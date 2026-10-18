@@ -18,7 +18,11 @@ dump (`image.orig` in config/project.json; tools/n3ds.py reads it).
 
 `--matched` reads build/report.json (`python3 build.py report`). The objects it
 relinks come from `python3 build.py split` (orig/target) and `python3 build.py`
-(build/obj).
+(build/obj). Every function objdiff scores 100% that does not link from its
+build/obj object is listed with its reason, and the run reports how many were
+proven (linked from build/obj) of how many objdiff claimed. A 100% function whose
+object is missing is not proven: the run exits 1 without a MATCH verdict unless
+`--exclude` names it.
 
 GNU ld/objcopy come from build/tools/binutils-arm-none-eabi/*/bin (`python3
 build.py fetch` installs Arm GNU Toolchain 13.3.rel1's as, ld, nm, objcopy,
@@ -248,12 +252,18 @@ def main():
     for name, address in names.items():
         if (address in thumb and address not in misread) or address in thumb_entered_arm:
             names[name] = address | 1
-    matched = matched_functions() - set(filter(None, args.exclude.split(","))) if args.matched else set()
+    exclude = set(filter(None, args.exclude.split(",")))
+    claimed = matched_functions() if args.matched else set()
+    # Functions of another module are that module's run to prove.
+    claimed -= {unit["function"] for unit in project["units"] if unit.get("module", module["id"]) != module["id"]}
+    excluded = sorted(claimed & exclude)
+    matched = claimed - exclude
 
     # The function objects, each at its retail address: every one with --full,
     # else only the matched ones (the rest are retail bytes either way).
     placed = []
     swapped, oversized, with_data, retargeted, rewritten = 0, [], [], [], []
+    missing, no_retail, entered_across, overlapped, object_for = [], [], [], [], {}
     address_name = re.compile(r"_([0-9a-f]{8})$")
 
     def resolve(name):
@@ -265,6 +275,11 @@ def main():
     for unit in units:
         address = int(unit["address"], 16)
         if "target" not in unit or address in misread:
+            if unit["function"] in matched:
+                if not (ROOT / unit["object"]).exists():
+                    missing.append(unit["function"])
+                else:
+                    (no_retail if "target" not in unit else entered_across).append(unit["function"])
             continue
         target = unit["target"]
         if not (ROOT / target).exists():
@@ -299,10 +314,16 @@ def main():
                 target = unit["object"]
                 function = unit["function"]
                 swapped += 1
+                object_for[function] = target
             else:
                 oversized.append((unit["function"], size, retail_size))
                 if not args.full:
                     continue
+        elif unit["function"] in matched:
+            # 100% in objdiff but nothing was compiled for it: the image would silently keep retail bytes.
+            missing.append(unit["function"])
+            if not args.full:
+                continue
         elif not args.full:
             continue
         sections = elf_sections(ROOT / target)
@@ -324,6 +345,9 @@ def main():
     for address, size, target, function in placed:
         if address < cursor:
             overlaps += 1
+            if object_for.get(function) == target:  # a matched object that lost its place: retail bytes cover it
+                overlapped.append(function)
+                swapped -= 1
             continue
         if address > cursor:
             gap = gaps_dir / f"text_{cursor:08x}.o"
@@ -398,24 +422,45 @@ def main():
           f"{overlaps} overlapping objects skipped, {len(misread - thumb_entered_arm)} Thumb-decoded functions entered "
           f"from ARM and {len(thumb_entered_arm)} ARM-decoded functions entered by a Thumb BL linked as bytes, "
           f"{len(dat)} address-named symbols")
-    if oversized:
-        print(f"{len(oversized)} functions at 100% in objdiff keep their retail bytes (compiled section size differs): "
-              + ", ".join(f"{name} {size:#x} vs {want:#x}" for name, size, want in oversized[:8]))
-    if with_data:
-        print(f"{len(with_data)} functions at 100% in objdiff keep their retail bytes (they define data the image has "
-              "no recorded address for): " + ", ".join(f"{name} ({kinds})" for name, kinds in with_data[:8]))
-    if retargeted:
-        print(f"{len(retargeted)} functions at 100% in objdiff keep their retail bytes (they call or address something "
-              "else than retail): " + ", ".join(retargeted[:8]))
-    if rewritten:
-        print(f"{len(rewritten)} functions at 100% in objdiff keep their retail bytes (their instructions differ in "
-              "operands objdiff does not compare): " + ", ".join(rewritten[:8]))
+    retained = (
+        (oversized, "compiled section size differs", lambda item: f"{item[0]} {item[1]:#x} vs {item[2]:#x}"),
+        (with_data, "they define data the image has no recorded address for", lambda item: f"{item[0]} ({item[1]})"),
+        (retargeted, "they call or address something else than retail", str),
+        (rewritten, "their instructions differ in operands objdiff does not compare", str),
+        (no_retail, "their unit has no retail target object", str),
+        (entered_across, "an ARM B or Thumb BL enters them in the other instruction set, so they link as bytes", str),
+        (overlapped, "their object overlaps a function placed at an earlier address", str),
+        (excluded, "named in --exclude", str),
+    )
+    for names, why, show in retained:
+        if names:
+            print(f"{len(names)} functions at 100% in objdiff keep their retail bytes ({why}): "
+                  + ", ".join(show(item) for item in names))
+    if args.matched:
+        proven = set(object_for) - set(overlapped)
+        accounted = proven | set(missing)
+        for names, _why, _show in retained:
+            accounted |= {item if isinstance(item, str) else item[0] for item in names}
+        unplaced = sorted(matched - accounted)
+        if unplaced:
+            print(f"{len(unplaced)} functions at 100% in objdiff are not in this module's units in config/project.json, "
+                  "so nothing links them: " + ", ".join(unplaced))
+        print(f"proven: {len(proven)} of {len(claimed)} functions objdiff scores 100% link from build/obj "
+              f"({len(claimed) - len(proven) - len(missing)} keep retail bytes, {len(missing)} have no object)")
+    if missing:
+        print(f"{len(missing)} functions at 100% in objdiff have no compiled object in build/obj, so the image keeps "
+              "their retail bytes and nothing proves them (run `python3 build.py` to compile them, or name them "
+              "in --exclude): " + ", ".join(missing))
     print(f"prepare {prepared - started:.1f}s, ld {linked - prepared:.1f}s, objcopy+compare {finished - linked:.1f}s")
     want = hashlib.sha256(code).hexdigest()
     got = hashlib.sha256(rebuilt).hexdigest()
     print(f"retail  .code sha256 {want} ({len(code):#x} bytes)")
     print(f"rebuilt .code sha256 {got} ({len(rebuilt):#x} bytes)")
     if rebuilt == code:
+        if missing:
+            print("INCOMPLETE: the relinked .code is byte-identical to retail, but it is not proven: "
+                  f"{len(missing)} matched functions were not linked from build/obj")
+            return 1
         print("MATCH: the relinked .code is byte-identical to retail")
         return 0
     diffs = [i for i in range(min(len(code), len(rebuilt))) if code[i] != rebuilt[i]]

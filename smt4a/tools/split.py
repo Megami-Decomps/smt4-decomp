@@ -67,6 +67,32 @@ def sign_extend(value, bits):
     return (value & ((1 << bits) - 1)) - ((value & (1 << (bits - 1))) << 1)
 
 
+def thumb_is_wide(first):
+    """The first halfword of a 32-bit Thumb-2 instruction: top five bits 0b11101/0b11110/0b11111."""
+    return first >> 11 >= 0x1D
+
+
+def thumb2_literal_load(first, second):
+    """(add, offset, size, is a word) of a Thumb-2 PC-relative literal load, else None: LDR.W
+    (F85F/F8DF), LDRB/LDRSB/LDRH/LDRSH, LDRD and VLDR literal. A byte or halfword load with
+    Rt = 15 is a PLD/PLI/hint, not a load."""
+    up = first >> 7 & 1 == 1
+    imm12 = second & 0xFFF
+    loads = second >> 12 != 0xF
+    kind = first & 0xFF7F
+    if kind == 0xF85F:
+        return up, imm12, 4, True
+    if kind in (0xF81F, 0xF91F) and loads:
+        return up, imm12, 1, False
+    if kind in (0xF83F, 0xF93F) and loads:
+        return up, imm12, 2, False
+    if kind == 0xE95F:
+        return up, (second & 0xFF) * 4, 8, False
+    if first & 0xFF3F == 0xED1F and second & 0x0E00 == 0x0A00:
+        return up, (second & 0xFF) * 4, 8 if second >> 8 & 1 else 4, False
+    return None
+
+
 def literal_pools(entry, code, thumb):
     """(merged data ranges, words a PC-relative LDR reads, end) of an ARM/Thumb function, as
     byte offsets: A32 LDR/LDRD/VLDR and Thumb LDR with PC as the base. One pass in address
@@ -100,8 +126,23 @@ def literal_pools(entry, code, thumb):
                 continue
             if half & 0xF800 == 0x4800:
                 read(((at + skew + 4) & ~3) - skew + (half & 0xFF) * 4, 4, True)
-            elif half & 0xF800 == 0xF000:
-                at += 2  # the first half of a BL/BLX pair: skip its second half
+            elif thumb_is_wide(half):
+                # a 32-bit instruction is one 4-byte unit: its second half is never decoded alone
+                if at + 4 <= length:
+                    load = thumb2_literal_load(half, struct.unpack_from("<H", code, at + 2)[0])
+                    if load is not None:
+                        up, imm, size, is_word = load
+                        base = ((at + skew + 4) & ~3) - skew
+                        target = base + imm if up else base - imm
+                        if target >= 0:
+                            if size < 4:  # a byte or halfword load marks the aligned words around it
+                                end = target + size
+                                low = target - (target + skew) % 4
+                                if low >= 0:
+                                    read(low, end + (4 - (end + skew) % 4) % 4 - low, False)
+                            else:
+                                read(target, size, is_word)
+                at += 2
             at += 2
     else:
         for at in range(0, max(length - 3, 0), 4):
@@ -139,7 +180,8 @@ def literal_pools(entry, code, thumb):
 
 def direct_branches(entry, code, thumb, pools):
     """(instruction address, target address, links) of every direct branch or call outside the
-    literal pools: A32 B/BL/BLX imm and Thumb BL/BLX pairs, a tail call wherever it sits."""
+    literal pools: A32 B/BL/BLX imm and Thumb BL/BLX pairs (a 32-bit Thumb instruction is one
+    4-byte unit), a tail call wherever it sits."""
     def in_pool(at):
         return any(start <= at < end for start, end in pools)
 
@@ -148,16 +190,17 @@ def direct_branches(entry, code, thumb, pools):
         at = 0
         while at + 4 <= length:
             first, second = struct.unpack_from("<HH", code, at)
-            if in_pool(at) or first & 0xF800 != 0xF000 or (second & 0xD000 != 0xD000 and second & 0xD001 != 0xC000):
+            if in_pool(at) or not thumb_is_wide(first):
                 at += 2
                 continue
-            blx = second & 0x1000 == 0
-            s = first >> 10 & 1
-            i1, i2 = ~((second >> 13 & 1) ^ s) & 1, ~((second >> 11 & 1) ^ s) & 1
-            imm = (s << 24) | (i1 << 23) | (i2 << 22) | ((first & 0x3FF) << 12) | ((second & 0x7FF) << 1)
-            origin = entry + at
-            base = (origin + 4) & ~3 if blx else origin + 4
-            found.append((origin, (base + sign_extend(imm, 25)) & 0xFFFFFFFF, True))
+            if first & 0xF800 == 0xF000 and (second & 0xD000 == 0xD000 or second & 0xD001 == 0xC000):
+                blx = second & 0x1000 == 0
+                s = first >> 10 & 1
+                i1, i2 = ~((second >> 13 & 1) ^ s) & 1, ~((second >> 11 & 1) ^ s) & 1
+                imm = (s << 24) | (i1 << 23) | (i2 << 22) | ((first & 0x3FF) << 12) | ((second & 0x7FF) << 1)
+                origin = entry + at
+                base = (origin + 4) & ~3 if blx else origin + 4
+                found.append((origin, (base + sign_extend(imm, 25)) & 0xFFFFFFFF, True))
             at += 4
     else:
         for at in range(0, max(length - 3, 0), 4):
