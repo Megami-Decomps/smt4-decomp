@@ -40,7 +40,10 @@ def load_game(name):
     n3ds = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(n3ds)
     project = json.loads((root / "config" / "project.json").read_text())
-    base, code, _ = n3ds.load_code(root / project["image"]["orig"])
+    image = root / project["image"]["orig"]
+    if not image.exists():
+        raise SystemExit(f"{name}: {image.relative_to(REPO)} not found: both games' dumps are needed (see README.md)")
+    base, code, _ = n3ds.load_code(image)
     functions = {}
     for line in (root / "config" / "symbols.txt").read_text().splitlines():
         match = SYMBOL.match(line)
