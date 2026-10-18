@@ -1,0 +1,28 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b737c` (_code @ 0x2b737c, 0x24 bytes) from smt4.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+/* stack frame of void: 1 slot(s), 4 byte(s) */
+typedef struct {
+    unsigned int sp8; /* 0x8: local_8 */
+} void_stack;
+
+extern unsigned int DAT_004729e0; /* 0x4729e0 */
+extern unsigned int DAT_004729e4; /* 0x4729e4 */
+
+/* Supplied declaration required: FUN_002bc9d8. */
+
+
+void FUN_002b737c(void)
+
+{
+/* irregular: irregular input(s): in_r3; 2 native warning(s); review required */
+  unsigned int in_r3;
+  unsigned int temp_v0 [2];
+  
+  temp_v0[0] = in_r3;
+  FUN_002bc9d8(0x208,temp_v0);
+  DAT_004729e0 = temp_v0[0];
+  DAT_004729e4 = 0;
+  return;
+}

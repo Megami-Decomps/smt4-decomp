@@ -1,0 +1,154 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00150320` (_code @ 0x150320, 0x318 bytes) from smt4.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+/* stack frame of param_4: 5 slot(s), 20 byte(s) */
+typedef struct {
+    unsigned int sp34; /* 0x34: local_34 */
+    unsigned int sp40; /* 0x40: local_40 */
+    unsigned int sp44; /* 0x44: local_44 */
+    unsigned int sp48; /* 0x48: local_48 */
+    unsigned int spB4; /* 0xb4: local_b4 */
+} param_4_stack;
+
+extern unsigned int *DAT_004652a0; /* 0x4652a0 */
+
+extern unsigned int FUN_00155584(int);
+/* Supplied declaration required: FUN_002a1a90. */
+/* Supplied declaration required: FUN_002a1ac8. */
+/* Supplied declaration required: FUN_002a1b98. */
+/* Supplied declaration required: FUN_002a5078. */
+/* Supplied declaration required: FUN_002acd38. */
+/* Supplied declaration required: FUN_002c255c. */
+
+
+void FUN_00150320(int param_1,int param_2,int param_3,int param_4)
+
+{
+/* irregular: 6 native warning(s); review required */
+  int temp_v0;
+  unsigned int *puVar2;
+  unsigned int temp_v1;
+  unsigned int temp_v2;
+  unsigned int *puVar5;
+  int temp_v3;
+  int temp_v4;
+  unsigned int *puVar8;
+  unsigned char temp_v5 [56];
+  unsigned char temp_v6 [48];
+  int temp_v7;
+  unsigned int temp_v8;
+  unsigned int temp_v9;
+  int temp_v10;
+  int iStack_30;
+  int iStack_2c;
+  int iStack_28;
+  
+  if (param_3 != 0) {
+    temp_v4 = *(int *)(*(int *)(param_2 + 0x22c) + param_4 * 4);
+    puVar8 = *(unsigned int **)(temp_v4 + 8);
+    if ((puVar8 != (unsigned int *)0x0) && ((~*puVar8 & 0x40000001) != 0)) {
+      puVar8 = (unsigned int *)0x0;
+    }
+    temp_v3 = *(int *)(*(int *)(param_2 + 0x240) + param_4 * 4);
+    temp_v10 = param_1;
+    iStack_30 = param_2;
+    iStack_2c = param_3;
+    iStack_28 = param_4;
+    if (*(char *)((int)puVar8 + 0x51) != '\0') {
+      FUN_002c255c(temp_v3);
+    }
+    temp_v0 = temp_v3 + (unsigned int)(*(char *)(temp_v3 + 0x30) != '\0') * 4;
+    temp_v2 = *(unsigned int *)(temp_v0 + 0x14);
+    FUN_002acd38(DAT_004652a0,*(unsigned int *)(temp_v0 + 0xc),temp_v2);
+    puVar5 = (unsigned int *)((temp_v2 & 0xfffffffc) + (int)DAT_004652a0);
+    DAT_004652a0 = puVar5;
+    *puVar5 = 0x80000006;
+    puVar5[1] = 0x804f02c0;
+    puVar5[2] = 0;
+    puVar5[3] = *(unsigned int *)(param_3 + 0x28);
+    puVar5[4] = *(unsigned int *)(param_3 + 0x24);
+    puVar5[5] = *(unsigned int *)(param_3 + 0x20);
+    temp_v0 = *(int *)(*(int *)(temp_v10 + 8) + 0xa4);
+    puVar5[6] = 0x80000019;
+    puVar5[7] = 0xf02c0;
+    puVar2 = *(unsigned int **)(temp_v4 + 8);
+    if ((puVar2 != (unsigned int *)0x0) && ((~*puVar2 & 0x40000001) != 0)) {
+      puVar2 = (unsigned int *)0x0;
+    }
+    if ((char)puVar2[0x14] != '\0') {
+      FUN_002a1ac8(puVar5 + 8,temp_v0 + 0x148,0x3bf02c1);
+      FUN_002a1a90(puVar5 + 0x15,temp_v0 + 0x178);
+      puVar5[0x21] = 0;
+      puVar5[0x22] = 0;
+      puVar5[0x23] = 0;
+      puVar5[0x24] = 0x3f800000;
+      puVar5[0x25] = 0;
+      puVar5[0x26] = 0;
+      puVar5[0x27] = 0x3f800000;
+      puVar5[0x28] = 0;
+      puVar5[0x29] = 0;
+      puVar5[0x2a] = 0x3f800000;
+      puVar5[0x2b] = 0;
+      puVar5[0x2c] = 0;
+      puVar5[0x2d] = 0;
+      puVar5[0x2e] = 0;
+      puVar5[0x2f] = 0;
+      puVar5[0x30] = 0x3f800000;
+      puVar5[0x31] = 0;
+      puVar5[0x32] = 0;
+      puVar5[0x33] = 0x3f800000;
+      puVar5[0x34] = 0;
+      puVar5[0x35] = 0;
+      puVar5[0x36] = 0x3f800000;
+      puVar5[0x37] = 0;
+      puVar5[0x38] = 0;
+    }
+    else {
+      FUN_002a5078(temp_v6,temp_v0 + 0x148,param_2 + 0x8c);
+      FUN_002a1ac8(puVar5 + 8,temp_v6,0x3bf02c1);
+      temp_v1 = FUN_00155584(param_2);
+      FUN_002a5078(temp_v5,temp_v1,temp_v0 + 0x178);
+      FUN_002a1a90(puVar5 + 0x15,temp_v5);
+      temp_v1 = FUN_00155584(param_2);
+      FUN_002a1a90(puVar5 + 0x21,temp_v1);
+      FUN_002a1a90(puVar5 + 0x2d,param_2 + 0x8c);
+    }
+    temp_v7 = 0;
+    temp_v8 = 0;
+    temp_v9 = 0;
+    temp_v2 = puVar8[0x11];
+    if (temp_v2 != 0) {
+      temp_v0 = temp_v2 + (int)(puVar8 + 0x11);
+    }
+    else {
+      temp_v0 = 0;
+    }
+    if (temp_v0 != 0) {
+      temp_v7 = *(unsigned int *)(temp_v0 + 8);
+      temp_v8 = *(unsigned int *)(temp_v0 + 0xc);
+      temp_v9 = *(unsigned int *)(temp_v0 + 0x10);
+    }
+    FUN_002a1b98(puVar5 + 0x39,&temp_v7);
+    FUN_002a1b98(puVar5 + 0x3d,temp_v4 + 0x74);
+    FUN_002a1b98(puVar5 + 0x41,temp_v4 + 0x80);
+    puVar5[0x45] = 0;
+    puVar5[0x46] = *(unsigned int *)(*(int *)(temp_v4 + 0x4c) + 0xcc);
+    puVar5[0x47] = 0xf0228;
+    temp_v2 = *(unsigned int *)(temp_v3 + (unsigned int)(*(char *)(temp_v3 + 0x30) != '\0') * 4 + 0x200);
+    if ((temp_v0 != 0) && (*(char *)(temp_v0 + 4) == '\0')) {
+      temp_v2 = temp_v2 + (*(int *)(*(int *)(temp_v4 + 0x4c) + 200) -
+                      *(int *)(*(int *)(temp_v4 + 0x4c) + 0xcc)) * 2;
+    }
+    puVar5[0x48] = temp_v2 | 0x80000000;
+    puVar5[0x49] = 0xf0227;
+    DAT_004652a0 = DAT_004652a0 + 0x4a;
+    temp_v2 = *(unsigned int *)(temp_v3 + 0x28);
+    FUN_002acd38(DAT_004652a0,*(unsigned int *)(temp_v3 + 0x24));
+    DAT_004652a0 = (unsigned int *)((int)DAT_004652a0 + (temp_v2 & 0xfffffffc));
+    temp_v2 = *(unsigned int *)(temp_v3 + 0x20);
+    FUN_002acd38(DAT_004652a0,*(unsigned int *)(temp_v3 + 0x1c),temp_v2);
+    DAT_004652a0 = (unsigned int *)((int)DAT_004652a0 + (temp_v2 & 0xfffffffc));
+  }
+  return;
+}

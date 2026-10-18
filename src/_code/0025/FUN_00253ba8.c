@@ -1,0 +1,119 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00253ba8` (_code @ 0x253ba8, 0x214 bytes) from smt4.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+typedef struct fn_00253ba8_arg0 fn_00253ba8_arg0;
+struct fn_00253ba8_arg0 {
+    unsigned char pad_0x0[0x4];
+    undefined4 field_0x4; /* +0x4 */
+    unsigned char pad_0x8[0x18];
+    float field_0x20; /* +0x20 */
+    float field_0x24; /* +0x24 */
+    float field_0x28; /* +0x28 */
+    float field_0x2c; /* +0x2c */
+    int field_0x30; /* +0x30 */
+    unsigned char pad_0x34[0x1c];
+    byte field_0x50; /* +0x50 */
+    unsigned char pad_0x51[0x25];
+    byte field_0x76; /* +0x76 */
+    unsigned char pad_0x77[0xf9];
+    int field_0x170; /* +0x170 */
+    int field_0x174; /* +0x174 */
+    unsigned char pad_0x178[0xc48];
+    undefined4 field_0xdc0; /* +0xdc0 */
+};
+
+extern signed char DAT_0049fa98; /* 0x49fa98 */
+extern int DAT_0049fa9c; /* 0x49fa9c */
+extern short DAT_0049faae; /* 0x49faae */
+extern short DAT_0049fab0; /* 0x49fab0 */
+extern unsigned short DAT_0049fab2; /* 0x49fab2 */
+extern signed char DAT_0049fab5; /* 0x49fab5 */
+extern float DAT_0049fac4; /* 0x49fac4 */
+extern float DAT_0049fac8; /* 0x49fac8 */
+extern float DAT_0049facc; /* 0x49facc */
+extern float DAT_0049fad0; /* 0x49fad0 */
+
+/* Supplied declaration required: FUN_00282600. */
+/* Supplied declaration required: FUN_0028277c. */
+/* Supplied declaration required: FUN_00287ce0. */
+/* Supplied declaration required: FUN_00287d54. */
+/* Supplied declaration required: FUN_00287e4c. */
+/* Supplied declaration required: FUN_002920e4. */
+extern int FUN_002b66ec(void);
+extern int FUN_002c2b1c(void);
+
+
+unsigned int FUN_00253ba8(fn_00253ba8_arg0 *param_1)
+
+{
+/* irregular: 1 goto(s); 6 native warning(s); review required */
+  short temp_v0;
+  int temp_v1;
+  int temp_v2;
+  int temp_v3;
+  unsigned int temp_v4;
+  unsigned char temp_v5;
+  float temp_v6;
+  float temp_v7;
+  
+  temp_v1 = FUN_002c2b1c();
+  temp_v2 = FUN_002b66ec();
+  temp_v0 = 0;
+  if (DAT_0049fa98 != '\0') {
+    temp_v0 = DAT_0049faae;
+  }
+  if (DAT_0049fa98 != '\0' && temp_v0 != 0) {
+    temp_v3 = DAT_0049fa9c;
+    FUN_00287d54();
+    if ((temp_v3 < 0x437a0000) && (temp_v3 = DAT_0049fa9c, FUN_00287ce0(), temp_v3 < 0x428c0000)) {
+LAB_00253cc0:
+      if (DAT_0049fab0 == 0) {
+        DAT_0049fab0 = 8;
+        DAT_0049fab2 = (unsigned short)param_1->field_0x4;
+        temp_v6 = param_1->field_0x20;
+        FUN_00287e4c();
+        DAT_0049fac4 = param_1->field_0x20;
+        DAT_0049fac8 = param_1->field_0x24 + 110.0f;
+        DAT_0049facc = param_1->field_0x28;
+        DAT_0049fab5 = '\0';
+        temp_v7 = param_1->field_0x20;
+        DAT_0049fad0 = temp_v6;
+        FUN_00287e4c();
+        param_1->field_0x2c = temp_v7;
+        if ((param_1->field_0x50 == 0) && (*(int *)(temp_v1 + 0xdc0) != 0)) {
+          if ((param_1->field_0x174 == 0) ||
+             ((param_1->field_0x174 >= 11 ||
+              ((int)(unsigned int)*(unsigned char *)(temp_v2 + 0x76) <= param_1->field_0x170)))) {
+            DAT_0049fab5 = '\0';
+          }
+          else {
+            DAT_0049fab5 = '\x01';
+          }
+        }
+        if (DAT_0049fab5 == '\0') {
+          temp_v4 = 0x1000185;
+        }
+        else {
+          temp_v4 = 0x1000187;
+        }
+        FUN_002920e4(temp_v4);
+      }
+      return 1;
+    }
+    temp_v3 = param_1->field_0x174;
+    temp_v5 = temp_v3 == 6 || temp_v3 == 0x10;
+    if (temp_v3 == 6 || temp_v3 == 0x10) {
+      temp_v5 = param_1->field_0x30 == 4;
+    }
+    if (temp_v5) {
+      FUN_0028277c();
+      FUN_00282600();
+      temp_v3 = DAT_0049fa9c;
+      FUN_00287d54();
+      if ((temp_v3 < 0x437a0000) && (temp_v3 = DAT_0049fa9c, FUN_00287ce0(), temp_v3 < 0x428c0000))
+      goto LAB_00253cc0;
+    }
+  }
+  return 0;
+}

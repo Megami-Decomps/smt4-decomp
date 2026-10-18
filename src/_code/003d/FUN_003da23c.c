@@ -1,0 +1,65 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003da23c` (_code @ 0x3da23c, 0xac bytes) from smt4.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+/* stack frame of param_1: 1 slot(s), 4 byte(s) */
+typedef struct {
+    unsigned int sp18; /* 0x18: local_18 */
+} param_1_stack;
+
+/* Supplied declaration required: FUN_00246908. */
+/* Supplied declaration required: FUN_00249fac. */
+extern unsigned int FUN_0024a80c(int);
+extern int FUN_002934d4(void);
+/* Supplied declaration required: FUN_00293c98. */
+/* Supplied declaration required: FUN_003db5d0. */
+/* Supplied declaration required: FUN_003dbe48. */
+/* Supplied declaration required: FUN_003dc504. */
+/* Supplied declaration required: FUN_003dcf3c. */
+
+
+void FUN_003da23c(int param_1)
+
+{
+/* irregular: 7 native warning(s); review required */
+  char temp_v0;
+  int temp_v1;
+  int temp_v2;
+  unsigned int temp_v3;
+  char *pcVar5;
+  unsigned char temp_v4;
+  unsigned char temp_v5;
+  
+  FUN_00293c98();
+  temp_v1 = FUN_002934d4();
+  if (temp_v1 != 0) {
+    return;
+  }
+  temp_v1 = 0;
+  do {
+    temp_v2 = param_1 + temp_v1 * 0x8c;
+    pcVar5 = *(char **)(temp_v2 + 0x25c4);
+    temp_v0 = *pcVar5;
+    temp_v4 = temp_v0 == 'V';
+    if (temp_v4) {
+      temp_v0 = pcVar5[1];
+    }
+    temp_v5 = temp_v4 && temp_v0 == 'E';
+    if (temp_v4 && temp_v0 == 'E') {
+      temp_v5 = pcVar5[2] == 'R';
+    }
+    if (temp_v5) {
+      temp_v3 = FUN_0024a80c(temp_v2 + 0x25c8);
+      *(char *)(temp_v2 + 0x25c0) = (char)temp_v3;
+      FUN_00249fac(temp_v3,pcVar5);
+      *(char *)(temp_v2 + 0x25c0) = (char)temp_v3;
+    }
+    temp_v1 = temp_v1 + 1;
+  } while (temp_v1 < 0xb);
+  FUN_003dbe48(param_1);
+  FUN_003db5d0(param_1);
+  FUN_003dc504(param_1);
+  FUN_003dcf3c(param_1);
+  FUN_00246908();
+  return;
+}

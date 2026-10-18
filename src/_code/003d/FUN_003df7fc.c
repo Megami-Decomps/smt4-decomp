@@ -1,0 +1,28 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003df7fc` (_code @ 0x3df7fc, 0x68 bytes) from smt4.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+/* stack frame of param_6: 3 slot(s), 12 byte(s) */
+typedef struct {
+    unsigned int sp10; /* 0x10: local_10 */
+    unsigned int sp18; /* 0x18: local_18 */
+    unsigned int sp20; /* 0x20: local_20 */
+} param_6_stack;
+
+/* Supplied declaration required: FUN_002bad80. */
+/* Supplied declaration required: FUN_003522c8. */
+
+
+void FUN_003df7fc(unsigned int param_1,int *param_2,unsigned int param_3,unsigned int param_4,
+                 unsigned int param_5,int param_6)
+
+{
+/* irregular: 2 native warning(s); review required */
+  if (*param_2 == 0 && param_2[1] == 0) {
+    FUN_002bad80(param_1,0xe0a13882);
+    return;
+  }
+  FUN_003522c8(param_3,param_4,param_5,1,*param_2,param_2[1],param_6 + 1);
+  FUN_002bad80(param_1,param_3);
+  return;
+}

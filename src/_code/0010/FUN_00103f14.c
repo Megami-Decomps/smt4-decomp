@@ -1,0 +1,37 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00103f14` (_code @ 0x103f14, 0x58 bytes) from smt4.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+/* stack frame of void: 1 slot(s), 4 byte(s) */
+typedef struct {
+    unsigned int sp4; /* 0x4: local_4 */
+} void_stack;
+
+extern int DAT_004e3cf4; /* 0x4e3cf4 */
+extern int DAT_004e3cf8; /* 0x4e3cf8 */
+
+
+void FUN_00103f14(void)
+
+{
+  int temp_v0;
+  int temp_v1;
+  int temp_v2;
+  int temp_v3;
+  
+  temp_v1 = DAT_004e3cf8;
+  temp_v0 = DAT_004e3cf4;
+  temp_v3 = 0;
+  if (0 < DAT_004e3cf8) {
+    do {
+      for (temp_v2 = *(int *)(temp_v0 + temp_v3 * 8); temp_v2 != 0; temp_v2 = *(int *)(temp_v2 + 0x4c)) {
+        if ((*(unsigned int *)(temp_v2 + 0x1c) & 0x80000) != 0) {
+          *(unsigned int *)(temp_v2 + 0x1c) = *(unsigned int *)(temp_v2 + 0x1c) | 0x200000;
+        }
+      }
+      temp_v3 = temp_v3 + 1;
+    } while (temp_v3 < temp_v1);
+    return;
+  }
+  return;
+}

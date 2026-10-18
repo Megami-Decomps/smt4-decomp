@@ -1,9 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00100f14` (_code @ 0x100f14, 0x6e bytes) from smt4.cxi.
- * It reads the retail function; it does not reproduce its bytes. build.py only checks that it compiles. */
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
-
-extern unsigned int DAT_00100f94; /* 0x100f94 */
-extern int DAT_00100f98; /* 0x100f98 */
 
 extern int FUN_00100ecc(unsigned int);
 extern long long FUN_002c615c(int, unsigned int);
@@ -36,18 +33,18 @@ unsigned int FUN_00100f14(char *param_1,unsigned int param_2)
     param_1[1] = temp_v0;
     return 2;
   }
-  if (param_2 == DAT_00100f94) {
+  if (param_2 == 0x203e) {
     temp_v0 = '~';
   }
   else if (param_2 != 0xa5) {
-    if (param_2 + DAT_00100f98 >= 0x3f) {
+    if (param_2 - 0xff61 >= 0x3f) {
       if (((param_2 < 0x80) && (param_2 != 0x7e)) && (param_2 != 0x5c)) {
         *param_1 = (char)param_2;
         return 1;
       }
       return 0xffffffff;
     }
-    temp_v0 = (char)param_2 + ((char)DAT_00100f98 - '_');
+    temp_v0 = (char)param_2 + '@';
   }
   else {
     temp_v0 = '\\';

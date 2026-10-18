@@ -1,0 +1,21 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0038b030` (_code @ 0x38b030, 0x10 bytes) from smt4.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+/* stack frame of void: 1 slot(s), 4 byte(s) */
+typedef struct {
+    unsigned int sp8; /* 0x8: local_8 */
+} void_stack;
+
+/* Supplied declaration required: FUN_002347f4. */
+/* Supplied declaration required: FUN_002b2520. */
+
+
+void FUN_0038b030(void)
+
+{
+/* irregular: 2 native warning(s); review required */
+  FUN_002347f4();
+  FUN_002b2520();
+  return;
+}

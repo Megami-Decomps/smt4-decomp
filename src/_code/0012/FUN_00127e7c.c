@@ -1,0 +1,23 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00127e7c` (_code @ 0x127e7c, 0x50 bytes) from smt4.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+/* Supplied declaration required: FUN_002c4b30. */
+
+
+unsigned int * FUN_00127e7c(unsigned int *param_1)
+
+{
+/* irregular: 1 native warning(s); review required */
+  param_1[1] = 0xffffffff;
+  *(unsigned char *)(param_1 + 0xa6) = 3;
+  *param_1 = 0;
+  *(unsigned char *)(param_1 + 2) = 0;
+  param_1[0x24] = 0;
+  param_1[0xa5] = 0;
+  param_1[0xa7] = 0;
+  param_1[0xa8] = 0;
+  param_1[0xd9] = 0;
+  FUN_002c4b30(param_1 + 0x4a1a,0x80);
+  return param_1;
+}

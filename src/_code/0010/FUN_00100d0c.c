@@ -1,5 +1,5 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00100d0c` (_code @ 0x100d0c, 0x10 bytes) from smt4.cxi.
- * It reads the retail function; it does not reproduce its bytes. build.py only checks that it compiles. */
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 

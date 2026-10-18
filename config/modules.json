@@ -9,17 +9,35 @@
       "build_id": null,
       "buildable": true,
       "compiler": "unknown",
-      "functions": 9350,
+      "functions": 9349,
       "id": "_code",
       "language": "ARM:LE:32:v6",
       "mapped_sha256": "1f98884fe997af22e032a14c51a46c872b05b0e079a0f29e307b0e059cfaa558",
       "program": "smt4..code",
       "sections": [
         {
-          "name": "ncch:.code",
-          "permissions": "rwx",
-          "size": "0x377000",
+          "name": "ncch:.text",
+          "permissions": "r-x",
+          "size": "0x2ff000",
           "start": "0x100000"
+        },
+        {
+          "name": "ncch:.rodata",
+          "permissions": "r--",
+          "size": "0x2c000",
+          "start": "0x3ff000"
+        },
+        {
+          "name": "ncch:.data",
+          "permissions": "rw-",
+          "size": "0x4c000",
+          "start": "0x42b000"
+        },
+        {
+          "name": "ncch:.bss",
+          "permissions": "rw-",
+          "size": "0x78e34",
+          "start": "0x477000"
         }
       ],
       "symbols": "config/symbols.txt"

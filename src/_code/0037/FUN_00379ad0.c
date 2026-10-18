@@ -1,0 +1,26 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00379ad0` (_code @ 0x379ad0, 0x2c bytes) from smt4.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+typedef struct fn_00379ad0_arg0 fn_00379ad0_arg0;
+struct fn_00379ad0_arg0 {
+    unsigned char pad_0x0[0x6c];
+    int field_0x6c; /* +0x6c */
+    int field_0x70; /* +0x70 */
+    unsigned char pad_0x74[0x34];
+    int field_0xa8; /* +0xa8 */
+    int field_0xac; /* +0xac */
+};
+
+
+void FUN_00379ad0(fn_00379ad0_arg0 *param_1)
+
+{
+  if (param_1->field_0x70 < param_1->field_0x6c) {
+    param_1->field_0x70 = param_1->field_0x70 + 1;
+  }
+  if (param_1->field_0xac < param_1->field_0xa8) {
+    param_1->field_0xac = param_1->field_0xac + 1;
+  }
+  return;
+}

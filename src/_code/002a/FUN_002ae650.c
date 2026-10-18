@@ -1,0 +1,20 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ae650` (_code @ 0x2ae650, 0x14 bytes) from smt4.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+extern int FUN_002b492c(void);
+
+
+unsigned char FUN_002ae650(void)
+
+{
+  unsigned char temp_v0;
+  int temp_v1;
+  
+  temp_v1 = FUN_002b492c();
+  temp_v0 = 0;
+  if (temp_v1 != 0) {
+    temp_v0 = *(unsigned char *)(temp_v1 + 8);
+  }
+  return temp_v0;
+}

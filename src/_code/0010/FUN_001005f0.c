@@ -1,5 +1,5 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001005f0` (_code @ 0x1005f0, 0xb6 bytes) from smt4.cxi.
- * It reads the retail function; it does not reproduce its bytes. build.py only checks that it compiles. */
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 typedef int romwright_code();
@@ -11,8 +11,6 @@ typedef struct {
     unsigned int sp34; /* 0x34: local_34 */
     unsigned int sp38; /* 0x38: local_38 */
 } param_3_stack;
-
-extern int DAT_001006a8; /* 0x1006a8 */
 
 /* Supplied declaration required: FUN_001009a2. */
 /* Supplied declaration required: FUN_002c69cc. */
@@ -37,9 +35,9 @@ void FUN_001005f0(int *param_1,int param_2,int param_3)
   int iStack_18;
   
   temp_v3 = 0;
-  temp_v4 = *(unsigned int *)(DAT_001006a8 + 0x1005fe);
-  temp_v5 = *(unsigned int *)(DAT_001006a8 + 0x100602);
   temp_v2 = 0;
+  temp_v4 = 0;
+  temp_v5 = 0;
   piStack_20 = param_1;
   temp_v9 = param_2;
   iStack_18 = param_3;
@@ -54,8 +52,8 @@ void FUN_001005f0(int *param_1,int param_2,int param_3)
   }
   param_1[6] = param_1[6] - temp_v3;
   FUN_002c69cc(param_1);
-  temp_v4 = *(unsigned int *)(DAT_001006a8 + 0x1005fe);
-  temp_v5 = *(unsigned int *)(DAT_001006a8 + 0x100602);
+  temp_v4 = 0;
+  temp_v5 = 0;
   for (temp_v7 = 0; temp_v7 < temp_v2; temp_v7 = temp_v7 + 1) {
     temp_v8 = FUN_001009a2(temp_v6,*(unsigned short *)(temp_v9 + temp_v7 * 2),&temp_v4);
     if (temp_v8 != 0xffffffff) {

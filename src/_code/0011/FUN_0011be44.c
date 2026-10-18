@@ -1,0 +1,37 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0011be44` (_code @ 0x11be44, 0x64 bytes) from smt4.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+/* stack frame of void: 1 slot(s), 4 byte(s) */
+typedef struct {
+    unsigned int sp10; /* 0x10: local_10 */
+} void_stack;
+
+extern signed char DAT_0044e459; /* 0x44e459 */
+extern unsigned short DAT_0044e45c; /* 0x44e45c */
+extern unsigned short DAT_0044e45e; /* 0x44e45e */
+extern int DAT_0044e460; /* 0x44e460 */
+extern unsigned char *DAT_0044e470; /* 0x44e470 */
+extern unsigned int DAT_0044e474; /* 0x44e474 */
+extern unsigned char DAT_004657b8; /* 0x4657b8 */
+
+/* Supplied declaration required: FUN_002b5bcc. */
+
+
+int FUN_0011be44(void)
+
+{
+/* irregular: 1 native warning(s); review required */
+  int temp_v0;
+  
+  DAT_0044e470 = &DAT_004657b8;
+  DAT_0044e474 = 0xc20a;
+  DAT_0044e45c = 0xff;
+  DAT_0044e45e = 0xff;
+  if ((DAT_0044e460 != 0) && (DAT_0044e459 == '\0')) {
+    temp_v0 = DAT_0044e460;
+    FUN_002b5bcc();
+    return temp_v0;
+  }
+  return -0x375f5804;
+}

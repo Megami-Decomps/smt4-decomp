@@ -1,0 +1,37 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001219f8` (_code @ 0x1219f8, 0xa0 bytes) from smt4.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+typedef int romwright_code();
+/* Supplied declaration required: FUN_00130de4. */
+/* Supplied declaration required: FUN_002b4ddc. */
+/* Supplied declaration required: FUN_002b4e44. */
+/* Supplied declaration required: FUN_002bb170. */
+
+
+void FUN_001219f8(char *param_1)
+
+{
+/* irregular: 4 native warning(s); review required */
+  int temp_v0;
+  int temp_v1;
+  
+  if (*param_1 != '\0') {
+    while (*(int *)(param_1 + 4) != 0) {
+      temp_v0 = *(int *)(param_1 + 8);
+      temp_v1 = temp_v0 - 0x58;
+      FUN_002b4e44(temp_v1);
+      if (*(romwright_code **)(temp_v0 - 0x4c) != (romwright_code *)0x0) {
+        (**(romwright_code **)(temp_v0 - 0x4c))(temp_v1,1,*(unsigned int *)(temp_v0 - 0x48));
+      }
+      FUN_002b4ddc(temp_v1);
+    }
+    while (*(int *)(param_1 + 0x10) != 0) {
+      temp_v0 = *(int *)(param_1 + 0x14);
+      FUN_002bb170(param_1 + 0x10);
+      FUN_00130de4(temp_v0 - 0x58);
+    }
+    *param_1 = '\0';
+  }
+  return;
+}

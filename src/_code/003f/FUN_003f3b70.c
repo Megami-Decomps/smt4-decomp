@@ -1,0 +1,28 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f3b70` (_code @ 0x3f3b70, 0x54 bytes) from smt4.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+extern unsigned char LAB_0017f5c0; /* 0x17f5c0 */
+extern unsigned int DAT_004720bc; /* 0x4720bc */
+extern unsigned int DAT_004720c4; /* 0x4720c4 */
+extern unsigned int DAT_004720cc; /* 0x4720cc */
+extern unsigned char DAT_004e9dc8; /* 0x4e9dc8 */
+
+/* Supplied declaration required: FUN_002c5f58. */
+
+
+void FUN_003f3b70(unsigned int param_1,unsigned int param_2,unsigned int *param_3)
+
+{
+/* irregular: 1 native warning(s); review required */
+  param_3[2] = param_1;
+  param_3[3] = param_2;
+  param_3[4] = 0;
+  param_3[5] = 0;
+  *param_3 = 0xbf0000;
+  FUN_002c5f58(&DAT_004e9dc8,&LAB_0017f5c0,4,0x18);
+  DAT_004720bc = 0xf0111;
+  DAT_004720c4 = 0xf0110;
+  DAT_004720cc = 0x803f0112;
+  return;
+}

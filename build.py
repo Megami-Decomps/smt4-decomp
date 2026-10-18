@@ -1,16 +1,17 @@
 #!/usr/bin/env python3
-"""Compile the decompiled C of this project to prove it compiles.
+"""Compile the decompiled C of this project with its compiler.
 
-This is a non-matching scaffold (docs/new-project.md in romwright): there is no
-byte-identical build. `src/` holds romwright's decompiled C, one function per
-unit, each marked NON_MATCHING; this script compiles every unit with the pinned
-clang (see config/toolchain.json) for the platform's target and writes
-build/compile_report.json. A unit that does not compile is reported, not fatal,
-unless --strict is given.
+`src/` holds romwright's decompiled C, one function per unit, each marked
+NON_MATCHING (docs/new-project.md in romwright). config/project.json names the
+compiler: the pinned clang (a compile check: no byte-identical build exists) or,
+where the platform's retail compiler is pinned (3DS armcc), that compiler, so
+objdiff compares every unit with its retail function byte for byte. This script
+compiles every unit and writes build/compile_report.json. A unit that does not
+compile is reported, not fatal, unless --strict is given.
 
-    python3 build.py [-j N] [--strict] [--clang PATH] [--only SUBSTR]
+    python3 build.py [-j N] [--strict] [--clang PATH | --armcc PATH] [--only SUBSTR]
     python3 build.py build/obj/<module>/<shard>/<name>.o     (what objdiff runs)
-    python3 build.py fetch                                   (download the pinned clang and objdiff-cli)
+    python3 build.py fetch                                   (download the pinned compiler and objdiff-cli)
     python3 build.py report                                  (objdiff-cli report -> build/report.json)
 
 Standard library only.
@@ -32,28 +33,50 @@ PROJECT = json.loads((ROOT / "config" / "project.json").read_text())
 BUILD = ROOT / "build"
 
 
-def find_clang(explicit):
-    """--clang, $CLANG, the toolchain profile, the pinned download, then PATH."""
-    candidates = [explicit, os.environ.get("CLANG")]
+COMPILER = PROJECT["compiler"]
+FAMILY = COMPILER.get("family", "clang")
+MANIFEST = {t["id"]: t for t in json.loads((ROOT / "config" / "toolchain.json").read_text())["tools"]}
+
+
+def find_compiler(args):
+    """--clang/--armcc, $CLANG/$ARMCC, the toolchain profile, the pinned download, then PATH."""
+    explicit = args.armcc if FAMILY == "armcc" else args.clang
+    candidates = [explicit, os.environ.get(FAMILY.upper())]
     local = ROOT / "config" / "toolchain.local.json"
     if local.exists():
-        candidates.append(json.loads(local.read_text()).get("clang"))
-    tool_id = PROJECT["compiler"]["tool"]
-    for name in ("clang", "clang.exe"):
+        candidates.append(json.loads(local.read_text()).get(FAMILY))
+    tool_id = COMPILER["tool"]
+    entry = MANIFEST.get(tool_id, {}).get("entry")
+    if FAMILY == "armcc" and entry:
+        candidates.append(str(BUILD / "tools" / tool_id / entry))
+    for name in ("clang", "clang.exe") if FAMILY == "clang" else ():
         candidates += sorted(glob.glob(str(BUILD / "tools" / tool_id / "*" / "bin" / name)))
-    candidates.append(shutil.which("clang"))
+    candidates.append(shutil.which(FAMILY))
     for candidate in candidates:
         if candidate and (Path(candidate).exists() or shutil.which(candidate)):
             return candidate
+    flag = "--armcc" if FAMILY == "armcc" else "--clang"
     raise SystemExit(
-        f"no clang found. Run `python3 build.py fetch` to download the pinned {tool_id}, "
-        "or pass --clang PATH / set $CLANG / put {\"clang\": \"PATH\"} in config/toolchain.local.json."
+        f"no {FAMILY} found. Run `python3 build.py fetch` to download the pinned {tool_id}, "
+        f"or pass {flag} PATH / set ${FAMILY.upper()} / put {{\"{FAMILY}\": \"PATH\"}} in config/toolchain.local.json."
     )
 
 
-def clang_version(clang):
-    out = subprocess.run([clang, "--version"], capture_output=True, text=True).stdout
-    return out.splitlines()[0] if out else "unknown"
+def launcher():
+    """armcc is a Windows executable: other hosts run it through wibo."""
+    if FAMILY != "armcc" or os.name == "nt":
+        return []
+    wibo = shutil.which("wibo") or next(iter(sorted(glob.glob(str(BUILD / "tools" / "wibo" / "wibo*")))), None)
+    if not wibo:
+        raise SystemExit("armcc needs wibo on this host: run `python3 build.py fetch` or put wibo on PATH")
+    return [wibo]
+
+
+def compiler_version(compiler):
+    probe = "--vsn" if FAMILY == "armcc" else "--version"
+    done = subprocess.run(launcher() + [compiler, probe], capture_output=True, text=True)
+    lines = (done.stdout or done.stderr).strip().splitlines()
+    return lines[0].strip() if lines else "unknown"
 
 
 def headers_mtime():
@@ -63,31 +86,43 @@ def headers_mtime():
     return newest
 
 
-def command(clang, unit, source, obj):
-    compiler = PROJECT["compiler"]
+def command(compiler, unit, source, obj):
     mode = []
     if "thumb" in unit:  # ARM: compile each function in the mode it was decoded in
-        mode = ["-mthumb" if unit["thumb"] else "-marm"]
+        modes = COMPILER.get("modes", {"arm": "-marm", "thumb": "-mthumb"})
+        mode = [modes["thumb"] if unit["thumb"] else modes["arm"]]
+    if FAMILY == "armcc":
+        system = Path(compiler).resolve().parent.parent / "include"
+        includes = ["-J", str(system)] if system.is_dir() else []
+        return (
+            launcher()
+            + [compiler, "-c"]
+            + COMPILER["cflags"]
+            + mode
+            + includes
+            + ["-I", str(ROOT / "include"), "-o", str(obj), str(source)]
+        )
     return (
-        [clang, f"--target={compiler['target']}"]
-        + compiler["cflags"]
+        [compiler, f"--target={COMPILER['target']}"]
+        + COMPILER["cflags"]
         + mode
         + ["-I", str(ROOT / "include"), "-c", str(source), "-o", str(obj)]
     )
 
 
-def compile_unit(clang, unit, newest_header, force):
+def compile_unit(compiler, unit, newest_header, force):
     source = ROOT / unit["source"]
     obj = ROOT / unit["object"]
     if not force and obj.exists() and obj.stat().st_mtime >= max(source.stat().st_mtime, newest_header):
         return unit, "cached", ""
     obj.parent.mkdir(parents=True, exist_ok=True)
-    done = subprocess.run(command(clang, unit, source, obj), capture_output=True, text=True, cwd=ROOT)
+    done = subprocess.run(command(compiler, unit, source, obj), capture_output=True, text=True, cwd=ROOT)
     if done.returncode == 0:
         return unit, "ok", ""
     if obj.exists():
         obj.unlink()
-    first = next((line for line in done.stderr.splitlines() if "error:" in line), done.stderr.strip()[:200])
+    output = done.stderr + done.stdout
+    first = next((line for line in output.splitlines() if "error" in line.lower()), output.strip()[:200])
     return unit, "failed", first.strip()
 
 
@@ -96,7 +131,7 @@ def units_present():
 
 
 def build(args):
-    clang = find_clang(args.clang)
+    compiler = find_compiler(args)
     units = units_present()
     wanted = [a for a in args.paths]
     if wanted:
@@ -112,7 +147,7 @@ def build(args):
     results = {"ok": 0, "cached": 0, "failed": 0}
     failures = []
     with concurrent.futures.ThreadPoolExecutor(max_workers=args.jobs) as pool:
-        futures = [pool.submit(compile_unit, clang, unit, newest_header, args.force) for unit in units]
+        futures = [pool.submit(compile_unit, compiler, unit, newest_header, args.force) for unit in units]
         for index, future in enumerate(concurrent.futures.as_completed(futures), 1):
             unit, status, message = future.result()
             results[status] += 1
@@ -122,9 +157,10 @@ def build(args):
                 print(f"  {index}/{len(units)}", flush=True)
     compiled = results["ok"] + results["cached"]
     report = {
-        "compiler": clang_version(clang),
-        "pinned": PROJECT["compiler"]["tool"],
-        "target": PROJECT["compiler"]["target"],
+        "compiler": compiler_version(compiler),
+        "pinned": COMPILER["tool"],
+        "family": FAMILY,
+        "target": COMPILER.get("target", COMPILER.get("arch")),
         "units": len(units),
         "compiled": compiled,
         "failed": results["failed"],
@@ -148,10 +184,10 @@ def build(args):
 
 
 def fetch():
-    tools = [PROJECT["compiler"]["tool"], "objdiff-cli"]
-    manifest = ROOT / "config" / "toolchain.json"
-    known = {t["id"] for t in json.loads(manifest.read_text())["tools"]}
-    ids = [t for t in tools if t in known]
+    tools = [COMPILER["tool"], "objdiff-cli"]
+    if FAMILY == "armcc" and os.name != "nt":
+        tools.append("wibo")
+    ids = [t for t in tools if t in MANIFEST]
     return subprocess.call([sys.executable, str(ROOT / "tools" / "download_tool.py"), *ids])
 
 
@@ -218,7 +254,8 @@ def main():
     parser.add_argument("-j", "--jobs", type=int, default=os.cpu_count() or 2)
     parser.add_argument("--strict", action="store_true", help="exit 1 when any unit fails to compile")
     parser.add_argument("--force", action="store_true", help="rebuild up-to-date objects")
-    parser.add_argument("--clang")
+    parser.add_argument("--clang", help="clang to use (projects built with clang)")
+    parser.add_argument("--armcc", help="armcc.exe to use (projects built with armcc)")
     parser.add_argument("--only", help="build only units whose source path contains this")
     args = parser.parse_args()
     if args.paths == ["fetch"]:

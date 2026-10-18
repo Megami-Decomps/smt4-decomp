@@ -4,38 +4,61 @@
   "note": "Pinned tool sources for generated projects (see docs/new-project.md). romwright never downloads or bundles these; the generated configure.py fetches and verifies them. Edit this file to update pins; every asset needs url, sha256, size and archive (raw|tar.gz|tar.xz|zip).",
   "tools": [
     {
-      "id": "clang-22.1.8",
-      "version": "22.1.8",
-      "role": "cross-compiler",
-      "platform": "scaffold",
-      "family": "clang",
-      "entry": "bin/clang",
-      "license": "Apache-2.0 WITH LLVM-exception",
-      "provenance": "https://github.com/llvm/llvm-project release llvmorg-22.1.8 (2026-06-16), assets LLVM-22.1.8-Linux-X64 / Linux-ARM64 / macOS-ARM64 .tar.xz and clang+llvm-22.1.8-x86_64-pc-windows-msvc.tar.xz; sha256 as published by the GitHub release asset digests. One clang compiles for ARM, AArch64, x86-64 and PowerPC (`--target=`), so the non-matching scaffolds (3DS, Switch, PS3, PS4, Vita, Xbox 360) use it to check that their decompiled C compiles. The archive holds a single top-level directory; the compiler is `<that directory>/bin/clang` (`bin/clang.exe` on Windows).",
+      "id": "armcc-4.1-b713",
+      "version": "4.1 [Build 713]",
+      "role": "compiler",
+      "platform": "3ds",
+      "family": "armcc",
+      "runtime": "wibo",
+      "entry": "4.1/b713/bin/armcc.exe",
+      "license": "Proprietary (ARM RealView Compilation Tools, as shipped to Nintendo 3DS developers). romwright and this manifest grant no rights to it: use it only if you are entitled to. Hosted by the decomp.me compilers project.",
+      "provenance": "https://github.com/decompme/compilers release `compilers`, asset armcc.zip (decomp.me's n3ds `armcc_41_713`: directory `4.1/b713/`, bin/armcc.exe and include/, no linker or libraries); the release tag is mutable, so the sha256 below is GitHub's asset digest of the bytes seen on 2026-10-17 (asset updated 2026-03-04T08:52:15Z). Runs natively on Windows, through wibo elsewhere.",
       "assets": {
-        "linux-aarch64": {
-          "url": "https://github.com/llvm/llvm-project/releases/download/llvmorg-22.1.8/LLVM-22.1.8-Linux-ARM64.tar.xz",
-          "sha256": "805efad2bb91cb4967fa569e0881d10c0f69c04461cf671cccbae19f547acc34",
-          "size": 1771004928,
-          "archive": "tar.xz"
+        "any": {
+          "url": "https://github.com/decompme/compilers/releases/download/compilers/armcc.zip",
+          "sha256": "bda0cea5b13a9c3f08322fa76f9f9dcda59bda290f57f1a06e05cd80044fafdb",
+          "size": 73315488,
+          "archive": "zip",
+          "include": [
+            "4.1/b713/"
+          ]
+        }
+      }
+    },
+    {
+      "id": "wibo",
+      "version": "1.2.0",
+      "role": "runtime",
+      "platform": "any",
+      "provides": {
+        "wibo": "wibo"
+      },
+      "license": "MIT",
+      "provenance": "https://github.com/decompals/wibo release 1.2.0; sha256 as published by GitHub release asset digests",
+      "assets": {
+        "linux-i686": {
+          "url": "https://github.com/decompals/wibo/releases/download/1.2.0/wibo-i686",
+          "sha256": "2575d3b0a2f408b2c2b0850db56f1af5d005a138394a6774eba77b6708ecc304",
+          "size": 7172552,
+          "archive": "raw"
         },
         "linux-x86_64": {
-          "url": "https://github.com/llvm/llvm-project/releases/download/llvmorg-22.1.8/LLVM-22.1.8-Linux-X64.tar.xz",
-          "sha256": "df0e1ecf16caf3489a272a5eea4eec9b0d82878f6477fa309504f918a0006384",
-          "size": 1938859476,
-          "archive": "tar.xz"
+          "url": "https://github.com/decompals/wibo/releases/download/1.2.0/wibo-x86_64",
+          "sha256": "13f86a2d618f0dbe67179d349625345eabf9b46450295cb4c904e49f6aff85af",
+          "size": 7256672,
+          "archive": "raw"
         },
         "macos-arm64": {
-          "url": "https://github.com/llvm/llvm-project/releases/download/llvmorg-22.1.8/LLVM-22.1.8-macOS-ARM64.tar.xz",
-          "sha256": "f260f4f7c0d430828a81ae8a3826a1d63fc0963ec2459489308cc23b1f7eab4f",
-          "size": 1479903744,
-          "archive": "tar.xz"
+          "url": "https://github.com/decompals/wibo/releases/download/1.2.0/wibo-macos",
+          "sha256": "2b3000ef6a7a490c24ccd71967735ae0005e218922e51806cca1b8d77fd3cf7c",
+          "size": 4682736,
+          "archive": "raw"
         },
-        "windows-x86_64": {
-          "url": "https://github.com/llvm/llvm-project/releases/download/llvmorg-22.1.8/clang%2Bllvm-22.1.8-x86_64-pc-windows-msvc.tar.xz",
-          "sha256": "d96c2cc1736f4eb7fa43cb9bbdf56d93551a9ae0a9aadb9c99c3c3b2b712a234",
-          "size": 862053924,
-          "archive": "tar.xz"
+        "macos-x86_64": {
+          "url": "https://github.com/decompals/wibo/releases/download/1.2.0/wibo-macos",
+          "sha256": "2b3000ef6a7a490c24ccd71967735ae0005e218922e51806cca1b8d77fd3cf7c",
+          "size": 4682736,
+          "archive": "raw"
         }
       }
     },

@@ -1,0 +1,31 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f5a74` (_code @ 0x3f5a74, 0x4c bytes) from smt4.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+typedef int romwright_code();
+/* stack frame of param_1: 1 slot(s), 4 byte(s) */
+typedef struct {
+    unsigned int sp10; /* 0x10: local_10 */
+} param_1_stack;
+
+extern romwright_code *DAT_0044e91c; /* 0x44e91c */
+
+
+void FUN_003f5a74(int *param_1)
+
+{
+/* irregular: 2 native warning(s); review required */
+  if (DAT_0044e91c == (romwright_code *)0x0 || param_1 == (int *)0x0) {
+    return;
+  }
+  if (param_1[3] != 0) {
+    (*DAT_0044e91c)();
+  }
+  if (*param_1 != 0) {
+    (*DAT_0044e91c)();
+  }
+                    /* WARNING: Could not recover jumptable at 0x003f5ab8. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  (*DAT_0044e91c)(param_1);
+  return;
+}

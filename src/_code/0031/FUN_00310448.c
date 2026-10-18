@@ -1,0 +1,72 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00310448` (_code @ 0x310448, 0x134 bytes) from smt4.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+/* stack frame of param_8: 7 slot(s), 28 byte(s) */
+typedef struct {
+    unsigned int sp38; /* 0x38: local_38 */
+    unsigned int sp40; /* 0x40: local_40 */
+    unsigned int sp44; /* 0x44: local_44 */
+    unsigned int sp4C; /* 0x4c: local_4c */
+    unsigned int sp50; /* 0x50: local_50 */
+    unsigned int sp54; /* 0x54: local_54 */
+    unsigned int sp58; /* 0x58: local_58 */
+} param_8_stack;
+
+extern unsigned int *DAT_00464fac; /* 0x464fac */
+
+/* Supplied declaration required: FUN_002390dc. */
+/* Supplied declaration required: FUN_00263534. */
+extern int FUN_002b5c2c(unsigned int);
+/* Supplied declaration required: FUN_003582b4. */
+
+
+unsigned int
+FUN_00310448(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
+            unsigned int param_5,unsigned int param_6,unsigned int param_7,unsigned int param_8)
+
+{
+/* irregular: 3 native warning(s); review required */
+  unsigned int *puVar1;
+  int temp_v0;
+  int temp_v1;
+  unsigned int temp_v2;
+  
+  temp_v2 = 5;
+  temp_v0 = DAT_00464fac[6];
+  FUN_00263534(temp_v0,param_1,param_2);
+  if (temp_v0 < 0) {
+    if (temp_v0 != -0x377ef411) {
+      if (temp_v0 != -0x377ef416) {
+        return 5;
+      }
+      return 2;
+    }
+    temp_v0 = FUN_002b5c2c(param_6);
+    temp_v1 = DAT_00464fac[6];
+    FUN_003582b4(temp_v1,param_1,param_2,param_3,param_4,param_5,param_6,temp_v0 << 1,0x80000,0x80000,
+                 param_7,param_8,0x19000);
+    if (temp_v1 == -0x371ef798) {
+      temp_v2 = 3;
+    }
+    if (temp_v1 == -0x371ef799) {
+      temp_v2 = 4;
+    }
+    temp_v0 = DAT_00464fac[6];
+    FUN_00263534(temp_v0,param_1,param_2);
+    if (temp_v0 < 0) {
+      return temp_v2;
+    }
+    temp_v2 = 1;
+  }
+  else {
+    temp_v2 = 6;
+  }
+  puVar1 = DAT_00464fac;
+  if (DAT_00464fac != (unsigned int *)0x0) {
+    *DAT_00464fac = param_1;
+    puVar1[1] = param_2;
+  }
+  FUN_002390dc(puVar1[6]);
+  return temp_v2;
+}
