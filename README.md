@@ -13,6 +13,10 @@ Every unit is built with the retail compiler (`armcc-4.1-b713`, `--cpu=MPCore --
   decompiler's primitive names) and `romwright_protos.h` (recovered prototypes).
 * `src/<module>/<shard>/<function>.c`: romwright's decompiled C, one function per file, each
   marked `NON_MATCHING`. It is a reading aid and a starting point, not retail-equivalent.
+  761 function(s) the evidence places in 172 original source file(s) are in
+  `src/<module>/<file>/<function>.c` instead, one objdiff progress category per file
+  (`file` in `config/project.json`); the placement is evidence, not proof: move a function by
+  correcting its entry in the `--tus` file and regenerating.
 * `build.py`: compiles every unit with `armcc-4.1-b713`; a unit matches when objdiff says its bytes do.
 * `objdiff.json` and `orig/target/`: each decompiled function's retail bytes as a relocatable target object, paired with `build/obj/` (what `build.py` compiles from `src/`).
 
