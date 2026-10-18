@@ -4,9 +4,11 @@
 Both games were built from one engine (AsdSDK), one SDK and much of one game
 (`sdds4`), so thousands of functions compile from the same source. Two
 functions are twins when they have the same size and instruction set and the
-same bytes once every call/branch target and every address-like word
-(literal-pool entries pointing into either image) is masked: those are the
-parts the linker sets, the rest is what the compiler wrote. A function with
+same bytes once the parts the linker sets are masked: every call/branch target
+and every literal-pool word that is an address inside the image's mapped
+segments (Thumb bit allowed). The pool words the function's PC-relative loads
+read are part of its signature even when the pool lies past its recorded size,
+and every other word (floats, constants) must match exactly. A function with
 more than one candidate in the other game is not paired.
 
 For each pair the report says how far each game is (objdiff, from
@@ -43,7 +45,7 @@ def load_game(name):
     image = root / project["image"]["orig"]
     if not image.exists():
         raise SystemExit(f"{name}: {image.relative_to(REPO)} not found: both games' dumps are needed (see README.md)")
-    base, code, _ = n3ds.load_code(image)
+    base, code, segments = n3ds.load_code(image)
     functions = {}
     for line in (root / "config" / "symbols.txt").read_text().splitlines():
         match = SYMBOL.match(line)
@@ -56,32 +58,98 @@ def load_game(name):
         for unit in json.loads(report.read_text())["units"]:
             for function in unit.get("functions", []):
                 scores[function["name"]] = function.get("fuzzy_match_percent", 0.0)
-    return {"name": name, "base": base, "code": code, "functions": functions, "sources": sources, "scores": scores}
+    return {"name": name, "base": base, "code": code,
+            "spans": [segments[part] for part in ("text", "rodata", "data", "bss") if part in segments],
+            "functions": functions, "sources": sources, "scores": scores}
+
+
+def literal_reads(game, address, size, thumb):
+    """Byte offsets (from the function's start) of the aligned words its PC-relative loads read:
+    A32 LDR/LDRB/LDRH/LDRSB/LDRSH/LDRD/VLDR and Thumb LDR with PC as the base. Pools can lie
+    past `size`. One pass in address order, so a pool word inside the function is data once the
+    scan reaches it and is not decoded. Also returns the offsets of the BL/BLX/B instructions."""
+    offset = address - game["base"]
+    code = game["code"]
+    skew = address % 4  # pool words are aligned to the address, not the function
+    words, data, branches = set(), set(), []
+
+    def read(at, count):
+        if at < 0:
+            return
+        first = ((at + skew) & ~3) - skew
+        for word in range(first, at + count, 4):
+            if 0 <= word and offset + word + 4 <= len(code):
+                words.add(word)
+                data.add(word)
+
+    if thumb:
+        at = 0
+        while at + 2 <= size:
+            half, = struct.unpack_from("<H", code, offset + at)
+            if ((at + skew) & ~3) - skew in data:
+                at += 2
+            elif half & 0xF800 == 0x4800:  # LDR Rt, [PC, #imm8*4]
+                read(((at + skew + 4) & ~3) - skew + (half & 0xFF) * 4, 4)
+                at += 2
+            elif half & 0xF800 == 0xF000 and at + 4 <= size:  # BL / BLX pair
+                second, = struct.unpack_from("<H", code, offset + at + 2)
+                if second & 0xD000 == 0xD000 or second & 0xD001 == 0xC000:
+                    branches.append(at)
+                    at += 4
+                else:
+                    at += 2
+            else:
+                at += 2
+    else:
+        for at in range(0, size - 3, 4):
+            if at in data:
+                continue
+            word, = struct.unpack_from("<I", code, offset + at)
+            if word >> 28 == 0xF:
+                if word >> 25 == 0x7D:  # BLX imm
+                    branches.append(at)
+                continue
+            if word >> 25 & 7 == 5:  # B / BL
+                branches.append(at)
+                continue
+            base = at + 8
+            if word & 0x0F7F0000 == 0x051F0000 or word & 0x0F7F0000 == 0x055F0000:  # LDR / LDRB Rt, [PC, #+/-imm12]
+                read(base + (word & 0xFFF if word >> 23 & 1 else -(word & 0xFFF)), 1 if word >> 22 & 1 else 4)
+            elif word & 0x0F7F00F0 in (0x014F00D0, 0x015F00B0, 0x015F00D0, 0x015F00F0):  # LDRD / LDRH / LDRSB / LDRSH
+                imm = (word >> 4 & 0xF0) | (word & 0xF)
+                kind = word & 0xF0
+                read(base + (imm if word >> 23 & 1 else -imm), 8 if kind == 0xD0 and not word >> 20 & 1 else 2 if kind != 0xD0 else 1)
+            elif word & 0x0F3F0E00 == 0x0D1F0A00:  # VLDR Sd/Dd, [PC, #+/-imm8*4]
+                imm = (word & 0xFF) * 4
+                read(base + (imm if word >> 23 & 1 else -imm), 8 if word >> 8 & 1 else 4)
+    return sorted(words), branches
 
 
 def masked(game, address, size, thumb):
-    """The function's bytes with what the linker decides blanked out."""
+    """What identifies the function apart from what the linker decides: its bytes with every
+    branch target and every pool word that is an address of the image blanked, and the pool
+    words its PC-relative loads read past its end (floats and constants compare exactly)."""
     offset = address - game["base"]
-    out = bytearray(game["code"][offset:offset + size])
-    start = 0
-    if thumb:
-        i = 0
-        while i + 4 <= len(out):
-            first, second = struct.unpack_from("<HH", out, i)
-            if first >> 11 == 0x1E and second >> 11 in (0x1F, 0x1D):  # BL / BLX pair
-                out[i:i + 4] = b"\xff" * 4
-                i += 4
-            else:
-                i += 2
-        start = (4 - address % 4) % 4  # pool words are aligned to the address, not the function
-    for i in range(start, len(out) - 3, 4):
-        word, = struct.unpack_from("<I", out, i)
-        if not thumb and (word >> 25) & 7 == 5:  # B / BL: keep the condition and opcode
-            word &= 0xFF000000
-        elif 0x100000 <= word < 0x700000:  # an address in either image
-            word = 0x11111111
-        struct.pack_into("<I", out, i, word)
-    return bytes(out)
+    code = game["code"]
+    out = bytearray(code[offset:offset + size])
+    words, branches = literal_reads(game, address, size, thumb)
+    for at in branches:
+        if thumb:
+            first, second = struct.unpack_from("<HH", out, at)
+            struct.pack_into("<HH", out, at, 0xF000, second & 0xD000)  # keep BL against BLX
+        else:
+            word, = struct.unpack_from("<I", out, at)
+            struct.pack_into("<I", out, at, 0xFA000000 if word >> 28 == 0xF else word & 0xFF000000)
+    tail = []
+    for at in words:
+        word, = struct.unpack_from("<I", code, offset + at)
+        if any(start <= (word & 0xFFFFFFFE) <= end for start, end in game["spans"]):
+            word = 0x11111111  # an address in the image
+        if at + 4 <= size:
+            struct.pack_into("<I", out, at, word)
+        else:
+            tail.append((at, word))
+    return bytes(out), tuple(tail)
 
 
 def pairs(left, right):
