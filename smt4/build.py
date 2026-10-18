@@ -256,16 +256,17 @@ def report():
     # objdiff-cli 3.6.1 panics on a unit whose compiled function is empty (decompiled code that
     # ends in halt_baddata() compiles to nothing) and fails on a missing object: such units are
     # reported as target-only (0% matched) for this run.
-    original = config.read_text()
+    original = config.read_bytes()
     document = json.loads(original)
     for unit in document["units"]:
         if "base_path" in unit and text_size(ROOT / unit["base_path"]) == 0:
             del unit["base_path"]
-    config.write_text(json.dumps(document, indent=2) + "\n")
+    config.write_bytes((json.dumps(document, indent=2) + "\n").encode())
     try:
         return subprocess.call([exe, "report", "generate", "-p", str(ROOT), "-o", str(BUILD / "report.json")])
     finally:
-        config.write_text(original)
+        # Byte for byte: a text-mode rewrite would turn a checkout's LF into CRLF on Windows.
+        config.write_bytes(original)
 
 
 def main():
