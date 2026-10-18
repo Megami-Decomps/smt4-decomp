@@ -1,0 +1,26 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003592dc` (_code @ 0x3592dc, 0x54 bytes) from smt4a.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+extern int FUN_00164a9c(void);
+/* Supplied declaration required: FUN_0020209c. */
+
+
+void FUN_003592dc(void)
+
+{
+/* irregular: 1 native warning(s); review required */
+  int temp_v0;
+  
+  temp_v0 = FUN_00164a9c();
+  FUN_0020209c();
+  *(unsigned int *)(temp_v0 + 0x70) = 0;
+  *(unsigned int *)(temp_v0 + 0x6c) = 0;
+  *(unsigned int *)(temp_v0 + 0x60) = 0;
+  *(unsigned int *)(temp_v0 + 100) = 0;
+  *(unsigned int *)(temp_v0 + 0x28) = 0;
+  *(unsigned int *)(temp_v0 + 0x6c) = *(unsigned int *)(temp_v0 + 0x28);
+  *(unsigned int *)(temp_v0 + 100) = *(unsigned int *)(temp_v0 + 0x30);
+  *(unsigned int *)(temp_v0 + 0x60) = *(unsigned int *)(temp_v0 + 0x2c);
+  return;
+}

@@ -1,0 +1,21 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `mathlib_ceilf` (_code @ 0x50db54, 0x84 bytes) from smt4a.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+
+void mathlib_ceilf(void)
+
+{
+/* irregular: irregular input(s): in_s0; 1 native warning(s); review required */
+  unsigned int temp_v0;
+  unsigned int in_s0;
+  
+  temp_v0 = ((in_s0 & 0x7fffffff) >> 0x17) - 0x7f;
+  if ((int)temp_v0 >= 0x17) {
+    return;
+  }
+  if ((-1 < (int)temp_v0) && ((in_s0 & (0x7fffffU >> (temp_v0 & 0xff))) == 0)) {
+    return;
+  }
+  return;
+}

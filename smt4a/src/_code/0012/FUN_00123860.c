@@ -1,0 +1,45 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00123860` (_code @ 0x123860, 0x58 bytes) from smt4a.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+/* stack frame of param_2: 1 slot(s), 4 byte(s) */
+typedef struct {
+    unsigned int sp344; /* 0x344: local_344 */
+} param_2_stack;
+
+extern unsigned char LAB_001238b8; /* 0x1238b8 */
+
+/* Supplied declaration required: FUN_00123844. */
+/* Supplied declaration required: FUN_002e7888. */
+/* Supplied declaration required: FUN_002e9318. */
+/* Supplied declaration required: FUN_002e97b4. */
+/* Supplied declaration required: FUN_002ea2e8. */
+/* Supplied declaration required: FUN_002ea3a8. */
+/* Supplied declaration required: FUN_002f32f8. */
+/* Supplied declaration required: FUN_002fbd00. */
+/* Supplied declaration required: FUN_0030f090. */
+
+
+void FUN_00123860(unsigned int param_1,unsigned int param_2)
+
+{
+/* irregular: 9 native warning(s); review required */
+  unsigned int temp_v0;
+  unsigned char temp_v1 [4];
+  unsigned int temp_v2;
+  unsigned char temp_v3 [256];
+  unsigned char temp_v4 [8];
+  unsigned char temp_v5 [32];
+  
+  FUN_002e97b4(param_1,temp_v3,0x80);
+  FUN_0030f090(param_1,temp_v5,0x10);
+  FUN_002ea2e8(temp_v1);
+  FUN_00123844(temp_v4,param_1);
+  temp_v0 = FUN_002f32f8(temp_v1,temp_v3);
+  temp_v0 = FUN_002f32f8(temp_v0,&LAB_001238b8);
+  FUN_002fbd00(temp_v0,temp_v4);
+  FUN_002e9318(temp_v4);
+  FUN_002e7888(param_2,temp_v2);
+  FUN_002ea3a8(temp_v1);
+  return;
+}

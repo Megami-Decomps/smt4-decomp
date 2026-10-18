@@ -1,0 +1,49 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004dc154` (_code @ 0x4dc154, 0xbc bytes) from smt4a.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+/* stack frame of param_3: 1 slot(s), 4 byte(s) */
+typedef struct {
+    unsigned int sp28; /* 0x28: local_28 */
+} param_3_stack;
+
+/* Supplied declaration required: FUN_004daf18. */
+
+
+unsigned short FUN_004dc154(int param_1,int param_2,unsigned int param_3)
+
+{
+/* irregular: 1 native warning(s); review required */
+  unsigned short temp_v0;
+  unsigned int temp_v1;
+  int temp_v2;
+  int temp_v3;
+  int temp_v4;
+  int temp_v5;
+  unsigned short temp_v6;
+  
+  temp_v6 = 999;
+  temp_v0 = 0;
+  if (*(char *)(param_1 + param_2) != '\0') {
+    temp_v4 = param_1 + param_2 * 4;
+    temp_v3 = 0;
+    temp_v1 = (unsigned int)*(unsigned short *)(*(int *)(temp_v4 + 0x44) + 2);
+    if (temp_v1 < param_3) {
+      param_3 = temp_v1;
+    }
+    if (*(char *)(param_1 + param_2) != '\0') {
+      do {
+        temp_v5 = temp_v3 * 4 + 2;
+        temp_v1 = (unsigned int)*(unsigned short *)(*(int *)(temp_v4 + 0x44) + temp_v5);
+        if (((param_3 <= temp_v1) && ((int)(temp_v1 - param_3) < (int)temp_v6)) &&
+           (temp_v2 = param_1,
+           FUN_004daf18(param_1,*(unsigned short *)(*(int *)(temp_v4 + 0x44) + temp_v3 * 4)), temp_v2 != 0)) {
+          temp_v0 = *(unsigned short *)(*(int *)(temp_v4 + 0x44) + temp_v3 * 4);
+          temp_v6 = *(unsigned short *)(*(int *)(temp_v4 + 0x44) + temp_v5) - param_3;
+        }
+        temp_v3 = temp_v3 + 1;
+      } while (temp_v3 < (int)(unsigned int)*(unsigned char *)(param_1 + param_2));
+    }
+  }
+  return temp_v0;
+}

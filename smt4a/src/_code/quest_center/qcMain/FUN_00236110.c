@@ -1,0 +1,185 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00236110` (_code @ 0x236110, 0x3d8 bytes) from smt4a.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+/* stack frame of void: 1 slot(s), 4 byte(s) */
+typedef struct {
+    unsigned int sp28; /* 0x28: local_28 */
+} void_stack;
+
+extern signed char DAT_00588c2d; /* 0x588c2d */
+extern int DAT_00588c30; /* 0x588c30 */
+extern int DAT_00588c34; /* 0x588c34 */
+extern unsigned int DAT_00588c38; /* 0x588c38 */
+extern int DAT_00588c3c; /* 0x588c3c */
+extern signed char DAT_005f19f1; /* 0x5f19f1 */
+extern unsigned int DAT_005f19f4; /* 0x5f19f4 */
+extern unsigned int DAT_005f19f8; /* 0x5f19f8 */
+extern unsigned int DAT_005f19fc; /* 0x5f19fc */
+extern unsigned char DAT_005f1a00; /* 0x5f1a00 */
+extern unsigned int DAT_005f1a50; /* 0x5f1a50 */
+extern unsigned char DAT_005f1b70; /* 0x5f1b70 */
+extern int DAT_005f1b74; /* 0x5f1b74 */
+
+/* Supplied declaration required: FUN_00137ee0. */
+/* Supplied declaration required: FUN_0016007c. */
+extern int FUN_0018719c(unsigned int);
+/* Supplied declaration required: FUN_001919a4. */
+extern int FUN_002009a8(unsigned int);
+/* Supplied declaration required: FUN_0021c118. */
+/* Supplied declaration required: FUN_002bf464. */
+extern int FUN_002d1fdc(void);
+/* Supplied declaration required: FUN_002e3328. */
+/* Supplied declaration required: FUN_00318d6c. */
+/* Supplied declaration required: FUN_0031a400. */
+extern int FUN_0032482c(void);
+/* Supplied declaration required: FUN_00324bc8. */
+/* Supplied declaration required: FUN_00342010. */
+/* Supplied declaration required: FUN_0035b304. */
+/* Supplied declaration required: FUN_0037b450. */
+/* Supplied declaration required: FUN_003b61ec. */
+/* Supplied declaration required: FUN_003d4c68. */
+/* Supplied declaration required: FUN_003d4da8. */
+/* Supplied declaration required: FUN_003d54f8. */
+/* Supplied declaration required: FUN_00467e64. */
+/* Supplied declaration required: FUN_0046a34c. */
+/* Supplied declaration required: FUN_0046adec. */
+/* Supplied declaration required: FUN_0046b9c0. */
+extern int FUN_004d03b4(unsigned int *);
+
+
+unsigned int FUN_00236110(void)
+
+{
+/* irregular: irregular input(s): in_r3; 21 native warning(s); review required */
+  int temp_v0;
+  unsigned int *puVar2;
+  int temp_v1;
+  int temp_v2;
+  unsigned int temp_v3;
+  int *piVar6;
+  unsigned int temp_v4;
+  int in_r3;
+  int temp_v5;
+  
+  temp_v0 = DAT_00588c30;
+  piVar6 = &temp_v5;
+  temp_v5 = in_r3;
+  switch(*(unsigned char *)(DAT_00588c30 + 0x19)) {
+  case 0:
+    if (DAT_00588c3c == 0) {
+      if (DAT_00588c34 != 1) {
+        temp_v2 = FUN_002009a8(0x10000a3);
+        if (temp_v2 == 1) {
+          FUN_0021c118(0x10000a3,0xf);
+        }
+        temp_v3 = 0x1000079;
+        temp_v2 = FUN_002009a8(0x1000079);
+        if ((((((DAT_00588c34 != 2) || (temp_v1 = FUN_0018719c(0x71), temp_v1 == 0)) ||
+              (temp_v1 = FUN_0018719c(0x74), temp_v1 != 0)) &&
+             (((DAT_00588c34 != 3 || (temp_v1 = FUN_0018719c(0x8f), temp_v1 == 0)) ||
+              (temp_v1 = FUN_0018719c(0x92), temp_v1 != 0)))) &&
+            (((DAT_00588c34 != 4 || (temp_v1 = FUN_0018719c(0xf4), temp_v1 == 0)) ||
+             (temp_v1 = FUN_0018719c(0xf6), temp_v1 != 0)))) &&
+           (((DAT_00588c34 != 2 || (temp_v1 = FUN_0018719c(0xd1), temp_v1 == 0)) ||
+            (temp_v1 = FUN_0018719c(0xd4), temp_v1 != 0)))) {
+          if (temp_v2 != 1) {
+            FUN_003d4c68(temp_v3);
+          }
+        }
+      }
+      else {
+        temp_v3 = 0x1000044;
+        temp_v2 = FUN_002009a8(0x1000044);
+        if (temp_v2 != 1) {
+          FUN_003d4c68(temp_v3);
+        }
+      }
+      FUN_0031a400();
+      FUN_002bf464();
+      FUN_00342010();
+      FUN_003b61ec();
+    }
+    puVar2 = (unsigned int *)0xe70;
+    FUN_0016007c();
+    temp_v2 = 0;
+    if (puVar2 != (unsigned int *)0x0) {
+      *puVar2 = 0;
+      temp_v2 = FUN_004d03b4(puVar2 + 0xd6);
+      temp_v2 = temp_v2 - 0x358;
+    }
+    *(int *)(temp_v0 + 0x1c) = temp_v2;
+    FUN_00467e64();
+    FUN_0046a34c(*(unsigned int *)(temp_v0 + 0x1c),DAT_00588c34,DAT_00588c38,DAT_00588c3c);
+    *(unsigned char *)(temp_v0 + 0x19) = 1;
+    break;
+  case 1:
+    FUN_0046adec(*(unsigned int *)(DAT_00588c30 + 0x1c));
+    if ((**(unsigned int **)(temp_v0 + 0x1c) & 1) != 0) {
+      *(unsigned char *)(temp_v0 + 0x19) = 3;
+    }
+    break;
+  case 2:
+    *(unsigned char *)(DAT_00588c30 + 0x19) = 4;
+    *(unsigned char *)(temp_v0 + 0x18) = 1;
+    if (*(int *)(temp_v0 + 0x1c) != 0) {
+      FUN_001919a4();
+      FUN_002e3328(*(unsigned int *)(temp_v0 + 0x1c));
+      *(unsigned int *)(temp_v0 + 0x1c) = 0;
+    }
+    break;
+  case 3:
+    temp_v2 = *(int *)(DAT_00588c30 + 0x1c);
+    if ((((temp_v2 == 0) || (FUN_0046b9c0(), temp_v2 == 0)) && (temp_v2 = FUN_002d1fdc(), temp_v2 != 0)) &&
+       (DAT_00588c3c == 0)) {
+      temp_v2 = FUN_0032482c();
+      if (temp_v2 != 0) {
+        temp_v4 = 4;
+        temp_v5 = DAT_005f1b74 - 200;
+        temp_v3 = 0xe;
+      }
+      else {
+        if (DAT_005f19f1 != '\0') {
+          DAT_005f19f1 = '\0';
+          DAT_005f1b70 = 0;
+          DAT_005f1a00 = 1;
+          FUN_00324bc8(DAT_005f19f4,DAT_005f19f8,DAT_005f19fc);
+          DAT_005f1a50 = 2;
+        }
+        temp_v4 = 0;
+        piVar6 = (int *)0x0;
+        temp_v3 = 6;
+      }
+      FUN_00137ee0(temp_v3,piVar6,temp_v4);
+    }
+    if (DAT_005f19f1 != '\0') {
+      DAT_005f19f1 = '\0';
+      DAT_005f1b70 = 0;
+      DAT_005f1a00 = 1;
+      FUN_00324bc8(DAT_005f19f4,DAT_005f19f8,DAT_005f19fc);
+      DAT_005f1a50 = 2;
+      FUN_00137ee0(6,0);
+    }
+    *(unsigned char *)(temp_v0 + 0x19) = 4;
+    *(unsigned char *)(temp_v0 + 0x18) = 1;
+    if (*(int *)(temp_v0 + 0x1c) != 0) {
+      FUN_001919a4();
+      FUN_002e3328(*(unsigned int *)(temp_v0 + 0x1c));
+      *(unsigned int *)(temp_v0 + 0x1c) = 0;
+    }
+    if (DAT_00588c3c == 0) {
+      FUN_0035b304();
+      FUN_0037b450();
+      FUN_00318d6c();
+    }
+    break;
+  case 4:
+    if (DAT_00588c2d != '\0') {
+      FUN_003d54f8(0,1);
+      FUN_003d54f8(1);
+      FUN_003d4da8();
+    }
+    return 0xffffffff;
+  }
+  return 0;
+}

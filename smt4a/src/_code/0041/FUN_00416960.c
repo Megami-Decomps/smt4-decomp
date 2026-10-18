@@ -1,0 +1,89 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00416960` (_code @ 0x416960, 0x1ec bytes) from smt4a.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+/* stack frame of param_3: 1 slot(s), 4 byte(s) */
+typedef struct {
+    unsigned int sp48; /* 0x48: local_48 */
+} param_3_stack;
+
+extern int FUN_0014aa78(void);
+extern int FUN_0014bce0(unsigned int);
+/* Supplied declaration required: FUN_0014bf2c. */
+/* Supplied declaration required: FUN_0014e188. */
+/* Supplied declaration required: FUN_00151408. */
+/* Supplied declaration required: FUN_001527d8. */
+extern unsigned int FUN_00152f54(void);
+/* Supplied declaration required: FUN_00184b80. */
+/* Supplied declaration required: FUN_00184c00. */
+/* Supplied declaration required: FUN_00184c40. */
+/* Supplied declaration required: FUN_0019e330. */
+/* Supplied declaration required: FUN_00237210. */
+/* Supplied declaration required: FUN_002a1850. */
+/* Supplied declaration required: FUN_002a1f60. */
+extern unsigned int FUN_0033885c(unsigned int, unsigned int);
+/* Supplied declaration required: FUN_00416388. */
+
+
+void FUN_00416960(int param_1,int param_2,unsigned int param_3)
+
+{
+/* irregular: irregular input(s): in_s1; 12 native warning(s); review required */
+  unsigned int temp_v0;
+  int temp_v1;
+  int temp_v2;
+  unsigned int *puVar4;
+  float temp_v3;
+  float in_s1;
+  unsigned char temp_v4 [16];
+  int iStack_24;
+  int iStack_20;
+  unsigned int uStack_1c;
+  
+  puVar4 = (unsigned int *)(param_1 + param_2 * 0xb0);
+  *puVar4 = 0;
+  puVar4[1] = 0;
+  *(unsigned char *)(puVar4 + 0x28) = 0;
+  puVar4[0x29] = 0;
+  puVar4[3] = 0;
+  puVar4[2] = 0;
+  puVar4[4] = 0;
+  iStack_24 = param_1;
+  iStack_20 = param_2;
+  uStack_1c = param_3;
+  if (puVar4[0x2a] != 0) {
+    FUN_00237210();
+    puVar4[0x2a] = 0;
+  }
+  puVar4[0x2b] = 0;
+  *(unsigned char *)(puVar4 + 0x28) = 1;
+  puVar4[0x29] = 1;
+  *puVar4 = param_3;
+  puVar4[1] = 0;
+  temp_v3 = 1.0f;
+  FUN_0014e188(puVar4 + 5,8,0xffffffff,param_1 + 0x840,0xb);
+  FUN_00184b80(puVar4 + 5,0x8b);
+  FUN_00184c00(puVar4 + 5,4,0);
+  FUN_0019e330(puVar4 + 5,6,0);
+  temp_v0 = FUN_00152f54();
+  FUN_002a1850(puVar4 + 2,0,temp_v0,temp_v4);
+  FUN_00416388(param_1,param_2,puVar4 + 5);
+  puVar4[2] = (float)puVar4[2] + temp_v3;
+  temp_v3 = (float)puVar4[3];
+  puVar4[3] = temp_v3 + in_s1;
+  FUN_00184c40(puVar4 + 5,(int)(short)(int)(float)puVar4[2],(int)(short)(int)(temp_v3 + in_s1));
+  temp_v1 = FUN_0014aa78();
+  temp_v2 = puVar4[0x2a];
+  if (temp_v2 == 0) {
+    temp_v2 = FUN_0014bce0(0);
+    puVar4[0x2a] = temp_v2;
+  }
+  FUN_001527d8(temp_v2,0x320202ff);
+  FUN_00151408(puVar4[0x2a],0,0x646464ff);
+  FUN_0014bf2c(puVar4[0x2a],8);
+  FUN_0014bf2c(puVar4[0x2a],0x100);
+  FUN_002a1f60(puVar4[0x2a],3,0xffffffff,0,3,*(unsigned int *)(temp_v1 + 0x4d64),*puVar4);
+  temp_v0 = FUN_0033885c(puVar4[0x2a],0);
+  puVar4[0x2b] = temp_v0;
+  return;
+}

@@ -1,6 +1,10 @@
-# Your retail image, the decrypted bytes cut from it, and everything derived stay out of version control.
-/orig/
-/build/
-/.romwright/
-/config/toolchain.local.json
+# Your own dumps: never committed.
+/iv/
+/iva/
+*.cxi
+*.cci
+*.3ds
+*.cia
 __pycache__/
+/build/
+/gen-*.log

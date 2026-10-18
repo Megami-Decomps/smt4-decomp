@@ -1,0 +1,166 @@
+{
+  "schema": 1,
+  "revision": "2026-10-15",
+  "note": "Pinned tool sources for generated projects (see docs/new-project.md). romwright never downloads or bundles these; the generated configure.py fetches and verifies them. Edit this file to update pins; every asset needs url, sha256, size and archive (raw|tar.gz|tar.xz|zip).",
+  "tools": [
+    {
+      "id": "armcc-4.1-b713",
+      "version": "4.1 [Build 713]",
+      "role": "compiler",
+      "platform": "3ds",
+      "family": "armcc",
+      "runtime": "wibo",
+      "entry": "4.1/b713/bin/armcc.exe",
+      "license": "Proprietary (ARM RealView Compilation Tools, as shipped to Nintendo 3DS developers). romwright and this manifest grant no rights to it: use it only if you are entitled to. Hosted by the decomp.me compilers project.",
+      "provenance": "https://github.com/decompme/compilers release `compilers`, asset armcc.zip (decomp.me's n3ds `armcc_41_713`: directory `4.1/b713/`, bin/armcc.exe and include/, no linker or libraries); the release tag is mutable, so the sha256 below is GitHub's asset digest of the bytes seen on 2026-10-17 (asset updated 2026-03-04T08:52:15Z). Runs natively on Windows, through wibo elsewhere.",
+      "assets": {
+        "any": {
+          "url": "https://github.com/decompme/compilers/releases/download/compilers/armcc.zip",
+          "sha256": "bda0cea5b13a9c3f08322fa76f9f9dcda59bda290f57f1a06e05cd80044fafdb",
+          "size": 73315488,
+          "archive": "zip",
+          "include": [
+            "4.1/b713/"
+          ]
+        }
+      }
+    },
+    {
+      "id": "wibo",
+      "version": "1.2.0",
+      "role": "runtime",
+      "platform": "any",
+      "provides": {
+        "wibo": "wibo"
+      },
+      "license": "MIT",
+      "provenance": "https://github.com/decompals/wibo release 1.2.0; sha256 as published by GitHub release asset digests",
+      "assets": {
+        "linux-i686": {
+          "url": "https://github.com/decompals/wibo/releases/download/1.2.0/wibo-i686",
+          "sha256": "2575d3b0a2f408b2c2b0850db56f1af5d005a138394a6774eba77b6708ecc304",
+          "size": 7172552,
+          "archive": "raw"
+        },
+        "linux-x86_64": {
+          "url": "https://github.com/decompals/wibo/releases/download/1.2.0/wibo-x86_64",
+          "sha256": "13f86a2d618f0dbe67179d349625345eabf9b46450295cb4c904e49f6aff85af",
+          "size": 7256672,
+          "archive": "raw"
+        },
+        "macos-arm64": {
+          "url": "https://github.com/decompals/wibo/releases/download/1.2.0/wibo-macos",
+          "sha256": "2b3000ef6a7a490c24ccd71967735ae0005e218922e51806cca1b8d77fd3cf7c",
+          "size": 4682736,
+          "archive": "raw"
+        },
+        "macos-x86_64": {
+          "url": "https://github.com/decompals/wibo/releases/download/1.2.0/wibo-macos",
+          "sha256": "2b3000ef6a7a490c24ccd71967735ae0005e218922e51806cca1b8d77fd3cf7c",
+          "size": 4682736,
+          "archive": "raw"
+        }
+      }
+    },
+    {
+      "id": "objdiff-cli",
+      "version": "v3.6.1",
+      "role": "report",
+      "platform": "any",
+      "provides": {
+        "objdiff-cli": "objdiff-cli"
+      },
+      "license": "Apache-2.0 OR MIT",
+      "provenance": "https://github.com/encounter/objdiff release v3.6.1; sha256 as published by GitHub release asset digests",
+      "assets": {
+        "linux-aarch64": {
+          "url": "https://github.com/encounter/objdiff/releases/download/v3.6.1/objdiff-cli-linux-aarch64",
+          "sha256": "bcb10a52f35f5639aa96600e75dbd9bbe99de9dbfdd5443d70b21b4f744979f9",
+          "size": 5831616,
+          "archive": "raw"
+        },
+        "linux-x86_64": {
+          "url": "https://github.com/encounter/objdiff/releases/download/v3.6.1/objdiff-cli-linux-x86_64",
+          "sha256": "72688707d5a7f30daebf5a4f65f74c6dab17ee6e09a230a187e327900345eecf",
+          "size": 6536112,
+          "archive": "raw"
+        },
+        "macos-arm64": {
+          "url": "https://github.com/encounter/objdiff/releases/download/v3.6.1/objdiff-cli-macos-arm64",
+          "sha256": "4ef0896ba8986f1adea6202d6e52a471deb1d126b071d23e88e8c00c250da7fd",
+          "size": 6480016,
+          "archive": "raw"
+        },
+        "macos-x86_64": {
+          "url": "https://github.com/encounter/objdiff/releases/download/v3.6.1/objdiff-cli-macos-x86_64",
+          "sha256": "59a4ee9d2fa0369c9cb76d579564aec8c9bfcce16d51acccdb872a80d4b14de8",
+          "size": 6916640,
+          "archive": "raw"
+        },
+        "windows-x86_64": {
+          "url": "https://github.com/encounter/objdiff/releases/download/v3.6.1/objdiff-cli-windows-x86_64.exe",
+          "sha256": "c1e418ebbedb1f6392ed1098c14423c48fab70f0b0f4094299b05a03d36773ae",
+          "size": 7013888,
+          "archive": "raw"
+        }
+      }
+    },
+    {
+      "id": "binutils-arm-none-eabi",
+      "version": "13.3.rel1",
+      "role": "binutils",
+      "platform": "gba",
+      "provides": {
+        "as": "*/bin/arm-none-eabi-as",
+        "cpp": "*/bin/arm-none-eabi-cpp",
+        "ld": "*/bin/arm-none-eabi-ld",
+        "nm": "*/bin/arm-none-eabi-nm",
+        "objcopy": "*/bin/arm-none-eabi-objcopy",
+        "objdump": "*/bin/arm-none-eabi-objdump",
+        "readelf": "*/bin/arm-none-eabi-readelf"
+      },
+      "license": "GPL-3.0-or-later (GNU Binutils 2.42 and GCC 13.3 as built and distributed by Arm; the archive also holds newlib under its own licenses)",
+      "provenance": "https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads release 13.3.rel1 (binrel); sha256 as published in the `.sha256asc` file next to each archive. The archive has one version-named top directory, so members are globs (`*/bin/arm-none-eabi-as`). The whole archive (about 150 MB) is extracted; the project runs as, ld, objcopy and cpp. The Windows asset (mingw-w64 build, 298 MB zip) installs only the standalone as, ld, nm, objcopy, objdump and readelf executables (`include`), which is what a 3DS project's tools/relink.py runs (`*/bin/arm-none-eabi-<tool>.exe`).",
+      "assets": {
+        "linux-aarch64": {
+          "url": "https://developer.arm.com/-/media/Files/downloads/gnu/13.3.rel1/binrel/arm-gnu-toolchain-13.3.rel1-aarch64-arm-none-eabi.tar.xz",
+          "sha256": "c8824bffd057afce2259f7618254e840715f33523a3d4e4294f471208f976764",
+          "size": 145688708,
+          "archive": "tar.xz"
+        },
+        "linux-x86_64": {
+          "url": "https://developer.arm.com/-/media/Files/downloads/gnu/13.3.rel1/binrel/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz",
+          "sha256": "95c011cee430e64dd6087c75c800f04b9c49832cc1000127a92a97f9c8d83af4",
+          "size": 147343268,
+          "archive": "tar.xz"
+        },
+        "macos-arm64": {
+          "url": "https://developer.arm.com/-/media/Files/downloads/gnu/13.3.rel1/binrel/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi.tar.xz",
+          "sha256": "fb6921db95d345dc7e5e487dd43b745e3a5b4d5c0c7ca4f707347148760317b4",
+          "size": 128649856,
+          "archive": "tar.xz"
+        },
+        "macos-x86_64": {
+          "url": "https://developer.arm.com/-/media/Files/downloads/gnu/13.3.rel1/binrel/arm-gnu-toolchain-13.3.rel1-darwin-x86_64-arm-none-eabi.tar.xz",
+          "sha256": "1ab00742d1ed0926e6f227df39d767f8efab46f5250505c29cb81f548222d794",
+          "size": 138514276,
+          "archive": "tar.xz"
+        },
+        "windows-x86_64": {
+          "url": "https://developer.arm.com/-/media/Files/downloads/gnu/13.3.rel1/binrel/arm-gnu-toolchain-13.3.rel1-mingw-w64-i686-arm-none-eabi.zip",
+          "sha256": "e46fda043c0ce83582bc8db4b3ef85f77f4beb7333344c2f4193c17e1167a095",
+          "size": 297871203,
+          "archive": "zip",
+          "include": [
+            "arm-gnu-toolchain-13.3.rel1-mingw-w64-i686-arm-none-eabi/bin/arm-none-eabi-as.exe",
+            "arm-gnu-toolchain-13.3.rel1-mingw-w64-i686-arm-none-eabi/bin/arm-none-eabi-ld.exe",
+            "arm-gnu-toolchain-13.3.rel1-mingw-w64-i686-arm-none-eabi/bin/arm-none-eabi-nm.exe",
+            "arm-gnu-toolchain-13.3.rel1-mingw-w64-i686-arm-none-eabi/bin/arm-none-eabi-objcopy.exe",
+            "arm-gnu-toolchain-13.3.rel1-mingw-w64-i686-arm-none-eabi/bin/arm-none-eabi-objdump.exe",
+            "arm-gnu-toolchain-13.3.rel1-mingw-w64-i686-arm-none-eabi/bin/arm-none-eabi-readelf.exe"
+          ]
+        }
+      }
+    }
+  ]
+}

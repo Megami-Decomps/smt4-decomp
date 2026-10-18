@@ -1,0 +1,48 @@
+{
+  "image": {
+    "file": "smt4a.cxi",
+    "sha256": "f51d2c6ab2320f2443b87ab286600123517d4a4f3b6aff44fd1461ea036c0f1e",
+    "size": 1799077888
+  },
+  "modules": [
+    {
+      "build_id": null,
+      "buildable": true,
+      "compiler": "unknown",
+      "functions": 15108,
+      "id": "_code",
+      "language": "ARM:LE:32:v6",
+      "mapped_sha256": "0b5338c4eace771ae809a06977a785ea4e00fd41c63e58d3f05fa6a255561bbe",
+      "program": "smt4a..code",
+      "sections": [
+        {
+          "name": "ncch:.text",
+          "permissions": "r-x",
+          "size": "0x426000",
+          "start": "0x100000"
+        },
+        {
+          "name": "ncch:.rodata",
+          "permissions": "r--",
+          "size": "0x42000",
+          "start": "0x526000"
+        },
+        {
+          "name": "ncch:.data",
+          "permissions": "rw-",
+          "size": "0x5d000",
+          "start": "0x568000"
+        },
+        {
+          "name": "ncch:.bss",
+          "permissions": "rw-",
+          "size": "0x8711c",
+          "start": "0x5c5000"
+        }
+      ],
+      "symbols": "config/symbols.txt"
+    }
+  ],
+  "platform": "3ds",
+  "schema": 1
+}

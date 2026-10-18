@@ -1,0 +1,85 @@
+{
+ "note": "Assert-anchored functions found with IDA's function bounds that assign_tus.py's scan misses.",
+ "units": [
+  {
+   "address": "0x150d2c",
+   "tu": "AsdSDK/Source/Gfx/Effect/effBehavior"
+  },
+  {
+   "address": "0x19fc50",
+   "tu": "AsdSDK/Source/Gfx/Tex/AsdTexTMX"
+  },
+  {
+   "address": "0x1b1b8c",
+   "tu": "AsdSDK/Source/Gfx/Effect/effMenu"
+  },
+  {
+   "address": "0x1d2158",
+   "tu": "AsdSDK/Source/Gfx/Effect/effMisc"
+  },
+  {
+   "address": "0x1d2450",
+   "tu": "AsdSDK/Source/Gfx/Effect/effMisc"
+  },
+  {
+   "address": "0x1f7140",
+   "tu": "AsdSDK/Source/Gfx/Effect/effMisc"
+  },
+  {
+   "address": "0x243224",
+   "tu": "AsdSDK/Source/Gfx/Effect/effMenu"
+  },
+  {
+   "address": "0x24fac4",
+   "tu": "AsdSDK/Source/Gfx/Effect/effMisc"
+  },
+  {
+   "address": "0x257c2c",
+   "tu": "AsdSDK/Source/Gfx/Tex/AsdTexTGA"
+  },
+  {
+   "address": "0x2826d4",
+   "tu": "AsdSDK/Source/Gfx/Effect/effMenu"
+  },
+  {
+   "address": "0x282780",
+   "tu": "AsdSDK/Source/Gfx/Effect/effMenu"
+  },
+  {
+   "address": "0x2ac4a0",
+   "tu": "AsdSDK/Source/Gfx/Effect/effBehavior"
+  },
+  {
+   "address": "0x2b2988",
+   "tu": "AsdSDK/Source/Gfx/Model/AsdModel"
+  },
+  {
+   "address": "0x2bd540",
+   "tu": "AsdSDK/Source/Gfx/Tex/AsdTexture"
+  },
+  {
+   "address": "0x2c31a0",
+   "tu": "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem"
+  },
+  {
+   "address": "0x2d15fc",
+   "tu": "AsdSDK/Source/Gfx/Effect/effMisc"
+  },
+  {
+   "address": "0x2f82ac",
+   "tu": "AsdSDK/Source/Gfx/Effect/effMenu"
+  },
+  {
+   "address": "0x2fdf34",
+   "tu": "battle/Effect/EffectSave"
+  },
+  {
+   "address": "0x30e48c",
+   "tu": "AsdSDK/Source/Gfx/Effect/effMenu"
+  },
+  {
+   "address": "0x31bae0",
+   "tu": "battle/Effect/EffectSave"
+  }
+ ]
+}

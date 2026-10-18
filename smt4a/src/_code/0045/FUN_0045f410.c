@@ -1,0 +1,34 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0045f410` (_code @ 0x45f410, 0x5c bytes) from smt4a.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+typedef int romwright_code();
+/* stack frame of param_2: 1 slot(s), 4 byte(s) */
+typedef struct {
+    unsigned int sp18; /* 0x18: local_18 */
+} param_2_stack;
+
+extern int FUN_00175678(void);
+/* Supplied declaration required: FUN_0017572c. */
+/* Supplied declaration required: FUN_0019102c. */
+
+
+void FUN_0045f410(int *param_1,unsigned char param_2)
+
+{
+/* irregular: 2 native warning(s); review required */
+  int temp_v0;
+  int temp_v1;
+  unsigned int temp_v2;
+  
+  temp_v0 = FUN_00175678();
+  temp_v1 = temp_v0;
+  FUN_0019102c(temp_v0,6);
+  *(unsigned int *)(temp_v1 + 0xc) = *(unsigned int *)(temp_v0 + 0x184);
+  *(unsigned char *)(temp_v1 + 4) = 10;
+  temp_v2 = (**(romwright_code **)(*param_1 + 0x20))(param_1);
+  *(unsigned int *)(temp_v1 + 0x10) = temp_v2;
+  *(unsigned char *)(temp_v1 + 0x15) = param_2;
+  FUN_0017572c(temp_v0,temp_v1);
+  return;
+}

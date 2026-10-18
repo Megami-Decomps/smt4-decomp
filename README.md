@@ -1,66 +1,79 @@
-# smt4
+# Shin Megami Tensei IV / IV: Apocalypse decompilation
 
-A **per-function matching** decompilation scaffold for the Nintendo 3DS image `smt4_v1.2.0.cxi`
-(sha256 `1f4d560dfb492e1f579310c832dc1ebb888581cc46cc66bbb4888cd7fb67a086`), bootstrapped by `romwright new-project` (romwright 0.5.0).
+Matching decompilations of the two Nintendo 3DS games, one function at a time, built with the
+compiler Atlus used: ARM's armcc (RVCT 4.1 build 713, `-O3 -Otime`). A function is decompiled when
+the C in `src/` compiles to the retail function's bytes.
 
-Every unit is built with the retail compiler (`armcc-4.1-b713`, `--cpu=MPCore --fpmode=fast --apcs=/interwork --c99 -O3 -Otime`) and compared with its retail function, so a function is decompiled when its bytes match. There is no whole-image build (no linker or C runtime ships with the public armcc builds, so no armcc build produces the whole `.code`; `tools/relink.py` instead relinks it from the per-function objects with GNU ld). What this repository gives you:
+| Game | Directory | Build | Functions | Exact (objdiff) | Proven in the image (GNU ld relink) | Fuzzy |
+|---|---|---|---|---|---|---|
+| Shin Megami Tensei IV (USA) | [`smt4/`](smt4/) | v1.2.0 update (CTR-U-AMXE), the last US patch | 9,350 | 1,185 | 1,179 | 41.9% |
+| Shin Megami Tensei IV: Apocalypse (USA) | [`smt4a/`](smt4a/) | v1.0 cartridge (CTR-P-BG4E); no US patch exists | 15,108 | 2,342 | 2,333 | 42.9% |
 
-* `config/symbols*.txt`: every function, label and import romwright found, with address and size
-  (`name = section:0xADDR; // type:function size:0xN`, one file per module).
-* `config/modules.json`: per module, the segment/section map with load addresses, the sha256 of the
-  mapped image and (where the format has one) the build id.
-* `include/`: `romwright_types.h` (base types for the ILP32 (ARM11 MPCore, ARMv6K, VFPv2) data model and the
-  decompiler's primitive names) and `romwright_protos.h` (recovered prototypes).
-* `src/<module>/<shard>/<function>.c`: romwright's decompiled C, one function per file, each
-  marked `NON_MATCHING`. It is a reading aid and a starting point, not retail-equivalent.
-* `build.py`: compiles every unit with `armcc-4.1-b713`; a unit matches when objdiff says its bytes do.
-* `objdiff.json` and `orig/target/`: each decompiled function's retail bytes as a relocatable target object, paired with `build/obj/` (what `build.py` compiles from `src/`).
+Everything here is romwright's first pass (decompiled C, nothing hand-edited yet). "Proven" counts the
+functions `tools/relink.py --matched` links from the compiled objects into a byte-identical `.code`;
+objdiff's 100% also counts a few functions it cannot tell apart (an operand it does not compare, a call
+to another function), and the relink lists them.
 
-The retail image is not part of this repository and neither is anything derived from its
-bytes (`orig/`, `build/`): put your own dump at `orig/smt4_v1.2.0.cxi`.
+## Layout
 
-## Quick start
-
-```sh
-python3 build.py fetch      # download the pinned armcc-4.1-b713 (decomp.me's armcc bundle, 73 MB), objdiff-cli, and wibo where Windows executables need it
-python3 build.py            # compile src/ with armcc-4.1-b713 (--cpu=MPCore --fpmode=fast --apcs=/interwork --c99 -O3 -Otime); writes build/compile_report.json
-python3 build.py report     # objdiff-cli report over objdiff.json -> build/report.json
-# or open this directory in the objdiff GUI
+```
+smt4/, smt4a/     one project per game: config/, include/, src/, objdiff.json, build.py, tools/
+  config/names.map    function names (see below), fed to romwright with --names
+  config/tus.json     function -> original source file (tools/assign_tus.py)
+  src/_code/<file>/   functions placed in their original source file's folder (AsdSDK/..., battle/...)
+  src/_code/<shard>/  everything else, by address
+tools/assign_tus.py   places functions in source files from assert paths and file-local data
+tools/shared.py       pairs the functions both games share and compares their progress
 ```
 
-This image: 9339 function(s) decompiled into `src/`, 9350 symbol(s), 1 module(s).
-Units compile as C99 (`--c99`): decompiled C has no headers for its callees, so armcc's implicit-declaration warnings are not errors; every error is reported. A unit that fails (a missing struct definition, say) is listed with its first error in `build/compile_report.json`, and the build exits 0 unless you pass `--strict`. Each unit compiles in the mode its function was decoded in (`--arm`/`--thumb`).
+Both games come from one build tree (the engine `AsdSDK`, Nintendo's SDK, and most of `sdds4`), so the
+same original file has the same path in both (`AsdSDK/Source/Sys/File/AsdFile`, `camp/IfTouch`):
+167 of Apocalypse's 215 placed files are also IV files. `python3 tools/shared.py` finds 3,750 functions
+with the same code in both games (40% of IV's, 25% of Apocalypse's); a function matched in one game
+and not in the other is listed as a porting candidate (`--list ported`).
 
-## From a fresh clone
+## Getting started (no romwright needed)
 
-`orig/` and `build/` hold retail bytes and are not in version control. With only Python 3 (romwright is not needed):
+Python 3 and your own decrypted dumps. Per game:
 
 ```sh
-python3 build.py fetch      # pinned tools (the compiler, objdiff-cli, wibo where needed, arm-none-eabi binutils)
-# put your decrypted dump at orig/smt4_v1.2.0.cxi (sha256 1f4d560dfb492e1f579310c832dc1ebb888581cc46cc66bbb4888cd7fb67a086)
-python3 build.py split      # tools/split.py: rebuild orig/target/**.o from the dump and config/
-python3 build.py            # compile src/
-python3 build.py report     # objdiff-cli -> build/report.json
-python3 tools/relink.py --matched   # relink the retail .code with every matched function from build/obj/: must print MATCH
+cd smt4
+python3 build.py fetch      # pinned armcc, objdiff-cli, wibo (non-Windows), arm-none-eabi binutils
+# put the decrypted v1.2.0 update at orig/smt4_v1.2.0.cxi: the installed NCCH or a decrypted .cia
+python3 build.py split      # checks the dump's program, writes orig/target/**.o (each retail function as an object)
+python3 build.py            # compile src/ with armcc
+python3 build.py report     # objdiff -> build/report.json (or open the directory in the objdiff GUI)
+python3 tools/relink.py --matched   # link every matched function into the retail .code: prints MATCH
 ```
 
-`tools/split.py` writes the target objects romwright wrote, byte for byte, from `orig/smt4_v1.2.0.cxi`, `config/symbols.txt` (a function renamed there is the name its callers' relocations use), `config/modules.json` and `config/project.json`. `tools/n3ds.py` reads NCCH and NCSD dumps (a decrypted `.cxi`/`.3ds`/`.cci`; encrypted content is refused with a message). `tools/relink.py` links the whole `.code` with GNU ld from `orig/target` objects (retail bytes) and, with `--matched`, from the objects `build.py` compiled for the functions objdiff reports at 100%; `--full` links every function from its target object, which proves those objects relocate back to retail. A function objdiff scores 100% that does not reproduce its bytes in the image is listed with an `--exclude` line to rerun with.
+For `smt4a/` the dump is the Apocalypse cartridge at `orig/smt4a.cxi` (a `.3ds`/`.cci` card or its
+partition 0). `build.py split` refuses a dump whose decompressed code is not the build the project was
+made from. Dumps, `orig/` and `build/` never go in git.
 
-`romwright new-project` writes `src/` too: do not regenerate into a directory whose `src/` you have edited. Personal ignore rules (your dump's directory, say) go in `.git/info/exclude`, because regenerating rewrites `.gitignore`.
+## Names and source files
 
+`smt4/config/names.map` has 1,049 names for IV v1.2.0; 907 of them are functions the analysis finds and
+get renamed:
 
-## Nintendo 3DS notes
+- Nintendo SDK functions (`nn::`, `nw::`), identified by matching code bytes against games that shipped
+  with symbols or DWARF;
+- event-script command handlers from the command table at `0x405F48` (`scrComm_EventFlag_Test`, ...);
+- map and navigation functions.
 
-romwright reads NCCH, NCSD and CIA containers (cleartext, or a title whose NCCH uses the documented all-zero fixed key). A flat ExeFS `.code` is imported with `--raw 0x100000 --language ARM:LE:32:v6`, which carries no section table: the scaffold then has one region. Code mixes ARM and Thumb: every function carries `mode:arm` or `mode:thumb` in the symbol file (the mode the analysis decoded it in), its target object has the matching mapping symbol, and `build.py` compiles its unit in that mode (`--arm`/`--thumb` with armcc, `-marm`/`-mthumb` with clang). Nintendo's retail compiler is ARM's armcc (RVCT 4.0/4.1, ARM Compiler 5): `romwright-cli new-project --compiler armcc-4.1-b713` (any `armcc-*` build in romwright's tool manifest) builds every unit with it, and `--cflags "-O3 -Otime"` replaces its optimisation flags. Without `--compiler` the units only get clang's compile check.
+`smt4a/config/names.map` carries 623 of them to Apocalypse functions with the same code bytes.
 
-**Reading objdiff here.** The retail side of each unit is one function cut out of a linked image. Direct calls and branches to other known functions (tail calls included) are rewritten into the relocations a compiler would emit. Literal pools are marked as data, and a pool word that holds an address is an `R_ARM_ABS32` to that function or to `DAT_<address>` (8 lowercase hex digits): declare the global under that name (`extern int DAT_00412345;`) and the operand matches. Other pool words are constants. The base side is the retail compiler's output, so 100% is reachable: a unit at 100% matches its retail function, and its `NON_MATCHING` marker can go.
+`config/tus.json` comes from `tools/assign_tus.py --project <game>`: a function that references an
+assert's source path (`c:\SMT4\XRD686\...\btlMain.cpp`) is in that file, and a function using a
+file-local variable of one file joins it (about 89% right on IV's held-out anchors).
+`smt4/config/tus_extra.json` adds 20 assert-anchored functions the scan's function bounds miss.
+Placement is evidence, not proof: fix an entry and regenerate.
 
-## Tools
+## Regenerating with romwright
 
-`config/toolchain.json` pins what this project downloads: URL, sha256, version, license and
-provenance. `build.py fetch` uses `tools/download_tool.py` (standard library only), which checks the
-sha256 before anything is extracted or run. romwright itself downloads nothing. `armcc-4.1-b713` is proprietary (ARM): `config/toolchain.json` records where the decomp.me compilers project hosts it and its sha256; use it only if you are entitled to. objdiff is Apache-2.0 or MIT, wibo MIT. `$ARMCC`, `--armcc PATH` or a toolchain profile (`config/toolchain.local.json` with `{"armcc": "/path/to/armcc.exe"}`) overrides the download.
+The projects are generated by [romwright](https://github.com/Raikaru/romwright); regenerating
+rewrites `src/`, so do it only before hand-editing, or into a fresh directory:
 
-## Keys and containers
-
-romwright never stores or emits decryption keys. A retail title encrypted with console-provisioned keys (bootrom slots, the CIA common key, ticket title keys) has to be decrypted by you first, or its keys passed to `romwright-cli new-project --keys FILE`; they are used in memory and never written into this repository.
+```sh
+cd smt4  && romwright-cli new-project orig/smt4_v1.2.0.cxi . --name smt4  --compiler armcc-4.1-b713 --cflags "-O3 -Otime" --names config/names.map --tus config/tus.json
+cd smt4a && romwright-cli new-project orig/smt4a.cxi       . --name smt4a --compiler armcc-4.1-b713 --cflags "-O3 -Otime" --names config/names.map --tus config/tus.json
+```

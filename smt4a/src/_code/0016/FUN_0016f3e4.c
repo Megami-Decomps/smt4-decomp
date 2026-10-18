@@ -1,0 +1,26 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0016f3e4` (_code @ 0x16f3e4, 0x40 bytes) from smt4a.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+extern unsigned char DAT_005894e4; /* 0x5894e4 */
+extern unsigned char DAT_005894e5; /* 0x5894e5 */
+extern unsigned char DAT_005894e6; /* 0x5894e6 */
+extern unsigned char DAT_005894ec; /* 0x5894ec */
+extern unsigned char DAT_006433d0; /* 0x6433d0 */
+
+/* Supplied declaration required: FUN_001a089c. */
+/* Supplied declaration required: nn_snd_CTR_Dspsnd_Finalize. */
+
+
+void FUN_0016f3e4(void)
+
+{
+/* irregular: 2 native warning(s); review required */
+  if ((DAT_005894e4 & ~DAT_005894e5) != 0) {
+    FUN_001a089c(&DAT_005894ec,1);
+    DAT_005894e6 = 1;
+    nn_snd_CTR_Dspsnd_Finalize(&DAT_006433d0,1);
+    DAT_005894e5 = 1;
+  }
+  return;
+}

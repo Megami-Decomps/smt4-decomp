@@ -22,8 +22,8 @@ placed hidden anchors right only 30% of the time and is not used. A function
 the evidence does not place stays unassigned (its own unit). Writes
 config/tus.json.
 
-    python3 tools/assign_tus.py [--image orig/<dump>] [--out config/tus.json]
-    python3 tools/assign_tus.py --holdout 0.3    (accuracy on hidden anchors)
+    python3 tools/assign_tus.py [--project smt4|smt4a] [--image <dump>] [--out <project>/config/tus.json]
+    python3 tools/assign_tus.py --project smt4 --holdout 0.3    (accuracy on hidden anchors)
 
 Standard library only.
 """
@@ -37,11 +37,11 @@ import struct
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
-from n3ds import load_code  # noqa: E402
-
-ROOT = Path(__file__).resolve().parent.parent
-SOURCE_ROOT = re.compile(r"^[A-Za-z]:\\SMT4\\XRD686\\", re.IGNORECASE)
+REPO = Path(__file__).resolve().parent.parent
+# The build trees: `c:\SMT4\XRD686\` (IV) and `c:\SMT4F\SMT4F\` (Apocalypse). Each game's own sources
+# sit below `sdds4\program\` (IV 1.0, Apocalypse) or `sdds4\Patch\` (IV 1.2.0), the engine (`AsdSDK\`)
+# beside or below it; both prefixes are dropped so one file has one path in both games.
+SOURCE_ROOT = re.compile(r"^[A-Za-z]:\\(?:SMT4\\XRD686|SMT4F\\SMT4F)\\(?:sdds4\\(?:Patch|program)\\)?", re.IGNORECASE)
 PATH_STRING = re.compile(rb"[A-Za-z]:\\[ -~]{4,200}?\.(?:cpp|cc|c|h|hpp|inl)\x00")
 
 
@@ -179,15 +179,19 @@ def assign(image, facts, anchors):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
-    parser.add_argument("--image", help="the dump (default: image.orig of config/project.json)")
-    parser.add_argument("--symbols", default=str(ROOT / "config" / "symbols.txt"))
+    parser.add_argument("--project", default="smt4", help="the game's project directory (default: smt4)")
+    parser.add_argument("--image", help="the dump (default: image.orig of <project>/config/project.json)")
     parser.add_argument("--module", default="_code")
-    parser.add_argument("--out", default=str(ROOT / "config" / "tus.json"))
+    parser.add_argument("--out", help="default: <project>/config/tus.json")
     parser.add_argument("--holdout", type=float, help="hide this share of anchors and report how many come back right")
     args = parser.parse_args()
+    root = (REPO / args.project).resolve()
+    sys.path.insert(0, str(root / "tools"))
+    from n3ds import load_code
 
-    base, code, segments = load_code(args.image or ROOT / json.loads((ROOT / "config" / "project.json").read_text())["image"]["orig"])
-    image = Image(base, code, segments, load_functions(args.symbols))
+    project = json.loads((root / "config" / "project.json").read_text())
+    base, code, segments = load_code(args.image or root / project["image"]["orig"])
+    image = Image(base, code, segments, load_functions(root / "config" / "symbols.txt"))
     facts = {entry: image.scan(entry) for entry, *_ in image.functions}
     paths = source_paths(image)
 
@@ -198,6 +202,16 @@ def main():
                 anchor_votes[entry][paths[address]] += 1
     anchors = {entry: votes.most_common(1)[0][0] for entry, votes in anchor_votes.items()}
     conflicts = sum(1 for votes in anchor_votes.values() if len(votes) > 1)
+    # Anchors this scan cannot see (another tool's function bounds found the string
+    # reference): `config/tus_extra.json`, `{"units": [{"address", "tu"}]}`.
+    extra_path = root / "config" / "tus_extra.json"
+    extra = 0
+    if extra_path.is_file():
+        for unit in json.loads(extra_path.read_text())["units"]:
+            entry = int(unit["address"], 16)
+            if entry in image.size and entry not in anchors:
+                anchors[entry] = unit["tu"]
+                extra += 1
 
     if args.holdout:
         rng = random.Random(4)
@@ -224,11 +238,13 @@ def main():
         "evidence": dict(counts),
         "units": units,
     }
-    Path(args.out).write_text(json.dumps(document, indent=1) + "\n")
-    print(f"{len(paths)} source-path strings, {len(anchors)} anchored functions ({conflicts} with more than one file)")
+    out = Path(args.out) if args.out else root / "config" / "tus.json"
+    out.write_text(json.dumps(document, indent=1) + "\n", newline="\n")
+    print(f"{len(paths)} source-path strings, {len(anchors)} anchored functions ({conflicts} with more than one file, "
+          f"{extra} from tus_extra.json)")
     print(f"placed {len(tu)} of {len(image.functions)} functions in {document['files']} files: "
           + ", ".join(f"{count} by {kind}" for kind, count in counts.most_common()))
-    print(f"wrote {args.out}")
+    print(f"wrote {out}")
 
 
 if __name__ == "__main__":

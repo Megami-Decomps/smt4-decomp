@@ -1,0 +1,70 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00352a14` (_code @ 0x352a14, 0x14c bytes) from smt4a.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+extern int DAT_005806a4; /* 0x5806a4 */
+
+
+void FUN_00352a14(void)
+
+{
+  int temp_v0;
+  
+  temp_v0 = DAT_005806a4;
+  *(unsigned int *)(DAT_005806a4 + 0xd0) = 0x43110000;
+  *(unsigned int *)(temp_v0 + 0x110) = 0x43250000;
+  *(unsigned int *)(temp_v0 + 0x150) = 0x42200000;
+  *(unsigned int *)(temp_v0 + 400) = 0x43020000;
+  *(unsigned int *)(temp_v0 + 0x1d0) = 0x42280000;
+  *(unsigned int *)(temp_v0 + 0x114) = 0x43520000;
+  *(unsigned int *)(temp_v0 + 0x154) = 0;
+  *(unsigned int *)(temp_v0 + 0x194) = 0x43e60000;
+  *(unsigned int *)(temp_v0 + 0x1d4) = 0x422c0000;
+  *(unsigned int *)(temp_v0 + 0x118) = 0x435c0000;
+  *(unsigned int *)(temp_v0 + 0x158) = 0;
+  *(unsigned int *)(temp_v0 + 0x198) = 0x43be0000;
+  *(unsigned int *)(temp_v0 + 0x1d8) = 0x42280000;
+  *(unsigned int *)(temp_v0 + 0x11c) = 0x43200000;
+  *(unsigned int *)(temp_v0 + 0x15c) = 0x42200000;
+  *(unsigned int *)(temp_v0 + 0xd4) = 0x432a0000;
+  *(unsigned int *)(temp_v0 + 0xd8) = 0x42c80000;
+  *(unsigned int *)(temp_v0 + 0xdc) = 0x43160000;
+  *(unsigned int *)(temp_v0 + 0x19c) = 0x43160000;
+  *(unsigned int *)(temp_v0 + 0x1dc) = 0x42280000;
+  *(unsigned int *)(temp_v0 + 0x120) = 0x43480000;
+  *(unsigned int *)(temp_v0 + 0x160) = 0;
+  *(unsigned int *)(temp_v0 + 0x1a0) = 0x42480000;
+  *(unsigned int *)(temp_v0 + 0x1e0) = 0x42280000;
+  *(unsigned int *)(temp_v0 + 0x124) = 0x42480000;
+  *(unsigned int *)(temp_v0 + 0x164) = 0;
+  *(unsigned int *)(temp_v0 + 0xe0) = 0x43160000;
+  *(unsigned int *)(temp_v0 + 0xe4) = 0x43480000;
+  *(unsigned int *)(temp_v0 + 0x1a4) = 0x43160000;
+  *(unsigned int *)(temp_v0 + 0x1e4) = 0x42280000;
+  *(unsigned int *)(temp_v0 + 0xe8) = 0x43200000;
+  *(unsigned int *)(temp_v0 + 0x128) = 0x432a0000;
+  *(unsigned int *)(temp_v0 + 0x168) = 0;
+  *(unsigned int *)(temp_v0 + 0x1a8) = 0x43e10000;
+  *(unsigned int *)(temp_v0 + 0x1e8) = 0x42280000;
+  *(unsigned int *)(temp_v0 + 0xec) = 0x42700000;
+  *(unsigned int *)(temp_v0 + 300) = 0x437a0000;
+  *(unsigned int *)(temp_v0 + 0x16c) = 0;
+  *(unsigned int *)(temp_v0 + 0x1ac) = 0x42c80000;
+  *(unsigned int *)(temp_v0 + 0x1ec) = 0x42280000;
+  *(unsigned int *)(temp_v0 + 0xf0) = 0x42d20000;
+  *(unsigned int *)(temp_v0 + 0x130) = 0x42fa0000;
+  *(unsigned int *)(temp_v0 + 0x170) = 0;
+  *(unsigned int *)(temp_v0 + 0x1b0) = 0x428c0000;
+  *(unsigned int *)(temp_v0 + 0x1f0) = 0x42280000;
+  *(unsigned int *)(temp_v0 + 0xf4) = 0x43660000;
+  *(unsigned int *)(temp_v0 + 0x134) = 0x43200000;
+  *(unsigned int *)(temp_v0 + 0x174) = 0;
+  *(unsigned int *)(temp_v0 + 500) = 0x42280000;
+  *(unsigned int *)(temp_v0 + 0xf8) = 0x43110000;
+  *(unsigned int *)(temp_v0 + 0x138) = 0x43250000;
+  *(unsigned int *)(temp_v0 + 0x178) = 0x42200000;
+  *(unsigned int *)(temp_v0 + 0x1f8) = 0x42280000;
+  *(unsigned int *)(temp_v0 + 0x1b4) = 0x43200000;
+  *(unsigned int *)(temp_v0 + 0x1b8) = 0x43660000;
+  return;
+}

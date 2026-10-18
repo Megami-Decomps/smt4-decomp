@@ -1,0 +1,87 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004aaac4` (_code @ 0x4aaac4, 0x208 bytes) from smt4a.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+/* stack frame of param_4: 3 slot(s), 12 byte(s) */
+typedef struct {
+    unsigned int sp24; /* 0x24: local_24 */
+    unsigned int sp3C; /* 0x3c: local_3c */
+    unsigned int sp40; /* 0x40: local_40 */
+} param_4_stack;
+
+extern unsigned int DAT_0059dbb4; /* 0x59dbb4 */
+
+/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
+extern char *FUN_0014bd84(unsigned int);
+/* Supplied declaration required: FUN_0015f858. */
+/* Supplied declaration required: FUN_00162790. */
+extern int FUN_001654d8(void);
+extern int FUN_001654e4(int);
+/* Supplied declaration required: FUN_001677c0. */
+/* Supplied declaration required: FUN_001689e8. */
+/* Supplied declaration required: FUN_001834a4. */
+/* Supplied declaration required: FUN_00185e84. */
+/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: FUN_004abc68. */
+
+
+void FUN_004aaac4(int param_1,int param_2,short *param_3,int param_4)
+
+{
+/* irregular: irregular input(s): in_fpscr; 9 native warning(s); review required */
+  unsigned short temp_v0;
+  int temp_v1;
+  int temp_v2;
+  int temp_v3;
+  unsigned int temp_v4;
+  char *pcVar6;
+  unsigned int in_fpscr;
+  float temp_v5;
+  
+  if (*param_3 == 0 || param_4 < 1) {
+    return;
+  }
+  temp_v1 = FUN_001834a4(0xc,0x82);
+  temp_v0 = *(unsigned short *)(temp_v1 + 6);
+  temp_v1 = FUN_001834a4(0xc,param_4 + 0x87);
+  temp_v5 = 0.26f;
+  FUN_001879d0(DAT_0059dbb4);
+  temp_v2 = param_1 + param_2 * 0x8c + 0x128ac;
+  temp_v3 = FUN_001654d8();
+  temp_v2 = FUN_001654e4(temp_v2);
+  temp_v3 = (int)*(short *)(temp_v1 + 8) + temp_v3 + (int)temp_v5;
+  temp_v2 = (temp_v0 & 0xffff7fff) * param_2 + (int)*(short *)(temp_v1 + 10) + temp_v2;
+  FUN_004abc68(param_1,temp_v3,temp_v2,(int)*param_3);
+  if (*(int *)(param_3 + 2) != 0) {
+    temp_v4 = (unsigned int)(short)*(int *)(param_3 + 2);
+    FUN_001677c0();
+    temp_v1 = FUN_001834a4(0xc,0x86);
+    FUN_00185e84(temp_v4,*(short *)(temp_v1 + 8) + temp_v3,*(short *)(temp_v1 + 10) + temp_v2,0x1a,0,0);
+    if (temp_v4 >= 0xfffffffe) {
+      pcVar6 = "悂钂钂膂莂讂";
+    }
+    else if (temp_v4 == 0xffffff9d) {
+      pcVar6 = (char *)0x52b4c4;
+    }
+    else {
+      pcVar6 = (char *)FUN_0014bd84(temp_v4);
+    }
+  }
+  else {
+    pcVar6 = *(char **)(param_3 + 4);
+    if (pcVar6 == (char *)0x0) {
+      return;
+    }
+    FUN_001677c0();
+    temp_v1 = FUN_001834a4(0xc,0x86);
+    FUN_001689e8((int)(short)pcVar6,*(short *)(temp_v1 + 8) + temp_v3,*(short *)(temp_v1 + 10) + temp_v2,
+                 0x1a,0);
+    FUN_0015f858(pcVar6,0);
+  }
+  temp_v1 = FUN_001834a4(0xc,0x87);
+  VectorSignedToFloat(*(short *)(temp_v1 + 10) + temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
+  VectorSignedToFloat(*(short *)(temp_v1 + 8) + temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
+  FUN_00162790(2,0xff,pcVar6);
+  FUN_001677c0();
+  return;
+}

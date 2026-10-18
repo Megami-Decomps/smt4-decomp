@@ -1,0 +1,21 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `sys_PDC0Callback` (_code @ 0x161bcc, 0x40 bytes) from smt4a.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+typedef int romwright_code();
+extern int DAT_0061a5c4; /* 0x61a5c4 */
+extern romwright_code *DAT_0061a5cc; /* 0x61a5cc */
+
+
+void sys_PDC0Callback(void)
+
+{
+  if (DAT_0061a5cc != (romwright_code *)0x0) {
+    (*DAT_0061a5cc)(0x400);
+  }
+  DAT_0061a5c4 = DAT_0061a5c4 + 1;
+  DAT_0061a5c4 = DAT_0061a5c4 +
+                 ((int)((long long)DAT_0061a5c4 * 0x40000001 >> 0x3d) - (DAT_0061a5c4 >> 0x1f)) *
+                 -0x7fffffff;
+  return;
+}

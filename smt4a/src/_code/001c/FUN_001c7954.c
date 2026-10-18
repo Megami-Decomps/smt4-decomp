@@ -1,0 +1,138 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001c7954` (_code @ 0x1c7954, 0x27c bytes) from smt4a.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+/* stack frame of param_1: 1 slot(s), 4 byte(s) */
+typedef struct {
+    unsigned int sp18; /* 0x18: local_18 */
+} param_1_stack;
+
+extern unsigned int DAT_0053f614; /* 0x53f614 */
+extern unsigned char DAT_006433d0; /* 0x6433d0 */
+
+/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
+/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
+/* Supplied declaration required: FUN_001b6280. */
+/* Supplied declaration required: nn_snd_CTR_Dspsnd_SetChannelIIRFilter_Biquad. */
+/* Supplied declaration required: nn_snd_CTR_Dspsnd_SetChannelIIRFilter_Mono. */
+/* Supplied declaration required: nn_snd_CTR_Dspsnd_SetChannelIirFilterType. */
+/* Supplied declaration required: nn_snd_CTR_Dspsnd_SetChannelRIM. */
+/* Supplied declaration required: nn_snd_CTR_Dspsnd_SetChannelTimer. */
+
+
+void FUN_001c7954(unsigned int *param_1)
+
+{
+/* irregular: irregular input(s): in_fpscr; 8 native warning(s); review required */
+  unsigned int temp_v0;
+  int temp_v1;
+  unsigned int temp_v2;
+  unsigned char temp_v3;
+  unsigned char temp_v4;
+  unsigned int in_fpscr;
+  unsigned int temp_v5;
+  float temp_v6;
+  
+  temp_v4 = (param_1[0x1b] & 1) != 0;
+  if (temp_v4) {
+    FUN_001b6280(param_1);
+  }
+  if ((param_1[0x1b] & 2) != 0) {
+    temp_v6 = (float)VectorSignedToFloat(param_1[8],(unsigned char)(in_fpscr >> 0x16) & 3);
+    param_1[10] = (unsigned int)((float)param_1[9] * temp_v6 * 3.055488e-05f);
+    nn_snd_CTR_Dspsnd_SetChannelTimer(&DAT_006433d0,*param_1 & 0xff);
+    if (*(char *)((int)param_1 + 0xe) == '\0') {
+      *(unsigned short *)(param_1 + 0x1b) = (unsigned short)param_1[0x1b] | 0x20;
+    }
+    temp_v4 = 1;
+  }
+  if ((param_1[0x1b] & 4) != 0) {
+    nn_snd_CTR_Dspsnd_SetChannelIirFilterType
+              (&DAT_006433d0,*param_1 & 0xff,*(unsigned char *)((int)param_1 + 0xf));
+    temp_v4 = 1;
+  }
+  if ((param_1[0x1b] & 8) != 0) {
+    nn_snd_CTR_Dspsnd_SetChannelIIRFilter_Mono
+              (&DAT_006433d0,*param_1 & 0xff,(int)(short)param_1[4],
+               (int)*(short *)((int)param_1 + 0x12));
+  }
+  if ((param_1[0x1b] & 0x10) != 0) {
+    nn_snd_CTR_Dspsnd_SetChannelIIRFilter_Biquad
+              (&DAT_006433d0,*param_1 & 0xff,(int)(short)param_1[5],
+               (int)*(short *)((int)param_1 + 0x16),(int)(short)param_1[6],
+               (int)*(short *)((int)param_1 + 0x1a),(int)(short)param_1[7]);
+  }
+  if ((param_1[0x1b] & 0x20) != 0) {
+    temp_v2 = 2;
+    temp_v3 = 1;
+    if (*(char *)((int)param_1 + 0xe) != '\0') {
+      if (*(char *)((int)param_1 + 0xe) == '\x01') {
+        temp_v2 = 1;
+      }
+    }
+    else {
+      temp_v2 = 0;
+      temp_v3 = (int)param_1[10] < 0x3faaaaac;
+      if ((temp_v3) && ((int)param_1[10] < 0x3f800001)) {
+        temp_v3 = 2;
+      }
+    }
+    nn_snd_CTR_Dspsnd_SetChannelRIM(&DAT_006433d0,*param_1 & 0xff,temp_v2,temp_v3);
+  }
+  else if (!temp_v4) {
+    *(unsigned short *)(param_1 + 0x1b) = (unsigned short)param_1[0x1b] & 0x8000;
+    return;
+  }
+  param_1[0xb] = 0x578;
+  temp_v0 = *(unsigned short *)((int)param_1 + 0x1e) & 3;
+  temp_v6 = (float)VectorSignedToFloat(*(unsigned int *)
+                                      ((int)&DAT_0053f614 +
+                                      (*(unsigned short *)((int)param_1 + 0x1e) & 0xc) * 2 + temp_v0 * 4),
+                                     (unsigned char)(in_fpscr >> 0x16) & 3);
+  temp_v5 = VectorFloatToUnsigned(temp_v6 * (float)param_1[10] + 1400.0f,3);
+  param_1[0xb] = temp_v5;
+  temp_v5 = temp_v5 + *(int *)((unsigned int)*(unsigned char *)((int)param_1 + 0xe) * 8 + temp_v0 * 4 + 0x53f62c);
+  param_1[0xb] = temp_v5;
+  temp_v5 = temp_v5 + *(int *)((unsigned int)*(unsigned char *)((int)param_1 + 0xf) * 8 + temp_v0 * 4 + 0x53f644);
+  param_1[0xb] = temp_v5;
+  temp_v0 = param_1[0x12];
+  temp_v1 = 1;
+  temp_v4 = temp_v0 != 0;
+  if (!temp_v4) {
+    temp_v0 = param_1[0x13];
+  }
+  if (!(temp_v4 || temp_v0 != 0)) {
+    temp_v0 = param_1[0x14];
+    temp_v4 = temp_v0 == 0;
+    if (temp_v4) {
+      temp_v0 = param_1[0x15];
+    }
+    if (!temp_v4 || temp_v0 != 0) {
+      temp_v1 = 2;
+    }
+  }
+  else {
+    temp_v1 = 2;
+  }
+  temp_v0 = param_1[0x16];
+  temp_v4 = temp_v0 != 0;
+  if (!temp_v4) {
+    temp_v0 = param_1[0x17];
+  }
+  if (!(temp_v4 || temp_v0 != 0)) {
+    temp_v0 = param_1[0x18];
+    temp_v4 = temp_v0 == 0;
+    if (temp_v4) {
+      temp_v0 = param_1[0x19];
+    }
+    if (!temp_v4 || temp_v0 != 0) {
+      temp_v1 = temp_v1 + 1;
+    }
+  }
+  else {
+    temp_v1 = temp_v1 + 1;
+  }
+  param_1[0xb] = temp_v5 + temp_v1 * 0x898;
+  *(unsigned short *)(param_1 + 0x1b) = (unsigned short)param_1[0x1b] & 0x8000;
+  return;
+}

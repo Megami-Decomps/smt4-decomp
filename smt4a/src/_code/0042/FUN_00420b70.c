@@ -1,0 +1,94 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00420b70` (_code @ 0x420b70, 0x190 bytes) from smt4a.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+typedef int romwright_code();
+/* stack frame of param_1: 1 slot(s), 4 byte(s) */
+typedef struct {
+    unsigned int sp10; /* 0x10: local_10 */
+} param_1_stack;
+
+extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
+
+/* Supplied declaration required: FUN_001641c4. */
+/* Supplied declaration required: FUN_0019a5a0. */
+/* Supplied declaration required: FUN_0019a7f4. */
+/* Supplied declaration required: FUN_0019c364. */
+/* Supplied declaration required: FUN_0019de98. */
+/* Supplied declaration required: FUN_001add24. */
+/* Supplied declaration required: FUN_001aea28. */
+/* Supplied declaration required: FUN_002844e4. */
+/* Supplied declaration required: FUN_002c1648. */
+/* Supplied declaration required: FUN_002c85b0. */
+/* Supplied declaration required: FUN_002e132c. */
+/* Supplied declaration required: FUN_00333f6c. */
+/* Supplied declaration required: FUN_0033440c. */
+/* Supplied declaration required: FUN_003a76a8. */
+/* Supplied declaration required: FUN_0050d778. */
+
+
+void FUN_00420b70(int param_1)
+
+{
+/* irregular: 15 native warning(s); review required */
+  int temp_v0;
+  
+  if (*(int *)(param_1 + 0x1c) != 0) {
+    FUN_0019a5a0();
+    *(unsigned int *)(param_1 + 0x1c) = 0;
+  }
+  if (*(int *)(param_1 + 0x20) != 0) {
+    FUN_0019a5a0();
+    *(unsigned int *)(param_1 + 0x20) = 0;
+  }
+  if (*(int *)(param_1 + 0x24) != 0) {
+    FUN_0019a5a0();
+    *(unsigned int *)(param_1 + 0x24) = 0;
+  }
+  if (*(int *)(param_1 + 0x40) != 0) {
+    FUN_0019c364();
+    *(unsigned int *)(param_1 + 0x40) = 0;
+  }
+  if (*(int *)(param_1 + 0x38) != 0) {
+    FUN_0019a5a0();
+    *(unsigned int *)(param_1 + 0x38) = 0;
+  }
+  if (*(int *)(param_1 + 0x3c) != 0) {
+    FUN_0019a5a0();
+    *(unsigned int *)(param_1 + 0x3c) = 0;
+  }
+  FUN_0019a7f4(0x2b,0);
+  FUN_002e132c(0x2b);
+  FUN_002c1648();
+  FUN_001add24(0x3d);
+  FUN_002844e4();
+  if (*(int *)(param_1 + 0x54) != 0) {
+    FUN_0019a5a0();
+    *(unsigned int *)(param_1 + 0x54) = 0;
+  }
+  if (*(int *)(param_1 + 0x58) != 0) {
+    FUN_001aea28(DAT_0056fcc0,*(unsigned int *)(*(int *)(param_1 + 0x58) + 4));
+    if (*(int **)(param_1 + 0x58) != (int *)0x0) {
+      (**(romwright_code **)(**(int **)(param_1 + 0x58) + 4))();
+      *(unsigned int *)(param_1 + 0x58) = 0;
+    }
+  }
+  temp_v0 = 0;
+  if (temp_v0 < *(int *)(param_1 + 0x448)) {
+    do {
+      FUN_001641c4();
+      temp_v0 = temp_v0 + 1;
+    } while (temp_v0 < *(int *)(param_1 + 0x448));
+  }
+  *(unsigned int *)(param_1 + 0x448) = 0;
+  FUN_0050d778(param_1 + 0x43c,0xffffffff);
+  *(unsigned char *)(param_1 + 0x44c) = 0;
+  *(unsigned char *)(param_1 + 0x44d) = 0;
+  *(unsigned char *)(param_1 + 0x44e) = 0;
+  FUN_002c85b0(0);
+  FUN_0033440c(0xffffffff);
+  FUN_00333f6c();
+  FUN_0019de98(0,0xf4f4f4ff);
+  FUN_003a76a8(1);
+  return;
+}

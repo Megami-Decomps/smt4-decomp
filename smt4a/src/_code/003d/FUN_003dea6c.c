@@ -1,0 +1,108 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003dea6c` (_code @ 0x3dea6c, 0x1e0 bytes) from smt4a.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+/* Supplied declaration required: FUN_0015f858. */
+/* Supplied declaration required: FUN_001654f0. */
+/* Supplied declaration required: FUN_00180118. */
+/* Supplied declaration required: FUN_001ad9b4. */
+/* Supplied declaration required: FUN_00282bf4. */
+extern short *FUN_00284fa4(int);
+/* Supplied declaration required: FUN_002e342c. */
+extern int FUN_002ebda8(void);
+/* Supplied declaration required: FUN_003180c4. */
+/* Supplied declaration required: FUN_00359974. */
+
+
+void FUN_003dea6c(int param_1,int param_2,int param_3)
+
+{
+/* irregular: 8 native warning(s); review required */
+  int temp_v0;
+  short *psVar2;
+  unsigned int temp_v1;
+  int temp_v2;
+  int temp_v3;
+  int temp_v4;
+  unsigned char temp_v5 [128];
+  unsigned char temp_v6 [132];
+  
+  temp_v3 = 0;
+  if (param_3 != 0) {
+    temp_v4 = param_1;
+    FUN_001ad9b4();
+    if (temp_v4 != 0) {
+      temp_v3 = temp_v4 + 8;
+    }
+    FUN_002e342c(temp_v5,temp_v3);
+    FUN_001654f0(temp_v5,temp_v6);
+    FUN_003180c4(0x28,temp_v6);
+  }
+  else {
+    temp_v4 = param_1;
+    FUN_001ad9b4();
+    if (temp_v4 != 0) {
+      temp_v3 = temp_v4 + 8;
+    }
+    FUN_003180c4(0x28,temp_v3);
+  }
+  if ((param_2 != 0) && (FUN_001ad9b4(), param_1 != 0)) {
+    temp_v3 = 0;
+    do {
+      temp_v4 = param_1 + temp_v3 * 8;
+      switch(*(unsigned short *)(temp_v4 + 0x100)) {
+      case 1:
+      case 7:
+        temp_v1 = (unsigned int)*(unsigned short *)(temp_v4 + 0x102);
+        FUN_0015f858(temp_v1,param_3);
+        FUN_002e342c(temp_v5,temp_v1);
+        temp_v0 = temp_v3;
+        FUN_003180c4(temp_v0,temp_v5);
+        FUN_00359974(temp_v3 + 0x18,*(unsigned int *)(temp_v4 + 0x104),0xffffffff,0);
+        break;
+      case 2:
+        temp_v1 = (unsigned int)*(unsigned short *)(temp_v4 + 0x102);
+        FUN_00180118(temp_v1);
+        FUN_002e342c(temp_v5,temp_v1);
+        temp_v0 = temp_v3 + 8;
+        FUN_003180c4(temp_v0,temp_v5);
+        FUN_00359974(temp_v3 + 0x18,*(unsigned int *)(temp_v4 + 0x104),0xffffffff,0);
+        break;
+      case 5:
+        temp_v1 = (unsigned int)*(unsigned short *)(temp_v4 + 0x102);
+        FUN_00282bf4(temp_v1);
+        temp_v4 = temp_v3 + 0x29;
+        FUN_003180c4(temp_v4,temp_v1);
+        break;
+      case 6:
+        FUN_00359974(temp_v3 + 0x18,*(unsigned int *)(temp_v4 + 0x104),0xffffffff,0);
+        break;
+      case 8:
+        temp_v0 = FUN_002ebda8();
+        temp_v2 = 0;
+        if (0 < temp_v0) {
+          do {
+            psVar2 = (short *)FUN_00284fa4(temp_v2);
+            if (*psVar2 == *(short *)(temp_v4 + 0x102)) {
+              if (psVar2 != (short *)0x0) {
+                FUN_003180c4(temp_v3 + 0x29,psVar2 + 1);
+                FUN_00359974(temp_v3 + 0x2a,*(unsigned int *)(temp_v4 + 0x104),0xffffffff,0);
+                if (*(char *)((int)psVar2 + 0x37) == '0') {
+                  temp_v1 = 0x3dec4c;
+                  temp_v4 = temp_v3 + 0x2b;
+                  FUN_003180c4(temp_v4,temp_v1);
+                  break;
+                }
+                FUN_003180c4(temp_v3 + 0x2b,(int)psVar2 + 0x37);
+              }
+              break;
+            }
+            temp_v2 = temp_v2 + 1;
+          } while (temp_v2 < temp_v0);
+        }
+      }
+      temp_v3 = temp_v3 + 1;
+    } while (temp_v3 < 4);
+  }
+  return;
+}

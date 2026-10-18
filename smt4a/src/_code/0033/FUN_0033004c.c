@@ -1,0 +1,49 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033004c` (_code @ 0x33004c, 0xb4 bytes) from smt4a.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+extern int DAT_0057f390; /* 0x57f390 */
+
+/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
+/* Supplied declaration required: FUN_002e3140. */
+/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern int nn_os_CriticalSection_TryEnter(void);
+
+
+unsigned int FUN_0033004c(void)
+
+{
+/* irregular: 3 native warning(s); review required */
+  int temp_v0;
+  unsigned int temp_v1;
+  int temp_v2;
+  unsigned int temp_v3;
+  
+  temp_v0 = DAT_0057f390;
+  temp_v3 = 0;
+  if (DAT_0057f390 != 0) {
+    temp_v1 = *(unsigned int *)(DAT_0057f390 + 0xd34);
+    if (temp_v1 != 0) {
+      software_interrupt(0x24);
+      if ((int)temp_v1 < 0) {
+        FUN_002e3140();
+      }
+      if ((temp_v1 & 0x3ff) == 0x3fe) {
+        temp_v2 = nn_os_CriticalSection_TryEnter();
+        if (temp_v2 == 0) {
+          return 0;
+        }
+        if (*(int *)(temp_v0 + 0x90) != *(int *)(temp_v0 + 0x94)) {
+          *(int *)(temp_v0 + 0x94) = *(int *)(temp_v0 + 0x94) + 1;
+        }
+        nn_os_CriticalSection_Leave(temp_v0 + 0xd28);
+        return 0;
+      }
+    }
+    temp_v3 = 1;
+    while (*(int *)(temp_v0 + 0x90) != *(int *)(temp_v0 + 0x94)) {
+      *(int *)(temp_v0 + 0x94) = *(int *)(temp_v0 + 0x94) + 1;
+    }
+  }
+  return temp_v3;
+}

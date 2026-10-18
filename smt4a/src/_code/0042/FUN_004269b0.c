@@ -1,0 +1,37 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004269b0` (_code @ 0x4269b0, 0x64 bytes) from smt4a.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+/* stack frame of param_4: 1 slot(s), 1 byte(s) */
+typedef struct {
+    unsigned char sp14; /* 0x14: local_14 */
+} param_4_stack;
+
+extern unsigned int DAT_005c149c; /* 0x5c149c */
+
+/* Unsupported intrinsic, declaration required: coproc_movefrom_User_R_Thread_and_Process_ID (CALLOTHER). */
+/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
+
+
+unsigned int FUN_004269b0(unsigned int param_1,unsigned char param_2,unsigned int param_3,int param_4)
+
+{
+/* irregular: 2 native warning(s); review required */
+  unsigned int temp_v0;
+  int temp_v1;
+  
+  temp_v1 = coproc_movefrom_User_R_Thread_and_Process_ID();
+  *(unsigned int *)(temp_v1 + 0x80) = 0x10050084;
+  *(unsigned char *)(temp_v1 + 0x84) = param_2;
+  *(int *)(temp_v1 + 0x88) = param_4;
+  *(unsigned int *)(temp_v1 + 0x8c) = (param_4 << 7) | 10;
+  *(unsigned int *)(temp_v1 + 0x90) = param_3;
+  *(unsigned int *)(temp_v1 + 0x98) = param_1;
+  *(unsigned int *)(temp_v1 + 0x94) = (param_4 * 0x180) | 0xc;
+  software_interrupt(0x32);
+  temp_v0 = DAT_005c149c;
+  if ((DAT_005c149c & 0x80000000) == 0) {
+    temp_v0 = *(unsigned int *)(temp_v1 + 0x84);
+  }
+  return temp_v0;
+}

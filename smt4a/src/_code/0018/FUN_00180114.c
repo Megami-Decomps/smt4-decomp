@@ -1,0 +1,35 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00180114` (_code @ 0x180114, 0x4 bytes) from smt4a.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+extern unsigned char LAB_00165390; /* 0x165390 */
+extern int DAT_00570280; /* 0x570280 */
+
+/* Supplied declaration required: FUN_00100854. */
+extern unsigned int FUN_00187180(unsigned int);
+/* Supplied declaration required: FUN_00192748. */
+/* Supplied declaration required: FUN_00192798. */
+
+
+void FUN_00180114(unsigned short param_1)
+
+{
+/* irregular: 3 native warning(s); review required */
+  unsigned short *puVar1;
+  unsigned int temp_v0;
+  unsigned short temp_v1 [20];
+  
+  if (*(int *)(DAT_00570280 + 0x368) != 0) {
+    puVar1 = temp_v1;
+    temp_v1[0] = param_1;
+    FUN_00100854(puVar1,*(unsigned int *)(DAT_00570280 + 0x378),*(unsigned int *)(DAT_00570280 + 0x374),
+                 0x28,&LAB_00165390);
+    if (puVar1 != (unsigned short *)0x0) {
+      return;
+    }
+  }
+  temp_v0 = FUN_00187180(1);
+  FUN_00192798();
+  FUN_00192748(temp_v0);
+  return;
+}

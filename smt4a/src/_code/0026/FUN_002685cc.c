@@ -1,0 +1,54 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002685cc` (_code @ 0x2685cc, 0xbc bytes) from smt4a.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+/* stack frame of param_1: 2 slot(s), 6 byte(s) */
+typedef struct {
+    unsigned short sp38; /* 0x38: local_38 */
+    unsigned int sp60; /* 0x60: local_60 */
+} param_1_stack;
+
+extern unsigned char LAB_001ac8dc; /* 0x1ac8dc */
+extern unsigned char *DAT_00570280; /* 0x570280 */
+
+/* Supplied declaration required: FUN_00100854. */
+extern unsigned int FUN_00187180(unsigned int, unsigned int);
+extern unsigned int FUN_00192748(unsigned int);
+extern unsigned int FUN_00192798(void);
+/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: FUN_001b2e78. */
+
+
+unsigned int FUN_002685cc(unsigned int param_1)
+
+{
+/* irregular: 3 native warning(s); review required */
+  unsigned char *puVar1;
+  unsigned int temp_v0;
+  unsigned int temp_v1;
+  unsigned char temp_v2 [32];
+  unsigned short temp_v3;
+  
+  if (param_1 >= 0x191) {
+    puVar1 = DAT_00570280;
+    FUN_001b2e78(DAT_00570280,param_1);
+    if (puVar1 == (unsigned char *)0x0) {
+      temp_v0 = FUN_00187180(4,1);
+      temp_v1 = FUN_00192798();
+      temp_v0 = FUN_00192748(temp_v0);
+      temp_v3 = (unsigned short)param_1;
+      puVar1 = temp_v2;
+      FUN_00100854(puVar1,temp_v1,temp_v0,0x48,&LAB_001ac8dc);
+    }
+    if (puVar1 != (unsigned char *)0x0) {
+      return (*(int *)(puVar1 + 0x44) >> 0x1f) + 1;
+    }
+  }
+  else {
+    FUN_001aba54();
+    if (param_1 != 0) {
+      return ~(*(unsigned int *)(param_1 + 0x3c) >> 0x1d) & 1;
+    }
+  }
+  return 0;
+}
