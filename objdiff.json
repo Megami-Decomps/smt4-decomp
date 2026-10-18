@@ -1,0 +1,821 @@
+{
+  "build_base": true,
+  "build_target": false,
+  "custom_args": [
+    "build.py"
+  ],
+  "custom_make": "python3",
+  "min_version": "2.0.0-beta.5",
+  "progress_categories": [
+    {
+      "id": "_code",
+      "name": "_code"
+    }
+  ],
+  "units": [
+    {
+      "base_path": "build/obj/_code/0010/entry.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "entry",
+            "size": 36,
+            "vram": "0x100000"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0010/entry.c"
+      },
+      "name": "_code/0010/entry",
+      "target_path": "orig/target/_code/0010/entry.o"
+    },
+    {
+      "base_path": "build/obj/_code/0010/FUN_00100024.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_00100024",
+            "size": 28,
+            "vram": "0x100024"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0010/FUN_00100024.c"
+      },
+      "name": "_code/0010/FUN_00100024",
+      "target_path": "orig/target/_code/0010/FUN_00100024.o"
+    },
+    {
+      "base_path": "build/obj/_code/0010/FUN_0010004a.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_0010004a",
+            "size": 158,
+            "vram": "0x10004a"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0010/FUN_0010004a.c"
+      },
+      "name": "_code/0010/FUN_0010004a",
+      "target_path": "orig/target/_code/0010/FUN_0010004a.o"
+    },
+    {
+      "base_path": "build/obj/_code/0010/FUN_00100238.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_00100238",
+            "size": 14,
+            "vram": "0x100238"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0010/FUN_00100238.c"
+      },
+      "name": "_code/0010/FUN_00100238",
+      "target_path": "orig/target/_code/0010/FUN_00100238.o"
+    },
+    {
+      "base_path": "build/obj/_code/0010/FUN_0010024c.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_0010024c",
+            "size": 22,
+            "vram": "0x10024c"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0010/FUN_0010024c.c"
+      },
+      "name": "_code/0010/FUN_0010024c",
+      "target_path": "orig/target/_code/0010/FUN_0010024c.o"
+    },
+    {
+      "base_path": "build/obj/_code/0010/FUN_00100262.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_00100262",
+            "size": 112,
+            "vram": "0x100262"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0010/FUN_00100262.c"
+      },
+      "name": "_code/0010/FUN_00100262",
+      "target_path": "orig/target/_code/0010/FUN_00100262.o"
+    },
+    {
+      "base_path": "build/obj/_code/0010/FUN_00100338.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_00100338",
+            "size": 22,
+            "vram": "0x100338"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0010/FUN_00100338.c"
+      },
+      "name": "_code/0010/FUN_00100338",
+      "target_path": "orig/target/_code/0010/FUN_00100338.o"
+    },
+    {
+      "base_path": "build/obj/_code/0010/FUN_00100366.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_00100366",
+            "size": 82,
+            "vram": "0x100366"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0010/FUN_00100366.c"
+      },
+      "name": "_code/0010/FUN_00100366",
+      "target_path": "orig/target/_code/0010/FUN_00100366.o"
+    },
+    {
+      "base_path": "build/obj/_code/0010/FUN_0010042c.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_0010042c",
+            "size": 388,
+            "vram": "0x10042c"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0010/FUN_0010042c.c"
+      },
+      "name": "_code/0010/FUN_0010042c",
+      "target_path": "orig/target/_code/0010/FUN_0010042c.o"
+    },
+    {
+      "base_path": "build/obj/_code/0010/FUN_001005dc.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_001005dc",
+            "size": 18,
+            "vram": "0x1005dc"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0010/FUN_001005dc.c"
+      },
+      "name": "_code/0010/FUN_001005dc",
+      "target_path": "orig/target/_code/0010/FUN_001005dc.o"
+    },
+    {
+      "base_path": "build/obj/_code/0010/FUN_001005f0.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_001005f0",
+            "size": 182,
+            "vram": "0x1005f0"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0010/FUN_001005f0.c"
+      },
+      "name": "_code/0010/FUN_001005f0",
+      "target_path": "orig/target/_code/0010/FUN_001005f0.o"
+    },
+    {
+      "base_path": "build/obj/_code/0010/FUN_0010072c.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_0010072c",
+            "size": 68,
+            "vram": "0x10072c"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0010/FUN_0010072c.c"
+      },
+      "name": "_code/0010/FUN_0010072c",
+      "target_path": "orig/target/_code/0010/FUN_0010072c.o"
+    },
+    {
+      "base_path": "build/obj/_code/0010/FUN_00100770.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_00100770",
+            "size": 24,
+            "vram": "0x100770"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0010/FUN_00100770.c"
+      },
+      "name": "_code/0010/FUN_00100770",
+      "target_path": "orig/target/_code/0010/FUN_00100770.o"
+    },
+    {
+      "base_path": "build/obj/_code/0010/FUN_0010083c.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_0010083c",
+            "size": 8,
+            "vram": "0x10083c"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0010/FUN_0010083c.c"
+      },
+      "name": "_code/0010/FUN_0010083c",
+      "target_path": "orig/target/_code/0010/FUN_0010083c.o"
+    },
+    {
+      "base_path": "build/obj/_code/0010/FUN_001008c8.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_001008c8",
+            "size": 64,
+            "vram": "0x1008c8"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0010/FUN_001008c8.c"
+      },
+      "name": "_code/0010/FUN_001008c8",
+      "target_path": "orig/target/_code/0010/FUN_001008c8.o"
+    },
+    {
+      "base_path": "build/obj/_code/0010/FUN_0010095c.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_0010095c",
+            "size": 14,
+            "vram": "0x10095c"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0010/FUN_0010095c.c"
+      },
+      "name": "_code/0010/FUN_0010095c",
+      "target_path": "orig/target/_code/0010/FUN_0010095c.o"
+    },
+    {
+      "base_path": "build/obj/_code/0010/FUN_00100974.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_00100974",
+            "size": 22,
+            "vram": "0x100974"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0010/FUN_00100974.c"
+      },
+      "name": "_code/0010/FUN_00100974",
+      "target_path": "orig/target/_code/0010/FUN_00100974.o"
+    },
+    {
+      "base_path": "build/obj/_code/0010/FUN_001009a2.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_001009a2",
+            "size": 68,
+            "vram": "0x1009a2"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0010/FUN_001009a2.c"
+      },
+      "name": "_code/0010/FUN_001009a2",
+      "target_path": "orig/target/_code/0010/FUN_001009a2.o"
+    },
+    {
+      "base_path": "build/obj/_code/0010/FUN_00100a70.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_00100a70",
+            "size": 206,
+            "vram": "0x100a70"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0010/FUN_00100a70.c"
+      },
+      "name": "_code/0010/FUN_00100a70",
+      "target_path": "orig/target/_code/0010/FUN_00100a70.o"
+    },
+    {
+      "base_path": "build/obj/_code/0010/FUN_00100b44.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_00100b44",
+            "size": 30,
+            "vram": "0x100b44"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0010/FUN_00100b44.c"
+      },
+      "name": "_code/0010/FUN_00100b44",
+      "target_path": "orig/target/_code/0010/FUN_00100b44.o"
+    },
+    {
+      "base_path": "build/obj/_code/0010/FUN_00100b64.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_00100b64",
+            "size": 32,
+            "vram": "0x100b64"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0010/FUN_00100b64.c"
+      },
+      "name": "_code/0010/FUN_00100b64",
+      "target_path": "orig/target/_code/0010/FUN_00100b64.o"
+    },
+    {
+      "base_path": "build/obj/_code/0010/FUN_00100b88.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_00100b88",
+            "size": 72,
+            "vram": "0x100b88"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0010/FUN_00100b88.c"
+      },
+      "name": "_code/0010/FUN_00100b88",
+      "target_path": "orig/target/_code/0010/FUN_00100b88.o"
+    },
+    {
+      "base_path": "build/obj/_code/0010/FUN_00100bd4.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_00100bd4",
+            "size": 26,
+            "vram": "0x100bd4"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0010/FUN_00100bd4.c"
+      },
+      "name": "_code/0010/FUN_00100bd4",
+      "target_path": "orig/target/_code/0010/FUN_00100bd4.o"
+    },
+    {
+      "base_path": "build/obj/_code/0010/FUN_00100bee.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_00100bee",
+            "size": 8,
+            "vram": "0x100bee"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0010/FUN_00100bee.c"
+      },
+      "name": "_code/0010/FUN_00100bee",
+      "target_path": "orig/target/_code/0010/FUN_00100bee.o"
+    },
+    {
+      "base_path": "build/obj/_code/0010/FUN_00100bf6.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_00100bf6",
+            "size": 8,
+            "vram": "0x100bf6"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0010/FUN_00100bf6.c"
+      },
+      "name": "_code/0010/FUN_00100bf6",
+      "target_path": "orig/target/_code/0010/FUN_00100bf6.o"
+    },
+    {
+      "base_path": "build/obj/_code/0010/FUN_00100bfe.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_00100bfe",
+            "size": 70,
+            "vram": "0x100bfe"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0010/FUN_00100bfe.c"
+      },
+      "name": "_code/0010/FUN_00100bfe",
+      "target_path": "orig/target/_code/0010/FUN_00100bfe.o"
+    },
+    {
+      "base_path": "build/obj/_code/0010/FUN_00100c44.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_00100c44",
+            "size": 8,
+            "vram": "0x100c44"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0010/FUN_00100c44.c"
+      },
+      "name": "_code/0010/FUN_00100c44",
+      "target_path": "orig/target/_code/0010/FUN_00100c44.o"
+    },
+    {
+      "base_path": "build/obj/_code/0010/FUN_00100c4c.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_00100c4c",
+            "size": 40,
+            "vram": "0x100c4c"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0010/FUN_00100c4c.c"
+      },
+      "name": "_code/0010/FUN_00100c4c",
+      "target_path": "orig/target/_code/0010/FUN_00100c4c.o"
+    },
+    {
+      "base_path": "build/obj/_code/0010/FUN_00100c74.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_00100c74",
+            "size": 28,
+            "vram": "0x100c74"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0010/FUN_00100c74.c"
+      },
+      "name": "_code/0010/FUN_00100c74",
+      "target_path": "orig/target/_code/0010/FUN_00100c74.o"
+    },
+    {
+      "base_path": "build/obj/_code/0010/FUN_00100c90.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_00100c90",
+            "size": 40,
+            "vram": "0x100c90"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0010/FUN_00100c90.c"
+      },
+      "name": "_code/0010/FUN_00100c90",
+      "target_path": "orig/target/_code/0010/FUN_00100c90.o"
+    },
+    {
+      "base_path": "build/obj/_code/0010/FUN_00100cb8.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_00100cb8",
+            "size": 26,
+            "vram": "0x100cb8"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0010/FUN_00100cb8.c"
+      },
+      "name": "_code/0010/FUN_00100cb8",
+      "target_path": "orig/target/_code/0010/FUN_00100cb8.o"
+    },
+    {
+      "base_path": "build/obj/_code/0010/FUN_00100ce6.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_00100ce6",
+            "size": 32,
+            "vram": "0x100ce6"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0010/FUN_00100ce6.c"
+      },
+      "name": "_code/0010/FUN_00100ce6",
+      "target_path": "orig/target/_code/0010/FUN_00100ce6.o"
+    },
+    {
+      "base_path": "build/obj/_code/0010/FUN_00100d0c.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_00100d0c",
+            "size": 16,
+            "vram": "0x100d0c"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0010/FUN_00100d0c.c"
+      },
+      "name": "_code/0010/FUN_00100d0c",
+      "target_path": "orig/target/_code/0010/FUN_00100d0c.o"
+    },
+    {
+      "base_path": "build/obj/_code/0010/FUN_00100d1c.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_00100d1c",
+            "size": 168,
+            "vram": "0x100d1c"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0010/FUN_00100d1c.c"
+      },
+      "name": "_code/0010/FUN_00100d1c",
+      "target_path": "orig/target/_code/0010/FUN_00100d1c.o"
+    },
+    {
+      "base_path": "build/obj/_code/0010/FUN_00100dc4.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_00100dc4",
+            "size": 138,
+            "vram": "0x100dc4"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0010/FUN_00100dc4.c"
+      },
+      "name": "_code/0010/FUN_00100dc4",
+      "target_path": "orig/target/_code/0010/FUN_00100dc4.o"
+    },
+    {
+      "base_path": "build/obj/_code/0010/FUN_00100e4e.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_00100e4e",
+            "size": 124,
+            "vram": "0x100e4e"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0010/FUN_00100e4e.c"
+      },
+      "name": "_code/0010/FUN_00100e4e",
+      "target_path": "orig/target/_code/0010/FUN_00100e4e.o"
+    },
+    {
+      "base_path": "build/obj/_code/0010/FUN_00100ecc.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_00100ecc",
+            "size": 72,
+            "vram": "0x100ecc"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0010/FUN_00100ecc.c"
+      },
+      "name": "_code/0010/FUN_00100ecc",
+      "target_path": "orig/target/_code/0010/FUN_00100ecc.o"
+    },
+    {
+      "base_path": "build/obj/_code/0010/FUN_00100f14.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_00100f14",
+            "size": 110,
+            "vram": "0x100f14"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0010/FUN_00100f14.c"
+      },
+      "name": "_code/0010/FUN_00100f14",
+      "target_path": "orig/target/_code/0010/FUN_00100f14.o"
+    },
+    {
+      "base_path": "build/obj/_code/0010/FUN_00100f9c.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_00100f9c",
+            "size": 44,
+            "vram": "0x100f9c"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0010/FUN_00100f9c.c"
+      },
+      "name": "_code/0010/FUN_00100f9c",
+      "target_path": "orig/target/_code/0010/FUN_00100f9c.o"
+    },
+    {
+      "base_path": "build/obj/_code/0010/FUN_00100fc8.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_00100fc8",
+            "size": 156,
+            "vram": "0x100fc8"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0010/FUN_00100fc8.c"
+      },
+      "name": "_code/0010/FUN_00100fc8",
+      "target_path": "orig/target/_code/0010/FUN_00100fc8.o"
+    }
+  ],
+  "watch_patterns": [
+    "src/**/*.c",
+    "include/**/*.h"
+  ]
+}

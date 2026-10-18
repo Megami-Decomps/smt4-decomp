@@ -1,0 +1,441 @@
+{
+  "compiler": {
+    "arch": "arm32",
+    "cflags": [
+      "-std=gnu17",
+      "-ffreestanding",
+      "-nostdlibinc",
+      "-fno-builtin",
+      "-fno-pic",
+      "-fno-unwind-tables",
+      "-fno-asynchronous-unwind-tables",
+      "-O2",
+      "-w",
+      "-Wno-implicit-function-declaration",
+      "-Wno-int-conversion",
+      "-Wno-incompatible-pointer-types",
+      "-marm",
+      "-mfloat-abi=hard",
+      "-mfpu=vfpv2"
+    ],
+    "data_model": "ILP32 (ARM11 MPCore, ARMv6K, VFPv2)",
+    "target": "armv6k-none-eabi",
+    "tool": "clang-22.1.8"
+  },
+  "image": {
+    "file": "smt4.cxi",
+    "orig": "orig/smt4.cxi",
+    "sha256": "565f9f5f03de03da5197d95ae33046a1f3f046ffe46d0f1c15796fb8b1351fdb",
+    "size": 1875677184
+  },
+  "name": "smt4",
+  "objdiff": true,
+  "romwright": {
+    "kind": "non-matching-scaffold",
+    "platform": "3ds",
+    "schema": 1,
+    "version": "0.5.0"
+  },
+  "units": [
+    {
+      "address": "0x100000",
+      "function": "entry",
+      "module": "_code",
+      "object": "build/obj/_code/0010/entry.o",
+      "size": 36,
+      "source": "src/_code/0010/entry.c",
+      "target": "orig/target/_code/0010/entry.o",
+      "thumb": false
+    },
+    {
+      "address": "0x100024",
+      "function": "FUN_00100024",
+      "module": "_code",
+      "object": "build/obj/_code/0010/FUN_00100024.o",
+      "size": 28,
+      "source": "src/_code/0010/FUN_00100024.c",
+      "target": "orig/target/_code/0010/FUN_00100024.o",
+      "thumb": false
+    },
+    {
+      "address": "0x10004a",
+      "function": "FUN_0010004a",
+      "module": "_code",
+      "object": "build/obj/_code/0010/FUN_0010004a.o",
+      "size": 158,
+      "source": "src/_code/0010/FUN_0010004a.c",
+      "target": "orig/target/_code/0010/FUN_0010004a.o",
+      "thumb": true
+    },
+    {
+      "address": "0x100238",
+      "function": "FUN_00100238",
+      "module": "_code",
+      "object": "build/obj/_code/0010/FUN_00100238.o",
+      "size": 14,
+      "source": "src/_code/0010/FUN_00100238.c",
+      "target": "orig/target/_code/0010/FUN_00100238.o",
+      "thumb": true
+    },
+    {
+      "address": "0x10024c",
+      "function": "FUN_0010024c",
+      "module": "_code",
+      "object": "build/obj/_code/0010/FUN_0010024c.o",
+      "size": 22,
+      "source": "src/_code/0010/FUN_0010024c.c",
+      "target": "orig/target/_code/0010/FUN_0010024c.o",
+      "thumb": true
+    },
+    {
+      "address": "0x100262",
+      "function": "FUN_00100262",
+      "module": "_code",
+      "object": "build/obj/_code/0010/FUN_00100262.o",
+      "size": 112,
+      "source": "src/_code/0010/FUN_00100262.c",
+      "target": "orig/target/_code/0010/FUN_00100262.o",
+      "thumb": true
+    },
+    {
+      "address": "0x100338",
+      "function": "FUN_00100338",
+      "module": "_code",
+      "object": "build/obj/_code/0010/FUN_00100338.o",
+      "size": 22,
+      "source": "src/_code/0010/FUN_00100338.c",
+      "target": "orig/target/_code/0010/FUN_00100338.o",
+      "thumb": true
+    },
+    {
+      "address": "0x100366",
+      "function": "FUN_00100366",
+      "module": "_code",
+      "object": "build/obj/_code/0010/FUN_00100366.o",
+      "size": 82,
+      "source": "src/_code/0010/FUN_00100366.c",
+      "target": "orig/target/_code/0010/FUN_00100366.o",
+      "thumb": true
+    },
+    {
+      "address": "0x10042c",
+      "function": "FUN_0010042c",
+      "module": "_code",
+      "object": "build/obj/_code/0010/FUN_0010042c.o",
+      "size": 388,
+      "source": "src/_code/0010/FUN_0010042c.c",
+      "target": "orig/target/_code/0010/FUN_0010042c.o",
+      "thumb": true
+    },
+    {
+      "address": "0x1005dc",
+      "function": "FUN_001005dc",
+      "module": "_code",
+      "object": "build/obj/_code/0010/FUN_001005dc.o",
+      "size": 18,
+      "source": "src/_code/0010/FUN_001005dc.c",
+      "target": "orig/target/_code/0010/FUN_001005dc.o",
+      "thumb": true
+    },
+    {
+      "address": "0x1005f0",
+      "function": "FUN_001005f0",
+      "module": "_code",
+      "object": "build/obj/_code/0010/FUN_001005f0.o",
+      "size": 182,
+      "source": "src/_code/0010/FUN_001005f0.c",
+      "target": "orig/target/_code/0010/FUN_001005f0.o",
+      "thumb": true
+    },
+    {
+      "address": "0x10072c",
+      "function": "FUN_0010072c",
+      "module": "_code",
+      "object": "build/obj/_code/0010/FUN_0010072c.o",
+      "size": 68,
+      "source": "src/_code/0010/FUN_0010072c.c",
+      "target": "orig/target/_code/0010/FUN_0010072c.o",
+      "thumb": true
+    },
+    {
+      "address": "0x100770",
+      "function": "FUN_00100770",
+      "module": "_code",
+      "object": "build/obj/_code/0010/FUN_00100770.o",
+      "size": 24,
+      "source": "src/_code/0010/FUN_00100770.c",
+      "target": "orig/target/_code/0010/FUN_00100770.o",
+      "thumb": true
+    },
+    {
+      "address": "0x10083c",
+      "function": "FUN_0010083c",
+      "module": "_code",
+      "object": "build/obj/_code/0010/FUN_0010083c.o",
+      "size": 8,
+      "source": "src/_code/0010/FUN_0010083c.c",
+      "target": "orig/target/_code/0010/FUN_0010083c.o",
+      "thumb": false
+    },
+    {
+      "address": "0x1008c8",
+      "function": "FUN_001008c8",
+      "module": "_code",
+      "object": "build/obj/_code/0010/FUN_001008c8.o",
+      "size": 64,
+      "source": "src/_code/0010/FUN_001008c8.c",
+      "target": "orig/target/_code/0010/FUN_001008c8.o",
+      "thumb": true
+    },
+    {
+      "address": "0x10095c",
+      "function": "FUN_0010095c",
+      "module": "_code",
+      "object": "build/obj/_code/0010/FUN_0010095c.o",
+      "size": 14,
+      "source": "src/_code/0010/FUN_0010095c.c",
+      "target": "orig/target/_code/0010/FUN_0010095c.o",
+      "thumb": true
+    },
+    {
+      "address": "0x100974",
+      "function": "FUN_00100974",
+      "module": "_code",
+      "object": "build/obj/_code/0010/FUN_00100974.o",
+      "size": 22,
+      "source": "src/_code/0010/FUN_00100974.c",
+      "target": "orig/target/_code/0010/FUN_00100974.o",
+      "thumb": true
+    },
+    {
+      "address": "0x1009a2",
+      "function": "FUN_001009a2",
+      "module": "_code",
+      "object": "build/obj/_code/0010/FUN_001009a2.o",
+      "size": 68,
+      "source": "src/_code/0010/FUN_001009a2.c",
+      "target": "orig/target/_code/0010/FUN_001009a2.o",
+      "thumb": true
+    },
+    {
+      "address": "0x100a70",
+      "function": "FUN_00100a70",
+      "module": "_code",
+      "object": "build/obj/_code/0010/FUN_00100a70.o",
+      "size": 206,
+      "source": "src/_code/0010/FUN_00100a70.c",
+      "target": "orig/target/_code/0010/FUN_00100a70.o",
+      "thumb": true
+    },
+    {
+      "address": "0x100b44",
+      "function": "FUN_00100b44",
+      "module": "_code",
+      "object": "build/obj/_code/0010/FUN_00100b44.o",
+      "size": 30,
+      "source": "src/_code/0010/FUN_00100b44.c",
+      "target": "orig/target/_code/0010/FUN_00100b44.o",
+      "thumb": true
+    },
+    {
+      "address": "0x100b64",
+      "function": "FUN_00100b64",
+      "module": "_code",
+      "object": "build/obj/_code/0010/FUN_00100b64.o",
+      "size": 32,
+      "source": "src/_code/0010/FUN_00100b64.c",
+      "target": "orig/target/_code/0010/FUN_00100b64.o",
+      "thumb": true
+    },
+    {
+      "address": "0x100b88",
+      "function": "FUN_00100b88",
+      "module": "_code",
+      "object": "build/obj/_code/0010/FUN_00100b88.o",
+      "size": 72,
+      "source": "src/_code/0010/FUN_00100b88.c",
+      "target": "orig/target/_code/0010/FUN_00100b88.o",
+      "thumb": true
+    },
+    {
+      "address": "0x100bd4",
+      "function": "FUN_00100bd4",
+      "module": "_code",
+      "object": "build/obj/_code/0010/FUN_00100bd4.o",
+      "size": 26,
+      "source": "src/_code/0010/FUN_00100bd4.c",
+      "target": "orig/target/_code/0010/FUN_00100bd4.o",
+      "thumb": true
+    },
+    {
+      "address": "0x100bee",
+      "function": "FUN_00100bee",
+      "module": "_code",
+      "object": "build/obj/_code/0010/FUN_00100bee.o",
+      "size": 8,
+      "source": "src/_code/0010/FUN_00100bee.c",
+      "target": "orig/target/_code/0010/FUN_00100bee.o",
+      "thumb": true
+    },
+    {
+      "address": "0x100bf6",
+      "function": "FUN_00100bf6",
+      "module": "_code",
+      "object": "build/obj/_code/0010/FUN_00100bf6.o",
+      "size": 8,
+      "source": "src/_code/0010/FUN_00100bf6.c",
+      "target": "orig/target/_code/0010/FUN_00100bf6.o",
+      "thumb": true
+    },
+    {
+      "address": "0x100bfe",
+      "function": "FUN_00100bfe",
+      "module": "_code",
+      "object": "build/obj/_code/0010/FUN_00100bfe.o",
+      "size": 70,
+      "source": "src/_code/0010/FUN_00100bfe.c",
+      "target": "orig/target/_code/0010/FUN_00100bfe.o",
+      "thumb": true
+    },
+    {
+      "address": "0x100c44",
+      "function": "FUN_00100c44",
+      "module": "_code",
+      "object": "build/obj/_code/0010/FUN_00100c44.o",
+      "size": 8,
+      "source": "src/_code/0010/FUN_00100c44.c",
+      "target": "orig/target/_code/0010/FUN_00100c44.o",
+      "thumb": true
+    },
+    {
+      "address": "0x100c4c",
+      "function": "FUN_00100c4c",
+      "module": "_code",
+      "object": "build/obj/_code/0010/FUN_00100c4c.o",
+      "size": 40,
+      "source": "src/_code/0010/FUN_00100c4c.c",
+      "target": "orig/target/_code/0010/FUN_00100c4c.o",
+      "thumb": true
+    },
+    {
+      "address": "0x100c74",
+      "function": "FUN_00100c74",
+      "module": "_code",
+      "object": "build/obj/_code/0010/FUN_00100c74.o",
+      "size": 28,
+      "source": "src/_code/0010/FUN_00100c74.c",
+      "target": "orig/target/_code/0010/FUN_00100c74.o",
+      "thumb": true
+    },
+    {
+      "address": "0x100c90",
+      "function": "FUN_00100c90",
+      "module": "_code",
+      "object": "build/obj/_code/0010/FUN_00100c90.o",
+      "size": 40,
+      "source": "src/_code/0010/FUN_00100c90.c",
+      "target": "orig/target/_code/0010/FUN_00100c90.o",
+      "thumb": true
+    },
+    {
+      "address": "0x100cb8",
+      "function": "FUN_00100cb8",
+      "module": "_code",
+      "object": "build/obj/_code/0010/FUN_00100cb8.o",
+      "size": 26,
+      "source": "src/_code/0010/FUN_00100cb8.c",
+      "target": "orig/target/_code/0010/FUN_00100cb8.o",
+      "thumb": true
+    },
+    {
+      "address": "0x100ce6",
+      "function": "FUN_00100ce6",
+      "module": "_code",
+      "object": "build/obj/_code/0010/FUN_00100ce6.o",
+      "size": 32,
+      "source": "src/_code/0010/FUN_00100ce6.c",
+      "target": "orig/target/_code/0010/FUN_00100ce6.o",
+      "thumb": true
+    },
+    {
+      "address": "0x100d0c",
+      "function": "FUN_00100d0c",
+      "module": "_code",
+      "object": "build/obj/_code/0010/FUN_00100d0c.o",
+      "size": 16,
+      "source": "src/_code/0010/FUN_00100d0c.c",
+      "target": "orig/target/_code/0010/FUN_00100d0c.o",
+      "thumb": true
+    },
+    {
+      "address": "0x100d1c",
+      "function": "FUN_00100d1c",
+      "module": "_code",
+      "object": "build/obj/_code/0010/FUN_00100d1c.o",
+      "size": 168,
+      "source": "src/_code/0010/FUN_00100d1c.c",
+      "target": "orig/target/_code/0010/FUN_00100d1c.o",
+      "thumb": true
+    },
+    {
+      "address": "0x100dc4",
+      "function": "FUN_00100dc4",
+      "module": "_code",
+      "object": "build/obj/_code/0010/FUN_00100dc4.o",
+      "size": 138,
+      "source": "src/_code/0010/FUN_00100dc4.c",
+      "target": "orig/target/_code/0010/FUN_00100dc4.o",
+      "thumb": true
+    },
+    {
+      "address": "0x100e4e",
+      "function": "FUN_00100e4e",
+      "module": "_code",
+      "object": "build/obj/_code/0010/FUN_00100e4e.o",
+      "size": 124,
+      "source": "src/_code/0010/FUN_00100e4e.c",
+      "target": "orig/target/_code/0010/FUN_00100e4e.o",
+      "thumb": true
+    },
+    {
+      "address": "0x100ecc",
+      "function": "FUN_00100ecc",
+      "module": "_code",
+      "object": "build/obj/_code/0010/FUN_00100ecc.o",
+      "size": 72,
+      "source": "src/_code/0010/FUN_00100ecc.c",
+      "target": "orig/target/_code/0010/FUN_00100ecc.o",
+      "thumb": true
+    },
+    {
+      "address": "0x100f14",
+      "function": "FUN_00100f14",
+      "module": "_code",
+      "object": "build/obj/_code/0010/FUN_00100f14.o",
+      "size": 110,
+      "source": "src/_code/0010/FUN_00100f14.c",
+      "target": "orig/target/_code/0010/FUN_00100f14.o",
+      "thumb": true
+    },
+    {
+      "address": "0x100f9c",
+      "function": "FUN_00100f9c",
+      "module": "_code",
+      "object": "build/obj/_code/0010/FUN_00100f9c.o",
+      "size": 44,
+      "source": "src/_code/0010/FUN_00100f9c.c",
+      "target": "orig/target/_code/0010/FUN_00100f9c.o",
+      "thumb": true
+    },
+    {
+      "address": "0x100fc8",
+      "function": "FUN_00100fc8",
+      "module": "_code",
+      "object": "build/obj/_code/0010/FUN_00100fc8.o",
+      "size": 156,
+      "source": "src/_code/0010/FUN_00100fc8.c",
+      "target": "orig/target/_code/0010/FUN_00100fc8.o",
+      "thumb": true
+    }
+  ]
+}
