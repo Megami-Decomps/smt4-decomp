@@ -1,47 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002d4ef4` (_code @ 0x2d4ef4, 0x90 bytes) from smt4.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002d4ef4` (_code @ 0x2d4ef4, 0x38 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-} param_1_stack;
-
-extern unsigned char DAT_004c2424; /* 0x4c2424 */
-extern int DAT_004c3224; /* 0x4c3224 */
-
-/* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
+extern unsigned int FUN_002c0c74(unsigned int);
+extern int FUN_002c0cc4(void);
+extern unsigned int FUN_002c0cec(unsigned int, unsigned int);
 
 
-unsigned int FUN_002d4ef4(int param_1)
+int FUN_002d4ef4(unsigned int param_1)
 
 {
-/* irregular: irregular input(s): in_s0, in_s1; 3 native warning(s); review required */
-  int temp_v0;
+  unsigned int temp_v0;
   int temp_v1;
-  unsigned char temp_v2;
-  unsigned char temp_v3;
-  float in_s0;
-  float in_s1;
+  unsigned int temp_v2;
   
-  temp_v1 = 0;
-  if (temp_v1 < DAT_004c3224) {
-    do {
-      temp_v0 = temp_v1 * 0x1c;
-      if ((*(int *)(temp_v0 + 0x4c243c) == param_1 || param_1 == 0) &&
-         (*(float *)(&DAT_004c2424 + temp_v0) <= in_s0)) {
-        temp_v2 = in_s1 < *(float *)(temp_v0 + 0x4c242c);
-        temp_v3 = NAN(in_s1) || NAN(*(float *)(temp_v0 + 0x4c242c));
-        if (!temp_v2) {
-          temp_v2 = *(float *)(temp_v0 + 0x4c2430) < in_s0;
-          temp_v3 = NAN(*(float *)(temp_v0 + 0x4c2430)) || NAN(in_s0);
-        }
-        if ((temp_v2 == temp_v3) && (in_s1 <= *(float *)(temp_v0 + 0x4c2438))) {
-          return 1;
-        }
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < DAT_004c3224);
+  temp_v0 = FUN_002c0cec(0x2e,1);
+  temp_v1 = FUN_002c0cc4();
+  temp_v2 = FUN_002c0c74(temp_v0);
+  if (param_1 >= temp_v2) {
+    temp_v1 = 0;
   }
-  return 0;
+  else {
+    temp_v1 = temp_v1 + param_1 * 4;
+  }
+  return temp_v1;
 }

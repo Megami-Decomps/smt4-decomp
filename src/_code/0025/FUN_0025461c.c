@@ -1,26 +1,19 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0025461c` (_code @ 0x25461c, 0x48 bytes) from smt4.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0025461c` (_code @ 0x25461c, 0x1c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_4_stack;
+extern int DAT_0043de68; /* 0x43de68 */
 
-/* Supplied declaration required: FUN_002a6e10. */
-extern int FUN_002b5b44(int, int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_003bbcb4. */
 
 
-unsigned int FUN_0025461c(unsigned int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
+void FUN_0025461c(void)
 
 {
 /* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1 [2];
-  
-  temp_v1[0] = param_4;
-  temp_v0 = FUN_002b5b44(*param_1 + 0x7cfc8400,param_1[1] + 0x395f + (unsigned int)(0x83037bff < *param_1),
-                       86400000,0);
-  FUN_002a6e10(0,0,temp_v1,temp_v0 - 0xb2407);
-  return temp_v1[0];
+  if (DAT_0043de68 != 0) {
+    FUN_003bbcb4(*(unsigned int *)(DAT_0043de68 + 4));
+    return;
+  }
+  return;
 }

@@ -1,32 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00113150` (_code @ 0x113150, 0x84 bytes) from smt4.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00113150` (_code @ 0x113150, 0x5c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
-extern int DAT_004c63e4; /* 0x4c63e4 */
-extern int DAT_004c63e8; /* 0x4c63e8 */
+/* stack frame of void: 1 slot(s), 4 byte(s) */
+typedef struct {
+    unsigned int sp8; /* 0x8: local_8 */
+} void_stack;
 
-/* Supplied declaration required: FUN_00129a24. */
+extern signed char DAT_004c62a1; /* 0x4c62a1 */
+extern unsigned char DAT_004c62a2; /* 0x4c62a2 */
+extern int DAT_004c632c; /* 0x4c632c */
+extern int DAT_004c6330; /* 0x4c6330 */
+
+/* Supplied declaration required: FUN_0013b608. */
+/* Supplied declaration required: FUN_0013b618. */
+/* Supplied declaration required: FUN_002ba2b8. */
 
 
-void FUN_00113150(int param_1)
+void FUN_00113150(void)
 
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = DAT_004c63e8;
-  temp_v0 = DAT_004c63e4;
-  do {
-    if (param_1 != 0x400) {
-      if (((param_1 == 0x401) || ((param_1 == 0x402 && (temp_v0 != DAT_004c63e4)))) &&
-         (temp_v1 != DAT_004c63e8)) {
-        return;
-      }
-    }
-    else if (temp_v0 != DAT_004c63e4) {
-      return;
-    }
-    FUN_00129a24();
-  } while( 1 );
+/* irregular: 3 native warning(s); review required */
+  if (DAT_004c632c == 0) {
+    return;
+  }
+  if (DAT_004c62a1 != '\0') {
+    return;
+  }
+  DAT_004c6330 = DAT_004c632c;
+  DAT_004c62a2 = 1;
+  if (*(int *)(DAT_004c632c + 0x20) <= *(int *)(DAT_004c632c + 0x28)) {
+    return;
+  }
+  DAT_004c62a1 = 1;
+  if (*(int *)(DAT_004c632c + 0x2c) != 0x300) {
+    return;
+  }
+  FUN_0013b608();
+  FUN_002ba2b8();
+  FUN_0013b618();
+  return;
 }

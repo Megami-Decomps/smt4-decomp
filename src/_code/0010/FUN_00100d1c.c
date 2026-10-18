@@ -1,4 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00100d1c` (_code @ 0x100d1c, 0xa8 bytes) from smt4.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00100d1c` (_code @ 0x100d1c, 0xa8 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
@@ -11,7 +11,7 @@ typedef struct {
 } param_3_stack;
 
 extern int FUN_001010d4(char, int);
-extern unsigned int *FUN_002c6840(void);
+extern unsigned int *FUN_002c6644(void);
 
 
 unsigned int FUN_00100d1c(char *param_1,unsigned int *param_2,int param_3)
@@ -72,7 +72,7 @@ unsigned int FUN_00100d1c(char *param_1,unsigned int *param_2,int param_3)
     *param_2 = (unsigned int)param_1;
   }
   if (temp_v1) {
-    puVar6 = (unsigned int *)FUN_002c6840();
+    puVar6 = (unsigned int *)FUN_002c6644();
     *puVar6 = 2;
     temp_v6 = 0xffffffff;
   }

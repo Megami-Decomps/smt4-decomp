@@ -1,40 +1,139 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00256a50` (_code @ 0x256a50, 0x80 bytes) from smt4.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00256a50` (_code @ 0x256a50, 0x238 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
-/* stack frame of param_1: 2 slot(s), 6 byte(s) */
+typedef int romwright_code();
+/* stack frame of param_2: 5 slot(s), 20 byte(s) */
 typedef struct {
-    unsigned short sp2C; /* 0x2c: local_2c */
-    unsigned int sp50; /* 0x50: local_50 */
-} param_1_stack;
+    unsigned int sp1C; /* 0x1c: local_1c */
+    unsigned int sp2C; /* 0x2c: local_2c */
+    unsigned int sp3C; /* 0x3c: local_3c */
+    unsigned int sp4C; /* 0x4c: local_4c */
+    unsigned int sp58; /* 0x58: local_58 */
+} param_2_stack;
 
-extern unsigned char LAB_00125d78; /* 0x125d78 */
-extern int DAT_00433158; /* 0x433158 */
+extern int DAT_0044ea00; /* 0x44ea00 */
 
-/* Supplied declaration required: FUN_001316ec. */
-/* Supplied declaration required: FUN_002b48dc. */
-extern unsigned int FUN_002c0e4c(int);
-extern unsigned int FUN_002c0e9c(void);
-extern int FUN_002c0ec4(unsigned int, unsigned int);
+/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
+/* Supplied declaration required: FUN_001f6b74. */
+/* Supplied declaration required: FUN_002571e8. */
+/* Supplied declaration required: FUN_002c18e4. */
+/* Supplied declaration required: FUN_002c198c. */
+/* Supplied declaration required: FUN_002c1b64. */
+extern int FUN_002c5d80(unsigned int, unsigned int);
+/* Supplied declaration required: FUN_00343298. */
+/* Supplied declaration required: FUN_00343810. */
+/* Supplied declaration required: FUN_00347198. */
+/* Supplied declaration required: FUN_0034724c. */
 
 
-void FUN_00256a50(unsigned int param_1)
+void FUN_00256a50(unsigned short *param_1,unsigned int param_2)
 
 {
-/* irregular: 2 native warning(s); review required */
+/* irregular: irregular input(s): in_fpscr; 10 native warning(s); review required */
   int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned char temp_v3 [32];
-  unsigned short temp_v4;
+  int temp_v1;
+  int temp_v2;
+  int temp_v3;
+  int *piVar5;
+  unsigned int in_fpscr;
+  int temp_v4;
+  unsigned int uStack_54;
+  unsigned int uStack_50;
+  unsigned int temp_v5;
+  unsigned int uStack_48;
+  unsigned int uStack_44;
+  unsigned int uStack_40;
+  unsigned int temp_v6;
+  unsigned int uStack_38;
+  unsigned int uStack_34;
+  unsigned int uStack_30;
+  unsigned int temp_v7;
+  unsigned int uStack_28;
+  unsigned int uStack_24;
+  unsigned int uStack_20;
+  unsigned int temp_v8;
   
-  temp_v4 = (unsigned short)param_1;
-  if (((*(int *)(DAT_00433158 + 0x3c4) == 0) ||
-      (temp_v0 = DAT_00433158, FUN_001316ec(DAT_00433158,param_1), temp_v0 == 0)) &&
-     (temp_v0 = FUN_002c0ec4(8,3), temp_v0 != 0)) {
-    temp_v1 = FUN_002c0e9c();
-    temp_v2 = FUN_002c0e4c(temp_v0);
-    FUN_002b48dc(temp_v3,temp_v1,temp_v2,0x3c,&LAB_00125d78);
+  temp_v0 = DAT_0044ea00;
+  if ((*param_1 & 0x100) != 0) {
+    temp_v1 = FUN_002c5d80(5,0);
+    piVar5 = (int *)(temp_v0 + 0x124c);
+    temp_v2 = *piVar5;
+    temp_v3 = piVar5[temp_v2 + 2];
+    *piVar5 = temp_v2 + 1;
+    piVar5[temp_v2 + 3] = temp_v1;
+    if (!(*(char *)(temp_v0 + 0x1264) == '\0' && temp_v3 == temp_v1)) {
+      (**(romwright_code **)(temp_v0 + 0x1268))();
+      *(unsigned char *)(temp_v0 + 0x1264) = 0;
+    }
   }
+  else {
+    temp_v1 = FUN_002c5d80(1,0);
+    piVar5 = (int *)(temp_v0 + 0x124c);
+    temp_v2 = *piVar5;
+    temp_v3 = piVar5[temp_v2 + 2];
+    *piVar5 = temp_v2 + 1;
+    piVar5[temp_v2 + 3] = temp_v1;
+    if (!(*(char *)(temp_v0 + 0x1264) == '\0' && temp_v3 == temp_v1)) {
+      (**(romwright_code **)(temp_v0 + 0x1268))();
+      *(unsigned char *)(temp_v0 + 0x1264) = 0;
+    }
+  }
+  if ((*param_1 & 0x200) != 0) {
+    FUN_001f6b74(*(unsigned int *)(param_1 + 6));
+    temp_v0 = DAT_0044ea00;
+    piVar5 = (int *)(DAT_0044ea00 + 0x124c);
+    temp_v1 = *piVar5;
+    temp_v2 = piVar5[temp_v1 + 2];
+    *piVar5 = temp_v1 - 1;
+    if (*(char *)(temp_v0 + 0x1264) == '\0' && temp_v2 == piVar5[temp_v1 + 1]) {
+      return;
+    }
+  }
+  else {
+    FUN_002c1b64(DAT_0044ea00,*(unsigned int *)(param_1 + 2));
+    temp_v4 = *(unsigned int *)(param_1 + 8);
+    uStack_54 = *(unsigned int *)(param_1 + 10);
+    uStack_50 = *(unsigned int *)(param_1 + 0xc);
+    uStack_48 = *(unsigned int *)(param_1 + 0x10);
+    uStack_44 = *(unsigned int *)(param_1 + 0x12);
+    uStack_40 = *(unsigned int *)(param_1 + 0x14);
+    uStack_38 = *(unsigned int *)(param_1 + 0x18);
+    uStack_34 = *(unsigned int *)(param_1 + 0x1a);
+    uStack_30 = *(unsigned int *)(param_1 + 0x1c);
+    uStack_28 = *(unsigned int *)(param_1 + 0x20);
+    uStack_24 = *(unsigned int *)(param_1 + 0x22);
+    uStack_20 = *(unsigned int *)(param_1 + 0x24);
+    temp_v5 = 0;
+    temp_v6 = 0;
+    temp_v7 = 0;
+    temp_v8 = 0x3f800000;
+    FUN_00343298(DAT_0044ea00,&temp_v4);
+    VectorUnsignedToFloat((unsigned int)*(unsigned char *)((int)param_1 + 0x53),(unsigned char)(in_fpscr >> 0x16) & 3);
+    VectorUnsignedToFloat((unsigned int)(unsigned char)param_1[0x29],(unsigned char)(in_fpscr >> 0x16) & 3);
+    VectorUnsignedToFloat((unsigned int)*(unsigned char *)((int)param_1 + 0x51),(unsigned char)(in_fpscr >> 0x16) & 3);
+    VectorUnsignedToFloat((unsigned int)(unsigned char)param_1[0x28],(unsigned char)(in_fpscr >> 0x16) & 3);
+    FUN_00343810(DAT_0044ea00,(unsigned int)(unsigned char)param_1[0x29],(unsigned int)*(unsigned char *)((int)param_1 + 0x51),
+                 (unsigned int)(unsigned char)param_1[0x28]);
+    FUN_002571e8(param_2);
+    if (*(int *)(param_1 + 0x2a) != 0) {
+      FUN_00347198(*(unsigned int *)(param_1 + 4));
+      param_1[0x2a] = 0;
+      param_1[0x2b] = 0;
+    }
+    FUN_0034724c(*(unsigned int *)(param_1 + 4));
+    FUN_002c18e4(DAT_0044ea00);
+    FUN_002c198c(DAT_0044ea00);
+    temp_v0 = DAT_0044ea00;
+    piVar5 = (int *)(DAT_0044ea00 + 0x124c);
+    temp_v1 = *piVar5;
+    temp_v2 = piVar5[temp_v1 + 2];
+    *piVar5 = temp_v1 - 1;
+    if (*(char *)(temp_v0 + 0x1264) == '\0' && temp_v2 == piVar5[temp_v1 + 1]) {
+      return;
+    }
+  }
+  (*(romwright_code *)piVar5[7])();
+  *(unsigned char *)(piVar5 + 6) = 0;
   return;
 }

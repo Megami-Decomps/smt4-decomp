@@ -1,4 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00100ecc` (_code @ 0x100ecc, 0x48 bytes) from smt4.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00100ecc` (_code @ 0x100ecc, 0x48 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
@@ -16,8 +16,8 @@ int FUN_00100ecc(unsigned int param_1)
   temp_v3 = 0x1ade;
   do {
     temp_v0 = (temp_v2 + temp_v3) / 2;
-    temp_v1 = *(short *)(temp_v0 * 2 + 0x4194e2);
-    temp_v4 = (unsigned int)*(unsigned short *)(temp_v1 * 2 + 0x41caa0);
+    temp_v1 = *(short *)(temp_v0 * 2 + 0x41989a);
+    temp_v4 = (unsigned int)*(unsigned short *)(temp_v1 * 2 + 0x41ce58);
     if (param_1 == temp_v4) {
       if (temp_v1 >= 0x2f0) {
         temp_v1 = temp_v1 + 0x292;

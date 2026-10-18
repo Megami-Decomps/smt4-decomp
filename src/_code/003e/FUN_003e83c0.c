@@ -1,55 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e83c0` (_code @ 0x3e83c0, 0xb4 bytes) from smt4.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e83c0` (_code @ 0x3e83c0, 0x70 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
+/* stack frame of param_1: 1 slot(s), 4 byte(s) */
+typedef struct {
+    unsigned int sp10; /* 0x10: local_10 */
+} param_1_stack;
 
-unsigned char * FUN_003e83c0(short *param_1,unsigned int param_2)
+
+void FUN_003e83c0(int param_1)
 
 {
-  short temp_v0;
-  unsigned char *pbVar2;
-  unsigned int temp_v1;
-  unsigned int *puVar4;
+  unsigned char temp_v0;
+  int temp_v1;
   unsigned int temp_v2;
-  unsigned char temp_v3;
-  unsigned char temp_v4;
+  int temp_v3;
   
-  temp_v0 = *param_1;
-  puVar4 = (unsigned int *)((int)param_1 + *(int *)(param_1 + 2));
-  if (temp_v0 == 0x6000) {
-    pbVar2 = (unsigned char *)(puVar4[1] + (int)puVar4);
-  }
-  else {
-    if (temp_v0 != 0x6001) {
-      if (temp_v0 != 0x6002) {
-        return (unsigned char *)0x0;
-      }
-      temp_v1 = (unsigned int)(unsigned char)*puVar4;
-      temp_v4 = param_2 <= temp_v1;
-      temp_v3 = temp_v1 == param_2;
-      if (!temp_v4 || temp_v3) {
-        temp_v4 = *(unsigned char *)((int)puVar4 + 1) <= param_2;
-        temp_v3 = param_2 == *(unsigned char *)((int)puVar4 + 1);
-      }
-      if (!temp_v4 || temp_v3) {
-        temp_v1 = puVar4[(param_2 - temp_v1) * 2 + 2];
-        return (unsigned char *)(temp_v1 + (int)puVar4);
-      }
+  temp_v0 = 0;
+  temp_v1 = 0;
+  temp_v2 = 0;
+  temp_v3 = 4;
+  do {
+    if (((*(unsigned int *)(param_1 + 4) & (1 << (temp_v2 & 0xff))) != 0) && (temp_v1 = temp_v1 + 1, temp_v2 == 3))
+    {
+      temp_v0 = 1;
     }
-    else {
-      temp_v2 = *puVar4;
-      temp_v1 = 0;
-      if (temp_v1 < temp_v2) {
-        do {
-          if (param_2 <= *(unsigned char *)((int)puVar4 + temp_v1 + 4)) {
-            temp_v1 = *(unsigned int *)((int)puVar4 + ((temp_v2 + 3) & 0xfffffffc) + temp_v1 * 8 + 8);
-            return (unsigned char *)(temp_v1 + (int)puVar4);
-          }
-          temp_v1 = temp_v1 + 1;
-        } while (temp_v1 < temp_v2);
-      }
-    }
-    pbVar2 = (unsigned char *)0x0;
+    temp_v3 = temp_v3 - 1;
+    temp_v2 = temp_v2 + 1;
+  } while (temp_v3 != 0);
+  if ((temp_v0) && (temp_v1 != 0)) {
+    return;
   }
-  return pbVar2;
+  return;
 }

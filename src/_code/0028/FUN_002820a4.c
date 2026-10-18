@@ -1,81 +1,71 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002820a4` (_code @ 0x2820a4, 0x210 bytes) from smt4.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002820a4` (_code @ 0x2820a4, 0x17c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
-#ifndef ROMWRIGHT_FABS_4_DEFINED
-#define ROMWRIGHT_FABS_4_DEFINED
-static float romwright_fabs_4(float value)
-{
-    return value < (float)0 ? -value : value;
-}
-#endif
-extern int FUN_002a4600(float);
-/* Supplied declaration required: FUN_002a462c. */
+extern int DAT_004474f4; /* 0x4474f4 */
 
 
-void FUN_002820a4(void)
+unsigned int FUN_002820a4(void)
 
 {
-/* irregular: irregular input(s): in_s0, in_s1; 3 native warning(s); review required */
-  float temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3;
-  float in_s0;
-  float in_s1;
+  float *pfVar1;
+  float *pfVar2;
+  int temp_v0;
+  unsigned int *puVar4;
+  float temp_v1;
+  float temp_v2;
+  unsigned int temp_v3;
   float temp_v4;
+  unsigned int temp_v5;
+  unsigned int temp_v6;
+  unsigned int temp_v7;
   
-  temp_v1 = 0xe8000000;
-  temp_v3 = (int)in_s0 * 2 + 0xe8000000U < 0xe5000000;
-  if (temp_v3) {
-    temp_v1 = (int)in_s1 * 2 + 0xe8000000;
+  temp_v0 = DAT_004474f4;
+  if (*(int *)(DAT_004474f4 + 0x26c) <= *(int *)(DAT_004474f4 + 0x270)) {
+    puVar4 = (unsigned int *)(DAT_004474f4 + 0x23c);
+    temp_v3 = *(unsigned int *)(DAT_004474f4 + 0x240);
+    temp_v5 = *(unsigned int *)(DAT_004474f4 + 0x244);
+    temp_v6 = *(unsigned int *)(DAT_004474f4 + 0x248);
+    temp_v7 = *(unsigned int *)(DAT_004474f4 + 0x24c);
+    *(unsigned int *)(DAT_004474f4 + 0x250) = *(unsigned int *)(DAT_004474f4 + 0x238);
+    *(unsigned int *)(temp_v0 + 0x254) = *puVar4;
+    *(unsigned int *)(temp_v0 + 600) = temp_v3;
+    *(unsigned int *)(temp_v0 + 0x25c) = temp_v5;
+    *(unsigned int *)(temp_v0 + 0x260) = temp_v6;
+    *(unsigned int *)(temp_v0 + 0x264) = temp_v7;
+    return 1;
   }
-  temp_v0 = in_s0;
-  temp_v4 = in_s1;
-  if (!temp_v3 || 0xe4ffffff < temp_v1) {
-    if (0xff000000 < (unsigned int)((int)in_s0 << 1) || 0xff000000 < (unsigned int)((int)in_s1 << 1)) {
-      return;
-    }
-    if ((((unsigned int)in_s0 | (unsigned int)in_s1) & 0x7fffffff) == 0) {
-      in_s1 = (float)((unsigned int)in_s1 | 0x7f800000);
-      temp_v4 = in_s1;
-    }
-    else if (romwright_fabs_4(in_s0) == INFINITY && romwright_fabs_4(in_s1) == INFINITY) {
-      temp_v0 = (float)((unsigned int)in_s0 & 0xbfffffff);
-      in_s1 = (float)((unsigned int)in_s1 & 0xbfffffff);
-      in_s0 = temp_v0;
-      temp_v4 = in_s1;
-    }
-    else if (romwright_fabs_4(in_s0) == INFINITY || romwright_fabs_4(in_s1) == 0.0f) {
-      temp_v0 = (float)((unsigned int)in_s0 | 0x7f800000);
-      in_s1 = (float)((unsigned int)in_s1 & 0x80000000);
-    }
-    else if (-1 < (int)(((unsigned int)in_s1 ^ (unsigned int)in_s0) << 1)) {
-      if ((int)in_s1 * 2 < 0) {
-        temp_v4 = 2.3283064e-10f;
-      }
-      else {
-        temp_v4 = 4.2949673e+09f;
-      }
-      in_s1 = in_s1 * temp_v4;
-      temp_v0 = in_s0 * temp_v4;
-      in_s0 = in_s0 * temp_v4;
-      temp_v4 = in_s1;
-    }
+  if (*(int *)(DAT_004474f4 + 0x268) != 0) {
+    pfVar1 = (float *)(DAT_004474f4 + 0x23c);
+    pfVar2 = (float *)(DAT_004474f4 + 0x254);
+    temp_v1 = *(float *)(DAT_004474f4 + 0x240);
+    temp_v4 = *(float *)(DAT_004474f4 + 600);
+    temp_v2 = 1.0f / *(float *)(DAT_004474f4 + 0x28c);
+    *(float *)(DAT_004474f4 + 0x250) =
+         *(float *)(DAT_004474f4 + 0x250) +
+         (*(float *)(DAT_004474f4 + 0x238) - *(float *)(DAT_004474f4 + 0x250)) * temp_v2;
+    *(float *)(temp_v0 + 0x254) = *(float *)(temp_v0 + 0x254) + (*pfVar1 - *pfVar2) * temp_v2;
+    *(float *)(temp_v0 + 600) = *(float *)(temp_v0 + 600) + (temp_v1 - temp_v4) * temp_v2;
+    temp_v1 = 1.0f / *(float *)(temp_v0 + 0x28c);
+    *(float *)(temp_v0 + 0x25c) =
+         *(float *)(temp_v0 + 0x25c) + (*(float *)(temp_v0 + 0x244) - *(float *)(temp_v0 + 0x25c)) * temp_v1
+    ;
+    *(float *)(temp_v0 + 0x260) =
+         *(float *)(temp_v0 + 0x260) + (*(float *)(temp_v0 + 0x248) - *(float *)(temp_v0 + 0x260)) * temp_v1
+    ;
+    temp_v1 = *(float *)(temp_v0 + 0x264) +
+            (*(float *)(temp_v0 + 0x24c) - *(float *)(temp_v0 + 0x264)) * temp_v1;
   }
-  temp_v2 = ((unsigned int)romwright_fabs_4(temp_v0) >> 0x17) - ((unsigned int)romwright_fabs_4(in_s1) >> 0x17);
-  if (temp_v2 >= 0x1c) {
-    return;
+  else {
+    *(float *)(DAT_004474f4 + 0x250) =
+         *(float *)(DAT_004474f4 + 0x250) + *(float *)(DAT_004474f4 + 0x274);
+    *(float *)(temp_v0 + 0x254) = *(float *)(temp_v0 + 0x254) + *(float *)(temp_v0 + 0x278);
+    *(float *)(temp_v0 + 600) = *(float *)(temp_v0 + 600) + *(float *)(temp_v0 + 0x27c);
+    *(float *)(temp_v0 + 0x25c) = *(float *)(temp_v0 + 0x25c) + *(float *)(temp_v0 + 0x280);
+    *(float *)(temp_v0 + 0x260) = *(float *)(temp_v0 + 0x260) + *(float *)(temp_v0 + 0x284);
+    temp_v1 = *(float *)(temp_v0 + 0x264) + *(float *)(temp_v0 + 0x288);
   }
-  if (-0x1b < temp_v2) {
-    return;
-  }
-  if (((unsigned int)in_s1 & 0x80000000) == 0) {
-    temp_v2 = FUN_002a4600(in_s0 / temp_v4);
-    if (temp_v2 == 4) {
-      FUN_002a462c();
-    }
-    return;
-  }
-  return;
+  *(float *)(temp_v0 + 0x264) = temp_v1;
+  *(int *)(temp_v0 + 0x270) = *(int *)(temp_v0 + 0x270) + 1;
+  return 0;
 }

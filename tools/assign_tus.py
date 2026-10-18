@@ -22,7 +22,7 @@ placed hidden anchors right only 30% of the time and is not used. A function
 the evidence does not place stays unassigned (its own unit). Writes
 config/tus.json.
 
-    python3 tools/assign_tus.py [--image orig/smt4.cxi] [--out config/tus.json]
+    python3 tools/assign_tus.py [--image orig/<dump>] [--out config/tus.json]
     python3 tools/assign_tus.py --holdout 0.3    (accuracy on hidden anchors)
 
 Standard library only.
@@ -34,74 +34,19 @@ import json
 import random
 import re
 import struct
+import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from n3ds import load_code  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 SOURCE_ROOT = re.compile(r"^[A-Za-z]:\\SMT4\\XRD686\\", re.IGNORECASE)
 PATH_STRING = re.compile(rb"[A-Za-z]:\\[ -~]{4,200}?\.(?:cpp|cc|c|h|hpp|inl)\x00")
 
 
-# --------------------------------------------------------------------------
-# The ARM11 code set of the image (NCCH -> ExeFS .code -> BLZ decompression)
-# --------------------------------------------------------------------------
-
-def blz_decompress(data):
-    """3DS/DS backward LZ (`.code` with exheader flag bit 0)."""
-    footer, extra = struct.unpack_from("<II", data, len(data) - 8)
-    header_len, encoded_len = footer >> 24, footer & 0xFFFFFF
-    out = bytearray(data) + bytearray(extra)
-    src, dst, end = len(data) - header_len, len(out), len(data) - encoded_len
-    while src > end:
-        src -= 1
-        flags = data[src]
-        for _ in range(8):
-            if src <= end:
-                break
-            if flags & 0x80:
-                src -= 2
-                segment = data[src] | data[src + 1] << 8
-                count, distance = (segment >> 12) + 3, (segment & 0xFFF) + 3
-                for _ in range(count):
-                    dst -= 1
-                    out[dst] = out[dst + distance]
-            else:
-                src -= 1
-                dst -= 1
-                out[dst] = data[src]
-            flags <<= 1
-    return bytes(out)
-
-
-def load_code(image):
-    """(text base, decompressed .code, segments) of a plaintext NCCH image."""
-    with open(image, "rb") as handle:
-        header = handle.read(0x200)
-        if header[0x100:0x104] != b"NCCH":
-            raise SystemExit(f"{image}: not an NCCH image")
-        handle.seek(0x200)
-        exheader = handle.read(0x400)
-        unit = 0x200 << header[0x188 + 6]
-        exefs = struct.unpack_from("<I", header, 0x1A0)[0] * unit
-        handle.seek(exefs)
-        table = handle.read(0x200)
-        for index in range(10):
-            name, offset, size = struct.unpack_from("<8sII", table, index * 16)
-            if name.rstrip(b"\0") == b".code":
-                handle.seek(exefs + 0x200 + offset)
-                stored = handle.read(size)
-                break
-        else:
-            raise SystemExit(f"{image}: no ExeFS .code")
-    code = blz_decompress(stored) if exheader[0x0D] & 1 else stored
-    word = lambda at: struct.unpack_from("<I", exheader, at)[0]
-    segments = {
-        "text": (word(0x10), word(0x10) + word(0x18)),
-        "rodata": (word(0x20), word(0x20) + word(0x28)),
-        "data": (word(0x30), word(0x30) + word(0x38)),
-        "bss": (word(0x30) + word(0x38), word(0x30) + word(0x38) + word(0x3C)),
-    }
-    return word(0x10), code, segments
-
+# The ARM11 code set of the image comes from tools/n3ds.py (NCCH/NCSD -> ExeFS .code -> BLZ),
+# the loader tools/split.py and tools/relink.py share.
 
 # --------------------------------------------------------------------------
 # Facts read from the code
@@ -234,14 +179,14 @@ def assign(image, facts, anchors):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
-    parser.add_argument("--image", default=str(ROOT / "orig" / "smt4.cxi"))
+    parser.add_argument("--image", help="the dump (default: image.orig of config/project.json)")
     parser.add_argument("--symbols", default=str(ROOT / "config" / "symbols.txt"))
     parser.add_argument("--module", default="_code")
     parser.add_argument("--out", default=str(ROOT / "config" / "tus.json"))
     parser.add_argument("--holdout", type=float, help="hide this share of anchors and report how many come back right")
     args = parser.parse_args()
 
-    base, code, segments = load_code(args.image)
+    base, code, segments = load_code(args.image or ROOT / json.loads((ROOT / "config" / "project.json").read_text())["image"]["orig"])
     image = Image(base, code, segments, load_functions(args.symbols))
     facts = {entry: image.scan(entry) for entry, *_ in image.functions}
     paths = source_paths(image)

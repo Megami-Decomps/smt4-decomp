@@ -1,0 +1,46 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0035777c` (_code @ 0x35777c, 0x6c bytes) from smt4_v1.2.0.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+/* stack frame of void: 1 slot(s), 4 byte(s) */
+typedef struct {
+    unsigned int sp8; /* 0x8: local_8 */
+} void_stack;
+
+extern unsigned char DAT_004656ca; /* 0x4656ca */
+extern unsigned char DAT_004656cb; /* 0x4656cb */
+extern unsigned char DAT_004656ce; /* 0x4656ce */
+
+/* Supplied declaration required: FUN_0011bd70. */
+extern int FUN_0011c834(void);
+/* Supplied declaration required: FUN_001467a4. */
+extern unsigned char FUN_002c5dc0(void);
+/* Supplied declaration required: FUN_00358d24. */
+/* Supplied declaration required: FUN_00358f98. */
+/* Supplied declaration required: FUN_00358fd4. */
+
+
+void FUN_0035777c(void)
+
+{
+/* irregular: 5 native warning(s); review required */
+  unsigned char temp_v0;
+  unsigned int temp_v1;
+  int temp_v2;
+  
+  FUN_00358d24();
+  temp_v1 = (unsigned int)DAT_004656ca;
+  if ((temp_v1 == 0) && (FUN_00358fd4(), -1 < (int)temp_v1)) {
+    FUN_00358f98();
+    temp_v2 = FUN_0011c834();
+    if (-1 < temp_v2) {
+      DAT_004656cb = 1;
+      temp_v0 = FUN_002c5dc0();
+      FUN_0011bd70();
+      DAT_004656ce = temp_v0;
+      FUN_001467a4();
+      DAT_004656ca = 1;
+    }
+  }
+  return;
+}

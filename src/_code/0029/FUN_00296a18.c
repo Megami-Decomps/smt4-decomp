@@ -1,104 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00296a18` (_code @ 0x296a18, 0x1b8 bytes) from smt4.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00296a18` (_code @ 0x296a18, 0xcc bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_2_stack;
-
-extern unsigned int FUN_00292e94(void);
-/* Supplied declaration required: FUN_00292eb0. */
-/* Supplied declaration required: FUN_00292f44. */
-/* Supplied declaration required: FUN_002954b8. */
-/* Supplied declaration required: FUN_002971e4. */
-/* Supplied declaration required: FUN_0029a3c4. */
-/* Supplied declaration required: FUN_0029c768. */
-/* Supplied declaration required: FUN_0029e260. */
-/* Supplied declaration required: FUN_0029eb14. */
-/* Supplied declaration required: FUN_0029f10c. */
-extern unsigned int *FUN_002a8a08(void);
-/* Supplied declaration required: FUN_002b85bc. */
-/* Supplied declaration required: FUN_002b8b78. */
-/* Supplied declaration required: FUN_002b9008. */
+extern int FUN_0023ea6c(unsigned int);
+/* Supplied declaration required: FUN_00297060. */
+extern int FUN_002a60b4(unsigned int, int);
 
 
-void FUN_00296a18(int param_1,int param_2)
+unsigned int FUN_00296a18(int param_1)
 
 {
-/* irregular: 2 goto(s); 12 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int *puVar2;
+/* irregular: 1 native warning(s); review required */
+  int temp_v0;
   int temp_v1;
-  unsigned int temp_v2;
-  int *piVar5;
+  int temp_v2;
   
-  piVar5 = (int *)(param_1 + 0x352c);
-  *(int *)(param_1 + 0x3530) = *piVar5;
-  *piVar5 = param_2;
-  *(unsigned int *)(param_1 + 0x3534) = 0;
-  *(unsigned int *)(param_1 + 0x353c) = 0;
-  *(unsigned int *)(param_1 + 0x3544) = 0;
-  temp_v1 = 0;
-  if (temp_v1 < *(short *)(param_1 + 0x357c)) {
+  if ((((*(int *)(param_1 + 0x3564) != 0) && (*(int *)(param_1 + 0x356c) != 0)) &&
+      (*(int *)(param_1 + 0x3570) != 0)) &&
+     ((temp_v0 = FUN_0023ea6c(0x14), temp_v0 != 0 && (temp_v0 = FUN_0023ea6c(0x25), temp_v0 != 0)))) {
+    temp_v2 = 0;
+    temp_v0 = temp_v2;
     do {
-      FUN_002b9008();
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < *(short *)(param_1 + 0x357c));
-  }
-  *(unsigned short *)(param_1 + 0x357c) = 0;
-  temp_v1 = *piVar5;
-  if (temp_v1 == 0xe) {
-    temp_v2 = 0xdf;
-  }
-  else if (temp_v1 < 0xf) {
-    if (temp_v1 == 1) {
-      temp_v2 = 0x62;
-    }
-    else if (temp_v1 == 10) {
-      temp_v2 = 0x9e;
-    }
-    else if (temp_v1 == 0xb) {
-      temp_v2 = 0x65;
-    }
-    else {
-      if (temp_v1 != 0xd) goto LAB_00296b18;
-      temp_v2 = 0x66;
+      temp_v1 = FUN_002a60b4(0x28,temp_v2);
+      if (temp_v1 != 0) {
+        temp_v0 = temp_v0 + 1;
+      }
+      temp_v2 = temp_v2 + 1;
+    } while (temp_v2 < 2);
+    if (temp_v0 >= 2) {
+      if (*(int *)(param_1 + 0x3568) == 0) {
+        temp_v0 = *(int *)(param_1 + 0x3564);
+        FUN_00297060(temp_v0,*(int *)(param_1 + 0x356c));
+        *(int *)(param_1 + 0x3568) = temp_v0;
+        *(unsigned int *)(temp_v0 + 0x108) = 0;
+      }
+      return 1;
     }
   }
-  else if (temp_v1 == 0xf) {
-    temp_v2 = 0x68;
-  }
-  else if (temp_v1 == 0x10) {
-    temp_v2 = 0x6a;
-  }
-  else if (temp_v1 == 0x11) {
-    temp_v2 = 0xe1;
-  }
-  else {
-    if (temp_v1 != 0x12) goto LAB_00296b18;
-    temp_v2 = 100;
-  }
-  FUN_0029f10c(0,0x323232ff);
-  FUN_002b8b78(temp_v2);
-LAB_00296b18:
-  if (*piVar5 != 0x14) {
-    return;
-  }
-  FUN_0029a3c4(0);
-  FUN_00292f44(0);
-  FUN_0029e260(0);
-  FUN_0029eb14(0);
-  FUN_0029c768(0);
-  FUN_00292eb0();
-  temp_v0 = FUN_00292e94();
-  if ((temp_v0 != 0) && (puVar2 = (unsigned int *)FUN_002a8a08(), temp_v0 <= *puVar2)) {
-    *piVar5 = 0x13;
-    FUN_002b8b78(0x90);
-    FUN_002971e4(*(unsigned int *)(param_1 + 0x3568),5);
-    return;
-  }
-  FUN_002954b8(0);
-  FUN_002b85bc(3);
-  return;
+  return 0;
 }

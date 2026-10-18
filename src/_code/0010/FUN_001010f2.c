@@ -1,4 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001010f2` (_code @ 0x1010f2, 0xd4 bytes) from smt4.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001010f2` (_code @ 0x1010f2, 0xd4 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
@@ -16,8 +16,8 @@ typedef struct {
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 extern int FUN_001010d4(char, int);
-extern long long FUN_0015f7a4(int, int, unsigned int, unsigned int);
-extern unsigned int *FUN_002c6840(void);
+extern long long FUN_0015f898(int, int, unsigned int, unsigned int);
+extern unsigned int *FUN_002c6644(void);
 
 
 unsigned long long FUN_001010f2(char *param_1,unsigned int *param_2,int param_3)
@@ -66,7 +66,7 @@ unsigned long long FUN_001010f2(char *param_1,unsigned int *param_2,int param_3)
     if (temp_v4 < 0) break;
     temp_v0 = 1;
     temp_v7 = param_3 * temp_v7 + temp_v4;
-    temp_v6 = FUN_0015f7a4(param_3,param_3 >> 0x1f,(int)temp_v2,(int)(temp_v2 >> 0x20));
+    temp_v6 = FUN_0015f898(param_3,param_3 >> 0x1f,(int)temp_v2,(int)(temp_v2 >> 0x20));
     temp_v2 = temp_v6 + (unsigned long long)(temp_v7 >> 0x10);
     temp_v7 = temp_v7 & 0xffff;
     if (0xffffffffffff < temp_v2) {
@@ -82,7 +82,7 @@ unsigned long long FUN_001010f2(char *param_1,unsigned int *param_2,int param_3)
     *param_2 = (unsigned int)param_1;
   }
   if (temp_v1) {
-    puVar6 = (unsigned int *)FUN_002c6840();
+    puVar6 = (unsigned int *)FUN_002c6644();
     *puVar6 = 2;
     temp_v7 = 0xffffffff;
     temp_v5 = temp_v7;

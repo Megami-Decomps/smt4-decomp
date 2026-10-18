@@ -1,4 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001005f0` (_code @ 0x1005f0, 0xb6 bytes) from smt4.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001005f0` (_code @ 0x1005f0, 0xb6 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
@@ -13,8 +13,8 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: FUN_001009a2. */
-/* Supplied declaration required: FUN_002c69cc. */
-/* Supplied declaration required: FUN_002c69f8. */
+/* Supplied declaration required: FUN_002c67dc. */
+/* Supplied declaration required: FUN_002c6808. */
 
 
 void FUN_001005f0(int *param_1,int param_2,int param_3)
@@ -51,7 +51,7 @@ void FUN_001005f0(int *param_1,int param_2,int param_3)
     temp_v2 = temp_v2 + 1;
   }
   param_1[6] = param_1[6] - temp_v3;
-  FUN_002c69cc(param_1);
+  FUN_002c67dc(param_1);
   temp_v4 = 0;
   temp_v5 = 0;
   for (temp_v7 = 0; temp_v7 < temp_v2; temp_v7 = temp_v7 + 1) {
@@ -63,6 +63,6 @@ void FUN_001005f0(int *param_1,int param_2,int param_3)
     }
   }
   param_1[8] = param_1[8] + temp_v3;
-  FUN_002c69f8(param_1);
+  FUN_002c6808(param_1);
   return;
 }

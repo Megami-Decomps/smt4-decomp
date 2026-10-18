@@ -1,26 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0010f73c` (_code @ 0x10f73c, 0x5c bytes) from smt4.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0010f73c` (_code @ 0x10f73c, 0x28 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
-extern signed char DAT_00471b54; /* 0x471b54 */
-extern unsigned char DAT_004e6ef0; /* 0x4e6ef0 */
+/* stack frame of void: 4 slot(s), 16 byte(s) */
+typedef struct {
+    unsigned int sp4; /* 0x4: local_4 */
+    unsigned int sp8; /* 0x8: local_8 */
+    unsigned int spC; /* 0xc: local_c */
+    unsigned int sp10; /* 0x10: local_10 */
+} void_stack;
 
-extern int FUN_002bbb2c(unsigned char *, int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002c5468. */
+/* Supplied declaration required: FUN_0011b9b0. */
 
 
-void FUN_0010f73c(int param_1,int param_2)
+void FUN_0010f73c(void)
 
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  if ((DAT_00471b54 != '\0') && (*(int *)(param_1 + 8) == 0)) {
-    temp_v0 = FUN_002bbb2c(&DAT_004e6ef0,param_1,(param_2 + 0xfffU) & 0xfffff000,0);
-    if (temp_v0 == 0) {
-      FUN_002c5468(0xd8601837);
-    }
-    *(unsigned char *)(param_1 + 0x10) = 0;
-  }
+/* irregular: 2 native warning(s); review required */
+  FUN_0011b9b0();
+                    /* WARNING: Treating indirect jump as return */
   return;
 }

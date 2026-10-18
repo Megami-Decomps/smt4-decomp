@@ -1,50 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ad8f8` (_code @ 0x2ad8f8, 0x17c bytes) from smt4.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ad8f8` (_code @ 0x2ad8f8, 0x5c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
-/* stack frame of param_2: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_2_stack;
-
-/* Supplied declaration required: FUN_002a6e10. */
-extern int FUN_002b5b44(int, int, unsigned int, unsigned int);
+/* Unsupported intrinsic, declaration required: coproc_movefrom_User_R_Thread_and_Process_ID (CALLOTHER). */
+/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 
 
-void FUN_002ad8f8(unsigned int *param_1,unsigned int *param_2)
+int FUN_002ad8f8(int *param_1,unsigned int *param_2,unsigned int param_3,unsigned int param_4,
+                unsigned int param_5,int param_6)
 
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
+/* irregular: 2 native warning(s); review required */
+  int temp_v0;
+  unsigned int temp_v1;
   int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  int temp_v7;
-  unsigned int temp_v8;
-  unsigned int temp_v9 [2];
   
-  temp_v2 = 86400000;
-  temp_v1 = FUN_002b5b44(*param_2 + 0x7cfc8400,param_2[1] + 0x395f + (unsigned int)(0x83037bff < *param_2),
-                       86400000,0);
-  FUN_002a6e10(&temp_v7,&temp_v8,temp_v9,temp_v1 - 0xb2407);
-  temp_v5 = temp_v1 - 0xb2401;
-  temp_v1 = (int)(((long long)(int)temp_v5 * -0x6db6db6d + ((unsigned long long)temp_v5 << 0x20)) >> 0x20);
-  temp_v6 = temp_v5 + ((temp_v1 >> 2) - (temp_v1 >> 0x1f)) * -7 + 7;
-  temp_v1 = (int)(((long long)(int)temp_v6 * -0x6db6db6d + ((unsigned long long)temp_v6 << 0x20)) >> 0x20);
-  temp_v5 = temp_v2 / 60000;
-  temp_v3 = (int)(((long long)(int)temp_v5 * -0x77777777 + ((unsigned long long)temp_v5 << 0x20)) >> 0x20);
-  temp_v0 = temp_v2 / 1000;
-  temp_v4 = (int)(((long long)(int)temp_v0 * -0x77777777 + ((unsigned long long)temp_v0 << 0x20)) >> 0x20);
-  param_1[2] = (((temp_v0 + ((temp_v4 >> 5) - (temp_v4 >> 0x1f)) * -0x3c) * 0x100) & 0xff00) |
-               ((temp_v5 + ((temp_v3 >> 5) - (temp_v3 >> 0x1f)) * -0x3c) & 0xff) |
-               ((temp_v2 % 1000) * 0x10000);
-  *param_1 = temp_v7;
-  param_1[1] = (((((temp_v1 >> 2) - (temp_v1 >> 0x1f)) * -7 + temp_v6) * 0x10000) & 0xff0000) |
-               (temp_v8 & 0xff) | ((temp_v9[0] & 0xff) << 8) | ((temp_v2 / 3600000) * 0x1000000);
-  return;
+  temp_v2 = coproc_movefrom_User_R_Thread_and_Process_ID();
+  *(unsigned int *)(temp_v2 + 0x80) = 0x80c00c2;
+  *(int *)(temp_v2 + 0x8c) = param_6;
+  *(unsigned int *)(temp_v2 + 0x90) = (param_6 << 0xe) | 2;
+  *(unsigned int *)(temp_v2 + 0x94) = param_5;
+  *(unsigned int *)(temp_v2 + 0x84) = param_3;
+  *(unsigned int *)(temp_v2 + 0x88) = param_4;
+  temp_v0 = *param_1;
+  software_interrupt(0x32);
+  if (-1 < temp_v0) {
+    temp_v1 = *(unsigned int *)(temp_v2 + 0x8c);
+    *param_2 = *(unsigned int *)(temp_v2 + 0x88);
+    param_2[1] = temp_v1;
+    temp_v0 = *(int *)(temp_v2 + 0x84);
+  }
+  return temp_v0;
 }

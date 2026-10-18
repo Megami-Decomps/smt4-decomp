@@ -1,9 +1,9 @@
 # smt4
 
-A **per-function matching** decompilation scaffold for the Nintendo 3DS image `smt4.cxi`
-(sha256 `565f9f5f03de03da5197d95ae33046a1f3f046ffe46d0f1c15796fb8b1351fdb`), bootstrapped by `romwright new-project` (romwright 0.5.0).
+A **per-function matching** decompilation scaffold for the Nintendo 3DS image `smt4_v1.2.0.cxi`
+(sha256 `1f4d560dfb492e1f579310c832dc1ebb888581cc46cc66bbb4888cd7fb67a086`), bootstrapped by `romwright new-project` (romwright 0.5.0).
 
-Every unit is built with the retail compiler (`armcc-4.1-b713`, `--cpu=MPCore --fpmode=fast --apcs=/interwork --c99 -O3 -Otime`) and compared with its retail function, so a function is decompiled when its bytes match. There is no whole-image build (no linker or C runtime ships with the public armcc builds, so no build relinks the retail `.code`). What this repository gives you:
+Every unit is built with the retail compiler (`armcc-4.1-b713`, `--cpu=MPCore --fpmode=fast --apcs=/interwork --c99 -O3 -Otime`) and compared with its retail function, so a function is decompiled when its bytes match. There is no whole-image build (no linker or C runtime ships with the public armcc builds, so no armcc build produces the whole `.code`; `tools/relink.py` instead relinks it from the per-function objects with GNU ld). What this repository gives you:
 
 * `config/symbols*.txt`: every function, label and import romwright found, with address and size
   (`name = section:0xADDR; // type:function size:0xN`, one file per module).
@@ -13,15 +13,11 @@ Every unit is built with the retail compiler (`armcc-4.1-b713`, `--cpu=MPCore --
   decompiler's primitive names) and `romwright_protos.h` (recovered prototypes).
 * `src/<module>/<shard>/<function>.c`: romwright's decompiled C, one function per file, each
   marked `NON_MATCHING`. It is a reading aid and a starting point, not retail-equivalent.
-  761 function(s) the evidence places in 172 original source file(s) are in
-  `src/<module>/<file>/<function>.c` instead, one objdiff progress category per file
-  (`file` in `config/project.json`); the placement is evidence, not proof: move a function by
-  correcting its entry in the `--tus` file and regenerating.
 * `build.py`: compiles every unit with `armcc-4.1-b713`; a unit matches when objdiff says its bytes do.
 * `objdiff.json` and `orig/target/`: each decompiled function's retail bytes as a relocatable target object, paired with `build/obj/` (what `build.py` compiles from `src/`).
 
 The retail image is not part of this repository and neither is anything derived from its
-bytes (`orig/`, `build/`): put your own dump at `orig/smt4.cxi`.
+bytes (`orig/`, `build/`): put your own dump at `orig/smt4_v1.2.0.cxi`.
 
 ## Quick start
 
@@ -32,8 +28,26 @@ python3 build.py report     # objdiff-cli report over objdiff.json -> build/repo
 # or open this directory in the objdiff GUI
 ```
 
-This image: 9333 function(s) decompiled into `src/`, 9349 symbol(s), 1 module(s).
+This image: 9339 function(s) decompiled into `src/`, 9350 symbol(s), 1 module(s).
 Units compile as C99 (`--c99`): decompiled C has no headers for its callees, so armcc's implicit-declaration warnings are not errors; every error is reported. A unit that fails (a missing struct definition, say) is listed with its first error in `build/compile_report.json`, and the build exits 0 unless you pass `--strict`. Each unit compiles in the mode its function was decoded in (`--arm`/`--thumb`).
+
+## From a fresh clone
+
+`orig/` and `build/` hold retail bytes and are not in version control. With only Python 3 (romwright is not needed):
+
+```sh
+python3 build.py fetch      # pinned tools (the compiler, objdiff-cli, wibo where needed, arm-none-eabi binutils)
+# put your decrypted dump at orig/smt4_v1.2.0.cxi (sha256 1f4d560dfb492e1f579310c832dc1ebb888581cc46cc66bbb4888cd7fb67a086)
+python3 build.py split      # tools/split.py: rebuild orig/target/**.o from the dump and config/
+python3 build.py            # compile src/
+python3 build.py report     # objdiff-cli -> build/report.json
+python3 tools/relink.py --matched   # relink the retail .code with every matched function from build/obj/: must print MATCH
+```
+
+`tools/split.py` writes the target objects romwright wrote, byte for byte, from `orig/smt4_v1.2.0.cxi`, `config/symbols.txt` (a function renamed there is the name its callers' relocations use), `config/modules.json` and `config/project.json`. `tools/n3ds.py` reads NCCH and NCSD dumps (a decrypted `.cxi`/`.3ds`/`.cci`; encrypted content is refused with a message). `tools/relink.py` links the whole `.code` with GNU ld from `orig/target` objects (retail bytes) and, with `--matched`, from the objects `build.py` compiled for the functions objdiff reports at 100%; `--full` links every function from its target object, which proves those objects relocate back to retail. A function objdiff scores 100% that does not reproduce its bytes in the image is listed with an `--exclude` line to rerun with.
+
+`romwright new-project` writes `src/` too: do not regenerate into a directory whose `src/` you have edited. Personal ignore rules (your dump's directory, say) go in `.git/info/exclude`, because regenerating rewrites `.gitignore`.
+
 
 ## Nintendo 3DS notes
 

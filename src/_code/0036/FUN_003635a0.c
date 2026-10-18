@@ -1,26 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003635a0` (_code @ 0x3635a0, 0x50 bytes) from smt4.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003635a0` (_code @ 0x3635a0, 0xc4 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
-/* stack frame of param_8: 6 slot(s), 24 byte(s) */
-typedef struct {
-    unsigned int spC; /* 0xc: local_c */
-    unsigned int sp10; /* 0x10: local_10 */
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_8_stack;
+typedef int romwright_code();
 
-/* Supplied declaration required: FUN_003f794c. */
-
-
-void FUN_003635a0(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
-                 unsigned int param_5,unsigned int param_6,unsigned int param_7,unsigned int param_8)
+unsigned int * FUN_003635a0(unsigned int *param_1,unsigned int param_2)
 
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_003f794c(*(unsigned int *)(param_1 + 8),*(unsigned int *)(param_1 + 0x18),param_2,param_3,param_4,
-               param_5,param_6,param_8,*(unsigned char *)(param_1 + 0x20),param_7);
-  return;
+  unsigned int *puVar1;
+  unsigned int *puVar2;
+  
+  *param_1 = param_2;
+  puVar2 = (unsigned int *)param_1[6];
+  puVar1 = param_1;
+  if (puVar2 != (unsigned int *)0x0) {
+    puVar1 = (unsigned int)(uint)*(unsigned int)(param_1 + 7);
+  }
+  if (puVar2 != (unsigned int *)0x0 && puVar1 != (unsigned int *)0x0) {
+    (**(romwright_code **)*puVar2)(puVar2);
+    puVar1 = (unsigned int *)(**(romwright_code **)(*(int *)puVar2[1] + 0xc))((int *)puVar2[1],puVar2);
+  }
+  puVar2 = (unsigned int *)param_1[4];
+  if (puVar2 != (unsigned int *)0x0) {
+    puVar1 = (unsigned int)(uint)*(unsigned int)(param_1 + 5);
+  }
+  if (puVar2 != (unsigned int *)0x0 && puVar1 != (unsigned int *)0x0) {
+    (**(romwright_code **)*puVar2)(puVar2);
+    puVar1 = (unsigned int *)(**(romwright_code **)(*(int *)puVar2[1] + 0xc))((int *)puVar2[1],puVar2);
+  }
+  puVar2 = (unsigned int *)param_1[2];
+  if (puVar2 != (unsigned int *)0x0) {
+    puVar1 = (unsigned int)(uint)*(unsigned int)(param_1 + 3);
+  }
+  if (puVar2 != (unsigned int *)0x0 && puVar1 != (unsigned int *)0x0) {
+    (**(romwright_code **)*puVar2)(puVar2);
+    (**(romwright_code **)(*(int *)puVar2[1] + 0xc))((int *)puVar2[1],puVar2);
+  }
+  return param_1;
 }

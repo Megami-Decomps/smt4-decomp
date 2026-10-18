@@ -1,4 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00100a70` (_code @ 0x100a70, 0xce bytes) from smt4.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00100a70` (_code @ 0x100a70, 0xce bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
@@ -13,9 +13,9 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_00155a08. */
-extern unsigned long long FUN_002c615c(int, unsigned int);
-/* Supplied declaration required: FUN_002c6810. */
+/* Supplied declaration required: FUN_00155afc. */
+extern unsigned long long FUN_002c5f60(int, unsigned int);
+/* Supplied declaration required: FUN_002c6614. */
 
 
 void FUN_00100a70(int *param_1,int param_2,int param_3)
@@ -57,7 +57,7 @@ void FUN_00100a70(int *param_1,int param_2,int param_3)
   temp_v16 = param_1;
   iStack_1c = param_2;
   iStack_18 = param_3;
-  temp_v9 = FUN_002c615c(param_2 + 0x1b9b,0x37);
+  temp_v9 = FUN_002c5f60(param_2 + 0x1b9b,0x37);
   temp_v6 = (int)temp_v9 - 0x80;
   temp_v5 = (int)((unsigned long long)temp_v9 >> 0x20) - 0x1b;
   temp_v8 = (int)temp_v5 < 0;
@@ -70,7 +70,7 @@ void FUN_00100a70(int *param_1,int param_2,int param_3)
     if ((temp_v5 & 1) != 0) {
       ppuVar1 = &temp_v10;
       temp_v0 = param_3;
-      FUN_002c6810(&temp_v10,temp_v7 * 0xc + 0x42029c);
+      FUN_002c6614(&temp_v10,temp_v7 * 0xc + 0x420654);
       temp_v10 = (unsigned char *)ppuVar1;
       uStack_44 = temp_v1;
       iStack_40 = temp_v0;
@@ -81,15 +81,15 @@ void FUN_00100a70(int *param_1,int param_2,int param_3)
   for (; temp_v6 != 0; temp_v6 = (int)temp_v6 >> 1) {
     if ((temp_v6 & 1) != 0) {
       temp_v0 = temp_v7 * 0x10;
-      temp_v12 = *(unsigned int *)(temp_v0 + 0x4202d8);
-      temp_v13 = *(unsigned int *)(temp_v0 + 0x4202dc);
-      temp_v14 = *(int *)(temp_v0 + 0x4202e0);
-      if (*(int *)(temp_v0 + 0x4202e4) + param_3 == 0) {
+      temp_v12 = *(unsigned int *)(temp_v0 + 0x420690);
+      temp_v13 = *(unsigned int *)(temp_v0 + 0x420694);
+      temp_v14 = *(int *)(temp_v0 + 0x420698);
+      if (*(int *)(temp_v0 + 0x42069c) + param_3 == 0) {
         temp_v14 = temp_v14 + param_3;
       }
       ppppuVar3 = &temp_v11;
       temp_v0 = param_3;
-      FUN_002c6810(ppppuVar3,&temp_v12);
+      FUN_002c6614(ppppuVar3,&temp_v12);
       temp_v11 = (unsigned int ***)ppppuVar3;
       uStack_38 = temp_v2;
       iStack_34 = temp_v0;
@@ -98,12 +98,12 @@ void FUN_00100a70(int *param_1,int param_2,int param_3)
   }
   if (temp_v15 != 0) {
     ppppuVar3 = &temp_v11;
-    FUN_00155a08(ppppuVar3,&temp_v10);
+    FUN_00155afc(ppppuVar3,&temp_v10);
     temp_v7 = temp_v3;
   }
   else {
     ppppuVar3 = &temp_v11;
-    FUN_002c6810(ppppuVar3,&temp_v10);
+    FUN_002c6614(ppppuVar3,&temp_v10);
     temp_v7 = temp_v4;
   }
   *temp_v16 = (int)ppppuVar3;

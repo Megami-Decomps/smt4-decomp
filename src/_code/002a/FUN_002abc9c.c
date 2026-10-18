@@ -1,51 +1,117 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002abc9c` (_code @ 0x2abc9c, 0x114 bytes) from smt4.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002abc9c` (_code @ 0x2abc9c, 0x19c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
+typedef struct fn_002abc9c_arg0 fn_002abc9c_arg0;
+struct fn_002abc9c_arg0 {
+    unsigned char pad_0x0[0x8];
+    undefined4 *field_0x8; /* +0x8 */
+    void *field_0xc; /* +0xc */
+    void *field_0x10; /* +0x10 */
+    uint field_0x14; /* +0x14 */
+    unsigned char field_0x18; /* +0x18 */
+    unsigned char pad_0x19[0x3];
+    unsigned char field_0x1c; /* +0x1c */
+    unsigned char pad_0x1d[0x3];
+    void *field_0x20; /* +0x20 */
+};
+
 typedef int romwright_code();
-/* stack frame of param_5: 4 slot(s), 16 byte(s) */
+/* stack frame of param_5: 1 slot(s), 4 byte(s) */
 typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
+    unsigned int sp28; /* 0x28: local_28 */
 } param_5_stack;
 
-/* Supplied declaration required: FUN_00148660. */
 
-
-void FUN_002abc9c(unsigned int *param_1,unsigned int *param_2,unsigned int *param_3,unsigned int param_4,
-                 unsigned int param_5)
+int FUN_002abc9c(fn_002abc9c_arg0 *param_1,unsigned int param_2,int param_3,unsigned int param_4,
+                unsigned int param_5)
 
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int *puVar2;
+  unsigned char temp_v0;
+  int *piVar2;
   unsigned int *puVar3;
+  unsigned int *puVar4;
   int temp_v1;
+  unsigned int temp_v2;
+  unsigned int *puVar7;
+  unsigned long long *puVar8;
+  romwright_code *pcVar9;
+  unsigned int *puVar10;
+  unsigned int temp_v3;
+  unsigned long long temp_v4;
   
-  for (; param_2 != param_3; param_2 = param_2 + 4) {
-    if ((int)(param_2[1] << 10) < 0) {
-      (*(romwright_code *)**(unsigned int **)*param_2)((unsigned int *)*param_2,param_4);
+  piVar2 = (int *)0x0;
+  if (param_3 == 0) {
+    piVar2 = *(int **)&param_1->field_0x18;
+  }
+  else if (param_3 == 1) {
+    piVar2 = *(int **)&param_1->field_0x1c;
+  }
+  else if (param_3 == 2) {
+    piVar2 = *(int **)(param_1 + 1);
+  }
+  else if (param_3 == 3) {
+    piVar2 = param_1->field_0x20;
+  }
+  temp_v4 = (**(romwright_code **)(*piVar2 + 0xc))();
+  temp_v2 = param_1->field_0x14 & 0x3fffffff;
+  if ((int)temp_v2 <= ((int)param_1->field_0x10 - (int)param_1->field_0xc) >> 4) {
+    if (temp_v2 == 0) {
+      temp_v2 = 1;
     }
     else {
-      temp_v0 = param_2[2];
-      temp_v1 = param_2[3];
-      puVar3 = *(unsigned int **)(*(int *)(temp_v1 + 0x158) + 0xc);
-      for (puVar2 = *(unsigned int **)(*(int *)(temp_v1 + 0x158) + 8); puVar2 != puVar3;
-          puVar2 = puVar2 + 1) {
-        (*(romwright_code *)**(unsigned int **)*puVar2)((unsigned int *)*puVar2,temp_v1,temp_v0,param_4);
+      temp_v2 = temp_v2 << 1;
+    }
+    if ((param_1->field_0x14 & 0x3fffffff) < temp_v2) {
+      if ((param_1->field_0x8 == (unsigned int *)0x0) ||
+         ((param_1->field_0x14 & 0xc0000000) != 0x40000000)) {
+        temp_v0 = 0;
+        temp_v1 = 0;
+        if (temp_v0) {
+          temp_v1 = (int)param_1->field_0x10 - 0x10;
+        }
+        return temp_v1;
       }
-      FUN_00148660(param_5,temp_v0,temp_v1);
-      puVar3 = *(unsigned int **)(*(int *)(temp_v1 + 0x15c) + 0xc);
-      for (puVar2 = *(unsigned int **)(*(int *)(temp_v1 + 0x15c) + 8); puVar2 != puVar3;
-          puVar2 = puVar2 + 1) {
-        (*(romwright_code *)**(unsigned int **)*puVar2)((unsigned int *)*puVar2,temp_v1,temp_v0,param_4);
+      pcVar9 = *(romwright_code **)(*param_1->field_0x8 + 8);
+      puVar3 = (unsigned int *)(*pcVar9)(param_1->field_0x8,temp_v2 << 4,0x20,pcVar9,param_5);
+      puVar7 = param_1->field_0xc;
+      puVar10 = param_1->field_0x10;
+      temp_v1 = 0;
+      puVar4 = puVar3;
+      if (puVar7 != puVar10) {
+        do {
+          if (puVar4 != (unsigned int *)0x0) {
+            temp_v3 = puVar7[1];
+            *puVar4 = *puVar7;
+            puVar4[1] = temp_v3;
+            puVar4[2] = puVar7[2];
+            puVar4[3] = puVar7[3];
+          }
+          puVar7 = puVar7 + 4;
+          puVar4 = puVar4 + 4;
+        } while (puVar7 != puVar10);
+        puVar7 = param_1->field_0xc;
+        temp_v1 = ((int)param_1->field_0x10 - (int)puVar7) >> 4;
       }
+      if (puVar7 != (unsigned int *)0x0) {
+        (**(romwright_code **)(*param_1->field_0x8 + 0xc))();
+      }
+      param_1->field_0x10 = puVar3 + temp_v1 * 4;
+      param_1->field_0xc = puVar3;
+      param_1->field_0x14 = (param_1->field_0x14 & 0xc0000000) | temp_v2;
     }
   }
-  *param_1 = param_4;
-  param_1[1] = param_5;
-                    /* WARNING: Treating indirect jump as return */
-  return;
+  temp_v0 = 1;
+  puVar8 = param_1->field_0x10;
+  if (puVar8 != (unsigned long long *)0x0) {
+    *(unsigned int *)(puVar8 + 1) = 0;
+    *(unsigned int *)((int)puVar8 + 0xc) = 0;
+    *puVar8 = temp_v4;
+  }
+  param_1->field_0x10 = (void *)((int)param_1->field_0x10 + 0x10);
+  temp_v1 = 0;
+  if (temp_v0) {
+    temp_v1 = (int)param_1->field_0x10 - 0x10;
+  }
+  return temp_v1;
 }

@@ -1,72 +1,56 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c06ac` (_code @ 0x3c06ac, 0x160 bytes) from smt4.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c06ac` (_code @ 0x3c06ac, 0xe8 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
-/* stack frame of param_3: 3 slot(s), 12 byte(s) */
+/* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_3_stack;
+    unsigned int sp10; /* 0x10: local_10 */
+} param_1_stack;
 
-/* Supplied declaration required: FUN_0022a640. */
-/* Supplied declaration required: FUN_0022a76c. */
-extern int FUN_00255398(int, unsigned int);
-extern int FUN_00293c98(void);
-extern int FUN_00295fac(unsigned int);
+extern int DAT_004342c8; /* 0x4342c8 */
+extern unsigned int DAT_00435d18; /* 0x435d18 */
+
+/* Supplied declaration required: FUN_00256898. */
+/* Supplied declaration required: FUN_002568c4. */
+extern int FUN_00256940(int, int, unsigned int);
+/* Supplied declaration required: FUN_0027da30. */
+/* Supplied declaration required: FUN_00297468. */
+/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: FUN_003dadd8. */
 
 
-unsigned int FUN_003c06ac(unsigned int *param_1,unsigned int param_2,unsigned int param_3)
+void FUN_003c06ac(int *param_1)
 
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned short temp_v0;
+/* irregular: 7 native warning(s); review required */
+  unsigned char temp_v0;
   int temp_v1;
   unsigned int temp_v2;
-  unsigned char temp_v3;
-  unsigned char temp_v4;
-  unsigned char temp_v5;
+  unsigned int temp_v3;
+  unsigned char temp_v4 [128];
   
-  temp_v1 = FUN_00293c98();
-  temp_v2 = *(unsigned int *)(temp_v1 + 0x44a0);
-  temp_v3 = (temp_v2 & 0x40) == 0;
-  temp_v4 = (temp_v2 & 0x100) == 0;
-  temp_v5 = (temp_v2 & 0x200) != 0;
-  if ((!temp_v3 || !temp_v4) || temp_v5) {
-    temp_v2 = 0;
+  temp_v1 = *param_1;
+  FUN_0027da30(temp_v1,param_1[8]);
+  temp_v2 = (unsigned int)*(unsigned short *)(temp_v1 + 2);
+  FUN_002b9024();
+  temp_v3 = (unsigned int)*(unsigned char *)(temp_v2 + 0x31);
+  if (temp_v3 == 99) {
+    temp_v3 = (unsigned int)*(unsigned char *)(temp_v2 + 0x30);
   }
-  if ((temp_v3 && temp_v4) && !temp_v5) {
-    temp_v0 = *(unsigned short *)((int)param_1 + 0x1c6);
-    if (((temp_v0 & 8) != 0) && ((param_2 & 8) == 0)) {
-      temp_v2 = 0x24;
-      FUN_0022a76c(0x24,param_1,param_3);
-      return temp_v2;
-    }
-    if ((temp_v0 & 0x200) != 0) {
-      temp_v2 = 0x13;
-      FUN_0022a76c(0x13,param_1,param_3);
-      return temp_v2;
-    }
-    if ((temp_v0 & 0x20) != 0) {
-      temp_v2 = 0x14;
-      FUN_0022a76c(0x14,param_1,param_3);
-      return temp_v2;
-    }
-    temp_v1 = FUN_00255398((int)(short)param_1[2],0xd);
-    if (0 < temp_v1) {
-      temp_v2 = 0x1f;
-      FUN_0022a76c(0x1f,param_1,param_3);
-      return temp_v2;
-    }
-    if (((*param_1 & 8) == 0) || (temp_v1 = FUN_00295fac(1), temp_v1 == 0)) {
-      return 0;
-    }
-    temp_v1 = FUN_00293c98();
-    temp_v2 = 0;
-    if (((*(unsigned int *)(temp_v1 + 0x44a0) & 0x40) == 0) && ((*(unsigned int *)(temp_v1 + 0x44a0) & 0x100) == 0)) {
-      temp_v2 = 0;
-      FUN_0022a640(0,0,0x15,*(unsigned int *)(temp_v1 + 0x2230),0,param_3,0xffffffff);
-    }
+  FUN_002be624(temp_v4,"battle/talk/Tone%s.tbb",*(unsigned int *)(temp_v3 * 4 + 0x439b70));
+  FUN_00297468(temp_v4,param_1 + 2,0);
+  temp_v0 = *(unsigned char *)(temp_v2 + 0x30);
+  param_1[0x32] = (unsigned int)temp_v0;
+  FUN_002be624(temp_v4,"battle/talk/TalkTone%s.mbm",*(unsigned int *)((unsigned int)temp_v0 * 4 + 0x439b70));
+  FUN_00297468(temp_v4,param_1 + 5,0);
+  FUN_00297468("battle/talk/talk.bf",param_1 + 3,0);
+  FUN_003dadd8(DAT_00435d18);
+  param_1[6] = 1;
+  if ((-1 < *(int *)(DAT_004342c8 + 0x760)) &&
+     (temp_v1 = FUN_00256940(DAT_004342c8,*param_1,1), temp_v1 != 0)) {
+    FUN_002568c4(0);
   }
-  return temp_v2;
+  FUN_00256898(1,0);
+  return;
 }

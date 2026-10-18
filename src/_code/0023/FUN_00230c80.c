@@ -1,38 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00230c80` (_code @ 0x230c80, 0xa0 bytes) from smt4.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00230c80` (_code @ 0x230c80, 0x2c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
-/* stack frame of param_9: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_9_stack;
+extern unsigned char LAB_00230cac; /* 0x230cac */
+extern unsigned char DAT_004c5344; /* 0x4c5344 */
 
-extern unsigned char LAB_00230d20; /* 0x230d20 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_002be16c. */
-/* Supplied declaration required: FUN_002be4dc. */
-/* Supplied declaration required: FUN_002bef14. */
+/* Supplied declaration required: FUN_002be624. */
+extern unsigned char *FUN_002be650(void);
 
 
-void FUN_00230c80(float *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
-                 unsigned int param_5,unsigned int param_6,unsigned int param_7,unsigned int param_8,
-                 unsigned int param_9)
+unsigned char * FUN_00230c80(unsigned int param_1)
 
 {
-/* irregular: irregular input(s): in_fpscr; 4 native warning(s); review required */
-  unsigned int in_fpscr;
-  float temp_v0;
-  float temp_v1;
+/* irregular: 1 native warning(s); review required */
+  unsigned char *puVar1;
   
-  FUN_002be4dc(param_7);
-  temp_v0 = (float)VectorSignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v1 = (float)VectorSignedToFloat(param_4,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_002be16c(param_2,(int)(*param_1 + param_1[2] + temp_v0),(int)(param_1[1] + param_1[3] + temp_v1),
-               param_5,param_6,param_8,&LAB_00230d20,param_9);
-  FUN_002bef14();
-  return;
+  puVar1 = (unsigned char *)FUN_002be650();
+  if (puVar1 == (unsigned char *)0x0) {
+    FUN_002be624(&DAT_004c5344,&LAB_00230cac,param_1);
+    puVar1 = &DAT_004c5344;
+  }
+  return puVar1;
 }

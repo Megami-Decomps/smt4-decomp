@@ -1,25 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002629a8` (_code @ 0x2629a8, 0x5c bytes) from smt4.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002629a8` (_code @ 0x2629a8, 0x44 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
+/* stack frame of param_2: 1 slot(s), 4 byte(s) */
+typedef struct {
+    unsigned int sp8; /* 0x8: local_8 */
+} param_2_stack;
 
-void FUN_002629a8(int param_1,unsigned int param_2,int param_3)
+extern unsigned char DAT_004d92f0; /* 0x4d92f0 */
+
+
+void FUN_002629a8(unsigned int param_1,unsigned int param_2)
 
 {
-  short temp_v0;
-  int temp_v1;
+  int temp_v0;
+  unsigned int *puVar2;
   
-  temp_v1 = 0;
+  temp_v0 = 0;
   do {
-    temp_v0 = *(short *)(param_3 + temp_v1 * 2);
-    if (temp_v0 != 0) {
-      *(short *)(param_1 + *(int *)(param_1 + 0x178) * 2 + 0x146) = temp_v0;
-      *(int *)(param_1 + 0x178) = *(int *)(param_1 + 0x178) + 1;
-    }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 8);
-  if (*(int *)(param_1 + 0x178) < 0x18) {
-    *(unsigned short *)(param_1 + *(int *)(param_1 + 0x178) * 2 + 0x146) = 0;
-  }
+    puVar2 = (unsigned int *)(&DAT_004d92f0 + temp_v0 * 8);
+    if (*(int *)(temp_v0 * 8 + 0x4d92f4) == 0) break;
+    temp_v0 = temp_v0 + 1;
+    puVar2 = (unsigned int *)0x0;
+  } while (temp_v0 < 0x40);
+  puVar2[1] = param_1;
+  *puVar2 = param_2;
   return;
 }

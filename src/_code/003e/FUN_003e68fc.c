@@ -1,38 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e68fc` (_code @ 0x3e68fc, 0x38 bytes) from smt4.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e68fc` (_code @ 0x3e68fc, 0x24 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
-typedef struct fn_003e68fc_arg0 fn_003e68fc_arg0;
-struct fn_003e68fc_arg0 {
-    unsigned char pad_0x0[0x14];
-    ushort field_0x14; /* +0x14 */
-    unsigned char pad_0x16[0xa];
-    unsigned char field_0x20; /* +0x20 */
-    unsigned char pad_0x21[0xb];
-    unsigned char field_0x2c; /* +0x2c */
-    unsigned char pad_0x2d[0x7];
-    ushort field_0x34; /* +0x34 */
-    unsigned char pad_0x36[0x2a];
-    ushort field_0x60; /* +0x60 */
-};
+/* stack frame of param_4: 1 slot(s), 4 byte(s) */
+typedef struct {
+    unsigned int sp8; /* 0x8: local_8 */
+} param_4_stack;
+
+/* Supplied declaration required: FUN_002a6a50. */
 
 
-unsigned int FUN_003e68fc(fn_003e68fc_arg0 *param_1)
+void FUN_003e68fc(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
 
 {
-  unsigned short *puVar1;
+/* irregular: 1 native warning(s); review required */
+  unsigned int temp_v0 [2];
   
-  if (param_1->field_0x14 == 0x4000) {
-    puVar1 = &param_1->field_0x14;
-  }
-  else if (*(short *)&param_1->field_0x20 == 0x4000) {
-    puVar1 = (unsigned short *)&param_1->field_0x20;
-  }
-  else if (*(short *)&param_1->field_0x2c == 0x4000) {
-    puVar1 = (unsigned short *)&param_1->field_0x2c;
-  }
-  else {
-    puVar1 = (unsigned short *)0x0;
-  }
-  return *(unsigned int *)(puVar1 + 2);
+  temp_v0[0] = param_4;
+  FUN_002a6a50(param_1 + 0x14,temp_v0,0x1f);
+  return;
 }

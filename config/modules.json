@@ -1,18 +1,18 @@
 {
   "image": {
-    "file": "smt4.cxi",
-    "sha256": "565f9f5f03de03da5197d95ae33046a1f3f046ffe46d0f1c15796fb8b1351fdb",
-    "size": 1875677184
+    "file": "smt4_v1.2.0.cxi",
+    "sha256": "1f4d560dfb492e1f579310c832dc1ebb888581cc46cc66bbb4888cd7fb67a086",
+    "size": 2252800
   },
   "modules": [
     {
       "build_id": null,
       "buildable": true,
       "compiler": "unknown",
-      "functions": 9349,
+      "functions": 9350,
       "id": "_code",
       "language": "ARM:LE:32:v6",
-      "mapped_sha256": "1f98884fe997af22e032a14c51a46c872b05b0e079a0f29e307b0e059cfaa558",
+      "mapped_sha256": "30c2fde6c31bdf2c2b08c74183523118a5eec048f0e0bf48f5b46fd136c495a1",
       "program": "smt4..code",
       "sections": [
         {

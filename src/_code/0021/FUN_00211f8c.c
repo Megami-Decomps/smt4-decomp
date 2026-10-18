@@ -1,47 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00211f8c` (_code @ 0x211f8c, 0x94 bytes) from smt4.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00211f8c` (_code @ 0x211f8c, 0x4c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
-extern int DAT_0043e2ac; /* 0x43e2ac */
+/* Supplied declaration required: FUN_0018af60. */
+/* Supplied declaration required: FUN_00296cc8. */
 
-extern unsigned int FUN_0026ace0(void);
 
-
-int FUN_00211f8c(void)
+unsigned int FUN_00211f8c(void)
 
 {
-  short temp_v0;
+/* irregular: 2 native warning(s); review required */
+  unsigned int temp_v0;
   int temp_v1;
-  unsigned int temp_v2;
-  short *psVar4;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
+  int temp_v2;
   
-  temp_v1 = DAT_0043e2ac;
-  temp_v5 = 0;
-  temp_v2 = FUN_0026ace0();
-  if (0 < (int)(temp_v2 - 1)) {
-    psVar4 = (short *)(temp_v1 + 0x106);
-    if (((temp_v2 & 1) == 0) && (psVar4 = (short *)(temp_v1 + 0x108), *psVar4 != 0)) {
-      temp_v5 = 1;
-    }
-    temp_v0 = psVar4[1];
-    temp_v4 = 0;
-    for (temp_v3 = (int)(temp_v2 - 1) >> 1; temp_v3 != 0; temp_v3 = temp_v3 - 1) {
-      if (temp_v0 != 0) {
-        temp_v5 = temp_v5 + 1;
-      }
-      temp_v0 = psVar4[3];
-      if (psVar4[2] != 0) {
-        temp_v4 = temp_v4 + 1;
-      }
-      psVar4 = psVar4 + 2;
-    }
-    temp_v5 = temp_v5 + temp_v4;
+  temp_v0 = FUN_00296cc8(0);
+  temp_v1 = FUN_00296cc8(1);
+  temp_v2 = FUN_00296cc8(2);
+  if (temp_v1 < 0) {
+    temp_v1 = 0;
   }
-  if ((-1 < (int)(temp_v2 - 1)) && (*(short *)(temp_v1 + (temp_v2 - 1) * 2 + 0x108) != 0)) {
-    temp_v5 = temp_v5 + 1;
+  if (temp_v2 < 0) {
+    temp_v2 = 0;
   }
-  return temp_v5;
+  FUN_0018af60(temp_v0,temp_v1,temp_v2);
+  return 1;
 }

@@ -1,55 +1,83 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002a4bac` (_code @ 0x2a4bac, 0x104 bytes) from smt4.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002a4bac` (_code @ 0x2a4bac, 0x168 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 typedef int romwright_code();
-/* Supplied declaration required: FUN_00156594. */
-/* Supplied declaration required: FUN_00156720. */
-/* Supplied declaration required: FUN_002b540c. */
+/* stack frame of param_1: 1 slot(s), 4 byte(s) */
+typedef struct {
+    unsigned int sp20; /* 0x20: local_20 */
+} param_1_stack;
+
+extern int DAT_0044ea5c; /* 0x44ea5c */
+
+/* Supplied declaration required: FUN_00152bec. */
+/* Supplied declaration required: FUN_00152ed8. */
+/* Supplied declaration required: FUN_002a72c0. */
+/* Supplied declaration required: FUN_002a775c. */
+/* Supplied declaration required: FUN_002c415c. */
 
 
-void FUN_002a4bac(int param_1,int *param_2)
+void FUN_002a4bac(int *param_1)
 
 {
-/* irregular: 3 native warning(s); review required */
+/* irregular: 5 native warning(s); review required */
   int temp_v0;
+  unsigned int *puVar2;
   int temp_v1;
   
-  if (*(int *)(param_1 + 0x24) != *(int *)(param_1 + 0x20)) {
-    if ((~*(unsigned int *)(param_1 + 0x14) & 2) != 0) {
-      temp_v1 = *(int *)(*(int *)(param_1 + 0x20) + 0x20);
-      temp_v0 = *(int *)(*(int *)(param_1 + 8) + 8);
-      if (temp_v0 == temp_v1) {
-        *(unsigned char *)(param_1 + 0x13) = 0;
-      }
-      else {
-        if (((temp_v0 != 0) && (-1 < *(int *)(temp_v0 + 0x10))) && (*(int *)(temp_v1 + 0x10) < 0)) {
-          *(unsigned char *)(param_1 + 0x12) = 1;
-          FUN_002b540c(param_1 + 0x100,0x1015);
-          *(unsigned char *)(param_1 + 0xec) = 1;
-          *(unsigned char *)(param_1 + 0xe9) = 1;
-          *(unsigned char *)(param_1 + 0xe8) = 1;
-          *(unsigned char *)(param_1 + 0xea) = 1;
-          *(unsigned char *)(param_1 + 0xeb) = 1;
-          *(unsigned int *)(param_1 + 0x1c) = 0;
-        }
-        FUN_00156720(*(unsigned int *)(param_1 + 8),temp_v1);
-        *(unsigned char *)(param_1 + 0x13) = 1;
-      }
-    }
-    FUN_00156594(param_1);
-    if ((~*(unsigned int *)(param_1 + 0x14) & 1) != 0) {
-      if (param_2 == (int *)0x0) {
-        param_2 = *(int **)(*(int *)(*(int *)(param_1 + 0x20) + 0x1c) + 0x1ec);
-      }
-      (**(romwright_code **)(*param_2 + 0xc))(param_2,param_1,*(unsigned int *)(param_1 + 0x20));
-    }
-    *(unsigned char *)(param_1 + 0xec) = 0;
-    *(unsigned char *)(param_1 + 0xe9) = 0;
-    *(unsigned char *)(param_1 + 0xe8) = 0;
-    *(unsigned char *)(param_1 + 0xea) = 0;
-    *(unsigned char *)(param_1 + 0xeb) = 0;
-    *(unsigned int *)(param_1 + 0x24) = *(unsigned int *)(param_1 + 0x20);
+  FUN_002a72c0(0);
+  if (param_1[7] != 0) {
+    FUN_00152bec();
+    FUN_002a775c(param_1[7]);
+    param_1[7] = 0;
   }
+  if (param_1[10] != 0) {
+    FUN_00152bec();
+    FUN_002a775c(param_1[10]);
+    param_1[10] = 0;
+  }
+  if (param_1[8] != 0) {
+    FUN_00152bec();
+    FUN_002a775c(param_1[8]);
+    param_1[8] = 0;
+  }
+  if (param_1[9] != 0) {
+    FUN_00152bec();
+    FUN_002a775c(param_1[9]);
+    param_1[9] = 0;
+  }
+  FUN_00152ed8(param_1);
+  temp_v1 = 0;
+  if (temp_v1 < *param_1) {
+    do {
+      puVar2 = (unsigned int *)param_1[temp_v1 + 0x15b];
+      if (puVar2 != (unsigned int *)0x0) {
+        (**(romwright_code **)*puVar2)(puVar2);
+        (**(romwright_code **)(*(int *)puVar2[1] + 0xc))((int *)puVar2[1],puVar2);
+        param_1[temp_v1 + 0x15b] = 0;
+      }
+      temp_v0 = 0;
+      if (temp_v0 < param_1[2]) {
+        do {
+          puVar2 = (unsigned int *)param_1[temp_v1 * 0x20 + temp_v0 + 0x17b];
+          if (puVar2 != (unsigned int *)0x0) {
+            (**(romwright_code **)*puVar2)(puVar2);
+            (**(romwright_code **)(*(int *)puVar2[1] + 0xc))((int *)puVar2[1],puVar2);
+            param_1[temp_v1 * 0x20 + temp_v0 + 0x17b] = 0;
+          }
+          temp_v0 = temp_v0 + 1;
+        } while (temp_v0 < param_1[2]);
+      }
+      temp_v1 = temp_v1 + 1;
+    } while (temp_v1 < *param_1);
+  }
+  if (param_1[6] != 0) {
+    FUN_002c415c();
+    param_1[6] = 0;
+  }
+  temp_v1 = DAT_0044ea5c;
+  temp_v0 = DAT_0044ea5c + 0x590;
+  *(int *)(DAT_0044ea5c + 0x80) = DAT_0044ea5c + 0x88;
+  *(int *)(temp_v1 + 0x84) = temp_v0;
   return;
 }

@@ -1,0 +1,17 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0034fb94` (_code @ 0x34fb94, 0x34 bytes) from smt4_v1.2.0.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+/* Supplied declaration required: FUN_002c3424. */
+/* Supplied declaration required: FUN_003511cc. */
+
+
+void FUN_0034fb94(int param_1)
+
+{
+/* irregular: 2 native warning(s); review required */
+  while (FUN_002c3424(param_1 + 0x20), *(char *)(param_1 + 0x10) != '\x01') {
+    FUN_003511cc(param_1);
+  }
+  return;
+}

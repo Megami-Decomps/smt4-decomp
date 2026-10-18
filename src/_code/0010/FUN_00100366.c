@@ -1,10 +1,10 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00100366` (_code @ 0x100366, 0x52 bytes) from smt4.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00100366` (_code @ 0x100366, 0x52 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 typedef int romwright_code();
-/* Supplied declaration required: FUN_002c69cc. */
-/* Supplied declaration required: FUN_002c69f8. */
+/* Supplied declaration required: FUN_002c67dc. */
+/* Supplied declaration required: FUN_002c6808. */
 
 
 void FUN_00100366(int *param_1,unsigned char *param_2,unsigned int param_3)
@@ -27,10 +27,10 @@ void FUN_00100366(int *param_1,unsigned char *param_2,unsigned int param_3)
   puVar2 = param_2 + temp_v0;
   param_1[6] = param_1[6] - temp_v0;
   param_1[8] = param_1[8] + temp_v0;
-  FUN_002c69cc(param_1);
+  FUN_002c67dc(param_1);
   for (; param_2 < puVar2; param_2 = param_2 + 1) {
     (*(romwright_code *)param_1[1])(*param_2,param_1[2]);
   }
-  FUN_002c69f8(param_1);
+  FUN_002c6808(param_1);
   return;
 }

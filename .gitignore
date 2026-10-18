@@ -4,6 +4,3 @@
 /.romwright/
 /config/toolchain.local.json
 __pycache__/
-# Retail dumps: SMT IV (orig/smt4.cxi is a hard link to iv/partition0.cxi) and SMT IV: Apocalypse.
-/iv/
-/iva/

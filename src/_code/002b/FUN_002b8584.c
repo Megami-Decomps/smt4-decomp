@@ -1,25 +1,61 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b8584` (_code @ 0x2b8584, 0x34 bytes) from smt4.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b8584` (_code @ 0x2b8584, 0xd4 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
-extern int DAT_0043da2c; /* 0x43da2c */
+extern int DAT_0043dcb4; /* 0x43dcb4 */
 
-/* Supplied declaration required: FUN_002ae2b4. */
+extern int FUN_002bf4f8(void);
 
 
-void FUN_002b8584(int param_1)
+int FUN_002b8584(void)
 
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
+  unsigned short temp_v0;
+  unsigned short temp_v1;
+  unsigned short temp_v2;
+  unsigned short temp_v3;
+  unsigned short temp_v4;
+  int temp_v5;
+  int temp_v6;
+  int temp_v7;
+  unsigned short *puVar9;
+  int temp_v8;
   
-  temp_v0 = DAT_0043da2c;
-  *(char *)(DAT_0043da2c + 0x4c7) = (char)param_1;
-  if (param_1 != 0) {
-    *(unsigned int *)(temp_v0 + 0x4b8) = 0;
-    *(unsigned short *)(temp_v0 + 0x4bc) = 0;
-    FUN_002ae2b4(temp_v0 + 0x4be);
-    return;
+  temp_v7 = DAT_0043dcb4;
+  temp_v6 = FUN_002bf4f8();
+  temp_v5 = DAT_0043dcb4;
+  if (*(short *)(temp_v7 + 0x64a) < 200) {
+    puVar9 = *(unsigned short **)(temp_v6 + 0xc);
+    if (puVar9 != (unsigned short *)0x0) {
+      temp_v2 = *puVar9;
+      temp_v3 = puVar9[1];
+      temp_v4 = *(unsigned short *)(temp_v6 + 10);
+      temp_v7 = (int)*(short *)(DAT_0043dcb4 + 0x64a);
+      if (temp_v7 < 200) {
+        temp_v8 = DAT_0043dcb4 + temp_v7 * 8;
+        *(unsigned short *)(temp_v8 + 10) = *(unsigned short *)(temp_v6 + 8);
+        *(unsigned short *)(temp_v8 + 0xc) = temp_v4;
+        *(unsigned short *)(temp_v8 + 0xe) = temp_v2;
+        *(unsigned short *)(temp_v8 + 0x10) = temp_v3;
+        *(short *)(temp_v5 + 0x64a) = *(short *)(temp_v5 + 0x64a) + 1;
+        return temp_v7;
+      }
+    }
+    else {
+      temp_v0 = *(unsigned short *)(temp_v6 + 6);
+      temp_v1 = *(unsigned short *)(temp_v6 + 4);
+      temp_v2 = *(unsigned short *)(temp_v6 + 10);
+      temp_v7 = (int)*(short *)(DAT_0043dcb4 + 0x64a);
+      if (temp_v7 < 200) {
+        temp_v8 = DAT_0043dcb4 + temp_v7 * 8;
+        *(unsigned short *)(temp_v8 + 10) = *(unsigned short *)(temp_v6 + 8);
+        *(unsigned short *)(temp_v8 + 0xc) = temp_v2;
+        *(unsigned short *)(temp_v8 + 0xe) = temp_v1 & 0x7fff;
+        *(unsigned short *)(temp_v8 + 0x10) = temp_v0 & 0x7fff;
+        *(short *)(temp_v5 + 0x64a) = *(short *)(temp_v5 + 0x64a) + 1;
+        return temp_v7;
+      }
+    }
   }
-  return;
+  return -1;
 }

@@ -1,59 +1,65 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033fd64` (_code @ 0x33fd64, 0x120 bytes) from smt4.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033fd64` (_code @ 0x33fd64, 0x108 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
-extern unsigned int DAT_0043427c; /* 0x43427c */
-
-extern int FUN_0027eb98(unsigned int);
-extern int FUN_002a89e4(void);
-extern int FUN_002a8a08(void);
+/* Supplied declaration required: FUN_0023d9b8. */
+extern int FUN_002939f4(void);
+/* Supplied declaration required: FUN_002ae164. */
 
 
-unsigned int FUN_0033fd64(unsigned int *param_1)
+unsigned int FUN_0033fd64(int param_1,int param_2)
 
 {
-  short temp_v0;
+/* irregular: 2 native warning(s); review required */
+  unsigned int temp_v0;
   int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
+  unsigned int temp_v2;
+  unsigned char temp_v3;
   
-  if (param_1 != (unsigned int *)0x0) {
-    if ((*param_1 & 2) != 0) {
-      temp_v1 = FUN_0027eb98(DAT_0043427c);
-      if ((*(unsigned int **)(temp_v1 + 0x20) != (unsigned int *)0x0) && ((**(unsigned int **)(temp_v1 + 0x20) & 2) != 0)) {
-        temp_v1 = FUN_002a8a08();
-        temp_v4 = 0;
-        if (*(char *)(temp_v1 + 0x910b) != '\0') {
-          do {
-            if (((-1 < *(char *)(temp_v1 + temp_v4 + 0x90f0)) && (temp_v2 = FUN_002a89e4(), temp_v2 != 0))
-               && (-1 < *(char *)(temp_v1 + temp_v4 + 0x90f0))) {
-              return 1;
-            }
-            temp_v4 = temp_v4 + 1;
-          } while (temp_v4 < (int)(unsigned int)*(unsigned char *)(temp_v1 + 0x910b));
-        }
-      }
+  if ((param_2 != 0) && (FUN_002ae164(), param_2 != 0)) {
+    temp_v2 = 2;
+    temp_v3 = (*(unsigned int *)(param_2 + 0x28) & 0x7ff) >> 9 != 2;
+    if (temp_v3) {
+      temp_v2 = 3;
     }
-    else if (((*param_1 & 8) != 0) && (temp_v0 = *(short *)((int)param_1 + 0xce), (int)temp_v0 != 0)) {
-      temp_v1 = FUN_002a8a08();
-      temp_v4 = 0;
-      if (*(char *)(temp_v1 + 0x910b) != '\0') {
-        do {
-          if (-1 < *(char *)(temp_v1 + temp_v4 + 0x90f0)) {
-            temp_v2 = FUN_002a89e4();
-            temp_v3 = 0;
-            if (temp_v2 != 0) {
-              temp_v3 = (unsigned int)*(unsigned short *)(temp_v2 + 0x46);
-            }
-            if ((temp_v2 != 0 && temp_v3 != (int)temp_v0) && (-1 < *(char *)(temp_v1 + temp_v4 + 0x90f0))) {
-              return 1;
+    if (!temp_v3 || temp_v2 == (*(unsigned int *)(param_2 + 0x28) & 0x7ff) >> 9) {
+      switch(*(unsigned char *)(param_2 + 0x23)) {
+      case 0:
+      case 1:
+      case 2:
+      case 5:
+      case 6:
+      case 10:
+        break;
+      default:
+        temp_v1 = FUN_002939f4();
+        if ((*(unsigned int *)(temp_v1 + 0x44a8) & 0x2000000) == 0) {
+          if (*(char *)(param_2 + 0x23) != '\x03') {
+            switch((*(unsigned int *)(param_2 + 0x28) & 0x1ff) >> 5) {
+            case 0:
+            case 1:
+            case 3:
+            case 4:
+            case 5:
+            case 6:
+            case 8:
+              return 0;
             }
           }
-          temp_v4 = temp_v4 + 1;
-        } while (temp_v4 < (int)(unsigned int)*(unsigned char *)(temp_v1 + 0x910b));
+          FUN_0023d9b8(param_1,1,param_2);
+          temp_v0 = 0;
+          if (param_1 != 0) {
+            temp_v0 = 3;
+          }
+          return temp_v0;
+        }
       }
+      return 0;
     }
+    temp_v0 = 2;
   }
-  return 0;
+  else {
+    temp_v0 = 1;
+  }
+  return temp_v0;
 }

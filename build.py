@@ -11,7 +11,8 @@ compile is reported, not fatal, unless --strict is given.
 
     python3 build.py [-j N] [--strict] [--clang PATH | --armcc PATH] [--only SUBSTR]
     python3 build.py build/obj/<module>/<shard>/<name>.o     (what objdiff runs)
-    python3 build.py fetch                                   (download the pinned compiler and objdiff-cli)
+    python3 build.py fetch                                   (download the pinned compiler, objdiff-cli; 3DS: arm-none-eabi binutils)
+    python3 build.py split                                   (3DS: rebuild orig/target/ from orig/<dump>, no romwright)
     python3 build.py report                                  (objdiff-cli report -> build/report.json)
 
 Standard library only.
@@ -188,7 +189,20 @@ def fetch():
     if FAMILY == "armcc" and os.name != "nt":
         tools.append("wibo")
     ids = [t for t in tools if t in MANIFEST]
-    return subprocess.call([sys.executable, str(ROOT / "tools" / "download_tool.py"), *ids])
+    status = subprocess.call([sys.executable, str(ROOT / "tools" / "download_tool.py"), *ids])
+    # tools/relink.py links with GNU ld; a host the pinned binutils do not cover can bring its own.
+    if "binutils-arm-none-eabi" in MANIFEST and (ROOT / "tools" / "relink.py").exists():
+        if subprocess.call([sys.executable, str(ROOT / "tools" / "download_tool.py"), "binutils-arm-none-eabi"]) != 0:
+            print("note: tools/relink.py needs arm-none-eabi binutils: put them on PATH or pass --ld/--objcopy", file=sys.stderr)
+    return status
+
+
+def split(arguments):
+    """tools/split.py: the retail target objects, from the dump and config/ only."""
+    script = ROOT / "tools" / "split.py"
+    if not script.exists():
+        raise SystemExit("this project has no tools/split.py (only Nintendo 3DS projects can rebuild orig/target without romwright)")
+    return subprocess.call([sys.executable, str(script), *arguments])
 
 
 def text_size(path):
@@ -232,6 +246,12 @@ def report():
             "this platform has no objdiff.json (objdiff has no backend for its CPU); "
             "see README.md for the per-function workflow"
         )
+    if not any((ROOT / unit["target_path"]).exists() for unit in json.loads(config.read_text())["units"]):
+        raise SystemExit(
+            "orig/target/ holds no retail objects: "
+            + ("run `python3 build.py split` (it needs your dump in orig/)" if (ROOT / "tools" / "split.py").exists()
+               else "regenerate the project with romwright-cli new-project (they are cut from your dump)")
+        )
     BUILD.mkdir(exist_ok=True)
     # objdiff-cli 3.6.1 panics on a unit whose compiled function is empty (decompiled code that
     # ends in halt_baddata() compiles to nothing) and fails on a missing object: such units are
@@ -249,6 +269,8 @@ def report():
 
 
 def main():
+    if sys.argv[1:2] == ["split"]:
+        sys.exit(split(sys.argv[2:]))
     parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     parser.add_argument("paths", nargs="*", help="`fetch`, `report`, or objects to build")
     parser.add_argument("-j", "--jobs", type=int, default=os.cpu_count() or 2)

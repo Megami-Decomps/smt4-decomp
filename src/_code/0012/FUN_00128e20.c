@@ -1,0 +1,114 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00128e20` (_code @ 0x128e20, 0xd8 bytes) from smt4_v1.2.0.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+/* stack frame of param_4: 1 slot(s), 1 byte(s) */
+typedef struct {
+    unsigned char sp18; /* 0x18: local_18 */
+} param_4_stack;
+
+extern unsigned char DAT_004ead10; /* 0x4ead10 */
+
+extern int FUN_0013a170(unsigned int *, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_0013a904. */
+/* Supplied declaration required: FUN_0013a92c. */
+/* Supplied declaration required: FUN_0013abfc. */
+/* Supplied declaration required: FUN_001467a4. */
+/* Supplied declaration required: FUN_002c38fc. */
+/* Supplied declaration required: FUN_002c5dc0. */
+
+
+void FUN_00128e20(char *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
+
+{
+/* irregular: 6 native warning(s); review required */
+  int temp_v0;
+  unsigned char temp_v1;
+  char temp_v2;
+  unsigned int temp_v3;
+  
+  if (*param_1 == '\0') {
+    *param_1 = '\x01';
+    temp_v3 = param_4;
+    FUN_0013a904(&DAT_004ead10);
+    param_1[2] = '\x01';
+    param_1[4] = '\0';
+    param_1[5] = '\0';
+    param_1[6] = -0x80;
+    param_1[7] = '?';
+    param_1[8] = '\0';
+    param_1[9] = '\0';
+    param_1[10] = -0x80;
+    param_1[0xb] = '?';
+    param_1[0xc] = '\0';
+    param_1[0xd] = '\0';
+    param_1[0xe] = -0x80;
+    param_1[0xf] = '?';
+    param_1[0x10] = '\0';
+    param_1[0x11] = '\0';
+    param_1[0x12] = -0x80;
+    param_1[0x13] = '?';
+    param_1[0x14] = '\0';
+    param_1[0x15] = '\0';
+    param_1[0x16] = '\0';
+    param_1[0x17] = '\0';
+    param_1[0x18] = '\0';
+    param_1[0x19] = '\0';
+    param_1[0x1a] = '\0';
+    param_1[0x1b] = '\0';
+    param_1[0x1c] = '\0';
+    param_1[0x1d] = '\0';
+    param_1[0x1e] = '\0';
+    param_1[0x1f] = '\0';
+    param_1[0x20] = '\0';
+    param_1[0x21] = '\0';
+    param_1[0x22] = '\0';
+    param_1[0x23] = '\0';
+    param_1[0x24] = '\0';
+    param_1[0x25] = '\0';
+    param_1[0x2c] = '\0';
+    param_1[0x2d] = '\0';
+    param_1[0x2e] = -0x80;
+    param_1[0x2f] = '?';
+    param_1[0x28] = '\0';
+    param_1[0x29] = '\0';
+    param_1[0x2a] = -0x80;
+    param_1[0x2b] = '?';
+    FUN_0013a92c(&DAT_004ead10);
+    FUN_002c5dc0();
+    temp_v0 = FUN_0013a170(&temp_v3,1,0x70001);
+    FUN_001467a4();
+    temp_v2 = '\x01';
+    if (-1 < temp_v0) {
+      temp_v1 = temp_v3;
+      temp_v2 = temp_v1 != 0;
+      if ((temp_v1 >= 2) && (temp_v1 == 2)) {
+        temp_v2 = '\x02';
+      }
+    }
+    param_1[3] = temp_v2;
+    FUN_0013abfc(&DAT_004ead10);
+    param_1[0x30] = '\0';
+    param_1[0x31] = '\0';
+    param_1[0x32] = '\0';
+    param_1[0x33] = '\0';
+    param_1[0x34] = '\0';
+    param_1[0x35] = '\0';
+    param_1[0x36] = '\0';
+    param_1[0x37] = '\0';
+    param_1[0x38] = '\0';
+    param_1[0x39] = '\0';
+    param_1[0x3a] = '\0';
+    param_1[0x3b] = '\0';
+    param_1[0x3c] = '\0';
+    param_1[0x3d] = '\0';
+    param_1[0x3e] = '\0';
+    param_1[0x3f] = '\0';
+    param_1[0x40] = '\0';
+    param_1[0x41] = '\0';
+    param_1[0x42] = '\0';
+    param_1[0x43] = '\0';
+    FUN_002c38fc(param_1 + 0x44);
+  }
+  return;
+}

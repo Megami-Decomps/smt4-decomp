@@ -1,26 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00273644` (_code @ 0x273644, 0x44 bytes) from smt4.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00273644` (_code @ 0x273644, 0x58 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
-/* Supplied declaration required: FUN_00208b00. */
+/* Supplied declaration required: FUN_002a7218. */
+/* Supplied declaration required: FUN_002c415c. */
 
 
-void FUN_00273644(int *param_1)
+void FUN_00273644(unsigned int *param_1)
 
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v1 = 0;
-  temp_v2 = *param_1;
-  do {
-    temp_v0 = temp_v2 + temp_v1 * 0x194;
-    if ((*(char *)(temp_v0 + 0x1d0) != '\0') && (*(int *)(temp_v0 + 0x1d4) == 3)) {
-      FUN_00208b00(*(unsigned int *)(temp_v0 + 500));
-    }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 0x80);
+/* irregular: 2 native warning(s); review required */
+  param_1[1] = 0xf;
+  *param_1 = 0;
+  if (param_1[3] != 0) {
+    FUN_002c415c();
+    param_1[3] = 0;
+  }
+  if (param_1[4] != 0) {
+    FUN_002c415c();
+    param_1[4] = 0;
+  }
+  if (param_1[5] != 0) {
+    FUN_002a7218();
+    param_1[5] = 0;
+  }
   return;
 }

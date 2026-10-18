@@ -1,9 +1,9 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0010004a` (_code @ 0x10004a, 0x9e bytes) from smt4.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0010004a` (_code @ 0x10004a, 0x9e bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern unsigned int FUN_00100262(unsigned int);
-extern int *FUN_002c6c40(void);
+extern int *FUN_002c6a50(void);
 
 
 unsigned int FUN_0010004a(unsigned int param_1)
@@ -17,7 +17,7 @@ unsigned int FUN_0010004a(unsigned int param_1)
   int temp_v4;
   int temp_v5;
   
-  piVar2 = (int *)FUN_002c6c40();
+  piVar2 = (int *)FUN_002c6a50();
   if (*(char *)(*piVar2 + 0x100) == '\0') {
     temp_v1 = FUN_00100262(param_1);
     return temp_v1;
@@ -28,19 +28,19 @@ unsigned int FUN_0010004a(unsigned int param_1)
     while (temp_v3 = temp_v0, temp_v4 - temp_v3 >= 2) {
       temp_v2 = (temp_v3 + temp_v4) / 2;
       temp_v5 = temp_v2 * 6;
-      if (((param_1 - *(unsigned short *)(temp_v5 + 0x417c64)) & 0xffff) <
-          (*(unsigned short *)(temp_v5 + 0x417c66) & 0x3fff)) {
+      if (((param_1 - *(unsigned short *)(temp_v5 + 0x41801c)) & 0xffff) <
+          (*(unsigned short *)(temp_v5 + 0x41801e) & 0x3fff)) {
         if (temp_v4 - temp_v3 < 2) {
           return 0;
         }
         return *(unsigned int *)
-                ((*(unsigned short *)(temp_v5 + 0x417c68) >>
-                  (((param_1 - *(unsigned short *)(temp_v2 * 6 + 0x417c64)) &
-                    ~(-1 << (unsigned int)(*(unsigned short *)(temp_v5 + 0x417c66) >> 0xe)) & 0x3f) << 2) & 0xf) * 4 +
-                0x417c2c);
+                ((*(unsigned short *)(temp_v5 + 0x418020) >>
+                  (((param_1 - *(unsigned short *)(temp_v2 * 6 + 0x41801c)) &
+                    ~(-1 << (unsigned int)(*(unsigned short *)(temp_v5 + 0x41801e) >> 0xe)) & 0x3f) << 2) & 0xf) * 4 +
+                0x417fe4);
       }
       temp_v0 = temp_v2;
-      if ((int)param_1 < (int)(unsigned int)*(unsigned short *)(temp_v5 + 0x417c64)) {
+      if ((int)param_1 < (int)(unsigned int)*(unsigned short *)(temp_v5 + 0x41801c)) {
         temp_v0 = temp_v3;
         temp_v4 = temp_v2;
       }

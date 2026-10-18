@@ -1,30 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0020ffa0` (_code @ 0x20ffa0, 0xc bytes) from smt4.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0020ffa0` (_code @ 0x20ffa0, 0x34 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
-typedef int romwright_code();
+extern int DAT_004dad80; /* 0x4dad80 */
 
-void FUN_0020ffa0(int param_1)
+extern unsigned int FUN_00252394(unsigned int);
+/* Supplied declaration required: FUN_002c00b4. */
+
+
+void FUN_0020ffa0(int *param_1,int param_2)
 
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
+/* irregular: 1 native warning(s); review required */
+  unsigned int temp_v0;
   
-  if (0 < *(int *)(param_1 + 0x58)) {
-    temp_v0 = *(int *)(param_1 + 0x2c);
-    if ((*(int *)(temp_v0 + 0x148) != 0) &&
-       (temp_v0 = *(int *)(*(int *)(*(int *)(temp_v0 + 0x28) + 0x1c) +
-                        *(int *)(temp_v0 + 0x14c) * *(int *)(*(int *)(temp_v0 + 0x28) + 0x28) * 4),
-       temp_v0 != 0)) {
-      temp_v2 = *(unsigned int *)(temp_v0 + 0x44);
-      (**(romwright_code **)(temp_v0 + 0x4c))(*(unsigned int *)(temp_v0 + 0x50));
-      temp_v1 = *(unsigned int *)(temp_v0 + 0x38);
-      *(unsigned int *)(temp_v0 + 0x38) = temp_v2;
-      *(unsigned int *)(temp_v0 + 0x3c) = temp_v1;
-      *(unsigned char *)(temp_v0 + 0x58) = 1;
-    }
-    return;
-  }
+  temp_v0 = FUN_00252394(1);
+  FUN_002c00b4(temp_v0,*(unsigned int *)(*param_1 + param_2 * 4));
+  DAT_004dad80 = DAT_004dad80 + 1;
   return;
 }

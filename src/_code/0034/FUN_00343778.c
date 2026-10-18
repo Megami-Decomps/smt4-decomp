@@ -1,0 +1,42 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00343778` (_code @ 0x343778, 0x94 bytes) from smt4_v1.2.0.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+typedef struct fn_00343778_arg0 fn_00343778_arg0;
+struct fn_00343778_arg0 {
+    unsigned char pad_0x0[0x52c];
+    undefined4 field_0x52c; /* +0x52c */
+    unsigned char pad_0x530[0xc9c];
+    float field_0x11cc; /* +0x11cc */
+    float field_0x11d0; /* +0x11d0 */
+    float field_0x11d4; /* +0x11d4 */
+    float field_0x11d8; /* +0x11d8 */
+    char field_0x11dc; /* +0x11dc */
+};
+
+/* Supplied declaration required: FUN_002b634c. */
+
+
+void FUN_00343778(fn_00343778_arg0 *param_1,float *param_2)
+
+{
+/* irregular: 1 native warning(s); review required */
+  float temp_v0;
+  float temp_v1;
+  float temp_v2;
+  
+  if ((((param_1->field_0x11dc != '\0') || (*param_2 != param_1->field_0x11cc)) ||
+      (param_2[1] != param_1->field_0x11d0)) ||
+     ((param_2[2] != param_1->field_0x11d4 || (param_2[3] != param_1->field_0x11d8)))) {
+    temp_v0 = param_2[1];
+    temp_v1 = param_2[2];
+    temp_v2 = param_2[3];
+    param_1->field_0x11cc = *param_2;
+    param_1->field_0x11d0 = temp_v0;
+    param_1->field_0x11d4 = temp_v1;
+    param_1->field_0x11d8 = temp_v2;
+    FUN_002b634c(param_1->field_0x52c,&param_1->field_0x11cc);
+  }
+  param_1->field_0x11dc = '\0';
+  return;
+}

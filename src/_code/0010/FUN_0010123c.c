@@ -1,12 +1,12 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0010123c` (_code @ 0x10123c, 0xcc bytes) from smt4.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0010123c` (_code @ 0x10123c, 0xcc bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 typedef int romwright_code();
 /* Supplied declaration required: FUN_00100366. */
 /* Supplied declaration required: FUN_001005f0. */
-/* Supplied declaration required: FUN_002c607c. */
-extern unsigned int *FUN_002c6840(void);
+/* Supplied declaration required: FUN_002c5e80. */
+extern unsigned int *FUN_002c6644(void);
 
 
 /* WARNING: Control flow encountered bad instruction data */
@@ -14,7 +14,6 @@ extern unsigned int *FUN_002c6840(void);
 /* WARNING: Removing unreachable block (ram,0x001008b4) */
 /* WARNING: Removing unreachable block (ram,0x001008a8) */
 /* WARNING: Removing unreachable block (ram,0x00100890) */
-/* WARNING: Removing unreachable block (ram,0x0010083a) */
 /* WARNING: Removing unreachable block (ram,0x00100822) */
 /* WARNING: Removing unreachable block (ram,0x001008a0) */
 /* WARNING: Removing unreachable block (ram,0x001008b0) */
@@ -23,7 +22,7 @@ extern unsigned int *FUN_002c6840(void);
 unsigned int * FUN_0010123c(unsigned int *param_1,unsigned int param_2,unsigned int *param_3)
 
 {
-/* irregular: 18 native warning(s); review required */
+/* irregular: 17 native warning(s); review required */
   unsigned int *puVar1;
   unsigned int *puVar2;
   unsigned int temp_v0;
@@ -38,7 +37,7 @@ unsigned int * FUN_0010123c(unsigned int *param_1,unsigned int param_2,unsigned 
     halt_baddata();
   }
   if (((param_2 == 0x66) || (param_2 == 0x65)) || (param_2 == 0x67)) {
-    puVar2 = (unsigned int *)(*(romwright_code *)0x2c6599)();
+    puVar2 = (unsigned int *)(*(romwright_code *)0x2c639d)();
     return puVar2;
   }
   if ((unsigned char)((unsigned char)(*param_1 >> 7) & 1)) {
@@ -61,9 +60,9 @@ unsigned int * FUN_0010123c(unsigned int *param_1,unsigned int param_2,unsigned 
   }
   if (((param_2 == 0xe9) || (param_2 == 0xe4)) || (param_2 == 0xf5)) {
     *param_1 = (unsigned int)param_1;
-    puVar1 = (unsigned int *)FUN_002c6840();
+    puVar1 = (unsigned int *)FUN_002c6644();
     temp_v0 = *puVar1;
-    FUN_002c607c(param_1,0,10);
+    FUN_002c5e80(param_1,0,10);
     *puVar1 = temp_v0;
     return param_1;
   }

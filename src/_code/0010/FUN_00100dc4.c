@@ -1,4 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00100dc4` (_code @ 0x100dc4, 0x8a bytes) from smt4.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00100dc4` (_code @ 0x100dc4, 0x8a bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
@@ -10,8 +10,8 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_001010f2. */
-extern unsigned int *FUN_002c6840(void);
-extern int *FUN_002c6c40(void);
+extern unsigned int *FUN_002c6644(void);
+extern int *FUN_002c6a50(void);
 
 
 void FUN_00100dc4(unsigned char *param_1,unsigned int *param_2,unsigned int param_3)
@@ -35,7 +35,7 @@ void FUN_00100dc4(unsigned char *param_1,unsigned int *param_2,unsigned int para
     temp_v3 = (unsigned int)*pbVar5;
     pbVar6 = pbVar5 + 1;
     if (temp_v3 == 0) break;
-    piVar2 = (int *)FUN_002c6c40();
+    piVar2 = (int *)FUN_002c6a50();
   } while ((*(unsigned char *)(*piVar2 + temp_v3) & 1) != 0);
   pbVar7 = pbVar6;
   if ((temp_v3 != 0x2b) && (pbVar7 = pbVar5, temp_v3 == 0x2d)) {
@@ -51,12 +51,12 @@ void FUN_00100dc4(unsigned char *param_1,unsigned int *param_2,unsigned int para
     temp_v2 = -(unsigned int)(pbVar6 != (unsigned char *)0x0) - temp_v1;
     if ((int)(-(unsigned int)(pbVar6 != (unsigned char *)0x0) - temp_v2) < 0 !=
         (SBORROW4(0,temp_v2) != SBORROW4(-temp_v2,(unsigned int)(pbVar6 != (unsigned char *)0x0)))) {
-      puVar3 = (unsigned int *)FUN_002c6840();
+      puVar3 = (unsigned int *)FUN_002c6644();
       *puVar3 = 2;
     }
   }
   else if (temp_v1 < 0) {
-    puVar3 = (unsigned int *)FUN_002c6840();
+    puVar3 = (unsigned int *)FUN_002c6644();
     *puVar3 = 2;
   }
   return;

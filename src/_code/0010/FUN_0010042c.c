@@ -1,4 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0010042c` (_code @ 0x10042c, 0x184 bytes) from smt4.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0010042c` (_code @ 0x10042c, 0x184 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
@@ -47,8 +47,8 @@ LAB_00100436:
     else {
       temp_v3 = 0;
       while (((temp_v0 = (*(romwright_code *)param_1[3])(param_1), (int)temp_v0 >= 0x20 && (temp_v0 < 0x31)) &&
-             (*(unsigned char *)(temp_v0 + 0x417a48) != 0))) {
-        temp_v3 = temp_v3 | *(unsigned char *)(temp_v0 + 0x417a48);
+             (*(unsigned char *)(temp_v0 + 0x417e00) != 0))) {
+        temp_v3 = temp_v3 | *(unsigned char *)(temp_v0 + 0x417e00);
       }
       if ((int)(temp_v3 << 0x1e) < 0) {
         temp_v3 = temp_v3 & 0xfffffffb;

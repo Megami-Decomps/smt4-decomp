@@ -1,0 +1,137 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00151050` (_code @ 0x151050, 0x288 bytes) from smt4_v1.2.0.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+/* stack frame of param_1: 1 slot(s), 4 byte(s) */
+typedef struct {
+    unsigned int sp20; /* 0x20: local_20 */
+} param_1_stack;
+
+/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
+/* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
+extern int FUN_00153254(void);
+extern int FUN_001532a0(void);
+/* Supplied declaration required: FUN_00157acc. */
+/* Supplied declaration required: FUN_002a3178. */
+/* Supplied declaration required: FUN_002b4cd4. */
+extern unsigned int FUN_002baf30(void);
+/* Supplied declaration required: FUN_002bcc54. */
+
+
+void FUN_00151050(int param_1)
+
+{
+/* irregular: 1 goto(s); irregular input(s): in_fpscr; 6 native warning(s); review required */
+  unsigned char temp_v0;
+  unsigned int temp_v1;
+  unsigned char temp_v2;
+  int temp_v3;
+  int temp_v4;
+  unsigned int temp_v5;
+  int temp_v6;
+  int temp_v7;
+  unsigned int temp_v8;
+  unsigned int in_fpscr;
+  unsigned int temp_v9;
+  float temp_v10;
+  float temp_v11;
+  float temp_v12;
+  unsigned long long temp_v13;
+  
+  temp_v8 = 0;
+  temp_v13 = 0x3f80000000000000;
+  do {
+    temp_v7 = param_1 + temp_v8 * 0x10;
+    temp_v3 = *(int *)(temp_v7 + 0x50);
+    temp_v0 = temp_v3 < *(int *)(temp_v7 + 0x4c);
+    if (temp_v0) {
+      *(int *)(temp_v7 + 0x50) = temp_v3 + 1;
+    }
+    if (*(int *)(temp_v7 + 0x30) >= *(int *)(temp_v7 + 0x2c)) {
+      if (temp_v0) goto LAB_001510cc;
+    }
+    else {
+      temp_v3 = *(int *)(temp_v7 + 0x30) + 1;
+      *(int *)(temp_v7 + 0x30) = temp_v3;
+      if (*(int *)(temp_v7 + 0x2c) <= temp_v3) {
+        FUN_002b4cd4(param_1,temp_v8 & 0xff);
+      }
+LAB_001510cc:
+      if (*(int *)(temp_v7 + 0x50) >= *(int *)(temp_v7 + 0x4c)) {
+        temp_v10 = *(float *)(temp_v7 + 0x48);
+      }
+      else {
+        temp_v11 = (float)VectorSignedToFloat(*(int *)(temp_v7 + 0x50),(unsigned char)(in_fpscr >> 0x16) & 3);
+        temp_v10 = (float)VectorSignedToFloat(*(int *)(temp_v7 + 0x4c),(unsigned char)(in_fpscr >> 0x16) & 3);
+        temp_v10 = ((*(float *)(temp_v7 + 0x48) - *(float *)(temp_v7 + 0x44)) * temp_v11) / temp_v10 +
+                 *(float *)(temp_v7 + 0x44);
+      }
+      temp_v11 = (float)((unsigned long long)temp_v13 >> 0x20);
+      temp_v9 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v10 < temp_v11) << 0x1f) |
+               ((unsigned int)(temp_v10 == temp_v11) << 0x1e);
+      temp_v2 = (unsigned char)(temp_v9 >> 0x18);
+      if ((unsigned char)((temp_v2 >> 6) & 1) || (unsigned char)(temp_v2 >> 7) != (NAN(temp_v10) || NAN(temp_v11))) {
+        temp_v9 = in_fpscr & 0xfffffff;
+      }
+      if (*(int *)(temp_v7 + 0x30) >= *(int *)(temp_v7 + 0x2c)) {
+        temp_v10 = *(float *)(temp_v7 + 0x28);
+      }
+      else {
+        temp_v12 = (float)VectorSignedToFloat(*(int *)(temp_v7 + 0x30),(unsigned char)(temp_v9 >> 0x16) & 3);
+        temp_v10 = (float)VectorSignedToFloat(*(int *)(temp_v7 + 0x2c),(unsigned char)(temp_v9 >> 0x16) & 3);
+        temp_v10 = ((*(float *)(temp_v7 + 0x28) - *(float *)(temp_v7 + 0x24)) * temp_v12) / temp_v10 +
+                 *(float *)(temp_v7 + 0x24);
+      }
+      temp_v1 = (temp_v9 & 0xfffffff) | ((unsigned int)(temp_v10 < temp_v11) << 0x1f) |
+              ((unsigned int)(temp_v10 == temp_v11) << 0x1e);
+      in_fpscr = temp_v1 | ((unsigned int)(NAN(temp_v10) || NAN(temp_v11)) << 0x1c);
+      temp_v2 = (unsigned char)(temp_v1 >> 0x18);
+      if ((unsigned char)((temp_v2 >> 6) & 1) || temp_v2 >> 7 != ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
+        in_fpscr = temp_v9 & 0xfffffff;
+      }
+      FUN_002a3178((int)(char)temp_v8);
+    }
+    temp_v3 = 0;
+    do {
+      temp_v6 = temp_v7 + temp_v3 * 8;
+      if ((*(int *)(temp_v6 + 0x2a0) != 0) && (*(char *)(temp_v6 + 0x2a4) == '\x02')) {
+        if (temp_v3 != 0) {
+          if (temp_v3 == 1) {
+            temp_v4 = FUN_001532a0();
+            if (temp_v4 == 0) {
+              *(int *)(temp_v6 + 0x2a0) = 0;
+              *(unsigned char *)(temp_v6 + 0x2a4) = 0;
+            }
+          }
+        }
+        else {
+          temp_v4 = FUN_00153254();
+          if (temp_v4 == 0) {
+            *(int *)(temp_v6 + 0x2a0) = 0;
+            *(unsigned char *)(temp_v6 + 0x2a4) = 0;
+          }
+        }
+      }
+      temp_v3 = temp_v3 + 1;
+    } while (temp_v3 < 2);
+    temp_v8 = temp_v8 + 1;
+    if ((int)temp_v8 >= 2) {
+      if (*(int *)(param_1 + 0x10) < *(int *)(param_1 + 0xc)) {
+        *(int *)(param_1 + 0x10) = *(int *)(param_1 + 0x10) + 1;
+        temp_v5 = FUN_002baf30();
+        FUN_00157acc(temp_v5,0x40);
+      }
+      if (*(int *)(param_1 + 0x20) < *(int *)(param_1 + 0x1c)) {
+        *(int *)(param_1 + 0x20) = *(int *)(param_1 + 0x20) + 1;
+        temp_v5 = FUN_002baf30();
+        FUN_00157acc(temp_v5,0x40);
+      }
+      if (*(int *)(param_1 + 0x20) < *(int *)(param_1 + 0x1c)) {
+        VectorSignedToFloat(*(int *)(param_1 + 0x20),(unsigned char)(in_fpscr >> 0x16) & 3);
+        VectorSignedToFloat(*(int *)(param_1 + 0x1c),(unsigned char)(in_fpscr >> 0x16) & 3);
+      }
+      FUN_002bcc54();
+      return;
+    }
+  } while( 1 );
+}

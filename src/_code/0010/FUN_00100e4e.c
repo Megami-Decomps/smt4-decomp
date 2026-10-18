@@ -1,4 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00100e4e` (_code @ 0x100e4e, 0x7c bytes) from smt4.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00100e4e` (_code @ 0x100e4e, 0x7c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
@@ -11,8 +11,8 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: FUN_001010f2. */
-extern int *FUN_002c6840(void);
-extern int *FUN_002c6c40(void);
+extern int *FUN_002c6644(void);
+extern int *FUN_002c6a50(void);
 
 
 unsigned char * FUN_00100e4e(unsigned char *param_1,unsigned int *param_2,unsigned int param_3)
@@ -29,7 +29,7 @@ unsigned char * FUN_00100e4e(unsigned char *param_1,unsigned int *param_2,unsign
   int temp_v2;
   
   temp_v2 = 0;
-  piVar1 = (int *)FUN_002c6840();
+  piVar1 = (int *)FUN_002c6644();
   temp_v0 = *piVar1;
   pbVar5 = param_1;
   do {
@@ -37,7 +37,7 @@ unsigned char * FUN_00100e4e(unsigned char *param_1,unsigned int *param_2,unsign
     temp_v1 = (unsigned int)*pbVar4;
     pbVar5 = pbVar4 + 1;
     if (temp_v1 == 0) break;
-    piVar3 = (int *)FUN_002c6c40();
+    piVar3 = (int *)FUN_002c6a50();
   } while ((*(unsigned char *)(*piVar3 + temp_v1) & 1) != 0);
   pbVar6 = pbVar5;
   if ((temp_v1 != 0x2b) && (pbVar6 = pbVar4, temp_v1 == 0x2d)) {

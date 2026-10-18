@@ -11,14 +11,19 @@ relocate back to retail; otherwise they are retail bytes. What no object
 covers (padding, strings between functions, functions the decompiler refused,
 .rodata, .data) is retail bytes. Symbols the objects reference and nothing
 defines (`DAT_<addr>`, functions linked as bytes) are defined at their
-addresses. The linked image is compared with the decompressed `.code`.
+addresses. The linked image is compared with the decompressed `.code` of the
+dump (`image.orig` in config/project.json; tools/n3ds.py reads it).
 
-    python3 tools/relink.py [--matched] [--full] [--exclude FUN_a,FUN_b] [--ld PATH] [--objcopy PATH]
+    python3 tools/relink.py [--matched] [--full] [--exclude FUN_a,FUN_b] [--module ID] [--ld PATH] [--objcopy PATH]
 
-GNU ld/objcopy come from build/tools/binutils-arm-none-eabi/*/bin (Arm GNU
-Toolchain 13.3.rel1; the Windows build is
-arm-gnu-toolchain-13.3.rel1-mingw-w64-i686-arm-none-eabi.zip, sha256
-e46fda043c0ce83582bc8db4b3ef85f77f4beb7333344c2f4193c17e1167a095), then PATH.
+`--matched` reads build/report.json (`python3 build.py report`). The objects it
+relinks come from `python3 build.py split` (orig/target) and `python3 build.py`
+(build/obj).
+
+GNU ld/objcopy come from build/tools/binutils-arm-none-eabi/*/bin (`python3
+build.py fetch` installs Arm GNU Toolchain 13.3.rel1's as, ld, nm, objcopy,
+objdump and readelf on Windows; elsewhere it extracts the whole toolchain), then
+PATH (any arm-none-eabi binutils).
 
 Standard library only.
 """
@@ -36,7 +41,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from assign_tus import load_code  # noqa: E402
+import n3ds  # noqa: E402
+import split  # noqa: E402
 
 OUT = ROOT / "build" / "relink"
 
@@ -49,7 +55,7 @@ def find_tool(explicit, name):
     for candidate in candidates:
         if candidate and Path(candidate).exists():
             return candidate
-    raise SystemExit(f"arm-none-eabi-{name} not found: pass --{name} PATH")
+    raise SystemExit(f"arm-none-eabi-{name} not found: run `python3 build.py fetch`, put arm-none-eabi binutils on PATH, or pass --{name} PATH")
 
 
 def elf_sections(path):
@@ -121,7 +127,8 @@ def matched_functions():
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
-    parser.add_argument("--image", default=str(ROOT / "orig" / "smt4.cxi"))
+    parser.add_argument("--image", help="the dump (default: image.orig of config/project.json)")
+    parser.add_argument("--module", help="module id of config/modules.json (default: the first)")
     parser.add_argument("--ld")
     parser.add_argument("--objcopy")
     parser.add_argument("--matched", action="store_true", help="link matched functions from build/obj/")
@@ -133,22 +140,25 @@ def main():
     ld, objcopy = find_tool(args.ld, "ld"), find_tool(args.objcopy, "objcopy")
     started = time.time()
 
-    base, code, segments = load_code(args.image)
-    project = json.loads((ROOT / "config" / "project.json").read_text())
-    names, thumb = {}, set()
-    for line in (ROOT / "config" / "symbols.txt").read_text().splitlines():
-        match = re.match(r"(\S+) = \S+:0x([0-9a-fA-F]+); // type:function.*?(mode:thumb)?$", line)
-        if match:
-            names[match[1]] = int(match[2], 16)
-            if match[3]:
-                thumb.add(int(match[2], 16))
+    project = json.loads((ROOT / "config" / "project.json").read_text(encoding="utf-8"))
+    modules = json.loads((ROOT / "config" / "modules.json").read_text(encoding="utf-8"))["modules"]
+    module = next((m for m in modules if args.module in (None, m["id"])), None)
+    if module is None:
+        raise SystemExit(f"no module {args.module!r}: config/modules.json has {', '.join(m['id'] for m in modules)}")
+    image = Path(args.image) if args.image else ROOT / project["image"]["orig"]
+    if not image.exists():
+        raise SystemExit(f"{image} not found: put your decrypted dump there (sha256 {project['image']['sha256']})")
+    base, code, segments = n3ds.load_code(image, module["id"])
+    functions = split.read_symbols(ROOT / module["symbols"])
+    units = [unit for unit in project["units"] if unit.get("module", module["id"]) == module["id"]]
+    names = {name: address for address, (name, _size, _thumb) in functions.items()}
+    thumb = {address for address, (_name, _size, is_thumb) in functions.items() if is_thumb}
     # An ARM `B`/`BL` cannot change the instruction set: its target is ARM code,
     # whatever mode the analysis decoded that function in. Such a function's
     # object says Thumb (and the linker would bridge to it with a veneer), so it
     # links as its raw bytes under an ARM symbol instead.
     entered_by_arm = set()
-    arm = sorted((address, size) for unit in project["units"]
-                 for address, size in [(int(unit["address"], 16), unit["size"])] if address not in thumb)
+    arm = sorted((address, size) for address, (_name, size, is_thumb) in functions.items() if not is_thumb)
     for entry, size in arm:
         for at in range(entry, entry + size - 3, 4):
             word = struct.unpack_from("<I", code, at - base)[0]
@@ -164,18 +174,23 @@ def main():
     # else only the matched ones (the rest are retail bytes either way).
     placed = []
     swapped, oversized = 0, []
-    for unit in project["units"]:
+    for unit in units:
         address = int(unit["address"], 16)
         if "target" not in unit or address in misread:
             continue
         target = unit["target"]
+        if not (ROOT / target).exists():
+            raise SystemExit(f"{target} not found: run `python3 build.py split` first")
         retail_size = elf_sections(ROOT / target)[".text"][0]
+        # What the object defines: tools/split.py names it after config/symbols.txt.
+        function = functions[address][0] if address in functions else unit["function"]
         if unit["function"] in matched and (ROOT / unit["object"]).exists():
             # objdiff compares the function symbol; the image needs the whole
             # section to be the retail size (armcc pads a Thumb section to 4).
             size = elf_sections(ROOT / unit["object"])[".text"][0]
             if size == retail_size:
                 target = unit["object"]
+                function = unit["function"]
                 swapped += 1
             else:
                 oversized.append((unit["function"], size, retail_size))
@@ -187,7 +202,7 @@ def main():
         stray = [name for name, (size, flags) in sections.items() if flags & 0x2 and size and name != ".text"]
         if stray:
             raise SystemExit(f"{target}: allocated sections besides .text ({', '.join(stray)}) have no retail address")
-        placed.append((address, sections[".text"][0], target, unit["function"]))
+        placed.append((address, sections[".text"][0], target, function))
     placed.sort()
     text_lo, text_hi = segments["text"][0], segments["rodata"][0]
 
@@ -243,10 +258,11 @@ def main():
     inputs.append(symbols_object.relative_to(ROOT).as_posix())
     dat = addressed
 
+    entry_name = functions[text_lo][0] if text_lo in functions else None
     script = OUT / "link.ld"
     script.write_text(
         "/* Generated by tools/relink.py: every function at its retail address. */\n"
-        "ENTRY(entry)\n"
+        + (f"ENTRY({entry_name})\n" if entry_name else "")
         + "".join(f"INPUT(\"{path}\")\n" for path in inputs)
         + "\nSECTIONS\n{\n"
         # Every input is placed by address; SUBALIGN keeps an object's own section
@@ -258,7 +274,7 @@ def main():
         + "\n  /DISCARD/ : { *(.comment) *(.debug_frame) *(.arm_vfe_header) }\n}\n"
     )
     prepared = time.time()
-    elf = OUT / "smt4.elf"
+    elf = OUT / f"{project['name']}.elf"
     done = subprocess.run([ld, "-T", str(script.relative_to(ROOT).as_posix()), "-o", str(elf), "-Map", str(OUT / "link.map"),
                            "--use-blx", "--no-warn-rwx-segments", "-nostdlib"],
                           cwd=ROOT, capture_output=True, text=True)

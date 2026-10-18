@@ -1,0 +1,40 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b86bc` (_code @ 0x2b86bc, 0x80 bytes) from smt4_v1.2.0.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+extern unsigned int *DAT_0044db8c; /* 0x44db8c */
+
+/* Supplied declaration required: FUN_002a6fb8. */
+/* Supplied declaration required: FUN_002b2368. */
+extern int FUN_002b2378(unsigned int);
+/* Supplied declaration required: FUN_002c415c. */
+
+
+unsigned int FUN_002b86bc(void)
+
+{
+/* irregular: 3 native warning(s); review required */
+  unsigned int *puVar1;
+  unsigned int *puVar2;
+  int temp_v0;
+  
+  puVar1 = DAT_0044db8c;
+  if (DAT_0044db8c != (unsigned int *)0x0) {
+    temp_v0 = FUN_002b2378(*DAT_0044db8c);
+    puVar2 = DAT_0044db8c;
+    if ((temp_v0 != 0) || (*(char *)(puVar1 + 6) == '\0')) {
+      return 1;
+    }
+    if (DAT_0044db8c != (unsigned int *)0x0) {
+      *(unsigned char *)(DAT_0044db8c + 6) = 1;
+      if (puVar2[7] != 0) {
+        FUN_002a6fb8();
+        FUN_002b2368(puVar2[7]);
+        puVar2[7] = 0;
+      }
+      FUN_002c415c(DAT_0044db8c);
+      DAT_0044db8c = (unsigned int *)0x0;
+    }
+  }
+  return 0;
+}

@@ -1,13 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00235df8` (_code @ 0x235df8, 0xc bytes) from smt4.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00235df8` (_code @ 0x235df8, 0x38 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
-extern unsigned char DAT_00421960; /* 0x421960 */
+/* stack frame of param_2: 1 slot(s), 2 byte(s) */
+typedef struct {
+    unsigned short sp4; /* 0x4: local_4 */
+} param_2_stack;
 
 
-void FUN_00235df8(unsigned int *param_1)
+unsigned int FUN_00235df8(int param_1,unsigned int param_2)
 
 {
-  *param_1 = (unsigned int)&DAT_00421960;
-  return;
+  unsigned int temp_v0;
+  
+  if ((param_2 & 0xffff & ~*(unsigned int *)(*(int *)(param_1 + 0x1c) + 0x188)) != 0) {
+    temp_v0 = *(unsigned int *)(param_1 + 8);
+  }
+  else if (*(int *)(param_1 + 0x24) >= 1) {
+    temp_v0 = **(unsigned int **)(param_1 + 0x10);
+  }
+  else {
+    temp_v0 = 0;
+  }
+  return temp_v0;
 }

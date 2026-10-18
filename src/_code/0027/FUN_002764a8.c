@@ -1,46 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002764a8` (_code @ 0x2764a8, 0x28 bytes) from smt4.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002764a8` (_code @ 0x2764a8, 0x84 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
-extern int DAT_0043e128; /* 0x43e128 */
-extern int DAT_00447a78; /* 0x447a78 */
-extern int *DAT_00447a98; /* 0x447a98 */
+/* stack frame of param_1: 2 slot(s), 6 byte(s) */
+typedef struct {
+    unsigned short sp1BC; /* 0x1bc: local_1bc */
+    unsigned int sp1C0; /* 0x1c0: local_1c0 */
+} param_1_stack;
+
+extern unsigned char LAB_0038e29c; /* 0x38e29c */
+extern unsigned int DAT_00432fc8; /* 0x432fc8 */
+extern int DAT_00433158; /* 0x433158 */
+
+extern int FUN_0029022c(void);
+extern unsigned int FUN_002903f0(void);
+extern int FUN_002a1534(unsigned int);
+/* Supplied declaration required: FUN_002b46f8. */
 
 
-/* WARNING: Removing unreachable block (ram,0x002bdaf4) */
-
-void FUN_002764a8(void)
+unsigned int FUN_002764a8(int param_1)
 
 {
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
-  int *piVar2;
-  int temp_v1;
+  unsigned int temp_v1;
+  unsigned short *puVar3;
+  unsigned short temp_v2 [218];
   
-  piVar2 = DAT_00447a98;
-  if (*DAT_00447a98 != 0) {
-    *DAT_00447a98 = 0;
-    piVar2[1] = 0;
+  temp_v0 = FUN_0029022c();
+  if ((temp_v0 != 0) && (temp_v1 = FUN_002903f0(), temp_v1 >= 0x15e)) {
+    temp_v2[0] = (unsigned short)temp_v1;
+    puVar3 = temp_v2;
+    FUN_002b46f8(puVar3,*(unsigned int *)(param_1 + 0x388),*(unsigned int *)(DAT_00433158 + 900),0x1b4,
+                 &LAB_0038e29c);
+    if ((puVar3 == (unsigned short *)0x0) || (temp_v0 = FUN_002a1534(DAT_00432fc8), temp_v0 == 0)) {
+      return 1;
+    }
   }
-  temp_v0 = DAT_00447a78;
-  if (*(char *)(DAT_00447a78 + 0x18) == '\0') {
-    return;
-  }
-  *(unsigned char *)(DAT_00447a78 + 0x18) = 0;
-  *(unsigned int *)(temp_v0 + 0x1c) = 0;
-  temp_v0 = DAT_0043e128;
-  *(unsigned int *)(DAT_0043e128 + 8) = 5;
-  *(unsigned int *)(temp_v0 + 0x10) = 0x1e;
-  temp_v1 = *(int *)(temp_v0 + 0x90);
-  if (temp_v1 == 0) {
-    return;
-  }
-  *(unsigned short *)(temp_v0 + 0x94) = 1;
-  *(unsigned short *)(temp_v0 + 0x96) = 0;
-  *(unsigned char *)(temp_v0 + 0xca) = 0;
-  *(unsigned char *)(temp_v0 + 0xce) = 0;
-  *(unsigned char *)(temp_v0 + 0x98) = 0;
-  *(int *)(temp_v0 + 0x50) = (int)*(short *)(temp_v1 + 0xc) << 0xc;
-  *(int *)(temp_v0 + 0x54) = (int)*(short *)(temp_v1 + 0xe) << 0xc;
-  return;
+  return 0;
 }
