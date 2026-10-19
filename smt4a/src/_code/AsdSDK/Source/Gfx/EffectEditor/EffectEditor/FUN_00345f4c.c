@@ -193,7 +193,7 @@ LAB_00346144:
           ((unsigned int)(DAT_0063533c == DAT_00635340) << 0x1e);
   temp_v0 = (unsigned char)(temp_v5 >> 0x18);
   temp_v8 = DAT_00635340;
-  if (((!(unsigned char)((temp_v0 >> 6) & 1) && (unsigned char)(temp_v0 >> 7) == (NAN(DAT_0063533c) || NAN(DAT_00635340)))
+  if (((!(unsigned char)((temp_v0 >> 6) & 1) && (unsigned char)(temp_v0 >> 7) == ((DAT_0063533c != DAT_0063533c) || (DAT_00635340 != DAT_00635340)))
       && (temp_v8 = DAT_0063533c,
          (float *)*(unsigned int **)(DAT_0059ee0c + DAT_0059ee04 * 0x18 + 8) != &DAT_0063533c)) &&
      ((DAT_0059dc38 != 1 || (DAT_0059dc34 != 1)))) {

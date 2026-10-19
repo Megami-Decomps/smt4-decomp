@@ -13,13 +13,13 @@ extern int FUN_00351ef0(int, unsigned int *);
 /* Supplied declaration required: FUN_00352008. */
 /* Supplied declaration required: FUN_00359f90. */
 extern int FUN_0035adf0(unsigned int);
-/* Supplied declaration required: nn_cfg_CTR_Initialize. */
+extern void nn_cfg_CTR_Initialize(void);
 
 
 int FUN_00351c08(int param_1,unsigned int *param_2,unsigned int param_3,unsigned int param_4)
 
 {
-/* irregular: 6 native warning(s); review required */
+/* irregular: 5 native warning(s); review required */
   int temp_v0;
   unsigned int temp_v1 [2];
   

@@ -13,17 +13,16 @@ struct fn_00513bdc_arg0 {
 
 extern unsigned char DAT_0062d6f8; /* 0x62d6f8 */
 
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 unsigned int FUN_00513bdc(fn_00513bdc_arg0 *param_1)
 
 {
-/* irregular: 2 native warning(s); review required */
-  nn_os_CriticalSection_Enter(&DAT_0062d6f8);
+  nn_os_CriticalSection_Enter((unsigned int)&DAT_0062d6f8);
   if (param_1->field_0x38 == 0) {
-    nn_os_CriticalSection_Leave(&DAT_0062d6f8);
+    nn_os_CriticalSection_Leave((unsigned int)&DAT_0062d6f8);
     return 0;
   }
   param_1->field_0x34 = param_1->field_0x34 + 1;
@@ -31,6 +30,6 @@ unsigned int FUN_00513bdc(fn_00513bdc_arg0 *param_1)
     param_1->field_0x34 = 0;
   }
   param_1->field_0x38 = param_1->field_0x38 - 1;
-  nn_os_CriticalSection_Leave(&DAT_0062d6f8);
+  nn_os_CriticalSection_Leave((unsigned int)&DAT_0062d6f8);
   return 1;
 }

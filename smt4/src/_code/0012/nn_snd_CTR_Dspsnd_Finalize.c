@@ -17,24 +17,24 @@ extern unsigned char DAT_004a95c0; /* 0x4a95c0 */
 /* Supplied declaration required: FUN_0013a294. */
 /* Supplied declaration required: FUN_0013a4c0. */
 /* Supplied declaration required: FUN_002bb150. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 /* Supplied declaration required: rt_memcpy. */
 
 
-void nn_snd_CTR_Dspsnd_Finalize(int *param_1,int param_2)
+void nn_snd_CTR_Dspsnd_Finalize(int *param_1,unsigned char param_2)
 
 {
-/* irregular: 9 native warning(s); review required */
+/* irregular: 7 native warning(s); review required */
   unsigned short temp_v0 [2];
   short temp_v1 [2];
   char temp_v2 [8];
   
-  if (param_2 == 0) {
-    temp_v0[0] = 1;
+  if (param_2) {
+    temp_v0[0] = 3;
   }
   else {
-    temp_v0[0] = 3;
+    temp_v0[0] = 1;
   }
   FUN_0013a1f4(2,temp_v0,4);
   while( 1 ) {
@@ -46,10 +46,10 @@ void nn_snd_CTR_Dspsnd_Finalize(int *param_1,int param_2)
     if (temp_v1[0] == 1) break;
     FUN_002bb150(&DAT_004a95c0,0);
   }
-  if (param_2 != 0) {
+  if (param_2) {
     rt_memcpy(param_1 + 6,param_1[0x42a],0x1080);
   }
-  nn_os_CriticalSection_Enter(param_1 + 2);
+  nn_os_CriticalSection_Enter((unsigned int)(param_1 + 2));
   *(unsigned char *)(param_1 + 0x4c6) = 0;
   if (*param_1 != 0) {
     software_interrupt(0x23);
@@ -58,7 +58,7 @@ void nn_snd_CTR_Dspsnd_Finalize(int *param_1,int param_2)
   FUN_0013a294(*param_1,2);
   software_interrupt(0x23);
   param_1[1] = 0;
-  nn_os_CriticalSection_Leave(param_1 + 2);
+  nn_os_CriticalSection_Leave((unsigned int)(param_1 + 2));
   param_1[4] = -1;
   return;
 }

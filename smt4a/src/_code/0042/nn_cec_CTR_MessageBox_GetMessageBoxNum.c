@@ -13,32 +13,32 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_002e6354. */
-/* Supplied declaration required: nn_cec_CTR_Base64Str2CecTitleId. */
+extern unsigned int nn_cec_CTR_Base64Str2CecTitleId(unsigned char *);
 /* Supplied declaration required: nn_cec_CTR_MessageBox_ReadMessageBoxList. */
 
 
 void nn_cec_CTR_MessageBox_GetMessageBoxNum(int *param_1)
 
 {
-/* irregular: 3 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   int *piVar1;
   unsigned int temp_v0;
-  int temp_v1;
-  unsigned char temp_v2 [100];
+  unsigned int temp_v1;
+  int temp_v2;
+  unsigned char temp_v3 [100];
   
   piVar1 = param_1;
   nn_cec_CTR_MessageBox_ReadMessageBoxList();
-  if ((piVar1 != (int *)0x0) && (temp_v0 = 0, param_1[6] != 0)) {
+  if ((piVar1 != (int *)0x0) && (temp_v1 = 0, param_1[6] != 0)) {
     do {
-      piVar1 = param_1 + temp_v0 * 4 + 7;
-      nn_cec_CTR_Base64Str2CecTitleId();
-      if (piVar1 != (int *)0x0) {
-        temp_v1 = 0;
-        FUN_002e6354(temp_v2,0x60);
-        (**(romwright_code **)(*param_1 + 0x34))(param_1,temp_v2,0x60,&temp_v1,piVar1,2,0x12);
+      temp_v0 = nn_cec_CTR_Base64Str2CecTitleId((unsigned char *)(param_1 + temp_v1 * 4 + 7));
+      if (temp_v0 != 0) {
+        temp_v2 = 0;
+        FUN_002e6354(temp_v3,0x60);
+        (**(romwright_code **)(*param_1 + 0x34))(param_1,temp_v3,0x60,&temp_v2,temp_v0,2,0x12);
       }
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < (unsigned int)param_1[6]);
+      temp_v1 = temp_v1 + 1;
+    } while (temp_v1 < (unsigned int)param_1[6]);
   }
   return;
 }

@@ -12,13 +12,13 @@ extern unsigned int DAT_00594b5c; /* 0x594b5c */
 #endif
 /* Supplied declaration required: FUN_001a0eb0. */
 /* Supplied declaration required: FUN_004311c0. */
-/* Supplied declaration required: nn_cfg_CTR_Initialize. */
+extern void nn_cfg_CTR_Initialize(void);
 
 
 unsigned long long FUN_0012237c(void)
 
 {
-/* irregular: 4 native warning(s); review required */
+/* irregular: 3 native warning(s); review required */
   unsigned int temp_v0;
   unsigned int temp_v1;
   

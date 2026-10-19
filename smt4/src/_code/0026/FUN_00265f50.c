@@ -145,7 +145,7 @@ void FUN_00265f50(int param_1)
   }
   else {
     temp_v5 = *(float *)(DAT_004474f4 + 0x9c);
-    if (NAN(temp_v5) || NAN(temp_v9)) {
+    if ((temp_v5 != temp_v5) || (temp_v9 != temp_v9)) {
       temp_v6 = *(float *)(DAT_004474f4 + 0xa0) + 10.0f;
       *(float *)(DAT_004474f4 + 0xa0) = temp_v6;
       if ((int)temp_v6 >= 0x42c80001) {

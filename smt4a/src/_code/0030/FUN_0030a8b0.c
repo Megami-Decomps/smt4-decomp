@@ -12,13 +12,12 @@ extern char *FUN_002ed1a0(int);
 extern int FUN_0030a9b6(int, unsigned int *, int);
 /* Supplied declaration required: FUN_0030a9e6. */
 /* Supplied declaration required: FUN_0030aa18. */
-/* Supplied declaration required: while. */
 
 
 void FUN_0030a8b0(unsigned int *param_1,int param_2,int param_3,int param_4,unsigned int *param_5)
 
 {
-/* irregular: 3 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   char *pcVar1;
   int temp_v0;
   char *pcVar3;

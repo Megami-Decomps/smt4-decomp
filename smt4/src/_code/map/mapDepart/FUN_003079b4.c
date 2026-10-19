@@ -327,7 +327,7 @@ void FUN_003079b4(void)
     temp_v24 = (float)DAT_004474f4[0xa4];
     temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v24 < 0.0f) << 0x1f) |
             ((unsigned int)(temp_v24 == 0.0f) << 0x1e);
-    in_fpscr = temp_v0 | ((unsigned int)NAN(temp_v24) << 0x1c);
+    in_fpscr = temp_v0 | ((unsigned int)(temp_v24 != temp_v24) << 0x1c);
     temp_v2 = (unsigned char)(temp_v0 >> 0x18);
     piVar7 = DAT_004474f4;
     if ((unsigned char)((temp_v2 >> 6) & 1) || temp_v2 >> 7 != ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
@@ -370,7 +370,7 @@ void FUN_003079b4(void)
     DAT_004474f4[0xa4] = (int)temp_v24;
     temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v24 < 0.0f) << 0x1f) |
             ((unsigned int)(temp_v24 == 0.0f) << 0x1e);
-    in_fpscr = temp_v0 | ((unsigned int)NAN(temp_v24) << 0x1c);
+    in_fpscr = temp_v0 | ((unsigned int)(temp_v24 != temp_v24) << 0x1c);
     temp_v2 = (unsigned char)(temp_v0 >> 0x18);
     if ((unsigned char)((temp_v2 >> 6) & 1) || temp_v2 >> 7 != ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
       temp_v24 = 0.0f;

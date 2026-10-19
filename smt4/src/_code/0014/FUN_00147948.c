@@ -47,8 +47,8 @@ void FUN_00147948(unsigned int param_1,unsigned int param_2,int param_3,unsigned
     temp_v4 = DAT_00472a8c[4];
     uStack_2c = DAT_00472a8c[5];
     temp_v5 = DAT_00472a8c[7];
-    temp_v1._1_3_ = (undefined3)((unsigned int)*DAT_00472a8c >> 8);
-    temp_v1 = romwright_piece_3_1(temp_v1._1_3_,5);
+    temp_v1 = (((unsigned int)(temp_v1) & 0xffU) | (((unsigned int)(((unsigned int)((unsigned int)*DAT_00472a8c >> 8) & 0xffffffU)) & 0xffffffU) << 8));
+    temp_v1 = romwright_piece_3_1((((unsigned int)(temp_v1) >> 8) & 0xffffffU),5);
     temp_v1 = temp_v1 & 0xffffff;
     temp_v2 = param_1;
     uStack_38 = param_2;
@@ -59,10 +59,10 @@ void FUN_00147948(unsigned int param_1,unsigned int param_2,int param_3,unsigned
     temp_v4 = DAT_00472a8c[4];
     uStack_2c = DAT_00472a8c[5];
     uStack_28 = DAT_00472a8c[6];
-    temp_v1._1_3_ = (undefined3)((unsigned int)*DAT_00472a8c >> 8);
-    temp_v1 = romwright_piece_3_1(temp_v1._1_3_,1);
+    temp_v1 = (((unsigned int)(temp_v1) & 0xffU) | (((unsigned int)(((unsigned int)((unsigned int)*DAT_00472a8c >> 8) & 0xffffffU)) & 0xffffffU) << 8));
+    temp_v1 = romwright_piece_3_1((((unsigned int)(temp_v1) >> 8) & 0xffffffU),1);
     temp_v5 = 0;
-    temp_v1 = romwright_piece_1_3(DAT_00472a88,(undefined3)temp_v1);
+    temp_v1 = romwright_piece_1_3(DAT_00472a88,((unsigned int)temp_v1 & 0xffffffU));
     temp_v2 = param_1;
     uStack_38 = param_2;
     temp_v3 = param_4;

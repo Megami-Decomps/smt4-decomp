@@ -238,12 +238,12 @@ LAB_0039f1cc:
                       temp_v14 = (float)VectorSignedToFloat((int)(short)puVar11[3],
                                                           (unsigned char)(in_fpscr >> 0x16) & 3);
                       temp_v10 = temp_v0 | ((unsigned int)(temp_v14 < temp_v18) << 0x1f);
-                      in_fpscr = temp_v10 | ((unsigned int)(NAN(temp_v14) || NAN(temp_v18)) << 0x1c);
+                      in_fpscr = temp_v10 | ((unsigned int)((temp_v14 != temp_v14) || (temp_v18 != temp_v18)) << 0x1c);
                       if ((unsigned char)(temp_v10 >> 0x1f) == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
                         temp_v14 = (float)VectorSignedToFloat((int)*(short *)((int)puVar11 + 0xe),
                                                             (unsigned char)(in_fpscr >> 0x16) & 3);
                         temp_v0 = temp_v0 | ((unsigned int)(temp_v14 < temp_v17) << 0x1f);
-                        in_fpscr = temp_v0 | ((unsigned int)(NAN(temp_v14) || NAN(temp_v17)) << 0x1c);
+                        in_fpscr = temp_v0 | ((unsigned int)((temp_v14 != temp_v14) || (temp_v17 != temp_v17)) << 0x1c);
                         if ((unsigned char)(temp_v0 >> 0x1f) == ((unsigned char)(in_fpscr >> 0x1c) & 1)) break;
                       }
                     }

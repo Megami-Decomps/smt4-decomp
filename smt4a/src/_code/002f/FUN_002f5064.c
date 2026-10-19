@@ -147,10 +147,10 @@ void FUN_002f5064(int param_1)
           temp_v10 = temp_v10 + 1;
         } while (temp_v10 < 8);
         FUN_0010063a(temp_v11 + 0x4564,8,2,&LAB_00321c94);
-        *temp_v12 = 1;
+        *(int *)temp_v12 = 1;
       }
       else {
-        *temp_v12 = 0;
+        *(int *)temp_v12 = 0;
       }
       FUN_00336de4(*(unsigned short *)(temp_v2 + 0x62),0);
       FUN_0035fd38(1);

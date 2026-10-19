@@ -14,7 +14,6 @@ typedef struct {
 
 extern unsigned char DAT_004ea168; /* 0x4ea168 */
 
-/* Unsupported intrinsic, declaration required: while (LOAD). */
 /* Supplied declaration required: FUN_001576b4. */
 /* Supplied declaration required: FUN_00157734. */
 /* Supplied declaration required: FUN_00157804. */
@@ -66,7 +65,7 @@ extern unsigned int FUN_002bb020(void);
 void FUN_001546c0(int *param_1)
 
 {
-/* irregular: 43 native warning(s); review required */
+/* irregular: 42 native warning(s); review required */
   int temp_v0;
   unsigned int temp_v1;
   romwright_code *pcVar3;

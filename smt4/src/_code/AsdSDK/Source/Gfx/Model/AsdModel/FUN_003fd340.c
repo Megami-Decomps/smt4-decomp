@@ -20,7 +20,6 @@ typedef struct {
     unsigned int spB0; /* 0xb0: local_b0 */
 } param_9_stack;
 
-/* Unsupported intrinsic, declaration required: while (PTRADD). */
 /* Supplied declaration required: FUN_00225a14. */
 /* Supplied declaration required: FUN_002a81a8. */
 /* Supplied declaration required: FUN_002b77f4. */
@@ -36,7 +35,7 @@ void FUN_003fd340(unsigned int *param_1,unsigned int *param_2,unsigned int *para
                  unsigned int param_5,unsigned int param_6,int param_7,unsigned int param_8,unsigned int param_9)
 
 {
-/* irregular: 1 goto(s); 10 native warning(s); review required */
+/* irregular: 1 goto(s); 9 native warning(s); review required */
   char temp_v0;
   int *piVar2;
   int temp_v1;

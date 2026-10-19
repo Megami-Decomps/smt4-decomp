@@ -30,15 +30,15 @@ extern unsigned int DAT_00618520; /* 0x618520 */
 /* Supplied declaration required: FUN_001afdc4. */
 /* Supplied declaration required: FUN_002e3140. */
 /* Supplied declaration required: FUN_002e3328. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
-/* Supplied declaration required: nn_snd_CTR_Voice_SetState. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
+extern void nn_snd_CTR_Voice_SetState(unsigned int, int);
 
 
 void FUN_00422ef8(void)
 
 {
-/* irregular: 1 goto(s); 13 native warning(s); review required */
+/* irregular: 1 goto(s); 10 native warning(s); review required */
   int temp_v0;
   unsigned int temp_v1;
   int *piVar3;
@@ -46,7 +46,7 @@ void FUN_00422ef8(void)
   if (DAT_005880d4 == (int *)0x0) {
     return;
   }
-  nn_os_CriticalSection_Enter(&DAT_00618518);
+  nn_os_CriticalSection_Enter((unsigned int)&DAT_00618518);
   temp_v1 = 0;
   if (temp_v1 < DAT_005880e4) {
     do {
@@ -57,7 +57,7 @@ void FUN_00422ef8(void)
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < DAT_005880e4);
   }
-  nn_os_CriticalSection_Leave(&DAT_00618518);
+  nn_os_CriticalSection_Leave((unsigned int)&DAT_00618518);
   DAT_005880d0 = 0;
   if (DAT_005880d1 != '\0') {
     software_interrupt(0x24);
@@ -93,7 +93,7 @@ LAB_00423070:
   }
   do {
     if (temp_v1 < DAT_005880e4) {
-      nn_os_CriticalSection_Enter(&DAT_00618518);
+      nn_os_CriticalSection_Enter((unsigned int)&DAT_00618518);
       piVar3 = (int *)(DAT_005880d8 + temp_v1 * 0x70);
       if (*piVar3 != 0) {
         FUN_001afdc4();
@@ -103,7 +103,7 @@ LAB_00423070:
         (**(romwright_code **)(*DAT_005880d4 + 4))();
         piVar3[1] = 0;
       }
-      nn_os_CriticalSection_Leave(&DAT_00618518);
+      nn_os_CriticalSection_Leave((unsigned int)&DAT_00618518);
     }
     do {
       temp_v1 = temp_v1 + 1;

@@ -27,7 +27,7 @@ void FUN_002f4d64(int *param_1,fn_002f4d64_arg1 *param_2,int *param_3)
     *(int *)(*(int *)*param_3 + 4) = ((int *)*param_3)[1];
     param_2->field_0x14 = param_2->field_0x14 - 1;
     puVar1 = (unsigned int *)*param_3;
-    *puVar1 = param_2->field_0x4;
+    *puVar1 = (unsigned int)param_2->field_0x4;
     param_2->field_0x4 = puVar1;
   }
   *param_1 = (int)piVar2;

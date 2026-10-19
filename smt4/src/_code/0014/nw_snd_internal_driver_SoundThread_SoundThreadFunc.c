@@ -20,8 +20,8 @@ extern unsigned char DAT_004ea168; /* 0x4ea168 */
 /* Supplied declaration required: FUN_002baed8. */
 /* Supplied declaration required: FUN_002baf30. */
 /* Supplied declaration required: FUN_002bafb0. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 /* Supplied declaration required: nw_snd_internal_DriverCommandManager_ProcessCommand. */
 /* Supplied declaration required: nw_snd_internal_driver_ChannelManager_UpdateAllChannel. */
 /* Supplied declaration required: nw_snd_internal_driver_VoiceManager_UpdateAllVoices. */
@@ -30,7 +30,7 @@ extern unsigned char DAT_004ea168; /* 0x4ea168 */
 void nw_snd_internal_driver_SoundThread_SoundThreadFunc(int param_1)
 
 {
-/* irregular: irregular input(s): in_stack_fffffff4; 14 native warning(s); review required */
+/* irregular: irregular input(s): in_stack_fffffff4; 12 native warning(s); review required */
   unsigned int *puVar1;
   int *piVar2;
   int *piVar3;

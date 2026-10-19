@@ -15,13 +15,13 @@ extern int FUN_002ad3a4(void);
 /* Supplied declaration required: FUN_002c4040. */
 /* Supplied declaration required: FUN_002c40f8. */
 /* Supplied declaration required: FUN_002c526c. */
-/* Supplied declaration required: nn_os_Thread_FinalizeImpl. */
+extern void nn_os_Thread_FinalizeImpl(unsigned int);
 
 
 void FUN_00146ee0(void)
 
 {
-/* irregular: 6 native warning(s); review required */
+/* irregular: 5 native warning(s); review required */
   int temp_v0;
   unsigned char *puVar2;
   int uStack_20;

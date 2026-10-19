@@ -13,8 +13,6 @@ typedef struct {
 
 extern unsigned char LAB_001a2a68; /* 0x1a2a68 */
 extern unsigned int DAT_005891bc; /* 0x5891bc */
-extern unsigned int DAT_005891c8; /* 0x5891c8 */
-extern unsigned int DAT_005891cc; /* 0x5891cc */
 extern unsigned int DAT_0061a60c; /* 0x61a60c */
 extern unsigned char DAT_0061a610; /* 0x61a610 */
 extern unsigned int DAT_0061a61c; /* 0x61a61c */
@@ -26,25 +24,24 @@ extern unsigned int DAT_0061a628; /* 0x61a628 */
 /* Supplied declaration required: FUN_001a3220. */
 /* Supplied declaration required: FUN_001a3338. */
 /* Supplied declaration required: FUN_002f5020. */
-/* Supplied declaration required: nn_applet_CTR_detail_GetDisplayInfo. */
+extern void nn_applet_CTR_detail_GetDisplayInfo(unsigned int);
 
 
 unsigned int FUN_0015a964(unsigned int param_1)
 
 {
-/* irregular: 8 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
+/* irregular: 6 native warning(s); review required */
+  int temp_v0;
   int iStack_2c;
+  unsigned int temp_v1;
   unsigned int temp_v2;
-  unsigned int temp_v3;
   
-  FUN_002f5020(&temp_v1,&LAB_001a2a68,0x10,2);
-  nn_applet_CTR_detail_GetDisplayInfo(&temp_v1);
-  FUN_001a2b80(param_1,temp_v0,DAT_005891c8,DAT_005891cc);
-  DAT_0061a61c = temp_v2;
-  DAT_0061a628 = temp_v3;
-  DAT_0061a610 = temp_v1 != iStack_2c;
+  FUN_002f5020(&temp_v0,&LAB_001a2a68,0x10,2);
+  nn_applet_CTR_detail_GetDisplayInfo((unsigned int)&temp_v0);
+  FUN_001a2b80(param_1);
+  DAT_0061a61c = temp_v1;
+  DAT_0061a628 = temp_v2;
+  DAT_0061a610 = temp_v0 != iStack_2c;
   FUN_001a30ec(&DAT_0061a60c);
   FUN_001a3338(param_1,0x10,&DAT_0061a60c,0x20,DAT_005891bc);
   FUN_001a2e74(param_1,0);

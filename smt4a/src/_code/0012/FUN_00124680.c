@@ -24,7 +24,7 @@ unsigned int * FUN_00124680(unsigned int param_1,int param_2,unsigned int param_
   if ((param_2 < piVar1[1]) && (temp_v0 = *(int *)(*piVar1 + param_2 * 8), temp_v0 != -1)) {
     temp_v1 = 0;
     puVar3 = (unsigned int *)FUN_001035cc(temp_v0,param_3,param_4,(unsigned int *)&temp_v1);
-    if (puVar3 != &temp_v1) {
+    if (puVar3 != (unsigned int *)&temp_v1) {
       return puVar3;
     }
   }

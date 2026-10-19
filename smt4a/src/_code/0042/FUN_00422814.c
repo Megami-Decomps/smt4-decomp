@@ -9,14 +9,13 @@ extern unsigned int DAT_005880e4; /* 0x5880e4 */
 extern unsigned int DAT_00618518; /* 0x618518 */
 
 extern unsigned int FUN_001af874(unsigned int, unsigned int);
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 unsigned int FUN_00422814(int param_1,int param_2,int param_3)
 
 {
-/* irregular: 2 native warning(s); review required */
   int temp_v0;
   unsigned int temp_v1;
   int *piVar3;
@@ -32,10 +31,10 @@ unsigned int FUN_00422814(int param_1,int param_2,int param_3)
         if (temp_v0 == 0) {
           return 0;
         }
-        nn_os_CriticalSection_Enter(&DAT_00618518);
+        nn_os_CriticalSection_Enter((unsigned int)&DAT_00618518);
         temp_v1 = FUN_001af874(0x80,0);
         *(unsigned int *)(DAT_005880d8 + temp_v2 * 0x70) = temp_v1;
-        nn_os_CriticalSection_Leave(&DAT_00618518);
+        nn_os_CriticalSection_Leave((unsigned int)&DAT_00618518);
         piVar3 = (int *)(DAT_005880d8 + temp_v2 * 0x70);
         if (*piVar3 == 0) {
           (**(romwright_code **)(*DAT_005880d4 + 4))(DAT_005880d4,piVar3[1]);

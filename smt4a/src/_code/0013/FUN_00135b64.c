@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 
 typedef int romwright_code();
+/* Unsupported intrinsic, declaration required: romwright_set_sp (a write of the stack pointer). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Unsupported intrinsic, declaration required: coprocessor_loadlong (CALLOTHER). */
 /* Supplied declaration required: FUN_001003ea. */
@@ -202,7 +203,7 @@ unsigned int * FUN_00135b64(unsigned int *param_1,unsigned int param_2,unsigned 
     temp_v8 = temp_v9;
   }
   else {
-    register0x00000054 = (BADSPACEBASE *)param_3[2];
+    romwright_set_sp((unsigned int)((unsigned int *)param_3[2]));
     puVar1 = (unsigned int *)(unaff_r5 << (unaff_r5 & 0xff));
     temp_v8 = puVar1 < param_3 || (unsigned int)((int)param_3 - (int)puVar1) < (unsigned int)temp_v9;
     temp_v10 = SBORROW4((int)param_3,(int)puVar1) !=
@@ -219,9 +220,9 @@ unsigned int * FUN_00135b64(unsigned int *param_1,unsigned int param_2,unsigned 
     for (temp_v2 = *unaff_r6; temp_v2 != unaff_r6[1]; temp_v2 = temp_v2 + 4) {
     }
     FUN_002e6e14();
-    temp_v3 = *(int *)register0x00000054;
+    temp_v3 = *(int *)((unsigned int)__current_sp());
     *unaff_r6 = unaff_r5;
-    temp_v4 = *(int *)((int)register0x00000054 + 4);
+    temp_v4 = *(int *)((int)((unsigned int)__current_sp()) + 4);
     unaff_r6[1] = temp_v1 * 4 + unaff_r5 + temp_v3;
     unaff_r6[2] = temp_v4 + unaff_r5;
     return (unsigned int *)(temp_v4 + unaff_r5);

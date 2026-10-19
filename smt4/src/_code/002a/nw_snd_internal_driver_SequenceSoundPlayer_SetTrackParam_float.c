@@ -21,7 +21,7 @@ void nw_snd_internal_driver_SequenceSoundPlayer_SetTrackParam_float
        (temp_v0 = *(int *)(param_1 + temp_v1 * 4 + 0x8c), temp_v0 != 0)) {
       pcVar2 = param_3;
       if ((param_4 & 1) != 0) {
-        pcVar2 = *(romwright_code **)(param_3 + *(int *)(temp_v0 + ((int)param_4 >> 1)));
+        pcVar2 = *(romwright_code **)((unsigned char *)param_3 + *(int *)(temp_v0 + ((int)param_4 >> 1)));
       }
       (*pcVar2)();
     }

@@ -14,13 +14,13 @@ extern unsigned char DAT_004e0e90; /* 0x4e0e90 */
 extern int FUN_0010fd38(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_0010fd94. */
 /* Supplied declaration required: FUN_002c498c. */
-/* Supplied declaration required: nn_cfg_CTR_Initialize. */
+extern void nn_cfg_CTR_Initialize(void);
 
 
 unsigned int FUN_00103b10(void)
 
 {
-/* irregular: 3 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   unsigned int temp_v0;
   int temp_v1;
   unsigned char *puVar3;

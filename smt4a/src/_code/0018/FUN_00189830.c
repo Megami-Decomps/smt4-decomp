@@ -4,7 +4,7 @@
 
 extern int DAT_0058928c; /* 0x58928c */
 
-extern unsigned int nn_dsp_CTR_DSP_GetSemaphoreEventHandle(int, unsigned int);
+extern unsigned int nn_dsp_CTR_DSP_GetSemaphoreEventHandle(unsigned int, unsigned int);
 
 
 unsigned int FUN_00189830(unsigned int param_1)

@@ -10,15 +10,14 @@ typedef struct {
 extern int DAT_0063f4e4; /* 0x63f4e4 */
 extern unsigned char DAT_0063f4f0; /* 0x63f4f0 */
 
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
-/* Supplied declaration required: nn_snd_CTR_Voice_SetState. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
+extern void nn_snd_CTR_Voice_SetState(unsigned int, int);
 
 
 void FUN_00141338(int param_1,int param_2)
 
 {
-/* irregular: 3 native warning(s); review required */
   unsigned int temp_v0;
   int temp_v1;
   int temp_v2;
@@ -35,7 +34,7 @@ void FUN_00141338(int param_1,int param_2)
     if (temp_v2 == param_1) break;
     temp_v2 = *(int *)(temp_v2 + 0xd8);
   }
-  nn_os_CriticalSection_Enter(&DAT_0063f4f0);
+  nn_os_CriticalSection_Enter((unsigned int)&DAT_0063f4f0);
   temp_v0 = *(unsigned int *)(param_1 + 0xf4);
   if ((temp_v0 & 2) != 0) {
     if (param_2 >= 1) {
@@ -66,6 +65,6 @@ void FUN_00141338(int param_1,int param_2)
       }
     }
   }
-  nn_os_CriticalSection_Leave(&DAT_0063f4f0);
+  nn_os_CriticalSection_Leave((unsigned int)&DAT_0063f4f0);
   return;
 }

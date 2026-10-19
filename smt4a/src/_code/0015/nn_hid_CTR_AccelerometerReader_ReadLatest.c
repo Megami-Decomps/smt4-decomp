@@ -11,25 +11,24 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_2_stack;
 
-/* Supplied declaration required: nn_hid_CTR_AccelerometerReader_Transform. */
+extern void nn_hid_CTR_AccelerometerReader_Transform(unsigned int, unsigned int);
 /* Supplied declaration required: nn_hid_CTR_detail_CalculateAccelerationTightly. */
-/* Supplied declaration required: nn_hidlow_CTR_AccelerometerLifoRing_ReadData. */
+extern void nn_hidlow_CTR_AccelerometerLifoRing_ReadData(unsigned int, unsigned int, int, int *, long long *, int *);
 
-
-/* WARNING: Type propagation algorithm not settling */
 
 unsigned char nn_hid_CTR_AccelerometerReader_ReadLatest(int *param_1,short *param_2)
 
 {
-/* irregular: 4 native warning(s); review required */
+/* irregular: 1 native warning(s); review required */
   int temp_v0;
-  int temp_v1 [5];
+  int temp_v1 [2];
+  unsigned long long temp_v2;
   
-  temp_v1[2] = 0xffffffff;
-  temp_v1[3] = 0xffffffff;
+  (*(unsigned int *)((unsigned char *)&temp_v2 + 0)) = 0xffffffff;
+  (*(unsigned int *)((unsigned char *)&temp_v2 + 4)) = 0xffffffff;
   temp_v1[1] = 0xffffffff;
   nn_hidlow_CTR_AccelerometerLifoRing_ReadData
-            (*(unsigned int *)(*param_1 + 4),param_2,1,temp_v1,temp_v1 + 2,temp_v1 + 1);
+            (*(unsigned int *)(*param_1 + 4),(unsigned int)param_2,1,temp_v1,(long long *)&temp_v2,temp_v1 + 1);
   if (0 < temp_v1[0]) {
     temp_v0 = (int)*param_2;
     nn_hid_CTR_detail_CalculateAccelerationTightly
@@ -49,7 +48,7 @@ unsigned char nn_hid_CTR_AccelerometerReader_ReadLatest(int *param_1,short *para
               );
     param_2[2] = (short)temp_v0;
     *(short *)(param_1 + 3) = (short)temp_v0;
-    nn_hid_CTR_AccelerometerReader_Transform(param_1,param_2);
+    nn_hid_CTR_AccelerometerReader_Transform((unsigned int)param_1,(unsigned int)param_2);
   }
   return 0 < temp_v1[0];
 }

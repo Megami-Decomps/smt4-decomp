@@ -4,14 +4,14 @@
 
 /* Supplied declaration required: FUN_002bb150. */
 /* Supplied declaration required: FUN_002c4040. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 unsigned int FUN_0034fbc8(int param_1)
 
 {
-/* irregular: 4 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   int temp_v0;
   unsigned char temp_v1;
   

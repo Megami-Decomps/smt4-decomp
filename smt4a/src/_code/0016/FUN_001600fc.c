@@ -36,7 +36,6 @@ extern unsigned int DAT_0064169c; /* 0x64169c */
 extern unsigned int DAT_006416a0; /* 0x6416a0 */
 extern unsigned int DAT_006416a4; /* 0x6416a4 */
 
-/* Unsupported intrinsic, declaration required: while (STORE). */
 /* Supplied declaration required: FUN_002e6354. */
 /* Supplied declaration required: rt_memcpy. */
 /* Supplied declaration required: rt_memcpy_w. */
@@ -45,7 +44,7 @@ extern unsigned int DAT_006416a4; /* 0x6416a4 */
 unsigned int FUN_001600fc(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
 
 {
-/* irregular: 33 unstructured edge(s); 21 goto(s); 4 native warning(s); review required */
+/* irregular: 33 unstructured edge(s); 21 goto(s); 3 native warning(s); review required */
   unsigned int *puVar1;
   int temp_v0;
   int temp_v1;

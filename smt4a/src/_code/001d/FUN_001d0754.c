@@ -10,8 +10,8 @@ typedef struct {
 
 /* Supplied declaration required: FUN_001a0990. */
 extern int FUN_001b1998(void);
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 /* Supplied declaration required: nn_os_detail_BlockingQueueBase_nn_os_CriticalSection_TryEnqueue. */
 /* Supplied declaration required: nw_ut_internal_LinkListImpl_insert. */
 
@@ -19,7 +19,7 @@ extern int FUN_001b1998(void);
 void FUN_001d0754(unsigned int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
 
 {
-/* irregular: 5 native warning(s); review required */
+/* irregular: 3 native warning(s); review required */
   int temp_v0;
   unsigned int unaff_r4;
   

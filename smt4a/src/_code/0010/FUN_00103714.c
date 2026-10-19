@@ -8,17 +8,18 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_002e7258. */
-/* Supplied declaration required: nn_fs_detail_FileBase_TryRead. */
+extern unsigned int nn_fs_detail_FileBase_TryRead(unsigned int, int *, unsigned int, unsigned int);
 
 
-unsigned int FUN_00103714(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
+int FUN_00103714(int param_1,unsigned int param_2,unsigned int param_3,int param_4)
 
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
+/* irregular: 1 native warning(s); review required */
+  unsigned int temp_v0;
+  int temp_v1;
   
-  temp_v0 = param_4;
-  nn_fs_detail_FileBase_TryRead(param_1 + 4,&temp_v0,param_2,param_3);
-  FUN_002e7258();
-  return temp_v0;
+  temp_v1 = param_4;
+  temp_v0 = nn_fs_detail_FileBase_TryRead(param_1 + 4,&temp_v1,param_2,param_3);
+  FUN_002e7258(temp_v0,0x103720);
+  return temp_v1;
 }

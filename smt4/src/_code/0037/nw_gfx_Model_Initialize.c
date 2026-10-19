@@ -34,7 +34,7 @@ unsigned int nw_gfx_Model_Initialize(unsigned int param_1,unsigned int param_2)
   int *piVar5;
   unsigned int *temp_v3;
   char temp_v4;
-  unsigned char uStack_1b [3];
+  unsigned int uStack_1b;
   
   temp_v0 = nw_gfx_TransformNode_Initialize();
   if (-1 < (int)temp_v0) {

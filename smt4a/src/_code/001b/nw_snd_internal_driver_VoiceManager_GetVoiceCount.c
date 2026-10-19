@@ -3,14 +3,13 @@
 #include "romwright_types.h"
 
 extern int FUN_001b1f04(void);
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 int nw_snd_internal_driver_VoiceManager_GetVoiceCount(int param_1)
 
 {
-/* irregular: 2 native warning(s); review required */
   int *piVar1;
   int temp_v0;
   int *piVar3;

@@ -3,36 +3,33 @@
 #include "romwright_types.h"
 
 typedef int romwright_code();
-/* stack frame of param_7: 1 slot(s), 4 byte(s) */
+/* Unsupported intrinsic, declaration required: romwright_set_sp (a write of the stack pointer). */
+/* stack frame of param_6: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
-} param_7_stack;
+} param_6_stack;
 
 /* Supplied declaration required: FUN_001884c8. */
 
 
-unsigned char *
-nn_fs_CTR_MPCore_detail_UserFileSystem_TryWriteFile
-          (int param_1,int *param_2,unsigned int param_3,unsigned int param_4,int param_5,
-          unsigned int param_6,unsigned int param_7)
+unsigned int nn_fs_CTR_MPCore_detail_UserFileSystem_TryWriteFile
+               (int *param_1,int *param_2,long long param_3,unsigned int param_4,unsigned int param_5,
+               unsigned char param_6)
 
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
+/* irregular: irregular input(s): in_stack_00000009; 1 native warning(s); review required */
+  long long temp_v0;
   unsigned int temp_v1;
-  unsigned int temp_v2;
+  unsigned int in_stack_00000009;
   
-  temp_v2 = param_7;
-  temp_v1 = param_6;
-  temp_v0 = param_5;
-  if ((param_1 == 0 || param_2 == (int *)0x0) || param_5 == 0) {
-    register0x00000054 = (BADSPACEBASE *)0xe0e046bc;
+  temp_v0 = param_3;
+  temp_v1 = (*(unsigned int *)&param_6);
+  if ((param_1 == (int *)0x0 || param_2 == (int *)0x0) || (int)param_3 == 0) {
+    romwright_set_sp((unsigned int)((unsigned int *)0xe0e046bc));
   }
-  if ((param_1 != 0 && param_2 != (int *)0x0) && param_5 != 0) {
+  if ((param_1 != (int *)0x0 && param_2 != (int *)0x0) && (int)param_3 != 0) {
     FUN_001884c8(0);
-    register0x00000054 =
-         (BADSPACEBASE *)
-         (**(romwright_code **)(*param_2 + 4))(param_2,param_1,param_3,param_4,temp_v0,temp_v1,temp_v2);
+    romwright_set_sp((unsigned int)((unsigned int *)(**(romwright_code **)(*param_2 + 4))(param_2,param_1,param_4,param_5,temp_v0,temp_v1)));
   }
-  return (unsigned char *)register0x00000054;
+  return (unsigned int)(unsigned char *)((unsigned int)__current_sp());
 }

@@ -11,14 +11,14 @@ typedef struct {
 /* Supplied declaration required: FUN_0014f560. */
 /* Supplied declaration required: FUN_002a42e8. */
 /* Supplied declaration required: aeabi_uidivmod. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 void nn_os_detail_BlockingQueueBase_nn_os_CriticalSection_Enqueue(int *param_1,unsigned int param_2)
 
 {
-/* irregular: 7 native warning(s); review required */
+/* irregular: 5 native warning(s); review required */
   unsigned char temp_v0;
   int *piVar2;
   int temp_v1;
@@ -33,10 +33,10 @@ void nn_os_detail_BlockingQueueBase_nn_os_CriticalSection_Enqueue(int *param_1,u
   *piVar2 = temp_v1;
   while( 1 ) {
     piVar2 = param_1 + 5;
-    nn_os_CriticalSection_Enter(piVar2);
+    nn_os_CriticalSection_Enter((unsigned int)piVar2);
     temp_v2 = param_1[10];
     if (temp_v2 < (unsigned int)param_1[8]) break;
-    nn_os_CriticalSection_Leave(piVar2);
+    nn_os_CriticalSection_Leave((unsigned int)piVar2);
     FUN_0014f560(param_1 + 3);
   }
   aeabi_uidivmod(param_1[9] + temp_v2,param_1[8],param_1[9],temp_v2,temp_v1);
@@ -45,7 +45,7 @@ void nn_os_detail_BlockingQueueBase_nn_os_CriticalSection_Enqueue(int *param_1,u
   if (0 < param_1[0xb]) {
     FUN_002a42e8(param_1 + 1,1);
   }
-  nn_os_CriticalSection_Leave(piVar2);
+  nn_os_CriticalSection_Leave((unsigned int)piVar2);
   param_1 = param_1 + 0xc;
   do {
     temp_v0 = (unsigned char)hasExclusiveAccess(param_1);

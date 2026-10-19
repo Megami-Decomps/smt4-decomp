@@ -168,7 +168,7 @@ void FUN_00280ccc(void)
                   if ((!romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0)) ||
                      (temp_v9 = temp_v9 | ((unsigned int)(temp_v20 < temp_v10) << 0x1f) |
                                ((unsigned int)(temp_v20 == temp_v10) << 0x1e),
-                     in_fpscr = temp_v9 | ((unsigned int)(NAN(temp_v20) || NAN(temp_v10)) << 0x1c),
+                     in_fpscr = temp_v9 | ((unsigned int)((temp_v20 != temp_v20) || (temp_v10 != temp_v10)) << 0x1c),
                      temp_v1 = (unsigned char)(temp_v9 >> 0x18), temp_v12 = in_s3,
                      !(unsigned char)((temp_v1 >> 6) & 1) && temp_v1 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1))) {
                     temp_v10 = temp_v10 + 360.0f;
@@ -315,14 +315,14 @@ void FUN_00280ccc(void)
                      in_s6 * *(float *)(temp_v0 + 0x4a12e8)) - *(float *)(temp_v0 + 0x4a1328);
             if ((!romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0)) &&
                (temp_v9 = temp_v9 | ((unsigned int)(temp_v12 < temp_v20) << 0x1f),
-               in_fpscr = temp_v9 | ((unsigned int)(NAN(temp_v12) || NAN(temp_v20)) << 0x1c),
+               in_fpscr = temp_v9 | ((unsigned int)((temp_v12 != temp_v12) || (temp_v20 != temp_v20)) << 0x1c),
                (unsigned char)(temp_v9 >> 0x1f) == ((unsigned char)(in_fpscr >> 0x1c) & 1))) {
               temp_v7 = -1;
             }
             else {
               temp_v9 = in_fpscr & 0xfffffff;
               temp_v11 = temp_v9 | ((unsigned int)(temp_v15 < temp_v20) << 0x1f);
-              in_fpscr = temp_v11 | ((unsigned int)(NAN(temp_v15) || NAN(temp_v20)) << 0x1c);
+              in_fpscr = temp_v11 | ((unsigned int)((temp_v15 != temp_v15) || (temp_v20 != temp_v20)) << 0x1c);
               if (((unsigned char)(temp_v11 >> 0x1f) != ((unsigned char)(in_fpscr >> 0x1c) & 1)) ||
                  (in_fpscr = temp_v9 | ((unsigned int)(temp_v20 <= temp_v12) << 0x1d), romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0))
                  ) goto LAB_00281704;
@@ -412,7 +412,7 @@ void FUN_00280ccc(void)
                         (in_s2 - temp_v19) * (in_s2 - temp_v19));
           temp_v9 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v12 < temp_v10) << 0x1f) |
                    ((unsigned int)(temp_v12 == temp_v10) << 0x1e);
-          in_fpscr = temp_v9 | ((unsigned int)(NAN(temp_v12) || NAN(temp_v10)) << 0x1c);
+          in_fpscr = temp_v9 | ((unsigned int)((temp_v12 != temp_v12) || (temp_v10 != temp_v10)) << 0x1c);
           temp_v1 = (unsigned char)(temp_v9 >> 0x18);
           temp_v9 = in_fpscr >> 0x1c;
           if ((int)romwright_sqrt_4((temp_v15 - temp_v17) * (temp_v15 - temp_v17) + (temp_v19 - in_s2) * (temp_v19 - in_s2))

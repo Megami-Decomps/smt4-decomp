@@ -213,7 +213,7 @@ void FUN_00131c98(int param_1,int param_2,int param_3)
               temp_v20 = (float)unaff_r7[2];
               temp_v2 = temp_v2 | ((unsigned int)(temp_v13 < temp_v20) << 0x1f) | ((unsigned int)(temp_v13 == temp_v20) << 0x1e)
               ;
-              in_fpscr = temp_v2 | ((unsigned int)(NAN(temp_v13) || NAN(temp_v20)) << 0x1c);
+              in_fpscr = temp_v2 | ((unsigned int)((temp_v13 != temp_v13) || (temp_v20 != temp_v20)) << 0x1c);
               temp_v0 = (unsigned char)(temp_v2 >> 0x18);
               temp_v17 = (float)temp_v26;
               if ((unsigned char)((temp_v0 >> 6) & 1) || temp_v0 >> 7 != ((unsigned char)(in_fpscr >> 0x1c) & 1)) {

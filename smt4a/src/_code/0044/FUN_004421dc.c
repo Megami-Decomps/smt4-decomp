@@ -5,18 +5,17 @@
 extern int DAT_00589384; /* 0x589384 */
 extern unsigned int DAT_0062d2a4; /* 0x62d2a4 */
 
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 unsigned char FUN_004421dc(void)
 
 {
-/* irregular: 2 native warning(s); review required */
   unsigned char temp_v0;
   
-  nn_os_CriticalSection_Enter(&DAT_0062d2a4);
+  nn_os_CriticalSection_Enter((unsigned int)&DAT_0062d2a4);
   temp_v0 = DAT_00589384 != 0;
-  nn_os_CriticalSection_Leave(&DAT_0062d2a4);
+  nn_os_CriticalSection_Leave((unsigned int)&DAT_0062d2a4);
   return temp_v0;
 }

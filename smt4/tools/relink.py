@@ -9,7 +9,9 @@ from its retail target object (`orig/target/**.o`: its bytes with calls, tail
 calls and literal-pool addresses as relocations), which proves those objects
 relocate back to retail; otherwise they are retail bytes. What no object
 covers (padding, strings between functions, functions the decompiler refused,
-.rodata, .data) is retail bytes. Symbols the objects reference and nothing
+.rodata, .data) is retail bytes, except a matched function's own constants (`.constdata`):
+they sit at the address its retail pool words name, once the bytes there equal the
+object's. Symbols the objects reference and nothing
 defines (`DAT_<addr>`, functions linked as bytes) are defined at their
 addresses. The linked image is compared with the decompressed `.code` of the
 dump (`image.orig` in config/project.json; tools/n3ds.py reads it).
@@ -74,7 +76,8 @@ def elf_sections(path):
 
 
 def text_section(path):
-    """(`.text` bytes, [(offset, type, symbol name)] of its relocations) of an ELF32 ARM object."""
+    """(`.text` bytes, [(offset, type, symbol name)] of its relocations) of an ELF32 ARM object.
+    A section symbol is named after its section (`.constdata`)."""
     data = Path(path).read_bytes()
     shoff, = struct.unpack_from("<I", data, 0x20)
     shentsize, shnum, shstrndx = struct.unpack_from("<HHH", data, 0x2E)
@@ -91,9 +94,47 @@ def text_section(path):
         strtab = headers[symtab[6]]
         for at in range(header[4], header[4] + header[5], 8):
             offset, info = struct.unpack_from("<II", data, at)
-            name_at, = struct.unpack_from("<I", data, symtab[4] + (info >> 8) * 16)
-            relocations.append((offset, info & 0xFF, cstr(strtab[4] + name_at)))
+            name_at, _value, _size, symbol_info, _other, section = struct.unpack_from("<IIIBBH", data, symtab[4] + (info >> 8) * 16)
+            name = cstr(strtab[4] + name_at)
+            if symbol_info & 0xF == 3 and 0 < section < len(headers):  # STT_SECTION
+                name = section_name(headers[section])
+            relocations.append((offset, info & 0xFF, name))
     return data[text[4]:text[4] + text[5]], sorted(relocations)
+
+
+def data_references(path):
+    """({section: (payload, alignment, constant)} for the allocated sections of an ELF32 ARM
+    object besides `.text`, {symbol name: (section, value)} for what its `.text` relocations
+    point into them). `constant` is False for a writable, executable or zero-filled section
+    and for one that carries relocations of its own; such a section cannot be placed by
+    comparing its bytes with the image."""
+    data = Path(path).read_bytes()
+    shoff, = struct.unpack_from("<I", data, 0x20)
+    shentsize, shnum, shstrndx = struct.unpack_from("<HHH", data, 0x2E)
+    headers = [struct.unpack_from("<IIIIIIIIII", data, shoff + i * shentsize) for i in range(shnum)]
+    cstr = lambda at: data[at:data.index(b"\0", at)].decode()
+    section_name = lambda h: cstr(headers[shstrndx][4] + h[0])
+    text_index = next(i for i, h in enumerate(headers) if section_name(h) == ".text")
+    held = {i for i, h in enumerate(headers) if i != text_index and h[2] & 0x2 and h[5]}  # SHF_ALLOC, not empty
+    sections = {}
+    for i in held:
+        h = headers[i]
+        constant = h[1] == 1 and not h[2] & 0x5 and not any(r[1] == 9 and r[7] == i for r in headers)  # PROGBITS, not W/X
+        sections[section_name(h)] = (data[h[4]:h[4] + h[5]] if h[1] != 8 else b"", h[8], constant)
+    references = {}
+    for header in headers:
+        if header[1] != 9 or header[7] != text_index:
+            continue
+        symtab = headers[header[6]]
+        strtab = headers[symtab[6]]
+        for at in range(header[4], header[4] + header[5], 8):
+            _offset, info = struct.unpack_from("<II", data, at)
+            name_at, value, _size, symbol_info, _other, section = struct.unpack_from("<IIIBBH", data, symtab[4] + (info >> 8) * 16)
+            if section in held:
+                section_symbol = symbol_info & 0xF == 3
+                references[section_name(headers[section]) if section_symbol else cstr(strtab[4] + name_at)] = (
+                    section_name(headers[section]), 0 if section_symbol else value)
+    return sections, references
 
 
 R_ARM_ABS32 = 2
@@ -130,6 +171,51 @@ def code_difference(built, retail, resolve):
     for offset in relocated:
         a[offset:offset + 4] = b[offset:offset + 4] = b"\0\0\0\0"
     return "bytes" if a != b else None
+
+
+def place_data(built, retail, resolve, code, base, window):
+    """Where the image holds the constants the compiled object `built` defines (`.constdata`),
+    or None when that cannot be shown. Each pool word of `built` that relocates to its own
+    section is a word of `retail` that relocates to a symbol the image has an address for
+    (`DAT_x`): that fixes the section's address, and the section is placed there only when
+    its bytes equal the image's and it lies in `window` (the .rodata range) at its alignment.
+    Returns ({section: (address, size)}, {symbol name: address}); the symbols resolve the
+    object's references to the section for `code_difference`."""
+    sections, references = data_references(built)
+    if not sections or not all(constant for _payload, _alignment, constant in sections.values()):
+        return None
+    (built_text, built_relocations), (retail_text, retail_relocations) = text_section(built), text_section(retail)
+    if len(built_text) != len(retail_text):
+        return None
+    retail_at = {offset: (kind, name) for offset, kind, name in retail_relocations}
+    start = {}
+    for offset, kind, name in built_relocations:
+        if name not in references:
+            continue
+        section, value = references[name]
+        if kind != R_ARM_ABS32 or retail_at.get(offset, (None, None))[0] != R_ARM_ABS32:
+            return None
+        address = resolve(retail_at[offset][1])
+        if address is None:
+            return None
+        word = lambda text: struct.unpack_from("<I", text, offset)[0]
+        begin = (address + word(retail_text) - word(built_text) - value) & 0xFFFFFFFF
+        if start.setdefault(section, begin) != begin:
+            return None
+    if set(start) != set(sections):
+        return None
+    placed = {}
+    for section, (payload, alignment, _constant) in sections.items():
+        begin = start[section]
+        if begin % max(alignment, 1) or not window[0] <= begin <= begin + len(payload) <= window[1]:
+            return None
+        if code[begin - base:begin - base + len(payload)] != payload:
+            return None
+        placed[section] = (begin, len(payload))
+    spans = sorted(placed.values())
+    if any(a[0] + a[1] > b[0] for a, b in zip(spans, spans[1:])):
+        return None
+    return placed, {name: start[section] + value for name, (section, value) in references.items()}
 
 
 def blob_object(path, section, payload, executable, symbols=()):
@@ -264,6 +350,8 @@ def main():
     placed = []
     swapped, oversized, with_data, retargeted, rewritten = 0, [], [], [], []
     missing, no_retail, entered_across, overlapped, object_for = [], [], [], [], {}
+    data_placed = []  # (address, size, object, section): an object's own constants at their retail address
+    rodata_window = (segments["rodata"][0], segments["data"][0])
     address_name = re.compile(r"_([0-9a-f]{8})$")
 
     def resolve(name):
@@ -287,16 +375,23 @@ def main():
         retail_size = elf_sections(ROOT / target)[".text"][0]
         # What the object defines: tools/split.py names it after config/symbols.txt.
         function = functions[address][0] if address in functions else unit["function"]
+        constants_here = ()  # sections of a linked build/obj object that sit at their retail address
         if unit["function"] in matched and (ROOT / unit["object"]).exists():
             # objdiff compares the function symbol; the image needs the whole
             # section to be the retail size (armcc pads a Thumb section to 4).
             built = elf_sections(ROOT / unit["object"])
             size = built[".text"][0]
             data = [name for name, (length, flags) in built.items() if flags & 0x2 and length and name != ".text"]
-            difference = None if data or size != retail_size else code_difference(ROOT / unit["object"], ROOT / target, resolve)
-            if data:
-                # Its own constants or variables (`.constdata`, `.data`, `.bss`) live at
-                # retail addresses nothing records yet: the code goes in as retail bytes.
+            # Its own constants (`.constdata`) go where the image holds them, when the retail
+            # object's pool words name that address and the bytes there are the object's.
+            own = place_data(ROOT / unit["object"], ROOT / target, resolve, code, base, rodata_window) if data else None
+            if own and any(a < start + length and start < a + n for start, length in own[0].values() for a, n, _o, _s in data_placed):
+                own = None  # another function's constants already sit there
+            here = resolve if own is None else (lambda name, symbols=own[1]: symbols[name] if name in symbols else resolve(name))
+            difference = None if (data and own is None) or size != retail_size else code_difference(ROOT / unit["object"], ROOT / target, here)
+            if data and own is None:
+                # Its own variables, or constants nothing ties to a retail address: the code
+                # goes in as retail bytes.
                 with_data.append((unit["function"], ",".join(data)))
                 if not args.full:
                     continue
@@ -315,6 +410,9 @@ def main():
                 function = unit["function"]
                 swapped += 1
                 object_for[function] = target
+                if own:
+                    data_placed += [(start, length, target, section) for section, (start, length) in own[0].items()]
+                    constants_here = own[0]
             else:
                 oversized.append((unit["function"], size, retail_size))
                 if not args.full:
@@ -327,7 +425,7 @@ def main():
         elif not args.full:
             continue
         sections = elf_sections(ROOT / target)
-        stray = [name for name, (size, flags) in sections.items() if flags & 0x2 and size and name != ".text"]
+        stray = [name for name, (size, flags) in sections.items() if flags & 0x2 and size and name != ".text" and name not in constants_here]
         if stray:
             raise SystemExit(f"{target}: allocated sections besides .text ({', '.join(stray)}) have no retail address")
         placed.append((address, sections[".text"][0], target, function))
@@ -363,14 +461,31 @@ def main():
         blob_object(gap, ".text", code[cursor - base:text_hi - base], True)
         inputs.append(gap.relative_to(ROOT).as_posix())
         script_text.append(f"    . = {cursor - text_lo:#x}; \"{inputs[-1]}\"(.text)")
+    linked = set(inputs)  # a matched object that lost its text place is not linked, nor are its constants
+    constants = sorted(piece for piece in data_placed if piece[2] in linked)
     data_sections = []
     for segment in ("rodata", "data"):
         lo = segments[segment][0]
         hi = segments["data"][0] if segment == "rodata" else base + len(code)
-        blob = gaps_dir / f"{segment}.o"
-        blob_object(blob, f".{segment}", code[lo - base:hi - base], False)
-        inputs.append(blob.relative_to(ROOT).as_posix())
-        data_sections.append(f"  .{segment} {lo:#x} : {{ \"{inputs[-1]}\"(.{segment}) }}")
+        # The retail bytes of the segment, but for the constants that sit in compiled objects.
+        pieces, cursor = [], lo
+        for address, size, target, section in constants if segment == "rodata" else ():
+            if address > cursor:
+                pieces.append((cursor, code[cursor - base:address - base], None))
+            pieces.append((address, None, f"\"{target}\"({section})"))
+            cursor = address + size
+        pieces.append((cursor, code[cursor - base:hi - base], None))
+        lines = []
+        for at, payload, ref in pieces:
+            if ref is None:
+                if not payload and len(pieces) > 1:
+                    continue
+                blob = gaps_dir / (f"{segment}.o" if len(pieces) == 1 else f"{segment}_{at:08x}.o")
+                blob_object(blob, f".{segment}", payload, False)
+                inputs.append(blob.relative_to(ROOT).as_posix())
+                ref = f"\"{inputs[-1]}\"(.{segment})"
+            lines.append(f"    . = {at - lo:#x}; {ref}")
+        data_sections.append(f"  .{segment} {lo:#x} : SUBALIGN(1) {{\n" + "\n".join(lines) + "\n  }")
 
     # Everything the objects reference and no object defines, as absolute
     # symbols: functions linked as bytes (typed, with the Thumb bit, so ld
@@ -421,10 +536,10 @@ def main():
     print(f"{len(placed)} function objects ({swapped} matched, from build/obj), {len(inputs) - len(placed)} raw blobs, "
           f"{overlaps} overlapping objects skipped, {len(misread - thumb_entered_arm)} Thumb-decoded functions entered "
           f"from ARM and {len(thumb_entered_arm)} ARM-decoded functions entered by a Thumb BL linked as bytes, "
-          f"{len(dat)} address-named symbols")
+          f"{len(dat)} address-named symbols, {len(constants)} constant sections of compiled objects at their retail addresses")
     retained = (
         (oversized, "compiled section size differs", lambda item: f"{item[0]} {item[1]:#x} vs {item[2]:#x}"),
-        (with_data, "they define data the image has no recorded address for", lambda item: f"{item[0]} ({item[1]})"),
+        (with_data, "they define variables, or constants no retail pool word ties to an address holding the same bytes", lambda item: f"{item[0]} ({item[1]})"),
         (retargeted, "they call or address something else than retail", str),
         (rewritten, "their instructions differ in operands objdiff does not compare", str),
         (no_retail, "their unit has no retail target object", str),

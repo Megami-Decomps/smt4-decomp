@@ -2,13 +2,13 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
-/* Supplied declaration required: FUN_00101b5a. */
+/* Retail branches to the ARM->Thumb veneer FUN_00312838, not to its Thumb target FUN_00101b5a. */
+void FUN_00312838(void);
 
 
 void FUN_001bc6a4(void)
 
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_00101b5a();
+  FUN_00312838();
   return;
 }

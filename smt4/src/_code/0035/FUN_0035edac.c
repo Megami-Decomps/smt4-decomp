@@ -24,14 +24,14 @@ extern unsigned char LAB_0035ef7c; /* 0x35ef7c */
 /* Supplied declaration required: FUN_0035efa0. */
 /* Supplied declaration required: FUN_0035f50c. */
 extern unsigned int FUN_003e0e24(unsigned int *, unsigned int *, unsigned int, unsigned int);
-/* Supplied declaration required: nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile. */
+extern void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(unsigned int);
 
 
 unsigned int * FUN_0035edac(unsigned int *param_1,unsigned int *param_2,unsigned int param_3,unsigned int param_4,
                    unsigned int param_5)
 
 {
-/* irregular: 1 goto(s); 7 native warning(s); review required */
+/* irregular: 1 goto(s); 6 native warning(s); review required */
   unsigned int *puVar1;
   unsigned int *puVar2;
   unsigned int temp_v0;

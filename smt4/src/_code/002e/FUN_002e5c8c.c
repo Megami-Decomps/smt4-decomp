@@ -130,7 +130,7 @@ void FUN_002e5c8c(int param_1)
         temp_v25 = 1;
         temp_v4 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v10 < 0.0f) << 0x1f) |
                 ((unsigned int)(temp_v10 == 0.0f) << 0x1e);
-        in_fpscr = temp_v4 | ((unsigned int)NAN(temp_v10) << 0x1c);
+        in_fpscr = temp_v4 | ((unsigned int)(temp_v10 != temp_v10) << 0x1c);
         temp_v1 = (unsigned char)(temp_v4 >> 0x18);
         in_s0 = temp_v14;
         temp_v24 = temp_v9;
@@ -149,7 +149,7 @@ void FUN_002e5c8c(int param_1)
         temp_v25 = 0;
         temp_v4 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v10 < 0.0f) << 0x1f) |
                 ((unsigned int)(temp_v10 == 0.0f) << 0x1e);
-        in_fpscr = temp_v4 | ((unsigned int)NAN(temp_v10) << 0x1c);
+        in_fpscr = temp_v4 | ((unsigned int)(temp_v10 != temp_v10) << 0x1c);
         temp_v1 = (unsigned char)(temp_v4 >> 0x18);
         if (!((unsigned char)((temp_v1 >> 6) & 1) || temp_v1 >> 7 != ((unsigned char)(in_fpscr >> 0x1c) & 1))) {
           temp_v10 = temp_v14;

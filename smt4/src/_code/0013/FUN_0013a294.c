@@ -5,13 +5,12 @@
 extern int DAT_0044e460; /* 0x44e460 */
 extern unsigned int DAT_0044e464; /* 0x44e464 */
 
-/* Supplied declaration required: nn_dsp_CTR_DSP_RegisterInterruptEvents. */
+extern unsigned int nn_dsp_CTR_DSP_RegisterInterruptEvents(unsigned int, unsigned int, int, int);
 
 
-unsigned int FUN_0013a294(int param_1,int param_2,int param_3)
+unsigned int FUN_0013a294(unsigned int param_1,int param_2,int param_3)
 
 {
-/* irregular: 1 native warning(s); review required */
   unsigned int temp_v0;
   unsigned int temp_v1;
   

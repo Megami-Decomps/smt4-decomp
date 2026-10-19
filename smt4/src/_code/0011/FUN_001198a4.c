@@ -18,15 +18,15 @@ extern int FUN_001329d4(unsigned int);
 /* Supplied declaration required: FUN_00147370. */
 /* Supplied declaration required: FUN_002bd430. */
 /* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
-/* Supplied declaration required: nn_snd_CTR_Voice_SetState. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
+extern void nn_snd_CTR_Voice_SetState(unsigned int, int);
 
 
 void FUN_001198a4(unsigned int param_1,unsigned int param_2,unsigned int param_3)
 
 {
-/* irregular: 13 goto(s); irregular input(s): in_fpscr; 7 native warning(s); review required */
+/* irregular: 13 goto(s); irregular input(s): in_fpscr; 4 native warning(s); review required */
   int temp_v0;
   unsigned int temp_v1;
   unsigned int temp_v2;
@@ -34,7 +34,7 @@ void FUN_001198a4(unsigned int param_1,unsigned int param_2,unsigned int param_3
   unsigned char temp_v4;
   unsigned int in_fpscr;
   
-  nn_os_CriticalSection_Enter(&DAT_004e315c);
+  nn_os_CriticalSection_Enter((unsigned int)&DAT_004e315c);
   if (DAT_004e3169 != '\0') {
     temp_v2 = 0;
     if (0 < (int)DAT_004e3158) {
@@ -66,7 +66,7 @@ LAB_001198d8:
               }
               goto LAB_00119b2c;
             }
-            nn_os_CriticalSection_Enter();
+            nn_os_CriticalSection_Enter((unsigned int)&DAT_004e315c);
             for (temp_v1 = DAT_004e3154; param_3 = DAT_004e3154, temp_v1 != 0;
                 temp_v1 = *(unsigned int *)(temp_v1 + 0x70)) {
               if (temp_v1 == temp_v3) {
@@ -129,7 +129,7 @@ LAB_00119b54:
       DAT_004e316a = '\0';
     }
   }
-  nn_os_CriticalSection_Leave(&DAT_004e315c);
+  nn_os_CriticalSection_Leave((unsigned int)&DAT_004e315c);
   return;
   while (temp_v1 = *(unsigned int *)(temp_v1 + 0x70), temp_v1 != 0) {
 LAB_00119ac4:
@@ -165,7 +165,7 @@ LAB_00119af8:
     FUN_002bd430();
   }
   FUN_002c415c(temp_v3);
-  nn_os_CriticalSection_Leave(&DAT_004e315c);
+  nn_os_CriticalSection_Leave((unsigned int)&DAT_004e315c);
   temp_v2 = temp_v2 - 1;
 LAB_00119b2c:
   if (DAT_004e316a != '\0') {

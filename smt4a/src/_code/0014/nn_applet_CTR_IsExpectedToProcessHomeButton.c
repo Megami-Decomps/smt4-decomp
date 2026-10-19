@@ -6,15 +6,15 @@ extern int FUN_0015a3c0(void);
 extern int FUN_0015a430(void);
 
 
-unsigned int nn_applet_CTR_IsExpectedToProcessHomeButton(void)
+unsigned char nn_applet_CTR_IsExpectedToProcessHomeButton(void)
 
 {
-  int temp_v0;
-  unsigned int temp_v1;
+  unsigned char temp_v0;
+  int temp_v1;
   
-  temp_v0 = FUN_0015a430();
-  if ((temp_v0 != 0) || (temp_v0 = FUN_0015a3c0(), temp_v1 = 0, temp_v0 != 0)) {
-    temp_v1 = 1;
+  temp_v1 = FUN_0015a430();
+  if ((temp_v1 != 0) || (temp_v1 = FUN_0015a3c0(), temp_v0 = 0, temp_v1 != 0)) {
+    temp_v0 = 1;
   }
-  return temp_v1;
+  return temp_v0;
 }

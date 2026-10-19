@@ -2,13 +2,13 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
-/* Supplied declaration required: nn_snd_CTR_Voice_SetMixParam. */
+extern void nn_snd_CTR_Voice_SetMixParam(unsigned int, unsigned int);
 
 
 void FUN_0010dd24(int param_1)
 
 {
-/* irregular: irregular input(s): in_s0, in_s1; 3 native warning(s); review required */
+/* irregular: irregular input(s): in_s0, in_s1; 2 native warning(s); review required */
   float in_s0;
   float in_s1;
   

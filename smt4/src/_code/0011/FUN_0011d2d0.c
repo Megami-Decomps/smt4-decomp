@@ -11,24 +11,23 @@ extern int *DAT_0044e3b4; /* 0x44e3b4 */
 extern int DAT_0044e3b8; /* 0x44e3b8 */
 extern unsigned int DAT_004c644c; /* 0x4c644c */
 
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 void FUN_0011d2d0(int *param_1)
 
 {
-/* irregular: 2 native warning(s); review required */
   int *piVar1;
   int temp_v0;
   int *piVar3;
   int *piVar4;
   
-  nn_os_CriticalSection_Enter();
+  nn_os_CriticalSection_Enter((unsigned int)&DAT_004c644c);
   piVar3 = DAT_0044e3b4;
   while( 1 ) {
     if (piVar3 == (int *)0x0) {
-      nn_os_CriticalSection_Leave(&DAT_004c644c);
+      nn_os_CriticalSection_Leave((unsigned int)&DAT_004c644c);
       return;
     }
     if (piVar3 == param_1) break;
@@ -49,6 +48,6 @@ void FUN_0011d2d0(int *param_1)
   DAT_0044e3b8 = temp_v0;
   *piVar3 = 0;
   piVar3[1] = 0;
-  nn_os_CriticalSection_Leave(&DAT_004c644c);
+  nn_os_CriticalSection_Leave((unsigned int)&DAT_004c644c);
   return;
 }

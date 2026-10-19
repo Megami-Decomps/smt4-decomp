@@ -66,7 +66,7 @@ void FUN_004c3db4(unsigned int *param_1)
       temp_v14 = (float)VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v6 = (in_fpscr & 0xfffffff) | ((unsigned int)(0.0f < temp_v14) << 0x1f) |
               ((unsigned int)(temp_v14 == 0.0f) << 0x1e);
-      in_fpscr = temp_v6 | ((unsigned int)NAN(temp_v14) << 0x1c);
+      in_fpscr = temp_v6 | ((unsigned int)(temp_v14 != temp_v14) << 0x1c);
       temp_v0 = (unsigned char)(temp_v6 >> 0x18);
       if (((unsigned char)((temp_v0 >> 6) & 1) || temp_v0 >> 7 != ((unsigned char)(in_fpscr >> 0x1c) & 1)) &&
          (temp_v15 = temp_v14, (int)temp_v14 >= 0x41100001)) {

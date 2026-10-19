@@ -2,6 +2,21 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
+#ifndef ROMWRIGHT_FLOAT_BITS_DEFINED
+#define ROMWRIGHT_FLOAT_BITS_DEFINED
+static unsigned int romwright_f2u(float value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.f = value;
+    return bits.u;
+}
+static float romwright_u2f(unsigned int value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.u = value;
+    return bits.f;
+}
+#endif
 extern unsigned char DAT_00404504; /* 0x404504 */
 extern unsigned char DAT_004045a4; /* 0x4045a4 */
 extern unsigned char DAT_00404644; /* 0x404644 */
@@ -4455,7 +4470,7 @@ LAB_0027142c:
       temp_v18 = (float)DAT_004474f4[0xa4];
       temp_v5 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v18 < 0.0f) << 0x1f) |
               ((unsigned int)(temp_v18 == 0.0f) << 0x1e);
-      in_fpscr = temp_v5 | ((unsigned int)NAN(temp_v18) << 0x1c);
+      in_fpscr = temp_v5 | ((unsigned int)(temp_v18 != temp_v18) << 0x1c);
       temp_v2 = (unsigned char)(temp_v5 >> 0x18);
       piVar22 = DAT_004474f4;
       if ((unsigned char)((temp_v2 >> 6) & 1) || temp_v2 >> 7 != ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
@@ -4498,7 +4513,7 @@ LAB_0027142c:
       DAT_004474f4[0xa4] = (int)temp_v18;
       temp_v5 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v18 < 0.0f) << 0x1f) |
               ((unsigned int)(temp_v18 == 0.0f) << 0x1e);
-      in_fpscr = temp_v5 | ((unsigned int)NAN(temp_v18) << 0x1c);
+      in_fpscr = temp_v5 | ((unsigned int)(temp_v18 != temp_v18) << 0x1c);
       temp_v2 = (unsigned char)(temp_v5 >> 0x18);
       if ((unsigned char)((temp_v2 >> 6) & 1) || temp_v2 >> 7 != ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
         temp_v18 = 0.0f;
@@ -5055,22 +5070,22 @@ LAB_0027142c:
     else {
       temp_v19 = 0.33333334f;
     }
-    piVar22 = (int *)(temp_v18 * temp_v19);
+    piVar22 = (int *)romwright_f2u((float)((temp_v18 * temp_v19)));
     piVar23 = piVar22;
     if ((int)piVar22 < 0x40a00000) {
       piVar23 = (int *)0x40a00000;
     }
-    if (temp_v18 <= (float)piVar23) {
+    if (temp_v18 <= romwright_u2f((unsigned int)(piVar23))) {
       piVar22 = DAT_00447e88;
     }
-    if (temp_v18 <= (float)piVar23) {
+    if (temp_v18 <= romwright_u2f((unsigned int)(piVar23))) {
       temp_v18 = (float)piVar22[0x14];
     }
     else if (temp_v17 < 0.0f) {
-      temp_v18 = (float)DAT_00447e88[0x13] - (float)piVar23;
+      temp_v18 = (float)DAT_00447e88[0x13] - romwright_u2f((unsigned int)(piVar23));
     }
     else {
-      temp_v18 = (float)DAT_00447e88[0x13] + (float)piVar23;
+      temp_v18 = (float)DAT_00447e88[0x13] + romwright_u2f((unsigned int)(piVar23));
     }
     if (temp_v18 < 0.0f) {
       temp_v18 = temp_v18 + 360.0f;

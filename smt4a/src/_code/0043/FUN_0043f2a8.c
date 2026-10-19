@@ -14,20 +14,20 @@ extern int *DAT_00646074; /* 0x646074 */
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_001bcd48. */
 /* Supplied declaration required: FUN_0043dd54. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 void FUN_0043f2a8(void)
 
 {
-/* irregular: 5 native warning(s); review required */
+/* irregular: 3 native warning(s); review required */
   unsigned int *puVar1;
   unsigned int *puVar2;
   unsigned char temp_v0;
   
   FUN_0043dd54(&DAT_0064602c);
-  nn_os_CriticalSection_Enter(&DAT_0064603c);
+  nn_os_CriticalSection_Enter((unsigned int)&DAT_0064603c);
   puVar2 = DAT_00646030;
   if (DAT_00646030 != (unsigned int *)0x0) {
     do {
@@ -46,12 +46,12 @@ void FUN_0043f2a8(void)
     } while (temp_v0 && puVar2 != (unsigned int *)0x0);
   }
   while (DAT_00646050 != 0) {
-    nn_os_CriticalSection_Leave(&DAT_0064603c);
+    nn_os_CriticalSection_Leave((unsigned int)&DAT_0064603c);
     FUN_001bcd48(100000000,0);
-    nn_os_CriticalSection_Enter(&DAT_0064603c);
+    nn_os_CriticalSection_Enter((unsigned int)&DAT_0064603c);
   }
   DAT_0064606d = 0;
-  nn_os_CriticalSection_Leave(&DAT_0064603c);
+  nn_os_CriticalSection_Leave((unsigned int)&DAT_0064603c);
   FUN_0043dd54(&DAT_0064602c);
   (**(romwright_code **)(*DAT_00646074 + 4))(DAT_00646074,DAT_00646070);
   DAT_00646070 = 0;

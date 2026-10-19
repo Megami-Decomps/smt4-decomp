@@ -7,6 +7,7 @@ typedef int romwright_code();
 void FUN_00100cb8(void)
 
 {
+  unsigned int unique0x10000039;
   char *pcVar1;
   
   for (pcVar1 = 

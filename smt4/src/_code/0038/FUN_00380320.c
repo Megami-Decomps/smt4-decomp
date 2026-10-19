@@ -74,6 +74,6 @@ void FUN_00380320(fn_00380320_arg0 *param_1,unsigned int param_2,unsigned int pa
   }
                     /* WARNING: Could not recover jumptable at 0x0038043c. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-  (*param_1->field_0x24)(1,param_1->field_0x38,temp_v1,*(unsigned int *)&param_1->field_0x28);
+  ((int (*)())param_1->field_0x24)(1,param_1->field_0x38,temp_v1,*(unsigned int *)&param_1->field_0x28);
   return;
 }

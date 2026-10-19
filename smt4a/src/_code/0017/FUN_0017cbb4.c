@@ -18,7 +18,7 @@ void FUN_0017cbb4(unsigned int *param_1)
   temp_v0 = 0;
   do {
     while (temp_v0 == 0) {
-      if (DAT_005b40e0 < DAT_005b40e4) {
+      if ((unsigned int)DAT_005b40e0 < DAT_005b40e4) {
         *DAT_005b40e0 = 0x11000;
         DAT_005b40e0[1] = 0xd0080;
         DAT_005b40e0 = DAT_005b40e0 + 2;
@@ -26,13 +26,13 @@ void FUN_0017cbb4(unsigned int *param_1)
       temp_v0 = 1;
     }
     if (temp_v0 != 0xc) {
-      if ((temp_v0 != 0xf) && (DAT_005b40e0 < DAT_005b40e4)) {
+      if ((temp_v0 != 0xf) && ((unsigned int)DAT_005b40e0 < DAT_005b40e4)) {
         *DAT_005b40e0 = 0;
         DAT_005b40e0[1] = (temp_v0 + 0x80U) | 0xf0000;
         DAT_005b40e0 = DAT_005b40e0 + 2;
       }
     }
-    else if (DAT_005b40e0 < DAT_005b40e4) {
+    else if ((unsigned int)DAT_005b40e0 < DAT_005b40e4) {
       *DAT_005b40e0 = 0xff0000;
       DAT_005b40e0[1] = 0xf008c;
       DAT_005b40e0 = DAT_005b40e0 + 2;

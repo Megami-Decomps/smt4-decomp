@@ -28,14 +28,14 @@ extern unsigned int *DAT_0044d15c; /* 0x44d15c */
 /* Supplied declaration required: FUN_002c4040. */
 /* Supplied declaration required: FUN_002c526c. */
 /* Supplied declaration required: FUN_0034ed38. */
-/* Supplied declaration required: nn_os_LightEvent_Initialize. */
+extern void nn_os_LightEvent_Initialize(unsigned int, unsigned char);
 
 
 unsigned int
 FUN_00351498(int param_1,int param_2,int param_3,int param_4,int param_5,unsigned int param_6)
 
 {
-/* irregular: 10 native warning(s); review required */
+/* irregular: 9 native warning(s); review required */
   unsigned int temp_v0;
   unsigned int *puVar2;
   int temp_v1;

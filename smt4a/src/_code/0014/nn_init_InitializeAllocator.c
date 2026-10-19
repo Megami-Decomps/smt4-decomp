@@ -23,7 +23,7 @@ extern int DAT_0062d624; /* 0x62d624 */
 /* Supplied declaration required: FUN_00188b60. */
 
 
-void nn_init_InitializeAllocator(int param_1)
+void nn_init_InitializeAllocator(unsigned int param_1)
 
 {
 /* irregular: 4 native warning(s); review required */

@@ -99,7 +99,7 @@ void FUN_0015e6f4(unsigned int *param_1,int param_2,unsigned int *param_3,unsign
       uStack_44 = uStack_64;
       uStack_40 = uStack_60;
       if (temp_v1 < 0) {
-        temp_v5 = romwright_piece_3_1(temp_v5._1_3_,100);
+        temp_v5 = romwright_piece_3_1((((unsigned int)(temp_v5) >> 8) & 0xffffffU),100);
         temp_v6 = temp_v7;
         uStack_68 = uStack_54;
         FUN_002c564c(0);
@@ -109,7 +109,7 @@ void FUN_0015e6f4(unsigned int *param_1,int param_2,unsigned int *param_3,unsign
         uStack_40 = uStack_60;
         if (temp_v1 != 0) {
           *(unsigned int *)(DAT_00432fc8 + 0x754) = *(unsigned int *)(DAT_00432fc8 + 0x754) & 0xfffeffff;
-          temp_v5 = romwright_piece_3_1(temp_v5._1_3_,200);
+          temp_v5 = romwright_piece_3_1((((unsigned int)(temp_v5) >> 8) & 0xffffffU),200);
           temp_v8[0] = temp_v5;
         }
       }

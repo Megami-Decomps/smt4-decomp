@@ -11,20 +11,20 @@ typedef struct {
 
 extern unsigned int FUN_002bbaf8(void);
 /* Supplied declaration required: FUN_002bbb2c. */
-extern int nn_fs_ipc_FileSystem_IsSdmcDetected(unsigned int *, char *);
+extern unsigned int nn_fs_ipc_FileSystem_IsSdmcDetected(unsigned int, unsigned char *);
 
 
 int FUN_0027eafc(void)
 
 {
 /* irregular: 2 native warning(s); review required */
-  int temp_v0;
+  unsigned int temp_v0;
   int temp_v1;
-  char temp_v2 [12];
+  unsigned char temp_v2 [12];
   
   temp_v1 = FUN_002bbaf8();
-  temp_v0 = nn_fs_ipc_FileSystem_IsSdmcDetected((unsigned int *)&temp_v1,temp_v2);
-  if (temp_v0 < 0) {
+  temp_v0 = nn_fs_ipc_FileSystem_IsSdmcDetected((unsigned int)&temp_v1,temp_v2);
+  if ((int)temp_v0 < 0) {
     FUN_002bbb2c(temp_v0,0x27eb20);
   }
                     /* WARNING: Treating indirect jump as return */

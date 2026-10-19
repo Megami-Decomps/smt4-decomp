@@ -9,15 +9,15 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: FUN_0015ea24. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
-/* Supplied declaration required: nn_snd_CTR_FxDelay_UpdateBuffer. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
+extern void nn_snd_CTR_FxDelay_UpdateBuffer(unsigned int, unsigned int);
 
 
 void nn_snd_CTR_MasterManager_ExecuteEffect(int param_1,int param_2,int param_3)
 
 {
-/* irregular: 4 native warning(s); review required */
+/* irregular: 1 native warning(s); review required */
   int temp_v0;
   int temp_v1;
   int temp_v2;
@@ -33,7 +33,7 @@ void nn_snd_CTR_MasterManager_ExecuteEffect(int param_1,int param_2,int param_3)
   temp_v0 = *(int *)(temp_v1 + 0x34);
   temp_v2 = param_3;
   if (temp_v0 != 0) {
-    nn_snd_CTR_FxDelay_UpdateBuffer(temp_v0,&temp_v2);
+    nn_snd_CTR_FxDelay_UpdateBuffer(temp_v0,(unsigned int)&temp_v2);
   }
   else {
     temp_v0 = *(int *)(temp_v1 + 0x38);

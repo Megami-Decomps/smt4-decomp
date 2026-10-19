@@ -22,15 +22,15 @@ extern unsigned int DAT_00618518; /* 0x618518 */
 /* Supplied declaration required: FUN_001c7c44. */
 /* Supplied declaration required: FUN_001cd5ac. */
 extern unsigned int FUN_00439e0c(unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
-/* Supplied declaration required: nn_snd_CTR_InitializeWaveBuffer. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
+extern void nn_snd_CTR_InitializeWaveBuffer(unsigned int);
 
 
 void FUN_00422c48(void)
 
 {
-/* irregular: 6 native warning(s); review required */
+/* irregular: 3 native warning(s); review required */
   int *piVar1;
   unsigned int temp_v0;
   unsigned int temp_v1;
@@ -42,7 +42,7 @@ void FUN_00422c48(void)
   unsigned int temp_v5;
   unsigned int temp_v6;
   
-  nn_os_CriticalSection_Enter(&DAT_00618518);
+  nn_os_CriticalSection_Enter((unsigned int)&DAT_00618518);
   if (DAT_005880d1 != '\0') {
     FUN_001cd5ac();
   }
@@ -102,6 +102,6 @@ void FUN_00422c48(void)
   if (DAT_005880d1 != '\0') {
     FUN_001c76b8();
   }
-  nn_os_CriticalSection_Leave(&DAT_00618518);
+  nn_os_CriticalSection_Leave((unsigned int)&DAT_00618518);
   return;
 }

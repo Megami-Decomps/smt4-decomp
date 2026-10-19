@@ -99,7 +99,7 @@ void FUN_00478608(fn_00478608_arg0 *param_1)
       FUN_001b57a8(puVar3,0);
       temp_v2 = *puVar3;
       temp_v3 = puVar3[1];
-      temp_v1 = romwright_piece_3_1(temp_v1._1_3_,200);
+      temp_v1 = romwright_piece_3_1((((unsigned int)(temp_v1) >> 8) & 0xffffffU),200);
       temp_v7 = temp_v5;
       temp_v6 = temp_v1;
       uStack_28 = temp_v4;

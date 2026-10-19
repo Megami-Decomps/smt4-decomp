@@ -98,8 +98,8 @@ void FUN_003269d4(int param_1,fn_003269d4_arg1 *param_2)
         puVar4[0xf] = 0;
         *puVar6 = 0;
         *(float *)&puVar6[2] = temp_v7;
-        puVar6[4] = temp_v7 * 2.0f;
-        puVar6[6] = temp_v7 * 3.0f;
+        *(float *)&puVar6[4] = temp_v7 * 2.0f;
+        *(float *)&puVar6[6] = temp_v7 * 3.0f;
         puVar4 = puVar4 + 0x10;
         puVar6 = puVar6 + 8;
       } while (temp_v0 < temp_v2);

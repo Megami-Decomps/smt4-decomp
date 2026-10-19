@@ -3,10 +3,8 @@
 #include "romwright_types.h"
 
 typedef int romwright_code();
-extern int FUN_00455748(int, unsigned int);
 
-
-int FUN_00455748(int param_1,unsigned int param_2)
+unsigned int FUN_00455748(int param_1,int *param_2)
 
 {
 /* irregular: 1 goto(s) */
@@ -26,7 +24,7 @@ int FUN_00455748(int param_1,unsigned int param_2)
             return 1;
           }
           do {
-            temp_v0 = FUN_00455748(param_1,*(unsigned int *)(param_2[5] + temp_v2 * 4));
+            temp_v0 = FUN_00455748(param_1,(int *)*(unsigned int *)(param_2[5] + temp_v2 * 4));
             if (temp_v0 == 0) {
               return 0;
             }
@@ -45,7 +43,7 @@ int FUN_00455748(int param_1,unsigned int param_2)
         piVar1 = (int *)*piVar1;
       } while (piVar1 != (int *)0x0);
     }
-    param_2 = (unsigned int)0x0;
+    param_2 = (int *)0x0;
 LAB_00455808:
     temp_v2 = param_2[0x15];
     temp_v1 = (**(romwright_code **)(**(int **)(param_1 + 0x260) + 0x18))();

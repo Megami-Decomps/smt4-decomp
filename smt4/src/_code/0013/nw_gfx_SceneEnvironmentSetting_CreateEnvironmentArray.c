@@ -214,11 +214,11 @@ void nw_gfx_SceneEnvironmentSetting_CreateEnvironmentArray
         puVar4 = (unsigned int *)((int)puVar4 + (int)piVar17);
       }
       FUN_0014b5b0(puVar4,temp_v13);
-      temp_v12 = romwright_piece_3_1(temp_v12._1_3_,1);
+      temp_v12 = romwright_piece_3_1((((unsigned int)(temp_v12) >> 8) & 0xffffffU),1);
       temp_v11 = puVar4;
       if (ppuVar21 != &temp_v11) {
         temp_v11 = *ppuVar21;
-        temp_v12 = romwright_piece_3_1(temp_v12._1_3_,*(unsigned char *)(temp_v2 + 8));
+        temp_v12 = romwright_piece_3_1((((unsigned int)(temp_v12) >> 8) & 0xffffffU),*(unsigned char *)(temp_v2 + 8));
         *(unsigned char *)(temp_v2 + 8) = 1;
         *ppuVar21 = puVar4;
       }
@@ -292,10 +292,10 @@ void nw_gfx_SceneEnvironmentSetting_CreateEnvironmentArray
       *(int ******)(param_1 + 0x34) = pppppiVar9;
       ppppppiVar8 = (int ******)temp_v13;
     }
-    if (temp_v6 < temp_v7) {
+    if (temp_v6 < (int ****)temp_v7) {
       ppppppiVar8 = (int ******)((int)temp_v7 - (int)temp_v6);
     }
-    if (temp_v6 < temp_v7) {
+    if (temp_v6 < (int ****)temp_v7) {
       temp_v4 = ((unsigned int)ppppppiVar8 & 0xf) >> 3;
     }
     else {

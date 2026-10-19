@@ -201,7 +201,7 @@ void FUN_0019cbf8(fn_0019cbf8_arg0 *param_1)
       param_1->field_0x48 = (fn_0019cbf8_arg0_p48 *)pfVar4;
       pfVar11 = param_1->field_0x2c;
       FUN_001ad8c4(pfVar11,*(unsigned int *)param_1->field_0x30,temp_v4);
-      param_1->field_0x4c = pfVar11;
+      param_1->field_0x4c = (undefined4)pfVar11;
       pfVar8 = param_1->field_0x48;
       *(fn_0019cbf8_arg0_p2c **)pfVar8->field_0x14 = pfVar11;
       *(unsigned int *)pfVar8->field_0x24 = temp_v5;
@@ -266,7 +266,7 @@ void FUN_0019cbf8(fn_0019cbf8_arg0 *param_1)
               temp_v2 = (int)piVar3 + temp_v2;
             }
           }
-          piVar3 = param_1->field_0x54 + temp_v4;
+          piVar3 = (int *)(param_1->field_0x54 + temp_v4);
           temp_v4 = temp_v4 + 1;
           *piVar3 = temp_v2;
         } while (temp_v4 < param_1->field_0x58);
@@ -335,7 +335,7 @@ void FUN_0019cbf8(fn_0019cbf8_arg0 *param_1)
               temp_v2 = (int)piVar3 + temp_v2;
             }
           }
-          piVar3 = param_1->field_0x64 + temp_v4;
+          piVar3 = (int *)(param_1->field_0x64 + temp_v4);
           temp_v4 = temp_v4 + 1;
           *piVar3 = temp_v2;
         } while (temp_v4 < param_1->field_0x68);

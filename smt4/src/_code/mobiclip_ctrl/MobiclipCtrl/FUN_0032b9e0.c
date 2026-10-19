@@ -62,9 +62,9 @@ unsigned char FUN_0032b9e0(void)
       puVar2 = &DAT_004c3b20;
       FUN_00350ff8();
       puVar3 = &DAT_004c3b20;
-      if ((int)(temp_v1 - (DAT_0044d02c + (unsigned int)(puVar2 < DAT_0044d028))) < 0 ==
+      if ((int)(temp_v1 - (DAT_0044d02c + (unsigned int)((unsigned int)puVar2 < DAT_0044d028))) < 0 ==
           (SBORROW4(temp_v1,DAT_0044d02c) !=
-          SBORROW4(temp_v1 - DAT_0044d02c,(unsigned int)(puVar2 < DAT_0044d028)))) {
+          SBORROW4(temp_v1 - DAT_0044d02c,(unsigned int)((unsigned int)puVar2 < DAT_0044d028)))) {
         FUN_0034fc50();
       }
       else {

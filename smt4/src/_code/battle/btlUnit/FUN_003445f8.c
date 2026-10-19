@@ -100,7 +100,7 @@ void FUN_003445f8(unsigned int param_1,int param_2)
         temp_v7 = *(float *)(DAT_004342c8 + 0x5c4);
         temp_v1 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v7 < 0.0f) << 0x1f) |
                 ((unsigned int)(temp_v7 == 0.0f) << 0x1e);
-        in_fpscr = temp_v1 | ((unsigned int)NAN(temp_v7) << 0x1c);
+        in_fpscr = temp_v1 | ((unsigned int)(temp_v7 != temp_v7) << 0x1c);
         temp_v3 = (unsigned char)(temp_v1 >> 0x18);
         if (!(unsigned char)((temp_v3 >> 6) & 1) && temp_v3 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
           temp_v6 = -1.0f;
@@ -258,7 +258,7 @@ LAB_00344904:
         temp_v7 = *(float *)(DAT_004342c8 + 0x5c4);
         temp_v1 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v7 < 0.0f) << 0x1f) |
                 ((unsigned int)(temp_v7 == 0.0f) << 0x1e);
-        in_fpscr = temp_v1 | ((unsigned int)NAN(temp_v7) << 0x1c);
+        in_fpscr = temp_v1 | ((unsigned int)(temp_v7 != temp_v7) << 0x1c);
         temp_v3 = (unsigned char)(temp_v1 >> 0x18);
         if (!(unsigned char)((temp_v3 >> 6) & 1) && temp_v3 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
           temp_v6 = -1.0f;

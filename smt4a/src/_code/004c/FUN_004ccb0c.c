@@ -65,7 +65,7 @@ void FUN_004ccb0c(unsigned int *param_1,fn_004ccb0c_arg1 *param_2)
   (*(unsigned char *)((unsigned char *)&temp_v3 + 1)) = pfVar3->field_0x29;
   (*(unsigned char *)((unsigned char *)&temp_v3 + 2)) = pfVar3->field_0x2a;
   (*(unsigned char *)((unsigned char *)&temp_v3 + 3)) = pfVar3->field_0x2b;
-  temp_v4 = romwright_piece_3_1(temp_v4._1_3_,pfVar3->field_0x2c);
+  temp_v4 = romwright_piece_3_1((((unsigned int)(temp_v4) >> 8) & 0xffffffU),pfVar3->field_0x2c);
   (*(unsigned short *)((unsigned char *)&temp_v5 + 0)) = pfVar3->field_0x1a;
   (*(unsigned char *)((unsigned char *)&temp_v5 + 2)) = pfVar3->field_0x1c;
   (*(unsigned char *)((unsigned char *)&temp_v5 + 3)) = pfVar3->field_0x1d;
@@ -82,7 +82,7 @@ void FUN_004ccb0c(unsigned int *param_1,fn_004ccb0c_arg1 *param_2)
   else {
     temp_v0 = 3;
   }
-  temp_v7 = romwright_piece_3_1(temp_v7._1_3_,temp_v0);
+  temp_v7 = romwright_piece_3_1((((unsigned int)(temp_v7) >> 8) & 0xffffffU),temp_v0);
   *param_1 = temp_v3;
   param_1[1] = temp_v4;
   param_1[2] = temp_v5;

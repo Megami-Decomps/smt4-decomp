@@ -60,7 +60,7 @@ void FUN_0010c6a0(int param_1,int param_2,int param_3,unsigned int *param_4)
       temp_v0 = *(int *)(param_2 + 8);
       if ((temp_v3[2] == 0) ||
          (temp_v1 = temp_v5, FUN_0010c144(temp_v5,param_2,param_3), temp_v1 != 0)) {
-        temp_v2[0] = (int *)romwright_piece_3_1(temp_v2[0]._1_3_,*(unsigned char *)(param_3 + 0x25));
+        temp_v2[0] = (int *)romwright_piece_3_1((((unsigned int)(temp_v2[0]) >> 8) & 0xffffffU),*(unsigned char *)(param_3 + 0x25));
         temp_v4 = (unsigned int)(*(unsigned char *)(param_3 + 0x25) >> 4);
         if (temp_v4 < 0xc) {
           FUN_002e74bc(*(unsigned int *)(param_3 + 0xd8));

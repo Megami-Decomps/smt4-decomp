@@ -10,13 +10,13 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_002c40f8. */
 /* Supplied declaration required: FUN_002c526c. */
-/* Supplied declaration required: nn_os_Thread_FinalizeImpl. */
+extern void nn_os_Thread_FinalizeImpl(unsigned int);
 
 
 unsigned int FUN_002348a8(int *param_1)
 
 {
-/* irregular: 4 native warning(s); review required */
+/* irregular: 3 native warning(s); review required */
   unsigned char *puVar1;
   int iStack_18;
   unsigned char temp_v0 [8];
@@ -39,7 +39,7 @@ unsigned int FUN_002348a8(int *param_1)
     FUN_002c526c();
   }
   *(unsigned char *)(param_1 + 1) = 1;
-  nn_os_Thread_FinalizeImpl(param_1);
+  nn_os_Thread_FinalizeImpl((unsigned int)param_1);
   if (*param_1 != 0) {
     software_interrupt(0x23);
     *param_1 = 0;

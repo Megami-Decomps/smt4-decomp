@@ -9,18 +9,18 @@ typedef struct {
 
 extern signed char DAT_0044e363; /* 0x44e363 */
 
-extern int FUN_00129b14(void);
+extern unsigned int FUN_00129b14(void);
 /* Supplied declaration required: FUN_002c131c. */
-extern int nn_gxlow_CTR_ReleaseGpuRight(void);
+extern unsigned int nn_gxlow_CTR_ReleaseGpuRight(void);
 
 
 void FUN_002bb194(int param_1)
 
 {
 /* irregular: 1 native warning(s); review required */
-  int temp_v0;
+  unsigned int temp_v0;
   unsigned int temp_v1;
-  int temp_v2;
+  unsigned int temp_v2;
   
   if (param_1 != 0) {
     DAT_0044e363 = 1;
@@ -33,16 +33,16 @@ void FUN_002bb194(int param_1)
     }
     DAT_0044e363 = 0;
     temp_v0 = nn_gxlow_CTR_ReleaseGpuRight();
-    temp_v2 = -0x275fd5fb;
-    if (temp_v0 != -0x275fd5fb) {
-      temp_v2 = -0x26ffe409;
+    temp_v2 = 0xd8a02a05;
+    if (temp_v0 != 0xd8a02a05) {
+      temp_v2 = 0xd9001bf7;
     }
-    if (temp_v0 == -0x275fd5fb || temp_v0 == temp_v2) {
+    if (temp_v0 == 0xd8a02a05 || temp_v0 == temp_v2) {
       return;
     }
     temp_v1 = 0x2bb1f4;
   }
-  if (-1 < temp_v0) {
+  if (-1 < (int)temp_v0) {
     return;
   }
   FUN_002c131c(temp_v0,temp_v1);

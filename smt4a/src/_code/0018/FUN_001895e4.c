@@ -9,19 +9,18 @@ extern unsigned int DAT_005c1fd0; /* 0x5c1fd0 */
 
 extern unsigned int FUN_001a0e10(void);
 extern int nn_cfg_CTR_detail_InitializeBase(unsigned int *, unsigned int);
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 unsigned int FUN_001895e4(void)
 
 {
-/* irregular: 2 native warning(s); review required */
   unsigned int temp_v0;
   int temp_v1;
   
   temp_v0 = FUN_001a0e10();
-  nn_os_CriticalSection_Enter();
+  nn_os_CriticalSection_Enter(temp_v0);
   if (DAT_005c1498 == 0) {
     temp_v1 = nn_cfg_CTR_detail_InitializeBase(&DAT_005c1fd0,0x56573b);
     if (temp_v1 >= 0) {

@@ -22,7 +22,7 @@ extern int FUN_002c17dc(); /* 0x2c17dc */
 /* Supplied declaration required: FUN_00389b58. */
 
 
-romwright_code * FUN_0031ba34(unsigned int param_1,unsigned int *param_2,romwright_code param_3,romwright_code param_4)
+romwright_code * FUN_0031ba34(unsigned int param_1,unsigned int *param_2,unsigned char param_3,unsigned char param_4)
 
 {
 /* irregular: irregular input(s): in_s0, in_s1, in_s2, in_s3; 4 native warning(s); review required */
@@ -39,7 +39,7 @@ romwright_code * FUN_0031ba34(unsigned int param_1,unsigned int *param_2,romwrig
     FUN_002e6354();
     temp_v0 = param_1;
     FUN_00389b58();
-    *(unsigned int *)(pcVar1 + 8) = temp_v0;
+    *(unsigned int *)((unsigned char *)pcVar1 + 8) = temp_v0;
     if (param_2 != (unsigned int *)0x0) {
       temp_v0 = 1;
     }
@@ -47,16 +47,16 @@ romwright_code * FUN_0031ba34(unsigned int param_1,unsigned int *param_2,romwrig
     if (param_2 != (unsigned int *)0x0) {
       *param_2 = temp_v0;
     }
-    *(unsigned int *)(pcVar1 + 0x20) = in_s0;
-    *(unsigned int *)(pcVar1 + 0x24) = in_s1;
-    *(unsigned int *)(pcVar1 + 0x28) = in_s2;
-    pcVar1[0x30] = romwright_subpiece_4_1_0(param_1,0);
-    pcVar1[0x150] = param_3;
-    pcVar1[0x45] = param_4;
-    *(unsigned int *)(pcVar1 + 0x2c) = in_s3;
-    *(unsigned int *)(pcVar1 + 0x48) = in_s3;
-    *(unsigned int *)(pcVar1 + 0x15c) = 0xffffffff;
-    *(unsigned int *)(pcVar1 + 0x164) = 0xffffffff;
+    *(unsigned int *)((unsigned char *)pcVar1 + 0x20) = in_s0;
+    *(unsigned int *)((unsigned char *)pcVar1 + 0x24) = in_s1;
+    *(unsigned int *)((unsigned char *)pcVar1 + 0x28) = in_s2;
+    ((unsigned char *)pcVar1)[0x30] = romwright_subpiece_4_1_0(param_1,0);
+    ((unsigned char *)pcVar1)[0x150] = (unsigned char)param_3;
+    ((unsigned char *)pcVar1)[0x45] = (unsigned char)param_4;
+    *(unsigned int *)((unsigned char *)pcVar1 + 0x2c) = in_s3;
+    *(unsigned int *)((unsigned char *)pcVar1 + 0x48) = in_s3;
+    *(unsigned int *)((unsigned char *)pcVar1 + 0x15c) = 0xffffffff;
+    *(unsigned int *)((unsigned char *)pcVar1 + 0x164) = 0xffffffff;
   }
   return pcVar1;
 }

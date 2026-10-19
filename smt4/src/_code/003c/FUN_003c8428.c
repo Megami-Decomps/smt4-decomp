@@ -60,7 +60,7 @@ void FUN_003c8428(fn_003c8428_arg0 *param_1)
   temp_v8 = 0xffffffff;
   temp_v7 = 0;
   do {
-    if ((fn_003c8428_arg0 *)(uint)(unsigned short)puVar8[temp_v7 + 0x305] == param_1) {
+    if ((fn_003c8428_arg0 *)(unsigned int)(unsigned short)puVar8[temp_v7 + 0x305] == param_1) {
       temp_v7 = FUN_002b63ac();
       temp_v8 = FUN_002eea80(param_1,*(unsigned char *)(temp_v7 + 0x76));
       break;

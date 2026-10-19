@@ -7,14 +7,14 @@ typedef int romwright_code();
 /* Unsupported intrinsic, declaration required: hasExclusiveAccess (CALLOTHER). */
 /* Supplied declaration required: FUN_001a08d8. */
 /* Supplied declaration required: FUN_002e3140. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 void FUN_001a26e4(int param_1)
 
 {
-/* irregular: irregular input(s): in_r12; 6 native warning(s); review required */
+/* irregular: irregular input(s): in_r12; 4 native warning(s); review required */
   char temp_v0;
   unsigned char temp_v1;
   unsigned char *pbVar3;

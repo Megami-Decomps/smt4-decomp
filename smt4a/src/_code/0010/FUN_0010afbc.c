@@ -104,7 +104,7 @@ FUN_0010afbc(fn_0010afbc_arg0 *param_1,unsigned int param_2,unsigned int param_3
       }
     }
   }
-  piVar2 = param_1->field_0xc;
+  piVar2 = (int *)param_1->field_0xc;
   if ((int)(param_4 * 0x40000000) < 0) {
     temp_v0 = (**(romwright_code **)(*piVar2 + 0x14))(piVar2,temp_v5,0);
   }

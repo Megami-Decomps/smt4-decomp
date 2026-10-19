@@ -13,13 +13,13 @@ typedef struct {
 /* Supplied declaration required: FUN_0017fc88. */
 extern unsigned int FUN_0017fcf8(void);
 /* Supplied declaration required: FUN_00188cb4. */
-/* Supplied declaration required: nn_os_ThreadLocalStorage_ClearAllSlots. */
+extern void nn_os_ThreadLocalStorage_ClearAllSlots(void);
 
 
 unsigned int FUN_0019a318(unsigned int *param_1)
 
 {
-/* irregular: 5 native warning(s); review required */
+/* irregular: 4 native warning(s); review required */
   unsigned int temp_v0;
   
   nn_os_ThreadLocalStorage_ClearAllSlots();

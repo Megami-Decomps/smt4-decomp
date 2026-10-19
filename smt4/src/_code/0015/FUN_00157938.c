@@ -16,18 +16,18 @@ extern unsigned char DAT_004ead10; /* 0x4ead10 */
 /* Supplied declaration required: FUN_002a2ab0. */
 /* Supplied declaration required: FUN_002a3178. */
 /* Supplied declaration required: FUN_002b4cd4. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
-/* Supplied declaration required: nn_snd_CTR_FxDelay_Finalize. */
-/* Supplied declaration required: nn_snd_CTR_FxReverb_Finalize. */
-/* Supplied declaration required: nn_snd_CTR_FxReverb_Initialize. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
+extern void nn_snd_CTR_FxDelay_Finalize(unsigned int);
+extern void nn_snd_CTR_FxReverb_Finalize(unsigned int);
+extern unsigned char nn_snd_CTR_FxReverb_Initialize(unsigned int);
 /* Supplied declaration required: nw_snd_internal_MoveValue_float_int_SetTarget. */
 
 
 unsigned int FUN_00157938(int param_1,int param_2,int param_3,unsigned int param_4)
 
 {
-/* irregular: 10 native warning(s); review required */
+/* irregular: 5 native warning(s); review required */
   int temp_v0;
   unsigned int unaff_r4;
   unsigned int unaff_r5;
@@ -47,10 +47,10 @@ unsigned int FUN_00157938(int param_1,int param_2,int param_3,unsigned int param
     nn_os_CriticalSection_Enter(0x4e6f58);
     temp_v0 = temp_v1 * 8;
     if (*(int *)(temp_v0 + 0x4e6f48) != 0) {
-      nn_snd_CTR_FxDelay_Finalize();
+      nn_snd_CTR_FxDelay_Finalize(*(int *)(temp_v0 + 0x4e6f48));
     }
     if (*(int *)(temp_v0 + 0x4e6f4c) != 0) {
-      nn_snd_CTR_FxReverb_Finalize();
+      nn_snd_CTR_FxReverb_Finalize(*(int *)(temp_v0 + 0x4e6f4c));
     }
     *(unsigned int *)(temp_v0 + 0x4e6f48) = 0;
     *(unsigned int *)(temp_v0 + 0x4e6f4c) = 0;

@@ -664,7 +664,7 @@ LAB_001438b8:
   *(unsigned int *)(temp_v1 + 0x784) = (*(unsigned int *)(temp_v1 + 0x784) & 0xc0000000) | (temp_v0 >> 3);
   *puVar9 = *puVar9 | 1;
   FUN_002aa6ac(0x81,10,temp_v1 + 0x774);
-  if (DAT_004652a0 < DAT_004652a4) {
+  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
     *DAT_004652a0 = *(unsigned int *)(temp_v1 + 0x7a8);
     DAT_004652a0[1] = 0xf008e;
     DAT_004652a0 = DAT_004652a0 + 2;

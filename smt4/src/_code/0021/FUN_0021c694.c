@@ -473,12 +473,12 @@ int FUN_0021c694(int param_1)
     *(float *)(temp_v0 + 0x4a12cc) = temp_v8;
     temp_v5 = temp_v26 < temp_v28;
     temp_v6 = temp_v26 == temp_v28;
-    temp_v7 = NAN(temp_v26) || NAN(temp_v28);
+    temp_v7 = (temp_v26 != temp_v26) || (temp_v28 != temp_v28);
     temp_v8 = 10.0f;
     if (!temp_v6 && !temp_v5) {
       temp_v5 = temp_v26 < temp_v24;
       temp_v6 = temp_v26 == temp_v24;
-      temp_v7 = NAN(temp_v26) || NAN(temp_v24);
+      temp_v7 = (temp_v26 != temp_v26) || (temp_v24 != temp_v24);
     }
     temp_v23 = (float)temp_v19;
     if (!(temp_v6 || temp_v5 != temp_v7)) {
@@ -570,11 +570,11 @@ int FUN_0021c694(int param_1)
     else {
       temp_v5 = temp_v28 < temp_v26;
       temp_v6 = temp_v28 == temp_v26;
-      temp_v7 = NAN(temp_v28) || NAN(temp_v26);
+      temp_v7 = (temp_v28 != temp_v28) || (temp_v26 != temp_v26);
       if (!temp_v6 && !temp_v5) {
         temp_v5 = temp_v28 < temp_v24;
         temp_v6 = temp_v28 == temp_v24;
-        temp_v7 = NAN(temp_v28) || NAN(temp_v24);
+        temp_v7 = (temp_v28 != temp_v28) || (temp_v24 != temp_v24);
       }
       if (!(temp_v6 || temp_v5 != temp_v7)) {
         *(unsigned short *)(temp_v0 + 0x4a13d8) = 1;

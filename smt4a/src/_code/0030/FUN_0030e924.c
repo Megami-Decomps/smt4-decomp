@@ -10,7 +10,6 @@ typedef struct {
 extern unsigned char DAT_0055780c; /* 0x55780c */
 extern unsigned char DAT_0055cba4; /* 0x55cba4 */
 
-/* Unsupported intrinsic, declaration required: while (INT_ADD). */
 /* Supplied declaration required: FUN_002e33f0. */
 extern int FUN_0030e914(unsigned int *, unsigned int, unsigned int);
 
@@ -18,7 +17,7 @@ extern int FUN_0030e914(unsigned int *, unsigned int, unsigned int);
 unsigned int * FUN_0030e924(unsigned int *param_1,int param_2,unsigned char param_3,unsigned int param_4)
 
 {
-/* irregular: 4 goto(s); 2 native warning(s); review required */
+/* irregular: 4 goto(s); 1 native warning(s); review required */
   unsigned char temp_v0;
   int temp_v1;
   unsigned char *puVar3;

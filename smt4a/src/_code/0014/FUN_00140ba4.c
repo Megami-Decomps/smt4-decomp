@@ -52,20 +52,18 @@ extern unsigned int FUN_0015959c(void);
 /* Supplied declaration required: FUN_0015976c. */
 /* Supplied declaration required: FUN_001d1438. */
 extern int FUN_002eba64(unsigned int *);
-/* Supplied declaration required: nn_hid_CTR_AccelerometerReader_ConvertToAcceleration. */
-/* Supplied declaration required: nn_hid_CTR_AccelerometerReader_ReadLatest. */
+extern void nn_hid_CTR_AccelerometerReader_ConvertToAcceleration(unsigned int, unsigned int, int, unsigned int);
+extern unsigned char nn_hid_CTR_AccelerometerReader_ReadLatest(unsigned int, unsigned int);
 
 
 unsigned int FUN_00140ba4(void)
 
 {
-/* irregular: irregular input(s): in_fpscr, in_r3; 8 native warning(s); review required */
+/* irregular: irregular input(s): in_fpscr; 6 native warning(s); review required */
   int temp_v0;
   unsigned int temp_v1;
   int temp_v2;
   int temp_v3;
-  unsigned int in_r3;
-  unsigned int unaff_r4;
   unsigned int in_fpscr;
   float temp_v4;
   float temp_v5;
@@ -91,8 +89,7 @@ unsigned int FUN_00140ba4(void)
   DAT_006474c4 = DAT_006474b8;
   DAT_006474c8 = DAT_006474bc;
   DAT_006474cc = DAT_006474c0;
-  nn_hid_CTR_AccelerometerReader_ReadLatest
-            (&DAT_00647448,&DAT_006474ac,DAT_006474bc,DAT_006474c0,in_r3,unaff_r4);
+  nn_hid_CTR_AccelerometerReader_ReadLatest((unsigned int)&DAT_00647448,(unsigned int)&DAT_006474ac);
   if (DAT_006474a5 == '\x01') {
     temp_v5 = (float)VectorSignedToFloat((int)DAT_006474ac,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v9 = (float)VectorSignedToFloat((int)DAT_006474ae,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -129,7 +126,6 @@ unsigned int FUN_00140ba4(void)
     }
     DAT_006474b0 = (short)(int)temp_v10;
   }
-  nn_hid_CTR_AccelerometerReader_ConvertToAcceleration
-            (&DAT_00647448,&DAT_006474b8,1,&DAT_006474ac,0xffffffff);
+  nn_hid_CTR_AccelerometerReader_ConvertToAcceleration((unsigned int)&DAT_00647448,(unsigned int)&DAT_006474b8,1,(unsigned int)&DAT_006474ac);
   return 1;
 }

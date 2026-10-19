@@ -115,7 +115,7 @@ void FUN_004cd4c0(fn_004cd4c0_arg0 *param_1,int param_2)
   temp_v22 = 0;
   temp_v19 = (unsigned int)*(unsigned short *)(temp_v11 + 0x18) << 0x10;
   temp_v18 = *(unsigned int *)(temp_v11 + 0x28);
-  temp_v19 = romwright_piece_3_1(temp_v19._1_3_,*(unsigned char *)(temp_v11 + 0x2c));
+  temp_v19 = romwright_piece_3_1((((unsigned int)(temp_v19) >> 8) & 0xffffffU),*(unsigned char *)(temp_v11 + 0x2c));
   temp_v20 = *(unsigned int *)(temp_v11 + 0x1a);
   temp_v3 = *(unsigned short *)(temp_v11 + 6);
   FUN_003da99c(temp_v3,&temp_v18);
@@ -130,7 +130,7 @@ void FUN_004cd4c0(fn_004cd4c0_arg0 *param_1,int param_2)
   else {
     temp_v2 = 3;
   }
-  temp_v22 = romwright_piece_3_1(temp_v22._1_3_,temp_v2);
+  temp_v22 = romwright_piece_3_1((((unsigned int)(temp_v22) >> 8) & 0xffffffU),temp_v2);
   temp_v17 = (temp_v22 & 0xffff) | (unaff_r6 & 0xffff0000);
   temp_v16 = temp_v18;
   uStack_6c = temp_v19;
@@ -195,20 +195,20 @@ void FUN_004cd4c0(fn_004cd4c0_arg0 *param_1,int param_2)
               do {
                 pfVar10 = param_1;
                 FUN_004cd340(param_1,&temp_v16,1);
-                switch(pfVar10) {
-                case (fn_004cd4c0_arg0 *)0x0:
+                switch((unsigned int)pfVar10) {
+                case (unsigned int)0x0:
                   param_1->field_0x20 = param_1->field_0x20 + 1;
                   break;
-                case (fn_004cd4c0_arg0 *)0x1:
+                case (unsigned int)0x1:
                   param_1->field_0x22 = param_1->field_0x22 + 1;
                   break;
-                case (fn_004cd4c0_arg0 *)0x2:
+                case (unsigned int)0x2:
                   param_1->field_0x24 = param_1->field_0x24 + 1;
                   break;
-                case (fn_004cd4c0_arg0 *)0x3:
+                case (unsigned int)0x3:
                   param_1->field_0x26 = param_1->field_0x26 + 1;
                   break;
-                case (fn_004cd4c0_arg0 *)0x4:
+                case (unsigned int)0x4:
                   param_1->field_0x28 = param_1->field_0x28 + 1;
                 }
                 temp_v12 = temp_v12 + 1;

@@ -2,6 +2,21 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
+#ifndef ROMWRIGHT_FLOAT_BITS_DEFINED
+#define ROMWRIGHT_FLOAT_BITS_DEFINED
+static unsigned int romwright_f2u(float value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.f = value;
+    return bits.u;
+}
+static float romwright_u2f(unsigned int value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.u = value;
+    return bits.f;
+}
+#endif
 /* stack frame of param_1: 9 slot(s), 36 byte(s) */
 typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
@@ -166,8 +181,8 @@ LAB_004899f8:
             *puVar7 = 1;
             *puVar8 = 1;
             pfVar3 = (float *)FUN_00492b84(temp_v7);
-            temp_v4 = (unsigned int *)(*pfVar3 * 2.0f);
-            temp_v5 = (unsigned int *)(pfVar3[1] * 2.0f);
+            temp_v4 = (unsigned int *)romwright_f2u((float)((*pfVar3 * 2.0f)));
+            temp_v5 = (unsigned int *)romwright_f2u((float)((pfVar3[1] * 2.0f)));
             FUN_00492c18(temp_v7,&temp_v4);
             *(unsigned char *)((int)temp_v10 + 0xd8e) = 0xc;
             *(unsigned char *)(param_1 + 0x57) = 5;
@@ -301,8 +316,8 @@ LAB_004899f8:
         *puVar7 = 1;
         *puVar8 = 1;
         pfVar3 = (float *)FUN_00492b84(temp_v7);
-        temp_v4 = (unsigned int *)(*pfVar3 * 0.5f);
-        temp_v5 = (unsigned int *)(pfVar3[1] * 0.5f);
+        temp_v4 = (unsigned int *)romwright_f2u((float)((*pfVar3 * 0.5f)));
+        temp_v5 = (unsigned int *)romwright_f2u((float)((pfVar3[1] * 0.5f)));
         FUN_00492c18(temp_v7,&temp_v4);
         *(unsigned char *)((int)temp_v10 + 0xd8e) = 6;
         *(unsigned char *)(param_1 + 0x59) = 5;

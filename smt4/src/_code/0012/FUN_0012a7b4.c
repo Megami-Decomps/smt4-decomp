@@ -9,13 +9,13 @@ extern int FUN_0013be98(unsigned char *);
 /* Supplied declaration required: FUN_0013bed4. */
 extern int FUN_0013bf10(unsigned char *);
 /* Supplied declaration required: FUN_0013bf4c. */
-/* Supplied declaration required: nn_camera_CTR_detail_ArriveApplication. */
+extern unsigned int nn_camera_CTR_detail_ArriveApplication(void);
 
 
 void FUN_0012a7b4(int param_1)
 
 {
-/* irregular: 3 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   int temp_v0;
   unsigned int temp_v1;
   unsigned char temp_v2 [4];

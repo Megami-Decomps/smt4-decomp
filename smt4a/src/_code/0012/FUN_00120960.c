@@ -30,7 +30,6 @@ extern unsigned char DAT_0055b06c; /* 0x55b06c */
 extern unsigned short DAT_00594986; /* 0x594986 */
 extern unsigned short DAT_00594988; /* 0x594988 */
 
-/* Unsupported intrinsic, declaration required: while (COPY). */
 /* Supplied declaration required: FUN_002e7232. */
 /* Supplied declaration required: FUN_002e75fa. */
 extern int FUN_002e760a(unsigned int);
@@ -53,7 +52,7 @@ extern int FUN_003105a0(int *, unsigned int *);
 unsigned int FUN_00120960(int param_1,int param_2,unsigned int param_3,unsigned int param_4,int param_5)
 
 {
-/* irregular: 2 goto(s); 10 native warning(s); review required */
+/* irregular: 2 goto(s); 9 native warning(s); review required */
   unsigned int temp_v0;
   int temp_v1;
   int temp_v2;

@@ -3,6 +3,21 @@
 #include "romwright_types.h"
 
 typedef int romwright_code();
+#ifndef ROMWRIGHT_FLOAT_BITS_DEFINED
+#define ROMWRIGHT_FLOAT_BITS_DEFINED
+static unsigned int romwright_f2u(float value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.f = value;
+    return bits.u;
+}
+static float romwright_u2f(unsigned int value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.u = value;
+    return bits.f;
+}
+#endif
 /* stack frame of void: 8 slot(s), 32 byte(s) */
 typedef struct {
     unsigned int sp5C; /* 0x5c: local_5c */
@@ -175,7 +190,7 @@ unsigned int FUN_00214a60(void)
           }
           temp_v19 = (temp_v0 & 4) != 0;
           if (temp_v19) {
-            temp_v25._0_3_ = romwright_piece_1_2(temp_v19 || temp_v18,(unsigned short)temp_v25);
+            temp_v25 = (((unsigned int)(temp_v25) & 0xff000000U) | (((unsigned int)(romwright_piece_1_2(temp_v19 || temp_v18,(unsigned short)temp_v25)) & 0xffffffU) << 0));
             temp_v25 = (unsigned int)(unsigned int)temp_v25;
           }
           if ((temp_v0 & 8) != 0) {
@@ -448,13 +463,13 @@ unsigned int FUN_00214a60(void)
         temp_v8 = (temp_v14 + 4) & 7;
         temp_v13 = (temp_v14 + 1) & 7;
         temp_v7 = (temp_v8 + 1) & 7;
-        FUN_002bf288(2,0x36,0x61,(int)(float)(&puStack_120)[temp_v14 * 2],(int)afStack_11c[temp_v14 * 2]
+        FUN_002bf288(2,0x36,0x61,(int)romwright_u2f((unsigned int)((&puStack_120)[temp_v14 * 2])),(int)afStack_11c[temp_v14 * 2]
                      ,0xd3);
-        FUN_002bf288(2,0x36,0x60,(int)(float)(&puStack_120)[temp_v13 * 2],(int)afStack_11c[temp_v13 * 2]
+        FUN_002bf288(2,0x36,0x60,(int)romwright_u2f((unsigned int)((&puStack_120)[temp_v13 * 2])),(int)afStack_11c[temp_v13 * 2]
                      ,0xd3);
-        FUN_002bf288(2,0x36,0x61,(int)(float)(&puStack_120)[temp_v8 * 2],(int)afStack_11c[temp_v8 * 2],
+        FUN_002bf288(2,0x36,0x61,(int)romwright_u2f((unsigned int)((&puStack_120)[temp_v8 * 2])),(int)afStack_11c[temp_v8 * 2],
                      0xd3);
-        FUN_002bf288(2,0x36,0x60,(int)(float)(&puStack_120)[temp_v7 * 2],(int)afStack_11c[temp_v7 * 2],
+        FUN_002bf288(2,0x36,0x60,(int)romwright_u2f((unsigned int)((&puStack_120)[temp_v7 * 2])),(int)afStack_11c[temp_v7 * 2],
                      0xd3);
         temp_v4 = DAT_0044ea00;
         piVar14 = (int *)(DAT_0044ea00 + 0x124c);

@@ -12,14 +12,14 @@ extern signed char DAT_004e3169; /* 0x4e3169 */
 /* Supplied declaration required: FUN_002bd430. */
 extern int FUN_002bd440(void);
 /* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 void FUN_0010bf78(void)
 
 {
-/* irregular: 6 unstructured edge(s); 1 goto(s); 5 native warning(s); review required */
+/* irregular: 6 unstructured edge(s); 1 goto(s); 3 native warning(s); review required */
   int temp_v0;
   int temp_v1;
   int temp_v2;
@@ -44,7 +44,7 @@ void FUN_0010bf78(void)
             }
           }
           if (temp_v0 != 0) {
-            nn_os_CriticalSection_Enter(&DAT_004e315c);
+            nn_os_CriticalSection_Enter((unsigned int)&DAT_004e315c);
             for (temp_v1 = DAT_004e3154; temp_v1 != 0; temp_v1 = *(int *)(temp_v1 + 0x70)) {
               if (temp_v1 == temp_v0) {
                 temp_v1 = DAT_004e3154;
@@ -87,7 +87,7 @@ LAB_0010c068:
               FUN_002bd430();
             }
             FUN_002c415c(temp_v0);
-            nn_os_CriticalSection_Leave(&DAT_004e315c);
+            nn_os_CriticalSection_Leave((unsigned int)&DAT_004e315c);
           }
         }
         temp_v3 = temp_v3 + 1;

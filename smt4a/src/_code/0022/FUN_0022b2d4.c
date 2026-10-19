@@ -3,6 +3,21 @@
 #include "romwright_types.h"
 
 typedef int romwright_code();
+#ifndef ROMWRIGHT_FLOAT_BITS_DEFINED
+#define ROMWRIGHT_FLOAT_BITS_DEFINED
+static unsigned int romwright_f2u(float value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.f = value;
+    return bits.u;
+}
+static float romwright_u2f(unsigned int value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.u = value;
+    return bits.f;
+}
+#endif
 /* stack frame of void: 12 slot(s), 48 byte(s) */
 typedef struct {
     unsigned int sp84; /* 0x84: local_84 */
@@ -353,13 +368,13 @@ LAB_0022b9b8:
             temp_v20 = (float)VectorSignedToFloat(temp_v27[5],(unsigned char)(in_fpscr >> 0x16) & 3);
             temp_v21 = (float)VectorSignedToFloat(temp_v27[6],(unsigned char)(in_fpscr >> 0x16) & 3);
             temp_v26 = (unsigned char *)((unsigned long long)temp_v22 >> 0x20);
-            temp_v25 = (unsigned char *)(temp_v21 + 48.0f);
+            temp_v25 = (unsigned char *)romwright_f2u((float)((temp_v21 + 48.0f)));
             temp_v24 = (float)VectorSignedToFloat((int)*(short *)(*(int *)(*(int *)(temp_v2 + 0x2028)
                                                                           + 0x10) + 0x12),
                                                   (unsigned char)(in_fpscr >> 0x16) & 3);
             temp_v24 = (temp_v20 + 300.0f) - temp_v24;
             if (*(short *)(temp_v28 + 0x138e) == 0x241) {
-              temp_v25 = (unsigned char *)((float)temp_v25 + 23.9f);
+              temp_v25 = (unsigned char *)romwright_f2u((float)((romwright_u2f((unsigned int)(temp_v25)) + 23.9f)));
             }
             VectorUnsignedToFloat(*(unsigned int *)(temp_v2 + 0x202c),(unsigned char)(in_fpscr >> 0x16) & 3);
             FUN_003fabfc(*(unsigned int *)(temp_v2 + 0x2028),0,&temp_v24,temp_v10 | 0xff,0);

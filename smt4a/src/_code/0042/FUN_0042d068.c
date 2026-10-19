@@ -19,13 +19,13 @@ extern int iRam00643324; /* 0x643324 */
 /* Unsupported intrinsic, declaration required: hasExclusiveAccess (CALLOTHER). */
 /* Supplied declaration required: FUN_001b4a58. */
 /* Supplied declaration required: FUN_002e3140. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
 
 
 void FUN_0042d068(int param_1,int *param_2,int param_3)
 
 {
-/* irregular: irregular input(s): in_lr; 5 native warning(s); review required */
+/* irregular: irregular input(s): in_lr; 4 native warning(s); review required */
   int temp_v0;
   unsigned int unaff_r4;
   unsigned int in_lr;
@@ -40,7 +40,7 @@ void FUN_0042d068(int param_1,int *param_2,int param_3)
     return;
   }
   if (param_2[2] != 0) {
-    nn_os_CriticalSection_Enter();
+    nn_os_CriticalSection_Enter(0x64331c);
     if ((int *)*param_2 == param_2) {
       piRam00643318 = (int *)0x0;
     }

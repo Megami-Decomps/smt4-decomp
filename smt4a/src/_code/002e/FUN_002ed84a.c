@@ -19,7 +19,7 @@ unsigned int FUN_002ed84a(int param_1,unsigned char *param_2,unsigned int param_
 {
 /* irregular: 1 native warning(s); review required */
   unsigned char temp_v0;
-  unsigned char uStack_f [3];
+  unsigned int uStack_f;
   unsigned int uStack_c;
   
   (*(unsigned int *)&temp_v0) = romwright_piece_3_1((int)((unsigned int)param_3 >> 8),*param_2);

@@ -9,13 +9,12 @@ typedef struct {
 
 extern unsigned int DAT_00617ca0; /* 0x617ca0 */
 
-/* Supplied declaration required: nn_fnd_ExpHeapBase_Allocate. */
+extern unsigned int nn_fnd_ExpHeapBase_Allocate(unsigned int, unsigned int, int, unsigned char, int, unsigned char);
 
 
 void FUN_0025fffc(unsigned int param_1)
 
 {
-/* irregular: 1 native warning(s); review required */
-  nn_fnd_ExpHeapBase_Allocate(&DAT_00617ca0,param_1,4,0,0,0);
+  nn_fnd_ExpHeapBase_Allocate((unsigned int)&DAT_00617ca0,param_1,4,0,0,0);
   return;
 }

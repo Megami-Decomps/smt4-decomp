@@ -167,7 +167,7 @@ void FUN_00176e84(int param_1,unsigned int param_2,int param_3,int param_4)
   }
   else {
     *(unsigned int *)(temp_v0 + 0xc) = temp_v2 + 0x20;
-    if (puVar5 < DAT_005b40e4) {
+    if ((unsigned int)puVar5 < DAT_005b40e4) {
       DAT_005b40e0 = puVar5 + 2;
       puVar5[1] = 0x8025e;
       *puVar5 = 0;

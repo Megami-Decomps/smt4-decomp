@@ -18,15 +18,15 @@ extern signed char DAT_0063f4fe; /* 0x63f4fe */
 /* Supplied declaration required: FUN_00152bf8. */
 extern int FUN_00178144(unsigned int);
 /* Supplied declaration required: FUN_001b6390. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
-/* Supplied declaration required: nn_snd_CTR_Voice_SetState. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
+extern void nn_snd_CTR_Voice_SetState(unsigned int, int);
 
 
 void FUN_00154320(unsigned int param_1,unsigned int param_2,unsigned int param_3)
 
 {
-/* irregular: 8 goto(s); irregular input(s): in_fpscr; 6 native warning(s); review required */
+/* irregular: 8 goto(s); irregular input(s): in_fpscr; 3 native warning(s); review required */
   int temp_v0;
   unsigned int temp_v1;
   int temp_v2;
@@ -34,7 +34,7 @@ void FUN_00154320(unsigned int param_1,unsigned int param_2,unsigned int param_3
   unsigned char temp_v4;
   unsigned int in_fpscr;
   
-  nn_os_CriticalSection_Enter();
+  nn_os_CriticalSection_Enter((unsigned int)&DAT_0063f4f0);
   if (DAT_0063f4fd != '\0') {
     temp_v3 = 0;
     DAT_0063f4ec = 0;
@@ -167,6 +167,6 @@ LAB_00154638:
       DAT_0063f4fe = '\0';
     }
   }
-  nn_os_CriticalSection_Leave(&DAT_0063f4f0);
+  nn_os_CriticalSection_Leave((unsigned int)&DAT_0063f4f0);
   return;
 }

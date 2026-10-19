@@ -11,14 +11,13 @@ extern unsigned char DAT_006433d0; /* 0x6433d0 */
 extern unsigned short uRam006446ea; /* 0x6446ea */
 
 extern int FUN_001c6e20(void);
-/* Supplied declaration required: nn_snd_CTR_Dspsnd_SetChannelPlayStop. */
-/* Supplied declaration required: nn_snd_CTR_VoiceImpl_ReleaseWaveBuffer. */
+extern unsigned char nn_snd_CTR_Dspsnd_SetChannelPlayStop(unsigned int, unsigned char);
+extern void nn_snd_CTR_VoiceImpl_ReleaseWaveBuffer(unsigned int);
 
 
-unsigned int * nn_snd_CTR_Voice_SetState(int param_1,int param_2)
+void nn_snd_CTR_Voice_SetState(int param_1,int param_2)
 
 {
-/* irregular: 2 native warning(s); review required */
   unsigned int *puVar1;
   unsigned int temp_v0;
   int temp_v1;
@@ -31,7 +30,7 @@ unsigned int * nn_snd_CTR_Voice_SetState(int param_1,int param_2)
   *(char *)((int)puVar1 + 0xd) = (char)param_2;
   if (param_2 != 0) {
     if (param_2 == 1) {
-      nn_snd_CTR_Dspsnd_SetChannelPlayStop(&DAT_006433d0,*puVar1 & 0xff);
+      nn_snd_CTR_Dspsnd_SetChannelPlayStop((unsigned int)&DAT_006433d0,(unsigned char)*puVar1);
       *(unsigned char *)(puVar1 + 3) = 0;
       temp_v0 = *puVar1;
       temp_v1 = FUN_001c6e20();
@@ -39,7 +38,7 @@ unsigned int * nn_snd_CTR_Voice_SetState(int param_1,int param_2)
         puVar1 = *(unsigned int **)((uRam006446ea & 1) * 0x60 + (temp_v0 & 0xff) * 4 + 0x644480);
         *puVar1 = *puVar1 | 0x20000000;
       }
-      return (unsigned int *)(unsigned int)(temp_v1 != 0);
+      return;
     }
     if (param_2 == 2) {
       temp_v0 = *puVar1;
@@ -49,8 +48,8 @@ unsigned int * nn_snd_CTR_Voice_SetState(int param_1,int param_2)
         *(unsigned short *)(puVar1 + 0x28) = (unsigned short)puVar1[0x28] & 0xff00;
         *puVar1 = *puVar1 | 0x10000;
       }
-      return (unsigned int *)(unsigned int)(temp_v1 != 0);
+      return;
     }
   }
-  return puVar1;
+  return;
 }

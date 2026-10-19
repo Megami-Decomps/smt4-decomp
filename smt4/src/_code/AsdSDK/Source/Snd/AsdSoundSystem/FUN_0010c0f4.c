@@ -18,22 +18,23 @@ extern unsigned int FUN_002bd29c(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bd420. */
 /* Supplied declaration required: FUN_002bf5c0. */
 /* Supplied declaration required: FUN_002c498c. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
-/* Supplied declaration required: nn_snd_CTR_InitializeWaveBuffer. */
-/* Supplied declaration required: nn_snd_CTR_Voice_SetMixParam. */
-/* Supplied declaration required: nn_snd_CTR_Voice_SetPitch. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
+extern void nn_snd_CTR_InitializeWaveBuffer(unsigned int);
+extern void nn_snd_CTR_Voice_SetMixParam(unsigned int, unsigned int);
+extern void nn_snd_CTR_Voice_SetPitch(unsigned int, float);
 
 
 unsigned int * FUN_0010c0f4(int param_1,int param_2,unsigned int param_3)
 
 {
-/* irregular: 11 native warning(s); review required */
+/* irregular: 7 native warning(s); review required */
   unsigned int *puVar1;
   unsigned int temp_v0;
   int temp_v1;
+  float temp_v2;
   
-  nn_os_CriticalSection_Enter(&DAT_004e315c);
+  nn_os_CriticalSection_Enter((unsigned int)&DAT_004e315c);
   puVar1 = (unsigned int *)0x100;
   FUN_002c498c(0x100,0x100,0,0x98,1);
   puVar1[0x1f] = 0xffffffff;
@@ -53,15 +54,15 @@ unsigned int * FUN_0010c0f4(int param_1,int param_2,unsigned int param_3)
   puVar1[0xe] = temp_v0;
   puVar1[0xf] = 0x3f34fdf4;
   puVar1[0x10] = 0x3f34fdf4;
-  nn_snd_CTR_Voice_SetMixParam(temp_v0,puVar1 + 0xf);
+  nn_snd_CTR_Voice_SetMixParam(temp_v0,(unsigned int)(puVar1 + 0xf));
   FUN_00147370(puVar1[0xe]);
-  nn_snd_CTR_Voice_SetPitch(puVar1[0xe]);
+  nn_snd_CTR_Voice_SetPitch(puVar1[0xe],temp_v2);
   temp_v1 = 0;
   do {
-    nn_snd_CTR_InitializeWaveBuffer(puVar1 + temp_v1 * 6 + 2);
+    nn_snd_CTR_InitializeWaveBuffer((unsigned int)(puVar1 + temp_v1 * 6 + 2));
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 2);
   FUN_001290cc(puVar1[0xe],puVar1[0x1b],puVar1 + 2,puVar1 + 8,0);
-  nn_os_CriticalSection_Leave(&DAT_004e315c);
+  nn_os_CriticalSection_Leave((unsigned int)&DAT_004e315c);
   return puVar1;
 }

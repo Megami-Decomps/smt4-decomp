@@ -9,15 +9,15 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_002c4040. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 /* Supplied declaration required: nw_snd_internal_TaskManager_GetNextTask. */
 
 
 void nw_snd_internal_TaskManager_ExecuteTask(int param_1)
 
 {
-/* irregular: 4 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   int *piVar1;
   int temp_v0;
   

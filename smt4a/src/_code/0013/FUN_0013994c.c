@@ -8,28 +8,28 @@ extern unsigned int DAT_00640550; /* 0x640550 */
 
 /* Supplied declaration required: FUN_0015a568. */
 /* Supplied declaration required: FUN_001a0990. */
-extern int nn_applet_CTR_IsExpectedToProcessHomeButton(void);
-extern int nn_os_CriticalSection_TryEnter(unsigned int *);
+extern unsigned char nn_applet_CTR_IsExpectedToProcessHomeButton(void);
+extern unsigned char nn_os_CriticalSection_TryEnter(unsigned int);
 
 
 unsigned int FUN_0013994c(void)
 
 {
 /* irregular: 2 native warning(s); review required */
-  int temp_v0;
+  unsigned char temp_v0;
   unsigned int temp_v1;
   
   temp_v1 = 0;
   temp_v0 = nn_applet_CTR_IsExpectedToProcessHomeButton();
-  if (temp_v0 != 0) {
+  if (temp_v0) {
     if (DAT_005b408d != '\0') {
       FUN_001a0990(&DAT_005b4098);
-      temp_v0 = nn_os_CriticalSection_TryEnter(&DAT_00640550);
-      if (temp_v0 == 0) {
-        temp_v1 = 2;
+      temp_v0 = nn_os_CriticalSection_TryEnter((unsigned int)&DAT_00640550);
+      if (temp_v0) {
+        temp_v1 = 3;
       }
       else {
-        temp_v1 = 3;
+        temp_v1 = 2;
       }
     }
     else {

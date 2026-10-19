@@ -400,9 +400,9 @@ void FUN_003b4294(fn_003b4294_arg0 *param_1)
                     *(float *)&puVar10[0x42] = temp_v13;
                     *(float *)&puVar10[0x43] = DAT_005c112c;
                     *pfVar8 = *pfVar8 * temp_v9;
-                    puVar10[0x45] = (float)puVar10[0x45] * temp_v9;
-                    puVar10[0x46] = (float)puVar10[0x46] * temp_v9;
-                    puVar10[0x47] = (float)puVar10[0x47] * temp_v9;
+                    *(float *)&puVar10[0x45] = (float)puVar10[0x45] * temp_v9;
+                    *(float *)&puVar10[0x46] = (float)puVar10[0x46] * temp_v9;
+                    *(float *)&puVar10[0x47] = (float)puVar10[0x47] * temp_v9;
                     *pfVar9 = *pfVar9 + *pfVar8;
                     puVar10[0x41] = (float)puVar10[0x41] + (float)puVar10[0x45];
                     puVar10[0x42] = (float)puVar10[0x42] + (float)puVar10[0x46];

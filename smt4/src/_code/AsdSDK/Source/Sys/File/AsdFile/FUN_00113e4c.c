@@ -33,16 +33,16 @@ extern int FUN_002b90c8(int *, unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_002c526c. */
 /* Supplied declaration required: FUN_002c52f8. */
 /* Supplied declaration required: FUN_002c618c. */
-/* Supplied declaration required: nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
-/* Supplied declaration required: nn_os_LightEvent_ClearSignal. */
+extern void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(unsigned int);
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
+extern void nn_os_LightEvent_ClearSignal(unsigned int);
 
 
 void FUN_00113e4c(void)
 
 {
-/* irregular: 1 goto(s); 17 native warning(s); review required */
+/* irregular: 1 goto(s); 13 native warning(s); review required */
   unsigned char *puVar1;
   int *piVar2;
   char *pcVar3;
@@ -306,7 +306,7 @@ joined_r0x0011436c:
     if (DAT_00465000 != '\0') {
       return;
     }
-    nn_os_LightEvent_ClearSignal(&DAT_00465028);
+    nn_os_LightEvent_ClearSignal((unsigned int)&DAT_00465028);
     FUN_002bb150(&LAB_002dc6c0,0);
   } while( 1 );
 }

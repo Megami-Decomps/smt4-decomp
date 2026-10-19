@@ -2,6 +2,21 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
+#ifndef ROMWRIGHT_FLOAT_BITS_DEFINED
+#define ROMWRIGHT_FLOAT_BITS_DEFINED
+static unsigned int romwright_f2u(float value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.f = value;
+    return bits.u;
+}
+static float romwright_u2f(unsigned int value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.u = value;
+    return bits.f;
+}
+#endif
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 #ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
@@ -125,7 +140,7 @@ void FUN_0051b1c8(float *param_1,float *param_2)
     }
     temp_v12 = VectorFloatToUnsigned(in_s0 / param_1[6],3);
   }
-  pbVar10 = (unsigned char *)*param_2;
+  pbVar10 = (unsigned char *)romwright_f2u((float)(*param_2));
   if (pbVar10 == (unsigned char *)0x0) {
     temp_v8 = (float)VectorSignedToFloat(*(unsigned short *)((int)param_1 + 0xe) - 1,
                                         (unsigned char)(temp_v11 >> 0x16) & 3);
@@ -149,7 +164,7 @@ void FUN_0051b1c8(float *param_1,float *param_2)
     temp_v15 = param_1[6];
     temp_v16 = *param_1;
     temp_v3 = pbVar10[-4];
-    *param_2 = (float)(pbVar10 + -4);
+    *param_2 = romwright_u2f((unsigned int)((pbVar10 + -4)));
     temp_v1 = *(char *)(param_1 + 3);
     temp_v8 = (float)VectorUnsignedToFloat((unsigned int)temp_v2,(unsigned char)(temp_v11 >> 0x16) & 3);
     temp_v17 = (float)VectorUnsignedToFloat((unsigned int)temp_v3,(unsigned char)(temp_v11 >> 0x16) & 3);
@@ -233,7 +248,7 @@ void FUN_0051b1c8(float *param_1,float *param_2)
     temp_v2 = *pbVar10;
     temp_v8 = *param_1;
     temp_v3 = pbVar10[4];
-    *param_2 = (float)(pbVar10 + 4);
+    *param_2 = romwright_u2f((unsigned int)((pbVar10 + 4)));
     temp_v1 = *(char *)(param_1 + 3);
     temp_v15 = (float)VectorUnsignedToFloat((unsigned int)temp_v2,(unsigned char)(temp_v11 >> 0x16) & 3);
     temp_v17 = (float)VectorUnsignedToFloat((unsigned int)temp_v3,(unsigned char)(temp_v11 >> 0x16) & 3);

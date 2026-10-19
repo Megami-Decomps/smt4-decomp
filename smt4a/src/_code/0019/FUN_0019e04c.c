@@ -59,7 +59,7 @@ unsigned int FUN_0019e04c(int *param_1,int param_2)
     nn_math_ARMv6_MTX34CopyAsm(*(int *)(temp_v0 + 4) + param_1[1] * 0x30,&temp_v3);
     temp_v2 = *param_1;
     for (temp_v0 = *(int *)(temp_v2 + 0xc); temp_v0 != 0; temp_v0 = *(int *)(temp_v0 + 0x18)) {
-      FUN_0019e04c(*(unsigned int *)(temp_v0 + 8),temp_v2);
+      FUN_0019e04c((int *)*(unsigned int *)(temp_v0 + 8),temp_v2);
     }
     temp_v1 = 1;
   }

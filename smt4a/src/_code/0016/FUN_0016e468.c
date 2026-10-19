@@ -11,21 +11,21 @@ extern unsigned int FUN_0016f988(unsigned int *, char *, unsigned int, unsigned 
 /* Supplied declaration required: FUN_00195fc8. */
 extern unsigned int FUN_001a0e10(void);
 extern unsigned int FUN_002e3390(char *);
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 unsigned int FUN_0016e468(void)
 
 {
-/* irregular: 3 native warning(s); review required */
+/* irregular: 1 native warning(s); review required */
   unsigned int temp_v0;
   int temp_v1;
   unsigned int temp_v2;
   unsigned int temp_v3;
   
   temp_v0 = FUN_001a0e10();
-  nn_os_CriticalSection_Enter();
+  nn_os_CriticalSection_Enter(temp_v0);
   if (DAT_005b4798 == 0) {
     temp_v1 = FUN_0016f864();
     if (temp_v1 < 0) {

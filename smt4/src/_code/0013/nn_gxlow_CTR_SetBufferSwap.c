@@ -8,8 +8,8 @@ extern int FUN_002ad244(void);
 
 
 void nn_gxlow_CTR_SetBufferSwap
-               (unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
-               unsigned int param_5,unsigned int param_6,unsigned int param_7)
+               (int param_1,int param_2,unsigned int param_3,unsigned int param_4,unsigned int param_5,
+               unsigned int param_6,unsigned int param_7)
 
 {
 /* irregular: 2 native warning(s); review required */
@@ -20,11 +20,11 @@ void nn_gxlow_CTR_SetBufferSwap
   unsigned int *puVar5;
   
   temp_v1 = FUN_002ad244();
-  if (param_1 < 2) {
+  if ((unsigned int)param_1 < 2) {
     pbVar4 = *(unsigned char **)(temp_v1 + 0x5c + param_1 * 4);
     temp_v2 = 1 - *pbVar4;
     pbVar4 = pbVar4 + temp_v2 * 0x1c + 4;
-    *(unsigned int *)pbVar4 = param_2;
+    *(int *)pbVar4 = param_2;
     *(unsigned int *)(pbVar4 + 0x18) = 0;
     *(unsigned int *)(pbVar4 + 4) = param_3;
     *(unsigned int *)(pbVar4 + 8) = param_4;

@@ -314,7 +314,7 @@ unsigned int FUN_001f5294(void)
   psVar24 = (short *)(temp_v4 + 0x20);
   temp_v18 = 0;
   temp_v47[0] = 0;
-  temp_v39[0]._0_1_ = '\0';
+  temp_v39[0] = (((unsigned int)(temp_v39[0]) & 0xffffff00U) | (((unsigned int)('\0') & 0xffU) << 0));
   FUN_00163aa4(piVar3 + 9);
   FUN_00163aa4(piVar3 + 0x2c);
   FUN_00163aa4(piVar3 + 0x4f);
@@ -1207,8 +1207,8 @@ LAB_001f6b9c:
           temp_v5 = FUN_002a4860(piVar3 + 0x158);
           temp_v6 = FUN_002a4894(piVar3 + 0x158);
           temp_v6 = temp_v6 + temp_v5;
-          switch(temp_v31) {
-          case (int *)0x0:
+          switch((unsigned int)temp_v31) {
+          case (unsigned int)0x0:
             if (temp_v6 != 0) {
               temp_v11 = 0;
               temp_v5 = 0;
@@ -1241,7 +1241,7 @@ LAB_001f6b9c:
               *(unsigned short *)(temp_v4 + 0x24) = 0;
             }
             break;
-          case (int *)0x1:
+          case (unsigned int)0x1:
             if (temp_v6 != 0) {
               *(unsigned short *)(temp_v4 + 0x2a) = *(unsigned short *)((int)piVar3 + temp_v6 * 2 + 0x5d2);
             }
@@ -1249,7 +1249,7 @@ LAB_001f6b9c:
               *(unsigned short *)(temp_v4 + 0x2a) = 0;
             }
             break;
-          case (int *)0x2:
+          case (unsigned int)0x2:
             temp_v7 = 0;
             puVar15 = (unsigned short *)0x0;
             *(char *)(temp_v4 + 0x43) = (char)temp_v6;
@@ -1310,7 +1310,7 @@ LAB_001f707c:
               *(unsigned short *)(temp_v4 + 0x2a) = 0;
             }
             break;
-          case (int *)0x3:
+          case (unsigned int)0x3:
             if (temp_v6 == 0) {
               *(unsigned short *)(temp_v4 + 0x28) = 0;
             }
@@ -1358,7 +1358,7 @@ LAB_001f713c:
               do {
                 if (*(short *)((int)piVar3 + (int)pcVar13 * 2 + 0x5d4) == *(short *)(temp_v4 + 0x2a))
                 goto LAB_001f71f0;
-                pcVar13 = pcVar13 + 1;
+                pcVar13 = (romwright_code *)((unsigned char *)pcVar13 + 1);
               } while ((int)pcVar13 < (int)pcVar23);
             }
             pcVar13 = pcVar23;
@@ -1368,10 +1368,10 @@ LAB_001f713c:
                 break;
                 if (*(short *)((int)piVar3 + (int)pcVar13 * 2 + 0x5d6) == *(short *)(temp_v4 + 0x2a))
                 {
-                  pcVar13 = pcVar13 + 1;
+                  pcVar13 = (romwright_code *)((unsigned char *)pcVar13 + 1);
                   break;
                 }
-                pcVar13 = pcVar13 + 2;
+                pcVar13 = (romwright_code *)((unsigned char *)pcVar13 + 2);
               } while ((int)pcVar13 < (int)temp_v7);
             }
 LAB_001f71f0:
@@ -1379,7 +1379,7 @@ LAB_001f71f0:
               *(unsigned short *)(temp_v4 + 0x2a) = 0;
             }
             break;
-          case (int *)0x4:
+          case (unsigned int)0x4:
             if (temp_v6 != 0) {
               *(unsigned short *)(temp_v4 + 0x2c) = *(unsigned short *)((int)piVar3 + temp_v6 * 2 + 0xfb6);
             }
@@ -1387,7 +1387,7 @@ LAB_001f71f0:
               *(unsigned short *)(temp_v4 + 0x2c) = 0;
             }
             break;
-          case (int *)0x5:
+          case (unsigned int)0x5:
             temp_v10 = 0;
             temp_v7 = 0;
             *(char *)(temp_v4 + 0x35) = (char)temp_v6 - '\x01';
@@ -1438,10 +1438,10 @@ LAB_001f732c:
               *(unsigned short *)(temp_v4 + 0x2c) = 0;
             }
             break;
-          case (int *)0x6:
+          case (unsigned int)0x6:
             *(short *)(temp_v4 + 0x2e) = (short)temp_v6 - 1;
             break;
-          case (int *)0xe:
+          case (unsigned int)0xe:
             if (temp_v6 != 0) {
               temp_v11 = 0;
               temp_v5 = 0;

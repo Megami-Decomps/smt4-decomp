@@ -2,6 +2,21 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
+#ifndef ROMWRIGHT_FLOAT_BITS_DEFINED
+#define ROMWRIGHT_FLOAT_BITS_DEFINED
+static unsigned int romwright_f2u(float value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.f = value;
+    return bits.u;
+}
+static float romwright_u2f(unsigned int value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.u = value;
+    return bits.f;
+}
+#endif
 /* stack frame of param_1: 4 slot(s), 16 byte(s) */
 typedef struct {
     unsigned int sp2C; /* 0x2c: local_2c */
@@ -87,9 +102,9 @@ unsigned int FUN_0039b370(int param_1)
     }
     else {
       temp_v4 = (float)VectorSignedToFloat(temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v9 = (unsigned int *)(*(float *)(param_1 + 0x34) + (temp_v4 - *(float *)(param_1 + 0x2c)));
+      temp_v9 = (unsigned int *)romwright_f2u((float)((*(float *)(param_1 + 0x34) + (temp_v4 - *(float *)(param_1 + 0x2c)))));
       temp_v4 = (float)VectorSignedToFloat(temp_v11,(unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v10 = (unsigned int *)(*(float *)(param_1 + 0x38) + (temp_v4 - *(float *)(param_1 + 0x30)));
+      temp_v10 = (unsigned int *)romwright_f2u((float)((*(float *)(param_1 + 0x38) + (temp_v4 - *(float *)(param_1 + 0x30)))));
       NaviMain_SetCursorPos(temp_v2,&temp_v9);
       temp_v4 = (float)VectorSignedToFloat(temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v1 = (in_fpscr & 0xfffffff) | ((unsigned int)(*(float *)(param_1 + 0x44) == temp_v4) << 0x1e);
@@ -159,8 +174,8 @@ unsigned int FUN_0039b370(int param_1)
     *(float *)(param_1 + 0x3c) = *(float *)(param_1 + 0x3c) * DAT_0044cdc8;
     *(float *)(param_1 + 0x40) = *(float *)(param_1 + 0x40) * temp_v4;
     pfVar4 = (float *)NaviMain_GetCursorPos(temp_v2);
-    temp_v9 = (unsigned int *)(*pfVar4 + *(float *)(param_1 + 0x3c));
-    temp_v10 = (unsigned int *)(pfVar4[1] + *(float *)(param_1 + 0x40));
+    temp_v9 = (unsigned int *)romwright_f2u((float)((*pfVar4 + *(float *)(param_1 + 0x3c))));
+    temp_v10 = (unsigned int *)romwright_f2u((float)((pfVar4[1] + *(float *)(param_1 + 0x40))));
     NaviMain_SetCursorPos(temp_v2,&temp_v9);
   }
   return 0;

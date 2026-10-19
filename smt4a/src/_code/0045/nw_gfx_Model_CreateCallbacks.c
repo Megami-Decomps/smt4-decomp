@@ -46,7 +46,7 @@ unsigned int nw_gfx_Model_CreateCallbacks(fn_004536d8_arg0 *param_1,int *param_2
           puVar1 = (unsigned int *)0x0;
         }
       }
-      param_1->field_0x158 = puVar1;
+      param_1->field_0x158 = (undefined4)puVar1;
       temp_v2 = *(unsigned int *)((int)param_1->field_0x218 + 4);
       puVar1 = (unsigned int *)(**(romwright_code **)(*param_2 + 8))(param_2,0x14,4);
       if (puVar1 != (unsigned int *)0x0) {
@@ -80,7 +80,7 @@ unsigned int nw_gfx_Model_CreateCallbacks(fn_004536d8_arg0 *param_1,int *param_2
       puVar1[3] = 0;
       puVar1[4] = 0;
     }
-    param_1->field_0x158 = puVar1;
+    param_1->field_0x158 = (undefined4)puVar1;
     puVar1 = (unsigned int *)(**(romwright_code **)(*param_2 + 8))(param_2,0x14,4);
     if (puVar1 == (unsigned int *)0x0) {
       param_1->field_0x15c = puVar5;
@@ -111,7 +111,7 @@ unsigned int nw_gfx_Model_CreateCallbacks(fn_004536d8_arg0 *param_1,int *param_2
       puVar1[3] = 0;
       puVar1[4] = 0x40000000;
     }
-    param_1->field_0x158 = puVar1;
+    param_1->field_0x158 = (undefined4)puVar1;
     puVar1 = (unsigned int *)(**(romwright_code **)(*param_2 + 8))(param_2,0x14,4);
     if (puVar1 != (unsigned int *)0x0) {
       puVar5 = puVar1 + 1;

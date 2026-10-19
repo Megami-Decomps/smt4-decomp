@@ -22,7 +22,6 @@ typedef struct {
 
 extern unsigned char DAT_005c1c4c; /* 0x5c1c4c */
 
-extern void FUN_0046722c(fn_0046722c_arg0 *);
 /* Supplied declaration required: FUN_00467840. */
 
 

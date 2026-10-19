@@ -2,62 +2,52 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
-/* stack frame of param_4: 2 slot(s), 8 byte(s) */
+/* stack frame of param_2: 2 slot(s), 8 byte(s) */
 typedef struct {
     unsigned int sp24; /* 0x24: local_24 */
     unsigned int sp28; /* 0x28: local_28 */
-} param_4_stack;
+} param_2_stack;
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-#ifndef ROMWRIGHT_PIECE_4_4_DEFINED
-#define ROMWRIGHT_PIECE_4_4_DEFINED
-#define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
-#endif
-extern int FUN_001a0050(unsigned int *, unsigned int);
+extern unsigned int FUN_001a0050(unsigned int *, unsigned int);
 
 
-long long nn_fs_detail_FileBase_TrySetPosition(unsigned int *param_1,int param_2,unsigned int param_3,unsigned int param_4)
+unsigned int nn_fs_detail_FileBase_TrySetPosition(unsigned int *param_1,long long param_2)
 
 {
-/* irregular: 3 native warning(s); review required */
+/* irregular: irregular input(s): in_r2, in_r3; 3 native warning(s); review required */
   unsigned int temp_v0;
-  int temp_v1;
+  unsigned int in_r2;
+  unsigned int in_r3;
+  unsigned int temp_v1;
   unsigned int temp_v2;
   unsigned int temp_v3;
-  unsigned int unaff_r5;
-  unsigned int unaff_r6;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
   
-  temp_v1 = -0x1f1fb93f;
-  if ((int)param_4 < 0) {
-    return romwright_piece_4_4(param_2,temp_v1);
-  }
-  temp_v2 = param_1[3];
-  temp_v0 = param_1[4];
-  temp_v3 = param_3 - temp_v2;
-  if ((int)(param_4 - (temp_v0 + (param_3 < temp_v2))) < 0 ==
-      (SBORROW4(param_4,temp_v0) != SBORROW4(param_4 - temp_v0,(unsigned int)(param_3 < temp_v2)))) {
-    temp_v1 = FUN_001a0050(&temp_v4,*param_1 & 0xfffffffe);
-    if (temp_v1 >= 0) {
-      param_1[4] = temp_v5;
-      param_1[3] = temp_v4;
+  temp_v1 = 0xe0e046c1;
+  if (-1 < (int)in_r3) {
+    temp_v0 = param_1[4];
+    if ((int)(in_r3 - (temp_v0 + (in_r2 < param_1[3]))) < 0 !=
+        (SBORROW4(in_r3,temp_v0) != SBORROW4(in_r3 - temp_v0,(unsigned int)(in_r2 < param_1[3])))) {
+      param_1[1] = in_r2;
+      param_1[2] = in_r3;
+      return 0;
+    }
+    temp_v0 = FUN_001a0050(&temp_v2,*param_1 & 0xfffffffe);
+    if ((int)temp_v0 >= 0) {
+      param_1[4] = temp_v3;
+      param_1[3] = temp_v2;
+      if ((int)(temp_v3 - (in_r3 + (temp_v2 < in_r2))) < 0 ==
+          (SBORROW4(temp_v3,in_r3) != SBORROW4(temp_v3 - in_r3,(unsigned int)(temp_v2 < in_r2)))) {
+        param_1[1] = in_r2;
+        param_1[2] = in_r3;
+        return 0;
+      }
     }
     else {
       param_1[3] = 0;
       param_1[4] = 0;
-      temp_v5 = unaff_r5;
-      temp_v4 = unaff_r6;
-    }
-    param_2 = -(temp_v1 >> 0x1f);
-    if ((param_2 != 0) ||
-       (temp_v3 = 0, temp_v1 = -0x1f1fb93f,
-       (int)(temp_v5 - (param_4 + (temp_v4 < param_3))) < 0 !=
-       (SBORROW4(temp_v5,param_4) != SBORROW4(temp_v5 - param_4,(unsigned int)(temp_v4 < param_3))))) {
-      return romwright_piece_4_4(param_2,temp_v1);
+      temp_v1 = temp_v0;
     }
   }
-  param_1[1] = param_3;
-  param_1[2] = param_4;
-  return (unsigned long long)temp_v3 << 0x20;
+  return temp_v1;
 }

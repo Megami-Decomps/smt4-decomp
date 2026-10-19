@@ -8,13 +8,12 @@ typedef struct {
 } param_2_stack;
 
 extern unsigned int FUN_002ad264(void);
-/* Supplied declaration required: nn_gxlow_CTR_Gpu_FlushDataCache. */
+extern unsigned int nn_gxlow_CTR_Gpu_FlushDataCache(unsigned int, unsigned int, unsigned int, unsigned int);
 
 
 void FUN_00147914(unsigned int param_1,unsigned int param_2)
 
 {
-/* irregular: 1 native warning(s); review required */
   unsigned int temp_v0;
   
   temp_v0 = FUN_002ad264();

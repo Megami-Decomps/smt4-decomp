@@ -4,14 +4,14 @@
 
 /* Unsupported intrinsic, declaration required: coproc_moveto_Data_Synchronization (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: hasExclusiveAccess (CALLOTHER). */
-/* Supplied declaration required: FUN_001a2a5c. */
-/* Supplied declaration required: nn_gxlow_CTR_Gpu_TriggerCmdReqQueue. */
+extern unsigned int FUN_001a2a5c(void);
+extern unsigned int nn_gxlow_CTR_Gpu_TriggerCmdReqQueue(unsigned int);
 
 
 unsigned int FUN_001b013c(unsigned int *param_1,unsigned int *param_2)
 
 {
-/* irregular: 4 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   unsigned char temp_v0;
   unsigned int temp_v1;
   unsigned int temp_v2;
@@ -61,8 +61,8 @@ unsigned int FUN_001b013c(unsigned int *param_1,unsigned int *param_2)
     }
     *(unsigned int *)*param_1 = temp_v2;
     if ((temp_v2 & 0xffff) >> 8 == 1) {
-      FUN_001a2a5c();
-      nn_gxlow_CTR_Gpu_TriggerCmdReqQueue();
+      temp_v1 = FUN_001a2a5c();
+      nn_gxlow_CTR_Gpu_TriggerCmdReqQueue(temp_v1);
     }
     temp_v1 = 0;
   }

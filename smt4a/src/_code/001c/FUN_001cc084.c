@@ -16,7 +16,7 @@ extern int FUN_001b1998(void);
 /* Supplied declaration required: FUN_001b4a58. */
 extern unsigned int *FUN_001b95dc(int);
 /* Supplied declaration required: FUN_002e6354. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
 /* Supplied declaration required: nn_os_detail_BlockingQueueBase_nn_os_CriticalSection_TryEnqueue. */
 extern int nw_snd_internal_PoolImpl_AllocImpl(int);
 /* Supplied declaration required: nw_ut_internal_LinkListImpl_insert. */
@@ -26,7 +26,7 @@ void FUN_001cc084(int param_1,unsigned int *param_2,unsigned int param_3,unsigne
                  unsigned int param_5,unsigned int param_6,unsigned char param_7)
 
 {
-/* irregular: irregular input(s): in_lr; 8 native warning(s); review required */
+/* irregular: irregular input(s): in_lr; 7 native warning(s); review required */
   unsigned char temp_v0;
   int temp_v1;
   unsigned int temp_v2;
@@ -72,7 +72,7 @@ void FUN_001cc084(int param_1,unsigned int *param_2,unsigned int param_3,unsigne
   nw_ut_internal_LinkListImpl_insert(param_1 + 0x84,param_1 + 0x88,puVar6 + 0x14);
   temp_v1 = FUN_001b1998();
   piVar7 = (int *)(temp_v1 + 0x2c);
-  nn_os_CriticalSection_Enter(piVar7);
+  nn_os_CriticalSection_Enter((unsigned int)piVar7);
   FUN_001a0990(puVar6 + 3);
   *(unsigned char *)(puVar6 + 5) = 1;
   temp_v3 = temp_v1 + (param_6 & 0xff) * 0xc;

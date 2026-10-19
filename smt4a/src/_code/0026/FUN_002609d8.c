@@ -152,7 +152,7 @@ void FUN_002609d8(fn_002609d8_arg0 *param_1,int param_2,int param_3)
           temp_v8 = *(float *)(temp_v2 + 0x28);
           temp_v6 = (temp_v6 & 0xfffffff) | ((unsigned int)(temp_v8 < temp_v15) << 0x1f) |
                   ((unsigned int)(temp_v8 == temp_v15) << 0x1e);
-          temp_v7 = temp_v6 | ((unsigned int)(NAN(temp_v8) || NAN(temp_v15)) << 0x1c);
+          temp_v7 = temp_v6 | ((unsigned int)((temp_v8 != temp_v8) || (temp_v15 != temp_v15)) << 0x1c);
           temp_v0 = (unsigned char)(temp_v6 >> 0x18);
           if (!(unsigned char)((temp_v0 >> 6) & 1) && temp_v0 >> 7 == ((unsigned char)(temp_v7 >> 0x1c) & 1)) {
             temp_v36 = *(float *)(temp_v2 + 0xa8);

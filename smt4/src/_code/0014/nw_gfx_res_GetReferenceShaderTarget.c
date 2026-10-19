@@ -74,7 +74,7 @@ void nw_gfx_res_GetReferenceShaderTarget(int *param_1,int param_2,int param_3)
     if (puVar6 != (unsigned int *)0x0) {
       temp_v5 = 0;
       temp_v6 = '\0';
-      nw_gfx_res_GetReferenceShaderTarget(temp_v7,puVar6,param_3);
+      nw_gfx_res_GetReferenceShaderTarget((int *)temp_v7,(int)puVar6,param_3);
       FUN_002a7c80(&temp_v5,temp_v7);
       if (temp_v6 != '\0') {
         piVar4 = (int *)(param_2 + 0x1c);

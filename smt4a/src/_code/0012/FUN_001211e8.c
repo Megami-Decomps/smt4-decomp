@@ -25,7 +25,7 @@ void FUN_001211e8(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   temp_v0 = param_1;
   temp_v1 = param_4;
   FUN_003100ae(param_1,*(unsigned int *)(param_1 + 0x10),param_2);
-  temp_v1 = romwright_piece_3_1(temp_v1._1_3_,(char)temp_v0);
+  temp_v1 = romwright_piece_3_1((((unsigned int)(temp_v1) >> 8) & 0xffffffU),(char)temp_v0);
   FUN_002e74c4(param_1,&temp_v1,1,0xffffffff);
   return;
 }

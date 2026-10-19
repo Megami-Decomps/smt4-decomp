@@ -38,7 +38,7 @@ unsigned char nn_cfg_CTR_IsDebugMode(void)
       FUN_002bbb2c(temp_v1,0x11bdc0);
     }
     FUN_001283e4(temp_v3[0]);
-    temp_v0 = temp_v2 & 1;
+    temp_v0 = (unsigned char)(temp_v2 & 1);
     if ((temp_v2 & 1) != 0) {
       temp_v0 = 1;
     }

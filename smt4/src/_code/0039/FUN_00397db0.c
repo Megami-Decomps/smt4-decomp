@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
+typedef int romwright_code();
 /* stack frame of param_1: 5 slot(s), 20 byte(s) */
 typedef struct {
     unsigned int sp24; /* 0x24: local_24 */
@@ -78,7 +79,7 @@ void FUN_00397db0(int param_1)
         else {
           temp_v5 = FUN_002bf4f8(0x2e,unaff_r8 * temp_v9 + temp_v8 + 0x56);
         }
-        (*(unsigned int *)temp_v12) = (unsigned char  [4])(int)*(short *)(temp_v5 + 10);
+        (*(unsigned int *)temp_v12) = (unsigned int)(int)*(short *)(temp_v5 + 10);
         temp_v13 = 0x15;
         FUN_002bf380(2,0x2e,1,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v5 + 8));
         temp_v6 = FUN_002bf4f8(0x2e,0x1a);
@@ -89,7 +90,7 @@ void FUN_00397db0(int param_1)
         temp_v3 = *(short *)(temp_v6 + 10);
         if (temp_v10 != -1) {
           temp_v5 = FUN_002aeaac(3,(int)temp_v1);
-          temp_v5 = (**(code **)(**(int **)(temp_v5 + 8) + 0x44))(*(int **)(temp_v5 + 8),temp_v10);
+          temp_v5 = (**(romwright_code **)(**(int **)(temp_v5 + 8) + 0x44))(*(int **)(temp_v5 + 8),temp_v10);
           (*(unsigned int *)temp_v4) = (*(unsigned int *)temp_v12);
           if (temp_v5 == 0) {
             temp_v10 = -0x7ec0;
@@ -121,7 +122,7 @@ void FUN_00397db0(int param_1)
           else {
             temp_v9 = FUN_002bf4f8(0x2e,temp_v9 + 0x56);
           }
-          (*(unsigned int *)temp_v12) = (unsigned char  [4])(int)*(short *)(temp_v9 + 10);
+          (*(unsigned int *)temp_v12) = (unsigned int)(int)*(short *)(temp_v9 + 10);
           temp_v13 = 0x15;
           FUN_002bf380(2,0x2e,2,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v9 + 8));
           temp_v8 = FUN_002bf4f8(0x2e,0x22);
@@ -139,14 +140,14 @@ void FUN_00397db0(int param_1)
             temp_v6 = piVar10[*piVar10 + 2];
             piVar10[*piVar10 + 2] = temp_v5;
             if (*(char *)(temp_v8 + 0x12c4) != '\0' || temp_v6 != temp_v5) {
-              (**(code **)(temp_v8 + 0x12c8))();
+              (**(romwright_code **)(temp_v8 + 0x12c8))();
               *(unsigned char *)(temp_v8 + 0x12c4) = 0;
             }
-            (*(unsigned int *)temp_v12) = (unsigned char  [4])(int)*(short *)(temp_v9 + 10);
+            (*(unsigned int *)temp_v12) = (unsigned int)(int)*(short *)(temp_v9 + 10);
             temp_v13 = 0x1f;
             FUN_002bf380(2,0x2e,3,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v9 + 8));
             if (0 < *(short *)(param_1 + 0x942)) {
-              (*(unsigned int *)temp_v12) = (unsigned char  [4])(int)*(short *)(temp_v9 + 10);
+              (*(unsigned int *)temp_v12) = (unsigned int)(int)*(short *)(temp_v9 + 10);
               temp_v13 = 0x1f;
               FUN_002bf288(2,0x2e,0x21,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v9 + 8));
             }
@@ -156,7 +157,7 @@ void FUN_00397db0(int param_1)
             temp_v5 = piVar10[*piVar10 + 2];
             piVar10[*piVar10 + 2] = temp_v8;
             if (*(char *)(temp_v9 + 0x12c4) != '\0' || temp_v5 != temp_v8) {
-              (**(code **)(temp_v9 + 0x12c8))();
+              (**(romwright_code **)(temp_v9 + 0x12c8))();
               *(unsigned char *)(temp_v9 + 0x12c4) = 0;
             }
             FUN_002bf538();
@@ -169,10 +170,10 @@ void FUN_00397db0(int param_1)
           if (0 < temp_v9) {
             do {
               temp_v9 = FUN_002bf4f8(0x2e,temp_v8 + 0xc6);
-              (*(unsigned int *)temp_v12) = (unsigned char  [4])(int)*(short *)(temp_v9 + 10);
+              (*(unsigned int *)temp_v12) = (unsigned int)(int)*(short *)(temp_v9 + 10);
               temp_v13 = 0x15;
               FUN_002bf380(2,0x2e,4,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v9 + 8));
-              (*(unsigned int *)temp_v12) = (unsigned char  [4])(int)*(short *)(temp_v9 + 10);
+              (*(unsigned int *)temp_v12) = (unsigned int)(int)*(short *)(temp_v9 + 10);
               temp_v13 = 0x1a;
               FUN_002bf288(2,0x2e,temp_v8 + 0x29,
                            *(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v9 + 8));
@@ -184,10 +185,10 @@ void FUN_00397db0(int param_1)
           if (*(char *)(param_1 + 0x648) != '\0') {
             temp_v9 = FUN_0029e908(temp_v15);
             temp_v8 = FUN_002bf4f8(0x2e,temp_v9 + 0xc6);
-            (*(unsigned int *)temp_v12) = (unsigned char  [4])(int)*(short *)(temp_v8 + 10);
+            (*(unsigned int *)temp_v12) = (unsigned int)(int)*(short *)(temp_v8 + 10);
             temp_v13 = 0x1f;
             FUN_002bf380(2,0x2e,5,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v8 + 8));
-            (*(unsigned int *)temp_v12) = (unsigned char  [4])(int)*(short *)(temp_v8 + 10);
+            (*(unsigned int *)temp_v12) = (unsigned int)(int)*(short *)(temp_v8 + 10);
             temp_v13 = 0x24;
             FUN_002bf288(2,0x2e,temp_v9 + 0x32,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v8 + 8))
             ;
@@ -199,10 +200,10 @@ void FUN_00397db0(int param_1)
             temp_v6 = piVar10[*piVar10 + 2];
             piVar10[*piVar10 + 2] = temp_v5;
             if (*(char *)(temp_v9 + 0x12c4) != '\0' || temp_v6 != temp_v5) {
-              (**(code **)(temp_v9 + 0x12c8))(temp_v5);
+              (**(romwright_code **)(temp_v9 + 0x12c8))(temp_v5);
               *(unsigned char *)(temp_v9 + 0x12c4) = 0;
             }
-            (*(unsigned int *)temp_v12) = (unsigned char  [4])(int)*(short *)(temp_v8 + 10);
+            (*(unsigned int *)temp_v12) = (unsigned int)(int)*(short *)(temp_v8 + 10);
             temp_v13 = 0x29;
             FUN_002bf380(2,0x2e,6,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v8 + 8));
             temp_v9 = DAT_0044ea00;
@@ -211,11 +212,11 @@ void FUN_00397db0(int param_1)
             temp_v6 = piVar10[*piVar10 + 2];
             piVar10[*piVar10 + 2] = temp_v5;
             if (*(char *)(temp_v9 + 0x12c4) != '\0' || temp_v6 != temp_v5) {
-              (**(code **)(temp_v9 + 0x12c8))(temp_v5);
+              (**(romwright_code **)(temp_v9 + 0x12c8))(temp_v5);
               *(unsigned char *)(temp_v9 + 0x12c4) = 0;
             }
             if (0 < *(short *)(param_1 + 0x942)) {
-              (*(unsigned int *)temp_v12) = (unsigned char  [4])(int)*(short *)(temp_v8 + 10);
+              (*(unsigned int *)temp_v12) = (unsigned int)(int)*(short *)(temp_v8 + 10);
               temp_v13 = 0x29;
               FUN_002bf288(2,0x2e,0x39,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v8 + 8));
             }
@@ -225,7 +226,7 @@ void FUN_00397db0(int param_1)
         }
         return;
       }
-LAB_00397df8:
+LAB_00397df8:;
     } while (temp_v9 == 0);
   } while( 1 );
 }

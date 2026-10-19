@@ -11,7 +11,7 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: hasExclusiveAccess (CALLOTHER). */
 
 
-unsigned int nn_os_LightEvent_TryWait(int *param_1)
+unsigned char nn_os_LightEvent_TryWait(int *param_1)
 
 {
 /* irregular: 1 goto(s); 2 native warning(s); review required */

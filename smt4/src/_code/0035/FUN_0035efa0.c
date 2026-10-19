@@ -48,7 +48,7 @@ unsigned int FUN_0035efa0(int param_1,int param_2,int *param_3,int param_4,unsig
       temp_v0 = FUN_0035f244(param_1,aiStack_68[temp_v3],0x40);
       if (temp_v0 != 0) {
         *(unsigned int *)(param_2 + temp_v3 * 4) =
-             *(unsigned int *)(param_2 + temp_v3 * 4) | (1 << *(sbyte *)(param_1 + 0x1b));
+             *(unsigned int *)(param_2 + temp_v3 * 4) | (1 << *(signed char *)(param_1 + 0x1b));
       }
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < param_5);

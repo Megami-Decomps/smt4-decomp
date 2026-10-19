@@ -154,7 +154,7 @@ int FUN_004adf7c(unsigned int *param_1,int param_2,unsigned int *param_3,unsigne
       ppppcVar4 = ppppcVar15;
       ppppcVar5 = (romwright_code ****)*temp_v11;
       while (ppppcVar5 != ppppcVar15) {
-        if (ppppcVar5[4] < temp_v38[0]) {
+        if (ppppcVar5[4] < (romwright_code ***)temp_v38[0]) {
           ppppcVar5 = (romwright_code ****)ppppcVar5[1];
         }
         else {
@@ -198,7 +198,7 @@ int FUN_004adf7c(unsigned int *param_1,int param_2,unsigned int *param_3,unsigne
           ppppcVar4 = (romwright_code ****)*temp_v7;
           ppppcVar21 = ppppcVar4;
           temp_v7 = ppppcVar4;
-          if (ppppcVar4[4] < temp_v38[0]) {
+          if (ppppcVar4[4] < (romwright_code ***)temp_v38[0]) {
             ppppcVar21 = ppppcVar5;
             temp_v7 = ppppcVar4 + 1;
           }
@@ -210,7 +210,7 @@ int FUN_004adf7c(unsigned int *param_1,int param_2,unsigned int *param_3,unsigne
         temp_v29 = temp_v15;
         temp_v31 = temp_v18;
         temp_v32 = temp_v22;
-        if ((ppppcVar5 != temp_v11 + 1) && (temp_v38[0] >= ppppcVar5[4])) {
+        if ((ppppcVar5 != temp_v11 + 1) && (temp_v38[0] >= (romwright_code ****)ppppcVar5[4])) {
                     /* WARNING: Ignoring partial resolution of indirect */
           (*(unsigned char *)((unsigned char *)&temp_v25 + 0)) = 0;
         }
@@ -508,7 +508,7 @@ int FUN_004adf7c(unsigned int *param_1,int param_2,unsigned int *param_3,unsigne
         temp_v9 = (romwright_code *****)(temp_v0 + 1);
         temp_v22 = (romwright_code *****)puVar7;
         temp_v23 = (romwright_code *****)temp_v6;
-        if ((int *****)param_1[0x511] >= temp_v9) {
+        if ((int *****)param_1[0x511] >= (int *****)temp_v9) {
           temp_v2 = (unsigned int)(temp_v0 - (int)temp_v6 != 0);
           temp_v1 = (temp_v0 - (int)temp_v6) - temp_v2;
           temp_v0 = (int)temp_v9 - temp_v2;
@@ -593,7 +593,7 @@ int FUN_004adf7c(unsigned int *param_1,int param_2,unsigned int *param_3,unsigne
             }
           }
           pppppcVar17 = temp_v18;
-          if ((romwright_code ****)param_1[0x512] <= temp_v18) {
+          if ((romwright_code ****)param_1[0x512] <= (romwright_code ****)temp_v18) {
             pppppcVar17 = (romwright_code *****)param_1[0x512];
           }
           FUN_00521c8c(puVar7,temp_v6);

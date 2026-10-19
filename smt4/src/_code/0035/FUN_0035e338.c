@@ -18,7 +18,6 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_4_stack;
 
-/* Unsupported intrinsic, declaration required: while (LOAD). */
 /* Supplied declaration required: FUN_0023799c. */
 /* Supplied declaration required: FUN_00238aac. */
 extern int FUN_0035c050(int *, int, int, unsigned int);
@@ -32,7 +31,7 @@ extern int FUN_0035e090(int *, int **);
 unsigned int FUN_0035e338(int *param_1,fn_0035e338_arg1 *param_2,int param_3,int *param_4)
 
 {
-/* irregular: 7 native warning(s); review required */
+/* irregular: 6 native warning(s); review required */
   int temp_v0;
   int temp_v1;
   int *piVar3;

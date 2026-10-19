@@ -141,7 +141,7 @@ void FUN_00285584(fn_00285584_arg0 *param_1,int param_2,int param_3)
           temp_v6 = (float)piVar2[10];
           temp_v4 = (temp_v4 & 0xfffffff) | ((unsigned int)(temp_v6 < temp_v12) << 0x1f) |
                   ((unsigned int)(temp_v6 == temp_v12) << 0x1e);
-          temp_v5 = temp_v4 | ((unsigned int)(NAN(temp_v6) || NAN(temp_v12)) << 0x1c);
+          temp_v5 = temp_v4 | ((unsigned int)((temp_v6 != temp_v6) || (temp_v12 != temp_v12)) << 0x1c);
           temp_v0 = (unsigned char)(temp_v4 >> 0x18);
           if (!(unsigned char)((temp_v0 >> 6) & 1) && temp_v0 >> 7 == ((unsigned char)(temp_v5 >> 0x1c) & 1)) {
             temp_v33 = (float)piVar2[0x21];

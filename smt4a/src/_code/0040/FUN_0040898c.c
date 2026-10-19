@@ -51,7 +51,7 @@ void FUN_0040898c(int param_1)
     temp_v5 = temp_v5 + 1.0f;
     *(float *)(param_1 + 0xa8) = temp_v5;
     temp_v4 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v5 < temp_v6) << 0x1f);
-    temp_v3 = temp_v4 | ((unsigned int)(NAN(temp_v5) || NAN(temp_v6)) << 0x1c);
+    temp_v3 = temp_v4 | ((unsigned int)((temp_v5 != temp_v5) || (temp_v6 != temp_v6)) << 0x1c);
     if ((unsigned char)(temp_v4 >> 0x1f) == ((unsigned char)(temp_v3 >> 0x1c) & 1)) {
       *(unsigned char *)(param_1 + 0xa5) = 1;
       temp_v1 = 0;
@@ -79,7 +79,7 @@ void FUN_0040898c(int param_1)
                                            *(int *)(param_1 + 0xbc),(unsigned char)(temp_v3 >> 0x16) & 3);
         temp_v5 = *(float *)(param_1 + 0x98) - temp_v5;
         temp_v4 = (temp_v3 & 0xfffffff) | ((unsigned int)(temp_v5 < temp_v6) << 0x1f);
-        if (romwright_subpiece_4_1_0(temp_v4 >> 0x1f,0) == (NAN(temp_v5) || NAN(temp_v6))) {
+        if (romwright_subpiece_4_1_0(temp_v4 >> 0x1f,0) == ((temp_v5 != temp_v5) || (temp_v6 != temp_v6))) {
           do {
             temp_v1 = *(int *)(param_1 + 0xbc) + 1;
             *(int *)(param_1 + 0xbc) = temp_v1;
@@ -88,7 +88,7 @@ void FUN_0040898c(int param_1)
                                                (unsigned char)(temp_v4 >> 0x16) & 3);
             temp_v5 = *(float *)(param_1 + 0x98) - temp_v5;
             temp_v4 = (temp_v4 & 0xfffffff) | ((unsigned int)(temp_v5 < temp_v6) << 0x1f);
-          } while (romwright_subpiece_4_1_0(temp_v4 >> 0x1f,0) == (NAN(temp_v5) || NAN(temp_v6)));
+          } while (romwright_subpiece_4_1_0(temp_v4 >> 0x1f,0) == ((temp_v5 != temp_v5) || (temp_v6 != temp_v6)));
         }
       }
     }

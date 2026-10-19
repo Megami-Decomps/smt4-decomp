@@ -65,7 +65,7 @@ unsigned int * FUN_001113b0(int *param_1,unsigned int *param_2)
   unsigned int temp_v3;
   unsigned int *temp_v4;
   unsigned char temp_v5;
-  unsigned char uStack_a3 [3];
+  unsigned int uStack_a3;
   unsigned char *temp_v6 [2];
   unsigned int *temp_v7;
   char temp_v8;
@@ -146,12 +146,12 @@ unsigned int * FUN_001113b0(int *param_1,unsigned int *param_2)
     (**(romwright_code **)(*piVar7 + 0xc))(piVar7,puVar5);
   }
   temp_v0 = temp_v8;
-  temp_v3 = romwright_piece_3_1(temp_v3._1_3_,1);
+  temp_v3 = romwright_piece_3_1((((unsigned int)(temp_v3) >> 8) & 0xffffffU),1);
   temp_v2 = puVar6;
   if (ppuVar8 != &temp_v2) {
     temp_v2 = temp_v7;
     temp_v8 = '\x01';
-    temp_v3 = romwright_piece_3_1(temp_v3._1_3_,temp_v0);
+    temp_v3 = romwright_piece_3_1((((unsigned int)(temp_v3) >> 8) & 0xffffffU),temp_v0);
     temp_v7 = puVar6;
   }
   puVar5 = temp_v2;

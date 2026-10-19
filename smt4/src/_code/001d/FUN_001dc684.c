@@ -8,14 +8,14 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_003bbb04. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 void FUN_001dc684(int param_1)
 
 {
-/* irregular: 3 native warning(s); review required */
+/* irregular: 1 native warning(s); review required */
   int temp_v0;
   int temp_v1;
   

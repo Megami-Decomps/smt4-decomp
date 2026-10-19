@@ -80,7 +80,7 @@ LAB_003c2f0c:
     }
     *(unsigned int *)(param_3 + 0x98) = *(unsigned int *)(param_3 + 0x98) & 0xfffffffd;
     *(unsigned int *)(param_3 + 0x94) = 0;
-    FUN_003c2df0(param_1,param_3);
+    FUN_003c2df0(param_1,param_3, /* unrecovered */ 0);
     for (temp_v3 = *(int *)(param_1 + 0x8c); param_2 = temp_v1, temp_v3 != 0;
         temp_v3 = *(int *)(temp_v3 + 0xac)) {
       temp_v2 = *(unsigned int *)(temp_v3 + 0x98) & 3;

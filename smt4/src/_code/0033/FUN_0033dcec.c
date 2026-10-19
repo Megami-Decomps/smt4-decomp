@@ -51,13 +51,13 @@ extern int FUN_002e1574(void *, unsigned int);
 /* Supplied declaration required: FUN_0033e8a8. */
 extern int FUN_0033f178(fn_0033dcec_arg0 *);
 /* Supplied declaration required: FUN_0033f22c. */
-/* Supplied declaration required: nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile. */
+extern void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(unsigned int);
 
 
 void FUN_0033dcec(fn_0033dcec_arg0 *param_1,unsigned int param_2,int param_3)
 
 {
-/* irregular: 13 native warning(s); review required */
+/* irregular: 12 native warning(s); review required */
   int temp_v0;
   void *pvVar2;
   unsigned short *puVar3;

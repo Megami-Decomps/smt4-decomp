@@ -68,7 +68,7 @@ void FUN_00259324(unsigned int param_1,int param_2,int param_3)
     }
     *(float *)&puVar2[2] = in_s0;
     temp_v1 = (float)VectorSignedToFloat(param_2,(unsigned char)(temp_v0 >> 0x16) & 3);
-    puVar2[3] = -(in_s0 / temp_v1);
+    *(float *)&puVar2[3] = -(in_s0 / temp_v1);
     return;
   }
   puVar2[1] = param_1;
@@ -79,7 +79,7 @@ void FUN_00259324(unsigned int param_1,int param_2,int param_3)
   else {
     *(float *)&puVar2[2] = temp_v1;
     temp_v1 = (float)VectorSignedToFloat(param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
-    puVar2[3] = in_s0 / temp_v1;
+    *(float *)&puVar2[3] = in_s0 / temp_v1;
   }
   return;
 }

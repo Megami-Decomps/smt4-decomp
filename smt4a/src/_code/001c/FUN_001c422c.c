@@ -3,6 +3,21 @@
 #include "romwright_types.h"
 
 typedef int romwright_code();
+#ifndef ROMWRIGHT_FLOAT_BITS_DEFINED
+#define ROMWRIGHT_FLOAT_BITS_DEFINED
+static unsigned int romwright_f2u(float value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.f = value;
+    return bits.u;
+}
+static float romwright_u2f(unsigned int value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.u = value;
+    return bits.f;
+}
+#endif
 extern unsigned int DAT_00646618; /* 0x646618 */
 
 #ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
@@ -26,8 +41,8 @@ float * FUN_001c422c(float *param_1)
   if (romwright_subpiece_4_1_0(temp_v0 >> 0x1e,0)) {
     return param_1;
   }
-  pfVar1 = (float *)param_1[4];
-  if ((float *)param_1[2] <= pfVar1) {
+  pfVar1 = (float *)romwright_f2u((float)(param_1[4]));
+  if ((float *)romwright_f2u((float)(param_1[2])) <= pfVar1) {
     pcVar2 = (romwright_code *)(&DAT_00646618)[*(unsigned char *)((int)param_1 + 0xd)];
     if (pcVar2 != (romwright_code *)0x0) {
       if (*(unsigned char *)((int)param_1 + 0xd) != 4) {

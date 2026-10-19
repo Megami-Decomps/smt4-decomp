@@ -104,7 +104,7 @@ LAB_0023f8b0:
       if (temp_v7 != 1) {
         temp_v4 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v9 < temp_v11) << 0x1f) |
                 ((unsigned int)(temp_v9 == temp_v11) << 0x1e);
-        in_fpscr = temp_v4 | ((unsigned int)(NAN(temp_v9) || NAN(temp_v11)) << 0x1c);
+        in_fpscr = temp_v4 | ((unsigned int)((temp_v9 != temp_v9) || (temp_v11 != temp_v11)) << 0x1c);
         temp_v0 = (unsigned char)(temp_v4 >> 0x18);
         temp_v10 = temp_v16[temp_v6];
         if ((unsigned char)((temp_v0 >> 6) & 1) || temp_v0 >> 7 != ((unsigned char)(in_fpscr >> 0x1c) & 1)) {

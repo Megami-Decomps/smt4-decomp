@@ -10,8 +10,8 @@ typedef struct {
 /* Supplied declaration required: FUN_002b4b94. */
 extern unsigned int FUN_002bad74(unsigned int, unsigned int);
 extern unsigned int FUN_002baed8(void);
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 /* Supplied declaration required: nw_snd_internal_FrameHeap_Clear. */
 /* Supplied declaration required: nw_snd_internal_FrameHeap_Destroy. */
 
@@ -19,7 +19,7 @@ extern unsigned int FUN_002baed8(void);
 void nw_snd_SoundHeap_Destroy(int param_1)
 
 {
-/* irregular: 5 native warning(s); review required */
+/* irregular: 3 native warning(s); review required */
   unsigned int temp_v0;
   unsigned int temp_v1;
   int temp_v2;

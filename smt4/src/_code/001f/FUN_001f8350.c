@@ -137,11 +137,11 @@ void FUN_001f8350(void)
   }
   temp_v2 = temp_v8 < temp_v10;
   temp_v3 = temp_v8 == temp_v10;
-  temp_v4 = NAN(temp_v8) || NAN(temp_v10);
+  temp_v4 = (temp_v8 != temp_v8) || (temp_v10 != temp_v10);
   if (!temp_v3 && !temp_v2) {
     temp_v2 = temp_v7 < temp_v11;
     temp_v3 = temp_v7 == temp_v11;
-    temp_v4 = NAN(temp_v7) || NAN(temp_v11);
+    temp_v4 = (temp_v7 != temp_v7) || (temp_v11 != temp_v11);
   }
   if (!temp_v3 && temp_v2 == temp_v4) {
     temp_v7 = temp_v7 - temp_v11;

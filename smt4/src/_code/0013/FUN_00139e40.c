@@ -11,13 +11,13 @@ extern unsigned int DAT_00471b60; /* 0x471b60 */
 /* Supplied declaration required: FUN_002ad888. */
 /* Supplied declaration required: FUN_002bb648. */
 /* Supplied declaration required: FUN_002c52f8. */
-/* Supplied declaration required: nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile. */
+extern void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(unsigned int);
 
 
 unsigned int FUN_00139e40(int *param_1,int *param_2,unsigned int param_3,unsigned int param_4)
 
 {
-/* irregular: 7 native warning(s); review required */
+/* irregular: 6 native warning(s); review required */
   unsigned int temp_v0;
   int temp_v1;
   unsigned int temp_v2;

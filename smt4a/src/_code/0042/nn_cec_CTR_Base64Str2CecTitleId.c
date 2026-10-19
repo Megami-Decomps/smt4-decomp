@@ -11,10 +11,10 @@ typedef struct {
 } param_1_stack;
 
 
-int nn_cec_CTR_Base64Str2CecTitleId(unsigned int *param_1)
+unsigned int nn_cec_CTR_Base64Str2CecTitleId(unsigned char *param_1)
 
 {
-  int temp_v0;
+  unsigned int temp_v0;
   unsigned char *pbVar2;
   unsigned int temp_v1;
   int temp_v2;
@@ -25,10 +25,10 @@ int nn_cec_CTR_Base64Str2CecTitleId(unsigned int *param_1)
   
   pbVar2 = (unsigned char *)&temp_v3;
   temp_v6 = 0;
-  temp_v3 = *param_1;
-  (*(unsigned char *)((unsigned char *)&temp_v3 + 0)) = (unsigned char)*param_1;
-  temp_v4 = param_1[1];
-  temp_v5 = (unsigned int)*(unsigned char *)(param_1 + 2);
+  temp_v3 = *(unsigned int *)param_1;
+  (*(unsigned char *)((unsigned char *)&temp_v3 + 0)) = (unsigned char)*(unsigned int *)param_1;
+  temp_v4 = *(unsigned int *)(param_1 + 4);
+  temp_v5 = (unsigned int)param_1[8];
   temp_v0 = 0;
   while ((unsigned char)temp_v3 != 0) {
     temp_v1 = (unsigned int)*pbVar2;

@@ -67,7 +67,7 @@ unsigned char FUN_003f9c6c(int param_1,unsigned int *param_2,int param_3)
     param_2[10] = *puVar7;
     param_2[0xb] = puVar7[1];
     param_2[0xc] = puVar7[2];
-    param_2[9] = (float)puVar7[3] * 57.295776f;
+    *(float *)&param_2[9] = (float)puVar7[3] * 57.295776f;
     return 1;
   }
   temp_v1 = *(int *)(*(int *)(temp_v1 + 0x90) + param_3 * 4);
@@ -118,7 +118,7 @@ unsigned char FUN_003f9c6c(int param_1,unsigned int *param_2,int param_3)
   temp_v6 = temp_v13[0] * temp_v7;
   *(float *)&param_2[9] = temp_v6;
   if (temp_v6 == temp_v9) {
-    param_2[9] = (float)puVar7[3] * temp_v7;
+    *(float *)&param_2[9] = (float)puVar7[3] * temp_v7;
   }
   FUN_0019eb14(param_2);
   temp_v6 = *(float *)(param_1 + 0x38) + (float)temp_v8;

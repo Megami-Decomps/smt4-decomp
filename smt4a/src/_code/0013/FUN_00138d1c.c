@@ -10,14 +10,14 @@ typedef struct {
 extern unsigned int DAT_00640550; /* 0x640550 */
 
 /* Supplied declaration required: FUN_0015a244. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 void FUN_00138d1c(void)
 
 {
-/* irregular: 2 native warning(s); review required */
-  nn_os_CriticalSection_Leave(&DAT_00640550);
+/* irregular: 1 native warning(s); review required */
+  nn_os_CriticalSection_Leave((unsigned int)&DAT_00640550);
   FUN_0015a244();
   return;
 }

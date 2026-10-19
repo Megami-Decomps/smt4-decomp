@@ -14,13 +14,10 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_3_stack;
 
-/* Unsupported intrinsic, declaration required: while (COPY). */
-
 
 void FUN_0030d4c0(int param_1,int param_2,int param_3)
 
 {
-/* irregular: 1 native warning(s); review required */
   unsigned int temp_v0;
   int temp_v1;
   int temp_v2;

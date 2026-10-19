@@ -9,10 +9,10 @@ typedef struct {
 
 extern int DAT_0058928c; /* 0x58928c */
 
-extern unsigned int nn_dsp_CTR_DSP_WriteProcessPipe(int, unsigned int, unsigned int, unsigned int);
+extern unsigned int nn_dsp_CTR_DSP_WriteProcessPipe(unsigned int, int, unsigned char *, unsigned int);
 
 
-unsigned int FUN_001897bc(unsigned int param_1,unsigned int param_2,unsigned int param_3)
+unsigned int FUN_001897bc(int param_1,unsigned char *param_2,unsigned int param_3)
 
 {
   unsigned int temp_v0;

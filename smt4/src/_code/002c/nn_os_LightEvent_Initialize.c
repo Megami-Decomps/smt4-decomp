@@ -3,28 +3,26 @@
 #include "romwright_types.h"
 
 /* Unsupported intrinsic, declaration required: hasExclusiveAccess (CALLOTHER). */
-/* Supplied declaration required: nn_os_SimpleLock_Initialize. */
+extern void nn_os_SimpleLock_Initialize(unsigned int);
 
 
-unsigned int nn_os_LightEvent_Initialize(unsigned int *param_1,int param_2)
+void nn_os_LightEvent_Initialize(unsigned int *param_1,unsigned char param_2)
 
 {
-/* irregular: 2 native warning(s); review required */
+/* irregular: 1 native warning(s); review required */
   unsigned char temp_v0;
   unsigned int temp_v1;
-  unsigned int temp_v2;
   
-  nn_os_SimpleLock_Initialize(param_1 + 1);
-  if (param_2 == 0) {
-    temp_v2 = 0xffffffff;
+  nn_os_SimpleLock_Initialize((unsigned int)(param_1 + 1));
+  if (param_2) {
+    temp_v1 = 0xfffffffe;
   }
   else {
-    temp_v2 = 0xfffffffe;
+    temp_v1 = 0xffffffff;
   }
   do {
-    temp_v1 = *param_1;
     temp_v0 = (unsigned char)hasExclusiveAccess(param_1);
   } while (!temp_v0);
-  *param_1 = temp_v2;
-  return temp_v1;
+  *param_1 = temp_v1;
+  return;
 }

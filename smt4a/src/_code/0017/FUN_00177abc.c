@@ -53,7 +53,7 @@ unsigned int * FUN_00177abc(float *param_1,unsigned int *param_2)
       temp_v3 = param_1[3];
     }
     else {
-      temp_v3 = (float)VectorSignedToFloat((1 << *(sbyte *)(param_1 + 5)) - 1,
+      temp_v3 = (float)VectorSignedToFloat((1 << *(signed char *)(param_1 + 5)) - 1,
                                          (unsigned char)(temp_v0 >> 0x16) & 3);
       temp_v3 = param_1[3] - ((param_1[3] - param_1[4]) * 128.0f * param_1[2]) / temp_v3;
     }

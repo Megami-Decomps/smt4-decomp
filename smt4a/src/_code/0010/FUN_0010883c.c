@@ -32,13 +32,12 @@ extern unsigned int FUN_002ef9e0(unsigned char *, unsigned short);
 extern int FUN_002f1334(unsigned char *, unsigned char *);
 extern unsigned int FUN_002f1352(int *);
 /* Supplied declaration required: FUN_002f135a. */
-/* Supplied declaration required: while. */
 
 
 void FUN_0010883c(int param_1,int param_2)
 
 {
-/* irregular: 14 native warning(s); review required */
+/* irregular: 13 native warning(s); review required */
   unsigned char temp_v0;
   unsigned int *puVar2;
   int *piVar3;

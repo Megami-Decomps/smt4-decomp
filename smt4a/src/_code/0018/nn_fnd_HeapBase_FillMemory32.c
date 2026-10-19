@@ -8,11 +8,11 @@ typedef struct {
 } param_3_stack;
 
 
-void nn_fnd_HeapBase_FillMemory32(unsigned int *param_1,unsigned int *param_2,unsigned int param_3)
+void nn_fnd_HeapBase_FillMemory32(unsigned int param_1,unsigned int param_2,unsigned int param_3)
 
 {
-  for (; param_1 != param_2; param_1 = param_1 + 1) {
-    *param_1 = param_3;
+  for (; param_1 != param_2; param_1 = param_1 + 4) {
+    *(unsigned int *)param_1 = param_3;
   }
   return;
 }

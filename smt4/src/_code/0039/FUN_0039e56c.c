@@ -6,7 +6,6 @@ extern unsigned int DAT_0049f924; /* 0x49f924 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: while (LOAD). */
 extern int FUN_002c2950(void);
 extern float *NaviMain_GetCursorPos(int);
 
@@ -14,7 +13,7 @@ extern float *NaviMain_GetCursorPos(int);
 void FUN_0039e56c(int param_1)
 
 {
-/* irregular: 8 goto(s); irregular input(s): in_fpscr; 3 native warning(s); review required */
+/* irregular: 8 goto(s); irregular input(s): in_fpscr; 2 native warning(s); review required */
   int temp_v0;
   float *pfVar2;
   int temp_v1;

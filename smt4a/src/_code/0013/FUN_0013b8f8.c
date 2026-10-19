@@ -24,15 +24,15 @@ extern romwright_code *DAT_0058922c; /* 0x58922c */
 /* Supplied declaration required: FUN_00170f68. */
 /* Supplied declaration required: FUN_0017145c. */
 /* Supplied declaration required: nn_applet_CTR_detail_GetAppletManInfo. */
-/* Supplied declaration required: nn_applet_CTR_detail_PrepareToJumpToHomeMenu. */
+extern unsigned int nn_applet_CTR_detail_PrepareToJumpToHomeMenu(void);
 /* Supplied declaration required: nn_applet_CTR_detail_ReplySleepQueryToManager. */
-/* Supplied declaration required: nn_applet_CTR_detail_SleepIfShellClosed. */
+extern void nn_applet_CTR_detail_SleepIfShellClosed(void);
 
 
 void FUN_0013b8f8(void)
 
 {
-/* irregular: 11 native warning(s); review required */
+/* irregular: 9 native warning(s); review required */
   int temp_v0;
   char temp_v1;
   int temp_v2;

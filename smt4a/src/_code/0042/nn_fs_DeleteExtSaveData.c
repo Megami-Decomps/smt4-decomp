@@ -13,7 +13,7 @@ typedef struct {
 } param_2_stack;
 
 extern unsigned int FUN_00188688(void);
-extern unsigned int nn_fs_ipc_FileSystem_DeleteExtSaveData(unsigned int *, unsigned char *);
+extern unsigned int nn_fs_ipc_FileSystem_DeleteExtSaveData(unsigned int, int, unsigned int);
 
 
 unsigned int nn_fs_DeleteExtSaveData(unsigned int param_1,unsigned int param_2)
@@ -28,13 +28,14 @@ unsigned int nn_fs_DeleteExtSaveData(unsigned int param_1,unsigned int param_2)
   unsigned int uStack_10;
   unsigned int temp_v5 [3];
   
+  temp_v0 = 1;
   temp_v3 = 0;
   temp_v1 = 1;
   temp_v2 = 0;
   temp_v4 = param_1;
   uStack_10 = param_2;
   temp_v5[0] = FUN_00188688();
-  temp_v0 = nn_fs_ipc_FileSystem_DeleteExtSaveData(temp_v5,&temp_v1);
+  temp_v0 = nn_fs_ipc_FileSystem_DeleteExtSaveData((unsigned int)temp_v5,(int)&temp_v1,temp_v0);
   if ((((temp_v0 & 0x3fc00) == 0x4400) && ((temp_v0 & 0x3ff) >= 0xdc)) && ((temp_v0 & 0x3ff) < 0xe6)) {
     temp_v0 = 0xc8804482;
   }

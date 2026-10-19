@@ -21,7 +21,7 @@ void FUN_00238bec(int *param_1,unsigned int param_2)
       if (temp_v1 == temp_v0 + 8) {
         return;
       }
-      if ((*(char *)(temp_v1 + 0xc) == '\x04') && ((param_2 & (1 << *(sbyte *)(temp_v1 + 0xe))) != 0))
+      if ((*(char *)(temp_v1 + 0xc) == '\x04') && ((param_2 & (1 << *(signed char *)(temp_v1 + 0xe))) != 0))
       break;
       temp_v1 = *(int *)(temp_v1 + 4);
     }

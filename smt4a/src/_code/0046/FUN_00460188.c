@@ -10,72 +10,73 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: FUN_0016e800. */
-/* Supplied declaration required: nn_fs_detail_FileBase_TryRead. */
-/* Supplied declaration required: nn_fs_detail_FileBase_TrySeek. */
+extern unsigned int nn_fs_detail_FileBase_TryRead(unsigned int, int *, unsigned int, unsigned int);
+extern unsigned int nn_fs_detail_FileBase_TrySeek(unsigned int, long long, int);
 /* Supplied declaration required: nw_io_FileStream_FilePosition_Skip. */
 
 
 int FUN_00460188(int param_1,unsigned int param_2,unsigned int param_3)
 
 {
-/* irregular: 4 native warning(s); review required */
+/* irregular: irregular input(s): in_stack_ffffffe4; 3 native warning(s); review required */
   unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  romwright_code *pcVar4;
+  unsigned int temp_v1;
+  romwright_code *pcVar3;
+  int temp_v2;
   int temp_v3;
   int temp_v4;
-  int temp_v5 [2];
+  unsigned int in_stack_ffffffe4;
   
   temp_v0 = *(int *)(param_1 + 0x40) + *(int *)(param_1 + 0x44);
   if (temp_v0 < *(int *)(param_1 + 0x3c) + param_3) {
     param_3 = ((temp_v0 - *(int *)(param_1 + 0x3c)) + 0x1f) & 0xffffffe0;
   }
-  temp_v3 = *(int *)(param_1 + 0x34);
+  temp_v2 = *(int *)(param_1 + 0x34);
   temp_v4 = 0;
-  temp_v1 = temp_v3 + 4;
-  if (*(char *)(temp_v3 + 0x1c) != '\0') {
-    nn_fs_detail_FileBase_TrySeek();
-    *(int *)(temp_v3 + 0x18) = temp_v1;
-    if (temp_v1 < 0) {
-      pcVar4 = *(romwright_code **)(param_1 + 0x48);
-      temp_v2 = *(unsigned int *)(*(int *)(param_1 + 0x34) + 0x18);
-      if (pcVar4 != (romwright_code *)0x0) {
-        (*pcVar4)(temp_v2,*(unsigned int *)(param_1 + 0x4c));
+  if (*(unsigned char *)(temp_v2 + 0x1c) != 0) {
+    temp_v0 = nn_fs_detail_FileBase_TrySeek
+                      (temp_v2 + 4,(unsigned long long)in_stack_ffffffe4 << 0x20,(unsigned int)*(unsigned char *)(temp_v2 + 0x1c))
+    ;
+    *(unsigned int *)(temp_v2 + 0x18) = temp_v0;
+    if ((int)temp_v0 < 0) {
+      pcVar3 = *(romwright_code **)(param_1 + 0x48);
+      temp_v1 = *(unsigned int *)(*(int *)(param_1 + 0x34) + 0x18);
+      if (pcVar3 != (romwright_code *)0x0) {
+        (*pcVar3)(temp_v1,*(unsigned int *)(param_1 + 0x4c));
       }
       return -1;
     }
   }
   else {
-    nn_fs_detail_FileBase_TrySeek();
-    if (temp_v1 < 0) {
-      FUN_0016e800();
+    temp_v0 = nn_fs_detail_FileBase_TrySeek(temp_v2 + 4,(unsigned long long)in_stack_ffffffe4 << 0x20,0);
+    if ((int)temp_v0 < 0) {
+      FUN_0016e800(temp_v0,0x460208);
     }
   }
-  temp_v5[0] = 0;
+  temp_v2 = 0;
   temp_v3 = *(int *)(param_1 + 0x34);
-  temp_v1 = temp_v3 + 4;
   if (*(char *)(temp_v3 + 0x1c) != '\0') {
-    nn_fs_detail_FileBase_TryRead(temp_v1,temp_v5,param_2,param_3);
-    *(int *)(temp_v3 + 0x18) = temp_v1;
-    if (temp_v1 < 0) {
-      pcVar4 = *(romwright_code **)(param_1 + 0x48);
-      temp_v2 = *(unsigned int *)(*(int *)(param_1 + 0x34) + 0x18);
-      if (pcVar4 != (romwright_code *)0x0) {
-        (*pcVar4)(temp_v2,*(unsigned int *)(param_1 + 0x4c));
+    temp_v0 = nn_fs_detail_FileBase_TryRead(temp_v3 + 4,(int *)&in_stack_ffffffe4,param_2,param_3);
+    *(unsigned int *)(temp_v3 + 0x18) = temp_v0;
+    if ((int)temp_v0 < 0) {
+      pcVar3 = *(romwright_code **)(param_1 + 0x48);
+      temp_v1 = *(unsigned int *)(*(int *)(param_1 + 0x34) + 0x18);
+      if (pcVar3 != (romwright_code *)0x0) {
+        (*pcVar3)(temp_v1,*(unsigned int *)(param_1 + 0x4c));
       }
       return -1;
     }
   }
   else {
-    nn_fs_detail_FileBase_TryRead(temp_v1,&temp_v4,param_2,param_3);
-    if (temp_v1 < 0) {
-      FUN_0016e800();
+    temp_v0 = nn_fs_detail_FileBase_TryRead(temp_v3 + 4,(int *)&temp_v4,param_2,param_3);
+    temp_v2 = temp_v4;
+    if ((int)temp_v0 < 0) {
+      FUN_0016e800(temp_v0,0x46027c);
+      temp_v2 = temp_v4;
     }
-    temp_v5[0] = temp_v4;
   }
-  if (0 < temp_v5[0]) {
+  if (0 < temp_v2) {
     nw_io_FileStream_FilePosition_Skip(param_1 + 0x38);
   }
-  return temp_v5[0];
+  return temp_v2;
 }

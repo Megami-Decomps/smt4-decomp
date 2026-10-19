@@ -98,7 +98,7 @@ void FUN_0032b688(int param_1)
     temp_v0 = temp_v0 + 1;
     temp_v5 = temp_v5 + 1.0f;
   } while (temp_v2 != 0);
-  puVar1[0x52] = -(float)puVar1[0x49];
+  *(float *)&puVar1[0x52] = -(float)puVar1[0x49];
   puVar1[0x54] = 0x3f800000;
   puVar1[0x1d6] = 0;
   *(unsigned char *)(puVar1 + 0x1d7) = 0;

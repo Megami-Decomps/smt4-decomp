@@ -2,6 +2,21 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
+#ifndef ROMWRIGHT_FLOAT_BITS_DEFINED
+#define ROMWRIGHT_FLOAT_BITS_DEFINED
+static unsigned int romwright_f2u(float value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.f = value;
+    return bits.u;
+}
+static float romwright_u2f(unsigned int value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.u = value;
+    return bits.f;
+}
+#endif
 /* stack frame of param_1: 12 slot(s), 48 byte(s) */
 typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
@@ -107,8 +122,8 @@ void FUN_0048c394(int param_1)
     pfVar2 = (float *)FUN_00492b84(temp_v11);
     temp_v13 = -(temp_v13 * 13.0f);
     temp_v19[0] = -(temp_v19[0] * 13.0f);
-    temp_v14 = (unsigned int ****)(temp_v13 / (float)in_s0 + *pfVar2);
-    in_s0 = (unsigned int ******)(pfVar2[1] - temp_v19[0] / (float)in_s0);
+    temp_v14 = (unsigned int ****)romwright_f2u((float)((temp_v13 / romwright_u2f((unsigned int)(in_s0)) + *pfVar2)));
+    in_s0 = (unsigned int ******)romwright_f2u((float)((pfVar2[1] - temp_v19[0] / romwright_u2f((unsigned int)(in_s0)))));
     temp_v15 = (unsigned int *****)in_s0;
     FUN_00492c18(temp_v11,&temp_v14);
     *puVar6 = 1;
@@ -186,8 +201,8 @@ void FUN_0048c394(int param_1)
               *puVar5 = 1;
               *puVar6 = 1;
               pfVar2 = (float *)FUN_00492b84(temp_v11);
-              temp_v8 = (unsigned int *****)(*pfVar2 * 0.5f);
-              in_s0 = (unsigned int ******)(pfVar2[1] * 0.5f);
+              temp_v8 = (unsigned int *****)romwright_f2u((float)((*pfVar2 * 0.5f)));
+              in_s0 = (unsigned int ******)romwright_f2u((float)((pfVar2[1] * 0.5f)));
               temp_v9 = (unsigned int *****)in_s0;
               FUN_00492c18(temp_v11,&temp_v8);
               *(unsigned char *)(temp_v0 + 0xd8e) = 6;
@@ -200,8 +215,8 @@ void FUN_0048c394(int param_1)
             *puVar5 = 1;
             *puVar6 = 1;
             pfVar2 = (float *)FUN_00492b84(temp_v11);
-            temp_v8 = (unsigned int *****)(*pfVar2 * 2.0f);
-            in_s0 = (unsigned int ******)(pfVar2[1] * 2.0f);
+            temp_v8 = (unsigned int *****)romwright_f2u((float)((*pfVar2 * 2.0f)));
+            in_s0 = (unsigned int ******)romwright_f2u((float)((pfVar2[1] * 2.0f)));
             temp_v9 = (unsigned int *****)in_s0;
             FUN_00492c18(temp_v11,&temp_v8);
             *(unsigned char *)(temp_v0 + 0xd8e) = 0xc;
@@ -352,11 +367,11 @@ LAB_0048c990:
       FUN_00492ab4(temp_v11);
       temp_v4 = (float)VectorSignedToFloat(temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v8 = (unsigned int *****)
-                 ((temp_v4 - *(float *)(param_1 + 0x2c)) / (float)in_s0 + *(float *)(param_1 + 0x34))
+                 romwright_f2u((float)(((temp_v4 - *(float *)(param_1 + 0x2c)) / romwright_u2f((unsigned int)(in_s0)) + *(float *)(param_1 + 0x34))))
       ;
       temp_v4 = (float)VectorSignedToFloat(temp_v10,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v9 = (unsigned int *****)
-                 ((temp_v4 - *(float *)(param_1 + 0x30)) / (float)in_s0 + *(float *)(param_1 + 0x38))
+                 romwright_f2u((float)(((temp_v4 - *(float *)(param_1 + 0x30)) / romwright_u2f((unsigned int)(in_s0)) + *(float *)(param_1 + 0x38))))
       ;
       FUN_00492c18(temp_v11,&temp_v8);
       temp_v4 = (float)VectorSignedToFloat(temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -398,8 +413,8 @@ LAB_0048cc98:
   *(float *)(param_1 + 0x40) = temp_v4;
   FUN_00492ab4(temp_v11);
   pfVar2 = (float *)FUN_00492b84(temp_v11);
-  temp_v14 = (unsigned int ****)(*(float *)(param_1 + 0x3c) / temp_v4 + *pfVar2);
-  temp_v15 = (unsigned int *****)(*(float *)(param_1 + 0x40) / temp_v4 + pfVar2[1]);
+  temp_v14 = (unsigned int ****)romwright_f2u((float)((*(float *)(param_1 + 0x3c) / temp_v4 + *pfVar2)));
+  temp_v15 = (unsigned int *****)romwright_f2u((float)((*(float *)(param_1 + 0x40) / temp_v4 + pfVar2[1])));
   FUN_00492c18(temp_v11,&temp_v14);
   *puVar6 = 1;
   return;

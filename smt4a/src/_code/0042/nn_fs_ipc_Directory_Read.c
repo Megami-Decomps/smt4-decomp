@@ -6,11 +6,11 @@
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 
 
-int nn_fs_ipc_Directory_Read(int *param_1,unsigned int *param_2,unsigned int param_3,int param_4)
+unsigned int nn_fs_ipc_Directory_Read(unsigned int *param_1,int *param_2,unsigned int param_3,int param_4)
 
 {
 /* irregular: 2 native warning(s); review required */
-  int temp_v0;
+  unsigned int temp_v0;
   int temp_v1;
   
   temp_v1 = coproc_movefrom_User_R_Thread_and_Process_ID();
@@ -20,9 +20,9 @@ int nn_fs_ipc_Directory_Read(int *param_1,unsigned int *param_2,unsigned int par
   *(unsigned int *)(temp_v1 + 0x8c) = param_3;
   temp_v0 = *param_1;
   software_interrupt(0x32);
-  if (-1 < temp_v0) {
-    *param_2 = *(unsigned int *)(temp_v1 + 0x88);
-    temp_v0 = *(int *)(temp_v1 + 0x84);
+  if (-1 < (int)temp_v0) {
+    *param_2 = *(int *)(temp_v1 + 0x88);
+    temp_v0 = *(unsigned int *)(temp_v1 + 0x84);
   }
   return temp_v0;
 }

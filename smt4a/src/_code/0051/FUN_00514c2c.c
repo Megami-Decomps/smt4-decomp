@@ -16,18 +16,17 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_3_stack;
 
-extern unsigned int nn_fnd_ExpHeapBase_Allocate(int, unsigned int, unsigned int, unsigned char, unsigned char, int);
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern unsigned int nn_fnd_ExpHeapBase_Allocate(unsigned int, unsigned int, int, unsigned char, int, unsigned char);
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
-unsigned int FUN_00514c2c(fn_00514c2c_arg0 *param_1,unsigned int param_2,unsigned int param_3)
+unsigned int FUN_00514c2c(fn_00514c2c_arg0 *param_1,unsigned int param_2,int param_3)
 
 {
-/* irregular: 2 native warning(s); review required */
   unsigned char temp_v0;
   unsigned char temp_v1;
-  char temp_v2;
+  unsigned char temp_v2;
   unsigned int temp_v3;
   int temp_v4;
   int temp_v5;
@@ -35,10 +34,10 @@ unsigned int FUN_00514c2c(fn_00514c2c_arg0 *param_1,unsigned int param_2,unsigne
   temp_v5 = param_1->field_0x4;
   temp_v0 = param_1->field_0x8;
   temp_v1 = param_1->field_0x9;
-  temp_v2 = param_1->field_0xa;
+  temp_v2 = (unsigned char)param_1->field_0xa;
   temp_v4 = temp_v5 + 0x58;
   nn_os_CriticalSection_Enter(temp_v4);
-  temp_v3 = nn_fnd_ExpHeapBase_Allocate(temp_v5,param_2,param_3,temp_v0,temp_v1,(int)temp_v2);
+  temp_v3 = nn_fnd_ExpHeapBase_Allocate(temp_v5,param_2,param_3,temp_v0,(unsigned int)temp_v1,temp_v2);
   nn_os_CriticalSection_Leave(temp_v4);
   return temp_v3;
 }

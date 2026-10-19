@@ -46,7 +46,7 @@ int FUN_002b6dd8(int param_1,unsigned int param_2)
   while( 1 ) {
     pcVar4 = temp_v5;
     if ((temp_v6 & 1) != 0) {
-      pcVar4 = *(romwright_code **)(temp_v5 + *piVar2);
+      pcVar4 = *(romwright_code **)((unsigned char *)temp_v5 + *piVar2);
     }
     temp_v1 = (*pcVar4)();
     if (temp_v1 == 0 || temp_v1 == 10) break;

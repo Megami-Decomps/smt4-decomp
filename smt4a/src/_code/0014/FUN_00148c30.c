@@ -4,7 +4,6 @@
 
 extern char s_____2_00588fa4[11]; /* 0x588fa4 */
 
-/* Unsupported intrinsic, declaration required: while (COPY). */
 extern unsigned int FUN_00187180(unsigned int, unsigned int);
 extern unsigned int FUN_00192748(unsigned int);
 extern int FUN_00192798(void);
@@ -13,7 +12,6 @@ extern int FUN_00192798(void);
 int FUN_00148c30(unsigned int param_1,unsigned int param_2,int param_3)
 
 {
-/* irregular: 1 native warning(s); review required */
   unsigned int temp_v0;
   int temp_v1;
   unsigned int temp_v2;

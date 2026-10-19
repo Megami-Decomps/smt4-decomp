@@ -8,13 +8,12 @@ extern unsigned char DAT_0044e459; /* 0x44e459 */
 extern unsigned char DAT_0044e45a; /* 0x44e45a */
 extern unsigned int DAT_0044e460; /* 0x44e460 */
 
-/* Supplied declaration required: nn_dsp_CTR_DSP_UnloadComponent. */
+extern unsigned int nn_dsp_CTR_DSP_UnloadComponent(unsigned int);
 
 
 void FUN_0035a394(void)
 
 {
-/* irregular: 1 native warning(s); review required */
   unsigned char temp_v0;
   romwright_code *pcVar2;
   int temp_v1;

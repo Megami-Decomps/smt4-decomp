@@ -108,14 +108,14 @@ int * FUN_005133e0(int *param_1,int *param_2,int *param_3,int param_4)
         temp_v13 = param_2[2];
       }
       FUN_003d8c2c();
-      switch(piVar1) {
-      case (int *)0xfffffffb:
-      case (int *)0xfffffffc:
-      case (int *)0xfffffffd:
+      switch((unsigned int)piVar1) {
+      case (unsigned int)0xfffffffb:
+      case (unsigned int)0xfffffffc:
+      case (unsigned int)0xfffffffd:
         param_1 = (int *)0x2;
         break;
-      case (int *)0xfffffffe:
-      case (int *)0xffffffff:
+      case (unsigned int)0xfffffffe:
+      case (unsigned int)0xffffffff:
         return (int *)0x6;
       default:
         temp_v0 = param_2[1];

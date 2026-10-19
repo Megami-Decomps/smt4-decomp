@@ -8,13 +8,12 @@ typedef struct {
 } param_4_stack;
 
 extern unsigned int FUN_002ad264(void);
-/* Supplied declaration required: nn_gxlow_CTR_Gpu_WriteHWRegsWithMask. */
+extern unsigned int nn_gxlow_CTR_Gpu_WriteHWRegsWithMask(unsigned int, unsigned int, unsigned char *, unsigned char *, unsigned int);
 
 
-void FUN_00129d00(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
+void FUN_00129d00(unsigned int param_1,unsigned char *param_2,unsigned char *param_3,unsigned int param_4)
 
 {
-/* irregular: 1 native warning(s); review required */
   unsigned int temp_v0;
   
   temp_v0 = FUN_002ad264();

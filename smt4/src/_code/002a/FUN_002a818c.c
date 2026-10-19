@@ -4,13 +4,12 @@
 
 extern unsigned int DAT_00465644; /* 0x465644 */
 
-/* Supplied declaration required: nn_os_LightEvent_ClearSignal. */
+extern void nn_os_LightEvent_ClearSignal(unsigned int);
 
 
 void FUN_002a818c(void)
 
 {
-/* irregular: 1 native warning(s); review required */
-  nn_os_LightEvent_ClearSignal(&DAT_00465644);
+  nn_os_LightEvent_ClearSignal((unsigned int)&DAT_00465644);
   return;
 }

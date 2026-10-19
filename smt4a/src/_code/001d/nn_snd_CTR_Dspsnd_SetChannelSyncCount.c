@@ -5,7 +5,7 @@
 extern int FUN_001c6e20(void);
 
 
-unsigned char nn_snd_CTR_Dspsnd_SetChannelSyncCount(int param_1,int param_2,unsigned short param_3)
+unsigned char nn_snd_CTR_Dspsnd_SetChannelSyncCount(int param_1,unsigned char param_2,short param_3)
 
 {
   int temp_v0;
@@ -13,9 +13,9 @@ unsigned char nn_snd_CTR_Dspsnd_SetChannelSyncCount(int param_1,int param_2,unsi
   
   temp_v0 = FUN_001c6e20();
   if (temp_v0 != 0) {
-    puVar2 = *(unsigned int **)(param_1 + (*(unsigned short *)(param_1 + 0x131a) & 1) * 0x60 + param_2 * 4 + 0x10b0)
-    ;
-    *(unsigned short *)((int)puVar2 + 0xa2) = param_3;
+    puVar2 = *(unsigned int **)(param_1 + (*(unsigned short *)(param_1 + 0x131a) & 1) * 0x60 + (unsigned int)param_2 * 4 +
+                       0x10b0);
+    *(short *)((int)puVar2 + 0xa2) = param_3;
     *puVar2 = *puVar2 | 0x10000000;
   }
   return temp_v0 != 0;

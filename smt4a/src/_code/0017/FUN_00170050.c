@@ -27,7 +27,7 @@ extern unsigned int DAT_0056eca8; /* 0x56eca8 */
 extern unsigned int DAT_0056ecac; /* 0x56ecac */
 extern unsigned char DAT_0056ecb0; /* 0x56ecb0 */
 extern signed char DAT_005c0aa0; /* 0x5c0aa0 */
-extern signed char DAT_005c0aa2; /* 0x5c0aa2 */
+extern unsigned char DAT_005c0aa2; /* 0x5c0aa2 */
 #ifndef ROMWRIGHT_STORAGE_s_______005c0aa3_14_1_DEFINED
 #define ROMWRIGHT_STORAGE_s_______005c0aa3_14_1_DEFINED
 /* Storage views; not a recovered source structure. */
@@ -49,9 +49,9 @@ extern unsigned int DAT_00643080; /* 0x643080 */
 /* Supplied declaration required: FUN_0016f988. */
 /* Supplied declaration required: FUN_0018b28c. */
 extern unsigned int FUN_002e3390(void);
-/* Supplied declaration required: nn_gxlow_CTR_Gpu_AcquireRight. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern unsigned int nn_gxlow_CTR_Gpu_AcquireRight(unsigned int, unsigned int, unsigned char);
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
@@ -59,13 +59,13 @@ extern unsigned int FUN_002e3390(void);
 void FUN_00170050(void)
 
 {
-/* irregular: 7 native warning(s); review required */
+/* irregular: 4 native warning(s); review required */
   unsigned int temp_v0;
   unsigned int temp_v1;
   
-  nn_os_CriticalSection_Enter(&DAT_00643080);
+  nn_os_CriticalSection_Enter((unsigned int)&DAT_00643080);
   if (DAT_005c0aa0 != '\0') {
-    nn_os_CriticalSection_Leave(&DAT_00643080);
+    nn_os_CriticalSection_Leave((unsigned int)&DAT_00643080);
     return;
   }
   DAT_005c0aa0 = 1;
@@ -76,8 +76,8 @@ void FUN_00170050(void)
   temp_v0 = (*(unsigned int *)&s_______005c0aa3.u1[1]);
   temp_v1 = FUN_002e3390();
   FUN_0016f988(s_______005c0aa3.whole + 0xd,temp_v0,temp_v1,0);
-  DAT_005c0ab4 = ram0x005c0ab0.whole;
-  nn_gxlow_CTR_Gpu_AcquireRight(&DAT_005c0ab4,0xffff8001,(int)DAT_005c0aa2);
+  DAT_005c0ab4 = (*(unsigned int *)0x005c0ab0);
+  nn_gxlow_CTR_Gpu_AcquireRight((unsigned int)&DAT_005c0ab4,0xffff8001,(unsigned char)DAT_005c0aa2);
   DAT_0056ec40 = 0;
   DAT_0056ec48 = 0xffffffff;
   DAT_0056ec44 = 0;
@@ -99,6 +99,6 @@ void FUN_00170050(void)
   DAT_0056ecb0 = 1;
   DAT_005c0abc = &DAT_0056ec40;
   FUN_0018b28c();
-  nn_os_CriticalSection_Leave(&DAT_00643080);
+  nn_os_CriticalSection_Leave((unsigned int)&DAT_00643080);
   return;
 }

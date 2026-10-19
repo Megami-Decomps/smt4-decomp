@@ -10,14 +10,14 @@ typedef struct {
 
 /* Supplied declaration required: FUN_001d1438. */
 /* Supplied declaration required: FUN_001d22f4. */
-/* Supplied declaration required: nn_snd_CTR_InitializeWaveBuffer. */
+extern void nn_snd_CTR_InitializeWaveBuffer(unsigned int);
 extern int nw_snd_internal_driver_Voice_FrameToByte(int, unsigned char);
 
 
 unsigned char FUN_001d0b98(int *param_1,int param_2,int *param_3,int param_4,int param_5,int param_6)
 
 {
-/* irregular: 3 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   int temp_v0;
   unsigned int temp_v1;
   int *piVar3;
@@ -48,7 +48,7 @@ unsigned char FUN_001d0b98(int *param_1,int param_2,int *param_3,int param_4,int
             temp_v2 = (int)param_1 + temp_v0 * 6 + temp_v1 * 0x3c8 + 0x530;
             FUN_001d1438(temp_v2,(int)param_3 + temp_v1 * 6 + 0x12);
           }
-          nn_snd_CTR_InitializeWaveBuffer(piVar3);
+          nn_snd_CTR_InitializeWaveBuffer((unsigned int)piVar3);
           param_1[temp_v1 * 0xf2 + temp_v0 * 6 + 0x8e] = temp_v2;
           param_1[temp_v1 * 0xf2 + temp_v0 * 6 + 0x8d] = temp_v3;
           *piVar3 = temp_v4;

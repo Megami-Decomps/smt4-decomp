@@ -7,15 +7,24 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
+#ifndef ROMWRIGHT_PIECE_4_4_DEFINED
+#define ROMWRIGHT_PIECE_4_4_DEFINED
+#define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
+#endif
 /* Supplied declaration required: FUN_002e7258. */
-/* Supplied declaration required: nn_fs_detail_FileBase_TrySeek. */
+extern unsigned int nn_fs_detail_FileBase_TrySeek(unsigned int, long long, int);
 
 
 void FUN_0010372e(int param_1)
 
 {
-/* irregular: 2 native warning(s); review required */
-  nn_fs_detail_FileBase_TrySeek(param_1 + 4);
-  FUN_002e7258();
+/* irregular: irregular input(s): in_stack_00000000; 3 native warning(s); review required */
+  unsigned int temp_v0;
+  unsigned int unaff_r4;
+  int in_stack_00000000;
+  
+  temp_v0 = nn_fs_detail_FileBase_TrySeek
+                    (param_1 + 4,romwright_piece_4_4(unaff_r4,in_stack_00000000),in_stack_00000000);
+  FUN_002e7258(temp_v0,0x103736);
   return;
 }

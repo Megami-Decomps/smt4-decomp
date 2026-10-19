@@ -51,11 +51,11 @@ int * nw_gfx_Camera_DynamicBuilder_Create(int param_1,int *param_2)
   if (*(int *)(param_1 + 0x10) == 0) {
     puVar6 = (unsigned int *)(param_1 + 0x10);
     ppuVar2 = (unsigned int **)FUN_0012d318(param_2);
-    temp_v10 = (unsigned int **)romwright_piece_3_1(temp_v10._1_3_,1);
+    temp_v10 = (unsigned int **)romwright_piece_3_1((((unsigned int)(temp_v10) >> 8) & 0xffffffU),1);
     temp_v9 = ppuVar2;
     if ((unsigned int ***)puVar6 != &temp_v9) {
       temp_v9 = (unsigned int **)*puVar6;
-      temp_v10 = (unsigned int **)romwright_piece_3_1(temp_v10._1_3_,*(unsigned char *)(param_1 + 0x14));
+      temp_v10 = (unsigned int **)romwright_piece_3_1((((unsigned int)(temp_v10) >> 8) & 0xffffffU),*(unsigned char *)(param_1 + 0x14));
       *(unsigned char *)(param_1 + 0x14) = 1;
       *puVar6 = (unsigned int)ppuVar2;
     }
@@ -69,11 +69,11 @@ int * nw_gfx_Camera_DynamicBuilder_Create(int param_1,int *param_2)
   if (*(int *)(param_1 + 0x18) == 0) {
     puVar6 = (unsigned int *)(param_1 + 0x18);
     ppuVar2 = (unsigned int **)FUN_0012d618(param_2);
-    temp_v10 = (unsigned int **)romwright_piece_3_1(temp_v10._1_3_,1);
+    temp_v10 = (unsigned int **)romwright_piece_3_1((((unsigned int)(temp_v10) >> 8) & 0xffffffU),1);
     temp_v9 = ppuVar2;
     if ((unsigned int ***)puVar6 != &temp_v9) {
       temp_v9 = (unsigned int **)*puVar6;
-      temp_v10 = (unsigned int **)romwright_piece_3_1(temp_v10._1_3_,*(unsigned char *)(param_1 + 0x1c));
+      temp_v10 = (unsigned int **)romwright_piece_3_1((((unsigned int)(temp_v10) >> 8) & 0xffffffU),*(unsigned char *)(param_1 + 0x1c));
       *(unsigned char *)(param_1 + 0x1c) = 1;
       *puVar6 = (unsigned int)ppuVar2;
     }

@@ -7,14 +7,13 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_3_stack;
 
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 void nw_snd_internal_driver_SoundThread_SetProfileBuffer(int param_1,int param_2,unsigned int param_3)
 
 {
-/* irregular: 2 native warning(s); review required */
   int temp_v0;
   
   temp_v0 = param_1 + 0x1c4;

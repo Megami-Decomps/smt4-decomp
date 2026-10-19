@@ -105,7 +105,7 @@ void FUN_0023592c(int param_1)
     temp_v15 = temp_v15 * 0.015873017f;
     temp_v3 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v15 < 1.0f) << 0x1f) |
             ((unsigned int)(temp_v15 == 1.0f) << 0x1e);
-    temp_v11 = temp_v3 | ((unsigned int)NAN(temp_v15) << 0x1c);
+    temp_v11 = temp_v3 | ((unsigned int)(temp_v15 != temp_v15) << 0x1c);
     temp_v0 = (unsigned char)(temp_v3 >> 0x18);
     temp_v14 = temp_v21;
     if (((unsigned char)((temp_v0 >> 6) & 1) || temp_v0 >> 7 != ((unsigned char)(temp_v11 >> 0x1c) & 1)) &&
@@ -129,7 +129,7 @@ void FUN_0023592c(int param_1)
     temp_v14 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(temp_v11 >> 0x16) & 3);
     temp_v14 = temp_v14 * temp_v18;
     temp_v3 = (temp_v11 & 0xfffffff) | ((unsigned int)(temp_v14 < 2.0f) << 0x1f) | ((unsigned int)(temp_v14 == 2.0f) << 0x1e);
-    temp_v12 = temp_v3 | ((unsigned int)NAN(temp_v14) << 0x1c);
+    temp_v12 = temp_v3 | ((unsigned int)(temp_v14 != temp_v14) << 0x1c);
     temp_v0 = (unsigned char)(temp_v3 >> 0x18);
     if (((unsigned char)((temp_v0 >> 6) & 1) || temp_v0 >> 7 != ((unsigned char)(temp_v12 >> 0x1c) & 1)) &&
        (temp_v12 = (temp_v11 & 0xfffffff) | ((unsigned int)(0.0f <= temp_v14) << 0x1d), temp_v13 = temp_v14,

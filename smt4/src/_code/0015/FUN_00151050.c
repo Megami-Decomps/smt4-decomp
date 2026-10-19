@@ -70,7 +70,7 @@ LAB_001510cc:
       temp_v9 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v10 < temp_v11) << 0x1f) |
                ((unsigned int)(temp_v10 == temp_v11) << 0x1e);
       temp_v2 = (unsigned char)(temp_v9 >> 0x18);
-      if ((unsigned char)((temp_v2 >> 6) & 1) || (unsigned char)(temp_v2 >> 7) != (NAN(temp_v10) || NAN(temp_v11))) {
+      if ((unsigned char)((temp_v2 >> 6) & 1) || (unsigned char)(temp_v2 >> 7) != ((temp_v10 != temp_v10) || (temp_v11 != temp_v11))) {
         temp_v9 = in_fpscr & 0xfffffff;
       }
       if (*(int *)(temp_v7 + 0x30) >= *(int *)(temp_v7 + 0x2c)) {
@@ -84,7 +84,7 @@ LAB_001510cc:
       }
       temp_v1 = (temp_v9 & 0xfffffff) | ((unsigned int)(temp_v10 < temp_v11) << 0x1f) |
               ((unsigned int)(temp_v10 == temp_v11) << 0x1e);
-      in_fpscr = temp_v1 | ((unsigned int)(NAN(temp_v10) || NAN(temp_v11)) << 0x1c);
+      in_fpscr = temp_v1 | ((unsigned int)((temp_v10 != temp_v10) || (temp_v11 != temp_v11)) << 0x1c);
       temp_v2 = (unsigned char)(temp_v1 >> 0x18);
       if ((unsigned char)((temp_v2 >> 6) & 1) || temp_v2 >> 7 != ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
         in_fpscr = temp_v9 & 0xfffffff;

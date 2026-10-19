@@ -158,7 +158,7 @@ void FUN_001326b4(int param_1,unsigned int param_2,unsigned int param_3,int para
   }
   else {
     *(unsigned int *)(temp_v1 + 0xc) = temp_v3 + 0x20;
-    if (puVar7 < DAT_004652a4) {
+    if ((unsigned int)puVar7 < DAT_004652a4) {
       DAT_004652a0 = puVar7 + 2;
       puVar7[1] = 0x8025e;
       *puVar7 = 0;

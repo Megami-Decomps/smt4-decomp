@@ -261,7 +261,7 @@ LAB_00180bc0:
                   temp_v13 = temp_v13 - temp_v21;
                   temp_v18 = (temp_v12 & 0xfffffff) | ((unsigned int)(temp_v13 < temp_v19) << 0x1f) |
                            ((unsigned int)(temp_v13 == temp_v19) << 0x1e);
-                  temp_v12 = temp_v18 | ((unsigned int)(NAN(temp_v13) || NAN(temp_v19)) << 0x1c);
+                  temp_v12 = temp_v18 | ((unsigned int)((temp_v13 != temp_v13) || (temp_v19 != temp_v19)) << 0x1c);
                   temp_v5 = (unsigned char)(temp_v18 >> 0x18);
                   if (!(unsigned char)((temp_v5 >> 6) & 1) && temp_v5 >> 7 == ((unsigned char)(temp_v12 >> 0x1c) & 1)) {
                     temp_v25 = (unsigned long long)(unsigned int)temp_v13 << 0x20;
@@ -342,7 +342,7 @@ LAB_00180bc0:
               temp_v13 = temp_v13 - temp_v21;
               temp_v18 = (temp_v12 & 0xfffffff) | ((unsigned int)(temp_v13 < temp_v19) << 0x1f) |
                        ((unsigned int)(temp_v13 == temp_v19) << 0x1e);
-              temp_v12 = temp_v18 | ((unsigned int)(NAN(temp_v13) || NAN(temp_v19)) << 0x1c);
+              temp_v12 = temp_v18 | ((unsigned int)((temp_v13 != temp_v13) || (temp_v19 != temp_v19)) << 0x1c);
               temp_v5 = (unsigned char)(temp_v18 >> 0x18);
               if (!(unsigned char)((temp_v5 >> 6) & 1) && temp_v5 >> 7 == ((unsigned char)(temp_v12 >> 0x1c) & 1)) {
                 temp_v25 = (unsigned long long)(unsigned int)temp_v13 << 0x20;

@@ -91,7 +91,7 @@ void FUN_002898e4(void)
       temp_v4 = temp_v5 + 1;
       temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)((float)puVar3[temp_v5 * 5 + 8] == temp_v9) << 0x1e);
       temp_v6 = (float)VectorUnsignedToFloat(temp_v3 + 0x14,(unsigned char)(temp_v0 >> 0x16) & 3);
-      puVar3[temp_v5 * 5 + 10] = temp_v6 * temp_v7;
+      *(float *)&puVar3[temp_v5 * 5 + 10] = temp_v6 * temp_v7;
       if (romwright_subpiece_4_1_0(temp_v0 >> 0x1e,0)) {
         puVar3[temp_v5 * 5 + 8] = temp_v10;
       }
@@ -115,7 +115,7 @@ void FUN_002898e4(void)
       *(unsigned short *)(puVar3 + temp_v5 * 5 + 0x23) = 0;
       *(unsigned short *)((int)puVar3 + temp_v5 * 0x14 + 0x8e) = 0xf0;
       temp_v6 = (float)VectorUnsignedToFloat(temp_v3 + 0x14,(unsigned char)(in_fpscr >> 0x16) & 3);
-      puVar3[temp_v5 * 5 + 0x21] = temp_v6 * temp_v7;
+      *(float *)&puVar3[temp_v5 * 5 + 0x21] = temp_v6 * temp_v7;
       temp_v3 = FUN_002c09f4(2);
       if (temp_v3 == 0) {
         temp_v1 = FUN_002c09f4(0x1e);
@@ -131,7 +131,7 @@ void FUN_002898e4(void)
       }
       temp_v6 = (float)puVar3[temp_v5 * 5 + 0x20];
       if (((int)temp_v6 < 0x3dcccccd) && ((unsigned int)temp_v6 < 0xbdcccccd)) {
-        puVar3[temp_v5 * 5 + 0x20] = temp_v6 * (float)((unsigned long long)temp_v11 >> 0x20);
+        *(float *)&puVar3[temp_v5 * 5 + 0x20] = temp_v6 * (float)((unsigned long long)temp_v11 >> 0x20);
       }
       temp_v5 = temp_v5 + 1;
     } while (temp_v5 < 5);

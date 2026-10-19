@@ -59,9 +59,9 @@ extern unsigned int FUN_002bad5c(char *);
 /* Supplied declaration required: FUN_002c564c. */
 extern unsigned int FUN_002c5c14(int, int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002c618c. */
-/* Supplied declaration required: nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile. */
-/* Supplied declaration required: nn_fs_detail_FileBase_TryGetSize. */
-/* Supplied declaration required: nn_fs_detail_FileBase_TryRead. */
+extern void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(unsigned int);
+extern unsigned int nn_fs_detail_FileBase_TryGetSize(unsigned int, long long *);
+extern unsigned int nn_fs_detail_FileBase_TryRead(unsigned int, int *, unsigned int, unsigned int);
 
 
 /* WARNING: Type propagation algorithm not settling */
@@ -69,7 +69,7 @@ extern unsigned int FUN_002c5c14(int, int, unsigned int, unsigned int);
 void FUN_0015c81c(int param_1,int param_2)
 
 {
-/* irregular: 2 goto(s); 22 native warning(s); review required */
+/* irregular: 2 goto(s); 19 native warning(s); review required */
   char temp_v0;
   unsigned char temp_v1;
   unsigned int *puVar3;
@@ -181,7 +181,7 @@ void FUN_0015c81c(int param_1,int param_2)
       temp_v2 = FUN_002ad1e0(DAT_00432fc8 + 0x98);
       if (temp_v2 != 0) {
         *(unsigned int *)(DAT_00432fc8 + 0x754) = *(unsigned int *)(DAT_00432fc8 + 0x754) & 0xfffeffff;
-        temp_v15 = romwright_piece_3_1(temp_v15._1_3_,200);
+        temp_v15 = romwright_piece_3_1((((unsigned int)(temp_v15) >> 8) & 0xffffffU),200);
       }
       else {
         FUN_0015dc2c(&temp_v23,DAT_00433158,param_2 + 0x30);
@@ -239,10 +239,9 @@ void FUN_0015c81c(int param_1,int param_2)
           else {
             temp_v22 = 0;
             uStack_5c = 0;
-            puVar9 = &temp_v10;
-            nn_fs_detail_FileBase_TryGetSize(puVar9,&temp_v22);
+            temp_v5 = nn_fs_detail_FileBase_TryGetSize((unsigned int)&temp_v10,(long long *)&temp_v22);
             pcVar4 = acStack_40;
-            FUN_002baa40(pcVar4,puVar9);
+            FUN_002baa40(pcVar4,temp_v5);
             (*(unsigned int *)temp_v16) = (unsigned int)*(char (*) [4])pcVar4;
             uStack_298 = *(unsigned int *)(pcVar4 + 4);
             temp_v2 = FUN_002a12d8(temp_v16);
@@ -292,12 +291,11 @@ void FUN_0015c81c(int param_1,int param_2)
                   *(unsigned int *)(param_2 + 0x14) = temp_v4;
                 }
               }
-              puVar9 = &temp_v10;
-              nn_fs_detail_FileBase_TryRead
-                        (puVar9,&temp_v20,*(unsigned int *)(param_2 + 0x14),
-                         *(unsigned int *)(param_2 + 0x24));
+              temp_v5 = nn_fs_detail_FileBase_TryRead
+                                 ((unsigned int)&temp_v10,&temp_v20,*(unsigned int *)(param_2 + 0x14),
+                                  *(unsigned int *)(param_2 + 0x24));
               pcVar4 = acStack_40;
-              FUN_002baa40(pcVar4,puVar9);
+              FUN_002baa40(pcVar4,temp_v5);
               (*(unsigned int *)temp_v16) = (unsigned int)*(char (*) [4])pcVar4;
               uStack_298 = *(unsigned int *)(pcVar4 + 4);
               if (temp_v20 == 0) {
@@ -398,7 +396,7 @@ LAB_0015cdc8:
       else if ((char)temp_v15 != -0x38) goto LAB_0015cfcc;
       FUN_002c564c(0);
       *(unsigned char *)(param_2 + 8) = 1;
-      temp_v15 = romwright_piece_3_1(temp_v15._1_3_,200);
+      temp_v15 = romwright_piece_3_1((((unsigned int)(temp_v15) >> 8) & 0xffffffU),200);
       temp_v8 = temp_v15;
       temp_v9[0] = temp_v16[0];
       temp_v9[1] = temp_v16[1];
@@ -421,7 +419,7 @@ LAB_0015cfcc:
       temp_v2 = DAT_00432fc8;
       FUN_0015dd58(DAT_00432fc8,&temp_v19,(*(unsigned int *)temp_v16),uStack_298);
       if (temp_v2 != 0) {
-        temp_v15 = romwright_piece_3_1(temp_v15._1_3_,100);
+        temp_v15 = romwright_piece_3_1((((unsigned int)(temp_v15) >> 8) & 0xffffffU),100);
         *(unsigned char *)(param_2 + 8) = 1;
       }
       else if (!temp_v6) {
@@ -434,13 +432,13 @@ LAB_0015cfcc:
         FUN_002a116c();
         if (pcVar4 == (char *)0x0) {
           FUN_002c564c(0);
-          temp_v15 = romwright_piece_3_1(temp_v15._1_3_,100);
+          temp_v15 = romwright_piece_3_1((((unsigned int)(temp_v15) >> 8) & 0xffffffU),100);
           *(unsigned char *)(param_2 + 8) = 1;
           FUN_002a12d8(temp_v16);
           return;
         }
       }
-      temp_v15 = romwright_piece_3_1(temp_v15._1_3_,100);
+      temp_v15 = romwright_piece_3_1((((unsigned int)(temp_v15) >> 8) & 0xffffffU),100);
       *(unsigned char *)(param_2 + 8) = 1;
       temp_v5 = FUN_002a12d8(temp_v16);
       if ((temp_v5 & 0x80000000) != 0) {

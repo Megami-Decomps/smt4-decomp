@@ -139,7 +139,7 @@ void FUN_0030c078(int param_1)
         temp_v1 = 1;
         temp_v6 = (in_fpscr & 0xfffffff) | ((unsigned int)(in_s0 < temp_v16) << 0x1f) |
                 ((unsigned int)(in_s0 == temp_v16) << 0x1e);
-        in_fpscr = temp_v6 | ((unsigned int)(NAN(in_s0) || NAN(temp_v16)) << 0x1c);
+        in_fpscr = temp_v6 | ((unsigned int)((in_s0 != in_s0) || (temp_v16 != temp_v16)) << 0x1c);
         temp_v0 = (unsigned char)(temp_v6 >> 0x18);
         if ((unsigned char)((temp_v0 >> 6) & 1) || temp_v0 >> 7 != ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
           temp_v8 = *(float *)(param_1 + 4);
@@ -157,7 +157,7 @@ void FUN_0030c078(int param_1)
         temp_v1 = 0;
         temp_v6 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v2 < temp_v16) << 0x1f) |
                 ((unsigned int)(temp_v2 == temp_v16) << 0x1e);
-        in_fpscr = temp_v6 | ((unsigned int)(NAN(temp_v2) || NAN(temp_v16)) << 0x1c);
+        in_fpscr = temp_v6 | ((unsigned int)((temp_v2 != temp_v2) || (temp_v16 != temp_v16)) << 0x1c);
         temp_v0 = (unsigned char)(temp_v6 >> 0x18);
         if (!((unsigned char)((temp_v0 >> 6) & 1) || temp_v0 >> 7 != ((unsigned char)(in_fpscr >> 0x1c) & 1))) {
           FUN_0024b830();
@@ -208,7 +208,7 @@ void FUN_0030c078(int param_1)
             temp_v13 = pfVar8[3] + (float)((unsigned long long)temp_v14 >> 0x20) * temp_v13;
             temp_v4 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v16 < temp_v13) << 0x1f) |
                     ((unsigned int)(temp_v16 == temp_v13) << 0x1e);
-            in_fpscr = temp_v4 | ((unsigned int)(NAN(temp_v16) || NAN(temp_v13)) << 0x1c);
+            in_fpscr = temp_v4 | ((unsigned int)((temp_v16 != temp_v16) || (temp_v13 != temp_v13)) << 0x1c);
             temp_v0 = (unsigned char)(temp_v4 >> 0x18);
             if (!(unsigned char)((temp_v0 >> 6) & 1) && temp_v0 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
               temp_v13 = temp_v16;
@@ -255,7 +255,7 @@ void FUN_0030c078(int param_1)
             temp_v2 = romwright_sqrt_4(temp_v13 * temp_v13 + temp_v11 * temp_v11 + DAT_004ea924 * DAT_004ea924);
             temp_v4 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v2 < temp_v16) << 0x1f) |
                     ((unsigned int)(temp_v2 == temp_v16) << 0x1e);
-            temp_v10 = temp_v4 | ((unsigned int)(NAN(temp_v2) || NAN(temp_v16)) << 0x1c);
+            temp_v10 = temp_v4 | ((unsigned int)((temp_v2 != temp_v2) || (temp_v16 != temp_v16)) << 0x1c);
             temp_v0 = (unsigned char)(temp_v4 >> 0x18);
             DAT_004ea91c = temp_v13;
             DAT_004ea920 = temp_v11;

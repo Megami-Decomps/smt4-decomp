@@ -159,7 +159,7 @@ void FUN_002d0708(int param_1)
         temp_v11 = 1;
         temp_v3 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v6 < 0.0f) << 0x1f) |
                 ((unsigned int)(temp_v6 == 0.0f) << 0x1e);
-        in_fpscr = temp_v3 | ((unsigned int)NAN(temp_v6) << 0x1c);
+        in_fpscr = temp_v3 | ((unsigned int)(temp_v6 != temp_v6) << 0x1c);
         temp_v10 = (unsigned char)(temp_v3 >> 0x18);
         temp_v21 = temp_v18;
         temp_v29 = temp_v7;
@@ -178,7 +178,7 @@ void FUN_002d0708(int param_1)
         temp_v11 = 0;
         temp_v3 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v6 < 0.0f) << 0x1f) |
                 ((unsigned int)(temp_v6 == 0.0f) << 0x1e);
-        in_fpscr = temp_v3 | ((unsigned int)NAN(temp_v6) << 0x1c);
+        in_fpscr = temp_v3 | ((unsigned int)(temp_v6 != temp_v6) << 0x1c);
         temp_v10 = (unsigned char)(temp_v3 >> 0x18);
         if (!((unsigned char)((temp_v10 >> 6) & 1) || temp_v10 >> 7 != ((unsigned char)(in_fpscr >> 0x1c) & 1))) {
           temp_v21 = temp_v18;
@@ -249,7 +249,7 @@ void FUN_002d0708(int param_1)
             temp_v19 = romwright_sqrt_4(DAT_004ea91c * DAT_004ea91c + DAT_004ea920 * DAT_004ea920 +
                           DAT_004ea924 * DAT_004ea924);
             temp_v12 = temp_v3 | ((unsigned int)(temp_v19 < temp_v21) << 0x1f) | ((unsigned int)(temp_v19 == temp_v21) << 0x1e);
-            in_fpscr = temp_v12 | ((unsigned int)(NAN(temp_v19) || NAN(temp_v21)) << 0x1c);
+            in_fpscr = temp_v12 | ((unsigned int)((temp_v19 != temp_v19) || (temp_v21 != temp_v21)) << 0x1c);
             temp_v10 = (unsigned char)(temp_v12 >> 0x18);
             DAT_004ea93c = DAT_004ea92c;
             DAT_004ea940 = DAT_004ea930;
@@ -260,7 +260,7 @@ void FUN_002d0708(int param_1)
                             DAT_004ea924 * DAT_004ea924);
               temp_v3 = temp_v3 | ((unsigned int)(temp_v14 < temp_v20) << 0x1f) | ((unsigned int)(temp_v14 == temp_v20) << 0x1e)
               ;
-              in_fpscr = temp_v3 | ((unsigned int)(NAN(temp_v14) || NAN(temp_v20)) << 0x1c);
+              in_fpscr = temp_v3 | ((unsigned int)((temp_v14 != temp_v14) || (temp_v20 != temp_v20)) << 0x1c);
               temp_v10 = (unsigned char)(temp_v3 >> 0x18);
               if (!(unsigned char)((temp_v10 >> 6) & 1) && temp_v10 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
                 DAT_004ea91c = DAT_004ea91c / temp_v14;
@@ -341,7 +341,7 @@ void FUN_002d0708(int param_1)
             temp_v22 = romwright_sqrt_4(temp_v14 * temp_v14 + temp_v2 * temp_v2 + DAT_004ea924 * DAT_004ea924);
             temp_v3 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v22 < temp_v20) << 0x1f) |
                     ((unsigned int)(temp_v22 == temp_v20) << 0x1e);
-            temp_v12 = temp_v3 | ((unsigned int)(NAN(temp_v22) || NAN(temp_v20)) << 0x1c);
+            temp_v12 = temp_v3 | ((unsigned int)((temp_v22 != temp_v22) || (temp_v20 != temp_v20)) << 0x1c);
             temp_v10 = (unsigned char)(temp_v3 >> 0x18);
             DAT_004ea91c = temp_v14;
             DAT_004ea920 = temp_v2;
@@ -385,7 +385,7 @@ void FUN_002d0708(int param_1)
               temp_v3 = temp_v12 & 0xfffffff;
               temp_v0 = temp_v3 | ((unsigned int)(temp_v21 < temp_v20) << 0x1f) | ((unsigned int)(temp_v21 == temp_v20) << 0x1e)
               ;
-              temp_v12 = temp_v0 | ((unsigned int)(NAN(temp_v21) || NAN(temp_v20)) << 0x1c);
+              temp_v12 = temp_v0 | ((unsigned int)((temp_v21 != temp_v21) || (temp_v20 != temp_v20)) << 0x1c);
               temp_v22 = pfVar8[3] + temp_v21 * temp_v22;
               temp_v10 = (unsigned char)(temp_v0 >> 0x18);
               temp_v8 = temp_v10 >> 7;
@@ -395,7 +395,7 @@ void FUN_002d0708(int param_1)
               if (!temp_v9 && temp_v8 == temp_v10) {
                 temp_v12 = temp_v3 | ((unsigned int)(temp_v22 < temp_v14) << 0x1f) |
                          ((unsigned int)(temp_v22 == temp_v14) << 0x1e) |
-                         ((unsigned int)(NAN(temp_v22) || NAN(temp_v14)) << 0x1c);
+                         ((unsigned int)((temp_v22 != temp_v22) || (temp_v14 != temp_v14)) << 0x1c);
                 temp_v10 = (unsigned char)(temp_v12 >> 0x18);
                 temp_v8 = temp_v10 >> 7;
                 temp_v9 = (unsigned char)((temp_v10 >> 6) & 1);
@@ -432,7 +432,7 @@ void FUN_002d0708(int param_1)
             temp_v21 = romwright_sqrt_4(temp_v16 * temp_v16 + temp_v20 * temp_v20 + DAT_004ea924 * DAT_004ea924);
             temp_v3 = (temp_v12 & 0xfffffff) | ((unsigned int)(temp_v21 < temp_v2) << 0x1f) |
                     ((unsigned int)(temp_v21 == temp_v2) << 0x1e);
-            in_fpscr = temp_v3 | ((unsigned int)(NAN(temp_v21) || NAN(temp_v2)) << 0x1c);
+            in_fpscr = temp_v3 | ((unsigned int)((temp_v21 != temp_v21) || (temp_v2 != temp_v2)) << 0x1c);
             temp_v10 = (unsigned char)(temp_v3 >> 0x18);
             DAT_004ea91c = temp_v16;
             DAT_004ea920 = temp_v20;

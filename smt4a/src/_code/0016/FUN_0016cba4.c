@@ -11,22 +11,21 @@ extern int DAT_005880d8; /* 0x5880d8 */
 extern unsigned int DAT_005880e4; /* 0x5880e4 */
 extern unsigned int DAT_00618518; /* 0x618518 */
 
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
-/* Supplied declaration required: nn_snd_CTR_Voice_SetState. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
+extern void nn_snd_CTR_Voice_SetState(unsigned int, int);
 
 
 void FUN_0016cba4(unsigned int param_1)
 
 {
-/* irregular: 3 native warning(s); review required */
   if ((int)param_1 < 0) {
     return;
   }
   if (param_1 < DAT_005880e4) {
-    nn_os_CriticalSection_Enter(&DAT_00618518);
+    nn_os_CriticalSection_Enter((unsigned int)&DAT_00618518);
     nn_snd_CTR_Voice_SetState(*(unsigned int *)(DAT_005880d8 + param_1 * 0x70),0);
-    nn_os_CriticalSection_Leave(&DAT_00618518);
+    nn_os_CriticalSection_Leave((unsigned int)&DAT_00618518);
     return;
   }
   return;

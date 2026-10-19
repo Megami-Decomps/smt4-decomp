@@ -82,20 +82,20 @@ int * FUN_002bc7f4(unsigned int param_1,int *param_2)
       return DAT_004c632c;
     }
     piVar2 = (int *)(unsigned int)*(unsigned char *)(DAT_004c632c[6] + DAT_004c632c[10] * 0x1c);
-    switch(piVar2) {
-    case (int *)0x0:
+    switch((unsigned int)piVar2) {
+    case (unsigned int)0x0:
       piVar2 = (int *)0x310;
       break;
-    case (int *)0x1:
+    case (unsigned int)0x1:
       piVar2 = (int *)0x311;
       break;
-    case (int *)0x2:
+    case (unsigned int)0x2:
       piVar2 = (int *)0x312;
       break;
-    case (int *)0x3:
+    case (unsigned int)0x3:
       piVar2 = (int *)0x313;
       break;
-    case (int *)0x4:
+    case (unsigned int)0x4:
       piVar2 = (int *)0x314;
       break;
     default:

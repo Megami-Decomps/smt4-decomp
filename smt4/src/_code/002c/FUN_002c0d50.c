@@ -38,17 +38,17 @@ extern int FUN_0012a708(void);
 /* Supplied declaration required: FUN_002bb460. */
 /* Supplied declaration required: FUN_002c12bc. */
 /* Supplied declaration required: FUN_002c131c. */
-/* Supplied declaration required: nn_applet_CTR_detail_LockTransition. */
-/* Supplied declaration required: nn_applet_CTR_detail_NotifyToWait. */
-/* Supplied declaration required: nn_applet_CTR_detail_SleepIfShellClosed. */
-/* Supplied declaration required: nn_applet_CTR_detail_UnlockTransition. */
+extern void nn_applet_CTR_detail_LockTransition(unsigned int, unsigned char);
+extern void nn_applet_CTR_detail_NotifyToWait(void);
+extern void nn_applet_CTR_detail_SleepIfShellClosed(void);
+extern void nn_applet_CTR_detail_UnlockTransition(unsigned int);
 
 
 int FUN_002c0d50(unsigned int *param_1,unsigned int param_2,unsigned int param_3,unsigned int *param_4,
                 unsigned int *param_5,unsigned int param_6,unsigned int param_7,unsigned int param_8)
 
 {
-/* irregular: 7 goto(s); 18 native warning(s); review required */
+/* irregular: 7 goto(s); 14 native warning(s); review required */
   char temp_v0;
   int temp_v1;
   unsigned int *puVar3;
@@ -56,23 +56,24 @@ int FUN_002c0d50(unsigned int *param_1,unsigned int param_2,unsigned int param_3
   unsigned int temp_v3;
   unsigned int temp_v4;
   int temp_v5;
-  int temp_v6;
-  unsigned int temp_v7;
+  unsigned int temp_v6;
+  int temp_v7;
   unsigned int temp_v8;
-  int temp_v9;
+  unsigned int temp_v9;
   int temp_v10;
-  int temp_v11 [5];
-  unsigned int temp_v12;
-  unsigned int *puStack_34;
+  int temp_v11;
+  int temp_v12 [5];
   unsigned int temp_v13;
+  unsigned int *puStack_34;
   unsigned int temp_v14;
+  unsigned int temp_v15;
   unsigned int *puStack_28;
   
   temp_v5 = 0;
-  temp_v12 = 0;
+  temp_v13 = 0;
   puStack_34 = param_1;
-  temp_v13 = param_2;
-  temp_v14 = param_3;
+  temp_v14 = param_2;
+  temp_v15 = param_3;
   puStack_28 = param_4;
   temp_v1 = FUN_0011d1fc();
   FUN_002bb140(0);
@@ -98,35 +99,35 @@ int FUN_002c0d50(unsigned int *param_1,unsigned int param_2,unsigned int param_3
   }
   do {
     do {
-      temp_v7 = temp_v13;
-      temp_v6 = 0;
       temp_v8 = temp_v14;
+      temp_v7 = 0;
+      temp_v9 = temp_v15;
       temp_v0 = '\x01';
-      puVar3 = (unsigned int *)&temp_v10;
-      FUN_0013bb98(puVar3,temp_v11,temp_v13,temp_v14,&temp_v9,&temp_v6,param_7,param_8);
+      puVar3 = (unsigned int *)&temp_v11;
+      FUN_0013bb98(puVar3,temp_v12,temp_v14,temp_v15,&temp_v10,&temp_v7,param_7,param_8);
       temp_v3 = 0xfbc00000;
       if (((unsigned int)puVar3 & 0x3ff) != 0x3ef) {
         temp_v0 = '\x01';
         if ((-1 < (int)puVar3) && (DAT_0044e3f8 != (romwright_code *)0x0)) {
-          temp_v0 = (*DAT_0044e3f8)(DAT_0044e438,temp_v10,temp_v11[0],temp_v7,temp_v8,temp_v9,
-                                  temp_v6);
+          temp_v0 = (*DAT_0044e3f8)(DAT_0044e438,temp_v11,temp_v12[0],temp_v8,temp_v9,temp_v10,
+                                  temp_v7);
           temp_v3 = temp_v4;
         }
         if (param_4 != (unsigned int *)0x0) {
-          temp_v3 = temp_v9;
+          temp_v3 = temp_v10;
         }
-        temp_v12 = temp_v10;
+        temp_v13 = temp_v11;
         if (param_4 != (unsigned int *)0x0) {
           *param_4 = temp_v3;
         }
-        temp_v5 = temp_v11[0];
+        temp_v5 = temp_v12[0];
         if (param_5 != (unsigned int *)0x0) {
-          *param_5 = temp_v6;
+          *param_5 = temp_v7;
         }
       }
     } while (temp_v0 == '\0');
     if (param_1 != (unsigned int *)0x0) {
-      *param_1 = temp_v12;
+      *param_1 = temp_v13;
     }
     if ((int)puVar3 < 0) goto LAB_002c0ec0;
   } while ((((temp_v5 != 1 && temp_v5 != 0xb) && (temp_v5 != 10 && temp_v5 != 0xc)) &&
@@ -203,25 +204,25 @@ LAB_002c0fa8:
     }
   }
 LAB_002c1044:
-  temp_v3 = 0;
+  temp_v6 = 0;
   temp_v2 = FUN_002c12bc();
   if (temp_v2 == 0) {
-    temp_v3 = 0x10;
+    temp_v6 = 0x10;
   }
   else if (temp_v2 == 1) {
-    temp_v3 = 0x20;
+    temp_v6 = 0x20;
   }
   else if (temp_v2 == 2) {
-    temp_v3 = 0x40;
+    temp_v6 = 0x40;
   }
   else if (temp_v2 == 3) {
-    temp_v3 = 0x80;
+    temp_v6 = 0x80;
   }
-  nn_applet_CTR_detail_UnlockTransition(temp_v3);
+  nn_applet_CTR_detail_UnlockTransition(temp_v6);
   nn_applet_CTR_detail_SleepIfShellClosed();
 LAB_002c108c:
   if (temp_v5 == 7) {
-    nn_applet_CTR_detail_LockTransition(1);
+    nn_applet_CTR_detail_LockTransition(1,1);
   }
   if ((temp_v1 == 0xe || temp_v1 == 4) || (temp_v1 == 5 || temp_v1 == 0x12)) {
     if (temp_v5 != 4 && temp_v5 != 5) {

@@ -24,15 +24,15 @@ extern unsigned int DAT_0044e444; /* 0x44e444 */
 /* Supplied declaration required: FUN_002c1148. */
 /* Supplied declaration required: FUN_002c130c. */
 /* Supplied declaration required: nn_applet_CTR_detail_GetAppletManInfo. */
-/* Supplied declaration required: nn_applet_CTR_detail_PrepareToJumpToHomeMenu. */
+extern unsigned int nn_applet_CTR_detail_PrepareToJumpToHomeMenu(void);
 /* Supplied declaration required: nn_applet_CTR_detail_ReplySleepQueryToManager. */
-/* Supplied declaration required: nn_applet_CTR_detail_SleepIfShellClosed. */
+extern void nn_applet_CTR_detail_SleepIfShellClosed(void);
 
 
 void FUN_00106f70(void)
 
 {
-/* irregular: 11 native warning(s); review required */
+/* irregular: 9 native warning(s); review required */
   int temp_v0;
   char temp_v1;
   int temp_v2;

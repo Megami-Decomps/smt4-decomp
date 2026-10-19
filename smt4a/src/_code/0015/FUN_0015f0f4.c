@@ -81,7 +81,7 @@ unsigned int FUN_0015f0f4(void)
     FUN_001b57a8(puVar4,0);
     temp_v7 = *puVar4;
     temp_v8 = puVar4[1];
-    temp_v6 = romwright_piece_3_1(temp_v6._1_3_,200);
+    temp_v6 = romwright_piece_3_1((((unsigned int)(temp_v6) >> 8) & 0xffffffU),200);
     temp_v10 = temp_v6;
     uStack_28 = temp_v9;
     uStack_24 = uStack_38;

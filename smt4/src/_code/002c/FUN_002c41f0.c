@@ -13,8 +13,6 @@ struct fn_002c41f0_arg0 {
     byte field_0x98; /* +0x98 */
 };
 
-extern void FUN_002c41f0(fn_002c41f0_arg0 *);
-
 
 void FUN_002c41f0(fn_002c41f0_arg0 *param_1)
 

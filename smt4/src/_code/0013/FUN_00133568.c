@@ -60,187 +60,187 @@ void FUN_00133568(unsigned int *param_1)
   DAT_004655d4 = 3;
   DAT_004655d8 = 0;
   DAT_004655e4 = 0x3000000;
-  if (DAT_004652a0 < DAT_004652a4) {
+  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
     DAT_004652a0[1] = 0x10245;
     *DAT_004652a0 = 1;
     DAT_004652a0 = DAT_004652a0 + 2;
   }
-  if (DAT_004652a0 < DAT_004652a4) {
+  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
     DAT_004652a0[1] = 0x10244;
     *DAT_004652a0 = 0;
     DAT_004652a0 = DAT_004652a0 + 2;
   }
-  if (DAT_004652a0 < DAT_004652a4) {
+  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
     DAT_004652a0[1] = 0x80289;
     *DAT_004652a0 = -0x80000000;
     DAT_004652a0 = DAT_004652a0 + 2;
   }
-  if (DAT_004652a0 < DAT_004652a4) {
+  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
     DAT_004652a0[1] = 0xb0229;
     *DAT_004652a0 = 0;
     DAT_004652a0 = DAT_004652a0 + 2;
   }
-  if (DAT_004652a0 < DAT_004652a4) {
+  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
     DAT_004652a0[1] = 0xf0252;
     *DAT_004652a0 = 0;
     DAT_004652a0 = DAT_004652a0 + 2;
   }
-  if (DAT_004652a0 < DAT_004652a4) {
+  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
     DAT_004652a0[1] = 0xf0251;
     *DAT_004652a0 = 0;
     DAT_004652a0 = DAT_004652a0 + 2;
   }
-  if (DAT_004652a0 < DAT_004652a4) {
+  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
     DAT_004652a0[1] = 0xf0254;
     *DAT_004652a0 = 0;
     DAT_004652a0 = DAT_004652a0 + 2;
   }
-  if (DAT_004652a0 < DAT_004652a4) {
+  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
     DAT_004652a0[1] = 0x10253;
     *DAT_004652a0 = 0;
     DAT_004652a0 = DAT_004652a0 + 2;
   }
-  if (DAT_004652a0 < DAT_004652a4) {
+  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
     DAT_004652a0[1] = 0xf0242;
     *DAT_004652a0 = 0;
     DAT_004652a0 = DAT_004652a0 + 2;
   }
-  if (DAT_004652a0 < DAT_004652a4) {
+  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
     DAT_004652a0[1] = 0xf024a;
     *DAT_004652a0 = 0;
     DAT_004652a0 = DAT_004652a0 + 2;
   }
-  if (DAT_004652a0 < DAT_004652a4) {
+  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
     DAT_004652a0[1] = 0x5025e;
     *DAT_004652a0 = 0;
     DAT_004652a0 = DAT_004652a0 + 2;
   }
   func_0x002a691c(0x101,7,0);
-  if (DAT_004652a0 < DAT_004652a4) {
+  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
     DAT_004652a0[1] = 0xf011f;
     *DAT_004652a0 = 0x10140;
     DAT_004652a0 = DAT_004652a0 + 2;
   }
-  if (DAT_004652a0 < DAT_004652a4) {
+  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
     DAT_004652a0[1] = 0xf0100;
     *DAT_004652a0 = 0xe40100;
     DAT_004652a0 = DAT_004652a0 + 2;
   }
-  if (DAT_004652a0 < DAT_004652a4) {
+  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
     DAT_004652a0[1] = 0xf0101;
     *DAT_004652a0 = 0x1010000;
     DAT_004652a0 = DAT_004652a0 + 2;
   }
-  if (DAT_004652a0 < DAT_004652a4) {
+  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
     DAT_004652a0[1] = 0xf0107;
     *DAT_004652a0 = 8000;
     DAT_004652a0 = DAT_004652a0 + 2;
   }
-  if (DAT_004652a0 < DAT_004652a4) {
+  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
     DAT_004652a0[1] = 0xf0105;
     *DAT_004652a0 = -0xff00f0;
     DAT_004652a0 = DAT_004652a0 + 2;
   }
-  if (DAT_004652a0 < DAT_004652a4) {
+  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
     DAT_004652a0[1] = 0x10061;
     *DAT_004652a0 = 3;
     DAT_004652a0 = DAT_004652a0 + 2;
   }
-  if (DAT_004652a0 < DAT_004652a4) {
+  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
     DAT_004652a0[1] = 0x10062;
     *DAT_004652a0 = 0;
     DAT_004652a0 = DAT_004652a0 + 2;
   }
-  if (DAT_004652a0 < DAT_004652a4) {
+  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
     DAT_004652a0[1] = 0xf0065;
     *DAT_004652a0 = 0;
     DAT_004652a0 = DAT_004652a0 + 2;
   }
-  if (DAT_004652a0 < DAT_004652a4) {
+  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
     DAT_004652a0[1] = 0xf0066;
     *DAT_004652a0 = 0;
     DAT_004652a0 = DAT_004652a0 + 2;
   }
-  if (DAT_004652a0 < DAT_004652a4) {
+  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
     DAT_004652a0[1] = 0xf0067;
     *DAT_004652a0 = 0;
     DAT_004652a0 = DAT_004652a0 + 2;
   }
-  if (DAT_004652a0 < DAT_004652a4) {
+  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
     DAT_004652a0[1] = 0x10118;
     *DAT_004652a0 = 0;
     DAT_004652a0 = DAT_004652a0 + 2;
   }
-  if (DAT_004652a0 < DAT_004652a4) {
+  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
     DAT_004652a0[1] = 0xf011b;
     *DAT_004652a0 = 0;
     DAT_004652a0 = DAT_004652a0 + 2;
   }
-  if (DAT_004652a0 < DAT_004652a4) {
+  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
     DAT_004652a0[1] = 0x7006a;
     *DAT_004652a0 = 0xffffff;
     DAT_004652a0 = DAT_004652a0 + 2;
   }
-  if (DAT_004652a0 < DAT_004652a4) {
+  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
     DAT_004652a0[1] = 0xf0102;
     *DAT_004652a0 = 3;
     DAT_004652a0 = DAT_004652a0 + 2;
   }
-  if (DAT_004652a0 < DAT_004652a4) {
+  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
     DAT_004652a0[1] = 0x80126;
     *DAT_004652a0 = 0x3000000;
     DAT_004652a0 = DAT_004652a0 + 2;
   }
   func_0x002a691c(0x40,0x10,0);
   func_0x002a691c(0x50,7,0x1f1f1f1f);
-  if (DAT_004652a0 < DAT_004652a4) {
+  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
     DAT_004652a0[1] = 0xf0058;
     *DAT_004652a0 = 0x100;
     DAT_004652a0 = DAT_004652a0 + 2;
   }
-  if (DAT_004652a0 < DAT_004652a4) {
+  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
     DAT_004652a0[1] = 0xf004c;
     *DAT_004652a0 = 1;
     DAT_004652a0 = DAT_004652a0 + 2;
   }
-  if (DAT_004652a0 < DAT_004652a4) {
+  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
     DAT_004652a0[1] = 0xf006f;
     *DAT_004652a0 = 0;
     DAT_004652a0 = DAT_004652a0 + 2;
   }
-  if (DAT_004652a0 < DAT_004652a4) {
+  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
     DAT_004652a0[1] = 0x20060;
     *DAT_004652a0 = 0;
     DAT_004652a0 = DAT_004652a0 + 2;
   }
-  if (DAT_004652a0 < DAT_004652a4) {
+  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
     DAT_004652a0[1] = 0xc0069;
     *DAT_004652a0 = 0x20000;
     DAT_004652a0 = DAT_004652a0 + 2;
   }
-  if (DAT_004652a0 < DAT_004652a4) {
+  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
     *DAT_004652a0 = 0xf;
     DAT_004652a0[1] = 0xf0113;
     DAT_004652a0 = DAT_004652a0 + 2;
   }
-  if (DAT_004652a0 < DAT_004652a4) {
+  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
     *DAT_004652a0 = 0xf;
     DAT_004652a0[1] = 0xf0112;
     DAT_004652a0 = DAT_004652a0 + 2;
   }
-  if (DAT_004652a0 < DAT_004652a4) {
+  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
     DAT_004652a0[1] = 0xf0114;
     *DAT_004652a0 = 3;
     DAT_004652a0 = DAT_004652a0 + 2;
   }
-  if (DAT_004652a0 < DAT_004652a4) {
+  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
     DAT_004652a0[1] = 0xf0115;
     *DAT_004652a0 = 3;
     DAT_004652a0 = DAT_004652a0 + 2;
   }
   temp_v1 = 0;
   do {
-    if (DAT_004652a0 < DAT_004652a4) {
+    if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
       *DAT_004652a0 = temp_v1 << 8;
       DAT_004652a0[1] = 0xf01c5;
       DAT_004652a0 = DAT_004652a0 + 2;
@@ -252,7 +252,7 @@ void FUN_00133568(unsigned int *param_1)
     } while (temp_v3 < 0x100);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 7);
-  if (DAT_004652a0 < DAT_004652a4) {
+  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
     DAT_004652a0[1] = 0xf0290;
     *DAT_004652a0 = -0x80000000;
     DAT_004652a0 = DAT_004652a0 + 2;
@@ -269,19 +269,19 @@ void FUN_00133568(unsigned int *param_1)
     temp_v4 = (*DAT_0044e330)(0x10000,0x100,0,0x4000);
   }
   FUN_002c4938(temp_v4,0x4000);
-  if (DAT_004652a0 < DAT_004652a4) {
+  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
     DAT_004652a0[1] = 0xf02cb;
     *DAT_004652a0 = 0;
     DAT_004652a0 = DAT_004652a0 + 2;
   }
   FUN_002aa790(0x2cc,0x200,temp_v4);
-  if (DAT_004652a0 < DAT_004652a4) {
+  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
     DAT_004652a0[1] = 0xf029b;
     *DAT_004652a0 = 0x200;
     DAT_004652a0 = DAT_004652a0 + 2;
   }
   FUN_002aa790(0x29c,0xe00,temp_v4);
-  if (DAT_004652a0 < DAT_004652a4) {
+  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
     DAT_004652a0[1] = 0xf02bf;
     *DAT_004652a0 = 0;
     DAT_004652a0 = DAT_004652a0 + 2;
@@ -291,7 +291,7 @@ void FUN_00133568(unsigned int *param_1)
   }
   temp_v1 = 0;
   do {
-    if (DAT_004652a0 < DAT_004652a4) {
+    if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
       DAT_004652a0[1] = (temp_v1 + 0x2b1U) | 0xf0000;
       *DAT_004652a0 = 0;
       DAT_004652a0 = DAT_004652a0 + 2;
@@ -300,12 +300,12 @@ void FUN_00133568(unsigned int *param_1)
   } while (temp_v1 < 4);
   func_0x002a691c(0x28b,2);
   func_0x002a691c(0x205,0x24,0);
-  if (DAT_004652a0 < DAT_004652a4) {
+  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
     DAT_004652a0[1] = 0xf01d4;
     *DAT_004652a0 = 1;
     DAT_004652a0 = DAT_004652a0 + 2;
   }
-  if (DAT_004652a0 < DAT_004652a4) {
+  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
     DAT_004652a0[1] = 0xf00ae;
     *DAT_004652a0 = -0x1030710;
     DAT_004652a0 = DAT_004652a0 + 2;
@@ -314,7 +314,7 @@ void FUN_00133568(unsigned int *param_1)
   temp_v3 = 0;
   do {
     pbVar3 = (unsigned char *)(temp_v1 + temp_v3 + 0x16b1);
-    if ((*pbVar3 != 0) && (DAT_004652a0 < DAT_004652a4)) {
+    if ((*pbVar3 != 0) && ((unsigned int)DAT_004652a0 < DAT_004652a4)) {
       *DAT_004652a0 = *(int *)(temp_v1 + temp_v3 * 4 + 0x1300);
       DAT_004652a0[1] = *(unsigned int *)(temp_v3 * 4 + 0x4e4f54) | ((unsigned int)*pbVar3 << 0x10);
       DAT_004652a0 = DAT_004652a0 + 2;

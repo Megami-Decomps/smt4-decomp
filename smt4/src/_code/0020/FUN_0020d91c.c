@@ -5,7 +5,6 @@
 extern int DAT_00447e10; /* 0x447e10 */
 extern signed char DAT_0049f93e; /* 0x49f93e */
 
-/* Unsupported intrinsic, declaration required: while (INT_ADD). */
 /* Supplied declaration required: FUN_001e2d88. */
 /* Supplied declaration required: FUN_0028c618. */
 /* Supplied declaration required: FUN_0028c640. */
@@ -16,7 +15,7 @@ extern signed char DAT_0049f93e; /* 0x49f93e */
 void FUN_0020d91c(void)
 
 {
-/* irregular: 6 native warning(s); review required */
+/* irregular: 5 native warning(s); review required */
   unsigned int *puVar1;
   unsigned int temp_v0;
   unsigned int temp_v1;

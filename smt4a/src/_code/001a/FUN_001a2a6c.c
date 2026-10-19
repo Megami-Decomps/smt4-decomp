@@ -17,13 +17,13 @@ extern signed char DAT_005891f4; /* 0x5891f4 */
 /* Supplied declaration required: FUN_001b03dc. */
 /* Supplied declaration required: FUN_001bcd48. */
 /* Supplied declaration required: nn_applet_CTR_detail_ReplySleepQueryToManager. */
-/* Supplied declaration required: nn_applet_CTR_detail_SleepIfShellClosed. */
+extern void nn_applet_CTR_detail_SleepIfShellClosed(void);
 
 
 void FUN_001a2a6c(unsigned int param_1)
 
 {
-/* irregular: 5 native warning(s); review required */
+/* irregular: 4 native warning(s); review required */
   char temp_v0;
   unsigned int temp_v1;
   char temp_v2 [4];

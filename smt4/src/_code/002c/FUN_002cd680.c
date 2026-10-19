@@ -11,17 +11,17 @@ extern int DAT_0043de68; /* 0x43de68 */
 
 /* Supplied declaration required: FUN_002c40f8. */
 /* Supplied declaration required: FUN_002c526c. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
-extern int nn_os_CriticalSection_TryEnter(int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
+extern unsigned char nn_os_CriticalSection_TryEnter(unsigned int);
 
 
 unsigned int FUN_002cd680(void)
 
 {
-/* irregular: 3 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   int temp_v0;
-  unsigned char *puVar2;
-  int temp_v1;
+  unsigned char temp_v1;
+  unsigned char *puVar3;
   unsigned int temp_v2;
   int iStack_18;
   unsigned char temp_v3 [4];
@@ -31,14 +31,14 @@ unsigned int FUN_002cd680(void)
   if (DAT_0043de68 != 0) {
     iStack_18 = *(int *)(DAT_0043de68 + 0x42c);
     if (iStack_18 != 0) {
-      puVar2 = temp_v3;
-      FUN_002c40f8(puVar2,&iStack_18,1,0,0,0);
-      if ((int)puVar2 < 0) {
+      puVar3 = temp_v3;
+      FUN_002c40f8(puVar3,&iStack_18,1,0,0,0);
+      if ((int)puVar3 < 0) {
         FUN_002c526c();
       }
-      if (((unsigned int)puVar2 & 0x3ff) == 0x3fe) {
+      if (((unsigned int)puVar3 & 0x3ff) == 0x3fe) {
         temp_v1 = nn_os_CriticalSection_TryEnter(temp_v0 + 0x420);
-        if (temp_v1 == 0) {
+        if (!temp_v1) {
           return 0;
         }
         if (*(int *)(temp_v0 + 0x78) != *(int *)(temp_v0 + 0x7c)) {

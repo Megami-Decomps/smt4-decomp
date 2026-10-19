@@ -24,7 +24,7 @@ void FUN_00109f4e(unsigned int param_1,unsigned int param_2,unsigned int param_3
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   unsigned char temp_v1;
-  unsigned char uStack_13 [3];
+  unsigned int uStack_13;
   
   temp_v0 = 0x4d264443;
   (*(unsigned int *)&temp_v1) = romwright_piece_3_1((int)((unsigned int)param_4 >> 8),0x4c);

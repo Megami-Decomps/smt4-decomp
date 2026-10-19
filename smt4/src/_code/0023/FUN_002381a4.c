@@ -9,7 +9,6 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_2_stack;
 
-/* Unsupported intrinsic, declaration required: while (INT_AND). */
 /* Supplied declaration required: FUN_00237d9c. */
 /* Supplied declaration required: FUN_00237e04. */
 /* Supplied declaration required: FUN_00238170. */
@@ -24,7 +23,7 @@ extern int FUN_0035e7ec(unsigned int, unsigned char **);
 int * FUN_002381a4(int *param_1,unsigned int param_2)
 
 {
-/* irregular: 9 unstructured edge(s); 1 goto(s); 7 native warning(s); review required */
+/* irregular: 9 unstructured edge(s); 1 goto(s); 6 native warning(s); review required */
   unsigned char temp_v0;
   char temp_v1;
   unsigned short temp_v2;
@@ -150,7 +149,7 @@ LAB_00238338:
       piVar6 = param_1;
       temp_v10 = (unsigned char *)&temp_v10;
       temp_v11 = (unsigned char *)&temp_v10;
-      FUN_002381a4(param_1,&temp_v10);
+      FUN_002381a4(param_1,(unsigned int)&temp_v10);
       if (piVar6 != (int *)0x0) {
         if ((temp_v12 != 0) && (puVar13 = temp_v11, (unsigned char **)temp_v11 != &temp_v10)) {
           do {
@@ -260,7 +259,7 @@ LAB_00238338:
       piVar6 = param_1;
       temp_v10 = (unsigned char *)&temp_v10;
       temp_v11 = (unsigned char *)&temp_v10;
-      FUN_002381a4(param_1,&temp_v10);
+      FUN_002381a4(param_1,(unsigned int)&temp_v10);
       if (piVar6 != (int *)0x0) {
         if ((temp_v12 != 0) && (puVar13 = temp_v11, (unsigned char **)temp_v11 != &temp_v10)) {
           do {

@@ -56,7 +56,7 @@ void FUN_00462848(fn_00462848_arg0 *param_1)
     }
     puVar1 = temp_v2;
     FUN_00508a6c(puVar1,temp_v0);
-    param_1->field_0x2c = puVar1;
+    param_1->field_0x2c = (undefined4)puVar1;
   }
   temp_v0 = param_1->field_0x2c;
   FUN_004619b0(temp_v0,*(unsigned int *)&param_1->field_0x30,*(unsigned int *)&param_1->field_0x1c);

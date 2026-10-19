@@ -12,11 +12,11 @@ typedef struct {
 extern unsigned int DAT_0044e660; /* 0x44e660 */
 
 /* Supplied declaration required: nn_fs_ExtSaveDataSpecifier_Make. */
-extern unsigned int nn_fs_ipc_FileSystem_CreateExtSaveData(unsigned int *, unsigned char *, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+extern unsigned int nn_fs_ipc_FileSystem_CreateExtSaveData(unsigned int, int, unsigned long long, unsigned int, unsigned int, unsigned int, unsigned int);
 
 
-unsigned int FUN_00354e48(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
-                 unsigned int param_5,unsigned int param_6)
+unsigned int FUN_00354e48(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,unsigned int param_5
+                 ,unsigned int param_6)
 
 {
 /* irregular: 1 native warning(s); review required */
@@ -27,7 +27,7 @@ unsigned int FUN_00354e48(unsigned int param_1,unsigned int param_2,unsigned int
   nn_fs_ExtSaveDataSpecifier_Make(temp_v1,1,param_1,param_2);
   temp_v2[0] = DAT_0044e660;
   temp_v0 = nn_fs_ipc_FileSystem_CreateExtSaveData
-                    (temp_v2,temp_v1,param_5,param_6,0xffffffff,0xffffffff,param_3,param_4);
+                    ((unsigned int)temp_v2,(int)temp_v1,0xffffffffffffffff,param_5,param_6,param_3,param_4);
   if ((((temp_v0 & 0x3fc00) == 0x4400) && ((temp_v0 & 0x3ff) >= 0xdc)) && ((temp_v0 & 0x3ff) < 0xe6)) {
     temp_v0 = 0xc8804482;
   }

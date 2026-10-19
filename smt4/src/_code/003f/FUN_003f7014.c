@@ -17,15 +17,14 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_3_stack;
 
-/* Supplied declaration required: nn_fnd_ExpHeapBase_Allocate. */
+extern unsigned int nn_fnd_ExpHeapBase_Allocate(unsigned int, unsigned int, int, unsigned char, int, unsigned char);
 
 
-void FUN_003f7014(fn_003f7014_arg0 *param_1,unsigned int param_2,unsigned int param_3)
+void FUN_003f7014(fn_003f7014_arg0 *param_1,unsigned int param_2,int param_3)
 
 {
-/* irregular: 1 native warning(s); review required */
   nn_fnd_ExpHeapBase_Allocate
-            (param_1->field_0x4,param_2,param_3,param_1->field_0x8,param_1->field_0x9,
-             (int)param_1->field_0xa);
+            (param_1->field_0x4,param_2,param_3,param_1->field_0x8,(unsigned int)param_1->field_0x9,
+             (unsigned char)param_1->field_0xa);
   return;
 }

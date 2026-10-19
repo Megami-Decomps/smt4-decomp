@@ -12,7 +12,7 @@ typedef struct {
 
 
 void nn_hidlow_CTR_AccelerometerLifoRing_ReadData
-               (unsigned int *param_1,int param_2,int param_3,int *param_4,unsigned int *param_5,unsigned int *param_6)
+               (unsigned int *param_1,int param_2,int param_3,int *param_4,long long *param_5,int *param_6)
 
 {
 /* irregular: 1 native warning(s); review required */
@@ -22,12 +22,11 @@ void nn_hidlow_CTR_AccelerometerLifoRing_ReadData
   int temp_v3;
   unsigned int temp_v4;
   unsigned int temp_v5;
-  unsigned int temp_v6;
+  int temp_v6;
   unsigned int temp_v7;
   unsigned short *puVar9;
   int temp_v8;
   unsigned int temp_v9;
-  int temp_v10;
   
   *param_4 = 0;
   if (0 < param_3) {
@@ -52,8 +51,8 @@ void nn_hidlow_CTR_AccelerometerLifoRing_ReadData
           temp_v7 = 7;
         }
       }
-      temp_v2 = *param_5;
-      temp_v6 = param_5[1];
+      temp_v2 = (unsigned int)*param_5;
+      temp_v6 = *(int *)((int)param_5 + 4);
       if ((int)(temp_v6 - (temp_v4 + (temp_v2 < temp_v0))) < 0 ==
           (SBORROW4(temp_v6,temp_v4) != SBORROW4(temp_v6 - temp_v4,(unsigned int)(temp_v2 < temp_v0)))) {
         temp_v8 = temp_v7 - *param_6;
@@ -68,25 +67,25 @@ void nn_hidlow_CTR_AccelerometerLifoRing_ReadData
           temp_v8 = (temp_v7 - *param_6) + 8;
         }
       }
-      temp_v10 = 0;
+      temp_v6 = 0;
       if (param_3 < temp_v8) {
         temp_v8 = param_3;
       }
       if (0 < temp_v8) {
         do {
-          temp_v3 = (int)((temp_v7 - temp_v10) + 8) % 8;
-          puVar9 = (unsigned short *)(param_2 + temp_v10 * 6);
-          temp_v10 = temp_v10 + 1;
+          temp_v3 = (int)((temp_v7 - temp_v6) + 8) % 8;
+          puVar9 = (unsigned short *)(param_2 + temp_v6 * 6);
+          temp_v6 = temp_v6 + 1;
           *puVar9 = *(unsigned short *)((int)param_1 + temp_v3 * 6 + 0x20);
           puVar9[1] = *(unsigned short *)((int)param_1 + temp_v3 * 6 + 0x22);
           puVar9[2] = *(unsigned short *)((int)param_1 + temp_v3 * 6 + 0x24);
-        } while (temp_v10 < temp_v8);
+        } while (temp_v6 < temp_v8);
       }
     } while (((param_1[4] != temp_v9) || (*param_1 != temp_v0 || param_1[1] != temp_v4)) ||
             (param_1[2] != temp_v1 || param_1[3] != temp_v5));
     *param_4 = temp_v8;
-    *param_5 = temp_v0;
-    param_5[1] = temp_v4;
+    *(unsigned int *)param_5 = temp_v0;
+    *(unsigned int *)((int)param_5 + 4) = temp_v4;
     *param_6 = temp_v7;
   }
   return;

@@ -3,17 +3,17 @@
 #include "romwright_types.h"
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: nn_os_Thread_FinalizeImpl. */
+extern void nn_os_Thread_FinalizeImpl(unsigned int);
 
 
 int FUN_0033b5d8(int param_1)
 
 {
-/* irregular: 2 native warning(s); review required */
+/* irregular: 1 native warning(s); review required */
   int *piVar1;
   
   piVar1 = (int *)(param_1 + 0x38);
-  nn_os_Thread_FinalizeImpl(piVar1);
+  nn_os_Thread_FinalizeImpl((unsigned int)piVar1);
   if (*piVar1 != 0) {
     software_interrupt(0x23);
     *piVar1 = 0;

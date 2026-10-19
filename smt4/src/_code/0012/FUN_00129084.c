@@ -8,18 +8,17 @@ extern unsigned char DAT_0044e7c2; /* 0x44e7c2 */
 extern unsigned char DAT_0044e7c8; /* 0x44e7c8 */
 extern unsigned char DAT_004e6f64; /* 0x4e6f64 */
 
-/* Supplied declaration required: nn_os_LightEvent_Initialize. */
-/* Supplied declaration required: nn_snd_CTR_Dspsnd_Finalize. */
+extern void nn_os_LightEvent_Initialize(unsigned int, unsigned char);
+extern void nn_snd_CTR_Dspsnd_Finalize(unsigned int, unsigned char);
 
 
 void FUN_00129084(void)
 
 {
-/* irregular: 2 native warning(s); review required */
   if ((DAT_0044e7c0 & ~DAT_0044e7c1) != 0) {
-    nn_os_LightEvent_Initialize(&DAT_0044e7c8,1);
+    nn_os_LightEvent_Initialize((unsigned int)&DAT_0044e7c8,1);
     DAT_0044e7c2 = 1;
-    nn_snd_CTR_Dspsnd_Finalize(&DAT_004e6f64,1);
+    nn_snd_CTR_Dspsnd_Finalize((unsigned int)&DAT_004e6f64,1);
     DAT_0044e7c1 = 1;
   }
   return;

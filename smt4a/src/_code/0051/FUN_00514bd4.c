@@ -10,15 +10,15 @@ typedef struct {
 extern unsigned char DAT_00558378; /* 0x558378 */
 
 /* Supplied declaration required: FUN_001af814. */
-/* Supplied declaration required: nn_fnd_ExpHeapBase_Finalize. */
+extern void nn_fnd_ExpHeapBase_Finalize(unsigned int);
 
 
 void FUN_00514bd4(unsigned int *param_1)
 
 {
-/* irregular: 2 native warning(s); review required */
+/* irregular: 1 native warning(s); review required */
   *param_1 = (unsigned int)&DAT_00558378;
-  nn_fnd_ExpHeapBase_Finalize(param_1);
+  nn_fnd_ExpHeapBase_Finalize((unsigned int)param_1);
   FUN_001af814(param_1);
   return;
 }

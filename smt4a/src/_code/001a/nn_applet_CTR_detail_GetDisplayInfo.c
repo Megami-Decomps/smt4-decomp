@@ -14,13 +14,12 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_1_stack;
 
-/* Supplied declaration required: nn_gxlow_CTR_ImportDisplayCaptureInfo. */
+extern void nn_gxlow_CTR_ImportDisplayCaptureInfo(unsigned int);
 
 
 void nn_applet_CTR_detail_GetDisplayInfo(unsigned int *param_1)
 
 {
-/* irregular: 1 native warning(s); review required */
   int temp_v0;
   unsigned int temp_v1;
   unsigned int temp_v2;
@@ -33,7 +32,7 @@ void nn_applet_CTR_detail_GetDisplayInfo(unsigned int *param_1)
   if (param_1 == (unsigned int *)0x0) {
     return;
   }
-  nn_gxlow_CTR_ImportDisplayCaptureInfo(&temp_v0);
+  nn_gxlow_CTR_ImportDisplayCaptureInfo((unsigned int)&temp_v0);
   *param_1 = temp_v0;
   param_1[1] = temp_v1;
   param_1[4] = temp_v4;

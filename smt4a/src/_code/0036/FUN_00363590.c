@@ -41,7 +41,7 @@ void FUN_00363590(int param_1,int param_2)
          (*(int *)(temp_v0 + 0x90) == *(int *)(param_2 + 0x90))) {
         do {
           if (temp_v0 == 0) goto LAB_0036366c;
-          FUN_00363590(param_1);
+          FUN_00363590(param_1, /* unrecovered */ 0);
           temp_v0 = *(int *)(param_1 + 0x8c);
           while( 1 ) {
             if (temp_v0 == 0) goto LAB_0036366c;

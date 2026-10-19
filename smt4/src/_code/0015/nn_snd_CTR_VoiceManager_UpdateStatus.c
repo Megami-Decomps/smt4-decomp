@@ -3,14 +3,14 @@
 #include "romwright_types.h"
 
 /* Unsupported intrinsic, declaration required: coproc_moveto_Data_Memory_Barrier (CALLOTHER). */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 void nn_snd_CTR_VoiceManager_UpdateStatus(int param_1,int param_2,unsigned short *param_3)
 
 {
-/* irregular: 1 goto(s); 3 native warning(s); review required */
+/* irregular: 1 goto(s); 1 native warning(s); review required */
   int *piVar1;
   unsigned short temp_v0;
   unsigned short temp_v1;

@@ -61,6 +61,6 @@ void FUN_00186e2c(unsigned int *param_1,int param_2)
     FUN_0019eb14(param_1);
   }
   FUN_001a77ac(temp_v1,param_1 + 9,param_1 + 0xc,param_1 + 10,param_1 + 0xb);
-  param_1[9] = (float)param_1[9] * 57.295776f;
+  *(float *)&param_1[9] = (float)param_1[9] * 57.295776f;
   return;
 }

@@ -157,7 +157,7 @@ void nw_gfx_Fog_Update(int param_1,fn_0013f424_arg1 *param_2)
     else {
       temp_v11 = (float)unaff_r4[2];
       temp_v3 = temp_v3 | ((unsigned int)(temp_v12 < temp_v11) << 0x1f) | ((unsigned int)(temp_v12 == temp_v11) << 0x1e);
-      in_fpscr = temp_v3 | ((unsigned int)(NAN(temp_v12) || NAN(temp_v11)) << 0x1c);
+      in_fpscr = temp_v3 | ((unsigned int)((temp_v12 != temp_v12) || (temp_v11 != temp_v11)) << 0x1c);
       temp_v1 = (unsigned char)(temp_v3 >> 0x18);
       temp_v8 = temp_v14;
       if ((unsigned char)((temp_v1 >> 6) & 1) || temp_v1 >> 7 != ((unsigned char)(in_fpscr >> 0x1c) & 1)) {

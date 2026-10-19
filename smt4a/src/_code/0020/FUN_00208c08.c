@@ -484,7 +484,7 @@ LAB_002097e0:
               *(float *)(temp_v2 + 0x2048) = temp_v12;
               temp_v8 = (in_fpscr & 0xfffffff) | ((unsigned int)(0.0f < temp_v12) << 0x1f) |
                        ((unsigned int)(temp_v12 == 0.0f) << 0x1e);
-              in_fpscr = temp_v8 | ((unsigned int)NAN(temp_v12) << 0x1c);
+              in_fpscr = temp_v8 | ((unsigned int)(temp_v12 != temp_v12) << 0x1c);
               temp_v9 = (unsigned char)(temp_v8 >> 0x18);
               if (!(unsigned char)((temp_v9 >> 6) & 1) && temp_v9 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
                 *(float *)(temp_v2 + 0x2048) = temp_v12 + 360.0f;

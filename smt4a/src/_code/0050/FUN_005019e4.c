@@ -13,7 +13,7 @@ extern char s_ERROR____005b4499[9]; /* 0x5b4499 */
 /* Supplied declaration required: FUN_00430ec8. */
 /* Supplied declaration required: FUN_00430ef0. */
 extern int FUN_00501f78(unsigned int, unsigned int *);
-extern int nn_cec_CTR_MessageBox_GetMessHeader(int, int, unsigned int);
+extern unsigned int nn_cec_CTR_MessageBox_GetMessHeader(unsigned int, int, unsigned int);
 
 
 unsigned int FUN_005019e4(int param_1,int param_2,unsigned int param_3)

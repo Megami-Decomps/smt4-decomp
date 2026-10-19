@@ -13,7 +13,7 @@ typedef struct {
 extern int FUN_0050947c(int);
 extern int FUN_005094c4(unsigned int);
 /* Supplied declaration required: aeabi_uidivmod. */
-/* Supplied declaration required: nn_snd_CTR_InitializeWaveBuffer. */
+extern void nn_snd_CTR_InitializeWaveBuffer(unsigned int);
 extern int nw_snd_internal_driver_Voice_IsRun(int);
 /* Supplied declaration required: nw_snd_internal_driver_Voice_Pause. */
 
@@ -21,7 +21,7 @@ extern int nw_snd_internal_driver_Voice_IsRun(int);
 void FUN_00464b20(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
 
 {
-/* irregular: 1 goto(s); 7 native warning(s); review required */
+/* irregular: 1 goto(s); 6 native warning(s); review required */
   char temp_v0;
   int temp_v1;
   unsigned int temp_v2;

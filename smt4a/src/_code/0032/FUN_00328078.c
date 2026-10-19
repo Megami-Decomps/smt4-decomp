@@ -64,12 +64,12 @@ unsigned int FUN_00328078(int param_1)
             temp_v6 = (float)VectorSignedToFloat((int)*(short *)(pcVar5 + 10),
                                                (unsigned char)(in_fpscr >> 0x16) & 3);
             temp_v1 = temp_v0 | ((unsigned int)(temp_v6 < temp_v7) << 0x1f);
-            in_fpscr = temp_v1 | ((unsigned int)(NAN(temp_v6) || NAN(temp_v7)) << 0x1c);
+            in_fpscr = temp_v1 | ((unsigned int)((temp_v6 != temp_v6) || (temp_v7 != temp_v7)) << 0x1c);
             if ((unsigned char)(temp_v1 >> 0x1f) == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
               temp_v6 = (float)VectorSignedToFloat((int)*(short *)(pcVar5 + 0xc),
                                                  (unsigned char)(in_fpscr >> 0x16) & 3);
               temp_v0 = temp_v0 | ((unsigned int)(temp_v6 < temp_v9) << 0x1f);
-              in_fpscr = temp_v0 | ((unsigned int)(NAN(temp_v6) || NAN(temp_v9)) << 0x1c);
+              in_fpscr = temp_v0 | ((unsigned int)((temp_v6 != temp_v6) || (temp_v9 != temp_v9)) << 0x1c);
               if ((unsigned char)(temp_v0 >> 0x1f) == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
                 temp_v4 = FUN_003ae498((int)*(short *)(pcVar5 + 0x12));
                 return temp_v4;

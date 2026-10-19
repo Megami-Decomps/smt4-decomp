@@ -50,13 +50,13 @@ extern unsigned int DAT_00471b60; /* 0x471b60 */
 /* Supplied declaration required: FUN_002bb6c4. */
 /* Supplied declaration required: FUN_002c52f8. */
 /* Supplied declaration required: FUN_002c567c. */
-/* Supplied declaration required: nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile. */
+extern void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(unsigned int);
 
 
 void FUN_00128174(void)
 
 {
-/* irregular: 13 native warning(s); review required */
+/* irregular: 12 native warning(s); review required */
   unsigned int *puVar1;
   unsigned short *puVar2;
   unsigned int temp_v0;

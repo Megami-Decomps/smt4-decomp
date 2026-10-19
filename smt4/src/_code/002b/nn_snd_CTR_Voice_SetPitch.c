@@ -2,22 +2,10 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
-typedef struct fn_002bd27c_arg0 fn_002bd27c_arg0;
-struct fn_002bd27c_arg0 {
-    unsigned char pad_0x0[0x1c];
-    float field_0x1c; /* +0x1c */
-    unsigned char pad_0x20[0x4];
-    undefined4 field_0x24; /* +0x24 */
-    unsigned char pad_0x28[0x40];
-    unsigned char field_0x68; /* +0x68 */
-    unsigned char pad_0x69[0x3];
-    ushort field_0x6c; /* +0x6c */
-};
-
 /* Supplied declaration required: func_0x0014fd48. */
 
 
-void nn_snd_CTR_Voice_SetPitch(fn_002bd27c_arg0 *param_1)
+void nn_snd_CTR_Voice_SetPitch(int param_1,float param_2)
 
 {
 /* irregular: irregular input(s): in_s0; 2 native warning(s); review required */
@@ -28,7 +16,7 @@ void nn_snd_CTR_Voice_SetPitch(fn_002bd27c_arg0 *param_1)
   if (0.0f <= in_s0) {
     temp_v0 = in_s0;
   }
-  param_1->field_0x1c = temp_v0;
-  func_0x0014fd48(*(unsigned int *)&param_1->field_0x68);
+  *(float *)(param_1 + 0x1c) = temp_v0;
+  func_0x0014fd48(*(unsigned int *)(param_1 + 0x68));
   return;
 }

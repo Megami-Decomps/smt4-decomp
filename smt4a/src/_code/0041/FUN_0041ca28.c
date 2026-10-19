@@ -56,9 +56,9 @@ void FUN_0041ca28(int param_1)
         *(float *)&puVar3[0x10] = temp_v7;
         *(float *)&puVar3[0x11] = temp_v4;
         puVar3[0x12] = temp_v6;
-        puVar3[0x10] = (float)puVar3[0x10] * temp_v5;
-        puVar3[0x11] = (float)puVar3[0x11] * temp_v5;
-        puVar3[0x12] = (float)puVar3[0x12] * temp_v5;
+        *(float *)&puVar3[0x10] = (float)puVar3[0x10] * temp_v5;
+        *(float *)&puVar3[0x11] = (float)puVar3[0x11] * temp_v5;
+        *(float *)&puVar3[0x12] = (float)puVar3[0x12] * temp_v5;
       }
       puVar3[1] = 0;
       *puVar3 = 0x3f800000;

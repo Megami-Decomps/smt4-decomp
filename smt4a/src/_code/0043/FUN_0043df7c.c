@@ -12,14 +12,14 @@ typedef struct {
 extern int FUN_002e3390(unsigned int);
 /* Supplied declaration required: FUN_0043e088. */
 /* Supplied declaration required: FUN_0043e31c. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 int FUN_0043df7c(int param_1,unsigned int param_2)
 
 {
-/* irregular: 4 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   unsigned int *puVar1;
   unsigned int *puVar2;
   int temp_v0;

@@ -58,27 +58,27 @@ void FUN_0023c8c0(int *param_1,unsigned int param_2,unsigned int param_3,int par
   temp_v12 = param_4;
   if (param_1 != (int *)0x48) {
     if ((int)param_1 >= 0x49) {
-      switch(param_1) {
-      case (int *)0x49:
+      switch((unsigned int)param_1) {
+      case (unsigned int)0x49:
         goto LAB_0023ca18;
-      case (int *)0x4a:
+      case (unsigned int)0x4a:
         goto LAB_0023cae4;
-      case (int *)0x4b:
+      case (unsigned int)0x4b:
         goto LAB_0023cb98;
-      case (int *)0x4c:
+      case (unsigned int)0x4c:
         goto LAB_0023cc4c;
-      case (int *)0x4d:
+      case (unsigned int)0x4d:
         goto LAB_0023cd04;
-      case (int *)0x4e:
+      case (unsigned int)0x4e:
         goto LAB_0023cdbc;
       default:
         goto LAB_0023ce68;
       }
     }
-    switch(param_1) {
-    case (int *)0x13:
+    switch((unsigned int)param_1) {
+    case (unsigned int)0x13:
       goto LAB_0023c964;
-    case (int *)0x14:
+    case (unsigned int)0x14:
 LAB_0023ca18:
       temp_v9 = DAT_0057f108 + 0x318;
       temp_v6 = DAT_0057f108 + 0x2c58;
@@ -90,7 +90,7 @@ LAB_0023ca18:
       temp_v3 = FUN_001801a4();
       FUN_002ac470(temp_v10,0,*(unsigned short *)(temp_v3 + 2),temp_v11,param_3,0xffffffff);
       break;
-    case (int *)0x15:
+    case (unsigned int)0x15:
 LAB_0023cae4:
       temp_v9 = DAT_0057f108 + 0x37c;
       temp_v6 = DAT_0057f108 + 0x2d48;
@@ -101,7 +101,7 @@ LAB_0023cae4:
       temp_v3 = FUN_001801a4();
       FUN_002ac470(temp_v10,0,*(unsigned short *)(temp_v3 + 4),temp_v11,param_3,0xffffffff);
       break;
-    case (int *)0x16:
+    case (unsigned int)0x16:
 LAB_0023cb98:
       temp_v9 = DAT_0057f108 + 0x3e0;
       temp_v6 = DAT_0057f108 + 0x2dac;
@@ -112,7 +112,7 @@ LAB_0023cb98:
       temp_v3 = FUN_001801a4();
       FUN_002ac470(temp_v10,0,*(unsigned short *)(temp_v3 + 6),temp_v11,param_3,0xffffffff);
       break;
-    case (int *)0x17:
+    case (unsigned int)0x17:
 LAB_0023cc4c:
       temp_v9 = DAT_0057f108 + 0x444;
       temp_v6 = DAT_0057f108 + 0x2e9c;
@@ -123,7 +123,7 @@ LAB_0023cc4c:
       temp_v3 = FUN_001801a4();
       FUN_002ac470(temp_v10,0,*(unsigned short *)(temp_v3 + 8),temp_v11,param_3,0xffffffff);
       break;
-    case (int *)0x18:
+    case (unsigned int)0x18:
 LAB_0023cd04:
       temp_v9 = DAT_0057f108 + 0x4a8;
       temp_v6 = DAT_0057f108 + 0x2f8c;
@@ -134,7 +134,7 @@ LAB_0023cd04:
       temp_v3 = FUN_001801a4();
       FUN_002ac470(temp_v10,0,*(unsigned short *)(temp_v3 + 10),temp_v11,param_3,0xffffffff);
       break;
-    case (int *)0x19:
+    case (unsigned int)0x19:
 LAB_0023cdbc:
       temp_v9 = DAT_0057f108 + 0x50c;
       temp_v6 = DAT_0057f108 + 0x307c;

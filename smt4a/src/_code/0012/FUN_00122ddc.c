@@ -73,7 +73,7 @@ FUN_00122ddc(int param_1,unsigned int param_2,romwright_code *param_3,unsigned i
       temp_v7 = 2;
       while (temp_v4[0] < 0) {
         temp_v0 = (*param_3)(param_4,0);
-        temp_v3 = romwright_piece_3_1(temp_v3._1_3_,temp_v0);
+        temp_v3 = romwright_piece_3_1((((unsigned int)(temp_v3) >> 8) & 0xffffffU),temp_v0);
         FUN_00122070(temp_v4);
         puVar4 = temp_v6;
         FUN_002e9de4(puVar4,

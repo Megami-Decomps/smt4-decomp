@@ -231,18 +231,18 @@ FUN_0045e228(int param_1,int param_2,unsigned int *param_3,unsigned int *param_4
           }
           puVar6 = temp_v24 + temp_v6 * 8;
           FUN_00461888(puVar6,temp_v27 + temp_v6,temp_v1,*(unsigned int *)(param_1 + 4));
-          switch(puVar6) {
-          case (unsigned char *)0x0:
-          case (unsigned char *)0x1:
+          switch((unsigned int)puVar6) {
+          case (unsigned int)0x0:
+          case (unsigned int)0x1:
             break;
-          case (unsigned char *)0x2:
+          case (unsigned int)0x2:
             if (temp_v10 != 0) {
               temp_v16 = 1;
             }
             break;
-          case (unsigned char *)0xfffffffe:
+          case (unsigned int)0xfffffffe:
             return 0x12;
-          case (unsigned char *)0xffffffff:
+          case (unsigned int)0xffffffff:
             if (temp_v10 == 0) {
               return 8;
             }

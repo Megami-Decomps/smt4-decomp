@@ -106,7 +106,7 @@ void FUN_002f5a04(unsigned int param_1,fn_002f5a04_arg1 *param_2,int param_3,int
       temp_v15[0] = temp_v6;
       temp_v8[0] = param_2->field_0x65;
       temp_v9[0] = param_2->field_0x25;
-      temp_v7[0] = romwright_piece_1_1(temp_v7[0]._1_1_,param_2->field_0x26);
+      temp_v7[0] = romwright_piece_1_1((((unsigned int)(temp_v7[0]) >> 8) & 0xffU),param_2->field_0x26);
       temp_v0 = temp_v14 >> 0x10;
       temp_v14 = temp_v14 & 0xffff0000;
       if (*(int *)&param_2->field_0xd8 != 0) {

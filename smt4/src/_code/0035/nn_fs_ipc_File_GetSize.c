@@ -6,11 +6,11 @@
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 
 
-int nn_fs_ipc_File_GetSize(int *param_1,unsigned int *param_2)
+unsigned int nn_fs_ipc_File_GetSize(unsigned int *param_1,long long *param_2)
 
 {
 /* irregular: 2 native warning(s); review required */
-  int temp_v0;
+  unsigned int temp_v0;
   unsigned int temp_v1;
   int temp_v2;
   
@@ -18,11 +18,11 @@ int nn_fs_ipc_File_GetSize(int *param_1,unsigned int *param_2)
   *(unsigned int *)(temp_v2 + 0x80) = 0x8040000;
   temp_v0 = *param_1;
   software_interrupt(0x32);
-  if (-1 < temp_v0) {
+  if (-1 < (int)temp_v0) {
     temp_v1 = *(unsigned int *)(temp_v2 + 0x8c);
-    *param_2 = *(unsigned int *)(temp_v2 + 0x88);
-    param_2[1] = temp_v1;
-    temp_v0 = *(int *)(temp_v2 + 0x84);
+    *(unsigned int *)param_2 = *(unsigned int *)(temp_v2 + 0x88);
+    *(unsigned int *)((int)param_2 + 4) = temp_v1;
+    temp_v0 = *(unsigned int *)(temp_v2 + 0x84);
   }
   return temp_v0;
 }

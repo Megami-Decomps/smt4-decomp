@@ -130,7 +130,7 @@ int * FUN_0031dac4(int *param_1)
       temp_v19 = 4;
       temp_v18 = 8;
       temp_v25 = 1;
-      temp_v17 = romwright_piece_3_1(temp_v17._1_3_,1);
+      temp_v17 = romwright_piece_3_1((((unsigned int)(temp_v17) >> 8) & 0xffffffU),1);
       temp_v21 = 0;
       temp_v20 = 4;
       temp_v23 = 4;
@@ -284,7 +284,7 @@ int * FUN_0031dac4(int *param_1)
                 temp_v6 = FUN_002c2ff0();
                 ppppiVar24 = &temp_v16;
                 temp_v16 = pppiVar6;
-                temp_v19 = romwright_piece_3_1(temp_v19._1_3_,1);
+                temp_v19 = romwright_piece_3_1((((unsigned int)(temp_v19) >> 8) & 0xffffffU),1);
                 temp_v17 = temp_v3;
                 temp_v18 = temp_v2;
                 FUN_00154080(ppppiVar24,temp_v6);
@@ -378,7 +378,7 @@ int * FUN_0031dac4(int *param_1)
               }
               else {
                 temp_v17 = *(unsigned int *)(*(int *)(temp_v1 + 8) + 0x10);
-                temp_v19 = romwright_piece_3_1(temp_v19._1_3_,1);
+                temp_v19 = romwright_piece_3_1((((unsigned int)(temp_v19) >> 8) & 0xffffffU),1);
                 temp_v16 = (int ***)*piVar16;
                 temp_v18 = temp_v17;
                 piVar16 = (int *)FUN_002c2ff0();

@@ -14,14 +14,14 @@ typedef struct {
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 extern unsigned long long FUN_002b5c50(long long *, unsigned int, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 unsigned int FUN_0011b6c8(int param_1,unsigned int param_2)
 
 {
-/* irregular: 3 native warning(s); review required */
+/* irregular: 1 native warning(s); review required */
   unsigned int temp_v0;
   unsigned long long temp_v1;
   long long temp_v2;

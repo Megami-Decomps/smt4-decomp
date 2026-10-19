@@ -30,7 +30,7 @@ void FUN_002c7a54(fn_002c7a54_arg0 *param_1,unsigned int param_2)
   pfVar1->field_0x90 = param_2;
   if (param_1->field_0x88 != (void *)0x0) {
     *(fn_002c7a54_arg0 **)((int)param_1->field_0x88 + 0xac) = pfVar1;
-    pfVar1->field_0xb0 = param_1->field_0x88;
+    pfVar1->field_0xb0 = (undefined4)param_1->field_0x88;
   }
   else {
     param_1->field_0x8c = (int)pfVar1;

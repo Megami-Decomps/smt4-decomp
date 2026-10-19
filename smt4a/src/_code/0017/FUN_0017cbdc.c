@@ -54,12 +54,12 @@ void FUN_0017cbdc(int param_1)
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 3);
     if ((temp_v0) && (temp_v5 = *(unsigned int *)(temp_v1 + 0x770), (temp_v5 & 7) != 0)) {
-      if (DAT_005b40e0 < DAT_005b40e4) {
+      if ((unsigned int)DAT_005b40e0 < DAT_005b40e4) {
         DAT_005b40e0[1] = 0x10080;
         *DAT_005b40e0 = temp_v5;
         DAT_005b40e0 = DAT_005b40e0 + 2;
       }
-      if (DAT_005b40e0 < DAT_005b40e4) {
+      if ((unsigned int)DAT_005b40e0 < DAT_005b40e4) {
         DAT_005b40e0[1] = 0x50080;
         *DAT_005b40e0 = 0x10000;
         DAT_005b40e0 = DAT_005b40e0 + 2;

@@ -152,7 +152,7 @@ void FUN_0036a434(int param_1)
   }
   else {
     temp_v9 = *(float *)(DAT_005806a4 + 0xa0);
-    if (NAN(temp_v9) || NAN(temp_v11)) {
+    if ((temp_v9 != temp_v9) || (temp_v11 != temp_v11)) {
       temp_v8 = *(float *)(DAT_005806a4 + 0xa4) + 10.0f;
       *(float *)(DAT_005806a4 + 0xa4) = temp_v8;
       if ((int)temp_v8 >= 0x42c80001) {

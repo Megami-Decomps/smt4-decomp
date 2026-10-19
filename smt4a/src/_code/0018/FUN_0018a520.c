@@ -30,15 +30,15 @@ typedef struct {
 /* Supplied declaration required: FUN_001a0f60. */
 /* Supplied declaration required: FUN_001a0fb4. */
 /* Supplied declaration required: FUN_002e3140. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 /* Supplied declaration required: rt_memcpy. */
 
 
 void FUN_0018a520(int *param_1,int param_2)
 
 {
-/* irregular: 10 native warning(s); review required */
+/* irregular: 8 native warning(s); review required */
   unsigned short temp_v0;
   int temp_v1;
   int temp_v2;
@@ -78,7 +78,7 @@ void FUN_0018a520(int *param_1,int param_2)
     }
     FUN_001897bc(2,temp_v10,4);
     FUN_001a0f34(0x4000);
-    nn_os_CriticalSection_Enter(param_1 + 2);
+    nn_os_CriticalSection_Enter((unsigned int)(param_1 + 2));
     software_interrupt(0x24);
     if (*param_1 < 0) {
       FUN_002e3140();
@@ -88,7 +88,7 @@ void FUN_0018a520(int *param_1,int param_2)
       FUN_002e3140();
     }
     *(char *)((int)param_1 + 0x1319) = *(char *)((int)param_1 + 0x1319) + '\x01';
-    nn_os_CriticalSection_Leave(param_1 + 2);
+    nn_os_CriticalSection_Leave((unsigned int)(param_1 + 2));
     FUN_001a0f60(2,temp_v9,2,temp_v18);
     FUN_001a0f60(2,temp_v11,(temp_v9[0] & 0x7fff) << 1,temp_v18);
     temp_v3[0] = param_1 + 0x426;

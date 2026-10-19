@@ -2,6 +2,21 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
+#ifndef ROMWRIGHT_FLOAT_BITS_DEFINED
+#define ROMWRIGHT_FLOAT_BITS_DEFINED
+static unsigned int romwright_f2u(float value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.f = value;
+    return bits.u;
+}
+static float romwright_u2f(unsigned int value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.u = value;
+    return bits.f;
+}
+#endif
 /* stack frame of param_1: 10 slot(s), 40 byte(s) */
 typedef struct {
     unsigned int sp34; /* 0x34: local_34 */
@@ -121,7 +136,7 @@ unsigned int FUN_00488ce8(int param_1)
           *(unsigned int *)(param_1 + 0x40) = temp_v7;
         }
         else {
-          in_s0 = (unsigned int *)(*(float *)(param_1 + 0x48) - *(float *)(param_1 + 0x50));
+          in_s0 = (unsigned int *)romwright_f2u((float)((*(float *)(param_1 + 0x48) - *(float *)(param_1 + 0x50))));
           *(float *)(param_1 + 0x3c) = *(float *)(param_1 + 0x44) - *(float *)(param_1 + 0x4c);
           *(unsigned int **)(param_1 + 0x40) = in_s0;
         }
@@ -129,9 +144,9 @@ unsigned int FUN_00488ce8(int param_1)
     }
     else {
       temp_v5 = (float)VectorSignedToFloat(temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v8 = (float *)(*(float *)(param_1 + 0x34) + (temp_v5 - *(float *)(param_1 + 0x2c)));
+      temp_v8 = (float *)romwright_f2u((float)((*(float *)(param_1 + 0x34) + (temp_v5 - *(float *)(param_1 + 0x2c)))));
       temp_v5 = (float)VectorSignedToFloat(temp_v11,(unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v9 = (unsigned int *)(*(float *)(param_1 + 0x38) + (temp_v5 - *(float *)(param_1 + 0x30)));
+      temp_v9 = (unsigned int *)romwright_f2u((float)((*(float *)(param_1 + 0x38) + (temp_v5 - *(float *)(param_1 + 0x30)))));
       FUN_00492c18(temp_v14,&temp_v8);
       temp_v5 = (float)VectorSignedToFloat(temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v2 = (in_fpscr & 0xfffffff) | ((unsigned int)(*(float *)(param_1 + 0x44) == temp_v5) << 0x1e);
@@ -193,17 +208,17 @@ unsigned int FUN_00488ce8(int param_1)
   temp_v5 = DAT_00587f10;
   if ((*(unsigned int *)(param_1 + 0x10) & 0x20000) == 0) {
     in_s0 = *(unsigned int **)(param_1 + 0x3c);
-    if (((int)romwright_fabs_4((float)in_s0) < 0x3f000001) && ((int)romwright_fabs_4(*(float *)(param_1 + 0x40)) < 0x3f000001)
+    if (((int)romwright_fabs_4(romwright_u2f((unsigned int)(in_s0))) < 0x3f000001) && ((int)romwright_fabs_4(*(float *)(param_1 + 0x40)) < 0x3f000001)
        ) {
       *(unsigned int *)(param_1 + 0x3c) = temp_v7;
       *(unsigned int *)(param_1 + 0x40) = temp_v7;
     }
     else {
-      *(float *)(param_1 + 0x3c) = (float)in_s0 * DAT_00587f10;
+      *(float *)(param_1 + 0x3c) = romwright_u2f((unsigned int)(in_s0)) * DAT_00587f10;
       *(float *)(param_1 + 0x40) = *(float *)(param_1 + 0x40) * temp_v5;
       pfVar4 = (float *)FUN_00492b84(temp_v14);
-      temp_v8 = (float *)(*pfVar4 + *(float *)(param_1 + 0x3c));
-      in_s0 = (unsigned int *)(pfVar4[1] + *(float *)(param_1 + 0x40));
+      temp_v8 = (float *)romwright_f2u((float)((*pfVar4 + *(float *)(param_1 + 0x3c))));
+      in_s0 = (unsigned int *)romwright_f2u((float)((pfVar4[1] + *(float *)(param_1 + 0x40))));
       temp_v9 = in_s0;
       FUN_00492c18(temp_v14,&temp_v8);
     }
@@ -214,8 +229,8 @@ unsigned int FUN_00488ce8(int param_1)
     pfVar4 = (float *)FUN_00492b84(temp_v14);
     temp_v10 = -(temp_v10 * 13.0f);
     temp_v15[0] = -(temp_v15[0] * 13.0f);
-    temp_v12 = (unsigned int *)(temp_v10 / (float)in_s0 + *pfVar4);
-    temp_v13 = pfVar4[1] - temp_v15[0] / (float)in_s0;
+    temp_v12 = (unsigned int *)romwright_f2u((float)((temp_v10 / romwright_u2f((unsigned int)(in_s0)) + *pfVar4)));
+    temp_v13 = pfVar4[1] - temp_v15[0] / romwright_u2f((unsigned int)(in_s0));
     FUN_00492c18(temp_v14,&temp_v12);
     puVar7 = (unsigned char *)(param_1 + 0x7b91);
     *puVar7 = 1;

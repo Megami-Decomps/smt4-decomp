@@ -11,16 +11,16 @@ typedef struct {
 } param_1_stack;
 
 
-void nn_cec_CTR_MessageBox_WriteMessageBoxList(int *param_1)
+unsigned int nn_cec_CTR_MessageBox_WriteMessageBoxList(int *param_1)
 
 {
-  int temp_v0;
+  unsigned int temp_v0;
   unsigned char temp_v1 [8];
   
   (**(romwright_code **)(*param_1 + 8))(param_1,param_1[1],10,8,temp_v1);
   temp_v0 = (**(romwright_code **)(*param_1 + 0x30))(param_1,param_1 + 4,0x18c,param_1[1],1,0x14);
-  if (-1 < temp_v0) {
-    (**(romwright_code **)(*param_1 + 0x34))(param_1,param_1 + 4,0x18c,temp_v1,param_1[1],1,0x12);
+  if (-1 < (int)temp_v0) {
+    temp_v0 = (**(romwright_code **)(*param_1 + 0x34))(param_1,param_1 + 4,0x18c,temp_v1,param_1[1],1,0x12);
   }
-  return;
+  return temp_v0;
 }

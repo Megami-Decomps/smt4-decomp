@@ -25,7 +25,7 @@ void FUN_001388dc(unsigned int param_1,unsigned int param_2,unsigned int param_3
   temp_v0 = DAT_004e3180;
   puVar2 = &DAT_004e2f68;
   if (DAT_004e3180 != 0) {
-    puVar2 = (unsigned int)(uint)*(unsigned int)(DAT_004e3180 + 0x3b);
+    puVar2 = (unsigned char *)(unsigned int)*(unsigned char *)(DAT_004e3180 + 0x3b);
   }
   if (DAT_004e3180 != 0 && puVar2 != (unsigned char *)0x0) {
     puVar2 = &DAT_004e21b8;

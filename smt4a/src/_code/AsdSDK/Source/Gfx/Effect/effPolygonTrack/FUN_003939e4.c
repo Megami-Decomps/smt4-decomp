@@ -247,7 +247,7 @@ void FUN_003939e4(int param_1)
                                   DAT_006472e4 * DAT_006472e4);
                     temp_v21 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v14 < temp_v20) << 0x1f) |
                              ((unsigned int)(temp_v14 == temp_v20) << 0x1e);
-                    in_fpscr = temp_v21 | ((unsigned int)(NAN(temp_v14) || NAN(temp_v20)) << 0x1c);
+                    in_fpscr = temp_v21 | ((unsigned int)((temp_v14 != temp_v14) || (temp_v20 != temp_v20)) << 0x1c);
                     temp_v1 = (unsigned char)(temp_v21 >> 0x18);
                     if (!(unsigned char)((temp_v1 >> 6) & 1) && temp_v1 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
                       DAT_006472dc = DAT_006472dc / temp_v14;

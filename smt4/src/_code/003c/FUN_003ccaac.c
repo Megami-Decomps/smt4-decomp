@@ -644,7 +644,7 @@ LAB_003cd944:
           FUN_003be8c8(param_7,param_8);
           temp_v6 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v21 < temp_v23) << 0x1f) |
                   ((unsigned int)(temp_v21 == temp_v23) << 0x1e);
-          in_fpscr = temp_v6 | ((unsigned int)(NAN(temp_v21) || NAN(temp_v23)) << 0x1c);
+          in_fpscr = temp_v6 | ((unsigned int)((temp_v21 != temp_v21) || (temp_v23 != temp_v23)) << 0x1c);
           temp_v2 = (unsigned char)(temp_v6 >> 0x18);
           if (!(unsigned char)((temp_v2 >> 6) & 1) && temp_v2 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
             temp_v22 = (float)VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -689,7 +689,7 @@ LAB_003cd944:
         FUN_003beb58(param_7,param_8);
         temp_v6 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v21 < temp_v23) << 0x1f) |
                 ((unsigned int)(temp_v21 == temp_v23) << 0x1e);
-        in_fpscr = temp_v6 | ((unsigned int)(NAN(temp_v21) || NAN(temp_v23)) << 0x1c);
+        in_fpscr = temp_v6 | ((unsigned int)((temp_v21 != temp_v21) || (temp_v23 != temp_v23)) << 0x1c);
         temp_v2 = (unsigned char)(temp_v6 >> 0x18);
         if (!(unsigned char)((temp_v2 >> 6) & 1) && temp_v2 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
           temp_v22 = (float)VectorSignedToFloat(temp_v16,(unsigned char)(in_fpscr >> 0x16) & 3);

@@ -41,7 +41,7 @@ unsigned int FUN_002e9f00(int param_1,unsigned int param_2)
     temp_v0 = FUN_002e9af4();
     FUN_002e9ec8(temp_v0,*puVar3);
     if (temp_v0 != 0) {
-      FUN_002e9f00();
+      FUN_002e9f00(/* unrecovered */ 0, /* unrecovered */ 0);
     }
   }
   FUN_002e9f64(&temp_v2);

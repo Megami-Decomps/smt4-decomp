@@ -8,15 +8,15 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_001af148. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 void FUN_0018b47c(int param_1)
 
 {
-/* irregular: 3 native warning(s); review required */
-  nn_os_CriticalSection_Enter();
+/* irregular: 1 native warning(s); review required */
+  nn_os_CriticalSection_Enter(param_1);
   if (*(char *)(param_1 + 0x76) != '\x02') {
     *(unsigned char *)(param_1 + 0x76) = 1;
     nn_os_CriticalSection_Leave(param_1);

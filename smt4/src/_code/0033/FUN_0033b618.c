@@ -7,17 +7,17 @@ extern unsigned char DAT_00420fac; /* 0x420fac */
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_00357488. */
 /* Supplied declaration required: FUN_0035f198. */
-/* Supplied declaration required: nn_os_Thread_FinalizeImpl. */
+extern void nn_os_Thread_FinalizeImpl(unsigned int);
 
 
 int FUN_0033b618(int param_1)
 
 {
-/* irregular: 4 native warning(s); review required */
+/* irregular: 3 native warning(s); review required */
   int *piVar1;
   
   piVar1 = (int *)(param_1 + 0x3c);
-  nn_os_Thread_FinalizeImpl(piVar1);
+  nn_os_Thread_FinalizeImpl((unsigned int)piVar1);
   if (*piVar1 != 0) {
     software_interrupt(0x23);
     *piVar1 = 0;

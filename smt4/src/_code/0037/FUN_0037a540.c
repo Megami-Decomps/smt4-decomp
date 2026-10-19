@@ -13,7 +13,7 @@ extern unsigned char DAT_00421b2c; /* 0x421b2c */
 /* Unsupported intrinsic, declaration required: builtin_strncpy (CALLOTHER). */
 extern int FUN_00130320(unsigned int *, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bbb2c. */
-/* Supplied declaration required: nn_fs_detail_FileBase_TryGetSize. */
+extern unsigned int nn_fs_detail_FileBase_TryGetSize(unsigned int, long long *);
 /* Supplied declaration required: nw_io_FileStream_FilePosition_Seek. */
 
 
@@ -22,12 +22,12 @@ FUN_0037a540(unsigned int *param_1,unsigned int param_2,unsigned int param_3,int
             unsigned int param_5,unsigned int param_6,unsigned int param_7)
 
 {
-/* irregular: 4 native warning(s); review required */
+/* irregular: 3 native warning(s); review required */
   int temp_v0;
-  unsigned int *puVar2;
   unsigned int temp_v1;
+  unsigned int temp_v2;
   romwright_code *pcVar4;
-  int temp_v2;
+  int temp_v3;
   unsigned int uStack_1c;
   
   *(unsigned char *)(param_1 + 1) = 0;
@@ -52,45 +52,43 @@ FUN_0037a540(unsigned int *param_1,unsigned int param_2,unsigned int param_3,int
   temp_v0 = FUN_00130320(param_1 + 5,param_2,param_5);
   if (temp_v0 == 0) {
     pcVar4 = (romwright_code *)param_1[0x12];
-    temp_v1 = param_1[0xb];
+    temp_v2 = param_1[0xb];
     if (pcVar4 != (romwright_code *)0x0) {
-      (*pcVar4)(temp_v1,param_1[0x13]);
+      (*pcVar4)(temp_v2,param_1[0x13]);
     }
     return param_1;
   }
   param_1[0xd] = (unsigned int)(param_1 + 5);
   if (*(char *)(param_1 + 0xc) != '\0') {
-    temp_v2 = 0;
+    temp_v3 = 0;
     uStack_1c = 0;
-    puVar2 = param_1 + 6;
-    nn_fs_detail_FileBase_TryGetSize(puVar2,&temp_v2);
-    param_1[0xb] = (unsigned int)puVar2;
-    temp_v1 = 0;
-    if (((unsigned int)puVar2 & 0x80000000) == 0) {
-      temp_v1 = temp_v2;
+    temp_v1 = nn_fs_detail_FileBase_TryGetSize((unsigned int)(param_1 + 6),(long long *)&temp_v3);
+    param_1[0xb] = temp_v1;
+    temp_v2 = 0;
+    if ((temp_v1 & 0x80000000) == 0) {
+      temp_v2 = temp_v3;
     }
-    if ((int)puVar2 < 0) {
+    if ((int)temp_v1 < 0) {
       pcVar4 = (romwright_code *)param_1[0x12];
-      temp_v1 = *(unsigned int *)(param_1[0xd] + 0x18);
+      temp_v2 = *(unsigned int *)(param_1[0xd] + 0x18);
       if (pcVar4 != (romwright_code *)0x0) {
-        (*pcVar4)(temp_v1,param_1[0x13]);
+        (*pcVar4)(temp_v2,param_1[0x13]);
       }
       return param_1;
     }
   }
   else {
-    puVar2 = param_1 + 6;
-    nn_fs_detail_FileBase_TryGetSize(puVar2,&temp_v2);
-    temp_v1 = temp_v2;
-    if ((int)puVar2 < 0) {
-      FUN_002bbb2c();
-      temp_v1 = temp_v2;
+    temp_v1 = nn_fs_detail_FileBase_TryGetSize((unsigned int)(param_1 + 6),(long long *)&temp_v3);
+    temp_v2 = temp_v3;
+    if ((int)temp_v1 < 0) {
+      FUN_002bbb2c(temp_v1,0x37a664);
+      temp_v2 = temp_v3;
     }
   }
   if (param_4 == 0) {
-    param_1[0x11] = temp_v1;
+    param_1[0x11] = temp_v2;
   }
-  param_1[0xe] = temp_v1;
+  param_1[0xe] = temp_v2;
   nw_io_FileStream_FilePosition_Seek(param_1 + 0xe,0);
   *(unsigned char *)((int)param_1 + 0x52) = 1;
   *(unsigned char *)(param_1 + 0x14) = 1;

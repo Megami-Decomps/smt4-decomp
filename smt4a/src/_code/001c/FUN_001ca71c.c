@@ -231,11 +231,11 @@ void FUN_001ca71c(int param_1,int *param_2,int *param_3)
         puVar19 = (unsigned int *)((int)puVar19 + (int)piVar16);
       }
       FUN_001d00fc(puVar19,temp_v15);
-      temp_v14 = romwright_piece_3_1(temp_v14._1_3_,1);
+      temp_v14 = romwright_piece_3_1((((unsigned int)(temp_v14) >> 8) & 0xffffffU),1);
       temp_v13 = puVar19;
       if (ppuVar21 != &temp_v13) {
         temp_v13 = *ppuVar21;
-        temp_v14 = romwright_piece_3_1(temp_v14._1_3_,*(unsigned char *)(temp_v4 + 8));
+        temp_v14 = romwright_piece_3_1((((unsigned int)(temp_v14) >> 8) & 0xffffffU),*(unsigned char *)(temp_v4 + 8));
         *(unsigned char *)(temp_v4 + 8) = 1;
         *ppuVar21 = puVar19;
       }

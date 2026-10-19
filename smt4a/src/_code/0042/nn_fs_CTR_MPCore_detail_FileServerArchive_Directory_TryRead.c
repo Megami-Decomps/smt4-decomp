@@ -8,21 +8,22 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_0016e800. */
-/* Supplied declaration required: nn_fs_ipc_Directory_Read. */
+extern unsigned int nn_fs_ipc_Directory_Read(unsigned int, int *, unsigned int, int);
 
 
-void nn_fs_CTR_MPCore_detail_FileServerArchive_Directory_TryRead
-               (int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
+unsigned int nn_fs_CTR_MPCore_detail_FileServerArchive_Directory_TryRead
+               (int param_1,int *param_2,unsigned int param_3,int param_4)
 
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
+/* irregular: 1 native warning(s); review required */
+  unsigned int temp_v0;
+  int temp_v1;
   
   if (*(int *)(param_1 + 4) == 0) {
-    temp_v0 = param_4;
+    temp_v1 = param_4;
     FUN_0016e800(0xe0a046da,0x42ba2c);
   }
-  temp_v0 = *(unsigned int *)(param_1 + 4);
-  nn_fs_ipc_Directory_Read(&temp_v0,param_2,param_3,param_4);
-  return;
+  temp_v1 = *(int *)(param_1 + 4);
+  temp_v0 = nn_fs_ipc_Directory_Read((unsigned int)&temp_v1,param_2,param_3,param_4);
+  return temp_v0;
 }

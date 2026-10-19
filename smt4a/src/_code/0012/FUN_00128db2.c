@@ -25,7 +25,7 @@ void FUN_00128db2(fn_00128db2_arg0 *param_1)
   param_1->field_0x1d = 1;
   piVar1 = (int *)((param_1->field_0x28 >> 1) + param_1->field_0x2c);
   if ((param_1->field_0x28 & 1U) != 0) {
-    UNRECOVERED_JUMPTABLE = *(romwright_code **)(UNRECOVERED_JUMPTABLE + *piVar1);
+    UNRECOVERED_JUMPTABLE = *(romwright_code **)((unsigned char *)UNRECOVERED_JUMPTABLE + *piVar1);
   }
                     /* WARNING: Could not recover jumptable at 0x00128dd0. Too many branches */
                     /* WARNING: Treating indirect jump as call */

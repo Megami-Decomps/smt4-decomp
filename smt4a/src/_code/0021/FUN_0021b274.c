@@ -44,7 +44,7 @@ void FUN_0021b274(fn_0021b274_arg0 *param_1,short param_2,unsigned int param_3)
   if (!(param_1 == (fn_0021b274_arg0 *)0x1 || param_1 == (fn_0021b274_arg0 *)0x2)) {
     if (param_1 == (fn_0021b274_arg0 *)0x3 || param_1 == (fn_0021b274_arg0 *)0x4) {
       if (DAT_0057f108 != 0) {
-        puVar3 = (unsigned int)(uint)*(unsigned int)pbVar5;
+        puVar3 = (unsigned int *)(unsigned int)*pbVar5;
       }
       if ((DAT_0057f108 != 0 && puVar3 != (unsigned int *)0x4) && puVar3 != (unsigned int *)0x3) {
         FUN_00184c00(DAT_0057f108 + 0x1a08,0x18,0);
@@ -55,7 +55,7 @@ void FUN_0021b274(fn_0021b274_arg0 *param_1,short param_2,unsigned int param_3)
   }
   else {
     if (DAT_0057f108 != 0) {
-      puVar3 = (unsigned int)(uint)*(unsigned int)pbVar5;
+      puVar3 = (unsigned int *)(unsigned int)*pbVar5;
     }
     if ((DAT_0057f108 != 0 && puVar3 != (unsigned int *)0x2) && puVar3 != (unsigned int *)0x1) {
       FUN_00184c00(DAT_0057f108 + 0x1a08,0x17,0);

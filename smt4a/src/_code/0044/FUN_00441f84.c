@@ -23,14 +23,14 @@ extern unsigned int FUN_002e3390(unsigned char *);
 extern int FUN_00442280(void);
 extern unsigned int FUN_00442724(unsigned char *);
 /* Supplied declaration required: FUN_00442800. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 unsigned int FUN_00441f84(void)
 
 {
-/* irregular: 4 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   int temp_v0;
   unsigned int temp_v1;
   unsigned int temp_v2;
@@ -38,15 +38,15 @@ unsigned int FUN_00441f84(void)
   unsigned char temp_v4 [8];
   unsigned int temp_v5;
   
-  nn_os_CriticalSection_Enter(&DAT_0062d2a4);
+  nn_os_CriticalSection_Enter((unsigned int)&DAT_0062d2a4);
   temp_v0 = FUN_00442280();
   if (temp_v0 != 0) {
     temp_v2 = 0xd8a0c7f9;
   }
   else {
-    nn_os_CriticalSection_Enter(&DAT_0062d2a4);
+    nn_os_CriticalSection_Enter((unsigned int)&DAT_0062d2a4);
     temp_v3 = DAT_00589384 == 0;
-    nn_os_CriticalSection_Leave(&DAT_0062d2a4);
+    nn_os_CriticalSection_Leave((unsigned int)&DAT_0062d2a4);
     if (!temp_v3) {
       temp_v2 = 0;
       DAT_00589384 = DAT_00589384 + 1;
@@ -62,9 +62,9 @@ unsigned int FUN_00441f84(void)
           FUN_00188b60(&DAT_0062d28c);
           DAT_00589380 = 0;
           FUN_00188b60(&DAT_0062d298);
-          nn_os_CriticalSection_Enter(&DAT_0062d2a4);
+          nn_os_CriticalSection_Enter((unsigned int)&DAT_0062d2a4);
           temp_v3 = DAT_00589384 == 0;
-          nn_os_CriticalSection_Leave(&DAT_0062d2a4);
+          nn_os_CriticalSection_Leave((unsigned int)&DAT_0062d2a4);
           if ((temp_v3) && (temp_v0 = FUN_00442280(), temp_v0 == 0)) {
             temp_v2 = 0xd8a0c7f8;
           }
@@ -78,6 +78,6 @@ unsigned int FUN_00441f84(void)
       }
     }
   }
-  nn_os_CriticalSection_Leave(&DAT_0062d2a4);
+  nn_os_CriticalSection_Leave((unsigned int)&DAT_0062d2a4);
   return temp_v2;
 }

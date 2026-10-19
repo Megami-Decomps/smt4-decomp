@@ -9,7 +9,6 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_1_stack;
 
-/* Unsupported intrinsic, declaration required: while (PTRADD). */
 /* Supplied declaration required: FUN_00522f50. */
 /* Supplied declaration required: FUN_00523060. */
 /* Supplied declaration required: FUN_00523180. */
@@ -19,7 +18,7 @@ typedef struct {
 void FUN_0044f42c(int param_1)
 
 {
-/* irregular: 3 unstructured edge(s); 1 goto(s); 5 native warning(s); review required */
+/* irregular: 3 unstructured edge(s); 1 goto(s); 4 native warning(s); review required */
   int *piVar1;
   int temp_v0;
   int *piVar3;

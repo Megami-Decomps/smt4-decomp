@@ -4,13 +4,12 @@
 
 extern int DAT_0044e460; /* 0x44e460 */
 
-/* Supplied declaration required: nn_dsp_CTR_DSP_ConvertProcessAddressFromDspDram. */
+extern unsigned int nn_dsp_CTR_DSP_ConvertProcessAddressFromDspDram(unsigned int, unsigned int, unsigned int *);
 
 
 unsigned int FUN_00146894(unsigned int param_1,unsigned int *param_2)
 
 {
-/* irregular: 1 native warning(s); review required */
   *param_2 = 0xffffffff;
   if (DAT_0044e460 != 0) {
     nn_dsp_CTR_DSP_ConvertProcessAddressFromDspDram(DAT_0044e460,param_1,param_2);

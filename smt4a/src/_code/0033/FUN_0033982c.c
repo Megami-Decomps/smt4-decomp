@@ -224,7 +224,7 @@ void FUN_0033982c(void)
         temp_v14 = *(float *)(DAT_005806a4 + 0x210);
         if (((int)temp_v14 >= 0x3dccccce) || ((unsigned int)temp_v14 >= 0xbdccccce)) {
           *(float *)(DAT_005806a4 + 0x214) = temp_v20;
-          if (!(NAN(temp_v20) || NAN(temp_v14))) {
+          if (!((temp_v20 != temp_v20) || (temp_v14 != temp_v14))) {
             temp_v14 = temp_v14 + temp_v17;
             *(float *)(temp_v2 + 0x210) = temp_v14;
             if (temp_v20 <= temp_v14) {
@@ -246,7 +246,7 @@ void FUN_0033982c(void)
         temp_v14 = -temp_v15;
         *(float *)(DAT_005806a4 + 0x214) = temp_v14;
         temp_v15 = *(float *)(temp_v2 + 0x210);
-        if (!(NAN(temp_v14) || NAN(temp_v15))) {
+        if (!((temp_v14 != temp_v14) || (temp_v15 != temp_v15))) {
           temp_v15 = temp_v15 + temp_v16;
           *(float *)(temp_v2 + 0x210) = temp_v15;
           if (temp_v15 < temp_v14) {
@@ -267,7 +267,7 @@ void FUN_0033982c(void)
     else {
       *(float *)(DAT_005806a4 + 0x214) = temp_v15;
       temp_v14 = *(float *)(temp_v2 + 0x210);
-      if (!(NAN(temp_v15) || NAN(temp_v14))) {
+      if (!((temp_v15 != temp_v15) || (temp_v14 != temp_v14))) {
         temp_v14 = temp_v14 + temp_v16;
         *(float *)(temp_v2 + 0x210) = temp_v14;
         if (temp_v15 <= temp_v14) {
@@ -455,7 +455,7 @@ LAB_00339bb4:
       if (((int)temp_v14 < 0x40c00001) && (temp_v17 = temp_v14, (int)temp_v14 < 0x3f800000)) {
         temp_v17 = temp_v18;
       }
-      if (!(NAN(temp_v17) || NAN(DAT_005806a8))) {
+      if (!((temp_v17 != temp_v17) || (DAT_005806a8 != DAT_005806a8))) {
         DAT_005806a8 = DAT_005806a8 + 0.3f;
         if (temp_v17 < DAT_005806a8) {
           DAT_005806a8 = temp_v17;
@@ -481,7 +481,7 @@ LAB_00339bb4:
       if (((int)temp_v14 < 0x40c00001) && (temp_v17 = temp_v14, (int)temp_v14 < 0x3f800000)) {
         temp_v17 = temp_v18;
       }
-      if (!(NAN(temp_v17) || NAN(DAT_005806a8))) {
+      if (!((temp_v17 != temp_v17) || (DAT_005806a8 != DAT_005806a8))) {
         DAT_005806a8 = DAT_005806a8 + temp_v18;
         if (temp_v17 < DAT_005806a8) {
           DAT_005806a8 = temp_v17;
@@ -512,7 +512,7 @@ LAB_00339bb4:
     else if ((int)temp_v18 < 0x3dcccccd) {
       temp_v18 = 0.1f;
     }
-    if (!(NAN(temp_v18) || NAN(DAT_005806a8))) {
+    if (!((temp_v18 != temp_v18) || (DAT_005806a8 != DAT_005806a8))) {
       DAT_005806a8 = DAT_005806a8 + 0.15f;
       if (temp_v18 < DAT_005806a8) {
         DAT_005806a8 = temp_v18;

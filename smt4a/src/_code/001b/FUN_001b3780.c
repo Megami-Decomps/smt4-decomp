@@ -23,7 +23,7 @@ void FUN_001b3780(float *param_1)
   temp_v4 = *param_1;
   temp_v3 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v4 < in_s0) << 0x1f) |
           ((unsigned int)(temp_v4 == in_s0) << 0x1e);
-  temp_v2 = temp_v3 | ((unsigned int)(NAN(temp_v4) || NAN(in_s0)) << 0x1c);
+  temp_v2 = temp_v3 | ((unsigned int)((temp_v4 != temp_v4) || (in_s0 != in_s0)) << 0x1c);
   temp_v1 = (unsigned char)(temp_v3 >> 0x18);
   if (!((unsigned char)((temp_v1 >> 6) & 1) || temp_v1 >> 7 != ((unsigned char)(temp_v2 >> 0x1c) & 1))) {
     temp_v0 = *(char *)(param_1 + 2);

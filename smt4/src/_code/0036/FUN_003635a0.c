@@ -14,7 +14,7 @@ unsigned int * FUN_003635a0(unsigned int *param_1,unsigned int param_2)
   puVar2 = (unsigned int *)param_1[6];
   puVar1 = param_1;
   if (puVar2 != (unsigned int *)0x0) {
-    puVar1 = (unsigned int)(uint)*(unsigned int)(param_1 + 7);
+    puVar1 = (unsigned int *)(unsigned int)*(unsigned char *)(param_1 + 7);
   }
   if (puVar2 != (unsigned int *)0x0 && puVar1 != (unsigned int *)0x0) {
     (**(romwright_code **)*puVar2)(puVar2);
@@ -22,7 +22,7 @@ unsigned int * FUN_003635a0(unsigned int *param_1,unsigned int param_2)
   }
   puVar2 = (unsigned int *)param_1[4];
   if (puVar2 != (unsigned int *)0x0) {
-    puVar1 = (unsigned int)(uint)*(unsigned int)(param_1 + 5);
+    puVar1 = (unsigned int *)(unsigned int)*(unsigned char *)(param_1 + 5);
   }
   if (puVar2 != (unsigned int *)0x0 && puVar1 != (unsigned int *)0x0) {
     (**(romwright_code **)*puVar2)(puVar2);
@@ -30,7 +30,7 @@ unsigned int * FUN_003635a0(unsigned int *param_1,unsigned int param_2)
   }
   puVar2 = (unsigned int *)param_1[2];
   if (puVar2 != (unsigned int *)0x0) {
-    puVar1 = (unsigned int)(uint)*(unsigned int)(param_1 + 3);
+    puVar1 = (unsigned int *)(unsigned int)*(unsigned char *)(param_1 + 3);
   }
   if (puVar2 != (unsigned int *)0x0 && puVar1 != (unsigned int *)0x0) {
     (**(romwright_code **)*puVar2)(puVar2);

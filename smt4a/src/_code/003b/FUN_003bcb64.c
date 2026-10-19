@@ -15,7 +15,6 @@ extern unsigned int DAT_00571104; /* 0x571104 */
 extern unsigned int DAT_00571108; /* 0x571108 */
 extern unsigned int DAT_0057110c; /* 0x57110c */
 
-/* Unsupported intrinsic, declaration required: while (COPY). */
 extern int FUN_0014aa78(void);
 /* Supplied declaration required: FUN_0014bef4. */
 extern int FUN_002a4b28(void);
@@ -28,7 +27,7 @@ extern int FUN_004d0bf0(unsigned short);
 unsigned int FUN_003bcb64(void)
 
 {
-/* irregular: 5 native warning(s); review required */
+/* irregular: 4 native warning(s); review required */
   short temp_v0;
   unsigned char temp_v1;
   int temp_v2;

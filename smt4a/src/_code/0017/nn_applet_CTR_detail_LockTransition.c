@@ -18,7 +18,7 @@ void nn_applet_CTR_detail_LockTransition(unsigned int param_1,unsigned char para
 
 {
 /* irregular: 2 native warning(s); review required */
-  int temp_v0;
+  unsigned int temp_v0;
   unsigned char temp_v1;
   
   temp_v0 = param_1;

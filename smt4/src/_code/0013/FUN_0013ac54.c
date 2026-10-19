@@ -4,13 +4,14 @@
 
 extern unsigned char DAT_004e6f64; /* 0x4e6f64 */
 
-/* Supplied declaration required: nn_snd_CTR_Dspsnd_SetIsHeadsetConnected. */
+extern unsigned char nn_snd_CTR_Dspsnd_SetIsHeadsetConnected(unsigned int, unsigned char);
 
 
-void FUN_0013ac54(void)
+unsigned char FUN_0013ac54(unsigned int param_1,unsigned char param_2)
 
 {
-/* irregular: 1 native warning(s); review required */
-  nn_snd_CTR_Dspsnd_SetIsHeadsetConnected(&DAT_004e6f64);
-  return;
+  unsigned char temp_v0;
+  
+  temp_v0 = nn_snd_CTR_Dspsnd_SetIsHeadsetConnected((unsigned int)&DAT_004e6f64,param_2);
+  return temp_v0;
 }

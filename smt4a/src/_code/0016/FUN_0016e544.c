@@ -16,19 +16,19 @@ extern int DAT_005b479c; /* 0x5b479c */
 /* Supplied declaration required: FUN_00189570. */
 /* Supplied declaration required: FUN_00195fc8. */
 extern unsigned int FUN_001a0e10(void);
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 void FUN_0016e544(int param_1)
 
 {
-/* irregular: 6 native warning(s); review required */
+/* irregular: 4 native warning(s); review required */
   unsigned int temp_v0;
   
   if (param_1 == 0) {
     temp_v0 = FUN_001a0e10();
-    nn_os_CriticalSection_Enter();
+    nn_os_CriticalSection_Enter(temp_v0);
     if (0 < DAT_005b4798) {
       DAT_005b4798 = DAT_005b4798 - 1;
     }

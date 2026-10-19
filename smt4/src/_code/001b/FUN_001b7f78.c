@@ -2869,8 +2869,8 @@ LAB_001bb1d4:
       FUN_00291764(DAT_00432fc8 + 0xa8);
       if ((int)DAT_0049fd14 >= 0) {
         (*(unsigned short *)((unsigned char *)&uStack_1c8 + 0)) = romwright_piece_1_1((char)DAT_0049f91c,1);
-        uStack_1c8._0_3_ = romwright_piece_1_2((char)DAT_0049f920,(unsigned short)uStack_1c8);
-        uStack_1c8 = romwright_piece_1_3((char)DAT_0049f924,(undefined3)uStack_1c8);
+        uStack_1c8 = (((unsigned int)(uStack_1c8) & 0xff000000U) | (((unsigned int)(romwright_piece_1_2((char)DAT_0049f920,(unsigned short)uStack_1c8)) & 0xffffffU) << 0));
+        uStack_1c8 = romwright_piece_1_3((char)DAT_0049f924,((unsigned int)uStack_1c8 & 0xffffffU));
         uStack_1c4 = *(unsigned int *)(DAT_00447e88 + 0x1c);
         uStack_1c0 = *(unsigned int *)(DAT_00447e88 + 0x20);
         uStack_1bc = (unsigned int)*(unsigned char **)(DAT_00447e88 + 0x24);
@@ -2884,8 +2884,8 @@ LAB_001bb1d4:
       }
       else if (DAT_0049f970 != 0) {
         (*(unsigned short *)((unsigned char *)&uStack_1c8 + 0)) = romwright_piece_1_1((char)DAT_0049f91c,1);
-        uStack_1c8._0_3_ = romwright_piece_1_2((char)DAT_0049f920,(unsigned short)uStack_1c8);
-        uStack_1c8 = romwright_piece_1_3((char)DAT_0049f924,(undefined3)uStack_1c8);
+        uStack_1c8 = (((unsigned int)(uStack_1c8) & 0xff000000U) | (((unsigned int)(romwright_piece_1_2((char)DAT_0049f920,(unsigned short)uStack_1c8)) & 0xffffffU) << 0));
+        uStack_1c8 = romwright_piece_1_3((char)DAT_0049f924,((unsigned int)uStack_1c8 & 0xffffffU));
         uStack_1c4 = *(unsigned int *)(DAT_00447e88 + 0x1c);
         uStack_1c0 = *(unsigned int *)(DAT_00447e88 + 0x20);
         uStack_1bc = (unsigned int)*(unsigned char **)(DAT_00447e88 + 0x24);
@@ -5493,7 +5493,7 @@ joined_r0x001bfcb4:
         (*(unsigned char *)((unsigned char *)&uStack_1bc + 0)) = 2;
       }
       if ((*(unsigned short *)((unsigned char *)&uStack_1c8 + 2)) != 0) {
-        uStack_1c8 = romwright_piece_3_1(uStack_1c8._1_3_,1);
+        uStack_1c8 = romwright_piece_3_1((((unsigned int)(uStack_1c8) >> 8) & 0xffffffU),1);
         FUN_0026fa30(0);
 code_r0x001c014c:
         if (DAT_0049f942 != '\0') {
@@ -5511,7 +5511,7 @@ code_r0x001c014c:
         if (temp_v8 != 0) {
           temp_v6 = FUN_0026f950();
           uStack_1c8 = romwright_piece_2_2(temp_v6,(unsigned short)uStack_1c8);
-          uStack_1c8 = romwright_piece_3_1(uStack_1c8._1_3_,1);
+          uStack_1c8 = romwright_piece_3_1((((unsigned int)(uStack_1c8) >> 8) & 0xffffffU),1);
           FUN_0027d8b4(0);
           goto code_r0x001c014c;
         }

@@ -36,7 +36,7 @@ unsigned int * FUN_0011f5e4(int *param_1,int *param_2)
   int temp_v4;
   unsigned int *temp_v5;
   char temp_v6;
-  unsigned char uStack_2b [3];
+  unsigned int uStack_2b;
   unsigned char temp_v7 [8];
   
   if (*param_1 == 0) {

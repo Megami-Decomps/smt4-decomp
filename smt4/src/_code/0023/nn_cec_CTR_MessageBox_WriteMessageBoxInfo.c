@@ -10,14 +10,16 @@ typedef struct {
 } param_1_stack;
 
 
-void nn_cec_CTR_MessageBox_WriteMessageBoxInfo(int *param_1)
+unsigned int nn_cec_CTR_MessageBox_WriteMessageBoxInfo(int *param_1)
 
 {
 /* irregular: 1 native warning(s); review required */
+  unsigned int temp_v0;
+  
   if (param_1[1] != 0) {
-    (**(romwright_code **)(*param_1 + 0x30))(param_1,param_1 + 0x67,0x60,param_1[1],2,0x14);
+    temp_v0 = (**(romwright_code **)(*param_1 + 0x30))(param_1,param_1 + 0x67,0x60,param_1[1],2,0x14);
                     /* WARNING: Treating indirect jump as return */
-    return;
+    return temp_v0;
   }
-  return;
+  return 0xc8810bea;
 }

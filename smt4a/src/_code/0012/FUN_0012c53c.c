@@ -142,7 +142,7 @@ void FUN_0012c53c(int param_1)
             piVar9 = (int *)(*(int *)(param_1 + 0x6c) + ((int)DAT_00589570 >> 1));
             pcVar7 = DAT_0058956c;
             if ((DAT_00589570 & 1) != 0) {
-              pcVar7 = *(romwright_code **)(DAT_0058956c + *piVar9);
+              pcVar7 = *(romwright_code **)((unsigned char *)DAT_0058956c + *piVar9);
             }
             temp_v0 = (*pcVar7)(piVar9,temp_v6,temp_v12,*(unsigned int *)(param_1 + 0x40c));
             if (temp_v0 != 0) {

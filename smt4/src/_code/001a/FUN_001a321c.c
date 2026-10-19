@@ -3,6 +3,21 @@
 #include "romwright_types.h"
 
 typedef int romwright_code();
+#ifndef ROMWRIGHT_FLOAT_BITS_DEFINED
+#define ROMWRIGHT_FLOAT_BITS_DEFINED
+static unsigned int romwright_f2u(float value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.f = value;
+    return bits.u;
+}
+static float romwright_u2f(unsigned int value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.u = value;
+    return bits.f;
+}
+#endif
 /* stack frame of void: 19 slot(s), 76 byte(s) */
 typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
@@ -302,13 +317,13 @@ unsigned char FUN_001a321c(void)
         else if (0 < *(short *)(temp_v34 + 0x12fe)) {
           temp_v16 = (float)VectorSignedToFloat(temp_v28,(unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v20 = (float)VectorSignedToFloat(temp_v30,(unsigned char)(in_fpscr >> 0x16) & 3);
-          temp_v23 = (short *)(temp_v20 + 48.0f);
+          temp_v23 = (short *)romwright_f2u((float)((temp_v20 + 48.0f)));
           temp_v20 = (float)VectorSignedToFloat((int)*(short *)(*(int *)(*(int *)(temp_v34 + 0x1e74) +
                                                                       0x10) + 0x12),
                                               (unsigned char)(in_fpscr >> 0x16) & 3);
-          temp_v22 = (short *)((temp_v16 + 300.0f) - temp_v20);
+          temp_v22 = (short *)romwright_f2u((float)(((temp_v16 + 300.0f) - temp_v20)));
           VectorUnsignedToFloat(*(unsigned int *)(temp_v34 + 0x1e78),(unsigned char)(in_fpscr >> 0x16) & 3);
-          temp_v24 = (short *)temp_v17;
+          temp_v24 = (short *)romwright_f2u((float)(temp_v17));
           FUN_0033d3f8(*(int *)(temp_v34 + 0x1e74),0,&temp_v22,temp_v8 | 0xff,0);
         }
       }
@@ -729,7 +744,7 @@ LAB_001a3ea8:
           FUN_002bdf94(0,(unsigned char *)((int)temp_v28 + (int)*(short *)(temp_v10 + 8)),
                        (int)temp_v30 + (int)*(short *)(temp_v10 + 10),0,1,0xdd,&LAB_001a48a4);
           temp_v26 = 0;
-          temp_v24 = (short *)temp_v30;
+          temp_v24 = (short *)romwright_f2u((float)(temp_v30));
           temp_v25 = 3.09687e-43f;
           temp_v22 = (short *)0x48;
           temp_v23 = temp_v28;
@@ -738,7 +753,7 @@ LAB_001a3ea8:
           if (*piVar17 != 0) {
             FUN_002bf538();
             temp_v23 = temp_v28;
-            temp_v24 = (short *)temp_v30;
+            temp_v24 = (short *)romwright_f2u((float)(temp_v30));
             temp_v26 = 1;
             temp_v25 = 3.11088e-43f;
             temp_v22 = (short *)0x48;

@@ -14,7 +14,7 @@ unsigned char FUN_003644bc(void)
   
   puVar1 = &DAT_005f15fc;
   if (DAT_005f1633 == -1) {
-    puVar1 = (unsigned int *)(uint)DAT_005f162e;
+    puVar1 = (unsigned int *)(unsigned int)DAT_005f162e;
   }
   return DAT_005f1633 == -1 && puVar1 == (unsigned int *)0x4;
 }

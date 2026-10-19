@@ -9,15 +9,15 @@ extern unsigned char LAB_00380684; /* 0x380684 */
 extern int FUN_002baed8(void);
 extern int FUN_002bd440(void);
 /* Supplied declaration required: FUN_00379cfc. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 /* Supplied declaration required: nw_snd_internal_PlayerHeapDataManager_Initialize. */
 
 
 unsigned char FUN_0038048c(int param_1,unsigned int *param_2,unsigned int *param_3)
 
 {
-/* irregular: 6 native warning(s); review required */
+/* irregular: 4 native warning(s); review required */
   int temp_v0;
   int temp_v1;
   int temp_v2;

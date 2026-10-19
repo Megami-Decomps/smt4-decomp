@@ -9,17 +9,17 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_0042cc10. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 void FUN_0043dd54(int param_1)
 
 {
-/* irregular: 4 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   int *piVar1;
   
-  nn_os_CriticalSection_Enter();
+  nn_os_CriticalSection_Enter(param_1 + 0x10);
   *(unsigned char *)(param_1 + 0x42) = 1;
   FUN_0042cc10(param_1 + 0x1c);
   while (piVar1 = *(int **)(param_1 + 8), piVar1 != (int *)0x0) {

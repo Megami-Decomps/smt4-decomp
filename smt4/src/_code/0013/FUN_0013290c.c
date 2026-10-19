@@ -64,7 +64,7 @@ void FUN_0013290c(unsigned int param_1,unsigned int param_2)
   }
   else {
     *(unsigned int *)(temp_v0 + 0xc) = temp_v2 + 0x20;
-    if (puVar3 < DAT_004652a4) {
+    if ((unsigned int)puVar3 < DAT_004652a4) {
       DAT_004652a0 = puVar3 + 2;
       puVar3[1] = 0x8025e;
       *puVar3 = 0;

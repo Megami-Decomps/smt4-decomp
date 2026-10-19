@@ -4,13 +4,12 @@
 
 extern unsigned int DAT_004e6c5c; /* 0x4e6c5c */
 
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
 
 
 void FUN_0013b608(void)
 
 {
-/* irregular: 1 native warning(s); review required */
-  nn_os_CriticalSection_Enter(&DAT_004e6c5c);
+  nn_os_CriticalSection_Enter((unsigned int)&DAT_004e6c5c);
   return;
 }

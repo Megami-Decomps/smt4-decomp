@@ -4,7 +4,6 @@
 
 extern int DAT_0043da2c; /* 0x43da2c */
 
-/* Unsupported intrinsic, declaration required: while (STORE). */
 extern int FUN_002b8d54(void);
 extern int FUN_002b8d68(void);
 
@@ -12,7 +11,7 @@ extern int FUN_002b8d68(void);
 void FUN_00220984(void)
 
 {
-/* irregular: 12 goto(s); 1 native warning(s); review required */
+/* irregular: 12 goto(s) */
   char temp_v0;
   int temp_v1;
   int temp_v2;

@@ -17,13 +17,13 @@ extern unsigned int *FUN_001246cc(unsigned int *);
 /* Supplied declaration required: FUN_002c415c. */
 /* Supplied declaration required: FUN_002c498c. */
 /* Supplied declaration required: FUN_00349804. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
 
 
 void FUN_0019fc50(int param_1,int param_2,unsigned int param_3,unsigned int param_4)
 
 {
-/* irregular: 3 goto(s); irregular input(s): in_lr; 8 native warning(s); review required */
+/* irregular: 3 goto(s); irregular input(s): in_lr; 7 native warning(s); review required */
   unsigned char temp_v0;
   unsigned short temp_v1;
   int *piVar3;
@@ -170,9 +170,9 @@ LAB_0019fea0:
   FUN_002c32a0(0x10000,0x100,0,*(unsigned int *)(param_1 + 0x28),0x80,1);
   *(unsigned int *)(param_1 + 0x24) = temp_v3;
   FUN_00349804(*(unsigned int *)(param_1 + 0x14),*(unsigned int *)(param_1 + 0x18),puStack_38,temp_v3);
-  nn_os_CriticalSection_Enter(DAT_00465124);
-  if (((puStack_38 < DAT_00465144) || ((unsigned int *)(DAT_00465154 + (int)DAT_00465144) < puStack_38)) &&
-     ((puStack_38 < DAT_00465148 || ((unsigned int *)((int)DAT_00465148 + DAT_00465158) < puStack_38)))) {
+  nn_os_CriticalSection_Enter((unsigned int)DAT_00465124);
+  if ((((unsigned int)puStack_38 < DAT_00465144) || ((unsigned int *)(DAT_00465154 + (int)DAT_00465144) < puStack_38)) &&
+     (((unsigned int)puStack_38 < DAT_00465148 || ((unsigned int *)((int)DAT_00465148 + DAT_00465158) < puStack_38)))) {
     puStack_38 = (unsigned int *)FUN_001246cc(puStack_38);
   }
   FUN_001245c4(puStack_38);

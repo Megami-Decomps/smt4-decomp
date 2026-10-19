@@ -136,7 +136,7 @@ LAB_001acd0c:
               }
               piVar1 = (int *)0x0;
 LAB_001ace94:
-              temp_v7 = romwright_piece_3_1(temp_v7._1_3_,1);
+              temp_v7 = romwright_piece_3_1((((unsigned int)(temp_v7) >> 8) & 0xffffffU),1);
               piVar1[0x87] = temp_v7;
             }
             else {

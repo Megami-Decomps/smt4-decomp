@@ -10,7 +10,6 @@ typedef struct {
 
 extern int DAT_0057f0c8; /* 0x57f0c8 */
 
-/* Unsupported intrinsic, declaration required: while (STORE). */
 extern int FUN_001643a0(void);
 extern int FUN_00165070(void);
 
@@ -18,7 +17,7 @@ extern int FUN_00165070(void);
 void FUN_0031879c(void)
 
 {
-/* irregular: 14 goto(s); 1 native warning(s); review required */
+/* irregular: 14 goto(s) */
   char temp_v0;
   int temp_v1;
   int temp_v2;

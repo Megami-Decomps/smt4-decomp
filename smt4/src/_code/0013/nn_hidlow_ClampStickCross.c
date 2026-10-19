@@ -5,9 +5,8 @@
 /* Supplied declaration required: aeabi_idivmod. */
 
 
-int nn_hidlow_ClampStickCross
-              (unsigned short *param_1,unsigned short *param_2,int param_3,int param_4,int param_5,
-              int param_6)
+short nn_hidlow_ClampStickCross
+                (short *param_1,short *param_2,int param_3,int param_4,int param_5,int param_6)
 
 {
 /* irregular: 1 native warning(s); review required */
@@ -73,5 +72,5 @@ int nn_hidlow_ClampStickCross
   }
   *param_1 = (short)param_3;
   *param_2 = (short)param_4;
-  return (int)(short)param_6;
+  return (short)param_6;
 }

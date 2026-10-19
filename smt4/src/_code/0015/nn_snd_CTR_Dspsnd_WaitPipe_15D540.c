@@ -11,8 +11,8 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_002c40f8. */
 /* Supplied declaration required: FUN_002c526c. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 unsigned int
@@ -20,13 +20,13 @@ nn_snd_CTR_Dspsnd_WaitPipe_15D540
           (int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
 
 {
-/* irregular: 5 native warning(s); review required */
+/* irregular: 3 native warning(s); review required */
   unsigned char *puVar1;
   unsigned int temp_v0;
   int temp_v1;
   unsigned char temp_v2 [8];
   
-  nn_os_CriticalSection_Enter(param_1 + 2);
+  nn_os_CriticalSection_Enter((unsigned int)(param_1 + 2));
   temp_v1 = *param_1;
   puVar1 = temp_v2;
   FUN_002c40f8(puVar1,&temp_v1,1,0,param_3,param_4);
@@ -44,6 +44,6 @@ nn_snd_CTR_Dspsnd_WaitPipe_15D540
   else {
     temp_v0 = 0;
   }
-  nn_os_CriticalSection_Leave(param_1 + 2);
+  nn_os_CriticalSection_Leave((unsigned int)(param_1 + 2));
   return temp_v0;
 }

@@ -44,7 +44,7 @@ void FUN_00239fc4(int param_1,unsigned int param_2)
       if (temp_v1 == 0x8c) {
         pcVar3 = temp_v3;
         FUN_003521c8(temp_v3,1,(unsigned int)*(unsigned char *)((int)puVar4 + 5) | ((*puVar4 & 0xff0fffff) << 8));
-        if (pcVar3 == (unsigned char *)0xd8a083fa) {
+        if (pcVar3 == (char *)0xd8a083fa) {
           pcVar3 = (char *)0x0;
         }
         else if ((-1 < (int)pcVar3) && (pcVar3 = (char *)0x0, temp_v3[0] != '\0')) {

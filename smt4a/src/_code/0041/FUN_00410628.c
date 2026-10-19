@@ -2,6 +2,21 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
+#ifndef ROMWRIGHT_FLOAT_BITS_DEFINED
+#define ROMWRIGHT_FLOAT_BITS_DEFINED
+static unsigned int romwright_f2u(float value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.f = value;
+    return bits.u;
+}
+static float romwright_u2f(unsigned int value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.u = value;
+    return bits.f;
+}
+#endif
 /* stack frame of param_1: 8 slot(s), 32 byte(s) */
 typedef struct {
     unsigned int sp24; /* 0x24: local_24 */
@@ -220,19 +235,19 @@ void FUN_00410628(int param_1)
         do {
           pppuVar15 = (&temp_v12)[temp_v1 * 3];
           temp_v9 = (float)(temp_v10 >> 0x20);
-          if (((float)pppuVar15 < temp_v9) && (temp_v9 <= (float)(&temp_v13)[temp_v1 * 3])) {
+          if ((romwright_u2f((unsigned int)(pppuVar15)) < temp_v9) && (temp_v9 <= romwright_u2f((unsigned int)((&temp_v13)[temp_v1 * 3])))) {
             in_d9 = in_d9 & 0xffffffff;
             temp_v8 = 1;
           }
           temp_v11 = (float)in_d9;
           temp_v4 = temp_v1 + 1;
-          if ((float)pppuVar15 < temp_v11) {
+          if (romwright_u2f((unsigned int)(pppuVar15)) < temp_v11) {
             in_d9 = romwright_zext_4_8(pppuVar15);
           }
-          if ((float)pppuVar15 < temp_v11) {
+          if (romwright_u2f((unsigned int)(pppuVar15)) < temp_v11) {
             temp_v10 = (unsigned long long)(unsigned int)temp_v9 << 0x20;
           }
-          if ((float)in_d10 < (float)(&temp_v13)[temp_v1 * 3]) {
+          if ((float)in_d10 < romwright_u2f((unsigned int)((&temp_v13)[temp_v1 * 3]))) {
             in_d9 = romwright_zext_4_8((&temp_v12)[temp_v1 * 3]);
             temp_v10 = temp_v10 & 0xffffffff00000000;
           }

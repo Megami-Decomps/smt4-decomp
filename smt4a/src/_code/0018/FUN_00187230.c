@@ -121,7 +121,7 @@ void FUN_00187230(int param_1,float *param_2,float *param_3)
       temp_v6 = *(float *)(temp_v0 + 0x6c);
       temp_v3 = temp_v6 < temp_v13;
       temp_v4 = temp_v6 == temp_v13;
-      temp_v5 = NAN(temp_v6) || NAN(temp_v13);
+      temp_v5 = (temp_v6 != temp_v6) || (temp_v13 != temp_v13);
       if (!temp_v4 && !temp_v3) {
         temp_v5 = SBORROW4(0x40490fdb,(int)temp_v6);
         temp_v3 = 0x40490fdb - (int)temp_v6 < 0;

@@ -29,7 +29,6 @@ extern int DAT_00465138; /* 0x465138 */
 #endif
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: while (LOAD). */
 /* Supplied declaration required: FUN_002b7928. */
 /* Supplied declaration required: FUN_002b7bca. */
 /* Supplied declaration required: FUN_002b7c54. */
@@ -45,7 +44,7 @@ extern int FUN_002c15fc(unsigned int);
 unsigned int FUN_00115cd0(int param_1,int param_2,int param_3)
 
 {
-/* irregular: 8 unstructured edge(s); 5 goto(s); irregular input(s): in_fpscr; 10 native warning(s); review required */
+/* irregular: 8 unstructured edge(s); 5 goto(s); irregular input(s): in_fpscr; 9 native warning(s); review required */
   short *psVar1;
   int temp_v0;
   unsigned int temp_v1;

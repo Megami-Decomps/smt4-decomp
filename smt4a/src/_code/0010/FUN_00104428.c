@@ -88,7 +88,7 @@ void FUN_00104428(int param_1)
         FUN_002ea3d0(param_1,temp_v2);
         return;
       }
-      *(float *)&temp_v4[0] = -0x7f97ffff;
+      temp_v4[0] = -0x7f97ffff;
       piVar4 = (int *)temp_v9;
       temp_v2 = FUN_002e7908(piVar4,piVar5);
       FUN_002ea214(param_1,temp_v2);

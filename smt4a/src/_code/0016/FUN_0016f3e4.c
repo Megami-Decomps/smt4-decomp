@@ -9,17 +9,17 @@ extern unsigned char DAT_005894ec; /* 0x5894ec */
 extern unsigned char DAT_006433d0; /* 0x6433d0 */
 
 /* Supplied declaration required: FUN_001a089c. */
-/* Supplied declaration required: nn_snd_CTR_Dspsnd_Finalize. */
+extern void nn_snd_CTR_Dspsnd_Finalize(unsigned int, unsigned char);
 
 
 void FUN_0016f3e4(void)
 
 {
-/* irregular: 2 native warning(s); review required */
+/* irregular: 1 native warning(s); review required */
   if ((DAT_005894e4 & ~DAT_005894e5) != 0) {
     FUN_001a089c(&DAT_005894ec,1);
     DAT_005894e6 = 1;
-    nn_snd_CTR_Dspsnd_Finalize(&DAT_006433d0,1);
+    nn_snd_CTR_Dspsnd_Finalize((unsigned int)&DAT_006433d0,1);
     DAT_005894e5 = 1;
   }
   return;

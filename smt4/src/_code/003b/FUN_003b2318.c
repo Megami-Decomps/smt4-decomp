@@ -536,7 +536,7 @@ LAB_003b2a4c:
                 else {
                   temp_v31[0] = temp_v29 - *(int *)(temp_v5 + 0x14);
                   if (*(unsigned int *)(temp_v5 + 0x18) <= *(unsigned int *)(temp_v5 + 0x14)) {
-                    temp_v25 = (unsigned char *)romwright_piece_3_1(temp_v25._1_3_,temp_v17[0]);
+                    temp_v25 = (unsigned char *)romwright_piece_3_1((((unsigned int)(temp_v25) >> 8) & 0xffffffU),temp_v17[0]);
                     temp_v7 = *(int *)(temp_v5 + 0x10);
                     temp_v8 = FUN_0022bcc4(temp_v6,(*(int *)(temp_v5 + 0x1c) - temp_v9) +
                                                  *(unsigned int *)(temp_v5 + 0x14),&temp_v25);

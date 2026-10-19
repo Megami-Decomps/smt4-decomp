@@ -10,14 +10,13 @@ typedef struct {
 
 extern int DAT_0058939c; /* 0x58939c */
 
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 void FUN_0042bb1c(int *param_1)
 
 {
-/* irregular: 2 native warning(s); review required */
   int temp_v0;
   int temp_v1;
   

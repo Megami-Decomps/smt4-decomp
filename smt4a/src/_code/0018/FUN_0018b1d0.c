@@ -6,28 +6,29 @@ extern int FUN_0018b620(void);
 extern int FUN_001a2480(void);
 /* Supplied declaration required: FUN_001a28a8. */
 extern int FUN_001a2a4c(void);
-extern int FUN_001a2a5c(void);
-/* Supplied declaration required: nn_gxlow_CTR_Gpu_AcquireRight. */
+extern unsigned int FUN_001a2a5c(void);
+extern unsigned int nn_gxlow_CTR_Gpu_AcquireRight(unsigned int, unsigned int, unsigned char);
 
 
-int FUN_0018b1d0(void)
+unsigned int FUN_0018b1d0(void)
 
 {
-/* irregular: 2 native warning(s); review required */
+/* irregular: 1 native warning(s); review required */
   int temp_v0;
-  int temp_v1;
+  unsigned int temp_v1;
+  unsigned int temp_v2;
   
   temp_v0 = FUN_001a2480();
   if (temp_v0 == 0) {
-    temp_v0 = 0x202bf8;
+    temp_v1 = 0x202bf8;
   }
   else {
-    temp_v0 = FUN_001a2a5c();
-    nn_gxlow_CTR_Gpu_AcquireRight(temp_v0,0xffff8001,0);
-    if ((-1 < temp_v0) && (temp_v1 = FUN_0018b620(), temp_v1 != 0)) {
-      temp_v1 = FUN_001a2a4c();
-      FUN_001a28a8(temp_v1 + 0x30,0);
+    temp_v2 = FUN_001a2a5c();
+    temp_v1 = nn_gxlow_CTR_Gpu_AcquireRight(temp_v2,0xffff8001,0);
+    if ((-1 < (int)temp_v1) && (temp_v0 = FUN_0018b620(), temp_v0 != 0)) {
+      temp_v0 = FUN_001a2a4c();
+      FUN_001a28a8(temp_v0 + 0x30,0);
     }
   }
-  return temp_v0;
+  return temp_v1;
 }

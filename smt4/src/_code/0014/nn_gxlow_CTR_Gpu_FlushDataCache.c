@@ -6,8 +6,7 @@
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 
 
-unsigned int nn_gxlow_CTR_Gpu_FlushDataCache
-               (unsigned int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
+unsigned int nn_gxlow_CTR_Gpu_FlushDataCache(unsigned int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
 
 {
 /* irregular: 2 native warning(s); review required */

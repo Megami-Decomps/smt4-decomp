@@ -89,11 +89,11 @@ FUN_00438a4c(int param_1,int param_2,unsigned int param_3,unsigned int param_4,i
       temp_v5 = 0;
       if (temp_v5 < param_6) {
         do {
-          if (((*(unsigned int *)(param_2 + temp_v5 * 4) & (1 << *(sbyte *)(param_1 + 0x1b))) == 0) &&
+          if (((*(unsigned int *)(param_2 + temp_v5 * 4) & (1 << *(signed char *)(param_1 + 0x1b))) == 0) &&
              (temp_v2 = temp_v1, FUN_00434e88(temp_v1,temp_v0,*(unsigned int *)(param_5 + temp_v5 * 4)),
              temp_v2 == 1)) {
             *(unsigned int *)(param_2 + temp_v5 * 4) =
-                 *(unsigned int *)(param_2 + temp_v5 * 4) | (1 << *(sbyte *)(param_1 + 0x1b));
+                 *(unsigned int *)(param_2 + temp_v5 * 4) | (1 << *(signed char *)(param_1 + 0x1b));
           }
           temp_v5 = temp_v5 + 1;
         } while (temp_v5 < param_6);
@@ -108,11 +108,11 @@ FUN_00438a4c(int param_1,int param_2,unsigned int param_3,unsigned int param_4,i
         FUN_00437828(temp_v3,temp_v6,temp_v2 + 4,&temp_v7);
         if ((temp_v0 != 0) && (temp_v5 = 0, param_6 != 0)) {
           do {
-            if (((*(unsigned int *)(param_2 + temp_v5 * 4) & (1 << *(sbyte *)(param_1 + 0x1b))) == 0) &&
+            if (((*(unsigned int *)(param_2 + temp_v5 * 4) & (1 << *(signed char *)(param_1 + 0x1b))) == 0) &&
                (temp_v0 = FUN_00433b58(puVar1,temp_v3 + 4,*(unsigned int *)(param_5 + temp_v5 * 4)),
                temp_v0 != 0)) {
               *(unsigned int *)(param_2 + temp_v5 * 4) =
-                   *(unsigned int *)(param_2 + temp_v5 * 4) | (1 << *(sbyte *)(param_1 + 0x1b));
+                   *(unsigned int *)(param_2 + temp_v5 * 4) | (1 << *(signed char *)(param_1 + 0x1b));
             }
             temp_v5 = temp_v5 + 1;
           } while (temp_v5 < param_6);

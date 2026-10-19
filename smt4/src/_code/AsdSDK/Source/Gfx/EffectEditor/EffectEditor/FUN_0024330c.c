@@ -361,10 +361,10 @@ LAB_00243564:
         temp_v0 = (unsigned char)(temp_v19 >> 0x18);
         temp_v17 = (unsigned char)(temp_v0 >> 7);
         temp_v18 = (unsigned char)((temp_v0 >> 6) & 1);
-        if (!temp_v18 && temp_v17 == (NAN(temp_v21) || NAN(temp_v23))) {
+        if (!temp_v18 && temp_v17 == ((temp_v21 != temp_v21) || (temp_v23 != temp_v23))) {
           param_1[temp_v1 * 2 + 2] = (unsigned int)temp_v23;
         }
-        if (!temp_v18 && temp_v17 == (NAN(temp_v21) || NAN(temp_v23))) {
+        if (!temp_v18 && temp_v17 == ((temp_v21 != temp_v21) || (temp_v23 != temp_v23))) {
           afStack_74[temp_v1] = temp_v23;
         }
       }
@@ -374,10 +374,10 @@ LAB_00243564:
         temp_v0 = (unsigned char)(temp_v19 >> 0x18);
         temp_v17 = (unsigned char)(temp_v0 >> 7);
         temp_v18 = (unsigned char)((temp_v0 >> 6) & 1);
-        if (!temp_v18 && temp_v17 == (NAN(temp_v23) || NAN(temp_v21))) {
+        if (!temp_v18 && temp_v17 == ((temp_v23 != temp_v23) || (temp_v21 != temp_v21))) {
           param_1[temp_v1 * 2 + 6] = (unsigned int)temp_v23;
         }
-        if (!temp_v18 && temp_v17 == (NAN(temp_v23) || NAN(temp_v21))) {
+        if (!temp_v18 && temp_v17 == ((temp_v23 != temp_v23) || (temp_v21 != temp_v21))) {
           afStack_74[temp_v1 + 2] = temp_v23;
         }
       }

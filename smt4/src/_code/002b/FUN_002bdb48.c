@@ -43,23 +43,23 @@ void FUN_002bdb48(void)
   }
   else {
     *(unsigned int *)(temp_v0 + 0xc) = temp_v1 + 0x20;
-    if (puVar2 < DAT_004652a4) {
+    if ((unsigned int)puVar2 < DAT_004652a4) {
       DAT_004652a0 = puVar2 + 2;
       puVar2[1] = 0x8025e;
       *puVar2 = 0;
     }
   }
-  if (DAT_004652a0 < DAT_004652a4) {
+  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
     *DAT_004652a0 = 1;
     DAT_004652a0[1] = 0xf0111;
     DAT_004652a0 = DAT_004652a0 + 2;
   }
-  if (DAT_004652a0 < DAT_004652a4) {
+  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
     *DAT_004652a0 = 1;
     DAT_004652a0[1] = 0xf0110;
     DAT_004652a0 = DAT_004652a0 + 2;
   }
-  if (DAT_004652a0 < DAT_004652a4) {
+  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
     *DAT_004652a0 = 0x12345678;
     DAT_004652a0[1] = 0xf0010;
     DAT_004652a0 = DAT_004652a0 + 2;

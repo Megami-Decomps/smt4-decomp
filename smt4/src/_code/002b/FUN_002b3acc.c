@@ -158,13 +158,13 @@ int * FUN_002b3acc(char *param_1,int param_2,int param_3,int *param_4)
     temp_v13 = param_4;
     FUN_0013e238(piVar9,*(unsigned int *)(param_1 + 4),pcVar13,&temp_v13);
     temp_v0 = temp_v12;
-    temp_v10 = (int *)romwright_piece_3_1(temp_v10._1_3_,1);
+    temp_v10 = (int *)romwright_piece_3_1((((unsigned int)(temp_v10) >> 8) & 0xffffffU),1);
     temp_v9 = piVar9;
     if (&temp_v11 != &temp_v9) {
       temp_v9 = temp_v11;
       pcVar13 = (romwright_code *)(unsigned int)temp_v12;
       temp_v12 = 1;
-      temp_v10 = (int *)romwright_piece_3_1(temp_v10._1_3_,temp_v0);
+      temp_v10 = (int *)romwright_piece_3_1((((unsigned int)(temp_v10) >> 8) & 0xffffffU),temp_v0);
       temp_v11 = piVar9;
     }
     piVar9 = temp_v9;

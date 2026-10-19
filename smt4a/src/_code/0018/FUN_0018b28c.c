@@ -30,35 +30,30 @@ extern int FUN_001a2a3c(void);
 extern unsigned int FUN_001a2a5c(void);
 /* Supplied declaration required: FUN_002e3140. */
 /* Supplied declaration required: FUN_002fb0d4. */
-extern int nn_gxlow_CTR_Gpu_RegisterInterruptRelayQueue(unsigned int, unsigned int, unsigned int, unsigned int *);
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern unsigned int nn_gxlow_CTR_Gpu_RegisterInterruptRelayQueue(unsigned int, unsigned int, unsigned int, unsigned int, int *);
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 /* Supplied declaration required: nn_os_SharedMemoryBlock_AttachAndMap. */
 
 
 void FUN_0018b28c(int param_1)
 
 {
-/* irregular: 10 native warning(s); review required */
-  int **ppiVar1;
-  unsigned int temp_v0;
-  int temp_v1;
+/* irregular: 8 native warning(s); review required */
+  unsigned char *puVar1;
+  int temp_v0;
+  unsigned int temp_v1;
   int temp_v2;
-  unsigned int temp_v3;
-  int *temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned int uStack_34;
-  int temp_v7;
-  int temp_v8;
+  int temp_v3;
+  int temp_v4;
+  int temp_v5;
+  unsigned char *temp_v6;
+  unsigned char *temp_v7;
+  unsigned char *temp_v8;
   int temp_v9;
-  unsigned char *temp_v10;
-  unsigned char *temp_v11;
-  unsigned char *temp_v12;
-  int temp_v13;
   
-  ppiVar1 = &temp_v4;
-  temp_v8 = 0;
+  puVar1 = (unsigned char *)&temp_v2;
+  temp_v4 = 0;
   FUN_00188b60();
   nn_os_CriticalSection_Enter(param_1);
   *(unsigned int *)(param_1 + 0x10) = 0;
@@ -68,64 +63,59 @@ void FUN_0018b28c(int param_1)
   *(unsigned int *)(param_1 + 0x20) = 0;
   *(unsigned int *)(param_1 + 0x24) = 0;
   *(unsigned int *)(param_1 + 0x28) = 0;
-  temp_v4 = (int *)0x0;
+  temp_v2 = 0;
   if (*(int *)(param_1 + 0x2c) != 0) {
-    ppiVar1 = (int **)0xe0a0183b;
+    puVar1 = (unsigned char *)0xe0a0183b;
   }
   else {
-    FUN_0017fd20(&temp_v4,0);
-    if (-1 < (int)ppiVar1) {
-      ppiVar1 = (int **)0x0;
-      *(int **)(param_1 + 0x2c) = temp_v4;
+    FUN_0017fd20(&temp_v2,0);
+    if (-1 < (int)puVar1) {
+      puVar1 = (unsigned char *)0x0;
+      *(unsigned int *)(param_1 + 0x2c) = temp_v2;
     }
   }
-  if ((int)ppiVar1 < 0) {
+  if ((int)puVar1 < 0) {
     FUN_002e3140();
   }
   *(unsigned char *)(param_1 + 0x77) = 0;
   *(unsigned char *)(param_1 + 0x76) = 0;
   FUN_001a089c(param_1 + 100,0);
-  temp_v0 = FUN_001a2a5c();
-  temp_v1 = FUN_0018b620();
-  if (temp_v1 == 0) {
-    temp_v3 = 1;
+  temp_v2 = FUN_001a2a5c();
+  temp_v0 = FUN_0018b620();
+  if (temp_v0 == 0) {
+    temp_v1 = 1;
   }
   else {
-    temp_v3 = 2;
+    temp_v1 = 2;
   }
-  temp_v1 = FUN_001a2a3c();
-  temp_v4 = &temp_v7;
-  if (temp_v1 != 0) {
-    temp_v3 = temp_v3 | 4;
+  temp_v0 = FUN_001a2a3c();
+  if (temp_v0 != 0) {
+    temp_v1 = temp_v1 | 4;
   }
   temp_v1 = nn_gxlow_CTR_Gpu_RegisterInterruptRelayQueue
-                    (temp_v0,*(unsigned int *)(param_1 + 0x2c),temp_v3,(unsigned int *)&temp_v8);
-  *(char *)(param_1 + 0x74) = (char)temp_v7;
-  nn_os_SharedMemoryBlock_AttachAndMap(param_1 + 0x38,temp_v8,0x1000,0);
+                    (temp_v2,*(unsigned int *)(param_1 + 0x2c),temp_v1,(unsigned int)&temp_v4,&temp_v3);
+  *(char *)(param_1 + 0x74) = (char)temp_v3;
+  nn_os_SharedMemoryBlock_AttachAndMap(param_1 + 0x38,temp_v4,0x1000,0);
   *(unsigned int *)(param_1 + 0x30) = *(unsigned int *)(param_1 + 0x2c);
-  *(int *)(param_1 + 0x34) = *(int *)(param_1 + 0x40) + temp_v7 * 0x40;
-  FUN_001a2420(param_1 + 0x58,*(int *)(param_1 + 0x40) + temp_v7 * 0x200 + 0x800);
-  temp_v2 = temp_v7 * 0x80 + 0x200 + *(int *)(param_1 + 0x40);
-  *(int *)(param_1 + 0x5c) = temp_v2;
-  *(int *)(param_1 + 0x60) = temp_v2 + 0x40;
+  *(int *)(param_1 + 0x34) = *(int *)(param_1 + 0x40) + temp_v3 * 0x40;
+  FUN_001a2420(param_1 + 0x58,*(int *)(param_1 + 0x40) + temp_v3 * 0x200 + 0x800);
+  temp_v0 = temp_v3 * 0x80 + 0x200 + *(int *)(param_1 + 0x40);
+  *(int *)(param_1 + 0x5c) = temp_v0;
+  *(int *)(param_1 + 0x60) = temp_v0 + 0x40;
   if (temp_v1 == 0x2a07) {
     *(unsigned char *)(param_1 + 0x75) = 1;
   }
   else {
     *(unsigned char *)(param_1 + 0x75) = 0;
   }
-  temp_v9 = 4;
-  temp_v10 = &LAB_00100ad9;
-  temp_v5 = 0x5109d502;
-  temp_v11 = &LAB_00100df3;
-  temp_v12 = &LAB_00100ded;
-  temp_v4 = (int *)(param_1 + 0x1078);
-  temp_v6 = 0xfffffffe;
-  uStack_34 = 0;
-  temp_v1 = param_1 + 0x6c;
-  temp_v13 = param_1;
-  FUN_002fb0d4(temp_v1,&temp_v9,FUN_001a26e4,&temp_v13);
-  if (temp_v1 < 0) {
+  temp_v5 = 4;
+  temp_v6 = &LAB_00100ad9;
+  temp_v7 = &LAB_00100df3;
+  temp_v8 = &LAB_00100ded;
+  temp_v0 = param_1 + 0x6c;
+  temp_v9 = param_1;
+  FUN_002fb0d4(temp_v0,&temp_v5,FUN_001a26e4,&temp_v9);
+  if (temp_v0 < 0) {
     FUN_002e3140();
   }
   nn_os_CriticalSection_Leave(param_1);

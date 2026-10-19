@@ -2,6 +2,21 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
+#ifndef ROMWRIGHT_FLOAT_BITS_DEFINED
+#define ROMWRIGHT_FLOAT_BITS_DEFINED
+static unsigned int romwright_f2u(float value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.f = value;
+    return bits.u;
+}
+static float romwright_u2f(unsigned int value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.u = value;
+    return bits.f;
+}
+#endif
 #ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
@@ -99,7 +114,7 @@ void FUN_0051bec8(float *param_1,float *param_2)
       in_s0 = in_s0 - temp_v11;
     }
   }
-  pfVar5 = (float *)*param_2;
+  pfVar5 = (float *)romwright_f2u((float)(*param_2));
   if (pfVar5 == (float *)0x0) {
     temp_v3 = (float)VectorSignedToFloat(*(unsigned short *)((int)param_1 + 0xe) - 1,(unsigned char)(temp_v4 >> 0x16) & 3
                                       );
@@ -122,7 +137,7 @@ void FUN_0051bec8(float *param_1,float *param_2)
     temp_v6 = *pfVar5;
     temp_v3 = *param_1;
     temp_v8 = pfVar5[-3];
-    *param_2 = (float)(pfVar5 + -3);
+    *param_2 = romwright_u2f((unsigned int)((pfVar5 + -3)));
     temp_v0 = *(char *)(param_1 + 3);
     temp_v6 = (temp_v3 - temp_v6) + temp_v11;
     temp_v11 = (temp_v3 - temp_v8) + temp_v11;
@@ -180,7 +195,7 @@ void FUN_0051bec8(float *param_1,float *param_2)
     temp_v3 = *param_1;
     temp_v6 = *pfVar5;
     temp_v8 = pfVar5[3];
-    *param_2 = (float)(pfVar5 + 3);
+    *param_2 = romwright_u2f((unsigned int)((pfVar5 + 3)));
     temp_v0 = *(char *)(param_1 + 3);
     temp_v6 = temp_v6 + temp_v3 + temp_v11;
     temp_v11 = temp_v8 + temp_v3 + temp_v11;

@@ -76,7 +76,7 @@ void FUN_0049fe58(unsigned int param_1)
       *(short *)(temp_v4 + 0x2a) = temp_v3;
       temp_v1 = (temp_v11 & 0xfffffff) | ((unsigned int)(temp_v14 < temp_v18) << 0x1f) |
               ((unsigned int)(temp_v14 == temp_v18) << 0x1e);
-      temp_v11 = temp_v1 | ((unsigned int)(NAN(temp_v14) || NAN(temp_v18)) << 0x1c);
+      temp_v11 = temp_v1 | ((unsigned int)((temp_v14 != temp_v14) || (temp_v18 != temp_v18)) << 0x1c);
       temp_v2 = (unsigned char)(temp_v1 >> 0x18);
       if (!(unsigned char)((temp_v2 >> 6) & 1) && temp_v2 >> 7 == ((unsigned char)(temp_v11 >> 0x1c) & 1)) {
         FUN_00408184(0x17,(int)temp_v15 - temp_v16);
@@ -146,7 +146,7 @@ void FUN_0049fe58(unsigned int param_1)
           temp_v15 = temp_v14 - temp_v15;
           temp_v1 = (temp_v11 & 0xfffffff) | ((unsigned int)(temp_v15 < temp_v18) << 0x1f) |
                   ((unsigned int)(temp_v15 == temp_v18) << 0x1e);
-          temp_v11 = temp_v1 | ((unsigned int)(NAN(temp_v15) || NAN(temp_v18)) << 0x1c);
+          temp_v11 = temp_v1 | ((unsigned int)((temp_v15 != temp_v15) || (temp_v18 != temp_v18)) << 0x1c);
           temp_v2 = (unsigned char)(temp_v1 >> 0x18);
           if (!(unsigned char)((temp_v2 >> 6) & 1) && temp_v2 >> 7 == ((unsigned char)(temp_v11 >> 0x1c) & 1)) {
             FUN_00408184(0x17,(int)temp_v14 - temp_v6);

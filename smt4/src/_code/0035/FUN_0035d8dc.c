@@ -29,6 +29,8 @@ unsigned int FUN_0035d8dc(unsigned int *param_1,int *param_2)
 
 {
 /* irregular: 8 native warning(s); review required */
+  unsigned int unique0x100003ab;
+  unsigned int unique0x1000038b;
   int *piVar1;
   int temp_v0;
   unsigned char *puVar3;

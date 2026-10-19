@@ -11,9 +11,6 @@ typedef struct {
 
 extern unsigned char LAB_0042b478; /* 0x42b478 */
 extern unsigned char DAT_00558438; /* 0x558438 */
-extern unsigned char DAT_0056d6c0; /* 0x56d6c0 */
-extern unsigned char DAT_0056d7c0; /* 0x56d7c0 */
-extern unsigned char DAT_0056d8c0; /* 0x56d8c0 */
 extern unsigned int DAT_005893a8; /* 0x5893a8 */
 extern unsigned char *DAT_0062d34c; /* 0x62d34c */
 extern unsigned int DAT_0062d350; /* 0x62d350 */
@@ -51,13 +48,13 @@ extern unsigned char DAT_0062d410; /* 0x62d410 */
 /* Supplied declaration required: FUN_00188b60. */
 /* Supplied declaration required: FUN_002f4370. */
 /* Supplied declaration required: FUN_002f5020. */
-/* Supplied declaration required: nn_fnd_UnitHeapBase_Initialize. */
+extern void nn_fnd_UnitHeapBase_Initialize(unsigned int, unsigned int, unsigned int, unsigned int, int, unsigned int);
 
 
 void FUN_00511c60(void)
 
 {
-/* irregular: 4 native warning(s); review required */
+/* irregular: 3 native warning(s); review required */
   FUN_002f5020(&DAT_0062d410,&LAB_0042b478,0x10,0x20);
   DAT_005893a8 = 0;
   DAT_0062d400 = 0;
@@ -72,7 +69,7 @@ void FUN_00511c60(void)
   DAT_0062d380 = 0;
   DAT_0062d384 = 0xffffffff;
   DAT_0062d34c = &DAT_00558438;
-  nn_fnd_UnitHeapBase_Initialize(&DAT_0062d34c,0x10,&DAT_0056d6c0,0x100,4,0);
+  nn_fnd_UnitHeapBase_Initialize((unsigned int)&DAT_0062d34c,0x10,0x56d6c0,0x100,4,0);
   FUN_00188b60(&DAT_0062d37c);
   DAT_0062d38c = 0;
   DAT_0062d390 = 0;
@@ -84,7 +81,7 @@ void FUN_00511c60(void)
   DAT_0062d3bc = 0;
   DAT_0062d3c0 = 0xffffffff;
   DAT_0062d388 = &DAT_00558438;
-  nn_fnd_UnitHeapBase_Initialize(&DAT_0062d388,8,&DAT_0056d7c0,0x100,4,0);
+  nn_fnd_UnitHeapBase_Initialize((unsigned int)&DAT_0062d388,8,0x56d7c0,0x100,4,0);
   FUN_00188b60(&DAT_0062d3b8);
   DAT_0062d3c8 = 0;
   DAT_0062d3cc = 0;
@@ -96,7 +93,7 @@ void FUN_00511c60(void)
   DAT_0062d3f8 = 0;
   DAT_0062d3fc = 0xffffffff;
   DAT_0062d3c4 = &DAT_00558438;
-  nn_fnd_UnitHeapBase_Initialize(&DAT_0062d3c4,8,&DAT_0056d8c0,0x80,4,0);
+  nn_fnd_UnitHeapBase_Initialize((unsigned int)&DAT_0062d3c4,8,0x56d8c0,0x80,4,0);
   FUN_00188b60(&DAT_0062d3f4);
   FUN_002f4370(&DAT_0062d3c4,0x1aa330,0x100000);
   return;

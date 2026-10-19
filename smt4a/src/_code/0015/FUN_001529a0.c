@@ -45,7 +45,7 @@ FUN_001529a0(unsigned int param_1,unsigned int *param_2,unsigned int *param_3,un
   unsigned int in_s2;
   int *temp_v4;
   char temp_v5;
-  unsigned char uStack_53 [3];
+  unsigned int uStack_53;
   unsigned char temp_v6;
   unsigned char temp_v7;
   unsigned int temp_v8;

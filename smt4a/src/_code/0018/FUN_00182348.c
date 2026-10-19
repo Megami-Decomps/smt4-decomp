@@ -57,7 +57,7 @@ void FUN_00182348(int param_1)
   }
   if (0.0f > temp_v13) {
     temp_v8 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v14 < temp_v11) << 0x1f);
-    if (romwright_subpiece_4_1_0(temp_v8 >> 0x1f,0) == (NAN(temp_v14) || NAN(temp_v11))) {
+    if (romwright_subpiece_4_1_0(temp_v8 >> 0x1f,0) == ((temp_v14 != temp_v14) || (temp_v11 != temp_v11))) {
 LAB_001823d0:
       if (*(char *)((int)pfVar7 + 10) != '\0') {
         if (temp_v1 != '\0') {

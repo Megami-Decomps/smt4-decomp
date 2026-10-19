@@ -8,14 +8,14 @@ extern unsigned int DAT_006426b4; /* 0x6426b4 */
 
 /* Supplied declaration required: FUN_001bcd48. */
 extern int FUN_004320e4(unsigned int);
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 int FUN_0042d6a8(void)
 
 {
-/* irregular: 3 native warning(s); review required */
+/* irregular: 1 native warning(s); review required */
   int temp_v0;
   
   temp_v0 = 0;
@@ -23,15 +23,15 @@ int FUN_0042d6a8(void)
     temp_v0 = -0x375ef410;
   }
   else if (DAT_005b4488 == '\0') {
-    nn_os_CriticalSection_Enter(&DAT_006426b4);
+    nn_os_CriticalSection_Enter((unsigned int)&DAT_006426b4);
     temp_v0 = FUN_004320e4(0);
     if (temp_v0 < 0) {
-      nn_os_CriticalSection_Leave(&DAT_006426b4);
+      nn_os_CriticalSection_Leave((unsigned int)&DAT_006426b4);
       return temp_v0;
     }
     FUN_001bcd48(16000000,0);
     DAT_005b4488 = '\x01';
-    nn_os_CriticalSection_Leave(&DAT_006426b4);
+    nn_os_CriticalSection_Leave((unsigned int)&DAT_006426b4);
   }
   return temp_v0;
 }

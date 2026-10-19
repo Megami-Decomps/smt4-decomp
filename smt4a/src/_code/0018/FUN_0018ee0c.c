@@ -45,7 +45,7 @@ void FUN_0018ee0c(int param_1,unsigned int param_2)
       temp_v5 = temp_v8;
       if (((unsigned char)((temp_v2 >> 5) & 1) && !(unsigned char)(temp_v2 >> 6)) &&
          (temp_v1 = temp_v1 | ((unsigned int)(temp_v4 < in_s1) << 0x1f) | ((unsigned int)(temp_v4 == in_s1) << 0x1e),
-         in_fpscr = temp_v1 | ((unsigned int)(NAN(temp_v4) || NAN(in_s1)) << 0x1c),
+         in_fpscr = temp_v1 | ((unsigned int)((temp_v4 != temp_v4) || (in_s1 != in_s1)) << 0x1c),
          temp_v2 = (unsigned char)(temp_v1 >> 0x18), temp_v5 = temp_v9,
          (unsigned char)((temp_v2 >> 6) & 1) || temp_v2 >> 7 != ((unsigned char)(in_fpscr >> 0x1c) & 1))) {
         temp_v5 = (in_s1 - temp_v4) / temp_v7;
@@ -67,7 +67,7 @@ void FUN_0018ee0c(int param_1,unsigned int param_2)
       temp_v5 = temp_v8;
       if (((unsigned char)((temp_v2 >> 5) & 1) && !(unsigned char)(temp_v2 >> 6)) &&
          (temp_v1 = temp_v1 | ((unsigned int)(temp_v4 < in_s1) << 0x1f) | ((unsigned int)(temp_v4 == in_s1) << 0x1e),
-         in_fpscr = temp_v1 | ((unsigned int)(NAN(temp_v4) || NAN(in_s1)) << 0x1c),
+         in_fpscr = temp_v1 | ((unsigned int)((temp_v4 != temp_v4) || (in_s1 != in_s1)) << 0x1c),
          temp_v2 = (unsigned char)(temp_v1 >> 0x18), temp_v5 = temp_v9,
          (unsigned char)((temp_v2 >> 6) & 1) || temp_v2 >> 7 != ((unsigned char)(in_fpscr >> 0x1c) & 1))) {
         temp_v5 = -(((temp_v4 - in_s0) * in_s2) / temp_v7);
@@ -90,7 +90,7 @@ void FUN_0018ee0c(int param_1,unsigned int param_2)
       temp_v5 = temp_v8;
       if (((unsigned char)((temp_v2 >> 5) & 1) && !(unsigned char)(temp_v2 >> 6)) &&
          (temp_v1 = temp_v1 | ((unsigned int)(temp_v4 < in_s1) << 0x1f) | ((unsigned int)(temp_v4 == in_s1) << 0x1e),
-         in_fpscr = temp_v1 | ((unsigned int)(NAN(temp_v4) || NAN(in_s1)) << 0x1c),
+         in_fpscr = temp_v1 | ((unsigned int)((temp_v4 != temp_v4) || (in_s1 != in_s1)) << 0x1c),
          temp_v2 = (unsigned char)(temp_v1 >> 0x18), temp_v5 = temp_v9,
          (unsigned char)((temp_v2 >> 6) & 1) || temp_v2 >> 7 != ((unsigned char)(in_fpscr >> 0x1c) & 1))) {
         temp_v5 = ((temp_v4 - in_s0) * in_s2) / temp_v7;

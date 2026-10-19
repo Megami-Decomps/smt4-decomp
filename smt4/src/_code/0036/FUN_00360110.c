@@ -4,13 +4,12 @@
 
 extern unsigned char DAT_004e8568; /* 0x4e8568 */
 
-/* Supplied declaration required: nn_snd_CTR_VoiceManager_SetPriority. */
+extern void nn_snd_CTR_VoiceManager_SetPriority(unsigned int, unsigned int, int);
 
 
 void FUN_00360110(int param_1,int param_2)
 
 {
-/* irregular: 1 native warning(s); review required */
   if (param_2 >= 0x8000) {
     param_2 = 0x7fff;
   }
@@ -18,6 +17,6 @@ void FUN_00360110(int param_1,int param_2)
     param_2 = 0;
   }
   *(int *)(param_1 + 0x20) = param_2;
-  nn_snd_CTR_VoiceManager_SetPriority(&DAT_004e8568,param_1,param_2);
+  nn_snd_CTR_VoiceManager_SetPriority((unsigned int)&DAT_004e8568,param_1,param_2);
   return;
 }

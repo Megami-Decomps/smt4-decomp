@@ -6,11 +6,11 @@
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 
 
-int nn_gxlow_CTR_Gpu_ImportDisplayCaptureInfo(int *param_1,unsigned int *param_2)
+unsigned int nn_gxlow_CTR_Gpu_ImportDisplayCaptureInfo(unsigned int *param_1,unsigned int *param_2)
 
 {
 /* irregular: 2 native warning(s); review required */
-  int temp_v0;
+  unsigned int temp_v0;
   unsigned int temp_v1;
   unsigned int temp_v2;
   unsigned int temp_v3;
@@ -24,7 +24,7 @@ int nn_gxlow_CTR_Gpu_ImportDisplayCaptureInfo(int *param_1,unsigned int *param_2
   *(unsigned int *)(temp_v4 + 0x80) = 0x180000;
   temp_v0 = *param_1;
   software_interrupt(0x32);
-  if (-1 < temp_v0) {
+  if (-1 < (int)temp_v0) {
     temp_v1 = *(unsigned int *)(temp_v4 + 0x88);
     temp_v2 = *(unsigned int *)(temp_v4 + 0x8c);
     temp_v3 = *(unsigned int *)(temp_v4 + 0x90);
@@ -40,7 +40,7 @@ int nn_gxlow_CTR_Gpu_ImportDisplayCaptureInfo(int *param_1,unsigned int *param_2
     param_2[4] = temp_v5;
     param_2[5] = temp_v6;
     param_2[6] = temp_v7;
-    temp_v0 = *(int *)(temp_v4 + 0x84);
+    temp_v0 = *(unsigned int *)(temp_v4 + 0x84);
   }
   return temp_v0;
 }

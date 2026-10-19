@@ -228,7 +228,7 @@ void FUN_003bd3d8(fn_003bd3d8_arg0 *param_1)
                 temp_v29 = pfVar24[1];
                 temp_v17 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v29 < temp_v37) << 0x1f) |
                          ((unsigned int)(temp_v29 == temp_v37) << 0x1e);
-                in_fpscr = temp_v17 | ((unsigned int)(NAN(temp_v29) || NAN(temp_v37)) << 0x1c);
+                in_fpscr = temp_v17 | ((unsigned int)((temp_v29 != temp_v29) || (temp_v37 != temp_v37)) << 0x1c);
                 temp_v2 = (unsigned char)(temp_v17 >> 0x18);
                 temp_v24 = (float)VectorSignedToFloat(temp_v21,(unsigned char)(in_fpscr >> 0x16) & 3);
                 if (!((unsigned char)((temp_v2 >> 6) & 1) || temp_v2 >> 7 != ((unsigned char)(in_fpscr >> 0x1c) & 1))) {

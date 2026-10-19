@@ -37,7 +37,7 @@ unsigned int * FUN_0034afd4(unsigned int *param_1,unsigned int param_2)
   param_1[10] = temp_v0;
   param_1[0xb] = temp_v0;
   param_1[3] = temp_v0;
-  param_1[4] = (float)param_1[0xd] * 0.5f;
+  *(float *)&param_1[4] = (float)param_1[0xd] * 0.5f;
   param_1[5] = temp_v0;
   param_1[0x24] = param_1[6];
   param_1[0x25] = param_1[7];

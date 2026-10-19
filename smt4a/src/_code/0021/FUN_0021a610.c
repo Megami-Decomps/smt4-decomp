@@ -14,7 +14,6 @@ struct fn_0021a610_arg0 {
 };
 
 /* Supplied declaration required: FUN_0021a5f0. */
-extern void FUN_0021a610(fn_0021a610_arg0 *);
 
 
 void FUN_0021a610(fn_0021a610_arg0 *param_1)

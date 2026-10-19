@@ -20,18 +20,17 @@ extern unsigned char DAT_0062d6f8; /* 0x62d6f8 */
 
 extern unsigned int FUN_0023c13c(fn_00513a68_arg0 *, unsigned int);
 extern unsigned int VX2DecoderGetV(fn_00513a68_arg0 *, unsigned int);
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 unsigned int FUN_00513a68(fn_00513a68_arg0 *param_1,unsigned int *param_2)
 
 {
-/* irregular: 2 native warning(s); review required */
   unsigned int temp_v0;
   int temp_v1;
   
-  nn_os_CriticalSection_Enter(&DAT_0062d6f8);
+  nn_os_CriticalSection_Enter((unsigned int)&DAT_0062d6f8);
   if (param_1->field_0x38 != 0) {
     temp_v1 = param_1->field_0x34;
     *param_2 = *(unsigned int *)(param_1->field_0x28 + temp_v1 * 4);
@@ -47,9 +46,9 @@ unsigned int FUN_00513a68(fn_00513a68_arg0 *param_1,unsigned int *param_2)
     param_2[8] = *(unsigned int *)(param_1->field_0x2c + temp_v1 * 4);
     param_2[9] = *(unsigned int *)(param_1->field_0x2c + temp_v1 * 4);
     param_2[10] = 1;
-    nn_os_CriticalSection_Leave(&DAT_0062d6f8);
+    nn_os_CriticalSection_Leave((unsigned int)&DAT_0062d6f8);
     return 1;
   }
-  nn_os_CriticalSection_Leave(&DAT_0062d6f8);
+  nn_os_CriticalSection_Leave((unsigned int)&DAT_0062d6f8);
   return 0;
 }

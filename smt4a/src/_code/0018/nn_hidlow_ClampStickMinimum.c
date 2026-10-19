@@ -24,8 +24,7 @@ static float romwright_sqrt_4(float value)
 
 
 void nn_hidlow_ClampStickMinimum
-               (unsigned short *param_1,unsigned short *param_2,int param_3,int param_4,unsigned int param_5,
-               int param_6)
+               (short *param_1,short *param_2,int param_3,int param_4,int param_5,int param_6)
 
 {
 /* irregular: irregular input(s): in_fpscr; 3 native warning(s); review required */
@@ -83,7 +82,7 @@ void nn_hidlow_ClampStickMinimum
       temp_v3 = romwright_sqrt_4(temp_v4);
       temp_v7 = temp_v3 - romwright_sqrt_4(temp_v2);
       temp_v5 = (float)VectorSignedToFloat(param_6 - 0x28,(unsigned char)(temp_v0 >> 0x16) & 3);
-      if (romwright_subpiece_4_1_0(temp_v0 >> 0x1f,0) == (NAN(temp_v4) || NAN(temp_v8))) {
+      if (romwright_subpiece_4_1_0(temp_v0 >> 0x1f,0) == ((temp_v4 != temp_v4) || (temp_v8 != temp_v8))) {
         temp_v4 = (float)VectorSignedToFloat(param_3,(unsigned char)(temp_v0 >> 0x16) & 3);
         temp_v2 = (float)VectorSignedToFloat(param_4,(unsigned char)(temp_v0 >> 0x16) & 3);
         *param_1 = (short)(int)((temp_v4 * temp_v5) / temp_v3);

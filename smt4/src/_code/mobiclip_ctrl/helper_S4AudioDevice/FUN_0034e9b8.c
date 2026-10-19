@@ -30,16 +30,16 @@ extern unsigned int DAT_004c4100; /* 0x4c4100 */
 /* Supplied declaration required: FUN_002c40f8. */
 /* Supplied declaration required: FUN_002c415c. */
 /* Supplied declaration required: FUN_002c526c. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
-/* Supplied declaration required: nn_os_Thread_FinalizeImpl. */
-/* Supplied declaration required: nn_snd_CTR_Voice_SetState. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
+extern void nn_os_Thread_FinalizeImpl(unsigned int);
+extern void nn_snd_CTR_Voice_SetState(unsigned int, int);
 
 
 void FUN_0034e9b8(void)
 
 {
-/* irregular: 1 goto(s); 14 native warning(s); review required */
+/* irregular: 1 goto(s); 10 native warning(s); review required */
   int temp_v0;
   unsigned char *puVar2;
   unsigned int temp_v1;
@@ -50,7 +50,7 @@ void FUN_0034e9b8(void)
   if (DAT_0044d0fc == (int *)0x0) {
     return;
   }
-  nn_os_CriticalSection_Enter(&DAT_004c40f8);
+  nn_os_CriticalSection_Enter((unsigned int)&DAT_004c40f8);
   temp_v1 = 0;
   if (temp_v1 < DAT_0044d10c) {
     do {
@@ -61,7 +61,7 @@ void FUN_0034e9b8(void)
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < DAT_0044d10c);
   }
-  nn_os_CriticalSection_Leave(&DAT_004c40f8);
+  nn_os_CriticalSection_Leave((unsigned int)&DAT_004c40f8);
   DAT_0044d0f8 = 0;
   iStack_20 = DAT_0044d128;
   puVar2 = temp_v2;
@@ -70,7 +70,7 @@ void FUN_0034e9b8(void)
     FUN_002c526c();
   }
   DAT_0044d12c = 1;
-  nn_os_Thread_FinalizeImpl(&DAT_0044d128);
+  nn_os_Thread_FinalizeImpl((unsigned int)&DAT_0044d128);
   if (DAT_0044d128 != 0) {
     software_interrupt(0x23);
     DAT_0044d128 = 0;
@@ -97,7 +97,7 @@ LAB_0034eb38:
   }
   do {
     if (temp_v1 < DAT_0044d10c) {
-      nn_os_CriticalSection_Enter(&DAT_004c40f8);
+      nn_os_CriticalSection_Enter((unsigned int)&DAT_004c40f8);
       piVar4 = (int *)(DAT_0044d100 + temp_v1 * 0x70);
       if (*piVar4 != 0) {
         FUN_002bd430();
@@ -107,7 +107,7 @@ LAB_0034eb38:
         (**(romwright_code **)(*DAT_0044d0fc + 4))();
         piVar4[1] = 0;
       }
-      nn_os_CriticalSection_Leave(&DAT_004c40f8);
+      nn_os_CriticalSection_Leave((unsigned int)&DAT_004c40f8);
     }
     do {
       temp_v1 = temp_v1 + 1;

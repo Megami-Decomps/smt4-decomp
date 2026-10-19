@@ -192,7 +192,7 @@ void FUN_001d3018(void)
                ((unsigned int)(temp_v15 == temp_v18) << 0x1e);
       *(float *)(temp_v7 + 0xb4) = temp_v15;
       temp_v0 = (unsigned char)(temp_v11 >> 0x18);
-      if ((!((unsigned char)((temp_v0 >> 6) & 1) || (unsigned char)(temp_v0 >> 7) != (NAN(temp_v15) || NAN(temp_v18)))) &&
+      if ((!((unsigned char)((temp_v0 >> 6) & 1) || (unsigned char)(temp_v0 >> 7) != ((temp_v15 != temp_v15) || (temp_v18 != temp_v18)))) &&
          (temp_v11 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v10 <= temp_v15) << 0x1d),
          !romwright_subpiece_4_1_0(temp_v11 >> 0x1d,0))) {
         *(unsigned char *)(temp_v7 + 0xb2) = 1;

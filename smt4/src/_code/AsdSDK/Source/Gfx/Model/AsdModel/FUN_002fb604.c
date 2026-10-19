@@ -99,7 +99,7 @@ LAB_002fb668:
             }
             piVar9 = (int *)0x0;
 LAB_002fb770:
-            temp_v5 = romwright_piece_3_1(temp_v5._1_3_,1);
+            temp_v5 = romwright_piece_3_1((((unsigned int)(temp_v5) >> 8) & 0xffffffU),1);
             piVar9[0x87] = temp_v5;
           }
           else if (DAT_00464af1 != '\0') {

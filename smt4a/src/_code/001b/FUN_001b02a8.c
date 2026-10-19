@@ -37,55 +37,54 @@ extern unsigned int DAT_0061a628; /* 0x61a628 */
 /* Supplied declaration required: FUN_001b6598. */
 /* Supplied declaration required: FUN_002f5020. */
 /* Supplied declaration required: nn_applet_CTR_detail_CaptureDisplayBuffer. */
-/* Supplied declaration required: nn_applet_CTR_detail_GetDisplayInfo. */
+extern void nn_applet_CTR_detail_GetDisplayInfo(unsigned int);
 /* Supplied declaration required: nn_os_TransferMemoryBlock_Finalize. */
 
 
 unsigned int FUN_001b02a8(unsigned int param_1)
 
 {
-/* irregular: 12 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
+/* irregular: 10 native warning(s); review required */
+  int temp_v0;
+  unsigned int temp_v1;
   unsigned int uStack_5c;
-  int temp_v3;
+  int temp_v2;
+  unsigned int temp_v3;
   unsigned int temp_v4;
   unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned char temp_v7;
-  int temp_v8;
-  unsigned char temp_v9;
-  int temp_v10;
+  unsigned char temp_v6;
+  int temp_v7;
+  unsigned char temp_v8;
+  int temp_v9;
   int iStack_34;
+  unsigned int temp_v10;
   unsigned int temp_v11;
-  unsigned int temp_v12;
   
-  FUN_002f5020(&temp_v10,&LAB_001a2a68,0x10,2);
-  nn_applet_CTR_detail_GetDisplayInfo(&temp_v10);
-  FUN_001a2b80(param_1,temp_v0,DAT_005891c8,DAT_005891cc);
-  DAT_0061a61c = temp_v11;
-  DAT_0061a628 = temp_v12;
-  DAT_0061a610 = temp_v10 != iStack_34;
+  FUN_002f5020(&temp_v9,&LAB_001a2a68,0x10,2);
+  nn_applet_CTR_detail_GetDisplayInfo((unsigned int)&temp_v9);
+  FUN_001a2b80(param_1);
+  DAT_0061a61c = temp_v10;
+  DAT_0061a628 = temp_v11;
+  DAT_0061a610 = temp_v9 != iStack_34;
   FUN_001a30ec(&DAT_0061a60c);
+  temp_v2 = 0;
   temp_v3 = 0;
   temp_v4 = 0;
   temp_v5 = 0;
   temp_v6 = 0;
   temp_v7 = 0;
   temp_v8 = 0;
-  temp_v9 = 0;
-  temp_v2 = DAT_005891c8;
+  temp_v1 = DAT_005891c8;
   uStack_5c = DAT_005891cc;
   FUN_001a3338(param_1,2,&DAT_0061a60c,0x20,DAT_005891bc);
-  temp_v1 = 0;
-  FUN_001a2e74(param_1,&temp_v1);
-  FUN_001b6598(&temp_v3,temp_v1,DAT_0061a60c,3);
-  nn_applet_CTR_detail_CaptureDisplayBuffer(temp_v5,&temp_v10,&DAT_0061a60c);
-  nn_os_TransferMemoryBlock_Finalize(&temp_v3);
+  temp_v0 = 0;
+  FUN_001a2e74(param_1,&temp_v0);
+  FUN_001b6598(&temp_v2,temp_v0,DAT_0061a60c,3);
+  nn_applet_CTR_detail_CaptureDisplayBuffer(temp_v4,&temp_v9,&DAT_0061a60c);
+  nn_os_TransferMemoryBlock_Finalize(&temp_v2);
   FUN_001a3220(&DAT_0061a60c,0x20);
-  nn_os_TransferMemoryBlock_Finalize(&temp_v3);
-  if (temp_v8 != 0) {
+  nn_os_TransferMemoryBlock_Finalize(&temp_v2);
+  if (temp_v7 != 0) {
     software_interrupt(0x23);
   }
   return 0;

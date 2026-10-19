@@ -250,7 +250,7 @@ void FUN_00234b30(void)
                 temp_v6 = in_fpscr & 0xfffffff;
                 temp_v7 = temp_v6 | ((unsigned int)(temp_v14 < temp_v15) << 0x1f) |
                         ((unsigned int)(temp_v14 == temp_v15) << 0x1e);
-                in_fpscr = temp_v7 | ((unsigned int)(NAN(temp_v14) || NAN(temp_v15)) << 0x1c);
+                in_fpscr = temp_v7 | ((unsigned int)((temp_v14 != temp_v14) || (temp_v15 != temp_v15)) << 0x1c);
                 temp_v1 = (unsigned char)(temp_v7 >> 0x18);
                 if (((!(unsigned char)((temp_v1 >> 6) & 1) && temp_v1 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) &&
                     (in_fpscr = temp_v6 | ((unsigned int)(temp_v17 <= temp_v14) << 0x1d),

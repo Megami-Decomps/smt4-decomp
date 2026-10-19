@@ -117,7 +117,7 @@ void FUN_0010bd38(unsigned int param_1,int param_2,int param_3)
       FUN_002ed84a(param_3,param_2 + 100);
     }
     temp_v6 = *(unsigned int *)(param_3 + 8);
-    temp_v2[0] = romwright_piece_1_1(temp_v2[0]._1_1_,*(unsigned char *)(param_2 + 0x25));
+    temp_v2[0] = romwright_piece_1_1((((unsigned int)(temp_v2[0]) >> 8) & 0xffU),*(unsigned char *)(param_2 + 0x25));
     temp_v7 = (unsigned int)(*(unsigned char *)(param_2 + 0x25) >> 4);
     if (*(int *)(param_2 + 0xd8) != 0) {
       temp_v0 = FUN_002eac34();

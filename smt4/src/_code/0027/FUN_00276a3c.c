@@ -432,7 +432,7 @@ void FUN_00276a3c(void)
         temp_v7 = temp_v10 < temp_v11;
         temp_v8 = temp_v10 == temp_v11;
         temp_v5 = temp_v11 <= temp_v10;
-        temp_v6 = NAN(temp_v10) || NAN(temp_v11);
+        temp_v6 = (temp_v10 != temp_v10) || (temp_v11 != temp_v11);
       }
       if ((!(!temp_v8 && temp_v7 == temp_v6)) && (!temp_v5)) {
         temp_v16 = (float)DAT_004474f4[0x28] + 8.0f;

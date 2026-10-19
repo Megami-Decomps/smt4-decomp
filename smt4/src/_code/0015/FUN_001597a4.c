@@ -4,13 +4,12 @@
 
 extern unsigned char DAT_004eac5c; /* 0x4eac5c */
 
-/* Supplied declaration required: nn_os_AddressSpaceManager_Free. */
+extern void nn_os_AddressSpaceManager_Free(unsigned int, unsigned int);
 
 
 void FUN_001597a4(unsigned int param_1)
 
 {
-/* irregular: 1 native warning(s); review required */
-  nn_os_AddressSpaceManager_Free(&DAT_004eac5c,param_1);
+  nn_os_AddressSpaceManager_Free((unsigned int)&DAT_004eac5c,param_1);
   return;
 }

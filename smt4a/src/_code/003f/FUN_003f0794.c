@@ -29,20 +29,20 @@ extern char *DAT_0057396c; /* 0x57396c */
 /* Supplied declaration required: FUN_00470e64. */
 /* Supplied declaration required: FUN_0047ec9c. */
 /* Supplied declaration required: FUN_0047f778. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 void FUN_003f0794(int param_1)
 
 {
-/* irregular: 7 unstructured edge(s); 8 goto(s); 12 native warning(s); review required */
+/* irregular: 7 unstructured edge(s); 8 goto(s); 10 native warning(s); review required */
   unsigned short temp_v0;
   unsigned int temp_v1;
   char *pcVar3;
   char *pcVar4;
   
-  nn_os_CriticalSection_Enter();
+  nn_os_CriticalSection_Enter(param_1 + 0x4d0c);
   do {
     temp_v0 = *(unsigned short *)(param_1 + 0x4d0a);
     temp_v1 = (unsigned int)temp_v0;

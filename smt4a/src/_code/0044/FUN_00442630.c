@@ -11,24 +11,24 @@ extern int DAT_00589384; /* 0x589384 */
 extern unsigned int DAT_0062d2a4; /* 0x62d2a4 */
 
 extern int FUN_00442280(void);
-/* Supplied declaration required: FUN_00442a64. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-extern int nn_os_CriticalSection_Leave(unsigned int *);
+extern unsigned int FUN_00442a64(void);
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
-void FUN_00442630(void)
+unsigned int FUN_00442630(void)
 
 {
-/* irregular: 2 native warning(s); review required */
   int temp_v0;
-  unsigned char temp_v1;
+  unsigned int temp_v1;
+  unsigned char temp_v2;
   
-  nn_os_CriticalSection_Enter(&DAT_0062d2a4);
-  temp_v1 = DAT_00589384 == 0;
-  temp_v0 = nn_os_CriticalSection_Leave(&DAT_0062d2a4);
-  if ((temp_v1) && (temp_v0 = FUN_00442280(), temp_v0 == 0)) {
-    return;
+  nn_os_CriticalSection_Enter((unsigned int)&DAT_0062d2a4);
+  temp_v2 = DAT_00589384 == 0;
+  nn_os_CriticalSection_Leave((unsigned int)&DAT_0062d2a4);
+  if ((temp_v2) && (temp_v0 = FUN_00442280(), temp_v0 == 0)) {
+    return 0xd8a0c7f8;
   }
-  FUN_00442a64(temp_v0);
-  return;
+  temp_v1 = FUN_00442a64();
+  return temp_v1;
 }

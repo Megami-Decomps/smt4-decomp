@@ -7,7 +7,6 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_1_stack;
 
-/* Unsupported intrinsic, declaration required: while (COPY). */
 extern int FUN_00187168(void);
 /* Supplied declaration required: FUN_00192550. */
 extern int FUN_001ab888(void);
@@ -19,7 +18,7 @@ extern int FUN_004ccbf0(unsigned short);
 unsigned int FUN_0048144c(unsigned int param_1)
 
 {
-/* irregular: 2 goto(s); 3 native warning(s); review required */
+/* irregular: 2 goto(s); 2 native warning(s); review required */
   unsigned int temp_v0;
   int temp_v1;
   int temp_v2;

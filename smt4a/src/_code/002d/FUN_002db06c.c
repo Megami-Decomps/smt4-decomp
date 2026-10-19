@@ -359,12 +359,12 @@ LAB_002db724:
             temp_v13 = (float)DAT_00581288[0x76];
             temp_v6 = temp_v13 < temp_v10;
             temp_v7 = temp_v13 == temp_v10;
-            temp_v8 = NAN(temp_v13) || NAN(temp_v10);
+            temp_v8 = (temp_v13 != temp_v13) || (temp_v10 != temp_v10);
             if (!temp_v7 && !temp_v6) {
               temp_v15 = (float)DAT_00581288[0x78];
               temp_v6 = temp_v15 < temp_v10;
               temp_v7 = temp_v15 == temp_v10;
-              temp_v8 = NAN(temp_v15) || NAN(temp_v10);
+              temp_v8 = (temp_v15 != temp_v15) || (temp_v10 != temp_v10);
             }
             if (!(temp_v7 || temp_v6 != temp_v8)) {
               temp_v13 = DAT_0058128c / DAT_005f19ac;

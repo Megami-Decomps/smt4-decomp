@@ -29,7 +29,7 @@ void FUN_0031b96c(void)
   if (pcVar1 != (romwright_code *)0x0) {
     FUN_002e6354();
     DAT_00570ab4 = pcVar1;
-    pcVar1[0x6c] = (romwright_code)0x0;
+    ((unsigned char *)pcVar1)[0x6c] = (unsigned char)0x0;
   }
   return;
 }

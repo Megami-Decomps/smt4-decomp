@@ -8,19 +8,20 @@ extern int DAT_0044e668; /* 0x44e668 */
 extern int DAT_0044e66c; /* 0x44e66c */
 
 /* Supplied declaration required: FUN_0011bde8. */
-/* Supplied declaration required: nn_cfg_CTR_IsDebugMode. */
+extern unsigned char nn_cfg_CTR_IsDebugMode(void);
 
 
 void FUN_0010f764(int param_1)
 
 {
-/* irregular: 2 native warning(s); review required */
+/* irregular: 1 native warning(s); review required */
+  unsigned char temp_v0;
+  
   FUN_0011bde8();
-  param_1 = param_1 * 10;
-  DAT_0044e66c = param_1 >> 0x1f;
-  DAT_0044e668 = param_1;
-  nn_cfg_CTR_IsDebugMode();
-  if (param_1 != 0) {
+  DAT_0044e668 = param_1 * 10;
+  DAT_0044e66c = DAT_0044e668 >> 0x1f;
+  temp_v0 = nn_cfg_CTR_IsDebugMode();
+  if (temp_v0) {
     DAT_0044e651 = '\x01';
   }
   if ((DAT_0044e651 != '\0') || (DAT_0044e66c != 0 || DAT_0044e668 != 0)) {

@@ -5,7 +5,7 @@
 /* Supplied declaration required: rt_memcpy. */
 
 
-void nn_snd_CTR_OutputCapture_Write(int *param_1,unsigned int param_2,int param_3)
+void nn_snd_CTR_OutputCapture_Write(int *param_1,short *param_2,int param_3)
 
 {
 /* irregular: 1 native warning(s); review required */

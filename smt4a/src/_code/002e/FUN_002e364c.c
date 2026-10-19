@@ -2,6 +2,17 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
+#ifndef ROMWRIGHT_ISNAN_DEFINED
+#define ROMWRIGHT_ISNAN_DEFINED
+static int romwright_isnanf(float value)
+{
+    return value != value;
+}
+static int romwright_isnan(double value)
+{
+    return value != value;
+}
+#endif
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
@@ -110,7 +121,7 @@ unsigned int FUN_002e364c(float *param_1)
                                            (int)*(char *)(temp_v3 + 5),temp_v3);
                               temp_v0 = (in_fpscr & 0xfffffff) |
                                       ((unsigned int)(temp_v11[0] < (float)temp_v10) << 0x1f);
-                              in_fpscr = temp_v0 | ((unsigned int)(NAN(temp_v11[0]) || NAN((float)temp_v10)) <<
+                              in_fpscr = temp_v0 | ((unsigned int)(romwright_isnanf(temp_v11[0]) || romwright_isnanf((float)temp_v10)) <<
                                                  0x1c);
                               if ((unsigned char)(temp_v0 >> 0x1f) == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
                                 FUN_003278c8((int)*(short *)(temp_v3 + 6));
@@ -128,7 +139,7 @@ unsigned int FUN_002e364c(float *param_1)
                                          (int)*(char *)(temp_v3 + 5),temp_v3);
                             temp_v0 = (in_fpscr & 0xfffffff) |
                                     ((unsigned int)(temp_v11[0] < (float)temp_v10) << 0x1f);
-                            in_fpscr = temp_v0 | ((unsigned int)(NAN(temp_v11[0]) || NAN((float)temp_v10)) <<
+                            in_fpscr = temp_v0 | ((unsigned int)(romwright_isnanf(temp_v11[0]) || romwright_isnanf((float)temp_v10)) <<
                                                0x1c);
                             if ((unsigned char)(temp_v0 >> 0x1f) == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
                               FUN_003278c8((int)*(short *)(temp_v3 + 6));
@@ -146,7 +157,7 @@ unsigned int FUN_002e364c(float *param_1)
                                        temp_v3);
                           temp_v0 = (in_fpscr & 0xfffffff) |
                                   ((unsigned int)(temp_v11[0] < (float)temp_v10) << 0x1f);
-                          in_fpscr = temp_v0 | ((unsigned int)(NAN(temp_v11[0]) || NAN((float)temp_v10)) << 0x1c
+                          in_fpscr = temp_v0 | ((unsigned int)(romwright_isnanf(temp_v11[0]) || romwright_isnanf((float)temp_v10)) << 0x1c
                                              );
                           if ((unsigned char)(temp_v0 >> 0x1f) == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
                             temp_v5 = temp_v5 | 0x400;
@@ -162,7 +173,7 @@ unsigned int FUN_002e364c(float *param_1)
                                      temp_v3);
                         temp_v0 = (in_fpscr & 0xfffffff) |
                                 ((unsigned int)(temp_v11[0] < (float)temp_v10) << 0x1f);
-                        in_fpscr = temp_v0 | ((unsigned int)(NAN(temp_v11[0]) || NAN((float)temp_v10)) << 0x1c);
+                        in_fpscr = temp_v0 | ((unsigned int)(romwright_isnanf(temp_v11[0]) || romwright_isnanf((float)temp_v10)) << 0x1c);
                         if ((unsigned char)(temp_v0 >> 0x1f) == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
                           temp_v5 = temp_v5 | 0x200;
                           DAT_005f1630 = (unsigned char)*(unsigned short *)(temp_v3 + 10);
@@ -177,7 +188,7 @@ unsigned int FUN_002e364c(float *param_1)
                                    temp_v3);
                       temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v11[0] < (float)temp_v10) << 0x1f)
                       ;
-                      in_fpscr = temp_v0 | ((unsigned int)(NAN(temp_v11[0]) || NAN((float)temp_v10)) << 0x1c);
+                      in_fpscr = temp_v0 | ((unsigned int)(romwright_isnanf(temp_v11[0]) || romwright_isnanf((float)temp_v10)) << 0x1c);
                       if ((unsigned char)(temp_v0 >> 0x1f) == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
                         DAT_005f1854 = *(unsigned short *)(temp_v3 + 10);
                         temp_v5 = temp_v5 | 0x100;
@@ -190,7 +201,7 @@ unsigned int FUN_002e364c(float *param_1)
                     FUN_002c28dc(temp_v11,(int)*(char *)(temp_v3 + 4),(int)*(char *)(temp_v3 + 5),temp_v3)
                     ;
                     temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v11[0] < (float)temp_v10) << 0x1f);
-                    in_fpscr = temp_v0 | ((unsigned int)(NAN(temp_v11[0]) || NAN((float)temp_v10)) << 0x1c);
+                    in_fpscr = temp_v0 | ((unsigned int)(romwright_isnanf(temp_v11[0]) || romwright_isnanf((float)temp_v10)) << 0x1c);
                     if ((unsigned char)(temp_v0 >> 0x1f) == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
                       DAT_005f1844 = (int)*(short *)(temp_v3 + 6);
                       temp_v5 = temp_v5 | 0x10;
@@ -202,7 +213,7 @@ unsigned int FUN_002e364c(float *param_1)
                         !romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0))) {
                   FUN_002c28dc(temp_v11,(int)*(char *)(temp_v3 + 4),(int)*(char *)(temp_v3 + 5),temp_v3);
                   temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v11[0] < (float)temp_v10) << 0x1f);
-                  in_fpscr = temp_v0 | ((unsigned int)(NAN(temp_v11[0]) || NAN((float)temp_v10)) << 0x1c);
+                  in_fpscr = temp_v0 | ((unsigned int)(romwright_isnanf(temp_v11[0]) || romwright_isnanf((float)temp_v10)) << 0x1c);
                   if ((unsigned char)(temp_v0 >> 0x1f) == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
                     temp_v5 = temp_v5 | 0x8000;
                     DAT_005f1a88 = VectorSignedToFloat((int)*(short *)(temp_v3 + 10),
@@ -215,7 +226,7 @@ unsigned int FUN_002e364c(float *param_1)
                       !romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0))) {
                 FUN_002c28dc(temp_v11,(int)*(char *)(temp_v3 + 4),(int)*(char *)(temp_v3 + 5),temp_v3);
                 temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v11[0] < (float)temp_v10) << 0x1f);
-                in_fpscr = temp_v0 | ((unsigned int)(NAN(temp_v11[0]) || NAN((float)temp_v10)) << 0x1c);
+                in_fpscr = temp_v0 | ((unsigned int)(romwright_isnanf(temp_v11[0]) || romwright_isnanf((float)temp_v10)) << 0x1c);
                 if ((unsigned char)(temp_v0 >> 0x1f) == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
                   DAT_005ed634 = *(unsigned int *)(temp_v3 + 0x5c);
                   DAT_005ed638 = *(unsigned int *)(temp_v3 + 0x60);
@@ -240,7 +251,7 @@ unsigned int FUN_002e364c(float *param_1)
                     !romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0))) {
               FUN_002c28dc(temp_v11,(int)*(char *)(temp_v3 + 4),(int)*(char *)(temp_v3 + 5),temp_v3);
               temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v11[0] < (float)temp_v10) << 0x1f);
-              in_fpscr = temp_v0 | ((unsigned int)(NAN(temp_v11[0]) || NAN((float)temp_v10)) << 0x1c);
+              in_fpscr = temp_v0 | ((unsigned int)(romwright_isnanf(temp_v11[0]) || romwright_isnanf((float)temp_v10)) << 0x1c);
               if ((unsigned char)(temp_v0 >> 0x1f) == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
                 DAT_005ed634 = *(unsigned int *)(temp_v3 + 0x5c);
                 DAT_005ed638 = *(unsigned int *)(temp_v3 + 0x60);
@@ -264,7 +275,7 @@ unsigned int FUN_002e364c(float *param_1)
                   !romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0))) {
             FUN_002c28dc(temp_v11,(int)*(char *)(temp_v3 + 4),(int)*(char *)(temp_v3 + 5),temp_v3);
             temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v11[0] < (float)temp_v10) << 0x1f);
-            in_fpscr = temp_v0 | ((unsigned int)(NAN(temp_v11[0]) || NAN((float)temp_v10)) << 0x1c);
+            in_fpscr = temp_v0 | ((unsigned int)(romwright_isnanf(temp_v11[0]) || romwright_isnanf((float)temp_v10)) << 0x1c);
             if ((unsigned char)(temp_v0 >> 0x1f) == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
               FUN_0033ab6c((int)*(short *)(temp_v3 + 6),1);
               FUN_00319f64((int)*(short *)(temp_v3 + 6));
@@ -279,7 +290,7 @@ unsigned int FUN_002e364c(float *param_1)
                 !romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0))) {
           FUN_002c28dc(temp_v11,(int)*(char *)(temp_v3 + 4),(int)*(char *)(temp_v3 + 5),temp_v3);
           temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v11[0] < (float)temp_v10) << 0x1f);
-          in_fpscr = temp_v0 | ((unsigned int)(NAN(temp_v11[0]) || NAN((float)temp_v10)) << 0x1c);
+          in_fpscr = temp_v0 | ((unsigned int)(romwright_isnanf(temp_v11[0]) || romwright_isnanf((float)temp_v10)) << 0x1c);
           if ((unsigned char)(temp_v0 >> 0x1f) == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
             temp_v5 = temp_v5 | 2;
           }

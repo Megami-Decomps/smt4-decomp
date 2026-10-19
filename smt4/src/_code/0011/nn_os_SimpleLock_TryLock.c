@@ -6,7 +6,7 @@
 /* Unsupported intrinsic, declaration required: hasExclusiveAccess (CALLOTHER). */
 
 
-unsigned int nn_os_SimpleLock_TryLock(int *param_1)
+unsigned char nn_os_SimpleLock_TryLock(int *param_1)
 
 {
 /* irregular: 2 native warning(s); review required */

@@ -82,7 +82,7 @@ void FUN_00401b50(fn_00401b50_arg0 *param_1,float *param_2)
   temp_v3 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v7 < temp_v9) << 0x1f) |
           ((unsigned int)(temp_v7 == temp_v9) << 0x1e);
   temp_v0 = (unsigned char)(temp_v3 >> 0x18);
-  if (!(unsigned char)((temp_v0 >> 6) & 1) && (unsigned char)(temp_v0 >> 7) == (NAN(temp_v7) || NAN(temp_v9))) {
+  if (!(unsigned char)((temp_v0 >> 6) & 1) && (unsigned char)(temp_v0 >> 7) == ((temp_v7 != temp_v7) || (temp_v9 != temp_v9))) {
     temp_v2 = (int)((temp_v7 - temp_v9) * 0.5f);
   }
   temp_v7 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(temp_v3 >> 0x16) & 3);

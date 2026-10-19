@@ -21,13 +21,13 @@ extern unsigned char LAB_001559dc; /* 0x1559dc */
 
 /* Supplied declaration required: FUN_002bcc60. */
 /* Supplied declaration required: FUN_002c526c. */
-/* Supplied declaration required: nn_os_LightEvent_Initialize. */
+extern void nn_os_LightEvent_Initialize(unsigned int, unsigned char);
 
 
 unsigned int FUN_0014fbec(int param_1,int param_2,int param_3,unsigned int param_4)
 
 {
-/* irregular: 4 native warning(s); review required */
+/* irregular: 3 native warning(s); review required */
   unsigned int temp_v0;
   int temp_v1;
   unsigned char *temp_v2;

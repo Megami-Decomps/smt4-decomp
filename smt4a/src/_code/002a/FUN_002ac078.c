@@ -2,6 +2,21 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
+#ifndef ROMWRIGHT_FLOAT_BITS_DEFINED
+#define ROMWRIGHT_FLOAT_BITS_DEFINED
+static unsigned int romwright_f2u(float value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.f = value;
+    return bits.u;
+}
+static float romwright_u2f(unsigned int value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.u = value;
+    return bits.f;
+}
+#endif
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 #ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
@@ -44,7 +59,7 @@ unsigned int FUN_002ac078(void)
     temp_v9 = pfVar2[2];
     temp_v0 = in_fpscr & 0xfffffff;
     temp_v7 = temp_v0 | ((unsigned int)(temp_v10 < temp_v9) << 0x1f);
-    in_fpscr = temp_v7 | ((unsigned int)(NAN(temp_v10) || NAN(temp_v9)) << 0x1c);
+    in_fpscr = temp_v7 | ((unsigned int)((temp_v10 != temp_v10) || (temp_v9 != temp_v9)) << 0x1c);
     if ((unsigned char)(temp_v7 >> 0x1f) == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
       in_fpscr = temp_v0 | ((unsigned int)(pfVar2[1] <= temp_v9) << 0x1d);
       if (!romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0)) {
@@ -113,13 +128,13 @@ unsigned int FUN_002ac078(void)
       pfVar2[6] = (float)temp_v13 * temp_v11;
     }
   }
-  *(float *)pfVar2[7] = temp_v9;
-  *(float *)pfVar2[8] = pfVar2[6];
+  *(float *)romwright_f2u((float)(pfVar2[7])) = temp_v9;
+  *(float *)romwright_f2u((float)(pfVar2[8])) = pfVar2[6];
   if ((*(char *)(pfVar2 + 9) == '\0') &&
      (temp_v8 = *pfVar2 + (float)((unsigned long long)temp_v13 >> 0x20), *pfVar2 = temp_v8, pfVar2[1] <= temp_v8))
   {
-    *(unsigned int *)pfVar2[7] = temp_v12;
-    *(unsigned int *)pfVar2[8] = temp_v12;
+    *(unsigned int *)romwright_f2u((float)(pfVar2[7])) = temp_v12;
+    *(unsigned int *)romwright_f2u((float)(pfVar2[8])) = temp_v12;
     return 0xffffffff;
   }
   return 0;

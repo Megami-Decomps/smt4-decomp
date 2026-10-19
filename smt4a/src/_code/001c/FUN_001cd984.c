@@ -9,15 +9,15 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_002e3140. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 void FUN_001cd984(int *param_1)
 
 {
-/* irregular: 4 native warning(s); review required */
-  nn_os_CriticalSection_Enter(param_1 + 2);
+/* irregular: 2 native warning(s); review required */
+  nn_os_CriticalSection_Enter((unsigned int)(param_1 + 2));
   software_interrupt(0x24);
   if (*param_1 < 0) {
     FUN_002e3140();
@@ -27,6 +27,6 @@ void FUN_001cd984(int *param_1)
     FUN_002e3140();
   }
   *(char *)((int)param_1 + 0x1319) = *(char *)((int)param_1 + 0x1319) + '\x01';
-  nn_os_CriticalSection_Leave(param_1 + 2);
+  nn_os_CriticalSection_Leave((unsigned int)(param_1 + 2));
   return;
 }

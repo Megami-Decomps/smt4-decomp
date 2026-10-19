@@ -8,13 +8,13 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_00140f3c. */
-/* Supplied declaration required: nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile. */
+extern void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(unsigned int);
 
 
 void FUN_0014047c(int param_1)
 
 {
-/* irregular: 2 native warning(s); review required */
+/* irregular: 1 native warning(s); review required */
   if (*(char *)(param_1 + 0x180) != '\0') {
     if ((*(unsigned int *)(param_1 + 0x110) & 0xfffffffe) != 0) {
       nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(*(unsigned int *)(param_1 + 0x110) & 0xfffffffe);

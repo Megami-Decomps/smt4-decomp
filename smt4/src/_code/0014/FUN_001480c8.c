@@ -15,13 +15,13 @@ extern int DAT_004e5290; /* 0x4e5290 */
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_002c40f8. */
 /* Supplied declaration required: FUN_002c526c. */
-/* Supplied declaration required: nn_os_Thread_FinalizeImpl. */
+extern void nn_os_Thread_FinalizeImpl(unsigned int);
 
 
 void FUN_001480c8(void)
 
 {
-/* irregular: 4 native warning(s); review required */
+/* irregular: 3 native warning(s); review required */
   unsigned char *puVar1;
   int temp_v0;
   int iStack_20;
@@ -39,7 +39,7 @@ void FUN_001480c8(void)
     FUN_002c526c();
   }
   DAT_00465640 = 1;
-  nn_os_Thread_FinalizeImpl(&DAT_0046563c);
+  nn_os_Thread_FinalizeImpl((unsigned int)&DAT_0046563c);
   if (DAT_0046563c != 0) {
     software_interrupt(0x23);
     DAT_0046563c = 0;

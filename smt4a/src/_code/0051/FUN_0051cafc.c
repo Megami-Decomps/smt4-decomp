@@ -2,6 +2,21 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
+#ifndef ROMWRIGHT_FLOAT_BITS_DEFINED
+#define ROMWRIGHT_FLOAT_BITS_DEFINED
+static unsigned int romwright_f2u(float value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.f = value;
+    return bits.u;
+}
+static float romwright_u2f(unsigned int value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.u = value;
+    return bits.f;
+}
+#endif
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 #ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
@@ -38,7 +53,7 @@ void FUN_0051cafc(float *param_1,int *param_2)
   float temp_v15;
   
   temp_v15 = 0.0f;
-  puVar4 = (unsigned int *)param_1[8];
+  puVar4 = (unsigned int *)romwright_f2u((float)(param_1[8]));
   temp_v2 = 0;
   temp_v8 = VectorFloatToUnsigned(in_s0 / param_1[6],3);
   temp_v5 = in_fpscr & 0xfffffff;

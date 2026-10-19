@@ -146,10 +146,10 @@ int FUN_001099b8(int param_1,int *param_2,unsigned int param_3,unsigned int para
     FUN_002f2aa0();
     temp_v5 = 1;
   } while (temp_v4 == 0);
-  temp_v7[0]._0_1_ = *(unsigned char *)(temp_v3 + 0x25);
+  temp_v7[0] = (((unsigned int)(temp_v7[0]) & 0xffffff00U) | (((unsigned int)(*(unsigned char *)(temp_v3 + 0x25)) & 0xffU) << 0));
   temp_v1 = FUN_002eac34(*(unsigned char *)(temp_v3 + 0x25) >> 4);
   temp_v15 = (unsigned int)*(unsigned short *)(temp_v1 + 0x32);
-  temp_v7[0] = romwright_piece_1_1(temp_v7[0]._1_1_,*(unsigned char *)(temp_v3 + 0x25));
+  temp_v7[0] = romwright_piece_1_1((((unsigned int)(temp_v7[0]) >> 8) & 0xffU),*(unsigned char *)(temp_v3 + 0x25));
   temp_v1 = FUN_002eac34(*(unsigned char *)(temp_v3 + 0x25) >> 4);
   temp_v9 = (unsigned int)*(unsigned short *)(temp_v1 + 0x30);
   temp_v14 = temp_v15;

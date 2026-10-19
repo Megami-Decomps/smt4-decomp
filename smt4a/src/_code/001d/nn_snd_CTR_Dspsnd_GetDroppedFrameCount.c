@@ -5,7 +5,7 @@
 extern int FUN_001c6e20(void);
 
 
-unsigned int nn_snd_CTR_Dspsnd_GetDroppedFrameCount(int param_1)
+int nn_snd_CTR_Dspsnd_GetDroppedFrameCount(int param_1)
 
 {
   int temp_v0;

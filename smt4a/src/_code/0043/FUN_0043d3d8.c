@@ -22,15 +22,15 @@ extern unsigned int *FUN_00188b60(unsigned char *);
 /* Supplied declaration required: FUN_0043f440. */
 /* Supplied declaration required: FUN_0043f878. */
 /* Supplied declaration required: FUN_0043f8c8. */
-/* Supplied declaration required: nn_fnd_ExpHeapBase_Finalize. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_fnd_ExpHeapBase_Finalize(unsigned int);
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 unsigned int * FUN_0043d3d8(unsigned int *param_1,int param_2,int param_3,unsigned int param_4)
 
 {
-/* irregular: 14 native warning(s); review required */
+/* irregular: 11 native warning(s); review required */
   unsigned int *puVar1;
   unsigned int *puVar2;
   unsigned int temp_v0;
@@ -67,9 +67,9 @@ unsigned int * FUN_0043d3d8(unsigned int *param_1,int param_2,int param_3,unsign
     if (DAT_005c0afc != (unsigned int *)0x0) {
       (**(romwright_code **)*DAT_005c0afc)();
       puVar1 = DAT_005c0afc;
-      nn_os_CriticalSection_Enter(&DAT_0062d6a0);
+      nn_os_CriticalSection_Enter((unsigned int)&DAT_0062d6a0);
       FUN_001a1244(&DAT_0062d648,puVar1);
-      nn_os_CriticalSection_Leave(&DAT_0062d6a0);
+      nn_os_CriticalSection_Leave((unsigned int)&DAT_0062d6a0);
       DAT_005c0afc = (unsigned int *)0x0;
       temp_v3 = temp_v4;
     }
@@ -78,7 +78,7 @@ unsigned int * FUN_0043d3d8(unsigned int *param_1,int param_2,int param_3,unsign
     DAT_0062d6b5 = (unsigned char)((unsigned int)temp_v3 >> 8);
     DAT_0062d6b6 = (unsigned char)((unsigned int)temp_v3 >> 0x10);
     DAT_0062d6a8 = 0xffffffff;
-    nn_fnd_ExpHeapBase_Finalize();
+    nn_fnd_ExpHeapBase_Finalize((unsigned int)&DAT_0062d648);
   }
   return puVar2;
 }

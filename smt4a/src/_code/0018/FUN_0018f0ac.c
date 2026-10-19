@@ -52,7 +52,7 @@ void FUN_0018f0ac(int param_1,unsigned int param_2,int param_3)
               ((unsigned int)(temp_v6 == 0.0f) << 0x1e);
       temp_v1 = (unsigned char)(temp_v3 >> 0x18);
       temp_v10 = temp_v4;
-      if (((unsigned char)((temp_v1 >> 6) & 1) || (unsigned char)(temp_v1 >> 7) != NAN(temp_v6)) &&
+      if (((unsigned char)((temp_v1 >> 6) & 1) || (unsigned char)(temp_v1 >> 7) != (temp_v6 != temp_v6)) &&
          (temp_v3 = (in_fpscr & 0xfffffff) | ((unsigned int)(-1.0f <= temp_v6) << 0x1d), temp_v10 = temp_v6,
          !romwright_subpiece_4_1_0(temp_v3 >> 0x1d,0))) {
         temp_v10 = temp_v9;
@@ -66,7 +66,7 @@ void FUN_0018f0ac(int param_1,unsigned int param_2,int param_3)
       if (((unsigned char)((temp_v1 >> 5) & 1) && !(unsigned char)(temp_v1 >> 6)) &&
          (temp_v3 = (temp_v3 & 0xfffffff) | ((unsigned int)(temp_v6 < in_s1) << 0x1f) |
                   ((unsigned int)(temp_v6 == in_s1) << 0x1e),
-         in_fpscr = temp_v3 | ((unsigned int)(NAN(temp_v6) || NAN(in_s1)) << 0x1c),
+         in_fpscr = temp_v3 | ((unsigned int)((temp_v6 != temp_v6) || (in_s1 != in_s1)) << 0x1c),
          temp_v1 = (unsigned char)(temp_v3 >> 0x18), temp_v10 = temp_v4,
          (unsigned char)((temp_v1 >> 6) & 1) || temp_v1 >> 7 != ((unsigned char)(in_fpscr >> 0x1c) & 1))) {
         temp_v10 = (in_s1 - temp_v6) / temp_v8;
@@ -86,7 +86,7 @@ void FUN_0018f0ac(int param_1,unsigned int param_2,int param_3)
               ((unsigned int)(temp_v5 == temp_v4) << 0x1e);
       temp_v1 = (unsigned char)(temp_v3 >> 0x18);
       temp_v6 = temp_v4;
-      if (((unsigned char)((temp_v1 >> 6) & 1) || (unsigned char)(temp_v1 >> 7) != (NAN(temp_v5) || NAN(temp_v4))) &&
+      if (((unsigned char)((temp_v1 >> 6) & 1) || (unsigned char)(temp_v1 >> 7) != ((temp_v5 != temp_v5) || (temp_v4 != temp_v4))) &&
          (temp_v3 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v9 <= temp_v5) << 0x1d), temp_v6 = temp_v5,
          !romwright_subpiece_4_1_0(temp_v3 >> 0x1d,0))) {
         temp_v6 = temp_v9;
@@ -100,7 +100,7 @@ void FUN_0018f0ac(int param_1,unsigned int param_2,int param_3)
       if (((unsigned char)((temp_v1 >> 5) & 1) && !(unsigned char)(temp_v1 >> 6)) &&
          (temp_v3 = (temp_v3 & 0xfffffff) | ((unsigned int)(temp_v5 < in_s1) << 0x1f) |
                   ((unsigned int)(temp_v5 == in_s1) << 0x1e),
-         in_fpscr = temp_v3 | ((unsigned int)(NAN(temp_v5) || NAN(in_s1)) << 0x1c),
+         in_fpscr = temp_v3 | ((unsigned int)((temp_v5 != temp_v5) || (in_s1 != in_s1)) << 0x1c),
          temp_v1 = (unsigned char)(temp_v3 >> 0x18), temp_v6 = temp_v4,
          (unsigned char)((temp_v1 >> 6) & 1) || temp_v1 >> 7 != ((unsigned char)(in_fpscr >> 0x1c) & 1))) {
         temp_v6 = -(((temp_v5 - in_s0) * in_s2) / temp_v8);
@@ -121,7 +121,7 @@ void FUN_0018f0ac(int param_1,unsigned int param_2,int param_3)
               ((unsigned int)(temp_v5 == temp_v4) << 0x1e);
       temp_v1 = (unsigned char)(temp_v3 >> 0x18);
       temp_v6 = temp_v4;
-      if (((unsigned char)((temp_v1 >> 6) & 1) || (unsigned char)(temp_v1 >> 7) != (NAN(temp_v5) || NAN(temp_v4))) &&
+      if (((unsigned char)((temp_v1 >> 6) & 1) || (unsigned char)(temp_v1 >> 7) != ((temp_v5 != temp_v5) || (temp_v4 != temp_v4))) &&
          (temp_v3 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v9 <= temp_v5) << 0x1d), temp_v6 = temp_v5,
          !romwright_subpiece_4_1_0(temp_v3 >> 0x1d,0))) {
         temp_v6 = temp_v9;
@@ -135,7 +135,7 @@ void FUN_0018f0ac(int param_1,unsigned int param_2,int param_3)
       if (((unsigned char)((temp_v1 >> 5) & 1) && !(unsigned char)(temp_v1 >> 6)) &&
          (temp_v3 = (temp_v3 & 0xfffffff) | ((unsigned int)(temp_v5 < in_s1) << 0x1f) |
                   ((unsigned int)(temp_v5 == in_s1) << 0x1e),
-         in_fpscr = temp_v3 | ((unsigned int)(NAN(temp_v5) || NAN(in_s1)) << 0x1c),
+         in_fpscr = temp_v3 | ((unsigned int)((temp_v5 != temp_v5) || (in_s1 != in_s1)) << 0x1c),
          temp_v1 = (unsigned char)(temp_v3 >> 0x18), temp_v6 = temp_v4,
          (unsigned char)((temp_v1 >> 6) & 1) || temp_v1 >> 7 != ((unsigned char)(in_fpscr >> 0x1c) & 1))) {
         temp_v6 = ((temp_v5 - in_s0) * in_s2) / temp_v8;
@@ -157,7 +157,7 @@ void FUN_0018f0ac(int param_1,unsigned int param_2,int param_3)
               ((unsigned int)(temp_v6 == temp_v4) << 0x1e);
       temp_v1 = (unsigned char)(temp_v3 >> 0x18);
       temp_v11 = temp_v4;
-      if (((unsigned char)((temp_v1 >> 6) & 1) || (unsigned char)(temp_v1 >> 7) != (NAN(temp_v6) || NAN(temp_v4))) &&
+      if (((unsigned char)((temp_v1 >> 6) & 1) || (unsigned char)(temp_v1 >> 7) != ((temp_v6 != temp_v6) || (temp_v4 != temp_v4))) &&
          (temp_v3 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v9 <= temp_v6) << 0x1d), temp_v11 = temp_v6,
          !romwright_subpiece_4_1_0(temp_v3 >> 0x1d,0))) {
         temp_v11 = temp_v9;
@@ -189,7 +189,7 @@ void FUN_0018f0ac(int param_1,unsigned int param_2,int param_3)
               ((unsigned int)(temp_v6 == temp_v4) << 0x1e);
       temp_v1 = (unsigned char)(temp_v3 >> 0x18);
       temp_v11 = temp_v4;
-      if (((unsigned char)((temp_v1 >> 6) & 1) || (unsigned char)(temp_v1 >> 7) != (NAN(temp_v6) || NAN(temp_v4))) &&
+      if (((unsigned char)((temp_v1 >> 6) & 1) || (unsigned char)(temp_v1 >> 7) != ((temp_v6 != temp_v6) || (temp_v4 != temp_v4))) &&
          (temp_v3 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v9 <= temp_v6) << 0x1d), temp_v11 = temp_v9,
          romwright_subpiece_4_1_0(temp_v3 >> 0x1d,0))) {
         temp_v11 = temp_v6;

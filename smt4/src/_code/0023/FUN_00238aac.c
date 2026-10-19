@@ -7,13 +7,11 @@ typedef struct {
     unsigned int sp14; /* 0x14: local_14 */
 } param_2_stack;
 
-/* Unsupported intrinsic, declaration required: while (INT_ADD). */
-
 
 int FUN_00238aac(int *param_1,int param_2)
 
 {
-/* irregular: 1 goto(s); 1 native warning(s); review required */
+/* irregular: 1 goto(s) */
   unsigned int temp_v0;
   int temp_v1;
   unsigned int temp_v2;

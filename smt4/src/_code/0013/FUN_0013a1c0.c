@@ -4,19 +4,17 @@
 
 extern int DAT_0044e460; /* 0x44e460 */
 
-/* Supplied declaration required: nn_dsp_CTR_DSP_RecvDataIsReady. */
+extern unsigned int nn_dsp_CTR_DSP_RecvDataIsReady(unsigned int, unsigned short, unsigned char *);
 
 
-int FUN_0013a1c0(unsigned int param_1,unsigned int param_2)
+unsigned int FUN_0013a1c0(unsigned short param_1,unsigned char *param_2)
 
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
+  unsigned int temp_v0;
   
   if (DAT_0044e460 != 0) {
-    temp_v0 = DAT_0044e460;
-    nn_dsp_CTR_DSP_RecvDataIsReady(DAT_0044e460,param_1,param_2);
+    temp_v0 = nn_dsp_CTR_DSP_RecvDataIsReady(DAT_0044e460,param_1,param_2);
     return temp_v0;
   }
-  return -0x375f5808;
+  return 0xc8a0a7f8;
 }

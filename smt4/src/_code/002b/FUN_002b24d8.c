@@ -12,15 +12,16 @@ extern unsigned int DAT_004e4100; /* 0x4e4100 */
 extern unsigned int DAT_004e411c; /* 0x4e411c */
 
 /* Supplied declaration required: FUN_00145008. */
-extern unsigned int *nn_fnd_ExpHeapBase_Allocate(int, int, int, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern unsigned int nn_fnd_ExpHeapBase_Allocate(unsigned int, unsigned int, int, unsigned char, int, unsigned char);
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
-unsigned int * FUN_002b24d8(int param_1,unsigned int param_2,unsigned int param_3,int param_4,int param_5)
+unsigned int *
+FUN_002b24d8(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,int param_5)
 
 {
-/* irregular: 3 native warning(s); review required */
+/* irregular: 1 native warning(s); review required */
   unsigned int *puVar1;
   int temp_v0;
   int temp_v1;

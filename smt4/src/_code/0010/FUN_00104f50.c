@@ -53,13 +53,13 @@ extern int FUN_0010f96c(void);
 /* Supplied declaration required: FUN_002c3918. */
 /* Supplied declaration required: FUN_002c3944. */
 /* Supplied declaration required: FUN_002c4938. */
-/* Supplied declaration required: nn_init_InitializeAllocator. */
+extern void nn_init_InitializeAllocator(unsigned int);
 
 
 void FUN_00104f50(void)
 
 {
-/* irregular: 12 native warning(s); review required */
+/* irregular: 11 native warning(s); review required */
   unsigned int *puVar1;
   int temp_v0;
   unsigned int temp_v1;

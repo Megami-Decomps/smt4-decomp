@@ -15,7 +15,7 @@ void FUN_00485abc(int param_1)
   temp_v0 = *(unsigned int *)(temp_v1 + 0xd8);
   pcVar3 = *(romwright_code **)(temp_v1 + 0xd4);
   if ((temp_v0 & 1) != 0) {
-    pcVar3 = *(romwright_code **)(pcVar3 + *(int *)(param_1 + ((int)temp_v0 >> 1)));
+    pcVar3 = *(romwright_code **)((unsigned char *)pcVar3 + *(int *)(param_1 + ((int)temp_v0 >> 1)));
   }
   (*pcVar3)();
   *(int *)(param_1 + 0xc) = *(int *)(param_1 + 0xc) + 1;

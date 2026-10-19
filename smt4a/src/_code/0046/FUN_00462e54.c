@@ -22,7 +22,7 @@ extern int FUN_0045b9a0(unsigned int);
 /* Supplied declaration required: FUN_0045fb88. */
 /* Supplied declaration required: FUN_00462a18. */
 /* Supplied declaration required: FUN_00462b74. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
 /* Supplied declaration required: nn_os_detail_BlockingQueueBase_nn_os_CriticalSection_TryEnqueue. */
 /* Supplied declaration required: nw_ut_internal_LinkListImpl_insert. */
 
@@ -30,7 +30,7 @@ extern int FUN_0045b9a0(unsigned int);
 void FUN_00462e54(int param_1)
 
 {
-/* irregular: 2 goto(s); irregular input(s): in_lr; 13 native warning(s); review required */
+/* irregular: 2 goto(s); irregular input(s): in_lr; 12 native warning(s); review required */
   char temp_v0;
   int temp_v1;
   unsigned int temp_v2;
@@ -138,7 +138,7 @@ LAB_00462ee4:
     if (temp_v0 == '\0') {
       temp_v1 = FUN_001b1998();
       piVar8 = (int *)(temp_v1 + 0x2c);
-      nn_os_CriticalSection_Enter(piVar8);
+      nn_os_CriticalSection_Enter((unsigned int)piVar8);
       FUN_001a0990(temp_v6 + 0xc);
       *(unsigned char *)(temp_v6 + 0x14) = 1;
       nw_ut_internal_LinkListImpl_insert(temp_v1 + 0xc,temp_v1 + 0x10,temp_v6 + 4);

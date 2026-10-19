@@ -10,18 +10,17 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_00238f4c. */
-/* Supplied declaration required: nn_cec_CTR_MessageBox_WriteMessageBoxList. */
+extern unsigned int nn_cec_CTR_MessageBox_WriteMessageBoxList(unsigned int);
 
 
-int * FUN_00358518(int *param_1,unsigned int param_2)
+unsigned int FUN_00358518(int *param_1,unsigned int param_2)
 
 {
-/* irregular: 2 native warning(s); review required */
-  int *piVar1;
+/* irregular: 1 native warning(s); review required */
+  unsigned int temp_v0;
   
   (**(romwright_code **)(*param_1 + 0x24))(param_1,param_2,0xb,0,0,0);
-  piVar1 = param_1;
-  nn_cec_CTR_MessageBox_WriteMessageBoxList(param_1);
+  temp_v0 = nn_cec_CTR_MessageBox_WriteMessageBoxList((unsigned int)param_1);
   FUN_00238f4c(param_1,0);
-  return piVar1;
+  return temp_v0;
 }

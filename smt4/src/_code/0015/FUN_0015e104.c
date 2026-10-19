@@ -4,7 +4,7 @@
 
 extern unsigned char DAT_004e6f64; /* 0x4e6f64 */
 
-extern int nn_snd_CTR_Dspsnd_GetDroppedFrameCount(unsigned char *);
+extern int nn_snd_CTR_Dspsnd_GetDroppedFrameCount(unsigned int);
 
 
 void FUN_0015e104(int param_1)
@@ -12,7 +12,7 @@ void FUN_0015e104(int param_1)
 {
   int temp_v0;
   
-  temp_v0 = nn_snd_CTR_Dspsnd_GetDroppedFrameCount(&DAT_004e6f64);
+  temp_v0 = nn_snd_CTR_Dspsnd_GetDroppedFrameCount((unsigned int)&DAT_004e6f64);
   if (-1 < temp_v0) {
     *(int *)(param_1 + 0x30) = temp_v0 + *(int *)(param_1 + 0x30);
   }

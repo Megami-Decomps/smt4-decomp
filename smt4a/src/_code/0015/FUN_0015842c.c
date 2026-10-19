@@ -13,14 +13,14 @@
 #endif
 /* Supplied declaration required: FUN_001a08d8. */
 /* Supplied declaration required: FUN_001bcd48. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 unsigned int FUN_0015842c(int param_1)
 
 {
-/* irregular: 7 native warning(s); review required */
+/* irregular: 5 native warning(s); review required */
   long long temp_v0;
   unsigned long long temp_v1;
   long long temp_v2;

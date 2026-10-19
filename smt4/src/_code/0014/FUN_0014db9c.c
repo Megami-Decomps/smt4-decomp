@@ -6,14 +6,14 @@
 /* Supplied declaration required: FUN_0014f560. */
 /* Supplied declaration required: FUN_002a42e8. */
 /* Supplied declaration required: aeabi_uidivmod. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 void FUN_0014db9c(int param_1)
 
 {
-/* irregular: 7 native warning(s); review required */
+/* irregular: 5 native warning(s); review required */
   unsigned char temp_v0;
   int *piVar2;
   int temp_v1;

@@ -14,14 +14,14 @@ extern int FUN_0042337c(int);
 extern int FUN_0042348c(int);
 /* Supplied declaration required: FUN_00425448. */
 extern int aeabi_idivmod(int, int);
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 unsigned int FUN_00424018(int param_1,unsigned int param_2,unsigned int param_3,int param_4)
 
 {
-/* irregular: 5 native warning(s); review required */
+/* irregular: 3 native warning(s); review required */
   int temp_v0;
   unsigned int temp_v1;
   int temp_v2;

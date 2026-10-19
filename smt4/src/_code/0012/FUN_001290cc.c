@@ -13,14 +13,14 @@ extern int FUN_00129034(unsigned int, int);
 /* Supplied declaration required: FUN_001294e0. */
 extern int FUN_0013ac6c(unsigned int, int);
 /* Supplied declaration required: FUN_001565ec. */
-/* Supplied declaration required: nn_snd_CTR_InitializeWaveBuffer. */
+extern void nn_snd_CTR_InitializeWaveBuffer(unsigned int);
 extern int nw_snd_Sound3DManager_Initialize_128F9C(char, unsigned int);
 
 
 unsigned int FUN_001290cc(int param_1,unsigned int param_2,int *param_3,int *param_4,int param_5)
 
 {
-/* irregular: 3 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   char *pcVar1;
   int temp_v0;
   int temp_v1;
@@ -35,7 +35,7 @@ unsigned int FUN_001290cc(int param_1,unsigned int param_2,int *param_3,int *par
     if (*pcVar1 == '\x02') {
       temp_v2 = FUN_0013ac6c(param_2,param_5);
     }
-    nn_snd_CTR_InitializeWaveBuffer(param_3);
+    nn_snd_CTR_InitializeWaveBuffer((unsigned int)param_3);
     *param_3 = temp_v0;
     param_3[1] = *(int *)(pcVar1 + 0xc);
     *(unsigned char *)(param_3 + 4) = 0;
@@ -44,7 +44,7 @@ unsigned int FUN_001290cc(int param_1,unsigned int param_2,int *param_3,int *par
     }
     FUN_001565ec(*(unsigned int *)(param_1 + 0x68),param_3);
     if (param_4 != (int *)0x0) {
-      nn_snd_CTR_InitializeWaveBuffer();
+      nn_snd_CTR_InitializeWaveBuffer((unsigned int)param_4);
     }
     if (pcVar1[1] != '\0') {
       temp_v1 = nw_snd_Sound3DManager_Initialize_128F9C(*pcVar1,*(unsigned int *)(pcVar1 + 8));

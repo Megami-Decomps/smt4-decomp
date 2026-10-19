@@ -9,21 +9,21 @@ extern int DAT_0044d114; /* 0x44d114 */
 extern unsigned int DAT_004c40f8; /* 0x4c40f8 */
 
 /* Supplied declaration required: FUN_002a4b0c. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 unsigned int FUN_0034e618(unsigned int param_1,int param_2,int param_3)
 
 {
-/* irregular: 3 native warning(s); review required */
+/* irregular: 1 native warning(s); review required */
   int temp_v0;
   
   if (((int)param_1 < 0) || (DAT_0044d10c <= param_1)) {
     return 0;
   }
   temp_v0 = DAT_0044d100 + param_1 * 0x70;
-  nn_os_CriticalSection_Enter(&DAT_004c40f8);
+  nn_os_CriticalSection_Enter((unsigned int)&DAT_004c40f8);
   if ((*(int *)(temp_v0 + 0x50) != *(int *)(temp_v0 + 0x38)) && (DAT_0044d110 - DAT_0044d114 != 0x40)) {
     if (param_2 != 0 && param_3 != 0) {
       FUN_002a4b0c(param_2,param_3);
@@ -33,9 +33,9 @@ unsigned int FUN_0034e618(unsigned int param_1,int param_2,int param_3)
       DAT_0044d110 = DAT_0044d110 + 1;
       *(int *)(temp_v0 + 0x50) = *(int *)(temp_v0 + 0x50) + 1;
     }
-    nn_os_CriticalSection_Leave(&DAT_004c40f8);
+    nn_os_CriticalSection_Leave((unsigned int)&DAT_004c40f8);
     return 1;
   }
-  nn_os_CriticalSection_Leave(&DAT_004c40f8);
+  nn_os_CriticalSection_Leave((unsigned int)&DAT_004c40f8);
   return 0;
 }

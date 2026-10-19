@@ -278,7 +278,7 @@ LAB_00228c48:
       }
       if (((temp_v0 == 8) &&
           (temp_v10 = FUN_0023eae0(99), temp_v10 < (int)(unsigned int)*(unsigned char *)((int)puVar6 + 0x14a))) &&
-         (((1 << *(sbyte *)(param_1 + 0x44)) & 0xffffU & (unsigned int)*(unsigned short *)((int)puVar6 + 0xfa)) != 0
+         (((1 << *(signed char *)(param_1 + 0x44)) & 0xffffU & (unsigned int)*(unsigned short *)((int)puVar6 + 0xfa)) != 0
          )) {
         return 5;
       }

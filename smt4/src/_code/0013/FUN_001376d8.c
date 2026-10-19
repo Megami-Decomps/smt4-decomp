@@ -25,7 +25,7 @@ void FUN_001376d8(int *param_1,int *param_2,int *param_3,int *param_4)
   DAT_004c62a3 = 0;
   temp_v0 = (int)DAT_004652a0 - *(int *)(DAT_004c632c + 4);
   *(unsigned int *)(DAT_004c632c + 0xc) = temp_v0;
-  if (((temp_v0 & 8) != 0) && (puVar1 < DAT_004652a4)) {
+  if (((temp_v0 & 8) != 0) && ((unsigned int)puVar1 < DAT_004652a4)) {
     DAT_004652a0 = puVar1 + 2;
     *puVar1 = 0;
     puVar1[1] = 0x8025e;

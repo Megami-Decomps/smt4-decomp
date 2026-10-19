@@ -16,29 +16,26 @@ extern int FUN_0011c834(void);
 /* Supplied declaration required: FUN_00358d24. */
 /* Supplied declaration required: FUN_00358f98. */
 /* Supplied declaration required: nn_cec_CTR_detail_InitializeCecControl. */
-/* Supplied declaration required: nn_cfg_CTR_Initialize. */
-/* Supplied declaration required: nn_cfg_CTR_IsDebugMode. */
+extern void nn_cfg_CTR_Initialize(void);
+extern unsigned char nn_cfg_CTR_IsDebugMode(void);
 
 
 void FUN_0035777c(void)
 
 {
-/* irregular: 6 native warning(s); review required */
-  unsigned char temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
+/* irregular: 4 native warning(s); review required */
+  unsigned int temp_v0;
+  int temp_v1;
   
   FUN_00358d24();
-  temp_v1 = (unsigned int)DAT_004656ca;
-  if ((temp_v1 == 0) && (nn_cec_CTR_detail_InitializeCecControl(), -1 < (int)temp_v1)) {
+  temp_v0 = (unsigned int)DAT_004656ca;
+  if ((temp_v0 == 0) && (nn_cec_CTR_detail_InitializeCecControl(), -1 < (int)temp_v0)) {
     FUN_00358f98();
-    temp_v2 = FUN_0011c834();
-    if (-1 < temp_v2) {
+    temp_v1 = FUN_0011c834();
+    if (-1 < temp_v1) {
       DAT_004656cb = 1;
       nn_cfg_CTR_Initialize();
-      temp_v0 = (unsigned char)temp_v2;
-      nn_cfg_CTR_IsDebugMode();
-      DAT_004656ce = temp_v0;
+      DAT_004656ce = nn_cfg_CTR_IsDebugMode();
       FUN_001467a4();
       DAT_004656ca = 1;
     }

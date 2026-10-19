@@ -2,14 +2,13 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
-/* Unsupported intrinsic, declaration required: while (PTRADD). */
 /* Supplied declaration required: FUN_0030ea58. */
 
 
 int FUN_00406708(int param_1,int param_2,unsigned int param_3)
 
 {
-/* irregular: 2 native warning(s); review required */
+/* irregular: 1 native warning(s); review required */
   int temp_v0;
   int *piVar2;
   int temp_v1;

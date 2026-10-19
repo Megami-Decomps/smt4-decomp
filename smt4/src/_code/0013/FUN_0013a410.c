@@ -15,40 +15,41 @@ extern signed char DAT_0044e45a; /* 0x44e45a */
 extern unsigned short DAT_0044e45c; /* 0x44e45c */
 extern unsigned short DAT_0044e45e; /* 0x44e45e */
 extern int DAT_0044e460; /* 0x44e460 */
-extern unsigned int DAT_0044e470; /* 0x44e470 */
+extern unsigned char *DAT_0044e470; /* 0x44e470 */
 extern unsigned int DAT_0044e474; /* 0x44e474 */
 extern unsigned char DAT_004c6484; /* 0x4c6484 */
 
 /* Supplied declaration required: FUN_002c131c. */
-/* Supplied declaration required: nn_dsp_CTR_DSP_LoadComponent. */
+extern unsigned int nn_dsp_CTR_DSP_LoadComponent(unsigned int, unsigned char *, unsigned int, unsigned short, unsigned short, unsigned char *);
 
 
 void FUN_0013a410(void)
 
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
+/* irregular: 1 native warning(s); review required */
+  unsigned int temp_v0;
+  int temp_v1;
   
   DAT_0044e458 = 0;
   if (DAT_0044e45a != '\0') {
     if ((DAT_0044e460 == 0) || (DAT_0044e459 != '\0')) {
-      temp_v0 = -0x375f5804;
+      temp_v0 = 0xc8a0a7fc;
     }
     else {
-      temp_v0 = DAT_0044e460;
-      nn_dsp_CTR_DSP_LoadComponent
-                (DAT_0044e460,DAT_0044e470,DAT_0044e474,DAT_0044e45c,DAT_0044e45e,&DAT_0044e459);
+      temp_v0 = nn_dsp_CTR_DSP_LoadComponent
+                        (DAT_0044e460,DAT_0044e470,DAT_0044e474,DAT_0044e45c,DAT_0044e45e,
+                         (unsigned char *)&DAT_0044e459);
     }
-    if (temp_v0 < 0) {
-      FUN_002c131c();
+    if ((int)temp_v0 < 0) {
+      FUN_002c131c(temp_v0,0x13a464);
     }
-    temp_v0 = 0;
+    temp_v1 = 0;
     do {
-      if (*(romwright_code **)(&DAT_004c6484 + temp_v0 * 4) != (romwright_code *)0x0) {
-        (**(romwright_code **)(&DAT_004c6484 + temp_v0 * 4))();
+      if (*(romwright_code **)(&DAT_004c6484 + temp_v1 * 4) != (romwright_code *)0x0) {
+        (**(romwright_code **)(&DAT_004c6484 + temp_v1 * 4))();
       }
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < 8);
+      temp_v1 = temp_v1 + 1;
+    } while (temp_v1 < 8);
     DAT_0044e45a = '\0';
   }
   return;

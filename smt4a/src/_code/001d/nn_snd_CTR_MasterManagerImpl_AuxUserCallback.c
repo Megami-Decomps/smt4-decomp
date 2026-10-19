@@ -10,21 +10,20 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_3_stack;
 
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 void nn_snd_CTR_MasterManagerImpl_AuxUserCallback(char *param_1,int param_2,int param_3)
 
 {
-/* irregular: 2 native warning(s); review required */
   int temp_v0;
   int temp_v1;
   int iStack_20;
   int iStack_1c;
   
   if (*param_1 != '\0') {
-    nn_os_CriticalSection_Enter(param_1 + 0x34);
+    nn_os_CriticalSection_Enter((unsigned int)(param_1 + 0x34));
     if (*(int *)(param_1 + param_2 * 4 + 0x14) != 0) {
       temp_v1 = param_3 + 0x280;
       iStack_20 = param_3 + 0x500;
@@ -33,7 +32,7 @@ void nn_snd_CTR_MasterManagerImpl_AuxUserCallback(char *param_1,int param_2,int 
       (**(romwright_code **)(param_1 + param_2 * 4 + 0x14))
                 (&temp_v0,0xa0,*(unsigned int *)(param_1 + param_2 * 4 + 0x1c));
     }
-    nn_os_CriticalSection_Leave(param_1 + 0x34);
+    nn_os_CriticalSection_Leave((unsigned int)(param_1 + 0x34));
     return;
   }
   return;

@@ -109,7 +109,7 @@ LAB_00338da0:
           temp_v8 = (float)VectorSignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v4 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v8 < temp_v9) << 0x1f) |
                   ((unsigned int)(temp_v8 == temp_v9) << 0x1e);
-          in_fpscr = temp_v4 | ((unsigned int)(NAN(temp_v8) || NAN(temp_v9)) << 0x1c);
+          in_fpscr = temp_v4 | ((unsigned int)((temp_v8 != temp_v8) || (temp_v9 != temp_v9)) << 0x1c);
           temp_v3 = (unsigned char)(temp_v4 >> 0x18);
           if (!(unsigned char)((temp_v3 >> 6) & 1) && temp_v3 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
             temp_v9 = (float)VectorSignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -129,7 +129,7 @@ LAB_00338da0:
           temp_v8 = (float)VectorUnsignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v4 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v8 < temp_v10) << 0x1f) |
                   ((unsigned int)(temp_v8 == temp_v10) << 0x1e);
-          in_fpscr = temp_v4 | ((unsigned int)(NAN(temp_v8) || NAN(temp_v10)) << 0x1c);
+          in_fpscr = temp_v4 | ((unsigned int)((temp_v8 != temp_v8) || (temp_v10 != temp_v10)) << 0x1c);
           temp_v3 = (unsigned char)(temp_v4 >> 0x18);
           if (!(unsigned char)((temp_v3 >> 6) & 1) && temp_v3 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
             temp_v10 = (float)VectorUnsignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);

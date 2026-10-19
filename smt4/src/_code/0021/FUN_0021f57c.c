@@ -16,15 +16,15 @@ extern int FUN_002b5a48(unsigned int);
 /* Supplied declaration required: FUN_00357a24. */
 /* Supplied declaration required: nn_cec_CTR_Message_Message_sub_object. */
 /* Supplied declaration required: nn_cec_CTR_Message_NewMessage. */
-/* Supplied declaration required: nn_cec_CTR_Message_SetExHeader. */
-/* Supplied declaration required: nn_cec_CTR_Message_SetMessageBody. */
+extern unsigned int nn_cec_CTR_Message_SetExHeader(unsigned int, unsigned int, unsigned int, unsigned int);
+extern unsigned int nn_cec_CTR_Message_SetMessageBody(unsigned int, unsigned int, unsigned int);
 
 
-unsigned int FUN_0021f57c(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
-                 unsigned int param_5)
+unsigned int FUN_0021f57c(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,unsigned int param_5
+                 )
 
 {
-/* irregular: 8 native warning(s); review required */
+/* irregular: 6 native warning(s); review required */
   unsigned int temp_v0;
   int temp_v1;
   unsigned int temp_v2;
@@ -38,10 +38,10 @@ unsigned int FUN_0021f57c(unsigned int param_1,unsigned int param_2,unsigned int
               (temp_v3,*DAT_00464fac,0,*(unsigned char *)(DAT_00464fac + 2),
                *(unsigned char *)((int)DAT_00464fac + 9),*(unsigned char *)((int)DAT_00464fac + 10),
                *(unsigned char *)((int)DAT_00464fac + 0xb));
-    nn_cec_CTR_Message_SetExHeader(temp_v3,2,param_3,param_2);
+    nn_cec_CTR_Message_SetExHeader((unsigned int)temp_v3,2,param_3,param_2);
     temp_v1 = FUN_002b5a48(param_1);
-    nn_cec_CTR_Message_SetExHeader(temp_v3,4,temp_v1 << 1,param_1);
-    nn_cec_CTR_Message_SetMessageBody(temp_v3,param_4,param_5);
+    nn_cec_CTR_Message_SetExHeader((unsigned int)temp_v3,4,temp_v1 << 1,param_1);
+    nn_cec_CTR_Message_SetMessageBody((unsigned int)temp_v3,param_4,param_5);
     temp_v0 = DAT_00464fac[6];
     FUN_00357a24(temp_v0,temp_v3,1,DAT_00464fac[3]);
     temp_v2 = temp_v0 & 0x80000000;

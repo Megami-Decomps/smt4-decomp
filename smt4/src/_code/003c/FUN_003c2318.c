@@ -96,20 +96,20 @@ void FUN_003c2318(fn_003c2318_arg0 *param_1,int param_2)
     do {
       pfVar2 = param_1;
       FUN_003c219c(param_1,&temp_v7,1);
-      switch(pfVar2) {
-      case (fn_003c2318_arg0 *)0x0:
+      switch((unsigned int)pfVar2) {
+      case (unsigned int)0x0:
         *(short *)&param_1->field_0x20 = *(short *)&param_1->field_0x20 + 1;
         break;
-      case (fn_003c2318_arg0 *)0x1:
+      case (unsigned int)0x1:
         *(short *)&param_1->field_0x22 = *(short *)&param_1->field_0x22 + 1;
         break;
-      case (fn_003c2318_arg0 *)0x2:
+      case (unsigned int)0x2:
         *(short *)&param_1->field_0x24 = *(short *)&param_1->field_0x24 + 1;
         break;
-      case (fn_003c2318_arg0 *)0x3:
+      case (unsigned int)0x3:
         *(short *)&param_1->field_0x26 = *(short *)&param_1->field_0x26 + 1;
         break;
-      case (fn_003c2318_arg0 *)0x4:
+      case (unsigned int)0x4:
         *(short *)&param_1->field_0x28 = *(short *)&param_1->field_0x28 + 1;
       }
       temp_v3 = temp_v3 + 1;

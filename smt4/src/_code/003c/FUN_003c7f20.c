@@ -15,13 +15,13 @@ typedef struct {
 /* Supplied declaration required: FUN_002c40f8. */
 /* Supplied declaration required: FUN_002c415c. */
 /* Supplied declaration required: FUN_002c526c. */
-/* Supplied declaration required: nn_os_Thread_FinalizeImpl. */
+extern void nn_os_Thread_FinalizeImpl(unsigned int);
 
 
 void FUN_003c7f20(int param_1)
 
 {
-/* irregular: 9 native warning(s); review required */
+/* irregular: 8 native warning(s); review required */
   unsigned char *puVar1;
   int temp_v0;
   int uStack_18;

@@ -16,7 +16,7 @@ extern int FUN_002399bc(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002ad8b4. */
 
 
-int nn_cec_CTR_MessageBox_ReadOutBoxIndex(int *param_1)
+unsigned int nn_cec_CTR_MessageBox_ReadOutBoxIndex(int *param_1)
 
 {
 /* irregular: 1 goto(s); 2 native warning(s); review required */

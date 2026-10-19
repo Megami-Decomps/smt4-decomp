@@ -36,7 +36,7 @@ void FUN_003fb11c(unsigned int *param_1,fn_003fb11c_arg1 *param_2,int *param_3,i
   int temp_v3;
   int temp_v4;
   
-  *param_1 = param_2->field_0x14;
+  *param_1 = (unsigned int)param_2->field_0x14;
   pvVar1 = param_2->field_0x14;
   pvVar4 = *(void **)((int)pvVar1 + 8);
   temp_v2 = (void *)*param_3 != pvVar4;
@@ -71,7 +71,7 @@ void FUN_003fb11c(unsigned int *param_1,fn_003fb11c_arg1 *param_2,int *param_3,i
     *(unsigned int *)((int)param_2->field_0x14 + 4) = 0;
     *(void **)((int)param_2->field_0x14 + 0xc) = param_2->field_0x14;
     param_2->field_0x18 = 0;
-    *param_1 = param_2->field_0x14;
+    *param_1 = (unsigned int)param_2->field_0x14;
   }
   else {
     while (temp_v4 = *param_3, temp_v4 != *param_4) {

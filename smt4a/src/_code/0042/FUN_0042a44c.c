@@ -3,7 +3,7 @@
 #include "romwright_types.h"
 
 typedef int romwright_code();
-/* stack frame of param_1: 16 slot(s), 64 byte(s) */
+/* stack frame of void: 16 slot(s), 64 byte(s) */
 typedef struct {
     unsigned int sp24; /* 0x24: local_24 */
     unsigned int sp28; /* 0x28: local_28 */
@@ -21,125 +21,121 @@ typedef struct {
     unsigned int sp68; /* 0x68: local_68 */
     unsigned int sp6C; /* 0x6c: local_6c */
     unsigned int sp70; /* 0x70: local_70 */
-} param_1_stack;
+} void_stack;
 
 extern unsigned int DAT_005893a8; /* 0x5893a8 */
 
 /* Supplied declaration required: FUN_001885b8. */
 /* Supplied declaration required: FUN_0042b8dc. */
-extern unsigned long long FUN_00500924(char **);
-extern char **nn_fs_ipc_FileSystem_OpenArchive(unsigned int *, int *, unsigned int);
+/* Supplied declaration required: FUN_00500924. */
+extern unsigned int nn_fs_ipc_FileSystem_OpenArchive(unsigned int, unsigned long long *, unsigned int, unsigned int, unsigned char *, unsigned int);
 
 
-char ** FUN_0042a44c(unsigned int **param_1)
+char ** FUN_0042a44c(void)
 
 {
-/* irregular: 2 native warning(s); review required */
+/* irregular: 5 native warning(s); review required */
   int temp_v0;
   int temp_v1;
   char **ppcVar3;
-  unsigned long long temp_v2;
-  unsigned int **temp_v3;
-  unsigned int temp_v4;
-  char *temp_v5;
-  unsigned int temp_v6;
-  int temp_v7;
+  unsigned int temp_v2;
+  unsigned int temp_v3;
+  unsigned long long temp_v4;
+  unsigned char temp_v5;
+  char *temp_v6;
+  unsigned int temp_v7;
   int temp_v8;
-  int *temp_v9;
-  int temp_v10;
+  int temp_v9;
+  int *temp_v10;
   int temp_v11;
+  int temp_v12;
   int iStack_4c;
-  unsigned int temp_v12;
-  unsigned int **temp_v13;
+  unsigned int temp_v13;
+  unsigned char **temp_v14;
   unsigned int uStack_40;
-  int temp_v14;
+  int temp_v15;
   unsigned int uStack_38;
   unsigned int uStack_34;
-  int temp_v15;
   int temp_v16;
   int temp_v17;
   int temp_v18;
+  int temp_v19;
   unsigned int *puStack_20;
   unsigned int uStack_1c;
-  unsigned char temp_v19 [4];
+  unsigned char temp_v20 [4];
   
-  temp_v3 = (unsigned int **)&temp_v13;
-  temp_v6 = 0;
-  temp_v5 = "룜B떨B듼B";
-  temp_v12 = 1;
+  temp_v14 = (unsigned char **)&temp_v14;
+  temp_v7 = 0;
+  temp_v6 = "룜B떨B듼B";
+  temp_v13 = 1;
   uStack_40 = 1;
-  temp_v18 = DAT_005893a8;
-  temp_v4 = 1;
-  temp_v13 = temp_v3;
-  ppcVar3 = (char **)nn_fs_ipc_FileSystem_OpenArchive((unsigned int *)&temp_v18,&temp_v11,3);
+  temp_v19 = DAT_005893a8;
+  ppcVar3 = (char **)nn_fs_ipc_FileSystem_OpenArchive
+                               ((unsigned int)&temp_v19,(unsigned long long *)&temp_v12,3,1,(unsigned char *)temp_v14,1);
   if ((int)ppcVar3 < 0) {
-    temp_v5 = "룜B떨B듼B";
-    if (temp_v7 != 0 || temp_v8 != 0) {
-      temp_v2 = FUN_00500924(&temp_v5);
-      temp_v10 = (unsigned int)temp_v2;
-      FUN_001885b8(&temp_v10,(int)((unsigned long long)temp_v2 >> 0x20),temp_v7,temp_v8);
+    temp_v6 = "룜B떨B듼B";
+    if (temp_v8 != 0 || temp_v9 != 0) {
+      temp_v4 = FUN_00500924(&temp_v6);
+      temp_v11 = (unsigned int)temp_v4;
+      FUN_001885b8(&temp_v11,(int)((unsigned long long)temp_v4 >> 0x20),temp_v8,temp_v9);
     }
   }
   else {
-    temp_v6 = DAT_005893a8;
-    temp_v7 = temp_v11;
-    temp_v8 = iStack_4c;
-    temp_v14 = 2;
+    temp_v7 = DAT_005893a8;
+    temp_v8 = temp_v12;
+    temp_v9 = iStack_4c;
+    temp_v15 = 2;
     uStack_38 = 0x6e6f6369;
     uStack_34 = 0;
-    puStack_20 = (unsigned int *)&temp_v14;
-    temp_v18 = 2;
+    puStack_20 = (unsigned int *)&temp_v15;
+    temp_v19 = 2;
     uStack_1c = 0xc;
-    ppcVar3 = &temp_v5;
-    FUN_0042b8dc(ppcVar3,&temp_v9,&temp_v18,1);
+    ppcVar3 = &temp_v6;
+    FUN_0042b8dc(ppcVar3,&temp_v10,&temp_v19,1);
     if ((int)ppcVar3 < 0) {
-      temp_v5 = "룜B떨B듼B";
-      if (temp_v7 != 0 || temp_v8 != 0) {
-        temp_v2 = FUN_00500924(&temp_v5);
-        temp_v15 = (unsigned int)temp_v2;
-        FUN_001885b8(&temp_v15,(int)((unsigned long long)temp_v2 >> 0x20),temp_v7,temp_v8);
+      temp_v6 = "룜B떨B듼B";
+      if (temp_v8 != 0 || temp_v9 != 0) {
+        temp_v4 = FUN_00500924(&temp_v6);
+        temp_v16 = (unsigned int)temp_v4;
+        FUN_001885b8(&temp_v16,(int)((unsigned long long)temp_v4 >> 0x20),temp_v8,temp_v9);
       }
     }
     else {
-      temp_v4 = 0x36c0;
-      temp_v3 = param_1;
-      ppcVar3 = (char **)(**(romwright_code **)*temp_v9)(temp_v9,temp_v19,0,0);
+      ppcVar3 = (char **)(**(romwright_code **)*temp_v10)(temp_v10,temp_v20,0,0);
       if (-1 < (int)ppcVar3) {
-        (**(romwright_code **)(*temp_v9 + 0x30))();
-        temp_v1 = temp_v8;
-        temp_v0 = temp_v7;
-        if (temp_v7 != 0 || temp_v8 != 0) {
-          temp_v2 = FUN_00500924(&temp_v5);
-          temp_v3 = (unsigned int **)temp_v2;
-          FUN_001885b8(&temp_v3,(int)((unsigned long long)temp_v2 >> 0x20),temp_v0,temp_v1);
-          temp_v7 = 0;
+        (**(romwright_code **)(*temp_v10 + 0x30))();
+        temp_v1 = temp_v9;
+        temp_v0 = temp_v8;
+        if (temp_v8 != 0 || temp_v9 != 0) {
+          FUN_00500924(&temp_v6);
+          FUN_001885b8(&temp_v5,temp_v2,temp_v0,temp_v1);
           temp_v8 = 0;
+          temp_v9 = 0;
         }
-        temp_v1 = temp_v8;
-        temp_v0 = temp_v7;
-        temp_v6 = 0;
-        temp_v5 = "룜B떨B듼B";
-        if (temp_v7 != 0 || temp_v8 != 0) {
-          temp_v2 = FUN_00500924(&temp_v5);
-          temp_v3 = (unsigned int **)temp_v2;
-          FUN_001885b8(&temp_v3,(int)((unsigned long long)temp_v2 >> 0x20),temp_v0,temp_v1);
+        temp_v1 = temp_v9;
+        temp_v0 = temp_v8;
+        temp_v7 = 0;
+        temp_v6 = "룜B떨B듼B";
+        if (temp_v8 != 0 || temp_v9 != 0) {
+          FUN_00500924(&temp_v6);
+          FUN_001885b8(&temp_v5,temp_v3,temp_v0,temp_v1);
         }
         return (char **)0x0;
       }
-      (**(romwright_code **)(*temp_v9 + 0x30))();
-      if (temp_v7 != 0 || temp_v8 != 0) {
-        temp_v2 = FUN_00500924(&temp_v5);
-        temp_v16 = (unsigned int)temp_v2;
-        FUN_001885b8(&temp_v16,(int)((unsigned long long)temp_v2 >> 0x20),temp_v7,temp_v8);
-        temp_v7 = 0;
+      (**(romwright_code **)(*temp_v10 + 0x30))();
+      if (temp_v8 != 0 || temp_v9 != 0) {
+        temp_v4 = FUN_00500924(&temp_v6);
+        temp_v17 = (unsigned int)temp_v4;
+        FUN_001885b8(&temp_v17,(int)((unsigned long long)temp_v4 >> 0x20),temp_v8,temp_v9);
         temp_v8 = 0;
+        temp_v9 = 0;
       }
-      temp_v6 = 0;
-      temp_v5 = "룜B떨B듼B";
-      if (temp_v8 != 0 || temp_v7 != 0) {
-        temp_v2 = FUN_00500924(&temp_v5);
-        temp_v17 = (unsigned int)temp_v2;
-        FUN_001885b8(&temp_v17,(int)((unsigned long long)temp_v2 >> 0x20),temp_v7,temp_v8);
+      temp_v7 = 0;
+      temp_v6 = "룜B떨B듼B";
+      if (temp_v9 != 0 || temp_v8 != 0) {
+        temp_v4 = FUN_00500924(&temp_v6);
+        temp_v18 = (unsigned int)temp_v4;
+        FUN_001885b8(&temp_v18,(int)((unsigned long long)temp_v4 >> 0x20),temp_v8,temp_v9);
       }
     }
   }

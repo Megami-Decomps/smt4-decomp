@@ -3,24 +3,25 @@
 #include "romwright_types.h"
 
 
-unsigned int
-nn_dbm_RomPathTool_PathParser_IsDirectoryPath(int param_1,unsigned int param_2,unsigned int param_3)
+unsigned char nn_dbm_RomPathTool_PathParser_IsDirectoryPath(int param_1)
 
 {
+/* irregular: irregular input(s): in_r2 */
   short temp_v0;
   short *psVar2;
+  unsigned int in_r2;
   unsigned char temp_v1;
   
   psVar2 = *(short **)(param_1 + 8);
   temp_v0 = *psVar2;
   if (temp_v0 == 0) {
-    param_3 = (unsigned int)(unsigned short)psVar2[-1];
+    in_r2 = (unsigned int)(unsigned short)psVar2[-1];
   }
-  if (temp_v0 != 0 || param_3 != 0x2f) {
+  if (temp_v0 != 0 || in_r2 != 0x2f) {
     if (temp_v0 == 0x2e) {
-      param_3 = (unsigned int)(unsigned short)psVar2[1];
+      in_r2 = (unsigned int)(unsigned short)psVar2[1];
     }
-    if (temp_v0 != 0x2e || param_3 != 0) {
+    if (temp_v0 != 0x2e || in_r2 != 0) {
       temp_v1 = temp_v0 != 0x2e;
       if (!temp_v1) {
         temp_v0 = psVar2[1];

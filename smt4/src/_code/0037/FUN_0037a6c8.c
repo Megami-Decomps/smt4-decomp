@@ -12,7 +12,7 @@ extern unsigned char DAT_00421b2c; /* 0x421b2c */
 
 /* Unsupported intrinsic, declaration required: builtin_strncpy (CALLOTHER). */
 /* Supplied declaration required: FUN_002bbb2c. */
-/* Supplied declaration required: nn_fs_detail_FileBase_TryGetSize. */
+extern unsigned int nn_fs_detail_FileBase_TryGetSize(unsigned int, long long *);
 /* Supplied declaration required: nw_io_FileStream_FilePosition_Seek. */
 
 
@@ -27,7 +27,7 @@ FUN_0037a6c8(unsigned int *param_1,unsigned int param_2,unsigned int param_3,int
             unsigned int param_5,unsigned int param_6)
 
 {
-/* irregular: 9 native warning(s); review required */
+/* irregular: 8 native warning(s); review required */
   unsigned int temp_v0;
   unsigned int temp_v1;
   romwright_code *pcVar3;
@@ -60,8 +60,7 @@ FUN_0037a6c8(unsigned int *param_1,unsigned int param_2,unsigned int param_3,int
   if (*(char *)(temp_v3 + 0x1c) != '\0') {
     temp_v4 = 0;
     uStack_1c = 0;
-    temp_v0 = temp_v3 + 4;
-    nn_fs_detail_FileBase_TryGetSize(temp_v0,&temp_v4);
+    temp_v0 = nn_fs_detail_FileBase_TryGetSize(temp_v3 + 4,(long long *)&temp_v4);
     temp_v1 = temp_v0 & 0x80000000;
     *(unsigned int *)(temp_v3 + 0x18) = temp_v0;
     temp_v2 = 0;
@@ -80,11 +79,10 @@ FUN_0037a6c8(unsigned int *param_1,unsigned int param_2,unsigned int param_3,int
     }
   }
   else {
-    temp_v3 = temp_v3 + 4;
-    nn_fs_detail_FileBase_TryGetSize(temp_v3,&temp_v4);
+    temp_v0 = nn_fs_detail_FileBase_TryGetSize(temp_v3 + 4,(long long *)&temp_v4);
     temp_v2 = temp_v4;
-    if (temp_v3 < 0) {
-      FUN_002bbb2c();
+    if ((int)temp_v0 < 0) {
+      FUN_002bbb2c(temp_v0,0x37a7ec);
       temp_v2 = temp_v4;
     }
   }

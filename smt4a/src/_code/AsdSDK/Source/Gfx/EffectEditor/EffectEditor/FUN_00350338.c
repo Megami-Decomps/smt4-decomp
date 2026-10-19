@@ -155,7 +155,7 @@ void FUN_00350338(int param_1)
                        pfVar7[3] * temp_v14;
               temp_v3 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v9 < temp_v10) << 0x1f) |
                       ((unsigned int)(temp_v9 == temp_v10) << 0x1e);
-              in_fpscr = temp_v3 | ((unsigned int)(NAN(temp_v9) || NAN(temp_v10)) << 0x1c);
+              in_fpscr = temp_v3 | ((unsigned int)((temp_v9 != temp_v9) || (temp_v10 != temp_v10)) << 0x1c);
               temp_v0 = (unsigned char)(temp_v3 >> 0x18);
               if (!(unsigned char)((temp_v0 >> 6) & 1) && temp_v0 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
                 temp_v10 = temp_v9;
@@ -214,7 +214,7 @@ void FUN_00350338(int param_1)
             temp_v12 = (float)((unsigned long long)temp_v19 >> 0x20);
             temp_v3 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v9 < temp_v12) << 0x1f) |
                     ((unsigned int)(temp_v9 == temp_v12) << 0x1e);
-            temp_v8 = temp_v3 | ((unsigned int)(NAN(temp_v9) || NAN(temp_v12)) << 0x1c);
+            temp_v8 = temp_v3 | ((unsigned int)((temp_v9 != temp_v9) || (temp_v12 != temp_v12)) << 0x1c);
             temp_v0 = (unsigned char)(temp_v3 >> 0x18);
             DAT_006472dc = temp_v4;
             DAT_006472e0 = temp_v10;

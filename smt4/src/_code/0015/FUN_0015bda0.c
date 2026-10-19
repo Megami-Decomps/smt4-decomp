@@ -98,7 +98,7 @@ unsigned int FUN_0015bda0(int param_1,int *param_2,int param_3)
       return 0x70;
     }
   }
-  else if (DAT_004652a4 < DAT_004652a0 + 0x1c) {
+  else if (DAT_004652a4 < (unsigned int)(DAT_004652a0 + 0x1c)) {
     return 0x70;
   }
   puVar5 = puVar4;

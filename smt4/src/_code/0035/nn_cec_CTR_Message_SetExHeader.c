@@ -5,49 +5,50 @@
 /* Supplied declaration required: FUN_00238c80. */
 /* Supplied declaration required: FUN_002634f4. */
 /* Supplied declaration required: FUN_002ad8b4. */
-extern int nn_cec_CTR_MessageId_IsEmpty(unsigned char *);
+extern unsigned char nn_cec_CTR_MessageId_IsEmpty(unsigned int);
 /* Supplied declaration required: nn_cec_CTR_Message_SetExHeaderWithoutCalc. */
 
 
-int nn_cec_CTR_Message_SetExHeader
-              (int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
+unsigned int nn_cec_CTR_Message_SetExHeader(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
 
 {
 /* irregular: 4 native warning(s); review required */
   int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
+  unsigned char temp_v1;
+  unsigned int temp_v2;
   int temp_v3;
-  int temp_v4;
-  unsigned char temp_v5 [8];
-  unsigned char temp_v6 [8];
-  unsigned char temp_v7 [12];
+  unsigned int temp_v4;
+  int temp_v5;
+  int temp_v6;
+  unsigned char temp_v7 [8];
+  unsigned char temp_v8 [8];
+  unsigned char temp_v9 [12];
   
-  FUN_002634f4(temp_v5);
-  temp_v1 = FUN_00238c80(temp_v7,param_1 + 0x20);
-  FUN_002ad8b4(temp_v5,temp_v1);
-  FUN_00238c80(temp_v6,param_1 + 0x20);
+  FUN_002634f4(temp_v7);
+  temp_v2 = FUN_00238c80(temp_v9,param_1 + 0x20);
+  FUN_002ad8b4(temp_v7,temp_v2);
+  FUN_00238c80(temp_v8,param_1 + 0x20);
   if ((*(char *)(param_1 + 0x131) == '\0') &&
-     (temp_v2 = nn_cec_CTR_MessageId_IsEmpty(temp_v5), temp_v2 != 0)) {
-    temp_v2 = param_1;
+     (temp_v1 = nn_cec_CTR_MessageId_IsEmpty((unsigned int)temp_v7), temp_v1)) {
+    temp_v4 = param_1;
     nn_cec_CTR_Message_SetExHeaderWithoutCalc(param_1,param_2,param_3,param_4);
-    if (-1 < temp_v2) {
-      temp_v3 = 0x70;
-      temp_v2 = (int)*(char *)(param_1 + 0x130);
-      if (temp_v2 != 0) {
-        temp_v4 = 0;
+    if (-1 < (int)temp_v4) {
+      temp_v5 = 0x70;
+      temp_v3 = (int)*(char *)(param_1 + 0x130);
+      if (temp_v3 != 0) {
+        temp_v6 = 0;
         do {
-          temp_v0 = temp_v4 * 0xc;
-          temp_v2 = temp_v2 - 1;
-          temp_v4 = temp_v4 + 1;
-          temp_v3 = temp_v3 + 8 + ((*(int *)(param_1 + temp_v0 + 0x74) + 3U) & 0xfffffffc);
-        } while (temp_v2 != 0);
+          temp_v0 = temp_v6 * 0xc;
+          temp_v3 = temp_v3 - 1;
+          temp_v6 = temp_v6 + 1;
+          temp_v5 = temp_v5 + 8 + ((*(int *)(param_1 + temp_v0 + 0x74) + 3U) & 0xfffffffc);
+        } while (temp_v3 != 0);
       }
-      *(int *)(param_1 + 4) = *(int *)(param_1 + 0x134) + temp_v3 + 0x20;
-      *(int *)(param_1 + 8) = temp_v3;
-      temp_v2 = 0;
+      *(int *)(param_1 + 4) = *(int *)(param_1 + 0x134) + temp_v5 + 0x20;
+      *(int *)(param_1 + 8) = temp_v5;
+      temp_v4 = 0;
     }
-    return temp_v2;
+    return temp_v4;
   }
-  return -0x377ef416;
+  return 0xc8810bea;
 }

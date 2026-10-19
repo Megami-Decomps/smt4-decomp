@@ -7,14 +7,13 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_2_stack;
 
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 void FUN_0037b488(unsigned int param_1,int param_2)
 
 {
-/* irregular: 2 native warning(s); review required */
   nn_os_CriticalSection_Enter(param_2 + 0x174);
   *(unsigned int *)(param_2 + 0x170) = param_1;
   nn_os_CriticalSection_Leave(param_2 + 0x174);

@@ -2,6 +2,21 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
+#ifndef ROMWRIGHT_FLOAT_BITS_DEFINED
+#define ROMWRIGHT_FLOAT_BITS_DEFINED
+static unsigned int romwright_f2u(float value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.f = value;
+    return bits.u;
+}
+static float romwright_u2f(unsigned int value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.u = value;
+    return bits.f;
+}
+#endif
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
@@ -46,7 +61,7 @@ unsigned int FUN_001f3740(void)
   temp_v11 = pfVar3[3];
   temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v13 < temp_v12) << 0x1f) |
           ((unsigned int)(temp_v13 == temp_v12) << 0x1e);
-  temp_v10 = temp_v0 | ((unsigned int)(NAN(temp_v13) || NAN(temp_v12)) << 0x1c);
+  temp_v10 = temp_v0 | ((unsigned int)((temp_v13 != temp_v13) || (temp_v12 != temp_v12)) << 0x1c);
   temp_v14 = pfVar3[4];
   temp_v1 = (unsigned char)(temp_v0 >> 0x18);
   temp_v7 = temp_v1 >> 7;
@@ -54,7 +69,7 @@ unsigned int FUN_001f3740(void)
   if (temp_v7 == temp_v9) {
     in_s3 = pfVar3[1];
     temp_v10 = (in_fpscr & 0xfffffff) | ((unsigned int)(in_s3 < temp_v12) << 0x1f) |
-             ((unsigned int)(in_s3 == temp_v12) << 0x1e) | ((unsigned int)(NAN(in_s3) || NAN(temp_v12)) << 0x1c);
+             ((unsigned int)(in_s3 == temp_v12) << 0x1e) | ((unsigned int)((in_s3 != in_s3) || (temp_v12 != temp_v12)) << 0x1c);
     temp_v1 = (unsigned char)(temp_v10 >> 0x18);
     temp_v7 = temp_v1 >> 7;
     temp_v9 = (temp_v1 >> 4) & 1;
@@ -123,16 +138,16 @@ unsigned int FUN_001f3740(void)
       pfVar3[6] = (float)temp_v16 * temp_v13;
     }
   }
-  *(float *)pfVar3[7] = temp_v12;
-  *(float *)pfVar3[8] = pfVar3[6];
+  *(float *)romwright_f2u((float)(pfVar3[7])) = temp_v12;
+  *(float *)romwright_f2u((float)(pfVar3[8])) = pfVar3[6];
   temp_v11 = *pfVar3 + (float)((unsigned long long)temp_v16 >> 0x20);
   *pfVar3 = temp_v11;
   if (temp_v11 < pfVar3[1]) {
     temp_v15 = 0;
   }
   else {
-    *(unsigned int *)pfVar3[7] = temp_v15;
-    *(unsigned int *)pfVar3[8] = temp_v15;
+    *(unsigned int *)romwright_f2u((float)(pfVar3[7])) = temp_v15;
+    *(unsigned int *)romwright_f2u((float)(pfVar3[8])) = temp_v15;
     temp_v15 = 0xffffffff;
   }
   return temp_v15;

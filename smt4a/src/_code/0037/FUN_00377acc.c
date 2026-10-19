@@ -85,7 +85,7 @@ void FUN_00377acc(fn_00377acc_arg0 *param_1,int param_2,unsigned int param_3)
         }
       }
       temp_v1 = DAT_005806d4;
-      if (param_1->field_0x180 != (int *)0x0) {
+      if (param_1->field_0x180 != (undefined4 *)0x0) {
         if (param_1->field_0x185 != 0) {
           (**(romwright_code **)(*param_1->field_0x180 + 4))();
           param_1->field_0x180 = (unsigned int *)0x0;

@@ -10,7 +10,7 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: hasExclusiveAccess (CALLOTHER). */
 
 
-void nn_os_LightSemaphore_Initialize(unsigned int *param_1,unsigned int param_2,unsigned short param_3)
+void nn_os_LightSemaphore_Initialize(int *param_1,int param_2,int param_3)
 
 {
 /* irregular: 1 native warning(s); review required */
@@ -24,6 +24,6 @@ void nn_os_LightSemaphore_Initialize(unsigned int *param_1,unsigned int param_2,
     temp_v0 = (unsigned char)hasExclusiveAccess(param_1 + 1);
   } while (!temp_v0);
   *(unsigned short *)(param_1 + 1) = 0;
-  *(unsigned short *)((int)param_1 + 6) = param_3;
+  *(short *)((int)param_1 + 6) = (short)param_3;
   return;
 }

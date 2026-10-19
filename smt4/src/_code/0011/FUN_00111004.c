@@ -44,7 +44,7 @@ unsigned int FUN_00111004(void)
   unsigned char temp_v4;
   unsigned long long temp_v5;
   unsigned int in_stack_ffffffb8;
-  unsigned char temp_v6 [3];
+  unsigned int temp_v6;
   int temp_v7;
   unsigned int temp_v8;
   int temp_v9;
@@ -69,7 +69,7 @@ unsigned int FUN_00111004(void)
      (temp_v1 = FUN_002ad1e0(DAT_00432fc8 + 0x98), temp_v1 != 0)) {
     *(unsigned int *)(DAT_00432fc8 + 0x754) = *(unsigned int *)(DAT_00432fc8 + 0x754) & 0xfffeffff;
     FUN_002ba9ac(DAT_00433158);
-    temp_v6 = (undefined3)((unsigned int)in_stack_ffffffb8 >> 8);
+    temp_v6 = ((unsigned int)((unsigned int)in_stack_ffffffb8 >> 8) & 0xffffffU);
     puVar4 = (unsigned int *)FUN_002bad5c((unsigned int *)&temp_v7);
     puVar4[2] = 0;
     puVar4[3] = 0;

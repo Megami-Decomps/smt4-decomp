@@ -4,15 +4,14 @@
 
 extern unsigned char DAT_00647708; /* 0x647708 */
 
-/* Supplied declaration required: nn_snd_CTR_MasterManagerImpl_Finalize. */
+extern void nn_snd_CTR_MasterManagerImpl_Finalize(unsigned int);
 
 
 void FUN_00159e24(char *param_1)
 
 {
-/* irregular: 1 native warning(s); review required */
   if (*param_1 != '\0') {
-    nn_snd_CTR_MasterManagerImpl_Finalize(&DAT_00647708);
+    nn_snd_CTR_MasterManagerImpl_Finalize((unsigned int)&DAT_00647708);
     param_1[0x4c] = -1;
     param_1[0x4d] = -1;
     param_1[0x4e] = -1;

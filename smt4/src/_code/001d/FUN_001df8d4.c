@@ -105,7 +105,7 @@ unsigned int FUN_001df8d4(int param_1)
               temp_v1 = in_fpscr & 0xfffffff;
               temp_v3 = temp_v1 | ((unsigned int)(temp_v11 < temp_v10) << 0x1f) | ((unsigned int)(temp_v11 == temp_v10) << 0x1e)
               ;
-              in_fpscr = temp_v3 | ((unsigned int)(NAN(temp_v11) || NAN(temp_v10)) << 0x1c);
+              in_fpscr = temp_v3 | ((unsigned int)((temp_v11 != temp_v11) || (temp_v10 != temp_v10)) << 0x1c);
               temp_v0 = (unsigned char)(temp_v3 >> 0x18);
               if ((!(!(unsigned char)((temp_v0 >> 6) & 1) && temp_v0 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1))) &&
                  ((in_fpscr = temp_v1 | ((unsigned int)(temp_v11 == temp_v10) << 0x1e), !romwright_subpiece_4_1_0(in_fpscr >> 0x1e,0)

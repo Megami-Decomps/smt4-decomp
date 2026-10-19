@@ -10,19 +10,18 @@ typedef struct {
 extern unsigned char DAT_00618824; /* 0x618824 */
 extern unsigned char DAT_0061887c; /* 0x61887c */
 
-extern unsigned int nn_fnd_ExpHeapBase_Allocate(unsigned char *, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern unsigned int nn_fnd_ExpHeapBase_Allocate(unsigned int, unsigned int, int, unsigned char, int, unsigned char);
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 unsigned int FUN_004d9af8(unsigned int param_1,unsigned int param_2)
 
 {
-/* irregular: 2 native warning(s); review required */
   unsigned int temp_v0;
   
-  nn_os_CriticalSection_Enter(&DAT_0061887c);
-  temp_v0 = nn_fnd_ExpHeapBase_Allocate(&DAT_00618824,param_2,0x20,0,0,0);
-  nn_os_CriticalSection_Leave(&DAT_0061887c);
+  nn_os_CriticalSection_Enter((unsigned int)&DAT_0061887c);
+  temp_v0 = nn_fnd_ExpHeapBase_Allocate((unsigned int)&DAT_00618824,param_2,0x20,0,0,0);
+  nn_os_CriticalSection_Leave((unsigned int)&DAT_0061887c);
   return temp_v0;
 }

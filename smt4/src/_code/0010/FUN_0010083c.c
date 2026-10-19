@@ -37,7 +37,7 @@ void FUN_0010083c(unsigned int *param_1,unsigned int *param_2,unsigned int param
     param_1[3] = unaff_r10;
     param_1[4] = unaff_r11;
     param_1[5] = 0x100845;
-    param_1[6] = register0x00000054;
+    param_1[6] = ((unsigned int)__current_sp());
     param_1[7] = 0x10085c;
     *param_1 = 0x100860;
     param_1[-1] = in_lr;

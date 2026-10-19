@@ -46,7 +46,7 @@ FUN_0030d824(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
 
 {
 /* irregular: 1 goto(s) */
-  unsigned char temp_v0 [3];
+  unsigned int temp_v0;
   unsigned int temp_v1;
   unsigned int temp_v2;
   unsigned int temp_v3;
@@ -183,7 +183,7 @@ FUN_0030d824(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
     }
   }
   do {
-    temp_v0 = (undefined3)(temp_v4 - temp_v6);
+    temp_v0 = ((unsigned int)(temp_v4 - temp_v6) & 0xffffffU);
     temp_v10 = *(unsigned short *)(param_6 + temp_v20 * 2);
     temp_v11 = (unsigned int)temp_v10;
     if ((int)temp_v11 < temp_v18) {

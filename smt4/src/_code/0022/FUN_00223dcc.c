@@ -40,7 +40,7 @@ extern int FUN_002b879c(void);
 /* Supplied declaration required: FUN_002c526c. */
 /* Supplied declaration required: FUN_0030f5bc. */
 /* Supplied declaration required: FUN_003c9f28. */
-/* Supplied declaration required: nn_os_Thread_FinalizeImpl. */
+extern void nn_os_Thread_FinalizeImpl(unsigned int);
 
 
 /* WARNING: Type propagation algorithm not settling */
@@ -48,7 +48,7 @@ extern int FUN_002b879c(void);
 void FUN_00223dcc(void)
 
 {
-/* irregular: 22 native warning(s); review required */
+/* irregular: 21 native warning(s); review required */
   int *piVar1;
   int *piVar2;
   int temp_v0;
@@ -66,7 +66,7 @@ void FUN_00223dcc(void)
       FUN_002c526c();
     }
     *(unsigned char *)(piVar1 + 0x257b) = 1;
-    nn_os_Thread_FinalizeImpl(piVar4);
+    nn_os_Thread_FinalizeImpl((unsigned int)piVar4);
     if (*piVar4 != 0) {
       software_interrupt(0x23);
       *piVar4 = 0;

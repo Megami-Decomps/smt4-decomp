@@ -18,7 +18,6 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-extern void FUN_0021a5f0(fn_0021a5f0_arg0 *);
 /* Supplied declaration required: FUN_0021a610. */
 
 

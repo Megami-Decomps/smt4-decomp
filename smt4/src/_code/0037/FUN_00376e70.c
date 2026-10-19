@@ -13,6 +13,21 @@ struct fn_00376e70_arg1 {
     float field_0x28; /* +0x28 */
 };
 
+#ifndef ROMWRIGHT_FLOAT_BITS_DEFINED
+#define ROMWRIGHT_FLOAT_BITS_DEFINED
+static unsigned int romwright_f2u(float value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.f = value;
+    return bits.u;
+}
+static float romwright_u2f(unsigned int value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.u = value;
+    return bits.f;
+}
+#endif
 /* stack frame of param_6: 8 slot(s), 32 byte(s) */
 typedef struct {
     unsigned int sp34; /* 0x34: local_34 */
@@ -82,11 +97,11 @@ void FUN_00376e70(int param_1,fn_00376e70_arg1 *param_2,float *param_3,unsigned 
           *param_6 = temp_v0;
         }
         if ((param_5 & 2) != 0) {
-          pfVar1 = (float *)param_6[8];
+          pfVar1 = (float *)romwright_f2u((float)(param_6[8]));
           if ((int)param_6[8] <= (int)temp_v2[0]) {
             pfVar1 = temp_v2[0];
           }
-          param_6[8] = (float)pfVar1;
+          param_6[8] = romwright_u2f((unsigned int)(pfVar1));
         }
       }
       if ((param_5 & 0xc) != 0) {
@@ -94,7 +109,7 @@ void FUN_00376e70(int param_1,fn_00376e70_arg1 *param_2,float *param_3,unsigned 
         temp_v1 = temp_v3;
         nw_snd_Sound3DCalculator_CalcPan(param_2,puVar3,param_3,param_1 + 4);
         if ((param_5 & 4) != 0) {
-          param_6[2] = (float)temp_v3[0];
+          param_6[2] = romwright_u2f((unsigned int)(temp_v3[0]));
         }
         if ((param_5 & 8) != 0) {
           param_6[3] = temp_v7;
@@ -103,16 +118,16 @@ void FUN_00376e70(int param_1,fn_00376e70_arg1 *param_2,float *param_3,unsigned 
       if ((param_5 & 0x20) != 0) {
         temp_v1 = temp_v8;
         FUN_0037787c(param_2,puVar3,param_3,&temp_v4);
-        param_6[1] = (float)temp_v8[0];
+        param_6[1] = romwright_u2f((unsigned int)(temp_v8[0]));
       }
       if ((param_5 & 0x10) != 0) {
         nw_snd_Sound3DCalculator_CalcBiquadFilterValue(param_2,puVar3,param_3,&temp_v1);
         param_6[7] = param_2->field_0x28;
         ppfVar5 = (float **)temp_v1;
-        if ((float)temp_v1 < param_6[6]) {
-          ppfVar5 = (float **)param_6[6];
+        if (romwright_u2f((unsigned int)(temp_v1)) < param_6[6]) {
+          ppfVar5 = (float **)romwright_f2u((float)(param_6[6]));
         }
-        param_6[6] = (float)ppfVar5;
+        param_6[6] = romwright_u2f((unsigned int)(ppfVar5));
       }
       puVar2 = (unsigned int *)*puVar2;
     } while ((void **)puVar2 != &param_2->field_0x10);

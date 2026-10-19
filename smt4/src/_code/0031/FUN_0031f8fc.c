@@ -225,7 +225,7 @@ void FUN_0031f8fc(fn_0031f8fc_arg0 *param_1)
                 temp_v26 = (float)piVar23[1];
                 temp_v15 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v26 < temp_v33) << 0x1f) |
                          ((unsigned int)(temp_v26 == temp_v33) << 0x1e);
-                in_fpscr = temp_v15 | ((unsigned int)(NAN(temp_v26) || NAN(temp_v33)) << 0x1c);
+                in_fpscr = temp_v15 | ((unsigned int)((temp_v26 != temp_v26) || (temp_v33 != temp_v33)) << 0x1c);
                 temp_v2 = (unsigned char)(temp_v15 >> 0x18);
                 temp_v24 = (float)VectorSignedToFloat(temp_v20,(unsigned char)(in_fpscr >> 0x16) & 3);
                 if (!((unsigned char)((temp_v2 >> 6) & 1) || temp_v2 >> 7 != ((unsigned char)(in_fpscr >> 0x1c) & 1))) {

@@ -12,46 +12,46 @@ typedef struct {
 extern unsigned int FUN_0018b70c(void);
 /* Supplied declaration required: FUN_0018b868. */
 /* Supplied declaration required: FUN_0018b964. */
-extern unsigned int FUN_001a35e0(unsigned char *, unsigned int, unsigned char *, unsigned char *, int, unsigned char *, int *);
+extern unsigned int FUN_001a35e0(unsigned char *, unsigned int, unsigned int *, unsigned char *, unsigned int, int *, int *);
 
 
-unsigned int
-nn_applet_CTR_detail_Glance
-          (unsigned char *param_1,unsigned char *param_2,unsigned char *param_3,int param_4,
-          unsigned char *param_5,int *param_6)
+unsigned int nn_applet_CTR_detail_Glance
+               (unsigned char *param_1,unsigned int *param_2,unsigned char *param_3,unsigned int param_4,int *param_5,
+               int *param_6)
 
 {
 /* irregular: 3 native warning(s); review required */
   unsigned int temp_v0;
-  int temp_v1;
-  unsigned char temp_v2 [4];
+  unsigned int temp_v1;
+  int temp_v2;
   unsigned char temp_v3 [4];
+  unsigned int uStack_2c;
   unsigned char temp_v4 [4];
-  unsigned char temp_v5 [4];
+  int iStack_24;
   
   FUN_0018b868();
   if (param_1 == (unsigned char *)0x0) {
-    param_1 = temp_v2;
+    param_1 = temp_v3;
   }
-  if (param_2 == (unsigned char *)0x0) {
-    param_2 = temp_v3;
+  if (param_2 == (unsigned int *)0x0) {
+    param_2 = &uStack_2c;
   }
   if (param_3 == (unsigned char *)0x0 || param_4 == 0) {
     param_3 = temp_v4;
     param_4 = 0;
   }
-  if (param_5 == (unsigned char *)0x0) {
-    param_5 = temp_v5;
+  if (param_5 == (int *)0x0) {
+    param_5 = &iStack_24;
   }
   if (param_6 == (int *)0x0) {
-    param_6 = &temp_v1;
+    param_6 = &temp_v2;
   }
-  temp_v1 = 0;
+  temp_v2 = 0;
   temp_v0 = FUN_0018b70c();
-  temp_v0 = FUN_001a35e0(param_1,temp_v0,param_2,param_3,param_4,param_5,param_6);
-  if (temp_v1 != 0) {
+  temp_v1 = FUN_001a35e0(param_1,temp_v0,param_2,param_3,param_4,param_5,param_6);
+  if (temp_v2 != 0) {
     software_interrupt(0x23);
   }
   FUN_0018b964();
-  return temp_v0;
+  return temp_v1;
 }

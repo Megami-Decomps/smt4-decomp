@@ -16,8 +16,8 @@ void FUN_003970ac(unsigned int *param_1,unsigned int *param_2)
 {
 /* irregular: 3 native warning(s); review required */
   if (param_2 != param_1 + 2) {
-    FUN_003970ac(param_1,*param_2);
-    FUN_003970ac(param_1,param_2[1]);
+    FUN_003970ac(param_1,(unsigned int *)*param_2);
+    FUN_003970ac(param_1,(unsigned int *)param_2[1]);
                     /* WARNING: Could not recover jumptable at 0x003970f0. Too many branches */
                     /* WARNING: Treating indirect jump as call */
     (**(romwright_code **)*param_1)(param_1,param_2);

@@ -6,13 +6,13 @@ extern unsigned int DAT_005c0ad8; /* 0x5c0ad8 */
 
 /* Unsupported intrinsic, declaration required: hasExclusiveAccess (CALLOTHER). */
 /* Supplied declaration required: FUN_001b4a58. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
 
 
 void FUN_001c7c44(int param_1,int param_2)
 
 {
-/* irregular: irregular input(s): in_lr; 3 native warning(s); review required */
+/* irregular: irregular input(s): in_lr; 2 native warning(s); review required */
   unsigned char temp_v0;
   int temp_v1;
   short temp_v2;
@@ -30,7 +30,7 @@ void FUN_001c7c44(int param_1,int param_2)
   *(unsigned int *)(param_2 + 0x14) = 0;
   piVar6 = (int *)(temp_v3 + 0x70);
   *(unsigned char *)(param_2 + 0x11) = 1;
-  nn_os_CriticalSection_Enter(piVar6);
+  nn_os_CriticalSection_Enter((unsigned int)piVar6);
   temp_v4 = *(int *)(temp_v3 + 0x30);
   if (temp_v4 == 0) {
     *(int *)(temp_v3 + 0x30) = param_2;

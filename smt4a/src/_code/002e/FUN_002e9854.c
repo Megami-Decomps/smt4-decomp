@@ -7,7 +7,6 @@ extern unsigned char LAB_002e98a0; /* 0x2e98a0 */
 extern unsigned int FUN_002e92e4(void);
 extern int FUN_002e9300(unsigned int *, unsigned char *);
 /* Supplied declaration required: FUN_002e9318. */
-extern unsigned int FUN_002e9854(int, int);
 
 
 unsigned int FUN_002e9854(int param_1,int param_2,unsigned int param_3,unsigned int param_4)
@@ -33,7 +32,7 @@ unsigned int FUN_002e9854(int param_1,int param_2,unsigned int param_3,unsigned 
   else {
     param_1 = FUN_002e9300((unsigned int *)&uStack_18,&LAB_002e98a0);
   }
-  temp_v0 = FUN_002e9854(param_1,param_2);
+  temp_v0 = FUN_002e9854(param_1,param_2, /* unrecovered */ 0, /* unrecovered */ 0);
   FUN_002e9318(&uStack_18);
   return temp_v0;
 }

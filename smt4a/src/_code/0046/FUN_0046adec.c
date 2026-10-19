@@ -32,7 +32,7 @@ void FUN_0046adec(int param_1)
   temp_v2 = *(unsigned int *)(temp_v1 + 700);
   if ((pcVar4 != (romwright_code *)0x0) || (((temp_v2 & 1) != 0 && (temp_v2 != 0)))) {
     if ((temp_v2 & 1) != 0) {
-      pcVar4 = *(romwright_code **)(pcVar4 + *(int *)(param_1 + ((int)temp_v2 >> 1)));
+      pcVar4 = *(romwright_code **)((unsigned char *)pcVar4 + *(int *)(param_1 + ((int)temp_v2 >> 1)));
     }
     (*pcVar4)();
   }

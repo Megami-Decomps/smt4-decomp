@@ -25,127 +25,115 @@ typedef struct {
 
 extern unsigned int DAT_0044e660; /* 0x44e660 */
 
-extern unsigned long long FUN_00239dec(char **);
+#ifndef ROMWRIGHT_PIECE_4_4_DEFINED
+#define ROMWRIGHT_PIECE_4_4_DEFINED
+#define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
+#endif
+extern unsigned int FUN_00239dec(char **);
 /* Supplied declaration required: FUN_0035633c. */
-/* Supplied declaration required: nn_fs_ipc_FileSystem_CloseArchive. */
-extern char **nn_fs_ipc_FileSystem_OpenArchive(unsigned int *, int *, unsigned int);
+extern unsigned int nn_fs_ipc_FileSystem_CloseArchive(unsigned int, unsigned long long);
+extern unsigned int nn_fs_ipc_FileSystem_OpenArchive(unsigned int, unsigned long long *, unsigned int, unsigned int, unsigned char *, unsigned int);
 
 
-char ** FUN_0035511c(unsigned int **param_1)
+char ** FUN_0035511c(unsigned int param_1)
 
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  char **ppcVar3;
-  unsigned long long temp_v2;
-  unsigned int **temp_v3;
-  unsigned int temp_v4;
-  char *temp_v5;
-  unsigned int temp_v6;
+/* irregular: 1 native warning(s); review required */
+  char **ppcVar1;
+  unsigned int temp_v0;
+  unsigned char ***pppbVar3;
+  unsigned int temp_v1;
+  char *temp_v2;
+  unsigned int temp_v3;
+  int temp_v4;
+  int temp_v5;
+  int *temp_v6;
   int temp_v7;
   int temp_v8;
-  int *temp_v9;
-  int temp_v10;
-  int temp_v11;
   int iStack_4c;
-  unsigned int temp_v12;
-  unsigned int **temp_v13;
+  unsigned int temp_v9;
+  unsigned char **temp_v10;
   unsigned int uStack_40;
-  int temp_v14;
+  int temp_v11;
   unsigned int uStack_38;
   unsigned int uStack_34;
+  int temp_v12;
+  int temp_v13;
+  int temp_v14;
   int temp_v15;
-  int temp_v16;
-  int temp_v17;
-  int temp_v18;
   unsigned int *puStack_20;
   unsigned int uStack_1c;
-  unsigned char temp_v19 [4];
+  unsigned char temp_v16 [4];
   
-  temp_v3 = (unsigned int **)&temp_v13;
-  temp_v6 = 0;
-  temp_v5 = "挼5悼5怐5";
-  temp_v12 = 1;
+  pppbVar3 = &temp_v10;
+  temp_v3 = 0;
+  temp_v2 = "挼5悼5怐5";
+  temp_v9 = 1;
   uStack_40 = 1;
-  temp_v18 = DAT_0044e660;
-  temp_v4 = 1;
-  temp_v13 = temp_v3;
-  ppcVar3 = (char **)nn_fs_ipc_FileSystem_OpenArchive((unsigned int *)&temp_v18,&temp_v11,3);
-  if ((int)ppcVar3 < 0) {
-    temp_v5 = "挼5悼5怐5";
-    if (temp_v7 != 0 || temp_v8 != 0) {
-      temp_v2 = FUN_00239dec(&temp_v5);
-      temp_v10 = (unsigned int)temp_v2;
-      nn_fs_ipc_FileSystem_CloseArchive(&temp_v10,(int)((unsigned long long)temp_v2 >> 0x20),temp_v7,temp_v8)
-      ;
+  temp_v15 = DAT_0044e660;
+  temp_v1 = 1;
+  temp_v10 = (unsigned char **)pppbVar3;
+  ppcVar1 = (char **)nn_fs_ipc_FileSystem_OpenArchive
+                               ((unsigned int)&temp_v15,(unsigned long long *)&temp_v8,3,1,(unsigned char *)pppbVar3,1);
+  if ((int)ppcVar1 < 0) {
+    temp_v2 = "挼5悼5怐5";
+    if (temp_v4 != 0 || temp_v5 != 0) {
+      temp_v7 = FUN_00239dec(&temp_v2);
+      nn_fs_ipc_FileSystem_CloseArchive((unsigned int)&temp_v7,romwright_piece_4_4(temp_v1,pppbVar3));
     }
   }
   else {
-    temp_v6 = DAT_0044e660;
-    temp_v7 = temp_v11;
-    temp_v8 = iStack_4c;
-    temp_v14 = 2;
+    temp_v3 = DAT_0044e660;
+    temp_v4 = temp_v8;
+    temp_v5 = iStack_4c;
+    temp_v11 = 2;
     uStack_38 = 0x6e6f6369;
     uStack_34 = 0;
-    puStack_20 = (unsigned int *)&temp_v14;
-    temp_v18 = 2;
+    puStack_20 = (unsigned int *)&temp_v11;
+    temp_v15 = 2;
     uStack_1c = 0xc;
-    ppcVar3 = &temp_v5;
-    FUN_0035633c(ppcVar3,&temp_v9,&temp_v18,1);
-    if ((int)ppcVar3 < 0) {
-      temp_v5 = "挼5悼5怐5";
-      if (temp_v7 != 0 || temp_v8 != 0) {
-        temp_v2 = FUN_00239dec(&temp_v5);
-        temp_v15 = (unsigned int)temp_v2;
-        nn_fs_ipc_FileSystem_CloseArchive
-                  (&temp_v15,(int)((unsigned long long)temp_v2 >> 0x20),temp_v7,temp_v8);
+    ppcVar1 = &temp_v2;
+    FUN_0035633c(ppcVar1,&temp_v6,&temp_v15,1);
+    if ((int)ppcVar1 < 0) {
+      temp_v2 = "挼5悼5怐5";
+      if (temp_v4 != 0 || temp_v5 != 0) {
+        temp_v12 = FUN_00239dec(&temp_v2);
+        nn_fs_ipc_FileSystem_CloseArchive((unsigned int)&temp_v12,romwright_piece_4_4(temp_v1,pppbVar3));
       }
     }
     else {
-      temp_v4 = 0x36c0;
-      temp_v3 = param_1;
-      ppcVar3 = (char **)(**(romwright_code **)*temp_v9)(temp_v9,temp_v19,0,0);
-      if (-1 < (int)ppcVar3) {
-        (**(romwright_code **)(*temp_v9 + 0x2c))();
-        temp_v1 = temp_v8;
-        temp_v0 = temp_v7;
-        if (temp_v7 != 0 || temp_v8 != 0) {
-          temp_v2 = FUN_00239dec(&temp_v5);
-          temp_v3 = (unsigned int **)temp_v2;
-          nn_fs_ipc_FileSystem_CloseArchive(&temp_v3,(int)((unsigned long long)temp_v2 >> 0x20),temp_v0,temp_v1);
-          temp_v7 = 0;
-          temp_v8 = 0;
+      temp_v1 = 0x36c0;
+      ppcVar1 = (char **)(**(romwright_code **)*temp_v6)(temp_v6,temp_v16,0,0);
+      if (-1 < (int)ppcVar1) {
+        (**(romwright_code **)(*temp_v6 + 0x2c))();
+        if (temp_v4 != 0 || temp_v5 != 0) {
+          temp_v0 = FUN_00239dec(&temp_v2);
+          nn_fs_ipc_FileSystem_CloseArchive((unsigned int)&pppbVar3,romwright_piece_4_4(temp_v1,temp_v0));
+          temp_v4 = 0;
+          temp_v5 = 0;
         }
-        temp_v1 = temp_v8;
-        temp_v0 = temp_v7;
-        temp_v6 = 0;
-        temp_v5 = "挼5悼5怐5";
-        if (temp_v7 != 0 || temp_v8 != 0) {
-          temp_v2 = FUN_00239dec(&temp_v5);
-          temp_v3 = (unsigned int **)temp_v2;
-          nn_fs_ipc_FileSystem_CloseArchive(&temp_v3,(int)((unsigned long long)temp_v2 >> 0x20),temp_v0,temp_v1);
+        temp_v3 = 0;
+        temp_v2 = "挼5悼5怐5";
+        if (temp_v4 != 0 || temp_v5 != 0) {
+          temp_v0 = FUN_00239dec(&temp_v2);
+          nn_fs_ipc_FileSystem_CloseArchive((unsigned int)&pppbVar3,romwright_piece_4_4(temp_v1,temp_v0));
         }
         return (char **)0x0;
       }
-      (**(romwright_code **)(*temp_v9 + 0x2c))();
-      if (temp_v7 != 0 || temp_v8 != 0) {
-        temp_v2 = FUN_00239dec(&temp_v5);
-        temp_v16 = (unsigned int)temp_v2;
-        nn_fs_ipc_FileSystem_CloseArchive
-                  (&temp_v16,(int)((unsigned long long)temp_v2 >> 0x20),temp_v7,temp_v8);
-        temp_v7 = 0;
-        temp_v8 = 0;
+      (**(romwright_code **)(*temp_v6 + 0x2c))();
+      if (temp_v4 != 0 || temp_v5 != 0) {
+        temp_v13 = FUN_00239dec(&temp_v2);
+        nn_fs_ipc_FileSystem_CloseArchive((unsigned int)&temp_v13,romwright_piece_4_4(temp_v1,param_1));
+        temp_v4 = 0;
+        temp_v5 = 0;
       }
-      temp_v6 = 0;
-      temp_v5 = "挼5悼5怐5";
-      if (temp_v7 != 0 || temp_v8 != 0) {
-        temp_v2 = FUN_00239dec(&temp_v5);
-        temp_v17 = (unsigned int)temp_v2;
-        nn_fs_ipc_FileSystem_CloseArchive
-                  (&temp_v17,(int)((unsigned long long)temp_v2 >> 0x20),temp_v7,temp_v8);
+      temp_v3 = 0;
+      temp_v2 = "挼5悼5怐5";
+      if (temp_v4 != 0 || temp_v5 != 0) {
+        temp_v14 = FUN_00239dec(&temp_v2);
+        nn_fs_ipc_FileSystem_CloseArchive((unsigned int)&temp_v14,romwright_piece_4_4(temp_v1,param_1));
       }
     }
   }
-  return ppcVar3;
+  return ppcVar1;
 }

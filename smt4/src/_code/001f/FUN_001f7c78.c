@@ -28,7 +28,7 @@ void FUN_001f7c78(void)
   if ((!romwright_subpiece_4_1_0(temp_v3 >> 0x1d,0)) ||
      (temp_v3 = (in_fpscr & 0xfffffff) | ((unsigned int)(0.0f < in_s1) << 0x1f) |
               ((unsigned int)(in_s1 == 0.0f) << 0x1e), temp_v0 = (unsigned char)(temp_v3 >> 0x18),
-     !(unsigned char)((temp_v0 >> 6) & 1) && (unsigned char)(temp_v0 >> 7) == NAN(in_s1))) {
+     !(unsigned char)((temp_v0 >> 6) & 1) && (unsigned char)(temp_v0 >> 7) == (in_s1 != in_s1))) {
     in_s0 = in_s0 + 360.0f;
     in_s1 = in_s1 + 360.0f;
   }

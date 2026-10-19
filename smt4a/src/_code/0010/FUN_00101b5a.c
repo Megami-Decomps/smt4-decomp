@@ -22,7 +22,6 @@ typedef struct {
     unsigned int sp78; /* 0x78: local_78 */
 } param_4_stack;
 
-/* Unsupported intrinsic, declaration required: while (COPY). */
 /* Supplied declaration required: FUN_0010195c. */
 extern unsigned char *FUN_001024a8(unsigned int, unsigned int, unsigned int *, int *);
 extern unsigned char *FUN_001024ac(unsigned int, unsigned int, unsigned int *, int *);
@@ -34,7 +33,7 @@ extern int FUN_002e363c(unsigned int);
 unsigned char * FUN_00101b5a(unsigned int param_1,unsigned int param_2,unsigned int *param_3,int *param_4)
 
 {
-/* irregular: 1 goto(s); 3 native warning(s); review required */
+/* irregular: 1 goto(s); 2 native warning(s); review required */
   int temp_v0;
   unsigned char *puVar2;
   int *piVar3;
@@ -58,7 +57,7 @@ unsigned char * FUN_00101b5a(unsigned int param_1,unsigned int param_2,unsigned 
   int temp_v14;
   unsigned int temp_v15;
   unsigned char temp_v16 [9];
-  unsigned char temp_v17 [3];
+  unsigned int temp_v17;
   int temp_v18;
   unsigned int temp_v19;
   unsigned int uStack_24;
@@ -226,7 +225,7 @@ LAB_00101da6:
           temp_v11 = temp_v5;
           while ((0 < temp_v0 && (temp_v4 = FUN_002e363c(temp_v10), temp_v4 != 0))) {
             temp_v0 = temp_v0 - 1;
-            if (temp_v11 < temp_v17) {
+            if ((unsigned int)temp_v11 < temp_v17) {
               *temp_v11 = (char)(temp_v10 - 0x30);
               if ((((temp_v10 - 0x30) & 0xff) != 0) || (temp_v5 < temp_v11)) {
                 temp_v11 = temp_v11 + 1;

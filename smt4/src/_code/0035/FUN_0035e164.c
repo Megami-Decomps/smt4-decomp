@@ -9,7 +9,6 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_2_stack;
 
-/* Unsupported intrinsic, declaration required: while (COPY). */
 /* Supplied declaration required: FUN_0023799c. */
 /* Supplied declaration required: FUN_00237a20. */
 /* Supplied declaration required: FUN_00238170. */
@@ -24,7 +23,7 @@ extern int FUN_002c1870(int, unsigned int, int);
 unsigned int FUN_0035e164(int *param_1,int *param_2)
 
 {
-/* irregular: 9 native warning(s); review required */
+/* irregular: 8 native warning(s); review required */
   unsigned int temp_v0;
   int temp_v1;
   int temp_v2;

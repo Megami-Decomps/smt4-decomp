@@ -407,7 +407,7 @@ LAB_001abfec:
             } while (temp_v15 < DAT_004bd0d0);
           }
         }
-LAB_001ac248:
+LAB_001ac248:;
       } while (temp_v23[7] != 0);
       temp_v6 = 0;
       if ('\0' < *(char *)((int)puVar8 + 0xdd1)) {
@@ -471,9 +471,9 @@ LAB_001ac248:
                 temp_v14 = *(int *)(temp_v8 * 0xc + 0x4bcf94);
                 if (temp_v14 < temp_v13) {
                   temp_v17 = (&DAT_004bcf8c)[temp_v7 * 3];
-                  puVar8 = &DAT_004bcf8c + temp_v7 * 3;
-                  temp_v18 = (&DAT_004bcf90)[temp_v8 * 3];
-                  temp_v9 = (&DAT_004bcf90)[temp_v7 * 3];
+                  puVar8 = (unsigned int *)(&DAT_004bcf8c + temp_v7 * 3);
+                  temp_v18 = (unsigned int)(&DAT_004bcf90)[temp_v8 * 3];
+                  temp_v9 = (unsigned int)(&DAT_004bcf90)[temp_v7 * 3];
                   *puVar8 = (&DAT_004bcf8c)[temp_v8 * 3];
                   (&DAT_004bcf90)[temp_v7 * 3] = (unsigned int *)temp_v18;
                   *(int *)(temp_v7 * 0xc + 0x4bcf94) = temp_v14;

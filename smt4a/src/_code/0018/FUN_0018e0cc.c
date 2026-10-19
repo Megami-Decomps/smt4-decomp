@@ -74,7 +74,7 @@ void FUN_0018e0cc(int *param_1,int param_2,int param_3)
     if (puVar6 != (unsigned int *)0x0) {
       temp_v5 = 0;
       temp_v6 = '\0';
-      FUN_0018e0cc(temp_v7,puVar6,param_3);
+      FUN_0018e0cc((int *)temp_v7,(int)puVar6,param_3);
       FUN_001a90f0(&temp_v5,temp_v7);
       if (temp_v6 != '\0') {
         piVar4 = (int *)(param_2 + 0x1c);

@@ -185,11 +185,11 @@ int FUN_0045a010(int param_1,int *param_2,int param_3,int param_4)
             return temp_v4;
           }
           puVar3 = (unsigned int *)(param_1 + 0x28);
-          temp_v7 = romwright_piece_3_1(temp_v7._1_3_,1);
+          temp_v7 = romwright_piece_3_1((((unsigned int)(temp_v7) >> 8) & 0xffffffU),1);
           temp_v6 = piVar2;
           if ((int **)puVar3 != &temp_v6) {
             temp_v6 = (int *)*puVar3;
-            temp_v7 = romwright_piece_3_1(temp_v7._1_3_,*(unsigned char *)(param_1 + 0x2c));
+            temp_v7 = romwright_piece_3_1((((unsigned int)(temp_v7) >> 8) & 0xffffffU),*(unsigned char *)(param_1 + 0x2c));
             *(unsigned char *)(param_1 + 0x2c) = 1;
             *puVar3 = (unsigned int)piVar2;
           }

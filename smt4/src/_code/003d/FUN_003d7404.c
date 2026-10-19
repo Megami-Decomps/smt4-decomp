@@ -2,6 +2,21 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
+#ifndef ROMWRIGHT_FLOAT_BITS_DEFINED
+#define ROMWRIGHT_FLOAT_BITS_DEFINED
+static unsigned int romwright_f2u(float value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.f = value;
+    return bits.u;
+}
+static float romwright_u2f(unsigned int value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.u = value;
+    return bits.f;
+}
+#endif
 /* stack frame of param_1: 40 slot(s), 160 byte(s) */
 typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
@@ -505,7 +520,7 @@ LAB_003d7d90:
   temp_v6 = temp_v19 * temp_v5 + temp_v20 * temp_v4 + temp_v21 * temp_v2;
   temp_v2 = temp_v23 * temp_v5 + temp_v24 * temp_v4 + temp_v25 * temp_v2;
   FUN_002ad314(&temp_v31,&temp_v44);
-  temp_v4 = temp_v0 - (float)temp_v44;
+  temp_v4 = temp_v0 - romwright_u2f((unsigned int)(temp_v44));
   temp_v0 = temp_v0 / romwright_sqrt_4(temp_v7 * temp_v7 + temp_v6 * temp_v6 + temp_v2 * temp_v2);
   temp_v7 = temp_v7 * temp_v0;
   temp_v6 = temp_v6 * temp_v0;
@@ -513,15 +528,15 @@ LAB_003d7d90:
   temp_v16 = temp_v4 * temp_v7 * temp_v6;
   temp_v17 = temp_v4 * temp_v7 * temp_v2;
   temp_v21 = temp_v4 * temp_v6 * temp_v2;
-  temp_v15 = (float)temp_v44 + temp_v4 * temp_v7 * temp_v7;
-  temp_v25 = (float)temp_v44 + temp_v4 * temp_v2 * temp_v2;
-  temp_v20 = (float)temp_v44 + temp_v4 * temp_v6 * temp_v6;
-  temp_v19 = temp_v16 + (float)temp_v31 * temp_v2;
-  temp_v23 = temp_v17 - (float)temp_v31 * temp_v6;
-  temp_v24 = temp_v21 + (float)temp_v31 * temp_v7;
-  temp_v16 = temp_v16 - (float)temp_v31 * temp_v2;
-  temp_v17 = temp_v17 + (float)temp_v31 * temp_v6;
-  temp_v21 = temp_v21 - (float)temp_v31 * temp_v7;
+  temp_v15 = romwright_u2f((unsigned int)(temp_v44)) + temp_v4 * temp_v7 * temp_v7;
+  temp_v25 = romwright_u2f((unsigned int)(temp_v44)) + temp_v4 * temp_v2 * temp_v2;
+  temp_v20 = romwright_u2f((unsigned int)(temp_v44)) + temp_v4 * temp_v6 * temp_v6;
+  temp_v19 = temp_v16 + romwright_u2f((unsigned int)(temp_v31)) * temp_v2;
+  temp_v23 = temp_v17 - romwright_u2f((unsigned int)(temp_v31)) * temp_v6;
+  temp_v24 = temp_v21 + romwright_u2f((unsigned int)(temp_v31)) * temp_v7;
+  temp_v16 = temp_v16 - romwright_u2f((unsigned int)(temp_v31)) * temp_v2;
+  temp_v17 = temp_v17 + romwright_u2f((unsigned int)(temp_v31)) * temp_v6;
+  temp_v21 = temp_v21 - romwright_u2f((unsigned int)(temp_v31)) * temp_v7;
   temp_v0 = param_1[0x160];
   temp_v5 = param_1[0x161];
   temp_v2 = param_1[0x162];

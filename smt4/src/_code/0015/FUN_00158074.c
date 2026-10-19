@@ -9,7 +9,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_9_stack;
 
-/* Supplied declaration required: nn_snd_CTR_InitializeWaveBuffer. */
+extern void nn_snd_CTR_InitializeWaveBuffer(unsigned int);
 /* Supplied declaration required: nw_snd_internal_driver_StreamChannel_AppendWaveBuffer. */
 extern int nw_snd_internal_driver_Voice_FrameToByte(int, unsigned char);
 
@@ -19,7 +19,7 @@ FUN_00158074(int *param_1,int param_2,int param_3,int param_4,int param_5,int pa
             int param_8,int param_9)
 
 {
-/* irregular: 2 native warning(s); review required */
+/* irregular: 1 native warning(s); review required */
   int temp_v0;
   unsigned int temp_v1;
   int *piVar3;
@@ -37,7 +37,7 @@ FUN_00158074(int *param_1,int param_2,int param_3,int param_4,int param_5,int pa
             temp_v0 = param_4 - param_6;
           }
           piVar3 = param_1 + temp_v1 * 0xd0 + param_3 * 6 + 0x43;
-          nn_snd_CTR_InitializeWaveBuffer(piVar3);
+          nn_snd_CTR_InitializeWaveBuffer((unsigned int)piVar3);
           *piVar3 = temp_v2;
           param_1[temp_v1 * 0xd0 + param_3 * 6 + 0x44] = temp_v0;
           param_1[temp_v1 * 0xd0 + param_3 * 6 + 0x45] = *(int *)(param_7 + temp_v1 * 4);

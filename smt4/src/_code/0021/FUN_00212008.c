@@ -11,14 +11,14 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_002c526c. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 unsigned int FUN_00212008(unsigned int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
 
 {
-/* irregular: 5 native warning(s); review required */
+/* irregular: 3 native warning(s); review required */
   unsigned int temp_v0;
   unsigned int temp_v1;
   romwright_code *pcVar3;
@@ -29,7 +29,7 @@ unsigned int FUN_00212008(unsigned int *param_1,unsigned int param_2,unsigned in
     temp_v0 = 0;
   }
   else {
-    nn_os_CriticalSection_Enter(param_1 + 0x10);
+    nn_os_CriticalSection_Enter((unsigned int)(param_1 + 0x10));
     param_1[6] = param_3;
     param_1[7] = param_4;
     *param_1 = param_3;
@@ -38,7 +38,7 @@ unsigned int FUN_00212008(unsigned int *param_1,unsigned int param_2,unsigned in
     param_1[3] = param_4;
     pcVar3 = *(romwright_code **)(*(int *)param_1[0xe] + 0xc);
     (*pcVar3)((int *)param_1[0xe],pcVar3,param_3,param_4,0);
-    nn_os_CriticalSection_Leave(param_1 + 0x10);
+    nn_os_CriticalSection_Leave((unsigned int)(param_1 + 0x10));
     software_interrupt(0x18);
     if ((int)param_1[0x13] < 0) {
       FUN_002c526c();

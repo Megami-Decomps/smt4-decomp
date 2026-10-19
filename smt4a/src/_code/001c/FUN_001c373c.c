@@ -46,7 +46,7 @@ void FUN_001c373c(fn_001c373c_arg0 *param_1,int param_2)
   temp_v4 = param_1->field_0x4;
   temp_v1 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v4 < 0.0f) << 0x1f) | ((unsigned int)(temp_v4 == 0.0f) << 0x1e);
   temp_v0 = (unsigned char)(temp_v1 >> 0x18);
-  if (!(unsigned char)((temp_v0 >> 6) & 1) && (unsigned char)(temp_v0 >> 7) == NAN(temp_v4)) {
+  if (!(unsigned char)((temp_v0 >> 6) & 1) && (unsigned char)(temp_v0 >> 7) == (temp_v4 != temp_v4)) {
     if (param_1->field_0x1c == 0) {
       param_1->field_0x1c = 1;
       temp_v3 = (float)VectorUnsignedToFloat((unsigned int)param_1->field_0xe,(unsigned char)(temp_v1 >> 0x16) & 3);

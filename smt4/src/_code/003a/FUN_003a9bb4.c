@@ -18,7 +18,6 @@ typedef struct {
 
 extern int DAT_0049fcfc; /* 0x49fcfc */
 
-/* Unsupported intrinsic, declaration required: while (LOAD). */
 /* Supplied declaration required: FUN_0022c9f4. */
 /* Supplied declaration required: FUN_0022e17c. */
 /* Supplied declaration required: FUN_00233730. */
@@ -34,7 +33,7 @@ extern int FUN_003bc874(void);
 void FUN_003a9bb4(int param_1)
 
 {
-/* irregular: 2 goto(s); 7 native warning(s); review required */
+/* irregular: 2 goto(s); 6 native warning(s); review required */
   short temp_v0;
   int temp_v1;
   int temp_v2;

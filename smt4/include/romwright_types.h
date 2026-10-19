@@ -34,6 +34,20 @@ typedef unsigned int uint;
 typedef unsigned long ulong;
 typedef long long longlong;
 typedef unsigned long long ulonglong;
+typedef signed char sbyte;
+typedef short sword;
+typedef int sdword;
+typedef long long sqword;
+/* The float constants the decompiler prints by name. */
+#ifndef NAN
+#if defined(__CC_ARM)
+#define NAN (__ESCAPE__(0f_7FC00000))
+#define INFINITY ((float)__INFINITY__)
+#else
+#define NAN (__builtin_nanf(""))
+#define INFINITY (__builtin_inff())
+#endif
+#endif
 typedef void *pointer;
 typedef void code(void);
 #if !defined(__STDC_VERSION__) || __STDC_VERSION__ < 202311L

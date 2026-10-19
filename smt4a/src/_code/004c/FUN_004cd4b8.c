@@ -81,7 +81,7 @@ void FUN_004cd4b8(int param_1,int param_2)
   uStack_4c = 0;
   iStack_58 = (unsigned int)*(unsigned short *)(temp_v11 + 0x18) << 0x10;
   uStack_5c = *(unsigned int *)(temp_v11 + 0x28);
-  iStack_58 = romwright_piece_3_1(iStack_58._1_3_,*(unsigned char *)(temp_v11 + 0x2c));
+  iStack_58 = romwright_piece_3_1((((unsigned int)(iStack_58) >> 8) & 0xffffffU),*(unsigned char *)(temp_v11 + 0x2c));
   uStack_54 = *(unsigned int *)(temp_v11 + 0x1a);
   temp_v5 = *(unsigned short *)(temp_v11 + 6);
   FUN_003da99c(temp_v5,&uStack_5c);
@@ -96,7 +96,7 @@ void FUN_004cd4b8(int param_1,int param_2)
   else {
     temp_v3 = 3;
   }
-  uStack_4c = romwright_piece_3_1(uStack_4c._1_3_,temp_v3);
+  uStack_4c = romwright_piece_3_1((((unsigned int)(uStack_4c) >> 8) & 0xffffffU),temp_v3);
   uStack_60 = (uStack_4c & 0xffff) | (unaff_r6 & 0xffff0000);
   uStack_70 = uStack_5c;
   uStack_6c = iStack_58;

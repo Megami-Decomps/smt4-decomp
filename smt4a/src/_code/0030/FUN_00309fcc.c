@@ -33,7 +33,7 @@ unsigned long long FUN_00309fcc(unsigned int param_1,unsigned char *param_2,unsi
     *(unsigned char **)(puVar1 + 4) = param_3;
     *puVar1 = *param_2;
     temp_v0 = param_1;
-    FUN_00309fcc(param_1,*(unsigned int *)(param_2 + 0xc),puVar1);
+    FUN_00309fcc(param_1,(unsigned char *)*(unsigned int *)(param_2 + 0xc),puVar1);
     *(unsigned int *)(puVar1 + 0xc) = temp_v0;
     param_3 = puVar1;
   }

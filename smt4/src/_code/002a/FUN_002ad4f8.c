@@ -17,22 +17,22 @@ extern unsigned int DAT_004d4280; /* 0x4d4280 */
 /* Supplied declaration required: FUN_00144f90. */
 /* Supplied declaration required: FUN_002bb150. */
 /* Supplied declaration required: FUN_002c3424. */
-/* Supplied declaration required: nn_err_CTR_FatalErr_Throw. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
-/* Supplied declaration required: nn_os_LightEvent_Initialize. */
+extern unsigned int nn_err_CTR_FatalErr_Throw(unsigned int, unsigned int);
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
+extern void nn_os_LightEvent_Initialize(unsigned int, unsigned char);
 
 
 void FUN_002ad4f8(unsigned char *param_1)
 
 {
-/* irregular: 2 unstructured edge(s); 9 native warning(s); review required */
+/* irregular: 2 unstructured edge(s); 5 native warning(s); review required */
   unsigned int *puVar1;
   unsigned char temp_v0;
   int temp_v1 [2];
   
   do {
-    nn_os_CriticalSection_Enter(&DAT_004d4280);
+    nn_os_CriticalSection_Enter((unsigned int)&DAT_004d4280);
     if (DAT_0044e608 == 0) {
       puVar1 = (unsigned int *)&DAT_0044e608;
       FUN_001383a8(&DAT_0044e608,"err:f");
@@ -46,35 +46,35 @@ void FUN_002ad4f8(unsigned char *param_1)
     if (-1 < (int)puVar1) {
       FUN_00144f90(param_1 + 0xc,0xffff8001);
       temp_v1[0] = DAT_0044e608;
-      nn_err_CTR_FatalErr_Throw(temp_v1,param_1);
+      nn_err_CTR_FatalErr_Throw((unsigned int)temp_v1,(unsigned int)param_1);
       if (DAT_0044e608 != 0) {
         software_interrupt(0x23);
         DAT_0044e608 = 0;
       }
-      nn_os_CriticalSection_Leave(&DAT_004d4280);
+      nn_os_CriticalSection_Leave((unsigned int)&DAT_004d4280);
       if (*param_1 != 2 && *param_1 != 5) {
         temp_v1[0] = 0;
         temp_v1[1] = 0;
-        nn_os_LightEvent_Initialize(temp_v1,1);
+        nn_os_LightEvent_Initialize((unsigned int)temp_v1,1);
         FUN_002c3424(temp_v1);
       }
       return;
     }
     temp_v0 = puVar1 == (unsigned int *)0xd0401834;
     if (temp_v0) {
-      puVar1 = (unsigned int)(uint)*(unsigned int)param_1;
+      puVar1 = (unsigned int *)(unsigned int)*param_1;
     }
     if (!temp_v0 || puVar1 != (unsigned int *)0x2) {
-      nn_os_CriticalSection_Leave(&DAT_004d4280);
+      nn_os_CriticalSection_Leave((unsigned int)&DAT_004d4280);
       if (*param_1 != 2 && *param_1 != 5) {
         temp_v1[0] = 0;
         temp_v1[1] = 0;
-        nn_os_LightEvent_Initialize(temp_v1,1);
+        nn_os_LightEvent_Initialize((unsigned int)temp_v1,1);
         FUN_002c3424(temp_v1);
       }
       return;
     }
     FUN_002bb150(&DAT_004c4b40,0);
-    nn_os_CriticalSection_Leave(&DAT_004d4280);
+    nn_os_CriticalSection_Leave((unsigned int)&DAT_004d4280);
   } while( 1 );
 }

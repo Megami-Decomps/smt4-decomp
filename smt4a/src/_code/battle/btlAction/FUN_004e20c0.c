@@ -862,7 +862,7 @@ LAB_004e32dc:
         temp_v17 = (float)((unsigned long long)temp_v19 >> 0x20);
         temp_v13 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v16 < temp_v17) << 0x1f) |
                  ((unsigned int)(temp_v16 == temp_v17) << 0x1e);
-        in_fpscr = temp_v13 | ((unsigned int)(NAN(temp_v16) || NAN(temp_v17)) << 0x1c);
+        in_fpscr = temp_v13 | ((unsigned int)((temp_v16 != temp_v16) || (temp_v17 != temp_v17)) << 0x1c);
         temp_v3 = (unsigned char)(temp_v13 >> 0x18);
         if (!(unsigned char)((temp_v3 >> 6) & 1) && temp_v3 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
           temp_v17 = (float)VectorSignedToFloat(puVar9,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -903,7 +903,7 @@ LAB_004e32dc:
       temp_v17 = (float)((unsigned long long)temp_v19 >> 0x20);
       temp_v13 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v16 < temp_v17) << 0x1f) |
                ((unsigned int)(temp_v16 == temp_v17) << 0x1e);
-      in_fpscr = temp_v13 | ((unsigned int)(NAN(temp_v16) || NAN(temp_v17)) << 0x1c);
+      in_fpscr = temp_v13 | ((unsigned int)((temp_v16 != temp_v16) || (temp_v17 != temp_v17)) << 0x1c);
       temp_v3 = (unsigned char)(temp_v13 >> 0x18);
       if (!(unsigned char)((temp_v3 >> 6) & 1) && temp_v3 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
         temp_v17 = (float)VectorSignedToFloat(puVar13,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -1120,34 +1120,34 @@ LAB_004e34b8:
         temp_v74 = 0;
         temp_v75 = 0;
         temp_v76 = 0;
-        switch(puVar12) {
-        case (unsigned int *)0x0:
+        switch((unsigned int)puVar12) {
+        case (unsigned int)0x0:
           temp_v18 = 0x4e3f7c;
           ARM_common_memcpy4_9(&temp_v61,temp_v18);
           break;
-        case (unsigned int *)0x1:
+        case (unsigned int)0x1:
           temp_v18 = 0x4e3f88;
           FUN_0050d740(&temp_v61,temp_v18);
           break;
-        case (unsigned int *)0x2:
+        case (unsigned int)0x2:
           temp_v18 = 0x4e3f90;
           ARM_common_memcpy4_9(&temp_v61,temp_v18);
           break;
-        case (unsigned int *)0x3:
+        case (unsigned int)0x3:
           temp_v18 = 0x4e3f9c;
           FUN_0050d740(&temp_v61,temp_v18);
           break;
-        case (unsigned int *)0x4:
+        case (unsigned int)0x4:
           temp_v18 = 0x4e3fa4;
           ARM_common_memcpy4_9(&temp_v61,temp_v18);
           break;
-        case (unsigned int *)0x5:
+        case (unsigned int)0x5:
           rt_memcpy_w(&temp_v61,&LAB_004e3fb0,0xb);
           break;
-        case (unsigned int *)0x6:
+        case (unsigned int)0x6:
           rt_memcpy_w(&temp_v61,&LAB_004e3fbc,0xb);
           break;
-        case (unsigned int *)0x7:
+        case (unsigned int)0x7:
           temp_v18 = 0x4e3fc8;
           ARM_common_memcpy4_9(&temp_v61,temp_v18);
         }
@@ -1208,34 +1208,34 @@ LAB_004e34b8:
       temp_v36 = 0;
       temp_v37 = (unsigned int *)0x0;
       temp_v38 = 0;
-      switch(temp_v39) {
-      case (unsigned int *)0x0:
+      switch((unsigned int)temp_v39) {
+      case (unsigned int)0x0:
         temp_v18 = 0x4e3f7c;
         ARM_common_memcpy4_9(&temp_v23,temp_v18);
         break;
-      case (unsigned int *)0x1:
+      case (unsigned int)0x1:
         temp_v18 = 0x4e3f88;
         FUN_0050d740(&temp_v23,temp_v18);
         break;
-      case (unsigned int *)0x2:
+      case (unsigned int)0x2:
         temp_v18 = 0x4e3f90;
         ARM_common_memcpy4_9(&temp_v23,temp_v18);
         break;
-      case (unsigned int *)0x3:
+      case (unsigned int)0x3:
         temp_v18 = 0x4e3f9c;
         FUN_0050d740(&temp_v23,temp_v18);
         break;
-      case (unsigned int *)0x4:
+      case (unsigned int)0x4:
         temp_v18 = 0x4e3fa4;
         ARM_common_memcpy4_9(&temp_v23,temp_v18);
         break;
-      case (unsigned int *)0x5:
+      case (unsigned int)0x5:
         rt_memcpy_w(&temp_v23,&LAB_004e3fb0,0xb);
         break;
-      case (unsigned int *)0x6:
+      case (unsigned int)0x6:
         rt_memcpy_w(&temp_v23,&LAB_004e3fbc,0xb);
         break;
-      case (unsigned int *)0x7:
+      case (unsigned int)0x7:
         temp_v18 = 0x4e3fc8;
         ARM_common_memcpy4_9(&temp_v23,temp_v18);
       }
@@ -1860,9 +1860,9 @@ LAB_004e5308:
     }
   }
   else {
-    switch(temp_v47) {
-    case (unsigned int *)0x0:
-    case (unsigned int *)0x3:
+    switch((unsigned int)temp_v47) {
+    case (unsigned int)0x0:
+    case (unsigned int)0x3:
       temp_v6 = param_2[4];
 joined_r0x004e5558:
       temp_v13 = 0;
@@ -1870,7 +1870,7 @@ joined_r0x004e5558:
         temp_v6 = temp_v13;
       }
       break;
-    case (unsigned int *)0x1:
+    case (unsigned int)0x1:
       temp_v12 = FUN_004c6b5c(temp_v57,temp_v81);
       temp_v6 = param_2[4];
       if (temp_v12 != 0) goto joined_r0x004e5558;
@@ -1879,7 +1879,7 @@ joined_r0x004e5558:
         temp_v6 = temp_v13;
       }
       break;
-    case (unsigned int *)0x2:
+    case (unsigned int)0x2:
       temp_v12 = FUN_004c6b5c(temp_v57,temp_v81);
       temp_v6 = param_2[4];
       if (temp_v12 != 0) {
@@ -1894,7 +1894,7 @@ joined_r0x004e5590:
         temp_v6 = temp_v13;
       }
       break;
-    case (unsigned int *)0x4:
+    case (unsigned int)0x4:
       temp_v6 = param_2[4];
       temp_v13 = 4;
       if ((int)temp_v6 < 4) {

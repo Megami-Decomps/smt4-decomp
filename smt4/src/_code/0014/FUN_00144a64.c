@@ -9,7 +9,6 @@ typedef struct {
     unsigned int sp84; /* 0x84: local_84 */
 } param_3_stack;
 
-/* Unsupported intrinsic, declaration required: while (INT_SRIGHT). */
 /* Supplied declaration required: FUN_00144a64. */
 
 
@@ -31,7 +30,7 @@ typedef struct {
 void FUN_00144a64(unsigned int *param_1,unsigned int *param_2,int param_3)
 
 {
-/* irregular: 16 native warning(s); review required */
+/* irregular: 15 native warning(s); review required */
   int temp_v0;
   int temp_v1;
   unsigned int *puVar3;

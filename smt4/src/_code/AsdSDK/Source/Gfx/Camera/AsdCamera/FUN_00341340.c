@@ -105,7 +105,7 @@ void FUN_00341340(int *param_1,fn_00341340_arg1 *param_2)
       }
       temp_v2 = FUN_002c2ff0();
       temp_v3 = FUN_002c300c();
-      temp_v11 = romwright_piece_3_1(temp_v11._1_3_,1);
+      temp_v11 = romwright_piece_3_1((((unsigned int)(temp_v11) >> 8) & 0xffffffU),1);
       temp_v12 = 8;
       temp_v13 = 4;
       uStack_48 = 0;
@@ -161,7 +161,7 @@ LAB_00341470:
               }
             }
             temp_v12 = 0x40;
-            temp_v13 = romwright_piece_3_1(temp_v13._1_3_,1);
+            temp_v13 = romwright_piece_3_1((((unsigned int)(temp_v13) >> 8) & 0xffffffU),1);
             temp_v11 = temp_v2;
             piVar5 = (int *)FUN_002c2ff0();
             piVar7 = (int *)(**(romwright_code **)(*piVar5 + 8))(piVar5,0x74,4);

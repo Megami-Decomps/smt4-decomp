@@ -14,7 +14,6 @@ struct fn_0028ec84_arg0 {
 };
 
 /* Supplied declaration required: FUN_0028ec64. */
-extern void FUN_0028ec84(fn_0028ec84_arg0 *);
 
 
 void FUN_0028ec84(fn_0028ec84_arg0 *param_1)

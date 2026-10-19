@@ -20,14 +20,13 @@ extern int FUN_002f44ec(unsigned char *, unsigned int *, int);
 extern char *FUN_00308576(fn_003085dc_arg1 *);
 /* Supplied declaration required: FUN_0030898c. */
 /* Supplied declaration required: FUN_003089be. */
-/* Supplied declaration required: while. */
 
 
 void FUN_003085dc(unsigned int *param_1,fn_003085dc_arg1 *param_2,int param_3,int param_4,
                  unsigned int *param_5)
 
 {
-/* irregular: 3 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   char *pcVar1;
   int temp_v0;
   void *pvVar3;

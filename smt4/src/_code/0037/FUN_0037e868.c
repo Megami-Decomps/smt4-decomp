@@ -9,7 +9,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_0015c404. */
 /* Supplied declaration required: FUN_002aa278. */
-/* Supplied declaration required: nn_snd_CTR_InitializeWaveBuffer. */
+extern void nn_snd_CTR_InitializeWaveBuffer(unsigned int);
 extern int nw_snd_internal_driver_Voice_IsRun(void);
 /* Supplied declaration required: nw_snd_internal_driver_Voice_Pause. */
 
@@ -17,7 +17,7 @@ extern int nw_snd_internal_driver_Voice_IsRun(void);
 void FUN_0037e868(int param_1)
 
 {
-/* irregular: 5 native warning(s); review required */
+/* irregular: 4 native warning(s); review required */
   char temp_v0;
   int temp_v1;
   unsigned int temp_v2;

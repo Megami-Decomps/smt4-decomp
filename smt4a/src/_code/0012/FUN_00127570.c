@@ -29,7 +29,6 @@ extern unsigned char LAB_00127f54; /* 0x127f54 */
 extern unsigned char DAT_00544030; /* 0x544030 */
 extern unsigned char DAT_00544830; /* 0x544830 */
 
-/* Unsupported intrinsic, declaration required: while (COPY). */
 /* Supplied declaration required: FUN_001286a0. */
 extern int FUN_00128bdc(int *, unsigned char *);
 /* Supplied declaration required: FUN_0030d824. */
@@ -42,7 +41,7 @@ extern int FUN_00128bdc(int *, unsigned char *);
 int FUN_00127570(int *param_1,unsigned char *param_2,unsigned char *param_3)
 
 {
-/* irregular: 94 goto(s); 8 native warning(s); review required */
+/* irregular: 94 goto(s); 7 native warning(s); review required */
   int *piVar1;
   unsigned char *pbVar2;
   unsigned int temp_v0;
@@ -118,8 +117,8 @@ int FUN_00127570(int *param_1,unsigned char *param_2,unsigned char *param_3)
 LAB_001275c2:
   pbVar2 = (unsigned char *)(unsigned int)*pbVar15;
   temp_v2 = temp_v12;
-  switch(pbVar2) {
-  case (unsigned char *)0x0:
+  switch((unsigned int)pbVar2) {
+  case (unsigned int)0x0:
     pbVar2 = *(unsigned char **)(pbVar15 + 8);
     if (pbVar2 != (unsigned char *)0x0) {
       for (; temp_v12 < 0x10; temp_v12 = temp_v12 + 8) {
@@ -187,7 +186,7 @@ LAB_0012761c:
     }
     temp_v6 = 0xc;
     goto LAB_0012830e;
-  case (unsigned char *)0x1:
+  case (unsigned int)0x1:
     for (; temp_v12 < 0x10; temp_v12 = temp_v12 + 8) {
       temp_v15 = pbVar17 == (unsigned char *)0x0;
 LAB_001276e0:
@@ -430,21 +429,21 @@ LAB_001279d8:
       param_3 = (unsigned char *)0x127a80;
     }
     break;
-  case (unsigned char *)0x2:
+  case (unsigned int)0x2:
     goto LAB_00127750;
-  case (unsigned char *)0x3:
+  case (unsigned int)0x3:
     goto LAB_0012779c;
-  case (unsigned char *)0x4:
+  case (unsigned int)0x4:
     goto LAB_001277d2;
-  case (unsigned char *)0x5:
+  case (unsigned int)0x5:
     goto LAB_0012782c;
-  case (unsigned char *)0x6:
+  case (unsigned int)0x6:
     goto LAB_0012789e;
-  case (unsigned char *)0x7:
+  case (unsigned int)0x7:
     goto LAB_00127920;
-  case (unsigned char *)0x8:
+  case (unsigned int)0x8:
     goto LAB_001279a0;
-  case (unsigned char *)0x9:
+  case (unsigned int)0x9:
     do {
       if (temp_v12 < 0x20) {
         temp_v15 = pbVar17 == (unsigned char *)0x0;
@@ -544,13 +543,13 @@ LAB_00127ade:
       temp_v12 = temp_v12 + 8;
       temp_v24 = pbVar2;
     } while( 1 );
-  case (unsigned char *)0xa:
+  case (unsigned int)0xa:
     goto LAB_00127aba;
-  case (unsigned char *)0xb:
+  case (unsigned int)0xb:
     goto LAB_00127ad4;
-  case (unsigned char *)0xc:
+  case (unsigned int)0xc:
     goto LAB_00127ade;
-  case (unsigned char *)0xd:
+  case (unsigned int)0xd:
     temp_v14 = temp_v14 >> (temp_v12 & 7);
     for (temp_v12 = temp_v12 - (temp_v12 & 7); temp_v12 < 0x20; temp_v12 = temp_v12 + 8) {
       temp_v17 = pbVar17 == (unsigned char *)0x0;
@@ -572,11 +571,11 @@ LAB_00127b8e:
     }
     param_3 = (unsigned char *)0x127f6c;
     break;
-  case (unsigned char *)0xe:
+  case (unsigned int)0xe:
 LAB_00127bc6:
     *pbVar15 = 0xf;
     temp_v12 = temp_v2;
-  case (unsigned char *)0xf:
+  case (unsigned int)0xf:
     temp_v23 = *(unsigned char **)(pbVar15 + 0x40);
     if (temp_v23 != (unsigned char *)0x0) {
       if (pbVar17 < temp_v23) {
@@ -599,7 +598,7 @@ LAB_00127bc6:
       *pbVar15 = temp_v6;
     }
     goto LAB_001275c2;
-  case (unsigned char *)0x10:
+  case (unsigned int)0x10:
     for (; temp_v12 < 0xe; temp_v12 = temp_v12 + 8) {
       if (pbVar17 == (unsigned char *)0x0) goto LAB_0012840c;
       pbVar17 = pbVar17 + -1;
@@ -621,14 +620,14 @@ LAB_00127bc6:
     }
     param_3 = (unsigned char *)0x127f8c;
     break;
-  case (unsigned char *)0x11:
+  case (unsigned int)0x11:
     goto LAB_00127c6c;
-  case (unsigned char *)0x12:
+  case (unsigned int)0x12:
     goto LAB_00127e4a;
-  case (unsigned char *)0x13:
+  case (unsigned int)0x13:
 LAB_00127ee6:
     *pbVar15 = 0x14;
-  case (unsigned char *)0x14:
+  case (unsigned int)0x14:
     if ((pbVar17 < (unsigned char *)0x6) || (temp_v25 < (unsigned char *)0x102)) {
       temp_v27 = pbVar15 + 0x1bc0;
       temp_v26 = 0;
@@ -731,15 +730,15 @@ LAB_00128072:
       *(unsigned int *)(pbVar15 + 0x1bc4) = 0xffffffffU;
     }
     goto LAB_001275c2;
-  case (unsigned char *)0x15:
+  case (unsigned int)0x15:
     goto LAB_00128132;
-  case (unsigned char *)0x16:
+  case (unsigned int)0x16:
     goto LAB_00128184;
-  case (unsigned char *)0x17:
+  case (unsigned int)0x17:
     goto LAB_00128246;
-  case (unsigned char *)0x18:
+  case (unsigned int)0x18:
     goto LAB_0012828a;
-  case (unsigned char *)0x19:
+  case (unsigned int)0x19:
     if (temp_v25 != (unsigned char *)0x0) {
       *temp_v29 = (unsigned char)*(unsigned int *)(pbVar15 + 0x40);
       temp_v29 = temp_v29 + 1;
@@ -747,7 +746,7 @@ LAB_00128072:
       goto LAB_0012830c;
     }
     goto LAB_0012840c;
-  case (unsigned char *)0x1a:
+  case (unsigned int)0x1a:
     if (*(int *)(pbVar15 + 8) != 0) {
       for (; temp_v12 < 0x20; temp_v12 = temp_v12 + 8) {
         if (pbVar17 == (unsigned char *)0x0) goto LAB_0012840c;
@@ -783,7 +782,7 @@ LAB_00128072:
       temp_v12 = 0;
     }
     *pbVar15 = 0x1b;
-  case (unsigned char *)0x1b:
+  case (unsigned int)0x1b:
     if ((*(int *)(pbVar15 + 8) != 0) && (*(int *)(pbVar15 + 0x10) != 0)) {
       for (; temp_v12 < 0x20; temp_v12 = temp_v12 + 8) {
         if (pbVar17 == (unsigned char *)0x0) goto LAB_0012840c;
@@ -799,7 +798,7 @@ LAB_00128072:
       temp_v12 = 0;
     }
     *pbVar15 = 0x1c;
-  case (unsigned char *)0x1c:
+  case (unsigned int)0x1c:
     temp_v32 = 1;
 LAB_0012840c:
     temp_v34[3] = (int)temp_v29;
@@ -856,10 +855,10 @@ LAB_0012840c:
       }
     }
     return temp_v32;
-  case (unsigned char *)0x1d:
+  case (unsigned int)0x1d:
     temp_v32 = -3;
     goto LAB_0012840c;
-  case (unsigned char *)0x1e:
+  case (unsigned int)0x1e:
     temp_v32 = -4;
     return temp_v32;
   default:

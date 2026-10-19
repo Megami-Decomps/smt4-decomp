@@ -26,8 +26,8 @@ extern unsigned int DAT_004c6458; /* 0x4c6458 */
 extern int FUN_0013a170(unsigned int *, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bbb2c. */
 /* Supplied declaration required: FUN_0035511c. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
@@ -35,7 +35,7 @@ extern int FUN_0013a170(unsigned int *, unsigned int, unsigned int);
 unsigned char FUN_00359f90(void)
 
 {
-/* irregular: irregular input(s): in_r3; 6 native warning(s); review required */
+/* irregular: irregular input(s): in_r3; 4 native warning(s); review required */
   unsigned short temp_v0;
   int temp_v1;
   unsigned char *puVar3;
@@ -47,14 +47,14 @@ unsigned char FUN_00359f90(void)
   if (temp_v1 < 0) {
     FUN_002bbb2c(temp_v1,0x359fac);
   }
-  nn_os_CriticalSection_Enter(&DAT_004c6458);
+  nn_os_CriticalSection_Enter((unsigned int)&DAT_004c6458);
   puVar3 = &DAT_0042d000;
   FUN_0035511c();
   temp_v0 = DAT_0042f02c.whole;
   if (-1 < (int)puVar3) {
-    nn_os_CriticalSection_Leave(&DAT_004c6458);
+    nn_os_CriticalSection_Leave((unsigned int)&DAT_004c6458);
     return (unsigned int)temp_v0 <= (temp_v2 & 0xffff);
   }
-  nn_os_CriticalSection_Leave(&DAT_004c6458);
+  nn_os_CriticalSection_Leave((unsigned int)&DAT_004c6458);
   return 0;
 }

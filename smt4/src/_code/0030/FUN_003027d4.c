@@ -227,14 +227,14 @@ void FUN_003027d4(fn_003027d4_arg0 *param_1)
                 temp_v0 = in_fpscr & 0xfffffff;
                 temp_v1 = temp_v0 | ((unsigned int)(temp_v28 < temp_v27) << 0x1f) |
                         ((unsigned int)(temp_v28 == temp_v27) << 0x1e);
-                in_fpscr = temp_v1 | ((unsigned int)(NAN(temp_v28) || NAN(temp_v27)) << 0x1c);
+                in_fpscr = temp_v1 | ((unsigned int)((temp_v28 != temp_v28) || (temp_v27 != temp_v27)) << 0x1c);
                 temp_v3 = (unsigned char)(temp_v1 >> 0x18);
                 temp_v19 = (float)VectorSignedToFloat(temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);
                 if (!(unsigned char)((temp_v3 >> 6) & 1) && temp_v3 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
                   temp_v23 = (temp_v39[1] / temp_v34) * temp_v38;
                   temp_v0 = temp_v0 | ((unsigned int)(temp_v19 < temp_v23) << 0x1f) |
                           ((unsigned int)(temp_v19 == temp_v23) << 0x1e);
-                  in_fpscr = temp_v0 | ((unsigned int)(NAN(temp_v19) || NAN(temp_v23)) << 0x1c);
+                  in_fpscr = temp_v0 | ((unsigned int)((temp_v19 != temp_v19) || (temp_v23 != temp_v23)) << 0x1c);
                   temp_v3 = (unsigned char)(temp_v0 >> 0x18);
                   if (!(unsigned char)((temp_v3 >> 6) & 1) && temp_v3 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
                     temp_v19 = temp_v23;

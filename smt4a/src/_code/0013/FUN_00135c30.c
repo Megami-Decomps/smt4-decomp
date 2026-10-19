@@ -286,15 +286,15 @@ extern unsigned long long FUN_00170390(unsigned int);
 /* Supplied declaration required: FUN_00180008. */
 /* Supplied declaration required: FUN_002f5020. */
 /* Supplied declaration required: FUN_0030fc80. */
-/* Supplied declaration required: nn_cfg_CTR_Initialize. */
-/* Supplied declaration required: nn_pl_CTR_InitializeGameCoin. */
+extern void nn_cfg_CTR_Initialize(void);
+extern void nn_pl_CTR_InitializeGameCoin(void);
 extern int nngxIsStereoVisionAllowed(void);
 
 
 void FUN_00135c30(void)
 
 {
-/* irregular: 3 unstructured edge(s); 2 goto(s); irregular input(s): in_fpscr; 125 native warning(s); review required */
+/* irregular: 3 unstructured edge(s); 2 goto(s); irregular input(s): in_fpscr; 123 native warning(s); review required */
   long long temp_v0;
   long long temp_v1;
   int temp_v2;

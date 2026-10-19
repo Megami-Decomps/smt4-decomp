@@ -12,15 +12,15 @@ extern unsigned char DAT_004e8568; /* 0x4e8568 */
 
 /* Supplied declaration required: FUN_0015e104. */
 extern int FUN_002bb274(void);
-/* Supplied declaration required: nn_snd_CTR_OutputCapture_Write. */
-/* Supplied declaration required: nn_snd_CTR_VoiceManager_UpdateStatus. */
+extern void nn_snd_CTR_OutputCapture_Write(unsigned int, short *, int);
+extern void nn_snd_CTR_VoiceManager_UpdateStatus(unsigned int, int, unsigned int);
 /* Supplied declaration required: rt_memcpy_w. */
 
 
 void FUN_0015d38c(int param_1)
 
 {
-/* irregular: 5 native warning(s); review required */
+/* irregular: 3 native warning(s); review required */
   short temp_v0;
   int temp_v1;
   unsigned short temp_v2;
@@ -43,7 +43,7 @@ void FUN_0015d38c(int param_1)
       *(unsigned short *)(param_1 + 0x131c) = *(unsigned short *)(param_1 + 0x131a) & 1;
       do {
         nn_snd_CTR_VoiceManager_UpdateStatus
-                  (&DAT_004e8568,temp_v4,
+                  ((unsigned int)&DAT_004e8568,temp_v4,
                    *(unsigned int *)
                     (param_1 + (unsigned int)*(unsigned short *)(param_1 + 0x131c) * 0x60 + (temp_v4 & 0xff) * 4 +
                     0x1170));
@@ -59,8 +59,8 @@ void FUN_0015d38c(int param_1)
       }
       if (temp_v1 != 0 && temp_v4 != 0) {
         nn_snd_CTR_OutputCapture_Write
-                  (temp_v1,*(unsigned int *)(param_1 + (unsigned int)*(unsigned short *)(param_1 + 0x131c) * 4 + 0x1300)
-                   ,0xa0);
+                  (temp_v1,*(short **)(param_1 + (unsigned int)*(unsigned short *)(param_1 + 0x131c) * 4 + 0x1300),
+                   0xa0);
       }
       FUN_0015e104(&DAT_004e6f14);
       return;

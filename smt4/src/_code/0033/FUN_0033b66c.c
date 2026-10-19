@@ -22,13 +22,13 @@ extern unsigned char DAT_00421c78; /* 0x421c78 */
 extern int FUN_00377414(int);
 extern int FUN_00378b40(int);
 /* Supplied declaration required: func_0x001404c4. */
-/* Supplied declaration required: nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile. */
+extern void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(unsigned int);
 
 
 unsigned int * FUN_0033b66c(int param_1)
 
 {
-/* irregular: 10 native warning(s); review required */
+/* irregular: 9 native warning(s); review required */
   int temp_v0;
   unsigned int *puVar2;
   

@@ -22,8 +22,8 @@ extern int FUN_00238490(); /* 0x238490 */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
-romwright_code * FUN_00347688(unsigned int param_1,unsigned int param_2,int param_3,romwright_code param_4,unsigned int *param_5,
-                   unsigned int param_6,unsigned int param_7,romwright_code param_8,unsigned int param_9,
+romwright_code * FUN_00347688(unsigned int param_1,unsigned int param_2,int param_3,unsigned char param_4,unsigned int *param_5,
+                   unsigned int param_6,unsigned int param_7,unsigned char param_8,unsigned int param_9,
                    unsigned short param_10,unsigned int param_11)
 
 {
@@ -57,47 +57,47 @@ romwright_code * FUN_00347688(unsigned int param_1,unsigned int param_2,int para
   if (unaff_r4 != (romwright_code *)0x0) {
     FUN_002e6354(unaff_r4,0x3f0);
     temp_v2 = (unsigned long long)param_6 << 0x20;
-    *(unsigned int *)(unaff_r4 + 0x26c) = 0xbf000000;
-    *(unsigned int *)(unaff_r4 + 0x270) = 0xbf000000;
-    *(unsigned int *)(unaff_r4 + 0x274) = 0;
-    *(unsigned int *)(unaff_r4 + 0x280) = 0xff00ff;
-    *(unsigned int *)(unaff_r4 + 0x28c) = 0;
-    *(unsigned int *)(unaff_r4 + 0x284) = 0xbf000000;
-    *(unsigned int *)(unaff_r4 + 0x288) = 0x3f000000;
-    *(unsigned int *)(unaff_r4 + 0x298) = 0xff0000ff;
-    *(unsigned int *)(unaff_r4 + 0x29c) = 0x3f000000;
-    *(unsigned int *)(unaff_r4 + 0x2a0) = 0xbf000000;
-    *(unsigned int *)(unaff_r4 + 0x2a4) = 0;
-    *(unsigned int *)(unaff_r4 + 0x2b0) = 0xffff;
-    *(unsigned int *)(unaff_r4 + 0x2b4) = 0x3f000000;
-    *(unsigned int *)(unaff_r4 + 0x2b8) = 0x3f000000;
-    *(unsigned int *)(unaff_r4 + 700) = 0;
-    *(unsigned int *)(unaff_r4 + 0x2c8) = 0xffff00ff;
-    unaff_r4[0x380] = param_4;
+    *(unsigned int *)((unsigned char *)unaff_r4 + 0x26c) = 0xbf000000;
+    *(unsigned int *)((unsigned char *)unaff_r4 + 0x270) = 0xbf000000;
+    *(unsigned int *)((unsigned char *)unaff_r4 + 0x274) = 0;
+    *(unsigned int *)((unsigned char *)unaff_r4 + 0x280) = 0xff00ff;
+    *(unsigned int *)((unsigned char *)unaff_r4 + 0x28c) = 0;
+    *(unsigned int *)((unsigned char *)unaff_r4 + 0x284) = 0xbf000000;
+    *(unsigned int *)((unsigned char *)unaff_r4 + 0x288) = 0x3f000000;
+    *(unsigned int *)((unsigned char *)unaff_r4 + 0x298) = 0xff0000ff;
+    *(unsigned int *)((unsigned char *)unaff_r4 + 0x29c) = 0x3f000000;
+    *(unsigned int *)((unsigned char *)unaff_r4 + 0x2a0) = 0xbf000000;
+    *(unsigned int *)((unsigned char *)unaff_r4 + 0x2a4) = 0;
+    *(unsigned int *)((unsigned char *)unaff_r4 + 0x2b0) = 0xffff;
+    *(unsigned int *)((unsigned char *)unaff_r4 + 0x2b4) = 0x3f000000;
+    *(unsigned int *)((unsigned char *)unaff_r4 + 0x2b8) = 0x3f000000;
+    *(unsigned int *)((unsigned char *)unaff_r4 + 700) = 0;
+    *(unsigned int *)((unsigned char *)unaff_r4 + 0x2c8) = 0xffff00ff;
+    ((unsigned char *)unaff_r4)[0x380] = (unsigned char)param_4;
     rt_memcpy_w(unaff_r4,param_2,0x134);
-    *(unsigned int **)(unaff_r4 + 0x354) = param_5;
+    *(unsigned int **)((unsigned char *)unaff_r4 + 0x354) = param_5;
     temp_v1 = (unsigned int)temp_v2;
-    *(unsigned int *)(unaff_r4 + 0x2d4) = temp_v1;
-    *(unsigned int *)(unaff_r4 + 0x2d8) = temp_v1;
-    *(unsigned int *)(unaff_r4 + 0x2dc) = temp_v1;
-    if (unaff_r4[0x380] != (romwright_code)0x0) {
-      rt_memcpy_w(unaff_r4 + 0x134,param_3,0xb0);
+    *(unsigned int *)((unsigned char *)unaff_r4 + 0x2d4) = temp_v1;
+    *(unsigned int *)((unsigned char *)unaff_r4 + 0x2d8) = temp_v1;
+    *(unsigned int *)((unsigned char *)unaff_r4 + 0x2dc) = temp_v1;
+    if (((unsigned char *)unaff_r4)[0x380] != (unsigned char)0x0) {
+      rt_memcpy_w((unsigned char *)unaff_r4 + 0x134,param_3,0xb0);
     }
     else {
-      unaff_r4[0x1da] = *(romwright_code *)(param_3 + 0xa6);
-      unaff_r4[0x1db] = *(romwright_code *)(param_3 + 0xa7);
-      unaff_r4[0x1dc] = *(romwright_code *)(param_3 + 0xa8);
-      unaff_r4[0x1dd] = *(romwright_code *)(param_3 + 0xa9);
+      ((unsigned char *)unaff_r4)[0x1da] = *(unsigned char *)(param_3 + 0xa6);
+      ((unsigned char *)unaff_r4)[0x1db] = *(unsigned char *)(param_3 + 0xa7);
+      ((unsigned char *)unaff_r4)[0x1dc] = *(unsigned char *)(param_3 + 0xa8);
+      ((unsigned char *)unaff_r4)[0x1dd] = *(unsigned char *)(param_3 + 0xa9);
     }
     temp_v1 = (unsigned int)((unsigned long long)temp_v2 >> 0x20);
-    *(unsigned int *)(unaff_r4 + 0x268) = param_11;
-    *(unsigned short *)(unaff_r4 + 0x2d0) = 0;
-    *(unsigned int *)(unaff_r4 + 0x37c) = param_1;
+    *(unsigned int *)((unsigned char *)unaff_r4 + 0x268) = param_11;
+    *(unsigned short *)((unsigned char *)unaff_r4 + 0x2d0) = 0;
+    *(unsigned int *)((unsigned char *)unaff_r4 + 0x37c) = param_1;
     FUN_00213d1c(unaff_r4);
-    *(unsigned int *)(unaff_r4 + 900) = temp_v1;
-    unaff_r4[0x3e9] = param_8;
-    *(unsigned short *)(unaff_r4 + 0x3ec) = param_10;
-    *(unsigned short *)(unaff_r4 + 0x3ea) = param_10;
+    *(unsigned int *)((unsigned char *)unaff_r4 + 900) = temp_v1;
+    ((unsigned char *)unaff_r4)[0x3e9] = (unsigned char)param_8;
+    *(unsigned short *)((unsigned char *)unaff_r4 + 0x3ec) = param_10;
+    *(unsigned short *)((unsigned char *)unaff_r4 + 0x3ea) = param_10;
   }
   return unaff_r4;
 }

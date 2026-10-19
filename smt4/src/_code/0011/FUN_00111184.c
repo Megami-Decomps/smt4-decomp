@@ -28,13 +28,13 @@ extern int FUN_002ba8e8(int);
 extern unsigned int *FUN_002bad5c(int);
 /* Supplied declaration required: FUN_002c4938. */
 /* Supplied declaration required: FUN_002c5788. */
-/* Supplied declaration required: nn_os_LightEvent_Initialize. */
+extern void nn_os_LightEvent_Initialize(unsigned int, unsigned char);
 
 
 unsigned int * FUN_00111184(int param_1)
 
 {
-/* irregular: 11 native warning(s); review required */
+/* irregular: 10 native warning(s); review required */
   int temp_v0;
   unsigned int *puVar2;
   romwright_code **ppcVar3;
@@ -55,7 +55,7 @@ unsigned int * FUN_00111184(int param_1)
   temp_v0 = FUN_00121fa0(temp_v0 + 4);
   *(unsigned int *)(temp_v0 + 0x10) = 0;
   *(unsigned int *)(temp_v0 + 0x14) = 0;
-  nn_os_LightEvent_Initialize((unsigned int *)(temp_v0 + 0x10),0);
+  nn_os_LightEvent_Initialize((unsigned int)(temp_v0 + 0x10),0);
   *(unsigned int *)(temp_v0 + 0x18) = 0;
   *(unsigned int *)(temp_v0 + 0x1c) = 0;
   nn_os_LightEvent_Initialize(temp_v0 + 0x18,0);

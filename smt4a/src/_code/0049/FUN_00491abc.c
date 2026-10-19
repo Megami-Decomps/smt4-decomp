@@ -59,14 +59,14 @@ int FUN_00491abc(unsigned int param_1,int param_2,int param_3)
         }
         temp_v0 = in_fpscr & 0xfffffff;
         temp_v1 = temp_v0 | ((unsigned int)(in_s1 < temp_v8) << 0x1f) | ((unsigned int)(in_s1 == temp_v8) << 0x1e);
-        in_fpscr = temp_v1 | ((unsigned int)(NAN(in_s1) || NAN(temp_v8)) << 0x1c);
+        in_fpscr = temp_v1 | ((unsigned int)((in_s1 != in_s1) || (temp_v8 != temp_v8)) << 0x1c);
         temp_v7 = (unsigned char)(temp_v1 >> 0x18);
         temp_v5 = temp_v7 >> 7;
         temp_v6 = (unsigned char)((temp_v7 >> 6) & 1);
         temp_v7 = (unsigned char)(in_fpscr >> 0x1c) & 1;
         if (!temp_v6 && temp_v5 == temp_v7) {
           in_fpscr = temp_v0 | ((unsigned int)(temp_v9 < in_s1) << 0x1f) | ((unsigned int)(temp_v9 == in_s1) << 0x1e) |
-                     ((unsigned int)(NAN(temp_v9) || NAN(in_s1)) << 0x1c);
+                     ((unsigned int)((temp_v9 != temp_v9) || (in_s1 != in_s1)) << 0x1c);
           temp_v7 = (unsigned char)(in_fpscr >> 0x18);
           temp_v5 = temp_v7 >> 7;
           temp_v6 = (unsigned char)((temp_v7 >> 6) & 1);

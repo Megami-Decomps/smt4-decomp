@@ -11,52 +11,41 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_6_stack;
 
-#ifndef ROMWRIGHT_CARRY_4_DEFINED
-#define ROMWRIGHT_CARRY_4_DEFINED
-#define romwright_carry_4(left, right) ((unsigned char)((unsigned long long)(unsigned int)(left) + (unsigned long long)(unsigned int)(right) > 0xffffffffULL))
+#ifndef ROMWRIGHT_PIECE_4_4_DEFINED
+#define ROMWRIGHT_PIECE_4_4_DEFINED
+#define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: nn_fs_CTR_MPCore_detail_RomFsArchive_RomFsStorage_ReadBytes. */
+extern unsigned int nn_fs_CTR_MPCore_detail_RomFsArchive_RomFsStorage_ReadBytes(unsigned int, long long, unsigned int, unsigned int);
 
 
-void FUN_00239b94(int param_1,unsigned int *param_2,unsigned int *param_3,int param_4,int *param_5,
-                 unsigned int param_6)
+unsigned int FUN_00239b94(int param_1,unsigned int *param_2,unsigned int *param_3,int param_4,int *param_5,
+                 int param_6)
 
 {
-/* irregular: 1 native warning(s); review required */
   unsigned int temp_v0;
   unsigned int temp_v1;
   int temp_v2;
   unsigned int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
   unsigned int uStack_30;
   unsigned int uStack_2c;
-  int temp_v6;
+  int temp_v4;
   
-  temp_v3 = *(unsigned int *)(param_1 + 0x10) + param_6;
-  temp_v2 = *(int *)(param_1 + 0x14) + (unsigned int)romwright_carry_4(*(unsigned int *)(param_1 + 0x10),param_6);
-  temp_v0 = *(unsigned int *)(param_1 + 0x1c);
-  nn_fs_CTR_MPCore_detail_RomFsArchive_RomFsStorage_ReadBytes
-            (temp_v0,&temp_v4,temp_v3,temp_v2,&temp_v4,0x18);
-  temp_v1 = temp_v0 & 0x80000000;
-  if (-1 < (int)temp_v1) {
-    if ((param_4 != 0 && param_5 != (int *)0x0) && (*param_5 = temp_v6, temp_v6 != 0)) {
-      temp_v0 = *(unsigned int *)(param_1 + 0x1c);
-      nn_fs_CTR_MPCore_detail_RomFsArchive_RomFsStorage_ReadBytes
-                (temp_v0,temp_v1,temp_v3 + 0x18,temp_v2 + (unsigned int)(0xffffffe7 < temp_v3),param_4,temp_v6);
-      if ((int)temp_v0 >= 0) {
-        temp_v0 = 0;
-      }
-    }
-    else {
-      temp_v0 = 0;
-    }
+  temp_v1 = *(int *)(param_1 + 0x10) + param_6;
+  temp_v0 = nn_fs_CTR_MPCore_detail_RomFsArchive_RomFsStorage_ReadBytes
+                    (*(unsigned int *)(param_1 + 0x1c),romwright_piece_4_4(0x18,&temp_v2),(unsigned int)&temp_v2,temp_v1);
+  if ((-1 < (int)(temp_v0 & 0x80000000)) &&
+     (((param_4 == 0 || param_5 == (int *)0x0 || (*param_5 = temp_v4, temp_v4 == 0)) ||
+      (temp_v0 = nn_fs_CTR_MPCore_detail_RomFsArchive_RomFsStorage_ReadBytes
+                         (*(unsigned int *)(param_1 + 0x1c),romwright_piece_4_4(temp_v4,param_4),
+                          temp_v0 & 0x80000000,temp_v1 + 0x18), -1 < (int)temp_v0)))) {
+    temp_v0 = 0;
   }
   if (-1 < (int)temp_v0) {
-    *param_2 = temp_v4;
-    *param_3 = temp_v5;
+    *param_2 = temp_v2;
+    *param_3 = temp_v3;
     param_3[1] = uStack_30;
     param_3[2] = uStack_2c;
+    temp_v0 = 0;
   }
-  return;
+  return temp_v0;
 }

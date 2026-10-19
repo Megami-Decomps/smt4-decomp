@@ -18,7 +18,7 @@ void FUN_00137080(unsigned int *param_1)
   temp_v0 = 0;
   do {
     while (temp_v0 == 0) {
-      if (DAT_004652a0 < DAT_004652a4) {
+      if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
         *DAT_004652a0 = 0x11000;
         DAT_004652a0[1] = 0xd0080;
         DAT_004652a0 = DAT_004652a0 + 2;
@@ -26,13 +26,13 @@ void FUN_00137080(unsigned int *param_1)
       temp_v0 = 1;
     }
     if (temp_v0 != 0xc) {
-      if ((temp_v0 != 0xf) && (DAT_004652a0 < DAT_004652a4)) {
+      if ((temp_v0 != 0xf) && ((unsigned int)DAT_004652a0 < DAT_004652a4)) {
         *DAT_004652a0 = 0;
         DAT_004652a0[1] = (temp_v0 + 0x80U) | 0xf0000;
         DAT_004652a0 = DAT_004652a0 + 2;
       }
     }
-    else if (DAT_004652a0 < DAT_004652a4) {
+    else if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
       *DAT_004652a0 = 0xff0000;
       DAT_004652a0[1] = 0xf008c;
       DAT_004652a0 = DAT_004652a0 + 2;

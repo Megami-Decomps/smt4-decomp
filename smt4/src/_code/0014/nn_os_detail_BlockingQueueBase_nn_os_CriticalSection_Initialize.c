@@ -9,14 +9,14 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: hasExclusiveAccess (CALLOTHER). */
 /* Supplied declaration required: FUN_002c38fc. */
-/* Supplied declaration required: nn_os_LightSemaphore_Initialize. */
+extern void nn_os_LightSemaphore_Initialize(unsigned int, int, int);
 
 
 void nn_os_detail_BlockingQueueBase_nn_os_CriticalSection_Initialize
                (unsigned int *param_1,unsigned int param_2,unsigned int param_3)
 
 {
-/* irregular: 3 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   unsigned char temp_v0;
   
   param_1[9] = 0;
@@ -31,8 +31,8 @@ void nn_os_detail_BlockingQueueBase_nn_os_CriticalSection_Initialize
     temp_v0 = (unsigned char)hasExclusiveAccess(param_1 + 0xc);
   } while (!temp_v0);
   param_1[0xc] = 0;
-  nn_os_LightSemaphore_Initialize(param_1 + 1,0,0x7fff);
-  nn_os_LightSemaphore_Initialize(param_1 + 3,0,0x7fff);
+  nn_os_LightSemaphore_Initialize((unsigned int)(param_1 + 1),0,0x7fff);
+  nn_os_LightSemaphore_Initialize((unsigned int)(param_1 + 3),0,0x7fff);
   FUN_002c38fc(param_1 + 5);
   return;
 }

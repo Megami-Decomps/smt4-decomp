@@ -7,7 +7,6 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_3_stack;
 
-/* Unsupported intrinsic, declaration required: while (LOAD). */
 /* Supplied declaration required: aeabi_uidivmod. */
 /* Supplied declaration required: nw_font_ResFontBase_FindGlyphIndex. */
 
@@ -15,7 +14,7 @@ typedef struct {
 void nw_font_ResFontBase_GetGlyph(unsigned int param_1,int *param_2,unsigned int param_3)
 
 {
-/* irregular: 1 goto(s); 5 native warning(s); review required */
+/* irregular: 1 goto(s); 4 native warning(s); review required */
   unsigned char temp_v0;
   unsigned char temp_v1;
   unsigned short temp_v2;

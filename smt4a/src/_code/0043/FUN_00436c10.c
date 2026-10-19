@@ -26,13 +26,13 @@ void FUN_00436c10(unsigned int *param_1,unsigned int *param_2,unsigned int param
   
   piVar3 = (int *)param_2[2];
   temp_v1 = param_4;
-  if (piVar3 != param_2 + 1) {
+  if (piVar3 != (int *)(param_2 + 1)) {
     do {
       temp_v0 = FUN_0030ef8c(piVar3[9],param_3,param_2[4]);
       if (temp_v0 != 0) {
         piVar3 = (int *)piVar3[1];
       }
-    } while (temp_v0 != 0 && piVar3 != param_2 + 1);
+    } while (temp_v0 != 0 && piVar3 != (int *)(param_2 + 1));
   }
   piVar2 = (int *)(param_2 + 1);
   if (piVar3 != piVar2) {

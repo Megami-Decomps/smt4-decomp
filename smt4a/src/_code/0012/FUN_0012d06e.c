@@ -14,7 +14,7 @@ void FUN_0012d06e(int param_1)
   UNRECOVERED_JUMPTABLE = *(romwright_code **)(param_1 + 8);
   piVar1 = (int *)(*(int *)(param_1 + 4) + ((int)*(unsigned int *)(param_1 + 0xc) >> 1));
   if ((*(unsigned int *)(param_1 + 0xc) & 1) != 0) {
-    UNRECOVERED_JUMPTABLE = *(romwright_code **)(UNRECOVERED_JUMPTABLE + *piVar1);
+    UNRECOVERED_JUMPTABLE = *(romwright_code **)((unsigned char *)UNRECOVERED_JUMPTABLE + *piVar1);
   }
                     /* WARNING: Could not recover jumptable at 0x0012d08a. Too many branches */
                     /* WARNING: Treating indirect jump as call */

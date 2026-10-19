@@ -58,6 +58,13 @@ unsigned int FUN_001fe640(unsigned int param_1)
 
 {
 /* irregular: 12 goto(s); irregular input(s): in_fpscr; 15 native warning(s); review required */
+  unsigned int unique0x1000091a;
+  unsigned int unique0x10000912;
+  unsigned int unique0x1000097a;
+  unsigned int unique0x10000972;
+  unsigned int unique0x100009be;
+  unsigned int unique0x100009b6;
+  unsigned int unique0x10000902;
   unsigned char temp_v0;
   int *piVar2;
   int temp_v1;
@@ -430,7 +437,7 @@ joined_r0x001feb24:
                   *(float *)(temp_v1 + 0x20c) = temp_v12;
                   temp_v3 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v12 < temp_v10) << 0x1f) |
                           ((unsigned int)(temp_v12 == temp_v10) << 0x1e);
-                  temp_v6 = temp_v3 | ((unsigned int)(NAN(temp_v12) || NAN(temp_v10)) << 0x1c);
+                  temp_v6 = temp_v3 | ((unsigned int)((temp_v12 != temp_v12) || (temp_v10 != temp_v10)) << 0x1c);
                   temp_v0 = (unsigned char)(temp_v3 >> 0x18);
                   temp_v3 = temp_v5;
                   if (!((unsigned char)((temp_v0 >> 6) & 1) || temp_v0 >> 7 != ((unsigned char)(temp_v6 >> 0x1c) & 1))) {

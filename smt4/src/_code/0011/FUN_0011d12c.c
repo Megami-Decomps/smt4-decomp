@@ -13,24 +13,24 @@ extern unsigned int DAT_00471a8c; /* 0x471a8c */
 extern unsigned int DAT_004e6c5c; /* 0x4e6c5c */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: nn_gxlow_CTR_InterruptReceiver_Finalize. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_gxlow_CTR_InterruptReceiver_Finalize(unsigned int);
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 void FUN_0011d12c(void)
 
 {
-/* irregular: 4 native warning(s); review required */
-  nn_os_CriticalSection_Enter(&DAT_004e6c5c);
+/* irregular: 1 native warning(s); review required */
+  nn_os_CriticalSection_Enter((unsigned int)&DAT_004e6c5c);
   if (DAT_00471a70 != '\0') {
     nn_gxlow_CTR_InterruptReceiver_Finalize(DAT_00471a8c);
     software_interrupt(0x23);
     DAT_00471a84 = 0;
     DAT_00471a70 = 0;
-    nn_os_CriticalSection_Leave(&DAT_004e6c5c);
+    nn_os_CriticalSection_Leave((unsigned int)&DAT_004e6c5c);
     return;
   }
-  nn_os_CriticalSection_Leave(&DAT_004e6c5c);
+  nn_os_CriticalSection_Leave((unsigned int)&DAT_004e6c5c);
   return;
 }

@@ -12,19 +12,18 @@ extern int *DAT_004d4340; /* 0x4d4340 */
 extern int DAT_004d4348; /* 0x4d4348 */
 extern unsigned int DAT_004d434c; /* 0x4d434c */
 
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 void FUN_0035606c(int *param_1)
 
 {
-/* irregular: 2 native warning(s); review required */
   (**(romwright_code **)(*param_1 + 0x34))(param_1);
-  nn_os_CriticalSection_Enter(&DAT_004d434c);
+  nn_os_CriticalSection_Enter((unsigned int)&DAT_004d434c);
   *param_1 = (int)DAT_004d4340;
   DAT_004d4348 = DAT_004d4348 - 1;
   DAT_004d4340 = param_1;
-  nn_os_CriticalSection_Leave(&DAT_004d434c);
+  nn_os_CriticalSection_Leave((unsigned int)&DAT_004d434c);
   return;
 }

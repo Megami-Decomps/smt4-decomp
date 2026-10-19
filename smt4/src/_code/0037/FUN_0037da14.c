@@ -222,7 +222,7 @@ void FUN_0037da14(fn_0037da14_arg0 *param_1,int param_2,int param_3,unsigned int
       pvVar8 = *(void **)((int)pvVar8 + 0x138);
     } while (pvVar8 != (void *)0x0);
   }
-  pfVar9->field_0x138 = param_1->field_0xc4;
+  pfVar9->field_0x138 = (undefined4)param_1->field_0xc4;
   param_1->field_0xc4 = pfVar9;
 LAB_0037dbb0:
   if (param_1->field_0x8c < 0x80) {

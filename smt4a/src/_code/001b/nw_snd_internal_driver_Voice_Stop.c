@@ -2,13 +2,12 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
-/* Supplied declaration required: nn_snd_CTR_Voice_SetState. */
+extern void nn_snd_CTR_Voice_SetState(unsigned int, int);
 
 
 void nw_snd_internal_driver_Voice_Stop(int param_1)
 
 {
-/* irregular: 1 native warning(s); review required */
   int temp_v0;
   int temp_v1;
   

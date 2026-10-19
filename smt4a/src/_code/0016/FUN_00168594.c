@@ -51,7 +51,7 @@ void FUN_00168594(int param_1,unsigned int *param_2)
     temp_v0 = FUN_002e3390(param_1);
     pcVar5 = temp_v5;
     if ((temp_v6 & 1) != 0) {
-      pcVar5 = *(romwright_code **)(temp_v5 + *(int *)((int)&temp_v4 + ((int)temp_v6 >> 1)));
+      pcVar5 = *(romwright_code **)((unsigned char *)temp_v5 + *(int *)((int)&temp_v4 + ((int)temp_v6 >> 1)));
     }
     temp_v1 = (*pcVar5)();
     temp_v2 = temp_v4 - param_1;
@@ -66,14 +66,14 @@ void FUN_00168594(int param_1,unsigned int *param_2)
         }
         VectorSignedToFloat((romwright_code *)(int)temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
         if (!temp_v3) {
-          pcVar5 = *(romwright_code **)(temp_v5 + *(int *)((int)&temp_v4 + ((int)temp_v6 >> 1)));
+          pcVar5 = *(romwright_code **)((unsigned char *)temp_v5 + *(int *)((int)&temp_v4 + ((int)temp_v6 >> 1)));
         }
         temp_v1 = (*pcVar5)();
       }
       else {
         pcVar5 = temp_v5;
         if ((temp_v6 & 1) != 0) {
-          pcVar5 = *(romwright_code **)(temp_v5 + *(int *)((int)&temp_v4 + ((int)temp_v6 >> 1)));
+          pcVar5 = *(romwright_code **)((unsigned char *)temp_v5 + *(int *)((int)&temp_v4 + ((int)temp_v6 >> 1)));
         }
         temp_v1 = (*pcVar5)();
         VectorSignedToFloat((int)temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);

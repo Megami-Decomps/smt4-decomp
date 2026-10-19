@@ -13,14 +13,14 @@ extern unsigned int DAT_004e411c; /* 0x4e411c */
 
 /* Supplied declaration required: FUN_00138430. */
 /* Supplied declaration required: FUN_002b3194. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 void FUN_001245c4(unsigned int param_1)
 
 {
-/* irregular: 4 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   int temp_v0;
   int temp_v1;
   

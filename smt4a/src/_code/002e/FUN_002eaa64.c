@@ -58,7 +58,7 @@ void FUN_002eaa64(int param_1,int *param_2)
     if (temp_v1 != 0) {
       temp_v2 = FUN_002ea93c(temp_v10 + 2);
       temp_v0 = FUN_002eacbc(temp_v10);
-      temp_v4 = romwright_piece_3_1(temp_v4._1_3_,temp_v0);
+      temp_v4 = romwright_piece_3_1((((unsigned int)(temp_v4) >> 8) & 0xffffffU),temp_v0);
       FUN_002ea948(temp_v6,temp_v2,temp_v0);
       FUN_002eacc6(&temp_v7,temp_v3,temp_v6);
       temp_v8 = *(unsigned int *)(param_1 + 100);

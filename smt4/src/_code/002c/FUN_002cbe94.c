@@ -7,13 +7,13 @@ typedef int romwright_code();
 /* Supplied declaration required: FUN_002bb5a4. */
 /* Supplied declaration required: FUN_002c3510. */
 /* Supplied declaration required: FUN_002c52f8. */
-/* Supplied declaration required: nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile. */
+extern void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(unsigned int);
 
 
 int * FUN_002cbe94(int *param_1,int param_2,unsigned int param_3)
 
 {
-/* irregular: 5 native warning(s); review required */
+/* irregular: 4 native warning(s); review required */
   int *piVar1;
   unsigned char temp_v0 [500];
   

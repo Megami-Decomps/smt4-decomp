@@ -4,15 +4,17 @@
 
 typedef int romwright_code();
 
-void nn_fs_CTR_MPCore_detail_UserFileSystem_TryGetFileSize(int param_1,int *param_2)
+unsigned int nn_fs_CTR_MPCore_detail_UserFileSystem_TryGetFileSize(long long *param_1,int *param_2)
 
 {
 /* irregular: 2 native warning(s); review required */
-  if (param_1 != 0 && param_2 != (int *)0x0) {
+  unsigned int temp_v0;
+  
+  if (param_1 != (long long *)0x0 && param_2 != (int *)0x0) {
                     /* WARNING: Could not recover jumptable at 0x002a858c. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-    (**(romwright_code **)(*param_2 + 8))(param_2,param_1);
-    return;
+    temp_v0 = (**(romwright_code **)(*param_2 + 8))(param_2,param_1);
+    return temp_v0;
   }
-  return;
+  return 0xe0e046bc;
 }

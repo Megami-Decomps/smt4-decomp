@@ -9,13 +9,13 @@ extern unsigned int DAT_0062d6e8; /* 0x62d6e8 */
 extern int FUN_00189738(unsigned int *, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00195fc8. */
 /* Supplied declaration required: FUN_001a0eb0. */
-/* Supplied declaration required: nn_cfg_CTR_Initialize. */
+extern void nn_cfg_CTR_Initialize(void);
 
 
 void FUN_0015a0e0(unsigned int *param_1)
 
 {
-/* irregular: 3 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   int temp_v0;
   
   if (DAT_00589504 == '\0') {

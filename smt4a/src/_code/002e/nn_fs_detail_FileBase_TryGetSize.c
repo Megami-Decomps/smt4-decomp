@@ -7,22 +7,22 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_2_stack;
 
-extern int FUN_001a0050(unsigned int *, unsigned int);
+extern unsigned int FUN_001a0050(unsigned int *, unsigned int);
 
 
-int nn_fs_detail_FileBase_TryGetSize(unsigned int *param_1,unsigned int *param_2)
+unsigned int nn_fs_detail_FileBase_TryGetSize(unsigned int *param_1,long long *param_2)
 
 {
-  int temp_v0;
+  unsigned int temp_v0;
   unsigned int temp_v1;
   unsigned int uStack_14;
   
   temp_v0 = FUN_001a0050(&temp_v1,*param_1 & 0xfffffffe);
-  if (temp_v0 >= 0) {
+  if ((int)temp_v0 >= 0) {
     param_1[3] = temp_v1;
     param_1[4] = uStack_14;
-    *param_2 = temp_v1;
-    param_2[1] = uStack_14;
+    *(unsigned int *)param_2 = temp_v1;
+    *(unsigned int *)((int)param_2 + 4) = uStack_14;
   }
   else {
     param_1[3] = 0;

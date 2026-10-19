@@ -57,7 +57,7 @@ unsigned int FUN_0024a89c(float *param_1,int param_2,float *param_3,float *param
     temp_v1 = temp_v2 == 0.0f;
     temp_v4 = temp_v2;
   }
-  if (!temp_v1 && temp_v0 == NAN(temp_v4)) {
+  if (!temp_v1 && temp_v0 == (temp_v4 != temp_v4)) {
     temp_v0 = temp_v3 < 0.0f;
     temp_v1 = temp_v3 == 0.0f;
     temp_v4 = temp_v3;
@@ -66,7 +66,7 @@ unsigned int FUN_0024a89c(float *param_1,int param_2,float *param_3,float *param
       temp_v1 = temp_v5 == 0.0f;
       temp_v4 = temp_v5;
     }
-    if (!temp_v1 && temp_v0 == NAN(temp_v4)) {
+    if (!temp_v1 && temp_v0 == (temp_v4 != temp_v4)) {
       return 1;
     }
   }

@@ -26,13 +26,13 @@ extern int FUN_002b90c8(unsigned char *, unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_002c3940. */
 /* Supplied declaration required: FUN_002c52f8. */
 /* Supplied declaration required: FUN_002c618c. */
-/* Supplied declaration required: nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile. */
+extern void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(unsigned int);
 
 
 unsigned int FUN_002cb8d8(unsigned int param_1)
 
 {
-/* irregular: 8 native warning(s); review required */
+/* irregular: 7 native warning(s); review required */
   int temp_v0;
   unsigned short *puVar2;
   unsigned int *puVar3;

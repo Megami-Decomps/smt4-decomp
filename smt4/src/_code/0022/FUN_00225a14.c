@@ -39,7 +39,6 @@ static float romwright_sqrt_4(float value)
     return (float)sqrt((double)value);
 }
 #endif
-/* Unsupported intrinsic, declaration required: while (INT_ADD). */
 /* Supplied declaration required: FUN_0023d20c. */
 /* Supplied declaration required: FUN_003e2044. */
 /* Supplied declaration required: nn_math_ARMv6_MTX33MultAsm_nn_math_MTX34. */
@@ -49,7 +48,7 @@ static float romwright_sqrt_4(float value)
 void FUN_00225a14(unsigned int param_1,int *param_2,unsigned int param_3,int param_4)
 
 {
-/* irregular: 5 native warning(s); review required */
+/* irregular: 4 native warning(s); review required */
   int temp_v0;
   int temp_v1;
   int temp_v2;

@@ -24,15 +24,15 @@ extern int *FUN_001afa44(void);
 /* Supplied declaration required: FUN_001c7598. */
 /* Supplied declaration required: FUN_001c76b8. */
 /* Supplied declaration required: FUN_001cd5ac. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 /* Supplied declaration required: nn_snd_CTR_MasterManager_GetAuxCallback. */
 
 
 void FUN_001bd870(void)
 
 {
-/* irregular: 12 native warning(s); review required */
+/* irregular: 10 native warning(s); review required */
   char temp_v0;
   int *piVar2;
   int temp_v1;
@@ -85,16 +85,16 @@ void FUN_001bd870(void)
       (*(romwright_code *)piVar2[10])(piVar2[0xb]);
     }
     if (piVar2[8] != 0) {
-      nn_os_CriticalSection_Enter(piVar2 + 0xd);
+      nn_os_CriticalSection_Enter((unsigned int)(piVar2 + 0xd));
       (*(romwright_code *)piVar2[8])(piVar2[9]);
-      nn_os_CriticalSection_Leave(piVar2 + 0xd);
+      nn_os_CriticalSection_Leave((unsigned int)(piVar2 + 0xd));
     }
     if (temp_v2 != 0) {
-      FUN_001af148(piVar2 + 0x12);
+      FUN_001af148();
     }
-    nn_os_CriticalSection_Enter(piVar2 + 0xd);
+    nn_os_CriticalSection_Enter((unsigned int)(piVar2 + 0xd));
     FUN_001c76b8();
-    nn_os_CriticalSection_Leave(piVar2 + 0xd);
+    nn_os_CriticalSection_Leave((unsigned int)(piVar2 + 0xd));
     puVar5 = (unsigned int *)(unsigned int)*(unsigned char *)(piVar2 + 2);
     if (puVar5 != (unsigned int *)0x0) {
       software_interrupt(0x28);

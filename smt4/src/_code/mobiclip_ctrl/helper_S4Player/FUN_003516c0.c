@@ -20,13 +20,13 @@ extern int DAT_0044d15c; /* 0x44d15c */
 /* Supplied declaration required: FUN_002c526c. */
 /* Supplied declaration required: FUN_0034f050. */
 /* Supplied declaration required: FUN_0035053c. */
-/* Supplied declaration required: nn_os_Thread_FinalizeImpl. */
+extern void nn_os_Thread_FinalizeImpl(unsigned int);
 
 
 void FUN_003516c0(int param_1)
 
 {
-/* irregular: 10 native warning(s); review required */
+/* irregular: 9 native warning(s); review required */
   unsigned char *puVar1;
   int temp_v0;
   int temp_v1;

@@ -11,14 +11,13 @@ typedef struct {
 /* Supplied declaration required: aeabi_idivmod. */
 
 
-int nn_hidlow_ClampStickCircle
-              (unsigned short *param_1,unsigned short *param_2,int param_3,int param_4,int param_5,
-              int param_6)
+short nn_hidlow_ClampStickCircle
+                (short *param_1,short *param_2,int param_3,int param_4,int param_5,int param_6)
 
 {
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
-  unsigned short temp_v1;
+  short temp_v1;
   int temp_v2;
   int temp_v3;
   int temp_v4;
@@ -60,5 +59,5 @@ int nn_hidlow_ClampStickCircle
   *param_1 = temp_v1;
   temp_v1 = aeabi_idivmod(param_4 * temp_v4,temp_v2);
   *param_2 = temp_v1;
-  return (int)(short)param_6;
+  return (short)param_6;
 }

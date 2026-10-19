@@ -3,7 +3,7 @@
 #include "romwright_types.h"
 
 
-unsigned int nn_cec_CTR_MessageId_IsEmpty(int param_1)
+unsigned char nn_cec_CTR_MessageId_IsEmpty(int param_1)
 
 {
   int temp_v0;

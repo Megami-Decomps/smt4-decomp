@@ -5,15 +5,14 @@
 extern signed char DAT_00471a70; /* 0x471a70 */
 extern unsigned int DAT_00471a84; /* 0x471a84 */
 
-/* Supplied declaration required: nn_gxlow_CTR_Gpu_SetLcdForceBlack. */
+extern unsigned int nn_gxlow_CTR_Gpu_SetLcdForceBlack(unsigned int, unsigned char);
 
 
 void FUN_0011d100(void)
 
 {
-/* irregular: 1 native warning(s); review required */
   if (DAT_00471a70 != '\0') {
-    nn_gxlow_CTR_Gpu_SetLcdForceBlack(&DAT_00471a84,0);
+    nn_gxlow_CTR_Gpu_SetLcdForceBlack((unsigned int)&DAT_00471a84,0);
     return;
   }
   return;

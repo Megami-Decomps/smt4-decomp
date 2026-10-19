@@ -5,7 +5,7 @@
 extern int FUN_001c6e20(void);
 
 
-void nn_snd_CTR_Dspsnd_SetMasterVolume(int param_1)
+void nn_snd_CTR_Dspsnd_SetMasterVolume(int param_1,float param_2)
 
 {
 /* irregular: irregular input(s): in_s0 */

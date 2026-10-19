@@ -13,36 +13,35 @@ extern unsigned char DAT_0062d648; /* 0x62d648 */
 extern unsigned char DAT_0062d6a0; /* 0x62d6a0 */
 
 /* Supplied declaration required: FUN_00188b60. */
-extern unsigned int *nn_fnd_ExpHeapBase_Allocate(unsigned char *, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern unsigned int nn_fnd_ExpHeapBase_Allocate(unsigned int, unsigned int, int, unsigned char, int, unsigned char);
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
-int FUN_0043f384(void)
+void FUN_0043f384(void)
 
 {
-/* irregular: 3 native warning(s); review required */
+/* irregular: 1 native warning(s); review required */
   unsigned int *puVar1;
+  unsigned int *puVar2;
   int temp_v0;
   
-  nn_os_CriticalSection_Enter(&DAT_0062d6a0);
-  puVar1 = (unsigned int *)nn_fnd_ExpHeapBase_Allocate(&DAT_0062d648,0x3794,4,0,0,0);
-  nn_os_CriticalSection_Leave(&DAT_0062d6a0);
-  if (puVar1 == (unsigned int *)0x0) {
+  nn_os_CriticalSection_Enter((unsigned int)&DAT_0062d6a0);
+  puVar2 = (unsigned int *)nn_fnd_ExpHeapBase_Allocate((unsigned int)&DAT_0062d648,0x3794,4,0,0,0);
+  nn_os_CriticalSection_Leave((unsigned int)&DAT_0062d6a0);
+  if (puVar2 == (unsigned int *)0x0) {
     temp_v0 = -0x279f8c0d;
   }
   else {
     temp_v0 = 0;
   }
-  if (-1 < temp_v0) {
-    if (puVar1 != (unsigned int *)0x0) {
-      *puVar1 = (unsigned int)&DAT_0055b418;
-      puVar1[0xde2] = 0;
-      FUN_00188b60();
-      puVar1[0x6c1] = 0;
-    }
-    temp_v0 = 0;
-    DAT_005c0afc = puVar1;
+  puVar1 = DAT_005c0afc;
+  if ((-1 < temp_v0) && (puVar1 = puVar2, puVar2 != (unsigned int *)0x0)) {
+    *puVar2 = (unsigned int)&DAT_0055b418;
+    puVar2[0xde2] = 0;
+    FUN_00188b60();
+    puVar2[0x6c1] = 0;
   }
-  return temp_v0;
+  DAT_005c0afc = puVar1;
+  return;
 }

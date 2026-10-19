@@ -19,13 +19,13 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_0015c0f4. */
-/* Supplied declaration required: nn_snd_CTR_Voice_SetMixParam. */
+extern void nn_snd_CTR_Voice_SetMixParam(unsigned int, unsigned int);
 
 
 void nw_snd_internal_driver_Voice_CalcMix(int param_1)
 
 {
-/* irregular: 2 native warning(s); review required */
+/* irregular: 1 native warning(s); review required */
   int temp_v0;
   int temp_v1;
   int temp_v2;
@@ -59,7 +59,7 @@ void nw_snd_internal_driver_Voice_CalcMix(int param_1)
       temp_v1 = *(int *)(param_1 + temp_v0 * 4);
       if (temp_v1 != 0) {
         FUN_0015c0f4(param_1,temp_v0,&temp_v2);
-        nn_snd_CTR_Voice_SetMixParam(temp_v1,&temp_v2);
+        nn_snd_CTR_Voice_SetMixParam(temp_v1,(unsigned int)&temp_v2);
       }
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < *(int *)(param_1 + 8));

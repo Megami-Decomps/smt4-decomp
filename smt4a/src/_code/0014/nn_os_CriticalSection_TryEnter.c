@@ -6,7 +6,7 @@
 extern int FUN_00158dc0(int);
 
 
-unsigned int nn_os_CriticalSection_TryEnter(int param_1)
+unsigned char nn_os_CriticalSection_TryEnter(int param_1)
 
 {
 /* irregular: 1 native warning(s); review required */

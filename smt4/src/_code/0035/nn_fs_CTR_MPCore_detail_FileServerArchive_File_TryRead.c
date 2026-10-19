@@ -2,25 +2,24 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
-/* stack frame of param_6: 2 slot(s), 8 byte(s) */
+/* stack frame of param_5: 2 slot(s), 8 byte(s) */
 typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
     unsigned int sp28; /* 0x28: local_28 */
-} param_6_stack;
+} param_5_stack;
 
 extern unsigned int FUN_00239ab8(void);
-/* Supplied declaration required: nn_fs_ipc_File_Read. */
+extern unsigned int nn_fs_ipc_File_Read(unsigned int, int *, long long, unsigned int, unsigned int);
 
 
-void nn_fs_CTR_MPCore_detail_FileServerArchive_File_TryRead
-               (unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
-               unsigned int param_5,unsigned int param_6)
+unsigned int nn_fs_CTR_MPCore_detail_FileServerArchive_File_TryRead
+               (unsigned int param_1,int *param_2,long long param_3,unsigned int param_4,unsigned int param_5)
 
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0 [2];
+  unsigned int temp_v0;
+  unsigned int temp_v1 [2];
   
-  temp_v0[0] = FUN_00239ab8();
-  nn_fs_ipc_File_Read(temp_v0,param_2,param_3,param_4,param_5,param_6);
-  return;
+  temp_v1[0] = FUN_00239ab8();
+  temp_v0 = nn_fs_ipc_File_Read((unsigned int)temp_v1,param_2,param_3,param_4,param_5);
+  return temp_v0;
 }

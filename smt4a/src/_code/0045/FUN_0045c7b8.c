@@ -55,14 +55,14 @@ void FUN_0045c7b8(int param_1,int param_2,fn_0045c7b8_arg2 *param_3,float *param
     temp_v1 = (unsigned char)(temp_v0 >> 0x18);
     temp_v2 = (unsigned char)(temp_v1 >> 7);
     temp_v3 = (unsigned char)((temp_v1 >> 6) & 1);
-    if (!temp_v3 && temp_v2 == NAN(in_s0)) {
+    if (!temp_v3 && temp_v2 == (in_s0 != in_s0)) {
       temp_v9 = 1.0f / in_s0;
       temp_v6 = temp_v6 * temp_v9;
       temp_v7 = temp_v7 * temp_v9;
       temp_v8 = temp_v8 * temp_v9;
     }
     temp_v9 = (float)VectorUnsignedToFloat((unsigned int)param_3->field_0x29,(unsigned char)(temp_v0 >> 0x16) & 3);
-    if (!(temp_v3 || temp_v2 != NAN(in_s0))) {
+    if (!(temp_v3 || temp_v2 != (in_s0 != in_s0))) {
       temp_v10 = temp_v6 * param_3->field_0xc + temp_v7 * param_3->field_0x10 +
                temp_v8 * param_3->field_0x14;
       temp_v6 = -(temp_v6 * *(float *)(param_2 + 0x3c) + temp_v7 * *(float *)(param_2 + 0x40) +

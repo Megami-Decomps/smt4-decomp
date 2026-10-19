@@ -12,7 +12,6 @@ extern int DAT_006199c8; /* 0x6199c8 */
 extern int DAT_006199cc; /* 0x6199cc */
 extern int DAT_006199d0; /* 0x6199d0 */
 
-/* Unsupported intrinsic, declaration required: while (LOAD). */
 /* Supplied declaration required: FUN_0019a5a0. */
 /* Supplied declaration required: FUN_003d4bbc. */
 
@@ -20,7 +19,7 @@ extern int DAT_006199d0; /* 0x6199d0 */
 void FUN_003d4b7c(void)
 
 {
-/* irregular: 3 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   char temp_v0;
   int temp_v1;
   int temp_v2;

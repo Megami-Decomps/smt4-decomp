@@ -239,12 +239,12 @@ unsigned int FUN_0019b770(unsigned short *param_1,unsigned int *param_2,int para
     temp_v3 = FUN_00168854(*(unsigned int *)(DAT_0059dbb4 + 0x52c));
     temp_v6 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v16 < temp_v11) << 0x1f) |
             ((unsigned int)(temp_v16 == temp_v11) << 0x1e);
-    temp_v7 = temp_v6 | ((unsigned int)(NAN(temp_v16) || NAN(temp_v11)) << 0x1c);
+    temp_v7 = temp_v6 | ((unsigned int)((temp_v16 != temp_v16) || (temp_v11 != temp_v11)) << 0x1c);
     temp_v16 = (float)VectorUnsignedToFloat(temp_v3,(unsigned char)(temp_v7 >> 0x16) & 3);
     temp_v1 = (unsigned char)(temp_v6 >> 0x18);
     temp_v6 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v17 < temp_v16) << 0x1f) |
             ((unsigned int)(temp_v17 == temp_v16) << 0x1e);
-    in_fpscr = temp_v6 | ((unsigned int)(NAN(temp_v17) || NAN(temp_v16)) << 0x1c);
+    in_fpscr = temp_v6 | ((unsigned int)((temp_v17 != temp_v17) || (temp_v16 != temp_v16)) << 0x1c);
     if (!(unsigned char)((temp_v1 >> 6) & 1) && temp_v1 >> 7 == ((unsigned char)(temp_v7 >> 0x1c) & 1)) {
       temp_v13 = temp_v11;
     }

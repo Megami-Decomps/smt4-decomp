@@ -18,27 +18,26 @@ extern int FUN_0017169c(void);
 /* Supplied declaration required: FUN_0018c4f8. */
 /* Supplied declaration required: nn_hid_CTR_AnalogStickClamper_ClampCore. */
 /* Supplied declaration required: nn_hid_CTR_AnalogStickClamper_ClampValueOfClamp. */
-/* Supplied declaration required: nn_hidlow_CTR_PadLifoRing_ReadData. */
+extern void nn_hidlow_CTR_PadLifoRing_ReadData(unsigned int, unsigned int, int, int *, long long *, int *);
 
-
-/* WARNING: Type propagation algorithm not settling */
 
 unsigned int FUN_00159814(int *param_1,unsigned int *param_2)
 
 {
-/* irregular: 5 native warning(s); review required */
+/* irregular: 3 native warning(s); review required */
   int temp_v0;
   unsigned int temp_v1;
-  int temp_v2 [4];
+  int temp_v2 [2];
+  unsigned long long temp_v3;
   
-  temp_v2[2] = 0xffffffff;
-  temp_v2[3] = 0xffffffff;
+  (*(unsigned int *)((unsigned char *)&temp_v3 + 0)) = 0xffffffff;
+  (*(unsigned int *)((unsigned char *)&temp_v3 + 4)) = 0xffffffff;
   temp_v2[1] = 0xffffffff;
   temp_v0 = FUN_0016f144();
   if (temp_v0 == 0) {
     nn_hid_CTR_AnalogStickClamper_ClampValueOfClamp(param_1 + 3);
     nn_hidlow_CTR_PadLifoRing_ReadData
-              (*(unsigned int *)(*param_1 + 4),param_2,1,temp_v2,temp_v2 + 2,temp_v2 + 1);
+              (*(unsigned int *)(*param_1 + 4),(unsigned int)param_2,1,temp_v2,(long long *)&temp_v3,temp_v2 + 1);
     if (0 < temp_v2[0]) {
       nn_hid_CTR_AnalogStickClamper_ClampCore
                 (param_1 + 3,param_2 + 3,(int)param_2 + 0xe,(int)(short)param_2[3],

@@ -140,12 +140,12 @@ void FUN_00193c08(int param_1,int param_2)
         temp_v12 = -temp_v12;
       }
       *pfVar5 = temp_v8 * temp_v7;
-      puVar8[8] = temp_v12 * temp_v7;
-      puVar8[0xd] = temp_v11 * temp_v7;
-      puVar8[0xe] = temp_v4 * temp_v7;
+      *(float *)&puVar8[8] = temp_v12 * temp_v7;
+      *(float *)&puVar8[0xd] = temp_v11 * temp_v7;
+      *(float *)&puVar8[0xe] = temp_v4 * temp_v7;
       puVar8[10] = temp_v4 * temp_v12 * temp_v6 - temp_v11 * temp_v8;
       puVar8[9] = temp_v4 * temp_v8 + temp_v11 * temp_v12 * temp_v6;
-      puVar8[0xc] = -temp_v6;
+      *(float *)&puVar8[0xc] = -temp_v6;
       puVar8[5] = temp_v11 * temp_v8 * temp_v6 - temp_v4 * temp_v12;
       puVar8[6] = temp_v11 * temp_v12 + temp_v4 * temp_v8 * temp_v6;
       puVar8[7] = 0;

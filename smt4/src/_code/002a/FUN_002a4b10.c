@@ -4,7 +4,7 @@
 
 extern int DAT_0044e460; /* 0x44e460 */
 
-extern unsigned int nn_dsp_CTR_DSP_FlushDataCache(int, unsigned int, unsigned int, unsigned int);
+extern unsigned int nn_dsp_CTR_DSP_FlushDataCache(unsigned int, unsigned int, unsigned int, unsigned int);
 
 
 unsigned int FUN_002a4b10(unsigned int param_1,unsigned int param_2)

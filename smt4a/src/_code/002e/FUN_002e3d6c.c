@@ -13,7 +13,6 @@ typedef struct {
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Unsupported intrinsic, declaration required: while (INT_ADD). */
 extern int FUN_00135b64(unsigned int *, unsigned int);
 /* Supplied declaration required: FUN_002e363c. */
 
@@ -21,7 +20,7 @@ extern int FUN_00135b64(unsigned int *, unsigned int);
 unsigned long long FUN_002e3d6c(unsigned int *param_1,unsigned int *param_2)
 
 {
-/* irregular: 1 goto(s); 2 native warning(s); review required */
+/* irregular: 1 goto(s); 1 native warning(s); review required */
   unsigned int temp_v0;
   int temp_v1;
   unsigned int temp_v2;

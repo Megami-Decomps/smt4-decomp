@@ -19,7 +19,7 @@ unsigned int FUN_0050d0ac(unsigned int *param_1,unsigned int param_2,int *param_
   puVar6 = param_1 + 2;
   piVar1 = (int *)param_1[1];
   piVar5 = (int *)(param_1 + 2);
-  while (piVar4 = piVar1, piVar4 != param_1 + 2) {
+  while (piVar4 = piVar1, piVar4 != (int *)(param_1 + 2)) {
     if ((unsigned int)piVar4[4] < param_2) {
       piVar1 = (int *)piVar4[1];
     }
@@ -28,15 +28,15 @@ unsigned int FUN_0050d0ac(unsigned int *param_1,unsigned int param_2,int *param_
       piVar5 = piVar4;
     }
   }
-  temp_v2 = puVar6 <= piVar5;
-  if (piVar5 != puVar6) {
+  temp_v2 = puVar6 <= (unsigned int *)piVar5;
+  if (piVar5 != (int *)puVar6) {
     piVar4 = (int *)piVar5[4];
-    temp_v2 = param_2 <= piVar4;
+    temp_v2 = param_2 <= (unsigned int)piVar4;
   }
-  if (temp_v2 && (piVar5 != puVar6 && piVar4 != (int *)param_2)) {
+  if (temp_v2 && (piVar5 != (int *)puVar6 && piVar4 != (int *)param_2)) {
     piVar5 = (int *)puVar6;
   }
-  if (piVar5 == param_1 + 2) {
+  if (piVar5 == (int *)(param_1 + 2)) {
     temp_v0 = 0x51;
   }
   else {

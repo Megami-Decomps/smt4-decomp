@@ -8,38 +8,38 @@ extern unsigned int FUN_002baed8(void);
 /* Supplied declaration required: FUN_002c3424. */
 /* Supplied declaration required: FUN_00379450. */
 /* Supplied declaration required: FUN_0037c294. */
-/* Supplied declaration required: nn_os_LightEvent_TryWait. */
+extern unsigned char nn_os_LightEvent_TryWait(unsigned int);
 
 
 void FUN_00379d54(int *param_1)
 
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
+/* irregular: 4 native warning(s); review required */
+  unsigned char temp_v0;
+  int temp_v1;
+  unsigned int temp_v2;
+  int temp_v3;
   
-  temp_v0 = (**(romwright_code **)(*param_1 + 0x20))(param_1);
-  temp_v1 = FUN_002baed8();
-  temp_v2 = temp_v0 + 4;
-  nn_os_LightEvent_TryWait();
-  if (temp_v2 == 0) {
-    FUN_002bad74(temp_v1,1);
-    FUN_002c3424(temp_v0 + 4);
+  temp_v1 = (**(romwright_code **)(*param_1 + 0x20))(param_1);
+  temp_v2 = FUN_002baed8();
+  temp_v0 = nn_os_LightEvent_TryWait(temp_v1 + 4);
+  if (!temp_v0) {
+    FUN_002bad74(temp_v2,1);
+    FUN_002c3424(temp_v1 + 4);
   }
   FUN_00379450(param_1);
   FUN_0037c294(param_1 + 0x754);
   param_1[0xa5f] = 0;
-  temp_v0 = 0;
+  temp_v1 = 0;
   do {
-    param_1[temp_v0 * 4 + 0xa64] = 0;
-    param_1[temp_v0 * 4 + 0xa61] = 0;
-    param_1[temp_v0 * 4 + 0xa62] = 0;
-    temp_v2 = temp_v0 + 1;
-    param_1[temp_v0 * 4 + 0xa63] = 1;
-    param_1[temp_v0 * 4 + 0xa62] = 0x3f800000;
-    temp_v0 = temp_v2;
-  } while (temp_v2 < 4);
+    param_1[temp_v1 * 4 + 0xa64] = 0;
+    param_1[temp_v1 * 4 + 0xa61] = 0;
+    param_1[temp_v1 * 4 + 0xa62] = 0;
+    temp_v3 = temp_v1 + 1;
+    param_1[temp_v1 * 4 + 0xa63] = 1;
+    param_1[temp_v1 * 4 + 0xa62] = 0x3f800000;
+    temp_v1 = temp_v3;
+  } while (temp_v3 < 4);
   *(unsigned char *)((int)param_1 + 0x2bca) = 1;
   return;
 }

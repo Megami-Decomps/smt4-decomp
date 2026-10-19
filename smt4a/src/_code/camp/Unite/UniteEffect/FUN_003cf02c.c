@@ -402,7 +402,7 @@ LAB_003cf9bc:
         temp_v13 = (float)VectorSignedToFloat(temp_v10,(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v4 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v16 < temp_v13) << 0x1f) |
                 ((unsigned int)(temp_v16 == temp_v13) << 0x1e);
-        in_fpscr = temp_v4 | ((unsigned int)(NAN(temp_v16) || NAN(temp_v13)) << 0x1c);
+        in_fpscr = temp_v4 | ((unsigned int)((temp_v16 != temp_v16) || (temp_v13 != temp_v13)) << 0x1c);
         temp_v1 = (unsigned char)(temp_v4 >> 0x18);
         if (!(unsigned char)((temp_v1 >> 6) & 1) && temp_v1 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
           if (temp_v0 == 2) {

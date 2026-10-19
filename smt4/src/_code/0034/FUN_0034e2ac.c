@@ -4,13 +4,13 @@
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_0034e140. */
-/* Supplied declaration required: nn_os_Thread_FinalizeImpl. */
+extern void nn_os_Thread_FinalizeImpl(unsigned int);
 
 
 int FUN_0034e2ac(int param_1)
 
 {
-/* irregular: 3 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   int *piVar1;
   
   FUN_0034e140();
@@ -23,7 +23,7 @@ int FUN_0034e2ac(int param_1)
     *(int *)(param_1 + 0x4c) = 0;
   }
   piVar1 = (int *)(param_1 + 0x30);
-  nn_os_Thread_FinalizeImpl(piVar1);
+  nn_os_Thread_FinalizeImpl((unsigned int)piVar1);
   if (*piVar1 != 0) {
     software_interrupt(0x23);
     *piVar1 = 0;

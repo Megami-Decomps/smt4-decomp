@@ -31,7 +31,7 @@ void FUN_003bb3fc(int param_1)
   temp_v1 = *(unsigned int *)(temp_v0 + 0xdc4);
   if ((pcVar5 != (romwright_code *)0x0) || (((temp_v1 & 1) != 0 && (temp_v1 != 0)))) {
     if ((temp_v1 & 1) != 0) {
-      pcVar5 = *(romwright_code **)(pcVar5 + *(int *)(param_1 + ((int)temp_v1 >> 1)));
+      pcVar5 = *(romwright_code **)((unsigned char *)pcVar5 + *(int *)(param_1 + ((int)temp_v1 >> 1)));
     }
     (*pcVar5)();
   }

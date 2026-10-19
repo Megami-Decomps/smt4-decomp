@@ -13,14 +13,14 @@ extern int DAT_004c4100; /* 0x4c4100 */
 
 /* Unsupported intrinsic, declaration required: hasExclusiveAccess (CALLOTHER). */
 /* Supplied declaration required: FUN_002a8554. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_snd_CTR_Voice_SetState. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_snd_CTR_Voice_SetState(unsigned int, int);
 
 
 void FUN_0034ec10(unsigned int param_1)
 
 {
-/* irregular: irregular input(s): in_lr; 5 native warning(s); review required */
+/* irregular: irregular input(s): in_lr; 3 native warning(s); review required */
   unsigned int temp_v0;
   unsigned int temp_v1;
   int temp_v2;
@@ -33,7 +33,7 @@ void FUN_0034ec10(unsigned int param_1)
     return;
   }
   if (param_1 < DAT_0044d10c) {
-    nn_os_CriticalSection_Enter(&DAT_004c40f8);
+    nn_os_CriticalSection_Enter((unsigned int)&DAT_004c40f8);
     puVar4 = (unsigned int *)(DAT_0044d100 + param_1 * 0x70);
     nn_snd_CTR_Voice_SetState(*puVar4,1);
     temp_v0 = DAT_0044d114;

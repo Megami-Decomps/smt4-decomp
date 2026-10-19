@@ -9,26 +9,27 @@ typedef struct {
 
 extern unsigned char DAT_004e6f64; /* 0x4e6f64 */
 
-/* Supplied declaration required: nn_snd_CTR_Dspsnd_InitializeChannelParameters. */
-/* Supplied declaration required: nn_snd_CTR_Dspsnd_SetChannelPlayStop. */
+extern unsigned char nn_snd_CTR_Dspsnd_InitializeChannelParameters(unsigned int, unsigned char);
+extern unsigned char nn_snd_CTR_Dspsnd_SetChannelPlayStop(unsigned int, unsigned char);
 
 
-void FUN_0015a514(unsigned int *param_1,int param_2)
+unsigned int * FUN_0015a514(unsigned int *param_1,int param_2)
 
 {
-/* irregular: 2 native warning(s); review required */
+  unsigned char temp_v0;
+  
   *(char *)((int)param_1 + 0xd) = (char)param_2;
   if (param_2 != 0) {
     if (param_2 == 1) {
-      nn_snd_CTR_Dspsnd_SetChannelPlayStop(&DAT_004e6f64,*param_1 & 0xff);
+      nn_snd_CTR_Dspsnd_SetChannelPlayStop((unsigned int)&DAT_004e6f64,(unsigned char)*param_1);
       *(unsigned char *)(param_1 + 3) = 0;
-      nn_snd_CTR_Dspsnd_InitializeChannelParameters(&DAT_004e6f64,*param_1 & 0xff);
-      return;
+      temp_v0 = nn_snd_CTR_Dspsnd_InitializeChannelParameters((unsigned int)&DAT_004e6f64,(unsigned char)*param_1);
+      return (unsigned int *)(unsigned int)temp_v0;
     }
     if (param_2 == 2) {
-      nn_snd_CTR_Dspsnd_SetChannelPlayStop(&DAT_004e6f64,*param_1 & 0xff);
-      return;
+      temp_v0 = nn_snd_CTR_Dspsnd_SetChannelPlayStop((unsigned int)&DAT_004e6f64,(unsigned char)*param_1);
+      return (unsigned int *)(unsigned int)temp_v0;
     }
   }
-  return;
+  return param_1;
 }

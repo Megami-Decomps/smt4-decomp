@@ -24,14 +24,14 @@ extern unsigned int DAT_00465028; /* 0x465028 */
 /* Supplied declaration required: FUN_002c40f8. */
 /* Supplied declaration required: FUN_002c526c. */
 /* Supplied declaration required: FUN_002c52f8. */
-/* Supplied declaration required: nn_os_Thread_FinalizeImpl. */
+extern void nn_os_Thread_FinalizeImpl(unsigned int);
 /* Supplied declaration required: nn_os_detail_ConvertLibraryToSvcPriority. */
 
 
 void FUN_00103504(void)
 
 {
-/* irregular: 9 native warning(s); review required */
+/* irregular: 8 native warning(s); review required */
   unsigned char *puVar1;
   int temp_v0;
   int iStack_18;
@@ -59,7 +59,7 @@ void FUN_00103504(void)
         FUN_002c526c();
       }
       DAT_00465024 = 1;
-      nn_os_Thread_FinalizeImpl(&DAT_00465020);
+      nn_os_Thread_FinalizeImpl((unsigned int)&DAT_00465020);
       if (DAT_00465020 != 0) {
         software_interrupt(0x23);
         DAT_00465020 = 0;

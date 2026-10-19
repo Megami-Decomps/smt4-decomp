@@ -6,18 +6,18 @@ extern signed char DAT_00471b54; /* 0x471b54 */
 extern unsigned char DAT_004e6ef0; /* 0x4e6ef0 */
 
 /* Supplied declaration required: FUN_002c526c. */
-extern int nn_os_AddressSpaceManager_Allocate(unsigned char *, int, unsigned int, unsigned int);
+extern unsigned int nn_os_AddressSpaceManager_Allocate(unsigned int, unsigned int, unsigned int, unsigned int);
 
 
 void FUN_0010f830(int param_1,int param_2)
 
 {
 /* irregular: 1 native warning(s); review required */
-  int temp_v0;
+  unsigned int temp_v0;
   
   if ((DAT_00471b54 != '\0') && (*(int *)(param_1 + 8) == 0)) {
     temp_v0 = nn_os_AddressSpaceManager_Allocate
-                      (&DAT_004e6ef0,param_1,(param_2 + 0xfffU) & 0xfffff000,0);
+                      ((unsigned int)&DAT_004e6ef0,param_1,(param_2 + 0xfffU) & 0xfffff000,0);
     if (temp_v0 == 0) {
       FUN_002c526c(0xd8601837);
     }

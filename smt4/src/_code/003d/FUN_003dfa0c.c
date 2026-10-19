@@ -8,17 +8,16 @@ typedef struct {
 } param_4_stack;
 
 extern unsigned int FUN_00239ab8(void);
-/* Supplied declaration required: nn_fs_ipc_File_GetSize. */
+extern unsigned int nn_fs_ipc_File_GetSize(unsigned int, long long *);
 
 
-void FUN_003dfa0c(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
+void FUN_003dfa0c(unsigned int param_1,long long *param_2,unsigned int param_3,unsigned int param_4)
 
 {
-/* irregular: 1 native warning(s); review required */
   int temp_v0;
   
   temp_v0 = param_4;
   temp_v0 = FUN_00239ab8();
-  nn_fs_ipc_File_GetSize(&temp_v0,param_2);
+  nn_fs_ipc_File_GetSize((unsigned int)&temp_v0,param_2);
   return;
 }

@@ -49,7 +49,7 @@ unsigned int FUN_00128bdc(fn_00128bdc_arg0 *param_1,int param_2,unsigned int par
   
   pfVar3 = param_1->field_0x1c;
   if (pfVar3->field_0x34 == 0) {
-    temp_v0 = (*param_1->field_0x20)
+    temp_v0 = ((int (*)())param_1->field_0x20)
                       (param_1->field_0x28,1 << (pfVar3->field_0x24 & 0xff),1,param_1->field_0x20,
                        param_4);
     pfVar3->field_0x34 = temp_v0;

@@ -58,7 +58,7 @@ void FUN_0017db14(unsigned int param_1,int param_2)
           temp_v3 = puVar6[3];
           if ((*(unsigned int *)(pcVar2 + 8) & 8) != (temp_v3 & 8)) {
             if (DAT_0061a50c == puVar6) {
-              if (DAT_005b40e0 < DAT_005b40e4) {
+              if ((unsigned int)DAT_005b40e0 < DAT_005b40e4) {
                 *DAT_005b40e0 = 0;
                 DAT_005b40e0[1] = 0x8025e;
                 DAT_005b40e0 = DAT_005b40e0 + 2;

@@ -151,7 +151,7 @@ LAB_0033aa48:
           temp_v8 = romwright_fabs_4(*(float *)(temp_v5 + 0xc)) - temp_v9;
           temp_v13 = (float)(temp_v14 >> 0x20);
           temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v8 < temp_v13) << 0x1f);
-          in_fpscr = temp_v0 | ((unsigned int)(NAN(temp_v8) || NAN(temp_v13)) << 0x1c);
+          in_fpscr = temp_v0 | ((unsigned int)((temp_v8 != temp_v8) || (temp_v13 != temp_v13)) << 0x1c);
           if ((unsigned char)(temp_v0 >> 0x1f) == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
             temp_v8 = (temp_v12 - temp_v11) * *(float *)(temp_v5 + 0x40) + *(float *)(temp_v5 + 0x40) * temp_v15
                     + (float)temp_v18;
@@ -182,7 +182,7 @@ LAB_0033ab28:
           if ((int)temp_v7 >= 1) {
             temp_v12 = romwright_fabs_4(*(float *)(aiStack_104[temp_v7] + 0xc)) - romwright_fabs_4(*(float *)(temp_v5 + 0xc));
             temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v12 < temp_v11) << 0x1f);
-            in_fpscr = temp_v0 | ((unsigned int)(NAN(temp_v12) || NAN(temp_v11)) << 0x1c);
+            in_fpscr = temp_v0 | ((unsigned int)((temp_v12 != temp_v12) || (temp_v11 != temp_v11)) << 0x1c);
             if ((unsigned char)(temp_v0 >> 0x1f) == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
               temp_v8 = *(float *)(temp_v5 + 0xc) - temp_v8;
               temp_v14 = (unsigned long long)(unsigned int)(temp_v8 - temp_v6);
@@ -192,7 +192,7 @@ LAB_0033ab28:
           else {
             temp_v12 = temp_v10 - romwright_fabs_4(*(float *)(temp_v5 + 0xc));
             temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v12 < temp_v11) << 0x1f);
-            in_fpscr = temp_v0 | ((unsigned int)(NAN(temp_v12) || NAN(temp_v11)) << 0x1c);
+            in_fpscr = temp_v0 | ((unsigned int)((temp_v12 != temp_v12) || (temp_v11 != temp_v11)) << 0x1c);
             if ((unsigned char)(temp_v0 >> 0x1f) == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
               temp_v14 = (unsigned long long)(unsigned int)((*(float *)(temp_v5 + 0xc) - temp_v8) - temp_v6);
               break;

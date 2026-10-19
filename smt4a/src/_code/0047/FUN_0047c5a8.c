@@ -20,7 +20,7 @@ void FUN_0047c5a8(int param_1)
   }
   if ((temp_v1 & 1) != 0) {
     UNRECOVERED_JUMPTABLE =
-         *(romwright_code **)(UNRECOVERED_JUMPTABLE + *(int *)(param_1 + ((int)temp_v1 >> 1)));
+         *(romwright_code **)((unsigned char *)UNRECOVERED_JUMPTABLE + *(int *)(param_1 + ((int)temp_v1 >> 1)));
   }
                     /* WARNING: Could not recover jumptable at 0x0047c5e8. Too many branches */
                     /* WARNING: Treating indirect jump as call */

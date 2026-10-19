@@ -15,40 +15,38 @@ extern unsigned int DAT_0062d34c; /* 0x62d34c */
 
 /* Supplied declaration required: FUN_001885b8. */
 extern unsigned long long nn_fnd_UnitHeapTemplate_nn_os_LockPolicy_Object_nn_os_CriticalSection_Allocate(unsigned int *);
-extern int nn_fs_ipc_FileSystem_OpenArchive(unsigned int *, unsigned int *, unsigned int, unsigned int, unsigned int);
+extern unsigned int nn_fs_ipc_FileSystem_OpenArchive(unsigned int, unsigned long long *, unsigned int, unsigned int, unsigned char *, unsigned int);
 
 
-int FUN_0042b3b8(unsigned int *param_1,unsigned int param_2,int param_3)
+unsigned int FUN_0042b3b8(unsigned int *param_1,unsigned char *param_2,int param_3)
 
 {
 /* irregular: 1 native warning(s); review required */
   unsigned int temp_v0;
   unsigned int temp_v1;
-  int temp_v2;
+  unsigned int temp_v2;
   unsigned int *puVar4;
   char *pcVar5;
   unsigned int temp_v3;
-  int temp_v4;
+  unsigned int temp_v4;
   unsigned long long temp_v5;
-  unsigned int temp_v6 [2];
+  unsigned char temp_v6;
   int temp_v7;
   int temp_v8;
   unsigned int uStack_24;
   
-  temp_v3 = 0;
-  if (param_3 != 0) {
-    temp_v3 = 0x12345678;
-  }
-  temp_v7 = DAT_005893a8;
-  temp_v6[0] = 0xc;
   if (param_3 == 0) {
     temp_v3 = 6;
   }
-  temp_v2 = nn_fs_ipc_FileSystem_OpenArchive((unsigned int *)&temp_v7,(unsigned int *)&temp_v8,temp_v3,2,param_2);
-  temp_v1 = uStack_24;
-  temp_v0 = temp_v8;
-  temp_v3 = DAT_005893a8;
-  if (-1 < temp_v2) {
+  else {
+    temp_v3 = 0x12345678;
+  }
+  temp_v7 = DAT_005893a8;
+  temp_v3 = nn_fs_ipc_FileSystem_OpenArchive((unsigned int)&temp_v7,(unsigned long long *)&temp_v8,temp_v3,2,param_2,0xc);
+  temp_v2 = uStack_24;
+  temp_v1 = temp_v8;
+  temp_v0 = DAT_005893a8;
+  if (-1 < (int)temp_v3) {
     temp_v5 = nn_fnd_UnitHeapTemplate_nn_os_LockPolicy_Object_nn_os_CriticalSection_Allocate
                       (&DAT_0062d34c);
     pcVar5 = (char *)((unsigned long long)temp_v5 >> 0x20);
@@ -56,21 +54,20 @@ int FUN_0042b3b8(unsigned int *param_1,unsigned int param_2,int param_3)
     if (puVar4 != (unsigned int *)0x0) {
       pcVar5 = "룜B떨B듼B";
       *puVar4 = (unsigned int)"룜B떨B듼B";
-      puVar4[2] = temp_v0;
-      puVar4[3] = temp_v1;
-      puVar4[1] = temp_v3;
+      puVar4[2] = temp_v1;
+      puVar4[3] = temp_v2;
+      puVar4[1] = temp_v0;
       temp_v4 = 0;
     }
     else {
-      temp_v4 = -0x279fb9a7;
+      temp_v4 = 0xd8604659;
     }
     *param_1 = (unsigned int)puVar4;
-    temp_v2 = 0;
-    if (temp_v4 < 0) {
-      temp_v6[0] = DAT_005893a8;
-      FUN_001885b8(temp_v6,pcVar5,temp_v8,uStack_24);
-      temp_v2 = temp_v4;
+    temp_v3 = 0;
+    if ((int)temp_v4 < 0) {
+      FUN_001885b8(&temp_v6,pcVar5,temp_v8,uStack_24);
+      temp_v3 = temp_v4;
     }
   }
-  return temp_v2;
+  return temp_v3;
 }

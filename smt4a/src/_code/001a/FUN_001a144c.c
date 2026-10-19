@@ -2,11 +2,10 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
-extern int FUN_001a144c(int, unsigned int);
 extern int nn_fnd_detail_GetNextListObject(unsigned int, int);
 
 
-int FUN_001a144c(int param_1,unsigned int param_2)
+int FUN_001a144c(unsigned int param_1,unsigned int param_2)
 
 {
   int temp_v0;

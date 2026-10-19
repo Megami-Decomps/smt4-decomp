@@ -20,13 +20,13 @@ extern int FUN_002e760a(unsigned int);
 /* Supplied declaration required: FUN_002f3b58. */
 extern unsigned int *FUN_00300ae8(fn_0011b724_arg0 *, unsigned int);
 /* Supplied declaration required: FUN_00311780. */
-/* Supplied declaration required: nn_cfg_CTR_Initialize. */
+extern void nn_cfg_CTR_Initialize(void);
 
 
 int FUN_0011b724(fn_0011b724_arg0 *param_1)
 
 {
-/* irregular: 3 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   unsigned int *puVar1;
   int temp_v0;
   int temp_v1;

@@ -56,7 +56,7 @@ unsigned int FUN_004498ec(fn_004498ec_arg0 *param_1,int param_2,unsigned int par
     if ((int)temp_v6 < 0) {
       temp_v7 = 0;
     }
-    param_1->field_0x18 = param_1->field_0x14 + temp_v7;
+    param_1->field_0x18 = (undefined4)(param_1->field_0x14 + temp_v7);
   }
   else {
     temp_v7 = temp_v6;
@@ -80,10 +80,10 @@ unsigned int FUN_004498ec(fn_004498ec_arg0 *param_1,int param_2,unsigned int par
           temp_v8 = (param_1->field_0x18 - (int)param_1->field_0x14) >> 2;
         }
         if (param_1->field_0x14 != (unsigned int *)0x0) {
-          param_1->field_0x18 = param_1->field_0x14;
+          param_1->field_0x18 = (undefined4)param_1->field_0x14;
           (**(romwright_code **)(*(int *)param_1->field_0x10 + 0xc))();
         }
-        param_1->field_0x18 = puVar1 + temp_v8;
+        param_1->field_0x18 = (undefined4)(puVar1 + temp_v8);
         param_1->field_0x14 = puVar1;
         param_1->field_0x1c = (param_1->field_0x1c & 0xc0000000) | temp_v6;
       }
@@ -91,7 +91,7 @@ unsigned int FUN_004498ec(fn_004498ec_arg0 *param_1,int param_2,unsigned int par
         temp_v7 = param_1->field_0x1c & 0x3fffffff;
       }
     }
-    param_1->field_0x18 = param_1->field_0x14 + temp_v7;
+    param_1->field_0x18 = (undefined4)(param_1->field_0x14 + temp_v7);
   }
   temp_v7 = *(unsigned int *)((int)param_1->field_0x54 + 0x18);
   if ((int)temp_v7 < (param_1->field_0x28 - (int)param_1->field_0x24) >> 2) {
@@ -99,7 +99,7 @@ unsigned int FUN_004498ec(fn_004498ec_arg0 *param_1,int param_2,unsigned int par
     if ((int)temp_v7 < 0) {
       temp_v9 = 0;
     }
-    param_1->field_0x28 = param_1->field_0x24 + temp_v9;
+    param_1->field_0x28 = (undefined4)(param_1->field_0x24 + temp_v9);
   }
   else {
     temp_v9 = temp_v7;
@@ -124,10 +124,10 @@ unsigned int FUN_004498ec(fn_004498ec_arg0 *param_1,int param_2,unsigned int par
           temp_v8 = (param_1->field_0x28 - (int)param_1->field_0x24) >> 2;
         }
         if (param_1->field_0x24 != (unsigned int *)0x0) {
-          param_1->field_0x28 = param_1->field_0x24;
+          param_1->field_0x28 = (undefined4)param_1->field_0x24;
           (**(romwright_code **)(*param_1->field_0x20 + 0xc))();
         }
-        param_1->field_0x28 = puVar1 + temp_v8;
+        param_1->field_0x28 = (undefined4)(puVar1 + temp_v8);
         param_1->field_0x24 = puVar1;
         param_1->field_0x2c = (param_1->field_0x2c & 0xc0000000) | temp_v7;
       }
@@ -135,7 +135,7 @@ unsigned int FUN_004498ec(fn_004498ec_arg0 *param_1,int param_2,unsigned int par
         temp_v9 = param_1->field_0x2c & 0x3fffffff;
       }
     }
-    param_1->field_0x28 = param_1->field_0x24 + temp_v9;
+    param_1->field_0x28 = (undefined4)(param_1->field_0x24 + temp_v9);
   }
   temp_v8 = 0;
   temp_v9 = temp_v6;

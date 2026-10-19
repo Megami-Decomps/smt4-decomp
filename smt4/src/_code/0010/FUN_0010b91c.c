@@ -10,15 +10,14 @@ typedef struct {
 extern int DAT_004e3154; /* 0x4e3154 */
 extern unsigned char DAT_004e315c; /* 0x4e315c */
 
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
-/* Supplied declaration required: nn_snd_CTR_Voice_SetState. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
+extern void nn_snd_CTR_Voice_SetState(unsigned int, int);
 
 
 void FUN_0010b91c(int param_1,int param_2)
 
 {
-/* irregular: 3 native warning(s); review required */
   int temp_v0;
   unsigned int temp_v1;
   float temp_v2;
@@ -34,7 +33,7 @@ void FUN_0010b91c(int param_1,int param_2)
     if (temp_v0 == param_1) break;
     temp_v0 = *(int *)(temp_v0 + 0x70);
   }
-  nn_os_CriticalSection_Enter(&DAT_004e315c);
+  nn_os_CriticalSection_Enter((unsigned int)&DAT_004e315c);
   temp_v1 = *(unsigned int *)(param_1 + 0x90);
   if ((temp_v1 & 2) != 0) {
     if (param_2 >= 1) {
@@ -56,6 +55,6 @@ void FUN_0010b91c(int param_1,int param_2)
       nn_snd_CTR_Voice_SetState(*(unsigned int *)(param_1 + 0x38),1);
     }
   }
-  nn_os_CriticalSection_Leave(&DAT_004e315c);
+  nn_os_CriticalSection_Leave((unsigned int)&DAT_004e315c);
   return;
 }

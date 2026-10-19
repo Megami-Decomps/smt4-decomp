@@ -12,14 +12,14 @@ extern unsigned char DAT_004eac44; /* 0x4eac44 */
 
 extern int FUN_00146d08(int, unsigned int *);
 extern int nn_fnd_detail_GetNextListObject(unsigned char *, int);
-/* Supplied declaration required: nn_fnd_detail_InitList. */
+extern void nn_fnd_detail_InitList(unsigned int, unsigned short);
 
 
 void FUN_0013a4f4(unsigned int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
                  unsigned int param_5)
 
 {
-/* irregular: 1 goto(s); 1 native warning(s); review required */
+/* irregular: 1 goto(s) */
   int temp_v0;
   unsigned int *puVar2;
   int temp_v1;
@@ -30,9 +30,9 @@ void FUN_0013a4f4(unsigned int *param_1,unsigned int param_2,unsigned int param_
   param_1[8] = param_5 & 0xff;
   param_1[6] = param_3;
   param_1[7] = param_4;
-  nn_fnd_detail_InitList(param_1 + 3,4);
+  nn_fnd_detail_InitList((unsigned int)(param_1 + 3),4);
   if (DAT_00472a70 == '\0') {
-    nn_fnd_detail_InitList(&DAT_004eac44,4);
+    nn_fnd_detail_InitList((unsigned int)&DAT_004eac44,4);
     DAT_00472a70 = '\x01';
   }
   puVar4 = (unsigned int *)&DAT_004eac44;

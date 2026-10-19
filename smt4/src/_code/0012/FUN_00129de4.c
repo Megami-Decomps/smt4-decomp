@@ -41,8 +41,6 @@ extern unsigned int DAT_0044e41c; /* 0x44e41c */
 extern unsigned int DAT_0044e420; /* 0x44e420 */
 extern unsigned int DAT_0044e424; /* 0x44e424 */
 extern unsigned int DAT_0044e42c; /* 0x44e42c */
-extern unsigned int DAT_0044e440; /* 0x44e440 */
-extern unsigned int DAT_0044e444; /* 0x44e444 */
 extern unsigned int DAT_004c644c; /* 0x4c644c */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
@@ -65,29 +63,27 @@ extern int FUN_002bc7e4(void);
 extern int FUN_002c55b4(void);
 extern int FUN_002c55c4(void);
 /* Supplied declaration required: nn_applet_CTR_detail_CancelParameter. */
-/* Supplied declaration required: nn_applet_CTR_detail_Glance. */
-/* Supplied declaration required: nn_applet_CTR_detail_ReplySleepNotificationCompleteToManager. */
+extern unsigned int nn_applet_CTR_detail_Glance(unsigned int, unsigned int *, unsigned char *, unsigned int, int *, unsigned int);
+extern void nn_applet_CTR_detail_ReplySleepNotificationCompleteToManager(void);
 /* Supplied declaration required: nn_applet_CTR_detail_ReplySleepQueryToManager. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 unsigned int FUN_00129de4(void)
 
 {
-/* irregular: 1 goto(s); 19 native warning(s); review required */
+/* irregular: 1 goto(s); 15 native warning(s); review required */
   int temp_v0;
   int temp_v1;
   unsigned int temp_v2;
-  unsigned int *puVar4;
   unsigned int temp_v3;
-  int *temp_v4;
-  unsigned int temp_v5;
-  unsigned int uStack_34;
+  unsigned int temp_v4;
+  int temp_v5;
   int temp_v6;
   int temp_v7;
   unsigned int temp_v8;
-  int temp_v9 [2];
+  unsigned int temp_v9 [2];
   
   temp_v0 = FUN_002ad234();
   temp_v1 = FUN_0013b648();
@@ -130,13 +126,12 @@ unsigned int FUN_00129de4(void)
       FUN_0013b690();
       return 1;
     }
-    temp_v4 = &temp_v6;
     temp_v2 = 1;
-    puVar4 = (unsigned int *)&temp_v7;
     temp_v6 = 0;
-    nn_applet_CTR_detail_Glance(puVar4,temp_v9,&DAT_0042c000,0x1000,&temp_v8);
-    if ((int)puVar4 < 0) {
-      FUN_002c131c();
+    temp_v3 = nn_applet_CTR_detail_Glance
+                      ((unsigned int)&temp_v7,temp_v9,(unsigned char *)&DAT_0042c000,0x1000,(int *)&temp_v8,(unsigned int)&temp_v6);
+    if ((int)temp_v3 < 0) {
+      FUN_002c131c(temp_v3,0x12a13c);
     }
     temp_v0 = temp_v6;
     if (temp_v9[0] != 2) {
@@ -167,19 +162,17 @@ unsigned int FUN_00129de4(void)
       }
     }
     else {
-      temp_v4 = (int *)0x0;
-      temp_v3 = DAT_0042c000;
+      temp_v5 = 0;
+      temp_v4 = DAT_0042c000;
       if (temp_v8 < 0x20) {
-        temp_v3 = 0;
+        temp_v4 = 0;
       }
       temp_v2 = 0;
       if (DAT_0044e3c0 != (romwright_code *)0x0) {
-        (*DAT_0044e3c0)(DAT_0044e400,temp_v3,&temp_v4);
+        (*DAT_0044e3c0)(DAT_0044e400,temp_v4,&temp_v5);
       }
       nn_applet_CTR_detail_CancelParameter(1,temp_v7,0);
-      temp_v5 = DAT_0044e440;
-      uStack_34 = DAT_0044e444;
-      FUN_002b563c(temp_v7,3,0,0,temp_v4);
+      FUN_002b563c(temp_v7,3,0,0,temp_v5);
     }
     if (temp_v6 == 0) {
       return temp_v2;
@@ -212,13 +205,13 @@ unsigned int FUN_00129de4(void)
          (temp_v0 = FUN_002c55b4(), temp_v0 == 0)) {
         (*DAT_0044e3d8)(DAT_0044e418);
       }
-      nn_os_CriticalSection_Enter(&DAT_004c644c);
+      nn_os_CriticalSection_Enter((unsigned int)&DAT_004c644c);
       for (temp_v0 = DAT_0044e3b4; temp_v0 != 0; temp_v0 = *(int *)(temp_v0 + 4)) {
         if (*(romwright_code **)(temp_v0 + 8) != (romwright_code *)0x0) {
-          (**(romwright_code **)(temp_v0 + 8))(*(unsigned int *)(temp_v0 + 0xc));
+          (**(romwright_code **)(temp_v0 + 8))();
         }
       }
-      nn_os_CriticalSection_Leave(&DAT_004c644c);
+      nn_os_CriticalSection_Leave((unsigned int)&DAT_004c644c);
       nn_applet_CTR_detail_ReplySleepNotificationCompleteToManager();
     }
   }

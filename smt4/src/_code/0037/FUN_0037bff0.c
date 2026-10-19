@@ -7,13 +7,13 @@ extern signed char DAT_004ea16a; /* 0x4ea16a */
 /* Supplied declaration required: FUN_0014732c. */
 /* Supplied declaration required: FUN_0014734c. */
 /* Supplied declaration required: FUN_003601c4. */
-/* Supplied declaration required: nn_snd_CTR_Voice_SetSampleRate. */
+extern void nn_snd_CTR_Voice_SetSampleRate(unsigned int, int);
 
 
 void FUN_0037bff0(int param_1,unsigned char *param_2)
 
 {
-/* irregular: 4 native warning(s); review required */
+/* irregular: 3 native warning(s); review required */
   unsigned int temp_v0;
   int temp_v1;
   int temp_v2;
@@ -34,7 +34,7 @@ void FUN_0037bff0(int param_1,unsigned char *param_2)
           temp_v0 = 2;
         }
         FUN_0014734c(temp_v1,temp_v0);
-        nn_snd_CTR_Voice_SetSampleRate(temp_v1,*(unsigned int *)(param_2 + 8));
+        nn_snd_CTR_Voice_SetSampleRate(temp_v1,*(int *)(param_2 + 8));
         temp_v0 = 0;
         if (DAT_004ea16a == '\0') {
           temp_v0 = 2;

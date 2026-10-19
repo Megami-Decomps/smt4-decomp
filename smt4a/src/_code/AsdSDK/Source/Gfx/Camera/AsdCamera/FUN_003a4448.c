@@ -25,7 +25,6 @@ typedef struct {
 #define ROMWRIGHT_PIECE_3_1_DEFINED
 #define romwright_piece_3_1(upper, lower) ((unsigned int)(((unsigned int)(unsigned int)(upper) << 8) | (unsigned char)(lower)))
 #endif
-/* Unsupported intrinsic, declaration required: while (INT_ADD). */
 /* Supplied declaration required: FUN_001630d4. */
 /* Supplied declaration required: FUN_00168188. */
 extern unsigned int FUN_001ad6fc(void);
@@ -38,7 +37,7 @@ extern int FUN_00455748(int *, unsigned int);
 int FUN_003a4448(int param_1)
 
 {
-/* irregular: 2 goto(s); 6 native warning(s); review required */
+/* irregular: 2 goto(s); 5 native warning(s); review required */
   int temp_v0;
   int temp_v1;
   unsigned int temp_v2;
@@ -153,7 +152,7 @@ LAB_003a459c:
           }
           temp_v15 = 0x40;
           temp_v14 = (unsigned int)temp_v10;
-          temp_v16 = romwright_piece_3_1(temp_v16._1_3_,1);
+          temp_v16 = romwright_piece_3_1((((unsigned int)(temp_v16) >> 8) & 0xffffffU),1);
           piVar5 = (int *)FUN_00168188();
           piVar6 = (int *)(**(romwright_code **)(*piVar5 + 8))(piVar5,0x74,4);
           piVar11 = (int *)0x0;

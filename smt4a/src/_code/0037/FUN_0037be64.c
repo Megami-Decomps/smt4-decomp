@@ -104,7 +104,7 @@ LAB_0037bf0c:
            (*(unsigned short *)(temp_v6 + temp_v13 * 4 + 0x28312) & 0xfc00) | (temp_v0 & 0x3ff);
       *(unsigned short *)(temp_v8 + 0x28310) = temp_v15;
     }
-LAB_0037c020:
+LAB_0037c020:;
   } while (temp_v15 < 0x500);
   temp_v13 = 0;
   temp_v15 = 0;

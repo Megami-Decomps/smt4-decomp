@@ -171,7 +171,7 @@ LAB_003fab70:
   pbVar4 = *(unsigned char **)(param_2 + 0x14);
   temp_v6 = pbVar4 != pbVar6;
   if (temp_v6) {
-    pbVar4 = (unsigned int)(uint)*(unsigned int)pbVar11;
+    pbVar4 = (unsigned char *)(unsigned int)*pbVar11;
   }
   if (!(!temp_v6 || pbVar4 == (unsigned char *)0x0)) {
     do {
@@ -187,7 +187,7 @@ LAB_003fab70:
           pbVar6 = pbVar4;
           continue;
         }
-        pbVar4 = (unsigned int)(uint)*(unsigned int)pbVar7;
+        pbVar4 = (unsigned char *)(unsigned int)*pbVar7;
         if (pbVar4 == (unsigned char *)0x0) {
           *pbVar7 = 1;
           **(unsigned char **)(pbVar6 + 4) = 0;
@@ -223,7 +223,7 @@ LAB_003fab70:
         }
         in_lr = *(unsigned char **)(pbVar7 + 0xc);
         if (in_lr != (unsigned char *)0x0) {
-          pbVar4 = (unsigned int)(uint)*(unsigned int)in_lr;
+          pbVar4 = (unsigned char *)(unsigned int)*in_lr;
         }
         if (!(in_lr == (unsigned char *)0x0 || pbVar4 == (unsigned char *)0x1)) {
 LAB_003faf94:
@@ -339,13 +339,13 @@ LAB_003faf94:
         }
         pbVar4 = *(unsigned char **)(pbVar7 + 8);
         if (pbVar4 != (unsigned char *)0x0) {
-          in_lr = (unsigned int)(uint)*(unsigned int)pbVar4;
+          in_lr = (unsigned char *)(unsigned int)*pbVar4;
         }
         if (!(pbVar4 != (unsigned char *)0x0 && in_lr != (unsigned char *)0x1)) {
           pbVar8 = *(unsigned char **)(pbVar7 + 0xc);
           in_lr = (unsigned char *)0x0;
           if (pbVar8 != (unsigned char *)0x0) {
-            in_lr = (unsigned int)(uint)*(unsigned int)pbVar8;
+            in_lr = (unsigned char *)(unsigned int)*pbVar8;
           }
           if (!(pbVar8 != (unsigned char *)0x0 && in_lr != (unsigned char *)0x1)) {
             *pbVar7 = 0;

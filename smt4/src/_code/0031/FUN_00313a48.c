@@ -216,7 +216,7 @@ void FUN_00313a48(fn_00313a48_arg0 *param_1)
                 temp_v24 = (float)piVar23[1];
                 temp_v14 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v24 < temp_v28) << 0x1f) |
                          ((unsigned int)(temp_v24 == temp_v28) << 0x1e);
-                in_fpscr = temp_v14 | ((unsigned int)(NAN(temp_v24) || NAN(temp_v28)) << 0x1c);
+                in_fpscr = temp_v14 | ((unsigned int)((temp_v24 != temp_v24) || (temp_v28 != temp_v28)) << 0x1c);
                 temp_v1 = (unsigned char)(temp_v14 >> 0x18);
                 temp_v22 = (float)VectorSignedToFloat(temp_v19,(unsigned char)(in_fpscr >> 0x16) & 3);
                 if (!((unsigned char)((temp_v1 >> 6) & 1) || temp_v1 >> 7 != ((unsigned char)(in_fpscr >> 0x1c) & 1))) {

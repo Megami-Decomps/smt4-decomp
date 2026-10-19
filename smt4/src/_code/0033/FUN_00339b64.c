@@ -23,19 +23,19 @@ extern int FUN_0023ea6c(unsigned int);
 /* Supplied declaration required: FUN_00328fa4. */
 /* Supplied declaration required: FUN_00394720. */
 /* Supplied declaration required: FUN_00394cc4. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 void FUN_00339b64(int param_1)
 
 {
-/* irregular: 6 unstructured edge(s); 9 goto(s); 7 native warning(s); review required */
+/* irregular: 6 unstructured edge(s); 9 goto(s); 5 native warning(s); review required */
   unsigned short temp_v0;
   unsigned int temp_v1;
   int temp_v2;
   
-  nn_os_CriticalSection_Enter();
+  nn_os_CriticalSection_Enter(param_1 + 0x4a00);
   do {
     temp_v0 = *(unsigned short *)(param_1 + 0x49fe);
     temp_v1 = (unsigned int)temp_v0;

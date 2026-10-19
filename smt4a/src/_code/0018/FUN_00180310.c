@@ -9,7 +9,6 @@ typedef struct {
     unsigned int sp78; /* 0x78: local_78 */
 } param_1_stack;
 
-/* Unsupported intrinsic, declaration required: while (LOAD). */
 /* Supplied declaration required: FUN_00100348. */
 /* Supplied declaration required: FUN_001835b4. */
 
@@ -17,7 +16,7 @@ typedef struct {
 void FUN_00180310(unsigned int param_1)
 
 {
-/* irregular: 1 goto(s); irregular input(s): in_stack_00000004, in_stack_00000008; 5 native warning(s); review required */
+/* irregular: 1 goto(s); irregular input(s): in_stack_00000004, in_stack_00000008; 4 native warning(s); review required */
   char temp_v0;
   char *pcVar2;
   unsigned long long temp_v1;

@@ -5,19 +5,19 @@
 extern unsigned char DAT_00421d18; /* 0x421d18 */
 
 /* Supplied declaration required: FUN_002c4040. */
-/* Supplied declaration required: nn_os_LightEvent_Initialize. */
+extern void nn_os_LightEvent_Initialize(unsigned int, unsigned char);
 
 
 unsigned int * FUN_002a7b78(unsigned int *param_1)
 
 {
-/* irregular: 2 native warning(s); review required */
+/* irregular: 1 native warning(s); review required */
   *param_1 = (unsigned int)&DAT_00421d18;
   param_1[1] = 0;
   param_1[2] = 0;
   param_1[3] = 0;
   param_1[4] = 0;
-  nn_os_LightEvent_Initialize(param_1 + 3,1);
+  nn_os_LightEvent_Initialize((unsigned int)(param_1 + 3),1);
   *(unsigned char *)(param_1 + 5) = 0;
   param_1[6] = 0;
   FUN_002c4040(param_1 + 3);

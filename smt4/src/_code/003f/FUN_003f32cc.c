@@ -11,9 +11,6 @@ typedef struct {
 
 extern unsigned char LAB_00355f8c; /* 0x355f8c */
 extern unsigned char DAT_00420f54; /* 0x420f54 */
-extern unsigned char DAT_004306c0; /* 0x4306c0 */
-extern unsigned char DAT_004307c0; /* 0x4307c0 */
-extern unsigned char DAT_004308c0; /* 0x4308c0 */
 extern unsigned int DAT_0044e660; /* 0x44e660 */
 extern unsigned char *DAT_004d431c; /* 0x4d431c */
 extern unsigned int DAT_004d4320; /* 0x4d4320 */
@@ -50,13 +47,13 @@ extern unsigned char DAT_004d43e0; /* 0x4d43e0 */
 
 /* Supplied declaration required: FUN_002c38fc. */
 /* Supplied declaration required: FUN_002c5d5c. */
-/* Supplied declaration required: nn_fnd_UnitHeapBase_Initialize. */
+extern void nn_fnd_UnitHeapBase_Initialize(unsigned int, unsigned int, unsigned int, unsigned int, int, unsigned int);
 
 
 unsigned long long FUN_003f32cc(void)
 
 {
-/* irregular: 3 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   FUN_002c5d5c(&DAT_004d43e0,&LAB_00355f8c,0x10,0x20);
   DAT_0044e660 = 0;
   DAT_004d43d0 = 0;
@@ -71,7 +68,7 @@ unsigned long long FUN_003f32cc(void)
   DAT_004d4350 = 0;
   DAT_004d4354 = 0xffffffff;
   DAT_004d431c = &DAT_00420f54;
-  nn_fnd_UnitHeapBase_Initialize(&DAT_004d431c,0x10,&DAT_004306c0,0x100,4,0);
+  nn_fnd_UnitHeapBase_Initialize((unsigned int)&DAT_004d431c,0x10,0x4306c0,0x100,4,0);
   FUN_002c38fc(&DAT_004d434c);
   DAT_004d435c = 0;
   DAT_004d4360 = 0;
@@ -83,7 +80,7 @@ unsigned long long FUN_003f32cc(void)
   DAT_004d438c = 0;
   DAT_004d4390 = 0xffffffff;
   DAT_004d4358 = &DAT_00420f54;
-  nn_fnd_UnitHeapBase_Initialize(&DAT_004d4358,8,&DAT_004307c0,0x100,4,0);
+  nn_fnd_UnitHeapBase_Initialize((unsigned int)&DAT_004d4358,8,0x4307c0,0x100,4,0);
   FUN_002c38fc(&DAT_004d4388);
   DAT_004d4398 = 0;
   DAT_004d439c = 0;
@@ -95,7 +92,7 @@ unsigned long long FUN_003f32cc(void)
   DAT_004d43c8 = 0;
   DAT_004d43cc = 0xffffffff;
   DAT_004d4394 = &DAT_00420f54;
-  nn_fnd_UnitHeapBase_Initialize(&DAT_004d4394,8,&DAT_004308c0,0x80,4,0);
+  nn_fnd_UnitHeapBase_Initialize((unsigned int)&DAT_004d4394,8,0x4308c0,0x80,4,0);
   FUN_002c38fc(&DAT_004d43c4);
   return 0x14dcb8004d4394;
 }

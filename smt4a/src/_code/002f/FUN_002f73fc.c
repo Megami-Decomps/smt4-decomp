@@ -4,13 +4,12 @@
 
 extern signed char DAT_0059495b; /* 0x59495b */
 
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 void FUN_002f73fc(int param_1)
 
 {
-/* irregular: 1 native warning(s); review required */
   if (DAT_0059495b == '\0') {
     nn_os_CriticalSection_Leave(param_1 + 4);
   }

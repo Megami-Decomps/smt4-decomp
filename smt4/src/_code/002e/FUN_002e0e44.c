@@ -7,7 +7,7 @@ extern int DAT_00464fac; /* 0x464fac */
 /* Supplied declaration required: FUN_00238f44. */
 /* Supplied declaration required: FUN_00263308. */
 extern int FUN_002b5a48(unsigned int);
-/* Supplied declaration required: nn_cec_CTR_MessageBox_SetMessageBoxData. */
+extern unsigned int nn_cec_CTR_MessageBox_SetMessageBoxData(unsigned int, unsigned int, unsigned int, unsigned int);
 
 
 unsigned int
@@ -15,7 +15,7 @@ FUN_002e0e44(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsi
             unsigned int param_5)
 
 {
-/* irregular: 3 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   int temp_v0;
   unsigned int temp_v1;
   

@@ -48,7 +48,7 @@ void FUN_001176c8(int *param_1,int param_2)
   
   temp_v2 = (unsigned int)*(unsigned short *)(param_2 + 0x86);
   temp_v6 = param_2 + 0x20;
-  temp_v3 = romwright_piece_3_1(temp_v3._1_3_,*(unsigned char *)(param_2 + 0x26));
+  temp_v3 = romwright_piece_3_1((((unsigned int)(temp_v3) >> 8) & 0xffffffU),*(unsigned char *)(param_2 + 0x26));
   temp_v7 = temp_v3;
   piVar1 = param_1;
   FUN_002f9dd4(param_1,&temp_v7);

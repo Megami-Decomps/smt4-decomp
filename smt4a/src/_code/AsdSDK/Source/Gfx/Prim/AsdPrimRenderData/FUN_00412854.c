@@ -124,7 +124,7 @@ void FUN_00412854(fn_00412854_arg0 *param_1)
   }
   puVar5 = (unsigned short *)0x10000;
   FUN_0019d4d8(0x10000,0x100,0,param_1->field_0x18 << 1,0x10,1);
-  param_1->field_0x48 = puVar5;
+  param_1->field_0x48 = (undefined4)puVar5;
   if (param_1->field_0x18 != 0) {
     temp_v0 = param_1->field_0x18 & 1;
     if (temp_v0 == 1) {

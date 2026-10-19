@@ -3,7 +3,6 @@
 #include "romwright_types.h"
 
 extern int FUN_002e92e4(void);
-extern unsigned int FUN_0030ffe0(int, int);
 
 
 unsigned int FUN_0030ffe0(int param_1,int param_2)

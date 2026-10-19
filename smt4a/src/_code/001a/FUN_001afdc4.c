@@ -4,13 +4,12 @@
 
 extern unsigned char DAT_006449d0; /* 0x6449d0 */
 
-/* Supplied declaration required: nn_snd_CTR_VoiceManager_FreeVoice. */
+extern void nn_snd_CTR_VoiceManager_FreeVoice(unsigned int, unsigned int);
 
 
 void FUN_001afdc4(unsigned int param_1)
 
 {
-/* irregular: 1 native warning(s); review required */
-  nn_snd_CTR_VoiceManager_FreeVoice(&DAT_006449d0,param_1);
+  nn_snd_CTR_VoiceManager_FreeVoice((unsigned int)&DAT_006449d0,param_1);
   return;
 }

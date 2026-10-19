@@ -5,19 +5,18 @@
 extern int *DAT_00646090; /* 0x646090 */
 extern unsigned char DAT_00646094; /* 0x646094 */
 
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 unsigned int FUN_0016f9bc(int param_1,unsigned int param_2)
 
 {
-/* irregular: 2 native warning(s); review required */
   int *piVar1;
   int temp_v0;
   int *piVar3;
   
-  nn_os_CriticalSection_Enter(&DAT_00646094);
+  nn_os_CriticalSection_Enter((unsigned int)&DAT_00646094);
   *(unsigned int *)(param_1 + 0xc) = param_2;
   piVar1 = DAT_00646090;
   if (param_1 != 0) {
@@ -48,6 +47,6 @@ unsigned int FUN_0016f9bc(int param_1,unsigned int param_2)
       DAT_00646090 = (int *)0x0;
     }
   }
-  nn_os_CriticalSection_Leave(&DAT_00646094);
+  nn_os_CriticalSection_Leave((unsigned int)&DAT_00646094);
   return 0;
 }

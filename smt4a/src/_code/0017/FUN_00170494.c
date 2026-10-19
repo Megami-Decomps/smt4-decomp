@@ -15,8 +15,6 @@ typedef struct {
 } void_stack;
 
 extern unsigned int DAT_00569000; /* 0x569000 */
-extern unsigned int DAT_005891c8; /* 0x5891c8 */
-extern unsigned int DAT_005891cc; /* 0x5891cc */
 extern signed char DAT_005891f4; /* 0x5891f4 */
 extern int DAT_005891f8; /* 0x5891f8 */
 extern romwright_code *DAT_00589200; /* 0x589200 */
@@ -65,28 +63,26 @@ extern int FUN_0018b8f0(void);
 /* Supplied declaration required: FUN_0018ba00. */
 /* Supplied declaration required: FUN_001a3338. */
 /* Supplied declaration required: nn_applet_CTR_detail_CancelParameter. */
-/* Supplied declaration required: nn_applet_CTR_detail_Glance. */
-/* Supplied declaration required: nn_applet_CTR_detail_ReplySleepNotificationCompleteToManager. */
+extern unsigned int nn_applet_CTR_detail_Glance(unsigned int, unsigned int *, unsigned char *, unsigned int, int *, unsigned int);
+extern void nn_applet_CTR_detail_ReplySleepNotificationCompleteToManager(void);
 /* Supplied declaration required: nn_applet_CTR_detail_ReplySleepQueryToManager. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 unsigned int FUN_00170494(void)
 
 {
-/* irregular: 1 goto(s); 19 native warning(s); review required */
+/* irregular: 1 goto(s); 15 native warning(s); review required */
   int temp_v0;
   int temp_v1;
   unsigned int temp_v2;
-  unsigned int *puVar4;
-  int *temp_v3;
-  unsigned int temp_v4;
-  unsigned int uStack_34;
+  unsigned int temp_v3;
+  int temp_v4;
   int temp_v5;
   int temp_v6;
   unsigned int temp_v7;
-  int temp_v8 [2];
+  unsigned int temp_v8 [2];
   
   temp_v0 = FUN_0018b9e0();
   temp_v1 = FUN_0018b6b0();
@@ -129,13 +125,12 @@ unsigned int FUN_00170494(void)
       FUN_0018b6f8();
       return 1;
     }
-    temp_v3 = &temp_v5;
     temp_v2 = 1;
-    puVar4 = (unsigned int *)&temp_v6;
     temp_v5 = 0;
-    nn_applet_CTR_detail_Glance(puVar4,temp_v8,&DAT_00569000,0x1000,&temp_v7);
-    if ((int)puVar4 < 0) {
-      FUN_00189a38();
+    temp_v3 = nn_applet_CTR_detail_Glance
+                      ((unsigned int)&temp_v6,temp_v8,(unsigned char *)&DAT_00569000,0x1000,(int *)&temp_v7,(unsigned int)&temp_v5);
+    if ((int)temp_v3 < 0) {
+      FUN_00189a38(temp_v3,0x1707ec);
     }
     temp_v0 = temp_v5;
     if (temp_v8[0] != 2) {
@@ -166,18 +161,16 @@ unsigned int FUN_00170494(void)
       }
     }
     else {
-      temp_v3 = (int *)0x0;
+      temp_v4 = 0;
       temp_v2 = DAT_00569000;
       if (temp_v7 < 0x20) {
         temp_v2 = 0;
       }
       if (DAT_00589204 != (romwright_code *)0x0) {
-        (*DAT_00589204)(DAT_00589244,temp_v2,&temp_v3);
+        (*DAT_00589204)(DAT_00589244,temp_v2,&temp_v4);
       }
       nn_applet_CTR_detail_CancelParameter(1,temp_v6,0);
-      temp_v4 = DAT_005891c8;
-      uStack_34 = DAT_005891cc;
-      FUN_001a3338(temp_v6,3,0,0,temp_v3);
+      FUN_001a3338(temp_v6,3,0,0,temp_v4);
       temp_v2 = 0;
     }
     if (temp_v5 == 0) {
@@ -211,13 +204,13 @@ unsigned int FUN_00170494(void)
          (temp_v0 = FUN_0015a410(), temp_v0 == 0)) {
         (*DAT_0058921c)(DAT_0058925c);
       }
-      nn_os_CriticalSection_Enter();
+      nn_os_CriticalSection_Enter((unsigned int)&DAT_0061a62c);
       for (temp_v0 = DAT_005891f8; temp_v0 != 0; temp_v0 = *(int *)(temp_v0 + 4)) {
         if (*(romwright_code **)(temp_v0 + 8) != (romwright_code *)0x0) {
-          (**(romwright_code **)(temp_v0 + 8))(*(unsigned int *)(temp_v0 + 0xc));
+          (**(romwright_code **)(temp_v0 + 8))();
         }
       }
-      nn_os_CriticalSection_Leave(&DAT_0061a62c);
+      nn_os_CriticalSection_Leave((unsigned int)&DAT_0061a62c);
       nn_applet_CTR_detail_ReplySleepNotificationCompleteToManager();
     }
   }

@@ -11,13 +11,12 @@ struct fn_0037a4fc_arg0 {
     byte field_0x51; /* +0x51 */
 };
 
-/* Supplied declaration required: nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile. */
+extern void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(unsigned int);
 
 
 void FUN_0037a4fc(fn_0037a4fc_arg0 *param_1)
 
 {
-/* irregular: 1 native warning(s); review required */
   unsigned char temp_v0;
   unsigned int temp_v1;
   void *pvVar3;

@@ -20,114 +20,92 @@ typedef struct {
     unsigned int sp198; /* 0x198: local_198 */
 } param_7_stack;
 
-#ifndef ROMWRIGHT_CARRY_4_DEFINED
-#define ROMWRIGHT_CARRY_4_DEFINED
-#define romwright_carry_4(left, right) ((unsigned char)((unsigned long long)(unsigned int)(left) + (unsigned long long)(unsigned int)(right) > 0xffffffffULL))
+#ifndef ROMWRIGHT_PIECE_4_4_DEFINED
+#define ROMWRIGHT_PIECE_4_4_DEFINED
+#define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-extern int FUN_00100c90(unsigned int, int *, unsigned int, int, int *, unsigned int);
+extern int FUN_00100c90(unsigned int, unsigned char *, unsigned int);
 /* Supplied declaration required: aeabi_uidivmod. */
-/* Supplied declaration required: nn_fs_CTR_MPCore_detail_RomFsArchive_RomFsStorage_ReadBytes. */
+extern unsigned int nn_fs_CTR_MPCore_detail_RomFsArchive_RomFsStorage_ReadBytes(unsigned int, long long, unsigned int, unsigned int);
 
 
-void FUN_003fc240(unsigned int *param_1,unsigned int *param_2,unsigned int *param_3,int *param_4,unsigned int param_5,
+unsigned int FUN_003fc240(int *param_1,int *param_2,unsigned int *param_3,int *param_4,unsigned int param_5,
                  unsigned int param_6,unsigned int param_7)
 
 {
-/* irregular: 2 goto(s); 3 native warning(s); review required */
+/* irregular: 2 goto(s); 2 native warning(s); review required */
   unsigned int temp_v0;
   int temp_v1;
   int temp_v2;
   unsigned int temp_v3;
-  unsigned int temp_v4;
+  int temp_v4;
   unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  int *piVar8;
-  int *piVar9;
+  unsigned char temp_v6 [256];
+  int temp_v7;
   unsigned int temp_v8;
-  int aiStack_190 [64];
-  int temp_v9;
-  unsigned int temp_v10;
   unsigned int uStack_88;
   unsigned int uStack_84;
   unsigned int uStack_80;
+  unsigned int temp_v9;
+  int temp_v10;
   unsigned int temp_v11;
   unsigned int temp_v12;
   unsigned int temp_v13;
-  unsigned int temp_v14;
-  unsigned int temp_v15;
-  unsigned int temp_v16;
+  int temp_v14;
+  int *temp_v15;
+  int temp_v16 [4];
+  int *piStack_34;
   int *temp_v17;
-  unsigned int temp_v18 [4];
-  unsigned int *puStack_34;
-  unsigned int *temp_v19;
-  unsigned int *temp_v20;
+  unsigned int *temp_v18;
   int *piStack_28;
   
-  temp_v16 = 0;
-  temp_v14 = param_6;
-  temp_v17 = param_4;
-  puStack_34 = param_1;
-  temp_v19 = param_2;
-  temp_v20 = param_3;
+  temp_v14 = 0;
+  temp_v12 = param_6;
+  temp_v15 = param_4;
+  piStack_34 = param_1;
+  temp_v17 = param_2;
+  temp_v18 = param_3;
   piStack_28 = param_4;
   aeabi_uidivmod(param_5,param_1[2]);
-  temp_v0 = param_1[3];
-  nn_fs_CTR_MPCore_detail_RomFsArchive_RomFsStorage_ReadBytes
-            (temp_v0,4,*param_1 + temp_v2 * 4,param_1[1] + (unsigned int)romwright_carry_4(*param_1,temp_v2 * 4),
-             temp_v18,4);
+  temp_v0 = nn_fs_CTR_MPCore_detail_RomFsArchive_RomFsStorage_ReadBytes
+                    (param_1[3],romwright_piece_4_4(4,temp_v16),4,*param_1 + temp_v2 * 4);
   if (-1 < (int)temp_v0) {
-    if (temp_v18[0] != 0xffffffff) {
-      temp_v15 = param_7 >> 1;
-      temp_v6 = temp_v18[0];
+    if (temp_v16[0] != -1) {
+      temp_v13 = param_7 >> 1;
+      temp_v4 = temp_v16[0];
       do {
-        temp_v3 = param_1[4];
-        temp_v5 = param_1[5];
-        piVar9 = aiStack_190;
-        temp_v8 = 0x20;
-        temp_v4 = temp_v3 + temp_v6;
-        temp_v0 = param_1[7];
-        piVar8 = &temp_v9;
-        nn_fs_CTR_MPCore_detail_RomFsArchive_RomFsStorage_ReadBytes();
-        temp_v7 = 0;
-        if (-1 < (int)temp_v0) {
-          temp_v7 = temp_v13;
-          if (temp_v13 != 0) {
-            temp_v0 = param_1[7];
-            temp_v8 = temp_v13;
-            nn_fs_CTR_MPCore_detail_RomFsArchive_RomFsStorage_ReadBytes
-                      (temp_v0,0,temp_v4 + 0x20,temp_v5 + romwright_carry_4(temp_v3,temp_v6) + (unsigned int)(0xffffffdf < temp_v4)
-                       ,piVar9,temp_v13);
-            piVar8 = piVar9;
-            if ((int)temp_v0 >= 0) {
-              temp_v0 = 0;
-            }
-          }
-          else {
-            temp_v0 = 0;
-          }
+        temp_v3 = param_1[4] + temp_v4;
+        temp_v0 = nn_fs_CTR_MPCore_detail_RomFsArchive_RomFsStorage_ReadBytes
+                          (param_1[7],romwright_piece_4_4(0x20,&temp_v7),param_1[4],temp_v3);
+        temp_v5 = 0;
+        if ((-1 < (int)temp_v0) &&
+           ((temp_v5 = temp_v11, temp_v11 == 0 ||
+            (temp_v0 = nn_fs_CTR_MPCore_detail_RomFsArchive_RomFsStorage_ReadBytes
+                               (param_1[7],romwright_piece_4_4(temp_v11,temp_v6),0,temp_v3 + 0x20),
+            -1 < (int)temp_v0)))) {
+          temp_v0 = 0;
         }
         if ((int)temp_v0 < 0) goto LAB_003fc370;
-        if ((*temp_v17 == temp_v9 && param_7 == temp_v7) &&
-           (temp_v1 = FUN_00100c90(temp_v14,aiStack_190,temp_v15,temp_v9,piVar8,temp_v8), temp_v1 == 0))
-        {
+        if ((*temp_v15 == temp_v7 && param_7 == temp_v5) &&
+           (temp_v1 = FUN_00100c90(temp_v12,temp_v6,temp_v13), temp_v1 == 0)) {
           temp_v0 = 0;
-          temp_v16 = temp_v6;
+          temp_v14 = temp_v4;
           goto LAB_003fc370;
         }
-        temp_v6 = temp_v12;
-      } while (temp_v12 != 0xffffffff);
+        temp_v4 = temp_v10;
+      } while (temp_v10 != -1);
     }
     temp_v0 = 0xc880446f;
   }
 LAB_003fc370:
   if (-1 < (int)temp_v0) {
-    *temp_v19 = temp_v16;
-    temp_v20[4] = temp_v11;
-    *temp_v20 = temp_v10;
-    temp_v20[1] = uStack_88;
-    temp_v20[2] = uStack_84;
-    temp_v20[3] = uStack_80;
+    *temp_v17 = temp_v14;
+    temp_v18[4] = temp_v9;
+    *temp_v18 = temp_v8;
+    temp_v18[1] = uStack_88;
+    temp_v18[2] = uStack_84;
+    temp_v18[3] = uStack_80;
+    temp_v0 = 0;
   }
-  return;
+  return temp_v0;
 }

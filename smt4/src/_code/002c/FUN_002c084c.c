@@ -23,13 +23,13 @@ extern int *FUN_0028c814(void);
 extern int FUN_0028c904(int *);
 /* Supplied declaration required: FUN_002a8554. */
 /* Supplied declaration required: FUN_002c415c. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
 
 
 void FUN_002c084c(int param_1,int *param_2)
 
 {
-/* irregular: irregular input(s): in_lr; 7 native warning(s); review required */
+/* irregular: irregular input(s): in_lr; 6 native warning(s); review required */
   unsigned char temp_v0;
   int *piVar2;
   int temp_v1;
@@ -59,9 +59,9 @@ void FUN_002c084c(int param_1,int *param_2)
     FUN_002c415c();
     param_2[0x11] = 0;
   }
-  nn_os_CriticalSection_Enter(DAT_00465124);
-  if (((param_2 < DAT_00465144) || ((int *)(DAT_00465154 + (int)DAT_00465144) < param_2)) &&
-     ((param_2 < DAT_00465148 || ((int *)((int)DAT_00465148 + DAT_00465158) < param_2)))) {
+  nn_os_CriticalSection_Enter((unsigned int)DAT_00465124);
+  if ((((unsigned int)param_2 < DAT_00465144) || ((int *)(DAT_00465154 + (int)DAT_00465144) < param_2)) &&
+     (((unsigned int)param_2 < DAT_00465148 || ((int *)((int)DAT_00465148 + DAT_00465158) < param_2)))) {
     param_2 = (int *)FUN_001246cc(param_2);
   }
   FUN_001245c4(param_2);

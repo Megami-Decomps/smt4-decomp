@@ -39,10 +39,10 @@ void FUN_002f3208(fn_002f3208_arg0 *param_1,fn_002f3208_arg1 *param_2)
   pfVar1 = param_2;
   FUN_0025c870();
   pfVar1->field_0xac = 0;
-  pfVar1->field_0x90 = param_2;
+  pfVar1->field_0x90 = (undefined4)param_2;
   if (param_1->field_0x88 != (void *)0x0) {
     *(fn_002f3208_arg1 **)((int)param_1->field_0x88 + 0xac) = pfVar1;
-    pfVar1->field_0xb0 = param_1->field_0x88;
+    pfVar1->field_0xb0 = (undefined4)param_1->field_0x88;
   }
   else {
     param_1->field_0x8c = (int)pfVar1;

@@ -18,7 +18,7 @@ void FUN_003491e8(void)
   temp_v0 = DAT_0057f58c;
   puVar2 = &DAT_0057f588;
   if (DAT_0057f58c != 0) {
-    puVar2 = (unsigned int)(uint)*(unsigned int)(DAT_0057f58c + 8);
+    puVar2 = (unsigned char *)(unsigned int)*(unsigned char *)(DAT_0057f58c + 8);
   }
   if (DAT_0057f58c != 0 && puVar2 != (unsigned char *)0x0) {
     *(unsigned char *)(DAT_0057f58c + 0x35) = 1;

@@ -28,16 +28,16 @@ int FUN_00348b7c(fn_00348b7c_arg0 *param_1)
   temp_v0 = FUN_002adc88();
   temp_v1 = FUN_00298f88(param_1);
   if (temp_v1 != 0) {
-    if ((unsigned int)(uint)*(unsigned int)(temp_v0 + 0x842) == param_1) {
+    if ((fn_00348b7c_arg0 *)(unsigned int)*(unsigned short *)(temp_v0 + 0x842) == param_1) {
       return temp_v0 + 0x842;
     }
-    if ((unsigned int)(uint)*(unsigned int)(temp_v0 + 0x850) == param_1) {
+    if ((fn_00348b7c_arg0 *)(unsigned int)*(unsigned short *)(temp_v0 + 0x850) == param_1) {
       return temp_v0 + 0x850;
     }
-    if ((unsigned int)(uint)*(unsigned int)(temp_v0 + 0x85e) == param_1) {
+    if ((fn_00348b7c_arg0 *)(unsigned int)*(unsigned short *)(temp_v0 + 0x85e) == param_1) {
       return temp_v0 + 0x85e;
     }
-    if ((unsigned int)(uint)*(unsigned int)(temp_v0 + 0x86c) == param_1) {
+    if ((fn_00348b7c_arg0 *)(unsigned int)*(unsigned short *)(temp_v0 + 0x86c) == param_1) {
       return temp_v0 + 0x86c;
     }
   }

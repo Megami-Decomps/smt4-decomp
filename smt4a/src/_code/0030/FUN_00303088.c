@@ -6,16 +6,15 @@
 extern unsigned int FUN_005020c0(unsigned int *);
 extern unsigned int FUN_005021d8(unsigned int *);
 extern unsigned int FUN_00502244(unsigned int *);
-/* Supplied declaration required: nn_fnd_DateTime_GetDay. */
-/* Supplied declaration required: nn_fnd_DateTime_GetMonth. */
-/* Supplied declaration required: nn_fnd_DateTime_GetYear. */
+extern int nn_fnd_DateTime_GetDay(unsigned int);
+extern int nn_fnd_DateTime_GetMonth(unsigned int);
+extern int nn_fnd_DateTime_GetYear(unsigned int);
 
 
 void FUN_00303088(unsigned int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
 
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned int *puVar1;
+/* irregular: 1 native warning(s); review required */
   unsigned int temp_v0;
   int uStack_18;
   unsigned int uStack_14;
@@ -23,18 +22,15 @@ void FUN_00303088(unsigned int *param_1,unsigned int param_2,unsigned int param_
   uStack_18 = param_3;
   uStack_14 = param_4;
   FUN_0030fc80(&uStack_18);
-  puVar1 = (unsigned int *)&uStack_18;
-  nn_fnd_DateTime_GetYear();
-  param_1[1] = (((unsigned int)puVar1 >> 6) & 0xff) | (param_1[1] & 0xffffff00);
-  *param_1 = ((int)puVar1 << 0x1a) | (*param_1 & 0x3ffffff);
-  puVar1 = (unsigned int *)&uStack_18;
-  nn_fnd_DateTime_GetMonth();
+  temp_v0 = nn_fnd_DateTime_GetYear((unsigned int)&uStack_18);
+  param_1[1] = ((temp_v0 >> 6) & 0xff) | (param_1[1] & 0xffffff00);
+  *param_1 = (temp_v0 << 0x1a) | (*param_1 & 0x3ffffff);
+  temp_v0 = nn_fnd_DateTime_GetMonth((unsigned int)&uStack_18);
   param_1[1] = param_1[1];
-  *param_1 = (((unsigned int)puVar1 & 0xf) << 0x16) | (*param_1 & 0xfc3fffff);
-  puVar1 = (unsigned int *)&uStack_18;
-  nn_fnd_DateTime_GetDay();
+  *param_1 = ((temp_v0 & 0xf) << 0x16) | (*param_1 & 0xfc3fffff);
+  temp_v0 = nn_fnd_DateTime_GetDay((unsigned int)&uStack_18);
   param_1[1] = param_1[1];
-  *param_1 = (((unsigned int)puVar1 & 0x1f) << 0x11) | (*param_1 & 0xffc1ffff);
+  *param_1 = ((temp_v0 & 0x1f) << 0x11) | (*param_1 & 0xffc1ffff);
   temp_v0 = FUN_005020c0((unsigned int *)&uStack_18);
   param_1[1] = param_1[1];
   *param_1 = ((temp_v0 & 0x1f) << 0xc) | (*param_1 & 0xfffe0fff);

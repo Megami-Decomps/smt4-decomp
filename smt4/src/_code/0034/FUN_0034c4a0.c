@@ -43,7 +43,7 @@ void FUN_0034c4a0(int param_1)
     temp_v7 = *(float *)(temp_v4 + *(int *)(param_1 + 0x1c));
     puVar7 = (unsigned int *)(temp_v2 + 0x3c + *(int *)(param_1 + 4));
     *puVar7 = *(unsigned int *)(*(int *)(param_1 + 0x1c) + temp_v6);
-    puVar7[1] = -temp_v7;
+    *(float *)&puVar7[1] = -temp_v7;
     puVar7[2] = 0;
   } while (temp_v3 < 2);
   return;

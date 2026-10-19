@@ -7,18 +7,17 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_3_stack;
 
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 void nn_snd_CTR_VoiceManager_SetPriority(int param_1,int param_2,int param_3)
 
 {
-/* irregular: 2 native warning(s); review required */
   int temp_v0;
   int temp_v1;
   
-  nn_os_CriticalSection_Enter();
+  nn_os_CriticalSection_Enter(param_1 + 0x10);
   temp_v0 = *(int *)(param_2 + 0x24);
   temp_v1 = *(int *)(param_2 + 0x28);
   if (temp_v0 == 0 && temp_v1 == 0) {

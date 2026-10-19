@@ -28,7 +28,6 @@ typedef struct {
     unsigned int sp60; /* 0x60: local_60 */
 } param_10_stack;
 
-/* Unsupported intrinsic, declaration required: while (COPY). */
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
 /* Supplied declaration required: FUN_002e7232. */
@@ -55,7 +54,7 @@ void FUN_0010895c(int *param_1,int param_2,fn_0010895c_arg2 *param_3,unsigned in
                  ,unsigned int param_6,int param_7,unsigned char param_8,int param_9,unsigned int param_10)
 
 {
-/* irregular: 2 goto(s); 15 native warning(s); review required */
+/* irregular: 2 goto(s); 14 native warning(s); review required */
   unsigned int temp_v0;
   int temp_v1;
   int *piVar3;

@@ -4,19 +4,17 @@
 
 extern int DAT_0044e460; /* 0x44e460 */
 
-/* Supplied declaration required: nn_dsp_CTR_DSP_SetSemaphoreMask. */
+extern unsigned int nn_dsp_CTR_DSP_SetSemaphoreMask(unsigned int, unsigned short);
 
 
-int FUN_0013a23c(unsigned int param_1)
+unsigned int FUN_0013a23c(unsigned short param_1)
 
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
+  unsigned int temp_v0;
   
   if (DAT_0044e460 != 0) {
-    temp_v0 = DAT_0044e460;
-    nn_dsp_CTR_DSP_SetSemaphoreMask(DAT_0044e460,param_1);
+    temp_v0 = nn_dsp_CTR_DSP_SetSemaphoreMask(DAT_0044e460,param_1);
     return temp_v0;
   }
-  return -0x375f5808;
+  return 0xc8a0a7f8;
 }

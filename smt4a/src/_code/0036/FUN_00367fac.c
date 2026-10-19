@@ -2,6 +2,17 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
+#ifndef ROMWRIGHT_ISNAN_DEFINED
+#define ROMWRIGHT_ISNAN_DEFINED
+static int romwright_isnanf(float value)
+{
+    return value != value;
+}
+static int romwright_isnan(double value)
+{
+    return value != value;
+}
+#endif
 /* stack frame of void: 23 slot(s), 92 byte(s) */
 typedef struct {
     unsigned int sp4C; /* 0x4c: local_4c */
@@ -104,7 +115,7 @@ unsigned int FUN_00367fac(void)
   temp_v17 = 0.0f;
   temp_v3 = FUN_00162e8c();
   temp_v23 = *(float *)(temp_v3 + 0x1528);
-  if ((NAN(*(float *)(DAT_00581288 + 0x20) - 200.0f) || NAN(in_s1)) &&
+  if ((romwright_isnan(*(float *)(DAT_00581288 + 0x20) - 200.0f) || (in_s1 != in_s1)) &&
      (in_s1 < *(float *)(DAT_00581288 + 0x20) + 200.0f)) {
     temp_v7 = *(float *)(DAT_00581288 + 0x21c) * 0.7111111f;
     temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v17 < temp_v7) << 0x1f) |
@@ -135,7 +146,7 @@ unsigned int FUN_00367fac(void)
              (temp_v2 - temp_v12) * (float)(&DAT_00536d1c)[temp_v6 * 4];
     temp_v11 = (float)(&DAT_00536d18)[temp_v6 * 4] +
              (temp_v2 - temp_v12) * (float)(&DAT_00536d20)[temp_v6 * 4];
-    if (!(unsigned char)((temp_v1 >> 6) & 1) && (unsigned char)(temp_v1 >> 7) == (NAN(temp_v17) || NAN(temp_v7))) {
+    if (!(unsigned char)((temp_v1 >> 6) & 1) && (unsigned char)(temp_v1 >> 7) == ((temp_v17 != temp_v17) || (temp_v7 != temp_v7))) {
       temp_v14 = -temp_v14;
     }
     temp_v24 = temp_v11 * temp_v34;

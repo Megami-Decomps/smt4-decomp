@@ -56,7 +56,7 @@ unsigned int FUN_004638ac(fn_004638ac_arg0 *param_1,int param_2,int *param_3)
           return 0;
         }
         temp_v1[0] = param_1->field_0x54;
-        temp_v0 = (*param_1->field_0x30)(temp_v1,*(unsigned int *)&param_1->field_0x34);
+        temp_v0 = ((int (*)())param_1->field_0x30)(temp_v1,*(unsigned int *)&param_1->field_0x34);
         if (temp_v0 == 0) {
           param_1->field_0x58 = param_1->field_0x60;
           param_1->field_0x51 = 1;

@@ -5,26 +5,26 @@
 extern unsigned char DAT_00647708; /* 0x647708 */
 
 /* Supplied declaration required: FUN_001cd658. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
-/* Supplied declaration required: nn_snd_CTR_FxDelay_Finalize. */
-/* Supplied declaration required: nn_snd_CTR_FxReverb_Finalize. */
-/* Supplied declaration required: nn_snd_CTR_FxReverb_Initialize. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
+extern void nn_snd_CTR_FxDelay_Finalize(unsigned int);
+extern void nn_snd_CTR_FxReverb_Finalize(unsigned int);
+extern unsigned char nn_snd_CTR_FxReverb_Initialize(unsigned int);
 
 
 unsigned int FUN_001cd514(int param_1,int param_2,unsigned int param_3)
 
 {
-/* irregular: 6 native warning(s); review required */
+/* irregular: 1 native warning(s); review required */
   int temp_v0;
   
   nn_os_CriticalSection_Enter(param_1 + 0x44);
   temp_v0 = param_1 + param_2 * 8;
   if (*(int *)(temp_v0 + 0x34) != 0) {
-    nn_snd_CTR_FxDelay_Finalize();
+    nn_snd_CTR_FxDelay_Finalize(*(int *)(temp_v0 + 0x34));
   }
   if (*(int *)(temp_v0 + 0x38) != 0) {
-    nn_snd_CTR_FxReverb_Finalize();
+    nn_snd_CTR_FxReverb_Finalize(*(int *)(temp_v0 + 0x38));
   }
   *(unsigned int *)(temp_v0 + 0x34) = 0;
   *(unsigned int *)(temp_v0 + 0x38) = 0;

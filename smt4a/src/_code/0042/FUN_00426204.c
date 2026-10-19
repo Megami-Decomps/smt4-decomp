@@ -12,23 +12,23 @@ extern unsigned int DAT_0061a5f0; /* 0x61a5f0 */
 
 extern int FUN_00146650(void);
 /* Supplied declaration required: FUN_0042642c. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 int FUN_00426204(void)
 
 {
-/* irregular: irregular input(s): in_r3; 4 native warning(s); review required */
+/* irregular: irregular input(s): in_r3; 2 native warning(s); review required */
   int temp_v0;
   unsigned int in_r3;
   unsigned char temp_v1;
   unsigned int temp_v2;
   
   temp_v2 = in_r3;
-  nn_os_CriticalSection_Enter(&DAT_0061a5f0);
+  nn_os_CriticalSection_Enter((unsigned int)&DAT_0061a5f0);
   temp_v1 = DAT_005891a8 == 0;
-  nn_os_CriticalSection_Leave(&DAT_0061a5f0);
+  nn_os_CriticalSection_Leave((unsigned int)&DAT_0061a5f0);
   if ((temp_v1) && (temp_v0 = FUN_00146650(), temp_v0 == 0)) {
     return 0;
   }

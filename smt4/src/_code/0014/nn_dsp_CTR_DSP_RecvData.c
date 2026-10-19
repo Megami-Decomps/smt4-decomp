@@ -11,11 +11,11 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 
 
-int nn_dsp_CTR_DSP_RecvData(int *param_1,unsigned short param_2,unsigned short *param_3)
+unsigned int nn_dsp_CTR_DSP_RecvData(unsigned int *param_1,unsigned short param_2,unsigned short *param_3)
 
 {
 /* irregular: 2 native warning(s); review required */
-  int temp_v0;
+  unsigned int temp_v0;
   int temp_v1;
   
   temp_v1 = coproc_movefrom_User_R_Thread_and_Process_ID();
@@ -23,9 +23,9 @@ int nn_dsp_CTR_DSP_RecvData(int *param_1,unsigned short param_2,unsigned short *
   *(unsigned short *)(temp_v1 + 0x84) = param_2;
   temp_v0 = *param_1;
   software_interrupt(0x32);
-  if (-1 < temp_v0) {
+  if (-1 < (int)temp_v0) {
     *param_3 = *(unsigned short *)(temp_v1 + 0x88);
-    temp_v0 = *(int *)(temp_v1 + 0x84);
+    temp_v0 = *(unsigned int *)(temp_v1 + 0x84);
   }
   return temp_v0;
 }

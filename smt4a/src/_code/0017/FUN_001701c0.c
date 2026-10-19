@@ -6,17 +6,19 @@
 /* Supplied declaration required: FUN_00188c28. */
 /* Supplied declaration required: FUN_0018b0a8. */
 /* Supplied declaration required: FUN_001a0d08. */
-/* Supplied declaration required: FUN_001a2a5c. */
+extern unsigned int FUN_001a2a5c(void);
 /* Supplied declaration required: FUN_002e3140. */
-/* Supplied declaration required: nn_gxlow_CTR_Gpu_UnregisterInterruptRelayQueue. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern unsigned int nn_gxlow_CTR_Gpu_UnregisterInterruptRelayQueue(unsigned int);
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 void FUN_001701c0(int param_1)
 
 {
-/* irregular: 9 native warning(s); review required */
+/* irregular: 5 native warning(s); review required */
+  unsigned int temp_v0;
+  
   *(unsigned char *)(param_1 + 0x77) = 1;
   software_interrupt(0x18);
   if (*(int *)(param_1 + 0x2c) < 0) {
@@ -33,8 +35,8 @@ void FUN_001701c0(int param_1)
     *(unsigned int *)(param_1 + 0x6c) = 0;
   }
   nn_os_CriticalSection_Enter(param_1);
-  FUN_001a2a5c();
-  nn_gxlow_CTR_Gpu_UnregisterInterruptRelayQueue();
+  temp_v0 = FUN_001a2a5c();
+  nn_gxlow_CTR_Gpu_UnregisterInterruptRelayQueue(temp_v0);
   FUN_0018b0a8(param_1 + 0x58);
   *(unsigned int *)(param_1 + 0x30) = 0;
   *(unsigned int *)(param_1 + 0x34) = 0;

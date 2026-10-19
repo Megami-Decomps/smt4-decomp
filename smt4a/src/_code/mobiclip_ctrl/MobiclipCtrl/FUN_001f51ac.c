@@ -29,13 +29,13 @@ extern unsigned int DAT_00617e30; /* 0x617e30 */
 /* Supplied declaration required: FUN_00513718. */
 /* Supplied declaration required: FUN_00513a30. */
 /* Supplied declaration required: FUN_00513f6c. */
-/* Supplied declaration required: nn_fnd_ExpHeapBase_Finalize. */
+extern void nn_fnd_ExpHeapBase_Finalize(unsigned int);
 
 
 void FUN_001f51ac(void)
 
 {
-/* irregular: 10 native warning(s); review required */
+/* irregular: 9 native warning(s); review required */
   unsigned int temp_v0;
   
   FUN_00422ef8();
@@ -47,22 +47,22 @@ void FUN_001f51ac(void)
   FUN_00513a30();
   FUN_00513620();
   temp_v0 = DAT_00617c78;
-  nn_fnd_ExpHeapBase_Finalize(&DAT_00617c48);
+  nn_fnd_ExpHeapBase_Finalize((unsigned int)&DAT_00617c48);
   FUN_0019a5a0(temp_v0);
   temp_v0 = DAT_00617cd0;
-  nn_fnd_ExpHeapBase_Finalize(&DAT_00617ca0);
+  nn_fnd_ExpHeapBase_Finalize((unsigned int)&DAT_00617ca0);
   FUN_0019a5a0(temp_v0);
   temp_v0 = DAT_00617d28;
-  nn_fnd_ExpHeapBase_Finalize(&DAT_00617cf8);
+  nn_fnd_ExpHeapBase_Finalize((unsigned int)&DAT_00617cf8);
   FUN_0019a5a0(temp_v0);
   temp_v0 = DAT_00617d80;
-  nn_fnd_ExpHeapBase_Finalize(&DAT_00617d50);
+  nn_fnd_ExpHeapBase_Finalize((unsigned int)&DAT_00617d50);
   FUN_0019a5a0(temp_v0);
   temp_v0 = DAT_00617dd8;
-  nn_fnd_ExpHeapBase_Finalize(&DAT_00617da8);
+  nn_fnd_ExpHeapBase_Finalize((unsigned int)&DAT_00617da8);
   FUN_0019a5a0(temp_v0);
   temp_v0 = DAT_00617e30;
-  nn_fnd_ExpHeapBase_Finalize(&DAT_00617e00);
+  nn_fnd_ExpHeapBase_Finalize((unsigned int)&DAT_00617e00);
   FUN_0019a5a0(temp_v0);
   return;
 }

@@ -7,15 +7,14 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_2_stack;
 
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 void nn_os_AddressSpaceManager_Free(int param_1,int *param_2)
 
 {
-/* irregular: 2 native warning(s); review required */
-  nn_os_CriticalSection_Enter();
+  nn_os_CriticalSection_Enter(param_1 + 0xc);
   if ((int *)*param_2 == param_2) {
     *(unsigned int *)(param_1 + 8) = 0;
   }

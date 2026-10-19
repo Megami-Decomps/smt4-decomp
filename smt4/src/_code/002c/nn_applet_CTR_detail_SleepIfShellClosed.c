@@ -9,14 +9,14 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } void_stack;
 
-/* Supplied declaration required: nn_applet_CTR_detail_CallUtility. */
+extern unsigned int nn_applet_CTR_detail_CallUtility(unsigned int, unsigned char *, unsigned int, unsigned char *, unsigned int, int *);
 
 
 void nn_applet_CTR_detail_SleepIfShellClosed(void)
 
 {
-/* irregular: 2 native warning(s); review required */
-  nn_applet_CTR_detail_CallUtility(4,0,0,0,0,0);
+/* irregular: 1 native warning(s); review required */
+  nn_applet_CTR_detail_CallUtility(4,0x0,0,0x0,0,0x0);
                     /* WARNING: Treating indirect jump as return */
   return;
 }

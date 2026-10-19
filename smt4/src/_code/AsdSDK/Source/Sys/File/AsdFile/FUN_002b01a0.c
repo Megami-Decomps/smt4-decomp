@@ -12,7 +12,6 @@ extern unsigned char LAB_002b03f8; /* 0x2b03f8 */
 extern unsigned int *DAT_00465010; /* 0x465010 */
 extern unsigned int DAT_00465014; /* 0x465014 */
 
-/* Unsupported intrinsic, declaration required: while (INT_ADD). */
 /* Supplied declaration required: FUN_002aa568. */
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002bf694. */
@@ -27,7 +26,7 @@ extern unsigned int FUN_002c30c4(int);
 unsigned int * FUN_002b01a0(int param_1,unsigned char param_2)
 
 {
-/* irregular: 5 unstructured edge(s); 3 goto(s); 9 native warning(s); review required */
+/* irregular: 5 unstructured edge(s); 3 goto(s); 8 native warning(s); review required */
   unsigned int *puVar1;
   unsigned char *puVar2;
   unsigned int *puVar3;

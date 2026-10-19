@@ -55,7 +55,7 @@ void FUN_00392e74(unsigned int *param_1)
     }
     if ((param_1[temp_v1 * 2 + 5] & 1) != 0) {
       UNRECOVERED_JUMPTABLE =
-           *(romwright_code **)(UNRECOVERED_JUMPTABLE +
+           *(romwright_code **)((unsigned char *)UNRECOVERED_JUMPTABLE +
                      *(int *)((int)param_1 + ((int)param_1[temp_v1 * 2 + 5] >> 1)));
     }
                     /* WARNING: Could not recover jumptable at 0x00393088. Too many branches */

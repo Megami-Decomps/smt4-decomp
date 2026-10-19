@@ -21,8 +21,8 @@ extern int FUN_002eb5f4(void);
 extern int FUN_002ee774(unsigned int **, unsigned int *);
 extern int FUN_002ee978(unsigned int *);
 extern int FUN_002fd454(unsigned int *);
+/* Supplied declaration required: FUN_00305644. */
 /* Supplied declaration required: FUN_00306d50. */
-/* Supplied declaration required: while. */
 
 
 void FUN_0011a01c(int param_1)

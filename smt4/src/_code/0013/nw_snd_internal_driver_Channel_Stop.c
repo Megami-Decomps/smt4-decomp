@@ -41,7 +41,7 @@ void nw_snd_internal_driver_Channel_Stop(fn_001312b4_arg0 *param_1)
     param_1->field_0xc5 = 0;
     param_1->field_0xc6 = 0;
     if (param_1->field_0x12c != (romwright_code *)0x0) {
-      (*param_1->field_0x12c)(param_1,0,*(unsigned int *)&param_1->field_0x130);
+      ((int (*)())param_1->field_0x12c)(param_1,0,*(unsigned int *)&param_1->field_0x130);
     }
     if (param_1->field_0xc7 != 0) {
       param_1->field_0xc7 = 0;

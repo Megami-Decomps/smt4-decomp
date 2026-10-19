@@ -8,14 +8,13 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 void nn_fs_CTR_MPCore_detail_RomFsArchive_Directory_Close(int *param_1)
 
 {
-/* irregular: 2 native warning(s); review required */
   int temp_v0;
   
   (**(romwright_code **)(*param_1 + 0x10))(param_1);

@@ -13,14 +13,14 @@ typedef struct {
 /* Supplied declaration required: FUN_002c4040. */
 /* Supplied declaration required: FUN_002c40f8. */
 /* Supplied declaration required: FUN_002c526c. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
-void nn_gxlow_CTR_InterruptReceiver_ReceiverThreadFunc(int param_1)
+void nn_gxlow_CTR_InterruptReceiver_ReceiverThreadFunc(unsigned int param_1)
 
 {
-/* irregular: 7 native warning(s); review required */
+/* irregular: 5 native warning(s); review required */
   char temp_v0;
   unsigned char temp_v1;
   unsigned char *puVar3;

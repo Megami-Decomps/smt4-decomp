@@ -2,6 +2,21 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
+#ifndef ROMWRIGHT_FLOAT_BITS_DEFINED
+#define ROMWRIGHT_FLOAT_BITS_DEFINED
+static unsigned int romwright_f2u(float value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.f = value;
+    return bits.u;
+}
+static float romwright_u2f(unsigned int value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.u = value;
+    return bits.f;
+}
+#endif
 /* stack frame of void: 9 slot(s), 36 byte(s) */
 typedef struct {
     unsigned int sp34; /* 0x34: local_34 */
@@ -327,7 +342,7 @@ LAB_00296958:
         ;
         temp_v11 = temp_v15;
         temp_v12 = temp_v16;
-        temp_v9 = (int *)(temp_v16 - 88.536f);
+        temp_v9 = (int *)romwright_f2u((float)((temp_v16 - 88.536f)));
         temp_v13 = temp_v17;
         temp_v8 = temp_v15;
         temp_v10 = temp_v17;

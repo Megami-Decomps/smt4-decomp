@@ -52,7 +52,7 @@ void FUN_00375c74(int param_1,fn_00375c74_arg1 *param_2,unsigned char *param_3,i
       temp_v5 = param_2->field_0x28;
       temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v5 < 0.0f) << 0x1f) |
               ((unsigned int)(temp_v5 == 0.0f) << 0x1e);
-      temp_v3 = temp_v0 | ((unsigned int)NAN(temp_v5) << 0x1c);
+      temp_v3 = temp_v0 | ((unsigned int)(temp_v5 != temp_v5) << 0x1c);
       temp_v1 = (unsigned char)(temp_v0 >> 0x18);
       if (!((unsigned char)((temp_v1 >> 6) & 1) || temp_v1 >> 7 != ((unsigned char)(temp_v3 >> 0x1c) & 1))) {
         FUN_00514540(0);
@@ -75,7 +75,7 @@ void FUN_00375c74(int param_1,fn_00375c74_arg1 *param_2,unsigned char *param_3,i
     *param_3 = 1;
     temp_v5 = param_2->field_0x28;
     temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v5 < 0.0f) << 0x1f) | ((unsigned int)(temp_v5 == 0.0f) << 0x1e);
-    temp_v3 = temp_v0 | ((unsigned int)NAN(temp_v5) << 0x1c);
+    temp_v3 = temp_v0 | ((unsigned int)(temp_v5 != temp_v5) << 0x1c);
     temp_v1 = (unsigned char)(temp_v0 >> 0x18);
     if (!(unsigned char)((temp_v1 >> 6) & 1) && temp_v1 >> 7 == ((unsigned char)(temp_v3 >> 0x1c) & 1)) {
       FUN_00514540(0);

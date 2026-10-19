@@ -352,7 +352,7 @@ LAB_002010f0:
             temp_v7 = in_fpscr | ((unsigned int)(temp_v15 < temp_v18) << 0x1f) |
                      ((unsigned int)(temp_v15 == temp_v18) << 0x1e);
             temp_v2 = (unsigned char)(temp_v7 >> 0x18);
-            if (!((unsigned char)((temp_v2 >> 6) & 1) || (unsigned char)(temp_v2 >> 7) != (NAN(temp_v15) || NAN(temp_v18)))) {
+            if (!((unsigned char)((temp_v2 >> 6) & 1) || (unsigned char)(temp_v2 >> 7) != ((temp_v15 != temp_v15) || (temp_v18 != temp_v18)))) {
               temp_v5 = VectorSignedToFloat(temp_v16,(unsigned char)(temp_v7 >> 0x16) & 3);
             }
             else {

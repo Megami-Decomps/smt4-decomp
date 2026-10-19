@@ -34,7 +34,7 @@ int FUN_002b8ee0(fn_002b8ee0_arg0 *param_1,int param_2)
   unsigned char temp_v3;
   
   temp_v2 = (int)param_1->field_0x52;
-  if ((temp_v2 == 0) && (param_1->field_0xc = &LAB_00140000, param_2 != 0)) {
+  if ((temp_v2 == 0) && (param_1->field_0xc = (undefined4)&LAB_00140000, param_2 != 0)) {
     param_1->field_0xc = 0xffec0000;
   }
   temp_v1 = 0x37;

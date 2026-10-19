@@ -184,11 +184,11 @@ FUN_001b7420(unsigned int *param_1,unsigned int param_2,fn_001b7420_arg2 *param_
     if (!romwright_subpiece_4_1_0(temp_v0 >> 0x1d,0)) {
       temp_v19 = -temp_v19;
     }
-    param_1[0x1b] = -temp_v21;
-    param_1[0x13] = temp_v11 * temp_v20;
-    param_1[0x17] = temp_v19 * temp_v20;
-    param_1[0x1c] = temp_v13 * temp_v20;
-    param_1[0x1d] = temp_v22 * temp_v20;
+    *(float *)&param_1[0x1b] = -temp_v21;
+    *(float *)&param_1[0x13] = temp_v11 * temp_v20;
+    *(float *)&param_1[0x17] = temp_v19 * temp_v20;
+    *(float *)&param_1[0x1c] = temp_v13 * temp_v20;
+    *(float *)&param_1[0x1d] = temp_v22 * temp_v20;
     param_1[0x14] = temp_v13 * temp_v11 * temp_v21 - temp_v22 * temp_v19;
     param_1[0x19] = temp_v22 * temp_v19 * temp_v21 - temp_v13 * temp_v11;
     param_1[0x15] = temp_v13 * temp_v19 + temp_v22 * temp_v11 * temp_v21;

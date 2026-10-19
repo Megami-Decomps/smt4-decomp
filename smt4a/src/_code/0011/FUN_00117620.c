@@ -50,13 +50,13 @@ unsigned int FUN_00117620(int param_1,int param_2,unsigned int param_3,unsigned 
   temp_v5 = temp_v5 & 0xffffff00;
   if (param_3 != 0) {
     puVar2 = (unsigned char *)FUN_002eb462(&temp_v2,*(unsigned char *)(temp_v8 + 4),param_3);
-    temp_v5 = romwright_piece_3_1(temp_v5._1_3_,*puVar2);
+    temp_v5 = romwright_piece_3_1((((unsigned int)(temp_v5) >> 8) & 0xffffffU),*puVar2);
 LAB_00117688:
     temp_v6 = temp_v5;
     temp_v1 = param_1;
     FUN_002f9dd4(param_1,&temp_v6);
     if (temp_v1 == 0) {
-      temp_v2 = romwright_piece_3_1(temp_v2._1_3_,(unsigned char)temp_v5);
+      temp_v2 = romwright_piece_3_1((((unsigned int)(temp_v2) >> 8) & 0xffffffU),(unsigned char)temp_v5);
       temp_v3 = temp_v8;
       FUN_00128fd8(temp_v7,param_1 + 4,&temp_v2);
       if (param_4 != (unsigned char *)0x0) {
@@ -71,7 +71,7 @@ LAB_00117688:
     temp_v2 = temp_v2 & 0xffffff00;
     do {
       puVar2 = (unsigned char *)FUN_002eb462(&temp_v2,*(unsigned char *)(temp_v8 + 4),param_3);
-      temp_v5 = romwright_piece_3_1(temp_v5._1_3_,*puVar2);
+      temp_v5 = romwright_piece_3_1((((unsigned int)(temp_v5) >> 8) & 0xffffffU),*puVar2);
       temp_v2 = temp_v5;
       temp_v1 = param_1;
       FUN_002f9dd4();

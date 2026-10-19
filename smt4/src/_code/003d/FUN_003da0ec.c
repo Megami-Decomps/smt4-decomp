@@ -640,7 +640,7 @@ code_r0x0034ca74:
         if (temp_v4 != 0) {
           temp_v8 = *(int *)(*(int *)(*(int *)(temp_v6 + 0x24) + temp_v7 * 4) + 0x148);
           piStack_a4 = *(int **)(*(int *)(temp_v8 + 8) + 0x10);
-          iStack_9c = romwright_piece_3_1(iStack_9c._1_3_,1);
+          iStack_9c = romwright_piece_3_1((((unsigned int)(iStack_9c) >> 8) & 0xffffffU),1);
           temp_v21 = temp_v4;
           piStack_a0 = piStack_a4;
           piVar4 = (int *)FUN_002c2ff0();

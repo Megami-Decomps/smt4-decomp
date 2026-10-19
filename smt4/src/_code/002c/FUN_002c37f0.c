@@ -11,13 +11,13 @@ extern unsigned int DAT_00471b58; /* 0x471b58 */
 
 /* Unsupported intrinsic, declaration required: hasExclusiveAccess (CALLOTHER). */
 /* Supplied declaration required: FUN_002a8554. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
 
 
 void FUN_002c37f0(int param_1)
 
 {
-/* irregular: irregular input(s): in_lr; 3 native warning(s); review required */
+/* irregular: irregular input(s): in_lr; 2 native warning(s); review required */
   unsigned char temp_v0;
   int temp_v1;
   int temp_v2;
@@ -26,7 +26,7 @@ void FUN_002c37f0(int param_1)
   unsigned int in_lr;
   
   piVar4 = (int *)(param_1 + 0x1c4);
-  nn_os_CriticalSection_Enter(piVar4);
+  nn_os_CriticalSection_Enter((unsigned int)piVar4);
   *(unsigned int *)(param_1 + 0x1b8) = 0;
   *(unsigned int *)(param_1 + 0x1bc) = 0;
   *(unsigned int *)(param_1 + 0x1c0) = 0;

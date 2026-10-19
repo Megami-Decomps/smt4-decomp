@@ -13,13 +13,13 @@ extern unsigned int DAT_00471b58; /* 0x471b58 */
 /* Supplied declaration required: FUN_001245c4. */
 extern unsigned int FUN_001246cc(unsigned int);
 /* Supplied declaration required: FUN_002a8554. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
 
 
 void FUN_0024dcfc(unsigned int param_1)
 
 {
-/* irregular: irregular input(s): in_lr; 4 native warning(s); review required */
+/* irregular: irregular input(s): in_lr; 3 native warning(s); review required */
   unsigned char temp_v0;
   int *piVar2;
   int temp_v1;
@@ -27,7 +27,7 @@ void FUN_0024dcfc(unsigned int param_1)
   unsigned int unaff_r4;
   unsigned int in_lr;
   
-  nn_os_CriticalSection_Enter(DAT_00465124);
+  nn_os_CriticalSection_Enter((unsigned int)DAT_00465124);
   if (((param_1 < DAT_00465144) || (DAT_00465154 + DAT_00465144 < param_1)) &&
      ((param_1 < DAT_00465148 || (DAT_00465148 + DAT_00465158 < param_1)))) {
     param_1 = FUN_001246cc(param_1);

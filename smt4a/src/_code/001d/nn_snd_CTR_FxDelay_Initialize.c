@@ -5,13 +5,13 @@
 /* Supplied declaration required: FUN_002e6dd4. */
 
 
-unsigned int nn_snd_CTR_FxDelay_Initialize(int param_1)
+unsigned char nn_snd_CTR_FxDelay_Initialize(int param_1)
 
 {
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   int temp_v1;
-  unsigned int temp_v2;
+  unsigned char temp_v2;
   int temp_v3;
   unsigned int temp_v4;
   int temp_v5;

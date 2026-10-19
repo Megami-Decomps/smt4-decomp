@@ -8,7 +8,6 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-/* Unsupported intrinsic, declaration required: while (INT_ADD). */
 /* Supplied declaration required: FUN_001247c0. */
 /* Supplied declaration required: FUN_002e3f68. */
 extern int FUN_0030e914(int, unsigned int, unsigned int);
@@ -19,7 +18,7 @@ extern int FUN_0030e914(int, unsigned int, unsigned int);
 void FUN_00124a5a(int param_1)
 
 {
-/* irregular: 4 goto(s); 5 native warning(s); review required */
+/* irregular: 4 goto(s); 4 native warning(s); review required */
   unsigned char temp_v0;
   int temp_v1;
   unsigned int temp_v2;

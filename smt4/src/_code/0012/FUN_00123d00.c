@@ -228,7 +228,7 @@ void FUN_00123d00(unsigned int *param_1,unsigned int *param_2,int param_3,unsign
       puVar8 = puVar8 + 1;
     }
     param_3 = param_3 / 2;
-    FUN_00123d00(puVar8,param_2,param_3);
+    FUN_00123d00(puVar8,param_2,param_3, /* unrecovered */ 0);
     param_2 = puVar8;
     if (((int)puVar8 - (int)param_1) >> 2 < 0x11) {
       return;

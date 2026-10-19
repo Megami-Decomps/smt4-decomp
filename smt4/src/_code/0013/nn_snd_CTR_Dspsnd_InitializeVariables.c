@@ -33,15 +33,15 @@ typedef struct {
 /* Supplied declaration required: FUN_00146894. */
 /* Supplied declaration required: FUN_002c40f8. */
 /* Supplied declaration required: FUN_002c526c. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 /* Supplied declaration required: rt_memcpy. */
 
 
-void nn_snd_CTR_Dspsnd_InitializeVariables(int *param_1,int param_2)
+void nn_snd_CTR_Dspsnd_InitializeVariables(int *param_1,unsigned char param_2)
 
 {
-/* irregular: 11 native warning(s); review required */
+/* irregular: 9 native warning(s); review required */
   unsigned short temp_v0;
   unsigned char *puVar2;
   int temp_v1;
@@ -74,7 +74,7 @@ void nn_snd_CTR_Dspsnd_InitializeVariables(int *param_1,int param_2)
   unsigned char temp_v20 [8];
   
   if ((char)param_1[0x4c6] == '\0') {
-    if (param_2 == 0) {
+    if (!param_2) {
       temp_v10[0] = 0;
     }
     else {
@@ -84,7 +84,7 @@ void nn_snd_CTR_Dspsnd_InitializeVariables(int *param_1,int param_2)
     }
     FUN_0013a1f4(2,temp_v10,4);
     FUN_00146814(0x4000);
-    nn_os_CriticalSection_Enter();
+    nn_os_CriticalSection_Enter((unsigned int)(param_1 + 2));
     temp_v18 = *param_1;
     puVar2 = temp_v20;
     FUN_002c40f8(puVar2,&temp_v18,1,0,0xffffffff,0xffffffff);
@@ -96,7 +96,7 @@ void nn_snd_CTR_Dspsnd_InitializeVariables(int *param_1,int param_2)
       FUN_002c526c();
     }
     *(char *)((int)param_1 + 0x1319) = *(char *)((int)param_1 + 0x1319) + '\x01';
-    nn_os_CriticalSection_Leave(param_1 + 2);
+    nn_os_CriticalSection_Leave((unsigned int)(param_1 + 2));
     FUN_00146840(2,temp_v9,2,temp_v19);
     FUN_00146840(2,temp_v15,(temp_v9[0] & 0x7fff) << 1,temp_v19);
     temp_v11[0] = param_1 + 0x426;

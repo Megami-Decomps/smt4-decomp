@@ -236,7 +236,7 @@ FUN_004bfcfc(int param_1,unsigned int param_2,fn_004bfcfc_arg2 *param_3,unsigned
       if (temp_v0 != 2) {
         if (((temp_v0 == 8) &&
             (temp_v5 = FUN_001633a0(99), temp_v5 < (int)(unsigned int)*(unsigned char *)((int)puVar4 + 799))) &&
-           (((1 << *(sbyte *)(param_1 + 0x4c)) & 0xffffU & (unsigned int)(unsigned short)puVar4[0x9d]) != 0)) {
+           (((1 << *(signed char *)(param_1 + 0x4c)) & 0xffffU & (unsigned int)(unsigned short)puVar4[0x9d]) != 0)) {
           return 5;
         }
       }

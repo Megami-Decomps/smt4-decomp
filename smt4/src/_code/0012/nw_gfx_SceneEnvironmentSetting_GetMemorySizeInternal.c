@@ -50,7 +50,7 @@ void nw_gfx_SceneEnvironmentSetting_GetMemorySizeInternal(int *param_1,fn_0012d3
   else {
     puVar2 = (unsigned int *)0x0;
   }
-  if (puVar2 != piVar1 + temp_v1) {
+  if (puVar2 != (unsigned int *)(piVar1 + temp_v1)) {
     temp_v0 = param_1[1];
     do {
       puVar5 = (unsigned char *)*puVar2;
@@ -65,7 +65,7 @@ void nw_gfx_SceneEnvironmentSetting_GetMemorySizeInternal(int *param_1,fn_0012d3
       *param_1 = temp_v2;
       puVar2 = puVar2 + 1;
       *param_1 = (((temp_v2 + temp_v0) - 1U) & ~(temp_v0 - 1U)) + *(int *)(puVar5 + 4) * 4;
-    } while (puVar2 != piVar1 + temp_v1);
+    } while (puVar2 != (unsigned int *)(piVar1 + temp_v1));
   }
   temp_v0 = (((*param_1 + param_1[1]) - 1U) & ~(param_1[1] - 1U)) + param_2->field_0x18 * 8;
   *param_1 = temp_v0;

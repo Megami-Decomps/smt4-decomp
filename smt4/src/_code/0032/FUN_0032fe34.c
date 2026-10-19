@@ -126,7 +126,7 @@ void FUN_0032fe34(int param_1)
         temp_v13 = (float)temp_v15;
         temp_v4 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v12 < temp_v13) << 0x1f) |
                 ((unsigned int)(temp_v12 == temp_v13) << 0x1e);
-        in_fpscr = temp_v4 | ((unsigned int)(NAN(temp_v12) || NAN(temp_v13)) << 0x1c);
+        in_fpscr = temp_v4 | ((unsigned int)((temp_v12 != temp_v12) || (temp_v13 != temp_v13)) << 0x1c);
         temp_v0 = (unsigned char)(temp_v4 >> 0x18);
         if (!(unsigned char)((temp_v0 >> 6) & 1) && temp_v0 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
           FUN_002bf538();

@@ -6,8 +6,8 @@ extern int FUN_002bb274(void);
 
 
 unsigned char nn_snd_CTR_Dspsnd_SetChannelIIRFilter_Biquad
-               (int param_1,int param_2,unsigned short param_3,unsigned short param_4,unsigned short param_5,
-               unsigned short param_6,unsigned short param_7)
+               (int param_1,unsigned char param_2,short param_3,short param_4,short param_5,short param_6,
+               short param_7)
 
 {
   int temp_v0;
@@ -15,13 +15,13 @@ unsigned char nn_snd_CTR_Dspsnd_SetChannelIIRFilter_Biquad
   
   temp_v0 = FUN_002bb274();
   if (temp_v0 != 0) {
-    puVar2 = *(unsigned int **)(param_1 + (*(unsigned short *)(param_1 + 0x131a) & 1) * 0x60 + param_2 * 4 + 0x10b0)
-    ;
-    *(unsigned short *)(puVar2 + 0x10) = param_7;
-    *(unsigned short *)((int)puVar2 + 0x42) = param_6;
-    *(unsigned short *)(puVar2 + 0x11) = param_5;
-    *(unsigned short *)((int)puVar2 + 0x46) = param_4;
-    *(unsigned short *)(puVar2 + 0x12) = param_3;
+    puVar2 = *(unsigned int **)(param_1 + (*(unsigned short *)(param_1 + 0x131a) & 1) * 0x60 + (unsigned int)param_2 * 4 +
+                       0x10b0);
+    *(short *)(puVar2 + 0x10) = param_7;
+    *(short *)((int)puVar2 + 0x42) = param_6;
+    *(short *)(puVar2 + 0x11) = param_5;
+    *(short *)((int)puVar2 + 0x46) = param_4;
+    *(short *)(puVar2 + 0x12) = param_3;
     *puVar2 = *puVar2 | 0x1000000;
   }
   return temp_v0 != 0;

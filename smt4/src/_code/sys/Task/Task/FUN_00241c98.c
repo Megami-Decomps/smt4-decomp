@@ -7,14 +7,13 @@ extern unsigned int DAT_004c5830; /* 0x4c5830 */
 extern unsigned int DAT_004c5834; /* 0x4c5834 */
 extern unsigned int DAT_004c5838; /* 0x4c5838 */
 
-/* Unsupported intrinsic, declaration required: while (LOAD). */
 /* Supplied declaration required: FUN_002c415c. */
 
 
 void FUN_00241c98(int param_1)
 
 {
-/* irregular: 2 native warning(s); review required */
+/* irregular: 1 native warning(s); review required */
   char temp_v0;
   int temp_v1;
   int temp_v2;

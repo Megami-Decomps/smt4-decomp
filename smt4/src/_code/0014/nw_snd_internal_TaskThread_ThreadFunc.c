@@ -5,8 +5,8 @@
 /* Supplied declaration required: FUN_00140e78. */
 /* Supplied declaration required: FUN_002bae7c. */
 /* Supplied declaration required: FUN_002bb020. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 /* Supplied declaration required: nw_snd_internal_TaskManager_ExecuteTask. */
 /* Supplied declaration required: nw_snd_internal_TaskManager_WaitTask. */
 
@@ -14,7 +14,7 @@
 void nw_snd_internal_TaskThread_ThreadFunc(int param_1)
 
 {
-/* irregular: 7 native warning(s); review required */
+/* irregular: 5 native warning(s); review required */
   char temp_v0;
   
   temp_v0 = *(char *)(param_1 + 0x14);

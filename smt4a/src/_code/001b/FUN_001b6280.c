@@ -20,14 +20,13 @@ typedef struct {
 
 extern unsigned char DAT_006433d0; /* 0x6433d0 */
 
-/* Supplied declaration required: nn_snd_CTR_Dspsnd_SetChannelMix. */
+extern unsigned char nn_snd_CTR_Dspsnd_SetChannelMix(unsigned int, unsigned char, unsigned int);
 
 
-void FUN_001b6280(unsigned int *param_1)
+unsigned char FUN_001b6280(unsigned int *param_1)
 
 {
-/* irregular: 1 native warning(s); review required */
-  float temp_v0;
+  unsigned char temp_v0;
   float temp_v1;
   float temp_v2;
   float temp_v3;
@@ -39,20 +38,21 @@ void FUN_001b6280(unsigned int *param_1)
   float temp_v9;
   float temp_v10;
   float temp_v11;
+  float temp_v12;
   
-  temp_v11 = (float)param_1[0x1a];
-  temp_v4 = (float)param_1[0x12] * temp_v11;
-  temp_v0 = (float)param_1[0xe] * temp_v11;
-  temp_v8 = (float)param_1[0x16] * temp_v11;
-  temp_v1 = (float)param_1[0xf] * temp_v11;
-  temp_v5 = (float)param_1[0x13] * temp_v11;
-  temp_v9 = (float)param_1[0x17] * temp_v11;
-  temp_v2 = (float)param_1[0x10] * temp_v11;
-  temp_v6 = (float)param_1[0x14] * temp_v11;
-  temp_v10 = (float)param_1[0x18] * temp_v11;
-  temp_v3 = (float)param_1[0x11] * temp_v11;
-  temp_v7 = (float)param_1[0x15] * temp_v11;
-  temp_v11 = (float)param_1[0x19] * temp_v11;
-  nn_snd_CTR_Dspsnd_SetChannelMix(&DAT_006433d0,*param_1 & 0xff,&temp_v0);
-  return;
+  temp_v12 = (float)param_1[0x1a];
+  temp_v5 = (float)param_1[0x12] * temp_v12;
+  temp_v1 = (float)param_1[0xe] * temp_v12;
+  temp_v9 = (float)param_1[0x16] * temp_v12;
+  temp_v2 = (float)param_1[0xf] * temp_v12;
+  temp_v6 = (float)param_1[0x13] * temp_v12;
+  temp_v10 = (float)param_1[0x17] * temp_v12;
+  temp_v3 = (float)param_1[0x10] * temp_v12;
+  temp_v7 = (float)param_1[0x14] * temp_v12;
+  temp_v11 = (float)param_1[0x18] * temp_v12;
+  temp_v4 = (float)param_1[0x11] * temp_v12;
+  temp_v8 = (float)param_1[0x15] * temp_v12;
+  temp_v12 = (float)param_1[0x19] * temp_v12;
+  temp_v0 = nn_snd_CTR_Dspsnd_SetChannelMix((unsigned int)&DAT_006433d0,(unsigned char)*param_1,(unsigned int)&temp_v1);
+  return temp_v0;
 }

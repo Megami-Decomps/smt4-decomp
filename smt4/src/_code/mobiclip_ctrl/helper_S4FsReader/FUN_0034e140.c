@@ -17,13 +17,13 @@ extern int DAT_0044d134; /* 0x44d134 */
 /* Supplied declaration required: FUN_002c40f8. */
 /* Supplied declaration required: FUN_002c415c. */
 /* Supplied declaration required: FUN_002c526c. */
-/* Supplied declaration required: nn_os_Thread_FinalizeImpl. */
+extern void nn_os_Thread_FinalizeImpl(unsigned int);
 
 
 void FUN_0034e140(unsigned int *param_1)
 
 {
-/* irregular: 7 native warning(s); review required */
+/* irregular: 6 native warning(s); review required */
   int temp_v0;
   unsigned char *puVar2;
   int uStack_20;
@@ -41,7 +41,7 @@ void FUN_0034e140(unsigned int *param_1)
       FUN_002c526c();
     }
     *(unsigned char *)(param_1 + 0xd) = 1;
-    nn_os_Thread_FinalizeImpl(param_1 + 0xc);
+    nn_os_Thread_FinalizeImpl((unsigned int)(param_1 + 0xc));
     if (param_1[0xc] != 0) {
       software_interrupt(0x23);
       param_1[0xc] = 0;

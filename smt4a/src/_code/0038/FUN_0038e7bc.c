@@ -236,7 +236,7 @@ void FUN_0038e7bc(int param_1)
             temp_v20 = romwright_sqrt_4(temp_v10 * temp_v10 + temp_v9 * temp_v9 + DAT_006472e4 * DAT_006472e4);
             temp_v4 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v20 < temp_v9) << 0x1f) |
                     ((unsigned int)(temp_v20 == temp_v9) << 0x1e);
-            in_fpscr = temp_v4 | ((unsigned int)(NAN(temp_v20) || NAN(temp_v9)) << 0x1c);
+            in_fpscr = temp_v4 | ((unsigned int)((temp_v20 != temp_v20) || (temp_v9 != temp_v9)) << 0x1c);
             temp_v0 = (unsigned char)(temp_v4 >> 0x18);
             DAT_006472dc = temp_v10;
             DAT_006472e0 = temp_v9;

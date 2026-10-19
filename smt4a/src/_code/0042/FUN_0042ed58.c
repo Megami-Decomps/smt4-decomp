@@ -20,28 +20,27 @@ extern signed char DAT_005b448c; /* 0x5b448c */
 /* Supplied declaration required: FUN_002e6354. */
 /* Supplied declaration required: FUN_0030fc80. */
 /* Supplied declaration required: FUN_0042d5b4. */
-extern int *FUN_0042d6a8(void);
+extern unsigned int FUN_0042d6a8(void);
 /* Supplied declaration required: FUN_0042e870. */
-/* Supplied declaration required: nn_cec_CTR_Base64Str2CecTitleId. */
+extern unsigned int nn_cec_CTR_Base64Str2CecTitleId(unsigned char *);
 /* Supplied declaration required: nn_cec_CTR_MessageBox_GetMessageBoxNum. */
-/* Supplied declaration required: nn_cec_CTR_MessageBox_ReadOutBoxIndex. */
-/* Supplied declaration required: nn_cec_CTR_MessageBox_SetMessageBoxData. */
-/* Supplied declaration required: nn_cec_CTR_MessageBox_WriteBoxInfo. */
-/* Supplied declaration required: nn_cec_CTR_MessageBox_WriteMessageBoxInfo. */
-/* Supplied declaration required: nn_cec_CTR_MessageBox_WriteMessageBoxList. */
+extern unsigned int nn_cec_CTR_MessageBox_ReadOutBoxIndex(unsigned int);
+extern unsigned int nn_cec_CTR_MessageBox_SetMessageBoxData(unsigned int, unsigned int, unsigned int, unsigned int);
+extern unsigned int nn_cec_CTR_MessageBox_WriteBoxInfo(unsigned int, int, unsigned int, unsigned int *);
+extern unsigned int nn_cec_CTR_MessageBox_WriteMessageBoxInfo(unsigned int);
+extern unsigned int nn_cec_CTR_MessageBox_WriteMessageBoxList(unsigned int);
 /* Supplied declaration required: rt_memcpy. */
 
 
-int * FUN_0042ed58(int *param_1,unsigned int param_2,int param_3,int param_4,unsigned int param_5,
-                  unsigned int param_6,unsigned int param_7,unsigned int param_8,int param_9,int param_10,
-                  unsigned int param_11,unsigned int param_12,unsigned int param_13)
+unsigned int FUN_0042ed58(int *param_1,unsigned int param_2,int param_3,int param_4,unsigned int param_5,unsigned int param_6,
+                 unsigned int param_7,unsigned int param_8,int param_9,int param_10,unsigned int param_11,
+                 unsigned int param_12,unsigned int param_13)
 
 {
-/* irregular: 13 native warning(s); review required */
-  int *piVar1;
+/* irregular: 7 native warning(s); review required */
   unsigned int temp_v0;
+  int *piVar2;
   int *piVar3;
-  int *piVar4;
   unsigned char temp_v1;
   unsigned char temp_v2;
   unsigned char *temp_v3;
@@ -62,14 +61,14 @@ int * FUN_0042ed58(int *param_1,unsigned int param_2,int param_3,int param_4,uns
   uStack_30 = param_2;
   temp_v9 = param_3;
   temp_v10 = param_4;
-  piVar1 = (int *)FUN_0042d6a8();
+  temp_v0 = FUN_0042d6a8();
   if (param_2 == 0) {
-    piVar1 = (int *)0xc8810bea;
+    temp_v0 = 0xc8810bea;
   }
   DAT_005b448c = '\x01';
   param_1[1] = param_2;
   if (param_2 == 0) {
-    return piVar1;
+    return temp_v0;
   }
   temp_v0 = param_9 + param_10;
   temp_v2 = temp_v0 >= 0x100000;
@@ -92,26 +91,25 @@ int * FUN_0042ed58(int *param_1,unsigned int param_2,int param_3,int param_4,uns
       }
       if ((param_11 != 0 && temp_v0 != 0) && ((param_9 != 0 && param_10 != 0) && param_13 != 0)) {
         if (temp_v10 != 0) {
-          piVar1 = param_1;
+          piVar2 = param_1;
           nn_cec_CTR_MessageBox_GetMessageBoxNum(param_1,0);
-          piVar4 = (int *)0x0;
-          if (piVar1 != (int *)0x0) {
+          piVar3 = (int *)0x0;
+          if (piVar2 != (int *)0x0) {
             do {
-              piVar3 = param_1 + (int)piVar4 * 4 + 7;
-              nn_cec_CTR_Base64Str2CecTitleId();
-              if ((unsigned int)piVar3 >> 8 == param_2 >> 8) {
+              temp_v0 = nn_cec_CTR_Base64Str2CecTitleId((unsigned char *)(param_1 + (int)piVar3 * 4 + 7));
+              if (temp_v0 >> 8 == param_2 >> 8) {
                 if (DAT_005b448c != '\0') {
                   FUN_0042d5b4(0);
                 }
                 param_1[1] = 0;
-                return (int *)0xc8e10868;
+                return 0xc8e10868;
               }
-              piVar4 = (int *)((int)piVar4 + 1);
-            } while (piVar4 < piVar1);
+              piVar3 = (int *)((int)piVar3 + 1);
+            } while (piVar3 < piVar2);
           }
-          piVar1 = param_1;
+          piVar2 = param_1;
           nn_cec_CTR_MessageBox_GetMessageBoxNum(param_1,1);
-          if (piVar1 < (int *)0xc) {
+          if (piVar2 < (int *)0xc) {
             param_1[0x81] = param_9;
             temp_v3 = temp_v7;
             param_1[0x83] = param_11;
@@ -122,14 +120,14 @@ int * FUN_0042ed58(int *param_1,unsigned int param_2,int param_3,int param_4,uns
             (**(romwright_code **)(*param_1 + 8))(param_1,param_1[1],0xb,8);
             temp_v3 = temp_v6;
             (**(romwright_code **)(*param_1 + 8))(param_1,param_1[1],0xc,8);
-            nn_cec_CTR_MessageBox_WriteBoxInfo(param_1,0,param_1 + 0x7f,param_1 + 0x87);
+            nn_cec_CTR_MessageBox_WriteBoxInfo((unsigned int)param_1,0,(unsigned int)(param_1 + 0x7f),(unsigned int *)(param_1 + 0x87));
             temp_v3 = temp_v6;
             (**(romwright_code **)(*param_1 + 8))(param_1,param_1[1],0xd,8);
-            nn_cec_CTR_MessageBox_WriteBoxInfo(param_1,1,param_1 + 0xeb,param_1 + 0xf3);
+            nn_cec_CTR_MessageBox_WriteBoxInfo((unsigned int)param_1,1,(unsigned int)(param_1 + 0xeb),(unsigned int *)(param_1 + 0xf3));
             temp_v3 = (unsigned char *)0x0;
             temp_v0 = (**(romwright_code **)(*param_1 + 0x28))(param_1,param_1[1],0,0);
             if ((temp_v0 & 0x80000000) == 0) {
-              nn_cec_CTR_MessageBox_ReadOutBoxIndex(param_1);
+              nn_cec_CTR_MessageBox_ReadOutBoxIndex((unsigned int)param_1);
             }
             FUN_002e6354(param_1 + 0x67,0x60);
             *(unsigned short *)(param_1 + 0x67) = 0x6363;
@@ -145,51 +143,47 @@ int * FUN_0042ed58(int *param_1,unsigned int param_2,int param_3,int param_4,uns
             param_1[0x74] = (int)temp_v3;
             param_1[0x75] = temp_v4;
             param_1[0x76] = iStack_58;
-            piVar1 = param_1;
-            nn_cec_CTR_MessageBox_WriteMessageBoxInfo();
-            if ((int)piVar1 < 0) {
+            temp_v0 = nn_cec_CTR_MessageBox_WriteMessageBoxInfo((unsigned int)param_1);
+            if ((int)temp_v0 < 0) {
               temp_v3 = (unsigned char *)0x0;
               temp_v4 = 0;
               (**(romwright_code **)(*param_1 + 0x24))(param_1,param_1[1],0xb,0);
-              nn_cec_CTR_MessageBox_WriteMessageBoxList(param_1);
+              nn_cec_CTR_MessageBox_WriteMessageBoxList((unsigned int)param_1);
               FUN_0042e870(param_1,0);
             }
             else {
-              piVar1 = param_1;
-              nn_cec_CTR_MessageBox_WriteMessageBoxList();
-              if ((int)piVar1 < 0) {
+              temp_v0 = nn_cec_CTR_MessageBox_WriteMessageBoxList((unsigned int)param_1);
+              if ((int)temp_v0 < 0) {
                 temp_v3 = (unsigned char *)0x0;
                 temp_v4 = 0;
                 (**(romwright_code **)(*param_1 + 0x24))(param_1,param_1[1],0xb,0);
-                nn_cec_CTR_MessageBox_WriteMessageBoxList(param_1);
+                nn_cec_CTR_MessageBox_WriteMessageBoxList((unsigned int)param_1);
                 FUN_0042e870(param_1,0);
               }
               else {
                 if (param_8 >= 0x81) {
-                  piVar1 = (int *)0xc8e1086a;
+                  temp_v0 = 0xc8e1086a;
                 }
                 else {
-                  piVar1 = param_1;
-                  nn_cec_CTR_MessageBox_SetMessageBoxData(param_1,0x6e,param_7);
+                  temp_v0 = nn_cec_CTR_MessageBox_SetMessageBoxData((unsigned int)param_1,0x6e,param_7,param_8);
                 }
-                if ((int)piVar1 < 0) {
+                if ((int)temp_v0 < 0) {
                   temp_v3 = (unsigned char *)0x0;
                   temp_v4 = 0;
                   (**(romwright_code **)(*param_1 + 0x24))(param_1,param_1[1],0xb,0);
-                  nn_cec_CTR_MessageBox_WriteMessageBoxList(param_1);
+                  nn_cec_CTR_MessageBox_WriteMessageBoxList((unsigned int)param_1);
                   FUN_0042e870(param_1,0);
                 }
                 else {
-                  piVar1 = param_1;
-                  nn_cec_CTR_MessageBox_SetMessageBoxData(param_1,0x65,param_5,param_6);
-                  if (((unsigned int)piVar1 & 0x80000000) == 0) {
+                  temp_v0 = nn_cec_CTR_MessageBox_SetMessageBoxData((unsigned int)param_1,0x65,param_5,param_6);
+                  if ((temp_v0 & 0x80000000) == 0) {
                     DAT_005b448b = 1;
-                    return (int *)0x0;
+                    return 0;
                   }
                   temp_v3 = (unsigned char *)0x0;
                   temp_v4 = 0;
                   (**(romwright_code **)(*param_1 + 0x24))(param_1,param_1[1],0xb,0);
-                  nn_cec_CTR_MessageBox_WriteMessageBoxList(param_1);
+                  nn_cec_CTR_MessageBox_WriteMessageBoxList((unsigned int)param_1);
                   FUN_0042e870(param_1,0);
                 }
               }
@@ -198,20 +192,20 @@ int * FUN_0042ed58(int *param_1,unsigned int param_2,int param_3,int param_4,uns
               FUN_0042d5b4(0);
             }
             param_1[1] = 0;
-            return piVar1;
+            return temp_v0;
           }
           if (DAT_005b448c != '\0') {
             FUN_0042d5b4(0);
           }
           param_1[1] = 0;
-          return (int *)0xc8e10867;
+          return 0xc8e10867;
         }
         param_1[1] = 0;
-        return (int *)0xe0e10bfd;
+        return 0xe0e10bfd;
       }
     }
   }
   FUN_0042d5b4(0);
   param_1[1] = 0;
-  return (int *)0xe0e10bfd;
+  return 0xe0e10bfd;
 }

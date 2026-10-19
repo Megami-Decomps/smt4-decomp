@@ -14,14 +14,14 @@ extern int DAT_004d42c4; /* 0x4d42c4 */
 extern int FUN_00129584(unsigned int *, unsigned int);
 extern int FUN_0013af84(unsigned int);
 /* Supplied declaration required: FUN_002bbb2c. */
-/* Supplied declaration required: nn_os_LightEvent_ClearSignal. */
-/* Supplied declaration required: nn_os_LightEvent_Initialize. */
+extern void nn_os_LightEvent_ClearSignal(unsigned int);
+extern void nn_os_LightEvent_Initialize(unsigned int, unsigned char);
 
 
 void FUN_001270f8(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
 
 {
-/* irregular: irregular input(s): in_lr; 4 native warning(s); review required */
+/* irregular: irregular input(s): in_lr; 2 native warning(s); review required */
   int temp_v0;
   unsigned int unaff_r4;
   unsigned int in_lr;

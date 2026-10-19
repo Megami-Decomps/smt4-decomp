@@ -8,8 +8,7 @@ extern unsigned char LAB_00130082; /* 0x130082 */
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 
 
-unsigned int nn_dsp_CTR_DSP_FlushDataCache
-               (unsigned int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
+unsigned int nn_dsp_CTR_DSP_FlushDataCache(unsigned int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
 
 {
 /* irregular: 2 native warning(s); review required */

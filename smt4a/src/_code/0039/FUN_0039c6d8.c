@@ -31,7 +31,7 @@ void FUN_0039c6d8(unsigned char param_1,int param_2)
   temp_v0 = FUN_00187180(5,3);
   temp_v1 = FUN_00192798();
   temp_v0 = FUN_00192748(temp_v0);
-  temp_v2[0] = romwright_piece_3_1(temp_v2[0]._1_3_,param_1);
+  temp_v2[0] = romwright_piece_3_1((((unsigned int)(temp_v2[0]) >> 8) & 0xffffffU),param_1);
   temp_v2[0] = (temp_v2[0] & 0xff0000ff) | (param_2 << 8);
   FUN_00100854(temp_v2,temp_v1,temp_v0,4,&LAB_003372a8);
   return;

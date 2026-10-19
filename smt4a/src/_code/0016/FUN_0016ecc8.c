@@ -15,14 +15,14 @@ typedef struct {
 #endif
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern short nn_hid_CTR_detail_CalculateAccelerationTightly(int, int, int, int);
-/* Supplied declaration required: nn_hidlow_CTR_AccelerometerLifoRing_ReadData. */
+extern void nn_hidlow_CTR_AccelerometerLifoRing_ReadData(unsigned int, unsigned int, int, int *, long long *, int *);
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
 
 
-void FUN_0016ecc8(int *param_1,int param_2,int *param_3,unsigned int param_4)
+void FUN_0016ecc8(int *param_1,int param_2,int *param_3,int param_4)
 
 {
-/* irregular: 1 goto(s); irregular input(s): in_fpscr; 3 native warning(s); review required */
+/* irregular: 1 goto(s); irregular input(s): in_fpscr; 2 native warning(s); review required */
   unsigned int temp_v0;
   short temp_v1;
   short *psVar3;
@@ -31,18 +31,17 @@ void FUN_0016ecc8(int *param_1,int param_2,int *param_3,unsigned int param_4)
   unsigned char temp_v4;
   unsigned int in_fpscr;
   float temp_v5;
-  unsigned long long temp_v6;
-  int *temp_v7;
-  int *temp_v8;
-  float temp_v9;
+  float temp_v6;
+  float temp_v7;
+  unsigned long long temp_v8;
+  int temp_v9;
   
-  temp_v8 = param_1 + 0x13;
-  temp_v7 = param_1 + 0x14;
   nn_hidlow_CTR_AccelerometerLifoRing_ReadData
-            (*(unsigned int *)(*param_1 + 4),param_2,param_4,param_3);
+            (*(unsigned int *)(*param_1 + 4),param_2,param_4,param_3,(long long *)(param_1 + 0x14),
+             param_1 + 0x13);
   temp_v2 = *param_3 - 1;
   if (-1 < temp_v2) {
-    temp_v6 = 0;
+    temp_v8 = 0;
     do {
       psVar3 = (short *)(param_2 + temp_v2 * 6);
       temp_v1 = nn_hid_CTR_detail_CalculateAccelerationTightly
@@ -66,7 +65,7 @@ void FUN_0016ecc8(int *param_1,int param_2,int *param_3,unsigned int param_4)
         psVar3[2] = psVar3[2] - *(short *)((int)param_1 + 0x12);
       }
       if (*(char *)((int)param_1 + 0x49) != '\0') {
-        temp_v5 = (float)temp_v6;
+        temp_v5 = (float)temp_v8;
         temp_v4 = 0;
         if (param_1[6] == 0x3f800000) {
           in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)((float)param_1[7] == temp_v5) << 0x1e);
@@ -116,13 +115,13 @@ void FUN_0016ecc8(int *param_1,int param_2,int *param_3,unsigned int param_4)
             }
           }
         }
-        temp_v7 = (int *)VectorSignedToFloat((int)*psVar3,(unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v9 = (float)VectorSignedToFloat((int)psVar3[2],(unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v8 = (int *)VectorSignedToFloat((int)psVar3[1],(unsigned char)(in_fpscr >> 0x16) & 3);
-        nn_math_ARMv6_VEC3TransformAsm_2AD44C(&temp_v7,param_1 + 6);
-        *psVar3 = (short)(int)(float)temp_v7;
-        psVar3[1] = (short)(int)(float)temp_v8;
-        psVar3[2] = (short)(int)temp_v9;
+        temp_v7 = (float)VectorSignedToFloat((int)*psVar3,(unsigned char)(in_fpscr >> 0x16) & 3);
+        temp_v6 = (float)VectorSignedToFloat((int)psVar3[2],(unsigned char)(in_fpscr >> 0x16) & 3);
+        temp_v5 = (float)VectorSignedToFloat((int)psVar3[1],(unsigned char)(in_fpscr >> 0x16) & 3);
+        nn_math_ARMv6_VEC3TransformAsm_2AD44C(&temp_v9,param_1 + 6);
+        *psVar3 = (short)(int)temp_v7;
+        psVar3[1] = (short)(int)temp_v5;
+        psVar3[2] = (short)(int)temp_v6;
       }
 LAB_0016eed4:
       temp_v2 = temp_v2 - 1;

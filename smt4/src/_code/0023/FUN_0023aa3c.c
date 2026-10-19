@@ -57,7 +57,7 @@ void FUN_0023aa3c(fn_0023aa3c_arg0 *param_1,float *param_2)
   temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v4 < temp_v5) << 0x1f) |
           ((unsigned int)(temp_v4 == temp_v5) << 0x1e);
   temp_v1 = (unsigned char)(temp_v0 >> 0x18);
-  if (!((unsigned char)((temp_v1 >> 6) & 1) || (unsigned char)(temp_v1 >> 7) != (NAN(temp_v4) || NAN(temp_v5)))) {
+  if (!((unsigned char)((temp_v1 >> 6) & 1) || (unsigned char)(temp_v1 >> 7) != ((temp_v4 != temp_v4) || (temp_v5 != temp_v5)))) {
     param_2[1] = temp_v4;
     *param_2 = temp_v4;
     temp_v5 = temp_v4;

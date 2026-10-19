@@ -179,7 +179,7 @@ void FUN_001e5e78(int param_1)
             temp_v15 = *(float *)(temp_v10 + 0x218);
             temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v14 < temp_v15) << 0x1f) |
                     ((unsigned int)(temp_v14 == temp_v15) << 0x1e);
-            in_fpscr = temp_v0 | ((unsigned int)(NAN(temp_v14) || NAN(temp_v15)) << 0x1c);
+            in_fpscr = temp_v0 | ((unsigned int)((temp_v14 != temp_v14) || (temp_v15 != temp_v15)) << 0x1c);
             temp_v2 = (unsigned char)(temp_v0 >> 0x18);
             if (!(unsigned char)((temp_v2 >> 6) & 1) && temp_v2 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
               pcVar13 = (char *)(temp_v10 + 0x1d0);
@@ -212,7 +212,7 @@ void FUN_001e5e78(int param_1)
         temp_v9 = *(int *)(temp_v12 + 0x214);
         temp_v8 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v19 < temp_v15) << 0x1f) |
                  ((unsigned int)(temp_v19 == temp_v15) << 0x1e);
-        in_fpscr = temp_v8 | ((unsigned int)(NAN(temp_v19) || NAN(temp_v15)) << 0x1c);
+        in_fpscr = temp_v8 | ((unsigned int)((temp_v19 != temp_v19) || (temp_v15 != temp_v15)) << 0x1c);
         temp_v2 = (unsigned char)(temp_v8 >> 0x18);
         if (!((unsigned char)((temp_v2 >> 6) & 1) || temp_v2 >> 7 != ((unsigned char)(in_fpscr >> 0x1c) & 1))) {
           if (0 < temp_v9) {

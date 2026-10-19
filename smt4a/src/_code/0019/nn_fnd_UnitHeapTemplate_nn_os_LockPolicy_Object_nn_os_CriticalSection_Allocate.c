@@ -13,9 +13,9 @@ struct fn_00197e44_arg0 {
     int field_0x2c; /* +0x2c */
 };
 
-/* Supplied declaration required: nn_fnd_HeapBase_FillMemory32. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_fnd_HeapBase_FillMemory32(unsigned int, unsigned int, unsigned int);
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 unsigned int *
@@ -23,18 +23,17 @@ nn_fnd_UnitHeapTemplate_nn_os_LockPolicy_Object_nn_os_CriticalSection_Allocate
           (fn_00197e44_arg0 *param_1)
 
 {
-/* irregular: 3 native warning(s); review required */
   unsigned int *puVar1;
   
-  nn_os_CriticalSection_Enter();
+  nn_os_CriticalSection_Enter((unsigned int)(param_1 + 1));
   puVar1 = param_1->field_0x24;
   if (puVar1 != (unsigned int *)0x0) {
     param_1->field_0x24 = (void *)*puVar1;
     param_1->field_0x2c = param_1->field_0x2c + 1;
     if ((param_1->field_0x14 & 1) != 0) {
-      nn_fnd_HeapBase_FillMemory32(puVar1,param_1->field_0x18 + (int)puVar1,0);
+      nn_fnd_HeapBase_FillMemory32((unsigned int)puVar1,param_1->field_0x18 + (int)puVar1,0);
     }
   }
-  nn_os_CriticalSection_Leave(param_1 + 1);
+  nn_os_CriticalSection_Leave((unsigned int)(param_1 + 1));
   return puVar1;
 }

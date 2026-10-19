@@ -26,6 +26,21 @@ struct fn_003fed38_arg1 {
     undefined4 field_0xd4; /* +0xd4 */
 };
 
+#ifndef ROMWRIGHT_FLOAT_BITS_DEFINED
+#define ROMWRIGHT_FLOAT_BITS_DEFINED
+static unsigned int romwright_f2u(float value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.f = value;
+    return bits.u;
+}
+static float romwright_u2f(unsigned int value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.u = value;
+    return bits.f;
+}
+#endif
 /* stack frame of param_2: 35 slot(s), 98 byte(s) */
 typedef struct {
     unsigned int sp64; /* 0x64: local_64 */
@@ -179,7 +194,7 @@ void FUN_003fed38(int param_1,fn_003fed38_arg1 *param_2)
   temp_v6 = *(float *)(param_1 + 0x34);
   param_2->field_0x49 = 0;
   FUN_0018a924(&temp_v11,&temp_v10);
-  temp_v4 = temp_v9 / (temp_v11 / (float)temp_v10);
+  temp_v4 = temp_v9 / (temp_v11 / romwright_u2f((unsigned int)(temp_v10)));
   param_2->field_0x4c = (temp_v4 / temp_v6) * temp_v5;
   param_2->field_0x50 = temp_v8;
   param_2->field_0x54 = 0xbf000000;

@@ -2,6 +2,21 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
+#ifndef ROMWRIGHT_FLOAT_BITS_DEFINED
+#define ROMWRIGHT_FLOAT_BITS_DEFINED
+static unsigned int romwright_f2u(float value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.f = value;
+    return bits.u;
+}
+static float romwright_u2f(unsigned int value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.u = value;
+    return bits.f;
+}
+#endif
 /* stack frame of void: 8 slot(s), 32 byte(s) */
 typedef struct {
     unsigned int sp3C; /* 0x3c: local_3c */
@@ -390,7 +405,7 @@ LAB_0018fbe4:
         temp_v15 = *(float *)(pcVar4 + 0x1e88);
         temp_v16 = *(unsigned int *)(pcVar4 + 0x1e8c);
         temp_v10 = (float)VectorSignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v14 = (char *)(*(float *)(pcVar4 + 0x1e84) + temp_v10 * temp_v11);
+        temp_v14 = (char *)romwright_f2u((float)((*(float *)(pcVar4 + 0x1e84) + temp_v10 * temp_v11)));
         FUN_00293e78(*(unsigned int *)pcVar13,&temp_v14);
         in_s0 = *(float *)(pcVar4 + 0x1e9c);
         FUN_00293e08(*(unsigned int *)pcVar13);
@@ -523,7 +538,7 @@ LAB_0018ffcc:
             *(float *)(pcVar4 + 0x1e94) = temp_v9;
             temp_v3 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v10 < temp_v9) << 0x1f) |
                     ((unsigned int)(temp_v10 == temp_v9) << 0x1e);
-            in_fpscr = temp_v3 | ((unsigned int)(NAN(temp_v10) || NAN(temp_v9)) << 0x1c);
+            in_fpscr = temp_v3 | ((unsigned int)((temp_v10 != temp_v10) || (temp_v9 != temp_v9)) << 0x1c);
             temp_v5 = (unsigned char)(temp_v3 >> 0x18);
             if (!(unsigned char)((temp_v5 >> 6) & 1) && temp_v5 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
               *(float *)(pcVar4 + 0x1e94) = temp_v9 + 360.0f;

@@ -286,16 +286,16 @@ extern unsigned int FUN_002c5bf8(void);
 /* Supplied declaration required: FUN_002c5d5c. */
 extern unsigned int FUN_002c5d80(unsigned int, unsigned int);
 extern unsigned int FUN_002c5da8(unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: nn_applet_CTR_detail_CloseApplication. */
-/* Supplied declaration required: nn_cfg_CTR_Initialize. */
-/* Supplied declaration required: nn_pl_CTR_InitializeGameCoin. */
+extern unsigned int nn_applet_CTR_detail_CloseApplication(unsigned char *, unsigned int, unsigned int);
+extern void nn_cfg_CTR_Initialize(void);
+extern void nn_pl_CTR_InitializeGameCoin(void);
 extern int nngxIsStereoVisionAllowed(void);
 
 
 void FUN_00101308(void)
 
 {
-/* irregular: 3 unstructured edge(s); 2 goto(s); irregular input(s): in_fpscr; 123 native warning(s); review required */
+/* irregular: 3 unstructured edge(s); 2 goto(s); irregular input(s): in_fpscr; 120 native warning(s); review required */
   long long temp_v0;
   long long temp_v1;
   int temp_v2;
@@ -777,7 +777,7 @@ LAB_00101b80:
               if ((int)temp_v24 != 0) {
                 if (DAT_0044d048 != 0) {
                   FUN_002c5630(3);
-                  nn_applet_CTR_detail_CloseApplication(0,0,DAT_0044e368);
+                  nn_applet_CTR_detail_CloseApplication((unsigned char *)0x0,0,DAT_0044e368);
                   temp_v3 = temp_v10;
                 }
                 DAT_00446db3 = 1;
@@ -786,7 +786,7 @@ LAB_00101b80:
             else {
               if (DAT_0044d048 != 0) {
                 FUN_002c5630(3);
-                nn_applet_CTR_detail_CloseApplication(0,0,DAT_0044e368);
+                nn_applet_CTR_detail_CloseApplication((unsigned char *)0x0,0,DAT_0044e368);
                 temp_v3 = temp_v10;
               }
               DAT_00446db3 = 1;
@@ -825,7 +825,7 @@ LAB_00101b80:
     if (temp_v2 != 0) {
       if (DAT_0044d048 != 0) {
         FUN_002c5630(3);
-        nn_applet_CTR_detail_CloseApplication(0,0,DAT_0044e368);
+        nn_applet_CTR_detail_CloseApplication((unsigned char *)0x0,0,DAT_0044e368);
       }
       DAT_00446db3 = 1;
     }
@@ -833,7 +833,7 @@ LAB_00101b80:
   else {
     if (DAT_0044d048 != 0) {
       FUN_002c5630(3);
-      nn_applet_CTR_detail_CloseApplication(0,0,DAT_0044e368);
+      nn_applet_CTR_detail_CloseApplication((unsigned char *)0x0,0,DAT_0044e368);
     }
     DAT_00446db3 = 1;
   }

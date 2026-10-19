@@ -4,16 +4,15 @@
 
 extern unsigned char DAT_0062d6f8; /* 0x62d6f8 */
 
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 unsigned int FUN_00513b50(int param_1,unsigned int *param_2)
 
 {
-/* irregular: 2 native warning(s); review required */
-  nn_os_CriticalSection_Enter(&DAT_0062d6f8);
+  nn_os_CriticalSection_Enter((unsigned int)&DAT_0062d6f8);
   *param_2 = *(unsigned int *)(param_1 + 0x38);
-  nn_os_CriticalSection_Leave(&DAT_0062d6f8);
+  nn_os_CriticalSection_Leave((unsigned int)&DAT_0062d6f8);
   return 1;
 }

@@ -10,7 +10,7 @@ typedef struct {
 extern unsigned char DAT_004eac5c; /* 0x4eac5c */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-extern int nn_os_AddressSpaceManager_Allocate(unsigned char *, int, unsigned int, unsigned int);
+extern unsigned int nn_os_AddressSpaceManager_Allocate(unsigned int, unsigned int, unsigned int, unsigned int);
 
 
 /* WARNING: Removing unreachable block (ram,0x001396ec) */
@@ -21,15 +21,16 @@ int nn_os_SharedMemoryBlock_AttachAndMap
 {
 /* irregular: 2 native warning(s); review required */
   int temp_v0;
+  unsigned int temp_v1;
   
   *(unsigned int *)(param_1 + 0x14) = param_2;
   if (*(int *)(param_1 + 8) != 0) {
     temp_v0 = 0x8a01bf9;
   }
   else {
-    temp_v0 = nn_os_AddressSpaceManager_Allocate
-                      (&DAT_004eac5c,param_1,(param_3 + 0xfffU) & 0xfffff000,0x1000);
-    if (temp_v0 == 0) {
+    temp_v1 = nn_os_AddressSpaceManager_Allocate
+                      ((unsigned int)&DAT_004eac5c,param_1,(param_3 + 0xfffU) & 0xfffff000,0x1000);
+    if (temp_v1 == 0) {
       temp_v0 = -0x279fe7c9;
     }
     else {

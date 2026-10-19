@@ -32,21 +32,21 @@ void FUN_0022b83c(int param_1,float *param_2)
   *param_2 = temp_v3;
   temp_v2 = (unsigned char)(temp_v1 >> 0x18);
   temp_v6 = 0.0f;
-  if (!(unsigned char)((temp_v2 >> 6) & 1) && (unsigned char)(temp_v2 >> 7) == NAN(temp_v7)) {
+  if (!(unsigned char)((temp_v2 >> 6) & 1) && (unsigned char)(temp_v2 >> 7) == (temp_v7 != temp_v7)) {
     temp_v6 = temp_v7;
   }
   temp_v7 = (float)VectorSignedToFloat(temp_v4,(unsigned char)(temp_v1 >> 0x16) & 3);
   param_2[1] = temp_v6;
   temp_v1 = temp_v0 | ((unsigned int)(temp_v3 < temp_v7) << 0x1f) | ((unsigned int)(temp_v3 == temp_v7) << 0x1e);
   temp_v2 = (unsigned char)(temp_v1 >> 0x18);
-  if (!(unsigned char)((temp_v2 >> 6) & 1) && (unsigned char)(temp_v2 >> 7) == (NAN(temp_v3) || NAN(temp_v7))) {
+  if (!(unsigned char)((temp_v2 >> 6) & 1) && (unsigned char)(temp_v2 >> 7) == ((temp_v3 != temp_v3) || (temp_v7 != temp_v7))) {
     temp_v3 = (float)VectorSignedToFloat(temp_v4,(unsigned char)(temp_v1 >> 0x16) & 3);
   }
   *param_2 = temp_v3;
   temp_v3 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(temp_v1 >> 0x16) & 3);
   temp_v0 = temp_v0 | ((unsigned int)(temp_v6 < temp_v3) << 0x1f) | ((unsigned int)(temp_v6 == temp_v3) << 0x1e);
   temp_v2 = (unsigned char)(temp_v0 >> 0x18);
-  if (!(unsigned char)((temp_v2 >> 6) & 1) && (unsigned char)(temp_v2 >> 7) == (NAN(temp_v6) || NAN(temp_v3))) {
+  if (!(unsigned char)((temp_v2 >> 6) & 1) && (unsigned char)(temp_v2 >> 7) == ((temp_v6 != temp_v6) || (temp_v3 != temp_v3))) {
     temp_v6 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(temp_v0 >> 0x16) & 3);
   }
   param_2[1] = temp_v6;

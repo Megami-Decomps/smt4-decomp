@@ -33,16 +33,16 @@ extern unsigned int FUN_00188c94(void);
 extern unsigned int FUN_00188ca4(void);
 extern unsigned int FUN_001c44b4(unsigned int);
 /* Supplied declaration required: FUN_002e6dd4. */
-extern unsigned int nn_fnd_ExpHeapBase_Allocate(int, int, unsigned int, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern unsigned int nn_fnd_ExpHeapBase_Allocate(unsigned int, unsigned int, int, unsigned char, int, unsigned char);
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 extern int nngxGetVramEndAddr(unsigned int);
 
 
 void FUN_001381dc(void)
 
 {
-/* irregular: 10 native warning(s); review required */
+/* irregular: 8 native warning(s); review required */
   int *piVar1;
   unsigned int temp_v0;
   unsigned int *puVar3;
@@ -67,7 +67,7 @@ void FUN_001381dc(void)
     temp_v4 = DAT_005b4070 + 0x88;
     temp_v3 = DAT_005b4070 + 0xe0;
     nn_os_CriticalSection_Enter(temp_v3);
-    temp_v0 = nn_fnd_ExpHeapBase_Allocate(temp_v4,temp_v1 + 0xfe000080,0xffffff80,0,0,0);
+    temp_v0 = nn_fnd_ExpHeapBase_Allocate(temp_v4,temp_v1 + 0xfe000080,-0x80,0,0,0);
     nn_os_CriticalSection_Leave(temp_v3);
     temp_v4 = DAT_005b4070 + 0x88;
     temp_v3 = DAT_005b4070 + 0xe0;

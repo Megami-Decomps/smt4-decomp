@@ -30,7 +30,6 @@ extern int DAT_0044dc20; /* 0x44dc20 */
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Unsupported intrinsic, declaration required: while (INT_ADD). */
 /* Supplied declaration required: FUN_0019e0c0. */
 /* Supplied declaration required: FUN_001ce0fc. */
 /* Supplied declaration required: FUN_001cea8c. */
@@ -173,7 +172,7 @@ extern int aeabi_idivmod(unsigned int, unsigned int);
 unsigned int FUN_0018c0ec(void)
 
 {
-/* irregular: 45 unstructured edge(s); 4 goto(s); 108 native warning(s); review required */
+/* irregular: 45 unstructured edge(s); 4 goto(s); 107 native warning(s); review required */
   char temp_v0;
   long long temp_v1;
   int temp_v2;

@@ -55,7 +55,7 @@ unsigned int FUN_0041210c(int *param_1)
         }
         temp_v6 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(temp_v0 >> 0x16) & 3);
         temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v6 < in_s0) << 0x1f);
-        in_fpscr = temp_v0 | ((unsigned int)(NAN(temp_v6) || NAN(in_s0)) << 0x1c);
+        in_fpscr = temp_v0 | ((unsigned int)((temp_v6 != temp_v6) || (in_s0 != in_s0)) << 0x1c);
         if ((unsigned char)(temp_v0 >> 0x1f) == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
           *(unsigned int *)(temp_v3 + 0x4d80) = 0;
         }

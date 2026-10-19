@@ -3,7 +3,7 @@
 #include "romwright_types.h"
 
 
-void nn_snd_CTR_FxDelay_UpdateBuffer(int param_1,int *param_2)
+void nn_snd_CTR_FxDelay_UpdateBuffer(int param_1,unsigned int param_2)
 
 {
   int temp_v0;
@@ -21,10 +21,10 @@ void nn_snd_CTR_FxDelay_UpdateBuffer(int param_1,int *param_2)
     return;
   }
   temp_v4 = 0;
-  aiStack_38[0] = *param_2;
-  aiStack_38[1] = param_2[1];
-  aiStack_38[2] = param_2[2];
-  aiStack_38[3] = param_2[3];
+  aiStack_38[0] = *(int *)param_2;
+  aiStack_38[1] = *(unsigned int *)(param_2 + 4);
+  aiStack_38[2] = *(unsigned int *)(param_2 + 8);
+  aiStack_38[3] = *(unsigned int *)(param_2 + 0xc);
   temp_v0 = *(int *)(param_1 + 0x40);
   if (*(char *)(param_1 + 0x55) != '\0') {
     do {

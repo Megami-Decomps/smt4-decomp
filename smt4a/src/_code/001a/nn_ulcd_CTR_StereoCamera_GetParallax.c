@@ -3,8 +3,8 @@
 #include "romwright_types.h"
 
 
-void nn_ulcd_CTR_StereoCamera_GetParallax(void)
+float nn_ulcd_CTR_StereoCamera_GetParallax(float param_1,float param_2)
 
 {
-  return;
+  return param_1;
 }

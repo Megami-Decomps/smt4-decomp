@@ -2,6 +2,21 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
+#ifndef ROMWRIGHT_FLOAT_BITS_DEFINED
+#define ROMWRIGHT_FLOAT_BITS_DEFINED
+static unsigned int romwright_f2u(float value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.f = value;
+    return bits.u;
+}
+static float romwright_u2f(unsigned int value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.u = value;
+    return bits.f;
+}
+#endif
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp68; /* 0x68: local_68 */
@@ -93,7 +108,7 @@ void FUN_003919d4(int param_1)
       temp_v6 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v7 < temp_v16) << 0x1f) |
               ((unsigned int)(temp_v7 == temp_v16) << 0x1e);
       temp_v1 = (unsigned char)(temp_v6 >> 0x18);
-      if (!(unsigned char)((temp_v1 >> 6) & 1) && (unsigned char)(temp_v1 >> 7) == (NAN(temp_v7) || NAN(temp_v16))) {
+      if (!(unsigned char)((temp_v1 >> 6) & 1) && (unsigned char)(temp_v1 >> 7) == ((temp_v7 != temp_v7) || (temp_v16 != temp_v16))) {
         temp_v7 = temp_v16;
       }
     }
@@ -111,11 +126,11 @@ void FUN_003919d4(int param_1)
     DAT_006472e8 = *(float *)(temp_v3 + 0x54) + temp_v7;
     temp_v12 = *(float *)(temp_v3 + 0x58) + DAT_006472e8;
     temp_v18 = DAT_005c1104 * temp_v7;
-    temp_v19 = (float)DAT_005c1108 * temp_v7;
+    temp_v19 = romwright_u2f((unsigned int)(DAT_005c1108)) * temp_v7;
     temp_v7 = DAT_005c110c * temp_v7;
     temp_v14 = DAT_005c1100 * DAT_006472e8;
     temp_v15 = DAT_005c1104 * DAT_006472e8;
-    DAT_006472e4 = (float)DAT_005c1108 * DAT_006472e8;
+    DAT_006472e4 = romwright_u2f((unsigned int)(DAT_005c1108)) * DAT_006472e8;
     DAT_006472e8 = DAT_005c110c * DAT_006472e8;
     pfVar8 = DAT_005c1108;
     if (temp_v0 != 0) {
@@ -124,7 +139,7 @@ void FUN_003919d4(int param_1)
     temp_v6 = 0;
     temp_v13 = DAT_005c1100 * temp_v12;
     DAT_006472f0 = DAT_005c1104 * temp_v12;
-    DAT_006472f4 = (float)DAT_005c1108 * temp_v12;
+    DAT_006472f4 = romwright_u2f((unsigned int)(DAT_005c1108)) * temp_v12;
     temp_v12 = DAT_005c110c * temp_v12;
     temp_v26 = temp_v25;
     DAT_006472dc = temp_v14;

@@ -312,7 +312,7 @@ void FUN_002b81ec(void)
             if ((unsigned char)((temp_v0 >> 5) & 1) && !(unsigned char)(temp_v0 >> 6)) {
               temp_v4 = temp_v4 | ((unsigned int)(temp_v18 < temp_v13) << 0x1f) | ((unsigned int)(temp_v18 == temp_v13) << 0x1e)
               ;
-              in_fpscr = temp_v4 | ((unsigned int)(NAN(temp_v18) || NAN(temp_v13)) << 0x1c);
+              in_fpscr = temp_v4 | ((unsigned int)((temp_v18 != temp_v18) || (temp_v13 != temp_v13)) << 0x1c);
               temp_v0 = (unsigned char)(temp_v4 >> 0x18);
               if ((unsigned char)((temp_v0 >> 6) & 1) || temp_v0 >> 7 != ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
                 temp_v26 = *(float *)(DAT_00581288 + 0x14) + temp_v23;
@@ -356,7 +356,7 @@ void FUN_002b81ec(void)
           }
           if (temp_v23 < temp_v14) {
             temp_v4 = temp_v4 | ((unsigned int)(temp_v18 < temp_v13) << 0x1f);
-            if (temp_v18 == temp_v13 || romwright_subpiece_4_1_0(temp_v4 >> 0x1f,0) != (NAN(temp_v18) || NAN(temp_v13))) {
+            if (temp_v18 == temp_v13 || romwright_subpiece_4_1_0(temp_v4 >> 0x1f,0) != ((temp_v18 != temp_v18) || (temp_v13 != temp_v13))) {
               temp_v21 = *(float *)(DAT_00581288 + 0x50) + temp_v23;
             }
             else {
@@ -483,7 +483,7 @@ void FUN_002b81ec(void)
         temp_v23 = *(float *)(temp_v2 + 0x15c0);
         temp_v9 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v14 < temp_v23) << 0x1f) |
                  ((unsigned int)(temp_v14 == temp_v23) << 0x1e);
-        in_fpscr = temp_v9 | ((unsigned int)(NAN(temp_v14) || NAN(temp_v23)) << 0x1c);
+        in_fpscr = temp_v9 | ((unsigned int)((temp_v14 != temp_v14) || (temp_v23 != temp_v23)) << 0x1c);
         temp_v0 = (unsigned char)(temp_v9 >> 0x18);
         if (!(unsigned char)((temp_v0 >> 6) & 1) && temp_v0 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
           FUN_003d2150(0x10000d1);
@@ -561,7 +561,7 @@ void FUN_002b81ec(void)
         temp_v13 = *(float *)(DAT_00581288 + 0x15c);
         temp_v4 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v13 < temp_v18) << 0x1f) |
                 ((unsigned int)(temp_v13 == temp_v18) << 0x1e);
-        temp_v12 = temp_v4 | ((unsigned int)(NAN(temp_v13) || NAN(temp_v18)) << 0x1c);
+        temp_v12 = temp_v4 | ((unsigned int)((temp_v13 != temp_v13) || (temp_v18 != temp_v18)) << 0x1c);
         temp_v0 = (unsigned char)(temp_v4 >> 0x18);
         temp_v13 = temp_v18;
         if (!(unsigned char)((temp_v0 >> 6) & 1) && temp_v0 >> 7 == ((unsigned char)(temp_v12 >> 0x1c) & 1)) {
@@ -571,7 +571,7 @@ void FUN_002b81ec(void)
         temp_v14 = *(float *)(DAT_00581288 + 0x15c);
         temp_v4 = (temp_v12 & 0xfffffff) | ((unsigned int)(temp_v14 < temp_v18) << 0x1f) |
                 ((unsigned int)(temp_v14 == temp_v18) << 0x1e);
-        in_fpscr = temp_v4 | ((unsigned int)(NAN(temp_v14) || NAN(temp_v18)) << 0x1c);
+        in_fpscr = temp_v4 | ((unsigned int)((temp_v14 != temp_v14) || (temp_v18 != temp_v18)) << 0x1c);
         temp_v0 = (unsigned char)(temp_v4 >> 0x18);
         if (!(unsigned char)((temp_v0 >> 6) & 1) && temp_v0 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
           temp_v18 = temp_v14;

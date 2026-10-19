@@ -37,11 +37,11 @@ int FUN_00296284(fn_00296284_arg0 *param_1,int param_2,int param_3)
   temp_v2 = (int)param_1->field_0x52;
   if (temp_v2 == 0) {
     if (param_3 == 0) {
-      param_1->field_0xc = &LAB_00140000;
+      param_1->field_0xc = (undefined4)&LAB_00140000;
       param_1->field_0x10 = 0;
     }
     else {
-      param_1->field_0x10 = &LAB_00140000;
+      param_1->field_0x10 = (undefined4)&LAB_00140000;
       param_1->field_0xc = 0;
     }
     if (param_2 != 0) {

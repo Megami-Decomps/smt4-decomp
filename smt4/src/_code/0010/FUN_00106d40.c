@@ -10,13 +10,13 @@ extern int FUN_0010f588(void);
 extern int FUN_0010feb4(unsigned int *, char *);
 extern int FUN_0010ff1c(void);
 /* Supplied declaration required: FUN_002c131c. */
-/* Supplied declaration required: nn_cfg_CTR_Initialize. */
+extern void nn_cfg_CTR_Initialize(void);
 
 
 void FUN_00106d40(void)
 
 {
-/* irregular: 3 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   int temp_v0;
   
   if (DAT_0044e598 == '\0') {

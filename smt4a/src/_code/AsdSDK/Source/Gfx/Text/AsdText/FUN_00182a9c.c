@@ -36,7 +36,6 @@ extern int FUN_0019be8c(short);
 /* Supplied declaration required: FUN_0019c9b4. */
 /* Supplied declaration required: FUN_0019caa0. */
 /* Supplied declaration required: FUN_0019dcbc. */
-extern int while(short);
 
 
 int FUN_00182a9c(int *param_1)

@@ -39,7 +39,6 @@ extern int DAT_00588c44; /* 0x588c44 */
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Unsupported intrinsic, declaration required: while (INT_ADD). */
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_0010063a. */
 extern unsigned int FUN_0014bf3c(unsigned short, unsigned int);
@@ -207,7 +206,7 @@ extern int FUN_004cc9dc(unsigned short, unsigned short, int);
 unsigned int FUN_00204098(void)
 
 {
-/* irregular: 55 unstructured edge(s); 9 goto(s); irregular input(s): in_fpscr; 132 native warning(s); review required */
+/* irregular: 55 unstructured edge(s); 9 goto(s); irregular input(s): in_fpscr; 131 native warning(s); review required */
   char temp_v0;
   short temp_v1;
   short temp_v2;
@@ -255,7 +254,7 @@ unsigned int FUN_00204098(void)
   float temp_v34;
   unsigned long long temp_v35;
   long long temp_v36;
-  unsigned char temp_v37 [6];
+  unsigned long long temp_v37;
   unsigned int temp_v38;
   short temp_v39 [2];
   int temp_v40;
@@ -845,7 +844,7 @@ LAB_0020524c:
           *(int *)(temp_v6 + 0x7e38) = temp_v16;
           *(int *)(temp_v6 + 0x7e3c) = temp_v16 << 0xc;
           if (temp_v13 != 0) {
-            *temp_v42 = 0xff;
+            *(int *)temp_v42 = 0xff;
             temp_v26 = (unsigned int)*(unsigned short *)(temp_v7 + 0x62);
             FUN_004cc6d4(temp_v7,(int)(short)temp_v13,0);
             FUN_004cd238(temp_v26,temp_v13 & 0xffff);

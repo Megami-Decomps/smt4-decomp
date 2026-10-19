@@ -21,13 +21,13 @@ extern int FUN_002c08f0(void);
 /* Supplied declaration required: FUN_002c415c. */
 /* Supplied declaration required: FUN_002c43b4. */
 /* Supplied declaration required: FUN_002c526c. */
-/* Supplied declaration required: nn_os_Thread_FinalizeImpl. */
+extern void nn_os_Thread_FinalizeImpl(unsigned int);
 
 
 void FUN_0021eda8(void)
 
 {
-/* irregular: 10 native warning(s); review required */
+/* irregular: 9 native warning(s); review required */
   int temp_v0;
   unsigned char *puVar2;
   int temp_v1;

@@ -18,19 +18,19 @@ extern unsigned int DAT_004e4138; /* 0x4e4138 */
 /* Supplied declaration required: FUN_002c5434. */
 extern int FUN_002c55b4(void);
 extern int FUN_002c55c4(void);
-/* Supplied declaration required: nn_os_LightEvent_Initialize. */
+extern void nn_os_LightEvent_Initialize(unsigned int, unsigned char);
 
 
 unsigned int FUN_00103ec8(void)
 
 {
-/* irregular: 7 native warning(s); review required */
+/* irregular: 6 native warning(s); review required */
   int temp_v0;
   unsigned int temp_v1;
   
   temp_v1 = 1;
-  nn_os_LightEvent_Initialize(&DAT_0046519c,0);
-  nn_os_LightEvent_Initialize(&DAT_004651a4,0);
+  nn_os_LightEvent_Initialize((unsigned int)&DAT_0046519c,0);
+  nn_os_LightEvent_Initialize((unsigned int)&DAT_004651a4,0);
   FUN_002c38fc(&DAT_004e4138);
   DAT_00465198 = 1;
   FUN_002c5434();

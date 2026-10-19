@@ -34,7 +34,7 @@ void FUN_004ba890(int param_1)
   temp_v1 = *(unsigned int *)(temp_v0 + 0x1180);
   if ((pcVar6 != (romwright_code *)0x0) || (((temp_v1 & 1) != 0 && (temp_v1 != 0)))) {
     if ((temp_v1 & 1) != 0) {
-      pcVar6 = *(romwright_code **)(pcVar6 + *(int *)(param_1 + ((int)temp_v1 >> 1)));
+      pcVar6 = *(romwright_code **)((unsigned char *)pcVar6 + *(int *)(param_1 + ((int)temp_v1 >> 1)));
     }
     (*pcVar6)();
   }

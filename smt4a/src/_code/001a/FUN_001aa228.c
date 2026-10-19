@@ -11,14 +11,14 @@ typedef struct {
 /* Supplied declaration required: FUN_001af27c. */
 /* Supplied declaration required: FUN_001af330. */
 /* Supplied declaration required: aeabi_uidivmod. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 void FUN_001aa228(int *param_1,unsigned int param_2)
 
 {
-/* irregular: 7 native warning(s); review required */
+/* irregular: 5 native warning(s); review required */
   unsigned char temp_v0;
   int temp_v1;
   int *piVar3;
@@ -33,10 +33,10 @@ void FUN_001aa228(int *param_1,unsigned int param_2)
   *piVar3 = temp_v1;
   while( 1 ) {
     piVar3 = param_1 + 5;
-    nn_os_CriticalSection_Enter(piVar3);
+    nn_os_CriticalSection_Enter((unsigned int)piVar3);
     temp_v2 = param_1[10];
     if (temp_v2 < (unsigned int)param_1[8]) break;
-    nn_os_CriticalSection_Leave(piVar3);
+    nn_os_CriticalSection_Leave((unsigned int)piVar3);
     FUN_001af27c(param_1 + 3);
   }
   aeabi_uidivmod(param_1[9] + temp_v2,param_1[8],param_1[9],temp_v2,temp_v1);
@@ -45,7 +45,7 @@ void FUN_001aa228(int *param_1,unsigned int param_2)
   if (0 < param_1[0xb]) {
     FUN_001af330(param_1 + 1,1);
   }
-  nn_os_CriticalSection_Leave(piVar3);
+  nn_os_CriticalSection_Leave((unsigned int)piVar3);
   param_1 = param_1 + 0xc;
   do {
     temp_v0 = (unsigned char)hasExclusiveAccess(param_1);

@@ -15,26 +15,30 @@ typedef struct {
 
 extern unsigned char LAB_00427334; /* 0x427334 */
 
+#ifndef ROMWRIGHT_PIECE_4_4_DEFINED
+#define ROMWRIGHT_PIECE_4_4_DEFINED
+#define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
+#endif
 /* Supplied declaration required: FUN_00102b6c. */
 /* Supplied declaration required: FUN_001884b0. */
 /* Supplied declaration required: FUN_001b57a8. */
 extern int FUN_002e783c(void);
 /* Supplied declaration required: FUN_0042b17c. */
 /* Supplied declaration required: FUN_0043c2f4. */
-/* Supplied declaration required: nn_fs_CTR_MPCore_detail_UserFileSystem_TryReadFile. */
+extern unsigned int nn_fs_CTR_MPCore_detail_UserFileSystem_TryReadFile(int *, unsigned int, long long, unsigned int, unsigned int);
 
 
 void FUN_0042718c(unsigned int *param_1,int *param_2,unsigned int param_3)
 
 {
-/* irregular: 6 native warning(s); review required */
+/* irregular: irregular input(s): in_stack_ffffff34; 5 native warning(s); review required */
   int temp_v0;
   int *piVar2;
-  unsigned char *puVar3;
-  int temp_v1;
+  unsigned int temp_v1;
   int temp_v2;
   int temp_v3;
-  unsigned int temp_v4;
+  int temp_v4;
+  unsigned int in_stack_ffffff34;
   unsigned char temp_v5 [96];
   int temp_v6;
   unsigned char *temp_v7;
@@ -43,7 +47,7 @@ void FUN_0042718c(unsigned int *param_1,int *param_2,unsigned int param_3)
   unsigned char temp_v10 [48];
   int temp_v11;
   unsigned int uStack_24;
-  unsigned char temp_v12 [8];
+  int aiStack_20 [2];
   
   if (*param_2 == 0 && param_2[1] == 0) {
     FUN_001b57a8(param_1,0xe0a13882);
@@ -52,33 +56,30 @@ void FUN_0042718c(unsigned int *param_1,int *param_2,unsigned int param_3)
   FUN_0043c2f4(temp_v10,0x30,&LAB_00427334);
   FUN_00102b6c(temp_v5,temp_v10,0x30);
   temp_v9 = 0;
-  temp_v2 = *param_2;
-  temp_v1 = param_2[1];
+  temp_v3 = *param_2;
+  temp_v2 = param_2[1];
   temp_v7 = temp_v5;
   piVar2 = &temp_v9;
   temp_v6 = 4;
   temp_v0 = FUN_002e783c();
   temp_v8 = (temp_v0 + 1) * 2;
-  temp_v3 = 1;
-  FUN_0042b17c(piVar2,temp_v2,temp_v1,&temp_v6);
+  temp_v4 = 1;
+  FUN_0042b17c(piVar2,temp_v3,temp_v2,&temp_v6);
   if (((((unsigned int)piVar2 & 0x3fc00) == 0x4400) && (((unsigned int)piVar2 & 0x3ff) >= 100)) &&
      (((unsigned int)piVar2 & 0x3ff) < 0xb4)) {
-    FUN_001b57a8(&temp_v3,0xd881388c);
+    FUN_001b57a8(&temp_v4,0xd881388c);
   }
   else {
     if (-1 < (int)piVar2) {
       temp_v4 = 0x1200;
-      puVar3 = temp_v12;
-      temp_v3 = param_3;
-      nn_fs_CTR_MPCore_detail_UserFileSystem_TryReadFile(puVar3,temp_v9,0,0);
-      if ((int)puVar3 < 0) {
-        FUN_001b57a8(&temp_v3,puVar3);
-        temp_v11 = temp_v3;
+      temp_v1 = nn_fs_CTR_MPCore_detail_UserFileSystem_TryReadFile
+                        (aiStack_20,temp_v9,romwright_piece_4_4(0x1200,param_3),0,0);
+      if ((int)temp_v1 < 0) {
+        temp_v11 = param_3;
         uStack_24 = temp_v4;
+        FUN_001b57a8(&temp_v4,temp_v1);
         if (temp_v9 != 0) {
           FUN_001884b0();
-          temp_v11 = temp_v3;
-          uStack_24 = temp_v4;
         }
       }
       else {
@@ -91,12 +92,12 @@ void FUN_0042718c(unsigned int *param_1,int *param_2,unsigned int param_3)
       param_1[1] = uStack_24;
       return;
     }
-    FUN_001b57a8(&temp_v3,piVar2);
+    FUN_001b57a8(&temp_v4,piVar2);
   }
   if (temp_v9 != 0) {
     FUN_001884b0();
   }
-  *param_1 = temp_v3;
-  param_1[1] = temp_v4;
+  *param_1 = temp_v4;
+  param_1[1] = in_stack_ffffff34;
   return;
 }

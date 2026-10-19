@@ -119,7 +119,7 @@ void FUN_002dda88(int param_1)
         temp_v1 = 1;
         temp_v5 = (in_fpscr & 0xfffffff) | ((unsigned int)(in_s0 < 0.0f) << 0x1f) |
                 ((unsigned int)(in_s0 == 0.0f) << 0x1e);
-        in_fpscr = temp_v5 | ((unsigned int)NAN(in_s0) << 0x1c);
+        in_fpscr = temp_v5 | ((unsigned int)(in_s0 != in_s0) << 0x1c);
         temp_v0 = (unsigned char)(temp_v5 >> 0x18);
         temp_v10 = temp_v9;
         if (!(unsigned char)((temp_v0 >> 6) & 1) && temp_v0 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
@@ -135,7 +135,7 @@ void FUN_002dda88(int param_1)
         temp_v1 = 0;
         temp_v5 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v10 < 0.0f) << 0x1f) |
                 ((unsigned int)(temp_v10 == 0.0f) << 0x1e);
-        in_fpscr = temp_v5 | ((unsigned int)NAN(temp_v10) << 0x1c);
+        in_fpscr = temp_v5 | ((unsigned int)(temp_v10 != temp_v10) << 0x1c);
         temp_v0 = (unsigned char)(temp_v5 >> 0x18);
         if (!((unsigned char)((temp_v0 >> 6) & 1) || temp_v0 >> 7 != ((unsigned char)(in_fpscr >> 0x1c) & 1))) {
           FUN_0024b830();
@@ -186,7 +186,7 @@ void FUN_002dda88(int param_1)
             temp_v13 = (float)temp_v18;
             temp_v5 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v13 < temp_v14) << 0x1f) |
                     ((unsigned int)(temp_v13 == temp_v14) << 0x1e);
-            in_fpscr = temp_v5 | ((unsigned int)(NAN(temp_v13) || NAN(temp_v14)) << 0x1c);
+            in_fpscr = temp_v5 | ((unsigned int)((temp_v13 != temp_v13) || (temp_v14 != temp_v14)) << 0x1c);
             temp_v0 = (unsigned char)(temp_v5 >> 0x18);
             if (!(unsigned char)((temp_v0 >> 6) & 1) && temp_v0 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
               temp_v14 = temp_v13;
@@ -229,7 +229,7 @@ void FUN_002dda88(int param_1)
             temp_v12 = (float)temp_v18;
             temp_v5 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v3 < temp_v12) << 0x1f) |
                     ((unsigned int)(temp_v3 == temp_v12) << 0x1e);
-            temp_v11 = temp_v5 | ((unsigned int)(NAN(temp_v3) || NAN(temp_v12)) << 0x1c);
+            temp_v11 = temp_v5 | ((unsigned int)((temp_v3 != temp_v3) || (temp_v12 != temp_v12)) << 0x1c);
             temp_v0 = (unsigned char)(temp_v5 >> 0x18);
             DAT_004ea91c = temp_v14;
             DAT_004ea920 = temp_v13;

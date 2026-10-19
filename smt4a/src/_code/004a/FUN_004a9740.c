@@ -69,11 +69,11 @@ void FUN_004a9740(unsigned int param_1,int param_2,int param_3,unsigned int para
     temp_v8 = 240.0f - temp_v8;
     temp_v5 = in_fpscr & 0xfffffff;
     temp_v0 = temp_v5 | ((unsigned int)(temp_v10 < temp_v8) << 0x1f) | ((unsigned int)(temp_v10 == temp_v8) << 0x1e);
-    in_fpscr = temp_v0 | ((unsigned int)(NAN(temp_v10) || NAN(temp_v8)) << 0x1c);
+    in_fpscr = temp_v0 | ((unsigned int)((temp_v10 != temp_v10) || (temp_v8 != temp_v8)) << 0x1c);
     temp_v1 = (unsigned char)(temp_v0 >> 0x18);
     if ((unsigned char)((temp_v1 >> 6) & 1) || temp_v1 >> 7 != ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
       temp_v5 = temp_v5 | ((unsigned int)(temp_v10 < 0.0f) << 0x1f) | ((unsigned int)(temp_v10 == 0.0f) << 0x1e);
-      in_fpscr = temp_v5 | ((unsigned int)NAN(temp_v10) << 0x1c);
+      in_fpscr = temp_v5 | ((unsigned int)(temp_v10 != temp_v10) << 0x1c);
       temp_v1 = (unsigned char)(temp_v5 >> 0x18);
       temp_v8 = temp_v10;
       if ((unsigned char)((temp_v1 >> 6) & 1) || temp_v1 >> 7 != ((unsigned char)(in_fpscr >> 0x1c) & 1)) {

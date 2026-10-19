@@ -17,14 +17,14 @@ typedef struct {
 /* Supplied declaration required: FUN_002c52f8. */
 /* Supplied declaration required: FUN_003573a4. */
 /* Supplied declaration required: ll_sdiv. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 void FUN_0034e020(int *param_1)
 
 {
-/* irregular: 6 native warning(s); review required */
+/* irregular: 4 native warning(s); review required */
   unsigned int temp_v0;
   int temp_v1;
   unsigned int temp_v2;
@@ -38,9 +38,9 @@ void FUN_0034e020(int *param_1)
       FUN_002c526c();
     }
     if (temp_v3[0] != 0) break;
-    nn_os_CriticalSection_Enter(param_1 + 0x10);
+    nn_os_CriticalSection_Enter((unsigned int)(param_1 + 0x10));
     if (0x40000U - (param_1[2] - *param_1) < 0x10000) {
-      nn_os_CriticalSection_Leave(param_1 + 0x10,param_1[3],*param_1,param_1[1]);
+      nn_os_CriticalSection_Leave((unsigned int)(param_1 + 0x10));
     }
     else {
       temp_v2 = param_1[4] - param_1[2];
@@ -62,7 +62,7 @@ void FUN_0034e020(int *param_1)
       temp_v2 = param_1[2];
       param_1[2] = temp_v2 + temp_v0;
       param_1[3] = param_1[3] + (unsigned int)romwright_carry_4(temp_v2,temp_v0);
-      nn_os_CriticalSection_Leave(param_1 + 0x10);
+      nn_os_CriticalSection_Leave((unsigned int)(param_1 + 0x10));
     }
   }
   return;

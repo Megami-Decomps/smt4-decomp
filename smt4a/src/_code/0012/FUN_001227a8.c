@@ -44,7 +44,7 @@ void FUN_001227a8(int param_1,unsigned char *param_2,unsigned int param_3,unsign
   temp_v5 = param_4;
   temp_v0 = FUN_002e6e26();
   temp_v3 = &DAT_0055b294;
-  temp_v4 = romwright_piece_3_1(temp_v4._1_3_,1);
+  temp_v4 = romwright_piece_3_1((((unsigned int)(temp_v4) >> 8) & 0xffffffU),1);
   temp_v5 = temp_v0 + 0x58;
   temp_v1 = FUN_002f73b8();
   if (temp_v1 != 0) {

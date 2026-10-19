@@ -128,7 +128,7 @@ void FUN_00162758(float *param_1,unsigned int *param_2,unsigned int param_3,int 
   piVar13 = (int *)((int)&iStack_94 + ((int)pcStack_8c >> 1));
   pcVar12 = pcStack_90;
   if (((unsigned int)pcStack_8c & 1) != 0) {
-    pcVar12 = *(romwright_code **)(pcStack_90 + *piVar13);
+    pcVar12 = *(romwright_code **)((unsigned char *)pcStack_90 + *piVar13);
   }
   temp_v3 = (*pcVar12)(piVar13);
   if (temp_v2 >= iStack_94 - param_4) {
@@ -150,7 +150,7 @@ void FUN_00162758(float *param_1,unsigned int *param_2,unsigned int param_3,int 
           VectorUnsignedToFloat((unsigned int)bStack_81,(unsigned char)(temp_v7 >> 0x16) & 3);
           temp_v14 = (float)VectorSignedToFloat((int)cStack_82,(unsigned char)(temp_v7 >> 0x16) & 3);
           temp_v12 = (float)VectorSignedToFloat((int)cStack_84,(unsigned char)(temp_v7 >> 0x16) & 3);
-          if (!((unsigned char)((temp_v1 >> 6) & 1) || (unsigned char)(temp_v1 >> 7) != (NAN(temp_v13) || NAN(temp_v21)))) {
+          if (!((unsigned char)((temp_v1 >> 6) & 1) || (unsigned char)(temp_v1 >> 7) != ((temp_v13 != temp_v13) || (temp_v21 != temp_v21)))) {
             VectorUnsignedToFloat(temp_v5,(unsigned char)(temp_v7 >> 0x16) & 3);
             cStack_84 = (char)(int)(temp_v12 * temp_v13);
             cStack_82 = (char)(int)(temp_v14 * temp_v13);
@@ -159,12 +159,12 @@ void FUN_00162758(float *param_1,unsigned int *param_2,unsigned int param_3,int 
             temp_v7 = temp_v9 | ((unsigned int)(temp_v15 < temp_v21) << 0x1f) | ((unsigned int)(temp_v15 == temp_v21) << 0x1e)
             ;
             temp_v1 = (unsigned char)(temp_v7 >> 0x18);
-            if (!(unsigned char)((temp_v1 >> 6) & 1) && (unsigned char)(temp_v1 >> 7) == (NAN(temp_v15) || NAN(temp_v21))) {
+            if (!(unsigned char)((temp_v1 >> 6) & 1) && (unsigned char)(temp_v1 >> 7) == ((temp_v15 != temp_v15) || (temp_v21 != temp_v21))) {
               temp_v7 = temp_v9 | ((unsigned int)(temp_v15 < temp_v14) << 0x1f) |
                        ((unsigned int)(temp_v15 == temp_v14) << 0x1e);
               temp_v1 = (unsigned char)(temp_v7 >> 0x18);
               cStack_82 = (char)((unsigned long long)temp_v22 >> 0x20);
-              if (!((unsigned char)((temp_v1 >> 6) & 1) || (unsigned char)(temp_v1 >> 7) != (NAN(temp_v15) || NAN(temp_v14))))
+              if (!((unsigned char)((temp_v1 >> 6) & 1) || (unsigned char)(temp_v1 >> 7) != ((temp_v15 != temp_v15) || (temp_v14 != temp_v14))))
               {
                 cStack_84 = cStack_84 + (char)(int)((temp_v15 - temp_v14) * (float)temp_v23);
               }
@@ -176,7 +176,7 @@ void FUN_00162758(float *param_1,unsigned int *param_2,unsigned int param_3,int 
           }
           temp_v9 = (temp_v7 & 0xfffffff) | ((unsigned int)(temp_v13 < temp_v21) << 0x1f) |
                    ((unsigned int)(temp_v13 == temp_v21) << 0x1e);
-          in_fpscr = temp_v9 | ((unsigned int)(NAN(temp_v13) || NAN(temp_v21)) << 0x1c);
+          in_fpscr = temp_v9 | ((unsigned int)((temp_v13 != temp_v13) || (temp_v21 != temp_v21)) << 0x1c);
           temp_v1 = (unsigned char)(temp_v9 >> 0x18);
           if ((unsigned char)((temp_v1 >> 6) & 1) || temp_v1 >> 7 != ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
             in_fpscr = temp_v7 & 0xfffffff;
@@ -249,7 +249,7 @@ LAB_00181ef0:
           piVar13 = (int *)((int)&iStack_94 + ((int)pcStack_8c >> 1));
           VectorSignedToFloat((romwright_code *)(int)cStack_82,(unsigned char)(in_fpscr >> 0x16) & 3);
           if (!temp_v10) {
-            pcVar12 = *(romwright_code **)(pcStack_90 + *piVar13);
+            pcVar12 = *(romwright_code **)((unsigned char *)pcStack_90 + *piVar13);
           }
           temp_v3 = (*pcVar12)(piVar13);
           temp_v12 = (float)VectorSignedToFloat((int)cStack_82,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -263,7 +263,7 @@ LAB_00181ef0:
           }
           VectorSignedToFloat((romwright_code *)(int)cStack_82,(unsigned char)(in_fpscr >> 0x16) & 3);
           if (!temp_v10) {
-            pcVar12 = *(romwright_code **)(pcStack_90 + *(int *)((int)&iStack_94 + ((int)pcStack_8c >> 1)));
+            pcVar12 = *(romwright_code **)((unsigned char *)pcStack_90 + *(int *)((int)&iStack_94 + ((int)pcStack_8c >> 1)));
           }
           temp_v3 = (*pcVar12)();
           temp_v12 = (float)VectorSignedToFloat((int)cStack_82,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -280,7 +280,7 @@ LAB_00181ef0:
         }
         temp_v18 = (unsigned long long)temp_v9 << 0x20;
         if (!temp_v10) {
-          pcVar12 = *(romwright_code **)(pcStack_90 + *(int *)((int)&iStack_94 + ((int)pcStack_8c >> 1)));
+          pcVar12 = *(romwright_code **)((unsigned char *)pcStack_90 + *(int *)((int)&iStack_94 + ((int)pcStack_8c >> 1)));
         }
         temp_v3 = (*pcVar12)();
         in_fpscr = (in_fpscr & 0xfffffff) |

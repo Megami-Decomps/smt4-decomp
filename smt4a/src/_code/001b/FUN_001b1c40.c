@@ -11,15 +11,15 @@ typedef struct {
 } param_6_stack;
 
 /* Supplied declaration required: FUN_001b1784. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 int FUN_001b1c40(int param_1,unsigned int param_2,int param_3,int param_4,unsigned int param_5,
                 int param_6)
 
 {
-/* irregular: 2 goto(s); 3 native warning(s); review required */
+/* irregular: 2 goto(s); 1 native warning(s); review required */
   int *piVar1;
   int temp_v0;
   int temp_v1;

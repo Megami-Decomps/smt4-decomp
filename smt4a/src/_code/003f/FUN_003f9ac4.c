@@ -74,7 +74,7 @@ unsigned char FUN_003f9ac4(int param_1,unsigned int *param_2,int param_3)
     param_2[10] = *puVar4;
     param_2[0xb] = puVar4[1];
     param_2[0xc] = puVar4[2];
-    param_2[9] = (float)puVar4[3] * 57.295776f;
+    *(float *)&param_2[9] = (float)puVar4[3] * 57.295776f;
     FUN_0019eb14(param_2);
     in_s0 = *(float *)(param_1 + 0x38) + in_s0;
     *(float *)(param_1 + 0x38) = in_s0;

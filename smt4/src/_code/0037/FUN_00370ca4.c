@@ -199,7 +199,7 @@ unsigned int FUN_00370ca4(fn_00370ca4_arg0 *param_1,int *param_2)
       } while (temp_v6 < (int)temp_v8);
     }
     param_1->field_0x174 = puVar3 + temp_v8;
-    param_1->field_0x170 = puVar3;
+    param_1->field_0x170 = (undefined4)puVar3;
     param_1->field_0x1f5 = pfVar12->field_0xd4 != 0;
     temp_v4 = (**(romwright_code **)(*param_2 + 8))(param_2,temp_v8,4);
     if (temp_v4 == 0) {

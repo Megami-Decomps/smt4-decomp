@@ -425,7 +425,7 @@ LAB_003c01a8:
   temp_v19 = (float)(temp_v24 >> 0x20);
   temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v18 < temp_v19) << 0x1f) |
           ((unsigned int)(temp_v18 == temp_v19) << 0x1e);
-  temp_v13 = temp_v0 | ((unsigned int)(NAN(temp_v18) || NAN(temp_v19)) << 0x1c);
+  temp_v13 = temp_v0 | ((unsigned int)((temp_v18 != temp_v18) || (temp_v19 != temp_v19)) << 0x1c);
   temp_v1 = (unsigned char)(temp_v0 >> 0x18);
   if (!(unsigned char)((temp_v1 >> 6) & 1) && temp_v1 >> 7 == ((unsigned char)(temp_v13 >> 0x1c) & 1)) {
     DAT_006472dc = DAT_006472dc / temp_v18;

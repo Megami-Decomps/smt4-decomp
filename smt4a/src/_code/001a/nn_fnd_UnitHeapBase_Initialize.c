@@ -6,7 +6,7 @@ extern int aeabi_uidivmod(int, int);
 
 
 void nn_fnd_UnitHeapBase_Initialize
-               (int param_1,int param_2,int param_3,int param_4,int param_5,unsigned int param_6)
+               (int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,int param_5,unsigned int param_6)
 
 {
   int temp_v0;

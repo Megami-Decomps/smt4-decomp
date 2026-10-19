@@ -11,19 +11,19 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_2_stack;
 
-/* Supplied declaration required: nn_applet_CTR_detail_CallUtility. */
+extern unsigned int nn_applet_CTR_detail_CallUtility(unsigned int, unsigned char *, unsigned int, unsigned char *, unsigned int, int *);
 
 
 void nn_applet_CTR_detail_LockTransition(unsigned int param_1,unsigned char param_2)
 
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
+/* irregular: 1 native warning(s); review required */
+  unsigned int temp_v0;
   unsigned char temp_v1;
   
   temp_v0 = param_1;
   temp_v1 = param_2;
-  nn_applet_CTR_detail_CallUtility(5,&temp_v0,8,0,0,0);
+  nn_applet_CTR_detail_CallUtility(5,(unsigned char *)&temp_v0,8,0x0,0,0x0);
                     /* WARNING: Treating indirect jump as return */
   return;
 }

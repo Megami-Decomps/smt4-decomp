@@ -230,7 +230,7 @@ LAB_00144764:
   *(unsigned int *)(temp_v0 + 0x798) = (*(unsigned int *)(temp_v0 + 0x798) & 0xffc00000) | ((temp_v2 >> 3) & 0xe03fffff);
   *puVar3 = *puVar3 | 1;
   FUN_002aa6ac(0x81,10,temp_v0 + 0x774);
-  if (DAT_004652a0 < DAT_004652a4) {
+  if ((unsigned int)DAT_004652a0 < DAT_004652a4) {
     *DAT_004652a0 = *(unsigned int *)(temp_v0 + 0x7a8);
     DAT_004652a0[1] = 0xf008e;
     DAT_004652a0 = DAT_004652a0 + 2;

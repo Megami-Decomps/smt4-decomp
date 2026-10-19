@@ -10,13 +10,13 @@ typedef struct {
 /* Supplied declaration required: FUN_001467a4. */
 /* Supplied declaration required: FUN_00351ce8. */
 /* Supplied declaration required: FUN_00359f90. */
-/* Supplied declaration required: nn_cfg_CTR_Initialize. */
+extern void nn_cfg_CTR_Initialize(void);
 
 
 int FUN_00351c14(int param_1,unsigned int param_2)
 
 {
-/* irregular: 4 native warning(s); review required */
+/* irregular: 3 native warning(s); review required */
   int temp_v0;
   
   temp_v0 = param_1;

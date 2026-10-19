@@ -11,15 +11,15 @@ extern unsigned int DAT_00465124; /* 0x465124 */
 
 /* Supplied declaration required: FUN_002c3944. */
 /* Supplied declaration required: FUN_002c5300. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 int FUN_002c498c(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
                 unsigned int param_5)
 
 {
-/* irregular: 4 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   nn_os_CriticalSection_Enter(DAT_00465124);
   FUN_002c5300(param_1,param_2,param_3,param_4,param_5);
   if (param_1 != 0) {

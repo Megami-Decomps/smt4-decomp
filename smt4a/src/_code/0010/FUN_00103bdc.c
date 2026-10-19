@@ -39,7 +39,6 @@ extern unsigned char LAB_00103e20; /* 0x103e20 */
 extern unsigned char LAB_00103e34; /* 0x103e34 */
 extern unsigned char LAB_00103e48; /* 0x103e48 */
 
-/* Unsupported intrinsic, declaration required: while (COPY). */
 extern int FUN_002e783c(unsigned char *);
 /* Supplied declaration required: FUN_002e95c4. */
 /* Supplied declaration required: FUN_002e9768. */
@@ -56,7 +55,7 @@ extern int FUN_002e9854(int, int);
 void FUN_00103bdc(fn_00103bdc_arg0 *param_1)
 
 {
-/* irregular: 7 native warning(s); review required */
+/* irregular: 6 native warning(s); review required */
   unsigned char temp_v0;
   unsigned short temp_v1;
   unsigned char temp_v2;

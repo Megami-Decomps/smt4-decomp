@@ -59,7 +59,7 @@ unsigned int FUN_001b4cbc(void)
   unsigned int uStack_2c;
   
   temp_v0 = DAT_00432fe0;
-  temp_v6 = romwright_piece_3_1(temp_v6._1_3_,1);
+  temp_v6 = romwright_piece_3_1((((unsigned int)(temp_v6) >> 8) & 0xffffffU),1);
   puVar1 = (unsigned int *)FUN_002bad5c((unsigned int *)&uStack_4c);
   puVar1[2] = 0;
   puVar1[3] = 0;

@@ -4,30 +4,31 @@
 
 extern int FUN_002ad244(void);
 extern int FUN_002ad254(void);
-extern int FUN_002ad264(void);
+extern unsigned int FUN_002ad264(void);
 extern int FUN_002b3abc(void);
-/* Supplied declaration required: nn_gxlow_CTR_Gpu_AcquireRight. */
+extern unsigned int nn_gxlow_CTR_Gpu_AcquireRight(unsigned int, unsigned int, unsigned char);
 /* Supplied declaration required: nn_gxlow_CTR_InterruptRelayQueueRx_SuppressPdcEvents. */
 
 
-int FUN_00129b14(void)
+unsigned int FUN_00129b14(void)
 
 {
-/* irregular: 2 native warning(s); review required */
+/* irregular: 1 native warning(s); review required */
   int temp_v0;
-  int temp_v1;
+  unsigned int temp_v1;
+  unsigned int temp_v2;
   
   temp_v0 = FUN_002ad254();
   if (temp_v0 == 0) {
-    temp_v0 = 0x202bf8;
+    temp_v1 = 0x202bf8;
   }
   else {
-    temp_v0 = FUN_002ad264();
-    nn_gxlow_CTR_Gpu_AcquireRight(temp_v0,0xffff8001,0);
-    if ((-1 < temp_v0) && (temp_v1 = FUN_002b3abc(), temp_v1 != 0)) {
-      temp_v1 = FUN_002ad244();
-      nn_gxlow_CTR_InterruptRelayQueueRx_SuppressPdcEvents(temp_v1 + 0x30,0);
+    temp_v2 = FUN_002ad264();
+    temp_v1 = nn_gxlow_CTR_Gpu_AcquireRight(temp_v2,0xffff8001,0);
+    if ((-1 < (int)temp_v1) && (temp_v0 = FUN_002b3abc(), temp_v0 != 0)) {
+      temp_v0 = FUN_002ad244();
+      nn_gxlow_CTR_InterruptRelayQueueRx_SuppressPdcEvents(temp_v0 + 0x30,0);
     }
   }
-  return temp_v0;
+  return temp_v1;
 }

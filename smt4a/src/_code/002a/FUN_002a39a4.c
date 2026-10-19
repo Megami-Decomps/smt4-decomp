@@ -21,7 +21,7 @@ extern int FUN_00260158(); /* 0x260158 */
 
 
 romwright_code * FUN_002a39a4(unsigned int param_1,int param_2,unsigned int param_3,unsigned int param_4,
-                   unsigned int param_5,romwright_code param_6,unsigned short param_7,unsigned int param_8)
+                   unsigned int param_5,unsigned char param_6,unsigned short param_7,unsigned int param_8)
 
 {
 /* irregular: irregular input(s): in_fpscr; 6 native warning(s); review required */
@@ -34,25 +34,25 @@ romwright_code * FUN_002a39a4(unsigned int param_1,int param_2,unsigned int para
   FUN_0028c05c(FUN_00260158,0,0,0,0,0x330,3,0,0);
   if (pcVar1 != (romwright_code *)0x0) {
     FUN_002e6354();
-    rt_memcpy_w(pcVar1 + 100,param_2,0x134);
+    rt_memcpy_w((unsigned char *)pcVar1 + 100,param_2,0x134);
     temp_v0 = *(unsigned int *)(param_2 + 0x124);
     temp_v1 = *(unsigned int *)(param_2 + 0x128);
-    *(unsigned int *)(pcVar1 + 0x54) = *(unsigned int *)(param_2 + 0x120);
-    *(unsigned int *)(pcVar1 + 0x58) = temp_v0;
-    *(unsigned int *)(pcVar1 + 0x5c) = temp_v1;
-    rt_memcpy_w(pcVar1 + 0x198,param_3,0xb0);
-    *(unsigned int *)(pcVar1 + 0x248) = param_4;
-    *(unsigned int *)(pcVar1 + 0x24c) = param_8;
-    temp_v0 = VectorSignedToFloat(*(unsigned int *)(pcVar1 + 0x1e4),(unsigned char)(in_fpscr >> 0x16) & 3);
-    *(unsigned int *)(pcVar1 + 4) = temp_v0;
-    *(unsigned int *)(pcVar1 + 0x250) = param_1;
-    pcVar1[600] = param_6;
-    *(unsigned int *)(pcVar1 + 0x260) = 0xffffffff;
-    *(unsigned int *)(pcVar1 + 0x25c) = 0xffffffff;
-    FUN_0034a16c(pcVar1 + 0x198,pcVar1 + 0x28,pcVar1 + 0x30,pcVar1 + 0xc,pcVar1 + 0x18);
-    *(unsigned int *)(pcVar1 + 0x254) = param_5;
-    *(unsigned short *)(pcVar1 + 0x32e) = param_7;
-    *(unsigned short *)(pcVar1 + 0x32c) = param_7;
+    *(unsigned int *)((unsigned char *)pcVar1 + 0x54) = *(unsigned int *)(param_2 + 0x120);
+    *(unsigned int *)((unsigned char *)pcVar1 + 0x58) = temp_v0;
+    *(unsigned int *)((unsigned char *)pcVar1 + 0x5c) = temp_v1;
+    rt_memcpy_w((unsigned char *)pcVar1 + 0x198,param_3,0xb0);
+    *(unsigned int *)((unsigned char *)pcVar1 + 0x248) = param_4;
+    *(unsigned int *)((unsigned char *)pcVar1 + 0x24c) = param_8;
+    temp_v0 = VectorSignedToFloat(*(unsigned int *)((unsigned char *)pcVar1 + 0x1e4),(unsigned char)(in_fpscr >> 0x16) & 3);
+    *(unsigned int *)((unsigned char *)pcVar1 + 4) = temp_v0;
+    *(unsigned int *)((unsigned char *)pcVar1 + 0x250) = param_1;
+    ((unsigned char *)pcVar1)[600] = (unsigned char)param_6;
+    *(unsigned int *)((unsigned char *)pcVar1 + 0x260) = 0xffffffff;
+    *(unsigned int *)((unsigned char *)pcVar1 + 0x25c) = 0xffffffff;
+    FUN_0034a16c((unsigned char *)pcVar1 + 0x198,(unsigned char *)pcVar1 + 0x28,(unsigned char *)pcVar1 + 0x30,(unsigned char *)pcVar1 + 0xc,(unsigned char *)pcVar1 + 0x18);
+    *(unsigned int *)((unsigned char *)pcVar1 + 0x254) = param_5;
+    *(unsigned short *)((unsigned char *)pcVar1 + 0x32e) = param_7;
+    *(unsigned short *)((unsigned char *)pcVar1 + 0x32c) = param_7;
   }
   return pcVar1;
 }

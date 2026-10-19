@@ -1008,7 +1008,7 @@ void FUN_0046c528(fn_0046c528_arg0 *param_1)
               }
             }
             puVar11 = puVar11 + 1;
-          } while (puVar11 < piVar6);
+          } while (puVar11 < (unsigned char *)piVar6);
         }
       }
       temp_v46 = (int *)((int)temp_v46 + 1);

@@ -7,13 +7,13 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-/* Supplied declaration required: nn_snd_CTR_Voice_SetMixParam. */
+extern void nn_snd_CTR_Voice_SetMixParam(unsigned int, unsigned int);
 
 
 void FUN_0014375c(int param_1)
 
 {
-/* irregular: irregular input(s): in_s0, in_s1; 3 native warning(s); review required */
+/* irregular: irregular input(s): in_s0, in_s1; 2 native warning(s); review required */
   float in_s0;
   float in_s1;
   

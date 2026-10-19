@@ -93,7 +93,7 @@ void FUN_00303508(int param_1)
       temp_v6 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v7 < temp_v15) << 0x1f) |
               ((unsigned int)(temp_v7 == temp_v15) << 0x1e);
       temp_v1 = (unsigned char)(temp_v6 >> 0x18);
-      if (!(unsigned char)((temp_v1 >> 6) & 1) && (unsigned char)(temp_v1 >> 7) == (NAN(temp_v7) || NAN(temp_v15))) {
+      if (!(unsigned char)((temp_v1 >> 6) & 1) && (unsigned char)(temp_v1 >> 7) == ((temp_v7 != temp_v7) || (temp_v15 != temp_v15))) {
         temp_v7 = temp_v15;
       }
     }
@@ -151,7 +151,7 @@ void FUN_00303508(int param_1)
         pfVar9[1] = temp_v17 * temp_v20;
         pfVar9[2] = temp_v18 * temp_v8;
         pfVar9[3] = temp_v15 * temp_v26;
-        puVar7[3] = temp_v16 * temp_v9;
+        *(float *)&puVar7[3] = temp_v16 * temp_v9;
         *(float *)&puVar7[4] = pfVar9[1];
         *(float *)&puVar7[5] = pfVar9[2];
         temp_v9 = temp_v14 * DAT_004ea92c;

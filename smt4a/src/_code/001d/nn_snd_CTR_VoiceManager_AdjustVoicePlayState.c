@@ -3,31 +3,32 @@
 #include "romwright_types.h"
 
 typedef int romwright_code();
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
+/* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
-} param_3_stack;
+} param_2_stack;
 
 /* Supplied declaration required: FUN_001d2fb0. */
 /* Supplied declaration required: FUN_001d3168. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
-/* Supplied declaration required: nn_snd_CTR_Voice_SetState. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
+extern void nn_snd_CTR_Voice_SetState(unsigned int, int);
 
 
-void nn_snd_CTR_VoiceManager_AdjustVoicePlayState(unsigned int *param_1,int param_2,int param_3)
+void nn_snd_CTR_VoiceManager_AdjustVoicePlayState(unsigned int *param_1,int param_2)
 
 {
-/* irregular: 5 native warning(s); review required */
+/* irregular: irregular input(s): in_r2; 3 native warning(s); review required */
   unsigned int temp_v0;
   int temp_v1;
   unsigned int temp_v2;
+  int in_r2;
   unsigned int *puVar4;
   
-  if ((*(char *)((int)param_1 + 0xe) == '\x01') && (0 < param_3 - 0x9ffc4)) {
-    param_2 = param_2 - (param_3 - 0x9ffc4);
+  if ((*(char *)((int)param_1 + 0xe) == '\x01') && (0 < in_r2 - 0x9ffc4)) {
+    param_2 = param_2 - (in_r2 - 0x9ffc4);
   }
-  nn_os_CriticalSection_Enter(param_1 + 4);
+  nn_os_CriticalSection_Enter((unsigned int)(param_1 + 4));
   for (puVar4 = (unsigned int *)param_1[1]; puVar4 != (unsigned int *)0x0; puVar4 = (unsigned int *)puVar4[10]) {
     temp_v0 = puVar4[0x1a];
     if ((*(char *)(temp_v0 + 0xd) == '\0') && (*(int *)(temp_v0 + 0x30) != 0)) {
@@ -42,9 +43,9 @@ void nn_snd_CTR_VoiceManager_AdjustVoicePlayState(unsigned int *param_1,int para
       else {
         if ((*param_1 & (1 << (*puVar4 & 0xff))) != 0) {
           if ((char)puVar4[1] != '\x01') {
-            nn_snd_CTR_Voice_SetState(puVar4,1);
+            nn_snd_CTR_Voice_SetState((unsigned int)puVar4,1);
           }
-          nn_os_CriticalSection_Enter();
+          nn_os_CriticalSection_Enter((unsigned int)(param_1 + 4));
           temp_v0 = puVar4[9];
           temp_v2 = puVar4[10];
           if (temp_v0 == 0 && temp_v2 == 0) {
@@ -61,7 +62,7 @@ void nn_snd_CTR_VoiceManager_AdjustVoicePlayState(unsigned int *param_1,int para
           }
           *param_1 = *param_1 & ~(1 << (*puVar4 & 0xff));
           *(short *)(param_1 + 3) = (short)param_1[3] - 1;
-          nn_os_CriticalSection_Leave(param_1 + 4);
+          nn_os_CriticalSection_Leave((unsigned int)(param_1 + 4));
         }
         if ((romwright_code *)puVar4[0xb] != (romwright_code *)0x0) {
           (*(romwright_code *)puVar4[0xb])(puVar4,puVar4[0xc]);
@@ -69,6 +70,6 @@ void nn_snd_CTR_VoiceManager_AdjustVoicePlayState(unsigned int *param_1,int para
       }
     }
   }
-  nn_os_CriticalSection_Leave(param_1 + 4);
+  nn_os_CriticalSection_Leave((unsigned int)(param_1 + 4));
   return;
 }

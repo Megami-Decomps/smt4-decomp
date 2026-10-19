@@ -8,13 +8,12 @@ extern unsigned char DAT_0064bf20; /* 0x64bf20 */
 /* Supplied declaration required: FUN_00195fc4. */
 /* Supplied declaration required: FUN_002e3494. */
 /* Supplied declaration required: FUN_0030f20a. */
-/* Supplied declaration required: while. */
 
 
 void FUN_001235b8(int param_1,int param_2)
 
 {
-/* irregular: 4 goto(s); 4 native warning(s); review required */
+/* irregular: 4 goto(s); 3 native warning(s); review required */
   unsigned int temp_v0;
   
   if (param_2 != 0) {

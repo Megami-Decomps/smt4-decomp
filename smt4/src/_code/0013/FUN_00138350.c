@@ -8,13 +8,13 @@ typedef struct {
 } void_stack;
 
 /* Supplied declaration required: FUN_00128110. */
-/* Supplied declaration required: nn_os_ThreadLocalStorage_ClearAllSlots. */
+extern void nn_os_ThreadLocalStorage_ClearAllSlots(void);
 
 
 unsigned int FUN_00138350(void)
 
 {
-/* irregular: 2 native warning(s); review required */
+/* irregular: 1 native warning(s); review required */
   nn_os_ThreadLocalStorage_ClearAllSlots();
   FUN_00128110();
   return 0x3000000;

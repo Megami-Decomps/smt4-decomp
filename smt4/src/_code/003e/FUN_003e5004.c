@@ -19,6 +19,21 @@ struct fn_003e5004_arg0 {
 };
 
 typedef int romwright_code();
+#ifndef ROMWRIGHT_FLOAT_BITS_DEFINED
+#define ROMWRIGHT_FLOAT_BITS_DEFINED
+static unsigned int romwright_f2u(float value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.f = value;
+    return bits.u;
+}
+static float romwright_u2f(unsigned int value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.u = value;
+    return bits.f;
+}
+#endif
 /* stack frame of param_3: 36 slot(s), 144 byte(s) */
 typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
@@ -540,7 +555,7 @@ LAB_003e54d4:
                     temp_v29 = temp_v7 * temp_v18 + temp_v13 * temp_v14 * temp_v6;
                     temp_v25 = temp_v13 * temp_v18 * temp_v6 - temp_v7 * temp_v14;
                     temp_v30 = temp_v7 * temp_v14 * temp_v6 - temp_v13 * temp_v18;
-                    temp_v27 = (int *)pfVar5[6];
+                    temp_v27 = (int *)romwright_f2u((float)(pfVar5[6]));
                     temp_v31 = pfVar5[7];
                     temp_v35 = pfVar5[8];
                     temp_v1 = temp_v39 | 0x800;

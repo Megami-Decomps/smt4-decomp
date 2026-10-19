@@ -4,13 +4,12 @@
 
 extern unsigned int DAT_0044e368; /* 0x44e368 */
 
-/* Supplied declaration required: nn_applet_CTR_detail_CloseApplication. */
+extern unsigned int nn_applet_CTR_detail_CloseApplication(unsigned char *, unsigned int, unsigned int);
 
 
 void FUN_00103c84(void)
 
 {
-/* irregular: 1 native warning(s); review required */
-  nn_applet_CTR_detail_CloseApplication(0,0,DAT_0044e368);
+  nn_applet_CTR_detail_CloseApplication(0x0,0,DAT_0044e368);
   return;
 }

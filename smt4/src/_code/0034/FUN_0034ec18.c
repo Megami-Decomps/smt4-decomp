@@ -13,15 +13,14 @@ extern unsigned int DAT_0044d110; /* 0x44d110 */
 extern unsigned int DAT_0044d114; /* 0x44d114 */
 extern unsigned int DAT_004c40f8; /* 0x4c40f8 */
 
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
-/* Supplied declaration required: nn_snd_CTR_Voice_SetState. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
+extern void nn_snd_CTR_Voice_SetState(unsigned int, int);
 
 
 void FUN_0034ec18(unsigned int param_1)
 
 {
-/* irregular: 3 native warning(s); review required */
   unsigned int temp_v0;
   unsigned int temp_v1;
   int temp_v2;
@@ -30,7 +29,7 @@ void FUN_0034ec18(unsigned int param_1)
   if (DAT_0044d10c <= param_1) {
     return;
   }
-  nn_os_CriticalSection_Enter(&DAT_004c40f8);
+  nn_os_CriticalSection_Enter((unsigned int)&DAT_004c40f8);
   puVar4 = (unsigned int *)(DAT_0044d100 + param_1 * 0x70);
   nn_snd_CTR_Voice_SetState(*puVar4,1);
   temp_v0 = DAT_0044d114;
@@ -65,6 +64,6 @@ void FUN_0034ec18(unsigned int param_1)
   puVar4[0x17] = 0;
   puVar4[0x18] = 0;
   puVar4[0x19] = 0;
-  nn_os_CriticalSection_Leave(&DAT_004c40f8);
+  nn_os_CriticalSection_Leave((unsigned int)&DAT_004c40f8);
   return;
 }

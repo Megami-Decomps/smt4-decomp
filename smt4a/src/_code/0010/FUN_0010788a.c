@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
+typedef int romwright_code();
 /* stack frame of param_1: 15 slot(s), 55 byte(s) */
 typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
@@ -58,7 +59,7 @@ void FUN_0010788a(int param_1)
   int temp_v2;
   unsigned short *puVar6;
   unsigned short *puVar7;
-  code *pcVar8;
+  romwright_code *pcVar8;
   int temp_v3;
   unsigned char temp_v4;
   int temp_v5;
@@ -90,7 +91,7 @@ void FUN_0010788a(int param_1)
     }
     temp_v1 = FUN_002eff84();
     if (temp_v1 == 0) {
-      (**(code **)(*piVar3 + 4))(piVar3);
+      (**(romwright_code **)(*piVar3 + 4))(piVar3);
       return;
     }
     temp_v1 = FUN_002e760a(0x10);
@@ -126,7 +127,7 @@ void FUN_0010788a(int param_1)
       FUN_002efa58(&temp_v5,temp_v12,temp_v1);
       temp_v14 = temp_v5;
       temp_v15 = temp_v6;
-      temp_v2 = FUN_002efa80(&temp_v14);
+      temp_v2 = FUN_002efa80((unsigned int *)&temp_v14);
       temp_v4 = 1;
     } while (temp_v2 == 0);
     FUN_002efa58(&temp_v5,temp_v12,temp_v1);
@@ -140,7 +141,7 @@ void FUN_0010788a(int param_1)
     temp_v18 = *(int *)(*(int *)(temp_v2 + 0x14) + 8);
     while( 1 ) {
       temp_v19 = *(unsigned int *)(temp_v6 + 0x10);
-      temp_v2 = FUN_002f000c(&temp_v18,&temp_v19);
+      temp_v2 = FUN_002f000c(&temp_v18,(unsigned int *)&temp_v19);
       if ((temp_v2 == 0) || ((unsigned int)*(unsigned short *)(temp_v18 + 0x14) != temp_v13[0] + 1)) break;
       temp_v13[0] = *(unsigned short *)(temp_v18 + 0x14);
       FUN_002effdc(&temp_v18);
@@ -158,7 +159,7 @@ void FUN_0010788a(int param_1)
     }
     while( 1 ) {
       temp_v19 = *(unsigned int *)(temp_v6 + 0x10);
-      temp_v2 = FUN_002f000c(&temp_v18,&temp_v19);
+      temp_v2 = FUN_002f000c(&temp_v18,(unsigned int *)&temp_v19);
       if (temp_v2 == 0) break;
       temp_v5 = romwright_piece_2_2((*(unsigned short *)((unsigned char *)&temp_v5 + 2)),*(unsigned short *)(temp_v18 + 0x14));
       if (temp_v9 != temp_v10) {
@@ -182,7 +183,7 @@ void FUN_0010788a(int param_1)
     if (999 < (unsigned int)(*(int *)(piVar4[2] + 0x10) + temp_v3)) {
       FUN_002f012e(param_1,piVar4[2],0,1);
       if (piVar4 != (int *)0x0) {
-        (**(code **)(*piVar4 + 4))(piVar4);
+        (**(romwright_code **)(*piVar4 + 4))(piVar4);
       }
       if (temp_v16 != 0) {
         temp_v2 = FUN_002eb7d0(0x20,0);
@@ -192,7 +193,7 @@ void FUN_0010788a(int param_1)
         }
         temp_v2 = FUN_002eff84();
         if (temp_v2 == 0) {
-          pcVar8 = *(code **)(*piVar4 + 4);
+          pcVar8 = *(romwright_code **)(*piVar4 + 4);
           (*pcVar8)(piVar4);
           FUN_001221a2(&temp_v8);
           return;
@@ -220,13 +221,13 @@ void FUN_0010788a(int param_1)
     for (puVar6 = temp_v8; piVar4 = piVar3, temp_v9 != puVar6; puVar6 = puVar6 + 1) {
       FUN_002eea5c(piVar3,puVar6);
     }
-LAB_00107af4:
+LAB_00107af4:;
   }
   if (*(int *)(piVar4[2] + 0x10) != 0) {
     FUN_002f012e(param_1,piVar4[2],0,1);
   }
   if (piVar4 != (int *)0x0) {
-    pcVar8 = *(code **)(*piVar4 + 4);
+    pcVar8 = *(romwright_code **)(*piVar4 + 4);
     (*pcVar8)(piVar4);
   }
   FUN_001221a2(&temp_v8);

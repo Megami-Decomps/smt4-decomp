@@ -12,23 +12,21 @@ typedef struct {
 
 extern int FUN_002bb638(void);
 extern int FUN_002bc7e4(void);
-/* Supplied declaration required: nn_hidlow_CTR_TouchPanelLifoRing_ReadData. */
+extern void nn_hidlow_CTR_TouchPanelLifoRing_ReadData(unsigned int, unsigned int, int, int *, long long *, int *);
 
-
-/* WARNING: Type propagation algorithm not settling */
 
 unsigned char nn_hid_CTR_TouchPanelReader_ReadLatest(int *param_1,unsigned short *param_2)
 
 {
-/* irregular: 2 native warning(s); review required */
   int temp_v0;
-  int temp_v1 [4];
+  int temp_v1 [2];
+  unsigned long long temp_v2;
   
-  temp_v1[2] = 0xffffffff;
-  temp_v1[3] = 0xffffffff;
+  (*(unsigned int *)((unsigned char *)&temp_v2 + 0)) = 0xffffffff;
+  (*(unsigned int *)((unsigned char *)&temp_v2 + 4)) = 0xffffffff;
   temp_v1[1] = 0xffffffff;
   nn_hidlow_CTR_TouchPanelLifoRing_ReadData
-            (*(unsigned int *)(*param_1 + 4),param_2,1,temp_v1,temp_v1 + 2,temp_v1 + 1);
+            (*(unsigned int *)(*param_1 + 4),(unsigned int)param_2,1,temp_v1,(long long *)&temp_v2,temp_v1 + 1);
   temp_v0 = FUN_002bb638();
   if ((temp_v0 != 0) && (temp_v0 = FUN_002bc7e4(), temp_v0 == 0)) {
     *param_2 = 0;

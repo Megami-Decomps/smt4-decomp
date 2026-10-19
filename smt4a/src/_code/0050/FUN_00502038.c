@@ -13,7 +13,7 @@ unsigned int FUN_00502038(unsigned int *param_1,unsigned int *param_2)
   unsigned int temp_v1;
   
   temp_v0 = (int)(param_1[1] - *param_1) >> 1;
-  temp_v1 = FUN_00502064.whole;
+  temp_v1 = (unsigned int)FUN_00502064;
   if (temp_v0 < 0x101) {
     *param_2 = temp_v0;
     param_2[1] = *param_1;

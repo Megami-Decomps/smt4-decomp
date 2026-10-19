@@ -3,6 +3,22 @@
 #include "romwright_types.h"
 
 typedef int romwright_code();
+#ifndef ROMWRIGHT_FLOAT_BITS_DEFINED
+#define ROMWRIGHT_FLOAT_BITS_DEFINED
+static unsigned int romwright_f2u(float value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.f = value;
+    return bits.u;
+}
+static float romwright_u2f(unsigned int value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.u = value;
+    return bits.f;
+}
+#endif
+/* Unsupported intrinsic, declaration required: romwright_set_sp (a write of the stack pointer). */
 extern romwright_code *DAT_0044e330; /* 0x44e330 */
 extern float *DAT_004652a0; /* 0x4652a0 */
 extern float *DAT_004652a4; /* 0x4652a4 */
@@ -224,7 +240,7 @@ float * FUN_0010123c(float *param_1,float *param_2,int *param_3)
   }
   else {
     unaff_r9 = (int *)*param_3;
-    register0x00000054 = (BADSPACEBASE *)param_3[2];
+    romwright_set_sp((unsigned int)((unsigned int *)param_3[2]));
     piVar9 = (int *)((int)unaff_r5 << ((unsigned int)unaff_r5 & 0xff));
     temp_v21 = piVar9 < param_3 || (unsigned int)((int)param_3 - (int)piVar9) < (unsigned int)temp_v22;
     temp_v23 = SBORROW4((int)param_3,(int)piVar9) !=
@@ -291,33 +307,33 @@ float * FUN_0010123c(float *param_1,float *param_2,int *param_3)
           temp_v15 = param_1[0x1408625];
           temp_v10 = param_1[0x1408626];
           temp_v27 = param_1[0x1408627];
-          *(float *)register0x00000054 = param_1[0x1408624];
-          *(float *)((int)register0x00000054 + 4) = temp_v15;
-          *(float *)((int)register0x00000054 + 8) = temp_v10;
-          *(float *)((int)register0x00000054 + 0xc) = temp_v27;
+          *(float *)((unsigned int)__current_sp()) = param_1[0x1408624];
+          *(float *)((int)((unsigned int)__current_sp()) + 4) = temp_v15;
+          *(float *)((int)((unsigned int)__current_sp()) + 8) = temp_v10;
+          *(float *)((int)((unsigned int)__current_sp()) + 0xc) = temp_v27;
           temp_v15 = param_1[0xa04313];
           temp_v10 = param_1[0xa04314];
           temp_v27 = param_1[0xa04315];
-          *(float *)((int)register0x00000054 + 0x10) = param_1[0xa04312];
-          *(float *)((int)register0x00000054 + 0x14) = temp_v15;
-          *(float *)((int)register0x00000054 + 0x18) = temp_v10;
-          *(float *)((int)register0x00000054 + 0x1c) = temp_v27;
+          *(float *)((int)((unsigned int)__current_sp()) + 0x10) = param_1[0xa04312];
+          *(float *)((int)((unsigned int)__current_sp()) + 0x14) = temp_v15;
+          *(float *)((int)((unsigned int)__current_sp()) + 0x18) = temp_v10;
+          *(float *)((int)((unsigned int)__current_sp()) + 0x1c) = temp_v27;
           temp_v26 = (float)VectorUnsignedToFloat(0x1006b6,(unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v15 = param_1[1];
           temp_v10 = param_1[2];
           temp_v27 = param_1[3];
-          *(float *)((int)register0x00000054 + 0x20) = *param_1;
-          *(float *)((int)register0x00000054 + 0x24) = temp_v15;
-          *(float *)((int)register0x00000054 + 0x28) = temp_v10;
-          *(float *)((int)register0x00000054 + 0x2c) = temp_v27;
+          *(float *)((int)((unsigned int)__current_sp()) + 0x20) = *param_1;
+          *(float *)((int)((unsigned int)__current_sp()) + 0x24) = temp_v15;
+          *(float *)((int)((unsigned int)__current_sp()) + 0x28) = temp_v10;
+          *(float *)((int)((unsigned int)__current_sp()) + 0x2c) = temp_v27;
           temp_v15 = param_1[1];
           temp_v10 = param_1[2];
           temp_v27 = param_1[3];
           temp_v26 = in_s12 / temp_v26;
-          *(float *)((int)register0x00000054 + 0x30) = *param_1;
-          *(float *)((int)register0x00000054 + 0x34) = temp_v15;
-          *(float *)((int)register0x00000054 + 0x38) = temp_v10;
-          *(float *)((int)register0x00000054 + 0x3c) = temp_v27;
+          *(float *)((int)((unsigned int)__current_sp()) + 0x30) = *param_1;
+          *(float *)((int)((unsigned int)__current_sp()) + 0x34) = temp_v15;
+          *(float *)((int)((unsigned int)__current_sp()) + 0x38) = temp_v10;
+          *(float *)((int)((unsigned int)__current_sp()) + 0x3c) = temp_v27;
           temp_v15 = param_1[5];
           temp_v38 = *(unsigned long long *)(param_1 + 0xa04318);
           temp_v40 = param_1[6] - (float)temp_v38;
@@ -358,7 +374,7 @@ float * FUN_0010123c(float *param_1,float *param_2,int *param_3)
           temp_v10 = DAT_004ea924;
           do {
             in_s16 = in_s16 + temp_v26;
-            FUN_002076b8(register0x00000054);
+            FUN_002076b8(((unsigned int)__current_sp()));
             pfVar3[-7] = DAT_004ea928;
             pfVar3[-10] = DAT_004ea91c;
             pfVar3[-9] = DAT_004ea920;
@@ -384,7 +400,7 @@ float * FUN_0010123c(float *param_1,float *param_2,int *param_3)
             DAT_004ea930 = temp_v15;
             DAT_004ea934 = temp_v10;
             DAT_004ea938 = temp_v27;
-            pfVar3[-5] = (float)param_1;
+            pfVar3[-5] = romwright_u2f((unsigned int)(param_1));
             temp_v14 = temp_v14 + 1;
             pfVar3[-6] = unaff_r6;
             pfVar3 = pfVar3 + -10;
@@ -466,21 +482,21 @@ float * FUN_0010123c(float *param_1,float *param_2,int *param_3)
                     /* WARNING: Bad instruction - Truncating control flow here */
     halt_baddata();
   }
-  while ((float)((((int)*(float *)((int)register0x00000054 + 0x10) +
-                  (int)*(float *)((int)register0x00000054 + 0x1c)) - 1U) &
-                ~((int)*(float *)((int)register0x00000054 + 0x1c) - 1U)) ==
-         *(float *)((int)register0x00000054 + 0xf0)) {
+  while ((float)((((int)*(float *)((int)((unsigned int)__current_sp()) + 0x10) +
+                  (int)*(float *)((int)((unsigned int)__current_sp()) + 0x1c)) - 1U) &
+                ~((int)*(float *)((int)((unsigned int)__current_sp()) + 0x1c) - 1U)) ==
+         *(float *)((int)((unsigned int)__current_sp()) + 0xf0)) {
     temp_v15 = param_2[2];
-    *(float *)((int)register0x00000054 + 0x1c) = 1.4013e-45f;
-    *(float *)((int)register0x00000054 + 0x10) = 0.0f;
-    param_2[2] = (float)(((int)*(float *)((int)register0x00000054 + 0xf0) << 0x10) |
+    *(float *)((int)((unsigned int)__current_sp()) + 0x1c) = 1.4013e-45f;
+    *(float *)((int)((unsigned int)__current_sp()) + 0x10) = 0.0f;
+    param_2[2] = (float)(((int)*(float *)((int)((unsigned int)__current_sp()) + 0xf0) << 0x10) |
                          ((int)param_3 << 0x1c) | (unsigned int)temp_v15);
     param_2 = param_2 + 3;
-    **(int **)((int)register0x00000054 + 0x100) = *(int *)(unaff_r4 + 0x93c) + 1;
+    **(int **)((int)((unsigned int)__current_sp()) + 0x100) = *(int *)(unaff_r4 + 0x93c) + 1;
     piVar9 = (int *)0x0;
     temp_v7 = temp_v14;
 LAB_00134780:
-    piVar1 = *(int **)((int)register0x00000054 + 0x108);
+    piVar1 = *(int **)((int)((unsigned int)__current_sp()) + 0x108);
     temp_v14 = temp_v7 + 1;
     if ((int)unaff_r6 <= (int)temp_v14) {
       if ((char)unaff_r5[0x207] == '\0') goto LAB_00134804;
@@ -509,12 +525,12 @@ LAB_00134780:
       goto LAB_00134804;
     }
     temp_v1 = *piVar1;
-    temp_v6 = *(int *)((int)*(float *)((int)register0x00000054 + 0xac) + 0x44);
-    *(int *)((int)register0x00000054 + 0x108) = piVar1[1];
+    temp_v6 = *(int *)((int)*(float *)((int)((unsigned int)__current_sp()) + 0xac) + 0x44);
+    *(int *)((int)((unsigned int)__current_sp()) + 0x108) = piVar1[1];
     temp_v27 = (float)unaff_r5[temp_v1 * 6 + 0x118];
     temp_v15 = (float)(unsigned int)(temp_v27 == 7.17465e-42f);
-    *(int *)((int)register0x00000054 + 0x24) =
-         *(int *)((int)*(float *)((int)register0x00000054 + 0xac) + temp_v1 * 4 + 4) - temp_v6;
+    *(int *)((int)((unsigned int)__current_sp()) + 0x24) =
+         *(int *)((int)*(float *)((int)((unsigned int)__current_sp()) + 0xac) + temp_v1 * 4 + 4) - temp_v6;
     temp_v10 = 0.0f;
     if (temp_v27 != 7.17465e-42f) {
       temp_v10 = (float)(unsigned int)(temp_v27 == 7.17605e-42f);
@@ -533,24 +549,24 @@ LAB_00134780:
     temp_v8 = (unsigned int)temp_v10 | (unaff_r5[temp_v1 * 6 + 0x117] * 4 - 4);
     if ((int)temp_v14 < 8) {
       temp_v8 = *(unsigned int *)(unaff_r4 + 0x944) | (temp_v8 << ((temp_v14 * 4) & 0xff));
-      puVar4 = *(unsigned int **)((int)register0x00000054 + 0x110);
+      puVar4 = *(unsigned int **)((int)((unsigned int)__current_sp()) + 0x110);
     }
     else {
       temp_v8 = *(unsigned int *)(unaff_r4 + 0x948) | (temp_v8 << ((temp_v14 * 4 - 0x20) & 0xff));
-      puVar4 = *(unsigned int **)((int)register0x00000054 + 0x10c);
+      puVar4 = *(unsigned int **)((int)((unsigned int)__current_sp()) + 0x10c);
     }
     *puVar4 = temp_v8;
     if (unaff_r5[temp_v1 * 6 + 0x119] == 0) {
       temp_v7 = unaff_r5[temp_v1 * 6 + 0x117];
-      *param_2 = *(float *)((int)register0x00000054 + 0x24);
+      *param_2 = *(float *)((int)((unsigned int)__current_sp()) + 0x24);
       param_2[1] = (float)((unsigned int)param_2[1] | temp_v14);
       param_2[2] = (float)((temp_v7 * (int)temp_v15 * 0x10000) | 0x10000000 | (unsigned int)param_2[2]);
       param_2 = param_2 + 3;
-      **(int **)((int)register0x00000054 + 0x100) = *(int *)(unaff_r4 + 0x93c) + 1;
+      **(int **)((int)((unsigned int)__current_sp()) + 0x100) = *(int *)(unaff_r4 + 0x93c) + 1;
       temp_v7 = temp_v14;
       goto LAB_00134780;
     }
-    temp_v10 = *(float *)((int)register0x00000054 + 0x1c);
+    temp_v10 = *(float *)((int)((unsigned int)__current_sp()) + 0x1c);
     temp_v8 = unaff_r5[temp_v1 * 6 + 0x117];
     if ((unsigned int)temp_v15 <= (unsigned int)temp_v10) {
       temp_v27 = temp_v10;
@@ -558,17 +574,17 @@ LAB_00134780:
     if ((unsigned int)temp_v10 < (unsigned int)temp_v15) {
       temp_v27 = temp_v15;
     }
-    *(unsigned int *)((int)register0x00000054 + 0x10) =
-         ((((int)*(float *)((int)register0x00000054 + 0x10) + (int)temp_v15) - 1U) &
+    *(unsigned int *)((int)((unsigned int)__current_sp()) + 0x10) =
+         ((((int)*(float *)((int)((unsigned int)__current_sp()) + 0x10) + (int)temp_v15) - 1U) &
          ~((int)temp_v15 - 1U)) + temp_v8 * (int)temp_v15;
-    *(float *)((int)register0x00000054 + 0x1c) = temp_v27;
+    *(float *)((int)((unsigned int)__current_sp()) + 0x1c) = temp_v27;
     if (piVar9 == (int *)0x0) {
-      *param_2 = *(float *)((int)register0x00000054 + 0x24);
+      *param_2 = *(float *)((int)((unsigned int)__current_sp()) + 0x24);
       temp_v6 = *piVar1;
       temp_v10 = (float)unaff_r5[temp_v1 * 6 + 0x119];
-      *(float *)((int)register0x00000054 + 0xf0) = temp_v10;
-      *(int *)((int)register0x00000054 + 0xfc) =
-           (int)temp_v10 + *(int *)((int)*(float *)((int)register0x00000054 + 0xac) + temp_v6 * 4 + 4);
+      *(float *)((int)((unsigned int)__current_sp()) + 0xf0) = temp_v10;
+      *(int *)((int)((unsigned int)__current_sp()) + 0xfc) =
+           (int)temp_v10 + *(int *)((int)*(float *)((int)((unsigned int)__current_sp()) + 0xac) + temp_v6 * 4 + 4);
     }
     if (piVar9 < (int *)0x8) {
       param_2[1] = (float)((unsigned int)param_2[1] | (temp_v14 << (((unsigned int)piVar9 & 0x3f) << 2)));
@@ -578,31 +594,31 @@ LAB_00134780:
     }
     param_3 = (int *)((int)piVar9 + 1);
     if ((float)(temp_v7 + 2) != unaff_r6) {
-      temp_v6 = *(int *)((int)*(float *)((int)register0x00000054 + 0xac) +
-                        **(int **)((int)register0x00000054 + 0x108) * 4 + 4);
-      temp_v10 = (float)(temp_v6 - *(int *)((int)*(float *)((int)register0x00000054 + 0xac) + 0x44));
-      if (((((unsigned int)temp_v10 > (unsigned int)*(float *)((int)register0x00000054 + 0x24)) &&
+      temp_v6 = *(int *)((int)*(float *)((int)((unsigned int)__current_sp()) + 0xac) +
+                        **(int **)((int)((unsigned int)__current_sp()) + 0x108) * 4 + 4);
+      temp_v10 = (float)(temp_v6 - *(int *)((int)*(float *)((int)((unsigned int)__current_sp()) + 0xac) + 0x44));
+      if (((((unsigned int)temp_v10 > (unsigned int)*(float *)((int)((unsigned int)__current_sp()) + 0x24)) &&
            (unaff_r5[temp_v1 * 6 + 0x119] ==
-            *(unsigned int *)((int)*(float *)((int)register0x00000054 + 0x104) +
-                      **(int **)((int)register0x00000054 + 0x108) * 0x18 + 0xc))) &&
-          ((int)*(float *)((int)register0x00000054 + 0xfc) > temp_v6)) && (param_3 != (int *)0xc)) {
-        *(float *)((int)register0x00000054 + 0xf8) = 0.0f;
+            *(unsigned int *)((int)*(float *)((int)((unsigned int)__current_sp()) + 0x104) +
+                      **(int **)((int)((unsigned int)__current_sp()) + 0x108) * 0x18 + 0xc))) &&
+          ((int)*(float *)((int)((unsigned int)__current_sp()) + 0xfc) > temp_v6)) && (param_3 != (int *)0xc)) {
+        *(float *)((int)((unsigned int)__current_sp()) + 0xf8) = 0.0f;
       }
       else {
-        *(float *)((int)register0x00000054 + 0xf8) = 1.4013e-45f;
-        temp_v10 = (float)((int)*param_2 + (int)*(float *)((int)register0x00000054 + 0xf0));
+        *(float *)((int)((unsigned int)__current_sp()) + 0xf8) = 1.4013e-45f;
+        temp_v10 = (float)((int)*param_2 + (int)*(float *)((int)((unsigned int)__current_sp()) + 0xf0));
       }
     }
     else {
-      *(float *)((int)register0x00000054 + 0xf8) = 1.4013e-45f;
-      temp_v10 = (float)((int)*param_2 + (int)*(float *)((int)register0x00000054 + 0xf0));
+      *(float *)((int)((unsigned int)__current_sp()) + 0xf8) = 1.4013e-45f;
+      temp_v10 = (float)((int)*param_2 + (int)*(float *)((int)((unsigned int)__current_sp()) + 0xf0));
     }
-    temp_v8 = ((int)temp_v10 - (int)*(float *)((int)register0x00000054 + 0x24)) - temp_v8 * (int)temp_v15;
+    temp_v8 = ((int)temp_v10 - (int)*(float *)((int)((unsigned int)__current_sp()) + 0x24)) - temp_v8 * (int)temp_v15;
     temp_v7 = temp_v8 >> 2;
     if ((unsigned int)((temp_v7 & 3) != 0) + (temp_v8 >> 4) > 0xcU - (int)param_3) break;
     if (temp_v7 != 0) {
-      *(unsigned int *)((int)register0x00000054 + 0x10) =
-           (((int)*(float *)((int)register0x00000054 + 0x10) + 3U) & 0xfffffffc) + temp_v7 * 4;
+      *(unsigned int *)((int)((unsigned int)__current_sp()) + 0x10) =
+           (((int)*(float *)((int)((unsigned int)__current_sp()) + 0x10) + 3U) & 0xfffffffc) + temp_v7 * 4;
       if ((temp_v7 & 3) != 0) {
         if (param_3 < (int *)0x8) {
           param_2[1] = (float)((unsigned int)param_2[1] |
@@ -658,7 +674,7 @@ LAB_00134780:
     }
     piVar9 = param_3;
     temp_v7 = temp_v14;
-    if (*(float *)((int)register0x00000054 + 0xf8) == 0.0f) goto LAB_00134780;
+    if (*(float *)((int)((unsigned int)__current_sp()) + 0xf8) == 0.0f) goto LAB_00134780;
   }
   *(unsigned char *)(unaff_r5 + 0x207) = 0;
 LAB_00134804:
@@ -698,18 +714,18 @@ LAB_001348b8:
         *(unsigned int *)(unaff_r4 + 0x9dc) =
              *(unsigned int *)(unaff_r4 + 0x9dc) |
              ((*(unsigned int *)(unaff_r4 +
-                         (int)*(float *)((int)register0x00000054 + (temp_v1 + 0x2c) * 4) * 0xc + 0x358
+                         (int)*(float *)((int)((unsigned int)__current_sp()) + (temp_v1 + 0x2c) * 4) * 0xc + 0x358
                         ) & 0xf) << ((temp_v14 & 0x3f) << 2));
       }
       else {
         *puVar10 = *(unsigned int *)(unaff_r4 + 0x9e0) |
                    ((*(unsigned int *)(unaff_r4 +
-                               (int)*(float *)((int)register0x00000054 + (temp_v1 + 0x2c) * 4) * 0xc +
+                               (int)*(float *)((int)((unsigned int)__current_sp()) + (temp_v1 + 0x2c) * 4) * 0xc +
                               0x358) & 0xf) << ((temp_v14 * 4 - 0x20) & 0xff));
       }
       temp_v6 = temp_v1 + 0x2c;
       temp_v1 = temp_v1 + 1;
-      unaff_r5[temp_v14 + 0x20a] = (unsigned int)*(float *)((int)register0x00000054 + temp_v6 * 4);
+      unaff_r5[temp_v14 + 0x20a] = (unsigned int)*(float *)((int)((unsigned int)__current_sp()) + temp_v6 * 4);
       temp_v14 = temp_v14 + 1;
     } while (temp_v1 < (int)unaff_r7);
   }
@@ -741,7 +757,7 @@ LAB_001348b8:
     }
   }
   if ((((char)unaff_r5[0x207] != '\0') &&
-      (pfVar3 = (float *)0x80c2, (**(unsigned int **)((int)register0x00000054 + 0x854) & 0x80c2) != 0)) &&
+      (pfVar3 = (float *)0x80c2, (**(unsigned int **)((int)((unsigned int)__current_sp()) + 0x854) & 0x80c2) != 0)) &&
      (temp_v15 = (float)unaff_r5[0x208], (unsigned int)temp_v15 < unaff_r5[0x209])) {
     pfVar3 = (float *)&DAT_004652a4;
     do {
@@ -771,7 +787,7 @@ LAB_001348b8:
     } while ((unsigned int)temp_v15 < unaff_r5[0x209]);
   }
   if (unaff_r5[1] != 0) {
-    if ((unaff_r5[1] & (unsigned int)*(float *)((int)register0x00000054 + 0x858) & 0x10) != 0) {
+    if ((unaff_r5[1] & (unsigned int)*(float *)((int)((unsigned int)__current_sp()) + 0x858) & 0x10) != 0) {
       *(unsigned int *)(unaff_r4 + 0x1bc) = 0xffffffff;
       *(unsigned int *)(unaff_r4 + 0x1b8) = 0xffffffff;
       *(unsigned int *)(unaff_r4 + 0x1b4) = 0xffffffff;
@@ -812,7 +828,7 @@ LAB_001348b8:
       }
     }
     temp_v15 = DAT_004652b4;
-    if ((((unsigned int)*(float *)((int)register0x00000054 + 0x858) & 0x20 & unaff_r5[1]) != 0) &&
+    if ((((unsigned int)*(float *)((int)((unsigned int)__current_sp()) + 0x858) & 0x20 & unaff_r5[1]) != 0) &&
        (temp_v1 = 0, DAT_0046534c != 0xbd)) {
       do {
         temp_v6 = (&DAT_0046534c)[temp_v1];
@@ -827,7 +843,7 @@ LAB_001348b8:
     }
     temp_v15 = DAT_004652b4;
     pfVar3 = (float *)unaff_r5[1];
-    if (((unsigned int)*(float *)((int)register0x00000054 + 0x858) & 2 & (unsigned int)pfVar3) != 0) {
+    if (((unsigned int)*(float *)((int)((unsigned int)__current_sp()) + 0x858) & 2 & (unsigned int)pfVar3) != 0) {
       pfVar3 = (float *)&DAT_004652bc;
       temp_v1 = 0;
       if (DAT_004652bc != 0xbd) {
@@ -845,7 +861,7 @@ LAB_001348b8:
       }
     }
   }
-  if (((unsigned int)*(float *)((int)register0x00000054 + 0x858) & 0x10) != 0) {
+  if (((unsigned int)*(float *)((int)((unsigned int)__current_sp()) + 0x858) & 0x10) != 0) {
     temp_v1 = *(int *)(unaff_r4 + 0x1b4);
     temp_v19 = temp_v1 == 0;
     if (temp_v19) {
@@ -1025,8 +1041,8 @@ LAB_001348b8:
 LAB_001350ac:
   temp_v15 = 0.0f;
   temp_v42 = 0;
-  if ((((unsigned int)*(float *)((int)register0x00000054 + 0x858) & 0x400) != 0) &&
-     ((**(unsigned int **)((int)register0x00000054 + 0x854) & 4) != 0)) {
+  if ((((unsigned int)*(float *)((int)((unsigned int)__current_sp()) + 0x858) & 0x400) != 0) &&
+     ((**(unsigned int **)((int)((unsigned int)__current_sp()) + 0x854) & 4) != 0)) {
     temp_v10 = *(float *)(unaff_r4 + 0xe4c);
     temp_v19 = temp_v10 == 0.0f;
     if (temp_v19) {
@@ -1106,7 +1122,7 @@ LAB_001350ac:
       *unaff_r5 = *unaff_r5 | 0x80000;
     }
   }
-  if (((unsigned int)*(float *)((int)register0x00000054 + 0x858) & 0x20) != 0) {
+  if (((unsigned int)*(float *)((int)((unsigned int)__current_sp()) + 0x858) & 0x20) != 0) {
     if ((~*(unsigned int *)(unaff_r4 + 0x624) & 7) == 0) {
       if (*(char *)(unaff_r4 + 0xe74) != '\0') {
         *(unsigned int *)((int)DAT_004652b4 + 0x1158) = *(unsigned int *)(unaff_r4 + 0x630);
@@ -1126,16 +1142,16 @@ LAB_001350ac:
       } while (temp_v1 < 8);
     }
   }
-  if (((unsigned int)*(float *)((int)register0x00000054 + 0x858) & 0x10) != 0) {
+  if (((unsigned int)*(float *)((int)((unsigned int)__current_sp()) + 0x858) & 0x10) != 0) {
     temp_v1 = 0;
     if (DAT_00465334 != 0xbd) {
-      *(float *)((int)register0x00000054 + 0xc) = DAT_004652b4;
+      *(float *)((int)((unsigned int)__current_sp()) + 0xc) = DAT_004652b4;
       do {
         temp_v14 = (&DAT_00465334)[temp_v1];
         if ((*(unsigned int *)(unaff_r4 + ((int)temp_v14 >> 5) * 4 + 0x7d8) & (1 << (temp_v14 & 0x1f))) != 0) {
           temp_v7 = (unsigned int)*(unsigned char *)(temp_v14 + unaff_r4 + 0x426);
           pfVar3 = (float *)(unaff_r4 + temp_v14 * 4 + 0x4e4);
-          pfVar15 = (float *)((int)*(float *)((int)register0x00000054 + 0xc) + temp_v14 * 4 + 0x100c);
+          pfVar15 = (float *)((int)*(float *)((int)((unsigned int)__current_sp()) + 0xc) + temp_v14 * 4 + 0x100c);
           if ((temp_v7 != 0) && (temp_v15 = *pfVar3, temp_v15 != *pfVar15)) {
             if (DAT_004652a0 < DAT_004652a4) {
               pfVar12 = DAT_004652a0 + 1;
@@ -1155,13 +1171,13 @@ LAB_001350ac:
     }
     temp_v1 = 0;
     if (DAT_0046531c != 0xbd) {
-      *(float *)((int)register0x00000054 + 0xc) = DAT_004652b4;
+      *(float *)((int)((unsigned int)__current_sp()) + 0xc) = DAT_004652b4;
       do {
         temp_v14 = (&DAT_0046531c)[temp_v1];
         if ((*(unsigned int *)(unaff_r4 + ((int)temp_v14 >> 5) * 4 + 0x7d8) & (1 << (temp_v14 & 0x1f))) != 0) {
           temp_v7 = (unsigned int)*(unsigned char *)(temp_v14 + unaff_r4 + 0x426);
           pfVar3 = (float *)(unaff_r4 + temp_v14 * 4 + 0x4e4);
-          pfVar15 = (float *)((int)*(float *)((int)register0x00000054 + 0xc) + temp_v14 * 4 + 0x100c);
+          pfVar15 = (float *)((int)*(float *)((int)((unsigned int)__current_sp()) + 0xc) + temp_v14 * 4 + 0x100c);
           if ((temp_v7 != 0) && (temp_v15 = *pfVar3, temp_v15 != *pfVar15)) {
             if (DAT_004652a0 < DAT_004652a4) {
               pfVar12 = DAT_004652a0 + 1;
@@ -1180,15 +1196,15 @@ LAB_001350ac:
       } while ((&DAT_0046531c)[temp_v1] != 0xbd);
     }
   }
-  if ((((unsigned int)*(float *)((int)register0x00000054 + 0x858) & 2) != 0) &&
+  if ((((unsigned int)*(float *)((int)((unsigned int)__current_sp()) + 0x858) & 2) != 0) &&
      (temp_v1 = 0, DAT_004652bc != 0xbd)) {
-    *(float *)((int)register0x00000054 + 0xc) = DAT_004652b4;
+    *(float *)((int)((unsigned int)__current_sp()) + 0xc) = DAT_004652b4;
     do {
       temp_v14 = (&DAT_004652bc)[temp_v1];
       if ((*(unsigned int *)(unaff_r4 + ((int)temp_v14 >> 5) * 4 + 0x7d8) & (1 << (temp_v14 & 0x1f))) != 0) {
         temp_v7 = (unsigned int)*(unsigned char *)(temp_v14 + unaff_r4 + 0x426);
         pfVar3 = (float *)(unaff_r4 + temp_v14 * 4 + 0x4e4);
-        pfVar15 = (float *)((int)*(float *)((int)register0x00000054 + 0xc) + temp_v14 * 4 + 0x100c);
+        pfVar15 = (float *)((int)*(float *)((int)((unsigned int)__current_sp()) + 0xc) + temp_v14 * 4 + 0x100c);
         if ((temp_v7 != 0) && (temp_v15 = *pfVar3, temp_v15 != *pfVar15)) {
           if (DAT_004652a0 < DAT_004652a4) {
             pfVar12 = DAT_004652a0 + 1;
@@ -1205,15 +1221,15 @@ LAB_001350ac:
       temp_v1 = temp_v1 + 1;
     } while ((&DAT_004652bc)[temp_v1] != 0xbd);
   }
-  if ((((unsigned int)*(float *)((int)register0x00000054 + 0x858) & 0x20) != 0) &&
+  if ((((unsigned int)*(float *)((int)((unsigned int)__current_sp()) + 0x858) & 0x20) != 0) &&
      (temp_v1 = 0, DAT_0046534c != 0xbd)) {
-    *(float *)((int)register0x00000054 + 0xc) = DAT_004652b4;
+    *(float *)((int)((unsigned int)__current_sp()) + 0xc) = DAT_004652b4;
     do {
       temp_v14 = (&DAT_0046534c)[temp_v1];
       if ((*(unsigned int *)(unaff_r4 + ((int)temp_v14 >> 5) * 4 + 0x7d8) & (1 << (temp_v14 & 0x1f))) != 0) {
         temp_v7 = (unsigned int)*(unsigned char *)(temp_v14 + unaff_r4 + 0x426);
         pfVar3 = (float *)(unaff_r4 + temp_v14 * 4 + 0x4e4);
-        pfVar15 = (float *)((int)*(float *)((int)register0x00000054 + 0xc) + temp_v14 * 4 + 0x100c);
+        pfVar15 = (float *)((int)*(float *)((int)((unsigned int)__current_sp()) + 0xc) + temp_v14 * 4 + 0x100c);
         if ((temp_v7 != 0) && (temp_v15 = *pfVar3, temp_v15 != *pfVar15)) {
           if (DAT_004652a0 < DAT_004652a4) {
             pfVar12 = DAT_004652a0 + 1;
@@ -1230,10 +1246,10 @@ LAB_001350ac:
       temp_v1 = temp_v1 + 1;
     } while ((&DAT_0046534c)[temp_v1] != 0xbd);
   }
-  if (((unsigned int)*(float *)((int)register0x00000054 + 0x858) & 0x40) != 0) {
+  if (((unsigned int)*(float *)((int)((unsigned int)__current_sp()) + 0x858) & 0x40) != 0) {
     temp_v38 = 0x4580000045000000;
     if (((*(unsigned int *)(unaff_r4 + 0x590) & 1) != 0) &&
-       ((**(unsigned int **)((int)register0x00000054 + 0x854) & 0x4008) != 0)) {
+       ((**(unsigned int **)((int)((unsigned int)__current_sp()) + 0x854) & 0x4008) != 0)) {
       temp_v37 = 0x44ffe000;
       temp_v14 = 0;
       do {
@@ -1246,28 +1262,28 @@ LAB_001350ac:
           if (temp_v7 == 0) break;
           temp_v1 = FUN_002aa67c();
           if (temp_v1 == 0) break;
-          *(unsigned int **)register0x00000054 = unaff_r5 + temp_v14;
+          *(unsigned int **)((unsigned int)__current_sp()) = unaff_r5 + temp_v14;
           if ((unaff_r5 + temp_v14)[0x43] == temp_v7) {
-            if (*(int *)((int)*(float *)register0x00000054 + 400) != 0) {
+            if (*(int *)((int)*(float *)((unsigned int)__current_sp()) + 400) != 0) {
               if (DAT_004652a0 < DAT_004652a4) {
                 *DAT_004652a0 =
-                     (float)(*(unsigned int *)((int)*(float *)register0x00000054 + 0x214) |
+                     (float)(*(unsigned int *)((int)*(float *)((unsigned int)__current_sp()) + 0x214) |
                             (*(int *)(temp_v14 * 4 + 0x40b694) << 8));
                 DAT_004652a0[1] = 1.378167e-39f;
                 DAT_004652a0 = DAT_004652a0 + 2;
               }
-              FUN_002aa790(0x1c8,*(unsigned int *)((int)*(float *)register0x00000054 + 400),
+              FUN_002aa790(0x1c8,*(unsigned int *)((int)*(float *)((unsigned int)__current_sp()) + 400),
                            *(int *)(temp_v1 + 0x804) +
-                           *(int *)((int)*(float *)register0x00000054 + 0x214) * 4);
-              *(unsigned int *)((int)*(float *)register0x00000054 + 400) = 0;
+                           *(int *)((int)*(float *)((unsigned int)__current_sp()) + 0x214) * 4);
+              *(unsigned int *)((int)*(float *)((unsigned int)__current_sp()) + 400) = 0;
             }
           }
           else {
-            if (*(int *)((int)*(float *)register0x00000054 + 400) != 0) {
-              *(unsigned int *)((int)*(float *)register0x00000054 + 400) = 0;
+            if (*(int *)((int)*(float *)((unsigned int)__current_sp()) + 400) != 0) {
+              *(unsigned int *)((int)*(float *)((unsigned int)__current_sp()) + 400) = 0;
             }
-            *(unsigned int *)((int)*(float *)register0x00000054 + 0x10c) = temp_v7;
-            *(unsigned int *)((int)register0x00000054 + 0x1c) = temp_v1 + 0x81c;
+            *(unsigned int *)((int)*(float *)((unsigned int)__current_sp()) + 0x10c) = temp_v7;
+            *(unsigned int *)((int)((unsigned int)__current_sp()) + 0x1c) = temp_v1 + 0x81c;
             if ((*(unsigned int *)(temp_v1 + 0x81c) & 1) != 0) {
               if (*(int *)(temp_v1 + 0x804) == 0) {
                 if (DAT_0044e330 == (romwright_code *)0x0) {
@@ -1316,7 +1332,7 @@ LAB_001350ac:
                 *(unsigned int *)(*(int *)(temp_v1 + 0x804) + temp_v6 * 4) = temp_v7 | (temp_v8 << 0xc);
                 temp_v6 = temp_v6 + 1;
               } while (temp_v6 < 0x100);
-              **(unsigned int **)((int)register0x00000054 + 0x1c) = *(unsigned int *)(temp_v1 + 0x81c) & 0xfffffffe;
+              **(unsigned int **)((int)((unsigned int)__current_sp()) + 0x1c) = *(unsigned int *)(temp_v1 + 0x81c) & 0xfffffffe;
             }
             if (DAT_004652a0 < DAT_004652a4) {
               temp_v6 = *(int *)(temp_v14 * 4 + 0x40b694);
@@ -1325,7 +1341,7 @@ LAB_001350ac:
               DAT_004652a0 = DAT_004652a0 + 2;
             }
             FUN_002aa790(0x1c8,0x100,*(unsigned int *)(temp_v1 + 0x804));
-            *(float *)((int)register0x00000054 + 0x818) = 1.4013e-45f;
+            *(float *)((int)((unsigned int)__current_sp()) + 0x818) = 1.4013e-45f;
           }
         }
         temp_v14 = temp_v14 + 1;
@@ -1412,7 +1428,7 @@ LAB_001350ac:
                 DAT_004652a0 = DAT_004652a0 + 2;
               }
               FUN_002aa790(0x1c8,0x100,*(unsigned int *)(temp_v13 + 0x804));
-              *(float *)((int)register0x00000054 + 0x818) = 1.4013e-45f;
+              *(float *)((int)((unsigned int)__current_sp()) + 0x818) = 1.4013e-45f;
             }
           }
           if (((*(unsigned int *)(unaff_r4 + 0x7c0) >> ((temp_v1 + 0x18U) & 0xff)) & 1) == 0) {
@@ -1492,7 +1508,7 @@ LAB_001350ac:
                 DAT_004652a0 = DAT_004652a0 + 2;
               }
               FUN_002aa790(0x1c8,0x100,*(unsigned int *)(temp_v6 + 0x804));
-              *(float *)((int)register0x00000054 + 0x818) = 1.4013e-45f;
+              *(float *)((int)((unsigned int)__current_sp()) + 0x818) = 1.4013e-45f;
             }
           }
         }
@@ -1502,19 +1518,19 @@ LAB_001350ac:
     temp_v15 = (float)((unsigned long long)temp_v42 >> 0x20);
     temp_v37 = 0x437f0000;
     if ((*(int *)(unaff_r4 + 0xe0c) != 0) &&
-       ((**(unsigned int **)((int)register0x00000054 + 0x854) & 0x4020) != 0)) {
+       ((**(unsigned int **)((int)((unsigned int)__current_sp()) + 0x854) & 0x4020) != 0)) {
       temp_v1 = 0;
       temp_v39 = 0x457ff000;
       temp_v37 = 0x3f800000437f0000;
-      *(float *)((int)register0x00000054 + 0x820) = 2.8026e-45f;
-      *(float *)((int)register0x00000054 + 0x824) = 4.2039e-45f;
+      *(float *)((int)((unsigned int)__current_sp()) + 0x820) = 2.8026e-45f;
+      *(float *)((int)((unsigned int)__current_sp()) + 0x824) = 4.2039e-45f;
       do {
         temp_v14 = unaff_r5[*(int *)(unaff_r4 + temp_v1 * 4 + 0xdf0) + 0x1d];
         temp_v6 = FUN_002aa67c();
         if (unaff_r5[temp_v1 + 0x59] == temp_v14) {
           if (unaff_r5[temp_v1 + 0x7a] != 0) {
             if (DAT_004652a0 < DAT_004652a4) {
-              temp_v15 = *(float *)((int)register0x00000054 + (temp_v1 + 0x208) * 4);
+              temp_v15 = *(float *)((int)((unsigned int)__current_sp()) + (temp_v1 + 0x208) * 4);
               temp_v14 = unaff_r5[temp_v1 + 0x9b];
               DAT_004652a0[1] = 1.377778e-39f;
               *DAT_004652a0 = (float)(temp_v14 | ((int)temp_v15 << 8));
@@ -1595,13 +1611,13 @@ LAB_001350ac:
             *(unsigned int *)(temp_v6 + 0x81c) = *(unsigned int *)(temp_v6 + 0x81c) & 0xfffffff7;
           }
           if (DAT_004652a0 < DAT_004652a4) {
-            temp_v15 = *(float *)((int)register0x00000054 + (temp_v1 + 0x208) * 4);
+            temp_v15 = *(float *)((int)((unsigned int)__current_sp()) + (temp_v1 + 0x208) * 4);
             DAT_004652a0[1] = 1.377778e-39f;
             *DAT_004652a0 = (float)((int)temp_v15 << 8);
             DAT_004652a0 = DAT_004652a0 + 2;
           }
           FUN_002aa790(0xb0,0x80,*(unsigned int *)(temp_v6 + 0x810));
-          *(float *)((int)register0x00000054 + 0x818) = 1.4013e-45f;
+          *(float *)((int)((unsigned int)__current_sp()) + 0x818) = 1.4013e-45f;
         }
         temp_v15 = (float)temp_v39;
         temp_v1 = temp_v1 + 1;
@@ -1690,7 +1706,7 @@ LAB_001350ac:
             DAT_004652a0 = DAT_004652a0 + 2;
           }
           FUN_002aa790(0xb0,0x80,*(unsigned int *)(temp_v1 + 0x814));
-          *(float *)((int)register0x00000054 + 0x818) = 1.4013e-45f;
+          *(float *)((int)((unsigned int)__current_sp()) + 0x818) = 1.4013e-45f;
         }
       }
       temp_v15 = (float)((unsigned long long)temp_v42 >> 0x20);
@@ -1774,8 +1790,8 @@ LAB_001350ac:
           temp_v15 = (float)((unsigned long long)temp_v42 >> 0x20);
           temp_v13 = 0;
           do {
-            *(unsigned int *)((int)register0x00000054 + (temp_v13 + 2) * 4) =
-                 ((unsigned int)*(float *)((int)register0x00000054 + (temp_v13 + 2) * 4) &
+            *(unsigned int *)((int)((unsigned int)__current_sp()) + (temp_v13 + 2) * 4) =
+                 ((unsigned int)*(float *)((int)((unsigned int)__current_sp()) + (temp_v13 + 2) * 4) &
                  ~(0xff << ((temp_v1 << 3) & 0xffU))) |
                  ((unsigned int)*(unsigned char *)(*(int *)(temp_v6 + 0x818) + temp_v13) << ((temp_v1 << 3) & 0xffU));
             temp_v13 = temp_v13 + 1;
@@ -1788,14 +1804,14 @@ LAB_001350ac:
             *DAT_004652a0 = 1.43493e-42f;
             DAT_004652a0 = DAT_004652a0 + 2;
           }
-          FUN_002aa790(0xb0,0x100,(float *)((int)register0x00000054 + 8));
+          FUN_002aa790(0xb0,0x100,(float *)((int)((unsigned int)__current_sp()) + 8));
           if (DAT_004652a0 < DAT_004652a4) {
             *DAT_004652a0 = 1.79366e-42f;
             DAT_004652a0[1] = 1.377778e-39f;
             DAT_004652a0 = DAT_004652a0 + 2;
           }
-          FUN_002aa790(0xb0,0x100,(float *)((int)register0x00000054 + 0x408));
-          *(float *)((int)register0x00000054 + 0x818) = 1.4013e-45f;
+          FUN_002aa790(0xb0,0x100,(float *)((int)((unsigned int)__current_sp()) + 0x408));
+          *(float *)((int)((unsigned int)__current_sp()) + 0x818) = 1.4013e-45f;
           temp_v1 = 0;
           do {
             temp_v6 = temp_v1 + 1;
@@ -1843,8 +1859,8 @@ LAB_001350ac:
           if (temp_v14 <= temp_v7) {
             temp_v8 = temp_v14;
             do {
-              *(unsigned int *)((int)register0x00000054 + (temp_v8 + 2) * 4) =
-                   ((unsigned int)*(float *)((int)register0x00000054 + (temp_v8 + 2) * 4) &
+              *(unsigned int *)((int)((unsigned int)__current_sp()) + (temp_v8 + 2) * 4) =
+                   ((unsigned int)*(float *)((int)((unsigned int)__current_sp()) + (temp_v8 + 2) * 4) &
                    ~(0xff << ((temp_v1 << 3) & 0xffU))) |
                    ((unsigned int)*(unsigned char *)(*(int *)(temp_v6 + 0x818) + temp_v8) << ((temp_v1 << 3) & 0xffU));
               temp_v8 = temp_v8 + 1;
@@ -1859,13 +1875,13 @@ LAB_001350ac:
               *DAT_004652a0 = (float)(temp_v14 | 0x400);
               DAT_004652a0 = DAT_004652a0 + 2;
             }
-            FUN_002aa790(0xb0,0x100 - temp_v14,(float *)((int)register0x00000054 + (temp_v14 + 2) * 4));
+            FUN_002aa790(0xb0,0x100 - temp_v14,(float *)((int)((unsigned int)__current_sp()) + (temp_v14 + 2) * 4));
             if (DAT_004652a0 < DAT_004652a4) {
               DAT_004652a0[1] = 1.377778e-39f;
               *DAT_004652a0 = 1.79366e-42f;
               DAT_004652a0 = DAT_004652a0 + 2;
             }
-            FUN_002aa790(0xb0,temp_v7 - 0xff,(float *)((int)register0x00000054 + 0x408));
+            FUN_002aa790(0xb0,temp_v7 - 0xff,(float *)((int)((unsigned int)__current_sp()) + 0x408));
           }
           else {
             if (DAT_004652a0 < DAT_004652a4) {
@@ -1874,7 +1890,7 @@ LAB_001350ac:
               DAT_004652a0 = DAT_004652a0 + 2;
             }
             FUN_002aa790(0xb0,(temp_v7 - temp_v14) + 1,
-                         (float *)((int)register0x00000054 + (temp_v14 + 2) * 4));
+                         (float *)((int)((unsigned int)__current_sp()) + (temp_v14 + 2) * 4));
           }
         }
         else {
@@ -1884,14 +1900,14 @@ LAB_001350ac:
             DAT_004652a0 = DAT_004652a0 + 2;
           }
           FUN_002aa790(0xb0,(temp_v7 - temp_v14) + 1,
-                       (float *)((int)register0x00000054 + (temp_v14 + 2) * 4));
+                       (float *)((int)((unsigned int)__current_sp()) + (temp_v14 + 2) * 4));
         }
       }
     }
 LAB_001367f8:
     temp_v24 = (unsigned int)temp_v37;
     if (((*(unsigned int *)(unaff_r4 + 0x624) & 7) != 0) &&
-       ((**(unsigned int **)((int)register0x00000054 + 0x854) & 0x4010) != 0)) {
+       ((**(unsigned int **)((int)((unsigned int)__current_sp()) + 0x854) & 0x4010) != 0)) {
       temp_v14 = unaff_r5[*(int *)(unaff_r4 + 0xe64) + 0x1d];
       temp_v1 = FUN_002aa67c();
       if (unaff_r5[0x60] == temp_v14) {
@@ -1977,11 +1993,11 @@ LAB_001367f8:
           DAT_004652a0 = DAT_004652a0 + 2;
         }
         FUN_002aa790(0xe8,0x80,*(unsigned int *)(temp_v1 + 0x808));
-        *(float *)((int)register0x00000054 + 0x818) = 1.4013e-45f;
+        *(float *)((int)((unsigned int)__current_sp()) + 0x818) = 1.4013e-45f;
       }
     }
     if (((~*(unsigned int *)(unaff_r4 + 0x624) & 7) == 0) &&
-       ((**(unsigned int **)((int)register0x00000054 + 0x854) & 0x2004000) != 0)) {
+       ((**(unsigned int **)((int)((unsigned int)__current_sp()) + 0x854) & 0x2004000) != 0)) {
       temp_v1 = 0;
       do {
         if (unaff_r5[*(int *)(unaff_r4 + temp_v1 * 4 + 0xe78) + 0x1d] != unaff_r5[temp_v1 + 0x61])
@@ -1991,23 +2007,23 @@ LAB_001367f8:
       if (temp_v1 != 3) {
         temp_v1 = 0;
         temp_v36 = (unsigned long long)(unsigned int)temp_v15;
-        *(float *)((int)register0x00000054 + 0x10) = 0.0f;
-        *(float *)((int)register0x00000054 + 0x14) = 0.0f;
-        *(float *)((int)register0x00000054 + 0x18) = 0.0f;
-        *(float *)((int)register0x00000054 + 0x1c) = 0.0f;
-        *(float *)((int)register0x00000054 + 0x20) = 0.0f;
-        *(float *)((int)register0x00000054 + 0x24) = 0.0f;
+        *(float *)((int)((unsigned int)__current_sp()) + 0x10) = 0.0f;
+        *(float *)((int)((unsigned int)__current_sp()) + 0x14) = 0.0f;
+        *(float *)((int)((unsigned int)__current_sp()) + 0x18) = 0.0f;
+        *(float *)((int)((unsigned int)__current_sp()) + 0x1c) = 0.0f;
+        *(float *)((int)((unsigned int)__current_sp()) + 0x20) = 0.0f;
+        *(float *)((int)((unsigned int)__current_sp()) + 0x24) = 0.0f;
         temp_v42 = romwright_piece_4_4(0x42fe0000,temp_v24);
-        *(float *)((int)register0x00000054 + 0x28) = 0.0f;
-        *(float *)((int)register0x00000054 + 0x2c) = 0.0f;
-        *(float *)((int)register0x00000054 + 0x30) = 0.0f;
-        *(float *)((int)register0x00000054 + 0x34) = 0.0f;
-        *(float *)((int)register0x00000054 + 0x38) = 0.0f;
-        *(float *)((int)register0x00000054 + 0x3c) = 0.0f;
-        *(float *)((int)register0x00000054 + 0x40) = 0.0f;
-        *(float *)((int)register0x00000054 + 0x44) = 0.0f;
-        *(float *)((int)register0x00000054 + 0x48) = 0.0f;
-        *(float *)((int)register0x00000054 + 0x4c) = 0.0f;
+        *(float *)((int)((unsigned int)__current_sp()) + 0x28) = 0.0f;
+        *(float *)((int)((unsigned int)__current_sp()) + 0x2c) = 0.0f;
+        *(float *)((int)((unsigned int)__current_sp()) + 0x30) = 0.0f;
+        *(float *)((int)((unsigned int)__current_sp()) + 0x34) = 0.0f;
+        *(float *)((int)((unsigned int)__current_sp()) + 0x38) = 0.0f;
+        *(float *)((int)((unsigned int)__current_sp()) + 0x3c) = 0.0f;
+        *(float *)((int)((unsigned int)__current_sp()) + 0x40) = 0.0f;
+        *(float *)((int)((unsigned int)__current_sp()) + 0x44) = 0.0f;
+        *(float *)((int)((unsigned int)__current_sp()) + 0x48) = 0.0f;
+        *(float *)((int)((unsigned int)__current_sp()) + 0x4c) = 0.0f;
         do {
           temp_v6 = FUN_002aa67c(*(unsigned int *)(unaff_r4 + temp_v1 * 4 + 0xe78));
           if ((*(unsigned int *)(temp_v6 + 0x81c) & 4) != 0) {
@@ -2048,19 +2064,19 @@ LAB_001367f8:
           }
           temp_v13 = 0;
           do {
-            *(unsigned int *)((int)register0x00000054 + (temp_v13 + 4) * 4) =
-                 (unsigned int)*(float *)((int)register0x00000054 + (temp_v13 + 4) * 4) |
+            *(unsigned int *)((int)((unsigned int)__current_sp()) + (temp_v13 + 4) * 4) =
+                 (unsigned int)*(float *)((int)((unsigned int)__current_sp()) + (temp_v13 + 4) * 4) |
                  (*(int *)(*(int *)(temp_v6 + 0x80c) + temp_v13 * 4 + 0x20) << ((temp_v1 << 3) & 0xffU));
             temp_v3 = temp_v13 + 1;
-            *(unsigned int *)((int)register0x00000054 + (temp_v13 + 0xc) * 4) =
-                 (unsigned int)*(float *)((int)register0x00000054 + (temp_v13 + 0xc) * 4) |
+            *(unsigned int *)((int)((unsigned int)__current_sp()) + (temp_v13 + 0xc) * 4) =
+                 (unsigned int)*(float *)((int)((unsigned int)__current_sp()) + (temp_v13 + 0xc) * 4) |
                  (*(int *)(*(int *)(temp_v6 + 0x80c) + temp_v13 * 4) << ((temp_v1 << 3) & 0xffU));
             temp_v13 = temp_v3;
           } while (temp_v3 < 8);
           temp_v1 = temp_v1 + 1;
         } while (temp_v1 < 3);
         if (temp_v1 == 3) {
-          if (*(float *)((int)register0x00000054 + 0x818) == 0.0f) {
+          if (*(float *)((int)((unsigned int)__current_sp()) + 0x818) == 0.0f) {
             FUN_002aa924(0xc0,0x2d);
           }
           if (DAT_004652a0 < DAT_004652a4) {
@@ -2068,7 +2084,7 @@ LAB_001367f8:
             DAT_004652a0[1] = 1.37794e-39f;
             DAT_004652a0 = DAT_004652a0 + 2;
           }
-          FUN_002aa790(0x124,0x10,(float *)((int)register0x00000054 + 0x10));
+          FUN_002aa790(0x124,0x10,(float *)((int)((unsigned int)__current_sp()) + 0x10));
           if (DAT_004652a0 < DAT_004652a4) {
             *DAT_004652a0 = 0.0f;
             DAT_004652a0[1] = 3.58732e-43f;
@@ -2084,10 +2100,10 @@ LAB_001367f8:
       }
     }
   }
-  if (((unsigned int)*(float **)((int)register0x00000054 + 0x858) & 0x800) == 0) {
-    return *(float **)((int)register0x00000054 + 0x858);
+  if (((unsigned int)*(float **)((int)((unsigned int)__current_sp()) + 0x858) & 0x800) == 0) {
+    return *(float **)((int)((unsigned int)__current_sp()) + 0x858);
   }
-  if (((**(unsigned int **)((int)register0x00000054 + 0x854) & 0x100) == 0) &&
+  if (((**(unsigned int **)((int)((unsigned int)__current_sp()) + 0x854) & 0x100) == 0) &&
      (*(float **)(unaff_r4 + 0xe38) == (float *)unaff_r5[0x191])) {
     return *(float **)(unaff_r4 + 0xe38);
   }

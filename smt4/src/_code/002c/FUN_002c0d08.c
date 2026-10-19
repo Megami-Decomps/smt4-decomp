@@ -8,17 +8,17 @@ typedef struct {
 } void_stack;
 
 /* Supplied declaration required: FUN_002bb460. */
-/* Supplied declaration required: nn_applet_CTR_detail_CallUtility. */
-/* Supplied declaration required: nn_applet_CTR_detail_UnlockTransition. */
+extern unsigned int nn_applet_CTR_detail_CallUtility(unsigned int, unsigned char *, unsigned int, unsigned char *, unsigned int, int *);
+extern void nn_applet_CTR_detail_UnlockTransition(unsigned int);
 
 
 void FUN_002c0d08(void)
 
 {
-/* irregular: 4 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   FUN_002bb460(0);
   nn_applet_CTR_detail_UnlockTransition(1);
-  nn_applet_CTR_detail_CallUtility(4,0,0,0,0,0);
+  nn_applet_CTR_detail_CallUtility(4,0x0,0,0x0,0,0x0);
                     /* WARNING: Treating indirect jump as return */
   return;
 }

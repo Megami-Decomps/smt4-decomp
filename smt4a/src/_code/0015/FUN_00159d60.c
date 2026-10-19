@@ -21,17 +21,18 @@ extern unsigned char uRam1ff810c0; /* 0x1ff810c0 */
 /* Supplied declaration required: FUN_0016f574. */
 extern int FUN_0016f864(unsigned int);
 /* Supplied declaration required: FUN_001a167c. */
-/* Supplied declaration required: FUN_001bd5f8. */
-/* Supplied declaration required: nn_snd_CTR_DspFxManager_Initialize. */
-/* Supplied declaration required: nn_snd_CTR_VoiceManager_Initialize. */
+extern unsigned int FUN_001bd5f8(void);
+extern void nn_snd_CTR_DspFxManager_Initialize(unsigned int);
+extern void nn_snd_CTR_VoiceManager_Initialize(unsigned int);
 
 
 void FUN_00159d60(void)
 
 {
-/* irregular: 9 native warning(s); review required */
+/* irregular: 6 native warning(s); review required */
   int temp_v0;
   unsigned char *puVar2;
+  unsigned int temp_v1;
   
   if ((DAT_005894e4 == '\0') && (temp_v0 = FUN_0016f864(0), -1 < temp_v0)) {
     puVar2 = &DAT_006433d0;
@@ -39,10 +40,10 @@ void FUN_00159d60(void)
     if (-1 < (int)puVar2) {
       DAT_005894e8 = uRam1ff810c0;
       FUN_001a167c(&DAT_00643380);
-      nn_snd_CTR_VoiceManager_Initialize(&DAT_006449d0);
+      nn_snd_CTR_VoiceManager_Initialize((unsigned int)&DAT_006449d0);
       FUN_0016f25c(&DAT_00643380);
-      FUN_001bd5f8();
-      nn_snd_CTR_DspFxManager_Initialize();
+      temp_v1 = FUN_001bd5f8();
+      nn_snd_CTR_DspFxManager_Initialize(temp_v1);
       FUN_0016e700(FUN_0016f3e4,FUN_0016f7ec,&LAB_0016f3a8);
       DAT_005894e5 = 0;
       DAT_005894e6 = 0;

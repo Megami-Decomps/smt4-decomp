@@ -146,7 +146,7 @@ unsigned int FUN_003b0f88(unsigned int *param_1,int param_2,unsigned int *param_
       ppppppcVar15 = (romwright_code ******)param_1[0x512];
       pppppppcVar9 = (romwright_code *******)ppppppcVar5;
       while (ppppppcVar3 = ppppppcVar15, ppppppcVar3 != ppppppcVar5) {
-        if (ppppppcVar3[4] < temp_v12) {
+        if (ppppppcVar3[4] < (romwright_code *****)temp_v12) {
           ppppppcVar15 = (romwright_code ******)ppppppcVar3[1];
         }
         else {
@@ -154,7 +154,7 @@ unsigned int FUN_003b0f88(unsigned int *param_1,int param_2,unsigned int *param_
           pppppppcVar9 = (romwright_code *******)ppppppcVar3;
         }
       }
-      temp_v6 = ppppppcVar5 <= pppppppcVar9;
+      temp_v6 = ppppppcVar5 <= (romwright_code ******)pppppppcVar9;
       if (pppppppcVar9 != (romwright_code *******)ppppppcVar5) {
         ppppppcVar3 = pppppppcVar9[4];
         temp_v6 = temp_v12 <= ppppppcVar3;
@@ -183,7 +183,7 @@ unsigned int FUN_003b0f88(unsigned int *param_1,int param_2,unsigned int *param_
           ppppppcVar15 = (romwright_code ******)*temp_v10;
           ppppppcVar4 = ppppppcVar15;
           temp_v10 = ppppppcVar15;
-          if (ppppppcVar15[4] < temp_v12) {
+          if (ppppppcVar15[4] < (romwright_code *****)temp_v12) {
             ppppppcVar4 = ppppppcVar5;
             temp_v10 = ppppppcVar15 + 1;
           }
@@ -194,7 +194,7 @@ unsigned int FUN_003b0f88(unsigned int *param_1,int param_2,unsigned int *param_
         temp_v21 = temp_v15;
         temp_v22 = temp_v16;
         temp_v24 = temp_v23;
-        if ((ppppppcVar5 != ppppppcVar13) && (temp_v12 >= ppppppcVar5[4])) {
+        if ((ppppppcVar5 != ppppppcVar13) && (temp_v12 >= (romwright_code ******)ppppppcVar5[4])) {
           temp_v26 = (romwright_code *******)((unsigned int)pppppppcVar6 & 0xffffff00);
         }
         else {
@@ -221,7 +221,7 @@ unsigned int FUN_003b0f88(unsigned int *param_1,int param_2,unsigned int *param_
           else {
             *temp_v10 = (romwright_code *****)ppppppcVar5;
             FUN_00396f3c(pppppppcVar9,ppppppcVar5);
-            temp_v26 = (romwright_code *******)romwright_piece_3_1(temp_v26._1_3_,1);
+            temp_v26 = (romwright_code *******)romwright_piece_3_1((((unsigned int)(temp_v26) >> 8) & 0xffffffU),1);
           }
         }
         temp_v25 = (romwright_code *******)ppppppcVar5;
@@ -513,7 +513,7 @@ unsigned int FUN_003b0f88(unsigned int *param_1,int param_2,unsigned int *param_
           }
           temp_v22 = (romwright_code *******)((int)ppppppcVar15 + 1);
           if (temp_v1 != 0) {
-            if (ppppppcVar15 >= temp_v22) {
+            if (ppppppcVar15 >= (romwright_code ******)temp_v22) {
               puVar10 = (unsigned int *)(param_1[0x50e] + (int)temp_v22 * 0x10);
               puVar19 = (unsigned int *)(param_1[0x50e] + (int)ppppppcVar15 * 0x10);
               do {
@@ -579,7 +579,7 @@ unsigned int FUN_003b0f88(unsigned int *param_1,int param_2,unsigned int *param_
             }
           }
           pppppppcVar9 = temp_v22;
-          if ((romwright_code ******)param_1[0x510] <= temp_v22) {
+          if ((romwright_code ******)param_1[0x510] <= (romwright_code ******)temp_v22) {
             pppppppcVar9 = (romwright_code *******)param_1[0x510];
           }
           FUN_0022c564(param_1 + 0x50d,ppppppcVar15);

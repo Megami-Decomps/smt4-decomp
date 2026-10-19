@@ -20,7 +20,7 @@ void FUN_001cd260(int param_1,unsigned int param_2,romwright_code *param_3,unsig
        (temp_v0 = *(int *)(param_1 + temp_v1 * 4 + 0x90), temp_v0 != 0)) {
       pcVar2 = param_3;
       if ((param_4 & 1) != 0) {
-        pcVar2 = *(romwright_code **)(param_3 + *(int *)(temp_v0 + ((int)param_4 >> 1)));
+        pcVar2 = *(romwright_code **)((unsigned char *)param_3 + *(int *)(temp_v0 + ((int)param_4 >> 1)));
       }
       (*pcVar2)();
     }

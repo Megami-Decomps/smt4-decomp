@@ -12,9 +12,9 @@ void FUN_001915c4(unsigned int *param_1,unsigned int param_2,int param_3)
   
   puVar2 = (unsigned int *)*param_1;
   for (; puVar2 != (unsigned int *)0x0; puVar2 = (unsigned int *)*puVar2) {
-    temp_v0 = puVar2 <= param_2;
-    if (param_2 <= puVar2) {
-      temp_v0 = param_3 + param_2 <= puVar2;
+    temp_v0 = (unsigned int)puVar2 <= param_2;
+    if (param_2 <= (unsigned int)puVar2) {
+      temp_v0 = param_3 + param_2 <= (unsigned int)puVar2;
     }
     puVar1 = puVar2;
     if (!temp_v0) {

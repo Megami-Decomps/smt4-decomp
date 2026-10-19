@@ -125,7 +125,7 @@ void FUN_0047c00c(int param_1)
        (((*(unsigned int *)(temp_v1 + 0xbc) & 1) != 0 && (*(unsigned int *)(temp_v1 + 0xbc) != 0)))) {
       if ((*(unsigned int *)(temp_v1 + 0xbc) & 1) != 0) {
         UNRECOVERED_JUMPTABLE =
-             *(romwright_code **)(UNRECOVERED_JUMPTABLE +
+             *(romwright_code **)((unsigned char *)UNRECOVERED_JUMPTABLE +
                        *(int *)(param_1 + ((int)*(unsigned int *)(temp_v1 + 0xbc) >> 1)));
       }
                     /* WARNING: Could not recover jumptable at 0x0047c344. Too many branches */

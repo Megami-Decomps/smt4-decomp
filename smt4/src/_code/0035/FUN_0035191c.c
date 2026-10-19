@@ -6,13 +6,13 @@
 /* Supplied declaration required: FUN_0034f050. */
 /* Supplied declaration required: FUN_003516c0. */
 /* Supplied declaration required: mwmofilterDeblockerRelease. */
-/* Supplied declaration required: nn_os_Thread_FinalizeImpl. */
+extern void nn_os_Thread_FinalizeImpl(unsigned int);
 
 
 int FUN_0035191c(int param_1)
 
 {
-/* irregular: 5 native warning(s); review required */
+/* irregular: 4 native warning(s); review required */
   unsigned int *puVar1;
   int *piVar2;
   
@@ -22,7 +22,7 @@ int FUN_0035191c(int param_1)
   mwmofilterDeblockerRelease(*puVar1);
   *puVar1 = 0;
   piVar2 = (int *)(param_1 + 0x28);
-  nn_os_Thread_FinalizeImpl(piVar2);
+  nn_os_Thread_FinalizeImpl((unsigned int)piVar2);
   if (*piVar2 != 0) {
     software_interrupt(0x23);
     *piVar2 = 0;

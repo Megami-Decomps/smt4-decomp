@@ -12,7 +12,7 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: FUN_0015d240. */
-/* Supplied declaration required: nn_snd_CTR_InitializeWaveBuffer. */
+extern void nn_snd_CTR_InitializeWaveBuffer(unsigned int);
 /* Supplied declaration required: nw_snd_internal_driver_Voice_AppendWaveBuffer. */
 /* Supplied declaration required: nw_snd_internal_driver_Voice_CalcOffsetAdpcmParam. */
 /* Supplied declaration required: nw_snd_internal_driver_Voice_FrameToByte. */
@@ -22,7 +22,7 @@ typedef struct {
 void nw_snd_internal_driver_Channel_AppendWaveBuffer(int param_1,char *param_2,unsigned int param_3)
 
 {
-/* irregular: 6 native warning(s); review required */
+/* irregular: 5 native warning(s); review required */
   long long temp_v0;
   unsigned int temp_v1;
   int temp_v2;
@@ -82,7 +82,7 @@ void nw_snd_internal_driver_Channel_AppendWaveBuffer(int param_1,char *param_2,u
       }
       puVar5 = (unsigned int *)(param_1 + temp_v4 * 0x30);
       piVar10 = (int *)(puVar5 + 6);
-      nn_snd_CTR_InitializeWaveBuffer(puVar5);
+      nn_snd_CTR_InitializeWaveBuffer((unsigned int)puVar5);
       *puVar5 = (unsigned int)temp_v6;
       puVar5[1] = *(int *)(param_2 + 0x10) - temp_v5;
       *(unsigned char *)(puVar5 + 4) = 0;
@@ -91,7 +91,7 @@ void nw_snd_internal_driver_Channel_AppendWaveBuffer(int param_1,char *param_2,u
       }
       nw_snd_internal_driver_Voice_AppendWaveBuffer(*(unsigned int *)(param_1 + 0x134),temp_v4,puVar5);
       if (param_2[1] != '\0') {
-        nn_snd_CTR_InitializeWaveBuffer(piVar10);
+        nn_snd_CTR_InitializeWaveBuffer((unsigned int)piVar10);
         *piVar10 = temp_v8 + (int)puVar7;
         puVar5[7] = *(int *)(param_2 + 0x10) - *(int *)(param_1 + 0x78);
         *(unsigned char *)(puVar5 + 10) = 1;

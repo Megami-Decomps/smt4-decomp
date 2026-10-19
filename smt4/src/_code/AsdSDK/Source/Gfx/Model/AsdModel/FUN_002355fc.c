@@ -22,7 +22,6 @@ typedef struct {
 
 extern char s______________________00471bc0[89]; /* 0x471bc0 */
 
-extern void FUN_002355fc(fn_002355fc_arg0 *);
 /* Supplied declaration required: FUN_00235744. */
 
 

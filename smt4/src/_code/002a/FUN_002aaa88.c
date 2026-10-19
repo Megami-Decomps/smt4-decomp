@@ -438,7 +438,7 @@ int * FUN_002aaa88(fn_002aaa88_arg0 *param_1,unsigned int *param_2,int param_3,i
                     }
                   }
                   if (((*(unsigned int *)(temp_v1 + 4) & 1) != 0) && (*(int *)(temp_v1 + 0xc) == 1)) {
-                    *temp_v12 = (((*temp_v12 + temp_v12[1]) - 1) & ~(temp_v12[1] - 1)) + 0x68;
+                    *(unsigned int *)temp_v12 = (((*(unsigned int *)temp_v12 + ((unsigned int *)temp_v12)[1]) - 1) & ~(((unsigned int *)temp_v12)[1] - 1)) + 0x68;
                     nw_gfx_AnimGroup_GetMemorySizeForInitialize(temp_v12,temp_v1,1);
                     break;
                   }

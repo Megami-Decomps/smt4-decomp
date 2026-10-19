@@ -215,7 +215,7 @@ void FUN_00188fbc(fn_00188fbc_arg0 *param_1)
   if (temp_v0 != uStack_84 || temp_v1 != temp_v6) {
     param_1->field_0x6 = 0;
   }
-  param_1->field_0x8 = puVar4;
+  param_1->field_0x8 = (undefined4)puVar4;
   FUN_00188e0c(&temp_v23,0x18,temp_v1,temp_v0);
   temp_v1 = temp_v23 & 0xffff;
   temp_v3 = 0;

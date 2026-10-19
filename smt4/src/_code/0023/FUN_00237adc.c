@@ -97,7 +97,7 @@ unsigned int FUN_00237adc(int *param_1,unsigned int *param_2,int *param_3,int *p
             temp_v5 = *(unsigned int *)(temp_v2 + 8);
             temp_v3 = *param_4;
             piVar5 = param_1;
-            FUN_00237adc(param_1,&temp_v4,&temp_v5,&temp_v3);
+            FUN_00237adc(param_1,(unsigned int *)&temp_v4,&temp_v5,&temp_v3);
             if (piVar5 == (int *)0x0) {
               return 0;
             }

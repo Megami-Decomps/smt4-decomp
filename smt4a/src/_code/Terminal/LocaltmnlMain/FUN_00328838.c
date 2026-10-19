@@ -179,7 +179,7 @@ unsigned int FUN_00328838(void)
     temp_v8 = *(float *)(**(int **)(*(int *)(temp_v4 + 0x34) + 0x90) + 8);
     temp_v5 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v8 < temp_v7) << 0x1f) |
             ((unsigned int)(temp_v8 == temp_v7) << 0x1e);
-    in_fpscr = temp_v5 | ((unsigned int)(NAN(temp_v8) || NAN(temp_v7)) << 0x1c);
+    in_fpscr = temp_v5 | ((unsigned int)((temp_v8 != temp_v8) || (temp_v7 != temp_v7)) << 0x1c);
     temp_v1 = (unsigned char)(temp_v5 >> 0x18);
     if (!((unsigned char)((temp_v1 >> 6) & 1) || temp_v1 >> 7 != ((unsigned char)(in_fpscr >> 0x1c) & 1))) {
       FUN_003f9c6c(temp_v4,&temp_v9,0);
@@ -276,7 +276,7 @@ unsigned int FUN_00328838(void)
     temp_v8 = *(float *)(**(int **)(*(int *)(temp_v6 + 0x34) + 0x90) + 8);
     temp_v5 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v8 < temp_v7) << 0x1f) |
             ((unsigned int)(temp_v8 == temp_v7) << 0x1e);
-    in_fpscr = temp_v5 | ((unsigned int)(NAN(temp_v8) || NAN(temp_v7)) << 0x1c);
+    in_fpscr = temp_v5 | ((unsigned int)((temp_v8 != temp_v8) || (temp_v7 != temp_v7)) << 0x1c);
     temp_v1 = (unsigned char)(temp_v5 >> 0x18);
     if (!((unsigned char)((temp_v1 >> 6) & 1) || temp_v1 >> 7 != ((unsigned char)(in_fpscr >> 0x1c) & 1))) {
       FUN_003f9c6c(temp_v6,&temp_v9,0);
@@ -422,7 +422,7 @@ unsigned int FUN_00328838(void)
           temp_v8 = *(float *)(**(int **)(*(int *)(*(int *)(temp_v0 + *(int *)(temp_v0 + 0x54c) * 4 +
                                                           0x30) + 0x34) + 0x90) + 8);
           temp_v5 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v8 < temp_v7) << 0x1f);
-          in_fpscr = temp_v5 | ((unsigned int)(NAN(temp_v8) || NAN(temp_v7)) << 0x1c);
+          in_fpscr = temp_v5 | ((unsigned int)((temp_v8 != temp_v8) || (temp_v7 != temp_v7)) << 0x1c);
           if (((unsigned char)(temp_v5 >> 0x1f) == ((unsigned char)(in_fpscr >> 0x1c) & 1)) ||
              (temp_v4 = FUN_004ffba8(*(unsigned int *)(*(int *)(temp_v0 + 0x2c) + 4)), temp_v4 == 0)) {
             temp_v7 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x3c),

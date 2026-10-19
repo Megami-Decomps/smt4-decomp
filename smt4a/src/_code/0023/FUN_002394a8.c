@@ -176,7 +176,7 @@ unsigned int FUN_002394a8(void)
               temp_v15 = (float)((unsigned long long)temp_v17 >> 0x20);
               temp_v10 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v14 < temp_v15) << 0x1f) |
                        ((unsigned int)(temp_v14 == temp_v15) << 0x1e);
-              in_fpscr = temp_v10 | ((unsigned int)(NAN(temp_v14) || NAN(temp_v15)) << 0x1c);
+              in_fpscr = temp_v10 | ((unsigned int)((temp_v14 != temp_v14) || (temp_v15 != temp_v15)) << 0x1c);
               temp_v0 = (unsigned char)(temp_v10 >> 0x18);
               if (!(unsigned char)((temp_v0 >> 6) & 1) && temp_v0 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
                 temp_v7 = *(int *)(temp_v11 + 0x28);

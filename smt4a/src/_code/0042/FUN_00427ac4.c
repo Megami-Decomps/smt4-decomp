@@ -70,11 +70,11 @@ void FUN_00427ac4(int param_1,unsigned int param_2)
         if (temp_v1 == 0x8c) {
           pcVar4 = temp_v5;
           FUN_004268ec(temp_v5,1,(unsigned int)temp_v0 | ((temp_v4 & 0xfffff) << 8) | (temp_v2 << 0x1c));
-          if (pcVar4 == unaff_r8) {
+          if (pcVar4 == (char *)unaff_r8) {
             pcVar4 = (char *)0x0;
           }
           else if ((-1 < (int)pcVar4) && (pcVar4 = (char *)0x0, temp_v5[0] != '\0')) {
-            pcVar4 = FUN_00427bec.whole;
+            pcVar4 = (char *)FUN_00427bec;
           }
           if ((int)pcVar4 < 0) {
             return;

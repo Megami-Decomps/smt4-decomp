@@ -93,7 +93,7 @@ unsigned int FUN_004af3b4(long long *param_1,int param_2,unsigned int *param_3,u
     *(unsigned int *)plVar12 = 0x40;
     *puVar3 = 0x10000;
     *temp_v14 = 0;
-    *temp_v22 = 0;
+    *(int *)temp_v22 = 0;
     return 0x43;
   }
   if (*(char *)(param_2 + temp_v0) == '\0') {
@@ -208,7 +208,7 @@ unsigned int FUN_004af3b4(long long *param_1,int param_2,unsigned int *param_3,u
           *(unsigned int *)plVar12 = 0x40;
           *puVar3 = 0x10000;
           *temp_v14 = 0;
-          *temp_v22 = 0;
+          *(int *)temp_v22 = 0;
           return 0x43;
         }
         temp_v7 = temp_v0 + param_2 + temp_v3;
@@ -369,7 +369,7 @@ unsigned int FUN_004af3b4(long long *param_1,int param_2,unsigned int *param_3,u
     *(unsigned int *)plVar12 = 0x40;
     *puVar3 = 0x10000;
     *temp_v14 = 0;
-    *temp_v22 = 0;
+    *(int *)temp_v22 = 0;
     return 0x48;
   }
   if (*(romwright_code **)temp_v23 != (romwright_code *)0x0) {
@@ -382,6 +382,6 @@ unsigned int FUN_004af3b4(long long *param_1,int param_2,unsigned int *param_3,u
   *(unsigned int *)plVar12 = 0x40;
   *puVar3 = 0x10000;
   *temp_v14 = 0;
-  *temp_v22 = 0;
+  *(int *)temp_v22 = 0;
   return 0x47;
 }

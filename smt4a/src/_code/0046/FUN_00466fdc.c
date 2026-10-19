@@ -5,15 +5,15 @@
 typedef int romwright_code();
 extern int FUN_00466f98(); /* 0x466f98 */
 
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 extern unsigned int nw_snd_internal_FrameHeap_Alloc(int, unsigned int, romwright_code *, unsigned int);
 
 
 unsigned int FUN_00466fdc(int param_1,unsigned int param_2)
 
 {
-/* irregular: 3 native warning(s); review required */
+/* irregular: 1 native warning(s); review required */
   unsigned int temp_v0;
   
   nn_os_CriticalSection_Enter(param_1 + 4);

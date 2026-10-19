@@ -22,15 +22,15 @@ extern int FUN_0011d2b0(void);
 extern int FUN_002c12bc(void);
 extern int FUN_002c12d0(void);
 /* Supplied declaration required: FUN_002c130c. */
-/* Supplied declaration required: nn_applet_CTR_detail_PrepareToJumpToHomeMenu. */
+extern unsigned int nn_applet_CTR_detail_PrepareToJumpToHomeMenu(void);
 /* Supplied declaration required: nn_applet_CTR_detail_ReplySleepQueryToManager. */
-/* Supplied declaration required: nn_applet_CTR_detail_SleepIfShellClosed. */
+extern void nn_applet_CTR_detail_SleepIfShellClosed(void);
 
 
 void FUN_00106e60(void)
 
 {
-/* irregular: 8 native warning(s); review required */
+/* irregular: 6 native warning(s); review required */
   char temp_v0;
   int temp_v1;
   

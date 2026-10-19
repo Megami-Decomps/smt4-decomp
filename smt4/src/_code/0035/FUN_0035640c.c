@@ -12,31 +12,29 @@ extern int *DAT_004d43b8; /* 0x4d43b8 */
 extern int DAT_004d43c0; /* 0x4d43c0 */
 extern unsigned int DAT_004d43c4; /* 0x4d43c4 */
 
-/* Supplied declaration required: nn_fs_ipc_Directory_Close. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern unsigned int nn_fs_ipc_Directory_Close(unsigned int);
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 void FUN_0035640c(int *param_1,unsigned int param_2,unsigned int param_3,int param_4)
 
 {
-/* irregular: 4 native warning(s); review required */
   int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
+  int temp_v1;
   
-  temp_v2 = param_1[1];
+  temp_v1 = param_1[1];
   temp_v0 = param_4;
-  if (temp_v2 != 0) {
-    nn_fs_ipc_Directory_Close(&temp_v2);
-    temp_v0 = temp_v2;
+  if (temp_v1 != 0) {
+    nn_fs_ipc_Directory_Close((unsigned int)&temp_v1);
+    temp_v0 = temp_v1;
   }
-  temp_v2 = temp_v0;
+  temp_v1 = temp_v0;
   (**(romwright_code **)(*param_1 + 0x10))(param_1);
-  nn_os_CriticalSection_Enter(&DAT_004d43c4);
+  nn_os_CriticalSection_Enter((unsigned int)&DAT_004d43c4);
   *param_1 = (int)DAT_004d43b8;
   DAT_004d43c0 = DAT_004d43c0 - 1;
   DAT_004d43b8 = param_1;
-  nn_os_CriticalSection_Leave(&DAT_004d43c4,temp_v1,param_3,temp_v2);
+  nn_os_CriticalSection_Leave((unsigned int)&DAT_004d43c4);
   return;
 }

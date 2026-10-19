@@ -2,6 +2,21 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
+#ifndef ROMWRIGHT_FLOAT_BITS_DEFINED
+#define ROMWRIGHT_FLOAT_BITS_DEFINED
+static unsigned int romwright_f2u(float value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.f = value;
+    return bits.u;
+}
+static float romwright_u2f(unsigned int value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.u = value;
+    return bits.f;
+}
+#endif
 extern unsigned char LAB_002d94f8; /* 0x2d94f8 */
 extern unsigned char LAB_002d9eec; /* 0x2d9eec */
 extern unsigned char LAB_002d9efc; /* 0x2d9efc */
@@ -646,7 +661,7 @@ LAB_002b82a8:
           if ((unsigned char)((temp_v1 >> 5) & 1) && !(unsigned char)(temp_v1 >> 6)) {
             temp_v11 = temp_v11 | ((unsigned int)(temp_v20 < temp_v35) << 0x1f) | ((unsigned int)(temp_v20 == temp_v35) << 0x1e)
             ;
-            in_fpscr = temp_v11 | ((unsigned int)(NAN(temp_v20) || NAN(temp_v35)) << 0x1c);
+            in_fpscr = temp_v11 | ((unsigned int)((temp_v20 != temp_v20) || (temp_v35 != temp_v35)) << 0x1c);
             temp_v1 = (unsigned char)(temp_v11 >> 0x18);
             if ((unsigned char)((temp_v1 >> 6) & 1) || temp_v1 >> 7 != ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
               fStack_6c = (float)DAT_00581288[5] + temp_v37;
@@ -690,7 +705,7 @@ LAB_002b82a8:
         }
         if (temp_v37 < temp_v26) {
           temp_v11 = temp_v11 | ((unsigned int)(temp_v20 < temp_v35) << 0x1f);
-          if (temp_v20 == temp_v35 || romwright_subpiece_4_1_0(temp_v11 >> 0x1f,0) != (NAN(temp_v20) || NAN(temp_v35))) {
+          if (temp_v20 == temp_v35 || romwright_subpiece_4_1_0(temp_v11 >> 0x1f,0) != ((temp_v20 != temp_v20) || (temp_v35 != temp_v35))) {
             temp_v19 = (float)DAT_00581288[0x14] + temp_v37;
           }
           else {
@@ -818,7 +833,7 @@ LAB_002b82a8:
       temp_v37 = *(float *)(temp_v7 + 0x15c0);
       temp_v6 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v26 < temp_v37) << 0x1f) |
                ((unsigned int)(temp_v26 == temp_v37) << 0x1e);
-      in_fpscr = temp_v6 | ((unsigned int)(NAN(temp_v26) || NAN(temp_v37)) << 0x1c);
+      in_fpscr = temp_v6 | ((unsigned int)((temp_v26 != temp_v26) || (temp_v37 != temp_v37)) << 0x1c);
       temp_v1 = (unsigned char)(temp_v6 >> 0x18);
       if (!(unsigned char)((temp_v1 >> 6) & 1) && temp_v1 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
         FUN_003d2150(0x10000d1);
@@ -896,7 +911,7 @@ LAB_002b82a8:
       temp_v35 = (float)DAT_00581288[0x57];
       temp_v6 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v35 < temp_v20) << 0x1f) |
                ((unsigned int)(temp_v35 == temp_v20) << 0x1e);
-      temp_v11 = temp_v6 | ((unsigned int)(NAN(temp_v35) || NAN(temp_v20)) << 0x1c);
+      temp_v11 = temp_v6 | ((unsigned int)((temp_v35 != temp_v35) || (temp_v20 != temp_v20)) << 0x1c);
       temp_v1 = (unsigned char)(temp_v6 >> 0x18);
       temp_v35 = temp_v20;
       if (!(unsigned char)((temp_v1 >> 6) & 1) && temp_v1 >> 7 == ((unsigned char)(temp_v11 >> 0x1c) & 1)) {
@@ -906,7 +921,7 @@ LAB_002b82a8:
       temp_v26 = (float)DAT_00581288[0x57];
       temp_v6 = (temp_v11 & 0xfffffff) | ((unsigned int)(temp_v26 < temp_v20) << 0x1f) |
                ((unsigned int)(temp_v26 == temp_v20) << 0x1e);
-      in_fpscr = temp_v6 | ((unsigned int)(NAN(temp_v26) || NAN(temp_v20)) << 0x1c);
+      in_fpscr = temp_v6 | ((unsigned int)((temp_v26 != temp_v26) || (temp_v20 != temp_v20)) << 0x1c);
       temp_v1 = (unsigned char)(temp_v6 >> 0x18);
       if (!(unsigned char)((temp_v1 >> 6) & 1) && temp_v1 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
         temp_v20 = temp_v26;
@@ -5501,22 +5516,22 @@ code_r0x00313648:
     else {
       temp_v26 = 0.33333334f;
     }
-    piVar19 = (int *)(temp_v19 * temp_v26);
+    piVar19 = (int *)romwright_f2u((float)((temp_v19 * temp_v26)));
     piVar11 = piVar19;
     if ((int)piVar19 < 0x40a00000) {
       piVar11 = (int *)0x40a00000;
     }
-    if (temp_v19 <= (float)piVar11) {
+    if (temp_v19 <= romwright_u2f((unsigned int)(piVar11))) {
       piVar19 = DAT_00581288;
     }
-    if (temp_v19 <= (float)piVar11) {
+    if (temp_v19 <= romwright_u2f((unsigned int)(piVar11))) {
       temp_v19 = (float)piVar19[0x14];
     }
     else if (temp_v20 < 0.0f) {
-      temp_v19 = (float)DAT_00581288[0x13] - (float)piVar11;
+      temp_v19 = (float)DAT_00581288[0x13] - romwright_u2f((unsigned int)(piVar11));
     }
     else {
-      temp_v19 = (float)DAT_00581288[0x13] + (float)piVar11;
+      temp_v19 = (float)DAT_00581288[0x13] + romwright_u2f((unsigned int)(piVar11));
     }
     if (temp_v19 < 0.0f) {
       temp_v19 = temp_v19 + 360.0f;
@@ -6390,7 +6405,7 @@ code_r0x00303460:
       temp_v19 = (float)DAT_005806a4[0xa6];
       temp_v6 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v19 < 0.0f) << 0x1f) |
                ((unsigned int)(temp_v19 == 0.0f) << 0x1e);
-      in_fpscr = temp_v6 | ((unsigned int)NAN(temp_v19) << 0x1c);
+      in_fpscr = temp_v6 | ((unsigned int)(temp_v19 != temp_v19) << 0x1c);
       temp_v1 = (unsigned char)(temp_v6 >> 0x18);
       piVar19 = DAT_005806a4;
       if ((unsigned char)((temp_v1 >> 6) & 1) || temp_v1 >> 7 != ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
@@ -6433,7 +6448,7 @@ code_r0x00303460:
       DAT_005806a4[0xa6] = (int)temp_v19;
       temp_v6 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v19 < 0.0f) << 0x1f) |
                ((unsigned int)(temp_v19 == 0.0f) << 0x1e);
-      in_fpscr = temp_v6 | ((unsigned int)NAN(temp_v19) << 0x1c);
+      in_fpscr = temp_v6 | ((unsigned int)(temp_v19 != temp_v19) << 0x1c);
       temp_v1 = (unsigned char)(temp_v6 >> 0x18);
       if ((unsigned char)((temp_v1 >> 6) & 1) || temp_v1 >> 7 != ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
         temp_v19 = 0.0f;

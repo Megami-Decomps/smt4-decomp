@@ -102,8 +102,8 @@ void FUN_00143424(void)
   temp_v9 = 1;
   temp_v10 = (unsigned int *)0x0;
   temp_v12 = (unsigned int *)0x0;
-  temp_v13 = romwright_piece_3_1(temp_v13._1_3_,1);
-  temp_v11 = romwright_piece_3_1(temp_v11._1_3_,1);
+  temp_v13 = romwright_piece_3_1((((unsigned int)(temp_v13) >> 8) & 0xffffffU),1);
+  temp_v11 = romwright_piece_3_1((((unsigned int)(temp_v11) >> 8) & 0xffffffU),1);
   temp_v8 = 0;
   temp_v7 = 0;
   DAT_005b3c14 = temp_v2;
@@ -125,8 +125,8 @@ void FUN_00143424(void)
   temp_v9 = 1;
   temp_v10 = (unsigned int *)0x0;
   temp_v12 = (unsigned int *)0x0;
-  temp_v13 = romwright_piece_3_1(temp_v13._1_3_,1);
-  temp_v11 = romwright_piece_3_1(temp_v11._1_3_,1);
+  temp_v13 = romwright_piece_3_1((((unsigned int)(temp_v13) >> 8) & 0xffffffU),1);
+  temp_v11 = romwright_piece_3_1((((unsigned int)(temp_v11) >> 8) & 0xffffffU),1);
   temp_v8 = 0;
   temp_v7 = 0;
   FUN_0017314c(&temp_v6,temp_v0);

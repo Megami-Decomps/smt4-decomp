@@ -6,7 +6,7 @@
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 
 
-unsigned int nn_fs_ipc_FileSystem_DeleteExtSaveData(unsigned int *param_1,unsigned int *param_2)
+unsigned int nn_fs_ipc_FileSystem_DeleteExtSaveData(unsigned int *param_1,int param_2,unsigned int param_3)
 
 {
 /* irregular: 2 native warning(s); review required */
@@ -17,9 +17,9 @@ unsigned int nn_fs_ipc_FileSystem_DeleteExtSaveData(unsigned int *param_1,unsign
   
   temp_v3 = coproc_movefrom_User_R_Thread_and_Process_ID();
   *(unsigned int *)(temp_v3 + 0x80) = 0x8520100;
-  temp_v1 = *param_2;
-  temp_v2 = param_2[1];
-  *(unsigned int *)(temp_v3 + 0x8c) = param_2[2];
+  temp_v1 = *(unsigned int *)param_2;
+  temp_v2 = *(unsigned int *)(param_2 + 4);
+  *(unsigned int *)(temp_v3 + 0x8c) = *(unsigned int *)(param_2 + 8);
   *(unsigned int *)(temp_v3 + 0x84) = temp_v1;
   *(unsigned int *)(temp_v3 + 0x88) = temp_v2;
   temp_v0 = *param_1;

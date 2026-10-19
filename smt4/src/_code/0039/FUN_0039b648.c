@@ -2,6 +2,21 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
+#ifndef ROMWRIGHT_FLOAT_BITS_DEFINED
+#define ROMWRIGHT_FLOAT_BITS_DEFINED
+static unsigned int romwright_f2u(float value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.f = value;
+    return bits.u;
+}
+static float romwright_u2f(unsigned int value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.u = value;
+    return bits.f;
+}
+#endif
 /* stack frame of param_1: 7 slot(s), 28 byte(s) */
 typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
@@ -104,8 +119,8 @@ unsigned int FUN_0039b648(int param_1)
         *puVar8 = 1;
         *puVar9 = 1;
         pfVar4 = (float *)NaviMain_GetCursorPos(temp_v11);
-        temp_v6 = (unsigned int *)(*pfVar4 * 2.0f);
-        temp_v7 = (unsigned int *)(pfVar4[1] * 2.0f);
+        temp_v6 = (unsigned int *)romwright_f2u((float)((*pfVar4 * 2.0f)));
+        temp_v7 = (unsigned int *)romwright_f2u((float)((pfVar4[1] * 2.0f)));
         NaviMain_SetCursorPos(temp_v11,&temp_v6);
         *(unsigned char *)(temp_v0 + 0xd5a) = 0xc;
         *(unsigned char *)(param_1 + 0x57) = 5;
@@ -134,8 +149,8 @@ unsigned int FUN_0039b648(int param_1)
         *puVar8 = 1;
         *puVar9 = 1;
         pfVar4 = (float *)NaviMain_GetCursorPos(temp_v11);
-        temp_v6 = (unsigned int *)(*pfVar4 * 0.5f);
-        temp_v7 = (unsigned int *)(pfVar4[1] * 0.5f);
+        temp_v6 = (unsigned int *)romwright_f2u((float)((*pfVar4 * 0.5f)));
+        temp_v7 = (unsigned int *)romwright_f2u((float)((pfVar4[1] * 0.5f)));
         NaviMain_SetCursorPos(temp_v11,&temp_v6);
         *(unsigned char *)(temp_v0 + 0xd5a) = 6;
         *(unsigned char *)(param_1 + 0x59) = 5;

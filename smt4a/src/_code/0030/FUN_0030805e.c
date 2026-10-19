@@ -12,13 +12,12 @@ typedef struct {
 /* Supplied declaration required: FUN_00308440. */
 extern int FUN_00308566(int, unsigned short *, int);
 extern char *FUN_00310314(int);
-/* Supplied declaration required: while. */
 
 
 void FUN_0030805e(unsigned int *param_1,int param_2,int param_3,int param_4,unsigned short *param_5)
 
 {
-/* irregular: 3 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   char *pcVar1;
   int temp_v0;
   char *pcVar3;

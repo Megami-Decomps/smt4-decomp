@@ -3,13 +3,13 @@
 #include "romwright_types.h"
 
 /* Unsupported intrinsic, declaration required: coproc_movefrom_User_R_Thread_and_Process_ID (CALLOTHER). */
-/* Supplied declaration required: nn_os_SimpleLock_Lock. */
+extern void nn_os_SimpleLock_Lock(unsigned int);
 
 
 void nn_os_CriticalSection_Enter(int param_1)
 
 {
-/* irregular: 2 native warning(s); review required */
+/* irregular: 1 native warning(s); review required */
   int temp_v0;
   unsigned int temp_v1;
   

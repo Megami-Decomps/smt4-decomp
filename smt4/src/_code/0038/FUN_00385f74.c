@@ -991,7 +991,7 @@ void FUN_00385f74(fn_00385f74_arg0 *param_1)
             temp_v20 = piVar17;
             puVar12 = puVar12 + 1;
             temp_v9 = temp_v13;
-          } while (puVar12 < piVar6);
+          } while (puVar12 < (unsigned char *)piVar6);
         }
       }
       temp_v49 = (int *)((int)temp_v49 + 1);

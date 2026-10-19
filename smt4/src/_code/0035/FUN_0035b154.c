@@ -74,7 +74,7 @@ int FUN_0035b154(int *param_1,fn_0035b154_arg1 *param_2,int param_3,int *param_4
         }
         if (!temp_v4) {
           pcVar6 = *(romwright_code **)(*(int *)((int)param_1 + ((int)*(unsigned int *)(temp_v2 + 0x472b84) >> 1)) +
-                             *(int *)(pcVar6 + -0x100));
+                             *(int *)((unsigned char *)pcVar6 + -0x100));
         }
         temp_v2 = (*pcVar6)();
       }

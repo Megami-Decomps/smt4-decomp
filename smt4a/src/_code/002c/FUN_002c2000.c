@@ -19,26 +19,26 @@ unsigned int FUN_002c2000(void)
   
   puVar1 = (unsigned short *)FUN_00236038();
   puVar2 = (unsigned short *)FUN_001801a4();
-  puVar4 = (unsigned int)(uint)*(unsigned int)puVar2;
+  puVar4 = (unsigned short *)(unsigned int)*puVar2;
   temp_v0 = 0;
   temp_v1 = puVar4 != puVar1;
   if (temp_v1) {
-    puVar4 = (unsigned short *)(uint)puVar2[1];
+    puVar4 = (unsigned short *)(unsigned int)puVar2[1];
   }
   if (temp_v1 && puVar4 != puVar1) {
-    puVar4 = (unsigned short *)(uint)puVar2[3];
+    puVar4 = (unsigned short *)(unsigned int)puVar2[3];
     temp_v1 = puVar4 != puVar1;
     if (temp_v1) {
-      puVar4 = (unsigned short *)(uint)puVar2[4];
+      puVar4 = (unsigned short *)(unsigned int)puVar2[4];
     }
     if (temp_v1 && puVar4 != puVar1) {
-      puVar4 = (unsigned short *)(uint)puVar2[5];
+      puVar4 = (unsigned short *)(unsigned int)puVar2[5];
       temp_v1 = puVar4 != puVar1;
       if (temp_v1) {
-        puVar4 = (unsigned short *)(uint)puVar2[6];
+        puVar4 = (unsigned short *)(unsigned int)puVar2[6];
       }
       if (temp_v1 && puVar4 != puVar1) {
-        puVar2 = (unsigned short *)(uint)puVar2[2];
+        puVar2 = (unsigned short *)(unsigned int)puVar2[2];
       }
       if ((temp_v1 && puVar4 != puVar1) && puVar2 != puVar1) {
         FUN_003283ac(temp_v0);

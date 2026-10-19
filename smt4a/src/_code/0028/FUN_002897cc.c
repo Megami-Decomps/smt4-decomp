@@ -244,7 +244,7 @@ unsigned int FUN_002897cc(fn_002897cc_arg0 *param_1)
     if (*(char *)(temp_v1 + 0x88) != '\0') {
       temp_v4 = (temp_v4 & 0xfffffff) | ((unsigned int)(temp_v11 < temp_v9) << 0x1f) |
               ((unsigned int)(temp_v11 == temp_v9) << 0x1e);
-      temp_v7 = temp_v4 | ((unsigned int)(NAN(temp_v11) || NAN(temp_v9)) << 0x1c);
+      temp_v7 = temp_v4 | ((unsigned int)((temp_v11 != temp_v11) || (temp_v9 != temp_v9)) << 0x1c);
       temp_v0 = (unsigned char)(temp_v4 >> 0x18);
       if (!((unsigned char)((temp_v0 >> 6) & 1) || temp_v0 >> 7 != ((unsigned char)(temp_v7 >> 0x1c) & 1))) {
         *(float *)(temp_v1 + 0x24) = *(float *)(temp_v1 + 0x24) + temp_v11;
@@ -266,7 +266,7 @@ unsigned int FUN_002897cc(fn_002897cc_arg0 *param_1)
       temp_v11 = *(float *)(temp_v1 + 0x28);
       temp_v4 = (temp_v7 & 0xfffffff) | ((unsigned int)(temp_v11 < temp_v9) << 0x1f) |
               ((unsigned int)(temp_v11 == temp_v9) << 0x1e) | ((unsigned int)(temp_v9 <= temp_v11) << 0x1d);
-      temp_v7 = temp_v4 | ((unsigned int)(NAN(temp_v11) || NAN(temp_v9)) << 0x1c);
+      temp_v7 = temp_v4 | ((unsigned int)((temp_v11 != temp_v11) || (temp_v9 != temp_v9)) << 0x1c);
       temp_v0 = (unsigned char)(temp_v4 >> 0x18);
       if (!((unsigned char)((temp_v0 >> 6) & 1) || temp_v0 >> 7 != ((unsigned char)(temp_v7 >> 0x1c) & 1))) {
         *(unsigned int *)(temp_v1 + 0x24) = 0x3f8ccccd;

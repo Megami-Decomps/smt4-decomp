@@ -3,14 +3,13 @@
 #include "romwright_types.h"
 
 typedef int romwright_code();
-/* Unsupported intrinsic, declaration required: while (INT_ADD). */
 /* Supplied declaration required: FUN_002f9048. */
 
 
 unsigned int FUN_0010e7e0(int param_1)
 
 {
-/* irregular: 2 native warning(s); review required */
+/* irregular: 1 native warning(s); review required */
   unsigned char temp_v0;
   int temp_v1;
   unsigned int temp_v2;

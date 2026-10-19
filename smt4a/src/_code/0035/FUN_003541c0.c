@@ -247,12 +247,12 @@ void FUN_003541c0(void)
           temp_v7 = (float)DAT_00581288[0x76];
           temp_v3 = temp_v7 < temp_v10;
           temp_v4 = temp_v7 == temp_v10;
-          temp_v5 = NAN(temp_v7) || NAN(temp_v10);
+          temp_v5 = (temp_v7 != temp_v7) || (temp_v10 != temp_v10);
           if (!temp_v4 && !temp_v3) {
             temp_v8 = (float)DAT_00581288[0x78];
             temp_v3 = temp_v8 < temp_v10;
             temp_v4 = temp_v8 == temp_v10;
-            temp_v5 = NAN(temp_v8) || NAN(temp_v10);
+            temp_v5 = (temp_v8 != temp_v8) || (temp_v10 != temp_v10);
           }
           if (!(temp_v4 || temp_v3 != temp_v5)) {
             temp_v7 = DAT_0058128c / DAT_005f19ac;

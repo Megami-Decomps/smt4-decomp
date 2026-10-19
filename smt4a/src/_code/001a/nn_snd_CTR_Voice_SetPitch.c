@@ -5,7 +5,7 @@
 /* Supplied declaration required: func_0x001b6368. */
 
 
-void nn_snd_CTR_Voice_SetPitch(int param_1)
+void nn_snd_CTR_Voice_SetPitch(int param_1,float param_2)
 
 {
 /* irregular: irregular input(s): in_s0; 2 native warning(s); review required */

@@ -209,7 +209,7 @@ void FUN_00107d94(int *param_1,int param_2)
         temp_v7 = (int *)((unsigned int)temp_v7 & 0xffffff00);
         temp_v3 = temp_v0 >> 4;
         if ((temp_v3 == 1) || (temp_v7 = (int *)romwright_piece_3_1((int)temp_v4,temp_v0), temp_v3 == 9)) {
-          temp_v7 = (int *)romwright_piece_3_1(temp_v7._1_3_,temp_v0);
+          temp_v7 = (int *)romwright_piece_3_1((((unsigned int)(temp_v7) >> 8) & 0xffffffU),temp_v0);
           temp_v5 = FUN_002eac34(temp_v3);
           if (*(char *)(temp_v5 + 0xa8) != '\0') {
             temp_v28 = *(unsigned char *)(temp_v18 + 5);

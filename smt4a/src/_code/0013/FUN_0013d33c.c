@@ -63,13 +63,12 @@ extern int DAT_00640110; /* 0x640110 */
 extern int DAT_00640114; /* 0x640114 */
 
 extern unsigned int FUN_00159590(void);
-/* Supplied declaration required: nn_hid_CTR_TouchPanelReader_ReadLatest. */
+extern unsigned char nn_hid_CTR_TouchPanelReader_ReadLatest(unsigned int, unsigned int);
 
 
 unsigned int FUN_0013d33c(void)
 
 {
-/* irregular: 1 native warning(s); review required */
   int temp_v0;
   unsigned int uStack_14;
   unsigned int temp_v1;
@@ -108,7 +107,7 @@ unsigned int FUN_0013d33c(void)
       }
     }
   }
-  nn_hid_CTR_TouchPanelReader_ReadLatest(&temp_v0,&DAT_006400f8);
+  nn_hid_CTR_TouchPanelReader_ReadLatest((unsigned int)&temp_v0,(unsigned int)&DAT_006400f8);
   if ((char)DAT_006400fc.whole == '\0') {
     DAT_006400f8 = DAT_00640100;
   }

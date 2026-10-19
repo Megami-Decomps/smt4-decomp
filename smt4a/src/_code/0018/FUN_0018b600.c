@@ -4,13 +4,12 @@
 
 extern unsigned int DAT_00643080; /* 0x643080 */
 
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
 
 
 void FUN_0018b600(void)
 
 {
-/* irregular: 1 native warning(s); review required */
-  nn_os_CriticalSection_Enter(&DAT_00643080);
+  nn_os_CriticalSection_Enter((unsigned int)&DAT_00643080);
   return;
 }

@@ -52,8 +52,8 @@ extern unsigned int *FUN_00147268(void);
 /* Supplied declaration required: FUN_00188b60. */
 /* Supplied declaration required: FUN_0019a300. */
 /* Supplied declaration required: FUN_001bcd48. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
@@ -61,7 +61,7 @@ extern unsigned int *FUN_00147268(void);
 unsigned int * FUN_0016f864(void)
 
 {
-/* irregular: 6 native warning(s); review required */
+/* irregular: 4 native warning(s); review required */
   unsigned int *puVar1;
   unsigned int temp_v0;
   unsigned char temp_v1;
@@ -77,10 +77,10 @@ unsigned int * FUN_0016f864(void)
     FUN_00188b60(&DAT_00646094.whole);
     DAT_005c0b10 = '\x01';
   }
-  nn_os_CriticalSection_Enter();
+  nn_os_CriticalSection_Enter((unsigned int)&DAT_00646078.whole);
   if (0 < DAT_005c0b14) {
     DAT_005c0b14 = DAT_005c0b14 + 1;
-    nn_os_CriticalSection_Leave(&DAT_00646078.whole);
+    nn_os_CriticalSection_Leave((unsigned int)&DAT_00646078.whole);
     return (unsigned int *)0x82067f9;
   }
   while( 1 ) {
@@ -103,6 +103,6 @@ unsigned int * FUN_0016f864(void)
     puVar1 = (unsigned int *)FUN_00147268();
     DAT_005c0b14 = DAT_005c0b14 + 1;
   }
-  nn_os_CriticalSection_Leave(&DAT_00646078.whole);
+  nn_os_CriticalSection_Leave((unsigned int)&DAT_00646078.whole);
   return puVar1;
 }

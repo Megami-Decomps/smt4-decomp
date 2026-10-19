@@ -12,13 +12,13 @@ typedef struct {
 
 
 void nn_hidlow_CTR_TouchPanelLifoRing_ReadData
-               (unsigned int *param_1,int param_2,int param_3,int *param_4,unsigned int *param_5,unsigned int *param_6)
+               (unsigned int *param_1,int param_2,int param_3,int *param_4,long long *param_5,int *param_6)
 
 {
 /* irregular: 1 native warning(s); review required */
   unsigned int temp_v0;
   unsigned int temp_v1;
-  unsigned int temp_v2;
+  int temp_v2;
   int temp_v3;
   unsigned int temp_v4;
   unsigned int temp_v5;
@@ -27,7 +27,6 @@ void nn_hidlow_CTR_TouchPanelLifoRing_ReadData
   unsigned short *puVar9;
   int temp_v8;
   unsigned int temp_v9;
-  int temp_v10;
   
   *param_4 = 0;
   if (0 < param_3) {
@@ -52,8 +51,8 @@ void nn_hidlow_CTR_TouchPanelLifoRing_ReadData
           temp_v7 = 7;
         }
       }
-      temp_v6 = *param_5;
-      temp_v2 = param_5[1];
+      temp_v6 = (unsigned int)*param_5;
+      temp_v2 = *(int *)((int)param_5 + 4);
       if ((int)(temp_v2 - (temp_v4 + (temp_v6 < temp_v0))) < 0 ==
           (SBORROW4(temp_v2,temp_v4) != SBORROW4(temp_v2 - temp_v4,(unsigned int)(temp_v6 < temp_v0)))) {
         temp_v8 = temp_v7 - *param_6;
@@ -68,25 +67,25 @@ void nn_hidlow_CTR_TouchPanelLifoRing_ReadData
           temp_v8 = (temp_v7 - *param_6) + 8;
         }
       }
-      temp_v10 = 0;
+      temp_v2 = 0;
       if (param_3 < temp_v8) {
         temp_v8 = param_3;
       }
       if (0 < temp_v8) {
         do {
-          puVar9 = (unsigned short *)(param_2 + temp_v10 * 8);
-          temp_v3 = (int)((temp_v7 - temp_v10) + 8) % 8;
-          temp_v10 = temp_v10 + 1;
+          puVar9 = (unsigned short *)(param_2 + temp_v2 * 8);
+          temp_v3 = (int)((temp_v7 - temp_v2) + 8) % 8;
+          temp_v2 = temp_v2 + 1;
           *puVar9 = (short)param_1[temp_v3 * 2 + 8];
           puVar9[1] = *(unsigned short *)((int)param_1 + temp_v3 * 8 + 0x22);
           *(char *)(puVar9 + 2) = (char)param_1[temp_v3 * 2 + 9];
-        } while (temp_v10 < temp_v8);
+        } while (temp_v2 < temp_v8);
       }
     } while (((param_1[4] != temp_v9) || (*param_1 != temp_v0 || param_1[1] != temp_v4)) ||
             (param_1[2] != temp_v1 || param_1[3] != temp_v5));
     *param_4 = temp_v8;
-    *param_5 = temp_v0;
-    param_5[1] = temp_v4;
+    *(unsigned int *)param_5 = temp_v0;
+    *(unsigned int *)((int)param_5 + 4) = temp_v4;
     *param_6 = temp_v7;
   }
   return;

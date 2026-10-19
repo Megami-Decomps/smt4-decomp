@@ -174,7 +174,7 @@ void FUN_00352568(void)
   else if (temp_v5) {
     temp_v8 = *(float *)(DAT_005806a4 + 0x210);
     *(float *)(DAT_005806a4 + 0x214) = temp_v9;
-    if (!(NAN(temp_v9) || NAN(temp_v8))) {
+    if (!((temp_v9 != temp_v9) || (temp_v8 != temp_v8))) {
       temp_v8 = temp_v8 + temp_v10;
       *(float *)(temp_v0 + 0x210) = temp_v8;
       if (temp_v9 <= temp_v8) {
@@ -195,7 +195,7 @@ void FUN_00352568(void)
     temp_v8 = -temp_v9;
     temp_v9 = *(float *)(DAT_005806a4 + 0x210);
     *(float *)(DAT_005806a4 + 0x214) = temp_v8;
-    if (!(NAN(temp_v8) || NAN(temp_v9))) {
+    if (!((temp_v8 != temp_v8) || (temp_v9 != temp_v9))) {
       temp_v9 = temp_v9 + temp_v10;
       *(float *)(temp_v0 + 0x210) = temp_v9;
       if (temp_v9 < temp_v8) {
@@ -216,7 +216,7 @@ void FUN_00352568(void)
     temp_v8 = *(float *)(DAT_005806a4 + 0x210);
     if (((int)temp_v8 >= 0x3dccccce) || ((unsigned int)temp_v8 >= 0xbdccccce)) {
       *(float *)(DAT_005806a4 + 0x214) = temp_v12;
-      if (!(NAN(temp_v12) || NAN(temp_v8))) {
+      if (!((temp_v12 != temp_v12) || (temp_v8 != temp_v8))) {
         temp_v8 = temp_v8 + temp_v11;
         *(float *)(temp_v0 + 0x210) = temp_v8;
         if (temp_v12 <= temp_v8) {

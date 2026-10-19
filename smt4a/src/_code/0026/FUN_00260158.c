@@ -2,6 +2,21 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
+#ifndef ROMWRIGHT_FLOAT_BITS_DEFINED
+#define ROMWRIGHT_FLOAT_BITS_DEFINED
+static unsigned int romwright_f2u(float value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.f = value;
+    return bits.u;
+}
+static float romwright_u2f(unsigned int value)
+{
+    union { float f; unsigned int u; } bits;
+    bits.u = value;
+    return bits.f;
+}
+#endif
 /* stack frame of param_1: 15 slot(s), 60 byte(s) */
 typedef struct {
     unsigned int sp24; /* 0x24: local_24 */
@@ -106,8 +121,8 @@ void FUN_00260158(float *param_1)
         param_1[0x12] = temp_v14;
         param_1[0x13] = temp_v14;
         param_1[0x14] = temp_v14;
-        if ((unsigned int *)param_1[0x95] != (unsigned int *)0x0) {
-          *(unsigned int *)param_1[0x95] = 0;
+        if ((unsigned int *)romwright_f2u((float)(param_1[0x95])) != (unsigned int *)0x0) {
+          *(unsigned int *)romwright_f2u((float)(param_1[0x95])) = 0;
         }
         FUN_00285834(param_1);
         return;
@@ -152,7 +167,7 @@ void FUN_00260158(float *param_1)
       temp_v18 = (float *)((unsigned int)temp_v8 & 0xff);
       uStack_e8 = 1;
       temp_v17 = param_1 + (int)temp_v8 + 0x99;
-      temp_v16 = (float *)param_1[0x92];
+      temp_v16 = (float *)romwright_f2u((float)(param_1[0x92]));
       temp_v10 = (float)VectorFloatToUnsigned(param_1[0x6a] * temp_v15,3);
       temp_v3 = param_1[0x94];
       temp_v11 = temp_v10;
@@ -209,11 +224,11 @@ void FUN_00260158(float *param_1)
       unaff_r6 = 0x168 - temp_v4;
       temp_v5 = FUN_0018aeb8();
       FUN_0019a0e8(&uStack_e8,temp_v5);
-      temp_v16 = (float *)(*(float *)((int)temp_v3 + 0x36c) + temp_v11);
+      temp_v16 = (float *)romwright_f2u((float)((*(float *)((int)temp_v3 + 0x36c) + temp_v11)));
       VectorSignedToFloat(unaff_r6,(unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v17 = (float *)temp_v14;
-      temp_v18 = (float *)temp_v14;
-      temp_v19 = (float *)temp_v12;
+      temp_v17 = (float *)romwright_f2u((float)(temp_v14));
+      temp_v18 = (float *)romwright_f2u((float)(temp_v14));
+      temp_v19 = (float *)romwright_f2u((float)(temp_v12));
       FUN_001a1c28(temp_v28);
       FUN_0019a0fc(&uStack_e8,&uStack_e8,temp_v28);
       FUN_0043b5b4(&temp_v16,&uStack_e8);
@@ -229,7 +244,7 @@ void FUN_00260158(float *param_1)
   temp_v2 = (float)VectorSignedToFloat((int)*(short *)(param_1 + 0x74) - (int)param_1[0x6b],
                                      (unsigned char)(in_fpscr >> 0x16) & 3);
   param_1[0x12] = param_1[0x12] + (temp_v2 / temp_v9) * (float)temp_v13;
-  temp_v16 = (float *)param_1[0x73];
+  temp_v16 = (float *)romwright_f2u((float)(param_1[0x73]));
   temp_v20 = temp_v14;
   temp_v21 = temp_v14;
   temp_v22 = temp_v14;
@@ -295,7 +310,7 @@ void FUN_00260158(float *param_1)
         temp_v3 = (float)VectorSignedToFloat(param_1[0x6b],(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v15 = param_1[0x71];
         temp_v8 = param_1[0x72];
-        pfVar17 = (float *)param_1[0x73];
+        pfVar17 = (float *)romwright_f2u((float)(param_1[0x73]));
         temp_v4 = (int)*(short *)((int)temp_v9 + 0x16e) - (int)temp_v11;
         temp_v3 = temp_v3 * (float)temp_v13;
         if ((int)temp_v4 >= 0x168) {

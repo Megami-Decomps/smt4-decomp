@@ -106,7 +106,7 @@ unsigned int * FUN_004d95e8(int param_1,unsigned int param_2,unsigned int param_
     else {
       FUN_002e6e5c(temp_v3);
     }
-    return (unsigned int *)(uint)(temp_v2 != 0);
+    return (unsigned int *)(unsigned int)(temp_v2 != 0);
   }
   return puVar5;
 }

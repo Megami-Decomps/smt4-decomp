@@ -10,14 +10,14 @@ typedef struct {
 
 /* Supplied declaration required: FUN_001afdc4. */
 extern unsigned int FUN_001c2484(void);
-/* Supplied declaration required: nn_snd_CTR_Voice_SetState. */
+extern void nn_snd_CTR_Voice_SetState(unsigned int, int);
 /* Supplied declaration required: nw_snd_internal_driver_VoiceManager_FreeVoice. */
 
 
 void nw_snd_internal_driver_Voice_SdkVoiceDropCallbackFuncMulti(int param_1,int param_2)
 
 {
-/* irregular: 5 native warning(s); review required */
+/* irregular: 4 native warning(s); review required */
   int temp_v0;
   unsigned int temp_v1;
   int temp_v2;

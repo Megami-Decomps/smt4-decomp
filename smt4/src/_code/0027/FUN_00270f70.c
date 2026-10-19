@@ -9,14 +9,13 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_1_stack;
 
-/* Unsupported intrinsic, declaration required: while (FLOAT_SUB). */
 /* Supplied declaration required: FUN_0027f48c. */
 
 
 void FUN_00270f70(unsigned int *param_1)
 
 {
-/* irregular: 2 native warning(s); review required */
+/* irregular: 1 native warning(s); review required */
   unsigned int *puVar1;
   int temp_v0;
   float temp_v1;

@@ -32,7 +32,7 @@ void nw_snd_Sound3DCalculator_CalcVolumeAndPriority
   temp_v7 = *(unsigned int *)(param_1 + 0x1c);
   temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(in_s0 < temp_v5) << 0x1f) |
           ((unsigned int)(in_s0 == temp_v5) << 0x1e);
-  temp_v2 = temp_v0 | ((unsigned int)(NAN(in_s0) || NAN(temp_v5)) << 0x1c);
+  temp_v2 = temp_v0 | ((unsigned int)((in_s0 != in_s0) || (temp_v5 != temp_v5)) << 0x1c);
   temp_v4 = *(float *)(param_3 + 0x24);
   temp_v1 = (unsigned char)(temp_v0 >> 0x18);
   temp_v3 = temp_v6;

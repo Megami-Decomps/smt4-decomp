@@ -7,29 +7,30 @@ extern unsigned int DAT_004e4138; /* 0x4e4138 */
 
 extern int FUN_00110138(void);
 /* Supplied declaration required: nn_applet_CTR_ReplySleepQuery. */
-extern int nn_os_CriticalSection_TryEnter(unsigned int *);
+extern unsigned char nn_os_CriticalSection_TryEnter(unsigned int);
 
 
 unsigned int FUN_00103e70(void)
 
 {
 /* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
+  unsigned char temp_v0;
+  int temp_v1;
+  unsigned int temp_v2;
   
-  temp_v1 = 0;
-  temp_v0 = FUN_00110138();
-  if (temp_v0 != 0) {
+  temp_v2 = 0;
+  temp_v1 = FUN_00110138();
+  if (temp_v1 != 0) {
     if (DAT_00465198 != '\0') {
-      temp_v0 = nn_os_CriticalSection_TryEnter(&DAT_004e4138);
-      if (temp_v0 != 0) {
-        temp_v1 = 2;
+      temp_v0 = nn_os_CriticalSection_TryEnter((unsigned int)&DAT_004e4138);
+      if (temp_v0) {
+        temp_v2 = 2;
       }
     }
     else {
       nn_applet_CTR_ReplySleepQuery(0);
-      temp_v1 = 1;
+      temp_v2 = 1;
     }
   }
-  return temp_v1;
+  return temp_v2;
 }

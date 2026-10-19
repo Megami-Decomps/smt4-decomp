@@ -100,8 +100,8 @@ void FUN_001079d8(void)
   temp_v11 = (unsigned int *)0x0;
   puVar2 = &temp_v6;
   temp_v13 = (unsigned int *)0x0;
-  temp_v14 = romwright_piece_3_1(temp_v14._1_3_,1);
-  temp_v12 = romwright_piece_3_1(temp_v12._1_3_,1);
+  temp_v14 = romwright_piece_3_1((((unsigned int)(temp_v14) >> 8) & 0xffffffU),1);
+  temp_v12 = romwright_piece_3_1((((unsigned int)(temp_v12) >> 8) & 0xffffffU),1);
   temp_v9 = (unsigned int *)0x0;
   temp_v8 = 0;
   DAT_00464b10 = temp_v2;
@@ -125,8 +125,8 @@ void FUN_001079d8(void)
   temp_v11 = (unsigned int *)0x0;
   puVar2 = &temp_v6;
   temp_v13 = (unsigned int *)0x0;
-  temp_v14 = romwright_piece_3_1(temp_v14._1_3_,1);
-  temp_v12 = romwright_piece_3_1(temp_v12._1_3_,1);
+  temp_v14 = romwright_piece_3_1((((unsigned int)(temp_v14) >> 8) & 0xffffffU),1);
+  temp_v12 = romwright_piece_3_1((((unsigned int)(temp_v12) >> 8) & 0xffffffU),1);
   temp_v9 = (unsigned int *)0x0;
   temp_v8 = 0;
   nw_gfx_Camera_DynamicBuilder_Create(puVar2,temp_v0);

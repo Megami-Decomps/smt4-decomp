@@ -29,13 +29,13 @@ extern unsigned int *DAT_004e5298; /* 0x4e5298 */
 /* Supplied declaration required: FUN_002b5820. */
 /* Supplied declaration required: FUN_002bcc60. */
 /* Supplied declaration required: FUN_002c526c. */
-/* Supplied declaration required: nn_os_LightEvent_Initialize. */
+extern void nn_os_LightEvent_Initialize(unsigned int, unsigned char);
 
 
 void FUN_0011d3fc(unsigned int param_1,unsigned int param_2,unsigned int param_3)
 
 {
-/* irregular: 6 native warning(s); review required */
+/* irregular: 5 native warning(s); review required */
   unsigned int **ppuVar1;
   unsigned int **ppuVar2;
   unsigned int **ppuVar3;
@@ -88,7 +88,7 @@ void FUN_0011d3fc(unsigned int param_1,unsigned int param_2,unsigned int param_3
   if ((int)ppuVar3 < 0) {
     FUN_002c526c();
   }
-  nn_os_LightEvent_Initialize(&DAT_00465644,1);
+  nn_os_LightEvent_Initialize((unsigned int)&DAT_00465644,1);
   DAT_00465630 = 0;
   temp_v2 = 4;
   temp_v6 = 0;

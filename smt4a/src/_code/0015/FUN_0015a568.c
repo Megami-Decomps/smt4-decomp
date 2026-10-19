@@ -9,13 +9,13 @@ typedef struct {
 
 /* Supplied declaration required: FUN_0015a400. */
 /* Supplied declaration required: FUN_00170d8c. */
-/* Supplied declaration required: nn_applet_CTR_detail_UnlockTransition. */
+extern void nn_applet_CTR_detail_UnlockTransition(unsigned int);
 
 
 void FUN_0015a568(void)
 
 {
-/* irregular: 4 native warning(s); review required */
+/* irregular: 3 native warning(s); review required */
   FUN_0015a400(0);
   nn_applet_CTR_detail_UnlockTransition(1);
   FUN_00170d8c(4,0,0,0,0,0);

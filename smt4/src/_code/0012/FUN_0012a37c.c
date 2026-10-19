@@ -43,7 +43,7 @@ extern unsigned int FUN_002bb100(void);
 /* Supplied declaration required: FUN_002c526c. */
 /* Supplied declaration required: FUN_002c52f8. */
 /* Supplied declaration required: FUN_002c5d5c. */
-/* Supplied declaration required: nn_os_LightEvent_TryWait. */
+extern unsigned char nn_os_LightEvent_TryWait(unsigned int);
 
 
 /* WARNING: Type propagation algorithm not settling */
@@ -51,12 +51,11 @@ extern unsigned int FUN_002bb100(void);
 void FUN_0012a37c(void)
 
 {
-/* irregular: 13 unstructured edge(s); 3 goto(s); 20 native warning(s); review required */
-  unsigned int *puVar1;
+/* irregular: 13 unstructured edge(s); 3 goto(s); 19 native warning(s); review required */
+  unsigned char temp_v0;
   unsigned int *puVar2;
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned char temp_v2;
+  unsigned int temp_v1;
+  int temp_v2;
   unsigned char temp_v3;
   unsigned int temp_v4;
   unsigned int uStack_24;
@@ -75,27 +74,26 @@ void FUN_0012a37c(void)
     }
     temp_v4 = 0xffffffff;
     uStack_24 = 0xffffffff;
-    puVar1 = &temp_v5;
-    FUN_002c40f8(puVar1,&temp_v6,3,0);
-    if ((int)puVar1 < 0) {
+    puVar2 = &temp_v5;
+    FUN_002c40f8(puVar2,&temp_v6,3,0);
+    if ((int)puVar2 < 0) {
       FUN_002c131c();
     }
     if (DAT_00465630 != '\0') {
       return;
     }
-    puVar2 = &DAT_00465644;
-    nn_os_LightEvent_TryWait();
-    if (puVar2 == (unsigned int *)0x0) {
+    temp_v0 = nn_os_LightEvent_TryWait((unsigned int)&DAT_00465644);
+    if (!temp_v0) {
       software_interrupt(0x19);
       if ((int)(&DAT_004e5290)[temp_v5] < 0) {
         FUN_002c526c();
       }
       if (temp_v5 == 2) {
-        temp_v0 = 0xc;
+        temp_v1 = 0xc;
       }
       else {
         if (temp_v5 == 1) {
-          if ((DAT_00465634 == (romwright_code *)0x0) || (temp_v1 = (*DAT_00465634)(DAT_00465638), temp_v1 != 0))
+          if ((DAT_00465634 == (romwright_code *)0x0) || (temp_v2 = (*DAT_00465634)(DAT_00465638), temp_v2 != 0))
           {
             FUN_002c4040(&DAT_00465644);
           }
@@ -103,52 +101,52 @@ void FUN_0012a37c(void)
         }
         if (temp_v5 != 0) continue;
         FUN_002bb378();
-        temp_v0 = FUN_002bb100();
-        temp_v1 = FUN_0013ba80(temp_v0,&temp_v4);
+        temp_v1 = FUN_002bb100();
+        temp_v2 = FUN_0013ba80(temp_v1,&temp_v4);
         FUN_002bb308();
-        if (temp_v1 < 0) continue;
-        temp_v2 = temp_v4;
-        switch(temp_v2) {
+        if (temp_v2 < 0) continue;
+        temp_v3 = temp_v4;
+        switch(temp_v3) {
         default:
           FUN_002c52f8();
           continue;
         case 1:
         case 2:
-          temp_v1 = FUN_002ad234();
-          if (temp_v1 == 0) {
-            temp_v0 = 1;
+          temp_v2 = FUN_002ad234();
+          if (temp_v2 == 0) {
+            temp_v1 = 1;
             if ((temp_v4 & 0xff) != 1) {
-              temp_v0 = 2;
+              temp_v1 = 2;
             }
-            FUN_0013b87c(temp_v0);
+            FUN_0013b87c(temp_v1);
           }
-          if ((DAT_00465634 != (romwright_code *)0x0) && (temp_v1 = (*DAT_00465634)(DAT_00465638), temp_v1 == 0))
+          if ((DAT_00465634 != (romwright_code *)0x0) && (temp_v2 = (*DAT_00465634)(DAT_00465638), temp_v2 == 0))
           continue;
           if ((temp_v4 & 0xff) == 1) {
-            temp_v0 = 6;
+            temp_v1 = 6;
           }
           else {
-            temp_v0 = 7;
+            temp_v1 = 7;
           }
           break;
         case 3:
         case 4:
         case 5:
         case 6:
-          temp_v3 = temp_v2 == 3;
-          if (temp_v3) {
-            temp_v2 = 1;
+          temp_v0 = temp_v3 == 3;
+          if (temp_v0) {
+            temp_v3 = 1;
           }
-          if (!temp_v3 && temp_v2 != 4) {
-            if (temp_v2 == 5) {
-              temp_v2 = 2;
+          if (!temp_v0 && temp_v3 != 4) {
+            if (temp_v3 == 5) {
+              temp_v3 = 2;
             }
             else {
-              if (temp_v2 != 6) goto joined_r0x0012a634;
-              temp_v2 = 3;
+              if (temp_v3 != 6) goto joined_r0x0012a634;
+              temp_v3 = 3;
             }
           }
-          FUN_0013b84c(temp_v2);
+          FUN_0013b84c(temp_v3);
 joined_r0x0012a634:
           if (DAT_00465634 == (romwright_code *)0x0) continue;
           (*DAT_00465634)(DAT_00465638);
@@ -167,9 +165,9 @@ joined_r0x0012a634:
           continue;
         case 10:
           FUN_002bb378();
-          temp_v1 = FUN_0013b8c4(0,0x40);
-          if (temp_v1 < 0) {
-            FUN_002c131c(temp_v1,0x12a674);
+          temp_v2 = FUN_0013b8c4(0,0x40);
+          if (temp_v2 < 0) {
+            FUN_002c131c(temp_v2,0x12a674);
           }
           FUN_002bb308();
           continue;
@@ -178,7 +176,7 @@ joined_r0x0012a634:
           continue;
         }
       }
-      FUN_002ad1d0(temp_v0);
+      FUN_002ad1d0(temp_v1);
       FUN_002c4040(&DAT_00465644);
       continue;
     }

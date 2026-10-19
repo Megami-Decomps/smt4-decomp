@@ -93,7 +93,7 @@ unsigned int * FUN_003764fc(unsigned int *param_1,unsigned int *param_2)
   }
   puVar2 = (unsigned int *)param_1[10];
   if (puVar2 != (unsigned int *)0x0) {
-    puVar1 = (unsigned int)(uint)*(unsigned int)(param_1 + 0xb);
+    puVar1 = (unsigned int *)(unsigned int)*(unsigned char *)(param_1 + 0xb);
   }
   if (puVar2 != (unsigned int *)0x0 && puVar1 != (unsigned int *)0x0) {
     (**(romwright_code **)*puVar2)(puVar2);

@@ -9,13 +9,13 @@
 /* Supplied declaration required: FUN_002bb5a4. */
 /* Supplied declaration required: FUN_002c3510. */
 /* Supplied declaration required: FUN_002c52f8. */
-/* Supplied declaration required: nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile. */
+extern void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(unsigned int);
 
 
 unsigned char * FUN_00220330(int param_1,int param_2,unsigned int param_3)
 
 {
-/* irregular: 9 native warning(s); review required */
+/* irregular: 8 native warning(s); review required */
   unsigned char *puVar1;
   unsigned int temp_v0;
   unsigned char temp_v1 [496];

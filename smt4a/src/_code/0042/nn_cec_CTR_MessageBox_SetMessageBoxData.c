@@ -10,45 +10,54 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_4_stack;
 
-/* Supplied declaration required: nn_cec_CTR_MessageBox_WriteMessageBoxInfo. */
+extern unsigned int nn_cec_CTR_MessageBox_WriteMessageBoxInfo(unsigned int);
 
 
-void nn_cec_CTR_MessageBox_SetMessageBoxData
-               (int *param_1,int param_2,unsigned char *param_3,unsigned int param_4)
+unsigned int nn_cec_CTR_MessageBox_SetMessageBoxData
+               (int *param_1,unsigned int param_2,unsigned char *param_3,unsigned int param_4)
 
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
+  unsigned int temp_v0;
+  int temp_v1;
   
-  temp_v0 = param_1[1];
-  if ((temp_v0 != 0) && (param_4 < 0x2801)) {
+  temp_v1 = param_1[1];
+  if (temp_v1 == 0) {
+    temp_v0 = 0xc8810bea;
+  }
+  else if (param_4 >= 0x2801) {
+    temp_v0 = 0xc8e10be9;
+  }
+  else {
     if (param_2 == 0x8c) {
       *(unsigned char *)(param_1 + 0x77) = *param_3;
-      nn_cec_CTR_MessageBox_WriteMessageBoxInfo();
-      return;
+      temp_v0 = nn_cec_CTR_MessageBox_WriteMessageBoxInfo((unsigned int)param_1);
+      return temp_v0;
     }
     if (param_2 == 0x8d) {
       *(unsigned char *)((int)param_1 + 0x1dd) = *param_3;
-      nn_cec_CTR_MessageBox_WriteMessageBoxInfo();
-      return;
+      temp_v0 = nn_cec_CTR_MessageBox_WriteMessageBoxInfo((unsigned int)param_1);
+      return temp_v0;
     }
     if (param_2 == 0x8e) {
       *(unsigned char *)((int)param_1 + 0x1de) = *param_3;
-      nn_cec_CTR_MessageBox_WriteMessageBoxInfo();
-      return;
+      temp_v0 = nn_cec_CTR_MessageBox_WriteMessageBoxInfo((unsigned int)param_1);
+      return temp_v0;
     }
     if (param_2 == 0x8f) {
       *(unsigned char *)((int)param_1 + 0x1df) = *param_3;
-      nn_cec_CTR_MessageBox_WriteMessageBoxInfo();
-      return;
+      temp_v0 = nn_cec_CTR_MessageBox_WriteMessageBoxInfo((unsigned int)param_1);
+      return temp_v0;
     }
-    if (param_2 - 0x65U < 99) {
+    if (param_2 - 0x65 >= 99) {
+      temp_v0 = 0xe0e10bfd;
+    }
+    else {
       if (param_4 == 0 || param_3 == (unsigned char *)0x0) {
-        (**(romwright_code **)(*param_1 + 0x24))(param_1,temp_v0,param_2,0,0,0);
-        return;
+        temp_v0 = (**(romwright_code **)(*param_1 + 0x24))(param_1,temp_v1,param_2,0,0,0);
+        return temp_v0;
       }
-      (**(romwright_code **)(*param_1 + 0x30))(param_1,param_3,param_4,temp_v0,param_2,0x14);
+      temp_v0 = (**(romwright_code **)(*param_1 + 0x30))(param_1,param_3,param_4,temp_v1,param_2,0x14);
     }
   }
-  return;
+  return temp_v0;
 }

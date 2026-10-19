@@ -86,7 +86,7 @@ int FUN_003717a0(fn_003717a0_arg0 *param_1,int *param_2,unsigned int param_3,uns
       (**(romwright_code **)(*(int *)param_1->field_0x178 + 0xc))();
     }
     param_1->field_0x178 = param_2;
-    param_1->field_0x17c = pvVar2;
+    param_1->field_0x17c = (undefined4)pvVar2;
     param_1->field_0x184 = (param_1->field_0x184 & 0xc0000000) | temp_v5;
     param_1->field_0x180 = pvVar2;
     temp_v3 = 0;

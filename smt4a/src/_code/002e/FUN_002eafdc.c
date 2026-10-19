@@ -11,10 +11,10 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_2_stack;
 
+/* Supplied declaration required: FUN_00107298. */
 extern unsigned int FUN_002e7908(unsigned int **, unsigned int **);
 extern int FUN_002eb358(unsigned int **, unsigned int *);
 /* Supplied declaration required: FUN_002eb368. */
-/* Supplied declaration required: while. */
 
 
 void FUN_002eafdc(int param_1,int param_2)

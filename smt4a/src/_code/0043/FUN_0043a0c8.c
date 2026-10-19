@@ -12,22 +12,22 @@ extern int FUN_0016f864(void);
 /* Supplied declaration required: FUN_00195fc8. */
 /* Supplied declaration required: FUN_0043a040. */
 extern unsigned int *FUN_0043a1d8(unsigned int *);
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 unsigned int * FUN_0043a0c8(void)
 
 {
-/* irregular: 5 native warning(s); review required */
+/* irregular: 3 native warning(s); review required */
   int temp_v0;
   unsigned int *puVar2;
   unsigned int *puVar3;
   
-  nn_os_CriticalSection_Enter(&DAT_006462a4);
+  nn_os_CriticalSection_Enter((unsigned int)&DAT_006462a4);
   if (0 < DAT_006462b0) {
     DAT_006462b0 = DAT_006462b0 + 1;
-    nn_os_CriticalSection_Leave(&DAT_006462a4);
+    nn_os_CriticalSection_Leave((unsigned int)&DAT_006462a4);
     return (unsigned int *)0x0;
   }
   temp_v0 = FUN_0016f864();
@@ -44,11 +44,11 @@ unsigned int * FUN_0043a0c8(void)
         software_interrupt(0x23);
         DAT_006462b4 = 0;
       }
-      nn_os_CriticalSection_Leave(&DAT_006462a4);
+      nn_os_CriticalSection_Leave((unsigned int)&DAT_006462a4);
       return puVar3;
     }
     DAT_006462b0 = 1;
   }
-  nn_os_CriticalSection_Leave(&DAT_006462a4);
+  nn_os_CriticalSection_Leave((unsigned int)&DAT_006462a4);
   return puVar2;
 }

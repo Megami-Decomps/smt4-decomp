@@ -10,7 +10,6 @@ typedef struct {
 
 extern romwright_code *DAT_0044e3f0; /* 0x44e3f0 */
 extern romwright_code *DAT_0044e3f4; /* 0x44e3f4 */
-extern unsigned int DAT_0044e430; /* 0x44e430 */
 extern unsigned int DAT_0044e434; /* 0x44e434 */
 
 
@@ -19,7 +18,7 @@ void nn_applet_CTR_CloseAppletHook(void)
 {
 /* irregular: 2 native warning(s); review required */
   if (DAT_0044e3f0 != (romwright_code *)0x0) {
-    (*DAT_0044e3f0)(DAT_0044e430);
+    (*DAT_0044e3f0)();
   }
   if (DAT_0044e3f4 == (romwright_code *)0x0) {
     return;

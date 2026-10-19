@@ -290,7 +290,7 @@ void FUN_00392070(fn_00392070_arg0 *param_1)
               temp_v20 = romwright_sqrt_4(temp_v10 * temp_v10 + temp_v11 * temp_v11 + DAT_006472e4 * DAT_006472e4);
               temp_v1 = (temp_v4 & 0xfffffff) | ((unsigned int)(temp_v20 < temp_v19) << 0x1f) |
                       ((unsigned int)(temp_v20 == temp_v19) << 0x1e);
-              temp_v4 = temp_v1 | ((unsigned int)(NAN(temp_v20) || NAN(temp_v19)) << 0x1c);
+              temp_v4 = temp_v1 | ((unsigned int)((temp_v20 != temp_v20) || (temp_v19 != temp_v19)) << 0x1c);
               temp_v0 = (unsigned char)(temp_v1 >> 0x18);
               DAT_006472dc = temp_v10;
               DAT_006472e0 = temp_v11;

@@ -18,7 +18,7 @@ void nw_gfx_SceneNode_IsCircularReference(int param_1,int param_2)
   
   temp_v0 = *(int *)(param_1 + 0xc);
   if ((temp_v0 != 0) && (temp_v0 != param_2)) {
-    nw_gfx_SceneNode_IsCircularReference(temp_v0);
+    nw_gfx_SceneNode_IsCircularReference(temp_v0, /* unrecovered */ 0);
   }
                     /* WARNING: Treating indirect jump as return */
   return;

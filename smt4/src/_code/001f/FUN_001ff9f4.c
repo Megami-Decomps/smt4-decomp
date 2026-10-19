@@ -11,13 +11,13 @@ typedef struct {
 /* Supplied declaration required: FUN_00254824. */
 /* Supplied declaration required: FUN_002c3510. */
 /* Supplied declaration required: FUN_002c52f8. */
-/* Supplied declaration required: nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile. */
+extern void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(unsigned int);
 
 
 int FUN_001ff9f4(int *param_1,unsigned int param_2,unsigned int param_3,int param_4)
 
 {
-/* irregular: 4 native warning(s); review required */
+/* irregular: 3 native warning(s); review required */
   int temp_v0;
   unsigned int temp_v1;
   int temp_v2;

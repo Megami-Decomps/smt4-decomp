@@ -7,7 +7,6 @@ extern unsigned char LAB_0036d304; /* 0x36d304 */
 extern unsigned char LAB_0036d310; /* 0x36d310 */
 extern unsigned char DAT_005e1ebc; /* 0x5e1ebc */
 
-/* Unsupported intrinsic, declaration required: while (COPY). */
 /* Supplied declaration required: FUN_00100388. */
 extern unsigned int FUN_00187180(unsigned int, unsigned int);
 extern unsigned int FUN_00192748(unsigned int);
@@ -18,7 +17,7 @@ extern int FUN_00330b58(int);
 unsigned char * FUN_0036d18c(unsigned int param_1)
 
 {
-/* irregular: 3 unstructured edge(s); 2 goto(s); 2 native warning(s); review required */
+/* irregular: 3 unstructured edge(s); 2 goto(s); 1 native warning(s); review required */
   unsigned int temp_v0;
   int temp_v1;
   unsigned int temp_v2;

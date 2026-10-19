@@ -9,7 +9,6 @@ typedef struct {
 
 extern unsigned int DAT_00439ca8; /* 0x439ca8 */
 
-/* Unsupported intrinsic, declaration required: while (INT_ADD). */
 /* Supplied declaration required: FUN_00254e4c. */
 /* Supplied declaration required: FUN_00282924. */
 
@@ -17,7 +16,7 @@ extern unsigned int DAT_00439ca8; /* 0x439ca8 */
 void FUN_0033b1ac(int param_1,int param_2,unsigned int param_3,int *param_4)
 
 {
-/* irregular: 3 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   short temp_v0;
   short temp_v1;
   unsigned int temp_v2;

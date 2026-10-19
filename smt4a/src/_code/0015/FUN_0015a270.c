@@ -14,23 +14,23 @@ extern unsigned int DAT_00643080; /* 0x643080 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_001701c0. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 void FUN_0015a270(void)
 
 {
-/* irregular: 4 native warning(s); review required */
-  nn_os_CriticalSection_Enter(&DAT_00643080);
+/* irregular: 2 native warning(s); review required */
+  nn_os_CriticalSection_Enter((unsigned int)&DAT_00643080);
   if (DAT_005c0aa0 != '\0') {
     FUN_001701c0(DAT_005c0abc);
     software_interrupt(0x23);
     DAT_005c0ab4 = 0;
     DAT_005c0aa0 = 0;
-    nn_os_CriticalSection_Leave(&DAT_00643080);
+    nn_os_CriticalSection_Leave((unsigned int)&DAT_00643080);
     return;
   }
-  nn_os_CriticalSection_Leave(&DAT_00643080);
+  nn_os_CriticalSection_Leave((unsigned int)&DAT_00643080);
   return;
 }

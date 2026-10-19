@@ -18,7 +18,7 @@ void FUN_00432d44(unsigned int param_1)
   float in_s0;
   
   temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(in_s0 < 0.0f) << 0x1f) | ((unsigned int)(in_s0 == 0.0f) << 0x1e);
-  temp_v2 = temp_v0 | ((unsigned int)NAN(in_s0) << 0x1c);
+  temp_v2 = temp_v0 | ((unsigned int)(in_s0 != in_s0) << 0x1c);
   temp_v1 = (unsigned char)(temp_v0 >> 0x18);
   if (!(unsigned char)((temp_v1 >> 6) & 1) && temp_v1 >> 7 == ((unsigned char)(temp_v2 >> 0x1c) & 1)) {
     FUN_002f651c(param_1,0x10000);

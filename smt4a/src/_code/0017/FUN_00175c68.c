@@ -41,7 +41,7 @@ void FUN_00175c68(fn_00175c68_arg0 *param_1)
     param_1->field_0x138 = 0;
     param_1->field_0x139 = 0;
     if (param_1->field_0x1a0 != (romwright_code *)0x0) {
-      (*param_1->field_0x1a0)(param_1,0,*(unsigned int *)&param_1->field_0x1a4);
+      ((int (*)())param_1->field_0x1a0)(param_1,0,*(unsigned int *)&param_1->field_0x1a4);
     }
     if (param_1->field_0x13a != 0) {
       param_1->field_0x13a = 0;

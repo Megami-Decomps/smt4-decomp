@@ -4,13 +4,12 @@
 
 extern unsigned char DAT_005891f4; /* 0x5891f4 */
 
-/* Supplied declaration required: nn_applet_CTR_detail_SleepIfShellClosed. */
+extern void nn_applet_CTR_detail_SleepIfShellClosed(void);
 
 
 void FUN_00170390(int param_1)
 
 {
-/* irregular: 1 native warning(s); review required */
   DAT_005891f4 = 1;
   if (param_1 != 0) {
     nn_applet_CTR_detail_SleepIfShellClosed();

@@ -14,36 +14,35 @@ extern int DAT_0043e2b4; /* 0x43e2b4 */
 extern int FUN_003e0c80(unsigned int *);
 extern int FUN_003e0ce8(unsigned int *);
 extern int FUN_003e0d54(unsigned int *);
-/* Supplied declaration required: nn_fnd_DateTime_DateToDays. */
-/* Supplied declaration required: nn_fnd_DateTime_GetDay. */
-/* Supplied declaration required: nn_fnd_DateTime_GetMonth. */
-/* Supplied declaration required: nn_fnd_DateTime_GetYear. */
+extern int nn_fnd_DateTime_DateToDays(int, int, int);
+extern int nn_fnd_DateTime_GetDay(unsigned int);
+extern int nn_fnd_DateTime_GetMonth(unsigned int);
+extern int nn_fnd_DateTime_GetYear(unsigned int);
 
 
 void FUN_0026b4cc(void)
 
 {
-/* irregular: 5 native warning(s); review required */
-  unsigned int *puVar1;
+/* irregular: 1 native warning(s); review required */
   int temp_v0;
   int temp_v1;
   int temp_v2;
   int temp_v3;
-  unsigned int uStack_1c;
   int temp_v4;
+  unsigned int uStack_1c;
+  int temp_v5;
   unsigned int uStack_14;
   
-  FUN_002c567c(&temp_v3);
-  temp_v4 = temp_v3;
+  FUN_002c567c(&temp_v4);
+  temp_v5 = temp_v4;
   uStack_14 = uStack_1c;
-  nn_fnd_DateTime_GetDay(&temp_v4);
-  nn_fnd_DateTime_GetMonth(&temp_v4);
-  puVar1 = (unsigned int *)&temp_v4;
-  nn_fnd_DateTime_GetYear();
-  nn_fnd_DateTime_DateToDays();
-  temp_v0 = FUN_003e0c80((unsigned int *)&temp_v4);
-  temp_v1 = FUN_003e0ce8((unsigned int *)&temp_v4);
-  temp_v2 = FUN_003e0d54((unsigned int *)&temp_v4);
-  *(int *)(DAT_0043e2b4 + 4) = temp_v2 + (temp_v1 + (temp_v0 + (int)puVar1 * 0x18) * 0x3c) * 0x3c;
+  temp_v0 = nn_fnd_DateTime_GetDay((unsigned int)&temp_v5);
+  temp_v1 = nn_fnd_DateTime_GetMonth((unsigned int)&temp_v5);
+  temp_v2 = nn_fnd_DateTime_GetYear((unsigned int)&temp_v5);
+  temp_v0 = nn_fnd_DateTime_DateToDays(temp_v2,temp_v1,temp_v0);
+  temp_v1 = FUN_003e0c80((unsigned int *)&temp_v5);
+  temp_v2 = FUN_003e0ce8((unsigned int *)&temp_v5);
+  temp_v3 = FUN_003e0d54((unsigned int *)&temp_v5);
+  *(int *)(DAT_0043e2b4 + 4) = temp_v3 + (temp_v2 + (temp_v1 + temp_v0 * 0x18) * 0x3c) * 0x3c;
   return;
 }

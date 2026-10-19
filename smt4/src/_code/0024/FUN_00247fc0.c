@@ -7,14 +7,13 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_2_stack;
 
-/* Unsupported intrinsic, declaration required: while (LOAD). */
 /* Supplied declaration required: aeabi_uidivmod. */
 
 
 void FUN_00247fc0(int param_1,unsigned int param_2)
 
 {
-/* irregular: 4 unstructured edge(s); 2 native warning(s); review required */
+/* irregular: 4 unstructured edge(s); 1 native warning(s); review required */
   unsigned short temp_v0;
   unsigned short *puVar2;
   unsigned short *puVar3;

@@ -18,7 +18,7 @@ extern unsigned char DAT_004e6f64; /* 0x4e6f64 */
 /* Supplied declaration required: FUN_0015d38c. */
 /* Supplied declaration required: FUN_002bb150. */
 /* Supplied declaration required: FUN_002c3424. */
-/* Supplied declaration required: nn_os_LightEvent_ClearSignal. */
+extern void nn_os_LightEvent_ClearSignal(unsigned int);
 /* Supplied declaration required: nn_snd_CTR_Dspsnd_WaitPipe_15D540. */
 /* Supplied declaration required: nn_snd_CTR_Dspsnd_WaitPipe_15D5E0. */
 
@@ -26,7 +26,7 @@ extern unsigned char DAT_004e6f64; /* 0x4e6f64 */
 void FUN_002a208c(unsigned int param_1,unsigned int param_2)
 
 {
-/* irregular: 6 native warning(s); review required */
+/* irregular: 5 native warning(s); review required */
   unsigned char *puVar1;
   
   if (DAT_0044e7c2 != '\0') {
@@ -41,7 +41,7 @@ void FUN_002a208c(unsigned int param_1,unsigned int param_2)
   }
   if (DAT_0044e7c1 != '\0') {
     FUN_002c3424(&DAT_0044e7c8);
-    nn_os_LightEvent_ClearSignal(&DAT_0044e7c8);
+    nn_os_LightEvent_ClearSignal((unsigned int)&DAT_0044e7c8);
   }
   if (DAT_0044e7c3 != '\0') {
     FUN_002bb150(&DAT_004a95c0,0);

@@ -9,34 +9,35 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_4_stack;
 
+#ifndef ROMWRIGHT_PIECE_4_4_DEFINED
+#define ROMWRIGHT_PIECE_4_4_DEFINED
+#define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
+#endif
 #ifndef ROMWRIGHT_CARRY_4_DEFINED
 #define ROMWRIGHT_CARRY_4_DEFINED
 #define romwright_carry_4(left, right) ((unsigned char)((unsigned long long)(unsigned int)(left) + (unsigned long long)(unsigned int)(right) > 0xffffffffULL))
 #endif
-/* Supplied declaration required: nn_fs_CTR_MPCore_detail_UserFileSystem_TryReadFile. */
+extern unsigned int nn_fs_CTR_MPCore_detail_UserFileSystem_TryReadFile(int *, unsigned int, long long, unsigned int, unsigned int);
 
 
-void nn_fs_detail_FileBase_TryRead(unsigned int *param_1,int *param_2,int param_3,unsigned int param_4)
+unsigned int nn_fs_detail_FileBase_TryRead(unsigned int *param_1,int *param_2,int param_3,unsigned int param_4)
 
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int *puVar1;
   unsigned int temp_v0;
   int temp_v1;
   unsigned int temp_v2;
   
   temp_v1 = 0;
   if (param_4 != 0) {
-    while( 1 ) {
-      puVar1 = &temp_v2;
-      nn_fs_CTR_MPCore_detail_UserFileSystem_TryReadFile
-                (puVar1,*param_1 & 0xfffffffe,param_1[1],param_1[2],param_3,param_4);
-      if ((int)puVar1 < 0) break;
+    while (temp_v0 = nn_fs_CTR_MPCore_detail_UserFileSystem_TryReadFile
+                             ((int *)&temp_v2,*param_1 & 0xfffffffe,romwright_piece_4_4(param_4,param_3),
+                              param_1[1],param_1[2]), -1 < (int)temp_v0) {
       temp_v0 = param_1[1];
       temp_v1 = temp_v1 + temp_v2;
       param_1[1] = temp_v0 + temp_v2;
       param_1[2] = param_1[2] + ((int)temp_v2 >> 0x1f) + (unsigned int)romwright_carry_4(temp_v0,temp_v2);
       if ((temp_v2 == param_4) || (temp_v2 == 0)) {
+        temp_v0 = 0;
         *param_2 = temp_v1;
         break;
       }
@@ -45,7 +46,8 @@ void nn_fs_detail_FileBase_TryRead(unsigned int *param_1,int *param_2,int param_
     }
   }
   else {
+    temp_v0 = 0;
     *param_2 = temp_v1;
   }
-  return;
+  return temp_v0;
 }

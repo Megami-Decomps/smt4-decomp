@@ -22,55 +22,54 @@ extern unsigned char LAB_0010fe8c; /* 0x10fe8c */
 /* Supplied declaration required: FUN_002bb484. */
 /* Supplied declaration required: FUN_002bb5a4. */
 /* Supplied declaration required: FUN_002bbb2c. */
-/* Supplied declaration required: nn_fs_detail_FileBase_TryGetSize. */
-/* Supplied declaration required: nn_fs_detail_FileBase_TryRead. */
+extern unsigned int nn_fs_detail_FileBase_TryGetSize(unsigned int, long long *);
+extern unsigned int nn_fs_detail_FileBase_TryRead(unsigned int, int *, unsigned int, unsigned int);
 
 
 unsigned int FUN_0010fd94(void)
 
 {
-/* irregular: 6 native warning(s); review required */
+/* irregular: 4 native warning(s); review required */
   unsigned int temp_v0;
   unsigned int *puVar2;
-  char temp_v1 [4];
-  int temp_v2;
-  unsigned int temp_v3;
+  unsigned int temp_v1;
+  char temp_v2 [4];
+  int temp_v3;
   unsigned int temp_v4;
   unsigned int temp_v5;
   unsigned int temp_v6;
-  int temp_v7;
+  unsigned int temp_v7;
   int temp_v8;
   int temp_v9;
   int temp_v10;
+  int temp_v11;
   
-  temp_v2 = 0;
-  builtin_strncpy(temp_v1,"h\fB",4);
-  puVar2 = (unsigned int *)&temp_v2;
-  temp_v5 = 0;
-  temp_v6 = 0;
   temp_v3 = 0;
+  builtin_strncpy(temp_v2,"h\fB",4);
+  puVar2 = (unsigned int *)&temp_v3;
+  temp_v6 = 0;
+  temp_v7 = 0;
   temp_v4 = 0;
+  temp_v5 = 0;
   FUN_002bb5a4(puVar2,&LAB_0010fe8c,1);
   if (-1 < (int)puVar2) {
-    puVar2 = (unsigned int *)&temp_v2;
-    nn_fs_detail_FileBase_TryGetSize(puVar2,&temp_v9);
-    if ((int)puVar2 < 0) {
-      FUN_002bbb2c();
+    temp_v1 = nn_fs_detail_FileBase_TryGetSize((unsigned int)&temp_v3,(long long *)&temp_v10);
+    if ((int)temp_v1 < 0) {
+      FUN_002bbb2c(temp_v1,0x10fe0c);
     }
-    if (temp_v10 == 0 && temp_v9 == 4) {
-      puVar2 = (unsigned int *)&temp_v2;
-      temp_v8 = 0;
-      nn_fs_detail_FileBase_TryRead(puVar2,&temp_v7,&temp_v8,4);
-      if ((int)puVar2 < 0) {
-        FUN_002bbb2c();
+    if (temp_v11 == 0 && temp_v10 == 4) {
+      temp_v9 = 0;
+      temp_v1 = nn_fs_detail_FileBase_TryRead((unsigned int)&temp_v3,&temp_v8,(unsigned int)&temp_v9,4);
+      if ((int)temp_v1 < 0) {
+        FUN_002bbb2c(temp_v1,0x10fe44);
       }
-      temp_v0 = temp_v8;
-      if (temp_v7 == 4) {
-        FUN_002bb484(temp_v1,0);
+      temp_v0 = temp_v9;
+      if (temp_v8 == 4) {
+        FUN_002bb484(temp_v2,0);
         return temp_v0;
       }
     }
   }
-  FUN_002bb484(temp_v1,0);
+  FUN_002bb484(temp_v2,0);
   return 0;
 }

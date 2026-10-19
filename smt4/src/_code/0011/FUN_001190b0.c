@@ -15,28 +15,29 @@ extern unsigned char DAT_004e315c; /* 0x4e315c */
 /* Supplied declaration required: FUN_00147370. */
 extern unsigned int FUN_002bd29c(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bd430. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
-/* Supplied declaration required: nn_snd_CTR_InitializeWaveBuffer. */
-/* Supplied declaration required: nn_snd_CTR_Voice_SetMixParam. */
-/* Supplied declaration required: nn_snd_CTR_Voice_SetPitch. */
-/* Supplied declaration required: nn_snd_CTR_Voice_SetState. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
+extern void nn_snd_CTR_InitializeWaveBuffer(unsigned int);
+extern void nn_snd_CTR_Voice_SetMixParam(unsigned int, unsigned int);
+extern void nn_snd_CTR_Voice_SetPitch(unsigned int, float);
+extern void nn_snd_CTR_Voice_SetState(unsigned int, int);
 
 
 void FUN_001190b0(int param_1,unsigned int param_2)
 
 {
-/* irregular: irregular input(s): in_s0; 10 native warning(s); review required */
+/* irregular: irregular input(s): in_s0; 5 native warning(s); review required */
   unsigned int temp_v0;
   unsigned int temp_v1;
-  int temp_v2;
+  float temp_v2;
+  int temp_v3;
   unsigned int in_s0;
   
   if (param_1 == 0) {
     return;
   }
   if ((*(unsigned int *)(param_1 + 0x90) & 0x202) == 0) {
-    nn_os_CriticalSection_Enter(&DAT_004e315c);
+    nn_os_CriticalSection_Enter((unsigned int)&DAT_004e315c);
     *(unsigned int *)(param_1 + 0x78) = param_2;
     *(unsigned int *)(param_1 + 0x84) = 0;
     *(unsigned int *)(param_1 + 0x94) = in_s0;
@@ -47,27 +48,27 @@ void FUN_001190b0(int param_1,unsigned int param_2)
     if (0 < *(int *)(param_1 + 0x78)) {
       *(unsigned int *)(param_1 + 0x90) = temp_v1 | 0x60;
     }
-    nn_os_CriticalSection_Leave(&DAT_004e315c);
+    nn_os_CriticalSection_Leave((unsigned int)&DAT_004e315c);
     return;
   }
   if ((*(unsigned int *)(param_1 + 0x90) & 0x200) == 0) {
     return;
   }
-  nn_os_CriticalSection_Enter(&DAT_004e315c);
+  nn_os_CriticalSection_Enter((unsigned int)&DAT_004e315c);
   FUN_002bd430(*(unsigned int *)(param_1 + 0x38));
   temp_v0 = FUN_002bd29c(0x7fff,0);
   *(unsigned int *)(param_1 + 0x38) = temp_v0;
   nn_snd_CTR_Voice_SetMixParam(temp_v0,param_1 + 0x3c);
-  nn_snd_CTR_Voice_SetPitch(*(unsigned int *)(param_1 + 0x38));
-  temp_v2 = 0;
+  nn_snd_CTR_Voice_SetPitch(*(unsigned int *)(param_1 + 0x38),temp_v2);
+  temp_v3 = 0;
   *(unsigned int *)(param_1 + 0x90) = 0;
   do {
-    nn_snd_CTR_InitializeWaveBuffer(param_1 + temp_v2 * 0x18 + 8);
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 2);
+    nn_snd_CTR_InitializeWaveBuffer(param_1 + temp_v3 * 0x18 + 8);
+    temp_v3 = temp_v3 + 1;
+  } while (temp_v3 < 2);
   FUN_001290cc(*(unsigned int *)(param_1 + 0x38),*(unsigned int *)(param_1 + 0x6c),param_1 + 8,
                param_1 + 0x20,0);
   FUN_001190b0(param_1,param_2);
-  nn_os_CriticalSection_Leave(&DAT_004e315c);
+  nn_os_CriticalSection_Leave((unsigned int)&DAT_004e315c);
   return;
 }

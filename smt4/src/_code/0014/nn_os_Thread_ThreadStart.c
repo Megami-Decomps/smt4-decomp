@@ -11,25 +11,22 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_00128110. */
 /* Supplied declaration required: FUN_00138364. */
-extern unsigned int FUN_00138370(void);
-/* Supplied declaration required: nn_os_ThreadLocalStorage_ClearAllSlots. */
+/* Supplied declaration required: FUN_00138370. */
+extern void nn_os_ThreadLocalStorage_ClearAllSlots(void);
 
 
-unsigned int nn_os_Thread_ThreadStart(unsigned int *param_1)
+void nn_os_Thread_ThreadStart(unsigned int param_1)
 
 {
 /* irregular: 4 native warning(s); review required */
-  unsigned int temp_v0;
-  
   nn_os_ThreadLocalStorage_ClearAllSlots();
   FUN_00128110();
   FUN_00138364();
-  (*(romwright_code *)param_1[1])(param_1[2],param_1[3]);
-  (*(romwright_code *)*param_1)(param_1[3]);
-  temp_v0 = 0;
-  if (*(char *)(param_1 + 5) != '\0') {
-    temp_v0 = FUN_00138370();
+  (**(romwright_code **)(param_1 + 4))(*(unsigned int *)(param_1 + 8),*(unsigned int *)(param_1 + 0xc));
+  (**(romwright_code **)param_1)(*(unsigned int *)(param_1 + 0xc));
+  if (*(char *)(param_1 + 0x14) != '\0') {
+    FUN_00138370(*(unsigned int *)(param_1 + 0x10));
   }
   software_interrupt(9);
-  return temp_v0;
+  return;
 }

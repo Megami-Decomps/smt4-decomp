@@ -13,6 +13,7 @@ struct fn_0021f6e4_arg1 {
     undefined4 field_0x20; /* +0x20 */
 };
 
+typedef int romwright_code();
 /* stack frame of param_2: 21 slot(s), 78 byte(s) */
 typedef struct {
     unsigned int sp2C; /* 0x2c: local_2c */
@@ -155,12 +156,12 @@ void FUN_0021f6e4(int *param_1,fn_0021f6e4_arg1 *param_2)
       temp_v22 = 0;
       temp_v17 = 8;
       uStack_64 = 4;
-      temp_v23 = romwright_piece_3_1(temp_v23._1_3_,1);
+      temp_v23 = romwright_piece_3_1((((unsigned int)(temp_v23) >> 8) & 0xffffffU),1);
       piVar19 = &temp_v15;
       temp_v15 = temp_v8;
       nw_gfx_SceneBuilder_CreateObject(piVar19,temp_v3,temp_v4);
       if (piVar19 != (int *)0x0) {
-        piVar9 = (int *)(**(code **)(*piVar19 + 8))(piVar19);
+        piVar9 = (int *)(**(romwright_code **)(*piVar19 + 8))(piVar19);
         do {
           if (piVar9 == (int *)0x44e858) goto LAB_0021f844;
           piVar9 = (int *)*piVar9;
@@ -193,8 +194,8 @@ LAB_0021f844:
         }
         temp_v13 = temp_v13 + 1;
       }
-      if ((piVar19 != (int *)0x0) && (temp_v8 = (**(code **)(*piVar19 + 8))(), temp_v8 == 0x471f18)) {
-        piVar9 = (int *)(**(code **)(*piVar19 + 8))(piVar19);
+      if ((piVar19 != (int *)0x0) && (temp_v8 = (**(romwright_code **)(*piVar19 + 8))(), temp_v8 == 0x471f18)) {
+        piVar9 = (int *)(**(romwright_code **)(*piVar19 + 8))(piVar19);
 LAB_0021f8dc:
         if (piVar9 != (int *)0x471f18) {
           piVar9 = (int *)*piVar9;
@@ -231,8 +232,8 @@ LAB_0021f8dc:
         *psVar22 = temp_v2 + 1;
       }
       else if ((piVar19 != (int *)0x0) &&
-              (temp_v8 = (**(code **)(*piVar19 + 8))(), temp_v8 == 0x472048)) {
-        piVar9 = (int *)(**(code **)(*piVar19 + 8))(piVar19);
+              (temp_v8 = (**(romwright_code **)(*piVar19 + 8))(), temp_v8 == 0x472048)) {
+        piVar9 = (int *)(**(romwright_code **)(*piVar19 + 8))(piVar19);
 LAB_0021f9a8:
         if (piVar9 != (int *)0x472048) {
           piVar9 = (int *)*piVar9;
@@ -269,8 +270,8 @@ LAB_0021f9a8:
         *temp_v29 = temp_v1 + 1;
       }
       else if ((piVar19 != (int *)0x0) &&
-              (temp_v8 = (**(code **)(*piVar19 + 8))(), temp_v8 == 0x4722d0)) {
-        piVar9 = (int *)(**(code **)(*piVar19 + 8))(piVar19);
+              (temp_v8 = (**(romwright_code **)(*piVar19 + 8))(), temp_v8 == 0x4722d0)) {
+        piVar9 = (int *)(**(romwright_code **)(*piVar19 + 8))(piVar19);
 LAB_0021fa84:
         if (piVar9 != (int *)0x4722d0) {
           piVar9 = (int *)*piVar9;
@@ -308,8 +309,8 @@ LAB_0021fa84:
         *psVar15 = temp_v1 + 1;
       }
       else if ((piVar19 != (int *)0x0) &&
-              (temp_v8 = (**(code **)(*piVar19 + 8))(), temp_v8 == 0x472110)) {
-        piVar9 = (int *)(**(code **)(*piVar19 + 8))(piVar19);
+              (temp_v8 = (**(romwright_code **)(*piVar19 + 8))(), temp_v8 == 0x472110)) {
+        piVar9 = (int *)(**(romwright_code **)(*piVar19 + 8))(piVar19);
 LAB_0021fb58:
         if (piVar9 != (int *)0x472110) {
           piVar9 = (int *)*piVar9;
@@ -386,11 +387,11 @@ LAB_0021fb58:
       temp_v21 = 1;
       piVar20 = &temp_v15;
       temp_v22 = 0;
-      temp_v23 = romwright_piece_3_1(temp_v23._1_3_,1);
+      temp_v23 = romwright_piece_3_1((((unsigned int)(temp_v23) >> 8) & 0xffffffU),1);
       temp_v15 = temp_v8;
       nw_gfx_SceneBuilder_CreateObject(piVar20,temp_v3,temp_v4);
       if (piVar20 != (int *)0x0) {
-        piVar19 = (int *)(**(code **)(*piVar20 + 8))(piVar20);
+        piVar19 = (int *)(**(romwright_code **)(*piVar20 + 8))(piVar20);
         do {
           if (piVar19 == (int *)0x44e858) goto LAB_0021fce4;
           piVar19 = (int *)*piVar19;
@@ -421,7 +422,7 @@ LAB_0021fce4:
         temp_v13 = temp_v13 + 1;
       }
       if (piVar20 != (int *)0x0) {
-        piVar19 = (int *)(**(code **)(*piVar20 + 8))(piVar20);
+        piVar19 = (int *)(**(romwright_code **)(*piVar20 + 8))(piVar20);
         do {
           if (piVar19 == (int *)0x472030) goto LAB_0021fd6c;
           piVar19 = (int *)*piVar19;
@@ -521,7 +522,7 @@ LAB_0021fd6c:
         *(unsigned int *)(temp_v7 + 0xc) = *(unsigned int *)(temp_v10 + 0x10);
       }
     }
-LAB_0021ff80:
+LAB_0021ff80:;
   }
   temp_v7 = *(int *)(*temp_v30 + 0x60);
   if (temp_v7 != 0) {
@@ -549,7 +550,7 @@ LAB_0021ff80:
       }
       temp_v3 = FUN_002c300c();
       temp_v4 = FUN_002c2ff0();
-      temp_v21 = romwright_piece_3_1(temp_v21._1_3_,1);
+      temp_v21 = romwright_piece_3_1((((unsigned int)(temp_v21) >> 8) & 0xffffffU),1);
       temp_v24 = 0;
       temp_v25 = 0;
       temp_v26 = 0;
@@ -558,11 +559,11 @@ LAB_0021ff80:
       temp_v22 = 8;
       temp_v23 = 4;
       piVar19 = &temp_v20;
-      temp_v29 = (short *)romwright_piece_3_1(temp_v29._1_3_,1);
+      temp_v29 = (short *)romwright_piece_3_1((((unsigned int)(temp_v29) >> 8) & 0xffffffU),1);
       temp_v20 = temp_v6;
       nw_gfx_SceneBuilder_CreateObject(piVar19,temp_v4,temp_v3);
       if (piVar19 != (int *)0x0) {
-        piVar9 = (int *)(**(code **)(*piVar19 + 8))(piVar19);
+        piVar9 = (int *)(**(romwright_code **)(*piVar19 + 8))(piVar19);
         do {
           if (piVar9 == (int *)0x472238) goto LAB_00220074;
           piVar9 = (int *)*piVar9;
@@ -579,7 +580,7 @@ LAB_00220074:
         if (temp_v9 > (*(unsigned int *)(temp_v8 + 0x4dacec) & 0x3fffffff)) {
           if ((*piVar20 != 0) && ((*(unsigned int *)(temp_v8 + 0x4dacec) & 0xc0000000) == 0x40000000)) {
             puVar12 = (unsigned int *)
-                      (**(code **)(*(int *)*piVar20 + 8))((int *)*piVar20,temp_v9 << 2,0x20);
+                      (**(romwright_code **)(*(int *)*piVar20 + 8))((int *)*piVar20,temp_v9 << 2,0x20);
             puVar13 = *(unsigned int **)(temp_v8 + 0x4dace4);
             puVar16 = *(unsigned int **)(temp_v8 + 0x4dace8);
             temp_v15 = 0;
@@ -595,7 +596,7 @@ LAB_00220074:
               temp_v15 = (*(int *)(temp_v8 + 0x4dace8) - *(int *)(temp_v8 + 0x4dace4)) >> 2;
             }
             if (*(int *)(temp_v8 + 0x4dace4) != 0) {
-              (**(code **)(*(int *)*piVar20 + 0xc))();
+              (**(romwright_code **)(*(int *)*piVar20 + 0xc))();
             }
             *(unsigned int **)(temp_v8 + 0x4dace8) = puVar12 + temp_v15;
             *(unsigned int **)(temp_v8 + 0x4dace4) = puVar12;
@@ -629,7 +630,7 @@ LAB_00220074:
     piVar20 = temp_v12;
   }
   if (temp_v11 != (int *)0x0 && piVar20 != (int *)0x0) {
-    (**(code **)(*temp_v11 + 0xc))(temp_v11,temp_v12);
+    (**(romwright_code **)(*temp_v11 + 0xc))(temp_v11,temp_v12);
   }
   return;
 }

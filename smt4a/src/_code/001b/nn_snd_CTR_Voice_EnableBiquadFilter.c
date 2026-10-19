@@ -5,13 +5,13 @@
 /* Supplied declaration required: func_0x001c7c30. */
 
 
-void nn_snd_CTR_Voice_EnableBiquadFilter(int param_1,int param_2)
+void nn_snd_CTR_Voice_EnableBiquadFilter(int param_1,unsigned char param_2)
 
 {
 /* irregular: 1 native warning(s); review required */
   unsigned char temp_v0;
   
-  if (param_2 != 0) {
+  if (param_2) {
     temp_v0 = *(unsigned char *)(param_1 + 7) | 2;
   }
   else {

@@ -7,16 +7,15 @@ unsigned int nn_dbm_RomPathTool_PathParser_GetAsDirectoryName(unsigned int *para
 
 {
   unsigned int temp_v0;
-  unsigned int temp_v1;
   
   temp_v0 = (int)(param_1[1] - *param_1) >> 1;
   if (temp_v0 < 0x101) {
     *param_2 = temp_v0;
     param_2[1] = *param_1;
-    temp_v1 = 0;
+    temp_v0 = 0;
   }
   else {
-    temp_v1 = 0xe0e046c8;
+    temp_v0 = 0xe0e046c8;
   }
-  return temp_v1;
+  return temp_v0;
 }

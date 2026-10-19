@@ -37,7 +37,6 @@ extern char s__V_V_V_005b3cc8[13]; /* 0x5b3cc8 */
 #define ROMWRIGHT_PIECE_2_2_DEFINED
 #define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
 #endif
-/* Unsupported intrinsic, declaration required: while (PTRADD). */
 /* Supplied declaration required: ARM_common_memset4_6. */
 /* Supplied declaration required: FUN_001630d4. */
 /* Supplied declaration required: FUN_00168188. */
@@ -60,7 +59,7 @@ extern int nw_ut_ResDicPatricia_Get(int *, int, unsigned int);
 void FUN_0019afe4(int *param_1,unsigned int *param_2,unsigned int param_3,int param_4)
 
 {
-/* irregular: 2 goto(s); 15 native warning(s); review required */
+/* irregular: 2 goto(s); 14 native warning(s); review required */
   int *piVar1;
   int *piVar2;
   unsigned short temp_v0;
@@ -182,7 +181,7 @@ void FUN_0019afe4(int *param_1,unsigned int *param_2,unsigned int param_3,int pa
         temp_v20 = 4;
         temp_v19 = 8;
         temp_v26 = 1;
-        temp_v18 = romwright_piece_3_1(temp_v18._1_3_,1);
+        temp_v18 = romwright_piece_3_1((((unsigned int)(temp_v18) >> 8) & 0xffffffU),1);
         temp_v22 = 0;
         temp_v21 = 4;
         temp_v24 = 4;

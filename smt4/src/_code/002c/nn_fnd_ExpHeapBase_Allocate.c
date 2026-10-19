@@ -8,21 +8,21 @@
 /* Supplied declaration required: nn_fnd_detail_SetAllocModeForHeap. */
 
 
-void nn_fnd_ExpHeapBase_Allocate
-               (int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
-               unsigned int param_5,unsigned int param_6)
+int nn_fnd_ExpHeapBase_Allocate
+              (int param_1,unsigned int param_2,int param_3,unsigned char param_4,int param_5,unsigned char param_6)
 
 {
-/* irregular: 4 native warning(s); review required */
+/* irregular: irregular input(s): in_stack_00000005; 4 native warning(s); review required */
   int temp_v0;
+  unsigned int in_stack_00000005;
   
   FUN_00146dc8(param_1 + 0x18,param_4);
   nn_fnd_detail_SetAllocModeForHeap(param_1 + 0x18,param_5);
-  FUN_00146df8(param_1 + 0x18,param_6);
+  FUN_00146df8(param_1 + 0x18,(*(unsigned int *)&param_6));
   temp_v0 = param_1 + 0x18;
   nn_fnd_detail_AllocFromHeap(temp_v0,param_2,param_3);
   if (temp_v0 != 0) {
     *(int *)(param_1 + 0x54) = *(int *)(param_1 + 0x54) + 1;
   }
-  return;
+  return temp_v0;
 }

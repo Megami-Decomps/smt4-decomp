@@ -7,13 +7,12 @@ extern unsigned char DAT_00589285; /* 0x589285 */
 extern unsigned char DAT_00589286; /* 0x589286 */
 extern unsigned int DAT_0058928c; /* 0x58928c */
 
-/* Supplied declaration required: nn_dsp_CTR_DSP_UnloadComponent. */
+extern unsigned int nn_dsp_CTR_DSP_UnloadComponent(unsigned int);
 
 
 void FUN_0016e758(void)
 
 {
-/* irregular: 1 native warning(s); review required */
   romwright_code *pcVar1;
   int temp_v0;
   

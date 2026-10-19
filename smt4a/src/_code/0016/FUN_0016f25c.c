@@ -13,15 +13,15 @@ extern unsigned char DAT_00647708; /* 0x647708 */
 extern int FUN_00189738(unsigned int *, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0018a0a8. */
 /* Supplied declaration required: FUN_001a0eb0. */
-/* Supplied declaration required: nn_cfg_CTR_Initialize. */
-/* Supplied declaration required: nn_snd_CTR_MasterManagerImpl_Initialize. */
+extern void nn_cfg_CTR_Initialize(void);
+extern void nn_snd_CTR_MasterManagerImpl_Initialize(unsigned int);
 /* Supplied declaration required: nn_snd_CTR_MasterManagerImpl_SetSoundOutputMode. */
 
 
 void FUN_0016f25c(char *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
 
 {
-/* irregular: 6 native warning(s); review required */
+/* irregular: 4 native warning(s); review required */
   int temp_v0;
   unsigned char temp_v1;
   char temp_v2;
@@ -30,7 +30,7 @@ void FUN_0016f25c(char *param_1,unsigned int param_2,unsigned int param_3,unsign
   if (*param_1 == '\0') {
     *param_1 = '\x01';
     temp_v3 = param_4;
-    nn_snd_CTR_MasterManagerImpl_Initialize(&DAT_00647708);
+    nn_snd_CTR_MasterManagerImpl_Initialize((unsigned int)&DAT_00647708);
     param_1[2] = '\x01';
     param_1[4] = '\0';
     param_1[5] = '\0';

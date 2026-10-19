@@ -100,7 +100,7 @@ void FUN_0044fab0(fn_0044fab0_arg0 *param_1,float *param_2,float *param_3)
     }
   }
   temp_v1 = param_1->field_0xc;
-  (*(unsigned int *)((unsigned char *)&temp_v9 + 0)) = param_1->field_0x10;
+  *(float *)&(*(unsigned int *)((unsigned char *)&temp_v9 + 0)) = param_1->field_0x10;
   (*(unsigned int *)((unsigned char *)&temp_v9 + 4)) = param_1->field_0x14;
   temp_v2 = param_1->field_0x18;
   FUN_0018a924(&temp_v10,temp_v11);

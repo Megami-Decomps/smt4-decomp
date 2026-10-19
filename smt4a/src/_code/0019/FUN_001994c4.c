@@ -12,7 +12,6 @@ typedef struct {
     unsigned int spB8; /* 0xb8: local_b8 */
 } param_4_stack;
 
-/* Unsupported intrinsic, declaration required: while (COPY). */
 /* Supplied declaration required: FUN_001994c4. */
 /* Supplied declaration required: FUN_001a73fc. */
 /* Supplied declaration required: FUN_001ab67c. */
@@ -26,7 +25,7 @@ typedef struct {
 void FUN_001994c4(unsigned int *param_1,unsigned int *param_2,int param_3,unsigned int param_4)
 
 {
-/* irregular: 3 goto(s); 8 native warning(s); review required */
+/* irregular: 3 goto(s); 7 native warning(s); review required */
   unsigned long long temp_v0;
   int temp_v1;
   unsigned int *puVar3;
@@ -270,7 +269,7 @@ LAB_001996ec:
       puVar7 = puVar7 + 0xc;
     }
     param_3 = param_3 / 2;
-    FUN_001994c4(puVar7,param_2,param_3);
+    FUN_001994c4(puVar7,param_2,param_3, /* unrecovered */ 0);
     temp_v1 = (int)puVar7 - (int)param_1;
     param_2 = puVar7;
   } while( 1 );

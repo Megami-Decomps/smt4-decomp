@@ -12,13 +12,13 @@ extern unsigned int DAT_00471b58; /* 0x471b58 */
 
 /* Unsupported intrinsic, declaration required: hasExclusiveAccess (CALLOTHER). */
 /* Supplied declaration required: FUN_002a8554. */
-/* Supplied declaration required: nn_os_SimpleLock_Lock. */
+extern void nn_os_SimpleLock_Lock(unsigned int);
 
 
 void FUN_002c4040(int *param_1)
 
 {
-/* irregular: irregular input(s): in_lr; 3 native warning(s); review required */
+/* irregular: irregular input(s): in_lr; 2 native warning(s); review required */
   unsigned char temp_v0;
   int temp_v1;
   int temp_v2;
@@ -29,7 +29,7 @@ void FUN_002c4040(int *param_1)
   if (*param_1 != -1) {
     if (*param_1 == -2) {
       piVar4 = param_1 + 1;
-      nn_os_SimpleLock_Lock(piVar4);
+      nn_os_SimpleLock_Lock((unsigned int)piVar4);
       do {
         temp_v0 = (unsigned char)hasExclusiveAccess(param_1);
       } while (!temp_v0);

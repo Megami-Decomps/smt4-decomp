@@ -29,7 +29,7 @@ void FUN_004a1510(int param_1)
   if ((pcVar2 != (romwright_code *)0x0) ||
      (((*(unsigned int *)(temp_v0 + 0xa97c) & 1) != 0 && (*(unsigned int *)(temp_v0 + 0xa97c) != 0)))) {
     if ((*(unsigned int *)(temp_v0 + 0xa97c) & 1) != 0) {
-      pcVar2 = *(romwright_code **)(pcVar2 + *(int *)(param_1 + ((int)*(unsigned int *)(temp_v0 + 0xa97c) >> 1)));
+      pcVar2 = *(romwright_code **)((unsigned char *)pcVar2 + *(int *)(param_1 + ((int)*(unsigned int *)(temp_v0 + 0xa97c) >> 1)));
     }
     (*pcVar2)();
   }

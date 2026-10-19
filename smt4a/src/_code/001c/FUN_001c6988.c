@@ -49,7 +49,7 @@ void FUN_001c6988(fn_001c6988_arg0 *param_1)
       temp_v3 = temp_v1 * 4;
       temp_v4 = *(int *)((int)param_1->field_0xc0 + (temp_v1 * 4 - 4)) + param_1->field_0xb8[temp_v1 - 1];
       *(int *)((int)param_1->field_0xc0 + temp_v1 * 4) = temp_v4;
-      piVar1 = param_1->field_0xb8 + temp_v1;
+      piVar1 = (int *)(param_1->field_0xb8 + temp_v1);
       temp_v1 = temp_v1 + 2;
       *(int *)((int)param_1->field_0xc0 + temp_v3 + 4) = temp_v4 + *piVar1;
     } while ((int)temp_v1 < (int)(unsigned int)param_1->field_0xc);

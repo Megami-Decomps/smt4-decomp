@@ -16,14 +16,14 @@ typedef struct {
 /* Supplied declaration required: FUN_00424ecc. */
 /* Supplied declaration required: FUN_00513f84. */
 /* Supplied declaration required: FUN_00513ff0. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
 void FUN_004257e4(int param_1,unsigned int param_2,unsigned int param_3,int param_4)
 
 {
-/* irregular: 10 native warning(s); review required */
+/* irregular: 8 native warning(s); review required */
   int temp_v0;
   int temp_v1;
   int temp_v2;
@@ -32,7 +32,7 @@ void FUN_004257e4(int param_1,unsigned int param_2,unsigned int param_3,int para
   int temp_v5;
   
   temp_v5 = param_4;
-  nn_os_CriticalSection_Enter();
+  nn_os_CriticalSection_Enter(param_1);
   if ((*(int *)(param_1 + 0xc) != 7) && (*(int *)(param_1 + 0xc) != 6)) {
     if (*(int *)(param_1 + 0xc) == 0) {
       if (*(char *)(param_1 + 0x11) == '\0') {

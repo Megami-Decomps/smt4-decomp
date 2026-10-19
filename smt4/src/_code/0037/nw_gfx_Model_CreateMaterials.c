@@ -85,9 +85,9 @@ int nw_gfx_Model_CreateMaterials(fn_00370a94_arg0 *param_1,int *param_2)
             if (temp_v4 < 0) {
               return temp_v4;
             }
-            piVar4 = param_1->field_0x168;
+            piVar4 = (int *)param_1->field_0x168;
             temp_v5 = temp_v5 + 1;
-            param_1->field_0x168 = piVar4 + 1;
+            param_1->field_0x168 = (undefined4 *)(piVar4 + 1);
             if (piVar4 != (int *)0x0) {
               *piVar4 = temp_v2;
             }

@@ -43,7 +43,7 @@ void FUN_0041bd84(unsigned int *param_1,unsigned int param_2)
   param_1[9] = 0;
   param_1[10] = 0;
   param_1[0xb] = 0;
-  param_1[4] = temp_v3 * 0.5f;
+  *(float *)&param_1[4] = temp_v3 * 0.5f;
   param_1[0x24] = param_1[6];
   param_1[0x25] = param_1[7];
   param_1[0x26] = param_1[8];

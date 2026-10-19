@@ -239,13 +239,13 @@ void FUN_00320458(fn_00320458_arg0 *param_1)
                 temp_v0 = in_fpscr & 0xfffffff;
                 temp_v1 = temp_v0 | ((unsigned int)(temp_v34 < temp_v32) << 0x1f) |
                         ((unsigned int)(temp_v34 == temp_v32) << 0x1e);
-                in_fpscr = temp_v1 | ((unsigned int)(NAN(temp_v34) || NAN(temp_v32)) << 0x1c);
+                in_fpscr = temp_v1 | ((unsigned int)((temp_v34 != temp_v34) || (temp_v32 != temp_v32)) << 0x1c);
                 temp_v3 = (unsigned char)(temp_v1 >> 0x18);
                 if (!(unsigned char)((temp_v3 >> 6) & 1) && temp_v3 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
                   temp_v17 = ((float)temp_v44[1] / temp_v39) * (float)temp_v43;
                   temp_v0 = temp_v0 | ((unsigned int)(temp_v16 < temp_v17) << 0x1f) |
                           ((unsigned int)(temp_v16 == temp_v17) << 0x1e);
-                  in_fpscr = temp_v0 | ((unsigned int)(NAN(temp_v16) || NAN(temp_v17)) << 0x1c);
+                  in_fpscr = temp_v0 | ((unsigned int)((temp_v16 != temp_v16) || (temp_v17 != temp_v17)) << 0x1c);
                   temp_v3 = (unsigned char)(temp_v0 >> 0x18);
                   if (!(unsigned char)((temp_v3 >> 6) & 1) && temp_v3 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
                     temp_v16 = temp_v17;

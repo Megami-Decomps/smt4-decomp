@@ -4,12 +4,11 @@
 
 /* Supplied declaration required: FUN_001a9110. */
 extern unsigned int FUN_00430ec8(unsigned char *, int);
-extern int nn_cec_CTR_MessageBox_GetMessHeader(unsigned int, unsigned int, unsigned int);
+extern unsigned int nn_cec_CTR_MessageBox_GetMessHeader(unsigned int, int, unsigned int);
 
 
 unsigned int
-nn_cec_CTR_MessageBox_GetMessageId
-          (unsigned int param_1,int param_2,unsigned int param_3,unsigned int param_4)
+nn_cec_CTR_MessageBox_GetMessageId(unsigned int param_1,int param_2,int param_3,unsigned int param_4)
 
 {
 /* irregular: 1 native warning(s); review required */

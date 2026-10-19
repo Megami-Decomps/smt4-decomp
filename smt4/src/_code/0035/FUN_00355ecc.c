@@ -13,64 +13,56 @@ typedef struct {
 extern unsigned int DAT_0044e660; /* 0x44e660 */
 extern unsigned int DAT_004d431c; /* 0x4d431c */
 
-extern unsigned long long nn_fnd_UnitHeapTemplate_nn_os_LockPolicy_Object_nn_os_CriticalSection_Allocate(unsigned int *);
-/* Supplied declaration required: nn_fs_ipc_FileSystem_CloseArchive. */
-extern int nn_fs_ipc_FileSystem_OpenArchive(unsigned int *, unsigned int *, unsigned int, unsigned int, unsigned int);
+#ifndef ROMWRIGHT_PIECE_4_4_DEFINED
+#define ROMWRIGHT_PIECE_4_4_DEFINED
+#define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
+#endif
+extern unsigned int *nn_fnd_UnitHeapTemplate_nn_os_LockPolicy_Object_nn_os_CriticalSection_Allocate(unsigned int *);
+extern unsigned int nn_fs_ipc_FileSystem_CloseArchive(unsigned int, unsigned long long);
+extern unsigned int nn_fs_ipc_FileSystem_OpenArchive(unsigned int, unsigned long long *, unsigned int, unsigned int, unsigned char *, unsigned int);
 
 
-int FUN_00355ecc(unsigned int *param_1,unsigned int param_2,int param_3)
+unsigned int FUN_00355ecc(unsigned int *param_1,unsigned char *param_2,int param_3)
 
 {
-/* irregular: 1 native warning(s); review required */
   unsigned int temp_v0;
+  unsigned int *puVar2;
   unsigned int temp_v1;
-  int temp_v2;
-  unsigned int *puVar4;
-  char *pcVar5;
-  unsigned int temp_v3;
+  unsigned int temp_v2;
+  unsigned char temp_v3;
   int temp_v4;
-  unsigned long long temp_v5;
-  unsigned int temp_v6 [2];
-  int temp_v7;
-  int temp_v8;
+  int temp_v5;
   unsigned int uStack_24;
   
-  temp_v3 = 0;
-  if (param_3 != 0) {
-    temp_v3 = 0x12345678;
-  }
-  temp_v7 = DAT_0044e660;
-  temp_v6[0] = 0xc;
   if (param_3 == 0) {
-    temp_v3 = 6;
+    temp_v1 = 6;
   }
-  temp_v2 = nn_fs_ipc_FileSystem_OpenArchive((unsigned int *)&temp_v7,(unsigned int *)&temp_v8,temp_v3,2,param_2);
-  temp_v1 = uStack_24;
-  temp_v0 = temp_v8;
-  temp_v3 = DAT_0044e660;
-  if (-1 < temp_v2) {
-    temp_v5 = nn_fnd_UnitHeapTemplate_nn_os_LockPolicy_Object_nn_os_CriticalSection_Allocate
-                      (&DAT_004d431c);
-    pcVar5 = (char *)((unsigned long long)temp_v5 >> 0x20);
-    puVar4 = (unsigned int *)temp_v5;
-    if (puVar4 != (unsigned int *)0x0) {
-      pcVar5 = "挼5悼5怐5";
-      *puVar4 = (unsigned int)"挼5悼5怐5";
-      puVar4[2] = temp_v0;
-      puVar4[3] = temp_v1;
-      puVar4[1] = temp_v3;
-      temp_v4 = 0;
+  else {
+    temp_v1 = 0x12345678;
+  }
+  temp_v4 = DAT_0044e660;
+  temp_v1 = nn_fs_ipc_FileSystem_OpenArchive((unsigned int)&temp_v4,(unsigned long long *)&temp_v5,temp_v1,2,param_2,0xc);
+  temp_v0 = DAT_0044e660;
+  if (-1 < (int)temp_v1) {
+    puVar2 = (unsigned int *)
+             nn_fnd_UnitHeapTemplate_nn_os_LockPolicy_Object_nn_os_CriticalSection_Allocate
+                       (&DAT_004d431c);
+    if (puVar2 != (unsigned int *)0x0) {
+      *puVar2 = (unsigned int)"挼5悼5怐5";
+      puVar2[2] = temp_v5;
+      puVar2[3] = uStack_24;
+      puVar2[1] = temp_v0;
+      temp_v2 = 0;
     }
     else {
-      temp_v4 = -0x279fb9a7;
+      temp_v2 = 0xd8604659;
     }
-    *param_1 = (unsigned int)puVar4;
-    temp_v2 = 0;
-    if (temp_v4 < 0) {
-      temp_v6[0] = DAT_0044e660;
-      nn_fs_ipc_FileSystem_CloseArchive(temp_v6,pcVar5,temp_v8,uStack_24);
-      temp_v2 = temp_v4;
+    *param_1 = (unsigned int)puVar2;
+    temp_v1 = 0;
+    if ((int)temp_v2 < 0) {
+      nn_fs_ipc_FileSystem_CloseArchive((unsigned int)&temp_v3,romwright_piece_4_4(DAT_0044e660,param_2));
+      temp_v1 = temp_v2;
     }
   }
-  return temp_v2;
+  return temp_v1;
 }

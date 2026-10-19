@@ -8,15 +8,15 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_002c4040. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 /* Supplied declaration required: nw_ut_internal_LinkListImpl_erase_2BAE30. */
 
 
 void FUN_0037a2a8(int param_1,int param_2)
 
 {
-/* irregular: 4 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   int *piVar1;
   int *piVar2;
   int temp_v0;

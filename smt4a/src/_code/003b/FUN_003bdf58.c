@@ -232,13 +232,13 @@ void FUN_003bdf58(int param_1)
                 temp_v0 = in_fpscr & 0xfffffff;
                 temp_v1 = temp_v0 | ((unsigned int)(temp_v16 < temp_v18) << 0x1f) |
                         ((unsigned int)(temp_v16 == temp_v18) << 0x1e);
-                in_fpscr = temp_v1 | ((unsigned int)(NAN(temp_v16) || NAN(temp_v18)) << 0x1c);
+                in_fpscr = temp_v1 | ((unsigned int)((temp_v16 != temp_v16) || (temp_v18 != temp_v18)) << 0x1c);
                 temp_v3 = (unsigned char)(temp_v1 >> 0x18);
                 if (!(unsigned char)((temp_v3 >> 6) & 1) && temp_v3 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
                   temp_v21 = ((float)temp_v45[1] / temp_v40) * (float)temp_v44;
                   temp_v0 = temp_v0 | ((unsigned int)(temp_v17 < temp_v21) << 0x1f) |
                           ((unsigned int)(temp_v17 == temp_v21) << 0x1e);
-                  in_fpscr = temp_v0 | ((unsigned int)(NAN(temp_v17) || NAN(temp_v21)) << 0x1c);
+                  in_fpscr = temp_v0 | ((unsigned int)((temp_v17 != temp_v17) || (temp_v21 != temp_v21)) << 0x1c);
                   temp_v3 = (unsigned char)(temp_v0 >> 0x18);
                   if (!(unsigned char)((temp_v3 >> 6) & 1) && temp_v3 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
                     temp_v17 = temp_v21;

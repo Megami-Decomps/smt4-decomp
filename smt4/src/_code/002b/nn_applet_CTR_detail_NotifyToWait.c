@@ -11,13 +11,13 @@ typedef struct {
 extern romwright_code *DAT_0044e450; /* 0x44e450 */
 extern int DAT_0044e608; /* 0x44e608 */
 extern signed char DAT_0044e7a8; /* 0x44e7a8 */
-extern unsigned char *DAT_00465668; /* 0x465668 */
+extern unsigned int DAT_00465668; /* 0x465668 */
 extern int DAT_004656b0; /* 0x4656b0 */
 extern unsigned char DAT_004c4b40; /* 0x4c4b40 */
 extern unsigned char DAT_004d4200; /* 0x4d4200 */
 extern unsigned char DAT_004d4201; /* 0x4d4201 */
 extern unsigned short DAT_004d4202; /* 0x4d4202 */
-extern unsigned char *DAT_004d4204; /* 0x4d4204 */
+extern unsigned int DAT_004d4204; /* 0x4d4204 */
 extern unsigned int DAT_004d4208; /* 0x4d4208 */
 extern unsigned int DAT_004d4280; /* 0x4d4280 */
 extern unsigned char bRam1ff80014; /* 0x1ff80014 */
@@ -32,20 +32,18 @@ extern int FUN_0013b8fc(void);
 /* Supplied declaration required: FUN_002bb378. */
 /* Supplied declaration required: FUN_002c131c. */
 /* Supplied declaration required: FUN_002c3424. */
-/* Supplied declaration required: nn_err_CTR_FatalErr_Throw. */
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
-/* Supplied declaration required: nn_os_LightEvent_Initialize. */
+extern unsigned int nn_err_CTR_FatalErr_Throw(unsigned int, unsigned int);
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
+extern void nn_os_LightEvent_Initialize(unsigned int, unsigned char);
 
 
-unsigned char * nn_applet_CTR_detail_NotifyToWait(void)
+void nn_applet_CTR_detail_NotifyToWait(void)
 
 {
-/* irregular: 1 goto(s); irregular input(s): in_lr; 14 native warning(s); review required */
+/* irregular: 1 goto(s); irregular input(s): in_lr; 10 native warning(s); review required */
   romwright_code *pcVar1;
   unsigned int *puVar2;
-  unsigned char *puVar3;
-  int *piVar4;
   int temp_v0;
   unsigned int temp_v1;
   unsigned int in_lr;
@@ -69,11 +67,11 @@ unsigned char * nn_applet_CTR_detail_NotifyToWait(void)
   if (temp_v0 < 0) {
     FUN_002c131c(temp_v0,0x2bb338);
   }
-  if ((DAT_00465668 == (unsigned char *)0x0) || (software_interrupt(0x14), -1 < (int)DAT_00465668)) {
-    return DAT_00465668;
+  if ((DAT_00465668 == 0) || (software_interrupt(0x14), -1 < (int)DAT_00465668)) {
+    return;
   }
-  temp_v1 = (unsigned int)DAT_00465668 >> 0x1b;
-  if (((unsigned int)DAT_00465668 & 0x80000000) != 0) {
+  temp_v1 = DAT_00465668 >> 0x1b;
+  if ((DAT_00465668 & 0x80000000) != 0) {
     temp_v1 = temp_v1 - 0x20;
   }
   if ((bRam1ff80014 & 1) == 0 && DAT_0044e7a8 == '\0') {
@@ -86,19 +84,18 @@ unsigned char * nn_applet_CTR_detail_NotifyToWait(void)
       (*pcVar1)(0,0,0,0);
     }
     software_interrupt(0x3c);
-    return (unsigned char *)0x0;
+    return;
   }
   if (temp_v1 == 0xfffffff9 || temp_v1 == 1) {
-    return DAT_00465668;
+    return;
   }
   DAT_004d4201 = 0;
   DAT_004d4200 = 0;
   DAT_004d4202 = 0xbca3;
   DAT_004d4204 = DAT_00465668;
-  piVar4 = aiStack_20;
   DAT_004d4208 = in_lr;
   do {
-    nn_os_CriticalSection_Enter(&DAT_004d4280);
+    nn_os_CriticalSection_Enter((unsigned int)&DAT_004d4280);
     if (DAT_0044e608 == 0) {
       puVar2 = (unsigned int *)&DAT_0044e608;
       FUN_001383a8(&DAT_0044e608,"err:f");
@@ -112,22 +109,20 @@ unsigned char * nn_applet_CTR_detail_NotifyToWait(void)
     if (-1 < (int)puVar2) {
       FUN_00144f90(0x4d420c,0xffff8001);
       aiStack_20[0] = DAT_0044e608;
-      nn_err_CTR_FatalErr_Throw(aiStack_20,&DAT_004d4200);
+      nn_err_CTR_FatalErr_Throw((unsigned int)aiStack_20,(unsigned int)&DAT_004d4200);
       if (DAT_0044e608 != 0) {
         software_interrupt(0x23);
         DAT_0044e608 = 0;
       }
 LAB_002ad598:
-      nn_os_CriticalSection_Leave(&DAT_004d4280);
-      puVar3 = (unsigned char *)(unsigned int)DAT_004d4200;
-      if (puVar3 != (unsigned char *)0x2 && puVar3 != (unsigned char *)0x5) {
+      nn_os_CriticalSection_Leave((unsigned int)&DAT_004d4280);
+      if (DAT_004d4200 != 2 && DAT_004d4200 != 5) {
         aiStack_20[0] = 0;
         aiStack_20[1] = 0;
-        nn_os_LightEvent_Initialize(aiStack_20,1);
+        nn_os_LightEvent_Initialize((unsigned int)aiStack_20,1);
         FUN_002c3424(aiStack_20);
-        puVar3 = (unsigned char *)piVar4;
       }
-      return puVar3;
+      return;
     }
     temp_v2 = puVar2 == (unsigned int *)0xd0401834;
     if (temp_v2) {
@@ -135,6 +130,6 @@ LAB_002ad598:
     }
     if (!temp_v2 || puVar2 != (unsigned int *)0x2) goto LAB_002ad598;
     FUN_002bb150(&DAT_004c4b40,0);
-    nn_os_CriticalSection_Leave(&DAT_004d4280);
+    nn_os_CriticalSection_Leave((unsigned int)&DAT_004d4280);
   } while( 1 );
 }

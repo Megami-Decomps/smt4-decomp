@@ -33,7 +33,7 @@ void FUN_00147c34(unsigned int param_1,unsigned int param_2,int param_3,unsigned
 /* irregular: 2 native warning(s); review required */
   int temp_v0;
   unsigned char temp_v1;
-  unsigned char temp_v2 [3];
+  unsigned int temp_v2;
   unsigned int temp_v3;
   unsigned int uStack_38;
   unsigned int temp_v4;
@@ -47,7 +47,7 @@ void FUN_00147c34(unsigned int param_1,unsigned int param_2,int param_3,unsigned
   temp_v5 = DAT_00472a8c[6];
   uStack_24 = DAT_00472a8c[7];
   (*(unsigned int *)&temp_v1) = romwright_piece_3_1(SUB43((unsigned int)*DAT_00472a8c >> 8,0),3);
-  (*(unsigned int *)&temp_v1) = romwright_piece_1_3(DAT_00472a88,_local_40);
+  (*(unsigned int *)&temp_v1) = romwright_piece_1_3(DAT_00472a88,((*(unsigned int *)&temp_v1) & 0xffffffU));
   uStack_2c = param_7;
   temp_v3 = param_1;
   uStack_38 = param_4;

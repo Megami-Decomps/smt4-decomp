@@ -445,11 +445,11 @@ void FUN_00292b84(void)
     }
     temp_v5 = temp_v19 < temp_v14;
     temp_v6 = temp_v19 == temp_v14;
-    temp_v3 = NAN(temp_v19) || NAN(temp_v14);
+    temp_v3 = (temp_v19 != temp_v19) || (temp_v14 != temp_v14);
     if (!temp_v6 && !temp_v5) {
       temp_v5 = temp_v15 < temp_v8;
       temp_v6 = temp_v15 == temp_v8;
-      temp_v3 = NAN(temp_v15) || NAN(temp_v8);
+      temp_v3 = (temp_v15 != temp_v15) || (temp_v8 != temp_v8);
     }
     if (!temp_v6 && temp_v5 == temp_v3) {
       temp_v19 = temp_v19 - temp_v14;
@@ -554,7 +554,7 @@ LAB_002936f8:
       temp_v5 = temp_v12 < temp_v19;
       temp_v6 = temp_v12 == temp_v19;
       temp_v3 = temp_v19 <= temp_v12;
-      temp_v4 = NAN(temp_v12) || NAN(temp_v19);
+      temp_v4 = (temp_v12 != temp_v12) || (temp_v19 != temp_v19);
     }
     if ((!(!temp_v6 && temp_v5 == temp_v4)) && (!temp_v3)) {
       temp_v17 = (float)DAT_005806a4[0x29] + 8.0f;

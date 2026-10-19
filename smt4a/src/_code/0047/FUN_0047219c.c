@@ -72,7 +72,7 @@ unsigned int FUN_0047219c(void)
   temp_v0 = FUN_001af210(DAT_00570260 + 0x98);
   if (temp_v0 != 0) {
     *(unsigned int *)(DAT_00570260 + 0x754) = *(unsigned int *)(DAT_00570260 + 0x754) & 0xfffeffff;
-    temp_v2 = romwright_piece_3_1(temp_v2._1_3_,200);
+    temp_v2 = romwright_piece_3_1((((unsigned int)(temp_v2) >> 8) & 0xffffffU),200);
   }
   else {
     FUN_001d0fcc(&temp_v5,DAT_00570280);
@@ -109,7 +109,7 @@ unsigned int FUN_0047219c(void)
       return 0;
     }
     FUN_00180008(0);
-    temp_v2 = romwright_piece_3_1(temp_v2._1_3_,200);
+    temp_v2 = romwright_piece_3_1((((unsigned int)(temp_v2) >> 8) & 0xffffffU),200);
     temp_v6 = temp_v2;
     uStack_24 = temp_v3;
     uStack_20 = uStack_48;

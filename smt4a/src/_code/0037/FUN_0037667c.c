@@ -49,7 +49,7 @@ void FUN_0037667c(fn_0037667c_arg0 *param_1,fn_0037667c_arg1 *param_2,unsigned i
   param_2->field_0x90 = (int)pfVar1;
   if (param_1->field_0x88 != (void *)0x0) {
     *(fn_0037667c_arg1 **)((int)param_1->field_0x88 + 0xac) = param_2;
-    param_2->field_0xb0 = param_1->field_0x88;
+    param_2->field_0xb0 = (undefined4)param_1->field_0x88;
   }
   else {
     param_1->field_0x8c = (int)param_2;

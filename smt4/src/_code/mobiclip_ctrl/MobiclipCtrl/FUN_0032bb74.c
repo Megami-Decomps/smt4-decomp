@@ -17,13 +17,13 @@ extern unsigned int DAT_004c40e4; /* 0x4c40e4 */
 /* Supplied declaration required: FUN_0034fa04. */
 /* Supplied declaration required: FUN_003516c0. */
 /* Supplied declaration required: FUN_003f6b28. */
-/* Supplied declaration required: nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile. */
+extern void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(unsigned int);
 
 
 void FUN_0032bb74(void)
 
 {
-/* irregular: 9 native warning(s); review required */
+/* irregular: 8 native warning(s); review required */
   FUN_0034f5f8(&DAT_004c3af8);
   FUN_0034fa04(&DAT_004c3b20);
   FUN_003516c0(&DAT_004c3b20);

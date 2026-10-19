@@ -39,7 +39,7 @@ void FUN_00306eac(unsigned int *param_1,fn_00306eac_arg1 *param_2,unsigned int *
       param_2->field_0x14 = param_2->field_0x14 - 1;
       (**(romwright_code **)piVar2[2])(piVar2 + 2);
       *piVar2 = param_2->field_0x4;
-      param_2->field_0x4 = piVar2;
+      param_2->field_0x4 = (undefined4)piVar2;
     }
     *param_3 = (unsigned int)piVar3;
   }

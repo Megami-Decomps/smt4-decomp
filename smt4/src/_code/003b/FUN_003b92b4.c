@@ -66,7 +66,7 @@ void FUN_003b92b4(int param_1)
     FUN_002c57c8(temp_v2,puVar5,temp_v4);
   }
   else if ((temp_v1 & 0x8000000) != 0) {
-    temp_v5[0] = romwright_piece_2_2(temp_v5[0]._2_2_,*(unsigned short *)(*(int *)(param_1 + 0xd60) + 0x54));
+    temp_v5[0] = romwright_piece_2_2((((unsigned int)(temp_v5[0]) >> 16) & 0xffffU),*(unsigned short *)(*(int *)(param_1 + 0xd60) + 0x54));
     FUN_002c57c8(0x12,temp_v5,2);
     FUN_002a03d8(0,10);
     FUN_002a03d8(1,10);

@@ -118,7 +118,7 @@ unsigned int FUN_003d02bc(void)
         temp_v15 = FUN_00192798();
         temp_v0 = FUN_00192748(temp_v0);
         puVar3 = temp_v16;
-        temp_v16[0] = romwright_piece_2_2(temp_v16[0]._2_2_,(short)temp_v1);
+        temp_v16[0] = romwright_piece_2_2((((unsigned int)(temp_v16[0]) >> 16) & 0xffffU),(short)temp_v1);
         FUN_00100854(puVar3,temp_v15,temp_v0,4,&LAB_002321f8);
         if (puVar3 != (unsigned int *)0x0) {
           temp_v10 = (int)*(short *)((int)puVar3 + 2);

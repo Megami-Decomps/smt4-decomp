@@ -7,9 +7,9 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_3_stack;
 
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
-/* Supplied declaration required: nn_os_LightEvent_ClearSignal. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
+extern void nn_os_LightEvent_ClearSignal(unsigned int);
 /* Supplied declaration required: nn_os_detail_BlockingQueueBase_nn_os_CriticalSection_TryEnqueue. */
 /* Supplied declaration required: nw_ut_internal_LinkListImpl_insert. */
 
@@ -17,7 +17,7 @@ typedef struct {
 void nw_snd_internal_TaskManager_AppendTask(int param_1,int param_2,int param_3)
 
 {
-/* irregular: 5 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   int temp_v0;
   
   nn_os_CriticalSection_Enter(param_1 + 0x2c);

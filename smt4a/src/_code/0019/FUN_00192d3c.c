@@ -54,7 +54,7 @@ void FUN_00192d3c(unsigned int param_1,char *param_2,unsigned int param_3)
           if (temp_v6 + temp_v4 <= param_3) {
             pbVar7 = (unsigned char *)(param_2 + (temp_v6 - (unsigned char)param_2[temp_v6 - 5]));
             pbVar11 = (unsigned char *)(param_2 + temp_v4 + temp_v6);
-            while (param_2 + (temp_v6 - (temp_v3 & 0xffffff)) < pbVar7) {
+            while (param_2 + (temp_v6 - (temp_v3 & 0xffffff)) < (char *)pbVar7) {
               pbVar7 = pbVar7 + -1;
               temp_v5 = *pbVar7;
               temp_v1 = 0;
@@ -86,7 +86,7 @@ void FUN_00192d3c(unsigned int param_1,char *param_2,unsigned int param_3)
                   *pbVar11 = *pbVar7;
                 }
                 temp_v5 = temp_v5 << 1;
-              } while ((param_2 + (temp_v6 - (temp_v3 & 0xffffff)) < pbVar7) &&
+              } while ((param_2 + (temp_v6 - (temp_v3 & 0xffffff)) < (char *)pbVar7) &&
                       (temp_v1 = temp_v1 + 1, temp_v1 < 8));
             }
           }

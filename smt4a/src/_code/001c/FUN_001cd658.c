@@ -9,15 +9,15 @@ typedef struct {
 
 extern unsigned char DAT_006433d0; /* 0x6433d0 */
 
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 /* Supplied declaration required: nn_snd_CTR_Dspsnd_EnableAuxBus. */
 
 
 void FUN_001cd658(int param_1,int param_2,unsigned char param_3)
 
 {
-/* irregular: 3 native warning(s); review required */
+/* irregular: 1 native warning(s); review required */
   nn_os_CriticalSection_Enter(param_1 + 0x34);
   *(unsigned char *)(param_1 + param_2 + 0x30) = param_3;
   nn_snd_CTR_Dspsnd_EnableAuxBus(&DAT_006433d0,param_2);

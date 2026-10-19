@@ -85,7 +85,7 @@ void FUN_00115fac(int param_1,unsigned int param_2,int *param_3)
     if (*(char *)(param_1 + 0xa0) != '\0') {
       temp_v0 = FUN_00301ac0();
       if (temp_v0 != 1) {
-        *(float *)&temp_v10[0] = -0x7f96ffff;
+        temp_v10[0] = -0x7f96ffff;
         piVar4 = temp_v10;
         puVar2 = (unsigned char *)FUN_002e7908(puVar3,piVar4);
         FUN_00301a60(param_1,puVar2);

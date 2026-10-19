@@ -112,7 +112,7 @@ unsigned int FUN_0010bf1c(unsigned int param_1,int param_2,int param_3,unsigned 
     }
     temp_v7 = param_3 + 0x20;
     *(unsigned int *)(temp_v0 + 0x10) = temp_v3;
-    temp_v6 = romwright_piece_3_1(temp_v6._1_3_,*(unsigned char *)(param_3 + 0x25));
+    temp_v6 = romwright_piece_3_1((((unsigned int)(temp_v6) >> 8) & 0xffffffU),*(unsigned char *)(param_3 + 0x25));
     temp_v11 = (unsigned int)(*(unsigned char *)(param_3 + 0x25) >> 4);
     if (temp_v11 < 0xc) {
       temp_v1 = FUN_002eac34();

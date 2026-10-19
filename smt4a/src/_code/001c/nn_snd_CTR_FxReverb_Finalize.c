@@ -2,42 +2,22 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
-typedef struct fn_001cda30_arg0 fn_001cda30_arg0;
-struct fn_001cda30_arg0 {
-    unsigned char pad_0x0[0x3c];
-    undefined4 field_0x3c; /* +0x3c */
-    undefined4 field_0x40; /* +0x40 */
-    unsigned char pad_0x44[0x8];
-    undefined4 field_0x4c; /* +0x4c */
-    undefined4 field_0x50; /* +0x50 */
-    unsigned char pad_0x54[0x8];
-    undefined4 field_0x5c; /* +0x5c */
-    undefined4 field_0x60; /* +0x60 */
-    undefined4 field_0x64; /* +0x64 */
-    undefined4 field_0x68; /* +0x68 */
-    unsigned char pad_0x6c[0x10];
-    undefined4 field_0x7c; /* +0x7c */
-    undefined4 field_0x80; /* +0x80 */
-    unsigned char pad_0x84[0x80];
-    byte field_0x104; /* +0x104 */
-};
 
-
-void nn_snd_CTR_FxReverb_Finalize(fn_001cda30_arg0 *param_1)
+void nn_snd_CTR_FxReverb_Finalize(int param_1)
 
 {
-  if (param_1->field_0x104 != 0) {
-    param_1->field_0x104 = 0;
-    param_1->field_0x3c = 0;
-    param_1->field_0x4c = 0;
-    param_1->field_0x5c = 0;
-    param_1->field_0x60 = 0;
-    param_1->field_0x7c = 0;
-    param_1->field_0x40 = 0;
-    param_1->field_0x50 = 0;
-    param_1->field_0x64 = 0;
-    param_1->field_0x68 = 0;
-    param_1->field_0x80 = 0;
+  if (*(char *)(param_1 + 0x104) != '\0') {
+    *(unsigned char *)(param_1 + 0x104) = 0;
+    *(unsigned int *)(param_1 + 0x3c) = 0;
+    *(unsigned int *)(param_1 + 0x4c) = 0;
+    *(unsigned int *)(param_1 + 0x5c) = 0;
+    *(unsigned int *)(param_1 + 0x60) = 0;
+    *(unsigned int *)(param_1 + 0x7c) = 0;
+    *(unsigned int *)(param_1 + 0x40) = 0;
+    *(unsigned int *)(param_1 + 0x50) = 0;
+    *(unsigned int *)(param_1 + 100) = 0;
+    *(unsigned int *)(param_1 + 0x68) = 0;
+    *(unsigned int *)(param_1 + 0x80) = 0;
   }
   return;
 }

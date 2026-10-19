@@ -38,7 +38,7 @@ void FUN_002e9e1e(fn_002e9e1e_arg0 *param_1)
       *(int *)(*temp_v1 + 4) = temp_v1[1];
       param_1->field_0x14 = param_1->field_0x14 - 1;
       *temp_v1 = param_1->field_0x4;
-      param_1->field_0x4 = temp_v1;
+      param_1->field_0x4 = (undefined4)temp_v1;
     }
   }
   return;

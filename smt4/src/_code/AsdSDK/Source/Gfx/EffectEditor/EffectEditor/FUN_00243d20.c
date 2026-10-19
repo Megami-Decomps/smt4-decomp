@@ -482,7 +482,7 @@ LAB_002444b0:
            ((unsigned int)(DAT_004d92bc == DAT_004d92c0) << 0x1e);
   temp_v0 = (unsigned char)(temp_v9 >> 0x18);
   temp_v12 = DAT_004d92c0;
-  if (((!(unsigned char)((temp_v0 >> 6) & 1) && (unsigned char)(temp_v0 >> 7) == (NAN(DAT_004d92bc) || NAN(DAT_004d92c0)))
+  if (((!(unsigned char)((temp_v0 >> 6) & 1) && (unsigned char)(temp_v0 >> 7) == ((DAT_004d92bc != DAT_004d92bc) || (DAT_004d92c0 != DAT_004d92c0)))
       && (temp_v12 = DAT_004d92bc,
          (float *)*(unsigned int **)(DAT_0044fcbc + DAT_0044fcb4 * 0x18 + 8) != &DAT_004d92bc)) &&
      ((DAT_0044ead8 != (unsigned char *)0x1 || (DAT_0044ead4 != 1)))) {
@@ -539,10 +539,10 @@ LAB_002444b0:
         temp_v0 = (unsigned char)(temp_v9 >> 0x18);
         temp_v7 = (unsigned char)(temp_v0 >> 7);
         temp_v8 = (unsigned char)((temp_v0 >> 6) & 1);
-        if (!temp_v8 && temp_v7 == (NAN(temp_v12) || NAN(temp_v10))) {
+        if (!temp_v8 && temp_v7 == ((temp_v12 != temp_v12) || (temp_v10 != temp_v10))) {
           *pfVar8 = temp_v10;
         }
-        if (!temp_v8 && temp_v7 == (NAN(temp_v12) || NAN(temp_v10))) {
+        if (!temp_v8 && temp_v7 == ((temp_v12 != temp_v12) || (temp_v10 != temp_v10))) {
           temp_v17[(int)puVar2 + 4] = temp_v10;
         }
       }
@@ -552,10 +552,10 @@ LAB_002444b0:
         temp_v0 = (unsigned char)(temp_v9 >> 0x18);
         temp_v7 = (unsigned char)(temp_v0 >> 7);
         temp_v8 = (unsigned char)((temp_v0 >> 6) & 1);
-        if (!temp_v8 && temp_v7 == (NAN(temp_v10) || NAN(temp_v12))) {
+        if (!temp_v8 && temp_v7 == ((temp_v10 != temp_v10) || (temp_v12 != temp_v12))) {
           pfVar8[4] = temp_v10;
         }
-        if (!temp_v8 && temp_v7 == (NAN(temp_v10) || NAN(temp_v12))) {
+        if (!temp_v8 && temp_v7 == ((temp_v10 != temp_v10) || (temp_v12 != temp_v12))) {
           temp_v17[(int)puVar2 + 6] = temp_v10;
         }
       }

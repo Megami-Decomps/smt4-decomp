@@ -3,12 +3,11 @@
 #include "romwright_types.h"
 
 
-/* WARNING: Control flow encountered bad instruction data */
+/* Retail branches to the ARM->Thumb veneer FUN_00102178; the decompiler followed it to a bad-data halt. */
+void FUN_00102178(void);
 
 void FUN_001024a8(void)
 
 {
-/* irregular: 2 native warning(s); review required */
-                    /* WARNING: Bad instruction - Truncating control flow here */
-  halt_baddata();
+  FUN_00102178();
 }

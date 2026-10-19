@@ -9,16 +9,15 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: hasExclusiveAccess (CALLOTHER). */
 /* Supplied declaration required: FUN_002c38fc. */
-/* Supplied declaration required: nn_os_LightSemaphore_Initialize. */
-/* Supplied declaration required: nn_os_SimpleLock_Initialize. */
+extern void nn_os_LightSemaphore_Initialize(unsigned int, int, int);
+extern void nn_os_SimpleLock_Initialize(unsigned int);
 
 
 void nw_snd_internal_TaskManager_Initialize(int param_1)
 
 {
-/* irregular: 5 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   unsigned char temp_v0;
-  unsigned int unaff_r4;
   
   FUN_002c38fc(param_1 + 0x2c);
   *(unsigned int *)(param_1 + 0x5c) = 0;
@@ -33,9 +32,9 @@ void nw_snd_internal_TaskManager_Initialize(int param_1)
     temp_v0 = (unsigned char)hasExclusiveAccess((unsigned int *)(param_1 + 0x68));
   } while (!temp_v0);
   *(unsigned int *)(param_1 + 0x68) = 0;
-  nn_os_LightSemaphore_Initialize(param_1 + 0x3c,0,0x7fff,0,unaff_r4);
+  nn_os_LightSemaphore_Initialize(param_1 + 0x3c,0,0x7fff);
   nn_os_LightSemaphore_Initialize(param_1 + 0x44,0,0x7fff);
-  nn_os_SimpleLock_Initialize();
+  nn_os_SimpleLock_Initialize(param_1 + 0x4c);
   *(unsigned int *)(param_1 + 0x50) = 0;
   *(unsigned int *)(param_1 + 0x54) = 0;
   return;

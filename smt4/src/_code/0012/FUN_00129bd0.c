@@ -8,20 +8,20 @@ typedef struct {
 } void_stack;
 
 extern int FUN_002ad254(void);
-/* Supplied declaration required: FUN_002ad264. */
-/* Supplied declaration required: nn_gxlow_CTR_Gpu_SaveVramSysArea. */
+extern unsigned int FUN_002ad264(int);
+extern unsigned int nn_gxlow_CTR_Gpu_SaveVramSysArea(unsigned int);
 
 
 void FUN_00129bd0(void)
 
 {
-/* irregular: 2 native warning(s); review required */
   int temp_v0;
+  unsigned int temp_v1;
   
   temp_v0 = FUN_002ad254();
   if (temp_v0 != 0) {
-    FUN_002ad264(temp_v0);
-    nn_gxlow_CTR_Gpu_SaveVramSysArea();
+    temp_v1 = FUN_002ad264(temp_v0);
+    nn_gxlow_CTR_Gpu_SaveVramSysArea(temp_v1);
     return;
   }
   return;

@@ -13,15 +13,15 @@ extern unsigned char DAT_00640534; /* 0x640534 */
 
 /* Supplied declaration required: FUN_0019a534. */
 extern int FUN_0019ad80(unsigned char *);
-extern int nn_fnd_ExpHeapBase_Allocate(int, int, int, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: nn_os_CriticalSection_Enter. */
-/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+extern unsigned int nn_fnd_ExpHeapBase_Allocate(unsigned int, unsigned int, int, unsigned char, int, unsigned char);
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
 
 
-int FUN_001817b8(int param_1,unsigned int param_2,unsigned int param_3,int param_4,int param_5)
+int FUN_001817b8(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,int param_5)
 
 {
-/* irregular: 3 native warning(s); review required */
+/* irregular: 1 native warning(s); review required */
   int temp_v0;
   int temp_v1;
   int temp_v2;
