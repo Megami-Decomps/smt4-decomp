@@ -8,12 +8,13 @@ extern unsigned char DAT_004c5818; /* 0x4c5818 */
 extern unsigned char DAT_004c5819; /* 0x4c5819 */
 
 extern int FUN_002893d8(void);
-extern unsigned int FUN_002bfc24(int, unsigned int, unsigned char, unsigned char);
+/* Supplied declaration required: FUN_002bfc24. */
 
 
-unsigned int FUN_001eb398(int param_1,unsigned int param_2)
+unsigned int FUN_001eb398(unsigned int param_1,unsigned int param_2)
 
 {
+/* irregular: 1 native warning(s); review required */
   int temp_v0;
   char *pcVar2;
   unsigned char temp_v1;
@@ -40,8 +41,9 @@ unsigned int FUN_001eb398(int param_1,unsigned int param_2)
         temp_v1 = 5;
       }
     }
-    DAT_0044e128 = FUN_002bfc24(param_1,param_2,DAT_004c5819,temp_v1);
-    if (DAT_0044e128 == 0xffffffff) {
+    FUN_002bfc24(param_1,param_2,DAT_004c5819,temp_v1);
+    DAT_0044e128 = param_1;
+    if (param_1 == 0xffffffff) {
       return 1;
     }
   }

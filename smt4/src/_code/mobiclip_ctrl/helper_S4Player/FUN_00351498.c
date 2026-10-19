@@ -23,7 +23,7 @@ extern unsigned int *DAT_0044d15c; /* 0x44d15c */
 /* Supplied declaration required: FUN_002bcc60. */
 /* Supplied declaration required: FUN_002bcd44. */
 /* Supplied declaration required: FUN_002c222c. */
-extern unsigned int FUN_002c32a0(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c32a0. */
 /* Supplied declaration required: FUN_002c38fc. */
 /* Supplied declaration required: FUN_002c4040. */
 /* Supplied declaration required: FUN_002c526c. */
@@ -35,14 +35,15 @@ unsigned int
 FUN_00351498(int param_1,int param_2,int param_3,int param_4,int param_5,unsigned int param_6)
 
 {
-/* irregular: 9 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
+/* irregular: 10 native warning(s); review required */
+  unsigned int temp_v0;
+  unsigned int *puVar2;
   int temp_v1;
-  unsigned char *temp_v2;
+  int temp_v2;
   unsigned char *temp_v3;
   unsigned char *temp_v4;
-  int temp_v5 [2];
+  unsigned char *temp_v5;
+  int temp_v6 [2];
   
   if ((param_2 != 0 && param_3 != 0) && (param_4 != 0 && param_5 != 0)) {
     *(int *)(param_1 + 0x18) = param_3;
@@ -80,27 +81,29 @@ FUN_00351498(int param_1,int param_2,int param_3,int param_4,int param_5,unsigne
     FUN_002c4040(param_1 + 0x20);
     *(unsigned char *)(param_1 + 0x10) = 0;
     *(unsigned char *)(param_1 + 0x11) = 0;
-    DAT_0044d158 = FUN_002c32a0(0x100,0x100,0,0x2000,0x1000,1);
-    puVar1 = (unsigned int *)0x18;
+    temp_v0 = 0x100;
+    FUN_002c32a0(0x100,0x100,0,0x2000,0x1000,1);
+    puVar2 = (unsigned int *)0x18;
+    DAT_0044d158 = temp_v0;
     FUN_002c222c();
-    if (puVar1 != (unsigned int *)0x0) {
-      *puVar1 = 0;
-      puVar1[1] = 0;
-      puVar1[2] = 0;
-      puVar1[3] = 0;
-      *(unsigned char *)(puVar1 + 4) = 0;
+    if (puVar2 != (unsigned int *)0x0) {
+      *puVar2 = 0;
+      puVar2[1] = 0;
+      puVar2[2] = 0;
+      puVar2[3] = 0;
+      *(unsigned char *)(puVar2 + 4) = 0;
     }
-    DAT_0044d15c = puVar1;
+    DAT_0044d15c = puVar2;
     FUN_002bcd44();
-    temp_v0 = param_1 + 0x28;
-    temp_v1 = 4;
-    temp_v2 = &LAB_003f6ee4;
-    temp_v3 = &LAB_003f6ffc;
-    temp_v4 = &LAB_003f6f98;
-    temp_v5[0] = param_1;
-    FUN_002bcc60(temp_v0,&temp_v1,FUN_0034fb94,temp_v5,DAT_0044d15c[3] + DAT_0044d15c[2],0x11,
+    temp_v1 = param_1 + 0x28;
+    temp_v2 = 4;
+    temp_v3 = &LAB_003f6ee4;
+    temp_v4 = &LAB_003f6ffc;
+    temp_v5 = &LAB_003f6f98;
+    temp_v6[0] = param_1;
+    FUN_002bcc60(temp_v1,&temp_v2,FUN_0034fb94,temp_v6,DAT_0044d15c[3] + DAT_0044d15c[2],0x11,
                  0xfffffffe,0);
-    if (temp_v0 < 0) {
+    if (temp_v1 < 0) {
       FUN_002c526c();
     }
     return 1;

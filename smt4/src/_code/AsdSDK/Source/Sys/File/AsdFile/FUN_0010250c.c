@@ -26,53 +26,58 @@ extern unsigned int DAT_00465028; /* 0x465028 */
 /* Supplied declaration required: FUN_002c526c. */
 /* Supplied declaration required: FUN_002c52dc. */
 /* Supplied declaration required: FUN_002c52f8. */
-extern unsigned int FUN_002c5300(unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c5300. */
 /* Supplied declaration required: nn_os_LightEvent_Initialize. */
 
 
 void FUN_0010250c(void)
 
 {
-/* irregular: 12 native warning(s); review required */
+/* irregular: 13 native warning(s); review required */
   unsigned int temp_v0;
-  unsigned char *puVar2;
-  unsigned int *puVar3;
+  unsigned int temp_v1;
+  unsigned char *puVar3;
   unsigned int *puVar4;
-  int temp_v1;
+  unsigned int *puVar5;
+  int temp_v2;
   unsigned int uStack_1c;
   
-  puVar3 = (unsigned int *)&temp_v1;
-  puVar4 = (unsigned int *)&temp_v1;
+  puVar4 = (unsigned int *)&temp_v2;
+  puVar5 = (unsigned int *)&temp_v2;
   DAT_00465010 = 0;
   FUN_0010f5dc();
   temp_v0 = 0x10;
   FUN_0010f73c(0x10,0x10,1);
-  temp_v1 = 1;
-  DAT_00465008 = FUN_002c5300(0x100,0x100,0,temp_v0);
-  temp_v1 = 1;
-  FUN_0010f7e4(0x10,0x10,DAT_00465008,temp_v0);
+  temp_v1 = 0x100;
+  temp_v2 = 1;
+  FUN_002c5300(0x100,0x100,0,temp_v0);
+  temp_v2 = 1;
+  DAT_00465008 = temp_v1;
+  FUN_0010f7e4(0x10,0x10,temp_v1,temp_v0);
   temp_v0 = 0x10;
   FUN_0010f7b8(0x10,0x10,1);
-  temp_v1 = 1;
-  DAT_0046500c = FUN_002c5300(0x100,0x100,0,temp_v0);
-  puVar2 = &LAB_00102698;
+  temp_v1 = 0x100;
+  temp_v2 = 1;
+  FUN_002c5300(0x100,0x100,0,temp_v0);
+  puVar3 = &LAB_00102698;
   uStack_1c = 1;
-  temp_v1 = temp_v0;
-  FUN_0010f698(&LAB_00102698,0x10,0x10,DAT_0046500c);
-  if ((int)puVar2 < 0) {
+  temp_v2 = temp_v0;
+  DAT_0046500c = temp_v1;
+  FUN_0010f698(&LAB_00102698,0x10,0x10,temp_v1);
+  if ((int)puVar3 < 0) {
     FUN_002c52f8();
   }
-  temp_v1 = 0;
-  FUN_002c52dc(&temp_v1,0,2);
-  if (-1 < (int)puVar3) {
-    puVar3 = (unsigned int *)0x0;
-    DAT_00465014 = temp_v1;
+  temp_v2 = 0;
+  FUN_002c52dc(&temp_v2,0,2);
+  if (-1 < (int)puVar4) {
+    puVar4 = (unsigned int *)0x0;
+    DAT_00465014 = temp_v2;
   }
-  if ((int)puVar3 < 0) {
+  if ((int)puVar4 < 0) {
     FUN_002c526c();
   }
-  FUN_002c5254(&temp_v1,DAT_00465014,1);
-  if ((int)puVar4 < 0) {
+  FUN_002c5254(&temp_v2,DAT_00465014,1);
+  if ((int)puVar5 < 0) {
     FUN_002c526c();
   }
   nn_os_LightEvent_Initialize(&DAT_00465028,0);

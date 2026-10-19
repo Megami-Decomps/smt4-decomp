@@ -19,7 +19,7 @@ extern unsigned int DAT_00433158; /* 0x433158 */
 extern int FUN_002ad1e0(int);
 /* Supplied declaration required: FUN_002b8cc8. */
 /* Supplied declaration required: FUN_002ba9ac. */
-extern unsigned int *FUN_002baa40(unsigned char *, unsigned int);
+/* Supplied declaration required: FUN_002baa40. */
 extern int FUN_002bf244(unsigned int);
 /* Supplied declaration required: FUN_002bf818. */
 /* Supplied declaration required: FUN_002c43b4. */
@@ -28,14 +28,15 @@ extern int FUN_002bf244(unsigned int);
 void FUN_00392e74(unsigned int *param_1)
 
 {
-/* irregular: 11 native warning(s); review required */
+/* irregular: 12 native warning(s); review required */
   int temp_v0;
   unsigned int *puVar2;
   unsigned int temp_v1;
   romwright_code *UNRECOVERED_JUMPTABLE;
   int *piVar4;
-  unsigned char temp_v2 [12];
+  unsigned int temp_v2 [3];
   
+  puVar2 = temp_v2;
   if ((param_1[1] - 4 >= 11) || (temp_v0 = FUN_002ad1e0(DAT_00432fc8 + 0x98), temp_v0 == 0)) {
     temp_v0 = 0;
     do {
@@ -77,7 +78,7 @@ void FUN_00392e74(unsigned int *param_1)
   }
   *(unsigned char *)(param_1 + 0x84) = 1;
   param_1[0x87] = 0;
-  puVar2 = (unsigned int *)FUN_002baa40(temp_v2,0);
+  FUN_002baa40(temp_v2,0);
   temp_v1 = puVar2[1];
   param_1[0x85] = *puVar2;
   param_1[0x86] = temp_v1;

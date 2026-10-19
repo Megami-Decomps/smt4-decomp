@@ -69,8 +69,9 @@ unsigned int * FUN_002de490(fn_002de490_arg0 *param_1)
   if (temp_v3 >= 301) {
     temp_v3 = 300;
   }
-  puVar3 = (unsigned int *)FUN_002c32a0(0x10000,0x100,0,0x5c,0x10,1);
-  FUN_002c3944(puVar3,0x5c);
+  puVar3 = (unsigned int *)0x10000;
+  FUN_002c32a0(0x10000,0x100,0,0x5c,0x10,1);
+  FUN_002c3944();
   puVar3[1] = 0xffffffff;
   *puVar3 = temp_v3;
   puVar3[2] = 0x3f800000;
@@ -137,7 +138,8 @@ unsigned int * FUN_002de490(fn_002de490_arg0 *param_1)
         puVar3[0xe] = 0;
       }
       if (temp_v0 << 2 != 0) {
-        temp_v3 = FUN_002c32a0(0x10000,0x100,0,temp_v0 << 2,0x10,1);
+        temp_v3 = 0x10000;
+        FUN_002c32a0(0x10000,0x100,0,temp_v0 << 2,0x10,1);
         puVar3[0xe] = temp_v3;
         puVar3[0xd] = temp_v3;
         FUN_0024fc18();
@@ -174,7 +176,8 @@ unsigned int * FUN_002de490(fn_002de490_arg0 *param_1)
         puVar3[0x10] = 0;
       }
       if (temp_v0 << 2 != 0) {
-        temp_v3 = FUN_002c32a0(0x10000,0x100,0,temp_v0 << 2,0x10,1);
+        temp_v3 = 0x10000;
+        FUN_002c32a0(0x10000,0x100,0,temp_v0 << 2,0x10,1);
         puVar3[0x10] = temp_v3;
         puVar3[0xf] = temp_v3;
         FUN_002a4e98();

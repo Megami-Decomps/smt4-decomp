@@ -1,34 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `nn_dsp_CTR_DSP_LoadComponent` (_code @ 0x2b59e8, 0x60 bytes) from smt4_v1.2.0.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `nn_dsp_CTR_DSP_LoadComponent` (_code @ 0x2b59e8, 0x5c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
-extern unsigned int uRam00000000; /* 0x0 */
-extern unsigned int uRam00000004; /* 0x4 */
-extern unsigned int uRam00000008; /* 0x8 */
-extern unsigned int uRam0000000c; /* 0xc */
-extern unsigned int uRam00000010; /* 0x10 */
-extern unsigned int uRam00000014; /* 0x14 */
+/* stack frame of param_6: 1 slot(s), 2 byte(s) */
+typedef struct {
+    unsigned short sp14; /* 0x14: local_14 */
+} param_6_stack;
+
+extern unsigned char LAB_001100c2; /* 0x1100c2 */
+
+/* Unsupported intrinsic, declaration required: coproc_movefrom_User_R_Thread_and_Process_ID (CALLOTHER). */
+/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 
 
-/* WARNING: Control flow encountered bad instruction data */
-
-void nn_dsp_CTR_DSP_LoadComponent(void)
+int nn_dsp_CTR_DSP_LoadComponent
+              (int *param_1,unsigned int param_2,int param_3,unsigned short param_4,unsigned short param_5,
+              unsigned char *param_6)
 
 {
-/* irregular: irregular input(s): in_r12, in_r3; 8 native warning(s); review required */
-  unsigned int in_r3;
-  unsigned int unaff_r4;
-  unsigned int unaff_r8;
-  unsigned int unaff_r9;
-  unsigned int unaff_r10;
-  unsigned int in_r12;
+/* irregular: 2 native warning(s); review required */
+  int temp_v0;
+  int temp_v1;
   
-  uRam00000000 = unaff_r4;
-  uRam00000004 = in_r3;
-  uRam00000008 = unaff_r8;
-  uRam0000000c = unaff_r9;
-  uRam00000010 = unaff_r10;
-  uRam00000014 = in_r12;
-                    /* WARNING: Bad instruction - Truncating control flow here */
-  halt_baddata();
+  temp_v1 = coproc_movefrom_User_R_Thread_and_Process_ID();
+  *(unsigned char **)(temp_v1 + 0x80) = &LAB_001100c2;
+  *(int *)(temp_v1 + 0x84) = param_3;
+  *(unsigned short *)(temp_v1 + 0x88) = param_4;
+  *(unsigned short *)(temp_v1 + 0x8c) = param_5;
+  *(unsigned int *)(temp_v1 + 0x94) = param_2;
+  *(unsigned int *)(temp_v1 + 0x90) = (param_3 << 4) | 10;
+  temp_v0 = *param_1;
+  software_interrupt(0x32);
+  if (-1 < temp_v0) {
+    *param_6 = *(unsigned char *)(temp_v1 + 0x88);
+    temp_v0 = *(int *)(temp_v1 + 0x84);
+  }
+  return temp_v0;
 }

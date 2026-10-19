@@ -8,32 +8,32 @@ typedef struct {
 } param_4_stack;
 
 extern unsigned int FUN_002b50e4(unsigned int **);
-extern unsigned int nw_gfx_res_SetupReferenceLut(unsigned int *, unsigned int);
+/* Supplied declaration required: nw_gfx_res_SetupReferenceLut. */
 
 
 unsigned int nw_gfx_res_ResLight_Setup
                (unsigned int *param_1,unsigned int param_2,unsigned int param_3,unsigned int *param_4)
 
 {
+/* irregular: 1 native warning(s); review required */
   unsigned int *puVar1;
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
+  int temp_v0;
+  unsigned int temp_v1;
+  int temp_v2;
+  unsigned int temp_v3;
+  unsigned int *puVar6;
   unsigned int *puVar7;
-  unsigned int *puVar8;
-  unsigned int *temp_v5;
+  unsigned int *temp_v4;
   
-  temp_v4 = 0;
-  puVar7 = (unsigned int *)*param_1;
-  if ((puVar7 != (unsigned int *)0x0) && ((~*puVar7 & 0x400000a2) != 0)) {
-    puVar7 = (unsigned int *)0x0;
+  temp_v3 = 0;
+  puVar6 = (unsigned int *)*param_1;
+  if ((puVar6 != (unsigned int *)0x0) && ((~*puVar6 & 0x400000a2) != 0)) {
+    puVar6 = (unsigned int *)0x0;
   }
-  if (puVar7 != (unsigned int *)0x0) {
-    puVar8 = (unsigned int *)0x0;
-    if (puVar7[0x46] != 0) {
-      puVar1 = (unsigned int *)((int)puVar7 + puVar7[0x46] + 0x118);
+  if (puVar6 != (unsigned int *)0x0) {
+    puVar7 = (unsigned int *)0x0;
+    if (puVar6[0x46] != 0) {
+      puVar1 = (unsigned int *)((int)puVar6 + puVar6[0x46] + 0x118);
     }
     else {
       puVar1 = (unsigned int *)0x0;
@@ -41,60 +41,60 @@ unsigned int nw_gfx_res_ResLight_Setup
     if ((puVar1 != (unsigned int *)0x0) && ((*puVar1 & 0x40000000) == 0)) {
       puVar1 = (unsigned int *)0x0;
     }
-    temp_v5 = param_4;
-    temp_v0 = nw_gfx_res_SetupReferenceLut(puVar1,param_3);
-    temp_v2 = puVar7[0x46];
-    if (temp_v2 != 0) {
-      temp_v1 = (int)puVar7 + temp_v2 + 0x118;
-    }
-    else {
-      temp_v1 = 0;
-    }
-    if ((temp_v1 != 0) && (-1 < (int)temp_v0)) {
-      if (temp_v2 != 0) {
-        temp_v5 = (unsigned int *)((int)puVar7 + temp_v2 + 0x118);
-      }
-      else {
-        temp_v5 = (unsigned int *)0x0;
-      }
-      temp_v4 = FUN_002b50e4(&temp_v5);
-    }
-    temp_v2 = puVar7[0x47];
-    temp_v4 = temp_v4 | temp_v0;
-    if (temp_v2 != 0) {
-      temp_v1 = (int)puVar7 + temp_v2 + 0x11c;
-    }
-    else {
-      temp_v1 = 0;
-    }
+    temp_v4 = param_4;
+    nw_gfx_res_SetupReferenceLut(puVar1,param_3);
+    temp_v1 = puVar6[0x46];
     if (temp_v1 != 0) {
+      temp_v0 = (int)puVar6 + temp_v1 + 0x118;
+    }
+    else {
+      temp_v0 = 0;
+    }
+    if ((temp_v0 != 0) && (-1 < (int)puVar1)) {
+      if (temp_v1 != 0) {
+        temp_v4 = (unsigned int *)((int)puVar6 + temp_v1 + 0x118);
+      }
+      else {
+        temp_v4 = (unsigned int *)0x0;
+      }
+      temp_v3 = FUN_002b50e4(&temp_v4);
+    }
+    temp_v1 = puVar6[0x47];
+    temp_v3 = temp_v3 | (unsigned int)puVar1;
+    if (temp_v1 != 0) {
+      temp_v0 = (int)puVar6 + temp_v1 + 0x11c;
+    }
+    else {
+      temp_v0 = 0;
+    }
+    if (temp_v0 != 0) {
+      if (temp_v1 != 0) {
+        temp_v0 = (int)puVar6 + temp_v1 + 0x11c;
+      }
+      else {
+        temp_v0 = 0;
+      }
+      temp_v2 = *(int *)(temp_v0 + 8);
       if (temp_v2 != 0) {
-        temp_v1 = (int)puVar7 + temp_v2 + 0x11c;
+        puVar7 = (unsigned int *)(temp_v2 + temp_v0 + 8);
+      }
+      if (puVar7 == (unsigned int *)0x0) {
+        temp_v3 = temp_v3 | 8;
       }
       else {
-        temp_v1 = 0;
-      }
-      temp_v3 = *(int *)(temp_v1 + 8);
-      if (temp_v3 != 0) {
-        puVar8 = (unsigned int *)(temp_v3 + temp_v1 + 8);
-      }
-      if (puVar8 == (unsigned int *)0x0) {
-        temp_v4 = temp_v4 | 8;
-      }
-      else {
-        puVar7 = (unsigned int *)0x0;
-        if ((*puVar8 & 0x40000000) != 0) {
-          puVar7 = puVar8;
+        puVar6 = (unsigned int *)0x0;
+        if ((*puVar7 & 0x40000000) != 0) {
+          puVar6 = puVar7;
         }
-        temp_v5 = puVar8;
-        temp_v0 = nw_gfx_res_SetupReferenceLut(puVar7,param_3);
-        if (-1 < (int)temp_v0) {
-          temp_v2 = FUN_002b50e4(&temp_v5);
-          temp_v4 = temp_v4 | temp_v2;
+        temp_v4 = puVar7;
+        nw_gfx_res_SetupReferenceLut(puVar6,param_3);
+        if (-1 < (int)puVar6) {
+          temp_v1 = FUN_002b50e4(&temp_v4);
+          temp_v3 = temp_v3 | temp_v1;
         }
-        temp_v4 = temp_v4 | temp_v0;
+        temp_v3 = temp_v3 | (unsigned int)puVar6;
       }
     }
   }
-  return temp_v4;
+  return temp_v3;
 }

@@ -10,21 +10,22 @@ typedef struct {
 /* Supplied declaration required: FUN_001467a4. */
 /* Supplied declaration required: FUN_00351ce8. */
 /* Supplied declaration required: FUN_00359f90. */
-extern int nn_cfg_CTR_Initialize(void);
+/* Supplied declaration required: nn_cfg_CTR_Initialize. */
 
 
-unsigned int FUN_00351c14(unsigned int param_1,unsigned int param_2)
+int FUN_00351c14(int param_1,unsigned int param_2)
 
 {
-/* irregular: 3 native warning(s); review required */
+/* irregular: 4 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = nn_cfg_CTR_Initialize();
+  temp_v0 = param_1;
+  nn_cfg_CTR_Initialize();
   FUN_00359f90();
   FUN_001467a4();
   if (temp_v0 != 0) {
     FUN_00351ce8(param_1,param_2);
     return param_1;
   }
-  return 0xc9209f84;
+  return -0x36df607c;
 }

@@ -8,16 +8,17 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_002bf694. */
-extern unsigned int *FUN_002c32a0(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c32a0. */
 
 
 unsigned int * FUN_00250120(unsigned int param_1)
 
 {
-/* irregular: 1 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   unsigned int *puVar1;
   
-  puVar1 = (unsigned int *)FUN_002c32a0(0x10000,0x100,0,0x38,0x10,1);
+  puVar1 = (unsigned int *)0x10000;
+  FUN_002c32a0(0x10000,0x100,0,0x38,0x10,1);
   *puVar1 = 8;
   puVar1[1] = 8;
   puVar1[2] = 0;

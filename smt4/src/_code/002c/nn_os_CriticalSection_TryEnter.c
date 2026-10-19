@@ -3,23 +3,25 @@
 #include "romwright_types.h"
 
 /* Unsupported intrinsic, declaration required: coproc_movefrom_User_R_Thread_and_Process_ID (CALLOTHER). */
+extern int nn_os_SimpleLock_TryLock(int);
 
 
-/* WARNING: Control flow encountered bad instruction data */
-
-void nn_os_CriticalSection_TryEnter(int param_1)
+unsigned int nn_os_CriticalSection_TryEnter(int param_1)
 
 {
-/* irregular: 5 native warning(s); review required */
+/* irregular: 1 native warning(s); review required */
   int temp_v0;
-  unsigned int unaff_r6;
+  unsigned int temp_v1;
   
   temp_v0 = coproc_movefrom_User_R_Thread_and_Process_ID();
   if (temp_v0 != *(int *)(param_1 + 4)) {
-    *(unsigned int *)(*(int *)(param_1 + 4) + 0x24) = unaff_r6;
-                    /* WARNING: Bad instruction - Truncating control flow here */
-    halt_baddata();
+    temp_v0 = nn_os_SimpleLock_TryLock(param_1);
+    if (temp_v0 == 0) {
+      return 0;
+    }
+    temp_v1 = coproc_movefrom_User_R_Thread_and_Process_ID();
+    *(unsigned int *)(param_1 + 4) = temp_v1;
   }
-                    /* WARNING: Bad instruction - Truncating control flow here */
-  halt_baddata();
+  *(int *)(param_1 + 8) = *(int *)(param_1 + 8) + 1;
+  return 1;
 }

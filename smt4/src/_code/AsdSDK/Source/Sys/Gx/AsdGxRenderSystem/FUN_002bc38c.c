@@ -1,62 +1,100 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002bc38c` (_code @ 0x2bc38c, 0x1d4 bytes) from smt4_v1.2.0.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002bc38c` (_code @ 0x2bc38c, 0x1c4 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
-extern unsigned int uRam00000024; /* 0x24 */
-extern unsigned int DAT_00433158; /* 0x433158 */
+/* stack frame of param_3: 1 slot(s), 4 byte(s) */
+typedef struct {
+    unsigned int sp30; /* 0x30: local_30 */
+} param_3_stack;
 
-/* Unsupported intrinsic, declaration required: coprocessor_function (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: coprocessor_moveto (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_002b9024. */
-/* Supplied declaration required: FUN_002bd420. */
-extern int FUN_0031c658(unsigned int, unsigned int);
+extern int FUN_002bc11c(void);
+/* Supplied declaration required: FUN_002bf5c0. */
+/* Supplied declaration required: FUN_002c5300. */
 
 
-/* WARNING: Control flow encountered bad instruction data */
-
-void FUN_002bc38c(unsigned char *param_1,int param_2)
+void FUN_002bc38c(int param_1,int param_2,int param_3)
 
 {
-/* irregular: irregular input(s): in_cr0, in_cr1, in_cr10, in_cr13, in_cr2, in_cr3, in_cr5, in_cr8, in_cr9, in_fpscr, in_s2, in_s5; 8 native warning(s); review required */
-  unsigned char temp_v0;
+/* irregular: 1 goto(s); 2 native warning(s); review required */
+  int temp_v0;
   int temp_v1;
-  unsigned int in_fpscr;
-  unsigned int in_cr0;
-  unsigned int in_cr1;
-  unsigned int in_cr2;
-  unsigned int in_cr3;
-  unsigned int in_cr5;
-  unsigned int in_cr8;
-  unsigned int in_cr9;
-  unsigned int in_cr10;
-  unsigned int in_cr13;
-  float in_s2;
-  float in_s5;
-  unsigned char temp_v2 [4];
-  int iStack_48;
+  int *piVar3;
+  int *piVar4;
+  unsigned int temp_v2;
+  int temp_v3;
+  int temp_v4;
   
-  *param_1 = (char)param_1;
-  iStack_48 = (int)param_1 << 1;
-  FUN_002b9024();
-  if (param_1 == (unsigned char *)0x0) {
-    coprocessor_function(10,0xf,1,in_cr0,in_cr8,in_cr0);
-    coprocessor_function(0,0xb,0,in_cr0,in_cr13,in_cr9);
-    coprocessor_moveto(10,0,0,temp_v2,in_cr1,in_cr10);
-    VectorSignedToFloat(*(float *)(param_2 + 0x40) - in_s5 * in_s2,(unsigned char)(in_fpscr >> 0x16) & 3);
-    coprocessor_function(10,0xf,4,in_cr2,in_cr8,in_cr3);
-  }
-  else {
-    temp_v0 = param_1[2];
-    temp_v1 = FUN_0031c658(DAT_00433158,(unsigned int)temp_v0);
-    if (temp_v1 == 0) {
-      FUN_002bd420((unsigned int)temp_v0 << 1);
-      uRam00000024 = 0x24;
-                    /* WARNING: Bad instruction - Truncating control flow here */
-      halt_baddata();
+  temp_v2 = 0;
+  do {
+    temp_v3 = 0;
+    temp_v1 = 0;
+    piVar3 = (int *)(param_2 + temp_v2 * 0x18);
+    temp_v4 = *piVar3;
+    piVar4 = (int *)(param_1 + temp_v2 * 0x18);
+    temp_v0 = 0;
+    if (temp_v4 != 0x81a5) {
+      if (temp_v4 < 0x81a6) {
+        if (temp_v4 == 0x8056) {
+          temp_v0 = 4;
+          temp_v3 = piVar3[1] * piVar3[2] * 2;
+        }
+        else if (temp_v4 == 0x8057) {
+          temp_v0 = 2;
+          temp_v3 = piVar3[1] * piVar3[2] * 2;
+        }
+        else {
+          if (temp_v4 != 0x8058) goto LAB_002bc450;
+          temp_v1 = 2;
+          temp_v3 = piVar3[1] * piVar3[2] * 4;
+        }
+      }
+      else if (temp_v4 == 0x88f0) {
+        temp_v0 = 3;
+        temp_v3 = piVar3[1] * piVar3[2] * 4;
+      }
+      else if (temp_v4 == 0x8d62) {
+        temp_v0 = 3;
+        temp_v3 = piVar3[1] * piVar3[2] * 2;
+      }
     }
-  }
-  coprocessor_function(0,3,0,in_cr5,in_cr2,in_cr0);
-                    /* WARNING: Bad instruction - Truncating control flow here */
-  halt_baddata();
+    else {
+      temp_v3 = piVar3[1] * piVar3[2] * 2;
+    }
+LAB_002bc450:
+    piVar4[4] = temp_v3;
+    temp_v4 = *piVar3;
+    piVar4[1] = temp_v0;
+    *piVar4 = temp_v4;
+    piVar4[5] = temp_v1;
+    if (param_3 != 0) {
+      temp_v1 = piVar3[3];
+      temp_v0 = 0;
+      if (temp_v1 != 0x10000) {
+        if (temp_v1 != 0x20000) {
+          if (temp_v1 == 0x30000) {
+            temp_v0 = 0x30000;
+            FUN_002c5300(temp_v0,0x100,0,temp_v3,1);
+          }
+        }
+        else {
+          temp_v0 = 0x20000;
+          FUN_002c5300(temp_v0,0x100,0,temp_v3,1);
+        }
+      }
+      else {
+        temp_v0 = 0x10000;
+        FUN_002bf5c0(0x10000,0x100,0,temp_v3,0x40,1);
+      }
+      piVar4[2] = temp_v0;
+      temp_v3 = FUN_002bc11c();
+      piVar4[3] = temp_v3;
+    }
+    temp_v2 = temp_v2 + 1;
+    *(int *)(param_1 + 0x30) = piVar3[1];
+    *(int *)(param_1 + 0x34) = piVar3[2];
+    *(int *)(param_1 + 0x38) = piVar3[5];
+    if (temp_v2 >= 2) {
+      return;
+    }
+  } while( 1 );
 }

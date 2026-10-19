@@ -8,16 +8,17 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_0011904c. */
-extern int FUN_002bf6fc(unsigned int);
+/* Supplied declaration required: FUN_002bf6fc. */
 
 
-unsigned int FUN_0010930c(unsigned int param_1,unsigned int param_2)
+unsigned int FUN_0010930c(int param_1,unsigned int param_2)
 
 {
-/* irregular: 1 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_002bf6fc(param_1);
+  temp_v0 = param_1;
+  FUN_002bf6fc();
   if (temp_v0 == 0) {
     FUN_0011904c(param_1,param_2,0);
   }

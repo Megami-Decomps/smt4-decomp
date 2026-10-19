@@ -2,27 +2,25 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
-#ifndef ROMWRIGHT_PIECE_4_4_DEFINED
-#define ROMWRIGHT_PIECE_4_4_DEFINED
-#define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
-#endif
+/* stack frame of void: 1 slot(s), 4 byte(s) */
+typedef struct {
+    unsigned int sp8; /* 0x8: local_8 */
+} void_stack;
+
 extern int FUN_00128334(void);
+/* Supplied declaration required: FUN_002bbb2c. */
 
 
-/* WARNING: Control flow encountered bad instruction data */
-
-unsigned long long nn_cfg_CTR_Initialize(unsigned int param_1,unsigned int param_2,unsigned short *param_3)
+void nn_cfg_CTR_Initialize(void)
 
 {
-/* irregular: 3 native warning(s); review required */
+/* irregular: 1 native warning(s); review required */
   int temp_v0;
-  unsigned int unaff_r4;
   
   temp_v0 = FUN_00128334();
-  if (-1 < temp_v0) {
-    *param_3 = (short)temp_v0;
-                    /* WARNING: Bad instruction - Truncating control flow here */
-    halt_baddata();
+  if ((temp_v0 < 0) && (temp_v0 < 0)) {
+    FUN_002bbb2c(temp_v0,0x2c5dd8);
+    return;
   }
-  return romwright_piece_4_4(temp_v0,unaff_r4);
+  return;
 }

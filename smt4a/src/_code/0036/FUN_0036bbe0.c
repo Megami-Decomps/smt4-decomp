@@ -3,7 +3,7 @@
 #include "romwright_types.h"
 
 extern unsigned int DAT_0063fd88; /* 0x63fd88 */
-extern unsigned char DAT_0063fdb4; /* 0x63fdb4 */
+extern unsigned int DAT_0063fdb4; /* 0x63fdb4 */
 extern unsigned int *DAT_0063fef4; /* 0x63fef4 */
 
 
@@ -15,7 +15,7 @@ unsigned int FUN_0036bbe0(void)
   if (DAT_0063fef4 == &DAT_0063fd88) {
     temp_v0 = 0;
   }
-  else if (DAT_0063fef4 == (unsigned int *)&DAT_0063fdb4) {
+  else if (DAT_0063fef4 == &DAT_0063fdb4) {
     temp_v0 = 1;
   }
   else {

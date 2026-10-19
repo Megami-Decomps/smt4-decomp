@@ -14,14 +14,14 @@ extern unsigned int DAT_00472528; /* 0x472528 */
 extern unsigned int DAT_0047252c; /* 0x47252c */
 extern unsigned char DAT_00472608; /* 0x472608 */
 
-extern unsigned int *FUN_002c32a0(unsigned int, unsigned int, unsigned int, int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c32a0. */
 /* Supplied declaration required: rt_memcpy. */
 
 
 unsigned int * FUN_002d1764(int param_1,unsigned int param_2,unsigned int param_3)
 
 {
-/* irregular: 1 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   unsigned int temp_v0;
   unsigned int temp_v1;
   unsigned int *puVar3;
@@ -29,7 +29,8 @@ unsigned int * FUN_002d1764(int param_1,unsigned int param_2,unsigned int param_
   int temp_v3;
   
   temp_v3 = *(int *)(param_1 * 0x1c + 0x472620);
-  puVar3 = (unsigned int *)FUN_002c32a0(0x10000,0x100,0,temp_v3 + 0x50,0x10,1);
+  puVar3 = (unsigned int *)0x10000;
+  FUN_002c32a0(0x10000,0x100,0,temp_v3 + 0x50,0x10,1);
   puVar3[0xc] = 0xffffffff;
   puVar3[0x10] = (unsigned int)(puVar3 + 0x14);
   puVar3[0xd] = 0;

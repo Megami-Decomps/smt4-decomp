@@ -12,7 +12,7 @@ typedef struct {
 
 extern int DAT_0059dbb4; /* 0x59dbb4 */
 extern unsigned int DAT_0063fd88; /* 0x63fd88 */
-extern unsigned char DAT_0063fdb4; /* 0x63fdb4 */
+extern unsigned int DAT_0063fdb4; /* 0x63fdb4 */
 extern unsigned int *DAT_0063fef4; /* 0x63fef4 */
 
 /* Supplied declaration required: FUN_00157558. */
@@ -37,7 +37,7 @@ void FUN_0037a99c(unsigned int param_1,unsigned int param_2)
   if (DAT_0063fef4 == &DAT_0063fd88) {
     temp_v1 = 0;
   }
-  else if (DAT_0063fef4 == (unsigned int *)&DAT_0063fdb4) {
+  else if (DAT_0063fef4 == &DAT_0063fdb4) {
     temp_v1 = 1;
   }
   else {

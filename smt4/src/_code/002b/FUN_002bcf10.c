@@ -1,14 +1,10 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002bcf10` (_code @ 0x2bcf10, 0xd bytes) from smt4_v1.2.0.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002bcf10` (_code @ 0x2bcf10, 0x10 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 
-/* WARNING: Control flow encountered bad instruction data */
-
-void FUN_002bcf10(void)
+int FUN_002bcf10(int param_1)
 
 {
-/* irregular: 2 native warning(s); review required */
-                    /* WARNING: Bad instruction - Truncating control flow here */
-  halt_baddata();
+  return param_1 * 0x60 + 0x4def48;
 }

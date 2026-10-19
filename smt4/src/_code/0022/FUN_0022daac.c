@@ -8,43 +8,43 @@ typedef struct {
 } param_5_stack;
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern unsigned int FUN_002bd06c(unsigned short);
+/* Supplied declaration required: FUN_002bd06c. */
 /* Supplied declaration required: FUN_002be56c. */
 /* Supplied declaration required: FUN_002bf4f0. */
 
 
-void FUN_0022daac(int param_1,unsigned short param_2,int param_3,int param_4,int param_5)
+void FUN_0022daac(int param_1,unsigned int param_2,int param_3,int param_4,int param_5)
 
 {
-/* irregular: irregular input(s): in_fpscr; 4 native warning(s); review required */
+/* irregular: irregular input(s): in_fpscr; 5 native warning(s); review required */
   short temp_v0;
   short temp_v1;
   int temp_v2;
   unsigned int temp_v3;
   unsigned int temp_v4;
   unsigned int temp_v5;
-  unsigned int temp_v6;
   unsigned int in_fpscr;
   
   VectorSignedToFloat(0x100 - param_5,(unsigned char)(in_fpscr >> 0x16) & 3);
   if (param_4 != 0) {
     temp_v2 = FUN_002bf4f0(param_1 + 200,param_3 + 0x42f);
-    temp_v4 = 0x499;
-    temp_v5 = 3;
-    temp_v6 = 0xffffffff;
+    temp_v3 = 0x499;
+    temp_v4 = 3;
+    temp_v5 = 0xffffffff;
   }
   else {
     temp_v2 = FUN_002bf4f0(param_1 + 200,param_3 + 0x40e);
-    temp_v4 = 0x48b;
-    temp_v5 = 2;
-    temp_v6 = 0xff;
+    temp_v3 = 0x48b;
+    temp_v4 = 2;
+    temp_v5 = 0xff;
   }
   temp_v0 = *(short *)(temp_v2 + 8);
   temp_v1 = *(short *)(temp_v2 + 10);
-  temp_v3 = FUN_002bd06c(param_2);
-  temp_v2 = FUN_002bf4f0(param_1 + 200,temp_v4);
+  param_2 = param_2 & 0xffff;
+  FUN_002bd06c(param_2);
+  temp_v2 = FUN_002bf4f0(param_1 + 200,temp_v3);
   VectorSignedToFloat((int)*(short *)(temp_v2 + 10) + (int)temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat((int)*(short *)(temp_v2 + 8) + (int)temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_002be56c(param_1 + 200,temp_v5,temp_v6,temp_v3);
+  FUN_002be56c(param_1 + 200,temp_v4,temp_v5,param_2);
   return;
 }

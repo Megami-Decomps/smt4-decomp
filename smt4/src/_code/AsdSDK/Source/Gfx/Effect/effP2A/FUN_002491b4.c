@@ -33,7 +33,8 @@ unsigned int * FUN_002491b4(int *param_1)
   if (param_1 != (int *)0x0) {
     piVar6 = (int *)(*param_1 + (int)param_1);
     temp_v3 = *piVar6;
-    piVar5 = (int *)FUN_002c32a0(0x10000,0x100,0,*param_1 + temp_v3 * 4 + 0x1c,0x10,1);
+    piVar5 = (int *)0x10000;
+    FUN_002c32a0(0x10000,0x100,0,*param_1 + temp_v3 * 4 + 0x1c,0x10,1);
     piVar5[6] = (int)piVar5;
     rt_memcpy(piVar5 + 7,param_1,*param_1);
     piVar5[3] = temp_v3;
@@ -74,10 +75,11 @@ unsigned int * FUN_002491b4(int *param_1)
       } while (temp_v2 < temp_v3);
     }
   }
-  puVar3 = (unsigned int *)FUN_002c32a0(0x10000,0x100,0,piVar5[2] * 0x14 + 0x18,0x10,1);
+  puVar3 = (unsigned int *)0x10000;
+  FUN_002c32a0(0x10000,0x100,0,piVar5[2] * 0x14 + 0x18,0x10,1);
   puVar3[4] = (unsigned int)(puVar3 + 6);
   *puVar3 = (unsigned int)piVar5;
-  FUN_001d22a0(puVar3,0);
+  FUN_001d22a0();
   *(unsigned short *)(puVar3 + 5) = 1;
   return puVar3;
 }

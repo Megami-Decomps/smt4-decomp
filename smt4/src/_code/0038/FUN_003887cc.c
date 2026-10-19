@@ -90,7 +90,8 @@ void FUN_003887cc(unsigned char *param_1,int param_2)
   piVar1[2] = 0;
   piVar11 = piVar1 + -1;
   piVar1[3] = 0;
-  piVar2 = (int *)FUN_002baa40(&temp_v10,0);
+  piVar2 = &temp_v10;
+  FUN_002baa40(piVar2,0);
   temp_v3 = piVar2[1];
   *piVar1 = *piVar2;
   piVar1[1] = temp_v3;
@@ -334,8 +335,9 @@ void FUN_003887cc(unsigned char *param_1,int param_2)
                 }
                 *(unsigned int *)(param_2 + 0x344) = 0;
                 *(char *)piVar11 = '\x01';
+                piVar2 = &temp_v10;
                 piVar1[2] = 0;
-                piVar2 = (int *)FUN_002baa40(&temp_v10);
+                FUN_002baa40();
                 temp_v3 = piVar2[1];
                 *piVar1 = *piVar2;
                 piVar1[1] = temp_v3;

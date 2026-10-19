@@ -13,8 +13,6 @@ struct fn_0027e5e4_arg0 {
     short field_0x62; /* +0x62 */
     unsigned char pad_0x64[0x3c];
     undefined4 field_0xa0; /* +0xa0 */
-    unsigned char pad_0xa4[0x56];
-    ushort field_0xfa; /* +0xfa */
 };
 
 /* Supplied declaration required: FUN_0027da30. */

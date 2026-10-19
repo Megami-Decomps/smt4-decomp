@@ -3,27 +3,38 @@
 #include "romwright_types.h"
 
 typedef int romwright_code();
+/* stack frame of param_2: 1 slot(s), 4 byte(s) */
+typedef struct {
+    unsigned int sp18; /* 0x18: local_18 */
+} param_2_stack;
+
 /* Supplied declaration required: FUN_002b4f64. */
-extern int FUN_002baed8(void);
+extern unsigned int *FUN_002baed8(void);
 
 
-/* WARNING: Control flow encountered bad instruction data */
-
-void FUN_002b4ee4(int *param_1)
+unsigned int FUN_002b4ee4(int *param_1,unsigned char param_2)
 
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
+/* irregular: 1 native warning(s); review required */
+  unsigned int *puVar1;
+  unsigned int *puVar2;
+  unsigned int temp_v0;
   
-  temp_v0 = FUN_002baed8();
-  temp_v1 = temp_v0;
-  FUN_002b4f64(temp_v0,6);
-  *(unsigned int *)(temp_v1 + 0xc) = *(unsigned int *)(temp_v0 + 0x184);
-  *(unsigned char *)(temp_v1 + 4) = 10;
-  temp_v2 = (**(romwright_code **)(*param_1 + 0x20))(param_1);
-  *(unsigned int *)(temp_v1 + 0x10) = temp_v2;
-                    /* WARNING: Bad instruction - Truncating control flow here */
-  halt_baddata();
+  puVar1 = (unsigned int *)FUN_002baed8();
+  puVar2 = puVar1;
+  FUN_002b4f64(puVar1,6);
+  puVar2[3] = puVar1[0x61];
+  *(unsigned char *)(puVar2 + 1) = 10;
+  temp_v0 = (**(romwright_code **)(*param_1 + 0x20))(param_1);
+  puVar2[4] = temp_v0;
+  *(unsigned char *)((int)puVar2 + 0x15) = param_2;
+  if ((unsigned int *)puVar1[0x5c] == (unsigned int *)0x0) {
+    puVar1[0x5b] = (unsigned int)puVar2;
+  }
+  else {
+    *(unsigned int **)puVar1[0x5c] = puVar2;
+  }
+  puVar1[0x5c] = (unsigned int)puVar2;
+  *puVar2 = 0;
+  return puVar1[0x5d];
 }

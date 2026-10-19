@@ -17,7 +17,7 @@ extern unsigned char DAT_004c54f0; /* 0x4c54f0 */
 /* Supplied declaration required: FUN_00109580. */
 /* Supplied declaration required: FUN_00110d54. */
 /* Supplied declaration required: FUN_00120dc4. */
-extern unsigned int FUN_002c5300(unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c5300. */
 extern int FUN_002c564c(unsigned int);
 /* Supplied declaration required: nw_snd_FxDelay_AssignWorkBuffer. */
 extern unsigned int nw_snd_FxDelay_GetRequiredMemSize(unsigned char *);
@@ -26,9 +26,10 @@ extern unsigned int nw_snd_FxDelay_GetRequiredMemSize(unsigned char *);
 void FUN_001036fc(void)
 
 {
-/* irregular: 4 native warning(s); review required */
+/* irregular: 5 native warning(s); review required */
   int temp_v0;
   unsigned int temp_v1;
+  unsigned int temp_v2;
   
   temp_v0 = FUN_002c564c(1);
   if (temp_v0 == 0) {
@@ -38,8 +39,10 @@ void FUN_001036fc(void)
     DAT_004c54f0 = 1;
     FUN_00110d54(&DAT_004c5484);
     temp_v1 = nw_snd_FxDelay_GetRequiredMemSize(&DAT_004c5484);
-    DAT_0044e0e0 = FUN_002c5300(0x10000,0x100,0,temp_v1);
-    nw_snd_FxDelay_AssignWorkBuffer(&DAT_004c5484,DAT_0044e0e0,temp_v1);
+    temp_v2 = 0x10000;
+    FUN_002c5300(0x10000,0x100,0,temp_v1);
+    DAT_0044e0e0 = temp_v2;
+    nw_snd_FxDelay_AssignWorkBuffer(&DAT_004c5484,temp_v2,temp_v1);
     FUN_00120dc4(0,&DAT_004c5484);
   }
   FUN_00109580();

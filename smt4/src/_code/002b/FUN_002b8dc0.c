@@ -2,7 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
-extern int FUN_002b45e8(int);
+/* Supplied declaration required: FUN_002b45e8. */
 /* Supplied declaration required: FUN_002b4670. */
 extern int FUN_002b4748(void);
 
@@ -10,7 +10,7 @@ extern int FUN_002b4748(void);
 unsigned int FUN_002b8dc0(int param_1)
 
 {
-/* irregular: 1 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   int temp_v0;
   unsigned int temp_v1;
   
@@ -44,13 +44,13 @@ unsigned int FUN_002b8dc0(int param_1)
       case 6:
       case 7:
       case 8:
-        temp_v0 = FUN_002b45e8(param_1);
+        FUN_002b45e8();
         temp_v1 = 0;
-        if (temp_v0 != 0) {
-          if ((*(unsigned short *)(temp_v0 + 0x9a) & 0x7c) == 0) {
+        if (param_1 != 0) {
+          if ((*(unsigned short *)(param_1 + 0x9a) & 0x7c) == 0) {
             return 999;
           }
-          temp_v1 = (*(unsigned short *)(temp_v0 + 0x9a) & 0x7f) >> 2;
+          temp_v1 = (*(unsigned short *)(param_1 + 0x9a) & 0x7f) >> 2;
         }
       }
     }

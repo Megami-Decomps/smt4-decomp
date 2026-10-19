@@ -2,14 +2,14 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
+extern int DAT_0043e18c; /* 0x43e18c */
 
-/* WARNING: Control flow encountered bad instruction data */
-/* WARNING: Removing unreachable block (ram,0x002c0126) */
 
 void FUN_002bff50(void)
 
 {
-/* irregular: 3 native warning(s); review required */
-                    /* WARNING: Bad instruction - Truncating control flow here */
-  halt_baddata();
+  if (DAT_0043e18c != 0) {
+    *(unsigned char *)(DAT_0043e18c + 0xa11) = 0x14;
+  }
+  return;
 }

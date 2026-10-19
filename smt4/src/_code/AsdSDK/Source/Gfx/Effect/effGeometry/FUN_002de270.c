@@ -13,19 +13,20 @@ extern unsigned int DAT_00473810; /* 0x473810 */
 extern unsigned int DAT_00473814; /* 0x473814 */
 
 /* Supplied declaration required: FUN_001f6998. */
-extern unsigned short *FUN_002c32a0(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c32a0. */
 
 
 unsigned short * FUN_002de270(int param_1,unsigned int param_2)
 
 {
-/* irregular: 1 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   unsigned int temp_v0;
   unsigned int temp_v1;
   unsigned int temp_v2;
   unsigned short *puVar4;
   
-  puVar4 = (unsigned short *)FUN_002c32a0(0x10000,0x100,0,0x58,0x10,1);
+  puVar4 = (unsigned short *)0x10000;
+  FUN_002c32a0(0x10000,0x100,0,0x58,0x10,1);
   *puVar4 = 0x300;
   puVar4[1] = 0;
   FUN_001f6998(param_1,param_2,0);

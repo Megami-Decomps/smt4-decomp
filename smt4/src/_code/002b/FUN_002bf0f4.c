@@ -1,32 +1,61 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002bf0f4` (_code @ 0x2bf0f4, 0x150 bytes) from smt4_v1.2.0.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002bf0f4` (_code @ 0x2bf0f4, 0x148 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
-/* Unsupported intrinsic, declaration required: coprocessor_storelong (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: coprocessor_function (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: coprocessor_load (CALLOTHER). */
+extern unsigned int *DAT_004655c0; /* 0x4655c0 */
+
+/* Supplied declaration required: FUN_002c4938. */
 
 
-/* WARNING: Control flow encountered bad instruction data */
-/* WARNING: Removing unreachable block (ram,0x002bedb2) */
-/* WARNING: Removing unreachable block (ram,0x002bedba) */
-/* WARNING: Removing unreachable block (ram,0x00336fbe) */
-
-void FUN_002bf0f4(void)
+void FUN_002bf0f4(unsigned int param_1)
 
 {
-/* irregular: irregular input(s): in_cr0, in_cr1, in_cr3, in_cr6, in_cr8; 13 native warning(s); review required */
-  unsigned int in_cr0;
-  unsigned int in_cr1;
-  unsigned int in_cr3;
-  unsigned int in_cr6;
-  unsigned int in_cr8;
-  unsigned char uStack000000fc;
-  unsigned char temp_v0 [4];
+/* irregular: 1 native warning(s); review required */
+  unsigned int *puVar1;
   
-  coprocessor_storelong(0,in_cr1,&uStack000000fc);
-  coprocessor_function(0xb,0xb,0,in_cr8,in_cr0,in_cr6);
-  coprocessor_load(0,in_cr3,temp_v0);
-                    /* WARNING: Bad instruction - Truncating control flow here */
-  halt_baddata();
+  puVar1 = DAT_004655c0;
+  param_1 = param_1 & ~DAT_004655c0[2];
+  if ((param_1 & 1) != 0) {
+    *DAT_004655c0 = *DAT_004655c0 | 0x100000;
+  }
+  if ((param_1 & 2) != 0) {
+    *puVar1 = *puVar1 | 0x10000;
+  }
+  if ((param_1 & 4) != 0) {
+    *puVar1 = *puVar1 | 0x1800000;
+  }
+  if ((param_1 & 8) != 0) {
+    *puVar1 = *puVar1 | 0x600000;
+  }
+  if ((param_1 & 0x10) != 0) {
+    *puVar1 = *puVar1 | 0x10000;
+  }
+  if ((param_1 & 0x20) != 0) {
+    *puVar1 = *puVar1 | 0x80000;
+  }
+  if ((param_1 & 0x40) != 0) {
+    *puVar1 = *puVar1 | 0x2004038;
+    FUN_002c4938(puVar1 + 0x43,0x84);
+    FUN_002c4938(puVar1 + 100,0x84);
+  }
+  if ((param_1 & 0x80) != 0) {
+    *puVar1 = *puVar1 | 0x1c00;
+  }
+  if ((param_1 & 0x100) != 0) {
+    *puVar1 = *puVar1 | 1;
+  }
+  if ((param_1 & 0x200) != 0) {
+    *puVar1 = *puVar1 | 0x80c2;
+  }
+  if ((param_1 & 0x400) != 0) {
+    *puVar1 = *puVar1 | 4;
+  }
+  if ((param_1 & 0x800) != 0) {
+    *puVar1 = *puVar1 | 0x100;
+  }
+  if ((param_1 & 0x1000) != 0) {
+    *puVar1 = *puVar1 | 0x200;
+  }
+  puVar1[1] = puVar1[1] | param_1;
+  return;
 }

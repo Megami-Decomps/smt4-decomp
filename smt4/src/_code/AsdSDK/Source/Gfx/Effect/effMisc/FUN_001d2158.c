@@ -10,7 +10,7 @@ typedef struct {
 
 extern unsigned char DAT_00472480; /* 0x472480 */
 
-extern unsigned int *FUN_002c32a0(unsigned int, unsigned int, unsigned int, int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c32a0. */
 /* Supplied declaration required: FUN_002c3944. */
 /* Supplied declaration required: rt_memcpy. */
 
@@ -18,16 +18,15 @@ extern unsigned int *FUN_002c32a0(unsigned int, unsigned int, unsigned int, int,
 unsigned int * FUN_001d2158(int param_1,unsigned int param_2)
 
 {
-/* irregular: 2 native warning(s); review required */
+/* irregular: 3 native warning(s); review required */
   unsigned int *puVar1;
   unsigned int temp_v0;
   int temp_v1;
-  int temp_v2;
   
   temp_v1 = *(int *)(param_1 * 0x18 + 0x472494);
-  temp_v2 = temp_v1 + 0x30;
-  puVar1 = (unsigned int *)FUN_002c32a0(0x10000,0x100,0,temp_v2,0x10,1);
-  FUN_002c3944(puVar1,temp_v2);
+  puVar1 = (unsigned int *)0x10000;
+  FUN_002c32a0(0x10000,0x100,0,temp_v1 + 0x30,0x10,1);
+  FUN_002c3944();
   puVar1[4] = 0xffffffff;
   puVar1[6] = param_1;
   puVar1[5] = 0x3f800000;

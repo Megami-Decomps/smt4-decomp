@@ -18,18 +18,19 @@ extern unsigned char LAB_0020fea8; /* 0x20fea8 */
 extern unsigned int *DAT_00446d78; /* 0x446d78 */
 
 /* Supplied declaration required: FUN_002c4a08. */
-extern unsigned int *FUN_002c5300(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c5300. */
 /* Supplied declaration required: FUN_002c5788. */
 
 
 void FUN_001b3c34(void)
 
 {
-/* irregular: 3 native warning(s); review required */
+/* irregular: 4 native warning(s); review required */
   unsigned int *puVar1;
   unsigned char *puVar2;
   
-  puVar1 = (unsigned int *)FUN_002c5300(0x10000,0x100,0,0xc,1);
+  puVar1 = (unsigned int *)0x10000;
+  FUN_002c5300(0x10000,0x100,0,0xc,1);
   DAT_00446d78 = puVar1;
   *(unsigned char *)(puVar1 + 1) = 0;
   puVar1[2] = 0;

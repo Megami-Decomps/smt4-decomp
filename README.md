@@ -7,8 +7,8 @@ byte-identical game binary.
 
 | Game | Directory | Build | Functions | Exact (objdiff) | Proven by relink | Fuzzy |
 |---|---|---|---|---|---|---|
-| Shin Megami Tensei IV (USA) | [`smt4/`](smt4/) | v1.2.0 update (CTR-U-AMXE) | 9,350 | 1,185 | 1,179 | 41.9% |
-| Shin Megami Tensei IV: Apocalypse (USA) | [`smt4a/`](smt4a/) | v1.0 cartridge (CTR-P-BG4E) | 15,108 | 2,342 | 2,333 | 42.9% |
+| Shin Megami Tensei IV (USA) | [`smt4/`](smt4/) | v1.2.0 update (CTR-U-AMXE) | 9,341 | 1,193 | 1,187 | 42.3% |
+| Shin Megami Tensei IV: Apocalypse (USA) | [`smt4a/`](smt4a/) | v1.0 cartridge (CTR-P-BG4E) | 15,106 | 2,347 | 2,338 | 42.9% |
 
 The C is romwright's first pass. "Proven by relink" counts the functions `tools/relink.py --matched`
 links from their compiled objects into the retail `.code`, byte for byte; it lists every function it
@@ -28,8 +28,8 @@ tools/shared.py       pairs the functions both games share and compares their pr
 
 Both games come from one build tree: the engine `AsdSDK`, Nintendo's SDK, and most of `sdds4`. The
 same original file has the same path in both (`AsdSDK/Source/Sys/File/AsdFile`, `camp/IfTouch`), and
-167 of Apocalypse's 215 placed files are also IV files. `python3 tools/shared.py` pairs the 3,672
-functions with the same code in both games (40% of IV's, 24% of Apocalypse's): same instructions, same
+167 of Apocalypse's 215 placed files are also IV files. `python3 tools/shared.py` pairs the 3,782
+functions with the same code in both games (41% of IV's, 25% of Apocalypse's): same instructions, same
 constants and floats, only branch targets and image addresses free. A function matched in one game
 and not the other is a porting candidate (`--list ported`): its C very likely matches the twin too.
 
@@ -53,7 +53,7 @@ Dumps, `orig/` and `build/` stay local (git-ignored).
 
 ## Names and source files
 
-`smt4/config/names.map` names 907 IV v1.2.0 functions:
+`smt4/config/names.map` names 909 IV v1.2.0 functions:
 
 - Nintendo SDK functions (`nn::`, `nw::`), identified by matching code bytes against games that shipped
   with symbols or DWARF;

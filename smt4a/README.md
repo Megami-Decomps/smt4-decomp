@@ -32,7 +32,7 @@ python3 build.py report     # objdiff-cli report over objdiff.json -> build/repo
 # or open this directory in the objdiff GUI
 ```
 
-This image: 15104 function(s) decompiled into `src/`, 15108 symbol(s), 1 module(s).
+This image: 15104 function(s) decompiled into `src/`, 15106 symbol(s), 1 module(s).
 Units compile as C99 (`--c99`): decompiled C has no headers for its callees, so armcc's implicit-declaration warnings are not errors; every error is reported. A unit that fails (a missing struct definition, say) is listed with its first error in `build/compile_report.json`, and the build exits 0 unless you pass `--strict`. Each unit compiles in the mode its function was decoded in (`--arm`/`--thumb`).
 
 ## From a fresh clone

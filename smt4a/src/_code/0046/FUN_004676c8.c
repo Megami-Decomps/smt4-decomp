@@ -1,4 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004676c8` (_code @ 0x4676c8, 0xfe bytes) from smt4a.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004676c8` (_code @ 0x4676c8, 0x140 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 

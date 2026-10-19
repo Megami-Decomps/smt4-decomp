@@ -94,7 +94,7 @@ extern int FUN_002b6b20(void);
 extern int FUN_002b6b38(void);
 /* Supplied declaration required: FUN_002b8838. */
 /* Supplied declaration required: FUN_002b9024. */
-extern unsigned int FUN_002bd06c(unsigned int);
+/* Supplied declaration required: FUN_002bd06c. */
 extern int FUN_002bf244(unsigned int);
 /* Supplied declaration required: FUN_002bf694. */
 /* Supplied declaration required: FUN_002bff50. */
@@ -127,7 +127,7 @@ extern int FUN_003bf0a4(void);
 void FUN_001fc6e8(unsigned int param_1)
 
 {
-/* irregular: 1 goto(s); 74 native warning(s); review required */
+/* irregular: 1 goto(s); 75 native warning(s); review required */
   unsigned short temp_v0;
   unsigned short temp_v1;
   short temp_v2;
@@ -648,8 +648,8 @@ LAB_001fd348:
       temp_v6 = (unsigned int)*(unsigned short *)(temp_v3 + 0x46);
       if ((temp_v6 != 0) && (temp_v10 = temp_v6, FUN_002b9024(), temp_v10 != 0)) {
         FUN_002c4938(&temp_v16,0x60);
-        temp_v8 = FUN_002bd06c(temp_v6);
-        FUN_002bf694(&temp_v16,temp_v8);
+        FUN_002bd06c(temp_v6);
+        FUN_002bf694(&temp_v16,temp_v6);
         FUN_00295660(0xd,&temp_v16);
         FUN_002bff50();
         FUN_00254e2c(*(unsigned int *)(temp_v4 + 0x2230),0,0,6,0);

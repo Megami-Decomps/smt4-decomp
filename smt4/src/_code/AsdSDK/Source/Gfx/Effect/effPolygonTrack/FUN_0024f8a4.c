@@ -18,7 +18,7 @@ extern unsigned char DAT_004737ce; /* 0x4737ce */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002469ec. */
 /* Supplied declaration required: FUN_0024ad88. */
-extern unsigned int FUN_002c32a0(unsigned int, unsigned int, unsigned int, int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c32a0. */
 /* Supplied declaration required: FUN_002c415c. */
 /* Supplied declaration required: FUN_002c4938. */
 /* Supplied declaration required: FUN_002d1480. */
@@ -28,32 +28,31 @@ extern unsigned int FUN_002c32a0(unsigned int, unsigned int, unsigned int, int, 
 void FUN_0024f8a4(unsigned int *param_1,unsigned int param_2,unsigned int *param_3)
 
 {
-/* irregular: irregular input(s): in_fpscr, in_s0; 7 native warning(s); review required */
+/* irregular: irregular input(s): in_fpscr, in_s0; 8 native warning(s); review required */
   unsigned int temp_v0;
   unsigned int temp_v1;
   unsigned int temp_v2;
   float *pfVar4;
   unsigned int temp_v3;
   unsigned int temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
+  unsigned int temp_v5;
   unsigned int in_fpscr;
   float in_s0;
-  float temp_v7;
+  float temp_v6;
   
   temp_v0 = param_3[1];
   temp_v1 = param_3[2];
   temp_v2 = param_3[3];
   temp_v3 = param_3[4];
   temp_v4 = param_3[5];
-  temp_v6 = param_3[6];
+  temp_v5 = param_3[6];
   param_1[3] = *param_3;
   param_1[4] = temp_v0;
   param_1[5] = temp_v1;
   param_1[6] = temp_v2;
   param_1[7] = temp_v3;
   param_1[8] = temp_v4;
-  param_1[9] = temp_v6;
+  param_1[9] = temp_v5;
   if (*param_1 != 0) {
     temp_v0 = param_1[10];
     if (temp_v0 != 0) {
@@ -63,9 +62,9 @@ void FUN_0024f8a4(unsigned int *param_1,unsigned int param_2,unsigned int *param
     }
     temp_v1 = *param_3;
     temp_v3 = *param_1 & 0xffff;
-    temp_v5 = temp_v3 * 2 + 0x1c;
-    temp_v2 = FUN_002c32a0(0x10000,0x100,0,temp_v5,0x10,1);
-    FUN_002c4938(temp_v2,temp_v5);
+    temp_v2 = 0x10000;
+    FUN_002c32a0(0x10000,0x100,0,temp_v3 * 2 + 0x1c,0x10,1);
+    FUN_002c4938();
     *(unsigned int *)(temp_v2 + 0x18) = temp_v2 + 0x1c;
     temp_v0 = temp_v3;
     FUN_002469ec(temp_v3,temp_v1 & 0xffff,&DAT_004736f0,3,0x48);
@@ -82,23 +81,23 @@ void FUN_0024f8a4(unsigned int *param_1,unsigned int param_2,unsigned int *param
         temp_v1 = temp_v0 & 0xffff;
         pfVar4 = (float *)(*(int *)(*(int *)(temp_v2 + 0x10) + 4) + (temp_v0 & 0xffff) * 0x10);
         temp_v0 = temp_v0 + 1;
-        temp_v7 = (float)VectorUnsignedToFloat((unsigned int)DAT_00472560,(unsigned char)(in_fpscr >> 0x16) & 3);
-        *pfVar4 = temp_v7 * in_s0 * in_s0;
-        temp_v7 = (float)VectorUnsignedToFloat((unsigned int)DAT_00472561,(unsigned char)(in_fpscr >> 0x16) & 3);
-        pfVar4[1] = temp_v7 * in_s0 * in_s0;
-        temp_v7 = (float)VectorUnsignedToFloat((unsigned int)DAT_00472562,(unsigned char)(in_fpscr >> 0x16) & 3);
-        pfVar4[2] = temp_v7 * in_s0 * in_s0;
-        temp_v7 = (float)VectorUnsignedToFloat((unsigned int)DAT_00472563,(unsigned char)(in_fpscr >> 0x16) & 3);
-        pfVar4[3] = temp_v7 * in_s0 * in_s0;
+        temp_v6 = (float)VectorUnsignedToFloat((unsigned int)DAT_00472560,(unsigned char)(in_fpscr >> 0x16) & 3);
+        *pfVar4 = temp_v6 * in_s0 * in_s0;
+        temp_v6 = (float)VectorUnsignedToFloat((unsigned int)DAT_00472561,(unsigned char)(in_fpscr >> 0x16) & 3);
+        pfVar4[1] = temp_v6 * in_s0 * in_s0;
+        temp_v6 = (float)VectorUnsignedToFloat((unsigned int)DAT_00472562,(unsigned char)(in_fpscr >> 0x16) & 3);
+        pfVar4[2] = temp_v6 * in_s0 * in_s0;
+        temp_v6 = (float)VectorUnsignedToFloat((unsigned int)DAT_00472563,(unsigned char)(in_fpscr >> 0x16) & 3);
+        pfVar4[3] = temp_v6 * in_s0 * in_s0;
         pfVar4 = (float *)(*(int *)(*(int *)(temp_v2 + 0x14) + 4) + temp_v1 * 0x10);
-        temp_v7 = (float)VectorUnsignedToFloat((unsigned int)DAT_00472560,(unsigned char)(in_fpscr >> 0x16) & 3);
-        *pfVar4 = temp_v7 * in_s0 * in_s0;
-        temp_v7 = (float)VectorUnsignedToFloat((unsigned int)DAT_00472561,(unsigned char)(in_fpscr >> 0x16) & 3);
-        pfVar4[1] = temp_v7 * in_s0 * in_s0;
-        temp_v7 = (float)VectorUnsignedToFloat((unsigned int)DAT_00472562,(unsigned char)(in_fpscr >> 0x16) & 3);
-        pfVar4[2] = temp_v7 * in_s0 * in_s0;
-        temp_v7 = (float)VectorUnsignedToFloat((unsigned int)DAT_00472563,(unsigned char)(in_fpscr >> 0x16) & 3);
-        pfVar4[3] = temp_v7 * in_s0 * in_s0;
+        temp_v6 = (float)VectorUnsignedToFloat((unsigned int)DAT_00472560,(unsigned char)(in_fpscr >> 0x16) & 3);
+        *pfVar4 = temp_v6 * in_s0 * in_s0;
+        temp_v6 = (float)VectorUnsignedToFloat((unsigned int)DAT_00472561,(unsigned char)(in_fpscr >> 0x16) & 3);
+        pfVar4[1] = temp_v6 * in_s0 * in_s0;
+        temp_v6 = (float)VectorUnsignedToFloat((unsigned int)DAT_00472562,(unsigned char)(in_fpscr >> 0x16) & 3);
+        pfVar4[2] = temp_v6 * in_s0 * in_s0;
+        temp_v6 = (float)VectorUnsignedToFloat((unsigned int)DAT_00472563,(unsigned char)(in_fpscr >> 0x16) & 3);
+        pfVar4[3] = temp_v6 * in_s0 * in_s0;
       } while (temp_v0 < temp_v3);
     }
     param_1[10] = temp_v2;

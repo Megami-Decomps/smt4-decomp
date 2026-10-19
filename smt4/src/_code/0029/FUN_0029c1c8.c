@@ -4,7 +4,8 @@
 
 typedef struct fn_0029c1c8_arg0 fn_0029c1c8_arg0;
 struct fn_0029c1c8_arg0 {
-    uint field_0x0; /* +0x0 */
+    undefined2 field_0x0; /* +0x0 */
+    undefined2 field_0x2; /* +0x2 */
     undefined2 field_0x4; /* +0x4 */
     undefined2 field_0x6; /* +0x6 */
     undefined2 field_0x8; /* +0x8 */

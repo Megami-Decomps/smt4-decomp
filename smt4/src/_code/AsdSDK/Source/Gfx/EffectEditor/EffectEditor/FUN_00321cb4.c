@@ -299,7 +299,8 @@ LAB_00321f54:
     in_d9 = CONCAT44(temp_v15 * temp_v22,temp_v17);
     if (DAT_0044ea82 + temp_v10 == 0) {
       temp_v13 = 0xff008080;
-      temp_v11 = FUN_002c32a0(0x10000,0x100,0,0x68,0x10,1);
+      temp_v11 = 0x10000;
+      FUN_002c32a0(0x10000,0x100,0,0x68,0x10,1);
       *(float *)(temp_v11 + 8) = temp_v29;
       *(float *)(temp_v11 + 0xc) = temp_v30;
       *(float *)(temp_v11 + 0x10) = temp_v31;
@@ -307,7 +308,8 @@ LAB_00321f54:
     }
     else {
       temp_v13 = 0xff808080;
-      temp_v11 = FUN_002c32a0(0x10000,0x100,0,0x68,0x10,1);
+      temp_v11 = 0x10000;
+      FUN_002c32a0(0x10000,0x100,0,0x68,0x10,1);
       *(float *)(temp_v11 + 8) = temp_v29;
       *(float *)(temp_v11 + 0xc) = temp_v30;
       *(float *)(temp_v11 + 0x10) = temp_v31;
@@ -348,8 +350,9 @@ LAB_00321f54:
     *(unsigned int *)(temp_v11 + 0x1c) = temp_v13;
     *(unsigned int *)(temp_v11 + 4) = 7;
     FUN_002571b8(temp_v11,1);
-    temp_v13 = FUN_002c32a0(0x10000,0x100,0,0x68,0x10,1);
-    rt_memcpy_w(temp_v13,temp_v11,0x68);
+    temp_v13 = 0x10000;
+    FUN_002c32a0(0x10000,0x100,0,0x68,0x10,1);
+    rt_memcpy_w();
     FUN_002571b8(temp_v13,2);
     temp_v10 = temp_v10 + 1;
   } while (temp_v10 < 9);

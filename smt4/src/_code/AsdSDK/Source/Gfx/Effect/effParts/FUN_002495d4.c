@@ -44,7 +44,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_4_stack;
 
-extern int FUN_002c32a0(unsigned int, unsigned int, unsigned int, int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c32a0. */
 /* Supplied declaration required: FUN_002c415c. */
 /* Supplied declaration required: rt_memcpy. */
 
@@ -53,7 +53,7 @@ void FUN_002495d4(fn_002495d4_arg0 *param_1,fn_002495d4_arg1 *param_2,int param_
                  )
 
 {
-/* irregular: 2 native warning(s); review required */
+/* irregular: 3 native warning(s); review required */
   int temp_v0;
   
   if (param_1->field_0x18 != 0) {
@@ -67,12 +67,13 @@ void FUN_002495d4(fn_002495d4_arg0 *param_1,fn_002495d4_arg1 *param_2,int param_
     temp_v0 = param_3;
   }
   if ((param_2 != (fn_002495d4_arg1 *)0x0 && param_3 != 0) && -1 < temp_v0) {
-    temp_v0 = FUN_002c32a0(0x10000,0x100,0,param_3,0x10,1);
+    temp_v0 = 0x10000;
+    FUN_002c32a0(0x10000,0x100,0,param_3,0x10,1);
     param_1->field_0xc = param_4;
     param_1->field_0x18 = temp_v0;
     param_1->field_0x10 = temp_v0;
     param_1->field_0x14 = param_3;
-    rt_memcpy(temp_v0,param_2,param_3);
+    rt_memcpy();
     return;
   }
   return;

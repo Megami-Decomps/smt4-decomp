@@ -10,17 +10,18 @@ typedef struct {
 extern unsigned char DAT_00473768; /* 0x473768 */
 
 /* Supplied declaration required: FUN_00247334. */
-extern int *FUN_002c32a0(unsigned int, unsigned int, unsigned int, int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c32a0. */
 
 
 int * FUN_0030ef08(int param_1)
 
 {
-/* irregular: 1 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   int *piVar1;
   unsigned short temp_v0;
   
-  piVar1 = (int *)FUN_002c32a0(0x10000,0x100,0,*(int *)(param_1 + 0x38) * 0x2c + 0x10,0x10,1);
+  piVar1 = (int *)0x10000;
+  FUN_002c32a0(0x10000,0x100,0,*(int *)(param_1 + 0x38) * 0x2c + 0x10,0x10,1);
   *piVar1 = (int)(piVar1 + 4);
   piVar1[2] = (int)piVar1;
   temp_v0 = *(unsigned int *)(param_1 + 0x38);

@@ -49,7 +49,7 @@ extern unsigned int FUN_0029a034(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002c498c. */
 /* Supplied declaration required: FUN_002c4a08. */
 /* Supplied declaration required: FUN_002c4c2c. */
-extern unsigned int FUN_002c5300(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c5300. */
 /* Supplied declaration required: FUN_002c5788. */
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
 /* Supplied declaration required: rt_memcpy_w. */
@@ -58,7 +58,7 @@ extern unsigned int FUN_002c5300(unsigned int, unsigned int, unsigned int, unsig
 void FUN_00202ab4(void)
 
 {
-/* irregular: 19 native warning(s); review required */
+/* irregular: 20 native warning(s); review required */
   unsigned int *puVar1;
   unsigned char *puVar2;
   unsigned int temp_v0;
@@ -79,11 +79,14 @@ void FUN_00202ab4(void)
   puVar1[2] = 0;
   puVar1[3] = 0;
   DAT_0044de34 = DAT_0044de30;
-  temp_v0 = FUN_002c5300(0x100,0x100,0,0x80,1);
+  temp_v0 = 0x100;
+  FUN_002c5300(0x100,0x100,0,0x80,1);
   puVar1[0xdf] = temp_v0;
-  temp_v0 = FUN_002c5300(0x100,0x100,0,8,1);
+  temp_v0 = 0x100;
+  FUN_002c5300(0x100,0x100,0,8,1);
   puVar1[0xe0] = temp_v0;
-  temp_v0 = FUN_002c5300(0x100,0x100,0,0x24d28,1);
+  temp_v0 = 0x100;
+  FUN_002c5300(0x100,0x100,0,0x24d28,1);
   puVar1[0xe1] = temp_v0;
   temp_v0 = FUN_0026b5dc();
   rt_memcpy_w(puVar1[0xdf],temp_v0,0x80);
@@ -144,7 +147,8 @@ void FUN_00202ab4(void)
   FUN_002c4938(puVar1 + 0xb3,0x80);
   *(unsigned char *)(puVar1 + 0xd3) = 0;
   *(unsigned char *)((int)puVar1 + 0x34d) = 0;
-  temp_v0 = FUN_002c5300(0x100,0x100,0,0x8c,1);
+  temp_v0 = 0x100;
+  FUN_002c5300(0x100,0x100,0,0x8c,1);
   puVar1[0xd4] = temp_v0;
   puVar1[6] = DAT_0044de30;
   *(unsigned char *)(puVar1 + 0xde) = 0;

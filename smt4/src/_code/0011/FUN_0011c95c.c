@@ -30,13 +30,13 @@ extern unsigned int uRam1ff81000; /* 0x1ff81000 */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_002b5c50. */
 /* Supplied declaration required: ll_sdiv. */
-extern unsigned int *nn_fnd_DateTime_DateTime_sub_object(unsigned char *, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: nn_fnd_DateTime_DateTime_sub_object. */
 
 
 long long FUN_0011c95c(void)
 
 {
-/* irregular: 5 native warning(s); review required */
+/* irregular: 6 native warning(s); review required */
   int temp_v0;
   long long temp_v1;
   unsigned int *puVar3;
@@ -64,17 +64,20 @@ long long FUN_0011c95c(void)
   long long temp_v21;
   int temp_v22;
   int temp_v23;
-  unsigned char temp_v24 [8];
-  unsigned char temp_v25 [12];
+  unsigned int temp_v24 [2];
+  unsigned int temp_v25 [3];
   
-  puVar3 = (unsigned int *)nn_fnd_DateTime_DateTime_sub_object(temp_v24,2000,1,1,0,0,0,0);
+  puVar3 = temp_v24;
+  nn_fnd_DateTime_DateTime_sub_object(puVar3,2000,1,1,0,0,0,0);
   temp_v1 = (unsigned long long)(*puVar3 - DAT_0044e630) * 1000000;
   temp_v22 = (unsigned int)temp_v1;
   temp_v23 = (puVar3[1] - (DAT_0044e634 + (unsigned int)(*puVar3 < DAT_0044e630))) * 1000000 +
              (int)((unsigned long long)temp_v1 >> 0x20);
   temp_v21 = FUN_002b5c50(&temp_v22,temp_v23,0xd7b634db,0x431bde82,0x12);
-  puVar3 = (unsigned int *)nn_fnd_DateTime_DateTime_sub_object(temp_v24,0x834,1,1,0,0,0,0);
-  puVar4 = (unsigned int *)nn_fnd_DateTime_DateTime_sub_object(temp_v25,2000,1,1,0,0,0,0);
+  puVar3 = temp_v24;
+  nn_fnd_DateTime_DateTime_sub_object(puVar3,0x834,1,1,0,0,0,0);
+  puVar4 = temp_v25;
+  nn_fnd_DateTime_DateTime_sub_object(puVar4,2000,1,1,0,0,0,0);
   temp_v1 = (unsigned long long)(*puVar3 - *puVar4) * 1000000;
   temp_v22 = (unsigned int)temp_v1;
   temp_v23 = (puVar3[1] - (puVar4[1] + (unsigned int)(*puVar3 < *puVar4))) * 1000000 +

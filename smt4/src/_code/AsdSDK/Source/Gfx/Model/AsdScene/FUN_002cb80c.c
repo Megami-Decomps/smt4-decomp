@@ -13,13 +13,14 @@ typedef struct {
 
 extern int FUN_0011d9c4(unsigned char *, unsigned int);
 extern unsigned int FUN_002c2ff0(void);
-extern unsigned int *FUN_002c5300(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c5300. */
 extern unsigned int nw_ut_FloatColor_ToPicaU32(int);
 
 
 unsigned int * FUN_002cb80c(void)
 
 {
+/* irregular: 1 native warning(s); review required */
   unsigned int *puVar1;
   unsigned int temp_v0;
   int temp_v1;
@@ -29,7 +30,8 @@ unsigned int * FUN_002cb80c(void)
   unsigned int temp_v5;
   unsigned int uStack_14;
   
-  puVar1 = (unsigned int *)FUN_002c5300(0x100,0x100,0,0xc,1);
+  puVar1 = (unsigned int *)0x100;
+  FUN_002c5300(0x100,0x100,0,0xc,1);
   puVar1[1] = 0;
   *puVar1 = 0xffffffff;
   puVar1[2] = 0;

@@ -12,7 +12,7 @@ extern unsigned int DAT_00435dc0; /* 0x435dc0 */
 extern int FUN_002201f4(unsigned int);
 extern unsigned int FUN_0023eb18(int);
 /* Supplied declaration required: FUN_00256224. */
-/* Supplied declaration required: FUN_0025c05c. */
+extern unsigned int FUN_0025c05c(int);
 /* Supplied declaration required: FUN_002bd06c. */
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002c4938. */
@@ -25,7 +25,7 @@ extern int FUN_003bc198(int);
 void FUN_003c2fe8(unsigned int param_1,int param_2)
 
 {
-/* irregular: irregular input(s): in_fpscr; 9 native warning(s); review required */
+/* irregular: irregular input(s): in_fpscr; 8 native warning(s); review required */
   int temp_v0;
   unsigned int temp_v1;
   unsigned short temp_v2;
@@ -89,9 +89,9 @@ void FUN_003c2fe8(unsigned int param_1,int param_2)
     temp_v2 = 0;
     do {
       if (temp_v4[temp_v2] != 0) {
-        temp_v1 = FUN_002bd06c(temp_v4[temp_v2] & 0xffff);
+        FUN_002bd06c(temp_v4[temp_v2] & 0xffff);
         VectorUnsignedToFloat(temp_v0 * temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
-        FUN_00256224(temp_v1,temp_v0 * temp_v3);
+        FUN_00256224();
         temp_v3 = temp_v3 + 1;
       }
       temp_v2 = temp_v2 + 1;
@@ -136,8 +136,8 @@ void FUN_003c2fe8(unsigned int param_1,int param_2)
       uStack_4c = 0;
       temp_v3 = FUN_003bc198(param_2);
       FUN_00256224(acStack_88 + temp_v3 * 0x20);
-      FUN_0025c05c(param_2);
-      temp_v1 = FUN_002bd06c();
+      temp_v1 = FUN_0025c05c(param_2);
+      FUN_002bd06c();
       uStack_48 = 0;
       uStack_44 = 0;
       uStack_40 = 0;

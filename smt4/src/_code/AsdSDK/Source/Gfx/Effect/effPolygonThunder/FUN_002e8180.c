@@ -8,14 +8,14 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_2_stack;
 
-extern unsigned int *FUN_002c32a0(unsigned int, unsigned int, unsigned int, int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c32a0. */
 /* Supplied declaration required: rt_memcpy. */
 
 
 unsigned int * FUN_002e8180(int param_1,unsigned int param_2)
 
 {
-/* irregular: 1 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   int temp_v0;
   unsigned int *puVar2;
   unsigned int temp_v1;
@@ -23,7 +23,8 @@ unsigned int * FUN_002e8180(int param_1,unsigned int param_2)
   
   temp_v0 = param_1 * 0x18;
   temp_v2 = *(int *)(temp_v0 + 0x4727bc);
-  puVar2 = (unsigned int *)FUN_002c32a0(0x10000,0x100,0,temp_v2 + 0x40,0x10,1);
+  puVar2 = (unsigned int *)0x10000;
+  FUN_002c32a0(0x10000,0x100,0,temp_v2 + 0x40,0x10,1);
   puVar2[9] = 0xffffffff;
   puVar2[0xd] = (unsigned int)(puVar2 + 0x10);
   puVar2[10] = 0;

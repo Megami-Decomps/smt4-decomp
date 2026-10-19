@@ -3,47 +3,53 @@
 #include "romwright_types.h"
 
 typedef int romwright_code();
-extern romwright_code *pcRam0044e8cc; /* 0x44e8cc */
+extern romwright_code *DAT_0044e8c4; /* 0x44e8c4 */
+extern romwright_code *DAT_0044e8c8; /* 0x44e8c8 */
+extern romwright_code *DAT_0044e8cc; /* 0x44e8cc */
+extern romwright_code *DAT_0044e8d0; /* 0x44e8d0 */
+extern romwright_code *DAT_0044e8d4; /* 0x44e8d4 */
 
-
-/* WARNING: Control flow encountered bad instruction data */
 
 void FUN_002c3364(unsigned int *param_1)
 
 {
-/* irregular: 8 native warning(s); review required */
-  int *piVar1;
+/* irregular: 10 native warning(s); review required */
   int temp_v0;
   
-  piVar1 = (int *)*param_1;
-  temp_v0 = *piVar1;
+  temp_v0 = *(int *)*param_1;
   if (temp_v0 == 0x20000009) {
-                    /* WARNING: Bad instruction - Truncating control flow here */
-    halt_baddata();
+                    /* WARNING: Could not recover jumptable at 0x002c33bc. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+    (*DAT_0044e8c8)();
+    return;
   }
   if (temp_v0 < 0x2000000a) {
     if (temp_v0 == 0x20000002) {
-      *piVar1 = (int)piVar1;
-                    /* WARNING: Bad instruction - Truncating control flow here */
-      halt_baddata();
+                    /* WARNING: Could not recover jumptable at 0x002c33c4. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      (*DAT_0044e8d0)();
+      return;
     }
     if (temp_v0 == 0x20000004) {
                     /* WARNING: Could not recover jumptable at 0x002c3390. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-      (*pcRam0044e8cc)();
+      (*DAT_0044e8cc)();
       return;
     }
   }
   else {
     if (temp_v0 == 0x20000011) {
-                    /* WARNING: Bad instruction - Truncating control flow here */
-      halt_baddata();
+                    /* WARNING: Could not recover jumptable at 0x002c33b4. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      (*DAT_0044e8c4)();
+      return;
     }
     if (temp_v0 == 0x20000021) {
-                    /* WARNING: Bad instruction - Truncating control flow here */
-      halt_baddata();
+                    /* WARNING: Could not recover jumptable at 0x002c33ac. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      (*DAT_0044e8d4)();
+      return;
     }
   }
-                    /* WARNING: Bad instruction - Truncating control flow here */
-  halt_baddata();
+  return;
 }

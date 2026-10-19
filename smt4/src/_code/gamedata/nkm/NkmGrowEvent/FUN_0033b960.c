@@ -36,13 +36,13 @@ extern unsigned char LAB_0032b33c; /* 0x32b33c */
 /* Supplied declaration required: FUN_002b9024. */
 extern int FUN_002c09f4(unsigned int);
 /* Supplied declaration required: FUN_002c415c. */
-extern int FUN_002c5300(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c5300. */
 
 
 unsigned short FUN_0033b960(fn_0033b960_arg0 *param_1)
 
 {
-/* irregular: 1 goto(s); 6 native warning(s); review required */
+/* irregular: 1 goto(s); 7 native warning(s); review required */
   int temp_v0;
   unsigned int temp_v1;
   unsigned int temp_v2;
@@ -63,7 +63,8 @@ unsigned short FUN_0033b960(fn_0033b960_arg0 *param_1)
   unsigned short temp_v14;
   unsigned short temp_v15;
   
-  temp_v0 = FUN_002c5300(0x100,0x100,0,0x3ea,1);
+  temp_v0 = 0x100;
+  FUN_002c5300(0x100,0x100,0,0x3ea,1);
   temp_v1 = (unsigned int)param_1->field_0x46;
   temp_v6 = 0;
   FUN_002b9024();

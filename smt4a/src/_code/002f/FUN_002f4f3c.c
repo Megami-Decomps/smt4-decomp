@@ -1,4 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f4f3c` (_code @ 0x2f4f3c, 0x5 bytes) from smt4a.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f4f3c` (_code @ 0x2f4f3c, 0x3a bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
@@ -17,7 +17,10 @@ struct fn_002f4f3c_arg0 {
     undefined4 field_0x3c; /* +0x3c */
 };
 
-extern unsigned int FUN_002e9300(unsigned int *, unsigned int);
+extern unsigned char LAB_002f4f78; /* 0x2f4f78 */
+extern unsigned char DAT_0055b23c; /* 0x55b23c */
+
+extern unsigned int FUN_002e9300(unsigned int *, unsigned char *);
 /* Supplied declaration required: FUN_002e9318. */
 extern unsigned int *FUN_002fd1e8(fn_002f4f3c_arg0 *, unsigned int);
 
@@ -34,10 +37,10 @@ FUN_002f4f3c(fn_002f4f3c_arg0 *param_1,unsigned int param_2,unsigned int param_3
   
   uStack_18 = param_3;
   uStack_14 = param_4;
-  temp_v0 = FUN_002e9300((unsigned int *)&uStack_18,0x2f4f78);
+  temp_v0 = FUN_002e9300((unsigned int *)&uStack_18,&LAB_002f4f78);
   puVar2 = (unsigned int *)FUN_002fd1e8(param_1,temp_v0);
   FUN_002e9318(&uStack_18);
-  *puVar2 = 0x55b23c;
+  *puVar2 = (unsigned int)&DAT_0055b23c;
   *(unsigned short *)(puVar2 + 8) = 0;
   puVar2[10] = 0;
   puVar2[0xc] = 0;

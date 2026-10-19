@@ -6,19 +6,19 @@ extern unsigned char LAB_00230cac; /* 0x230cac */
 extern unsigned char DAT_004c5344; /* 0x4c5344 */
 
 /* Supplied declaration required: FUN_002be624. */
-extern unsigned char *FUN_002be650(void);
+/* Supplied declaration required: FUN_002be650. */
 
 
-unsigned char * FUN_00230c80(unsigned int param_1)
+void FUN_00230c80(int param_1)
 
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned char *puVar1;
+/* irregular: 2 native warning(s); review required */
+  int temp_v0;
   
-  puVar1 = (unsigned char *)FUN_002be650();
-  if (puVar1 == (unsigned char *)0x0) {
+  temp_v0 = param_1;
+  FUN_002be650();
+  if (temp_v0 == 0) {
     FUN_002be624(&DAT_004c5344,&LAB_00230cac,param_1);
-    puVar1 = &DAT_004c5344;
   }
-  return puVar1;
+  return;
 }

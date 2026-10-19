@@ -28,7 +28,7 @@ extern int *DAT_00439c60; /* 0x439c60 */
 /* Supplied declaration required: FUN_002c222c. */
 /* Supplied declaration required: FUN_002c312c. */
 /* Supplied declaration required: FUN_002c4a08. */
-extern int *FUN_002c5300(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c5300. */
 /* Supplied declaration required: FUN_002c5d5c. */
 /* Supplied declaration required: FUN_002eb76c. */
 /* Supplied declaration required: FUN_00342fbc. */
@@ -38,7 +38,7 @@ extern int *FUN_002c5300(unsigned int, unsigned int, unsigned int, unsigned int,
 void FUN_002e82d4(unsigned int *param_1)
 
 {
-/* irregular: 11 native warning(s); review required */
+/* irregular: 12 native warning(s); review required */
   int *piVar1;
   int temp_v0;
   unsigned int *puVar3;
@@ -46,7 +46,8 @@ void FUN_002e82d4(unsigned int *param_1)
   unsigned int *puVar5;
   unsigned char *puVar6;
   
-  piVar1 = (int *)FUN_002c5300(0x100,0x100,0,0xb8,1);
+  piVar1 = (int *)0x100;
+  FUN_002c5300(0x100,0x100,0,0xb8,1);
   temp_v0 = 300;
   DAT_00439c60 = piVar1;
   FUN_002c222c(300,param_1);

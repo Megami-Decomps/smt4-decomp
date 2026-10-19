@@ -13,20 +13,21 @@ extern unsigned char DAT_004737c2; /* 0x4737c2 */
 /* Supplied declaration required: FUN_00247334. */
 extern unsigned int FUN_0024c3c8(unsigned int);
 /* Supplied declaration required: FUN_002694f8. */
-extern int *FUN_002c32a0(unsigned int, unsigned int, unsigned int, int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c32a0. */
 
 
 int * FUN_003213dc(int param_1,int param_2)
 
 {
-/* irregular: 3 native warning(s); review required */
+/* irregular: 4 native warning(s); review required */
   int *piVar1;
   unsigned int temp_v0;
   unsigned int *puVar3;
   unsigned int temp_v1;
   unsigned int temp_v2;
   
-  piVar1 = (int *)FUN_002c32a0(0x10000,0x100,0,*(int *)(param_1 + 0x38) * 0x18 + 0x10,0x10,1);
+  piVar1 = (int *)0x10000;
+  FUN_002c32a0(0x10000,0x100,0,*(int *)(param_1 + 0x38) * 0x18 + 0x10,0x10,1);
   *piVar1 = (int)(piVar1 + 4);
   piVar1[2] = (int)piVar1;
   temp_v0 = *(unsigned int *)(param_1 + 0x38) & 0xffff;

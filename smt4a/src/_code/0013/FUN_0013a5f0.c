@@ -2,6 +2,11 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
+extern unsigned int DAT_0063fefc; /* 0x63fefc */
+extern unsigned int DAT_0063ff00; /* 0x63ff00 */
+extern unsigned int DAT_0063ff04; /* 0x63ff04 */
+extern unsigned int DAT_0063ff08; /* 0x63ff08 */
+
 
 void FUN_0013a5f0(int param_1)
 
@@ -12,10 +17,9 @@ void FUN_0013a5f0(int param_1)
   unsigned int in_s2;
   unsigned int in_s3;
   
-  param_1 = param_1 * 0x10;
-  *(unsigned int *)(param_1 + 0x63fefc) = in_s0;
-  *(unsigned int *)(param_1 + 0x63ff00) = in_s1;
-  *(unsigned int *)(param_1 + 0x63ff04) = in_s2;
-  *(unsigned int *)(param_1 + 0x63ff08) = in_s3;
+  (&DAT_0063fefc)[param_1 * 4] = in_s0;
+  (&DAT_0063ff00)[param_1 * 4] = in_s1;
+  (&DAT_0063ff04)[param_1 * 4] = in_s2;
+  (&DAT_0063ff08)[param_1 * 4] = in_s3;
   return;
 }

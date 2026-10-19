@@ -7,18 +7,20 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-extern int FUN_002b45e8(unsigned short);
+/* Supplied declaration required: FUN_002b45e8. */
 extern unsigned short *FUN_002b63ac(void);
 
 
 unsigned int FUN_0025cc8c(void)
 
 {
+/* irregular: 1 native warning(s); review required */
   unsigned short *puVar1;
-  int temp_v0;
+  unsigned int temp_v0;
   
   puVar1 = (unsigned short *)FUN_002b63ac();
-  temp_v0 = FUN_002b45e8(*puVar1);
+  temp_v0 = (unsigned int)*puVar1;
+  FUN_002b45e8();
   switch(*(unsigned int *)(temp_v0 + 0x54) >> 0x14) {
   case 0:
     return 0x3ef;

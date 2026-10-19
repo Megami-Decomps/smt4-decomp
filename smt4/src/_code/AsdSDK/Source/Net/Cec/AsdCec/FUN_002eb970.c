@@ -14,7 +14,7 @@ extern unsigned int *DAT_00464fac; /* 0x464fac */
 /* Supplied declaration required: FUN_00263308. */
 /* Supplied declaration required: FUN_002634f4. */
 /* Supplied declaration required: FUN_002c415c. */
-extern unsigned int FUN_002c5300(unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c5300. */
 /* Supplied declaration required: FUN_00359e70. */
 extern unsigned int FUN_003e0564(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: nn_cec_CTR_MessageBox_GetMessageId. */
@@ -26,7 +26,7 @@ extern unsigned int FUN_003e0564(unsigned int, unsigned int, unsigned int);
 unsigned char FUN_002eb970(unsigned int param_1,unsigned int param_2)
 
 {
-/* irregular: 9 native warning(s); review required */
+/* irregular: 10 native warning(s); review required */
   unsigned int temp_v0;
   unsigned int temp_v1;
   unsigned int temp_v2;
@@ -46,8 +46,9 @@ unsigned char FUN_002eb970(unsigned int param_1,unsigned int param_2)
     if ((temp_v0 & 0x80000000) == 0) {
       nn_cec_CTR_MessageBox_GetMessageId(DAT_00464fac[6],temp_v8,1,param_1);
       temp_v1 = FUN_003e0564(DAT_00464fac[6],1,param_1);
+      temp_v2 = 0x100;
       temp_v5 = 1;
-      temp_v2 = FUN_002c5300(0x100,0x100,0,temp_v1);
+      FUN_002c5300(0x100,0x100,0,temp_v1);
       temp_v6 = temp_v8;
       temp_v5 = 1;
       temp_v3 = DAT_00464fac[6];

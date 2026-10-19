@@ -12,14 +12,14 @@ typedef struct {
 /* Supplied declaration required: FUN_0014f2c8. */
 /* Supplied declaration required: FUN_0014f408. */
 extern int FUN_0014f4f8(unsigned char *);
-extern unsigned char *FUN_002bf5c0(unsigned int, unsigned int, unsigned int, int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002bf5c0. */
 /* Supplied declaration required: FUN_002c415c. */
 
 
 unsigned char * FUN_002a43bc(unsigned char *param_1,unsigned int param_2,unsigned int param_3)
 
 {
-/* irregular: 4 native warning(s); review required */
+/* irregular: 5 native warning(s); review required */
   int temp_v0;
   unsigned char *pbVar2;
   unsigned char temp_v1;
@@ -30,17 +30,21 @@ unsigned char * FUN_002a43bc(unsigned char *param_1,unsigned int param_2,unsigne
      (temp_v0 = FUN_0014f4f8(param_1), temp_v0 != 0)) {
     if ((param_2 & 1) != 0) {
       if ((param_2 & 2) != 0) {
-        pbVar2 = (unsigned char *)FUN_002bf5c0(0x10000,0x100,0,temp_v0,param_3,0);
+        pbVar2 = (unsigned char *)0x10000;
+        FUN_002bf5c0(0x10000,0x100,0,temp_v0,param_3,0);
       }
       else {
-        pbVar2 = (unsigned char *)FUN_002bf5c0(0x10000,0x100,0,temp_v0,param_3,1);
+        pbVar2 = (unsigned char *)0x10000;
+        FUN_002bf5c0(0x10000,0x100,0,temp_v0,param_3,1);
       }
     }
     else if ((param_2 & 2) != 0) {
-      pbVar2 = (unsigned char *)FUN_002bf5c0(0x100,0x100,0,temp_v0,param_3,0);
+      pbVar2 = (unsigned char *)0x100;
+      FUN_002bf5c0(0x100,0x100,0,temp_v0,param_3,0);
     }
     else {
-      pbVar2 = (unsigned char *)FUN_002bf5c0(0x100,0x100,0,temp_v0,param_3,1);
+      pbVar2 = (unsigned char *)0x100;
+      FUN_002bf5c0(0x100,0x100,0,temp_v0,param_3,1);
     }
     if (temp_v1 != 0x10) {
       if (temp_v1 != 0x20) {

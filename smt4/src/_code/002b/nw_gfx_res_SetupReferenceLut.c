@@ -2,36 +2,46 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
-extern unsigned int uRam00000000; /* 0x0 */
-extern int iRam00000008; /* 0x8 */
+/* stack frame of param_2: 2 slot(s), 5 byte(s) */
+typedef struct {
+    unsigned char sp14; /* 0x14: local_14 */
+    unsigned int sp18; /* 0x18: local_18 */
+} param_2_stack;
+
+/* Supplied declaration required: FUN_0013fd7c. */
+/* Supplied declaration required: FUN_002a7c80. */
 
 
-/* WARNING: Control flow encountered bad instruction data */
-/* WARNING: Removing unreachable block (ram,0x002b51d8) */
-/* WARNING: Removing unreachable block (ram,0x002b51e0) */
-/* WARNING: Removing unreachable block (ram,0x002b5214) */
-/* WARNING: Removing unreachable block (ram,0x002b51ae) */
-
-unsigned int nw_gfx_res_SetupReferenceLut(int param_1,int param_2,unsigned int param_3,int param_4)
+unsigned int nw_gfx_res_SetupReferenceLut(int param_1,unsigned int param_2)
 
 {
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
+/* irregular: 2 native warning(s); review required */
+  unsigned int *puVar1;
+  unsigned int temp_v0;
+  int temp_v1;
+  char temp_v2;
+  unsigned char temp_v3 [8];
   
-  if (param_1 == 0) {
-    param_4 = param_4 + (param_2 >> 4);
-    temp_v0 = 1;
-    if (temp_v0 < param_4) {
-      do {
-        temp_v0 = temp_v0 + 2;
-      } while (temp_v0 < param_4);
-    }
-    iRam00000008 = param_1;
-    return 0;
-  }
+  temp_v0 = 0;
   if (param_1 != 0) {
-    uRam00000000 = *(unsigned int *)(param_1 + 4);
+    if (*(int *)(param_1 + 0xc) != 0) {
+      puVar1 = (unsigned int *)(param_1 + 0xc + *(int *)(param_1 + 0xc));
+    }
+    else {
+      puVar1 = (unsigned int *)0x0;
+    }
+    if ((puVar1 != (unsigned int *)0x0) && ((*puVar1 & 0x80000000) == 0)) {
+      puVar1 = (unsigned int *)0x0;
+    }
+    if (puVar1 == (unsigned int *)0x0) {
+      temp_v1 = 0;
+      temp_v2 = '\0';
+      FUN_0013fd7c(temp_v3,param_1,param_2);
+      FUN_002a7c80(&temp_v1,temp_v3);
+      if (temp_v2 == '\0') {
+        temp_v0 = 0x80000004;
+      }
+    }
   }
-                    /* WARNING: Bad instruction - Truncating control flow here */
-  halt_baddata();
+  return temp_v0;
 }

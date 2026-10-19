@@ -53,7 +53,7 @@ extern unsigned int FUN_002bce00(int);
 /* Supplied declaration required: FUN_002be370. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: FUN_002be624. */
-extern unsigned int FUN_002be650(int, unsigned int);
+/* Supplied declaration required: FUN_002be650. */
 extern int FUN_002bed98(int);
 extern int FUN_002beda4(void);
 /* Supplied declaration required: FUN_002bf288. */
@@ -66,7 +66,7 @@ extern int FUN_002c5da8(unsigned int, unsigned int, unsigned int);
 void FUN_002f1558(int param_1)
 
 {
-/* irregular: irregular input(s): in_fpscr; 20 native warning(s); review required */
+/* irregular: irregular input(s): in_fpscr; 21 native warning(s); review required */
   short temp_v0;
   short temp_v1;
   int temp_v2;
@@ -295,8 +295,9 @@ void FUN_002f1558(int param_1)
     if (temp_v3 == 7) {
       FUN_002bf288(2,0x15,0x11e,temp_v4,temp_v2,0xc3);
       temp_v13 = (int)*(short *)(param_1 + temp_v5 * 2 + 0x3480);
-      temp_v10 = FUN_002be650(temp_v13,0);
-      FUN_002be624(temp_v18,&LAB_002f1ff4,temp_v10);
+      temp_v3 = temp_v13;
+      FUN_002be650(temp_v13,0);
+      FUN_002be624(temp_v18,&LAB_002f1ff4,temp_v3);
       temp_v10 = FUN_0028fb40(temp_v13);
       temp_v3 = FUN_002bf4f8(0x15,0x12e);
       VectorSignedToFloat(*(short *)(temp_v3 + 10) + temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);

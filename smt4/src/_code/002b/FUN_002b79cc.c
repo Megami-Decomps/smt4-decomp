@@ -1,4 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b79cc` (_code @ 0x2b79cc, 0x180 bytes) from smt4_v1.2.0.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b79cc` (_code @ 0x2b79cc, 0x1fe bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
@@ -232,7 +232,7 @@ void FUN_002b79cc(unsigned int param_1,unsigned int param_2,unsigned int param_3
             puVar8 = puVar7;
             temp_v10 = temp_v5;
           }
-          else if ((int)temp_v2 < 0xb) goto code_r0x002b7bbe;
+          else if ((int)temp_v2 < 0xb) goto LAB_002b7bbe;
         }
         if ((int)temp_v2 < 0xb) break;
         temp_v6[temp_v9 + 1] = (unsigned int)puVar7;
@@ -242,7 +242,7 @@ void FUN_002b79cc(unsigned int param_1,unsigned int param_2,unsigned int param_3
       puVar8 = puVar7;
       temp_v10 = temp_v5;
     } while ((int)temp_v5 >= 11);
-code_r0x002b7bbe:
+LAB_002b7bbe:
     if (temp_v9 == 0) {
       return;
     }

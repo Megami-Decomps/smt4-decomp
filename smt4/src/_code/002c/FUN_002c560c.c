@@ -2,47 +2,13 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
-extern int FUN_001008c8(void);
-extern unsigned int *FUN_002c6644(void);
-/* Supplied declaration required: FUN_002c66f2. */
+/* Supplied declaration required: FUN_0010a714. */
 
 
-int FUN_002c560c(void)
+void FUN_002c560c(int param_1)
 
 {
-/* irregular: irregular input(s): in_stack_00000000, in_stack_00000004; 4 native warning(s); review required */
-  int temp_v0;
-  unsigned int *puVar2;
-  int unaff_r6;
-  int unaff_r7;
-  int temp_v1;
-  unsigned char temp_v2;
-  short in_stack_00000000;
-  short *in_stack_00000004;
-  
-  temp_v1 = unaff_r7 << 3;
-  FUN_002c66f2(2);
-  while( 1 ) {
-    temp_v2 = temp_v1 == 0;
-    temp_v1 = temp_v1 - 1;
-    if (temp_v2) {
-      return -2;
-    }
-    temp_v0 = FUN_001008c8();
-    unaff_r6 = unaff_r6 + 1;
-    if (temp_v0 == -1) break;
-    if (temp_v0 != -2) {
-      if (in_stack_00000004 != (short *)0x0) {
-        *in_stack_00000004 = in_stack_00000000;
-      }
-      temp_v1 = 0;
-      if (in_stack_00000000 != 0) {
-        temp_v1 = unaff_r6;
-      }
-      return temp_v1;
-    }
-  }
-  puVar2 = (unsigned int *)FUN_002c6644();
-  *puVar2 = 4;
-  return -1;
+/* irregular: 1 native warning(s); review required */
+  FUN_0010a714(*(unsigned int *)(param_1 * 4 + 0x44d0c8) & 0xff);
+  return;
 }

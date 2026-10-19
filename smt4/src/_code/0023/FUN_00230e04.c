@@ -4,14 +4,14 @@
 
 extern int FUN_002973ec(void);
 extern unsigned int FUN_002ae3c4(unsigned int);
-extern int FUN_002b45e8(unsigned int);
+/* Supplied declaration required: FUN_002b45e8. */
 /* Supplied declaration required: FUN_002b4670. */
 
 
 int FUN_00230e04(unsigned short *param_1)
 
 {
-/* irregular: 1 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   unsigned int temp_v0;
   int temp_v1;
   int temp_v2;
@@ -35,10 +35,10 @@ int FUN_00230e04(unsigned short *param_1)
   case 6:
   case 7:
   case 8:
-    temp_v1 = FUN_002b45e8(temp_v3);
+    FUN_002b45e8();
     temp_v2 = 99999999;
-    if (temp_v1 != 0) {
-      temp_v2 = *(int *)(temp_v1 + 0x9c);
+    if (temp_v3 != 0) {
+      temp_v2 = *(int *)(temp_v3 + 0x9c);
     }
   }
   if ((param_1[1] & 2) != 0) {

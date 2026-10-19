@@ -13,22 +13,24 @@ typedef struct {
 /* Supplied declaration required: FUN_002a6100. */
 extern unsigned int FUN_002a7bc0(void);
 /* Supplied declaration required: FUN_002bfe28. */
-extern int FUN_002c5300(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c5300. */
 /* Supplied declaration required: FUN_0034c4a0. */
 
 
 void FUN_0034c338(int *param_1,int param_2,unsigned int param_3)
 
 {
-/* irregular: 5 native warning(s); review required */
+/* irregular: 6 native warning(s); review required */
   int temp_v0;
   unsigned int temp_v1;
   int temp_v2;
   
   param_1[7] = param_2;
-  temp_v0 = FUN_002c5300(0x100,0x100,0,0xa0,1);
+  temp_v0 = 0x100;
+  FUN_002c5300(0x100,0x100,0,0xa0,1);
   param_1[1] = temp_v0;
-  temp_v0 = FUN_002c5300(0x100,0x100,0,0x88,1);
+  temp_v0 = 0x100;
+  FUN_002c5300(0x100,0x100,0,0x88,1);
   temp_v2 = 0;
   param_1[6] = temp_v0;
   do {

@@ -24,7 +24,7 @@ extern unsigned int FUN_0029c1fc(void);
 extern int FUN_002b47f4(unsigned int);
 /* Supplied declaration required: FUN_002b9024. */
 extern unsigned int FUN_002bce30(unsigned short, unsigned int);
-extern unsigned int FUN_002bd06c(unsigned short);
+/* Supplied declaration required: FUN_002bd06c. */
 extern int FUN_002bf244(void);
 /* Supplied declaration required: FUN_002bf694. */
 /* Supplied declaration required: FUN_002bff38. */
@@ -38,7 +38,7 @@ extern int FUN_002c09f4(unsigned int);
 unsigned int scrComm_Npc_SpawnRandomInRange(void)
 
 {
-/* irregular: 15 native warning(s); review required */
+/* irregular: 16 native warning(s); review required */
   unsigned short temp_v0;
   int temp_v1;
   unsigned int temp_v2;
@@ -115,9 +115,10 @@ unsigned int scrComm_Npc_SpawnRandomInRange(void)
     FUN_002b9024(temp_v0);
     FUN_002c4938(temp_v8,0x80);
     FUN_002c4938(temp_v9,0x80);
-    temp_v0 = FUN_002542bc(1);
-    temp_v2 = FUN_002bd06c(temp_v0);
-    FUN_002bf694(temp_v8,temp_v2);
+    temp_v5 = FUN_002542bc(1);
+    temp_v5 = temp_v5 & 0xffff;
+    FUN_002bd06c(temp_v5);
+    FUN_002bf694(temp_v8,temp_v5);
     temp_v0 = FUN_002542bc(1);
     temp_v2 = FUN_002bce30(temp_v0,1);
     FUN_002bf694(temp_v9,temp_v2);

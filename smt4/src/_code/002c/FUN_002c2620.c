@@ -1,46 +1,69 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c2620` (_code @ 0x2c2620, 0x108 bytes) from smt4_v1.2.0.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c2620` (_code @ 0x2c2620, 0x100 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
-/* Unsupported intrinsic, declaration required: coprocessor_movefromRt (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: coprocessor_function (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
+typedef int romwright_code();
+extern romwright_code *DAT_0044e330; /* 0x44e330 */
+extern int DAT_004c63b4; /* 0x4c63b4 */
 
 
-void FUN_002c2620(void)
+void FUN_002c2620(unsigned int param_1)
 
 {
-/* irregular: irregular input(s): in_cr0, in_cr12, in_s0, in_s1, in_s2, in_s3, in_s4, in_s5; 7 native warning(s); review required */
   int temp_v0;
-  unsigned int in_cr0;
-  unsigned int in_cr12;
-  float in_s0;
-  float in_s1;
-  float in_s2;
-  float temp_v1;
-  float temp_v2;
-  float in_s3;
-  float in_s4;
-  float in_s5;
+  unsigned int *puVar2;
+  unsigned int *puVar3;
+  unsigned int temp_v1;
+  unsigned int *puVar5;
   
-  do {
-    in_s1 = in_s1 - in_s1 * in_s3;
-    temp_v0 = coprocessor_movefromRt(10,5,0,in_cr12,in_cr0);
-    coprocessor_function(0xc,1,0,in_cr0,in_cr0,in_cr0);
-    if (in_s2 < in_s5) {
-      in_s2 = in_s1;
+  temp_v0 = (param_1 & 0x1f) * 4;
+  puVar3 = *(unsigned int **)(temp_v0 + 0x4c6334);
+  if (puVar3 != (unsigned int *)0x0) {
+    do {
+      temp_v1 = *puVar3;
+      if (temp_v1 != param_1) {
+        puVar3 = (unsigned int *)puVar3[6];
+      }
+    } while (temp_v1 != param_1 && puVar3 != (unsigned int *)0x0);
+  }
+  if ((param_1 != 0) && (puVar3 == (unsigned int *)0x0)) {
+    if (DAT_0044e330 == (romwright_code *)0x0) {
+      puVar3 = (unsigned int *)0x0;
     }
-    VectorFloatToUnsigned(in_s3 + in_s2 * in_s4,3);
-    temp_v1 = *(float *)(temp_v0 + 8);
-    temp_v2 = in_s0;
-    if ((temp_v1 <= in_s0) && (temp_v2 = temp_v1, temp_v1 < in_s1)) {
-      temp_v2 = in_s1;
+    else {
+      puVar3 = (unsigned int *)(*DAT_0044e330)(0x10000,0x100,0,0x1c);
     }
-    in_s5 = in_s3 + temp_v2 * in_s4;
-    VectorFloatToUnsigned(in_s5,3);
-    in_s2 = *(float *)(temp_v0 + 0xc);
-    if ((in_s2 <= in_s0) && (in_s2 < in_s1)) {
-      in_s0 = in_s1;
+    puVar3[1] = 0;
+    puVar3[2] = 0;
+    puVar3[3] = 0;
+    puVar3[4] = 0;
+    puVar3[5] = 0;
+    puVar3[6] = 0;
+    *puVar3 = param_1;
+    puVar5 = *(unsigned int **)(temp_v0 + 0x4c6334);
+    if (puVar5 == (unsigned int *)0x0) {
+      *(unsigned int **)(temp_v0 + 0x4c6334) = puVar3;
     }
-  } while( 1 );
+    else if (param_1 < *puVar5) {
+      puVar3[6] = (unsigned int)puVar5;
+      *(unsigned int **)(temp_v0 + 0x4c6334) = puVar3;
+    }
+    else {
+      for (puVar2 = (unsigned int *)puVar5[6]; puVar2 != (unsigned int *)0x0; puVar2 = (unsigned int *)puVar2[6]) {
+        if (param_1 < *puVar2) {
+          puVar5[6] = (unsigned int)puVar3;
+          puVar3[6] = (unsigned int)puVar2;
+          if (puVar2 != (unsigned int *)0x0) {
+            *(unsigned int **)(DAT_004c63b4 * 4 + 0x4c63b8) = puVar3;
+            return;
+          }
+          break;
+        }
+        puVar5 = puVar2;
+      }
+      puVar5[6] = (unsigned int)puVar3;
+    }
+  }
+  *(unsigned int **)(DAT_004c63b4 * 4 + 0x4c63b8) = puVar3;
+  return;
 }

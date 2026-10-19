@@ -1,17 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b71d0` (_code @ 0x2b71d0, 0x4c bytes) from smt4_v1.2.0.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b71d0` (_code @ 0x2b71d0, 0x44 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
-/* Supplied declaration required: FUN_002c08f0. */
+extern int *FUN_002c08f0(void);
 
 
-/* WARNING: Control flow encountered bad instruction data */
-
-void FUN_002b71d0(void)
+void FUN_002b71d0(unsigned int param_1,int param_2)
 
 {
-/* irregular: 3 native warning(s); review required */
-  FUN_002c08f0();
-                    /* WARNING: Bad instruction - Truncating control flow here */
-  halt_baddata();
+  int *piVar1;
+  int temp_v0;
+  unsigned char temp_v1;
+  
+  piVar1 = (int *)FUN_002c08f0();
+  if (param_2 != 0) {
+    piVar1[8] = 0x3f800000;
+  }
+  else {
+    piVar1[8] = 0x3f000000;
+  }
+  temp_v0 = *piVar1;
+  temp_v1 = temp_v0 == 0xfc97 || temp_v0 == 0xfc96;
+  if (temp_v0 != 0xfc97 && temp_v0 != 0xfc96) {
+    temp_v1 = temp_v0 == 0xfc95;
+  }
+  if (temp_v1) {
+    piVar1[8] = 0x3f800000;
+  }
+  return;
 }

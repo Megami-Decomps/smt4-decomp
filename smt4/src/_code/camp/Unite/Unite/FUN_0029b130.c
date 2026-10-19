@@ -45,22 +45,22 @@ extern int FUN_0029903c(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002b9024. */
 /* Supplied declaration required: FUN_002c415c. */
 /* Supplied declaration required: FUN_002c4938. */
-extern int FUN_002c5300(unsigned int, unsigned int, unsigned int, int, unsigned int);
+/* Supplied declaration required: FUN_002c5300. */
 /* Supplied declaration required: rt_memcpy. */
 
 
 void FUN_0029b130(int param_1,int param_2,int param_3,unsigned short *param_4)
 
 {
-/* irregular: 2 goto(s); 15 native warning(s); review required */
+/* irregular: 2 goto(s); 16 native warning(s); review required */
   short temp_v0;
-  unsigned int temp_v1;
+  int temp_v1;
   int temp_v2;
   unsigned int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
+  unsigned int temp_v4;
+  int temp_v5;
   unsigned int temp_v6;
-  int temp_v7;
+  unsigned int temp_v7;
   unsigned short *puVar9;
   int temp_v8 [9];
   int temp_v9;
@@ -91,54 +91,60 @@ void FUN_0029b130(int param_1,int param_2,int param_3,unsigned short *param_4)
   temp_v20 = 0;
   temp_v21 = '\0';
   FUN_002c4938(aiStack_80,0x58);
-  temp_v6 = 0;
+  temp_v7 = 0;
   if (param_3 != 0) {
-    temp_v6 = (*(unsigned int *)(param_3 + 4) & 0x1ffff) >> 2;
+    temp_v7 = (*(unsigned int *)(param_3 + 4) & 0x1ffff) >> 2;
   }
   else if (param_4 != (unsigned short *)0x0) {
-    temp_v6 = (unsigned int)*param_4;
+    temp_v7 = (unsigned int)*param_4;
   }
   temp_v9 = param_2 << 1;
-  temp_v11 = FUN_002c5300(0x100,0x100,0,temp_v9,1);
-  temp_v13 = FUN_002c5300(0x100,0x100,0,temp_v9,1);
-  temp_v19 = FUN_002c5300(0x100,0x100,0,temp_v9,1);
+  temp_v1 = 0x100;
+  FUN_002c5300(0x100,0x100,0,temp_v9,1);
+  temp_v2 = 0x100;
+  temp_v11 = temp_v1;
+  FUN_002c5300(0x100,0x100,0,temp_v9,1);
+  temp_v1 = 0x100;
+  temp_v13 = temp_v2;
+  FUN_002c5300(0x100,0x100,0,temp_v9,1);
+  temp_v19 = temp_v1;
   FUN_002b9024();
   temp_v8[0] = 0;
   temp_v8[1] = 0;
-  temp_v7 = 0;
+  temp_v1 = 0;
   temp_v8[2] = 0;
   temp_v8[3] = 0;
   temp_v8[4] = 0;
   temp_v8[5] = 0;
   temp_v8[6] = 0;
   do {
-    temp_v1 = (unsigned int)*(unsigned short *)(temp_v6 + temp_v7 * 2 + 0x3c);
-    if (temp_v1 != 0) {
+    temp_v3 = (unsigned int)*(unsigned short *)(temp_v7 + temp_v1 * 2 + 0x3c);
+    if (temp_v3 != 0) {
       FUN_0026a69c();
-      temp_v8[temp_v1] = temp_v8[temp_v1] + 1;
+      temp_v8[temp_v3] = temp_v8[temp_v3] + 1;
     }
-    temp_v7 = temp_v7 + 1;
-  } while (temp_v7 < 8);
+    temp_v1 = temp_v1 + 1;
+  } while (temp_v1 < 8);
   temp_v2 = 1;
-  temp_v7 = temp_v8[0];
+  temp_v1 = temp_v8[0];
   do {
-    if (temp_v7 < temp_v8[temp_v2]) {
+    if (temp_v1 < temp_v8[temp_v2]) {
       temp_v21 = (char)temp_v2;
-      temp_v7 = temp_v8[temp_v2];
+      temp_v1 = temp_v8[temp_v2];
     }
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 7);
-  temp_v7 = 0;
+  temp_v1 = 0;
   if (temp_v21 == '\x06') {
     temp_v21 = '\0';
   }
   if (0 < param_2) {
     do {
-      puVar9 = (unsigned short *)(param_1 + temp_v7 * 2);
+      puVar9 = (unsigned short *)(param_1 + temp_v1 * 2);
       temp_v2 = 0;
-      temp_v1 = (unsigned int)*puVar9;
+      temp_v3 = (unsigned int)*puVar9;
       do {
-        if (*(unsigned short *)(temp_v6 + temp_v2 * 4 + 0x4e) == temp_v1) {
+        if (*(unsigned short *)(temp_v7 + temp_v2 * 4 + 0x4e) == temp_v3) {
           *(unsigned short *)(temp_v19 + temp_v20 * 2) = *puVar9;
           temp_v20 = temp_v20 + 1;
           goto LAB_0029b3f4;
@@ -146,9 +152,9 @@ void FUN_0029b130(int param_1,int param_2,int param_3,unsigned short *param_4)
         temp_v2 = temp_v2 + 1;
       } while (temp_v2 < 8);
       FUN_00283e48();
-      if ((temp_v1 != 0) && (temp_v1 = *(unsigned int *)(temp_v1 + 0x38), (temp_v1 & 0x7ff) >> 6 == 5)) {
-        temp_v3 = (temp_v1 & 0xfffff) >> 0x10;
-        switch(temp_v3) {
+      if ((temp_v3 != 0) && (temp_v3 = *(unsigned int *)(temp_v3 + 0x38), (temp_v3 & 0x7ff) >> 6 == 5)) {
+        temp_v4 = (temp_v3 & 0xfffff) >> 0x10;
+        switch(temp_v4) {
         default:
           *(unsigned short *)(temp_v11 + temp_v12 * 2) = *puVar9;
           temp_v12 = temp_v12 + 1;
@@ -157,20 +163,20 @@ void FUN_0029b130(int param_1,int param_2,int param_3,unsigned short *param_4)
         case 2:
         case 3:
         case 4:
-          temp_v5 = 0;
-          if (temp_v3 == 1) {
-            temp_v5 = 5;
+          temp_v6 = 0;
+          if (temp_v4 == 1) {
+            temp_v6 = 5;
           }
-          else if (temp_v3 == 2) {
-            temp_v5 = 1;
+          else if (temp_v4 == 2) {
+            temp_v6 = 1;
           }
-          else if (temp_v3 == 3) {
-            temp_v5 = 3;
+          else if (temp_v4 == 3) {
+            temp_v6 = 3;
           }
-          else if (temp_v3 == 4) {
-            temp_v5 = 4;
+          else if (temp_v4 == 4) {
+            temp_v6 = 4;
           }
-          temp_v2 = FUN_0029903c(*(unsigned short *)(temp_v6 + ((temp_v1 & 0xf800) >> 10) + 0x6c) >> 10,temp_v5);
+          temp_v2 = FUN_0029903c(*(unsigned short *)(temp_v7 + ((temp_v3 & 0xf800) >> 10) + 0x6c) >> 10,temp_v6);
           if (temp_v2 != 0) {
             *(unsigned short *)(temp_v11 + temp_v12 * 2) = *puVar9;
             temp_v12 = temp_v12 + 1;
@@ -190,46 +196,50 @@ void FUN_0029b130(int param_1,int param_2,int param_3,unsigned short *param_4)
         temp_v12 = temp_v12 + 1;
       }
 LAB_0029b3f4:
-      temp_v7 = temp_v7 + 1;
-    } while (temp_v7 < param_2);
+      temp_v1 = temp_v1 + 1;
+    } while (temp_v1 < param_2);
   }
   FUN_002b7bca(temp_v13,temp_v14,2,FUN_002c6ce0);
   FUN_002b7bca(temp_v19,temp_v20,2,FUN_002dcaa8);
-  temp_v16 = FUN_00205568(0,temp_v6,param_3,param_4);
-  temp_v15 = FUN_002c5300(0x100,0x100,0,temp_v16 << 1,1);
-  FUN_00205568(temp_v15,temp_v6,param_3,param_4);
-  temp_v7 = 0;
-  if (temp_v7 < temp_v16) {
+  temp_v16 = FUN_00205568(0,temp_v7,param_3,param_4);
+  temp_v1 = 0x100;
+  FUN_002c5300(0x100,0x100,0,temp_v16 << 1,1);
+  temp_v15 = temp_v1;
+  FUN_00205568();
+  temp_v1 = 0;
+  if (0 < temp_v16) {
     do {
-      temp_v1 = (unsigned int)*(unsigned short *)(temp_v15 + temp_v7 * 2);
+      temp_v3 = (unsigned int)*(unsigned short *)(temp_v15 + temp_v1 * 2);
       FUN_0029e974();
-      temp_v7 = temp_v7 + 1;
-      aiStack_80[*(unsigned char *)(temp_v1 + 2)] = aiStack_80[*(unsigned char *)(temp_v1 + 2)] + 1;
-    } while (temp_v7 < temp_v16);
+      temp_v1 = temp_v1 + 1;
+      aiStack_80[*(unsigned char *)(temp_v3 + 2)] = aiStack_80[*(unsigned char *)(temp_v3 + 2)] + 1;
+    } while (temp_v1 < temp_v16);
   }
-  temp_v17 = FUN_002c5300(0x100,0x100,0,temp_v9,1);
+  temp_v1 = 0x100;
+  FUN_002c5300(0x100,0x100,0,temp_v9,1);
   temp_v18 = 0;
-  temp_v7 = 0;
-  if (temp_v7 < temp_v14) {
+  temp_v2 = 0;
+  temp_v17 = temp_v1;
+  if (0 < temp_v14) {
     do {
-      temp_v1 = (unsigned int)*(unsigned short *)(temp_v13 + temp_v7 * 2);
-      if (temp_v1 != 0) {
+      temp_v3 = (unsigned int)*(unsigned short *)(temp_v13 + temp_v2 * 2);
+      if (temp_v3 != 0) {
         FUN_00283e48();
-        temp_v2 = 0;
+        temp_v1 = 0;
         do {
-          temp_v3 = (unsigned int)*(unsigned short *)(temp_v6 + temp_v2 * 2 + 0x3c);
-          if (((temp_v3 != 0) && (FUN_002ae164(), temp_v3 != 0)) &&
-             (temp_v4 = FUN_0026a604(temp_v1), temp_v4 != 0)) {
-            *(unsigned short *)(temp_v17 + temp_v18 * 2) = *(unsigned short *)(temp_v13 + temp_v7 * 2);
+          temp_v4 = (unsigned int)*(unsigned short *)(temp_v7 + temp_v1 * 2 + 0x3c);
+          if (((temp_v4 != 0) && (FUN_002ae164(), temp_v4 != 0)) &&
+             (temp_v5 = FUN_0026a604(temp_v3), temp_v5 != 0)) {
+            *(unsigned short *)(temp_v17 + temp_v18 * 2) = *(unsigned short *)(temp_v13 + temp_v2 * 2);
             temp_v18 = temp_v18 + 1;
-            *(unsigned short *)(temp_v13 + temp_v7 * 2) = 0;
+            *(unsigned short *)(temp_v13 + temp_v2 * 2) = 0;
             goto LAB_0029b63c;
           }
-          temp_v2 = temp_v2 + 1;
-        } while (temp_v2 < 8);
+          temp_v1 = temp_v1 + 1;
+        } while (temp_v1 < 8);
       }
-      temp_v7 = temp_v7 + 1;
-    } while (temp_v7 < temp_v14);
+      temp_v2 = temp_v2 + 1;
+    } while (temp_v2 < temp_v14);
   }
 LAB_0029b63c:
   FUN_001df8d4(&temp_v10);
@@ -238,31 +248,31 @@ LAB_0029b63c:
   FUN_001df8d4(&temp_v10);
   FUN_001cffd0(&temp_v10);
   do {
-    temp_v7 = FUN_001d01f8(&temp_v10);
-  } while (temp_v7 != 0);
-  temp_v7 = 0;
-  if (temp_v7 < temp_v14) {
+    temp_v1 = FUN_001d01f8(&temp_v10);
+  } while (temp_v1 != 0);
+  temp_v1 = 0;
+  if (0 < temp_v14) {
     do {
-      temp_v0 = *(short *)(temp_v13 + temp_v7 * 2);
+      temp_v0 = *(short *)(temp_v13 + temp_v1 * 2);
       if (temp_v0 != 0) {
         *(short *)(temp_v17 + temp_v18 * 2) = temp_v0;
         temp_v18 = temp_v18 + 1;
-        *(unsigned short *)(temp_v13 + temp_v7 * 2) = 0;
+        *(unsigned short *)(temp_v13 + temp_v1 * 2) = 0;
       }
-      temp_v7 = temp_v7 + 1;
-    } while (temp_v7 < temp_v14);
+      temp_v1 = temp_v1 + 1;
+    } while (temp_v1 < temp_v14);
   }
-  temp_v7 = 0;
-  if (temp_v7 < temp_v20) {
+  temp_v1 = 0;
+  if (temp_v1 < temp_v20) {
     do {
-      temp_v0 = *(short *)(temp_v19 + temp_v7 * 2);
+      temp_v0 = *(short *)(temp_v19 + temp_v1 * 2);
       if (temp_v0 != 0) {
         *(short *)(temp_v17 + temp_v18 * 2) = temp_v0;
         temp_v18 = temp_v18 + 1;
-        *(unsigned short *)(temp_v19 + temp_v7 * 2) = 0;
+        *(unsigned short *)(temp_v19 + temp_v1 * 2) = 0;
       }
-      temp_v7 = temp_v7 + 1;
-    } while (temp_v7 < temp_v20);
+      temp_v1 = temp_v1 + 1;
+    } while (temp_v1 < temp_v20);
   }
   rt_memcpy(param_1,temp_v17,temp_v9);
   temp_v10 = &DAT_004207e8;

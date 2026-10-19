@@ -26,7 +26,8 @@ unsigned int * FUN_00207498(int param_1,int param_2,int param_3,unsigned short p
   unsigned int temp_v2;
   unsigned int in_s0;
   
-  puVar1 = (unsigned int *)FUN_002c32a0(0x10000,0x100,0,0x5c,0x10,1);
+  puVar1 = (unsigned int *)0x10000;
+  FUN_002c32a0(0x10000,0x100,0,0x5c,0x10,1);
   temp_v0 = 0x7e8;
   FUN_002c222c(0x7e8,param_1);
   if (temp_v0 == 0) {
@@ -37,7 +38,8 @@ unsigned int * FUN_00207498(int param_1,int param_2,int param_3,unsigned short p
   }
   FUN_002693b4(temp_v2,0x25,param_3 * param_1 * 3,param_2 * param_1);
   *puVar1 = temp_v2;
-  temp_v2 = FUN_002c32a0(0x10000,0x100,0,param_1 << 4,0x10,1);
+  temp_v2 = 0x10000;
+  FUN_002c32a0(0x10000,0x100,0,param_1 << 4,0x10,1);
   if (0 < param_1) {
     in_s0 = 0x3f800000;
   }

@@ -22,7 +22,7 @@ extern unsigned char LAB_003f6ff4; /* 0x3f6ff4 */
 /* Supplied declaration required: FUN_002bcc60. */
 /* Supplied declaration required: FUN_002bcd44. */
 /* Supplied declaration required: FUN_002c222c. */
-extern unsigned int FUN_002c32a0(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c32a0. */
 /* Supplied declaration required: FUN_002c38fc. */
 /* Supplied declaration required: FUN_002c40f8. */
 /* Supplied declaration required: FUN_002c526c. */
@@ -33,7 +33,7 @@ extern unsigned int FUN_002c32a0(unsigned int, unsigned int, unsigned int, unsig
 void FUN_003c8058(int param_1)
 
 {
-/* irregular: 8 native warning(s); review required */
+/* irregular: 9 native warning(s); review required */
   unsigned int temp_v0;
   unsigned int *puVar2;
   int *piVar3;
@@ -46,7 +46,8 @@ void FUN_003c8058(int param_1)
   
   FUN_002c38fc(param_1 + 0xb8);
   if (*(int *)(param_1 + 0xac) == 0) {
-    temp_v0 = FUN_002c32a0(0x100,0x100,0,0x1000,0x1000,1);
+    temp_v0 = 0x100;
+    FUN_002c32a0(0x100,0x100,0,0x1000,0x1000,1);
     *(unsigned int *)(param_1 + 0xac) = temp_v0;
   }
   if (*(int *)(param_1 + 0xb0) == 0) {

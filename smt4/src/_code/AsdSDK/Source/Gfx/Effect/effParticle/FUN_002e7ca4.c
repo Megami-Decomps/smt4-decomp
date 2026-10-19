@@ -15,14 +15,14 @@ extern unsigned int FUN_00256fdc(unsigned int);
 /* Supplied declaration required: FUN_0025715c. */
 /* Supplied declaration required: FUN_002c2264. */
 /* Supplied declaration required: FUN_002c2318. */
-extern unsigned int FUN_002c32a0(unsigned int, unsigned int, unsigned int, int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c32a0. */
 /* Supplied declaration required: FUN_002c415c. */
 
 
 void FUN_002e7ca4(int param_1,int param_2)
 
 {
-/* irregular: 8 native warning(s); review required */
+/* irregular: 9 native warning(s); review required */
   unsigned int temp_v0;
   unsigned int temp_v1;
   unsigned int temp_v2;
@@ -62,7 +62,8 @@ void FUN_002e7ca4(int param_1,int param_2)
     if (temp_v2 << 2 == 0) {
       return;
     }
-    temp_v0 = FUN_002c32a0(0x10000,0x100,0,temp_v2 << 2,0x10,1);
+    temp_v0 = 0x10000;
+    FUN_002c32a0(0x10000,0x100,0,temp_v2 << 2,0x10,1);
     *(unsigned int *)(param_1 + 0x38) = temp_v0;
     temp_v1 = 0;
     *(unsigned int *)(param_1 + 0x34) = temp_v0;
@@ -95,7 +96,8 @@ void FUN_002e7ca4(int param_1,int param_2)
     if (temp_v2 << 2 == 0) {
       return;
     }
-    temp_v0 = FUN_002c32a0(0x10000,0x100,0,temp_v2 << 2,0x10,1);
+    temp_v0 = 0x10000;
+    FUN_002c32a0(0x10000,0x100,0,temp_v2 << 2,0x10,1);
     *(unsigned int *)(param_1 + 0x40) = temp_v0;
     temp_v1 = 0;
     *(unsigned int *)(param_1 + 0x3c) = temp_v0;

@@ -12,59 +12,59 @@ typedef struct {
 /* Supplied declaration required: FUN_0029d770. */
 extern int FUN_002a8764(void);
 /* Supplied declaration required: FUN_002b9024. */
-extern unsigned int FUN_002bd06c(unsigned short);
+/* Supplied declaration required: FUN_002bd06c. */
 
 
 void FUN_0022e17c(unsigned short *param_1,unsigned short *param_2,int param_3)
 
 {
-/* irregular: 1 goto(s); 2 native warning(s); review required */
+/* irregular: 1 goto(s); 3 native warning(s); review required */
   unsigned short *puVar1;
   unsigned int temp_v0;
   int temp_v1;
   int temp_v2;
   int temp_v3;
-  short temp_v4;
-  unsigned short temp_v5;
-  unsigned char temp_v6 [14];
+  unsigned short temp_v4;
+  unsigned char temp_v5 [14];
+  unsigned short temp_v6;
   unsigned short temp_v7;
-  unsigned short temp_v8;
-  unsigned char temp_v9;
+  unsigned char temp_v8;
   
   puVar1 = param_2;
   FUN_002b9024();
   *param_1 = *puVar1;
-  *(unsigned char *)(param_1 + 1) = *(unsigned char *)(puVar1 + 1);
-  *(unsigned char *)((int)param_1 + 3) = *(unsigned char *)(puVar1 + 2);
+  *(char *)(param_1 + 1) = (char)puVar1[1];
+  *(char *)((int)param_1 + 3) = (char)puVar1[2];
   *(unsigned char *)(param_1 + 2) = *(unsigned char *)((int)puVar1 + 5);
-  temp_v0 = FUN_002bd06c(*puVar1);
+  temp_v0 = (unsigned int)*puVar1;
+  FUN_002bd06c();
   *(unsigned int *)(param_1 + 0xe) = temp_v0;
   param_1[3] = 0;
   if (param_3 == 0) {
-    FUN_0029d770(param_2,temp_v6);
-    *(unsigned char *)(param_1 + 6) = temp_v9;
-    param_1[7] = temp_v7;
-    param_1[9] = temp_v8;
-    FUN_0029d770(param_2,temp_v6);
-    *(unsigned char *)((int)param_1 + 0xd) = temp_v9;
-    param_1[8] = temp_v7;
-    param_1[10] = temp_v8;
+    FUN_0029d770(param_2,temp_v5);
+    *(unsigned char *)(param_1 + 6) = temp_v8;
+    param_1[7] = temp_v6;
+    param_1[9] = temp_v7;
+    FUN_0029d770(param_2,temp_v5);
+    *(unsigned char *)((int)param_1 + 0xd) = temp_v8;
+    param_1[8] = temp_v6;
+    param_1[10] = temp_v7;
     return;
   }
-  FUN_0029d770(param_2,temp_v6);
-  *(unsigned char *)(param_1 + 6) = temp_v9;
-  param_1[7] = temp_v7;
-  param_1[9] = temp_v8;
+  FUN_0029d770(param_2,temp_v5);
+  *(unsigned char *)(param_1 + 6) = temp_v8;
+  param_1[7] = temp_v6;
+  param_1[9] = temp_v7;
   temp_v1 = FUN_002a8764();
-  temp_v5 = 0;
-  if (temp_v5 < *(unsigned char *)(temp_v1 + 0x910b)) {
+  temp_v0 = 0;
+  if (temp_v0 < *(unsigned char *)(temp_v1 + 0x910b)) {
     do {
-      temp_v2 = (int)*(char *)(temp_v1 + temp_v5 + 0x90f0);
+      temp_v2 = (int)*(char *)(temp_v1 + temp_v0 + 0x90f0);
       if ((-1 < temp_v2) &&
          (temp_v2 = temp_v1 + temp_v2 * 0x604, temp_v3 = temp_v2 + 0x90,
          (unsigned short *)(unsigned int)*(unsigned short *)(temp_v2 + 0xd6) == param_2)) goto LAB_0022e258;
-      temp_v5 = temp_v5 + 1;
-    } while (temp_v5 < *(unsigned char *)(temp_v1 + 0x910b));
+      temp_v0 = (temp_v0 + 1) & 0xffff;
+    } while (temp_v0 < *(unsigned char *)(temp_v1 + 0x910b));
   }
   temp_v3 = 0;
 LAB_0022e258:
@@ -77,7 +77,7 @@ LAB_0022e258:
     temp_v1 = temp_v1 + 2;
     temp_v4 = param_1[3] + (unsigned short)*(unsigned char *)(temp_v2 + 0x8c);
     param_1[3] = temp_v4;
-    param_1[3] = temp_v4 + (unsigned short)*(unsigned char *)(temp_v2 + 0x8d);
+    param_1[3] = temp_v4 + *(unsigned char *)(temp_v2 + 0x8d);
   } while (temp_v1 < 0x500);
   return;
 }

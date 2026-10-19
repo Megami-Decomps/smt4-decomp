@@ -44,7 +44,7 @@ extern int FUN_0029e0f8(void);
 /* Supplied declaration required: FUN_0029ede8. */
 /* Supplied declaration required: FUN_002a0cc8. */
 /* Supplied declaration required: FUN_002b8838. */
-extern unsigned int FUN_002bd06c(unsigned short);
+/* Supplied declaration required: FUN_002bd06c. */
 /* Supplied declaration required: FUN_002bf694. */
 /* Supplied declaration required: FUN_002bf810. */
 extern int FUN_002bfde4(unsigned int);
@@ -56,7 +56,7 @@ extern int FUN_002bfde4(unsigned int);
 unsigned int FUN_001dbf34(int param_1)
 
 {
-/* irregular: 2 goto(s); 35 native warning(s); review required */
+/* irregular: 2 goto(s); 36 native warning(s); review required */
   short temp_v0;
   short temp_v1;
   int temp_v2;
@@ -74,8 +74,9 @@ unsigned int FUN_001dbf34(int param_1)
   piVar7 = (int *)(param_1 + 0xd38);
   switch(*(unsigned int *)(param_1 + 0xd38)) {
   case 0:
-    temp_v5 = FUN_002bd06c(*(unsigned short *)(temp_v3 + 0x46));
-    FUN_002bf694(temp_v8,temp_v5);
+    temp_v4 = (unsigned int)*(unsigned short *)(temp_v3 + 0x46);
+    FUN_002bd06c(temp_v4);
+    FUN_002bf694(temp_v8,temp_v4);
     FUN_00295660(0,temp_v8);
     FUN_00296f4c(*(unsigned int *)(param_1 + 0xd04),0x16);
     temp_v2 = FUN_002955fc();
@@ -109,8 +110,9 @@ unsigned int FUN_001dbf34(int param_1)
     *piVar7 = *(int *)(param_1 + 0xd38) + 1;
     break;
   case 4:
-    temp_v5 = FUN_002bd06c(*(unsigned short *)(temp_v3 + 0x46));
-    FUN_002bf694(temp_v8,temp_v5);
+    temp_v4 = (unsigned int)*(unsigned short *)(temp_v3 + 0x46);
+    FUN_002bd06c(temp_v4);
+    FUN_002bf694(temp_v8,temp_v4);
     FUN_00295660(0,temp_v8);
     temp_v2 = (int)*(short *)(param_1 + 0xd4);
     if (temp_v2 >= 1) {

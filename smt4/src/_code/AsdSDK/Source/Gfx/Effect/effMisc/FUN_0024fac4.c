@@ -16,14 +16,14 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-extern unsigned int *FUN_002c32a0(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c32a0. */
 /* Supplied declaration required: FUN_002c3944. */
 
 
 unsigned int * FUN_0024fac4(fn_0024fac4_arg0 *param_1)
 
 {
-/* irregular: 1 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   unsigned int *puVar1;
   int temp_v0;
   unsigned int temp_v1;
@@ -36,8 +36,9 @@ unsigned int * FUN_0024fac4(fn_0024fac4_arg0 *param_1)
   if (temp_v1 >= 101) {
     temp_v1 = 100;
   }
-  puVar1 = (unsigned int *)FUN_002c32a0(0x10000,0x100,0,0x38,0x10,1);
-  FUN_002c3944(puVar1,0x38);
+  puVar1 = (unsigned int *)0x10000;
+  FUN_002c32a0(0x10000,0x100,0,0x38,0x10,1);
+  FUN_002c3944();
   puVar1[1] = 0xffffffff;
   *puVar1 = temp_v1;
   puVar1[2] = 0x3f800000;

@@ -19,6 +19,7 @@ extern signed char DAT_004729b8; /* 0x4729b8 */
 extern int DAT_004729c0; /* 0x4729c0 */
 extern unsigned char DAT_004daf08; /* 0x4daf08 */
 extern unsigned char DAT_004dcf08; /* 0x4dcf08 */
+extern unsigned char DAT_004def18; /* 0x4def18 */
 extern unsigned char DAT_004def28; /* 0x4def28 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -166,7 +167,7 @@ LAB_00286e50:
                     temp_v2 = 0;
                     do {
                       if ((*(int *)(unaff_r11 + temp_v2 * 4) != 0) &&
-                         (*(unsigned short *)(temp_v2 * 2 + 0x4def18) == temp_v1)) {
+                         (*(unsigned short *)(&DAT_004def18 + temp_v2 * 2) == temp_v1)) {
                         temp_v2 = 0;
                         goto LAB_00286f80;
                       }
@@ -290,7 +291,8 @@ LAB_00286fe0:
   return;
   while (temp_v2 = temp_v2 + 1, temp_v2 < 8) {
 LAB_00286f80:
-    if ((*(int *)(unaff_r11 + temp_v2 * 4) != 0) && (*(unsigned short *)(temp_v2 * 2 + 0x4def18) == temp_v1)) {
+    if ((*(int *)(unaff_r11 + temp_v2 * 4) != 0) && (*(unsigned short *)(&DAT_004def18 + temp_v2 * 2) == temp_v1))
+    {
       temp_v3 = *(int *)(&DAT_004def28 + temp_v2 * 4);
       temp_v2 = 0;
       if (temp_v2 < temp_v3) {

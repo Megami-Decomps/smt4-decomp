@@ -32,14 +32,15 @@ extern unsigned int DAT_004d4358; /* 0x4d4358 */
 /* Supplied declaration required: FUN_001393e4. */
 /* Supplied declaration required: FUN_002c4938. */
 extern int *nn_fnd_UnitHeapTemplate_nn_os_LockPolicy_Object_nn_os_CriticalSection_Allocate(unsigned int *);
-extern int *nn_fs_ipc_FileSystem_OpenFileDirectly(unsigned int *, int *, unsigned int, unsigned int, unsigned int, unsigned int *, unsigned int, unsigned int, unsigned int *, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: nn_fs_ipc_FileSystem_OpenFileDirectly. */
 
 
-unsigned int FUN_002ad9e8(int *param_1,unsigned int *param_2,unsigned int param_3,unsigned int param_4,
-                 unsigned int param_5,unsigned int param_6,unsigned int param_7)
+unsigned int *
+FUN_002ad9e8(int *param_1,unsigned int *param_2,unsigned int param_3,unsigned int param_4,
+            unsigned int param_5,unsigned int param_6,unsigned int param_7)
 
 {
-/* irregular: irregular input(s): in_r12; 5 native warning(s); review required */
+/* irregular: irregular input(s): in_r12; 6 native warning(s); review required */
   int temp_v0;
   int *piVar2;
   int *piVar3;
@@ -63,7 +64,7 @@ unsigned int FUN_002ad9e8(int *param_1,unsigned int *param_2,unsigned int param_
   unsigned int uStack_2c;
   unsigned int uStack_28;
   
-  piVar4 = (int *)0x0;
+  piVar3 = (int *)0x0;
   temp_v10 = param_1;
   puStack_30 = param_2;
   uStack_2c = param_3;
@@ -83,51 +84,51 @@ unsigned int FUN_002ad9e8(int *param_1,unsigned int *param_2,unsigned int param_
       temp_v6 = 0;
       temp_v7 = 0;
       uStack_88 = DAT_0044e660;
+      piVar4 = &uStack_88;
       temp_v1 = param_4;
       temp_v2 = param_3;
       uStack_3c = param_3;
-      piVar2 = (int *)nn_fs_ipc_FileSystem_OpenFileDirectly
-                                ((unsigned int *)&uStack_88,temp_v3,0,0x2345678a,2,(unsigned int *)&temp_v8,0x10,2,(unsigned int *)&temp_v4,0x14,
-                                 1,0);
+      nn_fs_ipc_FileSystem_OpenFileDirectly
+                (piVar4,temp_v3,0,0x2345678a,2,&temp_v8,0x10,2,&temp_v4,0x14,1,0);
       temp_v0 = temp_v3[0];
-      if (-1 < (int)piVar2) {
-        piVar3 = (int *)nn_fnd_UnitHeapTemplate_nn_os_LockPolicy_Object_nn_os_CriticalSection_Allocate
+      if (-1 < (int)piVar4) {
+        piVar2 = (int *)nn_fnd_UnitHeapTemplate_nn_os_LockPolicy_Object_nn_os_CriticalSection_Allocate
                                   (&DAT_004d4358);
-        if (piVar3 != (int *)0x0) {
-          *piVar3 = (int)"扄5抄5兀=慬5";
-          piVar3[1] = temp_v0;
-          piVar2 = param_1;
-          FUN_00138f14(param_1,piVar3,temp_v2,temp_v1,param_5,param_6,param_7);
-          if ((int)piVar2 >= 0) {
-            piVar2 = (int *)0x0;
+        if (piVar2 != (int *)0x0) {
+          *piVar2 = (int)"扄5抄5兀=慬5";
+          piVar2[1] = temp_v0;
+          piVar4 = param_1;
+          FUN_00138f14(param_1,piVar2,temp_v2,temp_v1,param_5,param_6,param_7);
+          if ((int)piVar4 >= 0) {
+            piVar4 = (int *)0x0;
           }
           else {
-            (**(romwright_code **)(*piVar3 + 0x2c))(piVar3);
+            (**(romwright_code **)(*piVar2 + 0x2c))(piVar2);
           }
         }
         else {
           software_interrupt(0x23);
-          piVar2 = (int *)0xd8604659;
+          piVar4 = (int *)0xd8604659;
         }
       }
-      if (((unsigned int)piVar2 & 0x80000000) == 0) {
-        piVar2 = (int *)0x0;
-        piVar4 = param_1;
+      if (((unsigned int)piVar4 & 0x80000000) == 0) {
+        piVar4 = (int *)0x0;
+        piVar3 = param_1;
       }
       else {
         (**(romwright_code **)(*param_1 + 0x30))(param_1);
       }
-      if (-1 < (int)piVar2) {
-        *temp_v10 = (int)piVar4;
-        piVar2 = (int *)0x0;
+      if (-1 < (int)piVar4) {
+        *temp_v10 = (int)piVar3;
+        piVar4 = (int *)0x0;
       }
-      return (unsigned int)piVar2;
+      return (unsigned int *)piVar4;
     }
   }
-  piVar2 = (int *)0xd8604659;
-  if (-1 < (int)piVar2) {
-    *temp_v10 = (int)piVar4;
-    piVar2 = (int *)0x0;
+  piVar4 = (int *)0xd8604659;
+  if (-1 < (int)piVar4) {
+    *temp_v10 = (int)piVar3;
+    piVar4 = (int *)0x0;
   }
-  return (unsigned int)piVar2;
+  return (unsigned int *)piVar4;
 }

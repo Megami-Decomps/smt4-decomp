@@ -5,8 +5,9 @@
 typedef struct fn_0030ba10_arg1 fn_0030ba10_arg1;
 struct fn_0030ba10_arg1 {
     unsigned char pad_0x0[0x4];
-    undefined4 field_0x4; /* +0x4 */
-    unsigned char pad_0x8[0x8];
+    byte *field_0x4; /* +0x4 */
+    undefined4 field_0x8; /* +0x8 */
+    unsigned char pad_0xc[0x4];
     void *field_0x10; /* +0x10 */
     int field_0x14; /* +0x14 */
     undefined4 field_0x18; /* +0x18 */

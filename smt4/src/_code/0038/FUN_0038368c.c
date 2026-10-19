@@ -31,7 +31,7 @@ extern int FUN_00287704(unsigned char);
 /* Supplied declaration required: FUN_002b64a0. */
 /* Supplied declaration required: FUN_002b75ec. */
 /* Supplied declaration required: FUN_002ba12c. */
-extern unsigned int FUN_002bcf4c(void);
+/* Supplied declaration required: FUN_002bcf4c. */
 extern unsigned int FUN_002bd1fc(void);
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: FUN_002bed3c. */
@@ -45,7 +45,7 @@ extern unsigned int FUN_002bed98(unsigned int *);
 void FUN_0038368c(unsigned int *param_1)
 
 {
-/* irregular: irregular input(s): in_fpscr; 16 native warning(s); review required */
+/* irregular: irregular input(s): in_fpscr; 17 native warning(s); review required */
   int temp_v0;
   int temp_v1;
   int temp_v2;
@@ -261,9 +261,10 @@ void FUN_0038368c(unsigned int *param_1)
       temp_v8 = temp_v7;
       if (temp_v17 != -2) {
         if (temp_v17 != -1) {
-          if (*(short *)(temp_v26 + temp_v17 * 0x20 + 0x16) != 0) {
-            temp_v5 = FUN_002bcf4c();
-            FUN_002b64a0(temp_v21,temp_v5);
+          temp_v6 = (unsigned int)*(unsigned short *)(temp_v26 + temp_v17 * 0x20 + 0x16);
+          if (temp_v6 != 0) {
+            FUN_002bcf4c();
+            FUN_002b64a0(temp_v21,temp_v6);
           }
           else {
             FUN_002b64a0(temp_v21);

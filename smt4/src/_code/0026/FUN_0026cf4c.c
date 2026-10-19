@@ -36,7 +36,7 @@ extern int FUN_0029e02c(void);
 /* Supplied declaration required: FUN_0029ede8. */
 /* Supplied declaration required: FUN_0029ee6c. */
 extern unsigned char *FUN_002b066c(unsigned int);
-extern int FUN_002b45e8(unsigned short);
+/* Supplied declaration required: FUN_002b45e8. */
 extern unsigned short *FUN_002b63ac(void);
 extern int FUN_002b898c(void);
 /* Supplied declaration required: FUN_002be624. */
@@ -49,7 +49,7 @@ extern unsigned int FUN_002c0cec(unsigned int, unsigned int);
 void FUN_0026cf4c(void)
 
 {
-/* irregular: 17 native warning(s); review required */
+/* irregular: 18 native warning(s); review required */
   int temp_v0;
   char temp_v1;
   unsigned char temp_v2;
@@ -121,46 +121,47 @@ void FUN_0026cf4c(void)
       temp_v5 = DAT_0043da2c;
       if (temp_v3 != 0) {
         puVar13 = (unsigned short *)FUN_002b63ac();
-        temp_v6 = FUN_002b45e8(*puVar13);
-        if (temp_v6 == 0) {
+        temp_v7 = (unsigned int)*puVar13;
+        FUN_002b45e8();
+        if (temp_v7 == 0) {
           *(unsigned char *)(temp_v5 + 0x4cb) = 0;
         }
         else {
           *(unsigned char *)(temp_v5 + 0x55c) = 1;
           *(unsigned char *)(temp_v5 + 0x4cb) = 1;
-          temp_v2 = *(unsigned char *)(temp_v6 + 0x58);
+          temp_v2 = *(unsigned char *)(temp_v7 + 0x58);
           if ((temp_v2 & 0xf) == temp_v2 >> 4) {
             FUN_0029ede8(0x25,temp_v2 & 0xf,0xffffffff,0);
           }
           else {
             FUN_002907c4(&uStack_a8,temp_v2 & 0xf);
-            FUN_002907c4(temp_v14,*(unsigned char *)(temp_v6 + 0x58) >> 4);
+            FUN_002907c4(temp_v14,*(unsigned char *)(temp_v7 + 0x58) >> 4);
             FUN_002be624(temp_v15,&LAB_00317284,&uStack_a8,temp_v14);
             FUN_00295660(0x25,temp_v15);
           }
-          FUN_0024bda8(temp_v15,*(unsigned int *)(temp_v6 + 0x54) >> 0x14);
+          FUN_0024bda8(temp_v15,*(unsigned int *)(temp_v7 + 0x54) >> 0x14);
           FUN_00295660(0x26,temp_v15);
-          FUN_0024bc98(temp_v15,*(unsigned char *)(temp_v6 + 0x59));
+          FUN_0024bc98(temp_v15,*(unsigned char *)(temp_v7 + 0x59));
           FUN_00295660(0x27,temp_v15);
-          if (*(char *)(temp_v6 + 0x5b) == '\0') {
+          if (*(char *)(temp_v7 + 0x5b) == '\0') {
             FUN_002be624(temp_v15,&LAB_0031728c);
           }
-          if (*(char *)(temp_v6 + 0x5b) == '\x01') {
+          if (*(char *)(temp_v7 + 0x5b) == '\x01') {
             FUN_002be624(temp_v15,&LAB_00317298);
           }
-          if (*(char *)(temp_v6 + 0x5b) == '\x05') {
+          if (*(char *)(temp_v7 + 0x5b) == '\x05') {
             FUN_002be624(temp_v15,&LAB_003172a0);
           }
-          if (*(char *)(temp_v6 + 0x5b) == '\x06') {
+          if (*(char *)(temp_v7 + 0x5b) == '\x06') {
             FUN_002be624(temp_v15,&LAB_003172b0);
           }
-          if (*(char *)(temp_v6 + 0x5b) == '\a') {
+          if (*(char *)(temp_v7 + 0x5b) == '\a') {
             FUN_002be624(temp_v15,&LAB_003172bc);
           }
-          if (*(char *)(temp_v6 + 0x5b) == '\b') {
+          if (*(char *)(temp_v7 + 0x5b) == '\b') {
             FUN_002be624(temp_v15,&LAB_003172c8);
           }
-          if (*(char *)(temp_v6 + 0x5b) == '\t') {
+          if (*(char *)(temp_v7 + 0x5b) == '\t') {
             FUN_002be624(temp_v15,&LAB_003172d4);
           }
           FUN_00295660(0x28,temp_v15);

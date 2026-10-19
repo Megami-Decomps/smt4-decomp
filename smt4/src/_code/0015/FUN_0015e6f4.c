@@ -54,9 +54,10 @@ void FUN_0015e6f4(unsigned int *param_1,int param_2,unsigned int *param_3,unsign
   unsigned int temp_v8 [3];
   unsigned int uStack_44;
   unsigned int uStack_40;
-  unsigned char temp_v9 [20];
+  unsigned int temp_v9 [5];
   
   temp_v0 = param_2 + 0x331;
+  puVar3 = (unsigned int *)&temp_v2;
   temp_v1 = temp_v0;
   FUN_002aa568(temp_v0,param_3);
   if (temp_v1 != 0) {
@@ -65,7 +66,7 @@ void FUN_0015e6f4(unsigned int *param_1,int param_2,unsigned int *param_3,unsign
       *(unsigned char *)(param_2 + 0x330) = 0;
       if (temp_v1 < 0) {
         FUN_002a1130(temp_v8,0);
-        puVar3 = (unsigned int *)FUN_002baa40(&temp_v2,temp_v1);
+        FUN_002baa40(&temp_v2,temp_v1);
         temp_v6 = *puVar3;
         uStack_68 = puVar3[1];
         *param_1 = temp_v8[0];
@@ -86,7 +87,8 @@ void FUN_0015e6f4(unsigned int *param_1,int param_2,unsigned int *param_3,unsign
     uStack_7c = param_4;
     temp_v3 = param_5;
     FUN_0015e8c4(temp_v0,0xe5c,param_6,2);
-    puVar3 = (unsigned int *)FUN_002baa40(temp_v9,temp_v0);
+    puVar3 = temp_v9;
+    FUN_002baa40(puVar3,temp_v0);
     temp_v7 = *puVar3;
     uStack_54 = puVar3[1];
     temp_v1 = FUN_002a12d8((unsigned int *)&temp_v7);

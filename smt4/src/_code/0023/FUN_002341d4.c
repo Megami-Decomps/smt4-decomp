@@ -31,7 +31,7 @@ void FUN_002341d4(unsigned int *param_1,int param_2)
   int temp_v5;
   unsigned int temp_v6;
   unsigned char temp_v7 [32];
-  unsigned char temp_v8 [8];
+  unsigned int temp_v8 [2];
   int temp_v9;
   unsigned int uStack_14;
   
@@ -54,11 +54,13 @@ void FUN_002341d4(unsigned int *param_1,int param_2)
       if (-1 < temp_v0) {
         temp_v0 = param_2;
         FUN_002344d8(param_2,param_2 + 0x5b8,0x20,temp_v1);
-        puVar2 = (unsigned int *)FUN_002baa40(temp_v8,temp_v0);
+        puVar2 = temp_v8;
+        FUN_002baa40(puVar2,temp_v0);
         temp_v5 = *puVar2;
         temp_v6 = puVar2[1];
         FUN_002344d8(param_2,param_2 + 0x5f8,0x20,temp_v2);
-        puVar2 = (unsigned int *)FUN_002baa40(temp_v8,param_2);
+        puVar2 = temp_v8;
+        FUN_002baa40(puVar2,param_2);
         temp_v5 = *puVar2;
         temp_v6 = puVar2[1];
         FUN_002baa40(param_1,0);

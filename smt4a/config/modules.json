@@ -9,7 +9,7 @@
       "build_id": null,
       "buildable": true,
       "compiler": "unknown",
-      "functions": 15108,
+      "functions": 15106,
       "id": "_code",
       "language": "ARM:LE:32:v6",
       "mapped_sha256": "0b5338c4eace771ae809a06977a785ea4e00fd41c63e58d3f05fa6a255561bbe",

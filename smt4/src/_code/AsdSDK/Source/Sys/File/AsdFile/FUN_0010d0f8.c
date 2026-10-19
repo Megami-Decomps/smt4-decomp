@@ -25,42 +25,45 @@ extern unsigned int DAT_00465020; /* 0x465020 */
 /* Supplied declaration required: FUN_002bcc60. */
 /* Supplied declaration required: FUN_002bcd44. */
 /* Supplied declaration required: FUN_002c222c. */
-extern unsigned int FUN_002c32a0(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c32a0. */
 /* Supplied declaration required: FUN_002c526c. */
 
 
 void FUN_0010d0f8(void)
 
 {
-/* irregular: 5 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  unsigned char *temp_v1;
+/* irregular: 6 native warning(s); review required */
+  unsigned int temp_v0;
+  unsigned int *puVar2;
+  int temp_v1;
   unsigned char *temp_v2;
   unsigned char *temp_v3;
-  unsigned char temp_v4;
+  unsigned char *temp_v4;
+  unsigned char temp_v5;
   
   DAT_00465000 = 0;
-  DAT_00465018 = FUN_002c32a0(0x100,0x100,0,0x1000,0x1000,1);
-  puVar1 = (unsigned int *)0x18;
+  temp_v0 = 0x100;
+  FUN_002c32a0(0x100,0x100,0,0x1000,0x1000,1);
+  puVar2 = (unsigned int *)0x18;
+  DAT_00465018 = temp_v0;
   FUN_002c222c();
-  if (puVar1 != (unsigned int *)0x0) {
-    *puVar1 = 0;
-    puVar1[1] = 0;
-    puVar1[2] = 0;
-    puVar1[3] = 0;
-    *(unsigned char *)(puVar1 + 4) = 0;
+  if (puVar2 != (unsigned int *)0x0) {
+    *puVar2 = 0;
+    puVar2[1] = 0;
+    puVar2[2] = 0;
+    puVar2[3] = 0;
+    *(unsigned char *)(puVar2 + 4) = 0;
   }
-  DAT_0046501c = puVar1;
+  DAT_0046501c = puVar2;
   FUN_002bcd44();
-  temp_v0 = 4;
-  temp_v1 = &LAB_00123c88;
-  puVar1 = &DAT_00465020;
-  temp_v2 = &LAB_00123cb4;
-  temp_v3 = &LAB_00123ca4;
-  FUN_002bcc60(&DAT_00465020,&temp_v0,FUN_00113e4c,&temp_v4,DAT_0046501c[3] + DAT_0046501c[2],0x12
+  temp_v1 = 4;
+  temp_v2 = &LAB_00123c88;
+  puVar2 = &DAT_00465020;
+  temp_v3 = &LAB_00123cb4;
+  temp_v4 = &LAB_00123ca4;
+  FUN_002bcc60(&DAT_00465020,&temp_v1,FUN_00113e4c,&temp_v5,DAT_0046501c[3] + DAT_0046501c[2],0x12
                ,0xfffffffe,0);
-  if (((unsigned int)puVar1 & 0x7e00000) != 0x600000 && (int)puVar1 < 0) {
+  if (((unsigned int)puVar2 & 0x7e00000) != 0x600000 && (int)puVar2 < 0) {
     FUN_002c526c();
   }
   return;

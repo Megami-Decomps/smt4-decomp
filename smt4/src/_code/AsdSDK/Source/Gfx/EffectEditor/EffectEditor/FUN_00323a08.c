@@ -61,13 +61,13 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_0024dd90. */
 /* Supplied declaration required: FUN_002571b8. */
 /* Supplied declaration required: FUN_002bfde4. */
-extern int FUN_002c32a0(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c32a0. */
 
 
 unsigned int FUN_00323a08(int param_1,int param_2)
 
 {
-/* irregular: 10 native warning(s); review required */
+/* irregular: 11 native warning(s); review required */
   unsigned int temp_v0;
   unsigned int temp_v1;
   float temp_v2;
@@ -222,13 +222,14 @@ unsigned int FUN_00323a08(int param_1,int param_2)
   temp_v21 = DAT_004ea928;
   FUN_00243224(&temp_v14,&temp_v20,0xff00c0c0,0);
   FUN_00243224(&temp_v17,&temp_v20,0xff00c0c0,0);
-  temp_v5 = FUN_002c32a0(0x10000,0x100,0,0x68,0x10,1);
+  temp_v5 = 0x10000;
+  FUN_002c32a0(0x10000,0x100,0,0x68,0x10,1);
   *(unsigned int *)(temp_v5 + 0x18) = 0;
   *(unsigned int *)(temp_v5 + 4) = 9;
   *(unsigned int *)(temp_v5 + 8) = temp_v20;
   *(float *)(temp_v5 + 0xc) = fStack_54;
   *(float *)&*(unsigned int *)(temp_v5 + 0x10) = uStack_50;
   *(float *)&*(unsigned int *)(temp_v5 + 0x14) = temp_v21;
-  FUN_002571b8(temp_v5,0);
+  FUN_002571b8();
   return temp_v6;
 }

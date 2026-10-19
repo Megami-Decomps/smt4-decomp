@@ -62,7 +62,7 @@ extern unsigned char DAT_00404194; /* 0x404194 */
 extern unsigned int *DAT_0043e278; /* 0x43e278 */
 
 /* Supplied declaration required: FUN_002c312c. */
-extern unsigned int FUN_002c31a0(unsigned int);
+/* Supplied declaration required: FUN_002c31a0. */
 /* Supplied declaration required: FUN_002c4938. */
 /* Supplied declaration required: FUN_002c498c. */
 /* Supplied declaration required: FUN_002c4a08. */
@@ -73,7 +73,7 @@ extern unsigned int FUN_002c31a0(unsigned int);
 void FUN_001043c8(void)
 
 {
-/* irregular: 29 native warning(s); review required */
+/* irregular: 30 native warning(s); review required */
   unsigned int *puVar1;
   unsigned int *puVar2;
   unsigned int temp_v0;
@@ -83,13 +83,17 @@ void FUN_001043c8(void)
   FUN_002c498c(0x100,0x100,0,0xfec,1);
   DAT_0043e278 = puVar2;
   FUN_002c4938();
-  temp_v0 = FUN_002c31a0(0);
+  temp_v0 = 0;
+  FUN_002c31a0();
   puVar2[1] = temp_v0;
-  temp_v0 = FUN_002c31a0(0);
+  temp_v0 = 0;
+  FUN_002c31a0();
   puVar2[2] = temp_v0;
-  temp_v0 = FUN_002c31a0(0);
+  temp_v0 = 0;
+  FUN_002c31a0();
   puVar2[0x3c8] = temp_v0;
-  temp_v0 = FUN_002c31a0(0);
+  temp_v0 = 0;
+  FUN_002c31a0();
   puVar2[0x3c9] = temp_v0;
   puVar2[0x3f7] = 0;
   *(unsigned char *)(puVar2 + 3) = 0;

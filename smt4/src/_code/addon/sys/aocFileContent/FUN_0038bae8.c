@@ -17,7 +17,7 @@ extern unsigned int *FUN_002bad5c(unsigned char *);
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002c3944. */
 /* Supplied declaration required: FUN_002c415c. */
-extern unsigned int FUN_002c5300(unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c5300. */
 /* Supplied declaration required: FUN_002c564c. */
 /* Supplied declaration required: FUN_003550f4. */
 
@@ -25,7 +25,7 @@ extern unsigned int FUN_002c5300(unsigned int, unsigned int, unsigned int, unsig
 void FUN_0038bae8(unsigned char *param_1,int param_2,unsigned int param_3)
 
 {
-/* irregular: 6 native warning(s); review required */
+/* irregular: 7 native warning(s); review required */
   unsigned int *puVar1;
   unsigned int *puVar2;
   int temp_v0;
@@ -35,6 +35,7 @@ void FUN_0038bae8(unsigned char *param_1,int param_2,unsigned int param_3)
   int temp_v3;
   unsigned int uStack_1c;
   
+  puVar2 = (unsigned int *)&temp_v2;
   if (*(int *)(param_2 + 0x20) != 0) {
     FUN_002c415c();
     *(unsigned int *)(param_2 + 0x20) = 0;
@@ -43,7 +44,7 @@ void FUN_0038bae8(unsigned char *param_1,int param_2,unsigned int param_3)
   puVar1 = (unsigned int *)FUN_002bad5c(param_1 + 4);
   puVar1[2] = 0;
   puVar1[3] = 0;
-  puVar2 = (unsigned int *)FUN_002baa40(&temp_v2,0);
+  FUN_002baa40(&temp_v2,0);
   temp_v1 = puVar2[1];
   *puVar1 = *puVar2;
   puVar1[1] = temp_v1;
@@ -66,9 +67,10 @@ void FUN_0038bae8(unsigned char *param_1,int param_2,unsigned int param_3)
     return;
   }
   temp_v2 = 1;
-  temp_v1 = FUN_002c5300(0x100,0x100,0,*(unsigned int *)(param_2 + 0x34));
+  temp_v1 = 0x100;
+  FUN_002c5300(0x100,0x100,0,*(unsigned int *)(param_2 + 0x34));
   *(unsigned int *)(param_2 + 0x20) = temp_v1;
-  FUN_002c3944(temp_v1,*(unsigned int *)(param_2 + 0x34));
+  FUN_002c3944();
   FUN_002be624(param_2 + 0x24,"aoc%d:",param_3);
   return;
 }

@@ -236,8 +236,9 @@ void FUN_00197e34(void)
       FUN_002be370((int)psVar14[1],*(short *)(temp_v13 + 8) + temp_v11,*(short *)(temp_v13 + 10) + temp_v5,
                    0x6a,0);
       temp_v13 = FUN_002bf4f8(0x29,0x1c);
-      temp_v19 = FUN_002be650(psVar14[1],0);
-      FUN_002be624(temp_v24,&LAB_00198208,temp_v19);
+      temp_v7 = (unsigned int)(unsigned short)psVar14[1];
+      FUN_002be650(temp_v7,0);
+      FUN_002be624(temp_v24,&LAB_00198208,temp_v7);
       VectorSignedToFloat(*(short *)(temp_v13 + 8) + temp_v11,(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat(*(short *)(temp_v13 + 10) + temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
       FUN_002be5a4(2,0xffffffff,temp_v24);
@@ -414,12 +415,13 @@ LAB_00198518:
         FUN_002907c4(temp_v29,temp_v22);
         temp_v23 = temp_v7 + temp_v6 * 8;
         FUN_002907c4(temp_v28,*(unsigned int *)(temp_v23 + 0x170));
+        temp_v12 = temp_v21 & 0xffff;
         if ((*(unsigned char *)((unsigned char *)&temp_v21 + 2)) != '\0') {
-          temp_v19 = FUN_002be650(temp_v21 & 0xffff,0);
-          FUN_002be624(temp_v24,&LAB_00198dc0,temp_v19,temp_v29,temp_v28);
+          FUN_002be650(temp_v12,0);
+          FUN_002be624(temp_v24,&LAB_00198dc0,temp_v12,temp_v29,temp_v28);
         }
         else {
-          temp_v19 = FUN_002bd068(temp_v21 & 0xffff);
+          temp_v19 = FUN_002bd068(temp_v12);
           FUN_002be624(temp_v24,&LAB_00198dc0,temp_v19,temp_v29,temp_v28);
         }
         if (temp_v22 < *(unsigned int *)(temp_v23 + 0x170)) {

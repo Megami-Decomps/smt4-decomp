@@ -1,4 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002bb020` (_code @ 0x2bb020, 0xb0 bytes) from smt4_v1.2.0.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002bb020` (_code @ 0x2bb020, 0x9c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
@@ -6,26 +6,18 @@ extern unsigned char LAB_00144924; /* 0x144924 */
 extern unsigned int DAT_0047236c; /* 0x47236c */
 extern unsigned char DAT_004ea6d0; /* 0x4ea6d0 */
 
-extern unsigned long long FUN_002bfefc(unsigned int *);
+extern int FUN_002bfefc(unsigned int *);
 /* Supplied declaration required: FUN_002c5d5c. */
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
 
 
-/* WARNING: Control flow encountered bad instruction data */
-
-void FUN_002bb020(unsigned int param_1,unsigned int param_2)
+unsigned char * FUN_002bb020(void)
 
 {
-/* irregular: 5 native warning(s); review required */
-  unsigned int *puVar1;
+/* irregular: 1 native warning(s); review required */
+  int temp_v0;
   unsigned char *puVar2;
-  unsigned int temp_v0;
-  unsigned long long temp_v1;
   
-  temp_v0 = DAT_0047236c;
-  if (((DAT_0047236c & 1) == 0) &&
-     (temp_v1 = FUN_002bfefc(&DAT_0047236c), param_2 = (unsigned int)((unsigned long long)temp_v1 >> 0x20), temp_v0 = 0,
-     (int)temp_v1 != 0)) {
+  if (((DAT_0047236c & 1) == 0) && (temp_v0 = FUN_002bfefc(&DAT_0047236c), temp_v0 != 0)) {
     puVar2 = &DAT_004ea6d0;
     FUN_002c5d5c(&DAT_004ea6d0,&LAB_00144924,0xc,3);
     *(unsigned int *)(puVar2 + 0x24) = 0;
@@ -42,20 +34,6 @@ void FUN_002bb020(unsigned int param_1,unsigned int param_2)
     *(unsigned int *)(puVar2 + 0x54) = 0xffffffff;
     *(unsigned int *)(puVar2 + 100) = 0;
     *(unsigned int *)(puVar2 + 0x68) = 0;
-                    /* WARNING: Bad instruction - Truncating control flow here */
-    halt_baddata();
   }
-  puVar1 = (unsigned int *)(temp_v0 >> 8);
-  *puVar1 = 0;
-  puVar1[1] = 0;
-  puVar1[2] = 0;
-  puVar1[3] = 0;
-  puVar1[4] = 0;
-  *(unsigned char *)(puVar1 + 0x105) = 1;
-  *(unsigned char *)((int)puVar1 + 0x415) = 1;
-  puVar1[0x107] = 0;
-  puVar1[0x106] = 0;
-  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(puVar1 + 0x108,param_2 & (unsigned int)puVar1);
-                    /* WARNING: Bad instruction - Truncating control flow here */
-  halt_baddata();
+  return &DAT_004ea6d0;
 }

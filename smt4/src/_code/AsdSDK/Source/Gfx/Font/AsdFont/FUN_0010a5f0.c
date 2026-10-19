@@ -12,15 +12,19 @@ extern unsigned int DAT_00464a70; /* 0x464a70 */
 extern int DAT_00464a74; /* 0x464a74 */
 
 /* Supplied declaration required: FUN_00100238. */
-extern unsigned int FUN_002c5300(unsigned int, unsigned int, unsigned int, int, unsigned int);
+/* Supplied declaration required: FUN_002c5300. */
 
 
 void FUN_0010a5f0(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
 
 {
-/* irregular: 1 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
+  unsigned int temp_v0;
+  
   FUN_00100238(2,&LAB_0010a644,param_3,param_4,param_4);
+  temp_v0 = 0x100;
   DAT_00464a74 = param_1;
-  DAT_00464a70 = FUN_002c5300(0x100,0x100,0,param_1 * 0x2c,1);
+  FUN_002c5300(0x100,0x100,0,param_1 * 0x2c,1);
+  DAT_00464a70 = temp_v0;
   return;
 }

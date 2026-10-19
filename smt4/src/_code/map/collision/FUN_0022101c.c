@@ -12,15 +12,27 @@ extern unsigned int DAT_00447004; /* 0x447004 */
 extern unsigned int DAT_00447008; /* 0x447008 */
 extern unsigned int DAT_0044700c; /* 0x44700c */
 
-extern unsigned int FUN_002c5300(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c5300. */
 
 
 void FUN_0022101c(void)
 
 {
-  DAT_00447000 = FUN_002c5300(0x100,0x100,0,0x15000,1);
-  DAT_00447004 = FUN_002c5300(0x100,0x100,0,0xfc00,1);
-  DAT_00447008 = FUN_002c5300(0x100,0x100,0,0x6900,1);
-  DAT_0044700c = FUN_002c5300(0x100,0x100,0,0x1f800,1);
+/* irregular: 1 native warning(s); review required */
+  unsigned int temp_v0;
+  unsigned int temp_v1;
+  
+  temp_v0 = 0x100;
+  FUN_002c5300(0x100,0x100,0,0x15000,1);
+  temp_v1 = 0x100;
+  DAT_00447000 = temp_v0;
+  FUN_002c5300(0x100,0x100,0,0xfc00,1);
+  temp_v0 = 0x100;
+  DAT_00447004 = temp_v1;
+  FUN_002c5300(0x100,0x100,0,0x6900,1);
+  temp_v1 = 0x100;
+  DAT_00447008 = temp_v0;
+  FUN_002c5300(0x100,0x100,0,0x1f800,1);
+  DAT_0044700c = temp_v1;
   return;
 }

@@ -9,16 +9,18 @@ extern unsigned char DAT_004c5818; /* 0x4c5818 */
 
 extern unsigned int FUN_00100bd4(int);
 extern int FUN_002893d8(void);
-extern unsigned int FUN_002bfc24(unsigned int, unsigned int, unsigned short, unsigned char);
+/* Supplied declaration required: FUN_002bfc24. */
 
 
 unsigned int FUN_002f4f24(unsigned int param_1)
 
 {
+/* irregular: 1 native warning(s); review required */
   int temp_v0;
   char *pcVar2;
   unsigned int temp_v1;
-  unsigned char temp_v2;
+  unsigned int temp_v2;
+  unsigned char temp_v3;
   
   temp_v0 = FUN_002893d8();
   if (temp_v0 != 0) {
@@ -34,10 +36,12 @@ unsigned int FUN_002f4f24(unsigned int param_1)
   }
   else if (((param_1 < 0x10) && (DAT_004c5814 != 0)) &&
           (temp_v0 = DAT_004c5814 + param_1 * 0xc, temp_v0 != 0)) {
-    temp_v2 = DAT_004c5818 | 4;
+    temp_v3 = DAT_004c5818 | 4;
     temp_v1 = FUN_00100bd4(temp_v0);
-    DAT_0044e128 = FUN_002bfc24(1,temp_v1,*(unsigned short *)(temp_v0 + 10) & 0xff,temp_v2);
-    if (DAT_0044e128 != 0xffffffff) {
+    temp_v2 = 1;
+    FUN_002bfc24(1,temp_v1,*(unsigned short *)(temp_v0 + 10) & 0xff,temp_v3);
+    DAT_0044e128 = temp_v2;
+    if (temp_v2 != 0xffffffff) {
       return 0;
     }
   }

@@ -18,10 +18,20 @@ void FUN_00102d60(void)
 
 {
 /* irregular: 1 native warning(s); review required */
+  int temp_v0;
+  unsigned int temp_v1;
+  unsigned int temp_v2;
+  
   if (DAT_0043e2ac == 0) {
-    DAT_0043e2ac = FUN_002c5300(0x100,0x100,0,0x24db0,1);
-    DAT_0043e2b0 = FUN_002c5300(0x100,0x100,0,0x24d28,1);
-    DAT_0043e2b4 = FUN_002c5300(0x100,0x100,0,0xc,1);
+    temp_v0 = 0x100;
+    FUN_002c5300(0x100,0x100,0,0x24db0,1);
+    temp_v1 = 0x100;
+    DAT_0043e2ac = temp_v0;
+    FUN_002c5300(0x100,0x100,0,0x24d28,1);
+    temp_v2 = 0x100;
+    DAT_0043e2b0 = temp_v1;
+    FUN_002c5300(0x100,0x100,0,0xc,1);
+    DAT_0043e2b4 = temp_v2;
   }
   return;
 }

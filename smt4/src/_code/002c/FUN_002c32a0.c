@@ -1,31 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c32a0` (_code @ 0x2c32a0, 0x40 bytes) from smt4_v1.2.0.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c32a0` (_code @ 0x2c32a0, 0xc0 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
+/* stack frame of param_6: 1 slot(s), 4 byte(s) */
+typedef struct {
+    unsigned int sp30; /* 0x30: local_30 */
+} param_6_stack;
+
 extern unsigned int DAT_00465124; /* 0x465124 */
 
-extern int nn_os_CriticalSection_Enter(unsigned int);
+/* Supplied declaration required: FUN_002b23f4. */
+/* Supplied declaration required: FUN_002b24d8. */
+/* Supplied declaration required: FUN_002c3944. */
+/* Supplied declaration required: nn_os_CriticalSection_Enter. */
+/* Supplied declaration required: nn_os_CriticalSection_Leave. */
 
 
-/* WARNING: Control flow encountered bad instruction data */
-
-void FUN_002c32a0(void)
+int FUN_002c32a0(unsigned int *param_1,unsigned int param_2,unsigned int param_3,int param_4,unsigned int param_5,
+                unsigned int param_6)
 
 {
-/* irregular: irregular input(s): in_r3, in_stack_00000000; 5 native warning(s); review required */
+/* irregular: 5 native warning(s); review required */
   int temp_v0;
-  int in_r3;
-  unsigned int in_stack_00000000;
+  unsigned int temp_v1;
   
-  temp_v0 = nn_os_CriticalSection_Enter(DAT_00465124);
-  if (in_stack_00000000 < 0x80) {
-    in_stack_00000000 = 0x80;
+  nn_os_CriticalSection_Enter(DAT_00465124);
+  if (param_5 < 0x80) {
+    param_5 = 0x80;
   }
-  if (temp_v0 >> 0x20 != 0) {
-    *(int *)(in_r3 + in_stack_00000000 + 0x24) = in_r3;
-                    /* WARNING: Bad instruction - Truncating control flow here */
-    halt_baddata();
-  }
-                    /* WARNING: Bad instruction - Truncating control flow here */
-  halt_baddata();
+  temp_v1 = (param_4 + param_5 * 2 + 0x3b) & -param_5;
+  FUN_002b24d8(param_1,param_2,param_3,temp_v1,param_6);
+  *param_1 = temp_v1;
+  *(short *)(param_1 + 1) = (short)param_5;
+  *(unsigned short *)((int)param_1 + 6) = 0;
+  temp_v1 = (param_5 & 0xffff) - 1;
+  temp_v1 = ((param_5 & 0xffff) - ((unsigned int)(param_1 + 0xf) & temp_v1)) & temp_v1;
+  temp_v0 = (int)param_1 + temp_v1 + 0x3c;
+  *(unsigned int **)((int)param_1 + temp_v1 + 0x38) = param_1;
+  FUN_002b23f4();
+  FUN_002c3944(temp_v0,param_4);
+  nn_os_CriticalSection_Leave(DAT_00465124);
+  return temp_v0;
 }

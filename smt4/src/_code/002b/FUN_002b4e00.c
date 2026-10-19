@@ -7,58 +7,29 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_4_stack;
 
-extern unsigned int uRame59407a0; /* 0xe59407a0 */
-extern unsigned int uRame59407a4; /* 0xe59407a4 */
-
 /* Supplied declaration required: FUN_002bbb2c. */
 /* Supplied declaration required: nn_fs_detail_FileBase_TryRead. */
 
 
-/* WARNING: Control flow encountered bad instruction data */
-
 int FUN_002b4e00(int param_1,unsigned int param_2,unsigned int param_3,unsigned int *param_4)
 
 {
-/* irregular: 5 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int *temp_v3;
+/* irregular: 2 native warning(s); review required */
+  int temp_v0;
+  unsigned int *temp_v1;
   
-  if (*(unsigned char *)(param_1 + 0x1c) == 0) {
-    param_1 = param_1 + 4;
-    temp_v3 = param_4;
-    nn_fs_detail_FileBase_TryRead(param_1,&temp_v3,param_2,param_3);
-    if (param_1 < 0) {
-      FUN_002bbb2c();
-    }
-    *param_4 = (unsigned int)temp_v3;
-    return 1;
+  temp_v1 = param_4;
+  if (*(char *)(param_1 + 0x1c) != '\0') {
+    temp_v0 = param_1 + 4;
+    nn_fs_detail_FileBase_TryRead(temp_v0,param_4,param_2,param_3);
+    *(int *)(param_1 + 0x18) = temp_v0;
+    return (temp_v0 >> 0x1f) + 1;
   }
-  if ((int)uRame59407a0 < 1) {
-    temp_v0 = 0;
+  param_1 = param_1 + 4;
+  nn_fs_detail_FileBase_TryRead(param_1,&temp_v1,param_2,param_3);
+  if (param_1 < 0) {
+    FUN_002bbb2c();
   }
-  else {
-    temp_v0 = uRame59407a0 & 1;
-    temp_v2 = (unsigned int)*(unsigned char *)(param_1 + 0x1c);
-    if (temp_v0 != 0) {
-      temp_v2 = uRame59407a4;
-    }
-    temp_v1 = 0;
-    if (temp_v0 != 0) {
-      do {
-        if (*(unsigned short *)(temp_v2 + temp_v1 * 0x2c + 0x20) == 0x59403c80) {
-          return temp_v2 + temp_v1 * 0x2c;
-        }
-        temp_v1 = temp_v1 + 1;
-      } while (temp_v1 < (int)temp_v0);
-    }
-  }
-  if ((int)uRame59407a0 <= (int)temp_v0) {
-                    /* WARNING: Bad instruction - Truncating control flow here */
-    halt_baddata();
-  }
-  *(unsigned int *)(temp_v0 * 0x2c + 0x28) = temp_v0 * 0x2c + 0x20;
-                    /* WARNING: Bad instruction - Truncating control flow here */
-  halt_baddata();
+  *param_4 = (unsigned int)temp_v1;
+  return 1;
 }

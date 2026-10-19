@@ -25,16 +25,18 @@ struct fn_00387af0_arg0 {
 
 extern int DAT_00433130; /* 0x433130 */
 
-extern unsigned int *FUN_002baa40(unsigned char *);
+/* Supplied declaration required: FUN_002baa40. */
 
 
 void FUN_00387af0(fn_00387af0_arg0 *param_1)
 
 {
+/* irregular: 1 native warning(s); review required */
   unsigned int *puVar1;
   unsigned int temp_v0;
-  unsigned char temp_v1 [8];
+  unsigned int temp_v1 [2];
   
+  puVar1 = temp_v1;
   param_1->field_0x344 = 0;
   param_1->field_0x310 = 0;
   param_1->field_0x314 = 0;
@@ -44,7 +46,7 @@ void FUN_00387af0(fn_00387af0_arg0 *param_1)
   *(unsigned char *)(DAT_00433130 + 0x450c) = 1;
   param_1->field_0x31c = 1;
   param_1->field_0x328 = 0;
-  puVar1 = (unsigned int *)FUN_002baa40(temp_v1);
+  FUN_002baa40();
   temp_v0 = puVar1[1];
   param_1->field_0x320 = *puVar1;
   *(unsigned int *)&param_1->field_0x324 = temp_v0;

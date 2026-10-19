@@ -25,7 +25,7 @@ extern int DAT_0044ea00; /* 0x44ea00 */
 extern int FUN_0023342c(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002b06c4. */
 extern unsigned int FUN_002bce30(unsigned int, unsigned int);
-extern unsigned int FUN_002bd06c(unsigned int);
+/* Supplied declaration required: FUN_002bd06c. */
 /* Supplied declaration required: FUN_002be56c. */
 /* Supplied declaration required: FUN_002be624. */
 extern int FUN_002bed98(int);
@@ -38,7 +38,7 @@ extern int FUN_002beda4(void);
 void FUN_003aa044(int param_1,int param_2,int param_3,unsigned int param_4)
 
 {
-/* irregular: irregular input(s): in_fpscr; 12 native warning(s); review required */
+/* irregular: irregular input(s): in_fpscr; 13 native warning(s); review required */
   unsigned short temp_v0;
   short temp_v1;
   short temp_v2;
@@ -129,19 +129,20 @@ void FUN_003aa044(int param_1,int param_2,int param_3,unsigned int param_4)
     VectorSignedToFloat((temp_v11 + (int)**(short **)(temp_v5 + 0xc) / 2 + (int)*(short *)(temp_v5 + 8)) -
                         temp_v4 / 2,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_002be56c(param_1 + 200,temp_v14,temp_v12,temp_v7,temp_v7,temp_v4);
-    temp_v7 = FUN_002bd06c(param_4 & 0xffff);
+    temp_v8 = param_4;
+    FUN_002bd06c();
     if (param_3 == 0) {
-      temp_v9 = 0x105c;
-      temp_v12 = 0xff;
+      temp_v7 = 0x105c;
+      temp_v9 = 0xff;
     }
     else {
-      temp_v9 = 0x106c;
-      temp_v12 = 0xffffffff;
+      temp_v7 = 0x106c;
+      temp_v9 = 0xffffffff;
     }
-    temp_v5 = FUN_002bf4f0(param_1 + 200,temp_v9);
+    temp_v5 = FUN_002bf4f0(param_1 + 200,temp_v7);
     VectorSignedToFloat(*(short *)(temp_v5 + 10) + temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v5 + 8) + temp_v11,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_002be56c(param_1 + 200,temp_v14,temp_v12,temp_v7,temp_v7,temp_v4);
+    FUN_002be56c(param_1 + 200,temp_v14,temp_v9,temp_v8,temp_v8,temp_v4);
     temp_v8 = param_4;
     temp_v13 = 0;
     FUN_002b06c4();

@@ -1,78 +1,73 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b5cf0` (_code @ 0x2b5cf0, 0x23c bytes) from smt4_v1.2.0.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b5cf0` (_code @ 0x2b5cf0, 0x20c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
-typedef int romwright_code();
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
+/* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
-} param_2_stack;
-
-extern unsigned int DAT_00433158; /* 0x433158 */
+} param_4_stack;
 
 /* Supplied declaration required: FUN_001394d4. */
-/* Supplied declaration required: FUN_001413d0. */
-extern int FUN_0014143c(unsigned int, unsigned int);
-extern unsigned int *nn_gr_CTR_Shader_MakeLoadCommand(int, unsigned int *, unsigned int, unsigned int);
+/* Supplied declaration required: nn_gr_CTR_Shader_MakeLoadCommand. */
+/* Supplied declaration required: rt_memcpy_w. */
 
 
-/* WARNING: Control flow encountered bad instruction data */
-
-void FUN_002b5cf0(int param_1,unsigned int *param_2)
+unsigned int * FUN_002b5cf0(int *param_1,unsigned int *param_2,unsigned int param_3,unsigned int param_4)
 
 {
-/* irregular: 6 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int *puVar2;
+/* irregular: 3 native warning(s); review required */
+  unsigned int *puVar1;
+  int temp_v0;
+  unsigned int *puVar3;
   unsigned int temp_v1;
-  int temp_v2;
-  unsigned int unaff_r7;
-  int iStack_38;
-  int iStack_34;
-  int iStack_30;
-  unsigned int uStack_28;
-  unsigned int uStack_24;
-  unsigned int uStack_20;
   
-  FUN_001394d4(param_2,(*(int *)(param_1 + 4) >> 0x1f) + 1,*(unsigned char *)(param_1 + 0x298));
-  if (*(int *)(param_1 + 4) >= 0) {
+  FUN_001394d4(param_2,(param_1[1] >> 0x1f) + 1,(char)param_1[0xa6],param_4,param_4);
+  if (-1 < param_1[1]) {
     *param_2 = 0;
     param_2[1] = 0xf029b;
-    temp_v0 = *(unsigned int *)(param_1 + 0x90);
-    puVar2 = (unsigned int *)
-             nn_gr_CTR_Shader_MakeLoadCommand
-                       (param_1,param_2 + 2,0x29c,*(unsigned int *)(param_1 + 0x8c));
-    *puVar2 = 1;
-    puVar2[1] = 0xf028f;
-    puVar2[2] = 0;
-    puVar2[3] = 0xf02a5;
-    uStack_28 = 0xa9800;
-    *(unsigned char *)(puVar2 + 4) = 1;
-    temp_v1 = unaff_r7 >> 0xe;
-    uStack_20 = 1;
-    uStack_24 = 0;
-    temp_v2 = FUN_0014143c(DAT_00433158,temp_v1);
-    if (temp_v2 != 0) {
-      FUN_001413d0(DAT_00433158,temp_v1,(temp_v0 >> 0xd) & 0xfffffffe,0x2a6,0xfffffffc);
-      return;
-    }
-    if (temp_v1 >= 0x200) {
-                    /* WARNING: Bad instruction - Truncating control flow here */
-      halt_baddata();
-    }
-    iStack_38 = (temp_v1 / 0x10) * 0x10;
-    iStack_34 = iStack_38 + 0x10;
-    iStack_30 = (temp_v1 % 0x10) * 0x20;
-    if (*(char *)(temp_v1 + 0x18) != '\0' ||
-        &iStack_38 != *(int **)(temp_v1 + ((int)&iStack_38 >> 0x20) * 4 + 8)) {
-      (**(romwright_code **)(temp_v1 + 0x1c))();
-      *(unsigned char *)(temp_v1 + 0x18) = 0xa6;
-    }
+    puVar1 = (unsigned int *)
+             nn_gr_CTR_Shader_MakeLoadCommand(param_1,param_2 + 2,0x29c,param_1[0x23],param_1[0x24])
+    ;
+    *puVar1 = 1;
+    puVar1[1] = 0xf028f;
+    puVar1[2] = 0;
+    puVar1[3] = 0xf02a5;
+    temp_v0 = nn_gr_CTR_Shader_MakeLoadCommand(param_1,puVar1 + 4,0x2a6,param_1 + 0x25,param_1[0xa5]);
+    rt_memcpy_w(temp_v0,param_1 + param_1[1] * 0x24a + 0xda,param_1[param_1[1] + 0x4a1a] << 2);
+    puVar3 = (unsigned int *)(temp_v0 + param_1[param_1[1] + 0x4a1a] * 4);
+    *puVar3 = param_1[0xa8] | 0x7fff0000;
+    param_2 = puVar3 + 2;
+    puVar3[1] = 0xf0280;
   }
-  else {
-    *param_2 = 0;
-    param_2[1] = 0xf02cb;
+  *param_2 = 0;
+  param_2[1] = 0xf02cb;
+  temp_v1 = param_1[0x24];
+  if (temp_v1 >= 0x200) {
+    temp_v1 = 0x200;
   }
-                    /* WARNING: Bad instruction - Truncating control flow here */
-  halt_baddata();
+  puVar1 = (unsigned int *)
+           nn_gr_CTR_Shader_MakeLoadCommand(param_1,param_2 + 2,0x2cc,param_1[0x23],temp_v1);
+  *puVar1 = 1;
+  puVar1[1] = 0xf02bf;
+  puVar1[2] = 0;
+  puVar1[3] = 0xf02d5;
+  temp_v0 = nn_gr_CTR_Shader_MakeLoadCommand(param_1,puVar1 + 4,0x2d6,param_1 + 0x25,param_1[0xa5]);
+  rt_memcpy_w(temp_v0,param_1 + *param_1 * 0x24a + 0xda,param_1[*param_1 + 0x4a1a] << 2);
+  puVar3 = (unsigned int *)(temp_v0 + param_1[*param_1 + 0x4a1a] * 4);
+  *puVar3 = param_1[0xa7] | 0x7fff0000;
+  puVar3[1] = 0xf02b0;
+  temp_v1 = 0x100;
+  if ((char)param_1[0xa6] != '\x03') {
+    temp_v1 = 0;
+  }
+  puVar3[2] = temp_v1;
+  temp_v1 = 0x100;
+  puVar3[3] = 0x20229;
+  if ((char)param_1[0xa6] != '\x03') {
+    temp_v1 = 0;
+  }
+  puVar3[4] = temp_v1;
+  puVar3[5] = 0x20253;
+  rt_memcpy_w(puVar3 + 6,param_1 + 0xa9,param_1[0xd9] << 2);
+  return puVar3 + 6 + param_1[0xd9];
 }

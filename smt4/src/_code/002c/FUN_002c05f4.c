@@ -1,4 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c05f4` (_code @ 0x2c05f4, 0x1e4 bytes) from smt4_v1.2.0.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c05f4` (_code @ 0x2c05f4, 0x250 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
@@ -24,20 +24,20 @@ typedef struct {
 #endif
 extern int *FUN_0012d318(void);
 extern int *FUN_0012d618(unsigned int);
-/* Supplied declaration required: nn_math_ARMv6_MTX34InvTransposeAsm. */
-/* Supplied declaration required: nn_math_ARMv6_MTX34MultAsm. */
-extern int nw_gfx_Camera_DynamicBuilder_Create(unsigned char *, unsigned int);
+/* Supplied declaration required: nw_gfx_Camera_DynamicBuilder_Create. */
 
 
-void FUN_002c05f4(unsigned int param_1,unsigned int param_2,unsigned int *param_3,unsigned char param_4)
+unsigned char *
+FUN_002c05f4(unsigned int param_1,unsigned int *param_2,unsigned int *param_3,unsigned char param_4)
 
 {
-/* irregular: irregular input(s): in_s0, in_s1, in_s2; 2 native warning(s); review required */
+/* irregular: irregular input(s): in_s0, in_s1, in_s2; 1 native warning(s); review required */
   char temp_v0;
   int *piVar2;
   int temp_v1;
   int *piVar4;
   int *piVar5;
+  unsigned char *puVar6;
   unsigned int temp_v2;
   unsigned int temp_v3;
   unsigned int in_s0;
@@ -52,7 +52,7 @@ void FUN_002c05f4(unsigned int param_1,unsigned int param_2,unsigned int *param_
   unsigned int temp_v9;
   unsigned int temp_v10;
   int *temp_v11;
-  unsigned char temp_v12;
+  char temp_v12;
   int *temp_v13;
   char temp_v14;
   
@@ -78,6 +78,7 @@ void FUN_002c05f4(unsigned int param_1,unsigned int param_2,unsigned int *param_
   temp_v10 = 1;
   temp_v13 = (int *)0x0;
   temp_v14 = '\x01';
+  puVar6 = &temp_v6;
   temp_v9 = 0;
   temp_v8 = 0;
   temp_v5 = 1;
@@ -87,7 +88,7 @@ void FUN_002c05f4(unsigned int param_1,unsigned int param_2,unsigned int *param_
     temp_v11 = piVar2;
   }
   piVar2 = temp_v4;
-  temp_v12 = 1;
+  temp_v12 = '\x01';
   if (temp_v4 != (int *)0x0) {
     (**(romwright_code **)*temp_v4)(temp_v4);
     piVar5 = (int *)piVar2[1];
@@ -108,14 +109,24 @@ void FUN_002c05f4(unsigned int param_1,unsigned int param_2,unsigned int *param_
     piVar4 = (int *)piVar2[1];
     (**(romwright_code **)(*piVar4 + 0xc))(piVar4,piVar2);
   }
-  temp_v1 = nw_gfx_Camera_DynamicBuilder_Create(&temp_v6,param_1);
+  nw_gfx_Camera_DynamicBuilder_Create(puVar6,param_1);
   piVar2 = temp_v13;
   if ((temp_v13 != (int *)0x0) && (temp_v14 != '\0')) {
     (**(romwright_code **)*temp_v13)(temp_v13);
     piVar4 = (int *)piVar2[1];
     (**(romwright_code **)(*piVar4 + 0xc))(piVar4,piVar2);
   }
-  nn_math_ARMv6_MTX34InvTransposeAsm(&temp_v4);
-  nn_math_ARMv6_MTX34MultAsm(temp_v1 + 0x1bc,param_2,&temp_v4);
-  return;
+  piVar2 = temp_v11;
+  if ((temp_v11 != (int *)0x0) && (temp_v12 != '\0')) {
+    (**(romwright_code **)*temp_v11)(temp_v11);
+    piVar4 = (int *)piVar2[1];
+    (**(romwright_code **)(*piVar4 + 0xc))(piVar4,piVar2);
+  }
+  temp_v2 = param_2[1];
+  temp_v3 = param_2[2];
+  *(unsigned int *)(puVar6 + 0x58) = *param_2;
+  *(unsigned int *)(puVar6 + 0x68) = temp_v2;
+  *(unsigned int *)(puVar6 + 0x78) = temp_v3;
+  *(unsigned int *)(puVar6 + 0x88) = *(unsigned int *)(puVar6 + 0x88) | 0x800;
+  return puVar6;
 }

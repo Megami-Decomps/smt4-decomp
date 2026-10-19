@@ -4,7 +4,7 @@
 
 extern unsigned int DAT_0044ea00; /* 0x44ea00 */
 
-extern unsigned char FUN_002bfadc(unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002bfadc. */
 extern int FUN_002c08f0(void);
 /* Supplied declaration required: FUN_002c39a4. */
 
@@ -12,7 +12,7 @@ extern int FUN_002c08f0(void);
 unsigned int FUN_00109f40(void)
 
 {
-/* irregular: 1 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   unsigned char temp_v0;
   int temp_v1;
   
@@ -21,7 +21,8 @@ unsigned int FUN_00109f40(void)
     FUN_002c39a4(DAT_0044ea00);
     *(unsigned int *)(*(int *)(temp_v1 + 4) + 0x14) = 0x200;
     *(unsigned int *)(*(int *)(temp_v1 + 4) + 0x18) = 0x200;
-    temp_v0 = FUN_002bfadc(0,*(unsigned int *)(temp_v1 + 4));
+    temp_v0 = 0;
+    FUN_002bfadc(0,*(unsigned int *)(temp_v1 + 4));
     *(unsigned char *)(temp_v1 + 0xf9b) = temp_v0;
     *(unsigned char *)(temp_v1 + 0xf9c) = 1;
     return 0;

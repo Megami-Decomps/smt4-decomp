@@ -2,13 +2,25 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
+/* stack frame of void: 1 slot(s), 4 byte(s) */
+typedef struct {
+    unsigned int sp8; /* 0x8: local_8 */
+} void_stack;
 
-/* WARNING: Control flow encountered bad instruction data */
+extern int *FUN_002c0cec(unsigned int, unsigned int);
 
-void FUN_002c0cac(void)
+
+int * FUN_002c0cac(void)
 
 {
-/* irregular: 2 native warning(s); review required */
-                    /* WARNING: Bad instruction - Truncating control flow here */
-  halt_baddata();
+  int *piVar1;
+  
+  piVar1 = (int *)FUN_002c0cec(0x18,0);
+  if ((piVar1 != (int *)0x0) && (*piVar1 == 0x314c4254)) {
+    piVar1 = piVar1 + 4;
+  }
+  else {
+    piVar1 = (int *)0x0;
+  }
+  return piVar1;
 }

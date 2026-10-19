@@ -10,22 +10,20 @@ extern unsigned int *FUN_0014d128(unsigned int);
 extern unsigned int nw_snd_internal_WaveSoundFile_InfoBlockBody_GetWaveSoundData(unsigned int, unsigned int);
 /* Supplied declaration required: nw_snd_internal_WaveSoundFile_NoteInfo_GetOriginalKey. */
 /* Supplied declaration required: nw_snd_internal_WaveSoundFile_NoteInfo_GetSurroundPan. */
+/* Supplied declaration required: nw_snd_internal_WaveSoundFile_NoteInfo_GetVolume. */
 extern unsigned int *nw_snd_internal_WaveSoundFile_WaveSoundData_GetNoteInfo(unsigned int, unsigned int);
 
-
-/* WARNING: Control flow encountered bad instruction data */
 
 unsigned int
 nw_snd_internal_WaveSoundFileReader_ReadNoteInfo
           (int param_1,unsigned int *param_2,unsigned int param_3,unsigned int param_4)
 
 {
-/* irregular: irregular input(s): in_s0; 9 native warning(s); review required */
+/* irregular: irregular input(s): in_s0; 7 native warning(s); review required */
   unsigned int temp_v0;
   unsigned int *puVar2;
   unsigned int *puVar3;
   unsigned int temp_v1;
-  unsigned short unaff_r7;
   unsigned int in_s0;
   
   temp_v0 = nw_snd_internal_WaveSoundFile_InfoBlockBody_GetWaveSoundData
@@ -48,11 +46,12 @@ nw_snd_internal_WaveSoundFileReader_ReadNoteInfo
       puVar3 = puVar2;
       FUN_0014d234();
       *(char *)((int)param_2 + 0xe) = (char)puVar3;
+      puVar3 = puVar2;
       nw_snd_internal_WaveSoundFile_NoteInfo_GetSurroundPan();
-      *(char *)((int)param_2 + 0xf) = (char)puVar2;
-      *(unsigned short *)(param_2 + 7) = unaff_r7;
-                    /* WARNING: Bad instruction - Truncating control flow here */
-      halt_baddata();
+      *(char *)((int)param_2 + 0xf) = (char)puVar3;
+      nw_snd_internal_WaveSoundFile_NoteInfo_GetVolume();
+      *(char *)(param_2 + 4) = (char)puVar2;
+      return 1;
     }
   }
   return 0;

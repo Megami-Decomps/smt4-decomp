@@ -42,7 +42,7 @@ void FUN_0025c5a0(unsigned int param_1,unsigned int param_2,unsigned int param_3
         *(int *)(temp_v0 + 0x493834) = temp_v3;
       }
       if (temp_v1 == 0) {
-        FUN_0025b730(0);
+        FUN_0025b730();
       }
     }
   }

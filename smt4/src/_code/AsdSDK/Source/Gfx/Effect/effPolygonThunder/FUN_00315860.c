@@ -28,14 +28,14 @@ extern unsigned char DAT_0047372c; /* 0x47372c */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: FUN_0024505c. */
-extern int *FUN_002c32a0(unsigned int, unsigned int, unsigned int, int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c32a0. */
 /* Supplied declaration required: FUN_002c3944. */
 
 
 int * FUN_00315860(int param_1)
 
 {
-/* irregular: irregular input(s): in_d8, in_fpscr; 5 native warning(s); review required */
+/* irregular: irregular input(s): in_d8, in_fpscr; 6 native warning(s); review required */
   unsigned int temp_v0;
   int *piVar2;
   unsigned int temp_v1;
@@ -48,8 +48,8 @@ int * FUN_00315860(int param_1)
   unsigned int temp_v7;
   unsigned int temp_v8;
   unsigned int temp_v9;
-  int temp_v10;
   unsigned int in_fpscr;
+  int temp_v10;
   unsigned int temp_v11;
   int temp_v12;
   unsigned int temp_v13;
@@ -63,9 +63,9 @@ int * FUN_00315860(int param_1)
   unsigned int *temp_v20;
   
   temp_v0 = *(unsigned int *)(param_1 + 0x38);
-  temp_v10 = temp_v0 * 0x30 + 0x10;
-  piVar2 = (int *)FUN_002c32a0(0x10000,0x100,0,temp_v10,0x10,1);
-  FUN_002c3944(piVar2,temp_v10);
+  piVar2 = (int *)0x10000;
+  FUN_002c32a0(0x10000,0x100,0,temp_v0 * 0x30 + 0x10,0x10,1);
+  FUN_002c3944();
   *piVar2 = (int)(piVar2 + 4);
   piVar2[3] = (int)piVar2;
   temp_v1 = *(unsigned int *)(param_1 + 0x3c);

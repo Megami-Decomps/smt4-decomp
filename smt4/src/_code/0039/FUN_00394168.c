@@ -12,18 +12,18 @@ typedef struct {
 
 /* Supplied declaration required: FUN_002c4938. */
 extern int FUN_0038c030(int);
-extern unsigned int *nn_fnd_DateTime_DateTime_sub_object(unsigned char *, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: nn_fnd_DateTime_DateTime_sub_object. */
 
 
 int FUN_00394168(int param_1,unsigned int *param_2,unsigned int param_3)
 
 {
-/* irregular: 1 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   unsigned char temp_v0;
   int temp_v1;
   unsigned int *puVar3;
   unsigned int temp_v2;
-  unsigned char temp_v3 [12];
+  unsigned int temp_v3 [3];
   
   *param_2 = param_3;
   param_2[1] = param_3;
@@ -31,9 +31,8 @@ int FUN_00394168(int param_1,unsigned int *param_2,unsigned int param_3)
   FUN_002c4938(temp_v1 - 0x9bc,0x80);
   FUN_002c4938(temp_v1 - 0x93c,0x100);
   FUN_002c4938(temp_v1 - 0x83c,0x800);
-  puVar3 = (unsigned int *)
-           nn_fnd_DateTime_DateTime_sub_object(temp_v3,0x7b2,1,1,param_3,param_3,param_3,param_3)
-  ;
+  puVar3 = temp_v3;
+  nn_fnd_DateTime_DateTime_sub_object(puVar3,0x7b2,1,1,param_3,param_3,param_3,param_3);
   temp_v2 = puVar3[1];
   *(unsigned int *)(temp_v1 - 0x1c) = *puVar3;
   *(unsigned int *)(temp_v1 - 0x18) = temp_v2;

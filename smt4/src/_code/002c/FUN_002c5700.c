@@ -9,31 +9,33 @@ typedef struct {
 
 extern unsigned char DAT_0043e2a9; /* 0x43e2a9 */
 extern unsigned int DAT_0043e2bc; /* 0x43e2bc */
-extern unsigned char DAT_00465198; /* 0x465198 */
+extern signed char DAT_00465198; /* 0x465198 */
 
 /* Supplied declaration required: FUN_00297050. */
 /* Supplied declaration required: FUN_002b8244. */
+/* Supplied declaration required: FUN_002c5434. */
+/* Supplied declaration required: FUN_002c55d4. */
 /* Supplied declaration required: FUN_002c5758. */
-/* Supplied declaration required: func_0x006c4784. */
 
 
-/* WARNING: Control flow encountered bad instruction data */
-
-void FUN_002c5700(void)
+int FUN_002c5700(void)
 
 {
-/* irregular: 7 native warning(s); review required */
+/* irregular: 5 native warning(s); review required */
+  int temp_v0;
+  
   FUN_002b8244(0);
   FUN_00297050(1);
   FUN_002c5758(4);
   DAT_0043e2bc = DAT_0043e2bc & 0xfffffffb;
   DAT_0043e2a9 = DAT_0043e2bc == 0;
+  temp_v0 = (int)DAT_00465198;
   DAT_00465198 = DAT_0043e2a9;
   if ((unsigned char)DAT_0043e2a9) {
-                    /* WARNING: Bad instruction - Truncating control flow here */
-    halt_baddata();
+    FUN_002c5434();
   }
-  func_0x006c4784(1);
-                    /* WARNING: Bad instruction - Truncating control flow here */
-  halt_baddata();
+  else {
+    FUN_002c55d4(1);
+  }
+  return temp_v0;
 }

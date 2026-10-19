@@ -8,7 +8,7 @@ typedef struct {
 } param_3_stack;
 
 extern int FUN_002a2dec(int);
-extern unsigned int *FUN_002baa40(unsigned char *);
+/* Supplied declaration required: FUN_002baa40. */
 extern unsigned int *FUN_002bad5c(unsigned int *);
 /* Supplied declaration required: FUN_0038bae8. */
 
@@ -16,7 +16,7 @@ extern unsigned int *FUN_002bad5c(unsigned int *);
 void FUN_0038b6d8(unsigned int *param_1,int param_2,unsigned int *param_3)
 
 {
-/* irregular: 2 native warning(s); review required */
+/* irregular: 3 native warning(s); review required */
   unsigned int *puVar1;
   unsigned int *puVar2;
   int temp_v0;
@@ -30,13 +30,14 @@ void FUN_0038b6d8(unsigned int *param_1,int param_2,unsigned int *param_3)
   unsigned int uStack_30;
   unsigned int uStack_2c;
   unsigned int uStack_28;
-  unsigned char temp_v7 [12];
+  unsigned int temp_v7 [3];
   
   temp_v6 = temp_v6 & 0xffffff00;
   puVar1 = (unsigned int *)FUN_002bad5c(&uStack_34);
   puVar1[2] = 0;
   puVar1[3] = 0;
-  puVar2 = (unsigned int *)FUN_002baa40(temp_v7);
+  puVar2 = temp_v7;
+  FUN_002baa40();
   temp_v1 = puVar2[1];
   *puVar1 = *puVar2;
   puVar1[1] = temp_v1;

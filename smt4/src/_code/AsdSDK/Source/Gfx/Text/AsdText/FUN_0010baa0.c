@@ -7,6 +7,7 @@ typedef struct {
     unsigned int sp4; /* 0x4: local_4 */
 } param_3_stack;
 
+extern unsigned char DAT_004def18; /* 0x4def18 */
 extern unsigned char DAT_004def28; /* 0x4def28 */
 
 
@@ -19,7 +20,7 @@ void FUN_0010baa0(unsigned short param_1,unsigned int param_2,unsigned int param
   do {
     if (*(int *)(temp_v0 * 4 + 0x4daee8) == 0) {
       *(unsigned int *)(temp_v0 * 4 + 0x4daee8) = param_3;
-      *(unsigned short *)(temp_v0 * 2 + 0x4def18) = param_1;
+      *(unsigned short *)(&DAT_004def18 + temp_v0 * 2) = param_1;
       *(unsigned int *)(&DAT_004def28 + temp_v0 * 4) = param_2;
       return;
     }

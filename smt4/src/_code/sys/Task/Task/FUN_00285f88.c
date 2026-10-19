@@ -14,14 +14,14 @@ extern unsigned int DAT_004c5834; /* 0x4c5834 */
 extern unsigned int DAT_004c5838; /* 0x4c5838 */
 
 /* Supplied declaration required: FUN_002c3944. */
-extern unsigned short *FUN_002c5300(unsigned int, unsigned int, unsigned int, int, unsigned int);
+/* Supplied declaration required: FUN_002c5300. */
 
 
-unsigned short * FUN_00285f88(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
-                     unsigned int param_5,int param_6,int param_7,unsigned short param_8,int param_9)
+void FUN_00285f88(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
+                 unsigned int param_5,int param_6,int param_7,unsigned short param_8,int param_9)
 
 {
-/* irregular: 1 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   unsigned short temp_v0;
   unsigned short *puVar2;
   unsigned short *puVar3;
@@ -30,7 +30,8 @@ unsigned short * FUN_00285f88(unsigned int param_1,unsigned int param_2,unsigned
   unsigned short *puVar6;
   
   puVar5 = &DAT_004c5830 + param_7 * 4;
-  puVar2 = (unsigned short *)FUN_002c5300(0x100,0x100,0,param_6 + 0x34,1);
+  puVar2 = (unsigned short *)0x100;
+  FUN_002c5300(0x100,0x100,0,param_6 + 0x34,1);
   if (puVar2 != (unsigned short *)0x0) {
     *(char *)((int)puVar2 + 3) = (char)param_7;
     *puVar2 = param_8;
@@ -102,10 +103,9 @@ unsigned short * FUN_00285f88(unsigned int param_1,unsigned int param_2,unsigned
       }
     }
     (&DAT_004c5838)[param_7 * 4] = (&DAT_004c5838)[param_7 * 4] + 1;
-    puVar2 = puVar2 + 0x1a;
     if (param_9 != 0) {
-      FUN_002c3944(puVar2,param_6);
+      FUN_002c3944(puVar2 + 0x1a,param_6);
     }
   }
-  return puVar2;
+  return;
 }

@@ -9,44 +9,49 @@ typedef struct {
 } param_2_stack;
 
 extern int FUN_0029903c(unsigned short, unsigned int);
-extern int FUN_002b45e8(void);
+/* Supplied declaration required: FUN_002b45e8. */
 
 
 void FUN_00394edc(int param_1,unsigned short *param_2)
 
 {
+/* irregular: 1 native warning(s); review required */
   unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
+  unsigned int temp_v1;
+  int temp_v2;
   int temp_v3;
   int temp_v4;
   int temp_v5;
-  int temp_v6 [3];
+  unsigned int temp_v6 [3];
   
   temp_v6[0] = 0;
   temp_v6[1] = 0;
-  if (*(short *)(param_1 + 8) != 0) {
-    temp_v6[0] = FUN_002b45e8();
+  temp_v1 = (unsigned int)*(unsigned short *)(param_1 + 8);
+  if (temp_v1 != 0) {
+    FUN_002b45e8();
+    temp_v6[0] = temp_v1;
   }
-  if (*(short *)(param_1 + 0xc) != 0) {
-    temp_v6[1] = FUN_002b45e8();
+  temp_v1 = (unsigned int)*(unsigned short *)(param_1 + 0xc);
+  if (temp_v1 != 0) {
+    FUN_002b45e8();
+    temp_v6[1] = temp_v1;
   }
   temp_v4 = 0;
   do {
     temp_v5 = 0;
-    temp_v2 = 0;
+    temp_v1 = 0;
     temp_v3 = temp_v4 * 2 + 0x74;
     do {
-      if (temp_v6[temp_v2] != 0) {
-        temp_v0 = ((int)*(short *)(temp_v6[temp_v2] + temp_v3) & 0x3ffffU) >> 10;
-        temp_v1 = FUN_0029903c(*param_2 >> 10,temp_v0);
-        if (temp_v1 != 0) {
+      if (temp_v6[temp_v1] != 0) {
+        temp_v0 = ((int)*(short *)(temp_v6[temp_v1] + temp_v3) & 0x3ffffU) >> 10;
+        temp_v2 = FUN_0029903c(*param_2 >> 10,temp_v0);
+        if (temp_v2 != 0) {
           *param_2 = (*param_2 & 0x3ff) | (unsigned short)(temp_v0 << 10);
-          temp_v5 = (int)((unsigned int)*(unsigned short *)(temp_v6[temp_v2] + temp_v3) << 0x16) >> 0x16;
+          temp_v5 = (int)((unsigned int)*(unsigned short *)(temp_v6[temp_v1] + temp_v3) << 0x16) >> 0x16;
         }
       }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < 2);
+      temp_v1 = temp_v1 + 1;
+    } while (temp_v1 < 2);
     temp_v4 = temp_v4 + 1;
     *param_2 = (*param_2 & 0xfc00) | (((*param_2 & 0x3ff) + (short)temp_v5) & 0x3ff);
     param_2 = param_2 + 1;

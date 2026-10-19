@@ -3,36 +3,24 @@
 #include "romwright_types.h"
 
 typedef int romwright_code();
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
+/* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
+} param_2_stack;
 
 /* Supplied declaration required: FUN_002bb648. */
-extern int FUN_002c1850(unsigned int);
 /* Supplied declaration required: FUN_002c52f8. */
 /* Supplied declaration required: nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile. */
 
 
-/* WARNING: Control flow encountered bad instruction data */
-/* WARNING: Removing unreachable block (ram,0x002bbe48) */
-/* WARNING: Removing unreachable block (ram,0x002bbe58) */
-/* WARNING: Removing unreachable block (ram,0x002bc9ce) */
-/* WARNING: Removing unreachable block (ram,0x002bce48) */
-/* WARNING: Removing unreachable block (ram,0x002bd2dc) */
-/* WARNING: Removing unreachable block (ram,0x002bd76c) */
-/* WARNING: Removing unreachable block (ram,0x002bdad6) */
-
-unsigned int FUN_002bb6c4(int *param_1)
+void FUN_002bb6c4(int *param_1,unsigned int param_2)
 
 {
-/* irregular: 11 native warning(s); review required */
+/* irregular: 3 native warning(s); review required */
   int temp_v0;
-  int temp_v1;
-  unsigned char temp_v2;
+  unsigned char temp_v1 [8];
   
-  temp_v1 = 0;
-  temp_v0 = (**(romwright_code **)(*param_1 + 8))(param_1);
+  temp_v0 = (**(romwright_code **)(*param_1 + 8))(param_1,*(romwright_code **)(*param_1 + 8),0,0,0);
   if (temp_v0 < 0) {
     if ((param_1[2] & 0xfffffffeU) != 0) {
       if ((param_1[2] & 1U) != 0) {
@@ -45,24 +33,25 @@ unsigned int FUN_002bb6c4(int *param_1)
       FUN_002bb648(temp_v0,0x2bb730);
     }
   }
-  temp_v2 = ((temp_v1 >> 0x1f) & 1U) != 0;
-  while( 1 ) {
-    if (temp_v2) {
-      temp_v0 = 0;
+  temp_v0 = (**(romwright_code **)(*param_1 + 0x34))(param_1,temp_v1,param_2,0x14,1);
+  if (temp_v0 < 0) {
+    if ((param_1[2] & 0xfffffffeU) != 0) {
+      if ((param_1[2] & 1U) != 0) {
+        FUN_002c52f8();
+      }
+      nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(param_1[2] & 0xfffffffe);
+      param_1[2] = 0;
     }
-    else {
-      temp_v0 = (int)param_1 * 0x78;
+    if (temp_v0 < 0) {
+      FUN_002bb648(temp_v0,0x2bb794);
     }
-    temp_v1 = FUN_002c1850(*(unsigned int *)(temp_v0 + 0x48));
-    if (temp_v1 != 0) break;
-    param_1 = (int *)((int)param_1 + 1);
-    if ((int)param_1 >= 4) {
-      return 0;
-    }
-    temp_v2 = (int *)0x3 < param_1;
   }
-  if (temp_v0 == 0) {
-    return 0;
+  if ((param_1[2] & 0xfffffffeU) != 0) {
+    if ((param_1[2] & 1U) != 0) {
+      FUN_002c52f8();
+    }
+    nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(param_1[2] & 0xfffffffe);
+    param_1[2] = 0;
   }
-  return 1;
+  return;
 }

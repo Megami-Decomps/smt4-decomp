@@ -66,7 +66,7 @@ extern int FUN_002b8694(void);
 extern int FUN_002b879c(void);
 extern int FUN_002b8804(void);
 extern int FUN_002bfefc(unsigned int *);
-extern unsigned int FUN_002c5300(unsigned int, unsigned int, unsigned int, int, unsigned int);
+/* Supplied declaration required: FUN_002c5300. */
 extern float FUN_002c5da8(unsigned int, unsigned int, unsigned int);
 extern int MapMode_IsBusy(void);
 extern int QuestCenterMode_IsBusy(void);
@@ -78,7 +78,7 @@ extern int QuestCenterMode_IsBusy(void);
 void FUN_0033e8a8(int param_1)
 
 {
-/* irregular: irregular input(s): in_d12, in_fpscr, in_r12; 10 native warning(s); review required */
+/* irregular: irregular input(s): in_d12, in_fpscr, in_r12; 11 native warning(s); review required */
   int temp_v0;
   char temp_v1;
   unsigned short temp_v2;
@@ -185,9 +185,11 @@ void FUN_0033e8a8(int param_1)
                        (*(int *)(param_1 + 0x1c) +
                        *(int *)(*(int *)(param_1 + 0x20) + temp_v3 * 0x18) * 4 + 2);
   }
-  temp_v4 = FUN_002c5300(0x100,0x100,0,temp_v8 * 0x58,1);
+  temp_v4 = 0x100;
+  FUN_002c5300(0x100,0x100,0,temp_v8 * 0x58,1);
   *(unsigned int *)(param_1 + 0x2c) = temp_v4;
-  temp_v4 = FUN_002c5300(0x100,0x100,0,(unsigned int)*(unsigned short *)(*(int *)(param_1 + 0x10) + 0xc) * 0xc,1);
+  temp_v4 = 0x100;
+  FUN_002c5300(0x100,0x100,0,(unsigned int)*(unsigned short *)(*(int *)(param_1 + 0x10) + 0xc) * 0xc,1);
   *(unsigned int *)(param_1 + 0x30) = temp_v4;
   temp_v28 = 0;
   temp_v3 = *(int *)(param_1 + 0x10);

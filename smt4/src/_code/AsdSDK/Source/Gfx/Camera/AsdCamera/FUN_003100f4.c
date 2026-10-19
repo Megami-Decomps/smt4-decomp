@@ -31,14 +31,14 @@ extern int FUN_0024530c(int *, unsigned int);
 /* Supplied declaration required: FUN_002a5dc4. */
 /* Supplied declaration required: FUN_002c2ff0. */
 extern unsigned int FUN_002c300c(void);
-extern int FUN_002c5300(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c5300. */
 /* Supplied declaration required: nw_gfx_SceneBuilder_CreateObject. */
 
 
 int FUN_003100f4(int param_1)
 
 {
-/* irregular: 2 goto(s); 5 native warning(s); review required */
+/* irregular: 2 goto(s); 6 native warning(s); review required */
   int temp_v0;
   int temp_v1;
   unsigned int temp_v2;
@@ -65,7 +65,8 @@ int FUN_003100f4(int param_1)
   unsigned int temp_v19;
   unsigned char temp_v20;
   
-  temp_v0 = FUN_002c5300(0x100,0x100,0,0x18,1);
+  temp_v0 = 0x100;
+  FUN_002c5300(0x100,0x100,0,0x18,1);
   temp_v5 = *(int *)(param_1 + 0x48);
   temp_v1 = param_1 + 0x48;
   if (temp_v5 != 0) {

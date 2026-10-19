@@ -2,21 +2,32 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
+typedef struct fn_004bb510_arg0 fn_004bb510_arg0;
+struct fn_004bb510_arg0 {
+    undefined4 field_0x0; /* +0x0 */
+    unsigned char pad_0x4[0x5];
+    unsigned char field_0x9; /* +0x9 */
+    unsigned char pad_0xa[0x2];
+    ushort field_0xc; /* +0xc */
+    ushort field_0xe; /* +0xe */
+};
+
 extern int FUN_001801a4(void);
 /* Supplied declaration required: FUN_001ad9b4. */
 extern int FUN_001ada74(unsigned short);
-extern int FUN_001ba3d4(unsigned int);
+extern fn_004bb510_arg0 *FUN_001ba3d4(unsigned int);
 extern int FUN_003df390(unsigned short);
 extern int FUN_00418584(unsigned short);
 extern unsigned int *FUN_004bb80c(void);
 
 
-unsigned int FUN_004bb510(int param_1)
+unsigned int FUN_004bb510(fn_004bb510_arg0 *param_1)
 
 {
 /* irregular: 1 native warning(s); review required */
   unsigned int *puVar1;
   int temp_v0;
+  fn_004bb510_arg0 *pfVar3;
   unsigned int temp_v1;
   unsigned char temp_v2;
   
@@ -24,92 +35,93 @@ unsigned int FUN_004bb510(int param_1)
   temp_v0 = FUN_00418584((short)puVar1[3]);
   if ((temp_v0 == 0) && (temp_v0 = FUN_001ada74((short)puVar1[3]), temp_v0 == 0)) {
     if ((short)puVar1[3] == 0x8d) {
-      temp_v0 = FUN_001ba3d4(0x3a);
-      if (temp_v0 >= 10) {
-        if (param_1 != 0x357) {
-          temp_v0 = param_1 - 0x300;
+      pfVar3 = (fn_004bb510_arg0 *)FUN_001ba3d4(0x3a);
+      if ((int)pfVar3 >= 10) {
+        if (param_1 != (fn_004bb510_arg0 *)0x357) {
+          pfVar3 = param_1 + -0x30;
         }
-        if (param_1 == 0x357 || temp_v0 == 0x5d) {
+        if (param_1 == (fn_004bb510_arg0 *)0x357 || pfVar3 == (fn_004bb510_arg0 *)0x5d) {
           return 0;
         }
-        temp_v0 = 0;
-        if (param_1 != 0x369) {
-          temp_v0 = param_1 - 0x300;
+        pfVar3 = (fn_004bb510_arg0 *)0x0;
+        if (param_1 != (fn_004bb510_arg0 *)0x369) {
+          pfVar3 = param_1 + -0x30;
         }
-        if (param_1 == 0x369 || temp_v0 == 0x6a) {
+        if (param_1 == (fn_004bb510_arg0 *)0x369 || pfVar3 == (fn_004bb510_arg0 *)0x6a) {
           return 0;
         }
-        if (param_1 == 0x36f || param_1 == 0x370) {
+        if (param_1 == (fn_004bb510_arg0 *)0x36f || param_1 == (fn_004bb510_arg0 *)0x370) {
           return 0;
         }
-        temp_v0 = 0;
-        if (param_1 != 0x375) {
-          temp_v0 = param_1 - 0x300;
+        pfVar3 = (fn_004bb510_arg0 *)0x0;
+        if (param_1 != (fn_004bb510_arg0 *)0x375) {
+          pfVar3 = param_1 + -0x30;
         }
-        if (param_1 == 0x375 || temp_v0 == 0x77) {
+        if (param_1 == (fn_004bb510_arg0 *)0x375 || pfVar3 == (fn_004bb510_arg0 *)0x77) {
           return 0;
         }
-        if (param_1 == 0x37b || param_1 == 0x37c) {
+        if (param_1 == (fn_004bb510_arg0 *)0x37b || param_1 == (fn_004bb510_arg0 *)0x37c) {
           return 0;
         }
-        temp_v2 = param_1 == 0x382;
-        temp_v0 = 0;
+        temp_v2 = param_1 == (fn_004bb510_arg0 *)0x382;
+        pfVar3 = (fn_004bb510_arg0 *)0x0;
         if (!temp_v2) {
-          temp_v0 = param_1 - 0x387;
-          temp_v2 = temp_v0 == 0;
+          pfVar3 = (fn_004bb510_arg0 *)&param_1[-0x39].field_0x9;
+          temp_v2 = pfVar3 == (fn_004bb510_arg0 *)0x0;
         }
         if (temp_v2) {
           return 0;
         }
-        if (param_1 != 0x388) {
-          temp_v0 = param_1 - 0x300;
+        if (param_1 != (fn_004bb510_arg0 *)0x388) {
+          pfVar3 = param_1 + -0x30;
         }
-        if (param_1 == 0x388 || temp_v0 == 0xcf) {
+        if (param_1 == (fn_004bb510_arg0 *)0x388 || pfVar3 == (fn_004bb510_arg0 *)0xcf) {
           return 0;
         }
-        temp_v2 = param_1 == 0x3d1 || param_1 == 0x3e3;
-        if (param_1 != 0x3d1 && param_1 != 0x3e3) {
-          temp_v2 = param_1 == 0x3e5;
+        temp_v2 = param_1 == (fn_004bb510_arg0 *)0x3d1 || param_1 == (fn_004bb510_arg0 *)0x3e3;
+        if (param_1 != (fn_004bb510_arg0 *)0x3d1 && param_1 != (fn_004bb510_arg0 *)0x3e3) {
+          temp_v2 = param_1 == (fn_004bb510_arg0 *)0x3e5;
         }
         if (temp_v2) {
           return 0;
         }
       }
-      temp_v0 = FUN_001ba3d4(0x3c);
-      if (temp_v0 >= 10) {
-        if (param_1 != 0x357) {
-          temp_v0 = param_1 - 0x300;
+      pfVar3 = (fn_004bb510_arg0 *)FUN_001ba3d4(0x3c);
+      if ((int)pfVar3 >= 10) {
+        if (param_1 != (fn_004bb510_arg0 *)0x357) {
+          pfVar3 = param_1 + -0x30;
         }
-        if (param_1 == 0x357 || temp_v0 == 0xb9) {
+        if (param_1 == (fn_004bb510_arg0 *)0x357 || pfVar3 == (fn_004bb510_arg0 *)0xb9) {
           return 0;
         }
-        temp_v0 = 0;
-        if (param_1 != 0x3bb) {
-          temp_v0 = param_1 - 0x300;
+        pfVar3 = (fn_004bb510_arg0 *)0x0;
+        if (param_1 != (fn_004bb510_arg0 *)0x3bb) {
+          pfVar3 = param_1 + -0x30;
         }
-        if (param_1 == 0x3bb || temp_v0 == 0xbf) {
+        if (param_1 == (fn_004bb510_arg0 *)0x3bb || pfVar3 == (fn_004bb510_arg0 *)0xbf) {
           return 0;
         }
-        temp_v0 = 0;
-        if (param_1 != 0x3c9) {
-          temp_v0 = param_1 - 0x300;
+        pfVar3 = (fn_004bb510_arg0 *)0x0;
+        if (param_1 != (fn_004bb510_arg0 *)0x3c9) {
+          pfVar3 = param_1 + -0x30;
         }
-        if (param_1 == 0x3c9 || temp_v0 == 0xca) {
+        if (param_1 == (fn_004bb510_arg0 *)0x3c9 || pfVar3 == (fn_004bb510_arg0 *)0xca) {
           return 0;
         }
-        temp_v2 = param_1 == 0x3d5;
-        temp_v0 = 0;
+        temp_v2 = param_1 == (fn_004bb510_arg0 *)0x3d5;
+        pfVar3 = (fn_004bb510_arg0 *)0x0;
         if (!temp_v2) {
-          temp_v0 = param_1 - 0x3e2;
-          temp_v2 = temp_v0 == 0;
+          pfVar3 = (fn_004bb510_arg0 *)&param_1[-0x3f].field_0xe;
+          temp_v2 = pfVar3 == (fn_004bb510_arg0 *)0x0;
         }
         if (temp_v2) {
           return 0;
         }
-        if (param_1 != 0x3e4 && param_1 != 0x3ec) {
-          temp_v0 = param_1 - 0x300;
+        if (param_1 != (fn_004bb510_arg0 *)0x3e4 && param_1 != (fn_004bb510_arg0 *)0x3ec) {
+          pfVar3 = param_1 + -0x30;
         }
-        if ((param_1 == 0x3e4 || param_1 == 0x3ec) || temp_v0 == 0xf1) {
+        if ((param_1 == (fn_004bb510_arg0 *)0x3e4 || param_1 == (fn_004bb510_arg0 *)0x3ec) ||
+            pfVar3 == (fn_004bb510_arg0 *)0xf1) {
           return 0;
         }
       }

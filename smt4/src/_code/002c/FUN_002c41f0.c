@@ -16,12 +16,9 @@ struct fn_002c41f0_arg0 {
 extern void FUN_002c41f0(fn_002c41f0_arg0 *);
 
 
-/* WARNING: Control flow encountered bad instruction data */
-
 void FUN_002c41f0(fn_002c41f0_arg0 *param_1)
 
 {
-/* irregular: 2 native warning(s); review required */
   fn_002c41f0_arg0 *pfVar1;
   fn_002c41f0_arg0 *pfVar2;
   
@@ -38,7 +35,7 @@ void FUN_002c41f0(fn_002c41f0_arg0 *param_1)
   case 1:
   case 2:
   case 3:
-                    /* WARNING: Bad instruction - Truncating control flow here */
-    halt_baddata();
+    param_1->field_0x98 = 4;
+    return;
   }
 }

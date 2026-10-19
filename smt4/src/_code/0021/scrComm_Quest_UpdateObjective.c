@@ -54,9 +54,9 @@ extern int FUN_002b47f4(unsigned int);
 extern int FUN_002b6b20(void);
 extern int FUN_002b8660(void);
 /* Supplied declaration required: FUN_002b8838. */
-extern unsigned int FUN_002bd06c(unsigned short);
+/* Supplied declaration required: FUN_002bd06c. */
 extern unsigned int FUN_002bd1fc(void);
-extern unsigned int FUN_002be650(unsigned short, unsigned int);
+/* Supplied declaration required: FUN_002be650. */
 /* Supplied declaration required: FUN_002bf694. */
 /* Supplied declaration required: FUN_002bff50. */
 extern int FUN_002c2950(void);
@@ -75,8 +75,8 @@ extern int FUN_00333a38(unsigned int, unsigned int);
 unsigned int scrComm_Quest_UpdateObjective(void)
 
 {
-/* irregular: 33 native warning(s); review required */
-  unsigned short temp_v0;
+/* irregular: 35 native warning(s); review required */
+  unsigned int temp_v0;
   int temp_v1;
   unsigned int temp_v2;
   unsigned int temp_v3;
@@ -102,7 +102,7 @@ unsigned int scrComm_Quest_UpdateObjective(void)
   unsigned int temp_v22;
   unsigned int temp_v23;
   
-  temp_v0 = FUN_00296cc8(0);
+  temp_v0 = FUN_00296cc8(0) & 0xffff;
   temp_v1 = FUN_002893d8();
   if (temp_v1 == 0) {
     FUN_002542d4(0);
@@ -226,19 +226,21 @@ unsigned int scrComm_Quest_UpdateObjective(void)
       temp_v6 = temp_v3 + temp_v6 * 8;
       if (*(short *)(temp_v6 + 0x16c) != 1) {
         if (*(short *)(temp_v6 + 0x16c) == 2) {
+          temp_v0 = (unsigned int)*(unsigned short *)(temp_v6 + 0x16e);
           temp_v2 = 10;
-          temp_v5 = FUN_002bd06c(*(unsigned short *)(temp_v6 + 0x16e));
-          FUN_002bf694(&temp_v12,temp_v5);
+          FUN_002bd06c(temp_v0);
+          FUN_002bf694(&temp_v12,temp_v0);
           FUN_00295660(8,&temp_v12);
           FUN_0029ede8(0x18,*(unsigned int *)(temp_v6 + 0x170),0xffffffff,0);
         }
       }
       else {
+        temp_v0 = (unsigned int)*(unsigned short *)(temp_v6 + 0x16e);
         if (*(int *)(temp_v6 + 0x170) == 1) {
           temp_v2 = 8;
         }
-        temp_v5 = FUN_002be650(*(unsigned short *)(temp_v6 + 0x16e),1);
-        FUN_002bf694(&temp_v12,temp_v5);
+        FUN_002be650(temp_v0,1);
+        FUN_002bf694(&temp_v12,temp_v0);
         FUN_00295660(0,&temp_v12);
         FUN_0029ede8(0x18,*(unsigned int *)(temp_v6 + 0x170),0xffffffff,0);
       }
@@ -246,8 +248,9 @@ unsigned int scrComm_Quest_UpdateObjective(void)
     else {
       temp_v2 = 8;
       temp_v7 = FUN_002b6b20();
-      temp_v5 = FUN_002bd06c(*(unsigned short *)(temp_v7 + 0x46));
-      FUN_002bf694(&temp_v12,temp_v5);
+      temp_v0 = (unsigned int)*(unsigned short *)(temp_v7 + 0x46);
+      FUN_002bd06c(temp_v0);
+      FUN_002bf694(&temp_v12,temp_v0);
       FUN_00295660(0,&temp_v12);
       FUN_0029ede8(0x18,*(unsigned int *)(temp_v3 + temp_v6 * 8 + 0x170),0xffffffff,0);
     }

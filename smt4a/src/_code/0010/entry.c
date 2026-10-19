@@ -4,10 +4,10 @@
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_00102c80. */
+/* Supplied declaration required: FUN_00135c30. */
 /* Supplied declaration required: FUN_00136c40. */
 /* Supplied declaration required: FUN_001396c8. */
 /* Supplied declaration required: FUN_0016f854. */
-/* Supplied declaration required: func_0x00135c30. */
 /* Supplied declaration required: nninitCallStaticInitializers. */
 /* Supplied declaration required: nninitRegion. */
 /* Supplied declaration required: nninitSetup. */
@@ -24,7 +24,7 @@ void entry(void)
   FUN_00102c80();
   nninitCallStaticInitializers();
   nninitSetup();
-  func_0x00135c30();
+  FUN_00135c30();
   software_interrupt(3);
   return;
 }

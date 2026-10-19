@@ -23,13 +23,13 @@ extern unsigned char LAB_003df7b8; /* 0x3df7b8 */
 #endif
 extern unsigned long long FUN_00100bee(unsigned int, unsigned int, unsigned int);
 extern int FUN_002b4414(unsigned int, unsigned char *, unsigned int);
-extern unsigned int *nn_fnd_DateTime_DateTime_sub_object(unsigned char *, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: nn_fnd_DateTime_DateTime_sub_object. */
 
 
 void FUN_003df648(int *param_1,int *param_2)
 
 {
-/* irregular: 1 goto(s) */
+/* irregular: 1 goto(s); 1 native warning(s); review required */
   unsigned long long temp_v0;
   long long temp_v1;
   long long temp_v2;
@@ -43,7 +43,7 @@ void FUN_003df648(int *param_1,int *param_2)
   unsigned int temp_v9;
   unsigned int temp_v10;
   unsigned long long temp_v11;
-  unsigned char temp_v12 [12];
+  unsigned int temp_v12 [3];
   
   temp_v7 = 0;
   temp_v6 = *param_2;
@@ -61,7 +61,8 @@ void FUN_003df648(int *param_1,int *param_2)
   temp_v4 = 0;
 LAB_003df6a0:
   temp_v11 = FUN_00100bee(temp_v4,0,10);
-  puVar6 = (unsigned int *)nn_fnd_DateTime_DateTime_sub_object(temp_v12,0x7b2,1,1,0,0,0,0);
+  puVar6 = temp_v12;
+  nn_fnd_DateTime_DateTime_sub_object(puVar6,0x7b2,1,1,0,0,0,0);
   temp_v0 = (temp_v11 & 0xffffffff) * 1000000;
   temp_v9 = (int)(temp_v11 >> 0x20) * 1000000 + (int)(temp_v0 >> 0x20);
   temp_v5 = *puVar6;

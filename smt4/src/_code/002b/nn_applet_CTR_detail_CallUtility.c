@@ -1,44 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `nn_applet_CTR_detail_CallUtility` (_code @ 0x2b5838, 0xc9 bytes) from smt4_v1.2.0.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `nn_applet_CTR_detail_CallUtility` (_code @ 0x2b5838, 0xcc bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
-/* stack frame of void: 4 slot(s), 16 byte(s) */
+/* stack frame of param_6: 5 slot(s), 20 byte(s) */
 typedef struct {
+    unsigned int sp28; /* 0x28: local_28 */
     unsigned int sp2C; /* 0x2c: local_2c */
     unsigned int sp30; /* 0x30: local_30 */
     unsigned int sp34; /* 0x34: local_34 */
     unsigned int sp38; /* 0x38: local_38 */
-} void_stack;
+} param_6_stack;
 
-extern unsigned int uRam00000000; /* 0x0 */
-extern unsigned int uRam00000004; /* 0x4 */
-extern unsigned int uRam00000008; /* 0x8 */
-extern unsigned int uRam0000000c; /* 0xc */
-extern unsigned int uRam00000010; /* 0x10 */
-extern unsigned int uRam00000014; /* 0x14 */
-extern int DAT_004652a0; /* 0x4652a0 */
-
+extern int FUN_0013b934(unsigned int, unsigned int *);
+/* Supplied declaration required: FUN_002bb308. */
 /* Supplied declaration required: FUN_002bb378. */
+/* Supplied declaration required: FUN_002c131c. */
 
 
-/* WARNING: Control flow encountered bad instruction data */
-
-void nn_applet_CTR_detail_CallUtility(void)
+int nn_applet_CTR_detail_CallUtility
+              (unsigned int param_1,unsigned int *param_2,int param_3,int param_4,int param_5,
+              unsigned int *param_6)
 
 {
-/* irregular: irregular input(s): in_r3; 4 native warning(s); review required */
-  int in_r3;
+/* irregular: 3 native warning(s); review required */
+  int temp_v0;
+  int temp_v1;
+  unsigned int temp_v2;
+  unsigned int temp_v3;
   
+  temp_v1 = 0;
+  temp_v2 = 0;
   FUN_002bb378();
-  if (in_r3 == 0) {
-                    /* WARNING: Bad instruction - Truncating control flow here */
-    halt_baddata();
+  if ((param_2 == (unsigned int *)0x0) || (param_3 == 0)) {
+    param_2 = (unsigned int *)&temp_v1;
   }
-  uRam00000000 = *(unsigned char *)(in_r3 + 0x12a42) | 0x80000000;
-  DAT_004652a0 = DAT_004652a0 + 0x18;
-  uRam00000004 = 0x804f02c0;
-  uRam00000008 = uRam0000000c;
-  uRam00000010 = 0x804f02c0;
-  uRam00000014 = uRam00000000;
-  return;
+  temp_v0 = FUN_0013b934(param_1,param_2);
+  if (temp_v0 < 0) {
+    FUN_002c131c(temp_v0,0x2b58c8);
+  }
+  if (param_4 == 0 || param_5 == 0) {
+    temp_v3 = 0;
+  }
+  if (param_6 != (unsigned int *)0x0) {
+    *param_6 = temp_v3;
+  }
+  FUN_002bb308();
+  return temp_v0;
 }

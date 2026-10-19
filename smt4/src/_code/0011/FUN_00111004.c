@@ -23,7 +23,7 @@ extern int FUN_002ad1e0(int);
 /* Supplied declaration required: FUN_002ba8f4. */
 /* Supplied declaration required: FUN_002ba968. */
 /* Supplied declaration required: FUN_002ba9ac. */
-extern unsigned int *FUN_002baa40(unsigned char *, unsigned int);
+/* Supplied declaration required: FUN_002baa40. */
 extern unsigned int *FUN_002bad5c(unsigned int *);
 extern unsigned long long FUN_002c08f0(void);
 /* Supplied declaration required: FUN_002c40f8. */
@@ -33,7 +33,7 @@ extern unsigned long long FUN_002c08f0(void);
 unsigned int FUN_00111004(void)
 
 {
-/* irregular: irregular input(s): in_stack_ffffffb8; 5 native warning(s); review required */
+/* irregular: irregular input(s): in_stack_ffffffb8; 6 native warning(s); review required */
   unsigned int *puVar1;
   unsigned int temp_v0;
   int temp_v1;
@@ -54,7 +54,7 @@ unsigned int FUN_00111004(void)
   unsigned int uStack_2c;
   unsigned int uStack_28;
   unsigned int uStack_24;
-  unsigned char temp_v11 [8];
+  unsigned int temp_v11 [2];
   
   temp_v5 = FUN_002c08f0();
   temp_v2 = (unsigned int)((unsigned long long)temp_v5 >> 0x20);
@@ -73,12 +73,14 @@ unsigned int FUN_00111004(void)
     puVar4 = (unsigned int *)FUN_002bad5c((unsigned int *)&temp_v7);
     puVar4[2] = 0;
     puVar4[3] = 0;
-    puVar5 = (unsigned int *)FUN_002baa40(temp_v11,0);
+    puVar5 = temp_v11;
+    FUN_002baa40(puVar5,0);
     temp_v3 = puVar5[1];
     *puVar4 = *puVar5;
     puVar4[1] = temp_v3;
+    puVar4 = temp_v11;
     temp_v9 = 0;
-    puVar4 = (unsigned int *)FUN_002baa40(temp_v11,0);
+    FUN_002baa40(puVar4,0);
     temp_v7 = *puVar4;
     temp_v8 = puVar4[1];
     temp_v10 = romwright_piece_3_1(temp_v6,200);

@@ -53,14 +53,14 @@ extern int FUN_002b90c8(int, unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_002baa40. */
 extern unsigned int FUN_002bad5c(char *);
 /* Supplied declaration required: FUN_002bb5a4. */
-extern unsigned int FUN_002bf5c0(unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002bf5c0. */
 /* Supplied declaration required: FUN_002c415c. */
 /* Supplied declaration required: FUN_002c52f8. */
 /* Supplied declaration required: FUN_002c564c. */
 extern unsigned int FUN_002c5c14(int, int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002c618c. */
 /* Supplied declaration required: nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile. */
-extern unsigned int nn_fs_detail_FileBase_TryGetSize(unsigned int *, unsigned int *);
+/* Supplied declaration required: nn_fs_detail_FileBase_TryGetSize. */
 /* Supplied declaration required: nn_fs_detail_FileBase_TryRead. */
 
 
@@ -69,15 +69,17 @@ extern unsigned int nn_fs_detail_FileBase_TryGetSize(unsigned int *, unsigned in
 void FUN_0015c81c(int param_1,int param_2)
 
 {
-/* irregular: 2 goto(s); 20 native warning(s); review required */
+/* irregular: 2 goto(s); 22 native warning(s); review required */
   char temp_v0;
   unsigned char temp_v1;
   unsigned int *puVar3;
-  unsigned int *puVar4;
+  char *pcVar4;
   char *pcVar5;
   int temp_v2;
   int temp_v3;
   unsigned int *puVar8;
+  unsigned int *puVar9;
+  char *pcVar10;
   unsigned int temp_v4;
   unsigned int temp_v5;
   unsigned char temp_v6;
@@ -114,25 +116,28 @@ void FUN_0015c81c(int param_1,int param_2)
   unsigned int uStack_4c;
   unsigned int uStack_48;
   unsigned int *temp_v24;
-  unsigned char temp_v25 [8];
-  int temp_v26;
-  unsigned int temp_v27;
-  int temp_v28;
+  char acStack_40 [8];
+  int temp_v25;
+  unsigned int temp_v26;
+  int temp_v27;
   int iStack_28;
   
+  pcVar5 = (char *)&temp_v7;
+  pcVar10 = (char *)&temp_v7;
   (*(unsigned char *)((unsigned char *)&temp_v15 + 0)) = 1;
-  temp_v28 = param_1;
+  temp_v27 = param_1;
   iStack_28 = param_2;
   puVar3 = (unsigned int *)FUN_002bad5c(temp_v16);
   puVar3[2] = 0;
   puVar3[3] = 0;
-  puVar4 = (unsigned int *)FUN_002baa40(temp_v9,0);
-  temp_v4 = puVar4[1];
-  *puVar3 = *puVar4;
+  pcVar4 = temp_v9;
+  FUN_002baa40(pcVar4,0);
+  temp_v4 = *(unsigned int *)(pcVar4 + 4);
+  *puVar3 = *(unsigned int *)pcVar4;
   puVar3[1] = temp_v4;
   (*(unsigned char *)((unsigned char *)&temp_v15 + 0)) = 1;
   temp_v17 = 0;
-  pcVar5 = (char *)FUN_002baa40(&temp_v7,0);
+  FUN_002baa40(&temp_v7,0);
   (*(unsigned int *)temp_v16) = (unsigned int)*(char (*) [4])pcVar5;
   uStack_298 = *(unsigned int *)(pcVar5 + 4);
   (*(unsigned char *)((unsigned char *)&temp_v15 + 0)) = 100;
@@ -164,7 +169,7 @@ void FUN_0015c81c(int param_1,int param_2)
         return;
       }
       temp_v4 = FUN_002c5c14(param_2 + 0x70,param_2 + 0x24,*(unsigned int *)(param_2 + 0x28),
-                           *(unsigned int *)(param_2 + 0x2c));
+                            *(unsigned int *)(param_2 + 0x2c));
       *(unsigned int *)(param_2 + 0x14) = temp_v4;
       *(unsigned char *)(param_2 + 8) = 3;
       return;
@@ -200,26 +205,27 @@ void FUN_0015c81c(int param_1,int param_2)
           builtin_strncpy(temp_v9,"h\fB",4);
           temp_v21 = 1;
           temp_v24 = &temp_v10;
+          temp_v25 = 0;
           temp_v26 = 0;
-          temp_v27 = 0;
-          FUN_002b90e6(&temp_v26);
-          while ((temp_v3 = FUN_002b90c8(temp_v2,0x105,(unsigned int *)&temp_v26), temp_v3 != 0 &&
-                 (puVar4 = puVar3, FUN_002c618c(puVar3,temp_v2,temp_v3,&temp_v26),
-                 puVar4 != (unsigned int *)0x0))) {
+          FUN_002b90e6(&temp_v25);
+          while ((temp_v3 = FUN_002b90c8(temp_v2,0x105,(unsigned int *)&temp_v25), temp_v3 != 0 &&
+                 (puVar8 = puVar3, FUN_002c618c(puVar3,temp_v2,temp_v3,&temp_v25),
+                 puVar8 != (unsigned int *)0x0))) {
             puVar3 = (unsigned int *)((int)puVar3 + 2);
             temp_v2 = temp_v2 + temp_v3;
           }
           *(unsigned short *)puVar3 = 0;
-          puVar8 = temp_v24;
+          puVar9 = temp_v24;
           temp_v4 = temp_v21;
           temp_v24[3] = 0;
-          puVar8[4] = 0;
-          puVar8[1] = 0;
-          puVar8[2] = 0;
-          FUN_002bb5a4(puVar8,&temp_v18,temp_v4);
-          pcVar5 = (char *)FUN_002baa40(temp_v25,puVar8);
-          (*(unsigned int *)temp_v16) = (unsigned int)*(char (*) [4])pcVar5;
-          uStack_298 = *(unsigned int *)(pcVar5 + 4);
+          puVar9[4] = 0;
+          puVar9[1] = 0;
+          puVar9[2] = 0;
+          FUN_002bb5a4(puVar9,&temp_v18,temp_v4);
+          pcVar4 = acStack_40;
+          FUN_002baa40(pcVar4,puVar9);
+          (*(unsigned int *)temp_v16) = (unsigned int)*(char (*) [4])pcVar4;
+          uStack_298 = *(unsigned int *)(pcVar4 + 4);
           temp_v2 = FUN_002a12d8(temp_v16);
           if (temp_v2 < 0) {
             if ((temp_v10 & 0xfffffffe) != 0) {
@@ -233,10 +239,12 @@ void FUN_0015c81c(int param_1,int param_2)
           else {
             temp_v22 = 0;
             uStack_5c = 0;
-            temp_v4 = nn_fs_detail_FileBase_TryGetSize(&temp_v10,(unsigned int *)&temp_v22);
-            pcVar5 = (char *)FUN_002baa40(temp_v25,temp_v4);
-            (*(unsigned int *)temp_v16) = (unsigned int)*(char (*) [4])pcVar5;
-            uStack_298 = *(unsigned int *)(pcVar5 + 4);
+            puVar9 = &temp_v10;
+            nn_fs_detail_FileBase_TryGetSize(puVar9,&temp_v22);
+            pcVar4 = acStack_40;
+            FUN_002baa40(pcVar4,puVar9);
+            (*(unsigned int *)temp_v16) = (unsigned int)*(char (*) [4])pcVar4;
+            uStack_298 = *(unsigned int *)(pcVar4 + 4);
             temp_v2 = FUN_002a12d8(temp_v16);
             if (temp_v2 < 0) {
               if ((temp_v10 & 0xfffffffe) != 0) {
@@ -256,41 +264,46 @@ void FUN_0015c81c(int param_1,int param_2)
                     if (temp_v2 != 0x11) {
                       temp_v7 = *(unsigned int *)(param_2 + 0x2c);
                       temp_v8 = 1;
-                      temp_v4 = FUN_002bf5c0(0x100,0x100,0,*(unsigned int *)(param_2 + 0x24));
+                      temp_v4 = 0x100;
+                      FUN_002bf5c0(0x100,0x100,0,*(unsigned int *)(param_2 + 0x24));
                       *(unsigned int *)(param_2 + 0x14) = temp_v4;
                     }
                     else {
                       temp_v7 = *(unsigned int *)(param_2 + 0x2c);
                       temp_v8 = 0;
-                      temp_v4 = FUN_002bf5c0(0x10000,0x100,0,*(unsigned int *)(param_2 + 0x24));
+                      temp_v4 = 0x10000;
+                      FUN_002bf5c0(0x10000,0x100,0,*(unsigned int *)(param_2 + 0x24));
                       *(unsigned int *)(param_2 + 0x14) = temp_v4;
                     }
                   }
                   else {
                     temp_v7 = *(unsigned int *)(param_2 + 0x2c);
                     temp_v8 = 1;
-                    temp_v4 = FUN_002bf5c0(0x10000,0x100,0,*(unsigned int *)(param_2 + 0x24));
+                    temp_v4 = 0x10000;
+                    FUN_002bf5c0(0x10000,0x100,0,*(unsigned int *)(param_2 + 0x24));
                     *(unsigned int *)(param_2 + 0x14) = temp_v4;
                   }
                 }
                 else {
                   temp_v7 = *(unsigned int *)(param_2 + 0x2c);
                   temp_v8 = 0;
-                  temp_v4 = FUN_002bf5c0(0x100,0x100,0,*(unsigned int *)(param_2 + 0x24));
+                  temp_v4 = 0x100;
+                  FUN_002bf5c0(0x100,0x100,0,*(unsigned int *)(param_2 + 0x24));
                   *(unsigned int *)(param_2 + 0x14) = temp_v4;
                 }
               }
-              puVar8 = &temp_v10;
+              puVar9 = &temp_v10;
               nn_fs_detail_FileBase_TryRead
-                        (puVar8,&temp_v20,*(unsigned int *)(param_2 + 0x14),
+                        (puVar9,&temp_v20,*(unsigned int *)(param_2 + 0x14),
                          *(unsigned int *)(param_2 + 0x24));
-              pcVar5 = (char *)FUN_002baa40(temp_v25,puVar8);
-              (*(unsigned int *)temp_v16) = (unsigned int)*(char (*) [4])pcVar5;
-              uStack_298 = *(unsigned int *)(pcVar5 + 4);
+              pcVar4 = acStack_40;
+              FUN_002baa40(pcVar4,puVar9);
+              (*(unsigned int *)temp_v16) = (unsigned int)*(char (*) [4])pcVar4;
+              uStack_298 = *(unsigned int *)(pcVar4 + 4);
               if (temp_v20 == 0) {
-                pcVar5 = (char *)FUN_002baa40(&temp_v7,0xd9004586);
-                (*(unsigned int *)temp_v16) = (unsigned int)*(char (*) [4])pcVar5;
-                uStack_298 = *(unsigned int *)(pcVar5 + 4);
+                FUN_002baa40(&temp_v7,0xd9004586);
+                (*(unsigned int *)temp_v16) = (unsigned int)*(char (*) [4])pcVar10;
+                uStack_298 = *(unsigned int *)(pcVar10 + 4);
               }
               temp_v2 = FUN_002a12d8(temp_v16);
               if (temp_v2 < 0) {
@@ -310,7 +323,7 @@ void FUN_0015c81c(int param_1,int param_2)
                   nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(temp_v10 & 0xfffffffe);
                   temp_v10 = 0;
                 }
-                if (*(char *)(temp_v28 + 0x450c) == '\x01') {
+                if (*(char *)(temp_v27 + 0x450c) == '\x01') {
 LAB_0015cdc8:
                   puVar3 = *(unsigned int **)(param_2 + 4);
                   temp_v6 = ((unsigned int)puVar3 & 1) != 0;
@@ -414,12 +427,12 @@ LAB_0015cfcc:
       else if (!temp_v6) {
         FUN_002c564c();
       }
-      pcVar5 = temp_v16;
+      pcVar4 = temp_v16;
       FUN_002a1200();
-      if (pcVar5 == (char *)0x0) {
-        pcVar5 = temp_v16;
+      if (pcVar4 == (char *)0x0) {
+        pcVar4 = temp_v16;
         FUN_002a116c();
-        if (pcVar5 == (char *)0x0) {
+        if (pcVar4 == (char *)0x0) {
           FUN_002c564c(0);
           temp_v15 = romwright_piece_3_1(temp_v15._1_3_,100);
           *(unsigned char *)(param_2 + 8) = 1;

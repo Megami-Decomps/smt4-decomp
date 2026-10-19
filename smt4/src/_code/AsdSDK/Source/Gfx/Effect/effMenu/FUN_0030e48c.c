@@ -36,7 +36,7 @@ extern unsigned int FUN_0024ac4c(unsigned int);
 /* Supplied declaration required: FUN_002b011c. */
 /* Supplied declaration required: FUN_002b7d30. */
 /* Supplied declaration required: FUN_002c1b64. */
-extern unsigned int *FUN_002c32a0(unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c32a0. */
 /* Supplied declaration required: FUN_002c39a4. */
 /* Supplied declaration required: FUN_002c415c. */
 /* Supplied declaration required: FUN_002c4f8c. */
@@ -51,7 +51,7 @@ extern int FUN_002c5d80(unsigned int);
 void FUN_0030e48c(unsigned int param_1,int *param_2,int param_3)
 
 {
-/* irregular: 1 goto(s); irregular input(s): in_fpscr; 17 native warning(s); review required */
+/* irregular: 1 goto(s); irregular input(s): in_fpscr; 18 native warning(s); review required */
   short temp_v0;
   int temp_v1;
   unsigned int *puVar3;
@@ -110,7 +110,8 @@ void FUN_0030e48c(unsigned int param_1,int *param_2,int param_3)
       temp_v13 = *(unsigned long long *)(param_2 + 4);
       temp_v15 = 0x10;
       temp_v16 = 1;
-      puVar3 = (unsigned int *)FUN_002c32a0(0x10000,0x100,0,0x68);
+      puVar3 = (unsigned int *)0x10000;
+      FUN_002c32a0(0x10000,0x100,0,0x68);
       puVar3[2] = (int)temp_v12;
       puVar3[3] = (int)((unsigned long long)temp_v12 >> 0x20);
       puVar3[4] = (int)temp_v13;
@@ -126,7 +127,8 @@ void FUN_0030e48c(unsigned int param_1,int *param_2,int param_3)
       temp_v14 = *(unsigned long long *)(param_2 + 6);
       temp_v15 = 0x10;
       temp_v16 = 1;
-      puVar3 = (unsigned int *)FUN_002c32a0(0x10000,0x100,0,0x68);
+      puVar3 = (unsigned int *)0x10000;
+      FUN_002c32a0(0x10000,0x100,0,0x68);
       puVar3[2] = (int)temp_v12;
       puVar3[3] = (int)((unsigned long long)temp_v12 >> 0x20);
       puVar3[4] = (int)temp_v13;

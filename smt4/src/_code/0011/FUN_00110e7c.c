@@ -3,27 +3,28 @@
 #include "romwright_types.h"
 
 extern int FUN_0011b930(int);
-extern unsigned int *FUN_002baa40(unsigned char *, unsigned int);
+/* Supplied declaration required: FUN_002baa40. */
 /* Supplied declaration required: FUN_002bad5c. */
 
 
 void FUN_00110e7c(int param_1)
 
 {
-/* irregular: 1 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   int temp_v0;
   unsigned int *puVar2;
   unsigned int *puVar3;
   unsigned int temp_v1;
   unsigned long long temp_v2;
-  unsigned char temp_v3 [12];
+  unsigned int temp_v3 [3];
   
+  puVar3 = temp_v3;
   temp_v0 = FUN_0011b930(param_1 + 8);
   *(unsigned char *)(temp_v0 + 0x314) = 1;
   puVar2 = (unsigned int *)FUN_002bad5c(temp_v0 + 0x318);
   puVar2[2] = 0;
   puVar2[3] = 0;
-  puVar3 = (unsigned int *)FUN_002baa40(temp_v3,0);
+  FUN_002baa40(temp_v3,0);
   temp_v1 = puVar3[1];
   *puVar2 = *puVar3;
   puVar2[1] = temp_v1;

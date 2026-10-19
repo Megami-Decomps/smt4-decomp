@@ -23,7 +23,8 @@ void FUN_00243224(unsigned int *param_1,unsigned int *param_2,unsigned int param
   unsigned int temp_v3;
   unsigned int temp_v4;
   
-  temp_v0 = FUN_002c32a0(0x10000,0x100,0,0x68,0x10,1);
+  temp_v0 = 0x10000;
+  FUN_002c32a0(0x10000,0x100,0,0x68,0x10,1);
   temp_v1 = param_1[1];
   temp_v2 = param_1[2];
   temp_v3 = param_1[3];
@@ -43,8 +44,9 @@ void FUN_00243224(unsigned int *param_1,unsigned int *param_2,unsigned int param
   *(unsigned int *)(temp_v0 + 0x28) = param_3;
   *(unsigned int *)(temp_v0 + 0x2c) = param_4;
   FUN_002571b8(temp_v0,1);
-  temp_v1 = FUN_002c32a0(0x10000,0x100,0,0x68,0x10,1);
-  rt_memcpy_w(temp_v1,temp_v0,0x68);
+  temp_v1 = 0x10000;
+  FUN_002c32a0(0x10000,0x100,0,0x68,0x10,1);
+  rt_memcpy_w();
   FUN_002571b8(temp_v1,2);
   return;
 }

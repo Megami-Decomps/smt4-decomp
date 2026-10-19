@@ -7,20 +7,21 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_3_stack;
 
-extern unsigned int FUN_002c5300(unsigned int, unsigned int, unsigned int, int, unsigned int);
+/* Supplied declaration required: FUN_002c5300. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
 void FUN_002fdf3c(int param_1,unsigned int param_2,int param_3)
 
 {
-/* irregular: 1 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   unsigned int temp_v0;
   
   if (0 < param_3) {
-    temp_v0 = FUN_002c5300(0x100,0x100,0,param_3 * 0x348,1);
+    temp_v0 = 0x100;
+    FUN_002c5300(0x100,0x100,0,param_3 * 0x348,1);
     *(unsigned int *)(param_1 * 0x148 + 0x478024) = temp_v0;
-    rt_memcpy_w(temp_v0,param_2,param_3 * 0x348);
+    rt_memcpy_w();
   }
   *(int *)(param_1 * 0x148 + 0x478020) = param_3;
   return;

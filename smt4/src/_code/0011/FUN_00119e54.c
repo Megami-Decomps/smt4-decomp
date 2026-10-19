@@ -24,19 +24,21 @@ typedef struct {
 #endif
 extern int *FUN_0012d1fc(unsigned int);
 extern int *FUN_0012d318(void);
-extern int nw_gfx_Camera_DynamicBuilder_Create(unsigned char *, unsigned int);
+/* Supplied declaration required: nw_gfx_Camera_DynamicBuilder_Create. */
 
 
-int FUN_00119e54(unsigned int param_1,unsigned int *param_2,unsigned int *param_3,unsigned int *param_4,
-                unsigned char param_5)
+unsigned char *
+FUN_00119e54(unsigned int param_1,unsigned int *param_2,unsigned int *param_3,unsigned int *param_4,
+            unsigned char param_5)
 
 {
-/* irregular: irregular input(s): in_s0, in_s1, in_s2 */
+/* irregular: irregular input(s): in_s0, in_s1, in_s2; 1 native warning(s); review required */
   char temp_v0;
   int *piVar2;
   int temp_v1;
   int *piVar4;
   int *piVar5;
+  unsigned char *puVar6;
   unsigned int temp_v2;
   unsigned int temp_v3;
   unsigned int in_s0;
@@ -70,6 +72,7 @@ int FUN_00119e54(unsigned int param_1,unsigned int *param_2,unsigned int *param_
   piVar4 = (int *)FUN_0012d1fc(param_1);
   *(unsigned char *)(piVar4 + 2) = param_5;
   temp_v1 = (**(romwright_code **)(*piVar4 + 0x10))(piVar4);
+  puVar6 = &temp_v7;
   *(unsigned int *)(temp_v1 + 4) = in_s0;
   *(unsigned int *)(temp_v1 + 8) = in_s1;
   temp_v2 = *param_4;
@@ -113,7 +116,7 @@ int FUN_00119e54(unsigned int param_1,unsigned int *param_2,unsigned int *param_
     piVar4 = (int *)piVar2[1];
     (**(romwright_code **)(*piVar4 + 0xc))(piVar4,piVar2);
   }
-  temp_v1 = nw_gfx_Camera_DynamicBuilder_Create(&temp_v7,param_1);
+  nw_gfx_Camera_DynamicBuilder_Create(puVar6,param_1);
   piVar2 = temp_v14;
   if ((temp_v14 != (int *)0x0) && (temp_v15 != '\0')) {
     (**(romwright_code **)*temp_v14)(temp_v14);
@@ -128,10 +131,10 @@ int FUN_00119e54(unsigned int param_1,unsigned int *param_2,unsigned int *param_
   }
   temp_v2 = param_2[1];
   temp_v3 = param_2[2];
-  *(unsigned int *)(temp_v1 + 0x58) = *param_2;
-  *(unsigned int *)(temp_v1 + 0x68) = temp_v2;
-  *(unsigned int *)(temp_v1 + 0x78) = temp_v3;
-  *(unsigned int *)(temp_v1 + 0x88) = *(unsigned int *)(temp_v1 + 0x88) | 0x800;
-  *(unsigned int *)(temp_v1 + 0x294) = temp_v4;
-  return temp_v1;
+  *(unsigned int *)(puVar6 + 0x58) = *param_2;
+  *(unsigned int *)(puVar6 + 0x68) = temp_v2;
+  *(unsigned int *)(puVar6 + 0x78) = temp_v3;
+  *(unsigned int *)(puVar6 + 0x88) = *(unsigned int *)(puVar6 + 0x88) | 0x800;
+  *(unsigned int *)(puVar6 + 0x294) = temp_v4;
+  return puVar6;
 }

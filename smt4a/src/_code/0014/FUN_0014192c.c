@@ -11,6 +11,7 @@ extern int DAT_0063fe0c; /* 0x63fe0c */
 extern unsigned char DAT_0063fe10; /* 0x63fe10 */
 extern unsigned char DAT_0063fe4c; /* 0x63fe4c */
 extern unsigned char DAT_0063fe88; /* 0x63fe88 */
+extern unsigned int DAT_0063ff38; /* 0x63ff38 */
 
 /* Supplied declaration required: FUN_0015402c. */
 
@@ -37,6 +38,6 @@ void FUN_0014192c(int param_1,unsigned int param_2,unsigned int param_3,int para
     param_4 = 1;
     puVar1 = &DAT_0063fe88;
   }
-  FUN_0015402c(puVar1,puVar1 + 0x18,*(unsigned int *)(param_4 * 4 + 0x63ff38),7,param_2);
+  FUN_0015402c(puVar1,puVar1 + 0x18,(&DAT_0063ff38)[param_4],7,param_2);
   return;
 }

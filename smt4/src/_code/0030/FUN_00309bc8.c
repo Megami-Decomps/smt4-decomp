@@ -24,7 +24,7 @@ extern int DAT_0043da30; /* 0x43da30 */
 /* Supplied declaration required: FUN_00295660. */
 /* Supplied declaration required: FUN_00296ae8. */
 /* Supplied declaration required: FUN_0029ede8. */
-extern int FUN_002b45e8(unsigned short);
+/* Supplied declaration required: FUN_002b45e8. */
 extern int FUN_002b63ac(void);
 /* Supplied declaration required: FUN_002be624. */
 
@@ -32,69 +32,72 @@ extern int FUN_002b63ac(void);
 void FUN_00309bc8(int param_1,unsigned int param_2)
 
 {
-/* irregular: 7 native warning(s); review required */
+/* irregular: 8 native warning(s); review required */
   unsigned char temp_v0;
   int temp_v1;
   int temp_v2;
-  int temp_v3;
-  int temp_v4;
+  unsigned int temp_v3;
+  unsigned int temp_v4;
+  int temp_v5;
   int iStack_8c;
-  unsigned int temp_v5 [2];
-  unsigned char temp_v6 [100];
+  unsigned int temp_v6 [2];
+  unsigned char temp_v7 [100];
   
   temp_v1 = DAT_0043da2c;
   temp_v2 = FUN_002b63ac();
-  temp_v2 = FUN_002b45e8(*(unsigned short *)(temp_v2 + 2));
-  temp_v3 = FUN_002b63ac();
-  temp_v3 = FUN_002b45e8(*(unsigned short *)(temp_v3 + 4));
-  if (temp_v2 == 0 || temp_v3 == 0) {
+  temp_v3 = (unsigned int)*(unsigned short *)(temp_v2 + 2);
+  FUN_002b45e8();
+  temp_v2 = FUN_002b63ac();
+  temp_v4 = (unsigned int)*(unsigned short *)(temp_v2 + 4);
+  FUN_002b45e8();
+  if (temp_v3 == 0 || temp_v4 == 0) {
     *(unsigned char *)(temp_v1 + 0x4cb) = 0;
   }
   else {
     *(unsigned char *)(temp_v1 + 0x55c) = 1;
     *(unsigned char *)(temp_v1 + 0x4cb) = 1;
-    temp_v0 = *(unsigned char *)(temp_v2 + 0x58);
+    temp_v0 = *(unsigned char *)(temp_v3 + 0x58);
     if ((temp_v0 & 0xf) == temp_v0 >> 4) {
       FUN_0029ede8(0x25,temp_v0 & 0xf,0xffffffff,0);
     }
     else {
-      FUN_002907c4(&temp_v4,temp_v0 & 0xf);
-      FUN_002907c4(temp_v5,*(unsigned char *)(temp_v2 + 0x58) >> 4);
-      FUN_002be624(temp_v6,&LAB_00309d98,&temp_v4,temp_v5);
-      FUN_00295660(0x25,temp_v6);
+      FUN_002907c4(&temp_v5,temp_v0 & 0xf);
+      FUN_002907c4(temp_v6,*(unsigned char *)(temp_v3 + 0x58) >> 4);
+      FUN_002be624(temp_v7,&LAB_00309d98,&temp_v5,temp_v6);
+      FUN_00295660(0x25,temp_v7);
     }
-    FUN_0024bda8(temp_v6,*(unsigned int *)(temp_v3 + 0x54) >> 0x14);
-    FUN_00295660(0x26,temp_v6);
-    FUN_0024bc98(temp_v6,*(unsigned char *)(temp_v2 + 0x59));
-    FUN_00295660(0x27,temp_v6);
-    if (*(char *)(temp_v3 + 0x5b) == '\0') {
-      FUN_002be624(temp_v6,&LAB_00309da0);
+    FUN_0024bda8(temp_v7,*(unsigned int *)(temp_v4 + 0x54) >> 0x14);
+    FUN_00295660(0x26,temp_v7);
+    FUN_0024bc98(temp_v7,*(unsigned char *)(temp_v3 + 0x59));
+    FUN_00295660(0x27,temp_v7);
+    if (*(char *)(temp_v4 + 0x5b) == '\0') {
+      FUN_002be624(temp_v7,&LAB_00309da0);
     }
-    if (*(char *)(temp_v3 + 0x5b) == '\x01') {
-      FUN_002be624(temp_v6,&LAB_00309dac);
+    if (*(char *)(temp_v4 + 0x5b) == '\x01') {
+      FUN_002be624(temp_v7,&LAB_00309dac);
     }
-    if (*(char *)(temp_v3 + 0x5b) == '\x05') {
-      FUN_002be624(temp_v6,&LAB_00309db4);
+    if (*(char *)(temp_v4 + 0x5b) == '\x05') {
+      FUN_002be624(temp_v7,&LAB_00309db4);
     }
-    if (*(char *)(temp_v3 + 0x5b) == '\x06') {
-      FUN_002be624(temp_v6,&LAB_00309dc4);
+    if (*(char *)(temp_v4 + 0x5b) == '\x06') {
+      FUN_002be624(temp_v7,&LAB_00309dc4);
     }
-    if (*(char *)(temp_v3 + 0x5b) == '\a') {
-      FUN_002be624(temp_v6,&LAB_00309dd0);
+    if (*(char *)(temp_v4 + 0x5b) == '\a') {
+      FUN_002be624(temp_v7,&LAB_00309dd0);
     }
-    if (*(char *)(temp_v3 + 0x5b) == '\b') {
-      FUN_002be624(temp_v6,&LAB_00309ddc);
+    if (*(char *)(temp_v4 + 0x5b) == '\b') {
+      FUN_002be624(temp_v7,&LAB_00309ddc);
     }
-    if (*(char *)(temp_v3 + 0x5b) == '\t') {
-      FUN_002be624(temp_v6,&LAB_00309de8);
+    if (*(char *)(temp_v4 + 0x5b) == '\t') {
+      FUN_002be624(temp_v7,&LAB_00309de8);
     }
-    FUN_00295660(0x28,temp_v6);
+    FUN_00295660(0x28,temp_v7);
     if (param_1 == 0) {
       param_1 = DAT_0043da30;
     }
-    temp_v4 = 3;
+    temp_v5 = 3;
     iStack_8c = param_1;
-    temp_v5[0] = param_2;
+    temp_v6[0] = param_2;
     FUN_00296ae8(*(unsigned int *)(temp_v1 + 0x558),3,0xffffffff,0);
   }
   return;

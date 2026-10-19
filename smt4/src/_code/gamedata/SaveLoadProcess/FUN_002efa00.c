@@ -18,7 +18,7 @@ extern unsigned int FUN_0026b5dc(void);
 /* Supplied declaration required: FUN_002ad8b4. */
 extern int FUN_002c08f0(void);
 /* Supplied declaration required: FUN_002c09bc. */
-extern unsigned int FUN_002c5300(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c5300. */
 extern int FUN_002cedbc(void);
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -26,7 +26,7 @@ extern int FUN_002cedbc(void);
 unsigned int FUN_002efa00(void)
 
 {
-/* irregular: 6 native warning(s); review required */
+/* irregular: 7 native warning(s); review required */
   int temp_v0;
   unsigned int temp_v1;
   int temp_v2;
@@ -73,7 +73,8 @@ unsigned int FUN_002efa00(void)
   }
   else {
     *(unsigned int *)(temp_v0 + 0xc) = 0x24db0;
-    temp_v1 = FUN_002c5300(0x100,0x100,0,*(unsigned int *)(temp_v0 + 0xc),1);
+    temp_v1 = 0x100;
+    FUN_002c5300(0x100,0x100,0,*(unsigned int *)(temp_v0 + 0xc),1);
     *(unsigned int *)(temp_v0 + 8) = temp_v1;
     FUN_00247af8(3,0,*(unsigned int *)(temp_v0 + 0x10),temp_v1,*(unsigned int *)(temp_v0 + 0xc));
     *(unsigned int *)(temp_v0 + 4) = 5;

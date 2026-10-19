@@ -9,7 +9,7 @@ typedef struct {
 
 extern unsigned int FUN_0028522c(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002a775c. */
-extern unsigned int *FUN_002c32a0(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c32a0. */
 /* Supplied declaration required: FUN_002c3944. */
 /* Supplied declaration required: FUN_00313760. */
 /* Supplied declaration required: FUN_0031ce4c. */
@@ -19,7 +19,7 @@ extern unsigned int *FUN_002c32a0(unsigned int, unsigned int, unsigned int, unsi
 unsigned int * FUN_002d15fc(int param_1)
 
 {
-/* irregular: 5 native warning(s); review required */
+/* irregular: 6 native warning(s); review required */
   unsigned int *puVar1;
   int temp_v0;
   int temp_v1;
@@ -34,8 +34,9 @@ unsigned int * FUN_002d15fc(int param_1)
   if (temp_v2 >= 101) {
     temp_v2 = 100;
   }
-  puVar1 = (unsigned int *)FUN_002c32a0(0x10000,0x100,0,0xa8,0x10,1);
-  FUN_002c3944(puVar1,0xa8);
+  puVar1 = (unsigned int *)0x10000;
+  FUN_002c32a0(0x10000,0x100,0,0xa8,0x10,1);
+  FUN_002c3944();
   puVar1[1] = 0xffffffff;
   *puVar1 = temp_v2;
   puVar1[2] = 0x3f800000;

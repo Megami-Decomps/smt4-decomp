@@ -10,14 +10,14 @@ typedef struct {
 /* Supplied declaration required: FUN_00248f70. */
 /* Supplied declaration required: FUN_002a4e98. */
 /* Supplied declaration required: FUN_002c2264. */
-extern unsigned int FUN_002c32a0(unsigned int, unsigned int, unsigned int, int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c32a0. */
 /* Supplied declaration required: FUN_002c415c. */
 
 
 void FUN_002e7bb8(unsigned int *param_1,unsigned int param_2)
 
 {
-/* irregular: 4 native warning(s); review required */
+/* irregular: 5 native warning(s); review required */
   unsigned int temp_v0;
   unsigned int temp_v1;
   unsigned int unaff_r6;
@@ -42,7 +42,8 @@ void FUN_002e7bb8(unsigned int *param_1,unsigned int param_2)
     param_1[0x10] = 0;
   }
   if (unaff_r6 << 2 != 0) {
-    temp_v0 = FUN_002c32a0(0x10000,0x100,0,unaff_r6 << 2,0x10,1);
+    temp_v0 = 0x10000;
+    FUN_002c32a0(0x10000,0x100,0,unaff_r6 << 2,0x10,1);
     param_1[0x10] = temp_v0;
     param_1[0xf] = temp_v0;
     FUN_002a4e98();

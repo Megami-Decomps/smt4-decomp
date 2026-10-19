@@ -67,7 +67,7 @@ LAB_00138464:
     piVar2[2] = 0;
     piVar2[3] = 0;
     param_1[5] = param_1[5] - 1;
-    piVar2 = (int *)FUN_002c415c();
+    FUN_002c415c();
   }
   piVar4 = (int *)piVar4[2];
   if (piVar4 != (int *)0x0) {

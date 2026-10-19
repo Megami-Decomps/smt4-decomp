@@ -24,7 +24,7 @@ void FUN_00299370(unsigned short *param_1)
   unsigned short temp_v0;
   unsigned short temp_v1;
   unsigned int temp_v2;
-  int temp_v3;
+  unsigned int temp_v3;
   short temp_v4;
   unsigned short temp_v5;
   int temp_v6;
@@ -55,30 +55,32 @@ void FUN_00299370(unsigned short *param_1)
   temp_v2 = (unsigned int)param_1[0xd];
   param_1[0x14] = param_1[0xd];
   do {
+    temp_v3 = temp_v2;
     switch(temp_v6) {
     case 0:
-      temp_v2 = (unsigned int)*param_1;
+      temp_v3 = (unsigned int)*param_1;
       break;
     case 1:
-      temp_v2 = (unsigned int)param_1[1];
+      temp_v3 = (unsigned int)param_1[1];
       break;
     case 2:
-      temp_v2 = (unsigned int)param_1[2];
+      temp_v3 = (unsigned int)param_1[2];
       break;
     case 3:
-      temp_v2 = (unsigned int)param_1[3];
+      temp_v3 = (unsigned int)param_1[3];
       break;
     case 4:
-      temp_v2 = (unsigned int)param_1[4];
+      temp_v3 = (unsigned int)param_1[4];
       break;
     case 5:
-      temp_v2 = (unsigned int)param_1[5];
+      temp_v3 = (unsigned int)param_1[5];
       break;
     case 6:
-      temp_v2 = (unsigned int)param_1[6];
+      temp_v3 = (unsigned int)param_1[6];
     }
-    if (temp_v2 != 0) {
-      temp_v3 = FUN_002b45e8();
+    temp_v2 = temp_v3;
+    if (temp_v3 != 0) {
+      FUN_002b45e8();
       temp_v2 = 0;
       if (temp_v3 != 0) {
         param_1[0x10] = param_1[0x10] + (short)*(char *)(temp_v3 + 0x61);
@@ -135,10 +137,11 @@ void FUN_00299370(unsigned short *param_1)
   uStack_1c = *(unsigned int *)(param_1 + 0x20);
   param_1[0xe] = param_1[0xe] + temp_v4;
   param_1[0xf] = param_1[0xf] + (short)temp_v7;
-  temp_v6 = FUN_002b45e8(param_1[6]);
+  temp_v2 = (unsigned int)param_1[6];
+  FUN_002b45e8();
   temp_v11 = 0;
-  if (temp_v6 != 0) {
-    temp_v11 = *(unsigned short *)(temp_v6 + 0x6a);
+  if (temp_v2 != 0) {
+    temp_v11 = *(unsigned short *)(temp_v2 + 0x6a);
   }
   FUN_002dada4(param_1 + 0xe,&temp_v10,9);
   temp_v1 = param_1[0xe];

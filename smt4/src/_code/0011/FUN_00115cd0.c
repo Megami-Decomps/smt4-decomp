@@ -219,10 +219,14 @@ LAB_00115f7c:
     temp_v9 = temp_v9 + 1;
   } while (temp_v9 < 0x20);
   temp_v9 = (int)((unsigned long long)temp_v17 >> 0x20);
-  temp_v20 = FUN_002c5300(0x100,0x100,0,DAT_00465128[6] * 4 + 4,1);
-  FUN_002c4938(temp_v20,DAT_00465128[6] * 4 + 4);
-  temp_v21 = FUN_002c5300(0x100,0x100,0,0x400);
-  FUN_002c3944(temp_v21,0x400);
+  temp_v0 = 0x100;
+  FUN_002c5300(0x100,0x100,0,DAT_00465128[6] * 4 + 4,1);
+  temp_v20 = temp_v0;
+  FUN_002c4938(temp_v0,DAT_00465128[6] * 4 + 4);
+  temp_v0 = 0x100;
+  FUN_002c5300(0x100,0x100,0,0x400);
+  temp_v21 = temp_v0;
+  FUN_002c3944();
   temp_v8 = temp_v20;
   temp_v17 = 0x37000000;
   temp_v0 = 0;

@@ -3,14 +3,14 @@
 #include "romwright_types.h"
 
 /* Supplied declaration required: FUN_002b4414. */
-extern unsigned int FUN_002bf5c0(unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002bf5c0. */
 /* Supplied declaration required: rt_memcpy. */
 
 
 void FUN_00257c2c(int param_1,int param_2,unsigned int param_3,unsigned int param_4)
 
 {
-/* irregular: 2 native warning(s); review required */
+/* irregular: 3 native warning(s); review required */
   unsigned char temp_v0;
   unsigned char temp_v1;
   int temp_v2;
@@ -35,9 +35,10 @@ void FUN_00257c2c(int param_1,int param_2,unsigned int param_3,unsigned int para
           *(int *)(param_1 + 0x28) = *(int *)(param_2 + 8) - 0xc;
           uStack_2c = 1;
           uStack_30 = 0x80;
-          temp_v3 = FUN_002bf5c0(0x10000,0x100,0,*(unsigned int *)(param_1 + 0x28));
+          temp_v3 = 0x10000;
+          FUN_002bf5c0(0x10000,0x100,0,*(unsigned int *)(param_1 + 0x28));
           *(unsigned int *)(param_1 + 0x24) = temp_v3;
-          rt_memcpy(temp_v3,param_2 + 0xc,*(unsigned int *)(param_1 + 0x28));
+          rt_memcpy();
         }
         temp_v2 = FUN_002b4414(param_2,"nw4c_tfm",8);
         if (temp_v2 == 0) {

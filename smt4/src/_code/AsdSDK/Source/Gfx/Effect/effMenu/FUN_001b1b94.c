@@ -142,7 +142,7 @@ extern unsigned int *DAT_004ea7f4; /* 0x4ea7f4 */
 /* Supplied declaration required: FUN_002826d4. */
 /* Supplied declaration required: FUN_00282780. */
 /* Supplied declaration required: FUN_002be624. */
-extern unsigned int *FUN_002c32a0(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c32a0. */
 /* Supplied declaration required: aeabi_idivmod. */
 extern unsigned int aeabi_uidivmod(unsigned int);
 
@@ -150,7 +150,7 @@ extern unsigned int aeabi_uidivmod(unsigned int);
 void FUN_001b1b94(int *param_1,int param_2)
 
 {
-/* irregular: 27 goto(s); irregular input(s): in_fpscr; 5 native warning(s); review required */
+/* irregular: 27 goto(s); irregular input(s): in_fpscr; 6 native warning(s); review required */
   char temp_v0;
   short temp_v1;
   unsigned int *puVar3;
@@ -333,7 +333,8 @@ void FUN_001b1b94(int *param_1,int param_2)
             temp_v6 = (int)temp_v7;
             temp_v5 = (int)temp_v9;
             temp_v8 = (int)(temp_v7 + 150.0f);
-            puVar5 = (unsigned int *)FUN_002c32a0(0x10000,0x100,0,0x68,0x10);
+            puVar5 = (unsigned int *)0x10000;
+            FUN_002c32a0(0x10000,0x100,0,0x68,0x10);
             puVar5[2] = temp_v6;
             puVar5[3] = temp_v5;
             puVar5[4] = temp_v8;

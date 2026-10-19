@@ -11,7 +11,7 @@ extern unsigned char LAB_003572d0; /* 0x3572d0 */
 extern unsigned char LAB_003572dc; /* 0x3572dc */
 extern unsigned char DAT_00420730; /* 0x420730 */
 
-extern unsigned int FUN_002bf5c0(unsigned int, unsigned int, unsigned int, int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002bf5c0. */
 /* Supplied declaration required: FUN_002c4938. */
 /* Supplied declaration required: FUN_002c5d5c. */
 /* Supplied declaration required: nn_gr_CTR_Vertex_LoadArray_DisableAll. */
@@ -20,7 +20,7 @@ extern unsigned int FUN_002bf5c0(unsigned int, unsigned int, unsigned int, int, 
 unsigned int * FUN_0023aea4(unsigned int *param_1,unsigned int param_2)
 
 {
-/* irregular: 3 native warning(s); review required */
+/* irregular: 4 native warning(s); review required */
   unsigned int temp_v0;
   unsigned int temp_v1;
   unsigned int temp_v2;
@@ -51,9 +51,11 @@ unsigned int * FUN_0023aea4(unsigned int *param_1,unsigned int param_2)
   param_1[0x3c] = 0;
   param_1[0x3d] = 0;
   *(unsigned char *)(param_1 + 0x3e) = 0;
-  temp_v0 = FUN_002bf5c0(0x10000,0x100,0,param_1[-0x1ab] * 0x90,0x80,1);
+  temp_v0 = 0x10000;
+  FUN_002bf5c0(0x10000,0x100,0,param_1[-0x1ab] * 0x90,0x80,1);
   param_1[-0x1aa] = temp_v0;
-  temp_v0 = FUN_002bf5c0(0x10000,0x100,0,param_1[-0x1ab] * 0xc,0x80,1);
+  temp_v0 = 0x10000;
+  FUN_002bf5c0(0x10000,0x100,0,param_1[-0x1ab] * 0xc,0x80,1);
   param_1[-0x1a9] = temp_v0;
   return param_1 + -0x1ac;
 }

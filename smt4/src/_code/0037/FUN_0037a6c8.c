@@ -60,7 +60,8 @@ FUN_0037a6c8(unsigned int *param_1,unsigned int param_2,unsigned int param_3,int
   if (*(char *)(temp_v3 + 0x1c) != '\0') {
     temp_v4 = 0;
     uStack_1c = 0;
-    temp_v0 = nn_fs_detail_FileBase_TryGetSize(temp_v3 + 4,&temp_v4);
+    temp_v0 = temp_v3 + 4;
+    nn_fs_detail_FileBase_TryGetSize(temp_v0,&temp_v4);
     temp_v1 = temp_v0 & 0x80000000;
     *(unsigned int *)(temp_v3 + 0x18) = temp_v0;
     temp_v2 = 0;
@@ -79,10 +80,11 @@ FUN_0037a6c8(unsigned int *param_1,unsigned int param_2,unsigned int param_3,int
     }
   }
   else {
-    temp_v3 = nn_fs_detail_FileBase_TryGetSize(temp_v3 + 4,&temp_v4);
+    temp_v3 = temp_v3 + 4;
+    nn_fs_detail_FileBase_TryGetSize(temp_v3,&temp_v4);
     temp_v2 = temp_v4;
     if (temp_v3 < 0) {
-      FUN_002bbb2c(temp_v3,0x37a7ec);
+      FUN_002bbb2c();
       temp_v2 = temp_v4;
     }
   }

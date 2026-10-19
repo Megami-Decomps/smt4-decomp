@@ -49,7 +49,7 @@ extern int FUN_002b8ee0(int, unsigned int);
 extern unsigned int FUN_002bf4f8(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bf818. */
 extern int FUN_002bfde4(unsigned int);
-extern int FUN_002bff6c(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002bff6c. */
 /* Supplied declaration required: FUN_002c1658. */
 /* Supplied declaration required: FUN_002dfefc. */
 
@@ -57,7 +57,7 @@ extern int FUN_002bff6c(unsigned int, unsigned int, unsigned int, unsigned int, 
 unsigned int FUN_003291e0(int *param_1)
 
 {
-/* irregular: 29 native warning(s); review required */
+/* irregular: 30 native warning(s); review required */
   char temp_v0;
   unsigned short temp_v1;
   int temp_v2;
@@ -115,7 +115,8 @@ unsigned int FUN_003291e0(int *param_1)
       if ((temp_v6 == 0) && (temp_v6 = FUN_002b8cec(0xe), temp_v6 == 0)) {
         temp_v6 = FUN_002b8cec(6);
         if ((temp_v6 == 0) && (temp_v6 = FUN_002b8cec(0xf), temp_v6 == 0)) {
-          temp_v6 = FUN_002bff6c(0xa0,0x30,200,0x20,2);
+          temp_v6 = 0xa0;
+          FUN_002bff6c(0xa0,0x30,200,0x20,2);
           if (temp_v6 != 0) {
             temp_v4 = FUN_0029efa8(temp_v7 + 0x10);
             temp_v6 = temp_v4 - 1;
@@ -124,7 +125,8 @@ unsigned int FUN_003291e0(int *param_1)
             }
           }
           else {
-            temp_v6 = FUN_002bff6c(0xa0,0xc6,200,0x20,2);
+            temp_v6 = 0xa0;
+            FUN_002bff6c(0xa0,0xc6,200,0x20,2);
             if (temp_v6 == 0) {
               return 0;
             }

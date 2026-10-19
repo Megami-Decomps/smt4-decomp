@@ -12,7 +12,7 @@ extern unsigned char DAT_0047375c; /* 0x47375c */
 
 /* Supplied declaration required: FUN_00247334. */
 /* Supplied declaration required: FUN_0024b830. */
-extern float *FUN_002c32a0(unsigned int, unsigned int, unsigned int, int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c32a0. */
 /* Supplied declaration required: FUN_002c7ae0. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -20,7 +20,7 @@ extern float *FUN_002c32a0(unsigned int, unsigned int, unsigned int, int, unsign
 float * FUN_0030efb8(int param_1)
 
 {
-/* irregular: irregular input(s): in_s0; 4 native warning(s); review required */
+/* irregular: irregular input(s): in_s0; 5 native warning(s); review required */
   unsigned char temp_v0;
   unsigned char temp_v1;
   unsigned char temp_v2;
@@ -41,7 +41,8 @@ float * FUN_0030efb8(int param_1)
     temp_v8 = 3;
   }
   *(unsigned int *)(param_1 + 0x38) = temp_v8;
-  pfVar5 = (float *)FUN_002c32a0(0x10000,0x100,0,temp_v8 * 4 + 0x10,0x10,1);
+  pfVar5 = (float *)0x10000;
+  FUN_002c32a0(0x10000,0x100,0,temp_v8 * 4 + 0x10,0x10,1);
   pfVar13 = pfVar5 + temp_v8;
   *pfVar13 = (float)pfVar5;
   pfVar13[3] = (float)pfVar5;

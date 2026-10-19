@@ -13,7 +13,7 @@ Every unit is built with the retail compiler (`armcc-4.1-b713`, `--cpu=MPCore --
   decompiler's primitive names) and `romwright_protos.h` (recovered prototypes).
 * `src/<module>/<shard>/<function>.c`: romwright's decompiled C, one function per file, each
   marked `NON_MATCHING`. It is a reading aid and a starting point to refine into retail-equivalent C.
-  795 function(s) the evidence places in 173 original source file(s) are in
+  796 function(s) the evidence places in 173 original source file(s) are in
   `src/<module>/<file>/<function>.c` instead, one objdiff progress category per file
   (`file` in `config/project.json`); the placement is evidence, not proof: move a function by
   correcting its entry in the `--tus` file and regenerating.
@@ -32,7 +32,7 @@ python3 build.py report     # objdiff-cli report over objdiff.json -> build/repo
 # or open this directory in the objdiff GUI
 ```
 
-This image: 9339 function(s) decompiled into `src/`, 9350 symbol(s), 1 module(s).
+This image: 9341 function(s) decompiled into `src/`, 9341 symbol(s), 1 module(s).
 Units compile as C99 (`--c99`): decompiled C has no headers for its callees, so armcc's implicit-declaration warnings are not errors; every error is reported. A unit that fails (a missing struct definition, say) is listed with its first error in `build/compile_report.json`, and the build exits 0 unless you pass `--strict`. Each unit compiles in the mode its function was decoded in (`--arm`/`--thumb`).
 
 ## From a fresh clone

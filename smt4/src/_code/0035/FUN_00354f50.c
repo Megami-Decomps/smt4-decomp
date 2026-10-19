@@ -28,18 +28,18 @@ extern unsigned int DAT_004d4358; /* 0x4d4358 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 extern int *nn_fnd_UnitHeapTemplate_nn_os_LockPolicy_Object_nn_os_CriticalSection_Allocate(unsigned int *);
-extern int nn_fs_ipc_FileSystem_OpenFileDirectly(int *, int *, unsigned int, unsigned int, unsigned int, unsigned int *);
+/* Supplied declaration required: nn_fs_ipc_FileSystem_OpenFileDirectly. */
 
 
 /* WARNING: Type propagation algorithm not settling */
 
-int FUN_00354f50(int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,int param_5,int param_6,
-                int param_7)
+int * FUN_00354f50(int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,int param_5,int param_6
+                  ,int param_7)
 
 {
-/* irregular: 3 native warning(s); review required */
+/* irregular: 4 native warning(s); review required */
+  int *piVar1;
   int temp_v0;
-  int *piVar2;
   int temp_v1;
   unsigned int unaff_r9;
   int temp_v2 [2];
@@ -69,37 +69,38 @@ int FUN_00354f50(int *param_1,unsigned int param_2,unsigned int param_3,unsigned
   temp_v2[1] = 2;
   uStack_5c = 0x14;
   temp_v2[0] = 0x10;
+  piVar1 = temp_v11;
   temp_v6[2] = param_4;
-  temp_v0 = nn_fs_ipc_FileSystem_OpenFileDirectly(temp_v11,temp_v6,0,0x2345678a,2,temp_v10);
-  temp_v1 = temp_v6[0];
-  if (temp_v0 < 0) {
-    return temp_v0;
+  nn_fs_ipc_FileSystem_OpenFileDirectly(piVar1,temp_v6,0,0x2345678a,2,temp_v10);
+  temp_v0 = temp_v6[0];
+  if ((int)piVar1 < 0) {
+    return piVar1;
   }
-  piVar2 = (int *)nn_fnd_UnitHeapTemplate_nn_os_LockPolicy_Object_nn_os_CriticalSection_Allocate
+  piVar1 = (int *)nn_fnd_UnitHeapTemplate_nn_os_LockPolicy_Object_nn_os_CriticalSection_Allocate
                             (&DAT_004d4358);
-  if (piVar2 == (int *)0x0) {
+  if (piVar1 == (int *)0x0) {
     software_interrupt(0x23);
-    return -0x69fb85e;
+    return (int *)0xf96047a2;
   }
-  *piVar2 = (int)"扄5抄5兀=慬5";
-  piVar2[1] = temp_v1;
-  temp_v1 = 0;
+  *piVar1 = (int)"扄5抄5兀=慬5";
+  piVar1[1] = temp_v0;
+  temp_v0 = 0;
   if (param_7 != 0) {
-    temp_v1 = (**(romwright_code **)*piVar2)(piVar2,temp_v2,0,0,temp_v6 + 2,0x28);
-    temp_v0 = -1;
-    if (((-1 < temp_v1) && (temp_v2[0] == 0x28)) &&
-       (temp_v1 = temp_v10[2] + temp_v11[0] + temp_v8 + temp_v10[0], -1 < temp_v1)) {
-      temp_v0 = param_5 * 0x20 + param_6 * 0x18 + temp_v1;
+    temp_v0 = (**(romwright_code **)*piVar1)(piVar1,temp_v2,0,0,temp_v6 + 2,0x28);
+    temp_v1 = -1;
+    if (((-1 < temp_v0) && (temp_v2[0] == 0x28)) &&
+       (temp_v0 = temp_v10[2] + temp_v11[0] + temp_v8 + temp_v10[0], -1 < temp_v0)) {
+      temp_v1 = param_5 * 0x20 + param_6 * 0x18 + temp_v0;
     }
   }
   else {
-    temp_v0 = param_5 * 0x20 + param_6 * 0x18 + temp_v1;
+    temp_v1 = param_5 * 0x20 + param_6 * 0x18 + temp_v0;
   }
-  *param_1 = temp_v0;
-  if (0 < temp_v0) {
-    (**(romwright_code **)(*piVar2 + 0x2c))(piVar2);
-    return 0;
+  *param_1 = temp_v1;
+  if (0 < temp_v1) {
+    (**(romwright_code **)(*piVar1 + 0x2c))(piVar1);
+    return (int *)0x0;
   }
   software_interrupt(0x23);
-  return -0x69fb85e;
+  return (int *)0xf96047a2;
 }

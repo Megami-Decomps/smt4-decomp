@@ -6,12 +6,12 @@ extern unsigned int DAT_0063fd88; /* 0x63fd88 */
 extern int DAT_0063fd8c; /* 0x63fd8c */
 extern unsigned char DAT_0063fd90; /* 0x63fd90 */
 extern int DAT_0063fd9c; /* 0x63fd9c */
-extern unsigned char DAT_0063fdb4; /* 0x63fdb4 */
+extern unsigned int DAT_0063fdb4; /* 0x63fdb4 */
 extern int DAT_0063fdb8; /* 0x63fdb8 */
 extern int DAT_0063fdc8; /* 0x63fdc8 */
 extern unsigned int DAT_0063fde0; /* 0x63fde0 */
 extern int DAT_0063fde4; /* 0x63fde4 */
-extern unsigned int DAT_0063fde8; /* 0x63fde8 */
+extern unsigned char DAT_0063fde8; /* 0x63fde8 */
 extern int DAT_0063fdf4; /* 0x63fdf4 */
 
 /* Supplied declaration required: FUN_00154ca4. */
@@ -26,8 +26,8 @@ void FUN_00144f1c(int param_1,int param_2)
 
 {
 /* irregular: 9 native warning(s); review required */
+  unsigned int *puVar1;
   int temp_v0;
-  unsigned int *puVar2;
   unsigned int temp_v1;
   unsigned int temp_v2;
   unsigned int temp_v3;
@@ -45,19 +45,19 @@ void FUN_00144f1c(int param_1,int param_2)
     temp_v0 = DAT_0063fdb8 - 1;
   }
   if (param_2 != 0) {
-    puVar2 = (unsigned int *)(&DAT_0063fdb4 + temp_v0 * 4);
+    puVar1 = &DAT_0063fdb4;
   }
   else {
-    puVar2 = &DAT_0063fd88 + temp_v0;
+    puVar1 = &DAT_0063fd88;
   }
-  temp_v4 = puVar2[2];
+  temp_v4 = (puVar1 + temp_v0)[2];
   FUN_00161044(0x410);
   FUN_00161074(temp_v4);
   temp_v0 = DAT_0063fdf4 - 1;
   if (temp_v0 < 0) {
     temp_v0 = DAT_0063fde4 - 1;
   }
-  temp_v4 = (&DAT_0063fde8)[temp_v0];
+  temp_v4 = *(unsigned int *)(&DAT_0063fde8 + temp_v0 * 4);
   FUN_00161044(0x401);
   FUN_00161074(temp_v4);
   if (param_1 != 0) {

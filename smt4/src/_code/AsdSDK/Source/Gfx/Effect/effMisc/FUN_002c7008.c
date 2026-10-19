@@ -22,14 +22,14 @@ extern unsigned int *FUN_0024c3d8(fn_002c7008_arg0 *);
 extern unsigned int FUN_0024c3f8(void);
 extern unsigned int FUN_0028c814(unsigned int *);
 /* Supplied declaration required: FUN_0028c854. */
-extern unsigned int *FUN_002c32a0(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c32a0. */
 /* Supplied declaration required: FUN_002c3944. */
 
 
 unsigned int FUN_002c7008(fn_002c7008_arg0 *param_1)
 
 {
-/* irregular: 3 native warning(s); review required */
+/* irregular: 4 native warning(s); review required */
   unsigned int temp_v0;
   unsigned int *puVar2;
   unsigned int *puVar3;
@@ -47,8 +47,9 @@ unsigned int FUN_002c7008(fn_002c7008_arg0 *param_1)
     return temp_v1;
   }
   temp_v2 = (unsigned int)param_1->field_0x1c;
-  puVar3 = (unsigned int *)FUN_002c32a0(0x10000,0x100,0,0xc,0x10,1);
-  FUN_002c3944(puVar3,0xc);
+  puVar3 = (unsigned int *)0x10000;
+  FUN_002c32a0(0x10000,0x100,0,0xc,0x10,1);
+  FUN_002c3944();
   *puVar3 = temp_v2;
   puVar3[1] = 1;
   if (temp_v2 != 1) {

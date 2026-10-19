@@ -31,13 +31,13 @@ extern unsigned char DAT_0047372c; /* 0x47372c */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: FUN_0024505c. */
-extern unsigned int *FUN_002c32a0(unsigned int, unsigned int, unsigned int, int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c32a0. */
 
 
 unsigned int * FUN_00321558(int param_1)
 
 {
-/* irregular: irregular input(s): in_d8, in_fpscr; 4 native warning(s); review required */
+/* irregular: irregular input(s): in_d8, in_fpscr; 5 native warning(s); review required */
   int temp_v0;
   unsigned int temp_v1;
   unsigned int temp_v2;
@@ -67,7 +67,8 @@ unsigned int * FUN_00321558(int param_1)
   unsigned int *temp_v22;
   
   temp_v2 = *(unsigned int *)(param_1 + 0x38);
-  puVar4 = (unsigned int *)FUN_002c32a0(0x10000,0x100,0,temp_v2 * 0x10 + 4,0x10,1);
+  puVar4 = (unsigned int *)0x10000;
+  FUN_002c32a0(0x10000,0x100,0,temp_v2 * 0x10 + 4,0x10,1);
   *puVar4 = (unsigned int)(puVar4 + 1);
   temp_v3 = *(unsigned int *)(param_1 + 0x3c);
   if (temp_v3 < 4) {

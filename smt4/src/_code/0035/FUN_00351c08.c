@@ -7,26 +7,27 @@ extern signed char DAT_0044e348; /* 0x44e348 */
 extern int FUN_0011c834(void);
 /* Supplied declaration required: FUN_001467a4. */
 /* Supplied declaration required: FUN_0023a244. */
-extern int FUN_00351dfc(unsigned int, unsigned int);
+extern int FUN_00351dfc(int, unsigned int);
 /* Supplied declaration required: FUN_00351e54. */
-extern int FUN_00351ef0(unsigned int, unsigned int *);
+extern int FUN_00351ef0(int, unsigned int *);
 /* Supplied declaration required: FUN_00352008. */
 /* Supplied declaration required: FUN_00359f90. */
 extern int FUN_0035adf0(unsigned int);
-extern int nn_cfg_CTR_Initialize(void);
+/* Supplied declaration required: nn_cfg_CTR_Initialize. */
 
 
-int FUN_00351c08(unsigned int param_1,unsigned int *param_2,unsigned int param_3,unsigned int param_4)
+int FUN_00351c08(int param_1,unsigned int *param_2,unsigned int param_3,unsigned int param_4)
 
 {
-/* irregular: 5 native warning(s); review required */
+/* irregular: 6 native warning(s); review required */
   int temp_v0;
   unsigned int temp_v1 [2];
   
   if (param_2 == (unsigned int *)0x0) {
     return -0x1fbf6001;
   }
-  temp_v0 = nn_cfg_CTR_Initialize();
+  temp_v0 = param_1;
+  nn_cfg_CTR_Initialize();
   FUN_00359f90();
   FUN_001467a4();
   if (temp_v0 != 0) {

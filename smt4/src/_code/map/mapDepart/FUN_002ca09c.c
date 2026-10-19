@@ -24,7 +24,7 @@ extern short DAT_0049fdde; /* 0x49fdde */
 /* Supplied declaration required: FUN_002be370. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: FUN_002be624. */
-extern unsigned int FUN_002be650(int, unsigned int);
+/* Supplied declaration required: FUN_002be650. */
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
@@ -37,13 +37,13 @@ extern int FUN_002c5d80(unsigned int, unsigned int);
 unsigned int FUN_002ca09c(void)
 
 {
-/* irregular: irregular input(s): in_fpscr; 11 native warning(s); review required */
+/* irregular: irregular input(s): in_fpscr; 12 native warning(s); review required */
   short temp_v0;
   int temp_v1;
   int temp_v2;
-  int temp_v3;
+  unsigned int temp_v3;
   int temp_v4;
-  unsigned int temp_v5;
+  int temp_v5;
   unsigned int temp_v6;
   int temp_v7;
   int temp_v8;
@@ -92,9 +92,9 @@ unsigned int FUN_002ca09c(void)
             FUN_002bf288(2,0xe,temp_v9,(int)temp_v11,0,0xb);
             temp_v9 = temp_v9 + 1;
           } while (temp_v9 < 0x10b);
-          temp_v6 = DAT_0049f9c4;
+          temp_v3 = DAT_0049f9c4;
           FUN_0025b670(DAT_0049f9c4);
-          FUN_002be624(temp_v13,&LAB_002ca4f8,temp_v6);
+          FUN_002be624(temp_v13,&LAB_002ca4f8,temp_v3);
           VectorSignedToFloat((int)*(short *)(temp_v2 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat((int)*(short *)(temp_v2 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
           FUN_002be5a4(3,0xffffffff,temp_v13);
@@ -117,33 +117,34 @@ unsigned int FUN_002ca09c(void)
             temp_v1 = FUN_002bf4f8(0x1c,temp_v2 + 0x1105);
             temp_v7 = FUN_002bf4f8(0x1c,temp_v2 + 0x110d);
             temp_v8 = FUN_002bf4f8(0x1c,0x1101);
-            temp_v3 = FUN_002bf4f8(0x1c,0x1100);
+            temp_v4 = FUN_002bf4f8(0x1c,0x1100);
             temp_v16 = FUN_002bf4f8(0x1c,0x1104);
             temp_v15 = FUN_002bf4f8(0x1c,0x1102);
-            temp_v4 = FUN_002bf4f8(0x1c,0x1103);
+            temp_v5 = FUN_002bf4f8(0x1c,0x1103);
             temp_v9 = temp_v2 * 2;
             temp_v10 = (float)VectorSignedToFloat((int)*(short *)(temp_v1 + 8),
                                                 (unsigned char)(in_fpscr >> 0x16) & 3);
-            temp_v12 = (float)VectorSignedToFloat((int)*(short *)(temp_v3 + 8),
+            temp_v12 = (float)VectorSignedToFloat((int)*(short *)(temp_v4 + 8),
                                                 (unsigned char)(in_fpscr >> 0x16) & 3);
             FUN_002be370((int)*(short *)(temp_v9 + 0x49fd8c),(int)(temp_v10 + (float)temp_v11 + temp_v12),
-                         (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v3 + 10),0x6f,0);
+                         (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v4 + 10),0x6f,0);
             if ((*(char *)(temp_v2 + 0x49fdac) != '\0') &&
-               (temp_v5 = *(unsigned int *)(temp_v14 + 0x24),
-               temp_v3 = (int)(((long long)(int)temp_v5 * -0x77777777 + ((unsigned long long)temp_v5 << 0x20)) >>
-                            0x20), (int)(temp_v5 + ((temp_v3 >> 4) - (temp_v3 >> 0x1f)) * -0x1e) < 0x14))
+               (temp_v6 = *(unsigned int *)(temp_v14 + 0x24),
+               temp_v4 = (int)(((long long)(int)temp_v6 * -0x77777777 + ((unsigned long long)temp_v6 << 0x20)) >>
+                            0x20), (int)(temp_v6 + ((temp_v4 >> 4) - (temp_v4 >> 0x1f)) * -0x1e) < 0x14))
             {
-              temp_v3 = 0x10b9;
+              temp_v4 = 0x10b9;
               do {
                 temp_v12 = (float)VectorSignedToFloat((int)*(short *)(temp_v7 + 8),
                                                     (unsigned char)(in_fpscr >> 0x16) & 3);
-                FUN_002bf288(2,0x1c,temp_v3,(int)(temp_v12 + (float)temp_v11),(int)*(short *)(temp_v7 + 10),
+                FUN_002bf288(2,0x1c,temp_v4,(int)(temp_v12 + (float)temp_v11),(int)*(short *)(temp_v7 + 10),
                              0xb);
-                temp_v3 = temp_v3 + 1;
-              } while (temp_v3 < 0x10bc);
+                temp_v4 = temp_v4 + 1;
+              } while (temp_v4 < 0x10bc);
             }
-            temp_v6 = FUN_002be650((int)*(short *)(temp_v9 + 0x49fd8c),0);
-            FUN_002be624(temp_v13,&LAB_002ca4f8,temp_v6);
+            temp_v7 = (int)*(short *)(temp_v9 + 0x49fd8c);
+            FUN_002be650(temp_v7,0);
+            FUN_002be624(temp_v13,&LAB_002ca4f8,temp_v7);
             VectorSignedToFloat((int)*(short *)(temp_v1 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
             VectorSignedToFloat((int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v8 + 10),
                                 (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -162,10 +163,10 @@ unsigned int FUN_002ca09c(void)
                          (int)*(short *)(temp_v16 + 10) + (int)*(short *)(temp_v1 + 10),0xb);
             temp_v12 = (float)VectorSignedToFloat((int)*(short *)(temp_v1 + 8),
                                                 (unsigned char)(in_fpscr >> 0x16) & 3);
-            temp_v10 = (float)VectorSignedToFloat((int)*(short *)(temp_v4 + 8),
+            temp_v10 = (float)VectorSignedToFloat((int)*(short *)(temp_v5 + 8),
                                                 (unsigned char)(in_fpscr >> 0x16) & 3);
             FUN_002bf288(2,0xd,(int)temp_v0 / 10,(int)(temp_v12 + (float)temp_v11 + temp_v10),
-                         (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v1 + 10),0xb);
+                         (int)*(short *)(temp_v5 + 10) + (int)*(short *)(temp_v1 + 10),0xb);
             temp_v10 = (float)VectorSignedToFloat((int)*(short *)(temp_v1 + 8),
                                                 (unsigned char)(in_fpscr >> 0x16) & 3);
             temp_v12 = (float)VectorSignedToFloat((int)*(short *)(temp_v15 + 8),

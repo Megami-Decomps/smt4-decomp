@@ -10,21 +10,39 @@ typedef struct {
 extern unsigned int *FUN_0023d2ec(void);
 
 
-/* WARNING: Control flow encountered bad instruction data */
+/* WARNING: Removing unreachable block (ram,0x002c497c) */
+/* WARNING: Removing unreachable block (ram,0x002c4974) */
+/* WARNING: Removing unreachable block (ram,0x002c4964) */
+/* WARNING: Removing unreachable block (ram,0x002c4968) */
+/* WARNING: Removing unreachable block (ram,0x002c4980) */
+/* WARNING: Removing unreachable block (ram,0x002c4984) */
+/* WARNING: Removing unreachable block (ram,0x002c4988) */
 
-void FUN_002c4924(void)
+unsigned int * FUN_002c4924(void)
 
 {
-/* irregular: 3 native warning(s); review required */
+/* irregular: 7 native warning(s); review required */
   unsigned int *puVar1;
-  unsigned int unaff_r4;
+  unsigned int temp_v0;
+  unsigned char temp_v1;
   
   puVar1 = (unsigned int *)FUN_0023d2ec();
-  *puVar1 = 0;
-  puVar1[1] = 0;
-  puVar1[2] = 0;
-  puVar1[3] = 0;
-  puVar1[0x8dc] = unaff_r4;
-                    /* WARNING: Bad instruction - Truncating control flow here */
-  halt_baddata();
+  temp_v1 = 1;
+  temp_v0 = 0x2360;
+  do {
+    if (temp_v1) {
+      *puVar1 = 0;
+      puVar1[1] = 0;
+      puVar1[2] = 0;
+      puVar1[3] = 0;
+      puVar1[4] = 0;
+      puVar1[5] = 0;
+      puVar1[6] = 0;
+      puVar1[7] = 0;
+      puVar1 = puVar1 + 8;
+      temp_v1 = temp_v0 >= 0x20;
+      temp_v0 = temp_v0 - 0x20;
+    }
+  } while (temp_v1);
+  return puVar1;
 }

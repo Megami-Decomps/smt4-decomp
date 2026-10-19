@@ -25,15 +25,15 @@ extern unsigned int DAT_004d4358; /* 0x4d4358 */
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_002bbb2c. */
 extern int *nn_fnd_UnitHeapTemplate_nn_os_LockPolicy_Object_nn_os_CriticalSection_Allocate(unsigned int *);
-extern int nn_fs_ipc_FileSystem_OpenFileDirectly(int *, int *, unsigned int, unsigned int, unsigned int, unsigned int **);
+/* Supplied declaration required: nn_fs_ipc_FileSystem_OpenFileDirectly. */
 
 
 int FUN_0011b9b0(int param_1,int param_2,int param_3,unsigned int param_4)
 
 {
-/* irregular: 2 goto(s); 2 native warning(s); review required */
+/* irregular: 2 goto(s); 3 native warning(s); review required */
+  int *piVar1;
   int temp_v0;
-  int *piVar2;
   int temp_v1;
   int temp_v2 [3];
   unsigned int uStack_54;
@@ -57,17 +57,18 @@ int FUN_0011b9b0(int param_1,int param_2,int param_3,unsigned int param_4)
   temp_v2[0] = 1;
   temp_v2[1] = 2;
   uStack_54 = 0xc;
+  piVar1 = temp_v7;
   temp_v2[2] = param_4;
-  temp_v0 = nn_fs_ipc_FileSystem_OpenFileDirectly(temp_v7,temp_v4,0,3,1,temp_v5);
-  if (temp_v0 < 0) {
-    FUN_002bbb2c(temp_v0,0x11ba20);
+  nn_fs_ipc_FileSystem_OpenFileDirectly(piVar1,temp_v4,0,3,1,temp_v5);
+  if ((int)piVar1 < 0) {
+    FUN_002bbb2c();
   }
   temp_v0 = temp_v4[0];
-  piVar2 = (int *)nn_fnd_UnitHeapTemplate_nn_os_LockPolicy_Object_nn_os_CriticalSection_Allocate
+  piVar1 = (int *)nn_fnd_UnitHeapTemplate_nn_os_LockPolicy_Object_nn_os_CriticalSection_Allocate
                             (&DAT_004d4358);
-  if (piVar2 != (int *)0x0) {
-    *piVar2 = (int)"扄5抄5兀=慬5";
-    piVar2[1] = temp_v0;
+  if (piVar1 != (int *)0x0) {
+    *piVar1 = (int)"扄5抄5兀=慬5";
+    piVar1[1] = temp_v0;
   }
   else {
     software_interrupt(0x23);
@@ -75,7 +76,7 @@ int FUN_0011b9b0(int param_1,int param_2,int param_3,unsigned int param_4)
   }
   temp_v0 = 0;
   if (param_3 != 0) {
-    temp_v0 = (**(romwright_code **)*piVar2)(piVar2,temp_v2,0,0,&temp_v5,0x28);
+    temp_v0 = (**(romwright_code **)*piVar1)(piVar1,temp_v2,0,0,&temp_v5,0x28);
     temp_v1 = -1;
     if ((temp_v0 < 0) || (temp_v2[0] != 0x28)) goto LAB_0011baec;
     temp_v0 = temp_v9 + temp_v10 + temp_v7[0] + temp_v8;
@@ -86,12 +87,12 @@ LAB_0011badc:
     temp_v1 = param_1 * 0x20 + param_2 * 0x18 + temp_v0;
 LAB_0011baec:
     if (0 < temp_v1) {
-      (**(romwright_code **)(*piVar2 + 0x2c))(piVar2);
+      (**(romwright_code **)(*piVar1 + 0x2c))(piVar1);
       return temp_v1;
     }
   }
   software_interrupt(0x23);
   FUN_002bbb2c(0xf96047a2,0x11bb08);
-  (**(romwright_code **)(*piVar2 + 0x2c))(piVar2);
+  (**(romwright_code **)(*piVar1 + 0x2c))(piVar1);
   return temp_v1;
 }

@@ -36,14 +36,14 @@ extern unsigned int *DAT_00493570; /* 0x493570 */
 /* Supplied declaration required: FUN_002c222c. */
 extern unsigned int FUN_002c300c(void);
 /* Supplied declaration required: FUN_002c4a08. */
-extern unsigned int *FUN_002c5300(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c5300. */
 extern int FUN_0036752c(unsigned int **, unsigned int);
 
 
 void FUN_001d2844(unsigned int *param_1)
 
 {
-/* irregular: 6 native warning(s); review required */
+/* irregular: 7 native warning(s); review required */
   unsigned char *puVar1;
   unsigned int *puVar2;
   unsigned int *puVar3;
@@ -81,10 +81,12 @@ void FUN_001d2844(unsigned int *param_1)
   temp_v11 = &DAT_004208ec;
   DAT_00439ce4 = puVar2;
   do {
-    DAT_00493570 = (unsigned int *)FUN_002c5300(0x10000,0x100,0,0xc,1);
-    if (DAT_00493570 != (unsigned int *)0x0) {
-      DAT_00493570[2] = (unsigned int)DAT_00439ce4;
-      *DAT_00493570 = (unsigned int)puVar1;
+    puVar2 = (unsigned int *)0x10000;
+    FUN_002c5300(0x10000,0x100,0,0xc,1);
+    DAT_00493570 = puVar2;
+    if (puVar2 != (unsigned int *)0x0) {
+      puVar2[2] = (unsigned int)DAT_00439ce4;
+      *puVar2 = (unsigned int)puVar1;
     }
     while( 1 ) {
       piVar8 = &DAT_0049356c + temp_v3 * 2;
@@ -123,7 +125,8 @@ void FUN_001d2844(unsigned int *param_1)
         *(unsigned char *)(temp_v1 + 0x149) = 0xb;
       }
       if (temp_v3 == 0) break;
-      puVar3 = (unsigned int *)FUN_002c5300(0x10000,0x100,0,0xc,1);
+      puVar3 = (unsigned int *)0x10000;
+      FUN_002c5300(0x10000,0x100,0,0xc,1);
       puVar2 = DAT_00439ce4;
       if (puVar3 != (unsigned int *)0x0) {
         *puVar3 = (unsigned int)temp_v11;

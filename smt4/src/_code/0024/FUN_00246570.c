@@ -4,14 +4,14 @@
 
 /* Supplied declaration required: FUN_0022e3f8. */
 extern unsigned int FUN_002ae3c4(unsigned int);
-extern int FUN_002b45e8(unsigned int);
+/* Supplied declaration required: FUN_002b45e8. */
 /* Supplied declaration required: FUN_002b4670. */
 
 
 int FUN_00246570(unsigned short *param_1)
 
 {
-/* irregular: 2 native warning(s); review required */
+/* irregular: 3 native warning(s); review required */
   unsigned int temp_v0;
   int temp_v1;
   unsigned int temp_v2;
@@ -42,9 +42,9 @@ int FUN_00246570(unsigned short *param_1)
   case 6:
   case 7:
   case 8:
-    temp_v1 = FUN_002b45e8(temp_v2);
-    if (temp_v1 != 0) {
-      temp_v1 = *(int *)(temp_v1 + 0xa0);
+    FUN_002b45e8();
+    if (temp_v2 != 0) {
+      temp_v1 = *(int *)(temp_v2 + 0xa0);
       if ((param_1[1] & 2) != 0) {
         temp_v1 = (int)(((param_1[1] & 0x3ff) >> 2) * temp_v1) / 100;
       }

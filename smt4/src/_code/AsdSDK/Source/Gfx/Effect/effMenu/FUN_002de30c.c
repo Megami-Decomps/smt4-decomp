@@ -8,19 +8,20 @@ typedef struct {
 } param_5_stack;
 
 /* Supplied declaration required: FUN_002bf694. */
-extern unsigned int *FUN_002c32a0(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c32a0. */
 
 
 void FUN_002de30c(int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
                  unsigned int param_5)
 
 {
-/* irregular: 1 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   int temp_v0;
   unsigned int *puVar2;
   int temp_v1;
   
-  puVar2 = (unsigned int *)FUN_002c32a0(0x10000,0x100,0,0x44,0x10,1);
+  puVar2 = (unsigned int *)0x10000;
+  FUN_002c32a0(0x10000,0x100,0,0x44,0x10,1);
   *puVar2 = param_3;
   puVar2[1] = param_4;
   puVar2[2] = param_5;

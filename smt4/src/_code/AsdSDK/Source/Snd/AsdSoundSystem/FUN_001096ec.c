@@ -54,7 +54,7 @@ extern unsigned int DAT_004efd34; /* 0x4efd34 */
 /* Supplied declaration required: FUN_001216cc. */
 /* Supplied declaration required: FUN_00121824. */
 /* Supplied declaration required: FUN_0012201c. */
-extern unsigned int FUN_002bf5c0(unsigned int, unsigned int, unsigned int, unsigned char *);
+/* Supplied declaration required: FUN_002bf5c0. */
 extern int FUN_002bf684(unsigned char *);
 /* Supplied declaration required: FUN_002bf694. */
 extern int FUN_002bfefc(unsigned int *);
@@ -73,11 +73,11 @@ extern unsigned int nw_snd_internal_SoundArchiveFile_FileHeader_GetInfoBlockSize
 unsigned int FUN_001096ec(unsigned int param_1,int param_2,unsigned char *param_3)
 
 {
-/* irregular: 15 native warning(s); review required */
+/* irregular: 16 native warning(s); review required */
   int temp_v0;
   unsigned int temp_v1;
-  unsigned char *puVar3;
   unsigned int temp_v2;
+  unsigned char *puVar4;
   unsigned int temp_v3;
   unsigned long long temp_v4;
   unsigned char *temp_v5;
@@ -95,46 +95,56 @@ unsigned int FUN_001096ec(unsigned int param_1,int param_2,unsigned char *param_
   }
   FUN_00121824(&DAT_004e1f68,&DAT_004e23e4);
   temp_v1 = nw_snd_internal_SoundArchiveFile_FileHeader_GetInfoBlockSize(&DAT_004e2094);
+  temp_v2 = 0x10000;
   temp_v5 = (unsigned char *)0x1;
-  DAT_004e23d0 = FUN_002c5300(0x10000,0x100,0,temp_v1);
-  FUN_001216cc(&DAT_004e1f68,DAT_004e23d0,temp_v1);
+  FUN_002c5300(0x10000,0x100,0,temp_v1);
+  DAT_004e23d0 = temp_v2;
+  FUN_001216cc(&DAT_004e1f68,temp_v2,temp_v1);
   temp_v1 = nw_snd_SoundDataManager_GetRequiredMemSize(&DAT_004e21ac,&DAT_004e1f68);
+  temp_v2 = 0x10000;
   temp_v5 = (unsigned char *)0x1;
-  DAT_004e23d4 = FUN_002c5300(0x10000,0x100,0,temp_v1);
-  FUN_00121030(&DAT_004e21ac,&DAT_004e1f68,DAT_004e23d4,temp_v1);
-  puVar3 = &DAT_004e20ec;
+  FUN_002c5300(0x10000,0x100,0,temp_v1);
+  DAT_004e23d4 = temp_v2;
+  FUN_00121030(&DAT_004e21ac,&DAT_004e1f68,temp_v2,temp_v1);
+  puVar4 = &DAT_004e20ec;
   FUN_0012201c(&DAT_004e20ec,&DAT_004e1f68);
+  temp_v1 = 0x10000;
   temp_v6 = 1;
   temp_v5 = (unsigned char *)0x20;
-  DAT_004e23d8 = FUN_002bf5c0(0x10000,0x100,0,puVar3);
+  FUN_002bf5c0(0x10000,0x100,0,puVar4);
+  DAT_004e23d8 = temp_v1;
   if (param_3 == (unsigned char *)0x0) {
     param_3 = &DAT_004e20ec;
     nw_snd_SoundArchivePlayer_GetRequiredStreamBufferSize(&DAT_004e20ec,&DAT_004e1f68);
   }
+  temp_v1 = 0x10000;
   temp_v6 = 1;
   temp_v5 = (unsigned char *)0x20;
-  temp_v6 = FUN_002bf5c0(0x10000,0x100,0,param_3);
-  temp_v5 = puVar3;
+  FUN_002bf5c0(0x10000,0x100,0,param_3);
+  temp_v5 = puVar4;
+  temp_v6 = temp_v1;
   temp_v7 = param_3;
-  DAT_004e23dc = temp_v6;
+  DAT_004e23dc = temp_v1;
   FUN_0012113c(&DAT_004e20ec,&DAT_004e1f68,&DAT_004e21ac,DAT_004e23d8);
   if (param_2 != 0) {
-    puVar3 = &DAT_004e26ec;
+    puVar4 = &DAT_004e26ec;
     DAT_004e3134 = '\x01';
     nw_snd_Sound3DManager_GetRequiredMemSize(&DAT_004e26ec,&DAT_004e1f68);
+    temp_v1 = 0x10000;
     temp_v5 = (unsigned char *)0x1;
-    DAT_004e3130 = FUN_002c5300(0x10000,0x100,0,puVar3);
-    nw_snd_Sound3DManager_Initialize_120F48(&DAT_004e26ec,&DAT_004e1f68,DAT_004e3130,puVar3);
+    FUN_002c5300(0x10000,0x100,0,puVar4);
+    DAT_004e3130 = temp_v1;
+    nw_snd_Sound3DManager_Initialize_120F48(&DAT_004e26ec,&DAT_004e1f68,temp_v1,puVar4);
     temp_v1 = 0;
     DAT_004e2708 = 0x20;
     DAT_004e2710 = 0x40b55555;
     temp_v5 = (unsigned char *)0x0;
     temp_v6 = 0;
     temp_v7 = (unsigned char *)0x0;
-    temp_v3 = 0x3f800000;
+    temp_v2 = 0x3f800000;
     nw_ut_internal_LinkListImpl_insert(&DAT_004e26f8,&DAT_004e26fc,&DAT_004e30cc);
     DAT_004e3110 = temp_v1;
-    DAT_004e3114 = temp_v3;
+    DAT_004e3114 = temp_v2;
     DAT_004e3118 = temp_v1;
     FUN_00119c28(&temp_v5);
     temp_v4 = romwright_piece_4_4(0x40a00000,temp_v1);
@@ -146,26 +156,26 @@ unsigned int FUN_001096ec(unsigned int param_1,int param_2,unsigned char *param_
       DAT_004e3128 = 0x40a00000;
       DAT_004e30b0 = 0x40a00000;
     }
-    temp_v2 = 0;
+    temp_v3 = 0;
     DAT_004e312c = 0;
     do {
-      nw_snd_Sound3DActor_Initialize(temp_v2 * 0x84 + 0x4e2728,&DAT_004e20ec,&DAT_004e26ec);
-      if ((DAT_004e3134 != '\0') && (temp_v2 < 0x10)) {
+      nw_snd_Sound3DActor_Initialize(temp_v3 * 0x84 + 0x4e2728,&DAT_004e20ec,&DAT_004e26ec);
+      if ((DAT_004e3134 != '\0') && (temp_v3 < 0x10)) {
         if (((DAT_00476628 & 1) == 0) && (temp_v0 = FUN_002bfefc(&DAT_00476628), temp_v0 != 0)) {
           DAT_004efd2c = (unsigned int)temp_v4;
           DAT_004efd30 = DAT_004efd2c;
           DAT_004efd34 = DAT_004efd2c;
         }
-        temp_v3 = DAT_004efd34;
+        temp_v2 = DAT_004efd34;
         temp_v1 = DAT_004efd30;
-        temp_v0 = temp_v2 * 0xc;
+        temp_v0 = temp_v3 * 0xc;
         *(unsigned int *)(temp_v0 + 0x4e2fa8) = DAT_004efd2c;
         *(unsigned int *)(temp_v0 + 0x4e2fac) = temp_v1;
-        *(unsigned int *)(temp_v0 + 0x4e2fb0) = temp_v3;
-        nw_snd_Sound3DActor_SetPosition(temp_v2 * 0x84 + 0x4e2728,temp_v0 + 0x4e2fa8);
+        *(unsigned int *)(temp_v0 + 0x4e2fb0) = temp_v2;
+        nw_snd_Sound3DActor_SetPosition(temp_v3 * 0x84 + 0x4e2728,temp_v0 + 0x4e2fa8);
       }
-      temp_v2 = temp_v2 + 1;
-    } while ((int)temp_v2 < 0x10);
+      temp_v3 = temp_v3 + 1;
+    } while ((int)temp_v3 < 0x10);
   }
   return 1;
 }

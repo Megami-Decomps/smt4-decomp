@@ -8,7 +8,7 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned int DAT_0063fd88; /* 0x63fd88 */
-extern unsigned char DAT_0063fdb4; /* 0x63fdb4 */
+extern unsigned int DAT_0063fdb4; /* 0x63fdb4 */
 extern unsigned int DAT_0063fde0; /* 0x63fde0 */
 extern int DAT_0063fe0c; /* 0x63fe0c */
 extern unsigned char DAT_0063fe10; /* 0x63fe10 */
@@ -53,7 +53,7 @@ void FUN_00144ab4(int param_1)
     }
   }
   else {
-    DAT_0063fef4 = (unsigned int *)&DAT_0063fdb4;
+    DAT_0063fef4 = &DAT_0063fdb4;
     DAT_0063fef8 = &DAT_0063fe4c;
   }
   FUN_00154d68(DAT_0063fef8,DAT_0063fef8 + 0x18,*(unsigned int *)(DAT_0063fef8 + 0x30),

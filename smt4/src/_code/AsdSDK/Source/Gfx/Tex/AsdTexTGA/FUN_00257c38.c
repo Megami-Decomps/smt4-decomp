@@ -23,14 +23,14 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_002b4414. */
-extern unsigned int FUN_002bf5c0(unsigned int, unsigned int, unsigned int, int);
+/* Supplied declaration required: FUN_002bf5c0. */
 /* Supplied declaration required: rt_memcpy. */
 
 
 void FUN_00257c38(fn_00257c38_arg0 *param_1,int param_2,unsigned int param_3,unsigned int param_4)
 
 {
-/* irregular: 2 native warning(s); review required */
+/* irregular: 3 native warning(s); review required */
   unsigned char temp_v0;
   unsigned char temp_v1;
   int temp_v2;
@@ -53,9 +53,10 @@ void FUN_00257c38(fn_00257c38_arg0 *param_1,int param_2,unsigned int param_3,uns
         param_1->field_0x28 = *(int *)(param_2 + 8) - 0xc;
         temp_v5 = 1;
         temp_v4 = 0x80;
-        temp_v3 = FUN_002bf5c0(0x10000,0x100,0,param_1->field_0x28);
+        temp_v3 = 0x10000;
+        FUN_002bf5c0(0x10000,0x100,0,param_1->field_0x28);
         param_1->field_0x24 = temp_v3;
-        rt_memcpy(temp_v3,param_2 + 0xc,param_1->field_0x28);
+        rt_memcpy();
       }
       temp_v2 = FUN_002b4414(param_2,"nw4c_tfm",8);
       if (temp_v2 == 0) {

@@ -27,7 +27,7 @@ extern unsigned int DAT_0044ea00; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002be370. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: FUN_002be624. */
-extern unsigned int FUN_002be650(unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002be650. */
 /* Supplied declaration required: FUN_002bed3c. */
 extern int FUN_002bed98(int);
 /* Supplied declaration required: FUN_002beda4. */
@@ -43,7 +43,7 @@ extern unsigned int FUN_002c5d80(unsigned int, unsigned int);
 unsigned int FUN_0010a9c8(void)
 
 {
-/* irregular: irregular input(s): in_fpscr; 19 native warning(s); review required */
+/* irregular: irregular input(s): in_fpscr; 20 native warning(s); review required */
   int temp_v0;
   int temp_v1;
   int temp_v2;
@@ -98,7 +98,8 @@ unsigned int FUN_0010a9c8(void)
     FUN_002bed3c();
     temp_v4 = FUN_002bf4f8(0xe,200);
     FUN_002bf380(2,0xe,10,*(short *)(temp_v4 + 8) + temp_v1,*(short *)(temp_v4 + 10) + temp_v2,0xb);
-    temp_v3 = FUN_002be650(*(unsigned int *)(DAT_0043e190 + 0x68),0);
+    temp_v3 = *(unsigned int *)(DAT_0043e190 + 0x68);
+    FUN_002be650(temp_v3,0);
     FUN_002be624(temp_v9,&LAB_0010adb0,temp_v3);
     temp_v5 = FUN_002bf4f8(0xe,0xc2);
     VectorSignedToFloat((int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,

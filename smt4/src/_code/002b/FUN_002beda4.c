@@ -3,12 +3,8 @@
 #include "romwright_types.h"
 
 
-/* WARNING: Removing unreachable block (ram,0x002bfe04) */
-/* WARNING: Removing unreachable block (ram,0x002bfe14) */
-
-unsigned int FUN_002beda4(void)
+int FUN_002beda4(int param_1)
 
 {
-/* irregular: 2 native warning(s); review required */
-  return 0;
+  return *(int *)(param_1 + 0xc) >> 0xc;
 }

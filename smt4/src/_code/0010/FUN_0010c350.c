@@ -59,7 +59,7 @@ void FUN_0010c350(void)
       }
       *(unsigned int *)(temp_v0 + 0x4e2590) = 0;
       nw_snd_SoundHeap_Destroy(temp_v0 + 0x4e2564);
-      FUN_002c415c(*(unsigned int *)(temp_v0 + 0x4e258c));
+      FUN_002c415c();
     }
     do {
       temp_v2 = temp_v2 + 1;
@@ -103,7 +103,7 @@ void FUN_0010c350(void)
                   } while (temp_v3 < 4);
                   if ((&DAT_004e2637)[temp_v0] != '\0') {
                     nw_snd_SoundHeap_Destroy(temp_v5);
-                    FUN_002c415c(*(unsigned int *)(temp_v0 + 0x4e262c));
+                    FUN_002c415c();
                     *(unsigned int *)(temp_v0 + 0x4e2630) = 0;
                     (&DAT_004e2637)[temp_v0] = 0;
                   }

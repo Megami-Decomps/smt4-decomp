@@ -24,7 +24,7 @@ extern int FUN_002b90c8(int *, unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_002b90e6. */
 /* Supplied declaration required: FUN_002bb150. */
 /* Supplied declaration required: FUN_002bb5a4. */
-extern int FUN_002bf5c0(unsigned int, unsigned int, unsigned int, int);
+/* Supplied declaration required: FUN_002bf5c0. */
 /* Supplied declaration required: FUN_002c222c. */
 /* Supplied declaration required: FUN_002c3424. */
 /* Supplied declaration required: FUN_002c40f8. */
@@ -42,7 +42,7 @@ extern int FUN_002bf5c0(unsigned int, unsigned int, unsigned int, int);
 void FUN_00113e4c(void)
 
 {
-/* irregular: 1 goto(s); 16 native warning(s); review required */
+/* irregular: 1 goto(s); 17 native warning(s); review required */
   unsigned char *puVar1;
   int *piVar2;
   char *pcVar3;
@@ -177,27 +177,31 @@ void FUN_00113e4c(void)
                 if (temp_v1 != 0x11) {
                   temp_v2 = piVar8[10];
                   uStack_244 = 1;
-                  temp_v1 = FUN_002bf5c0(0x100,0x100,0,piVar8[6]);
+                  temp_v1 = 0x100;
+                  FUN_002bf5c0(0x100,0x100,0,piVar8[6]);
                   piVar8[3] = temp_v1;
                 }
                 else {
                   temp_v2 = piVar8[10];
                   uStack_244 = 0;
-                  temp_v1 = FUN_002bf5c0(0x10000,0x100,0,piVar8[6]);
+                  temp_v1 = 0x10000;
+                  FUN_002bf5c0(0x10000,0x100,0,piVar8[6]);
                   piVar8[3] = temp_v1;
                 }
               }
               else {
                 temp_v2 = piVar8[10];
                 uStack_244 = 1;
-                temp_v1 = FUN_002bf5c0(0x10000,0x100,0,piVar8[6]);
+                temp_v1 = 0x10000;
+                FUN_002bf5c0(0x10000,0x100,0,piVar8[6]);
                 piVar8[3] = temp_v1;
               }
             }
             else {
               temp_v2 = piVar8[10];
               uStack_244 = 0;
-              temp_v1 = FUN_002bf5c0(0x100,0x100,0,piVar8[6]);
+              temp_v1 = 0x100;
+              FUN_002bf5c0(0x100,0x100,0,piVar8[6]);
               piVar8[3] = temp_v1;
             }
           }

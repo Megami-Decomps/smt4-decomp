@@ -39,7 +39,7 @@ extern unsigned int FUN_002c2ff0(void);
 extern unsigned int FUN_002c300c(void);
 extern unsigned int FUN_002c30c4(unsigned char *);
 extern int FUN_002c3124(unsigned char *, unsigned int, unsigned int);
-extern unsigned int *FUN_002c5300(unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c5300. */
 /* Supplied declaration required: nw_gfx_SceneBuilder_CreateObject. */
 /* Supplied declaration required: nw_gfx_res_ResGraphicsFile_Setup. */
 /* Supplied declaration required: nw_gfx_res_ResModel_Setup. */
@@ -50,14 +50,15 @@ extern int nw_ut_ResDicPatricia_Get(int *, unsigned char *, unsigned int);
 void FUN_001049ac(void)
 
 {
-/* irregular: 3 goto(s); 4 native warning(s); review required */
-  unsigned int *puVar1;
+/* irregular: 3 goto(s); 5 native warning(s); review required */
   unsigned int temp_v0;
   int temp_v1;
   unsigned int temp_v2;
-  int *piVar5;
+  int *piVar4;
+  unsigned int *puVar5;
+  unsigned int *puVar6;
   int temp_v3;
-  int *piVar7;
+  int *piVar8;
   int temp_v4;
   int temp_v5;
   int temp_v6;
@@ -111,28 +112,28 @@ void FUN_001049ac(void)
   uStack_40 = 0;
   temp_v10 = 0;
   temp_v12 = 4;
-  piVar7 = &temp_v6;
+  piVar8 = &temp_v6;
   temp_v11 = 0;
   temp_v13 = 0;
   temp_v14 = 1;
   temp_v6 = temp_v15[0];
-  nw_gfx_SceneBuilder_CreateObject(piVar7,temp_v0,temp_v2);
-  if (piVar7 != (int *)0x0) {
-    piVar5 = (int *)(**(romwright_code **)(*piVar7 + 8))(piVar7);
+  nw_gfx_SceneBuilder_CreateObject(piVar8,temp_v0,temp_v2);
+  if (piVar8 != (int *)0x0) {
+    piVar4 = (int *)(**(romwright_code **)(*piVar8 + 8))(piVar8);
     do {
-      if (piVar5 == (int *)0x44e858) goto LAB_00104aec;
-      piVar5 = (int *)*piVar5;
-    } while (piVar5 != (int *)0x0);
+      if (piVar4 == (int *)0x44e858) goto LAB_00104aec;
+      piVar4 = (int *)*piVar4;
+    } while (piVar4 != (int *)0x0);
   }
-  piVar7 = (int *)0x0;
+  piVar8 = (int *)0x0;
 LAB_00104aec:
-  if (piVar7 != (int *)0x0) {
-    piVar5 = (int *)(**(romwright_code **)(*piVar7 + 8))(piVar7);
+  if (piVar8 != (int *)0x0) {
+    piVar4 = (int *)(**(romwright_code **)(*piVar8 + 8))(piVar8);
     do {
-      DAT_00464b44 = piVar7;
-      if (piVar5 == (int *)0x472180) goto LAB_00104b28;
-      piVar5 = (int *)*piVar5;
-    } while (piVar5 != (int *)0x0);
+      DAT_00464b44 = piVar8;
+      if (piVar4 == (int *)0x472180) goto LAB_00104b28;
+      piVar4 = (int *)*piVar4;
+    } while (piVar4 != (int *)0x0);
   }
   DAT_00464b44 = (int *)0x0;
 LAB_00104b28:
@@ -158,13 +159,13 @@ LAB_00104b28:
   }
   temp_v1 = *(int *)(temp_v3 + 0x2c);
   if (temp_v1 != 0) {
-    piVar5 = (int *)(temp_v3 + 0x2c + temp_v1);
+    piVar4 = (int *)(temp_v3 + 0x2c + temp_v1);
   }
   else {
-    piVar5 = (int *)0x0;
+    piVar4 = (int *)0x0;
   }
-  if (*piVar5 != 0) {
-    temp_v1 = (int)piVar5 + *piVar5;
+  if (*piVar4 != 0) {
+    temp_v1 = (int)piVar4 + *piVar4;
   }
   else {
     temp_v1 = 0;
@@ -172,18 +173,18 @@ LAB_00104b28:
   temp_v3 = *(int *)DAT_00464b44[0x59];
   *(int *)(temp_v3 + 0x20) = temp_v1;
   *(unsigned int *)(*(int *)(temp_v3 + 8) + 0x2a4) = 0;
-  if (piVar7 != (int *)0x0) {
-    piVar5 = (int *)(**(romwright_code **)(*piVar7 + 8))(piVar7);
+  if (piVar8 != (int *)0x0) {
+    piVar4 = (int *)(**(romwright_code **)(*piVar8 + 8))(piVar8);
     do {
-      if (piVar5 == (int *)0x472180) goto LAB_00104bf0;
-      piVar5 = (int *)*piVar5;
-    } while (piVar5 != (int *)0x0);
+      if (piVar4 == (int *)0x472180) goto LAB_00104bf0;
+      piVar4 = (int *)*piVar4;
+    } while (piVar4 != (int *)0x0);
   }
-  piVar7 = (int *)0x0;
+  piVar8 = (int *)0x0;
 LAB_00104bf0:
-  *(unsigned int *)(*(int *)(*(int *)piVar7[0x59] + 8) + 0x140) =
-       *(unsigned int *)(*(int *)(*(int *)piVar7[0x59] + 8) + 0x140) | 3;
-  temp_v1 = *(int *)(*(int *)piVar7[0x59] + 8);
+  *(unsigned int *)(*(int *)(*(int *)piVar8[0x59] + 8) + 0x140) =
+       *(unsigned int *)(*(int *)(*(int *)piVar8[0x59] + 8) + 0x140) | 3;
+  temp_v1 = *(int *)(*(int *)piVar8[0x59] + 8);
   *(unsigned int *)(temp_v1 + 0x44) = 0;
   *(unsigned int *)(temp_v1 + 0x48) = 0;
   *(unsigned int *)(temp_v1 + 0x4c) = 0;
@@ -191,34 +192,40 @@ LAB_00104bf0:
   temp_v0 = nw_ut_FloatColor_ToPicaU32(temp_v1 + 0x44);
   *(unsigned int *)(temp_v1 + 0xdc) = temp_v0;
   temp_v0 = *(unsigned int *)DAT_00464b44[0x59];
+  puVar5 = (unsigned int *)0x10000;
   temp_v4 = 1;
-  DAT_00472950 = (unsigned int *)FUN_002c5300(0x10000,0x100,0,0x18);
-  if (DAT_00472950 != (unsigned int *)0x0) {
+  FUN_002c5300(0x10000,0x100,0,0x18);
+  if (puVar5 != (unsigned int *)0x0) {
     temp_v2 = *DAT_004dae64;
-    DAT_00472950[2] = 2;
-    *DAT_00472950 = (unsigned int)&DAT_00420980;
-    DAT_00472950[1] = temp_v2;
-    DAT_00472950[3] = temp_v0;
-    DAT_00472950[4] = 0;
-    DAT_00472950[5] = 0;
+    puVar5[2] = 2;
+    *puVar5 = (unsigned int)&DAT_00420980;
+    puVar5[1] = temp_v2;
+    puVar5[3] = temp_v0;
+    puVar5[4] = 0;
+    puVar5[5] = 0;
   }
+  puVar6 = (unsigned int *)0x10000;
   temp_v4 = 1;
-  DAT_00472954 = (unsigned int *)FUN_002c5300(0x10000,0x100,0,0xc);
-  puVar1 = DAT_00472950;
-  if (DAT_00472954 != (unsigned int *)0x0) {
-    *DAT_00472954 = (unsigned int)&DAT_00420910;
-    DAT_00472954[1] = (unsigned int)puVar1;
-    DAT_00472954[2] = 0;
+  DAT_00472950 = puVar5;
+  FUN_002c5300(0x10000,0x100,0,0xc);
+  puVar5 = DAT_00472950;
+  if (puVar6 != (unsigned int *)0x0) {
+    *puVar6 = (unsigned int)&DAT_00420910;
+    puVar6[1] = (unsigned int)puVar5;
+    puVar6[2] = 0;
   }
+  puVar5 = (unsigned int *)0x10000;
   temp_v4 = 1;
-  DAT_00472958 = (unsigned int *)FUN_002c5300(0x10000,0x100,0,0x10);
+  DAT_00472954 = puVar6;
+  FUN_002c5300(0x10000,0x100,0,0x10);
   temp_v0 = DAT_00464bbc;
-  if (DAT_00472958 != (unsigned int *)0x0) {
+  if (puVar5 != (unsigned int *)0x0) {
     temp_v2 = *DAT_004dae64;
-    *DAT_00472958 = (unsigned int)&DAT_004208a8;
-    DAT_00472958[1] = temp_v2;
-    DAT_00472958[2] = temp_v0;
-    DAT_00472958[3] = 0;
+    *puVar5 = (unsigned int)&DAT_004208a8;
+    puVar5[1] = temp_v2;
+    puVar5[2] = temp_v0;
+    puVar5[3] = 0;
   }
+  DAT_00472958 = puVar5;
   return;
 }

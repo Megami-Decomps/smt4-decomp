@@ -25,14 +25,15 @@ extern unsigned int DAT_0044e660; /* 0x44e660 */
 /* Supplied declaration required: FUN_001392fc. */
 /* Supplied declaration required: FUN_001393e4. */
 /* Supplied declaration required: FUN_002c4938. */
-extern int *nn_fs_ipc_FileSystem_OpenFileDirectly(unsigned int *, unsigned int *, unsigned int, unsigned int, unsigned int, unsigned int *****, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: nn_fs_ipc_FileSystem_OpenFileDirectly. */
 
 
-unsigned int FUN_001271a0(int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
-                 unsigned int param_5,unsigned int param_6,unsigned int param_7)
+unsigned int *
+FUN_001271a0(int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
+            unsigned int param_5,unsigned int param_6,unsigned int param_7)
 
 {
-/* irregular: 4 native warning(s); review required */
+/* irregular: 5 native warning(s); review required */
   int *piVar1;
   int *piVar2;
   int *temp_v0;
@@ -54,9 +55,9 @@ unsigned int FUN_001271a0(int *param_1,unsigned int param_2,unsigned int param_3
       temp_v3 = 1;
       temp_v5 = 1;
       temp_v6 = DAT_0044e660;
+      piVar2 = &temp_v6;
       temp_v1 = param_2;
-      piVar2 = (int *)nn_fs_ipc_FileSystem_OpenFileDirectly
-                                ((unsigned int *)&temp_v6,(unsigned int *)&temp_v2,0,3,1,temp_v4,1,2,param_7,0xc,1,0);
+      nn_fs_ipc_FileSystem_OpenFileDirectly(piVar2,&temp_v2,0,3,1,temp_v4,1,2,param_7,0xc,1,0);
       if (-1 < (int)piVar2) {
         temp_v0 = (int *)0x0;
         piVar2 = (int *)(**(romwright_code **)(*piVar1 + 0x3c))(piVar1,&temp_v0,temp_v2);
@@ -73,11 +74,11 @@ unsigned int FUN_001271a0(int *param_1,unsigned int param_2,unsigned int param_3
       }
       if (((unsigned int)piVar2 & 0x80000000) == 0) {
         *param_1 = (int)piVar1;
-        return 0;
+        return (unsigned int *)0x0;
       }
       (**(romwright_code **)(*piVar1 + 0x30))(piVar1);
-      return (unsigned int)piVar2;
+      return (unsigned int *)piVar2;
     }
   }
-  return 0xd8604659;
+  return (unsigned int *)0xd8604659;
 }

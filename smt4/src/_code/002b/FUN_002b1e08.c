@@ -7,116 +7,99 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-extern unsigned char DAT_004c62a1; /* 0x4c62a1 */
-extern unsigned char DAT_004c62a2; /* 0x4c62a2 */
-extern unsigned char DAT_004c62a8; /* 0x4c62a8 */
-extern int DAT_004c6330; /* 0x4c6330 */
-
-/* Unsupported intrinsic, declaration required: coprocessor_storelong (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: while (COPY). */
-/* Unsupported intrinsic, declaration required: coprocessor_load (CALLOTHER). */
-/* Supplied declaration required: FUN_0013b608. */
-/* Supplied declaration required: FUN_0013b618. */
-/* Supplied declaration required: FUN_002ba2b8. */
+/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 
 
-/* WARNING: Control flow encountered bad instruction data */
-
-void FUN_002b1e08(unsigned int *param_1)
+void FUN_002b1e08(int param_1)
 
 {
-/* irregular: irregular input(s): in_cr0, in_cr1, in_r12, in_s17, in_stack_00000000; 17 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int *puVar3;
-  unsigned int temp_v2;
-  unsigned int *unaff_r4;
-  unsigned int unaff_r5;
-  unsigned int unaff_r6;
-  int temp_v3;
-  int temp_v4;
-  unsigned int *unaff_r10;
-  unsigned char in_r12;
-  unsigned int in_cr0;
-  unsigned int in_cr1;
-  unsigned int in_s17;
-  unsigned int *in_stack_00000000;
-  unsigned char uStack00000004;
+/* irregular: irregular input(s): in_fpscr; 2 native warning(s); review required */
+  short temp_v0;
+  char temp_v1;
+  float *pfVar3;
+  float temp_v2;
+  unsigned int *puVar5;
+  unsigned int temp_v3;
+  unsigned int temp_v4;
   int temp_v5;
+  int temp_v6;
+  unsigned char temp_v7;
+  unsigned int in_fpscr;
   
-  if ((*(char *)((int)param_1 + 0x87) == '\0') && (param_1[0x16] != 0)) {
-    puVar3 = (unsigned int *)(param_1[0x16] + (short)param_1[0x17] * 0xc);
-    if ((int)*(short *)((int)param_1 + 0x5e) < (int)(unsigned int)(unsigned short)puVar3[2]) {
-      *param_1 = unaff_r5;
-      param_1[1] = unaff_r6;
-      do {
-        uStack00000004 = 0;
-        do {
-          if ((unaff_r4 != (unsigned int *)0x0) && ((char)unaff_r5 != '\0')) {
-            temp_v2 = *unaff_r4;
-            *(unsigned int *)(temp_v2 + 0x24) = in_s17;
-            temp_v0 = DAT_004c6330;
-            coprocessor_storelong(0,in_cr0,temp_v2 + 0xa0);
-            temp_v3 = 0;
-            temp_v4 = *(int *)(DAT_004c6330 + 0x18) + *(int *)(DAT_004c6330 + 0x28) * 0x1c;
-            FUN_0013b608();
-            temp_v1 = *(int *)(temp_v0 + 0x28) + 1;
-            *(int *)(temp_v0 + 0x28) = temp_v1;
-            if ((*(int *)(temp_v0 + 0x38) != 0) &&
-               ((*(char *)(temp_v4 + 1) != '\0' ||
-                ((temp_v1 == *(int *)(temp_v0 + 0x20) && (*(char *)(temp_v0 + 0x3c) != '\0')))))) {
-              temp_v3 = *(int *)(temp_v0 + 0x38);
-            }
-            if (*(char *)(temp_v4 + 2) != '\0') {
-              DAT_004c62a2 = 0;
-              DAT_004c62a8 = 0;
-              DAT_004c62a1 = 0;
-            }
-            else if (temp_v1 >= *(int *)(temp_v0 + 0x20)) {
-              DAT_004c62a1 = 0;
-            }
-            else {
-              FUN_002ba2b8();
-            }
-            FUN_0013b618();
-            if (temp_v3 == 0) {
-              return;
-            }
-                    /* WARNING: Bad instruction - Truncating control flow here */
-            halt_baddata();
-          }
-          if (puVar3 == (unsigned int *)0x0) {
-                    /* WARNING: Bad instruction - Truncating control flow here */
-            halt_baddata();
-          }
-          unaff_r5 = 0;
-          unaff_r4 = puVar3;
-        } while (&in_stack_00000000 == (unsigned int **)&temp_v5);
-        unaff_r5 = (unsigned int)in_r12;
-        in_stack_00000000 = puVar3;
-        unaff_r4 = unaff_r10;
-      } while( 1 );
-    }
-    if (*(char *)((int)puVar3 + 10) == '\0') {
-      if ((char)param_1[0x18] != '\0') {
-        temp_v2 = *puVar3;
+  if ((*(char *)(param_1 + 0x87) == '\0') && (*(int *)(param_1 + 0x58) != 0)) {
+    pfVar3 = (float *)(*(int *)(param_1 + 0x58) + *(short *)(param_1 + 0x5c) * 0xc);
+    temp_v4 = (unsigned int)*(unsigned short *)(pfVar3 + 2);
+    if ((int)*(short *)(param_1 + 0x5e) < (int)temp_v4) {
+      if (*(char *)(param_1 + 0x60) != '\0') {
+        temp_v2 = (float)VectorUnsignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
+        temp_v2 = (*pfVar3 - pfVar3[1]) / temp_v2;
       }
       else {
-        temp_v2 = puVar3[1];
+        temp_v2 = (float)VectorUnsignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
+        temp_v2 = (pfVar3[1] - *pfVar3) / temp_v2;
       }
-      param_1[8] = temp_v2;
-      coprocessor_load(2,in_cr1,(unsigned char)param_1[0x21] + 0x1c);
-                    /* WARNING: Bad instruction - Truncating control flow here */
-      halt_baddata();
+      *(short *)(param_1 + 0x5e) = *(short *)(param_1 + 0x5e) + 1;
+      *(float *)(param_1 + 0x20) = temp_v2 + *(float *)(param_1 + 0x20);
+      return;
     }
-    if ((char)param_1[0x18] != '\0') {
-      temp_v2 = puVar3[1];
+    if (*(char *)((int)pfVar3 + 10) == '\0') {
+      if (*(char *)(param_1 + 0x60) != '\0') {
+        temp_v2 = *pfVar3;
+      }
+      else {
+        temp_v2 = pfVar3[1];
+      }
+      *(float *)(param_1 + 0x20) = temp_v2;
+      temp_v7 = *(char *)(param_1 + 0x84) != '\0';
+      if (temp_v7) {
+        temp_v2 = *(float *)(param_1 + 0x78);
+      }
+      if ((temp_v7 && temp_v2 != 0.0f) &&
+         (*(int *)((int)temp_v2 + *(short *)(param_1 + 0x7e) * 0x1c + 0xc) != -1)) {
+        temp_v0 = *(short *)(param_1 + 0x7e) + 1;
+        *(short *)(param_1 + 0x7e) = temp_v0;
+        temp_v6 = (int)temp_v2 + temp_v0 * 0x1c;
+        temp_v5 = *(int *)(temp_v6 + 0xc);
+        if (temp_v5 != -1 && temp_v5 != -3) {
+          if (temp_v5 != -2) {
+            temp_v1 = *(char *)(temp_v6 + 0x10);
+            *(short *)(param_1 + 0x5c) = (short)temp_v5;
+            *(unsigned short *)(param_1 + 0x5e) = 0;
+            *(char *)(param_1 + 0x60) = temp_v1;
+            *(unsigned char *)(param_1 + 0x8a) = 0;
+            puVar5 = (unsigned int *)(*(int *)(param_1 + 0x58) + (short)temp_v5 * 0xc);
+          }
+          else {
+            *(unsigned short *)(param_1 + 0x7e) = 0;
+            temp_v1 = *(char *)((int)temp_v2 + 0x10);
+            temp_v0 = (short)*(unsigned int *)((int)temp_v2 + 0xc);
+            *(short *)(param_1 + 0x5c) = temp_v0;
+            *(unsigned short *)(param_1 + 0x5e) = 0;
+            *(char *)(param_1 + 0x60) = temp_v1;
+            *(unsigned char *)(param_1 + 0x8a) = 0;
+            puVar5 = (unsigned int *)(*(int *)(param_1 + 0x58) + temp_v0 * 0xc);
+          }
+          if (temp_v1 != '\0') {
+            temp_v3 = puVar5[1];
+          }
+          else {
+            temp_v3 = *puVar5;
+          }
+          *(unsigned int *)(param_1 + 0x20) = temp_v3;
+          return;
+        }
+      }
+      *(unsigned char *)(param_1 + 0x87) = 1;
+      return;
+    }
+    if (*(char *)(param_1 + 0x60) != '\0') {
+      temp_v2 = pfVar3[1];
     }
     else {
-      temp_v2 = *puVar3;
+      temp_v2 = *pfVar3;
     }
-    param_1[8] = temp_v2;
-    *(unsigned short *)((int)param_1 + 0x5e) = 0;
+    *(float *)(param_1 + 0x20) = temp_v2;
+    *(unsigned short *)(param_1 + 0x5e) = 0;
   }
   return;
 }

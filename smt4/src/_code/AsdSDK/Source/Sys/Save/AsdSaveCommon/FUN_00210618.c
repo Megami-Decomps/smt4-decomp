@@ -9,7 +9,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_002bd420. */
 /* Supplied declaration required: FUN_002c415c. */
-extern int FUN_002c5300(unsigned int, unsigned int, unsigned int, int, unsigned int);
+/* Supplied declaration required: FUN_002c5300. */
 /* Supplied declaration required: FUN_002f55cc. */
 
 
@@ -18,10 +18,11 @@ FUN_00210618(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsi
             )
 
 {
-/* irregular: 3 native warning(s); review required */
+/* irregular: 4 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_002c5300(0x100,0x100,0,param_5 + 0x80,1);
+  temp_v0 = 0x100;
+  FUN_002c5300(0x100,0x100,0,param_5 + 0x80,1);
   FUN_002bd420(param_3,temp_v0,0x80);
   FUN_002bd420(param_4,temp_v0 + 0x80,param_5);
   FUN_002f55cc(param_1,param_2,temp_v0,param_5 + 0x80);

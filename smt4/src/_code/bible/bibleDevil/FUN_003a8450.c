@@ -37,7 +37,7 @@ extern int FUN_0029e010(void);
 /* Supplied declaration required: FUN_002a0cc8. */
 /* Supplied declaration required: FUN_002b8838. */
 extern unsigned int FUN_002bce30(unsigned short, unsigned int);
-extern unsigned int FUN_002bd06c(unsigned short);
+/* Supplied declaration required: FUN_002bd06c. */
 /* Supplied declaration required: FUN_002bf694. */
 /* Supplied declaration required: FUN_003a7ec8. */
 
@@ -45,7 +45,7 @@ extern unsigned int FUN_002bd06c(unsigned short);
 void FUN_003a8450(int param_1)
 
 {
-/* irregular: 22 native warning(s); review required */
+/* irregular: 23 native warning(s); review required */
   unsigned short temp_v0;
   int temp_v1;
   unsigned int temp_v2;
@@ -100,8 +100,9 @@ void FUN_003a8450(int param_1)
     temp_v1 = param_1;
     FUN_003a7ec8(param_1,temp_v0);
     if (temp_v1 != 0) {
-      temp_v4 = FUN_002bd06c(temp_v0);
-      FUN_002bf694(temp_v7,temp_v4);
+      temp_v2 = (unsigned int)temp_v0;
+      FUN_002bd06c(temp_v2);
+      FUN_002bf694(temp_v7,temp_v2);
       FUN_00295660(8,temp_v7);
       temp_v4 = FUN_002bce30(temp_v0,1);
       FUN_002bf694(temp_v7,temp_v4);

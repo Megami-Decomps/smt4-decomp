@@ -72,27 +72,28 @@ extern unsigned int FUN_00120e24(unsigned int *);
 /* Supplied declaration required: FUN_0012a740. */
 /* Supplied declaration required: FUN_002bcc54. */
 /* Supplied declaration required: FUN_002c52f8. */
-extern unsigned int FUN_002c5300(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c5300. */
 
 
 void FUN_0010d494(int param_1)
 
 {
-/* irregular: 6 native warning(s); review required */
+/* irregular: 7 native warning(s); review required */
   int temp_v0;
   int temp_v1;
   unsigned int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
+  unsigned int temp_v3;
+  int temp_v4;
   unsigned int temp_v5;
+  unsigned int temp_v6;
   unsigned int uStack_30;
   unsigned int uStack_2c;
-  unsigned int temp_v6;
+  unsigned int temp_v7;
   unsigned int uStack_24;
-  unsigned char temp_v7;
   unsigned char temp_v8;
   unsigned char temp_v9;
-  unsigned int temp_v10;
+  unsigned char temp_v10;
+  unsigned int temp_v11;
   
   temp_v0 = FUN_0011be58();
   temp_v1 = 0;
@@ -112,20 +113,22 @@ void FUN_0010d494(int param_1)
     FUN_0012a740(0x1e);
     FUN_0011cd14(3);
   }
-  temp_v5 = 0x4000;
+  temp_v6 = 0x4000;
   uStack_30 = 0x20000;
   uStack_2c = 3;
-  temp_v6 = 0x4000;
+  temp_v7 = 0x4000;
   uStack_24 = 0x2000;
-  temp_v3 = 4;
-  temp_v7 = 1;
-  temp_v8 = 0;
-  temp_v9 = 1;
-  temp_v10 = 0xffffffff;
-  temp_v4 = (unsigned int)(0 < param_1);
-  temp_v2 = FUN_00120e24((unsigned int *)&temp_v3);
-  DAT_004e23cc = FUN_002c5300(0x10000,0x100,0,temp_v2,1);
-  FUN_00120ba8(&temp_v3,DAT_004e23cc,temp_v2);
+  temp_v4 = 4;
+  temp_v8 = 1;
+  temp_v9 = 0;
+  temp_v10 = 1;
+  temp_v11 = 0xffffffff;
+  temp_v5 = (unsigned int)(0 < param_1);
+  temp_v2 = FUN_00120e24((unsigned int *)&temp_v4);
+  temp_v3 = 0x10000;
+  FUN_002c5300(0x10000,0x100,0,temp_v2,1);
+  DAT_004e23cc = temp_v3;
+  FUN_00120ba8(&temp_v4,temp_v3,temp_v2);
   DAT_004e246c = 0x40;
   DAT_004e24bc = 0x40;
   DAT_004e250c = 0x40;

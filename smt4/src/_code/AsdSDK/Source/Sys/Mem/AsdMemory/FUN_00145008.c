@@ -8,13 +8,13 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_002c36d0. */
-extern int *FUN_002c5300(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c5300. */
 
 
 int FUN_00145008(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
 
 {
-/* irregular: 1 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   int *piVar1;
   int temp_v0;
   int temp_v1;
@@ -37,7 +37,8 @@ int FUN_00145008(int param_1,unsigned int param_2,unsigned int param_3,unsigned 
     if ((param_2 & 0x7f) != 0) {
       param_2 = (0x80 - (param_2 & 0x7f)) + param_2;
     }
-    piVar1 = (int *)FUN_002c5300(0x100,0x100,0,0x10,1);
+    piVar1 = (int *)0x100;
+    FUN_002c5300(0x100,0x100,0,0x10,1);
     *piVar1 = 0;
     piVar1[1] = 0;
     piVar1[2] = 0;

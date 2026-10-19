@@ -8,22 +8,23 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_001d22a0. */
-extern int *FUN_002c32a0(unsigned int, unsigned int, unsigned int, int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c32a0. */
 
 
 int * FUN_00256fec(int *param_1)
 
 {
-/* irregular: 1 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   int *piVar1;
   int temp_v0;
   
   temp_v0 = *param_1;
   *(int *)(temp_v0 + 0x10) = *(int *)(temp_v0 + 0x10) + 1;
-  piVar1 = (int *)FUN_002c32a0(0x10000,0x100,0,*(int *)(temp_v0 + 8) * 0x14 + 0x18,0x10,1);
+  piVar1 = (int *)0x10000;
+  FUN_002c32a0(0x10000,0x100,0,*(int *)(temp_v0 + 8) * 0x14 + 0x18,0x10,1);
   piVar1[4] = (int)(piVar1 + 6);
   *piVar1 = temp_v0;
-  FUN_001d22a0(piVar1,0);
+  FUN_001d22a0();
   *(unsigned short *)(piVar1 + 5) = 1;
   return piVar1;
 }

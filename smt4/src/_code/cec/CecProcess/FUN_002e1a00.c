@@ -21,7 +21,7 @@ extern unsigned char LAB_003f6fe8; /* 0x3f6fe8 */
 extern unsigned int FUN_00248a9c(void);
 /* Supplied declaration required: FUN_002bcc60. */
 /* Supplied declaration required: FUN_002bcd44. */
-extern unsigned int FUN_002c32a0(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c32a0. */
 /* Supplied declaration required: FUN_002c38fc. */
 /* Supplied declaration required: FUN_002c526c. */
 
@@ -29,7 +29,7 @@ extern unsigned int FUN_002c32a0(unsigned int, unsigned int, unsigned int, unsig
 void FUN_002e1a00(int param_1)
 
 {
-/* irregular: 5 native warning(s); review required */
+/* irregular: 6 native warning(s); review required */
   unsigned int temp_v0;
   unsigned int temp_v1;
   int temp_v2;
@@ -44,7 +44,8 @@ void FUN_002e1a00(int param_1)
   *(unsigned int *)(param_1 + 0x70) = temp_v0;
   *(unsigned int *)(param_1 + 0x78) = 0;
   *(unsigned int *)(param_1 + 0x7c) = 0;
-  temp_v0 = FUN_002c32a0(0x100,0x100,0,0x1000,0x1000,1);
+  temp_v0 = 0x100;
+  FUN_002c32a0(0x100,0x100,0,0x1000,0x1000,1);
   *(unsigned int *)(param_1 + 0x44c) = temp_v0;
   FUN_002bcd44(param_1 + 0x434,temp_v0,0x1000);
   temp_v2 = 4;

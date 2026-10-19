@@ -44,7 +44,7 @@ extern int FUN_00295cec(void);
 /* Supplied declaration required: FUN_0029ede8. */
 /* Supplied declaration required: FUN_002ae164. */
 extern unsigned int FUN_002ae3c4(int);
-extern int FUN_002b45e8(int);
+/* Supplied declaration required: FUN_002b45e8. */
 /* Supplied declaration required: FUN_002b4670. */
 extern unsigned int FUN_002b8dc0(int);
 extern unsigned int FUN_002bce00(void);
@@ -56,14 +56,14 @@ extern unsigned int FUN_00394fd0(void);
 void FUN_0029212c(int param_1)
 
 {
-/* irregular: 10 native warning(s); review required */
+/* irregular: 11 native warning(s); review required */
   unsigned char temp_v0;
   char temp_v1;
   char temp_v2;
   int temp_v3;
   unsigned int temp_v4;
-  unsigned int temp_v5;
-  int temp_v6;
+  int temp_v5;
+  unsigned int temp_v6;
   int temp_v7;
   int temp_v8;
   int temp_v9;
@@ -85,17 +85,17 @@ void FUN_0029212c(int param_1)
   unsigned char temp_v18 [16];
   int temp_v19;
   
-  temp_v6 = DAT_0043da2c;
+  temp_v5 = DAT_0043da2c;
   temp_v16 = DAT_0043da2c;
   if (param_1 == 0) {
     *(unsigned char *)(DAT_0043da2c + 0x4cb) = 0;
     return;
   }
   *(unsigned char *)(DAT_0043da2c + 0x55c) = 1;
-  *(unsigned char *)(temp_v6 + 0x4cb) = 1;
+  *(unsigned char *)(temp_v5 + 0x4cb) = 1;
   temp_v19 = param_1;
   temp_v17 = FUN_00394fd0();
-  temp_v6 = temp_v19;
+  temp_v5 = temp_v19;
   temp_v4 = FUN_002ae3c4(temp_v19);
   switch(temp_v4) {
   default:
@@ -105,22 +105,22 @@ void FUN_0029212c(int param_1)
     FUN_00296ae8(*(unsigned int *)(temp_v16 + 0x558),3,0xffffffff,0);
     return;
   case 1:
-    temp_v8 = temp_v6;
+    temp_v8 = temp_v5;
     FUN_002b4670();
     if (*(short *)(temp_v8 + 0x76) != 0) {
-      temp_v6 = FUN_00295cec();
-      FUN_0029ede8(0x24,temp_v6,0xffffffff,0);
-      temp_v6 = (unsigned int)*(unsigned short *)(temp_v8 + 0x76) + temp_v6;
-      if (temp_v6 >= 10000) {
-        temp_v6 = 9999;
+      temp_v5 = FUN_00295cec();
+      FUN_0029ede8(0x24,temp_v5,0xffffffff,0);
+      temp_v5 = (unsigned int)*(unsigned short *)(temp_v8 + 0x76) + temp_v5;
+      if (temp_v5 >= 10000) {
+        temp_v5 = 9999;
       }
-      FUN_0029ede8(0x25,temp_v6,0xffffffff,0);
+      FUN_0029ede8(0x25,temp_v5,0xffffffff,0);
     }
     else {
-      temp_v5 = (unsigned int)*(unsigned short *)(temp_v8 + 0x62);
-      if (temp_v5 != 0) {
+      temp_v6 = (unsigned int)*(unsigned short *)(temp_v8 + 0x62);
+      if (temp_v6 != 0) {
         FUN_002ae164();
-        FUN_0024bc98(&temp_v12,(*(unsigned int *)(temp_v5 + 0x28) & 0x1ff) >> 5);
+        FUN_0024bc98(&temp_v12,(*(unsigned int *)(temp_v6 + 0x28) & 0x1ff) >> 5);
       }
       else if ((*(unsigned char *)(temp_v8 + 0x6a) & 0x80) != 0) {
         FUN_002be624(&temp_v12,&LAB_00292624);
@@ -129,7 +129,7 @@ void FUN_0029212c(int param_1)
         FUN_002be624(&temp_v12,&LAB_0029263c);
       }
       FUN_00295660(0x24,&temp_v12);
-      temp_v4 = FUN_002b8dc0(temp_v6);
+      temp_v4 = FUN_002b8dc0(temp_v5);
       FUN_0029ede8(0x25,temp_v4,0xffffffff,0);
     }
     temp_v12 = 3;
@@ -140,41 +140,41 @@ void FUN_0029212c(int param_1)
   case 2:
   case 3:
   case 8:
-    temp_v6 = FUN_002b45e8(temp_v6);
-    FUN_0029ede8(0x24,*(unsigned int *)(temp_v6 + 0x54) & 0x3ff,0xffffffff,0);
-    temp_v0 = *(unsigned char *)(temp_v6 + 0x58);
+    FUN_002b45e8();
+    FUN_0029ede8(0x24,*(unsigned int *)(temp_v5 + 0x54) & 0x3ff,0xffffffff,0);
+    temp_v0 = *(unsigned char *)(temp_v5 + 0x58);
     if ((temp_v0 & 0xf) == temp_v0 >> 4) {
       FUN_0029ede8(0x25,temp_v0 & 0xf,0xffffffff,0);
     }
     else {
       FUN_002907c4(temp_v13,temp_v0 & 0xf);
-      FUN_002907c4(temp_v14,*(unsigned char *)(temp_v6 + 0x58) >> 4);
+      FUN_002907c4(temp_v14,*(unsigned char *)(temp_v5 + 0x58) >> 4);
       FUN_002be624(&temp_v12,&LAB_0029264c,temp_v13,temp_v14);
       FUN_00295660(0x25,&temp_v12);
     }
-    FUN_0024bda8(&temp_v12,*(unsigned int *)(temp_v6 + 0x54) >> 0x14);
+    FUN_0024bda8(&temp_v12,*(unsigned int *)(temp_v5 + 0x54) >> 0x14);
     FUN_00295660(0x26,&temp_v12);
-    FUN_0024bc98(&temp_v12,*(unsigned char *)(temp_v6 + 0x59));
+    FUN_0024bc98(&temp_v12,*(unsigned char *)(temp_v5 + 0x59));
     FUN_00295660(0x27,&temp_v12);
-    if (*(char *)(temp_v6 + 0x5b) == '\0') {
+    if (*(char *)(temp_v5 + 0x5b) == '\0') {
       FUN_002be624(&temp_v12,&LAB_00292654);
     }
-    if (*(char *)(temp_v6 + 0x5b) == '\x01') {
+    if (*(char *)(temp_v5 + 0x5b) == '\x01') {
       FUN_002be624(&temp_v12,&LAB_00292660);
     }
-    if (*(char *)(temp_v6 + 0x5b) == '\x05') {
+    if (*(char *)(temp_v5 + 0x5b) == '\x05') {
       FUN_002be624(&temp_v12,&LAB_00292668);
     }
-    if (*(char *)(temp_v6 + 0x5b) == '\x06') {
+    if (*(char *)(temp_v5 + 0x5b) == '\x06') {
       FUN_002be624(&temp_v12,&LAB_00292678);
     }
-    if (*(char *)(temp_v6 + 0x5b) == '\a') {
+    if (*(char *)(temp_v5 + 0x5b) == '\a') {
       FUN_002be624(&temp_v12,&LAB_00292684);
     }
-    if (*(char *)(temp_v6 + 0x5b) == '\b') {
+    if (*(char *)(temp_v5 + 0x5b) == '\b') {
       FUN_002be624(&temp_v12,&LAB_00292690);
     }
-    if (*(char *)(temp_v6 + 0x5b) == '\t') {
+    if (*(char *)(temp_v5 + 0x5b) == '\t') {
       FUN_002be624(&temp_v12,&LAB_0029269c);
     }
     temp_v4 = 0x28;
@@ -183,10 +183,10 @@ void FUN_0029212c(int param_1)
   case 5:
   case 6:
   case 7:
-    temp_v6 = FUN_002b45e8(temp_v6);
+    FUN_002b45e8();
     temp_v8 = 0;
     do {
-      temp_v10 = (int)*(char *)(temp_v6 + temp_v8 + 0x61);
+      temp_v10 = (int)*(char *)(temp_v5 + temp_v8 + 0x61);
       temp_v11 = temp_v10;
       if (temp_v10 < 0) {
         temp_v11 = -temp_v10;
@@ -217,7 +217,7 @@ void FUN_0029212c(int param_1)
     temp_v15[6] = '\0';
     temp_v15[7] = '\0';
     do {
-      temp_v11 = temp_v6 + temp_v8 * 2;
+      temp_v11 = temp_v5 + temp_v8 * 2;
       temp_v1 = (char)temp_v8;
       if (*(short *)(temp_v11 + 0x74) >> 10 == 4) {
         temp_v2 = temp_v15[0] + '\x01';
@@ -308,7 +308,7 @@ void FUN_0029212c(int param_1)
       temp_v11 = temp_v11 + 1;
     } while (temp_v11 < 5);
     FUN_00295660(0x29,&temp_v12);
-    if (*(short *)(temp_v6 + 0x6a) != 0) {
+    if (*(short *)(temp_v5 + 0x6a) != 0) {
       temp_v4 = FUN_002bce00();
       FUN_002be624(&temp_v12,&LAB_00292650,temp_v4);
     }

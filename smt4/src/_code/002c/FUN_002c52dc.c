@@ -2,21 +2,19 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
+/* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp4; /* 0x4: local_4 */
-} void_stack;
+} param_2_stack;
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 
 
-/* WARNING: Control flow encountered bad instruction data */
-
-void FUN_002c52dc(void)
+void FUN_002c52dc(unsigned int *param_1,unsigned int param_2)
 
 {
-/* irregular: 3 native warning(s); review required */
+/* irregular: 1 native warning(s); review required */
   software_interrupt(0x15);
-                    /* WARNING: Bad instruction - Truncating control flow here */
-  halt_baddata();
+  *param_1 = param_2;
+  return;
 }

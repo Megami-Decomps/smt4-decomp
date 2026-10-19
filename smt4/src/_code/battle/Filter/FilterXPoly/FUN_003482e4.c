@@ -48,7 +48,7 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: FUN_00262888. */
 /* Supplied declaration required: FUN_002bfe28. */
 extern int FUN_002bfefc(unsigned int *);
-extern unsigned int FUN_002c5300(unsigned int, unsigned int, unsigned int, int, unsigned int);
+/* Supplied declaration required: FUN_002c5300. */
 
 
 /* WARNING: Removing unreachable block (ram,0x00348480) */
@@ -57,7 +57,7 @@ extern unsigned int FUN_002c5300(unsigned int, unsigned int, unsigned int, int, 
 void FUN_003482e4(int param_1,int param_2,unsigned int param_3)
 
 {
-/* irregular: irregular input(s): in_fpscr; 8 native warning(s); review required */
+/* irregular: irregular input(s): in_fpscr; 9 native warning(s); review required */
   unsigned int temp_v0;
   unsigned int *puVar2;
   int temp_v1;
@@ -84,7 +84,8 @@ void FUN_003482e4(int param_1,int param_2,unsigned int param_3)
   
   *(int *)(param_1 + 0x60) = param_2;
   FUN_0023b49c(param_1,param_3,*(unsigned int *)(param_2 + 0x2c));
-  temp_v0 = FUN_002c5300(0x100,0x100,0,(**(int **)(param_1 + 0x60) + 1) * 0x14,1);
+  temp_v0 = 0x100;
+  FUN_002c5300();
   *(unsigned int *)(param_1 + 4) = temp_v0;
   temp_v1 = (**(int **)(param_1 + 0x60) + 1) * 0xc;
   FUN_00262888();

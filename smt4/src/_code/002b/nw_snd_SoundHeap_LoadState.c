@@ -2,18 +2,31 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
-#ifndef ROMWRIGHT_PIECE_4_4_DEFINED
-#define ROMWRIGHT_PIECE_4_4_DEFINED
-#define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
-#endif
+/* stack frame of param_2: 1 slot(s), 4 byte(s) */
+typedef struct {
+    unsigned int sp10; /* 0x10: local_10 */
+} param_2_stack;
+
+/* Supplied declaration required: FUN_002b4b94. */
+extern unsigned int FUN_002bad74(unsigned int, unsigned int);
+extern unsigned int FUN_002baed8(void);
+/* Supplied declaration required: nn_os_CriticalSection_Enter. */
+/* Supplied declaration required: nn_os_CriticalSection_Leave. */
+/* Supplied declaration required: nw_snd_internal_FrameHeap_LoadState. */
 
 
-unsigned long long nw_snd_SoundHeap_LoadState(int param_1)
+void nw_snd_SoundHeap_LoadState(int param_1,unsigned int param_2)
 
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int unaff_r4;
+/* irregular: 4 native warning(s); review required */
+  unsigned int temp_v0;
+  unsigned int temp_v1;
   
-  *(int *)(param_1 * 2) = param_1;
-  return romwright_piece_4_4(unaff_r4,param_1 * 3);
+  nn_os_CriticalSection_Enter(param_1 + 4);
+  nw_snd_internal_FrameHeap_LoadState(param_1 + 0x10,param_2);
+  temp_v0 = FUN_002baed8();
+  temp_v1 = FUN_002bad74(temp_v0,1);
+  FUN_002b4b94(temp_v0,temp_v1);
+  nn_os_CriticalSection_Leave(param_1 + 4);
+  return;
 }

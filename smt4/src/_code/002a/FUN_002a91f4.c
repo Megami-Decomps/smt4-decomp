@@ -103,13 +103,13 @@ typedef struct {
 /* Supplied declaration required: FUN_002a5dc4. */
 /* Supplied declaration required: FUN_002a9834. */
 extern int *FUN_002c2ff0(void);
-extern unsigned int FUN_002c5300(unsigned int, unsigned int, unsigned int, int, unsigned int);
+/* Supplied declaration required: FUN_002c5300. */
 
 
 void FUN_002a91f4(fn_002a91f4_arg0 *param_1,unsigned int param_2)
 
 {
-/* irregular: 7 native warning(s); review required */
+/* irregular: 8 native warning(s); review required */
   int temp_v0;
   unsigned int temp_v1;
   int *piVar3;
@@ -142,7 +142,8 @@ void FUN_002a91f4(fn_002a91f4_arg0 *param_1,unsigned int param_2)
       *(unsigned int *)&param_1->field_0x4c = 0;
     }
     else {
-      temp_v1 = FUN_002c5300(0x100,0x100,0,*(int *)&param_1->field_0x34 << 2,1);
+      temp_v1 = 0x100;
+      FUN_002c5300(0x100,0x100,0,*(int *)&param_1->field_0x34 << 2,1);
       *(unsigned int *)&param_1->field_0x30 = temp_v1;
       temp_v0 = 0;
       if (temp_v0 < *(int *)&param_1->field_0x34) {
@@ -219,7 +220,8 @@ void FUN_002a91f4(fn_002a91f4_arg0 *param_1,unsigned int param_2)
       *(unsigned int *)&param_1->field_0x54 = 0;
     }
     else {
-      temp_v1 = FUN_002c5300(0x100,0x100,0,*(int *)&param_1->field_0x58 << 2,1);
+      temp_v1 = 0x100;
+      FUN_002c5300(0x100,0x100,0,*(int *)&param_1->field_0x58 << 2,1);
       temp_v4 = 0;
       *(unsigned int *)&param_1->field_0x54 = temp_v1;
       if (0 < *(int *)&param_1->field_0x58) {
@@ -288,7 +290,8 @@ void FUN_002a91f4(fn_002a91f4_arg0 *param_1,unsigned int param_2)
       param_1->field_0x64 = 0;
     }
     else {
-      temp_v1 = FUN_002c5300(0x100,0x100,0,param_1->field_0x68 << 2,1);
+      temp_v1 = 0x100;
+      FUN_002c5300(0x100,0x100,0,param_1->field_0x68 << 2,1);
       temp_v4 = 0;
       param_1->field_0x64 = temp_v1;
       if (0 < param_1->field_0x68) {

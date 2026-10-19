@@ -121,7 +121,7 @@ extern int FUN_002a0ce8(void);
 /* Supplied declaration required: FUN_002b9024. */
 /* Supplied declaration required: FUN_002bc01c. */
 extern unsigned int FUN_002bce30(unsigned short, unsigned int);
-extern unsigned int FUN_002bd06c(unsigned short);
+/* Supplied declaration required: FUN_002bd06c. */
 /* Supplied declaration required: FUN_002bd8e8. */
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002bee58. */
@@ -173,7 +173,7 @@ extern int aeabi_idivmod(unsigned int, unsigned int);
 unsigned int FUN_0018c0ec(void)
 
 {
-/* irregular: 45 unstructured edge(s); 4 goto(s); 107 native warning(s); review required */
+/* irregular: 45 unstructured edge(s); 4 goto(s); 108 native warning(s); review required */
   char temp_v0;
   long long temp_v1;
   int temp_v2;
@@ -946,8 +946,9 @@ LAB_0018d058:
       FUN_00295720();
       FUN_0029c424(1);
       FUN_002a0cc8(1);
-      temp_v9 = FUN_002bd06c(*(unsigned short *)(temp_v4 + 0x46));
-      FUN_002bf694(temp_v26,temp_v9);
+      temp_v16 = (unsigned int)*(unsigned short *)(temp_v4 + 0x46);
+      FUN_002bd06c(temp_v16);
+      FUN_002bf694(temp_v26,temp_v16);
       FUN_00295660(8,temp_v26);
       temp_v9 = FUN_002bce30(*(unsigned short *)(temp_v4 + 0x46),1);
       FUN_002bf694(temp_v26,temp_v9);

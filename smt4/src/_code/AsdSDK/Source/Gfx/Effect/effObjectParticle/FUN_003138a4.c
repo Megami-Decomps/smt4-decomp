@@ -61,8 +61,9 @@ unsigned int * FUN_003138a4(fn_003138a4_arg0 *param_1)
   if (temp_v3 >= 101) {
     temp_v3 = 100;
   }
-  puVar4 = (unsigned int *)FUN_002c32a0(0x10000,0x100,0,0xa8,0x10,1);
-  FUN_002c3944(puVar4,0xa8);
+  puVar4 = (unsigned int *)0x10000;
+  FUN_002c32a0(0x10000,0x100,0,0xa8,0x10,1);
+  FUN_002c3944();
   puVar4[1] = 0xffffffff;
   *puVar4 = temp_v3;
   puVar4[2] = 0x3f800000;
@@ -83,7 +84,8 @@ unsigned int * FUN_003138a4(fn_003138a4_arg0 *param_1)
           temp_v6 = pcVar5[3] == 'X';
         }
         if (temp_v6) {
-          temp_v3 = FUN_002c32a0(0x10000,0x100,0,temp_v4,0x10,1);
+          temp_v3 = 0x10000;
+          FUN_002c32a0(0x10000,0x100,0,temp_v4,0x10,1);
           puVar4[0x16] = temp_v3;
           FUN_002bd420(pcVar5,temp_v3,temp_v4);
           temp_v3 = FUN_0025bc18(puVar4[0x16],temp_v4,7);

@@ -17,7 +17,7 @@ extern int FUN_002355c0(int, unsigned char, unsigned int);
 extern int FUN_002c09d0(void);
 extern int FUN_002c09f4(unsigned int);
 /* Supplied declaration required: FUN_002c415c. */
-extern int FUN_002c5300(unsigned int, unsigned int, unsigned int, int, unsigned int);
+/* Supplied declaration required: FUN_002c5300. */
 extern int QcActive_GetField20(void);
 extern int QcActive_GetField22(void);
 extern int QcActive_GetField24(void);
@@ -32,7 +32,7 @@ QcUtility_BuildTabList
           int param_7)
 
 {
-/* irregular: 3 goto(s); 3 native warning(s); review required */
+/* irregular: 3 goto(s); 4 native warning(s); review required */
   unsigned char temp_v0;
   short temp_v1;
   unsigned char temp_v2;
@@ -63,7 +63,8 @@ QcUtility_BuildTabList
   } while (temp_v3 < 0x14);
   temp_v3 = param_3;
   QcUtility_GetQuestTableChunkCount(param_3,*param_1);
-  temp_v6 = FUN_002c5300(0x100,0x100,0,temp_v3 << 3,1);
+  temp_v6 = 0x100;
+  FUN_002c5300(0x100,0x100,0,temp_v3 << 3,1);
   temp_v11 = 0;
   temp_v7 = 0;
   temp_v4 = FUN_002355c0(param_3,*param_1,0);

@@ -24,7 +24,7 @@ extern int FUN_00121fb4(int);
 /* Supplied declaration required: FUN_002ba81c. */
 extern int FUN_002ba8e4(int);
 extern int FUN_002ba8e8(int);
-extern unsigned int *FUN_002baa40(romwright_code **, unsigned int);
+/* Supplied declaration required: FUN_002baa40. */
 extern unsigned int *FUN_002bad5c(int);
 /* Supplied declaration required: FUN_002c4938. */
 /* Supplied declaration required: FUN_002c5788. */
@@ -34,17 +34,19 @@ extern unsigned int *FUN_002bad5c(int);
 unsigned int * FUN_00111184(int param_1)
 
 {
-/* irregular: 10 native warning(s); review required */
+/* irregular: 11 native warning(s); review required */
   int temp_v0;
   unsigned int *puVar2;
-  unsigned int *puVar3;
-  unsigned char *puVar4;
+  romwright_code **ppcVar3;
+  unsigned int *puVar4;
+  unsigned char *puVar5;
   unsigned int temp_v1;
   unsigned int temp_v2;
   romwright_code *temp_v3;
   unsigned int uStack_1c;
   unsigned int *temp_v4;
   
+  ppcVar3 = &temp_v3;
   temp_v0 = FUN_0011b930(param_1 + 0x20);
   temp_v0 = FUN_0011b918(temp_v0 + 8);
   temp_v0 = FUN_002ba8e4(temp_v0 + 0x54);
@@ -71,9 +73,9 @@ unsigned int * FUN_00111184(int param_1)
   puVar2 = (unsigned int *)FUN_002bad5c(temp_v0 + 0x6b4);
   puVar2[2] = 0;
   puVar2[3] = 0;
-  puVar3 = (unsigned int *)FUN_002baa40(&temp_v3,0);
-  temp_v1 = puVar3[1];
-  *puVar2 = *puVar3;
+  FUN_002baa40(&temp_v3,0);
+  temp_v1 = (unsigned int)ppcVar3[1];
+  *puVar2 = (unsigned int)*ppcVar3;
   puVar2[1] = temp_v1;
   puVar2[4] = 0;
   *(unsigned char *)(puVar2 + 0x17d) = 1;
@@ -81,11 +83,11 @@ unsigned int * FUN_00111184(int param_1)
   puVar2[-2] = 0;
   FUN_00126fb8(puVar2 + -0x1b7);
   puVar2[-0x1d2] = (temp_v2 & 0xffff0000) | 2;
-  puVar3 = puVar2 + -0x1b7;
+  puVar4 = puVar2 + -0x1b7;
   puVar2[-0x1d3] = 0xe5c;
   FUN_00126fb8();
   puVar2[-0x1d1] = 0xe5c;
-  puVar2[-0x1d0] = (unsigned int)puVar3 & 0xffff0000;
+  puVar2[-0x1d0] = (unsigned int)puVar4 & 0xffff0000;
   FUN_00126fb8(puVar2 + -0x1b7);
   FUN_002c4938(puVar2 + -0x1d6,0xb);
   FUN_002ba81c(puVar2 + -0x1d6,&LAB_00111388,0xb);
@@ -111,9 +113,9 @@ unsigned int * FUN_00111184(int param_1)
   FUN_002ba78c(puVar2 + 4);
   temp_v3 = FUN_00121e5c;
   uStack_1c = 0;
-  puVar4 = &LAB_00111398;
+  puVar5 = &LAB_00111398;
   temp_v4 = puVar2 + -0x1d7;
   FUN_002c5788(&LAB_00111398,2,0);
-  puVar2[0x182] = (unsigned int)puVar4;
+  puVar2[0x182] = (unsigned int)puVar5;
   return puVar2 + -0x1d7;
 }

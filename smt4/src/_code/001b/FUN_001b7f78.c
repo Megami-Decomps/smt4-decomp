@@ -395,7 +395,7 @@ extern int FUN_002b8694(void);
 /* Supplied declaration required: FUN_002b8e84. */
 /* Supplied declaration required: FUN_002bd158. */
 /* Supplied declaration required: FUN_002be624. */
-extern unsigned int FUN_002be650(unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002be650. */
 /* Supplied declaration required: FUN_002bf694. */
 /* Supplied declaration required: FUN_002bf810. */
 /* Supplied declaration required: FUN_002bfc24. */
@@ -491,7 +491,7 @@ extern int func_0x0030f504(void);
 unsigned int FUN_001b7f78(void)
 
 {
-/* irregular: 76 goto(s); irregular input(s): in_fpscr; 259 native warning(s); review required */
+/* irregular: 76 goto(s); irregular input(s): in_fpscr; 260 native warning(s); review required */
   char temp_v0;
   char temp_v1;
   float temp_v2;
@@ -1359,8 +1359,8 @@ LAB_001b9210:
       DAT_0049f934 = 1;
       DAT_0049f93c = 1;
       DAT_0049f9ac = *(float *)(DAT_00447e88 + 0x50);
-      temp_v16 = FUN_002be650(DAT_0049f9cc,0);
-      FUN_002bd158(temp_v16,temp_v22);
+      FUN_002be650(DAT_0049f9cc,0);
+      FUN_002bd158();
       FUN_00295660(0,temp_v22);
       rt_memcpy_w(&DAT_0049f978,0x1b95f8,0x16);
       return 0;
@@ -3125,8 +3125,8 @@ LAB_001bc008:
       }
       else if (DAT_0049fa58 != '\0') {
         FUN_002b8830();
-        temp_v16 = FUN_002be650(DAT_0049fa5c,1);
-        FUN_002bd158(temp_v16,temp_v22);
+        FUN_002be650(DAT_0049fa5c,1);
+        FUN_002bd158();
         FUN_00295660(0,temp_v22);
         FUN_002bff50();
         temp_v16 = FUN_00290d74(puVar14[0x13],0x1bc5a4);

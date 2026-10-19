@@ -65,7 +65,7 @@ extern int FUN_00295618(void);
 extern int FUN_002b89a4(unsigned int);
 /* Supplied declaration required: FUN_002b8ee0. */
 extern unsigned int FUN_002bce30(unsigned short, unsigned int);
-extern unsigned int FUN_002bd06c(unsigned short);
+/* Supplied declaration required: FUN_002bd06c. */
 /* Supplied declaration required: FUN_002bee58. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bf694. */
@@ -79,7 +79,7 @@ extern int FUN_002bf4f8(unsigned int, unsigned int);
 unsigned int FUN_00329b70(void)
 
 {
-/* irregular: 1 goto(s); irregular input(s): in_fpscr, in_s0; 42 native warning(s); review required */
+/* irregular: 1 goto(s); irregular input(s): in_fpscr, in_s0; 43 native warning(s); review required */
   short temp_v0;
   unsigned char temp_v1;
   int temp_v2;
@@ -88,10 +88,10 @@ unsigned int FUN_00329b70(void)
   unsigned int *puVar6;
   unsigned char *puVar7;
   unsigned int temp_v5;
-  int temp_v6;
-  unsigned int temp_v7;
-  unsigned short *puVar10;
+  unsigned int temp_v6;
+  int temp_v7;
   unsigned int temp_v8;
+  unsigned short *puVar11;
   int temp_v9;
   int temp_v10;
   char *pcVar14;
@@ -108,11 +108,11 @@ unsigned int FUN_00329b70(void)
   FUN_00293a04(*(unsigned int *)(temp_v2 + 0x80),0);
   temp_v11 = (float)(int)in_s0;
   aeabi_idivmod(*(unsigned int *)(temp_v2 + 0x7c),temp_v11);
-  *(unsigned int *)(temp_v2 + 0x7c) = temp_v7;
+  *(unsigned int *)(temp_v2 + 0x7c) = temp_v8;
   switch(*(unsigned int *)(temp_v2 + 4)) {
   case 1:
-    temp_v6 = FUN_00295618();
-    if (temp_v6 == 0) break;
+    temp_v7 = FUN_00295618();
+    if (temp_v7 == 0) break;
     FUN_002a03d8(0,10);
     FUN_002a03d8(1,10);
     FUN_002a03a0(0x100006b,10,0x3c);
@@ -120,51 +120,51 @@ unsigned int FUN_00329b70(void)
     *(unsigned int *)(temp_v2 + 0x24) = 0xffffffff;
     if (temp_v0 != 2) {
       if (temp_v0 == 3) {
-        temp_v5 = 0x10000ab;
+        temp_v6 = 0x10000ab;
       }
       else {
         if (temp_v0 != 4) {
-          temp_v6 = DAT_0043dd90;
+          temp_v7 = DAT_0043dd90;
           *(unsigned int *)(DAT_0043dd90 + 4) = 2;
-          *(unsigned int *)(temp_v6 + 8) = 0;
+          *(unsigned int *)(temp_v7 + 8) = 0;
           break;
         }
-        temp_v5 = 0x10000ac;
+        temp_v6 = 0x10000ac;
       }
-      FUN_002bf810(temp_v5);
+      FUN_002bf810(temp_v6);
     }
     else {
       FUN_002bf810(0x10000aa);
     }
-    temp_v6 = DAT_0043dd90;
+    temp_v7 = DAT_0043dd90;
     *(unsigned int *)(DAT_0043dd90 + 4) = 2;
-    *(unsigned int *)(temp_v6 + 8) = 0;
+    *(unsigned int *)(temp_v7 + 8) = 0;
     break;
   case 2:
-    temp_v6 = 0;
+    temp_v7 = 0;
     do {
-      if (temp_v6 <= *(int *)(temp_v2 + 8) - 1) {
-        FUN_002b8ee0(temp_v2 + temp_v6 * 0x8c + 0x2c8,0);
+      if (temp_v7 <= *(int *)(temp_v2 + 8) - 1) {
+        FUN_002b8ee0(temp_v2 + temp_v7 * 0x8c + 0x2c8,0);
       }
-      temp_v6 = temp_v6 + 1;
-    } while (temp_v6 < 5);
+      temp_v7 = temp_v7 + 1;
+    } while (temp_v7 < 5);
     FUN_002bf818(temp_v2 + 0x840);
-    temp_v6 = FUN_002b89a4(0);
-    if (((temp_v6 != 0) && (temp_v6 = FUN_002b89a4(1), temp_v6 != 0)) &&
+    temp_v7 = FUN_002b89a4(0);
+    if (((temp_v7 != 0) && (temp_v7 = FUN_002b89a4(1), temp_v7 != 0)) &&
        (*(char *)(temp_v2 + 0x582) != '\0')) {
       FUN_002a0428(*(unsigned int *)(temp_v2 + 0x84),1);
       FUN_002a043c(*(unsigned int *)(temp_v2 + 0x8c),0);
-      temp_v6 = DAT_0043dd90;
+      temp_v7 = DAT_0043dd90;
       *(unsigned int *)(DAT_0043dd90 + 4) = 3;
-      *(unsigned int *)(temp_v6 + 8) = 0;
+      *(unsigned int *)(temp_v7 + 8) = 0;
     }
     break;
   case 3:
     *(int *)(temp_v2 + 0x78) = *(int *)(temp_v2 + 0x78) + 1;
-    temp_v6 = DAT_0043dd90;
+    temp_v7 = DAT_0043dd90;
     temp_v10 = FUN_002bf4f8(0x24,0x20b);
     temp_v14[0] = FUN_002bf4f8(0x24,0x20e);
-    temp_v0 = *(short *)(temp_v6 + 0x1e);
+    temp_v0 = *(short *)(temp_v7 + 0x1e);
     pcVar14 = (char *)0x0;
     if (temp_v0 == 2) {
       pcVar14 = (char *)0x4033b0;
@@ -178,46 +178,46 @@ unsigned int FUN_00329b70(void)
     temp_v9 = 0;
     if (temp_v0 != 0) {
       do {
-        puVar10 = (unsigned short *)(pcVar14 + temp_v9 * 4);
-        temp_v3 = *(int *)(temp_v6 + 8);
-        temp_v8 = (unsigned int)*puVar10;
-        if ((int)(temp_v8 - 5) <= temp_v3) {
-          if (temp_v3 < (int)temp_v8) {
-            *(unsigned int *)(temp_v6 + temp_v9 * 4 + 0x58) =
-                 ((int)**(short **)(temp_v10 + 0xc) / 5) * ((temp_v3 - temp_v8) + 5);
+        puVar11 = (unsigned short *)(pcVar14 + temp_v9 * 4);
+        temp_v3 = *(int *)(temp_v7 + 8);
+        temp_v5 = (unsigned int)*puVar11;
+        if ((int)(temp_v5 - 5) <= temp_v3) {
+          if (temp_v3 < (int)temp_v5) {
+            *(unsigned int *)(temp_v7 + temp_v9 * 4 + 0x58) =
+                 ((int)**(short **)(temp_v10 + 0xc) / 5) * ((temp_v3 - temp_v5) + 5);
           }
           else {
-            temp_v8 = (unsigned int)puVar10[1];
-            if (temp_v3 < (int)temp_v8) {
-              temp_v3 = temp_v6 + temp_v9 * 4;
+            temp_v5 = (unsigned int)puVar11[1];
+            if (temp_v3 < (int)temp_v5) {
+              temp_v3 = temp_v7 + temp_v9 * 4;
               *(int *)(temp_v3 + 0x58) = (int)**(short **)(temp_v10 + 0xc);
-              temp_v12 = (float)VectorSignedToFloat((unsigned int)puVar10[1] - (unsigned int)*puVar10,
+              temp_v12 = (float)VectorSignedToFloat((unsigned int)puVar11[1] - (unsigned int)*puVar11,
                                                   (unsigned char)(in_fpscr >> 0x16) & 3);
               temp_v13 = (float)VectorSignedToFloat((int)*(short *)(*(int *)(temp_v14[0] + 0xc) + 2),
                                                   (unsigned char)(in_fpscr >> 0x16) & 3);
-              temp_v11 = (float)VectorSignedToFloat(*(int *)(temp_v6 + 8) - (unsigned int)*puVar10,
+              temp_v11 = (float)VectorSignedToFloat(*(int *)(temp_v7 + 8) - (unsigned int)*puVar11,
                                                   (unsigned char)(in_fpscr >> 0x16) & 3);
               temp_v11 = (float)(int)-((temp_v13 / temp_v12) * temp_v11);
               *(float *)(temp_v3 + 0x68) = temp_v11;
             }
-            else if (temp_v3 < (int)(temp_v8 + 5)) {
-              temp_v4 = temp_v6 + temp_v9 * 4;
+            else if (temp_v3 < (int)(temp_v5 + 5)) {
+              temp_v4 = temp_v7 + temp_v9 * 4;
               *(unsigned int *)(temp_v4 + 0x58) =
-                   ((int)**(short **)(temp_v10 + 0xc) / 5) * (5 - (temp_v3 - temp_v8));
+                   ((int)**(short **)(temp_v10 + 0xc) / 5) * (5 - (temp_v3 - temp_v5));
               *(int *)(temp_v4 + 0x68) = -(int)*(short *)(*(int *)(temp_v14[0] + 0xc) + 2);
             }
             else {
-              *(unsigned int *)(temp_v6 + temp_v9 * 4 + 0x58) = 0;
-              FUN_002bf818(temp_v6 + temp_v9 * 0x8c + 0x610);
+              *(unsigned int *)(temp_v7 + temp_v9 * 4 + 0x58) = 0;
+              FUN_002bf818(temp_v7 + temp_v9 * 0x8c + 0x610);
             }
           }
         }
         temp_v9 = temp_v9 + 1;
-      } while (temp_v9 < (int)(unsigned int)*(unsigned short *)(temp_v6 + 0x1e));
+      } while (temp_v9 < (int)(unsigned int)*(unsigned short *)(temp_v7 + 0x1e));
     }
-    temp_v6 = FUN_002636e4(*(unsigned int *)(temp_v2 + 0x84));
+    temp_v7 = FUN_002636e4(*(unsigned int *)(temp_v2 + 0x84));
     puVar6 = *(unsigned int **)(temp_v2 + 0x84);
-    if (temp_v6 != 0) {
+    if (temp_v7 != 0) {
       *puVar6 = *puVar6 | 2;
       *(unsigned char *)(*(int *)(puVar6[2] + 0x2c) + 0x1f6) = 0;
       if (*(short *)(temp_v2 + 0x1e) == 2) {
@@ -225,30 +225,30 @@ unsigned int FUN_00329b70(void)
           puVar7 = &LAB_0032a054;
           FUN_0029bb3c(&LAB_0032a054,7);
           *(unsigned char **)(temp_v2 + 0x88) = puVar7;
-          temp_v5 = FUN_00263c1c(&LAB_0032a074);
-          *(unsigned int *)(temp_v2 + 0x90) = temp_v5;
+          temp_v6 = FUN_00263c1c(&LAB_0032a074);
+          *(unsigned int *)(temp_v2 + 0x90) = temp_v6;
         }
         else {
           puVar7 = &LAB_0032a098;
           FUN_0029bb3c(&LAB_0032a098,7);
           *(unsigned char **)(temp_v2 + 0x88) = puVar7;
-          temp_v5 = FUN_00263c1c(&LAB_0032a0b4);
-          *(unsigned int *)(temp_v2 + 0x90) = temp_v5;
+          temp_v6 = FUN_00263c1c(&LAB_0032a0b4);
+          *(unsigned int *)(temp_v2 + 0x90) = temp_v6;
         }
       }
       if (*(short *)(temp_v2 + 0x1e) == 3) {
         puVar7 = &LAB_0032a0d4;
         FUN_0029bb3c(&LAB_0032a0d4,7);
         *(unsigned char **)(temp_v2 + 0x88) = puVar7;
-        temp_v5 = FUN_00263c1c(&LAB_0032a0f0);
-        *(unsigned int *)(temp_v2 + 0x90) = temp_v5;
+        temp_v6 = FUN_00263c1c(&LAB_0032a0f0);
+        *(unsigned int *)(temp_v2 + 0x90) = temp_v6;
       }
       if (*(short *)(temp_v2 + 0x1e) == 4) {
         puVar7 = &LAB_0032a110;
         FUN_0029bb3c(&LAB_0032a110,7);
         *(unsigned char **)(temp_v2 + 0x88) = puVar7;
-        temp_v5 = FUN_00263c1c(&LAB_0032a12c);
-        *(unsigned int *)(temp_v2 + 0x90) = temp_v5;
+        temp_v6 = FUN_00263c1c(&LAB_0032a12c);
+        *(unsigned int *)(temp_v2 + 0x90) = temp_v6;
       }
       FUN_0029c2cc(*(unsigned int *)(temp_v2 + 0x8c),0);
       FUN_00263588(*(unsigned int *)(temp_v2 + 0x8c));
@@ -258,24 +258,24 @@ unsigned int FUN_00329b70(void)
       FUN_00152bec(*(unsigned int *)(temp_v2 + 0x84));
       FUN_002a775c(*(unsigned int *)(temp_v2 + 0x84));
       *(unsigned int *)(temp_v2 + 0x84) = 0;
-      temp_v6 = DAT_0043dd90;
+      temp_v7 = DAT_0043dd90;
       if (*(char *)(temp_v2 + 0x20) != '\0') {
         FUN_00296f4c(*(unsigned int *)(temp_v2 + 0x2a0),0x11);
         FUN_002b8838(0x58);
-        temp_v6 = DAT_0043dd90;
+        temp_v7 = DAT_0043dd90;
         *(unsigned int *)(DAT_0043dd90 + 4) = 4;
-        *(unsigned int *)(temp_v6 + 8) = 0;
+        *(unsigned int *)(temp_v7 + 8) = 0;
       }
       else {
         *(unsigned int *)(DAT_0043dd90 + 4) = 5;
-        *(unsigned int *)(temp_v6 + 8) = 0;
+        *(unsigned int *)(temp_v7 + 8) = 0;
       }
       break;
     }
     FUN_002b2b5c();
     temp_v10 = 9;
     FUN_002c1658(9,1);
-    temp_v6 = 0x28e;
+    temp_v7 = 0x28e;
     temp_v9 = 0x311;
     if (temp_v10 == 0) {
       temp_v10 = 6;
@@ -285,16 +285,16 @@ unsigned int FUN_00329b70(void)
     else {
 LAB_0032a1a4:
       temp_v0 = *(short *)(temp_v2 + 0x1e);
-      temp_v10 = temp_v6;
+      temp_v10 = temp_v7;
       if (*(char *)(temp_v2 + 0x20) != '\0') {
         if ((temp_v0 != 2) && (temp_v10 = 0, temp_v0 == 3 || temp_v0 == 4)) {
           temp_v10 = temp_v9;
         }
         temp_v12 = (float)VectorSignedToFloat(temp_v10,(unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v8 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v11 < temp_v12) << 0x1f) |
-                 ((unsigned int)(temp_v11 == temp_v12) << 0x1e);
-        in_fpscr = temp_v8 | ((unsigned int)(NAN(temp_v11) || NAN(temp_v12)) << 0x1c);
-        temp_v1 = (unsigned char)(temp_v8 >> 0x18);
+        temp_v5 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v11 < temp_v12) << 0x1f) |
+                ((unsigned int)(temp_v11 == temp_v12) << 0x1e);
+        in_fpscr = temp_v5 | ((unsigned int)(NAN(temp_v11) || NAN(temp_v12)) << 0x1c);
+        temp_v1 = (unsigned char)(temp_v5 >> 0x18);
         if (!(unsigned char)((temp_v1 >> 6) & 1) && temp_v1 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
           if (temp_v0 == 2) {
             temp_v10 = 800;
@@ -313,16 +313,16 @@ LAB_0032a1a4:
         temp_v10 = temp_v9;
       }
       temp_v12 = (float)VectorSignedToFloat(temp_v10,(unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v8 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v12 <= temp_v11) << 0x1d);
-      if (!romwright_subpiece_4_1_0(temp_v8 >> 0x1d,0)) {
-        VectorSignedToFloat(temp_v10,(unsigned char)(temp_v8 >> 0x16) & 3);
+      temp_v5 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v12 <= temp_v11) << 0x1d);
+      if (!romwright_subpiece_4_1_0(temp_v5 >> 0x1d,0)) {
+        VectorSignedToFloat(temp_v10,(unsigned char)(temp_v5 >> 0x16) & 3);
         FUN_00210194(*(unsigned int *)(temp_v2 + 0x84));
         temp_v3 = *(int *)(*(int *)(temp_v2 + 0x8c) + 4);
-        VectorSignedToFloat(temp_v10,(unsigned char)(temp_v8 >> 0x16) & 3);
-        temp_v5 = *(unsigned int *)(temp_v3 + 0x44);
+        VectorSignedToFloat(temp_v10,(unsigned char)(temp_v5 >> 0x16) & 3);
+        temp_v6 = *(unsigned int *)(temp_v3 + 0x44);
         (**(romwright_code **)(temp_v3 + 0x4c))(*(unsigned int *)(temp_v3 + 0x50));
         *(unsigned int *)(temp_v3 + 0x3c) = *(unsigned int *)(temp_v3 + 0x38);
-        *(unsigned int *)(temp_v3 + 0x38) = temp_v5;
+        *(unsigned int *)(temp_v3 + 0x38) = temp_v6;
         *(unsigned char *)(temp_v3 + 0x58) = 1;
         temp_v3 = 6;
         *(int *)(temp_v2 + 8) = temp_v10;
@@ -334,7 +334,7 @@ LAB_0032a1a4:
     }
     if (*(char *)(temp_v2 + 0x20) != '\0') {
       temp_v0 = *(short *)(temp_v2 + 0x1e);
-      temp_v10 = temp_v6;
+      temp_v10 = temp_v7;
       if ((temp_v0 != 2) && (temp_v10 = 0, temp_v0 == 3 || temp_v0 == 4)) {
         temp_v10 = temp_v9;
       }
@@ -359,7 +359,7 @@ LAB_0032a1a4:
       }
     }
     else {
-      temp_v10 = temp_v6;
+      temp_v10 = temp_v7;
       if ((temp_v0 != 2) && (temp_v10 = 0, temp_v0 == 3 || temp_v0 == 4)) {
         temp_v10 = temp_v9;
       }
@@ -373,25 +373,25 @@ LAB_0032a1a4:
     if (*(char *)(temp_v2 + 0x20) != '\0') {
       temp_v0 = *(short *)(DAT_0043dd90 + 0x1e);
       if (temp_v0 == 2) {
-        temp_v6 = 0x28f;
+        temp_v7 = 0x28f;
       }
       else {
-        temp_v6 = 0;
+        temp_v7 = 0;
         if (temp_v0 == 3 || temp_v0 == 4) {
-          temp_v6 = temp_v9;
+          temp_v7 = temp_v9;
         }
       }
-      if (*(int *)(temp_v2 + 8) == temp_v6) {
-        temp_v5 = FUN_002bf810(0x10000ae);
-        *(unsigned int *)(temp_v2 + 0x24) = temp_v5;
+      if (*(int *)(temp_v2 + 8) == temp_v7) {
+        temp_v6 = FUN_002bf810(0x10000ae);
+        *(unsigned int *)(temp_v2 + 0x24) = temp_v6;
       }
     }
     else {
       temp_v0 = *(short *)(temp_v2 + 0x1e);
-      if ((temp_v0 != 2) && (temp_v6 = 0, temp_v0 == 3 || temp_v0 == 4)) {
-        temp_v6 = temp_v9;
+      if ((temp_v0 != 2) && (temp_v7 = 0, temp_v0 == 3 || temp_v0 == 4)) {
+        temp_v7 = temp_v9;
       }
-      if (*(int *)(temp_v2 + 8) == temp_v6) {
+      if (*(int *)(temp_v2 + 8) == temp_v7) {
         FUN_002bf810(0x10000ad);
       }
     }
@@ -439,50 +439,51 @@ LAB_0032a1a4:
     break;
   case 4:
     FUN_002bf818();
-    temp_v6 = FUN_0019e0c0(*(unsigned int *)(temp_v2 + 0x2a0));
-    if ((temp_v6 != 2) || (*(char *)(temp_v2 + 0x60e) == '\0')) break;
+    temp_v7 = FUN_0019e0c0(*(unsigned int *)(temp_v2 + 0x2a0));
+    if ((temp_v7 != 2) || (*(char *)(temp_v2 + 0x60e) == '\0')) break;
   case 5:
-    temp_v5 = FUN_002bd06c(*(unsigned short *)(temp_v2 + 0xc));
+    temp_v5 = (unsigned int)*(unsigned short *)(temp_v2 + 0xc);
+    FUN_002bd06c(temp_v5);
     FUN_002bf694(temp_v14,temp_v5);
     FUN_00295660(8,temp_v14);
-    temp_v5 = FUN_002bce30(*(unsigned short *)(temp_v2 + 0xc),1);
-    FUN_002bf694(temp_v14,temp_v5);
+    temp_v6 = FUN_002bce30(*(unsigned short *)(temp_v2 + 0xc),1);
+    FUN_002bf694(temp_v14,temp_v6);
     FUN_00295660(0x10,temp_v14);
     FUN_00296f4c(*(unsigned int *)(temp_v2 + 0x2a0),0x10);
     FUN_002b8838(0x58);
     FUN_002954f4(*(unsigned short *)(temp_v2 + 0xc),1);
     FUN_002954dc(1);
-    temp_v6 = DAT_0043dd90;
+    temp_v7 = DAT_0043dd90;
     *(unsigned int *)(DAT_0043dd90 + 4) = 6;
-    *(unsigned int *)(temp_v6 + 8) = 0;
+    *(unsigned int *)(temp_v7 + 8) = 0;
     break;
   case 6:
     FUN_002bf818();
-    temp_v6 = FUN_0019e0c0(*(unsigned int *)(temp_v2 + 0x2a0));
-    if ((temp_v6 == 2) && (*(char *)(temp_v2 + 0x60e) != '\0')) {
+    temp_v7 = FUN_0019e0c0(*(unsigned int *)(temp_v2 + 0x2a0));
+    if ((temp_v7 == 2) && (*(char *)(temp_v2 + 0x60e) != '\0')) {
       FUN_0029c3c0(0,10,0xff);
       FUN_0029c3c0(1,10,0xff);
       FUN_0029c3b0(10);
-      temp_v6 = DAT_0043dd90;
+      temp_v7 = DAT_0043dd90;
       *(unsigned int *)(DAT_0043dd90 + 4) = 7;
-      *(unsigned int *)(temp_v6 + 8) = 0;
+      *(unsigned int *)(temp_v7 + 8) = 0;
     }
     break;
   case 7:
-    temp_v6 = FUN_002b89a4(0);
-    if ((temp_v6 != 0) && (temp_v6 = FUN_002b89a4(1), temp_v6 != 0)) {
+    temp_v7 = FUN_002b89a4(0);
+    if ((temp_v7 != 0) && (temp_v7 = FUN_002b89a4(1), temp_v7 != 0)) {
       FUN_002a7218(*(unsigned int *)(temp_v2 + 0x2a0));
       FUN_002c415c(*(unsigned int *)(temp_v2 + 0x2a4));
       FUN_002c415c(*(unsigned int *)(temp_v2 + 0x29c));
-      temp_v6 = 0;
+      temp_v7 = 0;
       if (*(short *)(temp_v2 + 0x1e) != 0) {
         do {
-          FUN_002958f8((int)*(short *)(temp_v2 + temp_v6 * 2 + 0xe),1);
-          temp_v10 = temp_v2 + temp_v6 * 4;
+          FUN_002958f8((int)*(short *)(temp_v2 + temp_v7 * 2 + 0xe),1);
+          temp_v10 = temp_v2 + temp_v7 * 4;
           FUN_00294f64(*(unsigned int *)(temp_v10 + 0x28));
           *(unsigned int *)(temp_v10 + 0x28) = 0;
-          temp_v6 = temp_v6 + 1;
-        } while (temp_v6 < (int)(unsigned int)*(unsigned short *)(temp_v2 + 0x1e));
+          temp_v7 = temp_v7 + 1;
+        } while (temp_v7 < (int)(unsigned int)*(unsigned short *)(temp_v2 + 0x1e));
       }
       FUN_00241d58(temp_v2 + 0x38);
       FUN_00294f64(*(unsigned int *)(temp_v2 + 0x80));
@@ -496,9 +497,9 @@ LAB_0032a1a4:
       *(unsigned int *)(temp_v2 + 0x90) = 0;
       FUN_002886e0();
       FUN_00294e18(1);
-      temp_v6 = DAT_0043dd90;
+      temp_v7 = DAT_0043dd90;
       *(unsigned int *)(DAT_0043dd90 + 4) = 8;
-      *(unsigned int *)(temp_v6 + 8) = 0;
+      *(unsigned int *)(temp_v7 + 8) = 0;
     }
   }
   *(int *)(temp_v2 + 8) = *(int *)(temp_v2 + 8) + 1;

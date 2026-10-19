@@ -10,14 +10,14 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0024b77c. */
 /* Supplied declaration required: FUN_0024b830. */
-extern int FUN_002c32a0(unsigned int, unsigned int, unsigned int, int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c32a0. */
 /* Supplied declaration required: aeabi_uidivmod. */
 
 
 int FUN_00313590(int *param_1)
 
 {
-/* irregular: irregular input(s): in_fpscr; 5 native warning(s); review required */
+/* irregular: irregular input(s): in_fpscr; 6 native warning(s); review required */
   int temp_v0;
   unsigned int temp_v1;
   int temp_v2;
@@ -36,7 +36,8 @@ int FUN_00313590(int *param_1)
   unsigned long long temp_v13;
   
   temp_v4 = *param_1;
-  temp_v0 = FUN_002c32a0(0x10000,0x100,0,temp_v4 * 0x34,0x10,1);
+  temp_v0 = 0x10000;
+  FUN_002c32a0(0x10000,0x100,0,temp_v4 * 0x34,0x10,1);
   temp_v3 = 0;
   if (0 < temp_v4) {
     temp_v12 = 0xc0490fdb;

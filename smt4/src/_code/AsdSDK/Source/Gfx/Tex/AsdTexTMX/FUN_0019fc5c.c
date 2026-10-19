@@ -10,7 +10,7 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_4_stack;
 
-extern unsigned int FUN_002c32a0(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c32a0. */
 /* Supplied declaration required: FUN_002c415c. */
 /* Supplied declaration required: FUN_002c498c. */
 /* Supplied declaration required: FUN_00349804. */
@@ -19,7 +19,7 @@ extern unsigned int FUN_002c32a0(unsigned int, unsigned int, unsigned int, unsig
 void FUN_0019fc5c(int param_1,int param_2,unsigned int param_3,unsigned int param_4)
 
 {
-/* irregular: 3 goto(s); 3 native warning(s); review required */
+/* irregular: 3 goto(s); 4 native warning(s); review required */
   unsigned char temp_v0;
   unsigned short temp_v1;
   unsigned int temp_v2;
@@ -155,7 +155,8 @@ LAB_0019fea0:
   *(unsigned int *)(param_1 + 0x20) = 0x1401;
   *(unsigned int *)(param_1 + 0x14) = temp_v8;
   *(unsigned int *)(param_1 + 0x18) = temp_v9;
-  temp_v3 = FUN_002c32a0(0x10000,0x100,0,*(unsigned int *)(param_1 + 0x28),0x80,1);
+  temp_v3 = 0x10000;
+  FUN_002c32a0(0x10000,0x100,0,*(unsigned int *)(param_1 + 0x28),0x80,1);
   *(unsigned int *)(param_1 + 0x24) = temp_v3;
   FUN_00349804(*(unsigned int *)(param_1 + 0x14),*(unsigned int *)(param_1 + 0x18),temp_v12,temp_v3);
   FUN_002c415c(temp_v12);

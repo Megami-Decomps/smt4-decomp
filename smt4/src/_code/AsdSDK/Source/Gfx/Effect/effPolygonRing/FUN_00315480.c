@@ -20,13 +20,13 @@ typedef struct {
 extern unsigned char DAT_00473708; /* 0x473708 */
 
 /* Supplied declaration required: FUN_0024505c. */
-extern unsigned int *FUN_002c32a0(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c32a0. */
 
 
 unsigned int * FUN_00315480(fn_00315480_arg0 *param_1)
 
 {
-/* irregular: 1 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   unsigned int temp_v0;
   unsigned char temp_v1;
   unsigned char temp_v2;
@@ -39,7 +39,8 @@ unsigned int * FUN_00315480(fn_00315480_arg0 *param_1)
   unsigned int temp_v7;
   unsigned int temp_v8;
   
-  puVar5 = (unsigned int *)FUN_002c32a0(0x10000,0x100,0,4,0x10,1);
+  puVar5 = (unsigned int *)0x10000;
+  FUN_002c32a0(0x10000,0x100,0,4,0x10,1);
   temp_v4 = param_1->field_0x38;
   if (temp_v4 < 4) {
     temp_v4 = 3;

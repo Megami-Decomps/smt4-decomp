@@ -1646,6 +1646,26 @@
       "target_path": "orig/target/_code/0010/FUN_0010123c.o"
     },
     {
+      "base_path": "build/obj/_code/0010/FUN_00101308.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_00101308",
+            "size": 4124,
+            "vram": "0x101308"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0010/FUN_00101308.c"
+      },
+      "name": "_code/0010/FUN_00101308",
+      "target_path": "orig/target/_code/0010/FUN_00101308.o"
+    },
+    {
       "base_path": "build/obj/_code/0010/nninitCallStaticInitializers.o",
       "metadata": {
         "auto_generated": false,
@@ -2338,6 +2358,26 @@
       "target_path": "orig/target/_code/0010/FUN_00103c9c.o"
     },
     {
+      "base_path": "build/obj/_code/0010/FUN_00103cd0.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_00103cd0",
+            "size": 24,
+            "vram": "0x103cd0"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0010/FUN_00103cd0.c"
+      },
+      "name": "_code/0010/FUN_00103cd0",
+      "target_path": "orig/target/_code/0010/FUN_00103cd0.o"
+    },
+    {
       "base_path": "build/obj/_code/0010/FUN_00103cec.o",
       "metadata": {
         "auto_generated": false,
@@ -2516,6 +2556,26 @@
       },
       "name": "_code/0010/FUN_00103ec8",
       "target_path": "orig/target/_code/0010/FUN_00103ec8.o"
+    },
+    {
+      "base_path": "build/obj/_code/0010/FUN_00103f74.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_00103f74",
+            "size": 24,
+            "vram": "0x103f74"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0010/FUN_00103f74.c"
+      },
+      "name": "_code/0010/FUN_00103f74",
+      "target_path": "orig/target/_code/0010/FUN_00103f74.o"
     },
     {
       "base_path": "build/obj/_code/0010/FUN_00103f90.o",
@@ -2845,6 +2905,26 @@
       "target_path": "orig/target/_code/0010/FUN_00104e0c.o"
     },
     {
+      "base_path": "build/obj/_code/0010/FUN_00104e28.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_00104e28",
+            "size": 24,
+            "vram": "0x104e28"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0010/FUN_00104e28.c"
+      },
+      "name": "_code/0010/FUN_00104e28",
+      "target_path": "orig/target/_code/0010/FUN_00104e28.o"
+    },
+    {
       "base_path": "build/obj/_code/0010/FUN_00104e44.o",
       "metadata": {
         "auto_generated": false,
@@ -2913,7 +2993,7 @@
         "functions": [
           {
             "name": "FUN_00104f50",
-            "size": 4,
+            "size": 360,
             "vram": "0x104f50"
           }
         ],
@@ -2924,26 +3004,6 @@
       },
       "name": "_code/0010/FUN_00104f50",
       "target_path": "orig/target/_code/0010/FUN_00104f50.o"
-    },
-    {
-      "base_path": "build/obj/_code/0010/FUN_00104f60.o",
-      "metadata": {
-        "auto_generated": false,
-        "complete": false,
-        "functions": [
-          {
-            "name": "FUN_00104f60",
-            "size": 344,
-            "vram": "0x104f60"
-          }
-        ],
-        "progress_categories": [
-          "_code"
-        ],
-        "source_path": "src/_code/0010/FUN_00104f60.c"
-      },
-      "name": "_code/0010/FUN_00104f60",
-      "target_path": "orig/target/_code/0010/FUN_00104f60.o"
     },
     {
       "base_path": "build/obj/_code/0010/FUN_001050cc.o",
@@ -3115,7 +3175,7 @@
         "functions": [
           {
             "name": "FUN_001054bc",
-            "size": 474,
+            "size": 948,
             "vram": "0x1054bc"
           }
         ],
@@ -3392,6 +3452,26 @@
       "target_path": "orig/target/_code/0010/FUN_00105e38.o"
     },
     {
+      "base_path": "build/obj/_code/0010/FUN_00105e50.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_00105e50",
+            "size": 44,
+            "vram": "0x105e50"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0010/FUN_00105e50.c"
+      },
+      "name": "_code/0010/FUN_00105e50",
+      "target_path": "orig/target/_code/0010/FUN_00105e50.o"
+    },
+    {
       "base_path": "build/obj/_code/AsdSDK/Source/Sys/Mem/AsdMemory/FUN_00105e88.o",
       "metadata": {
         "auto_generated": false,
@@ -3433,6 +3513,26 @@
       "target_path": "orig/target/_code/0010/FUN_00105e98.o"
     },
     {
+      "base_path": "build/obj/_code/0010/FUN_00105ef8.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_00105ef8",
+            "size": 132,
+            "vram": "0x105ef8"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0010/FUN_00105ef8.c"
+      },
+      "name": "_code/0010/FUN_00105ef8",
+      "target_path": "orig/target/_code/0010/FUN_00105ef8.o"
+    },
+    {
       "base_path": "build/obj/_code/0010/FUN_00105f98.o",
       "metadata": {
         "auto_generated": false,
@@ -3451,6 +3551,26 @@
       },
       "name": "_code/0010/FUN_00105f98",
       "target_path": "orig/target/_code/0010/FUN_00105f98.o"
+    },
+    {
+      "base_path": "build/obj/_code/0010/FUN_00106080.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_00106080",
+            "size": 192,
+            "vram": "0x106080"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0010/FUN_00106080.c"
+      },
+      "name": "_code/0010/FUN_00106080",
+      "target_path": "orig/target/_code/0010/FUN_00106080.o"
     },
     {
       "base_path": "build/obj/_code/0010/FUN_0010618c.o",
@@ -3651,6 +3771,26 @@
       },
       "name": "_code/0010/FUN_00106d40",
       "target_path": "orig/target/_code/0010/FUN_00106d40.o"
+    },
+    {
+      "base_path": "build/obj/_code/0010/FUN_00106db4.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_00106db4",
+            "size": 32,
+            "vram": "0x106db4"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0010/FUN_00106db4.c"
+      },
+      "name": "_code/0010/FUN_00106db4",
+      "target_path": "orig/target/_code/0010/FUN_00106db4.o"
     },
     {
       "base_path": "build/obj/_code/0010/FUN_00106dd4.o",
@@ -6821,6 +6961,26 @@
       },
       "name": "_code/0010/nn_os_detail_ConvertLibraryToSvcPriority",
       "target_path": "orig/target/_code/0010/nn_os_detail_ConvertLibraryToSvcPriority.o"
+    },
+    {
+      "base_path": "build/obj/_code/0010/FUN_0010fb54.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_0010fb54",
+            "size": 16,
+            "vram": "0x10fb54"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0010/FUN_0010fb54.c"
+      },
+      "name": "_code/0010/FUN_0010fb54",
+      "target_path": "orig/target/_code/0010/FUN_0010fb54.o"
     },
     {
       "base_path": "build/obj/_code/0010/FUN_0010fb68.o",
@@ -11969,7 +12129,7 @@
         "functions": [
           {
             "name": "FUN_00123a38",
-            "size": 8,
+            "size": 108,
             "vram": "0x123a38"
           }
         ],
@@ -11980,26 +12140,6 @@
       },
       "name": "_code/0012/FUN_00123a38",
       "target_path": "orig/target/_code/0012/FUN_00123a38.o"
-    },
-    {
-      "base_path": "build/obj/_code/0012/FUN_00123a40.o",
-      "metadata": {
-        "auto_generated": false,
-        "complete": false,
-        "functions": [
-          {
-            "name": "FUN_00123a40",
-            "size": 100,
-            "vram": "0x123a40"
-          }
-        ],
-        "progress_categories": [
-          "_code"
-        ],
-        "source_path": "src/_code/0012/FUN_00123a40.c"
-      },
-      "name": "_code/0012/FUN_00123a40",
-      "target_path": "orig/target/_code/0012/FUN_00123a40.o"
     },
     {
       "base_path": "build/obj/_code/0012/sys_PDC0Callback.o",
@@ -12080,6 +12220,26 @@
       },
       "name": "_code/0012/FUN_00123d00",
       "target_path": "orig/target/_code/0012/FUN_00123d00.o"
+    },
+    {
+      "base_path": "build/obj/_code/0012/FUN_00124178.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_00124178",
+            "size": 36,
+            "vram": "0x124178"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0012/FUN_00124178.c"
+      },
+      "name": "_code/0012/FUN_00124178",
+      "target_path": "orig/target/_code/0012/FUN_00124178.o"
     },
     {
       "base_path": "build/obj/_code/0012/FUN_0012419c.o",
@@ -18475,26 +18635,6 @@
       "target_path": "orig/target/_code/0013/FUN_0013afbc.o"
     },
     {
-      "base_path": "build/obj/_code/0013/FUN_0013b0f4.o",
-      "metadata": {
-        "auto_generated": false,
-        "complete": false,
-        "functions": [
-          {
-            "name": "FUN_0013b0f4",
-            "size": 40,
-            "vram": "0x13b0f4"
-          }
-        ],
-        "progress_categories": [
-          "_code"
-        ],
-        "source_path": "src/_code/0013/FUN_0013b0f4.c"
-      },
-      "name": "_code/0013/FUN_0013b0f4",
-      "target_path": "orig/target/_code/0013/FUN_0013b0f4.o"
-    },
-    {
       "base_path": "build/obj/_code/0013/nn_gxlow_CTR_CmdReqQueueTx_Finalize.o",
       "metadata": {
         "auto_generated": false,
@@ -20656,6 +20796,26 @@
       "target_path": "orig/target/_code/0014/FUN_0014143c.o"
     },
     {
+      "base_path": "build/obj/_code/0014/FUN_0014148c.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_0014148c",
+            "size": 188,
+            "vram": "0x14148c"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0014/FUN_0014148c.c"
+      },
+      "name": "_code/0014/FUN_0014148c",
+      "target_path": "orig/target/_code/0014/FUN_0014148c.o"
+    },
+    {
       "base_path": "build/obj/_code/0014/FUN_00141548.o",
       "metadata": {
         "auto_generated": false,
@@ -21519,6 +21679,26 @@
       "target_path": "orig/target/_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_001457ec.o"
     },
     {
+      "base_path": "build/obj/_code/0014/FUN_00145aa8.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_00145aa8",
+            "size": 452,
+            "vram": "0x145aa8"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0014/FUN_00145aa8.c"
+      },
+      "name": "_code/0014/FUN_00145aa8",
+      "target_path": "orig/target/_code/0014/FUN_00145aa8.o"
+    },
+    {
       "base_path": "build/obj/_code/0014/FUN_00145c88.o",
       "metadata": {
         "auto_generated": false,
@@ -21699,24 +21879,24 @@
       "target_path": "orig/target/_code/0014/FUN_00145f44.o"
     },
     {
-      "base_path": "build/obj/_code/0014/FUN_001464d0.o",
+      "base_path": "build/obj/_code/0014/FUN_001464cc.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_001464d0",
-            "size": 68,
-            "vram": "0x1464d0"
+            "name": "FUN_001464cc",
+            "size": 72,
+            "vram": "0x1464cc"
           }
         ],
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0014/FUN_001464d0.c"
+        "source_path": "src/_code/0014/FUN_001464cc.c"
       },
-      "name": "_code/0014/FUN_001464d0",
-      "target_path": "orig/target/_code/0014/FUN_001464d0.o"
+      "name": "_code/0014/FUN_001464cc",
+      "target_path": "orig/target/_code/0014/FUN_001464cc.o"
     },
     {
       "base_path": "build/obj/_code/0014/nn_fs_GetPriority.o",
@@ -23700,6 +23880,26 @@
       "target_path": "orig/target/_code/0014/nw_snd_SoundPlayer_SoundPlayer_sub_object.o"
     },
     {
+      "base_path": "build/obj/_code/0014/FUN_0014bfe0.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_0014bfe0",
+            "size": 12,
+            "vram": "0x14bfe0"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0014/FUN_0014bfe0.c"
+      },
+      "name": "_code/0014/FUN_0014bfe0",
+      "target_path": "orig/target/_code/0014/FUN_0014bfe0.o"
+    },
+    {
       "base_path": "build/obj/_code/0014/FUN_0014bfec.o",
       "metadata": {
         "auto_generated": false,
@@ -24218,6 +24418,26 @@
       },
       "name": "_code/0014/FUN_0014d08c",
       "target_path": "orig/target/_code/0014/FUN_0014d08c.o"
+    },
+    {
+      "base_path": "build/obj/_code/0014/nw_snd_internal_WaveSoundFile_FileHeader_GetInfoBlock.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "nw_snd_internal_WaveSoundFile_FileHeader_GetInfoBlock",
+            "size": 108,
+            "vram": "0x14d0bc"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0014/nw_snd_internal_WaveSoundFile_FileHeader_GetInfoBlock.c"
+      },
+      "name": "_code/0014/nw_snd_internal_WaveSoundFile_FileHeader_GetInfoBlock",
+      "target_path": "orig/target/_code/0014/nw_snd_internal_WaveSoundFile_FileHeader_GetInfoBlock.o"
     },
     {
       "base_path": "build/obj/_code/0014/FUN_0014d128.o",
@@ -24978,6 +25198,26 @@
       },
       "name": "_code/0014/FUN_0014e724",
       "target_path": "orig/target/_code/0014/FUN_0014e724.o"
+    },
+    {
+      "base_path": "build/obj/_code/0014/FUN_0014e738.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_0014e738",
+            "size": 252,
+            "vram": "0x14e738"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0014/FUN_0014e738.c"
+      },
+      "name": "_code/0014/FUN_0014e738",
+      "target_path": "orig/target/_code/0014/FUN_0014e738.o"
     },
     {
       "base_path": "build/obj/_code/0014/FUN_0014e834.o",
@@ -26781,6 +27021,26 @@
       },
       "name": "_code/0015/ll_udiv10",
       "target_path": "orig/target/_code/0015/ll_udiv10.o"
+    },
+    {
+      "base_path": "build/obj/_code/0015/FUN_0015284c.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_0015284c",
+            "size": 56,
+            "vram": "0x15284c"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0015/FUN_0015284c.c"
+      },
+      "name": "_code/0015/FUN_0015284c",
+      "target_path": "orig/target/_code/0015/FUN_0015284c.o"
     },
     {
       "base_path": "build/obj/_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_00152884.o",
@@ -32698,7 +32958,7 @@
         "functions": [
           {
             "name": "FUN_0016e234",
-            "size": 266,
+            "size": 524,
             "vram": "0x16e234"
           }
         ],
@@ -32709,26 +32969,6 @@
       },
       "name": "_code/0016/FUN_0016e234",
       "target_path": "orig/target/_code/0016/FUN_0016e234.o"
-    },
-    {
-      "base_path": "build/obj/_code/0016/FUN_0016e33e.o",
-      "metadata": {
-        "auto_generated": false,
-        "complete": false,
-        "functions": [
-          {
-            "name": "FUN_0016e33e",
-            "size": 93,
-            "vram": "0x16e33e"
-          }
-        ],
-        "progress_categories": [
-          "_code"
-        ],
-        "source_path": "src/_code/0016/FUN_0016e33e.c"
-      },
-      "name": "_code/0016/FUN_0016e33e",
-      "target_path": "orig/target/_code/0016/FUN_0016e33e.o"
     },
     {
       "base_path": "build/obj/_code/0016/FUN_0016e538.o",
@@ -32998,7 +33238,7 @@
         "functions": [
           {
             "name": "FUN_00174834",
-            "size": 266,
+            "size": 524,
             "vram": "0x174834"
           }
         ],
@@ -33009,26 +33249,6 @@
       },
       "name": "_code/0017/FUN_00174834",
       "target_path": "orig/target/_code/0017/FUN_00174834.o"
-    },
-    {
-      "base_path": "build/obj/_code/0017/FUN_0017493e.o",
-      "metadata": {
-        "auto_generated": false,
-        "complete": false,
-        "functions": [
-          {
-            "name": "FUN_0017493e",
-            "size": 93,
-            "vram": "0x17493e"
-          }
-        ],
-        "progress_categories": [
-          "_code"
-        ],
-        "source_path": "src/_code/0017/FUN_0017493e.c"
-      },
-      "name": "_code/0017/FUN_0017493e",
-      "target_path": "orig/target/_code/0017/FUN_0017493e.o"
     },
     {
       "base_path": "build/obj/_code/0017/FUN_00174b38.o",
@@ -33298,7 +33518,7 @@
         "functions": [
           {
             "name": "FUN_0017ae34",
-            "size": 266,
+            "size": 524,
             "vram": "0x17ae34"
           }
         ],
@@ -33309,26 +33529,6 @@
       },
       "name": "_code/0017/FUN_0017ae34",
       "target_path": "orig/target/_code/0017/FUN_0017ae34.o"
-    },
-    {
-      "base_path": "build/obj/_code/0017/FUN_0017af3e.o",
-      "metadata": {
-        "auto_generated": false,
-        "complete": false,
-        "functions": [
-          {
-            "name": "FUN_0017af3e",
-            "size": 93,
-            "vram": "0x17af3e"
-          }
-        ],
-        "progress_categories": [
-          "_code"
-        ],
-        "source_path": "src/_code/0017/FUN_0017af3e.c"
-      },
-      "name": "_code/0017/FUN_0017af3e",
-      "target_path": "orig/target/_code/0017/FUN_0017af3e.o"
     },
     {
       "base_path": "build/obj/_code/0017/FUN_0017b138.o",
@@ -41370,7 +41570,7 @@
         "functions": [
           {
             "name": "FUN_001dd1e0",
-            "size": 22,
+            "size": 112,
             "vram": "0x1dd1e0"
           }
         ],
@@ -45213,6 +45413,26 @@
       },
       "name": "_code/battle/btlEffect/FUN_001f8158",
       "target_path": "orig/target/_code/battle/btlEffect/FUN_001f8158.o"
+    },
+    {
+      "base_path": "build/obj/_code/001f/FUN_001f8290.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_001f8290",
+            "size": 192,
+            "vram": "0x1f8290"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/001f/FUN_001f8290.c"
+      },
+      "name": "_code/001f/FUN_001f8290",
+      "target_path": "orig/target/_code/001f/FUN_001f8290.o"
     },
     {
       "base_path": "build/obj/_code/001f/FUN_001f8350.o",
@@ -70078,7 +70298,7 @@
         "functions": [
           {
             "name": "FUN_00251d98",
-            "size": 224,
+            "size": 976,
             "vram": "0x251d98"
           }
         ],
@@ -70089,26 +70309,6 @@
       },
       "name": "_code/0025/FUN_00251d98",
       "target_path": "orig/target/_code/0025/FUN_00251d98.o"
-    },
-    {
-      "base_path": "build/obj/_code/0025/FUN_00251e78.o",
-      "metadata": {
-        "auto_generated": false,
-        "complete": false,
-        "functions": [
-          {
-            "name": "FUN_00251e78",
-            "size": 3,
-            "vram": "0x251e78"
-          }
-        ],
-        "progress_categories": [
-          "_code"
-        ],
-        "source_path": "src/_code/0025/FUN_00251e78.c"
-      },
-      "name": "_code/0025/FUN_00251e78",
-      "target_path": "orig/target/_code/0025/FUN_00251e78.o"
     },
     {
       "base_path": "build/obj/_code/0025/FUN_00252180.o",
@@ -70199,7 +70399,7 @@
         "functions": [
           {
             "name": "FUN_00252334",
-            "size": 4,
+            "size": 92,
             "vram": "0x252334"
           }
         ],
@@ -70210,26 +70410,6 @@
       },
       "name": "_code/0025/FUN_00252334",
       "target_path": "orig/target/_code/0025/FUN_00252334.o"
-    },
-    {
-      "base_path": "build/obj/_code/0025/FUN_00252338.o",
-      "metadata": {
-        "auto_generated": false,
-        "complete": false,
-        "functions": [
-          {
-            "name": "FUN_00252338",
-            "size": 88,
-            "vram": "0x252338"
-          }
-        ],
-        "progress_categories": [
-          "_code"
-        ],
-        "source_path": "src/_code/0025/FUN_00252338.c"
-      },
-      "name": "_code/0025/FUN_00252338",
-      "target_path": "orig/target/_code/0025/FUN_00252338.o"
     },
     {
       "base_path": "build/obj/_code/0025/FUN_00252394.o",
@@ -79619,6 +79799,26 @@
       },
       "name": "_code/0027/FUN_00276218",
       "target_path": "orig/target/_code/0027/FUN_00276218.o"
+    },
+    {
+      "base_path": "build/obj/_code/0027/FUN_00276238.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_00276238",
+            "size": 40,
+            "vram": "0x276238"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0027/FUN_00276238.c"
+      },
+      "name": "_code/0027/FUN_00276238",
+      "target_path": "orig/target/_code/0027/FUN_00276238.o"
     },
     {
       "base_path": "build/obj/_code/0027/FUN_00276264.o",
@@ -93149,7 +93349,7 @@
         "functions": [
           {
             "name": "FUN_002a155c",
-            "size": 52,
+            "size": 116,
             "vram": "0x2a155c"
           }
         ],
@@ -93169,7 +93369,7 @@
         "functions": [
           {
             "name": "FUN_002a15e4",
-            "size": 88,
+            "size": 228,
             "vram": "0x2a15e4"
           }
         ],
@@ -93249,7 +93449,7 @@
         "functions": [
           {
             "name": "nw_gfx_internal_NWCopyMtx34Reverse",
-            "size": 26,
+            "size": 56,
             "vram": "0x2a17f0"
           }
         ],
@@ -93610,7 +93810,7 @@
         "functions": [
           {
             "name": "nw_anim_res_ResAnim_Cleanup",
-            "size": 4,
+            "size": 188,
             "vram": "0x2a21dc"
           }
         ],
@@ -99307,7 +99507,7 @@
         "functions": [
           {
             "name": "FUN_002b13d8",
-            "size": 1788,
+            "size": 1784,
             "vram": "0x2b13d8"
           }
         ],
@@ -99387,7 +99587,7 @@
         "functions": [
           {
             "name": "FUN_002b1fc4",
-            "size": 384,
+            "size": 372,
             "vram": "0x2b1fc4"
           }
         ],
@@ -99407,7 +99607,7 @@
         "functions": [
           {
             "name": "FUN_002b2144",
-            "size": 61,
+            "size": 496,
             "vram": "0x2b2144"
           }
         ],
@@ -99447,7 +99647,7 @@
         "functions": [
           {
             "name": "FUN_002b234c",
-            "size": 11,
+            "size": 28,
             "vram": "0x2b234c"
           }
         ],
@@ -99527,7 +99727,7 @@
         "functions": [
           {
             "name": "FUN_002b23f4",
-            "size": 228,
+            "size": 224,
             "vram": "0x2b23f4"
           }
         ],
@@ -99547,7 +99747,7 @@
         "functions": [
           {
             "name": "FUN_002b24d8",
-            "size": 2,
+            "size": 364,
             "vram": "0x2b24d8"
           }
         ],
@@ -99560,26 +99760,6 @@
       "target_path": "orig/target/_code/002b/FUN_002b24d8.o"
     },
     {
-      "base_path": "build/obj/_code/002b/FUN_002b24da.o",
-      "metadata": {
-        "auto_generated": false,
-        "complete": false,
-        "functions": [
-          {
-            "name": "FUN_002b24da",
-            "size": 374,
-            "vram": "0x2b24da"
-          }
-        ],
-        "progress_categories": [
-          "_code"
-        ],
-        "source_path": "src/_code/002b/FUN_002b24da.c"
-      },
-      "name": "_code/002b/FUN_002b24da",
-      "target_path": "orig/target/_code/002b/FUN_002b24da.o"
-    },
-    {
       "base_path": "build/obj/_code/002b/FUN_002b2650.o",
       "metadata": {
         "auto_generated": false,
@@ -99587,7 +99767,7 @@
         "functions": [
           {
             "name": "FUN_002b2650",
-            "size": 4,
+            "size": 12,
             "vram": "0x2b2650"
           }
         ],
@@ -99607,7 +99787,7 @@
         "functions": [
           {
             "name": "FUN_002b265c",
-            "size": 64,
+            "size": 116,
             "vram": "0x2b265c"
           }
         ],
@@ -99648,7 +99828,7 @@
         "functions": [
           {
             "name": "FUN_002b2770",
-            "size": 536,
+            "size": 516,
             "vram": "0x2b2770"
           }
         ],
@@ -99669,7 +99849,7 @@
         "functions": [
           {
             "name": "FUN_002b2988",
-            "size": 78,
+            "size": 268,
             "vram": "0x2b2988"
           }
         ],
@@ -99681,26 +99861,6 @@
       },
       "name": "_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_002b2988",
       "target_path": "orig/target/_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_002b2988.o"
-    },
-    {
-      "base_path": "build/obj/_code/002b/FUN_002b29d6.o",
-      "metadata": {
-        "auto_generated": false,
-        "complete": false,
-        "functions": [
-          {
-            "name": "FUN_002b29d6",
-            "size": 2,
-            "vram": "0x2b29d6"
-          }
-        ],
-        "progress_categories": [
-          "_code"
-        ],
-        "source_path": "src/_code/002b/FUN_002b29d6.c"
-      },
-      "name": "_code/002b/FUN_002b29d6",
-      "target_path": "orig/target/_code/002b/FUN_002b29d6.o"
     },
     {
       "base_path": "build/obj/_code/002b/FUN_002b2ae8.o",
@@ -99730,7 +99890,7 @@
         "functions": [
           {
             "name": "FUN_002b2b08",
-            "size": 84,
+            "size": 80,
             "vram": "0x2b2b08"
           }
         ],
@@ -99790,7 +99950,7 @@
         "functions": [
           {
             "name": "FUN_002b2b88",
-            "size": 1396,
+            "size": 1392,
             "vram": "0x2b2b88"
           }
         ],
@@ -99850,7 +100010,7 @@
         "functions": [
           {
             "name": "FUN_002b31b4",
-            "size": 1929,
+            "size": 1924,
             "vram": "0x2b31b4"
           }
         ],
@@ -99950,7 +100110,7 @@
         "functions": [
           {
             "name": "FUN_002b3acc",
-            "size": 1264,
+            "size": 1792,
             "vram": "0x2b3acc"
           }
         ],
@@ -99990,7 +100150,7 @@
         "functions": [
           {
             "name": "nw_gfx_TransformNode_GetMemorySizeForInitialize",
-            "size": 140,
+            "size": 420,
             "vram": "0x2b4270"
           }
         ],
@@ -100010,7 +100170,7 @@
         "functions": [
           {
             "name": "FUN_002b4414",
-            "size": 240,
+            "size": 236,
             "vram": "0x2b4414"
           }
         ],
@@ -100050,7 +100210,7 @@
         "functions": [
           {
             "name": "FUN_002b45e8",
-            "size": 4,
+            "size": 128,
             "vram": "0x2b45e8"
           }
         ],
@@ -100063,26 +100223,6 @@
       "target_path": "orig/target/_code/002b/FUN_002b45e8.o"
     },
     {
-      "base_path": "build/obj/_code/002b/FUN_002b45ec.o",
-      "metadata": {
-        "auto_generated": false,
-        "complete": false,
-        "functions": [
-          {
-            "name": "FUN_002b45ec",
-            "size": 124,
-            "vram": "0x2b45ec"
-          }
-        ],
-        "progress_categories": [
-          "_code"
-        ],
-        "source_path": "src/_code/002b/FUN_002b45ec.c"
-      },
-      "name": "_code/002b/FUN_002b45ec",
-      "target_path": "orig/target/_code/002b/FUN_002b45ec.o"
-    },
-    {
       "base_path": "build/obj/_code/002b/FUN_002b4670.o",
       "metadata": {
         "auto_generated": false,
@@ -100090,7 +100230,7 @@
         "functions": [
           {
             "name": "FUN_002b4670",
-            "size": 24,
+            "size": 128,
             "vram": "0x2b4670"
           }
         ],
@@ -100130,7 +100270,7 @@
         "functions": [
           {
             "name": "FUN_002b4748",
-            "size": 116,
+            "size": 112,
             "vram": "0x2b4748"
           }
         ],
@@ -100150,7 +100290,7 @@
         "functions": [
           {
             "name": "FUN_002b47bc",
-            "size": 28,
+            "size": 48,
             "vram": "0x2b47bc"
           }
         ],
@@ -100250,7 +100390,7 @@
         "functions": [
           {
             "name": "FUN_002b486c",
-            "size": 436,
+            "size": 788,
             "vram": "0x2b486c"
           }
         ],
@@ -100430,7 +100570,7 @@
         "functions": [
           {
             "name": "nw_snd_internal_PoolImpl_DestroyImpl",
-            "size": 49,
+            "size": 52,
             "vram": "0x2b4dcc"
           }
         ],
@@ -100690,7 +100830,7 @@
         "functions": [
           {
             "name": "FUN_002b52b4",
-            "size": 103,
+            "size": 868,
             "vram": "0x2b52b4"
           }
         ],
@@ -100710,7 +100850,7 @@
         "functions": [
           {
             "name": "FUN_002b563c",
-            "size": 382,
+            "size": 464,
             "vram": "0x2b563c"
           }
         ],
@@ -100721,26 +100861,6 @@
       },
       "name": "_code/002b/FUN_002b563c",
       "target_path": "orig/target/_code/002b/FUN_002b563c.o"
-    },
-    {
-      "base_path": "build/obj/_code/002b/FUN_002b57ba.o",
-      "metadata": {
-        "auto_generated": false,
-        "complete": false,
-        "functions": [
-          {
-            "name": "FUN_002b57ba",
-            "size": 102,
-            "vram": "0x2b57ba"
-          }
-        ],
-        "progress_categories": [
-          "_code"
-        ],
-        "source_path": "src/_code/002b/FUN_002b57ba.c"
-      },
-      "name": "_code/002b/FUN_002b57ba",
-      "target_path": "orig/target/_code/002b/FUN_002b57ba.o"
     },
     {
       "base_path": "build/obj/_code/002b/FUN_002b5820.o",
@@ -100770,7 +100890,7 @@
         "functions": [
           {
             "name": "nn_applet_CTR_detail_CallUtility",
-            "size": 201,
+            "size": 204,
             "vram": "0x2b5838"
           }
         ],
@@ -100790,7 +100910,7 @@
         "functions": [
           {
             "name": "FUN_002b5904",
-            "size": 80,
+            "size": 76,
             "vram": "0x2b5904"
           }
         ],
@@ -100870,7 +100990,7 @@
         "functions": [
           {
             "name": "nn_dsp_CTR_DSP_LoadComponent",
-            "size": 96,
+            "size": 92,
             "vram": "0x2b59e8"
           }
         ],
@@ -100910,7 +101030,7 @@
         "functions": [
           {
             "name": "FUN_002b5a5c",
-            "size": 204,
+            "size": 200,
             "vram": "0x2b5a5c"
           }
         ],
@@ -100950,7 +101070,7 @@
         "functions": [
           {
             "name": "nn_fs_ipc_FileSystem_OpenFileDirectly",
-            "size": 96,
+            "size": 156,
             "vram": "0x2b5b8c"
           }
         ],
@@ -100970,7 +101090,7 @@
         "functions": [
           {
             "name": "nn_fs_ExtSaveDataSpecifier_Make",
-            "size": 16,
+            "size": 24,
             "vram": "0x2b5c2c"
           }
         ],
@@ -101030,7 +101150,7 @@
         "functions": [
           {
             "name": "FUN_002b5cf0",
-            "size": 572,
+            "size": 524,
             "vram": "0x2b5cf0"
           }
         ],
@@ -101050,7 +101170,7 @@
         "functions": [
           {
             "name": "nn_gr_CTR_Combiner_MakeCommand",
-            "size": 336,
+            "size": 328,
             "vram": "0x2b5f2c"
           }
         ],
@@ -101090,7 +101210,7 @@
         "functions": [
           {
             "name": "nn_gr_CTR_Combiner_Stage_SetupPrimaryModulateTexture0",
-            "size": 84,
+            "size": 92,
             "vram": "0x2b60d0"
           }
         ],
@@ -101110,7 +101230,7 @@
         "functions": [
           {
             "name": "FUN_002b612c",
-            "size": 112,
+            "size": 540,
             "vram": "0x2b612c"
           }
         ],
@@ -101230,7 +101350,7 @@
         "functions": [
           {
             "name": "FUN_002b64b8",
-            "size": 228,
+            "size": 224,
             "vram": "0x2b64b8"
           }
         ],
@@ -101250,7 +101370,7 @@
         "functions": [
           {
             "name": "FUN_002b659c",
-            "size": 28,
+            "size": 440,
             "vram": "0x2b659c"
           }
         ],
@@ -101270,7 +101390,7 @@
         "functions": [
           {
             "name": "FUN_002b6758",
-            "size": 68,
+            "size": 480,
             "vram": "0x2b6758"
           }
         ],
@@ -101290,7 +101410,7 @@
         "functions": [
           {
             "name": "FUN_002b6940",
-            "size": 276,
+            "size": 268,
             "vram": "0x2b6940"
           }
         ],
@@ -101450,7 +101570,7 @@
         "functions": [
           {
             "name": "FUN_002b6c34",
-            "size": 380,
+            "size": 348,
             "vram": "0x2b6c34"
           }
         ],
@@ -101510,7 +101630,7 @@
         "functions": [
           {
             "name": "nn_math_ARMv6_MTX44MultAsm",
-            "size": 78,
+            "size": 348,
             "vram": "0x2b6eb8"
           }
         ],
@@ -101690,7 +101810,7 @@
         "functions": [
           {
             "name": "FUN_002b71d0",
-            "size": 76,
+            "size": 68,
             "vram": "0x2b71d0"
           }
         ],
@@ -101830,7 +101950,7 @@
         "functions": [
           {
             "name": "nw_ut_internal_LinkListImpl_erase_2B743C",
-            "size": 36,
+            "size": 44,
             "vram": "0x2b743c"
           }
         ],
@@ -102030,7 +102150,7 @@
         "functions": [
           {
             "name": "nn_math_ARMv6_MTX34LookAtC_FAST",
-            "size": 94,
+            "size": 244,
             "vram": "0x2b7830"
           }
         ],
@@ -102070,7 +102190,7 @@
         "functions": [
           {
             "name": "FUN_002b79cc",
-            "size": 384,
+            "size": 510,
             "vram": "0x2b79cc"
           }
         ],
@@ -102951,7 +103071,7 @@
         "functions": [
           {
             "name": "FUN_002b99b8",
-            "size": 1756,
+            "size": 1900,
             "vram": "0x2b99b8"
           }
         ],
@@ -102971,7 +103091,7 @@
         "functions": [
           {
             "name": "FUN_002ba12c",
-            "size": 180,
+            "size": 176,
             "vram": "0x2ba12c"
           }
         ],
@@ -103004,6 +103124,26 @@
       "target_path": "orig/target/_code/002b/FUN_002ba1e0.o"
     },
     {
+      "base_path": "build/obj/_code/002b/FUN_002ba2b8.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_002ba2b8",
+            "size": 608,
+            "vram": "0x2ba2b8"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/002b/FUN_002ba2b8.c"
+      },
+      "name": "_code/002b/FUN_002ba2b8",
+      "target_path": "orig/target/_code/002b/FUN_002ba2b8.o"
+    },
+    {
       "base_path": "build/obj/_code/002b/FUN_002ba51c.o",
       "metadata": {
         "auto_generated": false,
@@ -103031,7 +103171,7 @@
         "functions": [
           {
             "name": "FUN_002ba520",
-            "size": 232,
+            "size": 220,
             "vram": "0x2ba520"
           }
         ],
@@ -103051,7 +103191,7 @@
         "functions": [
           {
             "name": "FUN_002ba608",
-            "size": 134,
+            "size": 136,
             "vram": "0x2ba608"
           }
         ],
@@ -103071,7 +103211,7 @@
         "functions": [
           {
             "name": "FUN_002ba698",
-            "size": 204,
+            "size": 200,
             "vram": "0x2ba698"
           }
         ],
@@ -103111,7 +103251,7 @@
         "functions": [
           {
             "name": "FUN_002ba78c",
-            "size": 144,
+            "size": 140,
             "vram": "0x2ba78c"
           }
         ],
@@ -103131,7 +103271,7 @@
         "functions": [
           {
             "name": "FUN_002ba81c",
-            "size": 82,
+            "size": 196,
             "vram": "0x2ba81c"
           }
         ],
@@ -103142,26 +103282,6 @@
       },
       "name": "_code/002b/FUN_002ba81c",
       "target_path": "orig/target/_code/002b/FUN_002ba81c.o"
-    },
-    {
-      "base_path": "build/obj/_code/002b/FUN_002ba86e.o",
-      "metadata": {
-        "auto_generated": false,
-        "complete": false,
-        "functions": [
-          {
-            "name": "FUN_002ba86e",
-            "size": 3,
-            "vram": "0x2ba86e"
-          }
-        ],
-        "progress_categories": [
-          "_code"
-        ],
-        "source_path": "src/_code/002b/FUN_002ba86e.c"
-      },
-      "name": "_code/002b/FUN_002ba86e",
-      "target_path": "orig/target/_code/002b/FUN_002ba86e.o"
     },
     {
       "base_path": "build/obj/_code/002b/FUN_002ba8e4.o",
@@ -103211,7 +103331,7 @@
         "functions": [
           {
             "name": "FUN_002ba8f4",
-            "size": 2,
+            "size": 116,
             "vram": "0x2ba8f4"
           }
         ],
@@ -103222,26 +103342,6 @@
       },
       "name": "_code/002b/FUN_002ba8f4",
       "target_path": "orig/target/_code/002b/FUN_002ba8f4.o"
-    },
-    {
-      "base_path": "build/obj/_code/002b/FUN_002ba8f6.o",
-      "metadata": {
-        "auto_generated": false,
-        "complete": false,
-        "functions": [
-          {
-            "name": "FUN_002ba8f6",
-            "size": 114,
-            "vram": "0x2ba8f6"
-          }
-        ],
-        "progress_categories": [
-          "_code"
-        ],
-        "source_path": "src/_code/002b/FUN_002ba8f6.c"
-      },
-      "name": "_code/002b/FUN_002ba8f6",
-      "target_path": "orig/target/_code/002b/FUN_002ba8f6.o"
     },
     {
       "base_path": "build/obj/_code/002b/FUN_002ba968.o",
@@ -103271,7 +103371,7 @@
         "functions": [
           {
             "name": "FUN_002ba9ac",
-            "size": 88,
+            "size": 80,
             "vram": "0x2ba9ac"
           }
         ],
@@ -103311,7 +103411,7 @@
         "functions": [
           {
             "name": "FUN_002baa40",
-            "size": 796,
+            "size": 664,
             "vram": "0x2baa40"
           }
         ],
@@ -103331,7 +103431,7 @@
         "functions": [
           {
             "name": "FUN_002bad5c",
-            "size": 17,
+            "size": 20,
             "vram": "0x2bad5c"
           }
         ],
@@ -103351,7 +103451,7 @@
         "functions": [
           {
             "name": "FUN_002bad74",
-            "size": 68,
+            "size": 188,
             "vram": "0x2bad74"
           }
         ],
@@ -103364,46 +103464,6 @@
       "target_path": "orig/target/_code/002b/FUN_002bad74.o"
     },
     {
-      "base_path": "build/obj/_code/002b/FUN_002badb8.o",
-      "metadata": {
-        "auto_generated": false,
-        "complete": false,
-        "functions": [
-          {
-            "name": "FUN_002badb8",
-            "size": 4,
-            "vram": "0x2badb8"
-          }
-        ],
-        "progress_categories": [
-          "_code"
-        ],
-        "source_path": "src/_code/002b/FUN_002badb8.c"
-      },
-      "name": "_code/002b/FUN_002badb8",
-      "target_path": "orig/target/_code/002b/FUN_002badb8.o"
-    },
-    {
-      "base_path": "build/obj/_code/002b/FUN_002badf2.o",
-      "metadata": {
-        "auto_generated": false,
-        "complete": false,
-        "functions": [
-          {
-            "name": "FUN_002badf2",
-            "size": 2,
-            "vram": "0x2badf2"
-          }
-        ],
-        "progress_categories": [
-          "_code"
-        ],
-        "source_path": "src/_code/002b/FUN_002badf2.c"
-      },
-      "name": "_code/002b/FUN_002badf2",
-      "target_path": "orig/target/_code/002b/FUN_002badf2.o"
-    },
-    {
       "base_path": "build/obj/_code/002b/nw_ut_internal_LinkListImpl_erase_2BAE30.o",
       "metadata": {
         "auto_generated": false,
@@ -103411,7 +103471,7 @@
         "functions": [
           {
             "name": "nw_ut_internal_LinkListImpl_erase_2BAE30",
-            "size": 32,
+            "size": 76,
             "vram": "0x2bae30"
           }
         ],
@@ -103422,26 +103482,6 @@
       },
       "name": "_code/002b/nw_ut_internal_LinkListImpl_erase_2BAE30",
       "target_path": "orig/target/_code/002b/nw_ut_internal_LinkListImpl_erase_2BAE30.o"
-    },
-    {
-      "base_path": "build/obj/_code/002b/FUN_002bae50.o",
-      "metadata": {
-        "auto_generated": false,
-        "complete": false,
-        "functions": [
-          {
-            "name": "FUN_002bae50",
-            "size": 44,
-            "vram": "0x2bae50"
-          }
-        ],
-        "progress_categories": [
-          "_code"
-        ],
-        "source_path": "src/_code/002b/FUN_002bae50.c"
-      },
-      "name": "_code/002b/FUN_002bae50",
-      "target_path": "orig/target/_code/002b/FUN_002bae50.o"
     },
     {
       "base_path": "build/obj/_code/002b/FUN_002bae7c.o",
@@ -103491,7 +103531,7 @@
         "functions": [
           {
             "name": "FUN_002baf30",
-            "size": 128,
+            "size": 112,
             "vram": "0x2baf30"
           }
         ],
@@ -103531,7 +103571,7 @@
         "functions": [
           {
             "name": "FUN_002bb020",
-            "size": 176,
+            "size": 156,
             "vram": "0x2bb020"
           }
         ],
@@ -103731,7 +103771,7 @@
         "functions": [
           {
             "name": "FUN_002bb194",
-            "size": 120,
+            "size": 108,
             "vram": "0x2bb194"
           }
         ],
@@ -103751,7 +103791,7 @@
         "functions": [
           {
             "name": "FUN_002bb20c",
-            "size": 98,
+            "size": 96,
             "vram": "0x2bb20c"
           }
         ],
@@ -103771,7 +103811,7 @@
         "functions": [
           {
             "name": "FUN_002bb274",
-            "size": 4,
+            "size": 12,
             "vram": "0x2bb274"
           }
         ],
@@ -103791,7 +103831,7 @@
         "functions": [
           {
             "name": "FUN_002bb284",
-            "size": 20,
+            "size": 60,
             "vram": "0x2bb284"
           }
         ],
@@ -103851,7 +103891,7 @@
         "functions": [
           {
             "name": "FUN_002bb308",
-            "size": 8,
+            "size": 96,
             "vram": "0x2bb308"
           }
         ],
@@ -103871,7 +103911,7 @@
         "functions": [
           {
             "name": "FUN_002bb378",
-            "size": 188,
+            "size": 172,
             "vram": "0x2bb378"
           }
         ],
@@ -103911,7 +103951,7 @@
         "functions": [
           {
             "name": "FUN_002bb460",
-            "size": 8,
+            "size": 12,
             "vram": "0x2bb460"
           }
         ],
@@ -104011,7 +104051,7 @@
         "functions": [
           {
             "name": "FUN_002bb5a4",
-            "size": 148,
+            "size": 144,
             "vram": "0x2bb5a4"
           }
         ],
@@ -104151,7 +104191,7 @@
         "functions": [
           {
             "name": "nn_os_AddressSpaceManager_Allocate",
-            "size": 52,
+            "size": 432,
             "vram": "0x2bb7ec"
           }
         ],
@@ -104171,7 +104211,7 @@
         "functions": [
           {
             "name": "FUN_002bb99c",
-            "size": 348,
+            "size": 328,
             "vram": "0x2bb99c"
           }
         ],
@@ -104271,7 +104311,7 @@
         "functions": [
           {
             "name": "FUN_002bbbc8",
-            "size": 44,
+            "size": 616,
             "vram": "0x2bbbc8"
           }
         ],
@@ -104291,7 +104331,7 @@
         "functions": [
           {
             "name": "FUN_002bbe30",
-            "size": 128,
+            "size": 144,
             "vram": "0x2bbe30"
           }
         ],
@@ -104371,7 +104411,7 @@
         "functions": [
           {
             "name": "FUN_002bc02c",
-            "size": 60,
+            "size": 88,
             "vram": "0x2bc02c"
           }
         ],
@@ -104451,7 +104491,7 @@
         "functions": [
           {
             "name": "FUN_002bc120",
-            "size": 196,
+            "size": 192,
             "vram": "0x2bc120"
           }
         ],
@@ -104471,7 +104511,7 @@
         "functions": [
           {
             "name": "FUN_002bc1e4",
-            "size": 398,
+            "size": 392,
             "vram": "0x2bc1e4"
           }
         ],
@@ -104491,7 +104531,7 @@
         "functions": [
           {
             "name": "FUN_002bc38c",
-            "size": 468,
+            "size": 452,
             "vram": "0x2bc38c"
           }
         ],
@@ -104512,7 +104552,7 @@
         "functions": [
           {
             "name": "FUN_002bc560",
-            "size": 36,
+            "size": 212,
             "vram": "0x2bc560"
           }
         ],
@@ -104532,7 +104572,7 @@
         "functions": [
           {
             "name": "FUN_002bc644",
-            "size": 68,
+            "size": 400,
             "vram": "0x2bc644"
           }
         ],
@@ -104572,7 +104612,7 @@
         "functions": [
           {
             "name": "FUN_002bc7f4",
-            "size": 472,
+            "size": 448,
             "vram": "0x2bc7f4"
           }
         ],
@@ -104592,7 +104632,7 @@
         "functions": [
           {
             "name": "FUN_002bc9cc",
-            "size": 336,
+            "size": 328,
             "vram": "0x2bc9cc"
           }
         ],
@@ -104612,7 +104652,7 @@
         "functions": [
           {
             "name": "FUN_002bcb1c",
-            "size": 148,
+            "size": 144,
             "vram": "0x2bcb1c"
           }
         ],
@@ -104632,7 +104672,7 @@
         "functions": [
           {
             "name": "nw_snd_internal_BasicSound_SetVolume",
-            "size": 100,
+            "size": 96,
             "vram": "0x2bcbb0"
           }
         ],
@@ -104652,7 +104692,7 @@
         "functions": [
           {
             "name": "nw_snd_SoundStartable_StartSound",
-            "size": 48,
+            "size": 64,
             "vram": "0x2bcc14"
           }
         ],
@@ -104692,7 +104732,7 @@
         "functions": [
           {
             "name": "FUN_002bcc60",
-            "size": 164,
+            "size": 216,
             "vram": "0x2bcc60"
           }
         ],
@@ -104792,7 +104832,7 @@
         "functions": [
           {
             "name": "FUN_002bce00",
-            "size": 32,
+            "size": 40,
             "vram": "0x2bce00"
           }
         ],
@@ -104812,7 +104852,7 @@
         "functions": [
           {
             "name": "FUN_002bce30",
-            "size": 224,
+            "size": 220,
             "vram": "0x2bce30"
           }
         ],
@@ -104832,7 +104872,7 @@
         "functions": [
           {
             "name": "FUN_002bcf10",
-            "size": 13,
+            "size": 16,
             "vram": "0x2bcf10"
           }
         ],
@@ -104872,7 +104912,7 @@
         "functions": [
           {
             "name": "FUN_002bcf4c",
-            "size": 116,
+            "size": 108,
             "vram": "0x2bcf4c"
           }
         ],
@@ -104892,7 +104932,7 @@
         "functions": [
           {
             "name": "FUN_002bcfc0",
-            "size": 20,
+            "size": 160,
             "vram": "0x2bcfc0"
           }
         ],
@@ -104903,26 +104943,6 @@
       },
       "name": "_code/002b/FUN_002bcfc0",
       "target_path": "orig/target/_code/002b/FUN_002bcfc0.o"
-    },
-    {
-      "base_path": "build/obj/_code/002b/FUN_002bd020.o",
-      "metadata": {
-        "auto_generated": false,
-        "complete": false,
-        "functions": [
-          {
-            "name": "FUN_002bd020",
-            "size": 4,
-            "vram": "0x2bd020"
-          }
-        ],
-        "progress_categories": [
-          "_code"
-        ],
-        "source_path": "src/_code/002b/FUN_002bd020.c"
-      },
-      "name": "_code/002b/FUN_002bd020",
-      "target_path": "orig/target/_code/002b/FUN_002bd020.o"
     },
     {
       "base_path": "build/obj/_code/002b/FUN_002bd068.o",
@@ -104952,7 +104972,7 @@
         "functions": [
           {
             "name": "FUN_002bd06c",
-            "size": 140,
+            "size": 132,
             "vram": "0x2bd06c"
           }
         ],
@@ -104992,7 +105012,7 @@
         "functions": [
           {
             "name": "FUN_002bd158",
-            "size": 164,
+            "size": 156,
             "vram": "0x2bd158"
           }
         ],
@@ -105112,7 +105132,7 @@
         "functions": [
           {
             "name": "FUN_002bd2b4",
-            "size": 94,
+            "size": 364,
             "vram": "0x2bd2b4"
           }
         ],
@@ -105172,7 +105192,7 @@
         "functions": [
           {
             "name": "FUN_002bd440",
-            "size": 88,
+            "size": 72,
             "vram": "0x2bd440"
           }
         ],
@@ -105192,7 +105212,7 @@
         "functions": [
           {
             "name": "FUN_002bd498",
-            "size": 168,
+            "size": 164,
             "vram": "0x2bd498"
           }
         ],
@@ -105212,7 +105232,7 @@
         "functions": [
           {
             "name": "FUN_002bd540",
-            "size": 34,
+            "size": 476,
             "vram": "0x2bd540"
           }
         ],
@@ -105233,7 +105253,7 @@
         "functions": [
           {
             "name": "FUN_002bd75c",
-            "size": 172,
+            "size": 164,
             "vram": "0x2bd75c"
           }
         ],
@@ -105307,6 +105327,67 @@
       "target_path": "orig/target/_code/002b/FUN_002bd82c.o"
     },
     {
+      "base_path": "build/obj/_code/AsdSDK/Source/Gfx/Text/AsdText/FUN_002bd838.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_002bd838",
+            "size": 84,
+            "vram": "0x2bd838"
+          }
+        ],
+        "progress_categories": [
+          "_code",
+          "AsdSDK/Source/Gfx/Text/AsdText"
+        ],
+        "source_path": "src/_code/AsdSDK/Source/Gfx/Text/AsdText/FUN_002bd838.c"
+      },
+      "name": "_code/AsdSDK/Source/Gfx/Text/AsdText/FUN_002bd838",
+      "target_path": "orig/target/_code/AsdSDK/Source/Gfx/Text/AsdText/FUN_002bd838.o"
+    },
+    {
+      "base_path": "build/obj/_code/002b/FUN_002bd8d4.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_002bd8d4",
+            "size": 20,
+            "vram": "0x2bd8d4"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/002b/FUN_002bd8d4.c"
+      },
+      "name": "_code/002b/FUN_002bd8d4",
+      "target_path": "orig/target/_code/002b/FUN_002bd8d4.o"
+    },
+    {
+      "base_path": "build/obj/_code/002b/FUN_002bd8e8.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_002bd8e8",
+            "size": 108,
+            "vram": "0x2bd8e8"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/002b/FUN_002bd8e8.c"
+      },
+      "name": "_code/002b/FUN_002bd8e8",
+      "target_path": "orig/target/_code/002b/FUN_002bd8e8.o"
+    },
+    {
       "base_path": "build/obj/_code/002b/FUN_002bd954.o",
       "metadata": {
         "auto_generated": false,
@@ -105314,7 +105395,7 @@
         "functions": [
           {
             "name": "FUN_002bd954",
-            "size": 88,
+            "size": 148,
             "vram": "0x2bd954"
           }
         ],
@@ -105374,7 +105455,7 @@
         "functions": [
           {
             "name": "FUN_002bda30",
-            "size": 276,
+            "size": 272,
             "vram": "0x2bda30"
           }
         ],
@@ -105414,7 +105495,7 @@
         "functions": [
           {
             "name": "FUN_002bdb48",
-            "size": 408,
+            "size": 376,
             "vram": "0x2bdb48"
           }
         ],
@@ -105434,7 +105515,7 @@
         "functions": [
           {
             "name": "FUN_002bdce0",
-            "size": 692,
+            "size": 668,
             "vram": "0x2bdce0"
           }
         ],
@@ -105454,7 +105535,7 @@
         "functions": [
           {
             "name": "FUN_002bdf94",
-            "size": 154,
+            "size": 840,
             "vram": "0x2bdf94"
           }
         ],
@@ -105474,7 +105555,7 @@
         "functions": [
           {
             "name": "FUN_002be304",
-            "size": 56,
+            "size": 100,
             "vram": "0x2be304"
           }
         ],
@@ -105494,7 +105575,7 @@
         "functions": [
           {
             "name": "FUN_002be370",
-            "size": 508,
+            "size": 476,
             "vram": "0x2be370"
           }
         ],
@@ -105534,7 +105615,7 @@
         "functions": [
           {
             "name": "FUN_002be5a4",
-            "size": 56,
+            "size": 112,
             "vram": "0x2be5a4"
           }
         ],
@@ -105594,7 +105675,7 @@
         "functions": [
           {
             "name": "FUN_002be650",
-            "size": 700,
+            "size": 680,
             "vram": "0x2be650"
           }
         ],
@@ -105714,7 +105795,7 @@
         "functions": [
           {
             "name": "FUN_002bee04",
-            "size": 52,
+            "size": 84,
             "vram": "0x2bee04"
           }
         ],
@@ -105754,7 +105835,7 @@
         "functions": [
           {
             "name": "FUN_002beed0",
-            "size": 80,
+            "size": 148,
             "vram": "0x2beed0"
           }
         ],
@@ -105794,7 +105875,7 @@
         "functions": [
           {
             "name": "FUN_002bef70",
-            "size": 288,
+            "size": 344,
             "vram": "0x2bef70"
           }
         ],
@@ -105854,7 +105935,7 @@
         "functions": [
           {
             "name": "FUN_002bf0f4",
-            "size": 336,
+            "size": 328,
             "vram": "0x2bf0f4"
           }
         ],
@@ -105874,7 +105955,7 @@
         "functions": [
           {
             "name": "FUN_002bf244",
-            "size": 68,
+            "size": 64,
             "vram": "0x2bf244"
           }
         ],
@@ -105894,7 +105975,7 @@
         "functions": [
           {
             "name": "FUN_002bf288",
-            "size": 248,
+            "size": 244,
             "vram": "0x2bf288"
           }
         ],
@@ -105914,7 +105995,7 @@
         "functions": [
           {
             "name": "FUN_002bf380",
-            "size": 158,
+            "size": 364,
             "vram": "0x2bf380"
           }
         ],
@@ -105925,26 +106006,6 @@
       },
       "name": "_code/002b/FUN_002bf380",
       "target_path": "orig/target/_code/002b/FUN_002bf380.o"
-    },
-    {
-      "base_path": "build/obj/_code/002b/FUN_002bf41e.o",
-      "metadata": {
-        "auto_generated": false,
-        "complete": false,
-        "functions": [
-          {
-            "name": "FUN_002bf41e",
-            "size": 2,
-            "vram": "0x2bf41e"
-          }
-        ],
-        "progress_categories": [
-          "_code"
-        ],
-        "source_path": "src/_code/002b/FUN_002bf41e.c"
-      },
-      "name": "_code/002b/FUN_002bf41e",
-      "target_path": "orig/target/_code/002b/FUN_002bf41e.o"
     },
     {
       "base_path": "build/obj/_code/002b/FUN_002bf4f0.o",
@@ -105974,7 +106035,7 @@
         "functions": [
           {
             "name": "FUN_002bf4f8",
-            "size": 11,
+            "size": 60,
             "vram": "0x2bf4f8"
           }
         ],
@@ -105994,7 +106055,7 @@
         "functions": [
           {
             "name": "FUN_002bf538",
-            "size": 24,
+            "size": 64,
             "vram": "0x2bf538"
           }
         ],
@@ -106014,7 +106075,7 @@
         "functions": [
           {
             "name": "FUN_002bf584",
-            "size": 20,
+            "size": 24,
             "vram": "0x2bf584"
           }
         ],
@@ -106054,7 +106115,7 @@
         "functions": [
           {
             "name": "FUN_002bf5c0",
-            "size": 64,
+            "size": 192,
             "vram": "0x2bf5c0"
           }
         ],
@@ -106114,7 +106175,7 @@
         "functions": [
           {
             "name": "FUN_002bf6fc",
-            "size": 176,
+            "size": 172,
             "vram": "0x2bf6fc"
           }
         ],
@@ -106234,7 +106295,7 @@
         "functions": [
           {
             "name": "FUN_002bfadc",
-            "size": 328,
+            "size": 320,
             "vram": "0x2bfadc"
           }
         ],
@@ -106254,7 +106315,7 @@
         "functions": [
           {
             "name": "FUN_002bfc24",
-            "size": 416,
+            "size": 376,
             "vram": "0x2bfc24"
           }
         ],
@@ -106494,7 +106555,7 @@
         "functions": [
           {
             "name": "FUN_002bff6c",
-            "size": 24,
+            "size": 108,
             "vram": "0x2bff6c"
           }
         ],
@@ -106574,7 +106635,7 @@
         "functions": [
           {
             "name": "nw_gfx_Camera_DynamicBuilder_Create",
-            "size": 992,
+            "size": 976,
             "vram": "0x2c0214"
           }
         ],
@@ -106594,7 +106655,7 @@
         "functions": [
           {
             "name": "FUN_002c05f4",
-            "size": 484,
+            "size": 592,
             "vram": "0x2c05f4"
           }
         ],
@@ -106674,7 +106735,7 @@
         "functions": [
           {
             "name": "FUN_002c0944",
-            "size": 38,
+            "size": 116,
             "vram": "0x2c0944"
           }
         ],
@@ -107416,7 +107477,7 @@
         "functions": [
           {
             "name": "FUN_002c1c1c",
-            "size": 108,
+            "size": 252,
             "vram": "0x2c1c1c"
           }
         ],
@@ -107457,7 +107518,7 @@
         "functions": [
           {
             "name": "FUN_002c1d78",
-            "size": 96,
+            "size": 92,
             "vram": "0x2c1d78"
           }
         ],
@@ -107517,7 +107578,7 @@
         "functions": [
           {
             "name": "FUN_002c1edc",
-            "size": 208,
+            "size": 352,
             "vram": "0x2c1edc"
           }
         ],
@@ -107537,7 +107598,7 @@
         "functions": [
           {
             "name": "FUN_002c2044",
-            "size": 468,
+            "size": 436,
             "vram": "0x2c2044"
           }
         ],
@@ -107598,7 +107659,7 @@
         "functions": [
           {
             "name": "FUN_002c2264",
-            "size": 180,
+            "size": 176,
             "vram": "0x2c2264"
           }
         ],
@@ -107698,7 +107759,7 @@
         "functions": [
           {
             "name": "nngxDisplayEnv",
-            "size": 29,
+            "size": 32,
             "vram": "0x2c24b8"
           }
         ],
@@ -107718,7 +107779,7 @@
         "functions": [
           {
             "name": "FUN_002c24dc",
-            "size": 88,
+            "size": 84,
             "vram": "0x2c24dc"
           }
         ],
@@ -107738,7 +107799,7 @@
         "functions": [
           {
             "name": "FUN_002c2534",
-            "size": 236,
+            "size": 224,
             "vram": "0x2c2534"
           }
         ],
@@ -107758,7 +107819,7 @@
         "functions": [
           {
             "name": "FUN_002c2620",
-            "size": 264,
+            "size": 256,
             "vram": "0x2c2620"
           }
         ],
@@ -107778,7 +107839,7 @@
         "functions": [
           {
             "name": "FUN_002c2728",
-            "size": 312,
+            "size": 304,
             "vram": "0x2c2728"
           }
         ],
@@ -107818,7 +107879,7 @@
         "functions": [
           {
             "name": "FUN_002c2890",
-            "size": 60,
+            "size": 188,
             "vram": "0x2c2890"
           }
         ],
@@ -107858,7 +107919,7 @@
         "functions": [
           {
             "name": "FUN_002c2968",
-            "size": 56,
+            "size": 92,
             "vram": "0x2c2968"
           }
         ],
@@ -107938,7 +107999,7 @@
         "functions": [
           {
             "name": "nw_ut_FloatColor_ToPicaU32",
-            "size": 212,
+            "size": 248,
             "vram": "0x2c2a1c"
           }
         ],
@@ -107958,7 +108019,7 @@
         "functions": [
           {
             "name": "nw_gfx_res_ResGraphicsFile_Setup",
-            "size": 604,
+            "size": 1176,
             "vram": "0x2c2b24"
           }
         ],
@@ -107978,7 +108039,7 @@
         "functions": [
           {
             "name": "nw_gfx_SceneBuilder_CreateObject",
-            "size": 43,
+            "size": 52,
             "vram": "0x2c2fbc"
           }
         ],
@@ -108060,7 +108121,7 @@
         "functions": [
           {
             "name": "FUN_002c30c4",
-            "size": 96,
+            "size": 92,
             "vram": "0x2c30c4"
           }
         ],
@@ -108100,7 +108161,7 @@
         "functions": [
           {
             "name": "FUN_002c312c",
-            "size": 73,
+            "size": 76,
             "vram": "0x2c312c"
           }
         ],
@@ -108140,7 +108201,7 @@
         "functions": [
           {
             "name": "FUN_002c31a0",
-            "size": 176,
+            "size": 240,
             "vram": "0x2c31a0"
           }
         ],
@@ -108161,7 +108222,7 @@
         "functions": [
           {
             "name": "FUN_002c32a0",
-            "size": 64,
+            "size": 192,
             "vram": "0x2c32a0"
           }
         ],
@@ -108241,7 +108302,7 @@
         "functions": [
           {
             "name": "FUN_002c3424",
-            "size": 179,
+            "size": 192,
             "vram": "0x2c3424"
           }
         ],
@@ -108341,7 +108402,7 @@
         "functions": [
           {
             "name": "FUN_002c3530",
-            "size": 128,
+            "size": 124,
             "vram": "0x2c3530"
           }
         ],
@@ -108381,7 +108442,7 @@
         "functions": [
           {
             "name": "FUN_002c36d0",
-            "size": 124,
+            "size": 148,
             "vram": "0x2c36d0"
           }
         ],
@@ -108681,7 +108742,7 @@
         "functions": [
           {
             "name": "FUN_002c3a14",
-            "size": 1000,
+            "size": 992,
             "vram": "0x2c3a14"
           }
         ],
@@ -108701,7 +108762,7 @@
         "functions": [
           {
             "name": "FUN_002c3dfc",
-            "size": 352,
+            "size": 336,
             "vram": "0x2c3dfc"
           }
         ],
@@ -108781,7 +108842,7 @@
         "functions": [
           {
             "name": "FUN_002c4040",
-            "size": 184,
+            "size": 180,
             "vram": "0x2c4040"
           }
         ],
@@ -108821,7 +108882,7 @@
         "functions": [
           {
             "name": "FUN_002c411c",
-            "size": 64,
+            "size": 52,
             "vram": "0x2c411c"
           }
         ],
@@ -108921,7 +108982,7 @@
         "functions": [
           {
             "name": "FUN_002c425c",
-            "size": 320,
+            "size": 316,
             "vram": "0x2c425c"
           }
         ],
@@ -108961,7 +109022,7 @@
         "functions": [
           {
             "name": "FUN_002c43b4",
-            "size": 296,
+            "size": 292,
             "vram": "0x2c43b4"
           }
         ],
@@ -109001,7 +109062,7 @@
         "functions": [
           {
             "name": "FUN_002c450c",
-            "size": 1016,
+            "size": 900,
             "vram": "0x2c450c"
           }
         ],
@@ -109062,7 +109123,7 @@
         "functions": [
           {
             "name": "FUN_002c4938",
-            "size": 65,
+            "size": 84,
             "vram": "0x2c4938"
           }
         ],
@@ -109095,6 +109156,26 @@
       "target_path": "orig/target/_code/002c/FUN_002c498c.o"
     },
     {
+      "base_path": "build/obj/_code/002c/FUN_002c49f8.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_002c49f8",
+            "size": 16,
+            "vram": "0x2c49f8"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/002c/FUN_002c49f8.c"
+      },
+      "name": "_code/002c/FUN_002c49f8",
+      "target_path": "orig/target/_code/002c/FUN_002c49f8.o"
+    },
+    {
       "base_path": "build/obj/_code/002c/FUN_002c4a08.o",
       "metadata": {
         "auto_generated": false,
@@ -109122,7 +109203,7 @@
         "functions": [
           {
             "name": "FUN_002c4a34",
-            "size": 504,
+            "size": 396,
             "vram": "0x2c4a34"
           }
         ],
@@ -109143,7 +109224,7 @@
         "functions": [
           {
             "name": "FUN_002c4c2c",
-            "size": 620,
+            "size": 580,
             "vram": "0x2c4c2c"
           }
         ],
@@ -109285,7 +109366,7 @@
         "functions": [
           {
             "name": "FUN_002c50f4",
-            "size": 284,
+            "size": 272,
             "vram": "0x2c50f4"
           }
         ],
@@ -109439,6 +109520,26 @@
       "target_path": "orig/target/_code/002c/FUN_002c52f8.o"
     },
     {
+      "base_path": "build/obj/_code/002c/FUN_002c5300.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_002c5300",
+            "size": 240,
+            "vram": "0x2c5300"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/002c/FUN_002c5300.c"
+      },
+      "name": "_code/002c/FUN_002c5300",
+      "target_path": "orig/target/_code/002c/FUN_002c5300.o"
+    },
+    {
       "base_path": "build/obj/_code/002c/FUN_002c53f4.o",
       "metadata": {
         "auto_generated": false,
@@ -109459,6 +109560,26 @@
       "target_path": "orig/target/_code/002c/FUN_002c53f4.o"
     },
     {
+      "base_path": "build/obj/_code/002c/FUN_002c5434.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_002c5434",
+            "size": 28,
+            "vram": "0x2c5434"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/002c/FUN_002c5434.c"
+      },
+      "name": "_code/002c/FUN_002c5434",
+      "target_path": "orig/target/_code/002c/FUN_002c5434.o"
+    },
+    {
       "base_path": "build/obj/_code/002c/nn_applet_CTR_detail_CloseApplication.o",
       "metadata": {
         "auto_generated": false,
@@ -109466,7 +109587,7 @@
         "functions": [
           {
             "name": "nn_applet_CTR_detail_CloseApplication",
-            "size": 352,
+            "size": 336,
             "vram": "0x2c5454"
           }
         ],
@@ -109617,6 +109738,26 @@
       },
       "name": "_code/002c/FUN_002c564c",
       "target_path": "orig/target/_code/002c/FUN_002c564c.o"
+    },
+    {
+      "base_path": "build/obj/_code/002c/FUN_002c565c.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_002c565c",
+            "size": 28,
+            "vram": "0x2c565c"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/002c/FUN_002c565c.c"
+      },
+      "name": "_code/002c/FUN_002c565c",
+      "target_path": "orig/target/_code/002c/FUN_002c565c.o"
     },
     {
       "base_path": "build/obj/_code/002c/FUN_002c567c.o",
@@ -109931,7 +110072,7 @@
         "functions": [
           {
             "name": "FUN_002c5c14",
-            "size": 328,
+            "size": 308,
             "vram": "0x2c5c14"
           }
         ],
@@ -110152,7 +110293,7 @@
         "functions": [
           {
             "name": "FUN_002c6202",
-            "size": 160,
+            "size": 410,
             "vram": "0x2c6202"
           }
         ],
@@ -115137,7 +115278,7 @@
         "functions": [
           {
             "name": "FUN_002d8910",
-            "size": 698,
+            "size": 752,
             "vram": "0x2d8910"
           }
         ],
@@ -133040,7 +133181,7 @@
         "functions": [
           {
             "name": "FUN_0031c344",
-            "size": 788,
+            "size": 852,
             "vram": "0x31c344"
           }
         ],
@@ -133051,26 +133192,6 @@
       },
       "name": "_code/0031/FUN_0031c344",
       "target_path": "orig/target/_code/0031/FUN_0031c344.o"
-    },
-    {
-      "base_path": "build/obj/_code/0031/FUN_0031c658.o",
-      "metadata": {
-        "auto_generated": false,
-        "complete": false,
-        "functions": [
-          {
-            "name": "FUN_0031c658",
-            "size": 64,
-            "vram": "0x31c658"
-          }
-        ],
-        "progress_categories": [
-          "_code"
-        ],
-        "source_path": "src/_code/0031/FUN_0031c658.c"
-      },
-      "name": "_code/0031/FUN_0031c658",
-      "target_path": "orig/target/_code/0031/FUN_0031c658.o"
     },
     {
       "base_path": "build/obj/_code/0031/FUN_0031c69c.o",
@@ -156983,7 +157104,7 @@
         "functions": [
           {
             "name": "FUN_003752f4",
-            "size": 1046,
+            "size": 1220,
             "vram": "0x3752f4"
           }
         ],
@@ -156994,46 +157115,6 @@
       },
       "name": "_code/0037/FUN_003752f4",
       "target_path": "orig/target/_code/0037/FUN_003752f4.o"
-    },
-    {
-      "base_path": "build/obj/_code/0037/FUN_0037570a.o",
-      "metadata": {
-        "auto_generated": false,
-        "complete": false,
-        "functions": [
-          {
-            "name": "FUN_0037570a",
-            "size": 9,
-            "vram": "0x37570a"
-          }
-        ],
-        "progress_categories": [
-          "_code"
-        ],
-        "source_path": "src/_code/0037/FUN_0037570a.c"
-      },
-      "name": "_code/0037/FUN_0037570a",
-      "target_path": "orig/target/_code/0037/FUN_0037570a.o"
-    },
-    {
-      "base_path": "build/obj/_code/0037/FUN_00375736.o",
-      "metadata": {
-        "auto_generated": false,
-        "complete": false,
-        "functions": [
-          {
-            "name": "FUN_00375736",
-            "size": 9,
-            "vram": "0x375736"
-          }
-        ],
-        "progress_categories": [
-          "_code"
-        ],
-        "source_path": "src/_code/0037/FUN_00375736.c"
-      },
-      "name": "_code/0037/FUN_00375736",
-      "target_path": "orig/target/_code/0037/FUN_00375736.o"
     },
     {
       "base_path": "build/obj/_code/0037/FUN_003757cc.o",
@@ -183333,7 +183414,7 @@
         "functions": [
           {
             "name": "nw_snd_internal_WaveFileReader_ReadWaveInfo",
-            "size": 6,
+            "size": 240,
             "vram": "0x3e64c0"
           }
         ],
@@ -183344,26 +183425,6 @@
       },
       "name": "_code/003e/nw_snd_internal_WaveFileReader_ReadWaveInfo",
       "target_path": "orig/target/_code/003e/nw_snd_internal_WaveFileReader_ReadWaveInfo.o"
-    },
-    {
-      "base_path": "build/obj/_code/003e/FUN_003e64c6.o",
-      "metadata": {
-        "auto_generated": false,
-        "complete": false,
-        "functions": [
-          {
-            "name": "FUN_003e64c6",
-            "size": 13,
-            "vram": "0x3e64c6"
-          }
-        ],
-        "progress_categories": [
-          "_code"
-        ],
-        "source_path": "src/_code/003e/FUN_003e64c6.c"
-      },
-      "name": "_code/003e/FUN_003e64c6",
-      "target_path": "orig/target/_code/003e/FUN_003e64c6.o"
     },
     {
       "base_path": "build/obj/_code/003e/nw_snd_internal_StreamSoundFile_FileHeader_GetInfoBlockSize.o",
@@ -184606,6 +184667,66 @@
       "target_path": "orig/target/_code/003e/nw_snd_internal_WaveFile_FileHeader_GetInfoBlock.o"
     },
     {
+      "base_path": "build/obj/_code/003e/FUN_003e8614.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_003e8614",
+            "size": 12,
+            "vram": "0x3e8614"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/003e/FUN_003e8614.c"
+      },
+      "name": "_code/003e/FUN_003e8614",
+      "target_path": "orig/target/_code/003e/FUN_003e8614.o"
+    },
+    {
+      "base_path": "build/obj/_code/003e/FUN_003e8620.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "FUN_003e8620",
+            "size": 12,
+            "vram": "0x3e8620"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/003e/FUN_003e8620.c"
+      },
+      "name": "_code/003e/FUN_003e8620",
+      "target_path": "orig/target/_code/003e/FUN_003e8620.o"
+    },
+    {
+      "base_path": "build/obj/_code/003e/nw_snd_internal_WaveFile_InfoBlockBody_GetChannelInfo.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "nw_snd_internal_WaveFile_InfoBlockBody_GetChannelInfo",
+            "size": 32,
+            "vram": "0x3e862c"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/003e/nw_snd_internal_WaveFile_InfoBlockBody_GetChannelInfo.c"
+      },
+      "name": "_code/003e/nw_snd_internal_WaveFile_InfoBlockBody_GetChannelInfo",
+      "target_path": "orig/target/_code/003e/nw_snd_internal_WaveFile_InfoBlockBody_GetChannelInfo.o"
+    },
+    {
       "base_path": "build/obj/_code/003e/nw_anim_res_ResVec3Anim_EvaluateResult.o",
       "metadata": {
         "auto_generated": false,
@@ -185470,26 +185591,6 @@
       "target_path": "orig/target/_code/003e/FUN_003ec998.o"
     },
     {
-      "base_path": "build/obj/_code/003e/FUN_003ecac6.o",
-      "metadata": {
-        "auto_generated": false,
-        "complete": false,
-        "functions": [
-          {
-            "name": "FUN_003ecac6",
-            "size": 13,
-            "vram": "0x3ecac6"
-          }
-        ],
-        "progress_categories": [
-          "_code"
-        ],
-        "source_path": "src/_code/003e/FUN_003ecac6.c"
-      },
-      "name": "_code/003e/FUN_003ecac6",
-      "target_path": "orig/target/_code/003e/FUN_003ecac6.o"
-    },
-    {
       "base_path": "build/obj/_code/003e/FUN_003ed634.o",
       "metadata": {
         "auto_generated": false,
@@ -185992,26 +186093,6 @@
       },
       "name": "_code/003f/FUN_003f2fac",
       "target_path": "orig/target/_code/003f/FUN_003f2fac.o"
-    },
-    {
-      "base_path": "build/obj/_code/003f/FUN_003f30c6.o",
-      "metadata": {
-        "auto_generated": false,
-        "complete": false,
-        "functions": [
-          {
-            "name": "FUN_003f30c6",
-            "size": 5,
-            "vram": "0x3f30c6"
-          }
-        ],
-        "progress_categories": [
-          "_code"
-        ],
-        "source_path": "src/_code/003f/FUN_003f30c6.c"
-      },
-      "name": "_code/003f/FUN_003f30c6",
-      "target_path": "orig/target/_code/003f/FUN_003f30c6.o"
     },
     {
       "base_path": "build/obj/_code/003f/FUN_003f32cc.o",
@@ -187445,7 +187526,7 @@
         "functions": [
           {
             "name": "FUN_003f8c80",
-            "size": 235,
+            "size": 236,
             "vram": "0x3f8c80"
           }
         ],

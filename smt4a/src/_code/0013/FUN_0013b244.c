@@ -2,6 +2,18 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
+typedef struct fn_0013b244_arg0 fn_0013b244_arg0;
+struct fn_0013b244_arg0 {
+    uint field_0x0; /* +0x0 */
+    unsigned char pad_0x4[0x508];
+    unsigned char field_0x50c; /* +0x50c */
+    unsigned char pad_0x50d[0x3];
+    undefined4 field_0x510; /* +0x510 */
+    undefined4 field_0x514; /* +0x514 */
+    float field_0x518; /* +0x518 */
+    float field_0x51c; /* +0x51c */
+};
+
 /* stack frame of param_1: 11 slot(s), 44 byte(s) */
 typedef struct {
     unsigned int sp2C; /* 0x2c: local_2c */
@@ -35,7 +47,7 @@ extern unsigned int FUN_00168854(unsigned int);
 extern unsigned int FUN_00184df8(unsigned int);
 
 
-void FUN_0013b244(int param_1)
+void FUN_0013b244(fn_0013b244_arg0 *param_1)
 
 {
 /* irregular: irregular input(s): in_fpscr, in_s0, in_s1, in_s2; 6 native warning(s); review required */
@@ -69,11 +81,11 @@ void FUN_0013b244(int param_1)
   VectorUnsignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_0015a20c(param_1);
   temp_v13 = in_s0 - temp_v2;
-  *(float *)(param_1 + 0x50c) = in_s0;
-  *(float *)(param_1 + 0x51c) = temp_v3;
-  *(float *)(param_1 + 0x518) = in_s0;
-  *(unsigned int *)(param_1 + 0x510) = in_s1;
-  *(unsigned int *)(param_1 + 0x514) = in_s2;
+  *(float *)&param_1->field_0x50c = in_s0;
+  param_1->field_0x51c = temp_v3;
+  param_1->field_0x518 = in_s0;
+  param_1->field_0x510 = in_s1;
+  param_1->field_0x514 = in_s2;
   temp_v11 = temp_v3 / romwright_sqrt_4(temp_v2 + temp_v13 * temp_v13);
   temp_v13 = temp_v13 * temp_v11;
   temp_v11 = temp_v2 * temp_v11;

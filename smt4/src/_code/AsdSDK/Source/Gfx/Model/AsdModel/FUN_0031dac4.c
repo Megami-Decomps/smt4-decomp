@@ -35,7 +35,7 @@ extern int FUN_002b4414(int, int ***, int);
 extern unsigned int FUN_002c300c(void);
 /* Supplied declaration required: FUN_002c30c4. */
 /* Supplied declaration required: FUN_002c498c. */
-extern int FUN_002c5300(unsigned int, unsigned int, unsigned int, int);
+/* Supplied declaration required: FUN_002c5300. */
 extern int nw_anim_res_ResAnim_IsFullBakedAnim(int ****);
 /* Supplied declaration required: nw_gfx_SceneBuilder_CreateObject. */
 /* Supplied declaration required: nw_gfx_SceneHelper_ResolveReferenceImpl. */
@@ -45,7 +45,7 @@ extern int nw_anim_res_ResAnim_IsFullBakedAnim(int ****);
 int * FUN_0031dac4(int *param_1)
 
 {
-/* irregular: 9 native warning(s); review required */
+/* irregular: 10 native warning(s); review required */
   unsigned int *puVar1;
   unsigned char temp_v0;
   unsigned int *puVar3;
@@ -97,7 +97,8 @@ int * FUN_0031dac4(int *param_1)
   temp_v15 = 0x40000000;
   piVar9[1] = *(int *)(*param_1 + 0x1c);
   temp_v11[0] = (int ***)0x1;
-  temp_v1 = FUN_002c5300(0x100,0x100,0,piVar9[1] << 2);
+  temp_v1 = 0x100;
+  FUN_002c5300(0x100,0x100,0,piVar9[1] << 2);
   *piVar9 = temp_v1;
   temp_v1 = *(int *)(*param_1 + 0x20);
   if (temp_v1 != 0) {
@@ -205,7 +206,8 @@ int * FUN_0031dac4(int *param_1)
   }
   else {
     temp_v11[0] = (int ***)0x1;
-    temp_v1 = FUN_002c5300(0x100,0x100,0,piVar9[3] << 2);
+    temp_v1 = 0x100;
+    FUN_002c5300(0x100,0x100,0,piVar9[3] << 2);
     piVar9[2] = temp_v1;
     temp_v11[0] = (int ***)0x1;
     temp_v1 = 0x100;
@@ -316,7 +318,8 @@ int * FUN_0031dac4(int *param_1)
   }
   else {
     temp_v11[0] = (int ***)0x1;
-    temp_v1 = FUN_002c5300(0x100,0x100,0,piVar9[6] << 2);
+    temp_v1 = 0x100;
+    FUN_002c5300(0x100,0x100,0,piVar9[6] << 2);
     piVar9[5] = temp_v1;
     temp_v11[0] = (int ***)0x1;
     temp_v1 = 0x100;

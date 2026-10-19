@@ -7,8 +7,8 @@ extern unsigned int FUN_0028e934(int, unsigned int);
 extern unsigned int FUN_00296cc8(unsigned int);
 /* Supplied declaration required: FUN_0029ede8. */
 extern unsigned int FUN_002bce00(unsigned int);
-extern unsigned int FUN_002bd06c(unsigned int);
-extern unsigned int FUN_002be650(unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002bd06c. */
+/* Supplied declaration required: FUN_002be650. */
 /* Supplied declaration required: FUN_002bf694. */
 /* Supplied declaration required: FUN_002c4938. */
 
@@ -16,7 +16,7 @@ extern unsigned int FUN_002be650(unsigned int, unsigned int);
 unsigned int FUN_00211a30(void)
 
 {
-/* irregular: 4 native warning(s); review required */
+/* irregular: 6 native warning(s); review required */
   unsigned int temp_v0;
   unsigned int temp_v1;
   unsigned int temp_v2;
@@ -38,8 +38,8 @@ unsigned int FUN_00211a30(void)
   case 0x21:
   case 0x22:
   case 0x23:
-    temp_v2 = FUN_002be650(temp_v1,1);
-    FUN_002bf694(temp_v3,temp_v2);
+    FUN_002be650(temp_v1,1);
+    FUN_002bf694(temp_v3,temp_v1);
     FUN_00295660(temp_v0,temp_v3);
     break;
   case 8:
@@ -50,8 +50,9 @@ unsigned int FUN_00211a30(void)
   case 0xd:
   case 0xe:
   case 0xf:
-    temp_v2 = FUN_002bd06c(temp_v1 & 0xffff);
-    FUN_002bf694(temp_v3,temp_v2);
+    temp_v1 = temp_v1 & 0xffff;
+    FUN_002bd06c(temp_v1);
+    FUN_002bf694(temp_v3,temp_v1);
     FUN_00295660(temp_v0,temp_v3);
     break;
   case 0x10:

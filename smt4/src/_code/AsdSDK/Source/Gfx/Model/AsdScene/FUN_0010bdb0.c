@@ -15,12 +15,13 @@ extern int DAT_00464c04; /* 0x464c04 */
 
 extern int FUN_001204b8(unsigned char *, unsigned int);
 extern unsigned int FUN_002c2ff0(void);
-extern unsigned int *FUN_002c5300(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c5300. */
 
 
 void FUN_0010bdb0(void)
 
 {
+/* irregular: 1 native warning(s); review required */
   unsigned int *puVar1;
   unsigned int temp_v0;
   int temp_v1;
@@ -46,7 +47,8 @@ void FUN_0010bdb0(void)
   temp_v6 = 0x42c80000;
   temp_v7 = 0x459c4000;
   do {
-    puVar1 = (unsigned int *)FUN_002c5300(0x100,0x100,0,0x10,1);
+    puVar1 = (unsigned int *)0x100;
+    FUN_002c5300(0x100,0x100,0,0x10,1);
     *puVar1 = 0;
     puVar1[1] = 0;
     puVar1[2] = 0;

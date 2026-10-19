@@ -26,8 +26,8 @@ typedef struct {
 
 extern unsigned char DAT_00464af4; /* 0x464af4 */
 extern unsigned int DAT_00464b10; /* 0x464b10 */
-extern unsigned int DAT_00464b14; /* 0x464b14 */
-extern unsigned int DAT_00464b18; /* 0x464b18 */
+extern unsigned char *DAT_00464b14; /* 0x464b14 */
+extern unsigned char *DAT_00464b18; /* 0x464b18 */
 extern unsigned int DAT_00464b1c; /* 0x464b1c */
 extern int DAT_00464b34; /* 0x464b34 */
 extern float DAT_00464b40; /* 0x464b40 */
@@ -43,23 +43,24 @@ extern unsigned int DAT_00464ba0; /* 0x464ba0 */
 /* Supplied declaration required: FUN_00120b5c. */
 /* Supplied declaration required: FUN_002c05f4. */
 /* Supplied declaration required: FUN_002c2ff0. */
-extern unsigned int nw_gfx_Camera_DynamicBuilder_Create(unsigned char *, unsigned int);
+/* Supplied declaration required: nw_gfx_Camera_DynamicBuilder_Create. */
 /* Supplied declaration required: nw_gfx_SceneNode_AttachChild. */
 
 
 void FUN_001079d8(void)
 
 {
-/* irregular: irregular input(s): in_fpscr; 6 native warning(s); review required */
+/* irregular: irregular input(s): in_fpscr; 7 native warning(s); review required */
   unsigned int temp_v0;
-  int *piVar2;
+  unsigned char *puVar2;
+  int *piVar3;
   int temp_v1;
   unsigned int temp_v2;
   unsigned int in_fpscr;
   unsigned long long temp_v3;
-  unsigned int *puVar6;
+  unsigned int *puVar7;
   float temp_v4;
-  unsigned int *puVar8;
+  unsigned int *puVar9;
   unsigned int temp_v5;
   unsigned char temp_v6;
   unsigned char temp_v7;
@@ -83,7 +84,7 @@ void FUN_001079d8(void)
   temp_v0 = FUN_002c2ff0();
   temp_v3 = 0x4170000041a00000;
   temp_v4 = 1.0f;
-  puVar8 = (unsigned int *)0x0;
+  puVar9 = (unsigned int *)0x0;
   temp_v5 = 0x41200000;
   temp_v18 = (unsigned int *)0x41a00000;
   uStack_50 = 0x41700000;
@@ -97,60 +98,64 @@ void FUN_001079d8(void)
   temp_v7 = 1;
   temp_v10 = 1;
   temp_v11 = (unsigned int *)0x0;
+  puVar2 = &temp_v6;
   temp_v13 = (unsigned int *)0x0;
   temp_v14 = romwright_piece_3_1(temp_v14._1_3_,1);
   temp_v12 = romwright_piece_3_1(temp_v12._1_3_,1);
   temp_v9 = (unsigned int *)0x0;
   temp_v8 = 0;
   DAT_00464b10 = temp_v2;
-  DAT_00464b14 = nw_gfx_Camera_DynamicBuilder_Create(&temp_v6,temp_v0);
-  puVar6 = temp_v13;
+  nw_gfx_Camera_DynamicBuilder_Create(puVar2,temp_v0);
+  puVar7 = temp_v13;
+  DAT_00464b14 = puVar2;
   if ((temp_v13 != (unsigned int *)0x0) && ((char)temp_v14 != '\0')) {
     (**(romwright_code **)*temp_v13)(temp_v13);
-    piVar2 = (int *)puVar6[1];
-    (**(romwright_code **)(*piVar2 + 0xc))(piVar2,puVar6);
+    piVar3 = (int *)puVar7[1];
+    (**(romwright_code **)(*piVar3 + 0xc))(piVar3,puVar7);
   }
-  puVar6 = temp_v11;
+  puVar7 = temp_v11;
   if ((temp_v11 != (unsigned int *)0x0) && ((char)temp_v12 != '\0')) {
     (**(romwright_code **)*temp_v11)(temp_v11);
-    piVar2 = (int *)puVar6[1];
-    (**(romwright_code **)(*piVar2 + 0xc))(piVar2,puVar6);
+    piVar3 = (int *)puVar7[1];
+    (**(romwright_code **)(*piVar3 + 0xc))(piVar3,puVar7);
   }
   temp_v6 = 1;
   temp_v7 = 1;
   temp_v10 = 1;
   temp_v11 = (unsigned int *)0x0;
+  puVar2 = &temp_v6;
   temp_v13 = (unsigned int *)0x0;
   temp_v14 = romwright_piece_3_1(temp_v14._1_3_,1);
   temp_v12 = romwright_piece_3_1(temp_v12._1_3_,1);
   temp_v9 = (unsigned int *)0x0;
   temp_v8 = 0;
-  DAT_00464b18 = nw_gfx_Camera_DynamicBuilder_Create(&temp_v6,temp_v0);
-  puVar6 = temp_v13;
+  nw_gfx_Camera_DynamicBuilder_Create(puVar2,temp_v0);
+  puVar7 = temp_v13;
+  DAT_00464b18 = puVar2;
   if ((temp_v13 != (unsigned int *)0x0) && ((char)temp_v14 != '\0')) {
     (**(romwright_code **)*temp_v13)(temp_v13);
-    piVar2 = (int *)puVar6[1];
-    (**(romwright_code **)(*piVar2 + 0xc))(piVar2,puVar6);
+    piVar3 = (int *)puVar7[1];
+    (**(romwright_code **)(*piVar3 + 0xc))(piVar3,puVar7);
   }
-  puVar6 = temp_v11;
+  puVar7 = temp_v11;
   if ((temp_v11 != (unsigned int *)0x0) && ((char)temp_v12 != '\0')) {
     (**(romwright_code **)*temp_v11)(temp_v11);
-    piVar2 = (int *)puVar6[1];
-    (**(romwright_code **)(*piVar2 + 0xc))(piVar2,puVar6);
+    piVar3 = (int *)puVar7[1];
+    (**(romwright_code **)(*piVar3 + 0xc))(piVar3,puVar7);
   }
   nw_gfx_SceneNode_AttachChild(DAT_00464b9c,DAT_00464b10);
-  puVar6 = (unsigned int *)((unsigned long long)temp_v3 >> 0x20);
+  puVar7 = (unsigned int *)((unsigned long long)temp_v3 >> 0x20);
   temp_v2 = (unsigned int)temp_v3;
   if (DAT_00464af4 != 0) {
     if (DAT_00464af4 == 2) {
       temp_v10 = temp_v2;
-      temp_v11 = puVar6;
+      temp_v11 = puVar7;
       temp_v12 = temp_v2;
-      temp_v13 = puVar8;
+      temp_v13 = puVar9;
       temp_v14 = temp_v5;
-      temp_v15 = puVar8;
-      temp_v20 = puVar8;
-      temp_v21 = puVar8;
+      temp_v15 = puVar9;
+      temp_v20 = puVar9;
+      temp_v21 = puVar9;
       temp_v1 = FUN_002c2ff0();
       VectorUnsignedToFloat((unsigned int)DAT_00464af4,(unsigned char)(in_fpscr >> 0x16) & 3);
       FUN_00119e54(temp_v1,&temp_v10,&temp_v13,&temp_v20,0);
@@ -159,11 +164,11 @@ void FUN_001079d8(void)
   }
   else {
     temp_v8 = temp_v2;
-    temp_v9 = puVar6;
+    temp_v9 = puVar7;
     temp_v10 = temp_v2;
-    temp_v11 = puVar8;
+    temp_v11 = puVar9;
     temp_v12 = temp_v5;
-    temp_v13 = puVar8;
+    temp_v13 = puVar9;
     temp_v1 = FUN_002c2ff0();
     FUN_002c05f4(temp_v1,&temp_v8,&temp_v11,0);
     DAT_00464b34 = temp_v1;
@@ -174,9 +179,9 @@ void FUN_001079d8(void)
   temp_v16 = (unsigned int)temp_v3;
   uStack_5c = (unsigned int)((unsigned long long)temp_v3 >> 0x20);
   temp_v17 = temp_v16;
-  temp_v18 = puVar8;
+  temp_v18 = puVar9;
   uStack_50 = temp_v5;
-  temp_v19 = puVar8;
+  temp_v19 = puVar9;
   temp_v2 = FUN_002c2ff0();
   FUN_002c05f4(temp_v2,&temp_v16,&temp_v18,0);
   DAT_00464b1c = temp_v2;

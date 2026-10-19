@@ -64,9 +64,11 @@ int * FUN_0034b6d4(int param_1,unsigned int param_2,int param_3)
   }
   piVar2[7] = param_1;
   FUN_0023b49c(piVar2,param_2,*(unsigned int *)(param_1 + 0x1c));
-  temp_v0 = FUN_002c5300(0x100,0x100,0,0x50,1);
+  temp_v0 = 0x100;
+  FUN_002c5300(0x100,0x100,0,0x50,1);
   piVar2[1] = temp_v0;
-  temp_v0 = FUN_002c5300(0x100,0x100,0,*(int *)(piVar2[7] + 0x2c) * 0x50,1);
+  temp_v0 = 0x100;
+  FUN_002c5300(0x100,0x100,0,*(int *)(piVar2[7] + 0x2c) * 0x50,1);
   piVar2[6] = temp_v0;
   FUN_0034b884(piVar2);
   (**(romwright_code **)(*piVar2 + 0x10))(piVar2);

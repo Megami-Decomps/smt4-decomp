@@ -16,7 +16,7 @@ extern int FUN_00129034(int, unsigned int);
 /* Supplied declaration required: FUN_00147370. */
 extern unsigned int FUN_002bd29c(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bd420. */
-extern unsigned int FUN_002bf5c0(unsigned int, unsigned int, unsigned int, int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002bf5c0. */
 /* Supplied declaration required: FUN_002c498c. */
 /* Supplied declaration required: nn_os_CriticalSection_Enter. */
 /* Supplied declaration required: nn_os_CriticalSection_Leave. */
@@ -28,7 +28,7 @@ extern unsigned int FUN_002bf5c0(unsigned int, unsigned int, unsigned int, int, 
 unsigned int * FUN_0010c0f4(int param_1,int param_2,unsigned int param_3)
 
 {
-/* irregular: 10 native warning(s); review required */
+/* irregular: 11 native warning(s); review required */
   unsigned int *puVar1;
   unsigned int temp_v0;
   int temp_v1;
@@ -45,7 +45,8 @@ unsigned int * FUN_0010c0f4(int param_1,int param_2,unsigned int param_3)
   temp_v1 = FUN_00129034(param_1,0);
   puVar1[0x22] = param_2 - (temp_v1 - param_1);
   puVar1[0x20] = temp_v1 - param_1;
-  temp_v0 = FUN_002bf5c0(0x10000,0x100,0,param_2,0x20,1);
+  temp_v0 = 0x10000;
+  FUN_002bf5c0(0x10000,0x100,0,param_2,0x20,1);
   puVar1[0x1b] = temp_v0;
   FUN_002bd420(param_1,temp_v0,param_2);
   temp_v0 = FUN_002bd29c(0x7fff,0);

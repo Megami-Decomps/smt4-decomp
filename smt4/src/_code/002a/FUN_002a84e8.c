@@ -9,31 +9,32 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-extern int FUN_002b5a48(short *);
-extern int *FUN_002b5a5c(void);
+extern int FUN_002b5a48(int *);
+/* Supplied declaration required: FUN_002b5a5c. */
 
 
-void FUN_002a84e8(short *param_1)
+void FUN_002a84e8(int *param_1)
 
 {
-  short temp_v0;
-  int *piVar2;
+/* irregular: 1 native warning(s); review required */
+  int *piVar1;
+  int temp_v0;
   int temp_v1;
+  int *piStack_1c;
   int temp_v2;
-  short *psStack_1c;
-  int temp_v3;
   
-  piVar2 = (int *)FUN_002b5a5c();
-  if (piVar2 != (int *)0x0) {
+  piVar1 = param_1;
+  FUN_002b5a5c();
+  if (piVar1 != (int *)0x0) {
     do {
-      psStack_1c = param_1 + 1;
+      piStack_1c = (int *)((int)param_1 + 2);
       temp_v0 = *param_1;
-      param_1 = psStack_1c;
-    } while (temp_v0 != 0x3a);
-    temp_v2 = 4;
-    temp_v1 = FUN_002b5a48(psStack_1c);
-    temp_v3 = (temp_v1 + 1) * 2;
-    (**(romwright_code **)(*piVar2 + 8))(piVar2,&temp_v2);
+      param_1 = piStack_1c;
+    } while ((short)temp_v0 != 0x3a);
+    temp_v1 = 4;
+    temp_v0 = FUN_002b5a48(piStack_1c);
+    temp_v2 = (temp_v0 + 1) * 2;
+    (**(romwright_code **)(*piVar1 + 8))(piVar1,&temp_v1);
   }
   return;
 }

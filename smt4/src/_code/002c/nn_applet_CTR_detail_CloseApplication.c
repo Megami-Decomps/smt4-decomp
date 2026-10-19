@@ -1,86 +1,57 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `nn_applet_CTR_detail_CloseApplication` (_code @ 0x2c5454, 0x160 bytes) from smt4_v1.2.0.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `nn_applet_CTR_detail_CloseApplication` (_code @ 0x2c5454, 0x150 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
-extern int iRamc8a0d004; /* 0xc8a0d004 */
-extern unsigned int uRamc8a0d008; /* 0xc8a0d008 */
-extern unsigned int uRamc8a0d00c; /* 0xc8a0d00c */
-
+/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 extern int FUN_0011d1fc(void);
-extern unsigned int *FUN_0011d744(unsigned int, unsigned int);
+extern int FUN_0011d744(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0011d888. */
-/* Supplied declaration required: FUN_0013727c. */
 /* Supplied declaration required: FUN_002bb140. */
+/* Supplied declaration required: FUN_002bb150. */
+/* Supplied declaration required: FUN_002bb180. */
 /* Supplied declaration required: FUN_002bb194. */
 /* Supplied declaration required: FUN_002bb308. */
 /* Supplied declaration required: FUN_002bb378. */
 /* Supplied declaration required: FUN_002bbb2c. */
-/* Supplied declaration required: FUN_002bc1e4. */
 /* Supplied declaration required: FUN_002c1148. */
 /* Supplied declaration required: nn_applet_CTR_CloseAppletHook. */
 
 
-/* WARNING: Control flow encountered bad instruction data */
-
-void nn_applet_CTR_detail_CloseApplication
-               (unsigned int param_1,unsigned int param_2,int param_3,int param_4)
+int nn_applet_CTR_detail_CloseApplication(unsigned int param_1,unsigned int param_2,unsigned int param_3)
 
 {
-/* irregular: 12 native warning(s); review required */
-  unsigned int *puVar1;
+/* irregular: 11 native warning(s); review required */
   int temp_v0;
-  unsigned int *puVar3;
-  unsigned int temp_v1;
-  unsigned int *puVar5;
-  unsigned char uStack_1c;
   
   temp_v0 = FUN_0011d1fc();
-  temp_v1 = 0xe0a0cc08;
-  puVar5 = (unsigned int *)0xc8a0cc02;
   if (temp_v0 != 9) {
     FUN_002c1148(0,0);
     FUN_002bb140(9);
-    FUN_002bb378();
-    puVar3 = (unsigned int *)0x1;
-    FUN_0011d888();
-    FUN_002bb308();
-    temp_v0 = iRamc8a0d004;
-    if ((puVar3 == (unsigned int *)0xc8a0cff0 || puVar3 == (unsigned int *)0xe0a0cc08) ||
-        puVar3 == (unsigned int *)0xc8a0cc02) {
-      temp_v1 = puVar3[0xe];
-      if (*(char *)(puVar3 + 0x97) == '\0') {
-        temp_v1 = 0x500;
-      }
-      FUN_002bc1e4();
-      puVar1 = *(unsigned int **)(param_3 + 0x1fc);
-      param_4 = temp_v0 * 4 - 0x375f3010;
-      puVar5 = (unsigned int *)&uStack_1c;
-      *puVar5 = (unsigned int)puVar1;
-      puVar5[1] = temp_v1;
-      FUN_0013727c(puVar3[2],puVar3[0xc],puVar3[0xd],*puVar3,*(unsigned int *)(param_4 + 0x20),
-                   uRamc8a0d008,uRamc8a0d00c);
-      return;
+    while( 1 ) {
+      FUN_002bb378();
+      temp_v0 = 1;
+      FUN_0011d888();
+      FUN_002bb308();
+      if ((temp_v0 != -0x375f3010 && temp_v0 != -0x1f5f33f8) && temp_v0 != -0x375f33fe) break;
+      FUN_002bb150(10000000,0);
     }
-    if ((int)puVar3 < 0) {
-      FUN_002bbb2c(puVar3,0x2c54d0);
+    if (temp_v0 < 0) {
+      FUN_002bbb2c(temp_v0,0x2c54d0);
     }
   }
   nn_applet_CTR_CloseAppletHook();
   FUN_002bb194(0);
-  FUN_002bb378();
-  puVar3 = (unsigned int *)FUN_0011d744(param_1,param_2);
-  FUN_002bb308();
-  if ((puVar3 != (unsigned int *)0xc8a0cff0 && puVar3 != (unsigned int *)0xe0a0cc08) &&
-      puVar3 != (unsigned int *)0xc8a0cc02) {
-                    /* WARNING: Bad instruction - Truncating control flow here */
-    halt_baddata();
+  while( 1 ) {
+    FUN_002bb378();
+    temp_v0 = FUN_0011d744(param_1,param_2,param_3);
+    FUN_002bb308();
+    if ((temp_v0 != -0x375f3010 && temp_v0 != -0x1f5f33f8) && temp_v0 != -0x375f33fe) break;
+    FUN_002bb150(10000000,0);
   }
-  *puVar3 = (unsigned int)puVar3;
-  puVar3[1] = 0xc8a0cff0;
-  puVar1 = puVar3 + 2;
-  *puVar5 = (unsigned int)puVar1;
-  puVar5[1] = temp_v1;
-  FUN_0013727c(puVar3[2],puVar3[0xc],puVar3[0xd],*puVar3,*(unsigned int *)(param_4 + 0x20),
-               uRamc8a0d008,uRamc8a0d00c);
-  return;
+  if (temp_v0 < 0) {
+    FUN_002bbb2c(temp_v0,0x2c5528);
+  }
+  FUN_002bb180();
+  software_interrupt(3);
+  return temp_v0;
 }

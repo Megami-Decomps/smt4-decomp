@@ -27,14 +27,14 @@ extern unsigned int DAT_004efdd8; /* 0x4efdd8 */
 
 /* Supplied declaration required: FUN_002bfe28. */
 extern int FUN_002bfefc(unsigned int *);
-extern int *FUN_002c32a0(unsigned int, unsigned int, unsigned int, int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c32a0. */
 extern int FUN_002d58b4(unsigned int, unsigned int);
 
 
 int * FUN_001f6998(unsigned int param_1,unsigned int param_2,int param_3)
 
 {
-/* irregular: 1 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   int *piVar1;
   int temp_v0;
   unsigned int temp_v1;
@@ -59,7 +59,8 @@ int * FUN_001f6998(unsigned int param_1,unsigned int param_2,int param_3)
   if ((param_2 & 0x80) != 0) {
     temp_v2 = temp_v2 + 0x10;
   }
-  piVar1 = (int *)FUN_002c32a0(0x10000,0x100,0,temp_v2 * param_1 + 200,0x10,1);
+  piVar1 = (int *)0x10000;
+  FUN_002c32a0(0x10000,0x100,0,temp_v2 * param_1 + 200,0x10,1);
   if (((DAT_00476638 & 1) == 0) && (temp_v0 = FUN_002bfefc(&DAT_00476638), temp_v0 != 0)) {
     DAT_004efd9c = 0x3f800000;
     DAT_004efda0 = 0;

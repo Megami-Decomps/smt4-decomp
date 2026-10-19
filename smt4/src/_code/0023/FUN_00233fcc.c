@@ -7,7 +7,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_2_stack;
 
-extern unsigned int *FUN_002baa40(unsigned char *, unsigned int);
+/* Supplied declaration required: FUN_002baa40. */
 extern unsigned int *FUN_002bad5c(unsigned int *);
 /* Supplied declaration required: FUN_002c222c. */
 
@@ -15,17 +15,18 @@ extern unsigned int *FUN_002bad5c(unsigned int *);
 unsigned int * FUN_00233fcc(unsigned int param_1,unsigned int param_2)
 
 {
-/* irregular: 1 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   unsigned int *puVar1;
   unsigned int *puVar2;
   unsigned int temp_v0;
-  unsigned char temp_v1 [16];
+  unsigned int temp_v1 [4];
   
   switch(param_2) {
   case 0:
     puVar1 = (unsigned int *)0x20;
     FUN_002c222c();
     if (puVar1 != (unsigned int *)0x0) {
+      puVar2 = temp_v1;
       *puVar1 = 0x422184;
       puVar1[1] = 0;
       puVar1[2] = 0xe7e3ffff;
@@ -35,7 +36,7 @@ unsigned int * FUN_00233fcc(unsigned int param_1,unsigned int param_2)
       puVar1[3] = 0;
       *(unsigned char *)(puVar1 + 4) = 0;
       puVar1[-2] = 0;
-      puVar2 = (unsigned int *)FUN_002baa40(temp_v1,0);
+      FUN_002baa40(temp_v1,0);
       temp_v0 = puVar2[1];
       *puVar1 = *puVar2;
       puVar1[1] = temp_v0;
@@ -46,6 +47,7 @@ unsigned int * FUN_00233fcc(unsigned int param_1,unsigned int param_2)
     puVar1 = (unsigned int *)0x1c;
     FUN_002c222c();
     if (puVar1 != (unsigned int *)0x0) {
+      puVar2 = temp_v1;
       *puVar1 = 0x422184;
       puVar1[1] = 0;
       puVar1[2] = 0xe7e3ffff;
@@ -53,7 +55,7 @@ unsigned int * FUN_00233fcc(unsigned int param_1,unsigned int param_2)
       puVar1[2] = 0xffffffff;
       puVar1[-3] = 0x422250;
       puVar1[-2] = 0;
-      puVar2 = (unsigned int *)FUN_002baa40(temp_v1,0);
+      FUN_002baa40(temp_v1,0);
       temp_v0 = puVar2[1];
       *puVar1 = *puVar2;
       puVar1[1] = temp_v0;
@@ -64,6 +66,7 @@ unsigned int * FUN_00233fcc(unsigned int param_1,unsigned int param_2)
     puVar1 = (unsigned int *)0x18;
     FUN_002c222c();
     if (puVar1 != (unsigned int *)0x0) {
+      puVar2 = temp_v1;
       *puVar1 = 0x422184;
       puVar1[1] = 0;
       puVar1[2] = 0xe7e3ffff;
@@ -71,7 +74,7 @@ unsigned int * FUN_00233fcc(unsigned int param_1,unsigned int param_2)
       puVar1[2] = 0xffffffff;
       puVar1[-3] = 0x422204;
       puVar1[-2] = 0;
-      puVar2 = (unsigned int *)FUN_002baa40(temp_v1,0);
+      FUN_002baa40(temp_v1,0);
       temp_v0 = puVar2[1];
       *puVar1 = *puVar2;
       puVar1[1] = temp_v0;
@@ -82,6 +85,7 @@ unsigned int * FUN_00233fcc(unsigned int param_1,unsigned int param_2)
     puVar1 = (unsigned int *)0x18;
     FUN_002c222c();
     if (puVar1 != (unsigned int *)0x0) {
+      puVar2 = temp_v1;
       *puVar1 = 0x422184;
       puVar1[1] = 0;
       puVar1[2] = 0xe7e3ffff;
@@ -89,7 +93,7 @@ unsigned int * FUN_00233fcc(unsigned int param_1,unsigned int param_2)
       puVar1[2] = 0xffffffff;
       puVar1[-3] = 0x4221c4;
       puVar1[-2] = 0;
-      puVar2 = (unsigned int *)FUN_002baa40(temp_v1,0);
+      FUN_002baa40(temp_v1,0);
       temp_v0 = puVar2[1];
       *puVar1 = *puVar2;
       puVar1[1] = temp_v0;
@@ -100,6 +104,7 @@ unsigned int * FUN_00233fcc(unsigned int param_1,unsigned int param_2)
     puVar1 = (unsigned int *)0x18;
     FUN_002c222c();
     if (puVar1 != (unsigned int *)0x0) {
+      puVar2 = temp_v1;
       *puVar1 = 0x422184;
       puVar1[1] = 0;
       puVar1[2] = 0xe7e3ffff;
@@ -107,7 +112,7 @@ unsigned int * FUN_00233fcc(unsigned int param_1,unsigned int param_2)
       puVar1[2] = 0xffffffff;
       puVar1[-3] = 0x422238;
       puVar1[-2] = 0;
-      puVar2 = (unsigned int *)FUN_002baa40(temp_v1,0);
+      FUN_002baa40(temp_v1,0);
       temp_v0 = puVar2[1];
       *puVar1 = *puVar2;
       puVar1[1] = temp_v0;
@@ -118,6 +123,7 @@ unsigned int * FUN_00233fcc(unsigned int param_1,unsigned int param_2)
     puVar1 = (unsigned int *)0x18;
     FUN_002c222c();
     if (puVar1 != (unsigned int *)0x0) {
+      puVar2 = temp_v1;
       *puVar1 = 0x422184;
       puVar1[1] = 0;
       puVar1[2] = 0xe7e3ffff;
@@ -125,7 +131,7 @@ unsigned int * FUN_00233fcc(unsigned int param_1,unsigned int param_2)
       puVar1[2] = 0xffffffff;
       puVar1[-3] = 0x4221ec;
       puVar1[-2] = 0;
-      puVar2 = (unsigned int *)FUN_002baa40(temp_v1,0);
+      FUN_002baa40(temp_v1,0);
       temp_v0 = puVar2[1];
       *puVar1 = *puVar2;
       puVar1[1] = temp_v0;
@@ -136,6 +142,7 @@ unsigned int * FUN_00233fcc(unsigned int param_1,unsigned int param_2)
     puVar1 = (unsigned int *)0x1c;
     FUN_002c222c();
     if (puVar1 != (unsigned int *)0x0) {
+      puVar2 = temp_v1;
       *puVar1 = 0x422184;
       puVar1[1] = 0;
       puVar1[2] = 0xe7e3ffff;
@@ -143,7 +150,7 @@ unsigned int * FUN_00233fcc(unsigned int param_1,unsigned int param_2)
       puVar1[2] = 0xffffffff;
       puVar1[-3] = 0x422298;
       puVar1[-2] = 0;
-      puVar2 = (unsigned int *)FUN_002baa40(temp_v1,0);
+      FUN_002baa40(temp_v1,0);
       temp_v0 = puVar2[1];
       *puVar1 = *puVar2;
       puVar1[1] = temp_v0;
@@ -154,6 +161,7 @@ unsigned int * FUN_00233fcc(unsigned int param_1,unsigned int param_2)
     puVar1 = (unsigned int *)0x18;
     FUN_002c222c();
     if (puVar1 != (unsigned int *)0x0) {
+      puVar2 = temp_v1;
       *puVar1 = 0x422184;
       puVar1[1] = 0;
       puVar1[2] = 0xe7e3ffff;
@@ -161,7 +169,7 @@ unsigned int * FUN_00233fcc(unsigned int param_1,unsigned int param_2)
       puVar1[2] = 0xffffffff;
       puVar1[-3] = 0x422268;
       puVar1[-2] = 0;
-      puVar2 = (unsigned int *)FUN_002baa40(temp_v1,0);
+      FUN_002baa40(temp_v1,0);
       temp_v0 = puVar2[1];
       *puVar1 = *puVar2;
       puVar1[1] = temp_v0;

@@ -7,20 +7,20 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-extern int FUN_002adc88(void);
-extern unsigned int FUN_002c5300(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002adc88. */
+/* Supplied declaration required: FUN_002c5300. */
 /* Supplied declaration required: rt_memcpy. */
 
 
 unsigned int FUN_0033f6d8(void)
 
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
+/* irregular: 3 native warning(s); review required */
+  unsigned int temp_v0;
   
-  temp_v0 = FUN_002adc88();
-  temp_v1 = FUN_002c5300(0x100,0x100,0,0x44,1);
-  rt_memcpy(temp_v1,temp_v0 + 0x100,0x44);
-  return temp_v1;
+  FUN_002adc88();
+  temp_v0 = 0x100;
+  FUN_002c5300(0x100,0x100,0,0x44,1);
+  rt_memcpy();
+  return temp_v0;
 }

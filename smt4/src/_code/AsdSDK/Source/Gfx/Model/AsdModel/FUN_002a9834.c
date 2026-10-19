@@ -48,7 +48,7 @@ extern int FUN_002b4414(int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002c2ff0. */
 extern unsigned int FUN_002c300c(void);
 /* Supplied declaration required: FUN_002c30c4. */
-extern unsigned int FUN_002c5300(unsigned int, unsigned int, unsigned int, int);
+/* Supplied declaration required: FUN_002c5300. */
 /* Supplied declaration required: nw_gfx_SceneBuilder_CreateObject. */
 /* Supplied declaration required: nw_gfx_SceneHelper_ResolveReferenceImpl. */
 /* Supplied declaration required: nw_gfx_SceneNode_IsCircularReference. */
@@ -59,7 +59,7 @@ extern int nw_ut_ResDicPatricia_Get(int *, int, unsigned int);
 void FUN_002a9834(int *param_1,unsigned int *param_2,unsigned int param_3,int param_4)
 
 {
-/* irregular: 2 goto(s); 14 native warning(s); review required */
+/* irregular: 2 goto(s); 15 native warning(s); review required */
   int *piVar1;
   int *piVar2;
   unsigned short temp_v0;
@@ -114,12 +114,13 @@ void FUN_002a9834(int *param_1,unsigned int *param_2,unsigned int param_3,int pa
     FUN_002a6264(param_1,0x2030000);
   }
   temp_v1 = FUN_002c2ff0();
-  temp_v2 = nw_gfx_res_ResGraphicsFile_Setup(param_1,temp_v1,*param_1);
-  temp_v3 = DAT_00464b6c;
-  if (((int)temp_v2 < 0) && ((temp_v2 & 2) != 0)) {
+  piVar15 = param_1;
+  nw_gfx_res_ResGraphicsFile_Setup(param_1,temp_v1,*param_1);
+  temp_v2 = DAT_00464b6c;
+  if (((int)piVar15 < 0) && (((unsigned int)piVar15 & 2) != 0)) {
     temp_v1 = FUN_002c2ff0();
-    nw_gfx_res_ResGraphicsFile_Setup(param_1,temp_v1,temp_v3);
-    param_3 = temp_v3;
+    nw_gfx_res_ResGraphicsFile_Setup(param_1,temp_v1,temp_v2);
+    param_3 = temp_v2;
   }
   temp_v13 = (int *)FUN_002c2ff0();
   temp_v14 = (int *)0x0;
@@ -129,8 +130,9 @@ void FUN_002a9834(int *param_1,unsigned int *param_2,unsigned int param_3,int pa
   temp_v12 = 0;
   param_2[10] = *(unsigned int *)(*param_1 + 0x1c);
   temp_v11 = 1;
-  temp_v3 = FUN_002c5300(0x100,0x100,0,param_2[10] << 2);
-  param_2[9] = temp_v3;
+  temp_v2 = 0x100;
+  FUN_002c5300(0x100,0x100,0,param_2[10] << 2);
+  param_2[9] = temp_v2;
   temp_v6 = *(int *)(*param_1 + 0x20);
   if (temp_v6 != 0) {
     temp_v6 = *param_1 + 0x20 + temp_v6;
@@ -144,8 +146,8 @@ void FUN_002a9834(int *param_1,unsigned int *param_2,unsigned int param_3,int pa
   if (temp_v6 == 0) {
     param_3 = 0;
   }
-  temp_v3 = param_3 + *(int *)(*param_1 + 0x1c) * 0x10;
-  if (param_3 != temp_v3) {
+  temp_v2 = param_3 + *(int *)(*param_1 + 0x1c) * 0x10;
+  if (param_3 != temp_v2) {
     do {
       if (param_4 != 0) {
         temp_v6 = *(int *)(param_4 + 0x2c);
@@ -175,7 +177,7 @@ void FUN_002a9834(int *param_1,unsigned int *param_2,unsigned int param_3,int pa
           temp_v6 = 0;
         }
         temp_v1 = FUN_002c2ff0();
-        temp_v4 = FUN_002c300c();
+        temp_v3 = FUN_002c300c();
         temp_v20 = 4;
         temp_v19 = 8;
         temp_v26 = 1;
@@ -187,7 +189,7 @@ void FUN_002a9834(int *param_1,unsigned int *param_2,unsigned int param_3,int pa
         temp_v23 = 0;
         temp_v25 = 0;
         temp_v17 = temp_v6;
-        nw_gfx_SceneBuilder_CreateObject(piVar15,temp_v1,temp_v4);
+        nw_gfx_SceneBuilder_CreateObject(piVar15,temp_v1,temp_v3);
         if (piVar15 != (int *)0x0) {
           piVar8 = (int *)(**(romwright_code **)(*piVar15 + 8))(piVar15);
           do {
@@ -204,10 +206,10 @@ LAB_002a9af8:
         temp_v12 = 1;
         *param_2 = *param_2 | 2;
       }
-      temp_v2 = temp_v16 & 0x3fffffff;
-      if (((int)temp_v15 - (int)temp_v14) >> 2 >= (int)temp_v2) {
-        if (temp_v2 != 0) {
-          temp_v6 = temp_v2 << 1;
+      temp_v4 = temp_v16 & 0x3fffffff;
+      if (((int)temp_v15 - (int)temp_v14) >> 2 >= (int)temp_v4) {
+        if (temp_v4 != 0) {
+          temp_v6 = temp_v4 << 1;
         }
         else {
           temp_v6 = 1;
@@ -239,21 +241,21 @@ LAB_002a9bac:
       temp_v10 = 1;
       *(int **)(param_2[9] + temp_v8 * 4) = piVar15;
       temp_v8 = temp_v8 + 1;
-    } while (param_3 != temp_v3);
+    } while (param_3 != temp_v2);
     if (temp_v12 != 0) {
       DAT_00464b30 = DAT_00464b30 + 1;
     }
   }
-  temp_v3 = *(unsigned int *)param_2[9];
-  param_2[0xb] = temp_v3;
+  temp_v2 = *(unsigned int *)param_2[9];
+  param_2[0xb] = temp_v2;
   if (temp_v10) {
-    puVar9 = *(unsigned int **)(temp_v3 + 8);
+    puVar9 = *(unsigned int **)(temp_v2 + 8);
     if ((puVar9 != (unsigned int *)0x0) && ((~*puVar9 & 0x40000092) != 0)) {
       puVar9 = (unsigned int *)0x0;
     }
-    temp_v3 = puVar9[0x38];
-    if (temp_v3 != 0) {
-      temp_v6 = temp_v3 + (int)(puVar9 + 0x38);
+    temp_v2 = puVar9[0x38];
+    if (temp_v2 != 0) {
+      temp_v6 = temp_v2 + (int)(puVar9 + 0x38);
     }
     else {
       temp_v6 = 0;
@@ -391,13 +393,13 @@ LAB_002a9bac:
          ((temp_v7 != temp_v8 && (nw_gfx_SceneNode_IsCircularReference(), temp_v7 == 0)))) &&
         (*(int *)(temp_v8 + 0xc) == 0)))) {
       temp_v7 = 1;
-      temp_v3 = *(unsigned int *)(temp_v6 + 0x20) & 0x3fffffff;
-      if ((int)temp_v3 <= (*(int *)(temp_v6 + 0x1c) - *(int *)(temp_v6 + 0x18)) >> 2) {
-        if (temp_v3 == 0) {
+      temp_v2 = *(unsigned int *)(temp_v6 + 0x20) & 0x3fffffff;
+      if ((int)temp_v2 <= (*(int *)(temp_v6 + 0x1c) - *(int *)(temp_v6 + 0x18)) >> 2) {
+        if (temp_v2 == 0) {
           temp_v7 = 1;
         }
         else {
-          temp_v7 = temp_v3 << 1;
+          temp_v7 = temp_v2 << 1;
         }
         temp_v7 = FUN_002af294(temp_v6 + 0x14,temp_v7);
         if (temp_v7 == 0) {

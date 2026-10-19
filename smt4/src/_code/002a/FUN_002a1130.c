@@ -2,67 +2,27 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
-typedef int romwright_code();
-extern unsigned char uRam00000000; /* 0x0 */
-extern signed char cRam00000003; /* 0x3 */
+/* Supplied declaration required: FUN_002baa40. */
+extern unsigned int *FUN_002bad5c(unsigned char *);
 
 
-/* WARNING: Removing unreachable block (ram,0x002a1180) */
-/* WARNING: Removing unreachable block (ram,0x002a1190) */
-/* WARNING: Removing unreachable block (ram,0x002a11d4) */
-/* WARNING: Removing unreachable block (ram,0x002a11dc) */
-/* WARNING: Removing unreachable block (ram,0x002a11e0) */
-/* WARNING: Removing unreachable block (ram,0x002a11e4) */
-/* WARNING: Removing unreachable block (ram,0x002a11e8) */
-/* WARNING: Removing unreachable block (ram,0x002a1194) */
-/* WARNING: Removing unreachable block (ram,0x002a11a0) */
-/* WARNING: Removing unreachable block (ram,0x002a11a8) */
-/* WARNING: Removing unreachable block (ram,0x002a11ac) */
-/* WARNING: Removing unreachable block (ram,0x002a11b0) */
-/* WARNING: Removing unreachable block (ram,0x002a11cc) */
-/* WARNING: Removing unreachable block (ram,0x002a11b4) */
-/* WARNING: Removing unreachable block (ram,0x002a11c4) */
-
-void FUN_002a1130(unsigned int *param_1,unsigned int param_2,unsigned short *param_3)
+unsigned int * FUN_002a1130(unsigned char *param_1,unsigned char param_2)
 
 {
-/* irregular: irregular input(s): in_ZR, in_s0, in_s1, in_s10, in_s11, in_s2, in_s3, in_s4, in_s5, in_s6, in_s7, in_s8, in_s9; 31 native warning(s); review required */
-  romwright_code *UNRECOVERED_JUMPTABLE;
-  char in_ZR;
-  unsigned int in_s0;
-  unsigned int in_s1;
-  unsigned int in_s2;
-  unsigned int in_s3;
-  unsigned int in_s4;
-  unsigned int in_s5;
-  unsigned int in_s6;
-  unsigned int in_s7;
-  unsigned int in_s8;
-  unsigned int in_s9;
-  unsigned int in_s10;
-  unsigned int in_s11;
+/* irregular: 1 native warning(s); review required */
+  unsigned int *puVar1;
+  unsigned int *puVar2;
+  unsigned int temp_v0;
+  unsigned int temp_v1 [2];
   
-  if (in_ZR != '\0') {
-    param_1[4] = in_s0;
-    param_1[3] = in_s1;
-    param_1[2] = in_s2;
-    *param_1 = in_s3;
-    param_1[8] = in_s4;
-    param_1[7] = in_s5;
-    param_1[6] = in_s6;
-    param_1[5] = in_s7;
-    param_1[0xc] = in_s8;
-    param_1[0xb] = in_s9;
-    param_1[10] = in_s10;
-    param_1[9] = in_s11;
-    return;
-  }
-  if (cRam00000003 == '\0') {
-    *param_3 = 0xa8;
-    return;
-  }
-                    /* WARNING: Could not recover jumptable at 0x002a11f0. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-  (*UNRECOVERED_JUMPTABLE)(0,uRam00000000);
-  return;
+  puVar2 = temp_v1;
+  *param_1 = param_2;
+  puVar1 = (unsigned int *)FUN_002bad5c(param_1 + 4);
+  puVar1[2] = 0;
+  puVar1[3] = 0;
+  FUN_002baa40();
+  temp_v0 = puVar2[1];
+  *puVar1 = *puVar2;
+  puVar1[1] = temp_v0;
+  return puVar1 + -1;
 }

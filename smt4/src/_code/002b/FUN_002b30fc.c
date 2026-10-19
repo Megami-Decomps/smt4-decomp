@@ -2,45 +2,34 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
-typedef int romwright_code();
+/* stack frame of param_1: 1 slot(s), 4 byte(s) */
+typedef struct {
+    unsigned int sp8; /* 0x8: local_8 */
+} param_1_stack;
+
 extern unsigned int DAT_0046513c; /* 0x46513c */
-extern int *DAT_00465148; /* 0x465148 */
+extern unsigned int DAT_00465140; /* 0x465140 */
+extern unsigned int DAT_00465144; /* 0x465144 */
+extern unsigned int DAT_00465148; /* 0x465148 */
 extern int DAT_0046514c; /* 0x46514c */
+extern int DAT_00465150; /* 0x465150 */
+extern int DAT_00465154; /* 0x465154 */
+extern int DAT_00465158; /* 0x465158 */
 
-/* Supplied declaration required: FUN_00145370. */
-/* Supplied declaration required: FUN_001454f0. */
-/* Supplied declaration required: func_0x006b3880. */
 
-
-/* WARNING: Control flow encountered bad instruction data */
-/* WARNING: Instruction at (ram,0x002b33ee) overlaps instruction at (ram,0x002b33ec)
-    */
-
-void FUN_002b30fc(unsigned int param_1)
+unsigned int FUN_002b30fc(unsigned int param_1)
 
 {
-/* irregular: 8 native warning(s); review required */
-  int *piVar1;
-  int temp_v0;
-  romwright_code *unaff_r8;
-  
-  piVar1 = DAT_00465148;
-  if ((DAT_0046513c <= param_1) && (param_1 <= DAT_0046513c + DAT_0046514c)) {
-                    /* WARNING: Bad instruction - Truncating control flow here */
-    halt_baddata();
+  if ((param_1 < DAT_0046513c) || (DAT_0046513c + DAT_0046514c < param_1)) {
+    if ((DAT_00465140 <= param_1) && (param_1 <= DAT_00465150 + DAT_00465140)) {
+      return 1;
+    }
+    if ((DAT_00465144 <= param_1) && (param_1 <= DAT_00465154 + DAT_00465144)) {
+      return 2;
+    }
+    if ((DAT_00465148 <= param_1) && (param_1 <= DAT_00465158 + DAT_00465148)) {
+      return 3;
+    }
   }
-  temp_v0 = DAT_00465148[3];
-  if (temp_v0 < DAT_00465148[4] + temp_v0) {
-    do {
-      FUN_00145370(*(unsigned short *)(*piVar1 + temp_v0 * 0x20));
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < piVar1[4] + piVar1[3]);
-  }
-  if ((piVar1[0xd] & 0x200U) != 0) {
-    FUN_001454f0(1);
-  }
-  func_0x006b3880();
-  (*unaff_r8)();
-                    /* WARNING: Bad instruction - Truncating control flow here */
-  halt_baddata();
+  return 0;
 }

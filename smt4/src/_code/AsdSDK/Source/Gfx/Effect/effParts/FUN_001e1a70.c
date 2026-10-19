@@ -28,7 +28,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0028c6b8. */
 /* Supplied declaration required: FUN_002a3d58. */
 /* Supplied declaration required: FUN_002bf694. */
-extern unsigned int *FUN_002c32a0(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c32a0. */
 /* Supplied declaration required: FUN_002c415c. */
 /* Supplied declaration required: FUN_002c4938. */
 extern unsigned int *FUN_002c5c14(fn_001e1a70_arg0 *, unsigned char *, unsigned int, unsigned int);
@@ -38,7 +38,7 @@ extern unsigned int *FUN_002c5c14(fn_001e1a70_arg0 *, unsigned char *, unsigned 
 unsigned int * FUN_001e1a70(fn_001e1a70_arg0 *param_1)
 
 {
-/* irregular: 2 goto(s); 8 native warning(s); review required */
+/* irregular: 2 goto(s); 9 native warning(s); review required */
   unsigned int *puVar1;
   unsigned int *puVar2;
   unsigned int *puVar3;
@@ -54,8 +54,9 @@ unsigned int * FUN_001e1a70(fn_001e1a70_arg0 *param_1)
   unsigned char temp_v9 [4];
   
   puVar2 = (unsigned int *)FUN_002c5c14(param_1,temp_v9,1,0x80);
-  puVar3 = (unsigned int *)FUN_002c32a0(0x10000,0x100,0,0x90,0x10,1);
-  FUN_002c4938(puVar3,0x90);
+  puVar3 = (unsigned int *)0x10000;
+  FUN_002c32a0(0x10000,0x100,0,0x90,0x10,1);
+  FUN_002c4938();
   puVar3[0x20] = 0;
   puVar3[0x21] = 0;
   FUN_002a3d58(puVar3);

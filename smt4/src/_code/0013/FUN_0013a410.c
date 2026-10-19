@@ -11,23 +11,7 @@ typedef struct {
 
 extern unsigned char DAT_0044e458; /* 0x44e458 */
 extern signed char DAT_0044e459; /* 0x44e459 */
-#ifndef ROMWRIGHT_STORAGE_DAT_0044e45a_2_2_DEFINED
-#define ROMWRIGHT_STORAGE_DAT_0044e45a_2_2_DEFINED
-/* Storage views; not a recovered source structure. */
-union romwright_storage_DAT_0044e45a_2_2 {
-    unsigned short whole;
-    unsigned char u1[2];
-    signed char s1[2];
-    unsigned short u2[1];
-    short s2[1];
-};
-typedef char romwright_storage_DAT_0044e45a_2_2_size_check[(sizeof(union romwright_storage_DAT_0044e45a_2_2) == 2) ? 1 : -1];
-typedef char romwright_storage_DAT_0044e45a_2_2_u1_width_check[(sizeof(((union romwright_storage_DAT_0044e45a_2_2 *)0)->u1[0]) == 1) ? 1 : -1];
-typedef char romwright_storage_DAT_0044e45a_2_2_s1_width_check[(sizeof(((union romwright_storage_DAT_0044e45a_2_2 *)0)->s1[0]) == 1) ? 1 : -1];
-typedef char romwright_storage_DAT_0044e45a_2_2_u2_width_check[(sizeof(((union romwright_storage_DAT_0044e45a_2_2 *)0)->u2[0]) == 2) ? 1 : -1];
-typedef char romwright_storage_DAT_0044e45a_2_2_s2_width_check[(sizeof(((union romwright_storage_DAT_0044e45a_2_2 *)0)->s2[0]) == 2) ? 1 : -1];
-#endif
-extern union romwright_storage_DAT_0044e45a_2_2 DAT_0044e45a; /* 0x44e45a */
+extern signed char DAT_0044e45a; /* 0x44e45a */
 extern unsigned short DAT_0044e45c; /* 0x44e45c */
 extern unsigned short DAT_0044e45e; /* 0x44e45e */
 extern int DAT_0044e460; /* 0x44e460 */
@@ -36,27 +20,27 @@ extern unsigned int DAT_0044e474; /* 0x44e474 */
 extern unsigned char DAT_004c6484; /* 0x4c6484 */
 
 /* Supplied declaration required: FUN_002c131c. */
-extern int nn_dsp_CTR_DSP_LoadComponent(int, unsigned int, unsigned int, unsigned short, unsigned short, unsigned char *);
+/* Supplied declaration required: nn_dsp_CTR_DSP_LoadComponent. */
 
 
 void FUN_0013a410(void)
 
 {
-/* irregular: 1 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   int temp_v0;
   
   DAT_0044e458 = 0;
-  if ((char)DAT_0044e45a.whole != '\0') {
+  if (DAT_0044e45a != '\0') {
     if ((DAT_0044e460 == 0) || (DAT_0044e459 != '\0')) {
       temp_v0 = -0x375f5804;
     }
     else {
-      temp_v0 = nn_dsp_CTR_DSP_LoadComponent
-                        (DAT_0044e460,DAT_0044e470,DAT_0044e474,DAT_0044e45c,DAT_0044e45e,
-                         (unsigned char *)&DAT_0044e459);
+      temp_v0 = DAT_0044e460;
+      nn_dsp_CTR_DSP_LoadComponent
+                (DAT_0044e460,DAT_0044e470,DAT_0044e474,DAT_0044e45c,DAT_0044e45e,&DAT_0044e459);
     }
     if (temp_v0 < 0) {
-      FUN_002c131c(temp_v0,0x13a464);
+      FUN_002c131c();
     }
     temp_v0 = 0;
     do {
@@ -65,7 +49,7 @@ void FUN_0013a410(void)
       }
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < 8);
-    DAT_0044e45a.s1[0] = '\0';
+    DAT_0044e45a = '\0';
   }
   return;
 }

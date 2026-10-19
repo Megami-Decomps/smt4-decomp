@@ -25,7 +25,8 @@ unsigned int * FUN_0028c6b8(unsigned int *param_1)
   int temp_v4;
   
   temp_v0 = *(unsigned short *)(param_1 + 1);
-  puVar3 = (unsigned int *)FUN_002c32a0(0x10000,0x100,0,0x2c,0x10,1);
+  puVar3 = (unsigned int *)0x10000;
+  FUN_002c32a0(0x10000,0x100,0,0x2c,0x10,1);
   puVar3[1] = 0;
   puVar3[2] = 0;
   puVar3[3] = 0;
@@ -56,7 +57,8 @@ unsigned int * FUN_0028c6b8(unsigned int *param_1)
       temp_v1 = temp_v3;
     }
     if ((temp_v4 != 0 && temp_v3 != 0) && -1 < temp_v1) {
-      temp_v2 = FUN_002c32a0(0x10000,0x100,0,temp_v3,0x10,1);
+      temp_v2 = 0x10000;
+      FUN_002c32a0(0x10000,0x100,0,temp_v3,0x10,1);
       *(unsigned short *)(puVar3 + 3) = temp_v0;
       puVar3[6] = temp_v2;
       puVar3[4] = temp_v2;

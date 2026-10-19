@@ -1,11 +1,11 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `nw_snd_internal_WaveFileReader_ReadWaveInfo` (_code @ 0x3e64c0, 0x6 bytes) from smt4_v1.2.0.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `nw_snd_internal_WaveFileReader_ReadWaveInfo` (_code @ 0x3e64c0, 0xf0 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 /* Supplied declaration required: FUN_002bd808. */
-extern int func_0x003e8614(int);
-extern unsigned int func_0x003e8620(int, int);
-extern int func_0x003e862c(int, int);
+extern int FUN_003e8614(int);
+extern unsigned int FUN_003e8620(int, int);
+extern int nw_snd_internal_WaveFile_InfoBlockBody_GetChannelInfo(int, int);
 /* Supplied declaration required: rt_memcpy. */
 
 
@@ -32,13 +32,13 @@ unsigned int nw_snd_internal_WaveFileReader_ReadWaveInfo(int *param_1,unsigned c
   *(unsigned int *)(param_2 + 0x10) = *(unsigned int *)(*param_1 + 0xc);
   for (; temp_v4 < *(int *)(*param_1 + 0x14); temp_v4 = temp_v4 + 1) {
     if (temp_v4 < 2) {
-      temp_v1 = func_0x003e862c(*param_1,temp_v4);
+      temp_v1 = nw_snd_internal_WaveFile_InfoBlockBody_GetChannelInfo(*param_1,temp_v4);
       if (*(int *)(temp_v1 + 0xc) != 0) {
-        temp_v2 = func_0x003e8614(temp_v1);
+        temp_v2 = FUN_003e8614(temp_v1);
         rt_memcpy(param_2 + temp_v4 * 0x30 + 0x18,temp_v2,0x26);
         FUN_002bd808(param_2 + temp_v4 * 0x30 + 0x3e,temp_v2 + 0x26);
       }
-      temp_v3 = func_0x003e8620(temp_v1,param_1[1]);
+      temp_v3 = FUN_003e8620(temp_v1,param_1[1]);
       *(unsigned int *)(param_2 + temp_v4 * 0x30 + 0x14) = temp_v3;
     }
   }

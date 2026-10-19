@@ -18,13 +18,13 @@ extern unsigned char DAT_0044eb1c; /* 0x44eb1c */
 /* Supplied declaration required: FUN_002571b8. */
 /* Supplied declaration required: FUN_002bd420. */
 /* Supplied declaration required: FUN_002bfde4. */
-extern int FUN_002c32a0(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c32a0. */
 
 
 unsigned char * FUN_00242f94(unsigned long long *param_1,unsigned int param_2,int param_3)
 
 {
-/* irregular: 6 native warning(s); review required */
+/* irregular: 7 native warning(s); review required */
   int temp_v0;
   unsigned int temp_v1;
   unsigned int temp_v2;
@@ -39,14 +39,15 @@ unsigned char * FUN_00242f94(unsigned long long *param_1,unsigned int param_2,in
   temp_v3 = *param_1;
   temp_v1 = 0x43360000;
   temp_v2 = 0x42200000;
-  temp_v0 = FUN_002c32a0(0x10000,0x100,0,0x68,0x10,1);
+  temp_v0 = 0x10000;
+  FUN_002c32a0(0x10000,0x100,0,0x68,0x10,1);
   *(unsigned int *)(temp_v0 + 8) = temp_v1;
   *(unsigned int *)(temp_v0 + 0xc) = temp_v2;
   *(int *)(temp_v0 + 0x10) = (int)temp_v3;
   *(int *)(temp_v0 + 0x14) = (int)((unsigned long long)temp_v3 >> 0x20);
   *(unsigned int *)(temp_v0 + 4) = 0xc;
   *(unsigned int *)(temp_v0 + 0x18) = param_2;
-  FUN_002571b8(temp_v0,3);
+  FUN_002571b8();
   temp_v0 = FUN_002bfde4(1);
   if (temp_v0 == 0) {
     FUN_0024dd80(1);

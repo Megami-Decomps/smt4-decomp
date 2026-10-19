@@ -12,17 +12,18 @@ extern unsigned char DAT_004dae48; /* 0x4dae48 */
 
 /* Supplied declaration required: FUN_002b265c. */
 /* Supplied declaration required: FUN_002c4938. */
-extern int FUN_002c5300(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c5300. */
 
 
 int FUN_001fe514(void)
 
 {
-/* irregular: 2 native warning(s); review required */
+/* irregular: 3 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_002c5300(0x100,0x100,0,0xa8,1);
-  FUN_002c4938(temp_v0,0xa8);
+  temp_v0 = 0x100;
+  FUN_002c5300(0x100,0x100,0,0xa8,1);
+  FUN_002c4938();
   *(unsigned int *)(temp_v0 + 0xc) = 0xffffffff;
   *(unsigned int *)(temp_v0 + 0x10) = 0xffffffff;
   *(unsigned int *)(temp_v0 + 4) = 0;

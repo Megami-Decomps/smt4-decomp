@@ -2,30 +2,54 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: coprocessor_function (CALLOTHER). */
 
-
-/* WARNING: Control flow encountered bad instruction data */
-
-void nn_math_ARMv6_MTX44PivotC_FAST(unsigned int param_1)
+void nn_math_ARMv6_MTX44PivotC_FAST(float *param_1,int param_2)
 
 {
-/* irregular: irregular input(s): in_cr0, in_cr2, in_cr3, in_cr5, in_cr8, in_fpscr, in_s2, in_s4, in_s5; 13 native warning(s); review required */
-  unsigned int in_fpscr;
-  unsigned int in_cr0;
-  unsigned int in_cr2;
-  unsigned int in_cr3;
-  unsigned int in_cr5;
-  unsigned int in_cr8;
-  float in_s2;
-  float in_s4;
-  float in_s5;
+  float temp_v0;
+  float temp_v1;
+  float temp_v2;
+  float temp_v3;
   
-  *(unsigned int *)((param_1 >> 0x10) * 2) = param_1 >> 0x10;
-  VectorSignedToFloat(in_s4 - in_s5 * in_s2,(unsigned char)(in_fpscr >> 0x16) & 3);
-  coprocessor_function(10,0xf,4,in_cr2,in_cr8,in_cr3);
-  coprocessor_function(0,3,0,in_cr5,in_cr2,in_cr0);
-                    /* WARNING: Bad instruction - Truncating control flow here */
-  halt_baddata();
+  if (param_2 != 0 && param_2 != 4) {
+    if (param_2 == 2) {
+      *param_1 = -*param_1;
+      param_1[1] = -param_1[1];
+      param_1[2] = -param_1[2];
+      param_1[3] = -param_1[3];
+      param_1[4] = -param_1[4];
+      param_1[5] = -param_1[5];
+      param_1[6] = -param_1[6];
+      param_1[7] = -param_1[7];
+      return;
+    }
+    if (param_2 == 3) {
+      temp_v1 = *param_1;
+      temp_v0 = param_1[5];
+      temp_v2 = param_1[2];
+      temp_v3 = param_1[3];
+      param_1[5] = param_1[1];
+      *param_1 = -param_1[4];
+      param_1[1] = -temp_v0;
+      param_1[2] = -param_1[6];
+      param_1[3] = -param_1[7];
+      param_1[4] = temp_v1;
+      param_1[6] = temp_v2;
+      param_1[7] = temp_v3;
+      return;
+    }
+    temp_v1 = *param_1;
+    temp_v2 = param_1[1];
+    temp_v3 = param_1[2];
+    temp_v0 = param_1[7];
+    param_1[7] = -param_1[3];
+    *param_1 = param_1[4];
+    param_1[1] = param_1[5];
+    param_1[2] = param_1[6];
+    param_1[3] = temp_v0;
+    param_1[4] = -temp_v1;
+    param_1[5] = -temp_v2;
+    param_1[6] = -temp_v3;
+  }
+  return;
 }

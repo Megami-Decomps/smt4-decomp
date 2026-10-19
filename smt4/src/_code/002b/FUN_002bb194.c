@@ -1,44 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002bb194` (_code @ 0x2bb194, 0x78 bytes) from smt4_v1.2.0.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002bb194` (_code @ 0x2bb194, 0x6c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
-typedef int romwright_code();
-extern unsigned int DAT_004d4704; /* 0x4d4704 */
+/* stack frame of param_1: 1 slot(s), 4 byte(s) */
+typedef struct {
+    unsigned int sp8; /* 0x8: local_8 */
+} param_1_stack;
 
-/* Supplied declaration required: FUN_002ae038. */
-/* Supplied declaration required: nn_applet_CTR_detail_CallUtility. */
+extern signed char DAT_0044e363; /* 0x44e363 */
+
+extern int FUN_00129b14(void);
+/* Supplied declaration required: FUN_002c131c. */
+extern int nn_gxlow_CTR_ReleaseGpuRight(void);
 
 
-/* WARNING: Control flow encountered bad instruction data */
-
-void FUN_002bb194(unsigned int param_1)
+void FUN_002bb194(int param_1)
 
 {
-/* irregular: 7 native warning(s); review required */
-  unsigned char uStack00000000;
-  romwright_code *UNRECOVERED_JUMPTABLE;
-  int uStack_20;
-  unsigned int uStack_1c;
-  unsigned int uStack_18;
-  unsigned int uStack_14;
+/* irregular: 1 native warning(s); review required */
+  int temp_v0;
+  unsigned int temp_v1;
+  int temp_v2;
   
-  if (param_1 == 0) {
-                    /* WARNING: Bad instruction - Truncating control flow here */
-    halt_baddata();
+  if (param_1 != 0) {
+    DAT_0044e363 = 1;
+    temp_v0 = FUN_00129b14();
+    temp_v1 = 0x2bb1b8;
   }
-  if (param_1 >> 8 != 0) {
-    DAT_004d4704 = 0x3f800000;
-    uStack_20 = 0x3f800000;
-    uStack_1c = 0x3f800000;
-    uStack_18 = 0x3f800000;
-    uStack_14 = 0x3f800000;
-    FUN_002ae038(&uStack_20,param_1);
-                    /* WARNING: Treating indirect jump as return */
+  else {
+    if (DAT_0044e363 == '\0') {
+      return;
+    }
+    DAT_0044e363 = 0;
+    temp_v0 = nn_gxlow_CTR_ReleaseGpuRight();
+    temp_v2 = -0x275fd5fb;
+    if (temp_v0 != -0x275fd5fb) {
+      temp_v2 = -0x26ffe409;
+    }
+    if (temp_v0 == -0x275fd5fb || temp_v0 == temp_v2) {
+      return;
+    }
+    temp_v1 = 0x2bb1f4;
+  }
+  if (-1 < temp_v0) {
     return;
   }
-  nn_applet_CTR_detail_CallUtility(7,&uStack00000000,4);
-                    /* WARNING: Could not recover jumptable at 0x002bb45c. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-  (*UNRECOVERED_JUMPTABLE)();
+  FUN_002c131c(temp_v0,temp_v1);
   return;
 }

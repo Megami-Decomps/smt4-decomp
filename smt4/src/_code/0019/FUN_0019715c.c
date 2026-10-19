@@ -34,7 +34,7 @@ extern int FUN_0029efc0(int);
 /* Supplied declaration required: FUN_002be370. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: FUN_002be624. */
-extern int FUN_002be650(unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002be650. */
 extern int FUN_002bed98(int);
 extern int FUN_002beda4(void);
 /* Supplied declaration required: FUN_002bf288. */
@@ -45,14 +45,14 @@ extern int FUN_002beda4(void);
 void FUN_0019715c(int param_1,int param_2)
 
 {
-/* irregular: irregular input(s): in_fpscr; 16 native warning(s); review required */
+/* irregular: irregular input(s): in_fpscr; 17 native warning(s); review required */
   unsigned short temp_v0;
   int temp_v1;
   int temp_v2;
   int temp_v3;
   int temp_v4;
   int temp_v5;
-  int temp_v6;
+  unsigned int temp_v6;
   unsigned int temp_v7;
   int temp_v8;
   int temp_v9;
@@ -128,7 +128,8 @@ void FUN_0019715c(int param_1,int param_2)
           FUN_002bf288(2,0x1d,0x46e,*(short *)(temp_v4 + 8) + temp_v2,*(short *)(temp_v4 + 10) + temp_v3,
                        0x6a);
           temp_v5 = FUN_002bf4f8(0x1d,0x470);
-          temp_v6 = FUN_002be650(temp_v10,0);
+          temp_v6 = temp_v10;
+          FUN_002be650(temp_v10,0);
           if (temp_v6 != 0) {
             temp_v11 = 0xff;
             if ((temp_v14 == 0xb) && (temp_v7 = temp_v10, FUN_0028fc60(), temp_v7 == 0)) {
@@ -168,8 +169,9 @@ void FUN_0019715c(int param_1,int param_2)
           FUN_0028f694(*(short *)(temp_v1 + 8) + temp_v2,*(short *)(temp_v1 + 10) + temp_v3,
                        (int)*(short *)(temp_v8 + temp_v9 * 2 + 0xe0c));
           temp_v8 = FUN_002bf4f8(0x1d,0x477);
-          temp_v9 = FUN_002be650(temp_v10,0);
-          if (temp_v9 != 0) {
+          temp_v6 = temp_v10;
+          FUN_002be650(temp_v10,0);
+          if (temp_v6 != 0) {
             temp_v11 = 0xffffffff;
             if ((temp_v14 == 0xb) && (temp_v7 = temp_v10, FUN_0028fc60(), temp_v7 == 0)) {
               temp_v11 = 0x5a5a5aff;
@@ -178,7 +180,7 @@ void FUN_0019715c(int param_1,int param_2)
                                 (unsigned char)(in_fpscr >> 0x16) & 3);
             VectorSignedToFloat((int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v8 + 8) + temp_v2,
                                 (unsigned char)(in_fpscr >> 0x16) & 3);
-            FUN_002be5a4(3,temp_v11,temp_v9,(int)*(short *)(temp_v8 + 8));
+            FUN_002be5a4(3,temp_v11,temp_v6,(int)*(short *)(temp_v8 + 8));
           }
           temp_v8 = FUN_002bf4f8(0x1d,0x47a);
           temp_v11 = FUN_0028fb40(temp_v10);

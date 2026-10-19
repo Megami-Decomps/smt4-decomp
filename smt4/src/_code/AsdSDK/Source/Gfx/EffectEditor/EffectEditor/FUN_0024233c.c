@@ -62,7 +62,7 @@ extern unsigned int FUN_0024c3f8(void);
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002bf694. */
 /* Supplied declaration required: FUN_002bfde4. */
-extern int FUN_002c32a0(unsigned int, unsigned int, unsigned int, int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c32a0. */
 /* Supplied declaration required: FUN_002c415c. */
 extern int FUN_002c7a54(unsigned int, unsigned int);
 /* Supplied declaration required: rt_memcpy. */
@@ -72,7 +72,7 @@ extern int FUN_002c7a54(unsigned int, unsigned int);
 unsigned char * FUN_0024233c(unsigned int param_1,int param_2,unsigned int param_3)
 
 {
-/* irregular: 2 goto(s); irregular input(s): in_fpscr; 21 native warning(s); review required */
+/* irregular: 2 goto(s); irregular input(s): in_fpscr; 22 native warning(s); review required */
   int temp_v0;
   unsigned int *puVar2;
   int *piVar3;
@@ -89,10 +89,11 @@ unsigned char * FUN_0024233c(unsigned int param_1,int param_2,unsigned int param
   int iStack_2c;
   unsigned int uStack_28;
   
+  temp_v0 = 0x10000;
   temp_v8 = param_1;
   iStack_2c = param_2;
   uStack_28 = param_3;
-  temp_v0 = FUN_002c32a0(0x10000,0x100,0,param_3 * 0x2c,0x10,1);
+  FUN_002c32a0(0x10000,0x100,0,param_3 * 0x2c,0x10,1);
   temp_v4 = 0;
   temp_v3 = 0;
   temp_v6 = temp_v0 + param_3 * 0x18;

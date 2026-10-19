@@ -10,23 +10,21 @@ typedef struct {
 extern unsigned int DAT_00465124; /* 0x465124 */
 
 /* Supplied declaration required: FUN_002c3944. */
-extern int FUN_002c5300(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c5300. */
 /* Supplied declaration required: nn_os_CriticalSection_Enter. */
 /* Supplied declaration required: nn_os_CriticalSection_Leave. */
 
 
-int FUN_002c498c(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
+int FUN_002c498c(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
                 unsigned int param_5)
 
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  
+/* irregular: 4 native warning(s); review required */
   nn_os_CriticalSection_Enter(DAT_00465124);
-  temp_v0 = FUN_002c5300(param_1,param_2,param_3,param_4,param_5);
-  if (temp_v0 != 0) {
-    FUN_002c3944(temp_v0,param_4);
+  FUN_002c5300(param_1,param_2,param_3,param_4,param_5);
+  if (param_1 != 0) {
+    FUN_002c3944();
   }
   nn_os_CriticalSection_Leave(DAT_00465124);
-  return temp_v0;
+  return param_1;
 }

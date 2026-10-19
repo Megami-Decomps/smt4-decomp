@@ -1,100 +1,89 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002bfc24` (_code @ 0x2bfc24, 0x1a0 bytes) from smt4_v1.2.0.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002bfc24` (_code @ 0x2bfc24, 0x178 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
+/* stack frame of param_4: 1 slot(s), 4 byte(s) */
+typedef struct {
+    unsigned int spF0; /* 0xf0: local_f0 */
+} param_4_stack;
+
+extern unsigned char LAB_00126484; /* 0x126484 */
 extern unsigned char LAB_002bfda0; /* 0x2bfda0 */
 extern unsigned char LAB_002bfdac; /* 0x2bfdac */
 extern unsigned char LAB_002bfdb4; /* 0x2bfdb4 */
 extern unsigned char DAT_004c5634; /* 0x4c5634 */
-extern unsigned char DAT_004c5818; /* 0x4c5818 */
-extern unsigned char DAT_004c581a; /* 0x4c581a */
-extern unsigned char DAT_004e3c58; /* 0x4e3c58 */
+extern signed char DAT_004c581a; /* 0x4c581a */
 
-/* Unsupported intrinsic, declaration required: coprocessor_store (CALLOTHER). */
 /* Supplied declaration required: FUN_00126468. */
+/* Supplied declaration required: FUN_002b6480. */
 /* Supplied declaration required: FUN_002b64a0. */
 /* Supplied declaration required: FUN_002be624. */
-extern unsigned int FUN_002c1d5c(void);
+/* Supplied declaration required: FUN_002bf694. */
+extern int FUN_002c1d5c(void);
 /* Supplied declaration required: FUN_002c3940. */
-extern unsigned int FUN_002c564c(unsigned int);
+extern int FUN_002c564c(unsigned int);
 
 
-/* WARNING: Control flow encountered bad instruction data */
-
-unsigned char FUN_002bfc24(unsigned int param_1,unsigned int param_2,int param_3,unsigned int param_4)
+unsigned int FUN_002bfc24(unsigned int param_1,unsigned int param_2,int param_3,unsigned char param_4)
 
 {
-/* irregular: 2 goto(s); irregular input(s): in_cr15, in_s10, in_s11, in_s6, in_s7, in_s8, in_s9; 7 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned char *pbVar2;
-  unsigned int *puVar3;
+/* irregular: irregular input(s): in_d0; 6 native warning(s); review required */
+  int temp_v0;
+  char *pcVar2;
+  unsigned char *puVar3;
   unsigned int temp_v1;
-  unsigned char temp_v2;
-  unsigned int in_cr15;
-  unsigned int in_s6;
-  unsigned int in_s7;
-  unsigned int in_s8;
-  unsigned int in_s9;
-  unsigned int in_s10;
-  unsigned int in_s11;
+  unsigned long long in_d0;
+  unsigned char temp_v2 [64];
   unsigned char temp_v3 [64];
-  unsigned int temp_v4 [16];
-  unsigned char temp_v5 [72];
+  unsigned char temp_v4 [72];
   
+  FUN_002c3940(temp_v2,0x40);
   FUN_002c3940(temp_v3,0x40);
   FUN_002c3940(temp_v4,0x40);
-  FUN_002c3940(temp_v5,0x40);
   temp_v0 = FUN_002c564c(1);
-  temp_v2 = 0;
-  if (temp_v0 == 0) {
-    temp_v0 = FUN_002c1d5c();
-    temp_v2 = 0;
-    if (temp_v0 == 0) {
-      temp_v0 = (unsigned int)DAT_004c581a;
-      temp_v2 = 0;
-      if ((temp_v0 == 0) && (temp_v2 = param_3 == 0, !temp_v2)) {
-        FUN_002be624(temp_v4,&LAB_002bfda0);
-        FUN_002be624(temp_v5,&LAB_002bfdac,param_2);
-        FUN_002b64a0(temp_v4,temp_v5);
-        puVar3 = temp_v4;
-        FUN_002be624(temp_v3,&LAB_002bfdb4);
-        FUN_00126468();
-        temp_v1 = 0;
-        do {
-          pbVar2 = &DAT_004c5634 + temp_v1 * 0x78;
-          while( 1 ) {
-            temp_v0 = (unsigned int)*pbVar2;
-            if (temp_v0 == 0) {
-              temp_v2 = temp_v1 == 0xffffffff;
-              if (!temp_v2) {
-                *puVar3 = in_s6;
-                puVar3[1] = in_s7;
-                puVar3[2] = in_s8;
-                puVar3[3] = in_s9;
-                puVar3[4] = in_s10;
-                puVar3[5] = in_s11;
-                coprocessor_store(0xf,in_cr15,puVar3 + 6);
-                    /* WARNING: Bad instruction - Truncating control flow here */
-                halt_baddata();
-              }
-              goto LAB_002bfd8c;
-            }
-            temp_v1 = temp_v1 + 1;
-            temp_v2 = temp_v1 == 4;
-            if ((int)temp_v1 >= 4) goto LAB_002bfd8c;
-            if (temp_v1 < 4) break;
-            pbVar2 = (unsigned char *)0x0;
-          }
-        } while( 1 );
+  if ((((temp_v0 != 0) || (temp_v0 = FUN_002c1d5c(), temp_v0 != 0)) || (DAT_004c581a != '\0')) ||
+     (param_3 == 0)) {
+    return 0xffffffff;
+  }
+  FUN_002be624(temp_v3,&LAB_002bfda0);
+  FUN_002be624(temp_v4,&LAB_002bfdac,param_2);
+  FUN_002b64a0(temp_v3,temp_v4);
+  FUN_002be624(temp_v2,&LAB_002bfdb4,temp_v3);
+  FUN_00126468();
+  temp_v1 = 0;
+  do {
+    pcVar2 = (char *)(&DAT_004c5634 + temp_v1 * 0x78);
+    while( 1 ) {
+      if (*pcVar2 == '\0') {
+        if (temp_v1 == 0xffffffff) {
+          return 0xffffffff;
+        }
+        if (temp_v1 >= 4) {
+          return 0xffffffff;
+        }
+        temp_v0 = temp_v1 * 0x78;
+        puVar3 = &DAT_004c5634 + temp_v0;
+        if (puVar3 == (unsigned char *)0x0) {
+          return 0xffffffff;
+        }
+        *(unsigned int *)(temp_v0 + 0x4c569c) = 0;
+        *(unsigned char *)(temp_v0 + 0x4c56a8) = param_4;
+        *puVar3 = 1;
+        *(unsigned int *)(temp_v0 + 0x4c5688) = param_2;
+        *(unsigned int *)(temp_v0 + 0x4c5684) = param_1;
+        *(int *)(temp_v0 + 0x4c568c) = (int)in_d0;
+        *(int *)(temp_v0 + 0x4c5690) = (int)((unsigned long long)in_d0 >> 0x20);
+        *(char *)(temp_v0 + 0x4c56a9) = (char)param_3;
+        FUN_002bf694(temp_v0 + 0x4c5635,temp_v2);
+        FUN_002b6480(temp_v2,0,3,&LAB_00126484,puVar3);
+        return temp_v1;
       }
+      temp_v1 = temp_v1 + 1;
+      if ((int)temp_v1 >= 4) {
+        return 0xffffffff;
+      }
+      if (temp_v1 < 4) break;
+      pcVar2 = (char *)0x0;
     }
-  }
-LAB_002bfd8c:
-  if (!temp_v2) {
-    return DAT_004c5818;
-  }
-  if (((param_4 & 1) == 0) && (*(int *)(&DAT_004e3c58 + temp_v0 * 4) == 1)) {
-    return 1;
-  }
-  return 0;
+  } while( 1 );
 }

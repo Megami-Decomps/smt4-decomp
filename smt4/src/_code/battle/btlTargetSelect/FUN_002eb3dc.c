@@ -32,7 +32,7 @@ extern unsigned int FUN_0027db08(unsigned int);
 extern unsigned char FUN_0029e9cc(fn_002eb3dc_arg1 *);
 /* Supplied declaration required: FUN_002b06c4. */
 extern unsigned int FUN_002bce30(fn_002eb3dc_arg1 *, unsigned int);
-extern unsigned int FUN_002bd06c(fn_002eb3dc_arg1 *);
+/* Supplied declaration required: FUN_002bd06c. */
 /* Supplied declaration required: FUN_002be624. */
 
 
@@ -41,9 +41,10 @@ void FUN_002eb3dc(unsigned int *param_1,fn_002eb3dc_arg1 *param_2,unsigned int p
                  unsigned char param_8)
 
 {
-/* irregular: 3 native warning(s); review required */
+/* irregular: 4 native warning(s); review required */
   int *piVar1;
   unsigned char temp_v0;
+  fn_002eb3dc_arg1 *pfVar3;
   unsigned int temp_v1;
   int temp_v2;
   float temp_v3;
@@ -59,8 +60,9 @@ void FUN_002eb3dc(unsigned int *param_1,fn_002eb3dc_arg1 *param_2,unsigned int p
   uStack_2c = param_3;
   temp_v5 = param_4;
   FUN_002b06c4();
-  temp_v1 = FUN_002bd06c(temp_v4);
-  FUN_002be624(*piVar1 + 4,&LAB_002eb5ac,temp_v1);
+  pfVar3 = temp_v4;
+  FUN_002bd06c(temp_v4);
+  FUN_002be624(*piVar1 + 4,&LAB_002eb5ac,pfVar3);
   temp_v1 = FUN_002bce30(temp_v4,0);
   FUN_002be624(*piVar1 + 0x2c,&LAB_002eb5ac,temp_v1);
   temp_v0 = FUN_0029e9cc(temp_v4);

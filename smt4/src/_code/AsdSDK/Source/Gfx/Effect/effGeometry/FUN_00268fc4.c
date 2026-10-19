@@ -18,13 +18,13 @@ extern unsigned int DAT_00473814; /* 0x473814 */
 extern unsigned int FUN_002693e4(void);
 /* Supplied declaration required: FUN_002694f8. */
 /* Supplied declaration required: FUN_002c222c. */
-extern unsigned short *FUN_002c32a0(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c32a0. */
 
 
 unsigned short * FUN_00268fc4(unsigned short *param_1)
 
 {
-/* irregular: 4 native warning(s); review required */
+/* irregular: 5 native warning(s); review required */
   unsigned short temp_v0;
   unsigned int temp_v1;
   unsigned short *puVar3;
@@ -40,7 +40,8 @@ unsigned short * FUN_00268fc4(unsigned short *param_1)
   if ((temp_v0 & 0x200) != 0) {
     temp_v4 = *(unsigned int *)(*(int *)(param_1 + 6) + 0x14);
     temp_v5 = *(unsigned int *)(*(int *)(param_1 + 6) + 4) & 0xffff;
-    puVar3 = (unsigned short *)FUN_002c32a0(0x10000,0x100,0,0x58,0x10,1);
+    puVar3 = (unsigned short *)0x10000;
+    FUN_002c32a0(0x10000,0x100,0,0x58,0x10,1);
     *puVar3 = 0x300;
     puVar3[1] = 0;
     FUN_001f6998(temp_v5,temp_v4,0);
@@ -63,7 +64,8 @@ unsigned short * FUN_00268fc4(unsigned short *param_1)
   else {
     temp_v6 = *(unsigned int *)(*(int *)(param_1 + 4) + 0xc);
     temp_v8 = *(int *)(*(int *)(param_1 + 4) + 0x14);
-    puVar3 = (unsigned short *)FUN_002c32a0(0x10000,0x100,0,0x58,0x10,1);
+    puVar3 = (unsigned short *)0x10000;
+    FUN_002c32a0(0x10000,0x100,0,0x58,0x10,1);
     temp_v2 = 0x7e8;
     FUN_002c222c(0x7e8,param_1);
     if (temp_v2 == 0) {

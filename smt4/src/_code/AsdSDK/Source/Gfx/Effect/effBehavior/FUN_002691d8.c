@@ -7,14 +7,14 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_3_stack;
 
-extern unsigned short *FUN_002c32a0(unsigned int, unsigned int, unsigned int, int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c32a0. */
 /* Supplied declaration required: rt_memcpy. */
 
 
 unsigned short * FUN_002691d8(int param_1,int param_2,int param_3)
 
 {
-/* irregular: 1 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   unsigned short *puVar1;
   unsigned int *puVar2;
   unsigned short *puVar3;
@@ -23,10 +23,10 @@ unsigned short * FUN_002691d8(int param_1,int param_2,int param_3)
   
   temp_v0 = *(int *)(param_1 * 0x14 + 0x47359c);
   temp_v1 = param_2 * *(int *)(param_3 + 0xc0) * *(int *)(param_3 + 0xc4) + param_2;
-  puVar1 = (unsigned short *)
-           FUN_002c32a0(0x10000,0x100,0,
-                        *(int *)(param_1 * 0x14 + 0x473598) * param_2 + temp_v1 * 0x28 + temp_v0 * 2 +
-                        0x30,0x10,1);
+  puVar1 = (unsigned short *)0x10000;
+  FUN_002c32a0(0x10000,0x100,0,
+               *(int *)(param_1 * 0x14 + 0x473598) * param_2 + temp_v1 * 0x28 + temp_v0 * 2 + 0x30,0x10,
+               1);
   puVar3 = puVar1 + 0x18 + temp_v1 * 0x14;
   *(unsigned short **)(puVar1 + 0xc) = puVar1 + 0x18;
   *(int *)(puVar1 + 0x12) = (int)puVar3 + temp_v0;

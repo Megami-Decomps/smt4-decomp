@@ -2,26 +2,25 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
-extern unsigned int uRam00000004; /* 0x4 */
+/* Supplied declaration required: FUN_002bd420. */
 
 
-/* WARNING: Control flow encountered bad instruction data */
-
-void FUN_002bd0f8(unsigned int param_1,int param_2,int param_3)
+int FUN_002bd0f8(int param_1,int *param_2,int param_3,int param_4)
 
 {
-/* irregular: 4 native warning(s); review required */
+/* irregular: 1 native warning(s); review required */
   int temp_v0;
-  int unaff_r6;
   
-  if (param_2 != 0 && param_3 != 0) {
+  if (param_2 == (int *)0x0 || param_3 == 0) {
+    temp_v0 = 0;
+  }
+  else {
     for (temp_v0 = 0; *(short *)(param_3 + temp_v0 * 2) != 0; temp_v0 = temp_v0 + 1) {
     }
-    uRam00000004 = 0xb4;
-                    /* WARNING: Bad instruction - Truncating control flow here */
-    halt_baddata();
+    if (param_4 == 0) {
+      FUN_002bd420(param_3,param_1 + *param_2 * 2,temp_v0 << 1);
+    }
+    *param_2 = *param_2 + temp_v0;
   }
-  *(unsigned short *)(unaff_r6 + 2) = 0;
-                    /* WARNING: Bad instruction - Truncating control flow here */
-  halt_baddata();
+  return temp_v0;
 }

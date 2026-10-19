@@ -13,22 +13,25 @@ extern unsigned int DAT_004e23e0; /* 0x4e23e0 */
 
 /* Supplied declaration required: FUN_00121774. */
 extern int FUN_002bf684(unsigned char *);
-extern unsigned int FUN_002c5300(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c5300. */
 extern unsigned int nw_snd_internal_SoundArchiveFile_FileHeader_GetStringBlockSize(unsigned char *);
 
 
 unsigned int FUN_0010b9e4(void)
 
 {
-/* irregular: 1 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   int temp_v0;
   unsigned int temp_v1;
+  unsigned int temp_v2;
   
   temp_v0 = FUN_002bf684(&DAT_004e1f68);
   if (temp_v0 != 0) {
     temp_v1 = nw_snd_internal_SoundArchiveFile_FileHeader_GetStringBlockSize(&DAT_004e2094);
-    DAT_004e23e0 = FUN_002c5300(0x10000,0x100,0,temp_v1,1);
-    FUN_00121774(&DAT_004e1f68,DAT_004e23e0,temp_v1);
+    temp_v2 = 0x10000;
+    FUN_002c5300(0x10000,0x100,0,temp_v1,1);
+    DAT_004e23e0 = temp_v2;
+    FUN_00121774(&DAT_004e1f68,temp_v2,temp_v1);
   }
   return DAT_004e23e0;
 }

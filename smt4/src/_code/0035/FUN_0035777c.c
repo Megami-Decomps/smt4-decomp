@@ -16,14 +16,14 @@ extern int FUN_0011c834(void);
 /* Supplied declaration required: FUN_00358d24. */
 /* Supplied declaration required: FUN_00358f98. */
 /* Supplied declaration required: nn_cec_CTR_detail_InitializeCecControl. */
-extern unsigned char nn_cfg_CTR_Initialize(void);
+/* Supplied declaration required: nn_cfg_CTR_Initialize. */
 /* Supplied declaration required: nn_cfg_CTR_IsDebugMode. */
 
 
 void FUN_0035777c(void)
 
 {
-/* irregular: 5 native warning(s); review required */
+/* irregular: 6 native warning(s); review required */
   unsigned char temp_v0;
   unsigned int temp_v1;
   int temp_v2;
@@ -35,7 +35,8 @@ void FUN_0035777c(void)
     temp_v2 = FUN_0011c834();
     if (-1 < temp_v2) {
       DAT_004656cb = 1;
-      temp_v0 = nn_cfg_CTR_Initialize();
+      nn_cfg_CTR_Initialize();
+      temp_v0 = (unsigned char)temp_v2;
       nn_cfg_CTR_IsDebugMode();
       DAT_004656ce = temp_v0;
       FUN_001467a4();

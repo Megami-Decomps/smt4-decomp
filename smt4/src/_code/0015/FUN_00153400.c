@@ -24,7 +24,7 @@ void FUN_00153400(void)
   do {
     FUN_002c3424(temp_v0 + 0x40);
     if (*(romwright_code **)(temp_v0 + 0x28) != (romwright_code *)0x0) {
-      (**(romwright_code **)(temp_v0 + 0x28))(*(unsigned int *)(temp_v0 + 0x2c));
+      (**(romwright_code **)(temp_v0 + 0x28))();
     }
     FUN_002a2a94(&DAT_004e6f14,0,*(unsigned int *)((unsigned int)DAT_004e8280 * 8 + 0x4e8254));
     FUN_002a2a94(&DAT_004e6f14,1,*(unsigned int *)((unsigned int)DAT_004e8280 * 8 + 0x4e8258));

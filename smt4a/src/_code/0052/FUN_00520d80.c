@@ -4,14 +4,10 @@
 
 typedef struct fn_00520d80_arg1 fn_00520d80_arg1;
 struct fn_00520d80_arg1 {
-    unsigned char pad_0x0[0x4];
-    undefined4 field_0x4; /* +0x4 */
-    unsigned char pad_0x8[0x8];
-    undefined4 field_0x10; /* +0x10 */
+    uint field_0x0; /* +0x0 */
+    unsigned char pad_0x4[0x10];
     void *field_0x14; /* +0x14 */
     int field_0x18; /* +0x18 */
-    undefined4 field_0x1c; /* +0x1c */
-    undefined4 field_0x20; /* +0x20 */
 };
 
 extern char *FUN_005203c0(fn_00520d80_arg1 *);

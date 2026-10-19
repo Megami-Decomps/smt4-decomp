@@ -41,13 +41,13 @@ extern int DAT_00432fc8; /* 0x432fc8 */
 /* Supplied declaration required: FUN_002a7218. */
 /* Supplied declaration required: FUN_002b8cc8. */
 /* Supplied declaration required: FUN_002ba968. */
-extern unsigned int *FUN_002baa40(unsigned char *, unsigned int);
+/* Supplied declaration required: FUN_002baa40. */
 
 
 void FUN_0038f464(fn_0038f464_arg0 *param_1)
 
 {
-/* irregular: 7 native warning(s); review required */
+/* irregular: 8 native warning(s); review required */
   void *pvVar1;
   int *piVar2;
   unsigned int *puVar3;
@@ -62,7 +62,7 @@ void FUN_0038f464(fn_0038f464_arg0 *param_1)
   unsigned int uStack_2c;
   unsigned int uStack_28;
   unsigned int temp_v7;
-  unsigned char temp_v8 [12];
+  unsigned int temp_v8 [3];
   
   if (param_1->field_0x8 != 0) {
     if (param_1->field_0x8 != 1) {
@@ -93,9 +93,10 @@ void FUN_0038f464(fn_0038f464_arg0 *param_1)
     *(unsigned int *)(DAT_00432fc8 + 0x754) = temp_v0 & 0xffffff8f;
     if ((temp_v0 & 0x10) == 0) {
       FUN_002340e4(&temp_v1);
+      puVar3 = temp_v8;
       (*(unsigned char *)((unsigned char *)&temp_v1 + 0)) = 1;
       temp_v4 = 0;
-      puVar3 = (unsigned int *)FUN_002baa40(temp_v8,0);
+      FUN_002baa40(puVar3,0);
       temp_v2 = *puVar3;
       temp_v3 = puVar3[1];
       temp_v1 = romwright_piece_3_1(temp_v1._1_3_,200);

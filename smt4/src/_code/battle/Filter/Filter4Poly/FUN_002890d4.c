@@ -16,14 +16,14 @@ extern unsigned char DAT_00420888; /* 0x420888 */
 extern unsigned int FUN_002a7bc0(void);
 /* Supplied declaration required: FUN_002bfe28. */
 /* Supplied declaration required: FUN_002c222c. */
-extern int FUN_002c5300(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c5300. */
 /* Supplied declaration required: FUN_0034791c. */
 
 
 int * FUN_002890d4(int param_1,unsigned int param_2,int param_3)
 
 {
-/* irregular: 4 native warning(s); review required */
+/* irregular: 5 native warning(s); review required */
   int *piVar1;
   int *piVar2;
   unsigned int temp_v0;
@@ -70,7 +70,8 @@ int * FUN_002890d4(int param_1,unsigned int param_2,int param_3)
     piVar2[0x18] = 0;
   }
   piVar2[0x18] = param_1;
-  temp_v1 = FUN_002c5300(0x100,0x100,0,0x50,1);
+  temp_v1 = 0x100;
+  FUN_002c5300(0x100,0x100,0,0x50,1);
   piVar2[1] = temp_v1;
   FUN_0034791c(piVar2);
   (**(romwright_code **)(*piVar2 + 0x10))(piVar2);

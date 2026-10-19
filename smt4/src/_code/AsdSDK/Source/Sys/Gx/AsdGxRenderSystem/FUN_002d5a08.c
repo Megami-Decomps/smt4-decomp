@@ -10,7 +10,7 @@ typedef struct {
 /* Supplied declaration required: FUN_002a66e0. */
 /* Supplied declaration required: FUN_002bc11c. */
 /* Supplied declaration required: FUN_002bd75c. */
-extern int FUN_002bf5c0(unsigned int, unsigned int, unsigned int, int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002bf5c0. */
 /* Supplied declaration required: FUN_002c5300. */
 
 
@@ -18,21 +18,23 @@ int * FUN_002d5a08(int param_1,int param_2,int param_3,int param_4,int param_5,i
                   int param_7)
 
 {
-/* irregular: 1 goto(s); 4 native warning(s); review required */
+/* irregular: 1 goto(s); 5 native warning(s); review required */
   int *piVar1;
   int *piVar2;
   int temp_v0;
   unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
+  int temp_v2;
+  unsigned int temp_v3;
   int temp_v4;
   int temp_v5;
   int temp_v6;
   int temp_v7;
   unsigned char temp_v8;
   
-  piVar1 = (int *)FUN_002c5300(0x100,0x100,0,0x14,1);
-  piVar2 = (int *)FUN_002c5300(0x100,0x100,0,0x30,1);
+  piVar1 = (int *)0x100;
+  FUN_002c5300(0x100,0x100,0,0x14,1);
+  piVar2 = (int *)0x100;
+  FUN_002c5300(0x100,0x100,0,0x30,1);
   temp_v0 = 0;
   FUN_002bd75c();
   piVar1[3] = temp_v0;
@@ -87,60 +89,61 @@ LAB_002d5b24:
   temp_v6 = 0;
   temp_v0 = param_1 * param_2 * 2;
   temp_v7 = param_1 * param_2 * 4;
-  temp_v3 = temp_v0;
+  temp_v2 = temp_v0;
   if (temp_v1 != 0x81a5) {
-    temp_v3 = 0;
+    temp_v2 = 0;
     if (temp_v1 < 0x81a5) {
       if (temp_v1 == 0x8056) {
         temp_v4 = 4;
-        temp_v3 = temp_v0;
+        temp_v2 = temp_v0;
       }
       else if (temp_v1 == 0x8057) {
         temp_v4 = 2;
-        temp_v3 = temp_v0;
+        temp_v2 = temp_v0;
       }
       else if (temp_v1 == 0x8058) {
         temp_v6 = 2;
-        temp_v3 = temp_v7;
+        temp_v2 = temp_v7;
       }
     }
     else {
       temp_v5 = temp_v7;
       if ((temp_v1 == 0x88f0) || (temp_v5 = temp_v0, temp_v1 == 0x8d62)) {
         temp_v4 = 3;
-        temp_v3 = temp_v5;
+        temp_v2 = temp_v5;
       }
     }
   }
   piVar2[1] = temp_v4;
-  piVar2[4] = temp_v3;
+  piVar2[4] = temp_v2;
   temp_v4 = 0;
   *piVar2 = param_4;
   if (param_3 != 0x10000) {
     if (param_3 != 0x20000) {
       if (param_3 == 0x30000) {
-        temp_v2 = 0x30000;
-        temp_v4 = FUN_002c5300(temp_v2,0x100,0,temp_v3,1);
+        temp_v4 = 0x30000;
+        FUN_002c5300(temp_v4,0x100,0,temp_v2,1);
       }
     }
     else {
-      temp_v2 = 0x20000;
-      temp_v4 = FUN_002c5300(temp_v2,0x100,0,temp_v3,1);
+      temp_v4 = 0x20000;
+      FUN_002c5300(temp_v4,0x100,0,temp_v2,1);
     }
   }
   else {
-    temp_v4 = FUN_002bf5c0(0x10000,0x100,0,temp_v3,0x40,1);
+    temp_v4 = 0x10000;
+    FUN_002bf5c0(0x10000,0x100,0,temp_v2,0x40,1);
   }
   piVar2[2] = temp_v4;
-  temp_v3 = FUN_002bc11c();
-  piVar2[3] = temp_v3;
+  temp_v2 = FUN_002bc11c();
+  piVar2[3] = temp_v2;
   piVar2[5] = temp_v6;
   piVar1[2] = piVar2[2];
-  temp_v2 = FUN_002bc11c();
+  temp_v3 = FUN_002bc11c();
   temp_v6 = 0;
-  *(unsigned int *)(piVar1[3] + 0x30) = temp_v2;
+  *(unsigned int *)(piVar1[3] + 0x30) = temp_v3;
   temp_v4 = 0;
-  temp_v3 = temp_v0;
+  temp_v2 = temp_v0;
   if (param_6 != 0x81a5) {
     if (param_6 < 0x81a5) {
       if (param_6 == 0x8056) {
@@ -150,21 +153,21 @@ LAB_002d5b24:
         temp_v4 = 2;
       }
       else {
-        temp_v3 = 0;
+        temp_v2 = 0;
         if (param_6 == 0x8058) {
           temp_v6 = 2;
-          temp_v3 = temp_v7;
+          temp_v2 = temp_v7;
         }
       }
     }
-    else if ((param_6 == 0x88f0) || (temp_v3 = 0, temp_v7 = temp_v0, param_6 == 0x8d62)) {
+    else if ((param_6 == 0x88f0) || (temp_v2 = 0, temp_v7 = temp_v0, param_6 == 0x8d62)) {
       temp_v4 = 3;
-      temp_v3 = temp_v7;
+      temp_v2 = temp_v7;
     }
   }
   piVar2[7] = temp_v4;
   piVar2[6] = param_4;
-  piVar2[10] = temp_v3;
+  piVar2[10] = temp_v2;
   temp_v0 = 0;
   if (param_7 != 0x10000) {
     if (param_7 != 0x20000) {
@@ -177,15 +180,16 @@ LAB_002d5b24:
         *piVar1 = (int)piVar2;
         return piVar1;
       }
-      temp_v2 = 0x30000;
+      temp_v0 = 0x30000;
     }
     else {
-      temp_v2 = 0x20000;
+      temp_v0 = 0x20000;
     }
-    temp_v0 = FUN_002c5300(temp_v2,0x100,0,temp_v3,1);
+    FUN_002c5300(temp_v0,0x100,0,temp_v2,1);
   }
   else {
-    temp_v0 = FUN_002bf5c0(0x10000,0x100,0,temp_v3,0x40,1);
+    temp_v0 = 0x10000;
+    FUN_002bf5c0(0x10000,0x100,0,temp_v2,0x40,1);
   }
   piVar2[8] = temp_v0;
   temp_v0 = FUN_002bc11c();

@@ -41,7 +41,7 @@ extern unsigned int FUN_002c37a0(unsigned int);
 /* Supplied declaration required: FUN_002c3944. */
 extern unsigned int FUN_002c3984(void);
 extern unsigned int FUN_002c3994(void);
-extern unsigned int *FUN_002c5300(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c5300. */
 extern unsigned int nn_fnd_ExpHeapBase_Allocate(int, int, unsigned int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: nn_os_CriticalSection_Enter. */
 /* Supplied declaration required: nn_os_CriticalSection_Leave. */
@@ -51,10 +51,11 @@ extern int nngxGetVramEndAddr(unsigned int);
 void FUN_001037dc(void)
 
 {
-/* irregular: 8 native warning(s); review required */
+/* irregular: 9 native warning(s); review required */
   int *piVar1;
   unsigned int temp_v0;
   unsigned int *puVar3;
+  unsigned int *puVar4;
   unsigned int temp_v1;
   int temp_v2;
   int temp_v3;
@@ -110,8 +111,9 @@ void FUN_001037dc(void)
   DAT_004e410c = 0;
   DAT_004e4110 = 0;
   DAT_004e4114 = 0;
+  puVar3 = (unsigned int *)0x100;
   DAT_004e4118 = temp_v5;
-  puVar3 = (unsigned int *)FUN_002c5300(0x100,0x100,0,0x10,1);
+  FUN_002c5300(0x100,0x100,0,0x10,1);
   puVar3[2] = 0;
   puVar3[3] = 0;
   *puVar3 = temp_v0;
@@ -125,25 +127,32 @@ void FUN_001037dc(void)
   DAT_004e4128 = 0;
   DAT_004e412c = 0;
   DAT_004e4130 = 0;
+  puVar3 = (unsigned int *)0x100;
   DAT_004e4134 = temp_v5;
-  puVar3 = (unsigned int *)FUN_002c5300(0x100,0x100,0,0x10,1);
+  FUN_002c5300(0x100,0x100,0,0x10,1);
   puVar3[2] = 0;
   puVar3[3] = 0;
   *puVar3 = temp_v0;
   puVar3[1] = temp_v5;
   FUN_002c36d0(&DAT_004e4128,puVar3);
-  DAT_00465178 = (unsigned int *)FUN_002c5300(0x100,0x100,0,4,1);
-  if (DAT_00465178 != (unsigned int *)0x0) {
-    *DAT_00465178 = (unsigned int)&DAT_00420938;
+  puVar3 = (unsigned int *)0x100;
+  FUN_002c5300(0x100,0x100,0,4,1);
+  if (puVar3 != (unsigned int *)0x0) {
+    *puVar3 = (unsigned int)&DAT_00420938;
   }
-  DAT_0046517c = (unsigned int *)FUN_002c5300(0x100,0x100,0,4,1);
-  if (DAT_0046517c != (unsigned int *)0x0) {
-    *DAT_0046517c = (unsigned int)&DAT_004207f8;
+  puVar4 = (unsigned int *)0x100;
+  DAT_00465178 = puVar3;
+  FUN_002c5300(0x100,0x100,0,4,1);
+  if (puVar4 != (unsigned int *)0x0) {
+    *puVar4 = (unsigned int)&DAT_004207f8;
   }
   DAT_00465170 = 0;
-  DAT_00465180 = (unsigned int *)FUN_002c5300(0x100,0x100,0,4,1);
-  if (DAT_00465180 != (unsigned int *)0x0) {
-    *DAT_00465180 = (unsigned int)"螸4螰4";
+  puVar3 = (unsigned int *)0x100;
+  DAT_0046517c = puVar4;
+  FUN_002c5300(0x100,0x100,0,4,1);
+  if (puVar3 != (unsigned int *)0x0) {
+    *puVar3 = (unsigned int)"螸4螰4";
   }
+  DAT_00465180 = puVar3;
   return;
 }

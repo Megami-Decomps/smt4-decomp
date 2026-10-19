@@ -17,14 +17,14 @@ extern unsigned char DAT_0047e554; /* 0x47e554 */
 /* Supplied declaration required: FUN_002b612c. */
 /* Supplied declaration required: FUN_002c4938. */
 extern unsigned int FUN_00356e94(void);
-extern unsigned int *nn_gr_CTR_Combiner_MakeCommand(unsigned char *, unsigned char *);
+/* Supplied declaration required: nn_gr_CTR_Combiner_MakeCommand. */
 /* Supplied declaration required: nn_gr_CTR_Combiner_Stage_SetupPrimaryModulateTexture0. */
 
 
 unsigned int * FUN_0034dc10(void)
 
 {
-/* irregular: 4 native warning(s); review required */
+/* irregular: 5 native warning(s); review required */
   unsigned int temp_v0;
   unsigned char *puVar2;
   unsigned int *puVar3;
@@ -32,13 +32,14 @@ unsigned int * FUN_0034dc10(void)
   int *piVar5;
   int temp_v1;
   int temp_v2;
-  unsigned char temp_v3 [24];
+  unsigned int temp_v3 [6];
   unsigned char temp_v4;
   unsigned char temp_v5;
   unsigned char temp_v6;
   unsigned char temp_v7;
   unsigned char temp_v8;
   
+  puVar3 = temp_v3;
   temp_v0 = FUN_00356e94();
   puVar2 = &DAT_0047e554;
   FUN_002b5cf0(&DAT_0047e554,temp_v0);
@@ -49,7 +50,7 @@ unsigned int * FUN_0034dc10(void)
   temp_v6 = 0;
   temp_v7 = 0;
   temp_v8 = 0;
-  puVar3 = (unsigned int *)nn_gr_CTR_Combiner_MakeCommand(temp_v3,puVar2);
+  nn_gr_CTR_Combiner_MakeCommand(temp_v3,puVar2);
   puVar3[3] = 0xf0202;
   *puVar3 = 0;
   puVar3[1] = 0xf0201;

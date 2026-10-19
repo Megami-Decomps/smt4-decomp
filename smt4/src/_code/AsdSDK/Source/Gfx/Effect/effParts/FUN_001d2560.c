@@ -8,18 +8,19 @@ typedef struct {
 } void_stack;
 
 /* Supplied declaration required: FUN_002a3d58. */
-extern int FUN_002c32a0(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c32a0. */
 /* Supplied declaration required: FUN_002c4938. */
 
 
 int FUN_001d2560(void)
 
 {
-/* irregular: 2 native warning(s); review required */
+/* irregular: 3 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_002c32a0(0x10000,0x100,0,0x90,0x10,1);
-  FUN_002c4938(temp_v0,0x90);
+  temp_v0 = 0x10000;
+  FUN_002c32a0(0x10000,0x100,0,0x90,0x10,1);
+  FUN_002c4938();
   *(unsigned int *)(temp_v0 + 0x80) = 0;
   *(unsigned int *)(temp_v0 + 0x84) = 0;
   FUN_002a3d58(temp_v0);

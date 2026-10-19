@@ -27,37 +27,36 @@ struct fn_002f325c_arg1 {
 
 /* Supplied declaration required: FUN_0025c870. */
 /* Supplied declaration required: FUN_0028c6b8. */
-extern void *FUN_002c415c(unsigned int);
-extern unsigned int FUN_002c5c14(fn_002f325c_arg1 *, unsigned int *, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c415c. */
+extern void *FUN_002c5c14(fn_002f325c_arg1 *, unsigned int *, unsigned int, unsigned int);
 
 
 void FUN_002f325c(fn_002f325c_arg0 *param_1,fn_002f325c_arg1 *param_2,unsigned int param_3,
                  unsigned int param_4)
 
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  void *pvVar3;
+/* irregular: 3 native warning(s); review required */
+  void *pvVar1;
+  void *pvVar2;
   int uStack_18;
   
   uStack_18 = param_4;
-  temp_v0 = FUN_002c5c14(param_2,(unsigned int *)&uStack_18,1,0x80);
-  temp_v1 = temp_v0;
+  pvVar1 = (void *)FUN_002c5c14(param_2,(unsigned int *)&uStack_18,1,0x80);
+  pvVar2 = pvVar1;
   FUN_0028c6b8();
-  pvVar3 = (void *)FUN_002c415c(temp_v0);
+  FUN_002c415c();
   FUN_0025c870();
-  *(unsigned int *)((int)pvVar3 + 0xac) = 0;
-  *(unsigned int *)((int)pvVar3 + 0x90) = temp_v1;
+  *(unsigned int *)((int)pvVar1 + 0xac) = 0;
+  *(void **)((int)pvVar1 + 0x90) = pvVar2;
   if (param_1->field_0x88 != (void *)0x0) {
-    *(void **)((int)param_1->field_0x88 + 0xac) = pvVar3;
-    *(void **)((int)pvVar3 + 0xb0) = param_1->field_0x88;
+    *(void **)((int)param_1->field_0x88 + 0xac) = pvVar1;
+    *(void **)((int)pvVar1 + 0xb0) = param_1->field_0x88;
   }
   else {
-    param_1->field_0x8c = (int)pvVar3;
-    *(unsigned int *)((int)pvVar3 + 0xb0) = 0;
+    param_1->field_0x8c = (int)pvVar1;
+    *(unsigned int *)((int)pvVar1 + 0xb0) = 0;
   }
   param_1->field_0x80 = param_1->field_0x80 + 1;
-  param_1->field_0x88 = pvVar3;
+  param_1->field_0x88 = pvVar1;
   return;
 }

@@ -7,18 +7,19 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-extern unsigned int *FUN_002c32a0(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c32a0. */
 /* Supplied declaration required: FUN_002c3944. */
 
 
 unsigned int * FUN_001f7140(unsigned int param_1)
 
 {
-/* irregular: 1 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   unsigned int *puVar1;
   
-  puVar1 = (unsigned int *)FUN_002c32a0(0x10000,0x100,0,0x5c,0x10,1);
-  FUN_002c3944(puVar1,0x5c);
+  puVar1 = (unsigned int *)0x10000;
+  FUN_002c32a0(0x10000,0x100,0,0x5c,0x10,1);
+  FUN_002c3944();
   puVar1[1] = 0xffffffff;
   *puVar1 = param_1;
   puVar1[2] = 0x3f800000;

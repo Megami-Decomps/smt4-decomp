@@ -21,7 +21,7 @@ extern signed char DAT_004e316b; /* 0x4e316b */
 extern int DAT_004e3180; /* 0x4e3180 */
 
 /* Supplied declaration required: FUN_002bda30. */
-extern unsigned int FUN_002c5300(unsigned int, unsigned int, unsigned int, int, unsigned int);
+/* Supplied declaration required: FUN_002c5300. */
 /* Supplied declaration required: nw_snd_SoundHeap_Create. */
 /* Supplied declaration required: nw_snd_SoundHeap_LoadState. */
 extern unsigned int nw_snd_SoundHeap_SaveState(int);
@@ -30,7 +30,7 @@ extern unsigned int nw_snd_SoundHeap_SaveState(int);
 unsigned int FUN_0010c650(unsigned int param_1,int param_2)
 
 {
-/* irregular: 3 native warning(s); review required */
+/* irregular: 4 native warning(s); review required */
   int temp_v0;
   unsigned int temp_v1;
   unsigned int temp_v2;
@@ -41,7 +41,8 @@ unsigned int FUN_0010c650(unsigned int param_1,int param_2)
     temp_v0 = param_1 * 0x3c;
     if ((&DAT_004e2636)[temp_v0] == '\0') {
       if (param_2 != 0) {
-        temp_v1 = FUN_002c5300(0x10000,0x100,0,param_2,1);
+        temp_v1 = 0x10000;
+        FUN_002c5300(0x10000,0x100,0,param_2,1);
         *(unsigned int *)(temp_v0 + 0x4e262c) = temp_v1;
         nw_snd_SoundHeap_Create(temp_v0 + 0x4e25fc,temp_v1,param_2);
         temp_v1 = nw_snd_SoundHeap_SaveState(temp_v0 + 0x4e25fc);

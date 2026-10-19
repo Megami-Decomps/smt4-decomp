@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
+typedef int romwright_code();
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
@@ -15,15 +16,14 @@ extern unsigned char DAT_004b896c; /* 0x4b896c */
 /* Supplied declaration required: FUN_002c5d5c. */
 
 
-void FUN_003ec4a4(unsigned int param_1,unsigned int param_2,int param_3)
+unsigned char * FUN_003ec4a4(unsigned int param_1,unsigned int param_2,int param_3)
 
 {
-/* irregular: irregular input(s): in_stack_0000003c, in_stack_00000060; 5 native warning(s); review required */
+/* irregular: 1 native warning(s); review required */
   unsigned char *puVar1;
-  int unaff_r4;
-  int unaff_r6;
-  unsigned int *in_stack_0000003c;
-  unsigned int in_stack_00000060;
+  int temp_v0;
+  unsigned char *puVar3;
+  unsigned char temp_v1;
   
   *(unsigned int *)(param_3 + 8) = param_1;
   *(unsigned int *)(param_3 + 0xc) = param_2;
@@ -31,14 +31,11 @@ void FUN_003ec4a4(unsigned int param_1,unsigned int param_2,int param_3)
   DAT_00447e54 = 0;
   puVar1 = &DAT_004b896c;
   FUN_002c5d5c(&DAT_004b896c,&LAB_00340650,0x284,0x10);
-  puVar1 = puVar1 + 0x2844;
-  *(unsigned char **)puVar1 = puVar1;
-  while (puVar1 = puVar1 + 1, (int)puVar1 < unaff_r6) {
-    puVar1[unaff_r4] = 100;
+  temp_v0 = 0x20;
+  puVar3 = puVar1 + 0x2844;
+  while (temp_v1 = temp_v0 != 0, temp_v0 = temp_v0 - 1, temp_v1) {
+    (*(romwright_code *)0x340664)(puVar3);
+    puVar3 = puVar3 + 0x30;
   }
-  *(unsigned char *)(unaff_r4 + unaff_r6) = 0;
-  in_stack_0000003c[2] = in_stack_00000060;
-  *in_stack_0000003c = 0;
-  in_stack_0000003c[1] = unaff_r6;
-  return;
+  return puVar1 + 0x2844;
 }

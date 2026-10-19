@@ -27,7 +27,7 @@ extern int FUN_0027ea14(unsigned int *);
 extern int FUN_002a1520(unsigned int *);
 extern int FUN_002ad1e0(int);
 /* Supplied declaration required: FUN_002ba9ac. */
-extern unsigned int *FUN_002baa40(unsigned int *, unsigned int);
+/* Supplied declaration required: FUN_002baa40. */
 extern unsigned int *FUN_002bad5c(unsigned int *);
 /* Supplied declaration required: FUN_002c564c. */
 /* Supplied declaration required: FUN_00387af0. */
@@ -38,7 +38,7 @@ extern int FUN_003943f8(unsigned int *);
 unsigned int FUN_001b4cbc(void)
 
 {
-/* irregular: 10 native warning(s); review required */
+/* irregular: 11 native warning(s); review required */
   unsigned int *puVar1;
   unsigned int *puVar2;
   int temp_v0;
@@ -63,7 +63,8 @@ unsigned int FUN_001b4cbc(void)
   puVar1 = (unsigned int *)FUN_002bad5c((unsigned int *)&uStack_4c);
   puVar1[2] = 0;
   puVar1[3] = 0;
-  puVar2 = (unsigned int *)FUN_002baa40((unsigned int *)&uStack_38,0);
+  puVar2 = (unsigned int *)&uStack_38;
+  FUN_002baa40(puVar2,0);
   temp_v4 = puVar2[1];
   *puVar1 = *puVar2;
   puVar1[1] = temp_v4;

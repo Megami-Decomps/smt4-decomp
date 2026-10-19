@@ -7,13 +7,13 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-extern int FUN_002c32a0(unsigned int, unsigned int, unsigned int, int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c32a0. */
 
 
 void FUN_00302410(int param_1)
 
 {
-/* irregular: irregular input(s): in_s0 */
+/* irregular: irregular input(s): in_s0; 1 native warning(s); review required */
   int temp_v0;
   int temp_v1;
   int temp_v2;
@@ -21,7 +21,8 @@ void FUN_00302410(int param_1)
   unsigned int in_s0;
   
   temp_v3 = *(int *)(param_1 + 0xc0);
-  temp_v0 = FUN_002c32a0(0x10000,0x100,0,temp_v3 * 0x34,0x10,1);
+  temp_v0 = 0x10000;
+  FUN_002c32a0(0x10000,0x100,0,temp_v3 * 0x34,0x10,1);
   if (0 < temp_v3) {
     in_s0 = 0x408487ee;
   }

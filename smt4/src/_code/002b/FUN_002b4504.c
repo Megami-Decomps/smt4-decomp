@@ -8,12 +8,9 @@ typedef struct {
 } param_2_stack;
 
 
-/* WARNING: Control flow encountered bad instruction data */
-
 int FUN_002b4504(int param_1,unsigned int param_2)
 
 {
-/* irregular: 3 native warning(s); review required */
   unsigned int temp_v0;
   int temp_v1;
   int unaff_r4;
@@ -38,11 +35,17 @@ int FUN_002b4504(int param_1,unsigned int param_2)
       } while (temp_v1 < (int)temp_v0);
     }
   }
-  if ((int)temp_v2 <= (int)temp_v0) {
-                    /* WARNING: Bad instruction - Truncating control flow here */
-    halt_baddata();
+  if ((int)temp_v0 < (int)temp_v2) {
+    temp_v1 = *(int *)(param_1 + 0x3dc);
+    do {
+      if (*(unsigned short *)(temp_v1 + temp_v0 * 0x2c + 0x20) == param_2) {
+        return temp_v1 + temp_v0 * 0x2c;
+      }
+      if (*(unsigned short *)(temp_v1 + temp_v0 * 0x2c + 0x4c) == param_2) {
+        return temp_v1 + temp_v0 * 0x2c + 0x2c;
+      }
+      temp_v0 = temp_v0 + 2;
+    } while ((int)temp_v0 < (int)temp_v2);
   }
-  *(unsigned int *)(temp_v0 * 0x2c + 0x28) = temp_v0 * 0x2c + 0x20;
-                    /* WARNING: Bad instruction - Truncating control flow here */
-  halt_baddata();
+  return 0;
 }

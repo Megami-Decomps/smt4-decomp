@@ -5,14 +5,14 @@
 extern int FUN_00230f44(unsigned short *);
 /* Supplied declaration required: FUN_002ae238. */
 extern unsigned int FUN_002ae3c0(unsigned int);
-extern int FUN_002b45e8(unsigned int);
+/* Supplied declaration required: FUN_002b45e8. */
 /* Supplied declaration required: FUN_002b4670. */
 
 
 int FUN_0039fd44(unsigned short *param_1,unsigned short *param_2)
 
 {
-/* irregular: 2 native warning(s); review required */
+/* irregular: 3 native warning(s); review required */
   unsigned int temp_v0;
   int temp_v1;
   int temp_v2;
@@ -39,8 +39,8 @@ int FUN_0039fd44(unsigned short *param_1,unsigned short *param_2)
   case 6:
   case 7:
   case 8:
-    temp_v1 = FUN_002b45e8(temp_v4);
-    temp_v3 = (unsigned int)*(unsigned short *)(temp_v1 + 0xa6);
+    FUN_002b45e8();
+    temp_v3 = (unsigned int)*(unsigned short *)(temp_v4 + 0xa6);
   }
   temp_v4 = (unsigned int)*param_2;
   temp_v5 = 0;
@@ -61,8 +61,8 @@ int FUN_0039fd44(unsigned short *param_1,unsigned short *param_2)
   case 6:
   case 7:
   case 8:
-    temp_v1 = FUN_002b45e8(temp_v4);
-    temp_v5 = (unsigned int)*(unsigned short *)(temp_v1 + 0xa6);
+    FUN_002b45e8();
+    temp_v5 = (unsigned int)*(unsigned short *)(temp_v4 + 0xa6);
   }
   temp_v1 = temp_v3 - temp_v5;
   if (temp_v1 == 0) {

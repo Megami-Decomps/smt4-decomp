@@ -8,24 +8,24 @@ typedef struct {
 } param_4_stack;
 
 extern unsigned int FUN_002b50e4(int *);
-extern unsigned int nw_gfx_res_SetupReferenceLut(unsigned int *, unsigned int);
+/* Supplied declaration required: nw_gfx_res_SetupReferenceLut. */
 
 
 unsigned int nw_gfx_res_ResFog_Setup(int *param_1,unsigned int param_2,unsigned int param_3,int param_4)
 
 {
+/* irregular: 1 native warning(s); review required */
   unsigned int *puVar1;
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
+  int temp_v0;
+  unsigned int temp_v1;
+  int temp_v2;
   int temp_v3;
-  int temp_v4;
   
+  temp_v1 = 0;
   temp_v2 = 0;
-  temp_v3 = 0;
-  temp_v1 = *(int *)(*param_1 + 0xc4);
-  if (temp_v1 != 0) {
-    puVar1 = (unsigned int *)(*param_1 + 0xc4 + temp_v1);
+  temp_v0 = *(int *)(*param_1 + 0xc4);
+  if (temp_v0 != 0) {
+    puVar1 = (unsigned int *)(*param_1 + 0xc4 + temp_v0);
   }
   else {
     puVar1 = (unsigned int *)0x0;
@@ -33,15 +33,15 @@ unsigned int nw_gfx_res_ResFog_Setup(int *param_1,unsigned int param_2,unsigned 
   if ((puVar1 != (unsigned int *)0x0) && ((*puVar1 & 0x40000000) == 0)) {
     puVar1 = (unsigned int *)0x0;
   }
-  temp_v4 = param_4;
-  temp_v0 = nw_gfx_res_SetupReferenceLut(puVar1,param_3);
-  if (-1 < (int)temp_v0) {
-    temp_v1 = *(int *)(*param_1 + 0xc4);
-    if (temp_v1 != 0) {
-      temp_v3 = temp_v1 + *param_1 + 0xc4;
+  temp_v3 = param_4;
+  nw_gfx_res_SetupReferenceLut(puVar1,param_3);
+  if (-1 < (int)puVar1) {
+    temp_v0 = *(int *)(*param_1 + 0xc4);
+    if (temp_v0 != 0) {
+      temp_v2 = temp_v0 + *param_1 + 0xc4;
     }
-    temp_v4 = temp_v3;
-    temp_v2 = FUN_002b50e4(&temp_v4);
+    temp_v3 = temp_v2;
+    temp_v1 = FUN_002b50e4(&temp_v3);
   }
-  return temp_v0 | temp_v2;
+  return (unsigned int)puVar1 | temp_v1;
 }

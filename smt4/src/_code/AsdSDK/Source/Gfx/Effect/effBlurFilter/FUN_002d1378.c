@@ -19,13 +19,13 @@ typedef struct {
 } param_1_stack;
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_002c32a0(unsigned int, unsigned int, unsigned int, int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c32a0. */
 
 
 int FUN_002d1378(fn_002d1378_arg0 *param_1)
 
 {
-/* irregular: irregular input(s): in_fpscr, in_s0; 1 native warning(s); review required */
+/* irregular: irregular input(s): in_fpscr, in_s0; 2 native warning(s); review required */
   int temp_v0;
   int temp_v1;
   int temp_v2;
@@ -36,7 +36,8 @@ int FUN_002d1378(fn_002d1378_arg0 *param_1)
   float temp_v4;
   
   temp_v3 = param_1->field_0xc0;
-  temp_v0 = FUN_002c32a0(0x10000,0x100,0,temp_v3 * 0x34,0x10,1);
+  temp_v0 = 0x10000;
+  FUN_002c32a0(0x10000,0x100,0,temp_v3 * 0x34,0x10,1);
   if (0 < temp_v3) {
     in_s0 = 0.0f;
   }

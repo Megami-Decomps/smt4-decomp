@@ -19,73 +19,74 @@ typedef struct {
 /* Supplied declaration required: FUN_0026242c. */
 extern int FUN_00295f28(unsigned char);
 extern int FUN_0029aafc(void);
-extern int FUN_002b45e8(unsigned short);
+/* Supplied declaration required: FUN_002b45e8. */
 extern unsigned int FUN_002bd1fc(void);
 /* Supplied declaration required: FUN_002bf694. */
 /* Supplied declaration required: FUN_002c4938. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
-void FUN_0024d94c(unsigned short *param_1,unsigned int *param_2)
+void FUN_0024d94c(unsigned short *param_1,unsigned short *param_2)
 
 {
-/* irregular: 6 native warning(s); review required */
-  unsigned char temp_v0;
+/* irregular: 7 native warning(s); review required */
+  unsigned short temp_v0;
   unsigned short temp_v1;
   unsigned short temp_v2;
   short temp_v3;
   int temp_v4;
-  unsigned int *puVar6;
+  unsigned short *puVar6;
   unsigned int temp_v5;
-  unsigned char temp_v6;
+  unsigned int temp_v6;
+  unsigned char temp_v7;
   unsigned char bStack_37;
-  unsigned short temp_v7;
-  unsigned char bStack_35;
   unsigned short temp_v8;
-  unsigned char bStack_33;
+  unsigned char bStack_35;
   unsigned short temp_v9;
-  unsigned char bStack_31;
+  unsigned char bStack_33;
   unsigned short temp_v10;
-  unsigned char bStack_2f;
+  unsigned char bStack_31;
   unsigned short temp_v11;
-  unsigned char bStack_2d;
+  unsigned char bStack_2f;
   unsigned short temp_v12;
-  unsigned char bStack_2b;
+  unsigned char bStack_2d;
   unsigned short temp_v13;
+  unsigned char bStack_2b;
+  unsigned short temp_v14;
   unsigned char bStack_29;
   
   FUN_002c4938(param_1,0x5b0);
-  temp_v0 = *(unsigned char *)((int)param_2 + 0x76);
+  temp_v1 = param_2[0x3b];
   *param_1 = 0xffff;
-  param_1[1] = (unsigned short)temp_v0;
-  temp_v4 = FUN_00295f28(*(unsigned char *)((int)param_2 + 0x76));
-  temp_v2 = *(unsigned short *)((int)param_2 + 0x2a);
-  temp_v1 = *(unsigned short *)(param_2 + 0xb);
-  *(int *)(param_1 + 2) = temp_v4 - param_2[0xc];
-  param_1[4] = temp_v2;
-  param_1[5] = temp_v1;
+  param_1[1] = (unsigned short)(unsigned char)temp_v1;
+  temp_v4 = FUN_00295f28((char)param_2[0x3b]);
+  temp_v1 = param_2[0x15];
+  temp_v0 = param_2[0x16];
+  *(int *)(param_1 + 2) = temp_v4 - *(int *)(param_2 + 0x18);
+  param_1[4] = temp_v1;
+  param_1[5] = temp_v0;
   puVar6 = param_2;
   FUN_0026242c();
-  temp_v2 = *(unsigned short *)((int)param_2 + 0x1e);
-  temp_v1 = *(unsigned short *)((int)param_2 + 0x72);
+  temp_v1 = param_2[0xf];
+  temp_v0 = param_2[0x39];
   param_1[6] = (short)puVar6;
-  param_1[7] = temp_v2;
+  param_1[7] = temp_v1;
   *(unsigned int *)(param_1 + 0x2cc) = 0xffffffff;
-  param_1[10] = temp_v1;
-  *(unsigned int *)(param_1 + 0xb) = param_2[7];
-  *(unsigned int *)(param_1 + 0xd) = param_2[8];
-  *(unsigned int *)(param_1 + 0xf) = param_2[9];
-  param_1[0x11] = *(unsigned short *)(param_2 + 10);
-  *(unsigned int *)(param_1 + 0x12) = *(unsigned int *)((int)param_2 + 0xe);
-  *(unsigned int *)(param_1 + 0x14) = *(unsigned int *)((int)param_2 + 0x12);
-  *(unsigned int *)(param_1 + 0x16) = *(unsigned int *)((int)param_2 + 0x16);
-  param_1[0x18] = *(unsigned short *)((int)param_2 + 0x1a);
-  *(unsigned int *)(param_1 + 0x1d) = *param_2;
-  *(unsigned int *)(param_1 + 0x1f) = param_2[1];
-  *(unsigned int *)(param_1 + 0x21) = param_2[2];
-  param_1[0x23] = *(unsigned short *)(param_2 + 3);
+  param_1[10] = temp_v0;
+  *(unsigned int *)(param_1 + 0xb) = *(unsigned int *)(param_2 + 0xe);
+  *(unsigned int *)(param_1 + 0xd) = *(unsigned int *)(param_2 + 0x10);
+  *(unsigned int *)(param_1 + 0xf) = *(unsigned int *)(param_2 + 0x12);
+  param_1[0x11] = param_2[0x14];
+  *(unsigned int *)(param_1 + 0x12) = *(unsigned int *)(param_2 + 7);
+  *(unsigned int *)(param_1 + 0x14) = *(unsigned int *)(param_2 + 9);
+  *(unsigned int *)(param_1 + 0x16) = *(unsigned int *)(param_2 + 0xb);
+  param_1[0x18] = param_2[0xd];
+  *(unsigned int *)(param_1 + 0x1d) = *(unsigned int *)param_2;
+  *(unsigned int *)(param_1 + 0x1f) = *(unsigned int *)(param_2 + 2);
+  *(unsigned int *)(param_1 + 0x21) = *(unsigned int *)(param_2 + 4);
+  param_1[0x23] = param_2[6];
   temp_v4 = FUN_0029aafc();
-  rt_memcpy_w(param_1 + 0x24,param_2 + 0xd,temp_v4 << 1);
+  rt_memcpy_w(param_1 + 0x24,param_2 + 0x1a,temp_v4 << 1);
   temp_v5 = FUN_002bd1fc();
   FUN_002bf694(param_1 + 0x2ce,temp_v5);
   if ((short)param_1[0xd] >= 1000) {
@@ -103,22 +104,25 @@ void FUN_0024d94c(unsigned short *param_1,unsigned int *param_2)
   if ((short)param_1[0x11] >= 1000) {
     param_1[0x11] = 999;
   }
-  temp_v4 = FUN_002b45e8(*(unsigned short *)param_2);
-  if (temp_v4 != 0) {
+  temp_v6 = (unsigned int)*param_2;
+  FUN_002b45e8();
+  if (temp_v6 != 0) {
     temp_v2 = FUN_00253f94();
     param_1[8] = temp_v2;
   }
-  temp_v4 = FUN_002b45e8(*(unsigned short *)((int)param_2 + 2));
-  if (temp_v4 != 0) {
+  temp_v6 = (unsigned int)param_2[1];
+  FUN_002b45e8();
+  if (temp_v6 != 0) {
     temp_v2 = FUN_00253f94();
     param_1[9] = temp_v2;
   }
-  temp_v4 = FUN_002b45e8(*(unsigned short *)(param_2 + 1));
-  if (temp_v4 != 0) {
+  temp_v6 = (unsigned int)param_2[2];
+  FUN_002b45e8();
+  if (temp_v6 != 0) {
     temp_v3 = FUN_00253f94();
     param_1[9] = temp_v3 + param_1[9];
   }
-  FUN_00253d60(&temp_v6,param_2);
+  FUN_00253d60(&temp_v7,param_2);
   *(unsigned char *)(param_1 + 0x19) = bStack_37 >> 2;
   *(unsigned char *)((int)param_1 + 0x33) = bStack_35 >> 2;
   *(unsigned char *)(param_1 + 0x1a) = bStack_33 >> 2;

@@ -15,14 +15,14 @@ extern int FUN_002b8cec(unsigned int);
 extern int FUN_002bf4f8(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bf810. */
 extern int FUN_002bfde4(unsigned int);
-extern int FUN_002bff6c(int, int, int, int, unsigned int);
+/* Supplied declaration required: FUN_002bff6c. */
 /* Supplied declaration required: FUN_002ebfbc. */
 
 
 unsigned int FUN_00220d58(int param_1)
 
 {
-/* irregular: 4 native warning(s); review required */
+/* irregular: 5 native warning(s); review required */
   unsigned char temp_v0;
   int temp_v1;
   int temp_v2;
@@ -31,15 +31,17 @@ unsigned int FUN_00220d58(int param_1)
   temp_v3 = 0;
   temp_v0 = 0;
   temp_v1 = FUN_002bf4f8(0x39,0x97);
-  temp_v2 = FUN_002bff6c((int)*(short *)(temp_v1 + 8),(int)*(short *)(temp_v1 + 10),
-                       (int)**(short **)(temp_v1 + 0xc),(int)(*(short **)(temp_v1 + 0xc))[1],0);
+  temp_v2 = (int)*(short *)(temp_v1 + 8);
+  FUN_002bff6c(temp_v2,(int)*(short *)(temp_v1 + 10),(int)**(short **)(temp_v1 + 0xc),
+               (int)(*(short **)(temp_v1 + 0xc))[1],0);
   if (temp_v2 != 0) {
     *(int *)(param_1 + 0x118) = *(int *)(param_1 + 0x118) + 1;
   }
   else {
-    temp_v1 = FUN_002bff6c((int)*(short *)(temp_v1 + 8),(int)*(short *)(temp_v1 + 10),
-                         (int)**(short **)(temp_v1 + 0xc),(int)(*(short **)(temp_v1 + 0xc))[1],3);
-    if ((temp_v1 != 0) && (*(int *)(param_1 + 0x118) - 1U < 0xf)) {
+    temp_v2 = (int)*(short *)(temp_v1 + 8);
+    FUN_002bff6c(temp_v2,(int)*(short *)(temp_v1 + 10),(int)**(short **)(temp_v1 + 0xc),
+                 (int)(*(short **)(temp_v1 + 0xc))[1],3);
+    if ((temp_v2 != 0) && (*(int *)(param_1 + 0x118) - 1U < 0xf)) {
       temp_v0 = 1;
     }
     *(unsigned int *)(param_1 + 0x118) = 0;

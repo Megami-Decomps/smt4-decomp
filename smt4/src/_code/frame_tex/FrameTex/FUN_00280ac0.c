@@ -11,13 +11,13 @@ extern int DAT_0043e278; /* 0x43e278 */
 
 extern unsigned int FUN_002bc11c(void);
 /* Supplied declaration required: FUN_002bd75c. */
-extern unsigned int FUN_002c5300(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: FUN_002c5300. */
 
 
 void FUN_00280ac0(int param_1)
 
 {
-/* irregular: 1 native warning(s); review required */
+/* irregular: 2 native warning(s); review required */
   int temp_v0;
   int temp_v1;
   unsigned int temp_v2;
@@ -36,7 +36,8 @@ void FUN_00280ac0(int param_1)
       *(unsigned int *)(temp_v1 + 0x18) = 400;
       *(unsigned int *)(temp_v1 + 0x1c) = 0x8d62;
       *(unsigned int *)(temp_v1 + 0x20) = 0x1403;
-      temp_v2 = FUN_002c5300(0x30000,0x100,0,*(unsigned int *)(temp_v1 + 0x28),1);
+      temp_v2 = 0x30000;
+      FUN_002c5300(0x30000,0x100,0,*(unsigned int *)(temp_v1 + 0x28),1);
       *(unsigned int *)(temp_v1 + 0x24) = temp_v2;
       temp_v2 = FUN_002bc11c();
       *(unsigned int *)(temp_v1 + 0x30) = temp_v2;
@@ -51,7 +52,8 @@ void FUN_00280ac0(int param_1)
       *(unsigned int *)(temp_v1 + 0x18) = 400;
       *(unsigned int *)(temp_v1 + 0x1c) = 0x8d62;
       *(unsigned int *)(temp_v1 + 0x20) = 0x1403;
-      temp_v2 = FUN_002c5300(0x20000,0x100,0,*(unsigned int *)(temp_v1 + 0x28),1);
+      temp_v2 = 0x20000;
+      FUN_002c5300(0x20000,0x100,0,*(unsigned int *)(temp_v1 + 0x28),1);
       *(unsigned int *)(temp_v1 + 0x24) = temp_v2;
       temp_v2 = FUN_002bc11c();
       *(unsigned int *)(temp_v1 + 0x30) = temp_v2;
@@ -65,7 +67,8 @@ void FUN_00280ac0(int param_1)
       *(unsigned int *)(temp_v3 + 0x18) = 0x100;
       *(unsigned int *)(temp_v3 + 0x1c) = 0x8d62;
       *(unsigned int *)(temp_v3 + 0x20) = 0x1403;
-      temp_v2 = FUN_002c5300(0x20000,0x100,0,*(unsigned int *)(temp_v3 + 0x28),1);
+      temp_v2 = 0x20000;
+      FUN_002c5300(0x20000,0x100,0,*(unsigned int *)(temp_v3 + 0x28),1);
       *(unsigned int *)(temp_v3 + 0x24) = temp_v2;
       temp_v2 = FUN_002bc11c();
       *(unsigned int *)(temp_v3 + 0x30) = temp_v2;
@@ -79,7 +82,8 @@ void FUN_00280ac0(int param_1)
       *(unsigned int *)(temp_v1 + 0x18) = 0x80;
       *(unsigned int *)(temp_v1 + 0x1c) = 0x8d62;
       *(unsigned int *)(temp_v1 + 0x20) = 0x1403;
-      temp_v2 = FUN_002c5300(0x20000,0x100,0,*(unsigned int *)(temp_v1 + 0x28),1);
+      temp_v2 = 0x20000;
+      FUN_002c5300(0x20000,0x100,0,*(unsigned int *)(temp_v1 + 0x28),1);
       *(unsigned int *)(temp_v1 + 0x24) = temp_v2;
       temp_v2 = FUN_002bc11c();
       *(unsigned int *)(temp_v1 + 0x30) = temp_v2;

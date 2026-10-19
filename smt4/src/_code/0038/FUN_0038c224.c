@@ -70,7 +70,7 @@ extern int FUN_003def24(unsigned char *);
 /* Supplied declaration required: FUN_003df0c4. */
 /* Supplied declaration required: FUN_003df140. */
 /* Supplied declaration required: FUN_003df1d4. */
-extern unsigned int *nn_fnd_DateTime_DateTime_sub_object(unsigned int *, unsigned int, unsigned int);
+/* Supplied declaration required: nn_fnd_DateTime_DateTime_sub_object. */
 /* Supplied declaration required: nn_fnd_DateTime_DateToDays. */
 /* Supplied declaration required: nn_fnd_DateTime_GetDay. */
 /* Supplied declaration required: nn_fnd_DateTime_GetMonth. */
@@ -80,18 +80,18 @@ extern unsigned int *nn_fnd_DateTime_DateTime_sub_object(unsigned int *, unsigne
 int FUN_0038c224(int param_1)
 
 {
-/* irregular: 26 native warning(s); review required */
+/* irregular: 27 native warning(s); review required */
   unsigned short temp_v0;
   unsigned char temp_v1;
   unsigned char temp_v2;
   unsigned int *puVar4;
-  int *piVar5;
+  unsigned int *puVar5;
+  int *piVar6;
   unsigned int temp_v3;
   unsigned int temp_v4;
   int temp_v5;
   unsigned int temp_v6;
   int temp_v7;
-  unsigned int *puVar11;
   int temp_v8;
   int temp_v9;
   int temp_v10;
@@ -231,14 +231,14 @@ int FUN_0038c224(int param_1)
   temp_v9 = *(int *)(temp_v7 + 0x67c) + 1;
   puVar4 = (unsigned int *)(temp_v9 * 0x9c8 + 8);
   FUN_00262888();
-  puVar11 = (unsigned int *)0x0;
+  puVar5 = (unsigned int *)0x0;
   if (puVar4 != (unsigned int *)0x0) {
-    puVar11 = puVar4 + 2;
+    puVar5 = puVar4 + 2;
     *puVar4 = 0x9c8;
     puVar4[1] = temp_v9;
-    FUN_002c5d5c(puVar11,&LAB_00394160,0x9c8,temp_v9);
+    FUN_002c5d5c(puVar5,&LAB_00394160,0x9c8,temp_v9);
   }
-  *(unsigned int **)(temp_v7 + 0x678) = puVar11;
+  *(unsigned int **)(temp_v7 + 0x678) = puVar5;
   temp_v18 = 0;
   temp_v13 = 0;
   if (*(int *)(temp_v7 + 0x67c) != 0) {
@@ -250,14 +250,14 @@ int FUN_0038c224(int param_1)
       FUN_00234624(temp_v45,*(unsigned int *)(temp_v7 + 0x5a8),temp_v13);
       temp_v17 = temp_v45;
       FUN_003def38(&temp_v14,temp_v45);
-      piVar5 = &temp_v42;
+      piVar6 = &temp_v42;
       temp_v42 = temp_v14;
       uStack_1a64 = temp_v15;
-      nn_fnd_DateTime_GetDay(piVar5);
-      nn_fnd_DateTime_GetMonth(piVar5);
+      nn_fnd_DateTime_GetDay(piVar6);
+      nn_fnd_DateTime_GetMonth(piVar6);
       nn_fnd_DateTime_GetYear();
       nn_fnd_DateTime_DateToDays();
-      if ((int)piVar5 <= *(int *)(temp_v46 + 0x18)) {
+      if ((int)piVar6 <= *(int *)(temp_v46 + 0x18)) {
         temp_v16 = *(int *)(temp_v7 + 0x678) + temp_v18 * 0x9c8;
         temp_v40 = temp_v16 + 0x900;
         temp_v18 = temp_v18 + 1;
@@ -538,13 +538,14 @@ int FUN_0038c224(int param_1)
           FUN_002c4938(temp_v16,0x80);
           FUN_002c4938(temp_v5 + 0x80,0x100);
           FUN_002c4938(temp_v5 + 0x180,0x800);
+          puVar5 = (unsigned int *)&temp_v20;
           temp_v14 = 0;
           temp_v15 = 0;
           temp_v16 = 0;
           temp_v17 = (unsigned char *)0x0;
-          puVar11 = (unsigned int *)nn_fnd_DateTime_DateTime_sub_object((unsigned int *)&temp_v20,0x7b2,1);
-          temp_v3 = puVar11[1];
-          *(unsigned int *)(temp_v5 + 0x9a0) = *puVar11;
+          nn_fnd_DateTime_DateTime_sub_object(puVar5,0x7b2,1);
+          temp_v3 = puVar5[1];
+          *(unsigned int *)(temp_v5 + 0x9a0) = *puVar5;
           *(unsigned int *)(temp_v5 + 0x9a4) = temp_v3;
           *(unsigned char *)(temp_v5 + 0x9ac) = 0;
           *(unsigned char *)(temp_v5 + 0x9ad) = 0;

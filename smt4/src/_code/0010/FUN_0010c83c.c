@@ -25,14 +25,14 @@ extern unsigned int FUN_002bce00(unsigned short);
 extern unsigned int FUN_002bce30(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002bcf10. */
 /* Supplied declaration required: FUN_002bcf24. */
-extern unsigned int FUN_002bcf4c(unsigned short);
+/* Supplied declaration required: FUN_002bcf4c. */
 /* Supplied declaration required: FUN_002bcfc0. */
-extern unsigned int FUN_002bd06c(unsigned short);
+/* Supplied declaration required: FUN_002bd06c. */
 /* Supplied declaration required: FUN_002bd0f8. */
 /* Supplied declaration required: FUN_002bd158. */
 extern unsigned int FUN_002bd1fc(void);
 /* Supplied declaration required: FUN_002be624. */
-extern unsigned int FUN_002be650(unsigned short, unsigned int);
+/* Supplied declaration required: FUN_002be650. */
 /* Supplied declaration required: FUN_002bf694. */
 /* Supplied declaration required: FUN_002bff38. */
 /* Supplied declaration required: FUN_002bff50. */
@@ -45,7 +45,7 @@ FUN_0010c83c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
             unsigned int param_6)
 
 {
-/* irregular: 13 native warning(s); review required */
+/* irregular: 16 native warning(s); review required */
   unsigned char temp_v0;
   short temp_v1;
   unsigned short temp_v2;
@@ -68,8 +68,8 @@ FUN_0010c83c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
       }
       if (param_1 >= 0xf844) {
         if (param_1 == 0xf870) {
-          temp_v6 = FUN_002bcf4c(*(unsigned short *)(param_2 + *param_4 * 2 + 2));
-          FUN_002bcfc0(temp_v6,temp_v11);
+          FUN_002bcf4c(*(unsigned short *)(param_2 + *param_4 * 2 + 2));
+          FUN_002bcfc0();
           *param_4 = *param_4 + 1;
           FUN_002bcf24(param_3,param_5,0x12f8,param_6);
           temp_v9 = 0;
@@ -117,8 +117,9 @@ FUN_0010c83c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
         return 1;
       }
       if (param_1 == 0xf841) {
-        temp_v6 = FUN_002be650(*(unsigned short *)(param_2 + *param_4 * 2 + 2),1);
-        FUN_002bf694(temp_v11,temp_v6);
+        temp_v7 = (unsigned int)*(unsigned short *)(param_2 + *param_4 * 2 + 2);
+        FUN_002be650(temp_v7,1);
+        FUN_002bf694(temp_v11,temp_v7);
         FUN_002bd158(temp_v11,temp_v12);
         FUN_002bd0f8(param_3,param_5,temp_v12,param_6);
         *param_4 = *param_4 + 1;
@@ -147,8 +148,8 @@ FUN_0010c83c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
         }
       }
       else {
-        temp_v6 = FUN_002bd06c(*(unsigned short *)(param_2 + *param_4 * 2 + 2));
-        FUN_002bcfc0(temp_v6,temp_v11);
+        FUN_002bd06c(*(unsigned short *)(param_2 + *param_4 * 2 + 2));
+        FUN_002bcfc0();
       }
       FUN_002bd0f8(param_3,param_5,temp_v11,param_6);
       *param_4 = *param_4 + 1;
