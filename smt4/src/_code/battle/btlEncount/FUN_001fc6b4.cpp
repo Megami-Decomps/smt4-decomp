@@ -55,7 +55,7 @@ int FUN_00336da8(...);
 int FUN_00337f98(...);
 int FUN_00338318(...);
 int FUN_00339210(...);
-int func_0x0027e38c(...);
+int FUN_0027e38c(...);
 int rt_memcpy_w(...);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -152,7 +152,7 @@ extern int stateBlockCall(unsigned int);
 /* Supplied declaration required: FUN_003ae720. */
 /* Supplied declaration required: vec3CopyFromOffsetC. */
 extern int FUN_003db7b4(int);
-/* Supplied declaration required: func_0x0027e38c. */
+/* Supplied declaration required: FUN_0027e38c. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -241,7 +241,7 @@ unsigned int * FUN_001fc6b4(void)
           FUN_002c29d8(1,10,0xff);
         }
       }
-      func_0x0027e38c(g_btlEvent);
+      FUN_0027e38c(g_btlEvent);
     }
     *puVar19 = 1;
     temp_v15 = FUN_0027e3b8(g_btlEvent);

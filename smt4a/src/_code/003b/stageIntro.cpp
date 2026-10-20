@@ -14,17 +14,15 @@ typedef struct StageObj {
     /* 0x9B4 */ StageSub sub;
 } StageObj;
 
-typedef struct StageRef {
-    /* 0x00 */ StageObj *obj;
-} StageRef;
+extern StageObj *g_mapGimic;
 
 extern void FUN_00314c38(s32 a, s32 b, s32 c, s32 d, s32 e, s32 f);
 extern void gameFlagSetValue(u32 index, s32 value, s32 flag);
 
 /* Plays the stage's introduction for its kind (0, 4, 8, 0xE, 0x12) and then flags it. */
-void stageIntro(StageRef *ref)
+void stageIntro(void)
 {
-    StageSub *sub = &ref->obj->sub;
+    StageSub *sub = &g_mapGimic->sub;
 
     if (sub->flag != 0) {
         if (sub->kind == 0) {

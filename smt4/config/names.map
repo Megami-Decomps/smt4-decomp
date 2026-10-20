@@ -1383,7 +1383,7 @@
 00295380 asdSoundSlotBIsPlaying
 002c1c1c asdSoundSlotBCreate
 002f4b38 staffRollClose
-00309488 staffRollFadeEnterState1
+0030947c staffRollFadeEnterState1
 00310068 staffRollFadeEnterState4
 00316f20 staffRollEnterState2
 00321988 staffRollEnterState5
@@ -1493,7 +1493,7 @@
 00146d08 nnFndFindNestedRange
 00284828 callGlobalHook
 003e60c4 vcallSlot5
-002ca70c machineStep
+002ca708 machineStep
 00220fb0 logFormatBuffer
 001e1a2c taskRunWithObject
 0024bc7c bitsetSetBit
@@ -1503,7 +1503,7 @@
 003bbb54 resourceLookupWithFallback
 0023eae0 randRange
 0024c350 requestDispatch
-00207234 entryCompare
+00207230 entryCompare
 00110978 sndSystemFinalize
 002495d4 effPartsSetData
 00356194 nn_fs_OpenLinkFile
@@ -2196,7 +2196,7 @@
 00131624 dataTableFindRecordForSources
 00292914 idOwnerHasActiveObject
 002e4990 dataTable08CompareIds
-00103bd8 titleSceneReset
+00103bd4 titleSceneReset
 00262f14 partyPanelIsActive
 00240448 btlPosArrangeGetFilePath
 002e3de4 scrCommBtlLiveUnitCountWithin
@@ -2212,7 +2212,7 @@
 002472f0 textureSlotReplace
 002dbc48 scrCommBtlUnitHpPercentWithin
 0021f304 resourceHolderReleaseHandle
-001e39b8 lmapSceneCreateEffect
+001e39b4 lmapSceneCreateEffect
 00269c7c slotPlacementSetSlot
 0030bf40 dataTable08Sub2CompareIds
 001dd02c scrCommJobWindDown
@@ -2282,7 +2282,7 @@
 003c041c btlMessageStartUnlessFlagged
 0024baec binFileGetValue
 0028971c msgWindowReset
-0024ace4 aocSystemGetTotalCount
+0024acdc aocSystemGetTotalCount
 0027eb30 jobOwnerFreeSlotAndStop
 0031cb20 scrCommBtlScriptLockSet
 002ff3a8 scrCommBtlUnitSlotStateIs4
@@ -2321,14 +2321,14 @@
 00317d90 scrCommSetMode
 0025bae4 colorSetAndCachePica
 001d1c34 btlStageFogTableLoad
-001d381c objectDestroyModelManager
+001d3818 objectDestroyModelManager
 001fa498 dataTable00RankOfPicked
 00224090 uniteFlagIsClear
 00254ec8 pickerAdvance
 00295f28 dataTable9EntryOrZero
 002880a8 layoutApplyForState
 00288790 messageKindForward
-002ca6a8 scrCommWaitStateAction
+002ca6a4 scrCommWaitStateAction
 002f5e64 scrCommAnyFlagRangePositive
 003004fc scrCommConvertEntryValue
 003c88b8 questRecordValueIfState2

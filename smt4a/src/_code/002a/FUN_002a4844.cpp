@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int func_0x00340f88(int);
+int FUN_00340f88(int);
 
-/* Supplied declaration required: func_0x00340f88. */
+/* Supplied declaration required: FUN_00340f88. */
 
 
 void FUN_002a4844(int param_1)
@@ -14,7 +14,7 @@ void FUN_002a4844(int param_1)
 {
 /* irregular: 1 native warning(s); review required */
   if (*(char *)(param_1 + 0x62) == '\0') {
-    func_0x00340f88(param_1 + 0x28);
+    FUN_00340f88(param_1 + 0x28);
     return;
   }
   return;

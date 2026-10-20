@@ -57,6 +57,11 @@ Every match must be one a programmer could have written for a reason.
 - **A function that starts with a NOP before its `push`** is two functions the analysis merged: a
   stub forwarding to the next one, and that function. Split the unit with
   `python -B tools/units.py split ROWS` (`<game> <function> <hex offset>` per row) and write both.
+- **A call or callback address that lands in no function** is code the analysis missed (a callee, a
+  callback, a switch tail cut off its function, or a function whose real start is a load before its
+  `push`). `python -B tools/units.py missing > rows.tsv` lists them; check the rows, then
+  `python -B tools/units.py add rows.tsv` adds, extends and moves the units. Never call a
+  `func_0x<address>` placeholder: the target has a symbol once its unit exists.
 
 ## Readability standard
 

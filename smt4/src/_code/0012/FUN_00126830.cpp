@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int func_0x002b080c(...);
+int FUN_002b080c(...);
 
 typedef struct fn_00126830_arg0 fn_00126830_arg0;
 struct fn_00126830_arg0 {
@@ -32,14 +32,14 @@ struct fn_00126830_arg0 {
     undefined4 field_0xb0; /* +0xb0 */
 };
 
-/* Supplied declaration required: func_0x002b080c. */
+/* Supplied declaration required: FUN_002b080c. */
 
 
 void FUN_00126830(fn_00126830_arg0 *param_1,unsigned int param_2)
 
 {
 /* irregular: 1 native warning(s); review required */
-  func_0x002b080c(param_1,0x12,param_2);
+  FUN_002b080c(param_1,0x12,param_2);
   return;
 }
 

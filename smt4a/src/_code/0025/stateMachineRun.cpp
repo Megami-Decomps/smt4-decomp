@@ -19,10 +19,12 @@ struct MachineState {
     u8 finished;                  /* 0x3e8 */
 };
 
+extern MachineState *g_campCecRecv;
+
 /* Runs the current state's handler; when it reports completion and a next state is queued, switches to it. */
-u32 stateMachineRun(MachineState **owner)
+u32 stateMachineRun(void)
 {
-    MachineState *machine = *owner;
+    MachineState *machine = g_campCecRecv;
     StateHandler handler = machine->handlers[machine->state];
     s32 result;
     s32 next;

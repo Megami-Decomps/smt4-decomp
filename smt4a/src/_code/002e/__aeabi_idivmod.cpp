@@ -16,7 +16,7 @@ extern "C" {
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
-extern unsigned int func_0x001ab850(unsigned int, unsigned int, unsigned int, int);
+extern unsigned int FUN_001ab850(unsigned int, unsigned int, unsigned int, int);
 
 
 long long __aeabi_idivmod(unsigned int param_1,unsigned int param_2)
@@ -119,7 +119,7 @@ LAB_002e5074:
     if (temp_v0 < 0) {
       param_1 = -param_1;
     }
-    temp_v2 = func_0x001ab850(0,0,temp_v3,temp_v1);
+    temp_v2 = FUN_001ab850(0,0,temp_v3,temp_v1);
     return romwright_piece_4_4(param_1,temp_v2);
   }
   if (param_1 >> 1 < param_2) {
@@ -144,7 +144,7 @@ LAB_002e5074:
       temp_v1 = -temp_v6;
       temp_v7 = 0;
       if (temp_v6 == 0) {
-        temp_v2 = func_0x001ab850(0,0,temp_v3,temp_v1);
+        temp_v2 = FUN_001ab850(0,0,temp_v3,temp_v1);
         return romwright_piece_4_4(param_1,temp_v2);
       }
       do {

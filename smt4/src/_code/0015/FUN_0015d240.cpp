@@ -4,16 +4,16 @@
 
 extern "C" {
 
-int func_0x0015e3a4(unsigned int, unsigned int);
+int FUN_0015e3a4(unsigned int, unsigned int);
 
-/* Supplied declaration required: func_0x0015e3a4. */
+/* Supplied declaration required: FUN_0015e3a4. */
 
 
 void FUN_0015d240(int param_1,int param_2,unsigned int param_3)
 
 {
 /* irregular: 1 native warning(s); review required */
-  func_0x0015e3a4(*(unsigned int *)(*(int *)(param_1 + param_2 * 4) + 0x68),param_3);
+  FUN_0015e3a4(*(unsigned int *)(*(int *)(param_1 + param_2 * 4) + 0x68),param_3);
   return;
 }
 

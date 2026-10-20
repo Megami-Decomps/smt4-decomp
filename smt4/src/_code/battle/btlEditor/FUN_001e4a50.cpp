@@ -55,7 +55,7 @@ extern int FUN_002c5c04(unsigned int *);
 /* Supplied declaration required: FUN_003d8b34. */
 /* Supplied declaration required: FUN_003d8c88. */
 /* Supplied declaration required: FUN_003d9628. */
-extern int func_0x0033a5ec(int, int);
+extern int FUN_0033a5ec(int, int);
 
 
 unsigned int FUN_001e4a50(void)
@@ -238,7 +238,7 @@ code_r0x003d9140:
       temp_v2 = puVar7[3];
       temp_v4 = *(int *)(temp_v1 + 0x1e98) + *(short *)(puVar7 + 4) * 0x114;
       FUN_0027da30(temp_v1);
-      temp_v1 = func_0x0033a5ec(temp_v1,(int)*(short *)(puVar7 + 4));
+      temp_v1 = FUN_0033a5ec(temp_v1,(int)*(short *)(puVar7 + 4));
       puVar7 = (unsigned int *)asdListBoxGetItemText(temp_v2,1);
       *(unsigned int *)(temp_v4 + 0xc) = *puVar7;
       puVar7 = (unsigned int *)asdListBoxGetItemText(temp_v2,2);

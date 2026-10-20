@@ -1,0 +1,38 @@
+/* Matches with --cpu=5TE (requested): this unit was built for the older core. */
+#include "common.h"
+
+extern "C" {
+
+typedef struct Effect {
+    u8 unk00[0x18];
+    u8 finished; /* 0x18 */
+    u8 unk19[3];
+    void *handle; /* 0x1c */
+} Effect;
+
+typedef struct EffectOwner {
+    u8 unk00[4];
+    Effect *effect; /* 0x04 */
+} EffectOwner;
+
+extern void FUN_001919a4(void *handle);
+extern void asdOperatorDelete(void *handle);
+extern void jyoucyuGetTableEntry(int index);
+
+extern EffectOwner g_qcMain;
+
+/* Marks the owner's effect finished and releases its handle. */
+void FUN_002bd360(void)
+{
+    Effect *effect = g_qcMain.effect;
+
+    effect->finished = 1;
+    if (effect->handle != NULL) {
+        FUN_001919a4(effect->handle);
+        asdOperatorDelete(effect->handle);
+        effect->handle = NULL;
+    }
+    jyoucyuGetTableEntry(0);
+}
+
+} /* extern "C" */

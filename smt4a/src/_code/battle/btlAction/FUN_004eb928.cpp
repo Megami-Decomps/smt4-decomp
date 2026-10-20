@@ -47,8 +47,8 @@ int FUN_004fddf4(...);
 int FUN_004fe618(...);
 int FUN_004fe9c0(...);
 int FUN_004fed00(...);
-int func_0x004fbd30(...);
-int func_0x004fee24(...);
+int FUN_004fbd30(...);
+int FUN_004fee24(...);
 
 int FUN_00192550(void);
 int FUN_002c7bf4(...);
@@ -62,8 +62,8 @@ int FUN_004fcfc0(...);
 int FUN_004fd508(...);
 int FUN_004fda3c(...);
 int FUN_004fdcd8(...);
-int func_0x004fb574(...);
-int func_0x004fe7b0(...);
+int FUN_004fb574(...);
+int FUN_004fe7b0(...);
 
 int FUN_001568f8(...);
 int sysPlaySe(int);
@@ -92,7 +92,7 @@ int FUN_004fb670(...);
 int FUN_004fcde0(...);
 int FUN_004fda78(...);
 int FUN_004feecc(...);
-int func_0x004fb5a8(...);
+int FUN_004fb5a8(...);
 
 /* stack frame of param_2: 4 slot(s), 14 byte(s) */
 typedef struct {
@@ -262,12 +262,12 @@ extern unsigned int FUN_004fa030(int);
 /* Supplied declaration required: FUN_004fe9c0. */
 /* Supplied declaration required: FUN_004fed00. */
 /* Supplied declaration required: FUN_004feecc. */
-/* Supplied declaration required: func_0x004fb574. */
-/* Supplied declaration required: func_0x004fb5a8. */
-/* Supplied declaration required: func_0x004fbd30. */
-/* Supplied declaration required: func_0x004fe7b0. */
-/* Supplied declaration required: func_0x004fee24. */
-extern unsigned int func_0x004fee98(int, unsigned int *, unsigned int);
+/* Supplied declaration required: FUN_004fb574. */
+/* Supplied declaration required: FUN_004fb5a8. */
+/* Supplied declaration required: FUN_004fbd30. */
+/* Supplied declaration required: FUN_004fe7b0. */
+/* Supplied declaration required: FUN_004fee24. */
+extern unsigned int FUN_004fee98(int, unsigned int *, unsigned int);
 
 
 void FUN_004eb928(int *param_1,unsigned int param_2)
@@ -541,7 +541,7 @@ LAB_004ebd00:
         FUN_004fda78(temp_v14,0,puVar25,*(int *)(*piVar16 + 0x1ed4) + temp_v11 * 0x1d0,3,0);
         temp_v12 = FUN_003e8430(*piVar16);
         if (temp_v12 == 0) {
-          func_0x004fb5a8(temp_v14 + 1,puVar25,*(int *)(*piVar16 + 0x1ed4) + temp_v11 * 0x1d0);
+          FUN_004fb5a8(temp_v14 + 1,puVar25,*(int *)(*piVar16 + 0x1ed4) + temp_v11 * 0x1d0);
         }
         temp_v11 = *piVar16;
         FUN_001568f8(temp_v11,temp_v13);
@@ -661,7 +661,7 @@ LAB_004ebd00:
         temp_v10 = FUN_004f59b0(DAT_00573808);
         temp_v10 = temp_v10 + temp_v5;
         temp_v14 = FUN_004bf67c(temp_v17);
-        func_0x004fb574(temp_v10,puVar25,-temp_v14);
+        FUN_004fb574(temp_v10,puVar25,-temp_v14);
         FUN_004e0114(piVar16,puVar25,temp_v13,temp_v10,10,0x14);
         if (temp_v14 != 0) {
           FUN_004e5a40(piVar16,temp_v13,3);
@@ -920,7 +920,7 @@ code_r0x004ef7f0:
             FUN_004fd508(temp_v9 + temp_v7 + 0x14,puVar29,temp_v3,*(unsigned int *)(temp_v20 + 0x28),1);
           }
           else {
-            func_0x004fe7b0(temp_v9 + temp_v7 + 0x14,puVar29);
+            FUN_004fe7b0(temp_v9 + temp_v7 + 0x14,puVar29);
           }
         }
       }
@@ -1023,7 +1023,7 @@ code_r0x004ef7f0:
           temp_v22 = FUN_004f5710(DAT_00573808,temp_v7 + 0x108);
           if (temp_v22 != 0) {
             temp_v22 = FUN_004f9d44(DAT_00573808);
-            func_0x004fbd30(temp_v22 + temp_v5,puVar29);
+            FUN_004fbd30(temp_v22 + temp_v5,puVar29);
           }
           else if (*(int *)(temp_v20 + 0x598) != 0) {
             FUN_004fdcd8(*(short *)(temp_v7 + 0x118) + temp_v5,puVar29,
@@ -1076,7 +1076,7 @@ code_r0x004ef7f0:
               }
               else if ((*puVar25 & 0x1080) == 0) {
                 uStack_288 = (unsigned int)*(unsigned char *)(temp_v22 + 0x161) + temp_v5;
-                func_0x004fee24(uStack_288,puVar29,*(unsigned char *)(temp_v22 + 0x162));
+                FUN_004fee24(uStack_288,puVar29,*(unsigned char *)(temp_v22 + 0x162));
                 *(unsigned int *)(g_btlCamera + 0x64c) = *(unsigned int *)(g_btlCamera + 0x64c) | 0x1000000;
               }
             }
@@ -1095,7 +1095,7 @@ code_r0x004ef7f0:
            (*(unsigned int *)(*piStack_30 + 0x45a4) & DAT_00571214) != 0)) &&
          ((iStack_68 == 2 && ((uStack_74 == 0x2d || uStack_74 == 0x2a || (uStack_74 == 0x24)))))) {
         uStack_288 = temp_v5 + 0x1e;
-        func_0x004fee24(temp_v5 + 0x1e,puVar29,0);
+        FUN_004fee24(temp_v5 + 0x1e,puVar29,0);
         *(unsigned int *)(g_btlCamera + 0x64c) = *(unsigned int *)(g_btlCamera + 0x64c) | 0x1000000;
       }
     }
@@ -1160,7 +1160,7 @@ code_r0x004f054c:
     }
     temp_v18 = 0;
     if ((temp_v6 != 0) && (temp_v18 = FUN_004fa030(DAT_00573808), -1 < (int)temp_v18)) {
-      temp_v18 = func_0x004fee98(temp_v18 + temp_v5,puVar25,5);
+      temp_v18 = FUN_004fee98(temp_v18 + temp_v5,puVar25,5);
     }
     temp_v15 = 0;
     if (temp_v17 != 0) {

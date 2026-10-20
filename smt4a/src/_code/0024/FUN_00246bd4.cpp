@@ -35,8 +35,8 @@ int FUN_003fe86c(...);
 int itemTableClear(...);
 int FUN_0045adc0(...);
 int FUN_0049fc88(...);
-int func_0x002b7f18(...);
-int func_0x002d871c(...);
+int FUN_002b7f18(...);
+int FUN_002d871c(...);
 
 int FUN_0015f858(...);
 int FUN_001681c4(...);
@@ -436,8 +436,8 @@ extern int FUN_004d0554(void);
 extern int FUN_004d0584(void);
 extern unsigned int slots4FGetActiveValue(void);
 /* Supplied declaration required: FUN_0050d8e4. */
-/* Supplied declaration required: func_0x002b7f18. */
-/* Supplied declaration required: func_0x002d871c. */
+/* Supplied declaration required: FUN_002b7f18. */
+/* Supplied declaration required: FUN_002d871c. */
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -5315,7 +5315,7 @@ LAB_002dad8c:
         piVar18 = g_lmapScene;
         g_lmapScene[0x15] = 0;
         piVar18[0x16] = 0x40a00000;
-        func_0x002d871c();
+        FUN_002d871c();
         piVar18 = g_lmapScene;
         g_lmapScene[1] = g_lmapScene[1] + 1;
         piVar18[2] = 0;
@@ -5330,7 +5330,7 @@ LAB_002dad8c:
     case 5:
       fStack_20 = temp_v35;
       fStack_1c = temp_v37;
-      func_0x002b7f18();
+      FUN_002b7f18();
       piVar18 = g_lmapScene;
       g_lmapScene[0x15] = 0;
       piVar18[0x16] = 0;

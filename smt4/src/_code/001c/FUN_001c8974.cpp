@@ -1,0 +1,60 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001c8974` (_code @ 0x1c8978, 0x100 bytes) from smt4_v1.2.0.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+extern "C" {
+
+int vec2GetXInt(...);
+int FUN_003b49a0(int, unsigned int, unsigned int);
+int FUN_003b5f30(int, int);
+int FUN_003b6a5c(int, unsigned int, unsigned int);
+int FUN_003b7084(int, unsigned int, unsigned int);
+
+extern int FUN_00296a18(int);
+extern unsigned int vec2GetYInt(int);
+/* Supplied declaration required: vec2GetXInt. */
+/* Supplied declaration required: FUN_003b49a0. */
+/* Supplied declaration required: FUN_003b5f30. */
+/* Supplied declaration required: FUN_003b6a5c. */
+/* Supplied declaration required: FUN_003b7084. */
+
+
+unsigned int FUN_001c8974(int *param_1)
+
+{
+/* irregular: 5 native warning(s); review required */
+  int temp_v0;
+  unsigned int temp_v1;
+  unsigned int temp_v2;
+  int temp_v3;
+  
+  temp_v3 = *param_1;
+  if ((temp_v3 != 0) && (temp_v0 = FUN_00296a18(temp_v3), temp_v0 != 0)) {
+    if (*(int *)(temp_v3 + 0x352c) < 8) {
+      FUN_003b5f30(temp_v3,0);
+    }
+    temp_v0 = *(int *)(temp_v3 + 0x352c);
+    if (temp_v0 != 10) {
+      if (temp_v0 != 0x11) {
+        if (temp_v0 == 0x12) {
+          temp_v1 = vec2GetXInt();
+          temp_v2 = vec2GetYInt(temp_v3 + 0x598);
+          FUN_003b6a5c(temp_v3,temp_v1,temp_v2);
+        }
+      }
+      else {
+        temp_v1 = vec2GetXInt(temp_v3 + 0xac);
+        temp_v2 = vec2GetYInt(temp_v3 + 0xac);
+        FUN_003b49a0(temp_v3,temp_v1,temp_v2);
+      }
+    }
+    else {
+      temp_v1 = vec2GetXInt();
+      temp_v2 = vec2GetYInt(temp_v3 + 0x50c);
+      FUN_003b7084(temp_v3,temp_v1,temp_v2);
+    }
+  }
+  return 0;
+}
+
+} /* extern "C" */

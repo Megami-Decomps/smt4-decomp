@@ -19,8 +19,8 @@ int FUN_003c91e8(void);
 int soundChannelStopAll(...);
 int objectVectorClear(...);
 int twoObjectsRelease(...);
-int func_0x003d2d9c(void);
-int func_0x003de0dc(void);
+int sub68OwnerDestroyAll(void);
+int jobFlagObjStop(void);
 
 int FUN_001927c0(...);
 int ptrListRemoveClearOwner(...);
@@ -39,7 +39,7 @@ int FUN_002e5924(...);
 int FUN_0034546c(...);
 int FUN_003ca8a4(void);
 int FUN_0040619c(...);
-int func_0x00353a10(void);
+int FUN_00353a10(void);
 
 int asdMemFree(...);
 int scrScriptProcessDestroy(...);
@@ -63,9 +63,9 @@ int scriptHolderReset(...);
 int scriptHolderFree3(...);
 int FUN_0047e430(...);
 int FUN_00483acc(...);
-int func_0x00245d78(...);
-int func_0x0029805c(...);
-int func_0x00365b78(void);
+int FUN_00245d78(...);
+int FUN_0029805c(...);
+int recTableFireType3(void);
 
 int FUN_001ad9b4(void);
 int FUN_001f4908(...);
@@ -91,8 +91,8 @@ int FUN_004731b8(...);
 int FUN_004731d8(void);
 int FUN_0047db34(...);
 int FUN_00483294(...);
-int func_0x00294a84(...);
-int func_0x00482fd4(...);
+int FUN_00294a84(...);
+int FUN_00482fd4(...);
 
 int sysPlaySe(...);
 int eventQueueAddUnique(...);
@@ -115,9 +115,9 @@ int FUN_003adef4(...);
 int FUN_003ae6cc(void);
 int FUN_003d2150(...);
 int FUN_00482c04(void);
-int func_0x00325a74(void);
-int func_0x00369938(void);
-int func_0x004bc758(...);
+int FUN_00325a74(void);
+int FUN_00369938(void);
+int FUN_004bc758(...);
 
 int FUN_0015f858(...);
 int FUN_001654f0(void);
@@ -137,7 +137,7 @@ int FUN_00352d30(...);
 int FUN_00387014(void);
 int FUN_00471d00(void);
 int FUN_00483834(...);
-int func_0x003adff0(...);
+int fireEntriesMatchingPair(...);
 
 int FUN_0013cab8(...);
 int FUN_0014f0dc(...);
@@ -165,7 +165,7 @@ int FUN_003d502c(...);
 int FUN_0048389c(...);
 int FUN_004839b4(...);
 int stateSetterSetFromBase(...);
-int func_0x00352dd4(...);
+int applyIfIdValid(...);
 int rt_memcpy_w(...);
 
 int FUN_0013c884(...);
@@ -193,10 +193,10 @@ int FUN_0040aa6c(void);
 int FUN_0040aad4(...);
 int FUN_0040ab8c(...);
 int FUN_0040ace8(...);
-int func_0x0024ad50(void);
-int func_0x002d7e6c(...);
-int func_0x00314b7c(...);
-int func_0x003a3b88(void);
+int FUN_0024ad50(void);
+int FUN_002d7e6c(...);
+int FUN_00314b7c(...);
+int FUN_003a3b88(void);
 
 int FUN_00100388(...);
 int FUN_001b4aa0(void);
@@ -219,10 +219,10 @@ int FUN_0040b0f8(...);
 int itemResetOverLimitStates(int);
 int FUN_004bc95c(...);
 int VectorSignedToFloat(...);
-int func_0x00244acc(void);
-int func_0x00245f4c(void);
-int func_0x00312a88(void);
-int func_0x0037723c(...);
+int FUN_00244acc(void);
+int FUN_00245f4c(void);
+int FUN_00312a88(void);
+int FUN_0037723c(...);
 
 typedef int romwright_code(...);
 extern unsigned int g_handleRegistry; /* 0x56fcc0 */
@@ -612,36 +612,36 @@ extern int FUN_004a0f5c(void);
 extern int flagsBit7Get(int, int);
 /* Supplied declaration required: FUN_004bc95c. */
 extern int FUN_004d0584(void);
-extern int func_0x00224278(unsigned int, unsigned int);
-/* Supplied declaration required: func_0x00244acc. */
-/* Supplied declaration required: func_0x00245d78. */
-/* Supplied declaration required: func_0x00245f4c. */
-/* Supplied declaration required: func_0x0024ad50. */
-/* Supplied declaration required: func_0x00294a84. */
-extern unsigned int func_0x00297f68(int);
-/* Supplied declaration required: func_0x0029805c. */
-/* Supplied declaration required: func_0x002d7e6c. */
-extern int func_0x002de9b8(void);
-extern int func_0x002dfa18(void);
-/* Supplied declaration required: func_0x00312a88. */
-/* Supplied declaration required: func_0x00314b7c. */
-extern int func_0x00324c68(unsigned int);
-/* Supplied declaration required: func_0x00325a74. */
-extern int func_0x00328200(void);
-extern int func_0x0033e0d4(void);
-/* Supplied declaration required: func_0x00352dd4. */
-/* Supplied declaration required: func_0x00353a10. */
-/* Supplied declaration required: func_0x00365b78. */
-extern int func_0x00368a4c(void);
-/* Supplied declaration required: func_0x00369938. */
-/* Supplied declaration required: func_0x0037723c. */
-extern unsigned short func_0x003847c4(void);
-/* Supplied declaration required: func_0x003a3b88. */
-/* Supplied declaration required: func_0x003adff0. */
-/* Supplied declaration required: func_0x003d2d9c. */
-/* Supplied declaration required: func_0x003de0dc. */
-/* Supplied declaration required: func_0x00482fd4. */
-/* Supplied declaration required: func_0x004bc758. */
+extern int FUN_00224278(unsigned int, unsigned int);
+/* Supplied declaration required: FUN_00244acc. */
+/* Supplied declaration required: FUN_00245d78. */
+/* Supplied declaration required: FUN_00245f4c. */
+/* Supplied declaration required: FUN_0024ad50. */
+/* Supplied declaration required: FUN_00294a84. */
+extern unsigned int FUN_00297f68(int);
+/* Supplied declaration required: FUN_0029805c. */
+/* Supplied declaration required: FUN_002d7e6c. */
+extern int FUN_002de9b8(void);
+extern int FUN_002dfa18(void);
+/* Supplied declaration required: FUN_00312a88. */
+/* Supplied declaration required: FUN_00314b7c. */
+extern int FUN_00324c68(unsigned int);
+/* Supplied declaration required: FUN_00325a74. */
+extern int FUN_00328200(void);
+extern int FUN_0033e0d4(void);
+/* Supplied declaration required: applyIfIdValid. */
+/* Supplied declaration required: FUN_00353a10. */
+/* Supplied declaration required: recTableFireType3. */
+extern int FUN_00368a4c(void);
+/* Supplied declaration required: FUN_00369938. */
+/* Supplied declaration required: FUN_0037723c. */
+extern unsigned short FUN_003847c4(void);
+/* Supplied declaration required: FUN_003a3b88. */
+/* Supplied declaration required: fireEntriesMatchingPair. */
+/* Supplied declaration required: sub68OwnerDestroyAll. */
+/* Supplied declaration required: jobFlagObjStop. */
+/* Supplied declaration required: FUN_00482fd4. */
+/* Supplied declaration required: FUN_004bc758. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -711,7 +711,7 @@ unsigned int FUN_00276264(void)
     uRam005f1621 = 1;
     DAT_005f1622 = 1;
     DAT_005f18c4 = '\0';
-    func_0x00244acc();
+    FUN_00244acc();
     FUN_002019dc(*puVar2,1);
     *(unsigned char *)((int)puVar2 + 0x9e2) = 0;
     *(unsigned char *)(temp_v5 + 0x7c6) = 0;
@@ -832,7 +832,7 @@ unsigned int FUN_00276264(void)
       }
       DAT_005f1b70 = 0;
       DAT_005f1c98 = 0;
-      func_0x00245f4c();
+      FUN_00245f4c();
       puVar2[3] = 2;
       FUN_003a2f54();
       temp_v8 = gameGetPlayerData();
@@ -855,7 +855,7 @@ unsigned int FUN_00276264(void)
       if (DAT_005f18c0 == 0) {
         return 0;
       }
-      func_0x00312a88();
+      FUN_00312a88();
       if (DAT_005f1a58 == 0) {
         return 0;
       }
@@ -903,10 +903,10 @@ unsigned int FUN_00276264(void)
         *(unsigned int *)(temp_v8 + 0x30) = *(unsigned int *)(temp_v8 + 0x24);
         *(unsigned char *)(puVar2 + 5) = 0;
       }
-      func_0x00245f4c();
+      FUN_00245f4c();
       if ((((*(char *)(puVar2 + 0x276) == '\0') && (puVar2[0x277] != 1)) && (puVar2[0x277] != 2)) &&
          (((DAT_005f1776 == '\0' && (DAT_005f172b == '\0')) &&
-          (temp_v8 = func_0x00324c68(puVar2[0x10]), temp_v8 != 0)))) {
+          (temp_v8 = FUN_00324c68(puVar2[0x10]), temp_v8 != 0)))) {
         *(unsigned char *)(puVar2 + 0x278) = 1;
       }
       puVar2[3] = 2;
@@ -926,7 +926,7 @@ unsigned int FUN_00276264(void)
   case 2:
     FUN_002b91ec();
     FUN_004bc95c(puVar2[0x10],puVar2[0x12]);
-    func_0x0037723c(0);
+    FUN_0037723c(0);
     FUN_00100388(temp_v27,0x276d48,puVar2[0x10] - 100,puVar2[0x10] - 100);
     FUN_0040b0f8(puVar2[0x24db],temp_v27);
     temp_v8 = FUN_0040af60(puVar2[0x24db]);
@@ -1029,17 +1029,17 @@ unsigned int FUN_00276264(void)
         FUN_002df914();
       }
       FUN_00379d58();
-      func_0x003a3b88();
+      FUN_003a3b88();
       FUN_00328794();
       puVar2[3] = puVar2[3] + 1;
     }
   case 5:
-    temp_v8 = func_0x00224278(puVar2[0x10],puVar2[0x12]);
+    temp_v8 = FUN_00224278(puVar2[0x10],puVar2[0x12]);
     if (temp_v8 != 0) {
       puVar2[3] = puVar2[3] + 1;
 LAB_00276e3c:
-      func_0x0024ad50();
-      func_0x00314b7c(puVar2[0x10],0);
+      FUN_0024ad50();
+      FUN_00314b7c(puVar2[0x10],0);
       temp_v6 = puVar2[3] + 1;
       puVar2[3] = temp_v6;
 LAB_00276e5c:
@@ -1048,7 +1048,7 @@ LAB_00276e5c:
         puVar2[3] = puVar2[3] + 1;
 LAB_00276e7c:
         FUN_00233170();
-        func_0x002d7e6c(puVar2[0x10],0);
+        FUN_002d7e6c(puVar2[0x10],0);
         puVar2[3] = puVar2[3] + 1;
 LAB_00276e9c:
         temp_v8 = FUN_0033bfac();
@@ -1197,7 +1197,7 @@ LAB_00276f5c:
           }
           FUN_002758b0(1,8);
           if (g_gameState == 0x65) {
-            func_0x00352dd4(0x10101003);
+            applyIfIdValid(0x10101003);
           }
           FUN_00378000();
           puVar2[3] = puVar2[3] + 1;
@@ -1371,13 +1371,13 @@ LAB_00276f5c:
           if (temp_v23 && temp_v1 == '\0') {
             temp_v8 = gameFlagIsSet(0x61);
             if (((temp_v8 == 0) && (temp_v8 = gameFlagIsSet(0x48c), temp_v8 == 0)) &&
-               ((temp_v8 = func_0x0033e0d4(), temp_v8 != 0 && (temp_v10 = FUN_002e5c2c(), temp_v10 >= 100)))
+               ((temp_v8 = FUN_0033e0d4(), temp_v8 != 0 && (temp_v10 = FUN_002e5c2c(), temp_v10 >= 100)))
                ) {
               *(unsigned char *)(puVar2 + 0x24d8) = 1;
             }
             temp_v8 = gameFlagIsSet(0x62);
             if ((((temp_v8 == 0) && (temp_v8 = gameFlagIsSet(0x418), temp_v8 == 0)) &&
-                (temp_v8 = func_0x0033e0d4(), temp_v8 != 0)) &&
+                (temp_v8 = FUN_0033e0d4(), temp_v8 != 0)) &&
                ((*(char *)(puVar2 + 0x24d8) == '\0' && (temp_v8 = gameSlotTableFindFree(), temp_v8 >= 5)))) {
               *(unsigned char *)((int)puVar2 + 0x9361) = 1;
             }
@@ -1724,9 +1724,9 @@ LAB_00276f5c:
                                         uStack_138 = (unsigned int)DAT_005f1729;
                                         FUN_00314c38(DAT_005f1725,DAT_005f1726,DAT_005f1727,
                                                      DAT_005f1728);
-                                        func_0x003adff0(DAT_005f1725,DAT_005f1726);
-                                        func_0x003adff0(DAT_005f1727,DAT_005f1728);
-                                        func_0x003adff0(DAT_005f1729,DAT_005f172a);
+                                        fireEntriesMatchingPair(DAT_005f1725,DAT_005f1726);
+                                        fireEntriesMatchingPair(DAT_005f1727,DAT_005f1728);
+                                        fireEntriesMatchingPair(DAT_005f1729,DAT_005f172a);
                                         temp_v8 = DAT_005f16a4;
                                         DAT_005f1614 = 1;
                                         DAT_005f185a = 0;
@@ -1804,7 +1804,7 @@ LAB_00278b38:
                                   else {
                                     sysPlaySe(0xd2);
                                   }
-                                  temp_v8 = func_0x00328200();
+                                  temp_v8 = FUN_00328200();
                                   if (temp_v8 != 0) {
                                     DAT_005f1614 = 1;
                                     puVar2[3] = 0xe;
@@ -1861,7 +1861,7 @@ LAB_00278b38:
                                   *(int *)(temp_v5 + 0x150c) = 0;
                                   return 0;
                                 }
-                                temp_v8 = func_0x0033e0d4();
+                                temp_v8 = FUN_0033e0d4();
                                 if (temp_v8 != 0) {
                                   temp_v8 = FUN_0033ded8();
                                   if (temp_v8 == 0) {
@@ -1872,12 +1872,12 @@ LAB_00278b38:
                                     temp_v8 = flagsBit7Get(g_gameState,DAT_005f1600);
                                     if (temp_v8 == 0) {
                                       popupTryStartScrollPrompt(g_gameState,DAT_005f1600);
-                                      func_0x004bc758(g_gameState,DAT_005f1600,1);
+                                      FUN_004bc758(g_gameState,DAT_005f1600,1);
                                     }
                                     FUN_00274d9c();
                                   }
                                   FUN_002b80b8();
-                                  func_0x00325a74();
+                                  FUN_00325a74();
                                   DAT_005f18e8 = 0;
                                 }
                                 if (*(char *)((int)puVar2 + 0x9e2) == '\0') {
@@ -1896,7 +1896,7 @@ LAB_00278b38:
                                   eventQueueAddUnique(0x1000222);
                                   FUN_0035c6ac();
                                   FUN_00237418();
-                                  func_0x00369938();
+                                  FUN_00369938();
                                   *(unsigned char *)((int)puVar2 + 9) = 1;
                                   puVar2[0x11] = (unsigned int)puVar19;
                                   puVar2[3] = 0x6f;
@@ -1986,9 +1986,9 @@ LAB_00278b38:
                             uStack_134 = (unsigned int)DAT_005f172a;
                             uStack_138 = (unsigned int)DAT_005f1729;
                             FUN_00314c38(DAT_005f1725,DAT_005f1726,DAT_005f1727,DAT_005f1728);
-                            func_0x003adff0(DAT_005f1725,DAT_005f1726);
-                            func_0x003adff0(DAT_005f1727,DAT_005f1728);
-                            func_0x003adff0(DAT_005f1729,DAT_005f172a);
+                            fireEntriesMatchingPair(DAT_005f1725,DAT_005f1726);
+                            fireEntriesMatchingPair(DAT_005f1727,DAT_005f1728);
+                            fireEntriesMatchingPair(DAT_005f1729,DAT_005f172a);
                             if (DAT_005f16ec == -1) {
                               puVar2[3] = 0x25;
                               puVar2[4] = 0;
@@ -2013,9 +2013,9 @@ LAB_00278b38:
                           uStack_134 = (unsigned int)DAT_005f172a;
                           uStack_138 = (unsigned int)DAT_005f1729;
                           FUN_00314c38(DAT_005f1725,DAT_005f1726,DAT_005f1727,DAT_005f1728);
-                          func_0x003adff0(DAT_005f1725,DAT_005f1726);
-                          func_0x003adff0(DAT_005f1727,DAT_005f1728);
-                          func_0x003adff0(DAT_005f1729,DAT_005f172a);
+                          fireEntriesMatchingPair(DAT_005f1725,DAT_005f1726);
+                          fireEntriesMatchingPair(DAT_005f1727,DAT_005f1728);
+                          fireEntriesMatchingPair(DAT_005f1729,DAT_005f172a);
                           temp_v8 = FUN_003cd4b4(DAT_005f163c);
                           if (temp_v8 != 0) {
                             FUN_0020ef68();
@@ -2050,9 +2050,9 @@ LAB_00278b38:
                         uStack_134 = (unsigned int)DAT_005f172a;
                         uStack_138 = (unsigned int)DAT_005f1729;
                         FUN_00314c38(DAT_005f1725,DAT_005f1726,DAT_005f1727,DAT_005f1728);
-                        func_0x003adff0(DAT_005f1725,DAT_005f1726);
-                        func_0x003adff0(DAT_005f1727,DAT_005f1728);
-                        func_0x003adff0(DAT_005f1729,DAT_005f172a);
+                        fireEntriesMatchingPair(DAT_005f1725,DAT_005f1726);
+                        fireEntriesMatchingPair(DAT_005f1727,DAT_005f1728);
+                        fireEntriesMatchingPair(DAT_005f1729,DAT_005f172a);
                         temp_v8 = FUN_003cd4b4(DAT_005f163c);
                         if (temp_v8 != 0) {
                           FUN_0020ef68();
@@ -2089,9 +2089,9 @@ LAB_00278b38:
                       uStack_134 = (unsigned int)DAT_005f172a;
                       uStack_138 = (unsigned int)DAT_005f1729;
                       FUN_00314c38(DAT_005f1725,DAT_005f1726,DAT_005f1727,DAT_005f1728);
-                      func_0x003adff0(DAT_005f1725,DAT_005f1726);
-                      func_0x003adff0(DAT_005f1727,DAT_005f1728);
-                      func_0x003adff0(DAT_005f1729,DAT_005f172a);
+                      fireEntriesMatchingPair(DAT_005f1725,DAT_005f1726);
+                      fireEntriesMatchingPair(DAT_005f1727,DAT_005f1728);
+                      fireEntriesMatchingPair(DAT_005f1729,DAT_005f172a);
                       temp_v8 = FUN_003cd4b4(DAT_005f163c);
                       if (temp_v8 != 0) {
                         FUN_0020ef68();
@@ -2106,7 +2106,7 @@ LAB_00278b38:
                       if (DAT_005f16ec == -1) {
                         if (DAT_005f16e4 == '\0') {
                           FUN_00237418();
-                          func_0x00369938();
+                          FUN_00369938();
                           puVar2[3] = 0x6d;
                           FUN_0020ef68();
                           puVar2[4] = 0;
@@ -2356,7 +2356,7 @@ LAB_00279490:
               temp_v22 = 0;
             }
           }
-          func_0x00294a84(temp_v22);
+          FUN_00294a84(temp_v22);
         }
       }
     }
@@ -2389,7 +2389,7 @@ LAB_00279444:
     *(unsigned short *)(temp_v5 + 0x1e) = *(unsigned short *)(pcVar11 + 6);
     FUN_00483294(puVar2 + 0x3d);
     stateSetterSetFromBase(puVar2 + 0x3d,puVar2[0x10] - 100,puVar2[0x12]);
-    func_0x00482fd4(puVar2 + 0x3d);
+    FUN_00482fd4(puVar2 + 0x3d);
     FUN_0039933c();
     FUN_002df914();
     break;
@@ -2427,7 +2427,7 @@ LAB_00279444:
     eventQueueAddUnique(0x1000222);
     FUN_0035c6ac();
     FUN_00237418();
-    func_0x00369938();
+    FUN_00369938();
     temp_v8 = 0x6f;
     *(unsigned char *)((int)puVar2 + 9) = 1;
     puVar2[3] = temp_v8;
@@ -2465,7 +2465,7 @@ LAB_00279444:
             uStack_9c = *(int *)(DAT_005806a4 + 0x18);
             FUN_004731b8(&uStack_b0);
             FUN_00237418();
-            func_0x00369938();
+            FUN_00369938();
             puVar2[3] = 0x70;
             puVar2[4] = 0;
             *(unsigned char *)((int)puVar2 + 10) = 1;
@@ -2640,13 +2640,13 @@ LAB_00279834:
     FUN_00297c3c();
     FUN_00234b30();
     FUN_002737a8();
-    temp_v8 = func_0x002dfa18();
+    temp_v8 = FUN_002dfa18();
     if (temp_v8 == 0) {
       return 0;
     }
     if (DAT_005f1658 != 0) {
 LAB_0027a7a8:
-      func_0x00369938();
+      FUN_00369938();
       puVar2[3] = 0x6e;
       puVar2[4] = 0;
       *(unsigned char *)((int)puVar2 + 10) = 1;
@@ -2873,7 +2873,7 @@ LAB_0027a7a8:
     DAT_005f185a = 0;
     DAT_005f1614 = '\x01';
     DAT_005f161c = 1;
-    func_0x00365b78();
+    recTableFireType3();
     FUN_001695a0();
     scrScriptProcessStartEntry(puVar2[0x27d],puVar2[0x279]);
     FUN_0036a434(puVar2);
@@ -2905,7 +2905,7 @@ LAB_0027a030:
       return 0;
     }
     FUN_00237418();
-    func_0x00369938();
+    FUN_00369938();
     puVar2[3] = 0x6d;
     FUN_0020ef68();
     puVar2[4] = 0;
@@ -3055,7 +3055,7 @@ LAB_0027a030:
     }
     FUN_001f4908(0,10,0xff);
     FUN_001f4908(1,10,0xff);
-    func_0x0029805c(8,0);
+    FUN_0029805c(8,0);
     FUN_00387014();
     temp_v8 = puVar2[3] + 1;
     puVar2[3] = temp_v8;
@@ -3180,7 +3180,7 @@ LAB_0027a030:
   case 0x39:
     FUN_00387014();
     puVar2[4] = puVar2[4] + 1;
-    temp_v8 = func_0x002dfa18();
+    temp_v8 = FUN_002dfa18();
     if (temp_v8 == 0) {
       return 0;
     }
@@ -3199,7 +3199,7 @@ LAB_0027a030:
       FUN_002747dc();
       FUN_00364740(temp_v22,puVar19[0x12]);
       FUN_002ddea0();
-      func_0x00245d78(0);
+      FUN_00245d78(0);
       FUN_002df914();
       FUN_003a2278(0);
       DAT_005f1614 = '\0';
@@ -3288,7 +3288,7 @@ LAB_0027a030:
     break;
   case 0x3e:
     temp_v8 = FUN_002e07f4();
-    if ((temp_v8 != 0) && (temp_v8 = func_0x002de9b8(), temp_v8 == 0)) {
+    if ((temp_v8 != 0) && (temp_v8 = FUN_002de9b8(), temp_v8 == 0)) {
       DAT_005f1aca = 1;
       FUN_00387014();
       mapPlaceSet(0xffffffff,0xffffffff);
@@ -3338,7 +3338,7 @@ LAB_0027a030:
     }
     break;
   case 0x41:
-    func_0x00369938();
+    FUN_00369938();
     mapPlaceSet(0xffffffff,0xffffffff);
     puVar19 = g_lmapMainState;
     FUN_001695a0();
@@ -3365,7 +3365,7 @@ LAB_0027a030:
     puVar2[4] = 0;
     break;
   case 0x42:
-    temp_v8 = func_0x002dfa18();
+    temp_v8 = FUN_002dfa18();
     if (temp_v8 != 0) {
       temp_v23 = DAT_005f1658 == 0;
       if (!temp_v23) {
@@ -3476,7 +3476,7 @@ LAB_0027a030:
     FUN_0036a434(puVar2);
     FUN_0036aa04(puVar2);
     FUN_00297c3c();
-    temp_v8 = func_0x00368a4c();
+    temp_v8 = FUN_00368a4c();
     if (temp_v8 == 0) {
       puVar19 = &DAT_005f16fc;
       if (DAT_005f1768 == '\0') {
@@ -3694,7 +3694,7 @@ LAB_0027a030:
     }
     FUN_00274e00();
     FUN_002dddb4();
-    func_0x00353a10();
+    FUN_00353a10();
     FUN_002b7be0();
     temp_v8 = puVar2[3] + 1;
     puVar2[3] = temp_v8;
@@ -3809,13 +3809,13 @@ LAB_0027a030:
       } while (temp_v8 < 0x20);
     }
     FUN_00379d58();
-    func_0x003a3b88();
+    FUN_003a3b88();
     FUN_00328794();
     temp_v8 = puVar2[3] + 1;
     puVar2[3] = temp_v8;
     break;
   case 0x53:
-    temp_v6 = func_0x00224278(puVar2[0x10],puVar2[0x12]);
+    temp_v6 = FUN_00224278(puVar2[0x10],puVar2[0x12]);
     if (temp_v6 == 0) {
       return 0;
     }
@@ -3824,8 +3824,8 @@ LAB_0027a030:
   case 0x54:
   case 0x61:
   case 0x6a:
-    func_0x0024ad50();
-    func_0x00314b7c(puVar2[0x10],0);
+    FUN_0024ad50();
+    FUN_00314b7c(puVar2[0x10],0);
     puVar2[3] = puVar2[3] + 1;
     break;
   case 0x55:
@@ -4009,7 +4009,7 @@ LAB_0027a030:
     }
     FUN_00274e00();
     FUN_002dddb4();
-    func_0x00353a10();
+    FUN_00353a10();
     FUN_002b7be0();
     puVar2[3] = puVar2[3] + 1;
     puVar2[4] = 0;
@@ -4114,13 +4114,13 @@ LAB_0027a030:
       } while (temp_v8 < 0x20);
     }
     FUN_00379d58();
-    func_0x003a3b88();
+    FUN_003a3b88();
     FUN_00328794();
     temp_v8 = puVar2[3] + 1;
     puVar2[3] = temp_v8;
     break;
   case 0x60:
-    temp_v6 = func_0x00224278(puVar2[0x10],puVar2[0x12]);
+    temp_v6 = FUN_00224278(puVar2[0x10],puVar2[0x12]);
     if (temp_v6 == 0) {
       return 0;
     }
@@ -4234,7 +4234,7 @@ LAB_0027ca0c:
       if (puVar2[4] == 0x10) {
         FUN_001f4908(0,10,0xff);
         FUN_001f4908(1,10,0xff);
-        func_0x0029805c(8,0);
+        FUN_0029805c(8,0);
       }
     }
     FUN_003401a4(puVar2);
@@ -4251,9 +4251,9 @@ LAB_0027ca0c:
     uStack_134 = (unsigned int)DAT_005f172a;
     uStack_138 = (unsigned int)DAT_005f1729;
     FUN_00314c38(DAT_005f1725,DAT_005f1726,DAT_005f1727,DAT_005f1728);
-    func_0x003adff0(DAT_005f1725,DAT_005f1726);
-    func_0x003adff0(DAT_005f1727,DAT_005f1728);
-    func_0x003adff0(DAT_005f1729,DAT_005f172a);
+    fireEntriesMatchingPair(DAT_005f1725,DAT_005f1726);
+    fireEntriesMatchingPair(DAT_005f1727,DAT_005f1728);
+    fireEntriesMatchingPair(DAT_005f1729,DAT_005f172a);
     puVar2[4] = 0;
     temp_v8 = DAT_005f16a0;
     FUN_003b5714(DAT_005f16a0,DAT_005f16a4,DAT_005f16a8);
@@ -4271,7 +4271,7 @@ LAB_0027ca0c:
     break;
   case 0x67:
     FUN_002dddb4();
-    func_0x00353a10();
+    FUN_00353a10();
     FUN_002b7be0();
     FUN_00227a70();
     g_gameState = DAT_005f1c98;
@@ -4456,9 +4456,9 @@ joined_r0x0027ce58:
     cameraRegistryRemove(&DAT_005f10cc);
     FUN_00274e00();
     FUN_002dddb4();
-    func_0x00353a10();
+    FUN_00353a10();
     FUN_002b7be0();
-    func_0x003d2d9c();
+    sub68OwnerDestroyAll();
     if (puVar2[0x27d] != 0) {
       scrScriptProcessDestroy();
       puVar2[0x27d] = 0;
@@ -4541,7 +4541,7 @@ joined_r0x0027ce58:
     temp_v22 = FUN_00294854();
     FUN_00249c9c(temp_v22);
     FUN_002c2358();
-    func_0x003de0dc();
+    jobFlagObjStop();
     temp_v8 = puVar2[3] + 1;
     puVar2[3] = temp_v8;
     break;
@@ -4584,9 +4584,9 @@ joined_r0x0027ce58:
       uStack_a4 = ((uStack_a4 >> 8) & 0xff) << 8;
       uStack_a0 = 0;
       uStack_9c = (unsigned int)(*(unsigned short *)((unsigned char *)&uStack_9c + 2)) << 0x10;
-      temp_v3 = func_0x003847c4();
+      temp_v3 = FUN_003847c4();
       uStack_b0 = romwright_piece_2_2(temp_v3,(unsigned short)uStack_b0);
-      temp_v22 = func_0x00297f68((int)(short)puVar2[0x12]);
+      temp_v22 = FUN_00297f68((int)(short)puVar2[0x12]);
       switch(temp_v22) {
       case 0:
         uStack_a4 = romwright_piece_2_2(1,(unsigned short)uStack_a4);

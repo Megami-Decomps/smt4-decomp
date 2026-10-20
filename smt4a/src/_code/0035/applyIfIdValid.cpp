@@ -8,6 +8,9 @@ extern void FUN_00274970(s32 value);
 
 void applyIfIdValid(s32 value)
 {
+    if (value == 0) {
+        return;
+    }
     s32 id = dataTable23Type0FindIndexById(value);
 
     if (id != -1) {

@@ -56,7 +56,7 @@ extern unsigned int btlPosArrangeGetFileName(int);
 /* Supplied declaration required: FUN_004f4648. */
 /* Supplied declaration required: FUN_004f479c. */
 /* Supplied declaration required: FUN_004f5144. */
-extern int func_0x003f11ac(int, int);
+extern int FUN_003f11ac(int, int);
 
 
 unsigned int FUN_002984d4(void)
@@ -240,7 +240,7 @@ code_r0x004f4c54:
       temp_v2 = puVar8[3];
       temp_v4 = *(int *)(temp_v1 + 0x1ed4) + *(short *)(puVar8 + 4) * 0x1d0;
       FUN_001568f8(temp_v1);
-      temp_v1 = func_0x003f11ac(temp_v1,(int)*(short *)(puVar8 + 4));
+      temp_v1 = FUN_003f11ac(temp_v1,(int)*(short *)(puVar8 + 4));
       puVar8 = (unsigned int *)asdListBoxGetFloatValuePtr(temp_v2,1);
       *(unsigned int *)(temp_v4 + 0xc) = *puVar8;
       puVar8 = (unsigned int *)asdListBoxGetFloatValuePtr(temp_v2,2);

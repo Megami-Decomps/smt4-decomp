@@ -18,7 +18,8 @@ tools/assign_tus.py   places functions in source files from assert paths and fil
 tools/shared.py       pairs the functions both games share and compares their progress
 tools/fdiff.py        compiles one function and diffs its disassembly and relocations against retail
 tools/names.py        names a function or global in every file at once and records the evidence
-tools/units.py        splits a unit the analysis merged from two functions (symbols, project, objdiff, source)
+tools/units.py        fixes the function list: splits merged units, adds the code the analysis missed
+                      (branch targets, callbacks, stub bodies), extends cut-short ones, moves late starts
 tools/scope.py        lists the third-party functions progress does not count (config/third_party.txt)
 tools/progress_site.py  renders both games' proven progress as a static site (build/site/)
 ```

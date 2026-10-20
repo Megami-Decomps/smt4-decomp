@@ -32,13 +32,13 @@ int asdSequenceRequest(...);
 int NaviMain_Destroy(void);
 int FUN_0032c69c(void);
 int mapIfDestroy(void);
-int func_0x001a8c54(void);
-int func_0x001d3818(void);
-int func_0x001e39b4(void);
-int func_0x00208bc8(void);
-int func_0x00208ca8(void);
-int func_0x0021e764(void);
-int func_0x002d3e18(void);
+int FUN_001a8c54(void);
+void objectDestroyModelManager(void);
+void lmapSceneCreateEffect(void);
+int FUN_00208bc8(void);
+int FUN_00208ca8(void);
+int FUN_0021e764(void);
+int FUN_002d3e18(void);
 
 int mapDepartFreeWork(void);
 int FUN_001a9574(void);
@@ -62,12 +62,12 @@ int asdMemFree(...);
 int FUN_002c8acc(void);
 int FUN_002c9b2c(...);
 int FUN_002df86c(void);
-int func_0x001e4540(void);
-int func_0x0020d00c(void);
-int func_0x002c87a4(void);
-int func_0x002dfa78(void);
-int func_0x002dfe64(void);
-int func_0x00316cfc(void);
+int FUN_001e4540(void);
+int FUN_0020d00c(void);
+int FUN_002c87a4(void);
+int FUN_002dfa78(void);
+int FUN_002dfe64(void);
+int FUN_00316cfc(void);
 
 int FUN_001a8cf8(void);
 int FUN_002236a4(void);
@@ -89,7 +89,7 @@ int FUN_002eb184(void);
 int FUN_002fb330(...);
 int FUN_002fb4dc(void);
 int FUN_0031d54c(void);
-int func_0x002e0608(...);
+int FUN_002e0608(...);
 
 int scrLoaderResetWithFlag(...);
 int scrLoaderRelease(...);
@@ -111,7 +111,7 @@ int scrScriptProcessStartEntry(...);
 int buttonHelpSetPresetDefault(void);
 int FUN_002bff50(void);
 int MapDepart_Init(...);
-int func_0x002733d0(void);
+void FUN_002733d0(void);
 
 int FUN_001f9334(void);
 int FUN_0020d91c(void);
@@ -158,9 +158,9 @@ int libc_strcpy(...);
 int FUN_002bf810(...);
 int FUN_002bfc24(...);
 int FUN_002fb0cc(...);
-int func_0x001d2f48(void);
-int func_0x001f90c4(...);
-int func_0x00276138(void);
+int FUN_001d2f48(void);
+int FUN_001f90c4(...);
+int FUN_00276138(void);
 
 int FUN_00276238(void);
 int FUN_00276310(void);
@@ -189,10 +189,10 @@ int FUN_002bd158(void);
 int FUN_002be650(...);
 int FUN_002c29d8(...);
 int MapEpl_Init(...);
-int func_0x001b42b0(...);
-int func_0x00276540(void);
-int func_0x002f49ec(...);
-int func_0x0030f8d4(void);
+int FUN_001b42b0(...);
+int FUN_00276540(void);
+int FUN_002f49ec(...);
+int FUN_0030f8d4(void);
 int rt_memcpy_w(...);
 
 int FUN_001abb98(void);
@@ -219,9 +219,9 @@ int FUN_002c5c04(...);
 int FUN_002d28a4(...);
 int FUN_003079b4(void);
 int MapEnemy_Register(...);
-int func_0x001b42e4(void);
-int func_0x00208b8c(void);
-int func_0x0020cfe8(...);
+int FUN_001b42e4(void);
+int FUN_00208b8c(void);
+int FUN_0020cfe8(...);
 
 int FUN_001fdebc(...);
 int FUN_00208160(void);
@@ -242,14 +242,14 @@ int FUN_00297060(...);
 int FUN_002be624(...);
 int NaviMain_SetCurrentMap(...);
 int NaviMain_Start(...);
-int func_0x001a8f74(void);
-int func_0x001d2f20(...);
-int func_0x001e3284(void);
-int func_0x001e3968(...);
-int func_0x0020d038(...);
-int func_0x0020d064(...);
-int func_0x002d3e88(...);
-int func_0x00342078(...);
+int FUN_001a8f74(void);
+int FUN_001d2f20(...);
+int FUN_001e3284(void);
+int FUN_001e3968(...);
+int FUN_0020d038(...);
+int FUN_0020d064(...);
+int FUN_002d3e88(...);
+int FUN_00342078(...);
 
 int FUN_0010bb84(int, int);
 int FUN_001fb3a0(void);
@@ -271,9 +271,9 @@ int gameFlagSetValue(int, int);
 int FUN_002f3694(void);
 int MapIf_Register(unsigned int, int);
 int VectorSignedToFloat(...);
-int func_0x0019dc74(void);
-int func_0x001a9510(void);
-int func_0x001e3994(void);
+int FUN_0019dc74(void);
+int FUN_001a9510(void);
+int FUN_001e3994(void);
 
 extern unsigned char LAB_00305f61; /* 0x305f61 */
 extern unsigned char LAB_0031305f; /* 0x31305f */
@@ -714,48 +714,48 @@ extern int FUN_00328b1c(int);
 /* Supplied declaration required: MapIf_Register. */
 /* Supplied declaration required: NaviMain_SetCurrentMap. */
 /* Supplied declaration required: NaviMain_Start. */
-/* Supplied declaration required: func_0x0019dc74. */
-/* Supplied declaration required: func_0x001a8c54. */
-/* Supplied declaration required: func_0x001a8f74. */
-/* Supplied declaration required: func_0x001a9510. */
-/* Supplied declaration required: func_0x001b42b0. */
-/* Supplied declaration required: func_0x001b42e4. */
-/* Supplied declaration required: func_0x001d2f20. */
-/* Supplied declaration required: func_0x001d2f48. */
-/* Supplied declaration required: func_0x001d3818. */
-/* Supplied declaration required: func_0x001e3284. */
-/* Supplied declaration required: func_0x001e3968. */
-/* Supplied declaration required: func_0x001e3994. */
-/* Supplied declaration required: func_0x001e39b4. */
-/* Supplied declaration required: func_0x001e4540. */
-/* Supplied declaration required: func_0x001f90c4. */
-extern int func_0x001fb2c8(void);
-/* Supplied declaration required: func_0x00208b8c. */
-/* Supplied declaration required: func_0x00208bc8. */
-/* Supplied declaration required: func_0x00208ca8. */
-/* Supplied declaration required: func_0x0020cfe8. */
-/* Supplied declaration required: func_0x0020d00c. */
-/* Supplied declaration required: func_0x0020d038. */
-/* Supplied declaration required: func_0x0020d064. */
-/* Supplied declaration required: func_0x0021e764. */
-extern int func_0x00270cc4(void);
-/* Supplied declaration required: func_0x002733d0. */
-/* Supplied declaration required: func_0x00276138. */
-/* Supplied declaration required: func_0x00276540. */
-/* Supplied declaration required: func_0x002c87a4. */
-extern int func_0x002d2b40(void);
-extern int func_0x002d3b20(void);
-/* Supplied declaration required: func_0x002d3e18. */
-/* Supplied declaration required: func_0x002d3e88. */
-/* Supplied declaration required: func_0x002dfa78. */
-extern int func_0x002dfb28(void);
-/* Supplied declaration required: func_0x002dfe64. */
-/* Supplied declaration required: func_0x002e0608. */
-/* Supplied declaration required: func_0x002f49ec. */
-extern int func_0x0030f504(void);
-/* Supplied declaration required: func_0x0030f8d4. */
-/* Supplied declaration required: func_0x00316cfc. */
-/* Supplied declaration required: func_0x00342078. */
+/* Supplied declaration required: FUN_0019dc74. */
+/* Supplied declaration required: FUN_001a8c54. */
+/* Supplied declaration required: FUN_001a8f74. */
+/* Supplied declaration required: FUN_001a9510. */
+/* Supplied declaration required: FUN_001b42b0. */
+/* Supplied declaration required: FUN_001b42e4. */
+/* Supplied declaration required: FUN_001d2f20. */
+/* Supplied declaration required: FUN_001d2f48. */
+/* Supplied declaration required: objectDestroyModelManager. */
+/* Supplied declaration required: FUN_001e3284. */
+/* Supplied declaration required: FUN_001e3968. */
+/* Supplied declaration required: FUN_001e3994. */
+/* Supplied declaration required: lmapSceneCreateEffect. */
+/* Supplied declaration required: FUN_001e4540. */
+/* Supplied declaration required: FUN_001f90c4. */
+extern int FUN_001fb2c8(void);
+/* Supplied declaration required: FUN_00208b8c. */
+/* Supplied declaration required: FUN_00208bc8. */
+/* Supplied declaration required: FUN_00208ca8. */
+/* Supplied declaration required: FUN_0020cfe8. */
+/* Supplied declaration required: FUN_0020d00c. */
+/* Supplied declaration required: FUN_0020d038. */
+/* Supplied declaration required: FUN_0020d064. */
+/* Supplied declaration required: FUN_0021e764. */
+extern int FUN_00270cc4(void);
+/* Supplied declaration required: FUN_002733d0. */
+/* Supplied declaration required: FUN_00276138. */
+/* Supplied declaration required: FUN_00276540. */
+/* Supplied declaration required: FUN_002c87a4. */
+extern int FUN_002d2b40(void);
+extern int FUN_002d3b20(void);
+/* Supplied declaration required: FUN_002d3e18. */
+/* Supplied declaration required: FUN_002d3e88. */
+/* Supplied declaration required: FUN_002dfa78. */
+extern int FUN_002dfb28(void);
+/* Supplied declaration required: FUN_002dfe64. */
+/* Supplied declaration required: FUN_002e0608. */
+/* Supplied declaration required: FUN_002f49ec. */
+extern int FUN_0030f504(void);
+/* Supplied declaration required: FUN_0030f8d4. */
+/* Supplied declaration required: FUN_00316cfc. */
+/* Supplied declaration required: FUN_00342078. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -815,10 +815,10 @@ unsigned int FUN_001b7f78(void)
     DAT_0049f940 = 1;
     DAT_0049f941 = 1;
     DAT_0049fba0 = '\0';
-    func_0x0019dc74();
+    FUN_0019dc74();
     FUN_00281788();
-    func_0x001e3994();
-    func_0x001a9510();
+    FUN_001e3994();
+    FUN_001a9510();
     MapIf_Register(*puVar14,0);
     *(unsigned char *)((int)puVar14 + 0xba) = 0;
     *(unsigned char *)(puVar14 + 0x11) = 0;
@@ -1145,7 +1145,7 @@ LAB_001b848c:
         DAT_0049f92c = 1;
       }
     }
-    func_0x00342078(DAT_0049f928,DAT_0049f92c,1);
+    FUN_00342078(DAT_0049f928,DAT_0049f92c,1);
     NaviMain_Start(1,DAT_0049f928);
     NaviMain_SetCurrentMap(DAT_0049f928);
     FUN_0027d474(DAT_0049f928,DAT_0049f92c,DAT_0049f924);
@@ -1180,7 +1180,7 @@ LAB_001b848c:
     puVar14[9] = temp_v9;
     break;
   case 3:
-    func_0x001d2f20(puVar14[0xb],puVar14[0xc]);
+    FUN_001d2f20(puVar14[0xb],puVar14[0xc]);
     temp_v10 = puVar14[9] + 1;
     puVar14[9] = temp_v10;
   case 4:
@@ -1198,7 +1198,7 @@ LAB_001b8a44:
     }
     puVar14[9] = puVar14[9] + 1;
 LAB_001b8a74:
-    func_0x001e3968(puVar14[0xb],puVar14[0xc]);
+    FUN_001e3968(puVar14[0xb],puVar14[0xc]);
     puVar14[9] = puVar14[9] + 1;
 LAB_001b8a8c:
     temp_v9 = FUN_0021e4bc();
@@ -1207,7 +1207,7 @@ LAB_001b8a8c:
     }
     puVar14[9] = puVar14[9] + 1;
 LAB_001b8aa8:
-    func_0x0020d038(puVar14[0xb],puVar14[0xc]);
+    FUN_0020d038(puVar14[0xb],puVar14[0xc]);
     puVar14[9] = puVar14[9] + 1;
 LAB_001b8ac0:
     temp_v9 = FUN_0027cda0();
@@ -1227,18 +1227,18 @@ LAB_001b8b00:
     }
     puVar14[9] = puVar14[9] + 1;
 LAB_001b8b20:
-    func_0x001a8f74();
-    func_0x0020d064(puVar14[0xb],puVar14[0xc]);
+    FUN_001a8f74();
+    FUN_0020d064(puVar14[0xb],puVar14[0xc]);
     puVar14[9] = puVar14[9] + 1;
 LAB_001b8b40:
-    temp_v9 = func_0x002d3b20();
+    temp_v9 = FUN_002d3b20();
     if (temp_v9 == 0) {
       return 0;
     }
     puVar14[9] = puVar14[9] + 1;
 LAB_001b8b60:
-    func_0x001e3284();
-    func_0x002d3e88(puVar14[0xb],puVar14[0xc]);
+    FUN_001e3284();
+    FUN_002d3e88(puVar14[0xb],puVar14[0xc]);
     puVar14[9] = puVar14[9] + 1;
 LAB_001b8b80:
     temp_v9 = FUN_002f400c();
@@ -1271,14 +1271,14 @@ LAB_001b8c30:
     }
     MapEnemy_Register(*puVar14);
     if (DAT_0049fc80 == 0) {
-      func_0x0020cfe8(puVar14[0xb],puVar14[0xc]);
+      FUN_0020cfe8(puVar14[0xb],puVar14[0xc]);
       puVar14[9] = puVar14[9] + 1;
 LAB_001b8c80:
-      temp_v9 = func_0x002dfb28();
+      temp_v9 = FUN_002dfb28();
       if (temp_v9 == 0) {
         return 0;
       }
-      func_0x001b42e4();
+      FUN_001b42e4();
       temp_v9 = puVar14[9] + 1;
       puVar14[9] = temp_v9;
       break;
@@ -1424,17 +1424,17 @@ LAB_001b8e80:
     }
     FUN_0021be00();
     FUN_002d28a4(g_gameState,DAT_0049f920);
-    func_0x00208b8c();
+    FUN_00208b8c();
     FUN_003079b4();
     FUN_00276a3c();
     if (DAT_0049fd14 != 0xffffffff) {
       mapDepartSetTarget(0xffffffff,0xffffffff);
     }
-    func_0x002f49ec(DAT_0049f924);
+    FUN_002f49ec(DAT_0049f924);
     FUN_00276968(1,8);
     FUN_0027d474(DAT_0049f928,DAT_0049f92c,DAT_0049f924);
     if ((DAT_0049f942 != '\0') && (temp_v9 = FUN_00285574(), temp_v9 == 0)) {
-      func_0x0030f8d4();
+      FUN_0030f8d4();
     }
     FUN_00276950(DAT_0049f928);
     DAT_0049f941 = 0;
@@ -1454,7 +1454,7 @@ LAB_001b8e80:
     puVar14[9] = temp_v9;
     break;
   case 0x14:
-    temp_v9 = func_0x001fb2c8();
+    temp_v9 = FUN_001fb2c8();
     if (temp_v9 == 0) {
       return 0;
     }
@@ -1465,7 +1465,7 @@ LAB_001b8e80:
     FUN_002a04f0(0);
     DAT_0049f934 = 1;
     FUN_0027fa98(1);
-    func_0x001b42b0(1);
+    FUN_001b42b0(1);
     FUN_002804ec(g_lmapScene + 0x28);
     *(unsigned char *)(DAT_004474f4 + 0xa4) = 1;
     FUN_003079b4();
@@ -1651,7 +1651,7 @@ LAB_001b9210:
       puVar14[10] = 0;
       DAT_0049f934 = 1;
       DAT_0049f93c = 1;
-      func_0x00276540();
+      FUN_00276540();
       return 0;
     }
     if (DAT_0049fa96 != 0) {
@@ -1660,7 +1660,7 @@ LAB_001b9210:
       puVar14[10] = 0;
       DAT_0049f934 = 1;
       DAT_0049f93c = 1;
-      func_0x00276540();
+      FUN_00276540();
       return 0;
     }
     if (DAT_0049fa94 != 0) {
@@ -1669,7 +1669,7 @@ LAB_001b9210:
       puVar14[10] = 0;
       DAT_0049f934 = 1;
       DAT_0049f93c = 1;
-      func_0x00276540();
+      FUN_00276540();
       return 0;
     }
     temp_v10 = g_aocSystem;
@@ -1679,10 +1679,10 @@ LAB_001b9210:
       puVar14[10] = 0;
       DAT_0049f934 = 1;
       DAT_0049f93c = 1;
-      func_0x00276540();
+      FUN_00276540();
       return 0;
     }
-    func_0x00276540();
+    FUN_00276540();
     if (g_gameState != 0x24) {
       FUN_0027d474(DAT_0049f928,DAT_0049f92c,DAT_0049f924);
     }
@@ -2169,7 +2169,7 @@ LAB_001ba78c:
                           DAT_0049f93c = 1;
                           if (temp_v10 == 4) {
                             FUN_00276218();
-                            func_0x00276138();
+                            FUN_00276138();
                             FUN_0027d5ac(0);
                             FUN_0028527c(0);
                             FUN_002bf810(0x10000bc);
@@ -2274,7 +2274,7 @@ LAB_001ba78c:
                                             else {
                                               temp_v10 = FUN_001fc2b0((int)(short)DAT_0049f994);
                                               if (temp_v10 != 0) {
-                                                func_0x001f90c4(DAT_0049f990);
+                                                FUN_001f90c4(DAT_0049f990);
                                                 FUN_00276078((int)(short)DAT_0049f994);
                                               }
                                             }
@@ -2904,12 +2904,12 @@ LAB_001bb1d4:
         *(unsigned char *)((int)puVar14 + 0xba) = 1;
       }
       if (*(char *)(temp_v9 + 0xdc8) == '\0') {
-        temp_v9 = func_0x002d2b40();
+        temp_v9 = FUN_002d2b40();
         if (temp_v9 == -1) {
           return 0;
         }
         if (DAT_0049fab5 != '\0') {
-          func_0x001d2f48();
+          FUN_001d2f48();
           return 0;
         }
         if (DAT_0049fc88 == 0) {
@@ -2997,7 +2997,7 @@ LAB_001bb1d4:
       uStack_1bc = (unsigned int)0x1e;
       FUN_00294834(200,200,200,0x82);
     }
-    func_0x00276540();
+    FUN_00276540();
     return 0;
   case 0x18:
     puVar14[10] = puVar14[10] + 1;
@@ -3091,7 +3091,7 @@ LAB_001bb1d4:
   case 0x1a:
     puVar14[10] = puVar14[10] + 1;
     temp_v9 = lmapSceneGetUnk0();
-    if ((temp_v9 == 0x1c) && (func_0x00276540(), *(int *)(g_lmapScene + 4) >= 100)) {
+    if ((temp_v9 == 0x1c) && (FUN_00276540(), *(int *)(g_lmapScene + 4) >= 100)) {
       puVar14[10] = 999;
     }
     else if ((int)puVar14[10] < 0x15) {
@@ -3130,7 +3130,7 @@ LAB_001bb1d4:
     puVar14[10] = temp_v16;
     break;
   case 0x1c:
-    func_0x00276540();
+    FUN_00276540();
     if (puVar14[10] == 0) {
       FUN_0028d664(g_aocMain + 0xa8,1);
       FUN_00273840(1);
@@ -3202,7 +3202,7 @@ LAB_001bbd00:
     FUN_00273840(temp_v16);
     break;
   case 0x1d:
-    func_0x00276540();
+    FUN_00276540();
     if (puVar14[10] == 0) {
       FUN_00273828();
     }
@@ -3221,7 +3221,7 @@ LAB_001bbd00:
     }
     break;
   case 0x1e:
-    func_0x00276540();
+    FUN_00276540();
     if (puVar14[10] == 0) {
       scrLoaderReset(g_aocMain + 0xa8);
       FUN_0027fa98(2);
@@ -3253,7 +3253,7 @@ LAB_001bbd00:
     FUN_002893ec(temp_v9,0);
     goto joined_r0x001bfcb4;
   case 0x20:
-    func_0x00276540();
+    FUN_00276540();
     if (puVar14[10] == 0) {
       scrLoaderResetWithFlag(g_aocMain + 0xa8,1);
       FUN_00273840(1);
@@ -3285,7 +3285,7 @@ LAB_001bc008:
     FUN_0027d0ec();
     break;
   case 0x21:
-    func_0x00276540();
+    FUN_00276540();
     temp_v9 = g_aocMain;
     temp_v14 = *(unsigned int *)(g_aocMain + 0x754);
     if ((temp_v14 & 4) != 0 || (temp_v14 & 8) != 0) {
@@ -3313,17 +3313,17 @@ LAB_001bc008:
     break;
   case 0x22:
     mapDepartSetTarget(0xffffffff,0xffffffff);
-    func_0x00276540();
+    FUN_00276540();
     uStack_1c8 = 0;
     uStack_1c4 = DAT_0049f958;
     MapDepart_Init(&uStack_1c8,0x20);
-    func_0x002733d0();
+    FUN_002733d0();
     DAT_0049fb47 = 1;
     puVar14[9] = 0x23;
     puVar14[10] = 0;
     break;
   case 0x23:
-    func_0x00276540();
+    FUN_00276540();
     temp_v12 = mapDepartIsRunning();
     temp_v10 = DAT_004474f4;
     if (temp_v12 != 0) {
@@ -3374,7 +3374,7 @@ LAB_001bc008:
   case 0x24:
     FUN_0027fa98(5);
     puVar14[10] = puVar14[10] + 1;
-    func_0x00276540();
+    FUN_00276540();
     temp_v16 = 0;
     temp_v9 = 0x25;
     DAT_0049fb45 = 0;
@@ -3382,7 +3382,7 @@ LAB_001bc008:
     puVar14[10] = temp_v16;
     break;
   case 0x25:
-    func_0x00276540();
+    FUN_00276540();
     temp_v9 = FUN_002eb134();
     if (temp_v9 == 0) {
       FUN_0027fca0(0);
@@ -3426,7 +3426,7 @@ LAB_001bc008:
     break;
   case 0x26:
     puVar14[10] = puVar14[10] + 1;
-    func_0x00276540();
+    FUN_00276540();
     if ((int)puVar14[10] >= 11) {
       puVar14[0x19] = DAT_0049fa3c;
       FUN_002be624(puVar14 + 0x1a,&DAT_0049fa40);
@@ -3439,7 +3439,7 @@ LAB_001bc008:
     }
     break;
   case 0x27:
-    func_0x00276540();
+    FUN_00276540();
     puVar14[10] = puVar14[10] + 1;
     temp_v9 = FUN_0019e0c0(puVar14[0x15]);
     if (temp_v9 == 2) {
@@ -3472,7 +3472,7 @@ LAB_001bc008:
     scrScriptProcessStartEntry(puVar14[0x15],0);
     DAT_0049fb45 = 0;
     DAT_0049fb46 = 0;
-    func_0x002733d0();
+    FUN_002733d0();
     puVar14[9] = puVar14[9] + 1;
     puVar14[10] = 0;
     break;
@@ -3532,17 +3532,17 @@ LAB_001bc008:
     buttonHelpSetPresetDefault();
     FUN_00273358(1);
     FUN_0027fa98(2);
-    func_0x00276540();
+    FUN_00276540();
     FUN_002bff50();
     scrScriptProcessStartEntry(puVar14[0x15],puVar14[0x2d]);
     DAT_0049fb45 = 0;
     DAT_0049fb46 = 0;
-    func_0x002733d0();
+    FUN_002733d0();
     puVar14[9] = puVar14[9] + 1;
     puVar14[10] = 0;
     break;
   case 0x2b:
-    func_0x00276540();
+    FUN_00276540();
     temp_v10 = FUN_0019e0c0(puVar14[0x15]);
     if (temp_v10 != 2) {
       return 0;
@@ -3569,7 +3569,7 @@ LAB_001bc008:
     temp_v10 = FUN_00285574();
     if (temp_v10 != 2) {
       FUN_00276218();
-      func_0x00276138();
+      FUN_00276138();
       *(unsigned char *)(temp_v9 + 0x790) = 1;
       if (temp_v8 == 1) {
         temp_v9 = dataTable2fSub0GetRecord((int)temp_v7);
@@ -3605,7 +3605,7 @@ LAB_001bc008:
       return 0;
     }
     FUN_00276218();
-    func_0x00276138();
+    FUN_00276138();
     DAT_0049f970 = 0x71;
     DAT_0049f978 = 0x33313165;
     DAT_0049f97c = &LAB_0031305f;
@@ -3659,7 +3659,7 @@ LAB_001bc008:
       DAT_0049f934 = 1;
       DAT_0049f93c = 1;
       DAT_0049f970 = 0;
-      func_0x00276540();
+      FUN_00276540();
       FUN_002bff50();
       temp_v16 = tableGroupFindEntryIndex(puVar14[0x16],DAT_00447e58 + 0xe1c);
       puVar14[0x2d] = temp_v16;
@@ -3679,7 +3679,7 @@ LAB_001bc008:
     }
     break;
   case 0x2e:
-    func_0x00276540();
+    FUN_00276540();
     temp_v9 = FUN_0019e0c0(puVar14[0x18]);
     if (temp_v9 == 2) {
       FUN_0027fa98(1);
@@ -3709,17 +3709,17 @@ LAB_001bc008:
     mapDepartSetTarget(0xffffffff,0xffffffff);
     DAT_0049f964 = (int)DAT_0049fb44;
     DAT_0049f970 = 0;
-    func_0x002733d0();
+    FUN_002733d0();
     temp_v16 = tableGroupFindEntryIndex(puVar14[0x16],&DAT_0049f978);
     puVar14[0x2d] = temp_v16;
     FUN_002bff50();
     scrScriptProcessStartEntry(puVar14[0x18],puVar14[0x2d]);
-    func_0x00276540();
+    FUN_00276540();
     puVar14[9] = puVar14[9] + 1;
     puVar14[10] = 0;
     break;
   case 0x30:
-    func_0x00276540();
+    FUN_00276540();
     puVar14[10] = puVar14[10] + 1;
     temp_v9 = FUN_0019e0c0(puVar14[0x18]);
     goto joined_r0x001bce40;
@@ -3741,17 +3741,17 @@ LAB_001bc008:
     mapDepartSetTarget(0xffffffff,0xffffffff);
     DAT_0049f964 = (int)DAT_0049fb44;
     DAT_0049f970 = 0;
-    func_0x002733d0();
+    FUN_002733d0();
     temp_v16 = tableGroupFindEntryIndex(puVar14[0x13],&DAT_0049f978);
     puVar14[0x2d] = temp_v16;
     FUN_002bff50();
     scrScriptProcessStartEntry(puVar14[0x15],puVar14[0x2d]);
-    func_0x00276540();
+    FUN_00276540();
     puVar14[9] = puVar14[9] + 1;
     puVar14[10] = 0;
     break;
   case 0x32:
-    func_0x00276540();
+    FUN_00276540();
     puVar14[10] = puVar14[10] + 1;
     temp_v9 = FUN_0019e0c0(puVar14[0x15]);
     if (temp_v9 != 2) {
@@ -3778,7 +3778,7 @@ LAB_001bc008:
     FUN_0031d54c();
     break;
   case 0x33:
-    func_0x00276540();
+    FUN_00276540();
     temp_v9 = mapIfHasSelection();
     if (temp_v9 == 0) {
       if ((DAT_0049f9d4 != '\0') && (DAT_0049f9d5 == '\x05')) {
@@ -3815,17 +3815,17 @@ LAB_001bc008:
     DAT_0049fb46 = 0;
     DAT_0049f934 = 1;
     DAT_0049f93c = 1;
-    func_0x002733d0();
+    FUN_002733d0();
     DAT_0049f964 = (int)DAT_0049fb44;
     FUN_002bff50();
     scrScriptProcessStartEntry(puVar14[0x15],puVar14[0x2d]);
-    func_0x00276540();
+    FUN_00276540();
     FUN_00276238();
     puVar14[9] = puVar14[9] + 1;
     puVar14[10] = 0;
     break;
   case 0x35:
-    func_0x00276540();
+    FUN_00276540();
     puVar14[10] = puVar14[10] + 1;
     temp_v9 = FUN_0019e0c0(puVar14[0x15]);
 joined_r0x001bce40:
@@ -3840,7 +3840,7 @@ joined_r0x001bce40:
     if (DAT_0049f954 != 6) {
       FUN_00273840(1);
     }
-    func_0x00276540();
+    FUN_00276540();
     mapDepartSetTarget(0xffffffff,0xffffffff);
     DAT_0049f964 = (int)DAT_0049fb44;
     temp_v9 = FUN_00270e34();
@@ -3858,19 +3858,19 @@ joined_r0x001bce40:
     DAT_0049f93c = 1;
     DAT_0049f970 = 0;
     DAT_0049f96c = 0;
-    func_0x002733d0();
+    FUN_002733d0();
     puVar14[9] = puVar14[9] + 1;
     puVar14[10] = 0;
     break;
   case 0x37:
     if (DAT_0049f93f == '\0') {
-      func_0x00276540();
+      FUN_00276540();
     }
     if (DAT_0049fb64 == 1) {
       puVar14[9] = 0x41;
       puVar14[10] = 0;
     }
-    temp_v9 = func_0x00270cc4();
+    temp_v9 = FUN_00270cc4();
     if (temp_v9 == 0) {
       return 0;
     }
@@ -3919,7 +3919,7 @@ joined_r0x001bce40:
     FUN_00273fc0();
     FUN_00275364();
     FUN_002755a8();
-    temp_v9 = func_0x00270cc4();
+    temp_v9 = FUN_00270cc4();
     if (temp_v9 == 0) {
       return 0;
     }
@@ -4010,17 +4010,17 @@ joined_r0x001bce40:
     FUN_0029c3c0(1,10,0xff);
     FUN_00270500(8,0);
     *(unsigned char *)((int)puVar14 + 0x47) = 0;
-    func_0x00276540();
+    FUN_00276540();
     puVar14[9] = puVar14[9] + 1;
     puVar14[10] = 0;
     break;
   case 0x3b:
-    func_0x00276540();
+    FUN_00276540();
     temp_v9 = FUN_002896bc();
     if (temp_v9 == 0) {
       return 0;
     }
-    func_0x002733d0();
+    FUN_002733d0();
     *(unsigned char *)(puVar14 + 4) = 1;
     temp_v9 = 0x6f;
     temp_v16 = 0;
@@ -4031,7 +4031,7 @@ joined_r0x001bce40:
   case 0x3c:
     FUN_00276218();
     *(unsigned char *)((int)puVar14 + 0x47) = 0;
-    func_0x00276540();
+    FUN_00276540();
     FUN_0029c3c0(0,10,0xff);
     FUN_0029c3c0(1,10,0xff);
     FUN_00270500(8,0);
@@ -4039,12 +4039,12 @@ joined_r0x001bce40:
     puVar14[10] = 0;
     break;
   case 0x3d:
-    func_0x00276540();
+    FUN_00276540();
     temp_v9 = FUN_002896bc();
     if (temp_v9 == 0) {
       return 0;
     }
-    func_0x002733d0();
+    FUN_002733d0();
     puVar23 = g_mapMain;
     temp_v9 = (int)DAT_0049f9da;
     if (temp_v9 >= 1) {
@@ -4089,7 +4089,7 @@ joined_r0x001bce40:
     FUN_0027fa98(2);
     buttonHelpSetPresetDefault();
     *(unsigned char *)((int)puVar14 + 0x47) = 0;
-    func_0x00276540();
+    FUN_00276540();
     mapDepartSetTarget(0xffffffff,0xffffffff);
     DAT_0049f970 = 0;
     FUN_002fb330(DAT_0049f958);
@@ -4102,7 +4102,7 @@ joined_r0x001bce40:
     puVar14[10] = 0;
     break;
   case 0x40:
-    func_0x00276540();
+    FUN_00276540();
     puVar14[10] = puVar14[10] + 1;
     temp_v9 = FUN_0019e0c0(puVar14[0x15]);
     if (temp_v9 != 2) {
@@ -4213,7 +4213,7 @@ LAB_001bd824:
         FUN_002fb4dc();
       }
     }
-    func_0x00276540();
+    FUN_00276540();
     temp_v9 = puVar14[10];
     puVar14[10] = temp_v9 + 1;
     if (temp_v9 + 1 < 0x1f) {
@@ -4251,9 +4251,9 @@ LAB_001bd824:
     break;
   case 0x42:
     if (puVar14[10] == 0) {
-      func_0x002733d0();
+      FUN_002733d0();
     }
-    func_0x00276540();
+    FUN_00276540();
     puVar14[10] = puVar14[10] + 1;
     temp_v9 = lmapSceneGetUnk0();
     if (temp_v9 != 8) {
@@ -4403,7 +4403,7 @@ LAB_001bd824:
             DAT_0049f924 = 0xffffffff;
           }
           FUN_00276950(DAT_0049f928);
-          func_0x002e0608(g_lmapScene + 0x1c);
+          FUN_002e0608(g_lmapScene + 0x1c);
           FUN_0027645c(1);
           FUN_00277b5c(g_gameState,DAT_0049f920);
           temp_v9 = 0x54;
@@ -4435,7 +4435,7 @@ LAB_001bd824:
     if (temp_v9 != 0) {
       FUN_0027fa98(0x1e);
       *(unsigned char *)((int)puVar14 + 0x47) = 0;
-      func_0x00276540();
+      FUN_00276540();
       mapDepartSetTarget(0xffffffff,0xffffffff);
       DAT_0049f970 = 0;
       temp_v16 = tableGroupFindEntryIndex(puVar14[0x13],0x1be080);
@@ -4447,7 +4447,7 @@ LAB_001bd824:
     }
     break;
   case 0x44:
-    func_0x00276540();
+    FUN_00276540();
     puVar14[10] = puVar14[10] + 1;
     temp_v9 = FUN_0019e0c0(puVar14[0x15]);
     if (temp_v9 != 2) {
@@ -4477,7 +4477,7 @@ LAB_001bd824:
       FUN_0027fa98(0x1e);
       *(unsigned char *)((int)puVar14 + 0x47) = 0;
     }
-    func_0x00276540();
+    FUN_00276540();
     puVar14[10] = puVar14[10] + 1;
     temp_v9 = FUN_002896bc();
     if (temp_v9 == 0) {
@@ -4493,7 +4493,7 @@ LAB_001bd824:
     puVar14[10] = temp_v16;
     break;
   case 0x46:
-    func_0x00276540();
+    FUN_00276540();
     puVar14[10] = puVar14[10] + 1;
     FUN_0027fa98(1);
     *(unsigned char *)((int)puVar14 + 0x47) = 1;
@@ -4509,7 +4509,7 @@ LAB_001bd824:
     *(unsigned char *)((int)puVar14 + 0x47) = 0;
     DAT_0049fb45 = 0;
     DAT_0049fb46 = 0;
-    func_0x00276540();
+    FUN_00276540();
     mapDepartSetTarget(0xffffffff,0xffffffff);
     DAT_0049f970 = 0;
     if (DAT_0049fa80 != 0) {
@@ -4542,9 +4542,9 @@ LAB_001bd824:
     puVar14[10] = 0;
     break;
   case 0x48:
-    func_0x00276540();
+    FUN_00276540();
     puVar14[10] = puVar14[10] + 1;
-    temp_v9 = func_0x00270cc4();
+    temp_v9 = FUN_00270cc4();
     if (temp_v9 == 0) {
       return 0;
     }
@@ -4651,7 +4651,7 @@ LAB_001bd824:
       buttonHelpSetPresetDefault();
       *(unsigned char *)((int)puVar14 + 0x47) = 0;
     }
-    func_0x00276540();
+    FUN_00276540();
     puVar14[10] = puVar14[10] + 1;
     temp_v9 = FUN_002896bc();
     if (temp_v9 != 0) {
@@ -4666,7 +4666,7 @@ LAB_001bd824:
     }
     break;
   case 0x4a:
-    func_0x00276540();
+    FUN_00276540();
     puVar14[10] = puVar14[10] + 1;
     temp_v9 = FUN_0019e0c0(puVar14[0x15]);
     if (temp_v9 == 2) {
@@ -4707,12 +4707,12 @@ LAB_001bd824:
     DAT_0049f934 = 1;
     DAT_0049f93c = 1;
     DAT_0049f970 = 0;
-    func_0x00276540();
+    FUN_00276540();
     puVar14[9] = puVar14[9] + 1;
     puVar14[10] = 0;
     break;
   case 0x4c:
-    func_0x00276540();
+    FUN_00276540();
     temp_v9 = FUN_0019e0c0(puVar14[0x29]);
     if (temp_v9 == 2) {
       scrScriptProcessDestroy(puVar14[0x29]);
@@ -4787,7 +4787,7 @@ LAB_001be80c:
     puVar14[10] = 0;
     break;
   case 0x4e:
-    temp_v9 = func_0x00270cc4();
+    temp_v9 = FUN_00270cc4();
     if (temp_v9 != 0) {
       temp_v19 = DAT_0049f970 == 0;
       if (!temp_v19) {
@@ -4814,7 +4814,7 @@ LAB_001be80c:
       FUN_0027fa98(6);
       FUN_0027fc14(1);
     }
-    func_0x00276540();
+    FUN_00276540();
     temp_v9 = puVar14[10];
     puVar14[10] = temp_v9 + 1;
     if (temp_v9 + 1 < 0x29) {
@@ -4852,7 +4852,7 @@ LAB_001be80c:
       DAT_0049fb46 = 0;
       DAT_0049fb45 = 0;
     }
-    func_0x00276540();
+    FUN_00276540();
     temp_v9 = puVar14[10];
     puVar14[10] = temp_v9 + 1;
     if (temp_v9 + 1 == 0x5f) {
@@ -4874,7 +4874,7 @@ LAB_001be80c:
       DAT_0049fb46 = 0;
       DAT_0049f93c = 1;
     }
-    func_0x00276540();
+    FUN_00276540();
     temp_v9 = puVar14[10];
     puVar14[10] = temp_v9 + 1;
     if (temp_v9 + 1 == 0x28) {
@@ -4923,7 +4923,7 @@ LAB_001bebac:
         FUN_0027645c(1);
       }
     }
-    func_0x00276540();
+    FUN_00276540();
     puVar14[10] = puVar14[10] + 1;
     if (DAT_0049f954 == 2) {
       if (DAT_0049f958 == 0x2702001) {
@@ -5010,7 +5010,7 @@ LAB_001bec78:
       *(unsigned char *)(DAT_004474f4 + 0xa4) = 1;
       DAT_0049fb45 = 1;
       DAT_0049fb46 = 1;
-      func_0x002733d0();
+      FUN_002733d0();
       puVar14[9] = 0x15;
       puVar14[10] = 0;
       DAT_0049fb44 = DAT_0049f964 != 0;
@@ -5060,7 +5060,7 @@ LAB_001bec78:
           FUN_0027d5ac(DAT_0049f994);
           DAT_0049f943 = '\x01';
           if (*(char *)((int)puVar14 + 0xb9) != '\0') {
-            func_0x00316cfc();
+            FUN_00316cfc();
           }
           *(unsigned char *)((int)puVar14 + 0xb9) = 0;
           temp_v10 = FUN_0030f528(DAT_0049f958);
@@ -5080,7 +5080,7 @@ LAB_001bec78:
           temp_v9 = (int)DAT_0049fb44;
         }
         if (!(temp_v19 || temp_v9 != temp_v12)) {
-          func_0x002dfa78();
+          FUN_002dfa78();
           if (*(char *)((int)puVar14 + 0x1d) != '\0') {
             *(unsigned char *)((int)puVar14 + 0x1d) = 0;
             puVar14[9] = 0x68;
@@ -5104,7 +5104,7 @@ LAB_001bec78:
           else {
             puVar14[9] = 0x53;
             puVar14[10] = 0;
-            func_0x002c87a4();
+            FUN_002c87a4();
           }
           DAT_0049f924 = (unsigned int)(unsigned char)pcVar13[3];
           DAT_0049f928 = puVar14[0xb];
@@ -5124,7 +5124,7 @@ LAB_001bec78:
           FUN_0027d474(DAT_0049f928);
           FUN_00276480(DAT_0049f928,DAT_0049f92c,DAT_0049f924);
           FUN_00276950(DAT_0049f928);
-          func_0x002e0608(&uStack_1c8);
+          FUN_002e0608(&uStack_1c8);
           DAT_0049f934 = 1;
           DAT_0049f93c = 1;
           puVar14[9] = 0x54;
@@ -5173,12 +5173,12 @@ LAB_001bec78:
     FUN_001fa680();
     FUN_002701e8();
     FUN_001fa6b8();
-    func_0x001e4540();
-    func_0x0020d00c();
+    FUN_001e4540();
+    FUN_0020d00c();
     mapDepartUpdateHandles();
     mdlManagerMarkAllDestroy();
     FUN_002c8acc();
-    func_0x002dfe64();
+    FUN_002dfe64();
     asdModelSlotRelease(0);
     FUN_001a9574();
     temp_v9 = puVar14[9] + 1;
@@ -5196,24 +5196,24 @@ LAB_001bec78:
     mapGimicReleaseAll();
     FUN_002700d0();
     FUN_001e2b5c();
-    func_0x001d3818();
+    objectDestroyModelManager();
     FUN_002148e4();
     FUN_0021e074();
-    func_0x002d3e18();
+    FUN_002d3e18();
     mapEplFree();
     temp_v9 = puVar14[9] + 1;
     puVar14[9] = temp_v9;
     break;
   case 0x57:
     if (*(char *)((int)puVar14 + 0xb9) != '\0') {
-      func_0x00316cfc();
+      FUN_00316cfc();
     }
     *(unsigned char *)((int)puVar14 + 0xb9) = 0;
     *(unsigned int *)(DAT_004474f4 + 0xac) = 0;
-    func_0x001e39b4();
+    lmapSceneCreateEffect();
     FUN_001fdebc(puVar14);
     mapEntryTriggerForScene(puVar14[0xc]);
-    func_0x001d2f20(puVar14[0xb],puVar14[0xc]);
+    FUN_001d2f20(puVar14[0xb],puVar14[0xc]);
     temp_v10 = puVar14[9] + 1;
     puVar14[9] = temp_v10;
   case 0x58:
@@ -5222,7 +5222,7 @@ LAB_001bec78:
       return 0;
     }
     FUN_002d28a4(g_gameState,DAT_0049f920);
-    func_0x00208b8c();
+    FUN_00208b8c();
     puVar14[9] = puVar14[9] + 1;
 LAB_001bf48c:
     temp_v9 = questMapSetCursor(puVar14[0xb],puVar14[0xc]);
@@ -5231,7 +5231,7 @@ LAB_001bf48c:
     }
     puVar14[9] = puVar14[9] + 1;
 LAB_001bf4ac:
-    func_0x001e3968(puVar14[0xb],puVar14[0xc]);
+    FUN_001e3968(puVar14[0xb],puVar14[0xc]);
     puVar14[9] = puVar14[9] + 1;
 LAB_001bf4c4:
     temp_v9 = FUN_0021e4bc();
@@ -5240,7 +5240,7 @@ LAB_001bf4c4:
     }
     puVar14[9] = puVar14[9] + 1;
 LAB_001bf4e0:
-    func_0x0020d038(puVar14[0xb],puVar14[0xc]);
+    FUN_0020d038(puVar14[0xb],puVar14[0xc]);
     puVar14[9] = puVar14[9] + 1;
 LAB_001bf4f8:
     temp_v9 = FUN_0027cda0();
@@ -5260,18 +5260,18 @@ LAB_001bf538:
     }
     puVar14[9] = puVar14[9] + 1;
 LAB_001bf558:
-    func_0x001a8f74();
-    func_0x0020d064(puVar14[0xb],puVar14[0xc]);
+    FUN_001a8f74();
+    FUN_0020d064(puVar14[0xb],puVar14[0xc]);
     puVar14[9] = puVar14[9] + 1;
 LAB_001bf578:
-    temp_v9 = func_0x002d3b20();
+    temp_v9 = FUN_002d3b20();
     if (temp_v9 == 0) {
       return 0;
     }
     puVar14[9] = puVar14[9] + 1;
 LAB_001bf598:
-    func_0x001e3284();
-    func_0x002d3e88(puVar14[0xb],puVar14[0xc]);
+    FUN_001e3284();
+    FUN_002d3e88(puVar14[0xb],puVar14[0xc]);
     puVar14[9] = puVar14[9] + 1;
 LAB_001bf5b8:
     temp_v9 = FUN_002f400c();
@@ -5281,14 +5281,14 @@ LAB_001bf5b8:
     puVar14[9] = puVar14[9] + 1;
 LAB_001bf5d4:
     if (DAT_0049fc80 == 0) {
-      func_0x0020cfe8(puVar14[0xb],puVar14[0xc]);
+      FUN_0020cfe8(puVar14[0xb],puVar14[0xc]);
       puVar14[9] = puVar14[9] + 1;
 LAB_001bf604:
-      temp_v9 = func_0x002dfb28();
+      temp_v9 = FUN_002dfb28();
       if (temp_v9 == 0) {
         return 0;
       }
-      func_0x001b42e4();
+      FUN_001b42e4();
       puVar14[9] = puVar14[9] + 1;
 LAB_001bf628:
       FUN_001b491c();
@@ -5384,7 +5384,7 @@ LAB_001bf6c8:
   case 0x66:
     goto LAB_001bf628;
   case 0x67:
-    temp_v9 = func_0x001fb2c8();
+    temp_v9 = FUN_001fb2c8();
     temp_v14 = DAT_0049f954;
     if (temp_v9 != 0) {
       FUN_0020db10();
@@ -5397,14 +5397,14 @@ LAB_001bf6c8:
       FUN_002a04f0(0);
       DAT_0049f934 = 1;
       FUN_0027fa98(1);
-      func_0x001b42b0(1);
+      FUN_001b42b0(1);
       *(unsigned char *)(DAT_004474f4 + 0xa4) = 1;
       FUN_00273358(0xffffffff);
       FUN_002804ec(g_lmapScene + 0x28);
       *(unsigned char *)(DAT_004474f4 + 0xa4) = 1;
       FUN_003079b4();
       FUN_00276a3c();
-      func_0x00342078(puVar14[0xb],puVar14[0xc],1);
+      FUN_00342078(puVar14[0xb],puVar14[0xc],1);
       FUN_0027645c(0);
       mapIfClose();
       if (*(char *)((int)puVar14 + 0x1d) != '\0') {
@@ -5442,7 +5442,7 @@ LAB_001bf6c8:
         }
         else {
           if (temp_v14 == 3) {
-            func_0x002c87a4();
+            FUN_002c87a4();
           }
           if (*(char *)(puVar14 + 7) != '\0') {
             *(unsigned char *)(puVar14 + 7) = 0;
@@ -5474,7 +5474,7 @@ LAB_001bf6c8:
       FUN_0027645c(0);
     }
     puVar14[10] = puVar14[10] + 1;
-    func_0x00276540();
+    FUN_00276540();
     temp_v9 = lmapSceneGetUnk0();
     if (temp_v9 == 0x17) {
       return 0;
@@ -5492,7 +5492,7 @@ LAB_001bf6c8:
       FUN_0027645c(0);
     }
     puVar14[10] = puVar14[10] + 1;
-    func_0x00276540();
+    FUN_00276540();
     temp_v9 = lmapSceneGetUnk0();
     if (temp_v9 == 0x18) {
       return 0;
@@ -5510,7 +5510,7 @@ LAB_001bf6c8:
       FUN_0027645c(0);
     }
     puVar14[10] = puVar14[10] + 1;
-    func_0x00276540();
+    FUN_00276540();
     temp_v9 = lmapSceneGetUnk0();
     if (temp_v9 == 0x19) {
       return 0;
@@ -5528,7 +5528,7 @@ LAB_001bf6c8:
       FUN_0027645c(0);
     }
     puVar14[10] = puVar14[10] + 1;
-    func_0x00276540();
+    FUN_00276540();
     temp_v9 = lmapSceneGetUnk0();
     if (temp_v9 == 0x1a) {
       return 0;
@@ -5605,18 +5605,18 @@ joined_r0x001bfcb4:
     FUN_001fa680();
     FUN_002701e8();
     FUN_001fa6b8();
-    func_0x001e4540();
-    func_0x0020d00c();
+    FUN_001e4540();
+    FUN_0020d00c();
     mapDepartUpdateHandles();
     mdlManagerMarkAllDestroy();
     FUN_002c8acc();
-    func_0x002dfe64();
+    FUN_002dfe64();
     NaviMain_Destroy();
     DAT_0049fb45 = 0;
     DAT_0049fba0 = '\0';
     DAT_0049fb49 = 0;
-    func_0x00208bc8();
-    func_0x00208ca8();
+    FUN_00208bc8();
+    FUN_00208ca8();
     scrScriptProcessDestroy(puVar14[0x18]);
     puVar14[0x18] = 0;
     asdMemFree(puVar14[0x16]);
@@ -5671,13 +5671,13 @@ joined_r0x001bfcb4:
       mapGimicReleaseAll();
       FUN_002700d0();
       FUN_001e2b5c();
-      func_0x001d3818();
+      objectDestroyModelManager();
       FUN_002148e4();
       FUN_0021e074();
-      func_0x002d3e18();
+      FUN_002d3e18();
       mapTableRelease();
       mapEplFree();
-      func_0x0021e764();
+      FUN_0021e764();
       puVar23 = g_mapMain;
       puVar14 = (unsigned int *)&g_mapMain;
       if (g_mapMain != (unsigned int *)0x0) {
@@ -5694,11 +5694,11 @@ joined_r0x001bfcb4:
     if (temp_v9 < 2) {
       return 0;
     }
-    temp_v9 = func_0x0030f504();
+    temp_v9 = FUN_0030f504();
     if (temp_v9 == 0) {
       return 0;
     }
-    func_0x001a8c54();
+    FUN_001a8c54();
     temp_v16 = 0;
     temp_v9 = puVar14[9] + 1;
     puVar14[9] = temp_v9;

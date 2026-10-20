@@ -27,10 +27,10 @@ int FUN_00282318(void);
 int FUN_002c29d8(...);
 int FUN_002c86ec(void);
 int FUN_002d1e4c(void);
-int func_0x001fa730(void);
-int func_0x001fc248(void);
-int func_0x0020d694(void);
-int func_0x0020e720(void);
+int FUN_001fa730(void);
+int FUN_001fc248(void);
+int FUN_0020d694(void);
+int FUN_0020e720(void);
 
 int FUN_0019db68(void);
 int FUN_0020d7c4(void);
@@ -291,10 +291,10 @@ extern unsigned int asdModelGetStatic38(void);
 /* Supplied declaration required: entryOwnerSetPosition. */
 /* Supplied declaration required: FUN_003a66c4. */
 /* Supplied declaration required: FUN_003a6988. */
-/* Supplied declaration required: func_0x001fa730. */
-/* Supplied declaration required: func_0x001fc248. */
-/* Supplied declaration required: func_0x0020d694. */
-/* Supplied declaration required: func_0x0020e720. */
+/* Supplied declaration required: FUN_001fa730. */
+/* Supplied declaration required: FUN_001fc248. */
+/* Supplied declaration required: FUN_0020d694. */
+/* Supplied declaration required: FUN_0020e720. */
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -3875,7 +3875,7 @@ LAB_002d472c:
             FUN_0027fca0(0);
           }
           if (g_lmapScene[2] + g_lmapScene[3] >= 0x79) {
-            func_0x0020e720();
+            FUN_0020e720();
             FUN_0027fca0(0);
             piVar22 = g_lmapScene;
             g_lmapScene[0x15] = 0xb;
@@ -3907,7 +3907,7 @@ LAB_002d472c:
     else {
       fStack_28 = temp_v35;
       fStack_24 = temp_v20;
-      func_0x001fc248();
+      FUN_001fc248();
       piVar22 = g_lmapScene;
       g_lmapScene[0x15] = 9;
       piVar22[0x16] = 0;
@@ -4125,7 +4125,7 @@ LAB_0027142c:
         piVar22 = g_lmapScene;
         g_lmapScene[0x15] = 0;
         piVar22[0x16] = 0x40a00000;
-        func_0x0020d694();
+        FUN_0020d694();
         piVar22 = g_lmapScene;
         g_lmapScene[1] = g_lmapScene[1] + 1;
         piVar22[2] = 0;
@@ -4140,7 +4140,7 @@ LAB_0027142c:
     case 5:
       fStack_28 = temp_v35;
       fStack_24 = temp_v20;
-      func_0x001fa730();
+      FUN_001fa730();
       piVar22 = g_lmapScene;
       g_lmapScene[0x15] = 0;
       piVar22[0x16] = 0;

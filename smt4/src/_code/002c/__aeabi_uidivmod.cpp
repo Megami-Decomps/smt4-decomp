@@ -12,7 +12,7 @@ extern "C" {
 #define ROMWRIGHT_CARRY_4_DEFINED
 #define romwright_carry_4(left, right) ((unsigned char)((unsigned long long)(unsigned int)(left) + (unsigned long long)(unsigned int)(right) > 0xffffffffULL))
 #endif
-extern unsigned int func_0x0014e6f4(unsigned int, unsigned int, int, unsigned int);
+extern unsigned int FUN_0014e6f4(unsigned int, unsigned int, int, unsigned int);
 
 
 unsigned long long __aeabi_uidivmod(unsigned int param_1,unsigned int param_2)
@@ -44,7 +44,7 @@ unsigned long long __aeabi_uidivmod(unsigned int param_1,unsigned int param_2)
         if (param_1 >> 0xc < temp_v1) goto LAB_002c5fec;
         temp_v4 = 0;
         if (temp_v1 == 0) {
-          temp_v0 = func_0x0014e6f4(0,0,temp_v3,0);
+          temp_v0 = FUN_0014e6f4(0,0,temp_v3,0);
           return romwright_piece_4_4(param_1,temp_v0);
         }
         do {

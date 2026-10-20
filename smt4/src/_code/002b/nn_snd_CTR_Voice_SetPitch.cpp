@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int func_0x0014fd48(unsigned int);
+int FUN_0014fd48(unsigned int);
 
-/* Supplied declaration required: func_0x0014fd48. */
+/* Supplied declaration required: FUN_0014fd48. */
 
 
 void nn_snd_CTR_Voice_SetPitch(int param_1,float param_2)
@@ -21,7 +21,7 @@ void nn_snd_CTR_Voice_SetPitch(int param_1,float param_2)
     temp_v0 = in_s0;
   }
   *(float *)(param_1 + 0x1c) = temp_v0;
-  func_0x0014fd48(*(unsigned int *)(param_1 + 0x68));
+  FUN_0014fd48(*(unsigned int *)(param_1 + 0x68));
   return;
 }
 

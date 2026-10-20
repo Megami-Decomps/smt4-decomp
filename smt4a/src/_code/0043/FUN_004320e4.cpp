@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int func_0x0016f160(int);
+int FUN_0016f160(int);
 
-/* Supplied declaration required: func_0x0016f160. */
+/* Supplied declaration required: FUN_0016f160. */
 
 
 void FUN_004320e4(unsigned int param_1)
@@ -14,7 +14,7 @@ void FUN_004320e4(unsigned int param_1)
 {
 /* irregular: 1 native warning(s); review required */
   if (param_1 < 4) {
-    func_0x0016f160(1 << (param_1 & 0xff));
+    FUN_0016f160(1 << (param_1 & 0xff));
     return;
   }
   return;

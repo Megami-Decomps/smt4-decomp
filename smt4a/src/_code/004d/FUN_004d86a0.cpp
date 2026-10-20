@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int func_0x004ffb0c(unsigned int);
+int FUN_004ffb0c(unsigned int);
 
-/* Supplied declaration required: func_0x004ffb0c. */
+/* Supplied declaration required: FUN_004ffb0c. */
 
 
 void FUN_004d86a0(int *param_1)
@@ -14,7 +14,7 @@ void FUN_004d86a0(int *param_1)
 {
 /* irregular: 1 native warning(s); review required */
   if (*param_1 != 0) {
-    func_0x004ffb0c(*(unsigned int *)(*param_1 + 4));
+    FUN_004ffb0c(*(unsigned int *)(*param_1 + 4));
     return;
   }
   return;

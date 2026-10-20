@@ -24,7 +24,7 @@ extern unsigned int DAT_005c1be8; /* 0x5c1be8 */
 /* Supplied declaration required: FUN_00146cbc. */
 /* Supplied declaration required: FUN_0017fc74. */
 /* Supplied declaration required: FUN_002e3140. */
-extern unsigned int func_0x001623b4(unsigned int *, unsigned int, unsigned int);
+extern unsigned int FUN_001623b4(unsigned int *, unsigned int, unsigned int);
 
 
 void FUN_00146c34(void)
@@ -39,7 +39,7 @@ void FUN_00146c34(void)
   nnosInitAddressSpaceHeap();
   nnosInitAddressSpaceApplication();
   FUN_0017fc74();
-  temp_v0 = func_0x001623b4(temp_v1,0xffff8001,0x14);
+  temp_v0 = FUN_001623b4(temp_v1,0xffff8001,0x14);
   if ((temp_v0 & 0x80000000) != 0) {
     FUN_002e3140();
   }

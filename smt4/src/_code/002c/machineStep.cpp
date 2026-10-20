@@ -17,9 +17,11 @@ typedef struct {
 
 void FUN_001f5f00(void);
 
-s32 machineStep(Machine **handle)
+extern Machine *g_staffRoll;
+
+s32 machineStep(void)
 {
-    Machine *machine = *handle;
+    Machine *machine = g_staffRoll;
 
     machine->handlers[machine->currentState]();
     if (machine->failed != 0) {

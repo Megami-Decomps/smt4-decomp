@@ -21,6 +21,9 @@ extern void FUN_002d23f0(s32 index);
 /* Fires FUN_002d23f0 for each entry (up to the first unused one) that lists the pair (a, b) in any of its three slots. */
 void fireEntriesMatchingPair(u32 a, u32 b)
 {
+    if (a == 0) {
+        return;
+    }
     s32 i;
     PairEntry *entry;
 

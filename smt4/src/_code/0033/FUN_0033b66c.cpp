@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00140f3c(...);
 int rt_vec_dtor(...);
-int func_0x001404c4(...);
+int FUN_001404c4(...);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -27,7 +27,7 @@ extern unsigned char DAT_00421c78; /* 0x421c78 */
 /* Supplied declaration required: rt_vec_dtor. */
 extern int FUN_00377414(int);
 extern int FUN_00378b40(int);
-/* Supplied declaration required: func_0x001404c4. */
+/* Supplied declaration required: FUN_001404c4. */
 extern void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(unsigned int);
 
 
@@ -58,7 +58,7 @@ unsigned int * FUN_0033b66c(int param_1)
     FUN_00140f3c(temp_v0 - 0x58);
     *(unsigned char *)(temp_v0 - 4) = 0;
   }
-  func_0x001404c4(puVar2);
+  FUN_001404c4(puVar2);
   *(unsigned int *)(temp_v0 - 8) = 0xffffffff;
   if ((*(unsigned int *)(temp_v0 - 0x74) & 0xfffffffe) != 0) {
     nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(*(unsigned int *)(temp_v0 - 0x74) & 0xfffffffe);

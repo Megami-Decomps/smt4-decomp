@@ -12,10 +12,12 @@ extern u8 FUN_001632fc(void);
 extern void dialogClose(s32 value);
 extern u32 jobStop(u32 job, u16 arg);
 
-/* Re-arms the object's flag at +0x1D when FUN_001632fc allows, then stops its job. */
-void jobFlagObjStop(JobFlagObj **ref)
+extern JobFlagObj *g_mapIf;
+
+/* Clears the object's flag when allowed, then stops its job. */
+void jobFlagObjStop(void)
 {
-    JobFlagObj *obj = *ref;
+    JobFlagObj *obj = g_mapIf;
 
     if (obj->unk1D != 0 && FUN_001632fc() != 0) {
         obj->unk1D = 0;

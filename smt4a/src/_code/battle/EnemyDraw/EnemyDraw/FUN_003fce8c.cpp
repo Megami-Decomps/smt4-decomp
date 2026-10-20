@@ -21,8 +21,8 @@ extern unsigned char DAT_005cc554; /* 0x5cc554 */
 /* Supplied declaration required: asdMemoryAllocAligned. */
 /* Supplied declaration required: FUN_002f5020. */
 /* Supplied declaration required: FUN_0042c8f8. */
-extern int func_0x004ff3c0(int, int, unsigned int);
-extern unsigned int func_0x004ff4a4(int);
+extern int FUN_004ff3c0(int, int, unsigned int);
+extern unsigned int FUN_004ff4a4(int);
 /* Supplied declaration required: nn_gr_CTR_Shader_SearchBindSymbol. */
 
 
@@ -125,7 +125,7 @@ void FUN_003fce8c(int param_1,int param_2)
     uStack_8b = 0xf;
     puStack_78 = &uStack_38;
     uStack_8a = 0xb;
-    temp_v1 = func_0x004ff4a4(iStack_2c);
+    temp_v1 = FUN_004ff4a4(iStack_2c);
     *(unsigned int *)(temp_v0 + 0x10) = temp_v1;
     if (param_2 != 0) {
       temp_v1 = 0x100;
@@ -161,7 +161,7 @@ void FUN_003fce8c(int param_1,int param_2)
     temp_v5 = 0;
     if (temp_v5 < *(int *)(temp_v0 + 0x10)) {
       do {
-        temp_v6 = func_0x004ff3c0(iStack_2c,temp_v5,5);
+        temp_v6 = FUN_004ff3c0(iStack_2c,temp_v5,5);
         if (temp_v6 != 0) {
           if (param_2 != 0) {
             temp_v2 = 0x100;
@@ -190,7 +190,7 @@ void FUN_003fce8c(int param_1,int param_2)
           FUN_0042c8f8(*(unsigned int *)(*(int *)(temp_v0 + 8) + temp_v5 * 4),temp_v7,iStack_2c,temp_v5,5
                       );
         }
-        temp_v6 = func_0x004ff3c0(iStack_2c,temp_v5,4);
+        temp_v6 = FUN_004ff3c0(iStack_2c,temp_v5,4);
         if (temp_v6 != 0) {
           if (param_2 != 0) {
             temp_v2 = 0x100;
@@ -219,7 +219,7 @@ void FUN_003fce8c(int param_1,int param_2)
           FUN_0042c8f8(*(unsigned int *)(*(int *)(temp_v0 + 4) + temp_v5 * 4),temp_v7,iStack_2c,temp_v5,4
                       );
         }
-        temp_v6 = func_0x004ff3c0(iStack_2c,temp_v5,6);
+        temp_v6 = FUN_004ff3c0(iStack_2c,temp_v5,6);
         if (temp_v6 != 0) {
           if (param_2 != 0) {
             temp_v2 = 0x100;

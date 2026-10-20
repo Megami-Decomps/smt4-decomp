@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail's final tail branch has no relocation (it targets 0x16F15C, which has no symbol) */
 #include "nn/Result.h"
 
 extern "C" {

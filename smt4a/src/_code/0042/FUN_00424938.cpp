@@ -1,4 +1,3 @@
-/* NON_MATCHING: the final tail call goes to 0x513664, which has no symbol; retail's `b` carries no relocation. */
 #include "common.h"
 
 extern "C" {
@@ -25,7 +24,7 @@ typedef struct PartHolder {
     /* 0x488 */ Part *endParts[1];
 } PartHolder;
 
-u32 func_0x00513664(u8 *sub);
+u32 FUN_00513664(u8 *sub);
 
 /* Calls every start part and every end part, then forwards the sub-object to FUN at 0x513664. */
 u32 FUN_00424938(PartHolder *holder)
@@ -46,7 +45,7 @@ u32 FUN_00424938(PartHolder *holder)
             part->vtable->onEnd(part);
         }
     }
-    return func_0x00513664(holder->sub);
+    return FUN_00513664(holder->sub);
 }
 
 } /* extern "C" */

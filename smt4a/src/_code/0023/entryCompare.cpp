@@ -2,7 +2,7 @@
 
 extern "C" {
 
-/* Record looked up for an index; the sort key is the halfword at 0x46. */
+/* Record looked up for an index; the sort key is the halfword at 0x62. */
 typedef struct {
     u8 unk00[0x62];
     u16 key;            /* 0x62 */
@@ -12,7 +12,7 @@ Record *gameGetSlotRecord(int index);
 int dataTableGetEntry0102Value(u16 key);
 
 /* Compares two record indices: a negative index sorts as "none" (none vs none = 0, valid after none = 1 / before = -1). */
-int entryCompare(u32 unused, int *first, int *second)
+int entryCompare(int *second, int *first)
 {
     int result = 0;
 

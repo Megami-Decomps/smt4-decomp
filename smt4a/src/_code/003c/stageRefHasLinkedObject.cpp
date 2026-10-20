@@ -17,17 +17,14 @@ typedef struct StageObjB {
     /* 0x000 */ u8 unk000[0x9B4];
     /* 0x9B4 */ StageSubB sub;
 } StageObjB;
-
-typedef struct StageRefB {
-    /* 0x00 */ StageObjB *obj;
-} StageRefB;
+extern StageObjB *g_mapGimic;
 
 extern s32 FUN_004ffba8(u32 value);
 
 /* True when the stage's sub-record is active and FUN_004ffba8 accepts its linked object. */
-u32 stageRefHasLinkedObject(StageRefB *ref)
+u32 stageRefHasLinkedObject(void)
 {
-    StageSubB *sub = &ref->obj->sub;
+    StageSubB *sub = &g_mapGimic->sub;
 
     if (sub->flag == 0 || FUN_004ffba8(sub->link->unk04) == 0) {
         return 0;

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001a91ec(int, int, unsigned int);
 int sysMemClear(unsigned int, int);
-int func_0x001a9124(...);
+int FUN_001a9124(...);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -31,7 +31,7 @@ extern unsigned int DAT_005b4424; /* 0x5b4424 */
 
 /* Supplied declaration required: FUN_001a91ec. */
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: func_0x001a9124. */
+/* Supplied declaration required: FUN_001a9124. */
 
 
 void FUN_0017909c(unsigned int *param_1)
@@ -121,7 +121,7 @@ void FUN_0017909c(unsigned int *param_1)
     *g_commandBufferCursor = 0;
     g_commandBufferCursor = g_commandBufferCursor + 2;
   }
-  func_0x001a9124(0x101,7,0);
+  FUN_001a9124(0x101,7,0);
   if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
     g_commandBufferCursor[1] = 0xf011f;
     *g_commandBufferCursor = 0x10140;
@@ -197,8 +197,8 @@ void FUN_0017909c(unsigned int *param_1)
     *g_commandBufferCursor = 0x3000000;
     g_commandBufferCursor = g_commandBufferCursor + 2;
   }
-  func_0x001a9124(0x40,0x10,0);
-  func_0x001a9124(0x50,7,0x1f1f1f1f);
+  FUN_001a9124(0x40,0x10,0);
+  FUN_001a9124(0x50,7,0x1f1f1f1f);
   if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
     g_commandBufferCursor[1] = 0xf0058;
     *g_commandBufferCursor = 0x100;
@@ -253,7 +253,7 @@ void FUN_0017909c(unsigned int *param_1)
     }
     temp_v3 = 0;
     do {
-      func_0x001a9124(0x1c8,8,0);
+      FUN_001a9124(0x1c8,8,0);
       temp_v3 = temp_v3 + 8;
     } while (temp_v3 < 0x100);
     temp_v1 = temp_v1 + 1;
@@ -265,7 +265,7 @@ void FUN_0017909c(unsigned int *param_1)
   }
   temp_v1 = 0;
   do {
-    func_0x001a9124(0x291,8,0);
+    FUN_001a9124(0x291,8,0);
     temp_v1 = temp_v1 + 2;
   } while (temp_v1 < 0x60);
   if (DAT_0058918c == (romwright_code *)0x0) {
@@ -304,8 +304,8 @@ void FUN_0017909c(unsigned int *param_1)
     }
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 4);
-  func_0x001a9124(0x28b,2);
-  func_0x001a9124(0x205,0x24,0);
+  FUN_001a9124(0x28b,2);
+  FUN_001a9124(0x205,0x24,0);
   if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
     g_commandBufferCursor[1] = 0xf01d4;
     *g_commandBufferCursor = 1;

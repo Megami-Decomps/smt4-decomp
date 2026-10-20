@@ -7,16 +7,14 @@ typedef struct BufOwner {
     /* 0x328 */ u32 **slot;
 } BufOwner;
 
-typedef struct BufRef {
-    /* 0x00 */ BufOwner *owner;
-} BufRef;
+extern BufOwner *g_infoWin;
 
 extern void asdMemFree(void *ptr);
 
 /* Frees the buffer referenced through the owner and clears the reference. */
-void bufRefFree(BufRef *ref)
+void bufRefFree(void)
 {
-    BufOwner *owner = ref->owner;
+    BufOwner *owner = g_infoWin;
     u32 **slot = NULL;
 
     if (owner != NULL) {

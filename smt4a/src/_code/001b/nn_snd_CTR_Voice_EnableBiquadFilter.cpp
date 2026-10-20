@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int func_0x001c7c30(unsigned int, int);
+int nn_snd_CTR_VoiceImpl_EnableMonoFilter(unsigned int, int);
 
-/* Supplied declaration required: func_0x001c7c30. */
+/* Supplied declaration required: nn_snd_CTR_VoiceImpl_EnableMonoFilter. */
 
 
 void nn_snd_CTR_Voice_EnableBiquadFilter(int param_1,unsigned char param_2)
@@ -22,7 +22,7 @@ void nn_snd_CTR_Voice_EnableBiquadFilter(int param_1,unsigned char param_2)
     temp_v0 = *(unsigned char *)(param_1 + 7) & 0xfd;
   }
   *(unsigned char *)(param_1 + 7) = temp_v0;
-  func_0x001c7c30(*(unsigned int *)(param_1 + 0x68),temp_v0);
+  nn_snd_CTR_VoiceImpl_EnableMonoFilter(*(unsigned int *)(param_1 + 0x68),temp_v0);
   return;
 }
 

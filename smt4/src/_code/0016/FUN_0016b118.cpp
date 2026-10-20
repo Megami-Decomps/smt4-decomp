@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int func_0x0016b39c(unsigned int, unsigned int);
-int func_0x0016b948(void);
+int FUN_0016b39c(unsigned int, unsigned int);
+int FUN_0016b948(void);
 
-/* Supplied declaration required: func_0x0016b39c. */
-/* Supplied declaration required: func_0x0016b948. */
+/* Supplied declaration required: FUN_0016b39c. */
+/* Supplied declaration required: FUN_0016b948. */
 
 
 void FUN_0016b118(unsigned int *param_1)
@@ -26,11 +26,11 @@ void FUN_0016b118(unsigned int *param_1)
   
   piVar2 = (int *)(param_1 + 2);
   temp_v4 = param_1[0x73];
-  func_0x0016b39c(*param_1,param_1[1]);
-  func_0x0016b948();
-  func_0x0016b948();
-  func_0x0016b948();
-  func_0x0016b948();
+  FUN_0016b39c(*param_1,param_1[1]);
+  FUN_0016b948();
+  FUN_0016b948();
+  FUN_0016b948();
+  FUN_0016b948();
   temp_v3 = piVar2[0x6d];
   temp_v5 = 0x100;
   psVar1 = temp_v0;

@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the final tail call differs: retail's `b` to the SVC stub at 0x128d20 (no symbol or unit there) carries no relocation, built emits R_ARM_JUMP24 FUN_00128d20. */
 #include "common.h"
 #include "nn/Result.h"
 

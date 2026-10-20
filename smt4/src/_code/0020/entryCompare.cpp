@@ -11,8 +11,8 @@ typedef struct {
 Record *gameGetUnitRecord(int index);
 int dataTableGetEntry0102Value(u16 key);
 
-/* Compares two record indices: a negative index sorts as "none" (none vs none = 0, valid after none = 1 / before = -1). */
-int entryCompare(u32 unused, int *first, int *second)
+/* Compares the second index against the first: negative means "none"; valid entries sort by table value. */
+int entryCompare(int *second, int *first)
 {
     int result = 0;
 

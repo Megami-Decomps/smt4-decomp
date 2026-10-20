@@ -4,9 +4,11 @@ extern "C" {
 
 extern void FUN_004b9588(void *data);
 
-u32 childOwnerUpdateKind123(ChildOwner4 *owner)
+extern ChildOwner4 g_mikado;
+
+u32 childOwnerUpdateKind123(void)
 {
-    ChildNode *child = owner->child;
+    ChildNode *child = g_mikado.child;
     u8 kind = child->kind;
     void *data;
 

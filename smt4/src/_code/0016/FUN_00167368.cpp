@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00163a10(void);
 
 typedef int romwright_code(...);
-extern int FUN_00163628(...); /* 0x163628 */
+extern int FUN_00163620(...); /* 0x163628 */
 extern int FUN_00166a10(...); /* 0x166a10 */
 
 /* Supplied declaration required: FUN_00163a10. */
@@ -19,7 +19,7 @@ void FUN_00167368(int *param_1)
 /* irregular: 3 native warning(s); review required */
   romwright_code *pcVar1;
   
-  pcVar1 = FUN_00163628;
+  pcVar1 = FUN_00163620;
   if (*param_1 != param_1[1]) {
     pcVar1 = FUN_00166a10;
   }

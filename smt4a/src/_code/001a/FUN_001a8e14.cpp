@@ -4,16 +4,16 @@
 
 extern "C" {
 
-int func_0x001b3950(unsigned int);
+int FUN_001b3950(unsigned int);
 
-/* Supplied declaration required: func_0x001b3950. */
+/* Supplied declaration required: FUN_001b3950. */
 
 
 void FUN_001a8e14(int param_1)
 
 {
 /* irregular: 1 native warning(s); review required */
-  func_0x001b3950(*(unsigned int *)(*(int *)(param_1 + 4) + 0x3c));
+  FUN_001b3950(*(unsigned int *)(*(int *)(param_1 + 4) + 0x3c));
   return;
 }
 

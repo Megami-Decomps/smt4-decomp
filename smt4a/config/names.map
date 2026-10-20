@@ -946,7 +946,7 @@
 00141280 asdSoundObjectRegister
 00141338 asdSoundObjectFadeOut
 0037a118 staffRollClose
-00399414 staffRollFadeEnterState1
+00399408 staffRollFadeEnterState1
 003a43bc staffRollFadeEnterState4
 003ae810 staffRollEnterState2
 00399444 staffRollScrollUpdate
@@ -1062,7 +1062,7 @@
 003af9f4 bannerShow
 00161b14 addressBlockInit
 001468a8 addressBlockAllocate
-002ce674 groupKeyCompare
+002ce670 groupKeyCompare
 002f4ba8 onlineObjectThreadRootStart
 00500724 archiveFindEntryValue
 0035e7a4 requestSubmitScrLookup
@@ -1107,7 +1107,7 @@
 001fc338 callGlobalHook
 00507d20 vcallSlot5
 001884b0 vcallSlot12IfValid
-0032b010 machineStep
+0032b00c machineStep
 00303610 readerReadU16
 0030727e readerRead8
 00319ce0 logFormatBuffer
@@ -1119,7 +1119,7 @@
 004bb1bc resourceLookupWithFallback
 001243c4 isLeapYear
 00222240 requestDispatch
-00232048 entryCompare
+00232044 entryCompare
 002fd0a0 byteArrayEnsureAt
 002feaa8 ringAdvance
 0010726c flagBlockRunCallback
@@ -1713,7 +1713,7 @@
 0033f7f8 dataTable2EType0GetEntry
 0033f830 dataTable2DGetEntry
 0033f868 dataTable2CGetEntry
-00340a18 childOwnerUpdateKind123
+00340a14 childOwnerUpdateKind123
 00340a54 jobRefIsAlive
 00340c10 obj80Select
 00340eb0 swapSlotExchange
@@ -1750,7 +1750,7 @@
 00350ca4 block6Free
 003522f8 byte76Set
 00352d18 gameFlags2Get
-00352ddc applyIfIdValid
+00352dd4 applyIfIdValid
 00353d68 clearByte
 003564ec dataTable4CGetEntry
 00357a90 sub68OwnerCall3
@@ -1776,7 +1776,7 @@
 0035f9fc menu32State387CIs2
 0035fb28 menu32State387CIs7
 0035fb44 menu32InitBlock96C
-00365b7c recTableFireType3
+00365b78 recTableFireType3
 00368390 clearFlags310To31F
 00368b4c sub68OwnerCall6
 00368b6c sub68OwnerCall7
@@ -1894,7 +1894,7 @@
 003a48b4 packFields
 003a60a8 dataSceneWaitStep
 003a62c0 dataTable15GetEntry
-003a7064 bufRefFree
+003a7060 bufRefFree
 003a7438 scrCommRefreshActiveMap
 003a7b88 stateHolderIsMissingOrState0
 003a7c1c stateHolder4IsZero2
@@ -1902,7 +1902,7 @@
 003a99e8 scrCommGetBattleTableValue
 003addd8 flagPairCondition
 003ade20 gameOwnedBitTest2
-003adff8 fireEntriesMatchingPair
+003adff0 fireEntriesMatchingPair
 003ae498 dataTable2CType2GetEntry
 003ae5e4 dataTable2FType2GetEntry
 003ae704 scrCommThreePhase2
@@ -1945,7 +1945,7 @@
 003bbc5c scrCommUnitHasCounters
 003bcb34 scrCommGetFlagBitA5
 003bcf88 menu32InitBlock368
-003bf70c stageIntro
+003bf708 stageIntro
 003bf840 dataTable49GetEntry
 003bfc90 stepObjStart
 003c1644 fieldStateAllowsAction
@@ -1955,7 +1955,7 @@
 003c3f74 dataTable5Type9Count
 003c48fc scrCommGetBattleTable5Value
 003c4ce8 byteArr51Get50
-003c4cfc stageRefHasLinkedObject
+003c4cf8 stageRefHasLinkedObject
 003c4d34 dataTable2FType0Count
 003c4d4c dataTable2FType1Count
 003c4d64 sub68OwnerCall10
@@ -1974,11 +1974,11 @@
 003cc670 stepObjBStart
 003cd700 scrCommGetPartyEntryValue
 003d2204 roundObjFinish
-003d2da0 sub68OwnerDestroyAll
+003d2d9c sub68OwnerDestroyAll
 003de124 sub68OwnerDestroy
 003d37bc pairSourceGet
 003d9174 words5Clear
-003de0e0 jobFlagObjStop
+003de0dc jobFlagObjStop
 003deeb4 partyEntryGetBit5
 003deecc partyEntryGetBit6
 003df538 playerSyncPair2A
@@ -2100,7 +2100,7 @@
 00427d34 recordTableAppend
 00429f6c fileHolderTryRead
 0042b164 objectReleaseIfSet
-0042b280 vcallSlot0With3
+0042b270 vcallSlot0With3
 0042ce1c registerObj8Holder
 00430ec8 releaseOrCopyHandle
 00430ef0 releaseOrCopyHandle2
@@ -2609,7 +2609,7 @@
 0020e9dc effEditorNodeChainApply
 002124f0 refSlotAssign
 0021a410 idListAnyValid
-0025d5c8 stateMachineRun
+0025d5c4 stateMachineRun
 0025ee0c scrOpStoreIntVar
 00275bb0 scrWorkGetValue
 00275fe4 scrWorkSetValue
