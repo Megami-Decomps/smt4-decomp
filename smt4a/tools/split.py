@@ -247,7 +247,9 @@ def relocate_branches(entry, code, thumb, branches):
             imm = sign_extend(word & 0xFFFFFF, 24) * 4 + ((word >> 24 & 1) * 2 if blx else 0)
             if (origin + 8 + imm) & 0xFFFFFFFF != to & 0xFFFFFFFE:
                 continue
-            top = 0xFA000000 if blx else word & 0xFF000000
+            # A call is written as the compiler emits it: BL with R_ARM_CALL. The linker turned it into
+            # BLX where the callee is Thumb (relink.py links with --use-blx and does the same).
+            top = 0xEB000000 if blx else word & 0xFF000000
             struct.pack_into("<I", code, at, top | 0x00FFFFFE)
             kind = 28 if blx or (link and unconditional) else 29  # R_ARM_CALL / R_ARM_JUMP24
         else:
@@ -263,7 +265,7 @@ def relocate_branches(entry, code, thumb, branches):
             base = (origin + 4) & ~3 if blx else origin + 4
             if (base + sign_extend(imm, 25)) & 0xFFFFFFFF != to & 0xFFFFFFFE:
                 continue
-            code[at:at + 4] = bytes((0xFF, 0xF7, 0xFE, 0xEF if blx else 0xFF))
+            code[at:at + 4] = bytes((0xFF, 0xF7, 0xFE, 0xFF))  # BL; the linker makes it BLX for an ARM callee
             kind = 10  # R_ARM_THM_CALL
         relocs.append((at, name, kind))
     relocs.sort(key=lambda r: r[0])

@@ -892,7 +892,17 @@
       "size": 110,
       "source": "src/_code/0010/FUN_001030f4.cpp",
       "target": "orig/target/_code/0010/FUN_001030f4.o",
-      "thumb": true
+      "thumb": true,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Ospace"
+      ]
     },
     {
       "address": "0x10317c",
@@ -7572,7 +7582,17 @@
       "size": 464,
       "source": "src/_code/0011/FUN_00115fac.cpp",
       "target": "orig/target/_code/0011/FUN_00115fac.o",
-      "thumb": true
+      "thumb": true,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Ospace"
+      ]
     },
     {
       "address": "0x116188",
@@ -12972,7 +12992,17 @@
       "size": 108,
       "source": "src/_code/0012/FUN_00124350.cpp",
       "target": "orig/target/_code/0012/FUN_00124350.o",
-      "thumb": true
+      "thumb": true,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Ospace"
+      ]
     },
     {
       "address": "0x1243c4",
@@ -12982,7 +13012,17 @@
       "size": 42,
       "source": "src/_code/0012/isLeapYear.cpp",
       "target": "orig/target/_code/0012/isLeapYear.o",
-      "thumb": true
+      "thumb": true,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Ospace"
+      ]
     },
     {
       "address": "0x1243ee",
@@ -13532,7 +13572,17 @@
       "size": 1604,
       "source": "src/_code/0012/FUN_00126d1c.cpp",
       "target": "orig/target/_code/0012/FUN_00126d1c.o",
-      "thumb": true
+      "thumb": true,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Ospace"
+      ]
     },
     {
       "address": "0x12736c",
@@ -13542,7 +13592,17 @@
       "size": 374,
       "source": "src/_code/0012/FUN_0012736c.cpp",
       "target": "orig/target/_code/0012/FUN_0012736c.o",
-      "thumb": true
+      "thumb": true,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Ospace"
+      ]
     },
     {
       "address": "0x1274fc",
@@ -13562,7 +13622,17 @@
       "size": 3986,
       "source": "src/_code/0012/FUN_00127570.cpp",
       "target": "orig/target/_code/0012/FUN_00127570.o",
-      "thumb": true
+      "thumb": true,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Ospace"
+      ]
     },
     {
       "address": "0x128588",
@@ -16512,7 +16582,17 @@
       "size": 14,
       "source": "src/_code/0013/FUN_001321ee.cpp",
       "target": "orig/target/_code/0013/FUN_001321ee.o",
-      "thumb": true
+      "thumb": true,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Ospace"
+      ]
     },
     {
       "address": "0x1321fc",
@@ -17112,7 +17192,17 @@
       "size": 226,
       "source": "src/_code/0013/FUN_00133222.cpp",
       "target": "orig/target/_code/0013/FUN_00133222.o",
-      "thumb": true
+      "thumb": true,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Ospace"
+      ]
     },
     {
       "address": "0x133304",
@@ -17122,7 +17212,17 @@
       "size": 134,
       "source": "src/_code/0013/FUN_00133304.cpp",
       "target": "orig/target/_code/0013/FUN_00133304.o",
-      "thumb": true
+      "thumb": true,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Ospace"
+      ]
     },
     {
       "address": "0x133394",
@@ -17132,7 +17232,17 @@
       "size": 226,
       "source": "src/_code/0013/FUN_00133394.cpp",
       "target": "orig/target/_code/0013/FUN_00133394.o",
-      "thumb": true
+      "thumb": true,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Ospace"
+      ]
     },
     {
       "address": "0x133478",
@@ -17142,7 +17252,17 @@
       "size": 134,
       "source": "src/_code/0013/FUN_00133478.cpp",
       "target": "orig/target/_code/0013/FUN_00133478.o",
-      "thumb": true
+      "thumb": true,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Ospace"
+      ]
     },
     {
       "address": "0x133508",
@@ -17162,7 +17282,17 @@
       "size": 218,
       "source": "src/_code/0013/FUN_001335cc.cpp",
       "target": "orig/target/_code/0013/FUN_001335cc.o",
-      "thumb": true
+      "thumb": true,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Ospace"
+      ]
     },
     {
       "address": "0x1336a8",
@@ -17172,7 +17302,17 @@
       "size": 132,
       "source": "src/_code/0013/FUN_001336a8.cpp",
       "target": "orig/target/_code/0013/FUN_001336a8.o",
-      "thumb": true
+      "thumb": true,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Ospace"
+      ]
     },
     {
       "address": "0x133734",
@@ -17182,7 +17322,17 @@
       "size": 218,
       "source": "src/_code/0013/FUN_00133734.cpp",
       "target": "orig/target/_code/0013/FUN_00133734.o",
-      "thumb": true
+      "thumb": true,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Ospace"
+      ]
     },
     {
       "address": "0x133810",
@@ -17192,7 +17342,17 @@
       "size": 132,
       "source": "src/_code/0013/FUN_00133810.cpp",
       "target": "orig/target/_code/0013/FUN_00133810.o",
-      "thumb": true
+      "thumb": true,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Ospace"
+      ]
     },
     {
       "address": "0x13389c",
@@ -17232,7 +17392,17 @@
       "size": 134,
       "source": "src/_code/0013/FUN_00133ab8.cpp",
       "target": "orig/target/_code/0013/FUN_00133ab8.o",
-      "thumb": true
+      "thumb": true,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Ospace"
+      ]
     },
     {
       "address": "0x133b48",
@@ -17242,7 +17412,17 @@
       "size": 226,
       "source": "src/_code/0013/FUN_00133b48.cpp",
       "target": "orig/target/_code/0013/FUN_00133b48.o",
-      "thumb": true
+      "thumb": true,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Ospace"
+      ]
     },
     {
       "address": "0x133c2c",
@@ -17252,7 +17432,17 @@
       "size": 134,
       "source": "src/_code/0013/FUN_00133c2c.cpp",
       "target": "orig/target/_code/0013/FUN_00133c2c.o",
-      "thumb": true
+      "thumb": true,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Ospace"
+      ]
     },
     {
       "address": "0x133cbc",
@@ -17272,7 +17462,17 @@
       "size": 218,
       "source": "src/_code/0013/FUN_00133db6.cpp",
       "target": "orig/target/_code/0013/FUN_00133db6.o",
-      "thumb": true
+      "thumb": true,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Ospace"
+      ]
     },
     {
       "address": "0x133e90",
@@ -17282,7 +17482,17 @@
       "size": 132,
       "source": "src/_code/0013/FUN_00133e90.cpp",
       "target": "orig/target/_code/0013/FUN_00133e90.o",
-      "thumb": true
+      "thumb": true,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Ospace"
+      ]
     },
     {
       "address": "0x133f1c",
@@ -17292,7 +17502,17 @@
       "size": 238,
       "source": "src/_code/0013/FUN_00133f1c.cpp",
       "target": "orig/target/_code/0013/FUN_00133f1c.o",
-      "thumb": true
+      "thumb": true,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Ospace"
+      ]
     },
     {
       "address": "0x13400a",
@@ -17342,7 +17562,17 @@
       "size": 134,
       "source": "src/_code/0013/FUN_00134338.cpp",
       "target": "orig/target/_code/0013/FUN_00134338.o",
-      "thumb": true
+      "thumb": true,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Ospace"
+      ]
     },
     {
       "address": "0x1343c8",
@@ -17362,7 +17592,17 @@
       "size": 218,
       "source": "src/_code/0013/FUN_001344c4.cpp",
       "target": "orig/target/_code/0013/FUN_001344c4.o",
-      "thumb": true
+      "thumb": true,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Ospace"
+      ]
     },
     {
       "address": "0x1345a0",
@@ -17372,7 +17612,17 @@
       "size": 132,
       "source": "src/_code/0013/FUN_001345a0.cpp",
       "target": "orig/target/_code/0013/FUN_001345a0.o",
-      "thumb": true
+      "thumb": true,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Ospace"
+      ]
     },
     {
       "address": "0x13462c",
@@ -74086,7 +74336,17 @@
       "size": 14,
       "source": "src/_code/0030/FUN_00301bd4.cpp",
       "target": "orig/target/_code/0030/FUN_00301bd4.o",
-      "thumb": true
+      "thumb": true,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Ospace"
+      ]
     },
     {
       "address": "0x301be2",
@@ -76269,7 +76529,17 @@
       "size": 16,
       "source": "src/_code/0030/FUN_00307974.cpp",
       "target": "orig/target/_code/0030/FUN_00307974.o",
-      "thumb": true
+      "thumb": true,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Ospace"
+      ]
     },
     {
       "address": "0x307984",
@@ -76329,7 +76599,17 @@
       "size": 14,
       "source": "src/_code/0030/vecCount28.cpp",
       "target": "orig/target/_code/0030/vecCount28.o",
-      "thumb": true
+      "thumb": true,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Ospace"
+      ]
     },
     {
       "address": "0x307a18",
@@ -76339,7 +76619,17 @@
       "size": 16,
       "source": "src/_code/0030/FUN_00307a18.cpp",
       "target": "orig/target/_code/0030/FUN_00307a18.o",
-      "thumb": true
+      "thumb": true,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Ospace"
+      ]
     },
     {
       "address": "0x307a28",
@@ -76389,7 +76679,17 @@
       "size": 16,
       "source": "src/_code/0030/vecCount24b.cpp",
       "target": "orig/target/_code/0030/vecCount24b.o",
-      "thumb": true
+      "thumb": true,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Ospace"
+      ]
     },
     {
       "address": "0x307a7a",
@@ -76459,7 +76759,17 @@
       "size": 16,
       "source": "src/_code/0030/FUN_00307af8.cpp",
       "target": "orig/target/_code/0030/FUN_00307af8.o",
-      "thumb": true
+      "thumb": true,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Ospace"
+      ]
     },
     {
       "address": "0x307b08",
@@ -76529,7 +76839,17 @@
       "size": 16,
       "source": "src/_code/0030/FUN_00307b8a.cpp",
       "target": "orig/target/_code/0030/FUN_00307b8a.o",
-      "thumb": true
+      "thumb": true,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Ospace"
+      ]
     },
     {
       "address": "0x307b9a",
@@ -76569,7 +76889,17 @@
       "size": 16,
       "source": "src/_code/0030/vecCount24c.cpp",
       "target": "orig/target/_code/0030/vecCount24c.o",
-      "thumb": true
+      "thumb": true,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Ospace"
+      ]
     },
     {
       "address": "0x307bf4",
@@ -76629,7 +76959,17 @@
       "size": 14,
       "source": "src/_code/0030/FUN_00307c56.cpp",
       "target": "orig/target/_code/0030/FUN_00307c56.o",
-      "thumb": true
+      "thumb": true,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Ospace"
+      ]
     },
     {
       "address": "0x307c64",
@@ -76679,7 +77019,17 @@
       "size": 14,
       "source": "src/_code/0030/vecCount24.cpp",
       "target": "orig/target/_code/0030/vecCount24.o",
-      "thumb": true
+      "thumb": true,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Ospace"
+      ]
     },
     {
       "address": "0x307cb0",
@@ -76689,7 +77039,17 @@
       "size": 16,
       "source": "src/_code/0030/FUN_00307cb0.cpp",
       "target": "orig/target/_code/0030/FUN_00307cb0.o",
-      "thumb": true
+      "thumb": true,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Ospace"
+      ]
     },
     {
       "address": "0x307cc0",
@@ -78879,7 +79239,17 @@
       "size": 14,
       "source": "src/_code/0030/FUN_0030c8c0.cpp",
       "target": "orig/target/_code/0030/FUN_0030c8c0.o",
-      "thumb": true
+      "thumb": true,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Ospace"
+      ]
     },
     {
       "address": "0x30c8ce",
@@ -79440,7 +79810,17 @@
       "size": 84,
       "source": "src/_code/0030/FUN_0030d228.cpp",
       "target": "orig/target/_code/0030/FUN_0030d228.o",
-      "thumb": true
+      "thumb": true,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Ospace"
+      ]
     },
     {
       "address": "0x30d27c",
@@ -79460,7 +79840,17 @@
       "size": 84,
       "source": "src/_code/0030/FUN_0030d2a8.cpp",
       "target": "orig/target/_code/0030/FUN_0030d2a8.o",
-      "thumb": true
+      "thumb": true,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Ospace"
+      ]
     },
     {
       "address": "0x30d2fc",
@@ -80770,7 +81160,17 @@
       "size": 14,
       "source": "src/_code/0030/FUN_0030fd70.cpp",
       "target": "orig/target/_code/0030/FUN_0030fd70.o",
-      "thumb": true
+      "thumb": true,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Ospace"
+      ]
     },
     {
       "address": "0x30fd7e",
@@ -103311,7 +103711,17 @@
       "size": 432,
       "source": "src/_code/003a/FUN_003a9d48.cpp",
       "target": "orig/target/_code/003a/FUN_003a9d48.o",
-      "thumb": false
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Ospace"
+      ]
     },
     {
       "address": "0x3a9ef8",
@@ -140808,7 +141218,17 @@
       "size": 804,
       "source": "src/_code/004b/FUN_004bf348.cpp",
       "target": "orig/target/_code/004b/FUN_004bf348.o",
-      "thumb": false
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Ospace"
+      ]
     },
     {
       "address": "0x4bf67c",

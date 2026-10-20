@@ -412,7 +412,17 @@
       "size": 110,
       "source": "src/_code/0010/FUN_00100f14.cpp",
       "target": "orig/target/_code/0010/FUN_00100f14.o",
-      "thumb": true
+      "thumb": true,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Ospace"
+      ]
     },
     {
       "address": "0x100f9c",
@@ -65488,7 +65498,17 @@
       "size": 432,
       "source": "src/_code/0031/FUN_00312f14.cpp",
       "target": "orig/target/_code/0031/FUN_00312f14.o",
-      "thumb": false
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Ospace"
+      ]
     },
     {
       "address": "0x3130c4",
