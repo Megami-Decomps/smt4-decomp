@@ -579,6 +579,15 @@ def main():
     got = hashlib.sha256(rebuilt).hexdigest()
     print(f"retail  .code sha256 {want} ({len(code):#x} bytes)")
     print(f"rebuilt .code sha256 {got} ({len(rebuilt):#x} bytes)")
+    if args.matched and not args.full:
+        # What tools/progress_site.py credits: the functions this link proved, and only when it matched.
+        (OUT / "proof.json").write_text(json.dumps({
+            "match": rebuilt == code,
+            "code_sha256": got,
+            "proven": sorted(proven),
+            "kept": {item if isinstance(item, str) else item[0]: why
+                     for names, why, _show in retained for item in names},
+        }, indent=1) + "\n")
     if rebuilt == code:
         if missing:
             print("INCOMPLETE: the relinked .code is byte-identical to retail, but it is not proven: "
