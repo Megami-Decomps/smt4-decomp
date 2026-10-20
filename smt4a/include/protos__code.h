@@ -5,6 +5,10 @@
 
 #include "romwright_types.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /* nn_pl_CTR_InitializeGameCoin */ void nn_pl_CTR_InitializeGameCoin(void);
 /* nn_os_CriticalSection_TryEnter */ bool nn_os_CriticalSection_TryEnter(undefined4 param_1);
 /* nn_init_InitializeAllocator */ void nn_init_InitializeAllocator(uint param_1);
@@ -138,5 +142,9 @@
 /* nn_fnd_DateTime_GetDay */ int nn_fnd_DateTime_GetDay(undefined4 param_1);
 /* nn_fnd_DateTime_GetYear */ int nn_fnd_DateTime_GetYear(undefined4 param_1);
 /* nn_fnd_DateTime_GetMonth */ int nn_fnd_DateTime_GetMonth(undefined4 param_1);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

@@ -1,0 +1,28 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00339828` (_code @ 0x339828, 0x38 bytes) from smt4_v1.2.0.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+extern "C" {
+
+int FUN_00152bec(void);
+int FUN_002a775c(unsigned int);
+
+/* Supplied declaration required: FUN_00152bec. */
+/* Supplied declaration required: FUN_002a775c. */
+
+
+void FUN_00339828(int param_1)
+
+{
+/* irregular: 2 native warning(s); review required */
+  if (*(int *)(param_1 + 0x4398) != 0) {
+    if (-1 < *(int *)(*(int *)(*(int *)(param_1 + 0x4398) + 8) + 0xc)) {
+      FUN_00152bec();
+    }
+    FUN_002a775c(*(unsigned int *)(param_1 + 0x4398));
+    *(unsigned int *)(param_1 + 0x4398) = 0;
+  }
+  return;
+}
+
+} /* extern "C" */

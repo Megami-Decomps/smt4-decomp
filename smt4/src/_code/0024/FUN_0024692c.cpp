@@ -1,0 +1,25 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0024692c` (_code @ 0x24692c, 0x14 bytes) from smt4_v1.2.0.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+extern "C" {
+
+int FUN_002bf538(void);
+int VectorUnsignedToFloat(unsigned int, int);
+
+/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
+/* Supplied declaration required: FUN_002bf538. */
+
+
+void FUN_0024692c(unsigned int param_1)
+
+{
+/* irregular: irregular input(s): in_fpscr; 3 native warning(s); review required */
+  unsigned int in_fpscr;
+  
+  VectorUnsignedToFloat(param_1,(unsigned char)(in_fpscr >> 0x16) & 3);
+  FUN_002bf538();
+  return;
+}
+
+} /* extern "C" */

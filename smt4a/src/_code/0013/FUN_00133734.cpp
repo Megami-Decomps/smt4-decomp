@@ -1,0 +1,80 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00133734` (_code @ 0x133734, 0xda bytes) from smt4a.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+extern "C" {
+
+int FUN_002e6e14(int);
+int FUN_00307b44(int, int, int, int *);
+int FUN_00307b78(...);
+int FUN_00307b8a(...);
+int FUN_0030c8c0(int *);
+int FUN_0030d200(...);
+int FUN_0030fda8(int *, int, int);
+
+/* stack frame of param_3: 2 slot(s), 8 byte(s) */
+typedef struct {
+    unsigned int sp18; /* 0x18: local_18 */
+    unsigned int sp28; /* 0x28: local_28 */
+} param_3_stack;
+
+extern int FUN_002e6dac(void);
+/* Supplied declaration required: FUN_002e6e14. */
+/* Supplied declaration required: FUN_00307b44. */
+extern int FUN_00307b66(unsigned int, int *);
+/* Supplied declaration required: FUN_00307b78. */
+/* Supplied declaration required: FUN_00307b8a. */
+/* Supplied declaration required: FUN_0030c8c0. */
+/* Supplied declaration required: FUN_0030d200. */
+/* Supplied declaration required: FUN_0030fda8. */
+extern int aeabi_idivmod(int, unsigned int);
+
+
+void FUN_00133734(int *param_1,int param_2,unsigned int param_3)
+
+{
+/* irregular: 7 native warning(s); review required */
+  unsigned int temp_v0;
+  unsigned int temp_v1;
+  unsigned int temp_v2;
+  int temp_v3;
+  int temp_v4;
+  int temp_v5;
+  int temp_v6;
+  
+  temp_v0 = FUN_00307b8a();
+  temp_v1 = FUN_0030c8c0(param_1);
+  if (temp_v1 < temp_v0) {
+    temp_v5 = param_1[1];
+    temp_v4 = temp_v5 - 0x18;
+    param_1[1] = temp_v5 + 0x18;
+    FUN_0030d200(param_1,temp_v5);
+    while (param_2 != temp_v4) {
+      temp_v5 = temp_v5 - 0x18;
+      temp_v4 = temp_v4 - 0x18;
+      FUN_00307b78(temp_v5,temp_v4);
+    }
+    FUN_00307b78(param_2,param_3);
+  }
+  else {
+    temp_v2 = FUN_0030c8c0(param_1);
+    temp_v4 = FUN_00307b66(temp_v2,param_1);
+    temp_v5 = FUN_002e6dac();
+    FUN_00307b44(*param_1,param_2,temp_v5,param_1);
+    temp_v3 = aeabi_idivmod(param_2 - *param_1,0x18);
+    FUN_0030d200(param_1,temp_v3 * 0x18 + temp_v5,param_3);
+    temp_v3 = aeabi_idivmod(param_2 - *param_1,0x18);
+    FUN_00307b44(param_2,param_1[1],temp_v3 * 0x18 + temp_v5 + 0x18,param_1);
+    temp_v3 = FUN_0030c8c0(param_1);
+    FUN_0030fda8(param_1,*param_1,param_1[1]);
+    temp_v6 = *param_1;
+    FUN_00307b8a(param_1);
+    FUN_002e6e14(temp_v6);
+    *param_1 = temp_v5;
+    param_1[2] = temp_v4 * 0x18 + temp_v5;
+    param_1[1] = temp_v3 * 0x18 + temp_v5 + 0x18;
+  }
+  return;
+}
+
+} /* extern "C" */

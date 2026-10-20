@@ -3,7 +3,7 @@
 A **per-function matching** decompilation scaffold for the Nintendo 3DS image `smt4_v1.2.0.cxi`
 (sha256 `1f4d560dfb492e1f579310c832dc1ebb888581cc46cc66bbb4888cd7fb67a086`), bootstrapped by `romwright new-project` (romwright 0.5.0).
 
-Every unit is built with the retail compiler (`armcc-4.1-b713`, `--cpu=MPCore --fpmode=fast --apcs=/interwork --c99 -O3 -Otime`) and scored by objdiff against its retail function. `tools/relink.py` rebuilds the whole `.code` with GNU ld from the per-function objects and proves every function that links from its compiled object. What this repository gives you:
+Every unit is built with the retail compiler (`armcc-4.1-b713`, `--cpu=MPCore --fpmode=fast --apcs=/interwork --cpp --no_rtti -O3 -Otime`) and scored by objdiff against its retail function. `tools/relink.py` rebuilds the whole `.code` with GNU ld from the per-function objects and proves every function that links from its compiled object. What this repository gives you:
 
 * `config/symbols*.txt`: every function, label and import romwright found, with address and size
   (`name = section:0xADDR; // type:function size:0xN`, one file per module).
@@ -11,12 +11,12 @@ Every unit is built with the retail compiler (`armcc-4.1-b713`, `--cpu=MPCore --
   mapped image and (where the format has one) the build id.
 * `include/`: `romwright_types.h` (base types for the ILP32 (ARM11 MPCore, ARMv6K, VFPv2) data model and the
   decompiler's primitive names) and `romwright_protos.h` (recovered prototypes).
-* `src/<module>/<shard>/<function>.c`: romwright's decompiled C, one function per file, each
-  marked `NON_MATCHING`. It is a reading aid and a starting point to refine into retail-equivalent C.
+* `src/<module>/<shard>/<function>.cpp`: one function per file, compiled as C++ inside `extern "C"` so
+  its symbol keeps the retail name objdiff and relink pair it by. Started as romwright's decompiled C,
+  each unmatched one marked `NON_MATCHING`; it is edited by hand from here, not regenerated.
   796 function(s) the evidence places in 173 original source file(s) are in
-  `src/<module>/<file>/<function>.c` instead, one objdiff progress category per file
-  (`file` in `config/project.json`); the placement is evidence, not proof: move a function by
-  correcting its entry in the `--tus` file and regenerating.
+  `src/<module>/<file>/<function>.cpp` instead, one objdiff progress category per file
+  (`file` in `config/project.json`); the placement is evidence, not proof.
 * `build.py`: compiles every unit with `armcc-4.1-b713`; objdiff scores each unit against its retail function.
 * `objdiff.json` and `orig/target/`: each decompiled function's retail bytes as a relocatable target object, paired with `build/obj/` (what `build.py` compiles from `src/`).
 
@@ -27,13 +27,13 @@ control: put your dump at `orig/smt4_v1.2.0.cxi`.
 
 ```sh
 python3 build.py fetch      # download the pinned armcc-4.1-b713 (decomp.me's armcc bundle, 73 MB), objdiff-cli, and wibo where Windows executables need it
-python3 build.py            # compile src/ with armcc-4.1-b713 (--cpu=MPCore --fpmode=fast --apcs=/interwork --c99 -O3 -Otime); writes build/compile_report.json
+python3 build.py            # compile src/ with armcc-4.1-b713 (the flags above); writes build/compile_report.json
 python3 build.py report     # objdiff-cli report over objdiff.json -> build/report.json
 # or open this directory in the objdiff GUI
 ```
 
 This image: 9341 function(s) decompiled into `src/`, 9341 symbol(s), 1 module(s).
-Units compile as C99 (`--c99`): decompiled C has no headers for its callees, so armcc's implicit-declaration warnings are not errors; every error is reported. A unit that fails (a missing struct definition, say) is listed with its first error in `build/compile_report.json`, and the build exits 0 unless you pass `--strict`. Each unit compiles in the mode its function was decoded in (`--arm`/`--thumb`).
+Units compile as C++ (`--cpp`), the language the game was written in; retail holds no RTTI type names, hence `--no_rtti`. armcc gives every C++ function an `.ARM.exidx` unwind entry and retail links none, so `tools/relink.py` drops them. Each callee is declared before its call: with the argument types the calls pass, or `int f(...)` where the calls disagree. A unit that fails (a missing struct definition, say) is listed with its first error in `build/compile_report.json`, and the build exits 0 unless you pass `--strict`; after changing flags in `config/project.json`, rebuild with `--force`. Each unit compiles in the mode its function was decoded in (`--arm`/`--thumb`).
 
 ## From a fresh clone
 
@@ -50,7 +50,7 @@ python3 tools/relink.py --matched   # relink the retail .code with every matched
 
 `tools/split.py` writes the target objects romwright wrote, byte for byte, from `orig/smt4_v1.2.0.cxi`, `config/symbols.txt` (a function renamed there is the name its callers' relocations use), `config/modules.json` and `config/project.json`, after checking the dump's decompressed `.code` against `mapped_sha256` in `config/modules.json` (another version of the game is refused). `tools/n3ds.py` reads NCCH, NCSD and decrypted CIA dumps (`.cxi`/`.3ds`/`.cci`/`.cia`; encrypted content is refused with a message). `tools/relink.py` links the whole `.code` with GNU ld from `orig/target` objects (retail bytes) and, with `--matched`, from the objects `build.py` compiled for the functions objdiff reports at 100%; `--full` links every function from its target object, which proves those objects relocate back to retail. Relink lists every 100% function it keeps as retail bytes with its reason, reports how many were proven (linked from `build/obj`) of how many objdiff claimed, and exits non-zero when a compiled object is missing (`--exclude FUN_a,FUN_b` names functions to keep as retail bytes on purpose). It prints MATCH when the image is byte-identical to retail and every function objdiff scores 100% has its compiled object; a function whose object does not reproduce its bytes is listed with the `--exclude` line to rerun with.
 
-`romwright new-project` writes `src/` too: do not regenerate into a directory whose `src/` you have edited. Personal ignore rules (your dump's directory, say) go in `.git/info/exclude`, because regenerating rewrites `.gitignore`.
+`romwright new-project` writes `src/` too: never regenerate into this directory, `src/` is edited by hand. Personal ignore rules (your dump's directory, say) go in `.git/info/exclude`.
 
 
 ## Nintendo 3DS notes

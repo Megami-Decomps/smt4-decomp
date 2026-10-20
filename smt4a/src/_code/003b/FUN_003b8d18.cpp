@@ -1,0 +1,79 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b8d18` (_code @ 0x3b8d18, 0x100 bytes) from smt4a.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+extern "C" {
+
+int FUN_0019cac4(void);
+int FUN_002e6354(unsigned int [129], int);
+int FUN_003283ac(unsigned int);
+
+/* stack frame of void: 1 slot(s), 4 byte(s) */
+typedef struct {
+    unsigned int sp218; /* 0x218: local_218 */
+} void_stack;
+
+extern unsigned int FUN_0014aa78(void);
+extern int FUN_0014bef4(unsigned int);
+extern int FUN_00192748(unsigned int);
+extern unsigned short *FUN_00192798(void);
+/* Supplied declaration required: FUN_0019cac4. */
+extern unsigned int FUN_00236038(unsigned int);
+/* Supplied declaration required: FUN_002e6354. */
+/* Supplied declaration required: FUN_003283ac. */
+extern unsigned int FUN_003ef960(unsigned int, unsigned int);
+
+
+unsigned int FUN_003b8d18(void)
+
+{
+/* irregular: 3 native warning(s); review required */
+  unsigned int temp_v0;
+  unsigned int temp_v1;
+  unsigned short *puVar3;
+  int temp_v2;
+  unsigned int temp_v3;
+  unsigned int temp_v4;
+  unsigned int temp_v5;
+  unsigned int temp_v6 [129];
+  
+  temp_v0 = FUN_00236038(0) & 0xffff;
+  FUN_0019cac4();
+  FUN_002e6354(temp_v6,0x200);
+  temp_v3 = (unsigned int)*(unsigned short *)(temp_v0 + 0x60);
+  if (temp_v3 != 0x7b6 && temp_v3 != 0) {
+    temp_v6[0] = temp_v3;
+  }
+  temp_v4 = (unsigned int)*(unsigned short *)(temp_v0 + 0x66);
+  temp_v5 = (unsigned int)(temp_v3 != 0x7b6 && temp_v3 != 0);
+  temp_v3 = temp_v5;
+  if (temp_v4 != 0x7b6 && temp_v4 != 0) {
+    temp_v3 = temp_v5 + 1;
+    temp_v6[temp_v5] = temp_v4;
+  }
+  temp_v4 = (unsigned int)*(unsigned short *)(temp_v0 + 0x6c);
+  temp_v0 = temp_v3;
+  if (temp_v4 != 0x7b6 && temp_v4 != 0) {
+    temp_v0 = temp_v3 + 1;
+    temp_v6[temp_v3] = temp_v4;
+  }
+  temp_v1 = FUN_0014aa78();
+  temp_v1 = FUN_003ef960(temp_v1,0x10);
+  puVar3 = (unsigned short *)FUN_00192798();
+  temp_v2 = FUN_00192748(temp_v1);
+  if (0 < temp_v2) {
+    do {
+      if (*puVar3 != 0) {
+        temp_v6[temp_v0] = (unsigned int)*puVar3;
+        temp_v0 = (temp_v0 + 1) & 0xff;
+      }
+      temp_v2 = temp_v2 - 1;
+      puVar3 = puVar3 + 1;
+    } while (temp_v2 != 0);
+  }
+  temp_v2 = FUN_0014bef4((temp_v0 - 1) & 0xffff);
+  FUN_003283ac(temp_v6[temp_v2]);
+  return 1;
+}
+
+} /* extern "C" */

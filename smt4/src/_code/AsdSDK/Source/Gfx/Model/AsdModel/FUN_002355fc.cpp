@@ -1,0 +1,107 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002355fc` (_code @ 0x2355fc, 0x144 bytes) from smt4_v1.2.0.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+extern "C" {
+
+int FUN_00235744(void);
+
+typedef struct fn_002355fc_arg0 fn_002355fc_arg0;
+struct fn_002355fc_arg0 {
+    float field_0x0; /* +0x0 */
+    unsigned char field_0x4; /* +0x4 */
+    unsigned char pad_0x5[0x3];
+    unsigned char field_0x8; /* +0x8 */
+    unsigned char pad_0x9[0x3];
+    uint field_0xc; /* +0xc */
+    int field_0x10; /* +0x10 */
+    int field_0x14; /* +0x14 */
+};
+
+typedef int romwright_code(...);
+/* stack frame of param_1: 1 slot(s), 4 byte(s) */
+typedef struct {
+    unsigned int sp10; /* 0x10: local_10 */
+} param_1_stack;
+
+extern char s______________________00471bc0[89]; /* 0x471bc0 */
+
+/* Supplied declaration required: FUN_00235744. */
+
+
+void FUN_002355fc(fn_002355fc_arg0 *param_1)
+
+{
+/* irregular: 1 goto(s); irregular input(s): in_s0; 3 native warning(s); review required */
+  unsigned int temp_v0;
+  fn_002355fc_arg0 *pfVar2;
+  int *piVar3;
+  int temp_v1;
+  int temp_v2;
+  int *piVar6;
+  fn_002355fc_arg0 *pfVar7;
+  float in_s0;
+  
+  FUN_00235744();
+  temp_v0 = param_1->field_0xc;
+  pfVar7 = (fn_002355fc_arg0 *)0x0;
+  if ((temp_v0 & 1) != 0) {
+    temp_v1 = param_1->field_0x10;
+    pfVar2 = (fn_002355fc_arg0 *)&param_1->field_0x10;
+    if (temp_v1 != 0) {
+      pfVar2 = (fn_002355fc_arg0 *)((int)pfVar2 + temp_v1);
+    }
+    temp_v2 = param_1->field_0x14;
+    if (temp_v1 == 0) {
+      pfVar2 = (fn_002355fc_arg0 *)0x0;
+    }
+    if (temp_v2 != 0) {
+      pfVar7 = (fn_002355fc_arg0 *)(temp_v2 + (int)&param_1->field_0x14);
+    }
+    FUN_002355fc(pfVar2);
+    FUN_002355fc(pfVar7);
+  }
+  else if ((temp_v0 & 2) == 0) {
+    if ((temp_v0 & 4) != 0) {
+      temp_v1 = param_1->field_0x14;
+      pfVar2 = pfVar7;
+      if (temp_v1 != 0) {
+        pfVar2 = (fn_002355fc_arg0 *)(temp_v1 + (int)&param_1->field_0x14);
+      }
+    }
+    else {
+      temp_v1 = param_1->field_0x10;
+      piVar6 = &param_1->field_0x14;
+      if (piVar6 < piVar6 + temp_v1) {
+        piVar3 = piVar6;
+        do {
+          if (*piVar3 != 0) {
+            pfVar2 = (fn_002355fc_arg0 *)(*piVar3 + (int)piVar3);
+          }
+          else {
+            pfVar2 = (fn_002355fc_arg0 *)0x0;
+          }
+          if (in_s0 < *(float *)&pfVar2->field_0x4) goto LAB_002356f0;
+          piVar3 = piVar3 + 1;
+        } while (piVar3 < piVar6 + temp_v1);
+      }
+      temp_v2 = piVar6[temp_v1 - 1];
+      pfVar2 = pfVar7;
+      if (temp_v2 != 0) {
+        pfVar2 = (fn_002355fc_arg0 *)(temp_v2 + (int)(piVar6 + (temp_v1 - 1)));
+      }
+    }
+LAB_002356f0:
+    temp_v0 = *(unsigned int *)&pfVar2->field_0x8;
+    if ((temp_v0 & 1) == 0) {
+                    /* WARNING: Could not recover jumptable at 0x0023573c. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      (**(romwright_code **)(s______________________00471bc0 +
+                  ((temp_v0 & 0xe0) >> 5) * 4 + ((temp_v0 & 0x1c) >> 2) * 0x20))(&pfVar2->field_0xc);
+      return;
+    }
+  }
+  return;
+}
+
+} /* extern "C" */

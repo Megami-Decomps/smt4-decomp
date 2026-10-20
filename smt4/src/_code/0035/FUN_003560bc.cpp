@@ -1,0 +1,63 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003560bc` (_code @ 0x3560bc, 0xa0 bytes) from smt4_v1.2.0.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+extern "C" {
+
+int software_interrupt(int);
+
+/* stack frame of param_3: 3 slot(s), 12 byte(s) */
+typedef struct {
+    unsigned int sp18; /* 0x18: local_18 */
+    unsigned int sp1C; /* 0x1c: local_1c */
+    unsigned int sp28; /* 0x28: local_28 */
+} param_3_stack;
+
+extern unsigned int DAT_004d4394; /* 0x4d4394 */
+
+/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
+extern unsigned int FUN_00239dec(int);
+extern unsigned int *nn_fnd_UnitHeapTemplate_nn_os_LockPolicy_Object_nn_os_CriticalSection_Allocate(unsigned int *);
+extern unsigned int nn_fs_ipc_FileSystem_OpenDirectory(unsigned int, unsigned int, unsigned long long, unsigned int, unsigned char *, unsigned int);
+
+
+unsigned int FUN_003560bc(int param_1,unsigned int *param_2,unsigned long long *param_3)
+
+{
+/* irregular: 1 native warning(s); review required */
+  unsigned int temp_v0;
+  unsigned int *puVar2;
+  int temp_v1;
+  unsigned int temp_v2 [2];
+  
+  if ((unsigned int)param_3[1] >= 0x201) {
+    temp_v0 = 0xe0e046bf;
+  }
+  else {
+    temp_v1 = 0;
+    temp_v2[0] = FUN_00239dec(param_1);
+    temp_v0 = nn_fs_ipc_FileSystem_OpenDirectory
+                      ((unsigned int)temp_v2,(unsigned int)&temp_v1,*param_3,*(unsigned int *)(param_1 + 8),*(unsigned char **)(param_1 + 0xc),
+                       (unsigned int)param_3[1]);
+    if (-1 < (int)temp_v0) {
+      puVar2 = (unsigned int *)
+               nn_fnd_UnitHeapTemplate_nn_os_LockPolicy_Object_nn_os_CriticalSection_Allocate
+                         (&DAT_004d4394);
+      if (puVar2 != (unsigned int *)0x0) {
+        puVar2[1] = temp_v1;
+        *puVar2 = (unsigned int)"摴5搌5";
+      }
+      *param_2 = (unsigned int)puVar2;
+      if (puVar2 != (unsigned int *)0x0) {
+        temp_v0 = 0;
+      }
+      else {
+        software_interrupt(0x23);
+        temp_v0 = 0xd8604659;
+      }
+    }
+  }
+  return temp_v0;
+}
+
+} /* extern "C" */

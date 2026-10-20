@@ -1,0 +1,52 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002322c4` (_code @ 0x2322c4, 0x90 bytes) from smt4a.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+extern "C" {
+
+int FUN_00145e24(int, unsigned int);
+int FUN_00157558(void);
+int FUN_00409718(int);
+
+typedef int romwright_code(...);
+/* stack frame of param_1: 1 slot(s), 4 byte(s) */
+typedef struct {
+    unsigned int sp18; /* 0x18: local_18 */
+} param_1_stack;
+
+extern int DAT_0059dbb4; /* 0x59dbb4 */
+
+/* Supplied declaration required: FUN_00145e24. */
+/* Supplied declaration required: FUN_00157558. */
+/* Supplied declaration required: FUN_00409718. */
+
+
+void FUN_002322c4(int param_1)
+
+{
+/* irregular: 5 native warning(s); review required */
+  char temp_v0;
+  unsigned int temp_v1;
+  
+  temp_v0 = *(char *)(DAT_0059dbb4 + 0x5f8);
+  if (temp_v0 == '\x01') {
+                    /* WARNING: Could not recover jumptable at 0x0023234c. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+    (**(romwright_code **)(*(int *)(param_1 + 0x18) * 0x18 + 0x5c1084))(param_1);
+    return;
+  }
+  temp_v1 = *(unsigned int *)(DAT_0059dbb4 + 0x6fc);
+  FUN_00157558();
+  (**(romwright_code **)(*(int *)(param_1 + 0x18) * 0x18 + 0x5c1084))(param_1);
+  if (temp_v0 != '\x03' && temp_v0 != '\x04') {
+    if (temp_v0 == '\x05') {
+      FUN_00145e24(DAT_0059dbb4,temp_v1);
+      return;
+    }
+    return;
+  }
+  FUN_00409718(DAT_0059dbb4);
+  return;
+}
+
+} /* extern "C" */

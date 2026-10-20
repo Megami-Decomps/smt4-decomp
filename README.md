@@ -1,8 +1,9 @@
 # Shin Megami Tensei IV / IV: Apocalypse decompilation
 
 Matching decompilations of the two Nintendo 3DS games, one function at a time, built with the
-compiler Atlus used: ARM's armcc (RVCT 4.1 build 713, `-O3 -Otime`). A function is done when the C in
-`src/` compiles to the retail function's bytes and `tools/relink.py` links it back into a
+compiler Atlus used: ARM's armcc (RVCT 4.1 build 713, `-O3 -Otime`). The games are C++ (asserts name 168
+`.cpp` source files and 4 `.c`), so every function is a `.cpp` compiled with `--cpp`. A function is done
+when its source compiles to the retail function's bytes and `tools/relink.py` links it back into a
 byte-identical game binary.
 
 | Game | Directory | Build | Functions | Exact (objdiff) | Proven by relink | Fuzzy |
@@ -10,8 +11,8 @@ byte-identical game binary.
 | Shin Megami Tensei IV (USA) | [`smt4/`](smt4/) | v1.2.0 update (CTR-U-AMXE) | 9,341 | 1,201 | 1,195 | 45.0% |
 | Shin Megami Tensei IV: Apocalypse (USA) | [`smt4a/`](smt4a/) | v1.0 cartridge (CTR-P-BG4E) | 15,106 | 2,351 | 2,345 | 45.7% |
 
-Every function's C compiles. Most of it is romwright's first pass; the files listed under
-[Regenerating with romwright](#regenerating-with-romwright) are edited by hand. "Proven by relink" counts the
+Every function compiles. Most of the source is romwright's first pass; the files listed under
+[Where the source came from](#where-the-source-came-from) are edited by hand. "Proven by relink" counts the
 functions `tools/relink.py --matched` links from their compiled objects into the retail `.code`, byte for
 byte; it lists every function it keeps as retail bytes and why. The 6 per game that objdiff scores 100% but
 relink keeps (`nw_gfx_internal_NWCopyVec4Reverse`, `NWCopyMtx24Reverse` and their copies) load with
@@ -70,23 +71,23 @@ assert's source path (`c:\SMT4\XRD686\...\btlMain.cpp`) is in that file, and a f
 file-local variable of one file joins it. Measured by hiding 30% of the anchors and placing them again
 (`--holdout 0.3`): IV 66.7% precision at 15.6% recall, Apocalypse 78.6% at 11.1%.
 `smt4/config/tus_extra.json` adds 20 assert-anchored functions found with another tool's function
-bounds. To move a function, fix its entry and regenerate.
+bounds. To move a function, move its `.cpp` and update its `source` and `file` in `config/project.json`
+and its unit in `objdiff.json`.
 
-## Regenerating with romwright
+## Where the source came from
 
-[romwright](https://github.com/Raikaru/romwright) branch `smt-decomp` (`a2e98c75`) generates both projects; a
-3DS image gets the CTR SDK prototypes by default. Regenerating rewrites `src/`, so run it into a fresh
-directory, or restore the hand-edited files afterwards with `git checkout HEAD -- <files>`:
-
-```sh
-(cd smt4  && romwright-cli new-project orig/smt4_v1.2.0.cxi . --name smt4  --compiler armcc-4.1-b713 --cflags "-O3 -Otime" --names config/names.map --tus config/tus.json)
-(cd smt4a && romwright-cli new-project orig/smt4a.cxi       . --name smt4a --compiler armcc-4.1-b713 --cflags "-O3 -Otime" --names config/names.map --tus config/tus.json)
-```
+[romwright](https://github.com/Raikaru/romwright) branch `smt-decomp` (`a2e98c75`) generated both projects
+once, as C. They were then converted to C++ in place: each file became `.cpp`, its body wrapped in
+`extern "C"` (symbols keep their retail names), and the casts C++ demands were added. C called undeclared
+functions; C++ cannot. Each such callee is now declared with the argument types its calls pass, after C's
+promotions (`float` → `double`, `char`/`short` → `int`), which is how C called it. A callee whose calls
+disagree is declared `int f(...)`. Variadic calls pass floats in core registers, not VFP, so that
+fallback can change a function's code. `src/` is the source of truth now: do not regenerate.
 
 Hand-edited:
 
-- `smt4/src/_code/0034/FUN_0034fe14.c`, `smt4/src/_code/0038/FUN_0038b3e8.c`: ported from their matching
-  Apocalypse twins.
-- `smt4a/src/_code/0010/FUN_001024a8.c`, `smt4a/src/_code/001b/FUN_001bc6a4.c`: call the ARM-to-Thumb
+- `smt4/src/_code/0034/FUN_0034fe14.cpp`, `smt4/src/_code/0038/FUN_0038b3e8.cpp`: ported from their
+  matching Apocalypse twins.
+- `smt4a/src/_code/0010/FUN_001024a8.cpp`, `smt4a/src/_code/001b/FUN_001bc6a4.cpp`: call the ARM-to-Thumb
   veneer the retail `b` goes through.
-- `smt4a/src/_code/0011/FUN_00115728.c`: its string is UTF-16 in retail (`DAT_0053813c`).
+- `smt4a/src/_code/0011/FUN_00115728.cpp`: its string is UTF-16 in retail (`DAT_0053813c`).

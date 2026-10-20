@@ -5,6 +5,10 @@
 
 #include "romwright_types.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /* nn_pl_CTR_InitializeGameCoin */ void nn_pl_CTR_InitializeGameCoin(void);
 /* nn_init_InitializeAllocator */ void nn_init_InitializeAllocator(uint param_1);
 /* nn_applet_CTR_IsExpectedToProcessHomeButton */ bool nn_applet_CTR_IsExpectedToProcessHomeButton(void);
@@ -177,5 +181,9 @@
 /* nn_dbm_RomPathTool_PathParser_GetAsFileName */ uint nn_dbm_RomPathTool_PathParser_GetAsFileName(undefined4 param_1, undefined4 param_2);
 /* nn_dbm_RomPathTool_PathParser_IsDirectoryPath */ bool nn_dbm_RomPathTool_PathParser_IsDirectoryPath(undefined4 param_1);
 /* nn_dbm_RomPathTool_PathParser_GetAsDirectoryName */ uint nn_dbm_RomPathTool_PathParser_GetAsDirectoryName(undefined4 param_1, undefined4 param_2);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

@@ -50,7 +50,7 @@ typedef long long sqword;
 #endif
 typedef void *pointer;
 typedef void code(void);
-#if !defined(__STDC_VERSION__) || __STDC_VERSION__ < 202311L
+#if !defined(__cplusplus) && (!defined(__STDC_VERSION__) || __STDC_VERSION__ < 202311L)
 typedef _Bool bool;
 #endif
 

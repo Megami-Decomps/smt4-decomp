@@ -1,0 +1,97 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001e1e20` (_code @ 0x1e1e20, 0x188 bytes) from smt4_v1.2.0.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+extern "C" {
+
+int FUN_002012f0(void);
+int FUN_0025c5a0(int);
+int FUN_002bf694(unsigned char *, unsigned int *);
+int FUN_002c4a08(...);
+int FUN_002c5788(...);
+
+/* stack frame of param_2: 4 slot(s), 16 byte(s) */
+typedef struct {
+    unsigned int sp14; /* 0x14: local_14 */
+    unsigned int sp18; /* 0x18: local_18 */
+    unsigned int sp1C; /* 0x1c: local_1c */
+    unsigned int sp20; /* 0x20: local_20 */
+} param_2_stack;
+
+extern int FUN_0019f3dc(...); /* 0x19f3dc */
+extern unsigned char LAB_001e1fb8; /* 0x1e1fb8 */
+extern unsigned char LAB_001e1fc8; /* 0x1e1fc8 */
+extern unsigned char LAB_001e1fe0; /* 0x1e1fe0 */
+extern unsigned char LAB_001e1ffc; /* 0x1e1ffc */
+extern int FUN_001e4d70(...); /* 0x1e4d70 */
+extern unsigned char LAB_0020f6c0; /* 0x20f6c0 */
+extern unsigned char LAB_002ca064; /* 0x2ca064 */
+extern unsigned char LAB_002ca07c; /* 0x2ca07c */
+extern unsigned char LAB_002e081c; /* 0x2e081c */
+extern unsigned char LAB_002f4b28; /* 0x2f4b28 */
+extern unsigned int DAT_004937c4; /* 0x4937c4 */
+extern int DAT_004937c8; /* 0x4937c8 */
+extern unsigned char DAT_004937cc; /* 0x4937cc */
+
+/* Supplied declaration required: FUN_002012f0. */
+/* Supplied declaration required: FUN_0025c5a0. */
+/* Supplied declaration required: FUN_002bf694. */
+/* Supplied declaration required: FUN_002c4a08. */
+extern int FUN_002c564c(unsigned int);
+/* Supplied declaration required: FUN_002c5788. */
+
+
+void FUN_001e1e20(unsigned int *param_1,unsigned int *param_2)
+
+{
+/* irregular: 7 native warning(s); review required */
+  unsigned char *puVar1;
+  int temp_v0;
+  
+  param_2 = (unsigned int *)*param_2;
+  param_2[2] = 0;
+  param_2[3] = 0;
+  param_2[4] = 0;
+  param_2[5] = 0;
+  param_2[6] = 0;
+  param_2[7] = 0;
+  param_2[10] = 0;
+  param_2[0xb] = 0;
+  param_2[0xc] = 0;
+  param_2[0xd] = 0;
+  *(unsigned char *)(param_2 + 8) = 0;
+  *(unsigned char *)((int)param_2 + 0x21) = 0;
+  *(unsigned char *)((int)param_2 + 0x22) = 0;
+  *(unsigned char *)((int)param_2 + 0x23) = 0;
+  *(unsigned char *)(param_2 + 9) = 0;
+  *(unsigned char *)(param_2 + 1) = 0;
+  if (param_1 == (unsigned int *)0x0) {
+    temp_v0 = FUN_002c564c(2);
+    if (temp_v0 == 0) {
+      FUN_0025c5a0(0x19);
+      FUN_0025c5a0(0x1b);
+      FUN_0025c5a0(0x1c);
+      FUN_002012f0();
+    }
+    puVar1 = &LAB_001e1fc8;
+    FUN_002c5788(&LAB_001e1fc8,2,0,0,FUN_001e4d70,&LAB_002ca064,0);
+    *param_2 = (unsigned int)puVar1;
+    FUN_002c4a08(&LAB_001e1fe0,0x73,0,0,&LAB_0020f6c0,&LAB_002e081c,0,puVar1);
+    FUN_002c4a08(&LAB_001e1ffc,0xe6,0,0,&LAB_002ca07c,&LAB_002f4b28,0,*param_2);
+    return;
+  }
+  DAT_004937c4 = *param_1;
+  DAT_004937c8 = param_1[1];
+  if (DAT_004937c8 != -1) {
+    DAT_004937cc = 0;
+  }
+  else {
+    FUN_002bf694(&DAT_004937cc,param_1 + 2);
+  }
+  puVar1 = &LAB_001e1fb8;
+  FUN_002c5788(&LAB_001e1fb8,2,0,0,FUN_0019f3dc,&LAB_002ca064,0);
+  *param_2 = (unsigned int)puVar1;
+  return;
+}
+
+} /* extern "C" */

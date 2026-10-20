@@ -1,0 +1,32 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `nn_fs_CTR_MPCore_detail_RomFsArchive_File_Close` (_code @ 0x3555d0, 0x50 bytes) from smt4_v1.2.0.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+extern "C" {
+
+typedef int romwright_code(...);
+/* stack frame of param_1: 1 slot(s), 4 byte(s) */
+typedef struct {
+    unsigned int sp10; /* 0x10: local_10 */
+} param_1_stack;
+
+extern void nn_os_CriticalSection_Enter(unsigned int);
+extern void nn_os_CriticalSection_Leave(unsigned int);
+
+
+void nn_fs_CTR_MPCore_detail_RomFsArchive_File_Close(int *param_1)
+
+{
+  int temp_v0;
+  
+  (**(romwright_code **)(*param_1 + 0x30))(param_1);
+  temp_v0 = param_1[1];
+  nn_os_CriticalSection_Enter(temp_v0 + 0xe8);
+  *param_1 = *(int *)(temp_v0 + 0xdc);
+  *(int **)(temp_v0 + 0xdc) = param_1;
+  *(int *)(temp_v0 + 0xe4) = *(int *)(temp_v0 + 0xe4) - 1;
+  nn_os_CriticalSection_Leave(temp_v0 + 0xe8);
+  return;
+}
+
+} /* extern "C" */

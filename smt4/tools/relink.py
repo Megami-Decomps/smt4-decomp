@@ -65,14 +65,15 @@ def find_tool(explicit, name):
 
 
 def elf_sections(path):
-    """{name: (size, flags)} of an ELF32 little-endian relocatable object."""
+    """{name: (size, flags)} of an ELF32 little-endian relocatable object, without .ARM.exidx
+    (SHT_ARM_EXIDX): the unwind entry armcc's C++ gives each function, which retail links none of."""
     data = Path(path).read_bytes()
     shoff, = struct.unpack_from("<I", data, 0x20)
     shentsize, shnum, shstrndx = struct.unpack_from("<HHH", data, 0x2E)
     headers = [struct.unpack_from("<IIIIIIIIII", data, shoff + i * shentsize) for i in range(shnum)]
     names = headers[shstrndx]
     name = lambda at: data[names[4] + at:data.index(b"\0", names[4] + at)].decode()
-    return {name(h[0]): (h[5], h[2]) for h in headers}
+    return {name(h[0]): (h[5], h[2]) for h in headers if h[1] != 0x70000001}
 
 
 def text_section(path):
@@ -115,7 +116,8 @@ def data_references(path):
     cstr = lambda at: data[at:data.index(b"\0", at)].decode()
     section_name = lambda h: cstr(headers[shstrndx][4] + h[0])
     text_index = next(i for i, h in enumerate(headers) if section_name(h) == ".text")
-    held = {i for i, h in enumerate(headers) if i != text_index and h[2] & 0x2 and h[5]}  # SHF_ALLOC, not empty
+    # SHF_ALLOC and not empty; not .ARM.exidx (SHT_ARM_EXIDX), the unwind entry armcc's C++ adds for the function
+    held = {i for i, h in enumerate(headers) if i != text_index and h[2] & 0x2 and h[5] and h[1] != 0x70000001}
     sections = {}
     for i in held:
         h = headers[i]
@@ -517,7 +519,7 @@ def main():
         + "\n".join(data_sections)
         # .ARM.attributes stays: it tells ld the code is ARMv6K, which calls Thumb
         # with BLX instead of through interworking veneers.
-        + "\n  /DISCARD/ : { *(.comment) *(.debug_frame) *(.arm_vfe_header) }\n}\n"
+        + "\n  /DISCARD/ : { *(.comment) *(.debug_frame) *(.arm_vfe_header) *(.ARM.exidx*) }\n}\n"
     )
     prepared = time.time()
     elf = OUT / f"{project['name']}.elf"

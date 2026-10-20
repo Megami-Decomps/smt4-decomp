@@ -1,0 +1,19 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0040a7f8` (_code @ 0x40a7f8, 0x18 bytes) from smt4a.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+extern "C" {
+
+extern unsigned char *FUN_0037d494(void);
+
+
+unsigned int FUN_0040a7f8(void)
+
+{
+  unsigned char *pbVar1;
+  
+  pbVar1 = (unsigned char *)FUN_0037d494();
+  return (*pbVar1 & 2) >> 1;
+}
+
+} /* extern "C" */

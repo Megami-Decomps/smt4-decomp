@@ -1,0 +1,32 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `nw_snd_SoundPlayer_detail_AllocPlayerHeap` (_code @ 0x376abc, 0x48 bytes) from smt4_v1.2.0.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+extern "C" {
+
+int nw_ut_internal_LinkListImpl_erase_2BAE30(int);
+
+/* Supplied declaration required: nw_ut_internal_LinkListImpl_erase_2BAE30. */
+
+
+int nw_snd_SoundPlayer_detail_AllocPlayerHeap(int param_1,int param_2)
+
+{
+/* irregular: 1 native warning(s); review required */
+  int temp_v0;
+  int temp_v1;
+  
+  if (*(int *)(param_1 + 0x18) == 0) {
+    temp_v0 = 0;
+  }
+  else {
+    temp_v1 = *(int *)(param_1 + 0x1c);
+    temp_v0 = temp_v1 - 0x18;
+    nw_ut_internal_LinkListImpl_erase_2BAE30(param_1 + 0x18);
+    *(int *)(temp_v1 - 0x14) = param_2;
+    *(int *)(param_2 + 4) = temp_v0;
+  }
+  return temp_v0;
+}
+
+} /* extern "C" */
