@@ -31,8 +31,8 @@ typedef struct {
 extern unsigned char LAB_002ca4f8; /* 0x2ca4f8 */
 extern int DAT_004475b8; /* 0x4475b8 */
 extern int DAT_0044ea00; /* 0x44ea00 */
-extern unsigned int DAT_0049f9c4; /* 0x49f9c4 */
-extern short DAT_0049fdde; /* 0x49fdde */
+extern unsigned char DAT_0049f91c; /* 0x49f91c */
+extern unsigned char DAT_0049fd38; /* 0x49fd38 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0025b670. */
@@ -107,8 +107,8 @@ unsigned int FUN_002ca09c(void)
             FUN_002bf288(2,0xe,temp_v9,(int)temp_v11,0,0xb);
             temp_v9 = temp_v9 + 1;
           } while (temp_v9 < 0x10b);
-          temp_v3 = DAT_0049f9c4;
-          FUN_0025b670(DAT_0049f9c4);
+          temp_v3 = (*(unsigned int *)((unsigned char *)&DAT_0049f91c + 0xa8));
+          FUN_0025b670((*(unsigned int *)((unsigned char *)&DAT_0049f91c + 0xa8)));
           FUN_002be624(temp_v13,&LAB_002ca4f8,temp_v3);
           VectorSignedToFloat((int)*(short *)(temp_v2 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat((int)*(short *)(temp_v2 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -127,7 +127,7 @@ unsigned int FUN_002ca09c(void)
           FUN_002bf380(2,0x1c,0x1e,(int)temp_v12,0,0xb);
         }
         temp_v2 = 0;
-        if (temp_v2 < DAT_0049fdde) {
+        if (temp_v2 < (*(short *)((unsigned char *)&DAT_0049fd38 + 0xa6))) {
           do {
             temp_v1 = FUN_002bf4f8(0x1c,temp_v2 + 0x1105);
             temp_v7 = FUN_002bf4f8(0x1c,temp_v2 + 0x110d);
@@ -189,7 +189,7 @@ unsigned int FUN_002ca09c(void)
             FUN_002bf288(2,0xd,(int)temp_v0 % 10,(int)(temp_v10 + (float)temp_v11 + temp_v12),
                          (int)*(short *)(temp_v15 + 10) + (int)*(short *)(temp_v1 + 10),0xb);
             temp_v2 = temp_v2 + 1;
-          } while (temp_v2 < DAT_0049fdde);
+          } while (temp_v2 < (*(short *)((unsigned char *)&DAT_0049fd38 + 0xa6)));
         }
       }
     }

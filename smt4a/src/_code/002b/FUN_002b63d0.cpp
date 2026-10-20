@@ -13,7 +13,7 @@ typedef struct {
 } void_stack;
 
 extern int DAT_005806d4; /* 0x5806d4 */
-extern short DAT_005f1884; /* 0x5f1884 */
+extern unsigned char DAT_005f17fc; /* 0x5f17fc */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00377acc. */
@@ -35,7 +35,7 @@ void FUN_002b63d0(void)
   unsigned int temp_v7;
   
   temp_v0 = DAT_005806d4;
-  if ((DAT_005f1884 != 0) && (temp_v1 = FUN_003c316c(), temp_v1 != 0)) {
+  if (((*(short *)((unsigned char *)&DAT_005f17fc + 0x88)) != 0) && (temp_v1 = FUN_003c316c(), temp_v1 != 0)) {
     temp_v3 = 0;
     do {
       temp_v2 = temp_v0 + temp_v3 * 0x188;
@@ -64,7 +64,7 @@ void FUN_002b63d0(void)
           *(unsigned int *)(temp_v2 + 0x5c) = *(unsigned int *)(temp_v2 + 0x44);
           *(unsigned int *)(temp_v2 + 0xb8) = 0x1c;
           *(unsigned int *)(temp_v2 + 0xbc) = 0;
-          FUN_00377acc((char *)(temp_v2 + 0x34),(int)DAT_005f1884,4);
+          FUN_00377acc((char *)(temp_v2 + 0x34),(int)(*(short *)((unsigned char *)&DAT_005f17fc + 0x88)),4);
           return;
         }
       }

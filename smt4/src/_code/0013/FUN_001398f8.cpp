@@ -12,7 +12,7 @@ int FUN_002bb5a4(unsigned int, unsigned int, int);
 int FUN_002bb648(void);
 int SBORROW4(...);
 
-extern unsigned int DAT_00471b60; /* 0x471b60 */
+extern unsigned char DAT_00471b5c; /* 0x471b5c */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_00128174. */
@@ -38,14 +38,14 @@ unsigned int FUN_001398f8(int param_1)
   do {
     while( 1 ) {
       while( 1 ) {
-        temp_v3 = DAT_00471b60;
+        temp_v3 = (*(unsigned int *)((unsigned char *)&DAT_00471b5c + 0x4));
         temp_v2 = param_1 + 8;
         *(unsigned int *)(param_1 + 0x14) = 0;
         *(unsigned int *)(param_1 + 0x18) = 0;
         *(unsigned int *)(param_1 + 0xc) = 0;
         *(unsigned int *)(param_1 + 0x10) = 0;
         FUN_002bb5a4(temp_v2,temp_v3,3);
-        temp_v3 = DAT_00471b60;
+        temp_v3 = (*(unsigned int *)((unsigned char *)&DAT_00471b5c + 0x4));
         if (-1 < (int)temp_v2) {
           return temp_v4;
         }

@@ -18,7 +18,7 @@ typedef struct {
 extern int FUN_00298354(...); /* 0x298354 */
 extern unsigned char LAB_002b4ff0; /* 0x2b4ff0 */
 extern int FUN_003284cc(...); /* 0x3284cc */
-extern unsigned int DAT_0057113c; /* 0x57113c */
+extern unsigned char DAT_00571138; /* 0x571138 */
 
 /* Supplied declaration required: FUN_0015155c. */
 /* Supplied declaration required: FUN_00163e40. */
@@ -36,7 +36,7 @@ void FUN_002b4f28(unsigned int *param_1,unsigned int param_2,unsigned int param_
   temp_v0 = (param_1[0x29] + 1) % 0xc;
   param_1[0x29] = temp_v0;
   FUN_00163e40(param_1[temp_v0 + 3]);
-  FUN_004dcb40(DAT_0057113c,param_1,param_2,param_3,param_4,param_5);
+  FUN_004dcb40((*(unsigned int *)((unsigned char *)&DAT_00571138 + 0x4)),param_1,param_2,param_3,param_4,param_5);
   puVar2 = &LAB_002b4ff0;
   FUN_0015155c(&LAB_002b4ff0,3,0,0,FUN_00298354,FUN_003284cc,param_1,*param_1);
   param_1[param_1[0x29] + 3] = (unsigned int)puVar2;

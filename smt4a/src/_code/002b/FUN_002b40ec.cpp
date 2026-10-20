@@ -1,5 +1,3 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b40ec` (_code @ 0x2b40ec, 0xd8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
@@ -41,11 +39,8 @@ void FUN_002b40ec(unsigned int *param_1)
     else {
       temp_v1 = *param_1;
     }
-    if (temp_v1 != 0) {
-      do {
-        FUN_0013dd78(*(unsigned int *)(param_1[0xd] + temp_v0 * 4));
-        temp_v0 = temp_v0 + 1;
-      } while (temp_v0 < temp_v1);
+    for (temp_v0 = 0; temp_v0 < temp_v1; temp_v0 = temp_v0 + 1) {
+      FUN_0013dd78(*(unsigned int *)(param_1[0xd] + temp_v0 * 4));
     }
     FUN_0019a5a0(param_1[0xe]);
   }
@@ -57,11 +52,8 @@ void FUN_002b40ec(unsigned int *param_1)
     else {
       temp_v1 = *param_1;
     }
-    if (temp_v1 != 0) {
-      do {
-        FUN_001836b0(*(unsigned int *)(param_1[0xf] + temp_v0 * 4));
-        temp_v0 = temp_v0 + 1;
-      } while (temp_v0 < temp_v1);
+    for (temp_v0 = 0; temp_v0 < temp_v1; temp_v0 = temp_v0 + 1) {
+      FUN_001836b0(*(unsigned int *)(param_1[0xf] + temp_v0 * 4));
     }
     FUN_0019a5a0(param_1[0x10]);
   }

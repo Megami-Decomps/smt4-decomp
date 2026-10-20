@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } void_stack;
 
-extern int DAT_004474f4; /* 0x4474f4 */
+extern unsigned char DAT_004474f0; /* 0x4474f0 */
 extern unsigned char DAT_0049f3f0; /* 0x49f3f0 */
 
 /* Supplied declaration required: FUN_002c1edc. */
@@ -33,10 +33,10 @@ void FUN_0025c238(void)
   float temp_v2;
   unsigned char temp_v3 [20];
   
-  temp_v0 = in_s3 + *(float *)(DAT_004474f4 + 0x294);
-  temp_v1 = in_s4 + *(float *)(DAT_004474f4 + 0x298);
-  temp_v2 = in_s5 + *(float *)(DAT_004474f4 + 0x29c);
-  FUN_002c1edc(&DAT_0049f3f0,temp_v3,&temp_v0,DAT_004474f4 + 0x1c);
+  temp_v0 = in_s3 + *(float *)((*(int *)((unsigned char *)&DAT_004474f0 + 0x4)) + 0x294);
+  temp_v1 = in_s4 + *(float *)((*(int *)((unsigned char *)&DAT_004474f0 + 0x4)) + 0x298);
+  temp_v2 = in_s5 + *(float *)((*(int *)((unsigned char *)&DAT_004474f0 + 0x4)) + 0x29c);
+  FUN_002c1edc(&DAT_0049f3f0,temp_v3,&temp_v0,(*(int *)((unsigned char *)&DAT_004474f0 + 0x4)) + 0x1c);
                     /* WARNING: Treating indirect jump as return */
   return;
 }

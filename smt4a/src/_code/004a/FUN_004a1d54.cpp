@@ -1,5 +1,3 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004a1d54` (_code @ 0x4a1d54, 0x58 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
@@ -33,7 +31,8 @@ void FUN_004a1d54(int param_1)
   }
   FUN_0019de98(0,0xf4f4f4ff);
   FUN_0022e774();
-  *(unsigned short *)(param_1 + 0xa874) = 9;
+  unsigned short *p = (unsigned short *)(param_1 + 0xa874);
+  *p = 9;
   FUN_00184528(param_1 + 0xdc);
   FUN_003343f0(1);
   *(unsigned int *)(param_1 + 0x14) = 0xd;

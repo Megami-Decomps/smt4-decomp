@@ -1,5 +1,3 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004dafd0` (_code @ 0x4dafd0, 0x64 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
@@ -31,8 +29,8 @@ struct fn_004dafd0_arg0 {
     ushort field_0x16c; /* +0x16c */
     undefined1 field_0x16e; /* +0x16e */
     unsigned char pad_0x16f[0x1];
-    undefined2 field_0x170; /* +0x170 */
-    undefined2 field_0x172; /* +0x172 */
+    short field_0x170; /* +0x170 */
+    short field_0x172; /* +0x172 */
     unsigned char pad_0x174[0x7];
     undefined1 field_0x17b; /* +0x17b */
     unsigned char pad_0x17c[0x38];
@@ -59,8 +57,8 @@ void FUN_004dafd0(fn_004dafd0_arg0 *param_1)
   param_1->field_0x16a = 0;
   param_1->field_0x16c = param_1->field_0x16c & 0x3ff;
   param_1->field_0x16e = 0;
-  param_1->field_0x170 = 0xffff;
-  param_1->field_0x172 = 0xffff;
+  param_1->field_0x170 = -1;
+  param_1->field_0x172 = -1;
   param_1->field_0x1b4 = 0;
   return;
 }

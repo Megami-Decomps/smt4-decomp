@@ -23,7 +23,7 @@ typedef struct {
 
 extern unsigned char LAB_0032c6d8; /* 0x32c6d8 */
 extern unsigned char LAB_00333670; /* 0x333670 */
-extern int DAT_0043427c; /* 0x43427c */
+extern unsigned char DAT_00434278; /* 0x434278 */
 extern unsigned int DAT_00439ca8; /* 0x439ca8 */
 
 /* Supplied declaration required: FUN_00227b14. */
@@ -109,7 +109,7 @@ unsigned int FUN_003cf228(int *param_1,unsigned int *param_2)
     FUN_00227b14(DAT_00439ca8,(short)param_2[0xb],0);
   }
   *(unsigned short *)(param_2[10] + 0x14c) = 0xf;
-  *(unsigned char *)(DAT_0043427c + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x13;
+  *(unsigned char *)((*(int *)((unsigned char *)&DAT_00434278 + 0x4)) + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x13;
   return 1;
 }
 

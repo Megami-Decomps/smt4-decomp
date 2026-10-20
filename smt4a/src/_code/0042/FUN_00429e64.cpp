@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_1_stack;
 
-extern unsigned int DAT_005893a8; /* 0x5893a8 */
+extern unsigned char DAT_00589398; /* 0x589398 */
 
 #ifndef ROMWRIGHT_ZEXT_4_8_DEFINED
 #define ROMWRIGHT_ZEXT_4_8_DEFINED
@@ -34,7 +34,7 @@ void FUN_00429e64(int param_1)
   
   FUN_00514964();
   if (param_1 != 0) {
-    temp_v0 = DAT_005893a8;
+    temp_v0 = (*(unsigned int *)((unsigned char *)&DAT_00589398 + 0x10));
     nn_fs_ipc_FileSystem_ControlArchive
               ((unsigned int)&temp_v0,romwright_zext_4_8(temp_v1) << 0x20,(unsigned int)temp_v2,*(unsigned int *)(param_1 + 8),
                *(unsigned int *)(param_1 + 0xc),1,(unsigned int)temp_v2);

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002e6e34(int *, unsigned char *);
 int FUN_002e6e5c(int *);
 
-extern int DAT_005949dc; /* 0x5949dc */
+extern unsigned char DAT_005949d8; /* 0x5949d8 */
 extern unsigned char DAT_0062e6a0; /* 0x62e6a0 */
 
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
@@ -31,7 +31,7 @@ unsigned long long FUN_00114a08(unsigned int param_1,unsigned int param_2,unsign
   uStack_14 = param_3;
   uStack_10 = param_4;
   FUN_002e6e34(&uStack_18,&DAT_0062e6a0);
-  temp_v0 = *(char *)(DAT_005949dc + 0x1a4);
+  temp_v0 = *(char *)((*(int *)((unsigned char *)&DAT_005949d8 + 0x4)) + 0x1a4);
   FUN_002e6e5c(&uStack_18);
   return romwright_piece_4_4(uStack_18,(int)temp_v0);
 }

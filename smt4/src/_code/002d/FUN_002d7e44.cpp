@@ -15,7 +15,7 @@ typedef struct {
 } void_stack;
 
 extern int DAT_0044ea00; /* 0x44ea00 */
-extern int DAT_0044eaf8; /* 0x44eaf8 */
+extern unsigned char DAT_0044ea80; /* 0x44ea80 */
 
 /* Supplied declaration required: FUN_001db658. */
 /* Supplied declaration required: FUN_0024a878. */
@@ -62,7 +62,7 @@ void FUN_002d7e44(void)
     (**(romwright_code **)(temp_v1 + 0x1268))();
     *(unsigned char *)(temp_v1 + 0x1264) = 0;
   }
-  if (DAT_0044eaf8 != 0) {
+  if ((*(int *)((unsigned char *)&DAT_0044ea80 + 0x78)) != 0) {
     FUN_001db658(0x1e,0x606060ff,0x909090ff);
     return;
   }

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00282c90(void);
 int VectorSignedToFloat(int, int);
 
-extern int DAT_0044e144; /* 0x44e144 */
+extern unsigned char DAT_0044e140; /* 0x44e140 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00282c90. */
@@ -21,9 +21,9 @@ void FUN_00294d6c(void)
   int temp_v1;
   unsigned int in_fpscr;
   
-  temp_v1 = *(int *)(DAT_0044e144 + 0x1ea0);
+  temp_v1 = *(int *)((*(int *)((unsigned char *)&DAT_0044e140 + 0x4)) + 0x1ea0);
   if (0 < temp_v1) {
-    temp_v0 = *(char *)(DAT_0044e144 + 0x1ea4);
+    temp_v0 = *(char *)((*(int *)((unsigned char *)&DAT_0044e140 + 0x4)) + 0x1ea4);
     if (temp_v0 != '\0') {
       if (temp_v0 != '\x01') {
         if (temp_v0 == '\x02') {

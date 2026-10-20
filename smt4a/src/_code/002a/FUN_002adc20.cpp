@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_00588fd4; /* 0x588fd4 */
+extern unsigned char DAT_00588fd0; /* 0x588fd0 */
 
 extern unsigned int FUN_00192748(unsigned int);
 extern unsigned int FUN_00192798(void);
@@ -19,19 +19,19 @@ unsigned int FUN_002adc20(unsigned int param_1,int param_2)
   unsigned int temp_v2;
   unsigned int temp_v3;
   
-  temp_v0 = DAT_00588fd4;
-  if (DAT_00588fd4 != 0) {
-    if (*(int *)(DAT_00588fd4 + 0x20cc) == 0) {
+  temp_v0 = (*(int *)((unsigned char *)&DAT_00588fd0 + 0x4));
+  if ((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) != 0) {
+    if (*(int *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x20cc) == 0) {
       return 0;
     }
-    temp_v1 = *(int *)(DAT_00588fd4 + 0x20bc);
+    temp_v1 = *(int *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x20bc);
     if (temp_v1 != 0) {
-      param_2 = *(int *)(DAT_00588fd4 + 0x20b8);
+      param_2 = *(int *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x20b8);
     }
     if (temp_v1 == 0 || param_2 == 0) {
       return 0;
     }
-    if (*(int *)(DAT_00588fd4 + 0x20c0) == 0) {
+    if (*(int *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x20c0) == 0) {
       temp_v2 = FUN_001a6f60(temp_v1,0);
       temp_v3 = FUN_00192798();
       *(unsigned int *)(temp_v0 + 0x20c0) = temp_v3;

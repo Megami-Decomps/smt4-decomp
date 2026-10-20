@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } param_2_stack;
 
-extern int *DAT_00473544; /* 0x473544 */
+extern unsigned char DAT_00473540; /* 0x473540 */
 
 extern int aeabi_uidivmod(int, int);
 
@@ -35,8 +35,8 @@ unsigned int FUN_0037c5f8(int param_1,int param_2)
   unsigned int temp_v11;
   
   temp_v3 = 0;
-  if (DAT_00473544 != (int *)0x0) {
-    temp_v0 = (**(romwright_code **)(*DAT_00473544 + 8))(DAT_00473544,*(unsigned int *)(param_1 + 0x14),&temp_v9)
+  if ((*(int * *)((unsigned char *)&DAT_00473540 + 0x4)) != (int *)0x0) {
+    temp_v0 = (**(romwright_code **)(*(*(int * *)((unsigned char *)&DAT_00473540 + 0x4)) + 8))((*(int * *)((unsigned char *)&DAT_00473540 + 0x4)),*(unsigned int *)(param_1 + 0x14),&temp_v9)
     ;
     temp_v3 = 0;
     if (temp_v0 != 0) {

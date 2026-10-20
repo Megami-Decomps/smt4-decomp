@@ -8,11 +8,12 @@ extern "C" {
 unsigned int FUN_0028dba8(int param_1)
 
 {
-  if (((*(unsigned int *)(param_1 + 0x44a0) & 2) == 0) &&
-     (((*(unsigned int *)(param_1 + 0x44a0) & 0x2000000) != 0 || (*(int *)(param_1 + 0xc4) < 0)))) {
-    return 1;
+if ((*(unsigned int *)(param_1 + 0x44a0) & 2) != 0) {
+    return 0;
   }
-  return 0;
+  if ((*(unsigned int *)(param_1 + 0x44a0) & 0x2000000) != 0 || *(int *)(param_1 + 0xc4) < 0) {
+    return 1;
+  }  return 0;
 }
 
 } /* extern "C" */

@@ -1,12 +1,10 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b8a68` (_code @ 0x3b8a68, 0xa4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
 
 int FUN_002305e8(int);
 int FUN_0026374c(int);
-int FUN_0027e774(int);
+int FUN_0027e774(int, int);
 int FUN_0027e7b4(unsigned int, int);
 int FUN_002a7218(undefined4);
 int FUN_002c415c(undefined4);
@@ -56,7 +54,7 @@ void FUN_003b8a68(fn_003b8a68_arg0 *param_1)
     param_1->field_0xda0 = 0;
     FUN_002c415c(param_1->field_0xda4);
     param_1->field_0xda4 = 0;
-    FUN_0027e774(0);
+    FUN_0027e774(0,0);
     FUN_0027e7b4(*(unsigned int *)&param_1->field_0xd80,
                  *(unsigned char *)((int)param_1->field_0xd5c + 0x3f));
     param_1->field_0x28 = 5;

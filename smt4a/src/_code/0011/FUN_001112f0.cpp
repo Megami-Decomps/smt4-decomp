@@ -12,7 +12,7 @@ int FUN_002fb25c(unsigned int, unsigned int);
 int FUN_0043afa0(unsigned int *);
 
 extern unsigned char DAT_00559454; /* 0x559454 */
-extern unsigned int DAT_00594abc; /* 0x594abc */
+extern unsigned char DAT_00594a58; /* 0x594a58 */
 
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
 #define ROMWRIGHT_PIECE_4_4_DEFINED
@@ -52,7 +52,7 @@ FUN_001112f0(unsigned int *param_1,unsigned int param_2,unsigned int param_3,uns
     FUN_002e6e14(temp_v0 - 4);
   }
   if (*(char *)(param_1 + 0x42d) != '\0') {
-    FUN_002fb25c(DAT_00594abc,param_1[0x42c]);
+    FUN_002fb25c((*(unsigned int *)((unsigned char *)&DAT_00594a58 + 0x64)),param_1[0x42c]);
   }
   FUN_0043afa0(param_1 + 0xe);
   temp_v0 = FUN_002eda5a(param_1 + 0x428);

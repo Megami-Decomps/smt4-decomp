@@ -4,14 +4,14 @@
 
 extern "C" {
 
-extern unsigned int DAT_005b4008; /* 0x5b4008 */
+extern unsigned char DAT_005b4000; /* 0x5b4000 */
 extern unsigned char DAT_00640000; /* 0x640000 */
 
 
 unsigned int FUN_001656a0(unsigned int param_1)
 
 {
-  if (((param_1 < 0x1f) && ((DAT_005b4008 & 1) == 0 && (DAT_005b4008 & 2) == 0)) &&
+  if (((param_1 < 0x1f) && (((*(unsigned int *)((unsigned char *)&DAT_005b4000 + 0x8)) & 1) == 0 && ((*(unsigned int *)((unsigned char *)&DAT_005b4000 + 0x8)) & 2) == 0)) &&
      (*(int *)(&DAT_00640000 + param_1 * 4) == 1)) {
     return 1;
   }

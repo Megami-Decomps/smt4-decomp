@@ -1,5 +1,3 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c277c` (_code @ 0x2c277c, 0x158 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
@@ -49,12 +47,10 @@ unsigned short FUN_002c277c(void)
   }
   temp_v1 = FUN_0018719c(0x534);
   temp_v3 = 999;
-  temp_v0 = temp_v3;
-  if (temp_v1 == 0) {
-    temp_v0 = 99;
-  }
-  if ((temp_v0 < temp_v2) && (temp_v1 = FUN_0018719c(0x534), temp_v2 = temp_v3, temp_v1 == 0)) {
-    temp_v2 = 99;
+  temp_v0 = (temp_v1 != 0) ? temp_v3 : 99;
+  if (temp_v0 < temp_v2) {
+    temp_v1 = FUN_0018719c(0x534);
+    temp_v2 = (temp_v1 != 0) ? temp_v3 : 99;
   }
   temp_v1 = FUN_003e46f4(0x29);
   if (temp_v1 != 0) {

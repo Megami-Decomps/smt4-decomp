@@ -7,7 +7,7 @@ extern "C" {
 int VectorSignedToFloat(unsigned int, int);
 int rt_memcpy_w(float *, unsigned int, int);
 
-extern int DAT_004474f4; /* 0x4474f4 */
+extern unsigned char DAT_004474f0; /* 0x4474f0 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: rt_memcpy_w. */
@@ -22,8 +22,8 @@ void FUN_00282228(unsigned int param_1)
   unsigned int in_fpscr;
   float temp_v1;
   
-  temp_v0 = DAT_004474f4;
-  pfVar2 = (float *)(DAT_004474f4 + 0x220);
+  temp_v0 = (*(int *)((unsigned char *)&DAT_004474f0 + 0x4));
+  pfVar2 = (float *)((*(int *)((unsigned char *)&DAT_004474f0 + 0x4)) + 0x220);
   rt_memcpy_w(pfVar2,param_1,0x70);
   *(float *)(temp_v0 + 0x250) = *pfVar2;
   *(unsigned int *)(temp_v0 + 0x254) = *(unsigned int *)(temp_v0 + 0x224);

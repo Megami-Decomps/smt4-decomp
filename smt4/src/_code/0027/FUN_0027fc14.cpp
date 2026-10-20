@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_003079b4(void);
 
-extern int *DAT_004474f4; /* 0x4474f4 */
+extern unsigned char DAT_004474f0; /* 0x4474f0 */
 
 /* Supplied declaration required: FUN_003079b4. */
 
@@ -19,9 +19,9 @@ void FUN_0027fc14(int param_1)
   int *piVar2;
   int temp_v0;
   
-  piVar1 = DAT_004474f4;
-  piVar2 = DAT_004474f4 + 7;
-  *(unsigned char *)(DAT_004474f4 + 0x87) = 0;
+  piVar1 = (*(int * *)((unsigned char *)&DAT_004474f0 + 0x4));
+  piVar2 = (*(int * *)((unsigned char *)&DAT_004474f0 + 0x4)) + 7;
+  *(unsigned char *)((*(int * *)((unsigned char *)&DAT_004474f0 + 0x4)) + 0x87) = 0;
   *piVar1 = param_1;
   piVar1[1] = 0;
   piVar1[2] = 0;

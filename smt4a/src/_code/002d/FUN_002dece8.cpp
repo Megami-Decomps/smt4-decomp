@@ -9,7 +9,7 @@ int FUN_0016c410(int);
 int FUN_0016c560(int);
 
 typedef int romwright_code(...);
-extern int DAT_00573808; /* 0x573808 */
+extern unsigned char DAT_005737f0; /* 0x5737f0 */
 extern int DAT_0059dbb4; /* 0x59dbb4 */
 
 /* Supplied declaration required: FUN_00164a9c. */
@@ -33,12 +33,12 @@ unsigned int FUN_002dece8(void)
   
   FUN_00164a9c();
   temp_v3 = DAT_0059dbb4;
-  temp_v0 = DAT_00573808;
-  if (DAT_00573808 != 0) {
-    temp_v1 = *(unsigned int *)(DAT_00573808 + 0x339c);
+  temp_v0 = (*(int *)((unsigned char *)&DAT_005737f0 + 0x18));
+  if ((*(int *)((unsigned char *)&DAT_005737f0 + 0x18)) != 0) {
+    temp_v1 = *(unsigned int *)((*(int *)((unsigned char *)&DAT_005737f0 + 0x18)) + 0x339c);
     temp_v6 = (temp_v1 & 2) != 0;
     if (temp_v6) {
-      temp_v1 = *(unsigned int *)(DAT_00573808 + 0x33a8);
+      temp_v1 = *(unsigned int *)((*(int *)((unsigned char *)&DAT_005737f0 + 0x18)) + 0x33a8);
     }
     if (temp_v6 && temp_v1 != 0) {
       temp_v2 = FUN_00387580(6);

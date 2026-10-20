@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } void_stack;
 
-extern int DAT_005806a4; /* 0x5806a4 */
+extern unsigned char DAT_005806a0; /* 0x5806a0 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_001f3f34. */
@@ -42,14 +42,14 @@ unsigned int FUN_0033a374(void)
   unsigned int uStack_1c;
   unsigned int uStack_18;
   
-  temp_v0 = DAT_005806a4;
-  if (*(int *)(DAT_005806a4 + 0x270) <= *(int *)(DAT_005806a4 + 0x274)) {
-    puVar6 = (unsigned int *)(DAT_005806a4 + 0x240);
-    temp_v5 = *(unsigned int *)(DAT_005806a4 + 0x244);
-    temp_v7 = *(unsigned int *)(DAT_005806a4 + 0x248);
-    temp_v8 = *(unsigned int *)(DAT_005806a4 + 0x24c);
-    temp_v9 = *(unsigned int *)(DAT_005806a4 + 0x250);
-    *(unsigned int *)(DAT_005806a4 + 0x254) = *(unsigned int *)(DAT_005806a4 + 0x23c);
+  temp_v0 = (*(int *)((unsigned char *)&DAT_005806a0 + 0x4));
+  if (*(int *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x270) <= *(int *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x274)) {
+    puVar6 = (unsigned int *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x240);
+    temp_v5 = *(unsigned int *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x244);
+    temp_v7 = *(unsigned int *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x248);
+    temp_v8 = *(unsigned int *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x24c);
+    temp_v9 = *(unsigned int *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x250);
+    *(unsigned int *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x254) = *(unsigned int *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x23c);
     *(unsigned int *)(temp_v0 + 600) = *puVar6;
     *(unsigned int *)(temp_v0 + 0x25c) = temp_v5;
     *(unsigned int *)(temp_v0 + 0x260) = temp_v7;
@@ -57,12 +57,12 @@ unsigned int FUN_0033a374(void)
     *(unsigned int *)(temp_v0 + 0x268) = temp_v9;
     return 1;
   }
-  temp_v2 = *(int *)(DAT_005806a4 + 0x26c);
+  temp_v2 = *(int *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x26c);
   if (temp_v2 != 0) {
     if (temp_v2 == 2) {
-      temp_v5 = *(unsigned int *)(DAT_005806a4 + 0x224);
-      VectorSignedToFloat(*(int *)(DAT_005806a4 + 0x274),(unsigned char)(in_fpscr >> 0x16) & 3);
-      VectorSignedToFloat(*(int *)(DAT_005806a4 + 0x270),(unsigned char)(in_fpscr >> 0x16) & 3);
+      temp_v5 = *(unsigned int *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x224);
+      VectorSignedToFloat(*(int *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x274),(unsigned char)(in_fpscr >> 0x16) & 3);
+      VectorSignedToFloat(*(int *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x270),(unsigned char)(in_fpscr >> 0x16) & 3);
       FUN_001f3f34();
       temp_v7 = *(unsigned int *)(temp_v0 + 0x228);
       VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x270),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -94,10 +94,10 @@ unsigned int FUN_0033a374(void)
       return 0;
     }
     if (temp_v2 == 3) {
-      temp_v1 = DAT_005806a4 + 0x254;
-      temp_v2 = DAT_005806a4 + 0x260;
-      *(float *)(DAT_005806a4 + 0x254) =
-           *(float *)(DAT_005806a4 + 0x254) + *(float *)(DAT_005806a4 + 0x278);
+      temp_v1 = (*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x254;
+      temp_v2 = (*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x260;
+      *(float *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x254) =
+           *(float *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x254) + *(float *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x278);
       *(float *)(temp_v0 + 600) = *(float *)(temp_v0 + 600) + *(float *)(temp_v0 + 0x27c);
       *(float *)(temp_v0 + 0x25c) = *(float *)(temp_v0 + 0x25c) + *(float *)(temp_v0 + 0x280);
       *(float *)(temp_v0 + 0x260) = *(float *)(temp_v0 + 0x260) + *(float *)(temp_v0 + 0x284);
@@ -110,14 +110,14 @@ unsigned int FUN_0033a374(void)
       *(int *)(temp_v0 + 0x274) = *(int *)(temp_v0 + 0x274) + 1;
       return 0;
     }
-    pfVar1 = (float *)(DAT_005806a4 + 0x240);
-    pfVar2 = (float *)(DAT_005806a4 + 600);
-    temp_v3 = *(float *)(DAT_005806a4 + 0x244);
-    temp_v6 = *(float *)(DAT_005806a4 + 0x25c);
-    temp_v4 = 1.0f / *(float *)(DAT_005806a4 + 0x290);
-    *(float *)(DAT_005806a4 + 0x254) =
-         *(float *)(DAT_005806a4 + 0x254) +
-         (*(float *)(DAT_005806a4 + 0x23c) - *(float *)(DAT_005806a4 + 0x254)) * temp_v4;
+    pfVar1 = (float *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x240);
+    pfVar2 = (float *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 600);
+    temp_v3 = *(float *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x244);
+    temp_v6 = *(float *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x25c);
+    temp_v4 = 1.0f / *(float *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x290);
+    *(float *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x254) =
+         *(float *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x254) +
+         (*(float *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x23c) - *(float *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x254)) * temp_v4;
     *(float *)(temp_v0 + 600) = *(float *)(temp_v0 + 600) + (*pfVar1 - *pfVar2) * temp_v4;
     *(float *)(temp_v0 + 0x25c) = *(float *)(temp_v0 + 0x25c) + (temp_v3 - temp_v6) * temp_v4;
     temp_v3 = 1.0f / *(float *)(temp_v0 + 0x290);
@@ -131,8 +131,8 @@ unsigned int FUN_0033a374(void)
             (*(float *)(temp_v0 + 0x250) - *(float *)(temp_v0 + 0x268)) * temp_v3;
   }
   else {
-    *(float *)(DAT_005806a4 + 0x254) =
-         *(float *)(DAT_005806a4 + 0x254) + *(float *)(DAT_005806a4 + 0x278);
+    *(float *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x254) =
+         *(float *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x254) + *(float *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x278);
     *(float *)(temp_v0 + 600) = *(float *)(temp_v0 + 600) + *(float *)(temp_v0 + 0x27c);
     *(float *)(temp_v0 + 0x25c) = *(float *)(temp_v0 + 0x25c) + *(float *)(temp_v0 + 0x280);
     *(float *)(temp_v0 + 0x260) = *(float *)(temp_v0 + 0x260) + *(float *)(temp_v0 + 0x284);

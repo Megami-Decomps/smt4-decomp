@@ -32,7 +32,7 @@ typedef struct {
 
 extern unsigned char DAT_00530b54; /* 0x530b54 */
 extern unsigned char DAT_00530b58; /* 0x530b58 */
-extern int DAT_0057f590; /* 0x57f590 */
+extern unsigned char DAT_0057f588; /* 0x57f588 */
 extern unsigned int DAT_0059dbb4; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -87,9 +87,9 @@ void FUN_00165b08(void)
   unsigned char temp_v17 [64];
   unsigned char temp_v18 [100];
   
-  temp_v7 = DAT_0057f590;
-  FUN_001654d8(DAT_0057f590 + 0xb00);
-  FUN_001654e4(DAT_0057f590 + 0xb00);
+  temp_v7 = (*(int *)((unsigned char *)&DAT_0057f588 + 0x8));
+  FUN_001654d8((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0xb00);
+  FUN_001654e4((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0xb00);
   temp_v2 = FUN_001692ac(1,0);
   FUN_0016c6f0(DAT_0059dbb4,3,temp_v2);
   FUN_00183bb0();
@@ -103,16 +103,16 @@ void FUN_00165b08(void)
     temp_v12 = 0;
     temp_v4 = FUN_00187168();
     if (temp_v4 != 0) {
-      temp_v4 = FUN_001654d8(DAT_0057f590 + 0xb00);
-      temp_v5 = FUN_001654e4(DAT_0057f590 + 0xb00);
+      temp_v4 = FUN_001654d8((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0xb00);
+      temp_v5 = FUN_001654e4((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0xb00);
       temp_v8 = 0;
       do {
         if (*(int *)(temp_v7 + 0x9c) < temp_v8) break;
         temp_v6 = FUN_00187010(*(unsigned int *)(temp_v7 + temp_v8 * 4 + 0xac) & 0xffff);
         if ((*(char *)(temp_v7 + temp_v8 + 0xdc) == '\0') &&
            (*(short *)(temp_v3 + 300) == *(short *)(temp_v6 + 300))) {
-          temp_v4 = FUN_001654d8(DAT_0057f590 + temp_v8 * 0x8c + 0xdbc);
-          temp_v5 = FUN_001654e4(DAT_0057f590 + temp_v8 * 0x8c + 0xdbc);
+          temp_v4 = FUN_001654d8((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + temp_v8 * 0x8c + 0xdbc);
+          temp_v5 = FUN_001654e4((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + temp_v8 * 0x8c + 0xdbc);
           temp_v12 = 1;
           break;
         }
@@ -185,8 +185,8 @@ LAB_00165eec:
     }
     if ((temp_v12 && temp_v14 != 0) && (temp_v14 = *(unsigned int *)(temp_v7 + temp_v9 * 4 + 0xac), temp_v14 != 0)) {
       temp_v3 = FUN_00187010(temp_v14 & 0xffff);
-      temp_v4 = FUN_001654d8(DAT_0057f590 + temp_v9 * 0x8c + 0xdbc);
-      temp_v5 = FUN_001654e4(DAT_0057f590 + temp_v9 * 0x8c + 0xdbc);
+      temp_v4 = FUN_001654d8((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + temp_v9 * 0x8c + 0xdbc);
+      temp_v5 = FUN_001654e4((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + temp_v9 * 0x8c + 0xdbc);
       FUN_001677c0();
       temp_v8 = FUN_001834a4(0x14,temp_v10 + 0xc34);
       temp_v6 = (int)*(short *)(temp_v8 + 10);

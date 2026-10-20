@@ -25,8 +25,8 @@ typedef struct {
 extern unsigned char DAT_0055909c; /* 0x55909c */
 extern unsigned char DAT_0055b0ec; /* 0x55b0ec */
 extern unsigned char DAT_0059496f; /* 0x59496f */
-extern signed char DAT_00594970; /* 0x594970 */
-extern int *DAT_00594aa8; /* 0x594aa8 */
+extern unsigned char DAT_00594958; /* 0x594958 */
+extern unsigned char DAT_00594a58; /* 0x594a58 */
 
 extern int *FUN_00106fa8(void);
 /* Supplied declaration required: FUN_0010cd18. */
@@ -89,8 +89,8 @@ int FUN_00121cc4(void)
   FUN_002ed0c0(temp_v0 - 0x354,temp_v3);
   FUN_002ecef0();
   *(unsigned int *)(temp_v0 - 0x388) = 0;
-  if (DAT_00594aa8 != (int *)0x0) {
-    temp_v1 = (**(romwright_code **)(*DAT_00594aa8 + 8))();
+  if ((*(int * *)((unsigned char *)&DAT_00594a58 + 0x50)) != (int *)0x0) {
+    temp_v1 = (**(romwright_code **)(*(*(int * *)((unsigned char *)&DAT_00594a58 + 0x50)) + 8))();
     *(unsigned int *)(temp_v0 - 0x388) = temp_v1;
   }
   else {
@@ -112,7 +112,7 @@ int FUN_00121cc4(void)
   *(unsigned int *)(temp_v0 - 0x2c4) = temp_v1;
   *(unsigned int *)(temp_v0 - 0x7c) = 0;
   FUN_00121a7c(temp_v3,DAT_0059496f);
-  if (DAT_00594970 != '\0') {
+  if ((*(signed char *)((unsigned char *)&DAT_00594958 + 0x18)) != '\0') {
     FUN_00121b54(temp_v3);
   }
   temp_v2 = FUN_002e760a(0xb0);

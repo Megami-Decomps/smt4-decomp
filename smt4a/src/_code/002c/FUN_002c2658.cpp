@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } void_stack;
 
-extern int DAT_0057f6a4; /* 0x57f6a4 */
+extern unsigned char DAT_0057f698; /* 0x57f698 */
 
 /* Supplied declaration required: FUN_001a1564. */
 /* Supplied declaration required: FUN_0030fc80. */
@@ -39,7 +39,7 @@ int FUN_002c2658(void)
   int temp_v6;
   unsigned int uStack_14;
   
-  if (*(int *)(DAT_0057f6a4 + 4) == 0) {
+  if (*(int *)((*(int *)((unsigned char *)&DAT_0057f698 + 0xc)) + 4) == 0) {
     temp_v0 = -1;
   }
   else {
@@ -54,8 +54,8 @@ int FUN_002c2658(void)
     temp_v1 = FUN_005021d8((unsigned int *)&temp_v6);
     temp_v3 = FUN_00502244((unsigned int *)&temp_v6);
     temp_v4 = temp_v3 + (temp_v1 + (temp_v0 + temp_v2 * 0x18) * 0x3c) * 0x3c;
-    if (temp_v4 >= *(unsigned int *)(DAT_0057f6a4 + 4)) {
-      temp_v0 = temp_v4 - *(unsigned int *)(DAT_0057f6a4 + 4);
+    if (temp_v4 >= *(unsigned int *)((*(int *)((unsigned char *)&DAT_0057f698 + 0xc)) + 4)) {
+      temp_v0 = temp_v4 - *(unsigned int *)((*(int *)((unsigned char *)&DAT_0057f698 + 0xc)) + 4);
     }
     else {
       temp_v0 = 0;

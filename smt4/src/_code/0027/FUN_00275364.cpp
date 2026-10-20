@@ -10,7 +10,7 @@ int FUN_0028c640(unsigned int, int, int);
 int FUN_002a5710(unsigned int);
 
 extern int DAT_0044cd88; /* 0x44cd88 */
-extern signed char DAT_0049f93e; /* 0x49f93e */
+extern unsigned char DAT_0049f91c; /* 0x49f91c */
 
 /* Supplied declaration required: FUN_00287098. */
 /* Supplied declaration required: FUN_0028c618. */
@@ -35,7 +35,7 @@ void FUN_00275364(void)
       temp_v2 = DAT_0044cd88 + temp_v1 * 0x4c;
       if (*(char *)(temp_v2 + 0x9d8) != '\0') {
         puVar5 = *(unsigned int **)(temp_v2 + 0xa08);
-        if (DAT_0049f93e != '\0') {
+        if ((*(signed char *)((unsigned char *)&DAT_0049f91c + 0x22)) != '\0') {
           if ((*puVar5 & 2) == 0) {
             *puVar5 = *puVar5 | 2;
             *(unsigned char *)(*(int *)(puVar5[2] + 0x2c) + 0x1f6) = 0;
@@ -76,7 +76,7 @@ void FUN_00275364(void)
         puVar5 = *(unsigned int **)(DAT_0044cd88 + *(int *)(temp_v3 + 0x90) * 8 + 0x1c);
       }
       temp_v0 = *puVar5;
-      if (DAT_0049f93e != '\0') {
+      if ((*(signed char *)((unsigned char *)&DAT_0049f91c + 0x22)) != '\0') {
         if ((temp_v0 & 2) == 0) {
           *puVar5 = temp_v0 | 2;
           *(unsigned char *)(*(int *)(puVar5[2] + 0x2c) + 0x1f6) = 0;

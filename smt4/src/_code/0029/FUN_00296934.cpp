@@ -30,24 +30,30 @@ void FUN_00296934(void)
 {
 /* irregular: 8 native warning(s); review required */
   unsigned int *puVar1;
+  unsigned int *puVar4;
+  char *pb;
   int temp_v0;
+  int cnt;
   
   puVar1 = DAT_0043dd50;
-  if (DAT_0043dd50 != (unsigned int *)0x0) {
+  puVar4 = puVar1;
+  if (puVar4 != (unsigned int *)0x0) {
+    pb = (char *)puVar4 + 0x900;
     temp_v0 = 0;
-    if (*(short *)(DAT_0043dd50 + 0x27e) != 0) {
+    cnt = *(unsigned short *)(pb + 0xf8);
+    if (cnt > 0) {
       do {
         FUN_002b8cc8();
         temp_v0 = temp_v0 + 1;
-      } while (temp_v0 < (int)(unsigned int)*(unsigned short *)(puVar1 + 0x27e));
+      } while (temp_v0 < (int)(unsigned int)*(unsigned short *)(pb + 0xf8));
     }
-    FUN_002a7218(puVar1[0x16d]);
-    FUN_002c415c(puVar1[0x16c]);
-    FUN_002c415c(puVar1[0x16b]);
-    if (puVar1[0x16e] != 0) {
-      FUN_002a7218(puVar1[0x170]);
-      FUN_002c415c(puVar1[0x16e]);
-      FUN_002c415c(puVar1[0x16f]);
+    FUN_002a7218(puVar4[0x16d]);
+    FUN_002c415c(puVar4[0x16c]);
+    FUN_002c415c(puVar4[0x16b]);
+    if (puVar4[0x16e] != 0) {
+      FUN_002a7218(puVar4[0x170]);
+      FUN_002c415c(puVar4[0x16e]);
+      FUN_002c415c(puVar4[0x16f]);
     }
     FUN_002ae898(0x29,0);
     FUN_002ae7e8(0x29);

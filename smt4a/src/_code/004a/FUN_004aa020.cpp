@@ -6,9 +6,9 @@ extern "C" {
 
 int FUN_002ccde8(int, int, int);
 
-extern int DAT_0057a9c8; /* 0x57a9c8 */
+extern unsigned char DAT_0057a9b8; /* 0x57a9b8 */
 
-extern int FUN_002cccf8(void);
+extern int FUN_002cccf8(int);
 /* Supplied declaration required: FUN_002ccde8. */
 
 
@@ -22,22 +22,20 @@ int FUN_004aa020(void)
   unsigned int temp_v3;
   unsigned int *puVar5;
   
-  temp_v0 = DAT_0057a9c8;
-  puVar5 = (unsigned int *)(DAT_0057a9c8 + 0x74a0);
+  temp_v0 = (*(int *)((unsigned char *)&DAT_0057a9b8 + 0x10));
+  puVar5 = (unsigned int *)((*(int *)((unsigned char *)&DAT_0057a9b8 + 0x10)) + 0x74a0);
   if (*puVar5 == 0xf) {
-    temp_v1 = 0;
+    return 0;
   }
-  else {
-    temp_v2 = DAT_0057a9c8 + 0x28c4;
-    temp_v1 = FUN_002cccf8();
-    if (temp_v1 != 0) {
-      FUN_002ccde8(temp_v2,temp_v0 + 0x74b6,temp_v0 + 0x74b8);
-      temp_v3 = (unsigned int)*(unsigned short *)(temp_v0 + 0x74b6);
-      if (temp_v3 != 0xe) {
-        temp_v3 = 0;
-      }
-      *puVar5 = temp_v3;
+  temp_v2 = (*(int *)((unsigned char *)&DAT_0057a9b8 + 0x10)) + 0x28c4;
+  temp_v1 = FUN_002cccf8(temp_v2);
+  if (temp_v1 != 0) {
+    FUN_002ccde8(temp_v2,temp_v0 + 0x74b6,temp_v0 + 0x74b8);
+    temp_v3 = (unsigned int)*(unsigned short *)(temp_v0 + 0x74b6);
+    if (temp_v3 != 0xe) {
+      temp_v3 = 0;
     }
+    *puVar5 = temp_v3;
   }
   return temp_v1;
 }

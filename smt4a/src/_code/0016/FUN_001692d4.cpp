@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-extern unsigned int DAT_0063077c; /* 0x63077c */
+extern unsigned char DAT_006306f8; /* 0x6306f8 */
 
 /* Supplied declaration required: FUN_001834e4. */
 
@@ -29,7 +29,7 @@ void FUN_001692d4(void)
   unsigned int temp_v2;
   unsigned int temp_v3;
   
-  DAT_0063077c = 0x3f800000;
+  (*(unsigned int *)((unsigned char *)&DAT_006306f8 + 0x84)) = 0x3f800000;
   temp_v0 = 0x3f800000;
   temp_v1 = 0x3f800000;
   temp_v2 = 0x3f800000;

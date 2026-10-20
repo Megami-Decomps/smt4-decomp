@@ -8,7 +8,7 @@ int FUN_0043b2a4(int, unsigned int);
 int software_interrupt(int);
 
 extern unsigned char DAT_0055b3c0; /* 0x55b3c0 */
-extern signed char DAT_00647634; /* 0x647634 */
+extern unsigned char DAT_00647630; /* 0x647630 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_0043b2a4. */
@@ -21,7 +21,7 @@ unsigned int * FUN_0043b044(unsigned int *param_1)
   *param_1 = (unsigned int)&DAT_0055b3c0;
   if (0 < (int)param_1[1]) {
     software_interrupt(0x23);
-    if (DAT_00647634 == '\0') {
+    if ((*(signed char *)((unsigned char *)&DAT_00647630 + 0x4)) == '\0') {
       param_1[1] = 0;
     }
     else {

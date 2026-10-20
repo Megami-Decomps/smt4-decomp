@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp60; /* 0x60: local_60 */
 } param_5_stack;
 
-extern int *DAT_00473544; /* 0x473544 */
+extern unsigned char DAT_00473540; /* 0x473540 */
 
 extern int aeabi_uidivmod(int, unsigned int);
 
@@ -86,7 +86,7 @@ unsigned int FUN_0037d1bc(int param_1,int param_2,unsigned int *param_3,unsigned
           temp_v0 = (**(romwright_code **)(**(int **)(param_1 + 0x14) + 0x54))();
           *(unsigned int *)(param_1 + 0x44) = temp_v0;
         }
-        (**(romwright_code **)(*DAT_00473544 + 0xc))(DAT_00473544,*(unsigned int *)(param_1 + 0x14));
+        (**(romwright_code **)(*(*(int * *)((unsigned char *)&DAT_00473540 + 0x4)) + 0xc))((*(int * *)((unsigned char *)&DAT_00473540 + 0x4)),*(unsigned int *)(param_1 + 0x14));
         temp_v3 = temp_v3 + 1;
       } while (temp_v3 < *(unsigned int *)(param_1 + 0x34));
     }
@@ -122,8 +122,8 @@ unsigned int FUN_0037d1bc(int param_1,int param_2,unsigned int *param_3,unsigned
         } while (temp_v1 < *(unsigned int *)(param_1 + 0x20));
       }
     }
-    temp_v7 = (**(romwright_code **)(*DAT_00473544 + 0x10))
-                      (DAT_00473544,*(unsigned int *)(param_1 + 0x14),*(unsigned int *)(param_1 + 0x20),
+    temp_v7 = (**(romwright_code **)(*(*(int * *)((unsigned char *)&DAT_00473540 + 0x4)) + 0x10))
+                      ((*(int * *)((unsigned char *)&DAT_00473540 + 0x4)),*(unsigned int *)(param_1 + 0x14),*(unsigned int *)(param_1 + 0x20),
                        temp_v8);
     if (temp_v7 == 0) {
       return 0;
@@ -163,8 +163,8 @@ unsigned int FUN_0037d1bc(int param_1,int param_2,unsigned int *param_3,unsigned
             } while (temp_v1 < *(unsigned int *)(param_1 + 0x20));
           }
         }
-        temp_v7 = (**(romwright_code **)(*DAT_00473544 + 0x10))
-                          (DAT_00473544,*(unsigned int *)(param_1 + 0x14),
+        temp_v7 = (**(romwright_code **)(*(*(int * *)((unsigned char *)&DAT_00473540 + 0x4)) + 0x10))
+                          ((*(int * *)((unsigned char *)&DAT_00473540 + 0x4)),*(unsigned int *)(param_1 + 0x14),
                            *(unsigned int *)(param_1 + 0x20),temp_v8);
         if (temp_v7 == 0) {
           return 0;

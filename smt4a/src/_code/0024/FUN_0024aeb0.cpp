@@ -12,7 +12,7 @@ int FUN_003fe86c(int, unsigned int, int);
 int VectorSignedToFloat(...);
 
 extern int DAT_00587f0c; /* 0x587f0c */
-extern signed char DAT_005f161f; /* 0x5f161f */
+extern unsigned char DAT_005f15fc; /* 0x5f15fc */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_001f3f34. */
@@ -47,7 +47,7 @@ void FUN_0024aeb0(void)
     }
     if (temp_v2 != 0) {
       temp_v2 = *(int *)(temp_v2 + 4);
-      if (DAT_005f161f != '\0') {
+      if ((*(signed char *)((unsigned char *)&DAT_005f15fc + 0x23)) != '\0') {
         *(unsigned int *)(temp_v2 + 4) = *(unsigned int *)(temp_v2 + 4) | 3;
       }
       else {

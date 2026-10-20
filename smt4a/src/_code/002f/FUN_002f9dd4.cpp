@@ -14,7 +14,7 @@ typedef struct {
     unsigned char sp20; /* 0x20: local_20 */
 } param_4_stack;
 
-extern signed char DAT_0059496c; /* 0x59496c */
+extern unsigned char DAT_00594958; /* 0x594958 */
 
 #ifndef ROMWRIGHT_PIECE_3_1_DEFINED
 #define ROMWRIGHT_PIECE_3_1_DEFINED
@@ -40,7 +40,7 @@ FUN_002f9dd4(unsigned int param_1,unsigned char *param_2,unsigned int param_3,un
   puStack_1c = param_2;
   uStack_18 = param_3;
   temp_v2 = param_4;
-  if (DAT_0059496c != '\0') {
+  if ((*(signed char *)((unsigned char *)&DAT_00594958 + 0x14)) != '\0') {
     temp_v1 = param_1;
     temp_v0 = FUN_002ea714();
     FUN_002e6e34(&temp_v1,temp_v0);

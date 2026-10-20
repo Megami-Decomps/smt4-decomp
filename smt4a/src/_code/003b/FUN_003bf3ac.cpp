@@ -25,16 +25,13 @@ void FUN_003bf3ac(int param_1)
   unsigned int temp_v1;
   unsigned int *puVar4;
   
-  temp_v0 = 0;
-  puVar4 = *(unsigned int **)(param_1 + 0x30);
+  unsigned int **pp = (unsigned int **)param_1 + 12;
+  puVar4 = *pp;
   puVar1 = (unsigned int *)*puVar4;
-  temp_v1 = *(unsigned int *)(*(int *)(param_1 + 0x34) + 0x38);
-  if (temp_v1 != 0) {
-    do {
-      FUN_002ce8d8(*puVar1);
-      temp_v0 = temp_v0 + 1;
-      puVar1 = puVar1 + 4;
-    } while (temp_v0 < temp_v1);
+  temp_v1 = *(unsigned int *)((int)pp[1] + 0x38);
+  for (temp_v0 = 0; temp_v0 < temp_v1; temp_v0++) {
+    FUN_002ce8d8(*puVar1);
+    puVar1 = puVar1 + 4;
   }
   FUN_0019a5a0(puVar4);
   return;

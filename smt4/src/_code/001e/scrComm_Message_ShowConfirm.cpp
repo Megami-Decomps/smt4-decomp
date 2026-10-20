@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-extern int DAT_0043e18c; /* 0x43e18c */
+extern unsigned char DAT_0043e188; /* 0x43e188 */
 
 /* Supplied declaration required: FUN_002011a4. */
 /* Supplied declaration required: FUN_00220554. */
@@ -34,8 +34,8 @@ void scrComm_Message_ShowConfirm(void)
   
   FUN_00220554();
   FUN_002011a4();
-  if (DAT_0043e18c != 0) {
-    *(unsigned char *)(DAT_0043e18c + 0xa11) = 0x14;
+  if ((*(int *)((unsigned char *)&DAT_0043e188 + 0x4)) != 0) {
+    *(unsigned char *)((*(int *)((unsigned char *)&DAT_0043e188 + 0x4)) + 0xa11) = 0x14;
   }
   temp_v0 = FUN_002865f8();
   temp_v1 = FUN_00296cc8(0);

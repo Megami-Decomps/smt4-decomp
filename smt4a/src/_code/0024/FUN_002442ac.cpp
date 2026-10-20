@@ -13,7 +13,7 @@ typedef struct {
 } void_stack;
 
 extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
-extern unsigned int *DAT_005806a4; /* 0x5806a4 */
+extern unsigned char DAT_005806a0; /* 0x5806a0 */
 
 /* Supplied declaration required: FUN_00303710. */
 /* Supplied declaration required: FUN_00352a14. */
@@ -25,8 +25,8 @@ void FUN_002442ac(void)
 /* irregular: 2 native warning(s); review required */
   unsigned int *puVar1;
   
-  puVar1 = DAT_005806a4;
-  *DAT_005806a4 = 0;
+  puVar1 = (*(unsigned int * *)((unsigned char *)&DAT_005806a0 + 0x4));
+  *(*(unsigned int * *)((unsigned char *)&DAT_005806a0 + 0x4)) = 0;
   puVar1[1] = 0;
   puVar1[2] = 0;
   puVar1[0x83] = 0xffffffff;
@@ -74,8 +74,8 @@ void FUN_002442ac(void)
   puVar1[0x30] = 0;
   puVar1[0x31] = 0x3f800000;
   FUN_00352a14();
-  puVar1 = DAT_005806a4;
-  DAT_005806a4[0xaf] = 0;
+  puVar1 = (*(unsigned int * *)((unsigned char *)&DAT_005806a0 + 0x4));
+  (*(unsigned int * *)((unsigned char *)&DAT_005806a0 + 0x4))[0xaf] = 0;
   puVar1[0xc5] = DAT_0056fcc0;
   FUN_00303710();
   return;

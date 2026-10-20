@@ -14,7 +14,6 @@ int FUN_004f612c(int);
 
 extern unsigned char LAB_004f84dc; /* 0x4f84dc */
 extern unsigned int DAT_005737f0; /* 0x5737f0 */
-extern unsigned int DAT_005737fc; /* 0x5737fc */
 extern unsigned int DAT_00573800; /* 0x573800 */
 extern unsigned int DAT_00573804; /* 0x573804 */
 
@@ -57,8 +56,8 @@ unsigned int FUN_004f828c(int param_1)
         if ((pcVar2 != (char *)0x0) &&
            ((temp_v4 == 0 || (temp_v0 = temp_v4, FUN_0030ea58(temp_v4,DAT_00573800), temp_v0 != 0)))) {
           if (temp_v4 != 0) {
-            temp_v1 = FUN_002e3390(DAT_005737fc);
-            temp_v0 = FUN_0019a37c(temp_v4,DAT_005737fc,temp_v1);
+            temp_v1 = FUN_002e3390((*(unsigned int *)((unsigned char *)&DAT_005737f0 + 0xc)));
+            temp_v0 = FUN_0019a37c(temp_v4,(*(unsigned int *)((unsigned char *)&DAT_005737f0 + 0xc)),temp_v1);
             if (temp_v0 == 0) goto LAB_004f84c0;
           }
           if (temp_v4 != 0) {

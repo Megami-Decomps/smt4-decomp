@@ -23,12 +23,12 @@ void FUN_0011d518(int param_1,int param_2)
 
 {
 /* irregular: 3 native warning(s); review required */
-  char temp_v0;
+  signed char temp_v0;
   int temp_v1;
   int temp_v2;
   
   *(unsigned char *)(param_2 + 4) = 0;
-  temp_v0 = *(char *)(param_1 + 0x3b);
+  temp_v0 = *(signed char *)(param_1 + 0x3b);
   temp_v2 = 0;
   if (((temp_v0 != '\0') ||
       ((FUN_00300900(param_1,param_2 + 4), *(char *)(param_1 + 4) == '\0' &&

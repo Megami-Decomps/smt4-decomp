@@ -1,12 +1,10 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0034bacc` (_code @ 0x34bacc, 0x80 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
 
-int FUN_0023d02c(void);
+int FUN_0023d02c(unsigned int);
 int FUN_002b2368(unsigned int *);
-int FUN_002c415c(void);
+int FUN_002c415c(unsigned int);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -28,20 +26,20 @@ void FUN_0034bacc(unsigned int *param_1)
 /* irregular: 3 native warning(s); review required */
   *param_1 = (unsigned int)&DAT_00420950;
   if (param_1[6] != 0) {
-    FUN_002c415c();
+    FUN_002c415c(param_1[6]);
     param_1[6] = 0;
   }
   *param_1 = (unsigned int)&DAT_00420798;
   if (param_1[2] != 0) {
-    FUN_0023d02c();
+    FUN_0023d02c(param_1[2]);
     param_1[2] = 0;
   }
   if (param_1[1] != 0) {
-    FUN_002c415c();
+    FUN_002c415c(param_1[1]);
     param_1[1] = 0;
   }
   if ((int *)param_1[5] != (int *)0x0) {
-    (**(romwright_code **)(*(int *)param_1[5] + 4))();
+    (**(romwright_code **)(*(int *)param_1[5] + 4))((int *)param_1[5]);
     param_1[5] = 0;
   }
   FUN_002b2368(param_1);

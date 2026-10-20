@@ -1,5 +1,3 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `scrComm_Message_Show` (_code @ 0x1aa248, 0x58 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
@@ -29,9 +27,7 @@ void scrComm_Message_Show(void)
   unsigned int temp_v3;
   
   temp_v0 = FUN_0028660c();
-  if (temp_v0 == 0x14) {
-    temp_v0 = 5;
-  }
+  temp_v0 = (temp_v0 == 0x14) ? 5 : temp_v0;
   temp_v1 = FUN_002865f8();
   temp_v2 = FUN_00296cc8(0);
   temp_v3 = FUN_002893d8();

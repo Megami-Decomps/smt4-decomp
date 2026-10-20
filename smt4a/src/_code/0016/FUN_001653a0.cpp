@@ -10,7 +10,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_4_stack;
 
-extern int DAT_005b4030; /* 0x5b4030 */
+extern unsigned char DAT_005b4028; /* 0x5b4028 */
 
 
 void FUN_001653a0(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -25,7 +25,7 @@ void FUN_001653a0(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   float in_s2;
   float in_s3;
   
-  if (*(int *)(DAT_005b4030 + 0x30) != 0 && param_1 != 0) {
+  if (*(int *)((*(int *)((unsigned char *)&DAT_005b4028 + 0x8)) + 0x30) != 0 && param_1 != 0) {
     puVar3 = (unsigned int *)(param_1 + 0x1410);
     *(float *)(param_1 + *puVar3 * 0x14 + 0x10) = in_s0;
     *(float *)(param_1 + *puVar3 * 0x14 + 0x14) = in_s1;
@@ -36,13 +36,13 @@ void FUN_001653a0(int param_1,unsigned int param_2,unsigned int param_3,unsigned
     temp_v0 = *puVar3;
     *puVar3 = temp_v0 + 1;
     if (temp_v0 + 1 >= 0x100) {
-      (**(romwright_code **)(DAT_005b4030 + 0x30))
-                (param_1 + 0x10,0x100,*(romwright_code **)(DAT_005b4030 + 0x30),temp_v1,param_4);
+      (**(romwright_code **)((*(int *)((unsigned char *)&DAT_005b4028 + 0x8)) + 0x30))
+                (param_1 + 0x10,0x100,*(romwright_code **)((*(int *)((unsigned char *)&DAT_005b4028 + 0x8)) + 0x30),temp_v1,param_4);
       *puVar3 = 0;
     }
     return;
   }
-  (**(romwright_code **)(DAT_005b4030 + 0x28))((int)in_s0,(int)in_s1,(int)in_s2,(int)in_s3,param_2);
+  (**(romwright_code **)((*(int *)((unsigned char *)&DAT_005b4028 + 0x8)) + 0x28))((int)in_s0,(int)in_s1,(int)in_s2,(int)in_s3,param_2);
   return;
 }
 

@@ -21,7 +21,7 @@ typedef struct {
 extern unsigned char LAB_0020848c; /* 0x20848c */
 extern unsigned char LAB_002084a4; /* 0x2084a4 */
 extern int DAT_004474d8; /* 0x4474d8 */
-extern int DAT_0049fc7c; /* 0x49fc7c */
+extern unsigned char DAT_0049f91c; /* 0x49f91c */
 
 extern int FUN_0020e708(int);
 extern unsigned int FUN_0025bc18(int, unsigned int, unsigned int);
@@ -103,7 +103,7 @@ unsigned int FUN_00208160(void)
     }
   }
   else {
-    if (DAT_0049fc7c == 1) {
+    if ((*(int *)((unsigned char *)&DAT_0049f91c + 0x360)) == 1) {
       *(unsigned int *)(DAT_004474d8 + 0xc) = 0;
       *(unsigned short *)(temp_v3 + 8) = 99;
       return 0;

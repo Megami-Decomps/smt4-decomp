@@ -16,7 +16,7 @@ typedef struct {
 extern unsigned char LAB_003c36c8; /* 0x3c36c8 */
 extern unsigned char LAB_00400001; /* 0x400001 */
 extern unsigned char LAB_00400002; /* 0x400002 */
-extern int DAT_0059dbf4; /* 0x59dbf4 */
+extern unsigned char DAT_0059dbe0; /* 0x59dbe0 */
 
 /* Supplied declaration required: FUN_002b30e4. */
 /* Supplied declaration required: FUN_002e342c. */
@@ -40,8 +40,8 @@ unsigned char * FUN_003c3654(void)
     puVar3 = (unsigned char *)0x400000;
   }
   else if (temp_v1 == 1) {
-    if (DAT_0059dbf4 != 0) {
-      puVar1 = (unsigned int *)FUN_0037667c(DAT_0059dbf4,temp_v0);
+    if ((*(int *)((unsigned char *)&DAT_0059dbe0 + 0x14)) != 0) {
+      puVar1 = (unsigned int *)FUN_0037667c((*(int *)((unsigned char *)&DAT_0059dbe0 + 0x14)),temp_v0);
       puVar2 = puVar1;
       FUN_002b30e4();
       FUN_002e342c(puVar1 + 0x27,*puVar2);

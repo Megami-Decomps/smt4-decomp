@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_5_stack;
 
-extern unsigned char DAT_004656d1; /* 0x4656d1 */
+extern unsigned char DAT_004656d0; /* 0x4656d0 */
 
 /* Supplied declaration required: FUN_00238d3c. */
 extern unsigned int FUN_003594b4(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
@@ -35,9 +35,9 @@ unsigned int FUN_003e0944(unsigned int param_1,unsigned int param_2,unsigned int
     if (temp_v0 != 0xc8a10bf0) break;
     FUN_00238d3c(1,0);
     temp_v1 = temp_v1 + 1;
-    DAT_004656d1 = 1;
+    (*(unsigned char *)((unsigned char *)&DAT_004656d0 + 0x1)) = 1;
     if (temp_v1 >= 3) {
-      DAT_004656d1 = 1;
+      (*(unsigned char *)((unsigned char *)&DAT_004656d0 + 0x1)) = 1;
       return temp_v0;
     }
   }

@@ -20,7 +20,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_1_stack;
 
-extern unsigned int DAT_00573940; /* 0x573940 */
+extern unsigned char DAT_00573920; /* 0x573920 */
 
 /* Supplied declaration required: FUN_00163060. */
 /* Supplied declaration required: FUN_00163e40. */
@@ -310,7 +310,7 @@ LAB_0024dd20:
           param_1[0x1353] = 0;
           *(unsigned char *)(param_1 + 0x1154) = 0;
           param_1[0x1155] = 0xffffffff;
-          param_1[0x1339] = DAT_00573940;
+          param_1[0x1339] = (*(unsigned int *)((unsigned char *)&DAT_00573920 + 0x20));
           param_1[0x133d] = 0xffffffff;
           param_1[0x133b] = 0;
           param_1[0x133c] = 0;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_0057f24c; /* 0x57f24c */
+extern unsigned char DAT_0057f248; /* 0x57f248 */
 
 
 int FUN_002e5c50(void)
@@ -13,8 +13,8 @@ int FUN_002e5c50(void)
   int temp_v0;
   
   temp_v0 = 0;
-  if (DAT_0057f24c != 0) {
-    temp_v0 = (int)*(short *)(DAT_0057f24c + 0x650);
+  if ((*(int *)((unsigned char *)&DAT_0057f248 + 0x4)) != 0) {
+    temp_v0 = (int)*(short *)((*(int *)((unsigned char *)&DAT_0057f248 + 0x4)) + 0x650);
   }
   return temp_v0;
 }

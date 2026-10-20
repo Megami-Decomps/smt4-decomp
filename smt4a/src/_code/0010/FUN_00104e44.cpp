@@ -8,7 +8,7 @@ int FUN_0010ce7c(int, int *);
 int FUN_002eb330(int *, unsigned int);
 int FUN_002eb338(int *, int *, unsigned int);
 
-extern unsigned int DAT_00594a30; /* 0x594a30 */
+extern unsigned char DAT_005949d8; /* 0x5949d8 */
 
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
 #define ROMWRIGHT_PIECE_4_4_DEFINED
@@ -31,7 +31,7 @@ unsigned long long FUN_00104e44(int param_1,unsigned int param_2,unsigned int pa
   int uStack_18;
   unsigned int uStack_14;
   
-  temp_v0 = DAT_00594a30;
+  temp_v0 = (*(unsigned int *)((unsigned char *)&DAT_005949d8 + 0x58));
   iStack_20 = param_1;
   uStack_1c = param_2;
   uStack_18 = param_3;

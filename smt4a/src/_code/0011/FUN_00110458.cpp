@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp14; /* 0x14: local_14 */
 } param_4_stack;
 
-extern int DAT_005949dc; /* 0x5949dc */
+extern unsigned char DAT_005949d8; /* 0x5949d8 */
 
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
 #define ROMWRIGHT_PIECE_4_4_DEFINED
@@ -39,12 +39,12 @@ unsigned long long FUN_00110458(unsigned int param_1,unsigned int param_2,unsign
   unsigned int uStack_18;
   int temp_v2;
   
-  temp_v0 = DAT_005949dc;
+  temp_v0 = (*(int *)((unsigned char *)&DAT_005949d8 + 0x4));
   uStack_20 = param_1;
   uStack_1c = param_2;
   uStack_18 = param_3;
   temp_v2 = param_4;
-  temp_v1 = FUN_002e6e34((unsigned int *)&uStack_20,DAT_005949dc + 0xdc);
+  temp_v1 = FUN_002e6e34((unsigned int *)&uStack_20,(*(int *)((unsigned char *)&DAT_005949d8 + 0x4)) + 0xdc);
   FUN_002fb208();
   puVar3 = (unsigned int *)(temp_v0 + 0x10c);
   temp_v2 = temp_v1;

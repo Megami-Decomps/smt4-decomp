@@ -12,7 +12,6 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } param_1_stack;
 
-extern unsigned char LAB_001b1804; /* 0x1b1804 */
 
 /* Supplied declaration required: FUN_002b46f8. */
 extern unsigned int FUN_002c0c74(unsigned int);
@@ -32,7 +31,7 @@ void FUN_0033b748(unsigned short param_1)
   temp_v1 = FUN_002c0cc4();
   temp_v0 = FUN_002c0c74(temp_v0);
   temp_v2[0] = param_1;
-  FUN_002b46f8(temp_v2,temp_v1,temp_v0,0x34,&LAB_001b1804);
+  FUN_002b46f8(temp_v2,temp_v1,temp_v0,0x34,(unsigned char *)0x1b1804);
   return;
 }
 

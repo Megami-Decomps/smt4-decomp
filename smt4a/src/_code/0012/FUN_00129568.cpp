@@ -10,7 +10,7 @@ int FUN_0030e878(unsigned char *, int);
 int FUN_004326fc(int, int);
 
 extern unsigned char DAT_005598d8; /* 0x5598d8 */
-extern unsigned int DAT_00594a00; /* 0x594a00 */
+extern unsigned char DAT_005949d8; /* 0x5949d8 */
 extern unsigned char DAT_00594b24; /* 0x594b24 */
 
 /* Supplied declaration required: FUN_001294fc. */
@@ -36,7 +36,7 @@ int FUN_00129568(void)
   FUN_004326fc(temp_v0 - 0xd8,temp_v0);
   *(unsigned int *)(temp_v0 - 0xe0) = 0;
   FUN_0030e878(&DAT_00594b24,temp_v1);
-  if (DAT_00594a00 >= 2) {
+  if ((*(unsigned int *)((unsigned char *)&DAT_005949d8 + 0x28)) >= 2) {
     FUN_001294fc(temp_v1);
   }
   return temp_v1;

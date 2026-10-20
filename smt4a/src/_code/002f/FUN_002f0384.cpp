@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-extern int DAT_00588fd4; /* 0x588fd4 */
+extern unsigned char DAT_00588fd0; /* 0x588fd0 */
 
 /* Supplied declaration required: FUN_00240170. */
 /* Supplied declaration required: FUN_002efd90. */
@@ -24,7 +24,7 @@ void FUN_002f0384(int param_1)
 
 {
 /* irregular: 3 native warning(s); review required */
-  if (*(char *)(DAT_00588fd4 + 0x2018) != '\x03' && *(char *)(DAT_00588fd4 + 0x2018) != '\n') {
+  if (*(char *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x2018) != '\x03' && *(char *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x2018) != '\n') {
     return;
   }
   if (param_1 != 0) {

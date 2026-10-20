@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_8_stack;
 
-extern unsigned char DAT_004656d1; /* 0x4656d1 */
+extern unsigned char DAT_004656d0; /* 0x4656d0 */
 
 /* Supplied declaration required: FUN_00238d3c. */
 /* Supplied declaration required: FUN_00359010. */
@@ -29,7 +29,7 @@ void FUN_003589dc(unsigned int param_1,int param_2,unsigned int param_3,unsigned
   FUN_00359010(param_2,param_3,param_4,param_5,param_6,param_7,param_8);
   if ((temp_v0 < 0) && (temp_v0 == -0x375ef410)) {
     FUN_00238d3c(1,0);
-    DAT_004656d1 = 1;
+    (*(unsigned char *)((unsigned char *)&DAT_004656d0 + 0x1)) = 1;
     FUN_00359010(param_2,param_3,param_4,param_5,param_6,param_7,param_8);
   }
   return;

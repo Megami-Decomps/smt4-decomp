@@ -20,8 +20,7 @@ void FUN_002b7be0(void)
   int temp_v1;
   int temp_v2;
   
-  temp_v2 = 0x22;
-  do {
+  for (temp_v2 = 0x22; temp_v2 >= 0; temp_v2--) {
     temp_v0 = *(int *)(DAT_00580ca0 + temp_v2 * 0x3c + 0xa8);
     temp_v1 = DAT_00580ca0;
     if (temp_v0 != 0) {
@@ -30,8 +29,7 @@ void FUN_002b7be0(void)
     if (temp_v0 != 0 && temp_v1 != 0) {
       FUN_001aea28(DAT_0056fcc0);
     }
-    temp_v2 = temp_v2 - 1;
-  } while (-1 < temp_v2);
+  }
   return;
 }
 

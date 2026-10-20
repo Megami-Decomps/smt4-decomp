@@ -11,8 +11,8 @@ int FUN_002b8838(unsigned int);
 int FUN_002b8ee0(int, int);
 int FUN_002bf818(int);
 
-extern int DAT_0043da2c; /* 0x43da2c */
-extern unsigned int DAT_0043da38; /* 0x43da38 */
+extern unsigned char DAT_0043da28; /* 0x43da28 */
+extern unsigned char DAT_0043da50; /* 0x43da50 */
 
 /* Supplied declaration required: FUN_00220984. */
 /* Supplied declaration required: FUN_002ae028. */
@@ -33,9 +33,9 @@ unsigned int FUN_001c0c38(void)
   unsigned int temp_v4;
   int temp_v5;
   
-  temp_v0 = DAT_0043da2c;
+  temp_v0 = (*(int *)((unsigned char *)&DAT_0043da28 + 0x4));
   temp_v5 = 0;
-  temp_v1 = *(int *)(DAT_0043da2c + 0x10);
+  temp_v1 = *(int *)((*(int *)((unsigned char *)&DAT_0043da28 + 0x4)) + 0x10);
   if (temp_v1 != 0) {
     if (temp_v1 == 1) {
       temp_v1 = 0;
@@ -54,11 +54,11 @@ unsigned int FUN_001c0c38(void)
            (temp_v5 = temp_v1, temp_v1 < *(int *)(temp_v0 + 0xc))) {
           FUN_002bf818(temp_v0 + temp_v1 * 0x8c + 0x34);
         }
-        temp_v2 = DAT_0043da2c;
+        temp_v2 = (*(int *)((unsigned char *)&DAT_0043da28 + 0x4));
         temp_v1 = temp_v1 + 1;
       } while (temp_v1 < 6);
       if ((*(int *)(temp_v0 + 0xc) > temp_v5) && (*(char *)(temp_v0 + temp_v5 * 0x8c + 0xbe) != '\0')) {
-        *(unsigned int *)(DAT_0043da2c + 0x10) = 2;
+        *(unsigned int *)((*(int *)((unsigned char *)&DAT_0043da28 + 0x4)) + 0x10) = 2;
         *(unsigned int *)(temp_v2 + 0xc) = 0;
       }
     }
@@ -81,8 +81,8 @@ unsigned int FUN_001c0c38(void)
           *(unsigned int *)(temp_v0 + 0x4b8) = 0;
           *(unsigned short *)(temp_v0 + 0x4bc) = 0;
           FUN_002ae028(temp_v0 + 0x4be);
-          temp_v2 = DAT_0043da2c;
-          *(unsigned int *)(DAT_0043da2c + 0x10) = 0;
+          temp_v2 = (*(int *)((unsigned char *)&DAT_0043da28 + 0x4));
+          *(unsigned int *)((*(int *)((unsigned char *)&DAT_0043da28 + 0x4)) + 0x10) = 0;
           *(unsigned int *)(temp_v2 + 0xc) = 0;
         }
       }
@@ -91,7 +91,7 @@ unsigned int FUN_001c0c38(void)
       FUN_00220984();
     }
   }
-  if ((-1 < (int)DAT_0043da38) && (FUN_002b8838(DAT_0043da38 & 0xff), (int)DAT_0043da38 < 0)) {
+  if ((-1 < (int)(*(unsigned int *)((unsigned char *)&DAT_0043da50 - 0x18))) && (FUN_002b8838((*(unsigned int *)((unsigned char *)&DAT_0043da50 - 0x18)) & 0xff), (int)(*(unsigned int *)((unsigned char *)&DAT_0043da50 - 0x18)) < 0)) {
     temp_v4 = 0;
     do {
       temp_v3 = *(unsigned int *)(temp_v4 * 4 + 0x43da50);

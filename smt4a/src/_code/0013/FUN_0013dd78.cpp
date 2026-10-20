@@ -1,5 +1,3 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0013dd78` (_code @ 0x13dd78, 0x74 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
@@ -7,6 +5,7 @@ extern "C" {
 int FUN_0019a5a0(...);
 
 typedef int romwright_code(...);
+extern unsigned char DAT_005b3274;
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
@@ -20,7 +19,7 @@ void FUN_0013dd78(int param_1)
 {
 /* irregular: 1 native warning(s); review required */
   if (*(int *)(param_1 + 8) != 0) {
-    (**(romwright_code **)((unsigned int)*(unsigned short *)(param_1 + 4) * 0x44 + 0x5b3284))();
+    (**(romwright_code **)(&DAT_005b3274 + (unsigned int)*(unsigned short *)(param_1 + 4) * 0x44 + 0x10))(*(int *)(param_1 + 8));
   }
   if (*(int *)(param_1 + 0x18) != 0) {
     FUN_0019a5a0();

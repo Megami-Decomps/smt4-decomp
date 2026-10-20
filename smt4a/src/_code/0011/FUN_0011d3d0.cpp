@@ -11,7 +11,7 @@ int FUN_00303d3a(unsigned int, int);
 int FUN_00303e66(int, unsigned int);
 
 extern unsigned char LAB_0011d21d; /* 0x11d21d */
-extern unsigned char *DAT_00630570; /* 0x630570 */
+extern unsigned char DAT_00630568; /* 0x630568 */
 
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
 #define ROMWRIGHT_PIECE_4_4_DEFINED
@@ -50,7 +50,7 @@ long long FUN_0011d3d0(int param_1,unsigned int param_2,unsigned int param_3,uns
       FUN_00303e66(param_1,param_3);
       FUN_00303e66(param_1,param_6);
     }
-    DAT_00630570 = &LAB_0011d21d;
+    (*(unsigned char * *)((unsigned char *)&DAT_00630568 + 0x8)) = &LAB_0011d21d;
     FUN_002e6e5c(&uStack_20);
     return romwright_piece_4_4(uStack_20,1);
   }

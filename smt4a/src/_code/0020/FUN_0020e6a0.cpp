@@ -1,5 +1,3 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0020e6a0` (_code @ 0x20e6a0, 0x78 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
@@ -23,9 +21,9 @@ void FUN_0020e6a0(void)
   puVar1 = DAT_00588e2c;
   if (DAT_00588e2c != (unsigned int *)0x0) {
     if ((int *)DAT_00588e2c[2] != (int *)0x0) {
-      (**(romwright_code **)(*(int *)DAT_00588e2c[2] + 0x10))();
+      (**(romwright_code **)(*(int *)DAT_00588e2c[2] + 0x10))(DAT_00588e2c[2]);
       if ((int *)puVar1[2] != (int *)0x0) {
-        (**(romwright_code **)(*(int *)puVar1[2] + 4))();
+        (**(romwright_code **)(*(int *)puVar1[2] + 4))(puVar1[2]);
       }
       puVar1[2] = 0;
     }

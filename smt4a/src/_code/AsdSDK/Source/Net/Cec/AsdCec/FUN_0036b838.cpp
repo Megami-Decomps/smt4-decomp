@@ -21,7 +21,7 @@ typedef struct {
     unsigned int sp198; /* 0x198: local_198 */
 } param_2_stack;
 
-extern unsigned int *DAT_005b3f98; /* 0x5b3f98 */
+extern unsigned char DAT_005b3f94; /* 0x5b3f94 */
 
 /* Supplied declaration required: FUN_001630d4. */
 /* Supplied declaration required: FUN_0019a5a0. */
@@ -53,18 +53,18 @@ unsigned char FUN_0036b838(unsigned int param_1,unsigned int param_2)
   temp_v4 = 0;
   nn_cec_CTR_Message_Message_sub_object(temp_v7);
   FUN_00430f18(temp_v8);
-  temp_v0 = DAT_005b3f98[6];
-  FUN_0042e67c(temp_v0,*DAT_005b3f98,DAT_005b3f98[1]);
-  if (*(int *)(DAT_005b3f98[6] + 0x3c0) != 0) {
+  temp_v0 = (*(unsigned int * *)((unsigned char *)&DAT_005b3f94 + 0x4))[6];
+  FUN_0042e67c(temp_v0,*(*(unsigned int * *)((unsigned char *)&DAT_005b3f94 + 0x4)),(*(unsigned int * *)((unsigned char *)&DAT_005b3f94 + 0x4))[1]);
+  if (*(int *)((*(unsigned int * *)((unsigned char *)&DAT_005b3f94 + 0x4))[6] + 0x3c0) != 0) {
     if ((temp_v0 & 0x80000000) == 0) {
-      nn_cec_CTR_MessageBox_GetMessageId(DAT_005b3f98[6],temp_v8,1,param_1);
-      temp_v1 = FUN_00501914(DAT_005b3f98[6],1,param_1);
+      nn_cec_CTR_MessageBox_GetMessageId((*(unsigned int * *)((unsigned char *)&DAT_005b3f94 + 0x4))[6],temp_v8,1,param_1);
+      temp_v1 = FUN_00501914((*(unsigned int * *)((unsigned char *)&DAT_005b3f94 + 0x4))[6],1,param_1);
       temp_v2 = 0x100;
       temp_v5 = 1;
       FUN_001630d4(0x100,0x100,0,temp_v1);
       temp_v6 = temp_v8;
       temp_v5 = 1;
-      temp_v3 = DAT_005b3f98[6];
+      temp_v3 = (*(unsigned int * *)((unsigned char *)&DAT_005b3f94 + 0x4))[6];
       nn_cec_CTR_MessageBox_ReadMessage_3579D4(temp_v3,temp_v7,temp_v2,temp_v1);
       temp_v4 = -1 < temp_v3;
       if (temp_v4) {
@@ -72,7 +72,7 @@ unsigned char FUN_0036b838(unsigned int param_1,unsigned int param_2)
         rt_memcpy(param_2,temp_v5,temp_v6);
       }
       FUN_0019a5a0(temp_v2);
-      FUN_0042e868(DAT_005b3f98[6]);
+      FUN_0042e868((*(unsigned int * *)((unsigned char *)&DAT_005b3f94 + 0x4))[6]);
     }
   }
   else {

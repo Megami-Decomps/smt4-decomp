@@ -37,7 +37,7 @@ void FUN_00292960(unsigned char param_1,int param_2)
   temp_v1 = FUN_002c0cc4();
   temp_v0 = FUN_002c0c74(temp_v0);
   temp_v2[0] = param_1;
-  FUN_002b46f8(temp_v2,temp_v1,temp_v0,0x60,&LAB_0032c6c8);
+  FUN_002b46f8(temp_v2,temp_v1,temp_v0,0x60,(unsigned char *)0x32c6c8);
   return;
 }
 

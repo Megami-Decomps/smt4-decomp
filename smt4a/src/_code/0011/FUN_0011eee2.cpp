@@ -23,9 +23,10 @@ void FUN_0011eee2(int param_1,int param_2)
 
 {
 /* irregular: 3 native warning(s); review required */
-  char temp_v0;
+  signed char temp_v0;
   int temp_v1;
   int temp_v2;
+  int res;
   
   *(unsigned char *)(param_2 + 4) = 0;
   temp_v0 = *(char *)(param_1 + 0x3b);
@@ -38,8 +39,8 @@ void FUN_0011eee2(int param_1,int param_2)
          (FUN_00300934(param_1,param_2 + 0xc), *(char *)(param_1 + 4) == '\0')) &&
         (FUN_0012d094(param_1,param_2 + 0x10), *(char *)(param_1 + 4) == '\0')) &&
        ((temp_v0 == '\0' &&
-        (((unsigned int)(temp_v1 + temp_v2) < *(unsigned int *)(param_1 + 0xc) ||
-         (temp_v1 = FUN_002ee9da(param_1), temp_v1 == 0)))))))))) {
+        ((*(unsigned int *)(param_1 + 0xc) > (unsigned int)(temp_v1 + temp_v2) ||
+         (res = FUN_002ee9da(param_1), res == 0)))))))))) {
     *(unsigned char *)(param_1 + 4) = 1;
   }
   return;

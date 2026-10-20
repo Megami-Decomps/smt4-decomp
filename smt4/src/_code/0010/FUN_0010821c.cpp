@@ -1,5 +1,3 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0010821c` (_code @ 0x10821c, 0x80 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
@@ -22,11 +20,13 @@ int FUN_0010821c(void)
   int temp_v0;
   int temp_v1;
   unsigned char temp_v2;
+  char *pb;
+  int temp_v4;
   
   temp_v0 = FUN_002c08f0();
-  temp_v1 = FUN_002bff10(0);
-  if (((temp_v1 == 0) && (*(char *)(temp_v0 + 0xedc) != '\0')) && (*(char *)(temp_v0 + 0xedd) != '\0')) {
-    temp_v2 = *(char *)(temp_v0 + 0xee6) == '\0';
+  temp_v4 = FUN_002bff10(0);
+  if (((temp_v4 == 0) && (pb = (char *)(temp_v0 + 0xe00), *(char *)(temp_v0 + 0xedc) != '\0')) && (*(char *)(pb + 0xdd) != '\0')) {
+    temp_v2 = *(char *)(pb + 0xe6) == '\0';
     temp_v1 = 0;
     if (!temp_v2) {
       temp_v1 = *(int *)(temp_v0 + 0xfdc);

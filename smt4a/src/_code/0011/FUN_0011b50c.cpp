@@ -38,7 +38,7 @@ void FUN_0011b50c(int param_1,int param_2)
 
 {
 /* irregular: 9 native warning(s); review required */
-  char temp_v0;
+  signed char temp_v0;
   unsigned int temp_v1;
   int temp_v2;
   int temp_v3;
@@ -48,7 +48,7 @@ void FUN_0011b50c(int param_1,int param_2)
   unsigned char temp_v7 [4];
   
   temp_v3 = 0;
-  temp_v0 = *(char *)(param_1 + 0x3b);
+  temp_v0 = *(signed char *)(param_1 + 0x3b);
   if (temp_v0 == '\0') {
     temp_v7[0] = 1;
     temp_v6[0] = *(unsigned char *)(param_2 + 4);

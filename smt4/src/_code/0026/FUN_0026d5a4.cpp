@@ -1,12 +1,10 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0026d5a4` (_code @ 0x26d5a4, 0xac bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
 
 int FUN_0026d654(int);
 int FUN_00293348(int, int);
-int FUN_00298d28(int);
+int FUN_00298d28(int, int);
 int FUN_0029ca58(void);
 int FUN_002bd8e8(int, int, int);
 
@@ -45,7 +43,7 @@ void FUN_0026d5a4(void)
     } while (temp_v2 < 4);
     FUN_002bd8e8(temp_v1 + 0x4c8,7,0);
   }
-  FUN_00298d28(0);
+  FUN_00298d28(0,0);
   temp_v0 = *(char *)(temp_v1 + 0x66c);
   if ((temp_v0 != '\x01' && temp_v0 != '\x06') && (temp_v0 != '\a')) {
     FUN_0029ca58();

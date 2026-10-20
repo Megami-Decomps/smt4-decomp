@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002939f4(void);
 int FUN_002aa568(int, unsigned int);
 
-extern unsigned int DAT_00435d14; /* 0x435d14 */
+extern unsigned char DAT_00435d00; /* 0x435d00 */
 
 extern int FUN_00293230(void);
 /* Supplied declaration required: FUN_002939f4. */
@@ -28,7 +28,7 @@ int FUN_003dcf34(int param_1)
     temp_v0 = 0;
     do {
       temp_v1 = *piVar3 + temp_v0 * 0x16;
-      if ((temp_v1 != 0) && (FUN_002aa568(temp_v1,DAT_00435d14), temp_v1 == 0)) {
+      if ((temp_v1 != 0) && (FUN_002aa568(temp_v1,(*(unsigned int *)((unsigned char *)&DAT_00435d00 + 0x14))), temp_v1 == 0)) {
         temp_v0 = *piVar3 + temp_v0 * 0x16;
         if (temp_v0 != 0) {
           return (int)*(short *)(temp_v0 + 0x10);

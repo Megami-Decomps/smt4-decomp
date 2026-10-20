@@ -40,7 +40,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-extern unsigned short DAT_0049fa94; /* 0x49fa94 */
+extern unsigned char DAT_0049fa1c; /* 0x49fa1c */
 
 extern int FUN_00215cbc(void);
 extern unsigned char FUN_00223cd8(void);
@@ -144,7 +144,7 @@ void FUN_00382cd8(fn_00382cd8_arg0 *param_1)
     FUN_002355ac(0);
     return;
   }
-  DAT_0049fa94 = 1;
+  (*(unsigned short *)((unsigned char *)&DAT_0049fa1c + 0x78)) = 1;
   param_1->field_0x4 = 0xf;
   param_1->field_0x8 = 0;
   FUN_002355ac(0);

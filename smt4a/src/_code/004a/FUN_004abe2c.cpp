@@ -53,7 +53,7 @@ typedef struct {
 } param_6_stack;
 
 extern unsigned char LAB_004abf9c; /* 0x4abf9c */
-extern unsigned int *DAT_0057a9c8; /* 0x57a9c8 */
+extern unsigned char DAT_0057a9b8; /* 0x57a9b8 */
 
 /* Supplied declaration required: FUN_0014aa78. */
 /* Supplied declaration required: FUN_001641c4. */
@@ -180,8 +180,8 @@ void FUN_004abe2c(fn_004abe2c_arg0 *param_1,int param_2,unsigned char param_3,un
   unsigned int in_lr;
   unsigned int temp_v2;
   
-  puVar1 = DAT_0057a9c8;
-  DAT_0057a9c8[0x1d28] = 3;
+  puVar1 = (*(unsigned int * *)((unsigned char *)&DAT_0057a9b8 + 0x10));
+  (*(unsigned int * *)((unsigned char *)&DAT_0057a9b8 + 0x10))[0x1d28] = 3;
   puVar1[0x1d2b] = 0;
   puVar1[0x1d29] = param_2;
   *(unsigned char *)((int)puVar1 + 0x7505) = param_3;
@@ -202,11 +202,11 @@ void FUN_004abe2c(fn_004abe2c_arg0 *param_1,int param_2,unsigned char param_3,un
     FUN_002a3258();
     FUN_003d8bc4(0);
   }
-  puVar5 = DAT_0057a9c8;
+  puVar5 = (*(unsigned int * *)((unsigned char *)&DAT_0057a9b8 + 0x10));
   if (param_6 == 0 && param_2 == 0) {
     return;
   }
-  puVar4 = DAT_0057a9c8 + 0x1d3f;
+  puVar4 = (*(unsigned int * *)((unsigned char *)&DAT_0057a9b8 + 0x10)) + 0x1d3f;
   FUN_0050d794(puVar4,0xffffffff);
   temp_v0 = FUN_003ea1cc(*puVar5,0);
   *(unsigned short *)(puVar5 + 0x1d3f) = temp_v0;

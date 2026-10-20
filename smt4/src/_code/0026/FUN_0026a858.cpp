@@ -1,12 +1,10 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0026a858` (_code @ 0x26a858, 0xfc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
 
 int FUN_0024bc7c(unsigned int *, int);
-int FUN_002b06c4(void);
-int FUN_002b9024(void);
+int FUN_002b06c4(void *);
+int FUN_002b9024(void *);
 int FUN_002c4938(unsigned int *, int);
 int rt_memcpy_w(unsigned int *, unsigned int *, int);
 
@@ -48,8 +46,7 @@ void FUN_0026a858(fn_0026a858_arg0 *param_1,unsigned int *param_2)
 /* irregular: 5 native warning(s); review required */
   fn_0026a858_arg0 *pfVar1;
   
-  pfVar1 = param_1;
-  FUN_002b06c4();
+  pfVar1 = (fn_0026a858_arg0 *)FUN_002b06c4(param_1);
   FUN_002c4938(param_2,0x604);
   *(short *)((int)param_2 + 0x46) = (short)(int)param_1;
   *(unsigned char *)(param_2 + 0x12) = pfVar1->field_0x2;
@@ -73,8 +70,7 @@ void FUN_0026a858(fn_0026a858_arg0 *param_1,unsigned int *param_2)
   *(unsigned short *)((int)param_2 + 0x3e) = pfVar1->field_0x52;
   *(unsigned short *)(param_2 + 0x10) = pfVar1->field_0x54;
   *(unsigned short *)((int)param_2 + 0x42) = pfVar1->field_0x56;
-  FUN_002b9024();
-  FUN_0024bc7c(param_2,param_1->field_0x38);
+  FUN_0024bc7c(param_2,((fn_0026a858_arg0 *)FUN_002b9024(param_1))->field_0x38);
   *(unsigned short *)((int)param_2 + 0x2a) = *(unsigned short *)((int)param_2 + 0xe);
   *(unsigned short *)(param_2 + 0xb) = *(unsigned short *)(param_2 + 4);
   return;

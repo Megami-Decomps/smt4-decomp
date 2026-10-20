@@ -5,7 +5,7 @@
 extern "C" {
 
 extern int *DAT_00447e88; /* 0x447e88 */
-extern unsigned char DAT_0049fa98; /* 0x49fa98 */
+extern unsigned char DAT_0049f91c; /* 0x49f91c */
 
 
 void FUN_0027fa98(int param_1)
@@ -27,7 +27,7 @@ void FUN_0027fa98(int param_1)
       piVar1[0x16] = in_s0;
     }
     else if (param_1 != 3) {
-      DAT_0049fa98 = 0;
+      (*(unsigned char *)((unsigned char *)&DAT_0049f91c + 0x17c)) = 0;
     }
   }
   return;

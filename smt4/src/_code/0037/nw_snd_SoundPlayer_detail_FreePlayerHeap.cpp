@@ -23,12 +23,16 @@ void nw_snd_SoundPlayer_detail_FreePlayerHeap(int param_1,int param_2)
 {
 /* irregular: 3 native warning(s); review required */
   int temp_v0;
+  int temp_v1;
+  int temp_v2;
   
   temp_v0 = *(int *)(param_2 + 4);
   if (temp_v0 != 0) {
     FUN_00379cc4(temp_v0);
     FUN_003798ec(param_2,temp_v0);
-    nw_ut_internal_LinkListImpl_insert(param_1 + 0x18,param_1 + 0x1c,temp_v0 + 0x18);
+    temp_v1 = param_1 + 0x18;
+    temp_v2 = param_1 + 0x1c;
+    nw_ut_internal_LinkListImpl_insert(temp_v1,temp_v2,temp_v0 + 0x18);
     return;
   }
   return;

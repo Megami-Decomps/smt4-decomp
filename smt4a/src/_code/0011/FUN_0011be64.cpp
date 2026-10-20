@@ -24,30 +24,31 @@ int FUN_0011be64(unsigned int *param_1)
 /* irregular: 3 native warning(s); review required */
   int temp_v0;
   int temp_v1;
+  int *q;
   
   *param_1 = (unsigned int)&DAT_0055a7b0;
   FUN_0011bbb6(param_1);
   temp_v1 = 0;
   do {
     if ((int *)param_1[temp_v1 + 0x28] != (int *)0x0) {
-      (**(romwright_code **)(*(int *)param_1[temp_v1 + 0x28] + 4))();
+      (**(romwright_code **)(*(int *)param_1[temp_v1 + 0x28] + 4))(param_1[temp_v1 + 0x28]);
     }
     if ((int *)param_1[temp_v1 + 0x13] != (int *)0x0) {
-      (**(romwright_code **)(*(int *)param_1[temp_v1 + 0x13] + 4))();
+      (**(romwright_code **)(*(int *)param_1[temp_v1 + 0x13] + 4))(param_1[temp_v1 + 0x13]);
     }
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 2);
   if ((int *)param_1[0x46] != (int *)0x0) {
-    (**(romwright_code **)(*(int *)param_1[0x46] + 4))();
+    (**(romwright_code **)(*(int *)param_1[0x46] + 4))(param_1[0x46]);
   }
   temp_v1 = FUN_002f5966(param_1 + 0x3a);
   temp_v1 = FUN_00122770(temp_v1 - 0x40);
   temp_v1 = FUN_002f5966(temp_v1 - 0x38);
-  temp_v1 = FUN_002f9ef8(temp_v1 - 0xc);
-  for (temp_v0 = *(int *)(temp_v1 - 0x24); temp_v0 != *(int *)(temp_v1 - 0x20); temp_v0 = temp_v0 + 0xc) {
+  q = (int *)(FUN_002f9ef8(temp_v1 - 0xc) - 0x24);
+  for (temp_v0 = *q; temp_v0 != q[1]; temp_v0 = temp_v0 + 0xc) {
   }
   FUN_002e6e14();
-  temp_v1 = FUN_002f5966(temp_v1 - 0x5c);
+  temp_v1 = FUN_002f5966((int)q - 0x38);
   return temp_v1 - 8;
 }
 

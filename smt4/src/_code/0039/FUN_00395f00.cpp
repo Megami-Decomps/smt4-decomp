@@ -19,10 +19,10 @@ void FUN_00395f00(int *param_1)
     param_1[0x16] = param_1[0x16] - 1;
   }
   if (param_1[0x16] == 0) {
-    *(unsigned char *)(param_1 + 2) = *(unsigned char *)(param_1 + 2) & 0xfe;
+    *(unsigned char *)(param_1 + 2) = *(unsigned char *)(param_1 + 2) & ~1;
   }
   if ((int *)param_1[0x1a] != (int *)0x0) {
-    (**(romwright_code **)(*(int *)param_1[0x1a] + 0xc))();
+    (**(romwright_code **)(*(int *)param_1[0x1a] + 0xc))(param_1[0x1a]);
   }
                     /* WARNING: Could not recover jumptable at 0x00395f58. Too many branches */
                     /* WARNING: Treating indirect jump as call */

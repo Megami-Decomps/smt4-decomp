@@ -18,6 +18,7 @@ unsigned int FUN_00374124(void)
   unsigned int temp_v0;
   int temp_v1;
   
+  
   temp_v0 = FUN_00236038();
   temp_v1 = FUN_0014aa78();
   FUN_003283ac((*(unsigned int *)(temp_v1 + 0x4cc8) & (1 << (temp_v0 & 0xff))) != 0);

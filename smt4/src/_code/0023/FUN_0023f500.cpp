@@ -71,8 +71,7 @@ void FUN_0023f500(unsigned int *param_1,int param_2)
   FUN_002c4938(temp_v4,0x80);
   temp_v0 = FUN_00240448(param_2);
   FUN_002bf694(temp_v4,temp_v0);
-  temp_v2 = param_2;
-  FUN_002402c4(param_2,temp_v4);
+  temp_v2 = FUN_002402c4(param_2,temp_v4);
   if (temp_v2 != 0) {
     *param_1 = 0xb;
     FUN_002c4938(temp_v5,0x80);
@@ -107,8 +106,7 @@ void FUN_0023f500(unsigned int *param_1,int param_2)
             ((*(unsigned int *)(temp_v3 + 0x54) & 8) != 0)) &&
            (*(unsigned int *)(temp_v3 + 0x54) = *(unsigned int *)(temp_v3 + 0x54) & 0xfffffff7,
            (*(unsigned short *)(temp_v3 + 0x58) & 0x800) == 0)) {
-          temp_v1 = param_2;
-          FUN_0027da30(param_2,(int)*(short *)(temp_v3 + 0x62));
+          temp_v1 = FUN_0027da30(param_2,(int)*(short *)(temp_v3 + 0x62));
           temp_v1 = FUN_002405c8(param_2,*(unsigned short *)(temp_v1 + 2));
           if (temp_v1 == 0) {
             *(unsigned short *)(temp_v3 + 0x58) = *(unsigned short *)(temp_v3 + 0x58) | 0x800;

@@ -18,7 +18,7 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_7_stack;
 
-extern int DAT_0044e368; /* 0x44e368 */
+extern unsigned char DAT_0044e360; /* 0x44e360 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 extern int FUN_0013b870(void);
@@ -69,7 +69,7 @@ FUN_0013b6a4(unsigned int *param_1,unsigned int *param_2,unsigned char *param_3,
     }
     temp_v1 = 0;
     if (param_6 != (int *)0x0) {
-      *param_6 = DAT_0044e368;
+      *param_6 = (*(int *)((unsigned char *)&DAT_0044e360 + 0x8));
     }
   }
   else {

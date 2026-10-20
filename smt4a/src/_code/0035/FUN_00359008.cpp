@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0042e67c(int, unsigned int, unsigned int);
 int FUN_0042e868(unsigned int);
 
-extern int DAT_005b3f98; /* 0x5b3f98 */
+extern unsigned char DAT_005b3f94; /* 0x5b3f94 */
 
 extern int FUN_002e783c(unsigned int);
 /* Supplied declaration required: FUN_0042e67c. */
@@ -25,15 +25,15 @@ FUN_00359008(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsi
   unsigned int temp_v1;
   
   temp_v1 = 5;
-  temp_v0 = *(int *)(DAT_005b3f98 + 0x18);
+  temp_v0 = *(int *)((*(int *)((unsigned char *)&DAT_005b3f94 + 0x4)) + 0x18);
   FUN_0042e67c(temp_v0,param_1,param_2);
   if (-1 < temp_v0) {
     temp_v0 = FUN_002e783c(param_3);
     nn_cec_CTR_MessageBox_SetMessageBoxData
-              (*(unsigned int *)(DAT_005b3f98 + 0x18),0x6e,param_3,temp_v0 << 1);
+              (*(unsigned int *)((*(int *)((unsigned char *)&DAT_005b3f94 + 0x4)) + 0x18),0x6e,param_3,temp_v0 << 1);
     nn_cec_CTR_MessageBox_SetMessageBoxData
-              (*(unsigned int *)(DAT_005b3f98 + 0x18),0x65,param_4,param_5);
-    FUN_0042e868(*(unsigned int *)(DAT_005b3f98 + 0x18));
+              (*(unsigned int *)((*(int *)((unsigned char *)&DAT_005b3f94 + 0x4)) + 0x18),0x65,param_4,param_5);
+    FUN_0042e868(*(unsigned int *)((*(int *)((unsigned char *)&DAT_005b3f94 + 0x4)) + 0x18));
     temp_v1 = 0;
   }
   return temp_v1;

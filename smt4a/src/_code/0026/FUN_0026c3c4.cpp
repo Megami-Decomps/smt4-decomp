@@ -18,7 +18,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_1_stack;
 
-extern int DAT_00588fd4; /* 0x588fd4 */
+extern unsigned char DAT_00588fd0; /* 0x588fd0 */
 
 /* Supplied declaration required: FUN_0019e4d4. */
 /* Supplied declaration required: FUN_002f01e0. */
@@ -44,13 +44,13 @@ void FUN_0026c3c4(unsigned int param_1)
   unsigned int temp_v7;
   unsigned int temp_v8;
   
-  temp_v3 = DAT_00588fd4;
+  temp_v3 = (*(int *)((unsigned char *)&DAT_00588fd0 + 0x4));
   temp_v4 = 8;
-  if (*(short *)(DAT_00588fd4 + 0x1390) < 0) {
+  if (*(short *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x1390) < 0) {
     temp_v4 = FUN_003dfd5c();
   }
-  else if ((0 < *(short *)(DAT_00588fd4 + 0x1390)) && (*(char *)(DAT_00588fd4 + 0x2017) != '\a')) {
-    FUN_0019e4d4(*(unsigned short *)(DAT_00588fd4 + 0x1390));
+  else if ((0 < *(short *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x1390)) && (*(char *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x2017) != '\a')) {
+    FUN_0019e4d4(*(unsigned short *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x1390));
     temp_v4 = FUN_004bd21c();
   }
   temp_v1 = temp_v3 + 0x13e0;

@@ -1,10 +1,8 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002220ac` (_code @ 0x2220ac, 0x7c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
 
-int FUN_0030a2c0(unsigned int, unsigned int, unsigned int, unsigned int);
+unsigned int FUN_0030a2c0(unsigned int, unsigned int, unsigned int, unsigned int);
 
 extern unsigned int DAT_0043df58; /* 0x43df58 */
 
@@ -37,8 +35,7 @@ unsigned int FUN_002220ac(void)
     }
   }
   else {
-    FUN_0030a2c0(temp_v0,temp_v1,temp_v2,temp_v3);
-    DAT_0043df58 = temp_v0;
+    DAT_0043df58 = FUN_0030a2c0(temp_v0,temp_v1,temp_v2,temp_v3);
   }
   return 0;
 }

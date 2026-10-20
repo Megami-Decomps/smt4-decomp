@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001677c0(void);
+int FUN_001677c0(float);
 int FUN_001835b4(int, int, int, unsigned int, unsigned int, int);
 int FUN_00344cd0(unsigned int, unsigned int, unsigned int, int, int, int, int, int, int, int, int, unsigned int, unsigned int, unsigned int, int, int);
 
@@ -29,11 +29,11 @@ void FUN_0041d034(unsigned int *param_1,unsigned int param_2)
 
 {
 /* irregular: 3 native warning(s); review required */
-  FUN_001677c0();
+  FUN_001677c0(((float *)param_1)[2]);
   FUN_001835b4(2,0x2b,0xe,*param_1,param_1[1],2);
   FUN_00344cd0(param_2,*param_1,param_1[1],0x2b,8,9,10,4,6,5,7,param_1[3],param_1[4],param_1[5],2,0)
   ;
-  FUN_001677c0();
+  FUN_001677c0(1.0f);
   return;
 }
 

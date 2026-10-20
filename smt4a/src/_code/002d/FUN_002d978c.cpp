@@ -23,7 +23,7 @@ typedef struct {
 } void_stack;
 
 extern int DAT_00581288; /* 0x581288 */
-extern unsigned char DAT_005f162e; /* 0x5f162e */
+extern unsigned char DAT_005f15fc; /* 0x5f15fc */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0013c1ec. */
@@ -73,7 +73,7 @@ void FUN_002d978c(void)
         }
         else {
           FUN_0033abd4();
-          switch(DAT_005f162e) {
+          switch((*(unsigned char *)((unsigned char *)&DAT_005f15fc + 0x32))) {
           case 0:
             temp_v1 = 0x10002c5;
             FUN_003d4ed8(temp_v1);
@@ -119,7 +119,7 @@ LAB_002d99dc:
       *(int *)(DAT_00581288 + 8) = temp_v3;
       if (temp_v3 >= 10) {
         FUN_0033abd4();
-        switch(DAT_005f162e) {
+        switch((*(unsigned char *)((unsigned char *)&DAT_005f15fc + 0x32))) {
         case 0:
           temp_v1 = 0x10002c4;
           FUN_003d4ed8(temp_v1);

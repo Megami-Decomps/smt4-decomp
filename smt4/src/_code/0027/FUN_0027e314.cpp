@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0028be84(void);
 
-extern int DAT_00439ca8; /* 0x439ca8 */
+extern unsigned char DAT_00439c88; /* 0x439c88 */
 
 /* Supplied declaration required: FUN_0028be84. */
 extern int FUN_0028bebc(int);
@@ -18,7 +18,7 @@ void FUN_0027e314(void)
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_0028bebc(DAT_00439ca8 + 8);
+  temp_v0 = FUN_0028bebc((*(int *)((unsigned char *)&DAT_00439c88 + 0x20)) + 8);
   if (temp_v0 != 0) {
     FUN_0028be84();
   }

@@ -15,7 +15,7 @@ int FUN_00301792(unsigned int, unsigned int);
 
 typedef int romwright_code(...);
 extern unsigned char DAT_0055aefc; /* 0x55aefc */
-extern int DAT_005949f0; /* 0x5949f0 */
+extern unsigned char DAT_005949d8; /* 0x5949d8 */
 extern unsigned char DAT_0062e6a0; /* 0x62e6a0 */
 
 /* Supplied declaration required: FUN_0010d2c4. */
@@ -57,7 +57,7 @@ void FUN_00120e80(unsigned int *param_1)
     (**(romwright_code **)(*(int *)param_1[6] + 4))();
   }
   FUN_002e6e34(temp_v2,&DAT_0062e6a0);
-  DAT_005949f0 = DAT_005949f0 - 1;
+  (*(int *)((unsigned char *)&DAT_005949d8 + 0x18)) = (*(int *)((unsigned char *)&DAT_005949d8 + 0x18)) - 1;
   FUN_002e6e5c(temp_v2);
   FUN_0010d2c4();
   temp_v0 = FUN_002eb624(param_1 + 0x13);

@@ -1,5 +1,3 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002cfed0` (_code @ 0x2cfed0, 0x184 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
@@ -9,7 +7,7 @@ int FUN_0028cf30(int, unsigned int, unsigned int);
 int FUN_002939f4(void);
 int FUN_00298140(int, int, int);
 int FUN_0029ee6c(int, int);
-int FUN_002af5c0(int, int);
+int FUN_002af5c0(int, int, int);
 int FUN_002b8838(int);
 int FUN_002bee58(int, int);
 
@@ -43,7 +41,7 @@ void FUN_002cfed0(int param_1,unsigned int param_2,unsigned char param_3,unsigne
   if (*(char *)(param_1 + 0x3080) == '\0') {
     temp_v0 = 0;
     do {
-      FUN_002af5c0(param_1 + temp_v0 * 0x8c + 0xe58,0);
+      FUN_002af5c0(param_1 + temp_v0 * 0x8c + 0xe58,0,0);
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < 6);
     if (*(char *)(param_1 + 0x3080) == '\0') {

@@ -1,5 +1,3 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0013994c` (_code @ 0x13994c, 0x58 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
@@ -30,12 +28,7 @@ unsigned int FUN_0013994c(void)
     if ((*(signed char *)((unsigned char *)&DAT_005b408c + 0x1)) != '\0') {
       FUN_001a0990(&DAT_005b4098);
       temp_v0 = nn_os_CriticalSection_TryEnter((unsigned int)&DAT_00640550);
-      if (temp_v0) {
-        temp_v1 = 3;
-      }
-      else {
-        temp_v1 = 2;
-      }
+      temp_v1 = (temp_v0 == 0) ? 2 : 3;
     }
     else {
       FUN_0015a568();

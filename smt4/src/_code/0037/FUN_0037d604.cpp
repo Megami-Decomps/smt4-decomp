@@ -24,7 +24,7 @@ int FUN_0037d604(int param_1)
   
   FUN_0037c7d4();
   nw_snd_internal_PoolImpl_DestroyImpl(param_1 + 0x8c,param_1 + 0x90,0xa00);
-  FUN_002c66cc(param_1 + 0x90,&LAB_00235c5c,0x50,0x20);
+  FUN_002c66cc(param_1 + 0x90,(unsigned char *)0x235c5c,0x50,0x20);
   temp_v0 = FUN_00235c60(param_1 + 0x60);
   return temp_v0 - 0x60;
 }

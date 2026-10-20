@@ -7,7 +7,7 @@ extern "C" {
 int VectorFloatToUnsigned(...);
 int VectorSignedToFloat(...);
 
-extern signed char DAT_0049fd00; /* 0x49fd00 */
+extern unsigned char DAT_0049fc1c; /* 0x49fc1c */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
@@ -53,7 +53,7 @@ void FUN_0039cddc(int param_1)
         }
         temp_v4 = temp_v3 || temp_v0 == '\0';
         if (temp_v3 || temp_v0 == '\0') {
-          temp_v4 = DAT_0049fd00 == '\0';
+          temp_v4 = (*(signed char *)((unsigned char *)&DAT_0049fc1c + 0xe4)) == '\0';
         }
         if (!temp_v4) {
           if (*(int *)(temp_v2 + 0x61bc) != -1) {
@@ -106,7 +106,7 @@ void FUN_0039cddc(int param_1)
         }
         temp_v4 = temp_v3 || temp_v0 == '\0';
         if (temp_v3 || temp_v0 == '\0') {
-          temp_v4 = DAT_0049fd00 == '\0';
+          temp_v4 = (*(signed char *)((unsigned char *)&DAT_0049fc1c + 0xe4)) == '\0';
         }
         if (!temp_v4) {
           if (*(int *)(temp_v2 + 0x61bc) != -1) {

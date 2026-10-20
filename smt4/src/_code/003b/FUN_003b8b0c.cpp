@@ -16,7 +16,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-extern signed char DAT_0049f950; /* 0x49f950 */
+extern unsigned char DAT_0049f91c; /* 0x49f91c */
 
 /* Supplied declaration required: FUN_002636b0. */
 /* Supplied declaration required: FUN_00273f84. */
@@ -59,7 +59,7 @@ void FUN_003b8b0c(int param_1)
   }
   FUN_002ae898(0x21,*(unsigned int *)(param_1 + 0x90));
   FUN_00273f84();
-  if ((*(char *)(param_1 + 0xe58) != '\0') && (DAT_0049f950 == '\0')) {
+  if ((*(char *)(param_1 + 0xe58) != '\0') && ((*(signed char *)((unsigned char *)&DAT_0049f91c + 0x34)) == '\0')) {
     *(unsigned char *)(param_1 + 0xe58) = 0;
     FUN_002a4bac(*(unsigned int *)(param_1 + 0xe5c));
     temp_v0 = 0;

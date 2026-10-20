@@ -8,7 +8,7 @@ int FUN_00113d9c(unsigned int *);
 int FUN_0012cf14(int);
 
 extern unsigned char DAT_00559600; /* 0x559600 */
-extern unsigned char DAT_0059495d; /* 0x59495d */
+extern unsigned char DAT_00594958; /* 0x594958 */
 
 /* Supplied declaration required: FUN_00113d9c. */
 /* Supplied declaration required: FUN_0012cf14. */
@@ -23,7 +23,7 @@ int FUN_00113e9c(unsigned int *param_1)
   
   *param_1 = (unsigned int)&DAT_00559600;
   FUN_00113d9c(param_1);
-  DAT_0059495d = 0;
+  (*(unsigned char *)((unsigned char *)&DAT_00594958 + 0x5)) = 0;
   temp_v0 = FUN_002f5966(param_1 + 6);
   temp_v0 = temp_v0 - 0x14;
   FUN_0012cf14(temp_v0);

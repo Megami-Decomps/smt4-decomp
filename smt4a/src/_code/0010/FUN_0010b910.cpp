@@ -23,7 +23,6 @@ extern unsigned char LAB_0010b9ec; /* 0x10b9ec */
 extern unsigned char LAB_0010ba0c; /* 0x10ba0c */
 extern unsigned char DAT_00558878; /* 0x558878 */
 extern unsigned char DAT_00630314; /* 0x630314 */
-extern int DAT_0063031c; /* 0x63031c */
 
 extern int FUN_002e760a(unsigned int);
 extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
@@ -60,7 +59,7 @@ void FUN_0010b910(int param_1)
   if (temp_v0 != 0) {
     temp_v0 = FUN_002f587c();
     if (temp_v0 != 0) {
-      pcVar4 = (char *)(DAT_0063031c + temp_v0);
+      pcVar4 = (char *)((*(int *)((unsigned char *)&DAT_00630314 + 0x8)) + temp_v0);
     }
     else {
       pcVar4 = (char *)0x630320;

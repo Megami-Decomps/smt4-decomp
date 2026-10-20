@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002a6fb8(void);
+int FUN_002a6fb8(unsigned int);
 int FUN_002b2368(unsigned int);
 int FUN_002c564c(int);
 
@@ -27,7 +27,7 @@ void FUN_001fe15c(int param_1)
   temp_v0 = *(int *)(param_1 + 4);
   *(unsigned char *)(temp_v0 + 0x18) = 1;
   if (*(int *)(temp_v0 + 0x1c) != 0) {
-    FUN_002a6fb8();
+    FUN_002a6fb8(*(unsigned int *)(temp_v0 + 0x1c));
     FUN_002b2368(*(unsigned int *)(temp_v0 + 0x1c));
     *(unsigned int *)(temp_v0 + 0x1c) = 0;
   }

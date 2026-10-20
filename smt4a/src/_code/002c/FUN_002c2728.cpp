@@ -4,14 +4,14 @@
 
 extern "C" {
 
-extern int DAT_0057f69c; /* 0x57f69c */
+extern unsigned char DAT_0057f698; /* 0x57f698 */
 
 
 int FUN_002c2728(unsigned int param_1,int param_2)
 
 {
   if (param_1 < 2) {
-    param_2 = DAT_0057f69c + param_1 * 8 + 0x27ec8;
+    param_2 = (*(int *)((unsigned char *)&DAT_0057f698 + 0x4)) + param_1 * 8 + 0x27ec8;
   }
   return param_2;
 }

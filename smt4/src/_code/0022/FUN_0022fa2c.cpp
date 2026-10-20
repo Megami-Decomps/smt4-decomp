@@ -1,5 +1,3 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0022fa2c` (_code @ 0x22fa2c, 0xc8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
@@ -31,7 +29,7 @@ void FUN_0022fa2c(int param_1)
     FUN_0029e328(3);
     FUN_0029e328(0xc);
     FUN_0029e328(0x10);
-    if (*(unsigned int *)(param_1 + 0x860) < 3) {
+    if (*(int *)(param_1 + 0x860) == 0 || *(int *)(param_1 + 0x860) == 1 || *(int *)(param_1 + 0x860) == 2) {
       FUN_0029e328(0xf);
     }
   }

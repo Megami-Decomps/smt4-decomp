@@ -17,7 +17,7 @@ void FUN_00121c94(int param_1,unsigned int param_2)
 {
 /* irregular: 1 native warning(s); review required */
   if (param_2 != 0) {
-    if (((param_1 != 0) && (param_2 >= 8)) && (param_2 < 0x21)) {
+    if (((param_1 != 0) && (param_2 >= 8)) && (param_2 <= 0x20)) {
       (*(unsigned int *)((unsigned char *)&DAT_005949d8 + 0x30)) = param_2;
       rt_memcpy(&DAT_006302d0,param_1,param_2);
     }

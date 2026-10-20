@@ -11,7 +11,7 @@ int FUN_00384830(void);
 
 extern int DAT_00581038; /* 0x581038 */
 extern int DAT_00581288; /* 0x581288 */
-extern float DAT_005f19d8; /* 0x5f19d8 */
+extern unsigned char DAT_005f15fc; /* 0x5f15fc */
 
 /* Supplied declaration required: FUN_002b5cb4. */
 /* Supplied declaration required: FUN_002b5cd4. */
@@ -48,7 +48,7 @@ unsigned int FUN_00325340(void)
         }
         temp_v5 = *(float *)(DAT_00581288 + 0x1c);
         FUN_002b5cb4();
-        temp_v6 = DAT_005f19d8;
+        temp_v6 = (*(float *)((unsigned char *)&DAT_005f15fc + 0x3dc));
         FUN_002b5cb4();
         if (temp_v6 < temp_v5) {
           temp_v5 = temp_v6;

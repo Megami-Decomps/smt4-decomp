@@ -19,7 +19,7 @@ typedef struct {
 
 extern unsigned char LAB_00400001; /* 0x400001 */
 extern unsigned char LAB_00400003; /* 0x400003 */
-extern signed char DAT_0059dbe9; /* 0x59dbe9 */
+extern unsigned char DAT_0059dbe0; /* 0x59dbe0 */
 extern unsigned char DAT_0059dc7c; /* 0x59dc7c */
 
 /* Supplied declaration required: FUN_001656a0. */
@@ -41,7 +41,7 @@ unsigned char * FUN_0035ba3c(unsigned long long *param_1,unsigned int param_2,in
   unsigned long long temp_v3;
   
   FUN_002e59f8(param_1,&DAT_0059dc7c,8);
-  if (DAT_0059dbe9 == '\0') {
+  if ((*(signed char *)((unsigned char *)&DAT_0059dbe0 + 0x9)) == '\0') {
     FUN_00200bcc(param_3);
   }
   FUN_002e59f8(&DAT_0059dc7c,param_1,8);

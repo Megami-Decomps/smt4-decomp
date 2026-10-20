@@ -45,7 +45,7 @@ typedef struct {
 } void_stack;
 
 extern unsigned char LAB_00192824; /* 0x192824 */
-extern int DAT_0057f0c8; /* 0x57f0c8 */
+extern unsigned char DAT_0057f0c4; /* 0x57f0c4 */
 extern int DAT_0059dbb4; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
@@ -123,7 +123,7 @@ void FUN_0020bd54(void)
   float temp_v43;
   float temp_v44;
   
-  temp_v5 = DAT_0057f0c8;
+  temp_v5 = (*(int *)((unsigned char *)&DAT_0057f0c4 + 0x4));
   temp_v21 = 0;
   temp_v22 = 0;
   FUN_002f5020(temp_v23,&LAB_00192824,0x10,6);

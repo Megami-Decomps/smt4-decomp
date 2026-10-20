@@ -13,7 +13,7 @@ int FUN_002fb244(int);
 int FUN_002fb25c(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 
 extern unsigned char DAT_0055937c; /* 0x55937c */
-extern unsigned int DAT_00594abc; /* 0x594abc */
+extern unsigned char DAT_00594a58; /* 0x594a58 */
 
 /* Supplied declaration required: FUN_001055f4. */
 /* Supplied declaration required: FUN_002e6e14. */
@@ -34,7 +34,7 @@ int FUN_0030262c(unsigned int *param_1,unsigned int param_2,unsigned int param_3
   
   *param_1 = (unsigned int)&DAT_0055937c;
   if (*(char *)(param_1 + 7) != '\0') {
-    FUN_002fb25c(DAT_00594abc,param_1[4],param_3,param_4,param_4);
+    FUN_002fb25c((*(unsigned int *)((unsigned char *)&DAT_00594a58 + 0x64)),param_1[4],param_3,param_4,param_4);
   }
   piVar2 = (int *)param_1[3];
   if (piVar2 != (int *)0x0) {

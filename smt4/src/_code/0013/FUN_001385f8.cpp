@@ -8,7 +8,7 @@ int FUN_002aa024(int, int);
 int FUN_002ae028(int);
 int FUN_002bee58(int, int);
 
-extern int DAT_0043da2c; /* 0x43da2c */
+extern unsigned char DAT_0043da28; /* 0x43da28 */
 
 /* Supplied declaration required: FUN_002aa024. */
 /* Supplied declaration required: FUN_002ae028. */
@@ -24,7 +24,7 @@ void FUN_001385f8(void)
   unsigned short temp_v2;
   int temp_v3;
   
-  temp_v1 = DAT_0043da2c;
+  temp_v1 = (*(int *)((unsigned char *)&DAT_0043da28 + 0x4));
   temp_v3 = 0;
   do {
     FUN_002bee58(temp_v1 + temp_v3 * 0x8c + 0x34,0);
@@ -57,8 +57,8 @@ void FUN_001385f8(void)
   *(unsigned short *)(temp_v1 + 0x4bc) = 0;
   FUN_002ae028(temp_v1 + 0x4be);
   *(unsigned char *)(temp_v1 + 0x4c6) = 0;
-  temp_v1 = DAT_0043da2c;
-  *(unsigned int *)(DAT_0043da2c + 0xc) = 0;
+  temp_v1 = (*(int *)((unsigned char *)&DAT_0043da28 + 0x4));
+  *(unsigned int *)((*(int *)((unsigned char *)&DAT_0043da28 + 0x4)) + 0xc) = 0;
   *(unsigned int *)(temp_v1 + 0x10) = 1;
   return;
 }

@@ -1,5 +1,3 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0013dbb4` (_code @ 0x13dbb4, 0xb4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
@@ -32,7 +30,10 @@ unsigned char FUN_0013dbb4(void)
   if (temp_v3 != 0) {
     *(unsigned char *)(temp_v2 + 0x1045) = 1;
   }
-  else if (*(char *)(temp_v2 + 0x1040) != '\0') {
+  else if ((temp_v1 = *(unsigned char *)(temp_v2 + 0x1040)) == 0) {
+    return temp_v1;
+  }
+  else {
     temp_v0 = *(char *)(temp_v2 + 0x1044);
     temp_v4 = temp_v0 == '\0';
     if (temp_v4) {
@@ -42,9 +43,7 @@ unsigned char FUN_0013dbb4(void)
       FUN_00157558(DAT_0059dbb4);
       *(unsigned int *)(*(int *)(temp_v2 + 8) + 0x14) = 0x200;
       *(unsigned int *)(*(int *)(temp_v2 + 8) + 0x18) = 0x200;
-      temp_v1 = 0;
-      FUN_00154edc(0,*(unsigned int *)(temp_v2 + 8));
-      *(unsigned char *)(temp_v2 + 0x1042) = temp_v1;
+      *(unsigned char *)(temp_v2 + 0x1042) = FUN_00154edc(0,*(unsigned int *)(temp_v2 + 8));
       FUN_00155024(*(unsigned int *)(temp_v2 + 8),*(unsigned int *)(temp_v2 + 8));
       *(int *)(*(int *)(temp_v2 + 8) + 0x14) = *(int *)(*(int *)(temp_v2 + 8) + 0x14) >> 1;
       *(int *)(*(int *)(temp_v2 + 8) + 0x18) = *(int *)(*(int *)(temp_v2 + 8) + 0x18) >> 1;

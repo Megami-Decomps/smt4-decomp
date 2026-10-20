@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001879d0(unsigned int);
 
-extern int DAT_00588fd4; /* 0x588fd4 */
+extern unsigned char DAT_00588fd0; /* 0x588fd0 */
 extern unsigned int DAT_0059dbb4; /* 0x59dbb4 */
 
 extern int FUN_001654d8(int);
@@ -23,7 +23,7 @@ void FUN_00230a50(int *param_1,unsigned int *param_2,int param_3)
   int temp_v2;
   float in_s0;
   
-  temp_v2 = DAT_00588fd4 + param_3 * 0x8c;
+  temp_v2 = (*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + param_3 * 0x8c;
   temp_v0 = FUN_001654d8(temp_v2 + 0x44);
   FUN_001879d0(DAT_0059dbb4);
   *param_1 = (int)in_s0 + temp_v0;

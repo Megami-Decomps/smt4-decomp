@@ -15,7 +15,7 @@ int FUN_00303d52(unsigned char [12]);
 int FUN_00303d74(int, unsigned int, unsigned char [64]);
 
 extern unsigned char LAB_00118e5d; /* 0x118e5d */
-extern unsigned char *DAT_0062d74c; /* 0x62d74c */
+extern unsigned char DAT_0062d744; /* 0x62d744 */
 
 /* Supplied declaration required: FUN_00120298. */
 extern int FUN_002e6e26(void);
@@ -47,7 +47,7 @@ int FUN_00118754(int param_1,unsigned int param_2,unsigned int param_3)
   if (temp_v0 != 0) {
     FUN_00303d3a(temp_v1,3);
     FUN_00120298(temp_v1,param_3);
-    DAT_0062d74c = &LAB_00118e5d;
+    (*(unsigned char * *)((unsigned char *)&DAT_0062d744 + 0x8)) = &LAB_00118e5d;
     if ((*(char *)(param_1 + 0x34) != '\0') && (temp_v0 = FUN_00303d44(param_1,0x10), temp_v0 != 0)) {
       FUN_00303d52(temp_v2);
     }

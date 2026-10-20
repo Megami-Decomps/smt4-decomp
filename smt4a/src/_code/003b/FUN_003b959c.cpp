@@ -4,7 +4,6 @@
 
 extern "C" {
 
-extern int DAT_00581280; /* 0x581280 */
 extern int DAT_00581284; /* 0x581284 */
 #ifndef ROMWRIGHT_STORAGE_s__a_a_00587f08_9_1_DEFINED
 #define ROMWRIGHT_STORAGE_s__a_a_00587f08_9_1_DEFINED
@@ -20,8 +19,8 @@ typedef char romwright_storage_s__a_a_00587f08_9_1_s1_width_check[(sizeof(((unio
 #endif
 extern union romwright_storage_s__a_a_00587f08_9_1 s__a_a_00587f08; /* 0x587f08 */
 extern int DAT_005f17f4; /* 0x5f17f4 */
-extern short DAT_005f18ba; /* 0x5f18ba */
-extern short DAT_005f18bc; /* 0x5f18bc */
+extern unsigned char DAT_005f17fc; /* 0x5f17fc */
+extern unsigned char DAT_005f15fc; /* 0x5f15fc */
 
 extern int FUN_0032530c(void);
 
@@ -32,13 +31,13 @@ void FUN_003b959c(void)
   int temp_v0;
   int temp_v1;
   
-  temp_v1 = (int)DAT_005f18ba;
+  temp_v1 = (int)(*(short *)((unsigned char *)&DAT_005f17fc + 0xbe));
   temp_v0 = FUN_0032530c();
-  DAT_005f17f4 = temp_v1 - (*(int *)(DAT_00581280 + 8) +
+  DAT_005f17f4 = temp_v1 - (*(int *)((*(int *)((unsigned char *)&DAT_00581284 - 0x4)) + 8) +
                          (temp_v0 + *(int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 0x10) +
                                   *(int *)(DAT_00581284 + 0x10)) / 3);
-  if (DAT_005f17f4 < DAT_005f18bc) {
-    DAT_005f17f4 = (int)DAT_005f18bc;
+  if (DAT_005f17f4 < (*(short *)((unsigned char *)&DAT_005f15fc + 0x2c0))) {
+    DAT_005f17f4 = (int)(*(short *)((unsigned char *)&DAT_005f15fc + 0x2c0));
   }
   return;
 }

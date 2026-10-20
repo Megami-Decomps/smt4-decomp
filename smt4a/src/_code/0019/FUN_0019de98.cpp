@@ -7,7 +7,7 @@ extern "C" {
 int SBORROW4(int, int);
 int rt_memcpy(int, int, int);
 
-extern int DAT_0057f0c8; /* 0x57f0c8 */
+extern unsigned char DAT_0057f0c4; /* 0x57f0c4 */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: rt_memcpy. */
@@ -24,8 +24,8 @@ void FUN_0019de98(int param_1,unsigned int param_2)
   int temp_v4;
   unsigned char temp_v5;
   
-  temp_v1 = DAT_0057f0c8;
-  *(unsigned int *)(DAT_0057f0c8 + 0x5ec) = param_2;
+  temp_v1 = (*(int *)((unsigned char *)&DAT_0057f0c4 + 0x4));
+  *(unsigned int *)((*(int *)((unsigned char *)&DAT_0057f0c4 + 0x4)) + 0x5ec) = param_2;
   *(unsigned int *)(temp_v1 + 0x670) = 0;
   *(unsigned char *)(temp_v1 + 0x674) = 0xff;
   if (param_1 == 0) {

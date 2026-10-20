@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_0057f69c; /* 0x57f69c */
+extern unsigned char DAT_0057f698; /* 0x57f698 */
 
 
 void FUN_0037a6bc(int param_1)
@@ -12,12 +12,12 @@ void FUN_0037a6bc(int param_1)
 {
   unsigned int temp_v0;
   
-  temp_v0 = param_1 + *(int *)(DAT_0057f69c + 0x27e90);
+  temp_v0 = param_1 + *(int *)((*(int *)((unsigned char *)&DAT_0057f698 + 0x4)) + 0x27e90);
   if (temp_v0 >= 10000000) {
-    *(unsigned int *)(DAT_0057f69c + 0x27e90) = 9999999;
+    *(unsigned int *)((*(int *)((unsigned char *)&DAT_0057f698 + 0x4)) + 0x27e90) = 9999999;
   }
   else {
-    *(unsigned int *)(DAT_0057f69c + 0x27e90) = temp_v0;
+    *(unsigned int *)((*(int *)((unsigned char *)&DAT_0057f698 + 0x4)) + 0x27e90) = temp_v0;
   }
   return;
 }

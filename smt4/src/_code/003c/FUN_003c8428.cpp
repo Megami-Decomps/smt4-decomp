@@ -1,5 +1,3 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c8428` (_code @ 0x3c8428, 0x108 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
@@ -49,13 +47,13 @@ void FUN_003c8428(fn_003c8428_arg0 *param_1)
 
 {
 /* irregular: 1 native warning(s); review required */
-  unsigned short temp_v0;
-  unsigned short temp_v1;
-  unsigned short temp_v2;
-  unsigned short temp_v3;
-  unsigned short temp_v4;
-  unsigned short temp_v5;
-  unsigned short temp_v6;
+  unsigned int temp_v0;
+  unsigned int temp_v1;
+  unsigned int temp_v2;
+  unsigned int temp_v3;
+  unsigned int temp_v4;
+  unsigned int temp_v5;
+  unsigned int temp_v6;
   unsigned short *puVar8;
   int temp_v7;
   unsigned int temp_v8;

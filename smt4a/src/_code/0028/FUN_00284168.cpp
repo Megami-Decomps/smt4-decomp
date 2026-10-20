@@ -9,7 +9,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_4_stack;
 
-extern int DAT_0057f24c; /* 0x57f24c */
+extern unsigned char DAT_0057f248; /* 0x57f248 */
 
 
 void FUN_00284168(unsigned short param_1,unsigned short param_2,unsigned short param_3,unsigned short param_4)
@@ -18,9 +18,9 @@ void FUN_00284168(unsigned short param_1,unsigned short param_2,unsigned short p
   int temp_v0;
   int temp_v1;
   
-  temp_v0 = DAT_0057f24c;
-  if (*(short *)(DAT_0057f24c + 0x64a) < 200) {
-    temp_v1 = DAT_0057f24c + *(short *)(DAT_0057f24c + 0x64a) * 8;
+  temp_v0 = (*(int *)((unsigned char *)&DAT_0057f248 + 0x4));
+  if (*(short *)((*(int *)((unsigned char *)&DAT_0057f248 + 0x4)) + 0x64a) < 200) {
+    temp_v1 = (*(int *)((unsigned char *)&DAT_0057f248 + 0x4)) + *(short *)((*(int *)((unsigned char *)&DAT_0057f248 + 0x4)) + 0x64a) * 8;
     *(unsigned short *)(temp_v1 + 10) = param_1;
     *(unsigned short *)(temp_v1 + 0xc) = param_2;
     *(unsigned short *)(temp_v1 + 0xe) = param_3;

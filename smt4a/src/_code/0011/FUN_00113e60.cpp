@@ -6,7 +6,7 @@ extern "C" {
 
 extern unsigned char DAT_00559600; /* 0x559600 */
 extern unsigned char DAT_0055b04c; /* 0x55b04c */
-extern unsigned char DAT_0059495d; /* 0x59495d */
+extern unsigned char DAT_00594958; /* 0x594958 */
 
 extern int FUN_002f5928(unsigned int *, unsigned int);
 
@@ -23,7 +23,7 @@ int FUN_00113e60(unsigned int *param_1)
   param_1[4] = 0;
   param_1[5] = 0;
   temp_v0 = FUN_002f5928(param_1 + 6,1);
-  DAT_0059495d = 1;
+  (*(unsigned char *)((unsigned char *)&DAT_00594958 + 0x5)) = 1;
   return temp_v0 - 0x18;
 }
 

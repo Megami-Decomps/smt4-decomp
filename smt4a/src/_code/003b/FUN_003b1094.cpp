@@ -35,7 +35,7 @@ unsigned int FUN_003b1094(void)
     temp_v1 = 0xb;
   }
   temp_v0 = FUN_004ee568(DAT_0057113c);
-  FUN_003283ac(0x7fffffff < *(unsigned int *)(*(int *)(temp_v0 + 0x20) + temp_v1 * 4 + 0x74));
+  FUN_003283ac(*(int *)(*(int *)(temp_v0 + 0x20) + temp_v1 * 4 + 0x74) <= -1);
   return 1;
 }
 

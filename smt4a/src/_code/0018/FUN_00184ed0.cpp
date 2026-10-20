@@ -11,14 +11,16 @@ int FUN_00184ed0(void)
 
 {
   int temp_v0;
+  int *piVar1;
   
-  if ((*(int *)((unsigned char *)&DAT_0057f25c + 0x4)) == 0) {
+  piVar1 = (*(int **)((unsigned char *)&DAT_0057f25c + 0x4));
+  if (piVar1 == 0) {
     temp_v0 = 0;
   }
   else {
-    temp_v0 = *(int *)((*(int *)((unsigned char *)&DAT_0057f25c + 0x4)) + 0x32c);
-    if (temp_v0 != *(int *)((*(int *)((unsigned char *)&DAT_0057f25c + 0x4)) + 0x328)) {
-      temp_v0 = *(int *)((*(int *)((unsigned char *)&DAT_0057f25c + 0x4)) + 0x2f4);
+    temp_v0 = piVar1[0xcb];
+    if (temp_v0 != piVar1[0xca]) {
+      temp_v0 = piVar1[0xbd];
     }
   }
   return temp_v0;

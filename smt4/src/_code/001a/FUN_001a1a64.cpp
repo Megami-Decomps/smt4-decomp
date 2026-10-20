@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-extern int DAT_0043e2ac; /* 0x43e2ac */
+extern unsigned char DAT_0043e2a8; /* 0x43e2a8 */
 
 extern int FUN_00288f78(unsigned char);
 extern int FUN_002c09d0(unsigned int);
@@ -25,8 +25,8 @@ void FUN_001a1a64(unsigned short *param_1)
   int temp_v0;
   int temp_v1;
   
-  temp_v0 = DAT_0043e2ac;
-  *(unsigned short *)(DAT_0043e2ac + 0x4e) = *param_1;
+  temp_v0 = (*(int *)((unsigned char *)&DAT_0043e2a8 + 0x4));
+  *(unsigned short *)((*(int *)((unsigned char *)&DAT_0043e2a8 + 0x4)) + 0x4e) = *param_1;
   rt_memcpy_w(temp_v0,param_1 + 0x2a,0x12);
   *(unsigned char *)(temp_v0 + 0x10) = 0;
   *(unsigned int *)(temp_v0 + 0x12) = *(unsigned int *)(param_1 + 4);
@@ -80,7 +80,7 @@ void FUN_001a1a64(unsigned short *param_1)
   else {
     *(unsigned short *)(temp_v0 + 0x5a) = (unsigned short)*(unsigned char *)((int)param_1 + 0xa83b);
   }
-  *(unsigned char *)(temp_v0 + 99) = *(unsigned char *)(DAT_0043e2ac + 0x24bb0);
+  *(unsigned char *)(temp_v0 + 99) = *(unsigned char *)((*(int *)((unsigned char *)&DAT_0043e2a8 + 0x4)) + 0x24bb0);
   temp_v1 = FUN_002c09d0(0x410);
   if (temp_v1 != 0) {
     *(unsigned char *)(temp_v0 + 100) = 1;
@@ -117,7 +117,7 @@ void FUN_001a1a64(unsigned short *param_1)
     *(unsigned short *)(temp_v0 + 0x5e) = 0;
     *(unsigned short *)(temp_v0 + 0x60) = 0;
   }
-  rt_memcpy_w(DAT_0043e2ac + 0x24794,temp_v0,0x80);
+  rt_memcpy_w((*(int *)((unsigned char *)&DAT_0043e2a8 + 0x4)) + 0x24794,temp_v0,0x80);
   return;
 }
 

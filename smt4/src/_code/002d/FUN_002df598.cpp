@@ -13,7 +13,7 @@ typedef struct {
 } param_2_stack;
 
 extern unsigned char LAB_002df5d4; /* 0x2df5d4 */
-extern int DAT_004474f4; /* 0x4474f4 */
+extern unsigned char DAT_004474f0; /* 0x4474f0 */
 
 extern unsigned int FUN_00263c1c(unsigned char *);
 /* Supplied declaration required: FUN_002be624. */
@@ -28,7 +28,7 @@ void FUN_002df598(unsigned int param_1,unsigned int param_2)
   
   FUN_002be624(temp_v1,&LAB_002df5d4,param_1,param_1,param_2);
   temp_v0 = FUN_00263c1c(temp_v1);
-  *(unsigned int *)(DAT_004474f4 + 0x2b4) = temp_v0;
+  *(unsigned int *)((*(int *)((unsigned char *)&DAT_004474f0 + 0x4)) + 0x2b4) = temp_v0;
                     /* WARNING: Treating indirect jump as return */
   return;
 }

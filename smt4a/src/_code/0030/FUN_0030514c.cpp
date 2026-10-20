@@ -27,12 +27,12 @@ void FUN_0030514c(int param_1,int param_2)
 
 {
 /* irregular: 5 native warning(s); review required */
-  char temp_v0;
+  signed char temp_v0;
   int temp_v1;
   int temp_v2;
   
   *(unsigned char *)(param_2 + 4) = 0;
-  temp_v0 = *(char *)(param_1 + 0x3b);
+  temp_v0 = *(signed char *)(param_1 + 0x3b);
   temp_v2 = 0;
   if (((temp_v0 != '\0') ||
       ((FUN_00300900(param_1,param_2 + 4), *(char *)(param_1 + 4) == '\0' &&
@@ -44,7 +44,7 @@ void FUN_0030514c(int param_1,int param_2)
         ((FUN_003072ae(param_1,param_2 + 0x20), *(char *)(param_1 + 4) == '\0' &&
          (FUN_00307316(param_1,param_2 + 0x2c), *(char *)(param_1 + 4) == '\0')))) &&
        ((temp_v0 == '\0' &&
-        (((unsigned int)(temp_v1 + temp_v2) < *(unsigned int *)(param_1 + 0xc) ||
+        ((*(unsigned int *)(param_1 + 0xc) > (unsigned int)(temp_v1 + temp_v2) ||
          (temp_v1 = FUN_002ee9da(param_1), temp_v1 == 0)))))))))) {
     *(unsigned char *)(param_1 + 4) = 1;
   }

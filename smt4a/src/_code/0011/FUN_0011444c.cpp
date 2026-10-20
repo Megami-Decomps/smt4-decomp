@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e7232(void);
+int FUN_002e7232(int);
 int FUN_002e75fa(int);
 
 /* Supplied declaration required: FUN_002e7232. */
@@ -16,7 +16,7 @@ void FUN_0011444c(int param_1,int param_2)
 {
 /* irregular: 2 native warning(s); review required */
   if (*(int *)(param_1 + 0x28) != 0) {
-    FUN_002e7232();
+    FUN_002e7232(*(int *)(param_1 + 0x28));
     *(unsigned int *)(param_1 + 0x28) = 0;
   }
   if (param_2 != 0) {

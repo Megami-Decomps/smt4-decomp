@@ -50,8 +50,8 @@ void FUN_004d9ebc(fn_004d9ebc_arg0 *param_1)
 
 {
 /* irregular: 1 native warning(s); review required */
-  unsigned short temp_v0;
   unsigned short temp_v1;
+  unsigned short temp_v0;
   unsigned short temp_v2;
   unsigned short temp_v3;
   unsigned short temp_v4;

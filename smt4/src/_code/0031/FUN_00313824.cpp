@@ -1,5 +1,3 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00313824` (_code @ 0x313824, 0x80 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
@@ -79,12 +77,13 @@ void FUN_00313824(fn_00313824_arg0 *param_1)
     temp_v1 = pfVar1->field_0x18;
     pfVar4 = param_1->field_0xa0;
     if ((param_1->field_0xc == 3) && (temp_v2 = 0, 0 < temp_v3)) {
+      int *q = (int *)temp_v1;
       do {
-        if (*(int *)(temp_v1 + 0x10) == 0) {
+        if (q[4] == 0) {
           FUN_003024d0(param_1,pfVar4);
         }
         temp_v2 = temp_v2 + 1;
-        temp_v1 = temp_v1 + 0x28;
+        q = q + 10;
         pfVar4 = pfVar4 + 1;
       } while (temp_v2 < temp_v3);
     }

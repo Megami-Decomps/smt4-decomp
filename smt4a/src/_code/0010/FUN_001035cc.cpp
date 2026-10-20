@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00123650(void);
 
-extern unsigned int DAT_005c4c14; /* 0x5c4c14 */
+extern unsigned char DAT_005c4c10; /* 0x5c4c10 */
 
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
 #define ROMWRIGHT_PIECE_4_4_DEFINED
@@ -22,7 +22,7 @@ unsigned long long FUN_001035cc(void)
   unsigned int in_r3;
   
   FUN_00123650();
-  return romwright_piece_4_4(DAT_005c4c14,in_r3);
+  return romwright_piece_4_4((*(unsigned int *)((unsigned char *)&DAT_005c4c10 + 0x4)),in_r3);
 }
 
 } /* extern "C" */

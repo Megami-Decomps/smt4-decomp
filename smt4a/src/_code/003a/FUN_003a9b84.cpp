@@ -7,8 +7,8 @@ extern "C" {
 int FUN_003283ac(int);
 
 extern unsigned int FUN_0014aa78(void);
-extern int FUN_0014bef4(short);
-extern short FUN_00192748(unsigned int);
+extern int FUN_0014bef4(unsigned short);
+extern unsigned short FUN_00192748(unsigned int);
 extern int FUN_00192798(void);
 extern int FUN_00236038(unsigned int);
 /* Supplied declaration required: FUN_003283ac. */
@@ -19,7 +19,7 @@ unsigned int FUN_003a9b84(void)
 
 {
 /* irregular: 1 native warning(s); review required */
-  short temp_v0;
+  unsigned short temp_v0;
   int temp_v1;
   unsigned int temp_v2;
   int temp_v3;

@@ -11,21 +11,18 @@ extern romwright_code *DAT_0059daf4; /* 0x59daf4 */
 void FUN_00451644(int *param_1)
 
 {
-/* irregular: 4 native warning(s); review required */
+  int *p;
   int temp_v0;
   
-  if (((int *)*param_1)[1] != 0) {
-    temp_v0 = *(int *)*param_1;
+  p = (int *)*param_1;
+  if (p[1] != 0) {
+    temp_v0 = *p;
     if (temp_v0 == -0x80000000) {
-                    /* WARNING: Could not recover jumptable at 0x00451678. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-      (*DAT_0059daf4)();
+      (*DAT_0059daf4)(p,p[1]);
       return;
     }
     if (temp_v0 == 0x40000000) {
-                    /* WARNING: Could not recover jumptable at 0x00451670. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-      (*(*(romwright_code * *)((unsigned char *)&DAT_0059daf4 + 0x4)))();
+      (*(*(romwright_code * *)((unsigned char *)&DAT_0059daf4 + 0x4)))(p,p[1]);
       return;
     }
   }

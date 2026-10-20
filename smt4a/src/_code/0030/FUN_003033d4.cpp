@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_005806a4; /* 0x5806a4 */
+extern unsigned char DAT_005806a0; /* 0x5806a0 */
 
 extern int FUN_00162e8c(void);
 
@@ -16,12 +16,12 @@ int FUN_003033d4(void)
   int temp_v1;
   
   temp_v0 = FUN_00162e8c();
-  temp_v1 = *(int *)(DAT_005806a4 + 0x20c);
+  temp_v1 = *(int *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x20c);
   if (temp_v1 == -1) {
-    temp_v1 = *(int *)(DAT_005806a4 + 200);
-    switch(*(unsigned int *)(DAT_005806a4 + 0xb0)) {
+    temp_v1 = *(int *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 200);
+    switch(*(unsigned int *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0xb0)) {
     case 0:
-      return *(int *)(DAT_005806a4 + 200) + (unsigned int)*(unsigned char *)(temp_v0 + 0x1d);
+      return *(int *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 200) + (unsigned int)*(unsigned char *)(temp_v0 + 0x1d);
     case 1:
       return 6;
     case 2:

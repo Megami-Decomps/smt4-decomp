@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00182540(void);
 
 extern int DAT_00580c8c; /* 0x580c8c */
-extern signed char DAT_005f161f; /* 0x5f161f */
+extern unsigned char DAT_005f15fc; /* 0x5f15fc */
 
 /* Supplied declaration required: FUN_00182540. */
 
@@ -21,7 +21,7 @@ void FUN_002b74cc(void)
   int temp_v2;
   unsigned char temp_v3;
   
-  if ((DAT_00580c8c != 0) && (DAT_005f161f == '\0')) {
+  if ((DAT_00580c8c != 0) && ((*(signed char *)((unsigned char *)&DAT_005f15fc + 0x23)) == '\0')) {
     temp_v2 = 0;
     do {
       temp_v0 = DAT_00580c8c + temp_v2 * 100;

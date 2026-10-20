@@ -45,7 +45,7 @@ void FUN_00384800(int param_1)
   }
   FUN_00259258();
   FUN_00235554(param_1,&LAB_003848ac);
-  FUN_00385b24(param_1 + 0x20,(int)*(char *)(param_1 + 0x10));
+  FUN_00385b24(param_1 + 0x20,(int)*(signed char *)(param_1 + 0x10));
   FUN_0026374c();
   *(unsigned int *)(param_1 + 4) = 6;
   *(unsigned int *)(param_1 + 8) = 0;

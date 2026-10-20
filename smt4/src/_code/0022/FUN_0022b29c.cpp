@@ -23,7 +23,7 @@ int VectorSignedToFloat(...);
 extern unsigned char DAT_00404e04; /* 0x404e04 */
 extern int DAT_00433158; /* 0x433158 */
 extern int DAT_0044cfb8; /* 0x44cfb8 */
-extern int DAT_0049fc1c; /* 0x49fc1c */
+extern unsigned char DAT_0049f91c; /* 0x49f91c */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int FUN_0019e0c0(unsigned int);
@@ -153,7 +153,7 @@ LAB_0022b560:
   temp_v1 = FUN_002872d4();
   temp_v0 = -1;
   if (temp_v1 != 0) {
-    temp_v0 = DAT_0049fc1c;
+    temp_v0 = (*(int *)((unsigned char *)&DAT_0049f91c + 0x300));
   }
   if (*(short *)(param_1 + 0x40) != 0) {
     temp_v0 = (int)*(short *)(param_1 + 0x40);

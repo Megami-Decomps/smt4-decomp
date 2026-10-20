@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_5_stack;
 
-extern unsigned int DAT_00465124; /* 0x465124 */
+extern unsigned char DAT_00465120; /* 0x465120 */
 
 /* Supplied declaration required: FUN_002b23f4. */
 /* Supplied declaration required: FUN_002b24d8. */
@@ -31,7 +31,7 @@ unsigned int * FUN_002c5300(unsigned int *param_1,unsigned int param_2,unsigned 
   unsigned int temp_v0;
   
   if (param_1 != (unsigned int *)0x20000 && param_1 != (unsigned int *)0x30000) {
-    nn_os_CriticalSection_Enter(DAT_00465124);
+    nn_os_CriticalSection_Enter((*(unsigned int *)((unsigned char *)&DAT_00465120 + 0x4)));
     temp_v0 = (param_4 + 0x13bU) & 0xffffff80;
     FUN_002b24d8(param_1,param_2,param_3,temp_v0,param_5);
     *param_1 = temp_v0;
@@ -42,12 +42,12 @@ unsigned int * FUN_002c5300(unsigned int *param_1,unsigned int param_2,unsigned 
     *(unsigned int **)((int)param_1 + temp_v0 + 0x38) = param_1;
     FUN_002b23f4();
     FUN_002c3944(puVar1,param_4);
-    nn_os_CriticalSection_Leave(DAT_00465124);
+    nn_os_CriticalSection_Leave((*(unsigned int *)((unsigned char *)&DAT_00465120 + 0x4)));
     return puVar1;
   }
-  nn_os_CriticalSection_Enter(DAT_00465124);
+  nn_os_CriticalSection_Enter((*(unsigned int *)((unsigned char *)&DAT_00465120 + 0x4)));
   FUN_002b24d8(param_1,param_2,param_3,param_4,param_5);
-  nn_os_CriticalSection_Leave(DAT_00465124);
+  nn_os_CriticalSection_Leave((*(unsigned int *)((unsigned char *)&DAT_00465120 + 0x4)));
   return param_1;
 }
 

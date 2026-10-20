@@ -12,7 +12,7 @@ int FUN_002bb648(...);
 int FUN_002c52f8(void);
 
 typedef int romwright_code(...);
-extern unsigned int DAT_00471b60; /* 0x471b60 */
+extern unsigned char DAT_00471b5c; /* 0x471b5c */
 
 /* Supplied declaration required: FUN_00128174. */
 /* Supplied declaration required: FUN_001398f8. */
@@ -55,7 +55,7 @@ unsigned int FUN_00139e40(int *param_1,int *param_2,unsigned int param_3,unsigne
       nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(param_1[2] & 0xfffffffe);
       param_1[2] = 0;
     }
-    temp_v2 = DAT_00471b60;
+    temp_v2 = (*(unsigned int *)((unsigned char *)&DAT_00471b5c + 0x4));
     FUN_002ad888();
     FUN_002a84e8();
     if ((((temp_v2 & 0x3fc00) != 0x4400) || ((temp_v2 & 0x3ff) < 100)) || ((temp_v2 & 0x3ff) >= 0xb4)) {

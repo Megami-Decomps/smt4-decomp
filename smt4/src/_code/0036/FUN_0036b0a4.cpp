@@ -5,7 +5,6 @@
 extern "C" {
 
 typedef int romwright_code(...);
-extern unsigned char DAT_00421468; /* 0x421468 */
 extern unsigned char DAT_00422058; /* 0x422058 */
 
 
@@ -43,8 +42,8 @@ unsigned int * FUN_0036b0a4(unsigned int *param_1,unsigned int param_2)
   if ((int *)param_1[0x18] != (int *)0x0 && temp_v1 != 0) {
     (**(romwright_code **)(*(int *)param_1[0x18] + 0xc))();
   }
-  param_1[0xc] = (unsigned int)&DAT_00422058;
-  *param_1 = (unsigned int)&DAT_00421468;
+  param_1[0xc] = (unsigned int)&(*(unsigned char *)((unsigned char *)&(*(unsigned char *)((unsigned char *)&DAT_00422058 - 0xbf0)) + 0xbf0));
+  *param_1 = (unsigned int)&(*(unsigned char *)((unsigned char *)&DAT_00422058 - 0xbf0));
   temp_v2 = param_1[9];
   param_1[10] = temp_v2;
   piVar6 = (int *)param_1[8];

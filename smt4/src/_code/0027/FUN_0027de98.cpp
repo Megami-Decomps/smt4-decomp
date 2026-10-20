@@ -31,12 +31,7 @@ unsigned int FUN_0027de98(fn_0027de98_arg0 *param_1)
     temp_v0 = 0;
     do {
       temp_v1 = *(int *)(param_1->field_0x2310 + temp_v0 * 0x10);
-      if (param_1->field_0x88 != 0) {
-        if (temp_v1 == 5) {
-          return 1;
-        }
-      }
-      else {
+      if (param_1->field_0x88 == 0) {
         if (temp_v1 != 4) {
           return 1;
         }
@@ -45,6 +40,9 @@ unsigned int FUN_0027de98(fn_0027de98_arg0 *param_1)
               *(int *)(param_1->field_0x2310 + temp_v0 * 0x10 + 4) * 0x288 + 0x1c6) & 0x1c0) == 0) {
           return 1;
         }
+      }
+      else if (temp_v1 == 5) {
+        return 1;
       }
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < param_1->field_0x2314);

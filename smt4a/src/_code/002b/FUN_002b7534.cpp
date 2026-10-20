@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_001836b0(void);
-int FUN_0019a5a0(void);
+int FUN_001836b0(int);
+int FUN_0019a5a0(int);
 
 extern int DAT_00580c8c; /* 0x580c8c */
 
@@ -22,21 +22,21 @@ void FUN_002b7534(void)
   
   temp_v1 = 0;
   do {
-    temp_v0 = DAT_00580c8c + temp_v1 * 100;
-    if (*(int *)(temp_v0 + 0x68) != 0) {
-      FUN_001836b0();
-      *(unsigned int *)(temp_v0 + 0x68) = 0;
-      *(unsigned char *)(temp_v0 + 0x6c) = 0;
+    temp_v0 = temp_v1 * 100 + DAT_00580c8c + 0xc;
+    if (*(int *)(temp_v0 + 0x5c) != 0) {
+      FUN_001836b0(*(int *)(temp_v0 + 0x5c));
+      *(unsigned int *)(temp_v0 + 0x5c) = 0;
+      *(unsigned char *)(temp_v0 + 0x60) = 0;
     }
-    if (*(int *)(temp_v0 + 100) != 0) {
-      FUN_0019a5a0();
-      *(unsigned int *)(temp_v0 + 100) = 0;
-      *(unsigned char *)(temp_v0 + 0x6c) = 0;
+    if (*(int *)(temp_v0 + 0x58) != 0) {
+      FUN_0019a5a0(*(int *)(temp_v0 + 0x58));
+      *(unsigned int *)(temp_v0 + 0x58) = 0;
+      *(unsigned char *)(temp_v0 + 0x60) = 0;
     }
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 0x10);
   if (DAT_00580c8c != 0) {
-    FUN_0019a5a0();
+    FUN_0019a5a0(DAT_00580c8c);
     DAT_00580c8c = 0;
   }
   return;

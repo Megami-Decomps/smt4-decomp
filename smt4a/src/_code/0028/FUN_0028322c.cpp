@@ -1,12 +1,9 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0028322c` (_code @ 0x28322c, 0x20 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
 
-int FUN_00285834(void);
-
 typedef struct fn_0028322c_arg0 fn_0028322c_arg0;
+int FUN_00285834(fn_0028322c_arg0 *);
 struct fn_0028322c_arg0 {
     unsigned char pad_0x0[0x2];
     byte field_0x2; /* +0x2 */
@@ -32,7 +29,7 @@ void FUN_0028322c(fn_0028322c_arg0 *param_1)
   if (*(unsigned int **)&param_1[0x11].field_0x10 != (unsigned int *)0x0) {
     **(unsigned int **)&param_1[0x11].field_0x10 = 0;
   }
-  FUN_00285834();
+  FUN_00285834(param_1);
   return;
 }
 

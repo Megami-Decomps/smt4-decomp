@@ -13,7 +13,7 @@ int FUN_0040ace8(unsigned int, int);
 extern unsigned char LAB_002245fc; /* 0x2245fc */
 extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
 extern unsigned int *DAT_00587f0c; /* 0x587f0c */
-extern int DAT_005f180c; /* 0x5f180c */
+extern unsigned char DAT_005f15fc; /* 0x5f15fc */
 
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_00224404. */
@@ -32,9 +32,9 @@ void FUN_00224498(int param_1,int param_2)
   unsigned int temp_v1;
   
   FUN_00224404();
-  temp_v0 = DAT_005f180c;
+  temp_v0 = (*(int *)((unsigned char *)&DAT_005f15fc + 0x210));
   puVar1 = DAT_00587f0c;
-  DAT_00587f0c[2] = DAT_005f180c;
+  DAT_00587f0c[2] = (*(int *)((unsigned char *)&DAT_005f15fc + 0x210));
   if (0 < temp_v0) {
     *(unsigned char *)(puVar1 + 4) = 0;
     temp_v0 = 0x20;

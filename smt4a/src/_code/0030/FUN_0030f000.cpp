@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002e9318(unsigned int *);
 
 typedef int romwright_code(...);
-extern int DAT_00599378; /* 0x599378 */
+extern unsigned char DAT_0059935c; /* 0x59935c */
 
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
 #define ROMWRIGHT_PIECE_4_4_DEFINED
@@ -27,12 +27,12 @@ long long FUN_0030f000(unsigned int param_1,unsigned int param_2,unsigned int pa
   unsigned int uStack_1c;
   unsigned int uStack_18;
   
-  puVar2 = (unsigned int *)**(unsigned int **)(DAT_00599378 + 0x10);
+  puVar2 = (unsigned int *)**(unsigned int **)((*(int *)((unsigned char *)&DAT_0059935c + 0x1c)) + 0x10);
   uStack_20 = param_2;
   uStack_1c = param_3;
   uStack_18 = param_4;
   while( 1 ) {
-    if (puVar2 == *(unsigned int **)(DAT_00599378 + 0x10)) {
+    if (puVar2 == *(unsigned int **)((*(int *)((unsigned char *)&DAT_0059935c + 0x1c)) + 0x10)) {
       return (unsigned long long)uStack_20 << 0x20;
     }
     (**(romwright_code **)(*(int *)puVar2[2] + 0xc))(&uStack_20);

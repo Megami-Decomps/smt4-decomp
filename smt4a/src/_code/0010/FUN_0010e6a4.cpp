@@ -1,5 +1,3 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0010e6a4` (_code @ 0x10e6a4, 0x78 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
@@ -30,14 +28,14 @@ unsigned int FUN_0010e6a4(int param_1)
   if ((temp_v0 != 0) && (*(char *)(temp_v0 + 0x1c) != '\0')) {
     FUN_002f4ab0(temp_v0,0xffffffff);
     if (*(int **)(param_1 + 0x14c) != (int *)0x0) {
-      (**(romwright_code **)(**(int **)(param_1 + 0x14c) + 4))();
+      (**(romwright_code **)(**(int **)(param_1 + 0x14c) + 4))(*(int **)(param_1 + 0x14c));
     }
     *(unsigned int *)(param_1 + 0x14c) = 0;
   }
   if (((*(signed char *)((unsigned char *)&DAT_00594958 + 0x12)) != '\0') && (*(int **)(param_1 + 0x150) != (int *)0x0)) {
-    (**(romwright_code **)(**(int **)(param_1 + 0x150) + 0xc))();
+    (**(romwright_code **)(**(int **)(param_1 + 0x150) + 0xc))(*(int **)(param_1 + 0x150));
     if (*(int **)(param_1 + 0x150) != (int *)0x0) {
-      (**(romwright_code **)(**(int **)(param_1 + 0x150) + 4))();
+      (**(romwright_code **)(**(int **)(param_1 + 0x150) + 4))(*(int **)(param_1 + 0x150));
     }
     *(unsigned int *)(param_1 + 0x150) = 0;
   }

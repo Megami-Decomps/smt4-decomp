@@ -19,7 +19,7 @@ typedef struct {
     unsigned int sp50; /* 0x50: local_50 */
 } param_7_stack;
 
-extern int DAT_0057a9c8; /* 0x57a9c8 */
+extern unsigned char DAT_0057a9b8; /* 0x57a9b8 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
@@ -60,7 +60,7 @@ void FUN_004a9740(unsigned int param_1,int param_2,int param_3,unsigned int para
   int iStack_2c;
   unsigned int uStack_28;
   
-  temp_v6 = DAT_0057a9c8;
+  temp_v6 = (*(int *)((unsigned char *)&DAT_0057a9b8 + 0x10));
   temp_v9 = in_s0;
   temp_v8 = in_s1;
   temp_v11 = in_s2;

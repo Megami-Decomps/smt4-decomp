@@ -28,7 +28,7 @@ typedef char romwright_storage_s__B_B_B_B_B_B_00435d00_25_1_s1_width_check[(size
 extern union romwright_storage_s__B_B_B_B_B_B_00435d00_25_1 s__B_B_B_B_B_B_00435d00; /* 0x435d00 */
 extern unsigned int DAT_00435d04; /* 0x435d04 */
 extern unsigned int DAT_00435d08; /* 0x435d08 */
-extern unsigned int DAT_00435d0c; /* 0x435d0c */
+extern unsigned char DAT_00435d00; /* 0x435d00 */
 extern unsigned int DAT_00435d10; /* 0x435d10 */
 
 /* Supplied declaration required: FUN_002276f8. */
@@ -73,8 +73,8 @@ unsigned int FUN_003dc68c(int param_1)
               (temp_v0 = temp_v4, FUN_002aa568(temp_v4,DAT_00435d08), temp_v0 != 0)))))) &&
            ((temp_v4 == 0 || (temp_v0 = temp_v4, FUN_002aa568(temp_v4,DAT_00435d10), temp_v0 != 0)))) {
           if (temp_v4 != 0) {
-            temp_v1 = FUN_002c30c4(DAT_00435d0c);
-            temp_v0 = FUN_002b4414(temp_v4,DAT_00435d0c,temp_v1);
+            temp_v1 = FUN_002c30c4((*(unsigned int *)((unsigned char *)&DAT_00435d00 + 0xc)));
+            temp_v0 = FUN_002b4414(temp_v4,(*(unsigned int *)((unsigned char *)&DAT_00435d00 + 0xc)),temp_v1);
             if (temp_v0 == 0) goto LAB_003dc8f8;
           }
           if (temp_v4 != 0) {

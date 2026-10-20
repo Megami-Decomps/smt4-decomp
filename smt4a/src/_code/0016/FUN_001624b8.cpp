@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-extern romwright_code *DAT_005b3d70; /* 0x5b3d70 */
+extern unsigned char DAT_005b3d54; /* 0x5b3d54 */
 #ifndef ROMWRIGHT_STORAGE_s________005b3d7c_13_1_DEFINED
 #define ROMWRIGHT_STORAGE_s________005b3d7c_13_1_DEFINED
 /* Storage views; not a recovered source structure. */
@@ -97,7 +97,7 @@ void FUN_001624b8(int *param_1)
             temp_v3 = (param_1[0xd] & 0x400U) != 0;
             UNRECOVERED_JUMPTABLE = (romwright_code *)param_1[2];
             if (temp_v3) {
-              UNRECOVERED_JUMPTABLE = DAT_005b3d70;
+              UNRECOVERED_JUMPTABLE = (*(romwright_code * *)((unsigned char *)&DAT_005b3d54 + 0x1c));
             }
             if (temp_v3 && UNRECOVERED_JUMPTABLE != (romwright_code *)0x0) {
                     /* WARNING: Could not recover jumptable at 0x001626e8. Too many branches */
@@ -120,7 +120,7 @@ void FUN_001624b8(int *param_1)
           param_1[4] = 0;
         }
         if (((temp_v1 == 1) && ((param_1[0xd] & 0x400U) != 0)) &&
-           (UNRECOVERED_JUMPTABLE = DAT_005b3d70, DAT_005b3d70 != (romwright_code *)0x0)) {
+           (UNRECOVERED_JUMPTABLE = (*(romwright_code * *)((unsigned char *)&DAT_005b3d54 + 0x1c)), (*(romwright_code * *)((unsigned char *)&DAT_005b3d54 + 0x1c)) != (romwright_code *)0x0)) {
           (*UNRECOVERED_JUMPTABLE)(0);
           return;
         }

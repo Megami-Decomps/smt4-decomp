@@ -8,7 +8,7 @@ int FUN_002e6e34(int *, unsigned char *);
 int FUN_002e6e5c(int *);
 int FUN_002e7232(int);
 
-extern signed char DAT_0059496c; /* 0x59496c */
+extern unsigned char DAT_00594958; /* 0x594958 */
 extern unsigned char DAT_0062e558; /* 0x62e558 */
 
 /* Supplied declaration required: FUN_002e6e34. */
@@ -28,7 +28,7 @@ void FUN_0030facc(int param_1,int param_2,unsigned int param_3,unsigned int para
   iStack_18 = param_2;
   uStack_14 = param_3;
   uStack_10 = param_4;
-  if (DAT_0059496c != '\0') {
+  if ((*(signed char *)((unsigned char *)&DAT_00594958 + 0x14)) != '\0') {
     puVar1 = &DAT_0062e558;
     if (*(char *)(param_2 + 0x38) != '\0') {
       puVar1 = (unsigned char *)(param_1 + 0x88);

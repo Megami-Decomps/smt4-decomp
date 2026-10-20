@@ -7,7 +7,7 @@ extern "C" {
 int FUN_004bdce0(int, unsigned int, unsigned int);
 int FUN_004bee88(int, unsigned int, unsigned int);
 
-extern int DAT_0057f260; /* 0x57f260 */
+extern unsigned char DAT_0057f25c; /* 0x57f25c */
 
 extern unsigned int FUN_001654d8(int);
 extern unsigned int FUN_001654e4(int);
@@ -24,9 +24,9 @@ unsigned int FUN_0031d7cc(void)
   unsigned int temp_v2;
   int temp_v3;
   
-  temp_v0 = DAT_0057f260;
-  if (DAT_0057f260 != 0) {
-    temp_v1 = FUN_001654d8(DAT_0057f260 + 0x30);
+  temp_v0 = (*(int *)((unsigned char *)&DAT_0057f25c + 0x4));
+  if ((*(int *)((unsigned char *)&DAT_0057f25c + 0x4)) != 0) {
+    temp_v1 = FUN_001654d8((*(int *)((unsigned char *)&DAT_0057f25c + 0x4)) + 0x30);
     temp_v2 = FUN_001654e4(temp_v0 + 0x30);
     temp_v3 = *(int *)(temp_v0 + 0x344);
     if ((temp_v3 == 1) || ((temp_v3 != 2 && (temp_v3 == 3)))) {

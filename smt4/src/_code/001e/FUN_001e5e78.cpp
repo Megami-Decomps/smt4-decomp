@@ -40,9 +40,8 @@ typedef struct {
 extern int DAT_004474f4; /* 0x4474f4 */
 extern int DAT_00447a78; /* 0x447a78 */
 extern int DAT_00447e88; /* 0x447e88 */
-extern signed char DAT_0049f934; /* 0x49f934 */
-extern signed char DAT_0049fb45; /* 0x49fb45 */
-extern signed char DAT_0049fb47; /* 0x49fb47 */
+extern unsigned char DAT_0049f91c; /* 0x49f91c */
+extern unsigned char DAT_0049fb1c; /* 0x49fb1c */
 
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 #ifndef ROMWRIGHT_SQRT_4_DEFINED
@@ -136,7 +135,7 @@ void FUN_001e5e78(int param_1)
   temp_v29 = 0;
   puVar10 = (unsigned char *)(DAT_00447a78 + 0xcce0);
   piVar7 = (int *)(DAT_00447a78 + 0xcce4);
-  if (DAT_0049f934 != '\0') {
+  if ((*(signed char *)((unsigned char *)&DAT_0049f91c + 0x18)) != '\0') {
     *puVar10 = 1;
     *piVar7 = 2;
   }
@@ -318,7 +317,7 @@ LAB_001e6120:
         }
         *(unsigned short *)(temp_v12 + 0x1dc) = 0;
         *(int *)(temp_v12 + 0x200) = (int)((unsigned long long)temp_v22 >> 0x20);
-        if ((DAT_0049fb45 != '\0') && (temp_v9 = FUN_0025b408(), temp_v9 != 0)) {
+        if (((*(signed char *)((unsigned char *)&DAT_0049fb1c + 0x29)) != '\0') && (temp_v9 = FUN_0025b408(), temp_v9 != 0)) {
           temp_v8 = 5;
           *(unsigned int *)(temp_v12 + 0x1d4) = temp_v8;
         }
@@ -326,7 +325,7 @@ LAB_001e6120:
       case 2:
         *(unsigned short *)(temp_v12 + 0x1dc) = 0;
         *(float *)(temp_v12 + 0x200) = temp_v16;
-        if ((DAT_0049fb45 != '\0') && (temp_v9 = FUN_0025b408(), temp_v9 != 0)) {
+        if (((*(signed char *)((unsigned char *)&DAT_0049fb1c + 0x29)) != '\0') && (temp_v9 = FUN_0025b408(), temp_v9 != 0)) {
           temp_v8 = 6;
           *(unsigned int *)(temp_v12 + 0x1d4) = temp_v8;
         }
@@ -352,13 +351,13 @@ LAB_001e6120:
         FUN_0025a8d8(pcVar13);
         *(unsigned int *)(temp_v12 + 0x250) = 0xffffffff;
         *(short *)(temp_v12 + 0x1f8) = *(short *)(temp_v12 + 0x1f8) + 1;
-        if (DAT_0049fb45 == '\0') {
+        if ((*(signed char *)((unsigned char *)&DAT_0049fb1c + 0x29)) == '\0') {
           *(unsigned int *)(temp_v12 + 0x1d4) = 1;
           break;
         }
         temp_v9 = FUN_0025b408();
         if (temp_v9 == 0) {
-          if ((DAT_0049fb45 == '\0') || (temp_v9 = FUN_0025b408(), temp_v9 == 0)) {
+          if (((*(signed char *)((unsigned char *)&DAT_0049fb1c + 0x29)) == '\0') || (temp_v9 = FUN_0025b408(), temp_v9 == 0)) {
             *(unsigned int *)(temp_v12 + 0x1d4) = 1;
             break;
           }
@@ -460,7 +459,7 @@ LAB_001e6120:
              (*(float *)(temp_v12 + 0x234) - *(float *)(temp_v12 + 0x240)) * 0.25f;
         FUN_0025a8d8(pcVar13);
         *(unsigned int *)(temp_v12 + 0x250) = 0xffffffff;
-        if (DAT_0049fb45 == '\0') {
+        if ((*(signed char *)((unsigned char *)&DAT_0049fb1c + 0x29)) == '\0') {
           *(unsigned int *)(temp_v12 + 0x1d4) = 1;
           break;
         }
@@ -481,7 +480,7 @@ LAB_001e6120:
           *(unsigned int *)(temp_v12 + 0x1d4) = 3;
           *(unsigned short *)(temp_v12 + 0x1f8) = 0;
         }
-        else if ((DAT_0049fb45 == '\0') || (temp_v9 = FUN_0025b408(), temp_v9 == 0)) {
+        else if (((*(signed char *)((unsigned char *)&DAT_0049fb1c + 0x29)) == '\0') || (temp_v9 = FUN_0025b408(), temp_v9 == 0)) {
           *(unsigned int *)(temp_v12 + 0x1d4) = 1;
         }
         break;
@@ -551,7 +550,7 @@ LAB_001e6120:
         }
         *(unsigned int *)(temp_v12 + 0x250) = temp_v8 | *(unsigned int *)(temp_v12 + 0x250);
         if (((temp_v9 != -3 && temp_v9 != -2) && (temp_v9 != -1 && temp_v9 != 1)) &&
-           ((DAT_0049fb45 == '\0' || (temp_v9 = FUN_0025b408(), temp_v9 == 0)))) {
+           (((*(signed char *)((unsigned char *)&DAT_0049fb1c + 0x29)) == '\0' || (temp_v9 = FUN_0025b408(), temp_v9 == 0)))) {
           temp_v8 = 2;
           *(unsigned int *)(temp_v12 + 0x1d4) = temp_v8;
         }
@@ -746,7 +745,7 @@ LAB_001e6120:
           temp_v8 = 0xff;
         }
         *(unsigned int *)(temp_v12 + 0x250) = temp_v8 | *(unsigned int *)(temp_v12 + 0x250);
-        if (DAT_0049fb47 != '\0') {
+        if ((*(signed char *)((unsigned char *)&DAT_0049f91c + 0x22b)) != '\0') {
           temp_v8 = 0x11;
           *(unsigned int *)(temp_v12 + 0x1d4) = temp_v8;
         }
@@ -1193,7 +1192,7 @@ joined_r0x001e7e00:
           temp_v8 = 0xff;
         }
         *(unsigned int *)(temp_v12 + 0x250) = temp_v8 | *(unsigned int *)(temp_v12 + 0x250);
-        if (DAT_0049fb47 == '\0') {
+        if ((*(signed char *)((unsigned char *)&DAT_0049f91c + 0x22b)) == '\0') {
           temp_v8 = 6;
           *(unsigned int *)(temp_v12 + 0x1d4) = temp_v8;
         }

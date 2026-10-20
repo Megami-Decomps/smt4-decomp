@@ -8,7 +8,7 @@ int FUN_00115560(int, unsigned int);
 int FUN_002e6e34(int *, int);
 int FUN_002e6e5c(int *);
 
-extern int DAT_00594b20; /* 0x594b20 */
+extern unsigned char DAT_00594ad8; /* 0x594ad8 */
 
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
 #define ROMWRIGHT_PIECE_4_4_DEFINED
@@ -40,7 +40,7 @@ unsigned long long FUN_002f7f00(int param_1,unsigned int param_2,unsigned int pa
     if (temp_v1 >= 8) {
       FUN_002e6e5c(&uStack_18);
       temp_v0 = 0;
-      if (DAT_00594b20 != 0) {
+      if ((*(int *)((unsigned char *)&DAT_00594ad8 + 0x48)) != 0) {
         FUN_00115560(param_1,param_2);
         temp_v0 = param_1;
       }

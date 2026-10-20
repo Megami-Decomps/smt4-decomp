@@ -37,7 +37,7 @@ typedef struct {
     unsigned int sp80; /* 0x80: local_80 */
 } param_1_stack;
 
-extern signed char DAT_0059496a; /* 0x59496a */
+extern unsigned char DAT_00594958; /* 0x594958 */
 #ifndef ROMWRIGHT_STORAGE_s______00594975_9_1_DEFINED
 #define ROMWRIGHT_STORAGE_s______00594975_9_1_DEFINED
 /* Storage views; not a recovered source structure. */
@@ -147,7 +147,7 @@ void FUN_002f8820(int param_1)
     }
     FUN_002ede60(&temp_v4,temp_v17 + 0xdc);
     temp_v11 = (unsigned int)*(unsigned char *)(temp_v17 + 0x66);
-    if ((DAT_0059496a == '\0') && (temp_v11 != 0)) {
+    if (((*(signed char *)((unsigned char *)&DAT_00594958 + 0x12)) == '\0') && (temp_v11 != 0)) {
       FUN_002f9056(temp_v8);
     }
     temp_v7 = *(int *)(param_1 + 100);
@@ -211,7 +211,7 @@ LAB_002f8962:
 LAB_002f895e:
       temp_v0 = 1;
     }
-    if ((DAT_0059496a == '\0') && (temp_v11 != 0)) {
+    if (((*(signed char *)((unsigned char *)&DAT_00594958 + 0x12)) == '\0') && (temp_v11 != 0)) {
       FUN_002f9056(temp_v8,0x40);
     }
   } while( 1 );

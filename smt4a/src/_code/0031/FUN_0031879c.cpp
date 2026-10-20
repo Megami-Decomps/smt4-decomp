@@ -10,7 +10,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } void_stack;
 
-extern int DAT_0057f0c8; /* 0x57f0c8 */
+extern unsigned char DAT_0057f0c4; /* 0x57f0c4 */
 
 extern int FUN_001643a0(void);
 extern int FUN_00165070(void);
@@ -26,7 +26,7 @@ void FUN_0031879c(void)
   int temp_v3;
   int temp_v4;
   
-  temp_v1 = DAT_0057f0c8;
+  temp_v1 = (*(int *)((unsigned char *)&DAT_0057f0c4 + 0x4));
   temp_v2 = FUN_001643a0();
   if (*(char *)(temp_v1 + 0x5e3) == '\0') {
     if ((temp_v2 == 1) || (temp_v2 == 2)) {

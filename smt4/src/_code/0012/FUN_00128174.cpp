@@ -50,8 +50,8 @@ typedef struct {
     unsigned int spA8; /* 0xa8: local_a8 */
 } void_stack;
 
-extern unsigned char DAT_00420b78; /* 0x420b78 */
-extern unsigned int DAT_00471b60; /* 0x471b60 */
+extern unsigned char DAT_00420b20; /* 0x420b20 */
+extern unsigned char DAT_00471b5c; /* 0x471b5c */
 
 /* Supplied declaration required: FUN_001398c0. */
 /* Supplied declaration required: FUN_001398dc. */
@@ -106,7 +106,7 @@ void FUN_00128174(void)
   int temp_v28;
   unsigned int uStack_14;
   
-  temp_v1 = DAT_00471b60;
+  temp_v1 = (*(unsigned int *)((unsigned char *)&DAT_00471b5c + 0x4));
   FUN_002ad888();
   FUN_002ad80c(temp_v1,temp_v0,0x14,0);
   if ((int)temp_v1 >= 0) {
@@ -145,7 +145,7 @@ void FUN_00128174(void)
     temp_v9 = 0;
     temp_v10 = 0;
     temp_v11 = 0;
-    temp_v5 = &DAT_00420b78;
+    temp_v5 = &(*(unsigned char *)((unsigned char *)&DAT_00420b20 + 0x58));
     temp_v6 = 0x420bf0;
     FUN_001398f8(&temp_v5);
     FUN_002bb6c4(&temp_v5,&temp_v20);

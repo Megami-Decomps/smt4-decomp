@@ -1,10 +1,8 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `nw_snd_internal_driver_Voice_CalcOffsetAdpcmParam` (_code @ 0x461b74, 0x54 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
 
-int nn_snd_CTR_DecodeAdpcmData(int, unsigned char [32], unsigned int, unsigned int, int);
+int nn_snd_CTR_DecodeAdpcmData(int, unsigned char *, unsigned int, unsigned int, int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -20,15 +18,11 @@ void nw_snd_internal_driver_Voice_CalcOffsetAdpcmParam
 {
 /* irregular: 1 native warning(s); review required */
   unsigned int temp_v0;
-  unsigned char temp_v1 [32];
+  unsigned char temp_v1 [28];
   
-  temp_v0 = 0;
-  if (temp_v0 < param_3) {
-    do {
-      nn_snd_CTR_DecodeAdpcmData(param_4,temp_v1,param_2,param_1,0xe);
-      temp_v0 = temp_v0 + 0xe;
-      param_4 = param_4 + 8;
-    } while (temp_v0 < param_3);
+  for (temp_v0 = 0; temp_v0 < param_3; temp_v0 += 0xe) {
+    nn_snd_CTR_DecodeAdpcmData(param_4,temp_v1,param_2,param_1,0xe);
+    param_4 = param_4 + 8;
   }
   return;
 }

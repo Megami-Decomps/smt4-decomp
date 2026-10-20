@@ -27,7 +27,7 @@ extern int FUN_001b72e0(...); /* 0x1b72e0 */
 extern unsigned char LAB_001e4bec; /* 0x1e4bec */
 extern unsigned char LAB_001e4bf0; /* 0x1e4bf0 */
 extern unsigned char LAB_0020f560; /* 0x20f560 */
-extern int *DAT_00439ca8; /* 0x439ca8 */
+extern unsigned char DAT_00439c88; /* 0x439c88 */
 
 /* Supplied declaration required: FUN_002898e4. */
 /* Supplied declaration required: FUN_002c498c. */
@@ -43,12 +43,12 @@ void FUN_001a84d8(unsigned int *param_1)
   unsigned char *puVar2;
   
   FUN_002898e4();
-  if (DAT_00439ca8 == (int *)0x0) {
+  if ((*(int * *)((unsigned char *)&DAT_00439c88 + 0x20)) == (int *)0x0) {
     piVar1 = (int *)0x100;
     FUN_002c498c(0x100,0x100,0,0xf040,1);
-    DAT_00439ca8 = piVar1;
+    (*(int * *)((unsigned char *)&DAT_00439c88 + 0x20)) = piVar1;
   }
-  piVar1 = DAT_00439ca8;
+  piVar1 = (*(int * *)((unsigned char *)&DAT_00439c88 + 0x20));
   puVar2 = &LAB_001a8658;
   FUN_002c4a08(&LAB_001a8658,2,0,0,FUN_0019e138,&LAB_001e4bec,param_1,*param_1);
   param_1[0x15] = (unsigned int)puVar2;

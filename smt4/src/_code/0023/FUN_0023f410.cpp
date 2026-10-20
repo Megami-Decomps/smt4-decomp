@@ -16,7 +16,7 @@ void FUN_0023f410(int param_1,int param_2,int param_3,int param_4)
   unsigned int temp_v0;
   unsigned int temp_v1;
   int temp_v2;
-  unsigned int temp_v3;
+  int temp_v3;
   unsigned int temp_v4;
   
   temp_v4 = 0;
@@ -36,29 +36,29 @@ void FUN_0023f410(int param_1,int param_2,int param_3,int param_4)
     temp_v4 = 0x43;
     temp_v2 = 0x2a;
   }
-  temp_v3 = temp_v2 + temp_v4;
-  if (temp_v4 < temp_v3) {
+  temp_v2 = temp_v2 + temp_v4;
+  if (temp_v2 > (int)temp_v4) {
     do {
-      temp_v2 = *(int *)(param_1 + 0x1e98) + temp_v4 * 0x114;
-      temp_v0 = *(unsigned int *)(temp_v2 + 0x50);
+      temp_v3 = *(int *)(param_1 + 0x1e98) + temp_v4 * 0x114;
+      temp_v0 = *(unsigned int *)(temp_v3 + 0x50);
       if (((temp_v0 & 1) != 0 && (temp_v0 & 0x80) != 0) && ((temp_v0 & 2) == 0)) {
-        temp_v0 = *(unsigned int *)(temp_v2 + 0x54) & 0xfffffff9;
-        temp_v1 = temp_v0 | 1;
-        *(unsigned int *)(temp_v2 + 0x54) = temp_v1;
-        *(unsigned int *)(temp_v2 + 0x4c) = 0;
+        temp_v0 = *(unsigned int *)(temp_v3 + 0x54);
+        temp_v1 = (temp_v0 & 0xfffffff9) | 1;
+        *(unsigned int *)(temp_v3 + 0x54) = temp_v1;
+        *(unsigned int *)(temp_v3 + 0x4c) = 0;
         if (param_3 != 0) {
-          temp_v1 = temp_v0 | 9;
+          temp_v1 = temp_v1 | 8;
         }
-        *(unsigned int *)(temp_v2 + 0x48) = 4;
+        *(unsigned int *)(temp_v3 + 0x48) = 4;
         if (param_3 != 0) {
-          *(unsigned int *)(temp_v2 + 0x54) = temp_v1;
+          *(unsigned int *)(temp_v3 + 0x54) = temp_v1;
         }
         if (param_4 == 0) {
-          *(unsigned short *)(temp_v2 + 0x58) = *(unsigned short *)(temp_v2 + 0x58) | 0x200;
+          *(unsigned short *)(temp_v3 + 0x58) = *(unsigned short *)(temp_v3 + 0x58) | 0x200;
         }
       }
       temp_v4 = temp_v4 + 1;
-    } while ((int)temp_v4 < (int)temp_v3);
+    } while (temp_v2 > (int)temp_v4);
   }
   return;
 }

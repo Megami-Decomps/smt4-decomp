@@ -16,10 +16,9 @@ typedef struct {
 } param_3_stack;
 
 extern int DAT_0056fcc0; /* 0x56fcc0 */
-extern signed char DAT_0057aa00; /* 0x57aa00 */
-extern signed char DAT_0057aa01; /* 0x57aa01 */
-extern signed char DAT_0057aa02; /* 0x57aa02 */
-extern int DAT_0057aa1c; /* 0x57aa1c */
+extern unsigned char DAT_0057aa00; /* 0x57aa00 */
+extern unsigned char DAT_0057aa01; /* 0x57aa01 */
+extern unsigned char DAT_0057aa02; /* 0x57aa02 */
 
 /* Supplied declaration required: FUN_00340c10. */
 /* Supplied declaration required: FUN_0035c708. */
@@ -82,10 +81,10 @@ void FUN_004d896c(int param_1,int param_2,int param_3)
   temp_v2 = (long long)(int)temp_v4 * -0x7f7f7f7f + ((unsigned long long)temp_v4 << 0x20);
   temp_v3 = (long long)(int)((unsigned int)temp_v0 * 0x24) * -0x7f7f7f7f +
           ((unsigned long long)((unsigned int)temp_v0 * 0x24) << 0x20);
-  DAT_0057aa00 = (char)(int)(temp_v1 >> 0x27) - (char)(temp_v1 >> 0x3f);
-  DAT_0057aa01 = (char)(int)(temp_v2 >> 0x27) - (char)(temp_v2 >> 0x3f);
-  DAT_0057aa02 = (char)(int)(temp_v3 >> 0x27) - (char)(temp_v3 >> 0x3f);
-  DAT_0057aa1c = ((temp_v8 >> 7) - (temp_v8 >> 0x1f)) * 0x1000000 +
+  (*(signed char *)((unsigned char *)&(*(int *)((unsigned char *)&DAT_0057aa02 + 0x1a)) - 0x1c)) = (char)(int)(temp_v1 >> 0x27) - (char)(temp_v1 >> 0x3f);
+  (*(signed char *)((unsigned char *)&DAT_0057aa00 + 0x1)) = (char)(int)(temp_v2 >> 0x27) - (char)(temp_v2 >> 0x3f);
+  (*(signed char *)((unsigned char *)&DAT_0057aa01 + 0x1)) = (char)(int)(temp_v3 >> 0x27) - (char)(temp_v3 >> 0x3f);
+  (*(int *)((unsigned char *)&DAT_0057aa02 + 0x1a)) = ((temp_v8 >> 7) - (temp_v8 >> 0x1f)) * 0x1000000 +
                  ((temp_v9 >> 7) - (temp_v9 >> 0x1f)) * 0x10000 +
                  ((temp_v5 >> 7) - (temp_v5 >> 0x1f)) * 0x100 + 0xff;
   return;

@@ -1,5 +1,3 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002d860c` (_code @ 0x2d860c, 0x1a4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
@@ -66,11 +64,11 @@ unsigned int FUN_002d860c(void)
   }
   else {
     temp_v4 = 0;
-    temp_v0 = DAT_0043e360 + ((unsigned int)(DAT_0043e360 >> 0x1f) >> 0x18);
+    temp_v0 = DAT_0043e360 / 0x100;
     do {
       temp_v3 = 0;
       do {
-        FUN_002c09d0(temp_v3 + temp_v4 * 0x10 + (temp_v0 >> 8) * 0x100);
+        FUN_002c09d0(temp_v3 + temp_v4 * 0x10 + temp_v0 * 0x100);
         temp_v3 = temp_v3 + 1;
       } while (temp_v3 < 0x10);
       temp_v4 = temp_v4 + 1;

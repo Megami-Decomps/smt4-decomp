@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00293ba8(void);
 
-extern int DAT_0044e144; /* 0x44e144 */
+extern unsigned char DAT_0044e140; /* 0x44e140 */
 
 /* Supplied declaration required: FUN_00293ba8. */
 
@@ -18,9 +18,9 @@ void FUN_0029dd7c(int param_1)
   char temp_v0;
   int temp_v1;
   
-  temp_v1 = DAT_0044e144;
-  temp_v0 = *(char *)(DAT_0044e144 + 0x1e66);
-  *(char *)(DAT_0044e144 + 0x1e66) = (char)param_1;
+  temp_v1 = (*(int *)((unsigned char *)&DAT_0044e140 + 0x4));
+  temp_v0 = *(char *)((*(int *)((unsigned char *)&DAT_0044e140 + 0x4)) + 0x1e66);
+  *(char *)((*(int *)((unsigned char *)&DAT_0044e140 + 0x4)) + 0x1e66) = (char)param_1;
   if (temp_v0 != '\b') {
     if (temp_v0 != '\a') {
       return;

@@ -36,8 +36,8 @@ unsigned long long FUN_00480a00(int param_1,unsigned int param_2)
       }
       temp_v0 = romwright_piece_4_4(temp_v1,temp_v2);
       if (!temp_v3) {
-        temp_v0 = (unsigned long long)((temp_v2 & 0x3ff) * temp_v1) * 0x28f5c29;
-        if (temp_v0 < 0x100000000) {
+        temp_v0 = (unsigned long long)((temp_v2 & 0x3ff) * temp_v1) * 0x28f5c29ULL;
+        if ((int)(temp_v0 >> 32) <= 0) {
           temp_v0 = romwright_piece_4_4(1,(int)temp_v0);
         }
       }

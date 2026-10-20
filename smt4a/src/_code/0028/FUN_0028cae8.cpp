@@ -6,9 +6,9 @@ extern "C" {
 
 int FUN_0010063a(unsigned int, unsigned int, int, unsigned char *);
 
-extern unsigned char LAB_003d4e88; /* 0x3d4e88 */
 
 /* Supplied declaration required: FUN_0010063a. */
+extern unsigned char LAB_003d4e88; /* 0x3d4e88 */
 extern unsigned int FUN_00187180(unsigned int, unsigned int);
 extern unsigned int FUN_00192748(unsigned int);
 extern unsigned int FUN_00192798(void);

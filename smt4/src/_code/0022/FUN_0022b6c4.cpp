@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00233240(int, int);
 int FUN_002a5ed0(int);
-int FUN_002af5c0(int, int);
+int FUN_002af5c0(int, int, int);
 
 /* Supplied declaration required: FUN_00233240. */
 extern int FUN_0023360c(int);
@@ -29,7 +29,7 @@ void FUN_0022b6c4(int param_1)
   temp_v1 = 0;
   *(unsigned int *)(param_1 + 0xcb8) = 0;
   do {
-    FUN_002af5c0(param_1 + temp_v1 * 0x8c + 0x654,0);
+    FUN_002af5c0(param_1 + temp_v1 * 0x8c + 0x654,0,0);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 10);
   FUN_00233240(param_1 + 0xa8,0);
@@ -39,7 +39,7 @@ void FUN_0022b6c4(int param_1)
   temp_v1 = temp_v0 + 1;
   temp_v2 = param_1 + temp_v1;
   *(int *)(param_1 + 0xc64) = temp_v1;
-  *(unsigned int *)(param_1 + 0xc60) = temp_v0 + 2;
+  *(int *)(param_1 + 0xc60) = temp_v0 + 2;
   if (*(char *)(temp_v2 + 0xc78) == '\0') {
     FUN_002a5ed0(0x2a);
     *(unsigned char *)(temp_v2 + 0xc78) = 1;

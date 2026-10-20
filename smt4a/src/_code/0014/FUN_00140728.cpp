@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_3_stack;
 
-extern int *DAT_005b4084; /* 0x5b4084 */
+extern unsigned char DAT_005b406c; /* 0x5b406c */
 
 /* Supplied declaration required: FUN_0019c920. */
 
@@ -33,11 +33,11 @@ void FUN_00140728(unsigned int *param_1,unsigned int param_2,unsigned int param_
   param_1[3] = 0;
   param_1[4] = 0;
   param_1[5] = 0;
-  piVar1 = DAT_005b4084;
-  if (DAT_005b4084 != (int *)0x0) {
-    unaff_r4 = *DAT_005b4084;
+  piVar1 = (*(int * *)((unsigned char *)&DAT_005b406c + 0x18));
+  if ((*(int * *)((unsigned char *)&DAT_005b406c + 0x18)) != (int *)0x0) {
+    unaff_r4 = *(*(int * *)((unsigned char *)&DAT_005b406c + 0x18));
   }
-  if (DAT_005b4084 != (int *)0x0 && unaff_r4 != 0) {
+  if ((*(int * *)((unsigned char *)&DAT_005b406c + 0x18)) != (int *)0x0 && unaff_r4 != 0) {
     temp_v0 = 0;
     do {
       temp_v1 = temp_v0 + 1;

@@ -8,7 +8,7 @@ int FUN_00325b84(void);
 int FUN_003538d0(void);
 int FUN_003ae6cc(void);
 
-extern int DAT_005806bc; /* 0x5806bc */
+extern unsigned char DAT_005806b4; /* 0x5806b4 */
 
 /* Supplied declaration required: FUN_00325b84. */
 extern int FUN_0033e1d4(void);
@@ -23,30 +23,30 @@ unsigned int FUN_003a7480(void)
 /* irregular: 3 native warning(s); review required */
   int temp_v0;
   
-  if (DAT_005806bc != 0) {
-    if (DAT_005806bc != 1) {
-      if (DAT_005806bc != 2) {
-        if ((DAT_005806bc == 3) && (temp_v0 = FUN_0033e1d4(), temp_v0 != 0)) {
-          DAT_005806bc = 0;
+  if ((*(int *)((unsigned char *)&DAT_005806b4 + 0x8)) != 0) {
+    if ((*(int *)((unsigned char *)&DAT_005806b4 + 0x8)) != 1) {
+      if ((*(int *)((unsigned char *)&DAT_005806b4 + 0x8)) != 2) {
+        if (((*(int *)((unsigned char *)&DAT_005806b4 + 0x8)) == 3) && (temp_v0 = FUN_0033e1d4(), temp_v0 != 0)) {
+          (*(int *)((unsigned char *)&DAT_005806b4 + 0x8)) = 0;
           return 1;
         }
       }
       else {
         FUN_00325b84();
-        DAT_005806bc = 3;
+        (*(int *)((unsigned char *)&DAT_005806b4 + 0x8)) = 3;
       }
     }
     else {
       temp_v0 = FUN_00377fe0();
       if (temp_v0 != 0) {
-        DAT_005806bc = 2;
+        (*(int *)((unsigned char *)&DAT_005806b4 + 0x8)) = 2;
       }
     }
   }
   else {
     FUN_003ae6cc();
     FUN_003538d0();
-    DAT_005806bc = 1;
+    (*(int *)((unsigned char *)&DAT_005806b4 + 0x8)) = 1;
   }
   return 0;
 }

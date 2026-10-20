@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-extern signed char DAT_0044e363; /* 0x44e363 */
+extern unsigned char DAT_0044e360; /* 0x44e360 */
 
 extern unsigned int FUN_00129b14(void);
 /* Supplied declaration required: FUN_002c131c. */
@@ -27,15 +27,15 @@ void FUN_002bb194(int param_1)
   unsigned int temp_v2;
   
   if (param_1 != 0) {
-    DAT_0044e363 = 1;
+    (*(signed char *)((unsigned char *)&DAT_0044e360 + 0x3)) = 1;
     temp_v0 = FUN_00129b14();
     temp_v1 = 0x2bb1b8;
   }
   else {
-    if (DAT_0044e363 == '\0') {
+    if ((*(signed char *)((unsigned char *)&DAT_0044e360 + 0x3)) == '\0') {
       return;
     }
-    DAT_0044e363 = 0;
+    (*(signed char *)((unsigned char *)&DAT_0044e360 + 0x3)) = 0;
     temp_v0 = nn_gxlow_CTR_ReleaseGpuRight();
     temp_v2 = 0xd8a02a05;
     if (temp_v0 != 0xd8a02a05) {

@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_002a775c(void);
-int FUN_002c415c(void);
+int FUN_002a775c(unsigned int);
+int FUN_002c415c(unsigned int);
 
 extern unsigned char DAT_004206f0; /* 0x4206f0 */
 
@@ -18,22 +18,24 @@ unsigned int * FUN_003354a0(unsigned int *param_1)
 {
 /* irregular: 2 native warning(s); review required */
   int temp_v0;
+  unsigned int *q;
   
   temp_v0 = 0;
   *param_1 = (unsigned int)&DAT_004206f0;
   do {
+    q = param_1 + temp_v0 * 0x14 + 4;
     if (param_1[temp_v0 * 0x14 + 6] != 0) {
-      FUN_002a775c();
-      param_1[temp_v0 * 0x14 + 6] = 0;
+      FUN_002a775c(param_1[temp_v0 * 0x14 + 6]);
+      q[2] = 0;
     }
-    if (param_1[temp_v0 * 0x14 + 7] != 0) {
-      FUN_002c415c();
-      param_1[temp_v0 * 0x14 + 7] = 0;
+    if (q[3] != 0) {
+      FUN_002c415c(q[3]);
+      q[3] = 0;
     }
     temp_v0 = temp_v0 + 1;
   } while (temp_v0 < 3);
   if (param_1[2] != 0) {
-    FUN_002a775c();
+    FUN_002a775c(param_1[2]);
     param_1[2] = 0;
   }
   return param_1;

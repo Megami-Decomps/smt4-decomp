@@ -12,6 +12,7 @@ objdiff and to be proven by `tools/relink.py --matched`.
 import argparse
 import difflib
 import glob
+import importlib.util
 import json
 import re
 import subprocess
@@ -43,7 +44,10 @@ def listing(tool, obj):
             text = re.sub(r"\s*[@;].*$", "", insn[2]).strip()
             text = re.sub(r"<[^>]*>", "", text).strip()
             rows.append(f"{int(insn[1], 16):4x}: {text}")
-    return rows
+    # A call relocation leaves bl/blx to the linker: it emits blx when the callee is in the other
+    # instruction set (relink.py links with --use-blx), so the object's choice is not a difference.
+    call = re.compile(r"^(\s*[0-9a-f]+: )blx(\s.*\[R_ARM_(?:THM_)?CALL )")
+    return [call.sub(r"\1bl\2", row) for row in rows]
 
 
 def main():
@@ -57,11 +61,18 @@ def main():
     if unit is None:
         raise SystemExit(f"{args.function}: no such function in {args.game}")
     if not args.no_build:
-        done = subprocess.run([sys.executable, "-B", "build.py", unit["object"]], cwd=ROOT / args.game, capture_output=True, text=True)
-        report = json.loads((ROOT / args.game / "build" / "compile_report.json").read_text())
-        failed = [f for f in report["failures"] if f["function"] == args.function]
-        if done.returncode or failed:
-            print(failed[0]["first_error"] if failed else done.stdout + done.stderr)
+        # The game's build.py gives the exact compile command; running the compiler here, not
+        # build.py, leaves build/compile_report.json alone, so several fdiffs can run at once.
+        spec = importlib.util.spec_from_file_location(f"build_{args.game}", ROOT / args.game / "build.py")
+        build = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(build)
+        compiler = build.find_compiler(argparse.Namespace(armcc=None, clang=None))
+        obj = ROOT / args.game / unit["object"]
+        obj.parent.mkdir(parents=True, exist_ok=True)
+        done = subprocess.run(build.command(compiler, unit, ROOT / args.game / unit["source"], obj),
+                              capture_output=True, text=True, errors="replace", cwd=ROOT / args.game)
+        if done.returncode:
+            print("\n".join(line for line in (done.stdout + done.stderr).splitlines() if "Error" in line or line.startswith("  ")))
             sys.exit(2)
     tool = objdump(args.game)
     retail = listing(tool, ROOT / args.game / unit["target"])

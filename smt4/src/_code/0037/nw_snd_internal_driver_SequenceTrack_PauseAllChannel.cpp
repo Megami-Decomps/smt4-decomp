@@ -1,5 +1,3 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `nw_snd_internal_driver_SequenceTrack_PauseAllChannel` (_code @ 0x37d860, 0x54 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
@@ -9,7 +7,7 @@ int nw_snd_internal_driver_Voice_Pause(unsigned int, unsigned int);
 /* Supplied declaration required: nw_snd_internal_driver_Voice_Pause. */
 
 
-void nw_snd_internal_driver_SequenceTrack_PauseAllChannel(int param_1,unsigned int param_2)
+void nw_snd_internal_driver_SequenceTrack_PauseAllChannel(int param_1,bool param_2)
 
 {
 /* irregular: 1 native warning(s); review required */
@@ -17,7 +15,7 @@ void nw_snd_internal_driver_SequenceTrack_PauseAllChannel(int param_1,unsigned i
   
   for (temp_v0 = *(int *)(param_1 + 0xc4); temp_v0 != 0; temp_v0 = *(int *)(temp_v0 + 0x138)) {
     if ((*(char *)(temp_v0 + 0xc6) != '\0') && ((*(char *)(temp_v0 + 0xc5) != '\0') != param_2)) {
-      *(char *)(temp_v0 + 0xc5) = (char)param_2;
+      *(char *)(temp_v0 + 0xc5) = param_2;
       nw_snd_internal_driver_Voice_Pause(*(unsigned int *)(temp_v0 + 0x134),param_2);
     }
   }

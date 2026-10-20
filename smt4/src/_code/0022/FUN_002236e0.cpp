@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00152bec(void);
 
-extern unsigned char DAT_004bd0dc; /* 0x4bd0dc */
+extern unsigned char DAT_004bce8c; /* 0x4bce8c */
 
 /* Supplied declaration required: FUN_00152bec. */
 
@@ -19,7 +19,7 @@ void FUN_002236e0(void)
   int temp_v1;
   
   temp_v1 = 0;
-  DAT_004bd0dc = 0;
+  (*(unsigned char *)((unsigned char *)&DAT_004bce8c + 0x250)) = 0;
   do {
     temp_v0 = 1;
     do {

@@ -10,7 +10,7 @@ int FUN_0016f9bc(unsigned char *, int);
 int FUN_0018b868(void);
 int FUN_0018b964(void);
 
-extern unsigned char DAT_005891b3; /* 0x5891b3 */
+extern unsigned char DAT_005891b0; /* 0x5891b0 */
 extern unsigned char DAT_0061a5fc; /* 0x61a5fc */
 
 extern int FUN_00147374(void);
@@ -29,7 +29,7 @@ void FUN_00136cb4(unsigned int param_1)
   
   temp_v0 = FUN_00147374();
   if (temp_v0 == 0) {
-    DAT_005891b3 = 1;
+    (*(unsigned char *)((unsigned char *)&DAT_005891b0 + 0x3)) = 1;
     FUN_0016f9bc(&DAT_0061a5fc,0x100);
     temp_v0 = 0;
     FUN_00147550(0x300,param_1 & 0xfffffff8,0xf);

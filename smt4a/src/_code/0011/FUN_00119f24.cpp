@@ -1,5 +1,3 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00119f24` (_code @ 0x119f24, 0x1a bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
@@ -21,7 +19,9 @@ unsigned char FUN_00119f24(fn_00119f24_arg0 *param_1)
 {
   int temp_v0;
   
-  temp_v0 = FUN_00306d0e(param_1->field_0xc,param_1->field_0x4,param_1->field_0x10);
+  unsigned char a = param_1->field_0x4;
+  unsigned char b = param_1->field_0x10;
+  temp_v0 = FUN_00306d0e(param_1->field_0xc,a,b);
   if (temp_v0 != 0) {
     param_1->field_0x10 = 0;
   }

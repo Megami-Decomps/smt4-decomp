@@ -37,7 +37,7 @@ void FUN_004caca0(int param_1,int param_2,int param_3,int param_4)
     temp_v2 = 0x2a;
   }
   temp_v3 = temp_v2 + temp_v4;
-  if (temp_v4 < temp_v3) {
+  if ((int)temp_v3 > (int)temp_v4) {
     do {
       temp_v2 = *(int *)(param_1 + 0x1ed4) + temp_v4 * 0x1d0;
       temp_v0 = *(unsigned int *)(temp_v2 + 0x50);
@@ -49,21 +49,21 @@ void FUN_004caca0(int param_1,int param_2,int param_3,int param_4)
           *(unsigned int *)(temp_v2 + 0x48) = 5;
         }
         temp_v0 = *(unsigned int *)(temp_v2 + 0x58) & 0xfffffff9;
-        temp_v1 = temp_v0 | 1;
-        *(unsigned int *)(temp_v2 + 0x58) = temp_v1;
+        temp_v0 = temp_v0 | 1;
+        *(unsigned int *)(temp_v2 + 0x58) = temp_v0;
         if (param_3 != 0) {
-          temp_v1 = temp_v0 | 9;
+          temp_v0 = temp_v0 | 8;
         }
         *(unsigned int *)(temp_v2 + 0x4c) = 0;
         if (param_3 != 0) {
-          *(unsigned int *)(temp_v2 + 0x58) = temp_v1;
+          *(unsigned int *)(temp_v2 + 0x58) = temp_v0;
         }
         if (param_4 == 0) {
           *(unsigned short *)(temp_v2 + 0x60) = *(unsigned short *)(temp_v2 + 0x60) | 0x200;
         }
       }
       temp_v4 = temp_v4 + 1;
-    } while ((int)temp_v4 < (int)temp_v3);
+    } while ((int)temp_v3 > (int)temp_v4);
   }
   return;
 }

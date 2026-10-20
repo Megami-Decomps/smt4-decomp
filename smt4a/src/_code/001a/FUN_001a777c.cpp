@@ -1,5 +1,3 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001a777c` (_code @ 0x1a777c, 0x30 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
@@ -11,7 +9,7 @@ unsigned int * FUN_001a777c(int param_1)
 {
   unsigned int *puVar1;
   
-  puVar1 = (unsigned int *)(**(romwright_code **)(**(int **)(param_1 + 600) + 0x14))();
+  puVar1 = (unsigned int *)(**(romwright_code **)(**(int **)(param_1 + 600) + 0x14))(*(int *)(param_1 + 600));
   if ((puVar1 != (unsigned int *)0x0) && ((*puVar1 & 0x20000000) == 0)) {
     puVar1 = (unsigned int *)0x0;
   }

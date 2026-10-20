@@ -17,7 +17,7 @@ typedef struct {
 
 extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
 extern int DAT_005806d4; /* 0x5806d4 */
-extern short DAT_005f1882; /* 0x5f1882 */
+extern unsigned char DAT_005f17fc; /* 0x5f17fc */
 
 /* Supplied declaration required: FUN_0019cac4. */
 /* Supplied declaration required: FUN_001aea28. */
@@ -64,7 +64,7 @@ void FUN_0033ad04(void)
           temp_v2 = *puVar9;
           do {
             piVar7 = (int *)(DAT_005806d4 + temp_v4 * 0xc4 + 0x3e34);
-            if (*piVar7 == (int)DAT_005f1882) {
+            if (*piVar7 == (int)(*(short *)((unsigned char *)&DAT_005f17fc + 0x86))) {
               if ((*(int *)(temp_v1 + 0x1b4) != 0) && (*(char *)(temp_v1 + 0x1b8) != '\0')) {
                 temp_v4 = *(int *)(*(int *)(temp_v1 + 0x1b4) + 4);
                 if (*(char *)(temp_v1 + 0x1b9) != '\0') {
@@ -125,7 +125,7 @@ LAB_0033ad90:
         temp_v2 = *puVar9;
 LAB_0033adb8:
         piVar7 = (int *)(DAT_005806d4 + temp_v4 * 0xc4 + 0x3e34);
-        if (*piVar7 != (int)DAT_005f1882) break;
+        if (*piVar7 != (int)(*(short *)((unsigned char *)&DAT_005f17fc + 0x86))) break;
         if ((*(int *)(temp_v1 + 0x1b4) != 0) && (*(char *)(temp_v1 + 0x1b8) != '\0')) {
           temp_v4 = *(int *)(*(int *)(temp_v1 + 0x1b4) + 4);
           if (*(char *)(temp_v1 + 0x1b9) != '\0') {

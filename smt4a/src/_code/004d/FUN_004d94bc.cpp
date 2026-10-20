@@ -13,10 +13,10 @@ int FUN_004d94bc(int *param_1,unsigned int param_2)
   int temp_v1;
   unsigned int temp_v2;
   
-  temp_v0 = (**(romwright_code **)(*param_1 + 0x18))(param_1);
+  temp_v0 = (**(romwright_code **)(*param_1 + 0x18))(param_1,param_2);
   if (temp_v0 == 0) {
     if (param_1[4] != 0) {
-      (**(romwright_code **)(*param_1 + 0x1c))(param_1);
+      (**(romwright_code **)(*param_1 + 0x1c))(param_1,param_1[4]);
       param_1[4] = 0;
     }
     temp_v0 = (**(romwright_code **)(*param_1 + 0x18))(param_1,param_2);
@@ -25,9 +25,7 @@ int FUN_004d94bc(int *param_1,unsigned int param_2)
   temp_v1 = (**(romwright_code **)(*param_1 + 0xc))(param_1,temp_v0);
   temp_v2 = temp_v1 + param_1[1];
   param_1[1] = temp_v2;
-  if (temp_v2 <= (unsigned int)param_1[2]) {
-    temp_v2 = param_1[2];
-  }
+  if (!(temp_v2 > (unsigned int)param_1[2])) { temp_v2 = (unsigned int)param_1[2]; }
   param_1[2] = temp_v2;
   return temp_v0;
 }

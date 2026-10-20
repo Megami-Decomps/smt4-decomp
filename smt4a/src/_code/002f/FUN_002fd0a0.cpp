@@ -21,7 +21,7 @@ int FUN_002fd0a0(int param_1,unsigned int param_2)
     FUN_0031011e(param_1,5);
   }
   temp_v0 = *(int *)(param_1 + 0x18) + param_2;
-  if (*(unsigned int *)(param_1 + 0x14) <= temp_v0) {
+  if (!(temp_v0 < *(unsigned int *)(param_1 + 0x14))) {
     temp_v1 = aeabi_uidivmod(temp_v0 * 0xf,10);
     FUN_0031011e(param_1,temp_v1);
   }

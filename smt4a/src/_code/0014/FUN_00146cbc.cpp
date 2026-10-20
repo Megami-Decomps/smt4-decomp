@@ -6,7 +6,7 @@ extern "C" {
 
 int coproc_movefrom_User_R_Thread_and_Process_ID(void);
 
-extern unsigned int DAT_005894d4; /* 0x5894d4 */
+extern unsigned char DAT_005894d0; /* 0x5894d0 */
 
 /* Unsupported intrinsic, declaration required: coproc_movefrom_User_R_Thread_and_Process_ID (CALLOTHER). */
 
@@ -15,7 +15,7 @@ void FUN_00146cbc(void)
 
 {
 /* irregular: 1 native warning(s); review required */
-  DAT_005894d4 = coproc_movefrom_User_R_Thread_and_Process_ID();
+  (*(unsigned int *)((unsigned char *)&DAT_005894d0 + 0x4)) = coproc_movefrom_User_R_Thread_and_Process_ID();
   return;
 }
 

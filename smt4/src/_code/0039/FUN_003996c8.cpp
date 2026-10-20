@@ -27,9 +27,9 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } param_1_stack;
 
-extern int DAT_0044cdd8; /* 0x44cdd8 */
+extern unsigned char DAT_0044cdc8; /* 0x44cdc8 */
 extern unsigned int DAT_0044ea00; /* 0x44ea00 */
-extern int DAT_0049f924; /* 0x49f924 */
+extern unsigned char DAT_0049f91c; /* 0x49f91c */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00231bcc. */
@@ -86,8 +86,8 @@ void FUN_003996c8(int param_1)
   temp_v9 = pfVar5[2];
   temp_v4 = NaviMain_GetCurrentMap(temp_v3);
   temp_v5 = NaviMain_GetPosY(temp_v3);
-  if (DAT_0049f924 != 0x73) {
-    if (DAT_0049f924 == 0x77) {
+  if ((*(int *)((unsigned char *)&DAT_0049f91c + 0x8)) != 0x73) {
+    if ((*(int *)((unsigned char *)&DAT_0049f91c + 0x8)) == 0x77) {
       temp_v8 = -(temp_v8 - 1050.0f);
     }
   }
@@ -97,12 +97,12 @@ void FUN_003996c8(int param_1)
   if ((*(unsigned int *)(param_1 + 0x10) & 2) != 0) {
     return;
   }
-  if ((DAT_0049f924 != 0xb6) && (DAT_0049f924 != 0xb7 && DAT_0049f924 != 0xb8)) {
+  if (((*(int *)((unsigned char *)&DAT_0049f91c + 0x8)) != 0xb6) && ((*(int *)((unsigned char *)&DAT_0049f91c + 0x8)) != 0xb7 && (*(int *)((unsigned char *)&DAT_0049f91c + 0x8)) != 0xb8)) {
     temp_v6 = FUN_00288f78(temp_v4);
     if (temp_v6 == 2 || temp_v6 == 3) {
-      DAT_0044cdd8 = 0xf1;
+      (*(int *)((unsigned char *)&DAT_0044cdc8 + 0x10)) = 0xf1;
       FUN_00231dec(param_1);
-      DAT_0044cdd8 = DAT_0044cdd8 + 1;
+      (*(int *)((unsigned char *)&DAT_0044cdc8 + 0x10)) = (*(int *)((unsigned char *)&DAT_0044cdc8 + 0x10)) + 1;
       return;
     }
     if (temp_v6 != 0) {
@@ -110,7 +110,7 @@ void FUN_003996c8(int param_1)
     }
   }
   FUN_00232554(param_1,1);
-  DAT_0044cdd8 = 0xb;
+  (*(int *)((unsigned char *)&DAT_0044cdc8 + 0x10)) = 0xb;
   if ((*(unsigned int *)(param_1 + 0x10) & 0x20) == 0) {
     if (*(char *)(param_1 + 0x5a8d) == '\0') {
       temp_v6 = *(int *)(param_1 + 0x121d8);
@@ -181,7 +181,7 @@ LAB_003998fc:
       *(float *)(param_1 + 0x121e0) = temp_v9;
       temp_v8 = (float)VectorSignedToFloat(temp_v11,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v9 = (float)VectorSignedToFloat((int)temp_v12 + 0x78,(unsigned char)(in_fpscr >> 0x16) & 3);
-      if (!(DAT_0049f924 == 0x73 || DAT_0049f924 == 0x77)) {
+      if (!((*(int *)((unsigned char *)&DAT_0049f91c + 0x8)) == 0x73 || (*(int *)((unsigned char *)&DAT_0049f91c + 0x8)) == 0x77)) {
         NaviMain_GetState(temp_v3);
         *(float *)(param_1 + 0x121d0) = temp_v11;
         FUN_00231d2c(temp_v3);
@@ -218,9 +218,9 @@ LAB_003998fc:
     FUN_002bedb0(DAT_0044ea00,3);
   }
   FUN_00232554(param_1,0);
-  DAT_0044cdd8 = 0xf1;
+  (*(int *)((unsigned char *)&DAT_0044cdc8 + 0x10)) = 0xf1;
   FUN_00231dec(param_1);
-  DAT_0044cdd8 = DAT_0044cdd8 + 1;
+  (*(int *)((unsigned char *)&DAT_0044cdc8 + 0x10)) = (*(int *)((unsigned char *)&DAT_0044cdc8 + 0x10)) + 1;
   return;
 }
 

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00162e8c(void);
-int FUN_003fd7c0(unsigned int, int, int);
+int FUN_003fd7c0(unsigned int, int, int, float);
 
 extern int DAT_00581288; /* 0x581288 */
 
@@ -27,7 +27,7 @@ unsigned int FUN_0038af8c(void)
       return 0;
     }
     if (*(int *)(DAT_00581288 + 0x18c) != 0) {
-      FUN_003fd7c0(*(unsigned int *)(*(int *)(DAT_00581288 + 0x18c) + 4),0,2);
+      FUN_003fd7c0(*(unsigned int *)(*(int *)(DAT_00581288 + 0x18c) + 4),0,2,85.0f);
     }
   }
   return 1;

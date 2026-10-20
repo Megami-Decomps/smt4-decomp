@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0019c40c(void);
 
 typedef int romwright_code(...);
-extern int *DAT_005b4030; /* 0x5b4030 */
+extern unsigned char DAT_005b4028; /* 0x5b4028 */
 
 /* Supplied declaration required: FUN_0019c40c. */
 
@@ -25,24 +25,24 @@ int * FUN_0017fe8c(int param_1)
   if ((romwright_code *)piVar4[3] != (romwright_code *)0x0) {
     (*(romwright_code *)piVar4[3])(param_1,piVar4[4]);
   }
-  piVar3 = DAT_005b4030;
-  DAT_005b4030[6] = DAT_005b4030[6] - 1;
+  piVar3 = (*(int * *)((unsigned char *)&DAT_005b4028 + 0x8));
+  (*(int * *)((unsigned char *)&DAT_005b4028 + 0x8))[6] = (*(int * *)((unsigned char *)&DAT_005b4028 + 0x8))[6] - 1;
   piVar3[7] = piVar3[7] - *piVar4;
   if ((*(unsigned short *)(piVar4 + 2) & 0xff) < 8) {
     piVar3 = piVar4;
     FUN_0019c40c();
-    DAT_005b4030[(int)piVar3 + 0xf] = DAT_005b4030[(int)piVar3 + 0xf] - *piVar4;
+    (*(int * *)((unsigned char *)&DAT_005b4028 + 0x8))[(int)piVar3 + 0xf] = (*(int * *)((unsigned char *)&DAT_005b4028 + 0x8))[(int)piVar3 + 0xf] - *piVar4;
     piVar3 = piVar4;
     FUN_0019c40c();
-    DAT_005b4030[(int)piVar3 + 0x17] =
-         (DAT_005b4030[(int)piVar3 + 0x17] - (*piVar4 - (unsigned int)*(unsigned short *)(piVar4 + 1))) + 0x40;
+    (*(int * *)((unsigned char *)&DAT_005b4028 + 0x8))[(int)piVar3 + 0x17] =
+         ((*(int * *)((unsigned char *)&DAT_005b4028 + 0x8))[(int)piVar3 + 0x17] - (*piVar4 - (unsigned int)*(unsigned short *)(piVar4 + 1))) + 0x40;
   }
-  piVar3 = DAT_005b4030;
+  piVar3 = (*(int * *)((unsigned char *)&DAT_005b4028 + 0x8));
   temp_v0 = piVar4[5];
   piVar1 = piVar4 + 5;
   if (temp_v0 != 0) {
     if (piVar4[6] == 0) {
-      DAT_005b4030[1] = temp_v0;
+      (*(int * *)((unsigned char *)&DAT_005b4028 + 0x8))[1] = temp_v0;
       *(unsigned int *)(*piVar1 + 4) = 0;
     }
     else {
@@ -52,16 +52,16 @@ int * FUN_0017fe8c(int param_1)
   }
   else {
     if (piVar4[6] != 0) {
-      *DAT_005b4030 = piVar4[6];
+      *(*(int * *)((unsigned char *)&DAT_005b4028 + 0x8)) = piVar4[6];
       piVar3 = (int *)piVar4[6];
     }
     else {
-      DAT_005b4030[1] = 0;
+      (*(int * *)((unsigned char *)&DAT_005b4028 + 0x8))[1] = 0;
     }
     *piVar3 = 0;
   }
-  if ((int *)DAT_005b4030[2] == piVar1) {
-    DAT_005b4030[2] = 0;
+  if ((int *)(*(int * *)((unsigned char *)&DAT_005b4028 + 0x8))[2] == piVar1) {
+    (*(int * *)((unsigned char *)&DAT_005b4028 + 0x8))[2] = 0;
   }
   *(unsigned short *)(piVar4 + 2) = 0;
   piVar4[3] = 0;

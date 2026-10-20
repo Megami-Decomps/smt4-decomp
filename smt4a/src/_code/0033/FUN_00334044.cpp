@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_00588fd4; /* 0x588fd4 */
+extern unsigned char DAT_00588fd0; /* 0x588fd0 */
 
 
 unsigned int FUN_00334044(void)
@@ -14,7 +14,7 @@ unsigned int FUN_00334044(void)
   char temp_v0;
   char temp_v1;
   
-  temp_v0 = *(char *)(DAT_00588fd4 + 0x2018);
+  temp_v0 = *(char *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x2018);
   if (((temp_v0 == '\x03' || temp_v0 == '\x05') || (temp_v0 == '\x06' || temp_v0 == '\a')) ||
      ((temp_v0 == '\t' || temp_v0 == '\n') || temp_v0 == '\f')) {
     return 1;
@@ -22,9 +22,9 @@ unsigned int FUN_00334044(void)
   if (temp_v0 == '\r') {
     return 2;
   }
-  temp_v0 = *(char *)(DAT_00588fd4 + 0x2017);
+  temp_v0 = *(char *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x2017);
   if (temp_v0 == '\0') {
-    temp_v1 = *(char *)(DAT_00588fd4 + 0x1381);
+    temp_v1 = *(char *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x1381);
     if (temp_v1 == '\0') {
       return 3;
     }
@@ -43,7 +43,7 @@ unsigned int FUN_00334044(void)
     if (temp_v0 == '\x0f') {
       return 1;
     }
-    temp_v1 = *(char *)(DAT_00588fd4 + 0x1381);
+    temp_v1 = *(char *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x1381);
     if (temp_v0 == '\x0e') {
       if (temp_v1 == '\0') {
         return 3;
@@ -53,10 +53,10 @@ unsigned int FUN_00334044(void)
     if (temp_v1 != '\0') {
       return 2;
     }
-    temp_v0 = *(char *)(DAT_00588fd4 + 0x2010);
+    temp_v0 = *(char *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x2010);
   }
   else {
-    temp_v0 = *(char *)(DAT_00588fd4 + 0x2010);
+    temp_v0 = *(char *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x2010);
   }
   if (temp_v0 != '\0') {
     return 3;

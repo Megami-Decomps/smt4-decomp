@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } void_stack;
 
-extern int DAT_0043e190; /* 0x43e190 */
+extern unsigned char DAT_0043e188; /* 0x43e188 */
 
 extern unsigned int FUN_002865f8(void);
 extern int FUN_0028660c(void);
@@ -36,10 +36,10 @@ void scrComm_Message_ShowWaitLockConfirm(void)
   
   FUN_0028dc98(0);
   temp_v0 = FUN_002893d8();
-  temp_v1 = DAT_0043e190;
+  temp_v1 = (*(int *)((unsigned char *)&DAT_0043e188 + 0x8));
   if (temp_v0 == 0) {
-    if (DAT_0043e190 != 0) {
-      *(unsigned char *)(DAT_0043e190 + 0x30) = 1;
+    if ((*(int *)((unsigned char *)&DAT_0043e188 + 0x8)) != 0) {
+      *(unsigned char *)((*(int *)((unsigned char *)&DAT_0043e188 + 0x8)) + 0x30) = 1;
     }
     *(unsigned char *)(temp_v1 + 0x31) = 1;
   }

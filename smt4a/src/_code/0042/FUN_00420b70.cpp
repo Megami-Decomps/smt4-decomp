@@ -87,16 +87,12 @@ void FUN_00420b70(int param_1)
   if (*(int *)(param_1 + 0x58) != 0) {
     FUN_001aea28(DAT_0056fcc0,*(unsigned int *)(*(int *)(param_1 + 0x58) + 4));
     if (*(int **)(param_1 + 0x58) != (int *)0x0) {
-      (**(romwright_code **)(**(int **)(param_1 + 0x58) + 4))();
+      (**(romwright_code **)(**(int **)(param_1 + 0x58) + 4))(*(int **)(param_1 + 0x58));
       *(unsigned int *)(param_1 + 0x58) = 0;
     }
   }
-  temp_v0 = 0;
-  if (temp_v0 < *(int *)(param_1 + 0x448)) {
-    do {
-      FUN_001641c4();
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < *(int *)(param_1 + 0x448));
+  for (temp_v0 = 0; temp_v0 < *(int *)(param_1 + 0x448); temp_v0++) {
+    FUN_001641c4();
   }
   *(unsigned int *)(param_1 + 0x448) = 0;
   FUN_0050d778(param_1 + 0x43c,0xffffffff);

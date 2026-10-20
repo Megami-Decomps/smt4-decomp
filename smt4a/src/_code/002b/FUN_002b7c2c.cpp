@@ -1,10 +1,8 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b7c2c` (_code @ 0x2b7c2c, 0xac bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
 
-int FUN_001aea28(unsigned int);
+int FUN_001aea28(unsigned int, unsigned int);
 
 extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
 extern int DAT_00581038; /* 0x581038 */
@@ -30,16 +28,18 @@ void FUN_002b7c2c(void)
     pcVar2 = (char *)(temp_v0 + 0x5c);
     temp_v2 = 0;
     if (*pcVar2 != '\0') {
-      temp_v2 = (unsigned int)*(unsigned char *)(temp_v0 + 0x84);
+      temp_v2 = (unsigned int)*(unsigned char *)(pcVar2 + 0x28);
     }
     if (*pcVar2 != '\0' && temp_v2 != 0) {
-      temp_v2 = (unsigned int)*(unsigned char *)(temp_v0 + 0x8c);
+      temp_v2 = (unsigned int)*(unsigned char *)(pcVar2 + 0x30);
       if (temp_v2 != 0) {
-        pcVar2 = *(char **)(temp_v0 + 0x88);
+        pcVar2 = *(char **)(pcVar2 + 0x2c);
       }
-      if ((temp_v2 != 0 && pcVar2 != (char *)0x0) && (temp_v2 = 0, *(int *)(pcVar2 + 4) != 0)) {
-        FUN_001aea28(DAT_0056fcc0);
-        temp_v2 = temp_v3;
+      if (temp_v2 != 0 && pcVar2 != (char *)0x0) {
+        temp_v2 = *(unsigned int *)(pcVar2 + 4);
+        if (temp_v2 != 0) {
+          FUN_001aea28(DAT_0056fcc0,temp_v2);
+        }
       }
     }
     temp_v5 = temp_v5 + 1;
@@ -53,8 +53,7 @@ void FUN_002b7c2c(void)
         temp_v2 = *(unsigned int *)(temp_v1 + 4);
       }
       if (temp_v1 != 0 && temp_v2 != 0) {
-        FUN_001aea28(DAT_0056fcc0);
-        temp_v2 = temp_v4;
+        FUN_001aea28(DAT_0056fcc0,temp_v2);
       }
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < 7);

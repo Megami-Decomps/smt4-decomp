@@ -1,5 +1,3 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00274d14` (_code @ 0x274d14, 0x7c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
@@ -13,7 +11,7 @@ typedef struct {
 } param_2_stack;
 
 extern int *DAT_0058104c; /* 0x58104c */
-extern signed char DAT_005f1614; /* 0x5f1614 */
+extern unsigned char DAT_005f15fc; /* 0x5f15fc */
 
 /* Supplied declaration required: FUN_00152f44. */
 extern int FUN_0018719c(unsigned int);
@@ -31,7 +29,7 @@ void FUN_00274d14(int param_1,int param_2)
   piVar1 = DAT_0058104c;
   DAT_0058104c[2] = param_1;
   piVar1[3] = param_2;
-  if ((((DAT_005f1614 == '\0') && (temp_v0 = FUN_0018719c(0x49a), temp_v0 != 0)) &&
+  if (((((*(signed char *)((unsigned char *)&DAT_005f15fc + 0x18)) == '\0') && (temp_v0 = FUN_0018719c(0x49a), temp_v0 != 0)) &&
       ((temp_v0 = FUN_0018719c(0xc), temp_v0 == 0 || (temp_v0 = FUN_0018719c(0x10), temp_v0 != 0)))) &&
      (*DAT_0058104c == 0)) {
     FUN_00353b00(0);

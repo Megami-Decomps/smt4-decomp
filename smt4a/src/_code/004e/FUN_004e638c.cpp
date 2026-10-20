@@ -16,8 +16,7 @@ typedef struct {
 } param_5_stack;
 
 extern unsigned char LAB_002419a0; /* 0x2419a0 */
-extern float DAT_0057a6e0; /* 0x57a6e0 */
-extern float DAT_0057a6e4; /* 0x57a6e4 */
+extern unsigned char DAT_0057a6e4; /* 0x57a6e4 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
@@ -149,8 +148,8 @@ LAB_004e6584:
   }
   else {
     FUN_0010063a(temp_v12,temp_v6);
-    temp_v9 = DAT_0057a6e4;
-    temp_v11 = DAT_0057a6e0;
+    temp_v9 = (*(float *)((unsigned char *)&(*(float *)((unsigned char *)&DAT_0057a6e4 - 0x4)) + 0x4));
+    temp_v11 = (*(float *)((unsigned char *)&DAT_0057a6e4 - 0x4));
     if (param_3 != 5) {
       if (param_3 == 1) {
         temp_v5 = 0;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_0057f69c; /* 0x57f69c */
+extern unsigned char DAT_0057f698; /* 0x57f698 */
 
 
 void FUN_002e0798(int param_1)
@@ -14,15 +14,15 @@ void FUN_002e0798(int param_1)
   unsigned int *puVar2;
   unsigned int temp_v1;
   
-  puVar2 = (unsigned int *)(DAT_0057f69c + 0x2db8);
-  *(int *)(DAT_0057f69c + 0x2db4) = *(int *)(DAT_0057f69c + 0x2db4) + param_1;
+  puVar2 = (unsigned int *)((*(int *)((unsigned char *)&DAT_0057f698 + 0x4)) + 0x2db8);
+  *(int *)((*(int *)((unsigned char *)&DAT_0057f698 + 0x4)) + 0x2db4) = *(int *)((*(int *)((unsigned char *)&DAT_0057f698 + 0x4)) + 0x2db4) + param_1;
   temp_v0 = *puVar2 + param_1;
   *puVar2 = temp_v0;
   temp_v1 = 9999;
   if (temp_v0 < 10000) {
     temp_v1 = temp_v0;
   }
-  *(unsigned int *)(DAT_0057f69c + 0x2db8) = temp_v1;
+  *(unsigned int *)((*(int *)((unsigned char *)&DAT_0057f698 + 0x4)) + 0x2db8) = temp_v1;
   return;
 }
 

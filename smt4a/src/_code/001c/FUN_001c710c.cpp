@@ -12,7 +12,7 @@ typedef struct {
     unsigned short sp48; /* 0x48: local_48 */
 } param_2_stack;
 
-extern unsigned char DAT_006446e9; /* 0x6446e9 */
+extern unsigned char DAT_006446d0; /* 0x6446d0 */
 
 extern unsigned int FUN_001bd5f8(void);
 /* Supplied declaration required: FUN_001bdaa8. */
@@ -43,7 +43,7 @@ unsigned int FUN_001c710c(int *param_1,unsigned int param_2)
         *(char *)((int)param_1 + 0xe) = (char)param_2;
       }
       if (*(char *)((int)param_1 + 0xe) == '\0') {
-        *(unsigned char *)((int)param_1 + 0xf) = DAT_006446e9;
+        *(unsigned char *)((int)param_1 + 0xf) = (*(unsigned char *)((unsigned char *)&DAT_006446d0 + 0x19));
       }
       return temp_v2;
     }

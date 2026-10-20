@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_0044e460; /* 0x44e460 */
+extern unsigned char DAT_0044e458; /* 0x44e458 */
 
 extern unsigned int nn_dsp_CTR_DSP_ConvertProcessAddressFromDspDram(unsigned int, unsigned int, unsigned int *);
 
@@ -13,8 +13,8 @@ unsigned int FUN_00146894(unsigned int param_1,unsigned int *param_2)
 
 {
   *param_2 = 0xffffffff;
-  if (DAT_0044e460 != 0) {
-    nn_dsp_CTR_DSP_ConvertProcessAddressFromDspDram(DAT_0044e460,param_1,param_2);
+  if ((*(int *)((unsigned char *)&DAT_0044e458 + 0x8)) != 0) {
+    nn_dsp_CTR_DSP_ConvertProcessAddressFromDspDram((*(int *)((unsigned char *)&DAT_0044e458 + 0x8)),param_1,param_2);
   }
   return 0xc8a0a7f8;
 }

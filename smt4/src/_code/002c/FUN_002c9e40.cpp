@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019faa0(int, int);
+int FUN_0019faa0(int, int, float);
 int FUN_0024dcec(int);
 int FUN_0024dcfc(unsigned int);
 int FUN_00263588(unsigned int);
@@ -51,7 +51,7 @@ void FUN_002c9e40(void)
       *(unsigned int *)(temp_v0 + 0x734) = 0;
     }
     FUN_00263c80(temp_v0 + 0x58);
-    FUN_0019faa0(0,1);
+    FUN_0019faa0(0,1,10.0f);
     FUN_002c415c(DAT_004342c8);
     DAT_004342c8 = 0;
   }

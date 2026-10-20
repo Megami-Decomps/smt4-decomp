@@ -18,14 +18,11 @@ unsigned int FUN_004fff5c(int *param_1,unsigned int param_2)
   temp_v2 = 0;
   temp_v1 = *param_1;
   temp_v3 = *(unsigned int *)(temp_v1 + 0x1c);
-  if (temp_v3 != 0) {
-    do {
-      temp_v0 = FUN_0019a37c(*(unsigned int *)(*(int *)(temp_v1 + 0x18) + temp_v2 * 8),param_2,0x40);
-      if (temp_v0 == 0) {
-        return *(unsigned int *)(*(int *)(temp_v1 + 0x18) + temp_v2 * 8 + 4);
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < temp_v3);
+  for (temp_v2 = 0; temp_v2 < temp_v3; temp_v2++) {
+    temp_v0 = FUN_0019a37c(*(unsigned int *)(*(int *)(temp_v1 + 0x18) + temp_v2 * 8),param_2,0x40);
+    if (temp_v0 == 0) {
+      return *(unsigned int *)(*(int *)(temp_v1 + 0x18) + temp_v2 * 8 + 4);
+    }
   }
   return 0;
 }

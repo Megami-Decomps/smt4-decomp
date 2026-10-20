@@ -26,7 +26,7 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned char DAT_00404c48; /* 0x404c48 */
-extern unsigned int DAT_0044cdd4; /* 0x44cdd4 */
+extern unsigned char DAT_0044cdc8; /* 0x44cdc8 */
 extern unsigned int DAT_0044ea00; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -75,7 +75,7 @@ void FUN_0039ba2c(int param_1)
   temp_v2 = FUN_002beda4(param_1 + 0xa88,(int)temp_v3);
   VectorSignedToFloat(temp_v2 + *(short *)(temp_v1 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat((int)*(short *)(temp_v1 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_002be5a4(2,DAT_0044cdd4,temp_v4);
+  FUN_002be5a4(2,(*(unsigned int *)((unsigned char *)&DAT_0044cdc8 + 0xc)),temp_v4);
   FUN_002bedb0(DAT_0044ea00,3);
   FUN_002bf538();
   FUN_002bf818(param_1 + 0xa88);

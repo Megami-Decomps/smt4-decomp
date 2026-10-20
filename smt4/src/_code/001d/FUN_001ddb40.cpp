@@ -9,8 +9,7 @@ int FUN_002b7bca(unsigned int, unsigned int, int, unsigned char *);
 int FUN_002c4c2c(int);
 int FUN_002c58c8(int, int);
 
-extern unsigned char LAB_001f62dc; /* 0x1f62dc */
-extern signed char DAT_0043dd21; /* 0x43dd21 */
+extern unsigned char DAT_0043dd20; /* 0x43dd20 */
 
 /* Supplied declaration required: FUN_00297410. */
 /* Supplied declaration required: FUN_002b7bca. */
@@ -28,16 +27,16 @@ void FUN_001ddb40(void)
   unsigned int temp_v0;
   unsigned int temp_v1;
   
-  if (DAT_0043dd21 < '\x01') {
+  if ((*(signed char *)((unsigned char *)&DAT_0043dd20 + 0x1)) <= 0) {
     FUN_002c4c2c(0x1e);
     FUN_002c58c8(0x1e,0);
     FUN_00297410(0x38);
     temp_v0 = FUN_002c0cec(0x38,0);
     temp_v1 = FUN_002c0cc4();
     temp_v0 = FUN_002c0c74(temp_v0);
-    FUN_002b7bca(temp_v1,temp_v0,0x72,&LAB_001f62dc);
+    FUN_002b7bca(temp_v1,temp_v0,0x72,(unsigned char *)0x1f62dc);
   }
-  DAT_0043dd21 = DAT_0043dd21 + '\x01';
+  (*(signed char *)((unsigned char *)&DAT_0043dd20 + 0x1)) = (*(signed char *)((unsigned char *)&DAT_0043dd20 + 0x1)) + '\x01';
   return;
 }
 

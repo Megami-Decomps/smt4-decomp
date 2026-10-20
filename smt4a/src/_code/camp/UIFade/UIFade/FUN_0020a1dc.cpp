@@ -17,7 +17,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-extern int DAT_0057f288; /* 0x57f288 */
+extern unsigned char DAT_0057f284; /* 0x57f284 */
 extern int DAT_0059dbb4; /* 0x59dbb4 */
 
 /* Supplied declaration required: FUN_00157558. */
@@ -37,7 +37,7 @@ void FUN_0020a1dc(unsigned int param_1)
   int temp_v3;
   int *piVar5;
   
-  if (0.0f < *(float *)(DAT_0057f288 + 0xc)) {
+  if (0.0f < *(float *)((*(int *)((unsigned char *)&DAT_0057f284 + 0x4)) + 0xc)) {
     FUN_00157558(DAT_0059dbb4);
     temp_v0 = DAT_0059dbb4;
     temp_v1 = FUN_001692ac(1,0);

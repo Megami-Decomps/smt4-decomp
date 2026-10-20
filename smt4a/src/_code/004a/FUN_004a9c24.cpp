@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002ae554(int, int);
 
-extern int DAT_0057a9c8; /* 0x57a9c8 */
+extern unsigned char DAT_0057a9b8; /* 0x57a9b8 */
 
 /* Supplied declaration required: FUN_002ae554. */
 
@@ -15,7 +15,7 @@ void FUN_004a9c24(unsigned int param_1,short param_2)
 
 {
 /* irregular: 1 native warning(s); review required */
-  FUN_002ae554(DAT_0057a9c8 + 0x28c4,(int)param_2);
+  FUN_002ae554((*(int *)((unsigned char *)&DAT_0057a9b8 + 0x10)) + 0x28c4,(int)param_2);
   return;
 }
 

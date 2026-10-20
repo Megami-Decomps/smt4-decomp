@@ -20,7 +20,7 @@ typedef struct {
     unsigned int sp14; /* 0x14: local_14 */
 } param_2_stack;
 
-extern int DAT_005949dc; /* 0x5949dc */
+extern unsigned char DAT_005949d8; /* 0x5949d8 */
 
 /* Supplied declaration required: FUN_00108548. */
 /* Supplied declaration required: FUN_00134f44. */
@@ -66,7 +66,7 @@ void FUN_002ef268(int *param_1,int param_2)
   if (((int)temp_v3 != 0) ||
      (temp_v3 = (**(romwright_code **)(*param_1 + 0x30))(param_1),
      temp_v2 = (unsigned int)((unsigned long long)temp_v3 >> 0x20), (int)temp_v3 != 0)) {
-    FUN_002efb9e(DAT_005949dc + 0x160,temp_v2,0,0x100);
+    FUN_002efb9e((*(int *)((unsigned char *)&DAT_005949d8 + 0x4)) + 0x160,temp_v2,0,0x100);
     if ((param_2 != 2) && (param_2 != 3)) {
       FUN_00108548(param_1);
     }

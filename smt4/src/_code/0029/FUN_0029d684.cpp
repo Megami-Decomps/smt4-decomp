@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-extern int DAT_0044e144; /* 0x44e144 */
+extern unsigned char DAT_0044e140; /* 0x44e140 */
 
 /* Supplied declaration required: FUN_00258a24. */
 /* Supplied declaration required: FUN_00293ba8. */
@@ -28,12 +28,12 @@ void FUN_0029d684(int param_1)
   int temp_v1;
   int temp_v2;
   
-  temp_v1 = DAT_0044e144;
-  if (*(int *)(DAT_0044e144 + 0x12dc) == 2 || *(int *)(DAT_0044e144 + 0x12dc) == 3) {
+  temp_v1 = (*(int *)((unsigned char *)&DAT_0044e140 + 0x4));
+  if (*(int *)((*(int *)((unsigned char *)&DAT_0044e140 + 0x4)) + 0x12dc) == 2 || *(int *)((*(int *)((unsigned char *)&DAT_0044e140 + 0x4)) + 0x12dc) == 3) {
     return;
   }
   if (param_1 != 0) {
-    *(unsigned char *)(DAT_0044e144 + 0x1e60) = 0;
+    *(unsigned char *)((*(int *)((unsigned char *)&DAT_0044e140 + 0x4)) + 0x1e60) = 0;
     temp_v2 = *(int *)(temp_v1 + 0x12dc);
     if ((temp_v2 == 4 || temp_v2 == 5) || temp_v2 == 6) {
       *(unsigned int *)(temp_v1 + 0x12e0) = 4;
@@ -45,9 +45,9 @@ void FUN_0029d684(int param_1)
     FUN_002bd8e8(temp_v1 + 0x7ec,4,0);
   }
   else {
-    temp_v0 = *(char *)(DAT_0044e144 + 0x1e66);
+    temp_v0 = *(char *)((*(int *)((unsigned char *)&DAT_0044e140 + 0x4)) + 0x1e66);
     if (((temp_v0 == '\b') || (temp_v0 == '\t' || temp_v0 == '\n')) || (temp_v0 == '\v' || temp_v0 == '\a')) {
-      *(unsigned int *)(DAT_0044e144 + 0x12e8) = 1;
+      *(unsigned int *)((*(int *)((unsigned char *)&DAT_0044e140 + 0x4)) + 0x12e8) = 1;
       FUN_00293ba8();
     }
   }

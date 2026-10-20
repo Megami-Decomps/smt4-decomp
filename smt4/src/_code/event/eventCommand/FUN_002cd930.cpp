@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00259324(unsigned int, unsigned int, int);
+int FUN_00259324(unsigned int, unsigned int, int, float);
 
 extern int DAT_0043e088; /* 0x43e088 */
 
@@ -25,7 +25,7 @@ unsigned char FUN_002cd930(void)
   if (temp_v0 == 0) {
     temp_v1 = FUN_00296cc8(0);
     temp_v2 = FUN_00296cc8(1);
-    FUN_00259324(temp_v1,temp_v2,1);
+    FUN_00259324(temp_v1,temp_v2,1,1.0f);
     return 0;
   }
   return *(int *)(DAT_0043e088 + 0x10) == *(int *)(DAT_0043e088 + 0x14);

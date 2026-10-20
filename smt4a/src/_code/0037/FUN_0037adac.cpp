@@ -23,8 +23,8 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_4_stack;
 
-extern unsigned char DAT_00558024; /* 0x558024 */
-extern unsigned int DAT_005b40c4; /* 0x5b40c4 */
+extern unsigned char DAT_00557fcc; /* 0x557fcc */
+extern unsigned char DAT_005b40b4; /* 0x5b40b4 */
 
 /* Supplied declaration required: FUN_00188374. */
 extern unsigned char *FUN_002bee0c(unsigned char **);
@@ -72,7 +72,7 @@ unsigned int FUN_0037adac(int param_1,int param_2,unsigned int param_3,unsigned 
   temp_v5 = 0;
   temp_v6 = 0;
   puVar5 = (unsigned char *)0xe7e3ffff;
-  temp_v0 = &DAT_00558024;
+  temp_v0 = &(*(unsigned char *)((unsigned char *)&DAT_00557fcc + 0x58));
   temp_v1 = 0x55809c;
   if (param_1 != 0) {
     if (param_1 != 1) {
@@ -126,7 +126,7 @@ unsigned int FUN_0037adac(int param_1,int param_2,unsigned int param_3,unsigned 
         }
       }
       else {
-        DAT_005b40c4 = 0xc8804464;
+        (*(unsigned int *)((unsigned char *)&DAT_005b40b4 + 0x10)) = 0xc8804464;
       }
       if (param_1 != 0) {
         if (param_1 != 1) {

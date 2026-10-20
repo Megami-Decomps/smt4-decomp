@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001af330(int *, int);
-int aeabi_uidivmod(int, int);
+unsigned long long aeabi_uidivmod(int, int);
 
 /* Supplied declaration required: FUN_001af330. */
 /* Supplied declaration required: aeabi_uidivmod. */
@@ -25,7 +25,7 @@ nn_os_detail_BlockingQueueBase_nn_os_CriticalSection_TryDequeue(int *param_1,uns
   nn_os_CriticalSection_Enter((unsigned int)piVar1);
   if (0 < param_1[10]) {
     *param_2 = *(unsigned int *)(*param_1 + param_1[9] * 4);
-    aeabi_uidivmod(param_1[9] + 1,param_1[8]);
+    temp_v0 = (int)(aeabi_uidivmod(param_1[9] + 1,param_1[8]) >> 0x20);
     param_1[9] = temp_v0;
     param_1[10] = param_1[10] - 1;
     if (0 < param_1[0xc]) {

@@ -6,7 +6,7 @@ extern "C" {
 
 int software_interrupt(int);
 
-extern signed char DAT_00647634; /* 0x647634 */
+extern unsigned char DAT_00647630; /* 0x647630 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 extern unsigned int FUN_0043b2a4(unsigned int, unsigned int);
@@ -23,7 +23,7 @@ unsigned int FUN_0043afa0(int param_1)
   }
   else {
     software_interrupt(0x23);
-    if (DAT_00647634 == '\0') {
+    if ((*(signed char *)((unsigned char *)&DAT_00647630 + 0x4)) == '\0') {
       temp_v0 = 0xd8a0a3f8;
       *(unsigned int *)(param_1 + 4) = 0;
     }

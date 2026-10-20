@@ -1,5 +1,3 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00460c94` (_code @ 0x460c94, 0x78 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
@@ -42,7 +40,8 @@ void FUN_00460c94(int *param_1,int param_2,int param_3)
   }
                     /* WARNING: Could not recover jumptable at 0x00460d08. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-  (**(romwright_code **)(*(int *)param_1[5] + 0x40))((int *)param_1[5],param_2);
+  int *p = (int *)param_1[5];
+  (**(romwright_code **)(*p + 0x40))(p,param_2,param_3);
   return;
 }
 

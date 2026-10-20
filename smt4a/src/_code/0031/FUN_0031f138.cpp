@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_0057f69c; /* 0x57f69c */
+extern unsigned char DAT_0057f698; /* 0x57f698 */
 
 
 unsigned int FUN_0031f138(unsigned int param_1,unsigned int param_2)
@@ -18,7 +18,7 @@ unsigned int FUN_0031f138(unsigned int param_1,unsigned int param_2)
     temp_v0 = 0;
   }
   else {
-    temp_v1 = DAT_0057f69c + param_1 * 0x50;
+    temp_v1 = (*(int *)((unsigned char *)&DAT_0057f698 + 0x4)) + param_1 * 0x50;
     if ((int)param_2 >= 0x40) {
       temp_v2 = *(unsigned short *)(temp_v1 + 0x5f42) | 0xfc;
     }

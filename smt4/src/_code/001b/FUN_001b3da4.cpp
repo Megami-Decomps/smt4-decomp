@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002df5f8(void);
 
-extern unsigned int *DAT_004474f4; /* 0x4474f4 */
+extern unsigned char DAT_004474f0; /* 0x4474f0 */
 
 /* Supplied declaration required: FUN_002df5f8. */
 
@@ -17,8 +17,8 @@ void FUN_001b3da4(void)
 /* irregular: 1 native warning(s); review required */
   unsigned int *puVar1;
   
-  puVar1 = DAT_004474f4;
-  *DAT_004474f4 = 0;
+  puVar1 = (*(unsigned int * *)((unsigned char *)&DAT_004474f0 + 0x4));
+  *(*(unsigned int * *)((unsigned char *)&DAT_004474f0 + 0x4)) = 0;
   puVar1[1] = 0;
   puVar1[2] = 0;
   puVar1[0x31] = 0;

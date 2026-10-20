@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019a5a0(void);
+int FUN_0019a5a0(int);
 int FUN_0019a7f4(int, int);
 int FUN_001add24(int);
 int FUN_002c2160(int);
@@ -45,7 +45,7 @@ void FUN_0032b04c(void)
     FUN_0037b450();
   }
   if ((*(int *)((unsigned char *)&DAT_0058916c + 0x4)) != 0) {
-    FUN_0019a5a0();
+    FUN_0019a5a0((*(int *)((unsigned char *)&DAT_0058916c + 0x4)));
     (*(int *)((unsigned char *)&DAT_0058916c + 0x4)) = 0;
   }
   return;

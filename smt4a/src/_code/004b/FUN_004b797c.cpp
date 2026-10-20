@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0019a5a0(undefined4);
 int FUN_0019c364(undefined4);
-int FUN_001f4e20(int);
+int FUN_001f4e20(int, int);
 int FUN_0020401c(int);
 int FUN_00284f90(int);
 int FUN_002a49e4(unsigned int, int);
@@ -56,7 +56,7 @@ void FUN_004b797c(fn_004b797c_arg0 *param_1)
     param_1->field_0x115c = 0;
     FUN_0019a5a0(param_1->field_0x1160);
     param_1->field_0x1160 = 0;
-    FUN_001f4e20(0);
+    FUN_001f4e20(0,0);
     FUN_002a49e4(*(unsigned int *)&param_1->field_0x113c,
                  *(unsigned char *)((int)param_1->field_0x1118 + 0x3f));
     param_1->field_0x28 = 5;

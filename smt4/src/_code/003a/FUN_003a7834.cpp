@@ -36,7 +36,7 @@ void FUN_003a7834(int param_1)
   temp_v0 = FUN_002bed98(temp_v2);
   temp_v1 = FUN_002beda4(temp_v2);
   FUN_00231240(param_1 + 200,temp_v1,temp_v0);
-  if ((*(char *)(param_1 + 0x186) != '\0') && (temp_v2 = FUN_00231184(), temp_v2 != 0)) {
+  if ((*(signed char *)(temp_v2 + 0x8a) != '\0') && (temp_v2 = FUN_00231184(), temp_v2 != 0)) {
     FUN_002a0cc8(0);
     *(unsigned int *)(param_1 + 0x14) = 2;
     *(unsigned int *)(param_1 + 0x18) = 0;

@@ -1,5 +1,3 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0028122c` (_code @ 0x28122c, 0x1fc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
@@ -17,12 +15,9 @@ void FUN_0028122c(float *param_1,float *param_2,float *param_3)
   param_1[8] = param_2[8] * *param_3 + param_2[9] * param_3[4] + param_2[10] * param_3[8];
   param_1[9] = param_2[8] * param_3[1] + param_2[9] * param_3[5] + param_2[10] * param_3[9];
   param_1[10] = param_2[8] * param_3[2] + param_2[9] * param_3[6] + param_2[10] * param_3[10];
-  param_1[0xc] = param_2[0xd] * param_3[4] + param_2[0xe] * param_3[8] +
-                 param_3[0xc] + param_2[0xc] * *param_3;
-  param_1[0xd] = param_2[0xd] * param_3[5] + param_2[0xe] * param_3[9] +
-                 param_3[0xd] + param_2[0xc] * param_3[1];
-  param_1[0xe] = param_2[0xd] * param_3[6] + param_2[0xe] * param_3[10] +
-                 param_3[0xe] + param_2[0xc] * param_3[2];
+  param_1[0xc] = param_3[0xc] + param_2[0xc] * param_3[0] + param_2[0xd] * param_3[4] + param_2[0xe] * param_3[8];
+  param_1[0xd] = param_3[0xd] + param_2[0xc] * param_3[1] + param_2[0xd] * param_3[5] + param_2[0xe] * param_3[9];
+  param_1[0xe] = param_3[0xe] + param_2[0xc] * param_3[2] + param_2[0xd] * param_3[6] + param_2[0xe] * param_3[10];
   return;
 }
 

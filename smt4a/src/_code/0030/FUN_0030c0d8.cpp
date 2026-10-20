@@ -14,12 +14,11 @@ unsigned int FUN_0030c0d8(unsigned int param_1,int param_2,int param_3)
   int temp_v0;
   
   temp_v0 = FUN_00307eb0(param_2,param_3);
-  if ((temp_v0 == 0) &&
-     ((temp_v0 = FUN_002f34ac(param_2,param_3), temp_v0 == 0 ||
-      (*(unsigned char *)(param_3 + 0x20) <= *(unsigned char *)(param_2 + 0x20))))) {
-    return 0;
+  if (temp_v0 != 0 || (temp_v0 = FUN_002f34ac(param_2,param_3), temp_v0 != 0 &&
+      *(unsigned char *)(param_2 + 0x20) < *(unsigned char *)(param_3 + 0x20))) {
+    return 1;
   }
-  return 1;
+  return 0;
 }
 
 } /* extern "C" */

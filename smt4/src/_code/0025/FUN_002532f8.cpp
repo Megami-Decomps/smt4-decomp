@@ -39,7 +39,7 @@ void FUN_002532f8(int param_1)
       if (*(char *)(param_1 + temp_v1) == '\0') {
         rt_memcpy(temp_v0 + 0x15c,param_1,temp_v1 + 1);
         *(unsigned char *)(temp_v0 + 0x21) = 1;
-        if (temp_v1 < 0x5c) {
+        if (temp_v1 <= 0x5b) {
           *(unsigned char *)(temp_v0 + 0x22) = 0;
         }
         else {
@@ -49,7 +49,8 @@ void FUN_002532f8(int param_1)
         FUN_002bd8e8(temp_v0 + 0xd0,2,0);
         temp_v1 = FUN_002beda4(temp_v0 + 0xd0);
         *(int *)(temp_v0 + 0x18) = temp_v1;
-        *(int *)(temp_v0 + 0x1c) = temp_v1 + *(int *)(temp_v0 + 0x14) + 0x2a;
+        temp_v1 = temp_v1 + *(int *)(temp_v0 + 0x14);
+        *(int *)(temp_v0 + 0x1c) = temp_v1 + 0x2a;
         if (*(int *)(temp_v0 + 8) == 3) {
           *(unsigned int *)(temp_v0 + 8) = 2;
         }

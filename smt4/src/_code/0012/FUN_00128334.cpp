@@ -7,7 +7,6 @@ extern "C" {
 int FUN_002c52f8(void);
 
 extern unsigned char DAT_00465710; /* 0x465710 */
-extern int DAT_00465714; /* 0x465714 */
 extern int DAT_00472a50; /* 0x472a50 */
 
 extern unsigned int FUN_002c1364(unsigned int *, char *, unsigned int, unsigned int);
@@ -24,7 +23,7 @@ unsigned int FUN_00128334(void)
   unsigned int temp_v1;
   unsigned int temp_v2;
   
-  if (DAT_00465714 == 0) {
+  if ((*(int *)((unsigned char *)&DAT_00465710 + 0x4)) == 0) {
     temp_v0 = FUN_002c1398();
     if (temp_v0 < 0) {
       FUN_002c52f8();
@@ -46,7 +45,7 @@ unsigned int FUN_00128334(void)
       return 0xd92103fb;
     }
   }
-  DAT_00465714 = DAT_00465714 + 1;
+  (*(int *)((unsigned char *)&DAT_00465710 + 0x4)) = (*(int *)((unsigned char *)&DAT_00465710 + 0x4)) + 1;
   return 0;
 }
 

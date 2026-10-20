@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_0057f69c; /* 0x57f69c */
+extern unsigned char DAT_0057f698; /* 0x57f698 */
 
 
 void FUN_00268450(int param_1)
@@ -13,7 +13,7 @@ void FUN_00268450(int param_1)
   if (param_1 >= 100) {
     param_1 = 99;
   }
-  *(int *)(DAT_0057f69c + 0x5448) = param_1;
+  *(int *)((*(int *)((unsigned char *)&DAT_0057f698 + 0x4)) + 0x5448) = param_1;
   return;
 }
 

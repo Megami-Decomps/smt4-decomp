@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_5_stack;
 
-extern unsigned int DAT_00465124; /* 0x465124 */
+extern unsigned char DAT_00465120; /* 0x465120 */
 
 /* Supplied declaration required: FUN_002c3944. */
 /* Supplied declaration required: FUN_002c5300. */
@@ -25,12 +25,12 @@ int FUN_002c498c(int param_1,unsigned int param_2,unsigned int param_3,unsigned 
 
 {
 /* irregular: 2 native warning(s); review required */
-  nn_os_CriticalSection_Enter(DAT_00465124);
+  nn_os_CriticalSection_Enter((*(unsigned int *)((unsigned char *)&DAT_00465120 + 0x4)));
   FUN_002c5300(param_1,param_2,param_3,param_4,param_5);
   if (param_1 != 0) {
     FUN_002c3944();
   }
-  nn_os_CriticalSection_Leave(DAT_00465124);
+  nn_os_CriticalSection_Leave((*(unsigned int *)((unsigned char *)&DAT_00465120 + 0x4)));
   return param_1;
 }
 

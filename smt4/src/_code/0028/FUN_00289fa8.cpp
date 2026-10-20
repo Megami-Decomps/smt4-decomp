@@ -9,7 +9,7 @@ typedef struct {
     unsigned int sp14; /* 0x14: local_14 */
 } param_3_stack;
 
-extern int DAT_00439ca8; /* 0x439ca8 */
+extern unsigned char DAT_00439c88; /* 0x439c88 */
 
 
 unsigned int FUN_00289fa8(unsigned int param_1,unsigned char param_2,unsigned char param_3)
@@ -30,9 +30,9 @@ unsigned int FUN_00289fa8(unsigned int param_1,unsigned char param_2,unsigned ch
   temp_v0 = 0xffffffff;
   temp_v1 = 0;
   do {
-    temp_v4 = (int)*(char *)(DAT_00439ca8 + temp_v1 + 0xe01c);
+    temp_v4 = (int)*(char *)((*(int *)((unsigned char *)&DAT_00439c88 + 0x20)) + temp_v1 + 0xe01c);
     if (temp_v4 - 1U < 7) {
-      temp_v4 = DAT_00439ca8 + temp_v1 * 0xa0 + temp_v4 * 0x14;
+      temp_v4 = (*(int *)((unsigned char *)&DAT_00439c88 + 0x20)) + temp_v1 * 0xa0 + temp_v4 * 0x14;
       temp_v5 = 0;
       if (*(float *)(temp_v4 + 0xd5f8) == in_s0) {
         temp_v5 = *(float *)(temp_v4 + 0xd5fc) == in_s1;
@@ -52,15 +52,15 @@ unsigned int FUN_00289fa8(unsigned int param_1,unsigned char param_2,unsigned ch
   temp_v2 = 0;
   do {
     temp_v1 = temp_v2;
-    if (*(char *)(DAT_00439ca8 + temp_v1 + 0xe01c) < '\x01') break;
+    if (*(char *)((*(int *)((unsigned char *)&DAT_00439c88 + 0x20)) + temp_v1 + 0xe01c) < '\x01') break;
     temp_v2 = temp_v1 + 1;
     temp_v1 = temp_v0;
   } while ((int)temp_v2 < 0x10);
 LAB_0028a054:
   if (temp_v1 < 0x11) {
-    temp_v4 = DAT_00439ca8 + temp_v1;
+    temp_v4 = (*(int *)((unsigned char *)&DAT_00439c88 + 0x20)) + temp_v1;
     if (*(char *)(temp_v4 + 0xe01c) < 8) {
-      temp_v3 = DAT_00439ca8 + temp_v1 * 0xa0 + *(char *)(temp_v4 + 0xe01c) * 0x14;
+      temp_v3 = (*(int *)((unsigned char *)&DAT_00439c88 + 0x20)) + temp_v1 * 0xa0 + *(char *)(temp_v4 + 0xe01c) * 0x14;
       *(unsigned char *)(temp_v3 + 0xd618) = 1;
       *(unsigned char *)(temp_v3 + 0xd619) = param_3;
       *(float *)(temp_v3 + 0xd60c) = in_s0;

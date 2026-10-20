@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_00588014; /* 0x588014 */
+extern unsigned char DAT_00588010; /* 0x588010 */
 
 
 void FUN_0024b078(void)
@@ -13,10 +13,10 @@ void FUN_0024b078(void)
   int temp_v0;
   
   temp_v0 = 0;
-  if (DAT_00588014 != 0) {
-    temp_v0 = *(int *)(DAT_00588014 + 8);
+  if ((*(int *)((unsigned char *)&DAT_00588010 + 0x4)) != 0) {
+    temp_v0 = *(int *)((*(int *)((unsigned char *)&DAT_00588010 + 0x4)) + 8);
   }
-  if (DAT_00588014 == 0 || temp_v0 == 0) {
+  if ((*(int *)((unsigned char *)&DAT_00588010 + 0x4)) == 0 || temp_v0 == 0) {
     return;
   }
   *(unsigned int *)(temp_v0 + 0x20) = *(unsigned int *)(temp_v0 + 0x20) | 0x80;

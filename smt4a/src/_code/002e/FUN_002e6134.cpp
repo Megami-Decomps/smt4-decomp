@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00166f80(unsigned int);
 
-extern int DAT_0057f58c; /* 0x57f58c */
+extern unsigned char DAT_0057f588; /* 0x57f588 */
 
 /* Supplied declaration required: FUN_00166f80. */
 
@@ -18,10 +18,10 @@ void FUN_002e6134(void)
   unsigned int *puVar1;
   int temp_v0;
   
-  temp_v0 = DAT_0057f58c;
-  if ((DAT_0057f58c != 0) && (*(char *)(DAT_0057f58c + 0x95) == '\x02')) {
-    puVar1 = (unsigned int *)(DAT_0057f58c + 0xc);
-    *(unsigned char *)(DAT_0057f58c + 0x95) = 0;
+  temp_v0 = (*(int *)((unsigned char *)&DAT_0057f588 + 0x4));
+  if (((*(int *)((unsigned char *)&DAT_0057f588 + 0x4)) != 0) && (*(char *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x4)) + 0x95) == '\x02')) {
+    puVar1 = (unsigned int *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x4)) + 0xc);
+    *(unsigned char *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x4)) + 0x95) = 0;
     if ((*puVar1 & 0x20) == 0) {
       FUN_00166f80(*(unsigned int *)(temp_v0 + 4));
       return;

@@ -46,11 +46,11 @@ void FUN_002ebaec(int param_1,int param_2,int param_3,int param_4)
     else {
       *(char *)(temp_v0 + 10) = (char)param_3;
     }
-    if (param_4 != 0) {
-      *(char *)(temp_v0 + 0xb) = (char)param_4 + '\x01';
+    if (param_4 == 0) {
+      *(unsigned char *)(temp_v0 + 0xb) = 1;
     }
     else {
-      *(unsigned char *)(temp_v0 + 0xb) = 1;
+      *(char *)(temp_v0 + 0xb) = (char)param_4 + '\x01';
     }
     return;
   }

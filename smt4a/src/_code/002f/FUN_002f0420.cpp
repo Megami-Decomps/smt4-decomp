@@ -25,7 +25,7 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_3_stack;
 
-extern int DAT_00588fd4; /* 0x588fd4 */
+extern unsigned char DAT_00588fd0; /* 0x588fd0 */
 
 extern unsigned int FUN_00192748(unsigned int);
 extern unsigned int FUN_00192798(void);
@@ -71,17 +71,17 @@ void FUN_002f0420(int param_1,unsigned int param_2,short *param_3)
   unsigned int temp_v15;
   unsigned int temp_v16;
   
-  temp_v1 = DAT_00588fd4;
+  temp_v1 = (*(int *)((unsigned char *)&DAT_00588fd0 + 0x4));
   temp_v3 = 8;
-  psVar13 = (short *)(DAT_00588fd4 + 0x1390);
+  psVar13 = (short *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x1390);
   if (param_1 != 0) {
-    psVar13 = (short *)(DAT_00588fd4 + 0x19d0);
+    psVar13 = (short *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x19d0);
   }
-  if (*(short *)(DAT_00588fd4 + 0x1390) < 0) {
+  if (*(short *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x1390) < 0) {
     temp_v3 = FUN_003dfd5c();
   }
-  else if (0 < *(short *)(DAT_00588fd4 + 0x1390)) {
-    temp_v4 = *(char *)(DAT_00588fd4 + 0x2017);
+  else if (0 < *(short *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x1390)) {
+    temp_v4 = *(char *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x2017);
     if (temp_v4 != '\x04') {
       if ((temp_v4 != '\a' && temp_v4 != '\x10') && temp_v4 != '\x11') {
         temp_v3 = FUN_004bd21c(0);
@@ -126,10 +126,10 @@ void FUN_002f0420(int param_1,unsigned int param_2,short *param_3)
     puVar7 = (unsigned int *)0x0;
   }
   FUN_0035da20(puVar7,temp_v9);
-  temp_v9 = DAT_00588fd4;
+  temp_v9 = (*(int *)((unsigned char *)&DAT_00588fd0 + 0x4));
   temp_v4 = *(char *)(temp_v1 + 0x2018);
   if ((temp_v4 == '\x06' || temp_v4 == '\a') || temp_v4 == '\f') {
-    *(unsigned int *)(DAT_00588fd4 + 0x1374) = 0;
+    *(unsigned int *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x1374) = 0;
     FUN_0021af2c();
     *(unsigned char *)(temp_v9 + 0x2014) = 0;
   }
@@ -137,7 +137,7 @@ void FUN_002f0420(int param_1,unsigned int param_2,short *param_3)
     *(unsigned int *)(temp_v1 + 0x1374) = 1;
     FUN_0021af2c();
   }
-  temp_v9 = DAT_00588fd4;
+  temp_v9 = (*(int *)((unsigned char *)&DAT_00588fd0 + 0x4));
   if (*psVar13 < 1) {
     FUN_00230d2c();
     return;
@@ -147,14 +147,14 @@ void FUN_002f0420(int param_1,unsigned int param_2,short *param_3)
     FUN_002a7104(psVar13 + 0x50);
   }
   else {
-    if (*(int *)(DAT_00588fd4 + 0x20c0) == 0) {
-      temp_v5 = FUN_001a6f60(*(unsigned int *)(DAT_00588fd4 + 0x20bc),0);
+    if (*(int *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x20c0) == 0) {
+      temp_v5 = FUN_001a6f60(*(unsigned int *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x20bc),0);
       temp_v6 = FUN_00192798();
       *(unsigned int *)(temp_v9 + 0x20c0) = temp_v6;
       temp_v5 = FUN_00192748(temp_v5);
       *(unsigned int *)(temp_v9 + 0x20c4) = temp_v5;
     }
-    temp_v2 = DAT_00588fd4;
+    temp_v2 = (*(int *)((unsigned char *)&DAT_00588fd0 + 0x4));
     temp_v11 = 0;
     temp_v12 = 0xffffffff;
     temp_v0 = *(short *)(temp_v9 + 0x1390);

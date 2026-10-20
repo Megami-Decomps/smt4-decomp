@@ -9,7 +9,7 @@ int FUN_003e48dc(unsigned int);
 int FUN_003e4e4c(int);
 int FUN_004bd410(void);
 
-extern int DAT_0057f590; /* 0x57f590 */
+extern unsigned char DAT_0057f588; /* 0x57f588 */
 
 extern int FUN_0015688c(void);
 /* Supplied declaration required: FUN_001846d0. */
@@ -35,14 +35,14 @@ unsigned int FUN_003bf938(void)
   unsigned int temp_v7;
   int temp_v8;
   
-  temp_v1 = DAT_0057f590;
+  temp_v1 = (*(int *)((unsigned char *)&DAT_0057f588 + 0x8));
   temp_v3 = FUN_002deb84();
-  temp_v8 = DAT_0057f590;
+  temp_v8 = (*(int *)((unsigned char *)&DAT_0057f588 + 0x8));
   if ((temp_v3 == 0x1e) &&
-     (temp_v0 = *(char *)(DAT_0057f590 + 0x8d), (temp_v0 == '\0' || temp_v0 == '\x02') || temp_v0 == '\x01')
+     (temp_v0 = *(char *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0x8d), (temp_v0 == '\0' || temp_v0 == '\x02') || temp_v0 == '\x01')
      ) {
-    temp_v3 = DAT_0057f590 + 0xb00;
-    *(unsigned char *)(DAT_0057f590 + 0x8d) = 4;
+    temp_v3 = (*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0xb00;
+    *(unsigned char *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0x8d) = 4;
     FUN_001846d0(temp_v3,2);
     temp_v3 = 0;
     do {

@@ -67,7 +67,7 @@ unsigned int FUN_002f08d4(void)
     } while (temp_v1 < temp_v6 + temp_v7);
   }
   temp_v1 = FUN_002939f4();
-  if (*(char *)(temp_v1 + 0x49c5) != '\0') {
+  if (*(signed char *)(temp_v1 + 0x49c5) != 0) {
     FUN_002939f4();
     temp_v1 = FUN_002499b4();
     if ((temp_v1 != 0) && (*(short *)(temp_v1 + temp_v5 * 2 + 0x72) == temp_v2)) {

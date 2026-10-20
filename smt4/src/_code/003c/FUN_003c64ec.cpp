@@ -46,19 +46,10 @@ typedef struct {
 extern signed char DAT_00434388; /* 0x434388 */
 extern short DAT_0043438a; /* 0x43438a */
 extern unsigned int DAT_0043438c; /* 0x43438c */
-extern unsigned int DAT_00435dc0; /* 0x435dc0 */
-extern unsigned int DAT_00435dd8; /* 0x435dd8 */
+extern unsigned char DAT_004357c8; /* 0x4357c8 */
 extern unsigned short DAT_00439a50; /* 0x439a50 */
-extern unsigned short DAT_00439a52; /* 0x439a52 */
-extern unsigned short DAT_00439a54; /* 0x439a54 */
-extern unsigned short DAT_00439a56; /* 0x439a56 */
-extern unsigned short DAT_00439a58; /* 0x439a58 */
-extern unsigned short DAT_00439a5a; /* 0x439a5a */
-extern unsigned short DAT_00439a5c; /* 0x439a5c */
-extern unsigned short DAT_00439a5e; /* 0x439a5e */
-extern unsigned short DAT_00439a60; /* 0x439a60 */
+extern unsigned char DAT_00439cf4; /* 0x439cf4 */
 extern unsigned short DAT_00439a62; /* 0x439a62 */
-extern unsigned short DAT_00439a64; /* 0x439a64 */
 extern unsigned short DAT_00439a66; /* 0x439a66 */
 extern unsigned char DAT_00439ce0; /* 0x439ce0 */
 extern unsigned char DAT_00439ce1; /* 0x439ce1 */
@@ -188,13 +179,13 @@ unsigned int FUN_003c64ec(unsigned int *param_1,int param_2)
     case 2:
       puVar7 = (unsigned int *)FUN_0022a464(param_1[4]);
       temp_v5 = *puVar7;
-      puVar7 = &DAT_00435dc0;
+      puVar7 = &(*(unsigned int *)((unsigned char *)&(*(unsigned int *)((unsigned char *)&DAT_004357c8 + 0x610)) - 0x18));
       *puVar7 = temp_v5;
       break;
     case 3:
       puVar7 = (unsigned int *)FUN_0022a464(param_1[4]);
       temp_v5 = *puVar7;
-      puVar7 = &DAT_00435dd8;
+      puVar7 = &(*(unsigned int *)((unsigned char *)&DAT_004357c8 + 0x610));
       *puVar7 = temp_v5;
       break;
     case 4:
@@ -624,39 +615,39 @@ unsigned int FUN_003c64ec(unsigned int *param_1,int param_2)
       break;
     case 0xb:
       puVar7 = (unsigned int *)FUN_0022a464(param_1[4],0xb);
-      DAT_00439a54 = (unsigned short)*puVar7;
+      (*(unsigned short *)((unsigned char *)&DAT_00439ce8 - 0x294)) = (unsigned short)*puVar7;
       break;
     case 0xc:
       puVar7 = (unsigned int *)FUN_0022a464(param_1[4],0xc);
-      DAT_00439a52 = (unsigned short)*puVar7;
+      (*(unsigned short *)((unsigned char *)&DAT_00439cf8 - 0x2a6)) = (unsigned short)*puVar7;
       break;
     case 0xd:
       puVar7 = (unsigned int *)FUN_0022a464(param_1[4],0xd);
-      DAT_00439a56 = (unsigned short)*puVar7;
+      (*(unsigned short *)((unsigned char *)&DAT_00439ce0 - 0x28a)) = (unsigned short)*puVar7;
       break;
     case 0xe:
       puVar7 = (unsigned int *)FUN_0022a464(param_1[4],0xe);
-      DAT_00439a58 = (unsigned short)*puVar7;
+      (*(unsigned short *)((unsigned char *)&DAT_00439ce1 - 0x289)) = (unsigned short)*puVar7;
       break;
     case 0xf:
       puVar7 = (unsigned int *)FUN_0022a464(param_1[4],0xf);
-      DAT_00439a5c = (unsigned short)*puVar7;
+      (*(unsigned short *)((unsigned char *)&DAT_00439ce2 - 0x286)) = (unsigned short)*puVar7;
       break;
     case 0x10:
       puVar7 = (unsigned int *)FUN_0022a464(param_1[4],0x10);
-      DAT_00439a5a = (unsigned short)*puVar7;
+      (*(unsigned short *)((unsigned char *)&DAT_00439ce3 - 0x289)) = (unsigned short)*puVar7;
       break;
     case 0x11:
       puVar7 = (unsigned int *)FUN_0022a464(param_1[4],0x11);
-      DAT_00439a5e = (unsigned short)*puVar7;
+      (*(unsigned short *)((unsigned char *)&DAT_00439cf0 - 0x292)) = (unsigned short)*puVar7;
       break;
     case 0x12:
       puVar7 = (unsigned int *)FUN_0022a464(param_1[4],0x12);
-      DAT_00439a60 = (unsigned short)*puVar7;
+      (*(unsigned short *)((unsigned char *)&DAT_00439cf4 - 0x294)) = (unsigned short)*puVar7;
       break;
     case 0x13:
       puVar7 = (unsigned int *)FUN_0022a464(param_1[4],0x13);
-      DAT_00439a64 = (unsigned short)*puVar7;
+      (*(unsigned short *)((unsigned char *)&DAT_00439a50 + 0x14)) = (unsigned short)*puVar7;
       break;
     case 0x14:
       puVar7 = (unsigned int *)FUN_0022a464(param_1[4],0x14);

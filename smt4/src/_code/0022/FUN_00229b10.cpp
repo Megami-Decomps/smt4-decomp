@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_2_stack;
 
-extern int DAT_0043427c; /* 0x43427c */
+extern unsigned char DAT_00434278; /* 0x434278 */
 extern int DAT_00435d48; /* 0x435d48 */
 
 /* Supplied declaration required: FUN_00229ad4. */
@@ -42,14 +42,14 @@ void FUN_00229b10(int *param_1,int param_2)
       FUN_0027e3f8(DAT_00435d48,7,temp_v3,0);
     }
     if (temp_v2 != 0) {
-      *(unsigned char *)(DAT_0043427c + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x18;
+      *(unsigned char *)((*(int *)((unsigned char *)&DAT_00434278 + 0x4)) + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x18;
       return;
     }
   }
   temp_v1 = *(short *)(*(int *)(param_2 + 0x28) + 0x14c);
   if (temp_v1 != 3) {
     if (temp_v1 == 0xd) {
-      *(unsigned char *)(DAT_0043427c + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 8;
+      *(unsigned char *)((*(int *)((unsigned char *)&DAT_00434278 + 0x4)) + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 8;
       return;
     }
   }
@@ -61,7 +61,7 @@ void FUN_00229b10(int *param_1,int param_2)
       temp_v0 = *(char *)(temp_v2 + 0x4b);
     }
     if (((*(unsigned int *)(*param_1 + 0x44a8) & 0x800) == 0) && (temp_v2 != 0 && temp_v0 != '\0')) {
-      *(unsigned char *)(DAT_0043427c + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0xc;
+      *(unsigned char *)((*(int *)((unsigned char *)&DAT_00434278 + 0x4)) + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0xc;
       return;
     }
   }

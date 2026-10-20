@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern signed char DAT_00647634; /* 0x647634 */
+extern unsigned char DAT_00647630; /* 0x647630 */
 
 extern unsigned int FUN_0043b21c(unsigned int);
 
@@ -18,7 +18,7 @@ unsigned int FUN_002fbfac(int param_1)
     temp_v0 = 0xd8a0a064;
   }
   else {
-    if (DAT_00647634 != '\0') {
+    if ((*(signed char *)((unsigned char *)&DAT_00647630 + 0x4)) != '\0') {
       temp_v0 = FUN_0043b21c(0x64765c);
       return temp_v0;
     }

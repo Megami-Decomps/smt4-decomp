@@ -1,5 +1,3 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `NaviMode_Enter` (_code @ 0x1925a8, 0x50 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
@@ -30,7 +28,8 @@ void NaviMode_Enter(void)
     FUN_00399b30(temp_v0 + 0x40);
     FUN_0039bbd4(temp_v0 + 0x40);
   }
-  *(unsigned char *)(DAT_0044cdf0 + 10) = 1;
+  temp_v0 = DAT_0044cdf0;
+  *(unsigned char *)(temp_v0 + 10) = 1;
   return;
 }
 

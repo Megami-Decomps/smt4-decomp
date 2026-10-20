@@ -4,13 +4,13 @@
 
 extern "C" {
 
-extern signed char DAT_00588e15; /* 0x588e15 */
+extern unsigned char DAT_00588e14; /* 0x588e14 */
 
 
 int FUN_0037de28(void)
 
 {
-  return (int)DAT_00588e15;
+  return (int)(*(signed char *)((unsigned char *)&DAT_00588e14 + 0x1));
 }
 
 } /* extern "C" */

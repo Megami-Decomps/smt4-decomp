@@ -28,7 +28,7 @@ typedef struct {
     unsigned int sp60; /* 0x60: local_60 */
 } param_1_stack;
 
-extern int DAT_00594a34; /* 0x594a34 */
+extern unsigned char DAT_005949d8; /* 0x5949d8 */
 
 extern int *FUN_0010979e(int *);
 /* Supplied declaration required: FUN_002e7232. */
@@ -128,7 +128,7 @@ void FUN_002f91dc(int param_1)
         FUN_002f8d6c(param_1);
       }
     }
-    else if (DAT_00594a34 != 0) {
+    else if ((*(int *)((unsigned char *)&DAT_005949d8 + 0x5c)) != 0) {
       FUN_002f8b88();
     }
   }

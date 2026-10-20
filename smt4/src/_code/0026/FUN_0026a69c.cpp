@@ -13,7 +13,7 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned char LAB_002dca98; /* 0x2dca98 */
-extern unsigned int DAT_00404384; /* 0x404384 */
+extern unsigned char DAT_00404386; /* 0x404386 */
 
 /* Supplied declaration required: FUN_002b46f8. */
 extern unsigned int FUN_002c0c74(unsigned int);
@@ -36,7 +36,7 @@ unsigned char FUN_0026a69c(unsigned short param_1)
   puVar3 = temp_v2;
   temp_v2[0] = param_1;
   FUN_002b46f8(puVar3,temp_v1,temp_v0,4,&LAB_002dca98);
-  return *(unsigned char *)((int)&DAT_00404384 + *(unsigned char *)(puVar3 + 1) + 2);
+  return *(unsigned char *)((int)&(*(unsigned int *)((unsigned char *)&DAT_00404386 - 0x2)) + *(unsigned char *)(puVar3 + 1) + 2);
 }
 
 } /* extern "C" */

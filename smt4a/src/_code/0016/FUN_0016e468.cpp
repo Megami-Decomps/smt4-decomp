@@ -7,7 +7,6 @@ extern "C" {
 int FUN_00195fc8(void);
 
 extern unsigned char DAT_005b4790; /* 0x5b4790 */
-extern int DAT_005b4798; /* 0x5b4798 */
 extern int DAT_005b479c; /* 0x5b479c */
 
 extern int FUN_0016f864(void);
@@ -30,7 +29,7 @@ unsigned int FUN_0016e468(void)
   
   temp_v0 = FUN_001a0e10();
   nn_os_CriticalSection_Enter(temp_v0);
-  if (DAT_005b4798 == 0) {
+  if ((*(int *)((unsigned char *)&DAT_005b4790 + 0x8)) == 0) {
     temp_v1 = FUN_0016f864();
     if (temp_v1 < 0) {
       FUN_00195fc8();
@@ -53,7 +52,7 @@ unsigned int FUN_0016e468(void)
       return 0xd92103fb;
     }
   }
-  DAT_005b4798 = DAT_005b4798 + 1;
+  (*(int *)((unsigned char *)&DAT_005b4790 + 0x8)) = (*(int *)((unsigned char *)&DAT_005b4790 + 0x8)) + 1;
   nn_os_CriticalSection_Leave(temp_v0);
   return 0;
 }

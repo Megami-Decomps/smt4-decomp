@@ -21,7 +21,7 @@ typedef struct {
     unsigned int sp78; /* 0x78: local_78 */
 } param_1_stack;
 
-extern int DAT_0043e2ac; /* 0x43e2ac */
+extern unsigned char DAT_0043e2a8; /* 0x43e2a8 */
 extern unsigned int DAT_0043e2b0; /* 0x43e2b0 */
 
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
@@ -56,11 +56,11 @@ void FUN_00285ca4(int param_1)
   int temp_v12;
   char acStack_40 [28];
   
-  temp_v1 = DAT_0043e2ac;
-  temp_v5 = DAT_0043e2ac + 0x88;
-  puVar7 = (unsigned char *)(DAT_0043e2ac + 0x24bb1);
+  temp_v1 = (*(int *)((unsigned char *)&DAT_0043e2a8 + 0x4));
+  temp_v5 = (*(int *)((unsigned char *)&DAT_0043e2a8 + 0x4)) + 0x88;
+  puVar7 = (unsigned char *)((*(int *)((unsigned char *)&DAT_0043e2a8 + 0x4)) + 0x24bb1);
   temp_v0 = *puVar7;
-  temp_v6 = *(unsigned int *)(DAT_0043e2ac + 0x8c);
+  temp_v6 = *(unsigned int *)((*(int *)((unsigned char *)&DAT_0043e2a8 + 0x4)) + 0x8c);
   temp_v10 = FUN_002c09d0(0x556);
   temp_v11 = FUN_002c09d0(0x557);
   temp_v3 = FUN_002c09d0(0x421);
@@ -94,7 +94,7 @@ void FUN_00285ca4(int param_1)
     }
   }
   else {
-    *(int *)(DAT_0043e2ac + 0x8c) = (int)temp_v7;
+    *(int *)((*(int *)((unsigned char *)&DAT_0043e2a8 + 0x4)) + 0x8c) = (int)temp_v7;
     *puVar7 = temp_v0;
     if (temp_v10 != 0) {
       FUN_0028975c(0x556,1);

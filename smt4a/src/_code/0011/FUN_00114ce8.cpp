@@ -23,7 +23,7 @@ void FUN_00114ce8(int param_1,int param_2)
 
 {
 /* irregular: 3 native warning(s); review required */
-  char temp_v0;
+  signed char temp_v0;
   int temp_v1;
   int temp_v2;
   

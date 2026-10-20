@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0019c920(int *, int *);
 
-extern int *DAT_005b4084; /* 0x5b4084 */
+extern unsigned char DAT_005b406c; /* 0x5b406c */
 
 /* Supplied declaration required: FUN_0019c920. */
 
@@ -72,8 +72,8 @@ LAB_0019aafc:
     piVar2[1] = 0;
     piVar2[3] = 0;
     piVar2[4] = 0;
-    piVar2 = DAT_005b4084;
-    DAT_005b4084[1] = DAT_005b4084[1] + 1;
+    piVar2 = (*(int * *)((unsigned char *)&DAT_005b406c + 0x18));
+    (*(int * *)((unsigned char *)&DAT_005b406c + 0x18))[1] = (*(int * *)((unsigned char *)&DAT_005b406c + 0x18))[1] + 1;
   }
   piVar4 = (int *)piVar4[3];
   if (piVar4 != (int *)0x0) {
@@ -103,7 +103,7 @@ LAB_0019aafc:
     piVar2[1] = 0;
     piVar2[3] = 0;
     piVar2[4] = 0;
-    DAT_005b4084[1] = DAT_005b4084[1] + 1;
+    (*(int * *)((unsigned char *)&DAT_005b406c + 0x18))[1] = (*(int * *)((unsigned char *)&DAT_005b406c + 0x18))[1] + 1;
   }
   return;
 }

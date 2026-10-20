@@ -19,7 +19,7 @@ typedef struct {
     unsigned short sp40; /* 0x40: local_40 */
 } param_1_stack;
 
-extern signed char DAT_0059497d; /* 0x59497d */
+extern unsigned char DAT_00594978; /* 0x594978 */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 extern int FUN_002ea704(void);
@@ -87,7 +87,7 @@ void FUN_001072cc(int *param_1)
       return;
     }
     temp_v0 = (**(romwright_code **)(*param_1 + 0x2c))(param_1);
-    if (((temp_v0 & (int)DAT_0059497d) != 0) &&
+    if (((temp_v0 & (int)(*(signed char *)((unsigned char *)&DAT_00594978 + 0x5))) != 0) &&
        (temp_v1 = (**(romwright_code **)(**(int **)(param_1[1] + 8) + 0x10))(*(int **)(param_1[1] + 8),param_1),
        temp_v1 != 0)) {
       return;

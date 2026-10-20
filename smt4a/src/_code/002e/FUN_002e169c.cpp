@@ -22,7 +22,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } void_stack;
 
-extern int DAT_0057f0c8; /* 0x57f0c8 */
+extern unsigned char DAT_0057f0c4; /* 0x57f0c4 */
 extern int DAT_0059dbb4; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -58,8 +58,8 @@ unsigned char FUN_002e169c(void)
   unsigned char temp_v9;
   unsigned int in_fpscr;
   
-  temp_v1 = DAT_0057f0c8;
-  if (*(char *)(DAT_0057f0c8 + 0x5e0) != '\0') {
+  temp_v1 = (*(int *)((unsigned char *)&DAT_0057f0c4 + 0x4));
+  if (*(char *)((*(int *)((unsigned char *)&DAT_0057f0c4 + 0x4)) + 0x5e0) != '\0') {
     FUN_00157558(DAT_0059dbb4);
     temp_v4 = DAT_0059dbb4;
     temp_v2 = FUN_001692ac(1,0);

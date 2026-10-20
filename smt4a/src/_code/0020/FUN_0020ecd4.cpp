@@ -14,7 +14,7 @@ int rt_memcpy(unsigned char [72], int, int);
 extern unsigned char LAB_0020ef4c; /* 0x20ef4c */
 extern unsigned char LAB_0020ef5c; /* 0x20ef5c */
 extern int *DAT_0058104c; /* 0x58104c */
-extern int DAT_005f198c; /* 0x5f198c */
+extern unsigned char DAT_005f15fc; /* 0x5f15fc */
 
 /* Supplied declaration required: FUN_00100388. */
 extern int FUN_0014bef4(unsigned int);
@@ -45,9 +45,9 @@ unsigned int FUN_0020ecd4(void)
   
   FUN_00152f44();
   temp_v0 = FUN_003e0044(5);
-  if ((((temp_v0 != 0) || (temp_v0 = FUN_003e0044(9), temp_v0 != 0)) && (DAT_005f198c != 0)) &&
-     (DAT_005f198c = DAT_005f198c + 1, DAT_005f198c >= 11)) {
-    DAT_005f198c = 0;
+  if ((((temp_v0 != 0) || (temp_v0 = FUN_003e0044(9), temp_v0 != 0)) && ((*(int *)((unsigned char *)&DAT_005f15fc + 0x390)) != 0)) &&
+     ((*(int *)((unsigned char *)&DAT_005f15fc + 0x390)) = (*(int *)((unsigned char *)&DAT_005f15fc + 0x390)) + 1, (*(int *)((unsigned char *)&DAT_005f15fc + 0x390)) >= 11)) {
+    (*(int *)((unsigned char *)&DAT_005f15fc + 0x390)) = 0;
   }
   if (*DAT_0058104c == 0) {
     temp_v0 = FUN_0015688c();
@@ -57,8 +57,8 @@ unsigned int FUN_0020ecd4(void)
     temp_v1 = FUN_0018719c(0x1a2);
     if ((((temp_v1 == 0) || (temp_v1 = FUN_0014bef4(99), temp_v1 + 1 >= 0x33)) &&
         ((temp_v1 = FUN_003e0044(5), temp_v1 != 0 || (temp_v1 = FUN_003e0044(9), temp_v1 != 0)))) &&
-       (DAT_005f198c == 0)) {
-      DAT_005f198c = 1;
+       ((*(int *)((unsigned char *)&DAT_005f15fc + 0x390)) == 0)) {
+      (*(int *)((unsigned char *)&DAT_005f15fc + 0x390)) = 1;
       temp_v2 = FUN_00187180(0x43,0);
       FUN_00192798();
       temp_v1 = FUN_00192748(temp_v2);

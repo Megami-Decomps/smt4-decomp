@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0014e220(int, int, int, int, int, int);
+int FUN_0014e220(int, int, int, int, int, int, float);
 int FUN_00184758(int, int, int);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
@@ -26,7 +26,7 @@ void FUN_0048ba5c(int param_1)
   *(unsigned char *)(param_1 + 0x12d0) = 1;
   *(unsigned char *)(param_1 + 0x12d1) = 0;
   *(unsigned char *)(param_1 + 0x12d2) = 0;
-  FUN_0014e220(param_1 + 0x12dc,0x13,0x1121,0x1d,param_1 + 0xc20,0x15);
+  FUN_0014e220(param_1 + 0x12dc,0x13,0x1121,0x1d,param_1 + 0xc20,0x15,1.0f);
   FUN_00184758(param_1 + 0x12dc,5,0);
   return;
 }

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_004a00f4(int);
+float FUN_004a00f4(int);
 
 extern int *DAT_0058104c; /* 0x58104c */
 
@@ -42,10 +42,10 @@ void FUN_00234788(unsigned int param_1,unsigned int param_2)
       temp_v1 = 0x10;
     }
     temp_v0 = FUN_0015fa74(param_1,param_2);
-    FUN_004a00f4(2);
+    in_s0 = FUN_004a00f4(2);
     if ((((int)in_s0 < (int)((unsigned int)*(unsigned short *)(temp_v0 + 8) + temp_v1)) &&
         (temp_v0 = FUN_0015688c(), temp_v0 != 0)) &&
-       ((temp_v1 = FUN_0018719c(0x1a2), temp_v1 == 0 || (temp_v1 = FUN_0014bef4(99), temp_v1 + 1 >= 0x33))))
+       ((temp_v1 = FUN_0018719c(0x1a2), temp_v1 == 0 || (temp_v1 = FUN_0014bef4(99), temp_v1 + 1 > 0x32))))
     {
       piVar1 = DAT_0058104c;
       *DAT_0058104c = 10;

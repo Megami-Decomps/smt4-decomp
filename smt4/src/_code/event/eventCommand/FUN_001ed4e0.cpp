@@ -9,7 +9,7 @@ int FUN_002cd878(void);
 int FUN_002d6658(int);
 int FUN_002ef6b8(int, unsigned int);
 
-extern int DAT_0043e090; /* 0x43e090 */
+extern unsigned char DAT_0043e088; /* 0x43e088 */
 
 /* Supplied declaration required: FUN_0028975c. */
 extern int FUN_00296cc8(unsigned int);
@@ -29,18 +29,18 @@ unsigned char FUN_001ed4e0(void)
   unsigned int temp_v2;
   
   temp_v0 = FUN_00296cc8(0);
-  if (DAT_0043e090 == 0) {
+  if ((*(int *)((unsigned char *)&DAT_0043e088 + 0x8)) == 0) {
     FUN_002d6658(0);
     FUN_002cd878();
     temp_v1 = temp_v0 + 0x800;
     temp_v2 = FUN_002c09d0();
     FUN_002ef6b8(temp_v0,temp_v2);
-    DAT_0043e090 = temp_v0;
+    (*(int *)((unsigned char *)&DAT_0043e088 + 0x8)) = temp_v0;
     FUN_0028975c(temp_v1,1);
   }
-  temp_v0 = FUN_002bf244(DAT_0043e090);
+  temp_v0 = FUN_002bf244((*(int *)((unsigned char *)&DAT_0043e088 + 0x8)));
   if (temp_v0 == 0) {
-    DAT_0043e090 = 0;
+    (*(int *)((unsigned char *)&DAT_0043e088 + 0x8)) = 0;
   }
   return temp_v0 == 0;
 }

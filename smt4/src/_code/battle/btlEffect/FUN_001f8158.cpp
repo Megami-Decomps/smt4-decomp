@@ -23,7 +23,7 @@ extern unsigned char LAB_001f8230; /* 0x1f8230 */
 extern unsigned char LAB_001f8244; /* 0x1f8244 */
 extern int FUN_0020ee0c(...); /* 0x20ee0c */
 extern int FUN_002c9fd0(...); /* 0x2c9fd0 */
-extern unsigned int DAT_00435d18; /* 0x435d18 */
+extern unsigned char DAT_00435d00; /* 0x435d00 */
 
 /* Supplied declaration required: FUN_002218d4. */
 /* Supplied declaration required: FUN_002c425c. */
@@ -51,7 +51,7 @@ void FUN_001f8158(unsigned int *param_1)
   param_1[0x10] = (unsigned int)puVar1;
   temp_v0 = 0x100;
   FUN_002c498c(0x100,0x100,0,0x32a4,1);
-  DAT_00435d18 = temp_v0;
+  (*(unsigned int *)((unsigned char *)&DAT_00435d00 + 0x18)) = temp_v0;
   FUN_003d971c();
   return;
 }

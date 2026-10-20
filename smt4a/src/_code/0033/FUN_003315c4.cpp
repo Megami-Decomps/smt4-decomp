@@ -16,7 +16,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } void_stack;
 
-extern int DAT_00588c44; /* 0x588c44 */
+extern unsigned char DAT_00588c40; /* 0x588c40 */
 
 /* Supplied declaration required: FUN_001631d0. */
 extern int FUN_00163e40(unsigned int);
@@ -37,11 +37,11 @@ void FUN_003315c4(void)
   int temp_v0;
   int temp_v1;
   
-  temp_v1 = DAT_00588c44;
-  if ((DAT_00588c44 != 0) &&
-     (temp_v0 = FUN_00163e40(*(unsigned int *)(DAT_00588c44 + 0x7f30)), temp_v0 != 0)) {
-    if (*(char *)(DAT_00588c44 + 0x4398) != '\x01') {
-      if (*(char *)(DAT_00588c44 + 0x4398) == '\x03') {
+  temp_v1 = (*(int *)((unsigned char *)&DAT_00588c40 + 0x4));
+  if (((*(int *)((unsigned char *)&DAT_00588c40 + 0x4)) != 0) &&
+     (temp_v0 = FUN_00163e40(*(unsigned int *)((*(int *)((unsigned char *)&DAT_00588c40 + 0x4)) + 0x7f30)), temp_v0 != 0)) {
+    if (*(char *)((*(int *)((unsigned char *)&DAT_00588c40 + 0x4)) + 0x4398) != '\x01') {
+      if (*(char *)((*(int *)((unsigned char *)&DAT_00588c40 + 0x4)) + 0x4398) == '\x03') {
         FUN_001681cc(*(unsigned short *)(temp_v1 + 0x439a));
       }
     }
@@ -57,7 +57,7 @@ void FUN_003315c4(void)
         }
       }
     }
-    FUN_001631d0(*(unsigned int *)(DAT_00588c44 + 0x7f30),0);
+    FUN_001631d0(*(unsigned int *)((*(int *)((unsigned char *)&DAT_00588c40 + 0x4)) + 0x7f30),0);
     FUN_0035b304();
     FUN_0037b450();
     return;

@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } void_stack;
 
-extern int DAT_0043e190; /* 0x43e190 */
+extern unsigned char DAT_0043e188; /* 0x43e188 */
 
 extern unsigned int FUN_00296cc8(unsigned int);
 extern unsigned int *FUN_002a8764(void);
@@ -33,8 +33,8 @@ unsigned int FUN_00321b9c(void)
   int temp_v3;
   
   temp_v1 = FUN_00296cc8(0);
-  temp_v0 = DAT_0043e190;
-  *(unsigned char *)(DAT_0043e190 + 0x7d) = 1;
+  temp_v0 = (*(int *)((unsigned char *)&DAT_0043e188 + 0x8));
+  *(unsigned char *)((*(int *)((unsigned char *)&DAT_0043e188 + 0x8)) + 0x7d) = 1;
   *(unsigned char *)(temp_v0 + 0x7c) = 1;
   puVar3 = (unsigned int *)FUN_002a8764();
   temp_v2 = *puVar3;
@@ -47,8 +47,8 @@ unsigned int FUN_00321b9c(void)
   FUN_002bd954(temp_v3,0xe,0xffffffff,temp_v0 + 0xa4,0xb);
   FUN_002b8da0(temp_v3,0);
   FUN_002bee58(temp_v3,6);
-  temp_v0 = DAT_0043e190;
-  *(unsigned char *)(DAT_0043e190 + 0x81) = 0;
+  temp_v0 = (*(int *)((unsigned char *)&DAT_0043e188 + 0x8));
+  *(unsigned char *)((*(int *)((unsigned char *)&DAT_0043e188 + 0x8)) + 0x81) = 0;
   *(unsigned int *)(temp_v0 + 0x70) = temp_v1;
   *(unsigned int *)(temp_v0 + 0x74) = temp_v1;
   *(unsigned char *)(temp_v0 + 0x80) = 1;

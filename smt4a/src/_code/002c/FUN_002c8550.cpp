@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0021af2c(void);
 
-extern int DAT_00588fd4; /* 0x588fd4 */
+extern unsigned char DAT_00588fd0; /* 0x588fd0 */
 
 /* Supplied declaration required: FUN_0021af2c. */
 
@@ -18,9 +18,9 @@ void FUN_002c8550(int param_1)
   char temp_v0;
   int temp_v1;
   
-  temp_v1 = DAT_00588fd4;
-  temp_v0 = *(char *)(DAT_00588fd4 + 0x2017);
-  *(char *)(DAT_00588fd4 + 0x2017) = (char)param_1;
+  temp_v1 = (*(int *)((unsigned char *)&DAT_00588fd0 + 0x4));
+  temp_v0 = *(char *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x2017);
+  *(char *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x2017) = (char)param_1;
   if (temp_v0 != '\t') {
     if (temp_v0 != '\b') {
       return;

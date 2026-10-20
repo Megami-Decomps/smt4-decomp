@@ -8,7 +8,6 @@ int FUN_001915c4(int, int, int);
 int FUN_002e5700(int, unsigned char *, int, int);
 int FUN_004637fc(void);
 
-extern unsigned char LAB_001914b4; /* 0x1914b4 */
 
 extern int FUN_001914b8(int);
 /* Supplied declaration required: FUN_001915c4. */
@@ -24,7 +23,7 @@ int FUN_00464a10(int param_1)
   
   FUN_004637fc();
   FUN_001915c4(param_1 + 0x90,param_1 + 0x94,0xb00);
-  FUN_002e5700(param_1 + 0x94,&LAB_001914b4,0x58,0x20);
+  FUN_002e5700(param_1 + 0x94,(unsigned char *)0x1914b4,0x58,0x20);
   temp_v0 = FUN_001914b8(param_1 + 100);
   return temp_v0 - 100;
 }

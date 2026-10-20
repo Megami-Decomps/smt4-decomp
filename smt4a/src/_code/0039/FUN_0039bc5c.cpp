@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_003283ac(unsigned int);
 
-extern unsigned int DAT_005f0cf4; /* 0x5f0cf4 */
+extern unsigned char DAT_005f0c7c; /* 0x5f0c7c */
 
 extern int FUN_0018719c(void);
 /* Supplied declaration required: FUN_003283ac. */
@@ -20,7 +20,7 @@ unsigned int FUN_0039bc5c(void)
   
   temp_v0 = FUN_0018719c();
   if (temp_v0 != 0) {
-    FUN_003283ac(DAT_005f0cf4);
+    FUN_003283ac((*(unsigned int *)((unsigned char *)&DAT_005f0c7c + 0x78)));
   }
   return 1;
 }

@@ -1,5 +1,3 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d37d0` (_code @ 0x3d37d0, 0x74 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
@@ -19,7 +17,7 @@ extern unsigned char DAT_00617e70; /* 0x617e70 */
 extern unsigned int DAT_00617f18; /* 0x617f18 */
 extern unsigned char DAT_00617f40; /* 0x617f40 */
 extern unsigned int DAT_006184a0; /* 0x6184a0 */
-extern unsigned int DAT_00618504; /* 0x618504 */
+extern unsigned char DAT_00618500; /* 0x618500 */
 
 /* Supplied declaration required: FUN_001884b0. */
 /* Supplied declaration required: FUN_00195fc8. */
@@ -44,12 +42,14 @@ void FUN_003d37d0(void)
   FUN_005143ac(DAT_00588024);
   DAT_00588024 = 0;
   FUN_00422654(&DAT_006184a0);
-  if ((DAT_00618504 & 0xfffffffe) != 0) {
-    if ((DAT_00618504 & 1) != 0) {
+  unsigned int *p = (unsigned int *)&DAT_00618500;
+  p = p + 1;
+  if ((*p & 0xfffffffe) != 0) {
+    if ((*p & 1) != 0) {
       FUN_00195fc8();
     }
-    FUN_001884b0(DAT_00618504 & 0xfffffffe);
-    DAT_00618504 = 0;
+    FUN_001884b0(*p & 0xfffffffe);
+    *p = 0;
   }
   return;
 }

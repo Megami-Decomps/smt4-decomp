@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00103d48(void);
 
-extern unsigned char DAT_0043e311; /* 0x43e311 */
+extern unsigned char DAT_0043e310; /* 0x43e310 */
 
 /* Supplied declaration required: FUN_00103d48. */
 extern int FUN_001041c8(void);
@@ -20,7 +20,7 @@ void FUN_002ef878(int param_1)
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   
-  DAT_0043e311 = 1;
+  (*(unsigned char *)((unsigned char *)&DAT_0043e310 + 0x1)) = 1;
   if (*(char *)(param_1 + 1) == '\x01') {
     temp_v0 = FUN_001041c8();
     if (temp_v0 != 0) {
@@ -28,7 +28,7 @@ void FUN_002ef878(int param_1)
     }
     temp_v0 = FUN_001eb4fc(6,0);
     if ((temp_v0 < 0) || (temp_v0 = FUN_002103dc(6,0), temp_v0 != 1 && temp_v0 != 2)) {
-      DAT_0043e311 = 0;
+      (*(unsigned char *)((unsigned char *)&DAT_0043e310 + 0x1)) = 0;
     }
   }
   return;

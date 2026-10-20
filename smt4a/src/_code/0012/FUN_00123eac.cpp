@@ -20,7 +20,7 @@ unsigned int FUN_00123eac(int param_1,unsigned int param_2,int param_3)
   int temp_v0;
   
   piVar1 = (int *)FUN_002ea704();
-  temp_v0 = (**(romwright_code **)(*piVar1 + 0x2c))();
+  temp_v0 = (**(romwright_code **)(*piVar1 + 0x2c))(piVar1);
   if ((((*(char *)(temp_v0 + 8) != '\0') &&
        (temp_v0 = FUN_002f7896(param_1 + 0x110,&LAB_00123f00), temp_v0 == 0)) &&
       (*(short *)(param_1 + 0x118) != 0)) &&

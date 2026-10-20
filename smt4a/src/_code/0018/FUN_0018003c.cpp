@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-extern int *DAT_005b402c; /* 0x5b402c */
+extern unsigned char DAT_005b4028; /* 0x5b4028 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_002e3140. */
@@ -23,7 +23,7 @@ void FUN_0018003c(void)
 {
 /* irregular: 2 native warning(s); review required */
   software_interrupt(0x24);
-  if (*DAT_005b402c < 0) {
+  if (*(*(int * *)((unsigned char *)&DAT_005b4028 + 0x4)) < 0) {
     FUN_002e3140();
     return;
   }

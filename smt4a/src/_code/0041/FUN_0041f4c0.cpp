@@ -13,7 +13,7 @@ int FUN_0041f020(...);
 typedef struct fn_0041f4c0_arg0 fn_0041f4c0_arg0;
 struct fn_0041f4c0_arg0 {
     unsigned char pad_0x0[0x5];
-    char field_0x5; /* +0x5 */
+    signed char field_0x5; /* +0x5 */
     unsigned char pad_0x6[0x1];
     byte field_0x7; /* +0x7 */
     undefined4 field_0x8; /* +0x8 */
@@ -46,7 +46,7 @@ void FUN_0041f4c0(fn_0041f4c0_arg0 *param_1)
 {
 /* irregular: 5 native warning(s); review required */
   unsigned char temp_v0;
-  char temp_v1;
+  signed char temp_v1;
   int temp_v2;
   
   temp_v2 = FUN_0023b3d0();

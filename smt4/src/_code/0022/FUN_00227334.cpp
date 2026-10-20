@@ -29,7 +29,7 @@ extern unsigned char LAB_00227618; /* 0x227618 */
 extern unsigned char LAB_0022761c; /* 0x22761c */
 extern unsigned char LAB_00227624; /* 0x227624 */
 extern unsigned char LAB_0022762c; /* 0x22762c */
-extern int DAT_00439ca8; /* 0x439ca8 */
+extern unsigned char DAT_00439c88; /* 0x439c88 */
 
 /* Supplied declaration required: FUN_002009c4. */
 /* Supplied declaration required: FUN_00211868. */
@@ -65,9 +65,9 @@ void FUN_00227334(unsigned int param_1,unsigned int param_2,int param_3,int para
   short temp_v5;
   unsigned char temp_v6 [68];
   
-  temp_v2 = DAT_00439ca8;
-  puVar2 = (unsigned int *)(DAT_00439ca8 + 0xc9e4);
-  *(unsigned char *)(DAT_00439ca8 + 0xc9d8) = 1;
+  temp_v2 = (*(int *)((unsigned char *)&DAT_00439c88 + 0x20));
+  puVar2 = (unsigned int *)((*(int *)((unsigned char *)&DAT_00439c88 + 0x20)) + 0xc9e4);
+  *(unsigned char *)((*(int *)((unsigned char *)&DAT_00439c88 + 0x20)) + 0xc9d8) = 1;
   *puVar2 = param_2;
   *(short *)(temp_v2 + 0xc9e8) = (short)param_3;
   *(unsigned int *)(temp_v2 + 0xc9dc) = 0x28;

@@ -9,7 +9,7 @@ int FUN_00342334(int);
 int FUN_00370b8c(int, unsigned int);
 int FUN_003fd63c(int, int);
 
-extern int DAT_0057f55c; /* 0x57f55c */
+extern unsigned char DAT_0057f554; /* 0x57f554 */
 
 extern int FUN_0016345c(void);
 extern int FUN_00163e40(int);
@@ -30,7 +30,7 @@ unsigned int FUN_002a3e10(void)
   unsigned int temp_v2;
   
   temp_v0 = FUN_00236038(0);
-  if (DAT_0057f55c == 0) {
+  if ((*(int *)((unsigned char *)&DAT_0057f554 + 0x8)) == 0) {
     temp_v1 = FUN_0016345c();
     if (temp_v1 != 0) {
       return 0;
@@ -40,14 +40,14 @@ unsigned int FUN_002a3e10(void)
     temp_v1 = temp_v0 + 0x800;
     temp_v2 = FUN_0018719c();
     FUN_00370b8c(temp_v0,temp_v2);
-    DAT_0057f55c = temp_v0;
+    (*(int *)((unsigned char *)&DAT_0057f554 + 0x8)) = temp_v0;
     FUN_003fd63c(temp_v1,1);
   }
-  temp_v0 = FUN_00163e40(DAT_0057f55c);
+  temp_v0 = FUN_00163e40((*(int *)((unsigned char *)&DAT_0057f554 + 0x8)));
   if (temp_v0 != 0) {
     return 0;
   }
-  DAT_0057f55c = 0;
+  (*(int *)((unsigned char *)&DAT_0057f554 + 0x8)) = 0;
   FUN_00342334(1);
   return 1;
 }

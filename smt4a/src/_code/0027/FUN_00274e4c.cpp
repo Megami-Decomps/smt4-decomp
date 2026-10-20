@@ -17,7 +17,7 @@ typedef struct {
 } void_stack;
 
 extern int DAT_00581280; /* 0x581280 */
-extern signed char DAT_005f1614; /* 0x5f1614 */
+extern unsigned char DAT_005f15fc; /* 0x5f15fc */
 extern unsigned char DAT_005f1724; /* 0x5f1724 */
 
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
@@ -57,7 +57,7 @@ void FUN_00274e4c(void)
     return;
   }
   *(unsigned char *)(DAT_00581280 + 0xf0c) = 0;
-  if (DAT_005f1614 != '\0') {
+  if ((*(signed char *)((unsigned char *)&DAT_005f15fc + 0x18)) != '\0') {
     return;
   }
   temp_v11 = (unsigned long long)in_s0 << 0x20;

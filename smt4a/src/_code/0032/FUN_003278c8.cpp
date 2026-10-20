@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_003fd63c(int, int);
 
-extern unsigned short DAT_005f1882; /* 0x5f1882 */
+extern unsigned char DAT_005f17fc; /* 0x5f17fc */
 
 extern int FUN_00162e8c(void);
 /* Supplied declaration required: FUN_003fd63c. */
@@ -26,7 +26,7 @@ void FUN_003278c8(int param_1)
     do {
       if ((*(char *)(temp_v0 + temp_v2 + 0x15f4) != '\0') &&
          (temp_v1 = temp_v0 + temp_v2 * 2, *(short *)(temp_v1 + 0x1644) == param_1)) {
-        DAT_005f1882 = *(unsigned short *)(temp_v1 + 0x1604);
+        (*(unsigned short *)((unsigned char *)&DAT_005f17fc + 0x86)) = *(unsigned short *)(temp_v1 + 0x1604);
         *(unsigned char *)(temp_v0 + temp_v2 + 0x15f4) = 0;
         if (*(short *)(temp_v1 + 0x1624) != 0) {
           FUN_003fd63c((int)*(short *)(temp_v1 + 0x1624),1);

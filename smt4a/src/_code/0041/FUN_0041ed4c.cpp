@@ -91,7 +91,7 @@ void FUN_0041ed4c(int param_1)
     if (*(int *)(param_1 + 0x58) != 0) {
       FUN_001aea28(DAT_0056fcc0,*(unsigned int *)(*(int *)(param_1 + 0x58) + 4));
       if (*(int **)(param_1 + 0x58) != (int *)0x0) {
-        (**(romwright_code **)(**(int **)(param_1 + 0x58) + 4))();
+        (**(romwright_code **)(**(int **)(param_1 + 0x58) + 4))(*(int **)(param_1 + 0x58));
         *(unsigned int *)(param_1 + 0x58) = 0;
       }
     }

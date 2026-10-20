@@ -37,7 +37,6 @@ unsigned int FUN_003fce08(fn_003fce08_arg0 *param_1,unsigned int param_2)
   
   temp_v0 = FUN_001861c4(param_1->field_0x8,param_1->field_0xc);
   temp_v1 = FUN_00341930();
-  temp_v2 = 0;
   if (temp_v1 != 0) {
     if (param_1->field_0x3d == 0) {
       temp_v1 = FUN_003fcbe0(param_1);
@@ -47,16 +46,16 @@ unsigned int FUN_003fce08(fn_003fce08_arg0 *param_1,unsigned int param_2)
       temp_v3 = *(unsigned int *)(temp_v0 + 8);
       temp_v2 = param_1->field_0xc;
       param_1->field_0x3d = 1;
-      if (*(short *)((int)param_1->field_0x10 + 4) != 0) {
+      if ((int)*(unsigned short *)((int)param_1->field_0x10 + 4) > 0) {
         pvVar3 = param_1->field_0x14;
         *(unsigned int *)((int)pvVar3 + 0x18) = temp_v3;
         *(unsigned int *)((int)pvVar3 + 0x1c) = temp_v2;
       }
       FUN_003fc294(param_1,param_2);
     }
-    temp_v2 = 1;
+    return 1;
   }
-  return temp_v2;
+  return 0;
 }
 
 } /* extern "C" */

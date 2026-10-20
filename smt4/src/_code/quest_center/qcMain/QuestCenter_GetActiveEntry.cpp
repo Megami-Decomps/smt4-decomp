@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_0044db8c; /* 0x44db8c */
+extern unsigned char DAT_0044db88; /* 0x44db88 */
 
 
 int QuestCenter_GetActiveEntry(void)
@@ -13,10 +13,10 @@ int QuestCenter_GetActiveEntry(void)
   int temp_v0;
   
   temp_v0 = 0;
-  if (DAT_0044db8c != 0) {
-    temp_v0 = *(int *)(DAT_0044db8c + 0x1c);
+  if ((*(int *)((unsigned char *)&DAT_0044db88 + 0x4)) != 0) {
+    temp_v0 = *(int *)((*(int *)((unsigned char *)&DAT_0044db88 + 0x4)) + 0x1c);
   }
-  if (DAT_0044db8c == 0 || temp_v0 == 0) {
+  if ((*(int *)((unsigned char *)&DAT_0044db88 + 0x4)) == 0 || temp_v0 == 0) {
     temp_v0 = 0;
   }
   return temp_v0;

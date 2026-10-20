@@ -1,5 +1,3 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ff3f0` (_code @ 0x2ff3f0, 0x110 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
@@ -44,7 +42,8 @@ unsigned int FUN_002ff3f0(void)
   if (temp_v5 < temp_v6 + temp_v5) {
     do {
       temp_v2 = FUN_002939f4();
-      puVar4 = (unsigned int *)(*(int *)(temp_v2 + 0x1fc0) + temp_v4 * 0x288);
+      temp_v2 = *(int *)(temp_v2 + 0x1fc0) + temp_v4 * 0x288;
+      puVar4 = (unsigned int *)temp_v2;
       temp_v3 = *puVar4;
       if (((((temp_v3 & 0x10) == 0) && ((temp_v3 & 1) != 0)) && ((temp_v3 & 0x40) == 0)) &&
          (*(unsigned short *)((int)puVar4 + temp_v0 * 2 + 0x1f2) >> 10 == 3)) {
@@ -54,8 +53,8 @@ unsigned int FUN_002ff3f0(void)
       temp_v4 = temp_v4 + 1;
     } while (temp_v4 < temp_v5 + temp_v6);
   }
-  temp_v4 = FUN_002939f4();
-  if (*(char *)(temp_v4 + 0x49c5) != '\0') {
+  temp_v4 = FUN_002939f4() + 0x4900;
+  if (*(char *)(temp_v4 + 0xc5) != '\0') {
     FUN_002939f4();
     temp_v4 = FUN_002499b4();
     if ((temp_v4 != 0) && (*(unsigned short *)(temp_v4 + temp_v0 * 2 + 0x1f2) >> 10 == 3)) {

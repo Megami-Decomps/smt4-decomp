@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001af468(int, unsigned int, unsigned int *);
 
-extern int DAT_0058928c; /* 0x58928c */
+extern unsigned char DAT_00589284; /* 0x589284 */
 
 /* Supplied declaration required: FUN_001af468. */
 
@@ -16,8 +16,8 @@ unsigned int FUN_001a0fb4(unsigned int param_1,unsigned int *param_2)
 {
 /* irregular: 1 native warning(s); review required */
   *param_2 = 0xffffffff;
-  if (DAT_0058928c != 0) {
-    FUN_001af468(DAT_0058928c,param_1,param_2);
+  if ((*(int *)((unsigned char *)&DAT_00589284 + 0x8)) != 0) {
+    FUN_001af468((*(int *)((unsigned char *)&DAT_00589284 + 0x8)),param_1,param_2);
   }
   return 0xc8a0a7f8;
 }

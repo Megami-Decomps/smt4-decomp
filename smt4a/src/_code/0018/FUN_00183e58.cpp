@@ -1,5 +1,3 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00183e58` (_code @ 0x183e58, 0xfc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
@@ -28,15 +26,14 @@ void FUN_00183e58(void)
   piVar4 = (int *)((*(int *)((unsigned char *)&DAT_0057f0c4 + 0x4)) + 0x5d0);
   do {
     FUN_001846d0(temp_v1 + temp_v2 * 0x8c + 0x34,1);
-    temp_v3 = temp_v1 + temp_v2 * 4;
-    temp_v0 = *(char *)(temp_v3 + 0x5ac);
+    temp_v0 = *(char *)(temp_v1 + temp_v2 * 4 + 0x5ac);
     if (temp_v0 != '\0') {
       if ((temp_v0 == '\a' || temp_v0 == '\t') ||
          ((temp_v0 == '\x13' || temp_v0 == '\x14') || temp_v0 == '\x15')) {
         FUN_0019d36c();
         *piVar4 = *(int *)(temp_v1 + 0x5d0) - 1;
       }
-      if (*(char *)(temp_v3 + 0x5ac) == '\b') {
+      if (*(char *)(temp_v1 + temp_v2 * 4 + 0x5ac) == '\b') {
         FUN_0019d36c();
         *piVar4 = *(int *)(temp_v1 + 0x5d0) - 1;
         FUN_0019d36c();

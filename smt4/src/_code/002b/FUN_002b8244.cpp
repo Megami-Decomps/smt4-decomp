@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002ae028(int);
 
-extern int DAT_0043da2c; /* 0x43da2c */
+extern unsigned char DAT_0043da28; /* 0x43da28 */
 
 /* Supplied declaration required: FUN_002ae028. */
 
@@ -17,8 +17,8 @@ void FUN_002b8244(int param_1)
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = DAT_0043da2c;
-  *(char *)(DAT_0043da2c + 0x4c7) = (char)param_1;
+  temp_v0 = (*(int *)((unsigned char *)&DAT_0043da28 + 0x4));
+  *(char *)((*(int *)((unsigned char *)&DAT_0043da28 + 0x4)) + 0x4c7) = (char)param_1;
   if (param_1 != 0) {
     *(unsigned int *)(temp_v0 + 0x4b8) = 0;
     *(unsigned short *)(temp_v0 + 0x4bc) = 0;

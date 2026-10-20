@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } void_stack;
 
-extern int DAT_00588fd4; /* 0x588fd4 */
+extern unsigned char DAT_00588fd0; /* 0x588fd0 */
 
 /* Supplied declaration required: FUN_002c7ce8. */
 
@@ -27,13 +27,13 @@ void FUN_0021af2c(void)
   unsigned int temp_v4;
   unsigned char temp_v5;
   
-  temp_v2 = DAT_00588fd4;
-  *(unsigned int *)(DAT_00588fd4 + 0x14) = 0;
+  temp_v2 = (*(int *)((unsigned char *)&DAT_00588fd0 + 0x4));
+  *(unsigned int *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x14) = 0;
   *(unsigned char *)(temp_v2 + 0x2014) = 1;
-  temp_v3 = DAT_00588fd4;
+  temp_v3 = (*(int *)((unsigned char *)&DAT_00588fd0 + 0x4));
   temp_v0 = *(char *)(temp_v2 + 0x2017);
   if (temp_v0 == '\0') {
-    if (*(int *)(DAT_00588fd4 + 0x1374) == 0) {
+    if (*(int *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x1374) == 0) {
       FUN_002c7ce8(0);
     }
     if (*(int *)(temp_v3 + 0x1374) == 1) {
@@ -54,7 +54,7 @@ void FUN_0021af2c(void)
     if ((!(temp_v0 == '\t' || temp_v0 == '\n')) &&
        (!((temp_v0 == '\v' || temp_v0 == '\f') || temp_v0 == '\b'))) {
       if (temp_v0 == '\x0f') {
-        if (*(int *)(DAT_00588fd4 + 0x1374) != 0) {
+        if (*(int *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x1374) != 0) {
           return;
         }
         FUN_002c7ce8(0);
@@ -66,7 +66,7 @@ void FUN_0021af2c(void)
           if (temp_v1 != '\x06') {
             if (temp_v1 != '\r') {
               if (*(char *)(temp_v2 + 0x2010) == '\0') {
-                if (*(int *)(DAT_00588fd4 + 0x1374) == 0) {
+                if (*(int *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x1374) == 0) {
                   FUN_002c7ce8(0);
                 }
                 if (*(int *)(temp_v3 + 0x1374) != 1) {
@@ -75,7 +75,7 @@ void FUN_0021af2c(void)
                 FUN_002c7ce8(1);
                 return;
               }
-              if (*(int *)(DAT_00588fd4 + 0x1374) == 0) {
+              if (*(int *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x1374) == 0) {
                 FUN_002c7ce8(0);
               }
               if (*(int *)(temp_v3 + 0x1374) == 1) {
@@ -91,7 +91,7 @@ void FUN_0021af2c(void)
               }
             }
             else {
-              if (*(int *)(DAT_00588fd4 + 0x1374) == 0) {
+              if (*(int *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x1374) == 0) {
                 FUN_002c7ce8(1);
               }
               if (*(int *)(temp_v3 + 0x1374) != 1) {
@@ -101,25 +101,25 @@ void FUN_0021af2c(void)
             FUN_002c7ce8(5);
             return;
           }
-          if (*(int *)(DAT_00588fd4 + 0x1374) != 0) {
+          if (*(int *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x1374) != 0) {
             return;
           }
         }
         else if (!(temp_v1 == '\a' || temp_v1 == '\f')) {
-          if (*(int *)(DAT_00588fd4 + 0x1374) == 0) {
+          if (*(int *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x1374) == 0) {
             FUN_002c7ce8(0);
           }
           if (*(int *)(temp_v3 + 0x1374) != 1) {
             return;
           }
         }
-        else if (*(int *)(DAT_00588fd4 + 0x1374) != 0) {
+        else if (*(int *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x1374) != 0) {
           return;
         }
         FUN_002c7ce8(1);
         return;
       }
-      if (*(int *)(DAT_00588fd4 + 0x1374) == 0) {
+      if (*(int *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x1374) == 0) {
         FUN_002c7ce8(0);
       }
       if (*(int *)(temp_v3 + 0x1374) == 1) {
@@ -135,7 +135,7 @@ void FUN_0021af2c(void)
       }
     }
     else {
-      if (*(int *)(DAT_00588fd4 + 0x1374) == 0) {
+      if (*(int *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x1374) == 0) {
         FUN_002c7ce8(1);
       }
       if (*(int *)(temp_v3 + 0x1374) != 1) {
@@ -145,7 +145,7 @@ void FUN_0021af2c(void)
   }
   else {
     if (*(char *)(temp_v2 + 0x2010) == '\0') {
-      if (*(int *)(DAT_00588fd4 + 0x1374) == 0) {
+      if (*(int *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x1374) == 0) {
         FUN_002c7ce8(0);
       }
       if (*(int *)(temp_v3 + 0x1374) != 1) {
@@ -154,7 +154,7 @@ void FUN_0021af2c(void)
       FUN_002c7ce8(1);
       return;
     }
-    if (*(int *)(DAT_00588fd4 + 0x1374) == 0) {
+    if (*(int *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x1374) == 0) {
       FUN_002c7ce8(0);
     }
     if (*(int *)(temp_v3 + 0x1374) == 1) {

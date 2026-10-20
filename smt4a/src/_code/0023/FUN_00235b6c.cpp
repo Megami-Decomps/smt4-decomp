@@ -22,15 +22,15 @@ void FUN_00235b6c(void)
     temp_v0 = 0;
     if (temp_v0 < *(int *)(DAT_005821a0 + 4)) {
       do {
-        temp_v1 = DAT_005821a0 + temp_v0 * 0x20;
-        if (*(char *)(temp_v1 + 0xc) != '\0') {
-          if (*(int *)(temp_v1 + 0x18) != 0) {
-            FUN_003d5000(*(unsigned int *)(temp_v1 + 0x14));
-            *(unsigned int *)(temp_v1 + 0x18) = 0;
-            *(unsigned short *)(temp_v1 + 0x1e) = 0;
-            *(unsigned int *)(temp_v1 + 0x14) = 0;
+        temp_v1 = DAT_005821a0 + temp_v0 * 0x20 + 0xc;
+        if (*(char *)temp_v1 != '\0') {
+          if (*(int *)(temp_v1 + 0xc) != 0) {
+            FUN_003d5000(*(unsigned int *)(temp_v1 + 8));
+            *(unsigned int *)(temp_v1 + 0xc) = 0;
+            *(unsigned short *)(temp_v1 + 0x12) = 0;
+            *(unsigned int *)(temp_v1 + 8) = 0;
           }
-          *(char *)(temp_v1 + 0xc) = '\0';
+          *(char *)temp_v1 = '\0';
         }
         temp_v0 = temp_v0 + 1;
       } while (temp_v0 < *(int *)(DAT_005821a0 + 4));

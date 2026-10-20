@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_0049fcfc; /* 0x49fcfc */
+extern unsigned char DAT_0049f91c; /* 0x49f91c */
 
 extern int FUN_0024c2ec(unsigned char);
 extern int FUN_002c09d0(void);
@@ -25,7 +25,7 @@ void FUN_0039edf0(int param_1)
     do {
       temp_v1 = param_1 + temp_v2 * 0x4c;
       if ((int)*(short *)(temp_v1 + 0xe8e) != (int)*(char *)(param_1 + 0x60)) goto LAB_0039eeac;
-      if (DAT_0049fcfc == 0) {
+      if ((*(int *)((unsigned char *)&DAT_0049f91c + 0x3e0)) == 0) {
         if (*(unsigned char *)(temp_v1 + 0xe8d) != 0xff) {
           if (*(unsigned char *)(temp_v1 + 0xe8d) != 0xfe) {
             temp_v0 = FUN_0024c2ec(*(unsigned char *)(temp_v1 + 0xe8c));
@@ -63,7 +63,7 @@ LAB_0039eee0:
     do {
       temp_v1 = param_1 + temp_v2 * 0x4c;
       if ((int)*(short *)(temp_v1 + 0x5a96) != (int)*(char *)(param_1 + 0x60)) goto LAB_0039ef90;
-      if (DAT_0049fcfc == 0) {
+      if ((*(int *)((unsigned char *)&DAT_0049f91c + 0x3e0)) == 0) {
         if (*(unsigned char *)(temp_v1 + 0x5a95) != 0xff) {
           temp_v0 = FUN_0024c2ec(*(unsigned char *)(temp_v1 + 0x5a94));
           if (((temp_v0 != 0) &&

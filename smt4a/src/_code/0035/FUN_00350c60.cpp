@@ -8,7 +8,7 @@ int FUN_00243c24(unsigned int);
 int FUN_002b41e4(unsigned int, int, unsigned int, int);
 int FUN_00350a8c(void);
 
-extern unsigned int DAT_0059dbfc; /* 0x59dbfc */
+extern unsigned char DAT_0059dbe0; /* 0x59dbe0 */
 
 /* Supplied declaration required: FUN_00243c24. */
 /* Supplied declaration required: FUN_002b41e4. */
@@ -22,11 +22,11 @@ unsigned int FUN_00350c60(int param_1)
   unsigned int temp_v0;
   
   if (*(int *)(param_1 + 0xc) != 0) {
-    FUN_002b41e4(DAT_0059dbfc,*(int *)(param_1 + 0xc),*(unsigned int *)(param_1 + 0x10),
+    FUN_002b41e4((*(unsigned int *)((unsigned char *)&DAT_0059dbe0 + 0x1c)),*(int *)(param_1 + 0xc),*(unsigned int *)(param_1 + 0x10),
                  *(unsigned short *)(param_1 + 8));
   }
-  temp_v0 = DAT_0059dbfc;
-  FUN_00243c24(DAT_0059dbfc);
+  temp_v0 = (*(unsigned int *)((unsigned char *)&DAT_0059dbe0 + 0x1c));
+  FUN_00243c24((*(unsigned int *)((unsigned char *)&DAT_0059dbe0 + 0x1c)));
   FUN_00350a8c();
   return temp_v0;
 }

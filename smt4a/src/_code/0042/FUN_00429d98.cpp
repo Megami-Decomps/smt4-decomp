@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_4_stack;
 
-extern int *DAT_005893a0; /* 0x5893a0 */
+extern unsigned char DAT_00589398; /* 0x589398 */
 
 extern int **FUN_001aeefc(unsigned int, int *, unsigned int);
 /* Supplied declaration required: FUN_0042bbf4. */
@@ -26,7 +26,7 @@ int ** FUN_00429d98(unsigned int param_1,unsigned int param_2,unsigned int param
   int *temp_v0;
   
   ppiVar1 = &temp_v0;
-  if (DAT_005893a0 != (int *)0x0) {
+  if ((*(int * *)((unsigned char *)&DAT_00589398 + 0x8)) != (int *)0x0) {
     ppiVar1 = (int **)0xc92044e7;
   }
   else {
@@ -35,7 +35,7 @@ int ** FUN_00429d98(unsigned int param_1,unsigned int param_2,unsigned int param
     if (-1 < (int)ppiVar1) {
       ppiVar1 = (int **)FUN_001aeefc(param_1,temp_v0,0);
       if (((unsigned int)ppiVar1 & 0x80000000) == 0) {
-        DAT_005893a0 = temp_v0;
+        (*(int * *)((unsigned char *)&DAT_00589398 + 0x8)) = temp_v0;
       }
       else {
         (**(romwright_code **)(*temp_v0 + 0x30))();

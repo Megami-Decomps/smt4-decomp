@@ -30,7 +30,6 @@ extern unsigned char LAB_00514a74; /* 0x514a74 */
 extern unsigned char LAB_00514b20; /* 0x514b20 */
 extern unsigned char LAB_00514b88; /* 0x514b88 */
 extern unsigned int DAT_005880f8; /* 0x5880f8 */
-extern unsigned int *DAT_005880fc; /* 0x5880fc */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_0016007c. */
@@ -113,7 +112,7 @@ unsigned int FUN_0042230c(unsigned int *param_1,int *param_2,unsigned int *param
     puVar2[3] = 0;
     *(unsigned char *)(puVar2 + 4) = 0;
   }
-  DAT_005880fc = puVar2;
+  (*(unsigned int * *)((unsigned char *)&DAT_005880f8 + 0x4)) = puVar2;
   FUN_0016dfc4();
   temp_v4 = 4;
   puStack_24 = &LAB_00514a74;
@@ -124,7 +123,7 @@ unsigned int FUN_0042230c(unsigned int *param_1,int *param_2,unsigned int *param
   temp_v2 = 0xfffffffe;
   uStack_3c = 0;
   temp_v3[0] = param_1;
-  FUN_002fb0d4(puVar2,&temp_v4,FUN_00422534,temp_v3,DAT_005880fc[3] + DAT_005880fc[2]);
+  FUN_002fb0d4(puVar2,&temp_v4,FUN_00422534,temp_v3,(*(unsigned int * *)((unsigned char *)&DAT_005880f8 + 0x4))[3] + (*(unsigned int * *)((unsigned char *)&DAT_005880f8 + 0x4))[2]);
   if ((int)puVar2 < 0) {
     FUN_002e3140();
   }

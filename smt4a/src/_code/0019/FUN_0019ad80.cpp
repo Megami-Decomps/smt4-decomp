@@ -18,7 +18,7 @@ struct fn_0019ad80_arg0 {
     int field_0x18; /* +0x18 */
 };
 
-extern int *DAT_005b4084; /* 0x5b4084 */
+extern unsigned char DAT_005b406c; /* 0x5b406c */
 
 /* Supplied declaration required: FUN_0019c920. */
 
@@ -35,7 +35,7 @@ int FUN_0019ad80(fn_0019ad80_arg0 *param_1,unsigned int param_2)
   int *piVar6;
   int in_r12;
   
-  piVar1 = DAT_005b4084;
+  piVar1 = (*(int * *)((unsigned char *)&DAT_005b406c + 0x18));
   piVar5 = (int *)param_1->field_0xc;
   while( 1 ) {
     if (piVar5 == (int *)0x0) {
@@ -72,10 +72,10 @@ int FUN_0019ad80(fn_0019ad80_arg0 *param_1,unsigned int param_2)
   if ((param_2 & 0x7f) != 0) {
     param_2 = param_2 + (0x80 - (param_2 & 0x7f));
   }
-  if (DAT_005b4084 != (int *)0x0) {
-    in_r12 = *DAT_005b4084;
+  if ((*(int * *)((unsigned char *)&DAT_005b406c + 0x18)) != (int *)0x0) {
+    in_r12 = *(*(int * *)((unsigned char *)&DAT_005b406c + 0x18));
   }
-  if (DAT_005b4084 != (int *)0x0 && in_r12 != 0) {
+  if ((*(int * *)((unsigned char *)&DAT_005b406c + 0x18)) != (int *)0x0 && in_r12 != 0) {
     temp_v1 = 0;
     do {
       temp_v0 = temp_v1 + 1;

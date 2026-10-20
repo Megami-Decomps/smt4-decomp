@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0050d2cc(void);
+int FUN_0050d2cc(int);
 
 extern int FUN_0050cf94(int);
 /* Supplied declaration required: FUN_0050d2cc. */
@@ -23,8 +23,7 @@ unsigned int FUN_00514018(int param_1,unsigned int param_2,unsigned int *param_3
     *param_3 = 0;
   }
   else {
-    temp_v1 = *(int *)(param_1 + 4);
-    FUN_0050d2cc();
+    temp_v1 = FUN_0050d2cc(*(int *)(param_1 + 4));
     temp_v2 = *(int *)(temp_v1 + 0x10);
     if (temp_v2 != 0) {
       temp_v1 = *(int *)(temp_v2 + 0x38);

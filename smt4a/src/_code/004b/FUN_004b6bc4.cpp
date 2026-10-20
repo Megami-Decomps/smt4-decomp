@@ -28,7 +28,7 @@ typedef struct {
 extern unsigned char DAT_005328fc; /* 0x5328fc */
 extern int DAT_00570280; /* 0x570280 */
 extern int DAT_0058800c; /* 0x58800c */
-extern int DAT_005f1b78; /* 0x5f1b78 */
+extern unsigned char DAT_005f15fc; /* 0x5f15fc */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00100388. */
@@ -159,7 +159,7 @@ LAB_004b6ea0:
   temp_v1 = FUN_0032482c();
   temp_v0 = -1;
   if (temp_v1 != 0) {
-    temp_v0 = DAT_005f1b78;
+    temp_v0 = (*(int *)((unsigned char *)&DAT_005f15fc + 0x57c));
   }
   if (*(short *)(param_1 + 0x40) != 0) {
     temp_v0 = (int)*(short *)(param_1 + 0x40);

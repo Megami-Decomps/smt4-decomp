@@ -18,7 +18,7 @@ struct fn_00119d20_arg0 {
 };
 
 extern unsigned char DAT_0055a220; /* 0x55a220 */
-extern signed char DAT_0059935d; /* 0x59935d */
+extern unsigned char DAT_0059935c; /* 0x59935c */
 
 extern unsigned long long FUN_001146b8(void);
 /* Supplied declaration required: FUN_0012220c. */
@@ -41,7 +41,7 @@ FUN_00119d20(fn_00119d20_arg0 *param_1,unsigned int param_2,unsigned int param_3
   puVar1[0x10] = param_3;
   puVar1[0x15] = 0;
   *puVar1 = (unsigned int)&DAT_0055a220;
-  if (DAT_0059935d == '\0') {
+  if ((*(signed char *)((unsigned char *)&DAT_0059935c + 0x1)) == '\0') {
     FUN_0012220c(param_3);
     temp_v0 = FUN_001146b8();
     *(unsigned long long *)(puVar1 + 0x12) = temp_v0;

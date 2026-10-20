@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern int DAT_00589384; /* 0x589384 */
+extern unsigned char DAT_00589380; /* 0x589380 */
 extern unsigned int DAT_0062d2a4; /* 0x62d2a4 */
 
 extern int FUN_00442280(void);
@@ -28,7 +28,7 @@ void FUN_00442164(int param_1)
   unsigned char temp_v1;
   
   nn_os_CriticalSection_Enter((unsigned int)&DAT_0062d2a4);
-  temp_v1 = DAT_00589384 != 0;
+  temp_v1 = (*(int *)((unsigned char *)&DAT_00589380 + 0x4)) != 0;
   nn_os_CriticalSection_Leave((unsigned int)&DAT_0062d2a4);
   if (((temp_v1) || (temp_v0 = FUN_00442280(), temp_v0 != 0)) && (param_1 != 0)) {
     FUN_004426c8(param_1,0x20);

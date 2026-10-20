@@ -16,7 +16,7 @@ unsigned int FUN_0023fae0(int param_1,int param_2)
   unsigned int temp_v0;
   unsigned int temp_v1;
   int temp_v2;
-  unsigned int temp_v3;
+  int temp_v3;
   
   temp_v1 = 0;
   temp_v2 = 0;
@@ -35,17 +35,17 @@ unsigned int FUN_0023fae0(int param_1,int param_2)
     temp_v1 = 0x43;
     temp_v2 = 0x2a;
   }
-  temp_v3 = temp_v2 + temp_v1;
-  if (temp_v1 < temp_v3) {
+  temp_v2 = temp_v2 + temp_v1;
+  if (temp_v2 > (int)temp_v1) {
     do {
-      temp_v2 = *(int *)(param_1 + 0x1e98) + temp_v1 * 0x114;
-      temp_v0 = *(unsigned int *)(temp_v2 + 0x50);
+      temp_v3 = *(int *)(param_1 + 0x1e98) + temp_v1 * 0x114;
+      temp_v0 = *(unsigned int *)(temp_v3 + 0x50);
       if ((((temp_v0 & 1) != 0 && (temp_v0 & 0x80) != 0) && ((temp_v0 & 2) == 0)) &&
-         ((*(unsigned int *)(temp_v2 + 0x54) & 4) == 0)) {
+         ((*(unsigned int *)(temp_v3 + 0x54) & 4) == 0)) {
         return 0;
       }
       temp_v1 = temp_v1 + 1;
-    } while ((int)temp_v1 < (int)temp_v3);
+    } while ((int)temp_v1 < temp_v2);
   }
   return 1;
 }

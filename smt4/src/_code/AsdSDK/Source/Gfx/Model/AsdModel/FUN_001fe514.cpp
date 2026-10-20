@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } void_stack;
 
-extern int DAT_00464b2c; /* 0x464b2c */
+extern unsigned char DAT_00464af0; /* 0x464af0 */
 extern unsigned char DAT_004dae48; /* 0x4dae48 */
 
 /* Supplied declaration required: FUN_002b265c. */
@@ -55,7 +55,7 @@ int FUN_001fe514(void)
   *(unsigned int *)(temp_v0 + 0x88) = 0;
   *(unsigned int *)(temp_v0 + 0x84) = 0;
   FUN_002b265c(&DAT_004dae48,temp_v0,0);
-  DAT_00464b2c = DAT_00464b2c + 1;
+  (*(int *)((unsigned char *)&DAT_00464af0 + 0x3c)) = (*(int *)((unsigned char *)&DAT_00464af0 + 0x3c)) + 1;
   return temp_v0;
 }
 

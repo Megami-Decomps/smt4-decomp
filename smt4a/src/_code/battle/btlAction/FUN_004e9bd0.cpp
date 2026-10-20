@@ -18,7 +18,7 @@ typedef struct {
 } param_7_stack;
 
 extern unsigned int DAT_00571190; /* 0x571190 */
-extern unsigned int DAT_00571194; /* 0x571194 */
+extern unsigned char DAT_00571138; /* 0x571138 */
 
 extern int FUN_0026264c(unsigned short);
 extern int FUN_002626e0(void);
@@ -87,7 +87,7 @@ LAB_004e9c3c:
       if (param_5 != 0) {
         do {
           puVar4 = *(unsigned int **)(param_4 + temp_v6 * 4);
-          if ((*puVar4 & DAT_00571190) != 0 || (puVar4[1] & DAT_00571194) != 0) {
+          if ((*puVar4 & DAT_00571190) != 0 || (puVar4[1] & (*(unsigned int *)((unsigned char *)&DAT_00571138 + 0x5c))) != 0) {
             temp_v3 = FUN_0026264c(*(unsigned short *)((int)puVar4 + 0x166));
             if (temp_v3 == 0) {
               temp_v4 = (unsigned int)*(unsigned short *)(*(int *)(param_4 + temp_v6 * 4) + 0x166);
@@ -134,7 +134,7 @@ LAB_004e9e34:
       if ((unsigned char)(temp_v1 & temp_v7)) {
         *(unsigned short *)(*(int *)(param_2 + 0x28) + 0x1be) = 2;
         *(unsigned short *)(*(int *)(param_2 + 0x28) + 0x1c0) = *(unsigned short *)(param_3 + 0x20);
-        temp_v4 = DAT_00571194;
+        temp_v4 = (*(unsigned int *)((unsigned char *)&DAT_00571138 + 0x5c));
         temp_v6 = DAT_00571190;
         if (param_5 == 0) {
           temp_v5 = 0;
@@ -152,7 +152,7 @@ LAB_004e9e34:
             } while (temp_v3 < (int)temp_v5);
           }
         }
-        temp_v4 = DAT_00571194;
+        temp_v4 = (*(unsigned int *)((unsigned char *)&DAT_00571138 + 0x5c));
         temp_v6 = DAT_00571190;
         if (temp_v5 < param_5) {
           do {

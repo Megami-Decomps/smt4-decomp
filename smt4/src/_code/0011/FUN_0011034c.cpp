@@ -25,7 +25,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_3_stack;
 
-extern signed char DAT_0044e362; /* 0x44e362 */
+extern unsigned char DAT_0044e360; /* 0x44e360 */
 
 /* Supplied declaration required: FUN_0011d0ec. */
 extern int FUN_0011d194(void);
@@ -60,11 +60,11 @@ int FUN_0011034c(unsigned int param_1,unsigned int param_2,unsigned int param_3)
   unsigned int temp_v4;
   int uStack_18;
   
-  if (DAT_0044e362 != '\0') {
+  if ((*(signed char *)((unsigned char *)&DAT_0044e360 + 0x2)) != '\0') {
     temp_v0 = -0x1f5f3007;
   }
   else {
-    DAT_0044e362 = '\x01';
+    (*(signed char *)((unsigned char *)&DAT_0044e360 + 0x2)) = '\x01';
     FUN_0011d934();
     temp_v3 = 0;
     temp_v0 = FUN_0011d694((unsigned int *)&temp_v3,param_2,(unsigned int *)&uStack_18,&temp_v4);

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_003283ac(unsigned int);
 
-extern int DAT_00588c44; /* 0x588c44 */
+extern unsigned char DAT_00588c40; /* 0x588c40 */
 
 extern int FUN_001ab854(int);
 extern int FUN_00236038(unsigned int);
@@ -25,14 +25,14 @@ unsigned int FUN_003c4e64(void)
   int temp_v2;
   
   temp_v0 = FUN_00236038(0);
-  if (DAT_00588c44 != 0) {
+  if ((*(int *)((unsigned char *)&DAT_00588c40 + 0x4)) != 0) {
     if (temp_v0 != 0) {
-      FUN_003283ac(*(unsigned int *)(DAT_00588c44 + 0x75cc));
+      FUN_003283ac(*(unsigned int *)((*(int *)((unsigned char *)&DAT_00588c40 + 0x4)) + 0x75cc));
       return 1;
     }
-    temp_v0 = FUN_001ab854((int)*(char *)(DAT_00588c44 + *(int *)(DAT_00588c44 + 0x74c0) * 0x150 +
+    temp_v0 = FUN_001ab854((int)*(char *)((*(int *)((unsigned char *)&DAT_00588c40 + 0x4)) + *(int *)((*(int *)((unsigned char *)&DAT_00588c40 + 0x4)) + 0x74c0) * 0x150 +
                                        0x442c));
-    temp_v1 = (unsigned int)*(unsigned short *)(temp_v0 + *(int *)(DAT_00588c44 + 0x75c8) * 2 + 0x34);
+    temp_v1 = (unsigned int)*(unsigned short *)(temp_v0 + *(int *)((*(int *)((unsigned char *)&DAT_00588c40 + 0x4)) + 0x75c8) * 2 + 0x34);
   }
   else {
     temp_v2 = FUN_0032faf4();

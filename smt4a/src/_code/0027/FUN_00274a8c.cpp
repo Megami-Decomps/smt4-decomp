@@ -8,7 +8,7 @@ int FUN_0016242c(void);
 int FUN_001f3f34(void);
 int VectorSignedToFloat(int, int);
 
-extern signed char DAT_005f1614; /* 0x5f1614 */
+extern unsigned char DAT_005f15fc; /* 0x5f15fc */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0016242c. */
@@ -37,7 +37,7 @@ void FUN_00274a8c(int *param_1)
   case 0:
     *(unsigned int *)(temp_v1 + 0xcd20) = 0xc2200000;
     *(unsigned int *)(temp_v1 + 0xcd24) = 0x43430000;
-    if ((DAT_005f1614 == '\0') && (*(int *)(temp_v0 + 0x109c) != 0)) {
+    if (((*(signed char *)((unsigned char *)&DAT_005f15fc + 0x18)) == '\0') && (*(int *)(temp_v0 + 0x109c) != 0)) {
       *puVar4 = 1;
       *(unsigned int *)(temp_v1 + 0xcd28) = 0;
       *(unsigned int *)(temp_v1 + 0xcd2c) = 0;
@@ -63,7 +63,7 @@ void FUN_00274a8c(int *param_1)
       *puVar4 = 3;
       *(unsigned int *)(temp_v1 + 0xcd28) = 0;
     }
-    if (DAT_005f1614 == '\0') break;
+    if ((*(signed char *)((unsigned char *)&DAT_005f15fc + 0x18)) == '\0') break;
     *puVar4 = 4;
     *(unsigned int *)(temp_v1 + 0xcd28) = 0;
     break;
@@ -91,7 +91,7 @@ void FUN_00274a8c(int *param_1)
     break;
   case 5:
     *(float *)(temp_v1 + 0xcd18) = 1.0f - *(float *)(temp_v0 + 0x10a0) / *(float *)(temp_v0 + 0x15c0);
-    if (DAT_005f1614 != '\0') break;
+    if ((*(signed char *)((unsigned char *)&DAT_005f15fc + 0x18)) != '\0') break;
     *puVar4 = 1;
     *(unsigned int *)(temp_v1 + 0xcd28) = 0;
   }

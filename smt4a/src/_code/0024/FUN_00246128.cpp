@@ -14,7 +14,7 @@ typedef struct {
 } void_stack;
 
 extern int *DAT_0058104c; /* 0x58104c */
-extern int DAT_005f1990; /* 0x5f1990 */
+extern unsigned char DAT_005f15fc; /* 0x5f15fc */
 
 extern int FUN_0014bef4(unsigned int);
 extern int FUN_0015688c(void);
@@ -49,22 +49,22 @@ void FUN_00246128(void)
   temp_v1 = FUN_00480c28();
   if (temp_v0 < 0x15) {
     if (temp_v1 < 5000) {
-      DAT_005f1990 = 0;
+      (*(int *)((unsigned char *)&DAT_005f15fc + 0x394)) = 0;
       return;
     }
   }
   else if (temp_v0 < 0x33) {
     if (temp_v1 < 10000) {
-      DAT_005f1990 = 0;
+      (*(int *)((unsigned char *)&DAT_005f15fc + 0x394)) = 0;
       return;
     }
   }
   else if (temp_v1 < 15000) {
-    DAT_005f1990 = 0;
+    (*(int *)((unsigned char *)&DAT_005f15fc + 0x394)) = 0;
     return;
   }
-  if ((DAT_005f1990 != 0) && (DAT_005f1990 = DAT_005f1990 + 1, DAT_005f1990 >= 0x15)) {
-    DAT_005f1990 = 0;
+  if (((*(int *)((unsigned char *)&DAT_005f15fc + 0x394)) != 0) && ((*(int *)((unsigned char *)&DAT_005f15fc + 0x394)) = (*(int *)((unsigned char *)&DAT_005f15fc + 0x394)) + 1, (*(int *)((unsigned char *)&DAT_005f15fc + 0x394)) >= 0x15)) {
+    (*(int *)((unsigned char *)&DAT_005f15fc + 0x394)) = 0;
   }
   temp_v1 = FUN_0015688c();
   if (((temp_v1 != 0) &&
@@ -89,13 +89,13 @@ void FUN_00246128(void)
         if ((((puVar9[1] == 0x12) && (*puVar9 == (unsigned int)*(unsigned short *)(temp_v1 + 300))) &&
             (((short)puVar9[2] == 0 || (temp_v4 = FUN_0018719c(), temp_v4 != 0)))) &&
            (((*(short *)((int)puVar9 + 10) == 0 || (temp_v4 = FUN_0018719c(), temp_v4 == 0)) &&
-            (DAT_005f1990 == 0)))) break;
+            ((*(int *)((unsigned char *)&DAT_005f15fc + 0x394)) == 0)))) break;
         temp_v6 = temp_v6 + 1;
         if (temp_v2 <= (int)temp_v6) {
           return;
         }
       }
-      DAT_005f1990 = 1;
+      (*(int *)((unsigned char *)&DAT_005f15fc + 0x394)) = 1;
       DAT_0058104c[6] = (unsigned int)*(unsigned short *)(temp_v1 + 300);
       temp_v1 = FUN_002d8b58(0x12);
       piVar2 = DAT_0058104c;

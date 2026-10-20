@@ -9,7 +9,7 @@ int FUN_002c18e4(int);
 int FUN_002c198c(int);
 
 typedef int romwright_code(...);
-extern int DAT_00435d18; /* 0x435d18 */
+extern unsigned char DAT_00435d00; /* 0x435d00 */
 extern int DAT_0044ea00; /* 0x44ea00 */
 
 extern int FUN_002865c0(unsigned int);
@@ -33,12 +33,12 @@ unsigned int FUN_0020ee0c(void)
   
   FUN_002c08f0();
   temp_v3 = DAT_0044ea00;
-  temp_v0 = DAT_00435d18;
-  if (DAT_00435d18 != 0) {
-    temp_v1 = *(unsigned int *)(DAT_00435d18 + 0x3028);
+  temp_v0 = (*(int *)((unsigned char *)&DAT_00435d00 + 0x18));
+  if ((*(int *)((unsigned char *)&DAT_00435d00 + 0x18)) != 0) {
+    temp_v1 = *(unsigned int *)((*(int *)((unsigned char *)&DAT_00435d00 + 0x18)) + 0x3028);
     temp_v6 = (temp_v1 & 2) != 0;
     if (temp_v6) {
-      temp_v1 = *(unsigned int *)(DAT_00435d18 + 0x3034);
+      temp_v1 = *(unsigned int *)((*(int *)((unsigned char *)&DAT_00435d00 + 0x18)) + 0x3034);
     }
     if (temp_v6 && temp_v1 != 0) {
       temp_v2 = FUN_002865c0(6);

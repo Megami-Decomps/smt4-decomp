@@ -21,7 +21,7 @@ typedef struct {
     unsigned int sp50; /* 0x50: local_50 */
 } param_5_stack;
 
-extern signed char DAT_0059497e; /* 0x59497e */
+extern unsigned char DAT_00594978; /* 0x594978 */
 
 extern int FUN_00107d3e(int *, int, unsigned char, unsigned char);
 /* Supplied declaration required: FUN_002ea852. */
@@ -82,7 +82,7 @@ void FUN_002eb188(int *param_1,unsigned int param_2,unsigned int param_3,int par
   }
   (**(romwright_code **)(*(int *)param_1[3] + 0x20))
             ((int *)param_1[3],temp_v4,(char)param_1[1],(char)param_1[4],temp_v5,param_4,
-             (int)DAT_0059497e);
+             (int)(*(signed char *)((unsigned char *)&DAT_00594978 + 0x6)));
   return;
 }
 

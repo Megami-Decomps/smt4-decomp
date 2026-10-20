@@ -24,7 +24,7 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_1_stack;
 
-extern int DAT_0057f590; /* 0x57f590 */
+extern unsigned char DAT_0057f588; /* 0x57f588 */
 extern unsigned int DAT_0059dbb4; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -68,12 +68,12 @@ void FUN_00164490(int param_1)
   
   temp_v2 = FUN_0018719c(0x402);
   if (temp_v2 != 0) {
-    temp_v2 = FUN_001654d8(DAT_0057f590 + 0xb00);
-    temp_v3 = FUN_001654e4(DAT_0057f590 + 0xb00);
-    if ('\0' < *(char *)(DAT_0057f590 + 0x94)) {
-      temp_v4 = FUN_001654d8(DAT_0057f590 + 0xb8c);
+    temp_v2 = FUN_001654d8((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0xb00);
+    temp_v3 = FUN_001654e4((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0xb00);
+    if ('\0' < *(char *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0x94)) {
+      temp_v4 = FUN_001654d8((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0xb8c);
       temp_v2 = temp_v2 + temp_v4;
-      temp_v4 = FUN_001654e4(DAT_0057f590 + 0xb8c);
+      temp_v4 = FUN_001654e4((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0xb8c);
       temp_v3 = temp_v3 + temp_v4;
     }
     temp_v5 = FUN_001692ac(1,0);
@@ -90,9 +90,9 @@ void FUN_00164490(int param_1)
       temp_v4 = FUN_001834a4(8,0xc0);
     }
     FUN_00164b5c(2,8,0,*(short *)(temp_v4 + 8) + temp_v2,*(short *)(temp_v4 + 10) + temp_v3,0xb);
-    FUN_00169e38(*(unsigned int *)(DAT_0057f590 + 0x7c),*(short *)(temp_v4 + 8) + temp_v2,
+    FUN_00169e38(*(unsigned int *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0x7c),*(short *)(temp_v4 + 8) + temp_v2,
                  *(short *)(temp_v4 + 10) + temp_v3,0);
-    if (*(char *)(DAT_0057f590 + 0x92) != '\0') {
+    if (*(char *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0x92) != '\0') {
       if (param_1 != 0) {
         temp_v4 = FUN_001834a4(8,0x100);
       }
@@ -100,10 +100,10 @@ void FUN_00164490(int param_1)
         temp_v4 = FUN_001834a4(8,0x11f);
       }
       FUN_00164b5c(2,8,0xc,*(short *)(temp_v4 + 8) + temp_v2,*(short *)(temp_v4 + 10) + temp_v3,0xb);
-      if (*(char *)(DAT_0057f590 + 0x8c) != '\0') {
+      if (*(char *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0x8c) != '\0') {
         temp_v0 = *(short *)(temp_v4 + 8);
         temp_v1 = *(short *)(temp_v4 + 10);
-        if (*(int *)(DAT_0057f590 + 0x84) < 0) {
+        if (*(int *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0x84) < 0) {
           temp_v5 = 0xdc0f14ff;
         }
         else {
@@ -120,15 +120,15 @@ void FUN_00164490(int param_1)
         FUN_00183bb0();
       }
       else {
-        FUN_00169e38(*(unsigned int *)(DAT_0057f590 + 0x84),*(short *)(temp_v4 + 8) + temp_v2,
+        FUN_00169e38(*(unsigned int *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0x84),*(short *)(temp_v4 + 8) + temp_v2,
                      *(short *)(temp_v4 + 10) + temp_v3,1);
       }
     }
-    temp_v2 = DAT_0057f590;
+    temp_v2 = (*(int *)((unsigned char *)&DAT_0057f588 + 0x8));
     temp_v12 = 0.25f;
-    if (*(char *)(DAT_0057f590 + 0x16d) != '\0') {
+    if (*(char *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0x16d) != '\0') {
       temp_v14 = temp_v12;
-      temp_v5 = FUN_001654d8(DAT_0057f590 + 0xb00);
+      temp_v5 = FUN_001654d8((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0xb00);
       temp_v3 = FUN_001654e4(temp_v2 + 0xb00);
       temp_v12 = temp_v14;
       FUN_001879d0(DAT_0059dbb4);
@@ -139,9 +139,9 @@ void FUN_00164490(int param_1)
       FUN_00169e38(-*(int *)(temp_v2 + 0x168),(int)*(short *)(temp_v4 + 8) + (int)(temp_v14 + temp_v13),
                    *(short *)(temp_v4 + 10) + temp_v3,1);
     }
-    temp_v2 = DAT_0057f590;
-    if (*(char *)(DAT_0057f590 + 0x17d) != '\0') {
-      temp_v5 = FUN_001654d8(DAT_0057f590 + 0xb00);
+    temp_v2 = (*(int *)((unsigned char *)&DAT_0057f588 + 0x8));
+    if (*(char *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0x17d) != '\0') {
+      temp_v5 = FUN_001654d8((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0xb00);
       temp_v3 = FUN_001654e4(temp_v2 + 0xb00);
       FUN_001879d0(DAT_0059dbb4);
       temp_v14 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);

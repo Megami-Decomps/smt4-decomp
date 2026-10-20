@@ -5,7 +5,7 @@
 extern "C" {
 
 extern int *DAT_00581288; /* 0x581288 */
-extern unsigned char DAT_005f17ac; /* 0x5f17ac */
+extern unsigned char DAT_005f15fc; /* 0x5f15fc */
 
 extern int FUN_00162e8c(void);
 
@@ -29,7 +29,7 @@ void FUN_00313648(int param_1)
     if (*piVar1 == 1) {
       piVar1[0x16] = 0x40a00000;
     }
-    else if ((*piVar1 == 3) || (DAT_005f17ac = 0, *piVar1 == 3)) {
+    else if ((*piVar1 == 3) || ((*(unsigned char *)((unsigned char *)&DAT_005f15fc + 0x1b0)) = 0, *piVar1 == 3)) {
       *(unsigned short *)(piVar1 + 0x67) = 0;
     }
   }

@@ -1,5 +1,3 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00465120` (_code @ 0x465120, 0x70 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
@@ -22,14 +20,10 @@ void FUN_00465120(int param_1)
   unsigned int temp_v1;
   
   FUN_00463894(*(unsigned int *)(param_1 + 0x60));
-  temp_v1 = 0;
-  if (*(int *)(param_1 + 0x220) != 0) {
-    do {
-      if (*(int *)(param_1 + temp_v1 * 0x3c8 + 0x22c) != 0) {
-        nw_snd_internal_driver_Voice_Stop();
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < *(unsigned int *)(param_1 + 0x220));
+  for (temp_v1 = 0; temp_v1 < *(unsigned int *)(param_1 + 0x220); temp_v1++) {
+    if (*(int *)(param_1 + temp_v1 * 0x3c8 + 0x22c) != 0) {
+      nw_snd_internal_driver_Voice_Stop();
+    }
   }
   if (*(char *)(param_1 + 0xd) != '\0') {
     temp_v0 = FUN_001b1f04();

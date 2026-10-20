@@ -38,7 +38,7 @@ typedef struct {
 extern unsigned char LAB_0013fbb4; /* 0x13fbb4 */
 extern unsigned char LAB_0013fbbc; /* 0x13fbbc */
 extern unsigned char LAB_0013fbc0; /* 0x13fbc0 */
-extern int DAT_0057f590; /* 0x57f590 */
+extern unsigned char DAT_0057f588; /* 0x57f588 */
 extern unsigned int DAT_0059dbb4; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -83,13 +83,13 @@ unsigned int FUN_0013f7c4(void)
   unsigned int in_fpscr;
   unsigned char temp_v9 [76];
   
-  temp_v1 = DAT_0057f590;
-  if (*(char *)(DAT_0057f590 + 0x95) != '\0') {
+  temp_v1 = (*(int *)((unsigned char *)&DAT_0057f588 + 0x8));
+  if (*(char *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0x95) != '\0') {
     return 0;
   }
-  if (*(char *)(DAT_0057f590 + 9) != '\v') {
-    if (*(char *)(DAT_0057f590 + 9) == '\x14') {
-      if (*(char *)(DAT_0057f590 + 8) != '\0') {
+  if (*(char *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 9) != '\v') {
+    if (*(char *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 9) == '\x14') {
+      if (*(char *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 8) != '\0') {
         FUN_001677c0();
         temp_v3 = FUN_001692ac(1,0);
         FUN_0016c6f0(DAT_0059dbb4,3,temp_v3);
@@ -98,11 +98,11 @@ unsigned int FUN_0013f7c4(void)
         FUN_001677c0();
       }
       FUN_001678a8(temp_v1);
-      FUN_00151e4c(DAT_0057f590);
+      FUN_00151e4c((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)));
     }
   }
   else {
-    if (*(char *)(DAT_0057f590 + 8) != '\0') {
+    if (*(char *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 8) != '\0') {
       FUN_001677c0();
       temp_v3 = FUN_001692ac(1,0);
       FUN_0016c6f0(DAT_0059dbb4,3,temp_v3);
@@ -111,21 +111,21 @@ unsigned int FUN_0013f7c4(void)
       FUN_001677c0();
     }
     FUN_001678a8(temp_v1);
-    FUN_00151e4c(DAT_0057f590);
+    FUN_00151e4c((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)));
   }
-  if ((*(char *)(DAT_0057f590 + 0x8e) != '\0') && (*(char *)(DAT_0057f590 + 0x91) == '\0')) {
+  if ((*(char *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0x8e) != '\0') && (*(char *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0x91) == '\0')) {
     FUN_00164490(0);
   }
-  if (*(char *)(DAT_0057f590 + 0x8f) != '\0') {
-    temp_v1 = FUN_001654d8(DAT_0057f590 + 0xb00);
-    temp_v2 = FUN_001654e4(DAT_0057f590 + 0xb00);
+  if (*(char *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0x8f) != '\0') {
+    temp_v1 = FUN_001654d8((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0xb00);
+    temp_v2 = FUN_001654e4((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0xb00);
     temp_v3 = FUN_001692ac(1,0);
     FUN_0016c6f0(DAT_0059dbb4,3,temp_v3);
     FUN_001677c0();
     FUN_00183bb0();
     temp_v4 = FUN_001834a4(8,200);
     FUN_00164b5c(2,8,10,*(short *)(temp_v4 + 8) + temp_v1,*(short *)(temp_v4 + 10) + temp_v2,0xb);
-    temp_v3 = *(unsigned int *)(DAT_0057f590 + 0x78);
+    temp_v3 = *(unsigned int *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0x78);
     FUN_0015f858(temp_v3,0);
     FUN_00100388(temp_v9,&LAB_0013fbb4,temp_v3);
     temp_v5 = FUN_001834a4(8,0xc2);
@@ -135,14 +135,14 @@ unsigned int FUN_0013f7c4(void)
                         (unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_00162790(2,0xffffffff,temp_v9,(int)*(short *)(temp_v4 + 8));
     temp_v5 = FUN_001834a4(8,0xc1);
-    FUN_001689e8((int)(short)*(unsigned int *)(DAT_0057f590 + 0x78),
+    FUN_001689e8((int)(short)*(unsigned int *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0x78),
                  (int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v1,
                  (int)*(short *)(temp_v5 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v2,0x10,0);
     FUN_00184e64(0xffffffff);
     temp_v5 = FUN_001834a4(8,0xc6);
     FUN_00180310(0,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v1,
                  (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,1,4,0x10,
-                 &LAB_0013fbbc,*(unsigned int *)(DAT_0057f590 + 0x7c));
+                 &LAB_0013fbbc,*(unsigned int *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0x7c));
     temp_v5 = FUN_001834a4(8,199);
     FUN_00180310(0,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v1,
                  (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,0,1,0x10,
@@ -151,9 +151,9 @@ unsigned int FUN_0013f7c4(void)
     FUN_001677c0();
     FUN_0016c69c(DAT_0059dbb4,3);
   }
-  temp_v1 = DAT_0057f590;
-  if (*(int *)(DAT_0057f590 + 0x158) != 0) {
-    temp_v2 = FUN_001654d8(DAT_0057f590 + 0xd30);
+  temp_v1 = (*(int *)((unsigned char *)&DAT_0057f588 + 0x8));
+  if (*(int *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0x158) != 0) {
+    temp_v2 = FUN_001654d8((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0xd30);
     temp_v4 = FUN_001654e4(temp_v1 + 0xd30);
     temp_v3 = FUN_001692ac(1,0);
     FUN_0016c6f0(DAT_0059dbb4,3,temp_v3);
@@ -191,15 +191,15 @@ unsigned int FUN_0013f7c4(void)
     FUN_00183bb0();
     FUN_0016c69c(DAT_0059dbb4,3);
   }
-  if ((*(char *)(DAT_0057f590 + 0x19fb) != '\0') &&
-     (temp_v1 = *(int *)(DAT_0057f590 + 0x19fc), temp_v1 != 0)) {
+  if ((*(char *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0x19fb) != '\0') &&
+     (temp_v1 = *(int *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0x19fc), temp_v1 != 0)) {
     if (temp_v1 != 1) {
       if (temp_v1 != 2) {
         if (temp_v1 == 3) {
           FUN_001677c0();
           FUN_001835b4(2,4,0xac0f,0,0,0xf1);
           FUN_001835b4(2,4,0xac10,0,0,0xf1);
-          if (*(char *)(DAT_0057f590 + 0x19f9) == '\x03') {
+          if (*(char *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0x19f9) == '\x03') {
             FUN_001677c0();
             temp_v1 = 0;
             do {
@@ -223,7 +223,7 @@ unsigned int FUN_0013f7c4(void)
       else {
         FUN_001677c0();
         FUN_001835b4(2,4,0xabf9,0,0,0xf1);
-        if (*(char *)(DAT_0057f590 + 0x19f9) == '\x03') {
+        if (*(char *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0x19f9) == '\x03') {
           FUN_001677c0();
           temp_v1 = 0;
           do {
@@ -240,7 +240,7 @@ unsigned int FUN_0013f7c4(void)
     else {
       FUN_001677c0();
       FUN_001835b4(2,4,0xac2c,0,0,0xf1);
-      if (*(char *)(DAT_0057f590 + 0x19f9) == '\x03') {
+      if (*(char *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0x19f9) == '\x03') {
         FUN_001677c0();
         temp_v1 = 0;
         do {

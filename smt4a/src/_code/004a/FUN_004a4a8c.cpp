@@ -1,5 +1,3 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004a4a8c` (_code @ 0x4a4a8c, 0x13c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
@@ -60,13 +58,13 @@ void FUN_004a4a8c(int param_1)
       temp_v0 = 10;
     }
     *(unsigned short *)(param_1 + 0xa872) = temp_v0;
-    FUN_00184528(param_1 + 0xdc,temp_v0);
+    FUN_00184528(param_1 + 0xdc,(short)temp_v0);
     return;
   }
   temp_v5 = FUN_002f036c();
   if ((temp_v5 == 0) && (0 < *(int *)(param_1 + 0x28))) {
-    temp_v5 = FUN_002a482c(param_1 + 0x20);
-    temp_v3 = FUN_0031d174(param_1 + 0x20);
+    int a = FUN_002a482c(param_1 + 0x20);
+    int c = FUN_0031d174(param_1 + 0x20);
     temp_v4 = FUN_0037df48();
     if (temp_v4 != 1) {
       temp_v4 = FUN_0037df48();
@@ -78,7 +76,7 @@ void FUN_004a4a8c(int param_1)
       FUN_004d0100(param_1 + 0x20);
     }
     temp_v4 = FUN_002a482c(param_1 + 0x20);
-    if ((temp_v4 != temp_v5) || (temp_v5 = FUN_0031d174(param_1 + 0x20), temp_v5 != temp_v3)) {
+    if ((temp_v4 != a) || (temp_v5 = FUN_0031d174(param_1 + 0x20), temp_v5 != c)) {
       FUN_004d0440();
       return;
     }

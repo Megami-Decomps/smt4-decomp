@@ -18,7 +18,8 @@ void FUN_0011fe6c(unsigned int *param_1)
   *param_1 = (unsigned int)&DAT_0055adc0;
   *(unsigned char *)(param_1 + 1) = 0;
   temp_v0 = FUN_002ea0e4(param_1 + 2);
-  *(unsigned char **)(temp_v0 - 8) = &DAT_0055aca0;
+  temp_v0 = temp_v0 - 8;
+  *(unsigned char **)temp_v0 = &DAT_0055aca0;
   return;
 }
 

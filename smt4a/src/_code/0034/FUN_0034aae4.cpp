@@ -33,13 +33,9 @@ void FUN_0034aae4(void)
   int temp_v0;
   
   puVar1 = DAT_0057f28c;
-  if (DAT_0057f28c != (unsigned int *)0x0) {
-    temp_v0 = 0;
-    if (*(short *)(DAT_0057f28c + 0x351) != 0) {
-      do {
-        FUN_001641c4();
-        temp_v0 = temp_v0 + 1;
-      } while (temp_v0 < (int)(unsigned int)*(unsigned short *)(puVar1 + 0x351));
+  if (puVar1 != (unsigned int *)0x0) {
+    for (temp_v0 = 0; temp_v0 < (int)(unsigned int)*(unsigned short *)(puVar1 + 0x351); temp_v0 = temp_v0 + 1) {
+      FUN_001641c4();
     }
     FUN_0019c364(puVar1[0x23f]);
     FUN_0019a5a0(puVar1[0x23e]);

@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_5_stack;
 
-extern int DAT_0057a9c8; /* 0x57a9c8 */
+extern unsigned char DAT_0057a9b8; /* 0x57a9b8 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int FUN_001834a4(unsigned int, unsigned int);
@@ -34,7 +34,7 @@ void FUN_004aace8(unsigned int param_1,int param_2,unsigned int param_3,int para
   int temp_v6;
   unsigned int in_fpscr;
   
-  temp_v2 = DAT_0057a9c8;
+  temp_v2 = (*(int *)((unsigned char *)&DAT_0057a9b8 + 0x10));
   temp_v4 = 0;
   if (param_2 == 0) {
     temp_v4 = 0x3fa;

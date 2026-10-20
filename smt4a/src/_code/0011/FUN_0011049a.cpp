@@ -21,8 +21,7 @@ void FUN_0011049a(int param_1)
 /* irregular: 4 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = param_1;
-  FUN_002fb208();
+  temp_v0 = FUN_002fb208();
   *(unsigned char *)(param_1 + 0x1e) = 0;
   FUN_001104c0(param_1,temp_v0);
   FUN_00110494(param_1);

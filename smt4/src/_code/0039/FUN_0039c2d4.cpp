@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002bd8e8(int, int, int);
-int FUN_002beed0(int, int, int, int, int, int);
+int FUN_002beed0(int, int, int, int, int, int, float);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -26,7 +26,7 @@ void FUN_0039c2d4(int param_1)
   *(unsigned int *)(param_1 + 0x9f4) = 0;
   *(unsigned char *)(param_1 + 0x9ed) = 0;
   *(unsigned char *)(param_1 + 0x9ee) = 0;
-  FUN_002beed0(param_1 + 0x9f8,0x1c,0x1121,0x1d,param_1 + 0x5f8,0x15);
+  FUN_002beed0(param_1 + 0x9f8,0x1c,0x1121,0x1d,param_1 + 0x5f8,0x15,1.0f);
   FUN_002bd8e8(param_1 + 0x9f8,5,0);
   return;
 }

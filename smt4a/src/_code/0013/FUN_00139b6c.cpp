@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_005f1850; /* 0x5f1850 */
+extern unsigned char DAT_005f15fc; /* 0x5f15fc */
 
 extern int FUN_00162e8c(void);
 
@@ -22,9 +22,9 @@ void FUN_00139b6c(void)
   int *piVar8;
   
   temp_v2 = FUN_00162e8c();
-  DAT_005f1850 = DAT_005f1850 + 1;
-  if (DAT_005f1850 >= 0x709) {
-    DAT_005f1850 = 0;
+  (*(int *)((unsigned char *)&DAT_005f15fc + 0x254)) = (*(int *)((unsigned char *)&DAT_005f15fc + 0x254)) + 1;
+  if ((*(int *)((unsigned char *)&DAT_005f15fc + 0x254)) >= 0x709) {
+    (*(int *)((unsigned char *)&DAT_005f15fc + 0x254)) = 0;
     temp_v3 = 0x40;
     pcVar4 = (char *)(temp_v2 + 0xc0c);
     do {

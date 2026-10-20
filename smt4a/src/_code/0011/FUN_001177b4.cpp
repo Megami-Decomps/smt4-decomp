@@ -8,7 +8,7 @@ int FUN_002e6e34(int *, unsigned int);
 int FUN_002e6e5c(int *);
 
 typedef int romwright_code(...);
-extern signed char DAT_0059496c; /* 0x59496c */
+extern unsigned char DAT_00594958; /* 0x594958 */
 
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
@@ -28,7 +28,7 @@ void FUN_001177b4(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   uStack_18 = param_2;
   uStack_14 = param_3;
   uStack_10 = param_4;
-  if (DAT_0059496c != '\0') {
+  if ((*(signed char *)((unsigned char *)&DAT_00594958 + 0x14)) != '\0') {
     temp_v0 = FUN_002ea714();
     FUN_002e6e34(&uStack_18,temp_v0);
     for (temp_v1 = *(int *)(param_1 + 8); *(int *)(param_1 + 0xc) != temp_v1; temp_v1 = temp_v1 + 8) {

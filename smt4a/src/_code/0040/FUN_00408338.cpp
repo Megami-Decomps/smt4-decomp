@@ -20,23 +20,20 @@ void FUN_00408338(int param_1,unsigned int param_2,int param_3)
   temp_v1 = FUN_002c2710();
   temp_v2 = FUN_0018719c(0x4f);
   if ((temp_v2 == 0) || (temp_v2 = FUN_0018719c(0x41), temp_v2 != 0)) {
-    temp_v1 = temp_v1 + param_1 * 8;
-    if (param_1 >= 0xc0) {
-      temp_v1 = temp_v1 + 0x2f0;
+    if (param_1 > 0xbf) {
+      temp_v1 = temp_v1 + param_1 * 8 + 0x2f0;
     }
     else {
-      temp_v1 = temp_v1 + 0xcf0;
+      temp_v1 = temp_v1 + param_1 * 8 + 0xcf0;
     }
     pbVar4 = (unsigned char *)(temp_v1 + (param_2 >> 3));
-    temp_v0 = *pbVar4;
     temp_v3 = (unsigned char)(1 << (param_2 & 7));
     if (param_3 != 0) {
-      temp_v3 = temp_v3 | temp_v0;
+      *pbVar4 = *pbVar4 | temp_v3;
     }
     else {
-      temp_v3 = temp_v0 & ~temp_v3;
+      *pbVar4 = *pbVar4 & ~temp_v3;
     }
-    *pbVar4 = temp_v3;
   }
   return;
 }

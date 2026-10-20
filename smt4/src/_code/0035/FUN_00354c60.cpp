@@ -17,7 +17,7 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } param_3_stack;
 
-extern unsigned int DAT_0044e660; /* 0x44e660 */
+extern unsigned char DAT_0044e650; /* 0x44e650 */
 
 /* Supplied declaration required: FUN_00361234. */
 /* Supplied declaration required: nn_fs_ipc_FileSystem_FormatSaveData. */
@@ -39,7 +39,7 @@ void FUN_00354c60(unsigned int param_1,unsigned int param_2,unsigned int param_3
   FUN_00361234();
   temp_v2 = (unsigned int **)&temp_v2;
   uStack_24 = 1;
-  temp_v3[0] = DAT_0044e660;
+  temp_v3[0] = (*(unsigned int *)((unsigned char *)&DAT_0044e650 + 0x10));
   nn_fs_ipc_FileSystem_FormatSaveData
             (temp_v3,4,1,temp_v2,1,0x200,param_2,param_1,temp_v0,temp_v1,param_3,1);
   return;

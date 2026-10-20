@@ -26,18 +26,13 @@ int FUN_00381114(int *param_1,unsigned int param_2,unsigned int param_3,int para
   
   temp_v2 = param_1[3];
   if (temp_v2 != 0) {
-    temp_v3 = param_4;
-    temp_v0 = (**(romwright_code **)(*param_1 + 0x68))();
-    temp_v1 = 0;
-    if (temp_v1 < temp_v0) {
-      do {
-        temp_v3 = *(int *)(temp_v2 + temp_v1 * 0x14);
-        if (temp_v3 != 0) {
-          FUN_003f51fc(1,&temp_v3);
-          *(unsigned int *)(temp_v2 + temp_v1 * 0x14) = 0;
-        }
-        temp_v1 = temp_v1 + 1;
-      } while (temp_v1 < temp_v0);
+    temp_v0 = (**(romwright_code **)(*param_1 + 0x68))(param_1);
+    for (temp_v1 = 0; temp_v1 < temp_v0; temp_v1++) {
+      temp_v3 = *(int *)(temp_v2 + temp_v1 * 0x14);
+      if (temp_v3 != 0) {
+        FUN_003f51fc(1,&temp_v3);
+        *(unsigned int *)(temp_v2 + temp_v1 * 0x14) = 0;
+      }
     }
     param_1[3] = 0;
   }

@@ -32,7 +32,7 @@ typedef struct {
 } param_1_stack;
 
 extern int DAT_00581288; /* 0x581288 */
-extern signed char DAT_005f161f; /* 0x5f161f */
+extern unsigned char DAT_005f15fc; /* 0x5f15fc */
 
 extern int FUN_00162e8c(void);
 /* Supplied declaration required: FUN_003fd76c. */
@@ -58,7 +58,7 @@ void FUN_0036aa04(fn_0036aa04_arg0 *param_1)
   temp_v0 = *(int *)((int)param_1->field_0xd8 + 4);
   temp_v2 = *(int *)((int)param_1->field_0xec + 4);
   temp_v3 = *(int *)((int)param_1->field_0xbc + 4);
-  if (DAT_005f161f != '\0') {
+  if ((*(signed char *)((unsigned char *)&DAT_005f15fc + 0x23)) != '\0') {
     *(unsigned int *)(temp_v3 + 4) = *(unsigned int *)(temp_v3 + 4) | 3;
     *(unsigned int *)(temp_v0 + 4) = *(unsigned int *)(temp_v0 + 4) | 3;
     *(unsigned int *)(temp_v2 + 4) = *(unsigned int *)(temp_v2 + 4) | 3;

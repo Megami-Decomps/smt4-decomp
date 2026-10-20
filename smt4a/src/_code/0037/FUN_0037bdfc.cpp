@@ -1,12 +1,10 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0037bdfc` (_code @ 0x37bdfc, 0x64 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
 
 int FUN_00169ddc(int);
 int FUN_002e0798(int);
-int FUN_003fd63c(int, int);
+int FUN_003fd63c(int, int, int);
 
 typedef struct fn_0037bdfc_arg0 fn_0037bdfc_arg0;
 struct fn_0037bdfc_arg0 {
@@ -39,7 +37,7 @@ unsigned int FUN_0037bdfc(fn_0037bdfc_arg0 *param_1)
   if (temp_v0 == 2) {
     param_1->field_0x3bc = 0;
     FUN_002e0798(0x28);
-    FUN_003fd63c(0x551,1);
+    FUN_003fd63c(0x551,1,1);
     param_1->field_0x3dc = param_1->field_0x3dc & 0xfffffff7;
     temp_v1 = FUN_00388024();
     param_1->field_0x3b0 = temp_v1;

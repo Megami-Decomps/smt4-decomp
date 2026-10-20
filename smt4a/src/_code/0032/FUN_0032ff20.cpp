@@ -1,10 +1,8 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0032ff20` (_code @ 0x32ff20, 0xf4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
 
-int FUN_00184310(...);
+int FUN_00184310(int);
 int FUN_002e6354(...);
 int FUN_004bcd90(...);
 int FUN_004bd6b0(...);
@@ -33,7 +31,7 @@ extern unsigned short FUN_0017760c(unsigned short *);
 /* Supplied declaration required: rt_memcpy_w. */
 
 
-void FUN_0032ff20(fn_0032ff20_arg0 *param_1,unsigned short *param_2)
+void FUN_0032ff20(int param_1,unsigned short *param_2)
 
 {
 /* irregular: 5 native warning(s); review required */
@@ -41,10 +39,9 @@ void FUN_0032ff20(fn_0032ff20_arg0 *param_1,unsigned short *param_2)
   fn_0032ff20_arg0 *pfVar2;
   int temp_v1;
   
-  pfVar2 = param_1;
-  FUN_00184310();
+  pfVar2 = (fn_0032ff20_arg0 *)FUN_00184310(param_1);
   FUN_002e6354(param_2,300);
-  param_2[0x31] = (short)(int)param_1;
+  param_2[0x31] = (short)param_1;
   param_2[0x32] = pfVar2->field_0x6;
   *param_2 = pfVar2->field_0x18;
   param_2[1] = pfVar2->field_0x1a;

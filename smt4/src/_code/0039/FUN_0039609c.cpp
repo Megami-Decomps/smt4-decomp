@@ -16,7 +16,7 @@ typedef struct {
 } param_1_stack;
 
 extern int DAT_00447e88; /* 0x447e88 */
-extern signed char DAT_0049f93e; /* 0x49f93e */
+extern unsigned char DAT_0049f91c; /* 0x49f91c */
 
 #ifndef ROMWRIGHT_SQRT_4_DEFINED
 #define ROMWRIGHT_SQRT_4_DEFINED
@@ -70,7 +70,7 @@ void FUN_0039609c(int param_1)
     }
     else {
       puVar1 = *(unsigned int **)(param_1 + 0x6c);
-      if (DAT_0049f93e == '\0') {
+      if ((*(signed char *)((unsigned char *)&DAT_0049f91c + 0x22)) == '\0') {
         if ((*puVar1 & 2) == 0) {
           return;
         }

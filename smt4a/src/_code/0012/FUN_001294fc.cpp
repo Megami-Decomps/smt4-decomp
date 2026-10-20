@@ -8,7 +8,7 @@ int FUN_002f5020(...);
 int FUN_004325f4(...);
 
 extern int FUN_0030cbf0(...); /* 0x30cbf0 */
-extern unsigned int DAT_00594a00; /* 0x594a00 */
+extern unsigned char DAT_005949d8; /* 0x5949d8 */
 
 extern unsigned int FUN_002e6dac(int);
 extern unsigned int *FUN_002f5010(unsigned int);
@@ -25,15 +25,15 @@ void FUN_001294fc(int param_1)
   int temp_v1;
   unsigned int temp_v2;
   
-  if ((DAT_00594a00 == 0xffffffff) &&
+  if (((*(unsigned int *)((unsigned char *)&DAT_005949d8 + 0x28)) == 0xffffffff) &&
      (puVar1 = (unsigned int *)FUN_002f5010(0xffffff30), puVar1 != (unsigned int *)0x0)) {
     puVar1[1] = 0xffffffff;
     *puVar1 = 0xd8;
     FUN_002f5020(puVar1 + 2,FUN_0030cbf0,0xd8,0xffffffff);
   }
-  temp_v0 = FUN_002e6dac(DAT_00594a00 * 0xd8);
+  temp_v0 = FUN_002e6dac((*(unsigned int *)((unsigned char *)&DAT_005949d8 + 0x28)) * 0xd8);
   *(unsigned int *)(param_1 + 8) = temp_v0;
-  for (temp_v2 = 0; temp_v2 < DAT_00594a00; temp_v2 = temp_v2 + 1) {
+  for (temp_v2 = 0; temp_v2 < (*(unsigned int *)((unsigned char *)&DAT_005949d8 + 0x28)); temp_v2 = temp_v2 + 1) {
     temp_v1 = *(int *)(param_1 + 8) + temp_v2 * 0xd8;
     if (temp_v1 != 0) {
       FUN_004325f4(temp_v1,param_1 + 0xe8);

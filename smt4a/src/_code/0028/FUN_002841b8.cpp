@@ -31,7 +31,7 @@ extern unsigned char DAT_00530a24; /* 0x530a24 */
 extern int DAT_0057f58c; /* 0x57f58c */
 extern unsigned char DAT_005a6665; /* 0x5a6665 */
 extern unsigned char DAT_005f1afc; /* 0x5f1afc */
-extern unsigned int DAT_005f1b00; /* 0x5f1b00 */
+extern unsigned char DAT_005f15fc; /* 0x5f15fc */
 
 /* Supplied declaration required: FUN_0016431c. */
 extern int FUN_0018719c(unsigned int);
@@ -104,7 +104,7 @@ unsigned int FUN_002841b8(int param_1,int param_2,unsigned int param_3)
   else {
     if (temp_v9 == 0) {
       DAT_005f1afc = 1;
-      DAT_005f1b00 = (unsigned int)temp_v7[param_2];
+      (*(unsigned int *)((unsigned char *)&DAT_005f15fc + 0x504)) = (unsigned int)temp_v7[param_2];
       if (DAT_0057f58c != 0) {
         *(unsigned char *)(DAT_0057f58c + 0x19c5) = 0x15;
       }
@@ -128,7 +128,7 @@ unsigned int FUN_002841b8(int param_1,int param_2,unsigned int param_3)
     temp_v4 = FUN_0023b258();
     if (temp_v4 != 0) {
       DAT_005f1afc = 0;
-      DAT_005f1b00 = 0;
+      (*(unsigned int *)((unsigned char *)&DAT_005f15fc + 0x504)) = 0;
       FUN_002686b8();
       FUN_0035d8a4();
       FUN_003491e8();
@@ -139,7 +139,7 @@ unsigned int FUN_002841b8(int param_1,int param_2,unsigned int param_3)
         return 0;
       }
       DAT_005f1afc = 0;
-      DAT_005f1b00 = 0;
+      (*(unsigned int *)((unsigned char *)&DAT_005f15fc + 0x504)) = 0;
       FUN_002686b8();
       FUN_0035d8a4();
       FUN_003491e8();

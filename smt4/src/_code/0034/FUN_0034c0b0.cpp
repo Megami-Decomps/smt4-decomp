@@ -1,5 +1,3 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0034c0b0` (_code @ 0x34c0b0, 0x19c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
@@ -19,7 +17,7 @@ typedef int romwright_code(...);
 void FUN_0034c0b0(fn_0034c0b0_arg0 *param_1)
 
 {
-  (**(romwright_code **)(*(int *)param_1->field_0x14 + 8))();
+  (**(romwright_code **)(*(int *)param_1->field_0x14 + 8))(param_1->field_0x14);
   *(float *)((int)param_1->field_0x4 + 0xc) =
        *(float *)((int)param_1->field_0x4 + 0xc) + *(float *)((int)param_1->field_0x1c + 0x20);
   *(float *)((int)param_1->field_0x4 + 0x10) =

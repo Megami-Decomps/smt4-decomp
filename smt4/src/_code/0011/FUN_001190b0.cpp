@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_2_stack;
 
-extern unsigned char DAT_004e315c; /* 0x4e315c */
+extern unsigned char DAT_004e3154; /* 0x4e3154 */
 
 /* Supplied declaration required: FUN_001190b0. */
 /* Supplied declaration required: FUN_001290cc. */
@@ -43,7 +43,7 @@ void FUN_001190b0(int param_1,unsigned int param_2)
     return;
   }
   if ((*(unsigned int *)(param_1 + 0x90) & 0x202) == 0) {
-    nn_os_CriticalSection_Enter((unsigned int)&DAT_004e315c);
+    nn_os_CriticalSection_Enter((unsigned int)&(*(unsigned char *)((unsigned char *)&DAT_004e3154 + 0x8)));
     *(unsigned int *)(param_1 + 0x78) = param_2;
     *(unsigned int *)(param_1 + 0x84) = 0;
     *(unsigned int *)(param_1 + 0x94) = in_s0;
@@ -54,13 +54,13 @@ void FUN_001190b0(int param_1,unsigned int param_2)
     if (0 < *(int *)(param_1 + 0x78)) {
       *(unsigned int *)(param_1 + 0x90) = temp_v1 | 0x60;
     }
-    nn_os_CriticalSection_Leave((unsigned int)&DAT_004e315c);
+    nn_os_CriticalSection_Leave((unsigned int)&(*(unsigned char *)((unsigned char *)&DAT_004e3154 + 0x8)));
     return;
   }
   if ((*(unsigned int *)(param_1 + 0x90) & 0x200) == 0) {
     return;
   }
-  nn_os_CriticalSection_Enter((unsigned int)&DAT_004e315c);
+  nn_os_CriticalSection_Enter((unsigned int)&(*(unsigned char *)((unsigned char *)&DAT_004e3154 + 0x8)));
   FUN_002bd430(*(unsigned int *)(param_1 + 0x38));
   temp_v0 = FUN_002bd29c(0x7fff,0);
   *(unsigned int *)(param_1 + 0x38) = temp_v0;
@@ -75,7 +75,7 @@ void FUN_001190b0(int param_1,unsigned int param_2)
   FUN_001290cc(*(unsigned int *)(param_1 + 0x38),*(unsigned int *)(param_1 + 0x6c),param_1 + 8,
                param_1 + 0x20,0);
   FUN_001190b0(param_1,param_2);
-  nn_os_CriticalSection_Leave((unsigned int)&DAT_004e315c);
+  nn_os_CriticalSection_Leave((unsigned int)&(*(unsigned char *)((unsigned char *)&DAT_004e3154 + 0x8)));
   return;
 }
 

@@ -22,7 +22,7 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } void_stack;
 
-extern int DAT_0057f214; /* 0x57f214 */
+extern unsigned char DAT_0057f208; /* 0x57f208 */
 extern int DAT_0059dbb4; /* 0x59dbb4 */
 
 /* Supplied declaration required: FUN_00157558. */
@@ -52,12 +52,12 @@ char FUN_003bab24(void)
   unsigned short temp_v8;
   unsigned short temp_v9;
   
-  temp_v2 = DAT_0057f214;
+  temp_v2 = (*(int *)((unsigned char *)&DAT_0057f208 + 0xc));
   temp_v0 = '\0';
-  if (DAT_0057f214 != 0) {
-    temp_v0 = *(char *)(DAT_0057f214 + 5);
+  if ((*(int *)((unsigned char *)&DAT_0057f208 + 0xc)) != 0) {
+    temp_v0 = *(char *)((*(int *)((unsigned char *)&DAT_0057f208 + 0xc)) + 5);
   }
-  if (DAT_0057f214 != 0 && temp_v0 != '\0') {
+  if ((*(int *)((unsigned char *)&DAT_0057f208 + 0xc)) != 0 && temp_v0 != '\0') {
     FUN_00157558(DAT_0059dbb4);
     temp_v5 = DAT_0059dbb4;
     temp_v1 = FUN_001692ac(1,0);

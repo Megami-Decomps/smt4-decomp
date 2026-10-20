@@ -8,7 +8,7 @@ int FUN_0020d8ec(void);
 int FUN_002aa18c(...);
 
 extern int DAT_00447600; /* 0x447600 */
-extern signed char DAT_0049f93c; /* 0x49f93c */
+extern unsigned char DAT_0049f91c; /* 0x49f91c */
 
 /* Supplied declaration required: FUN_0020d8ec. */
 /* Supplied declaration required: FUN_002aa18c. */
@@ -38,7 +38,7 @@ void FUN_001f9ce0(void)
   float temp_v17;
   
   temp_v1 = DAT_00447600;
-  if (((DAT_00447600 != 0) && (*(int *)(DAT_00447600 + 4) == 8)) && (DAT_0049f93c == '\0')) {
+  if (((DAT_00447600 != 0) && (*(int *)(DAT_00447600 + 4) == 8)) && ((*(signed char *)((unsigned char *)&DAT_0049f91c + 0x20)) == '\0')) {
     temp_v13 = 90.0f;
     temp_v14 = 1.9888889f;
     temp_v11 = 198.0f;

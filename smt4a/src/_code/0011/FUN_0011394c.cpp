@@ -24,7 +24,7 @@ typedef struct {
     unsigned int spA0; /* 0xa0: local_a0 */
 } param_2_stack;
 
-extern unsigned int DAT_00594aa4; /* 0x594aa4 */
+extern unsigned char DAT_00594a58; /* 0x594a58 */
 
 /* Supplied declaration required: FUN_001037a2. */
 /* Supplied declaration required: FUN_00113cd0. */
@@ -60,7 +60,7 @@ void FUN_0011394c(int param_1,unsigned int param_2)
   FUN_002ee9c0(temp_v1,param_1 + 0x14);
   FUN_002eb588(temp_v5);
   FUN_001037a2(temp_v1,temp_v5);
-  for (temp_v0 = 0; temp_v0 < DAT_00594aa4; temp_v0 = temp_v0 + 1) {
+  for (temp_v0 = 0; temp_v0 < (*(unsigned int *)((unsigned char *)&DAT_00594a58 + 0x4c)); temp_v0 = temp_v0 + 1) {
     piVar1 = *(int **)(param_1 + 0x18);
     if (piVar1 != (int *)0x0) {
       (**(romwright_code **)(*piVar1 + 0xc))

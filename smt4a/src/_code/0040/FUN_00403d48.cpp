@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001677c0(void);
+int FUN_001677c0(float);
 int FUN_001835b4(...);
 
 /* stack frame of param_6: 3 slot(s), 12 byte(s) */
@@ -19,11 +19,11 @@ typedef struct {
 
 
 void FUN_00403d48(unsigned int param_1,unsigned int param_2,unsigned int param_3,int param_4,int param_5,
-                 int param_6)
+                 int param_6,float param_7)
 
 {
 /* irregular: 2 native warning(s); review required */
-  FUN_001677c0();
+  FUN_001677c0(param_7);
   if (param_5 != 0) {
     FUN_001835b4(2,0x32,0x8e,param_2,param_3,param_4 + 1);
     FUN_001835b4(2,0x32,0x8f,param_2,param_3,param_4);
@@ -34,7 +34,7 @@ void FUN_00403d48(unsigned int param_1,unsigned int param_2,unsigned int param_3
     FUN_001835b4(2,0x32,0x9f,param_2,param_3,param_4);
     FUN_001835b4(2,0x32,0xa0,param_2,param_3,param_4 + 2);
   }
-  FUN_001677c0();
+  FUN_001677c0(1.0f);
   return;
 }
 

@@ -9,9 +9,10 @@ unsigned char FUN_00288da8(int param_1,int param_2)
 
 {
   unsigned int temp_v0;
+  int q;
   
-  temp_v0 = ((int)((unsigned long long)((long long)(param_2 << 0xc) * 0x28f5c29) >> 0x20) -
-          ((param_2 << 0xc) >> 0x1f)) * 0x14;
+  q = (int)(((long long)(param_2 << 0xc) * 0x28f5c29) >> 0x20);
+  temp_v0 = (q - (q >> 0x1f)) * 0x14;
   if (temp_v0 < 0x1000) {
     temp_v0 = 0x1000;
   }

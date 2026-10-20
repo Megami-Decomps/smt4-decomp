@@ -1,5 +1,3 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e9974` (_code @ 0x2e9974, 0x70 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
@@ -28,14 +26,18 @@ void FUN_002e9974(int param_1,int param_2,unsigned int param_3,unsigned int para
     *(unsigned char *)(param_1 + 0x65) = 1;
   }
   else {
-    FUN_002e95c4(param_1,0,param_3,param_4,param_4);
+    FUN_002e95c4(param_1,0);
   }
   if (*(char *)(param_2 + 100) != '\0') {
     FUN_002e9538(*(unsigned int *)(param_1 + 4),*(unsigned int *)(param_2 + 4));
     *(unsigned char *)(param_1 + 8) = *(unsigned char *)(param_2 + 8);
     FUN_0012f2ce(param_1 + 0xc,param_2 + 0xc);
-    FUN_002e9614(param_1 + 0x28,param_2 + 0x28);
-    FUN_002e9614(param_1 + 0x44,param_2 + 0x44);
+    int d = param_1 + 0x28;
+    int s = param_2 + 0x28;
+    FUN_002e9614(d,s);
+    d = param_1 + 0x44;
+    s = param_2 + 0x44;
+    FUN_002e9614(d,s);
     *(unsigned char *)(param_1 + 100) = 1;
   }
   *(unsigned char *)(param_1 + 0x66) = *(unsigned char *)(param_2 + 0x66);

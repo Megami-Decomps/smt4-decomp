@@ -34,7 +34,7 @@ typedef struct {
 } param_4_stack;
 
 extern unsigned char DAT_00558cc4; /* 0x558cc4 */
-extern float DAT_00599370; /* 0x599370 */
+extern unsigned char DAT_0059935c; /* 0x59935c */
 
 extern unsigned int FUN_00104fe0(int, unsigned char);
 /* Supplied declaration required: FUN_0010b0f4. */
@@ -80,9 +80,9 @@ FUN_004324d4(fn_004324d4_arg0 *param_1,unsigned int param_2,unsigned int param_3
   FUN_0010ccf0(&uStack_24,temp_v1,30000);
   temp_v1 = FUN_002eac34(*(unsigned char *)(puVar1 + 9));
   FUN_0010cd04(&uStack_24,temp_v1,5000);
-  if (0.0f < DAT_00599370) {
+  if (0.0f < (*(float *)((unsigned char *)&DAT_0059935c + 0x14))) {
     (**(romwright_code **)(*(int *)(puVar1[8] + 0x88) + 8))();
-    *(float *)(puVar1[8] + 0xa0) = DAT_00599370;
+    *(float *)(puVar1[8] + 0xa0) = (*(float *)((unsigned char *)&DAT_0059935c + 0x14));
   }
   temp_v0 = FUN_002e760a(0x78);
   if (temp_v0 != 0) {

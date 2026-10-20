@@ -8,7 +8,7 @@ int FUN_0018a8a8(int, int);
 int FUN_0018a8c8(int, unsigned int);
 int FUN_00439fa4(int, unsigned int);
 
-extern signed char DAT_00646b3a; /* 0x646b3a */
+extern unsigned char DAT_00646b38; /* 0x646b38 */
 
 /* Supplied declaration required: FUN_0018a8a8. */
 /* Supplied declaration required: FUN_0018a8c8. */
@@ -42,10 +42,10 @@ void FUN_00461a54(int param_1,unsigned char *param_2)
         FUN_0018a8c8(temp_v1,temp_v0);
         nn_snd_CTR_Voice_SetSampleRate(temp_v1,*(int *)(param_2 + 8));
         temp_v0 = 0;
-        if (DAT_00646b3a == '\0') {
+        if ((*(signed char *)((unsigned char *)&DAT_00646b38 + 0x2)) == '\0') {
           temp_v0 = 2;
         }
-        else if (DAT_00646b3a == '\x01') {
+        else if ((*(signed char *)((unsigned char *)&DAT_00646b38 + 0x2)) == '\x01') {
           temp_v0 = 1;
         }
         FUN_00439fa4(temp_v1,temp_v0);

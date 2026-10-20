@@ -22,8 +22,7 @@ typedef struct {
 } param_3_stack;
 
 extern unsigned int DAT_004652a0; /* 0x4652a0 */
-extern unsigned int DAT_00472094; /* 0x472094 */
-extern unsigned int DAT_00472098; /* 0x472098 */
+extern unsigned char DAT_00472098; /* 0x472098 */
 extern unsigned int DAT_004720a0; /* 0x4720a0 */
 extern unsigned int DAT_004720ec; /* 0x4720ec */
 extern float DAT_004720f4; /* 0x4720f4 */
@@ -69,7 +68,7 @@ void FUN_00364ebc(int param_1,int *param_2,float *param_3)
   puVar1 = (unsigned int *)(**(romwright_code **)(**(int **)(param_1 + 0x18) + 0xc))();
   temp_v6 = *puVar1;
   temp_v0 = (**(romwright_code **)(**(int **)(param_1 + 0x18) + 0xc))();
-  DAT_00472098 = *(unsigned int *)(temp_v0 + 4);
+  (*(unsigned int *)((unsigned char *)&(*(unsigned int *)((unsigned char *)&DAT_00472098 - 0x4)) + 0x4)) = *(unsigned int *)(temp_v0 + 4);
   temp_v3 = VectorFloatToUnsigned(*param_3,3);
   temp_v0 = VectorFloatToUnsigned(param_3[1],3);
   temp_v10 = 0;
@@ -158,7 +157,7 @@ void FUN_00364ebc(int param_1,int *param_2,float *param_3)
   temp_v9 = temp_v1 << 1;
   temp_v11 = (temp_v3 & 0xffff) | (temp_v0 << 0x10);
   temp_v12 = 0xf0068;
-  DAT_00472094 = temp_v6;
+  (*(unsigned int *)((unsigned char *)&DAT_00472098 - 0x4)) = temp_v6;
   nw_gfx_internal_FastWordCopyAsm_8(DAT_004652a0,temp_v7);
   temp_v5 = param_3[4];
   temp_v4 = param_3[5];

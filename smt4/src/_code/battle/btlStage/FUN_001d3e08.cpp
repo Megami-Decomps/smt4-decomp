@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-extern int DAT_004398d4; /* 0x4398d4 */
+extern unsigned char DAT_004398d0; /* 0x4398d0 */
 
 extern unsigned int FUN_002c08f0(void);
 /* Supplied declaration required: FUN_003c81c8. */
@@ -24,8 +24,8 @@ void FUN_001d3e08(void)
   unsigned int temp_v0;
   
   temp_v0 = FUN_002c08f0();
-  if (DAT_004398d4 != 0) {
-    FUN_003c81c8(DAT_004398d4,temp_v0);
+  if ((*(int *)((unsigned char *)&DAT_004398d0 + 0x4)) != 0) {
+    FUN_003c81c8((*(int *)((unsigned char *)&DAT_004398d0 + 0x4)),temp_v0);
     return;
   }
   return;

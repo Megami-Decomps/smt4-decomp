@@ -1,10 +1,8 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00513f90` (_code @ 0x513f90, 0x60 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
 
-int FUN_0050d2cc(void);
+int FUN_0050d2cc(int);
 
 extern int FUN_004acb54(int);
 /* Supplied declaration required: FUN_0050d2cc. */
@@ -20,8 +18,7 @@ unsigned int FUN_00513f90(int param_1)
   int temp_v3;
   int unaff_r6;
   
-  temp_v0 = *(int *)(param_1 + 4);
-  FUN_0050d2cc();
+  temp_v0 = FUN_0050d2cc(*(int *)(param_1 + 4));
   if (temp_v0 != 0) {
     unaff_r6 = *(int *)(temp_v0 + 0x10);
   }

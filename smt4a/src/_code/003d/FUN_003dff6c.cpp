@@ -39,7 +39,7 @@ extern unsigned short *FUN_001801a4(void);
 /* Supplied declaration required: FUN_004ccf78. */
 
 
-void FUN_003dff6c(fn_003dff6c_arg0 *param_1,unsigned int param_2,unsigned short *param_3)
+void FUN_003dff6c(int param_1,unsigned int param_2,unsigned short *param_3)
 
 {
 /* irregular: 4 native warning(s); review required */
@@ -47,13 +47,13 @@ void FUN_003dff6c(fn_003dff6c_arg0 *param_1,unsigned int param_2,unsigned short 
   
   puVar1 = (unsigned short *)FUN_001801a4();
   FUN_002e6354(puVar1,100);
-  puVar1[0x31] = (short)(int)param_1;
   puVar1[0x30] = 0;
+  puVar1[0x31] = (short)param_1;
   strncpy(puVar1 + 0x26,param_2,0x12);
   *(unsigned char *)((int)puVar1 + 0x5d) = 0;
   FUN_004ccf78(0);
-  if ((int)param_1 >= 2) {
-    FUN_004cc6d4(puVar1,(int)(short)((short)(int)param_1 - 1),1);
+  if (param_1 > 1) {
+    FUN_004cc6d4(puVar1,(int)(short)(param_1 - 1),1);
   }
   *puVar1 = *param_3;
   puVar1[1] = param_3[1];

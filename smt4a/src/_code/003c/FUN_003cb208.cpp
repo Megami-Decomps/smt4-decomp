@@ -29,12 +29,9 @@ void FUN_003cb208(int param_1)
   puVar4 = *(unsigned int **)(param_1 + 0x30);
   puVar1 = (unsigned int *)*puVar4;
   temp_v1 = *(unsigned int *)(*(int *)(param_1 + 0x34) + 0x38);
-  if (temp_v1 != 0) {
-    do {
-      FUN_002ce8d8(*puVar1);
-      temp_v0 = temp_v0 + 1;
-      puVar1 = puVar1 + 3;
-    } while (temp_v0 < temp_v1);
+  for (temp_v0 = 0; temp_v0 < temp_v1; temp_v0++) {
+    FUN_002ce8d8(*puVar1);
+    puVar1 = puVar1 + 3;
   }
   FUN_0019a5a0(puVar4);
   return;

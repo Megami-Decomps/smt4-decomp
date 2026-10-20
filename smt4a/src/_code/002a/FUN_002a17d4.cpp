@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_0057f69c; /* 0x57f69c */
+extern unsigned char DAT_0057f698; /* 0x57f698 */
 
 
 void FUN_002a17d4(int param_1)
@@ -15,7 +15,7 @@ void FUN_002a17d4(int param_1)
   unsigned int temp_v2;
   int temp_v3;
   
-  temp_v0 = DAT_0057f69c;
+  temp_v0 = (*(int *)((unsigned char *)&DAT_0057f698 + 0x4));
   temp_v1 = 0;
   do {
     temp_v2 = (unsigned int)*(unsigned short *)(param_1 + temp_v1 * 2 + 0x3c);

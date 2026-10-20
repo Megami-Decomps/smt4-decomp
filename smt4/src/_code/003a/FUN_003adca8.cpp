@@ -18,7 +18,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_7_stack;
 
-extern int DAT_00439ca8; /* 0x439ca8 */
+extern unsigned char DAT_00439c88; /* 0x439c88 */
 
 /* Supplied declaration required: FUN_002630e0. */
 /* Supplied declaration required: FUN_00295eb0. */
@@ -49,7 +49,7 @@ void FUN_003adca8(unsigned int param_1,int param_2,int param_3,unsigned int para
   unsigned int temp_v8;
   int temp_v9;
   
-  temp_v4 = DAT_00439ca8;
+  temp_v4 = (*(int *)((unsigned char *)&DAT_00439c88 + 0x20));
   temp_v6 = in_s0;
   temp_v7 = in_s1;
   temp_v8 = in_s2;

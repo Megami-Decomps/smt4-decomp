@@ -47,7 +47,7 @@ unsigned int scrComm_Message_ConfirmAndApplySimple(void)
     if (temp_v0 == 0) {
       return 1;
     }
-    FUN_002542d4(0);
+    FUN_002542d4(0,0);
     FUN_002542d4(1,0);
   }
   temp_v1 = FUN_002b47f4(0x1e);
@@ -57,7 +57,7 @@ unsigned int scrComm_Message_ConfirmAndApplySimple(void)
     FUN_0028ed3c(temp_v2,0,1);
     FUN_002bff50();
     temp_v3 = FUN_002542bc(1);
-    FUN_00254e2c(temp_v1,2,temp_v3,6,0);
+    temp_v1 = FUN_00254e2c(temp_v1,2,temp_v3,6,0);
     temp_v0 = FUN_002542bc(1);
     FUN_002542d4(1,temp_v0 + 1);
     if (temp_v1 == 1) {

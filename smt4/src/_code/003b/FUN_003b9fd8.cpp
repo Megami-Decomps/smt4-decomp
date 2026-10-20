@@ -42,7 +42,7 @@ typedef struct {
 } param_1_stack;
 
 extern int DAT_00432fc8; /* 0x432fc8 */
-extern int DAT_0049f970; /* 0x49f970 */
+extern unsigned char DAT_0049f91c; /* 0x49f91c */
 extern int DAT_0049fd14; /* 0x49fd14 */
 extern unsigned int DAT_0049fd18; /* 0x49fd18 */
 extern unsigned int DAT_0049fd1c; /* 0x49fd1c */
@@ -105,7 +105,7 @@ void FUN_003b9fd8(fn_003b9fd8_arg0 *param_1)
         param_1->field_0x2c = 0;
         param_1->field_0x28 = 5;
       }
-      else if (DAT_0049f970 != 0) {
+      else if ((*(int *)((unsigned char *)&DAT_0049f91c + 0x54)) != 0) {
         temp_v5 = 0;
         temp_v6 = 0;
         temp_v7 = 0;

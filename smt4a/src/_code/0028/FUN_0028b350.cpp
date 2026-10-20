@@ -31,7 +31,7 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } param_2_stack;
 
-extern int DAT_0057f594; /* 0x57f594 */
+extern unsigned char DAT_0057f588; /* 0x57f588 */
 extern unsigned short DAT_005e2058; /* 0x5e2058 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -387,7 +387,7 @@ LAB_0028bd98:
       temp_v6 = temp_v6 + 1;
     } while (temp_v6 < 5);
     *(unsigned char *)(param_1 + 0x46) = 0;
-    *(unsigned int *)(DAT_0057f594 + 0x28) = 0;
+    *(unsigned int *)((*(int *)((unsigned char *)&DAT_0057f588 + 0xc)) + 0x28) = 0;
     return;
   case 0xd:
     *(unsigned char *)(param_1 + 0x5d) = 0;
@@ -416,7 +416,7 @@ LAB_0028bd98:
     FUN_0019e330(temp_v7,6,0);
     FUN_00387240(temp_v7,8,temp_v6 + temp_v2);
     *(unsigned char *)(param_1 + 0x5e) = 0;
-    *(unsigned short *)(DAT_0057f594 + 0x58) = 0;
+    *(unsigned short *)((*(int *)((unsigned char *)&DAT_0057f588 + 0xc)) + 0x58) = 0;
     *(unsigned short *)(param_1 + 0x62) = 0;
     return;
   case 0x14:

@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp50; /* 0x50: local_50 */
 } param_1_stack;
 
-extern int DAT_0049fcfc; /* 0x49fcfc */
+extern unsigned char DAT_0049f91c; /* 0x49f91c */
 
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
 #define ROMWRIGHT_PIECE_4_4_DEFINED
@@ -92,7 +92,7 @@ void FUN_0039eb4c(int param_1)
   if (0 < temp_v4) {
     do {
       temp_v2 = param_1 + temp_v1 * 0x4c;
-      if ((DAT_0049fcfc == 0) &&
+      if (((*(int *)((unsigned char *)&DAT_0049f91c + 0x3e0)) == 0) &&
          (((temp_v3 = FUN_0024c2ec(*(unsigned char *)(temp_v2 + 0xe8c),*(unsigned char *)(temp_v2 + 0xe8d)),
            temp_v3 == 0 || ((*(short *)(temp_v2 + 0xeb8) != 0 && (temp_v3 = FUN_002c09d0(), temp_v3 == 0))))
           || ((*(short *)(temp_v2 + 0xeba) != 0 && (temp_v3 = FUN_002c09d0(), temp_v3 != 0)))))) {

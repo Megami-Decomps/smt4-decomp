@@ -1,5 +1,3 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00396fec` (_code @ 0x396fec, 0x94 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
@@ -21,17 +19,20 @@ void FUN_00396fec(int *param_1)
 {
 /* irregular: 2 native warning(s); review required */
   int *piVar1;
-  unsigned int temp_v0;
+  int temp_v0;
+  unsigned char temp_v1;
   
   piVar1 = (int *)*param_1;
+  int q = *piVar1;
   temp_v0 = *(unsigned char *)(piVar1 + 3) - 1;
-  if (((int)temp_v0 <= (int)(unsigned int)*(unsigned char *)(*piVar1 + 0xc)) &&
-     ((int)temp_v0 <= (int)(unsigned int)*(unsigned char *)(piVar1[1] + 0xc))) {
+  if (((int)*(unsigned char *)(q + 0xc) >= temp_v0) &&
+     ((int)*(unsigned char *)(piVar1[1] + 0xc) >= temp_v0)) {
     return;
   }
-  *(char *)(piVar1 + 3) = (char)temp_v0;
-  if ((temp_v0 & 0xff) < (unsigned int)*(unsigned char *)(*(int *)(*param_1 + 4) + 0xc)) {
-    *(char *)(*(int *)(*param_1 + 4) + 0xc) = (char)temp_v0;
+  temp_v1 = (unsigned char)temp_v0;
+  *(unsigned char *)(piVar1 + 3) = temp_v1;
+  if (*(unsigned char *)(*(int *)(*param_1 + 4) + 0xc) > temp_v1) {
+    *(unsigned char *)(*(int *)(*param_1 + 4) + 0xc) = temp_v1;
   }
   FUN_00232920(param_1);
   FUN_00232920(*param_1 + 4);
