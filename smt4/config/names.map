@@ -1049,3 +1049,8 @@
 003f5ffc mwmofilterDeblockerRelease
 003f613c mwmoimaadpcmDecoderRelease
 003f65e0 mwmomobiclipDecoderRelease
+00241c98 taskListUpdate
+00285f88 taskCreate
+002864d8 taskRunPhase
+0032fd18 taskUpdateAll
+0032fd74 taskInitLists

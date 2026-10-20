@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00285f88(...);
+int taskCreate(...);
 int FUN_002c4938(...);
 int FUN_002fdd9c(...);
 
@@ -23,7 +23,7 @@ extern int FUN_00200c9c(...); /* 0x200c9c */
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
-/* Supplied declaration required: FUN_00285f88. */
+/* Supplied declaration required: taskCreate. */
 /* Supplied declaration required: FUN_002c4938. */
 /* Supplied declaration required: FUN_002fdd9c. */
 
@@ -40,7 +40,7 @@ romwright_code * FUN_00244e1c(unsigned int param_1,unsigned int *param_2,unsigne
   unsigned int in_s3;
   
   pcVar1 = FUN_00200c9c;
-  FUN_00285f88(FUN_00200c9c,0,0,0,0,0x168,3,0,0);
+  taskCreate(FUN_00200c9c,0,0,0,0,0x168,3,0,0);
   if (pcVar1 != (romwright_code *)0x0) {
     FUN_002c4938();
     temp_v0 = param_1;

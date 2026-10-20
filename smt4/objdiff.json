@@ -65322,13 +65322,13 @@
       "target_path": "orig/target/_code/0024/FUN_00241c58.o"
     },
     {
-      "base_path": "build/obj/_code/sys/Task/Task/FUN_00241c98.o",
+      "base_path": "build/obj/_code/sys/Task/Task/taskListUpdate.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00241c98",
+            "name": "taskListUpdate",
             "size": 168,
             "vram": "0x241c98"
           }
@@ -65337,10 +65337,10 @@
           "_code",
           "sys/Task/Task"
         ],
-        "source_path": "src/_code/sys/Task/Task/FUN_00241c98.cpp"
+        "source_path": "src/_code/sys/Task/Task/taskListUpdate.cpp"
       },
-      "name": "_code/sys/Task/Task/FUN_00241c98",
-      "target_path": "orig/target/_code/sys/Task/Task/FUN_00241c98.o"
+      "name": "_code/sys/Task/Task/taskListUpdate",
+      "target_path": "orig/target/_code/sys/Task/Task/taskListUpdate.o"
     },
     {
       "base_path": "build/obj/_code/0024/FUN_00241d44.o",
@@ -82932,13 +82932,13 @@
       "target_path": "orig/target/_code/event/2dEvent/Npc2d/FUN_00285e44.o"
     },
     {
-      "base_path": "build/obj/_code/sys/Task/Task/FUN_00285f88.o",
+      "base_path": "build/obj/_code/sys/Task/Task/taskCreate.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00285f88",
+            "name": "taskCreate",
             "size": 452,
             "vram": "0x285f88"
           }
@@ -82947,10 +82947,10 @@
           "_code",
           "sys/Task/Task"
         ],
-        "source_path": "src/_code/sys/Task/Task/FUN_00285f88.cpp"
+        "source_path": "src/_code/sys/Task/Task/taskCreate.cpp"
       },
-      "name": "_code/sys/Task/Task/FUN_00285f88",
-      "target_path": "orig/target/_code/sys/Task/Task/FUN_00285f88.o"
+      "name": "_code/sys/Task/Task/taskCreate",
+      "target_path": "orig/target/_code/sys/Task/Task/taskCreate.o"
     },
     {
       "base_path": "build/obj/_code/0028/nn_math_ARMv6_MTX33CopyAsm.o",
@@ -83033,13 +83033,13 @@
       "target_path": "orig/target/_code/0028/FUN_0028648c.o"
     },
     {
-      "base_path": "build/obj/_code/sys/Task/Task/FUN_002864d8.o",
+      "base_path": "build/obj/_code/sys/Task/Task/taskRunPhase.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002864d8",
+            "name": "taskRunPhase",
             "size": 228,
             "vram": "0x2864d8"
           }
@@ -83048,10 +83048,10 @@
           "_code",
           "sys/Task/Task"
         ],
-        "source_path": "src/_code/sys/Task/Task/FUN_002864d8.cpp"
+        "source_path": "src/_code/sys/Task/Task/taskRunPhase.cpp"
       },
-      "name": "_code/sys/Task/Task/FUN_002864d8",
-      "target_path": "orig/target/_code/sys/Task/Task/FUN_002864d8.o"
+      "name": "_code/sys/Task/Task/taskRunPhase",
+      "target_path": "orig/target/_code/sys/Task/Task/taskRunPhase.o"
     },
     {
       "base_path": "build/obj/_code/0028/FUN_002865c0.o",
@@ -137132,13 +137132,13 @@
       "target_path": "orig/target/_code/font/SearchWin/RunWin/FUN_0032fcc0.o"
     },
     {
-      "base_path": "build/obj/_code/sys/Task/Task/FUN_0032fd18.o",
+      "base_path": "build/obj/_code/sys/Task/Task/taskUpdateAll.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0032fd18",
+            "name": "taskUpdateAll",
             "size": 88,
             "vram": "0x32fd18"
           }
@@ -137147,19 +137147,19 @@
           "_code",
           "sys/Task/Task"
         ],
-        "source_path": "src/_code/sys/Task/Task/FUN_0032fd18.cpp"
+        "source_path": "src/_code/sys/Task/Task/taskUpdateAll.cpp"
       },
-      "name": "_code/sys/Task/Task/FUN_0032fd18",
-      "target_path": "orig/target/_code/sys/Task/Task/FUN_0032fd18.o"
+      "name": "_code/sys/Task/Task/taskUpdateAll",
+      "target_path": "orig/target/_code/sys/Task/Task/taskUpdateAll.o"
     },
     {
-      "base_path": "build/obj/_code/sys/Task/Task/FUN_0032fd74.o",
+      "base_path": "build/obj/_code/sys/Task/Task/taskInitLists.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0032fd74",
+            "name": "taskInitLists",
             "size": 116,
             "vram": "0x32fd74"
           }
@@ -137168,10 +137168,10 @@
           "_code",
           "sys/Task/Task"
         ],
-        "source_path": "src/_code/sys/Task/Task/FUN_0032fd74.cpp"
+        "source_path": "src/_code/sys/Task/Task/taskInitLists.cpp"
       },
-      "name": "_code/sys/Task/Task/FUN_0032fd74",
-      "target_path": "orig/target/_code/sys/Task/Task/FUN_0032fd74.o"
+      "name": "_code/sys/Task/Task/taskInitLists",
+      "target_path": "orig/target/_code/sys/Task/Task/taskInitLists.o"
     },
     {
       "base_path": "build/obj/_code/camp/GauntletAppMenu/GauntletAppMenu/FUN_0032fdf0.o",

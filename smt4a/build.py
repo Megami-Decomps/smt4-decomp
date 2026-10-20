@@ -32,6 +32,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 PROJECT = json.loads((ROOT / "config" / "project.json").read_text())
 BUILD = ROOT / "build"
+# Headers both games share (the engine, the SDK and most game code are one build tree).
+SHARED_INCLUDE = ROOT.parent / "include"
 
 
 COMPILER = PROJECT["compiler"]
@@ -82,8 +84,9 @@ def compiler_version(compiler):
 
 def headers_mtime():
     newest = 0.0
-    for path in (ROOT / "include").rglob("*.h"):
-        newest = max(newest, path.stat().st_mtime)
+    for directory in (ROOT / "include", SHARED_INCLUDE):
+        for path in directory.rglob("*.h"):
+            newest = max(newest, path.stat().st_mtime)
     return newest
 
 
@@ -101,7 +104,7 @@ def command(compiler, unit, source, obj):
             + COMPILER["cflags"]
             + mode
             + includes
-            + ["-I", str(ROOT / "include"), "-o", str(obj), str(source)]
+            + ["-I", str(ROOT / "include"), "-I", str(SHARED_INCLUDE), "-o", str(obj), str(source)]
         )
     return (
         [compiler, f"--target={COMPILER['target']}"]

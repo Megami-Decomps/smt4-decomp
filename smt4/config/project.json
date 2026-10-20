@@ -32502,12 +32502,12 @@
     {
       "address": "0x241c98",
       "file": "sys/Task/Task",
-      "function": "FUN_00241c98",
+      "function": "taskListUpdate",
       "module": "_code",
-      "object": "build/obj/_code/sys/Task/Task/FUN_00241c98.o",
+      "object": "build/obj/_code/sys/Task/Task/taskListUpdate.o",
       "size": 168,
-      "source": "src/_code/sys/Task/Task/FUN_00241c98.cpp",
-      "target": "orig/target/_code/sys/Task/Task/FUN_00241c98.o",
+      "source": "src/_code/sys/Task/Task/taskListUpdate.cpp",
+      "target": "orig/target/_code/sys/Task/Task/taskListUpdate.o",
       "thumb": false
     },
     {
@@ -41342,12 +41342,12 @@
     {
       "address": "0x285f88",
       "file": "sys/Task/Task",
-      "function": "FUN_00285f88",
+      "function": "taskCreate",
       "module": "_code",
-      "object": "build/obj/_code/sys/Task/Task/FUN_00285f88.o",
+      "object": "build/obj/_code/sys/Task/Task/taskCreate.o",
       "size": 452,
-      "source": "src/_code/sys/Task/Task/FUN_00285f88.cpp",
-      "target": "orig/target/_code/sys/Task/Task/FUN_00285f88.o",
+      "source": "src/_code/sys/Task/Task/taskCreate.cpp",
+      "target": "orig/target/_code/sys/Task/Task/taskCreate.o",
       "thumb": false
     },
     {
@@ -41393,12 +41393,12 @@
     {
       "address": "0x2864d8",
       "file": "sys/Task/Task",
-      "function": "FUN_002864d8",
+      "function": "taskRunPhase",
       "module": "_code",
-      "object": "build/obj/_code/sys/Task/Task/FUN_002864d8.o",
+      "object": "build/obj/_code/sys/Task/Task/taskRunPhase.o",
       "size": 228,
-      "source": "src/_code/sys/Task/Task/FUN_002864d8.cpp",
-      "target": "orig/target/_code/sys/Task/Task/FUN_002864d8.o",
+      "source": "src/_code/sys/Task/Task/taskRunPhase.cpp",
+      "target": "orig/target/_code/sys/Task/Task/taskRunPhase.o",
       "thumb": false
     },
     {
@@ -68592,23 +68592,23 @@
     {
       "address": "0x32fd18",
       "file": "sys/Task/Task",
-      "function": "FUN_0032fd18",
+      "function": "taskUpdateAll",
       "module": "_code",
-      "object": "build/obj/_code/sys/Task/Task/FUN_0032fd18.o",
+      "object": "build/obj/_code/sys/Task/Task/taskUpdateAll.o",
       "size": 88,
-      "source": "src/_code/sys/Task/Task/FUN_0032fd18.cpp",
-      "target": "orig/target/_code/sys/Task/Task/FUN_0032fd18.o",
+      "source": "src/_code/sys/Task/Task/taskUpdateAll.cpp",
+      "target": "orig/target/_code/sys/Task/Task/taskUpdateAll.o",
       "thumb": false
     },
     {
       "address": "0x32fd74",
       "file": "sys/Task/Task",
-      "function": "FUN_0032fd74",
+      "function": "taskInitLists",
       "module": "_code",
-      "object": "build/obj/_code/sys/Task/Task/FUN_0032fd74.o",
+      "object": "build/obj/_code/sys/Task/Task/taskInitLists.o",
       "size": 116,
-      "source": "src/_code/sys/Task/Task/FUN_0032fd74.cpp",
-      "target": "orig/target/_code/sys/Task/Task/FUN_0032fd74.o",
+      "source": "src/_code/sys/Task/Task/taskInitLists.cpp",
+      "target": "orig/target/_code/sys/Task/Task/taskInitLists.o",
       "thumb": false
     },
     {

@@ -7,15 +7,17 @@ This writes them again from three things the repository keeps and the dump:
 * `orig/<image>` (config/project.json `image.orig`): the retail program;
 * `config/symbols.txt` (`config/<module>/symbols.txt` with several modules):
   every function's name, address, size and `mode:thumb`/`mode:arm`, so a
-  function you renamed there is the name its callers' relocations use;
+  function you renamed there is the name its callers' relocations use, and
+  every named global (`g_name = ncch:.data:0xADDR; // type:object size:0xN`);
 * `config/modules.json`: each module's sections (what is data, for `DAT_<address>`).
 
 `config/project.json` says which object belongs to which function. Each object
 is what `romwright-cli new-project` writes, byte for byte: one function's bytes
 as an ELF relocatable object where a direct call, tail call or conditional call
 to another function is the R_ARM_CALL / R_ARM_JUMP24 / R_ARM_THM_CALL a compiler
-emits, a literal-pool word holding an address is an R_ARM_ABS32 to that function
-or to `DAT_<8 hex digits>` (an address in a non-executable section), literal
+emits, a literal-pool word holding an address is an R_ARM_ABS32 to that function,
+to the named global at exactly that address, or to `DAT_<8 hex digits>` (an
+address in a non-executable section), literal
 pools are `$d` mapping symbols, a pool that follows the function's last
 instruction (before the next function) is part of the object, and
 `.ARM.attributes` says ARMv6K/VFPv2 (MPCore).
@@ -57,6 +59,17 @@ def read_symbols(path):
         size = re.search(r"\bsize:0x([0-9a-fA-F]+)", tags)
         functions[int(match[2], 16)] = (match[1], int(size[1], 16) if size else 0, "mode:thumb" in tags.split())
     return functions
+
+
+def read_objects(path):
+    """Every `type:object` line of a symbol file: {address: name}. A named global: a literal-pool
+    word holding exactly its address is a relocation to that name instead of `DAT_<address>`."""
+    objects = {}
+    for line in Path(path).read_text(encoding="utf-8").splitlines():
+        match = SYMBOL.match(line)
+        if match and "type:object" in match[3].split(' orig:"')[0].split():
+            objects[int(match[2], 16)] = match[1]
+    return objects
 
 
 # --------------------------------------------------------------------------
@@ -366,10 +379,11 @@ def build_object(name, code, thumb, relocs, pools, attributes):
 # --------------------------------------------------------------------------
 
 class Module:
-    def __init__(self, program, functions, data_regions):
+    def __init__(self, program, functions, data_regions, objects=None):
         self.program = program
         self.functions = functions                            # {address: (name, size, thumb)}
         self.names = {a: f[0] for a, f in functions.items()}
+        self.objects = objects or {}                          # {address: name} of named globals
         self.thumb = {a for a, f in functions.items() if f[2]}
         self.starts = sorted(functions)
         self.data = data_regions                              # [(start, end)] of the non-executable sections
@@ -381,7 +395,7 @@ class Module:
         if function in self.names:
             return self.names[function]
         if any(start <= value < end for start, end in self.data):
-            return f"DAT_{value:08x}"
+            return self.objects.get(value, f"DAT_{value:08x}")
         return None
 
     def target_object(self, address, attributes):
@@ -467,7 +481,7 @@ def main():
         functions = read_symbols(ROOT / module["symbols"])
         data = [(int(s["start"], 16), int(s["start"], 16) + int(s["size"], 16))
                 for s in module["sections"] if "x" not in s["permissions"]]
-        built = Module(program, functions, data)
+        built = Module(program, functions, data, read_objects(ROOT / module["symbols"]))
         for unit in units:
             address = int(unit["address"], 16)
             if address not in functions:

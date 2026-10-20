@@ -7,7 +7,7 @@ int FUN_002c415c(int);
 int FUN_002c43b4(unsigned int, int);
 int FUN_002cd8d4(void);
 int FUN_00310ac0(void);
-int FUN_0032fd18(void);
+int taskUpdateAll(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -23,7 +23,7 @@ extern int FUN_002c08f0(void);
 /* Supplied declaration required: FUN_002c43b4. */
 /* Supplied declaration required: FUN_002cd8d4. */
 /* Supplied declaration required: FUN_00310ac0. */
-/* Supplied declaration required: FUN_0032fd18. */
+/* Supplied declaration required: taskUpdateAll. */
 
 
 void FUN_001dc9d0(void)
@@ -49,7 +49,7 @@ void FUN_001dc9d0(void)
   }
   FUN_002c415c(temp_v0);
   DAT_00433260 = 0;
-  FUN_0032fd18();
+  taskUpdateAll();
   return;
 }
 

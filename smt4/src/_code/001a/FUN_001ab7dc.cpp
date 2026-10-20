@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00285f88(...);
+int taskCreate(...);
 int FUN_00291340(...);
 int FUN_002c4938(...);
 int rt_memcpy_w(...);
@@ -20,7 +20,7 @@ typedef struct {
 
 extern int FUN_00193440(...); /* 0x193440 */
 
-/* Supplied declaration required: FUN_00285f88. */
+/* Supplied declaration required: taskCreate. */
 /* Supplied declaration required: FUN_00291340. */
 /* Supplied declaration required: FUN_002c4938. */
 /* Supplied declaration required: rt_memcpy_w. */
@@ -34,7 +34,7 @@ romwright_code * FUN_001ab7dc(unsigned int param_1,unsigned int param_2,unsigned
   romwright_code *pcVar1;
   
   pcVar1 = FUN_00193440;
-  FUN_00285f88(FUN_00193440,0,0,0,0,0x304,3,0,0);
+  taskCreate(FUN_00193440,0,0,0,0,0x304,3,0,0);
   if (pcVar1 != (romwright_code *)0x0) {
     FUN_002c4938();
     rt_memcpy_w((unsigned char *)pcVar1 + 0x38,param_2,0x134);

@@ -8,27 +8,33 @@ byte-identical game binary.
 
 | Game | Directory | Build | Functions | Exact (objdiff) | Proven by relink | Fuzzy |
 |---|---|---|---|---|---|---|
-| Shin Megami Tensei IV (USA) | [`smt4/`](smt4/) | v1.2.0 update (CTR-U-AMXE) | 9,341 | 1,201 | 1,195 | 45.0% |
-| Shin Megami Tensei IV: Apocalypse (USA) | [`smt4a/`](smt4a/) | v1.0 cartridge (CTR-P-BG4E) | 15,106 | 2,351 | 2,345 | 45.7% |
+| Shin Megami Tensei IV (USA) | [`smt4/`](smt4/) | v1.2.0 update (CTR-U-AMXE) | 9,341 | 1,754 | 1,748 | 45.1% |
+| Shin Megami Tensei IV: Apocalypse (USA) | [`smt4a/`](smt4a/) | v1.0 cartridge (CTR-P-BG4E) | 15,106 | 3,081 | 3,075 | 45.8% |
 
-Every function compiles. Most of the source is romwright's first pass; the files listed under
-[Where the source came from](#where-the-source-came-from) are edited by hand. "Proven by relink" counts the
-functions `tools/relink.py --matched` links from their compiled objects into the retail `.code`, byte for
-byte; it lists every function it keeps as retail bytes and why. The 6 per game that objdiff scores 100% but
-relink keeps (`nw_gfx_internal_NWCopyVec4Reverse`, `NWCopyMtx24Reverse` and their copies) load with
-`vldmia r1!`, a writeback armcc emits only when the pointer is used afterwards: hand-written assembly.
+Every function compiles. Most of the source is still romwright's first pass; matched functions are
+edited by hand, and [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md) sets the bar a function has to clear:
+an honest match that reads like the original (`src/_code/sys/Task/Task/` and `include/sys/Task.h` are
+the reference). "Proven by relink" counts the functions `tools/relink.py --matched` links from their
+compiled objects into the retail `.code`, byte for byte; it lists every function it keeps as retail
+bytes and why. The 6 per game that objdiff scores 100% but relink keeps (`nw_gfx_internal_NWCopyVec4Reverse`,
+`NWCopyMtx24Reverse` and their copies) load with `vldmia r1!`, a writeback armcc emits only when the
+pointer is used afterwards: hand-written assembly.
 
 ## Layout
 
 ```
 smt4/, smt4a/     one project per game: config/, include/, src/, objdiff.json, build.py, tools/
-  config/names.map    function names (see below), fed to romwright with --names
+  config/symbols.txt  every function's name, address and size, and every named global
+  config/name_sources.txt  where each name came from (evidence or inferred)
   config/tus.json     function -> original source file (tools/assign_tus.py)
   src/_code/<file>/   functions placed in their original source file's folder (AsdSDK/..., battle/...)
   src/_code/<shard>/  everything else, by address
+include/              headers both games share: structs and accessors, by original source file
+docs/CONTRIBUTING.md  the workflow, the matching rules and the readability standard
 tools/assign_tus.py   places functions in source files from assert paths and file-local data
 tools/shared.py       pairs the functions both games share and compares their progress
 tools/fdiff.py        compiles one function and diffs its disassembly and relocations against retail
+tools/names.py        names a function or global in every file at once and records the evidence
 ```
 
 Both games come from one build tree: the engine `AsdSDK`, Nintendo's SDK, and most of `sdds4`. The
@@ -58,14 +64,15 @@ Dumps, `orig/` and `build/` stay local (git-ignored).
 
 ## Names and source files
 
-`smt4/config/names.map` names 909 IV v1.2.0 functions:
+Function names live in `config/symbols.txt`; `tools/names.py` changes them. IV started with 909 names:
 
 - Nintendo SDK functions (`nn::`, `nw::`), identified by matching code bytes against games that shipped
   with symbols or DWARF;
 - event-script command handlers from the command table at `0x405F48` (`scrComm_EventFlag_Test`, ...);
 - map and navigation functions.
 
-`smt4a/config/names.map` carries 623 of them to the Apocalypse functions with the same code.
+Apocalypse carries 623 of them to the functions with the same code. Names given since are listed in
+`config/name_sources.txt`.
 
 `config/tus.json` comes from `tools/assign_tus.py --project <game>`. A function that references an
 assert's source path (`c:\SMT4\XRD686\...\btlMain.cpp`) is in that file, and a function using a
@@ -85,10 +92,4 @@ promotions (`float` → `double`, `char`/`short` → `int`), which is how C call
 disagree is declared `int f(...)`. Variadic calls pass floats in core registers, not VFP, so that
 fallback can change a function's code. `src/` is the source of truth now: do not regenerate.
 
-Hand-edited:
-
-- `smt4/src/_code/0034/FUN_0034fe14.cpp`, `smt4/src/_code/0038/FUN_0038b3e8.cpp`: ported from their
-  matching Apocalypse twins.
-- `smt4a/src/_code/0010/FUN_001024a8.cpp`, `smt4a/src/_code/001b/FUN_001bc6a4.cpp`: call the ARM-to-Thumb
-  veneer the retail `b` goes through.
-- `smt4a/src/_code/0011/FUN_00115728.cpp`: its string is UTF-16 in retail (`DAT_0053813c`).
+Every hand edit since is in the git history.

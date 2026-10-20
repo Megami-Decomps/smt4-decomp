@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00193c70(...);
-int FUN_00285f88(...);
+int taskCreate(...);
 int FUN_002c4938(...);
 int rt_memcpy_w(...);
 
@@ -24,7 +24,7 @@ extern int FUN_001aa6a4(...); /* 0x1aa6a4 */
 extern int FUN_001aad64(...); /* 0x1aad64 */
 
 /* Supplied declaration required: FUN_00193c70. */
-/* Supplied declaration required: FUN_00285f88. */
+/* Supplied declaration required: taskCreate. */
 /* Supplied declaration required: FUN_002c4938. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -49,17 +49,17 @@ romwright_code * FUN_002d8238(unsigned int param_1,unsigned int param_2,int para
     if (temp_v0 != '\x01') {
       if (temp_v0 == '\x03') {
         unaff_r4 = FUN_00192ac8;
-        FUN_00285f88(FUN_00192ac8,0,0,FUN_001aa6a4,param_7,0x3f0,temp_v1,0,0);
+        taskCreate(FUN_00192ac8,0,0,FUN_001aa6a4,param_7,0x3f0,temp_v1,0,0);
       }
     }
     else {
       unaff_r4 = FUN_00192ac8;
-      FUN_00285f88(FUN_00192ac8,0,FUN_001aa6a4,0,param_7,0x3f0,temp_v1,0,0);
+      taskCreate(FUN_00192ac8,0,FUN_001aa6a4,0,param_7,0x3f0,temp_v1,0,0);
     }
   }
   else {
     unaff_r4 = FUN_00192ac8;
-    FUN_00285f88(FUN_00192ac8,FUN_001aad64,0,0,param_7,0x3f0,temp_v1,0,0);
+    taskCreate(FUN_00192ac8,FUN_001aad64,0,0,param_7,0x3f0,temp_v1,0,0);
   }
   if (unaff_r4 != (romwright_code *)0x0) {
     FUN_002c4938(unaff_r4,0x3f0);

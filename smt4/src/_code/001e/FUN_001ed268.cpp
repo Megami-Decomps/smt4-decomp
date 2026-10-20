@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00285f88(...);
+int taskCreate(...);
 int FUN_00291340(...);
 int FUN_002c4938(...);
 int VectorSignedToFloat(...);
@@ -22,7 +22,7 @@ typedef struct {
 extern int FUN_001c2c70(...); /* 0x1c2c70 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00285f88. */
+/* Supplied declaration required: taskCreate. */
 /* Supplied declaration required: FUN_00291340. */
 /* Supplied declaration required: FUN_002c4938. */
 /* Supplied declaration required: rt_memcpy_w. */
@@ -39,7 +39,7 @@ romwright_code * FUN_001ed268(unsigned int param_1,int param_2,unsigned int para
   unsigned int in_fpscr;
   
   pcVar1 = FUN_001c2c70;
-  FUN_00285f88(FUN_001c2c70,0,0,0,0,0x330,3,0,0);
+  taskCreate(FUN_001c2c70,0,0,0,0,0x330,3,0,0);
   if (pcVar1 != (romwright_code *)0x0) {
     FUN_002c4938();
     rt_memcpy_w((unsigned char *)pcVar1 + 100,param_2,0x134);

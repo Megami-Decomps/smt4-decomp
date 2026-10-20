@@ -15,7 +15,7 @@ int FUN_002c1650(...);
 int FUN_002e6354(...);
 int FUN_0031b96c(...);
 int FUN_003afc2c(...);
-int FUN_003d92dc(...);
+int taskInitLists(...);
 
 /* stack frame of param_1: 7 slot(s), 28 byte(s) */
 typedef struct {
@@ -50,7 +50,7 @@ extern int DAT_005702f4; /* 0x5702f4 */
 /* Supplied declaration required: FUN_002e6354. */
 /* Supplied declaration required: FUN_0031b96c. */
 /* Supplied declaration required: FUN_003afc2c. */
-/* Supplied declaration required: FUN_003d92dc. */
+/* Supplied declaration required: taskInitLists. */
 
 
 unsigned int FUN_0031b654(unsigned char param_1)
@@ -69,7 +69,7 @@ unsigned int FUN_0031b654(unsigned char param_1)
   DAT_005702f4 = temp_v0;
   FUN_002e6354();
   *(unsigned char *)(temp_v0 + 0x538) = param_1;
-  FUN_003d92dc();
+  taskInitLists();
   FUN_002c1650(0);
   if (*(char *)(temp_v0 + 0x538) == '\0') {
     FUN_003afc2c();

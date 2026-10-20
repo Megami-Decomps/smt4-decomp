@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0028c05c(...);
+int taskCreate(...);
 int FUN_002e6354(...);
 
 typedef int romwright_code(...);
@@ -19,7 +19,7 @@ typedef struct {
 extern int FUN_002c1664(...); /* 0x2c1664 */
 extern romwright_code *DAT_00570ab4; /* 0x570ab4 */
 
-/* Supplied declaration required: FUN_0028c05c. */
+/* Supplied declaration required: taskCreate. */
 /* Supplied declaration required: FUN_002e6354. */
 
 
@@ -30,7 +30,7 @@ void FUN_0031b96c(void)
   romwright_code *pcVar1;
   
   pcVar1 = FUN_002c1664;
-  FUN_0028c05c(FUN_002c1664,0,0,0,0,0x70,3,0,0);
+  taskCreate(FUN_002c1664,0,0,0,0,0x70,3,0,0);
   if (pcVar1 != (romwright_code *)0x0) {
     FUN_002e6354();
     DAT_00570ab4 = pcVar1;

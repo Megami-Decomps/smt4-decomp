@@ -1,0 +1,7 @@
+003d4bbc taskListUpdate inferred twin of smt4 taskListUpdate
+0028c05c taskCreate inferred twin of smt4 taskCreate
+003d9198 taskRunPhase inferred twin of smt4 taskRunPhase
+003d9280 taskUpdateAll inferred twin of smt4 taskUpdateAll
+003d92dc taskInitLists inferred twin of smt4 taskInitLists
+00619988 g_taskLists inferred twin of smt4 g_taskLists
+00588fec g_taskListsNeedInit inferred twin of smt4 g_taskListsNeedInit

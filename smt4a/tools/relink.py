@@ -356,9 +356,13 @@ def main():
     rodata_window = (segments["rodata"][0], segments["data"][0])
     address_name = re.compile(r"_([0-9a-f]{8})$")
 
+    objects = {name: address for address, name in split.read_objects(ROOT / module["symbols"]).items()}
+
     def resolve(name):
         if name in names:
             return names[name]
+        if name in objects:
+            return objects[name]
         match = address_name.search(name)
         return int(match[1], 16) if match else None
 
@@ -501,6 +505,8 @@ def main():
             if name not in names:
                 addressed[name] = int(match[2], 16)
     symbols += [(name, value, False) for name, value in sorted(addressed.items())]
+    # Named globals (`type:object` in the symbol file) the objects reference.
+    symbols += [(name, value, False) for name, value in sorted(objects.items()) if name not in defined and name not in addressed]
     symbols_object = gaps_dir / "symbols.o"
     blob_object(symbols_object, ".text", b"", True, symbols)
     inputs.append(symbols_object.relative_to(ROOT).as_posix())

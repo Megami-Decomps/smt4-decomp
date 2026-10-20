@@ -1,0 +1,7 @@
+00241c98 taskListUpdate inferred runs one list's tasks: update callbacks, kill countdown, unlink and free
+00285f88 taskCreate inferred allocates a task, sets its callbacks and links it into a list by priority
+002864d8 taskRunPhase inferred calls one per-phase callback of every live task in every list
+0032fd18 taskUpdateAll inferred visits every task, then runs taskListUpdate on each list
+0032fd74 taskInitLists inferred empties the five lists once, guarded by g_taskListsNeedInit
+004c5830 g_taskLists inferred TaskList[5], indexed by Task.list
+0044e1b8 g_taskListsNeedInit inferred cleared by taskInitLists

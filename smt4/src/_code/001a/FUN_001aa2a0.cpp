@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002864d8(int);
+int taskRunPhase(int);
 int FUN_002c08f0(void);
 int FUN_002c18e4(int);
 int FUN_002c198c(int);
@@ -13,7 +13,7 @@ int FUN_002c39a4(int);
 typedef int romwright_code(...);
 extern int DAT_0044ea00; /* 0x44ea00 */
 
-/* Supplied declaration required: FUN_002864d8. */
+/* Supplied declaration required: taskRunPhase. */
 extern int FUN_002865c0(unsigned int);
 /* Supplied declaration required: FUN_002c08f0. */
 /* Supplied declaration required: FUN_002c18e4. */
@@ -67,7 +67,7 @@ unsigned int FUN_001aa2a0(void)
     (**(romwright_code **)(temp_v0 + 0x12c8))();
     *(unsigned char *)(temp_v0 + 0x12c4) = 0;
   }
-  FUN_002864d8(1);
+  taskRunPhase(1);
   temp_v0 = DAT_0044ea00;
   piVar5 = (int *)(DAT_0044ea00 + 0x12ac);
   temp_v1 = *piVar5;
