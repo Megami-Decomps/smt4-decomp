@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00307c4a(int, int);
-int FUN_0030fdd8(int *, int, int);
+int vectorDestroyRangeStride184(int *, int, int);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -14,7 +14,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_00307c4a. */
-/* Supplied declaration required: FUN_0030fdd8. */
+/* Supplied declaration required: vectorDestroyRangeStride184. */
 extern int __aeabi_idivmod(int, unsigned int);
 
 
@@ -36,7 +36,7 @@ void FUN_0030d2fc(int *param_1)
       FUN_00307c4a(temp_v3,temp_v0);
       temp_v3 = temp_v3 + 0xb8;
     }
-    FUN_0030fdd8(param_1,temp_v3,param_1[1]);
+    vectorDestroyRangeStride184(param_1,temp_v3,param_1[1]);
     temp_v0 = __aeabi_idivmod(temp_v2 - temp_v1,0xb8);
     param_1[1] = param_1[1] + temp_v0 * -0xb8;
   }

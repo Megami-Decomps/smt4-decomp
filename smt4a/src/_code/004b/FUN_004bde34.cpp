@@ -10,7 +10,7 @@ int FUN_0018152c(...);
 int FUN_001835b4(...);
 int FUN_00183788(...);
 int FUN_00183bb0(void);
-int FUN_00184e64(...);
+int drawSetColorFromRGBA8(...);
 int FUN_004bda84(...);
 int __aeabi_idivmod(...);
 
@@ -38,7 +38,7 @@ extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183788. */
 /* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_00184e64. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 extern unsigned int FUN_0019e130(int);
 extern unsigned int FUN_002b4dcc(int);
 extern int valueAtMostFifthOfTotal(int, unsigned int);
@@ -86,7 +86,7 @@ void FUN_004bde34(int param_1,int param_2,int param_3,int param_4,int param_5)
   temp_v5 = *(short *)(temp_v5 + 10) + param_5;
   temp_v6 = valueAtMostFifthOfTotal(temp_v8,temp_v4);
   if (temp_v6 != 0) {
-    FUN_00184e64(0xdc0f14ff);
+    drawSetColorFromRGBA8(0xdc0f14ff);
   }
   efctSetSpeed();
   FUN_00180310(10,temp_v2 + param_4,temp_v5,1,4,0x79,&LAB_004be1bc,temp_v8);
@@ -107,7 +107,7 @@ void FUN_004bde34(int param_1,int param_2,int param_3,int param_4,int param_5)
     }
     temp_v3 = temp_v3 + 1;
   } while ((int)temp_v3 < 0xe);
-  FUN_00184e64(temp_v4);
+  drawSetColorFromRGBA8(temp_v4);
   efctSetSpeed();
   FUN_0018152c((int)temp_v0,temp_v5,temp_v8,0x9c,0);
   FUN_00183bb0();

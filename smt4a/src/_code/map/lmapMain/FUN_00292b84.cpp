@@ -14,7 +14,7 @@ int FUN_00352bc4(void);
 int FUN_001418fc(unsigned char *);
 int FUN_0014f0dc(...);
 int FUN_001523b8(...);
-int FUN_00162e8c(void);
+int gameFlagsGetBlock(void);
 int FUN_0025cb1c(void);
 int FUN_00275ffc(void);
 int FUN_003033d4(void);
@@ -71,8 +71,8 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_001418fc. */
 /* Supplied declaration required: FUN_0014f0dc. */
 /* Supplied declaration required: FUN_001523b8. */
-/* Supplied declaration required: FUN_00162e8c. */
-extern int FUN_0018719c(unsigned int);
+/* Supplied declaration required: gameFlagsGetBlock. */
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
 /* Supplied declaration required: FUN_0025cb1c. */
@@ -131,7 +131,7 @@ void FUN_00292b84(void)
   float temp_v27;
   unsigned long long temp_v28;
   
-  FUN_00162e8c();
+  gameFlagsGetBlock();
   piVar5 = DAT_005806a4;
   if (*DAT_005806a4 == 0x11) {
     return;
@@ -395,9 +395,9 @@ void FUN_00292b84(void)
   if (g_gameState != 1) {
     if (g_gameState != 2) {
       if ((g_gameState == 4) && (DAT_005f1600 == 2)) {
-        temp_v2 = FUN_0018719c(0xf4);
+        temp_v2 = gameFlagIsSet(0xf4);
         if (temp_v2 != 0) {
-          temp_v2 = FUN_0018719c(0xf6);
+          temp_v2 = gameFlagIsSet(0xf6);
           if (temp_v2 != 0) {
             DAT_005f1a88 = temp_v27;
           }
@@ -408,14 +408,14 @@ void FUN_00292b84(void)
       }
     }
     else if ((DAT_005f1600 == 5) &&
-            ((temp_v2 = FUN_0018719c(0x91), temp_v2 != 0 || (temp_v2 = FUN_003033d4(), temp_v2 == 4)))) {
+            ((temp_v2 = gameFlagIsSet(0x91), temp_v2 != 0 || (temp_v2 = FUN_003033d4(), temp_v2 == 4)))) {
       DAT_005f1a88 = temp_v27;
     }
   }
   else if (DAT_005f1600 == 1) {
-    temp_v2 = FUN_0018719c(0x72);
+    temp_v2 = gameFlagIsSet(0x72);
     if (temp_v2 != 0) {
-      temp_v2 = FUN_0018719c(0xb1);
+      temp_v2 = gameFlagIsSet(0xb1);
       if (temp_v2 != 0) {
         DAT_005f1a88 = temp_v27;
       }

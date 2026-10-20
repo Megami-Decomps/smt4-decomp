@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002e93da(void);
+int onlineUrlEnsureParsed(void);
 
-/* Supplied declaration required: FUN_002e93da. */
+/* Supplied declaration required: onlineUrlEnsureParsed. */
 
 
 unsigned short FUN_002fd624(int param_1)
@@ -15,7 +15,7 @@ unsigned short FUN_002fd624(int param_1)
 /* irregular: 1 native warning(s); review required */
   unsigned short temp_v0;
   
-  FUN_002e93da();
+  onlineUrlEnsureParsed();
   temp_v0 = *(unsigned short *)(*(int *)(param_1 + 4) + 6);
   return (temp_v0 << 8) | (temp_v0 >> 8);
 }

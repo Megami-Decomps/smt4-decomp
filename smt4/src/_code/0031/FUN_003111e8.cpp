@@ -6,7 +6,7 @@ int FUN_00293348(int a, int b);
 
 void FUN_003111e8(int flag)
 {
-    if (DAT_0043dcf0 == NULL) {
+    if (g_partyPanel == NULL) {
         return;
     }
     if (flag != 0) {

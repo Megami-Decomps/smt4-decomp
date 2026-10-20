@@ -3,7 +3,7 @@
 extern "C" {
 
 void FUN_0030fdc0(void *vector, void *begin, void *end);
-void FUN_002e6e14(void *memory);
+void asdOperatorDeleteArray(void *memory);
 
 typedef struct Vector {
     /* 0x00 */ void *begin;
@@ -14,7 +14,7 @@ typedef struct Vector {
 Vector *vectorTeardown_001220c4(Vector *vector)
 {
     FUN_0030fdc0(vector, vector->begin, vector->end);
-    FUN_002e6e14(vector->begin);
+    asdOperatorDeleteArray(vector->begin);
     return vector;
 }
 

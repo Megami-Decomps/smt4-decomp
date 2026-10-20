@@ -14,10 +14,10 @@ typedef struct ScreenClose {
 
 extern u16 DAT_00588108;
 extern void sysPlaySe(u32 id);
-extern void FUN_0037b450(void);
-extern void FUN_001641c4(void);
-extern void FUN_001b4a90(u8 *block, u32 size, u32 value);
-extern void FUN_0019a7f4(s32 a, s32 b);
+extern void campButtonHelpRelease(void);
+extern void ifTouchRegionRemove(void);
+extern void __aeabi_memset4(u8 *block, u32 size, u32 value);
+extern void asdTMTexTableReleaseNode(s32 a, s32 b);
 extern void asdTMTexTableFreeEntry(s32 index);
 extern void scrScriptProcessDestroy(u32 process);
 extern void asdMemFree(u32 ptr);
@@ -29,15 +29,15 @@ void screenCloseDestroy(ScreenClose *obj)
     s32 i;
 
     sysPlaySe(DAT_00588108);
-    FUN_0037b450();
+    campButtonHelpRelease();
     if (0 < obj->count) {
         for (i = 0; i < obj->count; i++) {
-            FUN_001641c4();
+            ifTouchRegionRemove();
         }
-        FUN_001b4a90(obj->block438, 0x124, 0xFFFFFFFF);
+        __aeabi_memset4(obj->block438, 0x124, 0xFFFFFFFF);
         obj->count = 0;
     }
-    FUN_0019a7f4(0x23, 0);
+    asdTMTexTableReleaseNode(0x23, 0);
     asdTMTexTableFreeEntry(0x23);
     scrScriptProcessDestroy(obj->proc26C);
     asdMemFree(obj->buf268);

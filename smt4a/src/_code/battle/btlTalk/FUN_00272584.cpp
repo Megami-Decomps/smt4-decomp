@@ -7,7 +7,7 @@ extern "C" {
 int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
 int jobIsValid(...);
-int FUN_001b4a90(...);
+int __aeabi_memset4(...);
 int FUN_004ab854(...);
 
 /* stack frame of param_4: 3 slot(s), 12 byte(s) */
@@ -21,12 +21,12 @@ extern unsigned char LAB_0024e2f4; /* 0x24e2f4 */
 extern unsigned char LAB_002726a4; /* 0x2726a4 */
 extern int FUN_002df5c8(...); /* 0x2df5c8 */
 extern int *g_btlTalk; /* 0x57a7b8 */
-extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
+extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: jobIsValid. */
-/* Supplied declaration required: FUN_001b4a90. */
+/* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: FUN_004ab854. */
 
 
@@ -55,8 +55,8 @@ void FUN_00272584(unsigned int *param_1,int param_2,int param_3,int param_4)
   *(unsigned char *)((int)piVar1 + 0x145) = 0;
   piVar1[0x52] = -1;
   piVar1[0xc] = (int)*(short *)(*(int *)(param_2 + 0x28) + 0x1c0);
-  FUN_001b4a90(piVar1 + 0xd,0x100,0xffffffff);
-  FUN_004ab854(DAT_0057a9c8);
+  __aeabi_memset4(piVar1 + 0xd,0x100,0xffffffff);
+  FUN_004ab854(g_btlUiBlock);
   piVar1[6] = 0;
   return;
 }

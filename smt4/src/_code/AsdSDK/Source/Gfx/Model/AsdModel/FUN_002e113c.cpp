@@ -15,9 +15,9 @@ typedef struct {
 
 extern unsigned int DAT_00464b7c; /* 0x464b7c */
 extern unsigned int DAT_00464b80; /* 0x464b80 */
-extern unsigned int DAT_00464b84; /* 0x464b84 */
+extern unsigned int g_asdModelTransformBuilder; /* 0x464b84 */
 extern unsigned int DAT_00464b88; /* 0x464b88 */
-extern unsigned int DAT_00464ba4; /* 0x464ba4 */
+extern unsigned int g_asdModelSlotArray1; /* 0x464ba4 */
 
 /* Supplied declaration required: sceneTraverserVisit. */
 /* Supplied declaration required: FUN_002abbe8. */
@@ -37,7 +37,7 @@ void FUN_002e113c(unsigned int *param_1,unsigned int param_2)
   *param_1 = param_2;
   if (param_2 >= 2) {
     if (param_2 == 0xffffffff) {
-      FUN_002abbe8((&DAT_00464ba4)[temp_v0] + 0x10,param_1[1]);
+      FUN_002abbe8((&g_asdModelSlotArray1)[temp_v0] + 0x10,param_1[1]);
       goto LAB_002e11a0;
     }
 LAB_002e11ac:
@@ -50,11 +50,11 @@ LAB_002e11ac:
     }
   }
   else {
-    nw_gfx_SceneNode_AttachChild((&DAT_00464ba4)[param_2],param_1[1]);
+    nw_gfx_SceneNode_AttachChild((&g_asdModelSlotArray1)[param_2],param_1[1]);
 LAB_002e11a0:
     if (*param_1 != 0) goto LAB_002e11ac;
   }
-  sceneTraverserVisit(DAT_00464b7c,DAT_00464b84);
+  sceneTraverserVisit(DAT_00464b7c,g_asdModelTransformBuilder);
   if (*param_1 != 1 && temp_v0 != 1) {
     return;
   }

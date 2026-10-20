@@ -6,11 +6,11 @@ extern "C" {
 
 int FUN_00123e98(unsigned char [32]);
 int destroyObj0055ae64(unsigned char [32]);
-int FUN_002ee54c(unsigned char [8]);
+int sharedRefHolderDestroy2(unsigned char [8]);
 int FUN_002f6ed2(int, int *);
 int FUN_002fde5c(unsigned char [8]);
 int FUN_00306e7a(unsigned char [8]);
-int FUN_0030ff74(...);
+int streamReaderReadArray(...);
 int FUN_00310dc6(unsigned char [8], unsigned int, int);
 
 /* stack frame of param_2: 5 slot(s), 20 byte(s) */
@@ -24,12 +24,12 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00123e98. */
 /* Supplied declaration required: destroyObj0055ae64. */
-/* Supplied declaration required: FUN_002ee54c. */
+/* Supplied declaration required: sharedRefHolderDestroy2. */
 /* Supplied declaration required: FUN_002f6ed2. */
 /* Supplied declaration required: FUN_002fde5c. */
 extern int FUN_00303158(unsigned int, int, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_00306e7a. */
-/* Supplied declaration required: FUN_0030ff74. */
+/* Supplied declaration required: streamReaderReadArray. */
 /* Supplied declaration required: FUN_00310dc6. */
 extern unsigned int vectorOwnerResize(int, unsigned int);
 
@@ -54,15 +54,15 @@ void FUN_0012143c(int param_1,unsigned int param_2)
   if (temp_v0 != 0) {
     *(unsigned char *)(param_1 + 9) = 1;
     FUN_00306e7a(temp_v2);
-    FUN_0030ff74(temp_v2,&temp_v7,8,1);
+    streamReaderReadArray(temp_v2,&temp_v7,8,1);
     temp_v4 = temp_v7;
     temp_v5 = temp_v8;
     FUN_002f6ed2(param_1 + 0x50,&temp_v4);
-    FUN_0030ff74(temp_v2,param_1 + 0x2c,4,1);
+    streamReaderReadArray(temp_v2,param_1 + 0x2c,4,1);
     temp_v1 = vectorOwnerResize(param_1 + 0x34,0x20);
     FUN_00310dc6(temp_v2,temp_v1,0x100);
   }
-  FUN_002ee54c(temp_v2);
+  sharedRefHolderDestroy2(temp_v2);
   destroyObj0055ae64(temp_v6);
   return;
 }

@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_001006ec(...);
-int FUN_002e3328(...);
-int FUN_002e5700(...);
+int asdOperatorDelete(...);
+int rt_vec_dtor(...);
 int FUN_00406a1c(...);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -18,8 +18,8 @@ extern int FUN_00522df0(...); /* 0x522df0 */
 extern unsigned char DAT_00557b70; /* 0x557b70 */
 
 /* Supplied declaration required: FUN_001006ec. */
-/* Supplied declaration required: FUN_002e3328. */
-/* Supplied declaration required: FUN_002e5700. */
+/* Supplied declaration required: asdOperatorDelete. */
+/* Supplied declaration required: rt_vec_dtor. */
 /* Supplied declaration required: FUN_00406a1c. */
 
 
@@ -29,9 +29,9 @@ void FUN_004070b4(unsigned int *param_1)
 /* irregular: 5 native warning(s); review required */
   *param_1 = (unsigned int)&DAT_00557b70;
   FUN_00406a1c(param_1);
-  FUN_002e5700(param_1 + 0x45,FUN_00522df0,0xc,8);
+  rt_vec_dtor(param_1 + 0x45,FUN_00522df0,0xc,8);
   FUN_001006ec(param_1[0x42],(int)(param_1[0x44] - param_1[0x42]) >> 3,0);
-  FUN_002e3328(param_1);
+  asdOperatorDelete(param_1);
   return;
 }
 

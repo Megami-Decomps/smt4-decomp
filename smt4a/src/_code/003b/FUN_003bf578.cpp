@@ -1,4 +1,4 @@
-/* Returns 1 if the object's sub-state is active and FUN_0018719c accepts its handle, else 0. */
+/* Returns 1 if the object's sub-state is active and gameFlagIsSet accepts its handle, else 0. */
 #include "common.h"
 
 extern "C" {
@@ -14,7 +14,7 @@ typedef struct Object {
     /* 0x9B4 */ SubState sub;
 } Object;
 
-extern s32 FUN_0018719c(u32 handle);
+extern s32 gameFlagIsSet(u32 handle);
 
 u32 FUN_003bf578(Object **object)
 {
@@ -22,7 +22,7 @@ u32 FUN_003bf578(Object **object)
     if (sub->active == 0) {
         return 0;
     }
-    return FUN_0018719c(sub->handle) != 0;
+    return gameFlagIsSet(sub->handle) != 0;
 }
 
 }

@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_00121808(...);
-int FUN_002e9ec8(...);
-int FUN_002ea446(...);
-int FUN_002eda5a(...);
-int FUN_002edb54(...);
+int onlineInstanceTableFind(...);
+int onlineJobSetStateTimed(...);
+int vectorDestroyBytes(...);
+int vectorResizeBytes(...);
 int FUN_002f17e4(...);
 int FUN_0030ff06(...);
 
@@ -41,13 +41,13 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00121808. */
 extern int *FUN_002e7908(unsigned int **, unsigned int *);
-extern int FUN_002e9af4(void);
-/* Supplied declaration required: FUN_002e9ec8. */
-/* Supplied declaration required: FUN_002ea446. */
-/* Supplied declaration required: FUN_002eda5a. */
-/* Supplied declaration required: FUN_002edb54. */
+extern int onlineInstanceTableGetCurrent(void);
+/* Supplied declaration required: onlineInstanceTableFind. */
+/* Supplied declaration required: onlineJobSetStateTimed. */
+/* Supplied declaration required: vectorDestroyBytes. */
+/* Supplied declaration required: vectorResizeBytes. */
 /* Supplied declaration required: FUN_002f17e4. */
-extern int FUN_002fc046(int *);
+extern int rangeIsEmpty(int *);
 /* Supplied declaration required: FUN_0030ff06. */
 
 
@@ -72,8 +72,8 @@ void FUN_0012165c(fn_0012165c_arg0 *param_1)
   int temp_v11;
   unsigned int temp_v12;
   
-  temp_v2 = FUN_002e9af4();
-  FUN_002e9ec8(temp_v2,*(unsigned int *)&param_1->field_0x68);
+  temp_v2 = onlineInstanceTableGetCurrent();
+  onlineInstanceTableFind(temp_v2,*(unsigned int *)&param_1->field_0x68);
   if (temp_v2 != 0) {
     temp_v12 = 0;
     while( 1 ) {
@@ -102,44 +102,44 @@ void FUN_0012165c(fn_0012165c_arg0 *param_1)
         temp_v5 = 0x80010004;
         piVar7 = (int *)FUN_002e7908(temp_v4,(unsigned int *)&temp_v5);
         FUN_0030ff06(param_1,piVar7);
-        FUN_002eda5a(&temp_v10);
+        vectorDestroyBytes(&temp_v10);
         return;
       }
-      temp_v2 = FUN_002e9af4();
-      FUN_002e9ec8(temp_v2,*(unsigned int *)&param_1->field_0x68);
+      temp_v2 = onlineInstanceTableGetCurrent();
+      onlineInstanceTableFind(temp_v2,*(unsigned int *)&param_1->field_0x68);
       if (temp_v2 == 0) {
         temp_v5 = 0x80010004;
         piVar7 = (int *)FUN_002e7908(temp_v4,(unsigned int *)&temp_v5);
         FUN_0030ff06(param_1,piVar7);
-        FUN_002eda5a(&temp_v10);
+        vectorDestroyBytes(&temp_v10);
         return;
       }
-      FUN_002edb54(&temp_v10,temp_v4[0],0);
-      temp_v2 = FUN_002fc046(&temp_v10);
+      vectorResizeBytes(&temp_v10,temp_v4[0],0);
+      temp_v2 = rangeIsEmpty(&temp_v10);
       if ((temp_v2 == 0) &&
          ((**(romwright_code **)(*(int *)param_1->field_0x6c + 0x34))
                     (temp_v6,param_1->field_0x6c,temp_v10,temp_v11 - temp_v10), temp_v6[0] < 0)) {
         piVar7 = temp_v6;
         FUN_0030ff06(param_1,piVar7);
-        FUN_002eda5a(&temp_v10);
+        vectorDestroyBytes(&temp_v10);
         return;
       }
       if ((char)temp_v8 != '\0') {
         (**(romwright_code **)(*(int *)param_1->field_0x6c + 0x1c))();
-        FUN_002eda5a(&temp_v10);
+        vectorDestroyBytes(&temp_v10);
         break;
       }
       if (temp_v4[0] == (unsigned int *)0x0) {
-        FUN_002eda5a(&temp_v10);
+        vectorDestroyBytes(&temp_v10);
         break;
       }
-      FUN_002eda5a(&temp_v10);
+      vectorDestroyBytes(&temp_v10);
     }
     if (param_1->field_0x88 != '\0') {
 LAB_001217d0:
       FUN_00121808(temp_v9,param_1);
       if (temp_v9[0] == -0x7ffaffea) {
-        FUN_002ea446(param_1,*(unsigned int *)(param_1 + 1));
+        onlineJobSetStateTimed(param_1,*(unsigned int *)(param_1 + 1));
         return;
       }
       piVar7 = temp_v9;
@@ -158,13 +158,13 @@ LAB_001217d0:
         return;
       }
       (**(romwright_code **)(*(int *)param_1->field_0x8c + 0x10))(param_1->field_0x8c,param_1->field_0x6c);
-      temp_v2 = FUN_002e9af4();
-      FUN_002e9ec8(temp_v2,*(unsigned int *)&param_1->field_0x68);
+      temp_v2 = onlineInstanceTableGetCurrent();
+      onlineInstanceTableFind(temp_v2,*(unsigned int *)&param_1->field_0x68);
       if (temp_v2 == 0) goto LAB_001217f2;
       goto LAB_001217d0;
     }
     if (temp_v6[0] == -0x7ffeffff) {
-      FUN_002ea446(param_1,*(unsigned int *)(param_1 + 1));
+      onlineJobSetStateTimed(param_1,*(unsigned int *)(param_1 + 1));
       return;
     }
     temp_v1 = 0x80050002;

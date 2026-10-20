@@ -19,6 +19,6 @@ typedef struct Gx464d48 {
     /* 0x30 */ u32 unk30;
 } Gx464d48;
 
-extern Gx464d48 DAT_00464d48;
+extern Gx464d48 g_asdTextDefaults;
 
 #endif

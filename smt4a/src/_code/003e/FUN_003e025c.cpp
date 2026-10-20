@@ -45,7 +45,7 @@ typedef struct {
     unsigned int sp58; /* 0x58: local_58 */
 } param_2_stack;
 
-extern unsigned int DAT_00571508; /* 0x571508 */
+extern unsigned int g_btlCamera; /* 0x571508 */
 extern int DAT_00573808; /* 0x573808 */
 
 /* Supplied declaration required: FUN_00100388. */
@@ -106,13 +106,13 @@ void FUN_003e025c(unsigned int *param_1,fn_003e025c_arg1 *param_2)
       temp_v16 = 0;
       FUN_00100388(&temp_v1,"battle/model/en%03d_camera.bch",
                    (int)*(short *)((int)pfVar2->field_0x404 + 0x8c));
-      FUN_004f2abc(DAT_00571508,&temp_v1);
+      FUN_004f2abc(g_btlCamera,&temp_v1);
       *param_1 = 0xe;
       param_1[4] = 0;
       param_1[3] = 0;
-      temp_v0 = FUN_004f2294(DAT_00571508);
+      temp_v0 = FUN_004f2294(g_btlCamera);
       if (temp_v0 != 0) {
-        FUN_004f1a54(DAT_00571508);
+        FUN_004f1a54(g_btlCamera);
         *param_1 = 0xf;
         param_1[4] = 0;
         param_1[3] = 0;

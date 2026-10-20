@@ -3,7 +3,7 @@
 
 extern "C" {
 
-extern const char DAT_00409378[]; /* "c:\SMT4\XRD686\sdds4\Patch\AsdSDK\Source\Gfx\Effect\effParts.cpp": __FILE__ */
+extern const char g_effPartsSourcePath[]; /* "c:\SMT4\XRD686\sdds4\Patch\AsdSDK\Source\Gfx\Effect\effParts.cpp": __FILE__ */
 
 void *memAlloc(int, int, int, int size, int align, int);
 void memClear(void *block, s32 size);
@@ -14,7 +14,7 @@ EffPart *effPartCreate(void)
 {
     EffPart *part;
 
-    asdDebugTrace(DAT_00409378, 1463);
+    asdDebugTrace(g_effPartsSourcePath, 1463);
     part = (EffPart *)memAlloc(0x10000, 0x100, 0, 0x90, 0x10, 1);
     memClear(part, 0x90);
     part->unk80 = 0;

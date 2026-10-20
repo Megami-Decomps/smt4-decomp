@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0017fa28(int, int);
-int FUN_002c30c4(...);
+int libc_strlen(...);
 
 /* stack frame of param_3: 4 slot(s), 14 byte(s) */
 typedef struct {
@@ -18,8 +18,8 @@ typedef struct {
 extern unsigned short DAT_00464da8; /* 0x464da8 */
 
 /* Supplied declaration required: FUN_0017fa28. */
-extern int FUN_002b4414(unsigned int, int, unsigned int);
-/* Supplied declaration required: FUN_002c30c4. */
+extern int libc_strncmp(unsigned int, int, unsigned int);
+/* Supplied declaration required: libc_strlen. */
 
 
 int FUN_001eb584(int param_1,int param_2,int param_3)
@@ -61,10 +61,10 @@ LAB_001eb5a0:
   temp_v0 = DAT_00464da8;
   while (temp_v0 != 0xf890) {
     if (*(int *)(puVar11 + 6) != 0) {
-      temp_v4 = FUN_002c30c4();
-      temp_v5 = FUN_002b4414(*(unsigned int *)(puVar11 + 6),temp_v11,temp_v4);
+      temp_v4 = libc_strlen();
+      temp_v5 = libc_strncmp(*(unsigned int *)(puVar11 + 6),temp_v11,temp_v4);
       if (temp_v5 == 0) {
-        temp_v5 = FUN_002c30c4(*(unsigned int *)(puVar11 + 6));
+        temp_v5 = libc_strlen(*(unsigned int *)(puVar11 + 6));
         temp_v10 = 0;
         if (*(int *)(puVar11 + 2) == 0) goto LAB_001eb788;
         if (*(char *)(temp_v11 + temp_v5) == '\0') goto LAB_001eb774;

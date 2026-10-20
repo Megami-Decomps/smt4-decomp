@@ -4,10 +4,10 @@ extern "C" {
 
 void resourceDestroy(void *resource);
 void resourceListDestroy(void *list);
-void FUN_00222104(void *ref);
-void FUN_00222434(void *shared);
-void FUN_002b2f08(void *object);
-void FUN_002ce8d8(void);
+void handleBlockRefDrop(void *ref);
+void handleBlockUnref(void *shared);
+void objectBufferFree(void *object);
+void geometryDestroy(void);
 void asdMemFree(void *memory);
 
 typedef struct Owner {
@@ -62,16 +62,16 @@ void FUN_002b40ec(Collection *collection)
         asdMemFree(collection->listBuffer);
     }
     if (collection->ref != NULL) {
-        FUN_00222104(collection->ref);
+        handleBlockRefDrop(collection->ref);
     }
     if (collection->shared != NULL) {
-        FUN_00222434(collection->shared);
+        handleBlockUnref(collection->shared);
     }
     if ((collection->flags & 1) != 0) {
-        FUN_002b2f08(collection->owner);
+        objectBufferFree(collection->owner);
     }
     if (collection->extra != NULL) {
-        FUN_002ce8d8();
+        geometryDestroy();
     }
     asdMemFree(collection);
 }

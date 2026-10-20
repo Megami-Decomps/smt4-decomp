@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_002b8584(int, int);
-int FUN_002b8cc8(void);
-int FUN_002c424c(int, int, unsigned int);
+int ifTouchRegionRemove(void);
+int __aeabi_memset4(int, int, unsigned int);
 
 /* Supplied declaration required: FUN_002b8584. */
-/* Supplied declaration required: FUN_002b8cc8. */
-/* Supplied declaration required: FUN_002c424c. */
+/* Supplied declaration required: ifTouchRegionRemove. */
+/* Supplied declaration required: __aeabi_memset4. */
 
 
 void FUN_00232698(int param_1)
@@ -24,10 +24,10 @@ void FUN_00232698(int param_1)
   if (0 < *(short *)(param_1 + 0x93e)) {
     temp_v2 = 0;
     do {
-      FUN_002b8cc8();
+      ifTouchRegionRemove();
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < *(short *)(param_1 + 0x93e));
-    FUN_002c424c(param_1 + 0x820,0x11e,0xffffffff);
+    __aeabi_memset4(param_1 + 0x820,0x11e,0xffffffff);
     *(unsigned short *)(param_1 + 0x93e) = 0;
   }
   if (*(char *)(param_1 + 0x29) != '\0') {

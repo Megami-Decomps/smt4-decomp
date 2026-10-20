@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_0019a300(...);
-int FUN_001a089c(...);
+int nn_os_LightEvent_Initialize(...);
 int FUN_001ab838(...);
-int FUN_001af148(...);
-int FUN_001bcd48(...);
+int nn_os_LightEvent_Wait(...);
+int svcSleepThread(...);
 int software_interrupt(...);
 
 typedef int romwright_code(...);
@@ -26,10 +26,10 @@ extern unsigned char bRam1ff80014; /* 0x1ff80014 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_0019a300. */
-/* Supplied declaration required: FUN_001a089c. */
+/* Supplied declaration required: nn_os_LightEvent_Initialize. */
 /* Supplied declaration required: FUN_001ab838. */
-/* Supplied declaration required: FUN_001af148. */
-/* Supplied declaration required: FUN_001bcd48. */
+/* Supplied declaration required: nn_os_LightEvent_Wait. */
+/* Supplied declaration required: svcSleepThread. */
 extern int FUN_0042d2ec(void);
 extern unsigned char *FUN_0042d30c(unsigned int *, unsigned int);
 extern unsigned int nn_err_CTR_FatalErr_Throw(unsigned int, unsigned int);
@@ -108,8 +108,8 @@ LAB_00189b20:
       if (puVar5 != (unsigned char *)0x2 && puVar5 != (unsigned char *)0x5) {
         aiStack_20[0] = 0;
         aiStack_20[1] = 0;
-        FUN_001a089c(aiStack_20,1);
-        FUN_001af148(aiStack_20);
+        nn_os_LightEvent_Initialize(aiStack_20,1);
+        nn_os_LightEvent_Wait(aiStack_20);
         puVar5 = (unsigned char *)piVar3;
       }
       return puVar5;
@@ -119,7 +119,7 @@ LAB_00189b20:
       puVar2 = (unsigned int *)(unsigned int)DAT_0062d200;
     }
     if (!temp_v1 || puVar2 != (unsigned int *)0x2) goto LAB_00189b20;
-    FUN_001bcd48(&LAB_004c4b40,0);
+    svcSleepThread(&LAB_004c4b40,0);
     nn_os_CriticalSection_Leave((unsigned int)&DAT_0062d280);
   } while( 1 );
 }

@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_001800b8(int);
-int FUN_00212500(int);
+int asdTextureRelease(int);
+int refCountIncrement(int);
 int VectorSignedToFloat(unsigned int, int);
 
 typedef struct fn_00390570_arg0 fn_00390570_arg0;
@@ -23,8 +23,8 @@ typedef struct {
 } param_2_stack;
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_001800b8. */
-/* Supplied declaration required: FUN_00212500. */
+/* Supplied declaration required: asdTextureRelease. */
+/* Supplied declaration required: refCountIncrement. */
 extern int FUN_0037a7f4(unsigned int);
 
 
@@ -43,8 +43,8 @@ void FUN_00390570(fn_00390570_arg0 *param_1,unsigned int param_2)
   param_1->field_0x54 = temp_v1 * 0.5f * 0.0625f;
   param_1->field_0x58 = temp_v2 * 0.5f * 0.0625f;
   *(int *)(*(int *)((int)param_1->field_0x50 + 0xc) + 0xb4) = temp_v0;
-  FUN_00212500(temp_v0);
-  FUN_001800b8(temp_v0);
+  refCountIncrement(temp_v0);
+  asdTextureRelease(temp_v0);
   return;
 }
 

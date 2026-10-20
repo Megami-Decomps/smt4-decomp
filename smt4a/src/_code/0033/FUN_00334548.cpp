@@ -4,13 +4,13 @@
 
 extern "C" {
 
-extern int DAT_0057f28c; /* 0x57f28c */
+extern int g_uiQuest; /* 0x57f28c */
 
 
 int FUN_00334548(void)
 
 {
-  return (int)*(char *)(DAT_0057f28c + 0x90f);
+  return (int)*(char *)(g_uiQuest + 0x90f);
 }
 
 } /* extern "C" */

@@ -24,7 +24,7 @@ typedef struct {
     unsigned int sp58; /* 0x58: local_58 */
 } param_1_stack;
 
-extern int DAT_0043e278; /* 0x43e278 */
+extern int g_frameTex; /* 0x43e278 */
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -32,8 +32,8 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002b99b8. */
 /* Supplied declaration required: FUN_002ba12c. */
 /* Supplied declaration required: FUN_002ba1e0. */
-extern unsigned int FUN_002bed98(int);
-extern int FUN_002beda4(int);
+extern unsigned int vec2GetYInt(int);
+extern int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf538. */
@@ -62,12 +62,12 @@ void FUN_0011340c(unsigned int param_1)
   unsigned int temp_v10;
   
   temp_v5 = g_titleScene;
-  temp_v0 = DAT_0043e278;
+  temp_v0 = g_frameTex;
   temp_v1 = param_1;
-  if (DAT_0043e278 != 0) {
-    temp_v1 = (unsigned int)*(unsigned char *)(DAT_0043e278 + 0x25);
+  if (g_frameTex != 0) {
+    temp_v1 = (unsigned int)*(unsigned char *)(g_frameTex + 0x25);
   }
-  if (DAT_0043e278 != 0 && temp_v1 != 0) {
+  if (g_frameTex != 0 && temp_v1 != 0) {
     temp_v2 = FUN_002c5d80(1,0);
     piVar7 = (int *)(temp_v5 + 0x124c);
     temp_v3 = *piVar7;
@@ -92,7 +92,7 @@ void FUN_0011340c(unsigned int param_1)
     FUN_002c39a4(g_titleScene);
     temp_v6 = *(float *)(temp_v0 + 0x28);
     FUN_002ba12c(g_titleScene);
-    temp_v5 = DAT_0043e278;
+    temp_v5 = g_frameTex;
     temp_v10 = 0;
     temp_v9 = 400.0f;
     VectorSignedToFloat((int)temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -134,8 +134,8 @@ void FUN_0011340c(unsigned int param_1)
       temp_v5 = temp_v5 + 1;
     } while (temp_v5 < 0x18);
     if (*(char *)(temp_v0 + 0x24) == '\0') {
-      temp_v5 = FUN_002beda4(temp_v0 + 0xe00);
-      temp_v10 = FUN_002bed98(temp_v0 + 0xe00);
+      temp_v5 = vec2GetXInt(temp_v0 + 0xe00);
+      temp_v10 = vec2GetYInt(temp_v0 + 0xe00);
       FUN_002bf380(2,0x1d,10,temp_v5 + (int)temp_v6,temp_v10,0x15);
     }
     temp_v0 = g_titleScene;

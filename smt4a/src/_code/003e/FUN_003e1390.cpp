@@ -6,21 +6,21 @@ extern "C" {
 
 int asdMemFree(void);
 int FUN_002804b0(unsigned char [132], unsigned int *, int);
-int FUN_002e342c(unsigned char [132], unsigned int);
+int libc_strcpy(unsigned char [132], unsigned int);
 int sysMemClear(unsigned char [132], int);
 int FUN_003e21c8(unsigned int *, int);
-int FUN_00470634(unsigned int, unsigned int, unsigned int *, unsigned char [132]);
+int aocQueueType39(unsigned int, unsigned int, unsigned int *, unsigned char [132]);
 
 extern unsigned int g_aocSystem; /* 0x570280 */
 
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002804b0. */
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003e21c8. */
 extern unsigned int FUN_003efa38(int);
 extern int FUN_0046ebf0(unsigned int);
-/* Supplied declaration required: FUN_00470634. */
+/* Supplied declaration required: aocQueueType39. */
 
 
 void FUN_003e1390(unsigned int *param_1,int param_2)
@@ -33,7 +33,7 @@ void FUN_003e1390(unsigned int *param_1,int param_2)
   
   sysMemClear(temp_v2,0x80);
   temp_v0 = FUN_003efa38(param_2);
-  FUN_002e342c(temp_v2,temp_v0);
+  libc_strcpy(temp_v2,temp_v0);
   if (param_1[1] != 0) {
     asdMemFree();
     param_1[1] = 0;
@@ -41,7 +41,7 @@ void FUN_003e1390(unsigned int *param_1,int param_2)
   if (0 < *(int *)(param_2 + 0xf0)) {
     temp_v1 = FUN_0046ebf0(g_aocSystem);
     if (temp_v1 != 0) {
-      FUN_00470634(g_aocSystem,*(unsigned int *)(param_2 + 0xf0),param_1 + 1,temp_v2);
+      aocQueueType39(g_aocSystem,*(unsigned int *)(param_2 + 0xf0),param_1 + 1,temp_v2);
       param_1[4] = 0;
       *param_1 = 0x16;
       param_1[3] = 0;

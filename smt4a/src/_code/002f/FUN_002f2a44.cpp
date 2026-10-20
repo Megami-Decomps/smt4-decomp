@@ -8,7 +8,7 @@ int FUN_002ece58(unsigned int *, unsigned int);
 
 extern unsigned char DAT_0055b22c; /* 0x55b22c */
 
-extern int FUN_002e760a(unsigned int);
+extern int operatorNew(unsigned int);
 extern unsigned int strInit(void);
 /* Supplied declaration required: FUN_002ece58. */
 extern unsigned int *FUN_003022b4(void);
@@ -24,7 +24,7 @@ unsigned int * FUN_002f2a44(void)
   
   puVar1 = (unsigned int *)FUN_003022b4();
   *puVar1 = (unsigned int)&DAT_0055b22c;
-  temp_v0 = FUN_002e760a(0x20);
+  temp_v0 = operatorNew(0x20);
   temp_v1 = 0;
   if (temp_v0 != 0) {
     temp_v1 = strInit();

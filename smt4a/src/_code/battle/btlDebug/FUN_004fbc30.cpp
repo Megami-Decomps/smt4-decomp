@@ -9,7 +9,7 @@ int FUN_003f06b4(unsigned int *, int);
 int FUN_003f0e20(unsigned int *, int);
 int FUN_004102d8(int, int, int, unsigned int);
 
-extern int DAT_005712f0; /* 0x5712f0 */
+extern int g_btlActionReflect; /* 0x5712f0 */
 extern unsigned int g_btlEvent; /* 0x573898 */
 extern unsigned int DAT_00573c18; /* 0x573c18 */
 extern unsigned int DAT_00573c1c; /* 0x573c1c */
@@ -48,8 +48,8 @@ unsigned int FUN_004fbc30(short param_1,unsigned int param_2,int param_3)
        (((puVar4 = puVar1, FUN_003f06b4(puVar1,param_3), puVar4 != (unsigned int *)0x0 &&
          (FUN_003f0254(puVar1,param_3), puVar1 == (unsigned int *)0x0)) ||
         ((DAT_00573c18 & *puVar2) == 0 && (DAT_00573c1c & puVar2[1]) == 0)))) {
-      temp_v0 = DAT_005712f0;
-      FUN_004102d8(DAT_005712f0,(int)param_1,0,param_2);
+      temp_v0 = g_btlActionReflect;
+      FUN_004102d8(g_btlActionReflect,(int)param_1,0,param_2);
       *(unsigned char *)(temp_v0 + 4) = 0x2e;
       *(unsigned int **)(temp_v0 + 0x18) = puVar2;
       *(unsigned int *)(temp_v0 + 0x28) = 1;

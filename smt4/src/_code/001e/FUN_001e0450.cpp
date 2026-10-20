@@ -8,7 +8,7 @@ int FUN_0029b130(int, int, unsigned int *, int);
 int FUN_0029cde0(int, int, int);
 int dataTable06Sub1GetRecord(void);
 int FUN_0029f848(int, int, int, int, int, int);
-int FUN_002b9024(void);
+int devilGetRecord(void);
 
 /* stack frame of param_3: 5 slot(s), 20 byte(s) */
 typedef struct {
@@ -19,13 +19,13 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_3_stack;
 
-extern int DAT_0043dd68; /* 0x43dd68 */
+extern int g_unite; /* 0x43dd68 */
 
 /* Supplied declaration required: FUN_0029b130. */
 /* Supplied declaration required: FUN_0029cde0. */
 /* Supplied declaration required: dataTable06Sub1GetRecord. */
 /* Supplied declaration required: FUN_0029f848. */
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: devilGetRecord. */
 
 
 void FUN_001e0450(unsigned int param_1,int param_2,int param_3)
@@ -43,10 +43,10 @@ void FUN_001e0450(unsigned int param_1,int param_2,int param_3)
   unsigned int temp_v8;
   int temp_v9;
   
-  temp_v0 = DAT_0043dd68;
+  temp_v0 = g_unite;
   temp_v6 = 0;
   temp_v1 = param_1;
-  FUN_002b9024();
+  devilGetRecord();
   temp_v4 = 0;
   *(unsigned int *)(temp_v0 + 0x9020) = 0;
   *(unsigned int *)(temp_v0 + 0x9024) = 0;

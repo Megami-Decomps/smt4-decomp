@@ -6,9 +6,9 @@ extern "C" {
 
 int FUN_0019d390(void);
 
-extern int FUN_001801a4(void);
+extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_0019d390. */
-extern int FUN_003e46f4(unsigned int);
+extern int gameDataFlagTestBit(unsigned int);
 
 
 void FUN_003e0174(unsigned int param_1)
@@ -20,21 +20,21 @@ void FUN_003e0174(unsigned int param_1)
   int temp_v2;
   unsigned int temp_v3;
   
-  temp_v1 = FUN_001801a4();
+  temp_v1 = gameGetPlayerData();
   temp_v3 = 4;
-  temp_v2 = FUN_003e46f4(0x77);
+  temp_v2 = gameDataFlagTestBit(0x77);
   if (temp_v2 != 0) {
     temp_v3 = 5;
   }
-  temp_v2 = FUN_003e46f4(0x78);
+  temp_v2 = gameDataFlagTestBit(0x78);
   if (temp_v2 != 0) {
     temp_v3 = temp_v3 + 1;
   }
-  temp_v2 = FUN_003e46f4(0x79);
+  temp_v2 = gameDataFlagTestBit(0x79);
   if (temp_v2 != 0) {
     temp_v3 = temp_v3 + 1;
   }
-  temp_v2 = FUN_003e46f4(0x7a);
+  temp_v2 = gameDataFlagTestBit(0x7a);
   if (temp_v2 != 0) {
     temp_v3 = temp_v3 + 1;
   }

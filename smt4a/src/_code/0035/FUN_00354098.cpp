@@ -11,7 +11,7 @@ extern int g_lmapScene; /* 0x581288 */
 extern int g_gameState; /* 0x5f15fc */
 extern int DAT_005f1600; /* 0x5f1600 */
 
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0030354c. */
 /* Supplied declaration required: FUN_003d2158. */
 
@@ -28,9 +28,9 @@ void FUN_00354098(void)
         if (DAT_005f1600 == 2) {
           return;
         }
-        temp_v0 = FUN_0018719c(0xf4);
+        temp_v0 = gameFlagIsSet(0xf4);
         if (temp_v0 != 0) {
-          temp_v0 = FUN_0018719c(0xf6);
+          temp_v0 = gameFlagIsSet(0xf6);
           if (temp_v0 == 0) {
             if (*(int *)(g_lmapScene + 0x288) != 0) {
               return;
@@ -45,7 +45,7 @@ void FUN_00354098(void)
       if (DAT_005f1600 == 5) {
         return;
       }
-      temp_v0 = FUN_0018719c(0x91);
+      temp_v0 = gameFlagIsSet(0x91);
       if (temp_v0 == 0) {
         if (*(int *)(g_lmapScene + 0x288) != 0) {
           return;
@@ -59,9 +59,9 @@ void FUN_00354098(void)
     if (DAT_005f1600 == 1) {
       return;
     }
-    temp_v0 = FUN_0018719c(0x72);
+    temp_v0 = gameFlagIsSet(0x72);
     if (temp_v0 != 0) {
-      temp_v0 = FUN_0018719c(0xb1);
+      temp_v0 = gameFlagIsSet(0xb1);
       if (temp_v0 == 0) {
         if (*(int *)(g_lmapScene + 0x288) != 0) {
           return;

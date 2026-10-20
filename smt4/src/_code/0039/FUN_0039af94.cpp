@@ -38,7 +38,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: uiGetEntrySize. */
 /* Supplied declaration required: FUN_002b0750. */
 /* Supplied declaration required: FUN_002bf538. */
-extern int FUN_002c2950(void);
+extern int gameGetMapBlock(void);
 extern int FUN_002c5d80(unsigned int, unsigned int);
 extern int NaviMain_GetCurrentMap(int);
 extern unsigned long long *NaviMain_GetCursorPos(void);
@@ -83,7 +83,7 @@ void FUN_0039af94(int param_1)
   float temp_v28;
   float temp_v29;
   
-  temp_v2 = FUN_002c2950();
+  temp_v2 = gameGetMapBlock();
   temp_v27 = param_1 + 0x162;
   puVar4 = (unsigned long long *)NaviMain_GetCursorPos();
   temp_v17 = *puVar4;

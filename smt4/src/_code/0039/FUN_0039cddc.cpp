@@ -11,7 +11,7 @@ extern unsigned char DAT_0049fc1c; /* 0x49fc1c */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-extern int FUN_002c2950(void);
+extern int gameGetMapBlock(void);
 extern float *NaviMain_GetCursorPos(int);
 
 
@@ -35,7 +35,7 @@ void FUN_0039cddc(int param_1)
   unsigned int temp_v10;
   float temp_v11;
   
-  temp_v1 = FUN_002c2950();
+  temp_v1 = gameGetMapBlock();
   pfVar3 = (float *)NaviMain_GetCursorPos(param_1 + 0x162);
   if (*(char *)(temp_v1 + 0xd5a) != '\f') {
     temp_v1 = 0;

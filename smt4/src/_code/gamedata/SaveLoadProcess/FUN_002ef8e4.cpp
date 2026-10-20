@@ -8,10 +8,10 @@ int FUN_001a1f7c(int);
 int FUN_001edcf0(void);
 int FUN_00247af8(int, int, int, int, int);
 int FUN_0028727c(void);
-int FUN_0028d6d0(void);
+int buttonHelpCreate(void);
 int FUN_0028d9b0(void);
-int FUN_002917b8(void);
-int FUN_00291944(void);
+int buttonHelpRelease(void);
+int uiFadeRelease(void);
 int FUN_00297050(int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -28,10 +28,10 @@ extern int FUN_00193c50(void);
 /* Supplied declaration required: FUN_001edcf0. */
 /* Supplied declaration required: FUN_00247af8. */
 /* Supplied declaration required: FUN_0028727c. */
-/* Supplied declaration required: FUN_0028d6d0. */
+/* Supplied declaration required: buttonHelpCreate. */
 /* Supplied declaration required: FUN_0028d9b0. */
-/* Supplied declaration required: FUN_002917b8. */
-/* Supplied declaration required: FUN_00291944. */
+/* Supplied declaration required: buttonHelpRelease. */
+/* Supplied declaration required: uiFadeRelease. */
 /* Supplied declaration required: FUN_00297050. */
 extern int jobGetWork(void);
 
@@ -53,11 +53,11 @@ unsigned int FUN_002ef8e4(void)
       }
       temp_v0 = FUN_00193c50();
       if (temp_v0 != 0) {
-        FUN_00291944();
+        uiFadeRelease();
         FUN_001a1f7c(0);
       }
       FUN_00297050(1);
-      FUN_002917b8();
+      buttonHelpRelease();
       FUN_0028727c();
       DAT_0043e2f2 = 1;
       return 0xffffffff;
@@ -79,7 +79,7 @@ unsigned int FUN_002ef8e4(void)
   }
   else {
     FUN_0028d9b0();
-    FUN_0028d6d0();
+    buttonHelpCreate();
     FUN_00297050(0);
     FUN_00247af8(0,0,0,0,0);
     temp_v2 = 9;

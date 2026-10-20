@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned char DAT_0057f0c4; /* 0x57f0c4 */
+extern unsigned char g_buttonHelp; /* 0x57f0c4 */
 
 
 unsigned short FUN_00341f88(void)
@@ -13,8 +13,8 @@ unsigned short FUN_00341f88(void)
   unsigned short temp_v0;
   
   temp_v0 = 0;
-  if ((*(int *)((unsigned char *)&DAT_0057f0c4 + 0x4)) != 0) {
-    temp_v0 = *(unsigned short *)((*(int *)((unsigned char *)&DAT_0057f0c4 + 0x4)) + 0x5e8);
+  if ((*(int *)((unsigned char *)&g_buttonHelp + 0x4)) != 0) {
+    temp_v0 = *(unsigned short *)((*(int *)((unsigned char *)&g_buttonHelp + 0x4)) + 0x5e8);
   }
   return temp_v0;
 }

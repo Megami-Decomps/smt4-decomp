@@ -6,7 +6,7 @@ extern "C" {
 
 int VectorUnsignedToFloat(unsigned int, int);
 
-extern unsigned int DAT_00573c78; /* 0x573c78 */
+extern unsigned int g_lcgRandomRangeState; /* 0x573c78 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 
@@ -18,8 +18,8 @@ unsigned int FUN_00270c18(void)
   unsigned int temp_v0;
   unsigned int in_fpscr;
   
-  DAT_00573c78 = DAT_00573c78 * 0x41c64e6d + 0x3039;
-  temp_v0 = DAT_00573c78 >> 0x10;
+  g_lcgRandomRangeState = g_lcgRandomRangeState * 0x41c64e6d + 0x3039;
+  temp_v0 = g_lcgRandomRangeState >> 0x10;
   VectorUnsignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
   return temp_v0;
 }

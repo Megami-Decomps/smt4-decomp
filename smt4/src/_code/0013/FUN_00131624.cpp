@@ -15,11 +15,11 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_3_stack;
 
-extern unsigned int FUN_002ac068(unsigned int, unsigned int);
+extern unsigned int dataTableFileGetTable(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002ac0c4. */
 /* Supplied declaration required: FUN_002ac0f8. */
 extern int FUN_002ac12c(void);
-extern int FUN_002c09d0(void);
+extern int gameFlagIsSet(void);
 extern int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
 
@@ -56,7 +56,7 @@ int FUN_00131624(int param_1,unsigned int param_2,unsigned int param_3)
         if (temp_v9 < temp_v3) {
           do {
             if (*(char *)(temp_v2 + temp_v9 * 0x40) == '\x1b') {
-              temp_v4 = FUN_002ac068(*(unsigned int *)(*(int *)(temp_v0 + 0x4c) + temp_v9 * 0x10),0);
+              temp_v4 = dataTableFileGetTable(*(unsigned int *)(*(int *)(temp_v0 + 0x4c) + temp_v9 * 0x10),0);
               temp_v1 = dataTableGetEntries();
               temp_v5 = dataTableGetCount(temp_v4);
               temp_v8 = 0;
@@ -69,8 +69,8 @@ int FUN_00131624(int param_1,unsigned int param_2,unsigned int param_3)
                     temp_v6 = (unsigned int)pbVar10[1];
                   }
                   if (((temp_v10 && temp_v6 == param_3) &&
-                      ((*(short *)(pbVar10 + 10) == 0 || (temp_v7 = FUN_002c09d0(), temp_v7 != 0)))) &&
-                     ((*(short *)(pbVar10 + 0xc) == 0 || (temp_v7 = FUN_002c09d0(), temp_v7 == 0)))) {
+                      ((*(short *)(pbVar10 + 10) == 0 || (temp_v7 = gameFlagIsSet(), temp_v7 != 0)))) &&
+                     ((*(short *)(pbVar10 + 0xc) == 0 || (temp_v7 = gameFlagIsSet(), temp_v7 == 0)))) {
                     return temp_v1 + temp_v8 * 0xa0;
                   }
                   temp_v8 = temp_v8 + 1;

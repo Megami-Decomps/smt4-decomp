@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_00296d6c(...);
+int randBetween(...);
 int VectorSignedToFloat(unsigned int, int);
 int VectorUnsignedToFloat(unsigned int, int);
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00296d6c. */
+/* Supplied declaration required: randBetween. */
 
 
 void FUN_00291620(int param_1,unsigned int param_2,unsigned int param_3)
@@ -22,7 +22,7 @@ void FUN_00291620(int param_1,unsigned int param_2,unsigned int param_3)
   unsigned int in_fpscr;
   
   if (param_1 == 0) {
-    temp_v1 = FUN_00296d6c(0,param_2);
+    temp_v1 = randBetween(0,param_2);
     VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorUnsignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
     return;
@@ -31,15 +31,15 @@ void FUN_00291620(int param_1,unsigned int param_2,unsigned int param_3)
     if (param_1 != 2) {
       return;
     }
-    temp_v0 = FUN_00296d6c(0,1);
+    temp_v0 = randBetween(0,1);
     if (temp_v0 != '\0') {
-      temp_v1 = FUN_00296d6c(0,param_2);
+      temp_v1 = randBetween(0,param_2);
       VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorUnsignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
       return;
     }
   }
-  temp_v1 = FUN_00296d6c(0,param_2);
+  temp_v1 = randBetween(0,param_2);
   VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorUnsignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
   return;

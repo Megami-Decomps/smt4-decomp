@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00153050(int);
+int settings5BClearFlags(int);
 int FUN_002c2968(unsigned int, unsigned int);
 int nw_gfx_SceneNode_AttachChild(unsigned int);
 
@@ -17,12 +17,12 @@ typedef struct {
 extern unsigned int DAT_00464b10; /* 0x464b10 */
 extern unsigned int DAT_00464b20; /* 0x464b20 */
 extern unsigned int DAT_00464b7c; /* 0x464b7c */
-extern unsigned int DAT_00464b84; /* 0x464b84 */
-extern unsigned int DAT_00464b9c; /* 0x464b9c */
-extern int DAT_00464bb4; /* 0x464bb4 */
+extern unsigned int g_asdModelTransformBuilder; /* 0x464b84 */
+extern unsigned int g_asdModelSlotArray0; /* 0x464b9c */
+extern int g_asdModelSlotArray3; /* 0x464bb4 */
 extern unsigned int DAT_00464bbc; /* 0x464bbc */
 
-/* Supplied declaration required: FUN_00153050. */
+/* Supplied declaration required: settings5BClearFlags. */
 extern int asdModelGetSlotArray0(unsigned int);
 /* Supplied declaration required: FUN_002c2968. */
 /* Supplied declaration required: nw_gfx_SceneNode_AttachChild. */
@@ -92,13 +92,13 @@ void FUN_00152ed8(int param_1)
   if (piVar6 != piVar2) {
     *(unsigned int *)(temp_v1 + 0xc) = 0;
   }
-  FUN_00153050(1);
-  temp_v0 = *(int *)(DAT_00464bb4 + 4);
+  settings5BClearFlags(1);
+  temp_v0 = *(int *)(g_asdModelSlotArray3 + 4);
   DAT_00464b10 = DAT_00464b20;
-  nw_gfx_SceneNode_AttachChild(DAT_00464b9c);
+  nw_gfx_SceneNode_AttachChild(g_asdModelSlotArray0);
   **(unsigned int **)(temp_v0 + 0xac) = DAT_00464b10;
   DAT_00464bbc = 0;
-  FUN_002c2968(DAT_00464b7c,DAT_00464b84);
+  FUN_002c2968(DAT_00464b7c,g_asdModelTransformBuilder);
   return;
 }
 

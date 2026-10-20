@@ -32,11 +32,11 @@ extern unsigned int DAT_00570d94; /* 0x570d94 */
 
 extern int btlGetMainState(void);
 extern int saveSlotFindSelected(void);
-extern int FUN_001ab888(void);
+extern int gameGetSlotTable(void);
 extern int FUN_00213b5c(void);
 extern unsigned int FUN_003e0154(void);
 extern unsigned int FUN_003e0164(void);
-extern int FUN_003e46f4(unsigned int);
+extern int gameDataFlagTestBit(unsigned int);
 /* Supplied declaration required: FUN_003e9f70. */
 /* Supplied declaration required: FUN_003eaa14. */
 /* Supplied declaration required: btlClearMode4D74. */
@@ -67,7 +67,7 @@ unsigned int FUN_0035f2f4(void)
   temp_v3 = FUN_003e0164();
   FUN_004fb798(0,0,0,*(int *)(temp_v1 + 0x1ed4),0,temp_v2,temp_v3,0xffffffff,2,0,0,9,0,0,1);
   temp_v4 = FUN_00213b5c();
-  if ((temp_v4 == 4) || (temp_v4 = FUN_003e46f4(0x80), temp_v4 != 0)) {
+  if ((temp_v4 == 4) || (temp_v4 = gameDataFlagTestBit(0x80), temp_v4 != 0)) {
     temp_v4 = 1;
     do {
       puVar7 = (unsigned int *)(*(int *)(temp_v1 + 0x1ffc) + temp_v4 * 0x408);
@@ -93,7 +93,7 @@ LAB_0035f460:
       temp_v4 = temp_v4 + 1;
     } while (temp_v4 < 4);
   }
-  temp_v4 = FUN_001ab888();
+  temp_v4 = gameGetSlotTable();
   temp_v5 = 0;
   temp_v9[0] = '\0';
   temp_v9[1] = '\0';

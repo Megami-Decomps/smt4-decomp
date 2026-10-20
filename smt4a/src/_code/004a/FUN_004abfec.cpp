@@ -5,11 +5,11 @@ extern "C" {
 s32 menu32ModeIsNot5(BtlUiObjAA *obj);
 s32 FUN_003bcf68(BtlUiObjBA *obj);
 
-extern BtlUiGlobalsA DAT_0057a9b8;
+extern BtlUiGlobalsA g_btlUi;
 
 bool FUN_004abfec(void)
 {
-    BtlUiA *ui = DAT_0057a9b8.ui;
+    BtlUiA *ui = g_btlUi.ui;
 
     return menu32ModeIsNot5(&ui->objA) != 0 && FUN_003bcf68(&ui->objB) != 0;
 }

@@ -6,14 +6,14 @@ extern "C" {
 
 int btlActionFreeData(void);
 int FUN_001e1874(unsigned int *);
-int FUN_002523f0(void);
+int btlTalkBustUpDestroy(void);
 int FUN_0026a958(int);
-int FUN_00288728(void);
+int mdlPartsRelease(void);
 int FUN_00294f64(void);
 int FUN_00295ba4(int);
 int FUN_0029b074(void);
 int scrScriptProcessDestroy(void);
-int FUN_002b2368(int);
+int asdMemFreeNonNull(int);
 int FUN_002c3f5c(void);
 int FUN_002c40f8(unsigned char *, int *, int, int, unsigned int, unsigned int);
 int asdMemFree(void);
@@ -33,19 +33,19 @@ typedef struct {
 extern unsigned int *g_btlMainState; /* 0x435d90 */
 extern int DAT_00435d94; /* 0x435d94 */
 extern int DAT_00435d98; /* 0x435d98 */
-extern int DAT_00439ca8; /* 0x439ca8 */
+extern int g_btlUiBlock; /* 0x439ca8 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: btlActionFreeData. */
 /* Supplied declaration required: FUN_001e1874. */
-/* Supplied declaration required: FUN_002523f0. */
+/* Supplied declaration required: btlTalkBustUpDestroy. */
 /* Supplied declaration required: FUN_0026a958. */
-/* Supplied declaration required: FUN_00288728. */
+/* Supplied declaration required: mdlPartsRelease. */
 /* Supplied declaration required: FUN_00294f64. */
 /* Supplied declaration required: FUN_00295ba4. */
 /* Supplied declaration required: FUN_0029b074. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: FUN_002b2368. */
+/* Supplied declaration required: asdMemFreeNonNull. */
 extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_002c3f5c. */
 /* Supplied declaration required: FUN_002c40f8. */
@@ -73,7 +73,7 @@ void FUN_0020f04c(void)
   *(unsigned char *)(g_btlMainState + 0x18) = 1;
   btlActionFreeData();
   FUN_0026a958(0);
-  if (DAT_00439ca8 != 0) {
+  if (g_btlUiBlock != 0) {
     FUN_001e1874(puVar1);
   }
   FUN_0029b074();
@@ -96,7 +96,7 @@ void FUN_0020f04c(void)
     temp_v0 = *piVar4;
     if (temp_v0 != 0) {
       FUN_002c3f5c();
-      FUN_002b2368(temp_v0);
+      asdMemFreeNonNull(temp_v0);
     }
     *piVar4 = 0;
   }
@@ -106,7 +106,7 @@ void FUN_0020f04c(void)
   }
   puVar1[0x1282] = 0xffffffff;
   if (puVar1[0x10e5] != 0) {
-    FUN_00288728();
+    mdlPartsRelease();
     if ((int *)puVar1[0x10e5] != (int *)0x0) {
       (**(romwright_code **)(*(int *)puVar1[0x10e5] + 4))();
     }
@@ -191,7 +191,7 @@ void FUN_0020f04c(void)
     temp_v0 = temp_v0 + 1;
   } while (temp_v0 < 0x2a);
   FUN_00310ac0();
-  FUN_002523f0();
+  btlTalkBustUpDestroy();
   FUN_00295ba4(1);
   temp_v0 = jobIsValid(*puVar1);
   if (temp_v0 != 0) {

@@ -26,7 +26,7 @@ typedef struct {
 } param_3_stack;
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 extern unsigned int mapEnemyLookupByte(unsigned int);
 extern unsigned int FUN_002b7478(unsigned int);
 /* Supplied declaration required: FUN_00356308. */
@@ -65,7 +65,7 @@ void FUN_00483304(int param_1,int param_2,unsigned int param_3)
   temp_v4 = param_2;
   FUN_00356308();
   if ((*(short *)(temp_v4 + 10) != 1) ||
-     ((temp_v1 = FUN_0018719c(0x137), temp_v1 != 0 && (temp_v1 = FUN_0018719c(0x147), temp_v1 == 0)))) {
+     ((temp_v1 = gameFlagIsSet(0x137), temp_v1 != 0 && (temp_v1 = gameFlagIsSet(0x147), temp_v1 == 0)))) {
     temp_v8 = VectorSignedToFloat((int)*(short *)(temp_v4 + 2),(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v9 = VectorSignedToFloat((int)*(short *)(temp_v4 + 4),(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v1 = 0;

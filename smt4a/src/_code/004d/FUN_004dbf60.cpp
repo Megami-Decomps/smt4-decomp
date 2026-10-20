@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100854(int, int, unsigned int, int, unsigned char *);
+int libc_bsearch(int, int, unsigned int, int, unsigned char *);
 int FUN_00184310(void);
 int FUN_003c3f1c(void);
 
@@ -15,7 +15,7 @@ typedef struct {
 
 extern unsigned char LAB_00321d38; /* 0x321d38 */
 
-/* Supplied declaration required: FUN_00100854. */
+/* Supplied declaration required: libc_bsearch. */
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: FUN_003c3f1c. */
 
@@ -39,7 +39,7 @@ unsigned int FUN_004dbf60(int param_1,unsigned int param_2,unsigned int param_3,
   FUN_00184310();
   if (*(char *)(param_1 + 0x158) != '\0') {
     temp_v2 = param_1 + 0x15a;
-    FUN_00100854(temp_v2,param_1 + 0x17e,*(unsigned int *)(param_1 + 0x1b0),2,&LAB_00321d38);
+    libc_bsearch(temp_v2,param_1 + 0x17e,*(unsigned int *)(param_1 + 0x1b0),2,&LAB_00321d38);
     temp_v6 = temp_v5;
     if (temp_v2 == 0) {
       return 0;

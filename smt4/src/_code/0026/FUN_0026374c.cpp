@@ -16,12 +16,12 @@ typedef struct Obj {
     /* 0xC0 */ u8 text[0x80];
 } Obj;
 
-extern Obj *DAT_0043e140;
+extern Obj *g_placeWin;
 
 /* Starts a text entry: stores the UTF-16 string `text` (up to 0x80 bytes, ending at the first zero halfword) in the object. */
 void FUN_0026374c(u8 *text)
 {
-    Obj *obj = DAT_0043e140;
+    Obj *obj = g_placeWin;
     int length;
 
     obj->unk08 = 1;

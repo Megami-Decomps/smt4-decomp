@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0013c174(unsigned char *, int *, int);
 int asdMemFree(unsigned char *);
 int asdTextureCreate(void);
-int FUN_0019a840(int);
+int asdTextureSetImage(int);
 int FUN_00226970(int, unsigned char *, int, int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -21,7 +21,7 @@ extern int *DAT_005806cc; /* 0x5806cc */
 /* Supplied declaration required: FUN_0013c174. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: asdTextureCreate. */
-/* Supplied declaration required: FUN_0019a840. */
+/* Supplied declaration required: asdTextureSetImage. */
 /* Supplied declaration required: FUN_00226970. */
 
 
@@ -44,7 +44,7 @@ void FUN_002d2774(void)
   FUN_0013c174(&LAB_002d2820,&temp_v2,0);
   FUN_00226970(temp_v0,puVar3,temp_v2,0x10000);
   asdMemFree(puVar3);
-  FUN_0019a840(temp_v0);
+  asdTextureSetImage(temp_v0);
   piVar1 = DAT_005806cc;
   *(unsigned int *)(*DAT_005806cc + 0x3c) = 1;
   *(unsigned int *)(*piVar1 + 0x40) = 1;

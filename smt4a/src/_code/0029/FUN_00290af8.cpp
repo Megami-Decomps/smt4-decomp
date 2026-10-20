@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 
 extern unsigned char g_btlAction; /* 0x571138 */
 
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: dataTable04FindById. */
 extern short FUN_003df574(unsigned short);
 extern short FUN_004bcbb4(int, unsigned short);
 extern int btlUnitGet(unsigned int);
@@ -26,9 +26,9 @@ int FUN_00290af8(unsigned short *param_1,unsigned short *param_2)
   
   temp_v2 = (unsigned int)*param_1;
   if ((temp_v2 != 0) && (*param_2 != 0)) {
-    FUN_001aba54();
+    dataTable04FindById();
     temp_v3 = (unsigned int)*param_2;
-    FUN_001aba54();
+    dataTable04FindById();
     if ((temp_v2 != 0) && (temp_v3 != 0)) {
       temp_v4 = btlUnitGet((*(unsigned int *)((unsigned char *)&g_btlAction + 0x4)));
       temp_v4 = *(int *)(*(int *)(temp_v4 + 0x20) + 0x3fc);

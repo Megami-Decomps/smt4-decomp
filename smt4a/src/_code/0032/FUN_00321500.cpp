@@ -11,7 +11,7 @@ typedef struct {
     u32 state;          /* 0x243c */
 } Owner;
 
-int FUN_00184758(u8 *sub, int a, int b);
+int uiSpriteSetKeyframe(u8 *sub, int a, int b);
 
 /* When the state is 0, switches to state 5, clears the counter and restarts the sub-object. */
 void FUN_00321500(Owner *owner)
@@ -21,7 +21,7 @@ void FUN_00321500(Owner *owner)
     if (*state == 0) {
         *state = 5;
         owner->counter = 0;
-        FUN_00184758(owner->sub, 0, 0);
+        uiSpriteSetKeyframe(owner->sub, 0, 0);
     }
 }
 

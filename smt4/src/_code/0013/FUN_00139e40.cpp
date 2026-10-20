@@ -9,7 +9,7 @@ int FUN_001398f8(...);
 int FUN_002a84e8(void);
 int FUN_002ad888(void);
 int FUN_002bb648(...);
-int FUN_002c52f8(void);
+int asdFatalError(void);
 
 typedef int romwright_code(...);
 extern unsigned char DAT_00471b5c; /* 0x471b5c */
@@ -19,7 +19,7 @@ extern unsigned char DAT_00471b5c; /* 0x471b5c */
 /* Supplied declaration required: FUN_002a84e8. */
 /* Supplied declaration required: FUN_002ad888. */
 /* Supplied declaration required: FUN_002bb648. */
-/* Supplied declaration required: FUN_002c52f8. */
+/* Supplied declaration required: asdFatalError. */
 extern void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(unsigned int);
 
 
@@ -38,7 +38,7 @@ unsigned int FUN_00139e40(int *param_1,int *param_2,unsigned int param_3,unsigne
   if (temp_v1 < 0) {
     if ((param_1[2] & 0xfffffffeU) != 0) {
       if ((param_1[2] & 1U) != 0) {
-        FUN_002c52f8();
+        asdFatalError();
       }
       nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(param_1[2] & 0xfffffffe);
       param_1[2] = 0;
@@ -50,7 +50,7 @@ unsigned int FUN_00139e40(int *param_1,int *param_2,unsigned int param_3,unsigne
   if (*param_2 != 0x4f00) {
     if ((param_1[2] & 0xfffffffeU) != 0) {
       if ((param_1[2] & 1U) != 0) {
-        FUN_002c52f8();
+        asdFatalError();
       }
       nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(param_1[2] & 0xfffffffe);
       param_1[2] = 0;
@@ -70,7 +70,7 @@ unsigned int FUN_00139e40(int *param_1,int *param_2,unsigned int param_3,unsigne
     if (temp_v1 < 0) {
       if ((param_1[2] & 0xfffffffeU) != 0) {
         if ((param_1[2] & 1U) != 0) {
-          FUN_002c52f8();
+          asdFatalError();
         }
         nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(param_1[2] & 0xfffffffe);
         param_1[2] = 0;

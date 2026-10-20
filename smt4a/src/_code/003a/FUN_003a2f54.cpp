@@ -5,7 +5,7 @@
 extern "C" {
 
 int gameFlagsSet(...);
-int FUN_003fd63c(int, int);
+int gameFlagSetValue(int, int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -14,10 +14,10 @@ typedef struct {
 
 extern unsigned char g_gameState; /* 0x5f15fc */
 
-extern int FUN_00162e8c(void);
+extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: gameFlagsSet. */
 extern int dataTable2FType1GetEntry(int);
-/* Supplied declaration required: FUN_003fd63c. */
+/* Supplied declaration required: gameFlagSetValue. */
 
 
 void FUN_003a2f54(void)
@@ -27,14 +27,14 @@ void FUN_003a2f54(void)
   int temp_v0;
   int temp_v1;
   
-  temp_v0 = FUN_00162e8c();
+  temp_v0 = gameFlagsGetBlock();
   if ((*(signed char *)((unsigned char *)&g_gameState + 0xdc)) == '\0') {
     return;
   }
   temp_v1 = (int)*(short *)(temp_v0 + 0x2a);
   temp_v0 = dataTable2FType1GetEntry(temp_v1);
   if (*(int *)(temp_v0 + 0x1c) != 0) {
-    FUN_003fd63c(*(int *)(temp_v0 + 0x1c),1);
+    gameFlagSetValue(*(int *)(temp_v0 + 0x1c),1);
   }
   if (*(short *)(temp_v0 + 0x14) != 0) {
     gameFlagsSet(temp_v1);

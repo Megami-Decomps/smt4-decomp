@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_0022c038(...);
+int poolNodeUnlinkAndDestroy(...);
 int FUN_0022c564(...);
 int FUN_00396f3c(...);
-int FUN_00396fec(...);
+int treeRebalanceAfterErase(...);
 int FUN_003af304(...);
 int FUN_003aff9c(...);
 int FUN_003b0190(...);
@@ -56,10 +56,10 @@ extern unsigned char LAB_003b156c; /* 0x3b156c */
 #define romwright_piece_3_1(upper, lower) ((unsigned int)(((unsigned int)(unsigned int)(upper) << 8) | (unsigned char)(lower)))
 #endif
 extern unsigned int FUN_0022c004(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0022c038. */
+/* Supplied declaration required: poolNodeUnlinkAndDestroy. */
 /* Supplied declaration required: FUN_0022c564. */
 /* Supplied declaration required: FUN_00396f3c. */
-/* Supplied declaration required: FUN_00396fec. */
+/* Supplied declaration required: treeRebalanceAfterErase. */
 extern romwright_code *****FUN_003970f8(romwright_code *******);
 extern romwright_code *****FUN_0039717c(romwright_code *******);
 /* Supplied declaration required: FUN_003af304. */
@@ -365,8 +365,8 @@ unsigned int FUN_003b0f88(unsigned int *param_1,int param_2,unsigned int *param_
           temp_v25 = temp_v21;
           temp_v26 = temp_v15;
           FUN_003fc840(temp_v11,param_1 + 0x505);
-          FUN_0022c038(&temp_v18);
-          FUN_0022c038(&temp_v23);
+          poolNodeUnlinkAndDestroy(&temp_v18);
+          poolNodeUnlinkAndDestroy(&temp_v23);
           pppppppcVar9 = (romwright_code *******)&temp_v13;
         }
         else {
@@ -487,11 +487,11 @@ unsigned int FUN_003b0f88(unsigned int *param_1,int param_2,unsigned int *param_
           temp_v24 = pppppppcVar9;
           temp_v25 = temp_v22;
           FUN_003fc840(temp_v11,param_1 + 0x505);
-          FUN_0022c038(&temp_v14);
-          FUN_0022c038(&temp_v19);
+          poolNodeUnlinkAndDestroy(&temp_v14);
+          poolNodeUnlinkAndDestroy(&temp_v19);
           pppppppcVar9 = (romwright_code *******)&temp_v23;
         }
-        FUN_0022c038(pppppppcVar9);
+        poolNodeUnlinkAndDestroy(pppppppcVar9);
       }
       else {
         temp_v17 = pppppppcVar9 + 5;
@@ -822,11 +822,11 @@ unsigned int FUN_003b0f88(unsigned int *param_1,int param_2,unsigned int *param_
           if ((romwright_code ******)*ppppppcVar13 != ppppppcVar15) {
             ppppppcVar3 = ppppppcVar13 + 1;
           }
-          FUN_00396fec(ppppppcVar3);
+          treeRebalanceAfterErase(ppppppcVar3);
           ppppppcVar15 = ppppppcVar13;
           ppppppcVar3 = (romwright_code ******)ppppppcVar13[2];
         }
-        FUN_00396fec(pppppppcVar1 + 1);
+        treeRebalanceAfterErase(pppppppcVar1 + 1);
         pppppppcVar1[4] = pppppppcVar1[1];
       }
 LAB_003b20d0:

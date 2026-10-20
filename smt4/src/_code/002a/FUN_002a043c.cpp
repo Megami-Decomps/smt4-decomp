@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00244d98(int);
-int FUN_00244db4(int);
+int sysFlagsSetBits(int);
 int FUN_002cbaf8(unsigned int, int);
 int nw_gfx_SceneNode_AttachChild(unsigned int, unsigned int);
 
@@ -17,7 +17,7 @@ typedef struct {
 extern unsigned char LAB_00155650; /* 0x155650 */
 
 /* Supplied declaration required: FUN_00244d98. */
-/* Supplied declaration required: FUN_00244db4. */
+/* Supplied declaration required: sysFlagsSetBits. */
 extern unsigned int asdModelGetSlotArray0(int);
 /* Supplied declaration required: FUN_002cbaf8. */
 /* Supplied declaration required: nw_gfx_SceneNode_AttachChild. */
@@ -34,7 +34,7 @@ void FUN_002a043c(int param_1,int param_2)
   FUN_002cbaf8(*(unsigned int *)(param_1 + 8),param_2);
   if (param_2 == 0) {
     nw_gfx_SceneNode_AttachChild(temp_v0,*(unsigned int *)(param_1 + 0xc));
-    FUN_00244db4(1);
+    sysFlagsSetBits(1);
     temp_v1 = *(int *)(param_1 + 4);
     if (temp_v1 != 0) {
       *(unsigned char *)(temp_v1 + 0x58) = 1;
@@ -45,7 +45,7 @@ void FUN_002a043c(int param_1,int param_2)
   }
   if (param_2 == 1) {
     nw_gfx_SceneNode_AttachChild(temp_v0,*(unsigned int *)(param_1 + 0xc));
-    FUN_00244db4(2);
+    sysFlagsSetBits(2);
     temp_v1 = *(int *)(param_1 + 4);
     if (temp_v1 != 0) {
       *(unsigned char *)(temp_v1 + 0x58) = 1;

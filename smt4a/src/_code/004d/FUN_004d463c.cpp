@@ -13,7 +13,7 @@ typedef struct {
 
 extern int g_btlStageModel; /* 0x57a4f8 */
 
-extern int FUN_001656a0(unsigned int);
+extern int padButtonIsPressed(unsigned int);
 extern unsigned int *asdListBoxGetIntValuePtr(unsigned int);
 extern unsigned int *asdListBoxGetFloatValuePtr(unsigned int);
 extern unsigned int FUN_003874fc(unsigned int);
@@ -108,7 +108,7 @@ void FUN_004d463c(int param_1)
   case 0x13:
     puVar4 = (unsigned int *)asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10));
     temp_v0 = *puVar4;
-    temp_v1 = FUN_001656a0(9);
+    temp_v1 = padButtonIsPressed(9);
     if (temp_v1 != 0) {
       FUN_00401578(g_btlStageModel,temp_v0);
       return;

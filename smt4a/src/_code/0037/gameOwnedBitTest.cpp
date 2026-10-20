@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern Flags0C0C *FUN_00162e8c(void);
+extern Flags0C0C *gameFlagsGetBlock(void);
 
 /* Tests the owned-bit of `id` after folding variant ids onto their base id. */
 u8 gameOwnedBitTest(s32 id)
 {
-    Flags0C0C *flags = FUN_00162e8c();
+    Flags0C0C *flags = gameFlagsGetBlock();
     s32 word;
     s32 bit;
 

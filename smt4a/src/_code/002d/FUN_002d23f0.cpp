@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_003fd63c(...);
+int gameFlagSetValue(...);
 
-extern int FUN_00162e8c(void);
-extern int FUN_00379890(int);
-/* Supplied declaration required: FUN_003fd63c. */
+extern int gameFlagsGetBlock(void);
+extern int dataTable23Sub0GetEntry(int);
+/* Supplied declaration required: gameFlagSetValue. */
 
 
 void FUN_002d23f0(int param_1)
@@ -19,8 +19,8 @@ void FUN_002d23f0(int param_1)
   int temp_v1;
   unsigned int temp_v2;
   
-  temp_v0 = FUN_00162e8c();
-  temp_v1 = FUN_00379890(param_1);
+  temp_v0 = gameFlagsGetBlock();
+  temp_v1 = dataTable23Sub0GetEntry(param_1);
   if ((temp_v1 == 0) || (*(char *)(temp_v1 + 0x1f) < 100)) {
     if (-1 < param_1) {
       temp_v0 = temp_v0 + ((int)(param_1 + ((unsigned int)(param_1 >> 0x1f) >> 0x1b)) >> 5) * 4;
@@ -30,7 +30,7 @@ void FUN_002d23f0(int param_1)
   }
   switch((int)*(char *)(temp_v1 + 0x1f)) {
   case 0x65:
-    FUN_003fd63c(0x493,1);
+    gameFlagSetValue(0x493,1);
     if (-1 < param_1) {
       temp_v0 = temp_v0 + ((int)(param_1 + ((unsigned int)(param_1 >> 0x1f) >> 0x1b)) >> 5) * 4;
       *(unsigned int *)(temp_v0 + 0x808) = (1 << ((param_1 % 0x20) & 0xffU)) | *(unsigned int *)(temp_v0 + 0x808);
@@ -109,7 +109,7 @@ void FUN_002d23f0(int param_1)
     }
     return;
   }
-  FUN_003fd63c(temp_v2,1);
+  gameFlagSetValue(temp_v2,1);
   if (-1 < param_1) {
     temp_v0 = temp_v0 + ((int)(param_1 + ((unsigned int)(param_1 >> 0x1f) >> 0x1b)) >> 5) * 4;
     *(unsigned int *)(temp_v0 + 0x808) = (1 << ((param_1 % 0x20) & 0xffU)) | *(unsigned int *)(temp_v0 + 0x808);

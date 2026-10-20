@@ -19,7 +19,7 @@ typedef struct StageRef {
 } StageRef;
 
 extern void FUN_00314c38(s32 a, s32 b, s32 c, s32 d, s32 e, s32 f);
-extern void FUN_003fd63c(u32 index, s32 value, s32 flag);
+extern void gameFlagSetValue(u32 index, s32 value, s32 flag);
 
 /* Plays the stage's introduction for its kind (0, 4, 8, 0xE, 0x12) and then flags it. */
 void stageIntro(StageRef *ref)
@@ -42,7 +42,7 @@ void stageIntro(StageRef *ref)
         if (sub->kind == 0x12) {
             FUN_00314c38(0xED, 4, 0, 0, 0, 0);
         }
-        FUN_003fd63c(sub->unk24, 1, 1);
+        gameFlagSetValue(sub->unk24, 1, 1);
     }
 }
 

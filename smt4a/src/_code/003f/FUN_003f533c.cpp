@@ -7,7 +7,7 @@ extern "C" {
 int efctSetSpeed(void);
 int FUN_00180310(...);
 int FUN_001835b4(int, int, int, int, int, unsigned int);
-int FUN_00184e64(...);
+int drawSetColorFromRGBA8(...);
 int FUN_001879d0(unsigned int);
 
 /* stack frame of param_10: 4 slot(s), 16 byte(s) */
@@ -25,7 +25,7 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_00180310. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_00184e64. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_001879d0. */
 
 
@@ -44,7 +44,7 @@ void FUN_003f533c(unsigned int param_1,int param_2,int param_3,unsigned int para
   temp_v2 = temp_v3;
   FUN_001879d0(g_renderCtx);
   efctSetSpeed();
-  FUN_00184e64(param_9);
+  drawSetColorFromRGBA8(param_9);
   temp_v0 = FUN_001834a4(0x31,param_6);
   temp_v1 = (int)*(short *)(temp_v0 + 8) + param_2 + (int)temp_v3;
   temp_v0 = *(short *)(temp_v0 + 10) + param_3;
@@ -61,7 +61,7 @@ void FUN_003f533c(unsigned int param_1,int param_2,int param_3,unsigned int para
   temp_v0 = FUN_001834a4(0x31,param_8);
   FUN_00180310(6,(int)*(short *)(temp_v0 + 8) + param_2 + (int)temp_v2,*(short *)(temp_v0 + 10) + param_3,
                0,4,param_4,&LAB_003f54bc,param_5 / 10);
-  FUN_00184e64(0xffffffff);
+  drawSetColorFromRGBA8(0xffffffff);
   efctSetSpeed();
   return;
 }

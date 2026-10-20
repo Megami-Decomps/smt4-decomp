@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_00103f54(unsigned int, unsigned int *, int, int);
-int FUN_00103f74(unsigned int, int);
+int holderSetFlagBits(unsigned int, int);
 int FUN_00110b28(unsigned char [16], unsigned char **);
 int FUN_0011b63e(int, unsigned int, unsigned char [5], int);
-int FUN_002e760a(int);
+int operatorNew(int);
 int FUN_00432b10(unsigned char [5]);
 int FUN_00433650(unsigned char [5]);
 
@@ -28,10 +28,10 @@ extern unsigned char DAT_00558760; /* 0x558760 */
 extern unsigned char DAT_0055cacc; /* 0x55cacc */
 
 /* Supplied declaration required: FUN_00103f54. */
-/* Supplied declaration required: FUN_00103f74. */
+/* Supplied declaration required: holderSetFlagBits. */
 /* Supplied declaration required: FUN_00110b28. */
 /* Supplied declaration required: FUN_0011b63e. */
-/* Supplied declaration required: FUN_002e760a. */
+/* Supplied declaration required: operatorNew. */
 extern unsigned int FUN_002fafd8(int, unsigned int);
 /* Supplied declaration required: FUN_00432b10. */
 /* Supplied declaration required: FUN_00433650. */
@@ -63,21 +63,21 @@ void FUN_004139ec(int param_1)
   temp_v9 = 0xffffffff;
   temp_v7 = &DAT_00558760;
   FUN_00110b28(temp_v5,&temp_v7);
-  temp_v0 = FUN_002e760a(0x78);
+  temp_v0 = operatorNew(0x78);
   if (temp_v0 == 0) {
     temp_v1 = 0;
   }
   else {
     temp_v1 = FUN_002fafd8(temp_v0,0);
   }
-  puVar2 = (unsigned int *)FUN_002e760a(0x14);
+  puVar2 = (unsigned int *)operatorNew(0x14);
   if (puVar2 != (unsigned int *)0x0) {
     puVar2[1] = param_1;
     puVar2[2] = (unsigned int)FUN_0041460c;
     puVar2[3] = 0;
     *puVar2 = (unsigned int)&DAT_0055cacc;
     puVar2[4] = temp_v1;
-    FUN_00103f74(temp_v1,2);
+    holderSetFlagBits(temp_v1,2);
     FUN_00103f54(temp_v1,puVar2,0,1);
   }
   FUN_0011b63e(param_1 + 4,temp_v1,temp_v2,param_1 + 0xdc);

@@ -2,8 +2,8 @@
 
 extern "C" {
 
-int FUN_002ae898(int table, int index);
-extern int FUN_002a60b4(u32 table, int index);
+int asdTMTexTableReleaseNode(int table, int index);
+extern int asdTMTexTableNodeIsLoaded(u32 table, int index);
 
 typedef struct Obj {
     /* 0x000 */ u8 unk000[0xC78];
@@ -19,8 +19,8 @@ u32 FUN_003bb36c(Obj *obj)
     u8 firstClear;
 
     do {
-        if ((obj->loaded[i] != 0) && (FUN_002a60b4(0x2a, i) != 0)) {
-            FUN_002ae898(0x2a, i);
+        if ((obj->loaded[i] != 0) && (asdTMTexTableNodeIsLoaded(0x2a, i) != 0)) {
+            asdTMTexTableReleaseNode(0x2a, i);
             obj->loaded[i] = 0;
         }
         i = i + 1;

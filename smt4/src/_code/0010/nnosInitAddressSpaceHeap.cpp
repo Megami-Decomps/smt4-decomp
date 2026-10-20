@@ -4,11 +4,11 @@ extern "C" {
 
 int nnosAddressSpaceManagerInitialize(u8 *manager, int base, int size);
 
-extern u8 DAT_004eac5c;
+extern u8 g_nnosAddressSpaceManagerHeap;
 
 void nnosInitAddressSpaceHeap(void)
 {
-    nnosAddressSpaceManagerInitialize(&DAT_004eac5c, 0x10000000, 0x4000000);
+    nnosAddressSpaceManagerInitialize(&g_nnosAddressSpaceManagerHeap, 0x10000000, 0x4000000);
 }
 
 } /* extern "C" */

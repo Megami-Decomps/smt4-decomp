@@ -39,7 +39,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_001e18d4. */
 /* Supplied declaration required: FUN_00269508. */
 /* Supplied declaration required: FUN_00269694. */
-extern int FUN_00269a58(void);
+extern int effGetFrameCounter(void);
 
 
 void FUN_001d1df4(float *param_1)
@@ -62,7 +62,7 @@ void FUN_001d1df4(float *param_1)
   if ((param_1[0xb] == 0.0f) && (DAT_00472398 != '\0')) {
     param_1[0xe] = DAT_0047239c;
   }
-  temp_v0 = FUN_00269a58();
+  temp_v0 = effGetFrameCounter();
   temp_v3 = param_1[0x2f];
   temp_v2 = (float)(temp_v0 + (int)param_1[0xb]);
   param_1[0xb] = temp_v2;

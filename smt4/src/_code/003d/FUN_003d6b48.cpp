@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_003100f4(void);
+int asdCameraCreateFromResource(void);
 
-/* Supplied declaration required: FUN_003100f4. */
+/* Supplied declaration required: asdCameraCreateFromResource. */
 
 
 unsigned char FUN_003d6b48(int param_1)
@@ -19,7 +19,7 @@ unsigned char FUN_003d6b48(int param_1)
   temp_v0 = *(int *)(param_1 + 0x734);
   temp_v1 = temp_v0 != 0;
   if (temp_v1) {
-    FUN_003100f4();
+    asdCameraCreateFromResource();
     *(int *)(param_1 + 0x730) = temp_v0;
     *(unsigned int *)(temp_v0 + 0x14) = *(unsigned int *)(param_1 + 0x734);
   }

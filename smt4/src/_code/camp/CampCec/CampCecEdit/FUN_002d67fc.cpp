@@ -9,11 +9,11 @@ int FUN_0026eda8(void);
 int FUN_0026ee14(...);
 int FUN_0026f204(void);
 int FUN_00297468(...);
-int FUN_002a8740(...);
-int FUN_002b8838(...);
+int gameGetUnitRecord(...);
+int buttonHelpSetPreset(...);
 int FUN_002bd81c(...);
 int FUN_002bd82c(...);
-int FUN_002c3940(...);
+int rt_aeabi_memclr(...);
 int memClear(void);
 int asdMemAlloc(int, int, int, int, int);
 int taskCreateDraw(...);
@@ -60,14 +60,14 @@ extern unsigned int FUN_0026ef04(void);
 /* Supplied declaration required: FUN_0026f204. */
 /* Supplied declaration required: FUN_00297468. */
 extern int flagWordTestBit(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002a8740. */
-extern int FUN_002a8764(void);
-extern unsigned int FUN_002b63ac(void);
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: gameGetUnitRecord. */
+extern int gameGetSlotTable(void);
+extern unsigned int gameGetPlayerData(void);
+/* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: FUN_002bd81c. */
 /* Supplied declaration required: FUN_002bd82c. */
 extern unsigned int asdTextCreate(unsigned int);
-/* Supplied declaration required: FUN_002c3940. */
+/* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: taskCreateDraw. */
@@ -160,35 +160,35 @@ void FUN_002d67fc(unsigned char param_1)
   puVar1[0x2c] = temp_v0;
   FUN_002bd82c(temp_v0,0xff);
   FUN_002bd81c(puVar1[0x2c],0,0x646464ff);
-  FUN_002b8838(0xb1);
+  buttonHelpSetPreset(0xb1);
   temp_v4 = 0;
   do {
-    FUN_002c3940(puVar1 + temp_v4 * 5 + 0xf,0x14);
+    rt_aeabi_memclr(puVar1 + temp_v4 * 5 + 0xf,0x14);
     temp_v3 = temp_v4 + 1;
     puVar1[temp_v4 * 5 + 0x10] = 0x14a;
     temp_v4 = temp_v3;
   } while (temp_v3 < 3);
   temp_v4 = 0;
   do {
-    FUN_002c3940(puVar1 + temp_v4 * 5 + 5,0x14);
+    rt_aeabi_memclr(puVar1 + temp_v4 * 5 + 5,0x14);
     temp_v4 = temp_v4 + 1;
   } while (temp_v4 < 2);
-  FUN_002c3940(puVar1 + 0x23,0x14);
+  rt_aeabi_memclr(puVar1 + 0x23,0x14);
   puVar1[0x24] = 0x14a;
-  temp_v0 = FUN_002b63ac();
+  temp_v0 = gameGetPlayerData();
   temp_v1 = FUN_0024aaa0();
   FUN_0026ee14(temp_v1,temp_v0);
   FUN_0024aaa0();
   FUN_0026eda8();
-  temp_v4 = FUN_002a8764();
+  temp_v4 = gameGetSlotTable();
   temp_v3 = 0;
   puVar1[0x47] = 0;
   do {
     if (-1 < *(char *)(temp_v4 + temp_v3 + 0x90f0)) {
-      temp_v0 = FUN_002a8740();
+      temp_v0 = gameGetUnitRecord();
       temp_v2 = flagWordTestBit(temp_v0,10);
       if (temp_v2 == 0) {
-        temp_v0 = FUN_002a8740((int)*(char *)(temp_v4 + temp_v3 + 0x90f0));
+        temp_v0 = gameGetUnitRecord((int)*(char *)(temp_v4 + temp_v3 + 0x90f0));
         temp_v2 = flagWordTestBit(temp_v0,1);
         if (temp_v2 == 0) {
           puVar1[0x47] = puVar1[0x47] + 1;

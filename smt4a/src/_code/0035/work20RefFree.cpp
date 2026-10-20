@@ -3,7 +3,7 @@
 extern "C" {
 
 extern void asdMemFree(void *ptr);
-extern void FUN_001800b8(void *p);
+extern void asdTextureRelease(void *p);
 
 /* Frees the pieces of a work-area reference. */
 void work20RefFree(Work20Ref *ref)
@@ -15,7 +15,7 @@ void work20RefFree(Work20Ref *ref)
     }
     asdMemFree(first->unk08);
     asdMemFree(ref->first);
-    FUN_001800b8(ref->unk0C);
+    asdTextureRelease(ref->unk0C);
     asdMemFree(ref);
 }
 

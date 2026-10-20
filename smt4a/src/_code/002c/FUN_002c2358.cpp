@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_001800b8(void);
+int asdTextureRelease(void);
 
-extern int DAT_0057f65c; /* 0x57f65c */
+extern int g_frameTex; /* 0x57f65c */
 
-/* Supplied declaration required: FUN_001800b8. */
+/* Supplied declaration required: asdTextureRelease. */
 
 
 void FUN_002c2358(void)
@@ -18,21 +18,21 @@ void FUN_002c2358(void)
   int temp_v0;
   int *piVar2;
   
-  temp_v0 = DAT_0057f65c;
-  piVar2 = (int *)(DAT_0057f65c + 0x1490);
-  *(unsigned char *)(DAT_0057f65c + 0xfa4) = 0;
+  temp_v0 = g_frameTex;
+  piVar2 = (int *)(g_frameTex + 0x1490);
+  *(unsigned char *)(g_frameTex + 0xfa4) = 0;
   if (*piVar2 != 0) {
-    FUN_001800b8();
+    asdTextureRelease();
     *piVar2 = 0;
   }
   piVar2 = (int *)(temp_v0 + 0x149c);
   if (*piVar2 != 0) {
-    FUN_001800b8();
+    asdTextureRelease();
     *piVar2 = 0;
   }
   piVar2 = (int *)(temp_v0 + 0x1498);
   if (*piVar2 != 0) {
-    FUN_001800b8();
+    asdTextureRelease();
     *piVar2 = 0;
   }
   return;

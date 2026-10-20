@@ -13,7 +13,7 @@ typedef struct {
 
 extern int g_lmapScene; /* 0x581288 */
 
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 extern int FUN_002e5db4(void);
 /* Supplied declaration required: FUN_003fd7c0. */
 
@@ -27,7 +27,7 @@ void FUN_003856f8(unsigned int param_1)
   if (*(int *)(g_lmapScene + 0x18c) == 0) {
     return;
   }
-  temp_v0 = FUN_0018719c(0x4c9);
+  temp_v0 = gameFlagIsSet(0x4c9);
   if ((temp_v0 != 0) && (temp_v0 = FUN_002e5db4(), temp_v0 == 0)) {
     FUN_003fd7c0(*(unsigned int *)(*(int *)(g_lmapScene + 0x18c) + 4),3,2);
     return;

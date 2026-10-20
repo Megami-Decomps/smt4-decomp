@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002e6e34(unsigned char [16], unsigned int);
 int FUN_002e6e5c(unsigned char [16]);
-int FUN_002f6d1c(int *);
+int mapIteratorNext5(int *);
 
 /* stack frame of param_2: 8 slot(s), 32 byte(s) */
 typedef struct {
@@ -22,9 +22,9 @@ typedef struct {
 
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-extern unsigned int FUN_002ea714(void);
+extern unsigned int onlineGetActiveLock(void);
 extern int FUN_002eba9c(unsigned int *, unsigned int *);
-/* Supplied declaration required: FUN_002f6d1c. */
+/* Supplied declaration required: mapIteratorNext5. */
 extern int wordRefsDiffer_002f6d4c(int *, unsigned int *);
 
 
@@ -44,7 +44,7 @@ void FUN_0010ce7c(int param_1,unsigned int *param_2)
   int temp_v9;
   unsigned int temp_v10;
   
-  temp_v0 = FUN_002ea714();
+  temp_v0 = onlineGetActiveLock();
   FUN_002e6e34(temp_v8,temp_v0);
   temp_v2 = *(int *)(*(int *)(param_1 + 0x30) + 8);
   while( 1 ) {
@@ -69,7 +69,7 @@ void FUN_0010ce7c(int param_1,unsigned int *param_2)
         *(unsigned int *)(temp_v1 + 0x10) = temp_v0;
       }
     }
-    FUN_002f6d1c(&temp_v2);
+    mapIteratorNext5(&temp_v2);
   }
   FUN_002e6e5c(temp_v8);
   return;

@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002bd540(void);
+int asdTextureSetImage(void);
 
-/* Supplied declaration required: FUN_002bd540. */
+/* Supplied declaration required: asdTextureSetImage. */
 
 
 unsigned char FUN_002a6e00(int param_1)
@@ -17,7 +17,7 @@ unsigned char FUN_002a6e00(int param_1)
   
   temp_v0 = *(int *)(param_1 + 8) != 0;
   if (temp_v0) {
-    FUN_002bd540();
+    asdTextureSetImage();
     *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) | 4;
   }
   return temp_v0;

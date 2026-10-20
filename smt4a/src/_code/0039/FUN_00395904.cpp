@@ -54,7 +54,7 @@ extern unsigned int DAT_00536d14; /* 0x536d14 */
 extern unsigned int DAT_00536d18; /* 0x536d18 */
 extern unsigned int DAT_00536d1c; /* 0x536d1c */
 extern unsigned int DAT_00536d20; /* 0x536d20 */
-extern int DAT_0056fcc0; /* 0x56fcc0 */
+extern int g_handleRegistry; /* 0x56fcc0 */
 extern int *DAT_005806a4; /* 0x5806a4 */
 extern int g_lmapScene; /* 0x581288 */
 extern float DAT_005f15d8; /* 0x5f15d8 */
@@ -1726,7 +1726,7 @@ joined_r0x00397538:
   temp_v25 = (float)DAT_005806a4[6] * temp_v25;
   FUN_001bbf0c();
   temp_v24 = temp_v24 + DAT_005f1a04;
-  temp_v9 = *(int *)(DAT_0056fcc0 + 0x14);
+  temp_v9 = *(int *)(g_handleRegistry + 0x14);
   temp_v21 = *(float *)(g_lmapScene + 0x24);
   temp_v11 = *(float *)(g_lmapScene + 0x1c);
   temp_v26 = *(float *)(g_lmapScene + 0x20);

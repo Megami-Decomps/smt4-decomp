@@ -4,7 +4,7 @@ extern "C" {
 
 u32 FUN_002c5be8(void)
 {
-    return DAT_00464af0.unk44;
+    return g_gfxSettings.unk44;
 }
 
 } /* extern "C" */

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned char DAT_0043e188; /* 0x43e188 */
+extern unsigned char g_messageMain; /* 0x43e188 */
 
 
 unsigned char FUN_0029ee2c(void)
@@ -12,7 +12,7 @@ unsigned char FUN_0029ee2c(void)
 {
   unsigned char temp_v0;
   
-  if (((*(int *)((unsigned char *)&DAT_0043e188 + 0x4)) == 0) || (temp_v0 = 1, *(char *)((*(int *)((unsigned char *)&DAT_0043e188 + 0x4)) + 8) != '\x01')) {
+  if (((*(int *)((unsigned char *)&g_messageMain + 0x4)) == 0) || (temp_v0 = 1, *(char *)((*(int *)((unsigned char *)&g_messageMain + 0x4)) + 8) != '\x01')) {
     temp_v0 = 0;
   }
   return temp_v0;

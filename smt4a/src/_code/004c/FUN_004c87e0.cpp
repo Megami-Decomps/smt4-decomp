@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern BtlHelpA *DAT_005738e8;
+extern BtlHelpA *g_btlHelp;
 
 bool FUN_004c87e0(void)
 {
-    return DAT_005738e8->unk08 >= 2;
+    return g_btlHelp->unk08 >= 2;
 }
 
 } /* extern "C" */

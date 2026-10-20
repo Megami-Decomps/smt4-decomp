@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_00206270(int);
-int FUN_0028be40(int);
-int FUN_0028be50(int);
+int playSceneTimerSubStart(int);
+int playSceneFadeInStart(int);
 int FUN_0028be84(void);
 int FUN_00297f1c(int, unsigned int, unsigned int, unsigned int);
 
@@ -15,13 +15,13 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_4_stack;
 
-extern unsigned char DAT_00439c88; /* 0x439c88 */
+extern unsigned char g_btlUi; /* 0x439c88 */
 
 /* Supplied declaration required: FUN_00206270. */
-/* Supplied declaration required: FUN_0028be40. */
-/* Supplied declaration required: FUN_0028be50. */
+/* Supplied declaration required: playSceneTimerSubStart. */
+/* Supplied declaration required: playSceneFadeInStart. */
 /* Supplied declaration required: FUN_0028be84. */
-extern int FUN_0028bebc(int);
+extern int playSceneIsFadeOutDone(int);
 /* Supplied declaration required: FUN_00297f1c. */
 
 
@@ -33,9 +33,9 @@ void FUN_00227b14(unsigned int param_1,unsigned int param_2,unsigned int param_3
   int temp_v1;
   unsigned int temp_v2;
   
-  temp_v0 = (*(int *)((unsigned char *)&DAT_00439c88 + 0x20));
+  temp_v0 = (*(int *)((unsigned char *)&g_btlUi + 0x20));
   temp_v2 = 0xffffffff;
-  *(unsigned int *)((*(int *)((unsigned char *)&DAT_00439c88 + 0x20)) + 0x7e38) = 7;
+  *(unsigned int *)((*(int *)((unsigned char *)&g_btlUi + 0x20)) + 0x7e38) = 7;
   switch(param_3) {
   case 1:
   case 2:
@@ -59,13 +59,13 @@ void FUN_00227b14(unsigned int param_1,unsigned int param_2,unsigned int param_3
     break;
   case 0xe:
     temp_v2 = 0xb;
-    temp_v1 = FUN_0028bebc(temp_v0 + 8);
+    temp_v1 = playSceneIsFadeOutDone(temp_v0 + 8);
     if (temp_v1 != 0) {
       temp_v1 = temp_v0 + 0x2200;
       FUN_0028be84();
       if (temp_v1 != 0) {
-        FUN_0028be50(temp_v0 + 8);
-        FUN_0028be40(temp_v0 + 0x2200);
+        playSceneFadeInStart(temp_v0 + 8);
+        playSceneTimerSubStart(temp_v0 + 0x2200);
       }
     }
     FUN_00206270(temp_v0 + 0x2460);

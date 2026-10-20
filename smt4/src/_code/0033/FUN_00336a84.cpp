@@ -33,7 +33,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00256124. */
 /* Supplied declaration required: FUN_00256194. */
 /* Supplied declaration required: FUN_0028ee90. */
-extern int FUN_002a8764(void);
+extern int gameGetSlotTable(void);
 extern int FUN_002b6b38(void);
 /* Supplied declaration required: FUN_00337cfc. */
 /* Supplied declaration required: FUN_003c8428. */
@@ -82,7 +82,7 @@ void FUN_00336a84(fn_00336a84_arg0 *param_1)
       }
     }
   }
-  temp_v0 = FUN_002a8764();
+  temp_v0 = gameGetSlotTable();
   if (*(short *)(temp_v0 + 0x9152) != 0) {
     FUN_00337cfc(param_1,temp_v1);
     FUN_00255e38(param_1,temp_v1,2,0x36,0);

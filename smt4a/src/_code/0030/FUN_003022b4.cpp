@@ -61,8 +61,8 @@ extern unsigned char DAT_0055af64; /* 0x55af64 */
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-extern int FUN_002e995c(int, unsigned int, int);
-extern unsigned int *FUN_002e9f80(fn_003022b4_arg0 *);
+extern int onlineSockAddrConstruct(int, unsigned int, int);
+extern unsigned int *sharedRefInit(fn_003022b4_arg0 *);
 /* Supplied declaration required: FUN_002eb530. */
 extern int constructObj00559344(unsigned int *, unsigned int);
 
@@ -82,7 +82,7 @@ FUN_003022b4(fn_003022b4_arg0 *param_1,unsigned int param_2,unsigned int param_3
   uStack_20 = param_2;
   uStack_1c = param_3;
   uStack_18 = param_4;
-  puVar1 = (unsigned int *)FUN_002e9f80(param_1);
+  puVar1 = (unsigned int *)sharedRefInit(param_1);
   puVar1[3] = 0;
   puVar1[4] = 0;
   puVar1[5] = 0;
@@ -99,7 +99,7 @@ FUN_003022b4(fn_003022b4_arg0 *param_1,unsigned int param_2,unsigned int param_3
   *(unsigned int *)(temp_v0 + 0x54) = 0;
   *(unsigned int *)(temp_v0 + 0x4c) = 0;
   *(unsigned char *)(temp_v0 + 0x8c) = 0;
-  temp_v0 = FUN_002e995c(temp_v0 + 0x94,0xd4,temp_v0 + 0x58);
+  temp_v0 = onlineSockAddrConstruct(temp_v0 + 0x94,0xd4,temp_v0 + 0x58);
   *(unsigned int *)(temp_v0 + 0x24) = 0;
   *(unsigned int *)(temp_v0 + 0x28) = 0;
   *(unsigned int *)(temp_v0 + 0x2c) = 0;

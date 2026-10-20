@@ -8,7 +8,7 @@ int refIsNullOrZero(...);
 int FUN_002bb5a4(...);
 int FUN_002be624(...);
 int memClear(...);
-int FUN_002c52f8(...);
+int asdFatalError(...);
 int FUN_002c618c(...);
 int builtin_strncpy(...);
 
@@ -34,7 +34,7 @@ extern int FUN_002b90c8(unsigned char *, unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_002bb5a4. */
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: memClear. */
-/* Supplied declaration required: FUN_002c52f8. */
+/* Supplied declaration required: asdFatalError. */
 /* Supplied declaration required: FUN_002c618c. */
 extern void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(unsigned int);
 
@@ -89,14 +89,14 @@ int FUN_002402c4(unsigned int param_1,unsigned int param_2)
   FUN_002bb5a4(puVar3,temp_v1,1);
   if ((temp_v4[0] & 0xfffffffe) != 0) {
     if ((temp_v4[0] & 1) != 0) {
-      FUN_002c52f8();
+      asdFatalError();
     }
     nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(temp_v4[0] & 0xfffffffe);
     temp_v4[0] = 0;
   }
   if ((temp_v4[0] & 0xfffffffe) != 0) {
     if ((temp_v4[0] & 1) != 0) {
-      FUN_002c52f8();
+      asdFatalError();
     }
     nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(temp_v4[0] & 0xfffffffe);
   }

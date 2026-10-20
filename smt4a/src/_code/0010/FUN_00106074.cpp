@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002e6e34(int *, unsigned char *);
 int FUN_002e6e5c(int *);
-int FUN_002e7232(void);
+int sharedRefRelease(void);
 int FUN_002ecf28(void);
 int FUN_002ecf40(void);
 
@@ -14,7 +14,7 @@ extern unsigned char DAT_0062e6a0; /* 0x62e6a0 */
 
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-/* Supplied declaration required: FUN_002e7232. */
+/* Supplied declaration required: sharedRefRelease. */
 /* Supplied declaration required: FUN_002ecf28. */
 /* Supplied declaration required: FUN_002ecf40. */
 
@@ -32,7 +32,7 @@ void FUN_00106074(unsigned int param_1,unsigned int param_2,unsigned int param_3
   uStack_8 = param_4;
   FUN_002e6e34(&uStack_10,&DAT_0062e6a0);
   FUN_002ecf28();
-  FUN_002e7232();
+  sharedRefRelease();
   FUN_002e6e5c(&uStack_10);
   FUN_002ecf40();
   return;

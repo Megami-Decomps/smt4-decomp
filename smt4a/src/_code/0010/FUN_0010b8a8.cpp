@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002e6e34(unsigned char [12], int);
 int FUN_002e6e5c(unsigned char [12]);
-int FUN_002e9afe(int, unsigned int);
+int vectorCopyHeader(int, unsigned int);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -17,7 +17,7 @@ typedef struct {
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
 extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
-/* Supplied declaration required: FUN_002e9afe. */
+/* Supplied declaration required: vectorCopyHeader. */
 extern int FUN_002ea704(void);
 
 
@@ -50,7 +50,7 @@ void FUN_0010b8a8(int param_1)
     temp_v4 = 0x10001;
   }
   temp_v1 = FUN_002e7908(temp_v3,(unsigned int *)&temp_v4);
-  FUN_002e9afe(param_1 + 0x6c,temp_v1);
+  vectorCopyHeader(param_1 + 0x6c,temp_v1);
   FUN_002e6e5c(temp_v2);
   return;
 }

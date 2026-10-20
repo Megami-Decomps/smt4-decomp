@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002b9024(void);
+int devilGetRecord(void);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: devilGetRecord. */
 
 
 void FUN_003c1cfc(unsigned int *param_1,int param_2)
@@ -25,7 +25,7 @@ void FUN_003c1cfc(unsigned int *param_1,int param_2)
   unsigned int temp_v4;
   unsigned int temp_v5;
   
-  FUN_002b9024();
+  devilGetRecord();
   temp_v1 = *(unsigned short *)(param_2 + 0x14);
   temp_v0 = *(unsigned char *)(param_2 + 0x28);
   temp_v2 = *(unsigned int *)(param_2 + 0x16);

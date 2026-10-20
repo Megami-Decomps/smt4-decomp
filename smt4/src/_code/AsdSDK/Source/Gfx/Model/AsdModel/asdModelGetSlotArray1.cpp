@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern u32 DAT_00464ba4[];
+extern u32 g_asdModelSlotArray1[];
 
-/* Returns element `slot` of the DAT_00464ba4 array. */
+/* Returns element `slot` of the g_asdModelSlotArray1 array. */
 u32 asdModelGetSlotArray1(s32 slot)
 {
-    return DAT_00464ba4[slot];
+    return g_asdModelSlotArray1[slot];
 }
 
 } /* extern "C" */

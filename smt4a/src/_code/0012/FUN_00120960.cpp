@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_002e7232(int);
-int FUN_002e75fa(int);
-int FUN_002ed838(int *);
+int sharedRefRelease(int);
+int sharedRefAddRef(int);
+int streamReset(int *);
 int FUN_002f2b24(int, int *);
 int FUN_002f2da0(...);
 int FUN_002f2dd8(int);
-int FUN_002f2de4(int *);
+int listIteratorNext2(int *);
 int FUN_00310510(int *, unsigned char **, int *);
 int FUN_00310578(unsigned char **);
 
@@ -42,11 +42,11 @@ extern unsigned char DAT_0055b06c; /* 0x55b06c */
 extern unsigned short DAT_00594986; /* 0x594986 */
 extern unsigned short DAT_00594988; /* 0x594988 */
 
-/* Supplied declaration required: FUN_002e7232. */
-/* Supplied declaration required: FUN_002e75fa. */
-extern int FUN_002e760a(unsigned int);
+/* Supplied declaration required: sharedRefRelease. */
+/* Supplied declaration required: sharedRefAddRef. */
+extern int operatorNew(unsigned int);
 extern int FUN_002eb5f4(void);
-/* Supplied declaration required: FUN_002ed838. */
+/* Supplied declaration required: streamReset. */
 extern int FUN_002efd4a(unsigned int *, unsigned int);
 extern int *FUN_002f2afc(void);
 /* Supplied declaration required: FUN_002f2b24. */
@@ -54,7 +54,7 @@ extern int FUN_002f2b30(void);
 extern int FUN_002f2c38(int, int);
 /* Supplied declaration required: FUN_002f2da0. */
 /* Supplied declaration required: FUN_002f2dd8. */
-/* Supplied declaration required: FUN_002f2de4. */
+/* Supplied declaration required: listIteratorNext2. */
 extern int wordRefsDiffer_002f2dec(int *, int);
 /* Supplied declaration required: FUN_00310510. */
 /* Supplied declaration required: FUN_00310578. */
@@ -131,7 +131,7 @@ unsigned int FUN_00120960(int param_1,int param_2,unsigned int param_3,unsigned 
       temp_v11 = temp_v21;
       temp_v1 = FUN_002f2b30();
       if ((temp_v1 != 0) && (temp_v1 = FUN_002f2c38(temp_v2,temp_v11), temp_v1 != 0)) break;
-      FUN_002f2de4(&temp_v13);
+      listIteratorNext2(&temp_v13);
     }
     if (temp_v23 < (unsigned int)(*(int *)(temp_v20 + 0x34) + temp_v3)) {
 LAB_00120aa8:
@@ -145,14 +145,14 @@ LAB_00120aa8:
           temp_v13 = temp_v12;
         }
         else {
-          FUN_002f2de4(&temp_v13);
+          listIteratorNext2(&temp_v13);
         }
       }
       if (temp_v3 == temp_v4) {
         FUN_00310578(&temp_v5);
         return 0;
       }
-      temp_v3 = FUN_002e760a(0x10);
+      temp_v3 = operatorNew(0x10);
       if (temp_v3 != 0) {
         piVar5 = (int *)FUN_002f2afc();
       }
@@ -162,7 +162,7 @@ LAB_00120aa8:
       temp_v3 = FUN_002eb5f4();
       temp_v16 = temp_v6;
       while (temp_v2 = iterNotEqual(&temp_v16,temp_v14), temp_v4 = temp_v16, temp_v2 != 0) {
-        FUN_002ed838(piVar5);
+        streamReset(piVar5);
         (**(romwright_code **)(*(int *)(temp_v3 + 0xd4) + 0x20))((int *)(temp_v3 + 0xd4),temp_v4,piVar5);
         if (*(char *)(temp_v4 + 0x138) == '\0') {
           *(unsigned char *)(temp_v4 + 0x138) = 1;
@@ -171,7 +171,7 @@ LAB_00120aa8:
           temp_v11 = temp_v16;
           FUN_00310510(&temp_v12,&temp_v5,&temp_v11);
           temp_v16 = temp_v12;
-          FUN_002e7232(temp_v4);
+          sharedRefRelease(temp_v4);
         }
         else {
           temp_v16 = *(int *)(temp_v16 + 0x14);
@@ -197,10 +197,10 @@ LAB_00120aa8:
     FUN_002f2dd8(temp_v2);
     temp_v3 = *(int *)(temp_v20 + 0x34) + temp_v3;
     if (*(unsigned short *)(temp_v19 + 2) < DAT_00594988) {
-      FUN_002f2de4(&temp_v13);
+      listIteratorNext2(&temp_v13);
       continue;
     }
-    FUN_002e75fa(temp_v2);
+    sharedRefAddRef(temp_v2);
     temp_v11 = temp_v13;
     FUN_002f2da0(&temp_v12,param_1,&temp_v11);
     temp_v13 = temp_v12;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6dd4(int, int);
+int rt_memclr(int, int);
 int FUN_00356308(void);
 int FUN_00482fe8(unsigned int *);
 int FUN_004834b0(unsigned int *, int);
@@ -14,8 +14,8 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-extern int FUN_0018719c(int);
-/* Supplied declaration required: FUN_002e6dd4. */
+extern int gameFlagIsSet(int);
+/* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: FUN_00356308. */
 extern int FUN_003a3038(void);
 /* Supplied declaration required: FUN_00482fe8. */
@@ -48,8 +48,8 @@ void FUN_004839b4(unsigned int *param_1)
       if (((((int)*pcVar2 != 0xffffffff) && ((int)*pcVar2 == param_1[1])) &&
           ((int)pcVar2[1] == param_1[2])) &&
          ((*(short *)(pcVar2 + 10) != 1 ||
-          ((temp_v1 = FUN_0018719c(unaff_r7), temp_v1 != 0 &&
-           (temp_v1 = FUN_0018719c(unaff_r7 + 0x10), temp_v1 == 0)))))) {
+          ((temp_v1 = gameFlagIsSet(unaff_r7), temp_v1 != 0 &&
+           (temp_v1 = gameFlagIsSet(unaff_r7 + 0x10), temp_v1 == 0)))))) {
         *(short *)((int)param_1 + (unsigned int)(unsigned short)(int)param_1[0x28] * 2 + 0xa2) = (short)(int)pcVar4;
         *(short *)(param_1 + 0x28) = (short)param_1[0x28] + 1;
       }
@@ -62,7 +62,7 @@ void FUN_004839b4(unsigned int *param_1)
     FUN_004834b0(param_1,1);
     temp_v0 = temp_v0 + 1;
   } while (temp_v0 < 4);
-  FUN_002e6dd4((int)param_1 + 0x8a2,0x40);
+  rt_memclr((int)param_1 + 0x8a2,0x40);
   FUN_00482fe8(param_1);
   return;
 }

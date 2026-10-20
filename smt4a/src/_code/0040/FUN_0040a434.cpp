@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_001519ac(void);
+extern int gameDataBlocksGetStats(void);
 
 
 void FUN_0040a434(unsigned int param_1,int param_2)
@@ -15,7 +15,7 @@ void FUN_0040a434(unsigned int param_1,int param_2)
   unsigned char *pbVar3;
   unsigned char temp_v2;
   
-  temp_v1 = FUN_001519ac();
+  temp_v1 = gameDataBlocksGetStats();
   pbVar3 = (unsigned char *)(temp_v1 + 4 + (param_1 >> 3));
   temp_v0 = *pbVar3;
   temp_v2 = (unsigned char)(1 << (param_1 & 7));

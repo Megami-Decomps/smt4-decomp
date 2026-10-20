@@ -7,9 +7,9 @@ extern "C" {
 int FUN_00184310(void);
 int FUN_003f2f58(void);
 
-extern int FUN_0014bef4(unsigned int);
+extern int randRange(unsigned int);
 /* Supplied declaration required: FUN_00184310. */
-extern int FUN_003e46f4(unsigned int);
+extern int gameDataFlagTestBit(unsigned int);
 /* Supplied declaration required: FUN_003f2f58. */
 
 
@@ -26,9 +26,9 @@ unsigned short FUN_003f3104(int param_1)
   FUN_00184310();
   temp_v0 = (*(unsigned int *)(temp_v0 + 0x34) & 0x1fffff) >> 0xe;
   FUN_003f2f58();
-  temp_v1 = FUN_0014bef4(0xb);
-  temp_v2 = FUN_0014bef4(0xd);
-  temp_v3 = FUN_003e46f4(6);
+  temp_v1 = randRange(0xb);
+  temp_v2 = randRange(0xd);
+  temp_v3 = gameDataFlagTestBit(6);
   if (temp_v3 != 0) {
     if (temp_v2 >= 2) {
       return *(unsigned short *)(temp_v0 + temp_v1 * 2 + 2);

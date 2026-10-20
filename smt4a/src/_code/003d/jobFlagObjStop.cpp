@@ -9,7 +9,7 @@ typedef struct JobFlagObj {
 } JobFlagObj;
 
 extern u8 FUN_001632fc(void);
-extern void FUN_00203d04(s32 value);
+extern void dialogClose(s32 value);
 extern u32 jobStop(u32 job, u16 arg);
 
 /* Re-arms the object's flag at +0x1D when FUN_001632fc allows, then stops its job. */
@@ -19,7 +19,7 @@ void jobFlagObjStop(JobFlagObj **ref)
 
     if (obj->unk1D != 0 && FUN_001632fc() != 0) {
         obj->unk1D = 0;
-        FUN_00203d04(1);
+        dialogClose(1);
     }
     jobStop(obj->job, 0);
 }

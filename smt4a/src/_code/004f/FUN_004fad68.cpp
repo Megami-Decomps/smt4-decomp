@@ -46,7 +46,7 @@ typedef struct {
     unsigned int spBC; /* 0xbc: local_bc */
 } param_4_stack;
 
-extern int DAT_00571508; /* 0x571508 */
+extern int g_btlCamera; /* 0x571508 */
 extern unsigned int DAT_00573810; /* 0x573810 */
 extern unsigned int DAT_00573814; /* 0x573814 */
 extern unsigned int DAT_00573818; /* 0x573818 */
@@ -161,10 +161,10 @@ void FUN_004fad68(unsigned int param_1,unsigned int param_2,unsigned int param_3
     }
     break;
   case 6:
-    temp_v4 = *(float *)(DAT_00571508 + 0x598);
-    temp_v5 = *(float *)(DAT_00571508 + 0x59c);
-    temp_v2 = *(float *)(DAT_00571508 + 0x5a0);
-    if (*(int *)(DAT_00571508 + 0x10) != 0x3727c5ac) {
+    temp_v4 = *(float *)(g_btlCamera + 0x598);
+    temp_v5 = *(float *)(g_btlCamera + 0x59c);
+    temp_v2 = *(float *)(g_btlCamera + 0x5a0);
+    if (*(int *)(g_btlCamera + 0x10) != 0x3727c5ac) {
       FUN_001aff14(&temp_v9,1);
       temp_v8 = temp_v15 * temp_v4 + temp_v16 * temp_v5 + temp_v17 * temp_v2;
       temp_v6 = temp_v9 * temp_v4 + temp_v10 * temp_v5 + temp_v11 * temp_v2;
@@ -173,10 +173,10 @@ void FUN_004fad68(unsigned int param_1,unsigned int param_2,unsigned int param_3
     }
     break;
   case 8:
-    temp_v4 = *(float *)(DAT_00571508 + 0x598);
-    temp_v5 = *(float *)(DAT_00571508 + 0x59c);
-    temp_v2 = *(float *)(DAT_00571508 + 0x5a0);
-    if (*(int *)(DAT_00571508 + 0x10) != 0x3727c5ac) {
+    temp_v4 = *(float *)(g_btlCamera + 0x598);
+    temp_v5 = *(float *)(g_btlCamera + 0x59c);
+    temp_v2 = *(float *)(g_btlCamera + 0x5a0);
+    if (*(int *)(g_btlCamera + 0x10) != 0x3727c5ac) {
       FUN_001aff14(&temp_v18,1);
       temp_v6 = temp_v18 * temp_v4 + temp_v19 * temp_v5 + temp_v20 * temp_v2;
       temp_v7 = temp_v21 * temp_v4 + temp_v22 * temp_v5 + temp_v23 * temp_v2;
@@ -185,10 +185,10 @@ void FUN_004fad68(unsigned int param_1,unsigned int param_2,unsigned int param_3
     }
     break;
   case 9:
-    temp_v4 = *(float *)(DAT_00571508 + 0x598);
-    temp_v5 = *(float *)(DAT_00571508 + 0x59c);
-    temp_v2 = *(float *)(DAT_00571508 + 0x5a0);
-    if (*(int *)(DAT_00571508 + 0x10) != 0x3727c5ac) {
+    temp_v4 = *(float *)(g_btlCamera + 0x598);
+    temp_v5 = *(float *)(g_btlCamera + 0x59c);
+    temp_v2 = *(float *)(g_btlCamera + 0x5a0);
+    if (*(int *)(g_btlCamera + 0x10) != 0x3727c5ac) {
       FUN_001aff14(&temp_v27,1);
       temp_v6 = temp_v27 * temp_v4 + temp_v28 * temp_v5 + temp_v29 * temp_v2;
       temp_v7 = temp_v30 * temp_v4 + temp_v31 * temp_v5 + temp_v32 * temp_v2;

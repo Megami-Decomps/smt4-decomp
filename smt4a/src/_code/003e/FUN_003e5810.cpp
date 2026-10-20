@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_001aea28(unsigned int);
+int ptrListRemoveClearOwner(unsigned int);
 
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 
-/* Supplied declaration required: FUN_001aea28. */
+/* Supplied declaration required: ptrListRemoveClearOwner. */
 
 
 void FUN_003e5810(int param_1,int param_2)
@@ -22,7 +22,7 @@ void FUN_003e5810(int param_1,int param_2)
   if (temp_v0 != 0) {
     *(unsigned int *)(param_1 + 0x1c) = 2;
     *(unsigned int *)(temp_v0 + 4) = *(unsigned int *)(temp_v0 + 4) | 3;
-    FUN_001aea28(DAT_0056fcc0);
+    ptrListRemoveClearOwner(g_handleRegistry);
     return;
   }
   return;

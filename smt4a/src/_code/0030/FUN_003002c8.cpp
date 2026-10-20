@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002e6e14(int);
+int asdOperatorDeleteArray(int);
 
 typedef int romwright_code(...);
-/* Supplied declaration required: FUN_002e6e14. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
 
 
 void FUN_003002c8(int *param_1)
@@ -23,7 +23,7 @@ void FUN_003002c8(int *param_1)
     *(unsigned int *)(*param_1 + temp_v0 * 0x34 + 0x10) = 0;
   }
   if (*param_1 != 0) {
-    FUN_002e6e14(*param_1 - 8);
+    asdOperatorDeleteArray(*param_1 - 8);
   }
   *param_1 = 0;
   if ((int *)param_1[4] != (int *)0x0) {

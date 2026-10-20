@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern u8 *FUN_0014af84(void);
+extern u8 *gameDataBlocksGetSaveData(void);
 
 u8 *gameBlockGetArea221AA(void)
 {
-    return (u8 *)FUN_0014af84() + 0x221AA;
+    return (u8 *)gameDataBlocksGetSaveData() + 0x221AA;
 }
 
 } /* extern "C" */

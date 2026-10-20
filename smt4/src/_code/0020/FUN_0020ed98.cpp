@@ -4,7 +4,7 @@ extern "C" {
 
 int FUN_00295ba4(int arg);
 int jobStop(u32 job, int mode);
-extern int FUN_00295bd0(void);
+extern int dialogIsActive(void);
 extern int jobIsValid(u32 job);
 
 typedef struct JobWork {
@@ -21,7 +21,7 @@ void FUN_0020ed98(void)
     if (jobIsValid(work->job) == 0) {
         return;
     }
-    if (FUN_00295bd0() != 0) {
+    if (dialogIsActive() != 0) {
         FUN_00295ba4(1);
     }
     jobStop(work->job, 0);

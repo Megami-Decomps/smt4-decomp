@@ -6,7 +6,7 @@ extern "C" {
 
 extern unsigned char DAT_00558490; /* 0x558490 */
 
-extern int FUN_002e760a(unsigned int);
+extern int operatorNew(unsigned int);
 extern unsigned int strInit(void);
 
 
@@ -17,7 +17,7 @@ unsigned int * FUN_002f2afc(unsigned int *param_1)
   unsigned int temp_v1;
   
   *param_1 = (unsigned int)&DAT_00558490;
-  temp_v0 = FUN_002e760a(0x20);
+  temp_v0 = operatorNew(0x20);
   temp_v1 = 0;
   if (temp_v0 != 0) {
     temp_v1 = strInit();

@@ -16,7 +16,7 @@ extern int g_gameState; /* 0x49f91c */
 extern int DAT_0049f920; /* 0x49f920 */
 
 /* Supplied declaration required: FUN_001e4284. */
-extern int FUN_002c09d0(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 
 
 void FUN_0027d490(int param_1)
@@ -26,7 +26,7 @@ void FUN_0027d490(int param_1)
   int temp_v0;
   
   if ((((g_gameState == 0x12) && (DAT_0049f920 == 4 || DAT_0049f920 == 5)) &&
-      (temp_v0 = FUN_002c09d0(0xd2), temp_v0 != 0)) && (temp_v0 = FUN_002c09d0(0xd4), temp_v0 == 0)) {
+      (temp_v0 = gameFlagIsSet(0xd2), temp_v0 != 0)) && (temp_v0 = gameFlagIsSet(0xd4), temp_v0 == 0)) {
     FUN_001e4284(6,0);
     return;
   }

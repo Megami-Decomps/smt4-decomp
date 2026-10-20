@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b7430(unsigned int, int);
+int linkListEraseManagerNode(unsigned int, int);
 int FUN_0037e278(void);
 int FUN_0037e3d0(int);
 
@@ -13,8 +13,8 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_002b7430. */
-extern unsigned int FUN_002bd440(void);
+/* Supplied declaration required: linkListEraseManagerNode. */
+extern unsigned int nw_snd_internal_driver_SoundThread_GetInstance(void);
 /* Supplied declaration required: FUN_0037e278. */
 /* Supplied declaration required: FUN_0037e3d0. */
 
@@ -59,8 +59,8 @@ void FUN_003eaeec(int param_1)
         return;
       }
     }
-    temp_v1 = FUN_002bd440();
-    FUN_002b7430(temp_v1,param_1);
+    temp_v1 = nw_snd_internal_driver_SoundThread_GetInstance();
+    linkListEraseManagerNode(temp_v1,param_1);
     *(unsigned char *)(param_1 - 0x43) = 0;
   }
   return;

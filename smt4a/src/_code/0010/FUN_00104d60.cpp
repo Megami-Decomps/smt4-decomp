@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_002ea774(int, unsigned char [104], unsigned int, int);
 int FUN_002ea974(unsigned char [104]);
-int FUN_002ea9c0(unsigned char [104], unsigned int);
-int FUN_002ea9dc(unsigned char [104]);
+int onlineUrlSetAddress(unsigned char [104], unsigned int);
+int onlineUrlDestroy(unsigned char [104]);
 int FUN_002eaba4(int, int);
 int FUN_002eb2ec(unsigned char [104], unsigned int);
 
@@ -19,8 +19,8 @@ typedef struct {
 
 /* Supplied declaration required: FUN_002ea774. */
 /* Supplied declaration required: FUN_002ea974. */
-/* Supplied declaration required: FUN_002ea9c0. */
-/* Supplied declaration required: FUN_002ea9dc. */
+/* Supplied declaration required: onlineUrlSetAddress. */
+/* Supplied declaration required: onlineUrlDestroy. */
 /* Supplied declaration required: FUN_002eaba4. */
 /* Supplied declaration required: FUN_002eb2ec. */
 
@@ -35,7 +35,7 @@ int FUN_00104d60(int param_1,unsigned int param_2,int param_3,unsigned int param
   unsigned char temp_v2 [104];
   
   FUN_002ea974(temp_v2);
-  FUN_002ea9c0(temp_v2,param_2);
+  onlineUrlSetAddress(temp_v2,param_2);
   FUN_002eb2ec(temp_v2,param_5);
   temp_v1 = param_1;
   FUN_002ea774(param_1,temp_v2,param_4,0);
@@ -52,7 +52,7 @@ int FUN_00104d60(int param_1,unsigned int param_2,int param_3,unsigned int param
       temp_v1 = 0;
     }
   }
-  FUN_002ea9dc(temp_v2);
+  onlineUrlDestroy(temp_v2);
   return temp_v1;
 }
 

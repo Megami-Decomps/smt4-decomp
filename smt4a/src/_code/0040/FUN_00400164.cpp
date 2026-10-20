@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 int FUN_00400564(int, int, int);
 
 extern unsigned int DAT_00573cb8; /* 0x573cb8 */
 extern unsigned int DAT_00573cbc; /* 0x573cbc */
 
 extern int btlGetMainState(void);
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: FUN_00400564. */
 
 
@@ -24,7 +24,7 @@ unsigned int FUN_00400164(int param_1,int param_2)
   unsigned int temp_v2;
   unsigned char temp_v3;
   
-  if ((param_2 != 0) && (FUN_001aba54(), param_2 != 0)) {
+  if ((param_2 != 0) && (dataTable04FindById(), param_2 != 0)) {
     temp_v2 = 2;
     temp_v3 = (*(unsigned int *)(param_2 + 0x28) & 0x7ff) >> 9 != 2;
     if (temp_v3) {

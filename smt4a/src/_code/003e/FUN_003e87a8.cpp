@@ -8,7 +8,7 @@ int FUN_003eb760(...);
 int FUN_004ca63c(...);
 int optionsApplyOverride(...);
 int FUN_004d9ebc(...);
-int FUN_004d9fc4(...);
+int optionsResetIfFlagSet(...);
 int optionsResetIfNoFlag(...);
 int FUN_004da144(...);
 int optionsSetFlag1(...);
@@ -31,13 +31,13 @@ typedef struct {
 extern unsigned int DAT_00573a50; /* 0x573a50 */
 extern unsigned int DAT_00573a54; /* 0x573a54 */
 
-extern int FUN_001ab888(void);
+extern int gameGetSlotTable(void);
 extern int FUN_001b34b8(void);
 /* Supplied declaration required: FUN_003eb760. */
 /* Supplied declaration required: FUN_004ca63c. */
 /* Supplied declaration required: optionsApplyOverride. */
 /* Supplied declaration required: FUN_004d9ebc. */
-/* Supplied declaration required: FUN_004d9fc4. */
+/* Supplied declaration required: optionsResetIfFlagSet. */
 /* Supplied declaration required: optionsResetIfNoFlag. */
 /* Supplied declaration required: FUN_004da144. */
 /* Supplied declaration required: optionsSetFlag1. */
@@ -61,7 +61,7 @@ void FUN_003e87a8(fn_003e87a8_arg0 *param_1)
     if ((int)param_1->field_0x3028 >= 1) {
       if (temp_v0 != 1) {
         if (temp_v0 == 2) {
-          FUN_004d9fc4();
+          optionsResetIfFlagSet();
           optionsSetFlag1();
         }
       }
@@ -85,7 +85,7 @@ void FUN_003e87a8(fn_003e87a8_arg0 *param_1)
       }
     }
   }
-  temp_v0 = FUN_001ab888();
+  temp_v0 = gameGetSlotTable();
   if (*(short *)(temp_v0 + 0x1d06) != 0) {
     FUN_003eb760(param_1,temp_v1);
     FUN_004ca63c(param_1,temp_v1,2,0x36,0);

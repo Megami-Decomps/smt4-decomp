@@ -5,14 +5,14 @@
 extern "C" {
 
 int FUN_00103f54(int, unsigned int *, int, int);
-int FUN_00103f74(int, int);
+int holderSetFlagBits(int, int);
 int FUN_0017fd20(unsigned int *, int);
 int FUN_002e3140(void);
 int FUN_002e6e26(void);
 int FUN_002e6e34(unsigned char [12], int);
 int FUN_002e6e5c(unsigned char [12]);
-int FUN_002e75fa(unsigned int *);
-int FUN_002e760a(int);
+int sharedRefAddRef(unsigned int *);
+int operatorNew(int);
 int FUN_002e78d0(unsigned int, unsigned int *, int);
 int FUN_002ea3d0(unsigned int *, unsigned int);
 int FUN_002eca44(void);
@@ -29,14 +29,14 @@ extern unsigned char DAT_0055ca8c; /* 0x55ca8c */
 extern unsigned char DAT_0055cae4; /* 0x55cae4 */
 
 /* Supplied declaration required: FUN_00103f54. */
-/* Supplied declaration required: FUN_00103f74. */
+/* Supplied declaration required: holderSetFlagBits. */
 /* Supplied declaration required: FUN_0017fd20. */
 /* Supplied declaration required: FUN_002e3140. */
 /* Supplied declaration required: FUN_002e6e26. */
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-/* Supplied declaration required: FUN_002e75fa. */
-/* Supplied declaration required: FUN_002e760a. */
+/* Supplied declaration required: sharedRefAddRef. */
+/* Supplied declaration required: operatorNew. */
 extern int FUN_002e789a(int);
 /* Supplied declaration required: FUN_002e78d0. */
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned int, unsigned int, unsigned char *);
@@ -63,7 +63,7 @@ unsigned int * FUN_004d95e8(int param_1,unsigned int param_2,unsigned int param_
   
   puVar5 = (unsigned int *)&temp_v5;
   temp_v5 = param_4;
-  temp_v1 = FUN_002e760a(0x60);
+  temp_v1 = operatorNew(0x60);
   if (temp_v1 == 0) {
     temp_v1 = 0;
   }
@@ -71,17 +71,17 @@ unsigned int * FUN_004d95e8(int param_1,unsigned int param_2,unsigned int param_
     FUN_002eca44();
   }
   *(int *)(param_1 + 0x28) = temp_v1;
-  puVar3 = (unsigned int *)FUN_002e760a(0x14);
+  puVar3 = (unsigned int *)operatorNew(0x14);
   if (puVar3 != (unsigned int *)0x0) {
     puVar3[1] = param_1;
     puVar3[2] = (unsigned int)FUN_004d9788;
     puVar3[3] = 0;
     *puVar3 = (unsigned int)&DAT_0055cae4;
     puVar3[4] = temp_v1;
-    FUN_00103f74(temp_v1,2);
+    holderSetFlagBits(temp_v1,2);
     FUN_00103f54(temp_v1,puVar3,0,1);
   }
-  temp_v2 = FUN_002e760a(0x78);
+  temp_v2 = operatorNew(0x78);
   if (temp_v2 == 0) {
     puVar3 = (unsigned int *)0x0;
   }
@@ -114,7 +114,7 @@ unsigned int * FUN_004d95e8(int param_1,unsigned int param_2,unsigned int param_
       puVar3[0x1a] = *(unsigned int *)(temp_v1 + 0x44);
       temp_v0 = FUN_002ea3c0(temp_v4,0x10abad,0,&LAB_0010acb0);
       FUN_002ea3d0(puVar3,temp_v0);
-      FUN_002e75fa(puVar3);
+      sharedRefAddRef(puVar3);
       temp_v0 = FUN_002e6e26();
       FUN_002e78d0(temp_v0,puVar3,0);
       FUN_002e6e5c(temp_v3);

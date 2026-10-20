@@ -8,9 +8,9 @@ void FUN_002bc7f4(u32 param, u32 *out);
 void FUN_002bdb48(void);
 void FUN_001376d8(u32 *a, u32 *b, u32 *c, u32 *d);
 void asdGxCommandListRefreshCopy(AsdGxCommandList *list);
-void FUN_002bef70(u32 cmdList);
+void nngxBindCmdlist(u32 cmdList);
 void FUN_0013764c(void);
-void FUN_002bf0dc(void);
+void nngxGetError(void);
 void asdModelResetCommandBuffer(void);
 void FUN_001373f0(u32 cmdList, void *copy, u32 copySize);
 
@@ -36,11 +36,11 @@ void asdGxCommandListEnd(AsdGxCommandList *list, s32 restoreCopy, u32 unk08, u32
         outer->state = ASD_GX_CMDLIST_ACTIVE;
     } else {
         asdModelResetCommandBuffer();
-        FUN_002bef70(list->boundList);
+        nngxBindCmdlist(list->boundList);
         if (restoreCopy != 0 && list->entries[0].copy != NULL) {
             FUN_002bc7f4(0x207, &bound);
             FUN_001373f0(bound, list->entries[0].copy, list->entries[0].copySize);
-            FUN_002bf0dc();
+            nngxGetError();
         }
     }
 }

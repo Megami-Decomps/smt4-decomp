@@ -9,12 +9,12 @@ int FUN_00184310(void);
 int slotRecordFindById(...);
 int FUN_00239234(...);
 int FUN_002e59f8(int, unsigned int [11], int);
-int FUN_002e6dd0(int, int);
+int rt_aeabi_memclr(int, int);
 int FUN_0031654c(unsigned int, int);
 int FUN_0034543c(int);
 int FUN_0036fcd0(unsigned int, int);
 int FUN_003e52bc(void);
-int FUN_003fd63c(int, int);
+int gameFlagSetValue(int, int);
 int FUN_004bd354(int, unsigned int);
 
 /* stack frame of void: 5 slot(s), 18 byte(s) */
@@ -26,8 +26,8 @@ typedef struct {
     unsigned int spC0; /* 0xc0: local_c0 */
 } void_stack;
 
-extern int FUN_0014af84(void);
-extern int FUN_0014bef4(unsigned int);
+extern int gameDataBlocksGetSaveData(void);
+extern int randRange(unsigned int);
 /* Supplied declaration required: FUN_0017760c. */
 /* Supplied declaration required: FUN_00184310. */
 extern unsigned int dataTableGet(unsigned int, unsigned int);
@@ -38,12 +38,12 @@ extern unsigned int FUN_0019acdc(short, unsigned int);
 extern unsigned int FUN_0019e52c(unsigned short);
 /* Supplied declaration required: FUN_00239234. */
 /* Supplied declaration required: FUN_002e59f8. */
-/* Supplied declaration required: FUN_002e6dd0. */
+/* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: FUN_0031654c. */
 /* Supplied declaration required: FUN_0034543c. */
 /* Supplied declaration required: FUN_0036fcd0. */
 /* Supplied declaration required: FUN_003e52bc. */
-/* Supplied declaration required: FUN_003fd63c. */
+/* Supplied declaration required: gameFlagSetValue. */
 extern int bitsAt60Test(int, unsigned int);
 /* Supplied declaration required: FUN_004bd354. */
 
@@ -76,11 +76,11 @@ void FUN_0037be64(void)
   unsigned char temp_v20 [78];
   unsigned short temp_v21;
   
-  temp_v6 = FUN_0014af84();
+  temp_v6 = gameDataBlocksGetSaveData();
   FUN_002e59f8(temp_v6 + 0x28310,temp_v16,0x28);
-  FUN_002e6dd0(temp_v6 + 0x28310,0x50);
-  FUN_002e6dd0(temp_v6 + 0x28360,0x30);
-  FUN_003fd63c(0x4c7,1);
+  rt_aeabi_memclr(temp_v6 + 0x28310,0x50);
+  rt_aeabi_memclr(temp_v6 + 0x28360,0x30);
+  gameFlagSetValue(0x4c7,1);
   temp_v19 = temp_v6 + 0x28300;
   temp_v15 = 0;
   do {
@@ -93,7 +93,7 @@ void FUN_0037be64(void)
 LAB_0037bf0c:
       temp_v8 = temp_v6 + temp_v13 * 4;
       temp_v3 = *(unsigned short *)(temp_v8 + 0x28312) & 0x3ff;
-      if ((temp_v0 <= temp_v3) && ((temp_v3 != temp_v0 || (temp_v9 = FUN_0014bef4(1), temp_v9 == 0))))
+      if ((temp_v0 <= temp_v3) && ((temp_v3 != temp_v0 || (temp_v9 = randRange(1), temp_v9 == 0))))
       goto LAB_0037c014;
       if (temp_v13 >= 9) {
         temp_v7 = 0;

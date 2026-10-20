@@ -14,7 +14,7 @@ int FUN_0027f94c(int);
 int FUN_0027fca0(unsigned int);
 int FUN_00287098(...);
 int FUN_0028c618(...);
-int FUN_0028c640(...);
+int nodeSetTranslation(...);
 int FUN_00293e08(int);
 int FUN_00293e78(int, int *);
 int FUN_00294450(...);
@@ -52,7 +52,7 @@ extern int asdMdlManagerCreateFromSource(unsigned int, unsigned int, unsigned in
 /* Supplied declaration required: FUN_0027fca0. */
 /* Supplied declaration required: FUN_00287098. */
 /* Supplied declaration required: FUN_0028c618. */
-/* Supplied declaration required: FUN_0028c640. */
+/* Supplied declaration required: nodeSetTranslation. */
 /* Supplied declaration required: FUN_00293e08. */
 /* Supplied declaration required: FUN_00293e78. */
 /* Supplied declaration required: FUN_00294450. */
@@ -60,7 +60,7 @@ extern int asdMdlManagerCreateFromSource(unsigned int, unsigned int, unsigned in
 /* Supplied declaration required: FUN_002a0428. */
 /* Supplied declaration required: FUN_002a55ec. */
 /* Supplied declaration required: FUN_002a5710. */
-extern int FUN_002b63ac(void);
+extern int gameGetPlayerData(void);
 extern int *FUN_00335118(int);
 /* Supplied declaration required: FUN_003351e0. */
 /* Supplied declaration required: FUN_00343c58. */
@@ -106,7 +106,7 @@ void FUN_00273fc0(void)
     } while ((int)temp_v0 < 3);
   }
   else {
-    temp_v2 = FUN_002b63ac();
+    temp_v2 = gameGetPlayerData();
     piVar3 = g_lmapScene;
     if ((short)g_lmapScene[0x6d] != *(short *)(temp_v2 + 6)) {
       *(short *)(g_lmapScene + 0x6d) = *(short *)(temp_v2 + 6);
@@ -216,7 +216,7 @@ LAB_002741d4:
     temp_v3 = g_lmapScene[7];
     temp_v4 = (int *)g_lmapScene[8];
     temp_v5 = g_lmapScene[9];
-    FUN_0028c640(*(unsigned int *)(g_lmapScene[0x5e] + 8),0,&temp_v3);
+    nodeSetTranslation(*(unsigned int *)(g_lmapScene[0x5e] + 8),0,&temp_v3);
     FUN_0028c618(*(unsigned int *)(g_lmapScene[0x5e] + 8),0);
     if (*(char *)((int)g_lmapScene + 0x183) != '\0') {
       FUN_002a5710(*(unsigned int *)(g_lmapScene[0x5e] + 8),1);
@@ -242,7 +242,7 @@ LAB_002741d4:
       temp_v3 = g_lmapScene[7];
       temp_v4 = (int *)g_lmapScene[8];
       temp_v5 = g_lmapScene[9];
-      FUN_0028c640(*(unsigned int *)(g_lmapScene[0x5f] + 8),0,&temp_v3);
+      nodeSetTranslation(*(unsigned int *)(g_lmapScene[0x5f] + 8),0,&temp_v3);
       FUN_0028c618(*(unsigned int *)(g_lmapScene[0x5f] + 8),0);
       piVar3 = g_lmapScene;
       if (*(char *)((int)g_lmapScene + 0x181) != '\0') {
@@ -261,7 +261,7 @@ LAB_002741d4:
         *(unsigned char *)(*(int *)(puVar2[2] + 0x2c) + 0x1f6) = 1;
       }
 LAB_0027461c:
-      FUN_0028c640(*(unsigned int *)(g_lmapScene[0x59] + 8),0,g_lmapScene + 7);
+      nodeSetTranslation(*(unsigned int *)(g_lmapScene[0x59] + 8),0,g_lmapScene + 7);
       FUN_0028c618(*(unsigned int *)(g_lmapScene[0x59] + 8),0);
       temp_v1 = g_lmapScene[0x5a];
       piVar3 = g_lmapScene;
@@ -291,7 +291,7 @@ LAB_0027461c:
       temp_v2 = asdMdlManagerCreateFromSource(DAT_0049fbac,DAT_0049fbb0,7);
       g_lmapScene[0x5d] = temp_v2;
       FUN_002a0428(temp_v2,1);
-      FUN_0028c640(*(unsigned int *)(g_lmapScene[0x5d] + 8),0,&DAT_0049fac4);
+      nodeSetTranslation(*(unsigned int *)(g_lmapScene[0x5d] + 8),0,&DAT_0049fac4);
       FUN_0028c618(*(unsigned int *)(g_lmapScene[0x5d] + 8),0);
       FUN_002a5710(*(unsigned int *)(g_lmapScene[0x5d] + 8),0);
       FUN_00287098(*(unsigned int *)(g_lmapScene[0x5d] + 8),0);

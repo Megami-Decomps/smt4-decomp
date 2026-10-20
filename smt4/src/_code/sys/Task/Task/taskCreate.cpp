@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c3944(unsigned short *, int);
+int rt_memclr(unsigned short *, int);
 int asdMemoryAlloc(int, int, int, int, int);
 
 /* stack frame of param_9: 3 slot(s), 12 byte(s) */
@@ -18,7 +18,7 @@ extern unsigned int g_taskLists; /* 0x4c5830 */
 extern unsigned int DAT_004c5834; /* 0x4c5834 */
 extern unsigned int DAT_004c5838; /* 0x4c5838 */
 
-/* Supplied declaration required: FUN_002c3944. */
+/* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: asdMemoryAlloc. */
 
 
@@ -109,7 +109,7 @@ void taskCreate(unsigned int param_1,unsigned int param_2,unsigned int param_3,u
     }
     (&DAT_004c5838)[param_7 * 4] = (&DAT_004c5838)[param_7 * 4] + 1;
     if (param_9 != 0) {
-      FUN_002c3944(puVar2 + 0x1a,param_6);
+      rt_memclr(puVar2 + 0x1a,param_6);
     }
   }
   return;

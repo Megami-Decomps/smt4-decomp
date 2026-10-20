@@ -12,7 +12,7 @@ int FUN_0029e620(...);
 int FUN_0029e648(...);
 int FUN_0029ee6c(...);
 int FUN_002a03d8(...);
-int FUN_002b8838(...);
+int buttonHelpSetPreset(...);
 int FUN_003a4210(...);
 
 typedef struct fn_003a0d64_arg0 fn_003a0d64_arg0;
@@ -34,7 +34,7 @@ struct fn_003a0d64_arg0 {
     undefined4 field_0x15d44; /* +0x15d44 */
 };
 
-extern int FUN_00221e00(unsigned int);
+extern int eventTexJobSlotsDone(unsigned int);
 /* Supplied declaration required: dataTable17Sub1GetCount. */
 /* Supplied declaration required: dataTable17Sub1GetRecord. */
 /* Supplied declaration required: FUN_0026374c. */
@@ -44,8 +44,8 @@ extern int FUN_0028e9d0(unsigned int);
 /* Supplied declaration required: FUN_0029e648. */
 /* Supplied declaration required: FUN_0029ee6c. */
 /* Supplied declaration required: FUN_002a03d8. */
-extern int FUN_002a60b4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002b8838. */
+extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
+/* Supplied declaration required: buttonHelpSetPreset. */
 extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_003a4210. */
 
@@ -73,11 +73,11 @@ void FUN_003a0d64(fn_003a0d64_arg0 *param_1)
   if (temp_v7) {
     temp_v1 = param_1->field_0x164;
   }
-  if ((temp_v7 && temp_v1 != 0) && (temp_v1 = FUN_002a60b4(0x2b,0), temp_v1 != 0)) {
+  if ((temp_v7 && temp_v1 != 0) && (temp_v1 = asdTMTexTableNodeIsLoaded(0x2b,0), temp_v1 != 0)) {
     temp_v1 = jobIsValid(param_1->field_0x15d40);
-    if ((temp_v1 == 0) || (temp_v1 = FUN_00221e00(param_1->field_0x15d40), temp_v1 != 0)) {
+    if ((temp_v1 == 0) || (temp_v1 = eventTexJobSlotsDone(param_1->field_0x15d40), temp_v1 != 0)) {
       temp_v1 = jobIsValid(param_1->field_0x15d44);
-      if ((temp_v1 == 0) || (temp_v1 = FUN_00221e00(param_1->field_0x15d44), temp_v1 != 0)) {
+      if ((temp_v1 == 0) || (temp_v1 = eventTexJobSlotsDone(param_1->field_0x15d44), temp_v1 != 0)) {
         pvVar3 = param_1->field_0x160;
         FUN_00297060(pvVar3,param_1->field_0x164);
         param_1->field_0x168 = (int)pvVar3;
@@ -132,7 +132,7 @@ LAB_003a0f28:
         param_1->field_0x8 = 0;
         param_1->field_0x4 = 1;
         FUN_003a4210(param_1);
-        FUN_002b8838(0x75);
+        buttonHelpSetPreset(0x75);
         FUN_0029ee6c(0,0x323232ff);
       }
     }

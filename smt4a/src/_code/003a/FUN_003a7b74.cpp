@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern StateHolder518 *DAT_00588fe8;
+extern StateHolder518 *g_statusDown;
 
 u32 FUN_003a7b74(void)
 {
-    return DAT_00588fe8->unk654;
+    return g_statusDown->unk654;
 }
 
 } /* extern "C" */

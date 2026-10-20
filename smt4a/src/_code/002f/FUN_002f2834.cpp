@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e7232(unsigned int);
+int sharedRefRelease(unsigned int);
 int wordMoveOut_00300376(int *, int *, int);
 int FUN_00300386(unsigned char [4], int, int *);
 
@@ -16,7 +16,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_002e7232. */
+/* Supplied declaration required: sharedRefRelease. */
 extern int wordRefsDiffer_00300366(int *, unsigned int *);
 /* Supplied declaration required: wordMoveOut_00300376. */
 /* Supplied declaration required: FUN_00300386. */
@@ -38,7 +38,7 @@ void FUN_002f2834(int param_1)
     temp_v2 = *(unsigned int *)(param_1 + 0x14);
     temp_v0 = wordRefsDiffer_00300366(&temp_v1,(unsigned int *)&temp_v2);
     if (temp_v0 == 0) break;
-    FUN_002e7232(*(unsigned int *)(temp_v1 + 0x18));
+    sharedRefRelease(*(unsigned int *)(temp_v1 + 0x18));
     wordMoveOut_00300376(&temp_v3,&temp_v1,0);
     temp_v4 = temp_v3;
     FUN_00300386(temp_v5,param_1 + 4,&temp_v4);

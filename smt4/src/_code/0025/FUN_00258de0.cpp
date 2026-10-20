@@ -35,8 +35,8 @@ extern int FUN_001ad4c0(int);
 extern int btlGetMainState(void);
 extern int FUN_00295d08(unsigned int);
 extern int flagWordTestBit(int, unsigned int);
-extern int FUN_002a8740(void);
-extern int FUN_002b63ac(void);
+extern int gameGetUnitRecord(void);
+extern int gameGetPlayerData(void);
 extern unsigned int FUN_0032b278(int, unsigned short);
 
 
@@ -58,10 +58,10 @@ FUN_00258de0(unsigned int param_1,fn_00258de0_arg1 *param_2,int param_3,int para
   temp_v4 = 0;
   temp_v5 = 0;
   if ((int)param_2 < 0) {
-    temp_v4 = FUN_002b63ac();
+    temp_v4 = gameGetPlayerData();
   }
   else {
-    temp_v5 = FUN_002a8740();
+    temp_v5 = gameGetUnitRecord();
     if (temp_v5 == 0) {
       return 1;
     }

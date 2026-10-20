@@ -8,7 +8,7 @@ int FUN_002305fc(unsigned int *);
 int FUN_00233670(unsigned int *, int, unsigned int, unsigned int);
 int FUN_00233818(void);
 int FUN_00233854(unsigned int);
-int FUN_002b8cc8(void);
+int ifTouchRegionRemove(void);
 
 typedef int romwright_code(...);
 /* Supplied declaration required: FUN_002305fc. */
@@ -16,7 +16,7 @@ typedef int romwright_code(...);
 /* Supplied declaration required: FUN_00233818. */
 /* Supplied declaration required: FUN_00233854. */
 extern unsigned short FUN_002b8584(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002b8cc8. */
+/* Supplied declaration required: ifTouchRegionRemove. */
 
 
 void FUN_002302d8(unsigned int *param_1,int param_2)
@@ -34,7 +34,7 @@ void FUN_002302d8(unsigned int *param_1,int param_2)
   temp_v4 = 0;
   if (temp_v4 < (short)param_1[0x5754]) {
     do {
-      FUN_002b8cc8();
+      ifTouchRegionRemove();
       temp_v4 = temp_v4 + 1;
     } while (temp_v4 < (short)param_1[0x5754]);
   }

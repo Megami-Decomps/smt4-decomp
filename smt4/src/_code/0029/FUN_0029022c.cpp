@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern s16 *FUN_002adc88(void);
+extern s16 *gameGetFlagBlock(void);
 
 u8 FUN_0029022c(void)
 {
-    s16 *base = FUN_002adc88();
+    s16 *base = gameGetFlagBlock();
 
     return base[0x420] != 0;
 }

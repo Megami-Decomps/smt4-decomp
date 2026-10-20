@@ -6,9 +6,9 @@ extern "C" {
 
 int FUN_0014e188(...);
 int FUN_001505ac(int, unsigned char *, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
-int FUN_001846d0(...);
-int FUN_00184758(...);
-int FUN_00184c00(...);
+int uiSpriteSelectAnim(...);
+int uiSpriteSetKeyframe(...);
+int uiSpriteSetImageKeyframe(...);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(int);
 
 /* stack frame of param_1: 6 slot(s), 24 byte(s) */
@@ -27,9 +27,9 @@ extern unsigned char DAT_0052d200; /* 0x52d200 */
 
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: FUN_001505ac. */
-/* Supplied declaration required: FUN_001846d0. */
-/* Supplied declaration required: FUN_00184758. */
-/* Supplied declaration required: FUN_00184c00. */
+/* Supplied declaration required: uiSpriteSelectAnim. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
 
 
@@ -40,20 +40,20 @@ void FUN_003f84e8(int param_1)
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(param_1 + 0x14c);
   FUN_001505ac(param_1 + 0x14c,&DAT_0052d140,0x54,&DAT_0052d194,0x6c,0,0,0,0,&DAT_0052d200,0x16c);
   FUN_0014e188(param_1 + 0x16c,0x31,0,param_1 + 0x14c,0xc9);
-  FUN_00184758(param_1 + 0x16c,1,0);
-  FUN_00184c00(param_1 + 0x16c,0);
+  uiSpriteSetKeyframe(param_1 + 0x16c,1,0);
+  uiSpriteSetImageKeyframe(param_1 + 0x16c,0);
   FUN_0014e188(param_1 + 0x1f8,0x31,0,param_1 + 0x14c,0xc9);
-  FUN_00184758(param_1 + 0x1f8,1,0);
-  FUN_00184c00(param_1 + 0x1f8,0);
+  uiSpriteSetKeyframe(param_1 + 0x1f8,1,0);
+  uiSpriteSetImageKeyframe(param_1 + 0x1f8,0);
   FUN_0014e188(param_1 + 0x284,0x31,0,param_1 + 0x14c,0xc9);
   FUN_0014e188(param_1 + 0x310,0x31,0,param_1 + 0x14c,0xc9);
-  FUN_001846d0(param_1 + 0x310,0);
+  uiSpriteSelectAnim(param_1 + 0x310,0);
   FUN_0014e188(param_1 + 0x39c,0x31,0,param_1 + 0x14c,0xc9);
-  FUN_00184758(param_1 + 0x39c,4,0);
+  uiSpriteSetKeyframe(param_1 + 0x39c,4,0);
   FUN_0014e188(param_1 + 0x428,0x31,0,param_1 + 0x14c,0xc9);
-  FUN_001846d0(param_1 + 0x428,1);
+  uiSpriteSelectAnim(param_1 + 0x428,1);
   FUN_0014e188(param_1 + 0x4b4,0x31,0,param_1 + 0x14c,0xc9);
-  FUN_001846d0(param_1 + 0x4b4,2);
+  uiSpriteSelectAnim(param_1 + 0x4b4,2);
   FUN_0014e188(param_1 + 0x540,0x31,0,param_1 + 0x14c,0xc9);
   return;
 }

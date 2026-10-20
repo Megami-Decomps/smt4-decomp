@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern s32 FUN_001acf08(void);
+extern s32 effGetFrameStep(void);
 
 void FUN_0035161c(Work2C *work)
 {
-    work->unk2C += FUN_001acf08();
+    work->unk2C += effGetFrameStep();
 }
 
 } /* extern "C" */

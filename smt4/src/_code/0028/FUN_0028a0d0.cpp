@@ -9,7 +9,7 @@ typedef struct {
     unsigned int sp1C; /* 0x1c: local_1c */
 } param_6_stack;
 
-extern unsigned char DAT_00439c88; /* 0x439c88 */
+extern unsigned char g_btlUi; /* 0x439c88 */
 
 
 unsigned int FUN_0028a0d0(unsigned int param_1,unsigned int param_2,unsigned char param_3,unsigned char param_4,
@@ -32,9 +32,9 @@ unsigned int FUN_0028a0d0(unsigned int param_1,unsigned int param_2,unsigned cha
     temp_v0 = 0xffffffff;
     temp_v2 = 0;
     do {
-      temp_v1 = (int)*(char *)((*(int *)((unsigned char *)&DAT_00439c88 + 0x20)) + temp_v2 + 0xd5fc);
+      temp_v1 = (int)*(char *)((*(int *)((unsigned char *)&g_btlUi + 0x20)) + temp_v2 + 0xd5fc);
       if (temp_v1 - 1U < 7) {
-        temp_v1 = (*(int *)((unsigned char *)&DAT_00439c88 + 0x20)) + temp_v2 * 0xc0 + temp_v1 * 0x18;
+        temp_v1 = (*(int *)((unsigned char *)&g_btlUi + 0x20)) + temp_v2 * 0xc0 + temp_v1 * 0x18;
         temp_v5 = 0;
         if (*(float *)(temp_v1 + 0xc9d4) == in_s0) {
           temp_v5 = *(float *)(temp_v1 + 0xc9d8) == in_s1;
@@ -54,15 +54,15 @@ unsigned int FUN_0028a0d0(unsigned int param_1,unsigned int param_2,unsigned cha
     temp_v3 = 0;
     do {
       temp_v2 = temp_v3;
-      if (*(char *)((*(int *)((unsigned char *)&DAT_00439c88 + 0x20)) + temp_v2 + 0xd5fc) < '\x01') break;
+      if (*(char *)((*(int *)((unsigned char *)&g_btlUi + 0x20)) + temp_v2 + 0xd5fc) < '\x01') break;
       temp_v3 = temp_v2 + 1;
       temp_v2 = temp_v0;
     } while ((int)temp_v3 < 0x10);
 LAB_0028a18c:
     if (temp_v2 < 0x10) {
-      temp_v1 = (*(int *)((unsigned char *)&DAT_00439c88 + 0x20)) + temp_v2;
+      temp_v1 = (*(int *)((unsigned char *)&g_btlUi + 0x20)) + temp_v2;
       if (*(char *)(temp_v1 + 0xd5fc) < 8) {
-        temp_v4 = (*(int *)((unsigned char *)&DAT_00439c88 + 0x20)) + temp_v2 * 0xc0 + *(char *)(temp_v1 + 0xd5fc) * 0x18;
+        temp_v4 = (*(int *)((unsigned char *)&g_btlUi + 0x20)) + temp_v2 * 0xc0 + *(char *)(temp_v1 + 0xd5fc) * 0x18;
         *(unsigned char *)(temp_v4 + 0xc9f8) = 1;
         *(unsigned char *)(temp_v4 + 0xc9f9) = param_6;
         *(float *)(temp_v4 + 0xc9ec) = in_s0;

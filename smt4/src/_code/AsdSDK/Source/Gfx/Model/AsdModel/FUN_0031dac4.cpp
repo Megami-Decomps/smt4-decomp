@@ -8,7 +8,7 @@ int FUN_00154080(int ****, unsigned int);
 int FUN_002a5960(...);
 int FUN_002a5dc4(...);
 int asdMemoryGetDefaultAllocator(void);
-int FUN_002c30c4(...);
+int libc_strlen(...);
 int asdMemAlloc(...);
 int asdMemoryAlloc(int, int, int, int);
 int nw_gfx_SceneBuilder_CreateObject(int ****, unsigned int, unsigned int);
@@ -43,10 +43,10 @@ typedef struct {
 /* Supplied declaration required: FUN_002a5960. */
 /* Supplied declaration required: FUN_002a5dc4. */
 extern int FUN_002af294(int **, int);
-extern int FUN_002b4414(int, int ***, int);
+extern int libc_strncmp(int, int ***, int);
 /* Supplied declaration required: asdMemoryGetDefaultAllocator. */
 extern unsigned int asdMemoryGetAllocatorA(void);
-/* Supplied declaration required: FUN_002c30c4. */
+/* Supplied declaration required: libc_strlen. */
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: asdMemoryAlloc. */
 extern int nw_anim_res_ResAnim_IsFullBakedAnim(int ****);
@@ -253,7 +253,7 @@ int * FUN_0031dac4(int *param_1)
         else {
           temp_v11[0] = (int ***)0x0;
         }
-        temp_v1 = FUN_002c30c4();
+        temp_v1 = libc_strlen();
         temp_v10 = 0;
         if (temp_v10 < piVar9[1]) {
           do {
@@ -266,9 +266,9 @@ int * FUN_0031dac4(int *param_1)
             else {
               temp_v7 = 0;
             }
-            temp_v5 = FUN_002c30c4(temp_v7);
+            temp_v5 = libc_strlen(temp_v7);
             if ((temp_v5 == temp_v1) &&
-               (temp_v7 = FUN_002b4414(temp_v7,temp_v11[0],temp_v1), temp_v7 == 0)) {
+               (temp_v7 = libc_strncmp(temp_v7,temp_v11[0],temp_v1), temp_v7 == 0)) {
               temp_v11[0] = (int ***)*piVar14;
               temp_v1 = *(int *)(temp_v9 + 0x228);
               temp_v2 = *(unsigned int *)(*piVar14 + 0x18);
@@ -369,7 +369,7 @@ int * FUN_0031dac4(int *param_1)
         else {
           temp_v11[0] = (int ***)0x0;
         }
-        temp_v1 = FUN_002c30c4();
+        temp_v1 = libc_strlen();
         temp_v10 = 0;
         if (temp_v10 < piVar9[1]) {
           do {
@@ -382,9 +382,9 @@ int * FUN_0031dac4(int *param_1)
             else {
               temp_v7 = 0;
             }
-            temp_v5 = FUN_002c30c4(temp_v7);
+            temp_v5 = libc_strlen(temp_v7);
             if ((temp_v5 == temp_v1) &&
-               (temp_v7 = FUN_002b4414(temp_v7,temp_v11[0],temp_v1), temp_v7 == 0)) {
+               (temp_v7 = libc_strncmp(temp_v7,temp_v11[0],temp_v1), temp_v7 == 0)) {
               temp_v1 = *(int *)(temp_v9 + 0x148);
               if (temp_v1 == 0) {
                 piVar14 = (int *)0x0;

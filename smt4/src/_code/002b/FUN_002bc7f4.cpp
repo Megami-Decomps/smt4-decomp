@@ -19,7 +19,7 @@ extern int *DAT_004c6330; /* 0x4c6330 */
 
 /* Unsupported intrinsic, declaration required: coproc_movefrom_User_R_Thread_and_Process_ID (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-extern unsigned int *FUN_002ad264(void);
+extern unsigned int *nn_gxlow_CTR_GetGpu(void);
 
 
 int * FUN_002bc7f4(unsigned int param_1,int *param_2)
@@ -120,7 +120,7 @@ int * FUN_002bc7f4(unsigned int param_1,int *param_2)
     param_2[1] = (int)piVar2;
     return piVar2;
   case 0x20e:
-    puVar1 = (unsigned int *)FUN_002ad264();
+    puVar1 = (unsigned int *)nn_gxlow_CTR_GetGpu();
     temp_v1 = coproc_movefrom_User_R_Thread_and_Process_ID();
     *(unsigned int *)(temp_v1 + 0x80) = 0x40080;
     *(unsigned int *)(temp_v1 + 0x84) = 0x400058;

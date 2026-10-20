@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_00233240(int, int);
-int FUN_002af5c0(int, int, int);
+int uiSpriteSetImageKeyframe(int, int, int);
 int timerStart(int, int, int);
 int FUN_0039c3fc(int);
 
 /* Supplied declaration required: FUN_00233240. */
-/* Supplied declaration required: FUN_002af5c0. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_0039c3fc. */
 
@@ -36,7 +36,7 @@ void FUN_0039bc28(int param_1)
     *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) | 0x1008;
     FUN_00233240(param_1 + 0x178,0);
     FUN_00233240(param_1 + 0x178,1);
-    FUN_002af5c0(param_1 + 0x8d4,1,0);
+    uiSpriteSetImageKeyframe(param_1 + 0x8d4,1,0);
     timerStart(param_1 + 0x960,1,0);
     temp_v0 = 1;
   }

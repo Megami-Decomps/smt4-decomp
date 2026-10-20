@@ -7,10 +7,10 @@ extern "C" {
 int FUN_0018b67c(void);
 int FUN_0018b68c(int);
 int FUN_0018b71c(unsigned int *, unsigned int *, unsigned char *, int, unsigned int *, int *, int);
-int FUN_0018b868(void);
+int nn_applet_CTR_detail_OpenSession(void);
 int FUN_0018b920(void);
-int FUN_0018b964(void);
-int FUN_001bcd48(int, int);
+int nn_applet_CTR_detail_CloseSession(void);
+int svcSleepThread(int, int);
 int SBORROW4(...);
 int software_interrupt(int);
 
@@ -46,12 +46,12 @@ extern unsigned int DAT_005891d4; /* 0x5891d4 */
 /* Supplied declaration required: FUN_0018b68c. */
 extern unsigned int FUN_0018b70c(void);
 /* Supplied declaration required: FUN_0018b71c. */
-/* Supplied declaration required: FUN_0018b868. */
+/* Supplied declaration required: nn_applet_CTR_detail_OpenSession. */
 /* Supplied declaration required: FUN_0018b920. */
-/* Supplied declaration required: FUN_0018b964. */
+/* Supplied declaration required: nn_applet_CTR_detail_CloseSession. */
 extern int FUN_0018b9d4(void);
 extern unsigned int *FUN_0018bbac(unsigned int *, unsigned int, unsigned int *, unsigned char *, int, unsigned int *, int *);
-/* Supplied declaration required: FUN_001bcd48. */
+/* Supplied declaration required: svcSleepThread. */
 
 
 unsigned int *
@@ -156,10 +156,10 @@ FUN_0018bd50(unsigned int *param_1,unsigned int *param_2,unsigned char *param_3,
         if (param_6 == (int *)0x0) {
           piVar11 = &temp_v9;
         }
-        FUN_0018b868();
+        nn_applet_CTR_detail_OpenSession();
         temp_v2 = FUN_0018b70c();
         puVar9 = (unsigned int *)FUN_0018bbac(puVar9,temp_v2,puVar4,puVar5,temp_v5,puVar10,piVar11);
-        FUN_0018b964();
+        nn_applet_CTR_detail_CloseSession();
         if (temp_v9 != 0) {
           software_interrupt(0x23);
         }
@@ -189,7 +189,7 @@ FUN_0018bd50(unsigned int *param_1,unsigned int *param_2,unsigned char *param_3,
         }
       }
     }
-    FUN_001bcd48(10000000,0);
+    svcSleepThread(10000000,0);
   }
   return puVar9;
 }

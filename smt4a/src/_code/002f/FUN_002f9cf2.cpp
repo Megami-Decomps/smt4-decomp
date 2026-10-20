@@ -7,8 +7,8 @@ extern "C" {
 int FUN_002e6e34(unsigned char [16], unsigned int);
 int FUN_002e6e5c(unsigned char [16]);
 int FUN_002ea974(unsigned char [104]);
-int FUN_002ea9c0(unsigned char [104], unsigned int);
-int FUN_002ea9dc(unsigned char [104]);
+int onlineUrlSetAddress(unsigned char [104], unsigned int);
+int onlineUrlDestroy(unsigned char [104]);
 
 typedef int romwright_code(...);
 /* stack frame of param_3: 2 slot(s), 8 byte(s) */
@@ -19,10 +19,10 @@ typedef struct {
 
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-extern unsigned int FUN_002ea714(void);
+extern unsigned int onlineGetActiveLock(void);
 /* Supplied declaration required: FUN_002ea974. */
-/* Supplied declaration required: FUN_002ea9c0. */
-/* Supplied declaration required: FUN_002ea9dc. */
+/* Supplied declaration required: onlineUrlSetAddress. */
+/* Supplied declaration required: onlineUrlDestroy. */
 extern int wordRefsDiffer_002f3204(unsigned int **, unsigned int *);
 
 
@@ -37,7 +37,7 @@ unsigned int FUN_002f9cf2(int param_1,unsigned int param_2,unsigned int param_3)
   unsigned int temp_v4 [2];
   unsigned char temp_v5 [16];
   
-  temp_v0 = FUN_002ea714();
+  temp_v0 = onlineGetActiveLock();
   FUN_002e6e34(temp_v5,temp_v0);
   temp_v3[0] = (unsigned int *)**(unsigned int **)(param_1 + 0xd4);
   while( 1 ) {
@@ -48,13 +48,13 @@ unsigned int FUN_002f9cf2(int param_1,unsigned int param_2,unsigned int param_3)
       return 1;
     }
     FUN_002ea974(temp_v2);
-    FUN_002ea9c0(temp_v2,param_3);
+    onlineUrlSetAddress(temp_v2,param_3);
     temp_v1 = (**(romwright_code **)(*(int *)temp_v3[0][2] + 8))((int *)temp_v3[0][2],param_2,temp_v2);
     if (temp_v1 != 0) break;
     temp_v3[0] = (unsigned int *)*temp_v3[0];
-    FUN_002ea9dc(temp_v2);
+    onlineUrlDestroy(temp_v2);
   }
-  FUN_002ea9dc(temp_v2);
+  onlineUrlDestroy(temp_v2);
   FUN_002e6e5c(temp_v5);
   return 0;
 }

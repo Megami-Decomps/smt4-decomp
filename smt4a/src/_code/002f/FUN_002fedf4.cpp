@@ -22,7 +22,7 @@ extern unsigned char DAT_0062e59c; /* 0x62e59c */
 
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-extern int FUN_002e9318(unsigned int *);
+extern int onlineStringDestroy(unsigned int *);
 extern int wordRefsDiffer_002fa114(unsigned int **);
 /* Supplied declaration required: FUN_002fa124. */
 
@@ -48,7 +48,7 @@ int FUN_002fedf4(unsigned int *param_1)
     FUN_002fa124(temp_v2,&DAT_0062e588,&temp_v1);
   }
   FUN_002e6e5c(temp_v3);
-  temp_v0 = FUN_002e9318(param_1 + 3);
+  temp_v0 = onlineStringDestroy(param_1 + 3);
   return temp_v0 - 0xc;
 }
 

@@ -15,11 +15,11 @@ typedef struct {
     Slot slots[1];     /* 0x200 */
 } SlotTable;
 
-SlotTable *FUN_002adc88(s32 index);
+SlotTable *gameGetFlagBlock(s32 index);
 
 void FUN_00349080(s32 index, s32 enable)
 {
-    Slot *slot = &FUN_002adc88(index)->slots[index];
+    Slot *slot = &gameGetFlagBlock(index)->slots[index];
 
     if ((slot->flags & 2) != 0) {
         if (enable != 0) {

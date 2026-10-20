@@ -8,7 +8,7 @@ int btlGetMainState(void);
 int FUN_001568f8(int, int);
 int FUN_004102d8(int, int, int, unsigned int);
 
-extern int DAT_005712f0; /* 0x5712f0 */
+extern int g_btlActionReflect; /* 0x5712f0 */
 
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_001568f8. */
@@ -29,11 +29,11 @@ int FUN_004fd968(short param_1,unsigned int param_2,int param_3,unsigned int par
   unsigned char temp_v6;
   
   if ((*(unsigned int *)(param_3 + 0x50) & 1) != 0) {
-    temp_v0 = *(int *)(DAT_005712f0 + 8);
+    temp_v0 = *(int *)(g_btlActionReflect + 8);
     do {
       if (temp_v0 == 0) {
-        temp_v0 = DAT_005712f0;
-        FUN_004102d8(DAT_005712f0,(int)param_1,0,param_2);
+        temp_v0 = g_btlActionReflect;
+        FUN_004102d8(g_btlActionReflect,(int)param_1,0,param_2);
         temp_v1 = btlGetMainState();
         FUN_001568f8(temp_v1,(int)*(short *)(param_3 + 0x6a));
         temp_v2 = btlGetMainState();

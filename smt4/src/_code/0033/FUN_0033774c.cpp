@@ -22,7 +22,7 @@ struct fn_0033774c_arg2 {
     byte field_0x76; /* +0x76 */
 };
 
-extern int FUN_002471d8(void);
+extern int padGetStickHorizontalDirection(void);
 extern unsigned short FUN_00257e0c(unsigned int);
 extern short FUN_00257e40(unsigned int);
 
@@ -93,7 +93,7 @@ void FUN_0033774c(unsigned int param_1,unsigned char *param_2,fn_0033774c_arg2 *
     temp_v3 = temp_v4;
   } while ((int)temp_v4 < 0x12);
   param_2[0x14a] = 100;
-  temp_v2 = FUN_002471d8();
+  temp_v2 = padGetStickHorizontalDirection();
   if (temp_v2 == 1) {
     param_2[0x14b] = 1;
   }

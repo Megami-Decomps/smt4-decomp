@@ -13,7 +13,7 @@ int FUN_003c5848(void);
 extern unsigned char g_gameState; /* 0x5f15fc */
 
 /* Supplied declaration required: sysPlaySe. */
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 extern int scrGetArg(void);
 /* Supplied declaration required: sub68OwnerCall3. */
 /* Supplied declaration required: FUN_00379be8. */
@@ -38,7 +38,7 @@ unsigned int FUN_0038ae5c(void)
   }
   else if ((*(signed char *)((unsigned char *)&g_gameState + 0x295)) != '\0') {
     (*(signed char *)((unsigned char *)&g_gameState + 0x295)) = '\0';
-    temp_v0 = FUN_0018719c(0x49a);
+    temp_v0 = gameFlagIsSet(0x49a);
     if (temp_v0 != 0) {
       FUN_003c5848();
     }

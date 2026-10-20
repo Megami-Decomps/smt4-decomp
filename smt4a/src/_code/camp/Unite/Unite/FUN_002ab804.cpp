@@ -17,10 +17,10 @@ int asdMemoryAllocTracked(...);
 int memAlloc(...);
 int FUN_0016dfc4(...);
 int FUN_00178b04(...);
-int FUN_001846d0(...);
-int FUN_00184758(...);
+int uiSpriteSelectAnim(...);
+int uiSpriteSetKeyframe(...);
 int FUN_00184b90(...);
-int FUN_001b4a90(...);
+int __aeabi_memset4(...);
 int FUN_001cd3ec(...);
 int FUN_0020214c(...);
 int FUN_0026f608(...);
@@ -29,10 +29,10 @@ int FUN_002e3140(...);
 int sysMemClear(...);
 int FUN_002fb0d4(...);
 int FUN_0031416c(...);
-int FUN_003a2ecc(...);
-int FUN_003f86f8(...);
+int mapSettings5BSetValueIfActive(...);
+int loadSlotEnsureLoaded(...);
 int FUN_003f9e80(...);
-int FUN_003fd63c(...);
+int gameFlagSetValue(...);
 int FUN_004db450(...);
 int FUN_004dc4b4(...);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
@@ -68,8 +68,8 @@ extern unsigned char LAB_00514b80; /* 0x514b80 */
 extern unsigned char DAT_0052ef50; /* 0x52ef50 */
 extern unsigned char DAT_0052efd4; /* 0x52efd4 */
 extern unsigned char DAT_0052f034; /* 0x52f034 */
-extern int DAT_0056fcc0; /* 0x56fcc0 */
-extern int *DAT_0057f290; /* 0x57f290 */
+extern int g_handleRegistry; /* 0x56fcc0 */
+extern int *g_unite; /* 0x57f290 */
 
 /* Supplied declaration required: FUN_0013c174. */
 /* Supplied declaration required: FUN_0014e188. */
@@ -82,15 +82,15 @@ extern int lmapMainIsRunning(void);
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_0016dfc4. */
 /* Supplied declaration required: FUN_00178b04. */
-/* Supplied declaration required: FUN_001846d0. */
-/* Supplied declaration required: FUN_00184758. */
+/* Supplied declaration required: uiSpriteSelectAnim. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: FUN_00184b90. */
 extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: dataTableGetCount. */
 /* Supplied declaration required: dataTableGetEntries. */
-extern int FUN_001ab854(void);
-/* Supplied declaration required: FUN_001b4a90. */
+extern int gameGetSlotRecord(void);
+/* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: FUN_001cd3ec. */
 /* Supplied declaration required: FUN_0020214c. */
 extern int FUN_0026140c(void);
@@ -102,10 +102,10 @@ extern int FUN_002e50d4(void);
 /* Supplied declaration required: FUN_002fb0d4. */
 /* Supplied declaration required: FUN_0031416c. */
 extern int lmapSceneGetScript(void);
-/* Supplied declaration required: FUN_003a2ecc. */
-/* Supplied declaration required: FUN_003f86f8. */
+/* Supplied declaration required: mapSettings5BSetValueIfActive. */
+/* Supplied declaration required: loadSlotEnsureLoaded. */
 /* Supplied declaration required: FUN_003f9e80. */
-/* Supplied declaration required: FUN_003fd63c. */
+/* Supplied declaration required: gameFlagSetValue. */
 extern int FUN_0040ac08(void);
 extern int bitsAt60Test(int, unsigned int);
 extern int FUN_004dad8c(void);
@@ -136,15 +136,15 @@ void FUN_002ab804(void)
   unsigned char *temp_v11;
   unsigned char temp_v12 [16];
   
-  if (DAT_0057f290 == (int *)0x0) {
+  if (g_unite == (int *)0x0) {
     piVar2 = (int *)0x100;
     asdMemoryAllocTracked(0x100,0x100,0,0x92c0,1);
-    DAT_0057f290 = piVar2;
+    g_unite = piVar2;
   }
-  piVar2 = DAT_0057f290;
+  piVar2 = g_unite;
   sysMemClear();
   piVar2[0x2428] = -1;
-  FUN_003a2ecc(0);
+  mapSettings5BSetValueIfActive(0);
   puVar3 = &LAB_002abc10;
   asdProcessCreateSimple(&LAB_002abc10,4,0,0,FUN_001f5294,0,0);
   piVar2[0xfe] = (int)puVar3;
@@ -183,7 +183,7 @@ void FUN_002ab804(void)
   if (((unsigned int)piVar6 & 0x7e00000) != 0x600000 && (int)piVar6 < 0) {
     FUN_002e3140();
   }
-  temp_v1 = FUN_0018719c(0x418);
+  temp_v1 = gameFlagIsSet(0x418);
   if (temp_v1 == 0) {
     temp_v1 = FUN_0026140c();
     *(unsigned short *)(temp_v1 + 0x20) = 0xffff;
@@ -208,7 +208,7 @@ void FUN_002ab804(void)
       *(unsigned short *)(temp_v1 + 0x20) = 0xffff;
     }
     else {
-      temp_v2 = FUN_001ab854();
+      temp_v2 = gameGetSlotRecord();
       if ((*(short *)(temp_v2 + 0x62) != *(short *)(temp_v1 + 0x24)) ||
          (temp_v2 = bitsAt60Test(temp_v2,10), temp_v2 != 0)) {
         *(unsigned short *)(temp_v1 + 0x20) = 0xffff;
@@ -221,34 +221,34 @@ void FUN_002ab804(void)
       *(unsigned short *)(temp_v1 + 0x22) = 0xffff;
     }
     else {
-      temp_v2 = FUN_001ab854();
+      temp_v2 = gameGetSlotRecord();
       if (*(short *)(temp_v2 + 0x62) != *(short *)(temp_v1 + 0x26)) {
         *(unsigned short *)(temp_v1 + 0x22) = 0xffff;
         *(unsigned short *)(temp_v1 + 0x26) = 0;
       }
     }
   }
-  FUN_001b4a90(piVar2 + 0x10e,0xa0,0xffffffff);
+  __aeabi_memset4(piVar2 + 0x10e,0xa0,0xffffffff);
   FUN_0026f608();
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(piVar2 + 1);
   temp_v6 = (int *)0x1dc;
   FUN_001505ac(piVar2 + 1,&DAT_0052ef50,0x84,&DAT_0052efd4,0x60,0,0,0,0,&DAT_0052f034);
   FUN_0014e188(piVar2 + 9,0x1a,0,piVar2 + 1,1);
-  FUN_001846d0(piVar2 + 9,0);
+  uiSpriteSelectAnim(piVar2 + 9,0);
   FUN_0014e188(piVar2 + 0x2c,0x1a,0,piVar2 + 1,1);
-  FUN_001846d0(piVar2 + 0x2c,4);
+  uiSpriteSelectAnim(piVar2 + 0x2c,4);
   FUN_0014e188(piVar2 + 0x4f,0x1a,0,piVar2 + 1,1);
-  FUN_001846d0(piVar2 + 0x4f,1);
+  uiSpriteSelectAnim(piVar2 + 0x4f,1);
   FUN_0014e188(piVar2 + 0x72,0x1a,0,piVar2 + 1,1);
   FUN_00184b90(piVar2,1);
   FUN_0014e188(piVar2 + 0x95,0x1a,0,piVar2 + 1,1);
-  FUN_00184758(piVar2 + 0x95,5,0);
+  uiSpriteSetKeyframe(piVar2 + 0x95,5,0);
   FUN_0014e188(piVar2 + 0xb8,0x1a,0,piVar2 + 1,1);
-  FUN_001846d0(piVar2 + 0xb8,2);
+  uiSpriteSelectAnim(piVar2 + 0xb8,2);
   FUN_0014e188(piVar2 + 0xdb,0x1a,0,piVar2 + 1,1);
-  FUN_001846d0(piVar2 + 0xdb,3);
-  FUN_003f86f8(0x24);
-  FUN_003f86f8(0x22);
+  uiSpriteSelectAnim(piVar2 + 0xdb,3);
+  loadSlotEnsureLoaded(0x24);
+  loadSlotEnsureLoaded(0x22);
   piVar2[0x10d] = -1;
   puVar3 = &LAB_002abf64;
   piVar2[0x122] = -1;
@@ -288,16 +288,16 @@ void FUN_002ab804(void)
   }
   piVar2[0x2483] = temp_v1;
   FUN_001cd3ec();
-  *(unsigned int *)(DAT_0056fcc0 + 0x34) = *(unsigned int *)(DAT_0056fcc0 + 0x34) | 1;
+  *(unsigned int *)(g_handleRegistry + 0x34) = *(unsigned int *)(g_handleRegistry + 0x34) | 1;
   piVar2[0x2497] = 0;
   piVar2[0x2498] = 0;
   temp_v1 = FUN_002e50d4();
   piVar2[0x107] = temp_v1;
   temp_v1 = *piVar2;
   FUN_004db450(temp_v1,piVar2 + 0x23df);
-  FUN_003fd63c(0x52c,temp_v1 != 0,1);
-  piVar2 = DAT_0057f290;
-  *(unsigned short *)(DAT_0057f290 + 0x24af) = 0;
+  gameFlagSetValue(0x52c,temp_v1 != 0,1);
+  piVar2 = g_unite;
+  *(unsigned short *)(g_unite + 0x24af) = 0;
   *(unsigned short *)((int)piVar2 + 0x92be) = 0;
   temp_v3 = dataTableGet(0x24,0);
   dataTableGetEntries();

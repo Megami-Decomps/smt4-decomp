@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-extern unsigned short *FUN_001801a4(void);
+extern unsigned short *gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00192608. */
 
 
@@ -23,7 +23,7 @@ unsigned int FUN_003c0d90(void)
   unsigned short *puVar2;
   unsigned int temp_v1;
   
-  puVar2 = (unsigned short *)FUN_001801a4();
+  puVar2 = (unsigned short *)gameGetPlayerData();
   temp_v1 = (unsigned int)*puVar2;
   FUN_00192608();
   temp_v1 = *(unsigned int *)(temp_v1 + 0x24) >> 0x14;

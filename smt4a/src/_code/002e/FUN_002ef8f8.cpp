@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002eb188(int, int, unsigned int, int);
-int FUN_002eb588(int *);
+int onlineTimeGetNow(int *);
 int FUN_002ef584(int, int);
 int FUN_0043222c(int, int);
 
@@ -18,7 +18,7 @@ typedef struct {
 extern int FUN_0010acb8(unsigned int);
 extern unsigned int FUN_002eacbc(int);
 /* Supplied declaration required: FUN_002eb188. */
-/* Supplied declaration required: FUN_002eb588. */
+/* Supplied declaration required: onlineTimeGetNow. */
 extern int FUN_002eed8c(int);
 extern unsigned int *arrayElementAddress_002eee88(int, int);
 extern int FUN_002ef01c(unsigned int);
@@ -72,7 +72,7 @@ void FUN_002ef8f8(int param_1,int param_2,unsigned int param_3,unsigned int para
   FUN_002ef584(*(int *)(param_1 + 4) + 0x14,param_2);
   temp_v3 = FUN_002ef01c(*(unsigned int *)(param_1 + 4));
   if (*(char *)(temp_v3 + 0x70) != '\0') {
-    FUN_002eb588(&temp_v4);
+    onlineTimeGetNow(&temp_v4);
     *(int *)(param_1 + 0xd8) = temp_v4;
     *(unsigned int *)(param_1 + 0xdc) = temp_v5;
   }

@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } void_stack;
 
-extern int DAT_0044cdf0; /* 0x44cdf0 */
+extern int g_naviMain; /* 0x44cdf0 */
 
 /* Supplied declaration required: FUN_002c86fc. */
 extern int FUN_0039d514(int);
@@ -25,7 +25,7 @@ void FUN_0028529c(void)
   int temp_v0;
   int temp_v1;
   
-  temp_v0 = DAT_0044cdf0;
+  temp_v0 = g_naviMain;
   FUN_002c86fc();
   if ((temp_v0 != 0) && (temp_v1 = FUN_0039d514(temp_v0 + 0x40), temp_v1 != 0)) {
     *(unsigned char *)(temp_v0 + 0x5acc) = 1;

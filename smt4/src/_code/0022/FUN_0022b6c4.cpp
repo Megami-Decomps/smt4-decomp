@@ -34,8 +34,8 @@ typedef struct Context {
 
 extern void FUN_00233240(void *obj, s32 arg);
 extern s32 FUN_0023360c(Context *ctx);
-extern void FUN_002a5ed0(s32 id);
-extern void FUN_002af5c0(Slot *slot, s32 a, s32 b);
+extern void asdTMTexTableLoadEntryAsync(s32 id);
+extern void uiSpriteSetImageKeyframe(Slot *slot, s32 a, s32 b);
 
 void FUN_0022b6c4(Context *ctx)
 {
@@ -49,7 +49,7 @@ void FUN_0022b6c4(Context *ctx)
     ctx->unkC5C = 0;
     ctx->unkCB8 = 0;
     for (i = 0; i < 10; i++) {
-        FUN_002af5c0(&ctx->slots[i], 0, 0);
+        uiSpriteSetImageKeyframe(&ctx->slots[i], 0, 0);
     }
     FUN_00233240(ctx->unk0A8, 0);
     FUN_00233240(ctx->unk0A8, 1);
@@ -58,7 +58,7 @@ void FUN_0022b6c4(Context *ctx)
     ctx->unkC64 = next;
     ctx->unkC60 = index + 2;
     if (ctx->flags[next] == 0) {
-        FUN_002a5ed0(0x2a);
+        asdTMTexTableLoadEntryAsync(0x2a);
         ctx->flags[next] = 1;
     }
 }

@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002e9ec8(int, unsigned int);
-int FUN_002edb54(...);
+int onlineInstanceTableFind(int, unsigned int);
+int vectorResizeBytes(...);
 int FUN_002f7824(int *);
-int FUN_002fc046(...);
+int rangeIsEmpty(...);
 
 typedef int romwright_code(...);
 /* stack frame of param_2: 9 slot(s), 36 byte(s) */
@@ -24,11 +24,11 @@ typedef struct {
 } param_2_stack;
 
 extern int *FUN_002e7908(int *, int *);
-extern int FUN_002e9af4(void);
-/* Supplied declaration required: FUN_002e9ec8. */
-/* Supplied declaration required: FUN_002edb54. */
+extern int onlineInstanceTableGetCurrent(void);
+/* Supplied declaration required: onlineInstanceTableFind. */
+/* Supplied declaration required: vectorResizeBytes. */
 /* Supplied declaration required: FUN_002f7824. */
-/* Supplied declaration required: FUN_002fc046. */
+/* Supplied declaration required: rangeIsEmpty. */
 
 
 int * FUN_00121808(int *param_1,int param_2)
@@ -53,14 +53,14 @@ int * FUN_00121808(int *param_1,int param_2)
   temp_v3 = (int *)(param_2 + 0x7c);
   temp_v10 = param_1;
   iStack_18 = param_2;
-  temp_v0 = FUN_002fc046();
+  temp_v0 = rangeIsEmpty();
   if (temp_v0 != 0) goto LAB_0012184e;
   while( 1 ) {
     temp_v0 = (**(romwright_code **)(**(int **)(param_2 + 0x8c) + 0x14))
                       (*(int **)(param_2 + 0x8c),*(unsigned int *)(param_2 + 0x7c),
                        temp_v3[1] - *temp_v3);
-    temp_v1 = FUN_002e9af4();
-    FUN_002e9ec8(temp_v1,*(unsigned int *)(param_2 + 0x68));
+    temp_v1 = onlineInstanceTableGetCurrent();
+    onlineInstanceTableFind(temp_v1,*(unsigned int *)(param_2 + 0x68));
     if (temp_v1 == 0) {
       temp_v2 = -0x7ffefffc;
       piVar3 = (int *)FUN_002e7908(temp_v10,piVar3);
@@ -70,7 +70,7 @@ int * FUN_00121808(int *param_1,int param_2)
     FUN_002f7824(temp_v3);
 LAB_0012184e:
     temp_v4 = 0;
-    FUN_002edb54(temp_v3,*(unsigned int *)(param_2 + 0x90),0);
+    vectorResizeBytes(temp_v3,*(unsigned int *)(param_2 + 0x90),0);
     temp_v2 = temp_v3[1] - *temp_v3;
     (**(romwright_code **)(**(int **)(param_2 + 0x6c) + 0x30))
               (&temp_v5,*(int **)(param_2 + 0x6c),*(unsigned int *)(param_2 + 0x7c),&temp_v4);
@@ -80,8 +80,8 @@ LAB_0012184e:
       temp_v10[2] = temp_v7;
       return temp_v10 + 3;
     }
-    FUN_002edb54(temp_v3,temp_v4,0);
-    temp_v0 = FUN_002fc046(temp_v3);
+    vectorResizeBytes(temp_v3,temp_v4,0);
+    temp_v0 = rangeIsEmpty(temp_v3);
     if (temp_v0 != 0) {
       temp_v0 = (**(romwright_code **)(**(int **)(param_2 + 0x6c) + 0x44))();
       if (temp_v0 != 0) {

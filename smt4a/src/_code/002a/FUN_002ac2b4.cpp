@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_0057f290; /* 0x57f290 */
+extern int g_unite; /* 0x57f290 */
 
 extern int slotRecordFindById(void);
 
@@ -19,7 +19,7 @@ unsigned int FUN_002ac2b4(int param_1,int param_2)
   
   temp_v3 = 0;
   if (param_2 != 0) {
-    temp_v0 = DAT_0057f290 + param_1 * 0x28;
+    temp_v0 = g_unite + param_1 * 0x28;
     while (((*(short *)(temp_v0 + temp_v3 * 2 + 0x523a) == 0 || (temp_v2 = slotRecordFindById(), temp_v2 == 0)) ||
            ((*(unsigned short *)(temp_v2 + 0x60) & 4) == 0))) {
       temp_v3 = temp_v3 + 1;
@@ -29,7 +29,7 @@ unsigned int FUN_002ac2b4(int param_1,int param_2)
     }
     return 1;
   }
-  temp_v0 = DAT_0057f290 + param_1 * 8;
+  temp_v0 = g_unite + param_1 * 8;
   do {
     temp_v1 = *(unsigned int *)(temp_v0 + 0x13b8) & 0x7fff;
     while( 1 ) {

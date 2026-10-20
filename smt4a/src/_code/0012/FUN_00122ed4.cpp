@@ -7,14 +7,14 @@ extern "C" {
 int FUN_00135a9c(...);
 int FUN_002e6e34(...);
 int FUN_002e6e5c(...);
-int FUN_002e7228(...);
+int onlineJobSetStateReady(...);
 int FUN_002e78d0(...);
 int FUN_002e9d28(...);
 int FUN_002e9d6c(...);
 int FUN_002e9d98(...);
 int FUN_002e9de4(...);
 int FUN_0030f640(...);
-int FUN_0030f66c(...);
+int mapIteratorNext9(...);
 int FUN_0030f846(...);
 
 /* stack frame of param_3: 3 slot(s), 10 byte(s) */
@@ -29,14 +29,14 @@ extern unsigned char LAB_00122f8c; /* 0x122f8c */
 /* Supplied declaration required: FUN_00135a9c. */
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-/* Supplied declaration required: FUN_002e7228. */
+/* Supplied declaration required: onlineJobSetStateReady. */
 /* Supplied declaration required: FUN_002e78d0. */
 /* Supplied declaration required: FUN_002e9d28. */
 /* Supplied declaration required: FUN_002e9d6c. */
 /* Supplied declaration required: FUN_002e9d98. */
 /* Supplied declaration required: FUN_002e9de4. */
 /* Supplied declaration required: FUN_0030f640. */
-/* Supplied declaration required: FUN_0030f66c. */
+/* Supplied declaration required: mapIteratorNext9. */
 extern int wordRefsDiffer_0030f814(int *, unsigned int *);
 /* Supplied declaration required: FUN_0030f846. */
 
@@ -61,9 +61,9 @@ unsigned int FUN_00122ed4(int param_1,unsigned int param_2,int param_3)
       temp_v6[0] = *(unsigned int *)(param_1 + 0x120);
       temp_v0 = wordRefsDiffer_0030f814(&temp_v4,temp_v6);
       if (temp_v0 == 0) break;
-      FUN_002e7228(*(unsigned int *)(temp_v4 + 0x18));
+      onlineJobSetStateReady(*(unsigned int *)(temp_v4 + 0x18));
       FUN_002e78d0(param_1,*(unsigned int *)(temp_v4 + 0x18),0);
-      FUN_0030f66c(&temp_v4);
+      mapIteratorNext9(&temp_v4);
     }
     FUN_00135a9c(param_1 + 0x110);
     FUN_002e6e5c(temp_v5);

@@ -8,13 +8,13 @@ typedef struct Obj {
     /* 0x18 */ u16 unk18;
 } Obj;
 
-extern Obj *DAT_0043e0f8;
+extern Obj *g_comWin;
 
 void FUN_002009c4(u16 value)
 {
-    Obj *obj = DAT_0043e0f8;
+    Obj *obj = g_comWin;
 
-    DAT_0043e0f8->unk14 = 3;
+    g_comWin->unk14 = 3;
     obj->unk18 = value;
 }
 

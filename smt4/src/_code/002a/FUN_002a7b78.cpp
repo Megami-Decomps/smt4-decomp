@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_002c4040(u32 *event);
+int nn_os_LightEvent_Signal(u32 *event);
 extern u8 DAT_00421d18;
 extern void nn_os_LightEvent_Initialize(u32 *event, u8 autoClear);
 
@@ -28,7 +28,7 @@ Obj *FUN_002a7b78(Obj *obj)
     nn_os_LightEvent_Initialize(obj->event, 1);
     obj->unk14 = 0;
     obj->unk18 = 0;
-    FUN_002c4040(obj->event);
+    nn_os_LightEvent_Signal(obj->event);
     return obj;
 }
 

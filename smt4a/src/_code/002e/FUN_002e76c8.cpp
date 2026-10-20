@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001b4a90(int, int, unsigned int);
+int __aeabi_memset4(int, int, unsigned int);
 int FUN_00203b40(int, int, int, int, int, int);
 int FUN_002a4964(int);
 int rt_memcpy_w(unsigned char [300], unsigned char *, int);
@@ -17,7 +17,7 @@ typedef struct {
     unsigned int spEA0; /* 0xea0: local_ea0 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_001b4a90. */
+/* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: FUN_00203b40. */
 /* Supplied declaration required: FUN_002a4964. */
 extern int FUN_003e4d68(unsigned int);
@@ -42,7 +42,7 @@ void FUN_002e76c8(int param_1)
   if (temp_v3 != 0) {
     rt_memcpy_w(temp_v5,&uStack00000000,0xe74);
     *(unsigned int *)(temp_v3 + 0x328) = 0xffffffff;
-    FUN_001b4a90(temp_v3 + 0x2c4,0x30,0xffffffff);
+    __aeabi_memset4(temp_v3 + 0x2c4,0x30,0xffffffff);
     temp_v4 = 0;
     temp_v2 = 0;
     do {

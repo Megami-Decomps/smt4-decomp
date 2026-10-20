@@ -2,13 +2,13 @@
 
 extern "C" {
 
-int FUN_001005dc(void);
-int FUN_002c6a10(void);
+int rt_vec_delete(void);
+int asdOperatorDelete(void);
 
 void FUN_002b4b88(void)
 {
-    FUN_001005dc();
-    FUN_002c6a10();
+    rt_vec_delete();
+    asdOperatorDelete();
 }
 
 } /* extern "C" */

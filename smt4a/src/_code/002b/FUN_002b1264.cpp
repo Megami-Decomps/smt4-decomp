@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_001846d0(int, int);
+int uiSpriteSelectAnim(int, int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_001846d0. */
+/* Supplied declaration required: uiSpriteSelectAnim. */
 extern int FUN_003e8430(unsigned int);
 
 
@@ -42,9 +42,9 @@ void FUN_002b1264(int param_1,int param_2)
     return;
   }
   param_1 = param_1 + param_2 * 0x8c;
-  FUN_001846d0(param_1 + 0x145c,0xb);
-  FUN_001846d0(param_1 + 0x168c,0xd);
-  FUN_001846d0(param_1 + 0x18bc,0xe);
+  uiSpriteSelectAnim(param_1 + 0x145c,0xb);
+  uiSpriteSelectAnim(param_1 + 0x168c,0xd);
+  uiSpriteSelectAnim(param_1 + 0x18bc,0xe);
   return;
 }
 

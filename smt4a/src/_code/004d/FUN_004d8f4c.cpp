@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_004d9090(...);
-int FUN_004d9108(...);
+int treeSkew(...);
+int treeSplit(...);
 
-/* Supplied declaration required: FUN_004d9090. */
-/* Supplied declaration required: FUN_004d9108. */
+/* Supplied declaration required: treeSkew. */
+/* Supplied declaration required: treeSplit. */
 
 
 void FUN_004d8f4c(unsigned int *param_1,int *param_2)
@@ -47,13 +47,13 @@ void FUN_004d8f4c(unsigned int *param_1,int *param_2)
     if ((int *)*piVar1 != param_2) {
       piVar2 = piVar1 + 1;
     }
-    FUN_004d9090(piVar2);
-    FUN_004d9108(piVar2);
+    treeSkew(piVar2);
+    treeSplit(piVar2);
     param_2 = piVar1;
     piVar2 = (int *)piVar1[2];
   }
-  FUN_004d9090(param_1);
-  FUN_004d9108(param_1);
+  treeSkew(param_1);
+  treeSplit(param_1);
   param_1[3] = *param_1;
   return;
 }

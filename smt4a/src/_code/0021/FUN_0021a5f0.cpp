@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0021a610(...);
+int nodeTreeRelease(...);
 
 typedef struct fn_0021a5f0_arg0 fn_0021a5f0_arg0;
 struct fn_0021a5f0_arg0 {
@@ -22,7 +22,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_0021a610. */
+/* Supplied declaration required: nodeTreeRelease. */
 
 
 void FUN_0021a5f0(fn_0021a5f0_arg0 *param_1)
@@ -42,9 +42,9 @@ void FUN_0021a5f0(fn_0021a5f0_arg0 *param_1)
         if (*(fn_0021a5f0_arg0 **)(temp_v0 + 0x30) != (fn_0021a5f0_arg0 *)0x0) {
           FUN_0021a5f0(*(fn_0021a5f0_arg0 **)(temp_v0 + 0x30));
         }
-        FUN_0021a610(temp_v0);
+        nodeTreeRelease(temp_v0);
       }
-      FUN_0021a610(param_1->field_0x28);
+      nodeTreeRelease(param_1->field_0x28);
       param_1->field_0x28 = (void *)0x0;
     }
     pvVar1 = param_1->field_0x24;

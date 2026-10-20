@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern StateHolder518 *DAT_00588fe8;
+extern StateHolder518 *g_statusDown;
 
 u8 stateHolderStateIs0x12(void)
 {
-    return DAT_00588fe8->state == 0x12;
+    return g_statusDown->state == 0x12;
 }
 
 } /* extern "C" */

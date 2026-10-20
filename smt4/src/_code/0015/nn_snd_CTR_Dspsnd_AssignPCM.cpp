@@ -9,7 +9,7 @@ typedef struct {
     unsigned int sp24; /* 0x24: local_24 */
 } param_4_stack;
 
-extern int FUN_002bb274(void);
+extern int nn_snd_CTR_Dspsnd_IsInitialized(void);
 
 
 unsigned int nn_snd_CTR_Dspsnd_AssignPCM(int param_1,int param_2,unsigned int *param_3,unsigned int param_4)
@@ -27,7 +27,7 @@ unsigned int nn_snd_CTR_Dspsnd_AssignPCM(int param_1,int param_2,unsigned int *p
   unsigned char temp_v6;
   unsigned short temp_v7;
   
-  temp_v0 = FUN_002bb274();
+  temp_v0 = nn_snd_CTR_Dspsnd_IsInitialized();
   if (temp_v0 == 0) {
     return 0;
   }

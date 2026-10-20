@@ -4,18 +4,18 @@
 
 extern "C" {
 
-int FUN_002e9318(int *);
+int onlineStringDestroy(int *);
 int FUN_002e9510(int, unsigned int);
 int FUN_002e954a(int, unsigned int);
-int FUN_002e9598(void);
+int onlineStringAssign(void);
 
 extern unsigned char DAT_00538b28; /* 0x538b28 */
 
-extern unsigned int FUN_002e9300(unsigned int *, unsigned char *);
-/* Supplied declaration required: FUN_002e9318. */
+extern unsigned int onlineStringConstruct(unsigned int *, unsigned char *);
+/* Supplied declaration required: onlineStringDestroy. */
 /* Supplied declaration required: FUN_002e9510. */
 /* Supplied declaration required: FUN_002e954a. */
-/* Supplied declaration required: FUN_002e9598. */
+/* Supplied declaration required: onlineStringAssign. */
 
 
 void FUN_00103ab8(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -28,13 +28,13 @@ void FUN_00103ab8(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   
   uStack_18 = param_3;
   uStack_14 = param_4;
-  temp_v0 = FUN_002e9300((unsigned int *)&uStack_18,&DAT_00538b28);
+  temp_v0 = onlineStringConstruct((unsigned int *)&uStack_18,&DAT_00538b28);
   FUN_002e9510(param_1 + 0x28,temp_v0);
-  FUN_002e9318(&uStack_18);
-  temp_v0 = FUN_002e9300((unsigned int *)&uStack_18,&DAT_00538b28);
+  onlineStringDestroy(&uStack_18);
+  temp_v0 = onlineStringConstruct((unsigned int *)&uStack_18,&DAT_00538b28);
   FUN_002e954a(param_1 + 0x28,temp_v0);
-  FUN_002e9598();
-  FUN_002e9318(&uStack_18);
+  onlineStringAssign();
+  onlineStringDestroy(&uStack_18);
   return;
 }
 

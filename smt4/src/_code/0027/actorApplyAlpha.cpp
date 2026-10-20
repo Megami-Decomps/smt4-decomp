@@ -19,14 +19,14 @@ typedef struct Globals {
 
 extern Globals g_gameState;
 
-Actor *FUN_002c2950(void);
+Actor *gameGetMapBlock(void);
 ActorInfo *dataTable2fSub1GetRecord(int id);
-void FUN_002d2a38(int id, int alpha);
+void gameSetActorAlpha(int id, int alpha);
 
 /* When enabled, applies the current actor's alpha (default 0xff if its info has none). */
 void actorApplyAlpha(void)
 {
-    Actor *actor = FUN_002c2950();
+    Actor *actor = gameGetMapBlock();
     int id;
     ActorInfo *info;
 
@@ -36,10 +36,10 @@ void actorApplyAlpha(void)
     id = actor->id;
     info = dataTable2fSub1GetRecord(id);
     if (info->alpha != 0) {
-        FUN_002d2a38(id, info->alpha);
+        gameSetActorAlpha(id, info->alpha);
         return;
     }
-    FUN_002d2a38(id, 0xff);
+    gameSetActorAlpha(id, 0xff);
 }
 
 } /* extern "C" */

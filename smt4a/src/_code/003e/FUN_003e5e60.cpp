@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0015f858(unsigned int, int);
-int FUN_00275f44(unsigned int);
+int scrScriptProcessStartEntry(unsigned int);
 int FUN_003180c4(int, unsigned int);
 int obj04Finish(void);
 int FUN_003c1060(void);
@@ -18,12 +18,12 @@ typedef struct {
 
 /* Supplied declaration required: FUN_0015f858. */
 extern int FUN_00224880(unsigned int);
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_003180c4. */
 extern int panelIsMissingOrFlagClear(void);
 /* Supplied declaration required: obj04Finish. */
-extern int FUN_00357bc8(unsigned int, char *);
+extern int tableGroupFindEntryIndex(unsigned int, char *);
 /* Supplied declaration required: FUN_003c1060. */
 /* Supplied declaration required: FUN_003c3e14. */
 
@@ -88,21 +88,21 @@ void FUN_003e5e60(int param_1)
     if (temp_v0 != 4) {
       if (temp_v0 != 6) {
         if (temp_v0 != 5) {
-          temp_v0 = FUN_00357bc8(*(unsigned int *)(param_1 + 0x14),"npcShop_Select_00");
+          temp_v0 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x14),"npcShop_Select_00");
         }
         else {
-          temp_v0 = FUN_00357bc8(*(unsigned int *)(param_1 + 0x14),"npcShop_Select_03");
+          temp_v0 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x14),"npcShop_Select_03");
         }
       }
       else {
-        temp_v0 = FUN_00357bc8(*(unsigned int *)(param_1 + 0x14),"npcShop_Select_01");
+        temp_v0 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x14),"npcShop_Select_01");
       }
     }
     else {
-      temp_v0 = FUN_00357bc8(*(unsigned int *)(param_1 + 0x14),"npcShop_Select_02");
+      temp_v0 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x14),"npcShop_Select_02");
     }
     if (-1 < temp_v0) {
-      FUN_00275f44(*(unsigned int *)(param_1 + 0x18));
+      scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x18));
     }
     *(int *)(param_1 + 8) = *(int *)(param_1 + 8) + 1;
   }

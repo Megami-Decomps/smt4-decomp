@@ -7,12 +7,12 @@ extern "C" {
 int FUN_00157558(int);
 int FUN_00162790(...);
 int FUN_00164b5c(int, int, int, int, int, int);
-int FUN_001654d8(...);
+int vec2GetXInt(...);
 int efctSetSpeed(void);
-int FUN_0016c410(...);
+int renderCtxResetColorScale(...);
 int FUN_0016c560(...);
 int FUN_001835b4(int, int, int, int, int, int);
-int FUN_00184518(...);
+int pairSetSecondResetFirst(...);
 int FUN_002199fc(...);
 int FUN_0025c848(...);
 int FUN_003346a8(...);
@@ -38,16 +38,16 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_00157558. */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164b5c. */
-/* Supplied declaration required: FUN_001654d8. */
-extern int FUN_001654e4(int);
+/* Supplied declaration required: vec2GetXInt. */
+extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0016c410. */
+/* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: FUN_0016c560. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_00184518. */
+/* Supplied declaration required: pairSetSecondResetFirst. */
 /* Supplied declaration required: FUN_002199fc. */
 /* Supplied declaration required: FUN_0025c848. */
 /* Supplied declaration required: FUN_003346a8. */
@@ -125,8 +125,8 @@ unsigned int FUN_003da030(void)
         efctSetSpeed();
       }
     }
-    temp_v2 = FUN_001654d8(temp_v3 + 0x360);
-    temp_v4 = FUN_001654e4(temp_v3 + 0x360);
+    temp_v2 = vec2GetXInt(temp_v3 + 0x360);
+    temp_v4 = vec2GetYInt(temp_v3 + 0x360);
     FUN_00164b5c(2,0x1a,1,temp_v2,temp_v4,0x65);
     FUN_001835b4(2,0x1a,0x206,temp_v2,temp_v4,0x65);
     temp_v0 = *(short *)(temp_v3 + 0x1e);
@@ -165,23 +165,23 @@ unsigned int FUN_003da030(void)
     } while (temp_v5 < 4);
     if ((*(char *)(temp_v3 + 0x20) != '\0') &&
        ((*(int *)(temp_v3 + 8) >= temp_v1 || (*(int *)(temp_v3 + 4) >= 4)))) {
-      FUN_00184518(temp_v3 + 0x8d8,0x19);
+      pairSetSecondResetFirst(temp_v3 + 0x8d8,0x19);
     }
     else {
-      FUN_00184518(temp_v3 + 0x8d8,0x18);
+      pairSetSecondResetFirst(temp_v3 + 0x8d8,0x18);
     }
     FUN_0025c848(temp_v3 + 0x8d8);
     if (*(int *)(temp_v3 + 4) < 3) {
-      temp_v2 = FUN_001654d8(temp_v3 + 0x590);
-      temp_v3 = FUN_001654e4(temp_v3 + 0x590);
+      temp_v2 = vec2GetXInt(temp_v3 + 0x590);
+      temp_v3 = vec2GetYInt(temp_v3 + 0x590);
       temp_v1 = FUN_001834a4(0x1a,0x21d);
       VectorSignedToFloat(*(short *)(temp_v1 + 10) + temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat(*(short *)(temp_v1 + 8) + temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
       FUN_00162790(4,0x57d8ffff,&LAB_003da414);
     }
     else if (*(int *)(temp_v3 + 4) >= 4) {
-      temp_v2 = FUN_001654d8();
-      temp_v1 = FUN_001654e4(temp_v3 + 0x61c);
+      temp_v2 = vec2GetXInt();
+      temp_v1 = vec2GetYInt(temp_v3 + 0x61c);
       if (*(char *)(temp_v3 + 0x20) != '\0') {
         if (*(int *)(temp_v3 + 8) % 0x14 >= 11) {
           temp_v3 = FUN_001834a4(0x1a,0x21f);
@@ -222,7 +222,7 @@ unsigned int FUN_003da030(void)
       *(unsigned char *)(temp_v3 + 0x1270) = 0;
     }
     FUN_0016c560(g_renderCtx);
-    FUN_0016c410(g_renderCtx);
+    renderCtxResetColorScale(g_renderCtx);
   }
   return 0;
 }

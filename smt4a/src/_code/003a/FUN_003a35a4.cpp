@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } void_stack;
 
-extern int DAT_00587f28; /* 0x587f28 */
+extern int g_naviMain; /* 0x587f28 */
 extern unsigned char g_gameState; /* 0x5f15fc */
 
 extern int dataTableGetEntry49(unsigned char);
@@ -36,10 +36,10 @@ void FUN_003a35a4(void)
     return;
   }
   temp_v3 = dataTableGetEntry49(*puVar4);
-  temp_v2 = DAT_00587f28;
+  temp_v2 = g_naviMain;
   temp_v0 = *(short *)(temp_v3 + 0x30);
   temp_v1 = *(short *)(temp_v3 + 0x32);
-  *(int *)(DAT_00587f28 + 0x30) = (int)*(short *)(temp_v3 + 0x2e);
+  *(int *)(g_naviMain + 0x30) = (int)*(short *)(temp_v3 + 0x2e);
   *(int *)(temp_v2 + 0x34) = (int)temp_v0;
   *(int *)(temp_v2 + 0x38) = (int)temp_v1;
   pair20638Set(temp_v2 + 0x68,(int)*(short *)(temp_v3 + 0x32),(int)*(short *)(temp_v3 + 0x34),

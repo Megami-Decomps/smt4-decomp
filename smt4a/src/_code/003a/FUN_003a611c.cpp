@@ -6,7 +6,7 @@ extern "C" {
 
 int sysPlaySe(int);
 int FUN_00275bc8(void);
-int FUN_00275f44(int, int);
+int scrScriptProcessStartEntry(int, int);
 int cecProcessCall4(void);
 
 typedef struct fn_003a611c_arg0 fn_003a611c_arg0;
@@ -29,7 +29,7 @@ struct fn_003a611c_arg0 {
 /* Supplied declaration required: sysPlaySe. */
 extern int FUN_00224880(int);
 /* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: cecProcessCall4. */
 
 
@@ -60,26 +60,26 @@ unsigned int FUN_003a611c(fn_003a611c_arg0 *param_1)
           if (temp_v0 != 5) {
             if (temp_v0 != 6) {
               if (temp_v0 != 3) {
-                FUN_00275f44(temp_v1,0x1c);
+                scrScriptProcessStartEntry(temp_v1,0x1c);
               }
               else {
-                FUN_00275f44(temp_v1,0x1b);
+                scrScriptProcessStartEntry(temp_v1,0x1b);
               }
             }
             else {
-              FUN_00275f44(temp_v1,0x25);
+              scrScriptProcessStartEntry(temp_v1,0x25);
             }
           }
           else {
-            FUN_00275f44(temp_v1,0x1d);
+            scrScriptProcessStartEntry(temp_v1,0x1d);
           }
         }
         else {
-          FUN_00275f44(temp_v1,0x1a);
+          scrScriptProcessStartEntry(temp_v1,0x1a);
         }
       }
       else {
-        FUN_00275f44(temp_v1,0x19);
+        scrScriptProcessStartEntry(temp_v1,0x19);
       }
       sysPlaySe(0x3e);
       if ((param_1->field_0x3e0 == 1 || param_1->field_0x3e0 == 2) && (param_1->field_0x7d5 == 0)) {

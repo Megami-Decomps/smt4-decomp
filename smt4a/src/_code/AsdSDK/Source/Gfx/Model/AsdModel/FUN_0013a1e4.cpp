@@ -28,7 +28,7 @@ typedef struct {
     unsigned short sp38; /* 0x38: local_38 */
 } param_1_stack;
 
-extern unsigned int DAT_005b3cb8; /* 0x5b3cb8 */
+extern unsigned int g_asdModelSlotArray3; /* 0x5b3cb8 */
 extern unsigned int DAT_005b3cbc; /* 0x5b3cbc */
 extern unsigned int DAT_00636e08; /* 0x636e08 */
 extern unsigned int DAT_00636e10; /* 0x636e10 */
@@ -88,7 +88,7 @@ void FUN_0013a1e4(fn_0013a1e4_arg0 *param_1)
   temp_v8 = 0x702;
   temp_v0 = asdMemoryGetDefaultAllocator();
   FUN_00148880(temp_v0,temp_v4);
-  DAT_005b3cb8 = temp_v0;
+  g_asdModelSlotArray3 = temp_v0;
   temp_v0 = asdMemoryGetDefaultAllocator();
   FUN_00148880(temp_v0,temp_v4);
   DAT_00636e30 = 0x100;

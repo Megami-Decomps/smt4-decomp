@@ -28,7 +28,7 @@ typedef struct Owner {
     /* 0x30 */ Resources resources;
 } Owner;
 
-int FUN_002570a8(u32 id);
+int geometryDestroy(u32 id);
 int asdMemFree(void *block);
 
 /* Releases every entry of the owner's entry block (count from its info) and frees the block. */
@@ -41,7 +41,7 @@ void FUN_00327ed4(Owner *owner)
     u32 i;
 
     for (i = 0; i < count; i++) {
-        FUN_002570a8(entry->id);
+        geometryDestroy(entry->id);
         entry++;
     }
     asdMemFree(block);

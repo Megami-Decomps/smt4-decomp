@@ -24,8 +24,8 @@ extern int FUN_0023360c(int);
 /* Supplied declaration required: FUN_00233fcc. */
 /* Supplied declaration required: FUN_002340e4. */
 /* Supplied declaration required: FUN_00234124. */
-extern int FUN_0027ea14(unsigned int *);
-extern int FUN_002a1520(unsigned int *);
+extern int strIsEmpty(unsigned int *);
+extern int byteIsAtLeast100(unsigned int *);
 
 
 /* WARNING: Type propagation algorithm not settling */
@@ -109,12 +109,12 @@ void FUN_003928b4(int param_1)
     uStack_50 = uStack_3c;
     uStack_4c = uStack_38;
     uStack_48 = uStack_34;
-    temp_v2 = FUN_0027ea14(&temp_v3);
+    temp_v2 = strIsEmpty(&temp_v3);
     if (temp_v2 != 0) {
       *(unsigned int *)(param_1 + 8) = 2;
       return;
     }
-    temp_v2 = FUN_002a1520(&temp_v3);
+    temp_v2 = byteIsAtLeast100(&temp_v3);
   }
   else {
     (**(romwright_code **)(**(int **)(param_1 + 0x208) + 0xc))(&temp_v4);
@@ -123,7 +123,7 @@ void FUN_003928b4(int param_1)
     uStack_50 = uStack_3c;
     uStack_4c = uStack_38;
     uStack_48 = uStack_34;
-    temp_v2 = FUN_0027ea14(&temp_v3);
+    temp_v2 = strIsEmpty(&temp_v3);
     if (temp_v2 != 0) {
       piVar4 = *(int **)(param_1 + 0x208);
       *(unsigned int *)(param_1 + 4) = 10;
@@ -135,7 +135,7 @@ void FUN_003928b4(int param_1)
       *(unsigned int *)(param_1 + 0x208) = 0;
       return;
     }
-    temp_v2 = FUN_002a1520(&temp_v3);
+    temp_v2 = byteIsAtLeast100(&temp_v3);
   }
   if (temp_v2 == 0) {
     return;

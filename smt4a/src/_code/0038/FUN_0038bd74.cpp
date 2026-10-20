@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0019cac4(void);
-int FUN_001aba54(void);
+int dataTable00FindById(void);
+int dataTable04FindById(void);
 int scrSetResult(int);
 
 extern unsigned int DAT_00570288; /* 0x570288 */
@@ -16,8 +16,8 @@ extern unsigned int DAT_005702b0; /* 0x5702b0 */
 extern unsigned int DAT_005702b4; /* 0x5702b4 */
 
 extern int btlGetMainState(void);
-/* Supplied declaration required: FUN_0019cac4. */
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: dataTable00FindById. */
+/* Supplied declaration required: dataTable04FindById. */
 extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: scrSetResult. */
 
@@ -48,7 +48,7 @@ unsigned int FUN_0038bd74(void)
         temp_v1 = 0;
         do {
           temp_v2 = (unsigned int)*(unsigned short *)(puVar5[0xfe] + temp_v1 * 2 + 0x34);
-          FUN_001aba54();
+          dataTable04FindById();
           if ((temp_v2 != 0) && (*(char *)(temp_v2 + 0x23) == '\x03')) {
             scrSetResult(1);
             return 1;
@@ -60,7 +60,7 @@ unsigned int FUN_0038bd74(void)
         temp_v1 = 0;
         do {
           temp_v2 = (unsigned int)*(unsigned short *)(puVar5[0xff] + temp_v1 * 2 + 0x34);
-          FUN_001aba54();
+          dataTable04FindById();
           if ((temp_v2 != 0) && (*(char *)(temp_v2 + 0x23) == '\x03')) {
             scrSetResult(1);
             return 1;
@@ -70,11 +70,11 @@ unsigned int FUN_0038bd74(void)
       }
       if (puVar5[0x101] != 0) {
         temp_v2 = (unsigned int)*(unsigned short *)((int)puVar5 + 0x166);
-        FUN_0019cac4();
+        dataTable00FindById();
         temp_v1 = 0;
         do {
           temp_v3 = (unsigned int)*(unsigned short *)(temp_v2 + temp_v1 * 2 + 0x50);
-          FUN_001aba54();
+          dataTable04FindById();
           if ((temp_v3 != 0) && (*(char *)(temp_v3 + 0x23) == '\x03')) {
             scrSetResult(1);
             return 1;

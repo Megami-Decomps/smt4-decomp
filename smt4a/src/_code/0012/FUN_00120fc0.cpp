@@ -7,8 +7,8 @@ extern "C" {
 int FUN_00106c88(int);
 int FUN_002e6e34(unsigned char [12], int);
 int FUN_002e6e5c(unsigned char [12]);
-int FUN_002e9318(unsigned char [8]);
-int FUN_002e9598(int, unsigned int);
+int onlineStringDestroy(unsigned char [8]);
+int onlineStringAssign(int, unsigned int);
 
 extern unsigned char LAB_0012104c; /* 0x12104c */
 
@@ -16,8 +16,8 @@ extern unsigned char LAB_0012104c; /* 0x12104c */
 extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-/* Supplied declaration required: FUN_002e9318. */
-/* Supplied declaration required: FUN_002e9598. */
+/* Supplied declaration required: onlineStringDestroy. */
+/* Supplied declaration required: onlineStringAssign. */
 extern unsigned int FUN_002ea100(unsigned char *, unsigned char *);
 extern int FUN_002eb5f4(void);
 
@@ -43,8 +43,8 @@ void FUN_00120fc0(int param_1)
       temp_v0 = FUN_002eb5f4();
       temp_v0 = *(int *)(temp_v0 + 0xd0);
       temp_v1 = FUN_002ea100(temp_v3,&LAB_0012104c);
-      FUN_002e9598(temp_v0 + 0x110,temp_v1);
-      FUN_002e9318(temp_v3);
+      onlineStringAssign(temp_v0 + 0x110,temp_v1);
+      onlineStringDestroy(temp_v3);
       temp_v0 = FUN_002eb5f4();
       *(unsigned short *)(*(int *)(temp_v0 + 0xd0) + 0x118) = 0;
     }

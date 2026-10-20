@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern StateHolder518 *DAT_00588fe8;
+extern StateHolder518 *g_statusDown;
 
 void FUN_0038b548(u8 value)
 {
-    if (DAT_00588fe8 != NULL) {
-        DAT_00588fe8->unk24AA = value;
+    if (g_statusDown != NULL) {
+        g_statusDown->unk24AA = value;
     }
 }
 

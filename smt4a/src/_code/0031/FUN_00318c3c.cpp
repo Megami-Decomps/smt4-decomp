@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_001641c4(void);
+int ifTouchRegionRemove(void);
 int FUN_00184310(void);
 int asdMemFree(...);
-int FUN_0019a7f4(int, int, unsigned int, unsigned int, unsigned int, unsigned int);
+int asdTMTexTableReleaseNode(int, int, unsigned int, unsigned int, unsigned int, unsigned int);
 int FUN_002cc220(void);
 int asdTMTexTableFreeEntry(int);
 int FUN_00341f4c(void);
-int FUN_0037b450(void);
+int campButtonHelpRelease(void);
 int FUN_0038b3f8(int, int);
 int FUN_003a7a88(int, int);
 
@@ -24,15 +24,15 @@ extern signed char DAT_0057f0c5; /* 0x57f0c5 */
 extern unsigned int DAT_0057f0cc; /* 0x57f0cc */
 extern unsigned int DAT_0057f0d0; /* 0x57f0d0 */
 
-/* Supplied declaration required: FUN_001641c4. */
+/* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: FUN_00184310. */
 extern int FUN_00187168(void);
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_0019a7f4. */
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
 /* Supplied declaration required: FUN_002cc220. */
 /* Supplied declaration required: asdTMTexTableFreeEntry. */
 /* Supplied declaration required: FUN_00341f4c. */
-/* Supplied declaration required: FUN_0037b450. */
+/* Supplied declaration required: campButtonHelpRelease. */
 /* Supplied declaration required: FUN_0038b3f8. */
 /* Supplied declaration required: FUN_003a7a88. */
 extern int FUN_003e4d68(unsigned int);
@@ -84,18 +84,18 @@ void FUN_00318c3c(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   temp_v2 = 0;
   if (temp_v2 < *(short *)(param_1 + 0x480c)) {
     do {
-      FUN_001641c4();
+      ifTouchRegionRemove();
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < *(short *)(param_1 + 0x480c));
   }
   *(unsigned short *)(param_1 + 0x480c) = 0;
-  FUN_0037b450();
+  campButtonHelpRelease();
   DAT_0057f0c5 = DAT_0057f0c5 - '\x01';
   if (DAT_0057f0c5 < '\x01') {
     FUN_00341f4c();
     asdMemFree(DAT_0057f0cc);
     asdMemFree(DAT_0057f0d0);
-    FUN_0019a7f4(10,0,param_3,param_4,unaff_r4,in_lr);
+    asdTMTexTableReleaseNode(10,0,param_3,param_4,unaff_r4,in_lr);
     asdTMTexTableFreeEntry(10);
     DAT_0057f0c5 = '\0';
   }

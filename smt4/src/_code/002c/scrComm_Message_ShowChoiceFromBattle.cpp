@@ -13,10 +13,10 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-extern unsigned char DAT_0043e188; /* 0x43e188 */
+extern unsigned char g_messageMain; /* 0x43e188 */
 
 /* Supplied declaration required: FUN_002866b4. */
-extern unsigned int FUN_002893d8(void);
+extern unsigned int scrGetCommandFrame(void);
 extern int btlGetMainState(void);
 extern unsigned int scrGetArg(unsigned int);
 
@@ -33,9 +33,9 @@ void scrComm_Message_ShowChoiceFromBattle(void)
   temp_v0 = btlGetMainState();
   temp_v1 = *(unsigned int *)(temp_v0 + 0x2234);
   temp_v2 = scrGetArg(0);
-  temp_v3 = FUN_002893d8();
-  if ((*(int *)((unsigned char *)&DAT_0043e188 + 0x4)) != 0) {
-    *(unsigned char *)((*(int *)((unsigned char *)&DAT_0043e188 + 0x4)) + 0xa11) = 0x14;
+  temp_v3 = scrGetCommandFrame();
+  if ((*(int *)((unsigned char *)&g_messageMain + 0x4)) != 0) {
+    *(unsigned char *)((*(int *)((unsigned char *)&g_messageMain + 0x4)) + 0xa11) = 0x14;
   }
   FUN_002866b4(temp_v1,temp_v2,temp_v3,0xb,0,0);
   return;

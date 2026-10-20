@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_002e7232(void *buffer);
+void sharedRefRelease(void *buffer);
 
 typedef struct BufferHolder {
     /* 0x00 */ u8 unk00[0x78];
@@ -13,7 +13,7 @@ typedef struct BufferHolder {
 void FUN_0010d0b8(BufferHolder *object)
 {
     if (object->buffer != NULL) {
-        FUN_002e7232(object->buffer);
+        sharedRefRelease(object->buffer);
     }
     object->buffer = NULL;
 }

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00232b68(unsigned int, int, int, unsigned int *, unsigned int *);
-int FUN_002b4670(void);
+int dataTable08Sub1GetRecord(void);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -13,7 +13,7 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_00232b68. */
-/* Supplied declaration required: FUN_002b4670. */
+/* Supplied declaration required: dataTable08Sub1GetRecord. */
 
 
 void FUN_0028caf8(unsigned int param_1,int param_2,unsigned int *param_3,unsigned int *param_4)
@@ -22,7 +22,7 @@ void FUN_0028caf8(unsigned int param_1,int param_2,unsigned int *param_3,unsigne
 /* irregular: 2 native warning(s); review required */
   *param_3 = 0;
   *param_4 = 0;
-  FUN_002b4670();
+  dataTable08Sub1GetRecord();
   if (param_2 != 0) {
     FUN_00232b68(param_1,param_2,1,param_3,param_4);
   }

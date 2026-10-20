@@ -16,9 +16,9 @@ typedef struct {
 } param_2_stack;
 
 extern unsigned char g_btlAction; /* 0x571138 */
-extern int DAT_00571508; /* 0x571508 */
+extern int g_btlCamera; /* 0x571508 */
 extern unsigned int g_btlEvent; /* 0x573898 */
-extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
+extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
 /* Supplied declaration required: FUN_004ab734. */
 extern int isEntryUsable(unsigned int);
@@ -46,7 +46,7 @@ unsigned int FUN_004e7418(int *param_1,int param_2)
       }
       else {
         *(unsigned int *)(temp_v0 + 0xa8) = 0;
-        FUN_004ab734(DAT_0057a9c8);
+        FUN_004ab734(g_btlUiBlock);
       }
     }
     if ((*(unsigned int *)(*(int *)(param_2 + 0x24) + 0x6c) & 0xff) != 0) {
@@ -54,7 +54,7 @@ unsigned int FUN_004e7418(int *param_1,int param_2)
     }
     FUN_004fbd98(0x1e,param_2,*(unsigned int *)(param_2 + 0x20),1);
     FUN_004e0114(param_1,param_2,(int)*(short *)(*(int *)(param_2 + 0x24) + 0x6a),0,0x1e,0x1e);
-    *(unsigned int *)(DAT_00571508 + 0x64c) = *(unsigned int *)(DAT_00571508 + 0x64c) & 0xfdffffff;
+    *(unsigned int *)(g_btlCamera + 0x64c) = *(unsigned int *)(g_btlCamera + 0x64c) & 0xfdffffff;
     *(unsigned char *)((*(int *)((unsigned char *)&g_btlAction + 0x4)) + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x1d;
     temp_v1 = 1;
   }

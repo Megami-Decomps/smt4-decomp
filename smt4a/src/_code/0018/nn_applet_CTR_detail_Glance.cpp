@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0018b868(void);
-int FUN_0018b964(void);
+int nn_applet_CTR_detail_OpenSession(void);
+int nn_applet_CTR_detail_CloseSession(void);
 int software_interrupt(int);
 
 /* stack frame of param_6: 2 slot(s), 8 byte(s) */
@@ -16,8 +16,8 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 extern unsigned int FUN_0018b70c(void);
-/* Supplied declaration required: FUN_0018b868. */
-/* Supplied declaration required: FUN_0018b964. */
+/* Supplied declaration required: nn_applet_CTR_detail_OpenSession. */
+/* Supplied declaration required: nn_applet_CTR_detail_CloseSession. */
 extern unsigned int FUN_001a35e0(unsigned char *, unsigned int, unsigned int *, unsigned char *, unsigned int, int *, int *);
 
 
@@ -35,7 +35,7 @@ unsigned int nn_applet_CTR_detail_Glance
   unsigned char temp_v4 [4];
   int iStack_24;
   
-  FUN_0018b868();
+  nn_applet_CTR_detail_OpenSession();
   if (param_1 == (unsigned char *)0x0) {
     param_1 = temp_v3;
   }
@@ -58,7 +58,7 @@ unsigned int nn_applet_CTR_detail_Glance
   if (temp_v2 != 0) {
     software_interrupt(0x23);
   }
-  FUN_0018b964();
+  nn_applet_CTR_detail_CloseSession();
   return temp_v1;
 }
 

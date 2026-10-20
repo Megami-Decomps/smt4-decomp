@@ -8,7 +8,7 @@ int FUN_003f9ac4(unsigned int, int, int);
 int FUN_003f9c3c(unsigned int, int, int);
 int FUN_003fe86c(unsigned int, int, int);
 
-extern int DAT_0057f290; /* 0x57f290 */
+extern int g_unite; /* 0x57f290 */
 
 /* Supplied declaration required: FUN_003f9ac4. */
 /* Supplied declaration required: FUN_003f9c3c. */
@@ -21,9 +21,9 @@ void FUN_00287598(void)
 /* irregular: 3 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = DAT_0057f290;
-  if (DAT_0057f290 != 0) {
-    FUN_003fe86c(*(unsigned int *)(*(int *)(DAT_0057f290 + 0x9208) + 4),0,2);
+  temp_v0 = g_unite;
+  if (g_unite != 0) {
+    FUN_003fe86c(*(unsigned int *)(*(int *)(g_unite + 0x9208) + 4),0,2);
     FUN_003fe86c(*(unsigned int *)(*(int *)(temp_v0 + 0x920c) + 4),0,2);
     FUN_003f9c3c(*(unsigned int *)(temp_v0 + 0x9210),temp_v0 + 0x9214,0);
     FUN_003f9ac4(*(unsigned int *)(temp_v0 + 0x9210),temp_v0 + 0x9214,0);

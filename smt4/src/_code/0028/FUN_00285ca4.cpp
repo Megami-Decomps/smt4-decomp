@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0028975c(...);
-int FUN_002c09d0(...);
+int gameFlagSetValue(...);
+int gameFlagIsSet(...);
 int asdMemFree(int);
 int FUN_0033f6d8(void);
 int FUN_0033f764(int);
@@ -28,8 +28,8 @@ extern unsigned int DAT_0043e2b0; /* 0x43e2b0 */
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: FUN_0028975c. */
-/* Supplied declaration required: FUN_002c09d0. */
+/* Supplied declaration required: gameFlagSetValue. */
+/* Supplied declaration required: gameFlagIsSet. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_0033f6d8. */
 /* Supplied declaration required: FUN_0033f764. */
@@ -61,9 +61,9 @@ void FUN_00285ca4(int param_1)
   puVar7 = (unsigned char *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x24bb1);
   temp_v0 = *puVar7;
   temp_v6 = *(unsigned int *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x8c);
-  temp_v10 = FUN_002c09d0(0x556);
-  temp_v11 = FUN_002c09d0(0x557);
-  temp_v3 = FUN_002c09d0(0x421);
+  temp_v10 = gameFlagIsSet(0x556);
+  temp_v11 = gameFlagIsSet(0x557);
+  temp_v3 = gameFlagIsSet(0x421);
   temp_v7 = romwright_piece_4_4(*(unsigned int *)(temp_v1 + 0x1f4dc),temp_v6);
   temp_v12 = temp_v3;
   FUN_0033f6d8();
@@ -75,7 +75,7 @@ void FUN_00285ca4(int param_1)
   temp_v8[3] = 0x2a5;
   temp_v9 = temp_v3;
   do {
-    temp_v2 = FUN_002c09d0(temp_v8[temp_v4]);
+    temp_v2 = gameFlagIsSet(temp_v8[temp_v4]);
     acStack_40[temp_v4] = temp_v2;
     temp_v4 = temp_v4 + 1;
   } while (temp_v4 < 5);
@@ -87,7 +87,7 @@ void FUN_00285ca4(int param_1)
       temp_v4 = 0;
       do {
         if (acStack_40[temp_v4] != '\0') {
-          FUN_0028975c(temp_v8[temp_v4],1);
+          gameFlagSetValue(temp_v8[temp_v4],1);
         }
         temp_v4 = temp_v4 + 1;
       } while (temp_v4 < 5);
@@ -97,13 +97,13 @@ void FUN_00285ca4(int param_1)
     *(int *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x8c) = (int)temp_v7;
     *puVar7 = temp_v0;
     if (temp_v10 != 0) {
-      FUN_0028975c(0x556,1);
+      gameFlagSetValue(0x556,1);
     }
     if (temp_v11 != 0) {
-      FUN_0028975c(0x557,1);
+      gameFlagSetValue(0x557,1);
     }
     if (temp_v12 != 0) {
-      FUN_0028975c(0x421,1);
+      gameFlagSetValue(0x421,1);
     }
   }
   asdMemFree(temp_v9);

@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } void_stack;
 
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern unsigned char DAT_005806a0; /* 0x5806a0 */
 
 /* Supplied declaration required: FUN_00303710. */
@@ -76,7 +76,7 @@ void FUN_002442ac(void)
   FUN_00352a14();
   puVar1 = (*(unsigned int * *)((unsigned char *)&DAT_005806a0 + 0x4));
   (*(unsigned int * *)((unsigned char *)&DAT_005806a0 + 0x4))[0xaf] = 0;
-  puVar1[0xc5] = DAT_0056fcc0;
+  puVar1[0xc5] = g_handleRegistry;
   FUN_00303710();
   return;
 }

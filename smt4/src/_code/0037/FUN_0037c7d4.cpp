@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_002a3188(int, int *);
-int FUN_002c3424(...);
+int slistPushFront(int, int *);
+int nn_os_LightEvent_Wait(...);
 int nw_ut_internal_LinkListImpl_erase_2B743C(int, int *);
 
 typedef int romwright_code(...);
-/* Supplied declaration required: FUN_002a3188. */
-/* Supplied declaration required: FUN_002c3424. */
+/* Supplied declaration required: slistPushFront. */
+/* Supplied declaration required: nn_os_LightEvent_Wait. */
 /* Supplied declaration required: nw_ut_internal_LinkListImpl_erase_2B743C. */
 
 
@@ -22,17 +22,17 @@ void FUN_0037c7d4(int param_1)
   int *piVar2;
   int *piVar3;
   
-  FUN_002c3424(param_1 + 0x6c);
+  nn_os_LightEvent_Wait(param_1 + 0x6c);
   piVar1 = *(int **)(param_1 + 0x84);
   if (*(int **)(param_1 + 0x84) != (int *)(param_1 + 0x84)) {
     do {
       piVar3 = piVar1 + -0x12;
       piVar2 = (int *)*piVar1;
-      FUN_002c3424(piVar1 + -0xf);
+      nn_os_LightEvent_Wait(piVar1 + -0xf);
       nw_ut_internal_LinkListImpl_erase_2B743C(param_1 + 0x80,piVar1);
       if (piVar3 != (int *)0x0) {
         (**(romwright_code **)*piVar3)(piVar3);
-        FUN_002a3188(param_1 + 0x8c,piVar3);
+        slistPushFront(param_1 + 0x8c,piVar3);
       }
       piVar1 = piVar2;
     } while (piVar2 != (int *)(param_1 + 0x84));

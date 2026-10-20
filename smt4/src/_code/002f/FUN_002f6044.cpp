@@ -6,7 +6,7 @@ extern "C" {
 
 int scrSetResult(...);
 
-extern int FUN_002471d8(void);
+extern int padGetStickHorizontalDirection(void);
 /* Supplied declaration required: scrSetResult. */
 
 
@@ -17,7 +17,7 @@ unsigned int FUN_002f6044(void)
   int temp_v0;
   unsigned int temp_v1;
   
-  temp_v0 = FUN_002471d8();
+  temp_v0 = padGetStickHorizontalDirection();
   if (temp_v0 == 4) {
     temp_v1 = 1;
   }

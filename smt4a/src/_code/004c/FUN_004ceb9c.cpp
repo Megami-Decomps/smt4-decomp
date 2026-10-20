@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001517b4(...);
 int FUN_001641b4(...);
 int sysPlaySe(...);
-int FUN_00275f44(...);
+int scrScriptProcessStartEntry(...);
 int FUN_0034913c(...);
 int panelSetTarget(...);
 int FUN_0037c8e4(...);
@@ -44,11 +44,11 @@ extern unsigned char LAB_004ced40; /* 0x4ced40 */
 extern int FUN_00224880(unsigned int);
 extern int FUN_00239414(void);
 extern int FUN_0026272c(void);
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002a4b60(void);
 /* Supplied declaration required: FUN_0034913c. */
 extern int FUN_0034919c(void);
-extern int FUN_00357bc8(unsigned int, unsigned char *);
+extern int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: panelSetTarget. */
 /* Supplied declaration required: FUN_0037c8e4. */
 /* Supplied declaration required: FUN_00388758. */
@@ -76,9 +76,9 @@ void FUN_004ceb9c(fn_004ceb9c_arg0 *param_1)
     FUN_001641b4(0x100020f);
     FUN_0034913c();
     param_1->field_0x598 = 0xb;
-    temp_v0 = FUN_00357bc8(param_1->field_0x10,&LAB_004ced30);
+    temp_v0 = tableGroupFindEntryIndex(param_1->field_0x10,&LAB_004ced30);
     if (-1 < temp_v0) {
-      FUN_00275f44(param_1->field_0x18);
+      scrScriptProcessStartEntry(param_1->field_0x18);
     }
     temp_v0 = FUN_00224880(param_1->field_0x18);
     if (temp_v0 != 2) {
@@ -90,9 +90,9 @@ void FUN_004ceb9c(fn_004ceb9c_arg0 *param_1)
     FUN_0034913c();
     temp_v0 = FUN_002a4b60();
     if (temp_v0 == 0) {
-      temp_v0 = FUN_00357bc8(param_1->field_0x10,&LAB_004ced40);
+      temp_v0 = tableGroupFindEntryIndex(param_1->field_0x10,&LAB_004ced40);
       if (-1 < temp_v0) {
-        FUN_00275f44(param_1->field_0x18);
+        scrScriptProcessStartEntry(param_1->field_0x18);
       }
       temp_v0 = FUN_0034919c();
       if (temp_v0 == 0) {
@@ -104,9 +104,9 @@ void FUN_004ceb9c(fn_004ceb9c_arg0 *param_1)
       FUN_004cdbd4(param_1);
       return;
     }
-    temp_v0 = FUN_00357bc8(param_1->field_0x10,&LAB_004ced30);
+    temp_v0 = tableGroupFindEntryIndex(param_1->field_0x10,&LAB_004ced30);
     if (-1 < temp_v0) {
-      FUN_00275f44(param_1->field_0x18);
+      scrScriptProcessStartEntry(param_1->field_0x18);
     }
     temp_v0 = FUN_0034919c();
     if (temp_v0 != 0) {

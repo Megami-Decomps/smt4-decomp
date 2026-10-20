@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0027eb88(unsigned int *, unsigned int);
+int memFill8(unsigned int *, unsigned int);
 int FUN_002ad8a8(unsigned int *, unsigned int *);
 int FUN_002dc464(void);
 int FUN_002e439c(unsigned int *);
@@ -38,10 +38,10 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_2_stack;
 
-extern unsigned char DAT_00439c88; /* 0x439c88 */
+extern unsigned char g_btlUi; /* 0x439c88 */
 
 extern unsigned short FUN_0022c930(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0027eb88. */
+/* Supplied declaration required: memFill8. */
 /* Supplied declaration required: FUN_002ad8a8. */
 /* Supplied declaration required: FUN_002dc464. */
 /* Supplied declaration required: FUN_002e439c. */
@@ -55,9 +55,9 @@ void FUN_003ae720(fn_003ae720_arg0 *param_1,int param_2)
   unsigned short temp_v0;
   unsigned int *puVar3;
   
-  puVar1 = (*(unsigned int * *)((unsigned char *)&DAT_00439c88 + 0x20));
-  puVar3 = (*(unsigned int * *)((unsigned char *)&DAT_00439c88 + 0x20)) + 0x1fa5;
-  FUN_0027eb88(puVar3,0xffffffff);
+  puVar1 = (*(unsigned int * *)((unsigned char *)&g_btlUi + 0x20));
+  puVar3 = (*(unsigned int * *)((unsigned char *)&g_btlUi + 0x20)) + 0x1fa5;
+  memFill8(puVar3,0xffffffff);
   temp_v0 = FUN_0022c930(*puVar1,0);
   *(unsigned short *)(puVar1 + 0x1fa5) = temp_v0;
   temp_v0 = FUN_0022c930(*puVar1,1);

@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern EventEffectGlobalsA DAT_0057f3b4;
+extern EventEffectGlobalsA g_eventEffect;
 
 bool FUN_0031cb5c(void)
 {
-    return DAT_0057f3b4.unk08 != NULL;
+    return g_eventEffect.unk08 != NULL;
 }
 
 } /* extern "C" */

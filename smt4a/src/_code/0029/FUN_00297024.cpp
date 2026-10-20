@@ -22,7 +22,7 @@ typedef struct {
 extern unsigned char LAB_00297948; /* 0x297948 */
 extern unsigned char LAB_00297958; /* 0x297958 */
 extern unsigned char LAB_00297968; /* 0x297968 */
-extern int DAT_0056fcc0; /* 0x56fcc0 */
+extern int g_handleRegistry; /* 0x56fcc0 */
 extern short DAT_005f1854; /* 0x5f1854 */
 extern float DAT_00610a74; /* 0x610a74 */
 extern float DAT_00610a78; /* 0x610a78 */
@@ -134,7 +134,7 @@ void FUN_00297024(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   temp_v39 = (float)VectorSignedToFloat(param_5,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v40 = (float)VectorSignedToFloat(param_6,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v41 = (float)VectorSignedToFloat(param_7,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v16 = *(unsigned int *)(DAT_0056fcc0 + 4);
+  temp_v16 = *(unsigned int *)(g_handleRegistry + 4);
   temp_v18 = temp_v34;
   temp_v32 = temp_v42;
   temp_v33 = temp_v42;

@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_00163fd4(...);
-int FUN_00164af0(...);
-int FUN_001656a0(...);
+int padButtonRepeat(...);
+int padButtonIsPressed(...);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -16,9 +16,9 @@ typedef struct {
 extern int DAT_0057f0c8; /* 0x57f0c8 */
 
 /* Supplied declaration required: FUN_00163fd4. */
-/* Supplied declaration required: FUN_00164af0. */
+/* Supplied declaration required: padButtonRepeat. */
 extern int FUN_00164e18(char);
-/* Supplied declaration required: FUN_001656a0. */
+/* Supplied declaration required: padButtonIsPressed. */
 extern int FUN_00166fa0(char);
 
 
@@ -63,14 +63,14 @@ int FUN_001517b4(int param_1,int param_2)
       }
     }
     else {
-      temp_v1 = FUN_001656a0(param_1);
+      temp_v1 = padButtonIsPressed(param_1);
       if (temp_v1 != 0) {
         return temp_v1;
       }
     }
   }
   else {
-    temp_v1 = FUN_00164af0(param_1);
+    temp_v1 = padButtonRepeat(param_1);
     if (temp_v1 != 0) {
       return temp_v1;
     }
@@ -97,18 +97,18 @@ joined_r0x001518b4:
           temp_v1 = FUN_00163fd4(temp_v2);
         }
         else {
-          temp_v1 = FUN_001656a0(temp_v2);
+          temp_v1 = padButtonIsPressed(temp_v2);
         }
       }
       else {
-        temp_v1 = FUN_00164af0(temp_v2);
+        temp_v1 = padButtonRepeat(temp_v2);
       }
     }
   }
   else {
     temp_v2 = 0xe;
     if (param_2 != 0) goto joined_r0x001518b4;
-    temp_v1 = FUN_00164af0(temp_v2);
+    temp_v1 = padButtonRepeat(temp_v2);
   }
   if (temp_v1 != 0) {
     return temp_v1;

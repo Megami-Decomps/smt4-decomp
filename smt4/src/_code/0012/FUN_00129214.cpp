@@ -11,7 +11,7 @@ int FUN_0013ab10(unsigned char *);
 int FUN_002b5820(int [2], int);
 int FUN_002b5954(void);
 int FUN_002bb470(void);
-int FUN_002c38fc(int *);
+int nn_os_CriticalSection_Initialize(int *);
 int FUN_002c526c(void);
 int software_interrupt(int);
 
@@ -21,8 +21,8 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_2_stack;
 
-extern unsigned char DAT_004e8568; /* 0x4e8568 */
-extern unsigned char DAT_004ead10; /* 0x4ead10 */
+extern unsigned char g_nnSndVoiceManager; /* 0x4e8568 */
+extern unsigned char g_nnSndMasterManagerImpl; /* 0x4ead10 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 #ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
@@ -37,9 +37,9 @@ extern int FUN_0013a294(int, unsigned int);
 /* Supplied declaration required: FUN_0013ab10. */
 /* Supplied declaration required: FUN_002b5820. */
 /* Supplied declaration required: FUN_002b5954. */
-extern int FUN_002bb274(void);
+extern int nn_snd_CTR_Dspsnd_IsInitialized(void);
 /* Supplied declaration required: FUN_002bb470. */
-/* Supplied declaration required: FUN_002c38fc. */
+/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
 /* Supplied declaration required: FUN_002c526c. */
 extern void nn_snd_CTR_Dspsnd_InitializeVariables(unsigned int, unsigned char);
 
@@ -54,7 +54,7 @@ int FUN_00129214(int *param_1,int param_2)
   int temp_v2 [3];
   
   piVar2 = temp_v1;
-  temp_v0 = FUN_002bb274();
+  temp_v0 = nn_snd_CTR_Dspsnd_IsInitialized();
   if (temp_v0 == 0) {
     return -0x375f57ff;
   }
@@ -84,11 +84,11 @@ int FUN_00129214(int *param_1,int param_2)
     }
     param_1[1] = temp_v2[0];
     FUN_0013a23c(0x2000);
-    FUN_002c38fc(param_1 + 2);
+    nn_os_CriticalSection_Initialize(param_1 + 2);
     nn_snd_CTR_Dspsnd_InitializeVariables((unsigned int)param_1,romwright_subpiece_4_1_0(param_2,0));
     if (param_2 != 0) {
-      FUN_0013a668(&DAT_004e8568);
-      FUN_0013ab10(&DAT_004ead10);
+      FUN_0013a668(&g_nnSndVoiceManager);
+      FUN_0013ab10(&g_nnSndMasterManagerImpl);
       FUN_002bb470();
       FUN_002b5954();
       FUN_0013a864();

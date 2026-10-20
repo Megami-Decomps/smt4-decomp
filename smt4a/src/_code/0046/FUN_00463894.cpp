@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0018c87c(int);
-int FUN_001a08d8(int *);
+int nn_os_LightEvent_Signal(int *);
 int FUN_001b4a58(unsigned int, int *, int, int, int, int, unsigned int, unsigned int);
 int hasExclusiveAccess(int *);
 
@@ -18,7 +18,7 @@ extern unsigned int DAT_005c0ad8; /* 0x5c0ad8 */
 
 /* Unsupported intrinsic, declaration required: hasExclusiveAccess (CALLOTHER). */
 /* Supplied declaration required: FUN_0018c87c. */
-/* Supplied declaration required: FUN_001a08d8. */
+/* Supplied declaration required: nn_os_LightEvent_Signal. */
 extern int FUN_001b1998(void);
 /* Supplied declaration required: FUN_001b4a58. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
@@ -50,7 +50,7 @@ void FUN_00463894(int param_1)
       if (piVar3[5] == param_1) {
         FUN_0018c87c(temp_v2);
         *(unsigned char *)(piVar3 + 4) = 4;
-        FUN_001a08d8(piVar3 + 2);
+        nn_os_LightEvent_Signal(piVar3 + 2);
       }
     }
     temp_v3 = temp_v3 + 1;

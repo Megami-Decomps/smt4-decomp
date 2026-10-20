@@ -22,8 +22,8 @@ extern int FUN_00293edc(void);
 /* Supplied declaration required: FUN_00297684. */
 /* Supplied declaration required: FUN_0029ee6c. */
 /* Supplied declaration required: lmapSceneGetScript. */
-extern unsigned int FUN_002bed98(unsigned int *);
-extern unsigned int FUN_002beda4(unsigned int *);
+extern unsigned int vec2GetYInt(unsigned int *);
+extern unsigned int vec2GetXInt(unsigned int *);
 /* Supplied declaration required: FUN_002bf818. */
 
 
@@ -57,8 +57,8 @@ void FUN_003a0c5c(unsigned int *param_1)
   else {
     puVar5 = param_1 + 0x115;
     FUN_002bf818(puVar5);
-    temp_v2 = FUN_002bed98(puVar5);
-    temp_v3 = FUN_002beda4(puVar5);
+    temp_v2 = vec2GetYInt(puVar5);
+    temp_v3 = vec2GetXInt(puVar5);
     FUN_00231240(param_1 + 0xe0,temp_v3,temp_v2);
     if (*(char *)((int)param_1 + 0x4de) == '\0') {
       return;

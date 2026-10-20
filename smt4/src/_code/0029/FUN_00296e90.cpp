@@ -6,7 +6,7 @@ int FUN_002b89e4(StateObj *state, int arg);
 
 void FUN_00296e90(void)
 {
-    StateObj *state = DAT_0043e188.state;
+    StateObj *state = g_messageMain.state;
 
     if (state != NULL && state->state != 0) {
         state->unk035 = 1;

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00263508(...);
 int FUN_00282bfc(...);
-int FUN_0028975c(...);
+int gameFlagSetValue(...);
 int FUN_0029be5c(...);
 int FUN_002a71fc(...);
 int asdMemAlloc(...);
@@ -34,10 +34,10 @@ extern unsigned int *g_tmnl; /* 0x432ce0 */
 /* Supplied declaration required: FUN_00263508. */
 extern int FUN_0026354c(unsigned int);
 /* Supplied declaration required: FUN_00282bfc. */
-/* Supplied declaration required: FUN_0028975c. */
+/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_0029be5c. */
 /* Supplied declaration required: FUN_002a71fc. */
-extern int FUN_002c09d0(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdProcessCreateSimple. */
@@ -64,10 +64,10 @@ void FUN_001db0b8(unsigned int *param_1)
     FUN_00263508(0xc,1);
   }
   temp_v0 = FUN_0026354c(0xb);
-  if ((temp_v0 == 0) && (temp_v0 = FUN_002c09d0(0x277), temp_v0 != 0)) {
+  if ((temp_v0 == 0) && (temp_v0 = gameFlagIsSet(0x277), temp_v0 != 0)) {
     FUN_00263508(0xb,1);
   }
-  FUN_0028975c(0x465,0,1);
+  gameFlagSetValue(0x465,0,1);
   *(unsigned char *)((int)puVar1 + 5) = 1;
   puVar1[4] = 0;
   puVar1[5] = 0;

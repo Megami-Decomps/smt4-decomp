@@ -8,7 +8,7 @@ int FUN_00282f80(unsigned int);
 int FUN_002937d0(int);
 int FUN_0029eb5c(int, int);
 int FUN_0029f848(int, int, int, int, int, int);
-int FUN_002b63ac(void);
+int gameGetPlayerData(void);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -16,14 +16,14 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_1_stack;
 
-extern int DAT_0043da90; /* 0x43da90 */
+extern int g_camp; /* 0x43da90 */
 
 /* Supplied declaration required: FUN_00282f80. */
-extern int FUN_0028e9d4(unsigned int);
+extern int flagValueIsPositive(unsigned int);
 /* Supplied declaration required: FUN_002937d0. */
 /* Supplied declaration required: FUN_0029eb5c. */
 /* Supplied declaration required: FUN_0029f848. */
-/* Supplied declaration required: FUN_002b63ac. */
+/* Supplied declaration required: gameGetPlayerData. */
 
 
 void FUN_00299da0(unsigned int param_1)
@@ -40,62 +40,62 @@ void FUN_00299da0(unsigned int param_1)
   short *psVar8;
   int temp_v6;
   
-  if (*(char *)(DAT_0043da90 + 0x33) == '\0') {
+  if (*(char *)(g_camp + 0x33) == '\0') {
     switch(param_1) {
     case 0x11:
       temp_v3 = 0x3d;
       temp_v4 = 0xb4;
-      psVar8 = (short *)(DAT_0043da90 + 0x1e7c);
-      temp_v6 = DAT_0043da90 + 0x2a4;
-      psVar1 = (short *)FUN_002b63ac();
+      psVar8 = (short *)(g_camp + 0x1e7c);
+      temp_v6 = g_camp + 0x2a4;
+      psVar1 = (short *)gameGetPlayerData();
       temp_v5 = *psVar1;
       break;
     case 0x12:
       temp_v3 = 0xb5;
       temp_v4 = 300;
-      psVar8 = (short *)(DAT_0043da90 + 0x1f6c);
-      temp_v6 = DAT_0043da90 + 0x308;
-      temp_v0 = FUN_002b63ac();
+      psVar8 = (short *)(g_camp + 0x1f6c);
+      temp_v6 = g_camp + 0x308;
+      temp_v0 = gameGetPlayerData();
       temp_v5 = *(short *)(temp_v0 + 2);
       break;
     case 0x13:
       temp_v3 = 0x30d;
-      psVar8 = (short *)(DAT_0043da90 + 0x205c);
+      psVar8 = (short *)(g_camp + 0x205c);
       temp_v4 = 0x33e;
-      temp_v6 = DAT_0043da90 + 0x36c;
-      temp_v0 = FUN_002b63ac();
+      temp_v6 = g_camp + 0x36c;
+      temp_v0 = gameGetPlayerData();
       temp_v5 = *(short *)(temp_v0 + 4);
       break;
     case 0x14:
       temp_v3 = 0x12d;
       temp_v4 = 0x1a4;
-      psVar8 = (short *)(DAT_0043da90 + 0x20c0);
-      temp_v6 = DAT_0043da90 + 0x3d0;
-      temp_v0 = FUN_002b63ac();
+      psVar8 = (short *)(g_camp + 0x20c0);
+      temp_v6 = g_camp + 0x3d0;
+      temp_v0 = gameGetPlayerData();
       temp_v5 = *(short *)(temp_v0 + 6);
       break;
     case 0x15:
       temp_v3 = 0x1a5;
       temp_v4 = 0x21c;
-      psVar8 = (short *)(DAT_0043da90 + 0x21b0);
-      temp_v6 = DAT_0043da90 + 0x434;
-      temp_v0 = FUN_002b63ac();
+      psVar8 = (short *)(g_camp + 0x21b0);
+      temp_v6 = g_camp + 0x434;
+      temp_v0 = gameGetPlayerData();
       temp_v5 = *(short *)(temp_v0 + 8);
       break;
     case 0x16:
       temp_v3 = 0x21d;
       temp_v4 = 0x294;
-      psVar8 = (short *)(DAT_0043da90 + 0x22a0);
-      temp_v6 = DAT_0043da90 + 0x498;
-      temp_v0 = FUN_002b63ac();
+      psVar8 = (short *)(g_camp + 0x22a0);
+      temp_v6 = g_camp + 0x498;
+      temp_v0 = gameGetPlayerData();
       temp_v5 = *(short *)(temp_v0 + 10);
       break;
     case 0x17:
       temp_v3 = 0x295;
       temp_v4 = 0x30c;
-      psVar8 = (short *)(DAT_0043da90 + 0x2390);
-      temp_v6 = DAT_0043da90 + 0x4fc;
-      temp_v0 = FUN_002b63ac();
+      psVar8 = (short *)(g_camp + 0x2390);
+      temp_v6 = g_camp + 0x4fc;
+      temp_v0 = gameGetPlayerData();
       temp_v5 = *(short *)(temp_v0 + 0xc);
       break;
     default:
@@ -105,7 +105,7 @@ void FUN_00299da0(unsigned int param_1)
       temp_v0 = 0;
       if (temp_v3 <= temp_v4) {
         do {
-          temp_v1 = FUN_0028e9d4(temp_v3);
+          temp_v1 = flagValueIsPositive(temp_v3);
           if (temp_v1 != 0) {
             psVar1 = psVar8 + temp_v0;
             temp_v0 = temp_v0 + 1;

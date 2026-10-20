@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00195fc8(void);
+int sysFatalBreak(void);
 int FUN_0019a46c(unsigned char *, unsigned int *, int);
 int FUN_001b57a8(...);
 int FUN_00427a10(unsigned int, unsigned char *);
@@ -24,11 +24,11 @@ extern unsigned char DAT_0061b080; /* 0x61b080 */
 extern unsigned int DAT_0061b0a0; /* 0x61b0a0 */
 extern unsigned char DAT_0061b0a4; /* 0x61b0a4 */
 
-extern unsigned char FUN_00100790(void);
+extern unsigned char libc_toupper(void);
 extern int FUN_0015a410(void);
-extern int FUN_0015a75c(void);
+extern int appletIsExitRequested(void);
 extern unsigned int FUN_0016ccfc(void);
-/* Supplied declaration required: FUN_00195fc8. */
+/* Supplied declaration required: sysFatalBreak. */
 /* Supplied declaration required: FUN_0019a46c. */
 /* Supplied declaration required: FUN_001b57a8. */
 /* Supplied declaration required: FUN_00427a10. */
@@ -82,14 +82,14 @@ void FUN_004293b0(unsigned int param_1,int *param_2,unsigned int *param_3,unsign
           temp_v2 = 2;
         }
         else {
-          FUN_00195fc8();
+          sysFatalBreak();
           temp_v2 = 0;
         }
       }
       DAT_0061b078 = (temp_v2 << 0x1c) | (unsigned int)temp_v0 | ((temp_v5 & 0xfffff) << 8);
       DAT_0061b07c = temp_v4 | 0x40000;
       for (temp_v5 = 0; (temp_v5 < 0x1f && (*(char *)(param_5 + temp_v5) != '\0')); temp_v5 = temp_v5 + 1) {
-        temp_v1 = FUN_00100790();
+        temp_v1 = libc_toupper();
         (&DAT_0061b080)[temp_v5] = temp_v1;
       }
       (&DAT_0061b080)[temp_v5] = 0;
@@ -97,7 +97,7 @@ void FUN_004293b0(unsigned int param_1,int *param_2,unsigned int *param_3,unsign
       FUN_0019a46c(&DAT_0061b0a4,param_4 + 1,0x14);
       temp_v2 = FUN_00427e28(temp_v7,&DAT_0061b000,0);
       if (-1 < temp_v2) {
-        temp_v2 = FUN_0015a75c();
+        temp_v2 = appletIsExitRequested();
         if ((temp_v2 == 0) && (temp_v2 = FUN_0015a410(), temp_v2 == 0)) {
           FUN_00427a10(param_1,&DAT_0061b000);
           return;

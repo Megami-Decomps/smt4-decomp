@@ -17,7 +17,7 @@ extern unsigned int FUN_0010c0d0(void);
 extern unsigned int FUN_0010c79c(void);
 extern int *wordRefMax(int *, int *);
 extern unsigned int *rt_malloc(void);
-extern int FUN_002e760a(unsigned int);
+extern int operatorNew(unsigned int);
 
 
 /* WARNING: Type propagation algorithm not settling */
@@ -53,19 +53,19 @@ unsigned int * FUN_001158c4(unsigned int *param_1)
   }
   param_1[2] = *piVar6 + temp_v3[0] * 4;
   param_1[3] = *piVar6 + temp_v0 * 4;
-  temp_v1 = FUN_002e760a(4);
+  temp_v1 = operatorNew(4);
   temp_v2 = 0;
   if (temp_v1 != 0) {
     temp_v2 = FUN_0010c0d0();
   }
   *(unsigned int *)*piVar6 = temp_v2;
-  temp_v1 = FUN_002e760a(0xa00);
+  temp_v1 = operatorNew(0xa00);
   temp_v2 = 0;
   if (temp_v1 != 0) {
     temp_v2 = FUN_0010c79c();
   }
   *(unsigned int *)(*piVar6 + 4) = temp_v2;
-  temp_v1 = FUN_002e760a(0x38);
+  temp_v1 = operatorNew(0x38);
   temp_v2 = 0;
   if (temp_v1 != 0) {
     temp_v2 = FUN_001068b4();

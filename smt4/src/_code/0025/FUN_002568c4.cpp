@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0022699c(short *, int, int, unsigned int);
 
-extern short *DAT_00434290; /* 0x434290 */
+extern short *g_btlActionReflect; /* 0x434290 */
 
 /* Supplied declaration required: FUN_0022699c. */
 
@@ -19,9 +19,9 @@ void FUN_002568c4(short param_1,unsigned int param_2)
   short *psVar2;
   short *psVar3;
   
-  psVar2 = DAT_00434290;
-  FUN_0022699c(DAT_00434290,(int)param_1,0,param_2);
-  psVar3 = *(short **)(DAT_00434290 + 4);
+  psVar2 = g_btlActionReflect;
+  FUN_0022699c(g_btlActionReflect,(int)param_1,0,param_2);
+  psVar3 = *(short **)(g_btlActionReflect + 4);
   do {
     psVar1 = psVar3;
     if (psVar1 == (short *)0x0) {

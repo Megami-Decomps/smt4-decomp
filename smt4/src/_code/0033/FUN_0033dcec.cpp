@@ -7,11 +7,11 @@ extern "C" {
 int FUN_0017fa3c(...);
 int refIsNullOrZero(...);
 int FUN_002bb5a4(...);
-int FUN_002bd540(...);
+int asdTextureSetImage(...);
 int asdTextureCreate(...);
 int FUN_002be624(...);
 int asdMemFree(...);
-int FUN_002c52f8(...);
+int asdFatalError(...);
 int FUN_002c618c(...);
 int FUN_0033e8a8(...);
 int FUN_0033f22c(...);
@@ -53,12 +53,12 @@ extern int FUN_002ae98c(unsigned int, void *, unsigned int, unsigned int);
 extern int FUN_002b90c8(unsigned char *, unsigned int, unsigned int *);
 /* Supplied declaration required: refIsNullOrZero. */
 /* Supplied declaration required: FUN_002bb5a4. */
-/* Supplied declaration required: FUN_002bd540. */
+/* Supplied declaration required: asdTextureSetImage. */
 /* Supplied declaration required: asdTextureCreate. */
 /* Supplied declaration required: FUN_002be624. */
 extern unsigned int FUN_002c3124(unsigned char *, unsigned int *, unsigned int);
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_002c52f8. */
+/* Supplied declaration required: asdFatalError. */
 extern int FUN_002c58c8(void *, unsigned int);
 /* Supplied declaration required: FUN_002c618c. */
 extern int FUN_002e151c(void *, unsigned int);
@@ -173,7 +173,7 @@ void FUN_0033dcec(fn_0033dcec_arg0 *param_1,unsigned int param_2,int param_3)
         FUN_002bb5a4(puVar4,temp_v5,1);
         if ((temp_v7[0] & 0xfffffffe) != 0) {
           if ((temp_v7[0] & 1) != 0) {
-            FUN_002c52f8();
+            asdFatalError();
           }
           nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(temp_v7[0] & 0xfffffffe);
           temp_v7[0] = 0;
@@ -199,7 +199,7 @@ void FUN_0033dcec(fn_0033dcec_arg0 *param_1,unsigned int param_2,int param_3)
             *(unsigned int *)(temp_v0 + 8) = temp_v3;
             *(unsigned int *)(temp_v0 + 0xc) = temp_v2;
           }
-          FUN_002bd540(temp_v0);
+          asdTextureSetImage(temp_v0);
           asdMemFree(temp_v1);
           param_1->field_0x3d = 1;
           if (temp_v4 < (int)(unsigned int)*(unsigned short *)((int)param_1->field_0x10 + 4)) {
@@ -213,7 +213,7 @@ void FUN_0033dcec(fn_0033dcec_arg0 *param_1,unsigned int param_2,int param_3)
     }
     if ((temp_v7[0] & 0xfffffffe) != 0) {
       if ((temp_v7[0] & 1) != 0) {
-        FUN_002c52f8();
+        asdFatalError();
       }
       nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(temp_v7[0] & 0xfffffffe);
       temp_v7[0] = 0;

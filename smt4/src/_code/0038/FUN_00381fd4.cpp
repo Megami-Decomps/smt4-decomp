@@ -16,7 +16,7 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00297060. */
 /* Supplied declaration required: FUN_002a03d8. */
-extern int FUN_002a60b4(unsigned int, unsigned int);
+extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 extern int FUN_002bf4f8(unsigned int, unsigned char);
 extern int FUN_002c2a04(unsigned int);
 
@@ -45,7 +45,7 @@ void FUN_00381fd4(int param_1)
     if (temp_v5) {
       temp_v1 = *(int *)(param_1 + 0x5b0);
     }
-    if ((temp_v5 && temp_v1 != 0) && (temp_v1 = FUN_002a60b4(0x31,0), temp_v1 != 0)) {
+    if ((temp_v5 && temp_v1 != 0) && (temp_v1 = asdTMTexTableNodeIsLoaded(0x31,0), temp_v1 != 0)) {
       temp_v4 = 0;
       do {
         temp_v1 = FUN_002bf4f8(0x31,*(unsigned char *)(temp_v4 + 0x405878));

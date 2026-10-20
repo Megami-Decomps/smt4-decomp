@@ -2,15 +2,15 @@
 
 extern "C" {
 
-extern StateAtF4 *DAT_0057f118;
+extern StateAtF4 *g_campCecEdit;
 
 /* True when the global state is in mode 1 and phase 1 or -1. */
 u32 stateAtF4IsActive(void)
 {
-    if (DAT_0057f118 == NULL) {
+    if (g_campCecEdit == NULL) {
         return 0;
     }
-    if (DAT_0057f118->mode == 1 && (DAT_0057f118->phase == 1 || DAT_0057f118->phase == -1)) {
+    if (g_campCecEdit->mode == 1 && (g_campCecEdit->phase == 1 || g_campCecEdit->phase == -1)) {
         return 1;
     }
     return 0;

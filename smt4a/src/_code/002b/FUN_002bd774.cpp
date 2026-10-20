@@ -4,17 +4,17 @@
 
 extern "C" {
 
-int FUN_00169ddc(int);
+int eventQueueAddUnique(int);
 int scrGetArg(int);
 int scrSetResult(...);
 
 extern unsigned char DAT_00589148; /* 0x589148 */
 
-extern int FUN_001656a0(unsigned int);
-/* Supplied declaration required: FUN_00169ddc. */
+extern int padButtonIsPressed(unsigned int);
+/* Supplied declaration required: eventQueueAddUnique. */
 extern int FUN_002121c4(unsigned int);
 /* Supplied declaration required: scrGetArg. */
-extern int FUN_002deb84(void);
+extern int scrGetCommandFrame(void);
 /* Supplied declaration required: scrSetResult. */
 
 
@@ -54,17 +54,17 @@ unsigned int FUN_002bd774(void)
     }
   }
   else if ((*(int *)((unsigned char *)&DAT_00589148 + 0x8)) != 0) {
-    temp_v4 = FUN_002deb84();
+    temp_v4 = scrGetCommandFrame();
     if (temp_v4 == 0) {
       temp_v3 = scrGetArg(1);
       *(unsigned short *)(temp_v5 + 0x10) = temp_v3;
     }
     temp_v5 = FUN_002121c4(1);
     if (((temp_v5 != 0) || (temp_v5 = FUN_002121c4(0), temp_v5 != 0)) ||
-       ((temp_v5 = FUN_001656a0(1), temp_v5 == 0 && (temp_v5 = FUN_001656a0(0), temp_v5 == 0)))) {
+       ((temp_v5 = padButtonIsPressed(1), temp_v5 == 0 && (temp_v5 = padButtonIsPressed(0), temp_v5 == 0)))) {
       return 0;
     }
-    FUN_00169ddc(0x1000210);
+    eventQueueAddUnique(0x1000210);
   }
   return 1;
 }

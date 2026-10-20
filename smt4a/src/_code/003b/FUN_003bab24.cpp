@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00157558(int);
 int FUN_00164b5c(...);
 int efctSetSpeed(void);
-int FUN_0016c410(...);
+int renderCtxResetColorScale(...);
 int FUN_0016c560(...);
 int FUN_001835b4(int, int, int, int, int, int);
 int FUN_0032cdc8(...);
@@ -22,14 +22,14 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } void_stack;
 
-extern unsigned char DAT_0057f208; /* 0x57f208 */
+extern unsigned char g_commonBg; /* 0x57f208 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: FUN_00157558. */
 /* Supplied declaration required: FUN_00164b5c. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0016c410. */
+/* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: FUN_0016c560. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
@@ -52,12 +52,12 @@ char FUN_003bab24(void)
   unsigned short temp_v8;
   unsigned short temp_v9;
   
-  temp_v2 = (*(int *)((unsigned char *)&DAT_0057f208 + 0xc));
+  temp_v2 = (*(int *)((unsigned char *)&g_commonBg + 0xc));
   temp_v0 = '\0';
-  if ((*(int *)((unsigned char *)&DAT_0057f208 + 0xc)) != 0) {
-    temp_v0 = *(char *)((*(int *)((unsigned char *)&DAT_0057f208 + 0xc)) + 5);
+  if ((*(int *)((unsigned char *)&g_commonBg + 0xc)) != 0) {
+    temp_v0 = *(char *)((*(int *)((unsigned char *)&g_commonBg + 0xc)) + 5);
   }
-  if ((*(int *)((unsigned char *)&DAT_0057f208 + 0xc)) != 0 && temp_v0 != '\0') {
+  if ((*(int *)((unsigned char *)&g_commonBg + 0xc)) != 0 && temp_v0 != '\0') {
     FUN_00157558(g_renderCtx);
     temp_v5 = g_renderCtx;
     temp_v1 = FUN_001692ac(1,0);
@@ -114,7 +114,7 @@ char FUN_003bab24(void)
       *(unsigned char *)(temp_v2 + 0x1270) = 0;
     }
     FUN_0016c560(g_renderCtx);
-    FUN_0016c410(g_renderCtx);
+    renderCtxResetColorScale(g_renderCtx);
     temp_v0 = '\0';
   }
   return temp_v0;

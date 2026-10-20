@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002430c8(unsigned char *, int, unsigned char [256]);
 int FUN_00246854(void);
-int FUN_002bf694(unsigned int *, unsigned int);
+int libc_strcpy(unsigned int *, unsigned int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -16,11 +16,11 @@ typedef struct {
 extern unsigned char LAB_00323944; /* 0x323944 */
 extern unsigned char DAT_00400001; /* 0x400001 */
 extern unsigned char DAT_00400002; /* 0x400002 */
-extern unsigned char DAT_0044ea80; /* 0x44ea80 */
+extern unsigned char g_effectEditor; /* 0x44ea80 */
 
 /* Supplied declaration required: FUN_002430c8. */
 /* Supplied declaration required: FUN_00246854. */
-/* Supplied declaration required: FUN_002bf694. */
+/* Supplied declaration required: libc_strcpy. */
 extern unsigned int *FUN_002f325c(int, unsigned char *);
 
 
@@ -40,11 +40,11 @@ unsigned char * FUN_003238d0(void)
     puVar3 = (unsigned char *)0x400000;
   }
   else if (temp_v1 == 1) {
-    if ((*(int *)((unsigned char *)&DAT_0044ea80 + 0x14)) != 0) {
-      puVar1 = (unsigned int *)FUN_002f325c((*(int *)((unsigned char *)&DAT_0044ea80 + 0x14)),temp_v0);
+    if ((*(int *)((unsigned char *)&g_effectEditor + 0x14)) != 0) {
+      puVar1 = (unsigned int *)FUN_002f325c((*(int *)((unsigned char *)&g_effectEditor + 0x14)),temp_v0);
       puVar2 = puVar1;
       FUN_00246854();
-      FUN_002bf694(puVar1 + 0x27,*puVar2);
+      libc_strcpy(puVar1 + 0x27,*puVar2);
     }
     puVar3 = &DAT_00400002;
   }

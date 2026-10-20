@@ -8,7 +8,7 @@ int FUN_001469a8(void);
 int asdMemFree(void);
 int FUN_001a0d08(int *);
 int FUN_002e3140(void);
-int FUN_002e3328(int);
+int asdOperatorDelete(int);
 int software_interrupt(int);
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
@@ -16,7 +16,7 @@ int software_interrupt(int);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_001a0d08. */
 /* Supplied declaration required: FUN_002e3140. */
-/* Supplied declaration required: FUN_002e3328. */
+/* Supplied declaration required: asdOperatorDelete. */
 
 
 void FUN_003f19dc(int param_1)
@@ -43,7 +43,7 @@ void FUN_003f19dc(int param_1)
     temp_v0 = *piVar2;
     if (temp_v0 != 0) {
       FUN_001469a8();
-      FUN_002e3328(temp_v0);
+      asdOperatorDelete(temp_v0);
     }
     *piVar2 = 0;
   }

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00203d04(int);
+int dialogClose(int);
 int FUN_002392b8(...);
 int FUN_00244bb4(int, int);
 int FUN_00261918(int, int, int);
@@ -43,13 +43,13 @@ extern unsigned int DAT_005f1878; /* 0x5f1878 */
 extern unsigned char DAT_005f187c; /* 0x5f187c */
 
 extern int FUN_001632fc(void);
-extern int FUN_0018719c(unsigned int);
-/* Supplied declaration required: FUN_00203d04. */
+extern int gameFlagIsSet(unsigned int);
+/* Supplied declaration required: dialogClose. */
 /* Supplied declaration required: FUN_002392b8. */
 /* Supplied declaration required: FUN_00244bb4. */
 /* Supplied declaration required: FUN_00261918. */
 extern int FUN_002b7af0(void);
-extern int FUN_002b809c(void);
+extern int popupIsActive(void);
 /* Supplied declaration required: FUN_002c2d5c. */
 /* Supplied declaration required: FUN_0033def0. */
 extern int FUN_00377028(unsigned int);
@@ -91,12 +91,12 @@ void FUN_003254a0(void)
           temp_v9 = 0;
         }
       }
-      temp_v4 = FUN_002b809c();
+      temp_v4 = popupIsActive();
       if (temp_v4 != 0) {
         temp_v9 = 0;
       }
-      temp_v4 = FUN_0018719c(0xc);
-      if (((temp_v4 == 0) || (temp_v4 = FUN_0018719c(0x10), temp_v4 != 0)) && (temp_v9)) {
+      temp_v4 = gameFlagIsSet(0xc);
+      if (((temp_v4 == 0) || (temp_v4 = gameFlagIsSet(0x10), temp_v4 != 0)) && (temp_v9)) {
         temp_v4 = FUN_004bc944(DAT_005f1860,DAT_005f1864);
         if (temp_v4 != 0) {
           temp_v4 = DAT_005f1860;
@@ -146,7 +146,7 @@ LAB_003256bc:
     }
   }
   else if (DAT_005f185f != '\0') {
-    FUN_00203d04(1);
+    dialogClose(1);
     DAT_005f185f = '\0';
   }
 LAB_003256e4:

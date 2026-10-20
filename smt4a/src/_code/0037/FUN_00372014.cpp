@@ -4,14 +4,14 @@
 
 extern "C" {
 
-extern unsigned char DAT_00588fd0; /* 0x588fd0 */
+extern unsigned char g_gameGlobals; /* 0x588fd0 */
 
 
 unsigned char FUN_00372014(void)
 
 {
-  if ((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) != 0) {
-    return *(short *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x132c) == 0xf;
+  if ((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) != 0) {
+    return *(short *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x132c) == 0xf;
   }
   return 0;
 }

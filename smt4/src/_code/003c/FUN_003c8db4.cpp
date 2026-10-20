@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b9024(void);
+int devilGetRecord(void);
 
 typedef struct fn_003c8db4_arg0 fn_003c8db4_arg0;
 struct fn_003c8db4_arg0 {
@@ -32,9 +32,9 @@ struct fn_003c8db4_arg0 {
 
 extern unsigned int FUN_0029dde0(void);
 extern int FUN_0029ea68(unsigned short);
-extern int FUN_002a8740(void);
+extern int gameGetUnitRecord(void);
 extern int FUN_002b066c(unsigned short);
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: devilGetRecord. */
 
 
 unsigned short FUN_003c8db4(fn_003c8db4_arg0 *param_1,unsigned int param_2,unsigned int param_3,short *param_4)
@@ -46,7 +46,7 @@ unsigned short FUN_003c8db4(fn_003c8db4_arg0 *param_1,unsigned int param_2,unsig
   unsigned int temp_v2;
   unsigned char temp_v3;
   
-  FUN_002b9024();
+  devilGetRecord();
   if ((param_4[3] & 1U) == 0) {
     return param_4[3] & 1;
   }
@@ -63,9 +63,9 @@ unsigned short FUN_003c8db4(fn_003c8db4_arg0 *param_1,unsigned int param_2,unsig
       ((param_1->field_0x17c == 0 || (temp_v1 = FUN_0029ea68(*param_4), temp_v1 == 0)))) &&
      ((param_1->field_0x17d == 0 || (temp_v1 = FUN_002b066c(*param_4), temp_v1 == 0)))) {
     temp_v2 = param_2;
-    FUN_002b9024();
+    devilGetRecord();
     temp_v0 = param_3;
-    FUN_002b9024();
+    devilGetRecord();
     if (param_1->field_0x142 == 0) {
       temp_v3 = *(char *)(temp_v2 + 2) != '&';
       if (temp_v3) {
@@ -77,17 +77,17 @@ unsigned short FUN_003c8db4(fn_003c8db4_arg0 *param_1,unsigned int param_2,unsig
     }
     if (((param_1->field_0x136 == 0) ||
         ((((unsigned short)param_1->field_0x138 >= 0x18 ||
-          (temp_v1 = FUN_002a8740(),
+          (temp_v1 = gameGetUnitRecord(),
           *(unsigned short *)(temp_v1 + 0x46) == param_2 || *(unsigned short *)(temp_v1 + 0x46) == param_3)) &&
          (((unsigned short)param_1->field_0x13a >= 0x18 ||
-          (temp_v1 = FUN_002a8740(),
+          (temp_v1 = gameGetUnitRecord(),
           *(unsigned short *)(temp_v1 + 0x46) == param_2 || *(unsigned short *)(temp_v1 + 0x46) == param_3)))))) &&
        ((param_1->field_0x13c == 0 ||
         ((((unsigned short)param_1->field_0x13e >= 0x18 ||
-          (temp_v1 = FUN_002a8740(),
+          (temp_v1 = gameGetUnitRecord(),
           *(unsigned short *)(temp_v1 + 0x46) != param_2 && *(unsigned short *)(temp_v1 + 0x46) != param_3)) &&
          (((unsigned short)param_1->field_0x140 >= 0x18 ||
-          (temp_v1 = FUN_002a8740(),
+          (temp_v1 = gameGetUnitRecord(),
           *(unsigned short *)(temp_v1 + 0x46) != param_2 && *(unsigned short *)(temp_v1 + 0x46) != param_3)))))))) {
       return 1;
     }

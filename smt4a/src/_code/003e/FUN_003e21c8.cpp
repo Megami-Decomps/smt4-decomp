@@ -21,7 +21,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_2_stack;
 
-extern unsigned int DAT_00571508; /* 0x571508 */
+extern unsigned int g_btlCamera; /* 0x571508 */
 extern unsigned int DAT_00573870; /* 0x573870 */
 extern unsigned int DAT_00573874; /* 0x573874 */
 extern unsigned int DAT_00573888; /* 0x573888 */
@@ -85,7 +85,7 @@ void FUN_003e21c8(unsigned int *param_1,int param_2)
   }
   FUN_003f0c78(param_2);
   FUN_003f0b80(param_2);
-  words10CopyHighToLow(DAT_00571508);
+  words10CopyHighToLow(g_btlCamera);
   temp_v4 = FUN_003e0f94(param_1,param_2);
   if ((temp_v4 == 1 || temp_v4 == 2) || temp_v4 == 5) {
     temp_v4 = 4;

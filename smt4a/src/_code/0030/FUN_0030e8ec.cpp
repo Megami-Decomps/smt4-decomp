@@ -2,11 +2,11 @@
 
 extern "C" {
 
-int FUN_002e3494(unsigned int);
+int asdOperatorDeleteB(unsigned int);
 
 extern unsigned char DAT_0055cba4; /* 0x55cba4 */
 
-/* Supplied declaration required: FUN_002e3494. */
+/* Supplied declaration required: asdOperatorDeleteB. */
 
 
 unsigned int * FUN_0030e8ec(unsigned int *param_1)
@@ -15,10 +15,10 @@ unsigned int * FUN_0030e8ec(unsigned int *param_1)
 /* irregular: 1 native warning(s); review required */
   *param_1 = (unsigned int)&DAT_0055cba4;
   if (*(char *)(param_1 + 6) != '\0') {
-    FUN_002e3494(param_1[5]);
+    asdOperatorDeleteB(param_1[5]);
   }
-  FUN_002e3494(param_1[0xb]);
-  FUN_002e3494(param_1[0xc]);
+  asdOperatorDeleteB(param_1[0xb]);
+  asdOperatorDeleteB(param_1[0xc]);
   return param_1;
 }
 

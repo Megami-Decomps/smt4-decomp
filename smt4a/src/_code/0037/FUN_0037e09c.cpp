@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern ObjBRef DAT_00588fd0;
+extern ObjBRef g_gameGlobals;
 
 void FUN_0037e09c(u8 value)
 {
-    if (DAT_00588fd0.instance != NULL) {
-        DAT_00588fd0.instance->unk2025 = value;
+    if (g_gameGlobals.instance != NULL) {
+        g_gameGlobals.instance->unk2025 = value;
     }
 }
 

@@ -29,7 +29,7 @@ extern int FUN_0023360c(int);
 extern int FUN_00299fc0(void);
 /* Supplied declaration required: FUN_0029a0cc. */
 /* Supplied declaration required: FUN_002ae3c0. */
-extern unsigned int FUN_002b63ac(void);
+extern unsigned int gameGetPlayerData(void);
 extern unsigned int FUN_003c2d54(int);
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -94,7 +94,7 @@ void FUN_0022f834(int param_1)
   }
   if ((*(int *)(param_1 + 0x15d24) != 0) && (*(unsigned int *)(param_1 + 0x15d28) != temp_v5)) {
     *(unsigned int *)(param_1 + 0x15d28) = temp_v5;
-    temp_v4 = FUN_002b63ac();
+    temp_v4 = gameGetPlayerData();
     rt_memcpy_w(&temp_v7,temp_v4,0x8c);
     if (temp_v5 != 0) {
       temp_v4 = FUN_002ae3c0(temp_v5);

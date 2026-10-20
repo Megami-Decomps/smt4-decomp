@@ -19,8 +19,8 @@ extern int FUN_0023ea94(void);
 /* Supplied declaration required: FUN_0025bfa4. */
 extern unsigned int FUN_002907a8(void);
 extern int btlGetMainState(void);
-extern unsigned int FUN_002a8764(void);
-extern int FUN_002b63ac(float, int);
+extern unsigned int gameGetSlotTable(void);
+extern int gameGetPlayerData(float, int);
 /* Supplied declaration required: FUN_002b99b8. */
 
 
@@ -37,7 +37,7 @@ int FUN_003bf44c(void)
   float temp_v5;
   
   temp_v0 = btlGetMainState();
-  temp_v1 = FUN_002a8764();
+  temp_v1 = gameGetSlotTable();
   temp_v5 = 0.0f;
   FUN_0025bfa4();
   if (temp_v1 == 0xffffffff) {
@@ -54,7 +54,7 @@ int FUN_003bf44c(void)
      (temp_v3 = 0x42f00000, temp_v2 = temp_v4, temp_v5 = temp_v4, (int)temp_v4 >= 0x42f00001)) {
     temp_v5 = 120.0f;
   }
-  temp_v0 = FUN_002b63ac(temp_v2,temp_v3);
+  temp_v0 = gameGetPlayerData(temp_v2,temp_v3);
   temp_v4 = (float)VectorUnsignedToFloat((unsigned int)*(unsigned char *)(temp_v0 + 0x76),(unsigned char)(temp_v1 >> 0x16) & 3);
   temp_v2 = temp_v4;
   FUN_002b99b8();

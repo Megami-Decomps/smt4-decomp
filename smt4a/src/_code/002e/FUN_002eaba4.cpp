@@ -12,7 +12,7 @@ extern unsigned char g_flagBlock; /* 0x594958 */
 
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-extern unsigned int FUN_002ea714(void);
+extern unsigned int onlineGetActiveLock(void);
 /* Supplied declaration required: FUN_002eaa64. */
 
 
@@ -29,7 +29,7 @@ void FUN_002eaba4(unsigned int param_1,unsigned int param_2,unsigned int param_3
   uStack_14 = param_3;
   uStack_10 = param_4;
   if ((*(signed char *)((unsigned char *)&g_flagBlock + 0x14)) != '\0') {
-    temp_v0 = FUN_002ea714();
+    temp_v0 = onlineGetActiveLock();
     FUN_002e6e34(&uStack_18,temp_v0);
     FUN_002eaa64(param_1,param_2);
     FUN_002e6e5c(&uStack_18);

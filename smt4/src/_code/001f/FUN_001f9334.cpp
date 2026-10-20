@@ -10,7 +10,7 @@ int FUN_00267144(void);
 int FUN_00273f5c(void);
 int FUN_00287aec(void);
 int FUN_002a0428(unsigned int, int);
-int FUN_002c09d0(...);
+int gameFlagIsSet(...);
 int FUN_002f3c28(void);
 int VectorSignedToFloat(int, int);
 
@@ -43,9 +43,9 @@ extern int FUN_0027d968(void);
 extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00287aec. */
 /* Supplied declaration required: FUN_002a0428. */
-/* Supplied declaration required: FUN_002c09d0. */
+/* Supplied declaration required: gameFlagIsSet. */
 extern int randNextInRange(unsigned int);
-extern int FUN_002c2950(void);
+extern int gameGetMapBlock(void);
 /* Supplied declaration required: FUN_002f3c28. */
 
 
@@ -81,9 +81,9 @@ unsigned int FUN_001f9334(int param_1)
   
   temp_v3 = g_mapEnemy;
   temp_v11 = 0;
-  temp_v5 = FUN_002c2950();
+  temp_v5 = gameGetMapBlock();
   *(unsigned char *)(temp_v3 + 0x3048) = 0;
-  temp_v6 = FUN_002c2950();
+  temp_v6 = gameGetMapBlock();
   temp_v10 = 0;
   pcVar13 = (char *)0x0;
   temp_v7 = FUN_002671bc();
@@ -100,12 +100,12 @@ unsigned int FUN_001f9334(int param_1)
         temp_v7 = temp_v6 + temp_v10 * 0x14;
         pbVar11 = (unsigned char *)(temp_v7 + 0xf20);
         if ((*pbVar11 & 1) != 0) {
-          temp_v9 = FUN_002c09d0(temp_v10 + 0x310);
+          temp_v9 = gameFlagIsSet(temp_v10 + 0x310);
           if (temp_v9 != 0) {
             *pbVar11 = *(unsigned char *)(temp_v7 + 0xf20) & 0xfb;
           }
-          else if (((*(short *)(pcVar9 + 0x14) == 0) || (temp_v9 = FUN_002c09d0(), temp_v9 != 0)) &&
-                  ((*(short *)(pcVar9 + 0x16) == 0 || (temp_v9 = FUN_002c09d0(), temp_v9 == 0)))) {
+          else if (((*(short *)(pcVar9 + 0x14) == 0) || (temp_v9 = gameFlagIsSet(), temp_v9 != 0)) &&
+                  ((*(short *)(pcVar9 + 0x16) == 0 || (temp_v9 = gameFlagIsSet(), temp_v9 == 0)))) {
             *pbVar11 = *(unsigned char *)(temp_v7 + 0xf20) | 4;
           }
         }
@@ -165,10 +165,10 @@ unsigned int FUN_001f9334(int param_1)
                   temp_v2 = 1;
                 }
 LAB_001f9924:
-                temp_v6 = FUN_002c09d0(temp_v11 + 0x310);
+                temp_v6 = gameFlagIsSet(temp_v11 + 0x310);
                 if (((temp_v6 == 0) &&
-                    ((*(short *)(pcVar9 + 0x14) == 0 || (temp_v6 = FUN_002c09d0(), temp_v6 != 0)))) &&
-                   ((*(short *)(pcVar9 + 0x16) == 0 || (temp_v6 = FUN_002c09d0(), temp_v6 == 0)))) {
+                    ((*(short *)(pcVar9 + 0x14) == 0 || (temp_v6 = gameFlagIsSet(), temp_v6 != 0)))) &&
+                   ((*(short *)(pcVar9 + 0x16) == 0 || (temp_v6 = gameFlagIsSet(), temp_v6 == 0)))) {
                   if (param_1 != 0) {
                     temp_v15 = 1;
                     return temp_v15;
@@ -350,8 +350,8 @@ LAB_001f9924:
           temp_v20 = romwright_piece_4_4(temp_v17,temp_v15);
           temp_v15 = VectorSignedToFloat((int)*(short *)(pcVar9 + 6),(unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v14 = romwright_piece_4_4(temp_v15,(int)temp_v14);
-          if (((*(short *)(pcVar9 + 0x14) == 0) || (temp_v6 = FUN_002c09d0(), temp_v6 != 0)) &&
-             ((*(short *)(pcVar9 + 0x16) == 0 || (temp_v6 = FUN_002c09d0(), temp_v6 == 0)))) {
+          if (((*(short *)(pcVar9 + 0x14) == 0) || (temp_v6 = gameFlagIsSet(), temp_v6 != 0)) &&
+             ((*(short *)(pcVar9 + 0x16) == 0 || (temp_v6 = gameFlagIsSet(), temp_v6 == 0)))) {
             temp_v6 = 0;
             if (param_1 != 0) {
               temp_v15 = 1;

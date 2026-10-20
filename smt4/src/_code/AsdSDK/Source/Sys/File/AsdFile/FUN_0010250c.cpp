@@ -14,7 +14,7 @@ int FUN_0010f7e4(int, int, unsigned int, unsigned int);
 int FUN_002c5254(int *, unsigned int, int);
 int FUN_002c526c(void);
 int FUN_002c52dc(int *, int, int);
-int FUN_002c52f8(void);
+int asdFatalError(void);
 int asdMemoryAlloc(int, int, int, unsigned int);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
@@ -40,7 +40,7 @@ extern unsigned int g_asdFileEvent; /* 0x465028 */
 /* Supplied declaration required: FUN_002c5254. */
 /* Supplied declaration required: FUN_002c526c. */
 /* Supplied declaration required: FUN_002c52dc. */
-/* Supplied declaration required: FUN_002c52f8. */
+/* Supplied declaration required: asdFatalError. */
 /* Supplied declaration required: asdMemoryAlloc. */
 extern void nn_os_LightEvent_Initialize(unsigned int, unsigned char);
 
@@ -80,7 +80,7 @@ void FUN_0010250c(void)
   DAT_0046500c = temp_v1;
   FUN_0010f698(&LAB_00102698,0x10,0x10,temp_v1);
   if ((int)puVar3 < 0) {
-    FUN_002c52f8();
+    asdFatalError();
   }
   temp_v2 = 0;
   FUN_002c52dc(&temp_v2,0,2);

@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_0011778e(...);
-int FUN_002e7232(...);
-int FUN_002e7378(...);
+int sharedRefRelease(...);
+int streamReaderSeek(...);
 int strAssign(...);
-int FUN_002e7658(...);
+int sharedRefHolderDestroy(...);
 int FUN_002eb17c(...);
 int FUN_002ed258(...);
 int ringSetLimit(...);
@@ -47,11 +47,11 @@ extern union romwright_storage_s______00594975_9_1 s______00594975; /* 0x594975 
 
 extern int *FUN_0011595c(int, int);
 /* Supplied declaration required: FUN_0011778e. */
-/* Supplied declaration required: FUN_002e7232. */
-/* Supplied declaration required: FUN_002e7378. */
+/* Supplied declaration required: sharedRefRelease. */
+/* Supplied declaration required: streamReaderSeek. */
 /* Supplied declaration required: strAssign. */
-extern int FUN_002e760a(unsigned int);
-/* Supplied declaration required: FUN_002e7658. */
+extern int operatorNew(unsigned int);
+/* Supplied declaration required: sharedRefHolderDestroy. */
 /* Supplied declaration required: FUN_002eb17c. */
 extern int FUN_002eb5f4(void);
 extern int FUN_002eb7d0(unsigned int, unsigned int);
@@ -93,7 +93,7 @@ int * FUN_00109824(int param_1,int param_2,unsigned int param_3,fn_00109824_arg3
     piVar2 = (int *)0x0;
   }
   else {
-    temp_v0 = FUN_002e760a(0x118);
+    temp_v0 = operatorNew(0x118);
     if (temp_v0 != 0) {
       piVar2 = (int *)FUN_002f2a44();
     }
@@ -119,15 +119,15 @@ LAB_00109882:
         if (temp_v0 == 0) {
           param_4->field_0x10 = 0;
           param_4->field_0x18 = 0;
-          FUN_002e7232(piVar2);
-          FUN_002e7658(temp_v4);
+          sharedRefRelease(piVar2);
+          sharedRefHolderDestroy(temp_v4);
           piVar2 = (int *)0x0;
           return piVar2;
         }
         strAssign(param_4,param_4->field_0xc + param_4->field_0x18 + temp_v1,temp_v0,0);
         param_4->field_0x10 = temp_v0;
       }
-      FUN_002e7378(temp_v4,0);
+      streamReaderSeek(temp_v4,0);
     }
     temp_v0 = (**(romwright_code **)(**(int **)(temp_v5 + 0x11c) + 0x18))
                       (*(int **)(temp_v5 + 0x11c),temp_v4,piVar2,&temp_v2);
@@ -135,10 +135,10 @@ LAB_00109882:
       ringSetLimit(param_4,param_4->field_0x18 + temp_v2);
     }
     else {
-      FUN_002e7232(piVar2);
+      sharedRefRelease(piVar2);
       piVar2 = (int *)0x0;
     }
-    FUN_002e7658(temp_v4);
+    sharedRefHolderDestroy(temp_v4);
   }
   return piVar2;
 }

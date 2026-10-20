@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002e9ec8(int, unsigned int);
+int onlineInstanceTableFind(int, unsigned int);
 int FUN_002ea214(int, unsigned int);
 int FUN_002ea3d0(int, unsigned int);
-int FUN_002ea43c(int);
+int onlineJobSetStateDone(int);
 int FUN_002ea458(int);
 int FUN_002ea4d2(void);
 int FUN_00442330(int, unsigned int, int *, int *);
@@ -30,15 +30,15 @@ extern unsigned int DAT_00104418; /* 0x104418 */
 extern unsigned char LAB_00104521; /* 0x104521 */
 
 extern unsigned int FUN_002e7908(unsigned int *, unsigned int *);
-extern int FUN_002e9af4(void);
-/* Supplied declaration required: FUN_002e9ec8. */
+extern int onlineInstanceTableGetCurrent(void);
+/* Supplied declaration required: onlineInstanceTableFind. */
 /* Supplied declaration required: FUN_002ea214. */
 extern unsigned int FUN_002ea3c0(unsigned int *, unsigned char *, unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_002ea3d0. */
-/* Supplied declaration required: FUN_002ea43c. */
+/* Supplied declaration required: onlineJobSetStateDone. */
 /* Supplied declaration required: FUN_002ea458. */
 extern int wordRefsEqual_002ea4ac(int *, unsigned int *);
-extern int FUN_002ea4bc(void);
+extern int onlineInstantiationContextGetCurrent(void);
 /* Supplied declaration required: FUN_002ea4d2. */
 /* Supplied declaration required: FUN_00442330. */
 
@@ -80,13 +80,13 @@ void FUN_00104350(int param_1)
   temp_v2 = 0xc8a0c7f0;
   temp_v0 = wordRefsEqual_002ea4ac(temp_v5,(unsigned int *)&temp_v2);
   if (temp_v0 != 0) {
-    temp_v0 = FUN_002e9af4();
-    FUN_002e9ec8(temp_v0,*(unsigned int *)(param_1 + 0xe0));
+    temp_v0 = onlineInstanceTableGetCurrent();
+    onlineInstanceTableFind(temp_v0,*(unsigned int *)(param_1 + 0xe0));
     if (temp_v0 == 0) {
-      FUN_002ea43c(param_1);
+      onlineJobSetStateDone(param_1);
       return;
     }
-    temp_v0 = FUN_002ea4bc();
+    temp_v0 = onlineInstantiationContextGetCurrent();
     if ((*(char *)(temp_v0 + 0x30) == '\0') && (temp_v0 = param_1, FUN_002ea4d2(), temp_v0 != 0)) {
       return;
     }

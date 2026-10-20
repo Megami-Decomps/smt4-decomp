@@ -16,7 +16,7 @@ int FUN_002e9c0c(int);
 extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-extern int FUN_002e9a92(void);
+extern int onlineCallStateIsDone(void);
 /* Supplied declaration required: FUN_002e9aa8. */
 /* Supplied declaration required: FUN_002e9c0c. */
 
@@ -36,7 +36,7 @@ long long FUN_00103f12(int param_1,unsigned int param_2,unsigned int param_3,uns
   temp_v0 = FUN_002e6e26();
   FUN_002e6e34(&uStack_18,temp_v0 + 0x58);
   if (*(char *)(param_1 + 0x10) != '\x01') {
-    temp_v0 = FUN_002e9a92();
+    temp_v0 = onlineCallStateIsDone();
     if (temp_v0 != 0) {
       FUN_002e9c0c(param_1);
     }

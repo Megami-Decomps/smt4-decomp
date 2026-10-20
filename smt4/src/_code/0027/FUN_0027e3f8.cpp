@@ -9,7 +9,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_4_stack;
 
-extern int FUN_00290d74(int, unsigned char *);
+extern int tableGroupFindEntryIndex(int, unsigned char *);
 extern int btlGetMainState(void);
 extern int FUN_003bf570(int);
 
@@ -64,7 +64,7 @@ LAB_0027e53c:
                 *(unsigned int *)(temp_v1 + 0x44a0) = *(unsigned int *)(temp_v1 + 0x44a0) | 0x100000;
               }
             }
-            temp_v2 = FUN_00290d74(param_1[4],pbVar5 + 4);
+            temp_v2 = tableGroupFindEntryIndex(param_1[4],pbVar5 + 4);
             if (-1 < temp_v2) {
               if (param_4 == 0) {
                 param_1[8] = temp_v2;

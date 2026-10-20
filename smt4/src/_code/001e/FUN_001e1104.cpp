@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_002621f8(int, int);
-int FUN_002b8da0(...);
+int pairSetSecondResetFirst(int, int);
+int pairSetFirstResetSecond(...);
 int timerStart(...);
 int FUN_002bee58(int, int);
 
-/* Supplied declaration required: FUN_002621f8. */
-/* Supplied declaration required: FUN_002b8da0. */
+/* Supplied declaration required: pairSetSecondResetFirst. */
+/* Supplied declaration required: pairSetFirstResetSecond. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bee58. */
 
@@ -25,24 +25,24 @@ void FUN_001e1104(int param_1,int param_2,unsigned char param_3,unsigned char pa
   *(unsigned char *)(param_1 + 0x25d) = param_3;
   if (param_2 != 0) {
     if (param_2 == 1) {
-      FUN_002b8da0(param_1 + 0x20,0x2a);
+      pairSetFirstResetSecond(param_1 + 0x20,0x2a);
       FUN_002bee58(param_1 + 0x20,0);
-      FUN_002621f8(param_1 + 0x138,3);
+      pairSetSecondResetFirst(param_1 + 0x138,3);
       FUN_002bee58(param_1 + 0x138,2);
-      FUN_002621f8(param_1 + 0xac,1);
+      pairSetSecondResetFirst(param_1 + 0xac,1);
       FUN_002bee58(param_1 + 0xac,1);
-      FUN_002b8da0(param_1 + 0x1c4,10);
+      pairSetFirstResetSecond(param_1 + 0x1c4,10);
       timerStart(param_1 + 0x1c4,2,0);
     }
   }
   else {
-    FUN_002b8da0(param_1 + 0x20,0x29);
+    pairSetFirstResetSecond(param_1 + 0x20,0x29);
     FUN_002bee58(param_1 + 0x20,0);
-    FUN_002621f8(param_1 + 0x138,2);
+    pairSetSecondResetFirst(param_1 + 0x138,2);
     FUN_002bee58(param_1 + 0x138,2);
-    FUN_002621f8(param_1 + 0xac,0);
+    pairSetSecondResetFirst(param_1 + 0xac,0);
     FUN_002bee58(param_1 + 0xac,1);
-    FUN_002b8da0(param_1 + 0x1c4,9);
+    pairSetFirstResetSecond(param_1 + 0x1c4,9);
     timerStart(param_1 + 0x1c4,2,0);
   }
   *(unsigned int *)(param_1 + 0x250) = 0;

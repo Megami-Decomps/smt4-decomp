@@ -7,7 +7,7 @@ extern "C" {
 int scrSetResult(int);
 
 /* Supplied declaration required: scrSetResult. */
-extern int FUN_0028e9d4(unsigned int);
+extern int flagValueIsPositive(unsigned int);
 
 
 unsigned int FUN_002f5e64(void)
@@ -21,7 +21,7 @@ unsigned int FUN_002f5e64(void)
   temp_v0 = 0;
   temp_v2 = 0x79f;
   do {
-    temp_v1 = FUN_0028e9d4(temp_v2);
+    temp_v1 = flagValueIsPositive(temp_v2);
     if (temp_v1 != 0) {
       temp_v0 = 1;
     }

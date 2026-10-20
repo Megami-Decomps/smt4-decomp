@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_2_stack;
 
-extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
+extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: FUN_003f2aec. */
@@ -38,13 +38,13 @@ void FUN_003f24e0(int param_1,int param_2)
   do {
     temp_v2 = temp_v2 + 1;
     if (temp_v2 >= 0xc) {
-      FUN_004abbe8(DAT_0057a9c8);
+      FUN_004abbe8(g_btlUiBlock);
       return;
     }
   } while (-1 < *(short *)(param_1 + temp_v2 * 2 + 0x3006));
   *(unsigned short *)(param_1 + temp_v2 * 2 + 0x3006) = *(unsigned short *)(temp_v1 + 0x6e);
   FUN_003f2aec(param_1);
-  FUN_004abbe8(DAT_0057a9c8);
+  FUN_004abbe8(g_btlUiBlock);
   return;
 }
 

@@ -9,7 +9,7 @@ int FUN_00250680(...);
 int FUN_00250720(void);
 int FUN_002551ac(int, unsigned int, int, int, int, unsigned int, unsigned int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int);
 int FUN_0026e61c(...);
-int FUN_00282924(int, int);
+int btlMainFindEntryByListedId(int, int);
 int btlGetMainState(void);
 int FUN_003ddbcc(...);
 int FUN_003ddc70(...);
@@ -43,10 +43,10 @@ extern unsigned int g_btlScriptUnit; /* 0x43427c */
 /* Supplied declaration required: FUN_002551ac. */
 /* Supplied declaration required: FUN_0026e61c. */
 extern unsigned int btlUnitGet(unsigned int);
-/* Supplied declaration required: FUN_00282924. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: btlGetMainState. */
 extern int scrGetArg(unsigned int);
-extern int FUN_002a8740(int);
+extern int gameGetUnitRecord(int);
 /* Supplied declaration required: FUN_003ddbcc. */
 /* Supplied declaration required: FUN_003ddc70. */
 
@@ -66,7 +66,7 @@ unsigned int FUN_002177e8(void)
     temp_v2 = btlGetMainState();
     temp_v3 = *(int *)(temp_v2 + 0x1e98) + temp_v0 * 0x114;
     temp_v2 = btlGetMainState();
-    FUN_00282924(temp_v2,temp_v0);
+    btlMainFindEntryByListedId(temp_v2,temp_v0);
     btlGetMainState();
     FUN_00250720();
     FUN_002551ac(0,temp_v1,temp_v3,0,(int)*(short *)(temp_v2 + 0x1b6),0xffffffff,0xffffffff,
@@ -75,7 +75,7 @@ unsigned int FUN_002177e8(void)
     FUN_00250680(0x19,temp_v1,temp_v3,0);
   }
   else {
-    temp_v0 = FUN_002a8740(temp_v0 - 0x6d);
+    temp_v0 = gameGetUnitRecord(temp_v0 - 0x6d);
     *(unsigned short *)(temp_v0 + 0x2a) = 0;
     FUN_0026e61c(temp_v0,1);
     FUN_003ddc70(0,temp_v1,0xf);

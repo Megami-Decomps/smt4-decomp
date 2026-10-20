@@ -11,7 +11,7 @@ typedef struct StateRef568 {
     /* 0x00 */ State568 *obj;
 } StateRef568;
 
-extern void FUN_0037d770(void);
+extern void event3dOpeningCreate(void);
 
 u32 stateRef568IsState2(StateRef568 *ref)
 {
@@ -20,7 +20,7 @@ u32 stateRef568IsState2(StateRef568 *ref)
             return 1;
         }
     } else {
-        FUN_0037d770();
+        event3dOpeningCreate();
     }
     return 0;
 }

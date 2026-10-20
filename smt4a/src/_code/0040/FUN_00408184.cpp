@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_2_stack;
 
-extern int FUN_001bcea0(void);
+extern int gameGetCounters(void);
 /* Supplied declaration required: FUN_0040a378. */
 /* Supplied declaration required: FUN_0040a3a0. */
 /* Supplied declaration required: FUN_0040a3c8. */
@@ -28,7 +28,7 @@ void FUN_00408184(int param_1,unsigned int param_2)
   int temp_v0;
   unsigned int *puVar2;
   
-  temp_v0 = FUN_001bcea0();
+  temp_v0 = gameGetCounters();
   puVar2 = (unsigned int *)(temp_v0 + param_1 * 4);
   if (param_2 < ~*puVar2) {
     *puVar2 = *puVar2 + param_2;
@@ -36,7 +36,7 @@ void FUN_00408184(int param_1,unsigned int param_2)
   else {
     *puVar2 = 0xffffffff;
   }
-  temp_v0 = FUN_001bcea0();
+  temp_v0 = gameGetCounters();
   puVar2 = (unsigned int *)(temp_v0 + param_1 * 4 + 0x200);
   if (param_2 < ~*puVar2) {
     *puVar2 = *puVar2 + param_2;

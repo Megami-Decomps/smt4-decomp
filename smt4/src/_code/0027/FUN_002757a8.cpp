@@ -2,12 +2,12 @@
 
 extern "C" {
 
-int FUN_0039c050(u32 *block);
+int NaviMain_EnterState5(u32 *block);
 
 void FUN_002757a8(void)
 {
-    if (DAT_0044cdf0 != NULL) {
-        FUN_0039c050(DAT_0044cdf0->unk00040);
+    if (g_naviMain != NULL) {
+        NaviMain_EnterState5(g_naviMain->unk00040);
     }
 }
 

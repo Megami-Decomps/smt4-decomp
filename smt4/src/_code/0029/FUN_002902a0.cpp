@@ -6,7 +6,7 @@ extern "C" {
 
 int uiFadeRequestClear(void);
 int FUN_0029eb5c(int, int);
-int FUN_002b8838(int);
+int buttonHelpSetPreset(int);
 int timerStart(int, int);
 int FUN_002bf810(int);
 
@@ -15,13 +15,13 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_2_stack;
 
-extern int DAT_0043dd50; /* 0x43dd50 */
+extern int g_uiQuest; /* 0x43dd50 */
 
 /* Supplied declaration required: uiFadeRequestClear. */
 extern unsigned char FUN_00298f88(unsigned int);
 /* Supplied declaration required: FUN_0029eb5c. */
 extern int FUN_0029ee54(int);
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bf810. */
 
@@ -38,8 +38,8 @@ void FUN_002902a0(unsigned int param_1,int param_2)
   int temp_v5;
   int temp_v6;
   
-  temp_v0 = DAT_0043dd50;
-  *(short *)(DAT_0043dd50 + 0x97e) = (short)param_1;
+  temp_v0 = g_uiQuest;
+  *(short *)(g_uiQuest + 0x97e) = (short)param_1;
   temp_v1 = FUN_00298f88(param_1);
   *(unsigned char *)(temp_v0 + 0x5c4) = temp_v1;
   *(unsigned int *)(temp_v0 + 0x5ec) = 0x3e55cfab;
@@ -72,12 +72,12 @@ void FUN_002902a0(unsigned int param_1,int param_2)
     timerStart(temp_v0 + 0x34,0);
   }
   uiFadeRequestClear();
-  temp_v0 = DAT_0043dd50;
-  temp_v3 = *(unsigned int *)(DAT_0043dd50 + 4);
-  *(unsigned int *)(DAT_0043dd50 + 4) = 0x14;
+  temp_v0 = g_uiQuest;
+  temp_v3 = *(unsigned int *)(g_uiQuest + 4);
+  *(unsigned int *)(g_uiQuest + 4) = 0x14;
   *(unsigned int *)(temp_v0 + 8) = temp_v3;
   *(unsigned int *)(temp_v0 + 0x10) = 0;
-  FUN_002b8838(0x1a);
+  buttonHelpSetPreset(0x1a);
   FUN_002bf810(0x100025e);
   return;
 }

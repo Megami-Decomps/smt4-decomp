@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_00215c5c(void);
 int FUN_002829d4(void);
-int FUN_0028975c(...);
-int FUN_002b46f8(...);
+int gameFlagSetValue(...);
+int libc_bsearch(...);
 int FUN_00334ff8(void);
 
 /* stack frame of param_3: 2 slot(s), 6 byte(s) */
@@ -19,10 +19,10 @@ typedef struct {
 extern unsigned char LAB_00145c78; /* 0x145c78 */
 
 /* Supplied declaration required: FUN_00215c5c. */
-extern int FUN_0023f3f8(void);
+extern int gameDataGetFlagBits(void);
 /* Supplied declaration required: FUN_002829d4. */
-/* Supplied declaration required: FUN_0028975c. */
-/* Supplied declaration required: FUN_002b46f8. */
+/* Supplied declaration required: gameFlagSetValue. */
+/* Supplied declaration required: libc_bsearch. */
 extern unsigned int dataTableGetCount(int);
 extern unsigned int dataTableGetEntries(void);
 extern int dataTableGet(unsigned int, unsigned int);
@@ -44,8 +44,8 @@ unsigned int FUN_0026e420(unsigned int param_1,int param_2,int param_3)
   unsigned char temp_v6 [32];
   unsigned short temp_v7;
   
-  temp_v1 = FUN_0023f3f8();
-  temp_v2 = FUN_0023f3f8();
+  temp_v1 = gameDataGetFlagBits();
+  temp_v2 = gameDataGetFlagBits();
   if ((((unsigned int)*(unsigned char *)(temp_v2 + (param_1 >> 3)) & (1 << (param_1 & 7))) == 0) &&
      ((param_2 != 0 || (temp_v3 = param_1, FUN_002829d4(), temp_v3 == 0)))) {
     if (param_3 == 0) {
@@ -59,7 +59,7 @@ unsigned int FUN_0026e420(unsigned int param_1,int param_2,int param_3)
         temp_v4 = dataTableGetEntries();
         temp_v5 = dataTableGetCount(temp_v2);
         temp_v7 = (short)param_1;
-        FUN_002b46f8(temp_v6,temp_v4,temp_v5,0x40,&LAB_00145c78);
+        libc_bsearch(temp_v6,temp_v4,temp_v5,0x40,&LAB_00145c78);
       }
       FUN_00215c5c();
       temp_v2 = dataTableGet(0xb,0);
@@ -71,7 +71,7 @@ unsigned int FUN_0026e420(unsigned int param_1,int param_2,int param_3)
         temp_v5 = dataTableGetCount(temp_v2);
         puVar8 = temp_v6;
         temp_v7 = (short)param_1;
-        FUN_002b46f8(puVar8,temp_v4,temp_v5,0x40,&LAB_00145c78);
+        libc_bsearch(puVar8,temp_v4,temp_v5,0x40,&LAB_00145c78);
       }
       if (puVar8[0x22] == '\0') {
         temp_v1 = temp_v1 + (unsigned int)(unsigned char)puVar8[0x2a] * 2;
@@ -82,7 +82,7 @@ unsigned int FUN_0026e420(unsigned int param_1,int param_2,int param_3)
           if (param_1 != 0x76) {
             return 1;
           }
-          FUN_0028975c(0x527,0,1);
+          gameFlagSetValue(0x527,0,1);
           return 1;
         }
         temp_v4 = 0x521;
@@ -90,7 +90,7 @@ unsigned int FUN_0026e420(unsigned int param_1,int param_2,int param_3)
       else {
         temp_v4 = 0x520;
       }
-      FUN_0028975c(temp_v4,0,1);
+      gameFlagSetValue(temp_v4,0,1);
     }
     return 1;
   }

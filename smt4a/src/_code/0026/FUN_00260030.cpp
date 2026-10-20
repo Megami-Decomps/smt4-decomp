@@ -25,7 +25,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-extern int DAT_005702f8; /* 0x5702f8 */
+extern int g_keyedRecordCount; /* 0x5702f8 */
 extern unsigned int *DAT_00570ab4; /* 0x570ab4 */
 
 extern unsigned int *FUN_00239218(fn_00260030_arg0 *);
@@ -52,7 +52,7 @@ void FUN_00260030(fn_00260030_arg0 *param_1)
   unsigned int temp_v10;
   
   puVar3 = DAT_00570ab4;
-  if (((-1 < (DAT_005702f8 - (int)param_1) - 1) &&
+  if (((-1 < (g_keyedRecordCount - (int)param_1) - 1) &&
       (temp_v2 = FUN_002a398c(), 0 < *(int *)(temp_v2 + 0xd8))) && (DAT_00570ab4 != (unsigned int *)0x0))
   {
     temp_v2 = *(int *)((int)param_1 * 0x148 + 0x5c60d8);

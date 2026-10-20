@@ -6,10 +6,10 @@ extern "C" {
 
 int FUN_0014e188(...);
 int FUN_001505ac(int, unsigned char *, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
-int FUN_001846d0(...);
-int FUN_00184758(...);
-int FUN_00184c00(...);
-int FUN_0018719c(int);
+int uiSpriteSelectAnim(...);
+int uiSpriteSetKeyframe(...);
+int uiSpriteSetImageKeyframe(...);
+int gameFlagIsSet(int);
 int FUN_00203b40(int, int, int, int, int, int);
 int FUN_002a4964(int, unsigned int);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(int);
@@ -31,10 +31,10 @@ extern unsigned char DAT_0052c884; /* 0x52c884 */
 
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: FUN_001505ac. */
-/* Supplied declaration required: FUN_001846d0. */
-/* Supplied declaration required: FUN_00184758. */
-/* Supplied declaration required: FUN_00184c00. */
-/* Supplied declaration required: FUN_0018719c. */
+/* Supplied declaration required: uiSpriteSelectAnim. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
+/* Supplied declaration required: gameFlagIsSet. */
 /* Supplied declaration required: FUN_00203b40. */
 /* Supplied declaration required: FUN_002a4964. */
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
@@ -52,11 +52,11 @@ void FUN_003d05a4(int param_1,unsigned short param_2)
   int temp_v5;
   
   temp_v5 = 3;
-  temp_v0 = FUN_0018719c(0x558);
+  temp_v0 = gameFlagIsSet(0x558);
   if (temp_v0 != 0) {
     temp_v5 = 4;
   }
-  temp_v0 = FUN_0018719c(0x559);
+  temp_v0 = gameFlagIsSet(0x559);
   if (temp_v0 != 0) {
     temp_v5 = temp_v5 + 1;
   }
@@ -83,10 +83,10 @@ void FUN_003d05a4(int param_1,unsigned short param_2)
     *(unsigned int *)(temp_v2 + 0x94) = 0xffffffff;
     *(unsigned int *)(temp_v2 + 0x98) = 0xffffffff;
     if (temp_v0 != 0) {
-      if ((temp_v0 == 4) && (temp_v2 = FUN_0018719c(0x559), temp_v2 == 0)) goto LAB_003d06d4;
+      if ((temp_v0 == 4) && (temp_v2 = gameFlagIsSet(0x559), temp_v2 == 0)) goto LAB_003d06d4;
     }
     else {
-      temp_v2 = FUN_0018719c(0x558);
+      temp_v2 = gameFlagIsSet(0x558);
       if (temp_v2 == 0) {
         temp_v0 = 1;
         continue;
@@ -138,10 +138,10 @@ LAB_003d06d4:
       default:
         temp_v0 = -1;
       }
-      temp_v4 = FUN_0018719c(0x558);
-      if (((temp_v4 == 0) || (temp_v4 = FUN_0018719c(0x559), temp_v4 == 0)) &&
-         (temp_v4 = FUN_0018719c(0x558), temp_v4 == 0)) {
-        FUN_0018719c(0x559);
+      temp_v4 = gameFlagIsSet(0x558);
+      if (((temp_v4 == 0) || (temp_v4 = gameFlagIsSet(0x559), temp_v4 == 0)) &&
+         (temp_v4 = gameFlagIsSet(0x558), temp_v4 == 0)) {
+        gameFlagIsSet(0x559);
         temp_v0 = temp_v0 - 1;
       }
       *(int *)(param_1 + 0x88) = temp_v0;
@@ -150,18 +150,18 @@ LAB_003d06d4:
       Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(param_1 + 200);
       FUN_001505ac(param_1 + 200,&DAT_0052c83c,0x18,&DAT_0052c854,0x30,0,0,0,0,&DAT_0052c884,0x70);
       FUN_0014e188(param_1 + 0xe8,0x24,0x57,param_1 + 200,1);
-      FUN_00184758(param_1 + 0xe8,0);
-      FUN_00184c00(param_1 + 0xe8,0);
+      uiSpriteSetKeyframe(param_1 + 0xe8,0);
+      uiSpriteSetImageKeyframe(param_1 + 0xe8,0);
       temp_v0 = 0;
       do {
         temp_v5 = param_1 + temp_v0 * 0x8c;
         FUN_0014e188(temp_v5 + 0x174,0x24,0x57,param_1 + 200,1);
-        FUN_00184758(temp_v5 + 0x174,0);
-        FUN_00184c00(temp_v5 + 0x174,0);
+        uiSpriteSetKeyframe(temp_v5 + 0x174,0);
+        uiSpriteSetImageKeyframe(temp_v5 + 0x174,0);
         temp_v0 = temp_v0 + 1;
       } while (temp_v0 < 5);
       FUN_0014e188(param_1 + 0x430,0x24,1,param_1 + 200,1);
-      FUN_001846d0(param_1 + 0x430,0);
+      uiSpriteSelectAnim(param_1 + 0x430,0);
       *(unsigned int *)(param_1 + 0x4bc) = 0;
       return;
     }

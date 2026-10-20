@@ -26,7 +26,7 @@ extern float DAT_004ea934; /* 0x4ea934 */
 extern float DAT_004ea938; /* 0x4ea938 */
 
 /* Supplied declaration required: FUN_0025c8f0. */
-extern int FUN_00269a58(void);
+extern int effGetFrameCounter(void);
 /* Supplied declaration required: FUN_002a3958. */
 
 
@@ -124,7 +124,7 @@ void FUN_00281bb0(float *param_1)
     } while (temp_v1 != 0.0f);
   }
   param_1[0x1a] = (float)((unsigned int)param_1[0x1a] | 0x80000000);
-  temp_v0 = FUN_00269a58();
+  temp_v0 = effGetFrameCounter();
   param_1[0x21] = (float)(temp_v0 + (int)param_1[0x21]);
   return;
 }

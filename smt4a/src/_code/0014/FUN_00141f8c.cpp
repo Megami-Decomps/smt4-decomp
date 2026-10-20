@@ -10,7 +10,7 @@ int FUN_00167f24(...);
 int rt_memcpy_w(...);
 
 int FUN_00100388(unsigned char [128], unsigned char *);
-int FUN_0014f280(...);
+int wstrBufferPutChar(...);
 int FUN_0014f2a8(...);
 int FUN_00151e34(...);
 int FUN_0015f858(unsigned int, int);
@@ -19,7 +19,7 @@ int FUN_001654f0(...);
 int FUN_001654f8(...);
 int FUN_001695a0(void);
 int FUN_00180118(...);
-int FUN_002e342c(...);
+int libc_strcpy(...);
 int sysMemClear(unsigned char [128], int);
 
 /* stack frame of param_6: 2 slot(s), 5 byte(s) */
@@ -39,7 +39,7 @@ extern unsigned char LAB_00142870; /* 0x142870 */
 /* Supplied declaration required: FUN_00100388. */
 extern unsigned int FUN_0014bd84(unsigned short);
 extern unsigned int FUN_0014bf3c(unsigned short, unsigned int);
-/* Supplied declaration required: FUN_0014f280. */
+/* Supplied declaration required: wstrBufferPutChar. */
 /* Supplied declaration required: FUN_0014f2a8. */
 /* Supplied declaration required: FUN_00151e34. */
 extern int FUN_001527e4(short);
@@ -57,7 +57,7 @@ extern int saveSlotFindSelected(void);
 /* Supplied declaration required: FUN_00167f24. */
 /* Supplied declaration required: FUN_001695a0. */
 /* Supplied declaration required: FUN_00180118. */
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -87,13 +87,13 @@ FUN_00141f8c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
         FUN_0016432c(*(unsigned short *)(param_2 + *param_4 * 2 + 2));
         FUN_001654f8();
         *param_4 = *param_4 + 1;
-        FUN_0014f280(param_3,param_5,0x12f8,param_6);
+        wstrBufferPutChar(param_3,param_5,0x12f8,param_6);
         temp_v7 = 0;
         do {
           temp_v6 = temp_v7 * 2;
           temp_v7 = temp_v7 + 1;
           temp_v0 = romwright_piece_1_1(temp_v9[temp_v6 + 1],temp_v9[temp_v6]);
-          FUN_0014f280(param_3,param_5,temp_v0,param_6);
+          wstrBufferPutChar(param_3,param_5,temp_v0,param_6);
         } while (temp_v0 != 0);
         return 1;
       }
@@ -105,7 +105,7 @@ FUN_00141f8c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
         case 0xf841:
           temp_v4 = (unsigned int)*(unsigned short *)(param_2 + *param_4 * 2 + 2);
           FUN_0015f858(temp_v4,1);
-          FUN_002e342c(temp_v9,temp_v4);
+          libc_strcpy(temp_v9,temp_v4);
           FUN_001654f0(temp_v9,temp_v10);
           FUN_0014f2a8(param_3,param_5,temp_v10,param_6);
           *param_4 = *param_4 + 1;
@@ -130,7 +130,7 @@ FUN_00141f8c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
           }
           else {
             temp_v5 = FUN_0015687c();
-            FUN_002e342c(temp_v9,temp_v5);
+            libc_strcpy(temp_v9,temp_v5);
           }
           break;
         default:
@@ -142,15 +142,15 @@ FUN_00141f8c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
       }
       if (param_1 == 0xf871) {
         temp_v5 = FUN_00151e34(*(unsigned short *)(param_2 + *param_4 * 2 + 2) + 7);
-        FUN_002e342c(temp_v9,temp_v5);
+        libc_strcpy(temp_v9,temp_v5);
         *param_4 = *param_4 + 1;
-        FUN_0014f280(param_3,param_5,0x12f8,param_6);
+        wstrBufferPutChar(param_3,param_5,0x12f8,param_6);
         temp_v7 = 0;
         do {
           temp_v6 = temp_v7 * 2;
           temp_v7 = temp_v7 + 1;
           temp_v0 = romwright_piece_1_1(temp_v9[temp_v6 + 1],temp_v9[temp_v6]);
-          FUN_0014f280(param_3,param_5,temp_v0,param_6);
+          wstrBufferPutChar(param_3,param_5,temp_v0,param_6);
         } while (temp_v0 != 0);
         return 1;
       }
@@ -160,7 +160,7 @@ FUN_00141f8c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
             return 0;
           }
           temp_v5 = FUN_0014bf3c(*(unsigned short *)(param_2 + *param_4 * 2 + 2),0);
-          FUN_002e342c(temp_v9,temp_v5);
+          libc_strcpy(temp_v9,temp_v5);
           FUN_001654f0(temp_v9,temp_v10);
           FUN_0014f2a8(param_3,param_5,temp_v10,param_6);
         }
@@ -171,7 +171,7 @@ FUN_00141f8c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
       }
       else {
         temp_v5 = FUN_00151e34(*(unsigned short *)(param_2 + *param_4 * 2 + 2) - 1);
-        FUN_002e342c(temp_v9,temp_v5);
+        libc_strcpy(temp_v9,temp_v5);
         FUN_001654f0(temp_v9,temp_v10);
         FUN_0014f2a8(param_3,param_5,temp_v10,param_6);
       }
@@ -198,11 +198,11 @@ FUN_00141f8c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
         FUN_0014f2a8(param_3,param_5,temp_v5,param_6);
         break;
       case 0xf87a:
-        FUN_0014f280(param_3,param_5,*(unsigned short *)(param_2 + *param_4 * 2),param_6);
+        wstrBufferPutChar(param_3,param_5,*(unsigned short *)(param_2 + *param_4 * 2),param_6);
         temp_v7 = *param_4;
         *param_4 = temp_v7 + 1;
         temp_v0 = *(short *)(param_2 + (temp_v7 + 1) * 2);
-        FUN_0014f280(param_3,param_5,temp_v0,param_6);
+        wstrBufferPutChar(param_3,param_5,temp_v0,param_6);
         if (temp_v0 == 0) {
           FUN_001695a0();
           return 1;
@@ -218,23 +218,23 @@ FUN_00141f8c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
         FUN_00167f24(2);
         return 1;
       case 0xf87b:
-        FUN_0014f280(param_3,param_5,*(unsigned short *)(param_2 + *param_4 * 2),param_6);
+        wstrBufferPutChar(param_3,param_5,*(unsigned short *)(param_2 + *param_4 * 2),param_6);
         temp_v7 = *param_4;
         *param_4 = temp_v7 + 1;
         temp_v8 = (unsigned int)*(unsigned short *)(param_2 + (temp_v7 + 1) * 2);
-        FUN_0014f280(param_3,param_5,temp_v8,param_6);
+        wstrBufferPutChar(param_3,param_5,temp_v8,param_6);
         temp_v7 = *param_4;
         *param_4 = temp_v7 + 1;
         temp_v3 = *(unsigned short *)(param_2 + (temp_v7 + 1) * 2);
-        FUN_0014f280(param_3,param_5,temp_v3,param_6);
+        wstrBufferPutChar(param_3,param_5,temp_v3,param_6);
         temp_v7 = *param_4;
         *param_4 = temp_v7 + 1;
         temp_v1 = *(unsigned short *)(param_2 + (temp_v7 + 1) * 2);
-        FUN_0014f280(param_3,param_5,temp_v1,param_6);
+        wstrBufferPutChar(param_3,param_5,temp_v1,param_6);
         temp_v7 = *param_4;
         *param_4 = temp_v7 + 1;
         temp_v2 = *(unsigned short *)(param_2 + (temp_v7 + 1) * 2);
-        FUN_0014f280(param_3,param_5,temp_v2,param_6);
+        wstrBufferPutChar(param_3,param_5,temp_v2,param_6);
         temp_v4 = temp_v8;
         FUN_00154bbc(temp_v8,temp_v3,temp_v1,temp_v2,0xffffffff);
         if (temp_v4 != 0) {
@@ -250,7 +250,7 @@ FUN_00141f8c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
         *param_4 = temp_v6;
         if (*(short *)(param_2 + temp_v6 * 2) == 0) {
           temp_v5 = FUN_00156850(temp_v3,1);
-          FUN_002e342c(temp_v9,temp_v5);
+          libc_strcpy(temp_v9,temp_v5);
           FUN_001654f0(temp_v9,temp_v10);
           FUN_0014f2a8(param_3,param_5,temp_v10,param_6);
           return 1;
@@ -266,38 +266,38 @@ FUN_00141f8c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
         case 7:
         case 0xe:
           temp_v5 = FUN_00151e34(0x24);
-          FUN_002e342c(temp_v9,temp_v5);
+          libc_strcpy(temp_v9,temp_v5);
           break;
         case 1:
         case 3:
         case 8:
         case 0xf:
           temp_v5 = FUN_00151e34(0x25);
-          FUN_002e342c(temp_v9,temp_v5);
+          libc_strcpy(temp_v9,temp_v5);
           break;
         case 4:
         case 9:
           temp_v5 = FUN_00151e34(0x26);
-          FUN_002e342c(temp_v9,temp_v5);
+          libc_strcpy(temp_v9,temp_v5);
           break;
         case 5:
         case 10:
           temp_v5 = FUN_00151e34(0x27);
-          FUN_002e342c(temp_v9,temp_v5);
+          libc_strcpy(temp_v9,temp_v5);
           break;
         case 6:
         case 0xb:
           temp_v5 = FUN_00151e34(0x28);
-          FUN_002e342c(temp_v9,temp_v5);
+          libc_strcpy(temp_v9,temp_v5);
           break;
         case 0xc:
         case 0x10:
           temp_v5 = FUN_00151e34(0x29);
-          FUN_002e342c(temp_v9,temp_v5);
+          libc_strcpy(temp_v9,temp_v5);
           break;
         case 0xd:
           temp_v5 = FUN_00151e34(0x2a);
-          FUN_002e342c(temp_v9,temp_v5);
+          libc_strcpy(temp_v9,temp_v5);
           break;
         default:
           rt_memcpy_w(temp_v9,&LAB_00142870,0xb);
@@ -320,7 +320,7 @@ FUN_00141f8c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
   }
   else {
     temp_v5 = FUN_00151e34(*(unsigned short *)(param_2 + *param_4 * 2 + 2) + 0xf);
-    FUN_002e342c(temp_v9,temp_v5);
+    libc_strcpy(temp_v9,temp_v5);
     FUN_001654f0(temp_v9,temp_v10);
     FUN_0014f2a8(param_3,param_5,temp_v10,param_6);
   }

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e342c(unsigned char *);
+int libc_strcpy(unsigned char *);
 int effMenuNodeCreate(void);
 int FUN_00390364(void);
 
@@ -14,11 +14,11 @@ typedef struct {
 } void_stack;
 
 extern unsigned char LAB_003aa574; /* 0x3aa574 */
-extern unsigned char DAT_0059dbe0; /* 0x59dbe0 */
+extern unsigned char g_effectEditor; /* 0x59dbe0 */
 extern unsigned char DAT_00634c50; /* 0x634c50 */
 
 extern unsigned int wstrlen(unsigned char *);
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: effMenuNodeCreate. */
 /* Supplied declaration required: FUN_00390364. */
 
@@ -30,17 +30,17 @@ void FUN_003aa520(void)
   unsigned int temp_v0;
   unsigned int *puVar2;
   
-  if ((*(unsigned int * *)((unsigned char *)&DAT_0059dbe0 + 0x48)) != (unsigned int *)0x0) {
+  if ((*(unsigned int * *)((unsigned char *)&g_effectEditor + 0x48)) != (unsigned int *)0x0) {
     FUN_00390364();
-    (*(unsigned int * *)((unsigned char *)&DAT_0059dbe0 + 0x48)) = (unsigned int *)0x0;
+    (*(unsigned int * *)((unsigned char *)&g_effectEditor + 0x48)) = (unsigned int *)0x0;
   }
   puVar2 = (unsigned int *)&LAB_003aa574;
   effMenuNodeCreate();
-  (*(unsigned int * *)((unsigned char *)&DAT_0059dbe0 + 0x48)) = puVar2;
+  (*(unsigned int * *)((unsigned char *)&g_effectEditor + 0x48)) = puVar2;
   *puVar2 = 0xb6;
   puVar2[1] = 100;
-  puVar2 = (*(unsigned int * *)((unsigned char *)&DAT_0059dbe0 + 0x48));
-  FUN_002e342c((unsigned char *)((int)(*(unsigned int * *)((unsigned char *)&DAT_0059dbe0 + 0x48)) + 0x21));
+  puVar2 = (*(unsigned int * *)((unsigned char *)&g_effectEditor + 0x48));
+  libc_strcpy((unsigned char *)((int)(*(unsigned int * *)((unsigned char *)&g_effectEditor + 0x48)) + 0x21));
   temp_v0 = wstrlen(&DAT_00634c50);
   puVar2[4] = temp_v0;
   return;

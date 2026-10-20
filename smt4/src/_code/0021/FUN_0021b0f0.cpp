@@ -39,7 +39,7 @@ extern int DAT_0049f920; /* 0x49f920 */
 extern int FUN_00211804(unsigned int *, unsigned int *, unsigned int *, unsigned char *);
 /* Supplied declaration required: FUN_00282390. */
 /* Supplied declaration required: FUN_0028250c. */
-extern int FUN_002c2950(void);
+extern int gameGetMapBlock(void);
 
 
 void FUN_0021b0f0(void)
@@ -90,7 +90,7 @@ void FUN_0021b0f0(void)
     temp_v8 = temp_v9;
     temp_v17 = temp_v10;
     temp_v20 = temp_v11;
-    temp_v1 = FUN_002c2950();
+    temp_v1 = gameGetMapBlock();
     temp_v0 = *(int *)(DAT_004474f4 + 0x208);
     if (*(int *)(DAT_004474f4 + 0x208) == -1) {
       temp_v0 = *(int *)(DAT_004474f4 + 0xc4);

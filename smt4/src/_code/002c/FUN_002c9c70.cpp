@@ -4,10 +4,10 @@
 
 extern "C" {
 
-extern int DAT_0044cdf0; /* 0x44cdf0 */
+extern int g_naviMain; /* 0x44cdf0 */
 
 extern int FUN_0024c278(void);
-extern int FUN_002c09d0(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 
 
 unsigned int FUN_002c9c70(void)
@@ -16,10 +16,10 @@ unsigned int FUN_002c9c70(void)
   int temp_v0;
   unsigned int temp_v1;
   
-  if (DAT_0044cdf0 == 0) {
+  if (g_naviMain == 0) {
     return 0;
   }
-  temp_v0 = FUN_002c09d0(0x404);
+  temp_v0 = gameFlagIsSet(0x404);
   temp_v1 = 0;
   if ((temp_v0 != 0) && (temp_v0 = FUN_0024c278(), temp_v1 = 0, temp_v0 != 0)) {
     temp_v1 = 1;

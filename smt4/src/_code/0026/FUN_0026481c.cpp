@@ -4,9 +4,9 @@
 
 extern "C" {
 
-extern unsigned int FUN_00248248(int);
-extern int FUN_002482a8(void);
-extern int FUN_002c2950(void);
+extern unsigned int dataTable23Sub0GetEntry(int);
+extern int dataTable23Type0CountWithAoc(void);
+extern int gameGetMapBlock(void);
 
 
 void FUN_0026481c(unsigned int param_1,unsigned int param_2)
@@ -23,10 +23,10 @@ void FUN_0026481c(unsigned int param_1,unsigned int param_2)
     return;
   }
   temp_v3 = 0;
-  temp_v0 = FUN_002482a8();
+  temp_v0 = dataTable23Type0CountWithAoc();
   if (0 < temp_v0) {
     do {
-      temp_v1 = FUN_00248248(temp_v3);
+      temp_v1 = dataTable23Sub0GetEntry(temp_v3);
       if (*(unsigned char *)(temp_v1 + 8) == 0xff) {
         return;
       }
@@ -45,14 +45,14 @@ void FUN_0026481c(unsigned int param_1,unsigned int param_2)
       }
       else {
 LAB_0026489c:
-        temp_v0 = FUN_002c2950();
+        temp_v0 = gameGetMapBlock();
         if (-1 < temp_v3) {
           temp_v0 = temp_v0 + ((int)(temp_v3 + ((unsigned int)(temp_v3 >> 0x1f) >> 0x1b)) >> 5) * 4;
           *(unsigned int *)(temp_v0 + 0x7d4) = *(unsigned int *)(temp_v0 + 0x7d4) | (1 << ((temp_v3 % 0x20) & 0xffU));
         }
       }
       temp_v3 = temp_v3 + 1;
-      temp_v0 = FUN_002482a8();
+      temp_v0 = dataTable23Type0CountWithAoc();
     } while (temp_v3 < temp_v0);
   }
   return;

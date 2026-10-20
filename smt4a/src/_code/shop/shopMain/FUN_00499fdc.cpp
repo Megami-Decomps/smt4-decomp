@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001641c4(void);
+int ifTouchRegionRemove(void);
 int FUN_00184528(int, int);
 int FUN_0019de98(int, unsigned int);
 int FUN_00224880(unsigned int);
@@ -27,7 +27,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_001641c4. */
+/* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: FUN_00184528. */
 /* Supplied declaration required: FUN_0019de98. */
 extern int FUN_001ba3d0(unsigned short);
@@ -129,7 +129,7 @@ void FUN_00499fdc(int param_1)
       temp_v1 = 0;
       if (temp_v1 < *(short *)(param_1 + 0x16030)) {
         do {
-          FUN_001641c4();
+          ifTouchRegionRemove();
           temp_v1 = temp_v1 + 1;
         } while (temp_v1 < *(short *)(param_1 + 0x16030));
       }

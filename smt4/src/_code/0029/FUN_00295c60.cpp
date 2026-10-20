@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002b9024(void);
+int devilGetRecord(void);
 int dataTableGet(int, int);
 
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: devilGetRecord. */
 extern int dataTableGetEntries(void);
 /* Supplied declaration required: dataTableGet. */
 
@@ -32,7 +32,7 @@ unsigned long long FUN_00295c60(int param_1,int param_2)
     dataTableGet(9,1);
     temp_v1 = dataTableGetEntries();
     temp_v3 = *(int *)((temp_v1 + param_2 * 4) - 4);
-    FUN_002b9024();
+    devilGetRecord();
     temp_v1 = (param_2 - (unsigned int)*(unsigned char *)(param_1 + 3)) + 1;
     if (temp_v1 < 1) {
       temp_v0 = 100;

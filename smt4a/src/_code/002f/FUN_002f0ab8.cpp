@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002eb588(unsigned int [2]);
+int onlineTimeGetNow(unsigned int [2]);
 int constructObj00559344(...);
 int FUN_002efb80(...);
 
@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_002eb588. */
+/* Supplied declaration required: onlineTimeGetNow. */
 extern unsigned short FUN_002eb5c0(unsigned int);
 /* Supplied declaration required: constructObj00559344. */
 extern int FUN_002ef00c(unsigned char *, int);
@@ -50,7 +50,7 @@ void FUN_002f0ab8(int param_1,int param_2)
     temp_v0 = 0;
   }
   if (temp_v0) {
-    FUN_002eb588(temp_v5);
+    onlineTimeGetNow(temp_v5);
     temp_v1 = FUN_002eb5c0(0xffff);
     temp_v2 = constructObj00559344(temp_v7,(temp_v5[0] & 0xffff) + (unsigned int)temp_v1);
     *(unsigned short *)(param_1 + 0xec) = *(unsigned short *)(temp_v2 + 4);

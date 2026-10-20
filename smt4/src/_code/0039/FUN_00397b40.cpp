@@ -9,9 +9,9 @@ int FUN_002327e0(int, int *);
 int FUN_0026a704(void);
 int FUN_00295660(int, int *);
 int FUN_00296ee0(int, int);
-int FUN_00296f4c(unsigned int, int);
-int FUN_002af5c0(int, int, int);
-int FUN_002b8838(int);
+int scrScriptProcessStartEntry(unsigned int, int);
+int uiSpriteSetImageKeyframe(int, int, int);
+int buttonHelpSetPreset(int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -24,11 +24,11 @@ extern int FUN_0019e0c0(unsigned int);
 /* Supplied declaration required: FUN_0026a704. */
 /* Supplied declaration required: FUN_00295660. */
 /* Supplied declaration required: FUN_00296ee0. */
-/* Supplied declaration required: FUN_00296f4c. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002973d8(void);
 extern int sys43e188GetState(void);
-/* Supplied declaration required: FUN_002af5c0. */
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 extern int FUN_00309fcc(unsigned int *, int);
 
 
@@ -51,17 +51,17 @@ void FUN_00397b40(int param_1)
       if (temp_v1 != 0) {
         FUN_00296ee0(param_1,2);
         if (*(char *)(param_1 + 0x29) != '\0') {
-          FUN_002b8838(0x97);
+          buttonHelpSetPreset(0x97);
           return;
         }
         if (*(char *)(param_1 + 0x20) == '\x02' || *(char *)(param_1 + 0x20) == '\x06') {
-          FUN_002b8838(0x96);
+          buttonHelpSetPreset(0x96);
           return;
         }
-        FUN_002b8838(0x95);
+        buttonHelpSetPreset(0x95);
         return;
       }
-      FUN_002af5c0(param_1 + 0x794,0,1);
+      uiSpriteSetImageKeyframe(param_1 + 0x794,0,1);
       if (*(unsigned char *)(param_1 + 0x649) >= 2) {
         FUN_0026a704();
         FUN_00296ee0(param_1,7);
@@ -106,7 +106,7 @@ LAB_00397cf4:
             return;
           }
           FUN_00296ee0(param_1,6);
-          FUN_00296f4c(*(unsigned int *)(param_1 + 0x654),4);
+          scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x654),4);
           return;
         }
       } while( 1 );
@@ -117,9 +117,9 @@ LAB_00397cf4:
     if (temp_v1 != 0) {
       FUN_002327e0(param_1,&uStack_30);
       FUN_00295660(0x32,&uStack_30);
-      FUN_00296f4c(*(unsigned int *)(param_1 + 0x654),1);
+      scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x654),1);
       *(unsigned char *)(param_1 + 0x658) = 1;
-      FUN_002b8838(0x9a);
+      buttonHelpSetPreset(0x9a);
     }
   }
   return;

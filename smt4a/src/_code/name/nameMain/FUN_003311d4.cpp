@@ -24,7 +24,7 @@ extern unsigned int *DAT_00588110; /* 0x588110 */
 extern int jobFind(unsigned int);
 /* Supplied declaration required: asdMemFree. */
 extern unsigned int scrGetArg(unsigned int);
-extern unsigned int FUN_00261828(void);
+extern unsigned int gameDataGetPlayerName(void);
 /* Supplied declaration required: FUN_00275748. */
 /* Supplied declaration required: FUN_002c76c0. */
 /* Supplied declaration required: FUN_003180c4. */
@@ -74,7 +74,7 @@ unsigned int FUN_003311d4(void)
     }
   }
   else {
-    temp_v1 = FUN_00261828();
+    temp_v1 = gameDataGetPlayerName();
     FUN_003180c4(0x33,temp_v1);
   }
   g_name = 0;

@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_00360110(int sdkVoice, int priority);
+int nn_snd_CTR_Voice_SetPriority(int sdkVoice, int priority);
 int nw_snd_internal_driver_VoiceManager_ChangeVoicePriority(u32 manager, void *voice);
 extern u32 FUN_002baf30(void);
 
@@ -33,7 +33,7 @@ void nw_snd_internal_driver_Voice_SetPriority(Voice *voice, u32 priority)
         do {
             sdkVoice = voice->sdkVoices[i];
             if (sdkVoice != 0) {
-                FUN_00360110(sdkVoice, 1);
+                nn_snd_CTR_Voice_SetPriority(sdkVoice, 1);
             }
             i = i + 1;
         } while (i < voice->count);

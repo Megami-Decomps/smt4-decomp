@@ -11,16 +11,16 @@ typedef struct Obj {
 extern struct {
     u8 unk0[4];
     Obj *obj;
-} DAT_0044ea58;
+} g_asdCamera;
 
 u32 FUN_0024ac4c(int which)
 {
     u32 value;
 
     if (which == 2) {
-        value = DAT_0044ea58.obj->unk84;
+        value = g_asdCamera.obj->unk84;
     } else {
-        value = DAT_0044ea58.obj->unk80;
+        value = g_asdCamera.obj->unk80;
     }
     return value;
 }

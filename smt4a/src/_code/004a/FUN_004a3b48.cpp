@@ -45,7 +45,7 @@ typedef struct {
 
 extern unsigned short FUN_0017760c(unsigned char *);
 /* Supplied declaration required: FUN_00184310. */
-extern int FUN_001ab888(void);
+extern int gameGetSlotTable(void);
 extern int FUN_0023b3d0(void);
 /* Supplied declaration required: FUN_0023b45c. */
 extern int FUN_002a4b28(unsigned short);
@@ -158,7 +158,7 @@ void FUN_004a3b48(int param_1)
       FUN_002f0420(temp_v4);
     }
     else {
-      temp_v2 = FUN_001ab888();
+      temp_v2 = gameGetSlotTable();
       temp_v3 = 0;
       temp_v5 = 0;
       if (temp_v5 < *(unsigned char *)(temp_v2 + 0x1ca3)) {

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e7232(void);
+int sharedRefRelease(void);
 int FUN_002ea3d0(int, unsigned int);
 int FUN_002ea41e(unsigned char [20], int);
 int FUN_002f674e(void);
@@ -13,7 +13,7 @@ int FUN_00310784(int, unsigned char [20]);
 typedef int romwright_code(...);
 extern unsigned char LAB_0011fb54; /* 0x11fb54 */
 
-/* Supplied declaration required: FUN_002e7232. */
+/* Supplied declaration required: sharedRefRelease. */
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned int, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
 /* Supplied declaration required: FUN_002ea41e. */
@@ -31,7 +31,7 @@ void FUN_0011fad8(int param_1)
   unsigned char temp_v1 [20];
   
   if (*(int *)(param_1 + 0x310) != 0) {
-    FUN_002e7232();
+    sharedRefRelease();
     *(unsigned int *)(param_1 + 0x310) = 0;
   }
   if (*(char *)(param_1 + 0x90) != '\x02') {

@@ -10,10 +10,10 @@ int FUN_0029be5c(int);
 extern int FUN_00287894(void);
 /* Supplied declaration required: FUN_002903f0. */
 /* Supplied declaration required: FUN_0029be5c. */
-extern int FUN_002a8740(void);
-extern int FUN_002a8764(void);
-extern int FUN_002a8778(void);
-extern int FUN_002b63ac(void);
+extern int gameGetUnitRecord(void);
+extern int gameGetSlotTable(void);
+extern int gameCountUnits(void);
+extern int gameGetPlayerData(void);
 extern int gameGetOptions(void);
 extern int FUN_002b6b38(void);
 
@@ -37,11 +37,11 @@ void FUN_0027f164(unsigned int param_1,int param_2)
     return;
   }
   if ((((param_1 == 0 || param_1 == 2) || param_1 == 3) &&
-      (temp_v2 = FUN_002b63ac(), (*(unsigned short *)(temp_v2 + 0x72) & 2) == 0)) &&
-     (temp_v2 = FUN_002b63ac(), (*(unsigned short *)(temp_v2 + 0x72) & 0x400) == 0)) {
-    temp_v2 = FUN_002b63ac();
+      (temp_v2 = gameGetPlayerData(), (*(unsigned short *)(temp_v2 + 0x72) & 2) == 0)) &&
+     (temp_v2 = gameGetPlayerData(), (*(unsigned short *)(temp_v2 + 0x72) & 0x400) == 0)) {
+    temp_v2 = gameGetPlayerData();
     temp_v5 = *(short *)(temp_v2 + 0x1c);
-    temp_v2 = FUN_002b63ac();
+    temp_v2 = gameGetPlayerData();
     temp_v1 = *(short *)(temp_v2 + 0x2a);
     temp_v2 = (temp_v5 * param_2) / 100;
     if (temp_v2 < 1) {
@@ -52,7 +52,7 @@ void FUN_0027f164(unsigned int param_1,int param_2)
       temp_v2 = 1;
     }
     temp_v5 = (short)temp_v2;
-    temp_v3 = FUN_002b63ac();
+    temp_v3 = gameGetPlayerData();
     temp_v7 = *(short *)(temp_v3 + 0x1c);
     if ((temp_v5 <= temp_v7) && (temp_v7 = temp_v5, temp_v5 < 1)) {
       temp_v7 = 1;
@@ -65,7 +65,7 @@ void FUN_0027f164(unsigned int param_1,int param_2)
   if (param_1 >= 2) {
     if (param_1 == 2 || param_1 == 3) {
       temp_v2 = 3;
-      temp_v3 = FUN_002a8764();
+      temp_v3 = gameGetSlotTable();
       temp_v3 = temp_v3 + 0x9108;
       goto LAB_0027f25c;
     }
@@ -74,15 +74,15 @@ void FUN_0027f164(unsigned int param_1,int param_2)
     }
   }
   else {
-    temp_v2 = FUN_002a8778();
-    temp_v3 = FUN_002a8764();
+    temp_v2 = gameCountUnits();
+    temp_v3 = gameGetSlotTable();
     temp_v3 = temp_v3 + 0x90f0;
 LAB_0027f25c:
     temp_v8 = 0;
     if (0 < temp_v2) {
       do {
         if (-1 < *(char *)(temp_v3 + temp_v8)) {
-          temp_v4 = FUN_002a8740();
+          temp_v4 = gameGetUnitRecord();
           temp_v0 = *(unsigned short *)(temp_v4 + 0x44);
           if (((temp_v0 & 2) == 0 && (temp_v0 & 0x400) == 0) && (temp_v0 & 4) == 0) {
             temp_v5 = *(short *)(temp_v4 + 0xe);

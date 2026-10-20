@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_00152bec(void);
+int asdMdlManagerMarkDestroy(void);
 int FUN_00152ed8(int *);
-int FUN_002a72c0(int);
+int asdModelSlotRelease(int);
 int asdMdlManagerDestroy(int);
 int asdMemFree(void);
 
@@ -18,9 +18,9 @@ typedef struct {
 
 extern int DAT_0044ea5c; /* 0x44ea5c */
 
-/* Supplied declaration required: FUN_00152bec. */
+/* Supplied declaration required: asdMdlManagerMarkDestroy. */
 /* Supplied declaration required: FUN_00152ed8. */
-/* Supplied declaration required: FUN_002a72c0. */
+/* Supplied declaration required: asdModelSlotRelease. */
 /* Supplied declaration required: asdMdlManagerDestroy. */
 /* Supplied declaration required: asdMemFree. */
 
@@ -33,24 +33,24 @@ void FUN_002a4bac(int *param_1)
   unsigned int *puVar2;
   int temp_v1;
   
-  FUN_002a72c0(0);
+  asdModelSlotRelease(0);
   if (param_1[7] != 0) {
-    FUN_00152bec();
+    asdMdlManagerMarkDestroy();
     asdMdlManagerDestroy(param_1[7]);
     param_1[7] = 0;
   }
   if (param_1[10] != 0) {
-    FUN_00152bec();
+    asdMdlManagerMarkDestroy();
     asdMdlManagerDestroy(param_1[10]);
     param_1[10] = 0;
   }
   if (param_1[8] != 0) {
-    FUN_00152bec();
+    asdMdlManagerMarkDestroy();
     asdMdlManagerDestroy(param_1[8]);
     param_1[8] = 0;
   }
   if (param_1[9] != 0) {
-    FUN_00152bec();
+    asdMdlManagerMarkDestroy();
     asdMdlManagerDestroy(param_1[9]);
     param_1[9] = 0;
   }

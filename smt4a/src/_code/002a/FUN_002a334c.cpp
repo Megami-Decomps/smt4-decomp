@@ -16,14 +16,14 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } void_stack;
 
-extern unsigned char DAT_0057f588; /* 0x57f588 */
+extern unsigned char g_messageMain; /* 0x57f588 */
 
 /* Supplied declaration required: FUN_0021bdac. */
 /* Supplied declaration required: scrGetArg. */
 /* Supplied declaration required: FUN_00282a08. */
 extern unsigned int FUN_002ba85c(void);
 /* Supplied declaration required: FUN_002c76c0. */
-extern unsigned int FUN_002deb84(void);
+extern unsigned int scrGetCommandFrame(void);
 
 
 void FUN_002a334c(void)
@@ -73,12 +73,12 @@ void FUN_002a334c(void)
   }
 LAB_002a33e8:
   FUN_002c76c0(0);
-  if ((*(int *)((unsigned char *)&DAT_0057f588 + 0x4)) != 0) {
-    *(unsigned char *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x4)) + 0x19c5) = 0x15;
+  if ((*(int *)((unsigned char *)&g_messageMain + 0x4)) != 0) {
+    *(unsigned char *)((*(int *)((unsigned char *)&g_messageMain + 0x4)) + 0x19c5) = 0x15;
   }
   temp_v2 = FUN_002ba85c();
   temp_v3 = scrGetArg(0);
-  temp_v4 = FUN_002deb84();
+  temp_v4 = scrGetCommandFrame();
   FUN_0021bdac(temp_v2,temp_v3,temp_v4,6,1,0);
   return;
 }

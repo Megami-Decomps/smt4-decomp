@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_003fd63c(int, int);
+int gameFlagSetValue(int, int);
 int SBORROW4(int, int);
 
 extern unsigned int DAT_00571490; /* 0x571490 */
@@ -15,9 +15,9 @@ extern unsigned int uRam005714c4; /* 0x5714c4 */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 extern int btlGetMainState(void);
 extern int lcgRandomRange(unsigned int);
-extern int FUN_001ab854(void);
-extern int FUN_001ab888(void);
-/* Supplied declaration required: FUN_003fd63c. */
+extern int gameGetSlotRecord(void);
+extern int gameGetSlotTable(void);
+/* Supplied declaration required: gameFlagSetValue. */
 extern int bitsAt60Test(int, unsigned int);
 
 
@@ -39,12 +39,12 @@ unsigned int FUN_004c6298(void)
   temp_v1 = btlGetMainState();
   if (*(int *)(temp_v1 + 0xf0) < 0) {
     temp_v8 = 0;
-    temp_v1 = FUN_001ab888();
+    temp_v1 = gameGetSlotTable();
     temp_v7 = 0;
     if (*(unsigned char *)(temp_v1 + 0x1ca3) != 0) {
       do {
         if (-1 < *(char *)(temp_v1 + temp_v7 + 0x1c88)) {
-          temp_v2 = FUN_001ab854();
+          temp_v2 = gameGetSlotRecord();
           temp_v3 = bitsAt60Test(temp_v2,10);
           if (temp_v3 != 0) {
             temp_v0 = *(unsigned char *)(temp_v2 + 0x12a);
@@ -83,7 +83,7 @@ unsigned int FUN_004c6298(void)
         temp_v7 = temp_v7 + 1;
       } while (temp_v7 < (int)(unsigned int)*(unsigned char *)(temp_v1 + 0x1ca3));
       if (0 < temp_v8) {
-        FUN_003fd63c(0x11d6,1);
+        gameFlagSetValue(0x11d6,1);
         temp_v1 = btlGetMainState();
         temp_v6 = *(unsigned int *)(temp_v1 + 0x45a4) | DAT_00571494;
         *(unsigned int *)(temp_v1 + 0x45a0) = *(unsigned int *)(temp_v1 + 0x45a0) | DAT_00571490;

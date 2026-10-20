@@ -7,15 +7,15 @@ extern "C" {
 int FUN_001600fc(void);
 int FUN_001612f4(...);
 int FUN_00170050(void);
-int FUN_00170158(...);
+int nn_gxlow_CTR_WriteHWRegsForward(...);
 int FUN_00170184(void);
-int FUN_001702ac(...);
+int nn_gxlow_CTR_WriteHWRegsWithMaskForward(...);
 int FUN_001702f8(...);
-int FUN_0017cdb4(void);
-int FUN_0017cff0(...);
+int nngxGetError(void);
+int nngxBindCmdlist(...);
 int FUN_0017dd84(void);
-int FUN_0018b600(void);
-int FUN_0018b610(void);
+int globalCriticalSectionEnterForward(void);
+int globalCriticalSectionLeaveForward(void);
 int FUN_001963e0(void);
 int sysMemClear(...);
 int SBORROW4(...);
@@ -109,9 +109,9 @@ extern unsigned int DAT_00589194; /* 0x589194 */
 extern unsigned int DAT_00589198; /* 0x589198 */
 extern int DAT_0058919c; /* 0x58919c */
 extern int DAT_005891a0; /* 0x5891a0 */
-extern int DAT_005b40e0; /* 0x5b40e0 */
-extern int DAT_005b40e4; /* 0x5b40e4 */
-extern unsigned int DAT_0061a470; /* 0x61a470 */
+extern int g_commandBufferCursor; /* 0x5b40e0 */
+extern int g_commandBufferEnd; /* 0x5b40e4 */
+extern unsigned int g_asdGfxContext; /* 0x61a470 */
 extern unsigned int DAT_0061a474; /* 0x61a474 */
 extern unsigned int DAT_0061a478; /* 0x61a478 */
 extern unsigned int DAT_0061a47c; /* 0x61a47c */
@@ -136,17 +136,17 @@ extern int FUN_00160f90(int);
 /* Supplied declaration required: FUN_001612f4. */
 extern unsigned long long FUN_001623d0(void);
 /* Supplied declaration required: FUN_00170050. */
-/* Supplied declaration required: FUN_00170158. */
+/* Supplied declaration required: nn_gxlow_CTR_WriteHWRegsForward. */
 /* Supplied declaration required: FUN_00170184. */
-/* Supplied declaration required: FUN_001702ac. */
+/* Supplied declaration required: nn_gxlow_CTR_WriteHWRegsWithMaskForward. */
 extern int FUN_001702e0(void);
 /* Supplied declaration required: FUN_001702f8. */
 extern unsigned int FUN_00170344(void);
-/* Supplied declaration required: FUN_0017cdb4. */
-/* Supplied declaration required: FUN_0017cff0. */
+/* Supplied declaration required: nngxGetError. */
+/* Supplied declaration required: nngxBindCmdlist. */
 /* Supplied declaration required: FUN_0017dd84. */
-/* Supplied declaration required: FUN_0018b600. */
-/* Supplied declaration required: FUN_0018b610. */
+/* Supplied declaration required: globalCriticalSectionEnterForward. */
+/* Supplied declaration required: globalCriticalSectionLeaveForward. */
 /* Supplied declaration required: FUN_001963e0. */
 /* Supplied declaration required: sysMemClear. */
 extern int nngxGetVramEndAddr(unsigned int);
@@ -177,8 +177,8 @@ unsigned int FUN_00149ae0(romwright_code *param_1,romwright_code *param_2)
   if ((param_1 == (romwright_code *)0x0 || param_2 == (romwright_code *)0x0) || (DAT_0061a480 != '\0')) {
     return 0;
   }
-  sysMemClear(&DAT_0061a470,0x180);
-  DAT_0061a470 = 0xf0;
+  sysMemClear(&g_asdGfxContext,0x180);
+  g_asdGfxContext = 0xf0;
   DAT_0061a474 = 0xf0;
   DAT_0061a478 = 400;
   DAT_0061a47c = 0x140;
@@ -198,8 +198,8 @@ unsigned int FUN_00149ae0(romwright_code *param_1,romwright_code *param_2)
     if ((((-1 < temp_v0) && (temp_v0 = FUN_001600b8(temp_v1), -1 < temp_v0)) &&
         (temp_v0 = FUN_00160f90(temp_v2), -1 < temp_v0)) &&
        ((FUN_001600fc(), -1 < temp_v4 && (temp_v0 = FUN_00160ddc(temp_v5), -1 < temp_v0)))) {
-      FUN_0017cdb4();
-      FUN_0017cff0(temp_v9[2]);
+      nngxGetError();
+      nngxBindCmdlist(temp_v9[2]);
       puVar1 = DAT_0061a50c;
       if (DAT_0061a50c != (unsigned int *)0x0) {
         if (DAT_0061a50c[1] != 0) {
@@ -227,16 +227,16 @@ unsigned int FUN_00149ae0(romwright_code *param_1,romwright_code *param_2)
         puVar1[6] = temp_v0 + 0x10000;
         puVar1[7] = 0x10;
         sysMemClear(temp_v0 + 0x10000,0x1c0);
-        DAT_005b40e0 = puVar1[1];
-        DAT_005b40e4 = puVar1[2] + DAT_005b40e0;
+        g_commandBufferCursor = puVar1[1];
+        g_commandBufferEnd = puVar1[2] + g_commandBufferCursor;
       }
       if (DAT_0061a50c != (unsigned int *)0x0) {
         DAT_0061a50c[0xb] = 0x300;
       }
-      temp_v0 = FUN_0017cdb4();
+      temp_v0 = nngxGetError();
       if ((temp_v0 == 0) && (temp_v0 = vldtr_initializeStateValidator(temp_v9[0]), -1 < temp_v0)) {
         temp_v3 = 2;
-        DAT_005891a0 = DAT_005b40e0 - DAT_0061a50c[1];
+        DAT_005891a0 = g_commandBufferCursor - DAT_0061a50c[1];
         DAT_0061a50c[3] = DAT_005891a0;
         FUN_00170050();
         temp_v0 = FUN_001702e0();
@@ -250,145 +250,145 @@ unsigned int FUN_00149ae0(romwright_code *param_1,romwright_code *param_2)
         FUN_001702f8(&LAB_0017e4d4,6);
         if (temp_v0 != 0) {
           temp_v9[0] = 0;
-          FUN_00170158(&LAB_00401000,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_00401000,temp_v9,4);
           temp_v9[0] = 0x12345678;
-          FUN_00170158(&LAB_00401080,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_00401080,temp_v9,4);
           temp_v9[0] = -0x10;
-          FUN_00170158(&LAB_004010c0,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_004010c0,temp_v9,4);
           temp_v9[0] = 1;
-          FUN_00170158(&LAB_004010d0,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_004010d0,temp_v9,4);
           temp_v9[0] = 0x1c2;
-          FUN_00170158(&LAB_00400400,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_00400400,temp_v9,4);
           temp_v9[0] = 0xd1;
-          FUN_00170158(&LAB_00400404,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_00400404,temp_v9,4);
           temp_v9[0] = 0x1c1;
-          FUN_00170158(&LAB_00400408,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_00400408,temp_v9,4);
           temp_v9[0] = 0x1c1;
-          FUN_00170158(&LAB_0040040c,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_0040040c,temp_v9,4);
           temp_v9[0] = 0;
-          FUN_00170158(&LAB_00400410,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_00400410,temp_v9,4);
           temp_v9[0] = 0xcf;
-          FUN_00170158(&LAB_00400414,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_00400414,temp_v9,4);
           temp_v9[0] = 0xd1;
-          FUN_00170158(&LAB_00400418,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_00400418,temp_v9,4);
           temp_v9[0] = 0x1c501c1;
-          FUN_00170158(&LAB_0040041c,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_0040041c,temp_v9,4);
           temp_v9[0] = 0x10000;
-          FUN_00170158(&LAB_00400420,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_00400420,temp_v9,4);
           temp_v9[0] = 0x19d;
-          FUN_00170158(&LAB_00400424,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_00400424,temp_v9,4);
           temp_v9[0] = 2;
-          FUN_00170158(&LAB_00400428,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_00400428,temp_v9,4);
           temp_v9[0] = 0x192;
-          FUN_00170158(&LAB_0040042c,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_0040042c,temp_v9,4);
           temp_v9[0] = 0x192;
-          FUN_00170158(&LAB_00400430,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_00400430,temp_v9,4);
           temp_v9[0] = 0x192;
-          FUN_00170158(&LAB_00400434,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_00400434,temp_v9,4);
           temp_v9[0] = 1;
-          FUN_00170158(&LAB_00400438,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_00400438,temp_v9,4);
           temp_v9[0] = 2;
-          FUN_00170158(&LAB_0040043c,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_0040043c,temp_v9,4);
           temp_v9[0] = 0x1960192;
-          FUN_00170158(&LAB_00400440,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_00400440,temp_v9,4);
           temp_v9[0] = 0;
-          FUN_00170158(&LAB_00400444,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_00400444,temp_v9,4);
           temp_v9[0] = 0;
-          FUN_00170158(&LAB_00400448,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_00400448,temp_v9,4);
           temp_v9[0] = 0x19000f0;
-          FUN_00170158(&LAB_0040045c,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_0040045c,temp_v9,4);
           temp_v9[0] = 0x1c100d1;
-          FUN_00170158(&LAB_00400460,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_00400460,temp_v9,4);
           temp_v9[0] = 0x1920002;
-          FUN_00170158(&LAB_00400464,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_00400464,temp_v9,4);
           temp_v9[0] = 0x80340;
-          FUN_00170158(&LAB_00400470,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_00400470,temp_v9,4);
           temp_v9[0] = 0;
-          FUN_00170158(&LAB_0040049c,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_0040049c,temp_v9,4);
           temp_v9[0] = 0x1c2;
-          FUN_00170158(&LAB_00400500,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_00400500,temp_v9,4);
           temp_v9[0] = 0xd1;
-          FUN_00170158(&LAB_00400504,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_00400504,temp_v9,4);
           temp_v9[0] = 0x1c1;
-          FUN_00170158(&LAB_00400508,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_00400508,temp_v9,4);
           temp_v9[0] = 0x1c1;
-          FUN_00170158(&LAB_0040050c,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_0040050c,temp_v9,4);
           temp_v9[0] = 0xcd;
-          FUN_00170158(&LAB_00400510,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_00400510,temp_v9,4);
           temp_v9[0] = 0xcf;
-          FUN_00170158(&LAB_00400514,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_00400514,temp_v9,4);
           temp_v9[0] = 0xd1;
-          FUN_00170158(&LAB_00400518,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_00400518,temp_v9,4);
           temp_v9[0] = 0x1c501c1;
-          FUN_00170158(&LAB_0040051c,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_0040051c,temp_v9,4);
           temp_v9[0] = 0x10000;
-          FUN_00170158(&LAB_00400520,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_00400520,temp_v9,4);
           temp_v9[0] = 0x19d;
-          FUN_00170158(&LAB_00400524,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_00400524,temp_v9,4);
           temp_v9[0] = 0x52;
-          FUN_00170158(&LAB_00400528,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_00400528,temp_v9,4);
           temp_v9[0] = 0x192;
-          FUN_00170158(&LAB_0040052c,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_0040052c,temp_v9,4);
           temp_v9[0] = 0x192;
-          FUN_00170158(&LAB_00400530,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_00400530,temp_v9,4);
           temp_v9[0] = 0x4f;
-          FUN_00170158(&LAB_00400534,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_00400534,temp_v9,4);
           temp_v9[0] = 0x50;
-          FUN_00170158(&LAB_00400538,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_00400538,temp_v9,4);
           temp_v9[0] = 0x52;
-          FUN_00170158(&LAB_0040053c,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_0040053c,temp_v9,4);
           temp_v9[0] = 0x1980194;
-          FUN_00170158(&LAB_00400540,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_00400540,temp_v9,4);
           temp_v9[0] = 0;
-          FUN_00170158(&LAB_00400544,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_00400544,temp_v9,4);
           temp_v9[0] = 0x11;
-          FUN_00170158(&LAB_00400548,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_00400548,temp_v9,4);
           temp_v9[0] = 0x14000f0;
-          FUN_00170158(&LAB_0040055c,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_0040055c,temp_v9,4);
           temp_v9[0] = 0x1c100d1;
-          FUN_00170158(&LAB_00400560,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_00400560,temp_v9,4);
           temp_v9[0] = 0x1920052;
-          FUN_00170158(FUN_00400564,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(FUN_00400564,temp_v9,4);
           temp_v9[0] = 0x80300;
-          FUN_00170158(&LAB_00400570,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_00400570,temp_v9,4);
           temp_v9[0] = 0;
-          FUN_00170158(&LAB_0040059c,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_0040059c,temp_v9,4);
           temp_v9[0] = 0x18300000;
-          FUN_00170158(&LAB_00400468,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_00400468,temp_v9,4);
           temp_v9[0] = 0x18300000;
-          FUN_00170158(&LAB_0040046c,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_0040046c,temp_v9,4);
           temp_v9[0] = 0x18300000;
-          FUN_00170158(&LAB_00400568,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_00400568,temp_v9,4);
           temp_v9[0] = 0x18300000;
-          FUN_00170158(&LAB_0040056c,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_0040056c,temp_v9,4);
           temp_v9[0] = 0x18300000;
-          FUN_00170158(&LAB_00400494,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_00400494,temp_v9,4);
           temp_v9[0] = 0x18300000;
-          FUN_00170158(&LAB_00400498,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_00400498,temp_v9,4);
           temp_v9[0] = 1;
-          FUN_00170158(&LAB_00400478,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_00400478,temp_v9,4);
           temp_v9[0] = 1;
-          FUN_00170158(&LAB_00400578,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_00400578,temp_v9,4);
           temp_v9[1] = 0xff00;
           temp_v9[0] = 0;
-          FUN_001702ac(&LAB_00400c18,temp_v9,temp_v9 + 1,4);
+          nn_gxlow_CTR_WriteHWRegsWithMaskForward(&LAB_00400c18,temp_v9,temp_v9 + 1,4);
           temp_v9[0] = 0x70100;
-          FUN_00170158(&LAB_00400004,temp_v9);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_00400004,temp_v9);
           temp_v9[0] = 0;
           temp_v9[1] = 0xff;
-          FUN_001702ac(&LAB_0040001c,temp_v9,temp_v9 + 1,4);
+          nn_gxlow_CTR_WriteHWRegsWithMaskForward(&LAB_0040001c,temp_v9,temp_v9 + 1,4);
           temp_v9[0] = 0;
           temp_v9[1] = 0xff;
-          FUN_001702ac(&LAB_0040002c,temp_v9,temp_v9 + 1,4);
+          nn_gxlow_CTR_WriteHWRegsWithMaskForward(&LAB_0040002c,temp_v9,temp_v9 + 1,4);
           temp_v9[0] = 0x22221200;
-          FUN_00170158(&LAB_00400050,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_00400050,temp_v9,4);
           temp_v9[0] = 0xff2;
           temp_v9[1] = 0xffff;
-          FUN_001702ac(&LAB_00400054,temp_v9,temp_v9 + 1,4);
+          nn_gxlow_CTR_WriteHWRegsWithMaskForward(&LAB_00400054,temp_v9,temp_v9 + 1,4);
           temp_v9[0] = 0x10501;
-          FUN_00170158(&LAB_00400474,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_00400474,temp_v9,4);
           temp_v9[0] = 0x10501;
-          FUN_00170158(&LAB_00400574,temp_v9,4);
+          nn_gxlow_CTR_WriteHWRegsForward(&LAB_00400574,temp_v9,4);
           FUN_0017dd84();
           puVar1 = DAT_0061a50c;
           puVar7 = (unsigned char *)(DAT_0061a50c[6] + DAT_0061a50c[8] * 0x1c);
@@ -420,9 +420,9 @@ unsigned int FUN_00149ae0(romwright_code *param_1,romwright_code *param_2)
           DAT_0061a482 = 1;
           if (((int)DAT_0061a50c[10] < (int)DAT_0061a50c[8]) &&
              (DAT_0061a481 = '\x01', DAT_0061a50c[0xb] == 0x300)) {
-            FUN_0018b600();
+            globalCriticalSectionEnterForward();
             FUN_001963e0();
-            FUN_0018b610();
+            globalCriticalSectionLeaveForward();
           }
         }
         temp_v7 = 0;
@@ -440,7 +440,7 @@ LAB_0014a6cc:
             }
             puVar1 = DAT_0061a510;
             if (DAT_0061a510 != (unsigned int *)0x0) {
-              FUN_0018b600();
+              globalCriticalSectionEnterForward();
               if (DAT_0061a481 == '\0') {
                 DAT_0061a482 = 0;
               }
@@ -448,9 +448,9 @@ LAB_0014a6cc:
                 *(unsigned char *)(puVar1[6] + (puVar1[9] * 0x1c - 0x1a)) = 1;
                 DAT_0061a488 = 1;
               }
-              FUN_0018b610();
+              globalCriticalSectionLeaveForward();
             }
-            FUN_0017cff0(0);
+            nngxBindCmdlist(0);
             FUN_001612f4(1,temp_v9 + 2);
             DAT_0061a480 = 1;
             return 1;

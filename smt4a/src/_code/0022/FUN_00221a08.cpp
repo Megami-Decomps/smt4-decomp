@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00186f58(void);
 
 /* Supplied declaration required: FUN_00186f58. */
-extern unsigned int FUN_003e46f4(int);
+extern unsigned int gameDataFlagTestBit(int);
 
 
 int FUN_00221a08(int *param_1,int *param_2)
@@ -20,9 +20,9 @@ int FUN_00221a08(int *param_1,int *param_2)
   int temp_v3;
   unsigned char temp_v4;
   
-  temp_v0 = FUN_003e46f4(*param_1);
+  temp_v0 = gameDataFlagTestBit(*param_1);
   temp_v3 = 0;
-  temp_v1 = FUN_003e46f4(*param_2);
+  temp_v1 = gameDataFlagTestBit(*param_2);
   if ((temp_v0 & ~temp_v1) != 0) {
     temp_v3 = -1;
   }

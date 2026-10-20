@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0019cac4(void);
-int FUN_001aba54(void);
+int dataTable00FindById(void);
+int dataTable04FindById(void);
 int scrGetArg(int);
 int FUN_00301a08(unsigned int, int [6], int *);
 int scrSetResult(int);
@@ -25,8 +25,8 @@ extern unsigned int DAT_005702b0; /* 0x5702b0 */
 extern unsigned int DAT_005702b4; /* 0x5702b4 */
 
 extern int btlGetMainState(void);
-/* Supplied declaration required: FUN_0019cac4. */
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: dataTable00FindById. */
+/* Supplied declaration required: dataTable04FindById. */
 extern unsigned int FUN_00232388(void);
 /* Supplied declaration required: scrGetArg. */
 extern int FUN_0027281c(void);
@@ -68,7 +68,7 @@ unsigned int FUN_0038c888(void)
           temp_v2 = 0;
           do {
             temp_v3 = (unsigned int)*(unsigned short *)(puVar6[0xfe] + temp_v2 * 2 + 0x34);
-            FUN_001aba54();
+            dataTable04FindById();
             if ((temp_v3 != 0) && (*(char *)(temp_v3 + 0x23) == '\x03')) {
               scrSetResult(1);
               return 1;
@@ -80,7 +80,7 @@ unsigned int FUN_0038c888(void)
           temp_v2 = 0;
           do {
             temp_v3 = (unsigned int)*(unsigned short *)(puVar6[0xff] + temp_v2 * 2 + 0x34);
-            FUN_001aba54();
+            dataTable04FindById();
             if ((temp_v3 != 0) && (*(char *)(temp_v3 + 0x23) == '\x03')) {
               scrSetResult(1);
               return 1;
@@ -90,11 +90,11 @@ unsigned int FUN_0038c888(void)
         }
         if (puVar6[0x101] != 0) {
           temp_v3 = (unsigned int)*(unsigned short *)((int)puVar6 + 0x166);
-          FUN_0019cac4();
+          dataTable00FindById();
           temp_v2 = 0;
           do {
             temp_v4 = (unsigned int)*(unsigned short *)(temp_v3 + temp_v2 * 2 + 0x50);
-            FUN_001aba54();
+            dataTable04FindById();
             if ((temp_v4 != 0) && (*(char *)(temp_v4 + 0x23) == '\x03')) {
               scrSetResult(1);
               return 1;

@@ -5,7 +5,7 @@
 extern "C" {
 
 int dataTable06Sub1GetRecord(void);
-int FUN_002b9024(void);
+int devilGetRecord(void);
 int randNextInRange(...);
 int dataTable14Sub0GetRecord(void);
 
@@ -45,9 +45,9 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_3_stack;
 
-extern int padIsButtonDown(unsigned int);
+extern int flagBitIsSet(unsigned int);
 /* Supplied declaration required: dataTable06Sub1GetRecord. */
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: randNextInRange. */
 /* Supplied declaration required: dataTable14Sub0GetRecord. */
 
@@ -112,7 +112,7 @@ short FUN_0033be90(unsigned int *param_1,int param_2,fn_0033be90_arg2 *param_3)
   else if (temp_v2 >= 2) {
     temp_v2 = (temp_v2 - 2) & 0xff;
   }
-  temp_v4 = padIsButtonDown(5);
+  temp_v4 = flagBitIsSet(5);
   if (temp_v4 != 0) {
     temp_v2 = (temp_v2 + 1) & 0xff;
   }
@@ -120,7 +120,7 @@ short FUN_0033be90(unsigned int *param_1,int param_2,fn_0033be90_arg2 *param_3)
   temp_v9 = param_1[1];
   temp_v10 = param_1[2];
   temp_v11 = param_1[3];
-  FUN_002b9024();
+  devilGetRecord();
   temp_v12 = param_3->field_0x4e;
   temp_v4 = 0;
   psVar9 = (short *)0x1;

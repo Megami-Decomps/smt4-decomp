@@ -5,12 +5,12 @@
 extern "C" {
 
 int btlGetMainState(void);
-int FUN_001846d0(int, int);
+int uiSpriteSelectAnim(int, int);
 int FUN_0020acd8(int, unsigned int, unsigned int);
 int FUN_0020ad6c(...);
 int FUN_0020d3d4(int);
 int FUN_002cb438(int, unsigned int, unsigned int);
-int FUN_0031d1b4(int, int);
+int flaggedEntrySetValueB(int, int);
 int FUN_003363a8(int, unsigned int, int, unsigned int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -22,13 +22,13 @@ extern unsigned int DAT_00573ba8; /* 0x573ba8 */
 extern unsigned int DAT_00573bac; /* 0x573bac */
 
 /* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: FUN_001846d0. */
+/* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: FUN_0020acd8. */
 /* Supplied declaration required: FUN_0020ad6c. */
 /* Supplied declaration required: FUN_0020d3d4. */
 /* Supplied declaration required: FUN_002cb438. */
 extern unsigned int FUN_002cc9e0(int, unsigned int);
-/* Supplied declaration required: FUN_0031d1b4. */
+/* Supplied declaration required: flaggedEntrySetValueB. */
 /* Supplied declaration required: FUN_003363a8. */
 extern int FUN_003e8430(void);
 
@@ -43,11 +43,11 @@ void FUN_00231cdc(int param_1,unsigned int param_2,int param_3,unsigned int para
   if (*(char *)(param_1 + 0x38b8) != '\0') {
     *(unsigned int *)(param_1 + 0x3890) = 0;
     FUN_0020d3d4(param_1);
-    FUN_0031d1b4(param_1 + 0x3bdc,0);
-    FUN_001846d0(param_1 + 0x20,0x1b);
+    flaggedEntrySetValueB(param_1 + 0x3bdc,0);
+    uiSpriteSelectAnim(param_1 + 0x20,0x1b);
     temp_v1 = 0;
     do {
-      FUN_001846d0(param_1 + temp_v1 * 0x8c + 0x138,0x1b);
+      uiSpriteSelectAnim(param_1 + temp_v1 * 0x8c + 0x138,0x1b);
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < 8);
     *(unsigned int *)(param_1 + 0x3888) = 0x2d;

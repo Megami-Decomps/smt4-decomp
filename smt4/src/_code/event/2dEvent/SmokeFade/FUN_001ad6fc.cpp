@@ -14,7 +14,7 @@ extern unsigned int DAT_0043df44; /* 0x43df44 */
 
 /* Supplied declaration required: FUN_0029c3c0. */
 /* Supplied declaration required: FUN_002a03d8. */
-extern int FUN_002a60b4(unsigned int, unsigned int);
+extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 extern int FUN_002c1d5c(void);
 /* Supplied declaration required: FUN_002c53f4. */
 
@@ -37,7 +37,7 @@ unsigned int FUN_001ad6fc(void)
   temp_v3 = 0;
   temp_v2 = 0;
   do {
-    temp_v1 = FUN_002a60b4((&DAT_0043df40)[temp_v2 * 3],(&DAT_0043df44)[temp_v2 * 3]);
+    temp_v1 = asdTMTexTableNodeIsLoaded((&DAT_0043df40)[temp_v2 * 3],(&DAT_0043df44)[temp_v2 * 3]);
     if (temp_v1 != 0) {
       temp_v3 = temp_v3 + 1;
     }
@@ -54,7 +54,7 @@ unsigned int FUN_001ad6fc(void)
     temp_v3 = 0;
     temp_v2 = 0;
     do {
-      temp_v1 = FUN_002a60b4((&DAT_0043df40)[temp_v2 * 3],(&DAT_0043df44)[temp_v2 * 3]);
+      temp_v1 = asdTMTexTableNodeIsLoaded((&DAT_0043df40)[temp_v2 * 3],(&DAT_0043df44)[temp_v2 * 3]);
       if (temp_v1 != 0) {
         temp_v3 = temp_v3 + 1;
       }

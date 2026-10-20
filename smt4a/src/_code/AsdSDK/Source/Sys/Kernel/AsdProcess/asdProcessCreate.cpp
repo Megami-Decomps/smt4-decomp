@@ -6,7 +6,7 @@ extern AsdProcessState g_asdProcess;
 
 void *asdMemoryAllocTracked(int heap, int alignClass, int unk08, u32 size, int fromFront);
 u32 asdGxCommandListCreate(void);
-void FUN_0014bdb4(void *owner, u32 handle);
+void jobSetParent(void *owner, u32 handle);
 
 /* Creates a process named `name` in `group`, linked at the end of the group's list. It starts
  * after `startDelay` frames, runs `onUpdate` each frame and ends `endDelay` frames after it is told
@@ -84,7 +84,7 @@ retry:
     }
 
     if (owner != NULL) {
-        FUN_0014bdb4(owner, proc->handle);
+        jobSetParent(owner, proc->handle);
     }
     return proc->handle;
 }

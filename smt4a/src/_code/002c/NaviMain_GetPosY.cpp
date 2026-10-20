@@ -8,12 +8,12 @@ typedef struct Navi {
     /* 0x0C */ u32 posX;
     /* 0x10 */ u32 posY;
 } Navi;
-extern Navi *DAT_0057f574;
+extern Navi *g_infoWin;
 
 /* Returns the navigator's Y position. */
 u32 NaviMain_GetPosY(void)
 {
-    return DAT_0057f574->posY;
+    return g_infoWin->posY;
 }
 
 } /* extern "C" */

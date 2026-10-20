@@ -7,7 +7,7 @@ extern "C" {
 int CONCAT44(...);
 int btlGetMainState(void);
 int FUN_001568f8(...);
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 int FUN_00243d30(...);
 int FUN_0028cb6c(void);
 int FUN_003e8bb0(...);
@@ -58,7 +58,7 @@ extern unsigned int DAT_0057149c; /* 0x57149c */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_001568f8. */
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: FUN_00243d30. */
 /* Supplied declaration required: FUN_0028cb6c. */
 /* Supplied declaration required: FUN_003e8bb0. */
@@ -265,7 +265,7 @@ int FUN_004c4178(fn_004c4178_arg0 *param_1,int param_2,unsigned int param_3,int 
     temp_v7 = temp_v5 * temp_v7;
   }
   if (((temp_v25 != (fn_004c4178_arg0 *)0x0) &&
-      (pfVar8 = temp_v25, FUN_001aba54(), pfVar8 != (fn_004c4178_arg0 *)0x0)) &&
+      (pfVar8 = temp_v25, dataTable04FindById(), pfVar8 != (fn_004c4178_arg0 *)0x0)) &&
      (*(short *)&pfVar8->field_0x3a < 0)) {
     FUN_00243d30(*(unsigned short *)(pbVar3 + 0x15e) >> 10);
     temp_v7 = temp_v7 * temp_v5;

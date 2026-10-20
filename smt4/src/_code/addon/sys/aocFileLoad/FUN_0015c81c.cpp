@@ -18,7 +18,7 @@ int FUN_002baa40(...);
 int FUN_002bb5a4(...);
 int asdMemoryAllocAligned(...);
 int asdMemFree(...);
-int FUN_002c52f8(...);
+int asdFatalError(...);
 int jyoucyuGetTableEntry(...);
 int FUN_002c618c(...);
 int builtin_strncpy(...);
@@ -64,8 +64,8 @@ extern unsigned int g_aocSystem; /* 0x433158 */
 /* Supplied declaration required: FUN_002a1248. */
 /* Supplied declaration required: FUN_002a126c. */
 /* Supplied declaration required: FUN_002a12d8. */
-extern int FUN_002a1520(unsigned int *);
-extern int FUN_002a1534(int);
+extern int byteIsAtLeast100(unsigned int *);
+extern int objGetFlagBit16(int);
 extern int FUN_002ad1e0(int);
 /* Supplied declaration required: asdLoadFileAsync. */
 extern int FUN_002b90c8(int, unsigned int, unsigned int *);
@@ -76,7 +76,7 @@ extern unsigned int FUN_002bad5c(char *);
 /* Supplied declaration required: FUN_002bb5a4. */
 /* Supplied declaration required: asdMemoryAllocAligned. */
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_002c52f8. */
+/* Supplied declaration required: asdFatalError. */
 /* Supplied declaration required: jyoucyuGetTableEntry. */
 extern unsigned int asdLoadFileSync(int, int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002c618c. */
@@ -197,7 +197,7 @@ void FUN_0015c81c(int param_1,int param_2)
     }
   }
   else {
-    temp_v2 = FUN_002a1534(g_aocMain);
+    temp_v2 = objGetFlagBit16(g_aocMain);
     if (temp_v2 != 0) {
       temp_v2 = FUN_002ad1e0(g_aocMain + 0x98);
       if (temp_v2 != 0) {
@@ -214,7 +214,7 @@ void FUN_0015c81c(int param_1,int param_2)
         uStack_298 = uStack_50;
         temp_v17 = uStack_4c;
         uStack_290 = uStack_48;
-        temp_v2 = FUN_002a1520((unsigned int *)&temp_v15);
+        temp_v2 = byteIsAtLeast100((unsigned int *)&temp_v15);
         if (temp_v2 == 0) {
           temp_v10 = 0;
           temp_v11 = 0;
@@ -251,7 +251,7 @@ void FUN_0015c81c(int param_1,int param_2)
           if (temp_v2 < 0) {
             if ((temp_v10 & 0xfffffffe) != 0) {
               if ((temp_v10 & 1) != 0) {
-                FUN_002c52f8();
+                asdFatalError();
               }
               nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(temp_v10 & 0xfffffffe);
               temp_v10 = 0;
@@ -269,7 +269,7 @@ void FUN_0015c81c(int param_1,int param_2)
             if (temp_v2 < 0) {
               if ((temp_v10 & 0xfffffffe) != 0) {
                 if ((temp_v10 & 1) != 0) {
-                  FUN_002c52f8();
+                  asdFatalError();
                 }
                 nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(temp_v10 & 0xfffffffe);
                 temp_v10 = 0;
@@ -328,7 +328,7 @@ void FUN_0015c81c(int param_1,int param_2)
               if (temp_v2 < 0) {
                 if ((temp_v10 & 0xfffffffe) != 0) {
                   if ((temp_v10 & 1) != 0) {
-                    FUN_002c52f8();
+                    asdFatalError();
                   }
                   nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(temp_v10 & 0xfffffffe);
                   temp_v10 = 0;
@@ -337,7 +337,7 @@ void FUN_0015c81c(int param_1,int param_2)
               else {
                 if ((temp_v10 & 0xfffffffe) != 0) {
                   if ((temp_v10 & 1) != 0) {
-                    FUN_002c52f8();
+                    asdFatalError();
                   }
                   nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(temp_v10 & 0xfffffffe);
                   temp_v10 = 0;
@@ -366,7 +366,7 @@ LAB_0015cdc8:
                     return;
                   }
                   if ((temp_v10 & 1) != 0) {
-                    FUN_002c52f8();
+                    asdFatalError();
                   }
                   nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(temp_v10 & 0xfffffffe);
                   return;
@@ -380,14 +380,14 @@ LAB_0015cdc8:
                 uStack_298 = uStack_284;
                 temp_v17 = uStack_280;
                 uStack_290 = uStack_27c;
-                temp_v2 = FUN_002a1520((unsigned int *)&temp_v15);
+                temp_v2 = byteIsAtLeast100((unsigned int *)&temp_v15);
                 if (temp_v2 == 0) goto LAB_0015cdc8;
               }
             }
           }
           if ((temp_v10 & 0xfffffffe) != 0) {
             if ((temp_v10 & 1) != 0) {
-              FUN_002c52f8();
+              asdFatalError();
             }
             nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(temp_v10 & 0xfffffffe);
             temp_v10 = 0;
@@ -469,7 +469,7 @@ LAB_0015cfcc:
         temp_v5 = temp_v5 >> 0x1b;
       }
       if ((temp_v5 == 0xfffffffc) && (temp_v2 = FUN_002a12d8(temp_v16), temp_v2 < 0)) {
-        FUN_002c52f8();
+        asdFatalError();
       }
       temp_v5 = FUN_002a12d8(temp_v16);
       if ((temp_v5 & 0x80000000) != 0) {
@@ -483,7 +483,7 @@ LAB_0015cfcc:
       }
       temp_v2 = FUN_002a12d8(temp_v16);
       if (temp_v2 < 0) {
-        FUN_002c52f8();
+        asdFatalError();
       }
       return;
     }

@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_002ae164(void);
-int FUN_002b45e8(void);
-int FUN_002b4670(void);
+int dataTable08Sub2GetRecord(void);
+int dataTable08Sub1GetRecord(void);
 int FUN_002b6a54(int, int);
-int FUN_002b9024(void);
+int devilGetRecord(void);
 int rt_memcpy(unsigned int, unsigned short *, int);
 
 /* stack frame of param_3: 22 slot(s), 32 byte(s) */
@@ -38,11 +38,11 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: FUN_002ae164. */
-/* Supplied declaration required: FUN_002b45e8. */
-/* Supplied declaration required: FUN_002b4670. */
+/* Supplied declaration required: dataTable08Sub2GetRecord. */
+/* Supplied declaration required: dataTable08Sub1GetRecord. */
 /* Supplied declaration required: FUN_002b6a54. */
 extern int FUN_002b6ad0(void);
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: rt_memcpy. */
 
 
@@ -108,13 +108,13 @@ void FUN_00247478(unsigned int param_1,unsigned int param_2,unsigned int *param_
         if (*(short *)((int)param_3 + 0x21a) == 2) {
           temp_v20 = *(unsigned short *)(param_3[0x9e] + 2);
           temp_v3 = (unsigned int)temp_v20;
-          FUN_002b45e8();
+          dataTable08Sub2GetRecord();
           temp_v5 = (unsigned short)*(unsigned char *)(temp_v3 + 0x59);
           temp_v25 = *(unsigned char *)(temp_v3 + 0x58) & 0xf;
           temp_v26 = *(unsigned char *)(temp_v3 + 0x58) >> 4;
           temp_v18 = *(unsigned char *)(temp_v3 + 0xa4);
           temp_v2 = (unsigned int)*(unsigned short *)(param_3[0x9e] + 4);
-          FUN_002b45e8();
+          dataTable08Sub2GetRecord();
           if (temp_v2 == 0) {
             temp_v6 = (unsigned short)((unsigned int)*(unsigned int *)(temp_v3 + 0x54) >> 0x10);
             temp_v0 = *(unsigned char *)(temp_v3 + 0x5a);
@@ -147,7 +147,7 @@ void FUN_00247478(unsigned int param_1,unsigned int param_2,unsigned int *param_
       else {
         temp_v20 = *(unsigned short *)param_3[0x9e];
         temp_v3 = (unsigned int)temp_v20;
-        FUN_002b45e8();
+        dataTable08Sub2GetRecord();
         temp_v6 = (unsigned short)((unsigned int)*(unsigned int *)(temp_v3 + 0x54) >> 0x10);
         temp_v5 = (unsigned short)*(unsigned char *)(temp_v3 + 0x59);
         temp_v10 = (unsigned short)*(unsigned int *)(temp_v3 + 0x54);
@@ -169,7 +169,7 @@ void FUN_00247478(unsigned int param_1,unsigned int param_2,unsigned int *param_
     }
     else if ((temp_v3 & 8) != 0) {
       temp_v3 = (unsigned int)*(unsigned short *)((int)param_3 + 0xce);
-      FUN_002b9024();
+      devilGetRecord();
       temp_v6 = (unsigned short)*(unsigned char *)(temp_v3 + 10);
       temp_v5 = (unsigned short)(((unsigned int)*(unsigned short *)(temp_v3 + 8) << 0x1b) >> 0x1c);
       temp_v10 = *(unsigned short *)(temp_v3 + 0x12);
@@ -190,7 +190,7 @@ void FUN_00247478(unsigned int param_1,unsigned int param_2,unsigned int *param_
       temp_v15 = *(unsigned char *)(param_3[0xa1] + 0x1b);
       temp_v16 = *(unsigned char *)(param_3[0xa1] + 0x1c);
       temp_v3 = (unsigned int)*(unsigned short *)((int)param_3 + 0xce);
-      FUN_002b9024();
+      devilGetRecord();
       temp_v18 = *(unsigned char *)(temp_v3 + 0xf);
     }
     else if ((temp_v3 & 0x20) != 0) {
@@ -209,7 +209,7 @@ void FUN_00247478(unsigned int param_1,unsigned int param_2,unsigned int *param_
       }
       else {
         temp_v3 = (unsigned int)*(unsigned short *)(param_3[0xa0] + 0x46);
-        FUN_002b9024();
+        devilGetRecord();
         temp_v6 = (unsigned short)*(unsigned char *)(temp_v3 + 10);
         temp_v5 = (unsigned short)(((unsigned int)*(unsigned short *)(temp_v3 + 8) << 0x1b) >> 0x1c);
         temp_v10 = *(unsigned short *)(temp_v3 + 0x12);
@@ -255,7 +255,7 @@ LAB_002478f4:
   case 8:
     temp_v21 = *(short *)((int)param_3 + 0x21a);
     temp_v4 = (int)temp_v21;
-    FUN_002b4670();
+    dataTable08Sub1GetRecord();
     temp_v3 = (unsigned int)*(unsigned short *)(temp_v4 + 0x62);
     if (temp_v3 != 0) goto LAB_002478f4;
     temp_v7 = 3;
@@ -293,7 +293,7 @@ LAB_002478f4:
   }
   else if ((temp_v3 & 8) != 0) {
     temp_v3 = (unsigned int)*(unsigned short *)((int)param_3 + 0xce);
-    FUN_002b9024();
+    devilGetRecord();
     temp_v9 = *(unsigned short *)(temp_v3 + 0x10);
   }
   else if ((temp_v3 & 0x10) != 0) {
@@ -306,7 +306,7 @@ LAB_002478f4:
     }
     else {
       temp_v3 = (unsigned int)*(unsigned short *)(param_3[0xa0] + 0x46);
-      FUN_002b9024();
+      devilGetRecord();
     }
     temp_v9 = *(unsigned short *)(temp_v3 + 0x10);
   }

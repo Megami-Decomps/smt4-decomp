@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0019a364(int *, int, int);
-int FUN_001bcd48(unsigned char *, int);
+int svcSleepThread(unsigned char *, int);
 int FUN_001cc6d0(int *, int *);
 int FUN_002e3140(void);
 int software_interrupt(int);
@@ -15,7 +15,7 @@ extern unsigned char LAB_002dc6c0; /* 0x2dc6c0 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_0019a364. */
-/* Supplied declaration required: FUN_001bcd48. */
+/* Supplied declaration required: svcSleepThread. */
 /* Supplied declaration required: FUN_001cc6d0. */
 /* Supplied declaration required: FUN_002e3140. */
 
@@ -62,7 +62,7 @@ void FUN_001c3864(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
         FUN_002e3140();
       }
     }
-    FUN_001bcd48(&LAB_002dc6c0,0);
+    svcSleepThread(&LAB_002dc6c0,0);
   }
   return;
 }

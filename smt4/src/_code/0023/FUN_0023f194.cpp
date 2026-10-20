@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_001e1874(unsigned int);
-int FUN_00207434(unsigned int);
-int FUN_00219840(unsigned int);
+int jobStopIfValidA(unsigned int);
+int jobStopIfValidB(unsigned int);
 int FUN_00227218(void);
-int FUN_002523f0(void);
-int FUN_0028975c(int, int);
+int btlTalkBustUpDestroy(void);
+int gameFlagSetValue(int, int);
 int FUN_002ef6b8(int, unsigned int);
 int FUN_0033a780(void);
 
@@ -21,15 +21,15 @@ typedef struct {
 extern int g_btlMain; /* 0x4342c8 */
 
 /* Supplied declaration required: FUN_001e1874. */
-/* Supplied declaration required: FUN_00207434. */
-/* Supplied declaration required: FUN_00219840. */
+/* Supplied declaration required: jobStopIfValidA. */
+/* Supplied declaration required: jobStopIfValidB. */
 /* Supplied declaration required: FUN_00227218. */
 extern int FUN_0023f074(unsigned int *);
-/* Supplied declaration required: FUN_002523f0. */
-/* Supplied declaration required: FUN_0028975c. */
+/* Supplied declaration required: btlTalkBustUpDestroy. */
+/* Supplied declaration required: gameFlagSetValue. */
 extern unsigned int btlGetMainState(void);
 extern int jobIsValid(unsigned int);
-extern unsigned int FUN_002c09d0(void);
+extern unsigned int gameFlagIsSet(void);
 extern int FUN_002c2a04(unsigned int);
 /* Supplied declaration required: FUN_002ef6b8. */
 /* Supplied declaration required: FUN_0033a780. */
@@ -52,9 +52,9 @@ int FUN_0023f194(unsigned int *param_1)
     if ((temp_v0 == 3) && (temp_v0 = FUN_002c2a04(1), temp_v0 == 3)) {
       temp_v1 = btlGetMainState();
       FUN_0033a780();
-      FUN_002523f0();
-      FUN_00219840(temp_v1);
-      FUN_00207434(temp_v1);
+      btlTalkBustUpDestroy();
+      jobStopIfValidB(temp_v1);
+      jobStopIfValidA(temp_v1);
       FUN_001e1874(temp_v1);
       if (g_btlMain != 0) {
         FUN_00227218();
@@ -64,11 +64,11 @@ int FUN_0023f194(unsigned int *param_1)
         temp_v0 = FUN_0023f074(param_1);
         return temp_v0;
       }
-      temp_v1 = FUN_002c09d0();
+      temp_v1 = gameFlagIsSet();
       temp_v2 = 0x17;
       FUN_002ef6b8(0x17,temp_v1);
       param_1[6] = temp_v2;
-      FUN_0028975c(0x817,1);
+      gameFlagSetValue(0x817,1);
       *param_1 = 5;
       temp_v0 = jobIsValid(param_1[6]);
       if (temp_v0 == 0) {

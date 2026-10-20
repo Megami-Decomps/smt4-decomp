@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00178bd4(int *);
 int FUN_00179178(unsigned int *, unsigned int);
 int FUN_0017cbdc(int *);
-int FUN_0017cdb4(void);
+int nngxGetError(void);
 int FUN_0017e8f4(void);
 int FUN_00195af0(unsigned int *);
 
@@ -22,7 +22,7 @@ extern unsigned int *DAT_005b4400; /* 0x5b4400 */
 /* Supplied declaration required: FUN_00178bd4. */
 /* Supplied declaration required: FUN_00179178. */
 /* Supplied declaration required: FUN_0017cbdc. */
-/* Supplied declaration required: FUN_0017cdb4. */
+/* Supplied declaration required: nngxGetError. */
 /* Supplied declaration required: FUN_0017e8f4. */
 /* Supplied declaration required: FUN_00195af0. */
 
@@ -36,7 +36,7 @@ void FUN_0016182c(unsigned int param_1,int param_2,unsigned int param_3,unsigned
   
   puVar1 = DAT_005b4400;
   temp_v0 = param_4;
-  FUN_0017cdb4();
+  nngxGetError();
   param_1 = param_1 & ~puVar1[2];
   if ((puVar1[1] & param_1 & 0x2000) != 0) {
     FUN_0017e8f4();
@@ -96,7 +96,7 @@ void FUN_0016182c(unsigned int param_1,int param_2,unsigned int param_3,unsigned
     *puVar1 = *puVar1 & 0xfffffdff;
   }
   puVar1[1] = puVar1[1] & ~param_1;
-  FUN_0017cdb4();
+  nngxGetError();
   return;
 }
 

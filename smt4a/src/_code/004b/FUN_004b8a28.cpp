@@ -28,30 +28,30 @@ typedef struct Registry {
 extern Registry *g_aocMain;
 
 int sysPlaySe(int arg);
-int FUN_001f4e20(int arg0, int arg1);
+int dialogOpen(int arg0, int arg1);
 int FUN_0020401c(u8 *name);
 int FUN_00215978(int arg);
 int FUN_00284f90(int arg);
 int FUN_002a49e4(u32 owner, int kind);
-int FUN_0047e38c(void *queue);
+int scriptHolderReset(void *queue);
 int scriptHolderFree3(void *queue);
-int FUN_0047e4e4(void *queue);
+int scriptHolderUpdateSimple(void *queue);
 int FUN_004b7d88(Menu *menu);
 
 /* Opens the menu's queue on the first call; once the queue reports ready, closes it and applies the selected entry. */
 void FUN_004b8a28(Menu *menu)
 {
     if (menu->phase == 0) {
-        FUN_0047e38c(g_aocMain->queue);
+        scriptHolderReset(g_aocMain->queue);
         sysPlaySe(0xa0);
         menu->phase = 1;
         return;
     }
-    if (menu->phase == 1 && FUN_0047e4e4(g_aocMain->queue) != 0) {
+    if (menu->phase == 1 && scriptHolderUpdateSimple(g_aocMain->queue) != 0) {
         scriptHolderFree3(g_aocMain->queue);
         FUN_004b7d88(menu);
         FUN_00215978(0);
-        FUN_001f4e20(0, 0);
+        dialogOpen(0, 0);
         FUN_002a49e4(menu->owner, menu->entry->kind);
         menu->phase = 0;
         menu->state = 5;

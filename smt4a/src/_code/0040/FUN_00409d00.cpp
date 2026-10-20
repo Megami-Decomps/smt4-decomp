@@ -4,8 +4,8 @@
 
 extern "C" {
 
-extern int FUN_001801a4(void);
-extern int FUN_001bcea0(void);
+extern int gameGetPlayerData(void);
+extern int gameGetCounters(void);
 
 
 void FUN_00409d00(void)
@@ -17,10 +17,10 @@ void FUN_00409d00(void)
   unsigned int temp_v3;
   unsigned int temp_v4;
   
-  temp_v1 = FUN_001801a4();
+  temp_v1 = gameGetPlayerData();
   if (temp_v1 != 0) {
     temp_v0 = *(short *)(temp_v1 + 0x12);
-    temp_v2 = FUN_001bcea0();
+    temp_v2 = gameGetCounters();
     temp_v3 = *(unsigned int *)(temp_v2 + 0x168);
     temp_v4 = (int)temp_v0;
     if ((unsigned int)(int)temp_v0 < temp_v3) {
@@ -28,7 +28,7 @@ void FUN_00409d00(void)
     }
     *(unsigned int *)(temp_v2 + 0x168) = temp_v4;
     temp_v0 = *(short *)(temp_v1 + 0x16);
-    temp_v2 = FUN_001bcea0();
+    temp_v2 = gameGetCounters();
     temp_v3 = *(unsigned int *)(temp_v2 + 0x170);
     temp_v4 = (int)temp_v0;
     if ((unsigned int)(int)temp_v0 < temp_v3) {
@@ -36,7 +36,7 @@ void FUN_00409d00(void)
     }
     *(unsigned int *)(temp_v2 + 0x170) = temp_v4;
     temp_v0 = *(short *)(temp_v1 + 0x18);
-    temp_v2 = FUN_001bcea0();
+    temp_v2 = gameGetCounters();
     temp_v3 = *(unsigned int *)(temp_v2 + 0x174);
     temp_v4 = (int)temp_v0;
     if ((unsigned int)(int)temp_v0 < temp_v3) {
@@ -44,7 +44,7 @@ void FUN_00409d00(void)
     }
     *(unsigned int *)(temp_v2 + 0x174) = temp_v4;
     temp_v0 = *(short *)(temp_v1 + 0x1a);
-    temp_v2 = FUN_001bcea0();
+    temp_v2 = gameGetCounters();
     temp_v3 = *(unsigned int *)(temp_v2 + 0x178);
     temp_v4 = (int)temp_v0;
     if ((unsigned int)(int)temp_v0 < temp_v3) {
@@ -52,7 +52,7 @@ void FUN_00409d00(void)
     }
     *(unsigned int *)(temp_v2 + 0x178) = temp_v4;
     temp_v0 = *(short *)(temp_v1 + 0x14);
-    temp_v1 = FUN_001bcea0();
+    temp_v1 = gameGetCounters();
     temp_v3 = *(unsigned int *)(temp_v1 + 0x16c);
     temp_v4 = (int)temp_v0;
     if ((unsigned int)(int)temp_v0 < temp_v3) {

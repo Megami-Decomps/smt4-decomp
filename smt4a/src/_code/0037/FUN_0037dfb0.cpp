@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_001641c4(void);
-int FUN_001b4a90(int, int, unsigned int);
+int ifTouchRegionRemove(void);
+int __aeabi_memset4(int, int, unsigned int);
 int FUN_00203b40(int, int, int, int, int, int);
 int FUN_00230d30(void);
 int FUN_002a4964(int, int);
@@ -17,10 +17,10 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_2_stack;
 
-extern int DAT_00588fe8; /* 0x588fe8 */
+extern int g_statusDown; /* 0x588fe8 */
 
-/* Supplied declaration required: FUN_001641c4. */
-/* Supplied declaration required: FUN_001b4a90. */
+/* Supplied declaration required: ifTouchRegionRemove. */
+/* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: FUN_00203b40. */
 /* Supplied declaration required: FUN_00230d30. */
 /* Supplied declaration required: FUN_002a4964. */
@@ -37,8 +37,8 @@ void FUN_0037dfb0(unsigned int param_1,unsigned int param_2)
   unsigned int *puVar4;
   unsigned int temp_v3;
   
-  temp_v0 = DAT_00588fe8;
-  *(unsigned int *)(DAT_00588fe8 + 0x65c) = param_1;
+  temp_v0 = g_statusDown;
+  *(unsigned int *)(g_statusDown + 0x65c) = param_1;
   temp_v1 = temp_v0 + 0x5ec;
   *(unsigned int *)(temp_v0 + 0x658) = param_2;
   temp_v2 = FUN_002c2c68();
@@ -46,18 +46,18 @@ void FUN_0037dfb0(unsigned int param_1,unsigned int param_2)
   temp_v2 = FUN_002c2c68(temp_v1);
   FUN_002a4964(temp_v1,temp_v2 - 1);
   *(unsigned char *)(temp_v0 + 0x528) = 1;
-  temp_v0 = DAT_00588fe8;
+  temp_v0 = g_statusDown;
   temp_v1 = 0;
-  if (*(char *)(DAT_00588fe8 + 0x59a) != '\0') {
+  if (*(char *)(g_statusDown + 0x59a) != '\0') {
     do {
-      FUN_001641c4();
+      ifTouchRegionRemove();
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < (int)(unsigned int)*(unsigned char *)(temp_v0 + 0x59a));
   }
   *(unsigned char *)(temp_v0 + 0x59a) = 0;
-  FUN_001b4a90(temp_v0 + 0x544,0x54,0xffffffff);
-  temp_v0 = DAT_00588fe8;
-  *(unsigned int *)(DAT_00588fe8 + 0x524) = 0;
+  __aeabi_memset4(temp_v0 + 0x544,0x54,0xffffffff);
+  temp_v0 = g_statusDown;
+  *(unsigned int *)(g_statusDown + 0x524) = 0;
   puVar4 = (unsigned int *)(temp_v0 + 0x518);
   temp_v3 = *puVar4;
   *puVar4 = 0xe;

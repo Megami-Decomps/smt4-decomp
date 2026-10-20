@@ -16,7 +16,7 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } param_6_stack;
 
-extern int DAT_0057f28c; /* 0x57f28c */
+extern int g_uiQuest; /* 0x57f28c */
 
 /* Supplied declaration required: FUN_00164b5c. */
 /* Supplied declaration required: FUN_001835b4. */
@@ -56,7 +56,7 @@ FUN_0023dedc(int param_1,unsigned int param_2,unsigned int param_3,unsigned int 
   temp_v6 = param_2;
   uStack_2c = param_3;
   uStack_28 = param_4;
-  if (*(char *)(DAT_0057f28c + 0x90c) != '\0') {
+  if (*(char *)(g_uiQuest + 0x90c) != '\0') {
     temp_v0 = partyEntryFlagsBit1();
     if (temp_v0 != 0) {
       temp_v0 = FUN_004186e0();

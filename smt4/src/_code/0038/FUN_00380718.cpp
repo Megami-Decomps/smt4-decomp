@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c3424(int *);
+int nn_os_LightEvent_Wait(int *);
 int FUN_00379a14(int *);
 int nw_snd_internal_PlayerHeapDataManager_Finalize(int *);
 int nw_snd_internal_TaskManager_CancelTask(unsigned int, int *);
@@ -18,7 +18,7 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned int FUN_002bb020(void);
-/* Supplied declaration required: FUN_002c3424. */
+/* Supplied declaration required: nn_os_LightEvent_Wait. */
 /* Supplied declaration required: FUN_00379a14. */
 /* Supplied declaration required: nw_snd_internal_PlayerHeapDataManager_Finalize. */
 /* Supplied declaration required: nw_snd_internal_TaskManager_CancelTask. */
@@ -38,7 +38,7 @@ void FUN_00380718(int *param_1)
     if ((char)param_1[0x117] == '\x01') {
       temp_v0 = FUN_002bb020();
       nw_snd_internal_TaskManager_CancelTask(temp_v0,param_1 + 0x66);
-      FUN_002c3424(param_1 + 0x69);
+      nn_os_LightEvent_Wait(param_1 + 0x69);
     }
     param_1[0x114] = 0;
     param_1[0x115] = 0;

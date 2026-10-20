@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002e9ec8(int, int);
+int onlineInstanceTableFind(int, int);
 int FUN_002e9f00(int *, int);
 int FUN_002ea3d0(int *, unsigned int);
 int FUN_002ea41e(int *, int *);
-int FUN_002ea43c(int *);
+int onlineJobSetStateDone(int *);
 int FUN_002ec738(int);
 int _ZN9Obj558be04stopEv(int *);
 int FUN_002f3dde(int, int *);
@@ -23,17 +23,17 @@ typedef struct {
 extern unsigned char LAB_0010dd40; /* 0x10dd40 */
 extern unsigned int DAT_00594eb0; /* 0x594eb0 */
 
-extern int FUN_002e9af4(void);
-/* Supplied declaration required: FUN_002e9ec8. */
+extern int onlineInstanceTableGetCurrent(void);
+/* Supplied declaration required: onlineInstanceTableFind. */
 /* Supplied declaration required: FUN_002e9f00. */
 extern unsigned int FUN_002ea3c0(unsigned int *, unsigned int, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
 /* Supplied declaration required: FUN_002ea41e. */
-/* Supplied declaration required: FUN_002ea43c. */
+/* Supplied declaration required: onlineJobSetStateDone. */
 /* Supplied declaration required: FUN_002ec738. */
 /* Supplied declaration required: _ZN9Obj558be04stopEv. */
 /* Supplied declaration required: FUN_002f3dde. */
-extern int FUN_002f4e86(unsigned int *);
+extern int refIsNonNegative(unsigned int *);
 
 
 void FUN_0010dc80(int *param_1)
@@ -51,8 +51,8 @@ void FUN_0010dc80(int *param_1)
   unsigned int uStack_20;
   unsigned int uStack_1c;
   
-  temp_v0 = FUN_002e9af4();
-  FUN_002e9ec8(temp_v0,param_1[0x45]);
+  temp_v0 = onlineInstanceTableGetCurrent();
+  onlineInstanceTableFind(temp_v0,param_1[0x45]);
   piVar4 = param_1 + 0x88;
   if (temp_v0 != 0) {
     _ZN9Obj558be04stopEv(param_1 + 0x22);
@@ -61,10 +61,10 @@ void FUN_0010dc80(int *param_1)
         FUN_002e9f00(piVar4,4);
       }
       (**(romwright_code **)(*param_1 + 0x3c))(&temp_v3,param_1);
-      temp_v1 = FUN_002f4e86((unsigned int *)&temp_v3);
+      temp_v1 = refIsNonNegative((unsigned int *)&temp_v3);
       if (temp_v1 != 0) {
         FUN_002ec738(temp_v0);
-        FUN_002ea43c(param_1);
+        onlineJobSetStateDone(param_1);
         return;
       }
       temp_v1 = param_1[0x86];
@@ -89,7 +89,7 @@ void FUN_0010dc80(int *param_1)
       FUN_002e9f00(piVar4,4);
     }
   }
-  FUN_002ea43c(param_1);
+  onlineJobSetStateDone(param_1);
   return;
 }
 

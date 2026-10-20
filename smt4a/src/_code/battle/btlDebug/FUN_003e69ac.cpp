@@ -5,13 +5,13 @@
 extern "C" {
 
 int sysPlaySe(...);
-int FUN_00203d04(...);
+int dialogClose(...);
 int FUN_00275bc8(...);
-int FUN_00275f44(...);
+int scrScriptProcessStartEntry(...);
 int FUN_002804b0(...);
 int FUN_003756c8(...);
 int FUN_003ebc08(...);
-int FUN_003fd63c(...);
+int gameFlagSetValue(...);
 int FUN_004ab734(...);
 int FUN_004ab854(...);
 int FUN_004abb94(...);
@@ -28,20 +28,20 @@ extern unsigned int DAT_005715ec; /* 0x5715ec */
 extern unsigned int DAT_005715f0; /* 0x5715f0 */
 extern unsigned int DAT_005715f4; /* 0x5715f4 */
 extern unsigned int DAT_00573808; /* 0x573808 */
-extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
+extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
 extern int btlGetMainState(void);
 /* Supplied declaration required: sysPlaySe. */
-extern int FUN_0018719c(unsigned int);
-/* Supplied declaration required: FUN_00203d04. */
+extern int gameFlagIsSet(unsigned int);
+/* Supplied declaration required: dialogClose. */
 extern int FUN_00224880(unsigned int);
-extern int FUN_002619e0(void);
+extern int dialogIsActive(void);
 /* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_002804b0. */
 /* Supplied declaration required: FUN_003756c8. */
 /* Supplied declaration required: FUN_003ebc08. */
-/* Supplied declaration required: FUN_003fd63c. */
+/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_004ab734. */
 /* Supplied declaration required: FUN_004ab854. */
 /* Supplied declaration required: FUN_004abb94. */
@@ -80,15 +80,15 @@ unsigned int FUN_003e69ac(unsigned int *param_1)
     temp_v0 = ~DAT_005715e0;
     *(unsigned int *)(temp_v2 + 0x45a4) = *(unsigned int *)(temp_v2 + 0x45a4) & ~DAT_005715dc & ~DAT_005715e4;
     *(unsigned int *)(temp_v2 + 0x45a0) = *(unsigned int *)(temp_v2 + 0x45a0) & temp_v4 & temp_v0;
-    temp_v2 = FUN_002619e0();
+    temp_v2 = dialogIsActive();
     if (temp_v2 != 0) {
-      FUN_00203d04(1);
+      dialogClose(1);
     }
-    FUN_004ab854(DAT_0057a9c8);
+    FUN_004ab854(g_btlUiBlock);
     temp_v3 = 3;
     break;
   case 3:
-    FUN_00275f44(param_1[2],0);
+    scrScriptProcessStartEntry(param_1[2],0);
     sysPlaySe(0xdf);
     *param_1 = 4;
     return 0;
@@ -97,26 +97,26 @@ unsigned int FUN_003e69ac(unsigned int *param_1)
     if (temp_v2 != 2) {
       return 0;
     }
-    temp_v2 = FUN_0018719c(0x590);
+    temp_v2 = gameFlagIsSet(0x590);
     if (temp_v2 != 0) {
       temp_v2 = btlGetMainState();
       puVar5 = (unsigned int *)(temp_v2 + 0x45a0);
       if ((DAT_005715d0 & *puVar5) == 0 && (DAT_005715d4 & *(unsigned int *)(temp_v2 + 0x45a4)) == 0) {
         *(unsigned short *)(temp_v2 + 0x4c70) = 8;
         *(unsigned short *)(temp_v2 + 0x4c72) = 8;
-        FUN_004abb94(DAT_0057a9c8);
+        FUN_004abb94(g_btlUiBlock);
         FUN_003ebc08(temp_v2,1);
         temp_v0 = ~DAT_005715e8;
         temp_v4 = ~DAT_005715f0;
         *(unsigned int *)(temp_v2 + 0x45a4) = *(unsigned int *)(temp_v2 + 0x45a4) & ~DAT_005715ec & ~DAT_005715f4;
         *puVar5 = *puVar5 & temp_v0 & temp_v4;
-        FUN_003fd63c(0x590,0,1);
+        gameFlagSetValue(0x590,0,1);
         return 0;
       }
     }
     FUN_003756c8(0);
     FUN_004f8f08(DAT_00573808);
-    FUN_004ab734(DAT_0057a9c8);
+    FUN_004ab734(g_btlUiBlock);
     temp_v3 = 5;
     break;
   case 5:

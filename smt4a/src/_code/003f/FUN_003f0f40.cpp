@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern u32 FUN_003f86c8(u32 id);
+extern u32 loadSlotIsLoaded(u32 id);
 
 u8 FUN_003f0f40(void)
 {
-    return FUN_003f86c8(0x4D) != 0;
+    return loadSlotIsLoaded(0x4D) != 0;
 }
 
 } /* extern "C" */

@@ -4,17 +4,17 @@
 
 extern "C" {
 
-int FUN_00201890(void);
-int FUN_00222104(void);
-int FUN_00222434(void);
+int handleBlockRefCreate(void);
+int handleBlockRefDrop(void);
+int handleBlockUnref(void);
 int FUN_00271d28(void);
 int effPolyTexCreate(void);
 int rt_memcpy_w(int, int, int);
 
-/* Supplied declaration required: FUN_00201890. */
-extern unsigned int FUN_00201940(unsigned int);
-/* Supplied declaration required: FUN_00222104. */
-/* Supplied declaration required: FUN_00222434. */
+/* Supplied declaration required: handleBlockRefCreate. */
+extern unsigned int handleRefIncrement(unsigned int);
+/* Supplied declaration required: handleBlockRefDrop. */
+/* Supplied declaration required: handleBlockUnref. */
 /* Supplied declaration required: FUN_00271d28. */
 /* Supplied declaration required: effPolyTexCreate. */
 /* Supplied declaration required: rt_memcpy_w. */
@@ -35,17 +35,17 @@ int FUN_002b42d0(int param_1)
   rt_memcpy_w(temp_v0 + 0x30,param_1 + 0x30,0x98);
   if (*(int *)(param_1 + 0xd0) != 0) {
     if (*(int *)(temp_v0 + 0xd0) != 0) {
-      FUN_00222104();
+      handleBlockRefDrop();
     }
     temp_v1 = *(unsigned int *)(param_1 + 0xd0);
-    FUN_00201890();
+    handleBlockRefCreate();
     *(unsigned int *)(temp_v0 + 0xd0) = temp_v1;
   }
   else if (*(int *)(param_1 + 0xcc) != 0) {
     if (*(int *)(temp_v0 + 0xcc) != 0) {
-      FUN_00222434();
+      handleBlockUnref();
     }
-    temp_v1 = FUN_00201940(*(unsigned int *)(param_1 + 0xcc));
+    temp_v1 = handleRefIncrement(*(unsigned int *)(param_1 + 0xcc));
     *(unsigned int *)(temp_v0 + 0xcc) = temp_v1;
   }
   return temp_v0;

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002a1f60(...);
 int FUN_002e59f8(int, char *, int);
-int FUN_002e6dd0(unsigned char [512], int);
+int rt_aeabi_memclr(unsigned char [512], int);
 int FUN_003180c4(...);
 int FUN_00359974(...);
 int builtin_strncpy(...);
@@ -25,7 +25,7 @@ extern int g_s4Load; /* 0x589154 */
 /* Unsupported intrinsic, declaration required: builtin_strncpy (CALLOTHER). */
 /* Supplied declaration required: FUN_002a1f60. */
 /* Supplied declaration required: FUN_002e59f8. */
-/* Supplied declaration required: FUN_002e6dd0. */
+/* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: FUN_003180c4. */
 /* Supplied declaration required: FUN_00359974. */
 
@@ -43,7 +43,7 @@ void FUN_0021b4e0(int param_1)
   char temp_v6 [40];
   
   temp_v1 = g_s4Load;
-  FUN_002e6dd0(temp_v5,0x200);
+  rt_aeabi_memclr(temp_v5,0x200);
   if ((temp_v1 != 0) && (-1 < param_1)) {
     if (param_1 == 0) {
       FUN_00359974(0,1);

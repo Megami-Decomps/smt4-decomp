@@ -9,8 +9,8 @@ typedef struct {
     unsigned int sp1C; /* 0x1c: local_1c */
 } param_3_stack;
 
-extern unsigned int *DAT_005b40e0; /* 0x5b40e0 */
-extern unsigned int *DAT_005b40e4; /* 0x5b40e4 */
+extern unsigned int *g_commandBufferCursor; /* 0x5b40e0 */
+extern unsigned int *g_commandBufferEnd; /* 0x5b40e4 */
 
 
 void FUN_001a9380(int param_1,unsigned int param_2,int param_3)
@@ -25,8 +25,8 @@ void FUN_001a9380(int param_1,unsigned int param_2,int param_3)
   unsigned int *puVar7;
   unsigned int *puVar8;
   
-  if (DAT_005b40e0 + (param_2 & 0xfffffffe) + (param_2 >> 7) * 2 + 2 >= DAT_005b40e4) {
-    DAT_005b40e0 = DAT_005b40e4;
+  if (g_commandBufferCursor + (param_2 & 0xfffffffe) + (param_2 >> 7) * 2 + 2 >= g_commandBufferEnd) {
+    g_commandBufferCursor = g_commandBufferEnd;
   }
   else {
     temp_v1 = 0;
@@ -38,10 +38,10 @@ void FUN_001a9380(int param_1,unsigned int param_2,int param_3)
         if (temp_v2 >= 0x81) {
           temp_v2 = 0x80;
         }
-        *DAT_005b40e0 = *puVar6;
+        *g_commandBufferCursor = *puVar6;
         temp_v0 = temp_v2 >> 1;
-        puVar1 = DAT_005b40e0 + 2;
-        DAT_005b40e0[1] = (temp_v2 * 0x100000 - 0x100000) | (param_1 + temp_v1) | 0x800f0000;
+        puVar1 = g_commandBufferCursor + 2;
+        g_commandBufferCursor[1] = (temp_v2 * 0x100000 - 0x100000) | (param_1 + temp_v1) | 0x800f0000;
         if (temp_v0 >= 0x80000000) {
           do {
             puVar8 = puVar7 + 1;
@@ -54,19 +54,19 @@ void FUN_001a9380(int param_1,unsigned int param_2,int param_3)
           } while (temp_v0 != 0);
         }
         else if (temp_v0 != 0 && -1 < (int)(temp_v0 * 2)) {
-          DAT_005b40e0 = DAT_005b40e0 + 1;
+          g_commandBufferCursor = g_commandBufferCursor + 1;
           temp_v3 = (int)(temp_v0 * 2) >> 1;
           do {
             temp_v3 = temp_v3 - 1;
-            DAT_005b40e0[1] = puVar6[1];
+            g_commandBufferCursor[1] = puVar6[1];
             puVar6 = puVar6 + 2;
-            DAT_005b40e0 = DAT_005b40e0 + 2;
-            *DAT_005b40e0 = *puVar6;
+            g_commandBufferCursor = g_commandBufferCursor + 2;
+            *g_commandBufferCursor = *puVar6;
           } while (temp_v3 != 0);
           puVar1 = puVar1 + temp_v0 * 2;
         }
         temp_v1 = temp_v1 + 0x80;
-        DAT_005b40e0 = puVar1;
+        g_commandBufferCursor = puVar1;
       } while (temp_v1 < param_2);
     }
   }

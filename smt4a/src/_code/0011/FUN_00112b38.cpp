@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0011289c(void);
 int FUN_002ea20c(unsigned char [8]);
 int FUN_002ea3d0(int, unsigned int);
-int FUN_002ea446(int, int);
+int onlineJobSetStateTimed(int, int);
 int FUN_002efd4a(...);
 int FUN_002f2e3c(int, int, int, int);
 int _ZN9Obj558be04stopEv(int);
@@ -36,7 +36,7 @@ extern unsigned int DAT_00594eac; /* 0x594eac */
 /* Supplied declaration required: FUN_002ea20c. */
 extern unsigned int FUN_002ea3c0(unsigned int *, unsigned char *, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
-/* Supplied declaration required: FUN_002ea446. */
+/* Supplied declaration required: onlineJobSetStateTimed. */
 /* Supplied declaration required: FUN_002efd4a. */
 /* Supplied declaration required: FUN_002f2e3c. */
 /* Supplied declaration required: _ZN9Obj558be04stopEv. */
@@ -124,7 +124,7 @@ LAB_00112c5c:
       temp_v0 = temp_v7;
       FUN_002f2e3c(temp_v7,temp_v8,0x10,param_1 + 0x178);
     } while (temp_v0 == 0);
-    FUN_002ea446(param_1,100);
+    onlineJobSetStateTimed(param_1,100);
     return;
   }
   temp_v1 = *(unsigned int *)(param_1 + 0x374);

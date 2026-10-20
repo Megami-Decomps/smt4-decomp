@@ -4,8 +4,8 @@ extern "C" {
 
 void FUN_002efed8(u8 value)
 {
-    if (DAT_0044e190 != NULL) {
-        DAT_0044e190->unk411 = value;
+    if (g_statusDown != NULL) {
+        g_statusDown->unk411 = value;
     }
 }
 

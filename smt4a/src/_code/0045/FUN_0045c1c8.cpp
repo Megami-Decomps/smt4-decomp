@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001a5e50(unsigned char [20], unsigned int, int);
+int slotTableReplace(unsigned char [20], unsigned int, int);
 int FUN_001a5e84(unsigned char [20], int, int);
 
 typedef int romwright_code(...);
@@ -16,7 +16,7 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_001a5e50. */
+/* Supplied declaration required: slotTableReplace. */
 /* Supplied declaration required: FUN_001a5e84. */
 extern int FUN_001a8930(int, unsigned int, unsigned int *);
 extern unsigned int FUN_001a8d40(unsigned char *, unsigned int);
@@ -78,7 +78,7 @@ void FUN_0045c1c8(int *param_1,unsigned int param_2,unsigned int param_3)
             do {
               temp_v3 = FUN_001a8d40(temp_v12,temp_v6);
               if (((temp_v3 != 0) && (param_2 <= temp_v3)) && (temp_v3 <= param_3)) {
-                FUN_001a5e50(temp_v12,temp_v6,0);
+                slotTableReplace(temp_v12,temp_v6,0);
               }
               temp_v6 = temp_v6 + 1;
             } while (temp_v6 < temp_v10);

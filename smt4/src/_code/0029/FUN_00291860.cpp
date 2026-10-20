@@ -5,13 +5,13 @@
 extern "C" {
 
 int FUN_0028727c(void);
-int FUN_002917b8(void);
+int buttonHelpRelease(void);
 int FUN_00292c0c(void);
 int FUN_0029a128(int);
 int FUN_002a0cc8(int);
 int scrScriptProcessDestroy(void);
 int asdTMTexTableFreeEntry(int);
-int FUN_002ae898(int, int);
+int asdTMTexTableReleaseNode(int, int);
 int asdMemFree(...);
 int jobStop(unsigned int, int);
 
@@ -32,19 +32,19 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_4_stack;
 
-extern signed char DAT_0043dc20; /* 0x43dc20 */
+extern signed char g_commonBg; /* 0x43dc20 */
 extern unsigned int *DAT_0043dc24; /* 0x43dc24 */
 extern signed char g_uiFade; /* 0x43dd38 */
 extern unsigned int *DAT_0043dd3c; /* 0x43dd3c */
 
 /* Supplied declaration required: FUN_0028727c. */
-/* Supplied declaration required: FUN_002917b8. */
+/* Supplied declaration required: buttonHelpRelease. */
 /* Supplied declaration required: FUN_00292c0c. */
 /* Supplied declaration required: FUN_0029a128. */
 /* Supplied declaration required: FUN_002a0cc8. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: asdTMTexTableFreeEntry. */
-/* Supplied declaration required: FUN_002ae898. */
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: jobStop. */
 
@@ -75,7 +75,7 @@ void FUN_00291860(fn_00291860_arg0 *param_1,unsigned int param_2,unsigned int pa
   if (param_1->field_0x1e != 0) {
     temp_v0 = 0;
     do {
-      FUN_002ae898(0x1d,temp_v0);
+      asdTMTexTableReleaseNode(0x1d,temp_v0);
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < 3);
     asdTMTexTableFreeEntry(0x1d);
@@ -85,20 +85,20 @@ void FUN_00291860(fn_00291860_arg0 *param_1,unsigned int param_2,unsigned int pa
     param_1->field_0x1d = 0;
   }
   if (param_1->field_0x1c != 0) {
-    FUN_002917b8();
+    buttonHelpRelease();
     FUN_0028727c();
     param_1->field_0x1c = 0;
   }
   puVar1 = DAT_0043dc24;
-  DAT_0043dc20 = DAT_0043dc20 - '\x01';
-  if ('\0' < DAT_0043dc20) {
+  g_commonBg = g_commonBg - '\x01';
+  if ('\0' < g_commonBg) {
     return;
   }
   jobStop(*DAT_0043dc24,0);
   asdMemFree(puVar1);
   puVar1 = DAT_0043dd3c;
   DAT_0043dc24 = (unsigned int *)0x0;
-  DAT_0043dc20 = 0;
+  g_commonBg = 0;
   g_uiFade = g_uiFade - '\x01';
   if (g_uiFade < '\x01') {
     jobStop(*DAT_0043dd3c,0);

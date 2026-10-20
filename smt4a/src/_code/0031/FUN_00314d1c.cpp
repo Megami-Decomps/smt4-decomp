@@ -16,7 +16,7 @@ extern int FUN_00163e84(unsigned int);
 extern int FUN_00203d74(void);
 /* Supplied declaration required: FUN_0022677c. */
 /* Supplied declaration required: scrGetArg. */
-extern int FUN_002deb84(void);
+extern int scrGetCommandFrame(void);
 extern int FUN_003309c8(void);
 
 
@@ -29,7 +29,7 @@ unsigned int FUN_00314d1c(void)
   unsigned char temp_v2;
   
   temp_v0 = scrGetArg();
-  temp_v1 = FUN_002deb84();
+  temp_v1 = scrGetCommandFrame();
   if (temp_v1 == 0) {
     temp_v1 = FUN_00203d74();
     temp_v2 = temp_v1 != 0;

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00232b68(...);
-int FUN_002b4670(void);
+int dataTable08Sub1GetRecord(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -13,8 +13,8 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_00232b68. */
-extern int FUN_002a8764(void);
-/* Supplied declaration required: FUN_002b4670. */
+extern int gameGetSlotTable(void);
+/* Supplied declaration required: dataTable08Sub1GetRecord. */
 
 
 unsigned int FUN_0028fc60(int param_1)
@@ -28,14 +28,14 @@ unsigned int FUN_0028fc60(int param_1)
   unsigned char temp_v4;
   
   if ((param_1 - 1U < 0x3c) &&
-     (temp_v0 = param_1, FUN_002b4670(),
+     (temp_v0 = param_1, dataTable08Sub1GetRecord(),
      *(char *)(temp_v0 + 0x6d) == '\x01' || *(char *)(temp_v0 + 0x6d) == '\x03')) {
     if ((*(unsigned char *)(temp_v0 + 0x6a) & 0x80) == 0) {
-      temp_v3 = FUN_002a8764();
+      temp_v3 = gameGetSlotTable();
       temp_v0 = -1;
 LAB_0028fd54:
       temp_v1 = param_1;
-      FUN_002b4670();
+      dataTable08Sub1GetRecord();
       if (temp_v1 == 0) goto LAB_0028fde8;
       temp_v2 = -1;
       FUN_00232b68(0xffffffff,temp_v1,1,0,0);
@@ -52,7 +52,7 @@ LAB_0028fd54:
           temp_v1 = (int)*(char *)(temp_v3 + temp_v0 + 0x90f0);
           if (temp_v1 < 0) break;
           temp_v2 = param_1;
-          FUN_002b4670();
+          dataTable08Sub1GetRecord();
           if (temp_v2 != 0) {
             FUN_00232b68(temp_v1,temp_v2,1,0,0);
             temp_v2 = temp_v1;
@@ -67,12 +67,12 @@ LAB_0028fde8:
         }
       } while( 1 );
     }
-    FUN_002b4670();
+    dataTable08Sub1GetRecord();
     if (param_1 != 0) {
       temp_v0 = -1;
       FUN_00232b68(0xffffffff,param_1,1,0,0);
       temp_v4 = temp_v0 == 0;
-      temp_v0 = FUN_002a8764();
+      temp_v0 = gameGetSlotTable();
       temp_v3 = 0;
       do {
         temp_v1 = (int)*(char *)(temp_v0 + temp_v3 + 0x90f0);

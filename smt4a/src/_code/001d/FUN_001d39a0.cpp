@@ -10,7 +10,7 @@ typedef struct {
 } param_4_stack;
 
 extern unsigned int FUN_001c6da0(unsigned int, unsigned int, unsigned int, unsigned int, int, int, unsigned int *);
-extern int FUN_001c6e20(void);
+extern int nn_snd_CTR_Dspsnd_IsInitialized(void);
 
 
 unsigned int FUN_001d39a0(int param_1,int param_2,unsigned int *param_3,unsigned int param_4)
@@ -36,7 +36,7 @@ unsigned int FUN_001d39a0(int param_1,int param_2,unsigned int *param_3,unsigned
   temp_v5 = param_1;
   temp_v9 = param_2;
   puVar14 = param_3;
-  temp_v1 = FUN_001c6e20();
+  temp_v1 = nn_snd_CTR_Dspsnd_IsInitialized();
   if (temp_v1 == 0) {
     return 0;
   }

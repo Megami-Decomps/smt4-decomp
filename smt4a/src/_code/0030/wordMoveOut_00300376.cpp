@@ -2,14 +2,14 @@
 
 extern "C" {
 
-void FUN_0030c558(u32 *source);
+void mapIteratorNext8(u32 *source);
 
-/* Moves the word out of `source` (FUN_0030c558 then resets it) into `dest`. */
+/* Moves the word out of `source` (mapIteratorNext8 then resets it) into `dest`. */
 void wordMoveOut_00300376(u32 *dest, u32 *source)
 {
     u32 value = *source;
 
-    FUN_0030c558(source);
+    mapIteratorNext8(source);
     *dest = value;
 }
 

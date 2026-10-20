@@ -22,7 +22,7 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_002486a8. */
 /* Supplied declaration required: FUN_0027f414. */
-extern int FUN_002c2950(void);
+extern int gameGetMapBlock(void);
 
 
 void FUN_002e29c0(void)
@@ -47,7 +47,7 @@ void FUN_002e29c0(void)
   int temp_v10;
   int temp_v11 [9];
   
-  temp_v1 = FUN_002c2950();
+  temp_v1 = gameGetMapBlock();
   temp_v5 = 0;
   if ('\0' < *(char *)(temp_v1 + 0xdd1)) {
     do {

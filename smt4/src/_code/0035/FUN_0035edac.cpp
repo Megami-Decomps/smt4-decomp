@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00100b88(...);
 int FUN_002bb5a4(...);
-int FUN_002c52f8(...);
+int asdFatalError(...);
 int FUN_0035efa0(...);
 int FUN_0035f50c(...);
 int builtin_strncpy(...);
@@ -29,7 +29,7 @@ extern unsigned char LAB_0035ef7c; /* 0x35ef7c */
 /* Unsupported intrinsic, declaration required: builtin_strncpy (CALLOTHER). */
 /* Supplied declaration required: FUN_00100b88. */
 /* Supplied declaration required: FUN_002bb5a4. */
-/* Supplied declaration required: FUN_002c52f8. */
+/* Supplied declaration required: asdFatalError. */
 /* Supplied declaration required: FUN_0035efa0. */
 /* Supplied declaration required: FUN_0035f50c. */
 extern unsigned int argsValidate(unsigned int *, unsigned int *, unsigned int, unsigned int);
@@ -98,7 +98,7 @@ joined_r0x0035eeb0:
           return puVar1;
         }
         if ((temp_v4 & 1) != 0) {
-          FUN_002c52f8();
+          asdFatalError();
         }
         nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(temp_v4 & 0xfffffffe);
         return puVar1;
@@ -109,7 +109,7 @@ joined_r0x0035eeb0:
       if ((int)puVar1 < 0) goto joined_r0x0035eeb0;
       if ((temp_v4 & 0xfffffffe) != 0) {
         if ((temp_v4 & 1) != 0) {
-          FUN_002c52f8();
+          asdFatalError();
         }
         nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(temp_v4 & 0xfffffffe);
         temp_v4 = 0;

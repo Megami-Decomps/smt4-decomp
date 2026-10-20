@@ -8,7 +8,7 @@ int FUN_003ae03c(unsigned int);
 int FUN_003ae2b0(unsigned int);
 int FUN_003ae6fc(...);
 
-extern unsigned int DAT_00439ca8; /* 0x439ca8 */
+extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 
 extern int scrGetArg(void);
 /* Supplied declaration required: FUN_003ae03c. */
@@ -27,19 +27,19 @@ unsigned int FUN_002f1214(void)
   if (temp_v0 != 0) {
     temp_v0 = FUN_003ae6fc();
     if (temp_v0 != 0) {
-      FUN_003ae03c(DAT_00439ca8);
+      FUN_003ae03c(g_btlUiBlock);
     }
-    temp_v0 = FUN_003ae3f0(DAT_00439ca8);
+    temp_v0 = FUN_003ae3f0(g_btlUiBlock);
     if (temp_v0 == 0) {
       return 0;
     }
   }
   else {
-    temp_v0 = FUN_003ae3f0(DAT_00439ca8);
+    temp_v0 = FUN_003ae3f0(g_btlUiBlock);
     if (temp_v0 != 0) {
-      FUN_003ae2b0(DAT_00439ca8);
+      FUN_003ae2b0(g_btlUiBlock);
     }
-    temp_v0 = FUN_003ae6fc(DAT_00439ca8);
+    temp_v0 = FUN_003ae6fc(g_btlUiBlock);
     if (temp_v0 == 0) {
       return 0;
     }

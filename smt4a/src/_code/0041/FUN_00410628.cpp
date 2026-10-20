@@ -6,11 +6,11 @@ extern "C" {
 
 int FUN_0013c174(unsigned char *, int);
 int asdMemFree(void);
-int FUN_001a6f60(void);
-int FUN_001b4a90(void);
+int dataTableFileGetTable(void);
+int __aeabi_memset4(void);
 int FUN_001f4908(...);
 int asdOperatorNewD(void);
-int FUN_002e6490(unsigned int *);
+int asdOperatorDeleteC(unsigned int *);
 int FUN_003d54f8(...);
 int FUN_003e503c(void);
 int btlReleaseEntries(...);
@@ -61,10 +61,10 @@ typedef struct {
 
 extern unsigned char DAT_005297d4; /* 0x5297d4 */
 extern unsigned char DAT_00529834; /* 0x529834 */
-extern unsigned int DAT_005712f0; /* 0x5712f0 */
-extern int DAT_00571508; /* 0x571508 */
+extern unsigned int g_btlActionReflect; /* 0x5712f0 */
+extern int g_btlCamera; /* 0x571508 */
 extern unsigned int DAT_00573808; /* 0x573808 */
-extern int DAT_00573c50; /* 0x573c50 */
+extern int g_btlPartnerAttack; /* 0x573c50 */
 extern unsigned int DAT_00573c68; /* 0x573c68 */
 extern unsigned int DAT_00573c6c; /* 0x573c6c */
 extern unsigned int g_btlStageModel; /* 0x57a4f8 */
@@ -78,16 +78,16 @@ extern int FUN_0013def0(unsigned int);
 extern int btlGetMainState(void);
 extern int lcgRandomRange(unsigned int);
 extern int FUN_00163e84(unsigned int);
-extern int FUN_001656a0(unsigned int);
+extern int padButtonIsPressed(unsigned int);
 extern int FUN_00187168(void);
 extern unsigned int dataTableGetEntries(void);
 /* Supplied declaration required: asdMemFree. */
 extern unsigned int FUN_0019acdc(unsigned short, unsigned int);
-/* Supplied declaration required: FUN_001a6f60. */
-/* Supplied declaration required: FUN_001b4a90. */
+/* Supplied declaration required: dataTableFileGetTable. */
+/* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: FUN_001f4908. */
 /* Supplied declaration required: asdOperatorNewD. */
-/* Supplied declaration required: FUN_002e6490. */
+/* Supplied declaration required: asdOperatorDeleteC. */
 /* Supplied declaration required: FUN_003d54f8. */
 /* Supplied declaration required: FUN_003e503c. */
 /* Supplied declaration required: btlReleaseEntries. */
@@ -200,7 +200,7 @@ void FUN_00410628(int param_1)
     if ((int)temp_v6 >= 4) {
       puVar3 = (unsigned int *)(temp_v6 << 2);
       asdOperatorNewD();
-      FUN_001b4a90();
+      __aeabi_memset4();
       temp_v8 = (temp_v6 & 1) != 0;
       puVar8 = puVar3 + -1;
       if (temp_v8) {
@@ -244,7 +244,7 @@ void FUN_00410628(int param_1)
           pppuVar15 = (unsigned int ***)((int)pppuVar15 + 1);
         } while (temp_v6 != 0);
       }
-      FUN_002e6490(puVar3);
+      asdOperatorDeleteC(puVar3);
     }
     *(unsigned int *)(param_1 + 0x1c8) = 0;
     *(int *)(param_1 + 0x10) = *(int *)(param_1 + 0x10) + 1;
@@ -253,7 +253,7 @@ void FUN_00410628(int param_1)
   case 2:
     in_d10 = in_d10 & 0xffffffff;
     temp_v3 = 0;
-    temp_v7 = *(int *)(DAT_00573c50 + 0x30);
+    temp_v7 = *(int *)(g_btlPartnerAttack + 0x30);
     do {
       if ((*(int *)(temp_v7 + temp_v3 * 0xb0 + 0xa4) != 0) &&
          (*(char *)(param_1 + temp_v3 + 0x1bc) != '\x01')) {
@@ -303,7 +303,7 @@ void FUN_00410628(int param_1)
       }
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 0xc);
-    temp_v7 = chainCountIdUnflagged(DAT_005712f0,0);
+    temp_v7 = chainCountIdUnflagged(g_btlActionReflect,0);
     temp_v3 = temp_v16;
     if (0 < temp_v7) {
       return;
@@ -315,7 +315,7 @@ void FUN_00410628(int param_1)
     }
     puVar12 = (unsigned int *)(temp_v16 + 0x45a8);
     if ((*puVar12 & DAT_00573c68) != 0 || (*(unsigned int *)(temp_v16 + 0x45ac) & DAT_00573c6c) != 0) {
-      temp_v7 = FUN_001656a0(9);
+      temp_v7 = padButtonIsPressed(9);
       if (temp_v7 != 0) {
         if (*(int *)(param_1 + 0x184) != 0) {
           asdMemFree();
@@ -324,12 +324,12 @@ void FUN_00410628(int param_1)
         puVar5 = &DAT_00529834;
         FUN_0013c174(&DAT_00529834,0);
         *(unsigned char **)(param_1 + 0x184) = puVar5;
-        FUN_001a6f60();
+        dataTableFileGetTable();
         temp_v2 = dataTableGetEntries();
         *(unsigned int *)(param_1 + 0x188) = temp_v2;
         FUN_00411c04(param_1,0);
       }
-      temp_v7 = FUN_001656a0(1);
+      temp_v7 = padButtonIsPressed(1);
       if (temp_v7 == 0) {
         return;
       }
@@ -360,7 +360,7 @@ void FUN_00410628(int param_1)
     FUN_001f4908(0,0,0xff);
     *(unsigned int *)(param_1 + 0x14) = 0;
     *(int *)(param_1 + 0x10) = *(int *)(param_1 + 0x10) + 1;
-    FUN_004f3ee0(DAT_00571508,1,0);
+    FUN_004f3ee0(g_btlCamera,1,0);
     return;
   case 4:
     temp_v3 = *(int *)(param_1 + 0x14) + 1;
@@ -368,12 +368,12 @@ void FUN_00410628(int param_1)
     if (temp_v3 < 7) {
       return;
     }
-    FUN_004f1530(DAT_00571508);
+    FUN_004f1530(g_btlCamera);
     FUN_004012f0(g_btlStageModel);
-    FUN_004f1c5c(DAT_00571508,0);
-    FUN_004f1edc(DAT_00571508);
-    temp_v3 = DAT_00571508;
-    *(unsigned int *)(DAT_00571508 + 0xc) = *(unsigned int *)(DAT_00571508 + 0x14);
+    FUN_004f1c5c(g_btlCamera,0);
+    FUN_004f1edc(g_btlCamera);
+    temp_v3 = g_btlCamera;
+    *(unsigned int *)(g_btlCamera + 0xc) = *(unsigned int *)(g_btlCamera + 0x14);
     *(unsigned int *)(temp_v3 + 0x10) = *(unsigned int *)(temp_v3 + 0x18);
     btlReleaseEntries(temp_v16);
     if (*(int *)(param_1 + 0x184) != 0) {
@@ -392,7 +392,7 @@ void FUN_00410628(int param_1)
     FUN_004f5238(DAT_00573808,0,0,10);
     *(unsigned int *)(param_1 + 0x2c) = temp_v2;
     FUN_003d54f8(0);
-    FUN_004f41b0(DAT_00571508,0,8);
+    FUN_004f41b0(g_btlCamera,0,8);
     break;
   case 6:
     if (*(int *)(*(int *)(param_1 + 0x2c) + 8) <= *(int *)(*(int *)(param_1 + 0x2c) + 4)) {

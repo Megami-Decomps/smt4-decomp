@@ -9,9 +9,9 @@ int FUN_0029118c(int, double, int);
 int FUN_00291234(int, double, int);
 int FUN_00291310(double, float *, float *, int, double, float *, unsigned int, int, int, double);
 int FUN_00291340(float *, float *, float *, float *, float *);
-int FUN_00291414(double);
+int nodeTreeReleaseItemClearOwner(double);
 int FUN_00291620(int, double, int);
-int FUN_002916ac(...);
+int nodeTreeReleaseItem(...);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(double, int);
 
@@ -46,9 +46,9 @@ typedef struct {
 /* Supplied declaration required: FUN_00291234. */
 /* Supplied declaration required: FUN_00291310. */
 /* Supplied declaration required: FUN_00291340. */
-/* Supplied declaration required: FUN_00291414. */
+/* Supplied declaration required: nodeTreeReleaseItemClearOwner. */
 /* Supplied declaration required: FUN_00291620. */
-/* Supplied declaration required: FUN_002916ac. */
+/* Supplied declaration required: nodeTreeReleaseItem. */
 
 
 void FUN_00193130(float *param_1)
@@ -77,7 +77,7 @@ void FUN_00193130(float *param_1)
       temp_v3 = 0;
       if (param_1 != (float *)0x0) {
         do {
-          FUN_00291414(param_1[temp_v3 + 0x8e]);
+          nodeTreeReleaseItemClearOwner(param_1[temp_v3 + 0x8e]);
           temp_v3 = temp_v3 + 1;
         } while (temp_v3 < 0x32);
         param_1[9] = 0.0f;
@@ -87,7 +87,7 @@ void FUN_00193130(float *param_1)
         if ((unsigned int *)romwright_f2u((float)(param_1[0x8a])) != (unsigned int *)0x0) {
           *(unsigned int *)romwright_f2u((float)(param_1[0x8a])) = 0;
         }
-        FUN_002916ac(param_1);
+        nodeTreeReleaseItem(param_1);
         return;
       }
     }
@@ -130,7 +130,7 @@ void FUN_00193130(float *param_1)
         param_1[0x8c] = 0.0f;
       }
       else if (param_1[(int)temp_v1 + 0x8e] != 0.0f) {
-        FUN_002916ac();
+        nodeTreeReleaseItem();
       }
       temp_v5 = (float)VectorFloatToUnsigned(param_1[0x5f] * (float)((unsigned long long)temp_v7 >> 0x20),3);
       temp_v2 = param_1[0x89];

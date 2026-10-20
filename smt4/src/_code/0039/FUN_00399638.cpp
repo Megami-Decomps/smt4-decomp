@@ -21,15 +21,15 @@ typedef struct {
 } Screen;
 
 int FUN_002bf818(Slot *slot);
-int padIsButtonDown(u32 flag);
-int FUN_002c09d0(u32 mask);
+int flagBitIsSet(u32 flag);
+int gameFlagIsSet(u32 mask);
 
 /* Advances the screen one step: updates every slot up to the current step and switches mode when the last slot is confirmed. */
 void FUN_00399638(Screen *screen)
 {
     int i;
 
-    if (FUN_002c09d0(0x400) != 0 && padIsButtonDown(0x76) != 0) {
+    if (gameFlagIsSet(0x400) != 0 && flagBitIsSet(0x76) != 0) {
         i = 0;
         do {
             if (i <= screen->step) {

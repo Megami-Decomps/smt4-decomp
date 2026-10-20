@@ -28,8 +28,8 @@ extern unsigned char g_gameState; /* 0x49f91c */
 /* Supplied declaration required: FUN_00233240. */
 extern int FUN_0026b564(void);
 /* Supplied declaration required: FUN_002b827c. */
-extern unsigned int FUN_002bed98(int *);
-extern unsigned int FUN_002beda4(int *);
+extern unsigned int vec2GetYInt(int *);
+extern unsigned int vec2GetXInt(int *);
 extern int FUN_002bf818(int *);
 
 
@@ -50,8 +50,8 @@ void FUN_0039c348(fn_0039c348_arg0 *param_1)
         param_1->field_0x8 = 2;
         param_1->field_0x10 = param_1->field_0x10 | 2;
       }
-      temp_v1 = FUN_002bed98(piVar4);
-      temp_v2 = FUN_002beda4(piVar4);
+      temp_v1 = vec2GetYInt(piVar4);
+      temp_v2 = vec2GetXInt(piVar4);
       FUN_00231240(&param_1[0x11].field_0x10,temp_v2,temp_v1);
       return;
     }

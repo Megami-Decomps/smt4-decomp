@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_00152bec(void);
+int asdMdlManagerMarkDestroy(void);
 int FUN_0023f2e4(...);
 int FUN_0023f3bc(...);
 int FUN_00254650(int, int);
 int FUN_00254a2c(unsigned int, int);
-int FUN_0028c640(unsigned int, int, unsigned char [12]);
+int nodeSetTranslation(unsigned int, int, unsigned char [12]);
 int FUN_0029a014(unsigned int, int);
 int FUN_002a0428(int, unsigned int);
 int statusCameraApply(void);
@@ -20,13 +20,13 @@ int asdMemFree(...);
 int FUN_002cbad0(unsigned int, int, unsigned char [24]);
 int FUN_003353cc(...);
 
-/* Supplied declaration required: FUN_00152bec. */
+/* Supplied declaration required: asdMdlManagerMarkDestroy. */
 extern unsigned int FUN_0019df10(void);
 /* Supplied declaration required: FUN_0023f2e4. */
 /* Supplied declaration required: FUN_0023f3bc. */
 /* Supplied declaration required: FUN_00254650. */
 /* Supplied declaration required: FUN_00254a2c. */
-/* Supplied declaration required: FUN_0028c640. */
+/* Supplied declaration required: nodeSetTranslation. */
 /* Supplied declaration required: FUN_0029a014. */
 /* Supplied declaration required: FUN_002a0428. */
 /* Supplied declaration required: statusCameraApply. */
@@ -34,7 +34,7 @@ extern unsigned int FUN_0019df10(void);
 /* Supplied declaration required: asdMdlManagerDestroy. */
 extern int FUN_002adee0(void);
 /* Supplied declaration required: FUN_002b2ae8. */
-extern int FUN_002bfde4(unsigned int);
+extern int padIsButtonPressed(unsigned int);
 extern int FUN_002c15fc(unsigned int);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002cbad0. */
@@ -82,7 +82,7 @@ void FUN_002975ac(int param_1)
   if (temp_v0 != 0) {
     FUN_00254650(param_1,2);
   }
-  temp_v0 = FUN_002bfde4(2);
+  temp_v0 = padIsButtonPressed(2);
   if (temp_v0 != 0) {
     temp_v0 = *(int *)(param_1 + 0x24) + 1;
     *(int *)(param_1 + 0x24) = temp_v0;
@@ -155,7 +155,7 @@ void FUN_002975ac(int param_1)
         if (*(int *)(*(int *)(*(int *)(temp_v4 + 0x18) + 8) + 0xc) < 0) {
           FUN_002a0428(*(int *)(temp_v4 + 0x18),*(unsigned int *)(temp_v0 + 0xc));
         }
-        FUN_0028c640(*(unsigned int *)(*(int *)(temp_v4 + 0x18) + 8),0,temp_v10);
+        nodeSetTranslation(*(unsigned int *)(*(int *)(temp_v4 + 0x18) + 8),0,temp_v10);
         FUN_0023f3bc(*(unsigned int *)(*(int *)(temp_v4 + 0x18) + 8),0,temp_v11);
         if ((**(unsigned int **)(temp_v0 + 8) & 2) != 0) {
           puVar7 = *(unsigned int **)(temp_v4 + 0x18);
@@ -175,7 +175,7 @@ void FUN_002975ac(int param_1)
         *puVar7 = *puVar7 | 2;
         *(unsigned char *)(*(int *)(puVar7[2] + 0x2c) + 0x1f6) = 0;
         if (-1 < *(int *)(*(int *)(*(int *)(temp_v4 + 0x18) + 8) + 0xc)) {
-          FUN_00152bec();
+          asdMdlManagerMarkDestroy();
         }
       }
       break;

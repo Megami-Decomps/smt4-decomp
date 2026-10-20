@@ -13,7 +13,7 @@ int FUN_002f5940(void);
 extern unsigned char DAT_005590bc; /* 0x5590bc */
 
 extern int FUN_0011ff0c(int, unsigned int);
-extern int FUN_002e760a(unsigned int);
+extern int operatorNew(unsigned int);
 extern int FUN_002ea974(unsigned int *);
 /* Supplied declaration required: FUN_002eca44. */
 /* Supplied declaration required: FUN_002ecef0. */
@@ -60,7 +60,7 @@ int FUN_0010d134(unsigned int *param_1)
   *(unsigned int *)(temp_v1 - 0x18) = 0;
   *(unsigned int *)(temp_v1 - 0x14) = 0;
   *(unsigned int *)(temp_v1 - 0x40) = 0;
-  temp_v2 = FUN_002e760a(0x80);
+  temp_v2 = operatorNew(0x80);
   temp_v3 = 0;
   if (temp_v2 != 0) {
     temp_v3 = FUN_002ed0dc(temp_v2,0);
@@ -68,7 +68,7 @@ int FUN_0010d134(unsigned int *param_1)
   *(int *)(temp_v1 - 0x2c) = temp_v3;
   *(unsigned short *)(temp_v3 + 0x20) = 0xe;
   FUN_002ed206(*(unsigned int *)(temp_v1 - 0x2c),8);
-  temp_v2 = FUN_002e760a(0x60);
+  temp_v2 = operatorNew(0x60);
   temp_v3 = 0;
   if (temp_v2 != 0) {
     temp_v3 = FUN_0011ff0c(temp_v2,0);

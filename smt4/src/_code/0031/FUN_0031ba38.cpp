@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0025011c(int);
+int asdMemoryFreeLocked(int);
 int FUN_002f2aa8(int);
 int FUN_002f2e88(int, int);
 
@@ -15,7 +15,7 @@ extern int DAT_0044eac4; /* 0x44eac4 */
 extern int DAT_0044f864; /* 0x44f864 */
 
 extern int FUN_002468e0(unsigned int, int);
-/* Supplied declaration required: FUN_0025011c. */
+/* Supplied declaration required: asdMemoryFreeLocked. */
 /* Supplied declaration required: FUN_002f2aa8. */
 /* Supplied declaration required: FUN_002f2e88. */
 
@@ -34,7 +34,7 @@ unsigned char * FUN_0031ba38(void)
     puVar2 = &LAB_00200001;
   }
   else {
-    FUN_0025011c(DAT_0044eac4);
+    asdMemoryFreeLocked(DAT_0044eac4);
     puVar2 = (unsigned char *)0x0;
     DAT_0044eac4 = 0;
   }

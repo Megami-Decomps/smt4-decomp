@@ -12,7 +12,7 @@ int countersGetB(int);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: dataTableGetCount. */
 /* Supplied declaration required: dataTableGetEntries. */
-extern unsigned int FUN_001b564c(unsigned short);
+extern unsigned int gameCountersGetWord(unsigned short);
 extern unsigned int FUN_00261424(void);
 extern int FUN_002e50d4(void);
 /* Supplied declaration required: sysMemClear. */
@@ -55,7 +55,7 @@ void FUN_0022feb0(int param_1)
            (temp_v0 = *puVar10, -1 < (short)temp_v0)) {
           if (temp_v0 != 0x2e) {
             if (temp_v0 != 0x2c) {
-              temp_v1 = FUN_001b564c(temp_v0 & 0xff);
+              temp_v1 = gameCountersGetWord(temp_v0 & 0xff);
               temp_v3 = param_1 + temp_v7 * 4;
               *(unsigned int *)(temp_v3 + 0x490) = temp_v1;
               temp_v1 = countersGetB(*puVar10 & 0xff);

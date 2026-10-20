@@ -19,7 +19,7 @@ int FUN_002cd37c(void);
 int bibleOpenMode3(int);
 int FUN_002e333c(void);
 
-int FUN_001a8040(int);
+int bgmRestart(int);
 int bibleOpenMode2(int);
 int FUN_00223cf0(void);
 int FUN_00269dc8(void);
@@ -51,11 +51,11 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern int DAT_0043da90; /* 0x43da90 */
+extern int g_camp; /* 0x43da90 */
 
 /* Supplied declaration required: configOpen. */
 /* Supplied declaration required: FUN_00194ec8. */
-/* Supplied declaration required: FUN_001a8040. */
+/* Supplied declaration required: bgmRestart. */
 /* Supplied declaration required: bibleOpenMode0. */
 /* Supplied declaration required: bibleOpenMode1. */
 /* Supplied declaration required: bibleOpenMode2. */
@@ -88,7 +88,7 @@ extern int FUN_0029ee54(int);
 extern int FUN_0029efa8(int);
 extern int FUN_0029efc0(int);
 /* Supplied declaration required: FUN_002a035c. */
-extern int FUN_002a8764(void);
+extern int gameGetSlotTable(void);
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002cd37c. */
 /* Supplied declaration required: FUN_002cf780. */
@@ -121,7 +121,7 @@ void FUN_001d0754(int *param_1)
   case 7:
     *(unsigned char *)(temp_v2 + 0x25bd) = 1;
     FUN_0029c3c0(0,10,0xff);
-    FUN_001a8040(0x1e);
+    bgmRestart(0x1e);
     return;
   case 9:
     FUN_0026a598();
@@ -137,9 +137,9 @@ void FUN_001d0754(int *param_1)
       FUN_00298d0c(1);
     }
     *(unsigned int *)(temp_v2 + 0x20) = 0xe;
-    temp_v1 = DAT_0043da90;
-    puVar5 = (unsigned int *)(DAT_0043da90 + 0x18);
-    *(unsigned int *)(DAT_0043da90 + 0x1c) = 0;
+    temp_v1 = g_camp;
+    puVar5 = (unsigned int *)(g_camp + 0x18);
+    *(unsigned int *)(g_camp + 0x1c) = 0;
     *(unsigned int *)(temp_v1 + 0x24) = *puVar5;
     *(unsigned int *)(temp_v1 + 0x14) = 0;
     *(unsigned int *)(temp_v1 + 0x18) = 4;
@@ -160,9 +160,9 @@ void FUN_001d0754(int *param_1)
     FUN_003aca0c();
     FUN_003aacd0();
     *(unsigned int *)(temp_v2 + 0x20) = 0x10;
-    temp_v1 = DAT_0043da90;
-    puVar5 = (unsigned int *)(DAT_0043da90 + 0x18);
-    *(unsigned int *)(DAT_0043da90 + 0x24) = *(unsigned int *)(DAT_0043da90 + 0x18);
+    temp_v1 = g_camp;
+    puVar5 = (unsigned int *)(g_camp + 0x18);
+    *(unsigned int *)(g_camp + 0x24) = *(unsigned int *)(g_camp + 0x18);
     *puVar5 = 4;
     *(unsigned int *)(temp_v1 + 0x1c) = 0;
     *(unsigned int *)(temp_v1 + 0x14) = 0;
@@ -204,9 +204,9 @@ void FUN_001d0754(int *param_1)
       temp_v0 = 0xb;
       FUN_0026a3c4(temp_v0);
     }
-    temp_v1 = DAT_0043da90;
-    puVar5 = (unsigned int *)(DAT_0043da90 + 0x18);
-    *(unsigned int *)(DAT_0043da90 + 0x24) = *(unsigned int *)(DAT_0043da90 + 0x18);
+    temp_v1 = g_camp;
+    puVar5 = (unsigned int *)(g_camp + 0x18);
+    *(unsigned int *)(g_camp + 0x24) = *(unsigned int *)(g_camp + 0x18);
     *puVar5 = 4;
     *(unsigned int *)(temp_v1 + 0x1c) = 0;
     *(unsigned int *)(temp_v1 + 0x14) = 0;
@@ -215,9 +215,9 @@ void FUN_001d0754(int *param_1)
     FUN_0026a598();
     guestWinRequestClose();
     FUN_0029cc44(1);
-    temp_v1 = DAT_0043da90;
-    puVar5 = (unsigned int *)(DAT_0043da90 + 0x18);
-    *(unsigned int *)(DAT_0043da90 + 0x1c) = 0;
+    temp_v1 = g_camp;
+    puVar5 = (unsigned int *)(g_camp + 0x18);
+    *(unsigned int *)(g_camp + 0x1c) = 0;
     *(unsigned int *)(temp_v1 + 0x24) = *puVar5;
     *(unsigned int *)(temp_v1 + 0x14) = 0;
     *(unsigned int *)(temp_v1 + 0x18) = 0x16;
@@ -226,9 +226,9 @@ void FUN_001d0754(int *param_1)
     FUN_0026a598();
     guestWinRequestClose();
     FUN_0029cc44(1);
-    temp_v1 = DAT_0043da90;
-    puVar5 = (unsigned int *)(DAT_0043da90 + 0x18);
-    *(unsigned int *)(DAT_0043da90 + 0x24) = *(unsigned int *)(DAT_0043da90 + 0x18);
+    temp_v1 = g_camp;
+    puVar5 = (unsigned int *)(g_camp + 0x18);
+    *(unsigned int *)(g_camp + 0x24) = *(unsigned int *)(g_camp + 0x18);
     *puVar5 = 0x17;
     *(unsigned int *)(temp_v1 + 0x1c) = 0;
     *(unsigned int *)(temp_v1 + 0x14) = 0;
@@ -278,9 +278,9 @@ void FUN_001d0754(int *param_1)
       FUN_00299da0(0x15);
       FUN_00299da0(0x16);
       FUN_00299da0(0x17);
-      temp_v1 = DAT_0043da90;
-      puVar5 = (unsigned int *)(DAT_0043da90 + 0x18);
-      *(unsigned int *)(DAT_0043da90 + 0x1c) = 0;
+      temp_v1 = g_camp;
+      puVar5 = (unsigned int *)(g_camp + 0x18);
+      *(unsigned int *)(g_camp + 0x1c) = 0;
       *(unsigned int *)(temp_v1 + 0x24) = *puVar5;
       *(unsigned int *)(temp_v1 + 0x14) = 0;
       *(unsigned int *)(temp_v1 + 0x18) = 4;
@@ -292,9 +292,9 @@ void FUN_001d0754(int *param_1)
     guestWinRequestClose();
     FUN_0029cc44(1);
     FUN_0026a38c(0);
-    temp_v1 = DAT_0043da90;
-    puVar5 = (unsigned int *)(DAT_0043da90 + 0x18);
-    *(unsigned int *)(DAT_0043da90 + 0x24) = *(unsigned int *)(DAT_0043da90 + 0x18);
+    temp_v1 = g_camp;
+    puVar5 = (unsigned int *)(g_camp + 0x18);
+    *(unsigned int *)(g_camp + 0x24) = *(unsigned int *)(g_camp + 0x18);
     *puVar5 = 0x12;
     *(unsigned int *)(temp_v1 + 0x1c) = 0;
     *(unsigned int *)(temp_v1 + 0x14) = 0;
@@ -305,9 +305,9 @@ void FUN_001d0754(int *param_1)
     guestWinRequestClose();
     FUN_0029cc44(1);
     bibleOpenMode2(0);
-    temp_v1 = DAT_0043da90;
-    puVar5 = (unsigned int *)(DAT_0043da90 + 0x18);
-    *(unsigned int *)(DAT_0043da90 + 0x24) = *(unsigned int *)(DAT_0043da90 + 0x18);
+    temp_v1 = g_camp;
+    puVar5 = (unsigned int *)(g_camp + 0x18);
+    *(unsigned int *)(g_camp + 0x24) = *(unsigned int *)(g_camp + 0x18);
     *puVar5 = 0x21;
     *(unsigned int *)(temp_v1 + 0x1c) = 0;
     *(unsigned int *)(temp_v1 + 0x14) = 0;
@@ -317,9 +317,9 @@ void FUN_001d0754(int *param_1)
     *(int *)(temp_v2 + 0xc) = temp_v1;
     FUN_0026d5a4();
     FUN_0029ee6c(0,0x323232ff);
-    temp_v1 = DAT_0043da90;
-    puVar5 = (unsigned int *)(DAT_0043da90 + 0x18);
-    *(unsigned int *)(DAT_0043da90 + 0x24) = *(unsigned int *)(DAT_0043da90 + 0x18);
+    temp_v1 = g_camp;
+    puVar5 = (unsigned int *)(g_camp + 0x18);
+    *(unsigned int *)(g_camp + 0x24) = *(unsigned int *)(g_camp + 0x18);
     *puVar5 = 0x22;
     *(unsigned int *)(temp_v1 + 0x1c) = 0;
     *(unsigned int *)(temp_v1 + 0x14) = 0;
@@ -331,9 +331,9 @@ void FUN_001d0754(int *param_1)
     FUN_0026d5a4();
     guestWinRequestClose();
     FUN_0029cc44(1);
-    temp_v1 = DAT_0043da90;
-    puVar5 = (unsigned int *)(DAT_0043da90 + 0x18);
-    *(unsigned int *)(DAT_0043da90 + 0x1c) = 0;
+    temp_v1 = g_camp;
+    puVar5 = (unsigned int *)(g_camp + 0x18);
+    *(unsigned int *)(g_camp + 0x1c) = 0;
     *(unsigned int *)(temp_v1 + 0x24) = *puVar5;
     *(unsigned int *)(temp_v1 + 0x14) = 0;
     *(unsigned int *)(temp_v1 + 0x18) = 0x23;
@@ -345,9 +345,9 @@ void FUN_001d0754(int *param_1)
     FUN_0026d5a4();
     guestWinRequestClose();
     FUN_0029cc44(1);
-    temp_v1 = DAT_0043da90;
-    puVar5 = (unsigned int *)(DAT_0043da90 + 0x18);
-    *(unsigned int *)(DAT_0043da90 + 0x24) = *(unsigned int *)(DAT_0043da90 + 0x18);
+    temp_v1 = g_camp;
+    puVar5 = (unsigned int *)(g_camp + 0x18);
+    *(unsigned int *)(g_camp + 0x24) = *(unsigned int *)(g_camp + 0x18);
     *puVar5 = 0x24;
     *(unsigned int *)(temp_v1 + 0x1c) = 0;
     *(unsigned int *)(temp_v1 + 0x14) = 0;
@@ -359,9 +359,9 @@ void FUN_001d0754(int *param_1)
     FUN_0026a598();
     bibleOpenMode3(0);
     FUN_002a035c();
-    temp_v1 = DAT_0043da90;
-    puVar5 = (unsigned int *)(DAT_0043da90 + 0x18);
-    *(unsigned int *)(DAT_0043da90 + 0x24) = *(unsigned int *)(DAT_0043da90 + 0x18);
+    temp_v1 = g_camp;
+    puVar5 = (unsigned int *)(g_camp + 0x18);
+    *(unsigned int *)(g_camp + 0x24) = *(unsigned int *)(g_camp + 0x18);
     *puVar5 = 0x21;
     *(unsigned int *)(temp_v1 + 0x1c) = 0;
     *(unsigned int *)(temp_v1 + 0x14) = 0;
@@ -372,9 +372,9 @@ void FUN_001d0754(int *param_1)
     FUN_0026d5a4();
     guestWinRequestClose();
     FUN_0029cc44(1);
-    temp_v1 = DAT_0043da90;
-    puVar5 = (unsigned int *)(DAT_0043da90 + 0x18);
-    *(unsigned int *)(DAT_0043da90 + 0x24) = *(unsigned int *)(DAT_0043da90 + 0x18);
+    temp_v1 = g_camp;
+    puVar5 = (unsigned int *)(g_camp + 0x18);
+    *(unsigned int *)(g_camp + 0x24) = *(unsigned int *)(g_camp + 0x18);
     *puVar5 = 0x2e;
     *(unsigned int *)(temp_v1 + 0x1c) = 0;
     *(unsigned int *)(temp_v1 + 0x14) = 0;
@@ -384,9 +384,9 @@ void FUN_001d0754(int *param_1)
     FUN_0026d5a4();
     guestWinRequestClose();
     FUN_0029cc44(1);
-    temp_v1 = DAT_0043da90;
-    puVar5 = (unsigned int *)(DAT_0043da90 + 0x18);
-    *(unsigned int *)(DAT_0043da90 + 0x24) = *(unsigned int *)(DAT_0043da90 + 0x18);
+    temp_v1 = g_camp;
+    puVar5 = (unsigned int *)(g_camp + 0x18);
+    *(unsigned int *)(g_camp + 0x24) = *(unsigned int *)(g_camp + 0x18);
     *puVar5 = 0x2f;
     *(unsigned int *)(temp_v1 + 0x1c) = 0;
     *(unsigned int *)(temp_v1 + 0x14) = 0;
@@ -399,9 +399,9 @@ void FUN_001d0754(int *param_1)
     guestWinRequestClose();
     FUN_0029cc44(1);
     *(unsigned int *)(temp_v2 + 0x20) = 0x2b;
-    temp_v1 = DAT_0043da90;
-    puVar5 = (unsigned int *)(DAT_0043da90 + 0x18);
-    *(unsigned int *)(DAT_0043da90 + 0x1c) = 0;
+    temp_v1 = g_camp;
+    puVar5 = (unsigned int *)(g_camp + 0x18);
+    *(unsigned int *)(g_camp + 0x1c) = 0;
     *(unsigned int *)(temp_v1 + 0x24) = *puVar5;
     *(unsigned int *)(temp_v1 + 0x14) = 0;
     *(unsigned int *)(temp_v1 + 0x18) = 4;
@@ -412,9 +412,9 @@ void FUN_001d0754(int *param_1)
     timerStart(temp_v2 + 0x6d4,0);
     FUN_0026d5a4();
     *(unsigned int *)(temp_v2 + 0x20) = 0x2c;
-    temp_v1 = DAT_0043da90;
-    puVar5 = (unsigned int *)(DAT_0043da90 + 0x18);
-    *(unsigned int *)(DAT_0043da90 + 0x1c) = 0;
+    temp_v1 = g_camp;
+    puVar5 = (unsigned int *)(g_camp + 0x18);
+    *(unsigned int *)(g_camp + 0x1c) = 0;
     *(unsigned int *)(temp_v1 + 0x24) = *puVar5;
     *(unsigned int *)(temp_v1 + 0x14) = 0;
     *(unsigned int *)(temp_v1 + 0x18) = 4;
@@ -424,9 +424,9 @@ void FUN_001d0754(int *param_1)
     if (temp_v1 != 0) {
       FUN_0026a598();
       FUN_00269da0(0);
-      temp_v1 = DAT_0043da90;
-      puVar5 = (unsigned int *)(DAT_0043da90 + 0x18);
-      *(unsigned int *)(DAT_0043da90 + 0x24) = *(unsigned int *)(DAT_0043da90 + 0x18);
+      temp_v1 = g_camp;
+      puVar5 = (unsigned int *)(g_camp + 0x18);
+      *(unsigned int *)(g_camp + 0x24) = *(unsigned int *)(g_camp + 0x18);
       *puVar5 = 0x1d;
       *(unsigned int *)(temp_v1 + 0x1c) = 0;
       *(unsigned int *)(temp_v1 + 0x14) = 0;
@@ -437,9 +437,9 @@ void FUN_001d0754(int *param_1)
   case 0x2b:
     FUN_0026a598();
     FUN_00269da0(1);
-    temp_v1 = DAT_0043da90;
-    puVar5 = (unsigned int *)(DAT_0043da90 + 0x18);
-    *(unsigned int *)(DAT_0043da90 + 0x24) = *(unsigned int *)(DAT_0043da90 + 0x18);
+    temp_v1 = g_camp;
+    puVar5 = (unsigned int *)(g_camp + 0x18);
+    *(unsigned int *)(g_camp + 0x24) = *(unsigned int *)(g_camp + 0x18);
     *puVar5 = 0x1d;
     *(unsigned int *)(temp_v1 + 0x1c) = 0;
     *(unsigned int *)(temp_v1 + 0x14) = 0;
@@ -450,9 +450,9 @@ void FUN_001d0754(int *param_1)
     if (temp_v1 != 0) {
       FUN_0026a598();
       bibleOpenMode0(0);
-      temp_v1 = DAT_0043da90;
-      puVar5 = (unsigned int *)(DAT_0043da90 + 0x18);
-      *(unsigned int *)(DAT_0043da90 + 0x1c) = 0;
+      temp_v1 = g_camp;
+      puVar5 = (unsigned int *)(g_camp + 0x18);
+      *(unsigned int *)(g_camp + 0x1c) = 0;
       *(unsigned int *)(temp_v1 + 0x24) = *puVar5;
       *(unsigned int *)(temp_v1 + 0x14) = 0;
       *(unsigned int *)(temp_v1 + 0x18) = 0x21;
@@ -464,7 +464,7 @@ void FUN_001d0754(int *param_1)
   case 0x2d:
     temp_v1 = FUN_00269d4c();
     if (temp_v1 != 0) {
-      temp_v1 = FUN_002a8764();
+      temp_v1 = gameGetSlotTable();
       temp_v3 = 0;
       if (*(char *)(temp_v1 + 0x910b) != '\0') {
         do {
@@ -475,9 +475,9 @@ void FUN_001d0754(int *param_1)
             if (temp_v2 == 0) {
               FUN_0026a598();
               bibleOpenMode1(0);
-              temp_v1 = DAT_0043da90;
-              puVar5 = (unsigned int *)(DAT_0043da90 + 0x18);
-              *(unsigned int *)(DAT_0043da90 + 0x24) = *(unsigned int *)(DAT_0043da90 + 0x18);
+              temp_v1 = g_camp;
+              puVar5 = (unsigned int *)(g_camp + 0x18);
+              *(unsigned int *)(g_camp + 0x24) = *(unsigned int *)(g_camp + 0x18);
               *puVar5 = 0x21;
               *(unsigned int *)(temp_v1 + 0x1c) = 0;
               *(unsigned int *)(temp_v1 + 0x14) = 0;
@@ -499,9 +499,9 @@ void FUN_001d0754(int *param_1)
     if (temp_v1 != 0) {
       FUN_0026a598();
       FUN_00269da0(3);
-      temp_v1 = DAT_0043da90;
-      puVar5 = (unsigned int *)(DAT_0043da90 + 0x18);
-      *(unsigned int *)(DAT_0043da90 + 0x24) = *(unsigned int *)(DAT_0043da90 + 0x18);
+      temp_v1 = g_camp;
+      puVar5 = (unsigned int *)(g_camp + 0x18);
+      *(unsigned int *)(g_camp + 0x24) = *(unsigned int *)(g_camp + 0x18);
       *puVar5 = 0x1d;
       *(unsigned int *)(temp_v1 + 0x1c) = 0;
       *(unsigned int *)(temp_v1 + 0x14) = 0;
@@ -523,9 +523,9 @@ void FUN_001d0754(int *param_1)
       FUN_0028a924(0xd,0,0xffffffff);
       FUN_0028a368(1);
       FUN_0029e774();
-      temp_v1 = DAT_0043da90;
-      puVar5 = (unsigned int *)(DAT_0043da90 + 0x18);
-      *(unsigned int *)(DAT_0043da90 + 0x1c) = 0;
+      temp_v1 = g_camp;
+      puVar5 = (unsigned int *)(g_camp + 0x18);
+      *(unsigned int *)(g_camp + 0x1c) = 0;
       *(unsigned int *)(temp_v1 + 0x24) = *puVar5;
       *(unsigned int *)(temp_v1 + 0x14) = 0;
       *(unsigned int *)(temp_v1 + 0x18) = 0x13;

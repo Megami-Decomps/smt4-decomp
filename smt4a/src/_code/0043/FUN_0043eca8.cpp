@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_001bcd48(int, int);
+int svcSleepThread(int, int);
 int FUN_0043dd54(unsigned int *);
 int software_interrupt(int);
 
 extern unsigned char DAT_0055b40c; /* 0x55b40c */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_001bcd48. */
+/* Supplied declaration required: svcSleepThread. */
 /* Supplied declaration required: FUN_0043dd54. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
@@ -49,7 +49,7 @@ unsigned int * FUN_0043eca8(unsigned int *param_1)
   }
   while (param_1[9] != 0) {
     nn_os_CriticalSection_Leave((unsigned int)(param_1 + 4));
-    FUN_001bcd48(100000000,0);
+    svcSleepThread(100000000,0);
     nn_os_CriticalSection_Enter((unsigned int)(param_1 + 4));
   }
   *(unsigned char *)((int)param_1 + 0x41) = 0;

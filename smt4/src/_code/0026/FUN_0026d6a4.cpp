@@ -11,9 +11,9 @@ int FUN_0029378c(...);
 int FUN_00293348(int, int);
 int FUN_002937d0(...);
 int FUN_002937e0(void);
-int FUN_0029e1ec(void);
+int useCounterStart(void);
 int FUN_0029e328(int);
-int FUN_0029e39c(int);
+int sortMenuCreate(int);
 int FUN_0029e8b8(...);
 int FUN_0029e908(...);
 int FUN_0029eb5c(...);
@@ -24,7 +24,7 @@ int timerStart(int, int, int);
 int FUN_002c1658(int, int);
 int SBORROW4(...);
 
-extern int DAT_0043dcf0; /* 0x43dcf0 */
+extern int g_partyPanel; /* 0x43dcf0 */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_00293348. */
@@ -34,9 +34,9 @@ extern int DAT_0043dcf0; /* 0x43dcf0 */
 /* Supplied declaration required: FUN_002937d0. */
 /* Supplied declaration required: FUN_002937e0. */
 extern int FUN_0029e02c(void);
-/* Supplied declaration required: FUN_0029e1ec. */
+/* Supplied declaration required: useCounterStart. */
 /* Supplied declaration required: FUN_0029e328. */
-/* Supplied declaration required: FUN_0029e39c. */
+/* Supplied declaration required: sortMenuCreate. */
 /* Supplied declaration required: FUN_0029e8b8. */
 /* Supplied declaration required: FUN_0029e908. */
 /* Supplied declaration required: FUN_0029eb5c. */
@@ -60,7 +60,7 @@ unsigned int FUN_0026d6a4(int param_1)
   unsigned char temp_v6;
   unsigned char temp_v7;
   
-  temp_v5 = DAT_0043dcf0;
+  temp_v5 = g_partyPanel;
   temp_v1 = 10;
   FUN_002c1658(10,1);
   if (temp_v1 == 0) {
@@ -79,14 +79,14 @@ unsigned int FUN_0026d6a4(int param_1)
     if (temp_v5 == 0) {
       return 0;
     }
-    FUN_0029e39c(0);
+    sortMenuCreate(0);
     FUN_0029e328(2);
     FUN_0029e328(1);
     FUN_0029e328(4);
     FUN_0029e328(5);
     FUN_0029e328(0x1f);
     FUN_0029e328(3);
-    FUN_0029e1ec();
+    useCounterStart();
     FUN_00293348(0xf,1);
     FUN_002a0cc8(1);
     FUN_002bc01c(0x100016d);

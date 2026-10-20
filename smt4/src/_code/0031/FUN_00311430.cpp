@@ -9,7 +9,7 @@ int FUN_00288e68(void);
 int FUN_0029eb5c(int, int);
 int FUN_0029f848(...);
 int FUN_002a0c08(int);
-int FUN_002b8838(int);
+int buttonHelpSetPreset(int);
 int timerStart(int, int, int);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
@@ -18,7 +18,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_2_stack;
 
-extern int DAT_0044e190; /* 0x44e190 */
+extern int g_statusDown; /* 0x44e190 */
 
 extern int FUN_00262cb0(unsigned int);
 /* Supplied declaration required: FUN_0026aa78. */
@@ -26,7 +26,7 @@ extern int FUN_00262cb0(unsigned int);
 /* Supplied declaration required: FUN_0029eb5c. */
 /* Supplied declaration required: FUN_0029f848. */
 /* Supplied declaration required: FUN_002a0c08. */
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: timerStart. */
 
 
@@ -42,10 +42,10 @@ void FUN_00311430(unsigned short param_1,unsigned char param_2)
   unsigned int temp_v4;
   int temp_v5;
   
-  temp_v0 = DAT_0044e190;
+  temp_v0 = g_statusDown;
   temp_v5 = 0;
   temp_v4 = 0x79f;
-  *(unsigned short *)(DAT_0044e190 + 0x2380) = param_1;
+  *(unsigned short *)(g_statusDown + 0x2380) = param_1;
   *(unsigned char *)(temp_v0 + 0x413) = param_2;
   *(unsigned int *)(temp_v0 + 0x2370) = 0;
   *(unsigned int *)(temp_v0 + 0x2374) = 0;
@@ -65,7 +65,7 @@ void FUN_00311430(unsigned short param_1,unsigned char param_2)
     }
   }
   FUN_002a0c08(0xe);
-  FUN_002b8838(5);
+  buttonHelpSetPreset(5);
   timerStart(temp_v0 + 0x28,1,0);
   temp_v1 = FUN_0026aa78();
   if (temp_v5 >= temp_v1) {
@@ -80,8 +80,8 @@ void FUN_00311430(unsigned short param_1,unsigned char param_2)
     temp_v3 = 0x16;
   }
   *(unsigned int *)(temp_v0 + 0x408) = temp_v3;
-  temp_v0 = DAT_0044e190;
-  *(unsigned int *)(DAT_0044e190 + 0x40c) = 0;
+  temp_v0 = g_statusDown;
+  *(unsigned int *)(g_statusDown + 0x40c) = 0;
   puVar5 = (unsigned int *)(temp_v0 + 0x400);
   temp_v3 = *puVar5;
   *puVar5 = 1;

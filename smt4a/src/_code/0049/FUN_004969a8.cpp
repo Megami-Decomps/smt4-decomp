@@ -7,7 +7,7 @@ extern "C" {
 int qsort(...);
 int FUN_0028a888(...);
 int FUN_002a1f60(...);
-int FUN_00493e14(...);
+int cellListAppend(...);
 int FUN_004964e0(...);
 int FUN_00499d14(void);
 int FUN_004cfeb0(...);
@@ -26,9 +26,9 @@ extern int DAT_0057f0c8; /* 0x57f0c8 */
 /* Supplied declaration required: FUN_0028a888. */
 /* Supplied declaration required: FUN_002a1f60. */
 extern int FUN_0046e458(unsigned int, short);
-extern int FUN_00480b08(void);
+extern int dataTableValue0f(void);
 extern int FUN_00481100(unsigned int);
-/* Supplied declaration required: FUN_00493e14. */
+/* Supplied declaration required: cellListAppend. */
 /* Supplied declaration required: FUN_004964e0. */
 /* Supplied declaration required: FUN_00499d14. */
 extern int FUN_004cfe4c(int);
@@ -73,7 +73,7 @@ void FUN_004969a8(int param_1)
           do {
             temp_v1 = FUN_00481100(temp_v6);
             if (temp_v1 != 0) {
-              FUN_00493e14(param_1 + 0x8f84,temp_v6 & 0xffff,0,0,0);
+              cellListAppend(param_1 + 0x8f84,temp_v6 & 0xffff,0,0,0);
             }
             temp_v6 = temp_v6 + 1;
           } while ((int)temp_v6 < 0x3d);
@@ -81,7 +81,7 @@ void FUN_004969a8(int param_1)
           do {
             temp_v1 = FUN_00481100(temp_v6);
             if (temp_v1 != 0) {
-              FUN_00493e14(param_1 + 0x8f84,temp_v6 & 0xffff,0,0,0);
+              cellListAppend(param_1 + 0x8f84,temp_v6 & 0xffff,0,0,0);
             }
             temp_v6 = temp_v6 + 1;
           } while ((int)temp_v6 < 0x7df);
@@ -91,7 +91,7 @@ void FUN_004969a8(int param_1)
         do {
           temp_v1 = FUN_00481100(temp_v5);
           if (temp_v1 != 0) {
-            FUN_00493e14(param_1 + 0x8f84,temp_v5 & 0xffff,0,0,0);
+            cellListAppend(param_1 + 0x8f84,temp_v5 & 0xffff,0,0,0);
           }
           temp_v5 = temp_v5 + 1;
         } while ((int)temp_v5 < 0x1a5);
@@ -99,7 +99,7 @@ void FUN_004969a8(int param_1)
         do {
           temp_v1 = FUN_00481100(temp_v6);
           if (temp_v1 != 0) {
-            FUN_00493e14(param_1 + 0x8f84,temp_v6 & 0xffff,0,0,0);
+            cellListAppend(param_1 + 0x8f84,temp_v6 & 0xffff,0,0,0);
           }
           temp_v6 = temp_v6 + 1;
         } while ((int)temp_v6 < 0x21d);
@@ -107,7 +107,7 @@ void FUN_004969a8(int param_1)
         do {
           temp_v1 = FUN_00481100(temp_v6);
           if (temp_v1 != 0) {
-            FUN_00493e14(param_1 + 0x8f84,temp_v6 & 0xffff,0,0,0);
+            cellListAppend(param_1 + 0x8f84,temp_v6 & 0xffff,0,0,0);
           }
           temp_v6 = temp_v6 + 1;
         } while ((int)temp_v6 < 0x295);
@@ -115,7 +115,7 @@ void FUN_004969a8(int param_1)
         do {
           temp_v1 = FUN_00481100(temp_v6);
           if (temp_v1 != 0) {
-            FUN_00493e14(param_1 + 0x8f84,temp_v6 & 0xffff,0,0,0);
+            cellListAppend(param_1 + 0x8f84,temp_v6 & 0xffff,0,0,0);
           }
           temp_v6 = temp_v6 + 1;
         } while ((int)temp_v6 < 0x30d);
@@ -126,7 +126,7 @@ void FUN_004969a8(int param_1)
       do {
         temp_v1 = FUN_00481100(temp_v5);
         if (temp_v1 != 0) {
-          FUN_00493e14(param_1 + 0x8f84,temp_v5 & 0xffff,0,0,0);
+          cellListAppend(param_1 + 0x8f84,temp_v5 & 0xffff,0,0,0);
         }
         temp_v5 = temp_v5 + 1;
       } while ((int)temp_v5 < 0xb5);
@@ -134,14 +134,14 @@ void FUN_004969a8(int param_1)
       do {
         temp_v1 = FUN_00481100(temp_v5);
         if (temp_v1 != 0) {
-          FUN_00493e14(param_1 + 0x8f84,temp_v5 & 0xffff,0,0,0);
+          cellListAppend(param_1 + 0x8f84,temp_v5 & 0xffff,0,0,0);
         }
         temp_v5 = temp_v5 + 1;
       } while ((int)temp_v5 < 0x12d);
       do {
         temp_v1 = FUN_00481100(temp_v6);
         if (temp_v1 != 0) {
-          FUN_00493e14(param_1 + 0x8f84,temp_v6 & 0xffff,0,0,0);
+          cellListAppend(param_1 + 0x8f84,temp_v6 & 0xffff,0,0,0);
         }
         temp_v6 = temp_v6 + 1;
       } while ((int)temp_v6 < 0x33f);
@@ -153,7 +153,7 @@ void FUN_004969a8(int param_1)
     do {
       temp_v2 = FUN_00481100(temp_v4);
       if (temp_v2 != 0) {
-        FUN_00493e14(temp_v1,temp_v4 & 0xffff,0,0,0);
+        cellListAppend(temp_v1,temp_v4 & 0xffff,0,0,0);
       }
       temp_v4 = temp_v4 + 1;
     } while ((int)temp_v4 < 0x3d);
@@ -162,7 +162,7 @@ void FUN_004969a8(int param_1)
     do {
       temp_v2 = FUN_00481100(temp_v4);
       if (temp_v2 != 0) {
-        FUN_00493e14(temp_v1,temp_v4 & 0xffff,0,0,0);
+        cellListAppend(temp_v1,temp_v4 & 0xffff,0,0,0);
       }
       temp_v4 = temp_v4 + 1;
     } while ((int)temp_v4 < 0xb5);
@@ -171,21 +171,21 @@ void FUN_004969a8(int param_1)
     do {
       temp_v2 = FUN_00481100(temp_v4);
       if (temp_v2 != 0) {
-        FUN_00493e14(temp_v1,temp_v4 & 0xffff,0,0,0);
+        cellListAppend(temp_v1,temp_v4 & 0xffff,0,0,0);
       }
       temp_v4 = temp_v4 + 1;
     } while ((int)temp_v4 < 0x12d);
     do {
       temp_v1 = FUN_00481100(temp_v6);
       if (temp_v1 != 0) {
-        FUN_00493e14(param_1 + 0x8f84,temp_v6 & 0xffff,0,0,0);
+        cellListAppend(param_1 + 0x8f84,temp_v6 & 0xffff,0,0,0);
       }
       temp_v6 = temp_v6 + 1;
     } while ((int)temp_v6 < 0x33f);
     do {
       temp_v1 = FUN_00481100(temp_v5);
       if (temp_v1 != 0) {
-        FUN_00493e14(param_1 + 0x8f84,temp_v5 & 0xffff,0,0,0);
+        cellListAppend(param_1 + 0x8f84,temp_v5 & 0xffff,0,0,0);
       }
       temp_v5 = temp_v5 + 1;
     } while ((int)temp_v5 < 0x1a5);
@@ -193,7 +193,7 @@ void FUN_004969a8(int param_1)
     do {
       temp_v1 = FUN_00481100(temp_v6);
       if (temp_v1 != 0) {
-        FUN_00493e14(param_1 + 0x8f84,temp_v6 & 0xffff,0,0,0);
+        cellListAppend(param_1 + 0x8f84,temp_v6 & 0xffff,0,0,0);
       }
       temp_v6 = temp_v6 + 1;
     } while ((int)temp_v6 < 0x21d);
@@ -201,7 +201,7 @@ void FUN_004969a8(int param_1)
     do {
       temp_v1 = FUN_00481100(temp_v6);
       if (temp_v1 != 0) {
-        FUN_00493e14(param_1 + 0x8f84,temp_v6 & 0xffff,0,0,0);
+        cellListAppend(param_1 + 0x8f84,temp_v6 & 0xffff,0,0,0);
       }
       temp_v6 = temp_v6 + 1;
     } while ((int)temp_v6 < 0x295);
@@ -209,7 +209,7 @@ void FUN_004969a8(int param_1)
     do {
       temp_v1 = FUN_00481100(temp_v6);
       if (temp_v1 != 0) {
-        FUN_00493e14(param_1 + 0x8f84,temp_v6 & 0xffff,0,0,0);
+        cellListAppend(param_1 + 0x8f84,temp_v6 & 0xffff,0,0,0);
       }
       temp_v6 = temp_v6 + 1;
     } while ((int)temp_v6 < 0x30d);
@@ -217,7 +217,7 @@ void FUN_004969a8(int param_1)
     do {
       temp_v1 = FUN_00481100(temp_v6);
       if (temp_v1 != 0) {
-        FUN_00493e14(param_1 + 0x8f84,temp_v6 & 0xffff,0,0,0);
+        cellListAppend(param_1 + 0x8f84,temp_v6 & 0xffff,0,0,0);
       }
       temp_v6 = temp_v6 + 1;
     } while ((int)temp_v6 < 0x7df);
@@ -239,7 +239,7 @@ void FUN_004969a8(int param_1)
     *(unsigned char *)(temp_v1 + 0x5ea) = 1;
     temp_v2 = FUN_0046e458(g_aocSystem,temp_v0);
     if (temp_v2 == 0) {
-      temp_v2 = FUN_00480b08();
+      temp_v2 = dataTableValue0f();
     }
     FUN_0028a888(temp_v0);
     FUN_002a1f60(*(unsigned int *)(temp_v1 + 0x678),2,0xffffffff,0,3,temp_v2,temp_v0);

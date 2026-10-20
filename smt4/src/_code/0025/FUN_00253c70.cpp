@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_002c2950(void);
+extern int gameGetMapBlock(void);
 
 
 void FUN_00253c70(int param_1)
@@ -16,7 +16,7 @@ void FUN_00253c70(int param_1)
   int temp_v3;
   unsigned char *pbVar5;
   
-  temp_v1 = FUN_002c2950();
+  temp_v1 = gameGetMapBlock();
   temp_v2 = 0;
   while( 1 ) {
     temp_v3 = temp_v1 + temp_v2 * 0x14;

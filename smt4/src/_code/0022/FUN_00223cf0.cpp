@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-extern int DAT_0043dd50; /* 0x43dd50 */
+extern int g_uiQuest; /* 0x43dd50 */
 
 /* Supplied declaration required: FUN_00250798. */
 /* Supplied declaration required: FUN_0028fe0c. */
@@ -33,25 +33,25 @@ void FUN_00223cf0(void)
   int temp_v2;
   unsigned int temp_v3;
   
-  temp_v0 = DAT_0043dd50;
-  *(unsigned char *)(DAT_0043dd50 + 0x5c4) = 0;
+  temp_v0 = g_uiQuest;
+  *(unsigned char *)(g_uiQuest + 0x5c4) = 0;
   if (*(int *)(temp_v0 + 4) != 0xd) {
     FUN_00250798();
     temp_v1 = FUN_0029efc0(temp_v0 + 0x660);
     temp_v2 = FUN_0029efa8(temp_v0 + 0x660);
     FUN_0028fe0c(*(unsigned short *)(temp_v0 + (temp_v2 + temp_v1) * 2 + 0x78a),1);
     timerStart(temp_v0 + 0x34,0);
-    temp_v0 = DAT_0043dd50;
-    temp_v3 = *(unsigned int *)(DAT_0043dd50 + 4);
-    *(unsigned int *)(DAT_0043dd50 + 4) = 1;
+    temp_v0 = g_uiQuest;
+    temp_v3 = *(unsigned int *)(g_uiQuest + 4);
+    *(unsigned int *)(g_uiQuest + 4) = 1;
     *(unsigned int *)(temp_v0 + 8) = temp_v3;
     *(unsigned int *)(temp_v0 + 0x10) = 0;
     return;
   }
   timerStart(temp_v0 + 0x34,2,0);
-  temp_v0 = DAT_0043dd50;
-  temp_v3 = *(unsigned int *)(DAT_0043dd50 + 4);
-  *(unsigned int *)(DAT_0043dd50 + 4) = 3;
+  temp_v0 = g_uiQuest;
+  temp_v3 = *(unsigned int *)(g_uiQuest + 4);
+  *(unsigned int *)(g_uiQuest + 4) = 3;
   *(unsigned int *)(temp_v0 + 8) = temp_v3;
   *(unsigned int *)(temp_v0 + 0x10) = 0;
   FUN_00290d5c(0xa0);

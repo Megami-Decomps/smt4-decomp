@@ -18,7 +18,7 @@ typedef struct RequestTable {
 
 extern RequestTable *g_eplSlots;
 
-extern void FUN_0019c8c0(u32 handle);
+extern void resOwnerRunNodeHandlers(u32 handle);
 
 void FUN_0027376c(s32 index)
 {
@@ -26,7 +26,7 @@ void FUN_0027376c(s32 index)
 
     if (request->handle != 0) {
         request->pending = 1;
-        FUN_0019c8c0(request->handle);
+        resOwnerRunNodeHandlers(request->handle);
     }
 }
 

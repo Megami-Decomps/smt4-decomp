@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00234bb4(unsigned int, unsigned char [132], unsigned int, unsigned int, int, int, int);
+int aocDisplayQueueRecord(unsigned int, unsigned char [132], unsigned int, unsigned int, int, int, int);
 int memClear(unsigned char [132], int);
 
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
@@ -15,7 +15,7 @@ typedef struct {
 
 extern unsigned int g_aocDisplay; /* 0x433130 */
 
-/* Supplied declaration required: FUN_00234bb4. */
+/* Supplied declaration required: aocDisplayQueueRecord. */
 extern int FUN_002a6e7c(unsigned int, unsigned int, unsigned int, unsigned char *);
 /* Supplied declaration required: memClear. */
 
@@ -30,7 +30,7 @@ void FUN_00387a7c(unsigned int param_1,unsigned int param_2,unsigned int param_3
   memClear(temp_v1,0x80);
   temp_v0 = FUN_002a6e7c(param_1,0x1e,param_2,temp_v1);
   if (temp_v0 != 0) {
-    FUN_00234bb4(g_aocDisplay,temp_v1,param_4,param_3,0,4,0);
+    aocDisplayQueueRecord(g_aocDisplay,temp_v1,param_4,param_3,0,4,0);
   }
   return;
 }

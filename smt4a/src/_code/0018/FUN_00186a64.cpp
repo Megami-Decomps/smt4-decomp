@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0017cff0(int);
+int nngxBindCmdlist(int);
 int FUN_0019eafc(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_0017cff0. */
+/* Supplied declaration required: nngxBindCmdlist. */
 extern int FUN_001960f0(int *, int *);
 /* Supplied declaration required: FUN_0019eafc. */
 
@@ -39,7 +39,7 @@ void FUN_00186a64(int *param_1)
   FUN_0019eafc();
   param_1[1] = temp_v0 - *param_1;
   param_1[3] = 2;
-  FUN_0017cff0(param_1[2]);
+  nngxBindCmdlist(param_1[2]);
   return;
 }
 

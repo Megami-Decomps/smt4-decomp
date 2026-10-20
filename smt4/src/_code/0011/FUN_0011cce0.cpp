@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned char DAT_004ead10; /* 0x4ead10 */
+extern unsigned char g_nnSndMasterManagerImpl; /* 0x4ead10 */
 
 extern void nn_snd_CTR_MasterManagerImpl_Finalize(unsigned int);
 
@@ -13,7 +13,7 @@ void FUN_0011cce0(char *param_1)
 
 {
   if (*param_1 != '\0') {
-    nn_snd_CTR_MasterManagerImpl_Finalize((unsigned int)&DAT_004ead10);
+    nn_snd_CTR_MasterManagerImpl_Finalize((unsigned int)&g_nnSndMasterManagerImpl);
     param_1[0x4c] = -1;
     param_1[0x4d] = -1;
     param_1[0x4e] = -1;

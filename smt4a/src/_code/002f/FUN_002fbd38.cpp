@@ -6,12 +6,12 @@ extern "C" {
 
 int strAssign(unsigned char [32], int *, int, unsigned int);
 int FUN_002e7614(...);
-int FUN_002e9318(unsigned char [8]);
+int onlineStringDestroy(unsigned char [8]);
 int initVtable00558630(unsigned char [16]);
-int FUN_002eb588(int *);
+int onlineTimeGetNow(int *);
 int strDestroy(...);
 int FUN_002f6be2(unsigned char [8], int *);
-int FUN_002f6bf0(int);
+int operatorDeleteArrayNullable(int);
 int FUN_002f6bfc(unsigned char [16], unsigned char [32], unsigned char [36]);
 int FUN_002f7b9c(unsigned char [8], unsigned char [36]);
 int FUN_002fbde4(int, int, unsigned char *, int);
@@ -29,12 +29,12 @@ extern unsigned char LAB_002fbdc8; /* 0x2fbdc8 */
 
 /* Supplied declaration required: strAssign. */
 /* Supplied declaration required: FUN_002e7614. */
-/* Supplied declaration required: FUN_002e9318. */
+/* Supplied declaration required: onlineStringDestroy. */
 /* Supplied declaration required: initVtable00558630. */
-/* Supplied declaration required: FUN_002eb588. */
+/* Supplied declaration required: onlineTimeGetNow. */
 /* Supplied declaration required: strDestroy. */
 /* Supplied declaration required: FUN_002f6be2. */
-/* Supplied declaration required: FUN_002f6bf0. */
+/* Supplied declaration required: operatorDeleteArrayNullable. */
 /* Supplied declaration required: FUN_002f6bfc. */
 /* Supplied declaration required: FUN_002f7b9c. */
 /* Supplied declaration required: FUN_002fbde4. */
@@ -55,7 +55,7 @@ int FUN_002fbd38(int param_1)
   unsigned char temp_v8 [16];
   
   if (*(char *)(param_1 + 0xf) == '\0') {
-    FUN_002eb588(&temp_v3);
+    onlineTimeGetNow(&temp_v3);
     temp_v6 = temp_v4;
     temp_v5 = temp_v3;
     FUN_002e7614(temp_v0,8);
@@ -66,10 +66,10 @@ int FUN_002fbd38(int param_1)
     temp_v2 = 0;
     FUN_002f7b9c(temp_v7,temp_v1);
     FUN_002f6be2(temp_v7,&temp_v2);
-    FUN_002e9318(temp_v7);
+    onlineStringDestroy(temp_v7);
     FUN_002fbde4(param_1 + 0xf,0x29,&LAB_002fbdc8,temp_v2);
     *(unsigned char *)(param_1 + 0x37) = 0;
-    FUN_002f6bf0(temp_v2);
+    operatorDeleteArrayNullable(temp_v2);
     strDestroy(temp_v1);
     strDestroy(temp_v0);
   }

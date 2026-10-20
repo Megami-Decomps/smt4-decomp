@@ -7,9 +7,9 @@ extern "C" {
 int FUN_001213a2(unsigned int);
 int FUN_002e6e34(unsigned char [12], int);
 int FUN_002e6e5c(unsigned char [12]);
-int FUN_002eaa50(...);
-int FUN_002eabe8(...);
-int FUN_00311724(int);
+int onlineMutexLockIfNeeded(...);
+int onlineMutexUnlockIfNeeded(...);
+int vectorEraseAtStride8(int);
 
 /* stack frame of param_2: 3 slot(s), 10 byte(s) */
 typedef struct {
@@ -21,9 +21,9 @@ typedef struct {
 /* Supplied declaration required: FUN_001213a2. */
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-/* Supplied declaration required: FUN_002eaa50. */
-/* Supplied declaration required: FUN_002eabe8. */
-/* Supplied declaration required: FUN_00311724. */
+/* Supplied declaration required: onlineMutexLockIfNeeded. */
+/* Supplied declaration required: onlineMutexUnlockIfNeeded. */
+/* Supplied declaration required: vectorEraseAtStride8. */
 
 
 void FUN_0011b89a(int param_1,unsigned int param_2)
@@ -74,19 +74,19 @@ void FUN_0011b89a(int param_1,unsigned int param_2)
     *(unsigned char *)(temp_v6 + 0x18) = 0;
     *(unsigned char *)(param_1 + 5) = 1;
     temp_v2 = temp_v3 * 4 + param_1;
-    FUN_002eaa50(*(unsigned int *)(temp_v2 + 0x4c));
+    onlineMutexLockIfNeeded(*(unsigned int *)(temp_v2 + 0x4c));
     temp_v3 = temp_v3 * 8 + param_1;
     *(unsigned short *)(temp_v3 + 0x54) = 0;
     *(unsigned int *)(temp_v3 + 0x58) = 0;
     *(unsigned char *)(temp_v6 + 0x1a) = 0;
-    FUN_002eabe8(*(unsigned int *)(temp_v2 + 0x4c));
-    FUN_002eaa50();
+    onlineMutexUnlockIfNeeded(*(unsigned int *)(temp_v2 + 0x4c));
+    onlineMutexLockIfNeeded();
     for (puVar5 = *(unsigned short **)(param_1 + 100);
         (puVar5 != *(unsigned short **)(param_1 + 0x68) && (*puVar5 != temp_v5)); puVar5 = puVar5 + 4) {
     }
-    FUN_00311724(param_1 + 100);
+    vectorEraseAtStride8(param_1 + 100);
     *(unsigned int *)(param_1 + 0x3c) = 0xffffffff;
-    FUN_002eabe8(param_1 + 0x70);
+    onlineMutexUnlockIfNeeded(param_1 + 0x70);
     *(unsigned char *)(param_1 + 5) = 0;
   }
   FUN_002e6e5c(temp_v4);

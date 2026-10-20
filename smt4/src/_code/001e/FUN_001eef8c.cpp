@@ -14,11 +14,11 @@ int FUN_0029efc0(...);
 int FUN_002b066c(...);
 int FUN_002b6758(...);
 int FUN_002b6dd8(...);
-int FUN_002b9024(void);
+int devilGetRecord(void);
 int FUN_002bce30(...);
 int FUN_002bd068(...);
 int FUN_002bdf94(...);
-int FUN_002be304(...);
+int drawSetColorFromRGBA8(...);
 int FUN_002be5a4(...);
 int FUN_002be624(...);
 int FUN_002bed3c(void);
@@ -67,20 +67,20 @@ extern unsigned int FUN_0029dde0(void);
 /* Supplied declaration required: FUN_0029e6f0. */
 extern int FUN_0029efa8(int);
 /* Supplied declaration required: FUN_0029efc0. */
-extern int *FUN_002a8764(void);
+extern int *gameGetSlotTable(void);
 /* Supplied declaration required: FUN_002b066c. */
 /* Supplied declaration required: FUN_002b6758. */
 /* Supplied declaration required: FUN_002b6dd8. */
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: FUN_002bce30. */
 /* Supplied declaration required: FUN_002bd068. */
 /* Supplied declaration required: FUN_002bdf94. */
-/* Supplied declaration required: FUN_002be304. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002bed3c. */
-extern int FUN_002bed98(int);
-extern int FUN_002beda4(int);
+extern int vec2GetYInt(int);
+extern int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf4f8. */
@@ -137,7 +137,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
     temp_v3 = temp_v2 + 0x6c00;
     puVar5 = (unsigned short *)
              ((*(unsigned int *)(temp_v2 + (unsigned int)*(unsigned short *)(temp_v2 + 0x6ce2) * 8 + 0x1394) & 0x1ffff) >> 2);
-    FUN_002b9024();
+    devilGetRecord();
     temp_v4 = FUN_002bf4f8(0x24,0x4d);
     temp_v15 = 0xffffffff;
     temp_v5 = FUN_0029dde0();
@@ -163,7 +163,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
     VectorSignedToFloat(*(short *)(temp_v4 + 8) + temp_v9,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_002be5a4(2,0xf49800ff,temp_v19);
     temp_v4 = FUN_002bf4f8(0x24,0x51);
-    FUN_002be304(temp_v15);
+    drawSetColorFromRGBA8(temp_v15);
     FUN_002bdf94(0,*(short *)(temp_v4 + 8) + temp_v9,*(short *)(temp_v4 + 10) + temp_v8,1,2,0x6f,
                  &LAB_001ef4c8,*(unsigned char *)((int)puVar5 + 3));
     FUN_002bed3c();
@@ -209,7 +209,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
         temp_v10 = temp_v2 + (unsigned int)temp_v1 * 8;
         psVar13 = (short *)(*(unsigned int *)(temp_v10 + 0x1390) & 0x7fff);
         temp_v13 = temp_v10;
-        FUN_002b9024();
+        devilGetRecord();
         temp_v11 = FUN_002bf4f8(0x24,0x11a);
         FUN_002bf288(2,0x24,0x113,*(short *)(temp_v11 + 8) + temp_v8,*(short *)(temp_v11 + 10) + temp_v6,
                      0x6a);
@@ -246,7 +246,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
           temp_v14 = FUN_002b066c(*psVar13);
           temp_v5 = (unsigned int)*(unsigned char *)(temp_v14 + 0x48);
         }
-        FUN_002be304(0xff);
+        drawSetColorFromRGBA8(0xff);
         FUN_002bdf94(0,(int)*(short *)(temp_v11 + 8) + (int)*(short *)(temp_v12 + 8) + temp_v8,
                      (int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v6,1,2,0x79,
                      &LAB_001ef4c8,temp_v5);
@@ -258,7 +258,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
         FUN_002580d4(*psVar13,(int)*(short *)(temp_v11 + 8) + (int)*(short *)(temp_v12 + 8) + temp_v8,
                      (int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v6,0x7e);
         psVar13 = (short *)((*(unsigned int *)(temp_v10 + 0x1390) & 0x3fffffff) >> 0xf);
-        FUN_002b9024();
+        devilGetRecord();
         temp_v11 = FUN_002bf4f8(0x24,0x11b);
         FUN_002bf288(2,0x24,0x113,*(short *)(temp_v11 + 8) + temp_v8,*(short *)(temp_v11 + 10) + temp_v6,
                      0x6a);
@@ -295,7 +295,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
           temp_v10 = FUN_002b066c(*psVar13);
           temp_v1 = (unsigned short)*(unsigned char *)(temp_v10 + 0x48);
         }
-        FUN_002be304(0xff);
+        drawSetColorFromRGBA8(0xff);
         FUN_002bdf94(0,(int)*(short *)(temp_v11 + 8) + (int)*(short *)(temp_v12 + 8) + temp_v8,
                      (int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v6,1,2,0x79,
                      &LAB_001ef4c8,temp_v1);
@@ -309,14 +309,14 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
         temp_v10 = FUN_002bf4f8(0x24,0x123);
         temp_v13 = temp_v13 + 0x1390;
         FUN_0029e6f0();
-        piVar19 = (int *)FUN_002a8764();
+        piVar19 = (int *)gameGetSlotTable();
         if (*piVar19 < temp_v13) {
           temp_v15 = 0xdc0f14ff;
         }
         else {
           temp_v15 = 0xff;
         }
-        FUN_002be304(temp_v15);
+        drawSetColorFromRGBA8(temp_v15);
         FUN_002bdf94(0,*(short *)(temp_v10 + 8) + temp_v8,*(short *)(temp_v10 + 10) + temp_v6,1,8,0x79,
                      &LAB_001efd48,temp_v13);
         FUN_002bed3c();
@@ -362,9 +362,9 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
       FUN_0029a17c((int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v13 + 8) + temp_v9,
                    (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v13 + 10) + temp_v8,
                    (int)**(short **)(temp_v13 + 0xc),(int)(*(short **)(temp_v13 + 0xc))[1],1);
-      temp_v6 = FUN_002bed98(temp_v2 + 0xb0);
+      temp_v6 = vec2GetYInt(temp_v2 + 0xb0);
       temp_v0 = *(short *)(temp_v4 + 10);
-      temp_v13 = FUN_002beda4(temp_v2 + 0xb0);
+      temp_v13 = vec2GetXInt(temp_v2 + 0xb0);
       FUN_002bf288(2,0x24,0x131,temp_v13 + temp_v9 + (int)*(short *)(temp_v4 + 8),
                    temp_v6 + temp_v8 + (int)temp_v0,0x83);
       temp_v6 = g_titleScene;
@@ -380,7 +380,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
       temp_v6 = temp_v2 + (unsigned int)temp_v1 * 8;
       psVar13 = (short *)(*(unsigned int *)(temp_v6 + 0x1390) & 0x7fff);
       temp_v4 = temp_v6;
-      FUN_002b9024();
+      devilGetRecord();
       temp_v13 = FUN_002bf4f8(0x24,0x13b);
       FUN_002bf288(2,0x24,0x133,*(short *)(temp_v13 + 8) + temp_v9,*(short *)(temp_v13 + 10) + temp_v8,
                    0x83);
@@ -453,7 +453,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
       FUN_002580d4(*psVar13,(int)*(short *)(temp_v13 + 8) + (int)*(short *)(temp_v11 + 8) + temp_v9,
                    (int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v13 + 10) + temp_v8,0x9c);
       psVar13 = (short *)((*(unsigned int *)(temp_v6 + 0x1390) & 0x3fffffff) >> 0xf);
-      FUN_002b9024();
+      devilGetRecord();
       temp_v13 = FUN_002bf4f8(0x24,0x13c);
       FUN_002bf288(2,0x24,0x134,*(short *)(temp_v13 + 8) + temp_v9,*(short *)(temp_v13 + 10) + temp_v8,
                    0x6a);
@@ -526,14 +526,14 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
                    (int)*(short *)(temp_v10 + 10) + (int)*(short *)(temp_v13 + 10) + temp_v8,0x9c);
       temp_v4 = temp_v4 + 0x1390;
       FUN_0029e6f0();
-      piVar19 = (int *)FUN_002a8764();
+      piVar19 = (int *)gameGetSlotTable();
       if (*piVar19 < temp_v4) {
         temp_v15 = 0xdc0f14ff;
       }
       else {
         temp_v15 = 0xffffffff;
       }
-      FUN_002be304(temp_v15);
+      drawSetColorFromRGBA8(temp_v15);
       temp_v3 = FUN_002bf4f8(0x24,0x144);
       FUN_002bdf94(0,*(short *)(temp_v3 + 8) + temp_v9,*(short *)(temp_v3 + 10) + temp_v8,1,8,0x8d,
                    &LAB_001f051c,temp_v4);

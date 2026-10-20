@@ -19,7 +19,7 @@ int FUN_00250720(...);
 int FUN_00250d84(...);
 int FUN_0026beb4(...);
 int FUN_002953b8(void);
-int FUN_002b4670(void);
+int dataTable08Sub1GetRecord(void);
 int FUN_0033b33c(...);
 int FUN_003dcc48(...);
 int FUN_003ddae8(...);
@@ -40,7 +40,7 @@ int FUN_00255180(...);
 int FUN_00256898(...);
 int FUN_002568c4(...);
 int FUN_00282820(...);
-int FUN_00282924(...);
+int btlMainFindEntryByListedId(...);
 int FUN_0029cc44(int);
 int FUN_002ae164(void);
 int FUN_00394750(...);
@@ -111,7 +111,7 @@ extern unsigned int DAT_00434344; /* 0x434344 */
 extern int DAT_00434348; /* 0x434348 */
 extern int DAT_0043434c; /* 0x43434c */
 extern int DAT_00435d18; /* 0x435d18 */
-extern unsigned int DAT_00439ca8; /* 0x439ca8 */
+extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 
 /* Supplied declaration required: FUN_00227334. */
 extern int FUN_00227630(int);
@@ -146,7 +146,7 @@ extern int FUN_00255158(int, unsigned int);
 /* Supplied declaration required: FUN_002568c4. */
 /* Supplied declaration required: FUN_0026beb4. */
 /* Supplied declaration required: FUN_00282820. */
-/* Supplied declaration required: FUN_00282924. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 extern int FUN_0028299c(int);
 /* Supplied declaration required: FUN_00283e48. */
 /* Supplied declaration required: FUN_002953b8. */
@@ -154,7 +154,7 @@ extern unsigned int FUN_0029a924(unsigned int);
 extern unsigned int FUN_0029a9d4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0029cc44. */
 /* Supplied declaration required: FUN_002ae164. */
-/* Supplied declaration required: FUN_002b4670. */
+/* Supplied declaration required: dataTable08Sub1GetRecord. */
 /* Supplied declaration required: FUN_0033b33c. */
 /* Supplied declaration required: FUN_00394750. */
 /* Supplied declaration required: FUN_00394a80. */
@@ -269,7 +269,7 @@ void FUN_003d3ba8(unsigned int *param_1,unsigned int *param_2)
     if (*psVar12 < 0) break;
     temp_v20 = temp_v32;
     temp_v18 = *param_1;
-    FUN_00282924();
+    btlMainFindEntryByListedId();
     temp_v34[0] = '\0';
     temp_v19 = temp_v27;
     FUN_00228220(temp_v27,(int)temp_v25,(int)*(short *)(param_2[10] + 0x14c),
@@ -337,7 +337,7 @@ void FUN_003d3ba8(unsigned int *param_1,unsigned int *param_2)
     case 7:
       temp_v5 = (int)*psVar12;
       puVar7 = (unsigned int *)*param_1;
-      FUN_00282924(puVar7,temp_v5);
+      btlMainFindEntryByListedId(puVar7,temp_v5);
       temp_v4 = FUN_002281a4(DAT_00435d18);
       if ((*puVar7 & 8) != 0) {
         if ((*puVar7 & 1) != 0) {
@@ -365,7 +365,7 @@ void FUN_003d3ba8(unsigned int *param_1,unsigned int *param_2)
     case 0xb:
       temp_v9 = *psVar12;
       temp_v12 = *param_1;
-      FUN_00282924(temp_v12,(int)temp_v9);
+      btlMainFindEntryByListedId(temp_v12,(int)temp_v9);
       FUN_00246454(temp_v3 + 0x28,param_2,temp_v12);
       FUN_002296f4(param_1,param_2,(int)temp_v9,temp_v3,0x1e,0x1e);
       break;
@@ -443,7 +443,7 @@ void FUN_003d3ba8(unsigned int *param_1,unsigned int *param_2)
       temp_v4 = FUN_00227630(DAT_00435d18);
       temp_v12 = temp_v27;
       temp_v15 = *param_1;
-      FUN_00282924(temp_v15,(int)temp_v9);
+      btlMainFindEntryByListedId(temp_v15,(int)temp_v9);
       FUN_002ae164();
       temp_v10 = '\0';
       if ((temp_v12 != 0) && (temp_v0 = *(char *)(temp_v12 + 0x45), temp_v0 == '\x01' || temp_v0 == '\x02')) {
@@ -469,7 +469,7 @@ void FUN_003d3ba8(unsigned int *param_1,unsigned int *param_2)
             case 0xc:
               if ((temp_v9 == 0xc) && (-1 < *psVar12)) {
                 puVar7 = (unsigned int *)*param_1;
-                FUN_00282924();
+                btlMainFindEntryByListedId();
                 if ((puVar7 != (unsigned int *)0x0) && ((*puVar7 & 2) == 0)) break;
               }
               temp_v6 = temp_v13 + temp_v4 * 0x16;
@@ -609,7 +609,7 @@ LAB_003d444c:
       if (temp_v28 != 1) {
         if ((temp_v28 == 8) && (!temp_v16)) {
           temp_v12 = temp_v29;
-          FUN_002b4670();
+          dataTable08Sub1GetRecord();
           temp_v12 = (unsigned int)*(unsigned short *)(temp_v12 + 0x62);
           if (temp_v12 != 0) {
             temp_v4 = FUN_0023c684(temp_v12);
@@ -841,7 +841,7 @@ LAB_003d444c:
         if (temp_v9 == 8) {
           temp_v13 = (int)*(short *)(param_2[10] + 0x14e);
           temp_v2 = temp_v13;
-          FUN_002b4670();
+          dataTable08Sub1GetRecord();
           if ((*(unsigned char *)(temp_v2 + 0x6e) & 1) == 0) {
             FUN_00250d84(temp_v13,1);
           }
@@ -904,7 +904,7 @@ LAB_003d444c:
       temp_v2 = *(int *)(param_2[8] + 0xc0);
       FUN_00283e48();
       if (temp_v2 != 0) {
-        FUN_00227334(DAT_00439ca8,2,*(unsigned int *)(param_2[8] + 0xc0) & 0xffff,
+        FUN_00227334(g_btlUiBlock,2,*(unsigned int *)(param_2[8] + 0xc0) & 0xffff,
                      *(unsigned int *)(param_2[8] + 0x278),0,0);
       }
       else {
@@ -916,31 +916,31 @@ LAB_003d444c:
         else {
           temp_v1 = *(unsigned short *)(temp_v3 + 4);
         }
-        FUN_00227334(DAT_00439ca8,temp_v28,0,*(unsigned int *)(param_2[8] + 0x278),temp_v1,temp_v16);
+        FUN_00227334(g_btlUiBlock,temp_v28,0,*(unsigned int *)(param_2[8] + 0x278),temp_v1,temp_v16);
       }
       break;
     case 2:
     case 3:
-      FUN_00227334(DAT_00439ca8,temp_v28,temp_v27 & 0xffff,*(unsigned int *)(param_2[8] + 0x278),0,0);
+      FUN_00227334(g_btlUiBlock,temp_v28,temp_v27 & 0xffff,*(unsigned int *)(param_2[8] + 0x278),0,0);
       break;
     case 8:
-      FUN_00227334(DAT_00439ca8,temp_v28,temp_v29 & 0xffff,0,0,0);
+      FUN_00227334(g_btlUiBlock,temp_v28,temp_v29 & 0xffff,0,0,0);
       break;
     case 9:
     case 0xb:
     case 0xc:
       if ((*param_2 & 0x2000000) == 0) {
-        FUN_00227334(DAT_00439ca8,temp_v28,1,0,0,0);
+        FUN_00227334(g_btlUiBlock,temp_v28,1,0,0,0);
       }
       else {
-        FUN_00227334(DAT_00439ca8,temp_v28,0,0,0,0);
+        FUN_00227334(g_btlUiBlock,temp_v28,0,0,0,0);
       }
       break;
     case 10:
       temp_v2 = 0;
       do {
         if (*(char *)((int)param_2 + temp_v2 + 0x38) != '\0') {
-          FUN_00227334(DAT_00439ca8,temp_v28,0,0,0,0);
+          FUN_00227334(g_btlUiBlock,temp_v28,0,0,0,0);
           break;
         }
         temp_v2 = temp_v2 + 1;

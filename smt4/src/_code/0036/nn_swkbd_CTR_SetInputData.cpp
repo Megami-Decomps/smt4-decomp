@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002c3944(int, int);
+int rt_memclr(int, int);
 int rt_memcpy(...);
 
-/* Supplied declaration required: FUN_002c3944. */
+/* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: rt_memcpy. */
 
 
@@ -105,7 +105,7 @@ nn_swkbd_CTR_SetInputData
       *(unsigned short *)(param_1 + 0x136) = 0;
       *(unsigned short *)(param_1 + 0x14a) = 0;
       *(unsigned short *)(param_1 + 0x352) = 0;
-      FUN_002c3944(param_1 + 0x355,0xab);
+      rt_memclr(param_1 + 0x355,0xab);
       *(unsigned int *)(param_1 + 0x130) = param_3;
       *(unsigned short *)(param_1 + 0x134) = 5;
       return 1;

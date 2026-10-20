@@ -5,17 +5,17 @@
 extern "C" {
 
 int FUN_00157558(int);
-int FUN_0016c410(int);
+int renderCtxResetColorScale(int);
 int FUN_0016c560(int);
 int FUN_00335060(int);
 
 typedef int romwright_code(...);
-extern int DAT_0057f108; /* 0x57f108 */
+extern int g_camp; /* 0x57f108 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: FUN_00157558. */
 extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0016c410. */
+/* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: FUN_0016c560. */
 extern unsigned int FUN_002a4878(int);
 extern int FUN_0033132c(void);
@@ -35,7 +35,7 @@ unsigned int FUN_00202450(void)
   int temp_v5;
   int *piVar7;
   
-  temp_v5 = DAT_0057f108;
+  temp_v5 = g_camp;
   FUN_00157558(g_renderCtx);
   temp_v2 = g_renderCtx;
   temp_v0 = FUN_001692ac(1,0);
@@ -50,7 +50,7 @@ unsigned int FUN_00202450(void)
   }
   temp_v1 = FUN_002a4878(temp_v5 + 0x40);
   temp_v0 = FUN_003da8f4((int)*(char *)(temp_v5 + 0xa4),temp_v1);
-  temp_v2 = DAT_0057f108;
+  temp_v2 = g_camp;
   temp_v5 = *(int *)(temp_v5 + 0x1c);
   if (temp_v5 != 0x21) {
     if (temp_v5 < 0x21) {
@@ -128,7 +128,7 @@ LAB_00202664:
     *(unsigned char *)(temp_v5 + 0x1270) = 0;
   }
   FUN_0016c560(g_renderCtx);
-  FUN_0016c410(g_renderCtx);
+  renderCtxResetColorScale(g_renderCtx);
   return 0;
 }
 

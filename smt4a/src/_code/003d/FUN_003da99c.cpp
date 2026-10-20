@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_0023e51c(unsigned short *, int *, int, int);
 int asdOperatorNewD(void);
-int FUN_002e6490(unsigned short *);
-int FUN_002e6dd4(void);
+int asdOperatorDeleteC(unsigned short *);
+int rt_memclr(void);
 
 typedef struct fn_003da99c_arg1 fn_003da99c_arg1;
 struct fn_003da99c_arg1 {
@@ -29,8 +29,8 @@ extern int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_0023e51c. */
 /* Supplied declaration required: asdOperatorNewD. */
-/* Supplied declaration required: FUN_002e6490. */
-/* Supplied declaration required: FUN_002e6dd4. */
+/* Supplied declaration required: asdOperatorDeleteC. */
+/* Supplied declaration required: rt_memclr. */
 
 
 unsigned int FUN_003da99c(int param_1,fn_003da99c_arg1 *param_2,unsigned int param_3,int param_4)
@@ -71,7 +71,7 @@ unsigned int FUN_003da99c(int param_1,fn_003da99c_arg1 *param_2,unsigned int par
   puVar6 = (unsigned short *)((temp_v7 + 1) * 8);
   temp_v8 = 0;
   asdOperatorNewD();
-  FUN_002e6dd4();
+  rt_memclr();
   FUN_0023e51c(puVar6,&temp_v8,temp_v0,param_1);
   temp_v5 = 0;
   if (temp_v8 != 0) {
@@ -97,10 +97,10 @@ unsigned int FUN_003da99c(int param_1,fn_003da99c_arg1 *param_2,unsigned int par
   }
   temp_v5 = param_2->field_0x6 + temp_v5;
   if (temp_v5 < 10000) {
-    FUN_002e6490(puVar6);
+    asdOperatorDeleteC(puVar6);
     return temp_v5;
   }
-  FUN_002e6490(puVar6);
+  asdOperatorDeleteC(puVar6);
   return 9999;
 }
 

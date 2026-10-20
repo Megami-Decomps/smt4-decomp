@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_0027db40(void);
+int sequenceRequestFlushDeferred(void);
 int FUN_00397aa4(int);
 int FUN_00398f50(int);
 
-/* Supplied declaration required: FUN_0027db40. */
+/* Supplied declaration required: sequenceRequestFlushDeferred. */
 extern int FUN_002f34bc(void);
 /* Supplied declaration required: FUN_00397aa4. */
 /* Supplied declaration required: FUN_00398f50. */
@@ -35,7 +35,7 @@ unsigned int FUN_001d957c(int param_1)
         }
         temp_v2 = FUN_002f34bc();
         if (temp_v2 != 0) {
-          FUN_0027db40();
+          sequenceRequestFlushDeferred();
         }
         return 0xffffffff;
       }

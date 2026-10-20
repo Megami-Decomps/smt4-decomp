@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002e995c(...);
+int onlineSockAddrConstruct(...);
 
 extern unsigned char DAT_00559418; /* 0x559418 */
 
-/* Supplied declaration required: FUN_002e995c. */
+/* Supplied declaration required: onlineSockAddrConstruct. */
 
 
 void FUN_00110a7c(unsigned int *param_1)
@@ -18,9 +18,9 @@ void FUN_00110a7c(unsigned int *param_1)
   int temp_v0;
   
   *param_1 = (unsigned int)&DAT_00559418;
-  temp_v0 = FUN_002e995c(param_1 + 2);
-  temp_v0 = FUN_002e995c(temp_v0 + 0x20);
-  temp_v0 = FUN_002e995c(temp_v0 + 0x20);
+  temp_v0 = onlineSockAddrConstruct(param_1 + 2);
+  temp_v0 = onlineSockAddrConstruct(temp_v0 + 0x20);
+  temp_v0 = onlineSockAddrConstruct(temp_v0 + 0x20);
   *(unsigned int *)(temp_v0 + 0x20) = 0;
   *(unsigned char *)(temp_v0 - 0x44) = 2;
   return;

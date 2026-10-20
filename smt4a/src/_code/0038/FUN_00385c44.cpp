@@ -8,7 +8,7 @@ int FUN_003ed6e8(...);
 int FUN_003f0070(...);
 int FUN_003f0e20(...);
 int FUN_003f26d4(...);
-int FUN_003fd63c(int, int, int);
+int gameFlagSetValue(int, int, int);
 int FUN_0047f1c4(...);
 int FUN_004a9a64(...);
 int FUN_004a9c84(...);
@@ -69,10 +69,10 @@ extern unsigned int DAT_00573ae8; /* 0x573ae8 */
 extern unsigned int DAT_00573aec; /* 0x573aec */
 extern unsigned int DAT_00573b00; /* 0x573b00 */
 extern unsigned int DAT_00573b04; /* 0x573b04 */
-extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
+extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
-extern int FUN_0014bef4(unsigned int);
-extern int FUN_0018719c(unsigned int);
+extern int randRange(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 extern unsigned int flagSelectVariant(void);
 extern int FUN_00261424(void);
 extern int FUN_002626e0(void);
@@ -83,7 +83,7 @@ extern int FUN_003e4978(void);
 /* Supplied declaration required: FUN_003f0070. */
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: FUN_003f26d4. */
-/* Supplied declaration required: FUN_003fd63c. */
+/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_0047f1c4. */
 /* Supplied declaration required: FUN_004a9a64. */
 /* Supplied declaration required: FUN_004a9c84. */
@@ -194,10 +194,10 @@ void FUN_00385c44(unsigned int *param_1)
     if (temp_v11 >= 9) {
       *(unsigned short *)(param_1 + 0x131c) = 8;
     }
-    temp_v8 = FUN_0018719c(0x590);
+    temp_v8 = gameFlagIsSet(0x590);
     if (temp_v8 != 0) {
       *(unsigned short *)(param_1 + 0x131c) = 8;
-      FUN_003fd63c(0x590,0,1);
+      gameFlagSetValue(0x590,0,1);
     }
   }
   temp_v8 = FUN_002626e0();
@@ -331,7 +331,7 @@ LAB_003861d0:
         temp_v20[0] = 1;
       }
       temp_v20[1] = (unsigned int)((temp_v7 & DAT_00573a04) != 0 || (temp_v12 & DAT_00573a00) != 0);
-      FUN_004a9a64(DAT_0057a9c8,temp_v18 || temp_v19,
+      FUN_004a9a64(g_btlUiBlock,temp_v18 || temp_v19,
                    (int)(char)((char)temp_v26 + (char)(short)param_1[0x131c]),(int)(char)temp_v26);
       temp_v7 = *puVar15 | DAT_00573a00;
       temp_v12 = param_1[0x1169] | DAT_00573a04;
@@ -341,7 +341,7 @@ LAB_003861d0:
         temp_v12 = (temp_v12 & ~DAT_00573a3c) | DAT_00573a44;
         *puVar15 = (temp_v7 & ~DAT_00573a38) | DAT_00573a40;
         param_1[0x1169] = temp_v12;
-        FUN_004a9c84(DAT_0057a9c8);
+        FUN_004a9c84(g_btlUiBlock);
       }
       temp_v8 = FUN_002e2b38();
       if ((temp_v8 != 0) &&
@@ -361,7 +361,7 @@ LAB_003861d0:
           if (temp_v19) {
             temp_v20[0] = 0x124;
             temp_v20[1] = 0x125;
-            temp_v8 = FUN_0014bef4(1);
+            temp_v8 = randRange(1);
             temp_v7 = temp_v20[temp_v8];
             FUN_004fdc9c(0,0,0xbb,temp_v7);
             FUN_0047f1c4(temp_v7);

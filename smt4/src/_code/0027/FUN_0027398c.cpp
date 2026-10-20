@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_00296f4c(unsigned int, unsigned int);
+int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int FUN_00297060(int, unsigned int);
-int FUN_002b63c0(void);
-int FUN_002b8838(int);
+int dataTable1bOr1cGetRecord(void);
+int buttonHelpSetPreset(int);
 int FUN_002be624(...);
 int FUN_003880c8(unsigned int, int, unsigned int *, int);
-int FUN_0038813c(unsigned int, int, unsigned int *, int);
+int aocQueueType07(unsigned int, int, unsigned int *, int);
 
 extern unsigned char LAB_00273b38; /* 0x273b38 */
 extern unsigned char LAB_00273b50; /* 0x273b50 */
@@ -20,14 +20,14 @@ extern unsigned int g_aocSystem; /* 0x433158 */
 extern int FUN_0019e0c0(unsigned int);
 extern int FUN_00289e54(unsigned int, unsigned short, unsigned int);
 extern int FUN_002903f0(void);
-extern unsigned int FUN_00290d74(unsigned int, unsigned char *);
-/* Supplied declaration required: FUN_00296f4c. */
+extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297060. */
-/* Supplied declaration required: FUN_002b63c0. */
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: dataTable1bOr1cGetRecord. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_003880c8. */
-/* Supplied declaration required: FUN_0038813c. */
+/* Supplied declaration required: aocQueueType07. */
 
 
 unsigned int FUN_0027398c(unsigned int *param_1)
@@ -44,7 +44,7 @@ unsigned int FUN_0027398c(unsigned int *param_1)
   switch(*param_1) {
   case 0:
     temp_v3 = FUN_002903f0();
-    FUN_002b63c0();
+    dataTable1bOr1cGetRecord();
     if ((temp_v3 == 0) || (temp_v0 = *(short *)(temp_v3 + 0x148), temp_v0 == 0)) {
       *param_1 = 3;
       return 0;
@@ -53,7 +53,7 @@ unsigned int FUN_0027398c(unsigned int *param_1)
     FUN_002be624(temp_v5,&LAB_00273b50,temp_v0);
     temp_v3 = FUN_00289e54(g_aocSystem,*(unsigned short *)(temp_v3 + 0x148),1);
     if (temp_v3 != 0) {
-      FUN_0038813c(g_aocSystem,temp_v0,param_1 + 3,0);
+      aocQueueType07(g_aocSystem,temp_v0,param_1 + 3,0);
       FUN_003880c8(g_aocSystem,temp_v0,param_1 + 4,0);
       *param_1 = 1;
       return 0;
@@ -69,19 +69,19 @@ unsigned int FUN_0027398c(unsigned int *param_1)
       return 0;
     }
     temp_v3 = FUN_002903f0();
-    FUN_002b63c0();
+    dataTable1bOr1cGetRecord();
     if (temp_v3 == 0) {
       *param_1 = 3;
     }
-    FUN_002b8838(0x90);
+    buttonHelpSetPreset(0x90);
     temp_v1 = param_1[3];
     FUN_00297060(temp_v1,param_1[4]);
     param_1[5] = temp_v1;
     *(unsigned int *)(temp_v1 + 0x108) = 2;
     FUN_002be624(temp_v4,&LAB_00273b6c,*(unsigned short *)(temp_v3 + 0x148),
                  *(unsigned short *)(temp_v3 + 0x14a));
-    temp_v2 = FUN_00290d74(param_1[3],temp_v4);
-    FUN_00296f4c(param_1[5],temp_v2);
+    temp_v2 = tableGroupFindEntryIndex(param_1[3],temp_v4);
+    scrScriptProcessStartEntry(param_1[5],temp_v2);
     temp_v2 = 2;
     break;
   case 2:

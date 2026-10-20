@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002ea446(unsigned int *, unsigned int);
+int onlineJobSetStateTimed(unsigned int *, unsigned int);
 
 extern unsigned char DAT_0055870c; /* 0x55870c */
 
-/* Supplied declaration required: FUN_002ea446. */
+/* Supplied declaration required: onlineJobSetStateTimed. */
 extern unsigned int *FUN_002eb77c(void);
 
 
@@ -21,7 +21,7 @@ unsigned int * FUN_0010531c(void)
   puVar1 = (unsigned int *)FUN_002eb77c();
   puVar1[0xf] = 0;
   *puVar1 = (unsigned int)&DAT_0055870c;
-  FUN_002ea446(puVar1,puVar1[9]);
+  onlineJobSetStateTimed(puVar1,puVar1[9]);
   return puVar1;
 }
 

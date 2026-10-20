@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00184310(void);
 
-extern int DAT_00588fe8; /* 0x588fe8 */
+extern int g_statusDown; /* 0x588fe8 */
 
 /* Supplied declaration required: FUN_00184310. */
 extern unsigned short *FUN_002c7e24(void);
@@ -28,9 +28,9 @@ unsigned int FUN_003b70e0(int param_1)
   unsigned char temp_v4;
   unsigned char temp_v5;
   
-  temp_v2 = DAT_00588fe8;
+  temp_v2 = g_statusDown;
   temp_v3 = 0;
-  if (DAT_00588fe8 != 0) {
+  if (g_statusDown != 0) {
     temp_v0 = FUN_002c7e3c();
     temp_v4 = temp_v0 != 0xe;
     temp_v5 = temp_v0 != 7;

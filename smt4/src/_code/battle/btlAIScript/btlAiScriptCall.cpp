@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_00335518(BtlAiScript *script, u32 arg);
+void btlAiScriptLoadFile(BtlAiScript *script, u32 arg);
 
 extern BtlAiScript *g_btlAiScript;
 
@@ -10,7 +10,7 @@ extern BtlAiScript *g_btlAiScript;
 void btlAiScriptCall(u32 arg)
 {
     if (g_btlAiScript != NULL) {
-        FUN_00335518(g_btlAiScript, arg);
+        btlAiScriptLoadFile(g_btlAiScript, arg);
     }
 }
 

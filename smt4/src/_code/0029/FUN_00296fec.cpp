@@ -25,7 +25,7 @@ typedef struct Obj296fec {
     /* 0x238 */ u32 unk238;
 } Obj296fec;
 
-void FUN_0026b584(int a);
+void gameDataBlocksAddFlags(int a);
 void FUN_00259294(int a);
 void FUN_00297050(int a);
 
@@ -41,7 +41,7 @@ void FUN_00296fec(Obj296fec *obj)
     obj->unk00 = 0;
     obj->unk0c = 0;
     obj->unk238 = 50;
-    FUN_0026b584(4);
+    gameDataBlocksAddFlags(4);
     FUN_00259294(4);
     FUN_00297050(0);
 }

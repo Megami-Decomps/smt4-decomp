@@ -5,8 +5,8 @@ extern "C" {
 
 s32 jobIsValid(u32 job);
 
-extern s32 DAT_005712f0;
-extern BtlMainA *DAT_00571508;
+extern s32 g_btlActionReflect;
+extern BtlMainA *g_btlCamera;
 extern s32 DAT_00573808;
 extern BtlEncount *g_btlEncount;
 
@@ -14,9 +14,9 @@ extern BtlEncount *g_btlEncount;
  * is set or the encounter state is not active; 1 otherwise. */
 u32 btlEncountCheck(BtlEncountOwner *owner)
 {
-    if (jobIsValid(owner->job) != 0 && g_btlEncount != NULL && DAT_005712f0 != 0 &&
-        DAT_00573808 != 0 && DAT_00571508 != NULL) {
-        if ((DAT_00571508->flags & BTL_FLAG_NO_ENCOUNT) != 0) {
+    if (jobIsValid(owner->job) != 0 && g_btlEncount != NULL && g_btlActionReflect != 0 &&
+        DAT_00573808 != 0 && g_btlCamera != NULL) {
+        if ((g_btlCamera->flags & BTL_FLAG_NO_ENCOUNT) != 0) {
             return 0;
         }
         if ((g_btlEncount->flags & BTL_ENCOUNT_ACTIVE) == 0) {

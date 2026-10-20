@@ -4,15 +4,15 @@
 
 extern "C" {
 
-int FUN_002c3944(int, int);
+int rt_memclr(int, int);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_3_stack;
 
-extern int FUN_002b5a48(int);
-/* Supplied declaration required: FUN_002c3944. */
+extern int wstrlenU16(int);
+/* Supplied declaration required: rt_memclr. */
 
 
 int FUN_002347b8(unsigned int param_1,int param_2,int param_3)
@@ -33,10 +33,10 @@ int FUN_002347b8(unsigned int param_1,int param_2,int param_3)
   unsigned int unaff_r11;
   int temp_v10;
   
-  temp_v2 = FUN_002b5a48(param_2);
+  temp_v2 = wstrlenU16(param_2);
   temp_v9 = 0;
   if (temp_v2 != 0) {
-    FUN_002c3944(param_3,0x80);
+    rt_memclr(param_3,0x80);
     if (0 < temp_v2) {
       unaff_r11 = 0xf890;
     }
@@ -66,7 +66,7 @@ int FUN_002347b8(unsigned int param_1,int param_2,int param_3)
           param_3 = param_3 + 0x80;
           temp_v8 = 0;
           temp_v9 = temp_v9 + 1;
-          FUN_002c3944(param_3,0x80);
+          rt_memclr(param_3,0x80);
           temp_v5 = temp_v6;
           temp_v10 = param_3;
         }

@@ -35,7 +35,7 @@ typedef struct {
 #define ENTITY_COUNT 109
 
 GameState *btlGetMainState(void);
-Entity *FUN_00282924(GameState *state, int index);
+Entity *btlMainFindEntryByListedId(GameState *state, int index);
 int FUN_0024ea50(u16 type);
 int scrSetResult(int id);
 int randNextInRange(u32 range);
@@ -50,7 +50,7 @@ u32 FUN_0031f400(void)
     int i;
     int id;
 
-    player = FUN_00282924(btlGetMainState(), btlGetMainState()->playerIndex);
+    player = btlMainFindEntryByListedId(btlGetMainState(), btlGetMainState()->playerIndex);
     memClear(candidates, sizeof(candidates));
     count = 0;
     i = 0;

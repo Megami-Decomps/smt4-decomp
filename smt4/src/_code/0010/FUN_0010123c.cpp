@@ -7,8 +7,8 @@ extern "C" {
 int FUN_002aa924(...);
 
 int CONCAT44(...);
-int FUN_00100366(float *, float *, int);
-int FUN_001005f0(float *, float *, int);
+int libc_printfStr(float *, float *, int);
+int libc_printfWstr(float *, float *, int);
 int FUN_002076b8(...);
 int FUN_002aa67c(...);
 int FUN_002aa6ac(...);
@@ -70,8 +70,8 @@ static float romwright_fabs_4(float value)
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: FUN_00100366. */
-/* Supplied declaration required: FUN_001005f0. */
+/* Supplied declaration required: libc_printfStr. */
+/* Supplied declaration required: libc_printfWstr. */
 extern unsigned int FUN_0010072c(float *, int, int, unsigned int);
 /* Supplied declaration required: FUN_002076b8. */
 /* Supplied declaration required: FUN_002aa67c. */
@@ -227,7 +227,7 @@ float * FUN_0010123c(float *param_1,float *param_2,int *param_3)
           *(char *)(param_1 + 9) = (char)*param_3;
           *(unsigned char *)((int)param_1 + 0x25) = 0;
           if (param_1[5] == 0.0f) {
-            FUN_00100366(param_1,param_1 + 9,1);
+            libc_printfStr(param_1,param_1 + 9,1);
           }
           return (float *)0x1;
         }
@@ -245,7 +245,7 @@ float * FUN_0010123c(float *param_1,float *param_2,int *param_3)
         *(short *)(param_1 + 9) = (short)*param_3;
         *(unsigned short *)((int)param_1 + 0x26) = 0;
         if (param_1[5] == 0.0f) {
-          FUN_001005f0(param_1,param_1 + 9,1);
+          libc_printfWstr(param_1,param_1 + 9,1);
         }
         return (float *)0x1;
       }

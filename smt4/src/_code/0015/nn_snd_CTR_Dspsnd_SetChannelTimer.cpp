@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_002bb274(void);
+extern int nn_snd_CTR_Dspsnd_IsInitialized(void);
 
 
 unsigned char nn_snd_CTR_Dspsnd_SetChannelTimer(int param_1,unsigned char param_2,float param_3)
@@ -15,7 +15,7 @@ unsigned char nn_snd_CTR_Dspsnd_SetChannelTimer(int param_1,unsigned char param_
   unsigned int *puVar2;
   unsigned int in_s0;
   
-  temp_v0 = FUN_002bb274();
+  temp_v0 = nn_snd_CTR_Dspsnd_IsInitialized();
   if (temp_v0 != 0) {
     puVar2 = *(unsigned int **)(param_1 + (*(unsigned short *)(param_1 + 0x131a) & 1) * 0x60 + (unsigned int)param_2 * 4 +
                        0x10b0);

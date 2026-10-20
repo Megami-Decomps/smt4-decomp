@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_00587f28; /* 0x587f28 */
+extern int g_naviMain; /* 0x587f28 */
 
 
 void FUN_00398464(void)
@@ -12,9 +12,9 @@ void FUN_00398464(void)
 {
   int temp_v0;
   
-  temp_v0 = DAT_00587f28;
-  if (DAT_00587f28 != 0) {
-    *(unsigned int *)(DAT_00587f28 + 0x6c) = 6;
+  temp_v0 = g_naviMain;
+  if (g_naviMain != 0) {
+    *(unsigned int *)(g_naviMain + 0x6c) = 6;
     *(unsigned int *)(temp_v0 + 0x70) = 0;
     return;
   }

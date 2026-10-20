@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e75fa(...);
+int sharedRefAddRef(...);
 int FUN_002f2978(...);
 
 typedef struct fn_0010974e_arg0 fn_0010974e_arg0;
@@ -40,7 +40,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_002e75fa. */
+/* Supplied declaration required: sharedRefAddRef. */
 /* Supplied declaration required: FUN_002f2978. */
 
 
@@ -54,7 +54,7 @@ unsigned char FUN_0010974e(fn_0010974e_arg0 *param_1,fn_0010974e_arg1 *param_2,u
   temp_v0 = 0;
   if ((param_2 != (fn_0010974e_arg1 *)0x0) && (param_2->field_0x10 != 0)) {
     *(fn_0010974e_arg1 **)((int)param_1->field_0x48 + 0x38) = param_2;
-    FUN_002e75fa(param_2);
+    sharedRefAddRef(param_2);
     pfVar1 = param_1;
     FUN_002f2978(param_1,param_2->field_0xc + param_2->field_0x18,param_2->field_0x10,param_3,
                  param_1->field_0x48);

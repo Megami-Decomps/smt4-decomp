@@ -7,7 +7,7 @@ extern "C" {
 int scrPopFloat(int);
 
 /* Supplied declaration required: scrPopFloat. */
-extern int FUN_00297514(int);
+extern int scrPopInt(int);
 
 
 unsigned int FUN_0018b390(int param_1)
@@ -20,7 +20,7 @@ unsigned int FUN_0018b390(int param_1)
   switch(*(unsigned char *)(*(int *)(param_1 + 0x1c) + param_1 + 0x1f)) {
   case 0:
   case 2:
-    temp_v0 = FUN_00297514(param_1);
+    temp_v0 = scrPopInt(param_1);
     if (temp_v0 != 0) {
       temp_v0 = *(int *)(param_1 + 0x18) + 1;
       *(int *)(param_1 + 0x18) = temp_v0;

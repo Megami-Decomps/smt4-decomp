@@ -7,7 +7,7 @@ extern "C" {
 int libc_strcat(...);
 int FUN_001ad150(void);
 int FUN_001b3008(unsigned int, unsigned char [132], unsigned char [128], int, unsigned int, unsigned char *, int *, int, int);
-int FUN_002e342c(...);
+int libc_strcpy(...);
 int sysMemClear(unsigned char [128], int);
 
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
@@ -22,13 +22,13 @@ extern unsigned char LAB_001b32a4; /* 0x1b32a4 */
 extern unsigned int g_aocDisplay; /* 0x57027c */
 
 /* Supplied declaration required: libc_strcat. */
-extern int *FUN_001861c4(unsigned int, unsigned int);
+extern int *asdTMTexTableGetNode(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001ad150. */
 extern int FUN_001b2bd8(unsigned int, int, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_001b3008. */
 extern int FUN_001b3214(unsigned int);
 extern int wstrlen(unsigned int);
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: sysMemClear. */
 
 
@@ -57,13 +57,13 @@ int * FUN_001a6568(unsigned int param_1,unsigned int param_2,unsigned int param_
   }
   *(unsigned char *)(temp_v0 + 0xd) = 0;
   *(unsigned int *)(temp_v0 + 8) = 0;
-  piVar2 = (int *)FUN_001861c4(param_2,param_3);
+  piVar2 = (int *)asdTMTexTableGetNode(param_2,param_3);
   if (piVar2 == (int *)0x0) {
     return (int *)0x0;
   }
   temp_v3 = piVar2[1];
   FUN_001ad150();
-  FUN_002e342c(temp_v4,*piVar2 + 0xc);
+  libc_strcpy(temp_v4,*piVar2 + 0xc);
   pcVar5 = *(char **)(temp_v3 + 8);
   if (*pcVar5 != '-') {
     libc_strcat(temp_v4);
@@ -82,7 +82,7 @@ int * FUN_001a6568(unsigned int param_1,unsigned int param_2,unsigned int param_
     piVar2[2] = 0;
     return piVar2;
   }
-  FUN_002e342c(temp_v6,temp_v5);
+  libc_strcpy(temp_v6,temp_v5);
   temp_v1 = piVar2[4];
   if ((temp_v1 & 0xfffeffff) != 0) {
     return piVar2;

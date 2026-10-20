@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0030a8b0(char **, int, int, char *, unsigned int);
-int FUN_0030a9b6(...);
+int lessU32Alt2(...);
 
 /* stack frame of param_3: 5 slot(s), 20 byte(s) */
 typedef struct {
@@ -17,7 +17,7 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: FUN_0030a8b0. */
-/* Supplied declaration required: FUN_0030a9b6. */
+/* Supplied declaration required: lessU32Alt2. */
 extern int wordRefsEqual_0030aa7a(char **, char **);
 
 
@@ -41,7 +41,7 @@ void FUN_0012f692(unsigned int *param_1,int param_2,unsigned int param_3)
   pcVar4 = *(char **)(temp_v5 + 4);
   while (pcVar4 != (char *)0x0) {
     temp_v5 = pcVar4;
-    temp_v1 = FUN_0030a9b6(temp_v2,param_3,pcVar4 + 0x10);
+    temp_v1 = lessU32Alt2(temp_v2,param_3,pcVar4 + 0x10);
     if (temp_v1 != 0) {
       pcVar4 = *(char **)(pcVar4 + 8);
     }
@@ -82,7 +82,7 @@ void FUN_0012f692(unsigned int *param_1,int param_2,unsigned int param_3)
         }
       }
     }
-    temp_v1 = FUN_0030a9b6(temp_v2,temp_v4 + 0x10,param_3);
+    temp_v1 = lessU32Alt2(temp_v2,temp_v4 + 0x10,param_3);
     if (temp_v1 == 0) {
       temp_v0 = 0;
       temp_v6 = temp_v4;

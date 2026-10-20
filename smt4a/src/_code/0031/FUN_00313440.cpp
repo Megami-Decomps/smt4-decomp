@@ -28,7 +28,7 @@ typedef struct {
 } void_stack;
 
 extern unsigned char LAB_00313588; /* 0x313588 */
-extern int DAT_00581284; /* 0x581284 */
+extern int g_mapObj; /* 0x581284 */
 
 /* Supplied declaration required: FUN_0018a924. */
 /* Supplied declaration required: FUN_003534b0. */
@@ -47,7 +47,7 @@ void FUN_00313440(void)
   
   temp_v2 = 0;
   do {
-    temp_v1 = DAT_00581284 + temp_v2 * 0x48;
+    temp_v1 = g_mapObj + temp_v2 * 0x48;
     if ((*(char *)(temp_v1 + 0x14) != '\0') &&
        ((temp_v0 = *(int *)(temp_v1 + 0x38), temp_v0 == 6 || temp_v0 == 7 || (temp_v0 == 9 || temp_v0 == 0xb))))
     {

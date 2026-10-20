@@ -14,9 +14,9 @@ struct fn_0028dbe0_arg0 {
     void *field_0x34; /* +0x34 */
 };
 
-extern int FUN_002a8740(void);
+extern int gameGetUnitRecord(void);
 extern unsigned int FUN_002b05d0(int);
-extern int FUN_002b63ac(void);
+extern int gameGetPlayerData(void);
 
 
 unsigned int FUN_0028dbe0(fn_0028dbe0_arg0 *param_1)
@@ -29,11 +29,11 @@ unsigned int FUN_0028dbe0(fn_0028dbe0_arg0 *param_1)
   
   if (param_1->field_0x23 == 0) {
     if ((int)param_1->field_0x34 < 0) {
-      temp_v1 = FUN_002b63ac();
+      temp_v1 = gameGetPlayerData();
       temp_v0 = *(unsigned short *)(temp_v1 + 0x72);
     }
     else {
-      temp_v1 = FUN_002a8740();
+      temp_v1 = gameGetUnitRecord();
       temp_v0 = *(unsigned short *)(temp_v1 + 0x44);
     }
     temp_v2 = 1;

@@ -5,7 +5,7 @@ extern "C" {
 extern const u8 DAT_0055c6e4[];  /* vtable */
 void asdMemFree(void *memory);
 void FUN_001a6928(void *self, s32 flag);
-void FUN_002e3494(void *memory);
+void asdOperatorDeleteB(void *memory);
 
 typedef struct Object55c6e4 {
     /* 0x00 */ const void *vtbl;
@@ -22,7 +22,7 @@ Object55c6e4 *destroyObj0055c6e4(Object55c6e4 *self)
     self->vtbl = DAT_0055c6e4;
     FUN_001a6928(self, 1);
     if (self->bufferC != NULL) {
-        FUN_002e3494(self->bufferC);
+        asdOperatorDeleteB(self->bufferC);
         self->bufferC = NULL;
     }
     if (self->bufferB != NULL) {

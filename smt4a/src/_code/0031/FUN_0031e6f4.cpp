@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001801a4(void);
+int gameGetPlayerData(void);
 int FUN_0034a290(void);
 int FUN_003e503c(void);
 int VectorFloatToUnsigned(double, int);
@@ -22,9 +22,9 @@ extern unsigned char DAT_00588c40; /* 0x588c40 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: FUN_001801a4. */
-extern int FUN_001ab854(void);
-extern int FUN_001ab888(void);
+/* Supplied declaration required: gameGetPlayerData. */
+extern int gameGetSlotRecord(void);
+extern int gameGetSlotTable(void);
 extern int FUN_0022fd80(int, unsigned int);
 /* Supplied declaration required: FUN_0034a290. */
 extern int playerHasFlagBit(unsigned int);
@@ -64,8 +64,8 @@ void FUN_0031e6f4(int *param_1)
   unsigned long long temp_v16;
   
   temp_v1 = (*(int *)((unsigned char *)&DAT_00588c40 + 0x4));
-  temp_v2 = FUN_001ab888();
-  FUN_001801a4();
+  temp_v2 = gameGetSlotTable();
+  gameGetPlayerData();
   temp_v10 = param_1[2];
   temp_v11 = 0;
   *(int *)(temp_v1 + 0x4428) = *(int *)(temp_v1 + 0x4428) + temp_v10;
@@ -106,7 +106,7 @@ void FUN_0031e6f4(int *param_1)
       temp_v10 = 0;
       do {
         if (-1 < *(char *)(temp_v2 + temp_v10 + 0x1c88)) {
-          temp_v7 = FUN_001ab854();
+          temp_v7 = gameGetSlotRecord();
           temp_v3 = bitsAt60Test(temp_v7,1);
           if ((temp_v3 == 0) && (temp_v3 = bitsAt60Test(temp_v7,10), temp_v3 == 0)) {
             temp_v6 = 0;
@@ -115,7 +115,7 @@ void FUN_0031e6f4(int *param_1)
                ((*(char *)(temp_v2 + 0x1ca1) == temp_v0 || (*(char *)(temp_v2 + 0x1ca2) == temp_v0)))) {
               temp_v6 = 1;
             }
-            temp_v3 = FUN_001ab854();
+            temp_v3 = gameGetSlotRecord();
             temp_v13 = (float)temp_v15;
             temp_v8 = 0;
             do {

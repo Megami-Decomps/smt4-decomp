@@ -11,14 +11,14 @@ typedef struct Scene {
     /* 0x904 */ u8 timers[8][0x8C];
 } Scene;
 
-extern Scene *DAT_0043da90;
+extern Scene *g_camp;
 
 void FUN_0026a598(void)
 {
-    Scene *scene = DAT_0043da90;
+    Scene *scene = g_camp;
     int i;
 
-    timerStart(DAT_0043da90->timerA, 3, 0);
+    timerStart(g_camp->timerA, 3, 0);
     i = 0;
     do {
         timerStart(scene->timers[i], 3, 0);

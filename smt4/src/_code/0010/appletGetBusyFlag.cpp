@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern s8 DAT_00465228;
+extern s8 g_appletBusyFlag;
 
 s32 appletGetBusyFlag(void)
 {
-    return DAT_00465228;
+    return g_appletBusyFlag;
 }
 
 } /* extern "C" */

@@ -10,10 +10,10 @@ int FUN_0019a0fc(...);
 int FUN_001a1c28(...);
 int FUN_002039d0(...);
 int FUN_00237da0(double, float *, float *, int);
-int FUN_0028322c(double);
+int nodeTreeReleaseItemClearOwner(double);
 int FUN_0028324c(int, double, int);
 int FUN_00283328(int, double, int);
-int FUN_00285834(...);
+int nodeTreeReleaseItem(...);
 int FUN_002c2d70(...);
 int FUN_002e5de0(...);
 int sysMemClear(float *, int);
@@ -69,10 +69,10 @@ extern int FUN_00184964(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001a1c28. */
 /* Supplied declaration required: FUN_002039d0. */
 /* Supplied declaration required: FUN_00237da0. */
-/* Supplied declaration required: FUN_0028322c. */
+/* Supplied declaration required: nodeTreeReleaseItemClearOwner. */
 /* Supplied declaration required: FUN_0028324c. */
 /* Supplied declaration required: FUN_00283328. */
-/* Supplied declaration required: FUN_00285834. */
+/* Supplied declaration required: nodeTreeReleaseItem. */
 /* Supplied declaration required: FUN_002c2d70. */
 /* Supplied declaration required: FUN_002e5de0. */
 /* Supplied declaration required: sysMemClear. */
@@ -133,7 +133,7 @@ void FUN_00260158(float *param_1)
       temp_v7 = 0;
       if (param_1 != (float *)0x0) {
         do {
-          FUN_0028322c(param_1[temp_v7 + 0x99]);
+          nodeTreeReleaseItemClearOwner(param_1[temp_v7 + 0x99]);
           temp_v7 = temp_v7 + 1;
         } while (temp_v7 < 0x32);
         param_1[9] = 0.0f;
@@ -146,7 +146,7 @@ void FUN_00260158(float *param_1)
         if ((unsigned int *)romwright_f2u((float)(param_1[0x95])) != (unsigned int *)0x0) {
           *(unsigned int *)romwright_f2u((float)(param_1[0x95])) = 0;
         }
-        FUN_00285834(param_1);
+        nodeTreeReleaseItem(param_1);
         return;
       }
     }
@@ -182,7 +182,7 @@ void FUN_00260158(float *param_1)
         param_1[0x97] = 0.0f;
       }
       else if (param_1[(int)temp_v8 + 0x99] != 0.0f) {
-        FUN_00285834();
+        nodeTreeReleaseItem();
       }
       temp_v20 = param_1[0x93];
       temp_v19 = (float *)(unsigned int)*(unsigned char *)(param_1 + 0x96);

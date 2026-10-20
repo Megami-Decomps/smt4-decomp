@@ -36,8 +36,8 @@ extern unsigned char LAB_003a965c; /* 0x3a965c */
 /* Supplied declaration required: FUN_00100388. */
 extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_00178b04. */
-extern unsigned int FUN_002360dc(unsigned int);
-extern int FUN_002deb84(void);
+extern unsigned int scrGetArgString(unsigned int);
+extern int scrGetCommandFrame(void);
 /* Supplied declaration required: FUN_004d854c. */
 extern int FUN_004d87e4(unsigned int);
 /* Supplied declaration required: callOnHandleField4D. */
@@ -70,7 +70,7 @@ unsigned int FUN_003a9540(void)
   unsigned int temp_v18;
   
   temp_v0 = btlGetMainState();
-  temp_v1 = FUN_002deb84();
+  temp_v1 = scrGetCommandFrame();
   if (temp_v1 != 0) {
     temp_v1 = FUN_004d87e4(*(unsigned int *)(temp_v0 + 0x2298));
     if (temp_v1 == 0) {
@@ -81,7 +81,7 @@ unsigned int FUN_003a9540(void)
     *(unsigned char *)(temp_v0 + 0x22b4) = 1;
   }
   else {
-    temp_v2 = FUN_002360dc(0);
+    temp_v2 = scrGetArgString(0);
     temp_v3 = 0;
     temp_v4 = 0;
     temp_v5 = 0;

@@ -6,12 +6,12 @@ extern "C" {
 
 int FUN_0023266c(unsigned char *, int, int, int);
 int FUN_0023346c(unsigned char *);
-int FUN_0027eb88(unsigned char *, int);
+int memFill8(unsigned char *, int);
 int timerStart(...);
 int FUN_002bd954(unsigned char *, int, int, unsigned char *, int);
 int FUN_002beed0(...);
 int FUN_002c312c(unsigned char *, unsigned char *, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
-int FUN_002c3944(unsigned char *, int);
+int rt_memclr(unsigned char *, int);
 int asdTMTexTableLoadTmx(int, int);
 int FUN_003eb068(unsigned char *);
 int NaviMain_InitCallbacks(unsigned char *);
@@ -34,13 +34,13 @@ extern unsigned char DAT_00404a9c; /* 0x404a9c */
 
 /* Supplied declaration required: FUN_0023266c. */
 /* Supplied declaration required: FUN_0023346c. */
-/* Supplied declaration required: FUN_0027eb88. */
+/* Supplied declaration required: memFill8. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002beed0. */
-extern int FUN_002c2950(void);
+extern int gameGetMapBlock(void);
 /* Supplied declaration required: FUN_002c312c. */
-/* Supplied declaration required: FUN_002c3944. */
+/* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: asdTMTexTableLoadTmx. */
 /* Supplied declaration required: FUN_003eb068. */
 /* Supplied declaration required: NaviMain_InitCallbacks. */
@@ -55,7 +55,7 @@ void NaviMain_InitInstance(unsigned char *param_1)
   unsigned char *puVar2;
   int temp_v1;
   
-  temp_v0 = FUN_002c2950();
+  temp_v0 = gameGetMapBlock();
   NaviMain_InitCallbacks(param_1);
   asdTMTexTableLoadTmx(0x33,0);
   param_1[0xc] = 0xff;
@@ -63,7 +63,7 @@ void NaviMain_InitInstance(unsigned char *param_1)
   *param_1 = 0;
   param_1[0x55] = 0;
   *(unsigned int *)(param_1 + 0x10) = 0;
-  FUN_002c3944(param_1 + 0x62,0x100);
+  rt_memclr(param_1 + 0x62,0x100);
   param_1[0x60] = 0;
   FUN_0023266c(param_1 + 0x164,0,0,0x1c);
   *(unsigned int *)(param_1 + 4) = 0;
@@ -106,7 +106,7 @@ void NaviMain_InitInstance(unsigned char *param_1)
   param_1[0x121bc] = 0;
   *(unsigned short *)(param_1 + 0x121be) = 0;
   *(unsigned short *)(param_1 + 0x121c0) = 0xffff;
-  FUN_0027eb88(param_1 + 0x122e8,1);
+  memFill8(param_1 + 0x122e8,1);
   temp_v1 = 0x20;
   temp_v0 = 0;
   do {

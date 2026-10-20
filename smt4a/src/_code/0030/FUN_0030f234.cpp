@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_002e7888(u32 dest, u32 source);
+void wstrcpyU16(u32 dest, u32 source);
 void FUN_002eea94(void *string, s32 size);
 
 typedef struct String {
@@ -21,8 +21,8 @@ void FUN_0030f234(u32 unused, u32 first, s32 a, u32 second, s32 b)
     string = constructObj0055affc();
     FUN_002eea94(string, a + b + 1);
     data = string->data;
-    FUN_002e7888(data, first);
-    FUN_002e7888(a * 2 + data, second);
+    wstrcpyU16(data, first);
+    wstrcpyU16(a * 2 + data, second);
 }
 
 } /* extern "C" */

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002a7f28(int, unsigned int, int, unsigned int);
 int FUN_002c0d50(unsigned int *, unsigned int, int, int *, int);
-int FUN_002c52f8(void);
+int asdFatalError(void);
 
 /* stack frame of param_2: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -23,7 +23,7 @@ extern unsigned int DAT_0044e624; /* 0x44e624 */
 /* Supplied declaration required: FUN_002a7f28. */
 extern int FUN_002a808c(unsigned int);
 /* Supplied declaration required: FUN_002c0d50. */
-/* Supplied declaration required: FUN_002c52f8. */
+/* Supplied declaration required: asdFatalError. */
 
 
 void FUN_0013c5f4(unsigned char *param_1,unsigned int param_2)
@@ -46,7 +46,7 @@ void FUN_0013c5f4(unsigned char *param_1,unsigned int param_2)
     temp_v1 = -0x375f3004;
   }
   if (temp_v0 < 0 && temp_v0 != temp_v1) {
-    FUN_002c52f8();
+    asdFatalError();
   }
   FUN_002a7f28(0x406,param_2,0xf80,DAT_0044e368);
   temp_v3 = DAT_0044e620;

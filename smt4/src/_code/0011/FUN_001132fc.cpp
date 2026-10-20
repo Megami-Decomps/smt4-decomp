@@ -16,7 +16,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_1_stack;
 
-extern int DAT_0043e278; /* 0x43e278 */
+extern int g_frameTex; /* 0x43e278 */
 extern unsigned int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -32,12 +32,12 @@ void FUN_001132fc(int param_1)
   unsigned int temp_v1;
   unsigned int in_fpscr;
   
-  temp_v1 = *(unsigned int *)(DAT_0043e278 + 0xfc8);
-  if ((param_1 == 0) && (*(char *)(DAT_0043e278 + 0xf9d) != '\0')) {
-    temp_v0 = *(int *)(DAT_0043e278 + 8);
+  temp_v1 = *(unsigned int *)(g_frameTex + 0xfc8);
+  if ((param_1 == 0) && (*(char *)(g_frameTex + 0xf9d) != '\0')) {
+    temp_v0 = *(int *)(g_frameTex + 8);
   }
   else {
-    temp_v0 = *(int *)(DAT_0043e278 + 4);
+    temp_v0 = *(int *)(g_frameTex + 4);
   }
   *(unsigned int *)(temp_v0 + 0x3c) = 1;
   *(unsigned int *)(temp_v0 + 0x40) = 1;

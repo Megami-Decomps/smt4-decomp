@@ -12,7 +12,7 @@ int FUN_001afc10(int *);
 int lcgRandomHigh16(void);
 int FUN_001b1f80(void);
 int FUN_001b207c(unsigned char *);
-int FUN_001c2484(void);
+int nw_snd_internal_driver_VoiceManager_GetInstance(void);
 int nw_snd_internal_DriverCommandManager_ProcessCommand(void);
 int nw_snd_internal_driver_VoiceManager_UpdateAllVoices(void);
 
@@ -34,7 +34,7 @@ extern unsigned char DAT_00646b38; /* 0x646b38 */
 /* Supplied declaration required: lcgRandomHigh16. */
 /* Supplied declaration required: FUN_001b1f80. */
 /* Supplied declaration required: FUN_001b207c. */
-/* Supplied declaration required: FUN_001c2484. */
+/* Supplied declaration required: nw_snd_internal_driver_VoiceManager_GetInstance. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
 /* Supplied declaration required: nw_snd_internal_DriverCommandManager_ProcessCommand. */
@@ -99,7 +99,7 @@ void nw_snd_internal_driver_SoundThread_SoundThreadFunc(int param_1)
   FUN_00191548();
   FUN_001b1f80();
   lcgRandomHigh16();
-  FUN_001c2484();
+  nw_snd_internal_driver_VoiceManager_GetInstance();
   nw_snd_internal_driver_VoiceManager_UpdateAllVoices();
   piVar3 = *(int **)(param_1 + 0x1d4);
   if (*(int **)(param_1 + 0x1d4) != (int *)(param_1 + 0x1d4)) {

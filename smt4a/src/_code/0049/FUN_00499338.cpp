@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001aea28(unsigned int, unsigned int);
+int ptrListRemoveClearOwner(unsigned int, unsigned int);
 int FUN_0022e774(void);
 int FUN_002a7324(int);
 int FUN_002c85b0(void);
@@ -19,11 +19,11 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_4_stack;
 
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
-extern int DAT_0057f578; /* 0x57f578 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
+extern int g_placeWin; /* 0x57f578 */
 
 extern int FUN_00192718(short);
-/* Supplied declaration required: FUN_001aea28. */
+/* Supplied declaration required: ptrListRemoveClearOwner. */
 /* Supplied declaration required: FUN_0022e774. */
 extern int FUN_0023b3d0(void);
 extern int FUN_0026c3a0(void);
@@ -89,7 +89,7 @@ void FUN_00499338(int param_1,unsigned int param_2,unsigned int param_3,unsigned
       *(unsigned int *)(param_1 + 0x16004) = 0;
       FUN_002c85b0();
       FUN_00333f6c();
-      *(unsigned char *)(DAT_0057f578 + 0x10) = 1;
+      *(unsigned char *)(g_placeWin + 0x10) = 1;
       return;
     }
     break;
@@ -105,7 +105,7 @@ void FUN_00499338(int param_1,unsigned int param_2,unsigned int param_3,unsigned
           *(unsigned int *)(param_1 + 0x16004) = 3;
           FUN_00345718(0);
           if (*(int *)(param_1 + 0x16028) != 0) {
-            FUN_001aea28(DAT_0056fcc0,*(unsigned int *)(*(int *)(param_1 + 0x16028) + 4));
+            ptrListRemoveClearOwner(g_handleRegistry,*(unsigned int *)(*(int *)(param_1 + 0x16028) + 4));
             if (*(int **)(param_1 + 0x16028) != (int *)0x0) {
               (**(romwright_code **)(**(int **)(param_1 + 0x16028) + 4))();
               *(unsigned int *)(param_1 + 0x16028) = 0;

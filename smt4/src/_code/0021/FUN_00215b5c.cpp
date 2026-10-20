@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0029f848(int, unsigned int, int, int, int, int);
 int rt_memcpy(int, unsigned int, unsigned int);
 
-extern int DAT_0044e190; /* 0x44e190 */
+extern int g_statusDown; /* 0x44e190 */
 
 /* Supplied declaration required: FUN_0029f848. */
 /* Supplied declaration required: rt_memcpy. */
@@ -22,11 +22,11 @@ void FUN_00215b5c(unsigned int param_1,unsigned int param_2)
   int temp_v2;
   unsigned int temp_v3;
   
-  temp_v0 = DAT_0044e190;
+  temp_v0 = g_statusDown;
   if (param_2 >= 0x11) {
     return;
   }
-  *(unsigned int *)(DAT_0044e190 + 0x4c2) = 0;
+  *(unsigned int *)(g_statusDown + 0x4c2) = 0;
   *(unsigned int *)(temp_v0 + 0x4c6) = 0;
   *(unsigned int *)(temp_v0 + 0x4ca) = 0;
   *(unsigned int *)(temp_v0 + 0x4ce) = 0;

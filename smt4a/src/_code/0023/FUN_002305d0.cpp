@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00184310(void);
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 int FUN_00239234(int, unsigned short *);
 int FUN_002854d8(int, int);
 int FUN_002a6894(unsigned short *);
@@ -48,8 +48,8 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int FUN_0018416c(unsigned short);
 /* Supplied declaration required: FUN_00184310. */
-extern int FUN_001ab888(void);
-/* Supplied declaration required: FUN_001aba54. */
+extern int gameGetSlotTable(void);
+/* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: FUN_00239234. */
 /* Supplied declaration required: FUN_002854d8. */
 /* Supplied declaration required: FUN_002a6894. */
@@ -103,7 +103,7 @@ void FUN_002305d0(unsigned short *param_1,unsigned char param_2,unsigned short p
   param_1[0x31] = param_3;
   *(unsigned char *)(param_1 + 0x33) = param_2;
   if (param_4 != 3) {
-    temp_v0 = FUN_001ab888();
+    temp_v0 = gameGetSlotTable();
     temp_v1 = 0;
     do {
       if (*(char *)(temp_v0 + 0x1c88 + temp_v1) < '\0') {
@@ -186,7 +186,7 @@ void FUN_002305d0(unsigned short *param_1,unsigned char param_2,unsigned short p
     temp_v0 = 0;
     do {
       temp_v2 = (unsigned int)(unsigned short)param_1[temp_v0 + 0x1a];
-      if (((temp_v2 != 0) && (FUN_001aba54(), temp_v2 != 0)) && (*(unsigned short *)(temp_v2 + 0x26) < 0x12)) {
+      if (((temp_v2 != 0) && (dataTable04FindById(), temp_v2 != 0)) && (*(unsigned short *)(temp_v2 + 0x26) < 0x12)) {
         temp_v3 = *(char *)((int)param_1 + *(unsigned short *)(temp_v2 + 0x26) + 0x4c) +
                 *(char *)((int)param_1 + temp_v0 + 0x44);
         *(char *)((int)param_1 + temp_v0 + 0x44) = temp_v3;

@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_001a0990(unsigned char *);
-int FUN_001af148(unsigned char *);
-int FUN_001bcd48(unsigned char *, int);
+int nn_os_LightEvent_ClearSignal(unsigned char *);
+int nn_os_LightEvent_Wait(unsigned char *);
+int svcSleepThread(unsigned char *, int);
 int FUN_001cd7f4(unsigned char *);
 int FUN_001cd984(unsigned char *);
 
@@ -23,9 +23,9 @@ extern unsigned char DAT_005894e9; /* 0x5894e9 */
 extern unsigned char DAT_005894ec; /* 0x5894ec */
 extern unsigned char g_dspsndState; /* 0x6433d0 */
 
-/* Supplied declaration required: FUN_001a0990. */
-/* Supplied declaration required: FUN_001af148. */
-/* Supplied declaration required: FUN_001bcd48. */
+/* Supplied declaration required: nn_os_LightEvent_ClearSignal. */
+/* Supplied declaration required: nn_os_LightEvent_Wait. */
+/* Supplied declaration required: svcSleepThread. */
 /* Supplied declaration required: FUN_001cd7f4. */
 extern int FUN_001cd8fc(unsigned char *, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001cd984. */
@@ -47,11 +47,11 @@ void FUN_001cd5ac(unsigned int param_1,unsigned int param_2)
     DAT_005894e5 = '\x01';
   }
   if (DAT_005894e5 != '\0') {
-    FUN_001af148(&DAT_005894ec);
-    FUN_001a0990(&DAT_005894ec);
+    nn_os_LightEvent_Wait(&DAT_005894ec);
+    nn_os_LightEvent_ClearSignal(&DAT_005894ec);
   }
   if (DAT_005894e7 != '\0') {
-    FUN_001bcd48(&LAB_004a95c0,0);
+    svcSleepThread(&LAB_004a95c0,0);
     return;
   }
   FUN_001cd984(&g_dspsndState);

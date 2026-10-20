@@ -1,0 +1,36 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `asdCecShutdown` (_code @ 0x1a9ebc, 0x68 bytes) from smt4_v1.2.0.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+extern "C" {
+
+int asdMemFreeNonNull(unsigned int);
+int asdMemFree(int);
+
+typedef int romwright_code(...);
+extern unsigned char g_asdCec; /* 0x464fa8 */
+
+/* Supplied declaration required: asdMemFreeNonNull. */
+/* Supplied declaration required: asdMemFree. */
+extern unsigned int FUN_003578b8(void);
+
+
+unsigned char asdCecShutdown(void)
+
+{
+/* irregular: 2 native warning(s); review required */
+  unsigned int temp_v0;
+  
+  if ((*(int *)((unsigned char *)&g_asdCec + 0x4)) != 0) {
+    asdMemFreeNonNull(*(unsigned int *)((*(int *)((unsigned char *)&g_asdCec + 0x4)) + 0xc));
+    if (*(int **)((*(int *)((unsigned char *)&g_asdCec + 0x4)) + 0x18) != (int *)0x0) {
+      (**(romwright_code **)(**(int **)((*(int *)((unsigned char *)&g_asdCec + 0x4)) + 0x18) + 4))();
+    }
+    asdMemFree((*(int *)((unsigned char *)&g_asdCec + 0x4)));
+    (*(int *)((unsigned char *)&g_asdCec + 0x4)) = 0;
+  }
+  temp_v0 = FUN_003578b8();
+  return (temp_v0 & 0x80000000) == 0;
+}
+
+} /* extern "C" */

@@ -6,13 +6,13 @@ extern "C" {
 
 int FUN_002e6e34(unsigned char [12], int);
 int FUN_002e6e5c(...);
-int FUN_002e7228(int *);
+int onlineJobSetStateReady(int *);
 int FUN_002e78d0(int, int *, int);
-int FUN_002eb588(unsigned int *);
+int onlineTimeGetNow(unsigned int *);
 int FUN_0030f824(int, int [2]);
 int wordMoveOut_0030f836(int [2], int *[2], int);
 int FUN_0030f846(int *[2]);
-int FUN_0030f89a(...);
+int listIteratorNext4(...);
 int FUN_0030f90c(int **, int, int *[2]);
 int FUN_0030facc(int, int *);
 
@@ -31,15 +31,15 @@ typedef struct {
 
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-/* Supplied declaration required: FUN_002e7228. */
+/* Supplied declaration required: onlineJobSetStateReady. */
 /* Supplied declaration required: FUN_002e78d0. */
-/* Supplied declaration required: FUN_002eb588. */
+/* Supplied declaration required: onlineTimeGetNow. */
 extern int wordRefsDiffer_0030f814(int **, int **);
 /* Supplied declaration required: FUN_0030f824. */
 /* Supplied declaration required: wordMoveOut_0030f836. */
 /* Supplied declaration required: FUN_0030f846. */
 extern int wordRefsDiffer_0030f88a(int **, int);
-/* Supplied declaration required: FUN_0030f89a. */
+/* Supplied declaration required: listIteratorNext4. */
 /* Supplied declaration required: FUN_0030f90c. */
 /* Supplied declaration required: FUN_0030facc. */
 
@@ -65,7 +65,7 @@ unsigned int FUN_0030f974(int param_1)
   unsigned int *temp_v13;
   
   temp_v2 = 0;
-  FUN_002eb588(&temp_v5);
+  onlineTimeGetNow(&temp_v5);
   FUN_002e6e34(temp_v8,param_1 + 0x58);
   FUN_002e6e34(temp_v9,param_1 + 0x88);
   FUN_002e6e34(temp_v10,param_1 + 0xb8);
@@ -86,7 +86,7 @@ unsigned int FUN_0030f974(int param_1)
       FUN_0030facc(param_1,piVar3);
     }
     else {
-      FUN_002e7228(piVar3);
+      onlineJobSetStateReady(piVar3);
       FUN_002e78d0(param_1,piVar3,0);
       temp_v2 = 1;
     }
@@ -118,7 +118,7 @@ unsigned int FUN_0030f974(int param_1)
       }
     }
     else {
-      FUN_0030f89a(&temp_v7);
+      listIteratorNext4(&temp_v7);
     }
   }
   FUN_002e6e5c(temp_v10);

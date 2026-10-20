@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_002c2950(void);
+extern int gameGetMapBlock(void);
 
 
 void FUN_0027d908(void)
@@ -15,7 +15,7 @@ void FUN_0027d908(void)
   int temp_v2;
   int temp_v3;
   
-  temp_v0 = FUN_002c2950();
+  temp_v0 = gameGetMapBlock();
   temp_v1 = 0;
   temp_v2 = 0x10;
   do {

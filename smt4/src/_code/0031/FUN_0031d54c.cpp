@@ -15,7 +15,7 @@ int FUN_00275e4c(void);
 int FUN_0027645c(...);
 int FUN_00276480(...);
 int FUN_00276950(...);
-int FUN_002769b4(...);
+int mapDepartSetTarget(...);
 int FUN_0027d0ec(void);
 int FUN_0027d474(...);
 int FUN_0027d7b0(...);
@@ -78,7 +78,7 @@ extern int FUN_0026f950(void);
 /* Supplied declaration required: FUN_0027645c. */
 /* Supplied declaration required: FUN_00276480. */
 /* Supplied declaration required: FUN_00276950. */
-/* Supplied declaration required: FUN_002769b4. */
+/* Supplied declaration required: mapDepartSetTarget. */
 /* Supplied declaration required: FUN_0027d0ec. */
 /* Supplied declaration required: FUN_0027d474. */
 extern int FUN_0027d748(void);
@@ -238,7 +238,7 @@ void FUN_0031d54c(unsigned int param_1,unsigned int param_2,int param_3)
     FUN_00276480(DAT_0049f928,DAT_0049f92c,DAT_0049f924);
     FUN_00276950(DAT_0049f928);
     FUN_0027645c(0);
-    FUN_002769b4(0xffffffff,0xffffffff);
+    mapDepartSetTarget(0xffffffff,0xffffffff);
     FUN_00275e18();
     FUN_0027fc14(0);
     FUN_00273840(0);

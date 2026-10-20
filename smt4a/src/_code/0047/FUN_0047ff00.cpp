@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00192608(void);
 
-extern unsigned short *FUN_001801a4(void);
+extern unsigned short *gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00192608. */
 extern int playerAlignmentClass(void);
 
@@ -27,7 +27,7 @@ void FUN_0047ff00(int param_1)
   if ((temp_v3 != 0) &&
      ((((temp_v0 = *(unsigned char *)(temp_v3 + 0x30), (temp_v0 & 1) != 0 && (temp_v2 == 4)) ||
        (((temp_v0 & 4) != 0 && (temp_v2 == 5)))) || (((temp_v0 & 2) != 0 && (temp_v2 == 1)))))) {
-    puVar5 = (unsigned short *)FUN_001801a4();
+    puVar5 = (unsigned short *)gameGetPlayerData();
     temp_v3 = param_1;
     FUN_00192608();
     temp_v1 = (unsigned short)param_1;

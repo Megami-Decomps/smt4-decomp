@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_00162e8c(...);
+int gameFlagsGetBlock(...);
 int FUN_001b4aa0(void);
 int FUN_00268450(int);
 int FUN_002854a8(int, int);
 int FUN_002b945c(unsigned int);
 int FUN_002c7ad8(void);
-int FUN_003fd63c(...);
+int gameFlagSetValue(...);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -26,8 +26,8 @@ extern unsigned int DAT_005f1c9c; /* 0x5f1c9c */
 extern unsigned int DAT_005f1ca0; /* 0x5f1ca0 */
 extern unsigned int DAT_005f1ca4; /* 0x5f1ca4 */
 
-/* Supplied declaration required: FUN_00162e8c. */
-extern int FUN_0018719c(unsigned int);
+/* Supplied declaration required: gameFlagsGetBlock. */
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_001b4aa0. */
 extern int FUN_001ba570(void);
 extern int FUN_00261424(void);
@@ -35,11 +35,11 @@ extern int FUN_00261424(void);
 /* Supplied declaration required: FUN_002854a8. */
 /* Supplied declaration required: FUN_002b945c. */
 /* Supplied declaration required: FUN_002c7ad8. */
-extern int FUN_0037692c(void);
+extern int sequenceRequestIsPending(void);
 extern char *FUN_003798f0(int);
 extern int FUN_003857c8(int);
-extern int FUN_003b56e8(void);
-/* Supplied declaration required: FUN_003fd63c. */
+extern int dataTable23Type1CountWithAoc(void);
+/* Supplied declaration required: gameFlagSetValue. */
 
 
 void FUN_002d2000(void)
@@ -56,7 +56,7 @@ void FUN_002d2000(void)
   unsigned char temp_v6;
   unsigned char temp_v7;
   
-  temp_v1 = FUN_00162e8c();
+  temp_v1 = gameFlagsGetBlock();
   temp_v0 = *(char *)(temp_v1 + 0x7c4);
   if (temp_v0 != '\0') {
     *(unsigned char *)(temp_v1 + 0x7c4) = 0;
@@ -67,11 +67,11 @@ void FUN_002d2000(void)
         FUN_002854a8(temp_v2,1);
         if (temp_v2 == 9) {
           temp_v4 = 0x4d2;
-          temp_v2 = FUN_0018719c(0x4d2);
+          temp_v2 = gameFlagIsSet(0x4d2);
           if (temp_v2 != 0) {
             temp_v4 = 0x4d3;
           }
-          FUN_003fd63c(temp_v4,1);
+          gameFlagSetValue(temp_v4,1);
           temp_v2 = FUN_00261424();
           FUN_00268450(temp_v2 + 1);
           temp_v2 = 0;
@@ -83,18 +83,18 @@ void FUN_002d2000(void)
           *(unsigned int *)(temp_v1 + 0x15cc) = 1;
           return;
         }
-        if ((temp_v2 == 8) && (temp_v3 = FUN_0018719c(0x4d1), temp_v3 == 0)) {
+        if ((temp_v2 == 8) && (temp_v3 = gameFlagIsSet(0x4d1), temp_v3 == 0)) {
           *(unsigned int *)(temp_v1 + 0x15cc) = 0x25;
-          FUN_003fd63c(0x4d4,1);
+          gameFlagSetValue(0x4d4,1);
           return;
         }
-        temp_v3 = FUN_0037692c();
+        temp_v3 = sequenceRequestIsPending();
         if (temp_v3 == 0) {
           temp_v5 = 0;
           DAT_005f1c98 = 0x18;
           DAT_005f1c9c = 1;
           DAT_005f1ca0 = 0;
-          temp_v3 = FUN_003b56e8();
+          temp_v3 = dataTable23Type1CountWithAoc();
           if (0 < temp_v3) {
             do {
               pcVar5 = (char *)FUN_003798f0(temp_v5);
@@ -112,21 +112,21 @@ void FUN_002d2000(void)
                 goto LAB_002d21fc;
               }
               temp_v5 = temp_v5 + 1;
-              temp_v3 = FUN_003b56e8();
+              temp_v3 = dataTable23Type1CountWithAoc();
             } while (temp_v5 < temp_v3);
           }
           DAT_005f1ca4 = 0xffffffff;
 LAB_002d21fc:
           DAT_005f1a50 = 0xffffffff;
           temp_v0 = (char)DAT_005f16a4;
-          temp_v3 = FUN_00162e8c();
+          temp_v3 = gameFlagsGetBlock();
           *(char *)(temp_v3 + 3) = temp_v0 + 'd';
           FUN_002b945c(DAT_005f16a4);
           DAT_005f1623 = 1;
         }
         if (temp_v2 == 8) {
-          FUN_003fd63c(0x4d4,1);
-          FUN_003fd63c(0x11d1,1);
+          gameFlagSetValue(0x4d4,1);
+          gameFlagSetValue(0x11d1,1);
         }
         DAT_005f1a99 = 1;
         *(unsigned int *)(temp_v1 + 0x15cc) = DAT_005f16a4;
@@ -142,9 +142,9 @@ LAB_002d21fc:
       case 5:
         temp_v1 = FUN_001ba570();
         if (temp_v1 == 0) {
-          temp_v1 = FUN_00162e8c(0);
+          temp_v1 = gameFlagsGetBlock(0);
           *(unsigned char *)(temp_v1 + 3) = 0;
-          temp_v1 = FUN_00162e8c();
+          temp_v1 = gameFlagsGetBlock();
           *(unsigned char *)(temp_v1 + 0x1c) = 0;
           return;
         }

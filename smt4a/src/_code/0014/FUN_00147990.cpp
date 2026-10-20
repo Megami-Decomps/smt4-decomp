@@ -8,9 +8,9 @@ int FUN_00170390(int);
 int FUN_001703b0(int);
 int FUN_00170474(int);
 int FUN_0017145c(int);
-int FUN_0018b868(void);
-int FUN_0018b964(void);
-int FUN_001bcd48(int, int);
+int nn_applet_CTR_detail_OpenSession(void);
+int nn_applet_CTR_detail_CloseSession(void);
+int svcSleepThread(int, int);
 
 extern int FUN_0015ac20(unsigned int);
 /* Supplied declaration required: FUN_00170390. */
@@ -19,9 +19,9 @@ extern int FUN_001703e8(void);
 /* Supplied declaration required: FUN_00170474. */
 /* Supplied declaration required: FUN_0017145c. */
 extern int FUN_0018b63c(void);
-/* Supplied declaration required: FUN_0018b868. */
-/* Supplied declaration required: FUN_0018b964. */
-/* Supplied declaration required: FUN_001bcd48. */
+/* Supplied declaration required: nn_applet_CTR_detail_OpenSession. */
+/* Supplied declaration required: nn_applet_CTR_detail_CloseSession. */
+/* Supplied declaration required: svcSleepThread. */
 
 
 int FUN_00147990(unsigned int param_1)
@@ -38,11 +38,11 @@ int FUN_00147990(unsigned int param_1)
     FUN_001703b0(1);
   }
   while( 1 ) {
-    FUN_0018b868();
+    nn_applet_CTR_detail_OpenSession();
     temp_v1 = FUN_0015ac20(param_1);
-    FUN_0018b964();
+    nn_applet_CTR_detail_CloseSession();
     if ((temp_v1 != -0x375f3010 && temp_v1 != -0x1f5f33f8) && temp_v1 != -0x375f33fe) break;
-    FUN_001bcd48(10000000,0);
+    svcSleepThread(10000000,0);
   }
   if (temp_v0 != 0) {
     temp_v0 = FUN_0018b63c();

@@ -24,7 +24,7 @@ extern unsigned int g_aocSystem; /* 0x570280 */
 /* Supplied declaration required: asdProcessCreateSimple. */
 extern int FUN_00162ea4(void);
 /* Supplied declaration required: asdMemoryAllocTracked. */
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_00191e00. */
 /* Supplied declaration required: FUN_0019e378. */
 extern int FUN_001a6508(unsigned int, unsigned int, unsigned int, unsigned int);
@@ -43,7 +43,7 @@ void FUN_003b6820(unsigned int param_1,int param_2,unsigned int param_3)
   unsigned int temp_v1;
   unsigned int temp_v2;
   
-  temp_v0 = FUN_0018719c(0x522);
+  temp_v0 = gameFlagIsSet(0x522);
   if (temp_v0 != 0) {
     FUN_00283498(param_1);
     temp_v0 = FUN_0019e378();

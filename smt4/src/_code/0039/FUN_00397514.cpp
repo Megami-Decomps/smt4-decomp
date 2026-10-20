@@ -3,7 +3,7 @@
 extern "C" {
 
 int FUN_00296ee0(void *obj, int state);
-int FUN_002b8838(int id);
+int buttonHelpSetPreset(int id);
 extern int FUN_0019e0c0(u32 value);
 
 typedef struct Obj {
@@ -22,14 +22,14 @@ void FUN_00397514(Obj *obj)
     }
     FUN_00296ee0(obj, 2);
     if (obj->unk029 != 0) {
-        FUN_002b8838(0x97);
+        buttonHelpSetPreset(0x97);
         return;
     }
     if ((obj->unk020 != 2) && (obj->unk020 != 6)) {
-        FUN_002b8838(0x95);
+        buttonHelpSetPreset(0x95);
         return;
     }
-    FUN_002b8838(0x96);
+    buttonHelpSetPreset(0x96);
 }
 
 } /* extern "C" */

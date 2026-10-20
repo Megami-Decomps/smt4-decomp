@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_0028975c(int, int);
+int gameFlagSetValue(int, int);
 
-/* Supplied declaration required: FUN_0028975c. */
-extern int FUN_002c2950(void);
+/* Supplied declaration required: gameFlagSetValue. */
+extern int gameGetMapBlock(void);
 
 
 void FUN_00276078(int param_1)
@@ -18,7 +18,7 @@ void FUN_00276078(int param_1)
   int temp_v1;
   int temp_v2;
   
-  temp_v0 = FUN_002c2950();
+  temp_v0 = gameGetMapBlock();
   temp_v2 = 0;
   if ('\0' < *(char *)(temp_v0 + 0xde3)) {
     do {
@@ -27,7 +27,7 @@ void FUN_00276078(int param_1)
         *(unsigned char *)(temp_v0 + temp_v2 + 0xde4) = 0;
         temp_v1 = (int)*(short *)(temp_v1 + 0xdf4);
         if (temp_v1 != 0) {
-          FUN_0028975c(temp_v1,1);
+          gameFlagSetValue(temp_v1,1);
         }
       }
       temp_v2 = temp_v2 + 1;

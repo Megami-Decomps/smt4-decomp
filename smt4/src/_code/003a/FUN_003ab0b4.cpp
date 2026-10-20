@@ -7,14 +7,14 @@ extern "C" {
 int FUN_00297060(int, unsigned int);
 int FUN_0029e620(int, int);
 int FUN_0029e648(int, int);
-int FUN_002b8838(int);
+int buttonHelpSetPreset(int);
 int FUN_003aacd0(void);
 
 extern int FUN_0023360c(int);
 /* Supplied declaration required: FUN_00297060. */
 /* Supplied declaration required: FUN_0029e620. */
 /* Supplied declaration required: FUN_0029e648. */
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: FUN_003aacd0. */
 extern int spriteTable22AllLoaded(void);
 
@@ -32,7 +32,7 @@ void FUN_003ab0b4(int param_1)
     *(int *)(param_1 + 0x5a0) = temp_v0;
     *(unsigned int *)(temp_v0 + 0x108) = 1;
     FUN_003aacd0();
-    FUN_002b8838(0x3e);
+    buttonHelpSetPreset(0x3e);
     temp_v0 = FUN_0023360c(param_1 + 0x20);
     temp_v0 = *(int *)(param_1 + temp_v0 * 0x20 + 0x5b4);
     FUN_0029e648(1,0);

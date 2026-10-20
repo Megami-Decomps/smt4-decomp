@@ -13,14 +13,14 @@ typedef struct {
 } void_stack;
 
 extern int FUN_001d1cb8(...); /* 0x1d1cb8 */
-extern int FUN_001f628c(...); /* 0x1f628c */
+extern int entryCompareByDataValue(...); /* 0x1f628c */
 extern int FUN_00206d9c(...); /* 0x206d9c */
 extern int FUN_00206e20(...); /* 0x206e20 */
 extern int FUN_002c6dbc(...); /* 0x2c6dbc */
-extern int FUN_002dcb00(...); /* 0x2dcb00 */
+extern int entryCompareByDataValueB(...); /* 0x2dcb00 */
 extern int FUN_002e45f8(...); /* 0x2e45f8 */
 extern int FUN_002e467c(...); /* 0x2e467c */
-extern int DAT_0044e190; /* 0x44e190 */
+extern int g_statusDown; /* 0x44e190 */
 
 /* Supplied declaration required: FUN_0027f3dc. */
 extern int FUN_002a0d0c(void);
@@ -35,7 +35,7 @@ void FUN_0032c288(void)
   int temp_v1;
   unsigned char *pbVar3;
   
-  temp_v0 = DAT_0044e190;
+  temp_v0 = g_statusDown;
   temp_v1 = FUN_002a0d0c();
   pbVar3 = (unsigned char *)(temp_v1 + 0x16);
   if ((*(unsigned char *)(temp_v1 + 0x16) & 0x7f) == 1) {
@@ -66,10 +66,10 @@ void FUN_0032c288(void)
     return;
   }
   if (-1 < (char)*pbVar3) {
-    FUN_0027f3dc(temp_v0 + 0xe30,(int)*(short *)(temp_v0 + 0x2230),4,FUN_001f628c);
+    FUN_0027f3dc(temp_v0 + 0xe30,(int)*(short *)(temp_v0 + 0x2230),4,entryCompareByDataValue);
     return;
   }
-  FUN_0027f3dc(temp_v0 + 0xe30,(int)*(short *)(temp_v0 + 0x2230),4,FUN_002dcb00);
+  FUN_0027f3dc(temp_v0 + 0xe30,(int)*(short *)(temp_v0 + 0x2230),4,entryCompareByDataValueB);
   return;
 }
 

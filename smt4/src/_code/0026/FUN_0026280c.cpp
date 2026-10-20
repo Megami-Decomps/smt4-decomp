@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern u32 DAT_0043dd68;
+extern u32 g_unite;
 
 u32 FUN_0026280c(void)
 {
-    return DAT_0043dd68;
+    return g_unite;
 }
 
 } /* extern "C" */

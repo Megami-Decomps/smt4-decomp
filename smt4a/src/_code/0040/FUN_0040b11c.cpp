@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00192608(void);
 
-extern int FUN_001801a4(void);
+extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00192608. */
 
 
@@ -25,7 +25,7 @@ unsigned int FUN_0040b11c(unsigned int param_1,int param_2,int param_3,int param
   unsigned int temp_v8;
   
   if (param_5 == 0) {
-    temp_v3 = FUN_001801a4();
+    temp_v3 = gameGetPlayerData();
     if (param_2 == 1) {
       temp_v0 = *(unsigned short *)(temp_v3 + 6);
     }

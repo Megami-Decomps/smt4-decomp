@@ -5,12 +5,12 @@
 extern "C" {
 
 int asdMemFree(unsigned int);
-int FUN_002371cc(void);
+int bufferPairFree(void);
 
 extern unsigned char DAT_0055c724; /* 0x55c724 */
 
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_002371cc. */
+/* Supplied declaration required: bufferPairFree. */
 
 
 unsigned int * FUN_00474b34(unsigned int *param_1)
@@ -19,7 +19,7 @@ unsigned int * FUN_00474b34(unsigned int *param_1)
 /* irregular: 2 native warning(s); review required */
   *param_1 = (unsigned int)&DAT_0055c724;
   if (param_1[2] != 0) {
-    FUN_002371cc();
+    bufferPairFree();
     asdMemFree(param_1[2]);
     param_1[2] = 0;
   }

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e9afe(unsigned int, unsigned int);
+int vectorCopyHeader(unsigned int, unsigned int);
 int FUN_002f4d2c(unsigned int, int *);
 
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
@@ -12,7 +12,7 @@ int FUN_002f4d2c(unsigned int, int *);
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 extern unsigned int FUN_002e7908(unsigned int *, unsigned int *);
-/* Supplied declaration required: FUN_002e9afe. */
+/* Supplied declaration required: vectorCopyHeader. */
 /* Supplied declaration required: FUN_002f4d2c. */
 
 
@@ -32,7 +32,7 @@ unsigned long long FUN_00310ff2(unsigned int param_1,unsigned int param_2,unsign
   uStack_c = param_4;
   FUN_002f4d2c(param_1,&uStack_c);
   temp_v0 = FUN_002e7908((unsigned int *)&uStack_18,(unsigned int *)&uStack_c);
-  FUN_002e9afe(param_2,temp_v0);
+  vectorCopyHeader(param_2,temp_v0);
   return romwright_piece_4_4(uStack_14,uStack_18);
 }
 

@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern s32 FUN_001656a0(u32 button);
+extern s32 padButtonIsPressed(u32 button);
 
 u8 isButton0Pressed(void)
 {
-    return FUN_001656a0(0) != 0;
+    return padButtonIsPressed(0) != 0;
 }
 
 } /* extern "C" */

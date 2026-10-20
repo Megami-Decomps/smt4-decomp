@@ -17,7 +17,7 @@ typedef struct {
 #define romwright_carry_4(left, right) ((unsigned char)((unsigned long long)(unsigned int)(left) + (unsigned long long)(unsigned int)(right) > 0xffffffffULL))
 #endif
 /* Supplied declaration required: FUN_0028cb40. */
-extern unsigned int FUN_002a8764(int);
+extern unsigned int gameGetSlotTable(int);
 
 
 unsigned int FUN_001f4f14(int param_1,unsigned int *param_2,int *param_3)
@@ -40,7 +40,7 @@ unsigned int FUN_001f4f14(int param_1,unsigned int *param_2,int *param_3)
   param_2[1] = 0;
   *param_3 = 0;
   param_3[1] = 0;
-  temp_v1 = FUN_002a8764(temp_v0);
+  temp_v1 = gameGetSlotTable(temp_v0);
   temp_v0 = *(int *)(param_1 + 0x3064);
   if (temp_v0 == 9999) {
     if (*(char *)(param_1 + 0x345c) != '\0') {

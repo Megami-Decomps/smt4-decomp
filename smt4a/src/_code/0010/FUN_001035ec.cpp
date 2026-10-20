@@ -5,10 +5,10 @@
 extern "C" {
 
 int asdOperatorNewB(int);
-int FUN_002e3328(unsigned int);
+int asdOperatorDelete(unsigned int);
 
 /* Supplied declaration required: asdOperatorNewB. */
-/* Supplied declaration required: FUN_002e3328. */
+/* Supplied declaration required: asdOperatorDelete. */
 
 
 unsigned int FUN_001035ec(void)
@@ -19,7 +19,7 @@ unsigned int FUN_001035ec(void)
   
   temp_v0 = 1;
   asdOperatorNewB(1);
-  FUN_002e3328(temp_v0);
+  asdOperatorDelete(temp_v0);
   return 0xffffffff;
 }
 

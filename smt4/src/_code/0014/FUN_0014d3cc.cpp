@@ -2,12 +2,12 @@
 
 extern "C" {
 
-u8 FUN_0014d3d4(SoundArchiveRef *ref, u32 unused, u32 *out);
+u8 nw_snd_internal_SoundArchiveFileReader_ReadBankInfo(SoundArchiveRef *ref, u32 unused, u32 *out);
 
-/* Passes the wrapper's ref on to FUN_0014d3d4, the function that follows it. */
+/* Passes the wrapper's ref on to nw_snd_internal_SoundArchiveFileReader_ReadBankInfo, the function that follows it. */
 u8 FUN_0014d3cc(SoundArchiveWrapper *wrapper, u32 unused, u32 *out)
 {
-    return FUN_0014d3d4(wrapper->ref, unused, out);
+    return nw_snd_internal_SoundArchiveFileReader_ReadBankInfo(wrapper->ref, unused, out);
 }
 
 } /* extern "C" */

@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_0027e974(void);
-int FUN_002b2368(void);
+int asdMemFreeNonNull(void);
 int FUN_002c5700(void);
 
 /* Supplied declaration required: FUN_0027e974. */
-/* Supplied declaration required: FUN_002b2368. */
+/* Supplied declaration required: asdMemFreeNonNull. */
 /* Supplied declaration required: FUN_002c5700. */
 
 
@@ -25,7 +25,7 @@ void FUN_0020ece8(int *param_1)
     FUN_002c5700();
     if (*(int *)(temp_v0 + 0x1c) != 0) {
       FUN_0027e974();
-      FUN_002b2368();
+      asdMemFreeNonNull();
       *(unsigned int *)(temp_v0 + 0x1c) = 0;
     }
   }

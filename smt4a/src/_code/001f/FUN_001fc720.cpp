@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0018408c(...);
-int FUN_0019cac4(void);
+int dataTable00FindById(void);
 int FUN_0025c848(...);
 int FUN_00288b20(...);
 
@@ -18,7 +18,7 @@ int FUN_00180310(...);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
 int FUN_00185e84(...);
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 int FUN_0022fb78(int, int);
 int FUN_002c7e24(void);
 int unitRecordBuild(int, unsigned char [300]);
@@ -59,7 +59,7 @@ extern unsigned char LAB_001fd7cc; /* 0x1fd7cc */
 extern unsigned char LAB_001fdcbc; /* 0x1fdcbc */
 extern unsigned char LAB_001fdccc; /* 0x1fdccc */
 extern unsigned char LAB_001fddb4; /* 0x1fddb4 */
-extern int DAT_00588fe8; /* 0x588fe8 */
+extern int g_statusDown; /* 0x588fe8 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -67,7 +67,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_0014bd84. */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164b5c. */
-extern int FUN_001654d8(int);
+extern int vec2GetXInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00180310. */
@@ -75,9 +75,9 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_0018408c. */
 /* Supplied declaration required: FUN_00185e84. */
-/* Supplied declaration required: FUN_0019cac4. */
+/* Supplied declaration required: dataTable00FindById. */
 extern unsigned char *slotRecordFindById(void);
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: FUN_0022fb78. */
 /* Supplied declaration required: FUN_0025c848. */
 extern int FUN_0026264c(unsigned short);
@@ -142,8 +142,8 @@ void FUN_001fc720(int param_1,int param_2)
   int temp_v28;
   int temp_v29;
   
-  temp_v2 = DAT_00588fe8;
-  temp_v23 = DAT_00588fe8 + 0x5ec;
+  temp_v2 = g_statusDown;
+  temp_v23 = g_statusDown + 0x5ec;
   temp_v21 = FUN_002a4894();
   temp_v27 = 0;
   temp_v24 = 0;
@@ -225,7 +225,7 @@ void FUN_001fc720(int param_1,int param_2)
         if (*(int *)(temp_v2 + 0x524) >= 9) {
           temp_v8 = FUN_00348ed0(temp_v23);
           if (temp_v8 == temp_v11 + 1) {
-            temp_v17 = FUN_001654d8(temp_v2 + 0x2e4);
+            temp_v17 = vec2GetXInt(temp_v2 + 0x2e4);
           }
           goto LAB_001fc9d0;
         }
@@ -236,7 +236,7 @@ LAB_001fc9d0:
           if (*(int *)(temp_v2 + 0x654) == temp_v11) {
             temp_v17 = *(int *)(temp_v2 + 0x524);
             if (temp_v17 >= 9) {
-              temp_v17 = FUN_001654d8(temp_v2 + 0x2e4);
+              temp_v17 = vec2GetXInt(temp_v2 + 0x2e4);
               goto LAB_001fca00;
             }
             temp_v17 = temp_v17 * -0x28;
@@ -255,7 +255,7 @@ LAB_001fca00:
               temp_v17 = temp_v17 * -0x28;
             }
             else {
-              temp_v17 = FUN_001654d8(temp_v2 + 0x2e4);
+              temp_v17 = vec2GetXInt(temp_v2 + 0x2e4);
             }
           }
         }
@@ -334,7 +334,7 @@ LAB_001fca00:
             temp_v27 = FUN_004bcbb4(temp_v19);
           }
           else {
-            FUN_001aba54();
+            dataTable04FindById();
             if (temp_v5 != 0) {
               temp_v27 = (unsigned int)*(unsigned char *)(temp_v5 + 0x22);
             }
@@ -652,7 +652,7 @@ LAB_001fd57c:
     temp_v12 = FUN_001834a4(0x12,0x544);
     puVar8 = (unsigned short *)FUN_002c7e24();
     temp_v5 = (unsigned int)*puVar8;
-    FUN_0019cac4();
+    dataTable00FindById();
     if (((temp_v5 == 0) || ((*(unsigned short *)(temp_v5 + 0x16) & 1) != 0)) && (temp_v22 != 0x10)) {
       FUN_00100388(temp_v20,&LAB_001fd7cc);
     }

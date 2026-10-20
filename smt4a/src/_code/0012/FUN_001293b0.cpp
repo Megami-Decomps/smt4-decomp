@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002e6e14(unsigned int);
+int asdOperatorDeleteArray(unsigned int);
 int FUN_002eb624(unsigned int);
 
 extern unsigned char DAT_005949d8; /* 0x5949d8 */
 
-/* Supplied declaration required: FUN_002e6e14. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
 /* Supplied declaration required: FUN_002eb624. */
 
 
@@ -25,7 +25,7 @@ void FUN_001293b0(int param_1)
     for (temp_v0 = 0; temp_v0 < *(unsigned int *)(puVar2 + 0x28); temp_v0 = temp_v0 + 1) {
       FUN_002eb624(*(int *)(param_1 + 8) + temp_v0 * 300 + 4);
     }
-    FUN_002e6e14(*(unsigned int *)(param_1 + 8));
+    asdOperatorDeleteArray(*(unsigned int *)(param_1 + 8));
     *(unsigned int *)(param_1 + 8) = 0;
   }
   return;

@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_00212120(int);
-int FUN_0027e774(int, int);
+int dialogOpen(int, int);
 int FUN_0027e7b4(unsigned int, unsigned int);
 int FUN_00295660(unsigned int, unsigned char [100]);
 int FUN_002bd06c(unsigned int);
-int FUN_002bf694(unsigned char [100], unsigned int);
+int libc_strcpy(unsigned char [100], unsigned int);
 int jobGetWork(void);
 int asdMemFree(void);
 int memClear(unsigned char [100], int);
@@ -17,14 +17,14 @@ int memClear(unsigned char [100], int);
 extern unsigned int *DAT_00435d78; /* 0x435d78 */
 
 /* Supplied declaration required: FUN_00212120. */
-/* Supplied declaration required: FUN_0027e774. */
+/* Supplied declaration required: dialogOpen. */
 /* Supplied declaration required: FUN_0027e7b4. */
 /* Supplied declaration required: FUN_00295660. */
-extern int FUN_00295bd0(void);
+extern int dialogIsActive(void);
 extern int FUN_002b6b04(void);
 /* Supplied declaration required: FUN_002bd06c. */
 extern unsigned int FUN_002bd1fc(void);
-/* Supplied declaration required: FUN_002bf694. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: jobGetWork. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: memClear. */
@@ -80,7 +80,7 @@ unsigned int FUN_001b5498(void)
   }
   else {
     temp_v3 = FUN_002b6b04();
-    if ((temp_v3 == 0) && (temp_v3 = FUN_00295bd0(), temp_v3 == 0)) {
+    if ((temp_v3 == 0) && (temp_v3 = dialogIsActive(), temp_v3 == 0)) {
       memClear(temp_v4,0x60);
       temp_v0 = *psVar2;
       if (temp_v0 != 0) {
@@ -89,17 +89,17 @@ unsigned int FUN_001b5498(void)
              (-1 < *(int *)(psVar2 + 0x14e))) {
             if ((*(unsigned int *)(psVar2 + 8) & 2) != 0) {
               temp_v1 = FUN_002bd1fc();
-              FUN_002bf694(temp_v4,temp_v1);
+              libc_strcpy(temp_v4,temp_v1);
             }
             else {
               temp_v2 = (unsigned int)(unsigned short)psVar2[0x6f];
               FUN_002bd06c(temp_v2);
-              FUN_002bf694(temp_v4,temp_v2);
+              libc_strcpy(temp_v4,temp_v2);
             }
             FUN_00295660(*(unsigned int *)(psVar2 + 0x14e),temp_v4);
           }
           FUN_0027e7b4(*(unsigned int *)(psVar2 + 6),*(unsigned int *)(psVar2 + 4) & 0xffff);
-          FUN_0027e774((int)(char)psVar2[0x14c],1);
+          dialogOpen((int)(char)psVar2[0x14c],1);
           psVar2[0x151] = 1;
           psVar2[1] = 1;
           psVar2[0x151] = psVar2[0x151] - 1;
@@ -111,12 +111,12 @@ unsigned int FUN_001b5498(void)
              (-1 < *(int *)(psVar2 + 0x14e))) {
             if ((*(unsigned int *)(psVar2 + 8) & 2) != 0) {
               temp_v1 = FUN_002bd1fc();
-              FUN_002bf694(temp_v4,temp_v1);
+              libc_strcpy(temp_v4,temp_v1);
             }
             else {
               temp_v2 = (unsigned int)(unsigned short)psVar2[0x6f];
               FUN_002bd06c(temp_v2);
-              FUN_002bf694(temp_v4,temp_v2);
+              libc_strcpy(temp_v4,temp_v2);
             }
             FUN_00295660(*(unsigned int *)(psVar2 + 0x14e),temp_v4);
           }
@@ -125,7 +125,7 @@ unsigned int FUN_001b5498(void)
       }
       else {
         FUN_0027e7b4(*(unsigned int *)(psVar2 + 6),*(unsigned int *)(psVar2 + 4) & 0xffff);
-        FUN_0027e774((int)(char)psVar2[0x14c],1);
+        dialogOpen((int)(char)psVar2[0x14c],1);
       }
       psVar2[0x151] = 1;
       psVar2[1] = 1;

@@ -13,11 +13,11 @@ typedef struct SessionHolder {
     /* 0x04 */ Session *session;
 } SessionHolder;
 
-extern SessionHolder DAT_00588fd0;
+extern SessionHolder g_gameGlobals;
 
 s32 FUN_002857b8(void)
 {
-    Session *session = DAT_00588fd0.session;
+    Session *session = g_gameGlobals.session;
 
     s32 value = 0;
 

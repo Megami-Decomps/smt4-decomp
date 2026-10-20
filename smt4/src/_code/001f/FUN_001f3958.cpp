@@ -30,7 +30,7 @@ typedef struct {
 extern unsigned char LAB_001f3d90; /* 0x1f3d90 */
 extern unsigned char LAB_001f40c0; /* 0x1f40c0 */
 extern unsigned char LAB_001f40f8; /* 0x1f40f8 */
-extern int DAT_0043da90; /* 0x43da90 */
+extern int g_camp; /* 0x43da90 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int FUN_0026aa78(void);
@@ -41,7 +41,7 @@ extern int FUN_0026aa78(void);
 extern int FUN_00298848(unsigned int, unsigned int);
 extern int FUN_0029efa8(int);
 extern int FUN_0029efc0(int);
-extern int *FUN_002a8764(void);
+extern int *gameGetSlotTable(void);
 /* Supplied declaration required: FUN_002b6c34. */
 extern int FUN_002bce00(unsigned int);
 /* Supplied declaration required: FUN_002bdf94. */
@@ -73,8 +73,8 @@ void FUN_001f3958(int param_1,int param_2,int param_3)
   int iStack_2c;
   int temp_v11;
   
-  temp_v5 = DAT_0043da90;
-  temp_v0 = DAT_0043da90 + 0x240;
+  temp_v5 = g_camp;
+  temp_v0 = g_camp + 0x240;
   iStack_30 = param_1;
   iStack_2c = param_2;
   temp_v11 = param_3;
@@ -106,7 +106,7 @@ void FUN_001f3958(int param_1,int param_2,int param_3)
           temp_v4 = FUN_00298848(temp_v10,0xffffffff);
           if (temp_v4 != 0) {
             temp_v4 = FUN_0028d1f4(temp_v10);
-            piVar7 = (int *)FUN_002a8764();
+            piVar7 = (int *)gameGetSlotTable();
             if (*piVar7 < temp_v4) {
               temp_v8 = 0x5a5a5aff;
             }
@@ -184,7 +184,7 @@ void FUN_001f3958(int param_1,int param_2,int param_3)
     temp_v1 = FUN_00298848(temp_v7,0xffffffff);
     if (temp_v1 != 0) {
       temp_v1 = FUN_0028d1f4(temp_v7);
-      piVar7 = (int *)FUN_002a8764();
+      piVar7 = (int *)gameGetSlotTable();
       if (*piVar7 < temp_v1) {
         temp_v8 = 0x5a5a5aff;
       }

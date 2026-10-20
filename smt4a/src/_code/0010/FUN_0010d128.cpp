@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0010d002(int, int *, unsigned int, unsigned int, int);
+int valuePairSet(int, int *, unsigned int, unsigned int, int);
 
-/* Supplied declaration required: FUN_0010d002. */
+/* Supplied declaration required: valuePairSet. */
 
 
 void FUN_0010d128(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -18,7 +18,7 @@ void FUN_0010d128(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   
   uStack_c = param_2;
   uStack_8 = param_3;
-  FUN_0010d002(param_1 + 4,&uStack_c,param_3,param_4,param_1);
+  valuePairSet(param_1 + 4,&uStack_c,param_3,param_4,param_1);
   return;
 }
 

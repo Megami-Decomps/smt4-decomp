@@ -19,7 +19,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00119f24. */
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-extern unsigned int FUN_002ea714(void);
+extern unsigned int onlineGetActiveLock(void);
 /* Supplied declaration required: FUN_002ea734. */
 extern int wordRefsDiffer_002ea764(int *, int *);
 
@@ -36,7 +36,7 @@ unsigned int FUN_001047fc(int *param_1)
   int temp_v5;
   
   FUN_00119f24();
-  temp_v1 = FUN_002ea714();
+  temp_v1 = onlineGetActiveLock();
   FUN_002e6e34(temp_v4,temp_v1);
   (**(romwright_code **)(*param_1 + 0x54))(param_1);
   temp_v5 = *(int *)(param_1[0x19] + 8);

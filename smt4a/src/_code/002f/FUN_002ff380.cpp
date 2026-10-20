@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_002eb404(void);
+extern int rangeIsEmpty2(void);
 extern int FUN_002eb414(int, int, int);
 
 
@@ -17,7 +17,7 @@ void FUN_002ff380(int *param_1)
   
   temp_v2 = param_1[1];
   temp_v1 = *param_1;
-  temp_v0 = FUN_002eb404();
+  temp_v0 = rangeIsEmpty2();
   if (temp_v0 == 0) {
     temp_v0 = FUN_002eb414(temp_v2,param_1[1],temp_v1);
     for (; temp_v0 != param_1[1]; temp_v0 = temp_v0 + 4) {

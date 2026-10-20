@@ -11,8 +11,8 @@ int FUN_00295660(...);
 int FUN_00296ae8(...);
 int FUN_0029ede8(...);
 int FUN_002ae164(void);
-int FUN_002b45e8(void);
-int FUN_002b4670(void);
+int dataTable08Sub2GetRecord(void);
+int dataTable08Sub1GetRecord(void);
 int FUN_002be624(...);
 int memClear(...);
 
@@ -58,13 +58,13 @@ extern int FUN_00295cec(void);
 /* Supplied declaration required: FUN_0029ede8. */
 /* Supplied declaration required: FUN_002ae164. */
 extern unsigned int FUN_002ae3c4(int);
-/* Supplied declaration required: FUN_002b45e8. */
-/* Supplied declaration required: FUN_002b4670. */
+/* Supplied declaration required: dataTable08Sub2GetRecord. */
+/* Supplied declaration required: dataTable08Sub1GetRecord. */
 extern unsigned int FUN_002b8dc0(int);
 extern unsigned int FUN_002bce00(void);
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: memClear. */
-extern unsigned int FUN_00394fd0(void);
+extern unsigned int dataTableValue0f(void);
 
 
 void FUN_0029212c(int param_1)
@@ -108,7 +108,7 @@ void FUN_0029212c(int param_1)
   *(unsigned char *)(DAT_0043da2c + 0x55c) = 1;
   *(unsigned char *)(temp_v5 + 0x4cb) = 1;
   temp_v19 = param_1;
-  temp_v17 = FUN_00394fd0();
+  temp_v17 = dataTableValue0f();
   temp_v5 = temp_v19;
   temp_v4 = FUN_002ae3c4(temp_v19);
   switch(temp_v4) {
@@ -120,7 +120,7 @@ void FUN_0029212c(int param_1)
     return;
   case 1:
     temp_v8 = temp_v5;
-    FUN_002b4670();
+    dataTable08Sub1GetRecord();
     if (*(short *)(temp_v8 + 0x76) != 0) {
       temp_v5 = FUN_00295cec();
       FUN_0029ede8(0x24,temp_v5,0xffffffff,0);
@@ -154,7 +154,7 @@ void FUN_0029212c(int param_1)
   case 2:
   case 3:
   case 8:
-    FUN_002b45e8();
+    dataTable08Sub2GetRecord();
     FUN_0029ede8(0x24,*(unsigned int *)(temp_v5 + 0x54) & 0x3ff,0xffffffff,0);
     temp_v0 = *(unsigned char *)(temp_v5 + 0x58);
     if ((temp_v0 & 0xf) == temp_v0 >> 4) {
@@ -197,7 +197,7 @@ void FUN_0029212c(int param_1)
   case 5:
   case 6:
   case 7:
-    FUN_002b45e8();
+    dataTable08Sub2GetRecord();
     temp_v8 = 0;
     do {
       temp_v10 = (int)*(char *)(temp_v5 + temp_v8 + 0x61);

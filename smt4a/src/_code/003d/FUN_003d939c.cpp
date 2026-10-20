@@ -6,8 +6,8 @@ extern "C" {
 
 int CONCAT44(unsigned int, double);
 int FUN_001634b4(...);
-int FUN_001654d8(...);
-int FUN_001654e4(...);
+int vec2GetXInt(...);
+int vec2GetYInt(...);
 int efctSetSpeed(void);
 int FUN_001835b4(...);
 int FUN_00358e94(...);
@@ -29,8 +29,8 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Supplied declaration required: FUN_001634b4. */
-/* Supplied declaration required: FUN_001654d8. */
-/* Supplied declaration required: FUN_001654e4. */
+/* Supplied declaration required: vec2GetXInt. */
+/* Supplied declaration required: vec2GetYInt. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001834a4(unsigned int, int);
@@ -129,9 +129,9 @@ void FUN_003d939c(int param_1)
   case 4:
     FUN_001634b4(param_1 + 0x20);
     if (*(char *)(param_1 + 0x2f5) != '\0') {
-      temp_v5 = FUN_001654d8(param_1 + 0x20);
+      temp_v5 = vec2GetXInt(param_1 + 0x20);
       temp_v14 = CONCAT44(temp_v5,in_s0);
-      temp_v8 = FUN_001654e4(param_1 + 0x20);
+      temp_v8 = vec2GetYInt(param_1 + 0x20);
       temp_v6 = 0;
       temp_v15 = 0;
       do {
@@ -223,9 +223,9 @@ void FUN_003d939c(int param_1)
     FUN_001634b4(param_1 + 0x20);
     if (*(char *)(param_1 + 0x2f5) == '\0') break;
     temp_v11 = *(unsigned int *)(param_1 + 0xb0);
-    temp_v5 = FUN_001654d8(param_1 + 0x20);
+    temp_v5 = vec2GetXInt(param_1 + 0x20);
     temp_v14 = CONCAT44(temp_v5,in_s0);
-    temp_v5 = FUN_001654e4(param_1 + 0x20);
+    temp_v5 = vec2GetYInt(param_1 + 0x20);
     efctSetSpeed();
     temp_v8 = g_renderCtx;
     temp_v6 = packNibblesAndByte(6,1,0);
@@ -254,8 +254,8 @@ void FUN_003d939c(int param_1)
   case 0x12:
     FUN_001634b4(param_1 + 0x20);
     if (*(char *)(param_1 + 0x2f5) == '\0') break;
-    temp_v1 = FUN_001654d8(param_1 + 0x20);
-    temp_v2 = FUN_001654e4(param_1 + 0x20);
+    temp_v1 = vec2GetXInt(param_1 + 0x20);
+    temp_v2 = vec2GetYInt(param_1 + 0x20);
     FUN_003872b8(param_1 + 0xac,0x10,*(int *)(param_1 + 0xb0) - 1);
     FUN_00358e94(param_1 + 0xac,(int)temp_v1,(int)temp_v2);
     temp_v8 = g_renderCtx;
@@ -351,9 +351,9 @@ void FUN_003d939c(int param_1)
     if (*(char *)(param_1 + 0x2f5) == '\0') break;
     FUN_001634b4(param_1 + 0xac);
     temp_v11 = *(unsigned int *)(param_1 + 0x13c);
-    temp_v5 = FUN_001654d8(param_1 + 0x20);
+    temp_v5 = vec2GetXInt(param_1 + 0x20);
     temp_v14 = CONCAT44(temp_v5,in_s0);
-    temp_v5 = FUN_001654e4(param_1 + 0x20);
+    temp_v5 = vec2GetYInt(param_1 + 0x20);
     efctSetSpeed();
     temp_v8 = g_renderCtx;
     temp_v6 = packNibblesAndByte(6,1,0);
@@ -383,8 +383,8 @@ void FUN_003d939c(int param_1)
     if (*(char *)(param_1 + 0x2f5) == '\0') break;
 LAB_003d9da8:
     temp_v10 = *(unsigned int *)(param_1 + 0xb0);
-    temp_v5 = FUN_001654d8(param_1 + 0x20);
-    temp_v11 = FUN_001654e4(param_1 + 0x20);
+    temp_v5 = vec2GetXInt(param_1 + 0x20);
+    temp_v11 = vec2GetYInt(param_1 + 0x20);
     efctSetSpeed();
     temp_v12 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_001835b4(2,0x10,temp_v10,(int)(temp_v12 + in_s0),temp_v11,0xc9);
@@ -393,9 +393,9 @@ LAB_003d9da8:
   case 0x13:
     if (*(char *)(param_1 + 0x2f5) != '\0') {
       temp_v11 = *(unsigned int *)(param_1 + 0xb0);
-      temp_v5 = FUN_001654d8(param_1 + 0x20);
+      temp_v5 = vec2GetXInt(param_1 + 0x20);
       temp_v14 = CONCAT44(temp_v5,in_s0);
-      temp_v5 = FUN_001654e4(param_1 + 0x20);
+      temp_v5 = vec2GetYInt(param_1 + 0x20);
       temp_v8 = g_renderCtx;
       temp_v6 = packNibblesAndByte(6,1,0);
       piVar11 = (int *)(temp_v8 + 0x12b8);

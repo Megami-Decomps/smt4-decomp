@@ -11,10 +11,10 @@ int FUN_001527d8(...);
 int asdMemoryAllocTracked(int, int, int, int, int);
 int sysPlaySe(...);
 int FUN_00182054(void);
-int FUN_001ab854(...);
+int gameGetSlotRecord(...);
 int FUN_002804b0(...);
 int sysMemClear(void);
-int FUN_002e6dd0(...);
+int rt_aeabi_memclr(...);
 int FUN_0039a3b4(...);
 int FUN_003a4980(void);
 int campCecDrawPageCreate(void);
@@ -51,9 +51,9 @@ extern int FUN_00387d38(...); /* 0x387d38 */
 extern int FUN_003aef48(...); /* 0x3aef48 */
 extern int stepObjStart(...); /* 0x3bfc90 */
 extern int stepObjBStart(...); /* 0x3cc670 */
-extern unsigned int *DAT_0057f118; /* 0x57f118 */
+extern unsigned int *g_campCecEdit; /* 0x57f118 */
 
-extern int FUN_0014af84(void);
+extern int gameDataBlocksGetSaveData(void);
 extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: FUN_00151408. */
@@ -61,15 +61,15 @@ extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: FUN_001527d8. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: sysPlaySe. */
-extern unsigned int FUN_001801a4(void);
+extern unsigned int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00182054. */
-/* Supplied declaration required: FUN_001ab854. */
-extern int FUN_001ab888(void);
+/* Supplied declaration required: gameGetSlotRecord. */
+extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_002804b0. */
 extern unsigned int FUN_002bf520(void);
 extern unsigned int FUN_002e264c(unsigned int);
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_002e6dd0. */
+/* Supplied declaration required: rt_aeabi_memclr. */
 extern unsigned int overlayGetStatusScene(void);
 /* Supplied declaration required: FUN_0039a3b4. */
 /* Supplied declaration required: FUN_003a4980. */
@@ -93,12 +93,12 @@ void FUN_0034280c(unsigned char param_1)
   int temp_v5;
   int temp_v6;
   
-  if (DAT_0057f118 == (unsigned int *)0x0) {
+  if (g_campCecEdit == (unsigned int *)0x0) {
     puVar3 = (unsigned int *)0x100;
     asdMemoryAllocTracked(0x100,0x100,0,0x198,1);
-    DAT_0057f118 = puVar3;
+    g_campCecEdit = puVar3;
   }
-  puVar3 = DAT_0057f118;
+  puVar3 = g_campCecEdit;
   sysMemClear();
   puVar4 = &LAB_00342c14;
   asdProcessCreateSimple(&LAB_00342c14,3,0,0,&LAB_0025d4a0,0,0);
@@ -133,7 +133,7 @@ void FUN_0034280c(unsigned char param_1)
   *(unsigned char *)(puVar3 + 0x55) = 1;
   puVar3[99] = 0;
   *(unsigned char *)((int)puVar3 + 0x189) = 0;
-  temp_v2 = FUN_0014af84();
+  temp_v2 = gameDataBlocksGetSaveData();
   temp_v1 = *(unsigned short *)(temp_v2 + 0x27e0c);
   *(unsigned short *)(puVar3 + 0x42) = temp_v1;
   *(unsigned short *)((int)puVar3 + 0x10a) = temp_v1;
@@ -176,9 +176,9 @@ void FUN_0034280c(unsigned char param_1)
   puVar3[1] = temp_v3;
   temp_v3 = FUN_002bf520();
   puVar3[2] = temp_v3;
-  temp_v3 = FUN_001801a4();
+  temp_v3 = gameGetPlayerData();
   rt_memcpy_w(puVar3 + 0x5b,temp_v3,0xe);
-  temp_v3 = FUN_001801a4();
+  temp_v3 = gameGetPlayerData();
   rt_memcpy_w(temp_v3,puVar3[2],0xe);
   puVar7 = (unsigned int *)puVar3[2];
   *(unsigned int *)((int)puVar3 + 0x17a) = *puVar7;
@@ -205,21 +205,21 @@ void FUN_0034280c(unsigned char param_1)
   sysPlaySe(0xb3);
   temp_v2 = 0;
   do {
-    FUN_002e6dd0(puVar3 + temp_v2 * 5 + 4,0x14);
+    rt_aeabi_memclr(puVar3 + temp_v2 * 5 + 4,0x14);
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 2);
-  FUN_002e6dd0(puVar3 + 0xe,0x14);
+  rt_aeabi_memclr(puVar3 + 0xe,0x14);
   puVar3[0xf] = 0x1e;
   *(unsigned char *)(puVar3 + 0x65) = 0;
-  temp_v2 = FUN_001ab888();
+  temp_v2 = gameGetSlotTable();
   temp_v6 = 0;
   puVar3[0x41] = 0;
   do {
     if (-1 < *(char *)(temp_v2 + temp_v6 + 0x1c88)) {
-      temp_v3 = FUN_001ab854();
+      temp_v3 = gameGetSlotRecord();
       temp_v5 = bitsAt60Test(temp_v3,10);
       if (temp_v5 == 0) {
-        temp_v3 = FUN_001ab854((int)*(char *)(temp_v2 + temp_v6 + 0x1c88));
+        temp_v3 = gameGetSlotRecord((int)*(char *)(temp_v2 + temp_v6 + 0x1c88));
         temp_v5 = bitsAt60Test(temp_v3,1);
         if (temp_v5 == 0) {
           puVar3[0x41] = puVar3[0x41] + 1;

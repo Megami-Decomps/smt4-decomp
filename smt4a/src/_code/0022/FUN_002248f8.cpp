@@ -7,13 +7,13 @@ extern "C" {
 int jobStop(...);
 int asdMemFree(void);
 int FUN_001a1ee0(void);
-int FUN_002e3328(...);
+int asdOperatorDelete(...);
 int FUN_00318c3c(...);
 
-int FUN_0014bef4(...);
+int randRange(...);
 int FUN_001641b4(...);
 int FUN_00184748(...);
-int FUN_00184c00(...);
+int uiSpriteSetImageKeyframe(...);
 int FUN_002b132c(...);
 int FUN_002f9418(void);
 int FUN_0031db84(...);
@@ -23,7 +23,7 @@ int FUN_00321500(...);
 int FUN_00333f6c(void);
 int FUN_003343f0(...);
 int FUN_00336aec(...);
-int FUN_0035b304(void);
+int campCommonBgRelease(void);
 int FUN_0037dab0(void);
 int FUN_0038b3f8(...);
 int FUN_003a7a88(...);
@@ -36,7 +36,7 @@ int VectorSignedToFloat(...);
 
 int btlGetMainState(void);
 int FUN_001517b4(void);
-int FUN_0019cac4(void);
+int dataTable00FindById(void);
 int FUN_00284ee4(...);
 int FUN_00291e14(void);
 int FUN_002c39dc(...);
@@ -50,7 +50,7 @@ int FUN_0039ebcc(void);
 int FUN_003b2178(...);
 
 int FUN_00163aa4(...);
-int FUN_001846d0(int, int);
+int uiSpriteSelectAnim(int, int);
 int menuStateStartConfirm(void);
 int FUN_0021d13c(int);
 int FUN_00280030(void);
@@ -81,11 +81,11 @@ typedef struct {
     unsigned int sp1B0; /* 0x1b0: local_1b0 */
 } void_stack;
 
-extern unsigned char DAT_0057a9b8; /* 0x57a9b8 */
+extern unsigned char g_btlUi; /* 0x57a9b8 */
 extern int DAT_0057a9bc; /* 0x57a9bc */
 extern int DAT_0057a9c0; /* 0x57a9c0 */
 extern int DAT_0057a9c4; /* 0x57a9c4 */
-extern int DAT_0057a9c8; /* 0x57a9c8 */
+extern int g_btlUiBlock; /* 0x57a9c8 */
 extern unsigned int DAT_0057a9f0; /* 0x57a9f0 */
 extern unsigned int DAT_0057a9f4; /* 0x57a9f4 */
 extern unsigned int DAT_0057a9f8; /* 0x57a9f8 */
@@ -97,23 +97,23 @@ extern unsigned int DAT_0057a9fc; /* 0x57a9fc */
 #endif
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: FUN_0014bef4. */
+/* Supplied declaration required: randRange. */
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: jobStop. */
 /* Supplied declaration required: FUN_00163aa4. */
 /* Supplied declaration required: FUN_001641b4. */
 extern int jobGetWork(void);
-extern int FUN_00164af0(unsigned int);
-extern int FUN_0018206c(unsigned int, int);
+extern int padButtonRepeat(unsigned int);
+extern int asdTMTexTableNodeIsLoaded(unsigned int, int);
 extern int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001846d0. */
+/* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: FUN_00184748. */
-/* Supplied declaration required: FUN_00184c00. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_0019cac4. */
+/* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: FUN_001a1ee0. */
-extern int FUN_001ab854(int);
-extern int FUN_001ab888(void);
+extern int gameGetSlotRecord(int);
+extern int gameGetSlotTable(void);
 /* Supplied declaration required: menuStateStartConfirm. */
 extern int flagSelectVariant(void);
 /* Supplied declaration required: FUN_0021d13c. */
@@ -132,7 +132,7 @@ extern int FUN_00284e94(void);
 /* Supplied declaration required: FUN_002cc36c. */
 /* Supplied declaration required: FUN_002ccde8. */
 /* Supplied declaration required: FUN_002cdd18. */
-/* Supplied declaration required: FUN_002e3328. */
+/* Supplied declaration required: asdOperatorDelete. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002f9418. */
 extern int FUN_002fc0a4(int);
@@ -156,7 +156,7 @@ extern unsigned int FUN_003493c4(void);
 extern int FUN_0034ed68(int);
 /* Supplied declaration required: FUN_0034efe0. */
 /* Supplied declaration required: owner2DCInitSub. */
-/* Supplied declaration required: FUN_0035b304. */
+/* Supplied declaration required: campCommonBgRelease. */
 /* Supplied declaration required: FUN_0035d0e4. */
 extern int menu32State387CIs2(void);
 extern int FUN_0035fa18(int, int, int);
@@ -220,14 +220,14 @@ unsigned int FUN_002248f8(void)
   int temp_v21;
   
   temp_v4 = jobGetWork();
-  temp_v0 = DAT_0057a9c8;
-  if (DAT_0057a9c8 == 0) {
+  temp_v0 = g_btlUiBlock;
+  if (g_btlUiBlock == 0) {
     return 0;
   }
   temp_v9 = 0;
   temp_v10 = temp_v9;
   do {
-    temp_v5 = FUN_0018206c(0xc,temp_v9);
+    temp_v5 = asdTMTexTableNodeIsLoaded(0xc,temp_v9);
     if (temp_v5 != 0) {
       temp_v10 = temp_v10 + 1;
     }
@@ -235,7 +235,7 @@ unsigned int FUN_002248f8(void)
   } while (temp_v9 < 6);
   temp_v9 = 0;
   do {
-    temp_v5 = FUN_0018206c(0xd,temp_v9);
+    temp_v5 = asdTMTexTableNodeIsLoaded(0xd,temp_v9);
     if (temp_v5 != 0) {
       temp_v10 = temp_v10 + 1;
     }
@@ -287,7 +287,7 @@ unsigned int FUN_002248f8(void)
             if (temp_v1 >= 2) {
               *(unsigned short *)(temp_v9 + 0x11a2e) = 0;
               *(unsigned short *)(temp_v9 + 0x11a2c) = 4;
-              FUN_001846d0(temp_v9 + 0x11914,0xc);
+              uiSpriteSelectAnim(temp_v9 + 0x11914,0xc);
             }
           }
           else {
@@ -398,8 +398,8 @@ unsigned int FUN_002248f8(void)
       FUN_003f9970(*(unsigned int *)(temp_v0 + 0x7488),&temp_v16,temp_v10);
       FUN_003f89c0(*(unsigned int *)(temp_v0 + 0x7488));
       *(unsigned int *)(temp_v0 + 0x74a0) = 0xd;
-      temp_v10 = DAT_0057a9c8;
-      temp_v9 = menu32ModeIsNot5(DAT_0057a9c8 + 8);
+      temp_v10 = g_btlUiBlock;
+      temp_v9 = menu32ModeIsNot5(g_btlUiBlock + 8);
       if (temp_v9 != 0) {
         temp_v9 = temp_v10 + 0x24bc;
         FUN_00280030();
@@ -415,8 +415,8 @@ unsigned int FUN_002248f8(void)
         FUN_002c7e6c();
         FUN_002c85b0(4);
         *(unsigned int *)(temp_v0 + 0x74a0) = 0xe;
-        temp_v10 = DAT_0057a9c8;
-        temp_v9 = menu32ModeIsNot5(DAT_0057a9c8 + 8);
+        temp_v10 = g_btlUiBlock;
+        temp_v9 = menu32ModeIsNot5(g_btlUiBlock + 8);
         if (temp_v9 != 0) {
           temp_v9 = temp_v10 + 0x24bc;
           FUN_00280030();
@@ -431,8 +431,8 @@ unsigned int FUN_002248f8(void)
         if (temp_v9 != 0) {
           *(unsigned int *)(temp_v0 + 0x74a0) = 0xc;
           menu32EnterState27(temp_v10);
-          temp_v10 = DAT_0057a9c8;
-          temp_v9 = menu32ModeIsNot5(DAT_0057a9c8 + 8);
+          temp_v10 = g_btlUiBlock;
+          temp_v9 = menu32ModeIsNot5(g_btlUiBlock + 8);
           if (temp_v9 != 0) {
             temp_v9 = temp_v10 + 0x24bc;
             FUN_00280030();
@@ -449,7 +449,7 @@ unsigned int FUN_002248f8(void)
          (*(unsigned int *)(temp_v10 + 0x45a8) & DAT_0057a9f8) != 0) &&
        (temp_v10 = btlTalkBustUpIsUnk2F8(*(unsigned int *)(temp_v4 + 0x2364)), temp_v10 == 0)) {
       puVar8 = (unsigned short *)0x0;
-      FUN_0019cac4();
+      dataTable00FindById();
       temp_v8 = 0;
       do {
         if ((int)(short)puVar8[0x46] == *(int *)(temp_v4 + 0x2364)) break;
@@ -457,10 +457,10 @@ unsigned int FUN_002248f8(void)
         puVar8 = puVar8 + 0x54;
       } while ((int)temp_v8 < 0x4b1);
       if (temp_v8 >= 0x4b1) {
-        DAT_0057a9b8 = 1;
+        g_btlUi = 1;
       }
       else {
-        DAT_0057a9b8 = 0;
+        g_btlUi = 0;
         FUN_0035fc4c();
         FUN_00336de4(*puVar8,1);
         btlTalkBustUpSetUnk2F4(1);
@@ -494,7 +494,7 @@ unsigned int FUN_002248f8(void)
           else {
             FUN_003493dc(1);
             if (*(int *)(temp_v0 + 0x6154) != 0) {
-              temp_v10 = FUN_001ab888();
+              temp_v10 = gameGetSlotTable();
               temp_v4 = *(int *)(temp_v0 + 0x6154);
               temp_v10 = (int)*(char *)(temp_v4 + temp_v10 + 0x1c9f);
               temp_v7 = 3;
@@ -513,7 +513,7 @@ unsigned int FUN_002248f8(void)
             temp_v4 = -1;
           }
           else {
-            temp_v4 = FUN_001ab888();
+            temp_v4 = gameGetSlotTable();
             temp_v4 = (int)*(char *)(*(int *)(temp_v0 + 0x6154) + temp_v4 + 0x1c9f);
           }
           FUN_003493dc(1);
@@ -528,7 +528,7 @@ unsigned int FUN_002248f8(void)
           temp_v4 = -1;
         }
         else {
-          temp_v4 = FUN_001ab888();
+          temp_v4 = gameGetSlotTable();
           temp_v4 = (int)*(char *)(*(int *)(temp_v0 + 0x6154) + temp_v4 + 0x1c9f);
         }
         FUN_003493dc(1);
@@ -542,8 +542,8 @@ unsigned int FUN_002248f8(void)
   case 0xd:
     temp_v10 = 1;
     FUN_001517b4();
-    temp_v4 = DAT_0057a9c8;
-    if ((temp_v10 != 0) && (temp_v10 = menu32ModeIsNot6(DAT_0057a9c8 + 8), temp_v10 != 0)) {
+    temp_v4 = g_btlUiBlock;
+    if ((temp_v10 != 0) && (temp_v10 = menu32ModeIsNot6(g_btlUiBlock + 8), temp_v10 != 0)) {
       temp_v4 = temp_v4 + 0x24bc;
       FUN_0039ebcc();
       if (temp_v4 == 0) goto LAB_00225054;
@@ -557,8 +557,8 @@ LAB_00225054:
     FUN_003f89e8(*(unsigned int *)(temp_v0 + 0x7488));
     menu32PlayCursorSeAndSelect(temp_v0 + 0x28c4);
     *(unsigned int *)(temp_v0 + 0x74a0) = 0xb;
-    temp_v4 = DAT_0057a9c8;
-    temp_v10 = menu32ModeIsNot6(DAT_0057a9c8 + 8);
+    temp_v4 = g_btlUiBlock;
+    temp_v10 = menu32ModeIsNot6(g_btlUiBlock + 8);
     if (temp_v10 != 0) {
       temp_v10 = temp_v4 + 0x24bc;
       FUN_0039ebcc();
@@ -628,8 +628,8 @@ LAB_00225054:
         if (temp_v4 != 0) {
           FUN_00321338(temp_v0 + 0x28c4);
         }
-        temp_v4 = DAT_0057a9c8;
-        temp_v10 = menu32ModeIsNot6(DAT_0057a9c8 + 8);
+        temp_v4 = g_btlUiBlock;
+        temp_v10 = menu32ModeIsNot6(g_btlUiBlock + 8);
         if (temp_v10 != 0) {
           temp_v10 = temp_v4 + 0x24bc;
           FUN_0039ebcc();
@@ -642,12 +642,12 @@ LAB_00225054:
     }
     break;
   case 0x12:
-    temp_v4 = FUN_00164af0(0);
+    temp_v4 = padButtonRepeat(0);
     if (temp_v4 != 0) {
       temp_v14 = temp_v14 & 0xffffffff00000000;
       temp_v4 = 0;
       do {
-        temp_v10 = FUN_0014bef4(0xf);
+        temp_v10 = randRange(0xf);
         temp_v16 = 1;
         temp_v17 = 1;
         FUN_004a9588(temp_v0,temp_v10 + 0x14,0);
@@ -659,12 +659,12 @@ LAB_002255d4:
       if (DAT_0057a9bc < 1) break;
     }
     else {
-      temp_v4 = FUN_00164af0(10);
+      temp_v4 = padButtonRepeat(10);
       if (temp_v4 == 0) {
-        temp_v4 = FUN_00164af0(1);
+        temp_v4 = padButtonRepeat(1);
         if (temp_v4 != 0) {
           *(unsigned int *)(temp_v0 + 0x74a0) = 0xb;
-          FUN_00184c00(DAT_0057a9c8 + 0x7528,0xe,0);
+          uiSpriteSetImageKeyframe(g_btlUiBlock + 0x7528,0xe,0);
         }
         goto LAB_002255d4;
       }
@@ -680,16 +680,16 @@ LAB_002255d4:
     if (0 < DAT_0057a9bc) {
       do {
         if (DAT_0057a9c0 == temp_v8 * 8) {
-          temp_v2 = FUN_0014bef4(0x28);
-          temp_v3 = FUN_0014bef4(0x28);
+          temp_v2 = randRange(0x28);
+          temp_v3 = randRange(0x28);
           temp_v4 = DAT_0057a9c4;
           temp_v20 = 1;
           temp_v18 = 10;
-          temp_v19 = DAT_0057a9c8;
+          temp_v19 = g_btlUiBlock;
           temp_v11 = (unsigned int)((temp_v8 & 1) == 0);
           temp_v17 = 1;
           temp_v16 = temp_v11;
-          FUN_00336aec(DAT_0057a9c8 + 0x28c4,10,DAT_0057a9c4,0);
+          FUN_00336aec(g_btlUiBlock + 0x28c4,10,DAT_0057a9c4,0);
           temp_v7 = 0;
           if (temp_v4 == 0) {
             temp_v7 = 0x3fa;
@@ -715,7 +715,7 @@ LAB_002255d4:
           VectorSignedToFloat(*(short *)(temp_v4 + 8) + temp_v21,(unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v20 = temp_v10;
           FUN_004a9588(temp_v19,temp_v18,0,temp_v11);
-          temp_v10 = DAT_0057a9c8;
+          temp_v10 = g_btlUiBlock;
           temp_v4 = DAT_0057a9c4;
           temp_v18 = 2;
           temp_v7 = 0;
@@ -772,7 +772,7 @@ LAB_002255d4:
           if (temp_v8 == DAT_0057a9bc - 1U) {
             DAT_0057a9bc = 0;
           }
-          temp_v4 = FUN_001ab854(DAT_0057a9c4 - 1);
+          temp_v4 = gameGetSlotRecord(DAT_0057a9c4 - 1);
           if (temp_v11 != 0) {
             temp_v2 = *(short *)(temp_v4 + 0x2c) - 10;
             *(short *)(temp_v4 + 0x2c) = temp_v2;
@@ -831,7 +831,7 @@ LAB_002255d4:
         *(unsigned int *)(temp_v0 + 0x12fe0) = 0xffffffff;
         temp_v7 = 0x120;
         *(unsigned int *)(temp_v0 + 0x12ffc) = 1;
-        temp_v4 = FUN_0014bef4(2);
+        temp_v4 = randRange(2);
         temp_v10 = flagSelectVariant();
         if ((temp_v10 != 1) && (temp_v10 == 2)) {
           if (temp_v4 == 0) {
@@ -921,14 +921,14 @@ LAB_002255d4:
     temp_v10 = FUN_003b2178(temp_v0 + 0x28c4);
     if (temp_v10 != 0) {
       *(unsigned int *)(temp_v0 + 0x74a0) = 0x15;
-      FUN_0035b304();
-      temp_v10 = DAT_0057a9c8;
-      FUN_00318c3c(DAT_0057a9c8 + 0x28c4);
-      FUN_002e3328(*(unsigned int *)(temp_v10 + 0x7488));
+      campCommonBgRelease();
+      temp_v10 = g_btlUiBlock;
+      FUN_00318c3c(g_btlUiBlock + 0x28c4);
+      asdOperatorDelete(*(unsigned int *)(temp_v10 + 0x7488));
       *(unsigned int *)(temp_v10 + 0x7488) = 0;
-      if (DAT_0057a9c8 != 0) {
+      if (g_btlUiBlock != 0) {
         asdMemFree();
-        DAT_0057a9c8 = 0;
+        g_btlUiBlock = 0;
       }
       jobStop(*(unsigned int *)(temp_v4 + 0x78),0);
     }

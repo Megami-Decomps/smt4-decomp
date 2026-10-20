@@ -25,8 +25,8 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00157558. */
 /* Supplied declaration required: FUN_00162790. */
-extern int FUN_001654d8(int);
-extern int FUN_001654e4(int);
+extern int vec2GetXInt(int);
+extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00168594. */
 extern int FUN_001692ac(unsigned int, unsigned int);
@@ -69,8 +69,8 @@ unsigned int FUN_003581bc(void)
     efctSetSpeed();
     FUN_00183bb0();
     if (*(int *)(temp_v2 + 0x48) == 0xb) {
-      temp_v1 = FUN_001654d8(temp_v2 + 0x148);
-      temp_v0 = FUN_001654e4(temp_v2 + 0x148);
+      temp_v1 = vec2GetXInt(temp_v2 + 0x148);
+      temp_v0 = vec2GetYInt(temp_v2 + 0x148);
       temp_v2 = g_mapDepart;
       temp_v3 = FUN_001834a4(0x1d,0xca);
       FUN_001835b4(2,0x1d,0xc2,*(short *)(temp_v3 + 8) + temp_v1,*(short *)(temp_v3 + 10) + temp_v0,0x65);

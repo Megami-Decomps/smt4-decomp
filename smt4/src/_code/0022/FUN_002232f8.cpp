@@ -7,16 +7,16 @@ extern "C" {
 int FUN_00215cd4(int);
 int FUN_00269dc8(int);
 int FUN_00296934(void);
-int FUN_002b8838(int);
+int buttonHelpSetPreset(int);
 int FUN_003490b8(int);
 
 extern int FUN_00215c9c(void);
 /* Supplied declaration required: FUN_00215cd4. */
 /* Supplied declaration required: FUN_00269dc8. */
-extern int FUN_002893d8(void);
+extern int scrGetCommandFrame(void);
 /* Supplied declaration required: FUN_00296934. */
 extern unsigned short scrGetArg(void);
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 extern int FUN_002c1d5c(void);
 /* Supplied declaration required: FUN_003490b8. */
 
@@ -29,7 +29,7 @@ unsigned char FUN_002232f8(void)
   int temp_v1;
   
   temp_v0 = scrGetArg();
-  temp_v1 = FUN_002893d8();
+  temp_v1 = scrGetCommandFrame();
   if (temp_v1 == 0) {
     FUN_003490b8(temp_v0);
     temp_v1 = FUN_002c1d5c();
@@ -42,7 +42,7 @@ unsigned char FUN_002232f8(void)
   temp_v1 = FUN_00215c9c();
   if (temp_v1 != 0) {
     FUN_00296934();
-    FUN_002b8838(0x90);
+    buttonHelpSetPreset(0x90);
   }
   return temp_v1 != 0;
 }

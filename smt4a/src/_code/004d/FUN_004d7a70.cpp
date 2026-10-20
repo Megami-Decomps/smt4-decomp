@@ -19,7 +19,7 @@ extern unsigned int DAT_005738b8; /* 0x5738b8 */
 extern unsigned int DAT_005738bc; /* 0x5738bc */
 
 extern int btlGetMainState(void);
-extern int FUN_00357bc8(int, unsigned char *);
+extern int tableGroupFindEntryIndex(int, unsigned char *);
 extern int isOutsideRange4To53(int);
 
 
@@ -81,7 +81,7 @@ unsigned int FUN_004d7a70(int *param_1,unsigned int param_2,int param_3,int para
             *(unsigned int *)(temp_v0 + 0x45a0) = *(unsigned int *)(temp_v0 + 0x45a0) | DAT_005738b8;
             *(unsigned int *)(temp_v0 + 0x45a4) = temp_v2;
           }
-          temp_v1 = FUN_00357bc8(param_1[4],pbVar5 + 4);
+          temp_v1 = tableGroupFindEntryIndex(param_1[4],pbVar5 + 4);
           if (-1 < temp_v1) {
             if (param_4 == 0) {
               param_1[8] = temp_v1;

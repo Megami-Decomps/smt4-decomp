@@ -24,7 +24,7 @@ extern unsigned int DAT_00573aec; /* 0x573aec */
 
 extern int lcgRandomRange(unsigned int);
 /* Supplied declaration required: FUN_00184310. */
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_003eaf20. */
 
 
@@ -45,7 +45,7 @@ char FUN_003ed6e8(unsigned int *param_1)
        ((temp_v3 & DAT_00573a2c) == 0 && (temp_v1 & DAT_00573a28) == 0)) &&
       ((DAT_00573a20 & temp_v1) == 0 && (DAT_00573a24 & temp_v3) == 0)) &&
      (((temp_v3 & DAT_00573aec) == 0 && (DAT_00573ae8 & temp_v1) == 0 &&
-      (temp_v2 = FUN_0018719c(0x1f9), temp_v2 == 0)))) {
+      (temp_v2 = gameFlagIsSet(0x1f9), temp_v2 == 0)))) {
     puVar6 = param_1 + 0x135b;
     *puVar6 = 0;
     puVar4 = param_1;

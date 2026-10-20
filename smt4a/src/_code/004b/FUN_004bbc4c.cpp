@@ -5,7 +5,7 @@
 extern "C" {
 
 int sysMemClear(unsigned int *, int);
-int FUN_0030ea58(unsigned char *, unsigned int *);
+int libc_strcmp(unsigned char *, unsigned int *);
 int FUN_00470340(unsigned int *, unsigned int);
 
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
@@ -21,7 +21,7 @@ extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern unsigned int *dataTableGetEntries(void);
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_0030ea58. */
+/* Supplied declaration required: libc_strcmp. */
 /* Supplied declaration required: FUN_00470340. */
 
 
@@ -195,7 +195,7 @@ void FUN_004bbc4c(unsigned int *param_1,unsigned int param_2,unsigned char param
   *(short *)((int)param_1 + 0x5a) = (short)puVar5[0x10];
   *(unsigned short *)(param_1 + 0x17) = *(unsigned short *)((int)puVar5 + 0x42);
   puVar6 = &LAB_004bc2c0;
-  FUN_0030ea58(&LAB_004bc2c0,puVar5 + 0x12);
+  libc_strcmp(&LAB_004bc2c0,puVar5 + 0x12);
   if (puVar6 == (unsigned char *)0x0) {
     *(unsigned char *)(param_1 + 0x19) = 0;
   }

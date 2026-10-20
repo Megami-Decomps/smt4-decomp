@@ -18,10 +18,10 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } void_stack;
 
-extern int DAT_0057f108; /* 0x57f108 */
+extern int g_camp; /* 0x57f108 */
 
-extern int FUN_001ab854(void);
-extern int FUN_001ab888(void);
+extern int gameGetSlotRecord(void);
+extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_00203b40. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003d0bc0. */
@@ -48,8 +48,8 @@ void FUN_0026f7f0(void)
   unsigned short temp_v12 [5];
   unsigned short temp_v13;
   
-  temp_v1 = DAT_0057f108;
-  temp_v2 = FUN_001ab888();
+  temp_v1 = g_camp;
+  temp_v2 = gameGetSlotTable();
   sysMemClear((unsigned int *)(temp_v1 + 0x1b70),0x640);
   playerGetWords(&temp_v10,0);
   temp_v3 = (unsigned int)temp_v10;
@@ -87,7 +87,7 @@ void FUN_0026f7f0(void)
   temp_v8 = 0;
   do {
     temp_v9 = temp_v2 + temp_v8;
-    if ((-1 < *(char *)(temp_v9 + 0x1c88)) && (temp_v4 = FUN_001ab854(), temp_v4 != 0)) {
+    if ((-1 < *(char *)(temp_v9 + 0x1c88)) && (temp_v4 = gameGetSlotRecord(), temp_v4 != 0)) {
       if (*(unsigned short *)(temp_v4 + 0x34) != 0) {
         temp_v6 = temp_v1 + temp_v3 * 8;
         *(unsigned int *)(temp_v6 + 0x1b70) = (unsigned int)*(unsigned short *)(temp_v4 + 0x34);

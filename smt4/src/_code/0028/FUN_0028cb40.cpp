@@ -13,13 +13,13 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_3_stack;
 
-extern int padIsButtonDown(int);
+extern int flagBitIsSet(int);
 extern int btlGetMainState(void);
 extern unsigned int FUN_00297ca4(int, unsigned int);
 /* Supplied declaration required: FUN_0029efa8. */
 /* Supplied declaration required: FUN_0029efc0. */
-extern unsigned int FUN_002b63ac(void);
-extern int FUN_002c09d0(unsigned int);
+extern unsigned int gameGetPlayerData(void);
+extern int gameFlagIsSet(unsigned int);
 
 
 void FUN_0028cb40(int param_1,unsigned short *param_2,short *param_3)
@@ -72,8 +72,8 @@ void FUN_0028cb40(int param_1,unsigned short *param_2,short *param_3)
         temp_v2 = (short)*(unsigned int *)(param_1 + 0x3068);
         break;
       }
-      if ((temp_v8 == 1) && (temp_v3 = FUN_002c09d0(0x410), temp_v3 != 0)) {
-        temp_v5 = FUN_002b63ac();
+      if ((temp_v8 == 1) && (temp_v3 = gameFlagIsSet(0x410), temp_v3 != 0)) {
+        temp_v5 = gameGetPlayerData();
         temp_v9 = *(short *)(temp_v5 + 2) != 0;
         if (temp_v9) {
           temp_v5 = (unsigned int)*(unsigned short *)(temp_v5 + 4);
@@ -106,7 +106,7 @@ void FUN_0028cb40(int param_1,unsigned short *param_2,short *param_3)
       temp_v10[4] = 4;
       temp_v3 = 0;
       do {
-        temp_v6 = padIsButtonDown(temp_v3 + 0x2e);
+        temp_v6 = flagBitIsSet(temp_v3 + 0x2e);
         if (temp_v6 != 0) {
           temp_v6 = FUN_0029efc0(param_1 + 0x3344);
           temp_v7 = FUN_0029efa8(param_1 + 0x3344);

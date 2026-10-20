@@ -7,11 +7,11 @@ extern "C" {
 int FUN_00100388(...);
 int qsort(int, int, int, unsigned char *);
 int FUN_001628c0(unsigned char *, unsigned int, int, int);
-int FUN_0018719c(...);
-int FUN_001aba54(void);
+int gameFlagIsSet(...);
+int dataTable04FindById(void);
 int asdOperatorNewD(void);
 int sysMemClear(...);
-int FUN_002e6490(int);
+int asdOperatorDeleteC(int);
 int VectorFloatToUnsigned(double, int);
 int VectorUnsignedToFloat(unsigned int, int);
 int rt_memcpy_w(int, int, int);
@@ -39,13 +39,13 @@ extern unsigned int FUN_0014af98(void);
 /* Supplied declaration required: FUN_001628c0. */
 extern int lcgRandomRange(unsigned int);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0018719c. */
+/* Supplied declaration required: gameFlagIsSet. */
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: asdOperatorNewD. */
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_002e6490. */
+/* Supplied declaration required: asdOperatorDeleteC. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -93,7 +93,7 @@ unsigned char * FUN_0047e690(unsigned int param_1,unsigned int param_2,unsigned 
   uStack_28 = param_3;
   if (param_2 != 0) {
     if ((int)param_2 >= 0) {
-      FUN_001aba54();
+      dataTable04FindById();
       switch(*(unsigned char *)(param_2 + 0x23)) {
       case 0:
       case 1:
@@ -141,7 +141,7 @@ unsigned char * FUN_0047e690(unsigned int param_1,unsigned int param_2,unsigned 
       if (temp_v16) {
         temp_v8 = (unsigned int)(unsigned short)psVar6[6];
       }
-      if (((temp_v16 && temp_v8 == 99) && (psVar6[3] != 0)) && (temp_v5 = FUN_0018719c(), temp_v5 != 0)) {
+      if (((temp_v16 && temp_v8 == 99) && (psVar6[3] != 0)) && (temp_v5 = gameFlagIsSet(), temp_v5 != 0)) {
         temp_v15 = 1;
         break;
       }
@@ -157,7 +157,7 @@ unsigned char * FUN_0047e690(unsigned int param_1,unsigned int param_2,unsigned 
         if ((temp_v8 == 3) || (psVar6[2] != 0)) {
           param_3 = temp_v23;
           if (((unsigned short)psVar6[2] == temp_v23) &&
-             ((psVar6[3] == 0 || (temp_v5 = FUN_0018719c(psVar6[3]), temp_v5 != 0)))) {
+             ((psVar6[3] == 0 || (temp_v5 = gameFlagIsSet(psVar6[3]), temp_v5 != 0)))) {
             *(short **)(temp_v4 + temp_v12 * 4) = psVar6;
             temp_v12 = temp_v12 + 1;
           }
@@ -167,7 +167,7 @@ unsigned char * FUN_0047e690(unsigned int param_1,unsigned int param_2,unsigned 
             param_3 = temp_v20;
           }
           if ((temp_v8 == 0 || temp_v8 == param_3) &&
-             ((psVar6[3] == 0 || (temp_v5 = FUN_0018719c(psVar6[3]), temp_v5 != 0)))) {
+             ((psVar6[3] == 0 || (temp_v5 = gameFlagIsSet(psVar6[3]), temp_v5 != 0)))) {
             *(short **)(temp_v3 + temp_v13 * 4) = psVar6;
             temp_v13 = temp_v13 + 1;
           }
@@ -221,7 +221,7 @@ unsigned char * FUN_0047e690(unsigned int param_1,unsigned int param_2,unsigned 
               temp_v7 = btlGetMainState();
               if (((DAT_00573cd4 & *(unsigned int *)(temp_v7 + 0x45a4)) == 0 &&
                    (*(unsigned int *)(temp_v7 + 0x45a0) & DAT_00573cd0) == 0) &&
-                 (temp_v7 = FUN_0018719c(*(unsigned short *)(temp_v10 + 6)), temp_v7 != 0)) {
+                 (temp_v7 = gameFlagIsSet(*(unsigned short *)(temp_v10 + 6)), temp_v7 != 0)) {
                 *(int *)(temp_v12 + temp_v5 * 4) = temp_v10;
                 temp_v10 = (int)*(short *)(temp_v10 + 0xe);
                 temp_v11 = 99;
@@ -299,20 +299,20 @@ unsigned char * FUN_0047e690(unsigned int param_1,unsigned int param_2,unsigned 
             puVar10 = temp_v22;
             FUN_001628c0(puVar10,temp_v2 & 0xff,2,0);
           }
-          FUN_002e6490(temp_v13);
-          FUN_002e6490(temp_v12);
-          FUN_002e6490(temp_v6);
-          FUN_002e6490(temp_v4);
-          FUN_002e6490(temp_v3);
+          asdOperatorDeleteC(temp_v13);
+          asdOperatorDeleteC(temp_v12);
+          asdOperatorDeleteC(temp_v6);
+          asdOperatorDeleteC(temp_v4);
+          asdOperatorDeleteC(temp_v3);
           return puVar10;
         }
       }
-      FUN_002e6490(temp_v12);
-      FUN_002e6490(temp_v6);
+      asdOperatorDeleteC(temp_v12);
+      asdOperatorDeleteC(temp_v6);
     }
   }
-  FUN_002e6490(temp_v4);
-  FUN_002e6490(temp_v3);
+  asdOperatorDeleteC(temp_v4);
+  asdOperatorDeleteC(temp_v3);
   return (unsigned char *)0x0;
 }
 

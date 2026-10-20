@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e9afe(int, unsigned char *);
+int vectorCopyHeader(int, unsigned char *);
 int FUN_002ea3d0(int, unsigned int);
 int FUN_002ea41e(unsigned char [12], int);
 
@@ -18,11 +18,11 @@ extern unsigned char LAB_0010f57d; /* 0x10f57d */
 extern unsigned char LAB_0010f9a0; /* 0x10f9a0 */
 
 extern unsigned char *FUN_002e7908(unsigned char *, unsigned int *);
-/* Supplied declaration required: FUN_002e9afe. */
+/* Supplied declaration required: vectorCopyHeader. */
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned char *, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
 /* Supplied declaration required: FUN_002ea41e. */
-extern int FUN_002f4e86(void);
+extern int refIsNonNegative(void);
 
 
 void FUN_0010f91c(int param_1)
@@ -39,16 +39,16 @@ void FUN_0010f91c(int param_1)
   if (*(char *)(param_1 + 0x168) != '\x02') {
     FUN_002ea41e(temp_v3,param_1 + 0x158);
     puVar1 = temp_v3;
-    FUN_002e9afe(param_1 + 200,puVar1);
+    vectorCopyHeader(param_1 + 200,puVar1);
   }
   else if (*(char *)(param_1 + 0x98) == '\0') {
     puVar1 = (unsigned char *)(param_1 + 0xbc);
-    temp_v0 = FUN_002f4e86();
+    temp_v0 = refIsNonNegative();
     if (temp_v0 != 0) {
       temp_v4 = 0x10001;
       puVar1 = (unsigned char *)FUN_002e7908(temp_v3,(unsigned int *)&temp_v4);
     }
-    FUN_002e9afe(param_1 + 200,puVar1);
+    vectorCopyHeader(param_1 + 200,puVar1);
   }
   if (*(int **)(param_1 + 0xd8) != (int *)0x0) {
     (**(romwright_code **)(**(int **)(param_1 + 0xd8) + 4))();

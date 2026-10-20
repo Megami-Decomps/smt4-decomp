@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_001846d0(int, int);
+int uiSpriteSelectAnim(int, int);
 
-/* Supplied declaration required: FUN_001846d0. */
+/* Supplied declaration required: uiSpriteSelectAnim. */
 
 
 void FUN_003bcf80(int param_1)
@@ -16,7 +16,7 @@ void FUN_003bcf80(int param_1)
   if (param_1 == 0) {
     return;
   }
-  FUN_001846d0(param_1 + 0x368,4);
+  uiSpriteSelectAnim(param_1 + 0x368,4);
   *(unsigned int *)(param_1 + 0x3f4) = 0;
   *(unsigned int *)(param_1 + 0x3f8) = 5;
   return;

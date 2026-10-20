@@ -31,8 +31,8 @@ extern unsigned int FUN_00132c28(unsigned int *, unsigned int);
 /* Supplied declaration required: FUN_001346ee. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002e7168. */
-extern int FUN_002e760a(unsigned int);
-extern int FUN_002e995c(int);
+extern int operatorNew(unsigned int);
+extern int onlineSockAddrConstruct(int);
 extern int constructObj0055affc(int);
 extern unsigned int FUN_002ea2e8(void);
 extern unsigned int *arrayElementAddress_002f32d4(int *, int);
@@ -97,7 +97,7 @@ FUN_0010a3a0(unsigned int *param_1,unsigned int param_2,unsigned int param_3,uns
   *(unsigned int *)(temp_v0 + 0x14) = 0;
   *(unsigned int *)(temp_v0 + 0x18) = 0;
   *(unsigned int *)(temp_v0 + 0x1c) = 0;
-  temp_v0 = FUN_002e995c(temp_v0 + 0x20);
+  temp_v0 = onlineSockAddrConstruct(temp_v0 + 0x20);
   temp_v0 = constructObj0055affc(temp_v0 + 0x20);
   *(int *)(temp_v0 - 0x88) = temp_v0 - 0x140;
   piVar10 = (int *)(temp_v0 - 0x2c);
@@ -130,7 +130,7 @@ FUN_0010a3a0(unsigned int *param_1,unsigned int param_2,unsigned int param_3,uns
   }
   temp_v3 = 0;
   do {
-    temp_v4 = FUN_002e760a(0x214);
+    temp_v4 = operatorNew(0x214);
     if (temp_v4 != 0) {
       temp_v1 = FUN_002ea2e8();
     }
@@ -141,7 +141,7 @@ FUN_0010a3a0(unsigned int *param_1,unsigned int param_2,unsigned int param_3,uns
     temp_v3 = temp_v3 + 1;
     *puVar2 = temp_v1;
   } while (temp_v3 < 4);
-  temp_v3 = FUN_002e760a(0x20);
+  temp_v3 = operatorNew(0x20);
   if (temp_v3 != 0) {
     temp_v4 = temp_v3;
     sysMemClear(temp_v3,0x20);

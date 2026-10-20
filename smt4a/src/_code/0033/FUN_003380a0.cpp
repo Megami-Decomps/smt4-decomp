@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0016c410(int);
+int renderCtxResetColorScale(int);
 int FUN_0016c4b8(int, unsigned int);
 int FUN_0016c560(int);
 int sysMemClear(unsigned char *, int);
@@ -36,7 +36,7 @@ extern unsigned char LAB_0042cbb0; /* 0x42cbb0 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0016c410. */
+/* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: FUN_0016c4b8. */
 /* Supplied declaration required: FUN_0016c560. */
 /* Supplied declaration required: sysMemClear. */
@@ -168,7 +168,7 @@ void FUN_003380a0(unsigned int *param_1,unsigned int param_2)
       temp_v5 = temp_v5 + 1;
     } while (temp_v5 < *(short *)(param_1 + 2));
   }
-  FUN_0016c410(g_renderCtx);
+  renderCtxResetColorScale(g_renderCtx);
   FUN_0016c560(g_renderCtx);
   temp_v5 = g_renderCtx;
   piVar5 = (int *)(g_renderCtx + 0x1258);

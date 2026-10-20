@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_003ae864(u32 arg);
+void gfxObjectDestroy(u32 arg);
 void FUN_00359370(s32 arg, s32 flag);
 void FUN_001ad6d8(void);
 void asdMdlManagerDestroy(u32 arg);
@@ -25,7 +25,7 @@ void bustupCutAnimDestroy(u32 job)
     anim->unk5EC = 0;
     anim->unk5E8 = 0;
     for (i = 0; i < BUSTUP_CUT_ENTRIES; i++) {
-        FUN_003ae864(anim->unk6CC[i]);
+        gfxObjectDestroy(anim->unk6CC[i]);
         asdMdlManagerDestroy(anim->unk65C[i]);
     }
     asdMemFree(g_bustupCutAnim);

@@ -8,8 +8,8 @@ int FUN_00192550(void);
 int FUN_00192608(void);
 int FUN_00408184(int, int);
 int FUN_00480d20(void);
-int FUN_00480e30(void);
-int FUN_00480fc0(int, int);
+int flagValueAdd(void);
+int flagValueSub(int, int);
 int FUN_004a0ef4(int);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
@@ -23,8 +23,8 @@ extern unsigned int FUN_0019271c(unsigned int);
 extern int FUN_00213b5c(void);
 /* Supplied declaration required: FUN_00408184. */
 /* Supplied declaration required: FUN_00480d20. */
-/* Supplied declaration required: FUN_00480e30. */
-/* Supplied declaration required: FUN_00480fc0. */
+/* Supplied declaration required: flagValueAdd. */
+/* Supplied declaration required: flagValueSub. */
 /* Supplied declaration required: FUN_004a0ef4. */
 
 
@@ -42,7 +42,7 @@ void FUN_0049cd18(unsigned short *param_1,int param_2,int param_3)
     return;
   }
   if (-1 >= param_2) {
-    FUN_00480fc0(*param_1,-param_2);
+    flagValueSub(*param_1,-param_2);
     if (param_3 == 0) {
       return;
     }
@@ -88,7 +88,7 @@ void FUN_0049cd18(unsigned short *param_1,int param_2,int param_3)
     temp_v3 = temp_v3 * -param_2;
   }
   else {
-    FUN_00480e30();
+    flagValueAdd();
     if (param_3 == 0) {
       return;
     }

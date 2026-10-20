@@ -17,7 +17,7 @@ extern int DAT_005f1600; /* 0x5f1600 */
 
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00183f58. */
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 extern int FUN_004a0404(void);
 
 
@@ -31,8 +31,8 @@ void FUN_003adc58(void)
   if (g_gameState == 5) {
     temp_v0 = DAT_005f1600;
   }
-  if (((g_gameState == 5 && temp_v0 == 0xc) || (temp_v0 = FUN_0018719c(0x49a), temp_v0 == 0)) ||
-     ((temp_v0 = FUN_0018719c(0xc), temp_v0 != 0 && (temp_v0 = FUN_0018719c(0x10), temp_v0 == 0)))) {
+  if (((g_gameState == 5 && temp_v0 == 0xc) || (temp_v0 = gameFlagIsSet(0x49a), temp_v0 == 0)) ||
+     ((temp_v0 = gameFlagIsSet(0xc), temp_v0 != 0 && (temp_v0 = gameFlagIsSet(0x10), temp_v0 == 0)))) {
     sysPlaySe(0xd3);
     return;
   }

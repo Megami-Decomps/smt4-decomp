@@ -5,12 +5,12 @@
 extern "C" {
 
 int asdOperatorNewC(void);
-int FUN_002e342c(void);
+int libc_strcpy(void);
 int FUN_0030f220(...);
 
 extern int wstrlen(void);
 /* Supplied declaration required: asdOperatorNewC. */
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_0030f220. */
 
 
@@ -28,7 +28,7 @@ FUN_0030ed04(unsigned int *param_1,unsigned int param_2,unsigned int param_3,uns
     temp_v0 = wstrlen();
     temp_v0 = temp_v0 + 1;
     asdOperatorNewC();
-    FUN_002e342c();
+    libc_strcpy();
     param_1[1] = temp_v0;
   }
   FUN_0030f220(param_3,param_2);

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00100388(...);
-int FUN_0030ea58(int *, unsigned int);
+int libc_strcmp(int *, unsigned int);
 int FUN_004fb43c(int, unsigned int, int, int);
 
 /* stack frame of param_3: 8 slot(s), 32 byte(s) */
@@ -21,13 +21,13 @@ typedef struct {
 } param_3_stack;
 
 extern unsigned char LAB_0047efcc; /* 0x47efcc */
-extern int DAT_00571508; /* 0x571508 */
+extern int g_btlCamera; /* 0x571508 */
 extern char s_ef_e_atk01_00573e68[11]; /* 0x573e68 */
 
 /* Supplied declaration required: FUN_00100388. */
 extern int btlGetMainState(void);
 extern int jyoucyuGetTableEntry(unsigned int);
-/* Supplied declaration required: FUN_0030ea58. */
+/* Supplied declaration required: libc_strcmp. */
 /* Supplied declaration required: FUN_004fb43c. */
 
 
@@ -71,7 +71,7 @@ unsigned int FUN_0047ed10(unsigned int param_1,unsigned int param_2,unsigned int
     temp_v13 = 0;
     FUN_00100388(&temp_v6,&LAB_0047efcc,pcVar6);
     puVar2 = (unsigned int *)&temp_v6;
-    FUN_0030ea58(&temp_v6,param_1);
+    libc_strcmp(&temp_v6,param_1);
     temp_v4 = (float)temp_v5;
     if (puVar2 == (unsigned int *)0x0) goto LAB_0047edd4;
     temp_v0 = temp_v0 + 1;
@@ -107,7 +107,7 @@ LAB_0047eed4:
     }
     break;
   default:
-    temp_v1 = *(float *)(DAT_00571508 + 0x58c);
+    temp_v1 = *(float *)(g_btlCamera + 0x58c);
     if (temp_v4 < temp_v1 + -17.0f) goto LAB_0047ee80;
     if (temp_v4 < temp_v1 + -9.0f) goto LAB_0047ee9c;
     if (temp_v1 + 17.0f < temp_v4) goto LAB_0047eeb8;
@@ -146,7 +146,7 @@ LAB_0047eee0:
     temp_v13 = 0;
     FUN_00100388(&temp_v6,&LAB_0047efcc,*(unsigned int *)(temp_v2 * 4 + 0x57a460));
     puVar2 = (unsigned int *)&temp_v6;
-    FUN_0030ea58(&temp_v6,param_1);
+    libc_strcmp(&temp_v6,param_1);
     if (puVar2 == (unsigned int *)0x0) {
       temp_v3 = 0xffffffff;
       *(unsigned int *)(temp_v0 + 0x4cf0) = temp_v3;

@@ -7,8 +7,8 @@ extern "C" {
 int FUN_001695a0(void);
 int FUN_001ad9b4(void);
 int FUN_00237898(int, int, unsigned int, int, int);
-int FUN_00275bb0(int);
-int FUN_00275fe4(...);
+int scrWorkGetValue(int);
+int scrWorkSetValue(...);
 int FUN_003dea6c(int, int, int);
 int FUN_00417e08(int);
 int optionsSetFlag1(void);
@@ -23,9 +23,9 @@ extern int dataTableValueOrZero(unsigned int);
 /* Supplied declaration required: FUN_001ad9b4. */
 extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_00237898. */
-/* Supplied declaration required: FUN_00275bb0. */
-/* Supplied declaration required: FUN_00275fe4. */
-extern int FUN_002deb84(void);
+/* Supplied declaration required: scrWorkGetValue. */
+/* Supplied declaration required: scrWorkSetValue. */
+extern int scrGetCommandFrame(void);
 /* Supplied declaration required: FUN_003dea6c. */
 /* Supplied declaration required: FUN_00417e08. */
 extern int FUN_004186a4(void);
@@ -44,23 +44,23 @@ unsigned int FUN_0031e38c(void)
   unsigned int temp_v4;
   
   temp_v1 = scrGetArg(0);
-  temp_v2 = FUN_002deb84();
+  temp_v2 = scrGetCommandFrame();
   if (temp_v2 == 0) {
     FUN_00417e08(temp_v1);
-    FUN_00275fe4(0);
-    FUN_00275fe4(1,0);
+    scrWorkSetValue(0);
+    scrWorkSetValue(1,0);
   }
   temp_v3 = dataTableValueOrZero(0x1e);
-  temp_v2 = FUN_00275bb0(0);
+  temp_v2 = scrWorkGetValue(0);
   if (temp_v2 == 0) {
     FUN_003dea6c(temp_v1,0,1);
     FUN_001695a0();
-    temp_v4 = FUN_00275bb0(1);
+    temp_v4 = scrWorkGetValue(1);
     FUN_00237898(temp_v3,0,temp_v4,6,0);
-    temp_v2 = FUN_00275bb0(1);
-    FUN_00275fe4(1,temp_v2 + 1);
+    temp_v2 = scrWorkGetValue(1);
+    scrWorkSetValue(1,temp_v2 + 1);
     if (temp_v3 == 1) {
-      FUN_00275fe4(1,0);
+      scrWorkSetValue(1,0);
       temp_v2 = FUN_004186a4();
       if (temp_v2 != 0) {
         temp_v2 = FUN_004186e0();

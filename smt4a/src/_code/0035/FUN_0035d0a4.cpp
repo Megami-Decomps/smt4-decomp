@@ -4,14 +4,14 @@
 
 extern "C" {
 
-extern int DAT_0057f268; /* 0x57f268 */
+extern int g_partyPanel; /* 0x57f268 */
 
 
 int FUN_0035d0a4(int param_1)
 
 {
-  if (((-1 < param_1) && (param_1 < 0x11)) && (DAT_0057f268 != 0)) {
-    return DAT_0057f268 + param_1 * 0x8c + 0x68;
+  if (((-1 < param_1) && (param_1 < 0x11)) && (g_partyPanel != 0)) {
+    return g_partyPanel + param_1 * 0x8c + 0x68;
   }
   return 0;
 }

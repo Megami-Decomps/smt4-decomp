@@ -25,7 +25,7 @@ extern unsigned int DAT_004341f8; /* 0x4341f8 */
 extern int btlGetMainState(void);
 extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002a09b4. */
-extern unsigned int FUN_002ac068(unsigned int, unsigned int);
+extern unsigned int dataTableFileGetTable(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002be624. */
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
@@ -72,7 +72,7 @@ void FUN_003400f0(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   }
   temp_v1 = asdMdlManagerCreateSecondList(temp_v9,param_4);
   *(unsigned int *)(param_1 + 0x10) = temp_v1;
-  temp_v1 = FUN_002ac068(DAT_004341f8,0);
+  temp_v1 = dataTableFileGetTable(DAT_004341f8,0);
   temp_v0 = dataTableGetEntries();
   temp_v2 = dataTableGetCount(temp_v1);
   if (temp_v2 != 0) {

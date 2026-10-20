@@ -12,7 +12,7 @@ int FUN_0027fca0(...);
 int FUN_00282390(void);
 int FUN_0028250c(void);
 int FUN_002879dc(...);
-int FUN_002b8838(int);
+int buttonHelpSetPreset(int);
 int VectorSignedToFloat(...);
 
 int FUN_002480c8(void);
@@ -69,9 +69,9 @@ extern int FUN_0027ee9c(void);
 /* Supplied declaration required: FUN_0028250c. */
 /* Supplied declaration required: FUN_002879dc. */
 /* Supplied declaration required: FUN_00291e40. */
-extern int FUN_00296d6c(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002b8838. */
-extern int FUN_002bfde4(unsigned int);
+extern int randBetween(unsigned int, unsigned int);
+/* Supplied declaration required: buttonHelpSetPreset. */
+extern int padIsButtonPressed(unsigned int);
 
 
 void FUN_002e8fdc(void)
@@ -277,7 +277,7 @@ void FUN_002e8fdc(void)
       *(unsigned int *)(temp_v0 + 0x50) = DAT_0049f9ac;
       FUN_0027fc14(0xc);
       *(unsigned int *)(DAT_004474f4 + 0xac) = 0xfffffffd;
-      FUN_002b8838(0xdb);
+      buttonHelpSetPreset(0xdb);
       FUN_0024f034(1,DAT_0049f99c);
       FUN_0028250c();
       FUN_00282390();
@@ -336,7 +336,7 @@ void FUN_002e8fdc(void)
         }
       }
       else {
-        temp_v0 = FUN_002bfde4(5);
+        temp_v0 = padIsButtonPressed(5);
         if ((temp_v0 != 0) || (temp_v0 = FUN_002762e0(), temp_v0 != 0)) {
           temp_v0 = DAT_004474f4;
           *(unsigned int *)(DAT_004474f4 + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
@@ -400,7 +400,7 @@ LAB_002e94f0:
       FUN_0027fca0(0xffffffff);
       FUN_0028250c();
       FUN_00282390();
-      temp_v0 = FUN_00296d6c(0,1);
+      temp_v0 = randBetween(0,1);
       FUN_00291e40(temp_v0 + 0x100023c);
       temp_v0 = g_lmapScene;
       *(float *)(g_lmapScene + 0x68) = temp_v6;
@@ -500,7 +500,7 @@ LAB_002e9794:
         FUN_0027fca0(0xffffffff);
         FUN_0028250c();
         FUN_00282390();
-        temp_v0 = FUN_00296d6c(0,1);
+        temp_v0 = randBetween(0,1);
         FUN_00291e40(temp_v0 + 0x100023e);
       }
       if (*(int *)(g_lmapScene + 8) != 6) break;

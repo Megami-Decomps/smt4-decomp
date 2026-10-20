@@ -2,15 +2,15 @@
 
 extern "C" {
 
-int FUN_002c3424(u32 *event);
+int nn_os_LightEvent_Wait(u32 *event);
 int nn_applet_CTR_ReplySleepQuery(int reply);
 
-extern u32 DAT_0046519c;
+extern u32 g_appletSleepQueryEvent;
 
 void appletReplySleepQueryAllow(void)
 {
     nn_applet_CTR_ReplySleepQuery(1);
-    FUN_002c3424(&DAT_0046519c);
+    nn_os_LightEvent_Wait(&g_appletSleepQueryEvent);
 }
 
 } /* extern "C" */

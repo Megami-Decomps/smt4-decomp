@@ -6,14 +6,14 @@ extern "C" {
 
 int FUN_002e6e34(int *, int);
 int FUN_002e6e5c(int *);
-int FUN_002e7228(unsigned int);
-int FUN_002e7232(unsigned int);
+int onlineJobSetStateReady(unsigned int);
+int sharedRefRelease(unsigned int);
 
 extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-/* Supplied declaration required: FUN_002e7228. */
-/* Supplied declaration required: FUN_002e7232. */
+/* Supplied declaration required: onlineJobSetStateReady. */
+/* Supplied declaration required: sharedRefRelease. */
 
 
 void FUN_001036ec(unsigned int param_1,unsigned int param_2,unsigned int *param_3,unsigned int param_4)
@@ -32,8 +32,8 @@ void FUN_001036ec(unsigned int param_1,unsigned int param_2,unsigned int *param_
   temp_v0 = FUN_002e6e26();
   FUN_002e6e34(&uStack_18,temp_v0 + 0x58);
   temp_v1 = *param_3;
-  FUN_002e7228(temp_v1);
-  FUN_002e7232(temp_v1);
+  onlineJobSetStateReady(temp_v1);
+  sharedRefRelease(temp_v1);
   FUN_002e6e5c(&uStack_18);
   return;
 }

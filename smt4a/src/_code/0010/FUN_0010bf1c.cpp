@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e74bc(unsigned int);
+int onlineBufferReset(unsigned int);
 int strAssign(int, unsigned int, unsigned int, unsigned int);
 int FUN_002e7908(unsigned char [8], unsigned int *);
 int FUN_002eac34(...);
@@ -27,14 +27,14 @@ typedef struct {
 #define romwright_piece_3_1(upper, lower) ((unsigned int)(((unsigned int)(unsigned int)(upper) << 8) | (unsigned char)(lower)))
 #endif
 extern int FUN_00121206(int, unsigned char);
-/* Supplied declaration required: FUN_002e74bc. */
+/* Supplied declaration required: onlineBufferReset. */
 /* Supplied declaration required: strAssign. */
 /* Supplied declaration required: FUN_002e7908. */
 /* Supplied declaration required: FUN_002eac34. */
-extern int FUN_002ed420(int, int, unsigned int);
+extern int streamReadBytes(int, int, unsigned int);
 /* Supplied declaration required: FUN_002eea8a. */
 extern int FUN_002ef9e0(unsigned char *, unsigned short);
-extern int FUN_002f12f4(int, int);
+extern int streamReadByte(int, int);
 extern int FUN_002f5c4c(int, unsigned int);
 
 
@@ -68,8 +68,8 @@ unsigned int FUN_0010bf1c(unsigned int param_1,int param_2,int param_3,unsigned 
   iStack_20 = param_2;
   iStack_1c = param_3;
   temp_v12 = param_4;
-  temp_v0 = FUN_002f12f4(param_2,param_3 + 0x25);
-  if ((temp_v0 == 0) || (temp_v0 = FUN_002f12f4(param_2,param_3 + 0x26), temp_v0 == 0)) {
+  temp_v0 = streamReadByte(param_2,param_3 + 0x25);
+  if ((temp_v0 == 0) || (temp_v0 = streamReadByte(param_2,param_3 + 0x26), temp_v0 == 0)) {
     return 0;
   }
   temp_v0 = FUN_002eea8a(param_2,param_3 + 0x3c);
@@ -77,11 +77,11 @@ unsigned int FUN_0010bf1c(unsigned int param_1,int param_2,int param_3,unsigned 
     return 0;
   }
   if (-1 < (int)((unsigned int)*(unsigned short *)(param_3 + 0x3c) << 0x13)) {
-    temp_v0 = FUN_002f12f4(param_2,param_3 + 0x65);
+    temp_v0 = streamReadByte(param_2,param_3 + 0x65);
     if (temp_v0 == 0) {
       return 0;
     }
-    temp_v0 = FUN_002ed420(param_2,param_3 + 0x28,4);
+    temp_v0 = streamReadBytes(param_2,param_3 + 0x28,4);
     if (temp_v0 == 0) {
       return 0;
     }
@@ -94,14 +94,14 @@ unsigned int FUN_0010bf1c(unsigned int param_1,int param_2,int param_3,unsigned 
     temp_v0 = FUN_002ef9e0(temp_v10,temp_v8[0]);
     *(unsigned short *)(param_3 + 0x44) = *(unsigned short *)(temp_v0 + 4);
     if (((*(unsigned short *)(param_3 + 0x3c) & 0xf) == 0) || ((*(unsigned short *)(param_3 + 0x3c) & 0xf) == 1)) {
-      temp_v0 = FUN_002ed420(param_2,param_3 + 0x50,4);
+      temp_v0 = streamReadBytes(param_2,param_3 + 0x50,4);
       if (temp_v0 == 0) {
         return 0;
       }
       *(unsigned int *)(param_3 + 0x60) = 4;
     }
     if (((*(unsigned short *)(param_3 + 0x3c) & 0xf) == 2) &&
-       (temp_v0 = FUN_002f12f4(param_2,param_3 + 100), temp_v0 == 0)) {
+       (temp_v0 = streamReadByte(param_2,param_3 + 100), temp_v0 == 0)) {
       return 0;
     }
     temp_v0 = *(int *)(param_2 + 8);
@@ -127,7 +127,7 @@ unsigned int FUN_0010bf1c(unsigned int param_1,int param_2,int param_3,unsigned 
       temp_v1 = FUN_00121206(temp_v0,*(unsigned char *)(temp_v1 + 8));
       if (temp_v1 != 0) {
         *(int *)(temp_v0 + 0x10) = *(int *)(temp_v0 + 0x10) - 1;
-        FUN_002e74bc(*(unsigned int *)(param_3 + 0xd8));
+        onlineBufferReset(*(unsigned int *)(param_3 + 0xd8));
         temp_v2 = *(unsigned int *)(param_2 + 0xc);
         if (*(unsigned int *)(temp_v0 + 0x10) < temp_v2) {
           return 0;

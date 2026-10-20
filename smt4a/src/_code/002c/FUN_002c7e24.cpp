@@ -13,12 +13,12 @@ typedef struct Global588fd0 {
     /* 0x00 */ u8 unk00[4];
     /* 0x04 */ Game *game;
 } Global588fd0;
-extern Global588fd0 DAT_00588fd0;
+extern Global588fd0 g_gameGlobals;
 
 /* Returns the address of the member at 0x1390 of the game record. */
 u8 *FUN_002c7e24(void)
 {
-    return DAT_00588fd0.game->member1390;
+    return g_gameGlobals.game->member1390;
 }
 
 } /* extern "C" */

@@ -30,7 +30,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Supplied declaration required: FUN_00164b5c. */
-extern int FUN_001654d8(void);
+extern int vec2GetXInt(void);
 /* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
@@ -99,7 +99,7 @@ void FUN_0034ea70(int param_1)
     }
   }
   else {
-    temp_v2 = FUN_001654d8();
+    temp_v2 = vec2GetXInt();
     temp_v6 = temp_v6 + temp_v2;
     temp_v9 = romwright_piece_4_4(temp_v8,*(unsigned int *)(param_1 + 0x13f0));
   }

@@ -9,7 +9,7 @@ int btlGetMainState(void);
 extern unsigned char g_btlEffect; /* 0x5737f0 */
 
 /* Supplied declaration required: btlGetMainState. */
-extern int FUN_0019a37c(int, unsigned int, unsigned int);
+extern int libc_strncmp(int, unsigned int, unsigned int);
 extern unsigned int wstrlen(unsigned int);
 extern int FUN_003e8430(void);
 
@@ -32,7 +32,7 @@ int FUN_004f8054(int param_1)
         temp_v3 = *(int *)(param_1 + 0x1f54) + temp_v0 * 0x16 + 0x58;
         if (temp_v3 != 0) {
           temp_v1 = wstrlen((*(unsigned int *)((unsigned char *)&g_btlEffect + 0xc)));
-          temp_v2 = FUN_0019a37c(temp_v3,(*(unsigned int *)((unsigned char *)&g_btlEffect + 0xc)),temp_v1);
+          temp_v2 = libc_strncmp(temp_v3,(*(unsigned int *)((unsigned char *)&g_btlEffect + 0xc)),temp_v1);
           if (temp_v2 == 0) {
             return (int)*(short *)(temp_v3 + 0x10);
           }

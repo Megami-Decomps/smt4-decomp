@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001b03ec(...);
 int FUN_001e0698(void);
-int FUN_0028d6d0(void);
+int buttonHelpCreate(void);
 int FUN_0028d9b0(void);
 int FUN_0028da40(...);
 int FUN_0028e9ec(...);
@@ -14,7 +14,7 @@ int FUN_002942c4(...);
 int FUN_00295eb0(...);
 int FUN_00297468(...);
 int FUN_0029f848(...);
-int FUN_002af5c0(int, unsigned int, int);
+int uiSpriteSetImageKeyframe(int, unsigned int, int);
 int FUN_002b7bca(...);
 int timerStart(...);
 int FUN_002bd954(...);
@@ -42,21 +42,21 @@ extern unsigned char DAT_00400d84; /* 0x400d84 */
 
 /* Supplied declaration required: FUN_001b03ec. */
 /* Supplied declaration required: FUN_001e0698. */
-/* Supplied declaration required: FUN_0028d6d0. */
+/* Supplied declaration required: buttonHelpCreate. */
 /* Supplied declaration required: FUN_0028d9b0. */
 /* Supplied declaration required: FUN_0028da40. */
 extern int FUN_0028dba8(unsigned int);
 extern int FUN_0028e9a0(unsigned int);
-extern int FUN_0028e9d4(unsigned int);
+extern int flagValueIsPositive(unsigned int);
 /* Supplied declaration required: FUN_0028e9ec. */
-extern int padIsButtonDown(int);
+extern int flagBitIsSet(int);
 /* Supplied declaration required: FUN_002942c4. */
 /* Supplied declaration required: FUN_00295eb0. */
 /* Supplied declaration required: FUN_00297468. */
 /* Supplied declaration required: FUN_0029f848. */
-extern int FUN_002a8740(int);
-extern int FUN_002a8764(void);
-/* Supplied declaration required: FUN_002af5c0. */
+extern int gameGetUnitRecord(int);
+extern int gameGetSlotTable(void);
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 extern int FUN_002b6a54(int, unsigned short);
 extern int FUN_002b6ad0(void);
 extern int gameGetOptions(void);
@@ -116,7 +116,7 @@ void FUN_00199b9c(int param_1,unsigned int param_2)
     else {
       temp_v3 = 8;
     }
-    FUN_002af5c0(temp_v2,temp_v3,0);
+    uiSpriteSetImageKeyframe(temp_v2,temp_v3,0);
     temp_v2 = temp_v4 + 0xc28;
     FUN_002bd954(temp_v2,0x15,0x1b,param_1,0x1f);
     FUN_00295eb0(temp_v2,0x15,0x45);
@@ -195,13 +195,13 @@ void FUN_00199b9c(int param_1,unsigned int param_2)
   FUN_002942c4(0xffffffff,1);
   temp_v1 = 0;
   do {
-    temp_v5 = FUN_002a8764();
+    temp_v5 = gameGetSlotTable();
     if (*(char *)(temp_v5 + temp_v1 + 0x9108) >= '\0') {
-      temp_v5 = FUN_002a8764();
-      temp_v5 = FUN_002a8740((int)*(char *)(temp_v5 + temp_v1 + 0x9108));
+      temp_v5 = gameGetSlotTable();
+      temp_v5 = gameGetUnitRecord((int)*(char *)(temp_v5 + temp_v1 + 0x9108));
       FUN_002942c4((int)*(short *)(temp_v5 + 0x46),1);
       *(unsigned int *)(param_1 + temp_v1 * 4 + 0x3410) = (unsigned int)*(unsigned short *)(temp_v5 + 0x46);
-      temp_v5 = FUN_002a8764();
+      temp_v5 = gameGetSlotTable();
       *(short *)(param_1 + temp_v1 * 2 + 0x38f6) = (short)*(char *)(temp_v5 + temp_v1 + 0x9108);
       *(unsigned char *)(param_1 + temp_v1 + 0x38d2) = 0;
     }
@@ -248,7 +248,7 @@ void FUN_00199b9c(int param_1,unsigned int param_2)
   temp_v1 = 0;
   temp_v6 = 1;
   do {
-    temp_v5 = FUN_0028e9d4(temp_v6);
+    temp_v5 = flagValueIsPositive(temp_v6);
     if ((temp_v5 != 0) && (temp_v5 = FUN_0028e9a0(temp_v6), temp_v5 != 0)) {
       temp_v5 = temp_v1 * 2;
       temp_v1 = temp_v1 + 1;
@@ -262,7 +262,7 @@ void FUN_00199b9c(int param_1,unsigned int param_2)
   temp_v5 = 0;
   temp_v1 = 0;
   do {
-    temp_v2 = padIsButtonDown(temp_v1 + 0x2e);
+    temp_v2 = flagBitIsSet(temp_v1 + 0x2e);
     if (temp_v2 != 0) {
       temp_v5 = temp_v5 + 1;
     }
@@ -270,7 +270,7 @@ void FUN_00199b9c(int param_1,unsigned int param_2)
   } while (temp_v1 < 6);
   FUN_0029f848(param_1 + 0x3344,temp_v5,6,1,0,1);
   FUN_0028d9b0();
-  FUN_0028d6d0();
+  buttonHelpCreate();
   FUN_00297468(0x19a4e0,param_1 + 0x59bc,0);
   return;
 }

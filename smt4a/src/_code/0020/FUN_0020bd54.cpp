@@ -45,7 +45,7 @@ typedef struct {
 } void_stack;
 
 extern unsigned char LAB_00192824; /* 0x192824 */
-extern unsigned char DAT_0057f0c4; /* 0x57f0c4 */
+extern unsigned char g_buttonHelp; /* 0x57f0c4 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
@@ -55,15 +55,15 @@ extern int g_renderCtx; /* 0x59dbb4 */
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
 /* Supplied declaration required: FUN_00164b5c. */
-extern int FUN_001654d8(int);
-extern int FUN_001654e4(int);
+extern int vec2GetXInt(int);
+extern int vec2GetYInt(int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0018291c. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_0025c848. */
 /* Supplied declaration required: FUN_002f5020. */
-extern unsigned int FUN_0036c6c4(unsigned short);
+extern unsigned int dataTable0eSub1GetId(unsigned short);
 
 
 void FUN_0020bd54(void)
@@ -123,7 +123,7 @@ void FUN_0020bd54(void)
   float temp_v43;
   float temp_v44;
   
-  temp_v5 = (*(int *)((unsigned char *)&DAT_0057f0c4 + 0x4));
+  temp_v5 = (*(int *)((unsigned char *)&g_buttonHelp + 0x4));
   temp_v21 = 0;
   temp_v22 = 0;
   FUN_002f5020(temp_v23,&LAB_00192824,0x10,6);
@@ -136,9 +136,9 @@ void FUN_0020bd54(void)
     if ((*(char *)(temp_v9 + 0x5ac) != '\0') &&
        (temp_v8 = temp_v5 + temp_v7 * 0x8c, *(char *)(temp_v8 + 0xb9) != '\0')) {
       acStack_a0[temp_v7] = '\x01';
-      temp_v2 = FUN_001654d8(temp_v8 + 0x34);
+      temp_v2 = vec2GetXInt(temp_v8 + 0x34);
       aiStack_d0[temp_v7] = temp_v2 + *(short *)(temp_v8 + 0x4c);
-      temp_v2 = FUN_001654e4(temp_v8 + 0x34);
+      temp_v2 = vec2GetYInt(temp_v8 + 0x34);
       aiStack_b8[temp_v7] = temp_v2 + *(short *)(temp_v8 + 0x4e);
       temp_v12 = VectorFloatToUnsigned(*(float *)(temp_v8 + 0x54) * temp_v17,3);
       temp_v6 = (temp_v12 & 0xff) - 0x100;
@@ -470,7 +470,7 @@ LAB_0020c3d4:
         }
         if (temp_v0 != '\0') {
           temp_v8 = temp_v5 + temp_v7 * 4;
-          temp_v3 = FUN_0036c6c4(*(unsigned short *)(temp_v8 + 0x5ae) & 0xff);
+          temp_v3 = dataTable0eSub1GetId(*(unsigned short *)(temp_v8 + 0x5ae) & 0xff);
           temp_v2 = temp_v5 + temp_v7;
           temp_v12 = (unsigned int)(*(char *)(temp_v2 + 0x5d4) != '\0');
           if (!(*(char *)(temp_v8 + 0x5ac) == '\x15' || *(char *)(temp_v8 + 0x5ac) == '\x14')) {

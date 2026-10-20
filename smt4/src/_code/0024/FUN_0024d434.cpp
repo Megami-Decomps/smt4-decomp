@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_0027da30(int, int);
-int FUN_00282924(int, int);
-int FUN_002b06c4(void);
+int btlMainFindEntryByListedId(int, int);
+int dataTable00FindById(void);
 int FUN_002d8cc8(void);
 int FUN_0033e0a8(unsigned int, int *);
 
@@ -19,8 +19,8 @@ typedef struct {
 
 extern unsigned int FUN_0027d9e8(int, unsigned int);
 /* Supplied declaration required: FUN_0027da30. */
-/* Supplied declaration required: FUN_00282924. */
-/* Supplied declaration required: FUN_002b06c4. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
+/* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: FUN_002d8cc8. */
 /* Supplied declaration required: FUN_0033e0a8. */
 
@@ -44,7 +44,7 @@ void FUN_0024d434(int param_1,int param_2,int param_3)
   temp_v3 = *(int *)(param_1 + 0x1e98) + param_2 * 0x114;
   if (((*(unsigned int *)(temp_v3 + 0x50) & 0x10) == 0) || (param_3 != 0)) {
     temp_v0 = param_1;
-    FUN_00282924(param_1,(int)*(short *)(temp_v3 + 0x62));
+    btlMainFindEntryByListedId(param_1,(int)*(short *)(temp_v3 + 0x62));
     if (temp_v0 != 0) {
       temp_v4 = 0;
       do {
@@ -80,7 +80,7 @@ LAB_0024d4b4:
     temp_v7 = puVar3[1];
     temp_v8 = (float)puVar3[2] + temp_v5;
     FUN_0027da30(param_1,param_2);
-    FUN_002b06c4();
+    dataTable00FindById();
   }
   return;
 }

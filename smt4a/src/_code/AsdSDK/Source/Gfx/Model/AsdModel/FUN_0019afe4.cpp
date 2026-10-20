@@ -58,7 +58,7 @@ extern char s__V_V_V_005b3cc8[13]; /* 0x5b3cc8 */
 /* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: asdMemoryGetDefaultAllocator. */
 /* Supplied declaration required: FUN_0018d9f0. */
-extern int FUN_0019a37c(int, unsigned int, unsigned int);
+extern int libc_strncmp(int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001aa528. */
 /* Supplied declaration required: FUN_001acca0. */
 extern unsigned int asdMemoryGetAllocatorA(void);
@@ -307,7 +307,7 @@ LAB_0019b358:
         }
         do {
           temp_v1 = wstrlen(*(unsigned int *)(s__V_V_V_005b3cc8 + temp_v7 * 4));
-          temp_v5 = FUN_0019a37c(temp_v9,*(unsigned int *)(s__V_V_V_005b3cc8 + temp_v7 * 4),temp_v1);
+          temp_v5 = libc_strncmp(temp_v9,*(unsigned int *)(s__V_V_V_005b3cc8 + temp_v7 * 4),temp_v1);
           if (temp_v5 == 0) {
             temp_v9 = *(int *)(s__V_V_V_005b3cc8 + temp_v7 * 4);
             if (*(int *)(temp_v6 + 0x1c) != 0) {

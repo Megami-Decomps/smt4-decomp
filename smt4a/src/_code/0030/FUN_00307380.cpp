@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e7232(int *);
+int sharedRefRelease(int *);
 int FUN_002e78d0(unsigned int, int *, int);
 int FUN_002e7908(unsigned int *, unsigned int *);
 
@@ -21,12 +21,12 @@ typedef struct {
 
 extern int *FUN_00116f6c(void);
 extern unsigned int FUN_002e6e26(void);
-/* Supplied declaration required: FUN_002e7232. */
-extern int FUN_002e760a(unsigned int);
+/* Supplied declaration required: sharedRefRelease. */
+extern int operatorNew(unsigned int);
 extern int FUN_002e789a(int);
 /* Supplied declaration required: FUN_002e78d0. */
 /* Supplied declaration required: FUN_002e7908. */
-extern int FUN_002f4e86(unsigned int *);
+extern int refIsNonNegative(unsigned int *);
 
 
 void FUN_00307380(unsigned int *param_1,unsigned int param_2,int param_3,unsigned int param_4,
@@ -57,7 +57,7 @@ void FUN_00307380(unsigned int *param_1,unsigned int param_2,int param_3,unsigne
   temp_v7 = param_4;
   temp_v0 = FUN_002e789a(param_3);
   if (temp_v0 != 0) {
-    temp_v0 = FUN_002e760a(0x138);
+    temp_v0 = operatorNew(0x138);
     if (temp_v0 != 0) {
       piVar2 = (int *)FUN_00116f6c();
     }
@@ -68,9 +68,9 @@ void FUN_00307380(unsigned int *param_1,unsigned int param_2,int param_3,unsigne
     temp_v4 = param_7;
     temp_v2 = param_6;
     (**(romwright_code **)(*piVar2 + 0x34))(&temp_v5,piVar2,*(unsigned int *)(param_3 + 0x44),temp_v7);
-    temp_v0 = FUN_002f4e86((unsigned int *)&temp_v5);
+    temp_v0 = refIsNonNegative((unsigned int *)&temp_v5);
     if (temp_v0 == 0) {
-      FUN_002e7232(piVar2);
+      sharedRefRelease(piVar2);
       *param_1 = temp_v5;
       param_1[1] = uStack_30;
       param_1[2] = uStack_2c;

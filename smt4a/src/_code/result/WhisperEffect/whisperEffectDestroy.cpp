@@ -6,9 +6,9 @@
 extern "C" {
 
 int jobGetWork(void);
-int FUN_0019a7f4(int type, int index);
+int asdTMTexTableReleaseNode(int type, int index);
 int asdTMTexTableFreeEntry(int type);
-int FUN_002e3328(void *ptr);
+int asdOperatorDelete(void *ptr);
 
 extern WhisperEffect *g_whisperEffect;
 
@@ -18,11 +18,11 @@ void whisperEffectDestroy(void)
 
     jobGetWork();
     for (i = 0; i < 5; i++) {
-        FUN_0019a7f4(0x2c, i);
+        asdTMTexTableReleaseNode(0x2c, i);
     }
     asdTMTexTableFreeEntry(0x2c);
     if (g_whisperEffect != NULL) {
-        FUN_002e3328(g_whisperEffect);
+        asdOperatorDelete(g_whisperEffect);
         g_whisperEffect = NULL;
     }
 }

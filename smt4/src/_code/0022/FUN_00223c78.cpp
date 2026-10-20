@@ -9,11 +9,11 @@ struct Obj00223c78 {
     /* 0x400 */ s32 state;
 };
 
-extern Obj00223c78 *DAT_0044e190;
+extern Obj00223c78 *g_statusDown;
 
 s32 FUN_00223c78(void)
 {
-    Obj00223c78 *obj = DAT_0044e190;
+    Obj00223c78 *obj = g_statusDown;
     s32 result = 0;
 
     if (obj != NULL) {

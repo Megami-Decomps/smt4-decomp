@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_00189a38(void);
-int FUN_0018b868(void);
-int FUN_0018b964(void);
+int nn_applet_CTR_detail_OpenSession(void);
+int nn_applet_CTR_detail_CloseSession(void);
 int FUN_0018bb68(int, unsigned int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -16,8 +16,8 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00189a38. */
 extern int FUN_0018b70c(void);
-/* Supplied declaration required: FUN_0018b868. */
-/* Supplied declaration required: FUN_0018b964. */
+/* Supplied declaration required: nn_applet_CTR_detail_OpenSession. */
+/* Supplied declaration required: nn_applet_CTR_detail_CloseSession. */
 /* Supplied declaration required: FUN_0018bb68. */
 
 
@@ -27,13 +27,13 @@ void nn_applet_CTR_detail_ReplySleepQueryToManager(unsigned int param_1)
 /* irregular: 4 native warning(s); review required */
   int temp_v0;
   
-  FUN_0018b868();
+  nn_applet_CTR_detail_OpenSession();
   temp_v0 = FUN_0018b70c();
   FUN_0018bb68(temp_v0,param_1);
   if (temp_v0 < 0) {
     FUN_00189a38();
   }
-  FUN_0018b964();
+  nn_applet_CTR_detail_CloseSession();
   return;
 }
 

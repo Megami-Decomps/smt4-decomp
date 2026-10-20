@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_00133126(unsigned char [8], int, int *, unsigned char [4]);
-int FUN_00300900(...);
-int FUN_00300934(int, int *);
+int streamExtractU8(...);
+int streamReadWord(int, int *);
 int FUN_0030093c(int, int);
 int FUN_00302698(void);
 int FUN_003026b0(int, unsigned int [2]);
@@ -22,9 +22,9 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_00133126. */
-extern int FUN_002ee9da(int);
-/* Supplied declaration required: FUN_00300900. */
-/* Supplied declaration required: FUN_00300934. */
+extern int streamSeek(int);
+/* Supplied declaration required: streamExtractU8. */
+/* Supplied declaration required: streamReadWord. */
 /* Supplied declaration required: FUN_0030093c. */
 /* Supplied declaration required: FUN_00302698. */
 /* Supplied declaration required: FUN_003026b0. */
@@ -50,8 +50,8 @@ void FUN_00116860(int param_1,int param_2)
   temp_v0 = *(char *)(param_1 + 0x3b);
   temp_v3 = 0;
   if ((((temp_v0 != '\0') ||
-       ((FUN_00300900(param_1,param_2 + 4), *(char *)(param_1 + 4) == '\0' &&
-        (FUN_00300934(param_1,&temp_v3), *(char *)(param_1 + 4) == '\0')))) &&
+       ((streamExtractU8(param_1,param_2 + 4), *(char *)(param_1 + 4) == '\0' &&
+        (streamReadWord(param_1,&temp_v3), *(char *)(param_1 + 4) == '\0')))) &&
       (temp_v5 = *(int *)(param_1 + 0xc), *(char *)(param_1 + 4) == '\0')) &&
      (FUN_0030093c(param_1,param_2 + 8), *(char *)(param_1 + 4) == '\0')) {
     temp_v6 = param_2 + 0x70;
@@ -59,7 +59,7 @@ void FUN_00116860(int param_1,int param_2)
     temp_v4[0] = 0;
     FUN_003026b0(param_1,temp_v4);
     for (temp_v2 = 0; temp_v2 < temp_v4[0]; temp_v2 = temp_v2 + 1) {
-      FUN_00300900(param_1,temp_v7);
+      streamExtractU8(param_1,temp_v7);
       temp_v8 = *(unsigned int *)(temp_v6 + 0x10);
       FUN_00133126(temp_v9,temp_v6,&temp_v8,temp_v7);
     }
@@ -69,7 +69,7 @@ void FUN_00116860(int param_1,int param_2)
          (FUN_003026bc(param_1,param_2 + 0xf0), *(char *)(param_1 + 4) == '\0')))) &&
        (temp_v0 == '\0')) {
       if (((unsigned int)(temp_v5 + temp_v3) < *(unsigned int *)(param_1 + 0xc)) ||
-         (temp_v1 = FUN_002ee9da(param_1), temp_v1 == 0)) {
+         (temp_v1 = streamSeek(param_1), temp_v1 == 0)) {
         *(unsigned char *)(param_1 + 4) = 1;
       }
     }

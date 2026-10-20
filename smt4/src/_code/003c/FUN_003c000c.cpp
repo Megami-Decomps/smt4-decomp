@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_0027da30(int, int);
-int FUN_00282924(int, int);
+int btlMainFindEntryByListedId(int, int);
 
 /* Supplied declaration required: FUN_0027da30. */
-/* Supplied declaration required: FUN_00282924. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 extern int btlGetMainState(void);
-extern int FUN_002a8740(int);
+extern int gameGetUnitRecord(int);
 
 
 void FUN_003c000c(int param_1,int param_2,int param_3)
@@ -25,7 +25,7 @@ void FUN_003c000c(int param_1,int param_2,int param_3)
   
   temp_v1 = btlGetMainState();
   if (param_1 >= 0x6d) {
-    temp_v1 = FUN_002a8740(param_1 - 0x6d);
+    temp_v1 = gameGetUnitRecord(param_1 - 0x6d);
     if (param_2 == 0) {
       param_3 = *(short *)(temp_v1 + 0x2a) + param_3;
       if (param_3 < 0) {
@@ -81,7 +81,7 @@ void FUN_003c000c(int param_1,int param_2,int param_3)
     }
     *puVar5 = (short)param_3;
   }
-  FUN_00282924(temp_v1,param_1);
+  btlMainFindEntryByListedId(temp_v1,param_1);
   if (*(int *)(temp_v1 + 0x278) != 0) {
     *(unsigned short *)(*(int *)(temp_v1 + 0x278) + 0x2a) = *(unsigned short *)(temp_v2 + 0xe8);
     *(unsigned short *)(*(int *)(temp_v1 + 0x278) + 0x2c) = *(unsigned short *)(temp_v2 + 0xec);

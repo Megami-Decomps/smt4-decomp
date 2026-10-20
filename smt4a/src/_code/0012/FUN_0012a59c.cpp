@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_002e9ec8(int, unsigned int);
-int FUN_002ea446(int, int);
+int onlineInstanceTableFind(int, unsigned int);
+int onlineJobSetStateTimed(int, int);
 int FUN_002f4c9c(...);
 int FUN_0030cae0(int, unsigned int);
 int rt_memcpy(unsigned int, unsigned int, unsigned int);
@@ -24,9 +24,9 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned int FUN_002e7908(unsigned int *, unsigned int *);
-extern int FUN_002e9af4(void);
-/* Supplied declaration required: FUN_002e9ec8. */
-/* Supplied declaration required: FUN_002ea446. */
+extern int onlineInstanceTableGetCurrent(void);
+/* Supplied declaration required: onlineInstanceTableFind. */
+/* Supplied declaration required: onlineJobSetStateTimed. */
 /* Supplied declaration required: FUN_002f4c9c. */
 extern int FUN_0030cad0(void);
 /* Supplied declaration required: FUN_0030cae0. */
@@ -55,8 +55,8 @@ void FUN_0012a59c(int param_1)
   unsigned int *puVar4;
   
   puVar4 = &temp_v3;
-  temp_v0 = FUN_002e9af4();
-  FUN_002e9ec8(temp_v0,*(unsigned int *)(param_1 + 0x6c));
+  temp_v0 = onlineInstanceTableGetCurrent();
+  onlineInstanceTableFind(temp_v0,*(unsigned int *)(param_1 + 0x6c));
   if (temp_v0 == 0) {
     temp_v6 = 0x80010004;
     puVar5 = (unsigned int *)&temp_v6;
@@ -79,7 +79,7 @@ LAB_0012a64c:
         FUN_002f4c9c(temp_v8);
         temp_v0 = (**(romwright_code **)(*piVar6 + 0x10))(piVar6,*(unsigned int *)(param_1 + 0x16c),temp_v1);
         if (temp_v0 == 0) {
-          FUN_002ea446(param_1,0x10);
+          onlineJobSetStateTimed(param_1,0x10);
           return;
         }
         temp_v1 = temp_v8;
@@ -101,15 +101,15 @@ LAB_0012a64c:
       temp_v4 = (unsigned int)*(unsigned short *)(param_1 + 0x15a);
       temp_v5 = 0;
       (**(romwright_code **)(*temp_v7 + 8))(temp_v7,temp_v6,temp_v1,*(unsigned int *)(param_1 + 0x154));
-      temp_v0 = FUN_002e9af4();
-      FUN_002e9ec8(temp_v0,*(unsigned int *)(param_1 + 0x6c));
+      temp_v0 = onlineInstanceTableGetCurrent();
+      onlineInstanceTableFind(temp_v0,*(unsigned int *)(param_1 + 0x6c));
       if (temp_v0 != 0) {
         piVar6 = *(int **)(temp_v12 + 0xc);
         temp_v1 = temp_v8;
         FUN_002f4c9c(temp_v8);
         (**(romwright_code **)(*piVar6 + 0xc))(piVar6,temp_v6,temp_v1);
-        temp_v0 = FUN_002e9af4();
-        FUN_002e9ec8(temp_v0,*(unsigned int *)(param_1 + 0x6c));
+        temp_v0 = onlineInstanceTableGetCurrent();
+        onlineInstanceTableFind(temp_v0,*(unsigned int *)(param_1 + 0x6c));
         if (temp_v0 != 0) goto LAB_0012a64c;
       }
       temp_v6 = 0x80010004;

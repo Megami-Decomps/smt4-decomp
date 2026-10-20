@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern signed char DAT_00446fe8; /* 0x446fe8 */
+extern signed char g_mapCollision; /* 0x446fe8 */
 extern unsigned int DAT_0049eb7c; /* 0x49eb7c */
 extern unsigned int DAT_0049eb80; /* 0x49eb80 */
 extern unsigned int DAT_0049eb84; /* 0x49eb84 */
@@ -28,7 +28,7 @@ unsigned char FUN_00211804(unsigned int *param_1,unsigned int *param_2,unsigned 
   
   temp_v1 = DAT_0049eb84;
   temp_v0 = DAT_0049eb80;
-  temp_v2 = DAT_00446fe8 != '\0';
+  temp_v2 = g_mapCollision != '\0';
   if (temp_v2) {
     *param_1 = DAT_0049eb7c;
     param_1[1] = temp_v0;

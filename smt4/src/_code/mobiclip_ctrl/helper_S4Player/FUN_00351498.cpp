@@ -8,8 +8,8 @@ int FUN_002bcc60(...);
 int FUN_002bcd44(...);
 int asdOperatorNew(...);
 int memAlloc(...);
-int FUN_002c38fc(...);
-int FUN_002c4040(...);
+int nn_os_CriticalSection_Initialize(...);
+int nn_os_LightEvent_Signal(...);
 int FUN_002c526c(...);
 int FUN_0034ed38(...);
 
@@ -35,8 +35,8 @@ extern unsigned int *DAT_0044d15c; /* 0x44d15c */
 /* Supplied declaration required: FUN_002bcd44. */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: memAlloc. */
-/* Supplied declaration required: FUN_002c38fc. */
-/* Supplied declaration required: FUN_002c4040. */
+/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
+/* Supplied declaration required: nn_os_LightEvent_Signal. */
 /* Supplied declaration required: FUN_002c526c. */
 /* Supplied declaration required: FUN_0034ed38. */
 extern void nn_os_LightEvent_Initialize(unsigned int, unsigned char);
@@ -88,8 +88,8 @@ FUN_00351498(int param_1,int param_2,int param_3,int param_4,int param_5,unsigne
     *(unsigned int *)(param_1 + 0x14c) = 0;
     FUN_0034ed38(param_1 + 0x158);
     nn_os_LightEvent_Initialize(param_1 + 0x20,1);
-    FUN_002c38fc(param_1);
-    FUN_002c4040(param_1 + 0x20);
+    nn_os_CriticalSection_Initialize(param_1);
+    nn_os_LightEvent_Signal(param_1 + 0x20);
     *(unsigned char *)(param_1 + 0x10) = 0;
     *(unsigned char *)(param_1 + 0x11) = 0;
     temp_v0 = 0x100;

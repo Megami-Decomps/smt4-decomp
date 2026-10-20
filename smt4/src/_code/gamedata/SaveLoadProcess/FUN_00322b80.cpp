@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001ec9d0(...);
 int FUN_00259274(...);
 int FUN_00259294(...);
-int FUN_0026b584(...);
+int gameDataBlocksAddFlags(...);
 int asdMemAlloc(...);
 int taskCreateDraw(...);
 int asdProcessCreateSimple(...);
@@ -37,8 +37,8 @@ extern unsigned int DAT_0043e2f8; /* 0x43e2f8 */
 /* Supplied declaration required: FUN_001ec9d0. */
 /* Supplied declaration required: FUN_00259274. */
 /* Supplied declaration required: FUN_00259294. */
-/* Supplied declaration required: FUN_0026b584. */
-extern int FUN_002c09bc(void);
+/* Supplied declaration required: gameDataBlocksAddFlags. */
+extern int gameDataBlocksGetSaveData(void);
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdProcessCreateSimple. */
@@ -55,11 +55,11 @@ unsigned int FUN_00322b80(void)
   
   puVar2 = (unsigned int *)0x100;
   asdMemAlloc(0x100,0x100,0,0x18,1);
-  FUN_0026b584(1);
+  gameDataBlocksAddFlags(1);
   FUN_00259294(1);
   FUN_00259274(1);
   puVar2[2] = 0;
-  temp_v1 = FUN_002c09bc();
+  temp_v1 = gameDataBlocksGetSaveData();
   temp_v0 = *(unsigned char *)(temp_v1 + 3);
   puVar2[4] = (unsigned int)temp_v0;
   if (temp_v0 == 0) {

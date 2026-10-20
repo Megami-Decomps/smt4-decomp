@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0028975c(...);
+int gameFlagSetValue(...);
 int randNextInRange(int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -12,10 +12,10 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-/* Supplied declaration required: FUN_0028975c. */
-extern int FUN_002c09d0(unsigned int);
+/* Supplied declaration required: gameFlagSetValue. */
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: randNextInRange. */
-extern char *FUN_002c2950(void);
+extern char *gameGetMapBlock(void);
 
 
 void FUN_0026faa4(void)
@@ -28,7 +28,7 @@ void FUN_0026faa4(void)
   char temp_v2;
   char temp_v3;
   
-  pcVar1 = (char *)FUN_002c2950();
+  pcVar1 = (char *)gameGetMapBlock();
   temp_v2 = '\0';
   temp_v3 = '\0';
   temp_v1 = 0;
@@ -43,84 +43,84 @@ void FUN_0026faa4(void)
     if (temp_v2 != '\x0e' || temp_v3 != '\x01') goto LAB_0026fb0c;
     temp_v1 = randNextInRange(0xff);
 LAB_0026fb74:
-    if ((temp_v1 != 0) || (temp_v1 = FUN_002c09d0(0x573), temp_v1 != 0)) {
-      FUN_0028975c(0x572,0,1);
+    if ((temp_v1 != 0) || (temp_v1 = gameFlagIsSet(0x573), temp_v1 != 0)) {
+      gameFlagSetValue(0x572,0,1);
     }
     else {
-      FUN_0028975c(0x572,1);
+      gameFlagSetValue(0x572,1);
     }
     temp_v1 = randNextInRange(0xff);
     if (temp_v2 != '\x05' || temp_v3 != '\x06') goto LAB_0026fbe0;
     temp_v1 = randNextInRange(0xff);
 LAB_0026fc4c:
-    if ((temp_v1 != 0) || (temp_v1 = FUN_002c09d0(0x577), temp_v1 != 0)) {
-      FUN_0028975c(0x576,0,1);
+    if ((temp_v1 != 0) || (temp_v1 = gameFlagIsSet(0x577), temp_v1 != 0)) {
+      gameFlagSetValue(0x576,0,1);
     }
     else {
-      FUN_0028975c(0x576,1);
+      gameFlagSetValue(0x576,1);
     }
     temp_v1 = randNextInRange(0xff);
     if (temp_v2 != '\b' || temp_v3 != '\x01') goto LAB_0026fcb8;
     temp_v1 = randNextInRange(0xff);
-    if ((temp_v1 != 0) || (temp_v1 = FUN_002c09d0(0x57b), temp_v1 != 0)) {
-      FUN_0028975c(0x57a,0,1);
+    if ((temp_v1 != 0) || (temp_v1 = gameFlagIsSet(0x57b), temp_v1 != 0)) {
+      gameFlagSetValue(0x57a,0,1);
     }
     else {
-      FUN_0028975c(0x57a,1);
+      gameFlagSetValue(0x57a,1);
     }
   }
   else {
     temp_v1 = randNextInRange(0xff);
 LAB_0026fb0c:
-    if ((temp_v1 != 0) || (temp_v1 = FUN_002c09d0(0x571), temp_v1 != 0)) {
-      FUN_0028975c(0x570,0,1);
+    if ((temp_v1 != 0) || (temp_v1 = gameFlagIsSet(0x571), temp_v1 != 0)) {
+      gameFlagSetValue(0x570,0,1);
     }
     else {
-      FUN_0028975c(0x570,1);
+      gameFlagSetValue(0x570,1);
     }
     temp_v1 = randNextInRange(0xff);
     if (temp_v2 != '\x03' || temp_v3 != '\b') goto LAB_0026fb74;
     temp_v1 = randNextInRange(0xff);
 LAB_0026fbe0:
-    if ((temp_v1 != 0) || (temp_v1 = FUN_002c09d0(0x575), temp_v1 != 0)) {
-      FUN_0028975c(0x574,0,1);
+    if ((temp_v1 != 0) || (temp_v1 = gameFlagIsSet(0x575), temp_v1 != 0)) {
+      gameFlagSetValue(0x574,0,1);
     }
     else {
-      FUN_0028975c(0x574,1);
+      gameFlagSetValue(0x574,1);
     }
     temp_v1 = randNextInRange(0xff);
     if (temp_v2 != '\a' || temp_v3 != '\x01') goto LAB_0026fc4c;
     temp_v1 = randNextInRange(0xff);
 LAB_0026fcb8:
-    if ((temp_v1 != 0) || (temp_v1 = FUN_002c09d0(0x579), temp_v1 != 0)) {
-      FUN_0028975c(0x578,0,1);
+    if ((temp_v1 != 0) || (temp_v1 = gameFlagIsSet(0x579), temp_v1 != 0)) {
+      gameFlagSetValue(0x578,0,1);
     }
     else {
-      FUN_0028975c(0x578,1);
+      gameFlagSetValue(0x578,1);
     }
     temp_v1 = randNextInRange(0xff);
     if (!(temp_v2 == '\f' && temp_v3 == '\x01')) {
-      if ((temp_v1 != 0) || (temp_v1 = FUN_002c09d0(0x57b), temp_v1 != 0)) {
-        FUN_0028975c(0x57a,0,1);
+      if ((temp_v1 != 0) || (temp_v1 = gameFlagIsSet(0x57b), temp_v1 != 0)) {
+        gameFlagSetValue(0x57a,0,1);
       }
       else {
-        FUN_0028975c(0x57a,1);
+        gameFlagSetValue(0x57a,1);
       }
     }
   }
   temp_v1 = randNextInRange(0xff);
-  temp_v0 = FUN_002c09d0(0x648);
+  temp_v0 = gameFlagIsSet(0x648);
   if (temp_v0 == 0) {
     temp_v1 = 0xff;
   }
   if (temp_v2 == '\r' && temp_v3 == '\x01') {
     return;
   }
-  if ((temp_v1 == 0) && (temp_v1 = FUN_002c09d0(0x57d), temp_v1 == 0)) {
-    FUN_0028975c(0x57c,1);
+  if ((temp_v1 == 0) && (temp_v1 = gameFlagIsSet(0x57d), temp_v1 == 0)) {
+    gameFlagSetValue(0x57c,1);
     return;
   }
-  FUN_0028975c(0x57c,0,1);
+  gameFlagSetValue(0x57c,0,1);
   return;
 }
 

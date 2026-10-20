@@ -11,8 +11,8 @@ int FUN_002a48e0(...);
 int FUN_002a4964(...);
 int FUN_002c2728(...);
 int sysMemClear(...);
-int FUN_002e6dd4(...);
-int FUN_0031d1d8(...);
+int rt_memclr(...);
+int flaggedEntrySetValueA(...);
 int FUN_003d18e0(...);
 
 /* stack frame of void: 3 slot(s), 12 byte(s) */
@@ -23,10 +23,10 @@ typedef struct {
 } void_stack;
 
 extern int FUN_0029093c(...); /* 0x29093c */
-extern int DAT_0057f28c; /* 0x57f28c */
+extern int g_uiQuest; /* 0x57f28c */
 
 /* Supplied declaration required: qsort. */
-extern int FUN_0019f18c(unsigned int);
+extern int idIsAtLeast350(unsigned int);
 extern int FUN_0019f1a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001ad9b4. */
 extern int FUN_001bd100(unsigned int);
@@ -36,8 +36,8 @@ extern int FUN_001bd100(unsigned int);
 /* Supplied declaration required: FUN_002c2728. */
 extern int FUN_002c2c68(int);
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_002e6dd4. */
-/* Supplied declaration required: FUN_0031d1d8. */
+/* Supplied declaration required: rt_memclr. */
+/* Supplied declaration required: flaggedEntrySetValueA. */
 extern int FUN_00348ed0(int);
 /* Supplied declaration required: FUN_003d18e0. */
 extern int FUN_003df004(unsigned int, int, int *);
@@ -63,11 +63,11 @@ void FUN_001ff724(void)
   int temp_v9;
   int temp_v10 [3];
   
-  temp_v5 = DAT_0057f28c;
+  temp_v5 = g_uiQuest;
   temp_v9 = 0;
   temp_v8 = 0;
-  sysMemClear(DAT_0057f28c + 0xa10,0xc6);
-  FUN_002e6dd4(temp_v5 + 0xad6,500);
+  sysMemClear(g_uiQuest + 0xa10,0xc6);
+  rt_memclr(temp_v5 + 0xad6,500);
   temp_v7 = 0;
   do {
     temp_v1 = FUN_0019f1a4(temp_v7,0);
@@ -91,7 +91,7 @@ void FUN_001ff724(void)
               goto LAB_001ff908;
               temp_v1 = temp_v1 + 1;
             } while (temp_v1 < 4);
-            temp_v1 = FUN_0019f18c(temp_v7);
+            temp_v1 = idIsAtLeast350(temp_v7);
             if ((temp_v1 == 0) && (*(short *)(temp_v2 + 0x124) != 0)) {
               switch(*(unsigned char *)(temp_v5 + 0x945)) {
               case 0:
@@ -208,7 +208,7 @@ LAB_001ff9d0:
   temp_v8 = FUN_002c2728(0);
   FUN_002a48e0(temp_v1,*(unsigned int *)(temp_v8 + 4));
   puVar7 = (unsigned int *)FUN_002c2728(0);
-  FUN_0031d1d8(temp_v1,*puVar7);
+  flaggedEntrySetValueA(temp_v1,*puVar7);
   temp_v8 = FUN_002c2728(1);
   temp_v8 = *(int *)(temp_v8 + 4);
   piVar6 = (int *)FUN_002c2728(1);
@@ -221,7 +221,7 @@ LAB_001ff9d0:
       temp_v5 = FUN_002c2728(1);
       FUN_002a48e0(temp_v3,*(unsigned int *)(temp_v5 + 4));
       puVar7 = (unsigned int *)FUN_002c2728(1);
-      FUN_0031d1d8(temp_v3,*puVar7);
+      flaggedEntrySetValueA(temp_v3,*puVar7);
       return;
     }
   }
@@ -232,7 +232,7 @@ LAB_001ff9d0:
   temp_v5 = FUN_002c2728(1);
   FUN_002a48e0(temp_v3,*(unsigned int *)(temp_v5 + 4));
   puVar7 = (unsigned int *)FUN_002c2728(1);
-  FUN_0031d1d8(temp_v3,*puVar7);
+  flaggedEntrySetValueA(temp_v3,*puVar7);
   return;
 }
 

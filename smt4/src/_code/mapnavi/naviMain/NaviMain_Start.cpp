@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00240cec(...);
 int FUN_00289880(...);
 int FUN_002898e4(...);
-int FUN_0028d6d0(...);
+int buttonHelpCreate(...);
 int asdMemAlloc(...);
 int taskCreateDraw(...);
 int asdProcessCreateSimple(...);
@@ -27,13 +27,13 @@ extern unsigned char LAB_001a96a4; /* 0x1a96a4 */
 extern int NAVI_PROC(...); /* 0x1a96c0 */
 extern unsigned char LAB_001fc4f8; /* 0x1fc4f8 */
 extern int NAVI_DOWN(...); /* 0x1fc524 */
-extern unsigned int *DAT_0044cdf0; /* 0x44cdf0 */
+extern unsigned int *g_naviMain; /* 0x44cdf0 */
 
 /* Supplied declaration required: FUN_00240cec. */
 /* Supplied declaration required: FUN_00289880. */
 /* Supplied declaration required: FUN_002898e4. */
-/* Supplied declaration required: FUN_0028d6d0. */
-extern int FUN_002c09d0(unsigned int);
+/* Supplied declaration required: buttonHelpCreate. */
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdProcessCreateSimple. */
@@ -53,7 +53,7 @@ void NaviMain_Start(unsigned int param_1,unsigned int param_2)
   
   puVar1 = (unsigned int *)0x100;
   asdMemAlloc(0x100,0x100,0,0x12344,1);
-  DAT_0044cdf0 = puVar1;
+  g_naviMain = puVar1;
   *(unsigned char *)((int)puVar1 + 10) = 0;
   *(unsigned char *)((int)puVar1 + 9) = 0;
   puVar1[3] = 0;
@@ -68,11 +68,11 @@ void NaviMain_Start(unsigned int param_1,unsigned int param_2)
   *(unsigned char *)(puVar1 + 2) = 0;
   NaviMain_InitInstance(puVar1 + 0x10);
   FUN_002898e4();
-  temp_v0 = FUN_002c09d0(0x16);
+  temp_v0 = gameFlagIsSet(0x16);
   if (temp_v0 == 0) {
     FUN_00289880();
   }
-  FUN_0028d6d0();
+  buttonHelpCreate();
   FUN_00240cec(param_2);
   pcVar3 = "NAVI PROC";
   asdProcessCreateSimple("NAVI PROC",2,0,0,NAVI_PROC,&LAB_001a96a4,puVar1);
@@ -84,11 +84,11 @@ void NaviMain_Start(unsigned int param_1,unsigned int param_2)
   taskCreateDraw("NAVI FADE DRAW",0xe6,0,0,&LAB_001fc4f8,0,0,*puVar1);
   puVar1[0x48cc] = (unsigned int)pcVar3;
   NaviMain_ResetFlags(puVar1 + 0x48cd,1);
-  puVar1 = DAT_0044cdf0;
-  if (DAT_0044cdf0 != (unsigned int *)0x0) {
-    pbVar5 = (unsigned char *)(DAT_0044cdf0 + 0x48cd);
-    if (DAT_0044cdf0[0x48ce] != 2) {
-      *(unsigned char *)(DAT_0044cdf0 + 0x48cf) = 0;
+  puVar1 = g_naviMain;
+  if (g_naviMain != (unsigned int *)0x0) {
+    pbVar5 = (unsigned char *)(g_naviMain + 0x48cd);
+    if (g_naviMain[0x48ce] != 2) {
+      *(unsigned char *)(g_naviMain + 0x48cf) = 0;
       *(unsigned char *)((int)puVar1 + 0x1233e) = 0;
       *(unsigned char *)((int)puVar1 + 0x1233f) = 0;
       puVar1[0x48ce] = 2;

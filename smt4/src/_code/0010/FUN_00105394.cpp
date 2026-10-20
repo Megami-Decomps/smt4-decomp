@@ -14,7 +14,7 @@ typedef struct {
 extern unsigned char g_gameState; /* 0x49f91c */
 
 /* Supplied declaration required: FUN_0010b580. */
-extern int FUN_002c2950(void);
+extern int gameGetMapBlock(void);
 
 
 void FUN_00105394(void)
@@ -30,7 +30,7 @@ void FUN_00105394(void)
   int temp_v5;
   int *piVar8;
   
-  temp_v2 = FUN_002c2950();
+  temp_v2 = gameGetMapBlock();
   (*(int *)((unsigned char *)&g_gameState + 0x220)) = (*(int *)((unsigned char *)&g_gameState + 0x220)) + 1;
   if ((*(int *)((unsigned char *)&g_gameState + 0x220)) >= 0x709) {
     (*(int *)((unsigned char *)&g_gameState + 0x220)) = 0;

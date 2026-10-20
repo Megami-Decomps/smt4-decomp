@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern PartyBlockB *FUN_001ab940(void);
+extern PartyBlockB *gameFlagBlockGet(void);
 
 u32 partyEntryFlagsBit1(s32 index)
 {
-    return (FUN_001ab940()->e[index].flags & 2) >> 1;
+    return (gameFlagBlockGet()->e[index].flags & 2) >> 1;
 }
 
 } /* extern "C" */

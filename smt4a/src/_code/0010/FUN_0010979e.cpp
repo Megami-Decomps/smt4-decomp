@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e7232(int);
+int sharedRefRelease(int);
 int FUN_002f2a22(undefined4, int);
 
 typedef struct fn_0010979e_arg0 fn_0010979e_arg0;
@@ -22,7 +22,7 @@ struct fn_0010979e_arg0 {
 };
 
 extern int FUN_00121398(fn_0010979e_arg0 *, void *);
-/* Supplied declaration required: FUN_002e7232. */
+/* Supplied declaration required: sharedRefRelease. */
 /* Supplied declaration required: FUN_002f2a22. */
 
 
@@ -68,7 +68,7 @@ int FUN_0010979e(fn_0010979e_arg0 *param_1)
         FUN_002f2a22(pfVar5->field_0x140,temp_v3);
       }
       else {
-        FUN_002e7232(temp_v3);
+        sharedRefRelease(temp_v3);
       }
     }
     return 0;

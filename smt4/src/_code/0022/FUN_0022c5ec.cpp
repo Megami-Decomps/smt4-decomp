@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_0022c0a4(int);
+int poolNodeUnlink(int);
 
 typedef int romwright_code(...);
 extern unsigned char DAT_00422548; /* 0x422548 */
 
-/* Supplied declaration required: FUN_0022c0a4. */
+/* Supplied declaration required: poolNodeUnlink. */
 
 
 unsigned int * FUN_0022c5ec(unsigned int *param_1)
@@ -32,7 +32,7 @@ unsigned int * FUN_0022c5ec(unsigned int *param_1)
     (**(romwright_code **)(**(int **)(temp_v1 + 0x5c) + 4))();
     *(unsigned int *)(temp_v1 + 0x60) = 0;
     *(unsigned int *)(temp_v1 + 100) = 0;
-    FUN_0022c0a4(temp_v1 + 0x4c);
+    poolNodeUnlink(temp_v1 + 0x4c);
     temp_v0 = *(int *)(temp_v1 + 0x3c);
     puVar4 = *(unsigned int **)(temp_v1 + 0x34);
     puVar1 = puVar4;

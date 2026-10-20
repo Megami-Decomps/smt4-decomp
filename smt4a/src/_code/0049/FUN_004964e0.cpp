@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_001641c4(void);
+int ifTouchRegionRemove(void);
 int FUN_00498ff0(unsigned int *);
 int FUN_004d05c4(unsigned int *, int, unsigned int, unsigned int);
 int releaseEntriesA(void);
 int releaseEntriesB(unsigned int);
 
 typedef int romwright_code(...);
-/* Supplied declaration required: FUN_001641c4. */
+/* Supplied declaration required: ifTouchRegionRemove. */
 extern unsigned short FUN_001643b4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00498ff0. */
 /* Supplied declaration required: FUN_004d05c4. */
@@ -34,7 +34,7 @@ void FUN_004964e0(unsigned int *param_1,int param_2)
   temp_v4 = 0;
   if (temp_v4 < (short)param_1[0x580c]) {
     do {
-      FUN_001641c4();
+      ifTouchRegionRemove();
       temp_v4 = temp_v4 + 1;
     } while (temp_v4 < (short)param_1[0x580c]);
   }

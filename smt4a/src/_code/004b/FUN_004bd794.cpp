@@ -8,7 +8,7 @@ int FUN_0014e188(...);
 int FUN_001505ac(...);
 int sysPlaySe(...);
 int FUN_00183f58(int, int, int);
-int FUN_001b4a90(int, int, unsigned int);
+int __aeabi_memset4(int, int, unsigned int);
 int FUN_00203b40(...);
 int FUN_00215bd0(void);
 int FUN_002804b0(...);
@@ -38,7 +38,7 @@ extern int saveSlotFindSelected(void);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00183f58. */
 extern int FUN_00187068(int);
-/* Supplied declaration required: FUN_001b4a90. */
+/* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: FUN_00203b40. */
 /* Supplied declaration required: FUN_00215bd0. */
 /* Supplied declaration required: FUN_002804b0. */
@@ -72,7 +72,7 @@ void FUN_004bd794(int param_1,unsigned char param_2)
     temp_v6 = *(short *)(temp_v0 + 300);
   }
   *(unsigned int *)(param_1 + 0x328) = 0xffffffff;
-  FUN_001b4a90(param_1 + 0x2c4,0x30,0xffffffff);
+  __aeabi_memset4(param_1 + 0x2c4,0x30,0xffffffff);
   temp_v0 = 0;
   do {
     temp_v1 = FUN_00187068(temp_v0);

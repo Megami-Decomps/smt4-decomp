@@ -7,7 +7,7 @@ extern "C" {
 extern int *g_lmapScene; /* 0x581288 */
 extern unsigned char g_gameState; /* 0x5f15fc */
 
-extern int FUN_00162e8c(void);
+extern int gameFlagsGetBlock(void);
 
 
 void FUN_00313648(int param_1)
@@ -16,7 +16,7 @@ void FUN_00313648(int param_1)
   int *piVar1;
   int temp_v0;
   
-  temp_v0 = FUN_00162e8c();
+  temp_v0 = gameFlagsGetBlock();
   piVar1 = g_lmapScene;
   if (*g_lmapScene != param_1) {
     g_lmapScene[1] = 0;

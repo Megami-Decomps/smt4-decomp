@@ -5,22 +5,22 @@
 extern "C" {
 
 int asdMemFree(int);
-int FUN_0019a7f4(int, int);
-int FUN_001add24(int);
+int asdTMTexTableReleaseNode(int, int);
+int dataTableFree(int);
 int FUN_002c2160(int);
 int asdTMTexTableFreeEntry(int);
-int FUN_0037b450(void);
+int campButtonHelpRelease(void);
 int freeTexTable24(void);
 
 extern unsigned char g_titleMain; /* 0x58916c */
 
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_0019a7f4. */
-/* Supplied declaration required: FUN_001add24. */
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
+/* Supplied declaration required: dataTableFree. */
 /* Supplied declaration required: FUN_002c2160. */
 /* Supplied declaration required: asdTMTexTableFreeEntry. */
-/* Supplied declaration required: FUN_0037b450. */
-extern int FUN_00399e04(void);
+/* Supplied declaration required: campButtonHelpRelease. */
+extern int campButtonHelpIsActive(void);
 /* Supplied declaration required: freeTexTable24. */
 
 
@@ -31,18 +31,18 @@ void FUN_0032b04c(void)
   int temp_v0;
   
   *(unsigned char *)((*(int *)((unsigned char *)&g_titleMain + 0x4)) + 4) = 1;
-  FUN_001add24(0x3a);
+  dataTableFree(0x3a);
   freeTexTable24();
   temp_v0 = 0;
   do {
-    FUN_0019a7f4(0x2a,temp_v0);
+    asdTMTexTableReleaseNode(0x2a,temp_v0);
     temp_v0 = temp_v0 + 1;
   } while (temp_v0 < 9);
   asdTMTexTableFreeEntry(0x2a);
   FUN_002c2160(0);
-  temp_v0 = FUN_00399e04();
+  temp_v0 = campButtonHelpIsActive();
   if (temp_v0 != 0) {
-    FUN_0037b450();
+    campButtonHelpRelease();
   }
   if ((*(int *)((unsigned char *)&g_titleMain + 0x4)) != 0) {
     asdMemFree((*(int *)((unsigned char *)&g_titleMain + 0x4)));

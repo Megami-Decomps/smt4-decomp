@@ -5,7 +5,7 @@
 extern "C" {
 
 typedef int romwright_code(...);
-extern int FUN_001acf08(void);
+extern int effGetFrameStep(void);
 
 
 void FUN_00232228(int param_1)
@@ -14,7 +14,7 @@ void FUN_00232228(int param_1)
   int temp_v0;
   
   (**(romwright_code **)(*(int *)(param_1 + 0x18) * 0x18 + 0x5c1080))(param_1);
-  temp_v0 = FUN_001acf08();
+  temp_v0 = effGetFrameStep();
   *(int *)(param_1 + 0x1c) = temp_v0 + *(int *)(param_1 + 0x1c);
   return;
 }

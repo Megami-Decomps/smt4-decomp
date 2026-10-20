@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_00117dec(int, int, int, unsigned int);
-int FUN_002e9318(unsigned char [8]);
-int FUN_002e9afe(int, int *);
+int onlineStringDestroy(unsigned char [8]);
+int vectorCopyHeader(int, int *);
 int FUN_002ea3c0(...);
 int FUN_002ea3d0(int, unsigned int);
 int FUN_002ea41e(int *, int);
-int FUN_002f7cb0(int);
+int onlineJobSetStateWaiting(int);
 int FUN_002f7cba(int, int, unsigned int);
 
 typedef int romwright_code(...);
@@ -25,14 +25,14 @@ extern unsigned char LAB_0010f72c; /* 0x10f72c */
 extern unsigned char LAB_0010f91d; /* 0x10f91d */
 
 /* Supplied declaration required: FUN_00117dec. */
-extern int FUN_002e760a(unsigned int);
-/* Supplied declaration required: FUN_002e9318. */
-/* Supplied declaration required: FUN_002e9afe. */
+extern int operatorNew(unsigned int);
+/* Supplied declaration required: onlineStringDestroy. */
+/* Supplied declaration required: vectorCopyHeader. */
 extern unsigned int FUN_002ea100(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002ea3c0. */
 /* Supplied declaration required: FUN_002ea3d0. */
 /* Supplied declaration required: FUN_002ea41e. */
-/* Supplied declaration required: FUN_002f7cb0. */
+/* Supplied declaration required: onlineJobSetStateWaiting. */
 /* Supplied declaration required: FUN_002f7cba. */
 
 
@@ -60,16 +60,16 @@ void FUN_0010f680(int param_1)
   temp_v2 = *(int *)(param_1 + 0xd8);
   temp_v1 = param_1 + 0x158;
   FUN_00117dec(temp_v2,temp_v1,param_1 + 0x80,temp_v0);
-  FUN_002e9318(temp_v5);
+  onlineStringDestroy(temp_v5);
   if (temp_v2 != 1) {
     FUN_002ea41e(&temp_v3,temp_v1);
-    FUN_002e9afe(param_1 + 200,&temp_v3);
+    vectorCopyHeader(param_1 + 200,&temp_v3);
     temp_v0 = FUN_002ea3c0(temp_v6,&LAB_0010f57d,0,&LAB_0010f72c);
     FUN_002ea3d0(param_1,temp_v0);
   }
   else {
-    FUN_002f7cb0(param_1);
-    temp_v2 = FUN_002e760a(0x10);
+    onlineJobSetStateWaiting(param_1);
+    temp_v2 = operatorNew(0x10);
     temp_v0 = 0;
     if (temp_v2 != 0) {
       temp_v0 = FUN_002ea3c0(temp_v2,&LAB_0010f91d,0,&LAB_0010f72c);

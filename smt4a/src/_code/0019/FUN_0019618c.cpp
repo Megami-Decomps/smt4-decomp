@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0018b600(void);
-int FUN_0018b610(void);
+int globalCriticalSectionEnterForward(void);
+int globalCriticalSectionLeaveForward(void);
 int FUN_001963e0(void);
 
 /* stack frame of param_9: 1 slot(s), 4 byte(s) */
@@ -17,8 +17,8 @@ extern signed char DAT_0061a481; /* 0x61a481 */
 extern signed char DAT_0061a482; /* 0x61a482 */
 extern int DAT_0061a510; /* 0x61a510 */
 
-/* Supplied declaration required: FUN_0018b600. */
-/* Supplied declaration required: FUN_0018b610. */
+/* Supplied declaration required: globalCriticalSectionEnterForward. */
+/* Supplied declaration required: globalCriticalSectionLeaveForward. */
 /* Supplied declaration required: FUN_001963e0. */
 
 
@@ -66,26 +66,26 @@ void FUN_0019618c(int param_1,unsigned int param_2,unsigned int param_3,unsigned
     }
     else {
       if (param_9 != 0x20) {
-        FUN_0018b600();
+        globalCriticalSectionEnterForward();
         *(int *)(param_1 + 0x20) = *(int *)(param_1 + 0x20) + 1;
         if (((DAT_0061a510 == param_1) && (DAT_0061a482 != '\0')) && (DAT_0061a481 == '\0')) {
           DAT_0061a481 = '\x01';
           FUN_001963e0();
         }
-        FUN_0018b610();
+        globalCriticalSectionLeaveForward();
         return;
       }
       temp_v1 = (temp_v0 & 0xfe7fffff) | 0x1000000;
     }
     *(unsigned int *)(puVar3 + 0x18) = temp_v1;
   }
-  FUN_0018b600();
+  globalCriticalSectionEnterForward();
   *(int *)(param_1 + 0x20) = *(int *)(param_1 + 0x20) + 1;
   if (((DAT_0061a510 == param_1) && (DAT_0061a482 != '\0')) && (DAT_0061a481 == '\0')) {
     DAT_0061a481 = '\x01';
     FUN_001963e0();
   }
-  FUN_0018b610();
+  globalCriticalSectionLeaveForward();
   return;
 }
 

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00192550(void);
-int FUN_0030ea58(int, unsigned char *);
+int libc_strcmp(int, unsigned char *);
 int FUN_00335660(unsigned int, int, unsigned int);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
@@ -16,7 +16,7 @@ typedef struct {
 extern unsigned char LAB_0037ef14; /* 0x37ef14 */
 
 /* Supplied declaration required: FUN_00192550. */
-/* Supplied declaration required: FUN_0030ea58. */
+/* Supplied declaration required: libc_strcmp. */
 /* Supplied declaration required: FUN_00335660. */
 
 
@@ -29,7 +29,7 @@ void FUN_0037eecc(unsigned int param_1,int param_2,unsigned int param_3)
   FUN_00192550();
   if (param_2 != 0) {
     temp_v0 = param_2 + 0x20;
-    FUN_0030ea58(temp_v0,&LAB_0037ef14);
+    libc_strcmp(temp_v0,&LAB_0037ef14);
     if (temp_v0 != 0) {
       FUN_00335660(param_1,param_2 + 0x20,param_3);
       return;

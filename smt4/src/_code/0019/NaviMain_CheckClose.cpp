@@ -9,16 +9,16 @@ extern int jobFind(u32 job);
 /* Returns 1 while the navi job is running (or no close was requested); otherwise frees the state and returns 0. */
 u32 NaviMain_CheckClose(void)
 {
-    NaviMain *navi = DAT_0044cdf0;
+    NaviMain *navi = g_naviMain;
 
-    if (DAT_0044cdf0 != NULL) {
-        if ((jobFind(DAT_0044cdf0->job) != 0) || (navi->closeRequested == 0)) {
+    if (g_naviMain != NULL) {
+        if ((jobFind(g_naviMain->job) != 0) || (navi->closeRequested == 0)) {
             return 1;
         }
-        if (DAT_0044cdf0 != NULL) {
-            FUN_00291730(DAT_0044cdf0->unk00040);
-            asdMemFree(DAT_0044cdf0);
-            DAT_0044cdf0 = NULL;
+        if (g_naviMain != NULL) {
+            FUN_00291730(g_naviMain->unk00040);
+            asdMemFree(g_naviMain);
+            g_naviMain = NULL;
         }
     }
     return 0;

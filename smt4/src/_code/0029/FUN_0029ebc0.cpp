@@ -5,7 +5,7 @@
 extern "C" {
 
 extern int FUN_002a0d0c(void);
-extern int FUN_002a8740(void);
+extern int gameGetUnitRecord(void);
 
 
 unsigned int FUN_0029ebc0(unsigned int param_1)
@@ -20,7 +20,7 @@ unsigned int FUN_0029ebc0(unsigned int param_1)
   case 0:
     temp_v0 = *(short *)(temp_v1 + 0x1c);
     if (-1 < temp_v0) {
-      temp_v1 = FUN_002a8740();
+      temp_v1 = gameGetUnitRecord();
       return (unsigned int)*(unsigned short *)(temp_v1 + 0x46);
     }
     break;
@@ -54,7 +54,7 @@ unsigned int FUN_0029ebc0(unsigned int param_1)
   case 0xd:
     temp_v0 = *(short *)(temp_v1 + 0x1e);
     if (-1 < temp_v0) {
-      temp_v1 = FUN_002a8740();
+      temp_v1 = gameGetUnitRecord();
       return (unsigned int)*(unsigned short *)(temp_v1 + 0x46);
     }
   }

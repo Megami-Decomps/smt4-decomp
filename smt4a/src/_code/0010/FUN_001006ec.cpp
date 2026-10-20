@@ -2,12 +2,12 @@
 
 extern "C" {
 
-void FUN_002e3328(void);
+void asdOperatorDelete(void);
 
-/* Forwards to FUN_002e3328. */
+/* Forwards to asdOperatorDelete. */
 void FUN_001006ec(void)
 {
-    FUN_002e3328();
+    asdOperatorDelete();
 }
 
 } /* extern "C" */

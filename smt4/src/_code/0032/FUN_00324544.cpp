@@ -6,11 +6,11 @@ extern "C" {
 
 int scrSetResult(int);
 
-extern int DAT_0044dc20; /* 0x44dc20 */
+extern int g_result; /* 0x44dc20 */
 
 /* Supplied declaration required: scrSetResult. */
 extern int scrGetArg(void);
-extern int FUN_002a8740(int);
+extern int gameGetUnitRecord(int);
 
 
 unsigned int FUN_00324544(void)
@@ -22,13 +22,13 @@ unsigned int FUN_00324544(void)
   int temp_v2;
   
   temp_v1 = scrGetArg();
-  if (DAT_0044dc20 != 0) {
-    temp_v2 = DAT_0044dc20 + *(int *)(DAT_0044dc20 + 0xcf78) * 0x620;
+  if (g_result != 0) {
+    temp_v2 = g_result + *(int *)(g_result + 0xcf78) * 0x620;
     if (temp_v1 != 0) {
       temp_v0 = *(unsigned short *)(temp_v2 + 0x369e);
     }
     else {
-      temp_v1 = FUN_002a8740((int)*(char *)(temp_v2 + 0x3654));
+      temp_v1 = gameGetUnitRecord((int)*(char *)(temp_v2 + 0x3654));
       temp_v0 = *(unsigned short *)(temp_v1 + 0x46);
     }
     scrSetResult(temp_v0);

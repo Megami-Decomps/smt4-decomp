@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0013b608(void);
-int FUN_0013b618(void);
+int nngxLockEnter(void);
+int nngxLockLeave(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -17,8 +17,8 @@ extern signed char DAT_004c62a2; /* 0x4c62a2 */
 extern unsigned char DAT_004c62a8; /* 0x4c62a8 */
 extern int DAT_004c6330; /* 0x4c6330 */
 
-/* Supplied declaration required: FUN_0013b608. */
-/* Supplied declaration required: FUN_0013b618. */
+/* Supplied declaration required: nngxLockEnter. */
+/* Supplied declaration required: nngxLockLeave. */
 
 
 void FUN_00123560(void)
@@ -31,7 +31,7 @@ void FUN_00123560(void)
   if (DAT_004c6330 == 0) {
     return;
   }
-  FUN_0013b608();
+  nngxLockEnter();
   if (DAT_004c62a1 == '\0') {
     DAT_004c62a2 = DAT_004c62a1;
   }
@@ -39,7 +39,7 @@ void FUN_00123560(void)
     *(unsigned char *)(*(int *)(temp_v0 + 0x18) + (*(int *)(temp_v0 + 0x24) * 0x1c - 0x1a)) = 1;
     DAT_004c62a8 = 1;
   }
-  FUN_0013b618();
+  nngxLockLeave();
   return;
 }
 

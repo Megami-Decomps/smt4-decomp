@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_00184310(void);
-int FUN_0019cac4(void);
+int dataTable00FindById(void);
 
 /* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: FUN_0019cac4. */
+/* Supplied declaration required: dataTable00FindById. */
 
 
 int FUN_004a7170(unsigned short *param_1,unsigned short *param_2)
@@ -20,9 +20,9 @@ int FUN_004a7170(unsigned short *param_1,unsigned short *param_2)
   int temp_v2;
   
   temp_v0 = (unsigned int)*param_1;
-  FUN_0019cac4();
+  dataTable00FindById();
   temp_v1 = (unsigned int)*param_2;
-  FUN_0019cac4();
+  dataTable00FindById();
   temp_v2 = *(int *)(temp_v0 + 8) - *(int *)(temp_v1 + 8);
   if (temp_v2 == 0) {
     temp_v0 = (unsigned int)*param_1;

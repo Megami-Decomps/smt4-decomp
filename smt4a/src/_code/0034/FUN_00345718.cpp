@@ -5,17 +5,17 @@
 extern "C" {
 
 int FUN_0014e188(int, int, int, int, int);
-int FUN_00184758(int, int, int);
+int uiSpriteSetKeyframe(int, int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern unsigned char DAT_0057f588; /* 0x57f588 */
+extern unsigned char g_messageMain; /* 0x57f588 */
 
 /* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: FUN_00184758. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
 
 
 unsigned int FUN_00345718(int param_1)
@@ -25,17 +25,17 @@ unsigned int FUN_00345718(int param_1)
   int temp_v0;
   int temp_v1;
   
-  temp_v0 = (*(int *)((unsigned char *)&DAT_0057f588 + 0x8));
-  temp_v1 = (*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0xb8c;
+  temp_v0 = (*(int *)((unsigned char *)&g_messageMain + 0x8));
+  temp_v1 = (*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0xb8c;
   if (param_1 != 0) {
-    *(unsigned char *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0x94) = 1;
+    *(unsigned char *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x94) = 1;
     FUN_0014e188(temp_v1,8,0,temp_v0 + 0x194,0xb);
-    FUN_00184758(temp_v1,8,0);
+    uiSpriteSetKeyframe(temp_v1,8,0);
   }
   else {
-    *(unsigned char *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0x94) = 2;
+    *(unsigned char *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x94) = 2;
     FUN_0014e188(temp_v1,8,0,temp_v0 + 0x194,0xb);
-    FUN_00184758(temp_v1,9,0);
+    uiSpriteSetKeyframe(temp_v1,9,0);
   }
   return 1;
 }

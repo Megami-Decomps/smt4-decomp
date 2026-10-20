@@ -9,7 +9,7 @@ int FUN_0020341c(int, int);
 int FUN_00288154(int, unsigned char [2]);
 int FUN_0029bde4(unsigned short *);
 int FUN_0029c6b0(unsigned short *);
-int FUN_002b9024(void);
+int devilGetRecord(void);
 int memClear(unsigned short *, int);
 
 /* stack frame of param_4: 24 slot(s), 51 byte(s) */
@@ -45,8 +45,8 @@ typedef struct {
 /* Supplied declaration required: FUN_00288154. */
 /* Supplied declaration required: FUN_0029bde4. */
 /* Supplied declaration required: FUN_0029c6b0. */
-extern int FUN_002a8764(void);
-/* Supplied declaration required: FUN_002b9024. */
+extern int gameGetSlotTable(void);
+/* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: memClear. */
 
 
@@ -86,7 +86,7 @@ void FUN_001a7dbc(unsigned short *param_1,unsigned char param_2,unsigned short p
   param_1[0x23] = param_3;
   *(unsigned char *)(param_1 + 0x25) = param_2;
   if (param_4 != 3) {
-    temp_v1 = FUN_002a8764();
+    temp_v1 = gameGetSlotTable();
     temp_v2 = 0;
     do {
       if (*(char *)(temp_v1 + 0x90f0 + temp_v2) < '\0') {
@@ -99,7 +99,7 @@ void FUN_001a7dbc(unsigned short *param_1,unsigned char param_2,unsigned short p
     FUN_001ddafc(param_3,1);
   }
   temp_v3 = (unsigned int)param_3;
-  FUN_002b9024();
+  devilGetRecord();
   if (param_4 != 0) {
     if (param_4 != 1) {
       if (param_4 != 3) {

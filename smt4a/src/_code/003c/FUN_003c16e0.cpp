@@ -28,7 +28,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern int DAT_00588fe8; /* 0x588fe8 */
+extern int g_statusDown; /* 0x588fe8 */
 
 /* Supplied declaration required: FUN_002a4964. */
 extern int FUN_00348ed0(void);
@@ -41,8 +41,8 @@ void FUN_003c16e0(fn_003c16e0_arg0 *param_1)
   int temp_v0;
   int temp_v1;
   
-  if (DAT_00588fe8 != 0) {
-    temp_v0 = DAT_00588fe8 + 0x5ec;
+  if (g_statusDown != 0) {
+    temp_v0 = g_statusDown + 0x5ec;
     temp_v1 = FUN_00348ed0();
     if (temp_v1 <= (int)param_1) {
       param_1 = (fn_003c16e0_arg0 *)(temp_v1 - 1);

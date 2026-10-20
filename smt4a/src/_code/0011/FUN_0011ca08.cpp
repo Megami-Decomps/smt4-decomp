@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_002e75fa(int);
-int FUN_002eb588(int *);
+int sharedRefAddRef(int);
+int onlineTimeGetNow(int *);
 int FUN_002f2da0(unsigned char [4], int, int *);
 int wordRefsDiffer_002f2dec(...);
 
@@ -17,8 +17,8 @@ typedef struct {
     unsigned int sp24; /* 0x24: local_24 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_002e75fa. */
-/* Supplied declaration required: FUN_002eb588. */
+/* Supplied declaration required: sharedRefAddRef. */
+/* Supplied declaration required: onlineTimeGetNow. */
 /* Supplied declaration required: FUN_002f2da0. */
 /* Supplied declaration required: wordRefsDiffer_002f2dec. */
 
@@ -34,7 +34,7 @@ void FUN_0011ca08(int param_1,int param_2)
   int temp_v4;
   unsigned int temp_v5;
   
-  FUN_002e75fa(param_2);
+  sharedRefAddRef(param_2);
   if ((*(int *)(param_2 + 0x20) == 0) && (*(int *)(param_2 + 0x1c) == 0)) {
     temp_v1 = param_2;
     temp_v0 = wordRefsDiffer_002f2dec(param_1 + 4,&temp_v1);
@@ -58,7 +58,7 @@ void FUN_0011ca08(int param_1,int param_2)
     *(int *)(param_1 + 8) = param_2;
   }
   *(int *)(param_1 + 0x10) = *(int *)(param_1 + 0x10) + 1;
-  FUN_002eb588(&temp_v4);
+  onlineTimeGetNow(&temp_v4);
   *(unsigned int *)(param_2 + 0x110) = temp_v4;
   *(unsigned int *)(param_2 + 0x114) = temp_v5;
   return;

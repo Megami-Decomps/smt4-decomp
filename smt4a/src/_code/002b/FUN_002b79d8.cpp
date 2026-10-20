@@ -6,7 +6,7 @@ extern "C" {
 
 extern int DAT_00580c94; /* 0x580c94 */
 
-extern int FUN_0018719c(void);
+extern int gameFlagIsSet(void);
 
 
 void FUN_002b79d8(void)
@@ -21,8 +21,8 @@ void FUN_002b79d8(void)
     do {
       temp_v0 = temp_v2 * 0x17c;
       if (((*(char *)(temp_v0 + 0x5f3404) == '\0') && (*(int *)(temp_v0 + 0x5f33cc) != 0)) &&
-         (((*(short *)(temp_v0 + 0x5f3400) != 0 && (temp_v1 = FUN_0018719c(), temp_v1 == 0)) ||
-          ((*(short *)(temp_v0 + 0x5f3402) != 0 && (temp_v1 = FUN_0018719c(), temp_v1 != 0)))))) {
+         (((*(short *)(temp_v0 + 0x5f3400) != 0 && (temp_v1 = gameFlagIsSet(), temp_v1 == 0)) ||
+          ((*(short *)(temp_v0 + 0x5f3402) != 0 && (temp_v1 = gameFlagIsSet(), temp_v1 != 0)))))) {
         *(unsigned char *)(temp_v0 + 0x5f3404) = 1;
       }
       temp_v2 = temp_v2 + 1;

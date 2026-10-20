@@ -8,7 +8,7 @@ int FUN_0010c97e(unsigned int, unsigned int);
 int FUN_002e6e34(unsigned char [12], int);
 int FUN_002e6e50(int);
 int FUN_002e6e5c(unsigned char [12]);
-int FUN_002e9afe(int, unsigned int);
+int vectorCopyHeader(int, unsigned int);
 int FUN_002eac60(unsigned int, unsigned int);
 int FUN_002eac8e(unsigned int, unsigned int);
 
@@ -23,7 +23,7 @@ extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_002e6e50. */
 /* Supplied declaration required: FUN_002e6e5c. */
 extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
-/* Supplied declaration required: FUN_002e9afe. */
+/* Supplied declaration required: vectorCopyHeader. */
 /* Supplied declaration required: FUN_002eac60. */
 /* Supplied declaration required: FUN_002eac8e. */
 
@@ -43,7 +43,7 @@ void FUN_0011a4b8(int param_1,int param_2)
   if (*(char *)(param_2 + 0x10) != '\x02') {
     temp_v4[0] = 0x80050001;
     temp_v1 = FUN_002e7908(temp_v3,temp_v4);
-    FUN_002e9afe(param_1 + 0x228,temp_v1);
+    vectorCopyHeader(param_1 + 0x228,temp_v1);
   }
   else {
     FUN_0010c97e(*(unsigned int *)(param_1 + 0x1a0),*(unsigned int *)(param_1 + 0x1a4));

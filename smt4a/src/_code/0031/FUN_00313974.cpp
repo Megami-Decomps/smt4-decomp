@@ -52,7 +52,7 @@ extern unsigned char LAB_00313cbc; /* 0x313cbc */
 extern unsigned char LAB_00314000; /* 0x314000 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_00162e8c(void);
+extern int gameFlagsGetBlock(void);
 extern int FUN_00262614(int);
 /* Supplied declaration required: FUN_00281b94. */
 /* Supplied declaration required: FUN_003534b0. */
@@ -76,7 +76,7 @@ void FUN_00313974(fn_00313974_arg0 *param_1)
   unsigned int in_fpscr;
   unsigned int temp_v8;
   
-  temp_v2 = FUN_00162e8c();
+  temp_v2 = gameFlagsGetBlock();
   temp_v3 = FUN_00376f94();
   psVar5 = (short *)dataTable4CGetEntry(param_1);
   if (temp_v3 < 100) {

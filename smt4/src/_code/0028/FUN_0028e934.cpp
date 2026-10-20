@@ -6,7 +6,7 @@ extern "C" {
 
 extern unsigned int g_aocSystem; /* 0x433158 */
 
-extern int FUN_002b8fdc(unsigned int, unsigned int);
+extern int entryListFindById(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
@@ -19,7 +19,7 @@ int FUN_0028e934(unsigned int param_1,int param_2)
   unsigned int temp_v1;
   unsigned int temp_v2;
   
-  temp_v0 = FUN_002b8fdc(g_aocSystem,param_1);
+  temp_v0 = entryListFindById(g_aocSystem,param_1);
   if (temp_v0 != 0) {
     temp_v0 = temp_v0 + 2;
   }

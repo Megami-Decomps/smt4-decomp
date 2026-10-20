@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_0023592c(void *track);
+int nw_snd_internal_driver_SequenceTrack_UpdateChannelParam(void *track);
 int nw_snd_internal_driver_Channel_FreeChannel(SndChannel *channel);
 int nw_snd_internal_driver_Channel_Release(SndChannel *channel);
 
@@ -17,7 +17,7 @@ void nw_snd_internal_driver_SequenceTrack_Close(SequenceTrack *track)
 {
     SndChannel *channel;
 
-    FUN_0023592c(track);
+    nw_snd_internal_driver_SequenceTrack_UpdateChannelParam(track);
     for (channel = track->channels; channel != NULL; channel = channel->next) {
         if (channel->unk0C6 != 0) {
             nw_snd_internal_driver_Channel_Release(channel);

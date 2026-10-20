@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001b9f8c(int, unsigned int *);
+int slistPushFront(int, unsigned int *);
 
 typedef int romwright_code(...);
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_001b9f8c. */
+/* Supplied declaration required: slistPushFront. */
 
 
 void FUN_004663a8(int param_1,unsigned int *param_2)
@@ -22,7 +22,7 @@ void FUN_004663a8(int param_1,unsigned int *param_2)
   param_2[0x4b] = 0;
   if (param_2 != (unsigned int *)0x0) {
     (**(romwright_code **)*param_2)(param_2);
-    FUN_001b9f8c(param_1 + 8,param_2);
+    slistPushFront(param_1 + 8,param_2);
     return;
   }
   return;

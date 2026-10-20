@@ -11,9 +11,9 @@ int FUN_002804b0(...);
 int FUN_002c7e6c(...);
 int FUN_002c8538(...);
 int FUN_002c85b0(...);
-int FUN_00342010(...);
+int campButtonHelpAcquire(...);
 int FUN_003c607c(...);
-int FUN_003f881c(...);
+int loadSlotRequestAsync(...);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -33,10 +33,10 @@ extern unsigned int *DAT_0058812c; /* 0x58812c */
 /* Supplied declaration required: FUN_002c7e6c. */
 /* Supplied declaration required: FUN_002c8538. */
 /* Supplied declaration required: FUN_002c85b0. */
-/* Supplied declaration required: FUN_00342010. */
+/* Supplied declaration required: campButtonHelpAcquire. */
 /* Supplied declaration required: FUN_003c607c. */
-extern int FUN_003f86c8(unsigned int);
-/* Supplied declaration required: FUN_003f881c. */
+extern int loadSlotIsLoaded(unsigned int);
+/* Supplied declaration required: loadSlotRequestAsync. */
 
 
 void FUN_0035b404(unsigned int param_1)
@@ -66,12 +66,12 @@ void FUN_0035b404(unsigned int param_1)
   FUN_002804b0("npc_shop/DevilMarket/DevilMarket.mbm",puVar1 + 4,0);
   FUN_002804b0("npc_shop/DevilMarket/DevilMarket.bf",puVar1 + 5,0);
   *(unsigned char *)(puVar1 + 7) = 0;
-  temp_v0 = FUN_003f86c8(0x4f);
+  temp_v0 = loadSlotIsLoaded(0x4f);
   if (temp_v0 == 0) {
-    FUN_003f881c(0x4f,0);
+    loadSlotRequestAsync(0x4f,0);
     *(unsigned char *)(puVar1 + 7) = 1;
   }
-  FUN_00342010();
+  campButtonHelpAcquire();
   FUN_002c7e6c();
   FUN_002c85b0(0);
   FUN_002c8538(0);

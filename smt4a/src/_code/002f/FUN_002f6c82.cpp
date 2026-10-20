@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002f6d5c(...);
+int lessU32Alt(...);
 int FUN_002f6e54(unsigned char [8], int, int *, int *);
 int FUN_0030a7bc(int [2]);
 
@@ -21,7 +21,7 @@ typedef struct {
     unsigned int sp4C; /* 0x4c: local_4c */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_002f6d5c. */
+/* Supplied declaration required: lessU32Alt. */
 /* Supplied declaration required: FUN_002f6e54. */
 extern int wordRefsDiffer_0030a728(int *, unsigned int *);
 /* Supplied declaration required: FUN_0030a7bc. */
@@ -54,7 +54,7 @@ int FUN_002f6c82(int param_1,unsigned int param_2)
   temp_v13 = param_1;
   uStack_18 = param_2;
   while (temp_v3 != 0) {
-    temp_v0 = FUN_002f6d5c(temp_v8,temp_v3 + 0x10,param_2);
+    temp_v0 = lessU32Alt(temp_v8,temp_v3 + 0x10,param_2);
     if (temp_v0 != 0) {
       temp_v3 = *(int *)(temp_v3 + 0xc);
     }
@@ -67,7 +67,7 @@ int FUN_002f6c82(int param_1,unsigned int param_2)
   temp_v3 = *(int *)(*(int *)(param_1 + 0x10) + 4);
   temp_v0 = *(int *)(param_1 + 0x10);
   while (temp_v2 = temp_v3, temp_v2 != 0) {
-    temp_v3 = FUN_002f6d5c(temp_v7,param_2,temp_v2 + 0x10);
+    temp_v3 = lessU32Alt(temp_v7,param_2,temp_v2 + 0x10);
     if (temp_v3 != 0) {
       temp_v3 = *(int *)(temp_v2 + 8);
       temp_v0 = temp_v2;

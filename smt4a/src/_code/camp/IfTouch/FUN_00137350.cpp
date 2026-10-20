@@ -17,7 +17,7 @@ typedef struct {
 extern unsigned char LAB_00137448; /* 0x137448 */
 extern unsigned char LAB_0013c2c8; /* 0x13c2c8 */
 extern unsigned char LAB_0013ed24; /* 0x13ed24 */
-extern signed char DAT_0057f248; /* 0x57f248 */
+extern signed char g_ifTouch; /* 0x57f248 */
 extern unsigned int *DAT_0057f24c; /* 0x57f24c */
 
 /* Supplied declaration required: asdProcessCreateSimple. */
@@ -32,7 +32,7 @@ void FUN_00137350(void)
   unsigned int *puVar1;
   unsigned char *puVar2;
   
-  if (DAT_0057f248 < '\x01') {
+  if (g_ifTouch < '\x01') {
     if (DAT_0057f24c == (unsigned int *)0x0) {
       puVar1 = (unsigned int *)0x100;
       asdMemoryAllocTracked(0x100,0x100,0,0x680,1);
@@ -47,7 +47,7 @@ void FUN_00137350(void)
     *(unsigned short *)((int)puVar1 + 0x64a) = 10;
     *(unsigned short *)(puVar1 + 0x193) = 0;
   }
-  DAT_0057f248 = DAT_0057f248 + '\x01';
+  g_ifTouch = g_ifTouch + '\x01';
   return;
 }
 

@@ -4,30 +4,30 @@
 
 extern "C" {
 
-int FUN_0029c3b0(int);
+int soundChannelStopAll(int);
 int FUN_0029c3c0(int, int, int);
 int FUN_0029e054(void);
-int FUN_002a03a0(int, int);
+int soundChannelRequestIfEnabled(int, int);
 int FUN_002a03d8(int, int);
-int FUN_002a5ed0(int, int);
+int asdTMTexTableLoadEntryAsync(int, int);
 int asdTMTexTableFreeEntry(int);
-int FUN_002ae898(int, int);
-int FUN_002b8cc8(void);
+int asdTMTexTableReleaseNode(int, int);
+int ifTouchRegionRemove(void);
 int asdTMTexTableLoadTmx(int, int);
 
-extern int FUN_00287468(unsigned int);
-/* Supplied declaration required: FUN_0029c3b0. */
+extern int bgmGetStateById(unsigned int);
+/* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: FUN_0029c3c0. */
 /* Supplied declaration required: FUN_0029e054. */
-/* Supplied declaration required: FUN_002a03a0. */
+/* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: FUN_002a03d8. */
-/* Supplied declaration required: FUN_002a5ed0. */
-extern int FUN_002a60b4(unsigned int, unsigned int);
+/* Supplied declaration required: asdTMTexTableLoadEntryAsync. */
+extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 /* Supplied declaration required: asdTMTexTableFreeEntry. */
-/* Supplied declaration required: FUN_002ae898. */
-/* Supplied declaration required: FUN_002b8cc8. */
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
+/* Supplied declaration required: ifTouchRegionRemove. */
 extern int FUN_002b8d54(void);
-extern int FUN_002bfde4(unsigned int);
+extern int padIsButtonPressed(unsigned int);
 extern int FUN_002c2a04(unsigned int);
 /* Supplied declaration required: asdTMTexTableLoadTmx. */
 
@@ -58,7 +58,7 @@ unsigned int FUN_0023ed64(unsigned int *param_1)
     asdTMTexTableLoadTmx(0x2d,0);
     temp_v1 = 1;
     do {
-      FUN_002a5ed0(0x2d,temp_v1);
+      asdTMTexTableLoadEntryAsync(0x2d,temp_v1);
       temp_v6 = (unsigned int)temp_v7;
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < 7);
@@ -66,15 +66,15 @@ unsigned int FUN_0023ed64(unsigned int *param_1)
     param_1[0xf] = 0;
     FUN_0029e054();
     param_1[0xf] = temp_v0;
-    temp_v1 = FUN_00287468(0x1000051);
+    temp_v1 = bgmGetStateById(0x1000051);
     if (temp_v1 != 1) {
-      FUN_002a03a0(0x1000051,0);
+      soundChannelRequestIfEnabled(0x1000051,0);
     }
     param_1[7] = param_1[7] + 1;
   }
   temp_v1 = FUN_002c2a04(0);
   if ((temp_v1 == 0) &&
-     ((temp_v1 = FUN_002b8d54(), temp_v1 == 6 || (temp_v1 = FUN_002bfde4(0), temp_v1 != 0)))) {
+     ((temp_v1 = FUN_002b8d54(), temp_v1 == 6 || (temp_v1 = padIsButtonPressed(0), temp_v1 != 0)))) {
     param_1[7] = 2;
     param_1[0xe] = 0;
   }
@@ -109,7 +109,7 @@ unsigned int FUN_0023ed64(unsigned int *param_1)
     param_1[0xd] = (float)param_1[0xd] + 0.016666668f;
   }
   if (param_1[7] == 1) {
-    temp_v1 = FUN_002a60b4(0x2d,6);
+    temp_v1 = asdTMTexTableNodeIsLoaded(0x2d,6);
     if (temp_v1 == 0) {
       return 0;
     }
@@ -141,12 +141,12 @@ unsigned int FUN_0023ed64(unsigned int *param_1)
   if ((param_1[7] == 3) && (temp_v1 = FUN_002c2a04(0), temp_v1 == 3)) {
     temp_v1 = 1;
     do {
-      FUN_002ae898(0x2d,temp_v1);
+      asdTMTexTableReleaseNode(0x2d,temp_v1);
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < 7);
     asdTMTexTableFreeEntry(0x2d);
-    FUN_002b8cc8();
-    FUN_0029c3b0(0xf);
+    ifTouchRegionRemove();
+    soundChannelStopAll(0xf);
     *param_1 = 9;
   }
   return 0;

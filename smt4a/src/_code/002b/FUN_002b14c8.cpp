@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0014e188(...);
 int FUN_001505ac(int, unsigned char *, int, unsigned char *, int, unsigned char *, int, unsigned char *, int, unsigned char *, int);
-int FUN_001846d0(...);
+int uiSpriteSelectAnim(...);
 int FUN_0019e330(int, int, int);
 int FUN_00387240(...);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(int);
@@ -24,7 +24,7 @@ extern unsigned char DAT_0052a560; /* 0x52a560 */
 
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: FUN_001505ac. */
-/* Supplied declaration required: FUN_001846d0. */
+/* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: FUN_0019e330. */
 /* Supplied declaration required: FUN_00387240. */
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
@@ -81,7 +81,7 @@ void FUN_002b14c8(int param_1)
     temp_v1 = param_1 + temp_v0 * 0x8c;
     FUN_0014e188(temp_v1 + 0x20,0xc,4,param_1,2);
     FUN_00387240(temp_v1 + 0x20,0xc,temp_v0 + 0x15);
-    FUN_001846d0(temp_v1 + 0x20,2);
+    uiSpriteSelectAnim(temp_v1 + 0x20,2);
     temp_v0 = temp_v0 + 1;
   } while (temp_v0 < 0x14);
   temp_v0 = 0x14;
@@ -89,7 +89,7 @@ void FUN_002b14c8(int param_1)
     temp_v1 = param_1 + temp_v0 * 0x8c;
     FUN_0014e188(temp_v1 + 0x20,0xc,7,param_1,2);
     FUN_00387240(temp_v1 + 0x20,0xc,temp_v0 + 1);
-    FUN_001846d0(temp_v1 + 0x20,5);
+    uiSpriteSelectAnim(temp_v1 + 0x20,5);
     temp_v0 = temp_v0 + 1;
   } while (temp_v0 < 0x1e);
   temp_v0 = 0x1e;
@@ -97,7 +97,7 @@ void FUN_002b14c8(int param_1)
     temp_v1 = param_1 + temp_v0 * 0x8c;
     FUN_0014e188(temp_v1 + 0x20,0xc,2,param_1,2);
     FUN_00387240(temp_v1 + 0x20,0xc,temp_v0 - 9);
-    FUN_001846d0(temp_v1 + 0x20,3);
+    uiSpriteSelectAnim(temp_v1 + 0x20,3);
     temp_v0 = temp_v0 + 1;
   } while (temp_v0 < 0x28);
   temp_v0 = 0x28;
@@ -105,7 +105,7 @@ void FUN_002b14c8(int param_1)
     temp_v1 = param_1 + temp_v0 * 0x8c;
     FUN_0014e188(temp_v1 + 0x20,0xc,4000,param_1,2);
     FUN_00387240(temp_v1 + 0x20,0xc,temp_v0 - 0x13);
-    FUN_001846d0(temp_v1 + 0x20,0xb);
+    uiSpriteSelectAnim(temp_v1 + 0x20,0xb);
     temp_v0 = temp_v0 + 1;
   } while (temp_v0 < 0x32);
   temp_v0 = 0x32;
@@ -113,7 +113,7 @@ void FUN_002b14c8(int param_1)
     temp_v1 = param_1 + temp_v0 * 0x8c;
     FUN_0014e188(temp_v1 + 0x20,0xc,0xfa6,param_1,2);
     FUN_00387240(temp_v1 + 0x20,0xc,temp_v0 - 0x1d);
-    FUN_001846d0(temp_v1 + 0x20,10);
+    uiSpriteSelectAnim(temp_v1 + 0x20,10);
     temp_v0 = temp_v0 + 1;
   } while (temp_v0 < 0x3c);
   FUN_0014e188(param_1 + 0x20f0,0xc,0,param_1,1);

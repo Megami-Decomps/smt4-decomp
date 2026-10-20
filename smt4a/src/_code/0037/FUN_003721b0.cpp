@@ -12,7 +12,7 @@ int FUN_0018152c(int, int, int, int, int);
 int FUN_001835b4(...);
 int FUN_00183bb0(void);
 int FUN_0018408c(...);
-int FUN_00184e64(...);
+int drawSetColorFromRGBA8(...);
 int FUN_001879d0(unsigned int);
 int FUN_0019d880(void);
 int VectorSignedToFloat(...);
@@ -39,7 +39,7 @@ extern int FUN_001834a4(unsigned int, int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: FUN_0018408c. */
-/* Supplied declaration required: FUN_00184e64. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_001879d0. */
 /* Supplied declaration required: FUN_0019d880. */
 extern short FUN_0019e52c(unsigned short);
@@ -97,7 +97,7 @@ void FUN_003721b0(unsigned int param_1,int param_2,int param_3,int param_4,int p
   temp_v4 = FUN_001834a4(0x14,temp_v4);
   temp_v2 = *(short *)(temp_v4 + 8);
   temp_v1 = *(short *)(temp_v4 + 10);
-  FUN_00184e64(0xffffffff);
+  drawSetColorFromRGBA8(0xffffffff);
   FUN_00180310(0,temp_v5 + temp_v2,temp_v1 + param_5,1,temp_v3,0xce,temp_v9);
   FUN_00183bb0();
   temp_v4 = FUN_001834a4(0x14,param_3 + 0xbe5);

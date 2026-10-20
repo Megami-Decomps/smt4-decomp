@@ -6,12 +6,12 @@ extern "C" {
 
 int FUN_00247478(unsigned char [2], unsigned int *, unsigned int *);
 int FUN_0027da30(...);
-int FUN_00282924(...);
+int btlMainFindEntryByListedId(...);
 int FUN_00283ebc(unsigned int, unsigned int, int);
-int FUN_002a8740(...);
+int gameGetUnitRecord(...);
 int FUN_002ae164(void);
-int FUN_002b45e8(void);
-int FUN_002b4670(void);
+int dataTable08Sub2GetRecord(void);
+int dataTable08Sub1GetRecord(void);
 int FUN_003bd9e8(...);
 int FUN_003be918(unsigned int, unsigned int, int, int, int);
 int FUN_003beba8(...);
@@ -45,15 +45,15 @@ typedef struct {
 extern int randRange(unsigned int);
 /* Supplied declaration required: FUN_00247478. */
 /* Supplied declaration required: FUN_0027da30. */
-/* Supplied declaration required: FUN_00282924. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_00283ebc. */
 extern unsigned int *btlGetMainState(void);
 extern int flagWordTestBit(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002a8740. */
+/* Supplied declaration required: gameGetUnitRecord. */
 extern unsigned int FUN_002ae108(unsigned int);
 /* Supplied declaration required: FUN_002ae164. */
-/* Supplied declaration required: FUN_002b45e8. */
-/* Supplied declaration required: FUN_002b4670. */
+/* Supplied declaration required: dataTable08Sub2GetRecord. */
+/* Supplied declaration required: dataTable08Sub1GetRecord. */
 /* Supplied declaration required: FUN_003bd9e8. */
 /* Supplied declaration required: FUN_003be918. */
 /* Supplied declaration required: FUN_003beba8. */
@@ -103,11 +103,11 @@ unsigned int FUN_003bdab0(int param_1,unsigned int param_2,int param_3,int param
   puVar3 = (unsigned int *)btlGetMainState();
   temp_v2 = temp_v22;
   FUN_002ae164();
-  FUN_002b4670();
+  dataTable08Sub1GetRecord();
   puVar6 = puVar3;
-  FUN_00282924(puVar3,param_5);
+  btlMainFindEntryByListedId(puVar3,param_5);
   puVar5 = puVar3;
-  FUN_00282924(puVar3,param_6);
+  btlMainFindEntryByListedId(puVar3,param_6);
   FUN_00247478(temp_v14,puVar3,puVar6);
   temp_v1 = temp_v22;
   temp_v6 = 0xffffffff;
@@ -272,7 +272,7 @@ unsigned int FUN_003bdab0(int param_1,unsigned int param_2,int param_3,int param
     case 3:
       if ((*(unsigned short *)(temp_v2 + 0x36) & 0xfff) == 4000) {
         if (puVar5 == (unsigned int *)0x0) {
-          temp_v4 = FUN_002a8740(param_6 - 0x6d);
+          temp_v4 = gameGetUnitRecord(param_6 - 0x6d);
           temp_v7 = (unsigned int)*(short *)(temp_v4 + 0xe);
 LAB_003be0e4:
           temp_v9 = 0;
@@ -291,7 +291,7 @@ LAB_003be190:
                      100;
             goto LAB_003be070;
           }
-          temp_v4 = FUN_002a8740(param_6 - 0x6d);
+          temp_v4 = gameGetUnitRecord(param_6 - 0x6d);
           temp_v7 = ((int)*(short *)(temp_v4 + 0xe) * (int)(short)(unsigned short)*(unsigned char *)(temp_v2 + 0x43)) /
                    100;
           goto LAB_003be0e4;
@@ -300,7 +300,7 @@ LAB_003be190:
         temp_v3 = VectorUnsignedToFloat(temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v13 = romwright_piece_4_4(0x3f800000,temp_v3);
         puVar6 = (unsigned int *)btlGetMainState();
-        FUN_00282924(puVar6,param_5);
+        btlMainFindEntryByListedId(puVar6,param_5);
         if (((*puVar6 & 2) != 0) && (temp_v7 = temp_v1, FUN_002ae164(), temp_v7 != 0)) {
           temp_v3 = FUN_002ae108(temp_v1);
           FUN_00283ebc(temp_v7,temp_v3,2);
@@ -313,7 +313,7 @@ LAB_003be190:
         temp_v7 = (unsigned int)((float)temp_v13 * temp_v12 * (float)((unsigned long long)temp_v13 >> 0x20) + 0.0f + temp_v11);
         if (puVar5 != (unsigned int *)0x0) goto LAB_003be190;
 LAB_003be1b4:
-        temp_v3 = FUN_002a8740(param_6 - 0x6d);
+        temp_v3 = gameGetUnitRecord(param_6 - 0x6d);
         temp_v4 = flagWordTestBit(temp_v3,3);
         temp_v10 = temp_v4 != 0;
         temp_v4 = 0;
@@ -365,7 +365,7 @@ LAB_003be1d4:
         temp_v11 = temp_v11 * temp_v12;
       }
       else {
-        temp_v4 = FUN_002a8740(param_6 - 0x6d);
+        temp_v4 = gameGetUnitRecord(param_6 - 0x6d);
         temp_v11 = (float)VectorSignedToFloat((int)*(short *)(temp_v4 + 0xe) *
                                             (int)(short)(unsigned short)*(unsigned char *)(param_4 + 0x68),
                                             (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -378,7 +378,7 @@ LAB_003be1d4:
       if ((*(unsigned short *)((int)puVar5 + 0x1c6) & 8) == 0 || (int)temp_v7 < 2) goto LAB_003bdce0;
     }
     else {
-      temp_v3 = FUN_002a8740(param_6 - 0x6d);
+      temp_v3 = gameGetUnitRecord(param_6 - 0x6d);
       temp_v4 = flagWordTestBit(temp_v3,3);
       temp_v10 = temp_v4 != 0;
       temp_v4 = 0;
@@ -395,7 +395,7 @@ LAB_003be1dc:
     temp_v4 = (int)temp_v16;
     if ((*puVar6 & 6) != 0) {
       temp_v8 = temp_v23;
-      FUN_002b45e8();
+      dataTable08Sub2GetRecord();
       temp_v4 = (int)temp_v16;
       if (*(char *)(temp_v8 + 0x52) == '\x02') {
         temp_v3 = 1;

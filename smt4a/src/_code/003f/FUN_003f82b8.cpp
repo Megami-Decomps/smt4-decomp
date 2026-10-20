@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_00164168(...);
-int FUN_001654d8(int);
-int FUN_001654e4(int);
+int vec2GetXInt(int);
+int vec2GetYInt(int);
 int efctSetSpeed(void);
 int FUN_001835b4(int, int, int, int, int, int);
 int FUN_001879d0(unsigned int);
@@ -25,8 +25,8 @@ typedef struct {
 extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: FUN_00164168. */
-/* Supplied declaration required: FUN_001654d8. */
-/* Supplied declaration required: FUN_001654e4. */
+/* Supplied declaration required: vec2GetXInt. */
+/* Supplied declaration required: vec2GetYInt. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001834a4(unsigned int, int);
 /* Supplied declaration required: FUN_001835b4. */
@@ -48,15 +48,15 @@ void FUN_003f82b8(int param_1)
   int temp_v4;
   float temp_v5;
   
-  temp_v0 = FUN_001654d8(param_1 + 0x16c);
-  temp_v1 = FUN_001654e4(param_1 + 0x16c);
+  temp_v0 = vec2GetXInt(param_1 + 0x16c);
+  temp_v1 = vec2GetYInt(param_1 + 0x16c);
   switch(*(unsigned int *)(param_1 + 0x14)) {
   case 0:
   case 1:
   case 2:
   case 3:
-    FUN_001654d8(param_1 + 0x540);
-    FUN_001654e4(param_1 + 0x540);
+    vec2GetXInt(param_1 + 0x540);
+    vec2GetYInt(param_1 + 0x540);
     temp_v5 = 0.26f;
     FUN_001879d0(g_renderCtx);
     temp_v0 = temp_v0 + (int)temp_v5;

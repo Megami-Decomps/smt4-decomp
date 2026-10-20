@@ -7,7 +7,7 @@ extern "C" {
 extern unsigned char DAT_00559524; /* 0x559524 */
 extern unsigned char DAT_00559ef4; /* 0x559ef4 */
 
-extern int FUN_002e9520(int *, int);
+extern int onlineStringCopyConstruct(int *, int);
 extern int *FUN_0030710c(int, unsigned int, unsigned int, unsigned int, unsigned int);
 
 
@@ -26,7 +26,7 @@ void FUN_001327b4(int param_1,int param_2,unsigned int param_3,unsigned int para
   piVar1[5] = *(int *)(param_2 + 0xc);
   piVar1[6] = *(int *)(param_2 + 0x10);
   piVar1[7] = *(int *)(param_2 + 0x14);
-  temp_v0 = FUN_002e9520(piVar1 + 8,param_2 + 0x18);
+  temp_v0 = onlineStringCopyConstruct(piVar1 + 8,param_2 + 0x18);
   *(unsigned int *)(temp_v0 + 8) = *(unsigned int *)(param_2 + 0x20);
   *(unsigned char **)(temp_v0 - 0x18) = &DAT_00559524;
   *piVar1 = temp_v1;

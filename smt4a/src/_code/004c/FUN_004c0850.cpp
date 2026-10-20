@@ -9,7 +9,7 @@ int FUN_003f0e20(...);
 int FUN_003f21ec(void);
 int FUN_003f24e0(unsigned int *, int);
 int FUN_003f2aac(unsigned int *, int, int);
-int FUN_003fd63c(...);
+int gameFlagSetValue(...);
 int countersAddSaturating(int, int);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
@@ -30,13 +30,13 @@ extern unsigned int DAT_00571488; /* 0x571488 */
 extern unsigned int DAT_0057148c; /* 0x57148c */
 
 /* Supplied declaration required: btlGetMainState. */
-extern int FUN_0018719c(unsigned int);
-extern int FUN_001ab854(void);
+extern int gameFlagIsSet(unsigned int);
+extern int gameGetSlotRecord(void);
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: FUN_003f21ec. */
 /* Supplied declaration required: FUN_003f24e0. */
 /* Supplied declaration required: FUN_003f2aac. */
-/* Supplied declaration required: FUN_003fd63c. */
+/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: countersAddSaturating. */
 extern unsigned int FUN_004c53fc(unsigned int);
 extern int btlUnitGet(unsigned int);
@@ -59,7 +59,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
   puVar3 = puVar2;
   FUN_003f0e20(puVar2,param_1);
   if (puVar3 == (unsigned int *)0x0) {
-    if ((-1 < param_1 - 0x6d) && (temp_v1 = FUN_001ab854(), temp_v1 != 0)) {
+    if ((-1 < param_1 - 0x6d) && (temp_v1 = gameGetSlotRecord(), temp_v1 != 0)) {
       if (param_2 == 0) {
         param_3 = *(unsigned short *)(temp_v1 + 0x60) & ~param_3;
       }
@@ -139,17 +139,17 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
         *(unsigned short *)(temp_v1 + *(short *)((int)puVar3 + 0x6e) * 2 + 0x5b0) =
              *(unsigned short *)(puVar3[0xff] + 0x62);
       }
-      temp_v1 = FUN_0018719c(0x4b6);
+      temp_v1 = gameFlagIsSet(0x4b6);
       if (temp_v1 != 0) {
-        FUN_003fd63c(0x4b6,0,1);
+        gameFlagSetValue(0x4b6,0,1);
       }
-      temp_v1 = FUN_0018719c(0x4b0);
+      temp_v1 = gameFlagIsSet(0x4b0);
       if (temp_v1 == 0) {
-        FUN_003fd63c(0x4b0,1);
+        gameFlagSetValue(0x4b0,1);
       }
       FUN_003f21ec();
-      if ((puVar2 != (unsigned int *)0x0) && (temp_v1 = FUN_0018719c(0x4c6), temp_v1 == 0)) {
-        FUN_003fd63c(0x4c6,1);
+      if ((puVar2 != (unsigned int *)0x0) && (temp_v1 = gameFlagIsSet(0x4c6), temp_v1 == 0)) {
+        gameFlagSetValue(0x4c6,1);
       }
     }
     if ((DAT_00571414 & puVar3[1]) != 0 || (*puVar3 & DAT_00571410) != 0) {

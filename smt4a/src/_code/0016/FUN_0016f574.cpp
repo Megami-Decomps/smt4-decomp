@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0017fd20(int [2], int);
-int FUN_00188b60(int *);
+int nn_os_CriticalSection_Initialize(int *);
 int FUN_00189804(int);
 int FUN_00189de4(unsigned char *);
 int FUN_00189fe0(void);
@@ -22,12 +22,12 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_2_stack;
 
-extern unsigned char DAT_006449d0; /* 0x6449d0 */
-extern unsigned char DAT_00647708; /* 0x647708 */
+extern unsigned char g_nnSndVoiceManager; /* 0x6449d0 */
+extern unsigned char g_nnSndMasterManagerImpl; /* 0x647708 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_0017fd20. */
-/* Supplied declaration required: FUN_00188b60. */
+/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
 /* Supplied declaration required: FUN_00189804. */
 extern int FUN_00189830(int *);
 extern int FUN_0018985c(int, unsigned int);
@@ -37,7 +37,7 @@ extern int FUN_0018985c(int, unsigned int);
 /* Supplied declaration required: FUN_0018a520. */
 /* Supplied declaration required: FUN_001afd94. */
 /* Supplied declaration required: FUN_001bd5f8. */
-extern int FUN_001c6e20(void);
+extern int nn_snd_CTR_Dspsnd_IsInitialized(void);
 /* Supplied declaration required: FUN_002e3140. */
 
 
@@ -51,7 +51,7 @@ int FUN_0016f574(int *param_1,int param_2)
   int temp_v2 [3];
   
   piVar2 = temp_v1;
-  temp_v0 = FUN_001c6e20();
+  temp_v0 = nn_snd_CTR_Dspsnd_IsInitialized();
   if (temp_v0 == 0) {
     return -0x375f57ff;
   }
@@ -86,11 +86,11 @@ int FUN_0016f574(int *param_1,int param_2)
     }
     param_1[1] = temp_v2[0];
     FUN_00189804(0x2000);
-    FUN_00188b60(param_1 + 2);
+    nn_os_CriticalSection_Initialize(param_1 + 2);
     FUN_0018a520(param_1,param_2);
     if (param_2 != 0) {
-      FUN_00189de4(&DAT_006449d0);
-      FUN_0018a28c(&DAT_00647708);
+      FUN_00189de4(&g_nnSndVoiceManager);
+      FUN_0018a28c(&g_nnSndMasterManagerImpl);
       FUN_001bd5f8();
       FUN_001afd94();
       FUN_00189fe0();

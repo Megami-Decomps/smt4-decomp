@@ -8,7 +8,7 @@ extern unsigned short DAT_00432cf8; /* 0x432cf8 */
 extern char s_Mikado_00432cfe[7]; /* 0x432cfe */
 extern unsigned short DAT_00432d1c; /* 0x432d1c */
 
-extern char *FUN_00288f60(void);
+extern char *gameDataGetPlayerName(void);
 
 
 char * FUN_002e0d34(int param_1)
@@ -18,7 +18,7 @@ char * FUN_002e0d34(int param_1)
   int temp_v0;
   
   if (param_1 >= 201) {
-    pcVar1 = (char *)FUN_00288f60();
+    pcVar1 = (char *)gameDataGetPlayerName();
     return pcVar1;
   }
   temp_v0 = 0;

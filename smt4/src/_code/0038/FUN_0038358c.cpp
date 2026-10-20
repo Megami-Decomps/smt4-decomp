@@ -8,9 +8,9 @@ int qcMainSetMode(int);
 int FUN_0026f960(int);
 int FUN_00270028(int);
 int FUN_00275dec(void);
-int FUN_002917b8(void);
-int FUN_002b63c0(void);
-int FUN_002b8e84(int);
+int buttonHelpRelease(void);
+int dataTable1bOr1cGetRecord(void);
+int eventQueueAddUnique(int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -23,9 +23,9 @@ typedef struct {
 /* Supplied declaration required: FUN_00275dec. */
 extern int FUN_00287894(void);
 extern int FUN_002903f0(void);
-/* Supplied declaration required: FUN_002917b8. */
-/* Supplied declaration required: FUN_002b63c0. */
-/* Supplied declaration required: FUN_002b8e84. */
+/* Supplied declaration required: buttonHelpRelease. */
+/* Supplied declaration required: dataTable1bOr1cGetRecord. */
+/* Supplied declaration required: eventQueueAddUnique. */
 
 
 void FUN_0038358c(int param_1)
@@ -41,9 +41,9 @@ void FUN_0038358c(int param_1)
       if (((temp_v0 == 2) && (temp_v0 = FUN_002903f0(), temp_v0 != 0)) &&
          (temp_v1 = FUN_00287894(), temp_v1 == 6)) {
         qcMainSetMode(1);
-        FUN_002b63c0();
+        dataTable1bOr1cGetRecord();
         FUN_0026f960(*(unsigned short *)(temp_v0 + 0x148));
-        FUN_002917b8();
+        buttonHelpRelease();
         return;
       }
     }
@@ -65,7 +65,7 @@ void FUN_0038358c(int param_1)
     temp_v0 = *(int *)(param_1 + 0xc) + 1;
     *(int *)(param_1 + 0xc) = temp_v0;
     if (temp_v0 == 7) {
-      FUN_002b8e84(0x1000184);
+      eventQueueAddUnique(0x1000184);
       FUN_00275dec();
     }
     if (*(int *)(param_1 + 0xc) == 8) {

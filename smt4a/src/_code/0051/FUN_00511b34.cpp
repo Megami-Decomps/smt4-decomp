@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-extern unsigned char DAT_006449d0; /* 0x6449d0 */
+extern unsigned char g_nnSndVoiceManager; /* 0x6449d0 */
 extern unsigned int DAT_006449e0; /* 0x6449e0 */
 extern unsigned int DAT_006449e4; /* 0x6449e4 */
 extern unsigned int DAT_006449e8; /* 0x6449e8 */
@@ -56,7 +56,7 @@ void FUN_00511b34(void)
     temp_v4 = temp_v4 + 0x7c;
     *(unsigned int *)(*piVar6 + 0x68) = temp_v1;
   } while (temp_v2 < 0x18);
-  emptyStub_002f4370(&DAT_006449d0,0x439cc0,0x100000);
+  emptyStub_002f4370(&g_nnSndVoiceManager,0x439cc0,0x100000);
   return;
 }
 

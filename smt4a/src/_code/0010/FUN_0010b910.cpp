@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002e9300(unsigned char [8], unsigned char *);
-int FUN_002e9318(unsigned char [8]);
-int FUN_002e9ec8(int, unsigned int);
+int onlineStringConstruct(unsigned char [8], unsigned char *);
+int onlineStringDestroy(unsigned char [8]);
+int onlineInstanceTableFind(int, unsigned int);
 int FUN_002ea3d0(int, unsigned int);
-int FUN_002ea446(int, int);
+int onlineJobSetStateTimed(int, int);
 int onlineObjectThreadRootStart(int, int, int, int);
 int FUN_002f5898(int, unsigned int);
 int FUN_002f5908(unsigned char *, unsigned char [4]);
@@ -24,15 +24,15 @@ extern unsigned char LAB_0010ba0c; /* 0x10ba0c */
 extern unsigned char DAT_00558878; /* 0x558878 */
 extern unsigned char DAT_00630314; /* 0x630314 */
 
-extern int FUN_002e760a(unsigned int);
+extern int operatorNew(unsigned int);
 extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
-/* Supplied declaration required: FUN_002e9300. */
-/* Supplied declaration required: FUN_002e9318. */
-extern int FUN_002e9af4(void);
-/* Supplied declaration required: FUN_002e9ec8. */
+/* Supplied declaration required: onlineStringConstruct. */
+/* Supplied declaration required: onlineStringDestroy. */
+extern int onlineInstanceTableGetCurrent(void);
+/* Supplied declaration required: onlineInstanceTableFind. */
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned int, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
-/* Supplied declaration required: FUN_002ea446. */
+/* Supplied declaration required: onlineJobSetStateTimed. */
 /* Supplied declaration required: onlineObjectThreadRootStart. */
 extern int FUN_002f587c(void);
 /* Supplied declaration required: FUN_002f5898. */
@@ -54,8 +54,8 @@ void FUN_0010b910(int param_1)
   unsigned char temp_v5 [16];
   unsigned char temp_v6 [16];
   
-  temp_v0 = FUN_002e9af4();
-  FUN_002e9ec8(temp_v0,*(unsigned int *)(param_1 + 0x68));
+  temp_v0 = onlineInstanceTableGetCurrent();
+  onlineInstanceTableFind(temp_v0,*(unsigned int *)(param_1 + 0x68));
   if (temp_v0 != 0) {
     temp_v0 = FUN_002f587c();
     if (temp_v0 != 0) {
@@ -65,19 +65,19 @@ void FUN_0010b910(int param_1)
       pcVar4 = (char *)0x630320;
     }
     if (*pcVar4 != '\0') {
-      FUN_002ea446(param_1,0x32);
+      onlineJobSetStateTimed(param_1,0x32);
     }
     else {
-      temp_v0 = FUN_002e760a(0x34);
+      temp_v0 = operatorNew(0x34);
       if (temp_v0 != 0) {
-        FUN_002e9300(temp_v4,&LAB_0010b9ec);
+        onlineStringConstruct(temp_v4,&LAB_0010b9ec);
         puVar2 = (unsigned int *)FUN_002f58d0(temp_v0,temp_v4,*(unsigned int *)(param_1 + 0xac));
         puVar2[0xb] = 0;
         *puVar2 = (unsigned int)&DAT_00558878;
         puVar2[10] = 0;
         puVar2[9] = 0;
         *(unsigned int **)(param_1 + 0x78) = puVar2;
-        FUN_002e9318(temp_v4);
+        onlineStringDestroy(temp_v4);
         temp_v0 = *(int *)(param_1 + 0x78);
       }
       else {

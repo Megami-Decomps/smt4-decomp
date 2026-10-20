@@ -5,10 +5,10 @@
 extern "C" {
 
 int strAssign(unsigned int, int *, int, unsigned int);
-int FUN_002e7526(int, int *);
+int writeU16Le(int, int *);
 
 /* Supplied declaration required: strAssign. */
-/* Supplied declaration required: FUN_002e7526. */
+/* Supplied declaration required: writeU16Le. */
 
 
 unsigned int FUN_002ed864(int param_1,unsigned short *param_2,unsigned int param_3,unsigned int param_4)
@@ -20,7 +20,7 @@ unsigned int FUN_002ed864(int param_1,unsigned short *param_2,unsigned int param
   
   uStack_10 = param_3;
   uStack_c = param_4;
-  FUN_002e7526(*param_2,&uStack_10);
+  writeU16Le(*param_2,&uStack_10);
   strAssign(*(unsigned int *)(param_1 + 8),&uStack_10,2,0xffffffff);
   return 1;
 }

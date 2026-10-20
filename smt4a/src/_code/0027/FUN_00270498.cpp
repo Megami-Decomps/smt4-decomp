@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001ab888(void);
+int gameGetSlotTable(void);
 int FUN_0032fea0(int, int);
 int unitRecordBuild(unsigned int);
 int FUN_0034c340(short [16], int, int, int);
@@ -28,12 +28,12 @@ typedef struct {
     unsigned int sp50; /* 0x50: local_50 */
 } void_stack;
 
-extern int DAT_0057f268; /* 0x57f268 */
+extern int g_partyPanel; /* 0x57f268 */
 
 extern int slotRecordFindById(unsigned int);
-extern int FUN_001ab854(int);
-/* Supplied declaration required: FUN_001ab888. */
-extern int FUN_001b347c(void);
+extern int gameGetSlotRecord(int);
+/* Supplied declaration required: gameGetSlotTable. */
+extern int gameSlotTableFindFree(void);
 /* Supplied declaration required: FUN_0032fea0. */
 /* Supplied declaration required: unitRecordBuild. */
 /* Supplied declaration required: FUN_0034c340. */
@@ -61,8 +61,8 @@ unsigned int FUN_00270498(void)
   int temp_v7 [2];
   short temp_v8 [16];
   
-  temp_v0 = DAT_0057f268;
-  FUN_001ab888();
+  temp_v0 = g_partyPanel;
+  gameGetSlotTable();
   temp_v3 = 0;
   temp_v7[0] = 0;
   temp_v7[1] = 0;
@@ -106,14 +106,14 @@ unsigned int FUN_00270498(void)
       temp_v2 = *(unsigned int *)(temp_v0 + 0xe90);
       temp_v5 = 0;
       temp_v4 = 0;
-      temp_v3 = FUN_001b347c();
+      temp_v3 = gameSlotTableFindFree();
       if (0 < temp_v3) {
         do {
-          temp_v3 = FUN_001ab888();
-          temp_v3 = FUN_001ab854((int)*(char *)(temp_v3 + temp_v4 + 0x1c88));
+          temp_v3 = gameGetSlotTable();
+          temp_v3 = gameGetSlotRecord((int)*(char *)(temp_v3 + temp_v4 + 0x1c88));
           if ((unsigned int)*(unsigned short *)(temp_v3 + 0x62) == (temp_v2 & 0x7fff)) goto LAB_002705ec;
           temp_v4 = temp_v4 + 1;
-          temp_v3 = FUN_001b347c();
+          temp_v3 = gameSlotTableFindFree();
         } while (temp_v4 < temp_v3);
       }
       temp_v3 = 0;
@@ -132,14 +132,14 @@ LAB_002705ec:
       } while (temp_v4 < 8);
       temp_v2 = *(unsigned int *)(temp_v0 + 0xe90);
       temp_v4 = 0;
-      temp_v3 = FUN_001b347c();
+      temp_v3 = gameSlotTableFindFree();
       if (0 < temp_v3) {
         do {
-          temp_v3 = FUN_001ab888();
-          temp_v3 = FUN_001ab854((int)*(char *)(temp_v3 + temp_v4 + 0x1c88));
+          temp_v3 = gameGetSlotTable();
+          temp_v3 = gameGetSlotRecord((int)*(char *)(temp_v3 + temp_v4 + 0x1c88));
           if ((unsigned int)*(unsigned short *)(temp_v3 + 0x62) == (temp_v2 & 0x3fffffff) >> 0xf) goto LAB_0027069c;
           temp_v4 = temp_v4 + 1;
-          temp_v3 = FUN_001b347c();
+          temp_v3 = gameSlotTableFindFree();
         } while (temp_v4 < temp_v3);
       }
       temp_v3 = 0;

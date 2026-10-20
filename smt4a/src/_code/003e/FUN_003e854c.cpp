@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0019cac4(...);
+int dataTable00FindById(...);
 int sysMemClear(...);
-int FUN_0039587c(unsigned int, int);
+int sequenceRequestDeferEx(unsigned int, int);
 int FUN_003e9fe4(int, int, int);
 int FUN_003eb314(int, unsigned char [676], int);
 int FUN_004ca63c(int, unsigned char [676], int, int, int);
@@ -19,9 +19,9 @@ typedef struct {
 
 extern unsigned char g_btlMain; /* 0x573920 */
 
-/* Supplied declaration required: FUN_0019cac4. */
+/* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_0039587c. */
+/* Supplied declaration required: sequenceRequestDeferEx. */
 /* Supplied declaration required: FUN_003e9fe4. */
 /* Supplied declaration required: FUN_003eb314. */
 /* Supplied declaration required: FUN_004ca63c. */
@@ -65,7 +65,7 @@ void FUN_003e854c(int param_1)
     do {
       if (*(int *)(param_1 + 0xf4 + temp_v3 * 4) != 0) {
         temp_v1 = *(unsigned int *)(param_1 + temp_v3 * 4 + 0xf4);
-        FUN_0019cac4();
+        dataTable00FindById();
         if (temp_v1 != 0) {
           FUN_003eb314(param_1,temp_v4,temp_v1);
           FUN_004ca63c(param_1,temp_v4,1,temp_v3 + 4,0);
@@ -76,12 +76,12 @@ void FUN_003e854c(int param_1)
   }
   else {
     temp_v3 = (*(unsigned int *)((unsigned char *)&g_btlMain + 0x50));
-    FUN_0019cac4(temp_v3);
+    dataTable00FindById(temp_v3);
     FUN_003eb314(param_1,temp_v4,temp_v3);
     FUN_004ca63c(param_1,temp_v4,1,4,0);
   }
   if (*(char *)(param_1 + 0x158) == '\x01') {
-    FUN_0039587c(*(unsigned int *)(param_1 + 0x15c),param_1 + 0x160);
+    sequenceRequestDeferEx(*(unsigned int *)(param_1 + 0x15c),param_1 + 0x160);
   }
   *(unsigned int *)(param_1 + 0x4c6c) = 0;
   sysMemClear(param_1 + 0x4bc4,0xa8);

@@ -14,7 +14,7 @@ int FUN_001834a4(...);
 int FUN_001835b4(...);
 int FUN_00183bb0(void);
 int FUN_00184310(void);
-int FUN_00184e64(...);
+int drawSetColorFromRGBA8(...);
 int FUN_0025cc78(...);
 
 /* stack frame of void: 10 slot(s), 40 byte(s) */
@@ -37,18 +37,18 @@ extern int g_campCecRanking; /* 0x57f11c */
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_001527d8. */
 /* Supplied declaration required: FUN_00164b5c. */
-extern int FUN_001654d8(int);
-extern int FUN_001654e4(int);
+extern int vec2GetXInt(int);
+extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00169a1c. */
 /* Supplied declaration required: FUN_00180310. */
-extern int FUN_0018206c(unsigned int, unsigned int);
+extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: FUN_00184e64. */
-extern int FUN_0018719c(unsigned int);
+/* Supplied declaration required: drawSetColorFromRGBA8. */
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0025cc78. */
 
 
@@ -77,7 +77,7 @@ int FUN_002bfd94(void)
   int temp_v18;
   
   temp_v2 = g_campCecRanking;
-  temp_v3 = FUN_0018719c(0x4f6);
+  temp_v3 = gameFlagIsSet(0x4f6);
   temp_v4 = 0;
   if (temp_v3 != 0) {
     temp_v4 = *(int *)(temp_v2 + 4);
@@ -87,11 +87,11 @@ int FUN_002bfd94(void)
       temp_v4 = 0;
     }
     else {
-      temp_v3 = FUN_0018206c(0x2e,1);
+      temp_v3 = asdTMTexTableNodeIsLoaded(0x2e,1);
       temp_v4 = 0;
       if (temp_v3 != 0) {
-        temp_v4 = FUN_001654d8(temp_v2 + 0xc);
-        temp_v3 = FUN_001654e4(temp_v2 + 0xc);
+        temp_v4 = vec2GetXInt(temp_v2 + 0xc);
+        temp_v3 = vec2GetYInt(temp_v2 + 0xc);
         efctSetSpeed();
         FUN_001835b4(2,0x2e,0x44d,temp_v4,temp_v3,0x65);
         FUN_00164b5c(2,0x2e,0x1a,temp_v4,temp_v3,0x65);
@@ -192,7 +192,7 @@ int FUN_002bfd94(void)
             FUN_001834a4(0x2e,temp_v16);
             temp_v0 = *(short *)(temp_v9 + 8);
             temp_v1 = *(short *)(temp_v9 + 10);
-            FUN_00184e64(0xffffffff);
+            drawSetColorFromRGBA8(0xffffffff);
             FUN_00100388(temp_v14,&LAB_002c0234,temp_v18);
             FUN_00180310(6,temp_v4 + temp_v0 + temp_v8,temp_v3 + temp_v1 + temp_v5,1,3,0x65,temp_v14);
             FUN_00183bb0();

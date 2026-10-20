@@ -5,7 +5,7 @@ extern "C" {
 void jobStop(u32 job, s32 arg);
 void asdMemFree(void *block);
 void scrScriptProcessDestroy(void *process);
-void FUN_00237210(u32 arg);
+void asdMemFreeSlot(u32 arg);
 
 extern S4Load *g_s4Load;
 
@@ -27,7 +27,7 @@ void s4LoadDestroy(void)
         asdMemFree(load->data);
         load->data = NULL;
     }
-    FUN_00237210(load->unk2B8);
+    asdMemFreeSlot(load->unk2B8);
     jobStop(load->job, 0);
     load->closing = 1;
     if (g_s4Load != NULL) {

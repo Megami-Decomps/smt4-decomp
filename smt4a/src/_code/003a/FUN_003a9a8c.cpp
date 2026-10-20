@@ -7,12 +7,12 @@ extern "C" {
 int scrSetResult(int);
 
 extern unsigned int btlGetMainState(void);
-extern int FUN_0014bef4(unsigned int);
+extern int randRange(unsigned int);
 extern int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(unsigned int);
 extern int scrGetArg(unsigned int);
 /* Supplied declaration required: scrSetResult. */
-extern unsigned int FUN_003ef960(unsigned int, unsigned int);
+extern unsigned int btlGetTable(unsigned int, unsigned int);
 
 
 unsigned int FUN_003a9a8c(void)
@@ -34,21 +34,21 @@ unsigned int FUN_003a9a8c(void)
     if (temp_v0 != 2) {
       if (temp_v0 == 3) {
         temp_v6 = btlGetMainState();
-        temp_v6 = FUN_003ef960(temp_v6,0xc);
+        temp_v6 = btlGetTable(temp_v6,0xc);
       }
     }
     else {
       temp_v6 = btlGetMainState();
-      temp_v6 = FUN_003ef960(temp_v6,0xb);
+      temp_v6 = btlGetTable(temp_v6,0xb);
     }
   }
   else {
     temp_v6 = btlGetMainState();
-    temp_v6 = FUN_003ef960(temp_v6,10);
+    temp_v6 = btlGetTable(temp_v6,10);
   }
   temp_v1 = dataTableGetEntries(temp_v6);
   temp_v2 = dataTableGetCount(temp_v6);
-  temp_v3 = FUN_0014bef4(99);
+  temp_v3 = randRange(99);
   temp_v0 = 0;
   temp_v7 = 0;
   temp_v4 = 0;

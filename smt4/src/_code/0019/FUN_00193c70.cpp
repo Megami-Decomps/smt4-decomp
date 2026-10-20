@@ -15,7 +15,7 @@ int FUN_002030bc(...);
 int FUN_002031dc(...);
 int FUN_002032fc(...);
 int FUN_00291620(...);
-int FUN_002a8178(...);
+int wordTripleClear(...);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
 
@@ -54,7 +54,7 @@ typedef struct {
 /* Supplied declaration required: FUN_002031dc. */
 /* Supplied declaration required: FUN_002032fc. */
 /* Supplied declaration required: FUN_00291620. */
-/* Supplied declaration required: FUN_002a8178. */
+/* Supplied declaration required: wordTripleClear. */
 
 
 void FUN_00193c70(int param_1,fn_00193c70_arg1 *param_2)
@@ -66,7 +66,7 @@ void FUN_00193c70(int param_1,fn_00193c70_arg1 *param_2)
   float temp_v1;
   unsigned int temp_v2;
   
-  FUN_002a8178(param_1 + 0x2e1);
+  wordTripleClear(param_1 + 0x2e1);
   *(unsigned int *)(param_1 + 0x2ec) = 0;
   *(unsigned int *)(param_1 + 0x2f0) = 0;
   *(unsigned int *)(param_1 + 0x2f4) = 0;

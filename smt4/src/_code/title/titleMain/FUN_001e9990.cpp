@@ -18,12 +18,12 @@ int FUN_00275be8(...);
 int FUN_00275dc4(void);
 int FUN_0028703c(...);
 int FUN_00287c34(...);
-int FUN_00291944(void);
-int FUN_0029c3b0(...);
+int uiFadeRelease(void);
+int soundChannelStopAll(...);
 int FUN_0029c3c0(...);
-int FUN_002a72c0(...);
+int asdModelSlotRelease(...);
 int FUN_002b827c(...);
-int FUN_002b8cc8(void);
+int ifTouchRegionRemove(void);
 int jobStop(...);
 int asdSequenceRequest(...);
 int FUN_002f4ce8(void);
@@ -33,21 +33,21 @@ int FUN_00210194(...);
 int FUN_00211bd0(void);
 int FUN_0025a0e0(void);
 int FUN_002898e4(void);
-int FUN_0028d6d0(void);
-int FUN_00297410(int);
+int buttonHelpCreate(void);
+int fileSlotLoad(int);
 int FUN_00298d50(...);
 int FUN_0029bb14(void);
 int asdMdlManagerCreateLoaded(...);
 int FUN_0029ee6c(...);
-int FUN_002a03a0(int, int, int);
+int soundChannelRequestIfEnabled(int, int, int);
 int FUN_002a03d8(...);
 int FUN_002a0428(...);
 int FUN_002a043c(...);
 int FUN_002a09b4(...);
 int FUN_002a5eb4(void);
 int FUN_002a8638(...);
-int FUN_002b8838(...);
-int FUN_002b8e84(...);
+int buttonHelpSetPreset(...);
+int eventQueueAddUnique(...);
 int FUN_002bc0e0(void);
 int dataTableGet(...);
 int FUN_002c159c(...);
@@ -97,7 +97,7 @@ extern int DAT_0049fd14; /* 0x49fd14 */
 /* Supplied declaration required: FUN_00210194. */
 /* Supplied declaration required: FUN_00211bd0. */
 extern int FUN_00215a14(void);
-extern int FUN_0025a03c(unsigned int);
+extern int effIsFinished(unsigned int);
 extern int FUN_0025a084(void);
 /* Supplied declaration required: FUN_0025a0e0. */
 extern unsigned int FUN_00263c1c(unsigned char *);
@@ -109,42 +109,42 @@ extern int FUN_0026ee68(unsigned int);
 /* Supplied declaration required: FUN_0026ff54. */
 /* Supplied declaration required: FUN_00275be8. */
 /* Supplied declaration required: FUN_00275dc4. */
-extern int FUN_00282b88(void);
+extern int jobWorkerPollAndFree(void);
 /* Supplied declaration required: FUN_0028703c. */
 /* Supplied declaration required: FUN_00287c34. */
 extern int FUN_002896bc(void);
 /* Supplied declaration required: FUN_002898e4. */
-/* Supplied declaration required: FUN_0028d6d0. */
-/* Supplied declaration required: FUN_00291944. */
-/* Supplied declaration required: FUN_00297410. */
+/* Supplied declaration required: buttonHelpCreate. */
+/* Supplied declaration required: uiFadeRelease. */
+/* Supplied declaration required: fileSlotLoad. */
 /* Supplied declaration required: FUN_00298d50. */
 /* Supplied declaration required: FUN_0029bb14. */
 /* Supplied declaration required: asdMdlManagerCreateLoaded. */
 /* Supplied declaration required: FUN_0029c2cc. */
-/* Supplied declaration required: FUN_0029c3b0. */
+/* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: FUN_0029c3c0. */
 extern int FUN_0029d65c(int);
 /* Supplied declaration required: FUN_0029ee6c. */
-/* Supplied declaration required: FUN_002a03a0. */
+/* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: FUN_002a03d8. */
 /* Supplied declaration required: FUN_002a0428. */
 /* Supplied declaration required: FUN_002a043c. */
 /* Supplied declaration required: FUN_002a09b4. */
 /* Supplied declaration required: FUN_002a5eb4. */
-/* Supplied declaration required: FUN_002a72c0. */
+/* Supplied declaration required: asdModelSlotRelease. */
 /* Supplied declaration required: FUN_002a8638. */
 extern int FUN_002adee0(unsigned int);
 /* Supplied declaration required: sndObjectForwardField8. */
 /* Supplied declaration required: FUN_002b827c. */
 extern unsigned short FUN_002b8584(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002b8838. */
-/* Supplied declaration required: FUN_002b8cc8. */
-extern int FUN_002b8cec(unsigned int);
-/* Supplied declaration required: FUN_002b8e84. */
+/* Supplied declaration required: buttonHelpSetPreset. */
+/* Supplied declaration required: ifTouchRegionRemove. */
+extern int padIsButtonRepeat(unsigned int);
+/* Supplied declaration required: eventQueueAddUnique. */
 /* Supplied declaration required: FUN_002bc0e0. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
-extern int FUN_002bfde4(unsigned int);
-extern int FUN_002c09bc(void);
+extern int padIsButtonPressed(unsigned int);
+extern int gameDataBlocksGetSaveData(void);
 extern int dataTableGetEntries(void);
 /* Supplied declaration required: dataTableGet. */
 /* Supplied declaration required: FUN_002c159c. */
@@ -192,7 +192,7 @@ unsigned int FUN_001e9990(void)
   ppuVar11 = &temp_v10;
   switch(g_titleMain[0x27]) {
   case 0:
-    FUN_00297410(0x3a);
+    fileSlotLoad(0x3a);
     FUN_002a5eb4();
     temp_v4 = FUN_002bf4f8(0x11,0x12);
     temp_v6 = VectorSignedToFloat((int)*(short *)(temp_v4 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -233,7 +233,7 @@ unsigned int FUN_001e9990(void)
     break;
   case 2:
     *(unsigned char *)(g_titleMain + 4) = 0;
-    FUN_002a03a0(0x1000001,0,0x3c);
+    soundChannelRequestIfEnabled(0x1000001,0,0x3c);
     FUN_002898e4();
     if (*(char *)(puVar13 + 0x18) != '\0') {
       puVar13[2] = 1;
@@ -243,8 +243,8 @@ unsigned int FUN_001e9990(void)
       puVar13[2] = 3;
       puVar13[3] = 3;
     }
-    FUN_0028d6d0();
-    FUN_002b8838(0x9f);
+    buttonHelpCreate();
+    buttonHelpSetPreset(0x9f);
     temp_v2 = puVar13[2];
     dataTableGet(0x3a,0);
     temp_v4 = dataTableGetEntries();
@@ -329,12 +329,12 @@ unsigned int FUN_001e9990(void)
     goto LAB_001ea720;
     temp_v8 = 1.0f;
     g_titleMain[0x19] = (float)g_titleMain[0x19] + 1.0f;
-    temp_v4 = FUN_002b8cec(5);
-    if ((temp_v4 != 0) || (temp_v4 = FUN_002b8cec(0xe), temp_v4 != 0)) {
+    temp_v4 = padIsButtonRepeat(5);
+    if ((temp_v4 != 0) || (temp_v4 = padIsButtonRepeat(0xe), temp_v4 != 0)) {
       puVar2[2] = puVar2[2] - 1;
     }
-    temp_v4 = FUN_002b8cec(6);
-    if ((temp_v4 == 0) && (temp_v4 = FUN_002b8cec(0xf), temp_v4 == 0)) {
+    temp_v4 = padIsButtonRepeat(6);
+    if ((temp_v4 == 0) && (temp_v4 = padIsButtonRepeat(0xf), temp_v4 == 0)) {
       temp_v4 = puVar2[2];
     }
     else {
@@ -344,7 +344,7 @@ unsigned int FUN_001e9990(void)
     temp_v4 = (temp_v4 + 4) % 4;
     puVar2[2] = temp_v4;
     if (temp_v4 != puVar2[3]) {
-      FUN_002b8e84(0x100016c);
+      eventQueueAddUnique(0x100016c);
       puVar2[3] = puVar2[2];
     }
     if ((int)puVar2[0x19] >= 0x41f00001) {
@@ -420,7 +420,7 @@ unsigned int FUN_001e9990(void)
       }
       FUN_00210194(temp_v6);
     }
-    temp_v4 = FUN_0025a03c(*(unsigned int *)(puVar3[0x23] + 8));
+    temp_v4 = effIsFinished(*(unsigned int *)(puVar3[0x23] + 8));
     if (((temp_v4 != 0) && (temp_v4 = FUN_002d5748(*(unsigned int *)(puVar3[0x23] + 8)), temp_v4 != 0)) &&
        (*(char *)(puVar3 + 0x25) == '\0')) {
       puVar10 = (unsigned int *)puVar3[0x23];
@@ -453,7 +453,7 @@ unsigned int FUN_001e9990(void)
     temp_v4 = dataTableGetEntries();
     FUN_0029ee6c(temp_v4 + temp_v2 * 0x56 + 0x16,0x323232ff);
     if (((*(char *)((int)puVar13 + 99) == '\0') && (temp_v4 = FUN_0026ee68(1), temp_v4 == 0)) &&
-       (temp_v4 = FUN_002bfde4(0), temp_v4 == 0)) goto LAB_001ea720;
+       (temp_v4 = padIsButtonPressed(0), temp_v4 == 0)) goto LAB_001ea720;
     puVar13 = g_titleMain;
     temp_v3 = g_titleMain[2];
     temp_v7 = temp_v3 == 1;
@@ -464,13 +464,13 @@ unsigned int FUN_001e9990(void)
       *(unsigned char *)((int)g_titleMain + 99) = 0;
       goto LAB_001ea720;
     }
-    FUN_002b8e84(0x100016d);
+    eventQueueAddUnique(0x100016d);
     temp_v4 = puVar13[2];
     if (temp_v4 == 1) {
       temp_v4 = 0;
       *(unsigned char *)((int)puVar13 + 0x61) = 1;
       do {
-        FUN_002b8cc8();
+        ifTouchRegionRemove();
         temp_v4 = temp_v4 + 1;
       } while (temp_v4 < 4);
       *(unsigned char *)((int)puVar13 + 99) = 0;
@@ -486,7 +486,7 @@ unsigned int FUN_001e9990(void)
           temp_v4 = 0;
           *(unsigned char *)((int)puVar13 + 99) = 0;
           do {
-            FUN_002b8cc8();
+            ifTouchRegionRemove();
             temp_v4 = temp_v4 + 1;
           } while (temp_v4 < 4);
           puVar13[0x27] = 0xb;
@@ -498,7 +498,7 @@ unsigned int FUN_001e9990(void)
       temp_v4 = 0;
       *(unsigned char *)((int)puVar13 + 0x61) = 1;
       do {
-        FUN_002b8cc8();
+        ifTouchRegionRemove();
         temp_v4 = temp_v4 + 1;
       } while (temp_v4 < 4);
       *(unsigned char *)((int)puVar13 + 99) = 0;
@@ -513,12 +513,12 @@ unsigned int FUN_001e9990(void)
       temp_v4 = 0;
       *(unsigned char *)((int)puVar13 + 99) = 0;
       do {
-        FUN_002b8cc8();
+        ifTouchRegionRemove();
         temp_v4 = temp_v4 + 1;
       } while (temp_v4 < 4);
       FUN_0029c3c0(0,0xc,0xffffffff);
       FUN_0029c3c0(1,0xc,0xffffffff);
-      FUN_0029c3b0(0xf);
+      soundChannelStopAll(0xf);
       temp_v4 = 6;
     }
     break;
@@ -527,22 +527,22 @@ unsigned int FUN_001e9990(void)
     break;
   case 7:
     if (*(char *)(g_titleMain + 0x1f) != '\0') goto LAB_001ea720;
-    FUN_002a72c0(0);
+    asdModelSlotRelease(0);
     FUN_0030a9d8();
     temp_v4 = 8;
     break;
   case 8:
-    temp_v4 = FUN_00282b88();
+    temp_v4 = jobWorkerPollAndFree();
     if (temp_v4 != 0) goto LAB_001ea720;
     temp_v4 = FUN_00215a14();
     if (temp_v4 == 0) goto LAB_001ea4cc;
     *(unsigned char *)((int)puVar13 + 0x62) = 1;
-    FUN_0029c3b0(0xf);
+    soundChannelStopAll(0xf);
     temp_v4 = 0xc;
     break;
   case 9:
     if (*(char *)(g_titleMain + 0x1f) != '\0') goto LAB_001ea720;
-    FUN_002a72c0(0);
+    asdModelSlotRelease(0);
     FUN_002f4ce8();
     temp_v4 = 10;
     break;
@@ -554,7 +554,7 @@ LAB_001ea4cc:
       in_s0 = 0.0f;
       g_titleMain[0x19] = 0;
       puVar13[0x1a] = 0;
-      FUN_002b8838(0x9f);
+      buttonHelpSetPreset(0x9f);
       temp_v1 = FUN_002b8584(0x11,0x14);
       *(unsigned short *)(puVar13 + 0x1d) = temp_v1;
       temp_v1 = FUN_002b8584(0x11,0x15);
@@ -581,7 +581,7 @@ LAB_001ea4cc:
   case 0xc:
     temp_v4 = FUN_002896bc();
     if (temp_v4 != 0) {
-      FUN_00291944();
+      uiFadeRelease();
       jobStop(*g_titleMain,0);
       FUN_002b827c(3);
       temp_v4 = puVar13[2];
@@ -607,7 +607,7 @@ LAB_001ea4cc:
       else {
         FUN_0026ff54();
         FUN_00287c34(1);
-        temp_v4 = FUN_002c09bc();
+        temp_v4 = gameDataBlocksGetSaveData();
         if (*(unsigned char *)(temp_v4 + 2) >= 2) {
           if (*(unsigned char *)(temp_v4 + 2) == 2) {
             temp_v6 = 0x20;

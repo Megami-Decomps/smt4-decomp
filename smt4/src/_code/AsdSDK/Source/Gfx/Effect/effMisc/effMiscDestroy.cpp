@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_002c0894(void *resource);
+void asdTextureRelease(void *resource);
 void asdMemFree(void *block);
 
 extern EffMiscKind g_effMiscKinds[];
@@ -19,7 +19,7 @@ void effMiscDestroy(EffMiscObject *obj)
     shared = obj->shared;
     if (shared != NULL && --shared->refCount == 0) {
         if (shared->type != 4) {
-            FUN_002c0894(shared->resource);
+            asdTextureRelease(shared->resource);
         }
         asdMemFree(shared);
     }

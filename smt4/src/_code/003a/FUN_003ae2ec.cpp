@@ -2,15 +2,15 @@
 
 extern "C" {
 
-s32 FUN_002062e8(BtlUiObjC *obj);
+s32 playSceneAcceptsInput(BtlUiObjC *obj);
 
-extern BtlUiGlobals DAT_00439c88;
+extern BtlUiGlobals g_btlUi;
 
 void FUN_003ae2ec(u32 unused, u16 *outA, u16 *outB)
 {
-    BtlUi *ui = DAT_00439c88.ui;
+    BtlUi *ui = g_btlUi.ui;
 
-    if (FUN_002062e8(&ui->objC) != 0) {
+    if (playSceneAcceptsInput(&ui->objC) != 0) {
         *outA = ui->unk7E4E;
         *outB = ui->unk7E50;
     }

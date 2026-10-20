@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00156260(unsigned int, int, unsigned short [3]);
 int FUN_002a4b10(int, int);
-int FUN_002c3944(int, int);
+int rt_memclr(int, int);
 int VectorFloatToUnsigned(double, int);
 
 /* stack frame of param_4: 6 slot(s), 12 byte(s) */
@@ -23,7 +23,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00156260. */
 /* Supplied declaration required: FUN_002a4b10. */
 extern unsigned int FUN_002bb470(void);
-/* Supplied declaration required: FUN_002c3944. */
+/* Supplied declaration required: rt_memclr. */
 
 
 unsigned int FUN_001598ec(int *param_1,int *param_2,unsigned int param_3,unsigned int param_4)
@@ -70,7 +70,7 @@ unsigned int FUN_001598ec(int *param_1,int *param_2,unsigned int param_3,unsigne
         }
         temp_v9 = (unsigned short)(int)((1.0f - temp_v4) * 128.0f);
         temp_v10 = (unsigned short)(int)(temp_v4 * 128.0f);
-        FUN_002c3944(*param_1,param_1[2]);
+        rt_memclr(*param_1,param_1[2]);
         FUN_002a4b10(*param_1,param_1[2]);
         temp_v0 = *(char *)((int)param_1 + 0xd);
         temp_v3 = FUN_002bb470();

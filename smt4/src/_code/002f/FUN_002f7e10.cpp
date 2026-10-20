@@ -29,7 +29,7 @@ extern unsigned int btlUnitGet(unsigned int);
 extern int btlGetMainState(void);
 /* Supplied declaration required: scrGetArg. */
 extern int flagWordTestBit(unsigned int, unsigned int);
-extern unsigned int FUN_002a8740(int);
+extern unsigned int gameGetUnitRecord(int);
 
 
 unsigned int FUN_002f7e10(void)
@@ -57,7 +57,7 @@ unsigned int FUN_002f7e10(void)
     FUN_00246e24(0,temp_v3,temp_v0,1 << (temp_v1 & 0xff),1);
   }
   else {
-    temp_v5 = FUN_002a8740(temp_v0 - 0x6d);
+    temp_v5 = gameGetUnitRecord(temp_v0 - 0x6d);
     if (temp_v2 == 0) {
       FUN_00262f68(temp_v5,(1 << (temp_v1 & 0xff)) & 0xffff);
       return 1;

@@ -8,13 +8,13 @@ int jobStop(u32 job, int mode);
 /* Stops the worker's job and frees it. */
 void FUN_0019207c(void)
 {
-    Worker *worker = DAT_0044de28.worker;
+    Worker *worker = g_saveLoadUIFlags.worker;
 
-    if (DAT_0044de28.worker != NULL) {
+    if (g_saveLoadUIFlags.worker != NULL) {
         worker->stopRequested = 1;
         jobStop(worker->job, 0);
         asdMemFree(worker);
-        DAT_0044de28.worker = NULL;
+        g_saveLoadUIFlags.worker = NULL;
     }
 }
 

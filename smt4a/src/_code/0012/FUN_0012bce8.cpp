@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002e760a(int);
-int FUN_002e9af4(void);
-int FUN_002e9ec8(int, unsigned int);
+int operatorNew(int);
+int onlineInstanceTableGetCurrent(void);
+int onlineInstanceTableFind(int, unsigned int);
 int FUN_002f7c94(unsigned int, unsigned int, unsigned int);
-int FUN_002f7cb0(int);
+int onlineJobSetStateWaiting(int);
 int FUN_002f7cba(...);
 int FUN_0030c800(...);
 int FUN_0030c846(int *, unsigned int, unsigned int, unsigned int);
@@ -40,13 +40,13 @@ extern unsigned char DAT_0055aec4; /* 0x55aec4 */
 extern romwright_code *DAT_00589564; /* 0x589564 */
 extern unsigned int DAT_00589568; /* 0x589568 */
 
-/* Supplied declaration required: FUN_002e760a. */
+/* Supplied declaration required: operatorNew. */
 extern unsigned int FUN_002e7908(unsigned int *, unsigned int *);
-/* Supplied declaration required: FUN_002e9af4. */
-/* Supplied declaration required: FUN_002e9ec8. */
+/* Supplied declaration required: onlineInstanceTableGetCurrent. */
+/* Supplied declaration required: onlineInstanceTableFind. */
 extern unsigned int FUN_002ea3c0(int, unsigned int, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002f7c94. */
-/* Supplied declaration required: FUN_002f7cb0. */
+/* Supplied declaration required: onlineJobSetStateWaiting. */
 /* Supplied declaration required: FUN_002f7cba. */
 /* Supplied declaration required: FUN_0030c800. */
 /* Supplied declaration required: FUN_0030c846. */
@@ -91,8 +91,8 @@ void FUN_0012bce8(int param_1)
   int temp_v19;
   unsigned int *temp_v20;
   
-  temp_v0 = FUN_002e9af4();
-  FUN_002e9ec8(temp_v0,*(unsigned int *)(param_1 + 0x68));
+  temp_v0 = onlineInstanceTableGetCurrent();
+  onlineInstanceTableFind(temp_v0,*(unsigned int *)(param_1 + 0x68));
   if (temp_v0 != 0) {
     temp_v20 = (unsigned int *)(param_1 + 0x3e0);
     temp_v1 = vectorCount4_0030c8ce();
@@ -120,8 +120,8 @@ void FUN_0012bce8(int param_1)
           temp_v8 = (unsigned int)temp_v16;
           temp_v7 = (unsigned int)temp_v15;
           (**(romwright_code **)(*piVar10 + 8))(piVar10,temp_v12,temp_v14,temp_v13);
-          temp_v0 = FUN_002e9af4();
-          FUN_002e9ec8(temp_v0,*(unsigned int *)(param_1 + 0x68));
+          temp_v0 = onlineInstanceTableGetCurrent();
+          onlineInstanceTableFind(temp_v0,*(unsigned int *)(param_1 + 0x68));
           temp_v6 = temp_v0 == 0;
         }
         else {
@@ -132,8 +132,8 @@ void FUN_0012bce8(int param_1)
           temp_v8 = *(unsigned int *)(param_1 + 0x294);
           temp_v7 = *(unsigned int *)(param_1 + 0x290);
           (**(romwright_code **)(**(int **)(param_1 + 0x3ec) + 0xc))(*(int **)(param_1 + 0x3ec),piVar9,0);
-          temp_v0 = FUN_002e9af4();
-          FUN_002e9ec8(temp_v0,*(unsigned int *)(param_1 + 0x68));
+          temp_v0 = onlineInstanceTableGetCurrent();
+          onlineInstanceTableFind(temp_v0,*(unsigned int *)(param_1 + 0x68));
           temp_v6 = temp_v0 == 0;
           if (!temp_v6) {
             *(int *)(param_1 + 0x3f4) = *(int *)(param_1 + 0x3f4) + 1;
@@ -147,7 +147,7 @@ void FUN_0012bce8(int param_1)
           if ((int *)piVar9[3] != (int *)0x0) {
             (**(romwright_code **)(*(int *)piVar9[3] + 4))();
           }
-          puVar4 = (unsigned int *)FUN_002e760a(0x24);
+          puVar4 = (unsigned int *)operatorNew(0x24);
           temp_v7 = param_1 + 0x80;
           temp_v0 = 0;
           if (puVar4 != (unsigned int *)0x0) {
@@ -172,10 +172,10 @@ void FUN_0012bce8(int param_1)
           temp_v0 = (*pcVar7)(piVar10,temp_v7,temp_v17,piVar9[3]);
           if (temp_v0 != 0) {
             temp_v5 = *(unsigned int *)(temp_v7 + 0x44);
-            temp_v3 = FUN_002e9af4();
+            temp_v3 = onlineInstanceTableGetCurrent();
             FUN_002f7c94(temp_v3,*(unsigned int *)(param_1 + 0x68),temp_v5);
-            FUN_002f7cb0(param_1);
-            temp_v0 = FUN_002e760a(0x10);
+            onlineJobSetStateWaiting(param_1);
+            temp_v0 = operatorNew(0x10);
             temp_v3 = 0;
             if (temp_v0 != 0) {
               temp_v3 = FUN_002ea3c0(temp_v0,0x12bfc1,0,&LAB_0012bec8);

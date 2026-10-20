@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00287098(unsigned int, unsigned int);
 int FUN_0028c618(unsigned int, int);
-int FUN_0028c640(unsigned int, int, int);
+int nodeSetTranslation(unsigned int, int, int);
 int FUN_002a5710(unsigned int, unsigned int);
 
 extern int DAT_0044cda0; /* 0x44cda0 */
@@ -14,7 +14,7 @@ extern unsigned char g_gameState; /* 0x49f91c */
 
 /* Supplied declaration required: FUN_00287098. */
 /* Supplied declaration required: FUN_0028c618. */
-/* Supplied declaration required: FUN_0028c640. */
+/* Supplied declaration required: nodeSetTranslation. */
 /* Supplied declaration required: FUN_002a5710. */
 
 
@@ -52,7 +52,7 @@ void FUN_001b4b54(void)
         *(unsigned char *)(*(int *)(unaff_r4[2] + 0x2c) + 0x1f6) = 0;
       }
       if (*(char *)(temp_v0 + 0x28) != '\0') {
-        FUN_0028c640(unaff_r4[2],0,temp_v0 + 0x14);
+        nodeSetTranslation(unaff_r4[2],0,temp_v0 + 0x14);
         FUN_0028c618(unaff_r4[2],0);
         FUN_002a5710(unaff_r4[2],*(unsigned int *)(temp_v0 + 0x24));
         FUN_00287098(unaff_r4[2],*(unsigned int *)(temp_v0 + 0x24));

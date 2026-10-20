@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0018b600(void);
-int FUN_0018b610(void);
+int globalCriticalSectionEnterForward(void);
+int globalCriticalSectionLeaveForward(void);
 int FUN_001963e0(void);
 
 typedef struct fn_0017d7c4_arg0 fn_0017d7c4_arg0;
@@ -35,8 +35,8 @@ extern signed char DAT_0061a481; /* 0x61a481 */
 extern signed char DAT_0061a482; /* 0x61a482 */
 extern fn_0017d7c4_arg0 *DAT_0061a510; /* 0x61a510 */
 
-/* Supplied declaration required: FUN_0018b600. */
-/* Supplied declaration required: FUN_0018b610. */
+/* Supplied declaration required: globalCriticalSectionEnterForward. */
+/* Supplied declaration required: globalCriticalSectionLeaveForward. */
 /* Supplied declaration required: FUN_001963e0. */
 
 
@@ -92,13 +92,13 @@ void FUN_0017d7c4(fn_0017d7c4_arg0 *param_1,unsigned int param_2)
     *(unsigned int *)(puVar2 + 0xc) = (temp_v0 & 0xfffffffd) | 5;
   }
   param_1->field_0x14 = param_1->field_0xc;
-  FUN_0018b600();
+  globalCriticalSectionEnterForward();
   param_1->field_0x20 = param_1->field_0x20 + 1;
   if (((DAT_0061a510 == param_1) && (DAT_0061a482 != '\0')) && (DAT_0061a481 == '\0')) {
     DAT_0061a481 = '\x01';
     FUN_001963e0();
   }
-  FUN_0018b610();
+  globalCriticalSectionLeaveForward();
   return;
 }
 

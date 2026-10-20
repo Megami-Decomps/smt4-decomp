@@ -13,10 +13,10 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } void_stack;
 
-extern int padIsButtonDown(unsigned int);
-extern int FUN_002a8740(void);
-extern int FUN_002a8764(void);
-extern int FUN_002b63ac(void);
+extern int flagBitIsSet(unsigned int);
+extern int gameGetUnitRecord(void);
+extern int gameGetSlotTable(void);
+extern int gameGetPlayerData(void);
 
 
 void FUN_003a6988(void)
@@ -38,27 +38,27 @@ void FUN_003a6988(void)
   unsigned int temp_v13;
   
   temp_v8 = 0;
-  temp_v1 = FUN_002b63ac();
+  temp_v1 = gameGetPlayerData();
   if ((*(unsigned short *)(temp_v1 + 0x72) & 2) == 0) {
-    temp_v1 = padIsButtonDown(0x67);
-    if ((temp_v1 != 0) || (temp_v1 = padIsButtonDown(0x65), temp_v1 != 0)) {
+    temp_v1 = flagBitIsSet(0x67);
+    if ((temp_v1 != 0) || (temp_v1 = flagBitIsSet(0x65), temp_v1 != 0)) {
       temp_v8 = 5;
     }
     else {
-      temp_v1 = padIsButtonDown(100);
+      temp_v1 = flagBitIsSet(100);
       if (temp_v1 != 0) {
         temp_v8 = 2;
       }
     }
-    temp_v2 = FUN_002b63ac();
+    temp_v2 = gameGetPlayerData();
     temp_v1 = temp_v8;
     if (*(short *)(temp_v2 + 0xc) == 0x2ab) {
       temp_v1 = temp_v8 + 2;
     }
     if (temp_v1 != 0) {
-      temp_v2 = FUN_002b63ac();
+      temp_v2 = gameGetPlayerData();
       temp_v7 = (int)*(short *)(temp_v2 + 0x1e);
-      temp_v2 = FUN_002b63ac();
+      temp_v2 = gameGetPlayerData();
       temp_v1 = (temp_v7 * temp_v1) / 100;
       if (temp_v1 < 0) {
         temp_v1 = 0;
@@ -68,19 +68,19 @@ void FUN_003a6988(void)
         temp_v1 = temp_v7;
       }
       temp_v5 = (short)temp_v1;
-      temp_v1 = FUN_002b63ac();
+      temp_v1 = gameGetPlayerData();
       temp_v6 = *(short *)(temp_v1 + 0x1e);
       if ((temp_v5 <= temp_v6) && (temp_v6 = temp_v5, temp_v5 < 1)) {
         temp_v6 = 1;
       }
       *(short *)(temp_v1 + 0x2c) = temp_v6;
     }
-    if ((temp_v8 != 0) && (temp_v1 = padIsButtonDown(0x67), temp_v1 != 0)) {
-      temp_v1 = FUN_002a8764();
+    if ((temp_v8 != 0) && (temp_v1 = flagBitIsSet(0x67), temp_v1 != 0)) {
+      temp_v1 = gameGetSlotTable();
       temp_v2 = 0;
       do {
         if (-1 < *(char *)(temp_v1 + 0x9108 + temp_v2)) {
-          temp_v7 = FUN_002a8740();
+          temp_v7 = gameGetUnitRecord();
           temp_v0 = *(unsigned short *)(temp_v7 + 0x44);
           if (((temp_v0 & 2) == 0 && (temp_v0 & 0x400) == 0) && (temp_v0 & 4) == 0) {
             temp_v3 = (int)*(short *)(temp_v7 + 0x10);
@@ -105,11 +105,11 @@ void FUN_003a6988(void)
         temp_v2 = temp_v2 + 1;
       } while (temp_v2 < 3);
     }
-    temp_v1 = FUN_002a8764();
+    temp_v1 = gameGetSlotTable();
     temp_v8 = 0;
     do {
       if (-1 < *(char *)(temp_v1 + 0x9108 + temp_v8)) {
-        temp_v2 = FUN_002a8740();
+        temp_v2 = gameGetUnitRecord();
         temp_v0 = *(unsigned short *)(temp_v2 + 0x44);
         if (((temp_v0 & 2) == 0 && (temp_v0 & 0x400) == 0) && (temp_v0 & 4) == 0) {
           temp_v9 = 0;

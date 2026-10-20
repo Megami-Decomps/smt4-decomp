@@ -7,8 +7,8 @@ extern "C" {
 int FUN_001517b4(...);
 int FUN_00163aa4(int);
 int FUN_001641b4(...);
-int FUN_001846d0(...);
-int FUN_0019a7f4(...);
+int uiSpriteSelectAnim(...);
+int asdTMTexTableReleaseNode(...);
 int FUN_001acf98(int, int);
 int FUN_00203b40(int, unsigned int, int, int, int, int);
 int FUN_00212724(void);
@@ -31,10 +31,10 @@ typedef struct {
 /* Supplied declaration required: FUN_00163aa4. */
 /* Supplied declaration required: FUN_001641b4. */
 extern int FUN_001643a0(void);
-extern int FUN_0018206c(unsigned int, short);
+extern int asdTMTexTableNodeIsLoaded(unsigned int, short);
 extern unsigned int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001846d0. */
-/* Supplied declaration required: FUN_0019a7f4. */
+/* Supplied declaration required: uiSpriteSelectAnim. */
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
 /* Supplied declaration required: FUN_001acf98. */
 /* Supplied declaration required: FUN_00203b40. */
 /* Supplied declaration required: FUN_00212724. */
@@ -82,11 +82,11 @@ void FUN_0049df84(int param_1)
     if ((temp_v4 != 0) || (temp_v2 == 6)) {
       FUN_001641b4(0x100020e);
       temp_v0 = *(short *)(*(int *)(param_1 + 0x84) + 0x36);
-      if ((temp_v0 != 0) && (temp_v2 = FUN_0018206c(0x33,temp_v0), temp_v2 == 0)) {
+      if ((temp_v0 != 0) && (temp_v2 = asdTMTexTableNodeIsLoaded(0x33,temp_v0), temp_v2 == 0)) {
         FUN_001acf98(0x33,temp_v0);
       }
       temp_v0 = *(short *)(*(int *)(param_1 + 0x84) + 0x40);
-      if ((temp_v0 != 0) && (temp_v2 = FUN_0018206c(0x33,temp_v0), temp_v2 == 0)) {
+      if ((temp_v0 != 0) && (temp_v2 = asdTMTexTableNodeIsLoaded(0x33,temp_v0), temp_v2 == 0)) {
         FUN_001acf98(0x33,temp_v0);
       }
       FUN_0049de10(param_1);
@@ -97,7 +97,7 @@ void FUN_0049df84(int param_1)
       if (temp_v2 != 0) {
         FUN_003fd690(**(unsigned short **)(param_1 + 0x84),0);
       }
-      FUN_001846d0(param_1 + 0x2c8,0);
+      uiSpriteSelectAnim(param_1 + 0x2c8,0);
       FUN_0049d140(param_1,5,6);
       return;
     }
@@ -106,14 +106,14 @@ void FUN_0049df84(int param_1)
     if (temp_v2 != 0) {
       FUN_001641b4(0x100020f);
       temp_v0 = *(short *)(*(int *)(param_1 + 0x84) + 0x36);
-      if ((temp_v0 != 0) && (temp_v2 = FUN_0018206c(0x33,temp_v0), temp_v2 != 0)) {
-        FUN_0019a7f4(0x33,temp_v0);
+      if ((temp_v0 != 0) && (temp_v2 = asdTMTexTableNodeIsLoaded(0x33,temp_v0), temp_v2 != 0)) {
+        asdTMTexTableReleaseNode(0x33,temp_v0);
       }
       temp_v0 = *(short *)(*(int *)(param_1 + 0x84) + 0x40);
-      if ((temp_v0 != 0) && (temp_v2 = FUN_0018206c(0x33,temp_v0), temp_v2 != 0)) {
-        FUN_0019a7f4(0x33,temp_v0);
+      if ((temp_v0 != 0) && (temp_v2 = asdTMTexTableNodeIsLoaded(0x33,temp_v0), temp_v2 != 0)) {
+        asdTMTexTableReleaseNode(0x33,temp_v0);
       }
-      FUN_001846d0(param_1 + 0x23c,1);
+      uiSpriteSelectAnim(param_1 + 0x23c,1);
       FUN_00212724();
       FUN_0049d140(param_1,1,10);
     }

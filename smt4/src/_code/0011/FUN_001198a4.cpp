@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00147370(unsigned int);
-int FUN_002bd430(void);
+int sndVoiceFree(void);
 int asdMemFree(...);
 int VectorSignedToFloat(...);
 
@@ -23,7 +23,7 @@ extern signed char DAT_004e316a; /* 0x4e316a */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int FUN_001329d4(unsigned int);
 /* Supplied declaration required: FUN_00147370. */
-/* Supplied declaration required: FUN_002bd430. */
+/* Supplied declaration required: sndVoiceFree. */
 /* Supplied declaration required: asdMemFree. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
@@ -169,7 +169,7 @@ LAB_00119af8:
     asdMemFree();
   }
   if (*(int *)(temp_v3 + 0x38) != 0) {
-    FUN_002bd430();
+    sndVoiceFree();
   }
   asdMemFree(temp_v3);
   nn_os_CriticalSection_Leave((unsigned int)&DAT_004e315c);

@@ -31,7 +31,7 @@ extern int DAT_0057f3c4; /* 0x57f3c4 */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
-extern int FUN_0018206c(unsigned int, unsigned int);
+extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001acf98. */
 extern int FUN_00341940(unsigned int);
 
@@ -97,7 +97,7 @@ int FUN_0035c3d0(unsigned int param_1,int param_2,int param_3,int param_4)
           DAT_0057f3c4 = 0;
         }
         temp_v1 = param_1 * 0x10;
-        temp_v0 = FUN_0018206c(*(unsigned int *)(temp_v1 + 0x57f43c),*(unsigned int *)(temp_v1 + 0x57f440));
+        temp_v0 = asdTMTexTableNodeIsLoaded(*(unsigned int *)(temp_v1 + 0x57f43c),*(unsigned int *)(temp_v1 + 0x57f440));
         if (temp_v0 != 0) {
           *(int *)(temp_v1 + 0x57f444) = *(int *)(temp_v1 + 0x57f444) + 1;
         }

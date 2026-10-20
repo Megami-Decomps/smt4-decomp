@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 
 extern int g_menuState; /* 0x57f56c */
 
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: dataTable04FindById. */
 
 
 void FUN_002e4308(int param_1,unsigned char param_2,int param_3)
@@ -23,7 +23,7 @@ void FUN_002e4308(int param_1,unsigned char param_2,int param_3)
   *(unsigned char *)(temp_v0 + 0x11) = param_2;
   *(unsigned char *)(temp_v0 + 0x2b8) = 0;
   if (param_3 != 0) {
-    FUN_001aba54();
+    dataTable04FindById();
     if (param_1 == 0) {
       param_3 = 0;
     }

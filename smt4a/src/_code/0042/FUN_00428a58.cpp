@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0016cd0c(int *);
-int FUN_00195fc8(void);
+int sysFatalBreak(void);
 int FUN_001b57a8(...);
 int FUN_00427a10(unsigned int *, unsigned char *);
 int FUN_00427ac4(unsigned int *, unsigned int);
@@ -41,10 +41,10 @@ extern unsigned char DAT_0061b43c; /* 0x61b43c */
 extern unsigned char DAT_0061c000; /* 0x61c000 */
 
 extern int FUN_0015a410(void);
-extern int FUN_0015a75c(void);
+extern int appletIsExitRequested(void);
 extern unsigned int FUN_0016ccfc(void);
 /* Supplied declaration required: FUN_0016cd0c. */
-/* Supplied declaration required: FUN_00195fc8. */
+/* Supplied declaration required: sysFatalBreak. */
 /* Supplied declaration required: FUN_001b57a8. */
 extern int FUN_001d25ec(unsigned int *);
 extern unsigned long long FUN_00302420(unsigned int, unsigned int, unsigned int);
@@ -121,7 +121,7 @@ void FUN_00428a58(unsigned int *param_1,unsigned int *param_2,unsigned int *para
       }
       temp_v0 = *(char *)((int)param_6 + temp_v6 * 8 + 6);
       if ((temp_v0 != '\0') && (temp_v0 != '\x01')) {
-        FUN_00195fc8();
+        sysFatalBreak();
       }
       if ((temp_v5 != 0x8c) && (temp_v5 != 0xd)) {
         FUN_001b57a8(temp_v18,0xe0e13883);
@@ -158,7 +158,7 @@ void FUN_00428a58(unsigned int *param_1,unsigned int *param_2,unsigned int *para
         temp_v5 = 2;
       }
       else {
-        FUN_00195fc8();
+        sysFatalBreak();
         temp_v5 = 0;
       }
     }
@@ -199,7 +199,7 @@ void FUN_00428a58(unsigned int *param_1,unsigned int *param_2,unsigned int *para
           temp_v2 = 2;
         }
         else {
-          FUN_00195fc8();
+          sysFatalBreak();
           temp_v2 = 0;
         }
         if (temp_v7 == 0x8c) {
@@ -215,7 +215,7 @@ void FUN_00428a58(unsigned int *param_1,unsigned int *param_2,unsigned int *para
     DAT_0061b230 = temp_v5;
     puVar5 = (unsigned int *)FUN_00427e28(temp_v17,&DAT_0061b000,0);
     if (-1 < (int)puVar5) {
-      temp_v5 = FUN_0015a75c();
+      temp_v5 = appletIsExitRequested();
       if ((temp_v5 != 0) || (temp_v5 = FUN_0015a410(), temp_v5 != 0)) {
         FUN_001b57a8(temp_v18,0xc9413891);
         return;
@@ -294,7 +294,7 @@ void FUN_00428a58(unsigned int *param_1,unsigned int *param_2,unsigned int *para
             temp_v4 = *puVar3;
             temp_v1 = *(unsigned char *)((int)puVar3 + 5);
             if ((*(char *)((int)puVar3 + 6) != '\0') && (*(char *)((int)puVar3 + 6) != '\x01')) {
-              FUN_00195fc8();
+              sysFatalBreak();
             }
             if (temp_v5 != 0x8c) {
               if (temp_v5 == 0x8c) {

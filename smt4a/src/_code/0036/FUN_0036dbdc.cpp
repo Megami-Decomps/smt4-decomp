@@ -4,15 +4,15 @@
 
 extern "C" {
 
-int FUN_0016431c(unsigned int);
+int msgBoxFlagsSetBit7(unsigned int);
 int FUN_0021bdac(unsigned int, unsigned int, unsigned int, int, int, int);
 int scrGetArg(int);
 int FUN_0023723c(unsigned int, int, unsigned int, int, int, unsigned char *, unsigned char *);
-int FUN_0023b27c(void);
+int useCounterStart(void);
 int FUN_002686b8(...);
 int eventTexRequestStopAll(void);
 int FUN_002c76c0(int);
-int FUN_002deb84(void);
+int scrGetCommandFrame(void);
 int bustupCutAnimRequestStopSlots(void);
 int FUN_0031f208(...);
 int FUN_0031f27c(unsigned int, int);
@@ -34,19 +34,19 @@ extern unsigned char LAB_0036de54; /* 0x36de54 */
 extern unsigned char LAB_0036de90; /* 0x36de90 */
 extern int DAT_0057f58c; /* 0x57f58c */
 
-/* Supplied declaration required: FUN_0016431c. */
-extern int FUN_0018719c(unsigned int);
+/* Supplied declaration required: msgBoxFlagsSetBit7. */
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0021bdac. */
 /* Supplied declaration required: scrGetArg. */
 /* Supplied declaration required: FUN_0023723c. */
-extern int FUN_0023b258(void);
-/* Supplied declaration required: FUN_0023b27c. */
+extern int useCounterIsFinished(void);
+/* Supplied declaration required: useCounterStart. */
 /* Supplied declaration required: FUN_002686b8. */
 extern unsigned int FUN_002ba85c(void);
 /* Supplied declaration required: eventTexRequestStopAll. */
 /* Supplied declaration required: FUN_002c76c0. */
 extern int FUN_002c7c54(void);
-/* Supplied declaration required: FUN_002deb84. */
+/* Supplied declaration required: scrGetCommandFrame. */
 /* Supplied declaration required: bustupCutAnimRequestStopSlots. */
 /* Supplied declaration required: FUN_0031f208. */
 /* Supplied declaration required: FUN_0031f27c. */
@@ -86,7 +86,7 @@ unsigned int FUN_0036dbdc(unsigned int param_1,int param_2)
   acStack_40[1] = 'S';
   acStack_40[2] = 'T';
   acStack_40[3] = '\0';
-  temp_v0 = FUN_002deb84();
+  temp_v0 = scrGetCommandFrame();
   temp_v1 = scrGetArg(0);
   FUN_002c76c0(0);
   temp_v7 = 0;
@@ -99,7 +99,7 @@ LAB_0036dc44:
         temp_v6 = 1;
         goto LAB_0036dc44;
       }
-      temp_v2 = FUN_0018719c(temp_v9[temp_v6]);
+      temp_v2 = gameFlagIsSet(temp_v9[temp_v6]);
       if (temp_v2 != 0) {
         temp_v7 = temp_v7 + 1;
       }
@@ -119,10 +119,10 @@ LAB_0036dc44:
     }
     temp_v5 = FUN_002ba85c();
     temp_v3 = scrGetArg(0);
-    temp_v4 = FUN_002deb84();
+    temp_v4 = scrGetCommandFrame();
     FUN_0021bdac(temp_v5,temp_v3,temp_v4,6,0,0);
     FUN_0023723c(*(unsigned int *)(temp_v2 + 4),4,0xffffffff,0,3,&LAB_0036de90,&LAB_0036de54);
-    FUN_0016431c(*(unsigned int *)(temp_v2 + 4));
+    msgBoxFlagsSetBit7(*(unsigned int *)(temp_v2 + 4));
     *(unsigned char *)(temp_v2 + 0x19c4) = 0;
     *(unsigned int *)(temp_v2 + 0xc) = *(unsigned int *)(temp_v2 + 0xc) | 0x20;
     FUN_0031f27c(0xffffffff,3);
@@ -135,17 +135,17 @@ LAB_0036dd68:
           temp_v0 = 1;
           goto LAB_0036dd68;
         }
-        temp_v6 = FUN_0018719c(temp_v9[temp_v0]);
+        temp_v6 = gameFlagIsSet(temp_v9[temp_v0]);
         if (temp_v6 != 0) {
           FUN_0031f208(*(unsigned char *)((int)&temp_v8 + temp_v0));
         }
       }
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < 7);
-    FUN_0023b27c();
+    useCounterStart();
   }
   temp_v0 = FUN_002c7c54();
-  temp_v1 = FUN_0023b258();
+  temp_v1 = useCounterIsFinished();
   if (temp_v1 != 0) {
     scrSetResult(0);
     FUN_002686b8();

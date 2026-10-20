@@ -6,7 +6,7 @@ extern "C" {
 
 int memAlloc(int, int, int, int, int, int);
 int asdMdlManagerDestroy(void);
-int FUN_002e6dd4(void);
+int rt_memclr(void);
 int FUN_003aa57c(unsigned int *, int, int);
 int FUN_003b8ecc(unsigned int *);
 int rt_memcpy_w(unsigned int *, int, int);
@@ -19,7 +19,7 @@ typedef struct {
 /* Supplied declaration required: memAlloc. */
 extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
 /* Supplied declaration required: asdMdlManagerDestroy. */
-/* Supplied declaration required: FUN_002e6dd4. */
+/* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: FUN_003aa57c. */
 /* Supplied declaration required: FUN_003b8ecc. */
 /* Supplied declaration required: rt_memcpy_w. */
@@ -45,7 +45,7 @@ unsigned int * FUN_003384c0(int param_1)
   }
   puVar1 = (unsigned int *)0x10000;
   memAlloc(0x10000,0x100,0,0xa8,0x10,1);
-  FUN_002e6dd4();
+  rt_memclr();
   puVar1[1] = 0xffffffff;
   *puVar1 = temp_v2;
   puVar1[2] = 0x3f800000;

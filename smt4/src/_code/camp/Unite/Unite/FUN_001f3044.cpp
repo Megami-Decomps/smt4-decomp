@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00294834(...);
 int FUN_00294e18(...);
 int FUN_00297060(...);
-int FUN_00297410(...);
+int fileSlotLoad(...);
 int FUN_002a019c(...);
 int FUN_002bcc60(...);
 int FUN_002bcd44(...);
@@ -17,7 +17,7 @@ int FUN_002bee58(...);
 int asdOperatorNew(...);
 int FUN_002c312c(...);
 int memAlloc(...);
-int FUN_002c424c(...);
+int __aeabi_memset4(...);
 int memClear(...);
 int asdMemAlloc(...);
 int taskCreateDraw(...);
@@ -59,32 +59,32 @@ extern unsigned char LAB_003f6fec; /* 0x3f6fec */
 extern unsigned char DAT_004030ec; /* 0x4030ec */
 extern unsigned char DAT_00403140; /* 0x403140 */
 extern unsigned char DAT_0040317c; /* 0x40317c */
-extern int *DAT_0043dd68; /* 0x43dd68 */
+extern int *g_unite; /* 0x43dd68 */
 
 extern int FUN_00263c1c(unsigned char *);
 extern int FUN_002907a8(void);
 /* Supplied declaration required: FUN_00294834. */
 /* Supplied declaration required: FUN_00294e18. */
 /* Supplied declaration required: FUN_00297060. */
-/* Supplied declaration required: FUN_00297410. */
+/* Supplied declaration required: fileSlotLoad. */
 extern int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
 extern int FUN_0029aef0(void);
 extern int flagWordTestBit(int, unsigned int);
 /* Supplied declaration required: FUN_002a019c. */
 extern int lmapSceneGetScript(void);
 extern int FUN_002a0d0c(void);
-extern int FUN_002a8740(void);
+extern int gameGetUnitRecord(void);
 extern int lmapMainIsRunning(void);
 /* Supplied declaration required: FUN_002bcc60. */
 /* Supplied declaration required: FUN_002bcd44. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002bee58. */
-extern int FUN_002c09d0(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_002c312c. */
 /* Supplied declaration required: memAlloc. */
-/* Supplied declaration required: FUN_002c424c. */
+/* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: taskCreateDraw. */
@@ -114,12 +114,12 @@ void FUN_001f3044(void)
   unsigned char *temp_v7;
   unsigned char *temp_v8;
   
-  if (DAT_0043dd68 == (int *)0x0) {
+  if (g_unite == (int *)0x0) {
     piVar1 = (int *)0x100;
     asdMemAlloc(0x100,0x100,0,0x95f8,1);
-    DAT_0043dd68 = piVar1;
+    g_unite = piVar1;
   }
-  piVar1 = DAT_0043dd68;
+  piVar1 = g_unite;
   memClear();
   piVar1[0x2518] = -1;
   mapMainCallIfFlag(0);
@@ -162,7 +162,7 @@ void FUN_001f3044(void)
   if (((unsigned int)piVar5 & 0x7e00000) != 0x600000 && (int)piVar5 < 0) {
     FUN_002c526c();
   }
-  temp_v0 = FUN_002c09d0(0x418);
+  temp_v0 = gameFlagIsSet(0x418);
   if (temp_v0 == 0) {
     temp_v0 = FUN_002a0d0c();
     *(unsigned short *)(temp_v0 + 0x1c) = 0xffff;
@@ -186,7 +186,7 @@ void FUN_001f3044(void)
       *(unsigned short *)(temp_v0 + 0x1c) = 0xffff;
     }
     else {
-      temp_v1 = FUN_002a8740();
+      temp_v1 = gameGetUnitRecord();
       if (((*(short *)(temp_v1 + 0x46) != *(short *)(temp_v0 + 0x20)) ||
           (temp_v2 = flagWordTestBit(temp_v1,10), temp_v2 != 0)) ||
          (temp_v1 = flagWordTestBit(temp_v1,2), temp_v1 != 0)) {
@@ -200,14 +200,14 @@ void FUN_001f3044(void)
       *(unsigned short *)(temp_v0 + 0x1e) = 0xffff;
     }
     else {
-      temp_v1 = FUN_002a8740();
+      temp_v1 = gameGetUnitRecord();
       if (*(short *)(temp_v1 + 0x46) != *(short *)(temp_v0 + 0x22)) {
         *(unsigned short *)(temp_v0 + 0x1e) = 0xffff;
         *(unsigned short *)(temp_v0 + 0x22) = 0;
       }
     }
   }
-  FUN_002c424c(piVar1 + 0x10e,0x80,0xffffffff);
+  __aeabi_memset4(piVar1 + 0x10e,0x80,0xffffffff);
   FUN_002a019c();
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(piVar1 + 1);
   temp_v3 = (int *)0x16c;
@@ -226,8 +226,8 @@ void FUN_001f3044(void)
   FUN_002bee58(piVar1 + 0xb8,2);
   FUN_002bd954(piVar1 + 0xdb,0x24,0,piVar1 + 1,1);
   FUN_002bee58(piVar1 + 0xdb,3);
-  FUN_00297410(0x24);
-  FUN_00297410(0x22);
+  fileSlotLoad(0x24);
+  fileSlotLoad(0x22);
   piVar1[0x10d] = -1;
   piVar1[0x11e] = -1;
   temp_v0 = FUN_002c5c04(&LAB_001f3658);

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00295f28(...);
-int FUN_002b63c0(void);
+int dataTable1bOr1cGetRecord(void);
 int randNextInRange(int);
 int dataTableGetCount(unsigned int);
 
@@ -24,8 +24,8 @@ extern int g_aocSystem; /* 0x433158 */
 
 extern unsigned char *FUN_00240cd4(fn_00333b74_arg1 *);
 /* Supplied declaration required: FUN_00295f28. */
-extern int FUN_002b63ac(void);
-/* Supplied declaration required: FUN_002b63c0. */
+extern int gameGetPlayerData(void);
+/* Supplied declaration required: dataTable1bOr1cGetRecord. */
 /* Supplied declaration required: randNextInRange. */
 /* Supplied declaration required: dataTableGetCount. */
 extern int dataTableGetEntries(void);
@@ -55,7 +55,7 @@ void FUN_00333b74(unsigned int *param_1,fn_00333b74_arg1 *param_2)
   unsigned short *puVar17;
   
   pfVar4 = param_2;
-  FUN_002b63c0();
+  dataTable1bOr1cGetRecord();
   if (pfVar4 != (fn_00333b74_arg1 *)0x0) {
     pbVar5 = (unsigned char *)FUN_00240cd4(param_2);
     puVar17 = (unsigned short *)((int)pfVar4 + ((int)((unsigned int)*pbVar5 << 0x1c) >> 0x1f) * -0xc + 0x154);
@@ -144,7 +144,7 @@ LAB_00333c78:
       pvVar12 = *(void **)(puVar17 + 4);
     }
     else {
-      temp_v7 = FUN_002b63ac();
+      temp_v7 = gameGetPlayerData();
       if (*(unsigned char *)(temp_v7 + 0x76) >= 99) {
         temp_v8 = FUN_00295f28(0x62);
         param_1[0xd] = temp_v8;

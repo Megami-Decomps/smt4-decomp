@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_001aba54(unsigned int);
+int dataTable04FindById(unsigned int);
 int FUN_00335660(...);
 
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: FUN_00335660. */
 
 
@@ -17,7 +17,7 @@ void FUN_004f7ea8(int param_1,unsigned int param_2,unsigned int param_3)
 /* irregular: 2 native warning(s); review required */
   unsigned int temp_v0;
   
-  FUN_001aba54(param_2);
+  dataTable04FindById(param_2);
   temp_v0 = FUN_00335660(param_3,param_2);
   *(unsigned int *)(param_1 + 0x1f54) = temp_v0;
   temp_v0 = FUN_00335660(param_3,param_2,0);

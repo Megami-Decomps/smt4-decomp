@@ -7,11 +7,11 @@ extern "C" {
 int FUN_0028dbe0(unsigned int);
 int FUN_0033c468(unsigned int);
 
-extern int DAT_0043dcf0; /* 0x43dcf0 */
+extern int g_partyPanel; /* 0x43dcf0 */
 
 /* Supplied declaration required: FUN_0028dbe0. */
 extern short *FUN_0029acb0(void);
-extern int FUN_002a8740(unsigned int);
+extern int gameGetUnitRecord(unsigned int);
 /* Supplied declaration required: FUN_0033c468. */
 
 
@@ -26,7 +26,7 @@ unsigned int FUN_0026db58(void)
   int temp_v3;
   unsigned int temp_v4;
   
-  temp_v0 = DAT_0043dcf0;
+  temp_v0 = g_partyPanel;
   temp_v2 = 0;
   temp_v4 = 0xffffffff;
   do {
@@ -42,7 +42,7 @@ unsigned int FUN_0026db58(void)
       }
     }
     else {
-      temp_v1 = FUN_002a8740(*(unsigned int *)(*(int *)(temp_v3 + 0x6c8) + 0x34));
+      temp_v1 = gameGetUnitRecord(*(unsigned int *)(*(int *)(temp_v3 + 0x6c8) + 0x34));
       if ((unsigned int)*(unsigned short *)(temp_v1 + 0x46) == (int)*psVar2) {
         temp_v1 = FUN_0028dbe0(*(unsigned int *)(temp_v3 + 0x6c8));
         if (temp_v1 != -1) {
@@ -66,7 +66,7 @@ unsigned int FUN_0026db58(void)
       }
     }
     else {
-      temp_v1 = FUN_002a8740(*(unsigned int *)(*(int *)(temp_v3 + 0x6d8) + 0x34));
+      temp_v1 = gameGetUnitRecord(*(unsigned int *)(*(int *)(temp_v3 + 0x6d8) + 0x34));
       if ((unsigned int)*(unsigned short *)(temp_v1 + 0x46) == (int)*psVar2) {
         temp_v1 = FUN_0028dbe0(*(unsigned int *)(temp_v3 + 0x6d8));
         if (temp_v1 != -1) {

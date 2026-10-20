@@ -4,16 +4,16 @@
 
 extern "C" {
 
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: dataTable04FindById. */
 
 
 unsigned int FUN_002a6a24(void)
 
 {
 /* irregular: 1 native warning(s); review required */
-  FUN_001aba54();
+  dataTable04FindById();
   return 0;
 }
 

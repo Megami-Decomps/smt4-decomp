@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b63c0(void);
+int dataTable1bOr1cGetRecord(void);
 int FUN_002bf288(...);
 int FUN_002bf380(int, int, int, unsigned int, unsigned int, unsigned int);
 
@@ -16,7 +16,7 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } param_5_stack;
 
-extern int DAT_0043dd50; /* 0x43dd50 */
+extern int g_uiQuest; /* 0x43dd50 */
 
 extern int FUN_0028f1bc(int);
 extern int FUN_0028f304(int);
@@ -25,7 +25,7 @@ extern int FUN_00298dc8(void);
 extern int FUN_00298e00(int);
 extern int FUN_00298e20(int);
 extern int FUN_00298e40(int, int, int *);
-/* Supplied declaration required: FUN_002b63c0. */
+/* Supplied declaration required: dataTable1bOr1cGetRecord. */
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 extern int FUN_00333aac(int);
@@ -56,8 +56,8 @@ FUN_001af84c(int param_1,unsigned int param_2,unsigned int param_3,unsigned int 
   temp_v6 = param_2;
   uStack_2c = param_3;
   uStack_28 = param_4;
-  if (*(char *)(DAT_0043dd50 + 0x5c4) == '\0') {
-    FUN_002b63c0();
+  if (*(char *)(g_uiQuest + 0x5c4) == '\0') {
+    dataTable1bOr1cGetRecord();
     if (param_1 == 0) {
       return temp_v3;
     }

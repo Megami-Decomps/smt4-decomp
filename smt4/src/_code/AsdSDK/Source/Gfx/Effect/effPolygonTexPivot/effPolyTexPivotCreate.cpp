@@ -12,7 +12,7 @@ void rt_memcpy(void *dst, const void *src, int size);
 void FUN_002472f0(PolyGeom *geom, u32 *resource);
 void *FUN_002491b4(u32 *resource);
 u32 FUN_0024c3c8(int id);
-void FUN_002694f8(u32 texture);
+void refCountIncrement(u32 texture);
 void *effTlpCreate(u32 *resource);
 
 extern u8 DAT_004737c2;
@@ -52,7 +52,7 @@ PolyTexPivotObject *effPolyTexPivotCreate(PolyTexDesc *desc)
                 break;
             case 4:
                 obj->geom->unk04 = FUN_0024c3c8(*resource & 0xffff);
-                FUN_002694f8(obj->geom->unk04);
+                refCountIncrement(obj->geom->unk04);
                 break;
             case 7:
                 obj->resource7 = effTlpCreate(resource);

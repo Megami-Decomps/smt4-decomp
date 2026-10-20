@@ -9,7 +9,7 @@ int FUN_00275bc8(int, unsigned int);
 extern int DAT_0057f134; /* 0x57f134 */
 
 /* Supplied declaration required: FUN_00275bc8. */
-extern int FUN_003f86c8(unsigned int);
+extern int loadSlotIsLoaded(unsigned int);
 
 
 unsigned int FUN_002c0854(void)
@@ -32,8 +32,8 @@ unsigned int FUN_002c0854(void)
     if (!temp_v2 && !temp_v3) {
       temp_v1 = *(int *)(DAT_0057f134 + 0x1c);
     }
-    if (((((temp_v2 || temp_v3) || temp_v1 == 0) || (temp_v1 = FUN_003f86c8(0x14), temp_v1 == 0)) ||
-        (temp_v1 = FUN_003f86c8(0x25), temp_v1 == 0)) || (temp_v1 = FUN_003f86c8(0x3e), temp_v1 == 0)) {
+    if (((((temp_v2 || temp_v3) || temp_v1 == 0) || (temp_v1 = loadSlotIsLoaded(0x14), temp_v1 == 0)) ||
+        (temp_v1 = loadSlotIsLoaded(0x25), temp_v1 == 0)) || (temp_v1 = loadSlotIsLoaded(0x3e), temp_v1 == 0)) {
       return 0;
     }
     if (*(int *)(temp_v0 + 0x14) == 0) {

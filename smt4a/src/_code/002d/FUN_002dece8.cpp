@@ -5,7 +5,7 @@
 extern "C" {
 
 int jobGetWork(void);
-int FUN_0016c410(int);
+int renderCtxResetColorScale(int);
 int FUN_0016c560(int);
 
 typedef int romwright_code(...);
@@ -13,7 +13,7 @@ extern unsigned char g_btlEffect; /* 0x5737f0 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: jobGetWork. */
-/* Supplied declaration required: FUN_0016c410. */
+/* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: FUN_0016c560. */
 extern int FUN_00387580(unsigned int);
 
@@ -62,7 +62,7 @@ unsigned int FUN_002dece8(void)
         *(unsigned char *)(temp_v0 + 0x1290) = 0;
       }
       FUN_0016c560(g_renderCtx);
-      FUN_0016c410(g_renderCtx);
+      renderCtxResetColorScale(g_renderCtx);
     }
   }
   return 0;

@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0014bef4(...);
+int randRange(...);
 int FUN_00480838(void);
-int FUN_00480e30(int, int);
+int flagValueAdd(int, int);
 int VectorUnsignedToFloat(unsigned int, int);
 
 /* stack frame of param_4: 7 slot(s), 28 byte(s) */
@@ -24,15 +24,15 @@ extern int g_mapDepart; /* 0x5806c4 */
 extern unsigned char g_gameState; /* 0x5f15fc */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0014bef4. */
+/* Supplied declaration required: randRange. */
 extern int saveSlotFindSelected(void);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
 extern int FUN_003e4d68(unsigned int);
 /* Supplied declaration required: FUN_00480838. */
-/* Supplied declaration required: FUN_00480e30. */
+/* Supplied declaration required: flagValueAdd. */
 extern int FUN_004813bc(int);
 
 
@@ -91,7 +91,7 @@ int FUN_003774e8(unsigned int param_1,int param_2,int param_3,int *param_4)
     }
     if ((temp_v7 != 0 && param_1 != 0) && -1 < (int)temp_v8) {
       if ((*(signed char *)((unsigned char *)&g_gameState + 0x666)) == '\0') {
-        temp_v6 = FUN_0014bef4(99);
+        temp_v6 = randRange(99);
         temp_v19 = VectorUnsignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
         if (temp_v19 >= 0x41a00000) {
           return 0;
@@ -119,7 +119,7 @@ int FUN_003774e8(unsigned int param_1,int param_2,int param_3,int *param_4)
         }
         pbVar11 = (unsigned char *)(temp_v7 + temp_v15 * 2);
         temp_v8 = (unsigned int)*pbVar11;
-        temp_v7 = FUN_0014bef4((pbVar11[1] - temp_v8) & 0xffff);
+        temp_v7 = randRange((pbVar11[1] - temp_v8) & 0xffff);
         temp_v7 = temp_v7 + temp_v8;
         if (temp_v7 != 0) {
           *param_4 = temp_v7;
@@ -186,12 +186,12 @@ int FUN_003774e8(unsigned int param_1,int param_2,int param_3,int *param_4)
               if (0 < temp_v7) {
                 temp_v21 = (unsigned char *)((int)(short)temp_v15 - 1);
                 do {
-                  temp_v15 = FUN_0014bef4((unsigned int)temp_v21 & 0xffff);
+                  temp_v15 = randRange((unsigned int)temp_v21 & 0xffff);
                   temp_v17 = (int)asStack_1e0[temp_v15];
                   temp_v15 = FUN_004813bc(temp_v17);
                   temp_v13 = 1;
                   *(unsigned char *)(temp_v26 + temp_v19) = temp_v15 == 0;
-                  FUN_00480e30(temp_v17,1);
+                  flagValueAdd(temp_v17,1);
                   temp_v15 = temp_v17;
                   FUN_00480838();
                   temp_v1 = *(char *)(temp_v15 + 0x25);
@@ -264,7 +264,7 @@ LAB_00377948:
                     }
 LAB_0037794c:
                     if ((*(short *)(temp_v9 + 300) == 0xb1) &&
-                       (temp_v11 = FUN_0018719c(0xc2), temp_v11 == 0)) {
+                       (temp_v11 = gameFlagIsSet(0xc2), temp_v11 == 0)) {
                       temp_v13 = 1;
                     }
                     else if ((temp_v13 == 2) &&

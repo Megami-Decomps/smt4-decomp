@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6e14(...);
+int asdOperatorDeleteArray(...);
 int FUN_003103e0(int *, int, int);
 int FUN_003103fa(int *, int *, int *, int *);
 
@@ -18,7 +18,7 @@ typedef struct {
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: FUN_002e6e14. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
 /* Supplied declaration required: FUN_003103e0. */
 /* Supplied declaration required: FUN_003103fa. */
 
@@ -41,8 +41,8 @@ unsigned long long FUN_002e99f8(int *param_1,unsigned int param_2,unsigned int p
     FUN_003103e0(param_1,param_1[4],0);
     while (piVar1 = (int *)*param_1, piVar1 != (int *)0x0) {
       *param_1 = *piVar1;
-      FUN_002e6e14(piVar1[2]);
-      FUN_002e6e14(piVar1);
+      asdOperatorDeleteArray(piVar1[2]);
+      asdOperatorDeleteArray(piVar1);
     }
   }
   return romwright_piece_4_4(temp_v0,param_1);

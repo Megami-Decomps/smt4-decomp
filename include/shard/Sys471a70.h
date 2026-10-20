@@ -12,6 +12,6 @@ typedef struct Sys471a70 {
     /* 0x1C */ u32 unk1C;
 } Sys471a70;
 
-extern Sys471a70 DAT_00471a70;
+extern Sys471a70 g_nngxState;
 
 #endif

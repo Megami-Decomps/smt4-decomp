@@ -5,10 +5,10 @@
 extern "C" {
 
 int vcallSlot12IfValid(unsigned int);
-int FUN_00195fc8(void);
+int sysFatalBreak(void);
 
 /* Supplied declaration required: vcallSlot12IfValid. */
-/* Supplied declaration required: FUN_00195fc8. */
+/* Supplied declaration required: sysFatalBreak. */
 
 
 void FUN_00103750(unsigned int *param_1)
@@ -17,7 +17,7 @@ void FUN_00103750(unsigned int *param_1)
 /* irregular: 2 native warning(s); review required */
   if (*param_1 >> 1 != 0) {
     if ((int)(*param_1 << 0x1f) < 0) {
-      FUN_00195fc8();
+      sysFatalBreak();
     }
     vcallSlot12IfValid(*param_1 & 0xfffffffe);
     *param_1 = 0;

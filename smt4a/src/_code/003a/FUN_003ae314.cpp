@@ -10,7 +10,7 @@ int FUN_003fdb18(unsigned int);
 int FUN_0040aad4(unsigned int, int);
 int FUN_0040ace8(unsigned int, unsigned int);
 
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern int g_lmapScene; /* 0x581288 */
 
 /* Supplied declaration required: FUN_003fd76c. */
@@ -36,7 +36,7 @@ unsigned char FUN_003ae314(void)
     FUN_0040aad4(*(unsigned int *)(temp_v1 + 400),0);
     temp_v2 = *(unsigned int *)(*(int *)(g_lmapScene + 400) + 4);
     FUN_003fd7c0(temp_v2,0,2);
-    FUN_0040ace8(DAT_0056fcc0,temp_v2);
+    FUN_0040ace8(g_handleRegistry,temp_v2);
     temp_v1 = g_lmapScene + 0x254;
     *(unsigned int *)(g_lmapScene + 0x250) = 0;
     FUN_003fd76c(temp_v2,temp_v1);

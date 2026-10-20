@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00168980(int);
 int FUN_0019de98(int, unsigned int);
-int FUN_001aea28(unsigned int, unsigned int);
+int ptrListRemoveClearOwner(unsigned int, unsigned int);
 int FUN_0022e774(void);
 int FUN_0023b45c(int);
 int FUN_002c8538(int);
@@ -17,13 +17,13 @@ int FUN_0041dcc0(int);
 int rt_memcpy_w(unsigned int, int, int);
 
 typedef int romwright_code(...);
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
-extern signed char DAT_00588e14; /* 0x588e14 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
+extern signed char g_saveLoadUIBase; /* 0x588e14 */
 
 /* Supplied declaration required: FUN_00168980. */
-extern unsigned int FUN_001801a4(void);
+extern unsigned int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_0019de98. */
-/* Supplied declaration required: FUN_001aea28. */
+/* Supplied declaration required: ptrListRemoveClearOwner. */
 /* Supplied declaration required: FUN_0022e774. */
 /* Supplied declaration required: FUN_0023b45c. */
 /* Supplied declaration required: FUN_002c8538. */
@@ -56,7 +56,7 @@ void FUN_0041ed4c(int param_1)
     *(unsigned char *)(param_1 + 0x68) = 1;
   }
   FUN_0041dcc0(param_1);
-  if ((DAT_00588e14 == '\0') || (*(char *)(param_1 + 0x5c) != '\0')) {
+  if ((g_saveLoadUIBase == '\0') || (*(char *)(param_1 + 0x5c) != '\0')) {
     if (*(char *)(param_1 + 0x11) == '\0') {
       return;
     }
@@ -75,7 +75,7 @@ void FUN_0041ed4c(int param_1)
     if (*(char *)(*(int *)(param_1 + 0x2f8) + param_1 + 0x2ec) == '\0') {
       FUN_0023b45c(0);
     }
-    temp_v3 = FUN_001801a4();
+    temp_v3 = gameGetPlayerData();
     rt_memcpy_w(temp_v3,param_1 + 0x28,0xe);
     FUN_0038b5fc(1,*(unsigned short *)(param_1 + 0x30));
     FUN_0038b5fc(2,*(unsigned short *)(param_1 + 0x32));
@@ -89,7 +89,7 @@ void FUN_0041ed4c(int param_1)
   }
   else {
     if (*(int *)(param_1 + 0x58) != 0) {
-      FUN_001aea28(DAT_0056fcc0,*(unsigned int *)(*(int *)(param_1 + 0x58) + 4));
+      ptrListRemoveClearOwner(g_handleRegistry,*(unsigned int *)(*(int *)(param_1 + 0x58) + 4));
       if (*(int **)(param_1 + 0x58) != (int *)0x0) {
         (**(romwright_code **)(**(int **)(param_1 + 0x58) + 4))(*(int **)(param_1 + 0x58));
         *(unsigned int *)(param_1 + 0x58) = 0;

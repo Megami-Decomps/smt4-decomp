@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001a9110(int *, int);
+int wordPairCopy(int *, int);
 int FUN_00430e58(int);
 
 typedef int romwright_code(...);
@@ -16,7 +16,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_001a9110. */
+/* Supplied declaration required: wordPairCopy. */
 /* Supplied declaration required: FUN_00430e58. */
 extern int handlerRefForward(unsigned int, unsigned int);
 
@@ -47,7 +47,7 @@ unsigned int nn_cec_CTR_MessageBox_ReadOutBoxIndex(int *param_1)
         temp_v2 = (**(romwright_code **)(*param_1 + 0x34))(param_1,temp_v1,temp_v3,&temp_v4,param_1[1],5,0x12);
         if (-1 < temp_v2) {
           if (temp_v4 != 0) {
-            FUN_001a9110(param_1 + 0x157,temp_v1);
+            wordPairCopy(param_1 + 0x157,temp_v1);
           }
           if (((short)param_1[0x157] == 0x6767) && (param_1[0x158] == (temp_v3 - 8U) >> 3)) {
 LAB_0042ed04:
@@ -56,7 +56,7 @@ LAB_0042ed04:
             if (param_1[0x158] != 0) {
               do {
                 temp_v2 = temp_v2 + 8;
-                FUN_001a9110(param_1 + temp_v0 * 2 + 0x159,temp_v2);
+                wordPairCopy(param_1 + temp_v0 * 2 + 0x159,temp_v2);
                 temp_v0 = temp_v0 + 1;
               } while (temp_v0 < (unsigned int)param_1[0x158]);
             }
@@ -70,7 +70,7 @@ LAB_0042ed04:
               temp_v2 = (**(romwright_code **)(*param_1 + 0x34))
                                 (param_1,temp_v1,temp_v3,&temp_v4,param_1[1],5,0x12);
               if (((-1 < temp_v2) &&
-                  (FUN_001a9110(param_1 + 0x157,temp_v1), (short)param_1[0x157] == 0x6767)) &&
+                  (wordPairCopy(param_1 + 0x157,temp_v1), (short)param_1[0x157] == 0x6767)) &&
                  (param_1[0x158] == (temp_v3 - 8U) >> 3)) goto LAB_0042ed04;
             }
             param_1[0x158] = 0;

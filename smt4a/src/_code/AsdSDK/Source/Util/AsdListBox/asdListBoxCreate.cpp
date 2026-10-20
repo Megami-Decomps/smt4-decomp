@@ -4,12 +4,12 @@
 
 extern "C" {
 s32 FUN_002bda9c(u32 handle);
-void FUN_002be8b4(u32 handle);
+void asdListBoxDestroy(u32 handle);
 
 void *asdMemoryAllocTracked(int heap, int alignClass, int unk08, u32 size, int fromFront);
 u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay, AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, void *owner);
 s32 jobIsValid(void *parent);
-void FUN_0014bdb4(void *parent, u32 handle);
+void jobSetParent(void *parent, u32 handle);
 void FUN_00280468(void *widget, s32 rows, s32 unk);
 void colorSlotSet(void *widget, s32 a, s32 b, s32 c, s32 d);
 
@@ -24,9 +24,9 @@ u32 asdListBoxCreate(void *parent, s32 group, s32 x, s32 y, u8 flag)
         return 0;
     }
 
-    handle = asdProcessCreateSimple((const s8 *)"AsdListBox", group, 0, 0, FUN_002bda9c, FUN_002be8b4, box);
+    handle = asdProcessCreateSimple((const s8 *)"AsdListBox", group, 0, 0, FUN_002bda9c, asdListBoxDestroy, box);
     if (jobIsValid(parent) != 0) {
-        FUN_0014bdb4(parent, handle);
+        jobSetParent(parent, handle);
     }
 
     box->unk3c = flag;

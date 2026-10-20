@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002b4670(void);
+int dataTable08Sub1GetRecord(void);
 
-/* Supplied declaration required: FUN_002b4670. */
+/* Supplied declaration required: dataTable08Sub1GetRecord. */
 
 
 unsigned int FUN_0028e9a0(int param_1)
@@ -16,7 +16,7 @@ unsigned int FUN_0028e9a0(int param_1)
   unsigned int temp_v0;
   
   if ((param_1 - 1U < 0x3c) &&
-     (FUN_002b4670(), *(char *)(param_1 + 0x6d) == '\x02' || *(char *)(param_1 + 0x6d) == '\x03')) {
+     (dataTable08Sub1GetRecord(), *(char *)(param_1 + 0x6d) == '\x02' || *(char *)(param_1 + 0x6d) == '\x03')) {
     temp_v0 = 1;
   }
   else {

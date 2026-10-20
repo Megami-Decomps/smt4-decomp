@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00267d84(...);
-int FUN_0026933c(...);
+int effBehaviorRun(...);
 int FUN_002c74ac(...);
 
 typedef struct fn_002de44c_arg0 fn_002de44c_arg0;
@@ -24,7 +24,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_00267d84. */
-/* Supplied declaration required: FUN_0026933c. */
+/* Supplied declaration required: effBehaviorRun. */
 /* Supplied declaration required: FUN_002c74ac. */
 
 
@@ -33,7 +33,7 @@ void FUN_002de44c(fn_002de44c_arg0 *param_1)
 {
 /* irregular: 3 native warning(s); review required */
   if (param_1->field_0x4c != (void *)0x0) {
-    FUN_0026933c();
+    effBehaviorRun();
     FUN_002c74ac(param_1);
   }
   FUN_00267d84(param_1);

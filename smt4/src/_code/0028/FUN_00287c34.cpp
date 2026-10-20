@@ -254,7 +254,7 @@ extern unsigned int DAT_0049fd20; /* 0x49fd20 */
 /* Supplied declaration required: FUN_0026faa4. */
 extern unsigned long long FUN_00270384(int);
 /* Supplied declaration required: FUN_0027d908. */
-extern int FUN_002c2950(void);
+extern int gameGetMapBlock(void);
 
 
 void FUN_00287c34(int param_1)
@@ -494,7 +494,7 @@ void FUN_00287c34(int param_1)
     FUN_0027d908();
     FUN_0026faa4();
   }
-  temp_v0 = FUN_002c2950();
+  temp_v0 = gameGetMapBlock();
   temp_v2 = 0;
   do {
     temp_v3 = FUN_00270384(temp_v2);

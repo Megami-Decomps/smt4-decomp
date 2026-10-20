@@ -7,14 +7,14 @@ extern "C" {
 int asdSequenceRequest(int, int *);
 int asdOperatorNew(void);
 int FUN_002bf464(void);
-int FUN_002e3328(void);
+int asdOperatorDelete(void);
 int FUN_00318d6c(void);
-int FUN_0031a400(void);
-int FUN_00342010(void);
-int FUN_0035b304(void);
-int FUN_0037b450(void);
+int campCommonBgAcquire(void);
+int campButtonHelpAcquire(void);
+int campCommonBgRelease(void);
+int campButtonHelpRelease(void);
 int FUN_003a7644(void);
-int FUN_003d2d6c(int);
+int soundChannelStopAll(int);
 int FUN_003d54f8(...);
 int FUN_0047c36c(unsigned int);
 int FUN_0047c5f0(void);
@@ -32,14 +32,14 @@ typedef struct {
 /* Supplied declaration required: asdSequenceRequest. */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_002bf464. */
-/* Supplied declaration required: FUN_002e3328. */
+/* Supplied declaration required: asdOperatorDelete. */
 /* Supplied declaration required: FUN_00318d6c. */
-/* Supplied declaration required: FUN_0031a400. */
-/* Supplied declaration required: FUN_00342010. */
-/* Supplied declaration required: FUN_0035b304. */
-/* Supplied declaration required: FUN_0037b450. */
+/* Supplied declaration required: campCommonBgAcquire. */
+/* Supplied declaration required: campButtonHelpAcquire. */
+/* Supplied declaration required: campCommonBgRelease. */
+/* Supplied declaration required: campButtonHelpRelease. */
 /* Supplied declaration required: FUN_003a7644. */
-/* Supplied declaration required: FUN_003d2d6c. */
+/* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: FUN_003d54f8. */
 /* Supplied declaration required: FUN_0047c36c. */
 /* Supplied declaration required: FUN_0047c5f0. */
@@ -71,7 +71,7 @@ unsigned int FUN_0024b5b0(int *param_1,unsigned int param_2,unsigned int param_3
         if (*(char *)(temp_v3 + 0x19) != '\0') {
           FUN_003d54f8(0,1);
           FUN_003d54f8(1);
-          FUN_003d2d6c(0xf);
+          soundChannelStopAll(0xf);
         }
         else {
           temp_v4 = romwright_piece_3_1((int)((unsigned int)param_4 >> 8),1);
@@ -81,12 +81,12 @@ unsigned int FUN_0024b5b0(int *param_1,unsigned int param_2,unsigned int param_3
         *(unsigned char *)(temp_v3 + 0x18) = 1;
         if ((*(int *)(temp_v3 + 0x1c) != 0) && (FUN_0047c5f0(), *(int *)(temp_v3 + 0x1c) != 0)) {
           FUN_0047c950();
-          FUN_002e3328();
+          asdOperatorDelete();
           *(unsigned int *)(temp_v3 + 0x1c) = 0;
         }
-        FUN_0037b450();
+        campButtonHelpRelease();
         FUN_00318d6c();
-        FUN_0035b304();
+        campCommonBgRelease();
       }
     }
     else {
@@ -97,9 +97,9 @@ unsigned int FUN_0024b5b0(int *param_1,unsigned int param_2,unsigned int param_3
     }
   }
   else {
-    FUN_0031a400();
+    campCommonBgAcquire();
     FUN_002bf464();
-    FUN_00342010();
+    campButtonHelpAcquire();
     temp_v1 = 0x26f0;
     asdOperatorNew();
     temp_v2 = 0;

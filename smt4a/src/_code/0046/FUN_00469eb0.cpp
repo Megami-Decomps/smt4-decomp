@@ -8,7 +8,7 @@ int sysPlaySe(int);
 int asdMemFree(void);
 int scrScriptProcessDestroy(void);
 int FUN_00275bc8(unsigned int, unsigned int);
-int FUN_00275f44(unsigned int, unsigned int);
+int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int FUN_002804b0(unsigned char *, int, int);
 int FUN_003fe86c(int, int);
 int FUN_004ff920(int);
@@ -22,9 +22,9 @@ extern unsigned char LAB_0046a0a0; /* 0x46a0a0 */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 extern int FUN_00224880(unsigned int);
 /* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_002804b0. */
-extern unsigned int FUN_00357bc8(unsigned int, unsigned char *);
+extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_003fe86c. */
 /* Supplied declaration required: FUN_004ff920. */
 
@@ -86,8 +86,8 @@ void FUN_00469eb0(int param_1)
       temp_v1 = *(unsigned int *)(param_1 + 0x2a8);
       FUN_00275bc8(temp_v1,*(unsigned int *)(param_1 + 0x2ac));
       *(unsigned int *)(param_1 + 0x2b0) = temp_v1;
-      temp_v1 = FUN_00357bc8(*(unsigned int *)(param_1 + 0x2a8),&LAB_0046a0a0);
-      FUN_00275f44(*(unsigned int *)(param_1 + 0x2b0),temp_v1);
+      temp_v1 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x2a8),&LAB_0046a0a0);
+      scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x2b0),temp_v1);
       temp_v2 = 0;
       FUN_003fe86c(temp_v0,0);
       temp_v1 = 2;

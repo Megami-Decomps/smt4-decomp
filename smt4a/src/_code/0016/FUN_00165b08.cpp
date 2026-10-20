@@ -8,8 +8,8 @@ int FUN_0016c69c(...);
 
 int FUN_00100388(...);
 int FUN_00162790(...);
-int FUN_001654d8(...);
-int FUN_001654e4(...);
+int vec2GetXInt(...);
+int vec2GetYInt(...);
 int efctSetSpeed(void);
 int FUN_0016c6f0(unsigned int, int, unsigned int);
 int FUN_00180310(...);
@@ -17,10 +17,10 @@ int FUN_0018152c(...);
 int FUN_001835b4(...);
 int FUN_00183bb0(void);
 int FUN_0018408c(...);
-int FUN_00184e64(...);
+int drawSetColorFromRGBA8(...);
 int FUN_001879d0(...);
 int FUN_0019d880(void);
-int FUN_002e6dd0(...);
+int rt_aeabi_memclr(...);
 int VectorSignedToFloat(...);
 
 /* stack frame of void: 3 slot(s), 12 byte(s) */
@@ -32,14 +32,14 @@ typedef struct {
 
 extern unsigned char DAT_00530b54; /* 0x530b54 */
 extern unsigned char DAT_00530b58; /* 0x530b58 */
-extern unsigned char DAT_0057f588; /* 0x57f588 */
+extern unsigned char g_messageMain; /* 0x57f588 */
 extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_00162790. */
-/* Supplied declaration required: FUN_001654d8. */
-/* Supplied declaration required: FUN_001654e4. */
+/* Supplied declaration required: vec2GetXInt. */
+/* Supplied declaration required: vec2GetYInt. */
 /* Supplied declaration required: efctSetSpeed. */
 extern unsigned int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c69c. */
@@ -51,14 +51,14 @@ extern int FUN_001834a4(unsigned int, int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: FUN_0018408c. */
-/* Supplied declaration required: FUN_00184e64. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 extern int FUN_00184ed0(void);
 extern int saveSlotFindById(unsigned int);
 extern int FUN_00187068(int);
 extern int FUN_00187168(void);
 /* Supplied declaration required: FUN_001879d0. */
 /* Supplied declaration required: FUN_0019d880. */
-/* Supplied declaration required: FUN_002e6dd0. */
+/* Supplied declaration required: rt_aeabi_memclr. */
 
 
 void FUN_00165b08(void)
@@ -87,9 +87,9 @@ void FUN_00165b08(void)
   unsigned char temp_v17 [64];
   unsigned char temp_v18 [100];
   
-  temp_v7 = (*(int *)((unsigned char *)&DAT_0057f588 + 0x8));
-  FUN_001654d8((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0xb00);
-  FUN_001654e4((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0xb00);
+  temp_v7 = (*(int *)((unsigned char *)&g_messageMain + 0x8));
+  vec2GetXInt((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0xb00);
+  vec2GetYInt((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0xb00);
   temp_v2 = FUN_001692ac(1,0);
   FUN_0016c6f0(g_renderCtx,3,temp_v2);
   FUN_00183bb0();
@@ -103,16 +103,16 @@ void FUN_00165b08(void)
     temp_v12 = 0;
     temp_v4 = FUN_00187168();
     if (temp_v4 != 0) {
-      temp_v4 = FUN_001654d8((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0xb00);
-      temp_v5 = FUN_001654e4((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0xb00);
+      temp_v4 = vec2GetXInt((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0xb00);
+      temp_v5 = vec2GetYInt((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0xb00);
       temp_v8 = 0;
       do {
         if (*(int *)(temp_v7 + 0x9c) < temp_v8) break;
         temp_v6 = saveSlotFindById(*(unsigned int *)(temp_v7 + temp_v8 * 4 + 0xac) & 0xffff);
         if ((*(char *)(temp_v7 + temp_v8 + 0xdc) == '\0') &&
            (*(short *)(temp_v3 + 300) == *(short *)(temp_v6 + 300))) {
-          temp_v4 = FUN_001654d8((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + temp_v8 * 0x8c + 0xdbc);
-          temp_v5 = FUN_001654e4((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + temp_v8 * 0x8c + 0xdbc);
+          temp_v4 = vec2GetXInt((*(int *)((unsigned char *)&g_messageMain + 0x8)) + temp_v8 * 0x8c + 0xdbc);
+          temp_v5 = vec2GetYInt((*(int *)((unsigned char *)&g_messageMain + 0x8)) + temp_v8 * 0x8c + 0xdbc);
           temp_v12 = 1;
           break;
         }
@@ -138,7 +138,7 @@ void FUN_00165b08(void)
         temp_v16 = temp_v6;
       }
       if ((*(char *)(temp_v7 + 0xe8) != '\0') && (temp_v6 = FUN_00184ed0(), temp_v6 == temp_v10)) {
-        FUN_00184e64(0x57d8ffff);
+        drawSetColorFromRGBA8(0x57d8ffff);
       }
       FUN_001835b4(2,0x14,0xc12,temp_v8,temp_v11,0xbf);
       if ((*(char *)(temp_v7 + 0xe8) != '\0') && (temp_v6 = FUN_00184ed0(), temp_v6 == temp_v10)) {
@@ -155,10 +155,10 @@ void FUN_00165b08(void)
       temp_v8 = FUN_001834a4(0x14,temp_v10 * 3 + 0xc52);
       temp_v0 = *(short *)(temp_v8 + 8);
       temp_v1 = *(short *)(temp_v8 + 10);
-      FUN_00184e64(0xffffffff);
+      drawSetColorFromRGBA8(0xffffffff);
       FUN_00180310(0,temp_v0 + temp_v4,temp_v1 + temp_v5,1,3,0xce,temp_v18);
       FUN_00183bb0();
-      FUN_002e6dd0(temp_v17,0x40);
+      rt_aeabi_memclr(temp_v17,0x40);
       temp_v2 = FUN_00180114(*(unsigned short *)(temp_v3 + 0x62));
       FUN_00100388(temp_v17,&DAT_00530b54,temp_v2);
       temp_v3 = FUN_001834a4(0x14,temp_v10 + 0xc49);
@@ -185,8 +185,8 @@ LAB_00165eec:
     }
     if ((temp_v12 && temp_v14 != 0) && (temp_v14 = *(unsigned int *)(temp_v7 + temp_v9 * 4 + 0xac), temp_v14 != 0)) {
       temp_v3 = saveSlotFindById(temp_v14 & 0xffff);
-      temp_v4 = FUN_001654d8((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + temp_v9 * 0x8c + 0xdbc);
-      temp_v5 = FUN_001654e4((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + temp_v9 * 0x8c + 0xdbc);
+      temp_v4 = vec2GetXInt((*(int *)((unsigned char *)&g_messageMain + 0x8)) + temp_v9 * 0x8c + 0xdbc);
+      temp_v5 = vec2GetYInt((*(int *)((unsigned char *)&g_messageMain + 0x8)) + temp_v9 * 0x8c + 0xdbc);
       efctSetSpeed();
       temp_v8 = FUN_001834a4(0x14,temp_v10 + 0xc34);
       temp_v6 = (int)*(short *)(temp_v8 + 10);
@@ -200,7 +200,7 @@ LAB_00165eec:
         temp_v16 = temp_v6;
       }
       if ((*(char *)(temp_v7 + 0xe8) != '\0') && (temp_v6 = FUN_00184ed0(), temp_v6 == temp_v10)) {
-        FUN_00184e64(0x57d8ffff);
+        drawSetColorFromRGBA8(0x57d8ffff);
       }
       FUN_001835b4(2,0x14,0xc12,temp_v8,temp_v11,0xbf);
       if ((*(char *)(temp_v7 + 0xe8) != '\0') && (temp_v6 = FUN_00184ed0(), temp_v6 == temp_v10)) {
@@ -217,10 +217,10 @@ LAB_00165eec:
       temp_v8 = FUN_001834a4(0x14,temp_v10 * 3 + 0xc52);
       temp_v0 = *(short *)(temp_v8 + 8);
       temp_v1 = *(short *)(temp_v8 + 10);
-      FUN_00184e64(0xffffffff);
+      drawSetColorFromRGBA8(0xffffffff);
       FUN_00180310(0,temp_v0 + temp_v4,temp_v1 + temp_v5,1,3,0xce,temp_v18);
       FUN_00183bb0();
-      FUN_002e6dd0(temp_v17,0x40);
+      rt_aeabi_memclr(temp_v17,0x40);
       temp_v2 = FUN_00180114(*(unsigned short *)(temp_v3 + 0x62));
       FUN_00100388(temp_v17,&DAT_00530b54,temp_v2);
       temp_v3 = FUN_001834a4(0x14,temp_v10 + 0xc49);

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00296d6c(int, int);
+int randBetween(int, int);
 int SBORROW4(int, int);
 int SCARRY4(int, int);
 int VectorSignedToFloat(...);
@@ -16,7 +16,7 @@ int VectorSignedToFloat(...);
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
-/* Supplied declaration required: FUN_00296d6c. */
+/* Supplied declaration required: randBetween. */
 
 
 void FUN_00257e74(float *param_1)
@@ -74,15 +74,15 @@ void FUN_00257e74(float *param_1)
   }
   temp_v13 = 0.5f;
   temp_v8 = 100.0f;
-  temp_v2 = FUN_00296d6c((int)(temp_v9 * 0.5f * 100.0f),(int)(temp_v9 * 100.0f));
+  temp_v2 = randBetween((int)(temp_v9 * 0.5f * 100.0f),(int)(temp_v9 * 100.0f));
   temp_v10 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v2 = FUN_00296d6c((int)(temp_v12 * temp_v13 * temp_v8),(int)(temp_v12 * temp_v8));
+  temp_v2 = randBetween((int)(temp_v12 * temp_v13 * temp_v8),(int)(temp_v12 * temp_v8));
   temp_v10 = temp_v10 * 0.01f;
   temp_v9 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v9 = temp_v9 * 0.01f;
-  temp_v1 = FUN_00296d6c(0,1);
+  temp_v1 = randBetween(0,1);
   temp_v4 = temp_v1 * 2 - 1;
-  temp_v1 = FUN_00296d6c(0,1);
+  temp_v1 = randBetween(0,1);
   temp_v8 = param_1[2];
   temp_v1 = temp_v1 * 2 - 1;
   temp_v12 = param_1[3];
@@ -114,7 +114,7 @@ void FUN_00257e74(float *param_1)
     temp_v7 = (temp_v0 & 0xfffffff) | ((unsigned int)(temp_v8 == temp_v11) << 0x1e);
     if ((!romwright_subpiece_4_1_0(temp_v7 >> 0x1e,0)) &&
        ((temp_v7 = (temp_v0 & 0xfffffff) | ((unsigned int)(temp_v12 == temp_v11) << 0x1e), romwright_subpiece_4_1_0(temp_v7 >> 0x1e,0) ||
-        (temp_v3 = FUN_00296d6c(0,1), temp_v3 != 0)))) {
+        (temp_v3 = randBetween(0,1), temp_v3 != 0)))) {
       temp_v12 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(temp_v7 >> 0x16) & 3);
       temp_v11 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(temp_v7 >> 0x16) & 3);
       param_1[2] = temp_v10 * temp_v11;

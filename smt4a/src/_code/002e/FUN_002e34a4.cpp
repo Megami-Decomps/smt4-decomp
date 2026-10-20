@@ -9,7 +9,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_4_stack;
 
-extern signed char DAT_00580204; /* 0x580204 */
+extern signed char g_mapCollision; /* 0x580204 */
 extern signed char DAT_00580205; /* 0x580205 */
 extern unsigned int DAT_005ed634; /* 0x5ed634 */
 extern unsigned int DAT_005ed638; /* 0x5ed638 */
@@ -37,7 +37,7 @@ unsigned char FUN_002e34a4(unsigned int *param_1,unsigned int *param_2,unsigned 
   temp_v1 = DAT_005ed63c;
   temp_v0 = DAT_005ed638;
   DAT_005f199e = DAT_00580205 != '\0';
-  temp_v2 = DAT_00580204 == '\0';
+  temp_v2 = g_mapCollision == '\0';
   if (temp_v2) {
     DAT_005f199f = 0;
   }

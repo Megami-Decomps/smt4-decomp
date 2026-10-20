@@ -9,10 +9,10 @@ int FUN_00232848(void);
 int FUN_00232854(...);
 int FUN_002328b4(void);
 int FUN_00233404(void);
-int FUN_00240d74(...);
+int flaggedEntryGetValueB(...);
 int FUN_00296ee0(int, int);
-int FUN_002992bc(int, int);
-int FUN_0029e11c(int);
+int flaggedEntrySetValueB(int, int);
+int flaggedEntryGetValueA(int);
 int FUN_0029efd8(int, int);
 int FUN_002bc01c(int);
 int timerStart(int, int, int);
@@ -30,13 +30,13 @@ typedef struct {
 /* Supplied declaration required: FUN_00232854. */
 /* Supplied declaration required: FUN_002328b4. */
 /* Supplied declaration required: FUN_00233404. */
-/* Supplied declaration required: FUN_00240d74. */
+/* Supplied declaration required: flaggedEntryGetValueB. */
 extern int FUN_0024c278(void);
 extern int FUN_002762e0(void);
 extern int FUN_0027ee9c(void);
 /* Supplied declaration required: FUN_00296ee0. */
-/* Supplied declaration required: FUN_002992bc. */
-/* Supplied declaration required: FUN_0029e11c. */
+/* Supplied declaration required: flaggedEntrySetValueB. */
+/* Supplied declaration required: flaggedEntryGetValueA. */
 /* Supplied declaration required: FUN_0029efd8. */
 /* Supplied declaration required: FUN_002bc01c. */
 /* Supplied declaration required: timerStart. */
@@ -161,44 +161,44 @@ void FUN_00397580(int param_1)
     }
     if (*(char *)(param_1 + 0x648) == '\0') {
       FUN_0029efd8(param_1 + 0x580,1);
-      temp_v10 = FUN_00240d74(param_1 + 0x580);
+      temp_v10 = flaggedEntryGetValueB(param_1 + 0x580);
       *(unsigned int *)(param_1 + 0x10) = temp_v10;
-      temp_v7 = FUN_0029e11c(param_1 + 0x580);
+      temp_v7 = flaggedEntryGetValueA(param_1 + 0x580);
       *(int *)(param_1 + 0x14) = temp_v7;
       if (temp_v7 != 6) {
         return;
       }
       *(unsigned char *)(param_1 + 0x648) = 1;
-      FUN_002992bc(temp_v6,*(int *)(param_1 + 0x10) / 5);
+      flaggedEntrySetValueB(temp_v6,*(int *)(param_1 + 0x10) / 5);
       return;
     }
     temp_v7 = temp_v6;
     FUN_0029efd8(temp_v6,0);
     FUN_0029efd8(param_1 + 0x580,0);
-    temp_v8 = FUN_0029e11c(param_1 + 0x580);
+    temp_v8 = flaggedEntryGetValueA(param_1 + 0x580);
     if (temp_v8 != 6) {
       *(unsigned char *)(param_1 + 0x648) = 0;
-      temp_v7 = FUN_00240d74(temp_v6);
-      FUN_002992bc(param_1 + 0x580,temp_v7 * 5 + 2);
+      temp_v7 = flaggedEntryGetValueB(temp_v6);
+      flaggedEntrySetValueB(param_1 + 0x580,temp_v7 * 5 + 2);
     }
     else if (temp_v7 == 0) {
-      temp_v10 = FUN_00240d74(param_1 + 0x580);
+      temp_v10 = flaggedEntryGetValueB(param_1 + 0x580);
       *(unsigned int *)(param_1 + 0x10) = temp_v10;
-      temp_v10 = FUN_0029e11c(param_1 + 0x580);
+      temp_v10 = flaggedEntryGetValueA(param_1 + 0x580);
       *(unsigned int *)(param_1 + 0x14) = temp_v10;
       return;
     }
     FUN_002bc01c(0x100016c);
-    temp_v10 = FUN_00240d74(param_1 + 0x580);
+    temp_v10 = flaggedEntryGetValueB(param_1 + 0x580);
     *(unsigned int *)(param_1 + 0x10) = temp_v10;
-    temp_v10 = FUN_0029e11c(param_1 + 0x580);
+    temp_v10 = flaggedEntryGetValueA(param_1 + 0x580);
     *(unsigned int *)(param_1 + 0x14) = temp_v10;
     return;
   }
   if (*(char *)(param_1 + 0x648) != '\0') {
-    temp_v8 = FUN_00240d74(temp_v6);
+    temp_v8 = flaggedEntryGetValueB(temp_v6);
     if (temp_v8 != 1) {
-      temp_v8 = FUN_00240d74(temp_v6);
+      temp_v8 = flaggedEntryGetValueB(temp_v6);
       if (temp_v8 != 2) goto LAB_00397744;
       if (*(char *)(param_1 + 0x22) < '\a') {
         *(char *)(param_1 + 0x22) = *(char *)(param_1 + 0x22) + '\x01';
@@ -221,7 +221,7 @@ void FUN_00397580(int param_1)
 LAB_00397744:
     temp_v5 = 0;
   }
-  if ((*(char *)(param_1 + 0x648) == '\0') || (temp_v6 = FUN_00240d74(temp_v6), temp_v6 != 0)) {
+  if ((*(char *)(param_1 + 0x648) == '\0') || (temp_v6 = flaggedEntryGetValueB(temp_v6), temp_v6 != 0)) {
     temp_v4 = 0;
   }
   else {

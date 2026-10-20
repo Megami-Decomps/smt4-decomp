@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_2_stack;
 
-extern unsigned int FUN_002ac068(unsigned int, unsigned int);
+extern unsigned int dataTableFileGetTable(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002ac0c4. */
 /* Supplied declaration required: FUN_002ac0f8. */
 extern int FUN_002ac12c(unsigned int);
@@ -49,7 +49,7 @@ int FUN_0038959c(int param_1,int param_2)
         if (temp_v7 < temp_v2) {
           do {
             if (*(char *)(temp_v1 + temp_v7 * 0x40) == '\x1c') {
-              temp_v3 = FUN_002ac068(*(unsigned int *)(*(int *)(temp_v8 + 0x4c) + temp_v7 * 0x10),0);
+              temp_v3 = dataTableFileGetTable(*(unsigned int *)(*(int *)(temp_v8 + 0x4c) + temp_v7 * 0x10),0);
               temp_v0 = dataTableGetEntries();
               temp_v4 = dataTableGetCount(temp_v3);
               if ((int)temp_v4 < 1) {

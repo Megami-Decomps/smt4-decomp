@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0013afbc(char *, char *, int *);
-int FUN_002b77b0(char *, char *, int);
+int memCopyWords(char *, char *, int);
 int FUN_002b77f4(char *, char *);
 int nn_math_ARMv6_MTX34LookAtC_FAST(char *, char *, char *, char *);
 int nn_math_ARMv6_MTX44TransposeAsm(char *, char *);
@@ -16,7 +16,7 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_0013afbc. */
-/* Supplied declaration required: FUN_002b77b0. */
+/* Supplied declaration required: memCopyWords. */
 /* Supplied declaration required: FUN_002b77f4. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34LookAtC_FAST. */
 /* Supplied declaration required: nn_math_ARMv6_MTX44TransposeAsm. */
@@ -70,7 +70,7 @@ void FUN_002c1edc(char *param_1,unsigned int *param_2,unsigned int *param_3,unsi
   uStack_10 = in_s16;
   nn_math_ARMv6_MTX34LookAtC_FAST(param_1 + 0x38,param_1 + 4,param_1 + 0x1c,param_1 + 0x10);
   FUN_002b77f4(param_1 + 0x128,param_1 + 0x38);
-  FUN_002b77b0(param_1 + 0x38,param_1 + 0x68,0x30);
+  memCopyWords(param_1 + 0x38,param_1 + 0x68,0x30);
   *(unsigned int *)(param_1 + 0x98) = temp_v3;
   *(unsigned int *)(param_1 + 0x9c) = temp_v3;
   *(unsigned int *)(param_1 + 0xa0) = temp_v3;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001801a4(void);
+int gameGetPlayerData(void);
 int FUN_002a482c(int);
 int FUN_0031d174(int);
 int FUN_0049339c(int, unsigned int, int, int, unsigned int);
@@ -22,7 +22,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_001801a4. */
+/* Supplied declaration required: gameGetPlayerData. */
 /* Supplied declaration required: FUN_002a482c. */
 /* Supplied declaration required: FUN_0031d174. */
 /* Supplied declaration required: FUN_0049339c. */
@@ -85,31 +85,31 @@ void FUN_004986b0(int param_1,unsigned int param_2)
   temp_v0 = 0;
   switch(*(unsigned int *)(param_1 + 0xb40)) {
   case 0:
-    puVar2 = (unsigned short *)FUN_001801a4();
+    puVar2 = (unsigned short *)gameGetPlayerData();
     temp_v0 = *puVar2;
     break;
   case 1:
-    temp_v1 = FUN_001801a4();
+    temp_v1 = gameGetPlayerData();
     temp_v0 = *(unsigned short *)(temp_v1 + 2);
     break;
   case 2:
-    temp_v1 = FUN_001801a4();
+    temp_v1 = gameGetPlayerData();
     temp_v0 = *(unsigned short *)(temp_v1 + 4);
     break;
   case 3:
-    temp_v1 = FUN_001801a4();
+    temp_v1 = gameGetPlayerData();
     temp_v0 = *(unsigned short *)(temp_v1 + 6);
     break;
   case 4:
-    temp_v1 = FUN_001801a4();
+    temp_v1 = gameGetPlayerData();
     temp_v0 = *(unsigned short *)(temp_v1 + 8);
     break;
   case 5:
-    temp_v1 = FUN_001801a4();
+    temp_v1 = gameGetPlayerData();
     temp_v0 = *(unsigned short *)(temp_v1 + 10);
     break;
   case 6:
-    temp_v1 = FUN_001801a4();
+    temp_v1 = gameGetPlayerData();
     temp_v0 = *(unsigned short *)(temp_v1 + 0xc);
   }
   temp_v12 = temp_v0;

@@ -24,7 +24,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0027b1b4. */
 /* Supplied declaration required: FUN_0027b27c. */
 /* Supplied declaration required: FUN_0027b2b4. */
-extern int FUN_002c09d0(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 
 
 void FUN_002fb238(int *param_1)
@@ -46,8 +46,8 @@ void FUN_002fb238(int *param_1)
   FUN_002702dc();
   if (*(int *)(temp_v5 + 0x2c) == 0x11) {
     if (*(int *)(temp_v5 + 0x30) != 1) goto LAB_002fb2cc;
-    temp_v0 = FUN_002c09d0(0xc6);
-    if ((temp_v0 != 0) && (temp_v0 = FUN_002c09d0(0x108), temp_v0 == 0)) {
+    temp_v0 = gameFlagIsSet(0xc6);
+    if ((temp_v0 != 0) && (temp_v0 = gameFlagIsSet(0x108), temp_v0 == 0)) {
       FUN_0027b2b4(*(unsigned int *)(temp_v5 + 0x2c),*(unsigned int *)(temp_v5 + 0x30),
                    *(unsigned int *)(temp_v5 + 0x2c),99);
       FUN_0027b27c();
@@ -63,7 +63,7 @@ void FUN_002fb238(int *param_1)
   if (!temp_v6) {
     temp_v0 = *(int *)(temp_v5 + 0x30);
   }
-  if ((temp_v6 || temp_v0 != 1) || (temp_v0 = FUN_002c09d0(0x719), temp_v0 != 0)) {
+  if ((temp_v6 || temp_v0 != 1) || (temp_v0 = gameFlagIsSet(0x719), temp_v0 != 0)) {
 LAB_002fb2cc:
     temp_v4 = 0;
     temp_v1 = *(unsigned int *)(temp_v5 + 0x2c);

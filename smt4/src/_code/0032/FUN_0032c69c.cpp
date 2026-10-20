@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_0029206c(unsigned int, int, int);
+int bgmStop(unsigned int, int, int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-/* Supplied declaration required: FUN_0029206c. */
+/* Supplied declaration required: bgmStop. */
 extern int jyoucyuGetTableEntry(unsigned int);
 
 
@@ -23,7 +23,7 @@ void FUN_0032c69c(void)
   
   temp_v0 = jyoucyuGetTableEntry(1);
   if (temp_v0 == 0) {
-    FUN_0029206c(0xffffffff,0xf,0);
+    bgmStop(0xffffffff,0xf,0);
     return;
   }
   return;

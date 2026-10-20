@@ -60,12 +60,12 @@ extern unsigned int DAT_005712b8; /* 0x5712b8 */
 extern unsigned int DAT_005712bc; /* 0x5712bc */
 extern unsigned int DAT_005712c0; /* 0x5712c0 */
 extern unsigned int DAT_005712c4; /* 0x5712c4 */
-extern unsigned int DAT_005712f0; /* 0x5712f0 */
-extern int DAT_0057a9c8; /* 0x57a9c8 */
+extern unsigned int g_btlActionReflect; /* 0x5712f0 */
+extern int g_btlUiBlock; /* 0x57a9c8 */
 
 extern int lcgRandomRange(unsigned int);
 extern unsigned int FUN_0019acdc(unsigned short, unsigned int);
-extern int FUN_002619e0(void);
+extern int dialogIsActive(void);
 /* Supplied declaration required: FUN_002a49e4. */
 /* Supplied declaration required: FUN_002c2cc4. */
 /* Supplied declaration required: FUN_003e9cd0. */
@@ -115,11 +115,11 @@ unsigned int FUN_004e05d4(int *param_1,unsigned int *param_2)
   int temp_v11;
   unsigned int *temp_v12;
   
-  temp_v2 = chainCountIdUnflagged(DAT_005712f0);
+  temp_v2 = chainCountIdUnflagged(g_btlActionReflect);
   if (0 < temp_v2) {
     return 0;
   }
-  temp_v2 = DAT_0057a9c8;
+  temp_v2 = g_btlUiBlock;
   FUN_004aa878();
   if (temp_v2 == 0) {
     return 0;
@@ -183,7 +183,7 @@ unsigned int FUN_004e05d4(int *param_1,unsigned int *param_2)
     }
     if ((*(unsigned int *)(*param_1 + 0x45a0) & DAT_005712b0) != 0 ||
         (DAT_005712b4 & *(unsigned int *)(*param_1 + 0x45a4)) != 0) {
-      temp_v2 = FUN_002619e0();
+      temp_v2 = dialogIsActive();
       if (temp_v2 != 0) {
         return 0;
       }

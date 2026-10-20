@@ -35,7 +35,7 @@ int rt_memcpy_w(...);
 
 int FUN_003e8bb0(...);
 int FUN_003f21ec(void);
-int FUN_003fd63c(...);
+int gameFlagSetValue(...);
 int FUN_004c2ca8(...);
 int FUN_004c34e0(...);
 int FUN_004c3a98(...);
@@ -55,7 +55,7 @@ int FUN_004fe764(...);
 int VectorSignedToFloat(...);
 
 int CONCAT44(unsigned int, double);
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 int FUN_0034a290(void);
 int FUN_003e8430(...);
 int FUN_003f0e20(...);
@@ -230,10 +230,10 @@ extern unsigned int g_btlEvent; /* 0x573898 */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: ARM_common_memcpy4_9. */
-extern char FUN_0014bef4(unsigned int);
+extern char randRange(unsigned int);
 /* Supplied declaration required: FUN_001568f8. */
-extern int FUN_0018719c(unsigned int);
-/* Supplied declaration required: FUN_001aba54. */
+extern int gameFlagIsSet(unsigned int);
+/* Supplied declaration required: dataTable04FindById. */
 extern int FUN_002c7bf4(unsigned int *);
 /* Supplied declaration required: FUN_0034a290. */
 /* Supplied declaration required: FUN_003e77cc. */
@@ -247,7 +247,7 @@ extern int FUN_003eca48(unsigned int, unsigned short);
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: FUN_003f21ec. */
 /* Supplied declaration required: FUN_003f2aac. */
-/* Supplied declaration required: FUN_003fd63c. */
+/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_004bf348. */
 /* Supplied declaration required: FUN_004bfa30. */
 /* Supplied declaration required: FUN_004bfcfc. */
@@ -440,7 +440,7 @@ void FUN_004e20c0(unsigned int *param_1,unsigned int *param_2,int param_3,unsign
   puStack_30 = param_2;
   temp_v107 = param_3;
   temp_v108 = param_4;
-  FUN_001aba54();
+  dataTable04FindById();
   temp_v59 = 1;
   temp_v93 = 1;
   temp_v12 = 0;
@@ -638,14 +638,14 @@ LAB_004e2728:
     puVar9 = (unsigned int *)*param_1;
     FUN_003f0e20(puVar9,param_8);
     if ((*puVar9 & DAT_00571160) != 0 || (puVar9[1] & DAT_00571164) != 0) {
-      temp_v5 = FUN_0018719c(0x4b6);
+      temp_v5 = gameFlagIsSet(0x4b6);
       if (temp_v5 != 0) {
-        FUN_003fd63c(0x4b6,0,1);
+        gameFlagSetValue(0x4b6,0,1);
       }
       temp_v13 = *param_1;
       FUN_003f21ec();
-      if ((temp_v13 != 0) && (temp_v5 = FUN_0018719c(0x4c6), temp_v5 == 0)) {
-        FUN_003fd63c(0x4c6,1);
+      if ((temp_v13 != 0) && (temp_v5 = gameFlagIsSet(0x4c6), temp_v5 == 0)) {
+        gameFlagSetValue(0x4c6,1);
       }
     }
   }
@@ -996,7 +996,7 @@ LAB_004e32dc:
     }
     temp_v62 = 0;
     temp_v60 = puVar12;
-    temp_v5 = FUN_0018719c(0x591);
+    temp_v5 = gameFlagIsSet(0x591);
     if (!(temp_v5 == 0 || temp_v6 == 0)) {
       temp_v100 = 0;
       if (temp_v60 != (unsigned int *)0x0) {
@@ -1139,9 +1139,9 @@ LAB_004e34b8:
       else {
         temp_v5 = FUN_004f8f44(DAT_00573808);
         FUN_004fbf44(temp_v5 + temp_v85 + temp_v12,param_2,0x33,(int)temp_v43,param_2[8]);
-        temp_v5 = FUN_0018719c(0xbb);
+        temp_v5 = gameFlagIsSet(0xbb);
         if (temp_v5 != 0) {
-          FUN_003fd63c(0xb9,1);
+          gameFlagSetValue(0xb9,1);
         }
       }
       *(unsigned int *)(*(int *)(*param_1 + 0x1ed4) + temp_v87) =
@@ -1241,7 +1241,7 @@ LAB_004e34b8:
        (temp_v5 = FUN_004c3a98(param_8,0x17), temp_v5 >= 1)) {
       puVar12 = temp_v60 + 0x59;
       do {
-        temp_v4 = FUN_0014bef4(7);
+        temp_v4 = randRange(7);
         temp_v5 = halfTable152TopIs2(puVar12,temp_v4);
       } while (temp_v5 != 0);
       temp_v39 = (unsigned int *)(int)temp_v4;
@@ -1331,7 +1331,7 @@ LAB_004e34b8:
         temp_v48 = temp_v48 + temp_v5;
       }
       else {
-        temp_v5 = FUN_0018719c(0x591);
+        temp_v5 = gameFlagIsSet(0x591);
         if (((temp_v5 != 0) && ((*param_2 & 0x20000) == 0)) && (temp_v59 != 0)) {
           if ((int)puVar9 < 1) {
             puVar9 = puVar13;
@@ -1892,8 +1892,8 @@ LAB_004e5308:
   }
   if (((DAT_00571284 & *(unsigned int *)(*param_1 + 0x45a4)) != 0 ||
        (*(unsigned int *)(*param_1 + 0x45a0) & DAT_00571280) != 0) &&
-     (temp_v12 = FUN_0018719c(0xba), temp_v12 != 0)) {
-    FUN_003fd63c(0xb8,1);
+     (temp_v12 = gameFlagIsSet(0xba), temp_v12 != 0)) {
+    gameFlagSetValue(0xb8,1);
   }
   if (temp_v107 != 0) {
     if (temp_v107 != 1) {

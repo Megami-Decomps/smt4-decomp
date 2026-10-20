@@ -16,7 +16,7 @@ extern unsigned char LAB_001237e0; /* 0x1237e0 */
 extern unsigned char LAB_001237e8; /* 0x1237e8 */
 
 /* Supplied declaration required: FUN_0012369c. */
-extern int FUN_002e92e4(unsigned char *, unsigned char *);
+extern int wstrcmpU16(unsigned char *, unsigned char *);
 extern int FUN_002ea6fc(unsigned char *);
 
 
@@ -31,15 +31,15 @@ unsigned int FUN_00123784(unsigned int param_1)
   FUN_0012369c(temp_v2,param_1,temp_v1,0x40);
   temp_v0 = FUN_002ea6fc(temp_v2);
   if (temp_v0 != 0) {
-    temp_v0 = FUN_002e92e4(temp_v1,&LAB_001237dc);
+    temp_v0 = wstrcmpU16(temp_v1,&LAB_001237dc);
     if (temp_v0 == 0) {
       return 1;
     }
-    temp_v0 = FUN_002e92e4(temp_v1,&LAB_001237e8);
+    temp_v0 = wstrcmpU16(temp_v1,&LAB_001237e8);
     if (temp_v0 == 0) {
       return 2;
     }
-    temp_v0 = FUN_002e92e4(temp_v1,&LAB_001237e0);
+    temp_v0 = wstrcmpU16(temp_v1,&LAB_001237e0);
     if (temp_v0 == 0) {
       return 3;
     }

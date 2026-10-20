@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b8da0(int, int);
+int pairSetFirstResetSecond(int, int);
 int FUN_002bd954(int, int, unsigned int, int, int);
 int FUN_002bee58(int, int);
 int VectorUnsignedToFloat(unsigned int, int);
@@ -15,8 +15,8 @@ typedef struct {
 } param_2_stack;
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-extern unsigned int FUN_0018c0d8(void);
-/* Supplied declaration required: FUN_002b8da0. */
+extern unsigned int gameDataBlocksGetCounter(void);
+/* Supplied declaration required: pairSetFirstResetSecond. */
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002bee58. */
 
@@ -33,7 +33,7 @@ unsigned int FUN_00310800(unsigned int param_1,int param_2)
   temp_v2 = *(int *)(param_2 + 8);
   *(unsigned int *)(temp_v2 + 0x84) = 10;
   *(unsigned int *)(temp_v2 + 0x8c) = 1;
-  temp_v0 = FUN_0018c0d8();
+  temp_v0 = gameDataBlocksGetCounter();
   *(short *)(temp_v2 + 0x90) = (short)temp_v0;
   *(short *)(temp_v2 + 0x92) = (short)temp_v0;
   temp_v0 = VectorUnsignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -41,7 +41,7 @@ unsigned int FUN_00310800(unsigned int param_1,int param_2)
   *(unsigned int *)(temp_v2 + 0x94) = temp_v0;
   *(unsigned char *)(temp_v2 + 0x88) = 1;
   FUN_002bd954(temp_v1,0xe,0xffffffff,temp_v2 + 0xa4,0xb);
-  FUN_002b8da0(temp_v1,0x11);
+  pairSetFirstResetSecond(temp_v1,0x11);
   FUN_002bee58(temp_v1,6);
   return 1;
 }

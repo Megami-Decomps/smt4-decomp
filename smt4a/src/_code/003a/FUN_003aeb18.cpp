@@ -34,7 +34,7 @@ extern int DAT_0057f0c8; /* 0x57f0c8 */
 extern int DAT_0057f0cc; /* 0x57f0cc */
 
 /* Supplied declaration required: FUN_00100388. */
-extern unsigned short *FUN_001801a4(void);
+extern unsigned short *gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00192608. */
 /* Supplied declaration required: FUN_0020d164. */
 /* Supplied declaration required: FUN_00230c1c. */
@@ -59,7 +59,7 @@ void FUN_003aeb18(int param_1,unsigned int param_2)
   unsigned char temp_v5 [128];
   
   temp_v1 = DAT_0057f0c8;
-  puVar3 = (unsigned short *)FUN_001801a4();
+  puVar3 = (unsigned short *)gameGetPlayerData();
   temp_v2 = (unsigned int)*puVar3;
   FUN_00192608();
   if (temp_v2 == 0) {

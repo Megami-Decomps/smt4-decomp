@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_001bcea0(void);
+int gameGetCounters(void);
 
-/* Supplied declaration required: FUN_001bcea0. */
+/* Supplied declaration required: gameGetCounters. */
 extern unsigned int scrGetArg(unsigned int);
 
 
@@ -20,15 +20,15 @@ unsigned int FUN_00331550(void)
   
   temp_v0 = scrGetArg(0);
   temp_v1 = scrGetArg(1);
-  temp_v2 = FUN_001bcea0();
+  temp_v2 = gameGetCounters();
   if (*(unsigned int *)(temp_v2 + (temp_v0 & 0xff) * 4) < temp_v1) {
-    temp_v2 = FUN_001bcea0();
+    temp_v2 = gameGetCounters();
     *(unsigned int *)(temp_v2 + (temp_v0 & 0xff) * 4) = temp_v1;
   }
-  FUN_001bcea0();
-  temp_v2 = FUN_001bcea0();
+  gameGetCounters();
+  temp_v2 = gameGetCounters();
   if (*(unsigned int *)(temp_v2 + (temp_v0 & 0xff) * 4 + 0x200) < temp_v1) {
-    temp_v2 = FUN_001bcea0();
+    temp_v2 = gameGetCounters();
     *(unsigned int *)(temp_v2 + (temp_v0 & 0xff) * 4 + 0x200) = temp_v1;
   }
   return 1;

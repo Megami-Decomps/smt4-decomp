@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_002f73e4(void);
-int FUN_002f73fc(void);
+int onlineMutexLock(void);
+int onlineMutexUnlock(void);
 
 /* stack frame of param_3: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -16,8 +16,8 @@ typedef struct {
 } param_3_stack;
 
 extern unsigned int sizeWithHeaderAligned(unsigned int);
-/* Supplied declaration required: FUN_002f73e4. */
-/* Supplied declaration required: FUN_002f73fc. */
+/* Supplied declaration required: onlineMutexLock. */
+/* Supplied declaration required: onlineMutexUnlock. */
 extern int __aeabi_uidivmod(unsigned int, unsigned int);
 
 
@@ -40,7 +40,7 @@ unsigned int FUN_0012350c(int *param_1,unsigned int param_2,unsigned int param_3
   else {
     temp_v7 = 0;
     if (param_1[4] != 0) {
-      FUN_002f73e4();
+      onlineMutexLock();
     }
     temp_v6 = 0;
     temp_v5 = param_1[1];
@@ -63,7 +63,7 @@ unsigned int FUN_0012350c(int *param_1,unsigned int param_2,unsigned int param_3
 LAB_00123572:
     *(unsigned char *)((int)param_1 + 0xd) = temp_v0;
     if (param_1[4] != 0) {
-      FUN_002f73fc();
+      onlineMutexUnlock();
     }
   }
   return temp_v7;

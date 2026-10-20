@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern s8 DAT_005891d8;
+extern s8 g_nnAppletState;
 
 /* Returns the signed byte at 0x5891D8. */
 s32 FUN_00147374(void)
 {
-    return DAT_005891d8;
+    return g_nnAppletState;
 }
 
 } /* extern "C" */

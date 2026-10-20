@@ -4,8 +4,8 @@ extern "C" {
 
 void FUN_00290d5c(u8 value)
 {
-    if (DAT_0043da28.obj != NULL) {
-        DAT_0043da28.obj->unk4C9 = value;
+    if (g_buttonHelp.obj != NULL) {
+        g_buttonHelp.obj->unk4C9 = value;
     }
 }
 

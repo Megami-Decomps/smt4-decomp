@@ -16,14 +16,14 @@ extern unsigned int DAT_00573be8; /* 0x573be8 */
 extern unsigned int DAT_00573bec; /* 0x573bec */
 
 extern int btlGetMainState(void);
-extern int FUN_0018719c(void);
-extern int FUN_001ab854(void);
-extern int FUN_001ab888(void);
+extern int gameFlagIsSet(void);
+extern int gameGetSlotRecord(void);
+extern int gameGetSlotTable(void);
 extern int FUN_00291e14(void);
 extern int FUN_002b24fc(void);
 /* Supplied declaration required: FUN_002cc228. */
 extern int FUN_003bcf2c(int);
-extern int FUN_003e46f4(void);
+extern int gameDataFlagTestBit(void);
 extern int FUN_004bd748(int);
 
 
@@ -41,7 +41,7 @@ char FUN_003da6ac(int param_1,int param_2)
   int temp_v5;
   
   temp_v5 = 0;
-  temp_v1 = FUN_001ab888();
+  temp_v1 = gameGetSlotTable();
   temp_v3 = 0;
   piVar6 = (int *)(param_1 + 0x3890);
   do {
@@ -50,11 +50,11 @@ char FUN_003da6ac(int param_1,int param_2)
     temp_v2 = *piVar6;
     temp_v4 = 0;
     if ((temp_v2 != 4 && temp_v2 != 0) && (-1 < *(char *)(temp_v2 + temp_v1 + 0x1c9f))) {
-      temp_v4 = FUN_001ab854();
+      temp_v4 = gameGetSlotRecord();
     }
     if ((((pcVar3 != (char *)0x0) && (pcVar3[1] == '\x01')) &&
-        ((*(short *)(pcVar3 + 0x5c) == 0 || (temp_v2 = FUN_0018719c(), temp_v2 != 0)))) &&
-       (((*(short *)(pcVar3 + 0x5e) == 0 || (temp_v2 = FUN_003e46f4(), temp_v2 != 0)) &&
+        ((*(short *)(pcVar3 + 0x5c) == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 != 0)))) &&
+       (((*(short *)(pcVar3 + 0x5e) == 0 || (temp_v2 = gameDataFlagTestBit(), temp_v2 != 0)) &&
         ((pcVar3[0x5b] == '\0' ||
          (temp_v2 = btlGetMainState(),
          (*(unsigned int *)(temp_v2 + 0x45a0) & DAT_00573be8) == 0 &&

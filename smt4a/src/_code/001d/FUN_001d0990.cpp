@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001afdc4(void);
+int nn_snd_CTR_FreeVoice(void);
 int UnsignedDoesSaturate(unsigned int, int);
 int UnsignedSaturate(unsigned int, int);
 
@@ -15,8 +15,8 @@ extern int nw_snd_internal_driver_Voice_SdkVoiceDropCallbackFuncMulti(...); /* 0
 /* Unsupported intrinsic, declaration required: UnsignedSaturate (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: UnsignedDoesSaturate (CALLOTHER). */
 extern int FUN_001af874(unsigned int, romwright_code *, int *);
-/* Supplied declaration required: FUN_001afdc4. */
-extern unsigned int FUN_001c2484(void);
+/* Supplied declaration required: nn_snd_CTR_FreeVoice. */
+extern unsigned int nw_snd_internal_driver_VoiceManager_GetInstance(void);
 extern int nw_snd_internal_driver_VoiceManager_DropLowestPriorityVoice(unsigned int, unsigned int);
 
 
@@ -52,7 +52,7 @@ LAB_001d09e8:
         temp_v1 = FUN_001af874(temp_v0,nw_snd_internal_driver_Voice_SdkVoiceDropCallbackFuncMulti,
                              param_1);
         if (temp_v1 == 0) {
-          temp_v2 = FUN_001c2484();
+          temp_v2 = nw_snd_internal_driver_VoiceManager_GetInstance();
           temp_v3 = nw_snd_internal_driver_VoiceManager_DropLowestPriorityVoice(temp_v2,temp_v0);
           if (temp_v3 != 0) goto LAB_001d09e8;
           *(unsigned char *)((int)param_1 + 0x1b) = 1;
@@ -92,7 +92,7 @@ LAB_001d0ab0:
     if (temp_v4 < param_1[2]) {
       do {
         if (param_1[temp_v4] != 0) {
-          FUN_001afdc4();
+          nn_snd_CTR_FreeVoice();
         }
         temp_v4 = temp_v4 + 1;
       } while (temp_v4 < param_1[2]);

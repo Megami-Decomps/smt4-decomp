@@ -4,20 +4,20 @@
 
 extern "C" {
 
-int FUN_002b8cc8(void);
+int ifTouchRegionRemove(void);
 int timerStart(int, int, int);
-int FUN_002c424c(int, int, unsigned int);
+int __aeabi_memset4(int, int, unsigned int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } void_stack;
 
-extern int DAT_0044e190; /* 0x44e190 */
+extern int g_statusDown; /* 0x44e190 */
 
-/* Supplied declaration required: FUN_002b8cc8. */
+/* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: timerStart. */
-/* Supplied declaration required: FUN_002c424c. */
+/* Supplied declaration required: __aeabi_memset4. */
 
 
 void FUN_0029bd4c(void)
@@ -29,12 +29,12 @@ void FUN_0029bd4c(void)
   unsigned int *puVar3;
   int temp_v2;
   
-  temp_v2 = DAT_0044e190;
-  if (*(int *)(DAT_0044e190 + 0x400) != 0) {
-    timerStart(DAT_0044e190 + 0x28,2,0);
-    temp_v0 = DAT_0044e190;
-    puVar3 = (unsigned int *)(DAT_0044e190 + 0x400);
-    *(unsigned int *)(DAT_0044e190 + 0x40c) = 0;
+  temp_v2 = g_statusDown;
+  if (*(int *)(g_statusDown + 0x400) != 0) {
+    timerStart(g_statusDown + 0x28,2,0);
+    temp_v0 = g_statusDown;
+    puVar3 = (unsigned int *)(g_statusDown + 0x400);
+    *(unsigned int *)(g_statusDown + 0x40c) = 0;
     temp_v1 = *(unsigned int *)(temp_v0 + 0x400);
     *puVar3 = 2;
     *(unsigned int *)(temp_v0 + 0x404) = temp_v1;
@@ -43,12 +43,12 @@ void FUN_0029bd4c(void)
     temp_v2 = 0;
     if (*(char *)(temp_v0 + 0x480) != '\0') {
       do {
-        FUN_002b8cc8();
+        ifTouchRegionRemove();
         temp_v2 = temp_v2 + 1;
       } while (temp_v2 < (int)(unsigned int)*(unsigned char *)(temp_v0 + 0x480));
     }
     *(unsigned char *)(temp_v0 + 0x480) = 0;
-    FUN_002c424c(temp_v0 + 0x42c,0x29,0xffffffff);
+    __aeabi_memset4(temp_v0 + 0x42c,0x29,0xffffffff);
     return;
   }
   return;

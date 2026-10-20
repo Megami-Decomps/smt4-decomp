@@ -13,7 +13,7 @@ int nw_snd_SoundArchive_SetExternalFileRoot(int, char *);
 extern int FUN_00130320(int, char *, int);
 /* Supplied declaration required: FUN_00130e50. */
 /* Supplied declaration required: FUN_002b4e00. */
-extern unsigned int FUN_002c30c4(char *);
+extern unsigned int libc_strlen(char *);
 /* Supplied declaration required: nw_snd_SoundArchive_SetExternalFileRoot. */
 
 
@@ -47,7 +47,7 @@ unsigned int FUN_00121824(int param_1,char *param_2)
   else if (aiStack_a0[0] == 0x40) {
     FUN_00130e50(param_1 + 300,temp_v5);
     FUN_0012f5ac(param_1,param_1 + 300);
-    temp_v2 = FUN_002c30c4(param_2);
+    temp_v2 = libc_strlen(param_2);
     do {
       temp_v0 = temp_v2;
       temp_v2 = temp_v0 - 1;

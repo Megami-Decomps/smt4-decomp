@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern Flags0C0C *FUN_00162e8c(void);
+extern Flags0C0C *gameFlagsGetBlock(void);
 
 void gameFlagsSet(s32 index, u8 value)
 {
-    Flags0C0C *obj = FUN_00162e8c();
+    Flags0C0C *obj = gameFlagsGetBlock();
 
     if (index < 0x40) {
         obj->flags[index] = value;

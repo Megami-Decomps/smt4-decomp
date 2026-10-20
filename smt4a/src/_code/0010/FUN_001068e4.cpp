@@ -6,14 +6,14 @@ extern "C" {
 
 int FUN_00106a5c(...);
 int FUN_0016cd18(unsigned int, int, int, int, int);
-int FUN_002e6e14(...);
-int FUN_002e9318(...);
+int asdOperatorDeleteArray(...);
+int onlineStringDestroy(...);
 int FUN_002ea100(...);
 int FUN_002ed8a0(unsigned int [2], int, unsigned int);
 int FUN_002ed91c(int, int);
 int FUN_002ed96e(int *, int, int);
 int FUN_002eda4a(unsigned char [20]);
-int FUN_002eda5a(unsigned char [12]);
+int vectorDestroyBytes(unsigned char [12]);
 int FUN_002eda74(int, int);
 int FUN_002eda80(int *, int, int *, int **);
 
@@ -51,17 +51,17 @@ extern int DAT_005949dc; /* 0x5949dc */
 extern int FUN_0016ceb8(unsigned int, unsigned int *, unsigned int, unsigned int, unsigned int);
 extern int FUN_001a0380(unsigned int);
 extern unsigned int rt_malloc(void);
-/* Supplied declaration required: FUN_002e6e14. */
-/* Supplied declaration required: FUN_002e9318. */
-extern int FUN_002e9520(unsigned char *, unsigned int);
+/* Supplied declaration required: asdOperatorDeleteArray. */
+/* Supplied declaration required: onlineStringDestroy. */
+extern int onlineStringCopyConstruct(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002ea100. */
 /* Supplied declaration required: FUN_002ed8a0. */
 extern int wordRefsEqual_002ed902(unsigned int *, int *);
-extern int FUN_002ed912(unsigned char *);
+extern int vectorInitEmpty2(unsigned char *);
 /* Supplied declaration required: FUN_002ed91c. */
 /* Supplied declaration required: FUN_002ed96e. */
 /* Supplied declaration required: FUN_002eda4a. */
-/* Supplied declaration required: FUN_002eda5a. */
+/* Supplied declaration required: vectorDestroyBytes. */
 /* Supplied declaration required: FUN_002eda74. */
 /* Supplied declaration required: FUN_002eda80. */
 
@@ -99,7 +99,7 @@ int FUN_001068e4(int param_1,int param_2,int param_3,int *param_4)
       temp_v0 = FUN_002ea100(&temp_v6,*(unsigned int *)(temp_v14 + (int)piVar4 * 4));
       FUN_002ed8a0(temp_v8,DAT_005949dc + 0x128,temp_v0);
       temp_v1 = wordRefsEqual_002ed902(temp_v8,&temp_v4);
-      FUN_002e9318(&temp_v6);
+      onlineStringDestroy(&temp_v6);
       if (temp_v1 != 0) goto LAB_001069c6;
     }
     for (piVar4 = (int *)0x0; piVar4 < param_4; piVar4 = (int *)((int)piVar4 + 1)) {
@@ -108,16 +108,16 @@ int FUN_001068e4(int param_1,int param_2,int param_3,int *param_4)
       temp_v3 = &temp_v7;
       puVar5 = temp_v9;
       temp_v4 = temp_v1;
-      temp_v6 = FUN_002ed912(temp_v10);
-      temp_v1 = FUN_002e9520(puVar5,temp_v0);
+      temp_v6 = vectorInitEmpty2(temp_v10);
+      temp_v1 = onlineStringCopyConstruct(puVar5,temp_v0);
       temp_v1 = temp_v1 + 8;
       FUN_002ed91c(temp_v1,temp_v6);
       FUN_002ed96e(temp_v3,temp_v4,temp_v1 - 8);
       temp_v1 = temp_v7;
       FUN_002eda4a(temp_v9);
-      FUN_002eda5a(temp_v10);
+      vectorDestroyBytes(temp_v10);
       FUN_002eda74((int)piVar4 * 0xc + temp_v13,temp_v1 + 0x18);
-      FUN_002e9318(temp_v11);
+      onlineStringDestroy(temp_v11);
     }
     temp_v1 = 1;
   }
@@ -142,13 +142,13 @@ LAB_001069c6:
       FUN_00106a5c(temp_v12,temp_v13,temp_v14,param_4);
       temp_v2 = FUN_001a0380((*(unsigned int *)&s__V_V_V_0058954c.u1[0]));
       if (-1 < temp_v2) {
-        FUN_002e6e14(temp_v8[0]);
+        asdOperatorDeleteArray(temp_v8[0]);
         return temp_v1;
       }
-      FUN_002e6e14(temp_v8[0]);
+      asdOperatorDeleteArray(temp_v8[0]);
     }
     else {
-      FUN_002e6e14(temp_v8[0]);
+      asdOperatorDeleteArray(temp_v8[0]);
     }
     temp_v1 = 0;
   }

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00218238(int, int, int, int, int);
 int FUN_00292960(char *, int);
 int btlGetMainState(void);
-int FUN_002beda4(...);
+int vec2GetXInt(...);
 int FUN_002bf288(int, int, int, int, int, int);
 int FUN_00330f80(int, int);
 
@@ -31,18 +31,18 @@ typedef struct {
 extern int FUN_0023dcb8(void);
 extern int FUN_00292914(int);
 /* Supplied declaration required: FUN_00292960. */
-extern int padIsButtonDown(void);
+extern int flagBitIsSet(void);
 extern int FUN_00293988(void);
 /* Supplied declaration required: btlGetMainState. */
 extern int FUN_0029e908(int);
 extern unsigned int FUN_0029e958(int);
-extern int FUN_002a8740(void);
-extern int FUN_002a8764(void);
-extern int FUN_002bed98(int);
-/* Supplied declaration required: FUN_002beda4. */
+extern int gameGetUnitRecord(void);
+extern int gameGetSlotTable(void);
+extern int vec2GetYInt(int);
+/* Supplied declaration required: vec2GetXInt. */
 /* Supplied declaration required: FUN_002bf288. */
 extern int FUN_002bf4f8(unsigned int, int);
-extern int FUN_002c09d0(void);
+extern int gameFlagIsSet(void);
 /* Supplied declaration required: FUN_00330f80. */
 
 
@@ -73,11 +73,11 @@ void FUN_0025ee64(int param_1)
   if ((temp_v2 == 0x10 || temp_v2 == 0x11) || (temp_v2 == 0x29 || temp_v2 == 0x2d)) {
     temp_v1 = 0;
   }
-  temp_v2 = FUN_002beda4(param_1 + 0x20);
+  temp_v2 = vec2GetXInt(param_1 + 0x20);
   temp_v3 = param_1 + 0x12b8;
-  temp_v4 = FUN_002beda4();
-  temp_v5 = FUN_002bed98(param_1 + 0x20);
-  temp_v6 = FUN_002bed98(temp_v3);
+  temp_v4 = vec2GetXInt();
+  temp_v5 = vec2GetYInt(param_1 + 0x20);
+  temp_v6 = vec2GetYInt(temp_v3);
   FUN_002bf288(2,0x15,0xdb,temp_v2 + temp_v4,temp_v5 + temp_v6,0x29);
   FUN_002bf288(2,0x15,0xdc,temp_v2 + temp_v4,temp_v5 + temp_v6,0x29);
   temp_v2 = FUN_0029e908(param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088);
@@ -87,10 +87,10 @@ void FUN_0025ee64(int param_1)
     do {
       if ((!temp_v1) || (temp_v4 != temp_v2)) {
         temp_v11 = param_1 + temp_v4 * 0x8c;
-        temp_v5 = FUN_002beda4(temp_v11 + 0x138);
-        temp_v6 = FUN_002beda4(temp_v3);
-        temp_v11 = FUN_002bed98(temp_v11 + 0x138);
-        temp_v8 = FUN_002bed98(temp_v3);
+        temp_v5 = vec2GetXInt(temp_v11 + 0x138);
+        temp_v6 = vec2GetXInt(temp_v3);
+        temp_v11 = vec2GetYInt(temp_v11 + 0x138);
+        temp_v8 = vec2GetYInt(temp_v3);
         if ((temp_v7 & 1) != 0) {
           temp_v15 = FUN_002bf4f8(0x15,temp_v4 + (int)(7 - temp_v7) / 2 + 0xff);
         }
@@ -99,7 +99,7 @@ void FUN_0025ee64(int param_1)
         }
         temp_v0 = '\0';
         temp_v14 = 0;
-        temp_v9 = FUN_002a8764();
+        temp_v9 = gameGetSlotTable();
         temp_v12 = 0;
         do {
           pcVar11 = (char *)(temp_v12 & 0xff);
@@ -107,11 +107,11 @@ void FUN_0025ee64(int param_1)
           temp_v13 = 0;
           if ((*(int *)(param_1 + 0x305c) != 0) &&
              (-1 < *(char *)(*(int *)(param_1 + 0x305c) + temp_v9 + 0x9107))) {
-            temp_v13 = FUN_002a8740();
+            temp_v13 = gameGetUnitRecord();
           }
           if (((((pcVar11 != (char *)0x0) && (pcVar11[1] == '\x01')) &&
-               ((*(short *)(pcVar11 + 0x5c) == 0 || (temp_v10 = FUN_002c09d0(), temp_v10 != 0)))) &&
-              ((*(short *)(pcVar11 + 0x5e) == 0 || (temp_v10 = padIsButtonDown(), temp_v10 != 0)))) &&
+               ((*(short *)(pcVar11 + 0x5c) == 0 || (temp_v10 = gameFlagIsSet(), temp_v10 != 0)))) &&
+              ((*(short *)(pcVar11 + 0x5e) == 0 || (temp_v10 = flagBitIsSet(), temp_v10 != 0)))) &&
              ((pcVar11[0x5b] == '\0' ||
               (temp_v10 = btlGetMainState(), (*(unsigned int *)(temp_v10 + 0x44a0) & 0x40000) == 0)))) {
             if (*pcVar11 != '\x05') {
@@ -156,10 +156,10 @@ LAB_0025f1b8:
   }
   if (temp_v1) {
     temp_v6 = param_1 + temp_v2 * 0x8c;
-    temp_v4 = FUN_002beda4(temp_v6 + 0x138);
-    temp_v5 = FUN_002beda4(temp_v3);
-    temp_v6 = FUN_002bed98(temp_v6 + 0x138);
-    temp_v3 = FUN_002bed98(temp_v3);
+    temp_v4 = vec2GetXInt(temp_v6 + 0x138);
+    temp_v5 = vec2GetXInt(temp_v3);
+    temp_v6 = vec2GetYInt(temp_v6 + 0x138);
+    temp_v3 = vec2GetYInt(temp_v3);
     if ((temp_v7 & 1) != 0) {
       temp_v11 = FUN_002bf4f8(0x15,temp_v2 + (int)(7 - temp_v7) / 2 + 0x182);
     }

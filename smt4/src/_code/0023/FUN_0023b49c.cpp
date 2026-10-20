@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_0023e3ec(int, unsigned int);
-int FUN_002a5ed0(int, unsigned int);
-int FUN_002a6100(int, unsigned int);
+int asdTMTexTableLoadEntryAsync(int, unsigned int);
+int asdTMTexTableLoadEntryAsyncB(int, unsigned int);
 
 /* Supplied declaration required: FUN_0023e3ec. */
-/* Supplied declaration required: FUN_002a5ed0. */
-/* Supplied declaration required: FUN_002a6100. */
+/* Supplied declaration required: asdTMTexTableLoadEntryAsync. */
+/* Supplied declaration required: asdTMTexTableLoadEntryAsyncB. */
 
 
 void FUN_0023b49c(int param_1,unsigned int param_2,unsigned int param_3)
@@ -29,12 +29,12 @@ void FUN_0023b49c(int param_1,unsigned int param_2,unsigned int param_3)
         return;
       }
       temp_v0 = 0x16;
-      FUN_002a5ed0(0x16,param_3);
+      asdTMTexTableLoadEntryAsync(0x16,param_3);
       *(unsigned int *)(param_1 + 8) = temp_v0;
       return;
     }
     temp_v0 = 0x16;
-    FUN_002a6100(0x16,param_3);
+    asdTMTexTableLoadEntryAsyncB(0x16,param_3);
   }
   *(unsigned int *)(param_1 + 8) = temp_v0;
   return;

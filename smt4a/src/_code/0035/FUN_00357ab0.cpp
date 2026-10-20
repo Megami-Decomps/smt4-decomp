@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_00587f28; /* 0x587f28 */
+extern int g_naviMain; /* 0x587f28 */
 
 
 void FUN_00357ab0(unsigned int *param_1)
@@ -14,10 +14,10 @@ void FUN_00357ab0(unsigned int *param_1)
   unsigned int temp_v1;
   unsigned int temp_v2;
   
-  temp_v0 = DAT_00587f28;
+  temp_v0 = g_naviMain;
   temp_v1 = param_1[1];
   temp_v2 = param_1[2];
-  *(unsigned int *)(DAT_00587f28 + 0x1c) = *param_1;
+  *(unsigned int *)(g_naviMain + 0x1c) = *param_1;
   *(unsigned int *)(temp_v0 + 0x20) = temp_v1;
   *(unsigned int *)(temp_v0 + 0x24) = temp_v2;
   *(unsigned char *)(temp_v0 + 9) = 1;

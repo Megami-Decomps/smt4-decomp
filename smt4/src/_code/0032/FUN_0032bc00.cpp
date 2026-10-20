@@ -32,7 +32,7 @@ typedef struct {
 } param_2_stack;
 
 extern unsigned char LAB_0032bffc; /* 0x32bffc */
-extern int DAT_0044e190; /* 0x44e190 */
+extern int g_statusDown; /* 0x44e190 */
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -49,8 +49,8 @@ extern int FUN_0029efc0(void);
 /* Supplied declaration required: FUN_002b6758. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: FUN_002be624. */
-extern int FUN_002bed98(int);
-extern int FUN_002beda4(int);
+extern int vec2GetYInt(int);
+extern int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf4f8. */
@@ -82,8 +82,8 @@ void FUN_0032bc00(int param_1,int param_2)
   unsigned char temp_v14 [64];
   int temp_v15;
   
-  temp_v2 = DAT_0044e190;
-  temp_v3 = DAT_0044e190 + 0xdcc;
+  temp_v2 = g_statusDown;
+  temp_v3 = g_statusDown + 0xdcc;
   temp_v15 = temp_v3;
   temp_v4 = FUN_0029efc0();
   temp_v3 = FUN_0029efa8(temp_v3);
@@ -193,9 +193,9 @@ void FUN_0032bc00(int param_1,int param_2)
     FUN_0029a17c((int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v6 + 8) + param_1,
                  (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v6 + 10) + param_2,
                  (int)**(short **)(temp_v6 + 0xc),(int)(*(short **)(temp_v6 + 0xc))[1],1);
-    temp_v3 = FUN_002bed98(temp_v2 + 0x1cc);
+    temp_v3 = vec2GetYInt(temp_v2 + 0x1cc);
     temp_v0 = *(short *)(temp_v4 + 10);
-    temp_v6 = FUN_002beda4(temp_v2 + 0x1cc);
+    temp_v6 = vec2GetXInt(temp_v2 + 0x1cc);
     FUN_002bf288(2,0x1a,0x422,temp_v6 + param_1 + (int)*(short *)(temp_v4 + 8),
                  temp_v3 + param_2 + (int)temp_v0,0xc9);
     temp_v3 = g_titleScene;

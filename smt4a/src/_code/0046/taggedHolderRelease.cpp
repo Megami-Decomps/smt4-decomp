@@ -16,9 +16,9 @@ typedef struct TaggedHolder {
 } TaggedHolder;
 
 extern void vcallSlot12IfValid(Object *object);
-extern void FUN_00195fc8(void);
+extern void sysFatalBreak(void);
 
-/* Releases the tagged object (bit 0 set: FUN_00195fc8 runs first) once the enabled flags are set, then clears the flag at +0x50. */
+/* Releases the tagged object (bit 0 set: sysFatalBreak runs first) once the enabled flags are set, then clears the flag at +0x50. */
 void taggedHolderRelease(TaggedHolder *obj)
 {
     Tagged4 *owner;
@@ -27,7 +27,7 @@ void taggedHolderRelease(TaggedHolder *obj)
         owner = obj->owner;
         if ((owner->tagged & ~1u) != 0) {
             if ((owner->tagged & 1) != 0) {
-                FUN_00195fc8();
+                sysFatalBreak();
             }
             vcallSlot12IfValid((Object *)(owner->tagged & ~1u));
             owner->tagged = 0;

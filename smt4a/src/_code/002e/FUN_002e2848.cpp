@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00169ddc(int);
+int eventQueueAddUnique(int);
 int FUN_002a4844(...);
 int FUN_002a4914(...);
 int FUN_002a4964(...);
@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_8_stack;
 
-/* Supplied declaration required: FUN_00169ddc. */
+/* Supplied declaration required: eventQueueAddUnique. */
 extern short FUN_002618c8(void);
 extern short FUN_002618e0(void);
 extern int FUN_00284140(int);
@@ -84,7 +84,7 @@ FUN_002e2848(unsigned int param_1,unsigned int param_2,int param_3,short param_4
       temp_v1 = FUN_002a4894(param_1);
       temp_v2 = FUN_002a4860(param_1);
       if (temp_v2 + temp_v1 != (int)temp_v0 && param_8 != 0) {
-        FUN_00169ddc(0x100020d);
+        eventQueueAddUnique(0x100020d);
       }
       FUN_002a4964(param_1,(int)temp_v0);
       return 1;
@@ -130,7 +130,7 @@ FUN_002e2848(unsigned int param_1,unsigned int param_2,int param_3,short param_4
     }
   }
   if (param_8 != 0) {
-    FUN_00169ddc(0x100020d);
+    eventQueueAddUnique(0x100020d);
   }
   return 1;
 }

@@ -4,16 +4,16 @@
 
 extern "C" {
 
-extern int DAT_0044cdf0; /* 0x44cdf0 */
+extern int g_naviMain; /* 0x44cdf0 */
 
 
 unsigned char NaviMain_IsMapOpen(void)
 
 {
-  if (DAT_0044cdf0 == 0) {
+  if (g_naviMain == 0) {
     return 0;
   }
-  return *(int *)(DAT_0044cdf0 + 0x44) == 4 || *(int *)(DAT_0044cdf0 + 0x44) == 6;
+  return *(int *)(g_naviMain + 0x44) == 4 || *(int *)(g_naviMain + 0x44) == 6;
 }
 
 } /* extern "C" */

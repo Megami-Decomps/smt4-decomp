@@ -15,9 +15,9 @@ extern int DAT_00464b10; /* 0x464b10 */
 extern int DAT_00464b1c; /* 0x464b1c */
 extern int DAT_00464b20; /* 0x464b20 */
 extern int DAT_00464b24; /* 0x464b24 */
-extern int DAT_00464b9c; /* 0x464b9c */
+extern int g_asdModelSlotArray0; /* 0x464b9c */
 extern int DAT_00464ba0; /* 0x464ba0 */
-extern unsigned int DAT_00464bb4; /* 0x464bb4 */
+extern unsigned int g_asdModelSlotArray3; /* 0x464bb4 */
 extern unsigned int DAT_00464bbc; /* 0x464bbc */
 extern unsigned int DAT_00464bc0; /* 0x464bc0 */
 
@@ -37,8 +37,8 @@ void FUN_002cbaf8(int param_1,int param_2)
   int temp_v3;
   
   temp_v1 = DAT_00464ba0;
-  temp_v0 = DAT_00464b9c;
-  temp_v2 = *(int *)((&DAT_00464bb4)[param_2] + 4);
+  temp_v0 = g_asdModelSlotArray0;
+  temp_v2 = *(int *)((&g_asdModelSlotArray3)[param_2] + 4);
   if (param_2 != 0) {
     if (param_2 == 1) {
       temp_v3 = DAT_00464b1c;
@@ -64,8 +64,8 @@ void FUN_002cbaf8(int param_1,int param_2)
     return;
   }
   temp_v3 = DAT_00464b10;
-  piVar5 = *(int **)(DAT_00464b9c + 0x1c);
-  for (piVar3 = *(int **)(DAT_00464b9c + 0x18); (piVar3 != piVar5 && (*piVar3 != DAT_00464b10));
+  piVar5 = *(int **)(g_asdModelSlotArray0 + 0x1c);
+  for (piVar3 = *(int **)(g_asdModelSlotArray0 + 0x18); (piVar3 != piVar5 && (*piVar3 != DAT_00464b10));
       piVar3 = piVar3 + 1) {
   }
   piVar4 = piVar3;

@@ -1,4 +1,4 @@
-/* Starts the new scene: records the current scrGetArg value and (re)initializes the transition state with FUN_002360dc(1); returns 1. */
+/* Starts the new scene: records the current scrGetArg value and (re)initializes the transition state with scrGetArgString(1); returns 1. */
 #include "common.h"
 
 extern "C" {
@@ -13,16 +13,16 @@ typedef struct SceneState {
 extern SceneState g_gameState;
 
 extern u32 scrGetArg(void);
-extern u32 FUN_002360dc(u32 arg);
-extern void FUN_002e342c(void *transition, u32 value);
+extern u32 scrGetArgString(u32 arg);
+extern void libc_strcpy(void *transition, u32 value);
 
 u32 FUN_0035cfa0(void)
 {
     u32 value = scrGetArg();
-    u32 transition = FUN_002360dc(1);
+    u32 transition = scrGetArgString(1);
 
     g_gameState.value = value;
-    FUN_002e342c(g_gameState.transition, transition);
+    libc_strcpy(g_gameState.transition, transition);
     return 1;
 }
 

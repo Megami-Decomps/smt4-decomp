@@ -8,13 +8,13 @@ typedef struct {
     s32 handle;         /* 0x15cc */
 } HandleOwner;
 
-HandleOwner *FUN_00162e8c(void);
+HandleOwner *gameFlagsGetBlock(void);
 void scrSetResult(s32 result);
 s32 FUN_003857c8(s32 handle);
 
 u32 FUN_003bb26c(void)
 {
-    HandleOwner *owner = FUN_00162e8c();
+    HandleOwner *owner = gameFlagsGetBlock();
     scrSetResult(owner->handle != 0 ? FUN_003857c8(owner->handle) : 1);
     return 1;
 }

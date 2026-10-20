@@ -15,15 +15,15 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } void_stack;
 
-extern int DAT_0043dcf0; /* 0x43dcf0 */
+extern int g_partyPanel; /* 0x43dcf0 */
 
 /* Supplied declaration required: FUN_00269c7c. */
 /* Supplied declaration required: FUN_0026c9c0. */
 /* Supplied declaration required: FUN_00293700. */
 /* Supplied declaration required: FUN_0029378c. */
 extern int FUN_00295d7c(void);
-extern int FUN_002a8740(unsigned int);
-extern int FUN_002a8764(void);
+extern int gameGetUnitRecord(unsigned int);
+extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_002e36f8. */
 
 
@@ -38,8 +38,8 @@ void FUN_001d13b0(void)
   int temp_v3;
   int temp_v4;
   
-  temp_v0 = DAT_0043dcf0;
-  temp_v1 = FUN_002a8764();
+  temp_v0 = g_partyPanel;
+  temp_v1 = gameGetSlotTable();
   piVar4 = (int *)(temp_v0 + 0x6c8);
   FUN_0029378c(*(unsigned int *)(temp_v0 + 0x6c8),0);
   FUN_00293700(*(unsigned int *)(temp_v0 + 0x6c8),*(char *)(temp_v0 + 0x42) == '\x01');
@@ -82,7 +82,7 @@ void FUN_001d13b0(void)
     else {
       *(unsigned char *)(*(int *)(temp_v3 + 0x6d8) + 0x20) = 0;
       *(unsigned int *)(*piVar4 + 0x34) = *(unsigned int *)(temp_v4 + 0x738);
-      temp_v4 = FUN_002a8740(*(unsigned int *)(temp_v4 + 0x738));
+      temp_v4 = gameGetUnitRecord(*(unsigned int *)(temp_v4 + 0x738));
       temp_v2 = FUN_00295d7c();
       *(unsigned char *)(*(int *)(temp_v3 + 0x6d8) + 0x23) = temp_v2 != 0;
       *(unsigned char *)(*(int *)(temp_v3 + 0x6d8) + 0x24) = (*(unsigned short *)(temp_v4 + 0x44) & 0x400) != 0;

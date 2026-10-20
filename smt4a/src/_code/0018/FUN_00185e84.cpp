@@ -7,9 +7,9 @@ extern "C" {
 int FUN_0017ffa8(int, int, unsigned int, int, int, int);
 int FUN_00180310(...);
 int FUN_00183bb0(void);
-int FUN_00184e64(void);
+int drawSetColorFromRGBA8(void);
 int FUN_0019d390(void);
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 
 /* stack frame of param_6: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -26,11 +26,11 @@ extern unsigned char LAB_00186004; /* 0x186004 */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00183bb0. */
 extern unsigned int FUN_0018439c(unsigned int);
-/* Supplied declaration required: FUN_00184e64. */
-extern int FUN_0019c6bc(void);
+/* Supplied declaration required: drawSetColorFromRGBA8. */
+extern int idIsAbove400(void);
 /* Supplied declaration required: FUN_0019d390. */
 extern int FUN_0019f240(unsigned int);
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: dataTable04FindById. */
 
 
 void FUN_00185e84(unsigned int param_1,int param_2,int param_3,int param_4,int param_5,int param_6)
@@ -54,13 +54,13 @@ void FUN_00185e84(unsigned int param_1,int param_2,int param_3,int param_4,int p
     if (param_1 == 0xffffff9d) {
       return;
     }
-    temp_v1 = FUN_0019c6bc();
+    temp_v1 = idIsAbove400();
     if (temp_v1 != 0) {
       temp_v0 = 0x419;
     }
     else {
       temp_v2 = param_1;
-      FUN_001aba54();
+      dataTable04FindById();
       if (temp_v2 == 0) {
         temp_v0 = 1000;
       }
@@ -78,7 +78,7 @@ void FUN_00185e84(unsigned int param_1,int param_2,int param_3,int param_4,int p
       temp_v2 = param_1 & 0xff;
     }
     if (temp_v2 >= 2) {
-      FUN_00184e64();
+      drawSetColorFromRGBA8();
       temp_v1 = FUN_001834a4(0xb,0x402);
       FUN_00180310(2,*(short *)(temp_v1 + 8) + param_2,*(short *)(temp_v1 + 10) + param_3,0,1,
                    param_4 + 1,&LAB_00186000);

@@ -7,7 +7,7 @@ extern u32 scrGetArg(u32 index);
 extern void scrSetResult(u32 value);
 extern u32 FUN_0029c1fc(void);
 extern void FUN_0029c1c8(u32 object, u32 arg, int flag);
-extern void *DAT_00439ca8; /* object the hook is given */
+extern void *g_btlUiBlock; /* object the hook is given */
 
 /* Script command: creates an object from argument 0 and returns it. */
 s32 FUN_0030ae1c(void)
@@ -16,7 +16,7 @@ s32 FUN_0030ae1c(void)
     u32 object = FUN_0029c1fc();
 
     FUN_0029c1c8(object, arg, 0);
-    asdDebugHookPtr(DAT_00439ca8);
+    asdDebugHookPtr(g_btlUiBlock);
     scrSetResult(object);
     return 1;
 }

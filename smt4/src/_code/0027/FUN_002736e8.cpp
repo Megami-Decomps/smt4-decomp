@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_00289508(void);
+int gameJumpRequestClear(void);
 int FUN_002900d0(void);
 int FUN_0029016c(unsigned int, int);
-int FUN_00296f4c(int, int);
+int scrScriptProcessStartEntry(int, int);
 int FUN_00297060(void);
 int FUN_00297468(unsigned char *, int *, int);
 
@@ -15,11 +15,11 @@ extern unsigned char LAB_002737d4; /* 0x2737d4 */
 extern unsigned char LAB_002737ec; /* 0x2737ec */
 
 extern int FUN_0019e0c0(int);
-/* Supplied declaration required: FUN_00289508. */
+/* Supplied declaration required: gameJumpRequestClear. */
 /* Supplied declaration required: FUN_002900d0. */
 /* Supplied declaration required: FUN_0029016c. */
 extern unsigned int FUN_002903f0(void);
-/* Supplied declaration required: FUN_00296f4c. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297060. */
 /* Supplied declaration required: FUN_00297468. */
 
@@ -42,7 +42,7 @@ unsigned int FUN_002736e8(int *param_1)
         temp_v1 = FUN_002903f0();
         FUN_0029016c(temp_v1,0);
         FUN_002900d0();
-        FUN_00289508();
+        gameJumpRequestClear();
         *param_1 = 4;
         return 0;
       }
@@ -61,7 +61,7 @@ unsigned int FUN_002736e8(int *param_1)
     FUN_00297060();
     param_1[5] = temp_v0;
     *(unsigned int *)(temp_v0 + 0x108) = 2;
-    FUN_00296f4c(param_1[5],param_1[1]);
+    scrScriptProcessStartEntry(param_1[5],param_1[1]);
     temp_v0 = 2;
   }
   else {

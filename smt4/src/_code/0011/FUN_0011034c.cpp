@@ -15,7 +15,7 @@ int FUN_0011d934(void);
 int FUN_0011d9a4(void);
 int FUN_002bb120(unsigned int);
 int FUN_002bb130(unsigned int);
-int FUN_002bb308(void);
+int nn_applet_CTR_detail_CloseSession(void);
 int FUN_002bb378(void);
 int FUN_002c131c(int, int);
 
@@ -44,7 +44,7 @@ extern unsigned int FUN_002bb110(void);
 /* Supplied declaration required: FUN_002bb120. */
 /* Supplied declaration required: FUN_002bb130. */
 extern int FUN_002bb2c8(void);
-/* Supplied declaration required: FUN_002bb308. */
+/* Supplied declaration required: nn_applet_CTR_detail_CloseSession. */
 /* Supplied declaration required: FUN_002bb378. */
 /* Supplied declaration required: FUN_002c131c. */
 
@@ -89,7 +89,7 @@ int FUN_0011034c(unsigned int param_1,unsigned int param_2,unsigned int param_3)
         }
         FUN_0011d20c();
         FUN_0011d3fc(param_3,temp_v3,temp_v4);
-        FUN_002bb308();
+        nn_applet_CTR_detail_CloseSession();
         temp_v0 = FUN_002bb2c8();
         if (temp_v0 == 0) {
           FUN_0011d0ec();

@@ -10,8 +10,8 @@ int SBORROW4(int, int);
 extern int randRange(unsigned int);
 extern int btlGetMainState(void);
 extern int flagWordTestBit(int, unsigned int);
-extern int FUN_002a8740(void);
-extern int FUN_002a8764(void);
+extern int gameGetUnitRecord(void);
+extern int gameGetSlotTable(void);
 
 
 unsigned int FUN_003bef90(void)
@@ -31,12 +31,12 @@ unsigned int FUN_003bef90(void)
   temp_v1 = btlGetMainState();
   if (*(int *)(temp_v1 + 0xc4) < 0) {
     temp_v7 = 0;
-    temp_v1 = FUN_002a8764();
+    temp_v1 = gameGetSlotTable();
     temp_v6 = 0;
     if (*(char *)(temp_v1 + 0x910b) != '\0') {
       do {
         if (-1 < *(char *)(temp_v1 + temp_v6 + 0x90f0)) {
-          temp_v2 = FUN_002a8740();
+          temp_v2 = gameGetUnitRecord();
           temp_v3 = flagWordTestBit(temp_v2,10);
           if (temp_v3 != 0) {
             temp_v0 = *(unsigned char *)(temp_v2 + 0x600);

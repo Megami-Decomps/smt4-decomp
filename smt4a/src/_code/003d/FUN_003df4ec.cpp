@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_001801a4(void);
+extern int gameGetPlayerData(void);
 
 
 void FUN_003df4ec(unsigned int param_1)
@@ -13,7 +13,7 @@ void FUN_003df4ec(unsigned int param_1)
   int temp_v0;
   int temp_v1;
   
-  temp_v0 = FUN_001801a4();
+  temp_v0 = gameGetPlayerData();
   temp_v1 = 0;
   do {
     if (*(unsigned short *)(temp_v0 + temp_v1 * 2 + 0x34) == param_1) {

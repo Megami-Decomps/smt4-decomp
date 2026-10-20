@@ -15,9 +15,9 @@ extern unsigned int DAT_005739a0; /* 0x5739a0 */
 extern unsigned int DAT_005739a4; /* 0x5739a4 */
 
 /* Unsupported intrinsic, declaration required: SCARRY4 (INT_SCARRY). */
-extern int FUN_001801a4(void);
-extern int FUN_001ab854(int);
-extern int FUN_001ab888(void);
+extern int gameGetPlayerData(void);
+extern int gameGetSlotRecord(int);
+extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_004c6c08. */
 
 
@@ -65,14 +65,14 @@ void FUN_003f135c(int param_1)
     }
     temp_v4 = temp_v4 + 1;
     if (temp_v4 >= 0x6d) {
-      temp_v4 = FUN_001ab888();
+      temp_v4 = gameGetSlotTable();
       temp_v5 = -1;
       temp_v1 = (unsigned int)*(unsigned char *)(temp_v4 + 0x1ca3);
       if (temp_v1 == 0xffffffff || SCARRY4(temp_v1,1)) {
         return;
       }
 LAB_003f1464:
-      temp_v2 = FUN_001801a4();
+      temp_v2 = gameGetPlayerData();
       temp_v2 = temp_v2 + 0x5e;
       do {
         FUN_004c6c08(temp_v2);
@@ -82,7 +82,7 @@ LAB_003f1464:
             return;
           }
           if (temp_v5 < 0) goto LAB_003f1464;
-          temp_v2 = FUN_001ab854(temp_v5);
+          temp_v2 = gameGetSlotRecord(temp_v5);
         } while (temp_v2 == 0);
         temp_v2 = temp_v2 + 0x60;
       } while( 1 );

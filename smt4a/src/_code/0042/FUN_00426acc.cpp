@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001029f4(unsigned int, int, int);
-int FUN_00195fc8(void);
+int sysFatalBreak(void);
 int recordTableAppend(unsigned char *);
 int FUN_00427d6c(int);
 int FUN_00427e10(void);
@@ -43,8 +43,8 @@ extern unsigned char DAT_00642980; /* 0x642980 */
 extern unsigned char DAT_00642b80; /* 0x642b80 */
 
 /* Supplied declaration required: FUN_001029f4. */
-/* Supplied declaration required: FUN_00195fc8. */
-extern int FUN_0019a37c(unsigned int, unsigned char *, unsigned int);
+/* Supplied declaration required: sysFatalBreak. */
+extern int libc_strncmp(unsigned int, unsigned char *, unsigned int);
 /* Supplied declaration required: recordTableAppend. */
 /* Supplied declaration required: FUN_00427d6c. */
 /* Supplied declaration required: FUN_00427e10. */
@@ -160,7 +160,7 @@ void FUN_00426acc(int param_1,int param_2,unsigned int param_3,int *param_4)
           temp_v3 = 0;
           if (temp_v3 < temp_v7) {
             do {
-              temp_v0 = FUN_0019a37c(*(unsigned int *)(puVar5[6] + temp_v3 * 8),&LAB_00426de4,0x40);
+              temp_v0 = libc_strncmp(*(unsigned int *)(puVar5[6] + temp_v3 * 8),&LAB_00426de4,0x40);
               if (temp_v0 == 0) {
                 temp_v3 = *(unsigned int *)(puVar5[6] + temp_v3 * 8 + 4);
                 goto LAB_00426cb8;
@@ -201,7 +201,7 @@ LAB_00426cb8:
             temp_v0 = 1;
           }
           else {
-            FUN_00195fc8();
+            sysFatalBreak();
             temp_v0 = 0;
           }
           temp_v10 = (temp_v1 & 0xff000000) | temp_v7 | ((temp_v4 & 0xff) << 8) | (temp_v0 << 0x10);

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b46f8(unsigned int *, char [10], unsigned int, int, unsigned char *);
+int libc_bsearch(unsigned int *, char [10], unsigned int, int, unsigned char *);
 
 /* stack frame of param_2: 5 slot(s), 18 byte(s) */
 typedef struct {
@@ -19,7 +19,7 @@ extern unsigned char LAB_001e16cc; /* 0x1e16cc */
 extern unsigned int DAT_0043e3b0; /* 0x43e3b0 */
 extern char s___e222_01_0043e3c8[10]; /* 0x43e3c8 */
 
-/* Supplied declaration required: FUN_002b46f8. */
+/* Supplied declaration required: libc_bsearch. */
 
 
 int FUN_002897f0(unsigned short param_1,unsigned int *param_2)
@@ -39,7 +39,7 @@ int FUN_002897f0(unsigned short param_1,unsigned int *param_2)
   temp_v3 = param_2[2];
   puVar1 = (unsigned int *)&temp_v1;
   temp_v4 = param_1;
-  FUN_002b46f8(puVar1,s___e222_01_0043e3c8,DAT_0043e3b0,0x10,&LAB_001e16cc);
+  libc_bsearch(puVar1,s___e222_01_0043e3c8,DAT_0043e3b0,0x10,&LAB_001e16cc);
   if (puVar1 != (unsigned int *)0x0) {
     temp_v0 = *(unsigned short *)((int)puVar1 + 0xe) + 0x820;
   }

@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_5_stack;
 
-extern int DAT_005b40e0; /* 0x5b40e0 */
+extern int g_commandBufferCursor; /* 0x5b40e0 */
 extern unsigned int *DAT_0061a50c; /* 0x61a50c */
 
 /* Supplied declaration required: FUN_001a9f08. */
@@ -34,7 +34,7 @@ int FUN_00196068(unsigned int param_1,unsigned int param_2,int param_3,unsigned 
     } while (temp_v0 != param_1 && puVar1 != (unsigned int *)0x0);
   }
   if (DAT_0061a50c == puVar1) {
-    puVar1[3] = DAT_005b40e0 - puVar1[1];
+    puVar1[3] = g_commandBufferCursor - puVar1[1];
   }
   FUN_001a9f08();
   return param_3 + param_5 * 0x1c + 0x10;

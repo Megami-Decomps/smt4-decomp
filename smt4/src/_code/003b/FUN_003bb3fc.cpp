@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002a60b4(...);
-int FUN_002ae898(int, int);
-int FUN_002af5c0(int, int, int);
+int asdTMTexTableNodeIsLoaded(...);
+int asdTMTexTableReleaseNode(int, int);
+int uiSpriteSetImageKeyframe(int, int, int);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -15,9 +15,9 @@ typedef struct {
 } param_1_stack;
 
 extern int FUN_0023360c(int);
-/* Supplied declaration required: FUN_002a60b4. */
-/* Supplied declaration required: FUN_002ae898. */
-/* Supplied declaration required: FUN_002af5c0. */
+/* Supplied declaration required: asdTMTexTableNodeIsLoaded. */
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 extern int FUN_002bf818(int);
 
 
@@ -45,7 +45,7 @@ void FUN_003bb3fc(int param_1)
   if (*(char *)(param_1 + 0x6cd) != '\0') {
     *(int *)(param_1 + 0xcf8) = (*(int *)(param_1 + 0xcf8) + 1) % 0x10;
   }
-  if (((*(int *)(param_1 + 0xd10) != -1) && (temp_v2 = FUN_002a60b4(0x2a), temp_v2 != 0)) &&
+  if (((*(int *)(param_1 + 0xd10) != -1) && (temp_v2 = asdTMTexTableNodeIsLoaded(0x2a), temp_v2 != 0)) &&
      (*(char *)(param_1 + 0xcf2) != '\0')) {
     temp_v2 = FUN_0023360c(temp_v0);
     if (*(int *)(param_1 + 0xd10) == *(unsigned short *)(*(int *)(temp_v0 + temp_v2 * 4 + 0x530) + 0x5a) + 1) {
@@ -54,7 +54,7 @@ void FUN_003bb3fc(int param_1)
       *(unsigned int *)(param_1 + 0xd0c) = 0xffffffff;
       *(unsigned int *)(param_1 + 0xd04) = temp_v4;
       *(unsigned int *)(param_1 + 0xd10) = 0xffffffff;
-      FUN_002af5c0(param_1 + 0xc68,1,0);
+      uiSpriteSetImageKeyframe(param_1 + 0xc68,1,0);
     }
   }
   if ((*(int *)(param_1 + 0xd04) != -1) && (temp_v2 = FUN_002bf818(param_1 + 0xc68), temp_v2 != 0)) {
@@ -69,8 +69,8 @@ void FUN_003bb3fc(int param_1)
          ((*(int *)(param_1 + 0xd00) == -1 || (*(int *)(param_1 + 0xd00) != temp_v2)))) &&
         ((*(int *)(param_1 + 0xd08) == -1 || (*(int *)(param_1 + 0xd08) != temp_v2)))) &&
        (((*(int *)(param_1 + 0xd10) == -1 || (*(int *)(param_1 + 0xd10) != temp_v2)) &&
-        (temp_v3 = FUN_002a60b4(0x2a,temp_v2), temp_v3 != 0)))) {
-      FUN_002ae898(0x2a,temp_v2);
+        (temp_v3 = asdTMTexTableNodeIsLoaded(0x2a,temp_v2), temp_v3 != 0)))) {
+      asdTMTexTableReleaseNode(0x2a,temp_v2);
       *(unsigned char *)(temp_v0 + temp_v2 + 0xc78) = 0;
     }
     temp_v2 = temp_v2 + 1;

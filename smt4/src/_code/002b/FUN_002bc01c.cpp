@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002b8e84(void);
+int eventQueueAddUnique(void);
 
-/* Supplied declaration required: FUN_002b8e84. */
+/* Supplied declaration required: eventQueueAddUnique. */
 
 
 void FUN_002bc01c(int param_1)
@@ -14,7 +14,7 @@ void FUN_002bc01c(int param_1)
 {
 /* irregular: 1 native warning(s); review required */
   if (-1 < param_1) {
-    FUN_002b8e84();
+    eventQueueAddUnique();
     return;
   }
   return;

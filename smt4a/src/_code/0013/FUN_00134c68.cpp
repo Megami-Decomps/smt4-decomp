@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6e14(void);
+int asdOperatorDeleteArray(void);
 int FUN_003077ce(...);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
@@ -13,7 +13,7 @@ typedef struct {
 } param_3_stack;
 
 extern int rt_malloc(void);
-/* Supplied declaration required: FUN_002e6e14. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
 /* Supplied declaration required: FUN_003077ce. */
 
 
@@ -66,7 +66,7 @@ void FUN_00134c68(int *param_1,unsigned int *param_2,unsigned int *param_3)
   temp_v3 = param_1[1] - temp_v2;
   for (; temp_v2 != param_1[1]; temp_v2 = temp_v2 + 4) {
   }
-  FUN_002e6e14();
+  asdOperatorDeleteArray();
   *param_1 = temp_v1;
   param_1[2] = temp_v5 * 4 + temp_v1;
   param_1[1] = (temp_v3 >> 2) * 4 + temp_v1 + 4;

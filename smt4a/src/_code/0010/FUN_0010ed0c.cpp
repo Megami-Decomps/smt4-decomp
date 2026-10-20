@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_002e75fa(void);
+int sharedRefAddRef(void);
 
 extern unsigned char LAB_0010ece5; /* 0x10ece5 */
 extern unsigned char DAT_0055b11c; /* 0x55b11c */
 
-/* Supplied declaration required: FUN_002e75fa. */
-extern unsigned int *FUN_002e760a(unsigned int);
+/* Supplied declaration required: sharedRefAddRef. */
+extern unsigned int *operatorNew(unsigned int);
 
 
 void FUN_0010ed0c(unsigned int param_1,unsigned int param_2)
@@ -19,8 +19,8 @@ void FUN_0010ed0c(unsigned int param_1,unsigned int param_2)
 /* irregular: 1 native warning(s); review required */
   unsigned int *puVar1;
   
-  FUN_002e75fa();
-  puVar1 = (unsigned int *)FUN_002e760a(0x14);
+  sharedRefAddRef();
+  puVar1 = (unsigned int *)operatorNew(0x14);
   if (puVar1 != (unsigned int *)0x0) {
     puVar1[4] = param_2;
     puVar1[1] = param_1;

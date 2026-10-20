@@ -2,7 +2,7 @@
 
 extern "C" {
 
-s32 FUN_001acf08(void);
+s32 effGetFrameStep(void);
 
 extern PolyWindKind g_polyWindKinds[];
 
@@ -10,7 +10,7 @@ extern PolyWindKind g_polyWindKinds[];
 void effPolyWindUpdate(PolyObject *obj)
 {
     g_polyWindKinds[obj->kind].update(obj);
-    obj->frame += FUN_001acf08();
+    obj->frame += effGetFrameStep();
 }
 
 } /* extern "C" */

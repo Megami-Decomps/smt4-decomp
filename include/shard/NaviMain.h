@@ -1,4 +1,4 @@
-/* The navigation screen's state block, held in DAT_0044cdf0. */
+/* The navigation screen's state block, held in g_naviMain. */
 #ifndef SHARD_NAVIMAIN_H
 #define SHARD_NAVIMAIN_H
 
@@ -23,6 +23,6 @@ typedef struct NaviMain {
     /* 0x12334 */ u8 unk12334[1];
 } NaviMain;
 
-extern NaviMain *DAT_0044cdf0;
+extern NaviMain *g_naviMain;
 
 #endif

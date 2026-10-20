@@ -7,8 +7,8 @@ typedef struct Inventory {
     /* 0x1CA3 */ u8 capacity;
 } Inventory;
 
-int FUN_001b347c(void);
-Inventory *FUN_001ab888(void);
+int gameSlotTableFindFree(void);
+Inventory *gameGetSlotTable(void);
 int scrSetResult(int value);
 int scrGetArg(u32 index);
 
@@ -17,7 +17,7 @@ u32 FUN_0038d7fc(void)
 {
     int needed = scrGetArg(0);
 
-    scrSetResult(needed <= (int)(FUN_001ab888()->capacity - FUN_001b347c()));
+    scrSetResult(needed <= (int)(gameGetSlotTable()->capacity - gameSlotTableFindFree()));
     return 1;
 }
 

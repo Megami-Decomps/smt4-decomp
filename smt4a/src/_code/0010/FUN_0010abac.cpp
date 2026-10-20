@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_0010ac08(int *, unsigned char *);
 int FUN_002e7908(unsigned char [12], int *);
-int FUN_002e9ec8(int, int);
-int FUN_002ea446(int *, int);
+int onlineInstanceTableFind(int, int);
+int onlineJobSetStateTimed(int *, int);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
@@ -18,9 +18,9 @@ typedef struct {
 
 /* Supplied declaration required: FUN_0010ac08. */
 /* Supplied declaration required: FUN_002e7908. */
-extern int FUN_002e9af4(void);
-/* Supplied declaration required: FUN_002e9ec8. */
-/* Supplied declaration required: FUN_002ea446. */
+extern int onlineInstanceTableGetCurrent(void);
+/* Supplied declaration required: onlineInstanceTableFind. */
+/* Supplied declaration required: onlineJobSetStateTimed. */
 
 
 void FUN_0010abac(int *param_1)
@@ -35,14 +35,14 @@ void FUN_0010abac(int *param_1)
   int temp_v4;
   
   puVar2 = temp_v1;
-  temp_v0 = FUN_002e9af4();
-  FUN_002e9ec8(temp_v0,param_1[0x1a]);
+  temp_v0 = onlineInstanceTableGetCurrent();
+  onlineInstanceTableFind(temp_v0,param_1[0x1a]);
   if (temp_v0 != 0) {
     temp_v2 = 0x80010001;
     FUN_002e7908(temp_v1,&temp_v2);
     temp_v0 = (**(romwright_code **)(*param_1 + 0x34))(param_1,temp_v1);
     if (temp_v0 == 0) {
-      FUN_002ea446(param_1,0x10);
+      onlineJobSetStateTimed(param_1,0x10);
       return;
     }
   }

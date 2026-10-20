@@ -41,7 +41,7 @@ typedef struct {
 extern unsigned char LAB_003d2d24; /* 0x3d2d24 */
 
 /* Supplied declaration required: qsort. */
-extern int FUN_0014bef4(unsigned int);
+extern int randRange(unsigned int);
 /* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: asdMemFree. */
@@ -91,7 +91,7 @@ unsigned short FUN_003f3170(fn_003f3170_arg0 *param_1)
     }
     temp_v5 = temp_v5 + 1;
   } while (temp_v5 < 8);
-  temp_v5 = FUN_0014bef4(99);
+  temp_v5 = randRange(99);
   temp_v7 = param_1->field_0x34;
   uStack_3c = param_1->field_0x38;
   uStack_38 = param_1->field_0x3c;
@@ -130,7 +130,7 @@ LAB_003f32c0:
   } while ((temp_v5 < 1) && (temp_v6 = temp_v6 - 1, -1 < (int)temp_v6));
   temp_v4 = 0;
   if (0 < temp_v5) {
-    temp_v5 = FUN_0014bef4((temp_v5 - 1U) & 0xffff);
+    temp_v5 = randRange((temp_v5 - 1U) & 0xffff);
     temp_v3 = 0;
     do {
       if (*(short *)((int)&param_1->field_0x34 + temp_v3 * 2) == 0) {

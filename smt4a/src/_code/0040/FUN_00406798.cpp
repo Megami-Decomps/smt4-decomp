@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0030ea58(int, unsigned int);
+int libc_strcmp(int, unsigned int);
 
-/* Supplied declaration required: FUN_0030ea58. */
+/* Supplied declaration required: libc_strcmp. */
 
 
 unsigned int FUN_00406798(int param_1,unsigned int param_2)
@@ -36,7 +36,7 @@ unsigned int FUN_00406798(int param_1,unsigned int param_2)
         if (*(int *)(temp_v3 + 8) != 0) {
           do {
             temp_v1 = *(int *)(*(int *)(temp_v3 + 4) + temp_v2 * 4);
-            FUN_0030ea58(temp_v1,param_2);
+            libc_strcmp(temp_v1,param_2);
             if (temp_v1 == 0) {
               return temp_v4;
             }

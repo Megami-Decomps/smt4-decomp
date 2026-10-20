@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern u8 *FUN_002bbb5c(void);
+extern u8 *gameGetQuestCenterBlock(void);
 
 u16 QcActive_GetField20(void)
 {
-    u8 *block = FUN_002bbb5c();
+    u8 *block = gameGetQuestCenterBlock();
 
     return *(u16 *)(block + 0x14);
 }

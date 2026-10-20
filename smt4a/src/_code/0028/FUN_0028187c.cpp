@@ -11,15 +11,15 @@ typedef struct Global57f110 {
     /* 0x00 */ u8 unk00[4];
     /* 0x04 */ Object *object;
 } Global57f110;
-extern Global57f110 DAT_0057f110;
+extern Global57f110 g_campCec;
 
-void FUN_00275f44(u32 handle, u32 request);
+void scrScriptProcessStartEntry(u32 handle, u32 request);
 
-/* Passes the held object's handle and `request` to FUN_00275f44, if there is an object. */
+/* Passes the held object's handle and `request` to scrScriptProcessStartEntry, if there is an object. */
 void FUN_0028187c(u32 request)
 {
-    if (DAT_0057f110.object != NULL) {
-        FUN_00275f44(DAT_0057f110.object->handle, request);
+    if (g_campCec.object != NULL) {
+        scrScriptProcessStartEntry(g_campCec.object->handle, request);
         return;
     }
 }

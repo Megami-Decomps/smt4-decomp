@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_0014e188(int, int, int, int, int);
-int FUN_001846d0(int, int);
-int FUN_00184758(int, int, int);
+int uiSpriteSelectAnim(int, int);
+int uiSpriteSetKeyframe(int, int, int);
 int FUN_003d2150(int);
 int FUN_003e48dc(unsigned int);
 int FUN_004bd410(unsigned int);
@@ -16,14 +16,14 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } void_stack;
 
-extern unsigned char DAT_0057f588; /* 0x57f588 */
+extern unsigned char g_messageMain; /* 0x57f588 */
 
 /* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: FUN_001846d0. */
-/* Supplied declaration required: FUN_00184758. */
+/* Supplied declaration required: uiSpriteSelectAnim. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
 extern int saveSlotFindById(unsigned int);
 extern unsigned int scrGetArg(unsigned int);
-extern int FUN_002deb84(void);
+extern int scrGetCommandFrame(void);
 extern int FUN_00370ecc(unsigned int);
 /* Supplied declaration required: FUN_003d2150. */
 /* Supplied declaration required: FUN_003e48dc. */
@@ -41,21 +41,21 @@ unsigned int FUN_003b5844(void)
   unsigned int temp_v4;
   unsigned int temp_v5;
   
-  temp_v0 = (*(int *)((unsigned char *)&DAT_0057f588 + 0x8));
+  temp_v0 = (*(int *)((unsigned char *)&g_messageMain + 0x8));
   temp_v1 = scrGetArg(0);
-  temp_v2 = FUN_002deb84();
-  temp_v3 = (*(int *)((unsigned char *)&DAT_0057f588 + 0x8));
+  temp_v2 = scrGetCommandFrame();
+  temp_v3 = (*(int *)((unsigned char *)&g_messageMain + 0x8));
   if (temp_v2 == 0) {
     if (*(char *)(temp_v0 + 0x90) != '\0') {
       *(int *)(temp_v0 + 0x9c) = *(int *)(temp_v0 + 0x9c) + 1;
       *(unsigned int *)(temp_v0 + 0x98) = 0x14;
     }
     else {
-      temp_v2 = (*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0x194;
-      *(unsigned char *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0x90) = 1;
+      temp_v2 = (*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x194;
+      *(unsigned char *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x90) = 1;
       *(unsigned char *)(temp_v3 + 0x8d) = 1;
       FUN_0014e188(temp_v3 + 0xb00,0x14,0xbb9,temp_v2,0xb);
-      FUN_001846d0(temp_v3 + 0xb00,0);
+      uiSpriteSelectAnim(temp_v3 + 0xb00,0);
       *(unsigned int *)(temp_v3 + 0xa0) = 0;
       *(unsigned int *)(temp_v3 + 0xa4) = 0;
       *(unsigned int *)(temp_v3 + 0xa8) = 0;
@@ -93,7 +93,7 @@ unsigned int FUN_003b5844(void)
   }
   if (*(int *)(temp_v0 + 0x98) == 0x14) {
     FUN_0014e188(temp_v0 + *(int *)(temp_v0 + 0x9c) * 0x8c + 0xdbc,0x14,0xc12,temp_v0 + 0x194,0xb);
-    FUN_00184758(temp_v0 + *(int *)(temp_v0 + 0x9c) * 0x8c + 0xdbc,10,0);
+    uiSpriteSetKeyframe(temp_v0 + *(int *)(temp_v0 + 0x9c) * 0x8c + 0xdbc,10,0);
     *(unsigned char *)(*(int *)(temp_v0 + 0x9c) + temp_v0 + 0xa0) = 1;
     FUN_003d2150(0x100016e);
   }

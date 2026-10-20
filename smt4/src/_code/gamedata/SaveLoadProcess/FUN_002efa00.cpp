@@ -8,7 +8,7 @@ int FUN_001a1d08(void);
 int FUN_00247af8(int, int, unsigned int, unsigned int, unsigned int);
 int FUN_0026b4cc(void);
 int FUN_002ad8b4(unsigned int, int);
-int FUN_002c09bc(void);
+int gameDataBlocksGetSaveData(void);
 int asdMemoryAlloc(int, int, int, unsigned int, int);
 int rt_memcpy_w(unsigned int, int, int);
 
@@ -23,11 +23,11 @@ extern unsigned char DAT_0043e2f3; /* 0x43e2f3 */
 /* Supplied declaration required: FUN_001a1d08. */
 /* Supplied declaration required: FUN_00247af8. */
 /* Supplied declaration required: FUN_0026b4cc. */
-extern unsigned int FUN_0026b5c8(void);
-extern unsigned int FUN_0026b5dc(void);
+extern unsigned int configGetSettings(void);
+extern unsigned int gameDataBlocksGetTable(void);
 /* Supplied declaration required: FUN_002ad8b4. */
 extern int jobGetWork(void);
-/* Supplied declaration required: FUN_002c09bc. */
+/* Supplied declaration required: gameDataBlocksGetSaveData. */
 /* Supplied declaration required: asdMemoryAlloc. */
 extern int FUN_002cedbc(void);
 /* Supplied declaration required: rt_memcpy_w. */
@@ -66,13 +66,13 @@ unsigned int FUN_002efa00(void)
         }
         else {
           temp_v2 = *(int *)(temp_v0 + 8);
-          temp_v1 = FUN_0026b5dc();
+          temp_v1 = gameDataBlocksGetTable();
           rt_memcpy_w(temp_v1,temp_v2,0x80);
-          temp_v1 = FUN_0026b5c8();
+          temp_v1 = configGetSettings();
           FUN_002ad8b4(temp_v1,temp_v2 + 0x80);
-          temp_v1 = FUN_002c09bc();
+          temp_v1 = gameDataBlocksGetSaveData();
           rt_memcpy_w(temp_v1,temp_v2 + 0x88,0x24d28);
-          temp_v2 = FUN_002c09bc();
+          temp_v2 = gameDataBlocksGetSaveData();
           *(char *)(temp_v2 + 3) = (char)*(unsigned int *)(temp_v0 + 0x10);
           FUN_0026b4cc();
           temp_v1 = 6;

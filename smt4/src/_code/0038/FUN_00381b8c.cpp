@@ -8,14 +8,14 @@ int qcMainSetMode(int);
 int FUN_002637c8(void);
 int FUN_0028eeb8(unsigned int);
 int FUN_00297468(unsigned char *, unsigned int *, int);
-int FUN_002a5ed0(int, int);
+int asdTMTexTableLoadEntryAsync(int, int);
 int FUN_002a71fc(int);
-int FUN_002b63c0(void);
+int dataTable1bOr1cGetRecord(void);
 int FUN_002c312c(unsigned int *, int, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
 int memClear(unsigned int *, int);
 int asdTMTexTableLoadSprites(int);
 int FUN_003852c8(void);
-int FUN_00385aac(unsigned int *);
+int dataTable27Load(unsigned int *);
 int FUN_00385aec(unsigned int *);
 int FUN_00385af4(unsigned int *);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(unsigned int *);
@@ -40,15 +40,15 @@ extern unsigned char DAT_004057c0; /* 0x4057c0 */
 /* Supplied declaration required: FUN_0028eeb8. */
 /* Supplied declaration required: FUN_00297468. */
 extern int FUN_00298fa0(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002a5ed0. */
+/* Supplied declaration required: asdTMTexTableLoadEntryAsync. */
 /* Supplied declaration required: FUN_002a71fc. */
-/* Supplied declaration required: FUN_002b63c0. */
+/* Supplied declaration required: dataTable1bOr1cGetRecord. */
 extern unsigned int asdTextCreate(unsigned int);
 /* Supplied declaration required: FUN_002c312c. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: asdTMTexTableLoadSprites. */
 /* Supplied declaration required: FUN_003852c8. */
-/* Supplied declaration required: FUN_00385aac. */
+/* Supplied declaration required: dataTable27Load. */
 /* Supplied declaration required: FUN_00385aec. */
 /* Supplied declaration required: FUN_00385af4. */
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
@@ -81,7 +81,7 @@ void FUN_00381b8c(unsigned int *param_1)
   FUN_00297468(&LAB_00381d4c,param_1 + 0x169,0);
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(param_1 + 9);
   FUN_002c312c(param_1 + 9,0,0,&DAT_004057a8,0x18,0,0,0,0,&DAT_004057c0,0xa8);
-  FUN_00385aac(param_1 + 8);
+  dataTable27Load(param_1 + 8);
   FUN_00385aec(param_1 + 8);
   FUN_00385af4(param_1 + 8);
   param_1[0x369] = 0;
@@ -92,7 +92,7 @@ void FUN_00381b8c(unsigned int *param_1)
   param_1[0x167] = 0;
   *(unsigned char *)(param_1 + 0x350) = 0;
   asdTMTexTableLoadSprites(0x31);
-  FUN_002a5ed0(0x31,0);
+  asdTMTexTableLoadEntryAsync(0x31,0);
   temp_v2 = 0;
   do {
     param_1[temp_v2 + 0xa3] = 0;
@@ -107,7 +107,7 @@ void FUN_00381b8c(unsigned int *param_1)
   temp_v2 = 0x15e;
   do {
     temp_v3 = temp_v2;
-    FUN_002b63c0();
+    dataTable1bOr1cGetRecord();
     if (((temp_v3 != 0) && (*(char *)(temp_v3 + 6) == '\0')) &&
        (temp_v1 = FUN_00298fa0(temp_v2,1), temp_v1 == 0)) {
       FUN_0028eeb8(temp_v2);

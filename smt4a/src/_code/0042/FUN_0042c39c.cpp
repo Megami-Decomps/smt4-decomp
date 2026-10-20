@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e3328(int);
+int asdOperatorDelete(int);
 int objectReleaseIfSet(unsigned int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_002e3328. */
+/* Supplied declaration required: asdOperatorDelete. */
 /* Supplied declaration required: objectReleaseIfSet. */
 
 
@@ -22,7 +22,7 @@ void FUN_0042c39c(int param_1)
 /* irregular: 2 native warning(s); review required */
   objectReleaseIfSet(*(unsigned int *)(param_1 + 4));
   *(unsigned int *)(param_1 + 4) = 0;
-  FUN_002e3328(param_1);
+  asdOperatorDelete(param_1);
   return;
 }
 

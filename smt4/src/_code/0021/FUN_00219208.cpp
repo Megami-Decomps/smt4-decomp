@@ -12,7 +12,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_00257568. */
-extern int FUN_002a8740(void);
+extern int gameGetUnitRecord(void);
 
 
 void FUN_00219208(int param_1,int param_2)
@@ -27,14 +27,14 @@ void FUN_00219208(int param_1,int param_2)
     temp_v2 = 0;
   }
   else {
-    temp_v1 = FUN_002a8740();
+    temp_v1 = gameGetUnitRecord();
     temp_v2 = *(short *)(temp_v1 + 0x46);
   }
   if (*(int *)(param_2 + 4) < 0) {
     temp_v0 = 0;
   }
   else {
-    temp_v1 = FUN_002a8740();
+    temp_v1 = gameGetUnitRecord();
     temp_v0 = *(short *)(temp_v1 + 0x46);
   }
   if (temp_v2 != temp_v0) {

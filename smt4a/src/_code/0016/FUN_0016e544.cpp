@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001894f4(void);
 int FUN_00189570(void);
-int FUN_00195fc8(void);
+int sysFatalBreak(void);
 int software_interrupt(int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -21,7 +21,7 @@ extern int DAT_005b479c; /* 0x5b479c */
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_001894f4. */
 /* Supplied declaration required: FUN_00189570. */
-/* Supplied declaration required: FUN_00195fc8. */
+/* Supplied declaration required: sysFatalBreak. */
 extern unsigned int FUN_001a0e10(void);
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
@@ -44,7 +44,7 @@ void FUN_0016e544(int param_1)
       if (DAT_005b479c != 0) {
         software_interrupt(0x23);
         if (DAT_005b479c < 0) {
-          FUN_00195fc8();
+          sysFatalBreak();
         }
         DAT_005b479c = 0;
       }

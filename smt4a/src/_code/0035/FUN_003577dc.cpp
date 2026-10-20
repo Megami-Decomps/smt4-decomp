@@ -18,7 +18,7 @@ static int romwright_isnan(double value)
 extern int DAT_00613174; /* 0x613174 */
 
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-extern int FUN_00162e8c(void);
+extern int gameFlagsGetBlock(void);
 
 
 unsigned int FUN_003577dc(int param_1)
@@ -33,7 +33,7 @@ unsigned int FUN_003577dc(int param_1)
   float in_s0;
   float in_s1;
   
-  temp_v1 = FUN_00162e8c();
+  temp_v1 = gameFlagsGetBlock();
   temp_v2 = 0;
   if (temp_v2 < DAT_00613174) {
     do {

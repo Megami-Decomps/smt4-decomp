@@ -10,7 +10,7 @@ int FUN_00233730(unsigned int *, int, int, int, int, int);
 int FUN_00233818(unsigned int *);
 int FUN_00233854(unsigned int *);
 int FUN_0023392c(...);
-int FUN_00233d78(...);
+int jobStopAndClearFlags(...);
 int FUN_00233db8(unsigned int *, int);
 int FUN_00233e70(unsigned int *, int, int);
 int FUN_00233fcc(unsigned int *, int);
@@ -39,7 +39,7 @@ extern unsigned int FUN_00233718(unsigned int *);
 /* Supplied declaration required: FUN_00233818. */
 /* Supplied declaration required: FUN_00233854. */
 /* Supplied declaration required: FUN_0023392c. */
-/* Supplied declaration required: FUN_00233d78. */
+/* Supplied declaration required: jobStopAndClearFlags. */
 /* Supplied declaration required: FUN_00233db8. */
 /* Supplied declaration required: FUN_00233e70. */
 /* Supplied declaration required: FUN_00233fcc. */
@@ -49,8 +49,8 @@ extern unsigned int FUN_00233718(unsigned int *);
 /* Supplied declaration required: FUN_0023470c. */
 /* Supplied declaration required: FUN_0023474c. */
 extern int FUN_0026b564(void);
-extern int FUN_0027ea14(unsigned int *);
-extern int FUN_002a1520(unsigned int *);
+extern int strIsEmpty(unsigned int *);
+extern int byteIsAtLeast100(unsigned int *);
 extern int FUN_002bf4f8(unsigned int, unsigned int);
 
 
@@ -108,14 +108,14 @@ void FUN_0038ebd8(unsigned int *param_1)
         uStack_50 = uStack_3c;
         uStack_4c = uStack_38;
         uStack_48 = uStack_34;
-        temp_v1 = FUN_0027ea14(&temp_v4);
+        temp_v1 = strIsEmpty(&temp_v4);
         if (temp_v1 != 0) {
           param_1[2] = 3;
         }
         else {
-          temp_v1 = FUN_002a1520(&temp_v4);
+          temp_v1 = byteIsAtLeast100(&temp_v4);
           if (temp_v1 != 0) {
-            FUN_00233d78(param_1);
+            jobStopAndClearFlags(param_1);
             if ((temp_v4 & 0xff) == 0x66) {
               temp_v6 = temp_v4;
               uStack_2c = uStack_54;
@@ -165,9 +165,9 @@ void FUN_0038ebd8(unsigned int *param_1)
     uStack_50 = uStack_3c;
     uStack_4c = uStack_38;
     uStack_48 = uStack_34;
-    temp_v2 = FUN_0027ea14(&temp_v4);
+    temp_v2 = strIsEmpty(&temp_v4);
     if (temp_v2 != 0) {
-      FUN_00233d78(param_1);
+      jobStopAndClearFlags(param_1);
       if (*(int *)(temp_v1 + 0x67c) != 0) {
         FUN_00233730(param_1 + 0x90,3,*(int *)(temp_v1 + 0x67c),0,1,1);
         puVar4 = param_1 + 0xba;
@@ -208,9 +208,9 @@ void FUN_0038ebd8(unsigned int *param_1)
       param_1[0x82] = 0;
       return;
     }
-    temp_v1 = FUN_002a1520(&temp_v4);
+    temp_v1 = byteIsAtLeast100(&temp_v4);
     if (temp_v1 != 0) {
-      FUN_00233d78(param_1);
+      jobStopAndClearFlags(param_1);
 LAB_0038ed80:
       param_1[2] = 9999;
       param_1[0x84] = temp_v4;

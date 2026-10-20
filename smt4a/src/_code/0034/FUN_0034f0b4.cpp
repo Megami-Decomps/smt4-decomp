@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00184310(void);
 
-extern int DAT_0057f290; /* 0x57f290 */
+extern int g_unite; /* 0x57f290 */
 
 /* Supplied declaration required: FUN_00184310. */
 
@@ -20,9 +20,9 @@ int FUN_0034f0b4(unsigned short *param_1,unsigned short *param_2)
   unsigned short *puVar3;
   int temp_v1;
   
-  temp_v0 = DAT_0057f290;
-  puVar2 = (unsigned short *)(*(unsigned int *)(DAT_0057f290 + (unsigned int)*param_1 * 8 + 0x13b8) & 0x7fff);
-  puVar3 = (unsigned short *)(*(unsigned int *)(DAT_0057f290 + (unsigned int)*param_2 * 8 + 0x13b8) & 0x7fff);
+  temp_v0 = g_unite;
+  puVar2 = (unsigned short *)(*(unsigned int *)(g_unite + (unsigned int)*param_1 * 8 + 0x13b8) & 0x7fff);
+  puVar3 = (unsigned short *)(*(unsigned int *)(g_unite + (unsigned int)*param_2 * 8 + 0x13b8) & 0x7fff);
   FUN_00184310();
   FUN_00184310();
   temp_v1 = (unsigned int)(unsigned char)puVar3[1] - (unsigned int)(unsigned char)puVar2[1];

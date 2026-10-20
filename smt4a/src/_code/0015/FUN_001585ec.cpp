@@ -9,7 +9,7 @@ typedef struct FileObject {
     /* 0x04 */ u32 handle;      /* bit 0: needs flush before close */
 } FileObject;
 
-extern void FUN_00195fc8(void);
+extern void sysFatalBreak(void);
 extern void vcallSlot12IfValid(u32 handle);
 
 FileObject *FUN_001585ec(FileObject *obj)
@@ -18,7 +18,7 @@ FileObject *FUN_001585ec(FileObject *obj)
 
     if ((*slot & ~1) != 0) {
         if ((*slot & 1) != 0) {
-            FUN_00195fc8();
+            sysFatalBreak();
         }
         vcallSlot12IfValid(*slot & ~1);
         *slot = 0;

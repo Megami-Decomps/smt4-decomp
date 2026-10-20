@@ -14,7 +14,7 @@ int FUN_001834a4(...);
 int FUN_001835b4(...);
 int FUN_00183bb0(void);
 int FUN_00184310(void);
-int FUN_00184e64(...);
+int drawSetColorFromRGBA8(...);
 int FUN_0025cc78(...);
 
 /* stack frame of void: 9 slot(s), 36 byte(s) */
@@ -36,18 +36,18 @@ extern int g_campCecRanking; /* 0x57f11c */
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_001527d8. */
 /* Supplied declaration required: FUN_00164b5c. */
-extern int FUN_001654d8(int);
-extern int FUN_001654e4(int);
+extern int vec2GetXInt(int);
+extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00169a1c. */
 /* Supplied declaration required: FUN_00180310. */
-extern int FUN_0018206c(unsigned int, unsigned int);
+extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: FUN_00184e64. */
-extern int FUN_0018719c(unsigned int);
+/* Supplied declaration required: drawSetColorFromRGBA8. */
+extern int gameFlagIsSet(unsigned int);
 extern int FUN_0019e52c(unsigned short);
 /* Supplied declaration required: FUN_0025cc78. */
 extern unsigned short FUN_0036fcd0(unsigned int, unsigned int);
@@ -79,7 +79,7 @@ int FUN_00343e5c(void)
   unsigned int temp_v19;
   
   temp_v2 = g_campCecRanking;
-  temp_v4 = FUN_0018719c(0x4f7);
+  temp_v4 = gameFlagIsSet(0x4f7);
   temp_v5 = 0;
   if (temp_v4 != 0) {
     temp_v5 = *(int *)(temp_v2 + 4);
@@ -89,11 +89,11 @@ int FUN_00343e5c(void)
       temp_v5 = 0;
     }
     else {
-      temp_v4 = FUN_0018206c(0x2e,1);
+      temp_v4 = asdTMTexTableNodeIsLoaded(0x2e,1);
       temp_v5 = 0;
       if (temp_v4 != 0) {
-        temp_v5 = FUN_001654d8(temp_v2 + 0xc);
-        temp_v4 = FUN_001654e4(temp_v2 + 0xc);
+        temp_v5 = vec2GetXInt(temp_v2 + 0xc);
+        temp_v4 = vec2GetYInt(temp_v2 + 0xc);
         efctSetSpeed();
         FUN_00164b5c(2,0x2e,0x1f,temp_v5,temp_v4,0x65);
         temp_v8 = 0;
@@ -199,7 +199,7 @@ int FUN_00343e5c(void)
             FUN_001834a4(0x2e,temp_v7);
             temp_v0 = *(short *)(temp_v12 + 8);
             temp_v1 = *(short *)(temp_v12 + 10);
-            FUN_00184e64(0xffffffff);
+            drawSetColorFromRGBA8(0xffffffff);
             FUN_00100388(temp_v15,&LAB_00344320,temp_v16);
             FUN_00180310(6,temp_v5 + temp_v11 + temp_v0,temp_v4 + temp_v1 + temp_v9,1,3,0x65,temp_v15);
             FUN_00183bb0();

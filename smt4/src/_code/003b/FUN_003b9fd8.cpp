@@ -9,7 +9,7 @@ int FUN_0022b064(...);
 int FUN_0022b684(...);
 int FUN_0027396c(...);
 int FUN_00276218(...);
-int FUN_00289508(...);
+int gameJumpRequestClear(...);
 int FUN_0028d664(...);
 int FUN_00291764(...);
 int FUN_002bd808(...);
@@ -53,7 +53,7 @@ extern unsigned int DAT_0049fd1c; /* 0x49fd1c */
 /* Supplied declaration required: FUN_0027396c. */
 extern int FUN_0027398c(int);
 /* Supplied declaration required: FUN_00276218. */
-/* Supplied declaration required: FUN_00289508. */
+/* Supplied declaration required: gameJumpRequestClear. */
 /* Supplied declaration required: FUN_0028d664. */
 /* Supplied declaration required: FUN_00291764. */
 /* Supplied declaration required: FUN_002bd808. */
@@ -121,7 +121,7 @@ void FUN_003b9fd8(fn_003b9fd8_arg0 *param_1)
         param_1->field_0x28 = 5;
       }
       else {
-        FUN_00289508();
+        gameJumpRequestClear();
         FUN_0022af9c(1);
         FUN_0022b064(param_1);
         param_1->field_0x2c = 0;

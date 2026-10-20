@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00188b60(unsigned int *);
+int nn_os_CriticalSection_Initialize(unsigned int *);
 int emptyStub_002f4370(unsigned int *, unsigned char *, int);
 int FUN_002f5020(void);
 
@@ -16,7 +16,7 @@ typedef struct {
 extern unsigned char LAB_0042ce3c; /* 0x42ce3c */
 extern unsigned int DAT_0061a62c; /* 0x61a62c */
 
-/* Supplied declaration required: FUN_00188b60. */
+/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
 /* Supplied declaration required: emptyStub_002f4370. */
 /* Supplied declaration required: FUN_002f5020. */
 
@@ -27,7 +27,7 @@ void FUN_005116b0(void)
 /* irregular: 3 native warning(s); review required */
   FUN_002f5020();
   DAT_0061a62c = 0;
-  FUN_00188b60(&DAT_0061a62c);
+  nn_os_CriticalSection_Initialize(&DAT_0061a62c);
   emptyStub_002f4370(&DAT_0061a62c,&LAB_0042ce3c,0x100000);
   return;
 }

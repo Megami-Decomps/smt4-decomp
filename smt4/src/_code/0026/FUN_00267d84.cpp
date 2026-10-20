@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001e1a00(...);
+int handlerTableCallWithValue(...);
 int requestDispatch(...);
 int FUN_0024f880(...);
 int FUN_0024f890(...);
@@ -13,11 +13,11 @@ int FUN_00256dbc(...);
 int FUN_00256f88(...);
 int FUN_002571e8(...);
 int FUN_00257374(...);
-int FUN_002694f8(void);
+int refCountIncrement(void);
 int FUN_0028186c(...);
 int FUN_002a2c7c(void);
 int FUN_002a353c(...);
-int FUN_002bd420(...);
+int memCopy(...);
 int FUN_002c7d18(...);
 int SUB41(double, int);
 int VectorFloatToUnsigned(...);
@@ -102,8 +102,8 @@ extern float DAT_004ea998; /* 0x4ea998 */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SUB41 (SUBPIECE). */
-extern unsigned int FUN_001e19dc(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001e1a00. */
+extern unsigned int tableOwnerGetEntry(unsigned int, unsigned int);
+/* Supplied declaration required: handlerTableCallWithValue. */
 extern int FUN_0021987c(void *);
 /* Supplied declaration required: requestDispatch. */
 /* Supplied declaration required: FUN_0024f880. */
@@ -113,11 +113,11 @@ extern int FUN_0021987c(void *);
 /* Supplied declaration required: FUN_00256f88. */
 /* Supplied declaration required: FUN_002571e8. */
 /* Supplied declaration required: FUN_00257374. */
-/* Supplied declaration required: FUN_002694f8. */
+/* Supplied declaration required: refCountIncrement. */
 /* Supplied declaration required: FUN_0028186c. */
 /* Supplied declaration required: FUN_002a2c7c. */
 /* Supplied declaration required: FUN_002a353c. */
-/* Supplied declaration required: FUN_002bd420. */
+/* Supplied declaration required: memCopy. */
 /* Supplied declaration required: FUN_002c7d18. */
 
 
@@ -378,7 +378,7 @@ void FUN_00267d84(fn_00267d84_arg0 *param_1)
         temp_v6 = FUN_0021987c(pvVar11);
         if (temp_v6 != 0) {
           *(unsigned int *)(temp_v8 + 0xa8) = *(unsigned int *)(temp_v8 + 0xa8) | 2;
-          FUN_002bd420(temp_v6,temp_v8 + 0xac,8);
+          memCopy(temp_v6,temp_v8 + 0xac,8);
         }
         *(int *)(temp_v8 + 0x60) = temp_v7;
         *(unsigned int *)(temp_v8 + 100) =
@@ -399,9 +399,9 @@ void FUN_00267d84(fn_00267d84_arg0 *param_1)
       FUN_00257374(temp_v34,0x20,&temp_v48);
       FUN_00257374(temp_v34,0x80,&temp_v33);
       temp_v1 = temp_v34;
-      temp_v3 = FUN_001e19dc(temp_v2,0);
+      temp_v3 = tableOwnerGetEntry(temp_v2,0);
       *(unsigned int *)(temp_v1 + 0xb4) = temp_v3;
-      FUN_002694f8();
+      refCountIncrement();
       temp_v14 = (float)temp_v29;
       if ((*(unsigned int *)((int)pvVar11 + 0xc) & 1) != 0) {
         FUN_0024f890(pvVar11,&temp_v59);
@@ -641,7 +641,7 @@ void FUN_00267d84(fn_00267d84_arg0 *param_1)
             DAT_004ea930 = temp_v18;
             DAT_004ea934 = temp_v23;
             DAT_004ea938 = temp_v14;
-            FUN_001e1a00(*puVar2,(temp_v13 & 0xff) |
+            handlerTableCallWithValue(*puVar2,(temp_v13 & 0xff) |
                                  (temp_v7 << 0x18) | ((temp_v17 & 0xff) << 0x10) |
                                  ((temp_v0 & 0xff) << 8));
             requestDispatch(*puVar2);

@@ -17,7 +17,7 @@ int FUN_001835b4(...);
 int FUN_00183bb0(...);
 int FUN_0018408c(...);
 int FUN_00184310(...);
-int FUN_00184e64(...);
+int drawSetColorFromRGBA8(...);
 int slotRecordFindById(...);
 int FUN_0020caec(...);
 int FUN_00239234(...);
@@ -75,8 +75,8 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_0014bf3c. */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164b5c. */
-extern int FUN_001654d8(unsigned int *);
-extern int FUN_001654e4(unsigned int *);
+extern int vec2GetXInt(unsigned int *);
+extern int vec2GetYInt(unsigned int *);
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00180114. */
@@ -87,9 +87,9 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: FUN_0018408c. */
 /* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: FUN_00184e64. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: slotRecordFindById. */
-extern int *FUN_001ab888(void);
+extern int *gameGetSlotTable(void);
 /* Supplied declaration required: FUN_0020caec. */
 extern unsigned int *FUN_0022e9b8(void);
 /* Supplied declaration required: FUN_00239234. */
@@ -203,7 +203,7 @@ void FUN_002f197c(fn_002f197c_arg0 *param_1,int param_2)
   VectorSignedToFloat((int)&param_1->field_0x0 + (int)*(short *)(temp_v7 + 8),
                       (unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_00162790(2,0x57d8ffff,temp_v14);
-  FUN_00184e64(temp_v11);
+  drawSetColorFromRGBA8(temp_v11);
   if ((unsigned short)puVar6[3] >= 100) {
     temp_v7 = FUN_001834a4(0x1a,0x265);
     FUN_00180310(0,(int)&param_1->field_0x0 + (int)*(short *)(temp_v7 + 8),
@@ -289,13 +289,13 @@ void FUN_002f197c(fn_002f197c_arg0 *param_1,int param_2)
 LAB_002f2034:
   efctSetSpeed();
   if (temp_v16 != 0) {
-    temp_v7 = FUN_001654e4(puVar2 + 0x2c);
-    temp_v2 = FUN_001654d8(puVar2 + 0x2c);
+    temp_v7 = vec2GetYInt(puVar2 + 0x2c);
+    temp_v2 = vec2GetXInt(puVar2 + 0x2c);
     FUN_001835b4(2,0x1a,0x28e,(int)&param_1->field_0x0 + temp_v2,temp_v7 + param_2,0x83);
   }
   else {
-    temp_v7 = FUN_001654e4(puVar2 + 0x2c);
-    temp_v2 = FUN_001654d8(puVar2 + 0x2c);
+    temp_v7 = vec2GetYInt(puVar2 + 0x2c);
+    temp_v2 = vec2GetXInt(puVar2 + 0x2c);
     FUN_001835b4(2,0x1a,0x156,(int)&param_1->field_0x0 + temp_v2,temp_v7 + param_2,0x83);
   }
   efctSetSpeed();
@@ -303,14 +303,14 @@ LAB_002f2034:
   puVar9 = puVar2 + 0x148e;
   puVar8 = puVar9;
   FUN_0026c4f0();
-  piVar15 = (int *)FUN_001ab888();
+  piVar15 = (int *)gameGetSlotTable();
   if (*piVar15 < (int)puVar8) {
     temp_v11 = 0xdc0f14ff;
   }
   else {
     temp_v11 = 0xffffffff;
   }
-  FUN_00184e64(temp_v11);
+  drawSetColorFromRGBA8(temp_v11);
   FUN_0026c4f0();
   FUN_00180310(0,(int)&param_1->field_0x0 + (int)*(short *)(temp_v7 + 8),
                *(short *)(temp_v7 + 10) + param_2,1,8,0x8d,&LAB_002f1f40,puVar9);

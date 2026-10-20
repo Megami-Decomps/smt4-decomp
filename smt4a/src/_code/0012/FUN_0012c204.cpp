@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_002e9318(unsigned char [8]);
-int FUN_002e9ec8(int, unsigned int);
+int onlineStringDestroy(unsigned char [8]);
+int onlineInstanceTableFind(int, unsigned int);
 int FUN_002ea3d0(int, unsigned int);
 int FUN_002ea41e(...);
 int FUN_0030c7ac(...);
@@ -30,9 +30,9 @@ typedef struct {
 extern unsigned char LAB_0012c3b0; /* 0x12c3b0 */
 
 extern unsigned char *FUN_002e7908(int *, unsigned int *);
-/* Supplied declaration required: FUN_002e9318. */
-extern int FUN_002e9af4(void);
-/* Supplied declaration required: FUN_002e9ec8. */
+/* Supplied declaration required: onlineStringDestroy. */
+extern int onlineInstanceTableGetCurrent(void);
+/* Supplied declaration required: onlineInstanceTableFind. */
 extern unsigned int FUN_002ea100(unsigned char *, int);
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned int, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
@@ -72,8 +72,8 @@ void FUN_0012c204(int param_1)
   int *piVar4;
   
   piVar4 = &temp_v6;
-  temp_v0 = FUN_002e9af4();
-  FUN_002e9ec8(temp_v0,*(unsigned int *)(param_1 + 0x68));
+  temp_v0 = onlineInstanceTableGetCurrent();
+  onlineInstanceTableFind(temp_v0,*(unsigned int *)(param_1 + 0x68));
   if (temp_v0 != 0) {
     temp_v7 = param_1 + 0x80;
     temp_v12 = 0;
@@ -121,7 +121,7 @@ LAB_0012c32e:
       }
       temp_v2 = FUN_002ea100(temp_v15,param_1 + 0x138);
       temp_v7 = FUN_0030c79c(temp_v2,temp_v6);
-      FUN_002e9318(temp_v15);
+      onlineStringDestroy(temp_v15);
       temp_v4 = temp_v7 != 0;
       if (temp_v4) {
         FUN_0030c7b6(temp_v0,temp_v6);

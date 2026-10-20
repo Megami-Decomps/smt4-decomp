@@ -1,10 +1,10 @@
-/* Runs FUN_0013bac4(mode, arg) between FUN_002bb378 and FUN_002bb308 (lock / unlock) and returns its result. */
+/* Runs FUN_0013bac4(mode, arg) between FUN_002bb378 and nn_applet_CTR_detail_CloseSession (lock / unlock) and returns its result. */
 #include "common.h"
 
 extern "C" {
 
 void FUN_002bb378(void);
-void FUN_002bb308(void);
+void nn_applet_CTR_detail_CloseSession(void);
 u32 FUN_0013bac4(u32 mode, u32 arg);
 
 u32 FUN_0012a74c(u32 mode, u32 arg)
@@ -13,7 +13,7 @@ u32 FUN_0012a74c(u32 mode, u32 arg)
 
     FUN_002bb378();
     result = FUN_0013bac4(mode, arg);
-    FUN_002bb308();
+    nn_applet_CTR_detail_CloseSession();
     return result;
 }
 

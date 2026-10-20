@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002a880c(unsigned int, int, int);
 int jobGetWork(...);
 
-extern int FUN_002893d8(void);
+extern int scrGetCommandFrame(void);
 extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_002a880c. */
 /* Supplied declaration required: jobGetWork. */
@@ -21,9 +21,9 @@ unsigned int FUN_0030a4cc(void)
   unsigned int temp_v1;
   unsigned int temp_v2;
   
-  temp_v0 = FUN_002893d8();
+  temp_v0 = scrGetCommandFrame();
   if (temp_v0 != 0) {
-    temp_v0 = FUN_002893d8();
+    temp_v0 = scrGetCommandFrame();
     if (temp_v0 == 0x14) {
       return 1;
     }

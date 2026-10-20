@@ -6,14 +6,14 @@ extern "C" {
 
 int FUN_0023ddbc(unsigned int, int);
 int FUN_0028eeb8(unsigned int);
-int FUN_002b63c0(void);
+int dataTable1bOr1cGetRecord(void);
 
 /* Supplied declaration required: FUN_0023ddbc. */
 extern int FUN_00287894(unsigned int);
 /* Supplied declaration required: FUN_0028eeb8. */
 extern int FUN_00298f88(unsigned int);
-extern int FUN_002adc88(void);
-/* Supplied declaration required: FUN_002b63c0. */
+extern int gameGetFlagBlock(void);
+/* Supplied declaration required: dataTable1bOr1cGetRecord. */
 
 
 unsigned char FUN_0034888c(unsigned int param_1)
@@ -28,18 +28,18 @@ unsigned char FUN_0034888c(unsigned int param_1)
   unsigned int temp_v5;
   unsigned char *pbVar7;
   
-  temp_v2 = FUN_002adc88();
+  temp_v2 = gameGetFlagBlock();
   temp_v2 = temp_v2 + param_1 * 4;
   pbVar7 = (unsigned char *)(temp_v2 + 0x200);
   temp_v1 = *pbVar7 & 2;
   if ((*pbVar7 & 2) != 0) {
-    temp_v3 = FUN_002adc88();
+    temp_v3 = gameGetFlagBlock();
     *(unsigned char *)(temp_v2 + 0x202) = *(unsigned char *)(temp_v2 + 0x202) & 0xfb;
     *pbVar7 = (*pbVar7 & 0xfd) | 0x1c;
     temp_v2 = FUN_00298f88(param_1);
     if (temp_v2 != 0) {
       temp_v5 = param_1;
-      FUN_002b63c0();
+      dataTable1bOr1cGetRecord();
       if (*(char *)(temp_v5 + 6) == '\x01') {
         if (*(unsigned short *)(temp_v3 + 0x842) == param_1) {
           *(unsigned short *)(temp_v3 + 0x842) = 0;
@@ -56,12 +56,12 @@ unsigned char FUN_0034888c(unsigned int param_1)
       }
     }
     else {
-      temp_v2 = FUN_002adc88();
+      temp_v2 = gameGetFlagBlock();
       if (*(unsigned short *)(temp_v2 + 0x840) == param_1) {
         temp_v5 = 0x500;
         *(unsigned short *)(temp_v3 + 0x840) = 0;
         do {
-          temp_v2 = FUN_002adc88();
+          temp_v2 = gameGetFlagBlock();
           FUN_0023ddbc(temp_v5,0);
           temp_v4 = temp_v5 & 7;
           temp_v0 = temp_v5 >> 3;
@@ -71,7 +71,7 @@ unsigned char FUN_0034888c(unsigned int param_1)
       }
       else {
         temp_v2 = FUN_00287894(param_1);
-        if ((temp_v2 == 0) && (temp_v5 = param_1, FUN_002b63c0(), (*(unsigned char *)(temp_v5 + 7) & 2) != 0)) {
+        if ((temp_v2 == 0) && (temp_v5 = param_1, dataTable1bOr1cGetRecord(), (*(unsigned char *)(temp_v5 + 7) & 2) != 0)) {
           FUN_0028eeb8(param_1);
         }
       }

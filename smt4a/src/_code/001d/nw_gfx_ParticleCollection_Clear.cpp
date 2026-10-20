@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_001b4a90(unsigned int, int, int);
+int __aeabi_memset4(unsigned int, int, int);
 
-/* Supplied declaration required: FUN_001b4a90. */
+/* Supplied declaration required: __aeabi_memset4. */
 
 
 void nw_gfx_ParticleCollection_Clear(int param_1)
@@ -40,7 +40,7 @@ void nw_gfx_ParticleCollection_Clear(int param_1)
       }
       temp_v3 = *(unsigned int *)(param_1 + temp_v2 * 4 + 0x14c);
     }
-    FUN_001b4a90(temp_v3,temp_v6 << 1,0xff);
+    __aeabi_memset4(temp_v3,temp_v6 << 1,0xff);
     temp_v5 = temp_v5 + 1;
   } while ((int)temp_v5 < 2);
   if (*(char *)(param_1 + 0xdf) == '\0') {

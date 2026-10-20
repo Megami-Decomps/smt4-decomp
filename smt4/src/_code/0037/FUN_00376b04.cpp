@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002b4ee4(int, int);
-int FUN_003e70d0(unsigned int, unsigned int);
+int soundArchiveWrapperGetSoundUserParam(unsigned int, unsigned int);
 int nw_snd_Sound3DParam_Sound3DParam_sub_object(int *);
 int nw_snd_SoundActor_detail_SetupSoundWithAmbientInfo(unsigned int, int *, unsigned int, unsigned int, int *, unsigned int);
 
@@ -34,7 +34,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_002b4ee4. */
 extern int FUN_003e707c(unsigned int, unsigned int, unsigned int *);
-/* Supplied declaration required: FUN_003e70d0. */
+/* Supplied declaration required: soundArchiveWrapperGetSoundUserParam. */
 /* Supplied declaration required: nw_snd_Sound3DParam_Sound3DParam_sub_object. */
 /* Supplied declaration required: nw_snd_SoundActor_detail_SetupSoundWithAmbientInfo. */
 
@@ -92,7 +92,7 @@ unsigned int FUN_00376b04(unsigned int param_1,int *param_2,unsigned int param_3
           temp_v8 = 2;
         }
       }
-      FUN_003e70d0(temp_v0,param_3);
+      soundArchiveWrapperGetSoundUserParam(temp_v0,param_3);
       temp_v6 = temp_v0;
     }
     temp_v15 = param_1 + 0x58;

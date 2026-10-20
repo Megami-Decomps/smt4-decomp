@@ -30,7 +30,7 @@ extern unsigned char LAB_00427334; /* 0x427334 */
 /* Supplied declaration required: FUN_00102b6c. */
 /* Supplied declaration required: vcallSlot12IfValid. */
 /* Supplied declaration required: FUN_001b57a8. */
-extern int FUN_002e783c(void);
+extern int wstrlenU16(void);
 /* Supplied declaration required: FUN_0042b17c. */
 /* Supplied declaration required: FUN_0043c2f4. */
 extern unsigned int nn_fs_CTR_MPCore_detail_UserFileSystem_TryReadFile(int *, unsigned int, long long, unsigned int, unsigned int);
@@ -69,7 +69,7 @@ void FUN_0042718c(unsigned int *param_1,int *param_2,unsigned int param_3)
   temp_v7 = temp_v5;
   piVar2 = &temp_v9;
   temp_v6 = 4;
-  temp_v0 = FUN_002e783c();
+  temp_v0 = wstrlenU16();
   temp_v8 = (temp_v0 + 1) * 2;
   temp_v4 = 1;
   FUN_0042b17c(piVar2,temp_v3,temp_v2,&temp_v6);

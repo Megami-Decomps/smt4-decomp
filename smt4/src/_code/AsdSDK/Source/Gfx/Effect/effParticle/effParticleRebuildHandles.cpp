@@ -5,7 +5,7 @@
 
 extern "C" {
 
-extern const char DAT_004103c4[]; /* __FILE__ of effParticle.cpp */
+extern const char g_effParticleSourcePath[]; /* __FILE__ of effParticle.cpp */
 
 void *memAlloc(int, int, int, u32, int, int);
 void asdMemFree(void *ptr);
@@ -28,7 +28,7 @@ void effParticleRebuildHandles(EffParticleParam *param, void *init)
         param->buffer38 = NULL;
     }
     if ((size = count * 4) != 0) {
-        asdDebugTrace(DAT_004103c4, 0x242);
+        asdDebugTrace(g_effParticleSourcePath, 0x242);
         param->buffer38 = memAlloc(0x10000, 0x100, 0, size, 0x10, 1);
         param->handles34 = (void **)param->buffer38;
         param->handles34[0] = effBlockCreateFromBlock(init);

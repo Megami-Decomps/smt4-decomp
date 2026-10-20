@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_2_stack;
 
-extern unsigned int FUN_0018719c(void);
+extern unsigned int gameFlagIsSet(void);
 
 
 unsigned int FUN_00148bb8(int param_1,int param_2)
@@ -63,7 +63,7 @@ unsigned int FUN_00148bb8(int param_1,int param_2)
                     /* WARNING: Treating indirect jump as return */
     return 0;
   }
-  temp_v1 = FUN_0018719c();
+  temp_v1 = gameFlagIsSet();
                     /* WARNING: Treating indirect jump as return */
   return temp_v1;
 }

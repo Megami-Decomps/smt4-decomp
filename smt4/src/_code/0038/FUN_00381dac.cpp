@@ -16,7 +16,7 @@ extern unsigned char LAB_00381df8; /* 0x381df8 */
 /* Supplied declaration required: FUN_002355ac. */
 /* Supplied declaration required: FUN_00259258. */
 /* Supplied declaration required: FUN_0026374c. */
-extern int FUN_002c09d0(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: dataTable28Sub0GetRecord. */
 
 
@@ -26,7 +26,7 @@ void FUN_00381dac(int param_1)
 /* irregular: 5 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_002c09d0(0x24);
+  temp_v0 = gameFlagIsSet(0x24);
   if (temp_v0 != 0) {
     FUN_002355ac(1);
   }

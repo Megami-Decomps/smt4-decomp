@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern const char DAT_00409c64[]; /* __FILE__ of AsdMemory.cpp */
+extern const char g_asdMemorySourcePath[]; /* __FILE__ of AsdMemory.cpp */
 
 AsdVramBlock *asdMemoryAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
 void asdVramBlockListInsert(void *list, AsdVramBlock *block);
@@ -32,7 +32,7 @@ u32 asdVramHeapAlloc(AsdVramHeap *heap, u32 size, u32 unk08, u32 unk0c)
                 if ((blockSize & 0x7f) != 0) {
                     blockSize += 0x80 - (blockSize & 0x7f);
                 }
-                asdDebugTrace(DAT_00409c64, 384);
+                asdDebugTrace(g_asdMemorySourcePath, 384);
                 block = asdMemoryAlloc(ASD_HEAP_MAIN, ASD_ALIGN_DEFAULT, 0, sizeof(AsdVramBlock), 1);
                 block->addr = 0;
                 block->size = 0;

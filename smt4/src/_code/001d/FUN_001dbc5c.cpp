@@ -19,7 +19,7 @@ typedef struct {
 extern unsigned int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-extern int FUN_002a60b4(unsigned int, unsigned int);
+extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 extern int FUN_002b8660(void);
 /* Supplied declaration required: FUN_002ba1e0. */
 extern int jobGetWork(void);
@@ -48,7 +48,7 @@ void FUN_001dbc5c(void)
     else {
       temp_v3 = *(float *)(temp_v0 + 0x2c) * 0.5f;
     }
-    temp_v1 = FUN_002a60b4(*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 0x14));
+    temp_v1 = asdTMTexTableNodeIsLoaded(*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 0x14));
     temp_v5 = 255.0f;
     if (temp_v1 != 0) {
       temp_v1 = VectorFloatToUnsigned(temp_v3 * 255.0f,3);
@@ -57,12 +57,12 @@ void FUN_001dbc5c(void)
       FUN_002c1b64(g_titleScene,*(unsigned int *)(*(int *)(temp_v0 + 0xc) + 8));
       FUN_002ba1e0(temp_v2 + temp_v1 * 0x1010100);
     }
-    temp_v1 = FUN_002a60b4(*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 0x84));
+    temp_v1 = asdTMTexTableNodeIsLoaded(*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 0x84));
     if (temp_v1 != 0) {
       temp_v4 = *(float *)(temp_v0 + 0x88);
       if (*(char *)(temp_v0 + 0x8d) == '\0') {
         temp_v4 = *(float *)(temp_v0 + 0x28);
-        temp_v1 = FUN_002a60b4(*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 0x14));
+        temp_v1 = asdTMTexTableNodeIsLoaded(*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 0x14));
         if (temp_v1 != 0) {
           return;
         }

@@ -9,7 +9,7 @@ int FUN_002829d4(void);
 int FUN_00295eb0(int, int, int);
 int FUN_0029f848(int, unsigned int, int, int, int, int);
 int FUN_002ae584(void);
-int FUN_002b8cc8(void);
+int ifTouchRegionRemove(void);
 int timerStart(...);
 int FUN_002bee58(int, int);
 
@@ -22,12 +22,12 @@ typedef struct {
 /* Supplied declaration required: FUN_00241d84. */
 /* Supplied declaration required: FUN_00248738. */
 /* Supplied declaration required: FUN_002829d4. */
-extern int padIsButtonDown(unsigned int);
+extern int flagBitIsSet(unsigned int);
 /* Supplied declaration required: FUN_00295eb0. */
 extern int FUN_0029efa8(int);
 /* Supplied declaration required: FUN_0029f848. */
 /* Supplied declaration required: FUN_002ae584. */
-/* Supplied declaration required: FUN_002b8cc8. */
+/* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bee58. */
 
@@ -66,7 +66,7 @@ unsigned int FUN_00248738(int param_1,unsigned int param_2)
         temp_v0 = temp_v2;
         FUN_002ae584();
         if ((temp_v0 != 0) &&
-           ((temp_v3 = padIsButtonDown(temp_v2), temp_v3 != 0 || (temp_v0 = temp_v2, FUN_002829d4(), temp_v0 != 2))
+           ((temp_v3 = flagBitIsSet(temp_v2), temp_v3 != 0 || (temp_v0 = temp_v2, FUN_002829d4(), temp_v0 != 2))
            )) {
           *(unsigned int *)(param_1 + *(int *)(param_1 + 0x2a8) * 4 + 0x74) = temp_v2;
           *(int *)(param_1 + 0x2a8) = *(int *)(param_1 + 0x2a8) + 1;
@@ -81,7 +81,7 @@ unsigned int FUN_00248738(int param_1,unsigned int param_2)
     temp_v2 = 1;
     *(unsigned int *)(param_1 + 0x2a8) = 0;
     do {
-      temp_v3 = padIsButtonDown(temp_v2);
+      temp_v3 = flagBitIsSet(temp_v2);
       if (temp_v3 != 0) {
         *(unsigned int *)(param_1 + *(int *)(param_1 + 0x2a8) * 4 + 0x74) = temp_v2;
         *(int *)(param_1 + 0x2a8) = *(int *)(param_1 + 0x2a8) + 1;
@@ -94,7 +94,7 @@ unsigned int FUN_00248738(int param_1,unsigned int param_2)
     *(unsigned int *)(param_1 + 0x2a8) = 0;
     if (*(char *)(param_1 + 0x2b4) != '\0') {
       temp_v1 = 0x2e;
-      temp_v3 = padIsButtonDown(0x2e);
+      temp_v3 = flagBitIsSet(0x2e);
       if (temp_v3 == 0) {
         temp_v3 = 0x2e;
         FUN_002829d4();
@@ -107,7 +107,7 @@ unsigned int FUN_00248738(int param_1,unsigned int param_2)
     else if (*(char *)(param_1 + 0x2b5) == '\0') {
       temp_v2 = 1;
       do {
-        temp_v3 = padIsButtonDown(temp_v2);
+        temp_v3 = flagBitIsSet(temp_v2);
         if ((temp_v3 == 0) && (temp_v0 = temp_v2, FUN_002829d4(), temp_v0 == 0)) {
           *(unsigned int *)(param_1 + *(int *)(param_1 + 0x2a8) * 4 + 0x74) = temp_v2;
           *(int *)(param_1 + 0x2a8) = *(int *)(param_1 + 0x2a8) + 1;
@@ -117,7 +117,7 @@ unsigned int FUN_00248738(int param_1,unsigned int param_2)
     }
     else {
       temp_v1 = 0x18;
-      temp_v3 = padIsButtonDown(0x18);
+      temp_v3 = flagBitIsSet(0x18);
       if (temp_v3 == 0) {
         temp_v3 = 0x18;
         FUN_002829d4();
@@ -144,7 +144,7 @@ unsigned int FUN_00248738(int param_1,unsigned int param_2)
     temp_v3 = 0;
     if (*(short *)(param_1 + 0x524) != 0) {
       do {
-        FUN_002b8cc8();
+        ifTouchRegionRemove();
         temp_v3 = temp_v3 + 1;
       } while (temp_v3 < (int)(unsigned int)*(unsigned short *)(param_1 + 0x524));
     }

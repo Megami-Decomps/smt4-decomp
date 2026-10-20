@@ -27,8 +27,8 @@ static float romwright_fabs_4(float value)
 }
 #endif
 extern int FUN_00163fd4(unsigned int);
-extern int FUN_00164af0(unsigned int);
-extern int FUN_001656a0(unsigned int);
+extern int padButtonRepeat(unsigned int);
+extern int padButtonIsPressed(unsigned int);
 
 
 int * FUN_00200bcc(int *param_1)
@@ -101,8 +101,8 @@ int * FUN_00200bcc(int *param_1)
   else if ((temp_v7 & 0x10) == 0) {
     if (param_1[6] >= 2) {
       param_1[4] = temp_v7 & 0xffffff9f;
-      temp_v3 = FUN_00164af0(5);
-      if ((temp_v3 != 0) || (temp_v3 = FUN_00164af0(0x10), temp_v3 != 0)) {
+      temp_v3 = padButtonRepeat(5);
+      if ((temp_v3 != 0) || (temp_v3 = padButtonRepeat(0x10), temp_v3 != 0)) {
         do {
           while( 1 ) {
             do {
@@ -127,8 +127,8 @@ int * FUN_00200bcc(int *param_1)
         } while (*(int *)(temp_v11 + 0xc) == -1);
       }
       else {
-        temp_v3 = FUN_00164af0(6);
-        if ((temp_v3 != 0) || (temp_v3 = FUN_00164af0(0x1d), temp_v3 != 0)) {
+        temp_v3 = padButtonRepeat(6);
+        if ((temp_v3 != 0) || (temp_v3 = padButtonRepeat(0x1d), temp_v3 != 0)) {
           do {
             while( 1 ) {
               do {
@@ -157,9 +157,9 @@ int * FUN_00200bcc(int *param_1)
 LAB_00200e54:
     temp_v3 = 0;
     temp_v17 = 0;
-    temp_v4 = FUN_00164af0(3);
+    temp_v4 = padButtonRepeat(3);
     temp_v18 = 50.0f;
-    if ((temp_v4 != 0) || (temp_v4 = FUN_00164af0(0x1e), temp_v4 != 0)) {
+    if ((temp_v4 != 0) || (temp_v4 = padButtonRepeat(0x1e), temp_v4 != 0)) {
       temp_v5 = (unsigned int)((unsigned long long)temp_v17 >> 0x20);
       temp_v3 = FUN_00163fd4(7);
       temp_v15 = 0.1f;
@@ -480,8 +480,8 @@ LAB_002010f0:
       }
     }
     else {
-      temp_v4 = FUN_00164af0(4);
-      if ((temp_v4 != 0) || (temp_v4 = FUN_00164af0(0x11), temp_v4 != 0)) {
+      temp_v4 = padButtonRepeat(4);
+      if ((temp_v4 != 0) || (temp_v4 = padButtonRepeat(0x11), temp_v4 != 0)) {
         temp_v5 = (unsigned int)((unsigned long long)temp_v17 >> 0x20);
         temp_v3 = FUN_00163fd4(7);
         temp_v18 = -0.1f;
@@ -529,8 +529,8 @@ LAB_002010e4:
                  ((unsigned int)((float)temp_v17 == (float)((unsigned long long)temp_v17 >> 0x20)) << 0x1e);
       if (!romwright_subpiece_4_1_0(in_fpscr >> 0x1e,0)) goto LAB_002010f0;
     }
-    temp_v3 = FUN_001656a0(0);
-    if (((temp_v3 != 0) || (temp_v3 = FUN_001656a0(0x14), temp_v3 != 0)) && (param_1[6] >= 1)) {
+    temp_v3 = padButtonIsPressed(0);
+    if (((temp_v3 != 0) || (temp_v3 = padButtonIsPressed(0x14), temp_v3 != 0)) && (param_1[6] >= 1)) {
       temp_v1 = *(char *)(temp_v11 + 4);
       if (!((temp_v1 == '\x1a' || temp_v1 == '\x1b') || temp_v1 == '\x1c')) {
         if (temp_v1 != '\x1d') {
@@ -607,8 +607,8 @@ LAB_002010e4:
       }
     }
     else {
-      temp_v11 = FUN_001656a0(1);
-      if ((temp_v11 != 0) || (temp_v11 = FUN_001656a0(0x16), temp_v11 != 0)) {
+      temp_v11 = padButtonIsPressed(1);
+      if ((temp_v11 != 0) || (temp_v11 = padButtonIsPressed(0x16), temp_v11 != 0)) {
         piVar18 = (int *)param_1[0xd];
         param_1[4] = param_1[4] | 0x40;
         if (piVar18 != (int *)0x0) {

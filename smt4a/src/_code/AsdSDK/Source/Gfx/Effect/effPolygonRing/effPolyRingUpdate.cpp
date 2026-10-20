@@ -2,7 +2,7 @@
 
 extern "C" {
 
-s32 FUN_001acf08(void);
+s32 effGetFrameStep(void);
 
 extern PolyRingKind g_polyRingKinds[];
 
@@ -10,7 +10,7 @@ extern PolyRingKind g_polyRingKinds[];
 void effPolyRingUpdate(PolyObject *obj)
 {
     g_polyRingKinds[obj->kind].update(obj);
-    obj->frame += FUN_001acf08();
+    obj->frame += effGetFrameStep();
 }
 
 } /* extern "C" */

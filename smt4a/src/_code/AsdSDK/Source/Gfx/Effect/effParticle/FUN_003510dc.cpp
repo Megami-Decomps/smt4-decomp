@@ -6,21 +6,21 @@ extern "C" {
 
 int resourceDestroy(unsigned int);
 int memAlloc(...);
-int FUN_001800b8(...);
+int asdTextureRelease(...);
 int resourceListDestroy(...);
 int asdMemFree(...);
 int FUN_001abbc4(void);
-int FUN_00212500(...);
+int refCountIncrement(...);
 int FUN_00221f20(void);
-int FUN_00222104(void);
+int handleBlockRefDrop(void);
 int FUN_00222180(void);
 int effTlpCreate(void);
-int FUN_00222434(void);
+int handleBlockUnref(void);
 int FUN_00243c24(void);
 int FUN_00291038(void);
 int FUN_002b2d74(unsigned int, unsigned int, unsigned int);
-int FUN_002b2f08(void);
-int FUN_002e6dd4(void);
+int objectBufferFree(void);
+int rt_memclr(void);
 int FUN_0035105c(...);
 int asdEffectTextureCreate(void);
 int VectorSignedToFloat(...);
@@ -46,23 +46,23 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: resourceDestroy. */
 /* Supplied declaration required: memAlloc. */
-/* Supplied declaration required: FUN_001800b8. */
+/* Supplied declaration required: asdTextureRelease. */
 /* Supplied declaration required: resourceListDestroy. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_001abbc4. */
-/* Supplied declaration required: FUN_00212500. */
+/* Supplied declaration required: refCountIncrement. */
 /* Supplied declaration required: FUN_00221f20. */
-/* Supplied declaration required: FUN_00222104. */
+/* Supplied declaration required: handleBlockRefDrop. */
 /* Supplied declaration required: FUN_00222180. */
 /* Supplied declaration required: effTlpCreate. */
-/* Supplied declaration required: FUN_00222434. */
+/* Supplied declaration required: handleBlockUnref. */
 /* Supplied declaration required: FUN_00243c24. */
 extern unsigned int *FUN_002721e4(fn_003510dc_arg0 *);
 /* Supplied declaration required: FUN_00291038. */
 /* Supplied declaration required: FUN_002b2d74. */
-/* Supplied declaration required: FUN_002b2f08. */
+/* Supplied declaration required: objectBufferFree. */
 extern unsigned int FUN_002b41c4(void);
-/* Supplied declaration required: FUN_002e6dd4. */
+/* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: FUN_0035105c. */
 extern int FUN_0037a7f4(unsigned int *);
 extern int FUN_0037a834(unsigned int);
@@ -94,13 +94,13 @@ unsigned int * FUN_003510dc(fn_003510dc_arg0 *param_1)
   }
   puVar3 = (unsigned int *)0x10000;
   memAlloc(0x10000,0x100,0,0x5c,0x10,1);
-  FUN_002e6dd4();
+  rt_memclr();
   puVar3[1] = 0xffffffff;
   *puVar3 = temp_v3;
   puVar3[2] = 0x3f800000;
   temp_v3 = (unsigned int)param_1->field_0xc;
   if (puVar3[0x13] != 0) {
-    FUN_002b2f08();
+    objectBufferFree();
   }
   FUN_002b2d74(temp_v3,*puVar3,temp_v0);
   puVar3[0x13] = temp_v3;
@@ -117,13 +117,13 @@ unsigned int * FUN_003510dc(fn_003510dc_arg0 *param_1)
       puVar3[0x15] = (unsigned int)(temp_v4 * 0.5f * 0.0625f);
       puVar3[0x16] = (unsigned int)(temp_v5 * 0.5f * 0.0625f);
       *(int *)(*(int *)(puVar3[0x14] + 0xc) + 0xb4) = temp_v1;
-      FUN_00212500(temp_v1);
-      FUN_001800b8(temp_v1);
+      refCountIncrement(temp_v1);
+      asdTextureRelease(temp_v1);
       break;
     case 2:
       FUN_0035105c(puVar3,*(unsigned int *)(puVar3[0x13] + 8),2);
       if (puVar3[0x11] != 0) {
-        FUN_00222104();
+        handleBlockRefDrop();
       }
       FUN_00221f20();
       puVar3[0x11] = (unsigned int)puVar4;
@@ -138,7 +138,7 @@ unsigned int * FUN_003510dc(fn_003510dc_arg0 *param_1)
       puVar3[0x15] = (unsigned int)(temp_v4 * 0.5f * 0.0625f);
       puVar3[0x16] = (unsigned int)(temp_v5 * 0.5f * 0.0625f);
       *(int *)(*(int *)(puVar3[0x14] + 0xc) + 0xb4) = temp_v1;
-      FUN_00212500();
+      refCountIncrement();
       break;
     case 5:
       temp_v3 = puVar3[0x13];
@@ -219,7 +219,7 @@ unsigned int * FUN_003510dc(fn_003510dc_arg0 *param_1)
     case 7:
       FUN_0035105c(puVar3,*(unsigned int *)(puVar3[0x13] + 8),7);
       if (puVar3[0x12] != 0) {
-        FUN_00222434();
+        handleBlockUnref();
       }
       effTlpCreate();
       puVar3[0x12] = (unsigned int)puVar4;
@@ -232,8 +232,8 @@ unsigned int * FUN_003510dc(fn_003510dc_arg0 *param_1)
       puVar3[0x15] = (unsigned int)(temp_v5 * 0.5f * 0.0625f);
       puVar3[0x16] = (unsigned int)(temp_v4 * 0.5f * 0.0625f);
       *(unsigned int **)(*(int *)(puVar3[0x14] + 0xc) + 0xb4) = puVar4;
-      FUN_00212500(puVar4);
-      FUN_001800b8(puVar4);
+      refCountIncrement(puVar4);
+      asdTextureRelease(puVar4);
     }
     *(unsigned short *)(puVar3 + 3) = param_1->field_0x1c;
   }

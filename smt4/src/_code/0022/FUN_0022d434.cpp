@@ -14,7 +14,7 @@ int FUN_00233818(void);
 int FUN_00233854(unsigned int);
 int FUN_0029ce60(unsigned int, int, int);
 int FUN_0029ea68(...);
-int FUN_002b9024(...);
+int devilGetRecord(...);
 int jyoucyuGetTableEntry(...);
 int FUN_002cd37c(void);
 
@@ -41,8 +41,8 @@ extern unsigned char FUN_0022e0b0(int, unsigned int);
 /* Supplied declaration required: FUN_0029ce60. */
 /* Supplied declaration required: FUN_0029ea68. */
 extern int FUN_002a0d0c(void);
-extern int FUN_002a8764(void);
-/* Supplied declaration required: FUN_002b9024. */
+extern int gameGetSlotTable(void);
+/* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: jyoucyuGetTableEntry. */
 /* Supplied declaration required: FUN_002cd37c. */
 extern unsigned char FUN_003ad6a0(int, int);
@@ -79,7 +79,7 @@ void FUN_0022d434(int param_1)
     temp_v9 = 0;
     do {
       puVar4 = (unsigned short *)((temp_v9 + 1U) & 0xffff);
-      FUN_002b9024();
+      devilGetRecord();
       if ((puVar4 != (unsigned short *)0x0) && ((puVar4[3] & 1) != 0)) {
         temp_v10 = temp_v10 + 1;
         temp_v3 = FUN_0029ea68(*puVar4);
@@ -127,7 +127,7 @@ void FUN_0022d434(int param_1)
   }
   else {
     FUN_0022e2fc();
-    temp_v9 = FUN_002a8764();
+    temp_v9 = gameGetSlotTable();
     temp_v4 = 0;
     if (*(char *)(temp_v9 + 0x910b) != '\0') {
       do {
@@ -138,7 +138,7 @@ void FUN_0022d434(int param_1)
           FUN_002cd37c();
           if (temp_v5 == 0) {
             puVar4 = (unsigned short *)(unsigned int)*(unsigned short *)(temp_v3 + 0xd6);
-            FUN_002b9024();
+            devilGetRecord();
             FUN_0022e17c(temp_v12,*puVar4,1);
             temp_v6 = (unsigned int)*puVar4;
             FUN_0029ce60(temp_v6,*(unsigned char *)(param_1 + 0x5a5),0);
@@ -158,7 +158,7 @@ void FUN_0022d434(int param_1)
     temp_v2 = 0;
     do {
       puVar10 = (unsigned short *)((temp_v2 + 1U) & 0xffff);
-      FUN_002b9024(puVar10,temp_v4);
+      devilGetRecord(puVar10,temp_v4);
       temp_v4 = temp_v7;
       if ((puVar10 != (unsigned short *)0x0) &&
          (temp_v4 = (unsigned int)(unsigned short)puVar10[3], (puVar10[3] & 1) != 0)) {

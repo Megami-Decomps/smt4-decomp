@@ -4,15 +4,15 @@
 
 extern "C" {
 
-int FUN_002b45e8(void);
+int dataTable08Sub2GetRecord(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-/* Supplied declaration required: FUN_002b45e8. */
-extern int FUN_002b63ac(void);
+/* Supplied declaration required: dataTable08Sub2GetRecord. */
+extern int gameGetPlayerData(void);
 
 
 unsigned int FUN_0025cc34(void)
@@ -22,9 +22,9 @@ unsigned int FUN_0025cc34(void)
   int temp_v0;
   unsigned int temp_v1;
   
-  temp_v0 = FUN_002b63ac();
+  temp_v0 = gameGetPlayerData();
   temp_v1 = (unsigned int)*(unsigned short *)(temp_v0 + 4);
-  FUN_002b45e8();
+  dataTable08Sub2GetRecord();
   switch(*(unsigned int *)(temp_v1 + 0x54) >> 0x14) {
   case 0:
     return 0x3ef;

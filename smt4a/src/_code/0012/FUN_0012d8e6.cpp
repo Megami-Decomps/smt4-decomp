@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002ede22(int [2]);
+int mapIteratorNext(int [2]);
 int FUN_002ede86(unsigned char [8], int, int *, int *);
 int FUN_0030f06c(...);
 
@@ -22,7 +22,7 @@ typedef struct {
 } param_2_stack;
 
 extern int wordRefsDiffer_002ede12(int *, unsigned int *);
-/* Supplied declaration required: FUN_002ede22. */
+/* Supplied declaration required: mapIteratorNext. */
 /* Supplied declaration required: FUN_002ede86. */
 /* Supplied declaration required: FUN_0030f06c. */
 
@@ -82,7 +82,7 @@ int FUN_0012d8e6(int param_1,unsigned int param_2)
   temp_v5 = temp_v1;
   while (temp_v1 = wordRefsDiffer_002ede12(temp_v4,(unsigned int *)&temp_v6), temp_v1 != 0) {
     temp_v3 = temp_v3 + 1;
-    FUN_002ede22(temp_v4);
+    mapIteratorNext(temp_v4);
   }
   temp_v9 = temp_v6;
   temp_v11 = temp_v5;

@@ -9,15 +9,15 @@ typedef struct Inventory {
 
 int scrSetResult(int value);
 int scrGetArg(int index);
-Inventory *FUN_002a8764(void);
-int FUN_002a8778(void);
+Inventory *gameGetSlotTable(void);
+int gameCountUnits(void);
 
 /* Script command: passes to scrSetResult whether script argument 0 fits in the remaining capacity (capacity - used). */
 u32 FUN_002fffcc(void)
 {
     int needed = scrGetArg(0);
 
-    scrSetResult(needed <= (int)(FUN_002a8764()->capacity - FUN_002a8778()));
+    scrSetResult(needed <= (int)(gameGetSlotTable()->capacity - gameCountUnits()));
     return 1;
 }
 

@@ -3,12 +3,12 @@
 extern "C" {
 
 int FUN_00234660(void);
-int FUN_002b2368(void);
+int asdMemFreeNonNull(void);
 
 void FUN_0038ae20(void)
 {
     FUN_00234660();
-    FUN_002b2368();
+    asdMemFreeNonNull();
 }
 
 } /* extern "C" */

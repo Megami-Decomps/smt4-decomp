@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001ac2d4(unsigned int);
 int FUN_0029570c(void);
-int FUN_0032c5c4(unsigned int, int, char *);
+int nodeSetTranslation(unsigned int, int, char *);
 int faderSetValue(unsigned int);
 int FUN_0036bb1c(unsigned int, int);
 
@@ -15,7 +15,7 @@ extern unsigned char g_gameState; /* 0x5f15fc */
 
 /* Supplied declaration required: FUN_001ac2d4. */
 /* Supplied declaration required: FUN_0029570c. */
-/* Supplied declaration required: FUN_0032c5c4. */
+/* Supplied declaration required: nodeSetTranslation. */
 /* Supplied declaration required: faderSetValue. */
 /* Supplied declaration required: FUN_0036bb1c. */
 
@@ -68,7 +68,7 @@ void FUN_002d8cec(void)
           temp_v0 = *(unsigned int *)(*(int *)(pcVar5 + 0x20) + 8);
           faderSetValue(temp_v0);
         }
-        FUN_0032c5c4(*(unsigned int *)(*(int *)(pcVar5 + 0x20) + 8),0,pcVar5 + 4);
+        nodeSetTranslation(*(unsigned int *)(*(int *)(pcVar5 + 0x20) + 8),0,pcVar5 + 4);
         FUN_0036bb1c(*(unsigned int *)(*(int *)(pcVar5 + 0x20) + 8),0);
         if (*(int *)(*(int *)(*(int *)(pcVar5 + 0x20) + 8) + 0x38) != *(int *)(pcVar5 + 0x14)) {
           FUN_001ac2d4(*(unsigned int *)(*(int *)(pcVar5 + 0x20) + 8));

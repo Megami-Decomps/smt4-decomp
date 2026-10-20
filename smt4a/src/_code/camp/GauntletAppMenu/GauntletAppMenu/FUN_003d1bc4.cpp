@@ -5,7 +5,7 @@
 extern "C" {
 
 int qsort(...);
-int FUN_00312830(...);
+int arraySortQsort(...);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -25,7 +25,7 @@ extern int g_gauntletAppMenu; /* 0x57f238 */
 /* Supplied declaration required: qsort. */
 extern int FUN_0026140c(void);
 extern unsigned int FUN_002c2c68(int);
-/* Supplied declaration required: FUN_00312830. */
+/* Supplied declaration required: arraySortQsort. */
 
 
 void FUN_003d1bc4(void)
@@ -75,11 +75,11 @@ void FUN_003d1bc4(void)
   if ((*pbVar5 & 0x7f) == 3) {
     if (temp_v3 != 0) {
       temp_v2 = FUN_002c2c68(temp_v0 + 0x10);
-      FUN_00312830(temp_v0 + 0x74,temp_v2,4,FUN_002320b0);
+      arraySortQsort(temp_v0 + 0x74,temp_v2,4,FUN_002320b0);
       return;
     }
     temp_v2 = FUN_002c2c68(temp_v0 + 0x10);
-    FUN_00312830(temp_v0 + 0x74,temp_v2,4,FUN_002ce6dc);
+    arraySortQsort(temp_v0 + 0x74,temp_v2,4,FUN_002ce6dc);
     return;
   }
   return;

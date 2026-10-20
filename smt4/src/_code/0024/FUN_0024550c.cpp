@@ -8,7 +8,7 @@ int FUN_0024679c(...);
 int FUN_00249e54(...);
 int FUN_00297468(...);
 int FUN_002be624(...);
-int FUN_002bf694(...);
+int libc_strcpy(...);
 int asdMemFree(...);
 int memClear(...);
 int rt_memcpy_w(...);
@@ -29,7 +29,7 @@ extern int FUN_0024a808(int);
 extern int FUN_002522e0(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_00297468. */
 /* Supplied declaration required: FUN_002be624. */
-/* Supplied declaration required: FUN_002bf694. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: rt_memcpy_w. */
@@ -84,9 +84,9 @@ unsigned int FUN_0024550c(int param_1)
       memClear(temp_v8,0x80);
       memClear(temp_v10,0x80);
       FUN_002be624(temp_v10,"battle/effect/%s.eft","Move_out_c" + temp_v1 * 0x20);
-      FUN_002bf694(temp_v8,temp_v10);
+      libc_strcpy(temp_v8,temp_v10);
       temp_v2 = FUN_002522e0(temp_v8,0x2f);
-      FUN_002bf694(temp_v3 + 0x2ce4,temp_v2 + 1);
+      libc_strcpy(temp_v3 + 0x2ce4,temp_v2 + 1);
       temp_v2 = FUN_0024a808(temp_v3 + 0x2ce4);
       if (temp_v2 == 0xff) {
         FUN_00297468(temp_v8,temp_v3 + 0x2ce0,0);

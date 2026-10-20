@@ -6,12 +6,12 @@ extern "C" {
 
 int FUN_002e93c2(int, unsigned int);
 int FUN_002ea974(unsigned char [104]);
-int FUN_002ea9dc(unsigned char [104]);
+int onlineUrlDestroy(unsigned char [104]);
 int FUN_002fd624(...);
 
 /* Supplied declaration required: FUN_002e93c2. */
 /* Supplied declaration required: FUN_002ea974. */
-/* Supplied declaration required: FUN_002ea9dc. */
+/* Supplied declaration required: onlineUrlDestroy. */
 extern int FUN_002eb5f4(void);
 extern int FUN_002ee5fe(unsigned int, int, unsigned char *);
 /* Supplied declaration required: FUN_002fd624. */
@@ -43,11 +43,11 @@ unsigned int FUN_002fd546(int param_1)
         *(unsigned short *)(param_1 + 0x1aa) = temp_v0;
         temp_v2 = FUN_002fd624(temp_v4);
         FUN_002e93c2(*piVar4 + 8,temp_v2);
-        FUN_002ea9dc(temp_v4);
+        onlineUrlDestroy(temp_v4);
         return 1;
       }
     }
-    FUN_002ea9dc(temp_v4);
+    onlineUrlDestroy(temp_v4);
   }
   return 0;
 }

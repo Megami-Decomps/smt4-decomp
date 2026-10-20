@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002bb648(int, int);
-int FUN_002c52f8(void);
+int asdFatalError(void);
 
 typedef int romwright_code(...);
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -14,7 +14,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_002bb648. */
-/* Supplied declaration required: FUN_002c52f8. */
+/* Supplied declaration required: asdFatalError. */
 extern void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(unsigned int);
 
 
@@ -29,7 +29,7 @@ void FUN_002bb6c4(int *param_1,unsigned int param_2)
   if (temp_v0 < 0) {
     if ((param_1[2] & 0xfffffffeU) != 0) {
       if ((param_1[2] & 1U) != 0) {
-        FUN_002c52f8();
+        asdFatalError();
       }
       nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(param_1[2] & 0xfffffffe);
       param_1[2] = 0;
@@ -42,7 +42,7 @@ void FUN_002bb6c4(int *param_1,unsigned int param_2)
   if (temp_v0 < 0) {
     if ((param_1[2] & 0xfffffffeU) != 0) {
       if ((param_1[2] & 1U) != 0) {
-        FUN_002c52f8();
+        asdFatalError();
       }
       nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(param_1[2] & 0xfffffffe);
       param_1[2] = 0;
@@ -53,7 +53,7 @@ void FUN_002bb6c4(int *param_1,unsigned int param_2)
   }
   if ((param_1[2] & 0xfffffffeU) != 0) {
     if ((param_1[2] & 1U) != 0) {
-      FUN_002c52f8();
+      asdFatalError();
     }
     nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(param_1[2] & 0xfffffffe);
     param_1[2] = 0;

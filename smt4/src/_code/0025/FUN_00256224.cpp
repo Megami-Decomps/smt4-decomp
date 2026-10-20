@@ -15,7 +15,7 @@ extern unsigned int DAT_00464a78; /* 0x464a78 */
 extern unsigned int DAT_00464a80; /* 0x464a80 */
 
 /* Supplied declaration required: FUN_002b2b88. */
-extern unsigned int FUN_002c30c4(void);
+extern unsigned int libc_strlen(void);
 
 
 void FUN_00256224(unsigned int param_1)
@@ -24,7 +24,7 @@ void FUN_00256224(unsigned int param_1)
 /* irregular: 1 native warning(s); review required */
   unsigned int temp_v0;
   
-  temp_v0 = FUN_002c30c4();
+  temp_v0 = libc_strlen();
   FUN_002b2b88(DAT_00464a80,DAT_00464a78,param_1,temp_v0);
   return;
 }

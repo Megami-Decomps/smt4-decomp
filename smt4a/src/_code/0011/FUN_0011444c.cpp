@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002e7232(int);
-int FUN_002e75fa(int);
+int sharedRefRelease(int);
+int sharedRefAddRef(int);
 
-/* Supplied declaration required: FUN_002e7232. */
-/* Supplied declaration required: FUN_002e75fa. */
+/* Supplied declaration required: sharedRefRelease. */
+/* Supplied declaration required: sharedRefAddRef. */
 
 
 void FUN_0011444c(int param_1,int param_2)
@@ -16,12 +16,12 @@ void FUN_0011444c(int param_1,int param_2)
 {
 /* irregular: 2 native warning(s); review required */
   if (*(int *)(param_1 + 0x28) != 0) {
-    FUN_002e7232(*(int *)(param_1 + 0x28));
+    sharedRefRelease(*(int *)(param_1 + 0x28));
     *(unsigned int *)(param_1 + 0x28) = 0;
   }
   if (param_2 != 0) {
     *(int *)(param_1 + 0x28) = param_2;
-    FUN_002e75fa(param_2);
+    sharedRefAddRef(param_2);
   }
   return;
 }

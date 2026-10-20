@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002e9520(int, unsigned int);
+int onlineStringCopyConstruct(int, unsigned int);
 
-/* Supplied declaration required: FUN_002e9520. */
+/* Supplied declaration required: onlineStringCopyConstruct. */
 
 
 void FUN_0030d3ba(unsigned int param_1,int param_2,unsigned int param_3)
@@ -14,7 +14,7 @@ void FUN_0030d3ba(unsigned int param_1,int param_2,unsigned int param_3)
 {
 /* irregular: 1 native warning(s); review required */
   if (param_2 != 0) {
-    FUN_002e9520(param_2,param_3);
+    onlineStringCopyConstruct(param_2,param_3);
   }
   return;
 }

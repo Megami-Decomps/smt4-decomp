@@ -4,17 +4,17 @@
 
 extern "C" {
 
-int FUN_002e75fa(...);
-int FUN_002e9318(unsigned char [8]);
-int FUN_002e9598(...);
+int sharedRefAddRef(...);
+int onlineStringDestroy(unsigned char [8]);
+int onlineStringAssign(...);
 int FUN_002e9c0c(void);
 int FUN_002ea2e8(unsigned char [4]);
 int FUN_002ea3a8(...);
-int FUN_002ea9dc(...);
+int onlineUrlDestroy(...);
 int FUN_002ec8f8(unsigned int *);
 int FUN_002ee568(unsigned char [104], unsigned int);
-int FUN_002f32f8(...);
-int FUN_002f7cb0(...);
+int wideBufferAppend(...);
+int onlineJobSetStateWaiting(...);
 int FUN_002f7cba(...);
 int FUN_003054f0(...);
 int FUN_0030568e(unsigned int, int);
@@ -38,21 +38,21 @@ extern unsigned char LAB_00119674; /* 0x119674 */
 extern unsigned char LAB_00119680; /* 0x119680 */
 
 extern int FUN_00124130(int);
-/* Supplied declaration required: FUN_002e75fa. */
-extern int FUN_002e760a(unsigned int);
+/* Supplied declaration required: sharedRefAddRef. */
+extern int operatorNew(unsigned int);
 extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
-/* Supplied declaration required: FUN_002e9318. */
-/* Supplied declaration required: FUN_002e9598. */
+/* Supplied declaration required: onlineStringDestroy. */
+/* Supplied declaration required: onlineStringAssign. */
 /* Supplied declaration required: FUN_002e9c0c. */
 extern unsigned int FUN_002ea100(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002ea2e8. */
 /* Supplied declaration required: FUN_002ea3a8. */
 extern unsigned int FUN_002ea3c0(int, unsigned int, unsigned int, unsigned char *);
-/* Supplied declaration required: FUN_002ea9dc. */
+/* Supplied declaration required: onlineUrlDestroy. */
 /* Supplied declaration required: FUN_002ec8f8. */
 /* Supplied declaration required: FUN_002ee568. */
-/* Supplied declaration required: FUN_002f32f8. */
-/* Supplied declaration required: FUN_002f7cb0. */
+/* Supplied declaration required: wideBufferAppend. */
+/* Supplied declaration required: onlineJobSetStateWaiting. */
 /* Supplied declaration required: FUN_002f7cba. */
 extern unsigned int FUN_002fbd00(unsigned int, int);
 /* Supplied declaration required: FUN_003054f0. */
@@ -80,15 +80,15 @@ void FUN_001194ec(int param_1)
   unsigned char temp_v11 [12];
   
   FUN_002ea2e8(temp_v5);
-  temp_v0 = FUN_002f32f8(temp_v5,&LAB_00119630);
+  temp_v0 = wideBufferAppend(temp_v5,&LAB_00119630);
   temp_v0 = FUN_002fbd00(temp_v0,param_1 + 0x78);
-  temp_v0 = FUN_002f32f8(temp_v0,&LAB_00119650);
+  temp_v0 = wideBufferAppend(temp_v0,&LAB_00119650);
   temp_v0 = FUN_0030568e(temp_v0,*(unsigned short *)(param_1 + 0x80));
-  temp_v0 = FUN_002f32f8(temp_v0,&LAB_00119660);
+  temp_v0 = wideBufferAppend(temp_v0,&LAB_00119660);
   temp_v0 = FUN_0030568e(temp_v0,10);
-  temp_v0 = FUN_002f32f8(temp_v0,&LAB_00119674);
+  temp_v0 = wideBufferAppend(temp_v0,&LAB_00119674);
   temp_v0 = FUN_0030568e(temp_v0,1);
-  temp_v0 = FUN_002f32f8(temp_v0,&LAB_00119680);
+  temp_v0 = wideBufferAppend(temp_v0,&LAB_00119680);
   FUN_0030568e(temp_v0,2);
   FUN_002ee568(temp_v9,temp_v6);
   temp_v1 = FUN_00124130(param_1);
@@ -97,9 +97,9 @@ void FUN_001194ec(int param_1)
     (**(romwright_code **)(**(int **)(*(int *)(*(int *)(param_1 + 0x198) + 0x78) + 0x24) + 0x14))();
     temp_v1 = *(int *)(*(int *)(param_1 + 0x198) + 0x78);
     temp_v0 = FUN_002ea100(temp_v10,*(unsigned int *)(param_1 + 0x74));
-    FUN_002e9598(temp_v1 + 0x1c,temp_v0);
-    FUN_002e9318(temp_v10);
-    FUN_002e9598(*(int *)(*(int *)(param_1 + 0x198) + 0x78) + 0x14,param_1 + 0x6c);
+    onlineStringAssign(temp_v1 + 0x1c,temp_v0);
+    onlineStringDestroy(temp_v10);
+    onlineStringAssign(*(int *)(*(int *)(param_1 + 0x198) + 0x78) + 0x14,param_1 + 0x6c);
     FUN_002e9c0c();
     temp_v7 = *(unsigned int *)(param_1 + 0x318);
     temp_v8 = *(unsigned int *)(param_1 + 0x31c);
@@ -111,15 +111,15 @@ void FUN_001194ec(int param_1)
     temp_v4 = param_1 + 0x30c;
     FUN_003056a0(temp_v1,param_1 + 0x88,temp_v9,param_1 + 0x310);
     if (temp_v1 != 0) {
-      FUN_002e75fa(*(unsigned int *)(param_1 + 0x30c));
-      FUN_002f7cb0(param_1);
-      temp_v1 = FUN_002e760a(0x10);
+      sharedRefAddRef(*(unsigned int *)(param_1 + 0x30c));
+      onlineJobSetStateWaiting(param_1);
+      temp_v1 = operatorNew(0x10);
       temp_v0 = 0;
       if (temp_v1 != 0) {
         temp_v0 = FUN_002ea3c0(temp_v1,0x1193c9,0,&LAB_0011965c);
       }
       FUN_002f7cba(param_1,param_1 + 0x88,temp_v0);
-      FUN_002ea9dc(temp_v9);
+      onlineUrlDestroy(temp_v9);
       FUN_002ea3a8(temp_v5);
       return;
     }
@@ -127,7 +127,7 @@ void FUN_001194ec(int param_1)
   temp_v3 = 0x8001000d;
   temp_v0 = FUN_002e7908(temp_v11,(unsigned int *)&temp_v3);
   FUN_003054f0(param_1,temp_v0);
-  FUN_002ea9dc(temp_v9);
+  onlineUrlDestroy(temp_v9);
   FUN_002ea3a8(temp_v5);
   return;
 }

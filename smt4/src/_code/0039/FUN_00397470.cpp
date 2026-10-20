@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002636d0(...);
 int FUN_00296ee0(...);
-int FUN_00296f4c(...);
+int scrScriptProcessStartEntry(...);
 
 typedef struct fn_00397470_arg0 fn_00397470_arg0;
 struct fn_00397470_arg0 {
@@ -49,7 +49,7 @@ extern int FUN_0019e0c0(unsigned int);
 extern int FUN_00220cf4(void);
 /* Supplied declaration required: FUN_002636d0. */
 /* Supplied declaration required: FUN_00296ee0. */
-/* Supplied declaration required: FUN_00296f4c. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002973d8(void);
 extern int sys43e188GetState(void);
 
@@ -82,7 +82,7 @@ void FUN_00397470(fn_00397470_arg0 *param_1)
   else {
     temp_v0 = sys43e188GetState();
     if (temp_v0 != 0) {
-      FUN_00296f4c(*(unsigned int *)&param_1->field_0x654,3);
+      scrScriptProcessStartEntry(*(unsigned int *)&param_1->field_0x654,3);
       param_1->field_0x658 = '\x01';
     }
   }

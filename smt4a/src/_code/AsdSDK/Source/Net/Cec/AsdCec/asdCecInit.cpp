@@ -4,7 +4,7 @@
 extern "C" {
 extern AsdCecGlobals g_asdCec;
 
-void FUN_002e3328(void *work);
+void asdOperatorDelete(void *work);
 void asdMemFree(void *block);
 void *asdMemoryAllocTracked(int heap, int alignClass, int unk08, u32 size, int fromFront);
 void *FUN_00178b04(u32 size, const char *file, int line);
@@ -19,7 +19,7 @@ s32 asdCecInit(void)
     AsdCecMessageBox *box;
 
     if (g_asdCec.cec != NULL) {
-        FUN_002e3328(g_asdCec.cec->work);
+        asdOperatorDelete(g_asdCec.cec->work);
         if (g_asdCec.cec->box != NULL) {
             ((void (*)(AsdCecMessageBox *))g_asdCec.cec->box->vtable[1])(g_asdCec.cec->box);
         }

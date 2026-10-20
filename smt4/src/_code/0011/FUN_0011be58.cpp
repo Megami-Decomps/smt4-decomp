@@ -16,13 +16,13 @@ extern unsigned int DAT_0044e46c; /* 0x44e46c */
 extern unsigned int DAT_0044e470; /* 0x44e470 */
 extern unsigned int DAT_0044e474; /* 0x44e474 */
 extern unsigned char DAT_004c6484; /* 0x4c6484 */
-extern unsigned char DAT_004c64a4; /* 0x4c64a4 */
+extern unsigned char g_callbackFuncs; /* 0x4c64a4 */
 extern unsigned char DAT_004c64c4; /* 0x4c64c4 */
 
 /* Supplied declaration required: FUN_0012a294. */
 extern int asdModelForwardChecked(unsigned int *, char *, unsigned int, unsigned int);
 extern int FUN_002c1398(unsigned int);
-extern unsigned int FUN_002c30c4(char *);
+extern unsigned int libc_strlen(char *);
 
 
 int FUN_0011be58(void)
@@ -39,7 +39,7 @@ int FUN_0011be58(void)
   else {
     temp_v0 = FUN_002c1398(0);
     if (-1 < temp_v0) {
-      temp_v1 = FUN_002c30c4("dsp::DSP");
+      temp_v1 = libc_strlen("dsp::DSP");
       temp_v0 = asdModelForwardChecked(&DAT_0044e46c,"dsp::DSP",temp_v1,0);
       if (-1 < temp_v0) {
         DAT_0044e460 = &DAT_0044e468;
@@ -47,7 +47,7 @@ int FUN_0011be58(void)
         temp_v0 = 0;
         temp_v2 = 8;
         do {
-          *(unsigned int *)(&DAT_004c64a4 + temp_v0 * 4) = 0;
+          *(unsigned int *)(&g_callbackFuncs + temp_v0 * 4) = 0;
           *(unsigned int *)(&DAT_004c6484 + temp_v0 * 4) = 0;
           *(unsigned int *)(temp_v0 * 4 + 0x4c6464) = 0;
           temp_v2 = temp_v2 - 1;

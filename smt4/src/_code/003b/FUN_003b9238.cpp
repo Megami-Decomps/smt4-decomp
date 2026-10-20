@@ -8,7 +8,7 @@ int FUN_0022b064(...);
 int FUN_002305e8(...);
 int FUN_0026374c(...);
 int FUN_0027db24(...);
-int FUN_0027e774(...);
+int dialogOpen(...);
 int FUN_0027e7b4(...);
 
 typedef struct fn_003b9238_arg0 fn_003b9238_arg0;
@@ -36,7 +36,7 @@ extern int FUN_0019e0c0(unsigned int);
 /* Supplied declaration required: FUN_002305e8. */
 /* Supplied declaration required: FUN_0026374c. */
 /* Supplied declaration required: FUN_0027db24. */
-/* Supplied declaration required: FUN_0027e774. */
+/* Supplied declaration required: dialogOpen. */
 /* Supplied declaration required: FUN_0027e7b4. */
 
 
@@ -50,7 +50,7 @@ void FUN_003b9238(fn_003b9238_arg0 *param_1)
   if (temp_v0 == 2) {
     FUN_0022b064(param_1);
     FUN_0027db24(0);
-    FUN_0027e774(0);
+    dialogOpen(0);
     FUN_0027e7b4(*(unsigned int *)&param_1->field_0xd80,
                  *(unsigned char *)((int)param_1->field_0xd5c + 0x3f));
     param_1->field_0x2c = 0;

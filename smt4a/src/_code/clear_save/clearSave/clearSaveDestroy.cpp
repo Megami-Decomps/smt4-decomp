@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_0037b450(void);
-int FUN_0035b304(void);
-int FUN_001add24(int id);
+int campButtonHelpRelease(void);
+int campCommonBgRelease(void);
+int dataTableFree(int id);
 int scrScriptProcessDestroy(u32 resource);
-int FUN_0019a7f4(int type, int index);
+int asdTMTexTableReleaseNode(int type, int index);
 int asdMemFree(void *ptr);               /* heap free */
 
 extern u32 *g_clearSave;
@@ -18,10 +18,10 @@ void clearSaveDestroy(void)
 {
     ClearSaveWorkA *work = jobGetWork();
 
-    FUN_0019a7f4(0, 0x83);
-    FUN_001add24(0x3c);
-    FUN_0035b304();
-    FUN_0037b450();
+    asdTMTexTableReleaseNode(0, 0x83);
+    dataTableFree(0x3c);
+    campCommonBgRelease();
+    campButtonHelpRelease();
     if (work->resource != 0) {
         scrScriptProcessDestroy(work->resource);
         work->resource = 0;

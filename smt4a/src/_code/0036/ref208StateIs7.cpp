@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern Ref208 DAT_0057f208;
+extern Ref208 g_commonBg;
 
 u8 ref208StateIs7(void)
 {
-    return DAT_0057f208.work->state == 7;
+    return g_commonBg.work->state == 7;
 }
 
 } /* extern "C" */

@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_001656a0(...);
+int padButtonIsPressed(...);
 int memAlloc(int, int, int, int, int, int);
 int FUN_00200bcc(int);
 int FUN_00202178(int);
-int FUN_0020e9dc(int);
+int effEditorNodeChainApply(int);
 int FUN_002e59f8(...);
 int FUN_00300124(void);
 
@@ -19,14 +19,14 @@ typedef struct {
 
 extern unsigned char LAB_00400001; /* 0x400001 */
 extern unsigned char LAB_00400003; /* 0x400003 */
-extern unsigned char DAT_0059dbe0; /* 0x59dbe0 */
+extern unsigned char g_effectEditor; /* 0x59dbe0 */
 extern unsigned char DAT_0059dc7c; /* 0x59dc7c */
 
-/* Supplied declaration required: FUN_001656a0. */
+/* Supplied declaration required: padButtonIsPressed. */
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_00200bcc. */
 /* Supplied declaration required: FUN_00202178. */
-/* Supplied declaration required: FUN_0020e9dc. */
+/* Supplied declaration required: effEditorNodeChainApply. */
 /* Supplied declaration required: FUN_002e59f8. */
 /* Supplied declaration required: FUN_00300124. */
 
@@ -41,11 +41,11 @@ unsigned char * FUN_0035ba3c(unsigned long long *param_1,unsigned int param_2,in
   unsigned long long temp_v3;
   
   FUN_002e59f8(param_1,&DAT_0059dc7c,8);
-  if ((*(signed char *)((unsigned char *)&DAT_0059dbe0 + 0x9)) == '\0') {
+  if ((*(signed char *)((unsigned char *)&g_effectEditor + 0x9)) == '\0') {
     FUN_00200bcc(param_3);
   }
   FUN_002e59f8(&DAT_0059dc7c,param_1,8);
-  FUN_0020e9dc(param_3);
+  effEditorNodeChainApply(param_3);
   temp_v3 = *param_1;
   temp_v1 = 0x43360000;
   temp_v2 = 0x42200000;
@@ -58,10 +58,10 @@ unsigned char * FUN_0035ba3c(unsigned long long *param_1,unsigned int param_2,in
   *(unsigned int *)(temp_v0 + 4) = 0xc;
   *(unsigned int *)(temp_v0 + 0x18) = param_2;
   FUN_00300124();
-  temp_v0 = FUN_001656a0(1);
+  temp_v0 = padButtonIsPressed(1);
   if (temp_v0 == 0) {
     FUN_00202178(1);
-    temp_v0 = FUN_001656a0();
+    temp_v0 = padButtonIsPressed();
     if (temp_v0 == 0) {
       if ((*(unsigned int *)(param_3 + 0x10) & 8) == 0) {
         return &LAB_00400001;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_002b63ac(void);
+extern int gameGetPlayerData(void);
 
 
 void FUN_00191c64(int param_1)
@@ -23,31 +23,31 @@ void FUN_00191c64(int param_1)
   int temp_v10;
   int *piVar12;
   
-  temp_v10 = FUN_002b63ac();
+  temp_v10 = gameGetPlayerData();
   piVar12 = (int *)(param_1 + 0xcf78);
   temp_v0 = *(short *)(temp_v10 + 0x12);
   temp_v1 = *(short *)(param_1 + *piVar12 * 0x620 + 0x366a);
-  temp_v10 = FUN_002b63ac();
+  temp_v10 = gameGetPlayerData();
   *(unsigned short *)(temp_v10 + 0x12) = *(unsigned short *)(param_1 + *piVar12 * 0x620 + 0x366a);
-  temp_v10 = FUN_002b63ac();
+  temp_v10 = gameGetPlayerData();
   temp_v2 = *(short *)(temp_v10 + 0x14);
   temp_v3 = *(short *)(param_1 + *piVar12 * 0x620 + 0x366c);
-  temp_v10 = FUN_002b63ac();
+  temp_v10 = gameGetPlayerData();
   *(unsigned short *)(temp_v10 + 0x14) = *(unsigned short *)(param_1 + *piVar12 * 0x620 + 0x366c);
-  temp_v10 = FUN_002b63ac();
+  temp_v10 = gameGetPlayerData();
   temp_v4 = *(short *)(temp_v10 + 0x16);
   temp_v5 = *(short *)(param_1 + *piVar12 * 0x620 + 0x366e);
-  temp_v10 = FUN_002b63ac();
+  temp_v10 = gameGetPlayerData();
   *(unsigned short *)(temp_v10 + 0x16) = *(unsigned short *)(param_1 + *piVar12 * 0x620 + 0x366e);
-  temp_v10 = FUN_002b63ac();
+  temp_v10 = gameGetPlayerData();
   temp_v6 = *(short *)(temp_v10 + 0x18);
   temp_v7 = *(short *)(param_1 + *piVar12 * 0x620 + 0x3670);
-  temp_v10 = FUN_002b63ac();
+  temp_v10 = gameGetPlayerData();
   *(unsigned short *)(temp_v10 + 0x18) = *(unsigned short *)(param_1 + *piVar12 * 0x620 + 0x3670);
-  temp_v10 = FUN_002b63ac();
+  temp_v10 = gameGetPlayerData();
   temp_v8 = *(short *)(temp_v10 + 0x1a);
   temp_v9 = *(short *)(param_1 + *piVar12 * 0x620 + 0x3672);
-  temp_v10 = FUN_002b63ac();
+  temp_v10 = gameGetPlayerData();
   *(unsigned short *)(temp_v10 + 0x1a) = *(unsigned short *)(param_1 + *piVar12 * 0x620 + 0x3672);
   *(int *)(param_1 + 0xcfcc) =
        *(int *)(param_1 + 0xcfcc) +

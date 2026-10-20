@@ -1,7 +1,7 @@
 #include "classes/Obj4727b8.h"
 
 extern "C" {
-void FUN_002ce8d8(u32 id);
+void geometryDestroy(u32 id);
 void asdMemFree(void *block);
 }
 
@@ -16,7 +16,7 @@ void Obj4727b8::releaseEntries()
     u32 i;
 
     for (i = 0; i < count; i++) {
-        FUN_002ce8d8(entry->id);
+        geometryDestroy(entry->id);
         entry++;
     }
     asdMemFree(table);

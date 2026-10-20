@@ -65,7 +65,7 @@ extern unsigned int DAT_0061a62c; /* 0x61a62c */
 /* Supplied declaration required: FUN_0015a3c0. */
 /* Supplied declaration required: FUN_0015a400. */
 extern int FUN_0015a410(void);
-extern int FUN_0015a75c(void);
+extern int appletIsExitRequested(void);
 /* Supplied declaration required: FUN_00170484. */
 /* Supplied declaration required: FUN_00170e6c. */
 extern int FUN_0017169c(void);
@@ -110,7 +110,7 @@ unsigned int FUN_00170494(void)
     }
     FUN_0018b6c0();
   }
-  temp_v1 = FUN_0015a75c();
+  temp_v1 = appletIsExitRequested();
   if (temp_v1 != 0) {
     if (DAT_00589230 == (romwright_code *)0x0) {
       return 1;
@@ -202,13 +202,13 @@ unsigned int FUN_00170494(void)
     if (temp_v0 != 2) {
       if (temp_v0 != 3) {
         if (((temp_v0 == 4) && (DAT_00589218 != (romwright_code *)0x0)) &&
-           ((temp_v0 = FUN_0015a75c(), temp_v0 == 0 && (temp_v0 = FUN_0015a410(), temp_v0 == 0)))) {
+           ((temp_v0 = appletIsExitRequested(), temp_v0 == 0 && (temp_v0 = FUN_0015a410(), temp_v0 == 0)))) {
           (*DAT_00589218)(DAT_00589258);
         }
       }
       else {
         FUN_0018991c();
-        if (((DAT_00589220 != (romwright_code *)0x0) && (temp_v0 = FUN_0015a75c(), temp_v0 == 0)) &&
+        if (((DAT_00589220 != (romwright_code *)0x0) && (temp_v0 = appletIsExitRequested(), temp_v0 == 0)) &&
            (temp_v0 = FUN_0015a410(), temp_v0 == 0)) {
           (*DAT_00589220)(DAT_00589260);
         }
@@ -218,7 +218,7 @@ unsigned int FUN_00170494(void)
     }
     else {
       FUN_00170484(4);
-      if (((DAT_0058921c != (romwright_code *)0x0) && (temp_v0 = FUN_0015a75c(), temp_v0 == 0)) &&
+      if (((DAT_0058921c != (romwright_code *)0x0) && (temp_v0 = appletIsExitRequested(), temp_v0 == 0)) &&
          (temp_v0 = FUN_0015a410(), temp_v0 == 0)) {
         (*DAT_0058921c)(DAT_0058925c);
       }
@@ -233,7 +233,7 @@ unsigned int FUN_00170494(void)
     }
   }
   else {
-    temp_v1 = FUN_0015a75c();
+    temp_v1 = appletIsExitRequested();
     temp_v0 = 0;
     if (temp_v1 == 0) {
       temp_v1 = FUN_0015a410();

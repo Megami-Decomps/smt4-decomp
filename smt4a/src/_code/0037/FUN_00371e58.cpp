@@ -27,7 +27,7 @@ struct fn_00371e54_arg1 {
     byte field_0x11; /* +0x11 */
 };
 
-extern int DAT_00588fe8; /* 0x588fe8 */
+extern int g_statusDown; /* 0x588fe8 */
 
 /* Supplied declaration required: rt_memcpy. */
 
@@ -38,9 +38,9 @@ void FUN_00371e58(fn_00371e54_arg0 *param_1,fn_00371e54_arg1 *param_2)
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = DAT_00588fe8;
+  temp_v0 = g_statusDown;
   if ((int)param_2 < 9) {
-    *(unsigned int *)(DAT_00588fe8 + 0x5cc) = 0;
+    *(unsigned int *)(g_statusDown + 0x5cc) = 0;
     *(unsigned int *)(temp_v0 + 0x5d0) = 0;
     *(unsigned int *)(temp_v0 + 0x5d4) = 0;
     *(unsigned int *)(temp_v0 + 0x5d8) = 0;

@@ -5,10 +5,10 @@
 extern "C" {
 
 int asdMemFree(void);
-int FUN_002e3494(void);
+int asdOperatorDeleteB(void);
 
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_002e3494. */
+/* Supplied declaration required: asdOperatorDeleteB. */
 
 
 void FUN_00471340(int param_1)
@@ -41,7 +41,7 @@ void FUN_00471340(int param_1)
     } while (temp_v1 < *(int *)(param_1 + 0x448));
   }
   if (*(int *)(param_1 + 0x450) != 0) {
-    FUN_002e3494();
+    asdOperatorDeleteB();
     *piVar3 = 0;
   }
   *(unsigned int *)(param_1 + 0x448) = 0;

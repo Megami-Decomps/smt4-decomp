@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned int FUN_00481104(unsigned int);
+extern unsigned int flagValueIsPositive(unsigned int);
 
 
 unsigned int FUN_00313930(unsigned int param_1)
@@ -24,7 +24,7 @@ unsigned int FUN_00313930(unsigned int param_1)
   case 7:
   case 8:
   case 9:
-    temp_v0 = FUN_00481104(0x364);
+    temp_v0 = flagValueIsPositive(0x364);
     return temp_v0;
   }
 }

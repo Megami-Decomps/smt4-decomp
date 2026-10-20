@@ -4,25 +4,25 @@
 
 extern "C" {
 
-int FUN_002769b4(...);
-int FUN_002a46d8(...);
-int FUN_002ae898(...);
+int mapDepartSetTarget(...);
+int fileSlotFree(...);
+int asdTMTexTableReleaseNode(...);
 
 int FUN_001f8da8(int, unsigned int *, unsigned char *, int *);
 int FUN_0021dea8(unsigned int, int, int);
 int FUN_0025b670(void);
 int FUN_00273358(...);
 int FUN_00276238(void);
-int FUN_0028975c(int, int);
+int gameFlagSetValue(int, int);
 int FUN_002897f0(int, unsigned char *);
 int FUN_0028dc68(int);
 int FUN_00291e40(int);
-int FUN_00296f4c(...);
+int scrScriptProcessStartEntry(...);
 int FUN_00297060(...);
-int FUN_00297410(int);
+int fileSlotLoad(int);
 int FUN_0029be5c(...);
 int scrScriptProcessDestroy(...);
-int FUN_002b8830(void);
+int buttonHelpSetPresetDefault(void);
 int asdMemFree(...);
 int jyoucyuGetTableEntry(int);
 int FUN_002c58c8(int, int);
@@ -70,23 +70,23 @@ extern int FUN_0025b6e8(unsigned int);
 /* Supplied declaration required: FUN_00273358. */
 /* Supplied declaration required: FUN_00276238. */
 extern int FUN_002762e0(void);
-/* Supplied declaration required: FUN_002769b4. */
+/* Supplied declaration required: mapDepartSetTarget. */
 extern int FUN_0027ee9c(void);
-/* Supplied declaration required: FUN_0028975c. */
+/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_002897f0. */
 /* Supplied declaration required: FUN_0028dc68. */
-extern unsigned int FUN_00290d74(unsigned int, unsigned char *);
+extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_00291e40. */
-/* Supplied declaration required: FUN_00296f4c. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297060. */
 extern int FUN_002973d8(void);
-/* Supplied declaration required: FUN_00297410. */
+/* Supplied declaration required: fileSlotLoad. */
 /* Supplied declaration required: FUN_0029be5c. */
-/* Supplied declaration required: FUN_002a46d8. */
+/* Supplied declaration required: fileSlotFree. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: FUN_002ae898. */
-/* Supplied declaration required: FUN_002b8830. */
-extern int FUN_002c09d0(unsigned int);
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
+/* Supplied declaration required: buttonHelpSetPresetDefault. */
+extern int gameFlagIsSet(unsigned int);
 extern int FUN_002c1c0c(unsigned int, unsigned int);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: jyoucyuGetTableEntry. */
@@ -133,7 +133,7 @@ unsigned int FUN_001e553c(void)
       *(unsigned int *)(temp_v2 + 0x1c) = 0;
     }
     else {
-      FUN_00297410(0x21);
+      fileSlotLoad(0x21);
       *(unsigned int *)(temp_v2 + 0x1c) = 0;
       switch(DAT_0049f9c0) {
       default:
@@ -145,7 +145,7 @@ unsigned int FUN_001e553c(void)
         temp_v3 = 9;
         break;
       case 4:
-        temp_v4 = FUN_002c09d0(99);
+        temp_v4 = gameFlagIsSet(99);
         if (temp_v4 == 0) {
           temp_v3 = 4;
         }
@@ -174,7 +174,7 @@ unsigned int FUN_001e553c(void)
       temp_v4 = FUN_0019e0c0(*(unsigned int *)(g_mapDepart + 0x60));
       if (temp_v4 == 2) {
         if (*(int *)(temp_v2 + 100) != 0) {
-          FUN_0028975c(*(int *)(temp_v2 + 100),1);
+          gameFlagSetValue(*(int *)(temp_v2 + 100),1);
         }
         FUN_0028dc68(0);
         scrScriptProcessDestroy(*(unsigned int *)(temp_v2 + 0x60));
@@ -190,7 +190,7 @@ unsigned int FUN_001e553c(void)
       }
     }
     else {
-      FUN_002b8830();
+      buttonHelpSetPresetDefault();
       temp_v3 = FUN_002c5c04(&LAB_001e5990);
       *(unsigned int *)(temp_v2 + 0x58) = temp_v3;
       temp_v3 = FUN_002c5c04(&LAB_001e59a4);
@@ -202,8 +202,8 @@ unsigned int FUN_001e553c(void)
       temp_v3 = 0x47;
       FUN_002897f0(0x47,&LAB_001e59b8);
       *(unsigned int *)(temp_v2 + 100) = temp_v3;
-      temp_v3 = FUN_00290d74(*(unsigned int *)(temp_v2 + 0x58),&LAB_001e59b8);
-      FUN_00296f4c(*(unsigned int *)(temp_v2 + 0x60),temp_v3);
+      temp_v3 = tableGroupFindEntryIndex(*(unsigned int *)(temp_v2 + 0x58),&LAB_001e59b8);
+      scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x60),temp_v3);
       FUN_00276238();
     }
     temp_v4 = *(int *)(temp_v2 + 0x1c);
@@ -385,7 +385,7 @@ LAB_001e5a1c:
     *(int *)(temp_v2 + 0x1c) = temp_v4 + 1;
     break;
   case 7:
-    FUN_002b8830();
+    buttonHelpSetPresetDefault();
     temp_v3 = FUN_002c5c04(&LAB_001e5d3c);
     *(unsigned int *)(temp_v2 + 0x58) = temp_v3;
     temp_v3 = FUN_002c5c04(&LAB_001e5d54);
@@ -394,7 +394,7 @@ LAB_001e5a1c:
     FUN_00297060(temp_v4,temp_v3);
     *(int *)(temp_v2 + 0x60) = temp_v4;
     *(unsigned int *)(temp_v4 + 0x108) = 3;
-    FUN_00296f4c(*(unsigned int *)(temp_v2 + 0x60),1);
+    scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x60),1);
     FUN_00276238();
     temp_v4 = *(int *)(temp_v2 + 0x18) + 1;
     *(int *)(temp_v2 + 0x18) = temp_v4;
@@ -419,7 +419,7 @@ LAB_001e5a1c:
     if (*(int *)(DAT_004474f4 + 0xac) == 0) {
       FUN_00273358(1);
     }
-    FUN_002b8830();
+    buttonHelpSetPresetDefault();
     temp_v3 = FUN_002c5c04(&LAB_001e5d3c);
     *(unsigned int *)(temp_v2 + 0x58) = temp_v3;
     temp_v3 = FUN_002c5c04(&LAB_001e5d54);
@@ -434,7 +434,7 @@ LAB_001e5a1c:
     else {
       temp_v3 = 3;
     }
-    FUN_00296f4c(*(unsigned int *)(temp_v2 + 0x60),temp_v3);
+    scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x60),temp_v3);
     FUN_00276238();
     *(int *)(temp_v2 + 0x18) = *(int *)(temp_v2 + 0x18) + 1;
     *(unsigned int *)(temp_v2 + 0x1c) = 0;
@@ -453,7 +453,7 @@ LAB_001e5a1c:
         FUN_00273358(0xffffffff);
       }
       else {
-        FUN_002769b4(0x18,1,0);
+        mapDepartSetTarget(0x18,1,0);
         FUN_0029be5c(0x1b,1);
       }
       *(unsigned int *)(temp_v2 + 0x18) = 0xb;
@@ -461,8 +461,8 @@ LAB_001e5a1c:
     }
     break;
   case 0xb:
-    FUN_002a46d8(0x21);
-    FUN_002ae898(10,4);
+    fileSlotFree(0x21);
+    asdTMTexTableReleaseNode(10,4);
     DAT_004475bc = (DAT_004475bc + 1) % 3;
     return 0xffffffff;
   }

@@ -9,7 +9,7 @@ int hasExclusiveAccess(unsigned int *);
 
 /* Unsupported intrinsic, declaration required: coproc_moveto_Data_Synchronization (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: hasExclusiveAccess (CALLOTHER). */
-extern unsigned int FUN_002ad264(void);
+extern unsigned int nn_gxlow_CTR_GetGpu(void);
 extern unsigned int nn_gxlow_CTR_Gpu_TriggerCmdReqQueue(unsigned int);
 
 
@@ -66,7 +66,7 @@ unsigned int FUN_002a4a10(int *param_1,unsigned int *param_2)
     }
     *(unsigned int *)*param_1 = temp_v2;
     if ((temp_v2 & 0xffff) >> 8 == 1) {
-      temp_v1 = FUN_002ad264();
+      temp_v1 = nn_gxlow_CTR_GetGpu();
       nn_gxlow_CTR_Gpu_TriggerCmdReqQueue(temp_v1);
     }
     temp_v1 = 0;

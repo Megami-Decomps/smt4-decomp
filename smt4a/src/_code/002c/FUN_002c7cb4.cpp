@@ -8,12 +8,12 @@ typedef struct Scene {
     /* 0x515 */ u8 unk515[3];
     /* 0x518 */ s32 state;
 } Scene;
-extern Scene *DAT_00588fe8;
+extern Scene *g_statusDown;
 
 /* Returns 0 when the scene state is 1, otherwise 1. */
 u8 FUN_002c7cb4(void)
 {
-    if (DAT_00588fe8->state == 1) {
+    if (g_statusDown->state == 1) {
         return 0;
     }
     return 1;

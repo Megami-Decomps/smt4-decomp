@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002e75fa(void);
+int sharedRefAddRef(void);
 int _ZN9Obj55b2d84initEv(unsigned int *);
 
 extern unsigned char DAT_0055b2e0; /* 0x55b2e0 */
 
-/* Supplied declaration required: FUN_002e75fa. */
+/* Supplied declaration required: sharedRefAddRef. */
 /* Supplied declaration required: _ZN9Obj55b2d84initEv. */
 
 
@@ -19,7 +19,7 @@ unsigned int * FUN_002ee524(unsigned int *param_1,unsigned int param_2)
 /* irregular: 2 native warning(s); review required */
   *param_1 = (unsigned int)&DAT_0055b2e0;
   param_1[2] = param_2;
-  FUN_002e75fa();
+  sharedRefAddRef();
   _ZN9Obj55b2d84initEv(param_1);
   param_1[5] = *(int *)(param_1[2] + 0x10) << 3;
   return param_1;

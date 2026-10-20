@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001aea28(...);
+int ptrListRemoveClearOwner(...);
 int FUN_00357b70(...);
 int FUN_003659f4(void);
 int sub68OwnerStart2(void);
@@ -13,12 +13,12 @@ int FUN_00378a1c(void);
 int FUN_003d2150(...);
 
 int ARM_common_memcpy4_9(...);
-int FUN_00169ddc(...);
+int eventQueueAddUnique(...);
 int FUN_001bbf0c(void);
 int FUN_001bc124(void);
 int FUN_002941c8(int *, int);
 int FUN_002ba170(void);
-int FUN_002e342c(unsigned char *, int);
+int libc_strcpy(unsigned char *, int);
 int FUN_003146ac(int, int, int);
 int FUN_0033abb4(void);
 int FUN_00352bc4(void);
@@ -26,10 +26,10 @@ int FUN_00364530(int, int);
 int FUN_003689d0(void);
 int FUN_00384830(void);
 int FUN_00385384(void);
-int FUN_003fd63c(int, int);
+int gameFlagSetValue(int, int);
 int FUN_00408184(...);
 int FUN_0046e800(unsigned short *, unsigned int);
-int FUN_00480e30(...);
+int flagValueAdd(...);
 int FUN_004813bc(...);
 
 typedef int romwright_code(...);
@@ -68,7 +68,7 @@ typedef struct {
 extern unsigned char LAB_0024a6ac; /* 0x24a6ac */
 extern unsigned char LAB_0024a6bc; /* 0x24a6bc */
 extern unsigned char LAB_0024ad40; /* 0x24ad40 */
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern unsigned short *g_aocSystem; /* 0x570280 */
 extern int DAT_005806a4; /* 0x5806a4 */
 extern int g_lmapScene; /* 0x581288 */
@@ -107,19 +107,19 @@ extern signed char DAT_005f1bc4; /* 0x5f1bc4 */
 extern int DAT_005f1be4; /* 0x5f1be4 */
 
 /* Supplied declaration required: ARM_common_memcpy4_9. */
-extern int FUN_00162e8c(void);
-/* Supplied declaration required: FUN_00169ddc. */
+extern int gameFlagsGetBlock(void);
+/* Supplied declaration required: eventQueueAddUnique. */
 extern int dataTableGet(unsigned int, unsigned int);
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 extern unsigned int dataTableGetCount(int);
 extern int dataTableGetEntries(void);
-/* Supplied declaration required: FUN_001aea28. */
+/* Supplied declaration required: ptrListRemoveClearOwner. */
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
 /* Supplied declaration required: FUN_002941c8. */
 extern int mapDepartIsRunning(void);
 /* Supplied declaration required: FUN_002ba170. */
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 extern int lmapSceneGetUnk0(void);
 /* Supplied declaration required: FUN_003146ac. */
 extern int FUN_0033aa6c(int);
@@ -137,12 +137,12 @@ extern int FUN_0036d54c(void);
 /* Supplied declaration required: FUN_00384830. */
 /* Supplied declaration required: FUN_00385384. */
 /* Supplied declaration required: FUN_003d2150. */
-/* Supplied declaration required: FUN_003fd63c. */
+/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_00408184. */
 /* Supplied declaration required: FUN_0046e800. */
 extern unsigned int FUN_00480738(unsigned int);
 extern unsigned int FUN_00480c28(void);
-/* Supplied declaration required: FUN_00480e30. */
+/* Supplied declaration required: flagValueAdd. */
 /* Supplied declaration required: FUN_004813bc. */
 extern int FUN_004d0584(void);
 
@@ -199,7 +199,7 @@ unsigned int FUN_00249dec(void)
   int temp_v44;
   
   temp_v10 = 0;
-  temp_v44 = FUN_00162e8c();
+  temp_v44 = gameFlagsGetBlock();
   FUN_002ba170();
   temp_v9 = 0;
   temp_v7 = 0;
@@ -283,19 +283,19 @@ joined_r0x00249fd4:
                   if (temp_v4 == 0) {
                     *(unsigned int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 0xccc) = 1;
                   }
-                  FUN_00480e30(*(unsigned int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 0xcac),
+                  flagValueAdd(*(unsigned int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 0xcac),
                                *(unsigned int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 0xcbc));
                 }
                 else {
-                  temp_v4 = FUN_0018719c(0x50);
-                  if ((temp_v4 != 0) && (temp_v4 = FUN_0018719c(0x51), temp_v4 == 0)) {
+                  temp_v4 = gameFlagIsSet(0x50);
+                  if ((temp_v4 != 0) && (temp_v4 = gameFlagIsSet(0x51), temp_v4 == 0)) {
                     *(unsigned int *)(temp_v8 + 0xa8) = 2;
                     return 1;
                   }
                   temp_v4 = *(int *)(temp_v8 + 0xcc);
                   FUN_003689d0();
                   if (*(short *)(temp_v4 + 0x10) != 0) {
-                    FUN_003fd63c((int)*(short *)(temp_v4 + 0x10),1);
+                    gameFlagSetValue((int)*(short *)(temp_v4 + 0x10),1);
                   }
                   temp_v10 = (*(unsigned int *)&s__a_a_00587f08.u1[0]);
                   if (*(short *)(temp_v4 + 0x12) != 0) {
@@ -305,7 +305,7 @@ joined_r0x00249fd4:
                     if (temp_v6 == 0) {
                       *(unsigned int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 0xccc) = 1;
                     }
-                    FUN_00480e30((int)*(short *)(temp_v4 + 0x12),1);
+                    flagValueAdd((int)*(short *)(temp_v4 + 0x12),1);
                   }
                   else {
                     temp_v1 = *(short *)(temp_v8 + 200);
@@ -344,8 +344,8 @@ joined_r0x00249fd4:
                   }
                   temp_v1 = *(short *)(temp_v8 + 200);
                   if ((((temp_v1 == 0 || temp_v1 == 2) || temp_v1 == 6) &&
-                      (temp_v6 = FUN_0018719c(0x8d), temp_v6 != 0)) &&
-                     (temp_v6 = FUN_0018719c(0xc2), temp_v6 == 0)) {
+                      (temp_v6 = gameFlagIsSet(0x8d), temp_v6 != 0)) &&
+                     (temp_v6 = gameFlagIsSet(0xc2), temp_v6 == 0)) {
                     DAT_005f174a = 1;
                     DAT_005f174c = 500;
                     if (g_gameState >= 0x65) {
@@ -358,7 +358,7 @@ joined_r0x00249fd4:
                   if (*(short *)(temp_v4 + 0x16) != 0) {
                     DAT_005f174a = 1;
                     DAT_005f174c = (int)*(short *)(temp_v4 + 0x16);
-                    FUN_002e342c(&DAT_005f1750,temp_v4 + 0x18);
+                    libc_strcpy(&DAT_005f1750,temp_v4 + 0x18);
                   }
                 }
                 if ((*(char *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 0x14) != '\0') &&
@@ -434,7 +434,7 @@ LAB_0024a684:
                     DAT_005f16b4 = *(unsigned int *)(temp_v8 + 0xb4);
                     DAT_005f16b8 = *(unsigned int *)(temp_v8 + 0xb8);
                     *(unsigned int *)(temp_v8 + 0xac) = 0;
-                    FUN_00169ddc(0x100020e);
+                    eventQueueAddUnique(0x100020e);
                     temp_v10 = 1;
                     *(unsigned int *)(temp_v8 + 0xa8) = 2;
                     FUN_00408184(0x18,1);
@@ -515,7 +515,7 @@ LAB_0024a684:
                 DAT_005f16b4 = *(unsigned int *)(temp_v8 + 0xb4);
                 DAT_005f16b8 = *(unsigned int *)(temp_v8 + 0xb8);
                 *(unsigned int *)(temp_v8 + 0xac) = 0;
-                FUN_00169ddc(0x100020e);
+                eventQueueAddUnique(0x100020e);
                 temp_v5 = 2;
                 temp_v10 = 1;
                 *(unsigned int *)(temp_v8 + 0xa8) = temp_v5;
@@ -534,8 +534,8 @@ LAB_0024a684:
         temp_v4 = *(int *)(temp_v8 + 0xac) + 1;
         *(int *)(temp_v8 + 0xac) = temp_v4;
         if (temp_v4 == 0x19) {
-          temp_v4 = FUN_0018719c(0x50);
-          if ((temp_v4 != 0) && (temp_v4 = FUN_0018719c(0x51), temp_v4 == 0)) {
+          temp_v4 = gameFlagIsSet(0x50);
+          if ((temp_v4 != 0) && (temp_v4 = gameFlagIsSet(0x51), temp_v4 == 0)) {
             DAT_005f1775 = 1;
             DAT_005f174c = 1;
             ARM_common_memcpy4_9(&DAT_005f1750,&LAB_0024ad40);
@@ -568,7 +568,7 @@ LAB_0024a684:
                   DAT_005f1774 = 0;
                   break;
                 }
-                FUN_001aea28(DAT_0056fcc0,*(unsigned int *)(*(int *)(temp_v8 + 0xd4) + 4));
+                ptrListRemoveClearOwner(g_handleRegistry,*(unsigned int *)(*(int *)(temp_v8 + 0xd4) + 4));
                 temp_v5 = 9;
                 *(unsigned char *)(temp_v8 + 0xd8) = 0;
               }
@@ -616,7 +616,7 @@ LAB_0024a684:
               FUN_00378964();
               if (*(char *)(temp_v8 + 0xd0) != '\0') {
                 if (*(int *)(temp_v8 + 0xd4) != 0) {
-                  FUN_001aea28(DAT_0056fcc0,
+                  ptrListRemoveClearOwner(g_handleRegistry,
                                *(unsigned int *)
                                 (*(int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(int *)(temp_v8 + 0xdc) * 8 + 0x20
                                          ) + 4));

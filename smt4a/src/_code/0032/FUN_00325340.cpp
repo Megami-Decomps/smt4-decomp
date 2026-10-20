@@ -9,7 +9,7 @@ int FUN_002b5cd4(void);
 int FUN_00352bc4(void);
 int FUN_00384830(void);
 
-extern int DAT_00581038; /* 0x581038 */
+extern int g_mapHakai; /* 0x581038 */
 extern int g_lmapScene; /* 0x581288 */
 extern unsigned char g_gameState; /* 0x5f15fc */
 
@@ -33,7 +33,7 @@ unsigned int FUN_00325340(void)
   
   temp_v3 = 0;
   do {
-    temp_v1 = DAT_00581038 + temp_v3 * 0x54;
+    temp_v1 = g_mapHakai + temp_v3 * 0x54;
     if ((*(char *)(temp_v1 + 0x5c) != '\0') &&
        (temp_v2 = *(int *)(temp_v1 + 0x60), (temp_v2 != 2 && temp_v2 != 3) && temp_v2 != 0)) {
       FUN_00352bc4();

@@ -9,11 +9,11 @@ int SBORROW4(int, int);
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_0017760c. */
-extern int FUN_001801a4(void);
+extern int gameGetPlayerData(void);
 extern int FUN_00187168(void);
-extern int FUN_001ab854(void);
-extern int FUN_001ab888(void);
-extern int FUN_001b347c(void);
+extern int gameGetSlotRecord(void);
+extern int gameGetSlotTable(void);
+extern int gameSlotTableFindFree(void);
 extern int FUN_003e0024(void);
 extern int FUN_003e0034(void);
 extern int FUN_003e0154(void);
@@ -36,7 +36,7 @@ unsigned int FUN_004ced50(void)
   int temp_v8;
   unsigned char temp_v9;
   
-  temp_v1 = FUN_001801a4();
+  temp_v1 = gameGetPlayerData();
   temp_v2 = FUN_003e0024();
   temp_v3 = FUN_003e0154();
   temp_v4 = FUN_003e0034();
@@ -50,13 +50,13 @@ unsigned int FUN_004ced50(void)
   if ((temp_v6 < 0 != temp_v9) || (*(short *)(temp_v1 + 0x5e) != 0)) {
     return 1;
   }
-  temp_v6 = FUN_001b347c();
-  temp_v1 = FUN_001ab888();
+  temp_v6 = gameSlotTableFindFree();
+  temp_v1 = gameGetSlotTable();
   temp_v2 = 0;
   if (temp_v2 < temp_v6) {
     do {
       if (-1 < *(char *)(temp_v1 + 0x1c88 + temp_v2)) {
-        temp_v4 = FUN_001ab854();
+        temp_v4 = gameGetSlotRecord();
         temp_v8 = (int)*(short *)(temp_v4 + 0x2a);
         temp_v5 = FUN_0017760c();
         temp_v9 = SBORROW4(temp_v8,temp_v5);

@@ -34,7 +34,7 @@ extern int g_aocMain; /* 0x570260 */
 
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001b3f7c. */
-extern int FUN_001d10ac(unsigned int *);
+extern int byteIsAtLeast100(unsigned int *);
 extern int FUN_002e19f8(void);
 /* Supplied declaration required: FUN_00474734. */
 /* Supplied declaration required: FUN_00476e58. */
@@ -113,7 +113,7 @@ void FUN_00477894(unsigned int *param_1)
           param_1[2] = 3;
         }
         else {
-          temp_v1 = FUN_001d10ac(&temp_v4);
+          temp_v1 = byteIsAtLeast100(&temp_v4);
           if (temp_v1 != 0) {
             jobFlagsWorkStop(param_1);
             if ((temp_v4 & 0xff) == 0x66) {
@@ -208,7 +208,7 @@ void FUN_00477894(unsigned int *param_1)
       param_1[0x82] = 0;
       return;
     }
-    temp_v1 = FUN_001d10ac(&temp_v4);
+    temp_v1 = byteIsAtLeast100(&temp_v4);
     if (temp_v1 != 0) {
       jobFlagsWorkStop(param_1);
 LAB_00477a3c:

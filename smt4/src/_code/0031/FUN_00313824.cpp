@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_0026933c(...);
+int effBehaviorRun(...);
 int FUN_002e7278(...);
 int FUN_003024d0(...);
 
@@ -41,7 +41,7 @@ void FUN_00313824(Obj *obj)
     Item *item;
     int i;
 
-    FUN_0026933c(obj->owner);
+    effBehaviorRun(obj->owner);
     owner = obj->owner;
     count = owner->count;
     if (count != 0 && owner->unk10 != 0) {

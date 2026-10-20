@@ -9,7 +9,7 @@ int jobIsValid(unsigned int);
 int FUN_00180000(void);
 int asdMemFree(void);
 int scrScriptProcessDestroy(void);
-int FUN_001b4a90(unsigned int *, int, unsigned int);
+int __aeabi_memset4(unsigned int *, int, unsigned int);
 int FUN_00215978(int);
 int btlActionAllocData(void);
 int sysMemClear(...);
@@ -27,7 +27,7 @@ extern unsigned char g_btlMain; /* 0x573920 */
 /* Supplied declaration required: FUN_00180000. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: FUN_001b4a90. */
+/* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: FUN_00215978. */
 /* Supplied declaration required: btlActionAllocData. */
 /* Supplied declaration required: sysMemClear. */
@@ -242,7 +242,7 @@ LAB_0024dd20:
           param_1[0x1164] = 0;
           param_1[0x1165] = 0;
           param_1[0x1166] = 0;
-          FUN_001b4a90(param_1 + 0x806,3,0xffffffff);
+          __aeabi_memset4(param_1 + 0x806,3,0xffffffff);
           param_1[0x8a4] = 0;
           param_1[0x8a5] = 0;
           param_1[0x8a6] = 0;

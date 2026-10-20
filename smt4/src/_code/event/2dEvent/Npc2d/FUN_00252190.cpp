@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b06c4(...);
+int dataTable00FindById(...);
 int memClear(...);
 int asdMemAlloc(...);
 int asdProcessCreateSimple(...);
@@ -18,7 +18,7 @@ extern int FUN_001dfc64(...); /* 0x1dfc64 */
 extern int FUN_002db92c(...); /* 0x2db92c */
 
 extern unsigned int FUN_00294090(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002b06c4. */
+/* Supplied declaration required: dataTable00FindById. */
 extern int FUN_002c1d5c(void);
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: asdMemAlloc. */
@@ -45,7 +45,7 @@ void FUN_00252190(unsigned int param_1,unsigned int param_2,unsigned int param_3
   *(unsigned char *)(puVar1 + 0xc) = 0;
   temp_v0 = param_1 & 0xffff;
   *(unsigned char *)(puVar1 + 0x17) = 1;
-  FUN_002b06c4();
+  dataTable00FindById();
   puVar1[0x13] = (int)*(short *)(temp_v0 + 0x88);
   temp_v1 = FUN_002c1d5c();
   if (temp_v1 != 0) {

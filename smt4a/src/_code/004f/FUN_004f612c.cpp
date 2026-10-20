@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0023917c(void);
+int objDestroyIfSet(void);
 
 typedef struct fn_004f612c_arg0 fn_004f612c_arg0;
 struct fn_004f612c_arg0 {
@@ -15,9 +15,9 @@ struct fn_004f612c_arg0 {
     undefined1 field_0x33ac; /* +0x33ac */
 };
 
-extern int DAT_00571508; /* 0x571508 */
+extern int g_btlCamera; /* 0x571508 */
 
-/* Supplied declaration required: FUN_0023917c. */
+/* Supplied declaration required: objDestroyIfSet. */
 
 
 void FUN_004f612c(fn_004f612c_arg0 *param_1)
@@ -25,13 +25,13 @@ void FUN_004f612c(fn_004f612c_arg0 *param_1)
 {
 /* irregular: 1 native warning(s); review required */
   if (param_1->field_0x33a8 != 0) {
-    FUN_0023917c();
+    objDestroyIfSet();
     param_1->field_0x33a8 = 0;
   }
   param_1->field_0x33ac = 0xc;
   param_1->field_0x339c = param_1->field_0x339c & 0xfffffffd;
-  if (DAT_00571508 != 0) {
-    *(unsigned int *)(DAT_00571508 + 0x64c) = *(unsigned int *)(DAT_00571508 + 0x64c) & 0xfbffffff;
+  if (g_btlCamera != 0) {
+    *(unsigned int *)(g_btlCamera + 0x64c) = *(unsigned int *)(g_btlCamera + 0x64c) & 0xfbffffff;
   }
   return;
 }

@@ -24,7 +24,7 @@ typedef struct {
 
 extern unsigned char LAB_00343e48; /* 0x343e48 */
 extern unsigned char DAT_00557c60; /* 0x557c60 */
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 
 /* Supplied declaration required: asdOperatorNew. */
 extern int lmapMainIsRunning(void);
@@ -62,8 +62,8 @@ void FUN_00343d04(int param_1)
   temp_v1 = lmapMainIsRunning();
   if ((temp_v1 == 0) && (temp_v1 = lmapSceneGetScript(), temp_v1 == 0)) {
     *(unsigned char *)(param_1 + 0x2c) = 1;
-    temp_v0 = DAT_0056fcc0;
-    temp_v1 = FUN_0040af60(DAT_0056fcc0);
+    temp_v0 = g_handleRegistry;
+    temp_v1 = FUN_0040af60(g_handleRegistry);
     if (temp_v1 == 0) {
       FUN_0040b0f8(temp_v0,&LAB_00343e48);
       FUN_0040ae70(temp_v0,1);

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002277d8(void);
-int FUN_00275f44(undefined4, int);
+int scrScriptProcessStartEntry(undefined4, int);
 int FUN_0031d890(void);
 
 typedef struct fn_002a283c_arg0 fn_002a283c_arg0;
@@ -21,7 +21,7 @@ struct fn_002a283c_arg0 {
 
 extern int FUN_00224880(unsigned int);
 /* Supplied declaration required: FUN_002277d8. */
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_0031d890. */
 
 
@@ -44,7 +44,7 @@ unsigned int FUN_002a283c(fn_002a283c_arg0 *param_1)
     }
   }
   else {
-    FUN_00275f44(param_1->field_0xf4,0x10);
+    scrScriptProcessStartEntry(param_1->field_0xf4,0x10);
     param_1->field_0x150 = param_1->field_0x150 + 1;
   }
   return temp_v1;

@@ -16,7 +16,7 @@ struct fn_003e98e0_arg0 {
 extern unsigned int DAT_00573b18; /* 0x573b18 */
 extern unsigned int DAT_00573b1c; /* 0x573b1c */
 
-extern int FUN_00330a80(int);
+extern int gameDataGetMarkEntry(int);
 
 
 unsigned int FUN_003e98e0(fn_003e98e0_arg0 *param_1)
@@ -31,7 +31,7 @@ unsigned int FUN_003e98e0(fn_003e98e0_arg0 *param_1)
     temp_v1 = 0;
     temp_v2 = temp_v1;
     do {
-      temp_v0 = FUN_00330a80(temp_v1);
+      temp_v0 = gameDataGetMarkEntry(temp_v1);
       temp_v1 = temp_v1 + 1;
       if (*(short *)(temp_v0 + 0x60) != 0) {
         temp_v2 = temp_v2 + 1;

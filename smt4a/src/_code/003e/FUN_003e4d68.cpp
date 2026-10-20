@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_001ab888(unsigned int);
+extern int gameGetSlotTable(unsigned int);
 
 
 int FUN_003e4d68(unsigned int param_1)
@@ -16,7 +16,7 @@ int FUN_003e4d68(unsigned int param_1)
     temp_v0 = 0;
   }
   else {
-    temp_v0 = FUN_001ab888(param_1);
+    temp_v0 = gameGetSlotTable(param_1);
     temp_v0 = temp_v0 + param_1 * 0x134 + 0x1ddc;
   }
   return temp_v0;

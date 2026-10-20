@@ -12,7 +12,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_00184310. */
-extern int FUN_001ab854(int);
+extern int gameGetSlotRecord(int);
 
 
 unsigned int FUN_00232104(int *param_1,int *param_2)
@@ -29,8 +29,8 @@ unsigned int FUN_00232104(int *param_1,int *param_2)
     if (temp_v3 < 0) {
       return 0xffffffff;
     }
-    temp_v3 = FUN_001ab854(*param_1);
-    temp_v0 = FUN_001ab854(*param_2);
+    temp_v3 = gameGetSlotRecord(*param_1);
+    temp_v0 = gameGetSlotRecord(*param_2);
     temp_v1 = (unsigned int)*(unsigned short *)(temp_v3 + 0x62);
     FUN_00184310();
     temp_v2 = (unsigned int)*(unsigned short *)(temp_v0 + 0x62);
@@ -43,8 +43,8 @@ unsigned int FUN_00232104(int *param_1,int *param_2)
       if (*param_2 < 0) {
         return 0xffffffff;
       }
-      temp_v3 = FUN_001ab854(*param_1);
-      temp_v0 = FUN_001ab854(*param_2);
+      temp_v3 = gameGetSlotRecord(*param_1);
+      temp_v0 = gameGetSlotRecord(*param_2);
       temp_v1 = (unsigned int)*(unsigned short *)(temp_v3 + 0x62);
       FUN_00184310();
       temp_v2 = (unsigned int)*(unsigned short *)(temp_v0 + 0x62);
@@ -63,8 +63,8 @@ unsigned int FUN_00232104(int *param_1,int *param_2)
         temp_v1 = 0xffffffff;
       }
       else {
-        temp_v3 = FUN_001ab854(*param_1);
-        temp_v0 = FUN_001ab854(*param_2);
+        temp_v3 = gameGetSlotRecord(*param_1);
+        temp_v0 = gameGetSlotRecord(*param_2);
         temp_v1 = (unsigned int)*(unsigned short *)(temp_v0 + 100) - (unsigned int)*(unsigned short *)(temp_v3 + 100);
         if (temp_v1 == 0) {
           temp_v1 = (unsigned int)*(unsigned short *)(temp_v3 + 0x62);

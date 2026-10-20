@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_001801a4(void);
+extern int gameGetPlayerData(void);
 
 
 int FUN_0019f240(unsigned int param_1)
@@ -14,7 +14,7 @@ int FUN_0019f240(unsigned int param_1)
   int temp_v1;
   int temp_v2;
   
-  temp_v0 = FUN_001801a4();
+  temp_v0 = gameGetPlayerData();
   temp_v1 = 0;
   while( 1 ) {
     temp_v2 = temp_v0 + temp_v1 * 2;

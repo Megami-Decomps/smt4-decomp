@@ -21,7 +21,7 @@ typedef struct {
 #define ROMWRIGHT_ZEXT_4_8_DEFINED
 #define romwright_zext_4_8(value) ((unsigned long long)(unsigned int)(value))
 #endif
-extern int FUN_002ed280(unsigned int *, unsigned int);
+extern int streamSkip(unsigned int *, unsigned int);
 /* Supplied declaration required: FUN_002f5c90. */
 
 
@@ -42,9 +42,9 @@ long long FUN_0010c0e4(int param_1,unsigned int *param_2,unsigned int param_3,in
     temp_v3 = 0;
     temp_v4 = 0;
     FUN_002f5c90(param_1,param_2,param_3,&temp_v3);
-    if ((((param_1 != 0) && (temp_v0 = FUN_002ed280(param_2,0x10), temp_v0 != 0)) &&
-        (temp_v0 = FUN_002ed280(param_2,temp_v3), temp_v0 != 0)) &&
-       (temp_v0 = FUN_002ed280(param_2,temp_v4), temp_v0 != 0)) {
+    if ((((param_1 != 0) && (temp_v0 = streamSkip(param_2,0x10), temp_v0 != 0)) &&
+        (temp_v0 = streamSkip(param_2,temp_v3), temp_v0 != 0)) &&
+       (temp_v0 = streamSkip(param_2,temp_v4), temp_v0 != 0)) {
       if (param_4 != (int *)0x0) {
         *param_4 = param_2[3] - temp_v1;
       }

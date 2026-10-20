@@ -10,6 +10,6 @@ typedef struct Sys471b48 {
     /* 0x08 */ u32 unk08;
 } Sys471b48;
 
-extern Sys471b48 DAT_00471b48;
+extern Sys471b48 g_nnosHeapState;
 
 #endif

@@ -4,29 +4,29 @@
 
 extern "C" {
 
-int FUN_00169ddc(int);
+int eventQueueAddUnique(int);
 int FUN_002a4844(char *);
 int FUN_002a4860(void);
 int FUN_002a48ac(char *, unsigned int);
 int FUN_002a48e0(char *, unsigned int);
-int FUN_0031d1b4(char *, int);
-int FUN_0031d1d8(char *, int);
+int flaggedEntrySetValueB(char *, int);
+int flaggedEntrySetValueA(char *, int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_00169ddc. */
+/* Supplied declaration required: eventQueueAddUnique. */
 extern int FUN_00284140(int);
 /* Supplied declaration required: FUN_002a4844. */
 /* Supplied declaration required: FUN_002a4860. */
 /* Supplied declaration required: FUN_002a48ac. */
 /* Supplied declaration required: FUN_002a48e0. */
-extern int FUN_0031d18c(char *);
-extern int FUN_0031d1a0(void);
-/* Supplied declaration required: FUN_0031d1b4. */
-/* Supplied declaration required: FUN_0031d1d8. */
+extern int flaggedEntryGetValueB(char *);
+extern int flaggedEntryGetValueA(void);
+/* Supplied declaration required: flaggedEntrySetValueB. */
+/* Supplied declaration required: flaggedEntrySetValueA. */
 
 
 void FUN_004d0738(int param_1,char *param_2)
@@ -79,13 +79,13 @@ void FUN_004d0738(int param_1,char *param_2)
     }
     if (temp_v1 + temp_v0 < *(int *)(param_2 + 8)) {
       if (*param_2 != '\x01') {
-        temp_v1 = FUN_0031d1a0();
+        temp_v1 = flaggedEntryGetValueA();
       }
       else {
-        temp_v1 = FUN_0031d18c(param_2 + 0x10);
+        temp_v1 = flaggedEntryGetValueB(param_2 + 0x10);
       }
       if (*(char *)(param_1 + 0x10) != '\0' && temp_v1 != temp_v0) {
-        FUN_00169ddc(0x100020d);
+        eventQueueAddUnique(0x100020d);
       }
       if (*param_2 != '\x01') {
         temp_v2 = FUN_002a4860();
@@ -95,11 +95,11 @@ void FUN_004d0738(int param_1,char *param_2)
       }
       if (*param_2 == '\0') {
         FUN_002a48e0(param_2 + 0x10,temp_v2);
-        FUN_0031d1d8(param_2 + 0x10,temp_v0);
+        flaggedEntrySetValueA(param_2 + 0x10,temp_v0);
       }
       if (*param_2 == '\x01') {
         FUN_002a48ac(param_2 + 0x10,temp_v2);
-        FUN_0031d1b4(param_2 + 0x10,temp_v0);
+        flaggedEntrySetValueB(param_2 + 0x10,temp_v0);
         return;
       }
     }

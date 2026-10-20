@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00164b5c(int, int, int, int, int, int);
 int efctSetSpeed(void);
 int FUN_00183bb0(void);
-int FUN_00184e64(unsigned int);
+int drawSetColorFromRGBA8(unsigned int);
 int FUN_002e1b64(unsigned int, int, int, int);
 
 /* stack frame of param_5: 3 slot(s), 12 byte(s) */
@@ -21,7 +21,7 @@ typedef struct {
 /* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_00184e64. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_002e1b64. */
 
 
@@ -41,7 +41,7 @@ void FUN_0036ca3c(int param_1,int param_2,int param_3,unsigned int param_4,int p
   else {
     FUN_00164b5c(2,0x2e,7,param_2,param_3,0x65);
   }
-  FUN_00184e64(0x82fff500);
+  drawSetColorFromRGBA8(0x82fff500);
   temp_v0 = FUN_001834a4(0x2e,0x53);
   FUN_002e1b64(param_4,*(short *)(temp_v0 + 8) + param_2,*(short *)(temp_v0 + 10) + param_3,0x67);
   FUN_00183bb0();

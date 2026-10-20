@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern u32 padIsButtonDown(u32 button);
+extern u32 flagBitIsSet(u32 button);
 
 typedef struct Btl {
     /* 0x0000 */ u8 unk0000[0x44A0];
@@ -19,7 +19,7 @@ u32 FUN_00337324(Btl *btl)
         result = 0;
     } else {
         if ((btl->flags2 & 0x20000) == 0) {
-            result = padIsButtonDown(0x10);
+            result = flagBitIsSet(0x10);
             return result;
         }
         result = 1;

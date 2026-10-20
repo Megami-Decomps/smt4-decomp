@@ -11,7 +11,7 @@ int FUN_0037d6e4(int);
 int FUN_003a7630(int);
 int FUN_003c1060(void);
 int FUN_003c3e14(void);
-int FUN_003fd63c(int, int);
+int gameFlagSetValue(int, int);
 int pickObjStart(unsigned int *, unsigned char *);
 int dataTable28Type0GetEntry(int, int);
 
@@ -24,7 +24,7 @@ extern unsigned char LAB_004681f4; /* 0x4681f4 */
 extern unsigned char LAB_00468208; /* 0x468208 */
 extern unsigned char LAB_00468218; /* 0x468218 */
 
-extern unsigned char FUN_0018719c(unsigned int);
+extern unsigned char gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0019ea64. */
 /* Supplied declaration required: FUN_0020401c. */
 extern int FUN_002c2758(unsigned short);
@@ -34,7 +34,7 @@ extern int FUN_0031d62c(void);
 /* Supplied declaration required: FUN_003a7630. */
 /* Supplied declaration required: FUN_003c1060. */
 /* Supplied declaration required: FUN_003c3e14. */
-/* Supplied declaration required: FUN_003fd63c. */
+/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: pickObjStart. */
 /* Supplied declaration required: dataTable28Type0GetEntry. */
 
@@ -61,10 +61,10 @@ void FUN_0046805c(unsigned int *param_1)
     temp_v4 = 0;
   } while (temp_v2 < 0x20);
   temp_v5 = 0;
-  temp_v1 = FUN_0018719c(0x586);
+  temp_v1 = gameFlagIsSet(0x586);
   if ((temp_v4 == 6) && ((char)param_1[6] != '\0')) {
     temp_v5 = (char)param_1[4] != '\x0e';
-    FUN_003fd63c(0x586,1);
+    gameFlagSetValue(0x586,1);
   }
   temp_v6 = (temp_v5 & ~temp_v1) == 0;
   temp_v0 = '\0';

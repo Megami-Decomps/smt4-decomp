@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0016c410(int);
+int renderCtxResetColorScale(int);
 int FUN_0016c560(int);
 int FUN_002609d8(unsigned int, int, int);
 
@@ -14,10 +14,10 @@ extern int g_renderCtx; /* 0x59dbb4 */
 
 extern int jobIsValid(unsigned int);
 extern int jobGetWork(void);
-extern int FUN_00165058(unsigned int);
+extern int jobGetStatus(unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0016c410. */
+/* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: FUN_0016c560. */
 /* Supplied declaration required: FUN_002609d8. */
 extern int FUN_00387580(unsigned int);
@@ -81,7 +81,7 @@ unsigned int FUN_002ad180(void)
       }
       else {
         temp_v2 = jobIsValid(*(unsigned int *)(temp_v1 + 4));
-        if ((temp_v2 != 0) && (temp_v2 = FUN_00165058(*(unsigned int *)(temp_v1 + 4)), temp_v2 == 4)) {
+        if ((temp_v2 != 0) && (temp_v2 = jobGetStatus(*(unsigned int *)(temp_v1 + 4)), temp_v2 == 4)) {
           FUN_002609d8(*(unsigned int *)(temp_v1 + 4),(int)*(float *)(temp_v0 + 0x90),
                        (int)*(float *)(temp_v0 + 0x94));
         }
@@ -117,7 +117,7 @@ unsigned int FUN_002ad180(void)
     *(unsigned char *)(temp_v4 + 0x1290) = 0;
   }
   FUN_0016c560(g_renderCtx);
-  FUN_0016c410(g_renderCtx);
+  renderCtxResetColorScale(g_renderCtx);
   return 0;
 }
 

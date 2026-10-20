@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00165088(int, int);
-int FUN_003216ec(void);
+int btlTalkBustUpReleaseAllSlots(void);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -25,7 +25,7 @@ extern int DAT_0057f58c; /* 0x57f58c */
 /* Supplied declaration required: FUN_00165088. */
 extern unsigned int *asdListBoxGetIntValuePtr(unsigned int);
 extern int FUN_003216d0(void);
-/* Supplied declaration required: FUN_003216ec. */
+/* Supplied declaration required: btlTalkBustUpReleaseAllSlots. */
 extern int FUN_0032c430(unsigned int, unsigned int);
 extern unsigned int FUN_003874fc(unsigned int);
 
@@ -75,7 +75,7 @@ void FUN_004d3360(int param_1,int param_2)
     if (temp_v1 == 0) {
       return;
     }
-    FUN_003216ec();
+    btlTalkBustUpReleaseAllSlots();
     temp_v1 = DAT_0057f58c;
     if (*(char *)(DAT_0057f58c + 0x35) != '\0') {
       FUN_00165088(DAT_0057f58c,*(unsigned char *)(DAT_0057f58c + 9));

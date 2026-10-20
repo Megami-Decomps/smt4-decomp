@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002b06c4(void);
+int dataTable00FindById(void);
 
 extern int FUN_0025c05c(void);
-/* Supplied declaration required: FUN_002b06c4. */
+/* Supplied declaration required: dataTable00FindById. */
 
 
 unsigned char FUN_001fa498(void)
@@ -17,7 +17,7 @@ unsigned char FUN_001fa498(void)
   int temp_v0;
   
   temp_v0 = FUN_0025c05c();
-  FUN_002b06c4();
+  dataTable00FindById();
   return *(unsigned char *)(temp_v0 + 2);
 }
 

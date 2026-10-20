@@ -6,14 +6,14 @@ extern "C" {
 
 int FUN_00100388(...);
 int FUN_00103f54(...);
-int FUN_00103f74(...);
+int holderSetFlagBits(...);
 int FUN_0011b272(unsigned char [52], unsigned int);
 int FUN_0011b648(...);
 int FUN_0012055e(unsigned char [24], unsigned char **);
-int FUN_002e6e14(...);
-int FUN_002e760a(...);
-int FUN_002e9318(...);
-int FUN_002e9598(unsigned char [8], unsigned int);
+int asdOperatorDeleteArray(...);
+int operatorNew(...);
+int onlineStringDestroy(...);
+int onlineStringAssign(unsigned char [8], unsigned int);
 int FUN_002ea100(...);
 int FUN_002f4cac(unsigned char [32]);
 int FUN_002f4cd6(unsigned char [32], unsigned char [104], int);
@@ -70,19 +70,19 @@ extern unsigned char DAT_0055cacc; /* 0x55cacc */
 
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_00103f54. */
-/* Supplied declaration required: FUN_00103f74. */
+/* Supplied declaration required: holderSetFlagBits. */
 /* Supplied declaration required: FUN_0011b272. */
 /* Supplied declaration required: FUN_0011b648. */
 /* Supplied declaration required: FUN_0012055e. */
-extern unsigned int FUN_0014bef4(unsigned int);
-extern int FUN_0018719c(unsigned int);
+extern unsigned int randRange(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 extern int FUN_00237608(void);
 extern unsigned int FUN_002bf520(void);
 extern int rt_malloc(unsigned int);
-/* Supplied declaration required: FUN_002e6e14. */
-/* Supplied declaration required: FUN_002e760a. */
-/* Supplied declaration required: FUN_002e9318. */
-/* Supplied declaration required: FUN_002e9598. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
+/* Supplied declaration required: operatorNew. */
+/* Supplied declaration required: onlineStringDestroy. */
+/* Supplied declaration required: onlineStringAssign. */
 extern int constructObj0055affc(unsigned char *);
 /* Supplied declaration required: FUN_002ea100. */
 /* Supplied declaration required: FUN_002f4cac. */
@@ -163,12 +163,12 @@ void FUN_00413e50(int param_1)
   temp_v35 = 0;
   temp_v36 = 0;
   temp_v0 = FUN_00303928(temp_v0 + 0x20,3,&temp_v34);
-  FUN_002e6e14(temp_v34);
+  asdOperatorDeleteArray(temp_v34);
   temp_v37 = 0;
   temp_v38 = 0;
   temp_v39 = 0;
   temp_v0 = FUN_00303928(temp_v0 + 0x14,3,&temp_v37);
-  FUN_002e6e14(temp_v37);
+  asdOperatorDeleteArray(temp_v37);
   temp_v0 = FUN_0030395c(temp_v0 + 0x20,0);
   *(unsigned int *)(temp_v0 + 0xc) = 0;
   *(unsigned int *)(temp_v0 + 0x10) = 0;
@@ -186,8 +186,8 @@ void FUN_00413e50(int param_1)
   FUN_00432dd8();
   temp_v10 = 0;
   temp_v1 = FUN_002ea100(temp_v32,&LAB_004141dc);
-  FUN_002e9598(temp_v11,temp_v1);
-  FUN_002e9318(temp_v32);
+  onlineStringAssign(temp_v11,temp_v1);
+  onlineStringDestroy(temp_v32);
   temp_v12 = 999;
   temp_v29 = 0;
   temp_v30 = 0;
@@ -195,11 +195,11 @@ void FUN_00413e50(int param_1)
   temp_v1 = FUN_00303928(temp_v27,0,&temp_v29);
   FUN_0011b272(temp_v14,temp_v1);
   temp_v27[0] = &DAT_0055a4c0;
-  FUN_002e6e14(temp_v28);
-  FUN_002e6e14(temp_v29);
+  asdOperatorDeleteArray(temp_v28);
+  asdOperatorDeleteArray(temp_v29);
   FUN_002f4cac(temp_v13);
   FUN_002f4cd6(temp_v13,temp_v23,100);
-  temp_v0 = FUN_0018719c(0x580);
+  temp_v0 = gameFlagIsSet(0x580);
   if (temp_v0 == 0) {
     temp_v5 = 0;
     temp_v7 = 1;
@@ -218,9 +218,9 @@ void FUN_00413e50(int param_1)
   temp_v20 = 0;
   temp_v21 = 0;
   temp_v22 = 0;
-  temp_v0 = FUN_0018719c(0x580);
+  temp_v0 = gameFlagIsSet(0x580);
   if (temp_v0 != 0) {
-    temp_v1 = FUN_0014bef4(0xffff);
+    temp_v1 = randRange(0xffff);
     FUN_00100388(&temp_v17,&LAB_004141f4,temp_v1,0);
   }
   else {
@@ -228,23 +228,23 @@ void FUN_00413e50(int param_1)
   }
   temp_v1 = FUN_002ea100(temp_v33,&temp_v17);
   FUN_00522a48(&temp_v24,temp_v1);
-  FUN_002e9318(temp_v33);
+  onlineStringDestroy(temp_v33);
   FUN_00522bf4(temp_v15,&temp_v24);
-  temp_v0 = FUN_002e760a(0x78);
+  temp_v0 = operatorNew(0x78);
   if (temp_v0 == 0) {
     temp_v1 = 0;
   }
   else {
     temp_v1 = FUN_002fafd8(temp_v0,0);
   }
-  puVar5 = (unsigned int *)FUN_002e760a(0x14);
+  puVar5 = (unsigned int *)operatorNew(0x14);
   if (puVar5 != (unsigned int *)0x0) {
     puVar5[1] = param_1;
     puVar5[2] = (unsigned int)FUN_0041488c;
     puVar5[3] = 0;
     *puVar5 = (unsigned int)&DAT_0055cacc;
     puVar5[4] = temp_v1;
-    FUN_00103f74(temp_v1,2);
+    holderSetFlagBits(temp_v1,2);
     FUN_00103f54(temp_v1,puVar5,0,1);
   }
   FUN_0011b648(param_1 + 4,temp_v1,&temp_v8,param_1 + 0x90);
@@ -252,7 +252,7 @@ void FUN_00413e50(int param_1)
   for (puVar5 = temp_v24; puVar5 != puVar1; puVar5 = puVar5 + 2) {
     (**(romwright_code **)*puVar5)(puVar5);
   }
-  FUN_002e6e14(temp_v24);
+  asdOperatorDeleteArray(temp_v24);
   FUN_0043378c(&temp_v8);
   return;
 }

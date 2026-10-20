@@ -11,7 +11,7 @@ int FUN_004d3c94(...);
 
 int FUN_00280328(...);
 int FUN_002ea508(...);
-int FUN_00317508(...);
+int asdListBoxSetByteValue(...);
 int asdListBoxAddItems(void);
 int asdListBoxSetToggleItem(...);
 int asdListBoxGetFloatValuePtr(...);
@@ -112,12 +112,12 @@ extern unsigned int DAT_0057aa2c; /* 0x57aa2c */
 
 /* Supplied declaration required: jobStop. */
 extern int jobIsValid(unsigned int);
-extern int FUN_001656a0(unsigned int);
+extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: FUN_00280328. */
 /* Supplied declaration required: FUN_002ea508. */
 /* Supplied declaration required: asdListBoxGetIntValuePtr. */
 /* Supplied declaration required: asdListBoxSetIntItem. */
-/* Supplied declaration required: FUN_00317508. */
+/* Supplied declaration required: asdListBoxSetByteValue. */
 /* Supplied declaration required: asdListBoxAddItems. */
 /* Supplied declaration required: FUN_0032c430. */
 /* Supplied declaration required: asdListBoxSetToggleItem. */
@@ -341,13 +341,13 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
       *(unsigned int *)(param_2 + 0x45a8) = temp_v4;
       *(unsigned int *)(param_2 + 0x45ac) = temp_v3;
     }
-    temp_v5 = FUN_001656a0(0);
+    temp_v5 = padButtonIsPressed(0);
     if (temp_v5 != 0) {
       FUN_004d130c(param_1,param_2);
       temp_v6 = 0x20;
     }
     else {
-      temp_v5 = FUN_001656a0(1);
+      temp_v5 = padButtonIsPressed(1);
       if (temp_v5 == 0) {
         return 0;
       }
@@ -360,7 +360,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
     asdListBoxGetIntValuePtr(param_1[4],temp_v6);
     switch(temp_v6) {
     case 0:
-      temp_v5 = FUN_001656a0(0);
+      temp_v5 = padButtonIsPressed(0);
       if (temp_v5 != 0) {
         temp_v5 = jobIsValid(param_1[4]);
         if (temp_v5 != 0) {
@@ -371,7 +371,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
       }
       break;
     case 1:
-      temp_v5 = FUN_001656a0(0);
+      temp_v5 = padButtonIsPressed(0);
       if (temp_v5 != 0) {
         temp_v5 = jobIsValid(param_1[4]);
         if (temp_v5 != 0) {
@@ -383,7 +383,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
       }
       break;
     case 2:
-      temp_v5 = FUN_001656a0(0);
+      temp_v5 = padButtonIsPressed(0);
       if (temp_v5 != 0) {
         temp_v5 = jobIsValid(param_1[4]);
         if (temp_v5 != 0) {
@@ -395,7 +395,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
       }
       break;
     case 3:
-      temp_v5 = FUN_001656a0(0);
+      temp_v5 = padButtonIsPressed(0);
       if (temp_v5 != 0) {
         temp_v5 = jobIsValid(param_1[4]);
         if (temp_v5 != 0) {
@@ -407,7 +407,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
       }
       break;
     case 4:
-      temp_v5 = FUN_001656a0(0);
+      temp_v5 = padButtonIsPressed(0);
       if (temp_v5 != 0) {
         temp_v5 = jobIsValid(param_1[4]);
         if (temp_v5 != 0) {
@@ -419,7 +419,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
       }
       break;
     case 5:
-      temp_v5 = FUN_001656a0(0);
+      temp_v5 = padButtonIsPressed(0);
       if (temp_v5 != 0) {
         temp_v5 = jobIsValid(param_1[4]);
         if (temp_v5 != 0) {
@@ -431,7 +431,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
       }
       break;
     case 6:
-      temp_v5 = FUN_001656a0(0);
+      temp_v5 = padButtonIsPressed(0);
       if (temp_v5 != 0) {
         temp_v5 = jobIsValid(param_1[4]);
         if (temp_v5 != 0) {
@@ -443,7 +443,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
       }
       break;
     case 7:
-      temp_v5 = FUN_001656a0(0);
+      temp_v5 = padButtonIsPressed(0);
       if (temp_v5 != 0) {
         temp_v5 = jobIsValid(param_1[4]);
         if (temp_v5 != 0) {
@@ -455,7 +455,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
       }
       break;
     case 8:
-      temp_v5 = FUN_001656a0(0);
+      temp_v5 = padButtonIsPressed(0);
       if (temp_v5 != 0) {
         temp_v5 = jobIsValid(param_1[4]);
         if (temp_v5 != 0) {
@@ -467,7 +467,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
       }
       break;
     case 9:
-      temp_v5 = FUN_001656a0(0);
+      temp_v5 = padButtonIsPressed(0);
       if (temp_v5 != 0) {
         temp_v5 = jobIsValid(param_1[4]);
         if (temp_v5 != 0) {
@@ -479,7 +479,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
       }
       break;
     case 10:
-      temp_v5 = FUN_001656a0(0);
+      temp_v5 = padButtonIsPressed(0);
       if (temp_v5 != 0) {
         temp_v5 = jobIsValid(param_1[4]);
         if (temp_v5 != 0) {
@@ -491,7 +491,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
       }
       break;
     case 0xb:
-      temp_v5 = FUN_001656a0(0);
+      temp_v5 = padButtonIsPressed(0);
       if (temp_v5 != 0) {
         temp_v5 = jobIsValid(param_1[4]);
         if (temp_v5 != 0) {
@@ -503,7 +503,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
       }
       break;
     case 0xc:
-      temp_v5 = FUN_001656a0(0);
+      temp_v5 = padButtonIsPressed(0);
       if (temp_v5 != 0) {
         temp_v5 = jobIsValid(param_1[4]);
         if (temp_v5 != 0) {
@@ -515,13 +515,13 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
       }
       break;
     case 0xd:
-      temp_v5 = FUN_001656a0(0);
+      temp_v5 = padButtonIsPressed(0);
       if (temp_v5 != 0) {
         temp_v6 = 0x20;
         *param_1 = temp_v6;
       }
     }
-    temp_v5 = FUN_001656a0(1);
+    temp_v5 = padButtonIsPressed(1);
     if (temp_v5 == 0) {
       return 0;
     }
@@ -538,7 +538,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
       FUN_00280328(temp_v6,0x75,0);
       param_1[4] = temp_v6;
       asdListBoxAddItems();
-      FUN_00317508(param_1[4],1);
+      asdListBoxSetByteValue(param_1[4],1);
       FUN_002ea508(param_1[4],"btl Camera Menu");
     }
     temp_v6 = 4;
@@ -549,7 +549,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
       param_1[3] = temp_v1;
       temp_v6 = 5;
     }
-    temp_v5 = FUN_001656a0(0);
+    temp_v5 = padButtonIsPressed(0);
     if (temp_v5 != 0) {
       temp_v5 = jobIsValid(param_1[4]);
       if (temp_v5 != 0) {
@@ -559,7 +559,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
       *param_1 = temp_v6;
       return 0;
     }
-    temp_v5 = FUN_001656a0(1);
+    temp_v5 = padButtonIsPressed(1);
     if (temp_v5 == 0) {
       return 0;
     }
@@ -605,9 +605,9 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
     else {
       FUN_004d542c(param_1,param_2,temp_v6);
     }
-    temp_v5 = FUN_001656a0(0);
+    temp_v5 = padButtonIsPressed(0);
     if (temp_v5 == 0) {
-      temp_v5 = FUN_001656a0(1);
+      temp_v5 = padButtonIsPressed(1);
       if (temp_v5 == 0) {
         return 0;
       }
@@ -779,7 +779,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
       puVar3 = (unsigned int *)asdListBoxGetIntValuePtr(param_1[4],0x17);
       DAT_0057a67a = (unsigned short)*puVar3;
     }
-    temp_v5 = FUN_001656a0(0);
+    temp_v5 = padButtonIsPressed(0);
     if (temp_v5 == 0) {
       return 0;
     }
@@ -791,7 +791,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
     break;
   case 10:
     FUN_004d290c(param_1);
-    temp_v5 = FUN_001656a0(0);
+    temp_v5 = padButtonIsPressed(0);
     if (temp_v5 == 0) {
       return 0;
     }
@@ -807,7 +807,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
     FUN_00280328(temp_v6,0x75,0);
     param_1[4] = temp_v6;
     asdListBoxAddItems();
-    FUN_00317508(param_1[4],1);
+    asdListBoxSetByteValue(param_1[4],1);
     FUN_002ea508(param_1[4],"btl Param Menu");
     asdListBoxSetIntItem(param_1[4],0,0xffffffff,0xffffffff,0x6c,0);
     param_1[7] = 0xffffffff;
@@ -815,7 +815,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
     break;
   case 0xc:
     FUN_004d3df0(param_1);
-    temp_v5 = FUN_001656a0(0);
+    temp_v5 = padButtonIsPressed(0);
     if (temp_v5 == 0) {
       return 0;
     }
@@ -831,7 +831,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
     FUN_00280328(temp_v6,0x75,0);
     param_1[4] = temp_v6;
     asdListBoxAddItems();
-    FUN_00317508(param_1[4],1);
+    asdListBoxSetByteValue(param_1[4],1);
     FUN_002ea508(param_1[4],"btl Bad Menu");
     asdListBoxSetIntItem(param_1[4],0,0xffffffff,0xffffffff,0x6c,0);
     *(unsigned char *)(param_1 + 5) = 0;
@@ -843,7 +843,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
     break;
   case 0xe:
     FUN_004d1470(param_1);
-    temp_v5 = FUN_001656a0(0);
+    temp_v5 = padButtonIsPressed(0);
     if (temp_v5 == 0) {
       return 0;
     }
@@ -855,7 +855,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
     break;
   case 0x10:
     FUN_004d463c(param_1);
-    temp_v5 = FUN_001656a0(0);
+    temp_v5 = padButtonIsPressed(0);
     if (temp_v5 == 0) {
       return 0;
     }
@@ -867,7 +867,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
     break;
   case 0x12:
     FUN_004d3360(param_1);
-    temp_v5 = FUN_001656a0(0);
+    temp_v5 = padButtonIsPressed(0);
     if (temp_v5 == 0) {
       return 0;
     }
@@ -921,7 +921,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
       *puVar3 = temp_v6;
     default:
     }
-    temp_v5 = FUN_001656a0(0);
+    temp_v5 = padButtonIsPressed(0);
     if (temp_v5 == 0) {
       return 0;
     }
@@ -933,7 +933,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
     break;
   case 0x16:
     FUN_004d4f54(param_1);
-    temp_v5 = FUN_001656a0(0);
+    temp_v5 = padButtonIsPressed(0);
     if (temp_v5 == 0) {
       return 0;
     }
@@ -949,7 +949,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
     FUN_00280328(temp_v6,0x75,0);
     param_1[4] = temp_v6;
     asdListBoxAddItems();
-    FUN_00317508(param_1[4],1);
+    asdListBoxSetByteValue(param_1[4],1);
     FUN_002ea508(param_1[4],"btl Result Menu");
     asdListBoxSetToggleItem(param_1[4],0,
                  (*(unsigned int *)(param_2 + 0x45a8) & DAT_00571740) != 0 ||
@@ -991,7 +991,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
         *(unsigned int *)(param_2 + 0x45ac) = temp_v4;
       }
     }
-    temp_v5 = FUN_001656a0(0);
+    temp_v5 = padButtonIsPressed(0);
     if (temp_v5 == 0) {
       return 0;
     }
@@ -1007,7 +1007,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
     FUN_00280328(temp_v6,0x75,0);
     param_1[4] = temp_v6;
     asdListBoxAddItems();
-    FUN_00317508(param_1[4],1);
+    asdListBoxSetByteValue(param_1[4],1);
     FUN_002ea508(param_1[4],"btl Sake Menu");
     FUN_00340edc(param_1[4],0,0,10);
     FUN_00340edc(param_1[4],1,0);
@@ -1048,7 +1048,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
     default:
     }
 LAB_004d729c:
-    temp_v5 = FUN_001656a0(0);
+    temp_v5 = padButtonIsPressed(0);
     if (temp_v5 == 0) {
       return 0;
     }
@@ -1060,7 +1060,7 @@ LAB_004d729c:
     break;
   case 0x1c:
     FUN_004d3c94(param_1);
-    temp_v5 = FUN_001656a0(0);
+    temp_v5 = padButtonIsPressed(0);
     if (temp_v5 == 0) {
       return 0;
     }
@@ -1076,7 +1076,7 @@ LAB_004d729c:
     FUN_00280328(temp_v6,0x75,0);
     param_1[4] = temp_v6;
     asdListBoxAddItems();
-    FUN_00317508(param_1[4],1);
+    asdListBoxSetByteValue(param_1[4],1);
     FUN_002ea508(param_1[4],"btl Face Menu");
     asdListBoxSetIntItem(param_1[4],0,0,0,3,0);
     temp_v6 = 0x1e;
@@ -1084,7 +1084,7 @@ LAB_004d729c:
     break;
   case 0x1e:
     FUN_004d2628(param_1);
-    temp_v5 = FUN_001656a0(0);
+    temp_v5 = padButtonIsPressed(0);
     if (temp_v5 == 0) {
       return 0;
     }
@@ -1100,7 +1100,7 @@ LAB_004d729c:
     FUN_00280328(temp_v6,0x75,0);
     param_1[4] = temp_v6;
     asdListBoxAddItems();
-    FUN_00317508(param_1[4],1);
+    asdListBoxSetByteValue(param_1[4],1);
     FUN_002ea508(param_1[4],"btl Debug Menu");
     *param_1 = 0;
     return 0;

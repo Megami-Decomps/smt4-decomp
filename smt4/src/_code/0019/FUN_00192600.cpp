@@ -3,8 +3,8 @@
 extern "C" {
 
 int FUN_00291730(u32 *block);
-int FUN_002917b8(void);
-int FUN_00291944(void);
+int buttonHelpRelease(void);
+int uiFadeRelease(void);
 int FUN_00291998(void);
 int FUN_002b827c(void);
 int asdMemFree(void *ptr);
@@ -14,13 +14,13 @@ void FUN_00192600(void)
 {
     FUN_002b827c();
     FUN_00291998();
-    FUN_00291944();
-    FUN_002917b8();
-    if (DAT_0044cdf0 != NULL) {
-        jobStop(DAT_0044cdf0->job, 0);
-        FUN_00291730(DAT_0044cdf0->unk00040);
-        asdMemFree(DAT_0044cdf0);
-        DAT_0044cdf0 = NULL;
+    uiFadeRelease();
+    buttonHelpRelease();
+    if (g_naviMain != NULL) {
+        jobStop(g_naviMain->job, 0);
+        FUN_00291730(g_naviMain->unk00040);
+        asdMemFree(g_naviMain);
+        g_naviMain = NULL;
     }
 }
 

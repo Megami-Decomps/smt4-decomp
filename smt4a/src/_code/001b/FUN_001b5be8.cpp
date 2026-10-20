@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_2_stack;
 
-extern unsigned char DAT_00647708; /* 0x647708 */
+extern unsigned char g_nnSndMasterManagerImpl; /* 0x647708 */
 
 /* Supplied declaration required: FUN_001cd658. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
@@ -36,7 +36,7 @@ void FUN_001b5be8(int param_1,int param_2)
   }
   *(unsigned int *)(temp_v0 + 0x34) = 0;
   *(unsigned int *)(temp_v0 + 0x38) = 0;
-  FUN_001cd658(&DAT_00647708,param_2,0);
+  FUN_001cd658(&g_nnSndMasterManagerImpl,param_2,0);
   nn_os_CriticalSection_Leave(param_1 + 0x44);
   return;
 }

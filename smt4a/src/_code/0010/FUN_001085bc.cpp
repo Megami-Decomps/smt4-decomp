@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002e6e34(...);
 int FUN_002e6e5c(...);
 int FUN_002e7908(int *, int *);
-int FUN_002e9afe(...);
+int vectorCopyHeader(...);
 
 typedef int romwright_code(...);
 /* stack frame of param_2: 7 slot(s), 22 byte(s) */
@@ -28,7 +28,7 @@ extern unsigned int FUN_00123830(int *);
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
 /* Supplied declaration required: FUN_002e7908. */
-/* Supplied declaration required: FUN_002e9afe. */
+/* Supplied declaration required: vectorCopyHeader. */
 extern int FUN_002ea6fc(int, unsigned char *);
 extern unsigned int *FUN_002f12d0(unsigned int, unsigned char *);
 
@@ -79,7 +79,7 @@ void FUN_001085bc(unsigned int param_1,int *param_2)
     }
     temp_v8 = 0x8005000d;
     temp_v0 = FUN_002e7908(&temp_v7,&temp_v8);
-    FUN_002e9afe(temp_v11,temp_v0);
+    vectorCopyHeader(temp_v11,temp_v0);
     temp_v1 = param_2[0x22];
     if (temp_v1 != 0) {
       FUN_002e6e34(temp_v3,temp_v1 + 4);
@@ -99,7 +99,7 @@ void FUN_001085bc(unsigned int param_1,int *param_2)
         temp_v1 = temp_v1 + 0x34;
         temp_v2 = FUN_002ea6fc(temp_v1,temp_v5);
         if (temp_v2 != 0) {
-          FUN_002e9afe(temp_v1,&temp_v4);
+          vectorCopyHeader(temp_v1,&temp_v4);
         }
         FUN_002e6e5c(temp_v10);
       }

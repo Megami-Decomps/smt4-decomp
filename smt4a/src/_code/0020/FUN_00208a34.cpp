@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100854(unsigned short *, unsigned int, unsigned int, int, unsigned char *);
+int libc_bsearch(unsigned short *, unsigned int, unsigned int, int, unsigned char *);
 int FUN_001517b4(int, int);
 int FUN_001a6568(unsigned int, int, int, int);
 int FUN_001acf98(int, int);
@@ -17,9 +17,9 @@ typedef struct {
 
 extern unsigned char LAB_002321f8; /* 0x2321f8 */
 extern unsigned int g_aocSystem; /* 0x570280 */
-extern int DAT_0057f57c; /* 0x57f57c */
+extern int g_sWin; /* 0x57f57c */
 
-/* Supplied declaration required: FUN_00100854. */
+/* Supplied declaration required: libc_bsearch. */
 /* Supplied declaration required: FUN_001517b4. */
 extern int FUN_00163fd4(unsigned int);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
@@ -42,21 +42,21 @@ void FUN_00208a34(int param_1,unsigned int param_2)
   int temp_v4;
   unsigned short temp_v5 [2];
   
-  temp_v0 = DAT_0057f57c;
-  if (*(int *)(DAT_0057f57c + 0x14) != param_1) {
+  temp_v0 = g_sWin;
+  if (*(int *)(g_sWin + 0x14) != param_1) {
     temp_v1 = 9;
     FUN_001517b4(9,2);
     if ((temp_v1 != 0) || (temp_v1 = FUN_00163fd4(6), temp_v1 != 0)) {
       param_2 = 0;
     }
     *(unsigned int *)(temp_v0 + 0x18) = *(unsigned int *)(temp_v0 + 0x14);
-    *(int *)(DAT_0057f57c + 0x14) = param_1;
+    *(int *)(g_sWin + 0x14) = param_1;
     temp_v2 = dataTableGet(0x47,0);
     temp_v3 = dataTableGetEntries();
     temp_v2 = dataTableGetCount(temp_v2);
     puVar5 = temp_v5;
     temp_v5[0] = (unsigned short)param_1;
-    FUN_00100854(puVar5,temp_v3,temp_v2,4,&LAB_002321f8);
+    libc_bsearch(puVar5,temp_v3,temp_v2,4,&LAB_002321f8);
     if ((puVar5 != (unsigned short *)0x0) && (temp_v1 = (int)(short)puVar5[1], -1 < temp_v1)) {
       temp_v4 = FUN_001a6508(g_aocSystem,0x34,temp_v1,1);
       if (temp_v4 != 0) {

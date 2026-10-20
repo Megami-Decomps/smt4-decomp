@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002039d0(...);
 int FUN_00213d1c(unsigned int *);
 int FUN_00213fe4(unsigned int *);
-int FUN_00285834(void);
+int nodeTreeReleaseItem(void);
 int FUN_003d2294(float *, unsigned int, unsigned int, unsigned int);
 int VectorSignedToFloat(unsigned int, int);
 int rt_memcpy_w(unsigned int *, unsigned int *, int);
@@ -28,7 +28,7 @@ typedef struct {
 /* Supplied declaration required: FUN_002039d0. */
 /* Supplied declaration required: FUN_00213d1c. */
 /* Supplied declaration required: FUN_00213fe4. */
-/* Supplied declaration required: FUN_00285834. */
+/* Supplied declaration required: nodeTreeReleaseItem. */
 /* Supplied declaration required: FUN_003d2294. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -72,7 +72,7 @@ void FUN_002129b8(unsigned int *param_1)
     if ((unsigned int *)param_1[0xe1] != (unsigned int *)0x0) {
       *(unsigned int *)param_1[0xe1] = 0;
     }
-    FUN_00285834();
+    nodeTreeReleaseItem();
     return;
   }
   FUN_00213fe4(param_1);

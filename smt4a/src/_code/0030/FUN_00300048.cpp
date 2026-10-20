@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_00120f5c(u32 value, s32 flag);
+void watcherSetEnabled(u32 value, s32 flag);
 
 typedef struct Object Object;
 typedef struct ObjectVtbl {
@@ -15,7 +15,7 @@ struct Object {
 
 Object *FUN_002ea704(void);
 
-/* When FUN_002ea704 yields an object, passes its slot-11 value to FUN_00120f5c(value, 0). */
+/* When FUN_002ea704 yields an object, passes its slot-11 value to watcherSetEnabled(value, 0). */
 void FUN_00300048(void)
 {
     Object *object;
@@ -24,7 +24,7 @@ void FUN_00300048(void)
     if (FUN_002ea704() != NULL) {
         object = FUN_002ea704();
         value = object->vtbl->getValue(object);
-        FUN_00120f5c(value, 0);
+        watcherSetEnabled(value, 0);
     }
 }
 

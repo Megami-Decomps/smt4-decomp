@@ -26,7 +26,7 @@ extern int FUN_002df6f0(...); /* 0x2df6f0 */
 extern int FUN_002df754(...); /* 0x2df754 */
 extern int FUN_002fc0c8(...); /* 0x2fc0c8 */
 extern unsigned char DAT_00557e84; /* 0x557e84 */
-extern int DAT_0056fcc0; /* 0x56fcc0 */
+extern int g_handleRegistry; /* 0x56fcc0 */
 extern unsigned int *DAT_0057aa08; /* 0x57aa08 */
 
 /* Supplied declaration required: taskCreateDraw. */
@@ -53,8 +53,8 @@ void FUN_002726b8(unsigned int *param_1)
     puVar2[1] = (unsigned int)param_1;
   }
   DAT_0057aa08 = puVar2;
-  if (*(unsigned int **)(DAT_0056fcc0 + 0x3c) != (unsigned int *)0x0) {
-    **(unsigned int **)(DAT_0056fcc0 + 0x3c) = (unsigned int)FUN_002fc0c8;
+  if (*(unsigned int **)(g_handleRegistry + 0x3c) != (unsigned int *)0x0) {
+    **(unsigned int **)(g_handleRegistry + 0x3c) = (unsigned int)FUN_002fc0c8;
     return;
   }
   return;

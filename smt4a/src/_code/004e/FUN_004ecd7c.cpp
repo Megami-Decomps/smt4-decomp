@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00203d04(int);
+int dialogClose(int);
 int FUN_00272584(int, int, int, int);
 int FUN_004c8b10(void);
 
@@ -25,8 +25,8 @@ extern unsigned int DAT_0057117c; /* 0x57117c */
 extern unsigned int DAT_00571230; /* 0x571230 */
 extern unsigned int DAT_00571234; /* 0x571234 */
 
-/* Supplied declaration required: FUN_00203d04. */
-extern int FUN_002619e0(void);
+/* Supplied declaration required: dialogClose. */
+extern int dialogIsActive(void);
 /* Supplied declaration required: FUN_00272584. */
 /* Supplied declaration required: FUN_004c8b10. */
 
@@ -71,9 +71,9 @@ void FUN_004ecd7c(int *param_1,int param_2)
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < 0x6d);
   }
-  temp_v0 = FUN_002619e0();
+  temp_v0 = dialogIsActive();
   if (temp_v0 != 0) {
-    FUN_00203d04(1);
+    dialogClose(1);
   }
   FUN_004c8b10();
   FUN_00272584(*param_1,param_2,0,temp_v5);

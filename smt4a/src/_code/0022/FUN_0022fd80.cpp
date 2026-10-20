@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001801a4(void);
+int gameGetPlayerData(void);
 int FUN_00192608(void);
 int FUN_0034a290(void);
 int VectorUnsignedToFloat(unsigned int, int);
@@ -14,7 +14,7 @@ int VectorUnsignedToFloat(unsigned int, int);
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: FUN_001801a4. */
+/* Supplied declaration required: gameGetPlayerData. */
 /* Supplied declaration required: FUN_00192608. */
 /* Supplied declaration required: FUN_0034a290. */
 extern int dataTable9Type3GetClamped(unsigned short, unsigned int);
@@ -35,9 +35,9 @@ unsigned long long FUN_0022fd80(int param_1,unsigned int param_2)
   float temp_v6;
   float temp_v7;
   
-  temp_v0 = FUN_001801a4();
+  temp_v0 = gameGetPlayerData();
   temp_v6 = 1.0f;
-  puVar2 = (unsigned short *)FUN_001801a4();
+  puVar2 = (unsigned short *)gameGetPlayerData();
   temp_v7 = 0.01f;
   temp_v4 = 0;
   do {

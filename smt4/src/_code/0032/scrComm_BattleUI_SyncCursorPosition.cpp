@@ -8,7 +8,7 @@ int FUN_00254f58(int);
 int FUN_00338060(int, int);
 int FUN_003af0b0(unsigned int);
 
-extern unsigned int DAT_00439ca8; /* 0x439ca8 */
+extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 
 /* Supplied declaration required: FUN_00254f58. */
 extern int btlGetMainState(void);
@@ -26,7 +26,7 @@ unsigned int scrComm_BattleUI_SyncCursorPosition(void)
   temp_v0 = btlGetMainState();
   *(unsigned short *)(temp_v0 + 0x4968) = *(unsigned short *)(temp_v0 + 0x4970);
   *(unsigned short *)(temp_v0 + 0x496a) = *(unsigned short *)(temp_v0 + 0x4972);
-  FUN_003af0b0(DAT_00439ca8);
+  FUN_003af0b0(g_btlUiBlock);
   puVar2 = (unsigned int *)(temp_v0 + 0x44a0);
   if ((*puVar2 & 0x1000) != 0) {
     *puVar2 = *puVar2 & 0xffffefff;

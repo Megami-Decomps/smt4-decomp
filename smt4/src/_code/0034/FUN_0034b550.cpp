@@ -13,7 +13,7 @@ int __aeabi_idivmod(int, unsigned int);
 typedef int romwright_code(...);
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-extern unsigned int FUN_00296d6c(unsigned int, unsigned int);
+extern unsigned int randBetween(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002b7064. */
 /* Supplied declaration required: FUN_002b70cc. */
 extern unsigned int randNextInRange(unsigned int);
@@ -51,7 +51,7 @@ void FUN_0034b550(int param_1)
       puVar3[0x13] = temp_v0 + 1;
       __aeabi_idivmod(temp_v0 + 1,*(unsigned int *)(*(int *)(param_1 + 0x1c) + 0x20));
       if (temp_v2 == 0) {
-        temp_v1 = FUN_00296d6c(0xffff8001,0x8000);
+        temp_v1 = randBetween(0xffff8001,0x8000);
         temp_v4 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v5 = *(float *)(*(int *)(param_1 + 0x1c) + 0x24);
         temp_v5 = temp_v5 + (*(float *)(*(int *)(param_1 + 0x1c) + 0x28) - temp_v5) * temp_v4 * temp_v8;

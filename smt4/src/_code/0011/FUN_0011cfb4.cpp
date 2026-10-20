@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001467a4(void);
-int FUN_002c52f8(void);
+int asdFatalError(void);
 
 extern signed char DAT_0044e7e8; /* 0x44e7e8 */
 extern unsigned int DAT_004d4638; /* 0x4d4638 */
@@ -13,7 +13,7 @@ extern unsigned int DAT_004d4648; /* 0x4d4648 */
 
 extern int FUN_0013a170(unsigned int *, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001467a4. */
-/* Supplied declaration required: FUN_002c52f8. */
+/* Supplied declaration required: asdFatalError. */
 extern void nn_cfg_CTR_Initialize(void);
 
 
@@ -27,7 +27,7 @@ void FUN_0011cfb4(unsigned int *param_1)
     nn_cfg_CTR_Initialize();
     temp_v0 = FUN_0013a170(&DAT_004d4638,0x20,0x50005);
     if (temp_v0 < 0) {
-      FUN_002c52f8();
+      asdFatalError();
     }
     FUN_001467a4();
     DAT_0044e7e8 = '\x01';

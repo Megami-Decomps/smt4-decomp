@@ -28,7 +28,7 @@ extern unsigned int g_aocSystem; /* 0x433158 */
 /* Supplied declaration required: FUN_00126fb8. */
 /* Supplied declaration required: FUN_00297060. */
 /* Supplied declaration required: FUN_002a126c. */
-extern unsigned int FUN_002b47f4(unsigned int);
+extern unsigned int fileSlotGetBuffer(unsigned int);
 /* Supplied declaration required: FUN_002baa40. */
 extern unsigned int *FUN_002bad5c(unsigned char *);
 extern unsigned int FUN_002c3124(char *, unsigned char *, unsigned int);
@@ -89,7 +89,7 @@ void FUN_00390038(int param_1)
   } while (temp_v0 < 3);
   temp_v1 = FUN_002c3124("addon/aoc_scr.bf",temp_v7,0);
   *(unsigned int *)(param_1 + 0x350) = temp_v1;
-  temp_v1 = FUN_002b47f4(0x41);
+  temp_v1 = fileSlotGetBuffer(0x41);
   *(unsigned int *)(param_1 + 0x354) = temp_v1;
   temp_v0 = *(int *)(param_1 + 0x350);
   FUN_00297060(temp_v0,temp_v1);

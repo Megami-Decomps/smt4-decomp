@@ -19,8 +19,8 @@ int FUN_00157558(...);
 int FUN_00162790(...);
 int FUN_00164490(int);
 int FUN_00164b5c(int, int);
-int FUN_001654d8(...);
-int FUN_001654e4(...);
+int vec2GetXInt(...);
+int vec2GetYInt(...);
 int FUN_00165b08(void);
 int efctSetSpeed(void);
 int FUN_00168594(int, int);
@@ -63,8 +63,8 @@ extern int FUN_00162848(unsigned int);
 /* Supplied declaration required: FUN_00164490. */
 extern int jobGetWork(void);
 /* Supplied declaration required: FUN_00164b5c. */
-/* Supplied declaration required: FUN_001654d8. */
-/* Supplied declaration required: FUN_001654e4. */
+/* Supplied declaration required: vec2GetXInt. */
+/* Supplied declaration required: vec2GetYInt. */
 /* Supplied declaration required: FUN_00165b08. */
 extern int FUN_001671e0(void);
 /* Supplied declaration required: efctSetSpeed. */
@@ -83,7 +83,7 @@ extern unsigned int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: FUN_0018408c. */
-extern int FUN_001861c4(unsigned int, unsigned int);
+extern int asdTMTexTableGetNode(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001879d0. */
 
 
@@ -137,8 +137,8 @@ char FUN_0014f3f4(void)
     if (*(char *)(DAT_0057f590 + 0x191) != '\0') {
       temp_v6 = DAT_0057f590 + 0x1820;
       temp_v24 = temp_v18;
-      temp_v7 = FUN_001654d8();
-      temp_v6 = FUN_001654e4(temp_v6);
+      temp_v7 = vec2GetXInt();
+      temp_v6 = vec2GetYInt(temp_v6);
       temp_v18 = temp_v24;
       FUN_001879d0(g_renderCtx);
       temp_v16 = (float)VectorSignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -167,8 +167,8 @@ char FUN_0014f3f4(void)
     temp_v6 = DAT_0057f590;
     if (*(char *)(DAT_0057f590 + 0x19f2) != '\0') {
       temp_v8 = DAT_0057f590 + 0x144c;
-      temp_v12 = FUN_001654d8();
-      temp_v8 = FUN_001654e4(temp_v8);
+      temp_v12 = vec2GetXInt();
+      temp_v8 = vec2GetYInt(temp_v8);
       temp_v6 = *(int *)(temp_v6 + 0x19f4);
       temp_v20 = 0;
       temp_v21 = 0xb;
@@ -245,7 +245,7 @@ char FUN_0014f3f4(void)
   if (temp_v13 && temp_v0 == '\0') {
     return temp_v0;
   }
-  temp_v6 = FUN_001861c4(8,0);
+  temp_v6 = asdTMTexTableGetNode(8,0);
   FUN_0016c4b8(g_renderCtx,*(unsigned int *)(temp_v6 + 8));
   FUN_00157558(g_renderCtx);
   switch(*(unsigned char *)(temp_v5 + 9)) {
@@ -291,9 +291,9 @@ char FUN_0014f3f4(void)
         {
           temp_v7 = FUN_001692ac(1,0);
           FUN_0016c6f0(g_renderCtx,3,temp_v7);
-          temp_v8 = FUN_001654d8(temp_v5 + 0x3e4);
+          temp_v8 = vec2GetXInt(temp_v5 + 0x3e4);
           temp_v8 = temp_v8 + temp_v6;
-          temp_v12 = FUN_001654e4(temp_v5 + 0x3e4);
+          temp_v12 = vec2GetYInt(temp_v5 + 0x3e4);
           efctSetSpeed();
           FUN_00183bb0();
           temp_v0 = *(char *)(temp_v5 + 9);
@@ -351,8 +351,8 @@ char FUN_0014f3f4(void)
     if ((temp_v5 != 0) && (*(char *)(temp_v5 + 8) == '\x04')) {
       if ((*(char *)(DAT_0057f590 + 8) != '\0') &&
          ((*(char *)(DAT_0057f590 + 0x6d) == '\0' && (*(char *)(DAT_0057f58c + 0x6d) == '\0')))) {
-        temp_v8 = FUN_001654d8(temp_v5 + 0x3e4);
-        FUN_001654e4(temp_v5 + 0x3e4);
+        temp_v8 = vec2GetXInt(temp_v5 + 0x3e4);
+        vec2GetYInt(temp_v5 + 0x3e4);
         temp_v7 = FUN_001692ac(1,0);
         FUN_0016c6f0(g_renderCtx,3,temp_v7);
         efctSetSpeed();

@@ -3,7 +3,7 @@
 extern "C" {
 
 void FUN_002f2faa(u8 *member);
-void FUN_002e7232(void *buffer);
+void sharedRefRelease(void *buffer);
 
 typedef struct BufferOwner {
     /* 0x00 */ u8 unk00[0x78];
@@ -15,7 +15,7 @@ u32 FUN_00109f28(BufferOwner *owner, void *buffer)
 {
     if (buffer != NULL) {
         FUN_002f2faa(owner->member78);
-        FUN_002e7232(buffer);
+        sharedRefRelease(buffer);
         return 1;
     }
     return 0;

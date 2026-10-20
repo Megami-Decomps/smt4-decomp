@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001137fc(int);
 int FUN_002c39a4(unsigned int);
 
-extern int DAT_0043e278; /* 0x43e278 */
+extern int g_frameTex; /* 0x43e278 */
 extern unsigned int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_001137fc. */
@@ -39,9 +39,9 @@ unsigned char FUN_0010a03c(void)
       }
       else {
         *(int *)(temp_v0 + 0x14) = temp_v2 + 1;
-        temp_v0 = DAT_0043e278;
+        temp_v0 = g_frameTex;
         if (temp_v2 + 1 >= 0x1f) {
-          *(unsigned char *)(DAT_0043e278 + 0xc) = 0;
+          *(unsigned char *)(g_frameTex + 0xc) = 0;
           *(unsigned int *)(temp_v0 + 0x10) = 0;
           *(unsigned int *)(temp_v0 + 0x14) = 0;
           *(unsigned int *)(temp_v0 + 0x18) = 0;

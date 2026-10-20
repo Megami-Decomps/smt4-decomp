@@ -22,7 +22,7 @@ typedef struct {
 extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_002a48e0. */
 extern int FUN_002c2c68(int);
-extern int FUN_0031d1a0(int);
+extern int flaggedEntryGetValueA(int);
 
 
 void FUN_00403510(int param_1)
@@ -76,7 +76,7 @@ void FUN_00403510(int param_1)
     temp_v0 = FUN_002a4860(param_1 + 0x28);
     temp_v1 = FUN_002c2c68(param_1 + 0x28);
     if ((temp_v0 != temp_v1 - 8) &&
-       ((temp_v0 = FUN_0031d1a0(param_1 + 0x28), temp_v0 != 0 ||
+       ((temp_v0 = flaggedEntryGetValueA(param_1 + 0x28), temp_v0 != 0 ||
         (temp_v0 = FUN_002c2c68(param_1 + 0x28), temp_v0 >= 8)))) {
       FUN_001641b4(0x100020d);
       *(int *)(param_1 + 0x8c) = *(int *)(param_1 + 0x8c) + 1;

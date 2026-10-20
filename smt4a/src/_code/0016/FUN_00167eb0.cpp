@@ -11,7 +11,7 @@ typedef struct Request {
 
 extern void FUN_0017d920(s32 id, s32 *value);
 extern void FUN_0017db14(s32 value, u32 first, u32 second);
-extern void FUN_0017cdb4(void);
+extern void nngxGetError(void);
 
 void FUN_00167eb0(Request *request)
 {
@@ -20,7 +20,7 @@ void FUN_00167eb0(Request *request)
     if (request->first != 0) {
         FUN_0017d920(0x207, &setting);
         FUN_0017db14(setting, request->first, request->second);
-        FUN_0017cdb4();
+        nngxGetError();
     }
 }
 

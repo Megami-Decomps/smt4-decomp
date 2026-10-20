@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002e6dd4(int, int);
+int rt_memclr(int, int);
 
 extern unsigned char g_gameDataBlocks; /* 0x57f698 */
 
-/* Supplied declaration required: FUN_002e6dd4. */
+/* Supplied declaration required: rt_memclr. */
 
 
 void FUN_0031d1fc(void)
@@ -20,7 +20,7 @@ void FUN_0031d1fc(void)
   temp_v0 = (*(int *)((unsigned char *)&g_gameDataBlocks + 0x4));
   *(unsigned int *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x2db4) = 0;
   *(unsigned int *)(temp_v0 + 0x2db8) = 0;
-  FUN_002e6dd4(temp_v0 + 0x2d68,0x4c);
+  rt_memclr(temp_v0 + 0x2d68,0x4c);
   return;
 }
 

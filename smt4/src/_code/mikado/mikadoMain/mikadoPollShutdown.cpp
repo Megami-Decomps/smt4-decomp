@@ -6,7 +6,7 @@
 extern "C" {
 
 int FUN_002a7838(void);
-int FUN_002b2368(int object);
+int asdMemFreeNonNull(int object);
 int jobFind(u32 task);                /* nonzero while the task exists */
 int asdMemFree(void *ptr);               /* heap free */
 extern int FUN_00263c34(u8 *sub);
@@ -27,7 +27,7 @@ u32 mikadoPollShutdown(void)
             if (work->camera != NULL) {
                 FUN_002a7838();
                 if (work->camera != NULL) {
-                    FUN_002b2368(FUN_00263c34(&work->camera->sub) - 0x110);
+                    asdMemFreeNonNull(FUN_00263c34(&work->camera->sub) - 0x110);
                 }
                 work->camera = NULL;
             }

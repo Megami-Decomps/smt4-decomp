@@ -7,8 +7,8 @@ extern "C" {
 int refIsNullOrZero(...);
 int FUN_002bb5a4(...);
 int FUN_002be624(...);
-int FUN_002c3940(...);
-int FUN_002c52f8(...);
+int rt_aeabi_memclr(...);
+int asdFatalError(...);
 int FUN_002c618c(...);
 int builtin_strncpy(...);
 
@@ -33,8 +33,8 @@ extern int FUN_002b90c8(unsigned char *, unsigned int, unsigned int *);
 /* Supplied declaration required: refIsNullOrZero. */
 /* Supplied declaration required: FUN_002bb5a4. */
 /* Supplied declaration required: FUN_002be624. */
-/* Supplied declaration required: FUN_002c3940. */
-/* Supplied declaration required: FUN_002c52f8. */
+/* Supplied declaration required: rt_aeabi_memclr. */
+/* Supplied declaration required: asdFatalError. */
 /* Supplied declaration required: FUN_002c618c. */
 extern void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(unsigned int);
 
@@ -56,7 +56,7 @@ unsigned int FUN_002cb8d8(unsigned int param_1)
   unsigned int temp_v6;
   
   puVar4 = temp_v1;
-  FUN_002c3940(temp_v4,0x100);
+  rt_aeabi_memclr(temp_v4,0x100);
   if ((g_asdLoadFileUseRawPaths != '\0') || (temp_v0 = asdLoadFileHasDevice(param_1), temp_v0 != 0)) {
     FUN_002be624(temp_v4,param_1);
   }
@@ -94,7 +94,7 @@ unsigned int FUN_002cb8d8(unsigned int param_1)
   FUN_002bb5a4(puVar3,temp_v1,1);
   if ((temp_v3[0] & 0xfffffffe) != 0) {
     if ((temp_v3[0] & 1) != 0) {
-      FUN_002c52f8();
+      asdFatalError();
     }
     nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(temp_v3[0] & 0xfffffffe);
     temp_v3[0] = 0;
@@ -102,7 +102,7 @@ unsigned int FUN_002cb8d8(unsigned int param_1)
   if (((unsigned int)puVar3 & 0x80000000) == 0) {
     if ((temp_v3[0] & 0xfffffffe) != 0) {
       if ((temp_v3[0] & 1) != 0) {
-        FUN_002c52f8();
+        asdFatalError();
       }
       nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(temp_v3[0] & 0xfffffffe);
     }
@@ -110,7 +110,7 @@ unsigned int FUN_002cb8d8(unsigned int param_1)
   }
   if ((temp_v3[0] & 0xfffffffe) != 0) {
     if ((temp_v3[0] & 1) != 0) {
-      FUN_002c52f8();
+      asdFatalError();
     }
     nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(temp_v3[0] & 0xfffffffe);
   }

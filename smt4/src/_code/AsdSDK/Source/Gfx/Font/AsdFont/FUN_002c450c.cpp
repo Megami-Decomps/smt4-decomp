@@ -5,9 +5,9 @@
 extern "C" {
 
 int FUN_00121c60(void);
-int FUN_002bd540(void);
+int asdTextureSetImage(void);
 int asdTextureCreate(void);
-int FUN_002c0894(unsigned int);
+int asdTextureRelease(unsigned int);
 int asdOperatorNew(void);
 int asdMemFree(...);
 int asdMemoryAlloc(int, int, int, unsigned int, int);
@@ -23,9 +23,9 @@ extern unsigned int *DAT_00464a74; /* 0x464a74 */
 
 /* Supplied declaration required: FUN_00121c60. */
 extern int FUN_00121e38(void);
-/* Supplied declaration required: FUN_002bd540. */
+/* Supplied declaration required: asdTextureSetImage. */
 /* Supplied declaration required: asdTextureCreate. */
-/* Supplied declaration required: FUN_002c0894. */
+/* Supplied declaration required: asdTextureRelease. */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: asdMemoryAlloc. */
@@ -63,7 +63,7 @@ unsigned int FUN_002c450c(unsigned int *param_1,int param_2)
           temp_v7 = 0;
           do {
             *(unsigned int *)(*(int *)(piVar11[3] + temp_v7 * 4) + 0x24) = 0;
-            FUN_002c0894(*(unsigned int *)(piVar11[3] + temp_v7 * 4));
+            asdTextureRelease(*(unsigned int *)(piVar11[3] + temp_v7 * 4));
             temp_v7 = temp_v7 + 1;
           } while (temp_v7 < (unsigned int)piVar11[4]);
         }
@@ -201,7 +201,7 @@ unsigned int FUN_002c450c(unsigned int *param_1,int param_2)
           *(int *)(temp_v5 + 0x20) = temp_v9;
           *(int *)(temp_v5 + 0x24) = temp_v6 + temp_v4;
           *(unsigned int *)(temp_v5 + 0x28) = temp_v10;
-          FUN_002bd540();
+          asdTextureSetImage();
           temp_v7 = temp_v7 + 1;
           temp_v4 = temp_v4 + *(int *)(temp_v3 + 4);
         } while (temp_v7 < (unsigned int)piVar11[4]);

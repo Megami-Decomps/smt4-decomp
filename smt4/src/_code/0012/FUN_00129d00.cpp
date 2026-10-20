@@ -2,12 +2,12 @@
 
 extern "C" {
 
-void FUN_00129d04(u32 reg, u8 *values, u8 *masks, u32 count);
+void nn_gxlow_CTR_WriteHWRegsWithMask(u32 reg, u8 *values, u8 *masks, u32 count);
 
-/* Forwards to FUN_00129d04, the function that follows it. */
+/* Forwards to nn_gxlow_CTR_WriteHWRegsWithMask, the function that follows it. */
 void FUN_00129d00(u32 reg, u8 *values, u8 *masks, u32 count)
 {
-    FUN_00129d04(reg, values, masks, count);
+    nn_gxlow_CTR_WriteHWRegsWithMask(reg, values, masks, count);
 }
 
 } /* extern "C" */

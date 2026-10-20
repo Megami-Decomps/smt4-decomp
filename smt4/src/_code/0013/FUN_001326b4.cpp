@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00138c94(...);
 int FUN_0013c6c0(...);
-int FUN_00147a7c(...);
+int nnosConvertVirtToPhys(...);
 int FUN_002aa6ac(...);
 int asdGxCommandListStartRecord(...);
 int FUN_002ab92c(...);
@@ -30,7 +30,7 @@ typedef struct {
 } param_4_stack;
 
 extern int DAT_00464b7c; /* 0x464b7c */
-extern int *DAT_00464b84; /* 0x464b84 */
+extern int *g_asdModelTransformBuilder; /* 0x464b84 */
 extern unsigned int DAT_00464b8c; /* 0x464b8c */
 extern unsigned int DAT_00464b94; /* 0x464b94 */
 extern unsigned int *g_commandBufferCursor; /* 0x4652a0 */
@@ -44,7 +44,7 @@ extern unsigned int *DAT_004dad90; /* 0x4dad90 */
 extern int FUN_001385d4(void);
 /* Supplied declaration required: FUN_00138c94. */
 /* Supplied declaration required: FUN_0013c6c0. */
-/* Supplied declaration required: FUN_00147a7c. */
+/* Supplied declaration required: nnosConvertVirtToPhys. */
 /* Supplied declaration required: FUN_002aa6ac. */
 /* Supplied declaration required: asdGxCommandListStartRecord. */
 /* Supplied declaration required: FUN_002ab92c. */
@@ -89,8 +89,8 @@ void FUN_001326b4(int param_1,unsigned int param_2,unsigned int param_3,int para
   uStack_2c = param_3;
   temp_v8 = param_4;
   if ((DAT_004dad84 != '\0') && (DAT_004dad85 == '\0')) {
-    FUN_002abbe8(DAT_00464b84 + 4,DAT_00464b8c);
-    piVar3 = DAT_00464b84;
+    FUN_002abbe8(g_asdModelTransformBuilder + 4,DAT_00464b8c);
+    piVar3 = g_asdModelTransformBuilder;
     temp_v1 = DAT_00464b7c;
     nw_gfx_SceneTraverser_Begin(*(unsigned int *)(DAT_00464b7c + 8),*(unsigned int *)(DAT_00464b7c + 4))
     ;
@@ -101,9 +101,9 @@ void FUN_001326b4(int param_1,unsigned int param_2,unsigned int param_3,int para
                  *(unsigned int *)(*(int *)(param_1 + 0x14) + 0x10),temp_v4,
                  *(unsigned int *)(param_1 + 0x18));
     asdGxCommandListEnd(DAT_004dad88,0);
-    nw_gfx_SceneNode_AttachChild(DAT_00464b84,DAT_00464b8c);
-    FUN_002abbe8(DAT_00464b84 + 4,DAT_00464b94);
-    piVar3 = DAT_00464b84;
+    nw_gfx_SceneNode_AttachChild(g_asdModelTransformBuilder,DAT_00464b8c);
+    FUN_002abbe8(g_asdModelTransformBuilder + 4,DAT_00464b94);
+    piVar3 = g_asdModelTransformBuilder;
     temp_v1 = DAT_00464b7c;
     nw_gfx_SceneTraverser_Begin(*(unsigned int *)(DAT_00464b7c + 8),*(unsigned int *)(DAT_00464b7c + 4))
     ;
@@ -183,8 +183,8 @@ void FUN_001326b4(int param_1,unsigned int param_2,unsigned int param_3,int para
     }
   }
   temp_v8 = temp_v8 >> 3;
-  FUN_00147a7c(temp_v4);
-  FUN_00147a7c(*(int *)(temp_v1 + 4) + *(int *)(temp_v1 + 0xc));
+  nnosConvertVirtToPhys(temp_v4);
+  nnosConvertVirtToPhys(*(int *)(temp_v1 + 4) + *(int *)(temp_v1 + 0xc));
   if (*(int *)(temp_v1 + 0x30) == 0) {
     *(int *)(temp_v1 + 0x30) = *(int *)(temp_v1 + 0xc) - *(int *)(temp_v1 + 0x14);
   }

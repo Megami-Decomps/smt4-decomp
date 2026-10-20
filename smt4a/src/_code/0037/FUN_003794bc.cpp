@@ -11,10 +11,10 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-extern int DAT_005821c4; /* 0x5821c4 */
+extern int g_mapTable; /* 0x5821c4 */
 extern int g_gameState; /* 0x5f15fc */
 
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_00297988. */
 
 
@@ -27,16 +27,16 @@ void FUN_003794bc(int param_1)
   if (g_gameState != 0x27) {
     if (g_gameState != 0x14) {
       if ((g_gameState == 0x1a) &&
-         ((((temp_v0 = FUN_0018719c(0x4c9), temp_v0 != 0 && (temp_v0 = FUN_0018719c(0x179), temp_v0 != 0))
-           && (temp_v0 = FUN_0018719c(0x19f), temp_v0 == 0)) ||
-          (((temp_v0 = FUN_0018719c(0x4c9), temp_v0 == 0 && (temp_v0 = FUN_0018719c(0x179), temp_v0 != 0))
-           && (temp_v0 = FUN_0018719c(0x184), temp_v0 == 0)))))) {
+         ((((temp_v0 = gameFlagIsSet(0x4c9), temp_v0 != 0 && (temp_v0 = gameFlagIsSet(0x179), temp_v0 != 0))
+           && (temp_v0 = gameFlagIsSet(0x19f), temp_v0 == 0)) ||
+          (((temp_v0 = gameFlagIsSet(0x4c9), temp_v0 == 0 && (temp_v0 = gameFlagIsSet(0x179), temp_v0 != 0))
+           && (temp_v0 = gameFlagIsSet(0x184), temp_v0 == 0)))))) {
         FUN_00297988(2,0);
         return;
       }
     }
     else {
-      temp_v0 = FUN_0018719c(0x170);
+      temp_v0 = gameFlagIsSet(0x170);
       if (temp_v0 != 0) {
         FUN_00297988(8,0);
         return;
@@ -44,31 +44,31 @@ void FUN_003794bc(int param_1)
     }
   }
   else {
-    temp_v0 = FUN_0018719c(0x9d);
+    temp_v0 = gameFlagIsSet(0x9d);
     if (temp_v0 != 0) {
       if (param_1 == 1) {
-        FUN_00297988(*(unsigned int *)(DAT_005821c4 + 0x7fc),0);
+        FUN_00297988(*(unsigned int *)(g_mapTable + 0x7fc),0);
         return;
       }
       if (param_1 == 2) {
-        FUN_00297988(*(unsigned int *)(DAT_005821c4 + 0x804),0);
+        FUN_00297988(*(unsigned int *)(g_mapTable + 0x804),0);
         return;
       }
       if (param_1 == 3) {
-        FUN_00297988(*(unsigned int *)(DAT_005821c4 + 0x80c),0);
+        FUN_00297988(*(unsigned int *)(g_mapTable + 0x80c),0);
         return;
       }
       if (param_1 == 4) {
-        FUN_00297988(*(unsigned int *)(DAT_005821c4 + 0x814),0);
+        FUN_00297988(*(unsigned int *)(g_mapTable + 0x814),0);
         return;
       }
       if (param_1 == 5) {
-        FUN_00297988(*(unsigned int *)(DAT_005821c4 + 0x81c),0);
+        FUN_00297988(*(unsigned int *)(g_mapTable + 0x81c),0);
         return;
       }
     }
   }
-  FUN_00297988(*(unsigned int *)(DAT_005821c4 + param_1 * 8 + 0x784),0);
+  FUN_00297988(*(unsigned int *)(g_mapTable + param_1 * 8 + 0x784),0);
   return;
 }
 

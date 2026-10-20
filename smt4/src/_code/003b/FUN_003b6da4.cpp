@@ -25,7 +25,7 @@ extern int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_00288790. */
 /* Supplied declaration required: FUN_0029a17c. */
-extern int FUN_002a8740(int);
+extern int gameGetUnitRecord(int);
 extern int FUN_002bf4f8(unsigned int, unsigned int);
 /* Supplied declaration required: __aeabi_idivmod. */
 
@@ -58,7 +58,7 @@ void FUN_003b6da4(int param_1,int param_2,int param_3,int param_4)
   temp_v8 = 0;
   temp_v1 = 0;
   if (-1 < param_2) {
-    temp_v3 = FUN_002a8740(param_2);
+    temp_v3 = gameGetUnitRecord(param_2);
     temp_v9 = (unsigned int)*(unsigned short *)(temp_v3 + 0x44);
   }
   param_1 = param_1 + param_2 * 4;

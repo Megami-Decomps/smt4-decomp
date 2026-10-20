@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e61e8(...);
-int FUN_002e6490(unsigned int);
+int asdOperatorDeleteC(unsigned int);
 
 extern unsigned char DAT_0064be80; /* 0x64be80 */
 extern unsigned char DAT_0064bed0; /* 0x64bed0 */
@@ -13,7 +13,7 @@ extern unsigned char DAT_0064bf20; /* 0x64bf20 */
 extern unsigned int DAT_0064bf6c; /* 0x64bf6c */
 
 /* Supplied declaration required: FUN_002e61e8. */
-/* Supplied declaration required: FUN_002e6490. */
+/* Supplied declaration required: asdOperatorDeleteC. */
 
 
 void FUN_00103048(void)
@@ -30,7 +30,7 @@ void FUN_00103048(void)
   while (temp_v1 = temp_v0 & 0xfffffffe, temp_v1 != 0) {
     temp_v0 = *(unsigned int *)(temp_v1 + 0x4c);
     FUN_002e61e8(temp_v1);
-    FUN_002e6490(temp_v1);
+    asdOperatorDeleteC(temp_v1);
   }
   return;
 }

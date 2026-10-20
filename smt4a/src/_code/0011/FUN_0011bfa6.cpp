@@ -21,10 +21,10 @@ typedef struct Record {
     /* 0x10 */ u8 field10[8];
 } Record;
 
-extern void FUN_00300900(Reader *reader, u8 *out);
-extern void FUN_00300934(Reader *reader, void *out);
-extern void FUN_00303608(Reader *reader, void *out);
-extern s32 FUN_002ee9da(Reader *reader, u32 end);
+extern void streamExtractU8(Reader *reader, u8 *out);
+extern void streamReadWord(Reader *reader, void *out);
+extern void streamReadU64(Reader *reader, void *out);
+extern s32 streamSeek(Reader *reader, u32 end);
 
 void FUN_0011bfa6(Reader *reader, Record *out)
 {
@@ -37,11 +37,11 @@ void FUN_0011bfa6(Reader *reader, Record *out)
     headerless = reader->headerless;
     length = 0;
     if (headerless == 0) {
-        FUN_00300900(reader, &out->flag);
+        streamExtractU8(reader, &out->flag);
         if (reader->done != 0) {
             return;
         }
-        FUN_00300934(reader, &length);
+        streamReadWord(reader, &length);
         if (reader->done != 0) {
             return;
         }
@@ -50,11 +50,11 @@ void FUN_0011bfa6(Reader *reader, Record *out)
     if (reader->done != 0) {
         return;
     }
-    FUN_00303608(reader, out->field8);
+    streamReadU64(reader, out->field8);
     if (reader->done != 0) {
         return;
     }
-    FUN_00303608(reader, out->field10);
+    streamReadU64(reader, out->field10);
     if (reader->done != 0) {
         return;
     }
@@ -62,7 +62,7 @@ void FUN_0011bfa6(Reader *reader, Record *out)
         return;
     }
     end = start + length;
-    if (reader->pos > end || FUN_002ee9da(reader, end) == 0) {
+    if (reader->pos > end || streamSeek(reader, end) == 0) {
         reader->done = 1;
     }
 }

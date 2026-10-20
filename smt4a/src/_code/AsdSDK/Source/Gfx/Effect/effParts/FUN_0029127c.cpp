@@ -9,7 +9,7 @@ int memAlloc(int, int, int, int, int, int);
 int asdMemFree(unsigned int *);
 int FUN_001b4ddc(...);
 int FUN_00290edc(void);
-int FUN_002e342c(int, int);
+int libc_strcpy(int, int);
 int sysMemClear(...);
 int FUN_003007a0(void);
 int FUN_003c2df0(unsigned int *, int, int);
@@ -25,7 +25,7 @@ typedef struct {
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_001b4ddc. */
 /* Supplied declaration required: FUN_00290edc. */
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003007a0. */
 /* Supplied declaration required: FUN_003c2df0. */
@@ -137,7 +137,7 @@ LAB_0029145c:
         FUN_003c2df0(puVar2,temp_v0,temp_v7);
       }
       rt_memcpy_w(temp_v0,temp_v5);
-      FUN_002e342c(temp_v0 + 0x9c,temp_v5 + 0x9c);
+      libc_strcpy(temp_v0 + 0x9c,temp_v5 + 0x9c);
       puVar1 = (unsigned int *)(temp_v5 + 0x98);
       temp_v6 = temp_v6 + 1;
       temp_v5 = temp_v5 + 0xc0;

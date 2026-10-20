@@ -6,7 +6,7 @@ extern "C" {
 
 int scrSetResult(unsigned int);
 
-extern unsigned short *FUN_001801a4(void);
+extern unsigned short *gameGetPlayerData(void);
 extern unsigned short *scrGetArg(void);
 /* Supplied declaration required: scrSetResult. */
 
@@ -22,7 +22,7 @@ unsigned int FUN_002c2000(void)
   unsigned char temp_v1;
   
   puVar1 = (unsigned short *)scrGetArg();
-  puVar2 = (unsigned short *)FUN_001801a4();
+  puVar2 = (unsigned short *)gameGetPlayerData();
   puVar4 = (unsigned short *)(unsigned int)*puVar2;
   temp_v0 = 0;
   temp_v1 = puVar4 != puVar1;

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0012e100(int [2], int, int);
-int FUN_002e75fa(unsigned int);
+int sharedRefAddRef(unsigned int);
 int FUN_002eb164(...);
 int FUN_00300304(unsigned char [4], int, unsigned char [8]);
 
@@ -16,7 +16,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_0012e100. */
-/* Supplied declaration required: FUN_002e75fa. */
+/* Supplied declaration required: sharedRefAddRef. */
 /* Supplied declaration required: FUN_002eb164. */
 extern int FUN_002ef00c(unsigned char *, unsigned char *);
 extern int FUN_002f1334(unsigned char *, int);
@@ -45,7 +45,7 @@ void FUN_00114b86(int param_1,unsigned int param_2)
     temp_v5 = *(unsigned int *)(param_1 + 0x14);
     temp_v0 = wordRefsEqual_0030060c(temp_v6,(unsigned int *)&temp_v5);
     if (temp_v0 != 0) {
-      FUN_002e75fa(param_2);
+      sharedRefAddRef(param_2);
       FUN_002eb164(temp_v4,param_2);
       temp_v0 = FUN_002ef00c(temp_v7,temp_v4);
       *(unsigned int *)(temp_v0 + 8) = 0;

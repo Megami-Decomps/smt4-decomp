@@ -11,11 +11,11 @@ int FUN_0017fe8c(...);
 int FUN_0018003c(...);
 int FUN_0019a300(...);
 int asdMemFree(...);
-int FUN_001a089c(...);
+int nn_os_LightEvent_Initialize(...);
 int FUN_001a1204(...);
 int FUN_001ab838(...);
-int FUN_001af148(...);
-int FUN_001bcd48(...);
+int nn_os_LightEvent_Wait(...);
+int svcSleepThread(...);
 int FUN_00418fe0(...);
 int software_interrupt(...);
 
@@ -45,11 +45,11 @@ extern unsigned char bRam1ff80014; /* 0x1ff80014 */
 /* Supplied declaration required: FUN_0018003c. */
 /* Supplied declaration required: FUN_0019a300. */
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_001a089c. */
+/* Supplied declaration required: nn_os_LightEvent_Initialize. */
 /* Supplied declaration required: FUN_001a1204. */
 /* Supplied declaration required: FUN_001ab838. */
-/* Supplied declaration required: FUN_001af148. */
-/* Supplied declaration required: FUN_001bcd48. */
+/* Supplied declaration required: nn_os_LightEvent_Wait. */
+/* Supplied declaration required: svcSleepThread. */
 /* Supplied declaration required: FUN_00418fe0. */
 extern unsigned int nn_err_CTR_FatalErr_Throw(unsigned int, unsigned int);
 extern void nn_os_CriticalSection_Enter(unsigned int);
@@ -273,8 +273,8 @@ LAB_00189b20:
       nn_os_CriticalSection_Leave((unsigned int)&DAT_0062d280);
       puVar6 = (unsigned char *)(unsigned int)DAT_0062d200;
       if (puVar6 != (unsigned char *)0x2 && puVar6 != (unsigned char *)0x5) {
-        FUN_001a089c(&uStack_20,1);
-        FUN_001af148(&uStack_20);
+        nn_os_LightEvent_Initialize(&uStack_20,1);
+        nn_os_LightEvent_Wait(&uStack_20);
         puVar6 = puVar5;
       }
       return puVar6;
@@ -284,7 +284,7 @@ LAB_00189b20:
       puVar4 = (unsigned int *)(unsigned int)DAT_0062d200;
     }
     if (!temp_v11 || puVar4 != (unsigned int *)0x2) goto LAB_00189b20;
-    FUN_001bcd48(&LAB_004c4b40,0);
+    svcSleepThread(&LAB_004c4b40,0);
     nn_os_CriticalSection_Leave((unsigned int)&DAT_0062d280);
   } while( 1 );
 }

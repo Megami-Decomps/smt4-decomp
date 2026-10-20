@@ -12,7 +12,7 @@ int FUN_00164b5c(...);
 int efctSetSpeed(void);
 int FUN_00168770(void);
 int FUN_00168e00(...);
-int FUN_0016c410(...);
+int renderCtxResetColorScale(...);
 int FUN_0016c4b8(...);
 int FUN_0016c560(...);
 int FUN_001835b4(int, int, int, int, int, int);
@@ -42,8 +42,8 @@ typedef struct {
 
 extern unsigned char LAB_0024e7b4; /* 0x24e7b4 */
 extern unsigned char LAB_0024e7e0; /* 0x24e7e0 */
-extern signed char DAT_0057a9b8; /* 0x57a9b8 */
-extern int DAT_0057a9c8; /* 0x57a9c8 */
+extern signed char g_btlUi; /* 0x57a9b8 */
+extern int g_btlUiBlock; /* 0x57a9c8 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -57,10 +57,10 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_00168e00. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0016c410. */
+/* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: FUN_0016c4b8. */
 /* Supplied declaration required: FUN_0016c560. */
-extern int FUN_0018206c(unsigned int, int);
+extern int asdTMTexTableNodeIsLoaded(unsigned int, int);
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00184c40. */
@@ -97,12 +97,12 @@ unsigned int FUN_0024e31c(void)
   unsigned int temp_v13;
   int temp_v14;
   
-  temp_v1 = DAT_0057a9c8;
-  if (DAT_0057a9c8 != 0) {
+  temp_v1 = g_btlUiBlock;
+  if (g_btlUiBlock != 0) {
     temp_v5 = 0;
     temp_v6 = temp_v5;
     do {
-      temp_v2 = FUN_0018206c(0xc,temp_v5);
+      temp_v2 = asdTMTexTableNodeIsLoaded(0xc,temp_v5);
       if (temp_v2 != 0) {
         temp_v6 = temp_v6 + 1;
       }
@@ -110,7 +110,7 @@ unsigned int FUN_0024e31c(void)
     } while (temp_v5 < 6);
     temp_v5 = 0;
     do {
-      temp_v2 = FUN_0018206c(0xd,temp_v5);
+      temp_v2 = asdTMTexTableNodeIsLoaded(0xd,temp_v5);
       if (temp_v2 != 0) {
         temp_v6 = temp_v6 + 1;
       }
@@ -182,7 +182,7 @@ unsigned int FUN_0024e31c(void)
         efctSetSpeed();
       }
       temp_v9 = 0;
-      if (DAT_0057a9b8 != '\0') {
+      if (g_btlUi != '\0') {
         FUN_00162790(3,0xffffffff,&LAB_0024e7b4);
         FUN_00162790(3,0xffffffff,&LAB_0024e7e0);
       }
@@ -314,7 +314,7 @@ unsigned int FUN_0024e31c(void)
         *(unsigned char *)(temp_v1 + 0x12d0) = 0;
       }
       FUN_0016c560(g_renderCtx);
-      FUN_0016c410(g_renderCtx);
+      renderCtxResetColorScale(g_renderCtx);
       return 0;
     }
   }

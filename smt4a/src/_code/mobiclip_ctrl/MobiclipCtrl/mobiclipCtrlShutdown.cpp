@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00195fc8(void);
+int sysFatalBreak(void);
 int FUN_00422654(S4FsReader *reader);
 int FUN_00423c0c(void *obj);
 int FUN_00423cfc(void *obj);
@@ -36,7 +36,7 @@ void mobiclipCtrlShutdown(void)
     handle = &DAT_00618500.handle;
     if ((*handle & ~1u) != 0) {
         if ((*handle & 1) != 0) {
-            FUN_00195fc8();
+            sysFatalBreak();
         }
         vcallSlot12IfValid(*handle & ~1u);
         *handle = 0;

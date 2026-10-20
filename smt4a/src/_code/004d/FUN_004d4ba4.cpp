@@ -8,7 +8,7 @@ int jobStop(unsigned int, int);
 int FUN_00280328(unsigned int, int, int);
 int FUN_002ea508(unsigned int, unsigned char *);
 int asdListBoxSetIntItem(...);
-int FUN_00317508(unsigned int, int);
+int asdListBoxSetByteValue(unsigned int, int);
 int asdListBoxAddItems(void);
 int asdListBoxSetToggleItem(...);
 int FUN_003592dc(unsigned int);
@@ -71,7 +71,7 @@ extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_00280328. */
 /* Supplied declaration required: FUN_002ea508. */
 /* Supplied declaration required: asdListBoxSetIntItem. */
-/* Supplied declaration required: FUN_00317508. */
+/* Supplied declaration required: asdListBoxSetByteValue. */
 /* Supplied declaration required: asdListBoxAddItems. */
 /* Supplied declaration required: asdListBoxSetToggleItem. */
 /* Supplied declaration required: FUN_003592dc. */
@@ -93,7 +93,7 @@ void FUN_004d4ba4(int param_1,fn_004d4ba4_arg1 *param_2)
   FUN_00280328(temp_v1,0x75,0);
   *(unsigned int *)(param_1 + 0x10) = temp_v1;
   asdListBoxAddItems();
-  FUN_00317508(*(unsigned int *)(param_1 + 0x10),1);
+  asdListBoxSetByteValue(*(unsigned int *)(param_1 + 0x10),1);
   FUN_002ea508(*(unsigned int *)(param_1 + 0x10),&LAB_004d4f38);
   asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),0);
   asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),1);

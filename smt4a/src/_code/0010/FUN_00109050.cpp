@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002e7908(unsigned int, unsigned char **);
 int FUN_002e9d28(...);
 int FUN_002e9de4(...);
-int FUN_002ea4bc(void);
+int onlineInstantiationContextGetCurrent(void);
 int FUN_002eb17c(int, unsigned int);
 int FUN_002eb330(unsigned char [32], unsigned int);
 int FUN_002eb338(int [2], unsigned char [32], unsigned int);
@@ -37,8 +37,8 @@ extern unsigned int DAT_00594a30; /* 0x594a30 */
 /* Supplied declaration required: FUN_002e7908. */
 /* Supplied declaration required: FUN_002e9d28. */
 /* Supplied declaration required: FUN_002e9de4. */
-/* Supplied declaration required: FUN_002ea4bc. */
-extern unsigned int FUN_002ea93c(int *);
+/* Supplied declaration required: onlineInstantiationContextGetCurrent. */
+extern unsigned int onlineUrlGetAddress(int *);
 /* Supplied declaration required: FUN_002eb17c. */
 /* Supplied declaration required: FUN_002eb330. */
 /* Supplied declaration required: FUN_002eb338. */
@@ -92,10 +92,10 @@ void FUN_00109050(unsigned int param_1,int *param_2,unsigned int param_3,unsigne
     temp_v4 = param_6;
     temp_v8 = param_2 + 0x7a;
     FUN_002ef6c4(temp_v8,temp_v11,temp_v12,param_5);
-    temp_v1 = FUN_002ea4bc();
+    temp_v1 = onlineInstantiationContextGetCurrent();
     temp_v3 = DAT_00594a30;
     if (*(char *)(temp_v1 + 0x30) != '\0') {
-      temp_v2 = FUN_002ea4bc();
+      temp_v2 = onlineInstantiationContextGetCurrent();
       FUN_002eb330(temp_v7,temp_v2);
       FUN_002eb338(temp_v6,temp_v7,temp_v3);
       temp_v3 = *(unsigned int *)(param_2[0x2b] + 0x118);
@@ -105,13 +105,13 @@ void FUN_00109050(unsigned int param_1,int *param_2,unsigned int param_3,unsigne
       temp_v6[0] = param_7;
     }
     FUN_002ef6e2(temp_v3,temp_v6[0]);
-    temp_v3 = FUN_002ea93c(param_2 + 2);
+    temp_v3 = onlineUrlGetAddress(param_2 + 2);
     FUN_002eb17c(param_2[0x2b],temp_v3);
     FUN_002ef8f8(param_2,param_2[0x2b]);
     temp_v0 = (**(romwright_code **)(*param_2 + 0x30))(param_2);
     *(unsigned char *)(param_2 + 0x9b) = temp_v0 ^ 1;
     if (param_5 == 0) {
-      temp_v1 = FUN_002ea4bc();
+      temp_v1 = onlineInstantiationContextGetCurrent();
       if (*(char *)(temp_v1 + 0x30) != '\0') {
         FUN_002e9d28(&temp_v4,0x32,DAT_00594a30);
         temp_v5 = 2;
@@ -130,7 +130,7 @@ void FUN_00109050(unsigned int param_1,int *param_2,unsigned int param_3,unsigne
         temp_v5 = 2;
         do {
           temp_v1 = (**(romwright_code **)(*param_2 + 0x20))(param_2);
-          if ((temp_v1 == 0) || (temp_v1 = FUN_002ea4bc(), *(char *)(temp_v1 + 0x30) != '\0')) break;
+          if ((temp_v1 == 0) || (temp_v1 = onlineInstantiationContextGetCurrent(), *(char *)(temp_v1 + 0x30) != '\0')) break;
           FUN_002ef708();
           ppuVar5 = &temp_v4;
           FUN_002e9de4(&temp_v4,

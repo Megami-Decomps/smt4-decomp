@@ -18,7 +18,7 @@ typedef struct {
 
 extern unsigned char LAB_001b9f9c; /* 0x1b9f9c */
 extern unsigned int g_effAsdLightHandle; /* 0x5b3c80 */
-extern unsigned int DAT_005b3c88; /* 0x5b3c88 */
+extern unsigned int g_asdModelTransformBuilder; /* 0x5b3c88 */
 
 /* Supplied declaration required: FUN_0015d434. */
 /* Supplied declaration required: FUN_0018e9d8. */
@@ -65,7 +65,7 @@ void FUN_003ba560(int param_1,int param_2,unsigned int param_3,unsigned int para
     }
     temp_v1 = 0;
   }
-  piVar3 = (int *)(&DAT_005b3c88)[temp_v1];
+  piVar3 = (int *)(&g_asdModelTransformBuilder)[temp_v1];
   temp_v1 = (&g_effAsdLightHandle)[temp_v1];
   (**(romwright_code **)(*piVar3 + 0x10))
             (piVar3,*(unsigned int *)(temp_v1 + 0x10),*(romwright_code **)(*piVar3 + 0x10),param_4,unaff_r4,

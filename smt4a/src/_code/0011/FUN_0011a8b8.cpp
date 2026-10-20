@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e9acc(int *, unsigned int);
-int FUN_002e9afe(int, unsigned int);
+int vectorCopyHeader(int, unsigned int);
 int FUN_002eca44(void);
 int FUN_002fafd8(...);
 
@@ -34,7 +34,7 @@ extern unsigned char DAT_0055a38c; /* 0x55a38c */
 
 extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
 /* Supplied declaration required: FUN_002e9acc. */
-/* Supplied declaration required: FUN_002e9afe. */
+/* Supplied declaration required: vectorCopyHeader. */
 extern int FUN_002e9ff4(int);
 extern int FUN_002ea974(int);
 extern unsigned int *FUN_002eb77c(fn_0011a8b8_arg0 *, unsigned int, unsigned char *);
@@ -90,7 +90,7 @@ int FUN_0011a8b8(fn_0011a8b8_arg0 *param_1,unsigned int param_2,unsigned int par
   *(unsigned int *)(temp_v0 + 0x78) = uStack_34;
   temp_v3 = 0x10001;
   temp_v1 = FUN_002e7908(temp_v2,(unsigned int *)&temp_v3);
-  FUN_002e9afe(temp_v0 - 0xc,temp_v1);
+  vectorCopyHeader(temp_v0 - 0xc,temp_v1);
   *(unsigned int *)(temp_v0 - 0x17c) = 0;
   *(unsigned int *)(temp_v0 - 0x178) = 0;
   *(unsigned int *)(temp_v0 - 0x174) = 0;

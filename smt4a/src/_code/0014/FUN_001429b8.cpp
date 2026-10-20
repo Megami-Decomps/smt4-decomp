@@ -10,7 +10,7 @@ int FUN_00161474(unsigned int, unsigned int *);
 int FUN_001615e4(unsigned char *);
 int asdGfxSetCmdBufferState(int, int);
 int FUN_0016163c(void);
-int FUN_0017cff0(unsigned int);
+int nngxBindCmdlist(unsigned int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -26,7 +26,7 @@ extern int DAT_0061a50c; /* 0x61a50c */
 /* Supplied declaration required: FUN_001615e4. */
 /* Supplied declaration required: asdGfxSetCmdBufferState. */
 /* Supplied declaration required: FUN_0016163c. */
-/* Supplied declaration required: FUN_0017cff0. */
+/* Supplied declaration required: nngxBindCmdlist. */
 
 
 /* WARNING: Removing unreachable block (ram,0x00161458) */
@@ -52,14 +52,14 @@ void FUN_001429b8(unsigned int *param_1,int param_2,unsigned int param_3,unsigne
   temp_v0 = 0;
   if (temp_v0 < (unsigned int)param_1[2]) {
     do {
-      FUN_0017cff0(param_1[temp_v0]);
+      nngxBindCmdlist(param_1[temp_v0]);
       FUN_0016120c(param_1[3],param_1[4]);
       asdGfxSetCmdBufferState(0x200,0x300);
       asdModelResetCommandBuffer();
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < (unsigned int)param_1[2]);
   }
-  FUN_0017cff0(*param_1);
+  nngxBindCmdlist(*param_1);
   FUN_0016163c();
   FUN_001615e4(&LAB_001536e0);
   if (DAT_0061a50c != 0) {

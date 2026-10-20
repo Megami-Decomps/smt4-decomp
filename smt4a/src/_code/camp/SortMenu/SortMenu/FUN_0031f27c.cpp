@@ -9,9 +9,9 @@ int asdProcessCreateSimple(...);
 int FUN_001505ac(...);
 int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
-int FUN_001846d0(...);
-int FUN_00184c00(...);
-int FUN_001b4a90(...);
+int uiSpriteSelectAnim(...);
+int uiSpriteSetImageKeyframe(...);
+int __aeabi_memset4(...);
 int sysMemClear(...);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
 
@@ -33,7 +33,7 @@ extern unsigned char LAB_0031f4e8; /* 0x31f4e8 */
 extern unsigned char DAT_0052ded8; /* 0x52ded8 */
 extern unsigned char DAT_0052def0; /* 0x52def0 */
 extern unsigned char DAT_0052df2c; /* 0x52df2c */
-extern signed char DAT_0057f27c; /* 0x57f27c */
+extern signed char g_useCounter; /* 0x57f27c */
 extern unsigned int *DAT_0057f280; /* 0x57f280 */
 
 /* Supplied declaration required: FUN_0014e188. */
@@ -41,9 +41,9 @@ extern unsigned int *DAT_0057f280; /* 0x57f280 */
 /* Supplied declaration required: FUN_001505ac. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: FUN_001846d0. */
-/* Supplied declaration required: FUN_00184c00. */
-/* Supplied declaration required: FUN_001b4a90. */
+/* Supplied declaration required: uiSpriteSelectAnim. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
+/* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
 
@@ -58,7 +58,7 @@ void FUN_0031f27c(unsigned int param_1,unsigned char param_2)
   unsigned char *puVar4;
   int temp_v0;
   
-  if (DAT_0057f27c < '\x01') {
+  if (g_useCounter < '\x01') {
     if (DAT_0057f280 == (unsigned int *)0x0) {
       puVar2 = (unsigned int *)0x100;
       asdMemoryAllocTracked(0x100,0x100,0,0x878,1);
@@ -78,22 +78,22 @@ void FUN_0031f27c(unsigned int param_1,unsigned char param_2)
     temp_v0 = 0;
     do {
       FUN_0014e188(puVar1 + temp_v0 * 0x23 + 10,0x15,0,puVar1 + 2,1);
-      FUN_00184c00(puVar1 + temp_v0 * 0x23 + 10,0);
+      uiSpriteSetImageKeyframe(puVar1 + temp_v0 * 0x23 + 10,0);
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < 0xd);
     FUN_0014e188(puVar1 + 0x168,0x15,0,puVar1 + 2,1);
-    FUN_001846d0(puVar1 + 0x168,0);
+    uiSpriteSelectAnim(puVar1 + 0x168,0);
     FUN_0014e188(puVar1 + 0x18b,0x15,0,puVar1 + 2,1);
-    FUN_001846d0(puVar1 + 0x18b,1);
+    uiSpriteSelectAnim(puVar1 + 0x18b,1);
     FUN_0014e188(puVar1 + 0x1ae,0x15,0,puVar1 + 2,1);
-    FUN_001846d0(puVar1 + 0x1ae,2);
-    FUN_001b4a90(puVar1 + 0x1db,0x1a,0xffffffff);
+    uiSpriteSelectAnim(puVar1 + 0x1ae,2);
+    __aeabi_memset4(puVar1 + 0x1db,0x1a,0xffffffff);
     puVar1[0x1d1] = 0;
     *(unsigned char *)((int)puVar1 + 0x74d) = 1;
     *(unsigned char *)((int)puVar2 + 0x74e) = param_2;
     puVar2[0x1d4] = param_1;
   }
-  DAT_0057f27c = DAT_0057f27c + '\x01';
+  g_useCounter = g_useCounter + '\x01';
   return;
 }
 

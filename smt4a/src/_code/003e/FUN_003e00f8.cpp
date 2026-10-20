@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_001801a4(void);
+extern int gameGetPlayerData(void);
 
 
 int FUN_003e00f8(unsigned int param_1)
@@ -12,7 +12,7 @@ int FUN_003e00f8(unsigned int param_1)
 {
   int temp_v0;
   
-  temp_v0 = FUN_001801a4();
+  temp_v0 = gameGetPlayerData();
   switch(param_1) {
   case 0:
     return (int)*(short *)(temp_v0 + 0x20);

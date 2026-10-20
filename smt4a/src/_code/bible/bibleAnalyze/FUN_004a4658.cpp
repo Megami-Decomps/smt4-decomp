@@ -22,8 +22,8 @@ typedef struct {
 extern unsigned int DAT_0057f0a8; /* 0x57f0a8 */
 
 /* Supplied declaration required: FUN_00100388. */
-extern unsigned int FUN_001654d8(int);
-extern unsigned int FUN_001654e4(int);
+extern unsigned int vec2GetXInt(int);
+extern unsigned int vec2GetYInt(int);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: FUN_0019de98. */
@@ -51,8 +51,8 @@ void FUN_004a4658(int param_1)
   
   temp_v0 = FUN_004cf8dc(param_1 + 0xdc,(int)*(short *)(param_1 + 0xa872));
   temp_v4 = param_1 + *(short *)(param_1 + 0xa872) * 0x8c + 0xfc;
-  temp_v1 = FUN_001654e4(temp_v4);
-  temp_v2 = FUN_001654d8(temp_v4);
+  temp_v1 = vec2GetYInt(temp_v4);
+  temp_v2 = vec2GetXInt(temp_v4);
   FUN_004935b0(param_1 + 200,temp_v2,temp_v1);
   if (temp_v0 == 0) {
     return;

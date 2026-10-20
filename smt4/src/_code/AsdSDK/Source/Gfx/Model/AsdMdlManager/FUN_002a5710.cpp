@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002a4e98(void);
-int FUN_002bd420(int, unsigned int [2], int);
+int memCopy(int, unsigned int [2], int);
 int resourceListDestroy(unsigned int);
 int asdMemFree(void);
 int asdMemAlloc(int, int, int, unsigned int);
@@ -23,7 +23,7 @@ typedef struct {
 #endif
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_002a4e98. */
-/* Supplied declaration required: FUN_002bd420. */
+/* Supplied declaration required: memCopy. */
 extern int rt_memcmp(int, char *, unsigned int);
 /* Supplied declaration required: resourceListDestroy. */
 /* Supplied declaration required: asdMemFree. */
@@ -160,7 +160,7 @@ void FUN_002a5710(unsigned int *param_1,unsigned int *param_2)
               do {
                 temp_v1 = rt_memcmp(temp_v8,"EPLSIGN",7);
                 if (temp_v1 != 0) break;
-                FUN_002bd420(temp_v8,temp_v10,0x10);
+                memCopy(temp_v8,temp_v10,0x10);
                 unaff_r7 = (unsigned short *)(temp_v8 + 0x10);
                 if (temp_v4 == temp_v0) break;
                 temp_v0 = temp_v0 + 1;
@@ -208,7 +208,7 @@ void FUN_002a5710(unsigned int *param_1,unsigned int *param_2)
                 do {
                   temp_v2 = rt_memcmp(temp_v0,"EPLSIGN",7);
                   if (temp_v2 != 0) break;
-                  FUN_002bd420(temp_v0,temp_v10,0x10);
+                  memCopy(temp_v0,temp_v10,0x10);
                   unaff_r7 = (unsigned short *)(temp_v0 + 0x10);
                   if (temp_v8 == temp_v5) break;
                   temp_v5 = temp_v5 + 1;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b46f8(unsigned short *, unsigned int, unsigned int, int, unsigned char *);
+int libc_bsearch(unsigned short *, unsigned int, unsigned int, int, unsigned char *);
 
 /* stack frame of param_1: 2 slot(s), 6 byte(s) */
 typedef struct {
@@ -18,8 +18,8 @@ extern int g_aocSystem; /* 0x433158 */
 
 extern int FUN_0029022c(void);
 extern unsigned int FUN_002903f0(void);
-extern int FUN_002a1534(unsigned int);
-/* Supplied declaration required: FUN_002b46f8. */
+extern int objGetFlagBit16(unsigned int);
+/* Supplied declaration required: libc_bsearch. */
 
 
 unsigned int FUN_002764a8(int param_1)
@@ -35,9 +35,9 @@ unsigned int FUN_002764a8(int param_1)
   if ((temp_v0 != 0) && (temp_v1 = FUN_002903f0(), temp_v1 >= 0x15e)) {
     temp_v2[0] = (unsigned short)temp_v1;
     puVar3 = temp_v2;
-    FUN_002b46f8(puVar3,*(unsigned int *)(param_1 + 0x388),*(unsigned int *)(g_aocSystem + 900),0x1b4,
+    libc_bsearch(puVar3,*(unsigned int *)(param_1 + 0x388),*(unsigned int *)(g_aocSystem + 900),0x1b4,
                  &LAB_0038e29c);
-    if ((puVar3 == (unsigned short *)0x0) || (temp_v0 = FUN_002a1534(g_aocMain), temp_v0 == 0)) {
+    if ((puVar3 == (unsigned short *)0x0) || (temp_v0 = objGetFlagBit16(g_aocMain), temp_v0 == 0)) {
       return 1;
     }
   }

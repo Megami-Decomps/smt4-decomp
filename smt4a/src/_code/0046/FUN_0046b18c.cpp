@@ -13,10 +13,10 @@ int jyoucyuGetTableEntry(...);
 int asdMemFree(void);
 int scrScriptProcessDestroy(void);
 int FUN_00275bc8(...);
-int FUN_00275f44(...);
+int scrScriptProcessStartEntry(...);
 int FUN_002804b0(...);
 int FUN_002a4b74(void);
-int FUN_002e342c(unsigned char [64], unsigned int);
+int libc_strcpy(unsigned char [64], unsigned int);
 int sysMemClear(unsigned int *, int);
 int FUN_003423cc(int);
 int FUN_0035d058(unsigned int, unsigned int);
@@ -46,15 +46,15 @@ extern unsigned int FUN_001801b8(unsigned short, unsigned char);
 /* Supplied declaration required: scrScriptProcessDestroy. */
 extern int FUN_00224880(unsigned int);
 /* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_002804b0. */
 extern unsigned int FUN_002a4b60(void);
 /* Supplied declaration required: FUN_002a4b74. */
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: sysMemClear. */
 extern int FUN_0031d62c(void);
 /* Supplied declaration required: FUN_003423cc. */
-extern unsigned int FUN_00357bc8(unsigned int, int);
+extern unsigned int tableGroupFindEntryIndex(unsigned int, int);
 /* Supplied declaration required: FUN_0035d058. */
 /* Supplied declaration required: FUN_003c1060. */
 /* Supplied declaration required: FUN_003fe86c. */
@@ -105,7 +105,7 @@ void FUN_0046b18c(unsigned int *param_1)
     if (0 < (int)param_1[0x2ae]) {
       do {
         temp_v3 = dataTable27GetEntry((int)param_1 + 0x19,0);
-        FUN_002e342c(temp_v7,temp_v3 + param_1[temp_v2 * 2 + 0x29c] * 0x88);
+        libc_strcpy(temp_v7,temp_v3 + param_1[temp_v2 * 2 + 0x29c] * 0x88);
         FUN_001654f8(temp_v7,temp_v9,0);
         libc_strcat(puVar2,temp_v9);
         libc_strcat(puVar2,"<br>");
@@ -310,8 +310,8 @@ LAB_0046b85c:
     temp_v3 = dataTable27GetEntry((int)param_1 + 0x19,0);
     temp_v4 = *(int *)param_1[0x2b6];
     jyoucyuGetTableEntry(0);
-    temp_v5 = FUN_00357bc8(param_1[0xa7],temp_v3 + temp_v4 * 0x88 + 0x6c);
-    FUN_00275f44(param_1[0xa9],temp_v5);
+    temp_v5 = tableGroupFindEntryIndex(param_1[0xa7],temp_v3 + temp_v4 * 0x88 + 0x6c);
+    scrScriptProcessStartEntry(param_1[0xa9],temp_v5);
     temp_v2 = param_1[2] + 1;
     param_1[2] = temp_v2;
     return;

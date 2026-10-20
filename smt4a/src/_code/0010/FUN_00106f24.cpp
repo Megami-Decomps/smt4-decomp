@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_002ee784(int, int);
+int inlineBufferFreeData(int, int);
 int rt_memcpy(unsigned int, int, int);
 
 extern unsigned char LAB_00106f5c; /* 0x106f5c */
 
 extern unsigned int FUN_002e786a(unsigned int, unsigned char *, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002ee784. */
+/* Supplied declaration required: inlineBufferFreeData. */
 /* Supplied declaration required: rt_memcpy. */
 
 
@@ -30,7 +30,7 @@ void FUN_00106f24(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   *(unsigned int *)(param_1 + 4) = temp_v1;
   rt_memcpy(temp_v1,temp_v2,temp_v0 + 2);
   *(int *)(param_1 + 0xc) = *(int *)(param_1 + 4) + temp_v0;
-  FUN_002ee784(param_1,temp_v2);
+  inlineBufferFreeData(param_1,temp_v2);
   return;
 }
 

@@ -8,7 +8,7 @@ extern "C" {
 
 int FUN_001835b4(int a, int b, int c, int d, int e, u32 arg);
 int efctSetSpeed(f32 alpha);
-int FUN_0016c410(RenderCtxA *ctx);
+int renderCtxResetColorScale(RenderCtxA *ctx);
 int FUN_00157558(RenderCtxA *ctx);
 int FUN_001692ac(u32 a, u32 b);
 
@@ -31,7 +31,7 @@ void uiFadeDraw(u32 arg)
     efctSetSpeed(fade->alpha);
     FUN_001835b4(2, 8, 0x10c, 0, 0, arg);
     renderStackPop(&g_renderCtx->stackA);
-    FUN_0016c410(g_renderCtx);
+    renderCtxResetColorScale(g_renderCtx);
     efctSetSpeed(1.0f);
 }
 

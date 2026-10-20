@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00157558(int);
 int FUN_00164b5c(int, int, int, unsigned int, unsigned int, int);
 int efctSetSpeed(void);
-int FUN_0016c410(...);
+int renderCtxResetColorScale(...);
 int FUN_0016c560(...);
 int FUN_001834a4(int, int);
 int FUN_00183bb0(void);
@@ -26,14 +26,14 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } void_stack;
 
-extern int DAT_0057f118; /* 0x57f118 */
+extern int g_campCecEdit; /* 0x57f118 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: FUN_00157558. */
 /* Supplied declaration required: FUN_00164b5c. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0016c410. */
+/* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: FUN_0016c560. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_00183bb0. */
@@ -58,7 +58,7 @@ unsigned int FUN_002e1d1c(void)
   int temp_v7;
   unsigned int temp_v8;
   
-  temp_v0 = DAT_0057f118;
+  temp_v0 = g_campCecEdit;
   FUN_001834a4(0x2e,0xcf);
   temp_v7 = *(int *)(temp_v0 + 0x124);
   if (*(char *)(temp_v0 + 0x114) == '\0') {
@@ -147,7 +147,7 @@ unsigned int FUN_002e1d1c(void)
     *(unsigned char *)(temp_v0 + 0x1270) = 0;
   }
   FUN_0016c560(g_renderCtx);
-  FUN_0016c410(g_renderCtx);
+  renderCtxResetColorScale(g_renderCtx);
   efctSetSpeed();
   return 0;
 }

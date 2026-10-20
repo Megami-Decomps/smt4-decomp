@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002e9ec8(int, unsigned int);
-int FUN_002ea43c(int);
+int onlineInstanceTableFind(int, unsigned int);
+int onlineJobSetStateDone(int);
 int FUN_002ec738(void);
 
 typedef int romwright_code(...);
-extern int FUN_002e9af4(void);
-/* Supplied declaration required: FUN_002e9ec8. */
-/* Supplied declaration required: FUN_002ea43c. */
+extern int onlineInstanceTableGetCurrent(void);
+/* Supplied declaration required: onlineInstanceTableFind. */
+/* Supplied declaration required: onlineJobSetStateDone. */
 /* Supplied declaration required: FUN_002ec738. */
 
 
@@ -22,9 +22,9 @@ void FUN_00119fce(int param_1)
   int temp_v0;
   
   (**(romwright_code **)(**(int **)(param_1 + 0x6c) + 8))();
-  FUN_002ea43c(param_1);
-  temp_v0 = FUN_002e9af4();
-  FUN_002e9ec8(temp_v0,*(unsigned int *)(param_1 + 0x68));
+  onlineJobSetStateDone(param_1);
+  temp_v0 = onlineInstanceTableGetCurrent();
+  onlineInstanceTableFind(temp_v0,*(unsigned int *)(param_1 + 0x68));
   if (temp_v0 != 0) {
     FUN_002ec738();
   }

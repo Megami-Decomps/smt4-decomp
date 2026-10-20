@@ -7,11 +7,11 @@ extern "C" {
 int btlActionAllocData(void);
 int FUN_0027db24(int);
 int scrScriptProcessDestroy(void);
-int FUN_002a8178(unsigned int *);
+int wordTripleClear(unsigned int *);
 int FUN_002ae164(void);
 int jobIsValid(unsigned int);
 int asdMemFree(void);
-int FUN_002c424c(unsigned int *, int, unsigned int);
+int __aeabi_memset4(unsigned int *, int, unsigned int);
 int memClear(...);
 int asdMemAlloc(int, int, int, int, int);
 int FUN_0033a414(unsigned int *);
@@ -25,11 +25,11 @@ typedef struct {
 /* Supplied declaration required: btlActionAllocData. */
 /* Supplied declaration required: FUN_0027db24. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: FUN_002a8178. */
+/* Supplied declaration required: wordTripleClear. */
 /* Supplied declaration required: FUN_002ae164. */
 /* Supplied declaration required: jobIsValid. */
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_002c424c. */
+/* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: FUN_0033a414. */
@@ -192,7 +192,7 @@ LAB_001b6eb0:
           memClear(param_1 + 0x84d,0xa8);
           memClear(param_1 + 0x877,0x54);
           memClear(param_1 + 0x41d,0xe10);
-          FUN_002a8178(param_1 + 0x7a3);
+          wordTripleClear(param_1 + 0x7a3);
           *(unsigned short *)(param_1 + 0x7f1) = 0;
           *(unsigned short *)((int)param_1 + 0x1fc6) = 0;
           *(unsigned short *)(param_1 + 0x7f2) = 0xffff;
@@ -216,7 +216,7 @@ LAB_001b6eb0:
           param_1[0x1124] = 0;
           param_1[0x1125] = 0;
           param_1[0x1126] = 0;
-          FUN_002c424c(param_1 + 0x7f8,3,0xffffffff);
+          __aeabi_memset4(param_1 + 0x7f8,3,0xffffffff);
           temp_v1 = 0x100;
           asdMemAlloc(0x100,0x100,0,0x80,1);
           param_1[0x8c4] = temp_v1;

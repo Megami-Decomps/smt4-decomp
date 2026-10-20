@@ -6,7 +6,7 @@ extern "C" {
 
 int scrSetResult(int);
 
-extern int FUN_001ab888(void);
+extern int gameGetSlotTable(void);
 extern int FUN_001ba514(unsigned short);
 extern unsigned short scrGetArg(unsigned int);
 /* Supplied declaration required: scrSetResult. */
@@ -30,7 +30,7 @@ unsigned int FUN_0031a0ec(void)
   }
   temp_v2 = 0;
   do {
-    temp_v3 = FUN_001ab888();
+    temp_v3 = gameGetSlotTable();
     if (*(char *)(temp_v3 + temp_v2 + 0x1ca0) == temp_v1) {
       scrSetResult(0);
       return 1;
@@ -39,9 +39,9 @@ unsigned int FUN_0031a0ec(void)
   } while (temp_v2 < 3);
   temp_v2 = 0;
   do {
-    temp_v3 = FUN_001ab888();
+    temp_v3 = gameGetSlotTable();
     if (*(char *)(temp_v3 + temp_v2 + 0x1ca0) < '\0') {
-      temp_v3 = FUN_001ab888();
+      temp_v3 = gameGetSlotTable();
       *(char *)(temp_v3 + temp_v2 + 0x1ca0) = (char)temp_v1;
       break;
     }

@@ -4,14 +4,14 @@
 
 extern "C" {
 
-extern unsigned int DAT_00589520; /* 0x589520 */
+extern unsigned int g_mwmoimaadpcmDecoder; /* 0x589520 */
 extern unsigned int DAT_00589524; /* 0x589524 */
 
 
 void FUN_00513718(void)
 
 {
-  DAT_00589520 = 0;
+  g_mwmoimaadpcmDecoder = 0;
   DAT_00589524 = 0;
   return;
 }

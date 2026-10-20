@@ -4,8 +4,8 @@
 
 extern "C" {
 
-extern int FUN_002e7328(int, unsigned int);
-extern int FUN_002e76b6(unsigned int);
+extern int streamReaderHasBytes(int, unsigned int);
+extern int onlineBufferGetData(unsigned int);
 
 
 int FUN_00103822(int param_1,unsigned short *param_2)
@@ -13,9 +13,9 @@ int FUN_00103822(int param_1,unsigned short *param_2)
 {
   int temp_v0;
   
-  temp_v0 = FUN_002e7328(param_1,2);
+  temp_v0 = streamReaderHasBytes(param_1,2);
   if (temp_v0 != 0) {
-    temp_v0 = FUN_002e76b6(*(unsigned int *)(param_1 + 8));
+    temp_v0 = onlineBufferGetData(*(unsigned int *)(param_1 + 8));
     *param_2 = *(unsigned short *)(temp_v0 + *(int *)(param_1 + 0xc));
     *(int *)(param_1 + 0xc) = *(int *)(param_1 + 0xc) + 2;
   }

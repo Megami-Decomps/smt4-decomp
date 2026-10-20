@@ -11,7 +11,7 @@ int MapNaviTable_GetCategoryCount(void);
 
 extern int dataTable2eSub2GetRecord(int);
 /* Supplied declaration required: dataTable2eSub2GetCount. */
-extern int FUN_002ae898(unsigned int);
+extern int asdTMTexTableReleaseNode(unsigned int);
 extern int FUN_002c1c0c(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002c58c8. */
 /* Supplied declaration required: FUN_0039d69c. */
@@ -35,7 +35,7 @@ void FUN_0023150c(int param_1,int param_2,unsigned int param_3,unsigned int para
   temp_v2 = param_1;
   uStack_20 = param_4;
   if (*(int *)(param_1 + 0xb7c) != 0) {
-    temp_v2 = FUN_002ae898(0x33);
+    temp_v2 = asdTMTexTableReleaseNode(0x33);
     *(unsigned int *)(param_1 + 0xb7c) = 0;
   }
   temp_v3 = 0;

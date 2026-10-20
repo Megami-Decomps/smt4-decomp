@@ -11,7 +11,7 @@ int FUN_002bd954(...);
 int FUN_002bee58(...);
 int FUN_002beed0(...);
 int FUN_002c312c(...);
-int FUN_002c424c(...);
+int __aeabi_memset4(...);
 int memClear(...);
 int asdMemAlloc(...);
 int taskCreateDraw(...);
@@ -37,7 +37,7 @@ extern unsigned char DAT_00407bc0; /* 0x407bc0 */
 extern unsigned char DAT_00407c08; /* 0x407c08 */
 extern unsigned char DAT_00407c50; /* 0x407c50 */
 extern unsigned char DAT_00407c68; /* 0x407c68 */
-extern unsigned int *DAT_0044e190; /* 0x44e190 */
+extern unsigned int *g_statusDown; /* 0x44e190 */
 
 /* Supplied declaration required: FUN_002bd81c. */
 /* Supplied declaration required: FUN_002bd82c. */
@@ -47,7 +47,7 @@ extern unsigned int asdTextCreate(unsigned int);
 /* Supplied declaration required: FUN_002bee58. */
 /* Supplied declaration required: FUN_002beed0. */
 /* Supplied declaration required: FUN_002c312c. */
-/* Supplied declaration required: FUN_002c424c. */
+/* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: taskCreateDraw. */
@@ -64,12 +64,12 @@ void FUN_002d9384(void)
   unsigned char *puVar3;
   unsigned int temp_v0;
   
-  if (DAT_0044e190 == (unsigned int *)0x0) {
+  if (g_statusDown == (unsigned int *)0x0) {
     puVar1 = (unsigned int *)0x100;
     asdMemAlloc(0x100,0x100,0,0x2394,1);
-    DAT_0044e190 = puVar1;
+    g_statusDown = puVar1;
   }
-  puVar1 = DAT_0044e190;
+  puVar1 = g_statusDown;
   memClear();
   puVar2 = &LAB_002d9654;
   asdProcessCreateSimple(&LAB_002d9654,2,0,0,FUN_001ca748,0,0);
@@ -77,8 +77,8 @@ void FUN_002d9384(void)
   puVar3 = &LAB_002d9664;
   taskCreateDraw(&LAB_002d9664,0xe7,0,0,FUN_001cca14,0,0,puVar2);
   puVar1[1] = (unsigned int)puVar3;
-  puVar1 = DAT_0044e190;
-  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(DAT_0044e190 + 2);
+  puVar1 = g_statusDown;
+  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(g_statusDown + 2);
   FUN_002c312c(puVar1 + 2,&DAT_00407bc0,0x48,&DAT_00407c08,0x48,&DAT_00407c50,0x18,0,0,&DAT_00407c68
                ,0x134);
   FUN_002bd954(puVar1 + 10,0x1a,1000,puVar1 + 2,1);
@@ -100,7 +100,7 @@ void FUN_002d9384(void)
   puVar1[0x8a8] = temp_v0;
   FUN_002bd82c(temp_v0,0xff);
   FUN_002bd81c(puVar1[0x8a8],0,0x646464ff);
-  FUN_002c424c(puVar1 + 0x10b,0x29,0xffffffff);
+  __aeabi_memset4(puVar1 + 0x10b,0x29,0xffffffff);
   *(unsigned char *)((int)puVar1 + 0x2392) = 1;
   return;
 }

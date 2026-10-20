@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00100388(...);
-int FUN_00275f44(unsigned int, unsigned int);
+int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int FUN_004080bc(unsigned int, int, unsigned int);
 int FUN_004b6bc4(int, int, int);
 int menu4CScrollToKind(int, int);
@@ -23,10 +23,10 @@ extern unsigned char DAT_005328fc; /* 0x5328fc */
 extern int DAT_0058800c; /* 0x58800c */
 
 /* Supplied declaration required: FUN_00100388. */
-extern int FUN_0018719c(void);
+extern int gameFlagIsSet(void);
 extern int FUN_00224880(unsigned int);
-/* Supplied declaration required: FUN_00275f44. */
-extern unsigned int FUN_00357bc8(unsigned int, unsigned char *);
+/* Supplied declaration required: scrScriptProcessStartEntry. */
+extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_004080bc. */
 /* Supplied declaration required: FUN_004b6bc4. */
 extern int menu4CGetEntry(int, int);
@@ -59,14 +59,14 @@ void FUN_004b8ba0(int param_1)
           temp_v4 = *(unsigned int *)(param_1 + 0x1144);
           DAT_0058800c = 0;
           FUN_00100388(temp_v8,&DAT_005328fc,temp_v2 + 0x2c);
-          temp_v4 = FUN_00357bc8(temp_v4,temp_v8);
-          FUN_00275f44(temp_v3,temp_v4);
+          temp_v4 = tableGroupFindEntryIndex(temp_v4,temp_v8);
+          scrScriptProcessStartEntry(temp_v3,temp_v4);
           do {
             temp_v5 = FUN_00224880(temp_v3);
           } while (temp_v5 != 2);
           if (((DAT_0058800c != 0) ||
-              ((*(short *)(temp_v2 + 0x3c) != 0 && (temp_v5 = FUN_0018719c(), temp_v5 == 0)))) ||
-             ((*(short *)(temp_v2 + 0x3e) != 0 && (temp_v5 = FUN_0018719c(), temp_v5 != 0))))
+              ((*(short *)(temp_v2 + 0x3c) != 0 && (temp_v5 = gameFlagIsSet(), temp_v5 == 0)))) ||
+             ((*(short *)(temp_v2 + 0x3e) != 0 && (temp_v5 = gameFlagIsSet(), temp_v5 != 0))))
           goto LAB_004b8c94;
           break;
         }
@@ -78,14 +78,14 @@ LAB_004b8c94:
           temp_v4 = *(unsigned int *)(param_1 + 0x1144);
           DAT_0058800c = 0;
           FUN_00100388(temp_v7,&DAT_005328fc,temp_v2 + 0x2c);
-          temp_v4 = FUN_00357bc8(temp_v4,temp_v7);
-          FUN_00275f44(temp_v3,temp_v4);
+          temp_v4 = tableGroupFindEntryIndex(temp_v4,temp_v7);
+          scrScriptProcessStartEntry(temp_v3,temp_v4);
           do {
             temp_v5 = FUN_00224880(temp_v3);
           } while (temp_v5 != 2);
           if (((DAT_0058800c == 0) &&
-              ((*(short *)(temp_v2 + 0x3c) == 0 || (temp_v5 = FUN_0018719c(), temp_v5 != 0)))) &&
-             ((*(short *)(temp_v2 + 0x3e) == 0 || (temp_v2 = FUN_0018719c(), temp_v2 == 0)))) {
+              ((*(short *)(temp_v2 + 0x3c) == 0 || (temp_v5 = gameFlagIsSet(), temp_v5 != 0)))) &&
+             ((*(short *)(temp_v2 + 0x3e) == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 == 0)))) {
             temp_v0 = 0;
             break;
           }
@@ -103,14 +103,14 @@ LAB_004b8c94:
         temp_v4 = *(unsigned int *)(param_1 + 0x1144);
         DAT_0058800c = 0;
         FUN_00100388(temp_v7,&DAT_005328fc,temp_v2 + 0x2c);
-        temp_v4 = FUN_00357bc8(temp_v4,temp_v7);
-        FUN_00275f44(temp_v3,temp_v4);
+        temp_v4 = tableGroupFindEntryIndex(temp_v4,temp_v7);
+        scrScriptProcessStartEntry(temp_v3,temp_v4);
         do {
           temp_v5 = FUN_00224880(temp_v3);
         } while (temp_v5 != 2);
         if (((DAT_0058800c == 0) &&
-            ((*(short *)(temp_v2 + 0x3c) == 0 || (temp_v5 = FUN_0018719c(), temp_v5 != 0)))) &&
-           ((*(short *)(temp_v2 + 0x3e) == 0 || (temp_v2 = FUN_0018719c(), temp_v2 == 0)))) break;
+            ((*(short *)(temp_v2 + 0x3c) == 0 || (temp_v5 = gameFlagIsSet(), temp_v5 != 0)))) &&
+           ((*(short *)(temp_v2 + 0x3e) == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 == 0)))) break;
       }
       temp_v6 = temp_v6 + 1;
     } while (temp_v6 < temp_v1);

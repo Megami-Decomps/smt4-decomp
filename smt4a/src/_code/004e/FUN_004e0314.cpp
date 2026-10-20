@@ -40,11 +40,11 @@ extern unsigned int DAT_00571148; /* 0x571148 */
 extern unsigned int DAT_0057114c; /* 0x57114c */
 extern unsigned int DAT_00571178; /* 0x571178 */
 extern unsigned int DAT_0057117c; /* 0x57117c */
-extern unsigned int DAT_005712f0; /* 0x5712f0 */
+extern unsigned int g_btlActionReflect; /* 0x5712f0 */
 
 extern unsigned int FUN_0019acdc(unsigned short, unsigned int);
-extern int FUN_001ab854(void);
-extern int FUN_001ab888(void);
+extern int gameGetSlotRecord(void);
+extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_003eaf20. */
 /* Supplied declaration required: FUN_003f1b3c. */
 extern int chainCountIdUnflagged(unsigned int);
@@ -74,7 +74,7 @@ unsigned int FUN_004e0314(int *param_1,fn_004e0314_arg1 *param_2)
   int temp_v8;
   int temp_v9;
   
-  temp_v1 = chainCountIdUnflagged(DAT_005712f0);
+  temp_v1 = chainCountIdUnflagged(g_btlActionReflect);
   if (0 < temp_v1) {
     return 0;
   }
@@ -102,14 +102,14 @@ unsigned int FUN_004e0314(int *param_1,fn_004e0314_arg1 *param_2)
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < 0x6d);
     temp_v6 = 1;
-    temp_v1 = FUN_001ab888();
+    temp_v1 = gameGetSlotTable();
     temp_v5 = 0;
     do {
       temp_v0 = (&param_2->field_0x5b0)[temp_v5];
       if ((-1 < temp_v0) && (temp_v4 = 0, *(unsigned char *)(temp_v1 + 0x1ca3) != 0)) {
         do {
           if ((-1 < *(char *)(temp_v1 + temp_v4 + 0x1c88)) &&
-             (temp_v2 = FUN_001ab854(), (unsigned int)*(unsigned short *)(temp_v2 + 0x62) == (int)temp_v0)) {
+             (temp_v2 = gameGetSlotRecord(), (unsigned int)*(unsigned short *)(temp_v2 + 0x62) == (int)temp_v0)) {
             *(unsigned short *)(temp_v2 + 0x60) = *(unsigned short *)(temp_v2 + 0x60) & 0xfbff;
             FUN_004fcf0c(temp_v6,param_2,0,temp_v4,temp_v5,0);
             temp_v6 = temp_v6 + 10;

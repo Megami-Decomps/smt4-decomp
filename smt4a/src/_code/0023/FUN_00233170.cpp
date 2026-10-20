@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_001cd24c(unsigned int *);
+int wordTripleClear(unsigned int *);
 
-extern unsigned int *DAT_00580ca0; /* 0x580ca0 */
+extern unsigned int *g_mapGimic; /* 0x580ca0 */
 
-/* Supplied declaration required: FUN_001cd24c. */
+/* Supplied declaration required: wordTripleClear. */
 
 
 void FUN_00233170(void)
@@ -20,9 +20,9 @@ void FUN_00233170(void)
   int temp_v0;
   int temp_v1;
   
-  puVar1 = DAT_00580ca0;
-  puVar2 = DAT_00580ca0 + 0xd;
-  *DAT_00580ca0 = 0;
+  puVar1 = g_mapGimic;
+  puVar2 = g_mapGimic + 0xd;
+  *g_mapGimic = 0;
   *(unsigned char *)(puVar1 + 1) = 0;
   *(unsigned short *)((int)puVar1 + 6) = 0;
   *(unsigned short *)(puVar1 + 2) = 0;
@@ -33,9 +33,9 @@ void FUN_00233170(void)
   *(unsigned char *)(puVar1 + 7) = 0;
   *(unsigned char *)(puVar1 + 9) = 0;
   *(unsigned char *)(puVar1 + 0xb) = 0;
-  FUN_001cd24c(puVar2);
-  puVar1 = DAT_00580ca0;
-  DAT_00580ca0[0x10] = 0;
+  wordTripleClear(puVar2);
+  puVar1 = g_mapGimic;
+  g_mapGimic[0x10] = 0;
   puVar1[0x11] = 0;
   puVar1[0x12] = 0;
   puVar1[0x13] = 0;
@@ -57,9 +57,9 @@ void FUN_00233170(void)
   puVar1[0x20] = 0;
   temp_v1 = 0;
   do {
-    puVar1 = DAT_00580ca0;
+    puVar1 = g_mapGimic;
     temp_v0 = temp_v1 + 1;
-    *(unsigned char *)(DAT_00580ca0 + temp_v1 * 0xf + 0x24) = 0;
+    *(unsigned char *)(g_mapGimic + temp_v1 * 0xf + 0x24) = 0;
     *(unsigned char *)((int)puVar1 + temp_v1 * 0x3c + 0x91) = 0;
     puVar1[temp_v1 * 0xf + 0x25] = 0;
     puVar1[temp_v1 * 0xf + 0x26] = 0;
@@ -80,9 +80,9 @@ void FUN_00233170(void)
   } while (temp_v0 < 0x23);
   temp_v1 = 0;
   do {
-    puVar1 = DAT_00580ca0;
+    puVar1 = g_mapGimic;
     temp_v0 = temp_v1 + 1;
-    *(unsigned char *)(DAT_00580ca0 + temp_v1 * 6 + 0x231) = 0;
+    *(unsigned char *)(g_mapGimic + temp_v1 * 6 + 0x231) = 0;
     *(unsigned short *)((int)puVar1 + temp_v1 * 0x18 + 0x8c6) = 0;
     *(unsigned short *)(puVar1 + temp_v1 * 6 + 0x232) = 0;
     puVar1[temp_v1 * 6 + 0x233] = 0;
@@ -90,10 +90,10 @@ void FUN_00233170(void)
     *(unsigned char *)(puVar1 + temp_v1 * 6 + 0x235) = 0;
     *(unsigned short *)((int)puVar1 + temp_v1 * 0x18 + 0x8d6) = 0;
     *(unsigned char *)(puVar1 + temp_v1 * 6 + 0x236) = 0;
-    puVar1 = DAT_00580ca0;
+    puVar1 = g_mapGimic;
     temp_v1 = temp_v0;
   } while (temp_v0 < 10);
-  *(unsigned char *)(DAT_00580ca0 + 0x26d) = 0;
+  *(unsigned char *)(g_mapGimic + 0x26d) = 0;
   *(unsigned short *)((int)puVar1 + 0x9b6) = 0;
   puVar1[0x26e] = 0;
   puVar1[0x26f] = 0;

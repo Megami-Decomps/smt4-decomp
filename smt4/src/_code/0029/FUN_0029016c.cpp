@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0023ddbc(unsigned int, int);
 
 /* Supplied declaration required: FUN_0023ddbc. */
-extern int FUN_002adc88(void);
+extern int gameGetFlagBlock(void);
 
 
 unsigned int FUN_0029016c(unsigned int param_1,int param_2)
@@ -20,17 +20,17 @@ unsigned int FUN_0029016c(unsigned int param_1,int param_2)
   unsigned char *pbVar4;
   unsigned int temp_v3;
   
-  temp_v1 = FUN_002adc88();
+  temp_v1 = gameGetFlagBlock();
   pbVar4 = (unsigned char *)(temp_v1 + param_1 * 4 + 0x200);
   if ((*pbVar4 & 2) != 0) {
-    temp_v1 = FUN_002adc88();
+    temp_v1 = gameGetFlagBlock();
     if (*(unsigned short *)(temp_v1 + 0x840) == param_1) {
       *pbVar4 = *pbVar4 & 0xb9;
-      temp_v1 = FUN_002adc88();
+      temp_v1 = gameGetFlagBlock();
       temp_v3 = 0x500;
       *(unsigned short *)(temp_v1 + 0x840) = 0;
       do {
-        temp_v1 = FUN_002adc88();
+        temp_v1 = gameGetFlagBlock();
         FUN_0023ddbc(temp_v3,0);
         temp_v2 = temp_v3 & 7;
         temp_v0 = temp_v3 >> 3;

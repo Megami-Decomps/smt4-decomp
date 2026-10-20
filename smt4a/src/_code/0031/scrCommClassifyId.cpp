@@ -6,7 +6,7 @@ extern u32 scrGetArg(s32 index);
 extern void scrSetResult(u32 value);
 extern u32 FUN_004d0bf0(u32 id);
 extern u32 FUN_001ba514(u32 id);
-extern u32 FUN_001ab854(u32 lookup);
+extern u32 gameGetSlotRecord(u32 lookup);
 extern s32 bitsAt60Test(u32 data, u32 flag);
 
 /* Script command: classifies the id given as argument 0 and returns the class through scrSetResult. */
@@ -21,11 +21,11 @@ u32 scrCommClassifyId(void)
             result = -1;
         } else {
             lookup = FUN_001ba514(id & 0xFFFF);
-            if (bitsAt60Test(FUN_001ab854(lookup), 2) != 0) {
+            if (bitsAt60Test(gameGetSlotRecord(lookup), 2) != 0) {
                 result = 3;
-            } else if (bitsAt60Test(FUN_001ab854(lookup), 1) != 0) {
+            } else if (bitsAt60Test(gameGetSlotRecord(lookup), 1) != 0) {
                 result = 1;
-            } else if (bitsAt60Test(FUN_001ab854(lookup), 10) != 0) {
+            } else if (bitsAt60Test(gameGetSlotRecord(lookup), 10) != 0) {
                 result = 2;
             }
         }

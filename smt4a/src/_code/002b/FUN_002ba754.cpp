@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_004920d4(int);
 
-extern int DAT_00587f28; /* 0x587f28 */
+extern int g_naviMain; /* 0x587f28 */
 
 /* Supplied declaration required: FUN_004920d4. */
 extern int FUN_004931e0(void);
@@ -19,8 +19,8 @@ unsigned int FUN_002ba754(void)
   int temp_v0;
   
   temp_v0 = FUN_004931e0();
-  if ((temp_v0 != 0) && (*(int *)(DAT_00587f28 + 0x58) == 0)) {
-    FUN_004920d4(DAT_00587f28 + 0x68);
+  if ((temp_v0 != 0) && (*(int *)(g_naviMain + 0x58) == 0)) {
+    FUN_004920d4(g_naviMain + 0x68);
   }
   return 0;
 }

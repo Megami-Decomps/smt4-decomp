@@ -3,7 +3,7 @@
 extern "C" {
 
 void FUN_002a1ca0(void *object);
-void FUN_002e3328(Filter4Poly *filter);
+void asdOperatorDelete(Filter4Poly *filter);
 void asdMemFree(void *block);
 
 extern const u8 g_filter4PolyBaseVtable[];
@@ -30,7 +30,7 @@ void filter4PolyDestroy(Filter4Poly *filter)
         filter->child->vtable[1](filter->child);
         filter->child = NULL;
     }
-    FUN_002e3328(filter);
+    asdOperatorDelete(filter);
 }
 
 } /* extern "C" */

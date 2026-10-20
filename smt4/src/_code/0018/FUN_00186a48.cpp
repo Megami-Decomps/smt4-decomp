@@ -26,7 +26,7 @@ typedef struct {
 } void_stack;
 
 extern unsigned char LAB_0018710c; /* 0x18710c */
-extern int DAT_0043dd50; /* 0x43dd50 */
+extern int g_uiQuest; /* 0x43dd50 */
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -37,8 +37,8 @@ extern int g_titleScene; /* 0x44ea00 */
 extern unsigned int FUN_002bcddc(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: FUN_002be624. */
-extern int FUN_002bed98(int);
-extern int FUN_002beda4(int);
+extern int vec2GetYInt(int);
+extern int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bf288. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bf538. */
@@ -67,19 +67,19 @@ void FUN_00186a48(void)
   float temp_v13;
   unsigned char temp_v14 [84];
   
-  temp_v1 = DAT_0043dd50;
+  temp_v1 = g_uiQuest;
   temp_v9 = 0;
   temp_v8 = 0;
   temp_v10 = 0;
   temp_v11 = 0;
-  temp_v0 = *(unsigned short *)(DAT_0043dd50 + 0x97e);
-  if (*(int *)(DAT_0043dd50 + 4) == 0x11) {
-    temp_v10 = FUN_002beda4(DAT_0043dd50 + 0x34);
-    temp_v11 = FUN_002bed98(temp_v1 + 0x34);
+  temp_v0 = *(unsigned short *)(g_uiQuest + 0x97e);
+  if (*(int *)(g_uiQuest + 4) == 0x11) {
+    temp_v10 = vec2GetXInt(g_uiQuest + 0x34);
+    temp_v11 = vec2GetYInt(temp_v1 + 0x34);
   }
   if (*(int *)(temp_v1 + 4) == 0x13) {
-    temp_v9 = FUN_002beda4(temp_v1 + 0x34);
-    temp_v8 = FUN_002bed98(temp_v1 + 0x34);
+    temp_v9 = vec2GetXInt(temp_v1 + 0x34);
+    temp_v8 = vec2GetYInt(temp_v1 + 0x34);
   }
   temp_v12 = 0.3f;
   FUN_002ba12c(g_titleScene);

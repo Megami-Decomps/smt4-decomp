@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 
 extern unsigned int DAT_00571168; /* 0x571168 */
 extern unsigned int DAT_0057116c; /* 0x57116c */
 
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: dataTable04FindById. */
 
 
 void FUN_004e9168(unsigned int param_1,unsigned int *param_2,int param_3,unsigned int *param_4,unsigned int *param_5)
@@ -19,7 +19,7 @@ void FUN_004e9168(unsigned int param_1,unsigned int *param_2,int param_3,unsigne
   unsigned int temp_v0;
   unsigned int temp_v1;
   
-  FUN_001aba54();
+  dataTable04FindById();
   if (param_3 == 0) {
     return;
   }

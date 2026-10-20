@@ -17,7 +17,7 @@ typedef struct {
 
 extern unsigned short DAT_005b3d94; /* 0x5b3d94 */
 
-extern int FUN_0019a37c(unsigned int, int, unsigned int);
+extern int libc_strncmp(unsigned int, int, unsigned int);
 /* Supplied declaration required: FUN_001f4934. */
 /* Supplied declaration required: wstrlen. */
 
@@ -62,7 +62,7 @@ LAB_002a1d08:
   while (temp_v0 != 0xf890) {
     if (*(int *)(puVar11 + 6) != 0) {
       temp_v4 = wstrlen();
-      temp_v5 = FUN_0019a37c(*(unsigned int *)(puVar11 + 6),temp_v11,temp_v4);
+      temp_v5 = libc_strncmp(*(unsigned int *)(puVar11 + 6),temp_v11,temp_v4);
       if (temp_v5 == 0) {
         temp_v5 = wstrlen(*(unsigned int *)(puVar11 + 6));
         temp_v10 = 0;

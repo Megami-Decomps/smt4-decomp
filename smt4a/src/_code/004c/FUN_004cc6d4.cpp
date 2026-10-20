@@ -28,7 +28,7 @@ extern unsigned int FUN_002e0798(void);
 /* Supplied declaration required: FUN_003df7c4. */
 extern short FUN_003e0154(void);
 extern unsigned int FUN_003e0164(void);
-extern int FUN_003e46f4(unsigned int);
+extern int gameDataFlagTestBit(unsigned int);
 /* Supplied declaration required: FUN_004cd340. */
 
 
@@ -92,13 +92,13 @@ void FUN_004cc6d4(int param_1,int param_2,int param_3)
     *(short *)(param_1 + 0x2a) = (*(short *)(param_1 + 0x1c) - temp_v0) + *(short *)(param_1 + 0x2a);
     *(short *)(param_1 + 0x2c) =
          (*(short *)(param_1 + 0x1e) - (short)temp_v4) + *(short *)(param_1 + 0x2c);
-    temp_v3 = FUN_003e46f4(0x83);
+    temp_v3 = gameDataFlagTestBit(0x83);
     if (temp_v3 != 0) {
       *(unsigned short *)(param_1 + 0x2a) = *(unsigned short *)(param_1 + 0x1c);
       *(unsigned short *)(param_1 + 0x2c) = *(unsigned short *)(param_1 + 0x1e);
     }
     else {
-      temp_v3 = FUN_003e46f4(0x82);
+      temp_v3 = gameDataFlagTestBit(0x82);
       if (temp_v3 != 0) {
         *(short *)(param_1 + 0x2a) =
              *(short *)(param_1 + 0x2a) +

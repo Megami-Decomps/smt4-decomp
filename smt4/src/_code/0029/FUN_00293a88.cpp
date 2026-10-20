@@ -7,11 +7,11 @@ typedef struct Obj {
     /* 0x400 */ s32 unk400;
 } Obj;
 
-extern Obj *DAT_0044e190;
+extern Obj *g_statusDown;
 
 u8 FUN_00293a88(void)
 {
-    return DAT_0044e190->unk400 != 0x12 && DAT_0044e190->unk400 != 0x14;
+    return g_statusDown->unk400 != 0x12 && g_statusDown->unk400 != 0x14;
 }
 
 } /* extern "C" */

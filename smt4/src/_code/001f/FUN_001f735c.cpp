@@ -12,7 +12,7 @@ int FUN_00256cd8(...);
 int FUN_00256dbc(...);
 int FUN_00256f88(...);
 int FUN_00257320(...);
-int FUN_002694f8(...);
+int refCountIncrement(...);
 int FUN_00269508(...);
 int FUN_00269694(unsigned int, int, int, int);
 int FUN_002ad314(...);
@@ -130,10 +130,10 @@ extern unsigned int DAT_004efdd8; /* 0x4efdd8 */
 /* Supplied declaration required: FUN_00256dbc. */
 /* Supplied declaration required: FUN_00256f88. */
 /* Supplied declaration required: FUN_00257320. */
-/* Supplied declaration required: FUN_002694f8. */
+/* Supplied declaration required: refCountIncrement. */
 /* Supplied declaration required: FUN_00269508. */
 /* Supplied declaration required: FUN_00269694. */
-extern int FUN_00269a58(void);
+extern int effGetFrameCounter(void);
 /* Supplied declaration required: FUN_002ad314. */
 /* Supplied declaration required: mtx44Copy. */
 extern int __cxa_guard_acquire(unsigned int *);
@@ -243,7 +243,7 @@ void FUN_001f735c(int param_1)
   unsigned int temp_v81;
   unsigned int temp_v82;
   
-  temp_v1 = FUN_00269a58();
+  temp_v1 = effGetFrameCounter();
   *(int *)(param_1 + 0x2c) = temp_v1 + *(int *)(param_1 + 0x2c);
   temp_v5 = *(int *)(param_1 + 0x2c);
   temp_v4 = *(int *)(param_1 + 0xbc);
@@ -311,7 +311,7 @@ void FUN_001f735c(int param_1)
     temp_v69 = (temp_v1 << 0x10) | (temp_v3 & 0xffff);
     temp_v67 = (temp_v2 & 0xffff) | (temp_v1 << 0x10);
     temp_v75 = (temp_v3 & 0xffff) | (temp_v4 << 0x10);
-    FUN_002694f8(temp_v39);
+    refCountIncrement(temp_v39);
   }
   else {
     temp_v36 = temp_v7;
@@ -336,7 +336,7 @@ void FUN_001f735c(int param_1)
       temp_v8 = temp_v8 * temp_v11;
       temp_v11 = temp_v7 * temp_v11;
       temp_v7 = temp_v36;
-      FUN_002694f8(temp_v79);
+      refCountIncrement(temp_v79);
     }
     else {
       FUN_002f81b0(puVar8,&temp_v72);

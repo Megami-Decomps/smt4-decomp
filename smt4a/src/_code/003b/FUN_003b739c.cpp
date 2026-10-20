@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00184310(void);
-int FUN_001b4a90(int, int, unsigned int);
+int __aeabi_memset4(int, int, unsigned int);
 int FUN_00203b40(int, unsigned int, int, int, int, int);
 int unitRecordBuild(int, unsigned char [304]);
 
@@ -15,10 +15,10 @@ typedef struct {
     unsigned int sp148; /* 0x148: local_148 */
 } param_1_stack;
 
-extern int DAT_0057f290; /* 0x57f290 */
+extern int g_unite; /* 0x57f290 */
 
 /* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: FUN_001b4a90. */
+/* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: FUN_00203b40. */
 /* Supplied declaration required: unitRecordBuild. */
 extern unsigned int getUnlockedSlotCount(unsigned char *);
@@ -32,14 +32,14 @@ void FUN_003b739c(unsigned short *param_1)
   unsigned int temp_v1;
   unsigned char temp_v2 [304];
   
-  temp_v0 = DAT_0057f290;
+  temp_v0 = g_unite;
   FUN_00184310();
   unitRecordBuild(*param_1,temp_v2);
   temp_v1 = getUnlockedSlotCount(temp_v2);
   *(unsigned int *)(temp_v0 + 0x8e7c) = 0;
   FUN_00203b40(temp_v0 + 0x8db0,temp_v1,8,1,1,1);
   *(unsigned char *)(temp_v0 + 0x8e8a) = 1;
-  FUN_001b4a90(temp_v0 + 0x8e8c,0x20,0xffffffff);
+  __aeabi_memset4(temp_v0 + 0x8e8c,0x20,0xffffffff);
   *(unsigned char *)(temp_v0 + 0x8eac) = 0;
   return;
 }

@@ -3,8 +3,8 @@
 extern "C" {
 
 int FUN_002a0cc8(int arg);
-int FUN_002b8838(int arg);
-extern int FUN_00296f4c(u32 a, int b);
+int buttonHelpSetPreset(int arg);
+extern int scrScriptProcessStartEntry(u32 a, int b);
 
 typedef struct Obj {
     /* 0x000 */ u8 unk000[0x42C];
@@ -16,17 +16,17 @@ typedef struct Obj {
     /* 0x478 */ int unk478;
 } Obj;
 
-extern Obj *DAT_0043dd68;
+extern Obj *g_unite;
 
 u32 FUN_002a0c08(int value)
 {
-    Obj *obj = DAT_0043dd68;
+    Obj *obj = g_unite;
 
-    if (DAT_0043dd68 != NULL) {
-        if (DAT_0043dd68->active != 0) {
-            DAT_0043dd68->unk478 = value;
+    if (g_unite != NULL) {
+        if (g_unite->active != 0) {
+            g_unite->unk478 = value;
         } else {
-            if (FUN_00296f4c(DAT_0043dd68->unk42C, value) != 0) {
+            if (scrScriptProcessStartEntry(g_unite->unk42C, value) != 0) {
                 if (((!(value == 7 || value == 8)) && (!(value == 9 || value == 10))) &&
                     (!(value == 0xb || value == 0xd))) {
                     if (value == 0xc) {
@@ -34,7 +34,7 @@ u32 FUN_002a0c08(int value)
                     }
                 } else {
                     FUN_002a0cc8(1);
-                    FUN_002b8838(0x9e);
+                    buttonHelpSetPreset(0x9e);
                 }
                 obj->unk478 = 0xffffffff;
                 obj->unk434 = value;

@@ -8,7 +8,7 @@ int CONCAT44(...);
 int FUN_001527d8(unsigned int, unsigned int);
 int FUN_00164b5c(int, int, int, int);
 int FUN_00183bb0(void);
-int FUN_00184e64(unsigned int);
+int drawSetColorFromRGBA8(unsigned int);
 int FUN_001879d0(...);
 int FUN_0019aee4(...);
 int FUN_0019be8c(...);
@@ -21,7 +21,7 @@ int VectorUnsignedToFloat(...);
 
 typedef int romwright_code(...);
 extern unsigned int g_renderCtx; /* 0x59dbb4 */
-extern signed char DAT_005b3d54; /* 0x5b3d54 */
+extern signed char g_asdTextDefaults; /* 0x5b3d54 */
 extern int DAT_005b3d64; /* 0x5b3d64 */
 extern romwright_code *DAT_005b3d74; /* 0x5b3d74 */
 extern unsigned int DAT_005b3d78; /* 0x5b3d78 */
@@ -44,7 +44,7 @@ extern unsigned int DAT_0063af94; /* 0x63af94 */
 /* Supplied declaration required: FUN_00164b5c. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_00184e64. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_001879d0. */
 /* Supplied declaration required: FUN_0019aee4. */
 /* Supplied declaration required: FUN_0019be8c. */
@@ -141,7 +141,7 @@ void FUN_0034248c(int param_1,int param_2,float *param_3,int param_4,int param_5
     uStack_24 = 0x65;
     FUN_00164b5c(2,0x2e,0x25,(int)param_3[1] + param_4);
   }
-  FUN_00184e64(0x82fff500);
+  drawSetColorFromRGBA8(0x82fff500);
   temp_v6 = FUN_001834a4(0x2e,0x53);
   FUN_002e1b64(*(unsigned int *)(param_2 + 0x30),
                (int)param_3[1] + (int)*(short *)(temp_v6 + 8) + param_4,
@@ -172,7 +172,7 @@ void FUN_0034248c(int param_1,int param_2,float *param_3,int param_4,int param_5
   temp_v25 = 0;
   iStack_a0 = 0;
   piStack_30 = piVar9;
-  if (DAT_005b3d54 != '\0') {
+  if (g_asdTextDefaults != '\0') {
     FUN_001879d0(g_renderCtx);
     temp_v14 = temp_v17 + temp_v14;
   }

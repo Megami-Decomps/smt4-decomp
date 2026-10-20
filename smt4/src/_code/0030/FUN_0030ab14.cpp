@@ -4,7 +4,7 @@ extern "C" {
 
 u8 FUN_0030ab14(void)
 {
-    return DAT_0044e190->unk400 == 10;
+    return g_statusDown->unk400 == 10;
 }
 
 } /* extern "C" */

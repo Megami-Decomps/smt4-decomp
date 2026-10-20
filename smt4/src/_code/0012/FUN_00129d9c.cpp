@@ -8,11 +8,11 @@ typedef struct State00471a70 {
     /* 0x0C */ u32 value;
 } State00471a70;
 
-extern State00471a70 DAT_00471a70;
+extern State00471a70 g_nngxState;
 
 u32 FUN_00129d9c(void)
 {
-    return DAT_00471a70.value;
+    return g_nngxState.value;
 }
 
 }

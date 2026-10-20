@@ -9,9 +9,9 @@ int FUN_00291060(...);
 int FUN_0029118c(...);
 int FUN_00291310(double, float *, float *, int, double, float *, unsigned int, int, int, double);
 int FUN_00291340(float *, float *, float *, float *, float *);
-int FUN_00291414(double);
+int nodeTreeReleaseItemClearOwner(double);
 int FUN_00291620(...);
-int FUN_002916ac(...);
+int nodeTreeReleaseItem(...);
 int VectorFloatToUnsigned(...);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
@@ -98,9 +98,9 @@ static float romwright_fabs_4(float value)
 extern unsigned int FUN_00291234(unsigned int, float, unsigned int);
 /* Supplied declaration required: FUN_00291310. */
 /* Supplied declaration required: FUN_00291340. */
-/* Supplied declaration required: FUN_00291414. */
+/* Supplied declaration required: nodeTreeReleaseItemClearOwner. */
 /* Supplied declaration required: FUN_00291620. */
-/* Supplied declaration required: FUN_002916ac. */
+/* Supplied declaration required: nodeTreeReleaseItem. */
 extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
@@ -168,7 +168,7 @@ void FUN_00193440(float *param_1)
       temp_v7 = 0;
       if (param_1 != (float *)0x0) {
         do {
-          FUN_00291414(param_1[temp_v7 + 0x8e]);
+          nodeTreeReleaseItemClearOwner(param_1[temp_v7 + 0x8e]);
           temp_v7 = temp_v7 + 1;
         } while (temp_v7 < 0x32);
         param_1[9] = 0.0f;
@@ -178,7 +178,7 @@ void FUN_00193440(float *param_1)
         if ((unsigned int *)romwright_f2u((float)(param_1[0x8a])) != (unsigned int *)0x0) {
           *(unsigned int *)romwright_f2u((float)(param_1[0x8a])) = 0;
         }
-        FUN_002916ac(param_1);
+        nodeTreeReleaseItem(param_1);
         return;
       }
     }
@@ -220,7 +220,7 @@ void FUN_00193440(float *param_1)
         param_1[0x8c] = 0.0f;
       }
       else if (param_1[(int)temp_v6 + 0x8e] != 0.0f) {
-        FUN_002916ac();
+        nodeTreeReleaseItem();
       }
       temp_v9 = (float)(int)(param_1[0x5f] * (float)((unsigned long long)temp_v26 >> 0x20));
       temp_v3 = param_1[0x89];

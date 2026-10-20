@@ -14,8 +14,8 @@ typedef struct PairEntry {
     /* 0x10 */ u8 b2;
 } PairEntry;
 
-extern s32 FUN_003b56bc(void);
-extern PairEntry *FUN_00379890(s32 index);
+extern s32 dataTable23Type0CountWithAoc(void);
+extern PairEntry *dataTable23Sub0GetEntry(s32 index);
 extern void FUN_002d23f0(s32 index);
 
 /* Fires FUN_002d23f0 for each entry (up to the first unused one) that lists the pair (a, b) in any of its three slots. */
@@ -24,8 +24,8 @@ void fireEntriesMatchingPair(u32 a, u32 b)
     s32 i;
     PairEntry *entry;
 
-    for (i = 0; i < FUN_003b56bc(); i++) {
-        entry = FUN_00379890(i);
+    for (i = 0; i < dataTable23Type0CountWithAoc(); i++) {
+        entry = dataTable23Sub0GetEntry(i);
         if (entry->unk08 == -1) {
             return;
         }

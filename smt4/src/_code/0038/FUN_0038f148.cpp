@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00126fb8(int);
 int FUN_0023392c(unsigned int *, unsigned int, int);
-int FUN_00233d78(unsigned int *);
+int jobStopAndClearFlags(unsigned int *);
 int FUN_00233db8(unsigned int *, int);
 int FUN_002340e4(int *);
 int aocClearDisplayFlag(unsigned int);
@@ -29,15 +29,15 @@ extern unsigned int g_aocSystem; /* 0x433158 */
 
 /* Supplied declaration required: FUN_00126fb8. */
 /* Supplied declaration required: FUN_0023392c. */
-/* Supplied declaration required: FUN_00233d78. */
+/* Supplied declaration required: jobStopAndClearFlags. */
 /* Supplied declaration required: FUN_00233db8. */
 /* Supplied declaration required: FUN_002340e4. */
 extern int FUN_0026b564(void);
 /* Supplied declaration required: aocClearDisplayFlag. */
-extern int FUN_0027ea14(unsigned int *);
+extern int strIsEmpty(unsigned int *);
 /* Supplied declaration required: FUN_0027eb30. */
 /* Supplied declaration required: FUN_002a126c. */
-extern int FUN_002a1520(unsigned int *);
+extern int byteIsAtLeast100(unsigned int *);
 extern int FUN_002ad1e0(int);
 /* Supplied declaration required: FUN_002b8244. */
 /* Supplied declaration required: FUN_002ba9ac. */
@@ -70,7 +70,7 @@ void FUN_0038f148(unsigned int *param_1)
   if ((temp_v0 & 0x10) != 0) {
     FUN_0023392c(param_1,0xffffffff,0);
     FUN_0027eb30(param_1 + 0x46c);
-    FUN_00233d78(param_1);
+    jobStopAndClearFlags(param_1);
     param_1[1] = 0x12;
     param_1[2] = 0;
     if ((int *)param_1[0x82] != (int *)0x0) {
@@ -151,19 +151,19 @@ void FUN_0038f148(unsigned int *param_1)
       uStack_38 = uStack_24;
       uStack_34 = uStack_20;
       uStack_30 = uStack_1c;
-      temp_v1 = FUN_0027ea14((unsigned int *)&temp_v3);
+      temp_v1 = strIsEmpty((unsigned int *)&temp_v3);
       if (temp_v1 != 0) {
         param_1[2] = 3;
       }
       else {
-        temp_v1 = FUN_002a1520((unsigned int *)&temp_v3);
+        temp_v1 = byteIsAtLeast100((unsigned int *)&temp_v3);
         if (temp_v1 != 0) {
           param_1[2] = 9999;
           temp_v1 = FUN_002ad1e0(g_aocMain + 0x98);
           if (temp_v1 != 0) {
             *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
           }
-          FUN_00233d78(param_1);
+          jobStopAndClearFlags(param_1);
           return;
         }
       }

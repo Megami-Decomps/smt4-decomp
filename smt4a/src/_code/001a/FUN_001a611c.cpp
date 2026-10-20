@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001c2484(void);
+int nw_snd_internal_driver_VoiceManager_GetInstance(void);
 
 #ifndef ROMWRIGHT_CARRY_4_DEFINED
 #define ROMWRIGHT_CARRY_4_DEFINED
@@ -15,7 +15,7 @@ int FUN_001c2484(void);
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 extern int FUN_001afa34(void);
-/* Supplied declaration required: FUN_001c2484. */
+/* Supplied declaration required: nw_snd_internal_driver_VoiceManager_GetInstance. */
 extern float ll_sto_f(int, int);
 extern unsigned char nw_snd_internal_driver_VoiceManager_GetVoiceCount(void);
 
@@ -89,7 +89,7 @@ void FUN_001a611c(unsigned int *param_1,unsigned int *param_2)
       if (param_1[0x7e] != 0) {
         if ((int)param_1[0x81] < (int)param_1[0x80]) {
           pfVar12 = (float *)(param_1[0x7e] + param_1[0x81] * 8);
-          FUN_001c2484();
+          nw_snd_internal_driver_VoiceManager_GetInstance();
           temp_v3 = nw_snd_internal_driver_VoiceManager_GetVoiceCount();
           *(unsigned char *)(pfVar12 + 1) = temp_v3;
           *(char *)((int)pfVar12 + 5) = (char)param_1[0x7f];

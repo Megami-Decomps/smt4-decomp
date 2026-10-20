@@ -2,12 +2,12 @@
 
 extern "C" {
 
-void FUN_001add24(s32 code);
+void dataTableFree(s32 code);
 
-/* Calls FUN_001add24 with 0x28. */
+/* Calls dataTableFree with 0x28. */
 void FUN_001a6500(void)
 {
-    FUN_001add24(0x28);
+    dataTableFree(0x28);
 }
 
 } /* extern "C" */

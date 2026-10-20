@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00192608(void);
-int FUN_00281720(unsigned int, int);
+int linkHolderApplyFlag(unsigned int, int);
 int FUN_002e207c(void);
 int FUN_002e2114(void);
 int FUN_002e2184(unsigned int, unsigned short *);
@@ -23,11 +23,11 @@ typedef struct {
     unsigned short sp70; /* 0x70: local_70 */
 } param_1_stack;
 
-extern int DAT_0057f118; /* 0x57f118 */
+extern int g_campCecEdit; /* 0x57f118 */
 
-extern unsigned int FUN_001801a4(void);
+extern unsigned int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00192608. */
-/* Supplied declaration required: FUN_00281720. */
+/* Supplied declaration required: linkHolderApplyFlag. */
 /* Supplied declaration required: FUN_002e207c. */
 /* Supplied declaration required: FUN_002e2114. */
 /* Supplied declaration required: FUN_002e2184. */
@@ -53,9 +53,9 @@ void FUN_0039a41c(int param_1)
   unsigned short temp_v10;
   unsigned short temp_v11;
   
-  temp_v1 = DAT_0057f118;
-  if (DAT_0057f118 != 0) {
-    temp_v2 = FUN_001801a4();
+  temp_v1 = g_campCecEdit;
+  if (g_campCecEdit != 0) {
+    temp_v2 = gameGetPlayerData();
     rt_memcpy_w(&temp_v5,temp_v2,100);
     temp_v3 = unitMatchesAlignment(param_1);
     if (temp_v3 != 0) {
@@ -98,7 +98,7 @@ void FUN_0039a41c(int param_1)
       if (temp_v4 != 0 && temp_v3 != 0) {
         FUN_003e5c68();
       }
-      FUN_00281720(*(unsigned int *)(temp_v1 + 4),0);
+      linkHolderApplyFlag(*(unsigned int *)(temp_v1 + 4),0);
       *(unsigned char *)(temp_v1 + 0x188) = 0;
     }
   }

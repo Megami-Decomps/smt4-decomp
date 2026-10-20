@@ -1,5 +1,5 @@
 /* NON_MATCHING: register choice differs (retail reuses r1 for src+16 and r0 for the constant 2) */
-/* Initialises the object from `src`: clears its slots, takes the two words at src+4/+8 and a data pointer at src+0x10, runs FUN_001641c4 once per recorded entry, clears the entry count and sets the 6-byte handle to all ones. */
+/* Initialises the object from `src`: clears its slots, takes the two words at src+4/+8 and a data pointer at src+0x10, runs ifTouchRegionRemove once per recorded entry, clears the entry count and sets the 6-byte handle to all ones. */
 #include "common.h"
 
 extern "C" {
@@ -27,7 +27,7 @@ struct Src00152530 {
     /* 0x0c */ u8 unk0c[4];
 };
 
-void FUN_001641c4(void);
+void ifTouchRegionRemove(void);
 void ARM_common_memset4_6(void *dst, u32 value);
 
 void FUN_001b3f7c(Obj00152530 *obj, Src00152530 *src)
@@ -54,7 +54,7 @@ void FUN_001b3f7c(Obj00152530 *obj, Src00152530 *src)
     if (obj->entryCount > 0) {
         i = 0;
         do {
-            FUN_001641c4();
+            ifTouchRegionRemove();
             i++;
         } while (i < obj->entryCount);
     }

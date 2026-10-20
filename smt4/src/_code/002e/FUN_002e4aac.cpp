@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002b4670(void);
+int dataTable08Sub1GetRecord(void);
 
-/* Supplied declaration required: FUN_002b4670. */
+/* Supplied declaration required: dataTable08Sub1GetRecord. */
 
 
 int FUN_002e4aac(unsigned short *param_1,unsigned short *param_2)
@@ -18,15 +18,15 @@ int FUN_002e4aac(unsigned short *param_1,unsigned short *param_2)
   int temp_v2;
   
   temp_v0 = (unsigned int)*param_1;
-  FUN_002b4670();
+  dataTable08Sub1GetRecord();
   temp_v1 = (unsigned int)*param_2;
-  FUN_002b4670();
+  dataTable08Sub1GetRecord();
   temp_v2 = (*(unsigned int *)(temp_v1 + 0x70) & 0xff) - (*(unsigned int *)(temp_v0 + 0x70) & 0xff);
   if (temp_v2 == 0) {
     temp_v0 = (unsigned int)*param_1;
-    FUN_002b4670();
+    dataTable08Sub1GetRecord();
     temp_v1 = (unsigned int)*param_2;
-    FUN_002b4670();
+    dataTable08Sub1GetRecord();
     temp_v2 = (unsigned int)*(unsigned char *)(temp_v1 + 0x6f) - (unsigned int)*(unsigned char *)(temp_v0 + 0x6f);
   }
   return temp_v2;

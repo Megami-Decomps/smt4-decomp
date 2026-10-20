@@ -7,7 +7,7 @@ void FUN_001ab914(s32 entry);
 void FUN_001ad150(void);
 void FUN_001ad15c(s32 entry, u32 arg);
 void sysMemClear(u8 *block, s32 size);
-s32 FUN_001861c4(u32 a, u32 b);
+s32 asdTMTexTableGetNode(u32 a, u32 b);
 s32 FUN_001b2bd8(u32 a, s32 b, u32 c, u8 *buffer);
 s32 FUN_001b3214(u32 a);
 
@@ -22,7 +22,7 @@ s32 FUN_00191e00(u32 a, u32 b, u32 c, u32 d)
     if (id != -1) {
         sysMemClear(buffer, 0x80);
         id = FUN_001b2bd8(a, id, c, buffer);
-        if ((id != 0) && (entry = FUN_001861c4(b, c), entry != 0)) {
+        if ((id != 0) && (entry = asdTMTexTableGetNode(b, c), entry != 0)) {
             FUN_001ad150();
             FUN_001a6d00(buffer, entry, id);
             FUN_001ad15c(entry, d);

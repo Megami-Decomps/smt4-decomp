@@ -9,7 +9,7 @@ typedef struct {
     unsigned int sp4; /* 0x4: local_4 */
 } param_2_stack;
 
-extern int DAT_00580ca0; /* 0x580ca0 */
+extern int g_mapGimic; /* 0x580ca0 */
 
 
 void FUN_003851f8(int param_1,int param_2)
@@ -20,7 +20,7 @@ void FUN_003851f8(int param_1,int param_2)
   int temp_v2;
   
   temp_v1 = 0;
-  while ((temp_v2 = DAT_00580ca0 + temp_v1 * 0x18, *(char *)(temp_v2 + 0x8c4) == '\0' ||
+  while ((temp_v2 = g_mapGimic + temp_v1 * 0x18, *(char *)(temp_v2 + 0x8c4) == '\0' ||
          (*(short *)(temp_v2 + 0x8c8) != param_1))) {
     temp_v1 = temp_v1 + 1;
     if (temp_v1 >= 10) {

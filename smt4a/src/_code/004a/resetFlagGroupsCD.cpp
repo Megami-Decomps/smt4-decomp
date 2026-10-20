@@ -2,15 +2,15 @@
 
 extern "C" {
 
-extern void FUN_0014384c(s32 id);
+extern void asdTMTexTableLoadSprites(s32 id);
 extern void FUN_001acf98(s32 id, s32 index);
 
 void resetFlagGroupsCD(void)
 {
     s32 i;
 
-    FUN_0014384c(0xC);
-    FUN_0014384c(0xD);
+    asdTMTexTableLoadSprites(0xC);
+    asdTMTexTableLoadSprites(0xD);
     for (i = 0; i < 6; i++) {
         FUN_001acf98(0xC, i);
     }

@@ -5,7 +5,7 @@
 extern "C" {
 
 int bitsetSetBit(unsigned int *, int);
-int FUN_002b9024(void);
+int devilGetRecord(void);
 int FUN_002dada4(int, unsigned int *, int);
 int FUN_003c1ab4(int, int, unsigned char [12]);
 int FUN_003c1cfc(unsigned char *, int);
@@ -16,7 +16,7 @@ typedef struct {
 } param_5_stack;
 
 /* Supplied declaration required: bitsetSetBit. */
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: FUN_002dada4. */
 /* Supplied declaration required: FUN_003c1ab4. */
 /* Supplied declaration required: FUN_003c1cfc. */
@@ -68,7 +68,7 @@ void FUN_0029c528(unsigned int param_1,int param_2,int param_3,int param_4,unsig
     } while (temp_v3 < 0x40);
   }
   temp_v4 = (unsigned int)*(unsigned short *)((int)param_5 + 0x46);
-  FUN_002b9024();
+  devilGetRecord();
   bitsetSetBit(param_5,*(unsigned short *)(temp_v4 + 0x38));
   temp_v12 = 0;
   if (!temp_v9) {

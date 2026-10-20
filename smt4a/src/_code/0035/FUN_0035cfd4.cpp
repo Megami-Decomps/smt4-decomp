@@ -1,5 +1,5 @@
 /* NON_MATCHING: store scheduling only: retail stores 13 then 0 and uses a writeback `str [r1,#468]!` for the last store */
-/* Resets the FUN_00162e8c state and starts mode 13 with the scrGetArg value as its argument; always returns 1. */
+/* Resets the gameFlagsGetBlock state and starts mode 13 with the scrGetArg value as its argument; always returns 1. */
 #include "common.h"
 
 extern "C" {
@@ -16,7 +16,7 @@ typedef struct State {
 
 extern State *g_lmapScene;
 
-extern void FUN_00162e8c(void);
+extern void gameFlagsGetBlock(void);
 extern u32 scrGetArg(u32 arg);
 
 s32 FUN_0035cfd4(void)
@@ -24,7 +24,7 @@ s32 FUN_0035cfd4(void)
     State *state;
     u32 value;
 
-    FUN_00162e8c();
+    gameFlagsGetBlock();
     value = scrGetArg(0);
     state = g_lmapScene;
     state->value = value;

@@ -9,7 +9,7 @@ int FUN_0016e7c0(void);
 int FUN_001883b0(unsigned int, unsigned int, int);
 int FUN_00188444(void);
 int FUN_001886bc(void);
-int FUN_001bcd48(int, int);
+int svcSleepThread(int, int);
 int SBORROW4(...);
 
 extern unsigned char DAT_005c0adc; /* 0x5c0adc */
@@ -20,7 +20,7 @@ extern unsigned char DAT_005c0adc; /* 0x5c0adc */
 /* Supplied declaration required: FUN_001883b0. */
 /* Supplied declaration required: FUN_00188444. */
 /* Supplied declaration required: FUN_001886bc. */
-/* Supplied declaration required: FUN_001bcd48. */
+/* Supplied declaration required: svcSleepThread. */
 
 
 unsigned int FUN_00188e44(int param_1)
@@ -51,7 +51,7 @@ unsigned int FUN_00188e44(int param_1)
         }
         temp_v0 = (temp_v2 & 0x3fc00) >> 10;
         if (((temp_v0 != 0x11) || ((temp_v2 & 0x3ff) < 0xe6)) || ((temp_v2 & 0x3ff) >= 0x154)) break;
-        FUN_001bcd48(10000000,0);
+        svcSleepThread(10000000,0);
       }
       if (((temp_v0 != 0x11) || ((temp_v2 & 0x3ff) < 100)) || ((temp_v2 & 0x3ff) >= 0xb4)) break;
       FUN_0016e2a8();

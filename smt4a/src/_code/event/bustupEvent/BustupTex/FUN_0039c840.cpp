@@ -23,7 +23,7 @@ extern unsigned int FUN_0014afd0(unsigned int, unsigned int);
 /* Supplied declaration required: asdProcessCreateSimple. */
 extern int FUN_00162ea4(void);
 /* Supplied declaration required: asdMemoryAllocTracked. */
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 extern unsigned int FUN_00191e00(unsigned int, unsigned int, unsigned int, unsigned int);
 extern int FUN_0019e378(void);
 extern int FUN_001a6508(unsigned int, unsigned int, int, unsigned int);
@@ -39,7 +39,7 @@ void FUN_0039c840(unsigned int param_1,int param_2)
   unsigned int *puVar2;
   unsigned int temp_v1;
   
-  temp_v0 = FUN_0018719c(0x522);
+  temp_v0 = gameFlagIsSet(0x522);
   if (temp_v0 != 0) {
     FUN_00283498(param_1);
     temp_v0 = FUN_0019e378();

@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_002a5ed0(int table, int index);
+int asdTMTexTableLoadEntryAsync(int table, int index);
 int asdTMTexTableLoadTmx(int table, int flag);
 
 extern struct {
@@ -19,7 +19,7 @@ void spriteTable22Acquire(void)
         asdTMTexTableLoadTmx(0x22, 0);
         i = 0;
         do {
-            FUN_002a5ed0(0x22, i);
+            asdTMTexTableLoadEntryAsync(0x22, i);
             i = i + 1;
         } while (i < 2);
     }

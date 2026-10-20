@@ -22,7 +22,7 @@ typedef struct {
 extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: efctSetSpeed. */
-extern int FUN_0018206c(unsigned int);
+extern int asdTMTexTableNodeIsLoaded(unsigned int);
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_001879d0. */
@@ -43,8 +43,8 @@ void FUN_0049ec78(int param_1,int param_2,int param_3,int param_4,int param_5)
   
   temp_v5 = *(int *)(param_2 + 0x10);
   if (((*(short *)(*(int *)(param_1 + 0x84) + 0x36) == 0) ||
-      (temp_v3 = FUN_0018206c(0x33), temp_v3 != 0)) &&
-     ((*(short *)(*(int *)(param_1 + 0x84) + 0x40) == 0 || (temp_v3 = FUN_0018206c(0x33), temp_v3 != 0))
+      (temp_v3 = asdTMTexTableNodeIsLoaded(0x33), temp_v3 != 0)) &&
+     ((*(short *)(*(int *)(param_1 + 0x84) + 0x40) == 0 || (temp_v3 = asdTMTexTableNodeIsLoaded(0x33), temp_v3 != 0))
      )) {
     temp_v7 = 0.25f;
     temp_v6 = temp_v7;

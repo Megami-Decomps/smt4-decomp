@@ -14,9 +14,9 @@ int FUN_0018152c(...);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
 int FUN_00183bb0(void);
-int FUN_00184e64(...);
+int drawSetColorFromRGBA8(...);
 int FUN_00185e84(...);
-int FUN_001ab854(...);
+int gameGetSlotRecord(...);
 int FUN_0023d150(...);
 int FUN_0026ec00(...);
 int FUN_00389d9c(...);
@@ -39,24 +39,24 @@ typedef struct {
 
 extern unsigned char LAB_0023d674; /* 0x23d674 */
 extern unsigned char LAB_0023dcbc; /* 0x23dcbc */
-extern int DAT_0057f108; /* 0x57f108 */
+extern int g_camp; /* 0x57f108 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00100388. */
 extern int FUN_0014bd84(unsigned int);
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164b5c. */
-extern int FUN_001801a4(void);
+extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: FUN_0018152c. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: FUN_0018408c. */
-/* Supplied declaration required: FUN_00184e64. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_00185e84. */
-extern int FUN_0018719c(unsigned int);
-/* Supplied declaration required: FUN_001ab854. */
+extern int gameFlagIsSet(unsigned int);
+/* Supplied declaration required: gameGetSlotRecord. */
 extern int FUN_0022a030(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0023d150. */
 extern int FUN_002684d0(unsigned int, int);
@@ -98,10 +98,10 @@ void FUN_0023d230(int param_1,int param_2,int param_3)
   int iStack_2c;
   int temp_v18;
   
-  temp_v6 = DAT_0057f108;
+  temp_v6 = g_camp;
   temp_v14 = 0;
   temp_v12 = 0;
-  temp_v13 = DAT_0057f108 + 0x1ec;
+  temp_v13 = g_camp + 0x1ec;
   iStack_30 = param_1;
   iStack_2c = param_2;
   temp_v18 = param_3;
@@ -117,7 +117,7 @@ void FUN_0023d230(int param_1,int param_2,int param_3)
     temp_v1 = FUN_002a4860(temp_v13);
     temp_v8 = *(unsigned int *)(temp_v6 + (temp_v1 + temp_v7) * 8 + 0x1b74);
     if (-1 < (int)temp_v8) {
-      temp_v12 = FUN_001ab854(temp_v8);
+      temp_v12 = gameGetSlotRecord(temp_v8);
     }
     temp_v16 = temp_v8 >> 0x1f;
     temp_v1 = FUN_001834a4(0x14,temp_v7 + 0x40d);
@@ -141,18 +141,18 @@ void FUN_0023d230(int param_1,int param_2,int param_3)
         temp_v3 = *(int *)(temp_v6 + (temp_v3 + temp_v7) * 8 + 0x1b74);
         temp_v10 = 1;
         if (temp_v3 < 0) {
-          temp_v3 = FUN_001801a4();
+          temp_v3 = gameGetPlayerData();
           if ((*(unsigned short *)(temp_v3 + 0x5e) & 2) != 0) {
             temp_v15 = 0x9b9b9bff;
           }
         }
         else {
-          temp_v3 = FUN_001ab854(temp_v3);
+          temp_v3 = gameGetSlotRecord(temp_v3);
           if (((temp_v3 == 0) || ((*(unsigned short *)(temp_v3 + 0x60) & 2) != 0)) ||
              ((*(unsigned short *)(temp_v3 + 0x60) & 0x400) != 0)) {
             temp_v10 = 0;
           }
-          temp_v4 = FUN_0018719c(0x401);
+          temp_v4 = gameFlagIsSet(0x401);
           temp_v3 = 0;
           if (temp_v4 != 0) {
             temp_v3 = temp_v10;
@@ -195,14 +195,14 @@ void FUN_0023d230(int param_1,int param_2,int param_3)
     }
     temp_v2 = FUN_001834a4(0x14,0x43e);
     if ((int)temp_v8 < 0) {
-      FUN_00184e64(*(unsigned int *)(temp_v6 + temp_v8 * 4 + 0x3248));
+      drawSetColorFromRGBA8(*(unsigned int *)(temp_v6 + temp_v8 * 4 + 0x3248));
       temp_v3 = (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v1 + 10);
       temp_v1 = (int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v2 + 8);
       temp_v2 = -1;
       FUN_0018152c(temp_v2,temp_v1 + param_1,temp_v3 + param_2,0x6f,0);
     }
     else if (temp_v12 != 0) {
-      FUN_00184e64(*(unsigned int *)(temp_v6 + temp_v8 * 4 + 0x3248));
+      drawSetColorFromRGBA8(*(unsigned int *)(temp_v6 + temp_v8 * 4 + 0x3248));
       temp_v3 = (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v2 + 10);
       temp_v1 = (int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v2 + 8);
       temp_v2 = (int)*(short *)(temp_v12 + 0x62);
@@ -220,7 +220,7 @@ void FUN_0023d230(int param_1,int param_2,int param_3)
     temp_v1 = FUN_002a4894(temp_v13);
     temp_v8 = *(unsigned int *)(temp_v6 + (temp_v1 + temp_v7) * 8 + 0x1b74);
     if (-1 < (int)temp_v8) {
-      temp_v12 = FUN_001ab854(temp_v8);
+      temp_v12 = gameGetSlotRecord(temp_v8);
     }
     temp_v16 = temp_v8 >> 0x1f;
     temp_v7 = FUN_002a4894(temp_v13);
@@ -245,18 +245,18 @@ void FUN_0023d230(int param_1,int param_2,int param_3)
         temp_v3 = FUN_002a4894(temp_v13);
         temp_v0 = 1;
         if (*(int *)(temp_v6 + (temp_v3 + temp_v2) * 8 + 0x1b74) < 0) {
-          temp_v2 = FUN_001801a4();
+          temp_v2 = gameGetPlayerData();
           if ((*(unsigned short *)(temp_v2 + 0x5e) & 2) != 0) {
             temp_v5 = 0x9b9b9bff;
           }
         }
         else {
-          temp_v2 = FUN_001ab854();
+          temp_v2 = gameGetSlotRecord();
           if (((temp_v2 == 0) || ((*(unsigned short *)(temp_v2 + 0x60) & 2) != 0)) ||
              ((*(unsigned short *)(temp_v2 + 0x60) & 0x400) != 0)) {
             temp_v0 = 0;
           }
-          temp_v2 = FUN_0018719c(0x401);
+          temp_v2 = gameFlagIsSet(0x401);
           if (temp_v2 == 0 || !temp_v0) {
             temp_v5 = 0x9b9b9bff;
           }
@@ -299,16 +299,16 @@ void FUN_0023d230(int param_1,int param_2,int param_3)
     }
     temp_v1 = FUN_001834a4(0x14,0x447);
     if ((int)temp_v8 < 0) {
-      FUN_00184e64(*(unsigned int *)(temp_v6 + temp_v8 * 4 + 0x3248));
+      drawSetColorFromRGBA8(*(unsigned int *)(temp_v6 + temp_v8 * 4 + 0x3248));
       temp_v3 = (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v7 + 10);
       temp_v7 = (int)*(short *)(temp_v7 + 8) + (int)*(short *)(temp_v1 + 8);
       temp_v2 = -1;
       FUN_0018152c(temp_v2,temp_v7 + param_1,temp_v3 + param_2,0x88,0);
     }
     else {
-      temp_v2 = FUN_001ab854(temp_v8);
+      temp_v2 = gameGetSlotRecord(temp_v8);
       if (temp_v2 != 0) {
-        FUN_00184e64(*(unsigned int *)(temp_v6 + temp_v8 * 4 + 0x3248));
+        drawSetColorFromRGBA8(*(unsigned int *)(temp_v6 + temp_v8 * 4 + 0x3248));
         temp_v3 = (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v7 + 10);
         temp_v2 = (int)*(short *)(temp_v2 + 0x62);
         temp_v7 = (int)*(short *)(temp_v7 + 8) + (int)*(short *)(temp_v1 + 8);

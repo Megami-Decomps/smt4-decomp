@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00282924(...);
+int btlMainFindEntryByListedId(...);
 int SBORROW4(...);
 int VectorSignedToFloat(...);
 
@@ -20,7 +20,7 @@ struct fn_00228808_arg0 {
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int FUN_0023ea94(void);
 extern int randRange(unsigned int);
-/* Supplied declaration required: FUN_00282924. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 extern unsigned int *btlGetMainState(void);
 extern int __aeabi_idivmod(int, int);
 
@@ -43,7 +43,7 @@ unsigned int FUN_00228808(fn_00228808_arg0 *param_1,unsigned int param_2,int par
     return 1;
   }
   temp_v2 = 0x28;
-  FUN_00282924(puVar1,param_1);
+  btlMainFindEntryByListedId(puVar1,param_1);
   if (puVar1 != (unsigned int *)0x0) {
     temp_v3 = *puVar1;
     if ((temp_v3 & 10) != 0) {

@@ -6,7 +6,7 @@
 extern "C" {
 
 int FUN_0019e290(void);
-int FUN_002e3328(int object);
+int asdOperatorDelete(int object);
 int jobFind(u32 task);                /* nonzero while the task exists */
 int asdMemFree(void *ptr);               /* heap free */
 extern int FUN_004d08d0(u8 *sub);
@@ -27,7 +27,7 @@ u32 mikadoPollShutdown(void)
             if (work->camera != NULL) {
                 FUN_0019e290();
                 if (work->camera != NULL) {
-                    FUN_002e3328(FUN_004d08d0(&work->camera->sub) - 0x110);
+                    asdOperatorDelete(FUN_004d08d0(&work->camera->sub) - 0x110);
                 }
                 work->camera = NULL;
             }

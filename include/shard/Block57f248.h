@@ -27,6 +27,6 @@ typedef struct Block57f248 {
     /* 0x04 */ Record57f248 *record;
 } Block57f248;
 
-extern Block57f248 DAT_0057f248;
+extern Block57f248 g_ifTouch;
 
 #endif

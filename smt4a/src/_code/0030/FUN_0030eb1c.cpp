@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002e3328(void);
+int asdOperatorDelete(void);
 int FUN_002e4e6c(void);
 
-/* Supplied declaration required: FUN_002e3328. */
+/* Supplied declaration required: asdOperatorDelete. */
 /* Supplied declaration required: FUN_002e4e6c. */
 
 
@@ -24,7 +24,7 @@ int * FUN_0030eb1c(int *param_1)
     *(int *)(temp_v0 + 0x1c) = temp_v1;
     if ((temp_v1 == 0) && (*param_1 != 0)) {
       FUN_002e4e6c();
-      FUN_002e3328();
+      asdOperatorDelete();
     }
   }
   return param_1;

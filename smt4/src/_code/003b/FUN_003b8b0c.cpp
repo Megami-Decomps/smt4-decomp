@@ -8,7 +8,7 @@ int FUN_002636b0(void);
 int campGetState(void);
 int FUN_002a4bac(unsigned int);
 int scrScriptProcessDestroy(void);
-int FUN_002ae898(int, unsigned int);
+int asdTMTexTableReleaseNode(int, unsigned int);
 int asdMemFree(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -22,7 +22,7 @@ extern unsigned char g_gameState; /* 0x49f91c */
 /* Supplied declaration required: campGetState. */
 /* Supplied declaration required: FUN_002a4bac. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: FUN_002ae898. */
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
 /* Supplied declaration required: asdMemFree. */
 
 
@@ -57,7 +57,7 @@ void FUN_003b8b0c(int param_1)
     asdMemFree();
     *(unsigned int *)(param_1 + 0xd98) = 0;
   }
-  FUN_002ae898(0x21,*(unsigned int *)(param_1 + 0x90));
+  asdTMTexTableReleaseNode(0x21,*(unsigned int *)(param_1 + 0x90));
   campGetState();
   if ((*(char *)(param_1 + 0xe58) != '\0') && ((*(signed char *)((unsigned char *)&g_gameState + 0x34)) == '\0')) {
     *(unsigned char *)(param_1 + 0xe58) = 0;

@@ -7,13 +7,13 @@ extern "C" {
 int FUN_0024f8a4(void);
 int effEmitterCreateSmall(void);
 int FUN_002691d8(unsigned int, unsigned int, int);
-int FUN_00269334(void);
+int objectBufferFree(void);
 
 extern int FUN_0024c3f8(void);
 /* Supplied declaration required: FUN_0024f8a4. */
 /* Supplied declaration required: effEmitterCreateSmall. */
 /* Supplied declaration required: FUN_002691d8. */
-/* Supplied declaration required: FUN_00269334. */
+/* Supplied declaration required: objectBufferFree. */
 
 
 unsigned int * FUN_00305ab0(int param_1)
@@ -30,7 +30,7 @@ unsigned int * FUN_00305ab0(int param_1)
   FUN_0024f8a4();
   temp_v1 = (unsigned int)*(unsigned short *)(param_1 + 0xc);
   if (puVar2[0xc] != 0) {
-    FUN_00269334();
+    objectBufferFree();
   }
   FUN_002691d8(temp_v1,*puVar2,temp_v0 + 0x1c);
   puVar2[0xc] = temp_v1;

@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdEffectTextureCreate(void);
-int FUN_002c0894(void);
+int asdTextureRelease(void);
 
 extern int DAT_0044ea9c; /* 0x44ea9c */
 extern int DAT_0044eab0; /* 0x44eab0 */
@@ -13,7 +13,7 @@ extern int DAT_0044eab0; /* 0x44eab0 */
 extern int FUN_0024c3d8(int);
 extern int FUN_0028c814(void);
 /* Supplied declaration required: asdEffectTextureCreate. */
-/* Supplied declaration required: FUN_002c0894. */
+/* Supplied declaration required: asdTextureRelease. */
 
 
 void FUN_002e1e58(void)
@@ -24,7 +24,7 @@ void FUN_002e1e58(void)
   int temp_v1;
   
   if (DAT_0044eab0 != 0) {
-    FUN_002c0894();
+    asdTextureRelease();
     DAT_0044eab0 = 0;
   }
   temp_v0 = DAT_0044ea9c;

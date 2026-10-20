@@ -11,10 +11,10 @@ void asdMemFree(void *ptr);
 void *memAlloc(int heap, int alignClass, int unk08, u32 size, int align, int fromFront);
 void *FUN_00291038(void *handle);
 void *FUN_00222180(void *handle);
-void *FUN_00201940(void *object);
-void *FUN_00201890(void *object);
-void FUN_00222434(void *object);
-void FUN_00222104(void *object);
+void *handleRefIncrement(void *object);
+void *handleBlockRefCreate(void *object);
+void handleBlockUnref(void *object);
+void handleBlockRefDrop(void *object);
 
 void effParticleParamCopy(EffParticleParam *dst, EffParticleParam *src)
 {
@@ -31,9 +31,9 @@ void effParticleParamCopy(EffParticleParam *dst, EffParticleParam *src)
         break;
     case 2:
         if (dst->object44) {
-            FUN_00222104(dst->object44);
+            handleBlockRefDrop(dst->object44);
         }
-        dst->object44 = FUN_00201890(src->object44);
+        dst->object44 = handleBlockRefCreate(src->object44);
         break;
     case 5:
         count = src->source->count;
@@ -85,9 +85,9 @@ void effParticleParamCopy(EffParticleParam *dst, EffParticleParam *src)
         break;
     case 7:
         if (dst->object48) {
-            FUN_00222434(dst->object48);
+            handleBlockUnref(dst->object48);
         }
-        dst->object48 = FUN_00201940(src->object48);
+        dst->object48 = handleRefIncrement(src->object48);
         break;
     }
     dst->type = src->type;

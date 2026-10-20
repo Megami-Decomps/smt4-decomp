@@ -7,7 +7,7 @@ extern "C" {
 int asdProcessCreateSimple(...);
 int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
-int FUN_002684ac(...);
+int gameDataBlocksAddFlags(...);
 int FUN_002a2d14(...);
 int FUN_002c76d8(...);
 int FUN_00333574(...);
@@ -26,7 +26,7 @@ extern unsigned char LAB_003c1468; /* 0x3c1468 */
 extern unsigned char LAB_003c1474; /* 0x3c1474 */
 extern unsigned char LAB_003c1480; /* 0x3c1480 */
 extern int work8BufDestroy(...); /* 0x3c6038 */
-extern unsigned char DAT_0057f6bc; /* 0x57f6bc */
+extern unsigned char g_saveLoadProcess; /* 0x57f6bc */
 extern unsigned char DAT_0057f6bd; /* 0x57f6bd */
 extern unsigned char DAT_0057f6be; /* 0x57f6be */
 extern unsigned char DAT_0057f6bf; /* 0x57f6bf */
@@ -34,11 +34,11 @@ extern unsigned char DAT_0057f6c0; /* 0x57f6c0 */
 extern unsigned short DAT_0057f6c2; /* 0x57f6c2 */
 extern unsigned int DAT_0057f6c4; /* 0x57f6c4 */
 
-extern int FUN_0014af84(void);
+extern int gameDataBlocksGetSaveData(void);
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: FUN_002684ac. */
+/* Supplied declaration required: gameDataBlocksAddFlags. */
 /* Supplied declaration required: FUN_002a2d14. */
 /* Supplied declaration required: FUN_002c76d8. */
 /* Supplied declaration required: FUN_00333574. */
@@ -56,10 +56,10 @@ unsigned int FUN_003c12d8(int param_1,unsigned char param_2)
   puVar2 = (unsigned int *)0x100;
   asdMemoryAllocTracked(0x100,0x100,0,0x1c,1);
   FUN_002c76d8(1);
-  FUN_002684ac(1);
+  gameDataBlocksAddFlags(1);
   FUN_00333574(1);
   puVar2[2] = 0;
-  temp_v1 = FUN_0014af84();
+  temp_v1 = gameDataBlocksGetSaveData();
   temp_v0 = *(unsigned char *)(temp_v1 + 3);
   puVar2[4] = (unsigned int)temp_v0;
   if (temp_v0 == 0) {
@@ -84,7 +84,7 @@ unsigned int FUN_003c12d8(int param_1,unsigned char param_2)
   *(unsigned char *)(puVar2 + 6) = param_2;
   taskCreateDraw(&LAB_003c1474,0x86,0,0,FUN_003a7938,0,0,*puVar2);
   taskCreateDraw(&LAB_003c1480,0xe2,0,0,FUN_003a7938,0,0,*puVar2);
-  DAT_0057f6bc = 0;
+  g_saveLoadProcess = 0;
   DAT_0057f6bd = 0;
   DAT_0057f6be = 0;
   puVar2[1] = 6;

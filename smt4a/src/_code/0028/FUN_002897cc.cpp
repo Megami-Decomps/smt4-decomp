@@ -6,9 +6,9 @@ extern "C" {
 
 int FUN_0014afd0(...);
 int jobStop(...);
-int FUN_00169ddc(int);
+int eventQueueAddUnique(int);
 int FUN_00191e00(unsigned int, unsigned int, unsigned int, int);
-int FUN_0019a7f4(...);
+int asdTMTexTableReleaseNode(...);
 int aocHandleButtons(int, int);
 int VectorSignedToFloat(...);
 
@@ -73,11 +73,11 @@ extern int FUN_00162880(void);
 extern int FUN_00162ea4(void);
 /* Supplied declaration required: jobStop. */
 extern unsigned long long jobGetWork(void);
-/* Supplied declaration required: FUN_00169ddc. */
-extern unsigned long long FUN_0018206c(unsigned int, unsigned int);
+/* Supplied declaration required: eventQueueAddUnique. */
+extern unsigned long long asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 extern int FUN_00184964(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00191e00. */
-/* Supplied declaration required: FUN_0019a7f4. */
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
 extern int FUN_001a6508(unsigned int, unsigned int, unsigned int, unsigned int);
 extern int FUN_00203d74(void);
 /* Supplied declaration required: aocHandleButtons. */
@@ -177,7 +177,7 @@ unsigned int FUN_002897cc(fn_002897cc_arg0 *param_1)
     return 0;
   }
   if (*(int *)(temp_v1 + 0x40) == 1) {
-    temp_v15 = FUN_0018206c(1,*(unsigned int *)(temp_v1 + 0x44));
+    temp_v15 = asdTMTexTableNodeIsLoaded(1,*(unsigned int *)(temp_v1 + 0x44));
     temp_v4 = (unsigned int)((unsigned long long)temp_v15 >> 0x20);
     if ((int)temp_v15 == 0) {
       return 0;
@@ -225,7 +225,7 @@ unsigned int FUN_002897cc(fn_002897cc_arg0 *param_1)
   }
   if (*(char *)(temp_v1 + 0x88) != '\0') {
     if (*(char *)(temp_v1 + 0x94) == '\0') {
-      FUN_00169ddc(0x1000212);
+      eventQueueAddUnique(0x1000212);
       *(unsigned char *)(temp_v1 + 0x94) = 1;
     }
     *(int *)(temp_v1 + 0x90) = (*(int *)(temp_v1 + 0x90) + 1) % 0x96;
@@ -263,7 +263,7 @@ unsigned int FUN_002897cc(fn_002897cc_arg0 *param_1)
       else {
         if (*(char *)(temp_v1 + 0x95) == '\0') {
           *(unsigned char *)(temp_v1 + 0x95) = 1;
-          FUN_00169ddc(0x1000213);
+          eventQueueAddUnique(0x1000213);
         }
         *(float *)(temp_v1 + 0x24) = *(float *)(temp_v1 + 0x24) + *(float *)(temp_v1 + 0x28);
       }
@@ -318,7 +318,7 @@ unsigned int FUN_002897cc(fn_002897cc_arg0 *param_1)
     temp_v0 = (unsigned char)(temp_v4 >> 0x18);
     if ((!(unsigned char)((temp_v0 >> 5) & 1) || (unsigned char)(temp_v0 >> 6)) &&
        (*(float *)(temp_v1 + 0x2c) = temp_v9, -1 < *(int *)(temp_v1 + 0x48))) {
-      FUN_0019a7f4(*(unsigned int *)(temp_v1 + 0x40));
+      asdTMTexTableReleaseNode(*(unsigned int *)(temp_v1 + 0x40));
       *(unsigned int *)(temp_v1 + 0x48) = 0xffffffff;
     }
   }

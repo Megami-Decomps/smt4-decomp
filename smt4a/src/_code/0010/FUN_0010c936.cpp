@@ -24,7 +24,7 @@ typedef struct Entry {
 
 void FUN_001221e4(void);
 s32 FUN_002ea6fc(u32 object, u8 *status);
-void FUN_002e9afe(u32 object, Name *name);
+void vectorCopyHeader(u32 object, Name *name);
 
 /* Clears `object`'s status and, when that succeeds and the entry has a source, stores the source's name for the entry's key and clears the status again. */
 void FUN_0010c936(u32 object, Entry *entry)
@@ -39,7 +39,7 @@ void FUN_0010c936(u32 object, Entry *entry)
     failed = FUN_002ea6fc(object, &status);
     if (failed == 0 && entry->source != NULL) {
         entry->source->vtbl->getName(&name, entry->source, entry->key);
-        FUN_002e9afe(object, &name);
+        vectorCopyHeader(object, &name);
         statusAfter = 0;
         FUN_002ea6fc(object, &statusAfter);
     }

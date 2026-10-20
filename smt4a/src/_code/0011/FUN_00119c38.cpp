@@ -8,8 +8,8 @@ int FUN_002e7908(int *, int *);
 int FUN_002e791c(int, int *, int, int);
 int FUN_002ea20c(unsigned int *);
 int FUN_002f6be2(int *, int *);
-int FUN_002f6bf0(int);
-int FUN_002f7cb0(int *);
+int operatorDeleteArrayNullable(int);
+int onlineJobSetStateWaiting(int *);
 int FUN_002f7cba(int *, int *, unsigned int);
 
 typedef int romwright_code(...);
@@ -26,15 +26,15 @@ typedef struct {
 
 extern unsigned char LAB_00119d18; /* 0x119d18 */
 
-extern int FUN_002e760a(unsigned int);
+extern int operatorNew(unsigned int);
 /* Supplied declaration required: FUN_002e7908. */
 /* Supplied declaration required: FUN_002e791c. */
 /* Supplied declaration required: FUN_002ea20c. */
 extern unsigned int FUN_002ea3c0(int, unsigned int, unsigned int, unsigned char *);
 extern int FUN_002eab1c(int *, unsigned int *);
 /* Supplied declaration required: FUN_002f6be2. */
-/* Supplied declaration required: FUN_002f6bf0. */
-/* Supplied declaration required: FUN_002f7cb0. */
+/* Supplied declaration required: operatorDeleteArrayNullable. */
+/* Supplied declaration required: onlineJobSetStateWaiting. */
 /* Supplied declaration required: FUN_002f7cba. */
 
 
@@ -76,8 +76,8 @@ void FUN_00119c38(int *param_1)
   temp_v2 = temp_v8;
   FUN_002e791c(temp_v0,temp_v7,0,param_1[0x1c]);
   if (temp_v0 != 0) {
-    FUN_002f7cb0(param_1);
-    temp_v0 = FUN_002e760a(0x10);
+    onlineJobSetStateWaiting(param_1);
+    temp_v0 = operatorNew(0x10);
     temp_v1 = 0;
     if (temp_v0 != 0) {
       temp_v1 = FUN_002ea3c0(temp_v0,0x119b69,0,&LAB_00119d18);
@@ -89,7 +89,7 @@ void FUN_00119c38(int *param_1)
     temp_v1 = FUN_002e7908(&temp_v2,&temp_v5);
     (**(romwright_code **)(*param_1 + 0x34))(param_1,temp_v1);
   }
-  FUN_002f6bf0(temp_v8);
+  operatorDeleteArrayNullable(temp_v8);
   return;
 }
 

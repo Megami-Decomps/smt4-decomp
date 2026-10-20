@@ -6,7 +6,7 @@ extern "C" {
 
 extern int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
-extern unsigned int FUN_001a6f60(int, unsigned int);
+extern unsigned int dataTableFileGetTable(int, unsigned int);
 
 
 unsigned short * FUN_003ecd24(int param_1,unsigned int param_2)
@@ -21,7 +21,7 @@ unsigned short * FUN_003ecd24(int param_1,unsigned int param_2)
   if (*(int *)(param_1 + 0x2284) == 0) {
     return (unsigned short *)0x0;
   }
-  temp_v0 = FUN_001a6f60(*(int *)(param_1 + 0x2284),0);
+  temp_v0 = dataTableFileGetTable(*(int *)(param_1 + 0x2284),0);
   temp_v1 = dataTableGetEntries();
   temp_v2 = dataTableGetCount(temp_v0);
   temp_v3 = 0;

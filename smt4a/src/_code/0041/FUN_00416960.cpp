@@ -4,15 +4,15 @@
 
 extern "C" {
 
-int FUN_0014bf2c(...);
+int objFlagsSetBits(...);
 int FUN_0014e188(unsigned int *, int, unsigned int, int, int);
 int FUN_00151408(unsigned int, int, int);
 int FUN_001527d8(int, int);
-int FUN_00184b80(unsigned int *, int);
-int FUN_00184c00(unsigned int *, int, int);
+int pairSetFirstResetSecond(unsigned int *, int);
+int uiSpriteSetImageKeyframe(unsigned int *, int, int);
 int FUN_00184c40(unsigned int *, int, int);
 int FUN_0019e330(unsigned int *, int, int);
-int FUN_00237210(void);
+int asdMemFreeSlot(void);
 int FUN_002a1850(unsigned int *, int, unsigned int, unsigned char [16]);
 int FUN_002a1f60(...);
 int FUN_00416388(int, int, unsigned int *);
@@ -24,16 +24,16 @@ typedef struct {
 
 extern int btlGetMainState(void);
 extern int spriteHandleCreate(unsigned int);
-/* Supplied declaration required: FUN_0014bf2c. */
+/* Supplied declaration required: objFlagsSetBits. */
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: FUN_00151408. */
 /* Supplied declaration required: FUN_001527d8. */
 extern unsigned int FUN_00152f54(void);
-/* Supplied declaration required: FUN_00184b80. */
-/* Supplied declaration required: FUN_00184c00. */
+/* Supplied declaration required: pairSetFirstResetSecond. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_00184c40. */
 /* Supplied declaration required: FUN_0019e330. */
-/* Supplied declaration required: FUN_00237210. */
+/* Supplied declaration required: asdMemFreeSlot. */
 /* Supplied declaration required: FUN_002a1850. */
 /* Supplied declaration required: FUN_002a1f60. */
 extern unsigned int FUN_0033885c(unsigned int, unsigned int);
@@ -67,7 +67,7 @@ void FUN_00416960(int param_1,int param_2,unsigned int param_3)
   iStack_20 = param_2;
   uStack_1c = param_3;
   if (puVar4[0x2a] != 0) {
-    FUN_00237210();
+    asdMemFreeSlot();
     puVar4[0x2a] = 0;
   }
   puVar4[0x2b] = 0;
@@ -77,8 +77,8 @@ void FUN_00416960(int param_1,int param_2,unsigned int param_3)
   puVar4[1] = 0;
   temp_v3 = 1.0f;
   FUN_0014e188(puVar4 + 5,8,0xffffffff,param_1 + 0x840,0xb);
-  FUN_00184b80(puVar4 + 5,0x8b);
-  FUN_00184c00(puVar4 + 5,4,0);
+  pairSetFirstResetSecond(puVar4 + 5,0x8b);
+  uiSpriteSetImageKeyframe(puVar4 + 5,4,0);
   FUN_0019e330(puVar4 + 5,6,0);
   temp_v0 = FUN_00152f54();
   FUN_002a1850(puVar4 + 2,0,temp_v0,temp_v4);
@@ -95,8 +95,8 @@ void FUN_00416960(int param_1,int param_2,unsigned int param_3)
   }
   FUN_001527d8(temp_v2,0x320202ff);
   FUN_00151408(puVar4[0x2a],0,0x646464ff);
-  FUN_0014bf2c(puVar4[0x2a],8);
-  FUN_0014bf2c(puVar4[0x2a],0x100);
+  objFlagsSetBits(puVar4[0x2a],8);
+  objFlagsSetBits(puVar4[0x2a],0x100);
   FUN_002a1f60(puVar4[0x2a],3,0xffffffff,0,3,*(unsigned int *)(temp_v1 + 0x4d64),*puVar4);
   temp_v0 = FUN_0033885c(puVar4[0x2a],0);
   puVar4[0x2b] = temp_v0;

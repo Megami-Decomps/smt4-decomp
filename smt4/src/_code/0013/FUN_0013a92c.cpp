@@ -17,7 +17,7 @@ typedef struct {
 
 extern unsigned char g_dspsndState; /* 0x4e6f64 */
 
-extern int FUN_002bb274(unsigned char);
+extern int nn_snd_CTR_Dspsnd_IsInitialized(unsigned char);
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
 /* Supplied declaration required: nn_snd_CTR_Dspsnd_EnableAuxBus. */
@@ -93,7 +93,7 @@ void FUN_0013a92c(char *param_1,float param_2)
   param_1[0x28] = -1;
   param_1[0x29] = '\x7f';
   temp_v0 = nn_snd_CTR_Dspsnd_SetSurroundDepth((unsigned int)&g_dspsndState,0x7fff);
-  temp_v1 = FUN_002bb274(temp_v0);
+  temp_v1 = nn_snd_CTR_Dspsnd_IsInitialized(temp_v0);
   if (temp_v1 != 0) {
     param_1[1] = '\x01';
     nn_snd_CTR_Dspsnd_SetClippingMode(&g_dspsndState,1);

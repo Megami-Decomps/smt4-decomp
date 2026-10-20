@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002691d8(unsigned int, unsigned int, unsigned int);
-int FUN_00269334(void);
+int objectBufferFree(void);
 int memAlloc(int, int, int, unsigned int, int, int);
 int asdMemFree(void);
 int FUN_003024d0(unsigned int *, int);
@@ -16,7 +16,7 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: FUN_002691d8. */
-/* Supplied declaration required: FUN_00269334. */
+/* Supplied declaration required: objectBufferFree. */
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_003024d0. */
@@ -31,7 +31,7 @@ void FUN_00313760(unsigned int *param_1,unsigned int param_2,unsigned int param_
   unsigned int temp_v2;
   
   if (param_1[0x27] != 0) {
-    FUN_00269334();
+    objectBufferFree();
   }
   param_2 = param_2 & 0xffff;
   FUN_002691d8(param_2,*param_1,param_3);

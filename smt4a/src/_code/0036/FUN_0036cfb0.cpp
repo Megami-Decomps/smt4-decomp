@@ -5,11 +5,11 @@
 extern "C" {
 
 int sysPlaySe(int);
-int FUN_001ab854(...);
+int gameGetSlotRecord(...);
 int cecProcessStart(void);
-int FUN_00237680(void);
+int cecProcessDestroy(void);
 int FUN_00275bc8(void);
-int FUN_00275f44(...);
+int scrScriptProcessStartEntry(...);
 int FUN_002a6480(int);
 int FUN_0031d890(void);
 int cecProcessCall4(void);
@@ -31,13 +31,13 @@ struct fn_0036cfb0_arg0 {
 };
 
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_001ab854. */
-extern int FUN_001ab888(void);
+/* Supplied declaration required: gameGetSlotRecord. */
+extern int gameGetSlotTable(void);
 extern int FUN_00224880(int);
 /* Supplied declaration required: cecProcessStart. */
-/* Supplied declaration required: FUN_00237680. */
+/* Supplied declaration required: cecProcessDestroy. */
 /* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_002a6480. */
 /* Supplied declaration required: FUN_0031d890. */
 /* Supplied declaration required: cecProcessCall4. */
@@ -68,14 +68,14 @@ unsigned int FUN_0036cfb0(fn_0036cfb0_arg0 *param_1)
     else {
       temp_v0 = FUN_00224880(param_1->field_0xf4);
       if (temp_v0 == 2) {
-        temp_v0 = FUN_001ab888();
+        temp_v0 = gameGetSlotTable();
         temp_v3 = 0;
         do {
           if (-1 < *(char *)(temp_v0 + temp_v3 + 0x1c88)) {
-            temp_v1 = FUN_001ab854();
+            temp_v1 = gameGetSlotRecord();
             temp_v2 = bitsAt60Test(temp_v1,2);
             if (temp_v2 != 0) {
-              temp_v1 = FUN_001ab854((int)*(char *)(temp_v0 + temp_v3 + 0x1c88));
+              temp_v1 = gameGetSlotRecord((int)*(char *)(temp_v0 + temp_v3 + 0x1c88));
               bitsAt60Clear(temp_v1,4);
             }
           }
@@ -83,7 +83,7 @@ unsigned int FUN_0036cfb0(fn_0036cfb0_arg0 *param_1)
         } while (temp_v3 < 0x18);
         FUN_002a6480(0);
         FUN_0031d890();
-        FUN_00275f44(param_1->field_0xf4,0x1e);
+        scrScriptProcessStartEntry(param_1->field_0xf4,0x1e);
         param_1->field_0x150 = param_1->field_0x150 + 1;
       }
     }
@@ -93,11 +93,11 @@ unsigned int FUN_0036cfb0(fn_0036cfb0_arg0 *param_1)
     if ((temp_v0 != 0) && (param_1->field_0xe8 != 0)) {
       FUN_00275bc8();
       param_1->field_0xf4 = temp_v0;
-      FUN_00275f44();
+      scrScriptProcessStartEntry();
       sysPlaySe(0x3e);
       cecProcessStart();
       cecProcessCall4();
-      FUN_00237680();
+      cecProcessDestroy();
       FUN_002a6480(0);
       param_1->field_0x150 = param_1->field_0x150 + 1;
     }

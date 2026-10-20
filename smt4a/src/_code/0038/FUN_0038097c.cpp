@@ -12,7 +12,7 @@ int btlUnitGet(unsigned int);
 extern unsigned int g_btlScriptUnit; /* 0x57113c */
 
 extern int btlGetMainState(void);
-extern unsigned int FUN_001ab854(int);
+extern unsigned int gameGetSlotRecord(int);
 /* Supplied declaration required: scrGetArg. */
 /* Supplied declaration required: scrSetResult. */
 /* Supplied declaration required: FUN_003f0e20. */
@@ -42,7 +42,7 @@ unsigned int FUN_0038097c(void)
     temp_v1 = (unsigned int)*(unsigned short *)(temp_v2 + 0x274) & (1 << (temp_v1 & 0xff));
   }
   else {
-    temp_v3 = FUN_001ab854(temp_v0 - 0x6d);
+    temp_v3 = gameGetSlotRecord(temp_v0 - 0x6d);
     temp_v1 = bitsAt60Test(temp_v3,temp_v1 & 0xffff);
   }
   scrSetResult(temp_v1 != 0);

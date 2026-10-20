@@ -9,7 +9,7 @@ int FUN_00134f44(int, int, int **);
 int FUN_002e6e34(unsigned char [12], int);
 int FUN_002e6e5c(unsigned char [12]);
 int FUN_002eaba4(int, int *);
-int FUN_002efb90(int, int);
+int pairCopyIfNotNull(int, int);
 int FUN_002efb9e(int, unsigned int, int, int);
 int FUN_002efbd8(int *);
 
@@ -28,7 +28,7 @@ extern unsigned char DAT_005949d8; /* 0x5949d8 */
 /* Supplied declaration required: FUN_002e6e5c. */
 /* Supplied declaration required: FUN_002eaba4. */
 extern int FUN_002eb5f4(void);
-/* Supplied declaration required: FUN_002efb90. */
+/* Supplied declaration required: pairCopyIfNotNull. */
 /* Supplied declaration required: FUN_002efb9e. */
 /* Supplied declaration required: FUN_002efbd8. */
 
@@ -55,7 +55,7 @@ void FUN_002ef268(int *param_1,int param_2)
   temp_v5 = param_1;
   if (temp_v1 != *(int *)(temp_v0 + 0x390)) {
     *(int *)(temp_v0 + 0x38c) = temp_v1 + 8;
-    FUN_002efb90(temp_v0 + 0x388,temp_v1);
+    pairCopyIfNotNull(temp_v0 + 0x388,temp_v1);
   }
   else {
     FUN_00134f44(temp_v0 + 0x388,temp_v1,&temp_v5);

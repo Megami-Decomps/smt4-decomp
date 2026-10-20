@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_00205bf4(void);
-int FUN_002917b8(void);
+int buttonHelpRelease(void);
 int FUN_002958f8(...);
 int asdTMTexTableFreeEntry(int);
-int FUN_002ae898(int, int, unsigned int, unsigned int, unsigned int, unsigned int);
-int FUN_002b8cc8(void);
+int asdTMTexTableReleaseNode(int, int, unsigned int, unsigned int, unsigned int, unsigned int);
+int ifTouchRegionRemove(void);
 int asdMemFree(...);
 int FUN_002d661c(void);
 
@@ -23,14 +23,14 @@ extern unsigned int DAT_0043da30; /* 0x43da30 */
 extern unsigned int DAT_0043da34; /* 0x43da34 */
 
 /* Supplied declaration required: FUN_00205bf4. */
-/* Supplied declaration required: FUN_002917b8. */
+/* Supplied declaration required: buttonHelpRelease. */
 /* Supplied declaration required: FUN_002958f8. */
 /* Supplied declaration required: asdTMTexTableFreeEntry. */
-/* Supplied declaration required: FUN_002ae898. */
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
 extern int FUN_002b6a54(int, unsigned short);
 extern int FUN_002b6ad0(void);
 extern int gameGetOptions(void);
-/* Supplied declaration required: FUN_002b8cc8. */
+/* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002d661c. */
 
@@ -70,18 +70,18 @@ void FUN_00287188(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   temp_v2 = 0;
   if (temp_v2 < *(short *)(param_1 + 0x5714)) {
     do {
-      FUN_002b8cc8();
+      ifTouchRegionRemove();
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < *(short *)(param_1 + 0x5714));
   }
   *(unsigned short *)(param_1 + 0x5714) = 0;
-  FUN_002917b8();
+  buttonHelpRelease();
   DAT_0043da29 = DAT_0043da29 - '\x01';
   if (DAT_0043da29 < '\x01') {
     FUN_002d661c();
     asdMemFree(DAT_0043da30);
     asdMemFree(DAT_0043da34);
-    FUN_002ae898(0x12,0,param_3,param_4,unaff_r4,in_lr);
+    asdTMTexTableReleaseNode(0x12,0,param_3,param_4,unaff_r4,in_lr);
     asdTMTexTableFreeEntry(0x12);
     DAT_0043da29 = '\0';
   }

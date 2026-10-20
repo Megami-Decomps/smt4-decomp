@@ -18,7 +18,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_001643b4. */
-extern int FUN_0018206c(unsigned int, int);
+extern int asdTMTexTableNodeIsLoaded(unsigned int, int);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern unsigned int dataTableGetEntries(void);
@@ -51,7 +51,7 @@ void FUN_003f5904(int param_1)
   }
   temp_v1 = 0;
   do {
-    temp_v2 = FUN_0018206c(0x31,temp_v1);
+    temp_v2 = asdTMTexTableNodeIsLoaded(0x31,temp_v1);
     if (temp_v2 == 0) {
       return;
     }

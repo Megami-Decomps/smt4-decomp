@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0014afd0(int, int);
-int FUN_0019a7f4(int, int);
+int asdTMTexTableReleaseNode(int, int);
 int FUN_00235bfc(int, int, unsigned int, unsigned int);
 int FUN_00297024(...);
 int FUN_0033f42c(void);
@@ -20,7 +20,7 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_2_stack;
 
-extern int DAT_005821c4; /* 0x5821c4 */
+extern int g_mapTable; /* 0x5821c4 */
 extern int DAT_005821c8; /* 0x5821c8 */
 extern int DAT_005821d0; /* 0x5821d0 */
 extern unsigned int DAT_005821d4; /* 0x5821d4 */
@@ -56,7 +56,7 @@ extern unsigned int DAT_005f1c44; /* 0x5f1c44 */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0014afd0. */
 extern int FUN_00153f64(unsigned int, int);
-/* Supplied declaration required: FUN_0019a7f4. */
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
 /* Supplied declaration required: FUN_00235bfc. */
 /* Supplied declaration required: FUN_00297024. */
 /* Supplied declaration required: FUN_0033f42c. */
@@ -87,7 +87,7 @@ void FUN_00297988(int param_1,int param_2)
     DAT_005821f0 = 0;
   }
   DAT_005f1c0c = DAT_005821f0;
-  psVar2 = (short *)(DAT_005821c4 + DAT_005821f0 * 0x30);
+  psVar2 = (short *)(g_mapTable + DAT_005821f0 * 0x30);
   DAT_005f1c14 = (int)*psVar2;
   DAT_005f1c18 = (int)psVar2[1];
   DAT_005f1c1c = (int)psVar2[2];
@@ -106,7 +106,7 @@ void FUN_00297988(int param_1,int param_2)
   DAT_005821dc = temp_v1;
   *(int *)(DAT_005821c8 + temp_v1 * 0x124) = (int)psVar2[3];
   if (DAT_005821f4 != 0) {
-    FUN_0019a7f4(0x2d,DAT_005821f8);
+    asdTMTexTableReleaseNode(0x2d,DAT_005821f8);
     DAT_005821f4 = 0;
   }
   DAT_005821f8 = temp_v1;

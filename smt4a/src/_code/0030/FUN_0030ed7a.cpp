@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern short FUN_00100790(void);
+extern short libc_toupper(void);
 
 
 void FUN_0030ed7a(int param_1)
@@ -18,7 +18,7 @@ void FUN_0030ed7a(int param_1)
     return;
   }
   for (; *psVar2 != 0; psVar2 = psVar2 + 1) {
-    temp_v0 = FUN_00100790();
+    temp_v0 = libc_toupper();
     *psVar2 = temp_v0;
   }
   return;

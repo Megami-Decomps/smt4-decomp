@@ -4,16 +4,16 @@
 
 extern "C" {
 
-int FUN_00184758(int, int, int);
+int uiSpriteSetKeyframe(int, int, int);
 int FUN_0026fa30(void);
 int FUN_002a4914(int, int);
 int FUN_002a4964(int, int);
 int FUN_003f5220(unsigned int, unsigned int);
 
-extern int DAT_0057f268; /* 0x57f268 */
+extern int g_partyPanel; /* 0x57f268 */
 
-/* Supplied declaration required: FUN_00184758. */
-extern int FUN_001ab888(void);
+/* Supplied declaration required: uiSpriteSetKeyframe. */
+extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_0026fa30. */
 /* Supplied declaration required: FUN_002a4914. */
 /* Supplied declaration required: FUN_002a4964. */
@@ -30,8 +30,8 @@ unsigned int FUN_00372570(int param_1)
   int temp_v3;
   unsigned int temp_v4;
   
-  temp_v0 = DAT_0057f268;
-  temp_v2 = FUN_001ab888();
+  temp_v0 = g_partyPanel;
+  temp_v2 = gameGetSlotTable();
   temp_v4 = 0;
   if ((0 < *(int *)(temp_v0 + 0x9b8)) &&
      (temp_v2 = (int)*(char *)(*(int *)(temp_v0 + 0x9b8) + temp_v2 + 0x1c9f), -1 < temp_v2)) {
@@ -51,11 +51,11 @@ unsigned int FUN_00372570(int param_1)
             temp_v2 = 0;
             *(unsigned int *)(temp_v0 + 0x2c) = 0;
           }
-          temp_v1 = DAT_0057f268;
+          temp_v1 = g_partyPanel;
           if (param_1 == 0 && temp_v2 == 1) {
             temp_v4 = 1;
-            *(unsigned int *)(DAT_0057f268 + 0x2c) = *(unsigned int *)(DAT_0057f268 + 0x2c) ^ 1;
-            FUN_00184758(temp_v1 + 0x180,5,0);
+            *(unsigned int *)(g_partyPanel + 0x2c) = *(unsigned int *)(g_partyPanel + 0x2c) ^ 1;
+            uiSpriteSetKeyframe(temp_v1 + 0x180,5,0);
             temp_v2 = 0;
             do {
               FUN_003f5220(*(unsigned int *)(temp_v1 + temp_v2 * 4 + 0xa10),*(unsigned int *)(temp_v1 + 0x2c))
@@ -81,11 +81,11 @@ unsigned int FUN_00372570(int param_1)
           temp_v2 = 1;
           *(unsigned int *)(temp_v0 + 0x2c) = 1;
         }
-        temp_v1 = DAT_0057f268;
+        temp_v1 = g_partyPanel;
         if (param_1 == 0 && temp_v2 == 0) {
           temp_v4 = 1;
-          *(unsigned int *)(DAT_0057f268 + 0x2c) = *(unsigned int *)(DAT_0057f268 + 0x2c) ^ 1;
-          FUN_00184758(temp_v1 + 0x180,4,0);
+          *(unsigned int *)(g_partyPanel + 0x2c) = *(unsigned int *)(g_partyPanel + 0x2c) ^ 1;
+          uiSpriteSetKeyframe(temp_v1 + 0x180,4,0);
           temp_v2 = 0;
           do {
             FUN_003f5220(*(unsigned int *)(temp_v1 + temp_v2 * 4 + 0xa10),*(unsigned int *)(temp_v1 + 0x2c));

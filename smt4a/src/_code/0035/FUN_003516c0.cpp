@@ -10,7 +10,7 @@ int mtx44Copy(...);
 int FUN_0019a0fc(...);
 int FUN_001d3e14(...);
 int FUN_001d3e54(...);
-int FUN_00212500(...);
+int refCountIncrement(...);
 int FUN_00290c28(...);
 int FUN_00290e04(...);
 int FUN_00291644(...);
@@ -138,10 +138,10 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_0018a924. */
 /* Supplied declaration required: mtx44Copy. */
 /* Supplied declaration required: FUN_0019a0fc. */
-extern int FUN_001acf08(void);
+extern int effGetFrameStep(void);
 /* Supplied declaration required: FUN_001d3e14. */
 /* Supplied declaration required: FUN_001d3e54. */
-/* Supplied declaration required: FUN_00212500. */
+/* Supplied declaration required: refCountIncrement. */
 /* Supplied declaration required: FUN_00290c28. */
 /* Supplied declaration required: FUN_00290e04. */
 /* Supplied declaration required: FUN_00291644. */
@@ -262,7 +262,7 @@ void FUN_003516c0(int param_1)
   float temp_v88;
   int temp_v89;
   
-  temp_v1 = FUN_001acf08();
+  temp_v1 = effGetFrameStep();
   *(int *)(param_1 + 0x2c) = temp_v1 + *(int *)(param_1 + 0x2c);
   temp_v4 = *(int *)(param_1 + 0x2c);
   temp_v5 = *(int *)(param_1 + 0xbc);
@@ -334,7 +334,7 @@ void FUN_003516c0(int param_1)
     temp_v69 = (temp_v1 << 0x10) | (temp_v3 & 0xffff);
     temp_v70 = (temp_v2 & 0xffff) | (temp_v1 << 0x10);
     temp_v71 = (temp_v3 & 0xffff) | (temp_v4 << 0x10);
-    FUN_00212500(temp_v77);
+    refCountIncrement(temp_v77);
   }
   else if (*(int *)(param_1 + 0x140) != 0) {
     FUN_00291644(*(int *)(param_1 + 0x140),temp_v4,&temp_v82);
@@ -358,7 +358,7 @@ void FUN_003516c0(int param_1)
     temp_v77 = temp_v85;
     temp_v74 = temp_v11;
     fStack_cc = temp_v11;
-    FUN_00212500(temp_v77);
+    refCountIncrement(temp_v77);
   }
   else {
     childHolderCopyOut(puVar9,&temp_v80);

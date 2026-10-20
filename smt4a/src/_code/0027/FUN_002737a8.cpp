@@ -7,7 +7,7 @@ extern "C" {
 int FUN_003fd76c(int, int *);
 int FUN_003fdb18(int);
 
-int FUN_001aea28(unsigned int);
+int ptrListRemoveClearOwner(unsigned int);
 int FUN_001f3eec(void);
 int FUN_00281b94(int);
 int FUN_00294854(void);
@@ -31,17 +31,17 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } void_stack;
 
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
-extern int *DAT_00580ca0; /* 0x580ca0 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
+extern int *g_mapGimic; /* 0x580ca0 */
 extern int g_gameState; /* 0x5f15fc */
 extern int DAT_005f1600; /* 0x5f1600 */
 extern signed char DAT_005f161f; /* 0x5f161f */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_00162e8c(void);
+extern int gameFlagsGetBlock(void);
 extern int FUN_0016345c(void);
-extern int FUN_0018719c(unsigned int);
-/* Supplied declaration required: FUN_001aea28. */
+extern int gameFlagIsSet(unsigned int);
+/* Supplied declaration required: ptrListRemoveClearOwner. */
 /* Supplied declaration required: FUN_001f3eec. */
 /* Supplied declaration required: FUN_00281b94. */
 /* Supplied declaration required: FUN_00294854. */
@@ -91,19 +91,19 @@ void FUN_002737a8(void)
   unsigned long long temp_v9;
   unsigned long long temp_v10;
   
-  temp_v0 = FUN_00162e8c();
-  if ((char)DAT_00580ca0[1] != '\0') {
-    temp_v0 = *DAT_00580ca0;
+  temp_v0 = gameFlagsGetBlock();
+  if ((char)g_mapGimic[1] != '\0') {
+    temp_v0 = *g_mapGimic;
     if (temp_v0 == 0) {
       temp_v0 = 0x22;
       do {
         temp_v4 = temp_v0 * 0xf;
-        temp_v1 = DAT_00580ca0[temp_v0 * 0xf + 0x2a];
+        temp_v1 = g_mapGimic[temp_v0 * 0xf + 0x2a];
         if (temp_v1 != 0) {
           temp_v4 = *(int *)(temp_v1 + 4);
         }
         if (temp_v1 != 0 && temp_v4 != 0) {
-          FUN_001aea28(DAT_0056fcc0);
+          ptrListRemoveClearOwner(g_handleRegistry);
         }
         temp_v0 = temp_v0 - 1;
       } while (-1 < temp_v0);
@@ -117,14 +117,14 @@ void FUN_002737a8(void)
         if (temp_v0 != 0) {
           temp_v0 = 0;
           do {
-            if (((char)DAT_00580ca0[temp_v0 * 0xf + 0x24] != '\0') &&
-               (*(short *)((int)DAT_00580ca0 + temp_v0 * 0x3c + 0xa6) == 0xc)) {
-              FUN_00281b94((int)(short)DAT_00580ca0[temp_v0 * 0xf + 0x2b]);
+            if (((char)g_mapGimic[temp_v0 * 0xf + 0x24] != '\0') &&
+               (*(short *)((int)g_mapGimic + temp_v0 * 0x3c + 0xa6) == 0xc)) {
+              FUN_00281b94((int)(short)g_mapGimic[temp_v0 * 0xf + 0x2b]);
             }
-            piVar1 = DAT_00580ca0;
+            piVar1 = g_mapGimic;
             temp_v0 = temp_v0 + 1;
           } while (temp_v0 < 0x23);
-          *(unsigned char *)(DAT_00580ca0 + 1) = 0;
+          *(unsigned char *)(g_mapGimic + 1) = 0;
           *piVar1 = 0;
           return;
         }
@@ -135,26 +135,26 @@ void FUN_002737a8(void)
     else {
       FUN_00294854();
     }
-    *DAT_00580ca0 = *DAT_00580ca0 + 1;
+    *g_mapGimic = *g_mapGimic + 1;
   }
   else {
-    if ((char)DAT_00580ca0[0x26d] != '\0') {
-      temp_v6 = *(unsigned int *)(*(int *)(DAT_00580ca0[0x272] + 4) + 4);
+    if ((char)g_mapGimic[0x26d] != '\0') {
+      temp_v6 = *(unsigned int *)(*(int *)(g_mapGimic[0x272] + 4) + 4);
       if (DAT_005f161f != '\0') {
         temp_v6 = temp_v6 | 3;
       }
       else {
         temp_v6 = temp_v6 & 0xfffffffc;
       }
-      *(unsigned int *)(*(int *)(DAT_00580ca0[0x272] + 4) + 4) = temp_v6;
+      *(unsigned int *)(*(int *)(g_mapGimic[0x272] + 4) + 4) = temp_v6;
     }
     temp_v9 = 0x40e0000000000000;
     temp_v10 = 0x3f80000040a00000;
     temp_v4 = 0;
     do {
-      piVar1 = DAT_00580ca0;
-      if ((char)DAT_00580ca0[temp_v4 * 0xf + 0x24] != '\0') {
-        temp_v1 = *(int *)(DAT_00580ca0[temp_v4 * 0xf + 0x2a] + 4);
+      piVar1 = g_mapGimic;
+      if ((char)g_mapGimic[temp_v4 * 0xf + 0x24] != '\0') {
+        temp_v1 = *(int *)(g_mapGimic[temp_v4 * 0xf + 0x2a] + 4);
         if (DAT_005f161f != '\0') {
           *(unsigned int *)(temp_v1 + 4) = *(unsigned int *)(temp_v1 + 4) | 3;
         }
@@ -174,13 +174,13 @@ void FUN_002737a8(void)
                 in_s0 = (int)temp_v9;
                 FUN_003fe86c(temp_v1,0,2);
                 temp_v2 = 2;
-                DAT_00580ca0[0x1b] = temp_v2;
+                g_mapGimic[0x1b] = temp_v2;
                 break;
               case 2:
                 FUN_004ff920(temp_v1);
-                piVar2 = DAT_00580ca0;
+                piVar2 = g_mapGimic;
                 if (in_s0 >= 0x42700000) {
-                  DAT_00580ca0[0x1b] = 3;
+                  g_mapGimic[0x1b] = 3;
                   piVar2[0x1c] = 0;
                 }
                 break;
@@ -189,14 +189,14 @@ void FUN_002737a8(void)
                 temp_v8 = -255.0f;
                 FUN_001f3eec();
                 in_s0 = (int)temp_v8;
-                DAT_00580ca0[0x1c] = DAT_00580ca0[0x1c] + 1;
+                g_mapGimic[0x1c] = g_mapGimic[0x1c] + 1;
                 FUN_002ddda4(in_s0);
                 temp_v2 = FUN_004ffba8(temp_v1);
                 if (temp_v2 == 0) break;
                 in_s0 = (int)temp_v9;
                 FUN_003fe86c(temp_v1,1,2);
                 temp_v2 = 4;
-                DAT_00580ca0[0x1b] = temp_v2;
+                g_mapGimic[0x1b] = temp_v2;
                 break;
               case 4:
                 temp_v7 = 0;
@@ -214,38 +214,38 @@ void FUN_002737a8(void)
             }
           }
           if (*(short *)((int)piVar1 + temp_v4 * 0x3c + 0xa6) == 0x27) {
-            switch(DAT_00580ca0[0x1d]) {
+            switch(g_mapGimic[0x1d]) {
             default:
               break;
             case 1:
               in_s0 = (int)temp_v9;
               FUN_003fe86c(temp_v1,1,2);
               temp_v2 = 2;
-              DAT_00580ca0[0x1d] = temp_v2;
+              g_mapGimic[0x1d] = temp_v2;
               break;
             case 2:
               temp_v2 = FUN_004ffba8(temp_v1);
               if (temp_v2 == 0) break;
               in_s0 = (int)temp_v9;
               FUN_003fe86c(temp_v1,2);
-              DAT_00580ca0[0x1d] = 3;
+              g_mapGimic[0x1d] = 3;
               break;
             case 3:
               *(unsigned char *)(temp_v0 + 0x1525) = 1;
               FUN_00319f64((int)(short)piVar1[temp_v4 * 0xf + 0x2b]);
               temp_v2 = 4;
-              DAT_00580ca0[0x1d] = temp_v2;
+              g_mapGimic[0x1d] = temp_v2;
             }
           }
           if (*(short *)((int)piVar1 + temp_v4 * 0x3c + 0xa6) == 0x28) {
-            switch(DAT_00580ca0[0x1e]) {
+            switch(g_mapGimic[0x1e]) {
             default:
               break;
             case 1:
               in_s0 = (int)temp_v9;
               FUN_003fe86c(temp_v1,1,2);
               temp_v2 = 2;
-              DAT_00580ca0[0x1e] = temp_v2;
+              g_mapGimic[0x1e] = temp_v2;
               break;
             case 2:
               temp_v2 = FUN_004ffba8(temp_v1);
@@ -253,24 +253,24 @@ void FUN_002737a8(void)
               in_s0 = (int)temp_v9;
               FUN_003fe86c(temp_v1,2);
               temp_v2 = 3;
-              DAT_00580ca0[0x1e] = temp_v2;
+              g_mapGimic[0x1e] = temp_v2;
               break;
             case 3:
               *(unsigned char *)(temp_v0 + 0x1524) = 1;
               FUN_00319f64((int)(short)piVar1[temp_v4 * 0xf + 0x2b]);
-              DAT_00580ca0[0x1e] = 4;
+              g_mapGimic[0x1e] = 4;
               break;
             }
           }
           if (*(short *)((int)piVar1 + temp_v4 * 0x3c + 0xa6) == 0x29) {
-            switch(DAT_00580ca0[0x1f]) {
+            switch(g_mapGimic[0x1f]) {
             default:
               break;
             case 1:
               in_s0 = (int)temp_v9;
               FUN_003fe86c(temp_v1,1,2);
               temp_v2 = 2;
-              DAT_00580ca0[0x1f] = temp_v2;
+              g_mapGimic[0x1f] = temp_v2;
               break;
             case 2:
               temp_v2 = FUN_004ffba8(temp_v1);
@@ -278,27 +278,27 @@ void FUN_002737a8(void)
               in_s0 = (int)temp_v9;
               FUN_003fe86c(temp_v1,2);
               temp_v2 = 3;
-              DAT_00580ca0[0x1f] = temp_v2;
+              g_mapGimic[0x1f] = temp_v2;
               break;
             case 3:
               *(unsigned char *)(temp_v0 + 0x1526) = 1;
               FUN_00319f64((int)(short)piVar1[temp_v4 * 0xf + 0x2b]);
-              DAT_00580ca0[0x1f] = 4;
+              g_mapGimic[0x1f] = 4;
               break;
             }
           }
           if ((*(short *)((int)piVar1 + temp_v4 * 0x3c + 0xa6) == 0x55) &&
-             (temp_v2 = FUN_0018719c(0x1120), temp_v2 != 0)) {
+             (temp_v2 = gameFlagIsSet(0x1120), temp_v2 != 0)) {
             in_s0 = (int)temp_v9;
             FUN_003fd7c0(temp_v1,2);
           }
           if ((*(short *)((int)piVar1 + temp_v4 * 0x3c + 0xa6) == 0x56) &&
-             (temp_v2 = FUN_0018719c(0x1122), temp_v2 != 0)) {
+             (temp_v2 = gameFlagIsSet(0x1122), temp_v2 != 0)) {
             in_s0 = (int)temp_v9;
             FUN_003fd7c0(temp_v1,2);
           }
           if ((*(short *)((int)piVar1 + temp_v4 * 0x3c + 0xa6) == 0x57) &&
-             (temp_v2 = FUN_0018719c(0x1121), temp_v2 != 0)) {
+             (temp_v2 = gameFlagIsSet(0x1121), temp_v2 != 0)) {
             in_s0 = (int)temp_v9;
             FUN_003fd7c0(temp_v1,2);
           }
@@ -343,20 +343,20 @@ void FUN_002737a8(void)
 LAB_00273ee8:
           if (*(short *)((int)piVar1 + temp_v4 * 0x3c + 0xa6) == 0x4e) {
             if (g_gameState == 0x1c) {
-              temp_v2 = FUN_0018719c(0x37c);
+              temp_v2 = gameFlagIsSet(0x37c);
               goto joined_r0x00273f44;
             }
             if (g_gameState == 0x1d) {
-              temp_v2 = FUN_0018719c(0x37d);
+              temp_v2 = gameFlagIsSet(0x37d);
               goto joined_r0x00273f44;
             }
             if (g_gameState == 0x1e) {
-              temp_v2 = FUN_0018719c(0x37e);
+              temp_v2 = gameFlagIsSet(0x37e);
               goto joined_r0x00273f44;
             }
             if (g_gameState != 0x1f) goto LAB_00274348;
             if (DAT_005f1600 != 1) {
-              temp_v2 = FUN_0018719c(0x308);
+              temp_v2 = gameFlagIsSet(0x308);
 joined_r0x00273f44:
               if (temp_v2 != 0) {
                 if (((short)piVar1[temp_v4 * 0xf + 0x29] != 2) &&
@@ -369,7 +369,7 @@ joined_r0x00273f44:
               }
             }
             else {
-              temp_v2 = FUN_0018719c(0x37f);
+              temp_v2 = gameFlagIsSet(0x37f);
               if (temp_v2 != 0) {
                 if (((short)piVar1[temp_v4 * 0xf + 0x29] != 2) &&
                    (temp_v2 = slots4FGetActiveValue(temp_v1), temp_v2 != 2)) {
@@ -390,26 +390,26 @@ joined_r0x00273f44:
                     if (DAT_005f1600 != 10) {
                       if (DAT_005f1600 != 0xe) {
                         if (DAT_005f1600 != 0x10) goto LAB_00274348;
-                        temp_v2 = FUN_0018719c(0x379);
+                        temp_v2 = gameFlagIsSet(0x379);
                       }
                       else {
-                        temp_v2 = FUN_0018719c(0x378);
+                        temp_v2 = gameFlagIsSet(0x378);
                       }
                     }
                     else {
-                      temp_v2 = FUN_0018719c(0x377);
+                      temp_v2 = gameFlagIsSet(0x377);
                     }
                   }
                   else {
-                    temp_v2 = FUN_0018719c(0x376);
+                    temp_v2 = gameFlagIsSet(0x376);
                   }
                 }
                 else {
-                  temp_v2 = FUN_0018719c(0x375);
+                  temp_v2 = gameFlagIsSet(0x375);
                 }
               }
               else {
-                temp_v2 = FUN_0018719c(0x374);
+                temp_v2 = gameFlagIsSet(0x374);
               }
               if (temp_v2 == 0) goto LAB_0027412c;
             }
@@ -425,44 +425,44 @@ LAB_0027412c:
           if (*(short *)((int)piVar1 + temp_v4 * 0x3c + 0xa6) == 0x50) {
             if (piVar1[temp_v4 * 0xf + 0x32] == 1) {
               temp_v2 = (int)temp_v9;
-              switch(DAT_00580ca0[0x21]) {
+              switch(g_mapGimic[0x21]) {
               default:
                 break;
               case 1:
                 FUN_003fe86c(temp_v1,1,2);
                 temp_v3 = 2;
                 in_s0 = temp_v2;
-                DAT_00580ca0[0x21] = temp_v3;
+                g_mapGimic[0x21] = temp_v3;
                 break;
               case 2:
                 temp_v2 = FUN_004ffba8(temp_v1);
                 if (temp_v2 == 0) break;
-                DAT_00580ca0[0x21] = 3;
+                g_mapGimic[0x21] = 3;
                 break;
               case 3:
                 FUN_003fe86c(temp_v1,2);
                 FUN_00319f64((int)(short)piVar1[temp_v4 * 0xf + 0x2b]);
                 temp_v3 = 4;
                 in_s0 = temp_v2;
-                DAT_00580ca0[0x21] = temp_v3;
+                g_mapGimic[0x21] = temp_v3;
               }
               if (*(short *)((int)piVar1 + temp_v4 * 0x3c + 0xa6) != 0x50) goto LAB_00274348;
             }
             if (piVar1[temp_v4 * 0xf + 0x32] == 2) {
               temp_v2 = (int)temp_v9;
-              switch(DAT_00580ca0[0x22]) {
+              switch(g_mapGimic[0x22]) {
               default:
                 break;
               case 1:
                 FUN_003fe86c(temp_v1,1,2);
                 temp_v3 = 2;
                 in_s0 = temp_v2;
-                DAT_00580ca0[0x22] = temp_v3;
+                g_mapGimic[0x22] = temp_v3;
                 break;
               case 2:
                 temp_v2 = FUN_004ffba8(temp_v1);
                 if (temp_v2 != 0) {
-                  DAT_00580ca0[0x22] = 3;
+                  g_mapGimic[0x22] = 3;
                 }
                 break;
               case 3:
@@ -470,25 +470,25 @@ LAB_0027412c:
                 FUN_00319f64((int)(short)piVar1[temp_v4 * 0xf + 0x2b]);
                 temp_v3 = 4;
                 in_s0 = temp_v2;
-                DAT_00580ca0[0x22] = temp_v3;
+                g_mapGimic[0x22] = temp_v3;
               }
               if (*(short *)((int)piVar1 + temp_v4 * 0x3c + 0xa6) != 0x50) goto LAB_00274348;
             }
             if (piVar1[temp_v4 * 0xf + 0x32] == 3) {
               temp_v2 = (int)temp_v9;
-              switch(DAT_00580ca0[0x23]) {
+              switch(g_mapGimic[0x23]) {
               default:
                 break;
               case 1:
                 FUN_003fe86c(temp_v1,1,2);
                 temp_v3 = 2;
                 in_s0 = temp_v2;
-                DAT_00580ca0[0x23] = temp_v3;
+                g_mapGimic[0x23] = temp_v3;
                 break;
               case 2:
                 temp_v2 = FUN_004ffba8(temp_v1);
                 if (temp_v2 != 0) {
-                  DAT_00580ca0[0x23] = 3;
+                  g_mapGimic[0x23] = 3;
                 }
                 break;
               case 3:
@@ -496,7 +496,7 @@ LAB_0027412c:
                 FUN_00319f64((int)(short)piVar1[temp_v4 * 0xf + 0x2b]);
                 temp_v3 = 4;
                 in_s0 = temp_v2;
-                DAT_00580ca0[0x23] = temp_v3;
+                g_mapGimic[0x23] = temp_v3;
               }
             }
           }
@@ -523,10 +523,10 @@ LAB_00274348:
     if (g_gameState == 0x20 && temp_v0 == 2) {
       temp_v0 = 0;
       do {
-        piVar1 = DAT_00580ca0;
-        if ((char)DAT_00580ca0[temp_v0 * 6 + 0x231] != '\0') {
-          if ((char)DAT_00580ca0[temp_v0 * 6 + 0x235] != '\0') {
-            temp_v7 = *(unsigned int *)(DAT_00580ca0[temp_v0 * 6 + 0x233] + 4);
+        piVar1 = g_mapGimic;
+        if ((char)g_mapGimic[temp_v0 * 6 + 0x231] != '\0') {
+          if ((char)g_mapGimic[temp_v0 * 6 + 0x235] != '\0') {
+            temp_v7 = *(unsigned int *)(g_mapGimic[temp_v0 * 6 + 0x233] + 4);
             temp_v4 = FUN_004ff970(temp_v7);
             if ((temp_v4 == *(short *)((int)piVar1 + temp_v0 * 0x18 + 0x8c6)) &&
                (temp_v4 = FUN_004ff9b4(temp_v7), temp_v4 != 0)) {
@@ -543,7 +543,7 @@ LAB_00274348:
               }
             }
           }
-          temp_v4 = FUN_0018719c(0x592);
+          temp_v4 = gameFlagIsSet(0x592);
           if (temp_v4 != 0) {
             if ((((short)piVar1[temp_v0 * 6 + 0x232] == 0xd2) &&
                 (temp_v4 = FUN_0040ab8c(piVar1[temp_v0 * 6 + 0x233]), temp_v4 != 0)) &&

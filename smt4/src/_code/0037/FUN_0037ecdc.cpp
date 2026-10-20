@@ -2,11 +2,11 @@
 
 extern "C" {
 
-int FUN_002b7430(u32 a, int b);
-int FUN_0037a2a8(u32 a, u32 b);
+int linkListEraseManagerNode(u32 a, int b);
+int nw_snd_internal_TaskManager_CancelTasksByKey(u32 a, u32 b);
 int nw_snd_internal_driver_Voice_Stop(void);
 extern u32 FUN_002bb020(void);
-extern u32 FUN_002bd440(void);
+extern u32 nw_snd_internal_driver_SoundThread_GetInstance(void);
 
 typedef struct Voice {
     /* 0x000 */ u8 unk000[0xC];
@@ -29,15 +29,15 @@ void FUN_0037ecdc(Voice *voice)
 
     b = voice->unk060;
     a = FUN_002bb020();
-    FUN_0037a2a8(a, b);
+    nw_snd_internal_TaskManager_CancelTasksByKey(a, b);
     for (i = 0; i < voice->count; i++) {
         if (*(int *)((u8 *)voice + i * 0x340 + 0x108) != 0) {
             nw_snd_internal_driver_Voice_Stop();
         }
     }
     if (voice->active != 0) {
-        a = FUN_002bd440();
-        FUN_002b7430(a, (int)voice + 0x44);
+        a = nw_snd_internal_driver_SoundThread_GetInstance();
+        linkListEraseManagerNode(a, (int)voice + 0x44);
         voice->active = 0;
     }
 }

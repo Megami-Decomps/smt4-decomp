@@ -4,16 +4,16 @@
 
 extern "C" {
 
-int FUN_001801a4(void);
+int gameGetPlayerData(void);
 int FUN_00192608(void);
 int FUN_0020b490(int, int);
 int FUN_00249a08(void);
-int FUN_00270b00(void);
+int bgmReleaseStopped(void);
 int FUN_002c8778(int);
 int FUN_002f0c18(void);
 int FUN_0034a290(void);
-int FUN_003d2d34(int, int, int);
-int FUN_003d2d6c(int);
+int soundChannelRequestIfEnabled(int, int, int);
+int soundChannelStopAll(int);
 int FUN_003de02c(int);
 int FUN_003e503c(unsigned int);
 int FUN_00408184(int, int);
@@ -31,20 +31,20 @@ extern int DAT_00588c44; /* 0x588c44 */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int lmapMainIsRunning(void);
-/* Supplied declaration required: FUN_001801a4. */
-extern int FUN_0018719c(unsigned int);
+/* Supplied declaration required: gameGetPlayerData. */
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_00192608. */
-extern int FUN_001ab854(void);
-extern int FUN_001ab888(void);
+extern int gameGetSlotRecord(void);
+extern int gameGetSlotTable(void);
 extern int FUN_001bd100(unsigned short);
 /* Supplied declaration required: FUN_0020b490. */
 /* Supplied declaration required: FUN_00249a08. */
-/* Supplied declaration required: FUN_00270b00. */
+/* Supplied declaration required: bgmReleaseStopped. */
 /* Supplied declaration required: FUN_002c8778. */
 /* Supplied declaration required: FUN_002f0c18. */
 /* Supplied declaration required: FUN_0034a290. */
-/* Supplied declaration required: FUN_003d2d34. */
-/* Supplied declaration required: FUN_003d2d6c. */
+/* Supplied declaration required: soundChannelRequestIfEnabled. */
+/* Supplied declaration required: soundChannelStopAll. */
 extern int FUN_003ddfd8(void);
 /* Supplied declaration required: FUN_003de02c. */
 extern int playerHasFlagBit(unsigned int);
@@ -90,15 +90,15 @@ void FUN_00331714(int param_1)
   unsigned long long temp_v20;
   
   temp_v3 = DAT_00588c44;
-  temp_v4 = FUN_001ab888();
-  FUN_001801a4();
+  temp_v4 = gameGetSlotTable();
+  gameGetPlayerData();
   FUN_0020b490(temp_v3,0);
   FUN_002f0c18();
   FUN_002c8778(*(unsigned short *)(param_1 + 0x38));
   temp_v5 = mapMainIsBusy();
   if ((temp_v5 != 0) || (temp_v5 = lmapMainIsRunning(), temp_v5 != 0)) {
-    FUN_00270b00();
-    FUN_003d2d6c(0xf);
+    bgmReleaseStopped();
+    soundChannelStopAll(0xf);
     FUN_00249a08();
   }
   else {
@@ -109,8 +109,8 @@ void FUN_00331714(int param_1)
   }
   temp_v0 = *(short *)(param_1 + 0x38);
   if (((temp_v0 != 2 && temp_v0 != 8) && ((temp_v0 != 10 && temp_v0 != 0x10) && temp_v0 != 0x11)) &&
-     ((temp_v0 != 0x18 || (temp_v5 = FUN_0018719c(0x4c9), temp_v5 == 0)))) {
-    FUN_003d2d34(0x100002d,0,0x3c);
+     ((temp_v0 != 0x18 || (temp_v5 = gameFlagIsSet(0x4c9), temp_v5 == 0)))) {
+    soundChannelRequestIfEnabled(0x100002d,0,0x3c);
   }
   temp_v5 = *(int *)(param_1 + 0x30);
   temp_v12 = 0;
@@ -155,7 +155,7 @@ void FUN_00331714(int param_1)
       temp_v19 = 0x42c800003c23d70a;
       if ((temp_v5 == 0) && (temp_v5 = playerHasFlagBit(10), temp_v5 == 0)) {
         temp_v17 = temp_v18;
-        puVar9 = (unsigned short *)FUN_001801a4();
+        puVar9 = (unsigned short *)gameGetPlayerData();
         temp_v5 = 0;
         do {
           temp_v7 = 0;
@@ -207,7 +207,7 @@ void FUN_00331714(int param_1)
       temp_v5 = 0;
       do {
         if (-1 < *(char *)(temp_v4 + temp_v5 + 0x1c88)) {
-          temp_v15 = FUN_001ab854();
+          temp_v15 = gameGetSlotRecord();
           temp_v9 = bitsAt60Test(temp_v15,1);
           if ((temp_v9 == 0) && (temp_v9 = bitsAt60Test(temp_v15,10), temp_v9 == 0)) {
             temp_v2 = 0;

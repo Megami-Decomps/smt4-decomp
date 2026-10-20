@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00250798(void);
 int FUN_0028fe0c(unsigned int, int);
 int FUN_0029eb5c(int, int);
-int FUN_002b8838(int);
+int buttonHelpSetPreset(int);
 int timerStart(...);
 int FUN_002bf810(int);
 
@@ -16,14 +16,14 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-extern int DAT_0043dd50; /* 0x43dd50 */
+extern int g_uiQuest; /* 0x43dd50 */
 
 /* Supplied declaration required: FUN_00250798. */
 /* Supplied declaration required: FUN_0028fe0c. */
 extern int FUN_00298f88(unsigned int);
 /* Supplied declaration required: FUN_0029eb5c. */
 extern int FUN_0029ee54(int);
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bf810. */
 
@@ -38,8 +38,8 @@ void FUN_003115b4(unsigned int param_1)
   int unaff_r6;
   int unaff_r8;
   
-  temp_v0 = DAT_0043dd50;
-  *(short *)(DAT_0043dd50 + 0x97e) = (short)param_1;
+  temp_v0 = g_uiQuest;
+  *(short *)(g_uiQuest + 0x97e) = (short)param_1;
   temp_v1 = FUN_00298f88(param_1);
   if (temp_v1 != 0) {
     unaff_r8 = temp_v0 + 0x5fc;
@@ -67,11 +67,11 @@ void FUN_003115b4(unsigned int param_1)
   FUN_0028fe0c(param_1,0);
   timerStart(temp_v0 + 0x34,0);
   timerStart(temp_v0 + 0x494,2,0);
-  temp_v0 = DAT_0043dd50;
-  *(unsigned int *)(DAT_0043dd50 + 8) = *(unsigned int *)(DAT_0043dd50 + 4);
+  temp_v0 = g_uiQuest;
+  *(unsigned int *)(g_uiQuest + 8) = *(unsigned int *)(g_uiQuest + 4);
   *(unsigned int *)(temp_v0 + 4) = 0x17;
   *(unsigned int *)(temp_v0 + 0x10) = 0;
-  FUN_002b8838(0x1a);
+  buttonHelpSetPreset(0x1a);
   FUN_002bf810(0x100025c);
   return;
 }

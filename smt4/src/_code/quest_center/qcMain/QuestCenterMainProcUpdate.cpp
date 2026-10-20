@@ -9,15 +9,15 @@ int FUN_00287328(unsigned int);
 int FUN_00287528(int);
 int FUN_00289880(void);
 int FUN_002898e4(void);
-int FUN_0028d6d0(void);
+int buttonHelpCreate(void);
 int FUN_0028d9b0(void);
-int FUN_002917b8(void);
-int FUN_00291944(void);
+int buttonHelpRelease(void);
+int uiFadeRelease(void);
 int FUN_002a03d8(...);
 int FUN_002a6fb8(void);
-int FUN_002b2368(unsigned int);
-int FUN_002bf694(unsigned char [28]);
-int FUN_002c09d0(...);
+int asdMemFreeNonNull(unsigned int);
+int libc_strcpy(unsigned char [28]);
+int gameFlagIsSet(...);
 int asdOperatorNew(void);
 int asdSequenceRequest(...);
 int FUN_0032c69c(void);
@@ -43,22 +43,22 @@ extern int gameStateIsFlagSetAndLarge(void);
 extern int FUN_00287304(void);
 extern int FUN_00287314(unsigned int *);
 /* Supplied declaration required: FUN_00287328. */
-extern int FUN_00287468(unsigned int);
+extern int bgmGetStateById(unsigned int);
 /* Supplied declaration required: FUN_00287528. */
 extern int FUN_002876f0(unsigned int, unsigned int);
 extern unsigned int FUN_00287704(unsigned int);
 /* Supplied declaration required: FUN_00289880. */
 /* Supplied declaration required: FUN_002898e4. */
-/* Supplied declaration required: FUN_0028d6d0. */
+/* Supplied declaration required: buttonHelpCreate. */
 /* Supplied declaration required: FUN_0028d9b0. */
-/* Supplied declaration required: FUN_002917b8. */
-/* Supplied declaration required: FUN_00291944. */
+/* Supplied declaration required: buttonHelpRelease. */
+/* Supplied declaration required: uiFadeRelease. */
 extern int FUN_00298e20(unsigned int);
 /* Supplied declaration required: FUN_002a03d8. */
 /* Supplied declaration required: FUN_002a6fb8. */
-/* Supplied declaration required: FUN_002b2368. */
-/* Supplied declaration required: FUN_002bf694. */
-/* Supplied declaration required: FUN_002c09d0. */
+/* Supplied declaration required: asdMemFreeNonNull. */
+/* Supplied declaration required: libc_strcpy. */
+/* Supplied declaration required: gameFlagIsSet. */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: asdSequenceRequest. */
 /* Supplied declaration required: FUN_0032c69c. */
@@ -114,9 +114,9 @@ unsigned int QuestCenterMainProcUpdate(void)
       temp_v6 = 3;
     }
     if (DAT_0044db98 == 0) {
-      if ((temp_v6 == 1) && (temp_v2 = FUN_002c09d0(0x235), temp_v2 != 0)) {
-        temp_v2 = FUN_002c09d0(0x1c0);
-        if ((temp_v2 != 0) && (temp_v2 = FUN_002c09d0(0x424), temp_v2 != 0)) {
+      if ((temp_v6 == 1) && (temp_v2 = gameFlagIsSet(0x235), temp_v2 != 0)) {
+        temp_v2 = gameFlagIsSet(0x1c0);
+        if ((temp_v2 != 0) && (temp_v2 = gameFlagIsSet(0x424), temp_v2 != 0)) {
           temp_v3 = FUN_00287704(1);
           temp_v2 = FUN_002876f0(temp_v3,4);
           if (temp_v2 != 0) {
@@ -140,15 +140,15 @@ unsigned int QuestCenterMainProcUpdate(void)
               temp_v1 = FUN_00298e20(0x67);
             }
             else {
-              temp_v1 = FUN_002c09d0();
+              temp_v1 = gameFlagIsSet();
             }
             if (temp_v1 == 0) goto LAB_001a9c38;
           }
-          if ((*(short *)(temp_v2 + 0x44dbc4) == 0) || (temp_v1 = FUN_002c09d0(), temp_v1 == 0)) {
+          if ((*(short *)(temp_v2 + 0x44dbc4) == 0) || (temp_v1 = gameFlagIsSet(), temp_v1 == 0)) {
             if (temp_v2 != -0x44dbb0) {
               temp_v7[0] = (unsigned int)*(unsigned short *)(temp_v2 + 0x44dbc0);
               temp_v7[1] = 0xffffffff;
-              FUN_002bf694(temp_v8);
+              libc_strcpy(temp_v8);
               asdSequenceRequest(4,temp_v7,0x20);
               return 0;
             }
@@ -160,18 +160,18 @@ LAB_001a9c38:
       } while (temp_v5 < 3);
       if (DAT_0044db90 != 1) {
         temp_v3 = 0x100005a;
-        temp_v2 = FUN_00287468(0x100005a);
+        temp_v2 = bgmGetStateById(0x100005a);
       }
       else {
         temp_v3 = 0x100005d;
-        temp_v2 = FUN_00287468(0x100005d);
+        temp_v2 = bgmGetStateById(0x100005d);
       }
       if (temp_v2 != 1) {
         FUN_00287328(temp_v3);
       }
       FUN_002898e4();
       FUN_0028d9b0();
-      FUN_0028d6d0();
+      buttonHelpCreate();
       FUN_00289880();
     }
     puVar3 = (unsigned int *)0xfc4;
@@ -198,7 +198,7 @@ LAB_001a9c38:
     *(unsigned char *)(temp_v0 + 0x18) = 1;
     if (*(int *)(temp_v0 + 0x1c) != 0) {
       FUN_002a6fb8();
-      FUN_002b2368(*(unsigned int *)(temp_v0 + 0x1c));
+      asdMemFreeNonNull(*(unsigned int *)(temp_v0 + 0x1c));
       *(unsigned int *)(temp_v0 + 0x1c) = 0;
     }
     break;
@@ -223,12 +223,12 @@ LAB_001a9c38:
     *(unsigned char *)(temp_v0 + 0x18) = 1;
     if (*(int *)(temp_v0 + 0x1c) != 0) {
       FUN_002a6fb8();
-      FUN_002b2368(*(unsigned int *)(temp_v0 + 0x1c));
+      asdMemFreeNonNull(*(unsigned int *)(temp_v0 + 0x1c));
       *(unsigned int *)(temp_v0 + 0x1c) = 0;
     }
     if (DAT_0044db98 == 0) {
-      FUN_00291944();
-      FUN_002917b8();
+      uiFadeRelease();
+      buttonHelpRelease();
       FUN_0028727c();
     }
     break;

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001807a0(int);
 int FUN_00181948(int);
 int FUN_00182348(int);
-int FUN_00184758(int, int, int);
+int uiSpriteSetKeyframe(int, int, int);
 int FUN_004cf8dc(int, int);
 int sub10OwnerStart(int);
 int FUN_004d0738(int, int);
@@ -26,7 +26,7 @@ typedef struct {
 /* Supplied declaration required: FUN_001807a0. */
 /* Supplied declaration required: FUN_00181948. */
 /* Supplied declaration required: FUN_00182348. */
-/* Supplied declaration required: FUN_00184758. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: FUN_004cf8dc. */
 /* Supplied declaration required: sub10OwnerStart. */
 /* Supplied declaration required: FUN_004d0738. */
@@ -110,11 +110,11 @@ int FUN_004cf880(int param_1)
           temp_v2 = *piVar5;
           if (temp_v2 != -1 && temp_v2 != -3) {
             if (temp_v2 != -2) {
-              FUN_00184758(temp_v3,(int)(short)temp_v2,(int)(char)piVar5[1]);
+              uiSpriteSetKeyframe(temp_v3,(int)(short)temp_v2,(int)(char)piVar5[1]);
             }
             else {
               *(unsigned short *)(param_1 + 0x808) = 0;
-              FUN_00184758(temp_v3,(int)(short)**(unsigned int **)(param_1 + 0x804),
+              uiSpriteSetKeyframe(temp_v3,(int)(short)**(unsigned int **)(param_1 + 0x804),
                            (int)*(char *)(*(unsigned int **)(param_1 + 0x804) + 1));
             }
           }

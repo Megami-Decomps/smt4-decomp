@@ -20,7 +20,7 @@ typedef struct {
     unsigned int sp50; /* 0x50: local_50 */
 } param_1_stack;
 
-extern int FUN_001ab888(void);
+extern int gameGetSlotTable(void);
 
 
 int FUN_003e503c(unsigned int param_1)
@@ -33,7 +33,7 @@ int FUN_003e503c(unsigned int param_1)
   int temp_v3;
   int temp_v4 [13];
   
-  temp_v0 = FUN_001ab888();
+  temp_v0 = gameGetSlotTable();
   if (*(short *)(temp_v0 + 0x2c4c) != 0) {
     temp_v2 = 0;
     do {
@@ -41,7 +41,7 @@ int FUN_003e503c(unsigned int param_1)
         temp_v3 = 0;
       }
       else {
-        temp_v3 = FUN_001ab888();
+        temp_v3 = gameGetSlotTable();
         temp_v3 = temp_v3 + (temp_v2 & 0xffff) * 0x134 + 0x1ddc;
       }
       if (*(short *)(temp_v3 + 300) == *(short *)(temp_v0 + 0x2c4c)) goto LAB_003e50b0;
@@ -53,7 +53,7 @@ LAB_003e50b0:
   temp_v0 = 0;
   if (param_1 < 0xc) {
     if (temp_v3 == 0) {
-      temp_v0 = FUN_001ab888();
+      temp_v0 = gameGetSlotTable();
       return temp_v0 + param_1 * 0x134 + 0x1ddc;
     }
     temp_v4[1] = 0;
@@ -75,7 +75,7 @@ LAB_003e50b0:
         temp_v1 = 0;
       }
       else {
-        temp_v1 = FUN_001ab888();
+        temp_v1 = gameGetSlotTable();
         temp_v1 = temp_v1 + (temp_v2 & 0xffff) * 0x134 + 0x1ddc;
       }
       if (temp_v1 != temp_v3) {

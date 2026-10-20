@@ -3,11 +3,11 @@
 
 extern "C" {
 
-void FUN_002a46d8(u32);
+void fileSlotFree(u32);
 
 void FUN_002a46d0(void)
 {
-    FUN_002a46d8(39);
+    fileSlotFree(39);
 }
 
 }

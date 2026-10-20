@@ -17,13 +17,13 @@ typedef struct {
 extern int FUN_0023dcb8(void);
 extern int FUN_00292914(int);
 /* Supplied declaration required: FUN_00292960. */
-extern int padIsButtonDown(void);
+extern int flagBitIsSet(void);
 extern int FUN_00293988(void);
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_0029f848. */
-extern int FUN_002a8740(int);
-extern int FUN_002a8764(void);
-extern int FUN_002c09d0(void);
+extern int gameGetUnitRecord(int);
+extern int gameGetSlotTable(void);
+extern int gameFlagIsSet(void);
 
 
 void FUN_0028e9ec(int param_1)
@@ -43,8 +43,8 @@ void FUN_0028e9ec(int param_1)
     pcVar1 = (char *)(temp_v2 & 0xff);
     FUN_00292960(pcVar1,1);
     if (((((pcVar1 != (char *)0x0) && (pcVar1[1] == '\x01')) &&
-         ((*(short *)(pcVar1 + 0x5c) == 0 || (temp_v0 = FUN_002c09d0(), temp_v0 != 0)))) &&
-        ((*(short *)(pcVar1 + 0x5e) == 0 || (temp_v0 = padIsButtonDown(), temp_v0 != 0)))) &&
+         ((*(short *)(pcVar1 + 0x5c) == 0 || (temp_v0 = gameFlagIsSet(), temp_v0 != 0)))) &&
+        ((*(short *)(pcVar1 + 0x5e) == 0 || (temp_v0 = flagBitIsSet(), temp_v0 != 0)))) &&
        ((pcVar1[0x5b] == '\0' ||
         (temp_v0 = btlGetMainState(), (*(unsigned int *)(temp_v0 + 0x44a0) & 0x40000) == 0)))) {
       if (*pcVar1 == '\x02') {
@@ -66,18 +66,18 @@ void FUN_0028e9ec(int param_1)
       temp_v3 = 0;
       do {
         temp_v4 = 0;
-        temp_v0 = FUN_002a8764();
+        temp_v0 = gameGetSlotTable();
         if (-1 < *(char *)(temp_v0 + temp_v3 + 0x9108)) {
-          temp_v0 = FUN_002a8764();
-          temp_v0 = FUN_002a8740((int)*(char *)(temp_v0 + temp_v3 + 0x9108));
+          temp_v0 = gameGetSlotTable();
+          temp_v0 = gameGetUnitRecord((int)*(char *)(temp_v0 + temp_v3 + 0x9108));
           if (temp_v0 != 0) {
             temp_v2 = 0;
             do {
               pcVar1 = (char *)(temp_v2 & 0xff);
               FUN_00292960(pcVar1,0);
               if ((((pcVar1 != (char *)0x0) && (pcVar1[1] == '\x01')) &&
-                  ((*(short *)(pcVar1 + 0x5c) == 0 || (temp_v1 = FUN_002c09d0(), temp_v1 != 0)))) &&
-                 (((*(short *)(pcVar1 + 0x5e) == 0 || (temp_v1 = padIsButtonDown(), temp_v1 != 0)) &&
+                  ((*(short *)(pcVar1 + 0x5c) == 0 || (temp_v1 = gameFlagIsSet(), temp_v1 != 0)))) &&
+                 (((*(short *)(pcVar1 + 0x5e) == 0 || (temp_v1 = flagBitIsSet(), temp_v1 != 0)) &&
                   ((pcVar1[0x5b] == '\0' ||
                    (temp_v1 = btlGetMainState(), (*(unsigned int *)(temp_v1 + 0x44a0) & 0x40000) == 0)))))) {
                 if (*pcVar1 != '\x05') {

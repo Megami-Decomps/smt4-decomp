@@ -12,9 +12,9 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-extern int DAT_0057f118; /* 0x57f118 */
+extern int g_campCecEdit; /* 0x57f118 */
 
-extern unsigned int *FUN_001801a4(void);
+extern unsigned int *gameGetPlayerData(void);
 
 
 unsigned int FUN_003a5094(void)
@@ -23,9 +23,9 @@ unsigned int FUN_003a5094(void)
   int temp_v0;
   unsigned int *puVar2;
   
-  temp_v0 = DAT_0057f118;
-  if (DAT_0057f118 != 0) {
-    puVar2 = (unsigned int *)FUN_001801a4();
+  temp_v0 = g_campCecEdit;
+  if (g_campCecEdit != 0) {
+    puVar2 = (unsigned int *)gameGetPlayerData();
     if (((((*puVar2 & 0xffff) != (*(unsigned int *)(temp_v0 + 0x17a) & 0xffff)) ||
          (*puVar2 >> 0x10 != *(unsigned int *)(temp_v0 + 0x17a) >> 0x10)) ||
         ((puVar2[1] & 0xffff) != (*(unsigned int *)(temp_v0 + 0x17e) & 0xffff))) ||

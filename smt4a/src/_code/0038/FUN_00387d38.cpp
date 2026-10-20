@@ -5,8 +5,8 @@
 extern "C" {
 
 int sysPlaySe(int);
-int FUN_001ab854(...);
-int FUN_00281720(unsigned int, int);
+int gameGetSlotRecord(...);
+int linkHolderApplyFlag(unsigned int, int);
 int FUN_002e2680(int);
 int FUN_00331380(int);
 int FUN_003b6fc4(void);
@@ -34,9 +34,9 @@ struct fn_00387d38_arg0 {
 };
 
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_001ab854. */
-extern int FUN_001ab888(void);
-/* Supplied declaration required: FUN_00281720. */
+/* Supplied declaration required: gameGetSlotRecord. */
+extern int gameGetSlotTable(void);
+/* Supplied declaration required: linkHolderApplyFlag. */
 extern int FUN_00284e94(void);
 extern int FUN_002c334c(void);
 /* Supplied declaration required: FUN_002e2680. */
@@ -66,7 +66,7 @@ unsigned int FUN_00387d38(fn_00387d38_arg0 *param_1)
       FUN_002e2680(0);
       param_1->field_0x154 = 1;
       FUN_00331380(0);
-      FUN_00281720(*(unsigned int *)&param_1->field_0x4,1);
+      linkHolderApplyFlag(*(unsigned int *)&param_1->field_0x4,1);
       param_1->field_0xfc = 1;
       param_1->field_0xe8 = 0xffffffff;
       param_1->field_0xf8 = 5;
@@ -80,11 +80,11 @@ unsigned int FUN_00387d38(fn_00387d38_arg0 *param_1)
   temp_v0 = FUN_003b6fc4();
   param_1->field_0x108 = temp_v0;
   param_1->field_0xec = -1;
-  temp_v1 = FUN_001ab888();
+  temp_v1 = gameGetSlotTable();
 LAB_00387d78:
   if (((-1 >= *(char *)(temp_v1 + temp_v3 + 0x1ca0)) ||
-      (temp_v2 = FUN_001ab854(), (unsigned int)*(unsigned short *)(temp_v2 + 0x62) != (int)param_1->field_0x108)) ||
-     (temp_v2 = FUN_001ab854((int)*(char *)(temp_v1 + temp_v3 + 0x1ca0)),
+      (temp_v2 = gameGetSlotRecord(), (unsigned int)*(unsigned short *)(temp_v2 + 0x62) != (int)param_1->field_0x108)) ||
+     (temp_v2 = gameGetSlotRecord((int)*(char *)(temp_v1 + temp_v3 + 0x1ca0)),
      *(short *)(temp_v2 + 0x62) != *(short *)((int)param_1->field_0x8 + 0x60))) {
     temp_v3 = temp_v3 + 1;
     if (temp_v3 < 3) goto LAB_00387d78;
@@ -92,8 +92,8 @@ LAB_00387d78:
       temp_v3 = 0;
       do {
         if (((-1 < *(char *)(temp_v1 + temp_v3 + 0x1c88)) &&
-            (temp_v2 = FUN_001ab854(), (unsigned int)*(unsigned short *)(temp_v2 + 0x62) == (int)param_1->field_0x108))
-           && (temp_v2 = FUN_001ab854((int)*(char *)(temp_v1 + temp_v3 + 0x1c88)),
+            (temp_v2 = gameGetSlotRecord(), (unsigned int)*(unsigned short *)(temp_v2 + 0x62) == (int)param_1->field_0x108))
+           && (temp_v2 = gameGetSlotRecord((int)*(char *)(temp_v1 + temp_v3 + 0x1c88)),
               *(short *)(temp_v2 + 0x62) == *(short *)((int)param_1->field_0x8 + 0x60))) {
           FUN_003c1060();
           param_1->field_0xec = 5;

@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_00188b60(u8 *member);
+void nn_os_CriticalSection_Initialize(u8 *member);
 
 typedef struct MasterManagerImpl {
     /* 0x00 */ u8 initialized;
@@ -14,7 +14,7 @@ typedef struct MasterManagerImpl {
 void nn_snd_CTR_MasterManagerImpl_Initialize(MasterManagerImpl *manager)
 {
     if (manager->initialized == 0) {
-        FUN_00188b60(manager->member34);
+        nn_os_CriticalSection_Initialize(manager->member34);
         manager->initialized = 1;
     }
 }

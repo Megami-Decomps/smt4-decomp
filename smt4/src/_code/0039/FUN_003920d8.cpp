@@ -28,9 +28,9 @@ extern int FUN_0023360c(int);
 /* Supplied declaration required: FUN_002340e4. */
 /* Supplied declaration required: FUN_00234124. */
 /* Supplied declaration required: FUN_002341d4. */
-extern int FUN_0027ea14(unsigned int *);
+extern int strIsEmpty(unsigned int *);
 extern int FUN_002a12d8(unsigned int *);
-extern int FUN_002a1520(unsigned int *);
+extern int byteIsAtLeast100(unsigned int *);
 
 
 void FUN_003920d8(int param_1)
@@ -91,13 +91,13 @@ void FUN_003920d8(int param_1)
         uStack_50 = uStack_3c;
         uStack_4c = temp_v7;
         uStack_48 = uStack_34;
-        temp_v2 = FUN_0027ea14(&temp_v4);
+        temp_v2 = strIsEmpty(&temp_v4);
         if (temp_v2 != 0) {
           temp_v3 = 2;
           *(unsigned int *)(param_1 + 8) = temp_v3;
           return;
         }
-        temp_v2 = FUN_002a1520(&temp_v4);
+        temp_v2 = byteIsAtLeast100(&temp_v4);
         if (temp_v2 != 0) {
           if ((temp_v4 & 0xff) == 0x66) goto LAB_00392248;
           if ((temp_v4 & 0xff) != 0x67) goto LAB_00392268;
@@ -153,7 +153,7 @@ void FUN_003920d8(int param_1)
     uStack_50 = uStack_3c;
     uStack_4c = temp_v7;
     uStack_48 = uStack_34;
-    temp_v2 = FUN_0027ea14(&temp_v4);
+    temp_v2 = strIsEmpty(&temp_v4);
     if (temp_v2 != 0) {
       piVar5 = *(int **)(param_1 + 0x208);
       *(unsigned int *)(param_1 + 4) = 10;
@@ -165,7 +165,7 @@ void FUN_003920d8(int param_1)
       *(unsigned int *)(param_1 + 0x208) = 0;
       return;
     }
-    temp_v2 = FUN_002a1520(&temp_v4);
+    temp_v2 = byteIsAtLeast100(&temp_v4);
     if (temp_v2 != 0) {
       if ((temp_v4 & 0xff) == 0x66) {
 LAB_00392248:

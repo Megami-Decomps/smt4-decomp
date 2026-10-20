@@ -14,12 +14,12 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } void_stack;
 
-extern int DAT_0043dcf0; /* 0x43dcf0 */
+extern int g_partyPanel; /* 0x43dcf0 */
 
 /* Supplied declaration required: FUN_0028caf8. */
 /* Supplied declaration required: FUN_00292be4. */
 /* Supplied declaration required: FUN_00298d28. */
-extern int FUN_002a8764(void);
+extern int gameGetSlotTable(void);
 
 
 void FUN_00205a90(void)
@@ -33,8 +33,8 @@ void FUN_00205a90(void)
   int temp_v4;
   unsigned int temp_v5 [2];
   
-  temp_v0 = DAT_0043dcf0;
-  temp_v1 = FUN_002a8764();
+  temp_v0 = g_partyPanel;
+  temp_v1 = gameGetSlotTable();
   temp_v4 = 0;
   temp_v5[0] = 0;
   if (*(char *)(temp_v0 + 0x678) != '\0') {

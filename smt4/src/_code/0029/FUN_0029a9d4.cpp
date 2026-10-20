@@ -9,10 +9,10 @@ int FUN_002ae164(void);
 int FUN_002ae584(void);
 
 /* Supplied declaration required: FUN_00283ebc. */
-extern int padIsButtonDown(unsigned int);
+extern int flagBitIsSet(unsigned int);
 /* Supplied declaration required: FUN_002ae164. */
 /* Supplied declaration required: FUN_002ae584. */
-extern int FUN_002b63ac(void);
+extern int gameGetPlayerData(void);
 
 
 void FUN_0029a9d4(unsigned int param_1,int param_2)
@@ -29,7 +29,7 @@ void FUN_0029a9d4(unsigned int param_1,int param_2)
   FUN_002ae164();
   if (temp_v0 != 0) {
     if (param_2 != 0) {
-      temp_v1 = FUN_002b63ac();
+      temp_v1 = gameGetPlayerData();
       temp_v2 = 0;
       do {
         temp_v4 = temp_v1 + temp_v2 * 2;
@@ -49,19 +49,19 @@ void FUN_0029a9d4(unsigned int param_1,int param_2)
       FUN_00283ebc(temp_v0,temp_v3,4);
     }
     else {
-      temp_v1 = padIsButtonDown(0xc);
+      temp_v1 = flagBitIsSet(0xc);
       if (temp_v1 != 0) {
         FUN_002ae584();
       }
-      temp_v1 = padIsButtonDown(0xd);
+      temp_v1 = flagBitIsSet(0xd);
       if (temp_v1 != 0) {
         FUN_002ae584();
       }
-      temp_v1 = padIsButtonDown(0xe);
+      temp_v1 = flagBitIsSet(0xe);
       if (temp_v1 != 0) {
         FUN_002ae584();
       }
-      temp_v1 = padIsButtonDown(0xf);
+      temp_v1 = flagBitIsSet(0xf);
       if (temp_v1 != 0) {
         FUN_002ae584();
       }

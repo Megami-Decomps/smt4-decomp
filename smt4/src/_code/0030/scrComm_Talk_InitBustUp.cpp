@@ -2,11 +2,11 @@
 
 extern "C" {
 
-int FUN_00295720(void);
+int btlTalkBustUpCreate(void);
 
 u32 scrComm_Talk_InitBustUp(void)
 {
-    FUN_00295720();
+    btlTalkBustUpCreate();
     return 1;
 }
 

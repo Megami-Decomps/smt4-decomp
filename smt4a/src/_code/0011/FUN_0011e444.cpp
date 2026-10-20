@@ -7,11 +7,11 @@ extern "C" {
 int FUN_00110b58(int *, unsigned int);
 int FUN_00114d60(int *, unsigned int, int, int);
 int FUN_0011c964(int *, unsigned int);
-int FUN_002e9318(...);
-int FUN_002e9ec8(int, unsigned int);
+int onlineStringDestroy(...);
+int onlineInstanceTableFind(int, unsigned int);
 int FUN_002ea100(...);
 int FUN_002f6be2(int, int *);
-int FUN_002f6bf0(int);
+int operatorDeleteArrayNullable(int);
 int FUN_002fbd38(...);
 
 typedef struct fn_0011e444_arg0 fn_0011e444_arg0;
@@ -44,14 +44,14 @@ typedef struct {
 /* Supplied declaration required: FUN_00110b58. */
 /* Supplied declaration required: FUN_00114d60. */
 /* Supplied declaration required: FUN_0011c964. */
-/* Supplied declaration required: FUN_002e9318. */
-extern int FUN_002e9af4(void);
-/* Supplied declaration required: FUN_002e9ec8. */
+/* Supplied declaration required: onlineStringDestroy. */
+extern int onlineInstanceTableGetCurrent(void);
+/* Supplied declaration required: onlineInstanceTableFind. */
 /* Supplied declaration required: FUN_002ea100. */
 /* Supplied declaration required: FUN_002f6be2. */
-/* Supplied declaration required: FUN_002f6bf0. */
+/* Supplied declaration required: operatorDeleteArrayNullable. */
 /* Supplied declaration required: FUN_002fbd38. */
-extern int FUN_002fc046(void *);
+extern int rangeIsEmpty(void *);
 
 
 void FUN_0011e444(fn_0011e444_arg0 *param_1,int *param_2)
@@ -65,8 +65,8 @@ void FUN_0011e444(fn_0011e444_arg0 *param_1,int *param_2)
   int temp_v3;
   unsigned char temp_v4 [12];
   
-  temp_v0 = FUN_002e9af4();
-  FUN_002e9ec8(temp_v0,*(unsigned int *)&param_1->field_0x4);
+  temp_v0 = onlineInstanceTableGetCurrent();
+  onlineInstanceTableFind(temp_v0,*(unsigned int *)&param_1->field_0x4);
   if (temp_v0 != 0) {
     param_2[2] = param_1->field_0x14;
     (**(romwright_code **)(*param_2 + 0x54))(param_2,*(unsigned int *)&param_1->field_0x18);
@@ -75,10 +75,10 @@ void FUN_0011e444(fn_0011e444_arg0 *param_1,int *param_2)
       FUN_002f6be2(temp_v0 + 8,&temp_v2);
       FUN_002f6be2(temp_v0 + 0x10,&temp_v3);
       (**(romwright_code **)(*param_2 + 0xc))(temp_v4,param_2,temp_v2,temp_v3);
-      FUN_002f6bf0(temp_v2);
-      FUN_002f6bf0(temp_v3);
+      operatorDeleteArrayNullable(temp_v2);
+      operatorDeleteArrayNullable(temp_v3);
     }
-    temp_v0 = FUN_002fc046(param_1->field_0x10);
+    temp_v0 = rangeIsEmpty(param_1->field_0x10);
     if (temp_v0 == 0) {
       (**(romwright_code **)(*param_2 + 0x50))
                 (param_2,*(unsigned int *)param_1->field_0x10,
@@ -90,18 +90,18 @@ void FUN_0011e444(fn_0011e444_arg0 *param_1,int *param_2)
       FUN_002fbd38(param_2);
       temp_v1 = FUN_002ea100(temp_v4,piVar2);
       FUN_00114d60(&param_1->field_0x2c,temp_v1,temp_v0 + 8,temp_v0 + 0x10);
-      FUN_002e9318(temp_v4);
+      onlineStringDestroy(temp_v4);
     }
     piVar2 = param_2;
     FUN_002fbd38();
     temp_v1 = FUN_002ea100(&temp_v2,piVar2);
     FUN_0011c964(&param_1->field_0x2c,temp_v1);
-    FUN_002e9318(&temp_v2);
+    onlineStringDestroy(&temp_v2);
     piVar2 = param_2;
     FUN_002fbd38(param_2);
     temp_v1 = FUN_002ea100(&temp_v2,piVar2);
     FUN_00110b58(&param_1->field_0x38,temp_v1);
-    FUN_002e9318(&temp_v2);
+    onlineStringDestroy(&temp_v2);
     (**(romwright_code **)(*param_2 + 0x14))
               (param_2,(param_1->field_0x30 - param_1->field_0x2c) +
                        (param_1->field_0x3c - param_1->field_0x38) + param_1->field_0x20);

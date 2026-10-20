@@ -2,8 +2,8 @@
 
 extern "C" {
 
-int FUN_002523f0(void);
-int FUN_002a46d8(int id);
+int btlTalkBustUpDestroy(void);
+int fileSlotFree(int id);
 int asdMemFree(u32 *ptr);
 int jobStop(u32 job, int mode);
 
@@ -13,8 +13,8 @@ void FUN_002fecfc(void)
 {
     u32 *block = DAT_0043dd90;
 
-    FUN_002a46d8(0x25);
-    FUN_002523f0();
+    fileSlotFree(0x25);
+    btlTalkBustUpDestroy();
     jobStop(*block, 0);
     asdMemFree(block);
     DAT_0043dd90 = NULL;

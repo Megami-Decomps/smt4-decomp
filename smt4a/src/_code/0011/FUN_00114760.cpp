@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_002e9ec8(int, unsigned int);
+int onlineInstanceTableFind(int, unsigned int);
 int FUN_002ea3d0(int, unsigned int);
 int FUN_002ea704(void);
-int FUN_002ea93c(void);
-int FUN_002ea9dc(...);
+int onlineUrlGetAddress(void);
+int onlineUrlDestroy(...);
 int FUN_002eb858(unsigned char [32], unsigned int, int);
-int FUN_002ede60(...);
+int onlineSockAddrConstruct2(...);
 int FUN_002ee568(...);
 int FUN_002f3490(unsigned char [36]);
 int FUN_002fa434(unsigned char [36], unsigned int);
@@ -26,15 +26,15 @@ typedef struct {
 extern unsigned char LAB_0010dc81; /* 0x10dc81 */
 extern unsigned char LAB_001148a0; /* 0x1148a0 */
 
-extern int FUN_002e9af4(void);
-/* Supplied declaration required: FUN_002e9ec8. */
+extern int onlineInstanceTableGetCurrent(void);
+/* Supplied declaration required: onlineInstanceTableFind. */
 extern unsigned int FUN_002ea3c0(int *, unsigned char *, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
 /* Supplied declaration required: FUN_002ea704. */
-/* Supplied declaration required: FUN_002ea93c. */
-/* Supplied declaration required: FUN_002ea9dc. */
+/* Supplied declaration required: onlineUrlGetAddress. */
+/* Supplied declaration required: onlineUrlDestroy. */
 /* Supplied declaration required: FUN_002eb858. */
-/* Supplied declaration required: FUN_002ede60. */
+/* Supplied declaration required: onlineSockAddrConstruct2. */
 /* Supplied declaration required: FUN_002ee568. */
 /* Supplied declaration required: FUN_002f3490. */
 /* Supplied declaration required: FUN_002fa434. */
@@ -67,8 +67,8 @@ void FUN_00114760(int param_1)
   
   temp_v1 = FUN_002ea704();
   if ((temp_v1 != 0) && (temp_v1 = FUN_002ea704(), *(char *)(temp_v1 + 0x10c) != '\0')) {
-    temp_v1 = FUN_002e9af4();
-    FUN_002e9ec8(temp_v1,*(unsigned int *)(param_1 + 0x114));
+    temp_v1 = onlineInstanceTableGetCurrent();
+    onlineInstanceTableFind(temp_v1,*(unsigned int *)(param_1 + 0x114));
     if (temp_v1 != 0) {
       temp_v1 = FUN_002ea704();
       piVar3 = (int *)(temp_v1 + 0x114);
@@ -76,13 +76,13 @@ void FUN_00114760(int param_1)
       temp_v6[0] = param_1 + 0xcc;
       do {
         FUN_002ee568(temp_v7,*(unsigned int *)(*(int *)*piVar3 + 4));
-        temp_v2 = FUN_002ea93c();
+        temp_v2 = onlineUrlGetAddress();
         temp_v3 = *(unsigned int *)(temp_v2 + 8);
         FUN_002eb858(temp_v10,
                      (temp_v3 << 0x18) | (((temp_v3 >> 8) & 0xff) << 0x10) |
                      (((temp_v3 >> 0x10) & 0xff) << 8) | (temp_v3 >> 0x18),0x8237);
-        FUN_002ea9dc(temp_v7);
-        temp_v4 = FUN_002ede60(temp_v12,temp_v10);
+        onlineUrlDestroy(temp_v7);
+        temp_v4 = onlineSockAddrConstruct2(temp_v12,temp_v10);
         temp_v4 = FUN_002fff64(temp_v11,0,temp_v4);
         FUN_002fff82(temp_v6[0],temp_v4);
         FUN_002fffbe(temp_v11);
@@ -107,12 +107,12 @@ void FUN_00114760(int param_1)
           temp_v2 = *(int *)*piVar3;
         }
         FUN_002ee568(temp_v9,*(unsigned int *)(temp_v2 + 4));
-        temp_v4 = FUN_002ea93c();
-        temp_v4 = FUN_002ede60(temp_v13,temp_v4);
+        temp_v4 = onlineUrlGetAddress();
+        temp_v4 = onlineSockAddrConstruct2(temp_v13,temp_v4);
         temp_v4 = FUN_002fff64(temp_v7,0x65,temp_v4);
         FUN_002fff82(temp_v6[0],temp_v4);
         FUN_002fffbe(temp_v7);
-        FUN_002ea9dc(temp_v9);
+        onlineUrlDestroy(temp_v9);
         temp_v5 = temp_v5 + 1;
       } while (temp_v5 < 5);
       FUN_002fffd0(param_1,0x9c4);

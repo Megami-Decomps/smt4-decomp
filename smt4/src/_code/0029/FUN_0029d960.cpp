@@ -13,7 +13,7 @@ int FUN_00296ae8(...);
 int FUN_0029d770(...);
 int FUN_0029da34(...);
 int FUN_0029ede8(int, unsigned int, unsigned int, int);
-int FUN_002b9024(void);
+int devilGetRecord(void);
 int FUN_002be624(...);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -43,7 +43,7 @@ extern int FUN_0023360c(int);
 /* Supplied declaration required: FUN_0029da34. */
 /* Supplied declaration required: FUN_0029ede8. */
 extern unsigned int FUN_002b066c(unsigned short);
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: FUN_002be624. */
 
 
@@ -76,7 +76,7 @@ void FUN_0029d960(int param_1)
     temp_v4 = FUN_002b066c(temp_v2);
     temp_v3 = DAT_0043da2c;
     temp_v5 = (unsigned int)temp_v2;
-    FUN_002b9024();
+    devilGetRecord();
     if (temp_v5 == 0) {
       *(unsigned char *)(temp_v3 + 0x4cb) = 0;
     }

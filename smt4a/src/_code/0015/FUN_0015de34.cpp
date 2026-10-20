@@ -52,7 +52,7 @@ extern unsigned int FUN_00191330(void);
 extern unsigned int FUN_00191548(void);
 /* Supplied declaration required: FUN_001b1998. */
 /* Supplied declaration required: FUN_001b1f04. */
-extern unsigned int FUN_001c2484(void);
+extern unsigned int nw_snd_internal_driver_VoiceManager_GetInstance(void);
 /* Supplied declaration required: nw_snd_internal_TaskManager_Initialize. */
 /* Supplied declaration required: nw_snd_internal_driver_SoundThread_SetProfileBuffer. */
 
@@ -101,12 +101,12 @@ void FUN_0015de34(unsigned int *param_1,int param_2)
     nw_snd_internal_TaskManager_Initialize();
     DAT_0059dbb0 = param_1[5];
     DAT_0059dbac = temp_v0;
-    temp_v1 = FUN_001c2484();
+    temp_v1 = nw_snd_internal_driver_VoiceManager_GetInstance();
     temp_v2 = FUN_00175c30(temp_v1,DAT_0059dba8);
     temp_v2 = temp_v2 + temp_v5 + temp_v0;
-    temp_v1 = FUN_001c2484();
+    temp_v1 = nw_snd_internal_driver_VoiceManager_GetInstance();
     temp_v1 = FUN_00175c30(temp_v1,DAT_0059dba8);
-    temp_v3 = FUN_001c2484();
+    temp_v3 = nw_snd_internal_driver_VoiceManager_GetInstance();
     FUN_00175bb8(temp_v3,temp_v5 + temp_v0,temp_v1);
     temp_v1 = FUN_00191548();
     temp_v0 = FUN_00175a78(temp_v1,DAT_0059dba8);

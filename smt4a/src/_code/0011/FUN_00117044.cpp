@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00113612(unsigned int, unsigned int, unsigned char [32], int);
 int strInit(unsigned char [32]);
 int strDestroy(unsigned char [32]);
-int FUN_002ee54c(unsigned char [8]);
+int sharedRefHolderDestroy2(unsigned char [8]);
 int FUN_002fde5c(unsigned char [8]);
 int FUN_00302fec(...);
 int FUN_00303018(...);
@@ -26,7 +26,7 @@ typedef struct {
 /* Supplied declaration required: strInit. */
 extern unsigned int FUN_002eb5c0(unsigned int);
 /* Supplied declaration required: strDestroy. */
-/* Supplied declaration required: FUN_002ee54c. */
+/* Supplied declaration required: sharedRefHolderDestroy2. */
 /* Supplied declaration required: FUN_002fde5c. */
 /* Supplied declaration required: FUN_00302fec. */
 /* Supplied declaration required: FUN_00303018. */
@@ -74,7 +74,7 @@ void FUN_00117044(unsigned int param_1,int param_2,int param_3,unsigned int *par
   FUN_00113612(*(unsigned int *)(param_2 + 0x14),temp_v3,temp_v4,param_3 + 0x34);
   FUN_00302fec(temp_v8,temp_v4);
   strDestroy(temp_v4);
-  FUN_002ee54c(temp_v2);
+  sharedRefHolderDestroy2(temp_v2);
   return;
 }
 

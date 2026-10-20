@@ -9,13 +9,13 @@ int asdOperatorNew(void);
 int FUN_001919a4(void);
 int FUN_0021c118(int, int);
 int FUN_002bf464(void);
-int FUN_002e3328(unsigned int);
+int asdOperatorDelete(unsigned int);
 int FUN_00318d6c(void);
-int FUN_0031a400(void);
-int FUN_00324bc8(unsigned int, unsigned int, unsigned int);
-int FUN_00342010(void);
-int FUN_0035b304(void);
-int FUN_0037b450(void);
+int campCommonBgAcquire(void);
+int mapPlaceSet(unsigned int, unsigned int, unsigned int);
+int campButtonHelpAcquire(void);
+int campCommonBgRelease(void);
+int campButtonHelpRelease(void);
 int FUN_003b61ec(void);
 int FUN_003d4c68(unsigned int);
 int FUN_003d4da8(void);
@@ -46,20 +46,20 @@ extern int DAT_005f1b74; /* 0x5f1b74 */
 
 /* Supplied declaration required: asdSequenceRequest. */
 /* Supplied declaration required: asdOperatorNew. */
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_001919a4. */
-extern int FUN_002009a8(unsigned int);
+extern int bgmGetStateById(unsigned int);
 /* Supplied declaration required: FUN_0021c118. */
 /* Supplied declaration required: FUN_002bf464. */
 extern int lmapMainGetUnk74(void);
-/* Supplied declaration required: FUN_002e3328. */
+/* Supplied declaration required: asdOperatorDelete. */
 /* Supplied declaration required: FUN_00318d6c. */
-/* Supplied declaration required: FUN_0031a400. */
+/* Supplied declaration required: campCommonBgAcquire. */
 extern int gameStateIsFlagSetAndLarge(void);
-/* Supplied declaration required: FUN_00324bc8. */
-/* Supplied declaration required: FUN_00342010. */
-/* Supplied declaration required: FUN_0035b304. */
-/* Supplied declaration required: FUN_0037b450. */
+/* Supplied declaration required: mapPlaceSet. */
+/* Supplied declaration required: campButtonHelpAcquire. */
+/* Supplied declaration required: campCommonBgRelease. */
+/* Supplied declaration required: campButtonHelpRelease. */
 /* Supplied declaration required: FUN_003b61ec. */
 /* Supplied declaration required: FUN_003d4c68. */
 /* Supplied declaration required: FUN_003d4da8. */
@@ -92,20 +92,20 @@ unsigned int FUN_00236110(void)
   case 0:
     if (DAT_00588c3c == 0) {
       if (DAT_00588c34 != 1) {
-        temp_v2 = FUN_002009a8(0x10000a3);
+        temp_v2 = bgmGetStateById(0x10000a3);
         if (temp_v2 == 1) {
           FUN_0021c118(0x10000a3,0xf);
         }
         temp_v3 = 0x1000079;
-        temp_v2 = FUN_002009a8(0x1000079);
-        if ((((((DAT_00588c34 != 2) || (temp_v1 = FUN_0018719c(0x71), temp_v1 == 0)) ||
-              (temp_v1 = FUN_0018719c(0x74), temp_v1 != 0)) &&
-             (((DAT_00588c34 != 3 || (temp_v1 = FUN_0018719c(0x8f), temp_v1 == 0)) ||
-              (temp_v1 = FUN_0018719c(0x92), temp_v1 != 0)))) &&
-            (((DAT_00588c34 != 4 || (temp_v1 = FUN_0018719c(0xf4), temp_v1 == 0)) ||
-             (temp_v1 = FUN_0018719c(0xf6), temp_v1 != 0)))) &&
-           (((DAT_00588c34 != 2 || (temp_v1 = FUN_0018719c(0xd1), temp_v1 == 0)) ||
-            (temp_v1 = FUN_0018719c(0xd4), temp_v1 != 0)))) {
+        temp_v2 = bgmGetStateById(0x1000079);
+        if ((((((DAT_00588c34 != 2) || (temp_v1 = gameFlagIsSet(0x71), temp_v1 == 0)) ||
+              (temp_v1 = gameFlagIsSet(0x74), temp_v1 != 0)) &&
+             (((DAT_00588c34 != 3 || (temp_v1 = gameFlagIsSet(0x8f), temp_v1 == 0)) ||
+              (temp_v1 = gameFlagIsSet(0x92), temp_v1 != 0)))) &&
+            (((DAT_00588c34 != 4 || (temp_v1 = gameFlagIsSet(0xf4), temp_v1 == 0)) ||
+             (temp_v1 = gameFlagIsSet(0xf6), temp_v1 != 0)))) &&
+           (((DAT_00588c34 != 2 || (temp_v1 = gameFlagIsSet(0xd1), temp_v1 == 0)) ||
+            (temp_v1 = gameFlagIsSet(0xd4), temp_v1 != 0)))) {
           if (temp_v2 != 1) {
             FUN_003d4c68(temp_v3);
           }
@@ -113,14 +113,14 @@ unsigned int FUN_00236110(void)
       }
       else {
         temp_v3 = 0x1000044;
-        temp_v2 = FUN_002009a8(0x1000044);
+        temp_v2 = bgmGetStateById(0x1000044);
         if (temp_v2 != 1) {
           FUN_003d4c68(temp_v3);
         }
       }
-      FUN_0031a400();
+      campCommonBgAcquire();
       FUN_002bf464();
-      FUN_00342010();
+      campButtonHelpAcquire();
       FUN_003b61ec();
     }
     puVar2 = (unsigned int *)0xe70;
@@ -147,7 +147,7 @@ unsigned int FUN_00236110(void)
     *(unsigned char *)(temp_v0 + 0x18) = 1;
     if (*(int *)(temp_v0 + 0x1c) != 0) {
       FUN_001919a4();
-      FUN_002e3328(*(unsigned int *)(temp_v0 + 0x1c));
+      asdOperatorDelete(*(unsigned int *)(temp_v0 + 0x1c));
       *(unsigned int *)(temp_v0 + 0x1c) = 0;
     }
     break;
@@ -166,7 +166,7 @@ unsigned int FUN_00236110(void)
           DAT_005f19f1 = '\0';
           DAT_005f1b70 = 0;
           DAT_005f1a00 = 1;
-          FUN_00324bc8(DAT_005f19f4,DAT_005f19f8,DAT_005f19fc);
+          mapPlaceSet(DAT_005f19f4,DAT_005f19f8,DAT_005f19fc);
           DAT_005f1a50 = 2;
         }
         temp_v4 = 0;
@@ -179,7 +179,7 @@ unsigned int FUN_00236110(void)
       DAT_005f19f1 = '\0';
       DAT_005f1b70 = 0;
       DAT_005f1a00 = 1;
-      FUN_00324bc8(DAT_005f19f4,DAT_005f19f8,DAT_005f19fc);
+      mapPlaceSet(DAT_005f19f4,DAT_005f19f8,DAT_005f19fc);
       DAT_005f1a50 = 2;
       asdSequenceRequest(6,0);
     }
@@ -187,12 +187,12 @@ unsigned int FUN_00236110(void)
     *(unsigned char *)(temp_v0 + 0x18) = 1;
     if (*(int *)(temp_v0 + 0x1c) != 0) {
       FUN_001919a4();
-      FUN_002e3328(*(unsigned int *)(temp_v0 + 0x1c));
+      asdOperatorDelete(*(unsigned int *)(temp_v0 + 0x1c));
       *(unsigned int *)(temp_v0 + 0x1c) = 0;
     }
     if (DAT_00588c3c == 0) {
-      FUN_0035b304();
-      FUN_0037b450();
+      campCommonBgRelease();
+      campButtonHelpRelease();
       FUN_00318d6c();
     }
     break;

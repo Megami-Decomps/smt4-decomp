@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002ed278(int);
+int streamReadU8(int);
 
 /* stack frame of param_2: 12 slot(s), 36 byte(s) */
 typedef struct {
@@ -22,7 +22,7 @@ typedef struct {
     unsigned char sp60; /* 0x60: local_60 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_002ed278. */
+/* Supplied declaration required: streamReadU8. */
 
 
 /* WARNING: Removing unreachable block (ram,0x00106432) */
@@ -49,7 +49,7 @@ unsigned int FUN_001063f8(unsigned int param_1,int param_2)
 {
 /* irregular: 19 native warning(s); review required */
   if (*(int *)(*(int *)(param_2 + 8) + 0x10) != 0) {
-    FUN_002ed278(param_2);
+    streamReadU8(param_2);
   }
   return 0;
 }

@@ -20,10 +20,10 @@ typedef struct {
 extern ScreenState *g_btlMain;
 
 void FUN_0019faa0(s32 a, s32 b, f32 value);
-void FUN_0024dcec(s32 value);
-void FUN_0024dcfc(u32 resource);
-void FUN_00263588(u32 effect);
-void FUN_00263c80(void *subObject);
+void eventCommandSetPendingCleanup(s32 value);
+void asdMemoryFreeLockedAlt(u32 resource);
+void gfxObjectDestroy(u32 effect);
+void cameraRegistryRemove(void *subObject);
 void FUN_0029c2cc(s32 effect, s32 value);
 ScreenManager *jobGetWork(void);
 void asdMemFree(ScreenState *screen);
@@ -35,16 +35,16 @@ void scrDestroyActive(void)
     ScreenState *screen = g_btlMain;
 
     if (g_btlMain != NULL) {
-        FUN_0024dcfc(g_btlMain->resource);
+        asdMemoryFreeLockedAlt(g_btlMain->resource);
         screen->resource = 0;
-        FUN_0024dcec(0);
+        eventCommandSetPendingCleanup(0);
         if (screen->effect != 0) {
             FUN_0029c2cc(screen->effect, 0);
-            FUN_00263588(screen->effect);
+            gfxObjectDestroy(screen->effect);
             screen->effect = 0;
             screen->effectParam = 0;
         }
-        FUN_00263c80(screen->subObject);
+        cameraRegistryRemove(screen->subObject);
         FUN_0019faa0(0, 1, 10.0f);
         asdMemFree(g_btlMain);
         g_btlMain = NULL;

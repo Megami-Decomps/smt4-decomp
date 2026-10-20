@@ -8,7 +8,7 @@ int CONCAT44(...);
 int btlGetMainState(void);
 int FUN_00184310(void);
 int FUN_00192550(void);
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 int sysMemClear(...);
 int FUN_002efc44(...);
 int FUN_0034a290(void);
@@ -113,10 +113,10 @@ extern unsigned int uRam005714dc; /* 0x5714dc */
 /* Supplied declaration required: btlGetMainState. */
 extern int lcgRandomRange(unsigned int);
 /* Supplied declaration required: FUN_00184310. */
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_00192550. */
 extern unsigned int FUN_0019f240(unsigned int);
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: dataTable04FindById. */
 extern int FUN_0028cb6c(void);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002efc44. */
@@ -209,14 +209,14 @@ unsigned int FUN_004c16c8(unsigned int param_1,int param_2,unsigned int param_3,
   temp_v54 = param_4;
   temp_v45 = (unsigned int *)btlGetMainState();
   temp_v1 = temp_v52;
-  FUN_001aba54();
+  dataTable04FindById();
   FUN_00192550();
   temp_v2 = 0;
   if (param_2 != 0) {
     temp_v2 = (unsigned int)*(unsigned short *)(param_2 + 0x32);
   }
   if (param_2 != 0 && temp_v2 != 0) {
-    FUN_001aba54();
+    dataTable04FindById();
     temp_v1 = temp_v2;
   }
   puVar4 = temp_v45;
@@ -641,7 +641,7 @@ unsigned int FUN_004c16c8(unsigned int param_1,int param_2,unsigned int param_3,
           temp_v8 = puVar11[1];
           if (!((DAT_005713f8 & temp_v10) == 0 && (DAT_005713fc & temp_v8) == 0)) {
             temp_v10 = temp_v2;
-            FUN_001aba54();
+            dataTable04FindById();
             if (temp_v10 != 0) {
               temp_v5 = FUN_0019f240(temp_v2);
               FUN_002efc44(temp_v10,temp_v5,3);
@@ -653,7 +653,7 @@ unsigned int FUN_004c16c8(unsigned int param_1,int param_2,unsigned int param_3,
           }
           else if (!((DAT_00571408 & temp_v10) == 0 && (DAT_0057140c & temp_v8) == 0)) {
             temp_v10 = temp_v2;
-            FUN_001aba54();
+            dataTable04FindById();
             temp_v5 = (unsigned int)(temp_v25 >> 0x20);
             temp_v36 = temp_v10;
             if (temp_v10 != 0) {
@@ -673,7 +673,7 @@ unsigned int FUN_004c16c8(unsigned int param_1,int param_2,unsigned int param_3,
             }
           }
           else if ((temp_v10 & DAT_00571410) != 0 || (temp_v8 & DAT_00571414) != 0) {
-            FUN_001aba54();
+            dataTable04FindById();
             temp_v5 = (unsigned int)(temp_v25 >> 0x20);
             temp_v33 = temp_v2;
             if (temp_v2 != 0) {
@@ -831,13 +831,13 @@ unsigned int FUN_004c16c8(unsigned int param_1,int param_2,unsigned int param_3,
 LAB_004c270c:
             if ((temp_v44[temp_v19] == 10) &&
                ((*temp_v50 & DAT_00571408) != 0 || (temp_v50[1] & DAT_0057140c) != 0)) {
-              temp_v11 = FUN_0018719c(0x4b6);
+              temp_v11 = gameFlagIsSet(0x4b6);
               if (temp_v11 != 0) {
                 temp_v18 = temp_v18 + (float)((unsigned long long)temp_v30 >> 0x20);
               }
               puVar11 = temp_v45;
               FUN_003f21ec();
-              if ((puVar11 != (unsigned int *)0x0) && (temp_v11 = FUN_0018719c(0x4c6), temp_v11 == 0)) {
+              if ((puVar11 != (unsigned int *)0x0) && (temp_v11 = gameFlagIsSet(0x4c6), temp_v11 == 0)) {
                 temp_v18 = temp_v18 + (float)((unsigned long long)temp_v30 >> 0x20);
               }
             }

@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_002c0894(int resource);
+int asdTextureRelease(int resource);
 int asdMemFree(...);
 
 typedef struct Block {
@@ -27,7 +27,7 @@ void FUN_002e1344(Obj *obj)
     }
     asdMemFree(block->buffer);
     asdMemFree(obj->block);
-    FUN_002c0894(obj->resource);
+    asdTextureRelease(obj->resource);
     asdMemFree(obj);
 }
 

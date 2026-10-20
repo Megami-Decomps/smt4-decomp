@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned int *DAT_00581284; /* 0x581284 */
+extern unsigned int *g_mapObj; /* 0x581284 */
 
 
 void FUN_0020f054(void)
@@ -14,8 +14,8 @@ void FUN_0020f054(void)
   int temp_v0;
   int temp_v1;
   
-  puVar1 = DAT_00581284;
-  *DAT_00581284 = 0;
+  puVar1 = g_mapObj;
+  *g_mapObj = 0;
   *(unsigned short *)(puVar1 + 1) = 0;
   *(unsigned short *)((int)puVar1 + 6) = 0;
   *(unsigned short *)(puVar1 + 2) = 0;

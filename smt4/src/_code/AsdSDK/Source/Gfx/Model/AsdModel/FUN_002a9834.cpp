@@ -12,7 +12,7 @@ int FUN_002a65d8(int *, int);
 int FUN_002af294(...);
 int FUN_002b3acc(int *, int, int, unsigned int);
 int asdMemoryGetDefaultAllocator(void);
-int FUN_002c30c4(...);
+int libc_strlen(...);
 int asdMemoryAlloc(int, int, int, unsigned int);
 int nw_gfx_SceneBuilder_CreateObject(int *, unsigned int, unsigned int);
 int nw_gfx_SceneHelper_ResolveReferenceImpl(...);
@@ -60,10 +60,10 @@ extern unsigned int DAT_00464b8c; /* 0x464b8c */
 /* Supplied declaration required: FUN_002a65d8. */
 /* Supplied declaration required: FUN_002af294. */
 /* Supplied declaration required: FUN_002b3acc. */
-extern int FUN_002b4414(int, unsigned int, unsigned int);
+extern int libc_strncmp(int, unsigned int, unsigned int);
 /* Supplied declaration required: asdMemoryGetDefaultAllocator. */
 extern unsigned int asdMemoryGetAllocatorA(void);
-/* Supplied declaration required: FUN_002c30c4. */
+/* Supplied declaration required: libc_strlen. */
 /* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: nw_gfx_SceneBuilder_CreateObject. */
 /* Supplied declaration required: nw_gfx_SceneHelper_ResolveReferenceImpl. */
@@ -305,8 +305,8 @@ LAB_002a9bac:
           temp_v9 = 0;
         }
         do {
-          temp_v1 = FUN_002c30c4(*(unsigned int *)(temp_v7 * 4 + 0x464bd8));
-          temp_v5 = FUN_002b4414(temp_v9,*(unsigned int *)(temp_v7 * 4 + 0x464bd8),temp_v1);
+          temp_v1 = libc_strlen(*(unsigned int *)(temp_v7 * 4 + 0x464bd8));
+          temp_v5 = libc_strncmp(temp_v9,*(unsigned int *)(temp_v7 * 4 + 0x464bd8),temp_v1);
           if (temp_v5 == 0) {
             temp_v9 = *(int *)(temp_v7 * 4 + 0x464bd8);
             if (*(int *)(temp_v6 + 0x1c) != 0) {
@@ -316,7 +316,7 @@ LAB_002a9bac:
               temp_v11 = 0;
             }
             if (!(temp_v11 == 0 || temp_v9 == 0)) {
-              temp_v1 = FUN_002c30c4(temp_v9);
+              temp_v1 = libc_strlen(temp_v9);
               temp_v9 = nw_ut_ResDicPatricia_Get(&temp_v11,temp_v9,temp_v1);
               if (temp_v9 == 0) {
                 temp_v0 = 0xffff;

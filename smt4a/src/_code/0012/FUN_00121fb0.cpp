@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0012201a(int, int *, int);
-int FUN_002e6e14(int);
+int asdOperatorDeleteArray(int);
 int FUN_002f4c9c(int);
 int FUN_002f4cd6(int, int, unsigned int);
 int FUN_0030fe20(int, unsigned int);
@@ -18,11 +18,11 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_0012201a. */
-/* Supplied declaration required: FUN_002e6e14. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
 /* Supplied declaration required: FUN_002f4c9c. */
 /* Supplied declaration required: FUN_002f4cd6. */
 /* Supplied declaration required: FUN_0030fe20. */
-extern int FUN_0030fe5c(int, unsigned int *);
+extern int wordRefCompare(int, unsigned int *);
 extern int __aeabi_uidivmod(unsigned int, int);
 
 
@@ -44,7 +44,7 @@ void FUN_00121fb0(int param_1,unsigned int param_2,int param_3,unsigned int para
   uStack_20 = param_2;
   iStack_1c = param_3;
   temp_v4 = param_4;
-  temp_v0 = FUN_0030fe5c(param_1 + 0x18,temp_v3);
+  temp_v0 = wordRefCompare(param_1 + 0x18,temp_v3);
   temp_v0 = temp_v0 / 2;
   if (temp_v0 != 0) {
     temp_v1 = __aeabi_uidivmod(param_2,temp_v0);
@@ -61,7 +61,7 @@ void FUN_00121fb0(int param_1,unsigned int param_2,int param_3,unsigned int para
     FUN_002f4cd6(param_1,param_3,temp_v4);
   }
   FUN_0012201a(param_1,&temp_v2,temp_v0);
-  FUN_002e6e14(temp_v2);
+  asdOperatorDeleteArray(temp_v2);
   return;
 }
 

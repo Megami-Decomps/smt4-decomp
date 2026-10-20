@@ -53,7 +53,7 @@ int mapIfSetMode1(void);
 int FUN_0027fae4(void);
 int FUN_0027fc14(...);
 int FUN_00287be4(void);
-int FUN_002b8838(...);
+int buttonHelpSetPreset(...);
 int FUN_002d3e58(void);
 int mapIfReleaseSlot0(void);
 
@@ -270,15 +270,15 @@ extern int FUN_002820a4(void);
 /* Supplied declaration required: FUN_00287be4. */
 extern int FUN_002896bc(void);
 /* Supplied declaration required: FUN_00291e40. */
-extern int FUN_00296d6c(unsigned int, unsigned int);
+extern int randBetween(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0029be5c. */
 /* Supplied declaration required: FUN_0029c3c0. */
-/* Supplied declaration required: FUN_002b8838. */
-extern int FUN_002b8cec(unsigned int);
+/* Supplied declaration required: buttonHelpSetPreset. */
+extern int padIsButtonRepeat(unsigned int);
 /* Supplied declaration required: FUN_002bf810. */
-extern int FUN_002bfde4(unsigned int);
-extern int FUN_002c09d0(unsigned int);
-extern int FUN_002c2950(void);
+extern int padIsButtonPressed(unsigned int);
+extern int gameFlagIsSet(unsigned int);
+extern int gameGetMapBlock(void);
 /* Supplied declaration required: FUN_002c29d8. */
 /* Supplied declaration required: FUN_002c5be8. */
 extern unsigned int asdModelGetStatic38(void);
@@ -433,7 +433,7 @@ void FUN_002712dc(void)
   switch(*g_lmapScene) {
   case 1:
     fStack_28 = temp_v36;
-    temp_v31 = FUN_002c2950();
+    temp_v31 = gameGetMapBlock();
     temp_v35 = 20.0f;
     temp_v15 = 0;
     temp_v36 = 0.0f;
@@ -495,22 +495,22 @@ void FUN_002712dc(void)
       }
       if (DAT_0049fc84 == 1) {
         if (DAT_0049fce8 != '\0') {
-          temp_v7 = FUN_002bfde4(1);
+          temp_v7 = padIsButtonPressed(1);
           if (temp_v7 != 0) {
             DAT_0049fce8 = '\0';
           }
-          temp_v7 = FUN_002b8cec(5);
+          temp_v7 = padIsButtonRepeat(5);
           temp_v18 = 50.0f;
           if (temp_v7 != 0) {
             g_lmapScene[0xb] = (int)((float)g_lmapScene[0xb] + 50.0f);
           }
-          temp_v7 = FUN_002b8cec(6);
+          temp_v7 = padIsButtonRepeat(6);
           if (temp_v7 != 0) {
             g_lmapScene[0xb] = (int)((float)g_lmapScene[0xb] - temp_v18);
           }
         }
         else {
-          temp_v7 = FUN_002bfde4(1);
+          temp_v7 = padIsButtonPressed(1);
           if (temp_v7 != 0) {
             DAT_0049fce8 = '\x01';
           }
@@ -1095,7 +1095,7 @@ joined_r0x002c99a8:
                 if (g_lmapScene[2] == 2) {
                   FUN_0028250c();
                   FUN_00282390();
-                  temp_v13 = FUN_00296d6c(0,2);
+                  temp_v13 = randBetween(0,2);
                   FUN_00291e40(temp_v13 + 0x1000235);
                 }
                 if (g_lmapScene[2] == 3) {
@@ -1115,7 +1115,7 @@ joined_r0x002c99a8:
               if (g_lmapScene[2] == 2) {
                 FUN_0028250c();
                 FUN_00282390();
-                temp_v13 = FUN_00296d6c(0,2);
+                temp_v13 = randBetween(0,2);
                 FUN_00291e40(temp_v13 + 0x1000232);
               }
               if (g_lmapScene[2] == 3) {
@@ -1136,7 +1136,7 @@ joined_r0x002c99a8:
               FUN_00291e40(0x10001f1);
               FUN_0028250c();
               FUN_00282390();
-              temp_v13 = FUN_00296d6c(0,2);
+              temp_v13 = randBetween(0,2);
               FUN_00291e40(temp_v13 + 0x100022f);
               FUN_0027fca0(0xffffffff);
             }
@@ -1152,7 +1152,7 @@ joined_r0x002c99a8:
             FUN_00291e40(0x10001f0);
             FUN_0028250c();
             FUN_00282390();
-            temp_v13 = FUN_00296d6c(0,2);
+            temp_v13 = randBetween(0,2);
             FUN_00291e40(temp_v13 + 0x100022c);
             FUN_0027fca0(0xffffffff);
           }
@@ -1344,7 +1344,7 @@ LAB_002c9a70:
         g_lmapScene[0x14] = temp_v7;
       }
       FUN_0027fc14(0xe);
-      FUN_002b8838(0xdb);
+      buttonHelpSetPreset(0xdb);
       piVar22 = g_lmapScene;
       g_lmapScene[1] = g_lmapScene[1] + 1;
       piVar22[2] = 0;
@@ -1421,7 +1421,7 @@ LAB_002c9a70:
             FUN_0027fca0(0xffffffff);
             FUN_0028250c();
             FUN_00282390();
-            temp_v7 = FUN_00296d6c(0,1);
+            temp_v7 = randBetween(0,1);
             FUN_00291e40(temp_v7 + 0x100023e);
             piVar22 = g_lmapScene;
             g_lmapScene[1] = g_lmapScene[1] + 1;
@@ -1459,7 +1459,7 @@ LAB_002c9a70:
           FUN_0027fca0(0xffffffff);
           FUN_0028250c();
           FUN_00282390();
-          temp_v7 = FUN_00296d6c(0,1);
+          temp_v7 = randBetween(0,1);
           FUN_00291e40(temp_v7 + 0x100023c);
           piVar22 = g_lmapScene;
           g_lmapScene[1] = g_lmapScene[1] + 1;
@@ -1568,7 +1568,7 @@ LAB_002c9a70:
               }
               FUN_0027fc14(10);
               DAT_004474f4[0x2b] = -1;
-              FUN_002b8838(0xdb);
+              buttonHelpSetPreset(0xdb);
               FUN_0024f034(1,DAT_0049f99c);
               FUN_001fa760();
               piVar22 = g_lmapScene;
@@ -1606,7 +1606,7 @@ LAB_002c9a70:
             piVar22[2] = 0;
           }
           else {
-            temp_v7 = FUN_002bfde4(5);
+            temp_v7 = padIsButtonPressed(5);
             if ((temp_v7 != 0) || (temp_v7 = FUN_002762e0(), temp_v7 != 0)) {
               piVar22 = DAT_004474f4;
               DAT_004474f4[6] = g_lmapScene[0x14];
@@ -1763,7 +1763,7 @@ LAB_002c9a70:
               piVar22[0x14] = (int)DAT_0049f9ac;
               FUN_0027fc14(0xb);
               DAT_004474f4[0x2b] = -2;
-              FUN_002b8838(0xdb);
+              buttonHelpSetPreset(0xdb);
               FUN_0024f034(1,DAT_0049f99c);
               FUN_0028250c();
               FUN_00282390();
@@ -1805,7 +1805,7 @@ LAB_002c9a70:
             piVar22[2] = 0;
           }
           else {
-            temp_v7 = FUN_002bfde4(5);
+            temp_v7 = padIsButtonPressed(5);
             if ((temp_v7 != 0) || (temp_v7 = FUN_002762e0(), temp_v7 != 0)) {
               piVar22 = DAT_004474f4;
               DAT_004474f4[6] = g_lmapScene[0x14];
@@ -2073,7 +2073,7 @@ LAB_002c9a70:
         piVar22[0x14] = (int)DAT_0049f9ac;
         FUN_0027fc14(0xc);
         DAT_004474f4[0x2b] = -3;
-        FUN_002b8838(0xdb);
+        buttonHelpSetPreset(0xdb);
         FUN_0024f034(1,DAT_0049f99c);
         FUN_0028250c();
         FUN_00282390();
@@ -2132,7 +2132,7 @@ LAB_002c9a70:
           }
         }
         else {
-          temp_v7 = FUN_002bfde4(5);
+          temp_v7 = padIsButtonPressed(5);
           if ((temp_v7 != 0) || (temp_v7 = FUN_002762e0(), temp_v7 != 0)) {
             piVar22 = DAT_004474f4;
             DAT_004474f4[6] = g_lmapScene[0x14];
@@ -2195,7 +2195,7 @@ LAB_002e94f0:
         FUN_0027fca0(0xffffffff);
         FUN_0028250c();
         FUN_00282390();
-        temp_v7 = FUN_00296d6c(0,1);
+        temp_v7 = randBetween(0,1);
         FUN_00291e40(temp_v7 + 0x100023c);
         piVar22 = g_lmapScene;
         g_lmapScene[0x1a] = (int)temp_v17;
@@ -2294,7 +2294,7 @@ LAB_002e94f0:
           FUN_0027fca0(0xffffffff);
           FUN_0028250c();
           FUN_00282390();
-          temp_v7 = FUN_00296d6c(0,1);
+          temp_v7 = randBetween(0,1);
           FUN_00291e40(temp_v7 + 0x100023e);
         }
         if (g_lmapScene[2] != 6) break;
@@ -2447,7 +2447,7 @@ LAB_002e94f0:
                 g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + temp_v19 * temp_v34);
               }
               else {
-                temp_v7 = FUN_002bfde4(5);
+                temp_v7 = padIsButtonPressed(5);
                 if ((temp_v7 != 0) || (temp_v7 = FUN_002762e0(), temp_v7 != 0)) {
                   piVar22 = DAT_004474f4;
                   DAT_004474f4[6] = g_lmapScene[0x14];
@@ -2490,7 +2490,7 @@ LAB_002e94f0:
           piVar22[0x14] = (int)DAT_0049f9ac;
           FUN_0027fc14(0xc);
           DAT_004474f4[0x2b] = -3;
-          FUN_002b8838(0xdb);
+          buttonHelpSetPreset(0xdb);
           FUN_0024f034(1,DAT_0049f99c);
           FUN_0028250c();
           FUN_00282390();
@@ -2603,7 +2603,7 @@ LAB_002e94f0:
                 piVar22[2] = 0;
               }
               else {
-                temp_v7 = FUN_002bfde4(5);
+                temp_v7 = padIsButtonPressed(5);
                 if ((temp_v7 != 0) || (temp_v7 = FUN_002762e0(), temp_v7 != 0)) {
                   piVar22 = DAT_004474f4;
                   DAT_004474f4[6] = g_lmapScene[0x14];
@@ -2680,7 +2680,7 @@ LAB_002e94f0:
           }
           FUN_0027fc14(10);
           DAT_004474f4[0x2b] = -1;
-          FUN_002b8838(0xdb);
+          buttonHelpSetPreset(0xdb);
           FUN_0024f034(1,DAT_0049f99c);
           temp_v7 = g_lmapScene[1];
           piVar22 = g_lmapScene;
@@ -2772,7 +2772,7 @@ LAB_002e94f0:
                     piVar22[2] = 0;
                   }
                   else {
-                    temp_v7 = FUN_002bfde4(5);
+                    temp_v7 = padIsButtonPressed(5);
                     if ((temp_v7 != 0) || (temp_v7 = FUN_002762e0(), temp_v7 != 0)) {
                       piVar22 = DAT_004474f4;
                       DAT_004474f4[6] = g_lmapScene[0x14];
@@ -2827,7 +2827,7 @@ LAB_002e94f0:
               g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + temp_v18 * temp_v19);
               FUN_0027fc14(10);
               DAT_004474f4[0x2b] = -1;
-              FUN_002b8838(0xdb);
+              buttonHelpSetPreset(0xdb);
               FUN_0024f034(1,DAT_0049f99c);
               FUN_0028250c();
               FUN_00282390();
@@ -2886,7 +2886,7 @@ LAB_002e94f0:
               FUN_0027fca0(0xffffffff);
               FUN_0028250c();
               FUN_00282390();
-              temp_v7 = FUN_00296d6c(0,1);
+              temp_v7 = randBetween(0,1);
               FUN_00291e40(temp_v7 + 0x100023c);
               piVar22 = g_lmapScene;
               g_lmapScene[0x1a] = 0x41000000;
@@ -3029,7 +3029,7 @@ LAB_002e94f0:
                     piVar22[2] = 0;
                   }
                   else {
-                    temp_v7 = FUN_002bfde4(6);
+                    temp_v7 = padIsButtonPressed(6);
                     if ((temp_v7 != 0) || (temp_v7 = FUN_002762e0(), temp_v7 != 0)) {
                       piVar22 = DAT_004474f4;
                       DAT_004474f4[6] = g_lmapScene[0x14];
@@ -3080,7 +3080,7 @@ LAB_002e94f0:
               piVar22[0x14] = (int)DAT_0049f9ac;
               FUN_0027fc14(0xd);
               DAT_004474f4[0x2b] = 1;
-              FUN_002b8838(0xda);
+              buttonHelpSetPreset(0xda);
               FUN_0024f034(1,DAT_0049f99c);
               FUN_0019db68();
               piVar22 = g_lmapScene;
@@ -3090,7 +3090,7 @@ LAB_002e94f0:
           }
           else if (temp_v7 != 0xb) {
             if (temp_v7 == 0xc) {
-              if ((DAT_0049f958 == 0x3303001) && (temp_v7 = FUN_002c09d0(0x292), temp_v7 != 0)) {
+              if ((DAT_0049f958 == 0x3303001) && (temp_v7 = gameFlagIsSet(0x292), temp_v7 != 0)) {
                 temp_v7 = FUN_002896bc();
                 if (temp_v7 != 0) {
 LAB_002d472c:
@@ -3140,9 +3140,9 @@ LAB_002d472c:
               FUN_0027fca0(0xffffffff);
               FUN_0028250c();
               FUN_00282390();
-              temp_v7 = FUN_00296d6c(0,1);
+              temp_v7 = randBetween(0,1);
               FUN_00291e40(temp_v7 + 0x100023c);
-              if ((DAT_0049f958 == 0x3303001) && (temp_v7 = FUN_002c09d0(0x292), temp_v7 != 0)) {
+              if ((DAT_0049f958 == 0x3303001) && (temp_v7 = gameFlagIsSet(0x292), temp_v7 != 0)) {
                 FUN_0029c3c0(0,0xf,0xff);
                 temp_v8 = 0xf;
                 temp_v6 = 1;
@@ -3344,7 +3344,7 @@ LAB_002d472c:
                 g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + temp_v17 * temp_v19);
               }
               else {
-                temp_v7 = FUN_002bfde4(6);
+                temp_v7 = padIsButtonPressed(6);
                 if ((temp_v7 != 0) || (temp_v7 = FUN_002762e0(), temp_v7 != 0)) {
                   piVar22 = DAT_004474f4;
                   DAT_004474f4[6] = g_lmapScene[0x14];
@@ -3394,7 +3394,7 @@ LAB_002d472c:
           piVar22[0x14] = (int)DAT_0049f9ac;
           FUN_0027fc14(0xd);
           DAT_004474f4[0x2b] = 1;
-          FUN_002b8838(0xda);
+          buttonHelpSetPreset(0xda);
           FUN_0024f034(1,DAT_0049f99c);
           FUN_0019db68();
           piVar22 = g_lmapScene;
@@ -3513,7 +3513,7 @@ LAB_002d472c:
           FUN_0027fca0(0xffffffff);
           FUN_0028250c();
           FUN_00282390();
-          temp_v7 = FUN_00296d6c(0,1);
+          temp_v7 = randBetween(0,1);
           FUN_00291e40(temp_v7 + 0x100023e);
         }
         piVar22 = g_lmapScene;
@@ -3583,7 +3583,7 @@ LAB_002d472c:
           FUN_0027fca0(0xffffffff);
           FUN_0028250c();
           FUN_00282390();
-          temp_v7 = FUN_00296d6c(0,1);
+          temp_v7 = randBetween(0,1);
           FUN_00291e40(temp_v7 + 0x100023e);
         }
         if (g_lmapScene[2] >= 0x24) {
@@ -3707,7 +3707,7 @@ LAB_002d472c:
       FUN_0027fca0(0xffffffff);
       FUN_0028250c();
       FUN_00282390();
-      temp_v7 = FUN_00296d6c(0,1);
+      temp_v7 = randBetween(0,1);
       FUN_00291e40(temp_v7 + 0x100023e);
     }
     goto code_r0x00272944;
@@ -3854,9 +3854,9 @@ LAB_002d472c:
               g_lmapScene[3] = g_lmapScene[3] + 2;
             }
           }
-          temp_v7 = FUN_002bfde4(1);
-          if (((temp_v7 != 0) || (temp_v7 = FUN_002bfde4(0), temp_v7 != 0)) ||
-             ((temp_v7 = FUN_002bfde4(9), temp_v7 != 0 || (temp_v7 = FUN_002bfde4(10), temp_v7 != 0))))
+          temp_v7 = padIsButtonPressed(1);
+          if (((temp_v7 != 0) || (temp_v7 = padIsButtonPressed(0), temp_v7 != 0)) ||
+             ((temp_v7 = padIsButtonPressed(9), temp_v7 != 0 || (temp_v7 = padIsButtonPressed(10), temp_v7 != 0))))
           {
             g_lmapScene[3] = g_lmapScene[3] + 3;
           }
@@ -3953,7 +3953,7 @@ LAB_002d472c:
       FUN_00291e40(0x1000186);
       FUN_0028250c();
       FUN_00282390();
-      temp_v7 = FUN_00296d6c(0,1);
+      temp_v7 = randBetween(0,1);
       FUN_00291e40(temp_v7 + 0x1000238);
       puVar5 = (unsigned int *)&g_gameState;
       if (g_gameState == (unsigned int *)0x5) {

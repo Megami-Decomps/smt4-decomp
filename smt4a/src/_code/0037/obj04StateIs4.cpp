@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern PanelRef DAT_0057f588;
+extern PanelRef g_messageMain;
 
 u8 obj04StateIs4(void)
 {
-    return DAT_0057f588.unk04->state == 4;
+    return g_messageMain.unk04->state == 4;
 }
 
 } /* extern "C" */

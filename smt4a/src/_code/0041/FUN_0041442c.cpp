@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e9afe(int, int *);
+int vectorCopyHeader(int, int *);
 int FUN_004130c0(int, int);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
@@ -13,8 +13,8 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_002e9afe. */
-extern int FUN_002f4e86(int);
+/* Supplied declaration required: vectorCopyHeader. */
+extern int refIsNonNegative(int);
 /* Supplied declaration required: FUN_004130c0. */
 
 
@@ -30,8 +30,8 @@ void FUN_0041442c(int param_1,int param_2)
   temp_v2 = *(unsigned int *)(param_2 + 0x40);
   temp_v1 = *(unsigned int *)(param_2 + 0x38);
   uStack_14 = *(unsigned int *)(param_2 + 0x3c);
-  FUN_002e9afe(param_1 + 0x7c,&temp_v1);
-  temp_v0 = FUN_002f4e86(param_1 + 0x7c);
+  vectorCopyHeader(param_1 + 0x7c,&temp_v1);
+  temp_v0 = refIsNonNegative(param_1 + 0x7c);
   if (temp_v0 == 0) {
     *(unsigned char *)(param_1 + 0xfc) = 1;
   }

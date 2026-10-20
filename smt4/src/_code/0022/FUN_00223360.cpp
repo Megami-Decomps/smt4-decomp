@@ -17,7 +17,7 @@ typedef struct {
     unsigned int sp50; /* 0x50: local_50 */
 } param_1_stack;
 
-extern int DAT_0044dc20; /* 0x44dc20 */
+extern int g_result; /* 0x44dc20 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
@@ -25,9 +25,9 @@ extern int dataTable09Sub3GetRecord(unsigned char, int);
 /* Supplied declaration required: FUN_00283e48. */
 extern int FUN_00295d08(unsigned int);
 extern int flagWordTestBit(int, unsigned int);
-extern int FUN_002a8740(void);
-extern int FUN_002a8764(void);
-extern int FUN_002b63ac(void);
+extern int gameGetUnitRecord(void);
+extern int gameGetSlotTable(void);
+extern int gameGetPlayerData(void);
 
 
 /* WARNING: Removing unreachable block (ram,0x002233a4) */
@@ -61,9 +61,9 @@ void FUN_00223360(int *param_1)
   unsigned long long temp_v18;
   unsigned long long temp_v19;
   
-  temp_v2 = DAT_0044dc20;
-  temp_v3 = FUN_002a8764();
-  temp_v4 = FUN_002b63ac();
+  temp_v2 = g_result;
+  temp_v3 = gameGetSlotTable();
+  temp_v4 = gameGetPlayerData();
   temp_v12 = param_1[2];
   temp_v13 = 0;
   *(int *)(temp_v2 + 0x3650) = *(int *)(temp_v2 + 0x3650) + temp_v12;
@@ -109,7 +109,7 @@ void FUN_00223360(int *param_1)
   temp_v12 = 0;
   do {
     if (-1 < *(char *)(temp_v3 + temp_v12 + 0x90f0)) {
-      temp_v4 = FUN_002a8740();
+      temp_v4 = gameGetUnitRecord();
       temp_v5 = flagWordTestBit(temp_v4,1);
       if (((temp_v5 == 0) && (temp_v5 = flagWordTestBit(temp_v4,10), temp_v5 == 0)) &&
          (temp_v5 = flagWordTestBit(temp_v4,2), temp_v5 == 0)) {
@@ -128,7 +128,7 @@ void FUN_00223360(int *param_1)
         else {
           temp_v8 = 1;
         }
-        temp_v5 = FUN_002a8740();
+        temp_v5 = gameGetUnitRecord();
         temp_v10 = 0;
         temp_v16 = temp_v17;
         do {

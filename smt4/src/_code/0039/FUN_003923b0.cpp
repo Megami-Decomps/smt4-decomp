@@ -6,15 +6,15 @@ extern "C" {
 
 int FUN_00233240(...);
 int FUN_0023392c(...);
-int FUN_00233d78(...);
+int jobStopAndClearFlags(...);
 int FUN_00233db8(...);
 int FUN_00233e70(...);
 int FUN_00233fcc(...);
 int FUN_002340e4(...);
 int FUN_00234124(...);
 int FUN_0027eafc(...);
-int FUN_00296f4c(...);
-int FUN_002b8cc8(...);
+int scrScriptProcessStartEntry(...);
+int ifTouchRegionRemove(...);
 int FUN_002bc01c(...);
 int jobStop(...);
 int taskCreateDraw(...);
@@ -39,21 +39,21 @@ extern int g_aocMain; /* 0x432fc8 */
 extern int FUN_0019e0c0(unsigned int);
 /* Supplied declaration required: FUN_00233240. */
 /* Supplied declaration required: FUN_0023392c. */
-/* Supplied declaration required: FUN_00233d78. */
+/* Supplied declaration required: jobStopAndClearFlags. */
 /* Supplied declaration required: FUN_00233db8. */
 /* Supplied declaration required: FUN_00233e70. */
 /* Supplied declaration required: FUN_00233fcc. */
 /* Supplied declaration required: FUN_002340e4. */
 /* Supplied declaration required: FUN_00234124. */
 extern int FUN_0026ee68(unsigned int);
-extern int FUN_0027ea14(unsigned int *);
+extern int strIsEmpty(unsigned int *);
 /* Supplied declaration required: FUN_0027eafc. */
-extern unsigned int FUN_00290d74(unsigned int, unsigned char *);
-/* Supplied declaration required: FUN_00296f4c. */
+extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002973d8(void);
 extern int FUN_0029d65c(int);
-extern int FUN_002a1520(unsigned int *);
-/* Supplied declaration required: FUN_002b8cc8. */
+extern int byteIsAtLeast100(unsigned int *);
+/* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: FUN_002bc01c. */
 extern int jobIsValid(unsigned int);
 /* Supplied declaration required: jobStop. */
@@ -124,17 +124,17 @@ void FUN_003923b0(unsigned int *param_1)
           uStack_58 = uStack_44;
           uStack_54 = uStack_40;
           uStack_50 = uStack_3c;
-          temp_v1 = FUN_0027ea14(&temp_v3);
+          temp_v1 = strIsEmpty(&temp_v3);
           if (temp_v1 != 0) {
             *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) | 0x100;
             FUN_0023392c(param_1,1);
             param_1[2] = 2;
-            FUN_00233d78(param_1);
+            jobStopAndClearFlags(param_1);
             return;
           }
-          temp_v1 = FUN_002a1520(&temp_v3);
+          temp_v1 = byteIsAtLeast100(&temp_v3);
           if (temp_v1 != 0) {
-            FUN_00233d78(param_1);
+            jobStopAndClearFlags(param_1);
             if ((temp_v3 & 0xff) == 0x66) {
               temp_v5 = temp_v3;
               uStack_34 = uStack_5c;
@@ -220,15 +220,15 @@ void FUN_003923b0(unsigned int *param_1)
       if (temp_v1 != 0) {
         if (*puVar2 != 0xffffffff) {
           *puVar2 = 0xffffffff;
-          FUN_002b8cc8();
+          ifTouchRegionRemove();
         }
         *param_1 = *param_1 & 0xffffcfff;
         jobStop(*puVar8,0);
       }
       if ((*param_1 & 2) != 0) {
         param_1[2] = 5;
-        temp_v2 = FUN_00290d74(param_1[0xd4],&LAB_003928a4);
-        FUN_00296f4c(param_1[0xd6],temp_v2);
+        temp_v2 = tableGroupFindEntryIndex(param_1[0xd4],&LAB_003928a4);
+        scrScriptProcessStartEntry(param_1[0xd6],temp_v2);
       }
       else {
         param_1[1] = 5;
@@ -254,7 +254,7 @@ void FUN_003923b0(unsigned int *param_1)
         *param_1 = *param_1 & 0xffffdfff;
         if (*puVar2 != 0xffffffff) {
           *puVar2 = 0xffffffff;
-          FUN_002b8cc8();
+          ifTouchRegionRemove();
         }
       }
       param_1[2] = 4;
@@ -268,7 +268,7 @@ void FUN_003923b0(unsigned int *param_1)
         *param_1 = *param_1 & 0xffffdfff;
         if (*puVar2 != 0xffffffff) {
           *puVar2 = 0xffffffff;
-          FUN_002b8cc8();
+          ifTouchRegionRemove();
         }
       }
       param_1[2] = 4;

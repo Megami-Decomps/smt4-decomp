@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0018b600(void);
-int FUN_0018b610(void);
+int globalCriticalSectionEnterForward(void);
+int globalCriticalSectionLeaveForward(void);
 int FUN_001963e0(void);
 
 /* stack frame of param_6: 1 slot(s), 4 byte(s) */
@@ -17,8 +17,8 @@ extern signed char DAT_0061a481; /* 0x61a481 */
 extern signed char DAT_0061a482; /* 0x61a482 */
 extern int DAT_0061a510; /* 0x61a510 */
 
-/* Supplied declaration required: FUN_0018b600. */
-/* Supplied declaration required: FUN_0018b610. */
+/* Supplied declaration required: globalCriticalSectionEnterForward. */
+/* Supplied declaration required: globalCriticalSectionLeaveForward. */
 /* Supplied declaration required: FUN_001963e0. */
 
 
@@ -62,13 +62,13 @@ void FUN_001962c0(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   *(unsigned short *)(puVar2 + 0x12) = param_5;
   *(short *)(puVar2 + 0xe) = (short)((unsigned int)*(unsigned int *)(puVar2 + 0x10) >> 0x10);
   *(unsigned int *)(puVar2 + 0x14) = (temp_v0 << 3) | (*(unsigned int *)(puVar2 + 0x14) & 0xfffff800) | temp_v0 | 0x900;
-  FUN_0018b600();
+  globalCriticalSectionEnterForward();
   *(int *)(param_1 + 0x20) = *(int *)(param_1 + 0x20) + 1;
   if (((DAT_0061a510 == param_1) && (DAT_0061a482 != '\0')) && (DAT_0061a481 == '\0')) {
     DAT_0061a481 = '\x01';
     FUN_001963e0();
   }
-  FUN_0018b610();
+  globalCriticalSectionLeaveForward();
   return;
 }
 

@@ -25,7 +25,7 @@ int VectorSignedToFloat(...);
 
 extern unsigned char LAB_00296450; /* 0x296450 */
 extern unsigned char LAB_00296470; /* 0x296470 */
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern int g_aocSystem; /* 0x570280 */
 extern int *DAT_00581280; /* 0x581280 */
 
@@ -277,7 +277,7 @@ LAB_002961f8:
   FUN_0040aad4(piVar12[temp_v5 * 0xf + 0x10],0);
   temp_v9 = *(unsigned int *)(piVar12[temp_v5 * 0xf + 0x10] + 4);
   FUN_003fe86c(temp_v9,0,2);
-  FUN_0040ace8(DAT_0056fcc0,temp_v9);
+  FUN_0040ace8(g_handleRegistry,temp_v9);
   temp_v3 = DAT_00581280[1];
   FUN_00327678();
   FUN_00385964();

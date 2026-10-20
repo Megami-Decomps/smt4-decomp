@@ -5,7 +5,7 @@
 
 extern "C" {
 
-extern const char DAT_00409378[]; /* __FILE__ of effParts.cpp */
+extern const char g_effPartsSourcePath[]; /* __FILE__ of effParts.cpp */
 
 void *memAlloc(int heap, int alignClass, int unk08, u32 size, int align, int fromFront);
 void rt_memcpy(void *dst, const void *src, u32 size);
@@ -19,7 +19,7 @@ EffBlock *effBlockCloneDeep(EffBlock *src)
     s32 size;
     u16 tag;
 
-    asdDebugTrace(DAT_00409378, 46);
+    asdDebugTrace(g_effPartsSourcePath, 46);
     block = (EffBlock *)memAlloc(0x10000, 0x100, 0, sizeof(EffBlock), 0x10, 1);
     block->flags = 0;
     block->unk08 = 0;
@@ -40,7 +40,7 @@ EffBlock *effBlockCloneDeep(EffBlock *src)
         data = effBlockDataA(src);
         tag = src->tagA;
         if (data != NULL && size > 0) {
-            asdDebugTrace(DAT_00409378, 1080);
+            asdDebugTrace(g_effPartsSourcePath, 1080);
             block->ownedA = memAlloc(0x10000, 0x100, 0, size, 0x10, 1);
             block->tagA = tag;
             block->dataA = block->ownedA;

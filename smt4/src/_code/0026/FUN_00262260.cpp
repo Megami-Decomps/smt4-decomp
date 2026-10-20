@@ -36,9 +36,9 @@ typedef struct {
 /* Supplied declaration required: FUN_00283e48. */
 /* Supplied declaration required: FUN_00283ebc. */
 /* Supplied declaration required: FUN_00283f30. */
-extern int FUN_002a8740(void);
+extern int gameGetUnitRecord(void);
 extern unsigned int FUN_002ae108(unsigned short);
-extern int FUN_002b63ac(void);
+extern int gameGetPlayerData(void);
 extern unsigned int FUN_003bf53c(int, fn_00262260_arg0 *, unsigned int);
 extern unsigned int FUN_003bf584(unsigned int, fn_00262260_arg0 *, unsigned int);
 
@@ -83,7 +83,7 @@ unsigned int FUN_00262260(fn_00262260_arg0 *param_1,unsigned int param_2,int par
     temp_v11 = param_2;
     iStack_28 = param_3;
     if (param_3 < 0) {
-      temp_v2 = FUN_002b63ac();
+      temp_v2 = gameGetPlayerData();
       temp_v1 = *(short *)(temp_v2 + 0x24);
       FUN_00283f30(&temp_v6,1);
       temp_v3 = FUN_002ae108(param_1->field_0x20);
@@ -91,7 +91,7 @@ unsigned int FUN_00262260(fn_00262260_arg0 *param_1,unsigned int param_2,int par
       FUN_00283ebc(param_1,temp_v3,2);
     }
     else {
-      temp_v2 = FUN_002a8740();
+      temp_v2 = gameGetUnitRecord();
       if (temp_v2 == 0) {
         return 0;
       }

@@ -4,16 +4,16 @@
 
 extern "C" {
 
-int FUN_00184758(int, int, unsigned int);
-int FUN_00184c00(int, int, unsigned int);
+int uiSpriteSetKeyframe(int, int, unsigned int);
+int uiSpriteSetImageKeyframe(int, int, unsigned int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_4_stack;
 
-/* Supplied declaration required: FUN_00184758. */
-/* Supplied declaration required: FUN_00184c00. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 
 
 void FUN_004be990(int param_1,int param_2,short param_3,unsigned int param_4)
@@ -40,14 +40,14 @@ void FUN_004be990(int param_1,int param_2,short param_3,unsigned int param_4)
       if (param_2 == 2 || param_2 == 3) {
         param_3 = 1;
       }
-      FUN_00184758(param_1 + 0x30,(int)temp_v0,param_4);
-      FUN_00184c00(param_1 + 0x30,(int)param_3,param_4);
+      uiSpriteSetKeyframe(param_1 + 0x30,(int)temp_v0,param_4);
+      uiSpriteSetImageKeyframe(param_1 + 0x30,(int)param_3,param_4);
       return;
     }
   }
   param_3 = 0;
-  FUN_00184758(param_1 + 0x30,(int)temp_v0,param_4);
-  FUN_00184c00(param_1 + 0x30,(int)param_3,param_4);
+  uiSpriteSetKeyframe(param_1 + 0x30,(int)temp_v0,param_4);
+  uiSpriteSetImageKeyframe(param_1 + 0x30,(int)param_3,param_4);
   return;
 }
 

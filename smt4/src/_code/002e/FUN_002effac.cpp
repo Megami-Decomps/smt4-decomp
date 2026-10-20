@@ -10,13 +10,13 @@ int FUN_0029e8b8(int, int);
 int FUN_0029eb5c(int, int);
 int timerStart(int, int, int);
 
-extern int DAT_0043dcf0; /* 0x43dcf0 */
+extern int g_partyPanel; /* 0x43dcf0 */
 
 /* Supplied declaration required: FUN_0029378c. */
 /* Supplied declaration required: FUN_002937e0. */
 /* Supplied declaration required: FUN_0029e8b8. */
 /* Supplied declaration required: FUN_0029eb5c. */
-extern int FUN_002a8764(void);
+extern int gameGetSlotTable(void);
 /* Supplied declaration required: timerStart. */
 
 
@@ -30,8 +30,8 @@ unsigned int FUN_002effac(int param_1)
   int temp_v3;
   unsigned int temp_v4;
   
-  temp_v2 = DAT_0043dcf0;
-  temp_v1 = FUN_002a8764();
+  temp_v2 = g_partyPanel;
+  temp_v1 = gameGetSlotTable();
   temp_v4 = 0;
   if ((0 < *(int *)(temp_v2 + 0x670)) &&
      (temp_v1 = (int)*(char *)(*(int *)(temp_v2 + 0x670) + temp_v1 + 0x9107), -1 < temp_v1)) {
@@ -56,10 +56,10 @@ unsigned int FUN_002effac(int param_1)
           temp_v1 = 0;
           *(unsigned int *)(temp_v2 + 0x2c) = 0;
         }
-        temp_v0 = DAT_0043dcf0;
+        temp_v0 = g_partyPanel;
         if (param_1 == 0 && temp_v1 == 1) {
           temp_v4 = 1;
-          *(unsigned int *)(DAT_0043dcf0 + 0x2c) = *(unsigned int *)(DAT_0043dcf0 + 0x2c) ^ 1;
+          *(unsigned int *)(g_partyPanel + 0x2c) = *(unsigned int *)(g_partyPanel + 0x2c) ^ 1;
           timerStart(temp_v0 + 0x180,5,0);
           temp_v1 = 0;
           do {
@@ -84,10 +84,10 @@ unsigned int FUN_002effac(int param_1)
         temp_v1 = 1;
         *(unsigned int *)(temp_v2 + 0x2c) = 1;
       }
-      temp_v0 = DAT_0043dcf0;
+      temp_v0 = g_partyPanel;
       if (param_1 == 0 && temp_v1 == 0) {
         temp_v4 = 1;
-        *(unsigned int *)(DAT_0043dcf0 + 0x2c) = *(unsigned int *)(DAT_0043dcf0 + 0x2c) ^ 1;
+        *(unsigned int *)(g_partyPanel + 0x2c) = *(unsigned int *)(g_partyPanel + 0x2c) ^ 1;
         timerStart(temp_v0 + 0x180,4,0);
         temp_v1 = 0;
         do {

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e9afe(int, unsigned int);
+int vectorCopyHeader(int, unsigned int);
 int FUN_00442218(void);
 
 typedef int romwright_code(...);
@@ -14,8 +14,8 @@ typedef struct {
 } param_4_stack;
 
 extern int *FUN_00111800(int);
-/* Supplied declaration required: FUN_002e9afe. */
-extern int FUN_002f4e86(int);
+/* Supplied declaration required: vectorCopyHeader. */
+extern int refIsNonNegative(int);
 extern int FUN_00432acc(void);
 /* Supplied declaration required: FUN_00442218. */
 
@@ -44,8 +44,8 @@ unsigned int FUN_003fa1c8(int param_1,unsigned int param_2,unsigned int param_3,
   if ((*(int **)(param_1 + 0x40) != (int *)0x0) &&
      (temp_v0 = (**(romwright_code **)(**(int **)(param_1 + 0x40) + 0x10))(), temp_v0 != 0)) {
     temp_v1 = (**(romwright_code **)(**(int **)(param_1 + 0x40) + 0xc))();
-    FUN_002e9afe(param_1 + 0x1c,temp_v1);
-    temp_v0 = FUN_002f4e86(param_1 + 0x1c);
+    vectorCopyHeader(param_1 + 0x1c,temp_v1);
+    temp_v0 = refIsNonNegative(param_1 + 0x1c);
     if (temp_v0 != 0) {
       temp_v1 = *(unsigned int *)(*(int *)(param_1 + 0x34) + 0x78);
       *(unsigned int *)(param_1 + 4) = 7;

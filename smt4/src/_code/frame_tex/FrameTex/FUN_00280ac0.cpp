@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_1_stack;
 
-extern int DAT_0043e278; /* 0x43e278 */
+extern int g_frameTex; /* 0x43e278 */
 
 extern unsigned int FUN_002bc11c(void);
 /* Supplied declaration required: asdTextureCreate. */
@@ -28,7 +28,7 @@ void FUN_00280ac0(int param_1)
   unsigned int temp_v2;
   int temp_v3;
   
-  temp_v0 = DAT_0043e278;
+  temp_v0 = g_frameTex;
   temp_v1 = 0;
   asdTextureCreate();
   if (*(int *)(temp_v0 + 0xfdc) == 0) {

@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002e9ec8(int, unsigned int);
+int onlineInstanceTableFind(int, unsigned int);
 int FUN_002e9f00(int, int);
-int FUN_002fc046(...);
-int FUN_00310d0a(int *, int, int);
+int rangeIsEmpty(...);
+int byteVectorErase(int *, int, int);
 int FUN_00310d38(int, int, unsigned int);
 int rt_memcpy(unsigned int, unsigned int, unsigned int);
 
@@ -38,12 +38,12 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_5_stack;
 
-extern int FUN_002e9af4(void);
-/* Supplied declaration required: FUN_002e9ec8. */
+extern int onlineInstanceTableGetCurrent(void);
+/* Supplied declaration required: onlineInstanceTableFind. */
 /* Supplied declaration required: FUN_002e9f00. */
 extern int *wordRefMin(unsigned int *, unsigned int *);
-/* Supplied declaration required: FUN_002fc046. */
-/* Supplied declaration required: FUN_00310d0a. */
+/* Supplied declaration required: rangeIsEmpty. */
+/* Supplied declaration required: byteVectorErase. */
 /* Supplied declaration required: FUN_00310d38. */
 /* Supplied declaration required: rt_memcpy. */
 
@@ -69,8 +69,8 @@ void FUN_0011e552(fn_0011e552_arg0 *param_1,unsigned int param_2,unsigned int pa
   uStack_20 = param_2;
   temp_v4 = param_3;
   temp_v5 = param_4;
-  temp_v0 = FUN_002e9af4();
-  FUN_002e9ec8(temp_v0,*(unsigned int *)&param_1->field_0x4);
+  temp_v0 = onlineInstanceTableGetCurrent();
+  onlineInstanceTableFind(temp_v0,*(unsigned int *)&param_1->field_0x4);
   if (temp_v0 == 0) {
     return;
   }
@@ -79,8 +79,8 @@ void FUN_0011e552(fn_0011e552_arg0 *param_1,unsigned int param_2,unsigned int pa
     piVar2 = (int *)wordRefMin(&temp_v3,&temp_v5);
     temp_v1 = *piVar2;
     FUN_00310d38(param_1->field_0x38,param_1->field_0x38 + temp_v1,temp_v4);
-    FUN_00310d0a(&param_1->field_0x38,param_1->field_0x38,param_1->field_0x38 + temp_v1);
-    temp_v1 = FUN_002fc046(&param_1->field_0x38);
+    byteVectorErase(&param_1->field_0x38,param_1->field_0x38,param_1->field_0x38 + temp_v1);
+    temp_v1 = rangeIsEmpty(&param_1->field_0x38);
     if (temp_v1 == 0) {
       return;
     }
@@ -90,13 +90,13 @@ void FUN_0011e552(fn_0011e552_arg0 *param_1,unsigned int param_2,unsigned int pa
     }
   }
   else {
-    temp_v1 = FUN_002fc046();
+    temp_v1 = rangeIsEmpty();
     if (temp_v1 == 0) {
       temp_v3 = param_1->field_0x30 - param_1->field_0x2c;
       piVar2 = (int *)wordRefMin(&temp_v3,&temp_v5);
       temp_v0 = *piVar2;
       FUN_00310d38(param_1->field_0x2c,param_1->field_0x2c + temp_v0,temp_v4);
-      FUN_00310d0a(&param_1->field_0x2c,param_1->field_0x2c,param_1->field_0x2c + temp_v0);
+      byteVectorErase(&param_1->field_0x2c,param_1->field_0x2c,param_1->field_0x2c + temp_v0);
       return;
     }
     if (param_1->field_0x1c != 0) {

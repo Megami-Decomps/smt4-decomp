@@ -25,7 +25,7 @@ extern unsigned int DAT_00573cbc; /* 0x573cbc */
 /* Unsupported intrinsic, declaration required: SCARRY4 (INT_SCARRY). */
 extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_00192550. */
-extern int FUN_001ab888(void);
+extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_003ff73c. */
 /* Supplied declaration required: FUN_00400284. */
 /* Supplied declaration required: FUN_004009d0. */
@@ -73,7 +73,7 @@ unsigned int FUN_0040082c(int param_1)
         temp_v4 = temp_v4 + 1;
         if (temp_v4 >= 4) {
           if (((*(unsigned char *)(param_1 + 0x3a) & 0x7f) == 1) || ((*(unsigned int *)(param_1 + 0x68) & 4) != 0)) {
-            temp_v2 = FUN_001ab888();
+            temp_v2 = gameGetSlotTable();
             temp_v4 = -1;
             temp_v1 = (unsigned int)*(unsigned char *)(temp_v2 + 0x1ca3);
             if (temp_v1 != 0xffffffff && !SCARRY4(temp_v1,1)) {

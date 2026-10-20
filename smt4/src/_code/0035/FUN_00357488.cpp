@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern u8 DAT_004e6ef0;
+extern u8 g_nnosAddressSpaceManager;
 extern void nn_os_AddressSpaceManager_Free(u8 *manager, void *address);
 
 typedef struct Block {
@@ -13,7 +13,7 @@ typedef struct Block {
 void FUN_00357488(Block *block)
 {
     if (block->unk8 != 0) {
-        nn_os_AddressSpaceManager_Free(&DAT_004e6ef0, block);
+        nn_os_AddressSpaceManager_Free(&g_nnosAddressSpaceManager, block);
         return;
     }
 }

@@ -45,7 +45,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_2_stack;
 
-extern unsigned int DAT_00464b9c; /* 0x464b9c */
+extern unsigned int g_asdModelSlotArray0; /* 0x464b9c */
 extern unsigned int DAT_00476634; /* 0x476634 */
 extern unsigned int DAT_004efd6c; /* 0x4efd6c */
 extern unsigned int DAT_004efd70; /* 0x4efd70 */
@@ -150,7 +150,7 @@ LAB_001412d4:
   if (*(char *)(temp_v0 + 1) != '\0') {
     temp_v5 = 0xbf800000;
   }
-  temp_v0 = (&DAT_00464b9c)[param_2];
+  temp_v0 = (&g_asdModelSlotArray0)[param_2];
   nn_math_ARMv6_MTX34CopyAsm(temp_v0 + 0x4c,temp_v4);
   *(unsigned int *)(temp_v0 + 0x88) = *(unsigned int *)(temp_v0 + 0x88) | 0x800;
   return;

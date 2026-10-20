@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_0030fe5c(int, unsigned int [2]);
+int wordRefCompare(int, unsigned int [2]);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_0030fe5c. */
+/* Supplied declaration required: wordRefCompare. */
 
 
 void FUN_002f4c9c(int param_1)
@@ -21,7 +21,7 @@ void FUN_002f4c9c(int param_1)
   unsigned int temp_v0 [2];
   
   temp_v0[0] = *(unsigned int *)(param_1 + 0x10);
-  FUN_0030fe5c(param_1 + 0x14,temp_v0);
+  wordRefCompare(param_1 + 0x14,temp_v0);
   return;
 }
 

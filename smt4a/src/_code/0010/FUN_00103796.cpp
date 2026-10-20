@@ -2,12 +2,12 @@
 
 extern "C" {
 
-u64 FUN_001623d4(void);
+u64 svcGetSystemTick(void);
 
-/* Stores the 64-bit value returned by FUN_001623d4 in `*out`. */
+/* Stores the 64-bit value returned by svcGetSystemTick in `*out`. */
 void FUN_00103796(u64 *out)
 {
-    *out = FUN_001623d4();
+    *out = svcGetSystemTick();
 }
 
 } /* extern "C" */

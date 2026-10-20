@@ -9,7 +9,7 @@ extern unsigned int DAT_0049f9c4; /* 0x49f9c4 */
 
 extern int dataTable2fSub0GetRecord(unsigned int);
 extern int dataTable2fSub1GetRecord(unsigned int);
-extern int FUN_002c2950(void);
+extern int gameGetMapBlock(void);
 extern int dataTable2fSub2GetRecord(unsigned int);
 
 
@@ -20,7 +20,7 @@ void FUN_002df86c(void)
   int temp_v1;
   int temp_v2;
   
-  temp_v1 = FUN_002c2950();
+  temp_v1 = gameGetMapBlock();
   *(unsigned char *)(temp_v1 + 0x792) = 0;
   if (DAT_0049f9c0 != 1) {
     if (DAT_0049f9c0 != 2) {

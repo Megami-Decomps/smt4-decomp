@@ -13,7 +13,7 @@ int FUN_0029c6b0(unsigned char [14]);
 int FUN_0029d684(int);
 int FUN_0029d8a0(unsigned int);
 int FUN_0029dfc0(int);
-int FUN_002b9024(void);
+int devilGetRecord(void);
 int memClear(unsigned char [1412], int);
 int rt_memcpy_w(unsigned char [14], int, int);
 
@@ -54,8 +54,8 @@ extern int FUN_0023360c(int);
 /* Supplied declaration required: FUN_0029d8a0. */
 /* Supplied declaration required: FUN_0029dfc0. */
 extern int FUN_0029e0f8(void);
-extern int FUN_002a8764(void);
-/* Supplied declaration required: FUN_002b9024. */
+extern int gameGetSlotTable(void);
+/* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -138,7 +138,7 @@ void FUN_0022de74(int param_1)
       FUN_0029d684(1);
     }
     else {
-      temp_v1 = FUN_002a8764();
+      temp_v1 = gameGetSlotTable();
       temp_v5 = 0;
       temp_v2 = 0;
       if (temp_v2 < *(unsigned char *)(temp_v1 + 0x910b)) {
@@ -151,7 +151,7 @@ void FUN_0022de74(int param_1)
         } while (temp_v2 < *(unsigned char *)(temp_v1 + 0x910b));
       }
       FUN_0029d8a0(temp_v6);
-      FUN_002b9024();
+      devilGetRecord();
       rt_memcpy_w(temp_v8,temp_v5,0x604);
       temp_v14 = 0;
       temp_v15 = 0;

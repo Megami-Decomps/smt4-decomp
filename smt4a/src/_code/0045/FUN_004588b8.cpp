@@ -50,7 +50,7 @@ typedef struct {
     unsigned int spB0; /* 0xb0: local_b0 */
 } param_3_stack;
 
-extern unsigned int *DAT_005b40e0; /* 0x5b40e0 */
+extern unsigned int *g_commandBufferCursor; /* 0x5b40e0 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_001bc768. */
@@ -98,12 +98,12 @@ void FUN_004588b8(unsigned int param_1,int param_2,fn_004588b8_arg2 *param_3)
   temp_v7[3] = 0x2200;
   temp_v7[4] = 0x100;
   temp_v0 = temp_v7[param_3->field_0x1c & 0xff];
-  DAT_005b40e0[1] = 0xa0080;
-  *DAT_005b40e0 = temp_v0 | 0x1000;
+  g_commandBufferCursor[1] = 0xa0080;
+  *g_commandBufferCursor = temp_v0 | 0x1000;
   temp_v7[6] = 0;
   temp_v7[7] = 0;
   temp_v7[8] = 0;
-  DAT_005b40e0 = DAT_005b40e0 + 2;
+  g_commandBufferCursor = g_commandBufferCursor + 2;
   *(unsigned int *)(param_2 + 0x14) = *(unsigned int *)(param_2 + 0x14) & 0xfffffdff;
   if (param_3->field_0x191 != 0) {
     if (param_3->field_0x190 != 0) {
@@ -150,17 +150,17 @@ void FUN_004588b8(unsigned int param_1,int param_2,fn_004588b8_arg2 *param_3)
     }
     temp_v7[6] = VectorSignedToFloat(param_3->field_0x16c,(unsigned char)(in_fpscr >> 0x16) & 3);
     *(unsigned int *)(param_2 + 0x14) = *(unsigned int *)(param_2 + 0x14) | 0x200;
-    puVar1 = DAT_005b40e0;
-    *DAT_005b40e0 = 0x8000000b;
+    puVar1 = g_commandBufferCursor;
+    *g_commandBufferCursor = 0x8000000b;
     puVar1[1] = 0xf02c0;
     FUN_001bc768(puVar1 + 2,&temp_v1,0xbf02c1);
-    DAT_005b40e0 = DAT_005b40e0 + 0x10;
+    g_commandBufferCursor = g_commandBufferCursor + 0x10;
   }
-  puVar1 = DAT_005b40e0;
-  *DAT_005b40e0 = 0x8000000a;
+  puVar1 = g_commandBufferCursor;
+  *g_commandBufferCursor = 0x8000000a;
   puVar1[1] = 0x804f02c0;
   nw_gfx_internal_NWCopyVec3Reverse(puVar1 + 2,temp_v7 + 6);
-  DAT_005b40e0 = DAT_005b40e0 + 6;
+  g_commandBufferCursor = g_commandBufferCursor + 6;
   return;
 }
 

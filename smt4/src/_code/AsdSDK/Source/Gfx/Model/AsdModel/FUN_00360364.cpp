@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002c52f8(void);
+int asdFatalError(void);
 int FUN_003607d0(void);
 int software_interrupt(int);
 
 extern signed char DAT_00471ba8; /* 0x471ba8 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_002c52f8. */
+/* Supplied declaration required: asdFatalError. */
 /* Supplied declaration required: FUN_003607d0. */
 
 
@@ -23,7 +23,7 @@ void FUN_00360364(int *param_1)
     FUN_003607d0();
     software_interrupt(0x23);
     if (*param_1 < 0) {
-      FUN_002c52f8();
+      asdFatalError();
     }
     DAT_00471ba8 = '\0';
   }

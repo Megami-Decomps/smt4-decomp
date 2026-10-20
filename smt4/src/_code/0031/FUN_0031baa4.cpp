@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_00247200(void);
+int nodeListOwnerFree(void);
 int FUN_00247240(void);
 
 extern int DAT_0044eabc; /* 0x44eabc */
 extern int DAT_0044eac0; /* 0x44eac0 */
 
-/* Supplied declaration required: FUN_00247200. */
+/* Supplied declaration required: nodeListOwnerFree. */
 /* Supplied declaration required: FUN_00247240. */
 
 
@@ -23,7 +23,7 @@ void FUN_0031baa4(void)
     DAT_0044eac0 = 0;
   }
   if (DAT_0044eabc != 0) {
-    FUN_00247200();
+    nodeListOwnerFree();
     DAT_0044eabc = 0;
   }
   return;

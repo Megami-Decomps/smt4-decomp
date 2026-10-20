@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00308566(...);
+int lessU16(...);
 
 /* stack frame of param_3: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_00308566. */
+/* Supplied declaration required: lessU16. */
 extern int iterEqual(int *, unsigned int *);
 
 
@@ -31,7 +31,7 @@ void FUN_002ecf70(int *param_1,int param_2,unsigned int param_3)
   temp_v0 = *(int *)(*(int *)(param_2 + 0x10) + 4);
   temp_v2 = *(int *)(param_2 + 0x10);
   while (temp_v1 = temp_v0, temp_v1 != 0) {
-    temp_v0 = FUN_00308566(param_2 + 0x19,temp_v1 + 0x10,param_3);
+    temp_v0 = lessU16(param_2 + 0x19,temp_v1 + 0x10,param_3);
     if (temp_v0 != 0) {
       temp_v0 = *(int *)(temp_v1 + 0xc);
     }
@@ -43,7 +43,7 @@ void FUN_002ecf70(int *param_1,int param_2,unsigned int param_3)
   temp_v4[0] = *(unsigned int *)(param_2 + 0x10);
   temp_v3 = temp_v2;
   temp_v0 = iterEqual(&temp_v3,temp_v4);
-  if ((temp_v0 != 0) || (temp_v0 = FUN_00308566(param_2 + 0x19,param_3,temp_v3 + 0x10), temp_v0 != 0)) {
+  if ((temp_v0 != 0) || (temp_v0 = lessU16(param_2 + 0x19,param_3,temp_v3 + 0x10), temp_v0 != 0)) {
     temp_v3 = *(int *)(param_2 + 0x10);
   }
   *param_1 = temp_v3;

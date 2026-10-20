@@ -3,11 +3,11 @@
 
 extern "C" {
 
-void FUN_002c4040(void *p);
+void nn_os_LightEvent_Signal(void *p);
 
 void FUN_002c4038(u8 *p)
 {
-    FUN_002c4040(p + 4);
+    nn_os_LightEvent_Signal(p + 4);
 }
 
 }

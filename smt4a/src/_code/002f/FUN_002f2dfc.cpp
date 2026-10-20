@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e9538(int, int);
+int onlineSockAddrCopy(int, int);
 
 typedef int romwright_code(...);
 /* stack frame of param_4: 1 slot(s), 2 byte(s) */
@@ -16,7 +16,7 @@ typedef struct {
 #define ROMWRIGHT_PIECE_2_2_DEFINED
 #define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
 #endif
-/* Supplied declaration required: FUN_002e9538. */
+/* Supplied declaration required: onlineSockAddrCopy. */
 
 
 unsigned int FUN_002f2dfc(int param_1,int param_2,unsigned int param_3,unsigned int param_4)
@@ -36,7 +36,7 @@ unsigned int FUN_002f2dfc(int param_1,int param_2,unsigned int param_3,unsigned 
     if (temp_v0 != 0) {
       *(unsigned short *)(param_2 + 6) = (temp_v1 << 8) | (temp_v1 >> 8);
       *(unsigned char *)(param_1 + 4) = 1;
-      FUN_002e9538(param_1 + 8,param_2);
+      onlineSockAddrCopy(param_1 + 8,param_2);
       return 1;
     }
   }

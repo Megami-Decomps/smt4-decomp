@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00247478(...);
 int FUN_002ae164(void);
-int FUN_002b4670(void);
+int dataTable08Sub1GetRecord(void);
 int FUN_003daf3c(unsigned int, unsigned int, int, int);
 int FUN_003db57c(unsigned int, unsigned int, int, int);
 int FUN_003dc108(unsigned int, unsigned int, int, int);
@@ -22,7 +22,7 @@ extern unsigned int DAT_00435d18; /* 0x435d18 */
 
 /* Supplied declaration required: FUN_00247478. */
 /* Supplied declaration required: FUN_002ae164. */
-/* Supplied declaration required: FUN_002b4670. */
+/* Supplied declaration required: dataTable08Sub1GetRecord. */
 /* Supplied declaration required: FUN_003daf3c. */
 /* Supplied declaration required: FUN_003db57c. */
 /* Supplied declaration required: FUN_003dc108. */
@@ -54,7 +54,7 @@ void FUN_003cee94(unsigned int *param_1,int param_2)
     if (temp_v0 != 8) {
       return;
     }
-    FUN_002b4670();
+    dataTable08Sub1GetRecord();
     temp_v1 = (unsigned int)*(unsigned short *)(temp_v1 + 0x62);
     if (temp_v1 == 0) {
       FUN_003daf3c(DAT_00435d18,temp_v3,(**(unsigned int **)(param_2 + 0x20) & 0x10) == 0,0);

@@ -7,7 +7,7 @@ extern "C" {
 int CONCAT44(double, double);
 int FUN_00100388(...);
 int jobGetWork(...);
-int FUN_001656a0(...);
+int padButtonIsPressed(...);
 int FUN_00167618(...);
 int FUN_0016c4b8(...);
 int FUN_00182884(...);
@@ -61,8 +61,8 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_00100388. */
 extern int FUN_00163fd4(unsigned int);
 /* Supplied declaration required: jobGetWork. */
-extern int FUN_00164af0(unsigned int);
-/* Supplied declaration required: FUN_001656a0. */
+extern int padButtonRepeat(unsigned int);
+/* Supplied declaration required: padButtonIsPressed. */
 /* Supplied declaration required: FUN_00167618. */
 /* Supplied declaration required: FUN_0016c4b8. */
 /* Supplied declaration required: FUN_00182884. */
@@ -378,7 +378,7 @@ joined_r0x002bdf80:
             temp_v3 = piVar2[0xb];
           }
           else {
-            temp_v1 = FUN_00164af0(3);
+            temp_v1 = padButtonRepeat(3);
             temp_v5 = 10000;
             temp_v6 = 100000;
             temp_v12 = 0.01f;
@@ -428,7 +428,7 @@ joined_r0x002bdf80:
                   temp_v3 = temp_v5 + *(int *)(temp_v1 + 0x208);
                   *(unsigned int *)(temp_v1 + 0x208) = temp_v3;
                   if ((int)temp_v3 <= *(int *)(temp_v1 + 0x214)) goto LAB_002be87c;
-                  temp_v4 = FUN_001656a0(3);
+                  temp_v4 = padButtonIsPressed(3);
                   if (temp_v4 == 0) {
                     temp_v3 = *(unsigned int *)(temp_v1 + 0x214);
                     break;
@@ -459,7 +459,7 @@ joined_r0x002bdf80:
                   temp_v0 = (unsigned char)(temp_v3 >> 0x18);
                   temp_v3 = temp_v5;
                   if (!((unsigned char)((temp_v0 >> 6) & 1) || temp_v0 >> 7 != ((unsigned char)(temp_v6 >> 0x1c) & 1))) {
-                    temp_v3 = FUN_001656a0(3);
+                    temp_v3 = padButtonIsPressed(3);
                     if (temp_v3 == 0) {
 LAB_002be718:
                       temp_v7 = VectorSignedToFloat(*(unsigned int *)(temp_v1 + 0x214),
@@ -479,7 +479,7 @@ LAB_002be734:
               }
             }
             else {
-              temp_v1 = FUN_00164af0(4);
+              temp_v1 = padButtonRepeat(4);
               if (temp_v1 != 0) {
                 temp_v1 = jobGetWork(param_1);
                 temp_v4 = *(int *)(temp_v1 + 0x60);
@@ -526,7 +526,7 @@ LAB_002be734:
                     temp_v3 = *(int *)(temp_v1 + 0x208) - temp_v5;
                     *(unsigned int *)(temp_v1 + 0x208) = temp_v3;
                     if (*(int *)(temp_v1 + 0x210) <= (int)temp_v3) goto LAB_002be87c;
-                    temp_v4 = FUN_001656a0(4);
+                    temp_v4 = padButtonIsPressed(4);
                     if (temp_v4 == 0) {
                       temp_v3 = *(unsigned int *)(temp_v1 + 0x210);
                       break;
@@ -554,7 +554,7 @@ LAB_002be734:
                     temp_v6 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v10 <= temp_v12) << 0x1d);
                     temp_v3 = temp_v5;
                     if (romwright_subpiece_4_1_0(temp_v6 >> 0x1d,0)) goto LAB_002be87c;
-                    temp_v3 = FUN_001656a0(4);
+                    temp_v3 = padButtonIsPressed(4);
                     if (temp_v3 == 0) goto LAB_002be734;
                     goto LAB_002be718;
                   }
@@ -562,7 +562,7 @@ LAB_002be734:
                 }
               }
               else {
-                temp_v1 = FUN_001656a0(0);
+                temp_v1 = padButtonIsPressed(0);
                 temp_v3 = 0;
                 if (temp_v1 != 0) {
                   temp_v1 = jobGetWork(param_1);

@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_00188b60(int *);
+int nn_os_CriticalSection_Initialize(int *);
 
-/* Supplied declaration required: FUN_00188b60. */
+/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
 
 
 void nnosAddressSpaceManagerInitialize(int *param_1,int param_2,int param_3)
@@ -30,7 +30,7 @@ void nnosAddressSpaceManagerInitialize(int *param_1,int param_2,int param_3)
     temp_v0 = param_1[1];
   }
   if (temp_v1 && temp_v0 == 0) {
-    FUN_00188b60(param_1 + 3);
+    nn_os_CriticalSection_Initialize(param_1 + 3);
     param_1[1] = param_2 + param_3;
     *param_1 = param_2;
   }

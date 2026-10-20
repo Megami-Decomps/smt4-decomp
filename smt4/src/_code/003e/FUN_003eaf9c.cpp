@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_0023592c(void);
+int nw_snd_internal_driver_SequenceTrack_UpdateChannelParam(void);
 int FUN_0037f334(int);
 int FUN_0037f770(int);
 
-/* Supplied declaration required: FUN_0023592c. */
+/* Supplied declaration required: nw_snd_internal_driver_SequenceTrack_UpdateChannelParam. */
 /* Supplied declaration required: FUN_0037f334. */
 /* Supplied declaration required: FUN_0037f770. */
 
@@ -38,7 +38,7 @@ void FUN_003eaf9c(int param_1)
     temp_v1 = 0;
     do {
       if ((temp_v1 < 0x10) && (*(int *)(temp_v2 + temp_v1 * 4 + 0x8c) != 0)) {
-        FUN_0023592c();
+        nw_snd_internal_driver_SequenceTrack_UpdateChannelParam();
       }
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < 0x10);

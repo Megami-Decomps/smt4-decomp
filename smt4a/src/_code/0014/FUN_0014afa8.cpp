@@ -3,14 +3,14 @@
 
 extern "C" {
 
-void FUN_003f881c(u32 a, u32 b);
-void FUN_0014384c(u32 a);
+void loadSlotRequestAsync(u32 a, u32 b);
+void asdTMTexTableLoadSprites(u32 a);
 void FUN_0014afd0(u32 a, u32 b);
 
 void FUN_0014afa8(void)
 {
-    FUN_003f881c(31, 1);
-    FUN_0014384c(26);
+    loadSlotRequestAsync(31, 1);
+    asdTMTexTableLoadSprites(26);
     FUN_0014afd0(26, 0);
 }
 

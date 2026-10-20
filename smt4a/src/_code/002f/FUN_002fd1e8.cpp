@@ -16,8 +16,8 @@ struct fn_002fd1e8_arg0 {
 
 extern unsigned char DAT_00559234; /* 0x559234 */
 
-extern int FUN_002e9520(unsigned int *, unsigned int);
-extern unsigned int *FUN_002e9f80(fn_002fd1e8_arg0 *, unsigned int, unsigned int, unsigned int);
+extern int onlineStringCopyConstruct(unsigned int *, unsigned int);
+extern unsigned int *sharedRefInit(fn_002fd1e8_arg0 *, unsigned int, unsigned int, unsigned int);
 
 
 void FUN_002fd1e8(fn_002fd1e8_arg0 *param_1,unsigned int param_2)
@@ -28,9 +28,9 @@ void FUN_002fd1e8(fn_002fd1e8_arg0 *param_1,unsigned int param_2)
   int temp_v0;
   unsigned int in_r2;
   
-  puVar1 = (unsigned int *)FUN_002e9f80(param_1,param_2,in_r2,param_2);
+  puVar1 = (unsigned int *)sharedRefInit(param_1,param_2,in_r2,param_2);
   *puVar1 = (unsigned int)&DAT_00559234;
-  temp_v0 = FUN_002e9520(puVar1 + 3,param_2);
+  temp_v0 = onlineStringCopyConstruct(puVar1 + 3,param_2);
   *(unsigned short *)(temp_v0 + 8) = 1;
   *(unsigned int *)(temp_v0 + 0xc) = 0;
   *(unsigned int *)(temp_v0 + 0x10) = 0;

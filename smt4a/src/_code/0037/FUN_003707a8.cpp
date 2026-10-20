@@ -10,10 +10,10 @@ int jyoucyuGetTableEntry(int);
 int FUN_00180118(unsigned int);
 int FUN_00184310(...);
 int FUN_00237898(...);
-int FUN_00275bb0(...);
-int FUN_00275fe4(...);
+int scrWorkGetValue(...);
+int scrWorkSetValue(...);
 int eventTexSetJobParam(void);
-int FUN_002e342c(...);
+int libc_strcpy(...);
 int sysMemClear(...);
 int FUN_003180c4(...);
 int FUN_0031bca4(...);
@@ -28,7 +28,7 @@ typedef struct {
 
 extern int DAT_00588008; /* 0x588008 */
 
-extern int FUN_0014bef4(unsigned int);
+extern int randRange(unsigned int);
 extern unsigned int FUN_0014bf3c(unsigned short, unsigned int);
 /* Supplied declaration required: jobStop. */
 extern int jobIsValid(void);
@@ -40,11 +40,11 @@ extern int dataTableValueOrZero(unsigned int);
 /* Supplied declaration required: FUN_00184310. */
 extern int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_00237898. */
-/* Supplied declaration required: FUN_00275bb0. */
-/* Supplied declaration required: FUN_00275fe4. */
+/* Supplied declaration required: scrWorkGetValue. */
+/* Supplied declaration required: scrWorkSetValue. */
 /* Supplied declaration required: eventTexSetJobParam. */
-extern int FUN_002deb84(void);
-/* Supplied declaration required: FUN_002e342c. */
+extern int scrGetCommandFrame(void);
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003180c4. */
 /* Supplied declaration required: FUN_0031bca4. */
@@ -69,14 +69,14 @@ unsigned int FUN_003707a8(void)
   unsigned char temp_v8 [128];
   unsigned char temp_v9 [4984];
   
-  temp_v1 = FUN_002deb84();
+  temp_v1 = scrGetCommandFrame();
   if (temp_v1 == 0) {
     jyoucyuGetTableEntry(0);
-    FUN_00275fe4(0);
-    FUN_00275fe4(1,0);
+    scrWorkSetValue(0);
+    scrWorkSetValue(1,0);
     DAT_00588008 = 0;
   }
-  temp_v2 = FUN_00275bb0(0);
+  temp_v2 = scrWorkGetValue(0);
   switch(temp_v2) {
   case 0:
     temp_v1 = scrGetArg(0);
@@ -98,49 +98,49 @@ unsigned int FUN_003707a8(void)
     if (temp_v6 < 1) {
       return 1;
     }
-    temp_v1 = FUN_0014bef4((temp_v6 - 1U) & 0xffff);
+    temp_v1 = randRange((temp_v6 - 1U) & 0xffff);
     temp_v5 = temp_v7[temp_v1];
     temp_v2 = FUN_004d0cd4();
     dispatchIfFound(temp_v2,temp_v5 & 0xffff,0);
-    FUN_00275fe4(0,1);
+    scrWorkSetValue(0,1);
     DAT_00588008 = 0;
-    FUN_00275fe4(1,temp_v5 & 0xffff);
+    scrWorkSetValue(1,temp_v5 & 0xffff);
     break;
   case 1:
-    temp_v2 = FUN_00275bb0(1);
+    temp_v2 = scrWorkGetValue(1);
     FUN_003afe2c(temp_v2,0,0);
     eventTexSetJobParam();
     FUN_0036f298(temp_v2);
-    FUN_00275fe4(2,temp_v2);
+    scrWorkSetValue(2,temp_v2);
     FUN_0031bca4(temp_v2,0,1);
-    FUN_00275fe4(0,2);
+    scrWorkSetValue(0,2);
     DAT_00588008 = 0;
     break;
   case 2:
-    temp_v2 = FUN_00275bb0(2);
+    temp_v2 = scrWorkGetValue(2);
     FUN_0031bca4(temp_v2,0xf,0);
-    FUN_00275fe4(0,3);
+    scrWorkSetValue(0,3);
     DAT_00588008 = 0;
     break;
   case 3:
     DAT_00588008 = DAT_00588008 + 1;
     if (DAT_00588008 >= 0xf) {
-      FUN_00275fe4(0,4);
+      scrWorkSetValue(0,4);
       DAT_00588008 = 0;
     }
     break;
   case 4:
-    temp_v0 = FUN_00275bb0(1);
+    temp_v0 = scrWorkGetValue(1);
     FUN_00184310(temp_v0);
     sysMemClear(temp_v8,0x80);
     sysMemClear(temp_v9,0x80);
-    temp_v5 = FUN_00275bb0(1);
+    temp_v5 = scrWorkGetValue(1);
     temp_v5 = temp_v5 & 0xffff;
     FUN_00180118(temp_v5);
-    FUN_002e342c(temp_v8,temp_v5);
-    temp_v0 = FUN_00275bb0(1);
+    libc_strcpy(temp_v8,temp_v5);
+    temp_v0 = scrWorkGetValue(1);
     temp_v2 = FUN_0014bf3c(temp_v0,0);
-    FUN_002e342c(temp_v9,temp_v2);
+    libc_strcpy(temp_v9,temp_v2);
     FUN_003180c4(8,temp_v8);
     FUN_003180c4(9,temp_v9);
     temp_v1 = dataTableValueOrZero(0x1e);
@@ -149,25 +149,25 @@ unsigned int FUN_003707a8(void)
     FUN_00237898(temp_v1,0x38,DAT_00588008,6);
     DAT_00588008 = DAT_00588008 + 1;
     if (temp_v1 == 1) {
-      FUN_00275fe4(0,10);
+      scrWorkSetValue(0,10);
       DAT_00588008 = 0;
     }
     break;
   case 10:
-    temp_v2 = FUN_00275bb0(2);
+    temp_v2 = scrWorkGetValue(2);
     FUN_0031bca4(temp_v2,10,1);
-    FUN_00275fe4(0,0xb);
+    scrWorkSetValue(0,0xb);
     DAT_00588008 = 0;
     break;
   case 0xb:
     DAT_00588008 = DAT_00588008 + 1;
     if (DAT_00588008 >= 10) {
-      FUN_00275fe4(0,0xc);
+      scrWorkSetValue(0,0xc);
       DAT_00588008 = 0;
     }
     break;
   case 0xc:
-    temp_v2 = FUN_00275bb0(2);
+    temp_v2 = scrWorkGetValue(2);
     temp_v1 = jobIsValid();
     if (temp_v1 != 0) {
       temp_v1 = jobGetWork(temp_v2);
@@ -179,7 +179,7 @@ unsigned int FUN_003707a8(void)
         jobStop(temp_v2,0);
       }
     }
-    FUN_00275fe4(0,0xd);
+    scrWorkSetValue(0,0xd);
     DAT_00588008 = 0;
     break;
   case 0xd:

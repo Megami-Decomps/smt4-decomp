@@ -8,7 +8,7 @@ int FUN_002e6e34(unsigned char [12], int);
 int FUN_002e6e5c(...);
 int FUN_0030f3e0(unsigned int);
 int FUN_0030f490(int *, int *, int *, int *);
-int FUN_0030f66c(int *);
+int mapIteratorNext9(int *);
 int FUN_0030f824(int, int [2]);
 int FUN_0030f846(int *);
 int FUN_0030f90c(int *, int, int [2]);
@@ -32,7 +32,7 @@ typedef struct {
 /* Supplied declaration required: FUN_002e6e5c. */
 /* Supplied declaration required: FUN_0030f3e0. */
 /* Supplied declaration required: FUN_0030f490. */
-/* Supplied declaration required: FUN_0030f66c. */
+/* Supplied declaration required: mapIteratorNext9. */
 extern int wordRefsDiffer_0030f814(int *, unsigned int *);
 /* Supplied declaration required: FUN_0030f824. */
 /* Supplied declaration required: FUN_0030f846. */
@@ -76,7 +76,7 @@ unsigned int FUN_00122fe4(int param_1,int param_2)
     temp_v5 = *(unsigned int *)(param_1 + 0x120);
     temp_v0 = wordRefsDiffer_0030f814(&temp_v4,(unsigned int *)&temp_v5);
     if ((temp_v0 == 0) || (*(int *)(temp_v4 + 0x18) == temp_v15)) break;
-    FUN_0030f66c(&temp_v4);
+    mapIteratorNext9(&temp_v4);
   }
   temp_v5 = *(unsigned int *)(param_1 + 0x120);
   temp_v0 = wordRefsDiffer_0030f814(&temp_v4,(unsigned int *)&temp_v5);

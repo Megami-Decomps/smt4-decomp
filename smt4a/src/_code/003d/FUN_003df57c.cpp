@@ -5,14 +5,14 @@
 extern "C" {
 
 int FUN_00186f58(void);
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 int FUN_002efc44(unsigned int, int, int);
 
-extern int FUN_001801a4(void);
+extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00186f58. */
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: FUN_002efc44. */
-extern int FUN_003e46f4(unsigned int);
+extern int gameDataFlagTestBit(unsigned int);
 
 
 void FUN_003df57c(unsigned int param_1,int param_2)
@@ -25,10 +25,10 @@ void FUN_003df57c(unsigned int param_1,int param_2)
   int temp_v3;
   
   temp_v0 = param_1;
-  FUN_001aba54();
+  dataTable04FindById();
   if (temp_v0 != 0) {
     if (param_2 != 0) {
-      temp_v1 = FUN_001801a4();
+      temp_v1 = gameGetPlayerData();
       temp_v2 = 0;
       do {
         temp_v3 = temp_v1 + temp_v2 * 2;
@@ -48,19 +48,19 @@ void FUN_003df57c(unsigned int param_1,int param_2)
       FUN_002efc44(temp_v0,temp_v1,4);
     }
     else {
-      temp_v1 = FUN_003e46f4(0xc);
+      temp_v1 = gameDataFlagTestBit(0xc);
       if (temp_v1 != 0) {
         FUN_00186f58();
       }
-      temp_v1 = FUN_003e46f4(0xd);
+      temp_v1 = gameDataFlagTestBit(0xd);
       if (temp_v1 != 0) {
         FUN_00186f58();
       }
-      temp_v1 = FUN_003e46f4(0xe);
+      temp_v1 = gameDataFlagTestBit(0xe);
       if (temp_v1 != 0) {
         FUN_00186f58();
       }
-      temp_v1 = FUN_003e46f4(0xf);
+      temp_v1 = gameDataFlagTestBit(0xf);
       if (temp_v1 != 0) {
         FUN_00186f58();
       }

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002aa568(...);
+int libc_strcmp(...);
 int asdMemAlloc(...);
 int taskCreateDraw(...);
 
@@ -21,9 +21,9 @@ extern int btlEventDestroy(...); /* 0x21ecfc */
 extern unsigned char DAT_00400988; /* 0x400988 */
 extern unsigned int *g_btlEvent; /* 0x435d48 */
 
-/* Supplied declaration required: FUN_002aa568. */
+/* Supplied declaration required: libc_strcmp. */
 extern int jobIsValid(unsigned int);
-extern int FUN_002c30c4(unsigned int *);
+extern int libc_strlen(unsigned int *);
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: taskCreateDraw. */
 
@@ -47,8 +47,8 @@ void FUN_001e2240(unsigned int *param_1)
     g_btlEvent = puVar3;
     *puVar3 = 0;
     puVar4 = param_1 + 0x40;
-    FUN_002aa568(puVar4,&DAT_00400988);
-    if ((puVar4 != (unsigned int *)0x0) && (temp_v0 = FUN_002c30c4(param_1 + 0x40), temp_v0 != 0)) {
+    libc_strcmp(puVar4,&DAT_00400988);
+    if ((puVar4 != (unsigned int *)0x0) && (temp_v0 = libc_strlen(param_1 + 0x40), temp_v0 != 0)) {
       *puVar3 = 1;
       *(unsigned char *)(puVar3 + 0xb) = 0;
     }

@@ -41,12 +41,12 @@ int FUN_0027e6f4(...);
 int FUN_002881bc(...);
 int aocHandleButtons(...);
 int FUN_00297468(...);
-int FUN_002b06c4(...);
+int dataTable00FindById(...);
 int FUN_002b7bca(...);
 int FUN_002be624(...);
-int FUN_002bf694(...);
+int libc_strcpy(...);
 int FUN_002c29d8(...);
-int FUN_002c424c(...);
+int __aeabi_memset4(...);
 int memClear(...);
 int FUN_002fe394(...);
 int FUN_0030a728(...);
@@ -65,7 +65,7 @@ typedef struct {
 
 extern unsigned char LAB_001921c8; /* 0x1921c8 */
 extern unsigned char LAB_0019d7d4; /* 0x19d7d4 */
-extern unsigned int DAT_00434290; /* 0x434290 */
+extern unsigned int g_btlActionReflect; /* 0x434290 */
 extern int g_btlMain; /* 0x4342c8 */
 extern int DAT_00435d18; /* 0x435d18 */
 extern unsigned int *g_btlEncount; /* 0x435d30 */
@@ -77,7 +77,7 @@ extern unsigned int DAT_00439a2c; /* 0x439a2c */
 extern unsigned int DAT_00439a30; /* 0x439a30 */
 extern unsigned int DAT_00439a34; /* 0x439a34 */
 extern unsigned int DAT_00439a38; /* 0x439a38 */
-extern unsigned int DAT_00439ca8; /* 0x439ca8 */
+extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 extern unsigned int DAT_00439cf8; /* 0x439cf8 */
 
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
@@ -114,7 +114,7 @@ extern int FUN_0027d9e8(int, unsigned int);
 extern int FUN_0027dab0(int, int);
 extern int FUN_0027e3b8(int);
 /* Supplied declaration required: FUN_0027e3f8. */
-extern int FUN_0027e6bc(unsigned int, unsigned int *);
+extern int nodeListCountActiveById(unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_0027e6f4. */
 /* Supplied declaration required: FUN_002881bc. */
 extern int FUN_002896bc(void);
@@ -123,15 +123,15 @@ extern unsigned int FUN_00294090(unsigned int, unsigned int);
 extern int FUN_00294fe0(int);
 extern int FUN_0029505c(int);
 /* Supplied declaration required: FUN_00297468. */
-/* Supplied declaration required: FUN_002b06c4. */
+/* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: FUN_002b7bca. */
 /* Supplied declaration required: FUN_002be624. */
-/* Supplied declaration required: FUN_002bf694. */
+/* Supplied declaration required: libc_strcpy. */
 extern int jobGetWork(void);
 /* Supplied declaration required: FUN_002c29d8. */
 extern int FUN_002c2a04(unsigned int);
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_002c424c. */
+/* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: FUN_002fe394. */
 /* Supplied declaration required: FUN_0030a728. */
@@ -259,7 +259,7 @@ FUN_00334140:
     if (-1 < temp_v15) {
       *(unsigned int *)(temp_v11 + 0x44a0) = *(unsigned int *)(temp_v11 + 0x44a0) | 0x4000000;
       temp_v20 = (unsigned int)*(unsigned short *)(*(int *)(temp_v11 + 0x1fc0) + temp_v15 * 0x288 + 0xce);
-      FUN_002b06c4();
+      dataTable00FindById();
       memClear(temp_v28,0x80);
       FUN_002be624(temp_v28,"battle/arngmt/%02d_%02d.earg",*(unsigned char *)(temp_v20 + 0x9e),
                    *(unsigned char *)(temp_v20 + 0x9f));
@@ -312,7 +312,7 @@ code_r0x00240990:
     puVar15 = temp_v25;
     FUN_00336da8(temp_v11);
     temp_v14 = *(unsigned int *)(temp_v11 + 0x1e88);
-    FUN_002c424c(temp_v25,0xa8,0xffffffff);
+    __aeabi_memset4(temp_v25,0xa8,0xffffffff);
     FUN_0030a728(temp_v25,0x2a,temp_v14);
     temp_v16 = 0;
     temp_v15 = 0;
@@ -401,7 +401,7 @@ FUN_00334228:
     piVar22 = (int *)(iStack_28 + 0x1fc0);
     temp_v20 = (unsigned int)*(unsigned short *)(*piVar22 + temp_v11 * 0x288 + 0xce);
     iStack_22c = temp_v11;
-    FUN_002b06c4();
+    dataTable00FindById();
     temp_v3 = *(unsigned char *)(temp_v20 + 0x9e);
     temp_v22 = 0.0f;
     if (temp_v3 == 0) {
@@ -587,7 +587,7 @@ LAB_003343b0:
   case 0xb:
     memClear(temp_v27,0x80);
     temp_v14 = FUN_00240448(temp_v11);
-    FUN_002bf694(temp_v27,temp_v14);
+    libc_strcpy(temp_v27,temp_v14);
     if (puVar19[1] != 0) {
       asdMemFree();
       puVar19[1] = 0;
@@ -778,7 +778,7 @@ code_r0x0023fbdc:
           if ((*puVar20 & 2) == 0) {
             FUN_00254f58(temp_v11);
             *puVar20 = *puVar20 | 0x200000;
-            FUN_003ae720(DAT_00439ca8,0);
+            FUN_003ae720(g_btlUiBlock,0);
           }
           puVar19[3] = 0;
           *puVar19 = 0xf;
@@ -805,16 +805,16 @@ code_r0x0023fbdc:
     else {
       FUN_00254f58(temp_v11);
       *puVar20 = *puVar20 | 0x200000;
-      FUN_003ae720(DAT_00439ca8,0);
+      FUN_003ae720(g_btlUiBlock,0);
     }
     puVar19[3] = 0;
     *puVar19 = 0xf;
 code_r0x00240678:
     if (((*(char *)(temp_v11 + 0x44b7) == '\0') ||
-        (temp_v15 = FUN_0027e6bc(DAT_00434290,puVar19), temp_v15 < 1)) &&
+        (temp_v15 = nodeListCountActiveById(g_btlActionReflect,puVar19), temp_v15 < 1)) &&
        ((temp_v15 = FUN_002404e8(DAT_00435d18), temp_v15 != 0 &&
         (((*(unsigned int *)(temp_v11 + 0x44a0) & 8) == 0 ||
-         (temp_v15 = stateBlockCall(DAT_00439ca8), temp_v15 != 0)))))) {
+         (temp_v15 = stateBlockCall(g_btlUiBlock), temp_v15 != 0)))))) {
       if ((*(unsigned int *)(temp_v11 + 0xe0) & 0x4000000) != 0) {
         temp_v16 = 4;
         temp_v15 = 4;
@@ -863,7 +863,7 @@ code_r0x00240678:
   case 0x10:
     temp_v15 = g_btlEncount[4];
     g_btlEncount[4] = temp_v15 + 1U;
-    if ((temp_v15 + 1U >= 0x1f) && (temp_v15 = FUN_0027e6bc(DAT_00434290,puVar19), temp_v15 < 1)) {
+    if ((temp_v15 + 1U >= 0x1f) && (temp_v15 = nodeListCountActiveById(g_btlActionReflect,puVar19), temp_v15 < 1)) {
       temp_v15 = FUN_002404e8(DAT_00435d18);
       if (temp_v15 == 0) {
         return (unsigned int *)0x0;
@@ -886,14 +886,14 @@ code_r0x00240678:
   }
   memClear(temp_v24,0x80);
   temp_v14 = FUN_00240448(temp_v11);
-  FUN_002bf694(temp_v24,temp_v14);
+  libc_strcpy(temp_v24,temp_v14);
   temp_v15 = temp_v11;
   FUN_002402c4(temp_v11,temp_v24);
   if (temp_v15 != 0) {
     *puVar19 = 0xb;
     memClear(temp_v26,0x80);
     temp_v14 = FUN_00240448(temp_v11);
-    FUN_002bf694(temp_v26,temp_v14);
+    libc_strcpy(temp_v26,temp_v14);
     if (puVar19[1] != 0) {
       asdMemFree();
       puVar19[1] = 0;

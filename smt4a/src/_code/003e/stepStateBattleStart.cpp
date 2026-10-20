@@ -9,14 +9,14 @@ typedef struct StepState {
 } StepState;
 
 extern s32 FUN_0013def0(u32 index);
-extern void FUN_0031a400(void);
-extern void FUN_00342010(void);
+extern void campCommonBgAcquire(void);
+extern void campButtonHelpAcquire(void);
 extern void FUN_003b61ec(void);
 extern void sysPlaySe(u32 id);
-extern void FUN_00275f44(u32 job, s32 value);
+extern void scrScriptProcessStartEntry(u32 job, s32 value);
 extern s32 FUN_00224880(u32 job);
-extern void FUN_0035b304(void);
-extern void FUN_0037b450(void);
+extern void campCommonBgRelease(void);
+extern void campButtonHelpRelease(void);
 extern BtlStateB *btlGetMainState(void);
 extern u32 FUN_003e71a8(StepState *step);
 
@@ -26,15 +26,15 @@ u32 stepStateBattleStart(StepState *step)
     u32 result;
 
     if (FUN_0013def0(0) == 3 && FUN_0013def0(1) == 3) {
-        FUN_0031a400();
-        FUN_00342010();
+        campCommonBgAcquire();
+        campButtonHelpAcquire();
         FUN_003b61ec();
         sysPlaySe(0xAB);
-        FUN_00275f44(step->job, 0);
+        scrScriptProcessStartEntry(step->job, 0);
         step->state = 8;
         if (FUN_00224880(step->job) == 2) {
-            FUN_0035b304();
-            FUN_0037b450();
+            campCommonBgRelease();
+            campButtonHelpRelease();
             if (btlGetMainState()->unk4C80 != 1) {
                 step->state = 9;
                 result = FUN_003e71a8(step);

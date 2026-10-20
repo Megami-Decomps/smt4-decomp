@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0013a92c(unsigned char *);
 int FUN_001467a4(void);
-int FUN_002c38fc(char *);
+int nn_os_CriticalSection_Initialize(char *);
 int nn_snd_CTR_MasterManagerImpl_SetSoundOutputMode(unsigned char *);
 
 /* stack frame of param_4: 1 slot(s), 1 byte(s) */
@@ -14,12 +14,12 @@ typedef struct {
     unsigned char sp18; /* 0x18: local_18 */
 } param_4_stack;
 
-extern unsigned char DAT_004ead10; /* 0x4ead10 */
+extern unsigned char g_nnSndMasterManagerImpl; /* 0x4ead10 */
 
 extern int FUN_0013a170(unsigned int *, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0013a92c. */
 /* Supplied declaration required: FUN_001467a4. */
-/* Supplied declaration required: FUN_002c38fc. */
+/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
 extern void nn_cfg_CTR_Initialize(void);
 extern void nn_snd_CTR_MasterManagerImpl_Initialize(unsigned int);
 /* Supplied declaration required: nn_snd_CTR_MasterManagerImpl_SetSoundOutputMode. */
@@ -37,7 +37,7 @@ void FUN_00128e20(char *param_1,unsigned int param_2,unsigned int param_3,unsign
   if (*param_1 == '\0') {
     *param_1 = '\x01';
     temp_v3 = param_4;
-    nn_snd_CTR_MasterManagerImpl_Initialize((unsigned int)&DAT_004ead10);
+    nn_snd_CTR_MasterManagerImpl_Initialize((unsigned int)&g_nnSndMasterManagerImpl);
     param_1[2] = '\x01';
     param_1[4] = '\0';
     param_1[5] = '\0';
@@ -81,7 +81,7 @@ void FUN_00128e20(char *param_1,unsigned int param_2,unsigned int param_3,unsign
     param_1[0x29] = '\0';
     param_1[0x2a] = -0x80;
     param_1[0x2b] = '?';
-    FUN_0013a92c(&DAT_004ead10);
+    FUN_0013a92c(&g_nnSndMasterManagerImpl);
     nn_cfg_CTR_Initialize();
     temp_v0 = FUN_0013a170(&temp_v3,1,0x70001);
     FUN_001467a4();
@@ -94,7 +94,7 @@ void FUN_00128e20(char *param_1,unsigned int param_2,unsigned int param_3,unsign
       }
     }
     param_1[3] = temp_v2;
-    nn_snd_CTR_MasterManagerImpl_SetSoundOutputMode(&DAT_004ead10);
+    nn_snd_CTR_MasterManagerImpl_SetSoundOutputMode(&g_nnSndMasterManagerImpl);
     param_1[0x30] = '\0';
     param_1[0x31] = '\0';
     param_1[0x32] = '\0';
@@ -115,7 +115,7 @@ void FUN_00128e20(char *param_1,unsigned int param_2,unsigned int param_3,unsign
     param_1[0x41] = '\0';
     param_1[0x42] = '\0';
     param_1[0x43] = '\0';
-    FUN_002c38fc(param_1 + 0x44);
+    nn_os_CriticalSection_Initialize(param_1 + 0x44);
   }
   return;
 }

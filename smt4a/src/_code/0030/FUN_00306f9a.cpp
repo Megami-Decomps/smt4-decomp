@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_002e9300(unsigned int, short *);
-int FUN_002e9520(unsigned int, int, int, unsigned int, unsigned int);
+int onlineStringConstruct(unsigned int, short *);
+int onlineStringCopyConstruct(unsigned int, int, int, unsigned int, unsigned int);
 int FUN_0030f234(unsigned int, short *, unsigned int, unsigned int, int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -13,9 +13,9 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_4_stack;
 
-extern unsigned int FUN_002e783c(short *);
-/* Supplied declaration required: FUN_002e9300. */
-/* Supplied declaration required: FUN_002e9520. */
+extern unsigned int wstrlenU16(short *);
+/* Supplied declaration required: onlineStringConstruct. */
+/* Supplied declaration required: onlineStringCopyConstruct. */
 extern int FUN_002eea7c(int);
 /* Supplied declaration required: FUN_0030f234. */
 
@@ -30,14 +30,14 @@ void FUN_00306f9a(unsigned int param_1,short *param_2,int param_3,unsigned int p
   if ((param_2 != (short *)0x0) && (*param_2 != 0)) {
     temp_v0 = FUN_002eea7c(param_3);
     if (temp_v0 != 0) {
-      temp_v1 = FUN_002e783c(param_2);
+      temp_v1 = wstrlenU16(param_2);
       FUN_0030f234(param_1,param_2,temp_v1,*(unsigned int *)(param_3 + 4),temp_v0);
       return;
     }
-    FUN_002e9300(param_1,param_2);
+    onlineStringConstruct(param_1,param_2);
     return;
   }
-  FUN_002e9520(param_1,param_3,param_3,param_4,param_4);
+  onlineStringCopyConstruct(param_1,param_3,param_3,param_4,param_4);
   return;
 }
 

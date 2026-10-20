@@ -10,13 +10,13 @@ int FUN_001299f8(void);
 int FUN_00129b00(void);
 int FUN_00129d00(...);
 int FUN_00129d4c(...);
-int FUN_0013b608(void);
-int FUN_0013b618(void);
+int nngxLockEnter(void);
+int nngxLockLeave(void);
 int FUN_002ba2b8(void);
 int FUN_002ba51c(...);
 int FUN_002bdb48(void);
-int FUN_002bef70(...);
-int FUN_002bf0dc(void);
+int nngxBindCmdlist(...);
+int nngxGetError(void);
 int memClear(...);
 int SBORROW4(...);
 
@@ -108,13 +108,13 @@ extern unsigned long long FUN_0012419c(void);
 extern int FUN_00129d34(void);
 /* Supplied declaration required: FUN_00129d4c. */
 extern unsigned int FUN_00129d98(void);
-/* Supplied declaration required: FUN_0013b608. */
-/* Supplied declaration required: FUN_0013b618. */
+/* Supplied declaration required: nngxLockEnter. */
+/* Supplied declaration required: nngxLockLeave. */
 /* Supplied declaration required: FUN_002ba2b8. */
 /* Supplied declaration required: FUN_002ba51c. */
 /* Supplied declaration required: FUN_002bdb48. */
-/* Supplied declaration required: FUN_002bef70. */
-/* Supplied declaration required: FUN_002bf0dc. */
+/* Supplied declaration required: nngxBindCmdlist. */
+/* Supplied declaration required: nngxGetError. */
 /* Supplied declaration required: memClear. */
 extern int nngxGetVramEndAddr(unsigned int);
 extern int vldtr_initializeStateValidator(int);
@@ -165,8 +165,8 @@ unsigned int FUN_001124ac(romwright_code *param_1,romwright_code *param_2)
     if ((((-1 < temp_v0) && (temp_v0 = FUN_001221e0(temp_v1), -1 < temp_v0)) &&
         (temp_v0 = FUN_001230b8(temp_v2), -1 < temp_v0)) &&
        ((FUN_00122224(), -1 < temp_v4 && (temp_v0 = FUN_00122f04(temp_v5), -1 < temp_v0)))) {
-      FUN_002bf0dc();
-      FUN_002bef70(temp_v9[2]);
+      nngxGetError();
+      nngxBindCmdlist(temp_v9[2]);
       puVar1 = DAT_004c632c;
       if (DAT_004c632c != (unsigned int *)0x0) {
         if (DAT_004c632c[1] != 0) {
@@ -200,7 +200,7 @@ unsigned int FUN_001124ac(romwright_code *param_1,romwright_code *param_2)
       if (DAT_004c632c != (unsigned int *)0x0) {
         DAT_004c632c[0xb] = 0x300;
       }
-      temp_v0 = FUN_002bf0dc();
+      temp_v0 = nngxGetError();
       if ((temp_v0 == 0) && (temp_v0 = vldtr_initializeStateValidator(temp_v9[0]), -1 < temp_v0)) {
         temp_v3 = 2;
         DAT_0044e344 = g_commandBufferCursor - DAT_004c632c[1];
@@ -387,9 +387,9 @@ unsigned int FUN_001124ac(romwright_code *param_1,romwright_code *param_2)
           DAT_004c62a2 = 1;
           if (((int)DAT_004c632c[10] < (int)DAT_004c632c[8]) &&
              (DAT_004c62a1 = '\x01', DAT_004c632c[0xb] == 0x300)) {
-            FUN_0013b608();
+            nngxLockEnter();
             FUN_002ba2b8();
-            FUN_0013b618();
+            nngxLockLeave();
           }
         }
         temp_v7 = 0;
@@ -407,7 +407,7 @@ LAB_00113098:
             }
             puVar1 = DAT_004c6330;
             if (DAT_004c6330 != (unsigned int *)0x0) {
-              FUN_0013b608();
+              nngxLockEnter();
               if (DAT_004c62a1 == '\0') {
                 DAT_004c62a2 = 0;
               }
@@ -415,9 +415,9 @@ LAB_00113098:
                 *(unsigned char *)(puVar1[6] + (puVar1[9] * 0x1c - 0x1a)) = 1;
                 DAT_004c62a8 = 1;
               }
-              FUN_0013b618();
+              nngxLockLeave();
             }
-            FUN_002bef70(0);
+            nngxBindCmdlist(0);
             FUN_00123254(1,temp_v9 + 2);
             DAT_004c62a0 = 1;
             return 1;

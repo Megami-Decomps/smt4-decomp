@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern StateHolder4 *DAT_0057f28c;
+extern StateHolder4 *g_uiQuest;
 
 u8 stateHolder4IsZero2(void)
 {
-    return DAT_0057f28c->state == 0;
+    return g_uiQuest->state == 0;
 }
 
 } /* extern "C" */

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0022d434(int);
-int FUN_0022e4a4(int, int, int);
+int panelSetScrollPosition(int, int, int);
 int FUN_00232848(void);
 int FUN_00233240(int, int);
 int FUN_0026c57c(void);
@@ -14,7 +14,7 @@ int FUN_0029cc44(int);
 int FUN_0029ee6c(int, int);
 int FUN_002a0cb0(void);
 int FUN_002a0cc8(int);
-int FUN_002b8838(void);
+int buttonHelpSetPreset(void);
 int FUN_003a7fec(int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -26,7 +26,7 @@ extern unsigned char DAT_0043d9c8; /* 0x43d9c8 */
 
 extern int FUN_0019e0c0(unsigned int);
 /* Supplied declaration required: FUN_0022d434. */
-/* Supplied declaration required: FUN_0022e4a4. */
+/* Supplied declaration required: panelSetScrollPosition. */
 /* Supplied declaration required: FUN_00232848. */
 /* Supplied declaration required: FUN_00233240. */
 extern int FUN_0023360c(int);
@@ -39,7 +39,7 @@ extern int FUN_0029e924(int);
 /* Supplied declaration required: FUN_0029ee6c. */
 /* Supplied declaration required: FUN_002a0cb0. */
 /* Supplied declaration required: FUN_002a0cc8. */
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: FUN_003a7fec. */
 
 
@@ -66,10 +66,10 @@ void FUN_003a80f4(int param_1)
       else if ((temp_v1 != 0) && (*(int *)(param_1 + 0x28) <= temp_v1 + temp_v0)) {
         temp_v1 = temp_v1 - 1;
       }
-      FUN_0022e4a4(param_1 + 0x20,temp_v0,temp_v1);
+      panelSetScrollPosition(param_1 + 0x20,temp_v0,temp_v1);
     }
     FUN_002a0cb0();
-    FUN_002b8838();
+    buttonHelpSetPreset();
     FUN_002a0cc8(0);
     if (*(short *)(param_1 + 0x5a8) < 1) {
       if (*(char *)(param_1 + 0x5a4) == '\0') {

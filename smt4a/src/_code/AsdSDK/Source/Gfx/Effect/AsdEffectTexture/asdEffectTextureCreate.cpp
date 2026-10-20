@@ -5,8 +5,8 @@ extern "C" {
 
 EffectTexture *asdTextureCreate(int arg);
 void *asdMemoryAllocAligned(int, int, int, u32 size, int align, int);
-void FUN_00167bc8(const void *src, void *dst, u32 size);
-void FUN_0019a840(EffectTexture *tex);
+void memCopyWords(const void *src, void *dst, u32 size);
+void asdTextureSetImage(EffectTexture *tex);
 
 /* Builds a texture object from a texture image file: copies the header fields and the pixel data. */
 EffectTexture *asdEffectTextureCreate(EffectTextureFile *file)
@@ -24,8 +24,8 @@ EffectTexture *asdEffectTextureCreate(EffectTextureFile *file)
     tex->size = file->size;
     asdDebugTrace("c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Gfx\\Effect\\AsdEffectTexture.cpp", 51);
     tex->pixels = (u8 *)asdMemoryAllocAligned(0x10000, 0x100, 0, tex->size, 0x80, 1);
-    FUN_00167bc8(file->pixels, tex->pixels, tex->size);
-    FUN_0019a840(tex);
+    memCopyWords(file->pixels, tex->pixels, tex->size);
+    asdTextureSetImage(tex);
     return tex;
 }
 

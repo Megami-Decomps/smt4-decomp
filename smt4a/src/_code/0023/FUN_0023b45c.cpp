@@ -19,7 +19,7 @@ typedef struct Global588fd0 {
     /* 0x02 */ u8 unk02[2];
     /* 0x04 */ Game *game;
 } Global588fd0;
-extern Global588fd0 DAT_00588fd0;
+extern Global588fd0 g_gameGlobals;
 
 /* Stores the flag; when it is cleared outside mode 10 and the game state is 5, 6 or 7, also clears the word at 0x136C. */
 void FUN_0023b45c(s32 flag)
@@ -27,8 +27,8 @@ void FUN_0023b45c(s32 flag)
     Game *game;
     s32 state;
 
-    game = DAT_00588fd0.game;
-    DAT_00588fd0.game->flag = (u8)flag;
+    game = g_gameGlobals.game;
+    g_gameGlobals.game->flag = (u8)flag;
     if (((flag == 0) && (game->mode != 10)) &&
         (state = game->state, (state == 5 || state == 6) || state == 7)) {
         game->unk136C = 0;

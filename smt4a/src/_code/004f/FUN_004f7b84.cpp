@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00100388(...);
 int asdMemFree(...);
 int FUN_002804b0(...);
-int FUN_002e342c(...);
+int libc_strcpy(...);
 int sysMemClear(...);
 
 /* stack frame of param_2: 16 slot(s), 64 byte(s) */
@@ -34,7 +34,7 @@ typedef struct {
 extern int FUN_00100d60(unsigned int *, unsigned int);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002804b0. */
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: sysMemClear. */
 extern int findRecordByKey(int);
 
@@ -88,9 +88,9 @@ unsigned int FUN_004f7b84(int param_1,unsigned int param_2)
   temp_v16 = 0;
   sysMemClear(temp_v17,0x80);
   FUN_00100388(temp_v17,"battle/effect/%s.eft",param_2);
-  FUN_002e342c(&temp_v1,temp_v17);
+  libc_strcpy(&temp_v1,temp_v17);
   temp_v0 = FUN_00100d60((unsigned int *)&temp_v1,0x2f);
-  FUN_002e342c(param_1 + 0x3594,temp_v0 + 1);
+  libc_strcpy(param_1 + 0x3594,temp_v0 + 1);
   temp_v0 = findRecordByKey(param_1 + 0x3594);
   if (temp_v0 == 0xff) {
     FUN_002804b0(&temp_v1,param_1 + 0x3590,1);

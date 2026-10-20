@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6e14(void);
+int asdOperatorDeleteArray(void);
 int FUN_00307604(...);
 int FUN_0030761e(unsigned char *, int, unsigned char *);
 int FUN_0030c588(unsigned char *, int, unsigned char *, int *);
@@ -19,7 +19,7 @@ typedef struct {
 
 extern int *wordRefMax(int *, unsigned int *);
 extern int rt_malloc(void);
-/* Supplied declaration required: FUN_002e6e14. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
 /* Supplied declaration required: FUN_00307604. */
 /* Supplied declaration required: FUN_0030761e. */
 /* Supplied declaration required: FUN_0030c588. */
@@ -82,7 +82,7 @@ void FUN_001352ae(int *param_1,unsigned char *param_2,int param_3,unsigned char 
       temp_v3 = param_1[1] - temp_v2;
       for (; temp_v2 != param_1[1]; temp_v2 = temp_v2 + 1) {
       }
-      FUN_002e6e14();
+      asdOperatorDeleteArray();
       *param_1 = temp_v1;
       param_1[1] = temp_v1 + temp_v3 + param_3;
       param_1[2] = temp_v1 + temp_v0;

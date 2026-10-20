@@ -6,7 +6,7 @@ extern "C" {
 
 int memAlloc(int, int, int, int);
 int FUN_0017fd20(int [3], int);
-int FUN_00195fc8(void);
+int sysFatalBreak(void);
 int FUN_002e3140(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -19,7 +19,7 @@ extern int DAT_00588118; /* 0x588118 */
 
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_0017fd20. */
-/* Supplied declaration required: FUN_00195fc8. */
+/* Supplied declaration required: sysFatalBreak. */
 /* Supplied declaration required: FUN_002e3140. */
 extern unsigned int FUN_0042640c(unsigned int *);
 extern unsigned int FUN_0043d3d8(unsigned int, unsigned int, unsigned int, unsigned int);
@@ -45,7 +45,7 @@ unsigned int FUN_00432998(unsigned int *param_1)
   temp_v1 = FUN_0043d3d8(DAT_00588114,temp_v0,0x10000,4);
   *param_1 = temp_v1;
   if ((int)temp_v1 < 0) {
-    FUN_00195fc8();
+    sysFatalBreak();
   }
   if (-1 < (int)*param_1) {
     temp_v2[0] = 0;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0028c640(unsigned int, int, unsigned char [16]);
+int nodeSetTranslation(unsigned int, int, unsigned char [16]);
 int FUN_00298d50(unsigned int);
 int FUN_002adde8(unsigned int, unsigned char [32], unsigned char [16]);
 int FUN_002be624(unsigned char [32], unsigned char *, unsigned int);
@@ -12,7 +12,7 @@ int FUN_002c159c(void);
 
 extern unsigned char LAB_003847f4; /* 0x3847f4 */
 
-/* Supplied declaration required: FUN_0028c640. */
+/* Supplied declaration required: nodeSetTranslation. */
 /* Supplied declaration required: FUN_00298d50. */
 /* Supplied declaration required: FUN_002adde8. */
 /* Supplied declaration required: FUN_002be624. */
@@ -52,8 +52,8 @@ void FUN_003846e8(int param_1)
         *(unsigned char *)(*(int *)(puVar2[2] + 0x2c) + 0x1f6) = 1;
       }
       temp_v2 = param_1 + temp_v1 * 4;
-      FUN_0028c640(*(unsigned int *)(*(int *)(temp_v2 + 0xd10) + 8),0,temp_v4);
-      FUN_0028c640(*(unsigned int *)(*(int *)(temp_v2 + 0xd28) + 8),0,temp_v4);
+      nodeSetTranslation(*(unsigned int *)(*(int *)(temp_v2 + 0xd10) + 8),0,temp_v4);
+      nodeSetTranslation(*(unsigned int *)(*(int *)(temp_v2 + 0xd28) + 8),0,temp_v4);
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < 6);
   }

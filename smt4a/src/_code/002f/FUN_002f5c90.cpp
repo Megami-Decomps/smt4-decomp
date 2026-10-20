@@ -10,8 +10,8 @@ typedef struct {
     unsigned char sp30; /* 0x30: local_30 */
 } param_5_stack;
 
-extern int FUN_002ed280(unsigned int, unsigned int);
-extern int FUN_002ed420(unsigned int, int, unsigned int);
+extern int streamSkip(unsigned int, unsigned int);
+extern int streamReadBytes(unsigned int, int, unsigned int);
 extern int FUN_002ef9e0(unsigned char *, unsigned short);
 
 
@@ -31,12 +31,12 @@ FUN_002f5c90(unsigned int param_1,unsigned int param_2,int param_3,unsigned int 
   temp_v3 = param_2;
   iStack_1c = param_3;
   puStack_18 = param_4;
-  temp_v0 = FUN_002ed280(param_2,2);
+  temp_v0 = streamSkip(param_2,2);
   temp_v1 = 0;
   if (temp_v0 != 0) {
     if (*(char *)(param_3 + 0x89) != '\0') {
       *(unsigned char *)(param_3 + 0x89) = 1;
-      temp_v0 = FUN_002ed280(temp_v3,0xc);
+      temp_v0 = streamSkip(temp_v3,0xc);
       if (temp_v0 == 0) {
         return 0;
       }
@@ -44,7 +44,7 @@ FUN_002f5c90(unsigned int param_1,unsigned int param_2,int param_3,unsigned int 
       *param_5 = (unsigned int)*(unsigned short *)(param_3 + 0x6a);
     }
     else {
-      temp_v0 = FUN_002ed420(temp_v3,param_3 + 0x68,0xc);
+      temp_v0 = streamReadBytes(temp_v3,param_3 + 0x68,0xc);
       if (temp_v0 == 0) {
         return 0;
       }

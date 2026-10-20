@@ -34,9 +34,9 @@ extern unsigned char LAB_004e81a0; /* 0x4e81a0 */
 extern int g_btlScriptUnit; /* 0x57113c */
 extern unsigned int DAT_00571168; /* 0x571168 */
 extern unsigned int DAT_0057116c; /* 0x57116c */
-extern unsigned int DAT_005712f0; /* 0x5712f0 */
+extern unsigned int g_btlActionReflect; /* 0x5712f0 */
 extern int DAT_00573808; /* 0x573808 */
-extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
+extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
 extern int FUN_003e8430(int);
 extern int chainCountIdUnflagged(unsigned int, fn_004e7e08_arg1 *);
@@ -95,7 +95,7 @@ unsigned int FUN_004e7e08(int *param_1,fn_004e7e08_arg1 *param_2)
       if (temp_v0 != 3) {
         return 0;
       }
-      temp_v0 = chainCountIdUnflagged(DAT_005712f0,param_2);
+      temp_v0 = chainCountIdUnflagged(g_btlActionReflect,param_2);
       if (0 < temp_v0) {
         return 0;
       }
@@ -111,7 +111,7 @@ unsigned int FUN_004e7e08(int *param_1,fn_004e7e08_arg1 *param_2)
       temp_v0 = (int)*(short *)((int)param_2->field_0x24 + 0x6a);
       FUN_004fdcd8(0,param_2,temp_v0,temp_v0,7,0,2,0);
     }
-    FUN_004aa3d4(DAT_0057a9c8,2,0x1cc,*(unsigned int *)((int)param_2->field_0x20 + 0x3f8),
+    FUN_004aa3d4(g_btlUiBlock,2,0x1cc,*(unsigned int *)((int)param_2->field_0x20 + 0x3f8),
                  *(unsigned short *)((int)param_2->field_0x28 + 2),0);
     temp_v0 = FUN_004c3a98((int)*(short *)((int)param_2->field_0x24 + 0x6a),7);
     temp_v1 = FUN_004c52ec(7);

@@ -11,7 +11,7 @@ extern int g_lmapScene; /* 0x447e88 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int FUN_00285574(void);
-extern int FUN_002c2950(void);
+extern int gameGetMapBlock(void);
 
 
 void FUN_0022373c(void)
@@ -29,7 +29,7 @@ void FUN_0022373c(void)
   float temp_v6;
   unsigned int temp_v7;
   
-  temp_v1 = FUN_002c2950();
+  temp_v1 = gameGetMapBlock();
   temp_v7 = 0;
   temp_v2 = FUN_00285574();
   temp_v0 = g_lmapScene;

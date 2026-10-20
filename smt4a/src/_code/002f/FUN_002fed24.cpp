@@ -20,7 +20,7 @@ extern unsigned char DAT_0062e59c; /* 0x62e59c */
 #endif
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-extern int FUN_002e9520(unsigned int *);
+extern int onlineStringCopyConstruct(unsigned int *);
 extern int wordRefsDiffer_002fa114(unsigned int *, unsigned int *);
 
 
@@ -43,7 +43,7 @@ FUN_002fed24(unsigned int *param_1,unsigned int param_2,unsigned int param_3,uns
   uStack_18 = param_2;
   uStack_14 = param_3;
   uStack_10 = param_4;
-  temp_v1 = FUN_002e9520(param_1 + 3);
+  temp_v1 = onlineStringCopyConstruct(param_1 + 3);
   temp_v3 = temp_v1 - 0xc;
   *(unsigned int *)(temp_v1 + 0xc) = 0;
   *(unsigned int *)(temp_v1 + 0x10) = 0;

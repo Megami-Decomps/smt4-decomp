@@ -7,10 +7,10 @@ extern "C" {
 int FUN_00137848(void);
 int asdSequenceRequest(int, int);
 int asdTMTexTableLoadTmx(...);
-int FUN_0014384c(int);
+int asdTMTexTableLoadSprites(int);
 int FUN_0014afd0(...);
 int FUN_00212774(void);
-int FUN_00213b10(void);
+int configSettingsResetDefaults(void);
 int FUN_002326b4(void);
 int FUN_0023b410(void);
 int FUN_00281a0c(void);
@@ -39,10 +39,10 @@ extern signed char g_jyoucyuLevel; /* 0x57ffd4 */
 /* Supplied declaration required: FUN_00137848. */
 /* Supplied declaration required: asdSequenceRequest. */
 /* Supplied declaration required: asdTMTexTableLoadTmx. */
-/* Supplied declaration required: FUN_0014384c. */
+/* Supplied declaration required: asdTMTexTableLoadSprites. */
 /* Supplied declaration required: FUN_0014afd0. */
 /* Supplied declaration required: FUN_00212774. */
-/* Supplied declaration required: FUN_00213b10. */
+/* Supplied declaration required: configSettingsResetDefaults. */
 /* Supplied declaration required: FUN_002326b4. */
 /* Supplied declaration required: FUN_0023b410. */
 /* Supplied declaration required: FUN_00281a0c. */
@@ -102,8 +102,8 @@ void FUN_0022258c(unsigned int param_1)
         asdTMTexTableLoadTmx(0x16,0);
         asdTMTexTableLoadTmx(0x17,0);
         asdTMTexTableLoadTmx(0x1c,0);
-        FUN_0014384c(0x27);
-        FUN_0014384c(0x1d);
+        asdTMTexTableLoadSprites(0x27);
+        asdTMTexTableLoadSprites(0x1d);
         asdTMTexTableLoadTmx(0xe,0);
         FUN_0014afd0(3,2);
         FUN_0014afd0(3);
@@ -117,7 +117,7 @@ void FUN_0022258c(unsigned int param_1)
       FUN_0039c304();
       FUN_00282b60();
       FUN_002bf464();
-      FUN_00213b10();
+      configSettingsResetDefaults();
       FUN_00283d74(0);
       FUN_00137848();
       FUN_002326b4();

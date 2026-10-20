@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0010b410(void);
 int FUN_001136a2(void);
-int FUN_002ea124(void);
+int operatorDelete(void);
 int FUN_00300bb0(void);
 int destroyObj00558c98(unsigned int *);
 
@@ -15,7 +15,7 @@ extern unsigned char DAT_00559758; /* 0x559758 */
 
 /* Supplied declaration required: FUN_0010b410. */
 /* Supplied declaration required: FUN_001136a2. */
-/* Supplied declaration required: FUN_002ea124. */
+/* Supplied declaration required: operatorDelete. */
 /* Supplied declaration required: FUN_00300bb0. */
 /* Supplied declaration required: destroyObj00558c98. */
 
@@ -27,11 +27,11 @@ void FUN_00114efc(unsigned int *param_1)
   *param_1 = (unsigned int)&DAT_00559758;
   if (param_1[5] != 0) {
     FUN_001136a2();
-    FUN_002ea124();
+    operatorDelete();
   }
   if (param_1[6] != 0) {
     FUN_0010b410();
-    FUN_002ea124();
+    operatorDelete();
   }
   if ((int *)param_1[4] != (int *)0x0) {
     (**(romwright_code **)(*(int *)param_1[4] + 4))();

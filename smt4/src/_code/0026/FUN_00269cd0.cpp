@@ -16,14 +16,14 @@ typedef struct UiState {
     /* 0xE3B */ u8 ready;
 } UiState;
 
-extern UiState *DAT_0043da90;
+extern UiState *g_camp;
 
-int FUN_002b8cc8(void);
+int ifTouchRegionRemove(void);
 
-/* Resets the three UI slots: all ids to -1 and four FUN_002b8cc8 calls per slot; then clears `ready`. */
+/* Resets the three UI slots: all ids to -1 and four ifTouchRegionRemove calls per slot; then clears `ready`. */
 void FUN_00269cd0(void)
 {
-    UiState *state = DAT_0043da90;
+    UiState *state = g_camp;
     int i = 0;
 
     do {
@@ -31,10 +31,10 @@ void FUN_00269cd0(void)
         state->slots[i].a = -1;
         state->slots[i].b = -1;
         state->slots[i].c = -1;
-        FUN_002b8cc8();
-        FUN_002b8cc8();
-        FUN_002b8cc8();
-        FUN_002b8cc8();
+        ifTouchRegionRemove();
+        ifTouchRegionRemove();
+        ifTouchRegionRemove();
+        ifTouchRegionRemove();
         i++;
     } while (i < 3);
     state->ready = 0;

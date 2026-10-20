@@ -7,7 +7,7 @@ extern "C" {
 int dataTable05Sub4GetCount(void);
 int FUN_0029cde0(unsigned int *, int, int);
 int FUN_0029f7d4(void);
-int FUN_002b9024(void);
+int devilGetRecord(void);
 
 /* stack frame of param_2: 9 slot(s), 34 byte(s) */
 typedef struct {
@@ -27,11 +27,11 @@ extern int FUN_00288154(unsigned short, unsigned char *);
 /* Supplied declaration required: FUN_0029cde0. */
 extern int FUN_0029ea68(unsigned short);
 /* Supplied declaration required: FUN_0029f7d4. */
-extern int FUN_002a8740(void);
-extern int FUN_002a8764(void);
-extern int FUN_002a8778(void);
-/* Supplied declaration required: FUN_002b9024. */
-extern int FUN_002c09d0(void);
+extern int gameGetUnitRecord(void);
+extern int gameGetSlotTable(void);
+extern int gameCountUnits(void);
+/* Supplied declaration required: devilGetRecord. */
+extern int gameFlagIsSet(void);
 
 
 unsigned int FUN_0029fa0c(unsigned int param_1,int param_2)
@@ -65,7 +65,7 @@ unsigned int FUN_0029fa0c(unsigned int param_1,int param_2)
   temp_v15 = 0;
   uStack_2c = param_1;
   temp_v18 = param_2;
-  temp_v2 = FUN_002a8764();
+  temp_v2 = gameGetSlotTable();
   temp_v8 = 0;
   temp_v3 = temp_v2;
   dataTable05Sub4GetCount();
@@ -75,8 +75,8 @@ unsigned int FUN_0029fa0c(unsigned int param_1,int param_2)
       FUN_0029f7d4();
       if (temp_v5 != 0) {
         puVar4 = (unsigned short *)(unsigned int)*(unsigned short *)(temp_v5 + 0x1a);
-        FUN_002b9024();
-        if ((puVar4[0x1b] == 0) || (temp_v3 = FUN_002c09d0(), temp_v3 != 0)) {
+        devilGetRecord();
+        if ((puVar4[0x1b] == 0) || (temp_v3 = gameFlagIsSet(), temp_v3 != 0)) {
           temp_v0 = puVar4[0x1a];
           if ((temp_v0 & 1) != 0) {
             if ((temp_v0 & 0xfffe) != 0) {
@@ -100,17 +100,17 @@ unsigned int FUN_0029fa0c(unsigned int param_1,int param_2)
               temp_v7 = temp_v5 + temp_v3 * 2;
               if (*(short *)(temp_v7 + 2) != 0) {
                 temp_v6 = 0;
-                temp_v4 = FUN_002a8778();
+                temp_v4 = gameCountUnits();
                 if (0 < temp_v4) {
                   do {
                     if ((-1 < *(char *)(temp_v2 + temp_v6 + 0x90f0)) &&
-                       (temp_v4 = FUN_002a8740(), *(short *)(temp_v4 + 0x46) == *(short *)(temp_v7 + 2)))
+                       (temp_v4 = gameGetUnitRecord(), *(short *)(temp_v4 + 0x46) == *(short *)(temp_v7 + 2)))
                     {
                       *(unsigned short *)((int)&temp_v9 + temp_v3 * 2) = 1;
                       goto LAB_0029fb98;
                     }
                     temp_v6 = temp_v6 + 1;
-                    temp_v4 = FUN_002a8778();
+                    temp_v4 = gameCountUnits();
                   } while (temp_v6 < temp_v4);
                 }
                 psVar10 = (short *)((int)&temp_v9 + temp_v3 * 2);

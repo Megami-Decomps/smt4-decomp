@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0024ef48(int);
+int mdlHandleArrayDestroy(int);
 int FUN_002759bc(void);
-int FUN_002b2368(int);
+int asdMemFreeNonNull(int);
 int FUN_002c3f5c(void);
 int FUN_002c40f8(unsigned char *, int *, int, int, unsigned int, unsigned int);
 int asdMemFree(void);
@@ -19,9 +19,9 @@ typedef struct {
 } param_1_stack;
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_0024ef48. */
+/* Supplied declaration required: mdlHandleArrayDestroy. */
 /* Supplied declaration required: FUN_002759bc. */
-/* Supplied declaration required: FUN_002b2368. */
+/* Supplied declaration required: asdMemFreeNonNull. */
 /* Supplied declaration required: FUN_002c3f5c. */
 /* Supplied declaration required: FUN_002c40f8. */
 /* Supplied declaration required: asdMemFree. */
@@ -55,7 +55,7 @@ void FUN_003c7f20(int param_1)
     temp_v0 = *(int *)(param_1 + 0xb0);
     if (temp_v0 != 0) {
       FUN_002c3f5c();
-      FUN_002b2368(temp_v0);
+      asdMemFreeNonNull(temp_v0);
     }
     *(unsigned int *)(param_1 + 0xb0) = 0;
   }
@@ -68,7 +68,7 @@ void FUN_003c7f20(int param_1)
     *(unsigned int *)(param_1 + 0xa0) = 0;
   }
   FUN_002759bc();
-  FUN_0024ef48(param_1);
+  mdlHandleArrayDestroy(param_1);
   *(unsigned int *)(param_1 + 0x80) = 0;
   return;
 }

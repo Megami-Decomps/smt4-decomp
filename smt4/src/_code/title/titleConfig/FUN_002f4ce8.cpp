@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_0027eb88(...);
+int memFill8(...);
 int FUN_00297468(...);
 int FUN_0029ee6c(...);
 int FUN_0029f848(...);
 int FUN_002ad8b4(...);
-int FUN_002b8838(...);
+int buttonHelpSetPreset(...);
 int timerStart(...);
 int FUN_002bd954(...);
 int FUN_002c312c(...);
@@ -44,12 +44,12 @@ extern unsigned char DAT_0044e0fa; /* 0x44e0fa */
 extern unsigned int *g_titleConfig; /* 0x44e2d0 */
 
 extern unsigned int FUN_0021f498(unsigned char);
-/* Supplied declaration required: FUN_0027eb88. */
+/* Supplied declaration required: memFill8. */
 /* Supplied declaration required: FUN_00297468. */
 /* Supplied declaration required: FUN_0029ee6c. */
 /* Supplied declaration required: FUN_0029f848. */
 /* Supplied declaration required: FUN_002ad8b4. */
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002c312c. */
@@ -83,11 +83,11 @@ void FUN_002f4ce8(void)
   FUN_0029f848(puVar1 + 0x3a,3,3,1,0,1);
   puVar1[2] = 0;
   *(unsigned short *)((int)puVar1 + 0x1a) = 0;
-  FUN_0027eb88(puVar1 + 7,0xffffffff);
+  memFill8(puVar1 + 7,0xffffffff);
   *(unsigned short *)(puVar1 + 9) = 0;
   FUN_00297468(&LAB_002f4efc,puVar1 + 0x53,0);
   FUN_00297468(&LAB_002f4f0c,puVar1 + 0x54,0);
-  FUN_002b8838(0x99);
+  buttonHelpSetPreset(0x99);
   FUN_0029ee6c(0,0x323232ff);
   temp_v0 = FUN_002cabf8(DAT_0044e0f8);
   puVar1[10] = temp_v0;

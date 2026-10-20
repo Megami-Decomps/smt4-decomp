@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002e6e14(void);
+int asdOperatorDeleteArray(void);
 int FUN_002e6e34(int *, int);
 int FUN_002e6e5c(int *);
 int FUN_003014a8(void);
 
-/* Supplied declaration required: FUN_002e6e14. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
 /* Supplied declaration required: FUN_003014a8. */
@@ -36,7 +36,7 @@ void FUN_001156bc(int param_1,int param_2,unsigned int param_3,unsigned int para
   param_1 = temp_v0 * 4 + param_1;
   if (*(int *)(param_1 + 0x34) != 0) {
     FUN_003014a8();
-    FUN_002e6e14();
+    asdOperatorDeleteArray();
   }
   *(unsigned int *)(param_1 + 0x34) = 0;
   FUN_002e6e5c(&iStack_18);

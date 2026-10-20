@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002b8584(int, int);
 
-extern int DAT_0043da90; /* 0x43da90 */
+extern int g_camp; /* 0x43da90 */
 
 extern int FUN_0029d644(unsigned int);
 extern int FUN_0029ee54(unsigned int);
@@ -22,7 +22,7 @@ void FUN_00299bc4(unsigned int param_1,int param_2)
   int temp_v2;
   int temp_v3;
   
-  temp_v0 = DAT_0043da90;
+  temp_v0 = g_camp;
   temp_v2 = FUN_0029ee54(param_1);
   temp_v3 = FUN_0029d644(param_1);
   if (temp_v3 < temp_v2) {

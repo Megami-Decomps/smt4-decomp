@@ -31,7 +31,7 @@ typedef struct FlagBlockView {
 extern FlagBlockView g_flagBlock;
 
 void FUN_002f4ab0(Object *object, u32 mode);
-void FUN_002e7232(void *buffer);
+void sharedRefRelease(void *buffer);
 u32 FUN_002e6e26(void);
 void FUN_002f8e58(u32 pool, void *buffer);
 
@@ -60,7 +60,7 @@ u32 FUN_0010e6a4(Owner *owner)
     if (owner->buffer != NULL && FUN_002e6e26() != 0) {
         pool = FUN_002e6e26();
         FUN_002f8e58(pool, owner->buffer);
-        FUN_002e7232(owner->buffer);
+        sharedRefRelease(owner->buffer);
         owner->buffer = NULL;
     }
     return 1;

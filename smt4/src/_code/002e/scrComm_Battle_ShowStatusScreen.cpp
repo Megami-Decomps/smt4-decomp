@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00218b9c(int);
 int FUN_00250d84(unsigned int, int);
-int FUN_002542d4(...);
+int scrWorkSetValue(...);
 int FUN_0028c040(void);
 int FUN_0028ca0c(unsigned int);
 int FUN_0028ca60(unsigned int);
@@ -18,18 +18,18 @@ int FUN_002bd8d4(int);
 int FUN_002f5eac(unsigned int, int);
 int FUN_00311430(unsigned int, int);
 
-extern int DAT_00439ca8; /* 0x439ca8 */
+extern int g_btlUiBlock; /* 0x439ca8 */
 
 /* Supplied declaration required: FUN_00218b9c. */
 /* Supplied declaration required: FUN_00250d84. */
-extern int FUN_002542bc(unsigned int);
-/* Supplied declaration required: FUN_002542d4. */
-extern int FUN_002893d8(void);
+extern int scrWorkGetValue(unsigned int);
+/* Supplied declaration required: scrWorkSetValue. */
+extern int scrGetCommandFrame(void);
 /* Supplied declaration required: FUN_0028c040. */
 /* Supplied declaration required: FUN_0028ca0c. */
 /* Supplied declaration required: FUN_0028ca60. */
 extern unsigned int FUN_0028cab8(void);
-extern int FUN_0028cad4(void);
+extern int statusScreenIsClosed(void);
 /* Supplied declaration required: FUN_00292c0c. */
 extern int FUN_00295618(void);
 /* Supplied declaration required: FUN_00295a18. */
@@ -50,24 +50,24 @@ unsigned int scrComm_Battle_ShowStatusScreen(void)
   unsigned int temp_v2;
   
   temp_v0 = scrGetArg(0);
-  temp_v1 = FUN_002893d8();
+  temp_v1 = scrGetCommandFrame();
   if (temp_v1 == 0) {
-    FUN_002542d4(0);
-    FUN_002542d4(1,0);
+    scrWorkSetValue(0);
+    scrWorkSetValue(1,0);
   }
-  temp_v1 = FUN_002542bc(0);
+  temp_v1 = scrWorkGetValue(0);
   if (temp_v1 != 0) {
     if (temp_v1 != 1) {
       if (temp_v1 != 2) {
         if ((temp_v1 == 3) && (temp_v1 = FUN_00295618(), temp_v1 != 0)) {
           FUN_00292c0c();
-          FUN_002bd8d4(DAT_00439ca8 + 0x2460);
-          FUN_002542d4(0,4);
+          FUN_002bd8d4(g_btlUiBlock + 0x2460);
+          scrWorkSetValue(0,4);
           return 1;
         }
       }
       else {
-        temp_v1 = FUN_0028cad4();
+        temp_v1 = statusScreenIsClosed();
         if (temp_v1 != 0) {
           temp_v2 = FUN_0028cab8();
           if (temp_v2 != 0) {
@@ -75,23 +75,23 @@ unsigned int scrComm_Battle_ShowStatusScreen(void)
           }
           FUN_0028ca0c(temp_v0 & 0xffff);
           FUN_0029ca58();
-          FUN_002542d4(0,3);
+          scrWorkSetValue(0,3);
         }
       }
     }
     else {
-      FUN_002542d4(0,2);
+      scrWorkSetValue(0,2);
       FUN_0028c040();
       FUN_0029e874(0);
       FUN_00311430(temp_v0 & 0xffff,0);
-      FUN_00218b9c(DAT_00439ca8 + 0x2460);
+      FUN_00218b9c(g_btlUiBlock + 0x2460);
     }
   }
   else {
     FUN_002f5eac(temp_v0,1);
     FUN_00295a18(temp_v0,1);
     FUN_00250d84(temp_v0,1);
-    FUN_002542d4(0,1);
+    scrWorkSetValue(0,1);
   }
   return 0;
 }

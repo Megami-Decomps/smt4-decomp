@@ -6,12 +6,12 @@ extern "C" {
 
 int FUN_0022afc4(unsigned int, int, unsigned int);
 int FUN_0022b29c(int, int, int);
-int FUN_0022b8d8(int, int);
+int listScrollToId(int, int);
 int FUN_00296e90(void);
-int FUN_00296f4c(unsigned int, unsigned int);
+int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int FUN_002bd808(int, unsigned short *);
 int FUN_002be624(...);
-int FUN_002c09d0(...);
+int gameFlagIsSet(...);
 
 /* stack frame of param_1: 6 slot(s), 18 byte(s) */
 typedef struct {
@@ -30,13 +30,13 @@ extern int FUN_0019e0c0(unsigned int);
 /* Supplied declaration required: FUN_0022afc4. */
 extern int FUN_0022b238(int, int);
 /* Supplied declaration required: FUN_0022b29c. */
-/* Supplied declaration required: FUN_0022b8d8. */
-extern unsigned int FUN_00290d74(unsigned int, unsigned char *);
+/* Supplied declaration required: listScrollToId. */
+extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_00296e90. */
-/* Supplied declaration required: FUN_00296f4c. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_002bd808. */
 /* Supplied declaration required: FUN_002be624. */
-/* Supplied declaration required: FUN_002c09d0. */
+/* Supplied declaration required: gameFlagIsSet. */
 
 
 void FUN_003b9c00(int param_1)
@@ -70,14 +70,14 @@ void FUN_003b9c00(int param_1)
           temp_v4 = *(unsigned int *)(param_1 + 0xd88);
           DAT_0044cfb8 = 0;
           FUN_002be624(temp_v13,&DAT_00404e04,temp_v2 + 0x2c);
-          temp_v4 = FUN_00290d74(temp_v4,temp_v13);
-          FUN_00296f4c(temp_v3,temp_v4);
+          temp_v4 = tableGroupFindEntryIndex(temp_v4,temp_v13);
+          scrScriptProcessStartEntry(temp_v3,temp_v4);
           do {
             temp_v5 = FUN_0019e0c0(temp_v3);
           } while (temp_v5 != 2);
           if (((DAT_0044cfb8 != 0) ||
-              ((*(short *)(temp_v2 + 0x3c) != 0 && (temp_v5 = FUN_002c09d0(), temp_v5 == 0)))) ||
-             ((*(short *)(temp_v2 + 0x3e) != 0 && (temp_v5 = FUN_002c09d0(), temp_v5 != 0))))
+              ((*(short *)(temp_v2 + 0x3c) != 0 && (temp_v5 = gameFlagIsSet(), temp_v5 == 0)))) ||
+             ((*(short *)(temp_v2 + 0x3e) != 0 && (temp_v5 = gameFlagIsSet(), temp_v5 != 0))))
           goto LAB_003b9cf0;
           break;
         }
@@ -89,14 +89,14 @@ LAB_003b9cf0:
           temp_v11 = *(unsigned int *)(param_1 + 0xd88);
           DAT_0044cfb8 = 0;
           FUN_002be624(temp_v12,&DAT_00404e04,temp_v2 + 0x2c);
-          temp_v4 = FUN_00290d74(temp_v11,temp_v12);
-          FUN_00296f4c(temp_v3,temp_v4);
+          temp_v4 = tableGroupFindEntryIndex(temp_v11,temp_v12);
+          scrScriptProcessStartEntry(temp_v3,temp_v4);
           do {
             temp_v5 = FUN_0019e0c0(temp_v3);
           } while (temp_v5 != 2);
           if (((DAT_0044cfb8 == 0) &&
-              ((*(short *)(temp_v2 + 0x3c) == 0 || (temp_v5 = FUN_002c09d0(), temp_v5 != 0)))) &&
-             ((*(short *)(temp_v2 + 0x3e) == 0 || (temp_v2 = FUN_002c09d0(), temp_v2 == 0)))) {
+              ((*(short *)(temp_v2 + 0x3c) == 0 || (temp_v5 = gameFlagIsSet(), temp_v5 != 0)))) &&
+             ((*(short *)(temp_v2 + 0x3e) == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 == 0)))) {
             temp_v0 = 0;
             break;
           }
@@ -114,14 +114,14 @@ LAB_003b9cf0:
         temp_v11 = *(unsigned int *)(param_1 + 0xd88);
         DAT_0044cfb8 = 0;
         FUN_002be624(temp_v12,&DAT_00404e04,temp_v2 + 0x2c);
-        temp_v4 = FUN_00290d74(temp_v11,temp_v12);
-        FUN_00296f4c(temp_v3,temp_v4);
+        temp_v4 = tableGroupFindEntryIndex(temp_v11,temp_v12);
+        scrScriptProcessStartEntry(temp_v3,temp_v4);
         do {
           temp_v5 = FUN_0019e0c0(temp_v3);
         } while (temp_v5 != 2);
         if (((DAT_0044cfb8 == 0) &&
-            ((*(short *)(temp_v2 + 0x3c) == 0 || (temp_v5 = FUN_002c09d0(), temp_v5 != 0)))) &&
-           ((*(short *)(temp_v2 + 0x3e) == 0 || (temp_v2 = FUN_002c09d0(), temp_v2 == 0)))) break;
+            ((*(short *)(temp_v2 + 0x3c) == 0 || (temp_v5 = gameFlagIsSet(), temp_v5 != 0)))) &&
+           ((*(short *)(temp_v2 + 0x3e) == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 == 0)))) break;
       }
       temp_v7 = temp_v7 + 1;
     } while (temp_v7 < temp_v1);
@@ -131,9 +131,9 @@ LAB_003b9cf0:
   temp_v10 = 0;
   switch(*(unsigned int *)(param_1 + 0xd64)) {
   case 0:
-    if ((temp_v0) && (temp_v1 = FUN_002c09d0(0x15), temp_v1 != 0)) {
+    if ((temp_v0) && (temp_v1 = gameFlagIsSet(0x15), temp_v1 != 0)) {
       temp_v8 = 4;
-      FUN_0022b8d8(param_1 + 0x9c,0xff);
+      listScrollToId(param_1 + 0x9c,0xff);
       FUN_002bd808(param_1 + 0x42,&temp_v8);
       temp_v6 = *(unsigned int *)(param_1 + 0x20);
       *(unsigned int *)(param_1 + 0x20) = temp_v6 | 0x10;
@@ -150,7 +150,7 @@ LAB_003b9cf0:
     }
   case 1:
   case 2:
-    FUN_0022b8d8(param_1 + 0x9c,0xff);
+    listScrollToId(param_1 + 0x9c,0xff);
     *(unsigned int *)(param_1 + 0x20) = *(unsigned int *)(param_1 + 0x20) | 0x40000000;
     *(unsigned char *)(param_1 + 0x6ce) = 1;
     break;

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0019de98(...);
-int FUN_001aea28(...);
+int ptrListRemoveClearOwner(...);
 int FUN_0020b660(...);
 int FUN_0021b274(...);
 int FUN_0022e774(void);
@@ -15,7 +15,7 @@ int FUN_002adce8(...);
 int FUN_002cb278(...);
 int FUN_002f78a0(...);
 int menuItemPlaySe(...);
-int FUN_0031d1b4(...);
+int flaggedEntrySetValueB(...);
 int FUN_0037c8e4(...);
 int FUN_0037e0b8(...);
 int FUN_0038843c(void);
@@ -37,7 +37,7 @@ int FUN_003d2150(...);
 int FUN_003df7c4(...);
 
 int FUN_00178b04(...);
-int FUN_001801a4(void);
+int gameGetPlayerData(void);
 int FUN_002a7324(int);
 int FUN_002c85b0(...);
 int FUN_002f0384(...);
@@ -67,8 +67,8 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned char LAB_001fe2e8; /* 0x1fe2e8 */
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
-extern int DAT_0057f108; /* 0x57f108 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
+extern int g_camp; /* 0x57f108 */
 
 #ifndef ROMWRIGHT_PIECE_2_2_DEFINED
 #define ROMWRIGHT_PIECE_2_2_DEFINED
@@ -78,11 +78,11 @@ extern int DAT_0057f108; /* 0x57f108 */
 /* Supplied declaration required: FUN_001641b4. */
 extern unsigned short FUN_00167f08(void);
 /* Supplied declaration required: FUN_00178b04. */
-/* Supplied declaration required: FUN_001801a4. */
+/* Supplied declaration required: gameGetPlayerData. */
 extern unsigned int FUN_001834a4(unsigned int, unsigned int);
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0019de98. */
-/* Supplied declaration required: FUN_001aea28. */
+/* Supplied declaration required: ptrListRemoveClearOwner. */
 /* Supplied declaration required: FUN_0020b660. */
 /* Supplied declaration required: FUN_0021b274. */
 /* Supplied declaration required: FUN_00228b04. */
@@ -104,7 +104,7 @@ extern int FUN_002c2c4c(int);
 /* Supplied declaration required: FUN_002f0384. */
 /* Supplied declaration required: FUN_002f78a0. */
 /* Supplied declaration required: menuItemPlaySe. */
-/* Supplied declaration required: FUN_0031d1b4. */
+/* Supplied declaration required: flaggedEntrySetValueB. */
 /* Supplied declaration required: FUN_0031f208. */
 /* Supplied declaration required: FUN_0031f27c. */
 /* Supplied declaration required: FUN_00320940. */
@@ -170,8 +170,8 @@ void FUN_001fdde8(int param_1)
   int temp_v13;
   char temp_v14 [16];
   
-  temp_v5 = DAT_0057f108;
-  psVar4 = (short *)FUN_001801a4();
+  temp_v5 = g_camp;
+  psVar4 = (short *)gameGetPlayerData();
   temp_v10 = (unsigned int)(param_1 - 0x48U < 7);
   temp_v13 = 0;
   temp_v9 = 0;
@@ -278,7 +278,7 @@ void FUN_001fdde8(int param_1)
     temp_v9 = FUN_0040ab8c(*(unsigned int *)(temp_v5 + 0x32ac));
     if (temp_v9 != 0) {
       temp_v3 = *(unsigned int *)(*(int *)(temp_v5 + 0x32ac) + 4);
-      FUN_0040ace8(DAT_0056fcc0,temp_v3);
+      FUN_0040ace8(g_handleRegistry,temp_v3);
       FUN_003fe86c(temp_v3,0,2);
       FUN_003fd7b4(temp_v3);
     }
@@ -443,7 +443,7 @@ void FUN_001fdde8(int param_1)
         return;
       }
       if (temp_v10 != 0) {
-        puVar8 = (unsigned int *)FUN_001801a4();
+        puVar8 = (unsigned int *)gameGetPlayerData();
         temp_v3 = FUN_002bf520();
         FUN_0035a074(temp_v3,*puVar8,puVar8[1],puVar8[2],romwright_piece_2_2(temp_v2,*(unsigned short *)(puVar8 + 3)));
         stateAtF4Apply();
@@ -571,7 +571,7 @@ void FUN_001fdde8(int param_1)
           }
           temp_v11 = temp_v5 + temp_v9 * 100;
           temp_v4 = FUN_002c2c4c(temp_v11 + 0x2b4);
-          temp_v6 = FUN_0018719c(0x410);
+          temp_v6 = gameFlagIsSet(0x410);
           if ((temp_v6 == 0) && (0 < temp_v9)) {
             temp_v4 = FUN_002c2c4c(temp_v11 + 0x37c);
           }
@@ -617,7 +617,7 @@ void FUN_001fdde8(int param_1)
           }
           temp_v11 = temp_v5 + temp_v9 * 100;
           temp_v4 = FUN_002c2c4c(temp_v11 + 0x2b4);
-          temp_v6 = FUN_0018719c(0x410);
+          temp_v6 = gameFlagIsSet(0x410);
           if ((temp_v6 == 0) && (0 < temp_v9)) {
             temp_v4 = FUN_002c2c4c(temp_v11 + 0x37c);
           }
@@ -651,7 +651,7 @@ void FUN_001fdde8(int param_1)
       FUN_0021b274(3,0xffffffff,0);
       *(unsigned int *)(temp_v5 + 0x24) = 6;
       FUN_0020b660(5);
-      FUN_001aea28(DAT_0056fcc0,*(unsigned int *)(*(int *)(temp_v5 + 0x32ac) + 4));
+      ptrListRemoveClearOwner(g_handleRegistry,*(unsigned int *)(*(int *)(temp_v5 + 0x32ac) + 4));
       if (*(int **)(temp_v5 + 0x32ac) != (int *)0x0) {
         (**(romwright_code **)(**(int **)(temp_v5 + 0x32ac) + 4))();
         *(unsigned int *)(temp_v5 + 0x32ac) = 0;
@@ -666,7 +666,7 @@ void FUN_001fdde8(int param_1)
     return;
   }
 LAB_001fea60:
-  FUN_0031d1b4(temp_v5 + 0x40,temp_v9);
+  flaggedEntrySetValueB(temp_v5 + 0x40,temp_v9);
   temp_v3 = FUN_002a4878(temp_v5 + 0x40);
   param_1 = FUN_003da8f4((int)*(char *)(temp_v5 + 0xa4),temp_v3);
   FUN_0028b088();

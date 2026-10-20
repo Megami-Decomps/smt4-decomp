@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_00100854(unsigned short *, unsigned int, unsigned int, int, unsigned char *);
+int libc_bsearch(unsigned short *, unsigned int, unsigned int, int, unsigned char *);
 int FUN_001517b4(int, int);
-int FUN_00184c00(int, int);
-int FUN_0019a7f4(void);
+int uiSpriteSetImageKeyframe(int, int);
+int asdTMTexTableReleaseNode(void);
 int FUN_0019e330(int, int);
 int FUN_0028520c(void);
 
@@ -18,17 +18,17 @@ typedef struct {
 } void_stack;
 
 extern unsigned char LAB_002321f8; /* 0x2321f8 */
-extern int DAT_0057f57c; /* 0x57f57c */
+extern int g_sWin; /* 0x57f57c */
 
-/* Supplied declaration required: FUN_00100854. */
+/* Supplied declaration required: libc_bsearch. */
 /* Supplied declaration required: FUN_001517b4. */
 extern int FUN_00163aa4(int);
 extern int FUN_00163fd4(unsigned int);
-/* Supplied declaration required: FUN_00184c00. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern unsigned int dataTableGetEntries(void);
-/* Supplied declaration required: FUN_0019a7f4. */
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
 /* Supplied declaration required: FUN_0019e330. */
 /* Supplied declaration required: FUN_0028520c. */
 
@@ -45,10 +45,10 @@ unsigned int FUN_003d0958(void)
   unsigned int temp_v4;
   unsigned short temp_v5 [6];
   
-  temp_v0 = DAT_0057f57c;
-  switch(*(unsigned int *)(DAT_0057f57c + 8)) {
+  temp_v0 = g_sWin;
+  switch(*(unsigned int *)(g_sWin + 8)) {
   case 1:
-    temp_v1 = (int)(short)*(unsigned int *)(DAT_0057f57c + 0x14);
+    temp_v1 = (int)(short)*(unsigned int *)(g_sWin + 0x14);
     FUN_0028520c();
     if (temp_v1 != 0) {
       if (*(int *)(temp_v0 + 0xc) == 0) {
@@ -58,7 +58,7 @@ unsigned int FUN_003d0958(void)
           *(unsigned char *)(temp_v0 + 0xcd) = 1;
         }
         else {
-          FUN_00184c00(temp_v0 + 0x48,0);
+          uiSpriteSetImageKeyframe(temp_v0 + 0x48,0);
           FUN_0019e330(temp_v0 + 0x48,0);
         }
         *(unsigned int *)(temp_v0 + 0xc) = 1;
@@ -72,7 +72,7 @@ unsigned int FUN_003d0958(void)
     }
     break;
   case 3:
-    temp_v1 = (int)(short)*(unsigned int *)(DAT_0057f57c + 0x14);
+    temp_v1 = (int)(short)*(unsigned int *)(g_sWin + 0x14);
     FUN_0028520c();
     if ((temp_v1 != 0) && (temp_v1 = FUN_00163aa4(temp_v0 + 0x48), temp_v1 != 0)) {
       temp_v4 = *(unsigned int *)(temp_v0 + 0x14);
@@ -81,9 +81,9 @@ unsigned int FUN_003d0958(void)
       temp_v2 = dataTableGetCount(temp_v2);
       puVar5 = temp_v5;
       temp_v5[0] = (unsigned short)temp_v4;
-      FUN_00100854(puVar5,temp_v3,temp_v2,4,&LAB_002321f8);
+      libc_bsearch(puVar5,temp_v3,temp_v2,4,&LAB_002321f8);
       if ((puVar5 != (unsigned short *)0x0) && (-1 < (short)puVar5[1])) {
-        FUN_0019a7f4();
+        asdTMTexTableReleaseNode();
       }
       *(unsigned int *)(temp_v0 + 8) = 0;
       *(unsigned int *)(temp_v0 + 0xc) = 0;
@@ -91,7 +91,7 @@ unsigned int FUN_003d0958(void)
     }
     break;
   case 4:
-    temp_v1 = (int)(short)*(unsigned int *)(DAT_0057f57c + 0x14);
+    temp_v1 = (int)(short)*(unsigned int *)(g_sWin + 0x14);
     FUN_0028520c();
     if ((temp_v1 != 0) &&
        (temp_v1 = *(int *)(temp_v0 + 0x1c) + 1, *(int *)(temp_v0 + 0x1c) = temp_v1,
@@ -102,9 +102,9 @@ unsigned int FUN_003d0958(void)
       temp_v2 = dataTableGetCount(temp_v2);
       puVar5 = temp_v5;
       temp_v5[0] = (unsigned short)temp_v4;
-      FUN_00100854(puVar5,temp_v3,temp_v2,4,&LAB_002321f8);
+      libc_bsearch(puVar5,temp_v3,temp_v2,4,&LAB_002321f8);
       if ((puVar5 != (unsigned short *)0x0) && (-1 < (short)puVar5[1])) {
-        FUN_0019a7f4();
+        asdTMTexTableReleaseNode();
       }
       *(unsigned int *)(temp_v0 + 0xc) = 0;
       *(unsigned int *)(temp_v0 + 8) = 2;

@@ -102,7 +102,7 @@ static float romwright_sqrt_4(float value)
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Supplied declaration required: FUN_001a1ee0. */
-extern int FUN_001acf08(void);
+extern int effGetFrameStep(void);
 /* Supplied declaration required: FUN_001b63b0. */
 /* Supplied declaration required: FUN_00221ee0. */
 /* Supplied declaration required: FUN_0037ee54. */
@@ -496,7 +496,7 @@ void FUN_00392070(fn_00392070_arg0 *param_1)
                   temp_v34 = temp_v34 + 1;
                 } while (temp_v34 < temp_v30);
               }
-              temp_v3 = FUN_001acf08();
+              temp_v3 = effGetFrameStep();
               temp_v22[5] = temp_v22[5] + temp_v3;
             }
             else {
@@ -553,7 +553,7 @@ void FUN_00392070(fn_00392070_arg0 *param_1)
             temp_v22[2] = (int)temp_v20;
             temp_v22[3] = (int)temp_v12;
             temp_v22[6] = -1;
-            temp_v3 = FUN_001acf08();
+            temp_v3 = effGetFrameStep();
             temp_v22[5] = temp_v22[5] + temp_v3;
           }
           temp_v31 = temp_v31 + 1;

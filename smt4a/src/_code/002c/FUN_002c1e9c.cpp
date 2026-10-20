@@ -12,7 +12,7 @@ int dataTableGetEntries(void);
 /* Supplied declaration required: dataTableGet. */
 extern unsigned int dataTableGetCount(unsigned int);
 /* Supplied declaration required: dataTableGetEntries. */
-extern unsigned int FUN_0048168c(void);
+extern unsigned int tbcrBlockGetPayload(void);
 
 
 void FUN_002c1e9c(void)
@@ -28,7 +28,7 @@ void FUN_002c1e9c(void)
   unsigned int temp_v5;
   
   dataTableValueOrZero(0x19);
-  temp_v0 = FUN_0048168c();
+  temp_v0 = tbcrBlockGetPayload();
   temp_v1 = dataTableGet(0x19,0);
   temp_v2 = dataTableGetEntries();
   temp_v3 = dataTableGetCount(temp_v1);

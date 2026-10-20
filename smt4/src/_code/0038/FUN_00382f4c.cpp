@@ -16,7 +16,7 @@ int FUN_0029cc44(int);
 int FUN_0029e620(unsigned int, int);
 int FUN_0029e648(int, int);
 int FUN_0029ee6c(unsigned int, int);
-int FUN_002b8e84(int);
+int eventQueueAddUnique(int);
 int FUN_002c1658(int, int);
 int FUN_002f6208(void);
 
@@ -35,8 +35,8 @@ extern int FUN_00290eb0(void);
 /* Supplied declaration required: FUN_0029e620. */
 /* Supplied declaration required: FUN_0029e648. */
 /* Supplied declaration required: FUN_0029ee6c. */
-/* Supplied declaration required: FUN_002b8e84. */
-extern int FUN_002c09d0(unsigned int);
+/* Supplied declaration required: eventQueueAddUnique. */
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_002c1658. */
 extern int FUN_002d8e10(void);
 /* Supplied declaration required: FUN_002f6208. */
@@ -83,8 +83,8 @@ void FUN_00382f4c(int param_1)
         }
         temp_v0 = 10;
         FUN_002c1658(10,1);
-        if ((temp_v0 != 0) && (temp_v0 = FUN_002c09d0(0x24), temp_v0 != 0)) {
-          FUN_002b8e84(0x100016f);
+        if ((temp_v0 != 0) && (temp_v0 = gameFlagIsSet(0x24), temp_v0 != 0)) {
+          eventQueueAddUnique(0x100016f);
           FUN_00269dc8();
           FUN_00223cf0();
           FUN_002636b0();

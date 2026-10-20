@@ -6,24 +6,24 @@ extern "C" {
 
 int FUN_0029acb0(void);
 int FUN_002b8454(int, int, int, int);
-int FUN_002b8838(unsigned int);
+int buttonHelpSetPreset(unsigned int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } void_stack;
 
-extern int DAT_0043dcf0; /* 0x43dcf0 */
+extern int g_partyPanel; /* 0x43dcf0 */
 
 extern int FUN_00282cb4(void);
 extern int FUN_00282ccc(void);
 extern int FUN_00282e70(void);
-extern int FUN_0028dccc(unsigned int);
+extern int buttonHelpGetEntryValue(unsigned int);
 /* Supplied declaration required: FUN_0029acb0. */
 extern int FUN_0029dfa8(void);
 /* Supplied declaration required: FUN_002b8454. */
-/* Supplied declaration required: FUN_002b8838. */
-extern int FUN_002c09d0(unsigned int);
+/* Supplied declaration required: buttonHelpSetPreset. */
+extern int gameFlagIsSet(unsigned int);
 
 
 void FUN_0026c214(void)
@@ -37,7 +37,7 @@ void FUN_0026c214(void)
   unsigned int temp_v4;
   int temp_v5;
   
-  temp_v5 = DAT_0043dcf0;
+  temp_v5 = g_partyPanel;
   FUN_0029acb0();
   temp_v0 = *(unsigned char *)(temp_v5 + 0x66c);
   temp_v1 = 1;
@@ -63,7 +63,7 @@ void FUN_0026c214(void)
         temp_v4 = 0xb8;
       }
     }
-    else if ((*(char *)(temp_v5 + 0x66c) == '\f') && (temp_v2 = FUN_002c09d0(0x401), temp_v2 != 0)) {
+    else if ((*(char *)(temp_v5 + 0x66c) == '\f') && (temp_v2 = gameFlagIsSet(0x401), temp_v2 != 0)) {
       if (*(char *)(temp_v5 + 0x42) == '\0') {
         temp_v4 = 0xbe;
       }
@@ -95,7 +95,7 @@ void FUN_0026c214(void)
         temp_v4 = 0xbb;
       }
     }
-    else if ((*(char *)(temp_v5 + 0x66c) == '\f') && (temp_v2 = FUN_002c09d0(0x401), temp_v2 != 0)) {
+    else if ((*(char *)(temp_v5 + 0x66c) == '\f') && (temp_v2 = gameFlagIsSet(0x401), temp_v2 != 0)) {
       if (*(char *)(temp_v5 + 0x42) == '\0') {
         temp_v4 = 0xc2;
       }
@@ -141,7 +141,7 @@ void FUN_0026c214(void)
     else {
       temp_v4 = 0xc1;
     }
-    FUN_002b8838(temp_v4);
+    buttonHelpSetPreset(temp_v4);
     temp_v2 = FUN_0029dfa8();
     if ((temp_v2 == 0) || (temp_v2 = FUN_00282cb4(), temp_v2 == 0)) goto LAB_0026c400;
     if (*(char *)(temp_v5 + 0x42) == '\0') {
@@ -151,13 +151,13 @@ void FUN_0026c214(void)
       temp_v4 = 0xcc;
     }
   }
-  FUN_002b8838(temp_v4);
+  buttonHelpSetPreset(temp_v4);
 LAB_0026c400:
   if (*(char *)(temp_v5 + 0x17f0) != '\0') {
     FUN_002b8454(3,0x12,0,1);
     return;
   }
-  temp_v5 = FUN_0028dccc(3);
+  temp_v5 = buttonHelpGetEntryValue(3);
   if (temp_v5 != 0) {
     return;
   }

@@ -11,12 +11,12 @@ typedef struct Record {
 } Record;
 
 extern s32 scrGetArg(void);
-extern Record *FUN_002b06c4(u16 id);
+extern Record *dataTable00FindById(u16 id);
 extern void scrSetResult(s32 value);
 
 u32 FUN_0031cb80(void)
 {
-    scrSetResult(FUN_002b06c4(scrGetArg())->flag);
+    scrSetResult(dataTable00FindById(scrGetArg())->flag);
     return 1;
 }
 

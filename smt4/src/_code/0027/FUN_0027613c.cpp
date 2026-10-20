@@ -31,7 +31,7 @@ extern unsigned int DAT_0049fc50; /* 0x49fc50 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00270f70. */
-extern int FUN_002c2950(void);
+extern int gameGetMapBlock(void);
 
 
 void FUN_0027613c(int *param_1)
@@ -43,7 +43,7 @@ void FUN_0027613c(int *param_1)
   unsigned int in_fpscr;
   
   temp_v1 = *param_1;
-  temp_v0 = FUN_002c2950();
+  temp_v0 = gameGetMapBlock();
   if (DAT_0049fba0 != '\0') {
     DAT_0049fba0 = '\0';
   }

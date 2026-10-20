@@ -7,7 +7,7 @@ extern "C" {
 int statusCameraSetEye(void);
 int VectorSignedToFloat(int, int);
 
-extern unsigned char DAT_00588fd0; /* 0x588fd0 */
+extern unsigned char g_gameGlobals; /* 0x588fd0 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: statusCameraSetEye. */
@@ -21,9 +21,9 @@ void FUN_00240170(void)
   int temp_v1;
   unsigned int in_fpscr;
   
-  temp_v1 = *(int *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x2054);
+  temp_v1 = *(int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x2054);
   if (0 < temp_v1) {
-    temp_v0 = *(char *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x2058);
+    temp_v0 = *(char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x2058);
     if (temp_v0 != '\0') {
       if (temp_v0 != '\x01') {
         if (temp_v0 == '\x02') {

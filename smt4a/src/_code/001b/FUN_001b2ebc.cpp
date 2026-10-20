@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0019a46c(...);
 int FUN_001a6c40(...);
 int FUN_001b9fe4(unsigned int);
-int FUN_001bcd48(unsigned char *, int);
+int svcSleepThread(unsigned char *, int);
 int wstrlen(...);
 
 /* stack frame of param_7: 7 slot(s), 28 byte(s) */
@@ -27,7 +27,7 @@ extern unsigned char LAB_002dc6c0; /* 0x2dc6c0 */
 /* Supplied declaration required: FUN_001a6c40. */
 /* Supplied declaration required: FUN_001b9fe4. */
 extern int FUN_001ba0c8(unsigned int, unsigned char *);
-/* Supplied declaration required: FUN_001bcd48. */
+/* Supplied declaration required: svcSleepThread. */
 /* Supplied declaration required: wstrlen. */
 
 
@@ -64,7 +64,7 @@ FUN_001b2ebc(unsigned int param_1,unsigned int param_2,int param_3,unsigned int 
     temp_v0 = FUN_001ba0c8(param_1,temp_v6);
     FUN_001b9fe4(param_1);
     while (*(char *)(temp_v0 + 8) != '\x03') {
-      FUN_001bcd48(&LAB_002dc6c0,0);
+      svcSleepThread(&LAB_002dc6c0,0);
     }
   }
   else {
@@ -77,7 +77,7 @@ FUN_001b2ebc(unsigned int param_1,unsigned int param_2,int param_3,unsigned int 
     temp_v0 = FUN_001ba0c8(param_1,temp_v1);
     FUN_001b9fe4(param_1);
     while (*(char *)(temp_v0 + 8) != '\x03') {
-      FUN_001bcd48(&LAB_002dc6c0,0);
+      svcSleepThread(&LAB_002dc6c0,0);
     }
   }
   *param_4 = *(unsigned int *)(temp_v0 + 0x24);

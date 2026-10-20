@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_002e9acc(int *, int);
-int FUN_002e9ec8(int, unsigned int);
+int onlineInstanceTableFind(int, unsigned int);
 int FUN_002ea3d0(...);
-int FUN_002ea43c(int);
+int onlineJobSetStateDone(int);
 int FUN_002ea704(void);
 int FUN_002eb858(unsigned char [32], unsigned int, int);
-int FUN_002ede60(...);
+int onlineSockAddrConstruct2(...);
 int FUN_002f2e3c(int, int, int, int, unsigned int);
 int FUN_002f3490(unsigned char [36]);
 int FUN_002fa18c(void);
@@ -38,14 +38,14 @@ extern unsigned char LAB_00113108; /* 0x113108 */
 extern unsigned int FUN_001127d8(unsigned char *);
 extern unsigned int FUN_001322ae(int *);
 /* Supplied declaration required: FUN_002e9acc. */
-extern int FUN_002e9af4(void);
-/* Supplied declaration required: FUN_002e9ec8. */
+extern int onlineInstanceTableGetCurrent(void);
+/* Supplied declaration required: onlineInstanceTableFind. */
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned int, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
-/* Supplied declaration required: FUN_002ea43c. */
+/* Supplied declaration required: onlineJobSetStateDone. */
 /* Supplied declaration required: FUN_002ea704. */
 /* Supplied declaration required: FUN_002eb858. */
-/* Supplied declaration required: FUN_002ede60. */
+/* Supplied declaration required: onlineSockAddrConstruct2. */
 /* Supplied declaration required: FUN_002f2e3c. */
 /* Supplied declaration required: FUN_002f3490. */
 /* Supplied declaration required: FUN_002fa18c. */
@@ -87,12 +87,12 @@ void FUN_00112e7c(int param_1)
   
   temp_v2 = FUN_002ea704();
   if (temp_v2 == 0) {
-    temp_v2 = FUN_002e9af4();
-    FUN_002e9ec8(temp_v2,*(unsigned int *)(param_1 + 0x1f0));
+    temp_v2 = onlineInstanceTableGetCurrent();
+    onlineInstanceTableFind(temp_v2,*(unsigned int *)(param_1 + 0x1f0));
     if (temp_v2 != 0) {
       FUN_002fa18c();
     }
-    FUN_002ea43c(param_1);
+    onlineJobSetStateDone(param_1);
     return;
   }
   temp_v6 = 0;
@@ -116,7 +116,7 @@ void FUN_00112e7c(int param_1)
     FUN_002eb858(temp_v16,
                  (temp_v5 << 0x18) | (((temp_v5 >> 8) & 0xff) << 0x10) | (((temp_v5 >> 0x10) & 0xff) << 8)
                  | (temp_v5 >> 0x18),0x8236);
-    temp_v3 = FUN_002ede60(temp_v19,temp_v16);
+    temp_v3 = onlineSockAddrConstruct2(temp_v19,temp_v16);
     temp_v3 = FUN_002fdaa0(temp_v17,0,temp_v3);
     FUN_002fdabe(temp_v7,temp_v3);
     FUN_002fdafa(temp_v17);
@@ -156,7 +156,7 @@ void FUN_00112e7c(int param_1)
   if (temp_v13 != 0) {
     temp_v6 = 0;
     do {
-      temp_v3 = FUN_002ede60(temp_v18,temp_v11[0] + 8);
+      temp_v3 = onlineSockAddrConstruct2(temp_v18,temp_v11[0] + 8);
       temp_v3 = FUN_002fdaa0(temp_v16,0x65,temp_v3);
       FUN_002fdabe(temp_v7,temp_v3);
       FUN_002fdafa(temp_v16);
@@ -167,7 +167,7 @@ void FUN_00112e7c(int param_1)
     temp_v6 = 0;
     do {
       temp_v3 = FUN_002fda98(temp_v2);
-      temp_v3 = FUN_002ede60(temp_v18,temp_v3);
+      temp_v3 = onlineSockAddrConstruct2(temp_v18,temp_v3);
       temp_v3 = FUN_002fdaa0(temp_v16,0x65,temp_v3);
       FUN_002fdabe(temp_v7,temp_v3);
       FUN_002fdafa(temp_v16);
@@ -178,7 +178,7 @@ void FUN_00112e7c(int param_1)
     temp_v6 = 0;
     temp_v8 = (unsigned int *)**(unsigned int **)(param_1 + 0x130);
     do {
-      temp_v3 = FUN_002ede60(temp_v18,temp_v8 + 2);
+      temp_v3 = onlineSockAddrConstruct2(temp_v18,temp_v8 + 2);
       temp_v3 = FUN_002fdaa0(temp_v16,0x66,temp_v3);
       FUN_002fdabe(temp_v7,temp_v3);
       FUN_002fdafa(temp_v16);
@@ -205,7 +205,7 @@ void FUN_00112e7c(int param_1)
             (unsigned short)((*(unsigned short *)(temp_v4 + 6) << 8) | (*(unsigned short *)(temp_v4 + 6) >> 8))));
     temp_v6 = 0;
     do {
-      temp_v3 = FUN_002ede60(temp_v18,temp_v8 + 2);
+      temp_v3 = onlineSockAddrConstruct2(temp_v18,temp_v8 + 2);
       temp_v3 = FUN_002fdaa0(temp_v16,0x67,temp_v3);
       FUN_002fdabe(temp_v7,temp_v3);
       FUN_002fdafa(temp_v16);

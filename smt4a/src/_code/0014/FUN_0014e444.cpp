@@ -10,7 +10,7 @@ int FUN_001653a0(...);
 int FUN_001655fc(...);
 int asdMemFree(void);
 int sysMemClear(...);
-int FUN_002e6dd4(void);
+int rt_memclr(void);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
 
@@ -44,13 +44,13 @@ extern int DAT_005b4040; /* 0x5b4040 */
 /* Supplied declaration required: qsort. */
 /* Supplied declaration required: asdMemoryAlloc. */
 extern int FUN_00163fd4(unsigned int);
-extern int FUN_00164af0(unsigned int);
+extern int padButtonRepeat(unsigned int);
 /* Supplied declaration required: FUN_001653a0. */
 /* Supplied declaration required: FUN_001655fc. */
-extern int FUN_001656a0(unsigned int);
+extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_002e6dd4. */
+/* Supplied declaration required: rt_memclr. */
 
 
 unsigned int FUN_0014e444(int param_1,int param_2,int param_3)
@@ -94,11 +94,11 @@ unsigned int FUN_0014e444(int param_1,int param_2,int param_3)
   }
   if (DAT_005b4040 != 0) {
     temp_v0 = FUN_00163fd4(8);
-    if ((temp_v0 != 0) && (temp_v0 = FUN_001656a0(2), temp_v0 != 0)) {
+    if ((temp_v0 != 0) && (temp_v0 = padButtonIsPressed(2), temp_v0 != 0)) {
       for (temp_v0 = *DAT_005b4030; temp_v0 != 0; temp_v0 = *(int *)(temp_v0 + 4)) {
       }
     }
-    if ((DAT_005b4040 != 0) && (temp_v0 = FUN_001656a0(5), temp_v0 != 0)) {
+    if ((DAT_005b4040 != 0) && (temp_v0 = padButtonIsPressed(5), temp_v0 != 0)) {
       DAT_005b4030[3] = DAT_005b4030[3] ^ 1;
     }
   }
@@ -140,7 +140,7 @@ LAB_0014e5e0:
   temp_v18 = temp_v18 + (short)DAT_005b4030[5];
   temp_v19 = *(short *)((int)DAT_005b4030 + 0x16) + temp_v19;
   if (DAT_005b4040 != 0) {
-    temp_v0 = FUN_00164af0(4);
+    temp_v0 = padButtonRepeat(4);
     if (temp_v0 != 0) {
       if ((DAT_005b4040 != 0) && (temp_v0 = FUN_00163fd4(10), temp_v0 != 0)) {
         temp_v0 = DAT_005b4030[4] + 10;
@@ -155,7 +155,7 @@ LAB_0014e5e0:
     }
     else {
       if (DAT_005b4040 == 0) goto LAB_0014e6f0;
-      temp_v0 = FUN_00164af0(3);
+      temp_v0 = padButtonRepeat(3);
       if (temp_v0 == 0) goto LAB_0014e6f0;
       if ((DAT_005b4040 != 0) && (temp_v0 = FUN_00163fd4(10), temp_v0 != 0)) {
         temp_v0 = DAT_005b4030[4] - 10;
@@ -237,7 +237,7 @@ LAB_0014e6f0:
   temp_v0 = 0x100;
   asdMemoryAlloc(0x100,0x100,0,0x400);
   temp_v21 = temp_v0;
-  FUN_002e6dd4();
+  rt_memclr();
   temp_v8 = temp_v20;
   temp_v17 = 0x37000000;
   temp_v0 = 0;

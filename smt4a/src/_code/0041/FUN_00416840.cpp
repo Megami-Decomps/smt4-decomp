@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_00163aa4(int);
-int FUN_00166f80(unsigned int);
-int FUN_00184b80(int, int);
+int msgBoxFlagsClearBit7(unsigned int);
+int pairSetFirstResetSecond(int, int);
 
 /* Supplied declaration required: FUN_00163aa4. */
-/* Supplied declaration required: FUN_00166f80. */
-/* Supplied declaration required: FUN_00184b80. */
+/* Supplied declaration required: msgBoxFlagsClearBit7. */
+/* Supplied declaration required: pairSetFirstResetSecond. */
 
 
 void FUN_00416840(int param_1)
@@ -38,7 +38,7 @@ void FUN_00416840(int param_1)
           if ((temp_v2 == 3) && (FUN_00163aa4(temp_v4 + 0x14), *(char *)(temp_v4 + 0x9b) != '\0')) {
             *(unsigned int *)(temp_v4 + 0xa4) = 0;
             *(unsigned char *)(temp_v4 + 0xa0) = 0;
-            FUN_00166f80(*(unsigned int *)(temp_v4 + 0xa8));
+            msgBoxFlagsClearBit7(*(unsigned int *)(temp_v4 + 0xa8));
           }
         }
         else {
@@ -47,7 +47,7 @@ void FUN_00416840(int param_1)
           if (temp_v2 >= 6) {
             *(unsigned int *)(temp_v4 + 4) = 0;
           }
-          FUN_00184b80(temp_v4 + 0x14,*(int *)(temp_v4 + 4) / 2 + 0x8b);
+          pairSetFirstResetSecond(temp_v4 + 0x14,*(int *)(temp_v4 + 4) / 2 + 0x8b);
         }
       }
       else {
@@ -59,7 +59,7 @@ void FUN_00416840(int param_1)
         if (temp_v2 >= 6) {
           *(unsigned int *)(temp_v4 + 4) = 0;
         }
-        FUN_00184b80(temp_v4 + 0x14,*(int *)(temp_v4 + 4) / 2 + 0x8b);
+        pairSetFirstResetSecond(temp_v4 + 0x14,*(int *)(temp_v4 + 4) / 2 + 0x8b);
         if ((temp_v0 & temp_v1) != 0) {
           *(unsigned int *)(temp_v4 + 0xa4) = 2;
         }

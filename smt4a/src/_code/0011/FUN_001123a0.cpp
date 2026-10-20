@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002e9ec8(int, unsigned int);
+int onlineInstanceTableFind(int, unsigned int);
 int FUN_002ea3d0(int, unsigned int);
-int FUN_002ea43c(int);
-int FUN_002ea9dc(unsigned char [104]);
-int FUN_002ede60(int *, unsigned int);
+int onlineJobSetStateDone(int);
+int onlineUrlDestroy(unsigned char [104]);
+int onlineSockAddrConstruct2(int *, unsigned int);
 int FUN_002ee568(unsigned char [104], unsigned int);
 int FUN_002f2dfc(int, int, int);
 int _ZN9Obj558be04stopEv(int);
@@ -33,22 +33,22 @@ typedef struct {
 extern unsigned char LAB_001124fc; /* 0x1124fc */
 
 extern int *FUN_00132514(int, unsigned int);
-extern int FUN_002e9af4(void);
-/* Supplied declaration required: FUN_002e9ec8. */
+extern int onlineInstanceTableGetCurrent(void);
+/* Supplied declaration required: onlineInstanceTableFind. */
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned int, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
-/* Supplied declaration required: FUN_002ea43c. */
+/* Supplied declaration required: onlineJobSetStateDone. */
 extern int FUN_002ea704(void);
-extern unsigned int FUN_002ea93c(void);
-/* Supplied declaration required: FUN_002ea9dc. */
-/* Supplied declaration required: FUN_002ede60. */
+extern unsigned int onlineUrlGetAddress(void);
+/* Supplied declaration required: onlineUrlDestroy. */
+/* Supplied declaration required: onlineSockAddrConstruct2. */
 /* Supplied declaration required: FUN_002ee568. */
-extern int FUN_002ee7e8(int);
+extern int wideBufferLength(int);
 /* Supplied declaration required: FUN_002f2dfc. */
 /* Supplied declaration required: _ZN9Obj558be04stopEv. */
 /* Supplied declaration required: FUN_002f8208. */
 /* Supplied declaration required: FUN_002fa18c. */
-extern int FUN_002fd6f8(int);
+extern int mapIsEmpty4(int);
 extern int FUN_002fd706(int);
 /* Supplied declaration required: FUN_0043d588. */
 
@@ -78,8 +78,8 @@ void FUN_001123a0(int param_1)
   unsigned char temp_v16 [104];
   unsigned char temp_v17 [8];
   
-  temp_v1 = FUN_002e9af4();
-  FUN_002e9ec8(temp_v1,*(unsigned int *)(param_1 + 0x1f0));
+  temp_v1 = onlineInstanceTableGetCurrent();
+  onlineInstanceTableFind(temp_v1,*(unsigned int *)(param_1 + 0x1f0));
   temp_v13 = temp_v1;
   if (temp_v1 != 0) {
     temp_v1 = FUN_002ea704();
@@ -91,24 +91,24 @@ void FUN_001123a0(int param_1)
       temp_v8 = param_1 + 0x120;
       for (piVar7 = *(int **)(temp_v1 + 0x114); piVar7 < *(int **)(temp_v1 + 0x118); piVar7 = piVar7 + 1
           ) {
-        temp_v2 = FUN_002ee7e8(*piVar7);
+        temp_v2 = wideBufferLength(*piVar7);
         temp_v3 = temp_v8;
         if (temp_v2 != 0) {
           FUN_002ee568(temp_v16,*(unsigned int *)(*piVar7 + 4));
-          temp_v7 = FUN_002ea93c();
+          temp_v7 = onlineUrlGetAddress();
           temp_v14 = temp_v3;
           temp_v6 = *(int *)(temp_v3 + 0x10);
           piVar4 = (int *)FUN_00132514(temp_v3,0);
-          FUN_002ede60(piVar4 + 2,temp_v7);
+          onlineSockAddrConstruct2(piVar4 + 2,temp_v7);
           *piVar4 = temp_v6;
           piVar4[1] = *(int *)(temp_v6 + 4);
           **(int **)(temp_v6 + 4) = (int)piVar4;
           *(int **)(temp_v6 + 4) = piVar4;
           *(int *)(temp_v14 + 0x14) = *(int *)(temp_v14 + 0x14) + 1;
-          FUN_002ea9dc(temp_v16);
+          onlineUrlDestroy(temp_v16);
         }
       }
-      temp_v1 = FUN_002fd6f8(temp_v8);
+      temp_v1 = mapIsEmpty4(temp_v8);
       if (temp_v1 == 0) {
         temp_v1 = param_1 + 0x1ac;
         FUN_002f8208(temp_v1,1);
@@ -134,7 +134,7 @@ void FUN_001123a0(int param_1)
     }
     FUN_002fa18c(temp_v13);
   }
-  FUN_002ea43c(param_1);
+  onlineJobSetStateDone(param_1);
   return;
 }
 

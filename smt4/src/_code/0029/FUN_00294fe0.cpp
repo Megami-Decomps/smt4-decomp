@@ -4,7 +4,7 @@ extern "C" {
 
 int FUN_0033e8a8(...);
 int FUN_0033f22c(...);
-extern int FUN_0023e378(void);
+extern int resourceIsReady(void);
 extern int asdTMTexTableCallFileB(void *file, u32 id);
 
 typedef struct Header {
@@ -39,7 +39,7 @@ u32 FUN_00294fe0(Obj *obj)
     int count;
 
     resource = asdTMTexTableCallFileB(obj->file, obj->id);
-    if (FUN_0023e378() == 0) {
+    if (resourceIsReady() == 0) {
         return 0;
     }
     if (obj->loaded == 0) {

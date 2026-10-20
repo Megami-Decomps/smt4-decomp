@@ -42,7 +42,7 @@ extern unsigned char g_gameState; /* 0x49f91c */
 /* Supplied declaration required: FUN_00231420. */
 /* Supplied declaration required: FUN_00231434. */
 /* Supplied declaration required: FUN_002319c0. */
-extern int FUN_002c2950(void);
+extern int gameGetMapBlock(void);
 /* Supplied declaration required: FUN_0039ac64. */
 /* Supplied declaration required: NaviMain_GetCursorPos. */
 /* Supplied declaration required: NaviMain_SetCursorPos. */
@@ -70,7 +70,7 @@ unsigned int FUN_0039b648(int param_1)
   int temp_v11;
   int temp_v12;
   
-  temp_v0 = FUN_002c2950();
+  temp_v0 = gameGetMapBlock();
   temp_v1 = *(unsigned int *)(param_1 + 0x10);
   if (((temp_v1 & 0x2000000) != 0) && ((FUN_002319c0(), temp_v1 == 0 || ((*(signed char *)((unsigned char *)&g_gameState + 0x18)) != '\0')))) {
     *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) & 0xfdffffff;

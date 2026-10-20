@@ -30,7 +30,7 @@ extern int DAT_0049fd0c; /* 0x49fd0c */
 /* Supplied declaration required: dataTable2eSub0GetCount. */
 extern unsigned int asdMdlManagerCreateFromSource(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002a0428. */
-extern unsigned short *FUN_002b63ac(void);
+extern unsigned short *gameGetPlayerData(void);
 extern short *dataTable2eSub1GetRecord(int);
 extern short *dataTable2eSub0GetRecord(int);
 
@@ -47,7 +47,7 @@ void FUN_0020db10(void)
   int temp_v1;
   int temp_v2;
   
-  puVar1 = (unsigned short *)FUN_002b63ac();
+  puVar1 = (unsigned short *)gameGetPlayerData();
   temp_v1 = 0;
   puVar2 = puVar1;
   dataTable2eSub0GetCount();

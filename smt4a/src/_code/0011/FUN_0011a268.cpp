@@ -23,7 +23,7 @@ struct fn_0011a268_arg0 {
 extern unsigned char LAB_0011a2d4; /* 0x11a2d4 */
 extern unsigned char DAT_0055a350; /* 0x55a350 */
 
-extern unsigned int FUN_002e9af4(void);
+extern unsigned int onlineInstanceTableGetCurrent(void);
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned int, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
 extern unsigned int *FUN_002eca10(fn_0011a268_arg0 *, unsigned int, unsigned char *);
@@ -54,7 +54,7 @@ FUN_0011a268(fn_0011a268_arg0 *param_1,unsigned int param_2,unsigned int param_3
   puVar1[-6] = 0x1000;
   puVar1[-5] = 0;
   if ((param_4 != 0) && (temp_v0 = FUN_002f4d9c(param_4,0xb), temp_v0 != 0)) {
-    temp_v1 = FUN_002e9af4();
+    temp_v1 = onlineInstanceTableGetCurrent();
     FUN_00306d9c(temp_v1,temp_v0,0);
   }
   temp_v1 = FUN_002ea3c0(temp_v2,0x11a1f9,0,&LAB_0011a2d4);

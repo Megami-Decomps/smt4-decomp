@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001834a4(...);
 int FUN_001835b4(...);
 int FUN_00183bb0(void);
-int FUN_00184e64(...);
+int drawSetColorFromRGBA8(...);
 
 /* stack frame of param_4: 6 slot(s), 24 byte(s) */
 typedef struct {
@@ -22,7 +22,7 @@ typedef struct {
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_00184e64. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 extern int __aeabi_idivmod(int, unsigned int);
 
 
@@ -43,18 +43,18 @@ void FUN_00169e38(int param_1,int param_2,int param_3,int param_4)
   temp_v4 = param_1;
   if (param_4 != 0) {
     if (-1 >= param_1) {
-      FUN_00184e64(0xdc0f14ff);
-      FUN_00184e64();
+      drawSetColorFromRGBA8(0xdc0f14ff);
+      drawSetColorFromRGBA8();
       temp_v4 = -param_1;
     }
     else {
-      FUN_00184e64();
+      drawSetColorFromRGBA8();
     }
   }
   else {
-    FUN_00184e64();
+    drawSetColorFromRGBA8();
     if (-1 >= param_1) {
-      FUN_00184e64();
+      drawSetColorFromRGBA8();
       temp_v4 = -param_1;
     }
   }

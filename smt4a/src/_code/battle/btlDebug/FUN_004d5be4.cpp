@@ -9,7 +9,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_3_stack;
 
-extern int DAT_00571508; /* 0x571508 */
+extern int g_btlCamera; /* 0x571508 */
 extern unsigned int DAT_00571514; /* 0x571514 */
 extern unsigned int DAT_00571518; /* 0x571518 */
 extern unsigned int DAT_00571520; /* 0x571520 */
@@ -59,16 +59,16 @@ void FUN_004d5be4(int param_1,int param_2,unsigned int param_3)
   case 0:
     temp_v0 = FUN_0032c430(*(unsigned int *)(param_1 + 0x10));
     if (temp_v0 != 0) {
-      temp_v2 = *(unsigned int *)(DAT_00571508 + 0x64c) | 0x100;
+      temp_v2 = *(unsigned int *)(g_btlCamera + 0x64c) | 0x100;
     }
     else {
-      temp_v2 = *(unsigned int *)(DAT_00571508 + 0x64c) & 0xfffffeff;
+      temp_v2 = *(unsigned int *)(g_btlCamera + 0x64c) & 0xfffffeff;
     }
-    *(unsigned int *)(DAT_00571508 + 0x64c) = temp_v2;
+    *(unsigned int *)(g_btlCamera + 0x64c) = temp_v2;
     return;
   case 1:
     puVar3 = (unsigned int *)asdListBoxGetFloatValuePtr(*(unsigned int *)(param_1 + 0x10));
-    *(unsigned int *)(DAT_00571508 + 0x578) = *puVar3;
+    *(unsigned int *)(g_btlCamera + 0x578) = *puVar3;
     return;
   case 2:
     temp_v0 = FUN_0032c430(*(unsigned int *)(param_1 + 0x10));

@@ -5,7 +5,7 @@
 extern "C" {
 
 int scrSetResult(unsigned int);
-int FUN_002b06c4(void);
+int dataTable00FindById(void);
 int memClear(unsigned int [129], int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -13,11 +13,11 @@ typedef struct {
     unsigned int sp218; /* 0x218: local_218 */
 } void_stack;
 
-extern unsigned int FUN_002451ac(unsigned int, unsigned int);
+extern unsigned int btlMainGetDataTable(unsigned int, unsigned int);
 /* Supplied declaration required: scrSetResult. */
 extern unsigned int btlGetMainState(void);
 extern unsigned int scrGetArg(unsigned int);
-/* Supplied declaration required: FUN_002b06c4. */
+/* Supplied declaration required: dataTable00FindById. */
 extern int randNextInRange(unsigned int);
 extern int dataTableGetCount(unsigned int);
 extern unsigned short *dataTableGetEntries(void);
@@ -37,7 +37,7 @@ unsigned int FUN_0031cd5c(void)
   unsigned int temp_v5 [129];
   
   temp_v0 = scrGetArg(0);
-  FUN_002b06c4();
+  dataTable00FindById();
   memClear(temp_v5,0x200);
   temp_v1 = (unsigned int)*(unsigned short *)(temp_v0 + 0x58);
   if (temp_v1 != 0) {
@@ -55,7 +55,7 @@ unsigned int FUN_0031cd5c(void)
     temp_v5[temp_v1] = (unsigned int)*(unsigned short *)(temp_v0 + 100);
   }
   temp_v2 = btlGetMainState();
-  temp_v2 = FUN_002451ac(temp_v2,0x10);
+  temp_v2 = btlMainGetDataTable(temp_v2,0x10);
   puVar4 = (unsigned short *)dataTableGetEntries();
   temp_v3 = dataTableGetCount(temp_v2);
   if (0 < temp_v3) {

@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_0014bef4(unsigned int);
+int randRange(unsigned int);
 int asdMemoryAllocTracked(int, int, int, int, int);
 int FUN_00180118(int);
 int FUN_00184310(...);
 int asdMemFree(int);
-int FUN_0019cac4(void);
+int dataTable00FindById(void);
 int scrSetResult(...);
 int FUN_004d0bf0(...);
 int SBORROW4(...);
@@ -20,14 +20,14 @@ typedef struct {
 } void_stack;
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_0014bef4. */
+/* Supplied declaration required: randRange. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_00180118. */
-extern int FUN_001801a4(void);
+extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00184310. */
 extern int FUN_00184964(int, int);
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_0019cac4. */
+/* Supplied declaration required: dataTable00FindById. */
 extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: scrSetResult. */
 /* Supplied declaration required: FUN_004d0bf0. */
@@ -50,21 +50,21 @@ unsigned int FUN_003b17f0(void)
   unsigned char temp_v9;
   
   temp_v1 = scrGetArg(0) & 0xffff;
-  FUN_0019cac4();
+  dataTable00FindById();
   temp_v5 = (unsigned int)*(unsigned short *)(temp_v1 + 0x86);
   temp_v8 = temp_v5;
-  FUN_0019cac4();
+  dataTable00FindById();
   FUN_00184310(temp_v5);
   if ((((temp_v5 == 0 || temp_v8 == 0) || ((*(unsigned short *)(temp_v8 + 0x16) & 0x80) == 0)) ||
-      (temp_v2 = FUN_001801a4(), *(unsigned short *)(temp_v2 + 0x62) < (*(unsigned short *)(temp_v8 + 2) & 0x7fff))) ||
+      (temp_v2 = gameGetPlayerData(), *(unsigned short *)(temp_v2 + 0x62) < (*(unsigned short *)(temp_v8 + 2) & 0x7fff))) ||
      (temp_v2 = FUN_004d0bf0(temp_v5), temp_v2 != 0)) {
     temp_v2 = 0x100;
     asdMemoryAllocTracked(0x100,0x100,0,0x962,1);
     temp_v8 = 0;
-    temp_v3 = FUN_001801a4();
+    temp_v3 = gameGetPlayerData();
     temp_v0 = *(unsigned short *)(temp_v1 + 2) & 0x7fff;
     if (*(unsigned short *)(temp_v3 + 0x62) <= temp_v0) {
-      temp_v3 = FUN_001801a4();
+      temp_v3 = gameGetPlayerData();
       temp_v0 = *(unsigned short *)(temp_v3 + 0x62);
     }
     temp_v7 = (int)(short)temp_v0;
@@ -86,7 +86,7 @@ unsigned int FUN_003b17f0(void)
         puVar5 = (unsigned short *)(temp_v1 & 0xffff);
         FUN_00184310();
         temp_v5 = temp_v1 & 0xffff;
-        FUN_0019cac4();
+        dataTable00FindById();
         temp_v4 = (unsigned int)(unsigned short)puVar5[3];
         temp_v9 = SBORROW4(temp_v4,temp_v6);
         temp_v3 = temp_v4 - temp_v6;
@@ -104,7 +104,7 @@ unsigned int FUN_003b17f0(void)
         temp_v1 = temp_v1 + 1;
       } while (temp_v1 < 0x4b1);
       if (temp_v8 != 0) {
-        FUN_0014bef4((temp_v8 - 1) & 0xffff);
+        randRange((temp_v8 - 1) & 0xffff);
       }
       scrSetResult();
     }

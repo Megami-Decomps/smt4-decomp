@@ -35,6 +35,6 @@ typedef struct Block57f0c4 {
     /* 0x04 */ Record57f0c4 *record;
 } Block57f0c4;
 
-extern Block57f0c4 DAT_0057f0c4;
+extern Block57f0c4 g_buttonHelp;
 
 #endif

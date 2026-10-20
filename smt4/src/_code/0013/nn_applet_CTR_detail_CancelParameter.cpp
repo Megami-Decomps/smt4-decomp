@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00148350(int, unsigned int, unsigned int, unsigned int, char [8]);
-int FUN_002bb308(void);
+int nn_applet_CTR_detail_CloseSession(void);
 int FUN_002bb378(void);
 int FUN_002c131c(void);
 
@@ -16,7 +16,7 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_00148350. */
-/* Supplied declaration required: FUN_002bb308. */
+/* Supplied declaration required: nn_applet_CTR_detail_CloseSession. */
 /* Supplied declaration required: FUN_002bb378. */
 /* Supplied declaration required: FUN_002c131c. */
 
@@ -33,7 +33,7 @@ int nn_applet_CTR_detail_CancelParameter
   if (param_1 < 0) {
     FUN_002c131c();
   }
-  FUN_002bb308();
+  nn_applet_CTR_detail_CloseSession();
   return (int)temp_v0[0];
 }
 

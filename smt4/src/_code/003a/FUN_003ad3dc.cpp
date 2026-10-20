@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002898e4(void);
 int FUN_0028c040(void);
-int FUN_0028d6d0(void);
+int buttonHelpCreate(void);
 int FUN_0028d9b0(void);
 int FUN_00297468(...);
 int FUN_0029a128(int);
@@ -25,9 +25,9 @@ extern unsigned char LAB_003ad4b8; /* 0x3ad4b8 */
 
 extern int *asdTMTexTableGetEntry(unsigned int);
 /* Supplied declaration required: FUN_002898e4. */
-extern int FUN_00289d58(void);
+extern int campButtonHelpIsActive(void);
 /* Supplied declaration required: FUN_0028c040. */
-/* Supplied declaration required: FUN_0028d6d0. */
+/* Supplied declaration required: buttonHelpCreate. */
 /* Supplied declaration required: FUN_0028d9b0. */
 /* Supplied declaration required: FUN_00297468. */
 /* Supplied declaration required: FUN_0029a128. */
@@ -46,11 +46,11 @@ void FUN_003ad3dc(int param_1)
   int *piVar2;
   
   FUN_002898e4();
-  temp_v0 = FUN_00289d58();
+  temp_v0 = campButtonHelpIsActive();
   if (temp_v0 == 0) {
     *(unsigned char *)(param_1 + 0x1c) = 1;
     FUN_0028d9b0();
-    FUN_0028d6d0();
+    buttonHelpCreate();
   }
   piVar2 = (int *)asdTMTexTableGetEntry(0xd);
   if (*piVar2 == 0) {

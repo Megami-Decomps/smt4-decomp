@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002e9ec8(int, unsigned int);
+int onlineInstanceTableFind(int, unsigned int);
 int FUN_002ea214(int, unsigned int);
 int FUN_002ea3d0(int, unsigned int);
-int FUN_002ea43c(int);
+int onlineJobSetStateDone(int);
 int FUN_002ea4d2(void);
 int FUN_002ea5b8(void);
 int FUN_004422bc(int);
@@ -23,13 +23,13 @@ typedef struct {
 extern unsigned char LAB_00104630; /* 0x104630 */
 
 extern unsigned int FUN_002e7908(unsigned int *, unsigned int *);
-extern int FUN_002e9af4(void);
-/* Supplied declaration required: FUN_002e9ec8. */
+extern int onlineInstanceTableGetCurrent(void);
+/* Supplied declaration required: onlineInstanceTableFind. */
 /* Supplied declaration required: FUN_002ea214. */
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned int, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
-/* Supplied declaration required: FUN_002ea43c. */
-extern unsigned long long FUN_002ea4bc(void);
+/* Supplied declaration required: onlineJobSetStateDone. */
+extern unsigned long long onlineInstantiationContextGetCurrent(void);
 /* Supplied declaration required: FUN_002ea4d2. */
 extern unsigned int FUN_002ea594(int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002ea5b8. */
@@ -55,13 +55,13 @@ void FUN_00104520(int param_1)
   
   puVar5 = temp_v4;
   puVar4 = temp_v4;
-  temp_v0 = FUN_002e9af4();
-  FUN_002e9ec8(temp_v0,*(unsigned int *)(param_1 + 0xe0));
+  temp_v0 = onlineInstanceTableGetCurrent();
+  onlineInstanceTableFind(temp_v0,*(unsigned int *)(param_1 + 0xe0));
   if (temp_v0 == 0) {
-    FUN_002ea43c(param_1);
+    onlineJobSetStateDone(param_1);
     return;
   }
-  temp_v3 = FUN_002ea4bc();
+  temp_v3 = onlineInstantiationContextGetCurrent();
   if (*(char *)((int)temp_v3 + 0x30) == '\0') {
     temp_v1 = FUN_002ea594(param_1 + 0x118,(int)((unsigned long long)temp_v3 >> 0x20),0,0);
     if (temp_v1 != 0) {

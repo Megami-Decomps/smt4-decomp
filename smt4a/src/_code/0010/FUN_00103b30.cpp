@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_00123784(void);
-int FUN_002e92dc(...);
-int FUN_002e9672(unsigned int);
+int wstrstrU16(...);
+int onlineSockAddrInit(unsigned int);
 int FUN_002e967e(int *, int, unsigned short **, int *);
 int FUN_002e96fc(int);
 int FUN_002e9714(...);
@@ -21,9 +21,9 @@ extern unsigned char LAB_00103bd0; /* 0x103bd0 */
 extern unsigned char LAB_00103bd8; /* 0x103bd8 */
 
 /* Supplied declaration required: FUN_00123784. */
-extern int FUN_002e783c(unsigned char *);
-/* Supplied declaration required: FUN_002e92dc. */
-/* Supplied declaration required: FUN_002e9672. */
+extern int wstrlenU16(unsigned char *);
+/* Supplied declaration required: wstrstrU16. */
+/* Supplied declaration required: onlineSockAddrInit. */
 /* Supplied declaration required: FUN_002e967e. */
 /* Supplied declaration required: FUN_002e96fc. */
 /* Supplied declaration required: FUN_002e9714. */
@@ -45,7 +45,7 @@ void FUN_00103b30(int param_1,unsigned short *param_2,int param_3,unsigned int p
   temp_v3 = param_2;
   temp_v4 = param_3;
   uStack_18 = param_4;
-  FUN_002e9672(*(unsigned int *)(param_1 + 4));
+  onlineSockAddrInit(*(unsigned int *)(param_1 + 4));
   temp_v4 = *(int *)(param_1 + 0x1c);
   temp_v3 = *(unsigned short **)(temp_v4 + 8);
   FUN_002e967e(&uStack_18,param_1 + 0xc,&temp_v3,&temp_v4);
@@ -57,12 +57,12 @@ void FUN_00103b30(int param_1,unsigned short *param_2,int param_3,unsigned int p
   if (temp_v0 == 0) {
     return;
   }
-  temp_v0 = FUN_002e92dc(*(unsigned int *)(param_1 + 0x60),&LAB_00103bd0);
-  temp_v1 = FUN_002e783c(&LAB_00103bd0);
+  temp_v0 = wstrstrU16(*(unsigned int *)(param_1 + 0x60),&LAB_00103bd0);
+  temp_v1 = wstrlenU16(&LAB_00103bd0);
   temp_v3 = (unsigned short *)(temp_v0 + temp_v1 * 2);
-  puVar3 = (unsigned short *)FUN_002e92dc(temp_v3,&LAB_00103bd8);
+  puVar3 = (unsigned short *)wstrstrU16(temp_v3,&LAB_00103bd8);
   if (puVar3 != (unsigned short *)0x0) {
-    temp_v0 = FUN_002e92dc(puVar3 + 1,&LAB_00103bd8);
+    temp_v0 = wstrstrU16(puVar3 + 1,&LAB_00103bd8);
     if (temp_v0 != 0) {
       return;
     }

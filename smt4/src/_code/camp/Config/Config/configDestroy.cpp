@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_00296e90(void);
-int FUN_002a46d8(int id);
+int fileSlotFree(int id);
 int scrScriptProcessDestroy(u32 resource);
-int FUN_002ae898(int type, int index);
-int FUN_002b8cc8(void);
+int asdTMTexTableReleaseNode(int type, int index);
+int ifTouchRegionRemove(void);
 int asdMemFree(void *ptr);               /* heap free */
 
 extern ConfigWork *g_config;
@@ -18,13 +18,13 @@ void configDestroy(void)
     ConfigWork *config = g_config;
     int i;
 
-    FUN_002ae898(0x2f, 0);
-    FUN_002a46d8(0x36);
+    asdTMTexTableReleaseNode(0x2f, 0);
+    fileSlotFree(0x36);
     for (i = 0; i < config->countA; i++) {
-        FUN_002b8cc8();
+        ifTouchRegionRemove();
     }
     for (i = 0; i < config->countB; i++) {
-        FUN_002b8cc8();
+        ifTouchRegionRemove();
     }
     FUN_00296e90();
     if (config->resource != 0) {

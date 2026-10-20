@@ -6,7 +6,7 @@ extern "C" {
 
 extern int FUN_001801b8(unsigned short, unsigned char);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern int FUN_0018719c(void);
+extern int gameFlagIsSet(void);
 extern unsigned int dataTableGetCount(unsigned int);
 extern unsigned short *dataTableGetEntries(void);
 
@@ -28,10 +28,10 @@ unsigned int FUN_002e707c(unsigned int param_1)
   temp_v3 = 0;
   if (temp_v1 != 0) {
     do {
-      if ((((*puVar2 == param_1) && ((puVar2[7] == 0 || (temp_v2 = FUN_0018719c(), temp_v2 != 0)))) &&
-          ((puVar2[8] == 0 || (temp_v2 = FUN_0018719c(), temp_v2 != 0)))) &&
-         ((((puVar2[9] == 0 || (temp_v2 = FUN_0018719c(), temp_v2 == 0)) &&
-           ((puVar2[10] == 0 || (temp_v2 = FUN_0018719c(), temp_v2 == 0)))) &&
+      if ((((*puVar2 == param_1) && ((puVar2[7] == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 != 0)))) &&
+          ((puVar2[8] == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 != 0)))) &&
+         ((((puVar2[9] == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 == 0)) &&
+           ((puVar2[10] == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 == 0)))) &&
           (temp_v2 = FUN_001801b8(*puVar2,(char)puVar2[0x29]), temp_v2 != 0)))) {
         temp_v4 = temp_v4 + 1;
       }

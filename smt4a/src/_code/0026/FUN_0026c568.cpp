@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019a7f4(unsigned int);
+int asdTMTexTableReleaseNode(unsigned int);
 int FUN_0019c720(int, int, unsigned int);
 int FUN_001a6568(int, unsigned int, unsigned int, int);
 int FUN_001acf98(void);
@@ -17,8 +17,8 @@ extern int g_aocSystem; /* 0x570280 */
 
 extern int FUN_00162ea4(void);
 extern int jobGetWork(void);
-extern int FUN_0018206c(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0019a7f4. */
+extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
 /* Supplied declaration required: FUN_0019c720. */
 extern int FUN_001a6508(int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001a6568. */
@@ -177,7 +177,7 @@ unsigned int FUN_0026c568(void)
       }
       break;
     case 3:
-      temp_v1 = FUN_0018206c(*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 0x14));
+      temp_v1 = asdTMTexTableNodeIsLoaded(*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 0x14));
       if (temp_v1 != 0) {
         *(float *)(temp_v0 + 0x70) = *(float *)(temp_v0 + 0x70) + temp_v7;
         temp_v5 = temp_v7;
@@ -194,7 +194,7 @@ unsigned int FUN_0026c568(void)
             temp_v1 = *(int *)(temp_v0 + 0x80);
           }
           if (temp_v3 && temp_v1 != 0) {
-            FUN_0019a7f4(*(unsigned int *)(temp_v0 + 0x10));
+            asdTMTexTableReleaseNode(*(unsigned int *)(temp_v0 + 0x10));
             FUN_001b2d54(g_aocSystem,*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 0x84));
             *(unsigned int *)(temp_v0 + 0x80) = 0;
             *(unsigned int *)(temp_v0 + 0x84) = 0xffffffff;

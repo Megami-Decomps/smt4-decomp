@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned int FUN_002c30c4(void);
+extern unsigned int libc_strlen(void);
 
 
 unsigned int asdLoadFileHasDevice(int param_1)
@@ -15,7 +15,7 @@ unsigned int asdLoadFileHasDevice(int param_1)
   unsigned int temp_v1;
   int temp_v2;
   
-  temp_v0 = FUN_002c30c4();
+  temp_v0 = libc_strlen();
   if ((int)temp_v0 >= 9) {
     temp_v0 = 8;
   }

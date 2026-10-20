@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019cac4(void);
+int dataTable00FindById(void);
 int scrSetResult(unsigned int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -12,8 +12,8 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-extern int FUN_0014bef4(unsigned int);
-/* Supplied declaration required: FUN_0019cac4. */
+extern int randRange(unsigned int);
+/* Supplied declaration required: dataTable00FindById. */
 extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: scrSetResult. */
 
@@ -29,7 +29,7 @@ unsigned int FUN_003802d4(void)
   unsigned int temp_v4 [4];
   
   temp_v0 = scrGetArg(0) & 0xffff;
-  FUN_0019cac4();
+  dataTable00FindById();
   temp_v2 = (unsigned int)*(unsigned short *)(temp_v0 + 0x60);
   if (temp_v2 != 0x7b6) {
     temp_v4[0] = temp_v2;
@@ -51,7 +51,7 @@ unsigned int FUN_003802d4(void)
   }
   temp_v0 = 0xffffffff;
   if (temp_v2 != 0) {
-    temp_v1 = FUN_0014bef4((temp_v2 - 1) & 0xffff);
+    temp_v1 = randRange((temp_v2 - 1) & 0xffff);
     temp_v0 = temp_v4[temp_v1];
   }
   scrSetResult(temp_v0);

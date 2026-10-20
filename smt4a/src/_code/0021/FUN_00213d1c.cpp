@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001cd24c(...);
+int wordTripleClear(...);
 int FUN_002039d0(...);
 int FUN_0023ab04(...);
 int FUN_00268334(...);
@@ -43,7 +43,7 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_001cd24c. */
+/* Supplied declaration required: wordTripleClear. */
 /* Supplied declaration required: FUN_002039d0. */
 /* Supplied declaration required: FUN_0023ab04. */
 /* Supplied declaration required: FUN_00268334. */
@@ -66,7 +66,7 @@ void FUN_00213d1c(int param_1,fn_00213d1c_arg1 *param_2)
   float temp_v1;
   unsigned int temp_v2;
   
-  FUN_001cd24c(param_1 + 0x2e1);
+  wordTripleClear(param_1 + 0x2e1);
   *(unsigned int *)(param_1 + 0x2ec) = 0;
   *(unsigned int *)(param_1 + 0x2f0) = 0;
   *(unsigned int *)(param_1 + 0x2f4) = 0;

@@ -20,7 +20,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-extern int FUN_001ab940(void);
+extern int gameFlagBlockGet(void);
 /* Supplied declaration required: rt_memcpy. */
 
 
@@ -30,7 +30,7 @@ void partyCopyRecord100(fn_003fd508_arg0 *param_1)
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_001ab940();
+  temp_v0 = gameFlagBlockGet();
   rt_memcpy(temp_v0 + 0x100,param_1,0x44);
   return;
 }

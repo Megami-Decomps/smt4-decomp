@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_0030f89a(int *);
+int listIteratorNext4(int *);
 
 extern int wordRefsEqual_00132162(int *, unsigned int);
-/* Supplied declaration required: FUN_0030f89a. */
+/* Supplied declaration required: listIteratorNext4. */
 
 
 void FUN_0030f490(int *param_1,int *param_2,unsigned int param_3,int *param_4)
@@ -17,7 +17,7 @@ void FUN_0030f490(int *param_1,int *param_2,unsigned int param_3,int *param_4)
   int temp_v0;
   
   while ((temp_v0 = wordRefsEqual_00132162(param_2,param_3), temp_v0 == 0 && (*param_2 != *param_4))) {
-    FUN_0030f89a(param_2);
+    listIteratorNext4(param_2);
   }
   *param_1 = *param_2;
   return;

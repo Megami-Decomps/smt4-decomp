@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_3_stack;
 
-extern int FUN_001a7470(int);
+extern int objGetFlagBit0(int);
 /* Supplied declaration required: FUN_001b57a8. */
 extern unsigned int *FUN_001b5acc(unsigned int *);
 /* Supplied declaration required: FUN_0047448c. */
@@ -57,7 +57,7 @@ void FUN_0047402c(unsigned int *param_1,int param_2,unsigned int *param_3)
   *(unsigned int *)(param_2 + 0x14) = temp_v3;
   *(unsigned int *)(param_2 + 0x18) = temp_v4;
   *(unsigned int *)(param_2 + 0x1c) = temp_v5;
-  temp_v0 = FUN_001a7470(param_2 + 8);
+  temp_v0 = objGetFlagBit0(param_2 + 8);
   if (temp_v0 == 0) {
     *param_1 = temp_v6;
     param_1[1] = uStack_34;

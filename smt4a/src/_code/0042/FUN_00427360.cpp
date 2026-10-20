@@ -29,7 +29,7 @@ extern unsigned char LAB_004275a8; /* 0x4275a8 */
 #endif
 /* Supplied declaration required: FUN_00102b6c. */
 /* Supplied declaration required: vcallSlot12IfValid. */
-extern int FUN_002e783c(void);
+extern int wstrlenU16(void);
 /* Supplied declaration required: FUN_0042b17c. */
 /* Supplied declaration required: FUN_00430f98. */
 extern int *FUN_0043126c(void);
@@ -70,7 +70,7 @@ int * FUN_00427360(unsigned int *param_1)
   temp_v10 = temp_v13;
   piVar4 = &temp_v12;
   temp_v9 = 4;
-  temp_v0 = FUN_002e783c();
+  temp_v0 = wstrlenU16();
   temp_v11 = (temp_v0 + 1) * 2;
   FUN_0042b17c(piVar4,temp_v2,temp_v3,&temp_v9,1);
   if (((((unsigned int)piVar4 & 0x3fc00) != 0x4400) || (99 >= ((unsigned int)piVar4 & 0x3ff))) ||

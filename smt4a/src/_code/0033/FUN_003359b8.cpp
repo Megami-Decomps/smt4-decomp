@@ -8,7 +8,7 @@ int scrSetResult(int);
 int FUN_003f0e20(int, int);
 
 extern int btlGetMainState(void);
-extern int FUN_001ab854(int);
+extern int gameGetSlotRecord(int);
 extern int scrGetArg(void);
 /* Supplied declaration required: scrSetResult. */
 /* Supplied declaration required: FUN_003f0e20. */
@@ -28,7 +28,7 @@ unsigned int FUN_003359b8(void)
     temp_v0 = *(int *)(temp_v1 + 0x3fc);
   }
   else {
-    temp_v0 = FUN_001ab854(temp_v0 - 0x6d);
+    temp_v0 = gameGetSlotRecord(temp_v0 - 0x6d);
   }
   scrSetResult(*(unsigned short *)(temp_v0 + 0x62));
   return 1;

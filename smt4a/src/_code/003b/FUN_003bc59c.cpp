@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00192550(void);
 int FUN_00192608(void);
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 int scrGetArg(int);
 int FUN_00301a08(unsigned int, int [8], int [3]);
 int scrSetResult(int);
@@ -30,7 +30,7 @@ extern unsigned int DAT_005702b4; /* 0x5702b4 */
 extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_00192550. */
 /* Supplied declaration required: FUN_00192608. */
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: dataTable04FindById. */
 extern unsigned int FUN_00232388(void);
 /* Supplied declaration required: scrGetArg. */
 /* Supplied declaration required: FUN_00301a08. */
@@ -81,7 +81,7 @@ unsigned int FUN_003bc59c(void)
             temp_v0 = *(short *)((int)puVar9 + temp_v7 * 8 + 0x33a);
             if (temp_v0 == 2 || temp_v0 == 3) {
               temp_v5 = (int)(short)puVar9[temp_v7 * 2 + 0xcf];
-              FUN_001aba54();
+              dataTable04FindById();
               if ((temp_v5 != 0) && (temp_v1 == (*(unsigned int *)(temp_v5 + 0x28) & 0xffff) >> 0xb)) {
                 temp_v3 = temp_v3 + 1;
               }
@@ -90,7 +90,7 @@ unsigned int FUN_003bc59c(void)
               temp_v5 = (int)(short)puVar9[temp_v7 * 2 + 0xcf];
               FUN_00192550();
               if (((temp_v5 != 0) && (temp_v4 = (unsigned int)*(unsigned short *)(temp_v5 + 0x32), temp_v4 != 0)) &&
-                 ((FUN_001aba54(), temp_v4 != 0 &&
+                 ((dataTable04FindById(), temp_v4 != 0 &&
                   (temp_v1 == (*(unsigned int *)(temp_v4 + 0x28) & 0xffff) >> 0xb)))) {
                 temp_v3 = temp_v3 + 1;
               }
@@ -113,7 +113,7 @@ unsigned int FUN_003bc59c(void)
         else {
           if (*(short *)((int)puVar9 + 0x32a) == 2 || *(short *)((int)puVar9 + 0x32a) == 3) {
             temp_v7 = (int)(short)puVar9[0xcb];
-            FUN_001aba54();
+            dataTable04FindById();
             if ((temp_v7 != 0) && (temp_v1 == (*(unsigned int *)(temp_v7 + 0x28) & 0xffff) >> 0xb)) {
               temp_v3 = 1;
             }
@@ -122,7 +122,7 @@ unsigned int FUN_003bc59c(void)
             temp_v7 = (int)(short)puVar9[0xcb];
             FUN_00192550();
             if ((((temp_v7 != 0) && (temp_v4 = (unsigned int)*(unsigned short *)(temp_v7 + 0x32), temp_v4 != 0)) &&
-                (FUN_001aba54(), temp_v4 != 0)) &&
+                (dataTable04FindById(), temp_v4 != 0)) &&
                (temp_v1 == (*(unsigned int *)(temp_v4 + 0x28) & 0xffff) >> 0xb)) {
               temp_v3 = temp_v3 + 1;
             }

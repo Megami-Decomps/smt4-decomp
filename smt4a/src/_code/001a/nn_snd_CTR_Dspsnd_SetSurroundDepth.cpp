@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_001c6e20(void);
+extern int nn_snd_CTR_Dspsnd_IsInitialized(void);
 
 
 unsigned char nn_snd_CTR_Dspsnd_SetSurroundDepth(int param_1,unsigned short param_2)
@@ -14,7 +14,7 @@ unsigned char nn_snd_CTR_Dspsnd_SetSurroundDepth(int param_1,unsigned short para
   int temp_v1;
   unsigned int *puVar3;
   
-  temp_v1 = FUN_001c6e20();
+  temp_v1 = nn_snd_CTR_Dspsnd_IsInitialized();
   temp_v0 = 0;
   if (temp_v1 != 0) {
     if (param_2 >= 0x8000) {

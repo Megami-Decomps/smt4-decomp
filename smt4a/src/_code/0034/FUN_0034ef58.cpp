@@ -6,7 +6,7 @@ extern "C" {
 
 int __aeabi_idivmod(unsigned int, int);
 
-extern unsigned int DAT_00573c78; /* 0x573c78 */
+extern unsigned int g_lcgRandomRangeState; /* 0x573c78 */
 
 /* Supplied declaration required: __aeabi_idivmod. */
 
@@ -23,8 +23,8 @@ int FUN_0034ef58(int param_1,int param_2)
     temp_v0 = param_1;
     param_1 = param_2;
   }
-  DAT_00573c78 = DAT_00573c78 * 0x41c64e6d + 0x3039;
-  __aeabi_idivmod(DAT_00573c78 >> 0x10,(temp_v0 - param_1) + 1);
+  g_lcgRandomRangeState = g_lcgRandomRangeState * 0x41c64e6d + 0x3039;
+  __aeabi_idivmod(g_lcgRandomRangeState >> 0x10,(temp_v0 - param_1) + 1);
   return temp_v1 + param_1;
 }
 

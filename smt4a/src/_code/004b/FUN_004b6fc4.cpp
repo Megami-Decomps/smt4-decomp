@@ -9,16 +9,16 @@ int asdOperatorNew(void);
 int FUN_0022677c(int, int);
 int FUN_002804b0(...);
 int FUN_002bf464(void);
-int FUN_0031a400(void);
+int campCommonBgAcquire(void);
 int FUN_0031e198(void);
-int FUN_00342010(void);
+int campButtonHelpAcquire(void);
 int FUN_003b61ec(void);
 int FUN_00407978(void);
 int FUN_004930e4(int);
 int FUN_004ba078(void);
 int FUN_004ba1f4(int);
 int resetFlagGroup1F(int);
-int unloadDataTable33(int);
+int dataTable33Load(int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -31,16 +31,16 @@ extern int FUN_0015a21c(int);
 /* Supplied declaration required: FUN_0022677c. */
 /* Supplied declaration required: FUN_002804b0. */
 /* Supplied declaration required: FUN_002bf464. */
-/* Supplied declaration required: FUN_0031a400. */
+/* Supplied declaration required: campCommonBgAcquire. */
 /* Supplied declaration required: FUN_0031e198. */
-/* Supplied declaration required: FUN_00342010. */
+/* Supplied declaration required: campButtonHelpAcquire. */
 /* Supplied declaration required: FUN_003b61ec. */
 /* Supplied declaration required: FUN_00407978. */
 /* Supplied declaration required: FUN_004930e4. */
 /* Supplied declaration required: FUN_004ba078. */
 /* Supplied declaration required: FUN_004ba1f4. */
 /* Supplied declaration required: resetFlagGroup1F. */
-/* Supplied declaration required: unloadDataTable33. */
+/* Supplied declaration required: dataTable33Load. */
 
 
 void FUN_004b6fc4(int param_1)
@@ -56,12 +56,12 @@ void FUN_004b6fc4(int param_1)
   FUN_004ba1f4(param_1 + 0x9c);
   *(unsigned int *)(param_1 + 0x34) = 0xffffffff;
   asdTMTexTableLoadTmx(0x18,0);
-  FUN_0031a400();
+  campCommonBgAcquire();
   FUN_003b61ec();
   FUN_002bf464();
-  FUN_00342010();
+  campButtonHelpAcquire();
   FUN_004930e4(0);
-  unloadDataTable33(param_1 + 0x1114);
+  dataTable33Load(param_1 + 0x1114);
   resetFlagGroup1F(param_1 + 0x9c);
   FUN_002804b0("mikado/talk.bf",param_1 + 0x1138,0);
   FUN_002804b0("mikado/talk.mbm",param_1 + 0x113c,0);

@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002e9318(int *);
+int onlineStringDestroy(int *);
 int FUN_002fecdc(int *, unsigned int, unsigned char *);
 int FUN_002fed24(int, int *);
 
 extern unsigned char LAB_00113fe4; /* 0x113fe4 */
 extern unsigned char LAB_00113ff8; /* 0x113ff8 */
 
-/* Supplied declaration required: FUN_002e9318. */
+/* Supplied declaration required: onlineStringDestroy. */
 /* Supplied declaration required: FUN_002fecdc. */
 /* Supplied declaration required: FUN_002fed24. */
 
@@ -32,10 +32,10 @@ int FUN_00113fa0(int param_1,unsigned int param_2,unsigned int param_3,unsigned 
   uStack_14 = param_4;
   FUN_002fecdc(&iStack_20,param_2,&LAB_00113fe4);
   temp_v0 = FUN_002fed24(param_1 + 4,&iStack_20);
-  FUN_002e9318(&iStack_20);
+  onlineStringDestroy(&iStack_20);
   FUN_002fecdc(&uStack_18,param_2,&LAB_00113ff8);
   temp_v0 = FUN_002fed24(temp_v0 + 0x24,&uStack_18);
-  FUN_002e9318(&uStack_18);
+  onlineStringDestroy(&uStack_18);
   return temp_v0 - 0x28;
 }
 

@@ -17,14 +17,14 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_2_stack;
 
-extern int DAT_00571508; /* 0x571508 */
+extern int g_btlCamera; /* 0x571508 */
 extern unsigned int DAT_00573858; /* 0x573858 */
 extern unsigned int DAT_0057385c; /* 0x57385c */
 extern unsigned int DAT_00573878; /* 0x573878 */
 extern unsigned int DAT_0057387c; /* 0x57387c */
 extern unsigned int DAT_00573890; /* 0x573890 */
 extern unsigned int DAT_00573894; /* 0x573894 */
-extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
+extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
 /* Supplied declaration required: FUN_003e0cd4. */
 /* Supplied declaration required: FUN_003ed6e8. */
@@ -44,11 +44,11 @@ void FUN_003e26f0(unsigned int *param_1,int param_2)
   unsigned int temp_v2;
   unsigned int *puVar4;
   
-  if (*(int *)(DAT_00571508 + 0x34) != 0) {
+  if (*(int *)(g_btlCamera + 0x34) != 0) {
     FUN_004f1c5c();
   }
   else {
-    FUN_004f1c5c(DAT_00571508,0x78);
+    FUN_004f1c5c(g_btlCamera,0x78);
   }
   puVar4 = (unsigned int *)(param_2 + 0x45a0);
   if ((DAT_00573858 & *puVar4) == 0 && (DAT_0057385c & *(unsigned int *)(param_2 + 0x45a4)) == 0) {
@@ -58,7 +58,7 @@ void FUN_003e26f0(unsigned int *param_1,int param_2)
     temp_v2 = *puVar4 | DAT_00573878;
     *(unsigned int *)(param_2 + 0x45a4) = *(unsigned int *)(param_2 + 0x45a4) | DAT_0057387c | DAT_00573894;
     *puVar4 = temp_v2 | temp_v0;
-    FUN_004aa2e0(DAT_0057a9c8,0);
+    FUN_004aa2e0(g_btlUiBlock,0);
   }
   else {
     FUN_003ed6e8(param_2);

@@ -2,9 +2,9 @@
 
 extern "C" {
 
-void FUN_001846d0(u8 *member, s32 flag);
-void FUN_00184758(u8 *unit, s32 a, s32 b);
-void FUN_00184c00(u8 *unit, s32 a, s32 b);
+void uiSpriteSelectAnim(u8 *member, s32 flag);
+void uiSpriteSetKeyframe(u8 *unit, s32 a, s32 b);
+void uiSpriteSetImageKeyframe(u8 *unit, s32 a, s32 b);
 void FUN_0037c8e4(s32 a, s32 b);
 void FUN_0038843c(void);
 
@@ -21,7 +21,7 @@ typedef struct Game {
     /* 0x1634 */ u8 member1634[0x348];
     /* 0x197C */ u8 member197C[1];
 } Game;
-extern Game *DAT_0057f108;
+extern Game *g_camp;
 
 /* Resets the game screen: runs the two set-up calls, then restarts the 13 units and the three members and clears the word at 0x18. */
 void FUN_002277d8(void)
@@ -31,17 +31,17 @@ void FUN_002277d8(void)
 
     FUN_0037c8e4(1, 0);
     FUN_0038843c();
-    game = DAT_0057f108;
+    game = g_camp;
     i = 0;
     do {
-        FUN_00184758(game->units[i].data, 10, 0);
-        FUN_00184c00(game->units[i].data, 0x13, 0);
+        uiSpriteSetKeyframe(game->units[i].data, 10, 0);
+        uiSpriteSetImageKeyframe(game->units[i].data, 0x13, 0);
         i = i + 1;
     } while (i < 0xD);
-    FUN_00184c00(game->member15A8, 6, 0);
-    FUN_001846d0(game->member197C, 8);
+    uiSpriteSetImageKeyframe(game->member15A8, 6, 0);
+    uiSpriteSelectAnim(game->member197C, 8);
     game->unk18 = 0;
-    FUN_00184c00(game->member1634, 0x16, 0);
+    uiSpriteSetImageKeyframe(game->member1634, 0x16, 0);
 }
 
 } /* extern "C" */

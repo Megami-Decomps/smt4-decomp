@@ -5,14 +5,14 @@
 extern "C" {
 
 int FUN_0010ed92(int *, unsigned int, unsigned int, int);
-int FUN_002e6e14(void);
-int FUN_002e755c(unsigned int, int, unsigned int);
-int FUN_002ea0c8(unsigned int, int);
+int asdOperatorDeleteArray(void);
+int streamReaderReadBytes(unsigned int, int, unsigned int);
+int onlineStringSetFromRaw(unsigned int, int);
 int FUN_002ee9f4(...);
 int FUN_002eea18(int *, unsigned int *, int);
 int FUN_002eea6a(int *);
 int FUN_002eea94(unsigned int, unsigned int);
-int FUN_002eead8(...);
+int streamReaderReadWideChars(...);
 
 /* stack frame of param_4: 2 slot(s), 6 byte(s) */
 typedef struct {
@@ -26,10 +26,10 @@ typedef struct {
 #endif
 /* Supplied declaration required: FUN_0010ed92. */
 extern unsigned int *rt_malloc(int);
-/* Supplied declaration required: FUN_002e6e14. */
-extern int FUN_002e7328(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002e755c. */
-/* Supplied declaration required: FUN_002ea0c8. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
+extern int streamReaderHasBytes(unsigned int, unsigned int);
+/* Supplied declaration required: streamReaderReadBytes. */
+/* Supplied declaration required: onlineStringSetFromRaw. */
 extern int FUN_002ee9e4(void);
 /* Supplied declaration required: FUN_002ee9f4. */
 /* Supplied declaration required: FUN_002eea18. */
@@ -37,7 +37,7 @@ extern int FUN_002ee9e4(void);
 extern int FUN_002eea8a(unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_002eea94. */
 extern int FUN_002eeabc(void);
-/* Supplied declaration required: FUN_002eead8. */
+/* Supplied declaration required: streamReaderReadWideChars. */
 
 
 unsigned long long FUN_002fbc1a(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -58,7 +58,7 @@ unsigned long long FUN_002fbc1a(unsigned int param_1,unsigned int param_2,unsign
   uStack_18 = param_4;
   temp_v0 = FUN_002eea8a(param_1,&temp_v4);
   if (temp_v0 != 0) {
-    temp_v0 = FUN_002e7328(param_1,temp_v4 & 0xffff);
+    temp_v0 = streamReaderHasBytes(param_1,temp_v4 & 0xffff);
     temp_v2 = 0;
     if (temp_v0 == 0) {
       return romwright_piece_4_4(temp_v4,temp_v2);
@@ -69,7 +69,7 @@ unsigned long long FUN_002fbc1a(unsigned int param_1,unsigned int param_2,unsign
       if ((temp_v0 == 0) || (temp_v0 = FUN_002eeabc(), temp_v0 != 0)) {
         temp_v0 = FUN_002eeabc();
         if (temp_v0 == 0) {
-          FUN_002eead8(param_1,*(unsigned int *)(param_2 + 4),temp_v4 & 0xffff);
+          streamReaderReadWideChars(param_1,*(unsigned int *)(param_2 + 4),temp_v4 & 0xffff);
           temp_v2 = 1;
           return romwright_piece_4_4(temp_v4,temp_v2);
         }
@@ -79,16 +79,16 @@ unsigned long long FUN_002fbc1a(unsigned int param_1,unsigned int param_2,unsign
         *puVar2 = temp_v3;
         for (temp_v1 = 0; temp_v1 < temp_v3; temp_v1 = temp_v1 + 1) {
         }
-        FUN_002eead8(param_1,puVar2 + 1,temp_v4 & 0xffff);
+        streamReaderReadWideChars(param_1,puVar2 + 1,temp_v4 & 0xffff);
         FUN_002eea18(&temp_v5,puVar2 + 1,0);
-        FUN_002ea0c8(param_2,temp_v5);
+        onlineStringSetFromRaw(param_2,temp_v5);
         for (temp_v1 = 0; temp_v1 < *puVar2; temp_v1 = temp_v1 + 1) {
         }
-        FUN_002e6e14();
+        asdOperatorDeleteArray();
       }
       else {
         FUN_002ee9f4(&temp_v5,(temp_v4 & 0xffff) + 1);
-        FUN_002e755c(param_1,temp_v5,temp_v4 & 0xffff);
+        streamReaderReadBytes(param_1,temp_v5,temp_v4 & 0xffff);
         FUN_0010ed92(&temp_v5,*(unsigned int *)(param_2 + 4),temp_v4 & 0xffff,0);
       }
       FUN_002eea6a(&temp_v5);

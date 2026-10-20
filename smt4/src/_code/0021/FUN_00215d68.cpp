@@ -12,11 +12,11 @@ int FUN_0029f7d4(...);
 int FUN_002b066c(...);
 int FUN_002b6758(...);
 int FUN_002b6dd8(...);
-int FUN_002b9024(...);
+int devilGetRecord(...);
 int FUN_002bce30(...);
 int FUN_002bd068(...);
 int FUN_002bdf94(...);
-int FUN_002be304(...);
+int drawSetColorFromRGBA8(...);
 int FUN_002be5a4(...);
 int FUN_002be624(...);
 int FUN_002bed3c(...);
@@ -71,20 +71,20 @@ extern unsigned int FUN_0029dde0(void);
 extern int FUN_0029efa8(unsigned int *);
 extern int FUN_0029efc0(unsigned int *);
 /* Supplied declaration required: FUN_0029f7d4. */
-extern int *FUN_002a8764(void);
+extern int *gameGetSlotTable(void);
 /* Supplied declaration required: FUN_002b066c. */
 /* Supplied declaration required: FUN_002b6758. */
 /* Supplied declaration required: FUN_002b6dd8. */
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: FUN_002bce30. */
 /* Supplied declaration required: FUN_002bd068. */
 /* Supplied declaration required: FUN_002bdf94. */
-/* Supplied declaration required: FUN_002be304. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002bed3c. */
-extern int FUN_002bed98(unsigned int *);
-extern int FUN_002beda4(unsigned int *);
+extern int vec2GetYInt(unsigned int *);
+extern int vec2GetXInt(unsigned int *);
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf4f8. */
@@ -153,7 +153,7 @@ void FUN_00215d68(fn_00215d68_arg0 *param_1,int param_2)
     FUN_002bf288(2,0x24,0x14d,param_1,param_2,0x6a);
     FUN_002bf288(2,0x24,0x4f,param_1,param_2,0x6a);
     puVar6 = (unsigned short *)(unsigned int)*(unsigned short *)(puVar2 + 0x1484);
-    FUN_002b9024();
+    devilGetRecord();
     temp_v2 = FUN_002bf4f8(0x24,0x4d);
     temp_v9 = 0xffffffff;
     temp_v11 = 0xffffffff;
@@ -190,7 +190,7 @@ void FUN_00215d68(fn_00215d68_arg0 *param_1,int param_2)
                         (unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_002be5a4(2,0xf49800ff,temp_v15);
     temp_v8 = FUN_002bf4f8(0x24,0x51);
-    FUN_002be304(temp_v11);
+    drawSetColorFromRGBA8(temp_v11);
     FUN_002bdf94(0,(int)&param_1->field_0x0 + (int)*(short *)(temp_v8 + 8),
                  *(short *)(temp_v8 + 10) + param_2,1,2,0x6f,&LAB_002162e4,
                  *(unsigned char *)((int)puVar6 + 3));
@@ -250,8 +250,8 @@ void FUN_00215d68(fn_00215d68_arg0 *param_1,int param_2)
     FUN_0029a17c((int)&param_1->field_0x0 + (int)*(short *)(temp_v2 + 8),
                  *(short *)(temp_v2 + 10) + param_2,(int)**(short **)(temp_v2 + 0xc),
                  (int)(*(short **)(temp_v2 + 0xc))[1],1);
-    temp_v8 = FUN_002bed98(puVar2 + 0x2c);
-    temp_v2 = FUN_002beda4(puVar2 + 0x2c);
+    temp_v8 = vec2GetYInt(puVar2 + 0x2c);
+    temp_v2 = vec2GetXInt(puVar2 + 0x2c);
     FUN_002bf288(2,0x24,0x156,(int)&param_1->field_0x0 + temp_v2,temp_v8 + param_2,0x83);
     temp_v8 = g_titleScene;
     piVar16 = (int *)(g_titleScene + 0x130c);
@@ -265,14 +265,14 @@ void FUN_00215d68(fn_00215d68_arg0 *param_1,int param_2)
     puVar9 = puVar2 + 0x1484;
     puVar8 = puVar9;
     FUN_001ce224();
-    piVar16 = (int *)FUN_002a8764();
+    piVar16 = (int *)gameGetSlotTable();
     if (*piVar16 < (int)puVar8) {
       temp_v11 = 0xdc0f14ff;
     }
     else {
       temp_v11 = 0xffffffff;
     }
-    FUN_002be304(temp_v11);
+    drawSetColorFromRGBA8(temp_v11);
     FUN_001ce224();
     FUN_002bdf94(0,(int)&param_1->field_0x0 + (int)*(short *)(temp_v8 + 8),
                  *(short *)(temp_v8 + 10) + param_2,1,8,0x8d,&LAB_002162e4,puVar9);
@@ -282,7 +282,7 @@ void FUN_00215d68(fn_00215d68_arg0 *param_1,int param_2)
       do {
         temp_v8 = FUN_002bf4f8(0x24,temp_v1 + 0x157);
         psVar10 = (short *)(unsigned int)*(unsigned short *)((int)puVar2 + temp_v1 * 2 + 0x5212);
-        FUN_002b9024();
+        devilGetRecord();
         temp_v2 = *(short *)(temp_v8 + 10) + param_2;
         temp_v3 = (int)&param_1->field_0x0 + (int)*(short *)(temp_v8 + 8);
         if ((temp_v1 & 1) != 0) {

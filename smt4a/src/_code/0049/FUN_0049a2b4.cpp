@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00312830(...);
+int arraySortQsort(...);
 int FUN_003343f0(int);
 int FUN_0035d8a4(void);
 int FUN_00498ff0(int);
@@ -28,10 +28,10 @@ extern int FUN_004944d0(...); /* 0x4944d0 */
 extern int FUN_00494530(...); /* 0x494530 */
 extern unsigned char LAB_0049cf3c; /* 0x49cf3c */
 
-extern int FUN_0023b258(void);
+extern int useCounterIsFinished(void);
 extern int FUN_002a6c24(void);
 extern int FUN_002c7c54(void);
-/* Supplied declaration required: FUN_00312830. */
+/* Supplied declaration required: arraySortQsort. */
 /* Supplied declaration required: FUN_003343f0. */
 /* Supplied declaration required: FUN_0035d8a4. */
 /* Supplied declaration required: FUN_00498ff0. */
@@ -48,7 +48,7 @@ void FUN_0049a2b4(int param_1)
   unsigned int temp_v3;
   int temp_v4;
   
-  temp_v0 = FUN_0023b258();
+  temp_v0 = useCounterIsFinished();
   if (temp_v0 != 0) {
     FUN_0035d8a4();
     FUN_003343f0(0);
@@ -93,47 +93,47 @@ void FUN_0049a2b4(int param_1)
     if (temp_v0 == 0xf) {
       temp_v0 = FUN_002a6c24();
       if (temp_v0 == 0) {
-        FUN_00312830(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,FUN_004943bc);
+        arraySortQsort(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,FUN_004943bc);
         return;
       }
-      FUN_00312830(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,FUN_00493d88);
+      arraySortQsort(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,FUN_00493d88);
       return;
     }
     if (temp_v0 < 0xf) {
       if (temp_v0 == 3) {
         temp_v0 = FUN_002a6c24();
         if (temp_v0 == 0) {
-          FUN_00312830(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,FUN_00493ee0);
+          arraySortQsort(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,FUN_00493ee0);
           return;
         }
-        FUN_00312830(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,FUN_0049393c);
+        arraySortQsort(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,FUN_0049393c);
         return;
       }
       if (temp_v0 == 7) {
         if (*(int *)(param_1 + 0xb40) == 8) {
           temp_v0 = FUN_002a6c24();
           if (temp_v0 == 0) {
-            FUN_00312830(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,FUN_00494530);
+            arraySortQsort(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,FUN_00494530);
             return;
           }
-          FUN_00312830(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,FUN_0049448c);
+          arraySortQsort(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,FUN_0049448c);
           return;
         }
         temp_v0 = FUN_002a6c24();
         if (temp_v0 == 0) {
-          FUN_00312830(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,FUN_004944d0);
+          arraySortQsort(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,FUN_004944d0);
           return;
         }
-        FUN_00312830(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,FUN_00494448);
+        arraySortQsort(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,FUN_00494448);
         return;
       }
       if (temp_v0 == 0xc) {
         temp_v0 = FUN_002a6c24();
         if (temp_v0 == 0) {
-          FUN_00312830(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,halfDifference);
+          arraySortQsort(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,halfDifference);
           return;
         }
-        FUN_00312830(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,&LAB_0049cf3c);
+        arraySortQsort(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,&LAB_0049cf3c);
         return;
       }
     }
@@ -141,19 +141,19 @@ void FUN_0049a2b4(int param_1)
       if (temp_v0 == 0x10) {
         temp_v0 = FUN_002a6c24();
         if (temp_v0 == 0) {
-          FUN_00312830(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,FUN_00493e94);
+          arraySortQsort(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,FUN_00493e94);
           return;
         }
-        FUN_00312830(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,FUN_004938d0);
+        arraySortQsort(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,FUN_004938d0);
         return;
       }
       if (temp_v0 == 0x1c) {
         temp_v0 = FUN_002a6c24();
         if (temp_v0 == 0) {
-          FUN_00312830(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,0x493d38);
+          arraySortQsort(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,0x493d38);
           return;
         }
-        FUN_00312830(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,0x49d0f0);
+        arraySortQsort(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,0x49d0f0);
         return;
       }
     }

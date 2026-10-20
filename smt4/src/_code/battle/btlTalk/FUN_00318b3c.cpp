@@ -5,16 +5,16 @@
 extern "C" {
 
 int scrSetResult(void);
-int FUN_002c424c(...);
+int __aeabi_memset4(...);
 
 extern int g_btlTalk; /* 0x439b58 */
 
 /* Supplied declaration required: scrSetResult. */
-extern int FUN_002c09d0(void);
+extern int gameFlagIsSet(void);
 extern int randNextInRange(unsigned int);
 extern int dataTableGetCount(void);
 extern int dataTableGetEntries(unsigned int);
-/* Supplied declaration required: FUN_002c424c. */
+/* Supplied declaration required: __aeabi_memset4. */
 extern unsigned int FUN_003c0868(int);
 
 
@@ -36,13 +36,13 @@ unsigned int FUN_00318b3c(void)
   temp_v1 = dataTableGetCount();
   temp_v2 = dataTableGetEntries(temp_v0);
   temp_v5 = 0;
-  FUN_002c424c(aiStack_b0,0x80,0xffffffff);
+  __aeabi_memset4(aiStack_b0,0x80,0xffffffff);
   temp_v4 = 0;
   if (temp_v4 < temp_v1) {
     do {
       temp_v3 = temp_v2 + temp_v4 * 0x7c;
       if (*(int *)(temp_v3 + 0x74) != 0) {
-        if ((*(int *)(temp_v3 + 0x78) == 0) || (temp_v3 = FUN_002c09d0(), temp_v3 != 0)) {
+        if ((*(int *)(temp_v3 + 0x78) == 0) || (temp_v3 = gameFlagIsSet(), temp_v3 != 0)) {
           aiStack_b0[temp_v5] = temp_v4;
         }
         temp_v5 = temp_v5 + 1;
@@ -51,7 +51,7 @@ unsigned int FUN_00318b3c(void)
     } while (temp_v4 < temp_v1);
   }
   temp_v2 = 0;
-  FUN_002c424c(aiStack_130,0x80,0xffffffff);
+  __aeabi_memset4(aiStack_130,0x80,0xffffffff);
   piVar5 = aiStack_b0;
   temp_v1 = 0x20;
   do {

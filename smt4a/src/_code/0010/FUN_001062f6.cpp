@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002e74bc(unsigned int);
+int onlineBufferReset(unsigned int);
 int strAssign(unsigned int, int, int, unsigned int);
 
-/* Supplied declaration required: FUN_002e74bc. */
+/* Supplied declaration required: onlineBufferReset. */
 /* Supplied declaration required: strAssign. */
 
 
@@ -19,7 +19,7 @@ void FUN_001062f6(unsigned int param_1,int param_2,int param_3)
   int temp_v1;
   
   temp_v1 = *(int *)(param_2 + 8);
-  FUN_002e74bc(*(unsigned int *)(param_3 + 0xd8));
+  onlineBufferReset(*(unsigned int *)(param_3 + 0xd8));
   temp_v0 = *(int *)(temp_v1 + 0x10) - 0x2cU;
   if (temp_v0 != 0) {
     strAssign(*(unsigned int *)(param_3 + 0xd8),

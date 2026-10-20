@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c38fc(unsigned int *);
+int nn_os_CriticalSection_Initialize(unsigned int *);
 int hasExclusiveAccess(unsigned int *);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
@@ -13,7 +13,7 @@ typedef struct {
 } param_3_stack;
 
 /* Unsupported intrinsic, declaration required: hasExclusiveAccess (CALLOTHER). */
-/* Supplied declaration required: FUN_002c38fc. */
+/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
 extern void nn_os_LightSemaphore_Initialize(unsigned int, int, int);
 
 
@@ -38,7 +38,7 @@ void nn_os_detail_BlockingQueueBase_nn_os_CriticalSection_Initialize
   param_1[0xc] = 0;
   nn_os_LightSemaphore_Initialize((unsigned int)(param_1 + 1),0,0x7fff);
   nn_os_LightSemaphore_Initialize((unsigned int)(param_1 + 3),0,0x7fff);
-  FUN_002c38fc(param_1 + 5);
+  nn_os_CriticalSection_Initialize(param_1 + 5);
   return;
 }
 

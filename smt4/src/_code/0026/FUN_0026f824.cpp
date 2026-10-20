@@ -27,11 +27,11 @@ extern unsigned char DAT_00404360; /* 0x404360 */
 
 /* Supplied declaration required: FUN_001a1110. */
 /* Supplied declaration required: FUN_001dd930. */
-extern unsigned int FUN_00288f60(void);
+extern unsigned int gameDataGetPlayerName(void);
 /* Supplied declaration required: FUN_00295a18. */
 /* Supplied declaration required: FUN_00299370. */
-extern unsigned int *FUN_002a8764(void);
-extern short *FUN_002b63ac(void);
+extern unsigned int *gameGetSlotTable(void);
+extern short *gameGetPlayerData(void);
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: FUN_003c1ef4. */
@@ -48,7 +48,7 @@ void FUN_0026f824(int param_1)
   short temp_v2 [8];
   
   FUN_001a1110();
-  puVar1 = (unsigned int *)FUN_002a8764();
+  puVar1 = (unsigned int *)gameGetSlotTable();
   if (param_1 == 0) {
     *puVar1 = 0;
     *(unsigned char *)((int)puVar1 + 0x910b) = 8;
@@ -67,7 +67,7 @@ void FUN_0026f824(int param_1)
       }
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < 7);
-    psVar2 = (short *)FUN_002b63ac();
+    psVar2 = (short *)gameGetPlayerData();
     memClear(psVar2,0x8c);
     *(unsigned char *)(psVar2 + 0x3b) = 1;
     psVar2[0x3a] = 0;
@@ -85,7 +85,7 @@ void FUN_0026f824(int param_1)
     psVar2[0x15] = psVar2[0xe];
     psVar2[0x16] = psVar2[0xf];
     FUN_001dd930();
-    temp_v0 = FUN_00288f60();
+    temp_v0 = gameDataGetPlayerName();
     FUN_002be624(temp_v0,"沂覂讂膂蒂辂㴀");
     FUN_00295a18(0x370,1);
   }

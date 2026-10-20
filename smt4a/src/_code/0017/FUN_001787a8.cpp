@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00190fc8(unsigned char [20], int);
 int FUN_00194c68(...);
 int FUN_00194d6c(int *, unsigned int, unsigned int);
-int FUN_00194fb0(int, unsigned int);
+int nw_snd_SoundArchive_GetSoundType(int, unsigned int);
 int nw_snd_internal_SoundArchiveLoader_IsWaveSoundDataLoaded(int *, unsigned int, unsigned int);
 
 typedef int romwright_code(...);
@@ -27,14 +27,14 @@ typedef struct {
     unsigned int sp50; /* 0x50: local_50 */
 } param_3_stack;
 
-extern int FUN_0015fe30(void);
+extern int nw_snd_SoundArchive_IsAvailable(void);
 extern int *FUN_001785f0(int *, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00190fc8. */
 extern int FUN_00194784(int, unsigned int, unsigned int *);
 extern int FUN_001947dc(int, unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_00194c68. */
 /* Supplied declaration required: FUN_00194d6c. */
-/* Supplied declaration required: FUN_00194fb0. */
+/* Supplied declaration required: nw_snd_SoundArchive_GetSoundType. */
 extern unsigned int FUN_001a8e14(int, unsigned int);
 /* Supplied declaration required: nw_snd_internal_SoundArchiveLoader_IsWaveSoundDataLoaded. */
 extern int nw_snd_internal_WaveSoundFileReader_ReadNoteInfo(unsigned char *, unsigned int *, unsigned int, unsigned int);
@@ -62,11 +62,11 @@ int * FUN_001787a8(int *param_1,unsigned int param_2,unsigned int param_3)
   unsigned char temp_v13;
   unsigned char temp_v14 [20];
   
-  if ((param_1[1] != 0) && (temp_v0 = FUN_0015fe30(), temp_v0 != 0 && param_2 != 0xffffffff)) {
+  if ((param_1[1] != 0) && (temp_v0 = nw_snd_SoundArchive_IsAvailable(), temp_v0 != 0 && param_2 != 0xffffffff)) {
     switch(param_2 >> 0x18) {
     case 1:
       temp_v0 = param_1[1];
-      FUN_00194fb0(temp_v0,param_2);
+      nw_snd_SoundArchive_GetSoundType(temp_v0,param_2);
       if (temp_v0 == 1) {
         FUN_00194d6c(param_1,param_2,param_3);
         return param_1;
@@ -84,7 +84,7 @@ int * FUN_001787a8(int *param_1,unsigned int param_2,unsigned int param_3)
       piVar2 = (int *)0x0;
       if (temp_v0 != 0) {
         temp_v0 = param_1[1];
-        FUN_00194fb0(temp_v0,temp_v4);
+        nw_snd_SoundArchive_GetSoundType(temp_v0,temp_v4);
         if (temp_v0 != 1) {
           if ((temp_v0 == 3) && (temp_v3 = temp_v4, temp_v4 <= temp_v5)) {
             do {

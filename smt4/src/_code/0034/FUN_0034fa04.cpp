@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0023a4f8(void);
 int FUN_002bb150(int, int);
-int FUN_002c4040(int);
+int nn_os_LightEvent_Signal(int);
 int FUN_00350e30(int);
 
 typedef int romwright_code(...);
@@ -18,7 +18,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0023a4f8. */
 extern int FUN_0023a5dc(int);
 /* Supplied declaration required: FUN_002bb150. */
-/* Supplied declaration required: FUN_002c4040. */
+/* Supplied declaration required: nn_os_LightEvent_Signal. */
 /* Supplied declaration required: FUN_00350e30. */
 extern int __aeabi_idivmod(int, int);
 extern void nn_os_CriticalSection_Enter(unsigned int);
@@ -60,7 +60,7 @@ unsigned int FUN_0034fa04(int param_1,unsigned int param_2,unsigned int param_3,
   else {
     if (*(int *)(param_1 + 0xc) != 1) {
       if (*(int *)(param_1 + 0xc) == 6) {
-        FUN_002c4040(param_1 + 0x20);
+        nn_os_LightEvent_Signal(param_1 + 0x20);
       }
       nn_os_CriticalSection_Enter(param_1);
       *(unsigned int *)(param_1 + 0xc) = 2;

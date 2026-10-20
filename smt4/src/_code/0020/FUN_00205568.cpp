@@ -20,9 +20,9 @@ struct fn_00205568_arg1 {
     ushort field_0x80; /* +0x80 */
 };
 
-extern int FUN_002a8740(void);
-extern int FUN_002a8764(void);
-extern int FUN_002b63ac(void);
+extern int gameGetUnitRecord(void);
+extern int gameGetSlotTable(void);
+extern int gameGetPlayerData(void);
 
 
 int FUN_00205568(int param_1,fn_00205568_arg1 *param_2,unsigned int *param_3,unsigned short *param_4)
@@ -68,7 +68,7 @@ int FUN_00205568(int param_1,fn_00205568_arg1 *param_2,unsigned int *param_3,uns
     temp_v5 = temp_v5 - 1;
     puVar3 = puVar3 + 2;
   } while (temp_v5 != 0);
-  temp_v2 = FUN_002b63ac();
+  temp_v2 = gameGetPlayerData();
   temp_v5 = temp_v8;
   if (*(short *)(temp_v2 + 0x34) != 0) {
     temp_v5 = temp_v8 + 1;
@@ -110,13 +110,13 @@ int FUN_00205568(int param_1,fn_00205568_arg1 *param_2,unsigned int *param_3,uns
       temp_v8 = temp_v5 + 1;
     }
   }
-  temp_v5 = FUN_002a8764();
+  temp_v5 = gameGetSlotTable();
   temp_v2 = 0;
   do {
     if (*(char *)(temp_v5 + temp_v2 + 0x90f0) < '\0') {
       return temp_v8;
     }
-    temp_v3 = FUN_002a8740();
+    temp_v3 = gameGetUnitRecord();
     if (param_3 != (unsigned int *)0x0) {
       temp_v6 = *param_3;
       if (((temp_v6 & 0x7fff) != (unsigned int)*(unsigned short *)(temp_v3 + 0x46) || temp_v6 >> 0x1e != 1) &&

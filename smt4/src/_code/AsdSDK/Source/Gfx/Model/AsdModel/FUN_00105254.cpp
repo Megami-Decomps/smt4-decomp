@@ -14,7 +14,7 @@ int FUN_002c29c4(unsigned char *);
 
 extern unsigned int DAT_00464b0c; /* 0x464b0c */
 extern unsigned int DAT_00464b7c; /* 0x464b7c */
-extern unsigned int DAT_00464b84; /* 0x464b84 */
+extern unsigned int g_asdModelTransformBuilder; /* 0x464b84 */
 extern unsigned char DAT_004dae3c; /* 0x4dae3c */
 extern unsigned char DAT_004dae48; /* 0x4dae48 */
 
@@ -41,7 +41,7 @@ void FUN_00105254(unsigned int param_1,unsigned int param_2)
   FUN_0010bdb0();
   temp_v0 = 0;
   do {
-    FUN_002c2968((&DAT_00464b7c)[temp_v0],(&DAT_00464b84)[temp_v0]);
+    FUN_002c2968((&DAT_00464b7c)[temp_v0],(&g_asdModelTransformBuilder)[temp_v0]);
     FUN_00131a2c((&DAT_00464b7c)[temp_v0]);
     temp_v0 = temp_v0 + 1;
   } while (temp_v0 < 2);

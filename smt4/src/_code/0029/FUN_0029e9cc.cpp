@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002b06c4(void);
+int dataTable00FindById(void);
 
 extern int DAT_0043e2ac; /* 0x43e2ac */
 
-/* Supplied declaration required: FUN_002b06c4. */
+/* Supplied declaration required: dataTable00FindById. */
 
 
 unsigned short FUN_0029e9cc(unsigned int param_1)
@@ -25,7 +25,7 @@ unsigned short FUN_0029e9cc(unsigned int param_1)
     return 0;
   }
   temp_v2 = param_1;
-  FUN_002b06c4();
+  dataTable00FindById();
   temp_v1 = *(unsigned short *)(temp_v2 + 0x16) & 1;
   if ((*(unsigned short *)(temp_v2 + 0x16) & 1) != 0) {
     temp_v0 = *(unsigned char *)(DAT_0043e2ac + param_1 * 0x34 + 0xc20e);

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0026fd50(int, int, int, unsigned int);
 
-extern unsigned char DAT_00588fd0; /* 0x588fd0 */
+extern unsigned char g_gameGlobals; /* 0x588fd0 */
 
 /* Supplied declaration required: FUN_0026fd50. */
 
@@ -17,8 +17,8 @@ void FUN_0037e0d0(int param_1,unsigned char param_2,unsigned int param_3)
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = (*(int *)((unsigned char *)&DAT_00588fd0 + 0x4));
-  *(unsigned char *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x2010) = 1;
+  temp_v0 = (*(int *)((unsigned char *)&g_gameGlobals + 0x4));
+  *(unsigned char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x2010) = 1;
   *(unsigned char *)(temp_v0 + 0x2017) = 4;
   FUN_0026fd50(temp_v0 + 0x1390,param_1,*(unsigned short *)(param_1 + 300),param_3);
   *(unsigned char *)(temp_v0 + 0x2024) = param_2;

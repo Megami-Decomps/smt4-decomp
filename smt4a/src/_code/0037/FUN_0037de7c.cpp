@@ -5,20 +5,20 @@
 extern "C" {
 
 int jobStop(unsigned int, int);
-int FUN_001641c4(void);
+int ifTouchRegionRemove(void);
 int asdMemFree(...);
 int scrScriptProcessDestroy(void);
-int FUN_001b4a90(unsigned int *, int, unsigned int);
-int FUN_00237210(unsigned int);
+int __aeabi_memset4(unsigned int *, int, unsigned int);
+int asdMemFreeSlot(unsigned int);
 
-extern unsigned int *DAT_00588fe8; /* 0x588fe8 */
+extern unsigned int *g_statusDown; /* 0x588fe8 */
 
 /* Supplied declaration required: jobStop. */
-/* Supplied declaration required: FUN_001641c4. */
+/* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: FUN_001b4a90. */
-/* Supplied declaration required: FUN_00237210. */
+/* Supplied declaration required: __aeabi_memset4. */
+/* Supplied declaration required: asdMemFreeSlot. */
 
 
 void FUN_0037de7c(void)
@@ -29,19 +29,19 @@ void FUN_0037de7c(void)
   unsigned int *puVar2;
   int temp_v0;
   
-  puVar1 = DAT_00588fe8;
+  puVar1 = g_statusDown;
   temp_v0 = 0;
-  if (*(char *)((int)DAT_00588fe8 + 0x59a) != '\0') {
+  if (*(char *)((int)g_statusDown + 0x59a) != '\0') {
     do {
-      FUN_001641c4();
+      ifTouchRegionRemove();
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < (int)(unsigned int)*(unsigned char *)((int)puVar1 + 0x59a));
   }
   *(unsigned char *)((int)puVar1 + 0x59a) = 0;
-  FUN_001b4a90(puVar1 + 0x151,0x54,0xffffffff);
-  FUN_00237210(puVar1[0x8ee]);
-  puVar2 = DAT_00588fe8;
-  if (DAT_00588fe8[0x95d] != 0) {
+  __aeabi_memset4(puVar1 + 0x151,0x54,0xffffffff);
+  asdMemFreeSlot(puVar1[0x8ee]);
+  puVar2 = g_statusDown;
+  if (g_statusDown[0x95d] != 0) {
     scrScriptProcessDestroy();
     puVar2[0x95d] = 0;
   }
@@ -55,7 +55,7 @@ void FUN_0037de7c(void)
   }
   jobStop(*puVar1,0);
   asdMemFree(puVar1);
-  DAT_00588fe8 = (unsigned int *)0x0;
+  g_statusDown = (unsigned int *)0x0;
   return;
 }
 

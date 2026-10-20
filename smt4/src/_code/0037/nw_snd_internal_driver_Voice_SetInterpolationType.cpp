@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_003601c4(int sdkVoice, int type);
+int nn_snd_CTR_Voice_SetInterpolationType(int sdkVoice, int type);
 
 typedef struct Voice {
     /* 0x0 */ int sdkVoices[2];
@@ -25,7 +25,7 @@ void nw_snd_internal_driver_Voice_SetInterpolationType(Voice *voice, int type)
                 if (((type != 0) && (value = type == 1, !value)) && (type == 2)) {
                     value = 2;
                 }
-                FUN_003601c4(sdkVoice, value);
+                nn_snd_CTR_Voice_SetInterpolationType(sdkVoice, value);
             }
             i = i + 1;
         } while (i < voice->count);

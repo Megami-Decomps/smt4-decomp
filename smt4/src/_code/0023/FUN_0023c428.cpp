@@ -8,7 +8,7 @@ int FUN_0023aa3c(int, unsigned char [16]);
 int FUN_0023ac2c(int, float *);
 int FUN_0023adf4(unsigned int, int, unsigned char [16]);
 int FUN_0027da30(int, int);
-int FUN_0028c640(unsigned int, int, float *);
+int nodeSetTranslation(unsigned int, int, float *);
 int btlGetMainState(void);
 int FUN_002a0428(int, int);
 
@@ -24,7 +24,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0023adf4. */
 /* Supplied declaration required: FUN_0027da30. */
 extern int FUN_0027dab0(unsigned int, int);
-/* Supplied declaration required: FUN_0028c640. */
+/* Supplied declaration required: nodeSetTranslation. */
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_002a0428. */
 
@@ -75,7 +75,7 @@ void FUN_0023c428(int param_1,int param_2)
     temp_v7 = temp_v7 + *(float *)(temp_v4 + 0xc);
     temp_v8 = temp_v8 + *(float *)(temp_v4 + 0x10);
     temp_v9 = temp_v9 + *(float *)(temp_v4 + 0x14);
-    FUN_0028c640(*(unsigned int *)(*(int *)(temp_v6 + 0x960) + 8),0,&temp_v7);
+    nodeSetTranslation(*(unsigned int *)(*(int *)(temp_v6 + 0x960) + 8),0,&temp_v7);
   }
   return;
 }

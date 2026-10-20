@@ -73,7 +73,7 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: FUN_0024b77c. */
 /* Supplied declaration required: FUN_0024b7bc. */
 /* Supplied declaration required: FUN_0024b830. */
-extern int FUN_00269a58(void);
+extern int effGetFrameCounter(void);
 /* Supplied declaration required: FUN_002a2c7c. */
 /* Supplied declaration required: FUN_002b7064. */
 /* Supplied declaration required: FUN_002b70cc. */
@@ -255,7 +255,7 @@ void FUN_002e65b0(int param_1)
             in_s0 = temp_v11 * temp_v16 + pfVar8[0xe];
             pfVar9[7] = in_s0;
             FUN_0024add8(param_1,pfVar9);
-            temp_v6 = FUN_00269a58();
+            temp_v6 = effGetFrameCounter();
             pfVar9[4] = (float)(temp_v6 + (int)temp_v4);
           }
           else if (temp_v27 != 0.0f) {
@@ -416,7 +416,7 @@ void FUN_002e65b0(int param_1)
             pfVar9[7] = in_s0;
             if (temp_v28 != 0) {
               FUN_0024b5f0(param_1,pfVar9);
-              temp_v6 = FUN_00269a58();
+              temp_v6 = effGetFrameCounter();
               pfVar9[4] = (float)(temp_v6 + (int)pfVar9[4]);
             }
             temp_v27 = (float)((int)temp_v27 - 1);

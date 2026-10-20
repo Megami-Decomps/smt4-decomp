@@ -63,8 +63,8 @@ extern unsigned int FUN_0014bd84(unsigned short);
 extern unsigned int FUN_0015687c(void);
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164b5c. */
-extern int FUN_001654d8(int);
-extern int FUN_001654e4(int);
+extern int vec2GetXInt(int);
+extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_00180114(unsigned short);
@@ -73,7 +73,7 @@ extern unsigned int FUN_00180114(unsigned short);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00185e84. */
 extern int FUN_0019f240(unsigned short);
-extern int FUN_001ab854(int);
+extern int gameGetSlotRecord(int);
 /* Supplied declaration required: FUN_002685cc. */
 extern int FUN_00284140(int);
 /* Supplied declaration required: FUN_002a4894. */
@@ -127,7 +127,7 @@ void FUN_004b1a00(int param_1,int param_2,int param_3)
   int temp_v32;
   
   temp_v22 = 0x1d;
-  temp_v13 = FUN_001ab854((int)*(char *)(param_1 + *(int *)(param_1 + 0x74c0) * 0x150 + 0x442c));
+  temp_v13 = gameGetSlotRecord((int)*(char *)(param_1 + *(int *)(param_1 + 0x74c0) * 0x150 + 0x442c));
   temp_v11 = 0;
   temp_v28 = param_1 + 0x4000;
   temp_v19 = 0;
@@ -237,9 +237,9 @@ LAB_004b1d78:
           temp_v3 = temp_v28;
         }
         else {
-          temp_v8 = FUN_001654d8(temp_v30);
+          temp_v8 = vec2GetXInt(temp_v30);
           temp_v8 = param_2 + temp_v8;
-          temp_v5 = FUN_001654e4(temp_v30);
+          temp_v5 = vec2GetYInt(temp_v30);
           temp_v5 = param_3 + temp_v5;
           temp_v3 = temp_v30;
         }

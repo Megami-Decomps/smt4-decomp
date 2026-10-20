@@ -5,17 +5,17 @@
 extern "C" {
 
 int FUN_00254e4c(unsigned int, int, int, int *);
-int FUN_00282924(void);
+int btlMainFindEntryByListedId(void);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_4_stack;
 
-extern unsigned int DAT_00439ca8; /* 0x439ca8 */
+extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 
 /* Supplied declaration required: FUN_00254e4c. */
-/* Supplied declaration required: FUN_00282924. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 
 
 void FUN_0033b1ac(int param_1,int param_2,unsigned int param_3,int *param_4)
@@ -42,13 +42,13 @@ void FUN_0033b1ac(int param_1,int param_2,unsigned int param_3,int *param_4)
     return;
   }
   temp_v3 = param_1;
-  FUN_00282924();
+  btlMainFindEntryByListedId();
   temp_v5 = *(short *)(param_1 + 0x2f1e) + 1;
   temp_v7 = temp_v5;
   do {
     temp_v13 = param_4;
     if (temp_v7 >= 0xc) {
-      FUN_00254e4c(DAT_00439ca8,temp_v7,temp_v5,temp_v13);
+      FUN_00254e4c(g_btlUiBlock,temp_v7,temp_v5,temp_v13);
       return;
     }
     if (*(short *)(param_1 + temp_v7 * 2 + 0x2f06) < 0) {
@@ -86,7 +86,7 @@ void FUN_0033b1ac(int param_1,int param_2,unsigned int param_3,int *param_4)
           temp_v5 = temp_v5 + 1;
         } while (temp_v5 < 0xb);
       }
-      FUN_00254e4c(DAT_00439ca8,temp_v7,temp_v5,temp_v13);
+      FUN_00254e4c(g_btlUiBlock,temp_v7,temp_v5,temp_v13);
       return;
     }
     temp_v7 = temp_v7 + 1;

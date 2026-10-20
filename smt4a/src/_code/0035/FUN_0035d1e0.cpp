@@ -20,7 +20,7 @@ typedef struct {
 } void_stack;
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-extern int FUN_00162e8c(void);
+extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_00272edc. */
 /* Supplied declaration required: FUN_00371068. */
 
@@ -47,7 +47,7 @@ void FUN_0035d1e0(void)
   int temp_v10;
   int temp_v11 [9];
   
-  temp_v1 = FUN_00162e8c();
+  temp_v1 = gameFlagsGetBlock();
   temp_v5 = 0;
   if ('\0' < *(char *)(temp_v1 + 0xe05)) {
     do {

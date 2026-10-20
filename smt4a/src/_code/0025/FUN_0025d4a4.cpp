@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_00281720(unsigned int, int);
+int linkHolderApplyFlag(unsigned int, int);
 int FUN_0037b7d8(void);
 int FUN_003aedc8(unsigned int, int);
 int FUN_003e54b8(unsigned int);
 
 typedef int romwright_code(...);
-/* Supplied declaration required: FUN_00281720. */
+/* Supplied declaration required: linkHolderApplyFlag. */
 /* Supplied declaration required: FUN_0037b7d8. */
 /* Supplied declaration required: FUN_003aedc8. */
 /* Supplied declaration required: FUN_003e54b8. */
@@ -31,7 +31,7 @@ unsigned int FUN_0025d4a4(int *param_1)
     temp_v0 = (*pcVar2)(temp_v2);
     if (temp_v0 != 3) {
       if (temp_v0 == 1) {
-        FUN_00281720(*(unsigned int *)(temp_v2 + 4),0);
+        linkHolderApplyFlag(*(unsigned int *)(temp_v2 + 4),0);
         *(unsigned char *)(temp_v2 + 0x10f) = 1;
       }
     }

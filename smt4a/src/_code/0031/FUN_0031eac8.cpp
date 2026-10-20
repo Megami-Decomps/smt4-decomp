@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00324bc8(int, int, int);
+int mapPlaceSet(int, int, int);
 int FUN_00376fb8(int);
 int FUN_00398004(int);
 
@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-/* Supplied declaration required: FUN_00324bc8. */
+/* Supplied declaration required: mapPlaceSet. */
 extern int FUN_00376f94(void);
 /* Supplied declaration required: FUN_00376fb8. */
 /* Supplied declaration required: FUN_00398004. */
@@ -27,7 +27,7 @@ void FUN_0031eac8(void)
   
   temp_v0 = FUN_00376f94();
   temp_v0 = temp_v0 * 0x44;
-  FUN_00324bc8((int)*(char *)(temp_v0 + 0x5814d9),(int)*(char *)(temp_v0 + 0x5814da),
+  mapPlaceSet((int)*(char *)(temp_v0 + 0x5814d9),(int)*(char *)(temp_v0 + 0x5814da),
                (int)*(char *)(temp_v0 + 0x5814db));
   FUN_00376fb8(0);
   FUN_00398004(0);

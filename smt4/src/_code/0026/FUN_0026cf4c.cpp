@@ -20,7 +20,7 @@ int FUN_00296ae8(unsigned int, int, unsigned int, int);
 int FUN_0029acb0(void);
 int FUN_0029ede8(int, int, unsigned int, int);
 int FUN_0029ee6c(...);
-int FUN_002b45e8(void);
+int dataTable08Sub2GetRecord(void);
 int FUN_002be624(...);
 int dataTableGetCount(...);
 
@@ -39,7 +39,7 @@ extern unsigned char LAB_003172c8; /* 0x3172c8 */
 extern unsigned char LAB_003172d4; /* 0x3172d4 */
 extern int DAT_0043da2c; /* 0x43da2c */
 extern unsigned int DAT_0043da30; /* 0x43da30 */
-extern int DAT_0043dcf0; /* 0x43dcf0 */
+extern int g_partyPanel; /* 0x43dcf0 */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_001f4568. */
@@ -58,8 +58,8 @@ extern int FUN_0029e02c(void);
 /* Supplied declaration required: FUN_0029ede8. */
 /* Supplied declaration required: FUN_0029ee6c. */
 extern unsigned char *FUN_002b066c(unsigned int);
-/* Supplied declaration required: FUN_002b45e8. */
-extern unsigned short *FUN_002b63ac(void);
+/* Supplied declaration required: dataTable08Sub2GetRecord. */
+extern unsigned short *gameGetPlayerData(void);
 extern int FUN_002b898c(void);
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: dataTableGetCount. */
@@ -94,7 +94,7 @@ void FUN_0026cf4c(void)
   unsigned char temp_v15 [128];
   
   temp_v6 = FUN_0029e02c();
-  temp_v5 = DAT_0043dcf0;
+  temp_v5 = g_partyPanel;
   if (temp_v6 == 0) {
     temp_v12 = 0;
     FUN_0029acb0();
@@ -128,7 +128,7 @@ void FUN_0026cf4c(void)
         ((temp_v7 != 0 || ((-1 < (int)temp_v8 || (*(char *)(temp_v5 + 0x42) != '\0')))))) || (temp_v12)) {
       FUN_0026c214();
     }
-    temp_v6 = DAT_0043dcf0;
+    temp_v6 = g_partyPanel;
     temp_v9 = (unsigned int)*(short *)(temp_v5 + 0x3a);
     temp_v12 = temp_v9 == temp_v8;
     if (temp_v12) {
@@ -142,9 +142,9 @@ void FUN_0026cf4c(void)
       temp_v7 = FUN_00282ccc();
       temp_v5 = DAT_0043da2c;
       if (temp_v3 != 0) {
-        puVar13 = (unsigned short *)FUN_002b63ac();
+        puVar13 = (unsigned short *)gameGetPlayerData();
         temp_v7 = (unsigned int)*puVar13;
-        FUN_002b45e8();
+        dataTable08Sub2GetRecord();
         if (temp_v7 == 0) {
           *(unsigned char *)(temp_v5 + 0x4cb) = 0;
         }

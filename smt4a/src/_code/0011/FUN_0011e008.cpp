@@ -9,7 +9,7 @@ int FUN_002ea3d0(int, unsigned int);
 int FUN_002ec728(int, unsigned char [24]);
 int destroyObj0055ae64(unsigned char [24]);
 int FUN_002f451c(int *, unsigned int);
-int FUN_002f7cb0(int);
+int onlineJobSetStateWaiting(int);
 int FUN_002f7cba(int, int, unsigned int);
 int FUN_00302058(unsigned char [24], unsigned int, unsigned int);
 int FUN_003020dc(int, unsigned int, unsigned int, int);
@@ -25,14 +25,14 @@ typedef struct {
 extern unsigned char LAB_0011e0cc; /* 0x11e0cc */
 extern signed char DAT_00594967; /* 0x594967 */
 
-extern int FUN_002e760a(unsigned int);
+extern int operatorNew(unsigned int);
 extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
 /* Supplied declaration required: FUN_002ea3c0. */
 /* Supplied declaration required: FUN_002ea3d0. */
 /* Supplied declaration required: FUN_002ec728. */
 /* Supplied declaration required: destroyObj0055ae64. */
 /* Supplied declaration required: FUN_002f451c. */
-/* Supplied declaration required: FUN_002f7cb0. */
+/* Supplied declaration required: onlineJobSetStateWaiting. */
 /* Supplied declaration required: FUN_002f7cba. */
 /* Supplied declaration required: FUN_00302058. */
 /* Supplied declaration required: FUN_003020dc. */
@@ -77,8 +77,8 @@ void FUN_0011e008(int param_1)
     FUN_002ea3d0(param_1,temp_v0);
   }
   else {
-    FUN_002f7cb0(param_1);
-    temp_v1 = FUN_002e760a(0x10);
+    onlineJobSetStateWaiting(param_1);
+    temp_v1 = operatorNew(0x10);
     temp_v0 = 0;
     if (temp_v1 != 0) {
       temp_v0 = FUN_002ea3c0(temp_v1,0x11de3d,0,&LAB_0011e0cc);

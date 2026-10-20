@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0010e9e0(unsigned int);
+int maxValueTrackerUpdate(unsigned int);
 int FUN_002e32a4(int, unsigned char *, unsigned char *, unsigned int, unsigned int);
 int __aeabi_uidivmod(unsigned int, unsigned int);
 
@@ -32,7 +32,7 @@ typedef struct {
 
 extern unsigned char LAB_00113f9c; /* 0x113f9c */
 
-/* Supplied declaration required: FUN_0010e9e0. */
+/* Supplied declaration required: maxValueTrackerUpdate. */
 /* Supplied declaration required: FUN_002e32a4. */
 extern unsigned int FUN_002ea704(void);
 extern int FUN_002f14a8(int, unsigned int);
@@ -69,7 +69,7 @@ unsigned int FUN_00113f00(fn_00113f00_arg0 *param_1,int *param_2)
          (param_1->field_0x84 < *param_2 - piVar6[10])) {
         *(unsigned char *)(temp_v2 + 0x1c) = *(unsigned char *)(temp_v2 + 0x1c) | 2;
         param_1->field_0x88 = param_1->field_0x88 + 1;
-        FUN_0010e9e0(temp_v0);
+        maxValueTrackerUpdate(temp_v0);
         temp_v6 = 1;
       }
     }

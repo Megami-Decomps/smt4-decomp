@@ -23,9 +23,9 @@ typedef struct {
 extern int g_gameState; /* 0x5f15fc */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-extern unsigned int FUN_0014bef4(unsigned int);
-extern int FUN_001801a4(void);
-extern int FUN_001ab854(void);
+extern unsigned int randRange(unsigned int);
+extern int gameGetPlayerData(void);
+extern int gameGetSlotRecord(void);
 /* Supplied declaration required: FUN_002e0798. */
 extern int FUN_002e5c2c(void);
 /* Supplied declaration required: FUN_0034a290. */
@@ -62,10 +62,10 @@ unsigned int FUN_0035e03c(int param_1,int param_2,int param_3,int param_4)
   temp_v9 = 0;
   temp_v8 = 0;
   if (param_1 < 0) {
-    temp_v9 = FUN_001801a4();
+    temp_v9 = gameGetPlayerData();
   }
   else {
-    temp_v8 = FUN_001ab854();
+    temp_v8 = gameGetSlotRecord();
     if (temp_v8 == 0) {
       return 1;
     }
@@ -74,7 +74,7 @@ unsigned int FUN_0035e03c(int param_1,int param_2,int param_3,int param_4)
   if (param_4 == 0) {
     if (*(short *)(param_2 + 0x30) != 0xb) {
       if ((!(*(short *)(param_2 + 0x30) != 0xc || param_3 != 0)) &&
-         (temp_v4 = FUN_0014bef4(99), 0x18 >= temp_v4)) {
+         (temp_v4 = randRange(99), 0x18 >= temp_v4)) {
         if (temp_v9 != 0) {
           temp_v2 = *(short *)(temp_v9 + 0x2c);
         }
@@ -90,7 +90,7 @@ unsigned int FUN_0035e03c(int param_1,int param_2,int param_3,int param_4)
         temp_v10 = 0;
       }
     }
-    else if ((param_3 == 0) && (temp_v4 = FUN_0014bef4(99), 0x18 >= temp_v4)) {
+    else if ((param_3 == 0) && (temp_v4 = randRange(99), 0x18 >= temp_v4)) {
       if (temp_v9 != 0) {
         playerGetWords(temp_v12,0);
         temp_v3 = playerHasFlagBit(5);

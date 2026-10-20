@@ -3,11 +3,11 @@
 extern "C" {
 
 int FUN_0035ff18(u8 *manager);
-extern u8 DAT_004e6f14;
+extern u8 g_nnSndMasterManager;
 
 void FUN_00360104(void)
 {
-    FUN_0035ff18(&DAT_004e6f14);
+    FUN_0035ff18(&g_nnSndMasterManager);
 }
 
 } /* extern "C" */

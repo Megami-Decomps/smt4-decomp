@@ -4,16 +4,16 @@
 
 extern "C" {
 
-int FUN_003fd63c(int, int);
+int gameFlagSetValue(int, int);
 
 extern int *g_popupState; /* 0x58104c */
 extern int DAT_005f1ac0; /* 0x5f1ac0 */
 
-extern int FUN_0014bef4(unsigned int);
-extern int FUN_0018719c(unsigned int);
+extern int randRange(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 extern int FUN_002d0044(void);
 extern int FUN_002d8b58(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_003fd63c. */
+/* Supplied declaration required: gameFlagSetValue. */
 
 
 void FUN_002240f0(void)
@@ -26,9 +26,9 @@ void FUN_002240f0(void)
   
   if ((*g_popupState == 0) && (temp_v1 = FUN_002d0044(), temp_v1 != 0)) {
     temp_v0 = 1;
-    temp_v1 = FUN_0018719c(0x111b);
+    temp_v1 = gameFlagIsSet(0x111b);
     if (temp_v1 != 0) {
-      temp_v1 = FUN_0014bef4(99);
+      temp_v1 = randRange(99);
       if (temp_v1 + 1 < 0x1f) {
         temp_v0 = 0;
       }
@@ -36,7 +36,7 @@ void FUN_002240f0(void)
     else {
       temp_v0 = 0;
       DAT_005f1ac0 = 0;
-      FUN_003fd63c(0x111b,1);
+      gameFlagSetValue(0x111b,1);
     }
     piVar2 = g_popupState;
     if (DAT_005f1ac0 >= 1) {

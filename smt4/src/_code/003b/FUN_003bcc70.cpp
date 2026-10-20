@@ -6,13 +6,13 @@ extern "C" {
 
 int FUN_0027da30(int, int);
 int FUN_002ae164(void);
-int FUN_002b4670(void);
+int dataTable08Sub1GetRecord(void);
 
 /* Supplied declaration required: FUN_0027da30. */
 extern int btlGetMainState(void);
-extern int FUN_002a8740(int);
+extern int gameGetUnitRecord(int);
 /* Supplied declaration required: FUN_002ae164. */
-/* Supplied declaration required: FUN_002b4670. */
+/* Supplied declaration required: dataTable08Sub1GetRecord. */
 
 
 unsigned int FUN_003bcc70(int param_1,int param_2,unsigned int param_3,int param_4)
@@ -24,7 +24,7 @@ unsigned int FUN_003bcc70(int param_1,int param_2,unsigned int param_3,int param
   unsigned int temp_v2;
   
   FUN_002ae164();
-  FUN_002b4670();
+  dataTable08Sub1GetRecord();
   if (((param_1 != 0 || param_2 != 0) &&
       ((param_1 == 0 || ((*(unsigned int *)(param_1 + 0x38) & 0x7f) != 0)))) &&
      ((param_2 == 0 || ((*(unsigned char *)(param_2 + 0x6a) & 0x7f) != 0)))) {
@@ -62,7 +62,7 @@ unsigned int FUN_003bcc70(int param_1,int param_2,unsigned int param_3,int param
       temp_v0 = *(unsigned short *)(temp_v1 + 0xfa);
     }
     else {
-      temp_v1 = FUN_002a8740(param_4 - 0x6d);
+      temp_v1 = gameGetUnitRecord(param_4 - 0x6d);
       temp_v0 = *(unsigned short *)(temp_v1 + 0x44);
     }
     if ((temp_v0 & temp_v2) != 0) {

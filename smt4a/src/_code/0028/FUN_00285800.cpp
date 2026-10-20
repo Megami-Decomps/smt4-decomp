@@ -15,7 +15,7 @@ typedef struct Global588fd0 {
     /* 0x00 */ u8 unk00[4];
     /* 0x04 */ Game *game;
 } Global588fd0;
-extern Global588fd0 DAT_00588fd0;
+extern Global588fd0 g_gameGlobals;
 
 void FUN_0021af2c(void);
 
@@ -24,8 +24,8 @@ void FUN_00285800(void)
 {
     Game *game;
 
-    game = DAT_00588fd0.game;
-    DAT_00588fd0.game->unk1374 = 0;
+    game = g_gameGlobals.game;
+    g_gameGlobals.game->unk1374 = 0;
     FUN_0021af2c();
     game->unk2014 = 0;
 }

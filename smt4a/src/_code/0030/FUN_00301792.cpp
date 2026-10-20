@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e7232(int);
+int sharedRefRelease(int);
 int FUN_00301754(unsigned char [4], int, unsigned int **);
 
 /* stack frame of param_2: 6 slot(s), 24 byte(s) */
@@ -17,7 +17,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_002e7232. */
+/* Supplied declaration required: sharedRefRelease. */
 extern int wordRefsEqual_00301734(unsigned int **, unsigned int **);
 extern int wordRefsDiffer_00301744(unsigned int **, unsigned int *);
 /* Supplied declaration required: FUN_00301754. */
@@ -51,7 +51,7 @@ unsigned char FUN_00301792(int param_1,int param_2)
   if (temp_v0 != 0) {
     temp_v1 = temp_v4;
     FUN_00301754(temp_v2,param_1 + 0x20,&temp_v1);
-    FUN_002e7232(temp_v7);
+    sharedRefRelease(temp_v7);
   }
   return temp_v0 != 0;
 }

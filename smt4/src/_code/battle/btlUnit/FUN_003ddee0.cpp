@@ -9,7 +9,7 @@ int FUN_002267b8(...);
 int FUN_0022699c(...);
 int FUN_0027da30(...);
 int FUN_0027e3e8(...);
-int FUN_00282924(...);
+int btlMainFindEntryByListedId(...);
 int btlGetMainState(...);
 int FUN_003dddd0(...);
 
@@ -38,7 +38,7 @@ typedef struct {
     unsigned int sp58; /* 0x58: local_58 */
 } param_6_stack;
 
-extern int DAT_00434290; /* 0x434290 */
+extern int g_btlActionReflect; /* 0x434290 */
 extern int g_btlMain; /* 0x4342c8 */
 extern int DAT_00435d18; /* 0x435d18 */
 extern unsigned int g_btlEvent; /* 0x435d48 */
@@ -49,7 +49,7 @@ extern unsigned int g_btlEvent; /* 0x435d48 */
 /* Supplied declaration required: FUN_0027da30. */
 extern int FUN_0027dab0(unsigned int, int);
 /* Supplied declaration required: FUN_0027e3e8. */
-/* Supplied declaration required: FUN_00282924. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_003dddd0. */
 
@@ -82,14 +82,14 @@ FUN_003ddee0(int param_1,unsigned int param_2,fn_003ddee0_arg2 *param_3,int para
   temp_v2 = param_3->field_0x50;
   if ((temp_v2 & 0x200) == 0) {
     temp_v0 = (short)param_1;
-    temp_v3 = DAT_00434290;
+    temp_v3 = g_btlActionReflect;
     if ((temp_v2 & 0x800) == 0) {
       if (temp_v4 == 0) {
         param_3->field_0x50 = temp_v2 | 0x80000;
       }
       temp_v3 = param_4 * 0xc;
       puVar5 = puVar2;
-      FUN_00282924(puVar2,(int)param_3->field_0x62);
+      btlMainFindEntryByListedId(puVar2,(int)param_3->field_0x62);
       temp_v9 = DAT_00435d18;
       if (temp_v1 != 0 && puVar5 != (unsigned int *)0x0) {
         temp_v11 = (*puVar5 & 0x10) != 0;
@@ -101,10 +101,10 @@ FUN_003ddee0(int param_1,unsigned int param_2,fn_003ddee0_arg2 *param_3,int para
           param_4 = 0xf;
           *(fn_003ddee0_arg2 **)(DAT_00435d18 + 0x3048) = param_3;
           *(unsigned int *)(temp_v9 + 0x3028) = *(unsigned int *)(temp_v9 + 0x3028) | 0x8000;
-          for (temp_v9 = *(int *)(DAT_00434290 + 8); temp_v9 != 0; temp_v9 = *(int *)(temp_v9 + 0xc)) {
+          for (temp_v9 = *(int *)(g_btlActionReflect + 8); temp_v9 != 0; temp_v9 = *(int *)(temp_v9 + 0xc)) {
           }
-          temp_v9 = DAT_00434290;
-          FUN_0022699c(DAT_00434290,(int)(short)((short)param_3->field_0x5c + temp_v0 + 2),0,param_2);
+          temp_v9 = g_btlActionReflect;
+          FUN_0022699c(g_btlActionReflect,(int)(short)((short)param_3->field_0x5c + temp_v0 + 2),0,param_2);
           *(unsigned char *)(temp_v9 + 4) = 0xb;
           *(unsigned int *)(temp_v9 + 0x28) = 2;
           *(unsigned int *)(temp_v9 + 0x4c) = 0xc0;
@@ -120,14 +120,14 @@ FUN_003ddee0(int param_1,unsigned int param_2,fn_003ddee0_arg2 *param_3,int para
       case 0:
       case 1:
         temp_v9 = 0;
-        temp_v3 = DAT_00434290;
-        FUN_0022699c(DAT_00434290,(int)(short)((short)param_3->field_0x5c + temp_v0),0,param_2);
+        temp_v3 = g_btlActionReflect;
+        FUN_0022699c(g_btlActionReflect,(int)(short)((short)param_3->field_0x5c + temp_v0),0,param_2);
         *(unsigned char *)(temp_v3 + 4) = 0x13;
         *(fn_003ddee0_arg2 **)(temp_v3 + 0x14) = param_3;
         *(unsigned int *)(temp_v3 + 0x4c) = 0;
         FUN_002267b8(param_3->field_0x5c + param_1,param_2,param_3);
-        temp_v3 = DAT_00434290;
-        FUN_0022699c(DAT_00434290,(int)(short)(temp_v0 + 5 + (short)param_3->field_0x5c),0,param_2);
+        temp_v3 = g_btlActionReflect;
+        FUN_0022699c(g_btlActionReflect,(int)(short)(temp_v0 + 5 + (short)param_3->field_0x5c),0,param_2);
         *(unsigned char *)(temp_v3 + 4) = 0x1b;
         temp_v3 = btlGetMainState();
         if (temp_v4 != 0) {
@@ -142,15 +142,15 @@ FUN_003ddee0(int param_1,unsigned int param_2,fn_003ddee0_arg2 *param_3,int para
             if (((((temp_v4 & 1) != 0 && (temp_v4 & 2) != 0) && (temp_v4 & 0x10) != 0) &&
                 (*(short *)(temp_v3 + 0x62) != param_3->field_0x62)) &&
                ((*(unsigned int *)(temp_v3 + 0xf8) & 2) == 0)) {
-              temp_v10 = DAT_00434290;
-              FUN_0022699c(DAT_00434290,(int)(short)((short)*(unsigned int *)(temp_v3 + 0x5c) + temp_v0),0
+              temp_v10 = g_btlActionReflect;
+              FUN_0022699c(g_btlActionReflect,(int)(short)((short)*(unsigned int *)(temp_v3 + 0x5c) + temp_v0),0
                            ,param_2);
               *(unsigned char *)(temp_v10 + 4) = 0x13;
               *(int *)(temp_v10 + 0x14) = temp_v3;
               *(unsigned int *)(temp_v10 + 0x4c) = 0;
               FUN_002267b8(*(int *)(temp_v3 + 0x5c) + param_1,param_2,temp_v3);
-              temp_v10 = DAT_00434290;
-              FUN_0022699c(DAT_00434290,
+              temp_v10 = g_btlActionReflect;
+              FUN_0022699c(g_btlActionReflect,
                            (int)(short)((short)*(unsigned int *)(temp_v3 + 0x5c) + temp_v0 + 5),0,param_2)
               ;
               *(unsigned char *)(temp_v10 + 4) = 0x1b;
@@ -175,8 +175,8 @@ FUN_003ddee0(int param_1,unsigned int param_2,fn_003ddee0_arg2 *param_3,int para
       case 0xc:
       case 0xd:
       case 0xe:
-        temp_v9 = DAT_00434290;
-        FUN_0022699c(DAT_00434290,(int)(short)((short)param_3->field_0x5c + temp_v0),0,param_2);
+        temp_v9 = g_btlActionReflect;
+        FUN_0022699c(g_btlActionReflect,(int)(short)((short)param_3->field_0x5c + temp_v0),0,param_2);
         *(unsigned char *)(temp_v9 + 4) = 0x13;
         *(fn_003ddee0_arg2 **)(temp_v9 + 0x14) = param_3;
         *(unsigned int *)(temp_v9 + 0x4c) = 0;
@@ -189,8 +189,8 @@ FUN_003ddee0(int param_1,unsigned int param_2,fn_003ddee0_arg2 *param_3,int para
         temp_v9 = btlGetMainState();
         *(char *)(temp_v9 + 0x2f04) = *(char *)(temp_v9 + 0x2f04) + '\x01';
         *(unsigned int *)&param_3[2].field_0x30 = *(unsigned int *)&param_3[2].field_0x30 | 2;
-        temp_v9 = DAT_00434290;
-        FUN_0022699c(DAT_00434290,
+        temp_v9 = g_btlActionReflect;
+        FUN_0022699c(g_btlActionReflect,
                      (int)(short)((short)param_3->field_0x5c + *(short *)(temp_v3 + 0x43996a) + temp_v0)
                      ,0,param_2);
         temp_v11 = temp_v4 != 0;
@@ -210,19 +210,19 @@ FUN_003ddee0(int param_1,unsigned int param_2,fn_003ddee0_arg2 *param_3,int para
             if (((((temp_v4 & 1) != 0 && (temp_v4 & 2) != 0) && (temp_v4 & 0x10) != 0) &&
                 (*(short *)(temp_v9 + 0x62) != param_3->field_0x62)) &&
                ((*(unsigned int *)(temp_v9 + 0xf8) & 2) == 0)) {
-              temp_v8 = DAT_00434290;
-              FUN_0022699c(DAT_00434290,(int)(short)((short)*(unsigned int *)(temp_v9 + 0x5c) + temp_v0),
+              temp_v8 = g_btlActionReflect;
+              FUN_0022699c(g_btlActionReflect,(int)(short)((short)*(unsigned int *)(temp_v9 + 0x5c) + temp_v0),
                            0,param_2);
               *(unsigned char *)(temp_v8 + 4) = 0x13;
               *(int *)(temp_v8 + 0x14) = temp_v9;
               *(unsigned int *)(temp_v8 + 0x4c) = 0;
               if (param_4 != 9) {
                 if ((*(unsigned int *)(temp_v9 + 0x50) & 1) != 0) {
-                  temp_v8 = *(int *)(DAT_00434290 + 8);
+                  temp_v8 = *(int *)(g_btlActionReflect + 8);
                   do {
                     if (temp_v8 == 0) {
-                      temp_v8 = DAT_00434290;
-                      FUN_0022699c(DAT_00434290,(int)(short)((short)*(int *)(temp_v9 + 0x5c) + temp_v0)
+                      temp_v8 = g_btlActionReflect;
+                      FUN_0022699c(g_btlActionReflect,(int)(short)((short)*(int *)(temp_v9 + 0x5c) + temp_v0)
                                    ,0);
                       temp_v5 = btlGetMainState();
                       FUN_0027da30(temp_v5,(int)*(short *)(temp_v9 + 0x62));
@@ -253,8 +253,8 @@ FUN_003ddee0(int param_1,unsigned int param_2,fn_003ddee0_arg2 *param_3,int para
               else {
                 FUN_002266dc(*(int *)(temp_v9 + 0x5c) + param_1,param_2,temp_v9,9);
               }
-              temp_v8 = DAT_00434290;
-              FUN_0022699c(DAT_00434290,
+              temp_v8 = g_btlActionReflect;
+              FUN_0022699c(g_btlActionReflect,
                            (int)(short)((short)*(unsigned int *)(temp_v9 + 0x5c) +
                                         *(short *)(temp_v3 + 0x43996a) + temp_v0),0,param_2);
               *(unsigned char *)(temp_v8 + 4) = 0x17;
@@ -269,8 +269,8 @@ FUN_003ddee0(int param_1,unsigned int param_2,fn_003ddee0_arg2 *param_3,int para
         break;
       case 0xf:
         if ((*puVar5 & 0x8000000) == 0) {
-          temp_v3 = DAT_00434290;
-          FUN_0022699c(DAT_00434290,(int)temp_v0,0,param_2);
+          temp_v3 = g_btlActionReflect;
+          FUN_0022699c(g_btlActionReflect,(int)temp_v0,0,param_2);
           temp_v9 = btlGetMainState();
           *(unsigned int *)(temp_v9 + 0x88) = 8;
           *(unsigned char *)(temp_v3 + 4) = 0x28;
@@ -278,9 +278,9 @@ FUN_003ddee0(int param_1,unsigned int param_2,fn_003ddee0_arg2 *param_3,int para
           *puVar5 = *puVar5 | 0x8000000;
         }
       }
-      temp_v3 = DAT_00434290;
+      temp_v3 = g_btlActionReflect;
     }
-    DAT_00434290 = temp_v3;
+    g_btlActionReflect = temp_v3;
     if ((param_5 != 0) && (temp_v1 == 0)) {
       FUN_0022699c(temp_v3,(int)temp_v0,0,param_2);
       *(unsigned char *)(temp_v3 + 4) = 0x33;

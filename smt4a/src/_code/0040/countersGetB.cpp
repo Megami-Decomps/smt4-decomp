@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern Counters *FUN_001bcea0(void);
+extern Counters *gameGetCounters(void);
 
 u32 countersGetB(s32 index)
 {
-    return FUN_001bcea0()->b[index];
+    return gameGetCounters()->b[index];
 }
 
 } /* extern "C" */

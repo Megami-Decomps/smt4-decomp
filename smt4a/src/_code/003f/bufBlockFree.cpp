@@ -11,7 +11,7 @@ typedef struct BufBlock {
 } BufBlock;
 
 extern void asdMemFree(u32 ptr);
-extern void FUN_002e3328(BufBlock *block);
+extern void asdOperatorDelete(BufBlock *block);
 
 /* Stores `value` in the first word, frees the three buffers at +0x3C/+0x40/+0x44 and the block. */
 void bufBlockFree(BufBlock *block, u32 value)
@@ -20,7 +20,7 @@ void bufBlockFree(BufBlock *block, u32 value)
     asdMemFree(block->buf3C);
     asdMemFree(block->buf40);
     asdMemFree(block->buf44);
-    FUN_002e3328(block);
+    asdOperatorDelete(block);
 }
 
 } /* extern "C" */

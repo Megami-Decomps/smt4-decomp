@@ -31,7 +31,7 @@ extern unsigned char LAB_0029a6d8; /* 0x29a6d8 */
 extern unsigned char LAB_0029a710; /* 0x29a710 */
 extern unsigned char LAB_0029a914; /* 0x29a914 */
 extern unsigned char LAB_0029a918; /* 0x29a918 */
-extern int DAT_0044e190; /* 0x44e190 */
+extern int g_statusDown; /* 0x44e190 */
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -48,8 +48,8 @@ extern unsigned int FUN_002bce00(int);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: FUN_002be624. */
-extern int FUN_002bed98(int);
-extern int FUN_002beda4(int);
+extern int vec2GetYInt(int);
+extern int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
@@ -78,7 +78,7 @@ void FUN_0029a284(int param_1,int param_2,int param_3,unsigned int param_4,unsig
   int temp_v12;
   int temp_v13;
   
-  temp_v3 = DAT_0044e190;
+  temp_v3 = g_statusDown;
   temp_v1 = FUN_002bf4f8(0x1a,param_4);
   temp_v13 = temp_v3 + 0x4d4;
   temp_v12 = FUN_0029efa8();
@@ -120,9 +120,9 @@ void FUN_0029a284(int param_1,int param_2,int param_3,unsigned int param_4,unsig
   FUN_0029a17c((int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v11 + 8) + param_1,
                (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v11 + 10) + param_2,
                (int)**(short **)(temp_v11 + 0xc),(int)(*(short **)(temp_v11 + 0xc))[1],1);
-  temp_v2 = FUN_002bed98(temp_v3 + 0x1cc);
+  temp_v2 = vec2GetYInt(temp_v3 + 0x1cc);
   temp_v0 = *(short *)(temp_v1 + 10);
-  temp_v6 = FUN_002beda4(temp_v3 + 0x1cc);
+  temp_v6 = vec2GetXInt(temp_v3 + 0x1cc);
   FUN_002bf288(2,0x1a,0x422,temp_v6 + param_1 + (int)*(short *)(temp_v1 + 8),
                temp_v2 + param_2 + (int)temp_v0,0xc9);
   temp_v2 = g_titleScene;

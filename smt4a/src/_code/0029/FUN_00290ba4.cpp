@@ -1,4 +1,4 @@
-/* NON_MATCHING: scheduling only: retail loads the DAT_0057a9b8 address before calling FUN_0035b304, built after */
+/* NON_MATCHING: scheduling only: retail loads the g_btlUi address before calling campCommonBgRelease, built after */
 /* Tears down the session: resets its sub-state, releases its handle, frees the session itself and notifies the owner's window. */
 #include "common.h"
 
@@ -20,26 +20,26 @@ typedef struct Owner {
     /* 0x78 */ u32 window;
 } Owner;
 
-extern SessionHolder DAT_0057a9b8;
+extern SessionHolder g_btlUi;
 
 extern void jobStop(u32 window, s32 arg);
 extern void asdMemFree(Session *session);
-extern void FUN_002e3328(u32 handle);
+extern void asdOperatorDelete(u32 handle);
 extern void FUN_00318c3c(void *subState);
-extern void FUN_0035b304(void);
+extern void campCommonBgRelease(void);
 
 void FUN_00290ba4(Owner *owner)
 {
     Session *session;
 
-    FUN_0035b304();
-    session = DAT_0057a9b8.session;
+    campCommonBgRelease();
+    session = g_btlUi.session;
     FUN_00318c3c(session->subState);
-    FUN_002e3328(session->handle);
+    asdOperatorDelete(session->handle);
     session->handle = 0;
-    if (DAT_0057a9b8.session != NULL) {
-        asdMemFree(DAT_0057a9b8.session);
-        DAT_0057a9b8.session = NULL;
+    if (g_btlUi.session != NULL) {
+        asdMemFree(g_btlUi.session);
+        g_btlUi.session = NULL;
     }
     jobStop(owner->window, 0);
 }

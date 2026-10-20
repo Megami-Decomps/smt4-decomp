@@ -12,11 +12,11 @@ int FUN_0014e188(...);
 int FUN_001517b4(...);
 int FUN_00163aa4(...);
 int FUN_001641b4(...);
-int FUN_001641c4(void);
-int FUN_00169ddc(...);
+int ifTouchRegionRemove(void);
+int eventQueueAddUnique(...);
 int FUN_001834a4(int, int);
-int FUN_00184758(...);
-int FUN_00184c00(...);
+int uiSpriteSetKeyframe(...);
+int uiSpriteSetImageKeyframe(...);
 int dataTableGet(...);
 int FUN_0019de98(...);
 int FUN_00213b5c(void);
@@ -24,7 +24,7 @@ int FUN_00215994(...);
 int FUN_00224880(...);
 int FUN_00228b04(int, int);
 int FUN_00275bc8(void);
-int FUN_00275f44(...);
+int scrScriptProcessStartEntry(...);
 int FUN_00284168(int, int, int, int);
 int FUN_003450d4(...);
 int FUN_003a76a8(...);
@@ -45,13 +45,13 @@ extern int g_gameState; /* 0x5f15fc */
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: FUN_00163aa4. */
 /* Supplied declaration required: FUN_001641b4. */
-/* Supplied declaration required: FUN_001641c4. */
+/* Supplied declaration required: ifTouchRegionRemove. */
 extern int FUN_001643a0(void);
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_00169ddc. */
+/* Supplied declaration required: eventQueueAddUnique. */
 /* Supplied declaration required: FUN_001834a4. */
-/* Supplied declaration required: FUN_00184758. */
-/* Supplied declaration required: FUN_00184c00. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: dataTableGet. */
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
@@ -61,7 +61,7 @@ extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_00224880. */
 /* Supplied declaration required: FUN_00228b04. */
 /* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00284168. */
 extern int FUN_002a4894(int);
 extern int FUN_002a4b74(void);
@@ -71,7 +71,7 @@ extern int FUN_00348ed0(int);
 /* Supplied declaration required: obj04Finish. */
 /* Supplied declaration required: FUN_003a76a8. */
 extern int FUN_003d21dc(void);
-extern int FUN_003f86c8(unsigned int);
+extern int loadSlotIsLoaded(unsigned int);
 /* Supplied declaration required: fillThreeWordsWithByte. */
 
 
@@ -114,7 +114,7 @@ void FUN_00202ea4(void)
       FUN_003a76a8(0);
       temp_v6 = FUN_00213b5c();
       if ((temp_v6 == 4) && (*(char *)(temp_v7 + 0xc0) != '\0')) {
-        FUN_00275f44(*(unsigned int *)(temp_v7 + 0x84),1);
+        scrScriptProcessStartEntry(*(unsigned int *)(temp_v7 + 0x84),1);
       }
       else {
         temp_v6 = FUN_003d21dc();
@@ -126,7 +126,7 @@ void FUN_00202ea4(void)
           temp_v4 = *(unsigned int *)(temp_v7 + 0x84);
           temp_v9 = 2;
         }
-        FUN_00275f44(temp_v4,temp_v9);
+        scrScriptProcessStartEntry(temp_v4,temp_v9);
       }
       temp_v4 = FUN_00213b5c();
       *(unsigned int *)(temp_v7 + 0x4c4) = temp_v4;
@@ -134,7 +134,7 @@ void FUN_00202ea4(void)
       temp_v6 = 0;
       if (0 < *(short *)(g_config + 0x78)) {
         do {
-          FUN_001641c4();
+          ifTouchRegionRemove();
           temp_v6 = temp_v6 + 1;
         } while (temp_v6 < *(short *)(temp_v7 + 0x78));
       }
@@ -222,14 +222,14 @@ void FUN_00202ea4(void)
         FUN_001641b4(0x100020f);
         FUN_003a76a8(1);
         FUN_0019de98(0,0xf4f4f4ff);
-        FUN_00184758(temp_v7 + 0xe8,1,0);
-        FUN_00184c00(temp_v7 + 0xe8,1,0);
+        uiSpriteSetKeyframe(temp_v7 + 0xe8,1,0);
+        uiSpriteSetImageKeyframe(temp_v7 + 0xe8,1,0);
         temp_v6 = 0;
         do {
           temp_v11 = temp_v7 + temp_v6 * 0x8c;
           FUN_0014e188(temp_v11 + 0x174,0x24,0x57,temp_v7 + 200,1);
-          FUN_00184758(temp_v11 + 0x174,1,0);
-          FUN_00184c00(temp_v11 + 0x174,1,0);
+          uiSpriteSetKeyframe(temp_v11 + 0x174,1,0);
+          uiSpriteSetImageKeyframe(temp_v11 + 0x174,1,0);
           temp_v6 = temp_v6 + 1;
         } while (temp_v6 < 5);
         *(unsigned int *)(temp_v7 + 0x4bc) = 0;
@@ -247,7 +247,7 @@ void FUN_00202ea4(void)
         FUN_00213b5c();
         temp_v6 = FUN_00213b5c();
         if (((temp_v6 == 4) || (temp_v6 = FUN_003d21dc(), temp_v6 != 0)) || (g_gameState == 0x2a)) {
-          FUN_00169ddc(0x100020f);
+          eventQueueAddUnique(0x100020f);
           temp_v7 = g_config;
           *(unsigned int *)(g_config + 100) = 2;
           *(unsigned int *)(temp_v7 + 0x68) = 0;
@@ -268,8 +268,8 @@ void FUN_00202ea4(void)
         temp_v4 = *(unsigned int *)(temp_v7 + 0x84);
         temp_v9 = 7;
       }
-      FUN_00275f44(temp_v4,temp_v9);
-      FUN_00169ddc(0x100020e);
+      scrScriptProcessStartEntry(temp_v4,temp_v9);
+      eventQueueAddUnique(0x100020e);
       obj04Finish();
       FUN_003a76a8(1);
       sysPlaySe(0xa0);
@@ -308,7 +308,7 @@ void FUN_00202ea4(void)
           temp_v4 = FUN_00213b5c();
           *(unsigned int *)(temp_v6 + 0x4c4) = temp_v4;
           FUN_003a76a8(1);
-          FUN_00275f44(*(unsigned int *)(temp_v6 + 0x84),8);
+          scrScriptProcessStartEntry(*(unsigned int *)(temp_v6 + 0x84),8);
           sysPlaySe(5);
           temp_v7 = g_config;
           *(unsigned int *)(g_config + 100) = 5;
@@ -343,7 +343,7 @@ void FUN_00202ea4(void)
       break;
     case 3:
       temp_v11 = *(int *)(g_config + 0xbc);
-      temp_v7 = FUN_003f86c8(0x36);
+      temp_v7 = loadSlotIsLoaded(0x36);
       if ((temp_v7 != 0) && (pcVar12 = pcVar13, temp_v11 < 5)) {
         switch((short)temp_v11) {
         case 0:
@@ -369,7 +369,7 @@ void FUN_00202ea4(void)
         pcVar12 = (char *)(temp_v11 + temp_v7 * 0xc + 0x1e);
       }
       FUN_003180c4(0,pcVar12);
-      FUN_00275f44(*(unsigned int *)(temp_v6 + 0x84),5);
+      scrScriptProcessStartEntry(*(unsigned int *)(temp_v6 + 0x84),5);
       temp_v4 = 4;
       *(unsigned int *)(temp_v6 + 0x68) = temp_v4;
       return;
@@ -385,7 +385,7 @@ void FUN_00202ea4(void)
 LAB_00203688:
       temp_v7 = FUN_00213b5c();
       if ((temp_v7 == 4) && (*(char *)(temp_v6 + 0xc0) != '\0')) {
-        FUN_00275f44(*(unsigned int *)(temp_v6 + 0x84),1);
+        scrScriptProcessStartEntry(*(unsigned int *)(temp_v6 + 0x84),1);
       }
       else {
         temp_v7 = FUN_003d21dc();
@@ -397,7 +397,7 @@ LAB_00203688:
           temp_v4 = *(unsigned int *)(temp_v6 + 0x84);
           temp_v9 = 2;
         }
-        FUN_00275f44(temp_v4,temp_v9);
+        scrScriptProcessStartEntry(temp_v4,temp_v9);
       }
       FUN_003a76a8(0);
       temp_v7 = g_config;
@@ -409,7 +409,7 @@ LAB_00203688:
       if (temp_v7 == 2) {
         FUN_00215994(*(unsigned int *)(temp_v6 + 0x4c4));
         temp_v7 = FUN_00213b5c();
-        temp_v11 = FUN_003f86c8(0x36);
+        temp_v11 = loadSlotIsLoaded(0x36);
         pcVar10 = pcVar12;
         if ((temp_v11 != 0) && (pcVar10 = pcVar13, temp_v7 < 5)) {
           switch((short)temp_v7) {
@@ -437,7 +437,7 @@ LAB_00203688:
         }
         FUN_003180c4(0,pcVar10);
         temp_v11 = *(int *)(temp_v6 + *(int *)(temp_v6 + 0x88) * 8 + 0x94);
-        temp_v7 = FUN_003f86c8(0x36);
+        temp_v7 = loadSlotIsLoaded(0x36);
         if ((temp_v7 != 0) && (pcVar12 = pcVar13, temp_v11 < 5)) {
           switch((short)temp_v11) {
           case 0:
@@ -463,7 +463,7 @@ LAB_00203688:
           pcVar12 = (char *)(temp_v11 + temp_v7 * 0xc + 0x1e);
         }
         FUN_003180c4(1,pcVar12);
-        FUN_00275f44(*(unsigned int *)(temp_v6 + 0x84),3);
+        scrScriptProcessStartEntry(*(unsigned int *)(temp_v6 + 0x84),3);
         *(unsigned int *)(temp_v6 + 0x68) = 1;
         return;
       }

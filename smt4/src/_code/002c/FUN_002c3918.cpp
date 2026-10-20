@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002c52f8(void);
+int asdFatalError(void);
 int nn_fnd_detail_CreateHeap(void);
 
-/* Supplied declaration required: FUN_002c52f8. */
+/* Supplied declaration required: asdFatalError. */
 /* Supplied declaration required: nn_fnd_detail_CreateHeap. */
 
 
@@ -20,7 +20,7 @@ void FUN_002c3918(int param_1)
   temp_v0 = param_1 + 0x18;
   nn_fnd_detail_CreateHeap();
   if (temp_v0 == 0) {
-    FUN_002c52f8();
+    asdFatalError();
   }
   *(unsigned int *)(param_1 + 0x54) = 0;
   return;

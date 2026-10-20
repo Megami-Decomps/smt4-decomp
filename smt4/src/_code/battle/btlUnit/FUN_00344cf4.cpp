@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0023c9e8(unsigned int, int, int, int, int);
 int FUN_0023cd08(unsigned int, int, int);
-int FUN_00282924(unsigned int *, int);
+int btlMainFindEntryByListedId(unsigned int *, int);
 int FUN_00289fa8(...);
 int btlGetMainState(void);
 
@@ -28,11 +28,11 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_2_stack;
 
-extern unsigned int DAT_00439ca8; /* 0x439ca8 */
+extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 
 /* Supplied declaration required: FUN_0023c9e8. */
 /* Supplied declaration required: FUN_0023cd08. */
-/* Supplied declaration required: FUN_00282924. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_00289fa8. */
 /* Supplied declaration required: btlGetMainState. */
 extern int FUN_003ae638(unsigned int, int);
@@ -52,14 +52,14 @@ void FUN_00344cf4(unsigned int param_1,fn_00344cf4_arg1 *param_2)
   int temp_v6;
   
   puVar2 = (unsigned int *)btlGetMainState();
-  FUN_00282924(puVar2,(int)*(short *)((int)param_2->field_0x14 + 0x62));
+  btlMainFindEntryByListedId(puVar2,(int)*(short *)((int)param_2->field_0x14 + 0x62));
   if (puVar2 == (unsigned int *)0x0) {
     param_2->field_0x2 = 0;
     return;
   }
   if (param_2->field_0x20 != '\0') {
     if ((param_2->field_0x20 == '\x01') &&
-       (temp_v3 = FUN_003ae638(DAT_00439ca8,(int)param_2->field_0x26), temp_v3 == 0)) {
+       (temp_v3 = FUN_003ae638(g_btlUiBlock,(int)param_2->field_0x26), temp_v3 == 0)) {
       param_2->field_0x2 = 0;
       return;
     }
@@ -77,25 +77,25 @@ void FUN_00344cf4(unsigned int param_1,fn_00344cf4_arg1 *param_2)
               param_2->field_0x2 = 0;
               return;
             }
-            temp_v1 = DAT_00439ca8;
-            FUN_00289fa8(DAT_00439ca8,2,1);
+            temp_v1 = g_btlUiBlock;
+            FUN_00289fa8(g_btlUiBlock,2,1);
             temp_v0 = (short)temp_v1;
           }
           else {
-            temp_v1 = DAT_00439ca8;
-            FUN_00289fa8(DAT_00439ca8,3,1);
+            temp_v1 = g_btlUiBlock;
+            FUN_00289fa8(g_btlUiBlock,3,1);
             temp_v0 = (short)temp_v1;
           }
         }
         else {
-          temp_v1 = DAT_00439ca8;
-          FUN_00289fa8(DAT_00439ca8,0,1);
+          temp_v1 = g_btlUiBlock;
+          FUN_00289fa8(g_btlUiBlock,0,1);
           temp_v0 = (short)temp_v1;
         }
       }
       else {
-        temp_v1 = DAT_00439ca8;
-        FUN_00289fa8(DAT_00439ca8,1);
+        temp_v1 = g_btlUiBlock;
+        FUN_00289fa8(g_btlUiBlock,1);
         temp_v0 = (short)temp_v1;
       }
     }
@@ -118,25 +118,25 @@ void FUN_00344cf4(unsigned int param_1,fn_00344cf4_arg1 *param_2)
               param_2->field_0x2 = 0;
               return;
             }
-            temp_v1 = DAT_00439ca8;
-            FUN_0023c9e8(DAT_00439ca8,temp_v3,2,temp_v5,temp_v2);
+            temp_v1 = g_btlUiBlock;
+            FUN_0023c9e8(g_btlUiBlock,temp_v3,2,temp_v5,temp_v2);
             temp_v0 = (short)temp_v1;
           }
           else {
-            temp_v1 = DAT_00439ca8;
-            FUN_0023c9e8(DAT_00439ca8,temp_v3,3,temp_v5,temp_v2);
+            temp_v1 = g_btlUiBlock;
+            FUN_0023c9e8(g_btlUiBlock,temp_v3,3,temp_v5,temp_v2);
             temp_v0 = (short)temp_v1;
           }
         }
         else {
-          temp_v1 = DAT_00439ca8;
-          FUN_0023c9e8(DAT_00439ca8,temp_v3,0,temp_v5,temp_v2);
+          temp_v1 = g_btlUiBlock;
+          FUN_0023c9e8(g_btlUiBlock,temp_v3,0,temp_v5,temp_v2);
           temp_v0 = (short)temp_v1;
         }
       }
       else {
-        temp_v1 = DAT_00439ca8;
-        FUN_0023c9e8(DAT_00439ca8,temp_v3,1,temp_v5,temp_v2);
+        temp_v1 = g_btlUiBlock;
+        FUN_0023c9e8(g_btlUiBlock,temp_v3,1,temp_v5,temp_v2);
         temp_v0 = (short)temp_v1;
       }
     }

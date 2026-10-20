@@ -12,7 +12,7 @@ int FUN_0023aac8(...);
 int FUN_0023aca0(...);
 int sysMemClear(void);
 int FUN_002efbb8(...);
-int FUN_0030ea58(int, unsigned char *);
+int libc_strcmp(int, unsigned char *);
 int FUN_00389cf0(...);
 int FUN_003b6728(...);
 int SBORROW4(int, int);
@@ -70,7 +70,7 @@ extern unsigned char LAB_003480c4; /* 0x3480c4 */
 extern int wstrlen(int);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002efbb8. */
-/* Supplied declaration required: FUN_0030ea58. */
+/* Supplied declaration required: libc_strcmp. */
 extern unsigned int FUN_0031b53c(int);
 /* Supplied declaration required: FUN_00389cf0. */
 /* Supplied declaration required: FUN_003b6728. */
@@ -328,8 +328,8 @@ LAB_00347c88:
           temp_v11 = temp_v11 + temp_v5;
           temp_v6 = temp_v11 + 0x201;
           temp_v5 = temp_v6;
-          FUN_0030ea58(temp_v6,&LAB_003480c0);
-          if ((temp_v5 == 0) || (FUN_0030ea58(temp_v6,&LAB_003480c4), temp_v6 == 0)) {
+          libc_strcmp(temp_v6,&LAB_003480c0);
+          if ((temp_v5 == 0) || (libc_strcmp(temp_v6,&LAB_003480c4), temp_v6 == 0)) {
             *(unsigned char *)(temp_v11 + 0x201) = 0;
           }
         }

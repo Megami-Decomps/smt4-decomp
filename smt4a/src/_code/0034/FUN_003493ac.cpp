@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_0057f268; /* 0x57f268 */
+extern int g_partyPanel; /* 0x57f268 */
 
 
 unsigned char FUN_003493ac(void)
@@ -13,8 +13,8 @@ unsigned char FUN_003493ac(void)
   unsigned char temp_v0;
   
   temp_v0 = 0;
-  if (DAT_0057f268 != 0) {
-    temp_v0 = *(unsigned char *)(DAT_0057f268 + 0x9b4);
+  if (g_partyPanel != 0) {
+    temp_v0 = *(unsigned char *)(g_partyPanel + 0x9b4);
   }
   return temp_v0;
 }

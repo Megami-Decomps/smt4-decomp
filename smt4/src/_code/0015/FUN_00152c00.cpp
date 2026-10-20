@@ -22,13 +22,13 @@ struct fn_00152c00_arg0 {
 
 extern unsigned int DAT_00464b7c; /* 0x464b7c */
 extern unsigned int DAT_00464b80; /* 0x464b80 */
-extern unsigned int DAT_00464b84; /* 0x464b84 */
+extern unsigned int g_asdModelTransformBuilder; /* 0x464b84 */
 extern unsigned int DAT_00464b88; /* 0x464b88 */
 extern unsigned int DAT_00464b8c; /* 0x464b8c */
 extern int DAT_00464b90; /* 0x464b90 */
 extern int DAT_00464b94; /* 0x464b94 */
 extern int DAT_00464b98; /* 0x464b98 */
-extern int DAT_004dad80; /* 0x4dad80 */
+extern int g_asdLightCount; /* 0x4dad80 */
 extern unsigned char DAT_004dad84; /* 0x4dad84 */
 extern unsigned char DAT_004dad85; /* 0x4dad85 */
 extern int DAT_004dad98; /* 0x4dad98 */
@@ -154,13 +154,13 @@ void FUN_00152c00(fn_00152c00_arg0 *param_1)
   if ((-1 < temp_v3) && (*(int *)(temp_v5 + 0x18) == *(int *)(temp_v5 + 0x1c))) {
     (&DAT_004dad84)[temp_v3 * 0x18] = 0;
     (&DAT_004dad85)[temp_v3 * 0x18] = 0;
-    nw_gfx_SceneNode_AttachChild((&DAT_00464b84)[temp_v3],(&DAT_00464b94)[temp_v3]);
-    sceneTraverserVisit((&DAT_00464b7c)[temp_v3],(&DAT_00464b84)[temp_v3]);
+    nw_gfx_SceneNode_AttachChild((&g_asdModelTransformBuilder)[temp_v3],(&DAT_00464b94)[temp_v3]);
+    sceneTraverserVisit((&DAT_00464b7c)[temp_v3],(&g_asdModelTransformBuilder)[temp_v3]);
   }
   if (param_1->field_0x14 != (void *)0x0) {
     if (*(int *)((int)param_1->field_0x14 + 8) == 0) {
-      sceneTraverserVisit(DAT_00464b7c,DAT_00464b84);
-      DAT_004dad80 = DAT_004dad80 - 1;
+      sceneTraverserVisit(DAT_00464b7c,g_asdModelTransformBuilder);
+      g_asdLightCount = g_asdLightCount - 1;
     }
     else {
       sceneTraverserVisit(DAT_00464b80,DAT_00464b88);
@@ -168,8 +168,8 @@ void FUN_00152c00(fn_00152c00_arg0 *param_1)
     }
   }
   else if (param_1->field_0xc < 3) {
-    sceneTraverserVisit(DAT_00464b7c,DAT_00464b84);
-    DAT_004dad80 = DAT_004dad80 - 1;
+    sceneTraverserVisit(DAT_00464b7c,g_asdModelTransformBuilder);
+    g_asdLightCount = g_asdLightCount - 1;
   }
   else {
     sceneTraverserVisit(DAT_00464b80,DAT_00464b88);

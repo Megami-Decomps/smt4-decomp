@@ -7,12 +7,12 @@ typedef struct Object {
     /* 0x4C */ u8 member4C[1];
 } Object;
 
-Object *FUN_001801a4(void);
+Object *gameGetPlayerData(void);
 
-/* Returns the address of the member at 0x4C of the object FUN_001801a4 returns. */
+/* Returns the address of the member at 0x4C of the object gameGetPlayerData returns. */
 u8 *FUN_0015687c(void)
 {
-    return FUN_001801a4()->member4C;
+    return gameGetPlayerData()->member4C;
 }
 
 } /* extern "C" */

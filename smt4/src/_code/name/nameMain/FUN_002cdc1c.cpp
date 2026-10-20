@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001d3848(unsigned int *, int);
 int FUN_0028dc98(...);
 int FUN_00295660(int, unsigned int);
-int FUN_002b8838(int);
+int buttonHelpSetPreset(int);
 int asdMemFree(void);
 int FUN_0033f7f4(void);
 
@@ -21,13 +21,13 @@ extern signed char DAT_0044d181; /* 0x44d181 */
 extern unsigned int *DAT_0044d184; /* 0x44d184 */
 
 /* Supplied declaration required: FUN_001d3848. */
-extern unsigned int FUN_0024bb38(void);
-extern unsigned int FUN_00288f60(void);
+extern unsigned int gameDataGetSecondName(void);
+extern unsigned int gameDataGetPlayerName(void);
 /* Supplied declaration required: FUN_0028dc98. */
 /* Supplied declaration required: FUN_00295660. */
 extern unsigned int scrGetArg(unsigned int);
 extern int jobFind(unsigned int);
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_0033f7f4. */
 
@@ -69,19 +69,19 @@ unsigned int FUN_002cdc1c(void)
   }
   if (temp_v2 != 1) {
     if (temp_v2 == 2) {
-      temp_v1 = FUN_0024bb38();
+      temp_v1 = gameDataGetSecondName();
       FUN_00295660(0x33,temp_v1);
     }
   }
   else {
-    temp_v1 = FUN_00288f60();
+    temp_v1 = gameDataGetPlayerName();
     FUN_00295660(0x33,temp_v1);
   }
   g_name = 0;
   FUN_0028dc98(0xffffffff);
   if (DAT_0044d181 != '\0') {
     DAT_0044d181 = '\0';
-    FUN_002b8838(0x90);
+    buttonHelpSetPreset(0x90);
   }
   return 1;
 }

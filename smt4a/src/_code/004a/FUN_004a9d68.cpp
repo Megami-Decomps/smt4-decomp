@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001846d0(unsigned int *, int);
+int uiSpriteSelectAnim(unsigned int *, int);
 int FUN_002a1850(int *, int, unsigned int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -12,12 +12,12 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_2_stack;
 
-extern unsigned int *DAT_0057a9c8; /* 0x57a9c8 */
+extern unsigned int *g_btlUiBlock; /* 0x57a9c8 */
 extern unsigned int DAT_0057a9f0; /* 0x57a9f0 */
 extern unsigned int DAT_0057a9f4; /* 0x57a9f4 */
 
 extern unsigned int FUN_00152f54(void);
-/* Supplied declaration required: FUN_001846d0. */
+/* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: FUN_002a1850. */
 extern int FUN_003e8430(unsigned int);
 
@@ -40,15 +40,15 @@ unsigned int FUN_004a9d68(unsigned int param_1,unsigned int *param_2)
   unsigned int uStack_34;
   unsigned int uStack_30;
   
-  puVar1 = DAT_0057a9c8;
+  puVar1 = g_btlUiBlock;
   temp_v2 = 0;
   do {
-    if (*(short *)(DAT_0057a9c8 + temp_v2 * 0x53 + 0x468b) == 0) {
+    if (*(short *)(g_btlUiBlock + temp_v2 * 0x53 + 0x468b) == 0) {
       if (temp_v2 >= 0xc) {
         return 0xffffffff;
       }
       temp_v4 = 0;
-      *(unsigned short *)(DAT_0057a9c8 + temp_v2 * 0x53 + 0x468b) = 2;
+      *(unsigned short *)(g_btlUiBlock + temp_v2 * 0x53 + 0x468b) = 2;
       *(unsigned short *)((int)puVar1 + temp_v2 * 0x14c + 0x11a2e) = 0;
       puVar1[temp_v2 * 0x53 + 0x468c] = 0;
       *(unsigned char *)(puVar1 + temp_v2 * 0x53 + 0x468d) = 0;
@@ -80,8 +80,8 @@ unsigned int FUN_004a9d68(unsigned int param_1,unsigned int *param_2)
         puVar4[1] = temp_v3;
       }
       else {
-        FUN_001846d0(puVar1 + temp_v2 * 0x53 + 0x4645,10);
-        FUN_001846d0(puVar1 + temp_v2 * 0x53 + 0x4668,0xb);
+        uiSpriteSelectAnim(puVar1 + temp_v2 * 0x53 + 0x4645,10);
+        uiSpriteSelectAnim(puVar1 + temp_v2 * 0x53 + 0x4668,0xb);
       }
       return temp_v2;
     }

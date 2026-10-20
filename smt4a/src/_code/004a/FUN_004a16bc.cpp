@@ -6,8 +6,8 @@ extern "C" {
 
 int sysPlaySe(unsigned int);
 int FUN_00180118(unsigned int);
-int FUN_00275f44(unsigned int, int);
-int FUN_002e342c(unsigned char [304], unsigned int);
+int scrScriptProcessStartEntry(unsigned int, int);
+int libc_strcpy(unsigned char [304], unsigned int);
 int FUN_003180c4(int, unsigned char [304]);
 int FUN_0032d0c8(...);
 int FUN_003343f0(int);
@@ -28,8 +28,8 @@ extern unsigned int FUN_0014bf3c(unsigned int, unsigned int);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00180118. */
 extern unsigned int slotRecordFindById(unsigned short);
-/* Supplied declaration required: FUN_00275f44. */
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
+/* Supplied declaration required: libc_strcpy. */
 extern int FUN_002f036c(void);
 /* Supplied declaration required: FUN_003180c4. */
 /* Supplied declaration required: FUN_0032d0c8. */
@@ -84,12 +84,12 @@ void FUN_004a16bc(int param_1)
     temp_v6 = (unsigned int)*(unsigned short *)(param_1 + 0x864 + temp_v2 * 0x20 + 4);
     temp_v4 = temp_v6;
     FUN_00180118(temp_v6);
-    FUN_002e342c(temp_v10,temp_v4);
+    libc_strcpy(temp_v10,temp_v4);
     FUN_003180c4(8,temp_v10);
     temp_v5 = FUN_0014bf3c(temp_v6,0);
-    FUN_002e342c(temp_v10,temp_v5);
+    libc_strcpy(temp_v10,temp_v5);
     FUN_003180c4(0x10,temp_v10);
-    FUN_00275f44(*(unsigned int *)(param_1 + 0x85c),7);
+    scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x85c),7);
     FUN_003343f0(1);
     *(unsigned int *)(param_1 + 0x14) = 8;
     *(unsigned int *)(param_1 + 0x18) = 0;
@@ -133,7 +133,7 @@ void FUN_004a16bc(int param_1)
       FUN_003343f0(1);
       *(unsigned int *)(param_1 + 0x14) = 9;
       *(unsigned int *)(param_1 + 0x18) = 0;
-      FUN_00275f44(*(unsigned int *)(param_1 + 0x85c),8);
+      scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x85c),8);
       sendEvent100020E();
       return;
     }

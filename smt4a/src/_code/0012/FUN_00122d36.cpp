@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_002e7232(void *buffer);
+void sharedRefRelease(void *buffer);
 void FUN_0030f8a2(void *object, void *buffer, u32 arg);
 
 typedef struct BufferOwner {
@@ -19,7 +19,7 @@ void FUN_00122d36(BufferOwner *object, u32 arg)
     if (object->attached != 0) {
         FUN_0030f8a2(object, buffer, arg);
     }
-    FUN_002e7232(buffer);
+    sharedRefRelease(buffer);
     object->buffer = NULL;
     object->attached = 0;
 }

@@ -5,13 +5,13 @@
 extern "C" {
 
 int FUN_002c7b8c(int, int);
-int FUN_003fd63c(int, int);
+int gameFlagSetValue(int, int);
 
 extern unsigned short scrGetArg(unsigned int);
 extern int FUN_002c2758(unsigned short);
 /* Supplied declaration required: FUN_002c7b8c. */
 extern int FUN_003de92c(unsigned short);
-/* Supplied declaration required: FUN_003fd63c. */
+/* Supplied declaration required: gameFlagSetValue. */
 
 
 unsigned int FUN_0038b21c(void)
@@ -31,7 +31,7 @@ unsigned int FUN_0038b21c(void)
     do {
       temp_v0 = *(short *)(temp_v2 + temp_v3 * 2 + 4);
       if (temp_v0 != 0) {
-        FUN_003fd63c(temp_v0,1);
+        gameFlagSetValue(temp_v0,1);
       }
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 3);

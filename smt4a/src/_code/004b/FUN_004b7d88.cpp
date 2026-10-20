@@ -12,8 +12,8 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: sysPlaySe. */
-extern int FUN_0018719c(unsigned int);
-extern int FUN_003e46f4(unsigned int);
+extern int gameFlagIsSet(unsigned int);
+extern int gameDataFlagTestBit(unsigned int);
 
 
 void FUN_004b7d88(int param_1)
@@ -23,9 +23,9 @@ void FUN_004b7d88(int param_1)
   short temp_v0;
   int temp_v1;
   
-  temp_v1 = FUN_0018719c(0x40c);
+  temp_v1 = gameFlagIsSet(0x40c);
   if (temp_v1 != 0) {
-    temp_v1 = FUN_003e46f4(0x76);
+    temp_v1 = gameDataFlagTestBit(0x76);
     temp_v0 = *(short *)(param_1 + 0x3c);
     if (temp_v1 != 0) {
       if (temp_v0 == 4) {

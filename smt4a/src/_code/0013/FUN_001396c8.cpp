@@ -10,12 +10,12 @@ int addressBlockAllocate(unsigned int *, int);
 int FUN_00146910(int);
 int FUN_00146ac0(void);
 int FUN_00146b14(int);
-int FUN_00146bf4(int, unsigned int);
+int nnosInitAddressSpaceOnce(int, unsigned int);
 int FUN_00146c28(void);
 int FUN_00159110(unsigned int *, unsigned int, unsigned int, int);
-int FUN_00188b60(unsigned int *);
+int nn_os_CriticalSection_Initialize(unsigned int *);
 int sysMemClear(unsigned int *, int);
-int FUN_002e6dd4(void);
+int rt_memclr(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -56,15 +56,15 @@ extern unsigned int DAT_006404fc; /* 0x6404fc */
 /* Supplied declaration required: FUN_00146898. */
 /* Supplied declaration required: addressBlockAllocate. */
 /* Supplied declaration required: FUN_00146910. */
-extern int FUN_00146ab0(void);
+extern int nnosGetAppMemAlloc(void);
 /* Supplied declaration required: FUN_00146ac0. */
 /* Supplied declaration required: FUN_00146b14. */
-/* Supplied declaration required: FUN_00146bf4. */
+/* Supplied declaration required: nnosInitAddressSpaceOnce. */
 /* Supplied declaration required: FUN_00146c28. */
 /* Supplied declaration required: FUN_00159110. */
-/* Supplied declaration required: FUN_00188b60. */
+/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_002e6dd4. */
+/* Supplied declaration required: rt_memclr. */
 extern void nn_init_InitializeAllocator(unsigned int);
 
 
@@ -77,13 +77,13 @@ void FUN_001396c8(void)
   unsigned int temp_v1;
   int temp_v2;
   
-  temp_v0 = FUN_00146ab0();
+  temp_v0 = nnosGetAppMemAlloc();
   temp_v2 = temp_v0;
   FUN_00146ac0();
   FUN_00146910((temp_v0 - temp_v2) - 0x3000000);
   FUN_00146b14(0x3000000);
   temp_v1 = FUN_00146898();
-  FUN_00146bf4(0x8000000,temp_v1);
+  nnosInitAddressSpaceOnce(0x8000000,temp_v1);
   FUN_00146c28();
   nn_init_InitializeAllocator(0x100000);
   FUN_001400ac();
@@ -121,10 +121,10 @@ void FUN_001396c8(void)
   puVar1 = DAT_005b4070;
   DAT_005b4070[5] = DAT_005b4070[2];
   puVar1[6] = puVar1[3];
-  FUN_002e6dd4();
+  rt_memclr();
   puVar1 = DAT_005b4070;
   FUN_00159110(DAT_005b4070 + 7,DAT_005b4070[5],DAT_005b4070[6],0x100);
-  FUN_00188b60(puVar1 + 0x1d);
+  nn_os_CriticalSection_Initialize(puVar1 + 0x1d);
   return;
 }
 

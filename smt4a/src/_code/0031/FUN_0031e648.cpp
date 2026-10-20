@@ -13,7 +13,7 @@ int FUN_00418820(int);
 extern int FUN_00162ea4(void);
 /* Supplied declaration required: sysPlaySe. */
 extern unsigned short scrGetArg(void);
-extern int FUN_002deb84(void);
+extern int scrGetCommandFrame(void);
 /* Supplied declaration required: FUN_002f0c18. */
 extern int FUN_002f151c(void);
 /* Supplied declaration required: FUN_002f1554. */
@@ -29,7 +29,7 @@ unsigned char FUN_0031e648(void)
   int temp_v1;
   
   temp_v0 = scrGetArg();
-  temp_v1 = FUN_002deb84();
+  temp_v1 = scrGetCommandFrame();
   if (temp_v1 == 0) {
     FUN_00418820(temp_v0);
     temp_v1 = FUN_00162ea4();

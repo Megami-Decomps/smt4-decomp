@@ -12,7 +12,7 @@ int FUN_0040a918(unsigned int, int);
 
 extern unsigned char LAB_00353888; /* 0x353888 */
 extern unsigned char LAB_003538a0; /* 0x3538a0 */
-extern int DAT_00580ca0; /* 0x580ca0 */
+extern int g_mapGimic; /* 0x580ca0 */
 
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_00178b04. */
@@ -33,7 +33,7 @@ void FUN_003537c8(int param_1)
   
   temp_v0 = 0;
   while( 1 ) {
-    temp_v2 = DAT_00580ca0 + temp_v0 * 0x18;
+    temp_v2 = g_mapGimic + temp_v0 * 0x18;
     if (*(char *)(temp_v2 + 0x8c4) == '\0') break;
     temp_v0 = temp_v0 + 1;
     if (temp_v0 >= 10) {

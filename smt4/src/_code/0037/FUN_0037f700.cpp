@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_002a215c(u32 a, int b);
+int linkListEraseObject(u32 a, int b);
 int FUN_002c4038(int obj);
 int FUN_0037b140(int slot);
 int FUN_0037bd18(int slot);
@@ -18,7 +18,7 @@ void FUN_0037f700(int player)
     nw_snd_internal_driver_SequenceSoundPlayer_FinishPlayer(player);
     if (*(char *)(player + 0xc) != 0) {
         a = FUN_002a2174();
-        FUN_002a215c(a, player + 0x44);
+        linkListEraseObject(a, player + 0x44);
         *(u8 *)(player + 0xc) = 0;
     }
     i = 0;

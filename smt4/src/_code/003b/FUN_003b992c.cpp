@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0022b778(void);
-int FUN_00296f4c(unsigned int, unsigned int);
+int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int FUN_00297060(int, unsigned int);
 int scrScriptProcessDestroy(unsigned int);
 int FUN_002be624(unsigned char [128], unsigned char *, int, int);
@@ -20,8 +20,8 @@ extern unsigned char DAT_0049fa84; /* 0x49fa84 */
 
 extern int FUN_0019e0c0(unsigned int);
 /* Supplied declaration required: FUN_0022b778. */
-extern unsigned int FUN_00290d74(int, unsigned char *);
-/* Supplied declaration required: FUN_00296f4c. */
+extern unsigned int tableGroupFindEntryIndex(int, unsigned char *);
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297060. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_002be624. */
@@ -67,8 +67,8 @@ void FUN_003b992c(int param_1)
   FUN_00297060(temp_v0,temp_v1);
   *(int *)(param_1 + 0xdbc) = temp_v0;
   *(unsigned int *)(temp_v0 + 0x108) = 2;
-  temp_v1 = FUN_00290d74(*piVar3,&DAT_0049fa84);
-  FUN_00296f4c(*(unsigned int *)(param_1 + 0xdbc),temp_v1);
+  temp_v1 = tableGroupFindEntryIndex(*piVar3,&DAT_0049fa84);
+  scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0xdbc),temp_v1);
   *(int *)(param_1 + 0x2c) = *(int *)(param_1 + 0x2c) + 1;
   return;
 }

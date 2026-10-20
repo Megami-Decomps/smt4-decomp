@@ -15,7 +15,7 @@ typedef struct {
 
 /* Supplied declaration required: rbTreeRotateRight_00307ffa. */
 /* Supplied declaration required: rbTreeRotateLeft_0030802c. */
-extern int FUN_00308566(int, unsigned short *, int);
+extern int lessU16(int, unsigned short *, int);
 extern char *FUN_003102ae(int);
 
 
@@ -36,7 +36,7 @@ void FUN_00307ed0(unsigned int *param_1,int param_2,int param_3,int param_4,unsi
   }
   *(int *)(param_2 + 0x14) = *(int *)(param_2 + 0x14) + 1;
   if (((*(int *)(param_2 + 0x10) == param_4) || (param_3 != 0)) ||
-     (temp_v0 = FUN_00308566(param_2 + 0x19,param_5,param_4 + 0x10), temp_v0 != 0)) {
+     (temp_v0 = lessU16(param_2 + 0x19,param_5,param_4 + 0x10), temp_v0 != 0)) {
     *(char **)(param_4 + 8) = pcVar1;
     temp_v0 = *(int *)(param_2 + 0x10);
     if (temp_v0 == param_4) {

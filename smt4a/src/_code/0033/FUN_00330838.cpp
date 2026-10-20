@@ -13,7 +13,7 @@ extern int g_eventCommand; /* 0x57f554 */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 extern int FUN_00203d74(void);
 /* Supplied declaration required: scrGetArg. */
-extern int FUN_002deb84(void);
+extern int scrGetCommandFrame(void);
 /* Supplied declaration required: FUN_0038a1d4. */
 
 
@@ -26,7 +26,7 @@ unsigned char FUN_00330838(void)
   int temp_v2;
   unsigned char temp_v3;
   
-  temp_v0 = FUN_002deb84();
+  temp_v0 = scrGetCommandFrame();
   if (temp_v0 == 0) {
     temp_v1 = scrGetArg(0);
     temp_v2 = scrGetArg(1);

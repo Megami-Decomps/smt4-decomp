@@ -9,7 +9,7 @@ int FUN_001ad264(...);
 int FUN_001ad2a0(...);
 int FUN_001ad484(...);
 int FUN_00215a34(...);
-int FUN_002aa568(int, unsigned char *);
+int libc_strcmp(int, unsigned char *);
 int asdMemFree(...);
 int memClear(void);
 int asdMemAlloc(...);
@@ -67,8 +67,8 @@ extern unsigned char LAB_0024a638; /* 0x24a638 */
 /* Supplied declaration required: FUN_001ad484. */
 /* Supplied declaration required: FUN_00215a34. */
 extern unsigned int FUN_002217bc(int);
-/* Supplied declaration required: FUN_002aa568. */
-extern int FUN_002c30c4(int);
+/* Supplied declaration required: libc_strcmp. */
+extern int libc_strlen(int);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: asdMemAlloc. */
@@ -323,13 +323,13 @@ LAB_0024a200:
       }
       do {
         temp_v11 = temp_v4 + temp_v12 * 0x28;
-        temp_v5 = FUN_002c30c4(temp_v11 + 0x204);
+        temp_v5 = libc_strlen(temp_v11 + 0x204);
         if (temp_v5 >= 3) {
           temp_v11 = temp_v11 + temp_v5;
           temp_v6 = temp_v11 + 0x201;
           temp_v5 = temp_v6;
-          FUN_002aa568(temp_v6,&LAB_0024a634);
-          if ((temp_v5 == 0) || (FUN_002aa568(temp_v6,&LAB_0024a638), temp_v6 == 0)) {
+          libc_strcmp(temp_v6,&LAB_0024a634);
+          if ((temp_v5 == 0) || (libc_strcmp(temp_v6,&LAB_0024a638), temp_v6 == 0)) {
             *(unsigned char *)(temp_v11 + 0x201) = 0;
           }
         }

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002ac068(int, int);
+int dataTableFileGetTable(int, int);
 int FUN_002be624(unsigned char [132], unsigned char *, int, unsigned int);
 int memClear(unsigned char [132], int);
 int FUN_0038a154(unsigned int, unsigned char [132], int, int, int, int);
@@ -17,7 +17,7 @@ typedef struct {
 extern unsigned char LAB_0038ba34; /* 0x38ba34 */
 extern unsigned int g_aocDisplay; /* 0x433130 */
 
-/* Supplied declaration required: FUN_002ac068. */
+/* Supplied declaration required: dataTableFileGetTable. */
 /* Supplied declaration required: FUN_002be624. */
 extern unsigned int dataTableGetCount(void);
 extern int dataTableGetEntries(void);
@@ -43,7 +43,7 @@ void FUN_0038b87c(int param_1,int param_2)
   if (temp_v0 != 0 && param_2 != 0) {
     temp_v3 = 0;
     if (*(char *)(param_1 + 0x45) != '\0') {
-      FUN_002ac068(temp_v0,0);
+      dataTableFileGetTable(temp_v0,0);
       temp_v3 = dataTableGetEntries();
     }
     temp_v4 = *(char *)(param_1 + 0x45) != '\0';
@@ -52,7 +52,7 @@ void FUN_0038b87c(int param_1,int param_2)
       temp_v0 = *(int *)(param_1 + 0x48);
     }
     if (temp_v4 && temp_v0 != 0) {
-      FUN_002ac068(temp_v0,0);
+      dataTableFileGetTable(temp_v0,0);
       temp_v1 = dataTableGetCount();
       temp_v2 = 0;
       if (temp_v2 < temp_v1) {

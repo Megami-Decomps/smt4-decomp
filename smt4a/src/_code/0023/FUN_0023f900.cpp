@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-extern int DAT_0057f268; /* 0x57f268 */
+extern int g_partyPanel; /* 0x57f268 */
 
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: dataTableGetCount. */
@@ -44,7 +44,7 @@ void FUN_0023f900(void)
   unsigned char temp_v6;
   unsigned char temp_v7 [304];
   
-  temp_v5 = DAT_0057f268;
+  temp_v5 = g_partyPanel;
   temp_v1 = FUN_002cad18();
   temp_v2 = FUN_002cab18();
   if (*(int *)(temp_v5 + 0x1218) != 1) {

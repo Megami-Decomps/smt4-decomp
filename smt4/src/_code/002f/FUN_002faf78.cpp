@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern SaveWork *FUN_002c2950(void);
+extern SaveWork *gameGetMapBlock(void);
 
 u32 FUN_002faf78(void)
 {
-    SaveWork *work = FUN_002c2950();
+    SaveWork *work = gameGetMapBlock();
 
     return work->unk18;
 }

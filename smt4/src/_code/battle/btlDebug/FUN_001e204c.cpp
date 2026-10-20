@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0025c2d0(...);
-int FUN_0025c2ec(...);
+int asdListBoxSetByteValue(...);
 int asdListBoxAddItems(void);
 int FUN_0025c58c(...);
 int FUN_00262914(...);
@@ -31,10 +31,10 @@ extern int FUN_0021ec34(...); /* 0x21ec34 */
 extern unsigned char LAB_0021ecdc; /* 0x21ecdc */
 extern unsigned short DAT_0043438a; /* 0x43438a */
 extern unsigned int *DAT_00434390; /* 0x434390 */
-extern int DAT_00439ca8; /* 0x439ca8 */
+extern int g_btlUiBlock; /* 0x439ca8 */
 
 /* Supplied declaration required: FUN_0025c2d0. */
-/* Supplied declaration required: FUN_0025c2ec. */
+/* Supplied declaration required: asdListBoxSetByteValue. */
 /* Supplied declaration required: asdListBoxAddItems. */
 /* Supplied declaration required: FUN_0025c58c. */
 /* Supplied declaration required: FUN_00262914. */
@@ -68,14 +68,14 @@ void FUN_001e204c(unsigned int *param_1,int param_2)
     FUN_0025c58c(temp_v0,0x73,0);
     puVar2[4] = temp_v0;
     asdListBoxAddItems();
-    FUN_0025c2ec(puVar2[4],1);
+    asdListBoxSetByteValue(puVar2[4],1);
     FUN_00262914(puVar2[4],"btl Debug Menu");
   }
   else {
     FUN_003c5150();
   }
-  if (DAT_00439ca8 != 0) {
-    FUN_0025c2d0(DAT_00439ca8,1);
+  if (g_btlUiBlock != 0) {
+    FUN_0025c2d0(g_btlUiBlock,1);
     return;
   }
   return;

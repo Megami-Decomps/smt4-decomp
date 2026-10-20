@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002ea668(unsigned char [88]);
-int FUN_002ea6ae(unsigned int, unsigned char [20], int);
+int fixedBufferAssign(unsigned int, unsigned char [20], int);
 int FUN_002ea6bc(...);
 int FUN_002ea6cc(unsigned char [88]);
 
@@ -17,7 +17,7 @@ typedef struct {
 extern unsigned char DAT_00538908; /* 0x538908 */
 
 /* Supplied declaration required: FUN_002ea668. */
-/* Supplied declaration required: FUN_002ea6ae. */
+/* Supplied declaration required: fixedBufferAssign. */
 /* Supplied declaration required: FUN_002ea6bc. */
 /* Supplied declaration required: FUN_002ea6cc. */
 extern int *wordRefMin(unsigned char *, unsigned int *);
@@ -53,7 +53,7 @@ void FUN_002ed2b0(unsigned int param_1,int param_2,unsigned int param_3,unsigned
     FUN_002ea6bc(temp_v1,param_6,temp_v0);
   }
   FUN_002ea6cc(temp_v1);
-  FUN_002ea6ae(temp_v3,temp_v2,0x10);
+  fixedBufferAssign(temp_v3,temp_v2,0x10);
   return;
 }
 

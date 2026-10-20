@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_002be624(...);
-int FUN_002c30c4(...);
-int FUN_002c3940(...);
+int libc_strlen(...);
+int rt_aeabi_memclr(...);
 int SBORROW4(...);
 
 /* stack frame of param_3: 1 slot(s), 1 byte(s) */
@@ -21,8 +21,8 @@ extern unsigned int DAT_004651f4; /* 0x4651f4 */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_002be624. */
-/* Supplied declaration required: FUN_002c30c4. */
-/* Supplied declaration required: FUN_002c3940. */
+/* Supplied declaration required: libc_strlen. */
+/* Supplied declaration required: rt_aeabi_memclr. */
 
 
 unsigned int FUN_00254884(int param_1,short *param_2,int param_3)
@@ -43,7 +43,7 @@ unsigned int FUN_00254884(int param_1,short *param_2,int param_3)
   char acStack_129 [281];
   
   if (param_3 != 3) {
-    temp_v3 = FUN_002c30c4();
+    temp_v3 = libc_strlen();
     if (temp_v3 >= 0xf8) {
       return 0;
     }
@@ -69,8 +69,8 @@ unsigned int FUN_00254884(int param_1,short *param_2,int param_3)
       } while (temp_v4 < temp_v3);
     }
   }
-  FUN_002c3940(param_2,0x1f0);
-  FUN_002c3940(acStack_129 + 1,0x118);
+  rt_aeabi_memclr(param_2,0x1f0);
+  rt_aeabi_memclr(acStack_129 + 1,0x118);
   if (param_3 != 0) {
     if (param_3 != 1) {
       if (param_3 != 2) {
@@ -89,7 +89,7 @@ unsigned int FUN_00254884(int param_1,short *param_2,int param_3)
   else {
     FUN_002be624(acStack_129 + 1,"%s/%s",DAT_004651e8,param_1);
   }
-  temp_v5 = FUN_002c30c4(acStack_129 + 1);
+  temp_v5 = libc_strlen(acStack_129 + 1);
   if ((int)temp_v5 >= 0xf9) {
     return 0;
   }

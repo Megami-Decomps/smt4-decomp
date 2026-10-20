@@ -19,8 +19,8 @@ typedef struct Loader {
 
 extern s32 FUN_0022b14c(void *resource);
 extern void FUN_002be624(u8 *buffer, const char *format, s32 arg);
-extern u32 FUN_00290d74(u32 listener, u8 *buffer);
-extern void FUN_00296f4c(u32 target, u32 handle);
+extern u32 tableGroupFindEntryIndex(u32 listener, u8 *buffer);
+extern void scrScriptProcessStartEntry(u32 target, u32 handle);
 
 void FUN_003ba460(Loader *loader)
 {
@@ -28,7 +28,7 @@ void FUN_003ba460(Loader *loader)
 
     if (FUN_0022b14c(loader->resource) != 0) {
         FUN_002be624(path, "%s", loader->pathBase + 0x20);
-        FUN_00296f4c(loader->target, FUN_00290d74(loader->listener, path));
+        scrScriptProcessStartEntry(loader->target, tableGroupFindEntryIndex(loader->listener, path));
         loader->state = 4;
         loader->stateStep = 0;
     }

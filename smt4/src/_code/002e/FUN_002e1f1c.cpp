@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b46f8(...);
+int libc_bsearch(...);
 int SBORROW4(unsigned int, int);
 
 /* stack frame of param_3: 2 slot(s), 6 byte(s) */
@@ -17,7 +17,7 @@ extern unsigned char LAB_00144ff8; /* 0x144ff8 */
 extern int g_aocSystem; /* 0x433158 */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_002b46f8. */
+/* Supplied declaration required: libc_bsearch. */
 extern unsigned int dataTableGetCount(unsigned int);
 extern unsigned int dataTableGetEntries(void);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
@@ -45,7 +45,7 @@ void FUN_002e1f1c(unsigned short param_1,unsigned short *param_2,unsigned int pa
   temp_v10[0] = param_1;
   if (*(int *)(g_aocSystem + 0x368) != 0) {
     puVar4 = temp_v10;
-    FUN_002b46f8(puVar4,*(int *)(g_aocSystem + 0x368),*(unsigned int *)(g_aocSystem + 0x364),0xa8,
+    libc_bsearch(puVar4,*(int *)(g_aocSystem + 0x368),*(unsigned int *)(g_aocSystem + 0x364),0xa8,
                  &LAB_00144ff8);
     temp_v7 = temp_v5;
     if (puVar4 != (unsigned short *)0x0) goto LAB_002e1fa0;
@@ -54,7 +54,7 @@ void FUN_002e1f1c(unsigned short param_1,unsigned short *param_2,unsigned int pa
   temp_v4 = dataTableGetEntries();
   temp_v3 = dataTableGetCount(temp_v3);
   puVar4 = temp_v10;
-  FUN_002b46f8(puVar4,temp_v4,temp_v3,0xa8,&LAB_00144ff8);
+  libc_bsearch(puVar4,temp_v4,temp_v3,0xa8,&LAB_00144ff8);
   temp_v7 = temp_v6;
 LAB_002e1fa0:
   if (puVar4 != (unsigned short *)0x0) {

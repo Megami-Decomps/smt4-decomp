@@ -9,12 +9,12 @@ typedef struct ObjBRecord {
     /* 0x0C */ u16 d;
 } ObjBRecord;
 
-extern ObjBRef DAT_00588fd0;
+extern ObjBRef g_gameGlobals;
 
 /* Copies a 14-byte record (three words and a halfword) into the object. */
 void objBSetRecord2000(ObjBRecord *src)
 {
-    ObjB *obj = DAT_00588fd0.instance;
+    ObjB *obj = g_gameGlobals.instance;
 
     obj->unk2000 = src->a;
     obj->unk2004 = src->b;

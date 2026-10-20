@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_001ad9b4(void);
 
-extern int FUN_0018719c(unsigned short);
-extern unsigned char *FUN_001abac8(unsigned int);
+extern int gameFlagIsSet(unsigned short);
+extern unsigned char *gameFlagBlockGetEntry(unsigned int);
 /* Supplied declaration required: FUN_001ad9b4. */
 extern int FUN_002e26c4(unsigned int);
 
@@ -24,12 +24,12 @@ unsigned int FUN_003deee4(unsigned int param_1)
   
   temp_v0 = 0;
   temp_v1 = FUN_002e26c4(0x1e);
-  if ((temp_v1 != 0) && (temp_v1 = FUN_0018719c(*(unsigned short *)(temp_v1 + 0x56)), temp_v1 != 0)) {
+  if ((temp_v1 != 0) && (temp_v1 = gameFlagIsSet(*(unsigned short *)(temp_v1 + 0x56)), temp_v1 != 0)) {
     temp_v0 = 1;
   }
   temp_v3 = 0;
   do {
-    pbVar3 = (unsigned char *)FUN_001abac8(temp_v3);
+    pbVar3 = (unsigned char *)gameFlagBlockGetEntry(temp_v3);
     if ((*pbVar3 & 1) == 0) goto LAB_003defc4;
     do {
       if (((temp_v3 < 0x15e) || (temp_v2 = temp_v3, FUN_001ad9b4(), temp_v2 != 0)) &&
@@ -52,7 +52,7 @@ unsigned int FUN_003deee4(unsigned int param_1)
             temp_v2 = 0;
           }
           if (((param_1 & ~temp_v2) == 0) &&
-             (pbVar3 = (unsigned char *)FUN_001abac8(temp_v3), (*pbVar3 & 0x20) != 0)) {
+             (pbVar3 = (unsigned char *)gameFlagBlockGetEntry(temp_v3), (*pbVar3 & 0x20) != 0)) {
             return 1;
           }
         }

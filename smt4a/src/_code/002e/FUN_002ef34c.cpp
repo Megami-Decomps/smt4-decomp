@@ -7,13 +7,13 @@ extern "C" {
 int FUN_001085bc(unsigned int, int);
 int FUN_0010ae5a(int, int, int, unsigned int);
 int FUN_002e7908(...);
-int FUN_002e9538(int *, int);
-int FUN_002e995c(int *);
-int FUN_002ea93c(int);
-int FUN_002eb16e(int, int);
+int onlineSockAddrCopy(int *, int);
+int onlineSockAddrConstruct(int *);
+int onlineUrlGetAddress(int);
+int fixedBufferCopy(int, int);
 int FUN_002eb17c(...);
 int FUN_002eb188(...);
-int FUN_002eb588(int *);
+int onlineTimeGetNow(int *);
 int FUN_002eee90(int, int, int, int);
 int FUN_002eefc4(int, int);
 int FUN_002ef00c(...);
@@ -34,14 +34,14 @@ extern unsigned char DAT_005949d8; /* 0x5949d8 */
 /* Supplied declaration required: FUN_001085bc. */
 /* Supplied declaration required: FUN_0010ae5a. */
 /* Supplied declaration required: FUN_002e7908. */
-/* Supplied declaration required: FUN_002e9538. */
-/* Supplied declaration required: FUN_002e995c. */
-/* Supplied declaration required: FUN_002ea93c. */
+/* Supplied declaration required: onlineSockAddrCopy. */
+/* Supplied declaration required: onlineSockAddrConstruct. */
+/* Supplied declaration required: onlineUrlGetAddress. */
 extern unsigned int FUN_002eacbc(int);
-/* Supplied declaration required: FUN_002eb16e. */
+/* Supplied declaration required: fixedBufferCopy. */
 /* Supplied declaration required: FUN_002eb17c. */
 /* Supplied declaration required: FUN_002eb188. */
-/* Supplied declaration required: FUN_002eb588. */
+/* Supplied declaration required: onlineTimeGetNow. */
 extern int FUN_002eb6ae(int, unsigned int);
 extern int FUN_002eed8c(int);
 extern int *arrayElementAddress_002eee88(int, unsigned char);
@@ -77,9 +77,9 @@ void FUN_002ef34c(unsigned int param_1,int param_2,int param_3)
   *(int *)(param_2 + 0x2b4) = temp_v0 + *(int *)(param_2 + 0x2b4);
   temp_v8 = param_2 + 8;
   if ((int)((unsigned int)*(unsigned short *)(param_3 + 0x3c) * 0x400000) < 0) {
-    FUN_002e995c(&temp_v2);
-    FUN_002e9538(&temp_v2,(*(int *)((unsigned char *)&DAT_005949d8 + 0x2c)) + 8);
-    temp_v0 = FUN_002ea93c(temp_v8);
+    onlineSockAddrConstruct(&temp_v2);
+    onlineSockAddrCopy(&temp_v2,(*(int *)((unsigned char *)&DAT_005949d8 + 0x2c)) + 8);
+    temp_v0 = onlineUrlGetAddress(temp_v8);
     temp_v4 = *(unsigned short *)(temp_v0 + 6);
     FUN_002eb17c(param_3);
     *(int *)(param_2 + 0x29c) = *(int *)(param_2 + 0x29c) + 1;
@@ -87,18 +87,18 @@ void FUN_002ef34c(unsigned int param_1,int param_2,int param_3)
     *(int *)(param_2 + 0x2c0) = temp_v0 + *(int *)(param_2 + 0x2c0);
   }
   else if ((int)((unsigned int)*(unsigned short *)(param_3 + 0x3c) << 0x15) < 0) {
-    FUN_002e995c(&temp_v2);
-    FUN_002e9538(&temp_v2,(*(int *)((unsigned char *)&DAT_005949d8 + 0x2c)) + 0x28);
+    onlineSockAddrConstruct(&temp_v2);
+    onlineSockAddrCopy(&temp_v2,(*(int *)((unsigned char *)&DAT_005949d8 + 0x2c)) + 0x28);
     FUN_002eb17c(param_3,&temp_v2);
     *(int *)(param_2 + 0x2a0) = *(int *)(param_2 + 0x2a0) + 1;
     temp_v0 = FUN_002eed8c(param_3);
     *(int *)(param_2 + 0x2c4) = temp_v0 + *(int *)(param_2 + 0x2c4);
   }
   else {
-    temp_v1 = FUN_002ea93c(temp_v8);
+    temp_v1 = onlineUrlGetAddress(temp_v8);
     FUN_002eb17c(param_3,temp_v1);
   }
-  FUN_002eb16e(param_3 + 0x28,param_2 + 0x108);
+  fixedBufferCopy(param_3 + 0x28,param_2 + 0x108);
   *(unsigned char *)(param_3 + 0x65) = *(unsigned char *)(param_2 + 0x149);
   temp_v2 = param_2 + 0x200;
   if ((int)((unsigned int)*(unsigned short *)(param_3 + 0x3c) * 0x4000000) < 0) {
@@ -144,7 +144,7 @@ void FUN_002ef34c(unsigned int param_1,int param_2,int param_3)
     }
     temp_v0 = FUN_002ef01c(*(unsigned int *)(param_2 + 4));
     if (*(char *)(temp_v0 + 0x70) != '\0') {
-      FUN_002eb588(&temp_v5);
+      onlineTimeGetNow(&temp_v5);
       *(unsigned int *)(param_2 + 0xd8) = temp_v5;
       *(unsigned int *)(param_2 + 0xdc) = temp_v6;
     }

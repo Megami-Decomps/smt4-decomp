@@ -12,7 +12,7 @@ int FUN_001bc768(unsigned int *, int *, int);
 int nw_gfx_internal_NWCopyVec3Reverse(unsigned int *, int);
 
 typedef int romwright_code(...);
-extern unsigned int *DAT_005b40e0; /* 0x5b40e0 */
+extern unsigned int *g_commandBufferCursor; /* 0x5b40e0 */
 
 /* Supplied declaration required: FUN_001b66cc. */
 /* Supplied declaration required: FUN_001b69f0. */
@@ -36,14 +36,14 @@ void FUN_001b0c5c(int param_1,int *param_2,int param_3,int param_4)
   int *piVar8;
   unsigned char temp_v2;
   
-  puVar1 = DAT_005b40e0;
+  puVar1 = g_commandBufferCursor;
   if (param_3 != 0) {
-    puVar2 = DAT_005b40e0 + 2;
-    *DAT_005b40e0 = 0x80000006;
+    puVar2 = g_commandBufferCursor + 2;
+    *g_commandBufferCursor = 0x80000006;
     puVar1[1] = 0x804f02c0;
     nw_gfx_internal_NWCopyVec3Reverse(puVar2,param_3 + 0x20);
     piVar7 = (int *)0x5c0f34;
-    DAT_005b40e0 = DAT_005b40e0 + 6;
+    g_commandBufferCursor = g_commandBufferCursor + 6;
     if (param_2 != (int *)0x0) {
       piVar3 = (int *)(**(romwright_code **)(*param_2 + 8))(param_2);
       do {
@@ -84,11 +84,11 @@ LAB_001b0cd4:
       else {
         temp_v0 = *(int *)(*(int *)(param_1 + 8) + 8);
         *(unsigned int *)(temp_v0 + 0x14) = *(unsigned int *)(temp_v0 + 0x14) & 0xfffffff9;
-        puVar1 = DAT_005b40e0;
-        *DAT_005b40e0 = 0x80000019;
+        puVar1 = g_commandBufferCursor;
+        *g_commandBufferCursor = 0x80000019;
         puVar1[1] = 0xf02c0;
         FUN_001bc768(puVar1 + 2,param_2 + 0x23,0xbf02c1);
-        DAT_005b40e0 = DAT_005b40e0 + 0x10;
+        g_commandBufferCursor = g_commandBufferCursor + 0x10;
       }
       if (*piVar7 != 0) {
         temp_v0 = *piVar7 + (int)piVar7;

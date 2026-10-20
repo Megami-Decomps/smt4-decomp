@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00122c48(int, int *);
 int FUN_00122d5a(int);
 int FUN_002eb338(...);
-int FUN_002eb588(int *);
+int onlineTimeGetNow(int *);
 int FUN_002f2dc2(int *, int *);
 int FUN_0030f4bc(int, int *);
 int FUN_0030f7d8(int, int *);
@@ -37,7 +37,7 @@ extern unsigned char DAT_005949d8; /* 0x5949d8 */
 /* Supplied declaration required: FUN_00122d5a. */
 extern unsigned int FUN_00124550(int);
 /* Supplied declaration required: FUN_002eb338. */
-/* Supplied declaration required: FUN_002eb588. */
+/* Supplied declaration required: onlineTimeGetNow. */
 /* Supplied declaration required: FUN_002f2dc2. */
 /* Supplied declaration required: FUN_0030f4bc. */
 /* Supplied declaration required: FUN_0030f7d8. */
@@ -78,7 +78,7 @@ unsigned int FUN_0030f69c(int param_1,int param_2,unsigned int param_3)
   iStack_1c = param_2;
   uStack_18 = param_3;
   (**(romwright_code **)(*piVar2 + 8))();
-  FUN_002eb588(&temp_v5);
+  onlineTimeGetNow(&temp_v5);
   temp_v0 = temp_v15;
   piVar4 = (int *)(temp_v15 + 0x1e0);
   if (*piVar4 != 0 || *(int *)(temp_v15 + 0x1e4) != 0) {

@@ -7,7 +7,7 @@ extern "C" {
 int sysPlaySe(int);
 int FUN_00180118(unsigned int);
 int FUN_00184310(void);
-int FUN_00275f44(...);
+int scrScriptProcessStartEntry(...);
 int FUN_003180c4(int, unsigned int);
 int FUN_003c1060(void);
 int FUN_003c3e14(void);
@@ -31,14 +31,14 @@ extern unsigned char LAB_003e36cc; /* 0x3e36cc */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00180118. */
 /* Supplied declaration required: FUN_00184310. */
-extern int FUN_0018719c(void);
+extern int gameFlagIsSet(void);
 extern int FUN_00224880(unsigned int);
 extern int FUN_00239234(unsigned short, unsigned char *);
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_003180c4. */
 extern int panelIsMissingOrFlagClear(void);
-extern int FUN_00357bc8(unsigned int, unsigned char *);
+extern int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_003c1060. */
 /* Supplied declaration required: FUN_003c3e14. */
 /* Supplied declaration required: fillThreeWordsWithByte. */
@@ -86,9 +86,9 @@ void FUN_003e32b0(int param_1)
           temp_v1 = *(int *)(param_1 + temp_v1 * 4 + 0x8c);
           *(int *)(param_1 + 0xa0) = temp_v1;
           if (temp_v1 < 0) {
-            temp_v1 = FUN_00357bc8(*(unsigned int *)(param_1 + 0x14),&LAB_003e36cc);
+            temp_v1 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x14),&LAB_003e36cc);
             if (-1 < temp_v1) {
-              FUN_00275f44(*(unsigned int *)(param_1 + 0x18));
+              scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x18));
             }
             temp_v4 = 3;
             *(unsigned int *)(param_1 + 8) = temp_v4;
@@ -118,7 +118,7 @@ void FUN_003e32b0(int param_1)
     puVar3 = (unsigned short *)(unsigned int)*(unsigned short *)(temp_v5 + 0x22);
     FUN_00184310();
     if ((puVar3 != (unsigned short *)0x0) &&
-       ((puVar3[0x1f] == 0 || (temp_v2 = FUN_0018719c(), temp_v2 != 0)))) {
+       ((puVar3[0x1f] == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 != 0)))) {
       temp_v0 = puVar3[0x1e];
       if ((temp_v0 & 1) != 0) {
         if ((temp_v0 & 0xfffe) != 0) {
@@ -141,9 +141,9 @@ LAB_003e33d0:
   } while (temp_v1 < 3);
   FUN_003c1060();
   if (temp_v6 == 0) {
-    temp_v1 = FUN_00357bc8(*(unsigned int *)(param_1 + 0x14),&LAB_003e3644);
+    temp_v1 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x14),&LAB_003e3644);
     if (-1 < temp_v1) {
-      FUN_00275f44(*(unsigned int *)(param_1 + 0x18),temp_v1);
+      scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x18),temp_v1);
     }
     temp_v4 = 2;
     *(unsigned int *)(param_1 + 8) = temp_v4;
@@ -156,19 +156,19 @@ LAB_003e33d0:
       }
       if ((*(int *)(param_1 + 0xc) == 5 || *(int *)(param_1 + 0xc) == 4) ||
          (*(char *)(param_1 + 0x98) != '\0')) {
-        temp_v1 = FUN_00357bc8(*(unsigned int *)(param_1 + 0x14),&LAB_003e3630);
+        temp_v1 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x14),&LAB_003e3630);
       }
       else {
-        temp_v1 = FUN_00357bc8(*(unsigned int *)(param_1 + 0x14),&LAB_003e36b8);
+        temp_v1 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x14),&LAB_003e36b8);
       }
     }
     else {
       if ((*(int *)(param_1 + 0xc) != 5 && *(int *)(param_1 + 0xc) != 4) &&
          (*(char *)(param_1 + 0x98) == '\0')) {
-        temp_v1 = FUN_00357bc8(*(unsigned int *)(param_1 + 0x14),&LAB_003e36a0);
+        temp_v1 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x14),&LAB_003e36a0);
         goto joined_r0x003e34b8;
       }
-      temp_v1 = FUN_00357bc8(*(unsigned int *)(param_1 + 0x14),&LAB_003e3688);
+      temp_v1 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x14),&LAB_003e3688);
     }
     if (temp_v1 < 0) {
       *(unsigned int *)(param_1 + 8) = 1;
@@ -179,10 +179,10 @@ LAB_003e33d0:
   else {
     if ((*(int *)(param_1 + 0xc) == 5 || *(int *)(param_1 + 0xc) == 4) ||
        (*(char *)(param_1 + 0x98) != '\0')) {
-      temp_v1 = FUN_00357bc8(*(unsigned int *)(param_1 + 0x14),&LAB_003e3658);
+      temp_v1 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x14),&LAB_003e3658);
     }
     else {
-      temp_v1 = FUN_00357bc8(*(unsigned int *)(param_1 + 0x14),&LAB_003e3670);
+      temp_v1 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x14),&LAB_003e3670);
     }
 joined_r0x003e34b8:
     if (temp_v1 < 0) {
@@ -191,7 +191,7 @@ joined_r0x003e34b8:
     }
     temp_v4 = *(unsigned int *)(param_1 + 0x18);
   }
-  FUN_00275f44(temp_v4,temp_v1);
+  scrScriptProcessStartEntry(temp_v4,temp_v1);
   *(unsigned int *)(param_1 + 8) = 1;
   return;
 }

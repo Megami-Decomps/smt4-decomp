@@ -11,7 +11,7 @@ int VectorSignedToFloat(int, int);
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 extern int jobGetWork(void);
-extern int FUN_0018206c(unsigned int, unsigned int);
+extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0038a538. */
 
 
@@ -111,7 +111,7 @@ unsigned int FUN_00283a48(void)
   }
   else if ((*(unsigned int *)(temp_v0 + 0x24) < 4) &&
           (temp_v1 = *(unsigned int *)(temp_v0 + 0x24) * 0x10,
-          temp_v1 = FUN_0018206c(*(unsigned int *)(temp_v1 + 0x57f43c),*(unsigned int *)(temp_v1 + 0x57f440)),
+          temp_v1 = asdTMTexTableNodeIsLoaded(*(unsigned int *)(temp_v1 + 0x57f43c),*(unsigned int *)(temp_v1 + 0x57f440)),
           temp_v1 != 0)) {
     *(unsigned int *)(temp_v0 + 0x10) = 0;
     *(unsigned int *)(temp_v0 + 0x14) = temp_v6;

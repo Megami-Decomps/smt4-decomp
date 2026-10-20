@@ -7,7 +7,7 @@
 extern "C" {
 
 int FUN_002a6fb8(void);
-int FUN_002b2368(u32 entry);
+int asdMemFreeNonNull(u32 entry);
 int jobFind(u32 task);                /* nonzero while the task exists */
 int asdMemFree(void *ptr);               /* heap free */
 
@@ -26,7 +26,7 @@ u32 QuestCenterMode_IsBusy(void)
             work->done = 1;
             if (work->entry != 0) {
                 FUN_002a6fb8();
-                FUN_002b2368(work->entry);
+                asdMemFreeNonNull(work->entry);
                 work->entry = 0;
             }
             asdMemFree(g_qcMain.work);

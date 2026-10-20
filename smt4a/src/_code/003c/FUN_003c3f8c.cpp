@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001b4a90(int *, int, unsigned int);
+int __aeabi_memset4(int *, int, unsigned int);
 
 /* stack frame of param_3: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_001b4a90. */
+/* Supplied declaration required: __aeabi_memset4. */
 
 
 void FUN_003c3f8c(int param_1,int param_2,int param_3)
@@ -42,7 +42,7 @@ void FUN_003c3f8c(int param_1,int param_2,int param_3)
     aiStack_30[3] = *(unsigned int *)(param_1 + 0x8ea0);
     aiStack_30[4] = *(unsigned int *)(param_1 + 0x8ea4);
     temp_v6 = *(int *)(param_1 + 0x8ea8);
-    FUN_001b4a90((int *)(param_1 + 0x8e8c),0x20,0xffffffff);
+    __aeabi_memset4((int *)(param_1 + 0x8e8c),0x20,0xffffffff);
     if (temp_v4 != param_2) {
       *(int *)(param_1 + 0x8e8c) = temp_v4;
     }

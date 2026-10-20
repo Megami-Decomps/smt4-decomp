@@ -6,7 +6,7 @@ extern "C" {
 
 extern unsigned char DAT_0044cf60; /* 0x44cf60 */
 
-extern int FUN_002a60b4(unsigned int, unsigned int);
+extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 
 
 unsigned int FUN_00287758(void)
@@ -15,9 +15,9 @@ unsigned int FUN_00287758(void)
   int temp_v0;
   unsigned int temp_v1;
   
-  if (((((*(int *)((unsigned char *)&DAT_0044cf60 + 0x4)) != 0x65) || (temp_v0 = FUN_002a60b4(0x1c,6), temp_v1 = 0, temp_v0 != 0)) &&
-      (((*(int *)((unsigned char *)&DAT_0044cf60 + 0x4)) != 0x66 || (temp_v0 = FUN_002a60b4(0x1c,7), temp_v1 = 0, temp_v0 != 0)))) &&
-     (((*(int *)((unsigned char *)&DAT_0044cf60 + 0x4)) != 0x67 || (temp_v0 = FUN_002a60b4(0x1c,8), temp_v1 = 0, temp_v0 != 0)))) {
+  if (((((*(int *)((unsigned char *)&DAT_0044cf60 + 0x4)) != 0x65) || (temp_v0 = asdTMTexTableNodeIsLoaded(0x1c,6), temp_v1 = 0, temp_v0 != 0)) &&
+      (((*(int *)((unsigned char *)&DAT_0044cf60 + 0x4)) != 0x66 || (temp_v0 = asdTMTexTableNodeIsLoaded(0x1c,7), temp_v1 = 0, temp_v0 != 0)))) &&
+     (((*(int *)((unsigned char *)&DAT_0044cf60 + 0x4)) != 0x67 || (temp_v0 = asdTMTexTableNodeIsLoaded(0x1c,8), temp_v1 = 0, temp_v0 != 0)))) {
     temp_v1 = 1;
   }
   return temp_v1;

@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002fbb60(int, unsigned int);
-int FUN_002fbb68(int, int *);
+int bufferAssignByteAlias(int, unsigned int);
+int strHolderAssignU32Alias(int, int *);
 int FUN_002fbb70(int, int);
-int FUN_00303e5e(int, int);
+int strHolderAssignU64Alias(int, int);
 int FUN_00307454(int, int);
 
 /* stack frame of param_2: 4 slot(s), 10 byte(s) */
@@ -19,10 +19,10 @@ typedef struct {
 } param_2_stack;
 
 extern unsigned int byteRefMin(unsigned char *, unsigned char *);
-/* Supplied declaration required: FUN_002fbb60. */
-/* Supplied declaration required: FUN_002fbb68. */
+/* Supplied declaration required: bufferAssignByteAlias. */
+/* Supplied declaration required: strHolderAssignU32Alias. */
 /* Supplied declaration required: FUN_002fbb70. */
-/* Supplied declaration required: FUN_00303e5e. */
+/* Supplied declaration required: strHolderAssignU64Alias. */
 /* Supplied declaration required: FUN_00307454. */
 
 
@@ -45,18 +45,18 @@ void FUN_0011fd60(int param_1,int param_2)
     temp_v7[0] = 0;
     temp_v6[0] = *(unsigned char *)(param_2 + 4);
     temp_v1 = byteRefMin(temp_v6,temp_v7);
-    FUN_002fbb60(param_1,temp_v1);
+    bufferAssignByteAlias(param_1,temp_v1);
     temp_v2 = *(int *)(*(int *)(param_1 + 8) + 0x10);
     temp_v4 = 0;
-    FUN_002fbb68(param_1,&temp_v4);
+    strHolderAssignU32Alias(param_1,&temp_v4);
   }
-  FUN_00303e5e(param_1,param_2 + 8);
+  strHolderAssignU64Alias(param_1,param_2 + 8);
   FUN_00307454(param_1,param_2 + 0x10);
   if (temp_v0 == '\0') {
     temp_v3 = *(int *)(*(int *)(param_1 + 8) + 0x10);
     FUN_002fbb70(param_1,temp_v2);
     temp_v5 = (temp_v3 - temp_v2) - 4;
-    FUN_002fbb68(param_1,&temp_v5);
+    strHolderAssignU32Alias(param_1,&temp_v5);
     FUN_002fbb70(param_1,temp_v3);
   }
   return;

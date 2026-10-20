@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_00184758(int, int, int);
-int FUN_00184c00(int, int, int);
+int uiSpriteSetKeyframe(int, int, int);
+int uiSpriteSetImageKeyframe(int, int, int);
 
-/* Supplied declaration required: FUN_00184758. */
-/* Supplied declaration required: FUN_00184c00. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 
 
 void FUN_0041e3a0(int param_1,int param_2)
@@ -19,15 +19,15 @@ void FUN_0041e3a0(int param_1,int param_2)
   int temp_v1;
   
   if (param_2 != 0) {
-    FUN_00184758(param_1 + 0x474,8,0);
-    FUN_00184c00(param_1 + 0x474,1,0);
+    uiSpriteSetKeyframe(param_1 + 0x474,8,0);
+    uiSpriteSetImageKeyframe(param_1 + 0x474,1,0);
   }
   temp_v0 = 0;
   if (temp_v0 < *(int *)(param_1 + 0x18)) {
     do {
       temp_v1 = param_1 + temp_v0 * 0x8c;
-      FUN_00184758(temp_v1 + 0x500,8,0);
-      FUN_00184c00(temp_v1 + 0x500,1,0);
+      uiSpriteSetKeyframe(temp_v1 + 0x500,8,0);
+      uiSpriteSetImageKeyframe(temp_v1 + 0x500,1,0);
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < *(int *)(param_1 + 0x18));
   }

@@ -5,19 +5,19 @@
 extern "C" {
 
 int FUN_00184310(void);
-int FUN_0019a7f4(int, unsigned int);
-int FUN_0019cac4(void);
+int asdTMTexTableReleaseNode(int, unsigned int);
+int dataTable00FindById(void);
 int FUN_001b2d54(unsigned int, int, unsigned int);
 
 extern unsigned int g_aocSystem; /* 0x570280 */
 extern int DAT_00588fdc; /* 0x588fdc */
 extern int DAT_00588fe0; /* 0x588fe0 */
 
-extern int FUN_0018206c(unsigned int, unsigned int);
+extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00184310. */
-extern int FUN_0018719c(unsigned int);
-/* Supplied declaration required: FUN_0019a7f4. */
-/* Supplied declaration required: FUN_0019cac4. */
+extern int gameFlagIsSet(unsigned int);
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
+/* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: FUN_001b2d54. */
 
 
@@ -32,7 +32,7 @@ void FUN_0038b3f8(unsigned int param_1,int param_2)
   
   if (param_2 != 0) {
     if ((int)param_1 < 0) {
-      temp_v1 = FUN_0018719c(0x11);
+      temp_v1 = gameFlagIsSet(0x11);
       if (temp_v1 == 0) {
         param_1 = 0x25e;
       }
@@ -47,7 +47,7 @@ void FUN_0038b3f8(unsigned int param_1,int param_2)
         return;
       }
       param_1 = param_1 & 0xffff;
-      FUN_0019cac4();
+      dataTable00FindById();
       if ((*(unsigned short *)(param_1 + 2) & 0x8000) != 0) {
         param_1 = (unsigned int)*(short *)(param_1 + 0x8c);
         if ((int)param_1 >= 0x9a) {
@@ -58,10 +58,10 @@ void FUN_0038b3f8(unsigned int param_1,int param_2)
         if ('\0' < temp_v0) {
           return;
         }
-        temp_v3 = FUN_0018206c(0x19,param_1);
+        temp_v3 = asdTMTexTableNodeIsLoaded(0x19,param_1);
         temp_v1 = DAT_00588fe0;
         if (temp_v3 != 0) {
-          FUN_0019a7f4(0x19,param_1);
+          asdTMTexTableReleaseNode(0x19,param_1);
           FUN_001b2d54(g_aocSystem,0x19,param_1);
           temp_v1 = DAT_00588fe0;
         }
@@ -79,10 +79,10 @@ void FUN_0038b3f8(unsigned int param_1,int param_2)
   if ('\0' < temp_v0) {
     return;
   }
-  temp_v3 = FUN_0018206c(0xf,param_1);
+  temp_v3 = asdTMTexTableNodeIsLoaded(0xf,param_1);
   temp_v1 = DAT_00588fdc;
   if (temp_v3 != 0) {
-    FUN_0019a7f4(0xf,param_1);
+    asdTMTexTableReleaseNode(0xf,param_1);
     FUN_001b2d54(g_aocSystem,0xf,param_1);
     temp_v1 = DAT_00588fdc;
   }

@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_001861c4(unsigned int, unsigned int);
+int asdTMTexTableGetNode(unsigned int, unsigned int);
 
 extern unsigned int g_aocSystem; /* 0x570280 */
 
-/* Supplied declaration required: FUN_001861c4. */
-extern int FUN_00341930(void);
+/* Supplied declaration required: asdTMTexTableGetNode. */
+extern int resourceIsReady(void);
 extern unsigned int FUN_0046c4f4(unsigned int, unsigned int, unsigned int);
 extern int FUN_004705ec(void);
 extern unsigned int FUN_004706e8(unsigned int, unsigned int);
@@ -26,8 +26,8 @@ unsigned int FUN_003fcbe0(int param_1)
   unsigned int temp_v2;
   unsigned int temp_v3;
   
-  FUN_001861c4(*(unsigned int *)(param_1 + 8),*(unsigned int *)(param_1 + 0xc));
-  temp_v0 = FUN_00341930();
+  asdTMTexTableGetNode(*(unsigned int *)(param_1 + 8),*(unsigned int *)(param_1 + 0xc));
+  temp_v0 = resourceIsReady();
   temp_v3 = 0;
   if (temp_v0 != 0) {
     if (*(int *)(param_1 + 8) != 6) {

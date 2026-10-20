@@ -4,9 +4,9 @@
 
 extern "C" {
 
-extern int DAT_0057f290; /* 0x57f290 */
+extern int g_unite; /* 0x57f290 */
 
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 
 
 unsigned int FUN_0035dde8(void)
@@ -16,10 +16,10 @@ unsigned int FUN_0035dde8(void)
   unsigned int temp_v1;
   
   temp_v1 = 0;
-  if (DAT_0057f290 != 0) {
-    if ((((*(int *)(DAT_0057f290 + 0x400) == 0x28) || (temp_v0 = FUN_0018719c(0x458), temp_v0 != 0)) ||
-        (DAT_0057f290 == 0)) ||
-       ((*(int *)(DAT_0057f290 + 0x434) != 0x1a || (*(char *)(DAT_0057f290 + 0x430) == '\0')))) {
+  if (g_unite != 0) {
+    if ((((*(int *)(g_unite + 0x400) == 0x28) || (temp_v0 = gameFlagIsSet(0x458), temp_v0 != 0)) ||
+        (g_unite == 0)) ||
+       ((*(int *)(g_unite + 0x434) != 0x1a || (*(char *)(g_unite + 0x430) == '\0')))) {
       temp_v1 = 0;
     }
     else {

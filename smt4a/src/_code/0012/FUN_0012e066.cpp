@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_003006f6(unsigned char [8], int, int *, int *);
 int FUN_0030bf3a(...);
-int FUN_0030c558(int [2]);
+int mapIteratorNext8(int [2]);
 
 /* stack frame of param_2: 9 slot(s), 36 byte(s) */
 typedef struct {
@@ -24,7 +24,7 @@ typedef struct {
 extern int wordRefsDiffer_00300366(int *, unsigned int *);
 /* Supplied declaration required: FUN_003006f6. */
 /* Supplied declaration required: FUN_0030bf3a. */
-/* Supplied declaration required: FUN_0030c558. */
+/* Supplied declaration required: mapIteratorNext8. */
 
 
 int FUN_0012e066(int param_1,unsigned int param_2)
@@ -82,7 +82,7 @@ int FUN_0012e066(int param_1,unsigned int param_2)
   temp_v5 = temp_v1;
   while (temp_v1 = wordRefsDiffer_00300366(temp_v4,(unsigned int *)&temp_v6), temp_v1 != 0) {
     temp_v3 = temp_v3 + 1;
-    FUN_0030c558(temp_v4);
+    mapIteratorNext8(temp_v4);
   }
   temp_v9 = temp_v6;
   temp_v11 = temp_v5;

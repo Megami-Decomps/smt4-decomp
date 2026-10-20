@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0021bdac(unsigned int, unsigned int, unsigned int, int, int, int);
 int FUN_002c76c0(int);
-int FUN_002deb84(void);
+int scrGetCommandFrame(void);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -14,13 +14,13 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } void_stack;
 
-extern unsigned char DAT_0057f588; /* 0x57f588 */
+extern unsigned char g_messageMain; /* 0x57f588 */
 
 /* Supplied declaration required: FUN_0021bdac. */
 extern unsigned int scrGetArg(unsigned int);
 extern unsigned int FUN_002ba85c(void);
 /* Supplied declaration required: FUN_002c76c0. */
-/* Supplied declaration required: FUN_002deb84. */
+/* Supplied declaration required: scrGetCommandFrame. */
 
 
 void FUN_002e4930(void)
@@ -34,17 +34,17 @@ void FUN_002e4930(void)
   unsigned int temp_v4;
   
   FUN_002c76c0(0);
-  temp_v1 = FUN_002deb84();
-  temp_v0 = (*(int *)((unsigned char *)&DAT_0057f588 + 0x8));
+  temp_v1 = scrGetCommandFrame();
+  temp_v0 = (*(int *)((unsigned char *)&g_messageMain + 0x8));
   if (temp_v1 == 0) {
-    if ((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) != 0) {
-      *(unsigned char *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0x30) = 1;
+    if ((*(int *)((unsigned char *)&g_messageMain + 0x8)) != 0) {
+      *(unsigned char *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x30) = 1;
     }
     *(unsigned char *)(temp_v0 + 0x31) = 1;
   }
   temp_v2 = FUN_002ba85c();
   temp_v3 = scrGetArg(0);
-  temp_v4 = FUN_002deb84();
+  temp_v4 = scrGetCommandFrame();
   FUN_0021bdac(temp_v2,temp_v3,temp_v4,5,1,0);
   return;
 }

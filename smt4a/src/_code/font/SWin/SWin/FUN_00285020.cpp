@@ -31,7 +31,7 @@ extern int FUN_003d02bc(...); /* 0x3d02bc */
 extern int FUN_003d0958(...); /* 0x3d0958 */
 extern unsigned char DAT_0052fbcc; /* 0x52fbcc */
 extern unsigned char DAT_0052fbe4; /* 0x52fbe4 */
-extern unsigned int *DAT_0057f57c; /* 0x57f57c */
+extern unsigned int *g_sWin; /* 0x57f57c */
 
 /* Supplied declaration required: asdTMTexTableLoadTmx. */
 /* Supplied declaration required: FUN_0014e188. */
@@ -53,12 +53,12 @@ void FUN_00285020(int param_1)
   unsigned int temp_v0;
   unsigned int temp_v1;
   
-  if (DAT_0057f57c == (unsigned int *)0x0) {
+  if (g_sWin == (unsigned int *)0x0) {
     puVar1 = (unsigned int *)0x100;
     asdMemoryAllocTracked(0x100,0x100,0,0xd4,1);
-    DAT_0057f57c = puVar1;
+    g_sWin = puVar1;
   }
-  puVar1 = DAT_0057f57c;
+  puVar1 = g_sWin;
   sysMemClear();
   temp_v0 = 0x80;
   temp_v1 = 0xdc;
@@ -72,9 +72,9 @@ void FUN_00285020(int param_1)
   *puVar1 = (unsigned int)puVar2;
   taskCreateDraw(&LAB_002851e0,temp_v0,0,0,FUN_003d02bc,0,0,puVar2);
   taskCreateDraw(&LAB_002851f0,temp_v1,0,0,FUN_003d02bc,0,0,*puVar1);
-  puVar1 = DAT_0057f57c;
-  puVar3 = DAT_0057f57c + 10;
-  DAT_0057f57c[2] = 0;
+  puVar1 = g_sWin;
+  puVar3 = g_sWin + 10;
+  g_sWin[2] = 0;
   puVar1[3] = 0;
   puVar1[4] = 0;
   puVar1[5] = 0;

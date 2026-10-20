@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_0018719c(...);
+int gameFlagIsSet(...);
 int FUN_003ff160(int);
 
 extern unsigned int dataTableGet(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0018719c. */
+/* Supplied declaration required: gameFlagIsSet. */
 extern int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_003ff160. */
@@ -27,7 +27,7 @@ unsigned int FUN_003b6f00(void)
   int temp_v4;
   short *psVar6;
   
-  temp_v0 = FUN_0018719c(0x40f);
+  temp_v0 = gameFlagIsSet(0x40f);
   temp_v1 = 0;
   if (temp_v0 != 0) {
     temp_v1 = dataTableGet(0x44,0);
@@ -48,7 +48,7 @@ unsigned int FUN_003b6f00(void)
             temp_v1 = 1;
           }
         }
-        else if ((psVar6[0x19] == 0) || (temp_v3 = FUN_0018719c(), temp_v3 != 0)) {
+        else if ((psVar6[0x19] == 0) || (temp_v3 = gameFlagIsSet(), temp_v3 != 0)) {
           FUN_003ff160(*psVar6);
           temp_v1 = 1;
         }

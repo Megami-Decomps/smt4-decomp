@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002b63c0(void);
+int dataTable1bOr1cGetRecord(void);
 
 extern int FUN_00287894(unsigned int);
-extern int FUN_002adc88(void);
-/* Supplied declaration required: FUN_002b63c0. */
-extern int FUN_002c2950(void);
+extern int gameGetFlagBlock(void);
+/* Supplied declaration required: dataTable1bOr1cGetRecord. */
+extern int gameGetMapBlock(void);
 
 
 void FUN_00348c10(unsigned int param_1,int param_2)
@@ -28,16 +28,16 @@ void FUN_00348c10(unsigned int param_1,int param_2)
   unsigned int temp_v9;
   unsigned char temp_v10;
   
-  temp_v1 = FUN_002adc88();
-  temp_v2 = FUN_002adc88();
+  temp_v1 = gameGetFlagBlock();
+  temp_v2 = gameGetFlagBlock();
   temp_v9 = (unsigned int)*(unsigned short *)(temp_v2 + 0x840);
   temp_v0 = (unsigned short)param_1;
   if (temp_v9 != 0) {
     temp_v2 = FUN_00287894(temp_v9);
     if (temp_v2 == 1) {
       temp_v4 = temp_v9;
-      FUN_002b63c0();
-      temp_v2 = FUN_002c2950();
+      dataTable1bOr1cGetRecord();
+      temp_v2 = gameGetMapBlock();
       temp_v3 = 0;
       while( 1 ) {
         temp_v5 = temp_v4 + temp_v3 * 8;
@@ -74,7 +74,7 @@ void FUN_00348c10(unsigned int param_1,int param_2)
           return;
         }
       }
-      temp_v1 = FUN_002adc88();
+      temp_v1 = gameGetFlagBlock();
       temp_v1 = temp_v1 + temp_v9 * 4;
       *(unsigned char *)(temp_v1 + 0x202) = *(unsigned char *)(temp_v1 + 0x202) | 2;
     }
@@ -83,8 +83,8 @@ void FUN_00348c10(unsigned int param_1,int param_2)
   temp_v2 = 0;
   do {
     temp_v9 = (unsigned int)*(unsigned short *)(temp_v1 + temp_v2 * 0xe + 0x842);
-    if ((temp_v9 != 0) && (temp_v4 = temp_v9, FUN_002b63c0(), *(char *)(temp_v4 + 6) == '\x01')) {
-      temp_v3 = FUN_002c2950();
+    if ((temp_v9 != 0) && (temp_v4 = temp_v9, dataTable1bOr1cGetRecord(), *(char *)(temp_v4 + 6) == '\x01')) {
+      temp_v3 = gameGetMapBlock();
       temp_v5 = 0;
       do {
         temp_v7 = temp_v4 + temp_v5 * 8;
@@ -112,7 +112,7 @@ void FUN_00348c10(unsigned int param_1,int param_2)
             *(unsigned short *)(temp_v6 + 2) = 0xffff;
             if (temp_v10) break;
           }
-          temp_v3 = FUN_002adc88();
+          temp_v3 = gameGetFlagBlock();
           temp_v3 = temp_v3 + temp_v9 * 4;
           *(unsigned char *)(temp_v3 + 0x202) = *(unsigned char *)(temp_v3 + 0x202) | 2;
           break;

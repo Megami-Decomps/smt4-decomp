@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0022abe0(int, unsigned short [16]);
-int FUN_00282924(...);
+int btlMainFindEntryByListedId(...);
 int FUN_00283e48(void);
 int btlGetMainState(void);
 int VectorUnsignedToFloat(int, int);
@@ -21,7 +21,7 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0022abe0. */
-/* Supplied declaration required: FUN_00282924. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_00283e48. */
 /* Supplied declaration required: btlGetMainState. */
 
@@ -38,10 +38,10 @@ void FUN_003be670(unsigned int param_1,unsigned int param_2)
   unsigned short temp_v3 [16];
   
   temp_v0 = btlGetMainState();
-  FUN_00282924(temp_v0,param_1);
+  btlMainFindEntryByListedId(temp_v0,param_1);
   if (temp_v0 != 0) {
     puVar2 = (unsigned int *)btlGetMainState();
-    FUN_00282924(puVar2,param_2);
+    btlMainFindEntryByListedId(puVar2,param_2);
     if ((puVar2 != (unsigned int *)0x0) && ((*puVar2 & 0x100) != 0)) {
       temp_v3[0] = 0;
       temp_v3[1] = 0;

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00297468(...);
 int FUN_002be624(...);
-int FUN_002bf694(...);
+int libc_strcpy(...);
 int asdMemFree(...);
 int memClear(...);
 
@@ -24,7 +24,7 @@ extern int FUN_002522e0(unsigned char *, unsigned int);
 extern unsigned int btlGetMainState(void);
 /* Supplied declaration required: FUN_00297468. */
 /* Supplied declaration required: FUN_002be624. */
-/* Supplied declaration required: FUN_002bf694. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: memClear. */
 extern int FUN_003397b8(unsigned int, unsigned int);
@@ -53,7 +53,7 @@ unsigned int FUN_003dc19c(int param_1)
     temp_v8 = 0;
     temp_v9 = 0;
     temp_v0 = FUN_003397b8(temp_v5,*(unsigned int *)(*(int *)(param_1 + 0x3054) + temp_v2 * 8 + 0x7c));
-    FUN_002bf694(&temp_v6,temp_v0 + 4);
+    libc_strcpy(&temp_v6,temp_v0 + 4);
     temp_v0 = param_1 + temp_v2 * 0x8c;
     *(unsigned char *)(temp_v0 + 0x3070) = 0xff;
     memClear(temp_v0 + 0x3078,0x80);
@@ -65,9 +65,9 @@ unsigned int FUN_003dc19c(int param_1)
     memClear(temp_v3,0x80);
     memClear(temp_v4,0x80);
     FUN_002be624(temp_v4,"battle/effect/%s.eft",&temp_v6);
-    FUN_002bf694(temp_v3,temp_v4);
+    libc_strcpy(temp_v3,temp_v4);
     temp_v1 = FUN_002522e0(temp_v3,0x2f);
-    FUN_002bf694(temp_v0 + 0x3078,temp_v1 + 1);
+    libc_strcpy(temp_v0 + 0x3078,temp_v1 + 1);
     temp_v1 = FUN_0024a808(temp_v0 + 0x3078);
     if (temp_v1 == 0xff) {
       FUN_00297468(temp_v3,temp_v0 + 0x3074,0);

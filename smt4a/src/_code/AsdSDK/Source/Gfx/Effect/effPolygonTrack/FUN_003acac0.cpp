@@ -67,7 +67,7 @@ static float romwright_sqrt_4(float value)
 #endif
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Supplied declaration required: FUN_001a1ee0. */
-extern unsigned int FUN_001acf08(void);
+extern unsigned int effGetFrameStep(void);
 /* Supplied declaration required: FUN_001b63b0. */
 /* Supplied declaration required: sysMemClear. */
 extern int FUN_0037a844(void);
@@ -124,7 +124,7 @@ void FUN_003acac0(int param_1)
   unsigned long long temp_v35;
   unsigned int temp_v36;
   
-  temp_v6 = FUN_001acf08();
+  temp_v6 = effGetFrameStep();
   temp_v15 = *(int *)(param_1 + 0x40);
   temp_v6 = VectorSignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
   if ((*(int *)(param_1 + 0x34) <= *(int *)(temp_v15 + 0x34)) || (*(int *)(temp_v15 + 0x34) == 0)) {

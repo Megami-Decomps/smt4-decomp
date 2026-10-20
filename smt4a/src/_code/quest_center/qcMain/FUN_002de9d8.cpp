@@ -9,7 +9,7 @@ extern "C" {
 int FUN_001919a4(void);
 int asdMemFree(void *ptr);               /* heap free */
 int jobFind(u32 task);                /* nonzero while the task exists */
-int FUN_002e3328(u32 entry);
+int asdOperatorDelete(u32 entry);
 
 extern QcGlobalsA DAT_00588c30;
 
@@ -26,7 +26,7 @@ s32 FUN_002de9d8(void)
             work->done = 1;
             if (work->entry != 0) {
                 FUN_001919a4();
-                FUN_002e3328(work->entry);
+                asdOperatorDelete(work->entry);
                 work->entry = 0;
             }
             asdMemFree(DAT_00588c30.work);

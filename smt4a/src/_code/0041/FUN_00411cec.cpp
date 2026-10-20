@@ -5,7 +5,7 @@
 extern "C" {
 
 int lcgRandomRange(...);
-int FUN_001b4a90(int [5], int, unsigned int);
+int __aeabi_memset4(int [5], int, unsigned int);
 int FUN_004fdb18(int, int, int, int, int);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
@@ -21,7 +21,7 @@ extern unsigned int DAT_00573c64; /* 0x573c64 */
 
 extern int btlGetMainState(void);
 /* Supplied declaration required: lcgRandomRange. */
-/* Supplied declaration required: FUN_001b4a90. */
+/* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: FUN_004fdb18. */
 
 
@@ -41,7 +41,7 @@ void FUN_00411cec(void)
   int aiStack_38 [5];
   
   temp_v0 = btlGetMainState();
-  FUN_001b4a90(aiStack_38,0x10,0xffffffff);
+  __aeabi_memset4(aiStack_38,0x10,0xffffffff);
   piVar7 = (int *)(temp_v0 + 0x1ffc);
   temp_v5 = 0;
   temp_v3 = 0;

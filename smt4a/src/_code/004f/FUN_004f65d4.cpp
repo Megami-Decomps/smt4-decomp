@@ -40,13 +40,13 @@ typedef struct {
     unsigned int spB0; /* 0xb0: local_b0 */
 } param_1_stack;
 
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern int g_btlStageModel; /* 0x57a4f8 */
 
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_001a79e8. */
-extern int FUN_0022a00c(void);
+extern int rangeIsValid(void);
 extern unsigned int FUN_002e4c2c(int);
 /* Supplied declaration required: FUN_003478dc. */
 /* Supplied declaration required: FUN_003afd30. */
@@ -101,7 +101,7 @@ void FUN_004f65d4(int param_1)
   temp_v9 = 0;
   uStack_20 = in_d8;
   if (*(int *)(param_1 + 0x33cc) != 0) {
-    temp_v4 = FUN_0022a00c();
+    temp_v4 = rangeIsValid();
     if (temp_v4 != 0) {
       *(unsigned int *)(param_1 + 0x33d8) = temp_v9;
       *(unsigned int *)(param_1 + 0x33d4) = temp_v9;
@@ -120,7 +120,7 @@ void FUN_004f65d4(int param_1)
     }
   }
   if (*(int *)(param_1 + 0x33d0) != 0) {
-    temp_v4 = FUN_0022a00c();
+    temp_v4 = rangeIsValid();
     if (temp_v4 != 0) {
       *(unsigned int *)(param_1 + 0x33e0) = temp_v9;
       *(unsigned int *)(param_1 + 0x33dc) = temp_v9;
@@ -309,7 +309,7 @@ code_r0x0042138c:
             if (temp_v3 != 0xffff) {
               FUN_003fd7c0(temp_v2,temp_v3,2);
             }
-            FUN_0040ace8(DAT_0056fcc0,temp_v2);
+            FUN_0040ace8(g_handleRegistry,temp_v2);
           }
           temp_v5 = temp_v5 + 1;
         } while (temp_v5 < temp_v6);

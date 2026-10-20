@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002e97b4(unsigned char [6], unsigned short [128], int);
+int onlineSockAddrFormatIpv4(unsigned char [6], unsigned short [128], int);
 int FUN_002f32ac(unsigned char [6], unsigned int, int);
-int FUN_002f32dc(unsigned int);
-int FUN_002f32f8(...);
+int inlineBufferReset(unsigned int);
+int wideBufferAppend(...);
 int FUN_002f3338(...);
 
 /* stack frame of param_4: 5 slot(s), 16 byte(s) */
@@ -22,11 +22,11 @@ typedef struct {
 extern unsigned char LAB_0010a1dc; /* 0x10a1dc */
 extern unsigned char LAB_0010a1fc; /* 0x10a1fc */
 
-/* Supplied declaration required: FUN_002e97b4. */
+/* Supplied declaration required: onlineSockAddrFormatIpv4. */
 /* Supplied declaration required: FUN_002f32ac. */
 extern unsigned int *arrayElementAddress_002f32d4(int, unsigned int);
-/* Supplied declaration required: FUN_002f32dc. */
-/* Supplied declaration required: FUN_002f32f8. */
+/* Supplied declaration required: inlineBufferReset. */
+/* Supplied declaration required: wideBufferAppend. */
 /* Supplied declaration required: FUN_002f3338. */
 
 
@@ -56,24 +56,24 @@ unsigned int FUN_0010a12c(int param_1,unsigned int param_2,int param_3,unsigned 
     if ((((temp_v3 & 0xff) != 0 || ((temp_v3 >> 8) & 0xff) != 0) ||
         ((temp_v3 >> 0x10) & 0xff) != 0) || temp_v3 >> 0x18 != 0) {
       temp_v5[0] = 0;
-      FUN_002e97b4(temp_v1,temp_v5,0x100);
+      onlineSockAddrFormatIpv4(temp_v1,temp_v5,0x100);
       temp_v4 = temp_v6 + 0x114;
       puVar1 = (unsigned int *)arrayElementAddress_002f32d4(temp_v4,0);
-      FUN_002f32dc(*puVar1);
+      inlineBufferReset(*puVar1);
       puVar1 = (unsigned int *)arrayElementAddress_002f32d4(temp_v4,0);
-      temp_v0 = FUN_002f32f8(*puVar1,&LAB_0010a1dc);
-      temp_v0 = FUN_002f32f8(temp_v0,temp_v5);
-      temp_v0 = FUN_002f32f8(temp_v0,&LAB_0010a1fc);
+      temp_v0 = wideBufferAppend(*puVar1,&LAB_0010a1dc);
+      temp_v0 = wideBufferAppend(temp_v0,temp_v5);
+      temp_v0 = wideBufferAppend(temp_v0,&LAB_0010a1fc);
       FUN_002f3338(temp_v0,param_3);
       temp_v2 = (unsigned short)((param_4 & 0xff) << 8) | ((unsigned short)(param_4 >> 8) & 0xff);
       temp_v5[0] = 0;
-      FUN_002e97b4(temp_v1,temp_v5,0x100);
+      onlineSockAddrFormatIpv4(temp_v1,temp_v5,0x100);
       puVar1 = (unsigned int *)arrayElementAddress_002f32d4(temp_v4,1);
-      FUN_002f32dc(*puVar1);
+      inlineBufferReset(*puVar1);
       puVar1 = (unsigned int *)arrayElementAddress_002f32d4(temp_v4,1);
-      temp_v0 = FUN_002f32f8(*puVar1,&LAB_0010a1dc);
-      temp_v0 = FUN_002f32f8(temp_v0,temp_v5);
-      temp_v0 = FUN_002f32f8(temp_v0,&LAB_0010a1fc);
+      temp_v0 = wideBufferAppend(*puVar1,&LAB_0010a1dc);
+      temp_v0 = wideBufferAppend(temp_v0,temp_v5);
+      temp_v0 = wideBufferAppend(temp_v0,&LAB_0010a1fc);
       FUN_002f3338(temp_v0,param_4);
       temp_v0 = 1;
     }

@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern PlayerData *FUN_001801a4(void);
+extern PlayerData *gameGetPlayerData(void);
 
 /* Adds `delta` to the player's halfword at +0x60, clamped to -999..999. */
 void FUN_003dfdb4(s32 delta)
 {
-    PlayerData *player = FUN_001801a4();
+    PlayerData *player = gameGetPlayerData();
 
     delta = player->unk60 + delta;
     if (delta < -999) {

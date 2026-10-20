@@ -20,8 +20,8 @@ extern int DAT_005b3c20; /* 0x5b3c20 */
 extern int DAT_005b3c38; /* 0x5b3c38 */
 extern unsigned int g_effAsdLightHandle; /* 0x5b3c80 */
 extern unsigned int DAT_005b3c84; /* 0x5b3c84 */
-extern unsigned int DAT_005b3c88; /* 0x5b3c88 */
-extern int DAT_005b3ca0; /* 0x5b3ca0 */
+extern unsigned int g_asdModelTransformBuilder; /* 0x5b3c88 */
+extern int g_asdModelSlotArray0; /* 0x5b3ca0 */
 extern int DAT_005b3ca4; /* 0x5b3ca4 */
 extern unsigned int DAT_00636e30; /* 0x636e30 */
 extern unsigned int DAT_00636e6c; /* 0x636e6c */
@@ -61,7 +61,7 @@ void FUN_001399b0(unsigned int param_1,unsigned int param_2)
   FUN_0013d42c(param_1,param_2);
   temp_v3 = 0;
   do {
-    FUN_001767a4((&g_effAsdLightHandle)[temp_v3],(&DAT_005b3c88)[temp_v3]);
+    FUN_001767a4((&g_effAsdLightHandle)[temp_v3],(&g_asdModelTransformBuilder)[temp_v3]);
     FUN_00176538((&g_effAsdLightHandle)[temp_v3]);
     temp_v3 = temp_v3 + 1;
   } while (temp_v3 < 2);
@@ -69,13 +69,13 @@ void FUN_001399b0(unsigned int param_1,unsigned int param_2)
   FUN_00141724();
   FUN_00143424();
   temp_v3 = temp_v1;
-  if (DAT_005b3ca0 != 0) {
+  if (g_asdModelSlotArray0 != 0) {
     if (DAT_005b3c14 != 0) {
       FUN_0018e9d8();
     }
     temp_v3 = 0;
     if (DAT_005b3c38 != 0) {
-      FUN_0018e9d8(DAT_005b3ca0);
+      FUN_0018e9d8(g_asdModelSlotArray0);
       temp_v3 = temp_v2;
     }
   }

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001a0990(int);
+int nn_os_LightEvent_ClearSignal(int);
 int FUN_00424454(int);
 int FUN_004245b4(int);
 int FUN_004249e8(int);
@@ -19,7 +19,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_4_stack;
 
-/* Supplied declaration required: FUN_001a0990. */
+/* Supplied declaration required: nn_os_LightEvent_ClearSignal. */
 /* Supplied declaration required: FUN_00424454. */
 /* Supplied declaration required: FUN_004245b4. */
 /* Supplied declaration required: FUN_004249e8. */
@@ -139,7 +139,7 @@ void FUN_004257e4(int param_1,unsigned int param_2,unsigned int param_3,int para
       return;
     }
   }
-  FUN_001a0990(param_1 + 0x20);
+  nn_os_LightEvent_ClearSignal(param_1 + 0x20);
   nn_os_CriticalSection_Leave(param_1);
   return;
 }

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0016c410(int);
+int renderCtxResetColorScale(int);
 int FUN_0016c4b8(int, unsigned int);
 int FUN_0016c560(int);
 int FUN_002b358c(unsigned int);
@@ -28,7 +28,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0016c410. */
+/* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: FUN_0016c4b8. */
 /* Supplied declaration required: FUN_0016c560. */
 /* Supplied declaration required: FUN_002b358c. */
@@ -132,7 +132,7 @@ void FUN_002b3c9c(unsigned short *param_1,unsigned int param_2)
       param_1[0x2b] = 0;
     }
     FUN_00412e44(*(unsigned int *)(param_1 + 4));
-    FUN_0016c410(g_renderCtx);
+    renderCtxResetColorScale(g_renderCtx);
     FUN_0016c560(g_renderCtx);
     temp_v0 = g_renderCtx;
     piVar5 = (int *)(g_renderCtx + 0x1258);

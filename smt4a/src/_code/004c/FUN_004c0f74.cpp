@@ -5,7 +5,7 @@
 extern "C" {
 
 int btlGetMainState(void);
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 int FUN_0034a290(void);
 int FUN_003e8bb0(unsigned char [2], unsigned int, unsigned int *);
 int FUN_003f0e20(int, int);
@@ -28,7 +28,7 @@ extern unsigned int DAT_00571408; /* 0x571408 */
 extern unsigned int DAT_0057140c; /* 0x57140c */
 
 /* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: FUN_0034a290. */
 /* Supplied declaration required: FUN_003e8bb0. */
 /* Supplied declaration required: FUN_003f0e20. */
@@ -56,7 +56,7 @@ unsigned int FUN_004c0f74(unsigned int *param_1,unsigned int param_2)
   FUN_003e8bb0(temp_v6,temp_v0,param_1);
   temp_v1 = (int)temp_v8;
   if (temp_v1 != 0) {
-    FUN_001aba54();
+    dataTable04FindById();
     temp_v2 = 0;
     if (temp_v1 != 0) {
       temp_v2 = (unsigned int)*(unsigned char *)(temp_v1 + 0x44);

@@ -15,7 +15,7 @@ typedef struct {
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-extern int FUN_0030a9b6(int, int, int);
+extern int lessU32Alt2(int, int, int);
 extern int wordRefsEqual_0030aa7a(int *, unsigned int *);
 
 
@@ -35,7 +35,7 @@ unsigned long long FUN_00310bd4(int param_1,int param_2,unsigned int param_3,uns
   temp_v3 = param_2;
   temp_v5 = param_4;
   while (temp_v1 = temp_v0, temp_v1 != 0) {
-    temp_v0 = FUN_0030a9b6(temp_v4,temp_v1 + 0x10,param_2);
+    temp_v0 = lessU32Alt2(temp_v4,temp_v1 + 0x10,param_2);
     if (temp_v0 != 0) {
       temp_v0 = *(int *)(temp_v1 + 0xc);
     }
@@ -47,7 +47,7 @@ unsigned long long FUN_00310bd4(int param_1,int param_2,unsigned int param_3,uns
   temp_v5 = *(unsigned int *)(param_1 + 0x10);
   temp_v3 = temp_v2;
   temp_v0 = wordRefsEqual_0030aa7a(&temp_v3,(unsigned int *)&temp_v5);
-  if ((temp_v0 == 0) && (temp_v0 = FUN_0030a9b6(temp_v4,param_2,temp_v3 + 0x10), temp_v0 == 0)) {
+  if ((temp_v0 == 0) && (temp_v0 = lessU32Alt2(temp_v4,param_2,temp_v3 + 0x10), temp_v0 == 0)) {
     return romwright_piece_4_4(temp_v3,temp_v3);
   }
   return romwright_piece_4_4(temp_v3,*(unsigned int *)(param_1 + 0x10));

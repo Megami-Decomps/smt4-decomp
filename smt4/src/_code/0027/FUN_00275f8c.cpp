@@ -11,8 +11,8 @@ extern int DAT_0049f95c; /* 0x49f95c */
 extern unsigned char DAT_0049fb49; /* 0x49fb49 */
 
 /* Supplied declaration required: FUN_00248e34. */
-extern int FUN_00248e8c(void);
-extern int FUN_002c2950(void);
+extern int dataTable23Type0FindIndexById(void);
+extern int gameGetMapBlock(void);
 
 
 void FUN_00275f8c(void)
@@ -22,8 +22,8 @@ void FUN_00275f8c(void)
   int temp_v0;
   int temp_v1;
   
-  if ((DAT_0049f958 != 0) && (temp_v0 = FUN_00248e8c(), temp_v0 != -1)) {
-    temp_v1 = FUN_002c2950();
+  if ((DAT_0049f958 != 0) && (temp_v0 = dataTable23Type0FindIndexById(), temp_v0 != -1)) {
+    temp_v1 = gameGetMapBlock();
     if (-1 < temp_v0) {
       temp_v1 = temp_v1 + ((int)(temp_v0 + ((unsigned int)(temp_v0 >> 0x1f) >> 0x1b)) >> 5) * 4;
       *(unsigned int *)(temp_v1 + 0x7d4) = *(unsigned int *)(temp_v1 + 0x7d4) | (1 << ((temp_v0 % 0x20) & 0xffU));
@@ -31,9 +31,9 @@ void FUN_00275f8c(void)
     FUN_00248e34(DAT_0049f958);
   }
   if (DAT_0049f95c != 0) {
-    temp_v0 = FUN_00248e8c();
+    temp_v0 = dataTable23Type0FindIndexById();
     if (temp_v0 != -1) {
-      temp_v1 = FUN_002c2950();
+      temp_v1 = gameGetMapBlock();
       if (-1 < temp_v0) {
         temp_v1 = temp_v1 + ((int)(temp_v0 + ((unsigned int)(temp_v0 >> 0x1f) >> 0x1b)) >> 5) * 4;
         *(unsigned int *)(temp_v1 + 0x7d4) = *(unsigned int *)(temp_v1 + 0x7d4) | (1 << ((temp_v0 % 0x20) & 0xffU));

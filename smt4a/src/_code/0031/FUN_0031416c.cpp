@@ -17,7 +17,7 @@ typedef struct {
 extern unsigned char LAB_00314518; /* 0x314518 */
 extern unsigned char LAB_00314534; /* 0x314534 */
 extern unsigned char LAB_00314544; /* 0x314544 */
-extern int DAT_0056fcc0; /* 0x56fcc0 */
+extern int g_handleRegistry; /* 0x56fcc0 */
 extern float DAT_00610a74; /* 0x610a74 */
 extern float DAT_00610a78; /* 0x610a78 */
 extern float DAT_00610a7c; /* 0x610a7c */
@@ -70,7 +70,7 @@ void FUN_0031416c(int param_1,int param_2,int param_3)
   float temp_v7;
   
   temp_v6 = in_s0 * 0.017453292f;
-  temp_v2 = *(unsigned int *)(DAT_0056fcc0 + 4);
+  temp_v2 = *(unsigned int *)(g_handleRegistry + 4);
   temp_v7 = temp_v6;
   FUN_001bc124();
   FUN_001bbf0c();

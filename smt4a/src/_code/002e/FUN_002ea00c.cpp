@@ -4,25 +4,25 @@
 
 extern "C" {
 
-int FUN_002e6e14(...);
+int asdOperatorDeleteArray(...);
 int FUN_002e6e34(int *, int);
 int FUN_002e6e5c(int *);
 int _ZN9Obj55859c12freeResourceEv(unsigned int *);
 int FUN_002e9e1e(int *);
 int FUN_002e9f00(unsigned int *, int);
-int FUN_002ea0b8(unsigned int *);
+int sharedRefInitEmpty(unsigned int *);
 
 typedef int romwright_code(...);
 extern unsigned char DAT_005585a4; /* 0x5585a4 */
 
-/* Supplied declaration required: FUN_002e6e14. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
 extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
 /* Supplied declaration required: _ZN9Obj55859c12freeResourceEv. */
 /* Supplied declaration required: FUN_002e9e1e. */
 /* Supplied declaration required: FUN_002e9f00. */
-/* Supplied declaration required: FUN_002ea0b8. */
+/* Supplied declaration required: sharedRefInitEmpty. */
 
 
 void FUN_002ea00c(unsigned int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -61,7 +61,7 @@ void FUN_002ea00c(unsigned int *param_1,unsigned int param_2,unsigned int param_
   param_1[0x17] = 0;
   for (temp_v0 = param_1[0xb]; temp_v0 != param_1[0xc]; temp_v0 = temp_v0 + 4) {
   }
-  FUN_002e6e14();
+  asdOperatorDeleteArray();
   piVar4 = (int *)(param_1 + 5);
   if (param_1[9] != 0) {
     FUN_002e9e1e(piVar4);
@@ -70,14 +70,14 @@ void FUN_002ea00c(unsigned int *param_1,unsigned int param_2,unsigned int param_
     param_1[6] = (unsigned int)puVar2;
     while (piVar3 = (int *)*piVar4, piVar3 != (int *)0x0) {
       *piVar4 = *piVar3;
-      FUN_002e6e14(piVar3[2]);
-      FUN_002e6e14(piVar3);
+      asdOperatorDeleteArray(piVar3[2]);
+      asdOperatorDeleteArray(piVar3);
     }
     param_1[6] = 0;
     param_1[7] = 0;
     param_1[8] = 0;
   }
-  FUN_002ea0b8(param_1);
+  sharedRefInitEmpty(param_1);
   return;
 }
 

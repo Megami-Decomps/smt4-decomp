@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00406768(unsigned int, int, unsigned int);
 int VectorFloatToUnsigned(double, int);
 
-extern int DAT_0056fcc0; /* 0x56fcc0 */
+extern int g_handleRegistry; /* 0x56fcc0 */
 
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: FUN_00406768. */
@@ -47,7 +47,7 @@ void FUN_004d8bf8(int param_1)
       temp_v5 = in_s2;
     }
     temp_v2 = VectorFloatToUnsigned(temp_v5 * 255.0f + 0.5f,3);
-    FUN_00406768(*(unsigned int *)(DAT_0056fcc0 + 4),(int)*(short *)(param_1 + 0xac),
+    FUN_00406768(*(unsigned int *)(g_handleRegistry + 4),(int)*(short *)(param_1 + 0xac),
                  (temp_v1 << 0x18) | ((temp_v3 & 0xff) << 0x10) | ((temp_v2 & 0xff) << 8) | 0xff);
     return;
   }

@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_002c424c(u32 a, u32 b, u32 c);
+int __aeabi_memset4(u32 a, u32 b, u32 c);
 
 typedef struct Obj {
     /* 0x00 */ u8 unk00[0x24];
@@ -17,7 +17,7 @@ extern struct {
 void FUN_002a7d70(Obj *obj, u32 a, u32 b)
 {
     if ((obj->flags & 2) != 0) {
-        FUN_002c424c(a, b, DAT_004765e4.unk8);
+        __aeabi_memset4(a, b, DAT_004765e4.unk8);
         return;
     }
 }

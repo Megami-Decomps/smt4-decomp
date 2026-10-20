@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0030ea58(void);
+int libc_strcmp(void);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -12,7 +12,7 @@ typedef struct {
 } param_2_stack;
 
 extern unsigned int wstrlen(int);
-/* Supplied declaration required: FUN_0030ea58. */
+/* Supplied declaration required: libc_strcmp. */
 
 
 unsigned int FUN_001a79e8(int param_1,int param_2)
@@ -52,7 +52,7 @@ unsigned int FUN_001a79e8(int param_1,int param_2)
       } while (*puVar6 < temp_v3);
     }
     temp_v2 = puVar6[2];
-    if ((temp_v2 != 0) && (FUN_0030ea58(), temp_v2 == 0)) {
+    if ((temp_v2 != 0) && (libc_strcmp(), temp_v2 == 0)) {
       return (((int)puVar6 - (int)(puVar7 + 3)) / 0xc) & 0xffff;
     }
   }

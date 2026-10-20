@@ -20,7 +20,7 @@ extern unsigned int DAT_00594ab8; /* 0x594ab8 */
 extern unsigned char DAT_00630334; /* 0x630334 */
 
 extern unsigned int FUN_002eabfc(void);
-extern unsigned int FUN_002eac18(unsigned char *, unsigned int);
+extern unsigned int inlineBufferAddress(unsigned char *, unsigned int);
 /* Supplied declaration required: byteRefMin. */
 /* Supplied declaration required: FUN_002eac34. */
 extern unsigned int FUN_002eac54(unsigned int, unsigned int);
@@ -54,7 +54,7 @@ void FUN_00104a0c(int param_1,int param_2,int param_3)
   temp_v4 = 0;
   if (*(char *)(param_3 + 0x24) != '\0') {
     temp_v3 = FUN_002eabfc();
-    temp_v3 = FUN_002eac18(&DAT_00630334,temp_v3);
+    temp_v3 = inlineBufferAddress(&DAT_00630334,temp_v3);
     temp_v9 = param_2 + 0x80;
     temp_v6[0] = (unsigned char)*(unsigned int *)(param_2 + 0x8c);
     pbVar5 = (unsigned char *)byteRefMin(temp_v6,temp_v3);

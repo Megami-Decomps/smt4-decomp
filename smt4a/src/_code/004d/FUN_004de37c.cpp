@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00192550(void);
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 int FUN_003e8bb0(unsigned char [4], int, unsigned int);
 int FUN_003f0e94(int, unsigned int);
 int FUN_004a92b8(unsigned int);
@@ -31,10 +31,10 @@ extern unsigned int DAT_00571218; /* 0x571218 */
 extern unsigned int DAT_0057121c; /* 0x57121c */
 extern unsigned int DAT_00571228; /* 0x571228 */
 extern unsigned int DAT_0057122c; /* 0x57122c */
-extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
+extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
 /* Supplied declaration required: FUN_00192550. */
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: dataTable04FindById. */
 extern int playerHasFlagBit(unsigned int);
 /* Supplied declaration required: FUN_003e8bb0. */
 /* Supplied declaration required: FUN_003f0e94. */
@@ -80,7 +80,7 @@ unsigned int FUN_004de37c(int *param_1,unsigned int *param_2)
     *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 1;
     return 1;
   }
-  temp_v4 = FUN_004aba9c(DAT_0057a9c8);
+  temp_v4 = FUN_004aba9c(g_btlUiBlock);
   if (temp_v4 == 0) {
     return 0;
   }
@@ -89,7 +89,7 @@ unsigned int FUN_004de37c(int *param_1,unsigned int *param_2)
   temp_v7 = 0;
   temp_v8 = 0;
   uStack_6c = 0;
-  FUN_004ab80c(DAT_0057a9c8,temp_v9,&temp_v6,&temp_v8);
+  FUN_004ab80c(g_btlUiBlock,temp_v9,&temp_v6,&temp_v8);
   temp_v3 = param_2[10];
   if (temp_v9[0] == '\0') {
     if (*(short *)(temp_v3 + 0x1be) != 10) {
@@ -115,7 +115,7 @@ unsigned int FUN_004de37c(int *param_1,unsigned int *param_2)
         temp_v4 = (int)*(short *)(temp_v3 + 0x1c0);
         FUN_00192550();
         temp_v3 = (unsigned int)*(unsigned short *)(temp_v4 + 0x32);
-        if ((temp_v3 != 0) && (FUN_001aba54(), temp_v3 != 0)) {
+        if ((temp_v3 != 0) && (dataTable04FindById(), temp_v3 != 0)) {
           temp_v0 = *(char *)(temp_v3 + 0x23);
           temp_v1 = *(unsigned char *)(temp_v3 + 0x38);
           goto LAB_004de5cc;
@@ -159,12 +159,12 @@ LAB_004de6b4:
         }
         temp_v3 = temp_v3 + 1;
       } while ((int)temp_v3 < 0x40);
-      FUN_004a92b8(DAT_0057a9c8);
+      FUN_004a92b8(g_btlUiBlock);
       FUN_004eb838(param_1,param_2);
       return 1;
     }
     temp_v4 = (int)*(short *)(temp_v3 + 0x1c0);
-    FUN_001aba54();
+    dataTable04FindById();
     if (temp_v4 == 0) goto LAB_004de6b0;
     temp_v0 = *(char *)(temp_v4 + 0x23);
     temp_v1 = *(unsigned char *)(temp_v4 + 0x38);
@@ -178,7 +178,7 @@ LAB_004de5cc:
          ) {
         *param_2 = temp_v3 | 0x4004;
       }
-      FUN_004a92b8(DAT_0057a9c8);
+      FUN_004a92b8(g_btlUiBlock);
       FUN_004eb838(param_1,param_2);
       return 1;
     }
@@ -209,7 +209,7 @@ LAB_004de56c:
   temp_v4 = *param_1;
   *(unsigned int *)(temp_v4 + 0x2008) = temp_v8;
   *(unsigned int *)(temp_v4 + 0x200c) = uStack_6c;
-  FUN_004a92b8(DAT_0057a9c8);
+  FUN_004a92b8(g_btlUiBlock);
   FUN_004eb838(param_1,param_2);
   return 1;
 }

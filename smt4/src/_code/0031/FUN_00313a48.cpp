@@ -102,7 +102,7 @@ extern unsigned int FUN_00246c28(void);
 /* Supplied declaration required: FUN_00246c8c. */
 /* Supplied declaration required: FUN_0024b77c. */
 /* Supplied declaration required: FUN_0024b830. */
-extern int FUN_00269a58(void);
+extern int effGetFrameCounter(void);
 /* Supplied declaration required: FUN_002b7064. */
 /* Supplied declaration required: FUN_002b70cc. */
 /* Supplied declaration required: __aeabi_uidivmod. */
@@ -362,7 +362,7 @@ void FUN_00313a48(fn_00313a48_arg0 *param_1)
                   *(unsigned char *)((int)puVar22 + 0x12) = 0;
                   *(char *)((int)puVar22 + 0x13) = SUB41(temp_v28,0);
                 }
-                temp_v16 = FUN_00269a58();
+                temp_v16 = effGetFrameCounter();
                 *piVar23 = temp_v16 + temp_v19;
               }
             }

@@ -8,7 +8,7 @@ int FUN_00233240(...);
 int FUN_0029d684(int);
 int FUN_0029defc(int, int);
 int FUN_0029dfc0(int);
-int FUN_002b8838(unsigned int);
+int buttonHelpSetPreset(unsigned int);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -24,7 +24,7 @@ extern int FUN_00287758(void);
 /* Supplied declaration required: FUN_0029defc. */
 /* Supplied declaration required: FUN_0029dfc0. */
 extern int FUN_0029e0f8(void);
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 
 
 void FUN_003a8dac(int *param_1)
@@ -52,11 +52,11 @@ void FUN_003a8dac(int *param_1)
   FUN_00233240(param_1 + 0x37,1);
   if ((char)param_1[0x169] == '\0') {
     temp_v1 = 0x2e;
-    FUN_002b8838(temp_v1);
+    buttonHelpSetPreset(temp_v1);
   }
   else if ((char)param_1[0x169] == '\x01') {
     temp_v1 = 0x46;
-    FUN_002b8838(temp_v1);
+    buttonHelpSetPreset(temp_v1);
   }
   if ((short)param_1[0x16a] != 0) {
     temp_v0 = FUN_0023360c(param_1 + 8);

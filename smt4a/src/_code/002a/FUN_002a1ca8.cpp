@@ -14,7 +14,7 @@ typedef struct Object {
 } Object;
 
 extern void asdMemFree(void *buffer);
-extern void FUN_001800b8(void *buffer);
+extern void asdTextureRelease(void *buffer);
 
 void FUN_002a1ca8(Object *obj)
 {
@@ -23,7 +23,7 @@ void FUN_002a1ca8(Object *obj)
         obj->bufferA = NULL;
     }
     if (obj->bufferB != NULL) {
-        FUN_001800b8(obj->bufferB);
+        asdTextureRelease(obj->bufferB);
         obj->bufferB = NULL;
     }
     obj->size = 0;

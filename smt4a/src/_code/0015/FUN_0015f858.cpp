@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100854(unsigned char *, unsigned int, unsigned int, int, unsigned char *);
+int libc_bsearch(unsigned char *, unsigned int, unsigned int, int, unsigned char *);
 int FUN_001762d4(unsigned char *, unsigned char *);
 int FUN_001763a4(unsigned char *, unsigned char *);
 int FUN_00192550(void);
@@ -27,7 +27,7 @@ extern unsigned char *g_aocSystem; /* 0x570280 */
 #define ROMWRIGHT_SUBPIECE_4_2_0_DEFINED
 #define romwright_subpiece_4_2_0(value, offset) ((unsigned short)(unsigned int)(value))
 #endif
-/* Supplied declaration required: FUN_00100854. */
+/* Supplied declaration required: libc_bsearch. */
 /* Supplied declaration required: FUN_001762d4. */
 /* Supplied declaration required: FUN_001763a4. */
 extern int dataTableGet(unsigned int, unsigned int);
@@ -75,7 +75,7 @@ void FUN_0015f858(unsigned char *param_1)
         temp_v2 = dataTableGetEntries();
         temp_v3 = dataTableGetCount(temp_v1);
         puVar3 = temp_v5;
-        FUN_00100854(puVar3,temp_v2,temp_v3,0x28,&LAB_0019e30c);
+        libc_bsearch(puVar3,temp_v2,temp_v3,0x28,&LAB_0019e30c);
       }
       break;
     case 1:
@@ -103,7 +103,7 @@ void FUN_0015f858(unsigned char *param_1)
         temp_v2 = dataTableGetEntries();
         temp_v3 = dataTableGetCount(temp_v1);
         puVar3 = temp_v4;
-        FUN_00100854(puVar3,temp_v2,temp_v3,0x3c,&LAB_00167224);
+        libc_bsearch(puVar3,temp_v2,temp_v3,0x3c,&LAB_00167224);
       }
       break;
     case 10:
@@ -116,7 +116,7 @@ void FUN_0015f858(unsigned char *param_1)
         temp_v2 = dataTableGetEntries();
         temp_v3 = dataTableGetCount(temp_v1);
         puVar3 = temp_v5;
-        FUN_00100854(puVar3,temp_v2,temp_v3,0x30,&LAB_00169230);
+        libc_bsearch(puVar3,temp_v2,temp_v3,0x30,&LAB_00169230);
       }
       break;
     default:

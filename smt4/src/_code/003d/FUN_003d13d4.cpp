@@ -20,7 +20,7 @@ typedef struct {
 /* Supplied declaration required: FUN_002296f4. */
 /* Supplied declaration required: FUN_00246454. */
 /* Supplied declaration required: FUN_0024b888. */
-extern int FUN_002a8764(void);
+extern int gameGetSlotTable(void);
 extern int FUN_00337b64(int);
 
 
@@ -128,7 +128,7 @@ LAB_003d15ac:
       if ((-1 < (short)temp_v11[0x35]) &&
          (((int)temp_v4 < 0 ||
           (((*param_2 & 0x4000) == 0 &&
-           (temp_v2 = FUN_002a8764(),
+           (temp_v2 = gameGetSlotTable(),
            (int)*(char *)(temp_v2 + temp_v4 + 0x90f0) == (int)(short)temp_v11[0x35])))))) {
         FUN_002296f4(param_1,param_2,(int)*(short *)(param_2[9] + 0x62),param_6,0xf,0x14);
         return 1;

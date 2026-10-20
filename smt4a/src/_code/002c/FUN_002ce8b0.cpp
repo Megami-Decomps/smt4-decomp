@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_001800b8(void *buffer);
+void asdTextureRelease(void *buffer);
 void FUN_002e3304(u32 handle);
 void asdMemFree(void *memory);
 
@@ -17,7 +17,7 @@ typedef struct Holder {
 void FUN_002ce8b0(Holder *object)
 {
     if (object->buffer != NULL) {
-        FUN_001800b8(object->buffer);
+        asdTextureRelease(object->buffer);
     }
     FUN_002e3304(object->handle);
     asdMemFree(object);

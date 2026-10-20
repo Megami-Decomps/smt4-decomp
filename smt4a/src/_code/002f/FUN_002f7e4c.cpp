@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002ed912(...);
+int vectorInitEmpty2(...);
 
 extern unsigned char DAT_0055ab0c; /* 0x55ab0c */
 
-/* Supplied declaration required: FUN_002ed912. */
+/* Supplied declaration required: vectorInitEmpty2. */
 
 
 void FUN_002f7e4c(unsigned int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
@@ -30,8 +30,8 @@ void FUN_002f7e4c(unsigned int *param_1,unsigned int param_2,unsigned int param_
   param_1[8] = param_9;
   param_1[10] = 0;
   param_1[9] = param_10;
-  temp_v0 = FUN_002ed912(param_1 + 0xb);
-  temp_v0 = FUN_002ed912(temp_v0 + 0xc);
+  temp_v0 = vectorInitEmpty2(param_1 + 0xb);
+  temp_v0 = vectorInitEmpty2(temp_v0 + 0xc);
   *(unsigned char *)(temp_v0 + 0xc) = 0;
   return;
 }

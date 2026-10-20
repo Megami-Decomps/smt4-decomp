@@ -23,10 +23,10 @@ typedef struct {
 
 extern PopupState *g_popupState;
 
-s32 FUN_0014bef4(u32 id);
+s32 randRange(u32 id);
 PopupCandidate *saveSlotFindSelected(void);
 PopupEntry *FUN_0015fa74(u32 a, u32 b);
-s32 FUN_0018719c(u32 flag);
+s32 gameFlagIsSet(u32 flag);
 s32 FUN_00213b5c(void);
 s32 FUN_002d8b58(u32 kind, u16 id);
 f32 FUN_004a00f4(s32 index);
@@ -63,7 +63,7 @@ void popupTryStartScrollPrompt(u32 arg1, u32 arg2)
     if (scrollY < entry->height + adjust) {
         candidate = saveSlotFindSelected();
         if (candidate != NULL) {
-            if (FUN_0018719c(0x1a2) == 0 || FUN_0014bef4(99) + 1 > 50) {
+            if (gameFlagIsSet(0x1a2) == 0 || randRange(99) + 1 > 50) {
                 g_popupState->mode = 10;
                 g_popupState->unk04 = 0;
                 g_popupState->candidate = candidate->id;

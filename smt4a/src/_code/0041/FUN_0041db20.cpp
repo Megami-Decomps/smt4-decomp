@@ -6,7 +6,7 @@ extern "C" {
 
 int asdMemFree(...);
 int FUN_002a1ca0(...);
-int FUN_002e3328(unsigned int *);
+int asdOperatorDelete(unsigned int *);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -19,7 +19,7 @@ extern unsigned char DAT_00557e14; /* 0x557e14 */
 
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002a1ca0. */
-/* Supplied declaration required: FUN_002e3328. */
+/* Supplied declaration required: asdOperatorDelete. */
 
 
 void FUN_0041db20(unsigned int *param_1)
@@ -58,7 +58,7 @@ void FUN_0041db20(unsigned int *param_1)
     (**(romwright_code **)(*(int *)param_1[5] + 4))();
     param_1[5] = 0;
   }
-  FUN_002e3328(param_1);
+  asdOperatorDelete(param_1);
   return;
 }
 

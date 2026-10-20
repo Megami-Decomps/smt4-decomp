@@ -4,7 +4,7 @@ extern "C" {
 
 s32 FUN_0013b680(void)
 {
-    return DAT_0044e380.unk07;
+    return g_nnAppletState.unk07;
 }
 
 } /* extern "C" */

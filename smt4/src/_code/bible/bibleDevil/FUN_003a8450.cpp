@@ -12,20 +12,20 @@ int FUN_00233854(unsigned int);
 int FUN_0023553c(...);
 int FUN_0026c57c(void);
 int FUN_00295660(int, int [33]);
-int FUN_00296f4c(...);
+int scrScriptProcessStartEntry(...);
 int FUN_0029ca58(void);
 int FUN_0029cc44(...);
 int FUN_0029ce60(unsigned int, int, int);
-int FUN_0029e1ec(void);
+int useCounterStart(void);
 int FUN_0029e328(...);
-int FUN_0029e39c(...);
+int sortMenuCreate(...);
 int FUN_0029e620(unsigned int, int);
 int FUN_0029ede8(int, unsigned int, unsigned int, int);
 int FUN_0029ee6c(...);
 int FUN_002a0cc8(...);
-int FUN_002b8838(...);
+int buttonHelpSetPreset(...);
 int FUN_002bd06c(unsigned int);
-int FUN_002bf694(int [33], unsigned int);
+int libc_strcpy(int [33], unsigned int);
 int FUN_003a7ec8(int, int);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
@@ -49,22 +49,22 @@ extern int FUN_0026c63c(void);
 extern int FUN_002762e0(void);
 extern int FUN_0027ee9c(void);
 /* Supplied declaration required: FUN_00295660. */
-/* Supplied declaration required: FUN_00296f4c. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_0029ca58. */
 /* Supplied declaration required: FUN_0029cc44. */
 /* Supplied declaration required: FUN_0029ce60. */
 extern int gameGetFlagByte12e8(void);
-/* Supplied declaration required: FUN_0029e1ec. */
+/* Supplied declaration required: useCounterStart. */
 /* Supplied declaration required: FUN_0029e328. */
-/* Supplied declaration required: FUN_0029e39c. */
+/* Supplied declaration required: sortMenuCreate. */
 /* Supplied declaration required: FUN_0029e620. */
 /* Supplied declaration required: FUN_0029ede8. */
 /* Supplied declaration required: FUN_0029ee6c. */
 /* Supplied declaration required: FUN_002a0cc8. */
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 extern unsigned int FUN_002bce30(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002bd06c. */
-/* Supplied declaration required: FUN_002bf694. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_003a7ec8. */
 
 
@@ -128,12 +128,12 @@ void FUN_003a8450(int param_1)
     if (temp_v1 != 0) {
       temp_v2 = (unsigned int)temp_v0;
       FUN_002bd06c(temp_v2);
-      FUN_002bf694(temp_v7,temp_v2);
+      libc_strcpy(temp_v7,temp_v2);
       FUN_00295660(8,temp_v7);
       temp_v4 = FUN_002bce30(temp_v0,1);
-      FUN_002bf694(temp_v7,temp_v4);
+      libc_strcpy(temp_v7,temp_v4);
       FUN_00295660(0x10,temp_v7);
-      FUN_00296f4c(*(unsigned int *)(param_1 + 0x5a0),0);
+      scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x5a0),0);
       *(unsigned int *)(param_1 + 0x14) = 3;
       *(unsigned int *)(param_1 + 0x18) = 0;
     }
@@ -155,10 +155,10 @@ void FUN_003a8450(int param_1)
       case 5:
         temp_v4 = 5;
       }
-      FUN_00296f4c(*(unsigned int *)(param_1 + 0x5a0),temp_v4);
+      scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x5a0),temp_v4);
       *(unsigned int *)(param_1 + 0x14) = 5;
       *(unsigned int *)(param_1 + 0x18) = 0;
-      FUN_002b8838(0x9e);
+      buttonHelpSetPreset(0x9e);
     }
     FUN_0023553c(1);
     FUN_002a0cc8(1);
@@ -170,12 +170,12 @@ void FUN_003a8450(int param_1)
       return;
     }
     (*(unsigned int *)((unsigned char *)&DAT_0043d9c8 + 0x4)) = 0xffffffff;
-    FUN_0029e39c(0xf,0);
+    sortMenuCreate(0xf,0);
     FUN_0029e328(1);
     FUN_0029e328(2);
     FUN_0029e328(7);
     FUN_0029e328(3);
-    FUN_0029e1ec();
+    useCounterStart();
     FUN_002a0cc8(1);
     *(unsigned int *)(param_1 + 0x14) = 6;
     *(unsigned int *)(param_1 + 0x18) = 0;

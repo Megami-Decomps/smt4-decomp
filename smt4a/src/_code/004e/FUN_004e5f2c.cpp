@@ -11,7 +11,7 @@ extern unsigned int DAT_0057116c; /* 0x57116c */
 extern unsigned int DAT_005712c8; /* 0x5712c8 */
 extern unsigned int DAT_005712cc; /* 0x5712cc */
 
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_003f0e20. */
 
 
@@ -37,7 +37,7 @@ unsigned char FUN_004e5f2c(int *param_1,int param_2,int param_3,int param_4)
         temp_v1 = temp_v0;
       }
     }
-    temp_v0 = FUN_0018719c(0x591);
+    temp_v0 = gameFlagIsSet(0x591);
     if (((temp_v0 == 0 || puVar1 == (unsigned int *)0x0) ||
         ((puVar1[1] & DAT_0057116c) != 0 || (*puVar1 & DAT_00571168) != 0)) || (-1 < param_4)) {
       if (-1 < temp_v1) {

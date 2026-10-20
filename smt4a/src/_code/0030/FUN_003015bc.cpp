@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_002b2d74(unsigned int, unsigned int, unsigned int *);
-int FUN_002b2f08(void);
+int objectBufferFree(void);
 int FUN_0038439c(unsigned int *, int, int);
 int FUN_003a1ef4(void);
 
 /* Supplied declaration required: FUN_002b2d74. */
-/* Supplied declaration required: FUN_002b2f08. */
+/* Supplied declaration required: objectBufferFree. */
 /* Supplied declaration required: FUN_0038439c. */
 /* Supplied declaration required: FUN_003a1ef4. */
 
@@ -29,7 +29,7 @@ unsigned int * FUN_003015bc(int param_1)
   FUN_0038439c(puVar1,**(unsigned short **)(param_1 + 0x30),param_1 + 0xc);
   temp_v0 = (unsigned int)**(unsigned short **)(param_1 + 0x30);
   if (puVar1[0xc] != 0) {
-    FUN_002b2f08();
+    objectBufferFree();
   }
   FUN_002b2d74(temp_v0,*puVar1,puVar3);
   puVar1[0xc] = temp_v0;

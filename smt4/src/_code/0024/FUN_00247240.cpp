@@ -2,8 +2,8 @@
 
 extern "C" {
 
-int FUN_0025715c(void);
-int FUN_002c0894(void);
+int handleBlockRefDrop(void);
+int asdTextureRelease(void);
 int asdMemFree(void *ptr);
 
 typedef struct Obj {
@@ -16,10 +16,10 @@ typedef struct Obj {
 void FUN_00247240(Obj *obj)
 {
     if (obj->unk38 != 0) {
-        FUN_002c0894();
+        asdTextureRelease();
     }
     if (obj->unk40 != 0) {
-        FUN_0025715c();
+        handleBlockRefDrop();
     }
     asdMemFree(obj);
 }

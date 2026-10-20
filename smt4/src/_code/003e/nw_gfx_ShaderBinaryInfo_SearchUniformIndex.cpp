@@ -11,8 +11,8 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_4_stack;
 
-extern int FUN_002b4414(unsigned int, int, int);
-extern int FUN_002c30c4(unsigned int);
+extern int libc_strncmp(unsigned int, int, int);
+extern int libc_strlen(unsigned int);
 
 
 void nw_gfx_ShaderBinaryInfo_SearchUniformIndex
@@ -36,13 +36,13 @@ void nw_gfx_ShaderBinaryInfo_SearchUniformIndex
   temp_v7 = *(int *)(param_2 + param_3 * 4 + 8);
   temp_v1 = *(int *)(temp_v7 + 0x38);
   temp_v4 = *(int *)(temp_v7 + 0x30);
-  temp_v2 = FUN_002c30c4(param_4);
+  temp_v2 = libc_strlen(param_4);
   temp_v5 = 0;
   if (temp_v5 < *(int *)(temp_v7 + 0x34)) {
     do {
       piVar7 = (int *)(temp_v4 + temp_v7 + temp_v5 * 8);
       temp_v6 = *piVar7 + temp_v1 + temp_v7;
-      temp_v3 = FUN_002b4414(param_4,temp_v6,temp_v2);
+      temp_v3 = libc_strncmp(param_4,temp_v6,temp_v2);
       if ((temp_v3 == 0) && ((temp_v0 = *(char *)(temp_v6 + temp_v2), temp_v0 == '\0' || (temp_v0 == '.')))) {
         temp_v8 = piVar7[1] & 0xffff;
         if (temp_v8 >= 0x88) {

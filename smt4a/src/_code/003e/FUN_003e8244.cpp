@@ -6,7 +6,7 @@ extern "C" {
 
 int dataTableGet(int, int);
 
-extern int FUN_0014bef4(unsigned int);
+extern int randRange(unsigned int);
 /* Supplied declaration required: dataTableGet. */
 extern short dataTableGetCount(void);
 extern int dataTableGetEntries(void);
@@ -37,7 +37,7 @@ int FUN_003e8244(unsigned int param_1,int param_2)
       temp_v3 = temp_v3 + 1;
     } while (temp_v2 < 0xc);
     if (0 < temp_v3) {
-      temp_v4 = FUN_0014bef4((temp_v3 - 1U) & 0xffff);
+      temp_v4 = randRange((temp_v3 - 1U) & 0xffff);
       temp_v4 = (int)*(short *)(temp_v1 + temp_v4 * 2);
     }
   }

@@ -25,7 +25,7 @@ typedef struct {
     unsigned int sp50; /* 0x50: local_50 */
 } param_4_stack;
 
-extern romwright_code *DAT_0044e948; /* 0x44e948 */
+extern romwright_code *g_mwmofilterDeblocker; /* 0x44e948 */
 extern romwright_code *DAT_0044e94c; /* 0x44e94c */
 
 /* Supplied declaration required: FUN_0032fa20. */
@@ -96,7 +96,7 @@ int * FUN_003f5d6c(int *param_1,int *param_2,int *param_3,int param_4)
             (*DAT_0044e94c)();
           }
           *param_1 = temp_v0;
-          temp_v0 = (*DAT_0044e948)(temp_v0);
+          temp_v0 = (*g_mwmofilterDeblocker)(temp_v0);
           param_1[1] = temp_v0;
           if (temp_v0 == 0) {
             return (int *)0x5;

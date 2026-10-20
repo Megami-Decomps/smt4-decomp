@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0048c09c(int);
 
-extern int DAT_00587f28; /* 0x587f28 */
+extern int g_naviMain; /* 0x587f28 */
 
 /* Supplied declaration required: FUN_0048c09c. */
 
@@ -18,9 +18,9 @@ void FUN_003a366c(unsigned int param_1,unsigned int param_2,unsigned int param_3
   int temp_v0;
   unsigned int *puVar2;
   
-  temp_v0 = DAT_00587f28;
-  puVar2 = (unsigned int *)(DAT_00587f28 + 0xc);
-  *(unsigned int *)(DAT_00587f28 + 0x14) = param_3;
+  temp_v0 = g_naviMain;
+  puVar2 = (unsigned int *)(g_naviMain + 0xc);
+  *(unsigned int *)(g_naviMain + 0x14) = param_3;
   *puVar2 = param_1;
   *(unsigned int *)(temp_v0 + 0x10) = param_2;
   FUN_0048c09c(temp_v0 + 0x68);

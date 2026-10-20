@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_0019cac4(void);
+int dataTable00FindById(void);
 int FUN_00261424(void);
 int asdOperatorNewD(void);
-int FUN_002e6490(unsigned int *);
+int asdOperatorDeleteC(unsigned int *);
 int VectorSignedToFloat(...);
 int __aeabi_idivmod(unsigned int, unsigned int);
 
@@ -22,14 +22,14 @@ extern unsigned int DAT_0057144c; /* 0x57144c */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 extern int btlGetMainState(void);
-extern unsigned int FUN_0014bef4(unsigned int);
+extern unsigned int randRange(unsigned int);
 extern int lcgRandomRange(unsigned int);
-extern int FUN_0018719c(void);
-/* Supplied declaration required: FUN_0019cac4. */
+extern int gameFlagIsSet(void);
+/* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: FUN_00261424. */
 extern int FUN_002626e0(void);
 /* Supplied declaration required: asdOperatorNewD. */
-/* Supplied declaration required: FUN_002e6490. */
+/* Supplied declaration required: asdOperatorDeleteC. */
 extern int FUN_003e8244(int, unsigned int);
 extern int valueAtF0IsReady(int);
 extern int FUN_003eaea0(int, int);
@@ -65,7 +65,7 @@ void FUN_004c3db4(unsigned int *param_1)
   temp_v1 = btlGetMainState();
   piVar12 = (int *)(temp_v1 + 0x1b0);
   temp_v2 = (unsigned int)*(unsigned short *)((int)param_1 + 0x166);
-  FUN_0019cac4();
+  dataTable00FindById();
   if (temp_v2 != 0) {
     temp_v10 = *(int *)(temp_v2 + 0x74);
     temp_v3 = FUN_002626e0();
@@ -109,7 +109,7 @@ void FUN_004c3db4(unsigned int *param_1)
         temp_v5 = FUN_00261424();
         if ((temp_v5 >= 2) &&
            (temp_v5 = FUN_003eaea0(temp_v1,(int)*(short *)((int)param_1 + 0x166)), 0 < temp_v5)) {
-          temp_v4 = FUN_0014bef4(99);
+          temp_v4 = randRange(99);
           temp_v14 = (float)VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
           if (temp_v14 <= temp_v15) {
             *(unsigned int *)(temp_v1 + 0x1c8) = 1;
@@ -139,7 +139,7 @@ void FUN_004c3db4(unsigned int *param_1)
           temp_v5 = 0;
           if (temp_v5 < (int)temp_v2) {
             do {
-              temp_v4 = FUN_0014bef4(temp_v2 & 0xffff);
+              temp_v4 = randRange(temp_v2 & 0xffff);
               __aeabi_idivmod(temp_v4,temp_v2);
               temp_v4 = puVar7[temp_v5];
               puVar7[temp_v5] = puVar7[temp_v9];
@@ -167,7 +167,7 @@ void FUN_004c3db4(unsigned int *param_1)
               temp_v3 = temp_v11;
             } while (temp_v12 < temp_v10);
           }
-          FUN_002e6490(puVar7);
+          asdOperatorDeleteC(puVar7);
           return;
         }
       }
@@ -181,7 +181,7 @@ void FUN_004c3db4(unsigned int *param_1)
       do {
         temp_v1 = temp_v2 + temp_v10 * 6;
         if (((*(unsigned short *)(temp_v1 + 0x60) != 0) &&
-            ((*(short *)(temp_v1 + 100) == 0 || (temp_v5 = FUN_0018719c(), temp_v5 != 0)))) &&
+            ((*(short *)(temp_v1 + 100) == 0 || (temp_v5 = gameFlagIsSet(), temp_v5 != 0)))) &&
            ((temp_v5 = lcgRandomRange(99), temp_v5 < (int)((unsigned int)*(unsigned short *)(temp_v1 + 0x62) + temp_v3) ||
             ((*param_1 & DAT_00571448) != 0 || (param_1[1] & DAT_0057144c) != 0)))) {
           temp_v6 = (unsigned int)*(unsigned short *)(temp_v1 + 0x60);

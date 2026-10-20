@@ -12,12 +12,12 @@ int FUN_0039a638(void);
 
 int FUN_00184310(void);
 int FUN_00184964(...);
-int FUN_001b4a90(...);
+int __aeabi_memset4(...);
 int FUN_00280250(void);
 int FUN_002a17d4(...);
 int FUN_002a469c(void);
 int FUN_002bf520(void);
-int FUN_002e342c(...);
+int libc_strcpy(...);
 int FUN_002e59f8(void);
 int FUN_003180c4(...);
 int cecProcessCall1(void);
@@ -43,8 +43,8 @@ int sysPlaySe(...);
 int FUN_0019ea64(int);
 int runWinClose(void);
 int FUN_00224880(...);
-int FUN_002684ac(int);
-int FUN_00275f44(...);
+int gameDataBlocksAddFlags(int);
+int scrScriptProcessStartEntry(...);
 int FUN_002c76d8(...);
 int dataStoreGetValue50(void);
 int FUN_0031d5e8(int);
@@ -77,16 +77,16 @@ extern int g_campCecRecv; /* 0x57f128 */
 extern int FUN_001774d8(short);
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: FUN_00184964. */
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0019ea64. */
-extern int FUN_001ab888(void);
-/* Supplied declaration required: FUN_001b4a90. */
+extern int gameGetSlotTable(void);
+/* Supplied declaration required: __aeabi_memset4. */
 extern int FUN_001ba3d4(short);
 /* Supplied declaration required: runWinClose. */
 /* Supplied declaration required: FUN_00224880. */
-/* Supplied declaration required: FUN_002684ac. */
+/* Supplied declaration required: gameDataBlocksAddFlags. */
 /* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00280250. */
 /* Supplied declaration required: FUN_002804b0. */
 /* Supplied declaration required: FUN_002a17d4. */
@@ -95,9 +95,9 @@ extern unsigned int dataStoreGetEntry(int);
 extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_002bf520. */
 /* Supplied declaration required: FUN_002c76d8. */
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_002e59f8. */
-extern int FUN_003166c0(void);
+extern int asdCecInboxGetMessageCount(void);
 /* Supplied declaration required: FUN_003180c4. */
 extern short *dataTable4AGetEntry(int);
 /* Supplied declaration required: cecProcessCall1. */
@@ -203,7 +203,7 @@ joined_r0x003a52e4:
       runWinClose();
       FUN_001386e8(2);
       FUN_00137ea0(2);
-      FUN_00275f44(*(unsigned int *)(param_1 + 0x360),0x2b);
+      scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x360),0x2b);
       sysPlaySe(0x92);
       temp_v9 = 3;
       *(unsigned int *)(param_1 + 0xa0) = temp_v9;
@@ -245,7 +245,7 @@ joined_r0x003a52e4:
       FUN_001386e8(2);
       FUN_00137ea0(2);
       runWinClose();
-      FUN_00275f44(*(unsigned int *)(param_1 + 0x360),0x2c);
+      scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x360),0x2c);
       FUN_0019ea64(1);
       sysPlaySe(0x92);
       temp_v9 = 6;
@@ -290,7 +290,7 @@ joined_r0x003a52e4:
         return temp_v18;
       }
       FUN_002c76d8();
-      FUN_002684ac(2);
+      gameDataBlocksAddFlags(2);
       return temp_v18;
     }
     FUN_001386e8(2);
@@ -307,9 +307,9 @@ joined_r0x003a52e4:
     break;
   case 9:
     FUN_002c76d8(2);
-    FUN_002684ac(2);
+    gameDataBlocksAddFlags(2);
     FUN_00280250();
-    temp_v8 = FUN_003166c0();
+    temp_v8 = asdCecInboxGetMessageCount();
     *(int *)(param_1 + 0x9c) = temp_v8;
     if (temp_v8 >= 1) {
       temp_v9 = 10;
@@ -320,7 +320,7 @@ joined_r0x003a52e4:
     FUN_001386e8(2);
     FUN_00137ea0(2);
     runWinClose();
-    FUN_00275f44(*(unsigned int *)(param_1 + 0x360),0x24);
+    scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x360),0x24);
     temp_v9 = 0xc;
     *(unsigned int *)(param_1 + 0xa0) = temp_v9;
     break;
@@ -365,7 +365,7 @@ joined_r0x003a52e4:
           if ((temp_v3 % 100 == 0) && (0 < temp_v3)) {
             FUN_0037be64();
             FUN_00330b7c();
-            temp_v3 = FUN_0018719c(0x45b);
+            temp_v3 = gameFlagIsSet(0x45b);
             if (temp_v3 != 0) {
               *(unsigned int *)(param_1 + 0x3dc) = *(unsigned int *)(param_1 + 0x3dc) | 0x10;
             }
@@ -385,12 +385,12 @@ joined_r0x003a52e4:
     *(int *)(param_1 + 0x9c) = temp_v11;
     if (temp_v11 != 0) {
       FUN_00359974(0,temp_v11,0xffffffff);
-      FUN_00275f44(*(unsigned int *)(param_1 + 0x360),0x23);
+      scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x360),0x23);
       *(unsigned int *)(param_1 + 0xa0) = 0xd;
       runWinClose();
       return temp_v18;
     }
-    FUN_00275f44(*(unsigned int *)(param_1 + 0x360),0x24);
+    scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x360),0x24);
     *(unsigned int *)(param_1 + 0xa0) = 0xc;
     runWinClose();
     return temp_v18;
@@ -409,7 +409,7 @@ joined_r0x003a52e4:
     }
     FUN_002bf520();
     playerSummaryFill();
-    temp_v8 = FUN_0018719c(0x551);
+    temp_v8 = gameFlagIsSet(0x551);
     if (temp_v8 == 0) {
       temp_v11 = 0x20;
       temp_v8 = 0;
@@ -424,9 +424,9 @@ joined_r0x003a52e4:
           temp_v3 = cecProcessGetEntry(temp_v8);
         }
         if ((temp_v3 != 0) && ((*(unsigned char *)(temp_v3 + 0x20) & 4) != 0)) {
-          FUN_002e342c(temp_v15,temp_v3 + 0xe);
+          libc_strcpy(temp_v15,temp_v3 + 0xe);
           FUN_003180c4(0,temp_v15);
-          FUN_00275f44(*(unsigned int *)(param_1 + 0x360),0x12);
+          scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x360),0x12);
           *(unsigned int *)(param_1 + 0x3dc) = *(unsigned int *)(param_1 + 0x3dc) | 8;
           break;
         }
@@ -495,13 +495,13 @@ joined_r0x003a5980:
       if (temp_v8 == 1) {
         FUN_0031cf00();
         FUN_002e59f8();
-        temp_v8 = FUN_001ab888();
+        temp_v8 = gameGetSlotTable();
         temp_v19 = temp_v8;
         FUN_0031cf00();
         if (temp_v8 != 0) {
           temp_v8 = 0;
           *(unsigned int *)(param_1 + 0x344) = 0;
-          FUN_001b4a90(temp_v15,0x168,0xffffffff);
+          __aeabi_memset4(temp_v15,0x168,0xffffffff);
           temp_v4 = 0;
           puVar15 = (unsigned short *)(*(int *)(g_campCecRecv + 0x34c) + temp_v4 * 0xc);
           while( 1 ) {

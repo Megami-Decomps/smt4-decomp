@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_0030ea58(unsigned int, unsigned int);
+int libc_strcmp(unsigned int, unsigned int);
 int scrSetResult(void);
 
 extern unsigned int FUN_0015687c(void);
-extern unsigned int FUN_002360dc(void);
-/* Supplied declaration required: FUN_0030ea58. */
+extern unsigned int scrGetArgString(void);
+/* Supplied declaration required: libc_strcmp. */
 /* Supplied declaration required: scrSetResult. */
 
 
@@ -20,9 +20,9 @@ unsigned int FUN_0037d740(void)
   unsigned int temp_v0;
   unsigned int temp_v1;
   
-  temp_v0 = FUN_002360dc();
+  temp_v0 = scrGetArgString();
   temp_v1 = FUN_0015687c();
-  FUN_0030ea58(temp_v1,temp_v0);
+  libc_strcmp(temp_v1,temp_v0);
   scrSetResult();
   return 1;
 }

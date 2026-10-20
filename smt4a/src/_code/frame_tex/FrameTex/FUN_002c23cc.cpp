@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_1_stack;
 
-extern int DAT_0057f65c; /* 0x57f65c */
+extern int g_frameTex; /* 0x57f65c */
 
 /* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: asdTextureCreate. */
@@ -30,7 +30,7 @@ void FUN_002c23cc(int param_1)
   int temp_v3;
   int *piVar5;
   
-  temp_v0 = DAT_0057f65c;
+  temp_v0 = g_frameTex;
   temp_v1 = 0;
   asdTextureCreate();
   piVar5 = (int *)(temp_v0 + 0x1490);

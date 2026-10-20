@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_0019cac4(void);
+int dataTable00FindById(void);
 
 extern unsigned char g_gameDataBlocks; /* 0x57f698 */
 
-/* Supplied declaration required: FUN_0019cac4. */
+/* Supplied declaration required: dataTable00FindById. */
 
 
 unsigned short FUN_0026264c(unsigned int param_1)
@@ -25,7 +25,7 @@ unsigned short FUN_0026264c(unsigned int param_1)
     return 0;
   }
   temp_v2 = param_1;
-  FUN_0019cac4();
+  dataTable00FindById();
   temp_v1 = *(unsigned short *)(temp_v2 + 0x16) & 1;
   if ((*(unsigned short *)(temp_v2 + 0x16) & 1) != 0) {
     temp_v0 = *(unsigned char *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + param_1 * 0x50 + 0x5f22);

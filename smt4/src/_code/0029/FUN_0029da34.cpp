@@ -11,7 +11,7 @@ int FUN_002907c4(...);
 int FUN_00295660(...);
 int FUN_00296ae8(...);
 int FUN_0029ede8(...);
-int FUN_002b9024(...);
+int devilGetRecord(...);
 int FUN_002be624(...);
 
 typedef struct fn_0029da34_arg2 fn_0029da34_arg2;
@@ -46,7 +46,7 @@ extern int DAT_0043da30; /* 0x43da30 */
 /* Supplied declaration required: FUN_00295660. */
 /* Supplied declaration required: FUN_00296ae8. */
 /* Supplied declaration required: FUN_0029ede8. */
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: FUN_002be624. */
 
 
@@ -64,7 +64,7 @@ void FUN_0029da34(int param_1,unsigned int param_2,fn_0029da34_arg2 *param_3,uns
   
   temp_v1 = DAT_0043da2c;
   pfVar3 = param_3;
-  FUN_002b9024();
+  devilGetRecord();
   if (pfVar3 == (fn_0029da34_arg2 *)0x0) {
     *(unsigned char *)(temp_v1 + 0x4cb) = 0;
   }

@@ -18,7 +18,7 @@ typedef struct {
 
 extern unsigned char g_asdCec; /* 0x5b3f94 */
 
-extern int FUN_002e783c(unsigned int);
+extern int wstrlenU16(unsigned int);
 /* Supplied declaration required: FUN_0042d5b4. */
 /* Supplied declaration required: FUN_0042dd98. */
 /* Supplied declaration required: asdCecMessageBoxOpen. */
@@ -48,7 +48,7 @@ unsigned int FUN_00316750(unsigned int param_1,unsigned int param_2,unsigned int
                *(unsigned char *)((int)(*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4)) + 9),*(unsigned char *)((int)(*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4)) + 10),
                *(unsigned char *)((int)(*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4)) + 0xb));
     nn_cec_CTR_Message_SetExHeader((unsigned int)temp_v3,2,param_3,param_2);
-    temp_v1 = FUN_002e783c(param_1);
+    temp_v1 = wstrlenU16(param_1);
     nn_cec_CTR_Message_SetExHeader((unsigned int)temp_v3,4,temp_v1 << 1,param_1);
     nn_cec_CTR_Message_SetMessageBody((unsigned int)temp_v3,param_4,param_5);
     temp_v0 = (*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4))[6];

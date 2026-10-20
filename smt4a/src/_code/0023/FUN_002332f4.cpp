@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001aea28(...);
+int ptrListRemoveClearOwner(...);
 int FUN_00245f70(int);
 int FUN_002749c8(unsigned int);
 int FUN_00274a30(void);
@@ -16,7 +16,7 @@ int FUN_00319f64(int);
 int FUN_00398078(unsigned int);
 int VectorSignedToFloat(unsigned int, int);
 
-int FUN_00162e8c(void);
+int gameFlagsGetBlock(void);
 int FUN_002b5cb4(void);
 int FUN_002b5cd4(void);
 int FUN_002b63d0(void);
@@ -30,7 +30,7 @@ int FUN_00377418(...);
 int FUN_00384830(void);
 int FUN_003ae6cc(void);
 int FUN_003d4ed8(...);
-int FUN_003fd63c(int, int);
+int gameFlagSetValue(int, int);
 int countersAddSaturating(...);
 
 typedef int romwright_code(...);
@@ -49,8 +49,8 @@ typedef struct {
     unsigned int spF0; /* 0xf0: local_f0 */
 } void_stack;
 
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
-extern int DAT_00581038; /* 0x581038 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
+extern int g_mapHakai; /* 0x581038 */
 extern int g_lmapScene; /* 0x581288 */
 extern unsigned char DAT_005f1614; /* 0x5f1614 */
 extern signed char DAT_005f161c; /* 0x5f161c */
@@ -72,8 +72,8 @@ extern unsigned int DAT_005f19fc; /* 0x5f19fc */
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
-/* Supplied declaration required: FUN_00162e8c. */
-/* Supplied declaration required: FUN_001aea28. */
+/* Supplied declaration required: gameFlagsGetBlock. */
+/* Supplied declaration required: ptrListRemoveClearOwner. */
 /* Supplied declaration required: FUN_00245f70. */
 /* Supplied declaration required: FUN_002749c8. */
 /* Supplied declaration required: FUN_00274a30. */
@@ -100,7 +100,7 @@ extern int FUN_00376fcc(int);
 /* Supplied declaration required: FUN_00398078. */
 /* Supplied declaration required: FUN_003ae6cc. */
 /* Supplied declaration required: FUN_003d4ed8. */
-/* Supplied declaration required: FUN_003fd63c. */
+/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: countersAddSaturating. */
 extern int FUN_004813bc(unsigned int);
 
@@ -147,7 +147,7 @@ unsigned int FUN_002332f4(void)
   temp_v14 = 0x42700000;
   temp_v24 = &DAT_005f17fc;
   do {
-    temp_v5 = DAT_00581038 + temp_v6 * 0x54;
+    temp_v5 = g_mapHakai + temp_v6 * 0x54;
     if (*(char *)(temp_v5 + 0x5c) != '\0') {
       switch(*(unsigned int *)(temp_v5 + 0x60)) {
       case 1:
@@ -160,7 +160,7 @@ unsigned int FUN_002332f4(void)
           FUN_003ae6cc();
         }
         temp_v16 = 0;
-        FUN_00162e8c();
+        gameFlagsGetBlock();
         temp_v1 = 0;
         if (DAT_005f17ac != '\0') {
           temp_v1 = DAT_005f17c2;
@@ -197,7 +197,7 @@ unsigned int FUN_002332f4(void)
         temp_v12 = 600.0f;
         temp_v10 = 210.0f;
         temp_v16 = 0;
-        temp_v17 = FUN_00162e8c();
+        temp_v17 = gameFlagsGetBlock();
         temp_v1 = *(short *)(temp_v5 + 0xac);
         if (temp_v1 == 2) {
           temp_v10 = (float)temp_v13;
@@ -273,7 +273,7 @@ unsigned int FUN_002332f4(void)
             if (((!(unsigned char)((temp_v0 >> 6) & 1) && temp_v0 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) &&
                 ((int)temp_v12 < 0x428c0000)) && (temp_v16 != 0)) {
               if (*(short *)(temp_v5 + 0xac) != 2) {
-                FUN_003fd63c(0x48d,1);
+                gameFlagSetValue(0x48d,1);
               }
               temp_v4 = FUN_00367f98();
               if (temp_v4 != 10) {
@@ -291,7 +291,7 @@ unsigned int FUN_002332f4(void)
             }
           }
         }
-        FUN_00162e8c();
+        gameFlagsGetBlock();
         if (*(short *)(temp_v5 + 0xac) == 3) {
           if (*(char *)((int)temp_v25 + 0x53) != '\0') {
             FUN_00352bc4();
@@ -320,9 +320,9 @@ unsigned int FUN_002332f4(void)
           else {
 LAB_00233a04:
             if (DAT_005f1638 == 0x35 || DAT_005f1638 == 0x4d) {
-              if (*(int *)(DAT_00581038 + 0x18) != DAT_005f16a0) {
+              if (*(int *)(g_mapHakai + 0x18) != DAT_005f16a0) {
                 FUN_002d8a48();
-                *(int *)(DAT_00581038 + 0x18) = DAT_005f16a0;
+                *(int *)(g_mapHakai + 0x18) = DAT_005f16a0;
               }
               else {
                 FUN_00245f70(DAT_005f16a0);
@@ -353,14 +353,14 @@ LAB_00233a04:
         if ((unsigned char)(temp_v3 >> 0x1f) == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
           if (*(char *)(temp_v5 + 0x84) != '\0') {
             if (*(int *)(temp_v5 + 0x88) != 0) {
-              FUN_001aea28(DAT_0056fcc0,*(unsigned int *)(*(int *)(temp_v5 + 0x88) + 4));
+              ptrListRemoveClearOwner(g_handleRegistry,*(unsigned int *)(*(int *)(temp_v5 + 0x88) + 4));
               temp_v2 = 4;
               *(unsigned char *)(temp_v5 + 0x8c) = 0;
               *(unsigned int *)(temp_v5 + 0x60) = temp_v2;
             }
           }
           else {
-            temp_v4 = *(int *)(*(int *)(DAT_00581038 + *(int *)(temp_v5 + 0x90) * 0x20 + temp_v4 * 4 +
+            temp_v4 = *(int *)(*(int *)(g_mapHakai + *(int *)(temp_v5 + 0x90) * 0x20 + temp_v4 * 4 +
                                      0x20) + 4);
             *(unsigned int *)(temp_v4 + 4) = *(unsigned int *)(temp_v4 + 4) | 3;
             *(unsigned int *)(temp_v5 + 0x60) = 3;

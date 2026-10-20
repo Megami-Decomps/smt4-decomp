@@ -13,11 +13,11 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_1_stack;
 
-extern int DAT_0057f108; /* 0x57f108 */
+extern int g_camp; /* 0x57f108 */
 
-extern int FUN_001801a4(void);
+extern int gameGetPlayerData(void);
 extern unsigned int FUN_0019e130(int);
-extern int FUN_001ab854(int);
+extern int gameGetSlotRecord(int);
 extern int FUN_002a4860(int);
 extern int FUN_002a4894(int);
 extern int FUN_002c2c68(int);
@@ -44,9 +44,9 @@ void FUN_003d386c(int param_1)
   int aiStack_8c [25];
   int temp_v11;
   
-  temp_v0 = DAT_0057f108;
+  temp_v0 = g_camp;
   temp_v11 = param_1;
-  temp_v1 = FUN_002c2c68(DAT_0057f108 + 0x1ec);
+  temp_v1 = FUN_002c2c68(g_camp + 0x1ec);
   temp_v2 = FUN_002c2c68(temp_v0 + 0x1ec);
   if (temp_v2 < temp_v1) {
     temp_v1 = FUN_002c2c68(temp_v0 + 0x1ec);
@@ -60,7 +60,7 @@ void FUN_003d386c(int param_1)
         temp_v8 = 0;
         aiStack_8c[temp_v9] = 1;
         if (-1 < temp_v9) {
-          temp_v5 = FUN_001ab854(temp_v9);
+          temp_v5 = gameGetSlotRecord(temp_v9);
           temp_v7 = (unsigned int)*(unsigned short *)(temp_v5 + 0x60);
           temp_v3 = 1;
           temp_v5 = 0xd;
@@ -78,7 +78,7 @@ void FUN_003d386c(int param_1)
             } while (temp_v3 == 2);
           } while( 1 );
         }
-        temp_v8 = FUN_001801a4();
+        temp_v8 = gameGetPlayerData();
         temp_v7 = (unsigned int)*(unsigned short *)(temp_v8 + 0x5e);
 LAB_003d3940:
         temp_v8 = 0;

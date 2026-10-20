@@ -66,14 +66,14 @@ extern unsigned char DAT_00616ee4; /* 0x616ee4 */
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-extern int FUN_0018719c(void);
+extern int gameFlagIsSet(void);
 /* Supplied declaration required: FUN_002e1208. */
 /* Supplied declaration required: FUN_00356470. */
 extern int FUN_003657f0(unsigned int);
-extern unsigned int *FUN_00379890(int);
+extern unsigned int *dataTable23Sub0GetEntry(int);
 extern int FUN_003a3270(void);
 extern unsigned short FUN_003ae4d0(unsigned int);
-extern int FUN_003b56bc(void);
+extern int dataTable23Type0CountWithAoc(void);
 extern unsigned short FUN_003bf894(unsigned int);
 extern int FUN_003c3010(unsigned int);
 extern unsigned short FUN_003c302c(unsigned int);
@@ -198,8 +198,8 @@ void FUN_0048e46c(int param_1,unsigned int param_2)
       if (temp_v16) {
         temp_v8 = (unsigned int)(unsigned short)psVar9[6];
       }
-      if (((temp_v16 && temp_v8 != 2) && ((psVar9[0x18] == 0 || (temp_v7 = FUN_0018719c(), temp_v7 != 0))))
-         && ((psVar9[0x19] == 0 || (temp_v7 = FUN_0018719c(), temp_v7 == 0)))) {
+      if (((temp_v16 && temp_v8 != 2) && ((psVar9[0x18] == 0 || (temp_v7 = gameFlagIsSet(), temp_v7 != 0))))
+         && ((psVar9[0x19] == 0 || (temp_v7 = gameFlagIsSet(), temp_v7 == 0)))) {
         temp_v4 = psVar9[6];
         if (temp_v4 != 3) {
           if (temp_v4 != 1) {
@@ -511,8 +511,8 @@ LAB_0048ee54:
                   (temp_v1 != '}' && temp_v1 != '~')))) {
 LAB_0048eeec:
                 temp_v16 = 0;
-                if (((*(short *)(pcVar20 + 4) != 0) && (temp_v12 = FUN_0018719c(), temp_v12 == 0)) ||
-                   ((*(short *)(pcVar20 + 6) != 0 && (temp_v12 = FUN_0018719c(), temp_v12 != 0)))) {
+                if (((*(short *)(pcVar20 + 4) != 0) && (temp_v12 = gameFlagIsSet(), temp_v12 == 0)) ||
+                   ((*(short *)(pcVar20 + 6) != 0 && (temp_v12 = gameFlagIsSet(), temp_v12 != 0)))) {
                   temp_v16 = 1;
                 }
                 temp_v3 = *(short *)(pcVar20 + 8);
@@ -644,11 +644,11 @@ LAB_0048f224:
   FUN_002e1208(0xb,0x1b67,&temp_v53,&temp_v54);
   FUN_002e1208(0xb,0x1b8f,temp_v59,&temp_v44);
   temp_v9 = 0;
-  temp_v7 = FUN_003b56bc();
+  temp_v7 = dataTable23Type0CountWithAoc();
   if (0 < temp_v7) {
     in_d9 = romwright_piece_4_4((int)(in_d9 >> 0x20),(int)temp_v34);
     do {
-      puVar12 = (unsigned int *)FUN_00379890(temp_v9);
+      puVar12 = (unsigned int *)dataTable23Sub0GetEntry(temp_v9);
       if (((int)*(char *)(puVar12 + 2) == temp_v64) &&
          (temp_v1 = *(char *)((int)puVar12 + 10),
          (temp_v1 == '\x18' || temp_v1 == '\x19') || temp_v1 == '\x1a')) {
@@ -741,17 +741,17 @@ LAB_0048f224:
         }
       }
       temp_v9 = temp_v9 + 1;
-      temp_v7 = FUN_003b56bc();
+      temp_v7 = dataTable23Type0CountWithAoc();
     } while (temp_v9 < temp_v7);
   }
   temp_v42 = 0xb;
   FUN_002e1208(0xb,0x1b67,&temp_v53,&temp_v54);
   FUN_002e1208(0xb,0x1b8f,temp_v59,&temp_v44);
   temp_v9 = 0;
-  temp_v7 = FUN_003b56bc();
+  temp_v7 = dataTable23Type0CountWithAoc();
   if (0 < temp_v7) {
     do {
-      puVar12 = (unsigned int *)FUN_00379890(temp_v9);
+      puVar12 = (unsigned int *)dataTable23Sub0GetEntry(temp_v9);
       temp_v8 = (unsigned int)*(char *)(puVar12 + 2);
       temp_v16 = temp_v8 == temp_v64;
       if (temp_v16) {
@@ -844,7 +844,7 @@ LAB_0048f224:
         *(unsigned char *)(temp_v7 + 0x17dc) = 0;
       }
       temp_v9 = temp_v9 + 1;
-      temp_v7 = FUN_003b56bc();
+      temp_v7 = dataTable23Type0CountWithAoc();
     } while (temp_v9 < temp_v7);
   }
   temp_v60 = (int *)(param_1 + 0x84f4);

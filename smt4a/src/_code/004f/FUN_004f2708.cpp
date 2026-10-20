@@ -16,7 +16,7 @@ struct fn_004f2708_arg1 {
 };
 
 extern unsigned int g_btlScriptUnit; /* 0x57113c */
-extern int DAT_00571508; /* 0x571508 */
+extern int g_btlCamera; /* 0x571508 */
 extern unsigned int DAT_00571550; /* 0x571550 */
 extern unsigned int DAT_00571554; /* 0x571554 */
 extern unsigned int DAT_00571558; /* 0x571558 */
@@ -55,17 +55,17 @@ unsigned int FUN_004f2708(unsigned int param_1,fn_004f2708_arg1 *param_2,int par
       return 0;
     }
     if (param_3 != 0) {
-      if (DAT_00571508 == 0) {
+      if (g_btlCamera == 0) {
         return 1;
       }
-      if ((*(unsigned int *)(DAT_00571508 + 0x64c) & 0x2000000) != 0) {
+      if ((*(unsigned int *)(g_btlCamera + 0x64c) & 0x2000000) != 0) {
         return 0;
       }
     }
-    else if (DAT_00571508 == 0) {
+    else if (g_btlCamera == 0) {
       return 1;
     }
-    if ((*(unsigned int *)(DAT_00571508 + 0x64c) & 0x10000000) == 0) {
+    if ((*(unsigned int *)(g_btlCamera + 0x64c) & 0x10000000) == 0) {
       return 1;
     }
   }

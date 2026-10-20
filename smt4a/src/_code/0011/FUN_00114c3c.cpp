@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_00134dcc(int, unsigned int, unsigned int);
-int FUN_002e9afe(int, unsigned int);
+int vectorCopyHeader(int, unsigned int);
 
 /* Supplied declaration required: FUN_00134dcc. */
-/* Supplied declaration required: FUN_002e9afe. */
+/* Supplied declaration required: vectorCopyHeader. */
 
 
 void FUN_00114c3c(int param_1,int param_2,unsigned int param_3,int param_4)
@@ -22,7 +22,7 @@ void FUN_00114c3c(int param_1,int param_2,unsigned int param_3,int param_4)
         *(unsigned int *)(param_1 + 0x6c) = 0;
       }
       if (*(int *)(param_1 + 0x70) != 0) {
-        FUN_002e9afe(*(int *)(param_1 + 0x70),param_3);
+        vectorCopyHeader(*(int *)(param_1 + 0x70),param_3);
         *(unsigned int *)(param_1 + 0x70) = 0;
       }
     }

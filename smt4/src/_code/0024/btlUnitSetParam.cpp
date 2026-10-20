@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00229998(int *);
 int FUN_00247478(unsigned int [110], int, unsigned int);
 int btlUnitGet(...);
-int FUN_002b4670(void);
+int dataTable08Sub1GetRecord(void);
 int FUN_003cf1a8(int *);
 int FUN_003cf7fc(int *);
 int FUN_003d0160(int *, int);
@@ -27,7 +27,7 @@ extern int randRange(unsigned int);
 /* Supplied declaration required: FUN_00247478. */
 /* Supplied declaration required: btlUnitGet. */
 extern int btlGetMainState(void);
-/* Supplied declaration required: FUN_002b4670. */
+/* Supplied declaration required: dataTable08Sub1GetRecord. */
 extern unsigned int FUN_003c83e0(void);
 /* Supplied declaration required: FUN_003cf1a8. */
 /* Supplied declaration required: FUN_003cf7fc. */
@@ -85,7 +85,7 @@ void btlUnitSetParam(int *param_1,unsigned int param_2,unsigned int param_3)
   case 8:
     temp_v2 = btlUnitGet(param_1);
     temp_v2 = (int)*(short *)(*(int *)(temp_v2 + 0x28) + 0x14e);
-    FUN_002b4670();
+    dataTable08Sub1GetRecord();
     if (*(short *)(temp_v2 + 0x62) == 0) {
       temp_v3 = btlUnitGet(param_1);
       temp_v11 = (unsigned int)((**(unsigned int **)(temp_v3 + 0x20) & 0x10) != 0);

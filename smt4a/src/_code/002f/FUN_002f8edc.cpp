@@ -39,7 +39,7 @@ typedef struct {
 extern unsigned int g_btlScriptUnit; /* 0x57113c */
 
 /* Supplied declaration required: btlGetMainState. */
-extern int FUN_001ab854(int);
+extern int gameGetSlotRecord(int);
 extern int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_003ee0c0. */
 /* Supplied declaration required: FUN_003f0e20. */
@@ -76,7 +76,7 @@ unsigned int FUN_002f8edc(void)
     FUN_004fbc30(0x19,temp_v1,temp_v3,0);
   }
   else {
-    temp_v0 = FUN_001ab854(temp_v0 - 0x6d);
+    temp_v0 = gameGetSlotRecord(temp_v0 - 0x6d);
     *(unsigned short *)(temp_v0 + 0x2a) = 0;
     bitsAt60Set(temp_v0,1);
     FUN_004fbfbc(0,temp_v1,0xf);

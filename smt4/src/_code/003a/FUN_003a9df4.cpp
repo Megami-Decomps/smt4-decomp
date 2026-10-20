@@ -10,7 +10,7 @@ int FUN_0022daac(int, unsigned int, int, int, int);
 int FUN_0022db94(int, unsigned int, int, int, int);
 int FUN_0022dcac(int, int, unsigned int, int, int, int);
 int FUN_00230aec(...);
-int FUN_002b06c4(void);
+int dataTable00FindById(void);
 int FUN_002be624(...);
 int FUN_002bf4f0(...);
 
@@ -33,7 +33,7 @@ extern unsigned char LAB_003aa030; /* 0x3aa030 */
 /* Supplied declaration required: FUN_0022db94. */
 /* Supplied declaration required: FUN_0022dcac. */
 /* Supplied declaration required: FUN_00230aec. */
-/* Supplied declaration required: FUN_002b06c4. */
+/* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002bf4f0. */
 
@@ -72,14 +72,14 @@ void FUN_003a9df4(int param_1,int param_2,int param_3,unsigned int param_4)
   FUN_0022daac(param_1,param_4,param_2,param_3,temp_v6);
   temp_v5 = param_4;
   temp_v7 = 0;
-  FUN_002b06c4();
+  dataTable00FindById();
   if (temp_v5 != 0) {
     temp_v7 = *(unsigned char *)(temp_v5 + 2);
   }
   FUN_0022d9c8(param_1,temp_v7,param_2,param_3,temp_v6,0xffffffff);
   temp_v5 = param_4;
   temp_v8 = 0;
-  FUN_002b06c4();
+  dataTable00FindById();
   if (temp_v5 != 0) {
     temp_v8 = *(unsigned int *)(temp_v5 + 4);
   }
@@ -98,7 +98,7 @@ void FUN_003a9df4(int param_1,int param_2,int param_3,unsigned int param_4)
                temp_v10);
   param_4 = param_4 & 0xffff;
   temp_v8 = 0;
-  FUN_002b06c4();
+  dataTable00FindById();
   if (param_4 != 0) {
     temp_v8 = *(unsigned int *)(param_4 + 8);
   }

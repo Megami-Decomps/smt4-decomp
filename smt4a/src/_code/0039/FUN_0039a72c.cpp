@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_001846d0(int, int);
+int uiSpriteSelectAnim(int, int);
 
-extern unsigned char DAT_0057f588; /* 0x57f588 */
+extern unsigned char g_messageMain; /* 0x57f588 */
 
-/* Supplied declaration required: FUN_001846d0. */
-extern int FUN_002deb84(void);
+/* Supplied declaration required: uiSpriteSelectAnim. */
+extern int scrGetCommandFrame(void);
 
 
 unsigned char FUN_0039a72c(void)
@@ -20,11 +20,11 @@ unsigned char FUN_0039a72c(void)
   int temp_v1;
   int temp_v2;
   
-  temp_v0 = (*(int *)((unsigned char *)&DAT_0057f588 + 0x8));
-  temp_v2 = FUN_002deb84();
-  temp_v1 = (*(int *)((unsigned char *)&DAT_0057f588 + 0x8));
+  temp_v0 = (*(int *)((unsigned char *)&g_messageMain + 0x8));
+  temp_v2 = scrGetCommandFrame();
+  temp_v1 = (*(int *)((unsigned char *)&g_messageMain + 0x8));
   if ((temp_v2 == 0) && (*(char *)(temp_v0 + 0x19f2) != '\0')) {
-    FUN_001846d0((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0x144c,0xc);
+    uiSpriteSelectAnim((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x144c,0xc);
     *(unsigned char *)(temp_v1 + 0x19f1) = 1;
     *(unsigned char *)(temp_v1 + 0x19f0) = 4;
   }

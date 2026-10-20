@@ -21,7 +21,7 @@ typedef struct {
 extern unsigned int g_btlScriptUnit; /* 0x57113c */
 
 extern int btlGetMainState(void);
-extern unsigned int FUN_001ab854(int);
+extern unsigned int gameGetSlotRecord(int);
 /* Supplied declaration required: scrGetArg. */
 extern int bitsAt60Test(unsigned int, unsigned int);
 /* Supplied declaration required: bitsAt60Set. */
@@ -57,7 +57,7 @@ unsigned int FUN_00380b04(void)
     FUN_004fdb18(0,temp_v3,temp_v0,1 << (temp_v1 & 0xff),1);
   }
   else {
-    temp_v5 = FUN_001ab854(temp_v0 - 0x6d);
+    temp_v5 = gameGetSlotRecord(temp_v0 - 0x6d);
     if (temp_v2 == 0) {
       bitsAt60Clear(temp_v5,(1 << (temp_v1 & 0xff)) & 0xffff);
       return 1;

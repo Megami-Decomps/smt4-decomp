@@ -9,8 +9,8 @@ int FUN_0014e188(...);
 int FUN_0014e220(...);
 int FUN_001505ac(...);
 int sysPlaySe(...);
-int FUN_001846d0(...);
-int FUN_00184758(...);
+int uiSpriteSelectAnim(...);
+int uiSpriteSetKeyframe(...);
 int FUN_0019e330(...);
 int FUN_0020214c(void);
 int FUN_00275bc8(...);
@@ -64,8 +64,8 @@ extern int DAT_0057f2c4; /* 0x57f2c4 */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: FUN_001846d0. */
-/* Supplied declaration required: FUN_00184758. */
+/* Supplied declaration required: uiSpriteSelectAnim. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: FUN_0019e330. */
 /* Supplied declaration required: FUN_001fc348. */
 /* Supplied declaration required: FUN_0020214c. */
@@ -249,7 +249,7 @@ void FUN_002a74ac(void)
     temp_v4 = temp_v0 + temp_v3 * 0x8c;
     temp_v5 = 1;
     FUN_0014e188(temp_v4 + 0x360,0x1a,0,temp_v0 + 0x340);
-    FUN_00184758(temp_v4 + 0x360,0);
+    uiSpriteSetKeyframe(temp_v4 + 0x360,0);
     temp_v3 = temp_v3 + 1;
   } while (temp_v3 < 6);
   temp_v3 = 6;
@@ -257,7 +257,7 @@ void FUN_002a74ac(void)
     temp_v4 = temp_v0 + temp_v3 * 0x8c;
     temp_v5 = 1;
     FUN_0014e188(temp_v4 + 0x360,0x1a,0,temp_v0 + 0x340);
-    FUN_001846d0(temp_v4 + 0x360,0);
+    uiSpriteSelectAnim(temp_v4 + 0x360,0);
     temp_v3 = temp_v3 + 1;
   } while (temp_v3 < 10);
   temp_v5 = temp_v0 + 0x340;
@@ -270,7 +270,7 @@ void FUN_002a74ac(void)
   *(unsigned char *)(temp_v0 + 0x914) = 1;
   temp_v5 = 1;
   FUN_0014e188(temp_v0 + 0x964,0x1a,0,temp_v0 + 0x340);
-  FUN_001846d0(temp_v0 + 0x964,2);
+  uiSpriteSelectAnim(temp_v0 + 0x964,2);
   sysPlaySe(99);
   temp_v0 = DAT_0057f2c4;
   *(unsigned int *)(DAT_0057f2c4 + 4) = 1;

@@ -14,7 +14,7 @@ typedef struct Global59dbc0 {
     /* 0x00 */ u8 unk00[4];
     /* 0x04 */ Inner *inner;
 } Global59dbc0;
-extern Global59dbc0 DAT_0059dbc0;
+extern Global59dbc0 g_asdCamera;
 
 /* Points the inner object's two pointers at its areas at 0x88 and 0x594. */
 void FUN_001ad6d8(void)
@@ -22,9 +22,9 @@ void FUN_001ad6d8(void)
     Inner *inner;
     u8 *areaB;
 
-    inner = DAT_0059dbc0.inner;
-    areaB = DAT_0059dbc0.inner->areaB;
-    DAT_0059dbc0.inner->first = DAT_0059dbc0.inner->areaA;
+    inner = g_asdCamera.inner;
+    areaB = g_asdCamera.inner->areaB;
+    g_asdCamera.inner->first = g_asdCamera.inner->areaA;
     inner->second = areaB;
 }
 

@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern s8 DAT_0057f110;
+extern s8 g_campCec;
 
 s32 FUN_003881d0(void)
 {
-    return DAT_0057f110;
+    return g_campCec;
 }
 
 } /* extern "C" */

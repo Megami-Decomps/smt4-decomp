@@ -14,11 +14,11 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_1_stack;
 
-extern int DAT_0057f108; /* 0x57f108 */
+extern int g_camp; /* 0x57f108 */
 
 /* Supplied declaration required: FUN_00203b40. */
 /* Supplied declaration required: FUN_003d0bc0. */
-extern int FUN_00481104(unsigned int);
+extern int flagValueIsPositive(unsigned int);
 
 
 void FUN_0023f604(int param_1)
@@ -38,22 +38,22 @@ void FUN_0023f604(int param_1)
         return;
       }
       temp_v2 = 0x33f;
-      temp_v3 = DAT_0057f108 + 0x2a78;
+      temp_v3 = g_camp + 0x2a78;
       temp_v4 = 0x3b6;
-      temp_v5 = DAT_0057f108 + 0x188;
+      temp_v5 = g_camp + 0x188;
     }
     else {
       temp_v2 = 0x3b7;
-      temp_v3 = DAT_0057f108 + 0x22a8;
+      temp_v3 = g_camp + 0x22a8;
       temp_v4 = 0x47e;
-      temp_v5 = DAT_0057f108 + 0x124;
+      temp_v5 = g_camp + 0x124;
     }
   }
   else {
     temp_v2 = 1;
     temp_v4 = 0x3c;
-    temp_v3 = DAT_0057f108 + 0x21b0;
-    temp_v5 = DAT_0057f108 + 0xc0;
+    temp_v3 = g_camp + 0x21b0;
+    temp_v5 = g_camp + 0xc0;
   }
   if (temp_v3 == 0 || temp_v5 == 0) {
     return;
@@ -61,7 +61,7 @@ void FUN_0023f604(int param_1)
   temp_v1 = 0;
   if (temp_v2 <= temp_v4) {
     do {
-      temp_v0 = FUN_00481104(temp_v2);
+      temp_v0 = flagValueIsPositive(temp_v2);
       if (temp_v0 != 0) {
         temp_v0 = temp_v1 * 2;
         temp_v1 = temp_v1 + 1;
@@ -73,7 +73,7 @@ void FUN_0023f604(int param_1)
   if (param_1 == 0xb) {
     temp_v2 = 0x79f;
     do {
-      temp_v0 = FUN_00481104(temp_v2);
+      temp_v0 = flagValueIsPositive(temp_v2);
       if (temp_v0 != 0) {
         temp_v0 = temp_v1 * 2;
         temp_v1 = temp_v1 + 1;
@@ -85,7 +85,7 @@ void FUN_0023f604(int param_1)
   else if (param_1 == 0xd) {
     temp_v2 = 0x47f;
     do {
-      temp_v0 = FUN_00481104(temp_v2);
+      temp_v0 = flagValueIsPositive(temp_v2);
       if (temp_v0 != 0) {
         temp_v0 = temp_v1 * 2;
         temp_v1 = temp_v1 + 1;

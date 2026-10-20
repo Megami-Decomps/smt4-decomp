@@ -3,7 +3,7 @@
 extern "C" {
 
 extern PolyRingKind g_polyRingKinds[];
-void FUN_002ce8d8(void *geometry);
+void geometryDestroy(void *geometry);
 void asdMemFree(void *block);
 
 /* Frees a ring effect's state: its geometry, its polygon object (releasing the kind's state first)
@@ -12,7 +12,7 @@ void effPolyRingStateDestroy(PolyRingState *state)
 {
     PolyObject *obj;
 
-    FUN_002ce8d8(state->geom);
+    geometryDestroy(state->geom);
     obj = state->obj;
     g_polyRingKinds[obj->kind].release(obj->state);
     asdMemFree(obj);

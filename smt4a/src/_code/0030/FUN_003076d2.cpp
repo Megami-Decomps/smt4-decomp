@@ -2,16 +2,16 @@
 
 extern "C" {
 
-void FUN_002efb6c(u32 dest, u32 value);
-u32 FUN_002efa80(u32 source);
+void bitFieldSet(u32 dest, u32 value);
+u32 bitFieldTest(u32 source);
 
-/* Calls FUN_002efb6c(dest, FUN_002efa80(source)). */
+/* Calls bitFieldSet(dest, bitFieldTest(source)). */
 void FUN_003076d2(u32 dest, u32 source)
 {
     u32 value;
 
-    value = FUN_002efa80(source);
-    FUN_002efb6c(dest, value);
+    value = bitFieldTest(source);
+    bitFieldSet(dest, value);
 }
 
 } /* extern "C" */

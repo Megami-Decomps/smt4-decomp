@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_00249b18(int, int);
-int FUN_002542bc(...);
-int FUN_002542d4(...);
+int scrWorkGetValue(...);
+int scrWorkSetValue(...);
 int FUN_00254e2c(...);
 int FUN_00295660(int, unsigned int);
-int FUN_002a8740(int);
+int gameGetUnitRecord(int);
 int FUN_002bd06c(unsigned int);
 int FUN_002bff50(void);
 
@@ -19,15 +19,15 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_00249b18. */
-/* Supplied declaration required: FUN_002542bc. */
-/* Supplied declaration required: FUN_002542d4. */
+/* Supplied declaration required: scrWorkGetValue. */
+/* Supplied declaration required: scrWorkSetValue. */
 /* Supplied declaration required: FUN_00254e2c. */
-extern int FUN_002893d8(void);
+extern int scrGetCommandFrame(void);
 /* Supplied declaration required: FUN_00295660. */
-/* Supplied declaration required: FUN_002a8740. */
-extern int FUN_002a8764(void);
-extern int FUN_002a8778(void);
-extern int FUN_002b47f4(unsigned int);
+/* Supplied declaration required: gameGetUnitRecord. */
+extern int gameGetSlotTable(void);
+extern int gameCountUnits(void);
+extern int fileSlotGetBuffer(unsigned int);
 /* Supplied declaration required: FUN_002bd06c. */
 extern unsigned int FUN_002bd1fc(void);
 /* Supplied declaration required: FUN_002bff50. */
@@ -46,23 +46,23 @@ int FUN_002d8910(int param_1)
   int temp_v6;
   
   if (param_1 != 0) {
-    if ((param_1 == 1) && (temp_v6 = FUN_002893d8(), temp_v6 == 0)) {
+    if ((param_1 == 1) && (temp_v6 = scrGetCommandFrame(), temp_v6 == 0)) {
       FUN_00249b18(0,1);
-      FUN_002542d4(0);
-      FUN_002542d4(1,0);
-      FUN_002542d4(2,0);
+      scrWorkSetValue(0);
+      scrWorkSetValue(1,0);
+      scrWorkSetValue(2,0);
     }
     return 1;
   }
-  temp_v6 = FUN_002893d8();
+  temp_v6 = scrGetCommandFrame();
   if (temp_v6 == 0) {
     FUN_00249b18(0,1);
-    FUN_002542d4(0);
-    FUN_002542d4(1,0);
-    FUN_002542d4(2,0);
+    scrWorkSetValue(0);
+    scrWorkSetValue(1,0);
+    scrWorkSetValue(2,0);
   }
-  temp_v0 = FUN_002b47f4(0x1e);
-  temp_v6 = FUN_002542bc(0);
+  temp_v0 = fileSlotGetBuffer(0x1e);
+  temp_v6 = scrWorkGetValue(0);
   if (temp_v6 != 0) {
     if (temp_v6 != 1) {
       if (temp_v6 != 2) {
@@ -71,57 +71,57 @@ int FUN_002d8910(int param_1)
         }
       }
       else {
-        temp_v6 = FUN_002a8778();
-        temp_v3 = FUN_002a8764();
-        while (temp_v2 = FUN_002542bc(2), temp_v2 < temp_v6) {
-          temp_v2 = FUN_002542bc(2);
-          FUN_002a8740((int)*(char *)(temp_v2 + temp_v3 + 0x90f0));
-          temp_v2 = FUN_002542bc(2);
-          FUN_002542d4(2,temp_v2 + 1);
+        temp_v6 = gameCountUnits();
+        temp_v3 = gameGetSlotTable();
+        while (temp_v2 = scrWorkGetValue(2), temp_v2 < temp_v6) {
+          temp_v2 = scrWorkGetValue(2);
+          gameGetUnitRecord((int)*(char *)(temp_v2 + temp_v3 + 0x90f0));
+          temp_v2 = scrWorkGetValue(2);
+          scrWorkSetValue(2,temp_v2 + 1);
         }
-        temp_v3 = FUN_002542bc(2);
+        temp_v3 = scrWorkGetValue(2);
         if (temp_v6 <= temp_v3) {
           return 1;
         }
       }
-      temp_v6 = FUN_002a8764();
-      temp_v3 = FUN_002542bc(2);
-      temp_v6 = FUN_002a8740((int)*(char *)(temp_v3 + temp_v6 + 0x90f0));
+      temp_v6 = gameGetSlotTable();
+      temp_v3 = scrWorkGetValue(2);
+      temp_v6 = gameGetUnitRecord((int)*(char *)(temp_v3 + temp_v6 + 0x90f0));
       temp_v4 = (unsigned int)*(unsigned short *)(temp_v6 + 0x46);
       FUN_002bd06c(temp_v4);
       FUN_00295660(0x28,temp_v4);
-      temp_v5 = FUN_002542bc(1);
+      temp_v5 = scrWorkGetValue(1);
       FUN_00254e2c(temp_v0,0xd,temp_v5,6,0);
-      temp_v6 = FUN_002542bc(1);
-      FUN_002542d4(1,temp_v6 + 1);
+      temp_v6 = scrWorkGetValue(1);
+      scrWorkSetValue(1,temp_v6 + 1);
       if (temp_v0 == 1) {
-        FUN_002542d4(0,2);
-        FUN_002542d4(1,0);
-        temp_v6 = FUN_002542bc(2);
-        FUN_002542d4(2,temp_v6 + 1);
+        scrWorkSetValue(0,2);
+        scrWorkSetValue(1,0);
+        temp_v6 = scrWorkGetValue(2);
+        scrWorkSetValue(2,temp_v6 + 1);
         temp_v0 = 0;
       }
     }
     else {
       temp_v5 = FUN_002bd1fc();
       FUN_00295660(0x28,temp_v5);
-      temp_v5 = FUN_002542bc(1);
+      temp_v5 = scrWorkGetValue(1);
       FUN_00254e2c(temp_v0,0xd,temp_v5,6,0);
-      temp_v6 = FUN_002542bc(1);
-      FUN_002542d4(1,temp_v6 + 1);
+      temp_v6 = scrWorkGetValue(1);
+      scrWorkSetValue(1,temp_v6 + 1);
     }
   }
   else {
     temp_v5 = 0xf;
-    temp_v6 = FUN_002a8778();
+    temp_v6 = gameCountUnits();
     if (temp_v6 == 0) {
       temp_v5 = 0xe;
     }
     FUN_002bff50();
-    temp_v1 = FUN_002542bc(1);
+    temp_v1 = scrWorkGetValue(1);
     FUN_00254e2c(temp_v0,temp_v5,temp_v1,6,0);
-    temp_v6 = FUN_002542bc(1);
-    FUN_002542d4(1,temp_v6 + 1);
+    temp_v6 = scrWorkGetValue(1);
+    scrWorkSetValue(1,temp_v6 + 1);
   }
   return temp_v0;
 }

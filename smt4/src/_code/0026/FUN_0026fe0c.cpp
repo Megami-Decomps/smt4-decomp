@@ -14,9 +14,9 @@ extern unsigned int DAT_0049fd2c; /* 0x49fd2c */
 extern unsigned int DAT_0049fd30; /* 0x49fd30 */
 extern unsigned int DAT_0049fd34; /* 0x49fd34 */
 
-extern int FUN_0024c324(void);
+extern int dataTable23Type1CountWithAoc(void);
 extern char *FUN_0027d748(int);
-extern char *FUN_002c2950(void);
+extern char *gameGetMapBlock(void);
 
 
 void FUN_0026fe0c(void)
@@ -29,14 +29,14 @@ void FUN_0026fe0c(void)
   unsigned char temp_v3;
   unsigned char temp_v4;
   
-  pcVar2 = (char *)FUN_002c2950();
+  pcVar2 = (char *)gameGetMapBlock();
   temp_v0 = *pcVar2;
   if (temp_v0 == '\0') {
     temp_v2 = 0;
     DAT_0049fd14 = 1;
     DAT_0049fd18 = 2;
     DAT_0049fd1c = 0;
-    temp_v1 = FUN_0024c324();
+    temp_v1 = dataTable23Type1CountWithAoc();
     if (0 < temp_v1) {
       do {
         pcVar2 = (char *)FUN_0027d748(temp_v2);
@@ -58,7 +58,7 @@ void FUN_0026fe0c(void)
           return;
         }
         temp_v2 = temp_v2 + 1;
-        temp_v1 = FUN_0024c324();
+        temp_v1 = dataTable23Type1CountWithAoc();
       } while (temp_v2 < temp_v1);
     }
     DAT_0049fd20 = 0xffffffff;

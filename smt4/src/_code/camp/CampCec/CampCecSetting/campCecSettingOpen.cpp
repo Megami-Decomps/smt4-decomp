@@ -9,7 +9,7 @@ extern "C" {
 typedef void (*VoidFunc)(void);
 
 int FUN_00297468(VoidFunc fn, void **out, int arg);
-int FUN_002b8838(int id);
+int buttonHelpSetPreset(int id);
 int memClear(void *ptr, int size);                  /* zero a block */
 void *asdMemAlloc(int heap, int align, int arg2, int size, int arg4);
 u32 taskCreateDraw(VoidFunc fn, int priority, int arg2, int arg3, VoidFunc cb, int arg5, int arg6, u32 parent);
@@ -50,7 +50,7 @@ void campCecSettingOpen(void)
     setting->unk2C = 10;
     setting->unk30 = 7;
     setting->unk34 = 0xb;
-    FUN_002b8838(0xe2);
+    buttonHelpSetPreset(0xe2);
 }
 
 } /* extern "C" */

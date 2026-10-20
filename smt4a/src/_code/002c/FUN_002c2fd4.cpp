@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_001f4e20(int);
-int FUN_002360dc(void);
+int dialogOpen(int);
+int scrGetArgString(void);
 int FUN_002392b8(void);
 int FUN_002c2d5c(unsigned int);
 
-/* Supplied declaration required: FUN_001f4e20. */
-/* Supplied declaration required: FUN_002360dc. */
+/* Supplied declaration required: dialogOpen. */
+/* Supplied declaration required: scrGetArgString. */
 /* Supplied declaration required: FUN_002392b8. */
 /* Supplied declaration required: FUN_002c2d5c. */
 
@@ -19,9 +19,9 @@ unsigned int FUN_002c2fd4(void)
 
 {
 /* irregular: 4 native warning(s); review required */
-  FUN_002360dc();
+  scrGetArgString();
   FUN_002392b8();
-  FUN_001f4e20(1);
+  dialogOpen(1);
   FUN_002c2d5c(0xffffffff);
   return 1;
 }

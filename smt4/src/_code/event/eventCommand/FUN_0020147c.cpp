@@ -9,7 +9,7 @@ int FUN_00259324(unsigned int, int, int);
 extern int g_eventCommand; /* 0x43e088 */
 
 /* Supplied declaration required: FUN_00259324. */
-extern int FUN_002893d8(void);
+extern int scrGetCommandFrame(void);
 extern int scrGetArg(unsigned int);
 
 
@@ -20,7 +20,7 @@ unsigned char FUN_0020147c(void)
   int temp_v0;
   unsigned int temp_v1;
   
-  temp_v0 = FUN_002893d8();
+  temp_v0 = scrGetCommandFrame();
   if (temp_v0 == 0) {
     temp_v0 = scrGetArg(0);
     if (temp_v0 == 0) {

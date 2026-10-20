@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_0043dcf0; /* 0x43dcf0 */
+extern int g_partyPanel; /* 0x43dcf0 */
 
 
 unsigned int FUN_001ed80c(void)
@@ -12,21 +12,21 @@ unsigned int FUN_001ed80c(void)
 {
   int temp_v0;
   
-  if (DAT_0043dcf0 != 0) {
-    temp_v0 = *(int *)(DAT_0043dcf0 + 0x1c);
+  if (g_partyPanel != 0) {
+    temp_v0 = *(int *)(g_partyPanel + 0x1c);
     if (temp_v0 != 0x17) {
       if (temp_v0 == 0xb) {
         return 0;
       }
-      if ((temp_v0 == 0xd) && (*(int *)(DAT_0043dcf0 + 0x24) != 8)) {
+      if ((temp_v0 == 0xd) && (*(int *)(g_partyPanel + 0x24) != 8)) {
         return 0;
       }
     }
-    else if (*(int *)(DAT_0043dcf0 + 0x18) >= 5) {
+    else if (*(int *)(g_partyPanel + 0x18) >= 5) {
       return 0;
     }
-    if (((*(short *)(DAT_0043dcf0 + 0x2e8) != 8) && (*(short *)(DAT_0043dcf0 + 0x2e8) != 7)) ||
-       (*(char *)(DAT_0043dcf0 + 0x322) == '\0')) {
+    if (((*(short *)(g_partyPanel + 0x2e8) != 8) && (*(short *)(g_partyPanel + 0x2e8) != 7)) ||
+       (*(char *)(g_partyPanel + 0x322) == '\0')) {
       return 1;
     }
   }

@@ -11,7 +11,7 @@ typedef struct {
     u8 buffer[0x50];        /* 0x90 */
 } PoolOwner;
 
-int FUN_002c66cc(u8 *dest, u8 *source, int size, int flags);
+int rt_vec_dtor(u8 *dest, u8 *source, int size, int flags);
 int FUN_0037c7d4(void);
 int nw_snd_internal_PoolImpl_DestroyImpl(u8 *pool, u8 *buffer, int size);
 u8 *FUN_00235c60(u8 *subObject);
@@ -21,7 +21,7 @@ PoolOwner *FUN_0037d604(PoolOwner *self)
 {
     FUN_0037c7d4();
     nw_snd_internal_PoolImpl_DestroyImpl(self->pool, self->buffer, 0xa00);
-    FUN_002c66cc(self->buffer, (u8 *)0x235c5c, 0x50, 0x20);
+    rt_vec_dtor(self->buffer, (u8 *)0x235c5c, 0x50, 0x20);
     return (PoolOwner *)(FUN_00235c60(self->subObject) - 0x60);
 }
 

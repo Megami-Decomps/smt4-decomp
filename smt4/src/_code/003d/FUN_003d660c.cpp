@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_00263588(u32 value);
+int gfxObjectDestroy(u32 value);
 int FUN_0029c2cc(int value, int flag);
 
 typedef struct Obj {
@@ -15,7 +15,7 @@ void FUN_003d660c(Obj *obj)
 {
     if (obj->value != 0) {
         FUN_0029c2cc(obj->value, 0);
-        FUN_00263588(obj->value);
+        gfxObjectDestroy(obj->value);
         obj->value = 0;
         obj->unk734 = 0;
     }

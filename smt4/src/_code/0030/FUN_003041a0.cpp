@@ -110,7 +110,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_0024857c. */
 /* Supplied declaration required: FUN_0024b77c. */
 /* Supplied declaration required: FUN_0024b830. */
-extern int FUN_00269a58(void);
+extern int effGetFrameCounter(void);
 /* Supplied declaration required: FUN_002b7064. */
 /* Supplied declaration required: FUN_002b70cc. */
 /* Supplied declaration required: FUN_00360e64. */
@@ -496,7 +496,7 @@ void FUN_003041a0(fn_003041a0_arg0 *param_1)
                   temp_v34 = temp_v34 + 1;
                 } while (temp_v34 < temp_v30);
               }
-              temp_v3 = FUN_00269a58();
+              temp_v3 = effGetFrameCounter();
               temp_v22[5] = temp_v22[5] + temp_v3;
             }
             else {
@@ -553,7 +553,7 @@ void FUN_003041a0(fn_003041a0_arg0 *param_1)
             temp_v22[2] = (int)temp_v20;
             temp_v22[3] = (int)temp_v12;
             temp_v22[6] = -1;
-            temp_v3 = FUN_00269a58();
+            temp_v3 = effGetFrameCounter();
             temp_v22[5] = temp_v22[5] + temp_v3;
           }
           temp_v31 = temp_v31 + 1;

@@ -9,9 +9,9 @@ int FUN_0026a704(void);
 int FUN_00287704(...);
 int FUN_00296284(...);
 int FUN_0029c3c0(int, int, int);
-int FUN_002af5c0(...);
-int FUN_002b8838(...);
-int FUN_002b8e84(...);
+int uiSpriteSetImageKeyframe(...);
+int buttonHelpSetPreset(...);
+int eventQueueAddUnique(...);
 int FUN_002bd954(...);
 int FUN_002bf818(...);
 int FUN_00382878(unsigned int *);
@@ -43,12 +43,12 @@ extern int FUN_00282b28(void);
 extern unsigned int FUN_002950e8(unsigned int *, unsigned int);
 /* Supplied declaration required: FUN_00296284. */
 /* Supplied declaration required: FUN_0029c3c0. */
-/* Supplied declaration required: FUN_002af5c0. */
-/* Supplied declaration required: FUN_002b8838. */
-/* Supplied declaration required: FUN_002b8e84. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
+/* Supplied declaration required: buttonHelpSetPreset. */
+/* Supplied declaration required: eventQueueAddUnique. */
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002bf818. */
-extern int FUN_002c09d0(void);
+extern int gameFlagIsSet(void);
 extern int FUN_003818c8(unsigned int, unsigned char);
 extern int FUN_00381ae0(int);
 /* Supplied declaration required: FUN_00382878. */
@@ -73,8 +73,8 @@ void FUN_00385448(unsigned int *param_1)
       if (((((unsigned short)(unsigned char)param_1[6] == *(unsigned short *)(temp_v4 + 0x44db06)) &&
            ((*(short *)(temp_v4 + 0x44db08) == -1 ||
             ((int)(char)param_1[4] == (int)*(short *)(temp_v4 + 0x44db08))))) &&
-          ((*(short *)(temp_v4 + 0x44db02) == 0 || (temp_v0 = FUN_002c09d0(), temp_v0 != 0)))) &&
-         ((*(short *)(temp_v4 + 0x44db04) == 0 || (temp_v0 = FUN_002c09d0(), temp_v0 == 0)))) {
+          ((*(short *)(temp_v4 + 0x44db02) == 0 || (temp_v0 = gameFlagIsSet(), temp_v0 != 0)))) &&
+         ((*(short *)(temp_v4 + 0x44db04) == 0 || (temp_v0 = gameFlagIsSet(), temp_v0 == 0)))) {
         *param_1 = *param_1 | 0x20000;
         param_1[5] = (unsigned int)(s_e021_01_0044daf0 + temp_v4);
         FUN_0029c3c0(0,10,0xff);
@@ -85,7 +85,7 @@ void FUN_00385448(unsigned int *param_1)
       }
       temp_v5 = temp_v5 + 1;
     } while (temp_v5 < 2);
-    FUN_002b8838(0xa3);
+    buttonHelpSetPreset(0xa3);
     param_1[0x3ec] = 7;
     temp_v4 = FUN_00235414((char)param_1[6]);
     if (temp_v4 != 0) {
@@ -111,14 +111,14 @@ void FUN_00385448(unsigned int *param_1)
       return;
     }
     if (((char)param_1[6] != '\x02') && ((char)param_1[6] != '\x03')) {
-      FUN_002b8838(0xa4);
+      buttonHelpSetPreset(0xa4);
       param_1[2] = param_1[2] + 1;
       FUN_00382878(param_1);
       FUN_002bd954(param_1 + 0x11,0x31,0xffffffff,param_1 + 9,0xb);
       FUN_002bd954(param_1 + 0x34,0x31,0xffffffff,param_1 + 9,0xb);
       FUN_002bd954(param_1 + 0x57,0x31,0xffffffff,param_1 + 9,0xb);
       FUN_002bd954(param_1 + 0x7a,0x31,0,param_1 + 9,0xb);
-      FUN_002af5c0(param_1 + 0x7a,0);
+      uiSpriteSetImageKeyframe(param_1 + 0x7a,0);
       param_1[0x356] = 6;
       param_1[0x9d] = 0x43c80000;
       param_1[0x9e] = 0;
@@ -146,7 +146,7 @@ void FUN_00385448(unsigned int *param_1)
           temp_v3 = FUN_00287704((char)param_1[6]);
           temp_v4 = FUN_003818c8(temp_v3,*(unsigned char *)(temp_v4 + 10));
           if ((temp_v4 == 0) && ((char)param_1[0x355] == '\0')) {
-            FUN_002b8e84(0x1000121);
+            eventQueueAddUnique(0x1000121);
             *(unsigned char *)(param_1 + 0x355) = 1;
           }
         }
@@ -158,7 +158,7 @@ void FUN_00385448(unsigned int *param_1)
         param_1[0x356] = temp_v5;
         temp_v4 = FUN_0027ee9c();
         if (temp_v4 != 0) {
-          FUN_002b8838(0xa3);
+          buttonHelpSetPreset(0xa3);
           *(unsigned char *)(param_1 + 0x355) = 0;
           temp_v4 = FUN_00235414((char)param_1[6]);
           if (temp_v4 != 0) {
@@ -179,7 +179,7 @@ void FUN_00385448(unsigned int *param_1)
             param_1[2] = 7;
             return;
           }
-          FUN_002af5c0(param_1 + 0x7a,1,0);
+          uiSpriteSetImageKeyframe(param_1 + 0x7a,1,0);
           param_1[2] = param_1[2] + 1;
           param_1[3] = 0;
           return;
@@ -229,7 +229,7 @@ void FUN_00385448(unsigned int *param_1)
     if (temp_v4 != 2) {
       return;
     }
-    FUN_002af5c0(param_1 + 0x7a,1,0);
+    uiSpriteSetImageKeyframe(param_1 + 0x7a,1,0);
     temp_v5 = 3;
     param_1[2] = temp_v5;
     return;

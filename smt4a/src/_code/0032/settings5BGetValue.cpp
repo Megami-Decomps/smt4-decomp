@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern Settings5B DAT_005b3bf4;
+extern Settings5B g_gfxSettings;
 
 s32 settings5BGetValue(void)
 {
-    return DAT_005b3bf4.value;
+    return g_gfxSettings.value;
 }
 
 } /* extern "C" */

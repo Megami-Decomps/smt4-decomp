@@ -13,7 +13,7 @@ extern unsigned char DAT_0044e360; /* 0x44e360 */
 /* Unsupported intrinsic, declaration required: coproc_movefrom_User_R_Thread_and_Process_ID (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 extern int FUN_002ad254(void);
-extern unsigned int *FUN_002ad264(int);
+extern unsigned int *nn_gxlow_CTR_GetGpu(int);
 
 
 unsigned int FUN_0012a708(void)
@@ -30,7 +30,7 @@ unsigned int FUN_0012a708(void)
   (*(signed char *)((unsigned char *)&DAT_0044e360 + 0x1)) = 0;
   temp_v0 = FUN_002ad254();
   if (temp_v0 != 0) {
-    puVar2 = (unsigned int *)FUN_002ad264(temp_v0);
+    puVar2 = (unsigned int *)nn_gxlow_CTR_GetGpu(temp_v0);
     temp_v0 = coproc_movefrom_User_R_Thread_and_Process_ID();
     *(unsigned char **)(temp_v0 + 0x80) = &LAB_001a0000;
     temp_v1 = *puVar2;

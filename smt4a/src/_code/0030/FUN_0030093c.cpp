@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_002e9318(int *);
-int FUN_002e95c4(unsigned int, unsigned int);
+int onlineStringDestroy(int *);
+int onlineUrlSetText(unsigned int, unsigned int);
 int constructObj0055affc(int *);
 int FUN_002fbc1a(int, int *);
 
@@ -14,8 +14,8 @@ typedef struct {
     unsigned int sp14; /* 0x14: local_14 */
 } param_4_stack;
 
-/* Supplied declaration required: FUN_002e9318. */
-/* Supplied declaration required: FUN_002e95c4. */
+/* Supplied declaration required: onlineStringDestroy. */
+/* Supplied declaration required: onlineUrlSetText. */
 /* Supplied declaration required: constructObj0055affc. */
 /* Supplied declaration required: FUN_002fbc1a. */
 
@@ -32,11 +32,11 @@ unsigned int FUN_0030093c(int param_1,unsigned int param_2,unsigned int param_3,
   constructObj0055affc(&uStack_18);
   FUN_002fbc1a(param_1,&uStack_18);
   if (param_1 != 0) {
-    FUN_002e95c4(param_2,temp_v0);
-    FUN_002e9318(&uStack_18);
+    onlineUrlSetText(param_2,temp_v0);
+    onlineStringDestroy(&uStack_18);
     return 1;
   }
-  FUN_002e9318(&uStack_18);
+  onlineStringDestroy(&uStack_18);
   return 0;
 }
 

@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0019cac4(void);
-int FUN_001aea28(unsigned int);
+int dataTable00FindById(void);
+int ptrListRemoveClearOwner(unsigned int);
 
 typedef int romwright_code(...);
 /* stack frame of void: 3 slot(s), 12 byte(s) */
@@ -15,12 +15,12 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } void_stack;
 
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern int DAT_005806d4; /* 0x5806d4 */
 extern unsigned char DAT_005f17fc; /* 0x5f17fc */
 
-/* Supplied declaration required: FUN_0019cac4. */
-/* Supplied declaration required: FUN_001aea28. */
+/* Supplied declaration required: dataTable00FindById. */
+/* Supplied declaration required: ptrListRemoveClearOwner. */
 extern int FUN_004bb870(unsigned int);
 
 
@@ -69,7 +69,7 @@ void FUN_0033ad04(void)
                 temp_v4 = *(int *)(*(int *)(temp_v1 + 0x1b4) + 4);
                 if (*(char *)(temp_v1 + 0x1b9) != '\0') {
                   if (temp_v4 != 0) {
-                    FUN_001aea28(DAT_0056fcc0);
+                    ptrListRemoveClearOwner(g_handleRegistry);
                   }
                   *(unsigned char *)(temp_v1 + 0x1b8) = 0;
                 }
@@ -101,7 +101,7 @@ void FUN_0033ad04(void)
               temp_v2 = piVar7[0x11];
               *(unsigned int *)(temp_v1 + 0xa8) = temp_v2;
               temp_v2 = temp_v2 & 0xffff;
-              FUN_0019cac4();
+              dataTable00FindById();
               *(unsigned short *)(temp_v1 + 0x1a8) = *(unsigned short *)(temp_v2 + 2) & 0x7fff;
               temp_v3 = FUN_004bb870(*(unsigned int *)(temp_v1 + 0xa4));
               if (temp_v3 != 0) {
@@ -130,7 +130,7 @@ LAB_0033adb8:
           temp_v4 = *(int *)(*(int *)(temp_v1 + 0x1b4) + 4);
           if (*(char *)(temp_v1 + 0x1b9) != '\0') {
             if (temp_v4 != 0) {
-              FUN_001aea28(DAT_0056fcc0);
+              ptrListRemoveClearOwner(g_handleRegistry);
             }
             *(unsigned char *)(temp_v1 + 0x1b8) = 0;
           }
@@ -162,7 +162,7 @@ LAB_0033adb8:
         temp_v2 = piVar7[0x11];
         *(unsigned int *)(temp_v1 + 0xa8) = temp_v2;
         temp_v2 = temp_v2 & 0xffff;
-        FUN_0019cac4();
+        dataTable00FindById();
         *(unsigned short *)(temp_v1 + 0x1a8) = *(unsigned short *)(temp_v2 + 2) & 0x7fff;
         temp_v3 = FUN_004bb870(*(unsigned int *)(temp_v1 + 0xa4));
         if (temp_v3 != 0) {

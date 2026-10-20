@@ -7,7 +7,7 @@ void FUN_004b7d88(AocStep *step);
 void scriptHolderBReset(AocObjC *obj, s32 arg);
 void scriptHolderFree1(AocObjC *obj);
 void FUN_004731d8(void);
-s32 FUN_0047dff0(AocObjC *obj);
+s32 scriptHolderUpdate(AocObjC *obj);
 s32 gameBlockByte27E98Is1To3(void);
 
 extern AocMain *g_aocMain;
@@ -20,7 +20,7 @@ void aocBootStep(AocStep *step)
         step->substate = 1;
         return;
     }
-    if (step->substate == 1 && FUN_0047dff0(&g_aocMain->objC) != 0) {
+    if (step->substate == 1 && scriptHolderUpdate(&g_aocMain->objC) != 0) {
         scriptHolderFree1(&g_aocMain->objC);
         if (gameBlockByte27E98Is1To3() == 0) {
             FUN_004731d8();

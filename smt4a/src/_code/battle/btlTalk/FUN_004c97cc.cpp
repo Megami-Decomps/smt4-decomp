@@ -9,7 +9,7 @@ int FUN_001568f8(int, int);
 int sysPlaySe(int);
 int FUN_00184310(void);
 int FUN_00275bc8(void);
-int FUN_00275f44(int, int);
+int scrScriptProcessStartEntry(int, int);
 int FUN_002804b0(...);
 int FUN_003756c8(int);
 int FUN_004aa8b0(unsigned int, int);
@@ -20,8 +20,8 @@ int FUN_004fb670(int, int);
 int FUN_004fcde0(int);
 int FUN_004feecc(int, int);
 
-extern unsigned int DAT_005712f0; /* 0x5712f0 */
-extern int DAT_00571508; /* 0x571508 */
+extern unsigned int g_btlActionReflect; /* 0x5712f0 */
+extern int g_btlCamera; /* 0x571508 */
 extern int DAT_00573808; /* 0x573808 */
 extern unsigned int DAT_0057a7c0; /* 0x57a7c0 */
 extern unsigned int DAT_0057a7c4; /* 0x57a7c4 */
@@ -29,7 +29,7 @@ extern unsigned int DAT_0057a7c8; /* 0x57a7c8 */
 extern unsigned int DAT_0057a7cc; /* 0x57a7cc */
 extern unsigned int DAT_0057a7d0; /* 0x57a7d0 */
 extern unsigned int DAT_0057a7d4; /* 0x57a7d4 */
-extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
+extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_001568f8. */
@@ -37,7 +37,7 @@ extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
 /* Supplied declaration required: FUN_00184310. */
 extern int FUN_00224880(int);
 /* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_002804b0. */
 /* Supplied declaration required: FUN_003756c8. */
 extern int chainCountIdUnflagged(unsigned int, unsigned int);
@@ -80,8 +80,8 @@ unsigned int FUN_004c97cc(int *param_1,int param_2)
     FUN_002804b0("battle/talk/talk.bf",param_1 + 3,1);
     FUN_004f741c(DAT_00573808);
     param_1[6] = 1;
-    if ((-1 < *(int *)(DAT_00571508 + 0x7cc)) &&
-       (temp_v2 = FUN_004f2708(DAT_00571508,*param_1,1), temp_v2 != 0)) {
+    if ((-1 < *(int *)(g_btlCamera + 0x7cc)) &&
+       (temp_v2 = FUN_004f2708(g_btlCamera,*param_1,1), temp_v2 != 0)) {
       FUN_004fb670(0,0);
     }
     FUN_004feecc(1,0);
@@ -126,7 +126,7 @@ unsigned int FUN_004c97cc(int *param_1,int param_2)
     FUN_00275bc8();
     param_1[4] = temp_v2;
     *(unsigned int *)(temp_v2 + 0x108) = 1;
-    FUN_00275f44(param_1[4],0);
+    scrScriptProcessStartEntry(param_1[4],0);
     sysPlaySe(0x3e);
     temp_v2 = 2;
     break;
@@ -161,13 +161,13 @@ unsigned int FUN_004c97cc(int *param_1,int param_2)
     temp_v2 = 2;
     break;
   case 4:
-    temp_v2 = chainCountIdUnflagged(DAT_005712f0,0);
+    temp_v2 = chainCountIdUnflagged(g_btlActionReflect,0);
     if (0 < temp_v2) {
       return 0;
     }
     if ((DAT_0057a7d0 & *(unsigned int *)(*param_1 + 0x45a0)) != 0 ||
         (DAT_0057a7d4 & *(unsigned int *)(*param_1 + 0x45a4)) != 0) {
-      FUN_004aa8b0(DAT_0057a9c8,0);
+      FUN_004aa8b0(g_btlUiBlock,0);
       temp_v2 = *param_1;
       temp_v1 = ~DAT_0057a7d4;
       *(unsigned int *)(temp_v2 + 0x45a0) = *(unsigned int *)(temp_v2 + 0x45a0) & ~DAT_0057a7d0;

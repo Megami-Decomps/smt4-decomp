@@ -6,13 +6,13 @@ extern "C" {
 
 int FUN_00241d84(void);
 int FUN_00241f2c(...);
-int FUN_00296f4c(...);
+int scrScriptProcessStartEntry(...);
 int FUN_00298d64(...);
-int FUN_0029d620(...);
+int flaggedEntrySetValueA(...);
 int FUN_0029e17c(void);
-int FUN_0029e1ec(void);
+int useCounterStart(void);
 int FUN_0029e328(...);
-int FUN_0029e39c(...);
+int sortMenuCreate(...);
 int FUN_0029ede8(...);
 int FUN_002ae584(void);
 int FUN_002dfefc(...);
@@ -29,8 +29,8 @@ int FUN_0029efd8(...);
 int FUN_0029f5d8(...);
 int FUN_0029f848(...);
 int FUN_002b8584(int, int);
-int FUN_002b8838(...);
-int FUN_002b8e84(...);
+int buttonHelpSetPreset(...);
+int eventQueueAddUnique(...);
 int FUN_002bc01c(...);
 int FUN_002bf818(...);
 int FUN_002bff6c(int, int, int, int, int);
@@ -52,18 +52,18 @@ extern int FUN_0019e0c0(unsigned int);
 /* Supplied declaration required: FUN_00248738. */
 /* Supplied declaration required: FUN_0026e420. */
 /* Supplied declaration required: FUN_002829d4. */
-extern int padIsButtonDown(unsigned int);
+extern int flagBitIsSet(unsigned int);
 /* Supplied declaration required: FUN_00295660. */
-/* Supplied declaration required: FUN_00296f4c. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002973d8(void);
 /* Supplied declaration required: FUN_00298d64. */
-/* Supplied declaration required: FUN_0029d620. */
-extern unsigned int FUN_0029e11c(int);
+/* Supplied declaration required: flaggedEntrySetValueA. */
+extern unsigned int flaggedEntryGetValueA(int);
 /* Supplied declaration required: FUN_0029e17c. */
-extern int FUN_0029e1c8(void);
-/* Supplied declaration required: FUN_0029e1ec. */
+extern int useCounterIsFinished(void);
+/* Supplied declaration required: useCounterStart. */
 /* Supplied declaration required: FUN_0029e328. */
-/* Supplied declaration required: FUN_0029e39c. */
+/* Supplied declaration required: sortMenuCreate. */
 /* Supplied declaration required: FUN_0029eb5c. */
 /* Supplied declaration required: FUN_0029ede8. */
 extern int FUN_0029ee54(int);
@@ -75,14 +75,14 @@ extern int FUN_0029efa8(int);
 extern int sys43e188GetState(void);
 /* Supplied declaration required: FUN_002ae584. */
 /* Supplied declaration required: FUN_002b8584. */
-/* Supplied declaration required: FUN_002b8838. */
-extern int FUN_002b8cec(unsigned int);
-/* Supplied declaration required: FUN_002b8e84. */
+/* Supplied declaration required: buttonHelpSetPreset. */
+extern int padIsButtonRepeat(unsigned int);
+/* Supplied declaration required: eventQueueAddUnique. */
 extern int FUN_002b8ee0(int, unsigned int);
 /* Supplied declaration required: FUN_002bc01c. */
 extern unsigned int FUN_002bf4f8(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bf818. */
-extern int FUN_002bfde4(unsigned int);
+extern int padIsButtonPressed(unsigned int);
 /* Supplied declaration required: FUN_002bff6c. */
 /* Supplied declaration required: FUN_002c1658. */
 /* Supplied declaration required: FUN_002dfefc. */
@@ -115,7 +115,7 @@ unsigned int FUN_003291e0(int *param_1)
   case 0:
     temp_v6 = FUN_002b8ee0(temp_v7 + 0x2d8,0);
     if (temp_v6 != 0) {
-      FUN_002b8838(0x19);
+      buttonHelpSetPreset(0x19);
       FUN_00242000(temp_v7);
       FUN_00248738(temp_v7,3);
       temp_v6 = 0;
@@ -138,17 +138,17 @@ unsigned int FUN_003291e0(int *param_1)
     }
     break;
   case 1:
-    temp_v6 = FUN_002bfde4(0);
+    temp_v6 = padIsButtonPressed(0);
     if (temp_v6 == 0) {
-      temp_v6 = FUN_002bfde4(1);
+      temp_v6 = padIsButtonPressed(1);
       if (temp_v6 != 0) {
         FUN_002bc01c(0x100016e);
         return 0xffffffff;
       }
-      temp_v6 = FUN_002b8cec(5);
-      if ((temp_v6 == 0) && (temp_v6 = FUN_002b8cec(0xe), temp_v6 == 0)) {
-        temp_v6 = FUN_002b8cec(6);
-        if ((temp_v6 == 0) && (temp_v6 = FUN_002b8cec(0xf), temp_v6 == 0)) {
+      temp_v6 = padIsButtonRepeat(5);
+      if ((temp_v6 == 0) && (temp_v6 = padIsButtonRepeat(0xe), temp_v6 == 0)) {
+        temp_v6 = padIsButtonRepeat(6);
+        if ((temp_v6 == 0) && (temp_v6 = padIsButtonRepeat(0xf), temp_v6 == 0)) {
           temp_v6 = 0xa0;
           FUN_002bff6c(0xa0,0x30,200,0x20,2);
           if (temp_v6 != 0) {
@@ -212,9 +212,9 @@ unsigned int FUN_003291e0(int *param_1)
       FUN_00242000();
       return 0;
     }
-    temp_v6 = FUN_002bfde4(0);
+    temp_v6 = padIsButtonPressed(0);
     if (temp_v6 == 0) {
-      temp_v6 = FUN_002bfde4(1);
+      temp_v6 = padIsButtonPressed(1);
       if (temp_v6 == 0) {
         return 0;
       }
@@ -236,7 +236,7 @@ unsigned int FUN_003291e0(int *param_1)
     *(unsigned int *)(temp_v7 + 0x2a8) = 0;
     if (*(char *)(temp_v7 + 0x2b4) != '\0') {
       temp_v10 = 0x2e;
-      temp_v6 = padIsButtonDown(0x2e);
+      temp_v6 = flagBitIsSet(0x2e);
       if (temp_v6 == 0) {
         temp_v6 = 0x2e;
         FUN_002829d4();
@@ -249,7 +249,7 @@ unsigned int FUN_003291e0(int *param_1)
     else if (*(char *)(temp_v7 + 0x2b5) == '\0') {
       temp_v8 = 1;
       do {
-        temp_v6 = padIsButtonDown(temp_v8);
+        temp_v6 = flagBitIsSet(temp_v8);
         if ((temp_v6 == 0) && (temp_v5 = temp_v8, FUN_002829d4(), temp_v5 == 0)) {
           *(unsigned int *)(temp_v7 + *(int *)(temp_v7 + 0x2a8) * 4 + 0x74) = temp_v8;
           *(int *)(temp_v7 + 0x2a8) = *(int *)(temp_v7 + 0x2a8) + 1;
@@ -259,7 +259,7 @@ unsigned int FUN_003291e0(int *param_1)
     }
     else {
       temp_v10 = 0x18;
-      temp_v6 = padIsButtonDown(0x18);
+      temp_v6 = flagBitIsSet(0x18);
       if (temp_v6 == 0) {
         temp_v6 = 0x18;
         FUN_002829d4();
@@ -301,7 +301,7 @@ unsigned int FUN_003291e0(int *param_1)
       temp_v6 = temp_v4;
       FUN_0026e420(temp_v4,0,1);
       if (temp_v6 == 0) {
-        FUN_002b8e84(0x100016e);
+        eventQueueAddUnique(0x100016e);
         return 0;
       }
       temp_v6 = temp_v4;
@@ -309,7 +309,7 @@ unsigned int FUN_003291e0(int *param_1)
       FUN_00295660(0,temp_v6);
       FUN_00241f2c(temp_v4);
       FUN_0029ede8(0x18,temp_v4,0xffffffff,0);
-      FUN_00296f4c(*(unsigned int *)(temp_v7 + 0x530),0);
+      scrScriptProcessStartEntry(*(unsigned int *)(temp_v7 + 0x530),0);
       FUN_00248738(temp_v7,4);
       temp_v10 = temp_v9;
       FUN_002bc01c(temp_v10);
@@ -344,12 +344,12 @@ unsigned int FUN_003291e0(int *param_1)
       return 0;
     }
     FUN_002bc01c(0x100016d);
-    FUN_0029e39c(0xd,0);
+    sortMenuCreate(0xd,0);
     FUN_0029e328(0x21);
     FUN_0029e328(0x15);
     FUN_0029e328(0x16);
     FUN_0029e328(3);
-    FUN_0029e1ec();
+    useCounterStart();
     temp_v10 = 6;
     FUN_00248738(temp_v7,temp_v10);
     return 0;
@@ -364,10 +364,10 @@ unsigned int FUN_003291e0(int *param_1)
         temp_v6 = FUN_0029efc0(temp_v7 + 0x10);
         temp_v4 = FUN_0029efa8(temp_v7 + 0x10);
         FUN_0026e420(*(unsigned int *)(temp_v7 + (temp_v4 + temp_v6) * 4 + 0x74),0);
-        FUN_002b8e84(0x100025c);
+        eventQueueAddUnique(0x100025c);
         FUN_00248738(temp_v7,5);
       }
-      FUN_002b8838(0x19);
+      buttonHelpSetPreset(0x19);
     }
     break;
   case 5:
@@ -388,7 +388,7 @@ unsigned int FUN_003291e0(int *param_1)
       }
       if (temp_v11 && temp_v0 == '\0') {
         temp_v10 = FUN_0029efc0(temp_v7 + 0x10);
-        temp_v9 = FUN_0029e11c(temp_v7 + 0x10);
+        temp_v9 = flaggedEntryGetValueA(temp_v7 + 0x10);
         *(unsigned int *)(temp_v7 + 0x2a8) = 0;
         if (*(char *)(temp_v7 + 0x2b4) != '\0') {
           *(unsigned int *)(temp_v7 + 0x74) = 0x2e;
@@ -408,7 +408,7 @@ unsigned int FUN_003291e0(int *param_1)
             temp_v5 = temp_v8;
             FUN_002ae584();
             if ((temp_v5 != 0) &&
-               ((temp_v6 = padIsButtonDown(temp_v8), temp_v6 != 0 ||
+               ((temp_v6 = flagBitIsSet(temp_v8), temp_v6 != 0 ||
                 (temp_v5 = temp_v8, FUN_002829d4(), temp_v5 != 2)))) {
               *(unsigned int *)(temp_v7 + *(int *)(temp_v7 + 0x2a8) * 4 + 0x74) = temp_v8;
               *(int *)(temp_v7 + 0x2a8) = *(int *)(temp_v7 + 0x2a8) + 1;
@@ -419,7 +419,7 @@ unsigned int FUN_003291e0(int *param_1)
         FUN_0029f848(temp_v7 + 0x10,*(unsigned int *)(temp_v7 + 0x2a8),10,1,1,1);
         FUN_00241d84();
         FUN_00298d64(temp_v7 + 0x10,temp_v10);
-        FUN_0029d620(temp_v7 + 0x10,temp_v9);
+        flaggedEntrySetValueA(temp_v7 + 0x10,temp_v9);
         FUN_00242000(temp_v7);
         FUN_00248738(temp_v7,3);
         return 0;
@@ -430,10 +430,10 @@ unsigned int FUN_003291e0(int *param_1)
     FUN_002bc01c(temp_v9);
     break;
   case 6:
-    temp_v6 = FUN_0029e1c8();
+    temp_v6 = useCounterIsFinished();
     if (temp_v6 != 0) {
       FUN_0029e17c();
-      FUN_002b8838(0x19);
+      buttonHelpSetPreset(0x19);
       FUN_00242000(temp_v7);
       FUN_00248738(temp_v7,3);
     }

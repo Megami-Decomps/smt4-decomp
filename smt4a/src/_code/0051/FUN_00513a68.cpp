@@ -18,9 +18,9 @@ struct fn_00513a68_arg0 {
     int field_0x38; /* +0x38 */
 };
 
-extern unsigned char DAT_0062d6f8; /* 0x62d6f8 */
+extern unsigned char g_mwmoCriticalSection; /* 0x62d6f8 */
 
-extern unsigned int FUN_0023c13c(fn_00513a68_arg0 *, unsigned int);
+extern unsigned int indexerGetElementOffset(fn_00513a68_arg0 *, unsigned int);
 extern unsigned int VX2DecoderGetV(fn_00513a68_arg0 *, unsigned int);
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
@@ -32,11 +32,11 @@ unsigned int FUN_00513a68(fn_00513a68_arg0 *param_1,unsigned int *param_2)
   unsigned int temp_v0;
   int temp_v1;
   
-  nn_os_CriticalSection_Enter((unsigned int)&DAT_0062d6f8);
+  nn_os_CriticalSection_Enter((unsigned int)&g_mwmoCriticalSection);
   if (param_1->field_0x38 != 0) {
     temp_v1 = param_1->field_0x34;
     *param_2 = *(unsigned int *)(param_1->field_0x28 + temp_v1 * 4);
-    temp_v0 = FUN_0023c13c(param_1,*(unsigned int *)(param_1->field_0x28 + temp_v1 * 4));
+    temp_v0 = indexerGetElementOffset(param_1,*(unsigned int *)(param_1->field_0x28 + temp_v1 * 4));
     param_2[1] = temp_v0;
     temp_v0 = VX2DecoderGetV(param_1,*(unsigned int *)(param_1->field_0x28 + temp_v1 * 4));
     param_2[2] = temp_v0;
@@ -48,10 +48,10 @@ unsigned int FUN_00513a68(fn_00513a68_arg0 *param_1,unsigned int *param_2)
     param_2[8] = *(unsigned int *)(param_1->field_0x2c + temp_v1 * 4);
     param_2[9] = *(unsigned int *)(param_1->field_0x2c + temp_v1 * 4);
     param_2[10] = 1;
-    nn_os_CriticalSection_Leave((unsigned int)&DAT_0062d6f8);
+    nn_os_CriticalSection_Leave((unsigned int)&g_mwmoCriticalSection);
     return 1;
   }
-  nn_os_CriticalSection_Leave((unsigned int)&DAT_0062d6f8);
+  nn_os_CriticalSection_Leave((unsigned int)&g_mwmoCriticalSection);
   return 0;
 }
 

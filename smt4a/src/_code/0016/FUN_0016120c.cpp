@@ -9,8 +9,8 @@ int sysMemClear(int, int);
 typedef int romwright_code(...);
 extern romwright_code *DAT_0058918c; /* 0x58918c */
 extern romwright_code *DAT_00589190; /* 0x589190 */
-extern int DAT_005b40e0; /* 0x5b40e0 */
-extern int DAT_005b40e4; /* 0x5b40e4 */
+extern int g_commandBufferCursor; /* 0x5b40e0 */
+extern int g_commandBufferEnd; /* 0x5b40e4 */
 extern unsigned int *DAT_0061a50c; /* 0x61a50c */
 
 /* Supplied declaration required: sysMemClear. */
@@ -50,8 +50,8 @@ void FUN_0016120c(int param_1,int param_2)
     puVar1[6] = temp_v0 + param_1;
     puVar1[7] = param_2;
     sysMemClear(temp_v0 + param_1,param_2 * 0x1c);
-    DAT_005b40e0 = puVar1[1];
-    DAT_005b40e4 = DAT_005b40e0 + puVar1[2];
+    g_commandBufferCursor = puVar1[1];
+    g_commandBufferEnd = g_commandBufferCursor + puVar1[2];
   }
   return;
 }

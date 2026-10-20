@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0016c410(...);
+int renderCtxResetColorScale(...);
 int FUN_0016c4b8(...);
 int FUN_0016c560(...);
 int FUN_0025ca50(void);
@@ -61,7 +61,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0016c410. */
+/* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: FUN_0016c4b8. */
 /* Supplied declaration required: FUN_0016c560. */
 /* Supplied declaration required: FUN_0025ca50. */
@@ -346,7 +346,7 @@ void FUN_00402290(fn_00402290_arg0 *param_1)
     *(unsigned char *)(temp_v0 + 0x1330) = 0;
   }
   FUN_0016c560(g_renderCtx);
-  FUN_0016c410(g_renderCtx);
+  renderCtxResetColorScale(g_renderCtx);
   return;
 }
 

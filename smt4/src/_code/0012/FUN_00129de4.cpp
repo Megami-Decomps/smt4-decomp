@@ -79,7 +79,7 @@ extern int FUN_002bc7e4(void);
 /* Supplied declaration required: FUN_002c130c. */
 /* Supplied declaration required: FUN_002c131c. */
 extern int FUN_002c55b4(void);
-extern int FUN_002c55c4(void);
+extern int appletIsExitRequested(void);
 /* Supplied declaration required: nn_applet_CTR_detail_CancelParameter. */
 extern unsigned int nn_applet_CTR_detail_Glance(unsigned int, unsigned int *, unsigned char *, unsigned int, int *, unsigned int);
 extern void nn_applet_CTR_detail_ReplySleepNotificationCompleteToManager(void);
@@ -111,7 +111,7 @@ unsigned int FUN_00129de4(void)
     }
     FUN_0013b658();
   }
-  temp_v1 = FUN_002c55c4();
+  temp_v1 = appletIsExitRequested();
   if (temp_v1 != 0) {
     if (DAT_0044e3ec == (romwright_code *)0x0) {
       return 1;
@@ -203,13 +203,13 @@ unsigned int FUN_00129de4(void)
     if (temp_v0 != 2) {
       if (temp_v0 != 3) {
         if (((temp_v0 == 4) && (DAT_0044e3d4 != (romwright_code *)0x0)) &&
-           ((temp_v0 = FUN_002c55c4(), temp_v0 == 0 && (temp_v0 = FUN_002c55b4(), temp_v0 == 0)))) {
+           ((temp_v0 = appletIsExitRequested(), temp_v0 == 0 && (temp_v0 = FUN_002c55b4(), temp_v0 == 0)))) {
           (*DAT_0044e3d4)(DAT_0044e414);
         }
       }
       else {
         FUN_0013a354();
-        if (((DAT_0044e3dc != (romwright_code *)0x0) && (temp_v0 = FUN_002c55c4(), temp_v0 == 0)) &&
+        if (((DAT_0044e3dc != (romwright_code *)0x0) && (temp_v0 = appletIsExitRequested(), temp_v0 == 0)) &&
            (temp_v0 = FUN_002c55b4(), temp_v0 == 0)) {
           (*DAT_0044e3dc)(DAT_0044e41c);
         }
@@ -219,7 +219,7 @@ unsigned int FUN_00129de4(void)
     }
     else {
       FUN_002c130c(4);
-      if (((DAT_0044e3d8 != (romwright_code *)0x0) && (temp_v0 = FUN_002c55c4(), temp_v0 == 0)) &&
+      if (((DAT_0044e3d8 != (romwright_code *)0x0) && (temp_v0 = appletIsExitRequested(), temp_v0 == 0)) &&
          (temp_v0 = FUN_002c55b4(), temp_v0 == 0)) {
         (*DAT_0044e3d8)(DAT_0044e418);
       }
@@ -234,7 +234,7 @@ unsigned int FUN_00129de4(void)
     }
   }
   else {
-    temp_v1 = FUN_002c55c4();
+    temp_v1 = appletIsExitRequested();
     temp_v0 = 0;
     if (temp_v1 == 0) {
       temp_v1 = FUN_002c55b4();

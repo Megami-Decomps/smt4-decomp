@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c52f8(void);
+int asdFatalError(void);
 int software_interrupt(int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -23,7 +23,7 @@ extern unsigned int DAT_00473854; /* 0x473854 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 extern int FUN_00146704(unsigned int *);
-/* Supplied declaration required: FUN_002c52f8. */
+/* Supplied declaration required: asdFatalError. */
 
 
 void FUN_001283e4(int param_1)
@@ -74,7 +74,7 @@ void FUN_001283e4(int param_1)
       if (DAT_00472a50 != 0) {
         software_interrupt(0x23);
         if (DAT_00472a50 < 0) {
-          FUN_002c52f8();
+          asdFatalError();
         }
         DAT_00472a50 = 0;
       }

@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-extern int DAT_0057f28c; /* 0x57f28c */
+extern int g_uiQuest; /* 0x57f28c */
 extern unsigned char g_gameState; /* 0x5f15fc */
 
 /* Supplied declaration required: sysPlaySe. */
@@ -24,12 +24,12 @@ void FUN_00320834(void)
   int temp_v0;
   int temp_v1;
   
-  temp_v0 = DAT_0057f28c;
-  temp_v1 = *(int *)(DAT_0057f28c + 0x918);
-  if (*(char *)(DAT_0057f28c + 0x90c) != '\0') {
+  temp_v0 = g_uiQuest;
+  temp_v1 = *(int *)(g_uiQuest + 0x918);
+  if (*(char *)(g_uiQuest + 0x90c) != '\0') {
     if ((*(signed char *)((unsigned char *)&g_gameState + 0x460)) != '\0') {
       if (temp_v1 == 2) {
-        if (*(int *)(DAT_0057f28c + 0x910) == 0) {
+        if (*(int *)(g_uiQuest + 0x910) == 0) {
           sysPlaySe(0x10f);
         }
         if (*(int *)(temp_v0 + 0x910) == 1) {
@@ -39,7 +39,7 @@ void FUN_00320834(void)
       }
     }
     else if (temp_v1 == 2) {
-      if (*(int *)(DAT_0057f28c + 0x910) == 0) {
+      if (*(int *)(g_uiQuest + 0x910) == 0) {
         sysPlaySe(0xd7);
       }
       if (*(int *)(temp_v0 + 0x910) == 1) {
@@ -50,7 +50,7 @@ void FUN_00320834(void)
   }
   else {
     if (temp_v1 == 2) {
-      if (*(int *)(DAT_0057f28c + 0x910) == 0) {
+      if (*(int *)(g_uiQuest + 0x910) == 0) {
         sysPlaySe(0xd7);
       }
       if (*(int *)(temp_v0 + 0x910) == 1) {

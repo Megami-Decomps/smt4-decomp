@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_0010d6d4(unsigned char [12], int, int);
-int FUN_002e9598(int, int);
-int FUN_002e9ec8(int, unsigned int);
+int onlineStringAssign(int, int);
+int onlineInstanceTableFind(int, unsigned int);
 int FUN_002ea3d0(int, unsigned int);
 int FUN_002ea41e(unsigned char [12]);
 int FUN_002f7830(int, unsigned char [4]);
@@ -26,9 +26,9 @@ extern unsigned char LAB_0010db69; /* 0x10db69 */
 /* Supplied declaration required: FUN_0010d6d4. */
 extern int FUN_0010da40(int);
 extern unsigned char *FUN_002e7908(unsigned char *, unsigned int *);
-/* Supplied declaration required: FUN_002e9598. */
-extern int FUN_002e9af4(void);
-/* Supplied declaration required: FUN_002e9ec8. */
+/* Supplied declaration required: onlineStringAssign. */
+extern int onlineInstanceTableGetCurrent(void);
+/* Supplied declaration required: onlineInstanceTableFind. */
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned char *, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
 /* Supplied declaration required: FUN_002ea41e. */
@@ -55,8 +55,8 @@ void FUN_0010d5cc(int param_1)
   
   puVar4 = temp_v2;
   puVar3 = temp_v2;
-  temp_v0 = FUN_002e9af4();
-  FUN_002e9ec8(temp_v0,*(unsigned int *)(param_1 + 0x6c));
+  temp_v0 = onlineInstanceTableGetCurrent();
+  onlineInstanceTableFind(temp_v0,*(unsigned int *)(param_1 + 0x6c));
   if (temp_v0 == 0) {
     temp_v1 = 0x80010004;
     puVar5 = (unsigned int *)&temp_v3;
@@ -98,7 +98,7 @@ void FUN_0010d5cc(int param_1)
           temp_v6 = param_1 + 0x11c;
           temp_v0 = FUN_002f7896(temp_v6,&LAB_0010d6d0);
           if ((temp_v0 == 0) && (*(unsigned int *)(param_1 + 0x104) < 5)) {
-            FUN_002e9598(param_1 + 0x70,temp_v6);
+            onlineStringAssign(param_1 + 0x70,temp_v6);
             temp_v1 = FUN_002ea3c0(temp_v2,&LAB_0010db69,0,&LAB_0010d6d0);
             FUN_002ea3d0(param_1,temp_v1);
             return;

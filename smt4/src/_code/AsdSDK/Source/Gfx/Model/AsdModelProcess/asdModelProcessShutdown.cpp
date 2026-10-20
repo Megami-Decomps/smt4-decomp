@@ -7,7 +7,7 @@ s32 jobIsValid(u32 handle);
 void jobStop(u32 handle, s32 arg);
 void asdMemFree(void *block);
 
-extern u32 DAT_00464be8;
+extern u32 g_asdModelProcess;
 
 /* Shuts down the model manager's workers: stops each one that is still running, frees the
  * process set and clears its pointer. */
@@ -25,7 +25,7 @@ void asdModelProcessShutdown(void)
         jobStop(set->handle[2], 0);
     }
     asdMemFree(set);
-    DAT_00464be8 = 0;
+    g_asdModelProcess = 0;
 }
 
 } /* extern "C" */

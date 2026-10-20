@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002b46f8(unsigned short [6], unsigned int, unsigned int, int, unsigned char *);
+int libc_bsearch(unsigned short [6], unsigned int, unsigned int, int, unsigned char *);
 
 extern unsigned char LAB_001b1814; /* 0x1b1814 */
 
-/* Supplied declaration required: FUN_002b46f8. */
+/* Supplied declaration required: libc_bsearch. */
 extern unsigned int dataTableGetCount(unsigned int);
 extern unsigned int dataTableGetEntries(void);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
@@ -29,7 +29,7 @@ void FUN_0023c684(int param_1)
   temp_v1 = dataTableGetEntries();
   temp_v0 = dataTableGetCount(temp_v0);
   temp_v2[0] = (unsigned short)param_1;
-  FUN_002b46f8(temp_v2,temp_v1,temp_v0,0xc,&LAB_001b1814);
+  libc_bsearch(temp_v2,temp_v1,temp_v0,0xc,&LAB_001b1814);
   return;
 }
 

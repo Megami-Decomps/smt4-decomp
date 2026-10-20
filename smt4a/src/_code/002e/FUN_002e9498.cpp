@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_0012f1f2(int [2], int, int);
 int FUN_002e7908(unsigned int, unsigned int [2]);
-int FUN_002e9318(...);
-int FUN_002e93da(int);
+int onlineStringDestroy(...);
+int onlineUrlEnsureParsed(int);
 int FUN_002e9510(int, unsigned int);
 
 /* stack frame of param_4: 4 slot(s), 16 byte(s) */
@@ -20,11 +20,11 @@ typedef struct {
 
 /* Supplied declaration required: FUN_0012f1f2. */
 /* Supplied declaration required: FUN_002e7908. */
-extern unsigned int FUN_002e9300(unsigned char *, unsigned int);
-/* Supplied declaration required: FUN_002e9318. */
-/* Supplied declaration required: FUN_002e93da. */
+extern unsigned int onlineStringConstruct(unsigned char *, unsigned int);
+/* Supplied declaration required: onlineStringDestroy. */
+/* Supplied declaration required: onlineUrlEnsureParsed. */
 /* Supplied declaration required: FUN_002e9510. */
-extern int FUN_002e9520(unsigned char *, unsigned int);
+extern int onlineStringCopyConstruct(unsigned char *, unsigned int);
 
 
 void FUN_002e9498(unsigned int param_1,int param_2,unsigned int param_3,unsigned int param_4)
@@ -47,17 +47,17 @@ void FUN_002e9498(unsigned int param_1,int param_2,unsigned int param_3,unsigned
   iStack_20 = param_2;
   uStack_1c = param_3;
   temp_v8 = param_4;
-  FUN_002e93da(param_2);
-  temp_v0 = FUN_002e9300(temp_v4,param_3);
+  onlineUrlEnsureParsed(param_2);
+  temp_v0 = onlineStringConstruct(temp_v4,param_3);
   FUN_002e9510(param_2 + 0x28,temp_v0);
-  FUN_002e9318(temp_v4);
-  temp_v0 = FUN_002e9300(temp_v5,param_3);
-  temp_v1 = FUN_002e9520(temp_v3,temp_v0);
+  onlineStringDestroy(temp_v4);
+  temp_v0 = onlineStringConstruct(temp_v5,param_3);
+  temp_v1 = onlineStringCopyConstruct(temp_v3,temp_v0);
   *(unsigned int *)(temp_v1 + 8) = 0;
   FUN_0012f1f2(temp_v2,param_2 + 0xc,temp_v1);
-  FUN_002e9318(temp_v3);
+  onlineStringDestroy(temp_v3);
   *(unsigned int *)(temp_v2[0] + 0x18) = temp_v8;
-  FUN_002e9318(temp_v5);
+  onlineStringDestroy(temp_v5);
   *(unsigned char *)(param_2 + 0x65) = 0;
   temp_v6[0] = 0x10001;
   FUN_002e7908(temp_v7,temp_v6);

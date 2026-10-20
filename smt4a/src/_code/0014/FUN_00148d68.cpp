@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned int FUN_0014bef4(unsigned int);
+extern unsigned int randRange(unsigned int);
 extern short *FUN_00152978(unsigned int, unsigned int);
 extern int FUN_0015fa74(unsigned int, unsigned int);
 extern int FUN_0015fb68(void);
@@ -46,7 +46,7 @@ unsigned int FUN_00148d68(unsigned int param_1,unsigned int param_2,int param_3)
   temp_v7 = (unsigned int)*(unsigned short *)(temp_v6 + 0x16);
   if (temp_v7 != 0) {
     if (999 >= temp_v7) {
-      temp_v7 = FUN_0014bef4(99);
+      temp_v7 = randRange(99);
       if (*(unsigned short *)(temp_v6 + 0x16) > temp_v7) {
         temp_v2 = *psVar12;
         if (temp_v2 != 0) {
@@ -71,7 +71,7 @@ unsigned int FUN_00148d68(unsigned int param_1,unsigned int param_2,int param_3)
             puVar8 = puVar8 + 3;
           } while (temp_v4 != 0);
         }
-        temp_v7 = FUN_0014bef4(99);
+        temp_v7 = randRange(99);
         if (temp_v7 < temp_v10) {
           temp_v9 = *psVar12;
           *(unsigned char *)(psVar6 + 1) = *(unsigned char *)(psVar6 + 1) | (unsigned char)temp_v0;

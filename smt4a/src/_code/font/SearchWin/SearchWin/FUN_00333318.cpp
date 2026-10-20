@@ -9,7 +9,7 @@ int asdProcessCreateSimple(...);
 int FUN_001505ac(...);
 int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
-int FUN_001846d0(...);
+int uiSpriteSelectAnim(...);
 int sysMemClear(...);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
 
@@ -37,7 +37,7 @@ extern unsigned int *DAT_0057f584; /* 0x57f584 */
 /* Supplied declaration required: FUN_001505ac. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: FUN_001846d0. */
+/* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
 
@@ -64,7 +64,7 @@ void FUN_00333318(void)
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(puVar1 + 6);
   FUN_001505ac(puVar1 + 6,&DAT_0052fcb4,0x24,&DAT_0052fcd8,0x24,0,0,0,0,&DAT_0052fcfc,0x70);
   FUN_0014e188(puVar1 + 0xe,8,0x87,puVar1 + 6,1);
-  FUN_001846d0(puVar1 + 0xe,0);
+  uiSpriteSelectAnim(puVar1 + 0xe,0);
   return;
 }
 

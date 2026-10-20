@@ -9,7 +9,7 @@ int FUN_0011cd14(int);
 int FUN_00120ba8(int *, unsigned int, unsigned int);
 int FUN_0012a740(int);
 int FUN_002bcc54(void);
-int FUN_002c52f8(void);
+int asdFatalError(void);
 int asdMemoryAlloc(int, int, int, unsigned int, int);
 
 /* stack frame of param_1: 9 slot(s), 27 byte(s) */
@@ -81,7 +81,7 @@ extern int FUN_0011cc1c(void);
 extern unsigned int FUN_00120e24(unsigned int *);
 /* Supplied declaration required: FUN_0012a740. */
 /* Supplied declaration required: FUN_002bcc54. */
-/* Supplied declaration required: FUN_002c52f8. */
+/* Supplied declaration required: asdFatalError. */
 /* Supplied declaration required: asdMemoryAlloc. */
 
 
@@ -108,15 +108,15 @@ void FUN_0010d494(int param_1)
   temp_v0 = FUN_0011be58();
   temp_v1 = 0;
   if (temp_v0 < 0) {
-    temp_v1 = FUN_002c52f8();
+    temp_v1 = asdFatalError();
   }
   FUN_0011bf24();
   if (temp_v1 < 0) {
-    FUN_002c52f8();
+    asdFatalError();
   }
   temp_v1 = FUN_0011cc1c();
   if (temp_v1 < 0) {
-    FUN_002c52f8();
+    asdFatalError();
   }
   FUN_002bcc54();
   if (0 < param_1) {

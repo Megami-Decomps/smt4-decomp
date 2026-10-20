@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019a7f4(unsigned int);
+int asdTMTexTableReleaseNode(unsigned int);
 int FUN_0019d96c(int, int, int);
 int FUN_001ad0fc(int);
 int FUN_001ad1ac(int, unsigned int);
@@ -20,8 +20,8 @@ extern unsigned int g_aocSystem; /* 0x570280 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int jobGetWork(int);
-extern int FUN_0018719c(unsigned int);
-/* Supplied declaration required: FUN_0019a7f4. */
+extern int gameFlagIsSet(unsigned int);
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
 /* Supplied declaration required: FUN_0019d96c. */
 /* Supplied declaration required: FUN_001ad0fc. */
 /* Supplied declaration required: FUN_001ad1ac. */
@@ -40,7 +40,7 @@ void FUN_00318544(int param_1,unsigned int param_2,int param_3,unsigned int para
   float temp_v3;
   float temp_v4;
   
-  temp_v0 = FUN_0018719c(0x522);
+  temp_v0 = gameFlagIsSet(0x522);
   if ((temp_v0 == 0) || (param_1 != 0)) {
     temp_v1 = jobGetWork(param_1);
     temp_v2 = *(int *)(temp_v1 + 0x84) != -1;
@@ -49,7 +49,7 @@ void FUN_00318544(int param_1,unsigned int param_2,int param_3,unsigned int para
       temp_v0 = *(int *)(temp_v1 + 0x80);
     }
     if (temp_v2 && temp_v0 != 0) {
-      FUN_0019a7f4(*(unsigned int *)(temp_v1 + 0x10));
+      asdTMTexTableReleaseNode(*(unsigned int *)(temp_v1 + 0x10));
       FUN_001b2d54(g_aocSystem,*(unsigned int *)(temp_v1 + 0x10),*(unsigned int *)(temp_v1 + 0x84));
       *(unsigned int *)(temp_v1 + 0x84) = 0xffffffff;
       *(unsigned int *)(temp_v1 + 0x80) = 0;

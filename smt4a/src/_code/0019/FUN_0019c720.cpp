@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019a7f4(...);
+int asdTMTexTableReleaseNode(...);
 int FUN_0019d96c(...);
 int FUN_001a6568(...);
 int FUN_001acf98(...);
@@ -40,8 +40,8 @@ typedef struct {
 extern unsigned int g_aocSystem; /* 0x570280 */
 
 extern int FUN_00162ea4(void);
-extern int FUN_0018206c(unsigned int);
-/* Supplied declaration required: FUN_0019a7f4. */
+extern int asdTMTexTableNodeIsLoaded(unsigned int);
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
 /* Supplied declaration required: FUN_0019d96c. */
 extern int FUN_001a6508(unsigned int, unsigned int, int, unsigned int);
 /* Supplied declaration required: FUN_001a6568. */
@@ -59,7 +59,7 @@ void FUN_0019c720(fn_0019c720_arg0 *param_1,int param_2,int param_3)
   if (param_1->field_0x14 != param_2) {
     if (param_1->field_0x7c != 0) {
       if (param_1->field_0x84 != -1) {
-        FUN_0019a7f4(*(unsigned int *)&param_1->field_0x10);
+        asdTMTexTableReleaseNode(*(unsigned int *)&param_1->field_0x10);
         FUN_001b2d54(g_aocSystem,*(unsigned int *)&param_1->field_0x10,param_1->field_0x84);
         param_1->field_0x84 = -1;
         param_1->field_0x80 = 0;
@@ -68,7 +68,7 @@ void FUN_0019c720(fn_0019c720_arg0 *param_1,int param_2,int param_3)
     }
     else if (param_1[1].field_0x5 == '\0') {
       if ((param_1->field_0x14 != -1) &&
-         (temp_v0 = FUN_0018206c(*(unsigned int *)&param_1->field_0x10), temp_v0 == 0)) {
+         (temp_v0 = asdTMTexTableNodeIsLoaded(*(unsigned int *)&param_1->field_0x10), temp_v0 == 0)) {
         if (*(int *)&param_1->field_0x18 == -1) {
           *(int *)&param_1->field_0x18 = param_2;
         }
@@ -76,7 +76,7 @@ void FUN_0019c720(fn_0019c720_arg0 *param_1,int param_2,int param_3)
       }
       if (((param_1->field_0x30 == '\0') || (*(float *)&param_1->field_0x28 == 0.0f)) &&
          (*(int *)&param_1->field_0xc != 0)) {
-        FUN_0019a7f4(*(unsigned int *)&param_1->field_0x10,param_1->field_0x14);
+        asdTMTexTableReleaseNode(*(unsigned int *)&param_1->field_0x10,param_1->field_0x14);
         FUN_001b2d54(g_aocSystem,*(unsigned int *)&param_1->field_0x10,param_1->field_0x14);
         *(unsigned int *)&param_1->field_0xc = 0;
       }

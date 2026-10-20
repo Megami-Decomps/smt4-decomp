@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_002942c4(int, int);
-int FUN_002b06c4(void);
+int dataTable00FindById(void);
 
 extern unsigned char g_countdown; /* 0x43d9e0 */
 
 /* Supplied declaration required: FUN_002942c4. */
-/* Supplied declaration required: FUN_002b06c4. */
+/* Supplied declaration required: dataTable00FindById. */
 
 
 void FUN_003acf1c(unsigned int param_1)
@@ -27,7 +27,7 @@ void FUN_003acf1c(unsigned int param_1)
       *(unsigned int *)((*(int *)((unsigned char *)&g_countdown + 0x4)) + 4) = param_1;
       puVar2 = (unsigned short *)0x0;
       *(unsigned short *)(temp_v0 + 8) = 0xffff;
-      FUN_002b06c4();
+      dataTable00FindById();
       temp_v1 = 0;
       do {
         if ((unsigned short)puVar2[0x50] == param_1) {
@@ -40,7 +40,7 @@ void FUN_003acf1c(unsigned int param_1)
       *(unsigned int *)(temp_v0 + 0x14) = param_1;
       puVar2 = (unsigned short *)0x0;
       *(unsigned short *)(temp_v0 + 0x18) = 0xffff;
-      FUN_002b06c4();
+      dataTable00FindById();
       temp_v1 = 0;
       do {
         if ((unsigned short)puVar2[0x50] == param_1) {
@@ -57,7 +57,7 @@ void FUN_003acf1c(unsigned int param_1)
     *(unsigned int *)(temp_v0 + 0xc) = param_1;
     puVar2 = (unsigned short *)0x0;
     *(unsigned short *)(temp_v0 + 0x10) = 0xffff;
-    FUN_002b06c4();
+    dataTable00FindById();
     temp_v1 = 0;
     while ((unsigned short)puVar2[0x50] != param_1) {
       temp_v1 = temp_v1 + 1;

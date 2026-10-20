@@ -4,16 +4,16 @@
 
 extern "C" {
 
-int FUN_002b06c4(void);
-int FUN_002b9024(void);
+int dataTable00FindById(void);
+int devilGetRecord(void);
 int VectorFloatToUnsigned(double, int);
 int VectorUnsignedToFloat(unsigned int, int);
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-extern int padIsButtonDown(unsigned int);
-/* Supplied declaration required: FUN_002b06c4. */
-/* Supplied declaration required: FUN_002b9024. */
+extern int flagBitIsSet(unsigned int);
+/* Supplied declaration required: dataTable00FindById. */
+/* Supplied declaration required: devilGetRecord. */
 extern int bitsetTestBit(int, int);
 
 
@@ -33,11 +33,11 @@ unsigned int FUN_0029c0c0(unsigned int param_1,int param_2)
   unsigned long long temp_v8;
   
   temp_v0 = (unsigned int)*(unsigned short *)(param_2 + 0x46);
-  FUN_002b06c4();
+  dataTable00FindById();
   temp_v7 = 0.0f;
   temp_v8 = 0;
   temp_v1 = 0;
-  FUN_002b9024();
+  devilGetRecord();
   temp_v6 = 1.0f;
   temp_v2 = 0x500;
   temp_v3 = 0;
@@ -57,19 +57,19 @@ unsigned int FUN_0029c0c0(unsigned int param_1,int param_2)
     temp_v3 = temp_v3 + 1;
   } while (temp_v3 < 0x200);
   temp_v7 = (float)temp_v8 / temp_v7 + temp_v6;
-  temp_v3 = padIsButtonDown(0x21);
+  temp_v3 = flagBitIsSet(0x21);
   if (temp_v3 != 0) {
     temp_v6 = 1.2f;
   }
-  temp_v3 = padIsButtonDown(0x22);
+  temp_v3 = flagBitIsSet(0x22);
   if (temp_v3 != 0) {
     temp_v6 = 1.5f;
   }
-  temp_v3 = padIsButtonDown(0x23);
+  temp_v3 = flagBitIsSet(0x23);
   if (temp_v3 != 0) {
     temp_v6 = 2.0f;
   }
-  temp_v3 = padIsButtonDown(0x24);
+  temp_v3 = flagBitIsSet(0x24);
   if (temp_v3 != 0) {
     temp_v6 = 3.0f;
   }

@@ -11,8 +11,8 @@ int FUN_00151408(...);
 int taskCreateDraw(...);
 int FUN_001527d8(...);
 int asdMemoryAllocTracked(...);
-int FUN_00184758(...);
-int FUN_00184c00(...);
+int uiSpriteSetKeyframe(...);
+int uiSpriteSetImageKeyframe(...);
 int sysMemClear(...);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
 
@@ -34,7 +34,7 @@ extern int FUN_00155ca8(...); /* 0x155ca8 */
 extern int FUN_00156478(...); /* 0x156478 */
 extern unsigned char DAT_0052facc; /* 0x52facc */
 extern unsigned char DAT_0052fb14; /* 0x52fb14 */
-extern unsigned int *DAT_0057f574; /* 0x57f574 */
+extern unsigned int *g_infoWin; /* 0x57f574 */
 
 extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: FUN_0014e188. */
@@ -44,8 +44,8 @@ extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: FUN_001527d8. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: FUN_00184758. */
-/* Supplied declaration required: FUN_00184c00. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
 
@@ -58,28 +58,28 @@ void FUN_001402d0(void)
   unsigned char *puVar2;
   unsigned int temp_v0;
   
-  if (DAT_0057f574 == (unsigned int *)0x0) {
+  if (g_infoWin == (unsigned int *)0x0) {
     puVar1 = (unsigned int *)0x100;
     asdMemoryAllocTracked(0x100,0x100,0,0x330,1);
-    DAT_0057f574 = puVar1;
+    g_infoWin = puVar1;
   }
-  puVar1 = DAT_0057f574;
+  puVar1 = g_infoWin;
   sysMemClear();
   puVar2 = &LAB_00140510;
   asdProcessCreateSimple(&LAB_00140510,3,0,0,FUN_00156478,0,0);
   *puVar1 = (unsigned int)puVar2;
   taskCreateDraw(&LAB_00140524,0x86,0,0,FUN_00155ca8,0,0,puVar2);
   taskCreateDraw(&LAB_00140538,0xe2,0,0,FUN_00155ca8,0,0,*puVar1);
-  puVar1 = DAT_0057f574;
-  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(DAT_0057f574 + 0xd);
+  puVar1 = g_infoWin;
+  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(g_infoWin + 0xd);
   FUN_001505ac(puVar1 + 0xd,&DAT_0052facc,0x48,&DAT_0052fb14,0x18,0,0,0,0,0,0);
   FUN_0014e188(puVar1 + 0x15,8,0x87,puVar1 + 0xd,1);
-  FUN_00184758(puVar1 + 0x15,0);
+  uiSpriteSetKeyframe(puVar1 + 0x15,0);
   FUN_0014e188(puVar1 + 0x5b,8,0x87,puVar1 + 0xd,1);
-  FUN_00184758(puVar1 + 0x5b,2,0);
+  uiSpriteSetKeyframe(puVar1 + 0x5b,2,0);
   FUN_0014e188(puVar1 + 0x38,0x1b,4000,puVar1 + 0xd,1);
-  FUN_00184758(puVar1 + 0x38,3,0);
-  FUN_00184c00(puVar1 + 0x38,0);
+  uiSpriteSetKeyframe(puVar1 + 0x38,3,0);
+  uiSpriteSetImageKeyframe(puVar1 + 0x38,0);
   temp_v0 = spriteHandleCreate(0);
   puVar1[0xca] = temp_v0;
   FUN_001527d8(temp_v0,0xffffffff);

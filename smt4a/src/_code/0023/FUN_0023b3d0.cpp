@@ -16,12 +16,12 @@ typedef struct Global588fd0 {
     /* 0x02 */ u8 unk02[2];
     /* 0x04 */ Game *game;
 } Global588fd0;
-extern Global588fd0 DAT_00588fd0;
+extern Global588fd0 g_gameGlobals;
 
 /* Returns whether the game state is neither 2 nor 1. */
 u8 FUN_0023b3d0(void)
 {
-    return DAT_00588fd0.game->state != 2 && DAT_00588fd0.game->state != 1;
+    return g_gameGlobals.game->state != 2 && g_gameGlobals.game->state != 1;
 }
 
 } /* extern "C" */

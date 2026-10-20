@@ -4,7 +4,7 @@ extern "C" {
 
 int FUN_002613f0(int);
 
-extern int FUN_001ab854(int);
+extern int gameGetSlotRecord(int);
 /* Supplied declaration required: FUN_002613f0. */
 
 
@@ -26,7 +26,7 @@ int FUN_002e27b8(void)
     if (*psVar1 != 0) {
       temp_v1 = 0;
       do {
-        temp_v0 = FUN_001ab854(temp_v1);
+        temp_v0 = gameGetSlotRecord(temp_v1);
         if ((temp_v0 != 0) && (*(unsigned short *)(temp_v0 + 0x62) == *psVar1)) {
           temp_v3 = temp_v3 + 1;
           goto LAB_002e2834;

@@ -13,11 +13,11 @@ struct Global002a73f8 {
     /* 0x04 */ Obj002a73f8 *obj;
 };
 
-extern Global002a73f8 DAT_00588fd0;
+extern Global002a73f8 g_gameGlobals;
 
 s32 FUN_002a73f8(void)
 {
-    return DAT_00588fd0.obj->value;
+    return g_gameGlobals.obj->value;
 }
 
 }

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e3328(void);
+int asdOperatorDelete(void);
 int FUN_00467a6c(void);
 int FUN_00467bac(unsigned int *);
 
@@ -15,7 +15,7 @@ typedef struct {
 
 extern unsigned char DAT_0055c618; /* 0x55c618 */
 
-/* Supplied declaration required: FUN_002e3328. */
+/* Supplied declaration required: asdOperatorDelete. */
 /* Supplied declaration required: FUN_00467a6c. */
 /* Supplied declaration required: FUN_00467bac. */
 
@@ -29,7 +29,7 @@ void FUN_00467bb4(unsigned int *param_1)
     FUN_00467a6c();
   }
   FUN_00467bac(param_1);
-  FUN_002e3328();
+  asdOperatorDelete();
   return;
 }
 

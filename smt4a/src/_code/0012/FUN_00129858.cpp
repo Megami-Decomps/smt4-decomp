@@ -5,13 +5,13 @@
 extern "C" {
 
 int FUN_001297ac(unsigned int *);
-int FUN_0030ccc0(unsigned char *, unsigned int *);
+int onlineObjectListRemove(unsigned char *, unsigned int *);
 
 extern unsigned char DAT_00559944; /* 0x559944 */
 extern unsigned char DAT_00594b24; /* 0x594b24 */
 
 /* Supplied declaration required: FUN_001297ac. */
-/* Supplied declaration required: FUN_0030ccc0. */
+/* Supplied declaration required: onlineObjectListRemove. */
 
 
 unsigned int * FUN_00129858(unsigned int *param_1)
@@ -19,7 +19,7 @@ unsigned int * FUN_00129858(unsigned int *param_1)
 {
 /* irregular: 2 native warning(s); review required */
   *param_1 = (unsigned int)&DAT_00559944;
-  FUN_0030ccc0(&DAT_00594b24,param_1);
+  onlineObjectListRemove(&DAT_00594b24,param_1);
   FUN_001297ac(param_1);
   return param_1;
 }

@@ -8,7 +8,7 @@ int FUN_0023f410(int, int, int);
 int FUN_00240520(int, unsigned int);
 int FUN_002881bc(void);
 int FUN_002adde8(unsigned int, unsigned char *, float *);
-int FUN_002b06c4(void);
+int dataTable00FindById(void);
 
 /* stack frame of param_1: 9 slot(s), 36 byte(s) */
 typedef struct {
@@ -38,7 +38,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_00240520. */
 /* Supplied declaration required: FUN_002881bc. */
 /* Supplied declaration required: FUN_002adde8. */
-/* Supplied declaration required: FUN_002b06c4. */
+/* Supplied declaration required: dataTable00FindById. */
 
 
 void FUN_003392cc(int param_1)
@@ -100,7 +100,7 @@ void FUN_003392cc(int param_1)
     temp_v11 = 0x3f800000;
     do {
       temp_v0 = *(unsigned int *)(param_1 + temp_v2 * 4 + 0x43a8);
-      FUN_002b06c4();
+      dataTable00FindById();
       temp_v1 = param_1 + temp_v2 * 0x20;
       *(int *)(temp_v1 + 0x2f3c) = (int)*(short *)(temp_v0 + 0x88);
       *(short *)(temp_v1 + 0x2f40) = (short)temp_v2;

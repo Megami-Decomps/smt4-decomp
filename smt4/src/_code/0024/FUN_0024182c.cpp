@@ -2,15 +2,15 @@
 
 extern "C" {
 
-int FUN_001aa030(void);
+int cecProcessDestroy(void);
 int FUN_00220f5c(void *obj);
-int FUN_002523f0(void);
-int FUN_00290f48(int id);
-int FUN_0029c3b0(int id);
-int FUN_002a46d8(int id);
+int btlTalkBustUpDestroy(void);
+int bgmFadeOut(int id);
+int soundChannelStopAll(int id);
+int fileSlotFree(int id);
 int scrScriptProcessDestroy(u32 process);
 int asdTMTexTableFreeEntry(int table);
-int FUN_002ae898(int table, int index);
+int asdTMTexTableReleaseNode(int table, int index);
 int asdMemFree(u32 ptr);
 int jobStop(u32 job, int mode);
 int runWinDestroy(void);
@@ -32,16 +32,16 @@ typedef struct Scene {
     /* 0xD5C */ u32 shuttingDown;
 } Scene;
 
-extern Scene *DAT_0043daa8;
+extern Scene *g_campCec;
 
 void FUN_0024182c(void)
 {
-    Scene *scene = DAT_0043daa8;
+    Scene *scene = g_campCec;
     int entry;
     int i;
 
-    if (DAT_0043daa8->shuttingDown != 0) {
-        if (DAT_0043daa8->bufferC != 0) {
+    if (g_campCec->shuttingDown != 0) {
+        if (g_campCec->bufferC != 0) {
             asdMemFree(scene->bufferC);
         }
         if (scene->bufferD != 0) {
@@ -52,7 +52,7 @@ void FUN_0024182c(void)
         }
         jobStop(scene->job, 0);
         asdMemFree((u32)scene);
-        DAT_0043daa8 = NULL;
+        g_campCec = NULL;
         return;
     }
     i = 0;
@@ -63,9 +63,9 @@ void FUN_0024182c(void)
             *(u8 *)(entry + 0x20) = *(u8 *)(entry + 0x20) & ~0x10U;
         }
     } while (i < 0xc);
-    FUN_001aa030();
-    FUN_002a46d8(0x25);
-    FUN_002523f0();
+    cecProcessDestroy();
+    fileSlotFree(0x25);
+    btlTalkBustUpDestroy();
     if (scene->bufferA != 0) {
         asdMemFree(scene->bufferA);
     }
@@ -90,15 +90,15 @@ void FUN_0024182c(void)
     if (scene->scriptB != 0) {
         scrScriptProcessDestroy(scene->scriptB);
     }
-    FUN_002ae898(0x39, 0);
+    asdTMTexTableReleaseNode(0x39, 0);
     asdTMTexTableFreeEntry(0x39);
     runWinDestroy();
-    FUN_00220f5c(DAT_0043daa8->sub);
+    FUN_00220f5c(g_campCec->sub);
     jobStop(scene->job, 0);
     asdMemFree((u32)scene);
-    DAT_0043daa8 = NULL;
-    FUN_0029c3b0(0xf);
-    FUN_00290f48(0x2d);
+    g_campCec = NULL;
+    soundChannelStopAll(0xf);
+    bgmFadeOut(0x2d);
 }
 
 } /* extern "C" */

@@ -17,8 +17,8 @@ typedef struct {
 
 extern int g_renderCtx; /* 0x59dbb4 */
 
-extern int FUN_001654d8(void);
-extern int FUN_001654e4(int);
+extern int vec2GetXInt(void);
+extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001834a4(unsigned int, int);
@@ -40,8 +40,8 @@ void FUN_00336574(int param_1,int param_2)
   int temp_v6;
   
   if ((*(char *)(param_1 + 0x38b9) == '\0') && (*(int *)(param_1 + 0x3890) < 4)) {
-    temp_v0 = FUN_001654d8();
-    temp_v1 = FUN_001654e4(param_1 + 0x12b8);
+    temp_v0 = vec2GetXInt();
+    temp_v1 = vec2GetYInt(param_1 + 0x12b8);
     efctSetSpeed();
     temp_v2 = FUN_001834a4(0xd,*(int *)(param_1 + 0x3890) + 0x5a);
     temp_v6 = g_renderCtx;

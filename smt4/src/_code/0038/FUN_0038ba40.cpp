@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002ac068(int, int);
+int dataTableFileGetTable(int, int);
 int dataTableGetEntries(void);
 
 typedef struct fn_0038ba40_arg0 fn_0038ba40_arg0;
@@ -16,7 +16,7 @@ struct fn_0038ba40_arg0 {
     int field_0x4c; /* +0x4c */
 };
 
-/* Supplied declaration required: FUN_002ac068. */
+/* Supplied declaration required: dataTableFileGetTable. */
 extern unsigned int dataTableGetCount(void);
 /* Supplied declaration required: dataTableGetEntries. */
 
@@ -37,7 +37,7 @@ unsigned int FUN_0038ba40(fn_0038ba40_arg0 *param_1,unsigned int param_2,int par
       temp_v0 = param_1->field_0x48;
     }
     if (temp_v3 && temp_v0 != 0) {
-      FUN_002ac068(temp_v0,0);
+      dataTableFileGetTable(temp_v0,0);
       dataTableGetEntries();
     }
     temp_v3 = param_1->field_0x45 != 0;
@@ -46,7 +46,7 @@ unsigned int FUN_0038ba40(fn_0038ba40_arg0 *param_1,unsigned int param_2,int par
       temp_v0 = param_1->field_0x48;
     }
     if (temp_v3 && temp_v0 != 0) {
-      FUN_002ac068(temp_v0,0);
+      dataTableFileGetTable(temp_v0,0);
       temp_v1 = dataTableGetCount();
       if (temp_v1 != 0) {
         param_3 = param_1->field_0x4c;

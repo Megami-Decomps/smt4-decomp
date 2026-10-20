@@ -4,8 +4,8 @@ extern "C" {
 
 void FUN_002bff38(u8 value)
 {
-    if (DAT_0043e188.state != NULL) {
-        DAT_0043e188.state->unkA11 = value;
+    if (g_messageMain.state != NULL) {
+        g_messageMain.state->unkA11 = value;
     }
 }
 

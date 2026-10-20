@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e3328(void);
+int asdOperatorDelete(void);
 int bufProcRelease(void);
 int FUN_004aa380(unsigned int);
 int FUN_004ddd10(...);
@@ -43,13 +43,13 @@ extern unsigned int DAT_00571258; /* 0x571258 */
 extern unsigned int DAT_0057125c; /* 0x57125c */
 extern unsigned int DAT_00571288; /* 0x571288 */
 extern unsigned int DAT_0057128c; /* 0x57128c */
-extern unsigned int DAT_005712f0; /* 0x5712f0 */
+extern unsigned int g_btlActionReflect; /* 0x5712f0 */
 extern int DAT_00573808; /* 0x573808 */
 extern unsigned int g_btlEvent; /* 0x573898 */
-extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
+extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
 extern int jobIsValid(unsigned int);
-/* Supplied declaration required: FUN_002e3328. */
+/* Supplied declaration required: asdOperatorDelete. */
 extern int FUN_003e69ac(unsigned int);
 /* Supplied declaration required: bufProcRelease. */
 extern int FUN_003e7adc(int);
@@ -125,7 +125,7 @@ int * FUN_004ec120(int *param_1,unsigned int param_2,unsigned int param_3,unsign
     FUN_004eb838(param_1,puVar9);
     break;
   case 4:
-    temp_v4 = FUN_004abe14(DAT_0057a9c8);
+    temp_v4 = FUN_004abe14(g_btlUiBlock);
     if (temp_v4 == 0) {
       return (int *)0x0;
     }
@@ -147,11 +147,11 @@ int * FUN_004ec120(int *param_1,unsigned int param_2,unsigned int param_3,unsign
     *(unsigned char *)(temp_v4 + 9) = 10;
     break;
   case 10:
-    temp_v6 = chainCountIdUnflagged(DAT_005712f0,puVar9);
+    temp_v6 = chainCountIdUnflagged(g_btlActionReflect,puVar9);
     if (0 < temp_v6) {
       return (int *)0x0;
     }
-    FUN_004aa380(DAT_0057a9c8);
+    FUN_004aa380(g_btlUiBlock);
     *(unsigned short *)(*(int *)(temp_v4 + 0x2c) + 0x1be) = 10;
     temp_v4 = *(int *)(*param_1 + 0xa4);
     temp_v3 = 0xb;
@@ -173,7 +173,7 @@ int * FUN_004ec120(int *param_1,unsigned int param_2,unsigned int param_3,unsign
     if (temp_v4 != 0) {
       return (int *)0x0;
     }
-    temp_v4 = FUN_004abac8(DAT_0057a9c8);
+    temp_v4 = FUN_004abac8(g_btlUiBlock);
     if (temp_v4 == 0) {
       return (int *)0x0;
     }
@@ -182,7 +182,7 @@ int * FUN_004ec120(int *param_1,unsigned int param_2,unsigned int param_3,unsign
     *(unsigned char *)(temp_v4 + 9) = temp_v3;
     break;
   case 0xe:
-    temp_v4 = FUN_004aaf80(DAT_0057a9c8);
+    temp_v4 = FUN_004aaf80(g_btlUiBlock);
     if (temp_v4 == 0) {
       return (int *)0x0;
     }
@@ -202,7 +202,7 @@ int * FUN_004ec120(int *param_1,unsigned int param_2,unsigned int param_3,unsign
     FUN_004e6018(param_1,puVar9,temp_v6,param_4);
     return param_1;
   case 0x11:
-    temp_v4 = chainCountIdUnflagged(DAT_005712f0,puVar9);
+    temp_v4 = chainCountIdUnflagged(g_btlActionReflect,puVar9);
     if (0 < temp_v4) {
       return (int *)0x0;
     }
@@ -214,7 +214,7 @@ int * FUN_004ec120(int *param_1,unsigned int param_2,unsigned int param_3,unsign
          (temp_v6 = FUN_003e7adc(temp_v6), temp_v6 == 0)) && ((*puVar9 & 0x200000) != 0)) &&
        (temp_v1 = *(short *)(*(int *)(temp_v4 + 0x2c) + 0x1be),
        (temp_v1 == 9 || temp_v1 == 10) || temp_v1 == 0xd)) {
-      temp_v6 = chainCountIdUnflagged(DAT_005712f0,puVar9);
+      temp_v6 = chainCountIdUnflagged(g_btlActionReflect,puVar9);
       if (temp_v6 != 0) {
         return (int *)0x0;
       }
@@ -239,7 +239,7 @@ int * FUN_004ec120(int *param_1,unsigned int param_2,unsigned int param_3,unsign
     }
     if (*(int *)(*param_1 + 0x4e54) != 0) {
       bufProcRelease();
-      FUN_002e3328();
+      asdOperatorDelete();
       *(unsigned int *)(*param_1 + 0x4e54) = 0;
     }
     FUN_004eb740(param_1,puVar9);
@@ -266,19 +266,19 @@ int * FUN_004ec120(int *param_1,unsigned int param_2,unsigned int param_3,unsign
     FUN_004e05d4(param_1,puVar9,temp_v6,param_4);
     return param_1;
   case 0x21:
-    temp_v4 = chainCountIdUnflagged(DAT_005712f0,puVar9);
+    temp_v4 = chainCountIdUnflagged(g_btlActionReflect,puVar9);
     if (0 < temp_v4) {
       return (int *)0x0;
     }
     temp_v4 = 0;
     do {
-      temp_v6 = FUN_004aa768(DAT_0057a9c8,temp_v4);
+      temp_v6 = FUN_004aa768(g_btlUiBlock,temp_v4);
       if (temp_v6 == 0) {
         return (int *)0x0;
       }
       temp_v4 = temp_v4 + 1;
     } while (temp_v4 < 4);
-    temp_v4 = FUN_004ab784(DAT_0057a9c8);
+    temp_v4 = FUN_004ab784(g_btlUiBlock);
     if (temp_v4 == 0) {
       return (int *)0x0;
     }
@@ -311,7 +311,7 @@ int * FUN_004ec120(int *param_1,unsigned int param_2,unsigned int param_3,unsign
     *(unsigned char *)(temp_v4 + 9) = temp_v3;
     break;
   case 0x23:
-    temp_v4 = chainCountIdUnflagged(DAT_005712f0,puVar9);
+    temp_v4 = chainCountIdUnflagged(g_btlActionReflect,puVar9);
     if (0 < temp_v4) {
       return (int *)0x0;
     }
@@ -327,7 +327,7 @@ int * FUN_004ec120(int *param_1,unsigned int param_2,unsigned int param_3,unsign
     }
     if ((DAT_0057125c & *(unsigned int *)(*param_1 + 0x45a4)) != 0 ||
         (DAT_00571258 & *(unsigned int *)(*param_1 + 0x45a0)) != 0) {
-      temp_v6 = FUN_004abac8(DAT_0057a9c8);
+      temp_v6 = FUN_004abac8(g_btlUiBlock);
       if (temp_v6 == 0) {
         return (int *)0x0;
       }

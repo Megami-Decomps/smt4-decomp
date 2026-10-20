@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002bcc60(...);
-int FUN_002c38fc(...);
+int nn_os_CriticalSection_Initialize(...);
 int FUN_002c526c(...);
 
 /* stack frame of param_7: 6 slot(s), 24 byte(s) */
@@ -26,7 +26,7 @@ extern unsigned char DAT_004e8510; /* 0x4e8510 */
 
 extern int FUN_002bb0e0(void);
 /* Supplied declaration required: FUN_002bcc60. */
-/* Supplied declaration required: FUN_002c38fc. */
+/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
 /* Supplied declaration required: FUN_002c526c. */
 
 
@@ -52,7 +52,7 @@ FUN_0014faa0(unsigned int *param_1,unsigned int param_2,unsigned int param_3,int
     if ((temp_v0 != 0) && (param_7 == 1)) {
       param_6 = 0x5109d500;
     }
-    FUN_002c38fc(param_1 + 0xd);
+    nn_os_CriticalSection_Initialize(param_1 + 0xd);
     temp_v1 = 4;
     temp_v2 = &LAB_001559dc;
     puVar1 = param_1 + 4;

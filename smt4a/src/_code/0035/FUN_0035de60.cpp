@@ -18,15 +18,15 @@ typedef struct Scene {
     /* 0x920C */ Child *child;
 } Scene;
 
-extern u32 DAT_0056fcc0;
+extern u32 g_handleRegistry;
 
-int FUN_001aea28(u32 arg, u32 handle);
+int ptrListRemoveClearOwner(u32 arg, u32 handle);
 
-/* Unregisters the scene's child (FUN_001aea28), releases it through its vtable and clears the pointer. */
+/* Unregisters the scene's child (ptrListRemoveClearOwner), releases it through its vtable and clears the pointer. */
 void FUN_0035de60(Scene *scene)
 {
     if (scene->child != NULL) {
-        FUN_001aea28(DAT_0056fcc0, scene->child->handle);
+        ptrListRemoveClearOwner(g_handleRegistry, scene->child->handle);
         if (scene->child != NULL) {
             scene->child->vtbl->release(scene->child);
             scene->child = NULL;

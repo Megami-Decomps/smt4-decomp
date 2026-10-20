@@ -13,7 +13,7 @@ extern int g_aocMain; /* 0x570260 */
 extern int FUN_001b315c(char *);
 /* Supplied declaration required: FUN_001b31ac. */
 /* Supplied declaration required: FUN_001b31e0. */
-extern int FUN_001d109c(void);
+extern int objGetFlagBit16(void);
 /* Supplied declaration required: FUN_00429f38. */
 
 
@@ -31,7 +31,7 @@ int FUN_0046bc7c(int param_1,int param_2)
   temp_v3 = param_1;
   FUN_00429f38();
   if (temp_v3 != 0) {
-    temp_v1 = FUN_001d109c();
+    temp_v1 = objGetFlagBit16();
     temp_v3 = 0;
     if (temp_v1 != 0) {
       temp_v3 = 0;

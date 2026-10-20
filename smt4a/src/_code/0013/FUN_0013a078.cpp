@@ -12,7 +12,7 @@ int FUN_00161a10(void);
 int FUN_0017cdb0(void);
 int FUN_0017cfe8(unsigned char *, int);
 int FUN_0017dd80(void);
-int FUN_0018b19c(unsigned int, unsigned int);
+int nn_gxlow_CTR_FlushDataCacheForward(unsigned int, unsigned int);
 int nngxRunCmdlist(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -21,7 +21,7 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned char DAT_0063fec4; /* 0x63fec4 */
-extern unsigned char DAT_0063fd88; /* 0x63fd88 */
+extern unsigned char g_asdGxPresets; /* 0x63fd88 */
 extern int DAT_0063ff7c; /* 0x63ff7c */
 
 /* Supplied declaration required: asdGxCommandListFlip. */
@@ -34,7 +34,7 @@ extern int DAT_0063ff7c; /* 0x63ff7c */
 /* Supplied declaration required: FUN_0017dd80. */
 extern unsigned int FUN_00188c94(void);
 extern unsigned int FUN_00188ca4(void);
-/* Supplied declaration required: FUN_0018b19c. */
+/* Supplied declaration required: nn_gxlow_CTR_FlushDataCacheForward. */
 /* Supplied declaration required: nngxRunCmdlist. */
 
 
@@ -46,19 +46,19 @@ void FUN_0013a078(unsigned int param_1)
   unsigned int temp_v1;
   
   FUN_0017dd80();
-  FUN_0017cfe8(&DAT_0063fec4,(*(int *)((unsigned char *)&DAT_0063fd88 + 0x150)) == 0);
+  FUN_0017cfe8(&DAT_0063fec4,(*(int *)((unsigned char *)&g_asdGxPresets + 0x150)) == 0);
   FUN_00161a10();
   asdModelResetCommandBuffer();
   asdGxCommandListBindBack();
   temp_v0 = FUN_00188c94();
   temp_v1 = FUN_00188ca4();
-  FUN_0018b19c(temp_v1,temp_v0);
-  FUN_0017cfe8(&DAT_0063fec4,(*(int *)((unsigned char *)&DAT_0063fd88 + 0x150)));
+  nn_gxlow_CTR_FlushDataCacheForward(temp_v1,temp_v0);
+  FUN_0017cfe8(&DAT_0063fec4,(*(int *)((unsigned char *)&g_asdGxPresets + 0x150)));
   FUN_0017cdb0();
   nngxRunCmdlist();
-  (*(int *)((unsigned char *)&DAT_0063fd88 + 0x150)) = 1 - (*(int *)((unsigned char *)&DAT_0063fd88 + 0x150));
+  (*(int *)((unsigned char *)&g_asdGxPresets + 0x150)) = 1 - (*(int *)((unsigned char *)&g_asdGxPresets + 0x150));
   asdGxCommandListFlip();
-  FUN_0017cfe8(&DAT_0063fec4,(*(int *)((unsigned char *)&DAT_0063fd88 + 0x150)));
+  FUN_0017cfe8(&DAT_0063fec4,(*(int *)((unsigned char *)&g_asdGxPresets + 0x150)));
   if (DAT_0063ff7c == 0) {
     FUN_00144f1c(0,param_1);
     return;

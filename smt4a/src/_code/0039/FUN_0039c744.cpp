@@ -8,8 +8,8 @@ int FUN_0020b908(int, int);
 int FUN_0023c08c(int);
 int FUN_002a7b74(void);
 int FUN_003857b4(int);
-int FUN_003d2d34(unsigned int, int, int);
-int FUN_003d2d6c(int);
+int soundChannelRequestIfEnabled(unsigned int, int, int);
+int soundChannelStopAll(int);
 int linkHolderClearFlag(int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -17,17 +17,17 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-extern unsigned int *DAT_0057f290; /* 0x57f290 */
+extern unsigned int *g_unite; /* 0x57f290 */
 
-extern int FUN_001ab854(void);
+extern int gameGetSlotRecord(void);
 /* Supplied declaration required: FUN_0020b908. */
 /* Supplied declaration required: FUN_0023c08c. */
 extern int FUN_0026140c(void);
 /* Supplied declaration required: FUN_002a7b74. */
 extern int lmapSceneGetScript(void);
 /* Supplied declaration required: FUN_003857b4. */
-/* Supplied declaration required: FUN_003d2d34. */
-/* Supplied declaration required: FUN_003d2d6c. */
+/* Supplied declaration required: soundChannelRequestIfEnabled. */
+/* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: linkHolderClearFlag. */
 extern unsigned int FUN_004dad8c(unsigned int);
 
@@ -41,18 +41,18 @@ void FUN_0039c744(void)
   int temp_v1;
   unsigned int temp_v2;
   
-  puVar1 = DAT_0057f290;
+  puVar1 = g_unite;
   temp_v0 = FUN_0026140c();
-  FUN_003d2d6c(0);
-  FUN_003d2d34(puVar1[0x123],0,0x3c);
+  soundChannelStopAll(0);
+  soundChannelRequestIfEnabled(puVar1[0x123],0,0x3c);
   if ((-1 < *(short *)(temp_v0 + 0x20)) &&
-     ((temp_v1 = FUN_001ab854(), temp_v1 == 0 || (*(short *)(temp_v1 + 0x62) != *(short *)(temp_v0 + 0x24)))
+     ((temp_v1 = gameGetSlotRecord(), temp_v1 == 0 || (*(short *)(temp_v1 + 0x62) != *(short *)(temp_v0 + 0x24)))
      )) {
     *(short *)(temp_v0 + 0x20) = -1;
     *(unsigned short *)(temp_v0 + 0x24) = 0;
   }
   if ((-1 < *(short *)(temp_v0 + 0x22)) &&
-     ((temp_v1 = FUN_001ab854(), temp_v1 == 0 || (*(short *)(temp_v1 + 0x62) != *(short *)(temp_v0 + 0x26)))
+     ((temp_v1 = gameGetSlotRecord(), temp_v1 == 0 || (*(short *)(temp_v1 + 0x62) != *(short *)(temp_v0 + 0x26)))
      )) {
     *(unsigned short *)(temp_v0 + 0x22) = 0xffff;
     *(unsigned short *)(temp_v0 + 0x26) = 0;

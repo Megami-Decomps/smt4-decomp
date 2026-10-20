@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_00195fc8(void);
+int sysFatalBreak(void);
 
 extern signed char DAT_00589285; /* 0x589285 */
 extern unsigned char DAT_00589287; /* 0x589287 */
 extern unsigned int DAT_0058928c; /* 0x58928c */
 extern int DAT_00589290; /* 0x589290 */
 
-/* Supplied declaration required: FUN_00195fc8. */
+/* Supplied declaration required: sysFatalBreak. */
 extern unsigned int nn_dsp_CTR_DSP_UnloadComponent(unsigned int);
 
 
@@ -23,12 +23,12 @@ unsigned int FUN_00146dc8(void)
   int temp_v1;
   
   if (DAT_00589290 != 0) {
-    FUN_00195fc8();
+    sysFatalBreak();
   }
   temp_v1 = 0;
   do {
     if (*(int *)(temp_v1 * 4 + 0x61a644) != 0) {
-      FUN_00195fc8();
+      sysFatalBreak();
     }
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 8);

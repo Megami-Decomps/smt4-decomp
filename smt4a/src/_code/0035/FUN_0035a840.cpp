@@ -9,13 +9,13 @@ int FUN_001386e8(int);
 int FUN_001469a8(...);
 int asdMemFree(unsigned int);
 int FUN_001a0d08(void);
-int FUN_002684ac(int);
+int gameDataBlocksAddFlags(int);
 int FUN_00275bc8(int, unsigned int);
-int FUN_00275f44(unsigned int, int);
+int scrScriptProcessStartEntry(unsigned int, int);
 int FUN_002c76d8(int);
 int FUN_002e3140(void);
-int FUN_002e3328(int);
-int FUN_002e6dd0(int, int);
+int asdOperatorDelete(int);
+int rt_aeabi_memclr(int, int);
 int software_interrupt(int);
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
@@ -24,13 +24,13 @@ int software_interrupt(int);
 /* Supplied declaration required: FUN_001469a8. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_001a0d08. */
-/* Supplied declaration required: FUN_002684ac. */
+/* Supplied declaration required: gameDataBlocksAddFlags. */
 /* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_002c76d8. */
 /* Supplied declaration required: FUN_002e3140. */
-/* Supplied declaration required: FUN_002e3328. */
-/* Supplied declaration required: FUN_002e6dd0. */
+/* Supplied declaration required: asdOperatorDelete. */
+/* Supplied declaration required: rt_aeabi_memclr. */
 
 
 unsigned int FUN_0035a840(int param_1)
@@ -57,7 +57,7 @@ unsigned int FUN_0035a840(int param_1)
     temp_v1 = *(int *)(param_1 + 0x7f8);
     if (temp_v1 != 0) {
       FUN_001469a8();
-      FUN_002e3328(temp_v1);
+      asdOperatorDelete(temp_v1);
     }
     *(unsigned int *)(param_1 + 0x7f8) = 0;
     asdMemFree(*(unsigned int *)(param_1 + 0x804));
@@ -74,10 +74,10 @@ unsigned int FUN_0035a840(int param_1)
     }
     else {
       *(unsigned int *)(param_1 + 0xa0) = 0;
-      FUN_002e6dd0(param_1 + 0x3ec,1000);
-      FUN_00275f44(*(unsigned int *)(param_1 + 0x360),0x28);
+      rt_aeabi_memclr(param_1 + 0x3ec,1000);
+      scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x360),0x28);
       FUN_002c76d8(2);
-      FUN_002684ac(2);
+      gameDataBlocksAddFlags(2);
     }
     temp_v0 = 3;
   }

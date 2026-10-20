@@ -10,7 +10,7 @@ int FUN_003bb088(unsigned int);
 /* Supplied declaration required: jobStop. */
 extern int jobIsValid(void);
 extern int jobGetWork(unsigned int);
-extern int FUN_002deb84(void);
+extern int scrGetCommandFrame(void);
 extern unsigned int FUN_003b6808(void);
 /* Supplied declaration required: FUN_003bb088. */
 
@@ -33,7 +33,7 @@ unsigned int FUN_002e525c(void)
       return 1;
     }
     if (*(char *)(temp_v1 + 0x88) != '\0') {
-      temp_v2 = FUN_002deb84();
+      temp_v2 = scrGetCommandFrame();
       if (temp_v2 == 0) {
         *(unsigned char *)(temp_v1 + 0x30) = 1;
         *(unsigned int *)(temp_v1 + 0x28) = 0xbdcccccd;

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002579bc(int);
-int FUN_002a8740(...);
+int gameGetUnitRecord(...);
 int FUN_0031c274(void);
 
 typedef struct fn_002fc8dc_arg0 fn_002fc8dc_arg0;
@@ -20,8 +20,8 @@ struct fn_002fc8dc_arg0 {
 
 /* Supplied declaration required: FUN_002579bc. */
 extern int flagWordTestBit(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002a8740. */
-extern int FUN_002a8764(void);
+/* Supplied declaration required: gameGetUnitRecord. */
+extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_0031c274. */
 
 
@@ -42,15 +42,15 @@ int FUN_002fc8dc(fn_002fc8dc_arg0 *param_1)
     temp_v0 = FUN_0031c274();
     param_1->field_0x120 = temp_v0;
     param_1->field_0x104 = -1;
-    temp_v1 = FUN_002a8764();
+    temp_v1 = gameGetSlotTable();
     do {
       temp_v2 = temp_v1 + temp_v5;
       if ((-1 < *(char *)(temp_v2 + 0x9108)) &&
-         (temp_v3 = FUN_002a8740(), (unsigned int)*(unsigned short *)(temp_v3 + 0x46) == (int)param_1->field_0x120)) {
-        temp_v4 = FUN_002a8740((int)*(char *)(temp_v2 + 0x9108));
+         (temp_v3 = gameGetUnitRecord(), (unsigned int)*(unsigned short *)(temp_v3 + 0x46) == (int)param_1->field_0x120)) {
+        temp_v4 = gameGetUnitRecord((int)*(char *)(temp_v2 + 0x9108));
         temp_v3 = flagWordTestBit(temp_v4,10);
         if (temp_v3 == 0) {
-          temp_v4 = FUN_002a8740((int)*(char *)(temp_v2 + 0x9108));
+          temp_v4 = gameGetUnitRecord((int)*(char *)(temp_v2 + 0x9108));
           temp_v2 = flagWordTestBit(temp_v4,1);
           if (temp_v2 == 0) {
             temp_v1 = 5;
@@ -72,8 +72,8 @@ int FUN_002fc8dc(fn_002fc8dc_arg0 *param_1)
     do {
       temp_v2 = temp_v1 + temp_v5;
       if ((-1 < *(char *)(temp_v2 + 0x90f0)) &&
-         (temp_v3 = FUN_002a8740(), (unsigned int)*(unsigned short *)(temp_v3 + 0x46) == (int)param_1->field_0x120)) {
-        temp_v4 = FUN_002a8740((int)*(char *)(temp_v2 + 0x90f0));
+         (temp_v3 = gameGetUnitRecord(), (unsigned int)*(unsigned short *)(temp_v3 + 0x46) == (int)param_1->field_0x120)) {
+        temp_v4 = gameGetUnitRecord((int)*(char *)(temp_v2 + 0x90f0));
         temp_v3 = flagWordTestBit(temp_v4,10);
         if (temp_v3 != 0) {
           param_1->field_0x104 = 2;
@@ -81,7 +81,7 @@ int FUN_002fc8dc(fn_002fc8dc_arg0 *param_1)
           param_1->field_0x110 = 2;
           return temp_v5;
         }
-        temp_v4 = FUN_002a8740((int)*(char *)(temp_v2 + 0x90f0));
+        temp_v4 = gameGetUnitRecord((int)*(char *)(temp_v2 + 0x90f0));
         temp_v2 = flagWordTestBit(temp_v4,1);
         if (temp_v2 != 0) {
           param_1->field_0x104 = 2;

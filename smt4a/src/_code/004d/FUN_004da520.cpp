@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_00184310(void);
 
-extern unsigned int FUN_0014bef4(unsigned int);
-extern int FUN_001801a4(void);
+extern unsigned int randRange(unsigned int);
+extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00184310. */
 
 
@@ -27,7 +27,7 @@ unsigned char FUN_004da520(unsigned int param_1,int param_2,int param_3)
   temp_v2 = (unsigned int)*(unsigned short *)(param_3 + 0x62);
   FUN_00184310();
   temp_v4 = 1;
-  temp_v3 = FUN_001801a4();
+  temp_v3 = gameGetPlayerData();
   if ((*(unsigned short *)(temp_v3 + 0x5e) & 0x200) != 0) {
     temp_v4 = 7;
   }
@@ -51,7 +51,7 @@ unsigned char FUN_004da520(unsigned int param_1,int param_2,int param_3)
   if (!temp_v5 || temp_v0 == '#') {
     temp_v4 = temp_v4 << 1;
   }
-  temp_v1 = FUN_0014bef4(0x3f);
+  temp_v1 = randRange(0x3f);
   return temp_v1 < temp_v4;
 }
 

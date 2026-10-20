@@ -10,12 +10,12 @@ int FUN_001dcf78(...);
 int FUN_001dcfd0(...);
 int FUN_001ed268(...);
 int FUN_00211c90(...);
-int FUN_002544ac(...);
+int rangeInit(...);
 int FUN_002544d8(...);
 int FUN_00254568(...);
 int FUN_00291310(...);
-int FUN_00291414(...);
-int FUN_002916ac(...);
+int nodeTreeReleaseItemClearOwner(...);
+int nodeTreeReleaseItem(...);
 int rt_memcpy_w(unsigned char [32], int, int);
 
 /* stack frame of param_1: 4 slot(s), 13 byte(s) */
@@ -33,13 +33,13 @@ extern int FUN_001ab9cc(void);
 /* Supplied declaration required: FUN_001dcfd0. */
 /* Supplied declaration required: FUN_001ed268. */
 /* Supplied declaration required: FUN_00211c90. */
-/* Supplied declaration required: FUN_002544ac. */
+/* Supplied declaration required: rangeInit. */
 /* Supplied declaration required: FUN_002544d8. */
 /* Supplied declaration required: FUN_00254568. */
-extern unsigned int FUN_002580b4(void);
+extern unsigned int eventCommandGetPendingCleanup(void);
 /* Supplied declaration required: FUN_00291310. */
-/* Supplied declaration required: FUN_00291414. */
-/* Supplied declaration required: FUN_002916ac. */
+/* Supplied declaration required: nodeTreeReleaseItemClearOwner. */
+/* Supplied declaration required: nodeTreeReleaseItem. */
 extern int FUN_002cda20(unsigned char, unsigned int);
 extern int FUN_002fdecc(unsigned char, int);
 extern int FUN_002fdef8(void);
@@ -153,8 +153,8 @@ void FUN_00200c9c(unsigned int *param_1)
     }
     temp_v2 = FUN_002cda20(*(unsigned char *)(param_1 + 0xc),param_1[1]);
     if ((temp_v2 != 0) && ((*(unsigned int *)(temp_v2 + 8) & 0xfc0) != 0)) {
-      temp_v7 = FUN_002580b4();
-      FUN_002544ac(temp_v7,*(unsigned char *)(temp_v2 + 0x14),0);
+      temp_v7 = eventCommandGetPendingCleanup();
+      rangeInit(temp_v7,*(unsigned char *)(temp_v2 + 0x14),0);
     }
     param_1[1] = param_1[1] + 1;
     return;
@@ -163,7 +163,7 @@ void FUN_00200c9c(unsigned int *param_1)
   if (param_1 != (unsigned int *)0x0) {
     if (0 < (int)param_1[3]) {
       do {
-        FUN_00291414(param_1[temp_v2 + 0x14]);
+        nodeTreeReleaseItemClearOwner(param_1[temp_v2 + 0x14]);
         temp_v2 = temp_v2 + 1;
       } while (temp_v2 < (int)param_1[3]);
     }
@@ -204,7 +204,7 @@ void FUN_00200c9c(unsigned int *param_1)
   param_1[5] = 0;
   param_1[6] = 0;
   param_1[7] = 0;
-  FUN_002916ac(param_1);
+  nodeTreeReleaseItem(param_1);
   return;
 }
 

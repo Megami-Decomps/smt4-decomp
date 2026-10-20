@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0040a60c(...);
-int FUN_00493e14(...);
+int cellListAppend(...);
 int dataTable17Count(void);
 int FUN_0049d048(unsigned char *, int);
 int FUN_0049d09c(unsigned char *, int);
@@ -22,7 +22,7 @@ typedef struct {
 extern unsigned long long FUN_00145f04(unsigned char, unsigned int, unsigned int);
 extern unsigned long long FUN_00192718(short);
 /* Supplied declaration required: FUN_0040a60c. */
-/* Supplied declaration required: FUN_00493e14. */
+/* Supplied declaration required: cellListAppend. */
 extern unsigned long long FUN_00494020(void);
 extern int dataTable17Type1GetEntry(unsigned int *, unsigned int);
 /* Supplied declaration required: dataTable17Count. */
@@ -222,7 +222,7 @@ void FUN_0049a9a8(int param_1)
           temp_v2 = param_1 + 0x2f78;
           temp_v14 = 0;
         }
-        FUN_00493e14(temp_v2,temp_v1,temp_v11,temp_v12);
+        cellListAppend(temp_v2,temp_v1,temp_v11,temp_v12);
         temp_v7 = temp_v6;
       }
 LAB_0049ad3c:
@@ -240,7 +240,7 @@ LAB_0049ad3c:
   }
   temp_v9 = FUN_0040a60c(0x7b2,temp_v7);
   temp_v14 = 0x40;
-  FUN_00493e14(temp_v15,0x7b2,temp_v9 == 0,0);
+  cellListAppend(temp_v15,0x7b2,temp_v9 == 0,0);
   temp_v9 = 0;
   do {
     if (!(temp_v9 == 7 || temp_v9 == 8)) {

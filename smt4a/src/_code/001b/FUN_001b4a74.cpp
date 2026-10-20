@@ -9,12 +9,12 @@ struct Obj001b4a74 {
     /* 0x7ec */ u8 rest[1];
 };
 
-void FUN_001b4a90(void *rest, u32 size, s32 value);
+void __aeabi_memset4(void *rest, u32 size, s32 value);
 
 void FUN_001b4a74(Obj001b4a74 *o)
 {
     o->unk7e8 = 0;
-    FUN_001b4a90(o->rest + 0x100, 256, -1);
+    __aeabi_memset4(o->rest + 0x100, 256, -1);
 }
 
 }

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00170f68(unsigned int *, int, int, int *, int, unsigned int, unsigned int, unsigned int);
-int FUN_00195fc8(void);
+int sysFatalBreak(void);
 int FUN_001a2d04(int, int, int, int);
 int FUN_0043ca90(unsigned char *, int);
 int nn_os_TransferMemoryBlock_Finalize(unsigned char *);
@@ -29,7 +29,7 @@ extern unsigned char DAT_0062d6b8; /* 0x62d6b8 */
 extern int DAT_0062d6cc; /* 0x62d6cc */
 
 /* Supplied declaration required: FUN_00170f68. */
-/* Supplied declaration required: FUN_00195fc8. */
+/* Supplied declaration required: sysFatalBreak. */
 /* Supplied declaration required: FUN_001a2d04. */
 extern int FUN_001a324c(unsigned int);
 extern int FUN_0043c4cc(int, int, int, unsigned int, unsigned int, unsigned int, unsigned int);
@@ -64,7 +64,7 @@ FUN_0043c808(unsigned char *param_1,int param_2,int param_3,int param_4,unsigned
       temp_v0 = -0x375f3004;
     }
     if (temp_v1 < 0 && temp_v1 != temp_v0) {
-      FUN_00195fc8();
+      sysFatalBreak();
     }
     if (param_3 != 0 && param_4 != 0) {
       temp_v1 = *(int *)(param_2 + 0x130);

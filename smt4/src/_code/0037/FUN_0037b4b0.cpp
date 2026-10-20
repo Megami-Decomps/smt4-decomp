@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c38fc(...);
+int nn_os_CriticalSection_Initialize(...);
 int builtin_strncpy(...);
 
 typedef struct fn_0037b4b0_arg0 fn_0037b4b0_arg0;
@@ -30,7 +30,7 @@ struct fn_0037b4b0_arg0 {
 extern unsigned char DAT_00421c78; /* 0x421c78 */
 
 /* Unsupported intrinsic, declaration required: builtin_strncpy (CALLOTHER). */
-/* Supplied declaration required: FUN_002c38fc. */
+/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
 extern unsigned int FUN_00376dd0(void);
 extern int FUN_0037bd3c(unsigned int *);
 
@@ -58,7 +58,7 @@ int FUN_0037b4b0(fn_0037b4b0_arg0 *param_1,unsigned char param_2)
   *(unsigned int *)(temp_v0 + 0x4c) = 0;
   *(unsigned char *)(temp_v0 + 0x54) = 0;
   *(unsigned char *)(temp_v0 + 0x55) = param_2;
-  FUN_002c38fc();
+  nn_os_CriticalSection_Initialize();
   return temp_v0 - 300;
 }
 

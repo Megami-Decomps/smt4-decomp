@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_00162e8c(void);
+extern int gameFlagsGetBlock(void);
 
 
 void FUN_002c5468(void)
@@ -16,7 +16,7 @@ void FUN_002c5468(void)
   int temp_v3;
   int temp_v4;
   
-  temp_v0 = FUN_00162e8c();
+  temp_v0 = gameFlagsGetBlock();
   temp_v4 = 1;
   if (temp_v4 < *(char *)(temp_v0 + 0xe05) - 1) {
     do {

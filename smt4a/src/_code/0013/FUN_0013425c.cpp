@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_002e6e14(int);
-int FUN_002e9afe(...);
+int asdOperatorDeleteArray(int);
+int vectorCopyHeader(...);
 int vectorSize12A(int *);
 int FUN_00307940(int, int, int, int *);
 int FUN_00307974(...);
@@ -18,8 +18,8 @@ typedef struct {
 } param_3_stack;
 
 extern int rt_malloc(void);
-/* Supplied declaration required: FUN_002e6e14. */
-/* Supplied declaration required: FUN_002e9afe. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
+/* Supplied declaration required: vectorCopyHeader. */
 /* Supplied declaration required: vectorSize12A. */
 /* Supplied declaration required: FUN_00307940. */
 extern int vectorGrowCapacity_00307962(unsigned int, int *);
@@ -51,9 +51,9 @@ void FUN_0013425c(int *param_1,int param_2,unsigned int param_3)
     while (param_2 != temp_v5) {
       temp_v5 = temp_v5 - 0xc;
       temp_v6 = temp_v6 - 0xc;
-      FUN_002e9afe(temp_v6,temp_v5);
+      vectorCopyHeader(temp_v6,temp_v5);
     }
-    FUN_002e9afe(param_2,param_3);
+    vectorCopyHeader(param_2,param_3);
   }
   else {
     temp_v2 = vectorSize12A(param_1);
@@ -69,7 +69,7 @@ void FUN_0013425c(int *param_1,int param_2,unsigned int param_3)
     for (temp_v5 = temp_v7; temp_v5 != param_1[1]; temp_v5 = temp_v5 + 0xc) {
     }
     FUN_00307974(param_1);
-    FUN_002e6e14(temp_v7);
+    asdOperatorDeleteArray(temp_v7);
     *param_1 = temp_v3;
     param_1[1] = temp_v4 * 0xc + temp_v3 + 0xc;
     param_1[2] = temp_v6 * 0xc + temp_v3;

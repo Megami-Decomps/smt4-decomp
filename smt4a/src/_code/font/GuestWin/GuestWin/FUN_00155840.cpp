@@ -38,8 +38,8 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_00162790. */
 extern int FUN_001632fc(void);
 /* Supplied declaration required: FUN_0016432c. */
-extern int FUN_001654d8(int);
-extern int FUN_001654e4(int);
+extern int vec2GetXInt(int);
+extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 extern int FUN_00168518(int, unsigned short);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
@@ -91,10 +91,10 @@ unsigned int FUN_00155840(void)
       (**(romwright_code **)(temp_v3 + 0x1274))();
       *(unsigned char *)(temp_v3 + 0x1270) = 0;
     }
-    temp_v3 = FUN_001654d8(temp_v4 + 0x30);
+    temp_v3 = vec2GetXInt(temp_v4 + 0x30);
     temp_v9 = 0.25f;
     FUN_001879d0(g_renderCtx);
-    temp_v4 = FUN_001654e4(temp_v4 + 0x30);
+    temp_v4 = vec2GetYInt(temp_v4 + 0x30);
     efctSetSpeed();
     temp_v2 = FUN_001834a4(8,0xda);
     temp_v7 = FUN_001632fc();

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0017760c(...);
 int FUN_00184310(...);
 int sysMemClear(...);
-int FUN_002e6dd4(...);
+int rt_memclr(...);
 int FUN_004bd274(...);
 int FUN_004bd294(...);
 int clearTwoWords(...);
@@ -39,7 +39,7 @@ extern int saveSlotFindSelected(void);
 /* Supplied declaration required: FUN_0017760c. */
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_002e6dd4. */
+/* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: FUN_004bd274. */
 /* Supplied declaration required: FUN_004bd294. */
 /* Supplied declaration required: clearTwoWords. */
@@ -105,7 +105,7 @@ void FUN_003ecfb4(unsigned int param_1,unsigned char *param_2,fn_003ecfb4_arg2 *
   clearTwoWords(param_2 + 0x1be);
   clearTwoWords(param_2 + 0x1c6);
   clearTwoWords(param_2 + 0x1ce);
-  FUN_002e6dd4(param_2 + 0x1d6,0x50);
+  rt_memclr(param_2 + 0x1d6,0x50);
   temp_v5 = 0;
   do {
     pfVar6 = param_3;

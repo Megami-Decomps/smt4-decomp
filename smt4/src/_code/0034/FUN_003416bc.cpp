@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00244d98(int);
-int FUN_00244db4(int);
+int sysFlagsSetBits(int);
 int FUN_002a8638(...);
 int FUN_002a86a4(int);
 int FUN_002c1e30(unsigned int, int);
@@ -56,7 +56,7 @@ static float romwright_fabs_4(float value)
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00244d98. */
-/* Supplied declaration required: FUN_00244db4. */
+/* Supplied declaration required: sysFlagsSetBits. */
 extern int FUN_0024530c(int, int);
 extern int asdModelGetSlotArray0(unsigned int);
 /* Supplied declaration required: FUN_002a8638. */
@@ -149,7 +149,7 @@ void FUN_003416bc(int *param_1,int param_2,int param_3,unsigned int param_4)
   param_1[0x585] = temp_v4;
   param_1[0x586] = temp_v2;
   FUN_002cbaf8(temp_v7,0);
-  FUN_00244db4(1);
+  sysFlagsSetBits(1);
   if (-1 < param_3) {
     temp_v8 = 0;
     temp_v2 = param_1[param_2 * 0x20 + param_3 + 0x17b];

@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern Sub68Owner *DAT_00587f28;
+extern Sub68Owner *g_naviMain;
 
 u32 NaviMain_GetCurrentMap(void)
 {
-    return DAT_00587f28->unk28;
+    return g_naviMain->unk28;
 }
 
 } /* extern "C" */

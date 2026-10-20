@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00100388(...);
 int asdMemoryAllocTracked(...);
 int FUN_001bce30(...);
-int FUN_001bce84(...);
+int asdFileRequestSetHeapKind(...);
 int FUN_001bceb8(...);
 int sysMemClear(...);
 
@@ -23,7 +23,7 @@ extern signed char g_asdLoadFileUseRawPaths; /* 0x5b3fe0 */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 extern int FUN_0019dbb8(unsigned int);
 /* Supplied declaration required: FUN_001bce30. */
-/* Supplied declaration required: FUN_001bce84. */
+/* Supplied declaration required: asdFileRequestSetHeapKind. */
 /* Supplied declaration required: FUN_001bceb8. */
 /* Supplied declaration required: sysMemClear. */
 
@@ -58,7 +58,7 @@ void FUN_001bcfb4(unsigned int param_1,unsigned int *param_2,int param_3,int par
   }
   FUN_001bce30(puVar3,0,FUN_001bcd8c,piVar2);
   *piVar2 = (int)puVar3;
-  FUN_001bce84();
+  asdFileRequestSetHeapKind();
   FUN_001bceb8(*piVar2,param_6);
   return;
 }

@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002e9300(...);
-int FUN_002e9318(int *);
-int FUN_002e9520(unsigned int, int);
+int onlineStringConstruct(...);
+int onlineStringDestroy(int *);
+int onlineStringCopyConstruct(unsigned int, int);
 int FUN_0030f0bc(int, unsigned int);
 
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
@@ -22,9 +22,9 @@ extern unsigned char DAT_00538914; /* 0x538914 */
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: FUN_002e9300. */
-/* Supplied declaration required: FUN_002e9318. */
-/* Supplied declaration required: FUN_002e9520. */
+/* Supplied declaration required: onlineStringConstruct. */
+/* Supplied declaration required: onlineStringDestroy. */
+/* Supplied declaration required: onlineStringCopyConstruct. */
 extern int wordRefsDiffer_0030f0ac(int *, unsigned int *);
 /* Supplied declaration required: FUN_0030f0bc. */
 
@@ -44,18 +44,18 @@ unsigned long long FUN_002fe400(unsigned int param_1,int param_2,int param_3,uns
   iStack_1c = param_2;
   temp_v2 = param_3;
   temp_v3 = param_4;
-  temp_v0 = FUN_002e9300(&uStack_20,&DAT_00538914);
+  temp_v0 = onlineStringConstruct(&uStack_20,&DAT_00538914);
   temp_v1 = param_2 + 0x28;
   FUN_0030f0bc(temp_v1,temp_v0);
   temp_v2 = temp_v1;
-  FUN_002e9318(&uStack_20);
+  onlineStringDestroy(&uStack_20);
   temp_v3 = *(unsigned int *)(param_2 + 0x38);
   temp_v1 = wordRefsDiffer_0030f0ac(&temp_v2,(unsigned int *)&temp_v3);
   if (temp_v1 != 0) {
-    FUN_002e9520(param_1,temp_v2 + 0x18);
+    onlineStringCopyConstruct(param_1,temp_v2 + 0x18);
     return romwright_piece_4_4(iStack_1c,uStack_20);
   }
-  FUN_002e9300(param_1,&LAB_002fe450);
+  onlineStringConstruct(param_1,&LAB_002fe450);
   return romwright_piece_4_4(iStack_1c,uStack_20);
 }
 

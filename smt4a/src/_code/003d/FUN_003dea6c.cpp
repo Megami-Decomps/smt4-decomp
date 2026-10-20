@@ -9,7 +9,7 @@ int FUN_001654f0(unsigned char [128], unsigned char [132]);
 int FUN_00180118(unsigned int);
 int FUN_001ad9b4(void);
 int FUN_00282bf4(unsigned int);
-int FUN_002e342c(...);
+int libc_strcpy(...);
 int FUN_002ebda8(void);
 int FUN_003180c4(...);
 int FUN_00359974(...);
@@ -20,7 +20,7 @@ int FUN_00359974(...);
 /* Supplied declaration required: FUN_001ad9b4. */
 /* Supplied declaration required: FUN_00282bf4. */
 extern short *dataTableGetEntry37(int);
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_002ebda8. */
 /* Supplied declaration required: FUN_003180c4. */
 /* Supplied declaration required: FUN_00359974. */
@@ -45,7 +45,7 @@ void FUN_003dea6c(int param_1,int param_2,int param_3)
     if (temp_v3 != 0) {
       temp_v2 = temp_v3 + 8;
     }
-    FUN_002e342c(temp_v4,temp_v2);
+    libc_strcpy(temp_v4,temp_v2);
     FUN_001654f0(temp_v4,temp_v5);
     FUN_003180c4(0x28,temp_v5);
   }
@@ -67,7 +67,7 @@ void FUN_003dea6c(int param_1,int param_2,int param_3)
       case 7:
         temp_v0 = (unsigned int)*(unsigned short *)(temp_v3 + 0x102);
         FUN_0015f858(temp_v0,param_3);
-        FUN_002e342c(temp_v4,temp_v0);
+        libc_strcpy(temp_v4,temp_v0);
         temp_v1 = temp_v2;
         FUN_003180c4(temp_v1,temp_v4);
         FUN_00359974(temp_v2 + 0x18,*(unsigned int *)(temp_v3 + 0x104),0xffffffff,0);
@@ -75,7 +75,7 @@ void FUN_003dea6c(int param_1,int param_2,int param_3)
       case 2:
         temp_v0 = (unsigned int)*(unsigned short *)(temp_v3 + 0x102);
         FUN_00180118(temp_v0);
-        FUN_002e342c(temp_v4,temp_v0);
+        libc_strcpy(temp_v4,temp_v0);
         temp_v1 = temp_v2 + 8;
         FUN_003180c4(temp_v1,temp_v4);
         FUN_00359974(temp_v2 + 0x18,*(unsigned int *)(temp_v3 + 0x104),0xffffffff,0);

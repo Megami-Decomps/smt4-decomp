@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_00229f30(unsigned short);
+extern int questRecordFindById(unsigned short);
 extern int gameGetOptions(void);
 extern int FUN_002b6b38(void);
 
@@ -23,7 +23,7 @@ unsigned int FUN_003c83e0(void)
       return 0;
     }
     temp_v0 = gameGetOptions();
-    temp_v0 = FUN_00229f30(*(unsigned short *)(temp_v0 + 0x46));
+    temp_v0 = questRecordFindById(*(unsigned short *)(temp_v0 + 0x46));
     if (*(char *)(temp_v0 + 2) != '\0') {
       return 0;
     }

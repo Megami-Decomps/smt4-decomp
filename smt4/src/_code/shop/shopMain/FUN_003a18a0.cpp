@@ -57,7 +57,7 @@ extern int FUN_0029d65c(int);
 /* Supplied declaration required: FUN_002a0428. */
 /* Supplied declaration required: asdMdlManagerDestroy. */
 extern int FUN_002adee0(void);
-extern int FUN_002c09d0(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 
 
 void FUN_003a18a0(int param_1)
@@ -119,11 +119,11 @@ void FUN_003a18a0(int param_1)
       if (((*(int *)(param_1 + 0x860) != 0) ||
           (((temp_v1 = DAT_0044e014, *(char *)(param_1 + 0x14) == '\0' &&
             (*(int *)(param_1 + 0x18) != 8)) &&
-           (temp_v0 = FUN_002c09d0(0x410), temp_v1 = DAT_0044e014, temp_v0 != 0)))) &&
+           (temp_v0 = gameFlagIsSet(0x410), temp_v1 = DAT_0044e014, temp_v0 != 0)))) &&
          ((*(int *)(param_1 + 0x860) != 3 ||
           (((temp_v1 = DAT_0044e01c, *(char *)(param_1 + 0x14) == '\0' &&
             (*(int *)(param_1 + 0x18) != 8)) &&
-           (temp_v0 = FUN_002c09d0(0x410), temp_v1 = DAT_0044e01c, temp_v0 != 0)))))) {
+           (temp_v0 = gameFlagIsSet(0x410), temp_v1 = DAT_0044e01c, temp_v0 != 0)))))) {
         *(unsigned int *)(param_1 + 0x860) = *(unsigned int *)(*(int *)(param_1 + 0x860) * 8 + 0x44dfd4)
         ;
       }
@@ -161,11 +161,11 @@ void FUN_003a18a0(int param_1)
     if (((*(int *)(param_1 + 0x860) != 0) ||
         (((temp_v1 = DAT_0044e010, *(char *)(param_1 + 0x14) == '\0' &&
           (*(int *)(param_1 + 0x18) != 8)) &&
-         (temp_v0 = FUN_002c09d0(0x410), temp_v1 = DAT_0044e010, temp_v0 != 0)))) &&
+         (temp_v0 = gameFlagIsSet(0x410), temp_v1 = DAT_0044e010, temp_v0 != 0)))) &&
        ((*(int *)(param_1 + 0x860) != 3 ||
         (((temp_v1 = DAT_0044e018, *(char *)(param_1 + 0x14) == '\0' &&
           (*(int *)(param_1 + 0x18) != 8)) &&
-         (temp_v0 = FUN_002c09d0(0x410), temp_v1 = DAT_0044e018, temp_v0 != 0)))))) {
+         (temp_v0 = gameFlagIsSet(0x410), temp_v1 = DAT_0044e018, temp_v0 != 0)))))) {
       *(unsigned int *)(param_1 + 0x860) = *(unsigned int *)(*(int *)(param_1 + 0x860) * 8 + 0x44dfd0);
     }
     else {

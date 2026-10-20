@@ -16,7 +16,7 @@ extern unsigned int g_btlScriptUnit; /* 0x43427c */
 /* Supplied declaration required: FUN_0023d9b8. */
 extern int btlUnitGet(unsigned int);
 extern int btlGetMainState(void);
-extern int FUN_002a8764(void);
+extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_002ae164. */
 
 
@@ -118,7 +118,7 @@ unsigned int FUN_0028d320(int param_1)
             }
           }
           if (temp_v2) {
-            temp_v4 = FUN_002a8764();
+            temp_v4 = gameGetSlotTable();
             temp_v7 = -1;
             if (*(unsigned char *)(temp_v4 + 0x910b) != 0xffffffff &&
                 !SCARRY4((unsigned int)*(unsigned char *)(temp_v4 + 0x910b),1)) {

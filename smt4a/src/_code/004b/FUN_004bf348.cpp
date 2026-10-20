@@ -39,7 +39,7 @@ extern unsigned int DAT_005714ec; /* 0x5714ec */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: btlGetMainState. */
 extern int lcgRandomRange(unsigned int);
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 extern int FUN_0028cb6c(void);
 /* Supplied declaration required: FUN_003f0e20. */
 extern int __aeabi_idivmod(int, unsigned int);
@@ -61,10 +61,10 @@ unsigned int FUN_004bf348(fn_004bf348_arg0 *param_1,int param_2,int param_3)
   
   puVar1 = (unsigned int *)btlGetMainState();
   if (((DAT_005714e8 & puVar1[0x116a]) != 0 || (DAT_005714ec & puVar1[0x116b]) != 0) ||
-     (temp_v0 = FUN_0018719c(0x46e), temp_v0 != 0)) {
+     (temp_v0 = gameFlagIsSet(0x46e), temp_v0 != 0)) {
     return 1;
   }
-  temp_v0 = FUN_0018719c(0x472);
+  temp_v0 = gameFlagIsSet(0x472);
   if (temp_v0 == 0) {
     temp_v4 = 0x28;
     puVar3 = puVar1;

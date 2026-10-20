@@ -9,7 +9,7 @@ int FUN_0010e290(unsigned int *);
 int FUN_0010e6a4(unsigned int *);
 int FUN_00119d74(unsigned int *);
 int FUN_0012cf84(int);
-int FUN_002e6e14(void);
+int asdOperatorDeleteArray(void);
 int FUN_002eb744(unsigned int *);
 int FUN_002ecf40(void);
 int FUN_002f28bc(int);
@@ -28,7 +28,7 @@ extern int FUN_0011571c(int);
 extern int FUN_001210e0(unsigned int *);
 extern int destroyObj0055afbc(int);
 /* Supplied declaration required: FUN_0012cf84. */
-/* Supplied declaration required: FUN_002e6e14. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
 extern int FUN_002eb728(int);
 /* Supplied declaration required: FUN_002eb744. */
 /* Supplied declaration required: FUN_002ecf40. */
@@ -52,7 +52,7 @@ void FUN_002ee878(unsigned int *param_1)
   FUN_0010e290(param_1);
   if (param_1[0xb4] != 0) {
     FUN_002f8da8();
-    FUN_002e6e14();
+    asdOperatorDeleteArray();
     param_1[0xb4] = 0;
   }
   (**(romwright_code **)(*(int *)param_1[0x7d] + 8))();

@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0029c3b0(int);
+int soundChannelStopAll(int);
 int FUN_002a03d8(...);
-int FUN_002b2368(int);
+int asdMemFreeNonNull(int);
 int FUN_002be624(unsigned char [24], unsigned char *, int, unsigned int);
 int asdOperatorNew(void);
 int asdSequenceRequest(...);
@@ -32,9 +32,9 @@ extern int DAT_0049fc18; /* 0x49fc18 */
 extern int FUN_00263c34(int);
 extern int gameStateIsFlagSetAndLarge(void);
 extern int FUN_00287304(void);
-/* Supplied declaration required: FUN_0029c3b0. */
+/* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: FUN_002a03d8. */
-/* Supplied declaration required: FUN_002b2368. */
+/* Supplied declaration required: asdMemFreeNonNull. */
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: asdSequenceRequest. */
@@ -137,7 +137,7 @@ unsigned int FUN_001d9634(void)
             else {
               FUN_002a03d8(0,1);
               FUN_002a03d8(1);
-              FUN_0029c3b0(0xf);
+              soundChannelStopAll(0xf);
             }
           }
           return 0xffffffff;
@@ -148,7 +148,7 @@ unsigned int FUN_001d9634(void)
           FUN_003a3914();
           if (*(int *)(temp_v3 + 0x18) != 0) {
             temp_v2 = FUN_00263c34(*(int *)(temp_v3 + 0x18) + 0x828);
-            FUN_002b2368(temp_v2 - 0x828);
+            asdMemFreeNonNull(temp_v2 - 0x828);
           }
           FUN_003a63f8(temp_v7);
         }

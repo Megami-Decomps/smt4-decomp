@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00257dec(...);
 int FUN_00269bd0(...);
-int FUN_002b9024(...);
+int devilGetRecord(...);
 
 typedef struct fn_00336ed0_arg2 fn_00336ed0_arg2;
 struct fn_00336ed0_arg2 {
@@ -30,7 +30,7 @@ struct fn_00336ed0_arg2 {
 extern unsigned short FUN_0023eb7c(fn_00336ed0_arg2 *);
 /* Supplied declaration required: FUN_00257dec. */
 /* Supplied declaration required: FUN_00269bd0. */
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: devilGetRecord. */
 
 
 void FUN_00336ed0(unsigned int param_1,unsigned char *param_2,fn_00336ed0_arg2 *param_3)
@@ -105,7 +105,7 @@ void FUN_00336ed0(unsigned int param_1,unsigned char *param_2,fn_00336ed0_arg2 *
     temp_v2 = temp_v3;
   } while ((int)temp_v3 < 0x12);
   temp_v2 = (unsigned int)*(unsigned short *)(param_2 + 2);
-  FUN_002b9024();
+  devilGetRecord();
   param_2[0x14a] = *(unsigned char *)(temp_v2 + 0x33);
   temp_v0 = *(char *)(temp_v2 + 5);
   if (temp_v0 == '\x01') {

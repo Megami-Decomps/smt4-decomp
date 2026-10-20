@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned int DAT_0063fd88; /* 0x63fd88 */
+extern unsigned int g_asdGxPresets; /* 0x63fd88 */
 extern unsigned int DAT_0063fdb4; /* 0x63fdb4 */
 extern unsigned int *DAT_0063fef4; /* 0x63fef4 */
 
@@ -14,7 +14,7 @@ unsigned int FUN_0036bbe0(void)
 {
   unsigned int temp_v0;
   
-  if (DAT_0063fef4 == &DAT_0063fd88) {
+  if (DAT_0063fef4 == &g_asdGxPresets) {
     temp_v0 = 0;
   }
   else if (DAT_0063fef4 == &DAT_0063fdb4) {

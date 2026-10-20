@@ -12,7 +12,7 @@ extern unsigned char g_gameState; /* 0x5f15fc */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0016242c. */
-extern int FUN_00162e8c(void);
+extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_001f3f34. */
 
 
@@ -29,7 +29,7 @@ void FUN_00274a8c(int *param_1)
   unsigned int temp_v3;
   
   temp_v1 = *param_1;
-  temp_v0 = FUN_00162e8c();
+  temp_v0 = gameFlagsGetBlock();
   puVar4 = (unsigned char *)(temp_v1 + 0xcd1c);
   temp_v2 = 0xc2200000;
   temp_v3 = 0x41200000;

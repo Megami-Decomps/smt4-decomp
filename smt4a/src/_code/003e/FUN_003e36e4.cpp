@@ -5,15 +5,15 @@
 extern "C" {
 
 int FUN_00275bc8(int, unsigned int);
-int FUN_00275f44(unsigned int, int);
+int scrScriptProcessStartEntry(unsigned int, int);
 
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: FUN_00275f44. */
-extern int FUN_00357bc8(unsigned int, char *);
-extern int FUN_003f86c8(unsigned int);
+/* Supplied declaration required: scrScriptProcessStartEntry. */
+extern int tableGroupFindEntryIndex(unsigned int, char *);
+extern int loadSlotIsLoaded(unsigned int);
 
 
 void FUN_003e36e4(int param_1)
@@ -43,14 +43,14 @@ void FUN_003e36e4(int param_1)
   if (temp_v7) {
     temp_v0 = *(int *)(param_1 + 0x14);
   }
-  if ((temp_v7 && temp_v0 != 0) && (temp_v0 = FUN_003f86c8(0x4f), temp_v0 != 0)) {
+  if ((temp_v7 && temp_v0 != 0) && (temp_v0 = loadSlotIsLoaded(0x4f), temp_v0 != 0)) {
     temp_v0 = *(int *)(param_1 + 0x14);
     FUN_00275bc8(temp_v0,*(unsigned int *)(param_1 + 0x10));
     *(int *)(param_1 + 0x18) = temp_v0;
     *(unsigned int *)(temp_v0 + 0x108) = 2;
-    temp_v0 = FUN_00357bc8(*(unsigned int *)(param_1 + 0x14),"npcShop_Select_00");
+    temp_v0 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x14),"npcShop_Select_00");
     if (-1 < temp_v0) {
-      FUN_00275f44(*(unsigned int *)(param_1 + 0x18),temp_v0);
+      scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x18),temp_v0);
     }
     *(unsigned char *)(param_1 + 0x98) = 0;
     temp_v5 = *(unsigned int *)(param_1 + 0x9c);

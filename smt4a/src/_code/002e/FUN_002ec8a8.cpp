@@ -6,7 +6,7 @@ extern "C" {
 
 int strAssign(...);
 int ringSetLimit(...);
-int FUN_0031011e(...);
+int bufReallocate(...);
 
 typedef struct fn_002ec8a8_arg0 fn_002ec8a8_arg0;
 typedef struct fn_002ec8a8_arg1 fn_002ec8a8_arg1;
@@ -34,7 +34,7 @@ struct fn_002ec8a8_arg1 {
 
 /* Supplied declaration required: strAssign. */
 /* Supplied declaration required: ringSetLimit. */
-/* Supplied declaration required: FUN_0031011e. */
+/* Supplied declaration required: bufReallocate. */
 
 
 int FUN_002ec8a8(fn_002ec8a8_arg0 *param_1,fn_002ec8a8_arg1 *param_2)
@@ -48,7 +48,7 @@ int FUN_002ec8a8(fn_002ec8a8_arg0 *param_1,fn_002ec8a8_arg1 *param_2)
     param_1->field_0x10 = 0;
     param_1->field_0x18 = 0;
     if (param_1->field_0x14 < temp_v0) {
-      FUN_0031011e(param_1,temp_v0);
+      bufReallocate(param_1,temp_v0);
     }
     strAssign(param_1,*(unsigned int *)&param_2->field_0xc,temp_v0,0xffffffff);
     ringSetLimit(param_1,param_2->field_0x18);

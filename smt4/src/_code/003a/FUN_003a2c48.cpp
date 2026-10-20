@@ -15,11 +15,11 @@ int FUN_00233818(...);
 int FUN_00233854(...);
 int FUN_0029212c(int);
 int FUN_00296e90(void);
-int FUN_00296f4c(unsigned int, unsigned int);
+int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int FUN_0029c43c(unsigned int, int);
 int FUN_0029e620(unsigned int, int);
-int FUN_002b8838(int);
-int FUN_002b8cc8(void);
+int buttonHelpSetPreset(int);
+int ifTouchRegionRemove(void);
 int FUN_002b8ee0(int, int);
 int FUN_003a1378(int);
 
@@ -43,19 +43,19 @@ extern int FUN_0023360c(int);
 /* Supplied declaration required: FUN_00233818. */
 /* Supplied declaration required: FUN_00233854. */
 extern int FUN_0027ee9c(void);
-extern unsigned int FUN_00290d74(unsigned int, unsigned char *);
+extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_0029212c. */
 /* Supplied declaration required: FUN_00296e90. */
-/* Supplied declaration required: FUN_00296f4c. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_0029c3ec(void);
 /* Supplied declaration required: FUN_0029c43c. */
 /* Supplied declaration required: FUN_0029e620. */
 extern int sys43e188GetState(void);
-/* Supplied declaration required: FUN_002b8838. */
-/* Supplied declaration required: FUN_002b8cc8. */
+/* Supplied declaration required: buttonHelpSetPreset. */
+/* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: FUN_002b8ee0. */
-extern unsigned int FUN_002bed98(int);
-extern unsigned int FUN_002beda4(int);
+extern unsigned int vec2GetYInt(int);
+extern unsigned int vec2GetXInt(int);
 /* Supplied declaration required: FUN_003a1378. */
 
 
@@ -69,8 +69,8 @@ void FUN_003a2c48(int param_1)
   
   switch(*(unsigned int *)(param_1 + 8)) {
   case 0:
-    temp_v0 = FUN_00290d74(*(unsigned int *)(param_1 + 0x160),&LAB_003a2f64);
-    FUN_00296f4c(*(unsigned int *)(param_1 + 0x168),temp_v0);
+    temp_v0 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x160),&LAB_003a2f64);
+    scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x168),temp_v0);
     FUN_0019e0c0(*(unsigned int *)(param_1 + 0x168));
     *(unsigned int *)(param_1 + 0xc) = 0;
     *(unsigned int *)(param_1 + 0x15d58) = 0;
@@ -98,11 +98,11 @@ void FUN_003a2c48(int param_1)
   case 2:
     temp_v2 = sys43e188GetState();
     if (temp_v2 != 0) {
-      temp_v0 = FUN_00290d74(*(unsigned int *)(param_1 + 0x160),&LAB_003a2f78);
-      FUN_00296f4c(*(unsigned int *)(param_1 + 0x168),temp_v0);
+      temp_v0 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x160),&LAB_003a2f78);
+      scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x168),temp_v0);
       FUN_0019e0c0(*(unsigned int *)(param_1 + 0x168));
       FUN_00233240(param_1 + 0x3a8,0);
-      FUN_002b8838(0x77);
+      buttonHelpSetPreset(0x77);
       *(unsigned int *)(param_1 + 8) = 3;
       return;
     }
@@ -110,8 +110,8 @@ void FUN_003a2c48(int param_1)
   case 3:
     temp_v2 = param_1 + 0x3c8;
     FUN_002b8ee0(temp_v2,0);
-    temp_v0 = FUN_002bed98(temp_v2);
-    temp_v1 = FUN_002beda4(temp_v2);
+    temp_v0 = vec2GetYInt(temp_v2);
+    temp_v1 = vec2GetXInt(temp_v2);
     FUN_00231240(param_1 + 0x380,temp_v1,temp_v0);
     FUN_0019e0c0(*(unsigned int *)(param_1 + 0x168));
     if (*(char *)(param_1 + 0x452) != '\0') {
@@ -149,7 +149,7 @@ void FUN_003a2c48(int param_1)
       temp_v2 = 0;
       if (temp_v2 < *(short *)(param_1 + 0x15d50)) {
         do {
-          FUN_002b8cc8();
+          ifTouchRegionRemove();
           temp_v2 = temp_v2 + 1;
         } while (temp_v2 < *(short *)(param_1 + 0x15d50));
       }

@@ -4,15 +4,15 @@
 
 extern "C" {
 
-int FUN_00184758(int, int);
-int FUN_00184c00(int, int, int);
+int uiSpriteSetKeyframe(int, int);
+int uiSpriteSetImageKeyframe(int, int, int);
 int FUN_003d498c(unsigned int, int);
 int FUN_003dc530(void);
 
-extern int DAT_0057f28c; /* 0x57f28c */
+extern int g_uiQuest; /* 0x57f28c */
 
-/* Supplied declaration required: FUN_00184758. */
-/* Supplied declaration required: FUN_00184c00. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 extern unsigned char FUN_001bd100(unsigned int);
 /* Supplied declaration required: FUN_003d498c. */
 /* Supplied declaration required: FUN_003dc530. */
@@ -26,17 +26,17 @@ void FUN_0038b710(unsigned int param_1)
   int temp_v1;
   unsigned char temp_v2;
   
-  temp_v0 = DAT_0057f28c;
-  *(unsigned char *)(DAT_0057f28c + 0x93e) = 1;
+  temp_v0 = g_uiQuest;
+  *(unsigned char *)(g_uiQuest + 0x93e) = 1;
   temp_v2 = FUN_001bd100(param_1);
   *(unsigned char *)(temp_v0 + 0x90c) = temp_v2;
   *(short *)(temp_v0 + 0xcca) = (short)param_1;
   FUN_003dc530();
   FUN_003d498c(param_1,1);
-  FUN_00184758(temp_v0 + 0x34,0);
-  FUN_00184c00(temp_v0 + 0x34,8,0);
-  temp_v1 = DAT_0057f28c;
-  *(unsigned int *)(DAT_0057f28c + 8) = *(unsigned int *)(DAT_0057f28c + 4);
+  uiSpriteSetKeyframe(temp_v0 + 0x34,0);
+  uiSpriteSetImageKeyframe(temp_v0 + 0x34,8,0);
+  temp_v1 = g_uiQuest;
+  *(unsigned int *)(g_uiQuest + 8) = *(unsigned int *)(g_uiQuest + 4);
   *(unsigned int *)(temp_v1 + 4) = 1;
   *(unsigned int *)(temp_v1 + 0x10) = 0;
   *(unsigned int *)(temp_v0 + 0xc) = 0x1c;

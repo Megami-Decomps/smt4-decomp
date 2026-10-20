@@ -6,11 +6,11 @@ extern "C" {
 
 int FUN_001517b4(...);
 int FUN_001641b4(int);
-int FUN_00184758(int, int, int);
-int FUN_00184c00(int, int, int);
+int uiSpriteSetKeyframe(int, int, int);
+int uiSpriteSetImageKeyframe(int, int, int);
 int FUN_00228b04(int, int);
-int FUN_00275f44(...);
-int FUN_0031d1d8(...);
+int scrScriptProcessStartEntry(...);
+int flaggedEntrySetValueA(...);
 int FUN_003450d4(int, int, int, unsigned int, unsigned int, unsigned int, char [4], int, int);
 
 /* stack frame of param_1: 4 slot(s), 13 byte(s) */
@@ -23,12 +23,12 @@ typedef struct {
 
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: FUN_001641b4. */
-/* Supplied declaration required: FUN_00184758. */
-/* Supplied declaration required: FUN_00184c00. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_00228b04. */
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002a4894(int);
-/* Supplied declaration required: FUN_0031d1d8. */
+/* Supplied declaration required: flaggedEntrySetValueA. */
 /* Supplied declaration required: FUN_003450d4. */
 
 
@@ -67,10 +67,10 @@ void FUN_002f7f6c(int param_1)
               *(int *)(param_1 + 0x24f8) = *(int *)(param_1 + 0x24f4);
               *(int *)(param_1 + 0x24f4) = temp_v0;
             }
-            FUN_00184758(param_1 + 0x3fc,0xb,0);
-            FUN_00184c00(param_1 + 0x3fc,0xb,0);
-            FUN_00184758(param_1 + 0x488,10,0);
-            FUN_00184c00(param_1 + 0x488,0xb,0);
+            uiSpriteSetKeyframe(param_1 + 0x3fc,0xb,0);
+            uiSpriteSetImageKeyframe(param_1 + 0x3fc,0xb,0);
+            uiSpriteSetKeyframe(param_1 + 0x488,10,0);
+            uiSpriteSetImageKeyframe(param_1 + 0x488,0xb,0);
             *(unsigned int *)(param_1 + 0x2564) = 2;
             *(unsigned int *)(param_1 + 0x2568) = 0;
             return;
@@ -81,7 +81,7 @@ void FUN_002f7f6c(int param_1)
           return;
         }
         FUN_001641b4(0x100020e);
-        FUN_00275f44(*(unsigned int *)(param_1 + 0x2574),1);
+        scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x2574),1);
         *(unsigned int *)(param_1 + 0x2564) = 3;
         *(unsigned int *)(param_1 + 0x2568) = 0;
       }
@@ -91,12 +91,12 @@ void FUN_002f7f6c(int param_1)
         if (temp_v0 != 0) {
           FUN_001641b4(0x100020f);
           if (*(int *)(param_1 + 0x24f4) < 0) {
-            FUN_00275f44(*(unsigned int *)(param_1 + 0x2574),2);
+            scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x2574),2);
             *(unsigned int *)(param_1 + 0x2564) = 4;
             *(unsigned int *)(param_1 + 0x2568) = 0;
             return;
           }
-          FUN_0031d1d8(param_1 + 0x2500);
+          flaggedEntrySetValueA(param_1 + 0x2500);
           *(unsigned int *)(param_1 + 0x24f4) = 0xffffffff;
           *(unsigned char *)(param_1 + 0x24f0) = 0;
           return;

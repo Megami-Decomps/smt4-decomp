@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_00195fc8(void);
+int sysFatalBreak(void);
 
 extern unsigned char DAT_0055845c; /* 0x55845c */
 
-/* Supplied declaration required: FUN_00195fc8. */
+/* Supplied declaration required: sysFatalBreak. */
 
 
 unsigned int * FUN_001af814(unsigned int *param_1)
@@ -20,10 +20,10 @@ unsigned int * FUN_001af814(unsigned int *param_1)
   
   *param_1 = (unsigned int)&DAT_0055845c;
   if (param_1[3] != 0) {
-    FUN_00195fc8();
+    sysFatalBreak();
   }
   if (param_1[4] != 0) {
-    FUN_00195fc8();
+    sysFatalBreak();
   }
   puVar1 = (unsigned int *)param_1[4];
   if (puVar1 != (unsigned int *)0x0) {

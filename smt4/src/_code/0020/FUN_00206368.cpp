@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002b8da0(...);
+int pairSetFirstResetSecond(...);
 int FUN_002bee58(int, int);
 
-/* Supplied declaration required: FUN_002b8da0. */
+/* Supplied declaration required: pairSetFirstResetSecond. */
 /* Supplied declaration required: FUN_002bee58. */
 
 
@@ -44,26 +44,26 @@ void FUN_00206368(int param_1,unsigned int param_2,unsigned short param_3,unsign
     do {
       temp_v1 = param_1 + temp_v0 * 0x8c;
       if (*(int *)(param_1 + 0x2184) != 0) {
-        FUN_002b8da0(temp_v1 + 0x20,1);
-        FUN_002b8da0(temp_v1 + 0xb10,8);
-        FUN_002b8da0(temp_v1 + 0x1088,3);
-        FUN_002b8da0(temp_v1 + 0x1b78,0xfa7);
+        pairSetFirstResetSecond(temp_v1 + 0x20,1);
+        pairSetFirstResetSecond(temp_v1 + 0xb10,8);
+        pairSetFirstResetSecond(temp_v1 + 0x1088,3);
+        pairSetFirstResetSecond(temp_v1 + 0x1b78,0xfa7);
         temp_v3 = 0xfa1;
       }
       else {
-        FUN_002b8da0(temp_v1 + 0x20,0);
-        FUN_002b8da0(temp_v1 + 0xb10,7);
-        FUN_002b8da0(temp_v1 + 0x1088,2);
-        FUN_002b8da0(temp_v1 + 0x1b78,0xfa6);
+        pairSetFirstResetSecond(temp_v1 + 0x20,0);
+        pairSetFirstResetSecond(temp_v1 + 0xb10,7);
+        pairSetFirstResetSecond(temp_v1 + 0x1088,2);
+        pairSetFirstResetSecond(temp_v1 + 0x1b78,0xfa6);
         temp_v3 = 4000;
       }
-      FUN_002b8da0(temp_v1 + 0x1600,temp_v3);
+      pairSetFirstResetSecond(temp_v1 + 0x1600,temp_v3);
       temp_v1 = param_1 + temp_v0 * 0x8c;
       FUN_002bee58(temp_v1 + 0x20,2);
       FUN_002bee58(temp_v1 + 0xb10,5);
       FUN_002bee58(temp_v1 + 0x1088,3);
       FUN_002bee58(temp_v1 + 0x1b78,10);
-      FUN_002b8da0(temp_v1 + 0x598,6);
+      pairSetFirstResetSecond(temp_v1 + 0x598,6);
       FUN_002bee58(temp_v1 + 0x598,1);
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < *(short *)(param_1 + 0x218c));

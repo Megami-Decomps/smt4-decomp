@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdOperatorNewC(void);
-int FUN_002e3494(int);
+int asdOperatorDeleteB(int);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -17,7 +17,7 @@ typedef struct {
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Supplied declaration required: asdOperatorNewC. */
-/* Supplied declaration required: FUN_002e3494. */
+/* Supplied declaration required: asdOperatorDeleteB. */
 
 
 unsigned long long FUN_0030ebe4(int *param_1,unsigned int param_2,unsigned int *param_3)
@@ -44,7 +44,7 @@ unsigned long long FUN_0030ebe4(int *param_1,unsigned int param_2,unsigned int *
   for (; temp_v0 < param_2; temp_v0 = temp_v0 + 1) {
     puVar1[temp_v0] = *param_3;
   }
-  FUN_002e3494(*param_1);
+  asdOperatorDeleteB(*param_1);
   *param_1 = (int)puVar1;
   param_1[1] = param_2;
   return romwright_piece_4_4(param_1,puVar1);

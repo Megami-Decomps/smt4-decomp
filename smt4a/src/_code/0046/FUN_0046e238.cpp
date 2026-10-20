@@ -6,12 +6,12 @@ extern "C" {
 
 int FUN_001b31ac(void);
 int FUN_001b31e0(void);
-int FUN_003fd63c(unsigned int, int);
+int gameFlagSetValue(unsigned int, int);
 
 extern int FUN_001b315c(unsigned int);
 /* Supplied declaration required: FUN_001b31ac. */
 /* Supplied declaration required: FUN_001b31e0. */
-/* Supplied declaration required: FUN_003fd63c. */
+/* Supplied declaration required: gameFlagSetValue. */
 
 
 void FUN_0046e238(int param_1)
@@ -39,7 +39,7 @@ void FUN_0046e238(int param_1)
           do {
             pcVar3 = (char *)(temp_v1 + temp_v3 * 0x40);
             if (*pcVar3 == '6') {
-              FUN_003fd63c(*(unsigned int *)(pcVar3 + 0x3c),1);
+              gameFlagSetValue(*(unsigned int *)(pcVar3 + 0x3c),1);
             }
             temp_v3 = temp_v3 + 1;
           } while (temp_v3 < temp_v2);

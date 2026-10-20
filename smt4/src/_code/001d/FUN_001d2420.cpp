@@ -8,14 +8,14 @@ typedef struct {
     void *effect;       /* 0x4c */
 } Owner;
 
-int FUN_0026933c(void *effect);
+int effBehaviorRun(void *effect);
 int FUN_002c74ac(Owner *owner, f32 scale);
 
-/* If the owner has an effect record, runs FUN_0026933c on it and then FUN_002c74ac with scale 1.0. */
+/* If the owner has an effect record, runs effBehaviorRun on it and then FUN_002c74ac with scale 1.0. */
 void FUN_001d2420(Owner *owner)
 {
     if (owner->effect != NULL) {
-        FUN_0026933c(owner->effect);
+        effBehaviorRun(owner->effect);
         FUN_002c74ac(owner, 1.0f);
     }
 }

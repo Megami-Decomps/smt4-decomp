@@ -4,15 +4,15 @@
 
 extern "C" {
 
-int FUN_002e6e14(int);
-int FUN_002e9520(int, int);
-int FUN_002e9598(unsigned int *, int);
+int asdOperatorDeleteArray(int);
+int onlineStringCopyConstruct(int, int);
+int onlineStringAssign(unsigned int *, int);
 
 typedef int romwright_code(...);
 extern int rt_malloc(int);
-/* Supplied declaration required: FUN_002e6e14. */
-/* Supplied declaration required: FUN_002e9520. */
-/* Supplied declaration required: FUN_002e9598. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
+/* Supplied declaration required: onlineStringCopyConstruct. */
+/* Supplied declaration required: onlineStringAssign. */
 
 
 int * FUN_00522bf4(int *param_1,int *param_2)
@@ -50,7 +50,7 @@ int * FUN_00522bf4(int *param_1,int *param_2)
     temp_v4 = temp_v2;
     for (temp_v3 = *param_2; temp_v3 != temp_v5; temp_v3 = temp_v3 + 8) {
       if (temp_v4 != 0) {
-        FUN_002e9520(temp_v4,temp_v3);
+        onlineStringCopyConstruct(temp_v4,temp_v3);
       }
       temp_v4 = temp_v4 + 8;
     }
@@ -58,14 +58,14 @@ int * FUN_00522bf4(int *param_1,int *param_2)
     for (puVar5 = (unsigned int *)*param_1; puVar5 != puVar6; puVar5 = puVar5 + 2) {
       (**(romwright_code **)*puVar5)(puVar5);
     }
-    FUN_002e6e14(*param_1);
+    asdOperatorDeleteArray(*param_1);
     *param_1 = temp_v2;
     param_1[1] = temp_v2 + ((param_2[1] - *param_2) >> 3) * 8;
     param_1[2] = temp_v2 + temp_v6 * 8;
   }
   else if (temp_v1 >= temp_v0) {
     for (; temp_v3 != temp_v4; temp_v3 = temp_v3 + 8) {
-      FUN_002e9598(puVar5,temp_v3);
+      onlineStringAssign(puVar5,temp_v3);
       puVar5 = puVar5 + 2;
     }
     puVar6 = (unsigned int *)param_1[1];
@@ -79,7 +79,7 @@ int * FUN_00522bf4(int *param_1,int *param_2)
   else {
     temp_v4 = temp_v3 + temp_v1 * 8;
     for (; temp_v3 != temp_v4; temp_v3 = temp_v3 + 8) {
-      FUN_002e9598(puVar5,temp_v3);
+      onlineStringAssign(puVar5,temp_v3);
       puVar5 = puVar5 + 2;
     }
     param_1[1] = *param_1 + ((param_2[1] - *param_2) >> 3) * 8;
@@ -87,7 +87,7 @@ int * FUN_00522bf4(int *param_1,int *param_2)
     temp_v3 = *param_1 + temp_v1 * 8;
     for (temp_v4 = *param_2 + temp_v1 * 8; temp_v4 != temp_v2; temp_v4 = temp_v4 + 8) {
       if (temp_v3 != 0) {
-        FUN_002e9520(temp_v3,temp_v4);
+        onlineStringCopyConstruct(temp_v3,temp_v4);
       }
       temp_v3 = temp_v3 + 8;
     }

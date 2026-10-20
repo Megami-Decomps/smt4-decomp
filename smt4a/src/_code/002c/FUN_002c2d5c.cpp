@@ -8,12 +8,12 @@ typedef struct Navi {
     /* 0x0C */ u32 posX;
     /* 0x10 */ u32 posY;
 } Navi;
-extern Navi *DAT_0057f574;
+extern Navi *g_infoWin;
 
 /* Stores `timer` at 0x10 of the navigator. */
 void FUN_002c2d5c(u32 timer)
 {
-    DAT_0057f574->posY = timer;
+    g_infoWin->posY = timer;
 }
 
 } /* extern "C" */

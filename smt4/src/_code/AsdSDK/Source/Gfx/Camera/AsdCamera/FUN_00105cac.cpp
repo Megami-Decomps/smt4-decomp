@@ -19,7 +19,7 @@ typedef struct {
 extern unsigned char LAB_00105df0; /* 0x105df0 */
 extern unsigned char LAB_0010e52c; /* 0x10e52c */
 extern unsigned char LAB_0010e9f0; /* 0x10e9f0 */
-extern unsigned char *DAT_0044ea58; /* 0x44ea58 */
+extern unsigned char *g_asdCamera; /* 0x44ea58 */
 extern int DAT_0044ea5c; /* 0x44ea5c */
 extern unsigned int DAT_004d4924; /* 0x4d4924 */
 extern unsigned int DAT_004d4930; /* 0x4d4930 */
@@ -53,7 +53,7 @@ void FUN_00105cac(unsigned int param_1)
   *(int *)(temp_v0 + 0x84) = temp_v0 + 0x590;
   puVar2 = &LAB_00105df0;
   asdProcessCreateSimple(&LAB_00105df0,param_1,0,0,&LAB_0010e52c,&LAB_0010e9f0,DAT_0044ea5c);
-  DAT_0044ea58 = puVar2;
+  g_asdCamera = puVar2;
   return;
 }
 

@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_0011ccfc(int *, int, unsigned int, int, unsigned int, unsigned int, unsigned int, int, unsigned int);
-int FUN_002e760a(int);
-int FUN_002e995c(unsigned char [6]);
+int operatorNew(int);
+int onlineSockAddrConstruct(unsigned char [6]);
 int _ZN9Obj558be04stopEv(int *);
 int FUN_002f8624(unsigned char [12], int, unsigned short [2]);
 int FUN_002f86ac(int, unsigned short *);
@@ -46,8 +46,8 @@ extern unsigned int DAT_00594a58; /* 0x594a58 */
 
 extern int FUN_00109e60(int *, unsigned char *, unsigned short *, unsigned int);
 /* Supplied declaration required: FUN_0011ccfc. */
-/* Supplied declaration required: FUN_002e760a. */
-/* Supplied declaration required: FUN_002e995c. */
+/* Supplied declaration required: operatorNew. */
+/* Supplied declaration required: onlineSockAddrConstruct. */
 /* Supplied declaration required: _ZN9Obj558be04stopEv. */
 extern int FUN_002f8208(int *, unsigned int);
 extern int *FUN_002f8574(int, int, unsigned int, int, unsigned int, unsigned int);
@@ -91,7 +91,7 @@ FUN_0010e05c(int param_1,unsigned int param_2,unsigned short *param_3,unsigned i
     }
     temp_v2 = DAT_00594a58;
     temp_v3 = DAT_00594a54;
-    piVar2 = (int *)FUN_002e760a(0x270);
+    piVar2 = (int *)operatorNew(0x270);
     if (piVar2 != (int *)0x0) {
       FUN_0011ccfc(piVar2,temp_v8,temp_v11,param_1,temp_v3,temp_v2,*(unsigned int *)(param_1 + 100),temp_v1
                    ,*(unsigned int *)(temp_v0 + 0x10));
@@ -101,7 +101,7 @@ FUN_0010e05c(int param_1,unsigned int param_2,unsigned short *param_3,unsigned i
     }
   }
   else {
-    temp_v1 = FUN_002e760a(0x148);
+    temp_v1 = operatorNew(0x148);
     if (temp_v1 == 0) {
       piVar2 = (int *)0x0;
     }
@@ -112,7 +112,7 @@ FUN_0010e05c(int param_1,unsigned int param_2,unsigned short *param_3,unsigned i
   }
   temp_v0 = FUN_002f8208(piVar2,1);
   if (temp_v0 != 0) {
-    FUN_002e995c(temp_v4);
+    onlineSockAddrConstruct(temp_v4);
     temp_v5 = (unsigned short)((temp_v10 & 0xff) << 8) | ((unsigned short)(temp_v10 >> 8) & 0xff);
     *(unsigned char *)(piVar2 + 0x51) = param_5;
     temp_v0 = FUN_00109e60(piVar2,temp_v4,param_3,param_6);

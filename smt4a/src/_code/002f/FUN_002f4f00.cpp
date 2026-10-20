@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002e7658(unsigned int *);
+int sharedRefHolderDestroy(unsigned int *);
 int FUN_002f674e(void);
 
 extern unsigned char DAT_0055b0dc; /* 0x55b0dc */
 
-/* Supplied declaration required: FUN_002e7658. */
+/* Supplied declaration required: sharedRefHolderDestroy. */
 /* Supplied declaration required: FUN_002f674e. */
 
 
@@ -21,7 +21,7 @@ void FUN_002f4f00(unsigned int *param_1)
   if (param_1[0xd] != 0) {
     FUN_002f674e();
   }
-  FUN_002e7658(param_1);
+  sharedRefHolderDestroy(param_1);
   return;
 }
 

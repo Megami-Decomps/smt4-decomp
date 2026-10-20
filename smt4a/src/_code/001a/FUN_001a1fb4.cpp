@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0018aa5c(unsigned int, float *, float *, float *);
 int FUN_0018af48(unsigned int, float *, float *);
-int FUN_00195fc8(void);
+int sysFatalBreak(void);
 int nn_math_ARMv6_MTX44FrustumC_FAST(unsigned int);
 int nn_math_ARMv6_MTX44PivotC_FAST(unsigned int, int);
 
@@ -39,7 +39,7 @@ extern signed char cRam1ff81084; /* 0x1ff81084 */
 
 /* Supplied declaration required: FUN_0018aa5c. */
 /* Supplied declaration required: FUN_0018af48. */
-/* Supplied declaration required: FUN_00195fc8. */
+/* Supplied declaration required: sysFatalBreak. */
 /* Supplied declaration required: nn_math_ARMv6_MTX44FrustumC_FAST. */
 /* Supplied declaration required: nn_math_ARMv6_MTX44PivotC_FAST. */
 
@@ -92,7 +92,7 @@ void FUN_001a1fb4(float *param_1,unsigned int param_2,unsigned int param_3,unsig
   temp_v28 = param_3;
   uStack_28 = param_4;
   if ((in_s1 < 0.0f) || ((int)in_s1 >= 0x3f800001)) {
-    FUN_00195fc8();
+    sysFatalBreak();
   }
   temp_v4 = param_6[10];
   temp_v3 = param_6[0xb];

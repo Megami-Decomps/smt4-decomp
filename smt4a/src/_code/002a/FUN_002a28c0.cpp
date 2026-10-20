@@ -4,22 +4,22 @@
 
 extern "C" {
 
-int FUN_001bcd48(...);
+int svcSleepThread(...);
 int FUN_002804b0(unsigned char *, int *, int);
 int FUN_002a4664(int *);
 int FUN_002a469c(void);
 int FUN_002bf520(void);
 int FUN_002c0b10(unsigned short [2]);
 int FUN_002c0b5c(void);
-int FUN_002cd8fc(void);
-int FUN_002e6dd0(int, int);
+int btlTalkBustUpCreate(void);
+int rt_aeabi_memclr(int, int);
 int cecProcessCall2(void);
 int FUN_0032e25c(...);
 int FUN_00333bfc(void);
 int ownerSetName(unsigned int, unsigned int);
 int FUN_0035a074(unsigned int, int, unsigned int, unsigned int);
 int FUN_00387edc(void);
-int FUN_003f86f8(int);
+int loadSlotEnsureLoaded(int);
 
 typedef struct fn_002a28c0_arg0 fn_002a28c0_arg0;
 struct fn_002a28c0_arg0 {
@@ -52,7 +52,7 @@ extern unsigned char LAB_002a2c28; /* 0x2a2c28 */
 extern unsigned char LAB_002a2c40; /* 0x2a2c40 */
 extern unsigned char LAB_002a2c54; /* 0x2a2c54 */
 
-/* Supplied declaration required: FUN_001bcd48. */
+/* Supplied declaration required: svcSleepThread. */
 extern unsigned char FUN_002391e0(void);
 /* Supplied declaration required: FUN_002804b0. */
 extern unsigned int FUN_002840ac(void);
@@ -64,8 +64,8 @@ extern unsigned char FUN_002a46d8(void);
 /* Supplied declaration required: FUN_002bf520. */
 /* Supplied declaration required: FUN_002c0b10. */
 /* Supplied declaration required: FUN_002c0b5c. */
-/* Supplied declaration required: FUN_002cd8fc. */
-/* Supplied declaration required: FUN_002e6dd0. */
+/* Supplied declaration required: btlTalkBustUpCreate. */
+/* Supplied declaration required: rt_aeabi_memclr. */
 extern int rt_memcmp(unsigned char *, int, unsigned int);
 /* Supplied declaration required: cecProcessCall2. */
 extern unsigned char FUN_0031cee0(void);
@@ -76,7 +76,7 @@ extern unsigned int gameDataBlocksGetWord27E8C(void);
 extern int FUN_00345388(unsigned int);
 /* Supplied declaration required: FUN_0035a074. */
 /* Supplied declaration required: FUN_00387edc. */
-/* Supplied declaration required: FUN_003f86f8. */
+/* Supplied declaration required: loadSlotEnsureLoaded. */
 
 
 void FUN_002a28c0(fn_002a28c0_arg0 *param_1)
@@ -110,8 +110,8 @@ void FUN_002a28c0(fn_002a28c0_arg0 *param_1)
       }
     }
     else {
-      FUN_003f86f8(0x25);
-      FUN_002cd8fc();
+      loadSlotEnsureLoaded(0x25);
+      btlTalkBustUpCreate();
       FUN_002804b0(&LAB_002a2c10,&param_1->field_0x348,0);
       FUN_002804b0(&LAB_002a2c28,&param_1->field_0x34c,0);
       FUN_002804b0(&LAB_002a2c40,&param_1->field_0x350,0);
@@ -146,7 +146,7 @@ void FUN_002a28c0(fn_002a28c0_arg0 *param_1)
       temp_v4 = FUN_002a469c();
       if (temp_v4 == 0) {
         temp_v4 = FUN_002bf520();
-        FUN_002e6dd0(temp_v4 + 0x50,0x14);
+        rt_aeabi_memclr(temp_v4 + 0x50,0x14);
       }
       temp_v3 = (unsigned int)param_1->field_0x7d5;
       if (temp_v3 != 1) {
@@ -170,7 +170,7 @@ void FUN_002a28c0(fn_002a28c0_arg0 *param_1)
               FUN_002bf520();
               FUN_002c0b5c();
               temp_v4 = FUN_002bf520();
-              FUN_002e6dd0(temp_v4 + 0x50,0x14);
+              rt_aeabi_memclr(temp_v4 + 0x50,0x14);
             }
           }
         }
@@ -181,7 +181,7 @@ void FUN_002a28c0(fn_002a28c0_arg0 *param_1)
       }
       param_1->field_0x7f4 = param_1->field_0x7f4 + 1;
     }
-    FUN_001bcd48(10000000,0);
+    svcSleepThread(10000000,0);
   }
   return;
 }

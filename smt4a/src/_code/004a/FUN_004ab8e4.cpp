@@ -8,7 +8,7 @@ int sysMemClear(unsigned int *, int);
 int FUN_00371c3c(int, int);
 int FUN_003a7a88(int, int);
 
-extern unsigned char DAT_0057a9b8; /* 0x57a9b8 */
+extern unsigned char g_btlUi; /* 0x57a9b8 */
 
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: sysMemClear. */
@@ -26,8 +26,8 @@ void FUN_004ab8e4(void)
   int temp_v3;
   unsigned int *puVar5;
   
-  temp_v1 = (*(int *)((unsigned char *)&DAT_0057a9b8 + 0x10));
-  puVar5 = (unsigned int *)((*(int *)((unsigned char *)&DAT_0057a9b8 + 0x10)) + 0x12fd0);
+  temp_v1 = (*(int *)((unsigned char *)&g_btlUi + 0x10));
+  puVar5 = (unsigned int *)((*(int *)((unsigned char *)&g_btlUi + 0x10)) + 0x12fd0);
   sysMemClear(puVar5,0x48);
   *puVar5 = 0;
   temp_v3 = 0;

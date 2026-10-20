@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00184310(void);
 int FUN_001849bc(int, unsigned int, int, int, int, unsigned int, int *);
-int FUN_0019cac4(void);
+int dataTable00FindById(void);
 int FUN_003a7a88(unsigned int, int);
 int FUN_00471a04(unsigned int, unsigned int, int, unsigned int, int, int, unsigned int, int);
 
@@ -28,8 +28,8 @@ extern unsigned int g_aocSystem; /* 0x570280 */
 extern unsigned short *FUN_001834a4(unsigned int, int);
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: FUN_001849bc. */
-extern int FUN_0018719c(unsigned int);
-/* Supplied declaration required: FUN_0019cac4. */
+extern int gameFlagIsSet(unsigned int);
+/* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: FUN_003a7a88. */
 extern int FUN_0046c4f4(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00471a04. */
@@ -62,7 +62,7 @@ void FUN_003bb50c(unsigned int param_1,int param_2,int param_3,unsigned int para
   temp_v8 = param_4;
   if (param_5 != 0) {
     if ((int)param_1 < 0) {
-      temp_v0 = FUN_0018719c(0x11);
+      temp_v0 = gameFlagIsSet(0x11);
       if (temp_v0 == 0) {
         temp_v2 = 0x25e;
       }
@@ -77,7 +77,7 @@ void FUN_003bb50c(unsigned int param_1,int param_2,int param_3,unsigned int para
         return;
       }
       temp_v1 = param_1 & 0xffff;
-      FUN_0019cac4();
+      dataTable00FindById();
       if ((*(unsigned short *)(temp_v1 + 2) & 0x8000) != 0) {
         temp_v2 = (unsigned int)*(short *)(temp_v1 + 0x8c);
         temp_v3 = 0x19;

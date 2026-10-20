@@ -13,12 +13,12 @@ typedef struct Global588fd0 {
     /* 0x00 */ u8 unk00[4];
     /* 0x04 */ Game *game;
 } Global588fd0;
-extern Global588fd0 DAT_00588fd0;
+extern Global588fd0 g_gameGlobals;
 
 /* Returns the byte at 0x2017 of the game record. */
 u8 FUN_002c7e3c(void)
 {
-    return DAT_00588fd0.game->unk2017;
+    return g_gameGlobals.game->unk2017;
 }
 
 } /* extern "C" */

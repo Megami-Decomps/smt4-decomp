@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_00230434(int, int);
-int FUN_002304ec(int, int, unsigned int, int, int);
+int cellListAppend(int, int, unsigned int, int, int);
 int dataTable17Sub1GetCount(void);
 int FUN_00233730(int, unsigned int, int, int, int);
-int FUN_003a6424(unsigned char *, int);
-int FUN_003a6478(unsigned char *, int);
+int dataTable17Sub1ChildGetCount(unsigned char *, int);
+int dataTable17Sub1ChildGetEntries(unsigned char *, int);
 
 /* stack frame of param_1: 11 slot(s), 44 byte(s) */
 typedef struct {
@@ -27,7 +27,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_00230434. */
-/* Supplied declaration required: FUN_002304ec. */
+/* Supplied declaration required: cellListAppend. */
 /* Supplied declaration required: dataTable17Sub1GetCount. */
 extern int dataTable17Sub1GetRecord(unsigned int *, unsigned int);
 /* Supplied declaration required: FUN_00233730. */
@@ -35,8 +35,8 @@ extern unsigned int FUN_002ae3c0(short);
 extern unsigned long long FUN_002c0a2c(unsigned char, unsigned int, unsigned int);
 extern int FUN_00343bd8(short);
 extern int FUN_003a0284(void);
-/* Supplied declaration required: FUN_003a6424. */
-/* Supplied declaration required: FUN_003a6478. */
+/* Supplied declaration required: dataTable17Sub1ChildGetCount. */
+/* Supplied declaration required: dataTable17Sub1ChildGetEntries. */
 
 
 unsigned int FUN_003a45fc(int param_1)
@@ -102,9 +102,9 @@ unsigned int FUN_003a45fc(int param_1)
     } while (temp_v7 < (int)puVar5);
   }
   puVar7 = temp_v23;
-  FUN_003a6478(puVar7,temp_v8);
+  dataTable17Sub1ChildGetEntries(puVar7,temp_v8);
   puVar8 = temp_v23;
-  FUN_003a6424(puVar8,temp_v8);
+  dataTable17Sub1ChildGetCount(puVar8,temp_v8);
   temp_v8 = 0;
   if (0 < (int)puVar8) {
     temp_v21 = param_1 + 0xc94;
@@ -238,7 +238,7 @@ unsigned int FUN_003a45fc(int param_1)
           temp_v2 = 0;
           temp_v3 = temp_v14;
         }
-        FUN_002304ec(temp_v3,temp_v1,temp_v10,temp_v11,temp_v2);
+        cellListAppend(temp_v3,temp_v1,temp_v10,temp_v11,temp_v2);
       }
 LAB_003a49b8:
       temp_v8 = temp_v8 + 1;

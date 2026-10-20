@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002501e0(unsigned int);
+int eventDispatch(unsigned int);
 int FUN_00250200(unsigned int);
 
 extern signed char DAT_0044ea81; /* 0x44ea81 */
@@ -12,7 +12,7 @@ extern signed char DAT_0044ea89; /* 0x44ea89 */
 extern int DAT_0044ea90; /* 0x44ea90 */
 extern unsigned int DAT_0044eaac; /* 0x44eaac */
 
-/* Supplied declaration required: FUN_002501e0. */
+/* Supplied declaration required: eventDispatch. */
 /* Supplied declaration required: FUN_00250200. */
 
 
@@ -27,7 +27,7 @@ void FUN_00219cc4(unsigned int param_1)
      ((FUN_00250200(param_1), DAT_0044ea89 == '\0' ||
       (((temp_v0 = param_1, DAT_0044ea89 != '\x01' && (temp_v0 = param_1, DAT_0044ea89 == '\x02')) &&
        (temp_v0 = param_1, DAT_0044ea81 == '\0')))))) {
-    FUN_002501e0(param_1);
+    eventDispatch(param_1);
     temp_v0 = param_1;
   }
   DAT_0044eaac = temp_v0;

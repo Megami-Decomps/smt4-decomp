@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern StateHolder518 *DAT_00588fe8;
+extern StateHolder518 *g_statusDown;
 
 u16 stateHolderGetCurrentEntry(void)
 {
-    return DAT_00588fe8->table59C[DAT_00588fe8->unk654];
+    return g_statusDown->table59C[g_statusDown->unk654];
 }
 
 } /* extern "C" */

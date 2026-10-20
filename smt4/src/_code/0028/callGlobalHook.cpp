@@ -3,11 +3,11 @@
 
 extern "C" {
 
-extern void (*DAT_0044e978)(u32 arg);
+extern void (*g_mobiclipAllocator)(u32 arg);
 
 void callGlobalHook(u32 arg)
 {
-    DAT_0044e978(arg);
+    g_mobiclipAllocator(arg);
 }
 
 } /* extern "C" */

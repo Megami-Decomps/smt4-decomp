@@ -18,7 +18,7 @@ typedef struct Archive {
     /* 0x00 */ Table *table;
 } Archive;
 
-int FUN_0019a37c(u32 a, u32 b, int size);
+int libc_strncmp(u32 a, u32 b, int size);
 
 /* Looks up `key` among the archive's entries (compared for up to 0x40 bytes) and returns its value, or 0 if absent. */
 u32 archiveFindEntryValue(Archive *archive, u32 key)
@@ -28,7 +28,7 @@ u32 archiveFindEntryValue(Archive *archive, u32 key)
     u32 i;
 
     for (i = 0; i < count; i++) {
-        if (FUN_0019a37c(table->entries[i].name, key, 0x40) == 0) {
+        if (libc_strncmp(table->entries[i].name, key, 0x40) == 0) {
             return table->entries[i].value;
         }
     }

@@ -34,7 +34,7 @@ extern int FUN_0028f1bc(unsigned short);
 /* Supplied declaration required: FUN_00295a18. */
 extern int FUN_00298dc8(unsigned short);
 extern int FUN_00298e40(unsigned short, int, unsigned int *);
-extern int FUN_002c2950(void);
+extern int gameGetMapBlock(void);
 /* Supplied declaration required: FUN_002e8598. */
 /* Supplied declaration required: FUN_002e87ac. */
 
@@ -66,7 +66,7 @@ int FUN_001a9104(void)
   unsigned int temp_v20;
   
   temp_v16 = 0;
-  temp_v14 = FUN_002c2950();
+  temp_v14 = gameGetMapBlock();
   temp_v17 = 0;
   if (DAT_0049f9c8 != '\0') {
     temp_v3 = dataTable2fSub1GetRecord((int)*(short *)(temp_v14 + 0x2a));

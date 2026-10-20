@@ -9,8 +9,8 @@ int FUN_003fe86c(unsigned int, int, int);
 int FUN_0040aad4(unsigned int, int);
 int FUN_0040ace8(unsigned int, unsigned int);
 
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
-extern int DAT_00580ca0; /* 0x580ca0 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
+extern int g_mapGimic; /* 0x580ca0 */
 
 /* Supplied declaration required: FUN_003fda08. */
 /* Supplied declaration required: FUN_003fe86c. */
@@ -28,7 +28,7 @@ unsigned int FUN_0039817c(int param_1)
   unsigned int temp_v2;
   
   temp_v0 = 0;
-  while ((temp_v1 = DAT_00580ca0 + temp_v0 * 0x18, *(char *)(temp_v1 + 0x8c4) == '\0' ||
+  while ((temp_v1 = g_mapGimic + temp_v0 * 0x18, *(char *)(temp_v1 + 0x8c4) == '\0' ||
          (*(short *)(temp_v1 + 0x8c8) != param_1))) {
     temp_v0 = temp_v0 + 1;
     if (temp_v0 >= 10) {
@@ -44,7 +44,7 @@ unsigned int FUN_0039817c(int param_1)
     if (param_1 == 0x2a) {
       FUN_003fda08(temp_v2,1,2);
     }
-    FUN_0040ace8(DAT_0056fcc0,temp_v2);
+    FUN_0040ace8(g_handleRegistry,temp_v2);
     temp_v2 = 1;
   }
   return temp_v2;

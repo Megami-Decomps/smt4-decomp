@@ -6,7 +6,7 @@ extern "C" {
 
 int jyoucyuGetTableEntry(int);
 int FUN_0019e290(void);
-int FUN_002e3328(int);
+int asdOperatorDelete(int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -15,7 +15,7 @@ typedef struct {
 
 /* Supplied declaration required: jyoucyuGetTableEntry. */
 /* Supplied declaration required: FUN_0019e290. */
-/* Supplied declaration required: FUN_002e3328. */
+/* Supplied declaration required: asdOperatorDelete. */
 extern int FUN_004d08d0(int);
 
 
@@ -32,7 +32,7 @@ void FUN_003409c0(int param_1)
     FUN_0019e290();
     if (*(int *)(temp_v1 + 8) != 0) {
       temp_v0 = FUN_004d08d0(*(int *)(temp_v1 + 8) + 0x110);
-      FUN_002e3328(temp_v0 - 0x110);
+      asdOperatorDelete(temp_v0 - 0x110);
     }
     *(unsigned int *)(temp_v1 + 8) = 0;
   }

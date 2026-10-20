@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002e6dd4(short *, int);
+int rt_memclr(short *, int);
 int FUN_0035dd74(void);
 
-/* Supplied declaration required: FUN_002e6dd4. */
+/* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: FUN_0035dd74. */
 
 
@@ -20,7 +20,7 @@ void FUN_004da920(unsigned int param_1,short *param_2,short *param_3)
   
   FUN_0035dd74();
   if (param_2 != (short *)0x0) {
-    FUN_002e6dd4(param_3,0x28);
+    rt_memclr(param_3,0x28);
     temp_v1 = 0xc;
     *param_3 = param_2[0xd];
     temp_v0 = 0;

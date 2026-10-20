@@ -46,7 +46,7 @@ extern int FUN_001fa498(int);
 extern int *FUN_00232a6c(int, unsigned int);
 /* Supplied declaration required: FUN_0024f520. */
 /* Supplied declaration required: FUN_002533f4. */
-extern int FUN_002c09d0(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 extern int randNextInRange(unsigned int);
 
 
@@ -185,7 +185,7 @@ LAB_00396b7c:
     piVar5[0x18] = temp_v4;
     temp_v1 = FUN_001fa498(temp_v1);
     piVar5[0x19] = temp_v1;
-    temp_v1 = FUN_002c09d0(0x529);
+    temp_v1 = gameFlagIsSet(0x529);
     if ((temp_v1 != 0) && (param_2 == 1)) {
       (**(romwright_code **)(*piVar5 + 0x14))(piVar5);
     }

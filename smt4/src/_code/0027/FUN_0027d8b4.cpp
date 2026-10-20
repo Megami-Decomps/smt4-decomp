@@ -7,11 +7,11 @@ typedef struct Obj {
     /* 0x20 */ u16 unk20;
 } Obj;
 
-extern Obj *FUN_002c2950(void);
+extern Obj *gameGetMapBlock(void);
 
 void FUN_0027d8b4(u16 value)
 {
-    Obj *obj = FUN_002c2950();
+    Obj *obj = gameGetMapBlock();
 
     obj->unk20 = value;
 }

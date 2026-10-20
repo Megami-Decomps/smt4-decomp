@@ -39,9 +39,9 @@ extern unsigned int DAT_00439cec; /* 0x439cec */
 extern unsigned int DAT_00493554; /* 0x493554 */
 extern unsigned int DAT_0049355c; /* 0x49355c */
 
-extern unsigned int *FUN_0022a344(unsigned int);
+extern unsigned int *asdListBoxGetItemText(unsigned int);
 extern int FUN_0022a444(unsigned int);
-extern unsigned int *FUN_0022a464(unsigned int, unsigned int);
+extern unsigned int *asdListBoxGetItemValuePtr(unsigned int, unsigned int);
 
 
 void FUN_003c5ffc(int param_1,int param_2,unsigned int param_3)
@@ -64,7 +64,7 @@ void FUN_003c5ffc(int param_1,int param_2,unsigned int param_3)
     *(unsigned int *)(g_btlMain + 0x634) = temp_v2;
     return;
   case 1:
-    puVar2 = (unsigned int *)FUN_0022a344(*(unsigned int *)(param_1 + 0x10));
+    puVar2 = (unsigned int *)asdListBoxGetItemText(*(unsigned int *)(param_1 + 0x10));
     *(unsigned int *)(g_btlMain + 0x560) = *puVar2;
     return;
   case 2:
@@ -79,140 +79,140 @@ void FUN_003c5ffc(int param_1,int param_2,unsigned int param_3)
     *(unsigned int *)(param_2 + 0x44a8) = temp_v2;
     return;
   case 3:
-    puVar2 = (unsigned int *)FUN_0022a344(*(unsigned int *)(param_1 + 0x10));
+    puVar2 = (unsigned int *)asdListBoxGetItemText(*(unsigned int *)(param_1 + 0x10));
     DAT_00493554 = *puVar2;
     return;
   case 4:
-    puVar2 = (unsigned int *)FUN_0022a344(*(unsigned int *)(param_1 + 0x10));
+    puVar2 = (unsigned int *)asdListBoxGetItemText(*(unsigned int *)(param_1 + 0x10));
     DAT_0049355c = *puVar2;
     return;
   case 5:
-    puVar2 = (unsigned int *)FUN_0022a344(*(unsigned int *)(param_1 + 0x10));
+    puVar2 = (unsigned int *)asdListBoxGetItemText(*(unsigned int *)(param_1 + 0x10));
     temp_v1 = *puVar2;
     puVar2 = &DAT_00434310;
     break;
   case 6:
-    puVar2 = (unsigned int *)FUN_0022a344(*(unsigned int *)(param_1 + 0x10));
+    puVar2 = (unsigned int *)asdListBoxGetItemText(*(unsigned int *)(param_1 + 0x10));
     temp_v1 = *puVar2;
     puVar2 = &DAT_00434314;
     break;
   case 7:
-    puVar2 = (unsigned int *)FUN_0022a344(*(unsigned int *)(param_1 + 0x10));
+    puVar2 = (unsigned int *)asdListBoxGetItemText(*(unsigned int *)(param_1 + 0x10));
     temp_v1 = *puVar2;
     puVar2 = &DAT_00434318;
     break;
   case 8:
-    puVar2 = (unsigned int *)FUN_0022a464(*(unsigned int *)(param_1 + 0x10),param_3);
+    puVar2 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
     temp_v1 = *puVar2;
     puVar2 = &DAT_0043431c;
     break;
   case 9:
-    puVar2 = (unsigned int *)FUN_0022a464(*(unsigned int *)(param_1 + 0x10),param_3);
+    puVar2 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
     temp_v1 = *puVar2;
     puVar2 = &DAT_004342d4;
     break;
   case 10:
-    puVar2 = (unsigned int *)FUN_0022a464(*(unsigned int *)(param_1 + 0x10),param_3);
+    puVar2 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
     temp_v1 = *puVar2;
     puVar2 = &DAT_004342d8;
     break;
   case 0xb:
-    puVar2 = (unsigned int *)FUN_0022a344(*(unsigned int *)(param_1 + 0x10));
+    puVar2 = (unsigned int *)asdListBoxGetItemText(*(unsigned int *)(param_1 + 0x10));
     temp_v1 = *puVar2;
     puVar2 = &DAT_00434320;
     break;
   case 0xc:
-    puVar2 = (unsigned int *)FUN_0022a464(*(unsigned int *)(param_1 + 0x10),param_3);
+    puVar2 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
     temp_v1 = *puVar2;
     puVar2 = &DAT_00434324;
     break;
   case 0xd:
-    puVar2 = (unsigned int *)FUN_0022a464(*(unsigned int *)(param_1 + 0x10),param_3);
+    puVar2 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
     temp_v1 = *puVar2;
     puVar2 = &DAT_004342e0;
     break;
   case 0xe:
-    puVar2 = (unsigned int *)FUN_0022a464(*(unsigned int *)(param_1 + 0x10),param_3);
+    puVar2 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
     temp_v1 = *puVar2;
     puVar2 = &DAT_00434328;
     break;
   case 0xf:
-    puVar2 = (unsigned int *)FUN_0022a344(*(unsigned int *)(param_1 + 0x10));
+    puVar2 = (unsigned int *)asdListBoxGetItemText(*(unsigned int *)(param_1 + 0x10));
     temp_v1 = *puVar2;
     puVar2 = &DAT_0043432c;
     break;
   case 0x10:
-    puVar2 = (unsigned int *)FUN_0022a464(*(unsigned int *)(param_1 + 0x10),param_3);
+    puVar2 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
     temp_v1 = *puVar2;
     puVar2 = &DAT_00434330;
     break;
   case 0x11:
-    puVar2 = (unsigned int *)FUN_0022a464(*(unsigned int *)(param_1 + 0x10),param_3);
+    puVar2 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
     temp_v1 = *puVar2;
     puVar2 = &DAT_004342e4;
     break;
   case 0x12:
-    puVar2 = (unsigned int *)FUN_0022a464(*(unsigned int *)(param_1 + 0x10),param_3);
+    puVar2 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
     temp_v1 = *puVar2;
     puVar2 = &DAT_00434334;
     break;
   case 0x13:
-    puVar2 = (unsigned int *)FUN_0022a464(*(unsigned int *)(param_1 + 0x10),param_3);
+    puVar2 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
     temp_v1 = *puVar2;
     puVar2 = &DAT_00434338;
     break;
   case 0x14:
-    puVar2 = (unsigned int *)FUN_0022a464(*(unsigned int *)(param_1 + 0x10),param_3);
+    puVar2 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
     temp_v1 = *puVar2;
     puVar2 = &DAT_004342e8;
     break;
   case 0x15:
-    puVar2 = (unsigned int *)FUN_0022a464(*(unsigned int *)(param_1 + 0x10),param_3);
+    puVar2 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
     temp_v1 = *puVar2;
     puVar2 = &DAT_0043433c;
     break;
   case 0x16:
-    puVar2 = (unsigned int *)FUN_0022a464(*(unsigned int *)(param_1 + 0x10),param_3);
+    puVar2 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
     temp_v1 = *puVar2;
     puVar2 = &DAT_00434340;
     break;
   case 0x17:
-    puVar2 = (unsigned int *)FUN_0022a464(*(unsigned int *)(param_1 + 0x10),param_3);
+    puVar2 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
     temp_v1 = *puVar2;
     puVar2 = &DAT_004342ec;
     break;
   case 0x18:
-    puVar2 = (unsigned int *)FUN_0022a464(*(unsigned int *)(param_1 + 0x10),param_3);
+    puVar2 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
     temp_v1 = *puVar2;
     puVar2 = &DAT_00434344;
     break;
   case 0x19:
-    puVar2 = (unsigned int *)FUN_0022a464(*(unsigned int *)(param_1 + 0x10),param_3);
+    puVar2 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
     temp_v1 = *puVar2;
     puVar2 = &DAT_00434348;
     break;
   case 0x1a:
-    puVar2 = (unsigned int *)FUN_0022a464(*(unsigned int *)(param_1 + 0x10),param_3);
+    puVar2 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
     temp_v1 = *puVar2;
     puVar2 = &DAT_0043434c;
     break;
   case 0x1b:
-    puVar2 = (unsigned int *)FUN_0022a464(*(unsigned int *)(param_1 + 0x10),param_3);
+    puVar2 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
     temp_v1 = *puVar2;
     puVar2 = &DAT_00434350;
     break;
   case 0x1c:
-    puVar2 = (unsigned int *)FUN_0022a464(*(unsigned int *)(param_1 + 0x10),param_3);
+    puVar2 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
     temp_v1 = *puVar2;
     puVar2 = &DAT_00434354;
     break;
   case 0x1d:
-    puVar2 = (unsigned int *)FUN_0022a464(*(unsigned int *)(param_1 + 0x10),param_3);
+    puVar2 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
     temp_v1 = *puVar2;
     puVar2 = &DAT_00439cec;
     break;
   case 0x1e:
-    puVar2 = (unsigned int *)FUN_0022a464(*(unsigned int *)(param_1 + 0x10),param_3);
+    puVar2 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
     temp_v1 = *puVar2;
     puVar2 = &DAT_004342f0;
     break;

@@ -17,7 +17,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-extern int DAT_00588fe8; /* 0x588fe8 */
+extern int g_statusDown; /* 0x588fe8 */
 
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: FUN_00203b40. */
@@ -39,8 +39,8 @@ void FUN_002a7104(int param_1)
   int temp_v4;
   unsigned short *puVar7;
   
-  temp_v2 = DAT_00588fe8;
-  *(unsigned short *)(DAT_00588fe8 + 0x2348) = 0;
+  temp_v2 = g_statusDown;
+  *(unsigned short *)(g_statusDown + 0x2348) = 0;
   *(unsigned short *)(temp_v2 + 0x234a) = 0;
   sysMemClear(temp_v2 + 0xf48,0x1400);
   puVar7 = (unsigned short *)0x0;

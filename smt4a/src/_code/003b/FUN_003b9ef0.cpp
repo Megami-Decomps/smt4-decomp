@@ -15,7 +15,7 @@ int FUN_00303460(...);
 int FUN_00303504(unsigned int);
 int FUN_00313648(...);
 int FUN_00314c38(...);
-int FUN_00324bc8(...);
+int mapPlaceSet(...);
 int FUN_0033f938(...);
 int FUN_0035846c(void);
 int FUN_00368b28(...);
@@ -86,7 +86,7 @@ extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_00303504. */
 /* Supplied declaration required: FUN_00313648. */
 /* Supplied declaration required: FUN_00314c38. */
-/* Supplied declaration required: FUN_00324bc8. */
+/* Supplied declaration required: mapPlaceSet. */
 /* Supplied declaration required: FUN_0033f938. */
 /* Supplied declaration required: FUN_0035846c. */
 /* Supplied declaration required: FUN_00368b28. */
@@ -257,7 +257,7 @@ void FUN_003b9ef0(unsigned int param_1,unsigned int param_2,int param_3)
       FUN_003a366c(DAT_005f1608,DAT_005f160c,DAT_005f1604);
       FUN_0033f938(DAT_005f1608);
       FUN_00368b28(0);
-      FUN_00324bc8(0xffffffff,0xffffffff);
+      mapPlaceSet(0xffffffff,0xffffffff);
       FUN_00272f54();
       FUN_00303460(0);
       FUN_003a2278(0);

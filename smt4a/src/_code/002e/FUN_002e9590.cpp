@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002e98d4(void);
-int FUN_0030ff80(int, unsigned int);
+int operatorDeleteArray(void);
+int strDuplicateInto(int, unsigned int);
 
-/* Supplied declaration required: FUN_002e98d4. */
-/* Supplied declaration required: FUN_0030ff80. */
+/* Supplied declaration required: operatorDeleteArray. */
+/* Supplied declaration required: strDuplicateInto. */
 
 
 int FUN_002e9590(int param_1,int param_2)
@@ -17,9 +17,9 @@ int FUN_002e9590(int param_1,int param_2)
 /* irregular: 2 native warning(s); review required */
   if (*(int *)(param_1 + 4) != *(int *)(param_2 + 4)) {
     if (*(int *)(param_1 + 4) != 0) {
-      FUN_002e98d4();
+      operatorDeleteArray();
     }
-    FUN_0030ff80(param_1 + 4,*(unsigned int *)(param_2 + 4));
+    strDuplicateInto(param_1 + 4,*(unsigned int *)(param_2 + 4));
   }
   return param_1;
 }

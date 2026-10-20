@@ -7,7 +7,7 @@ extern "C" {
 extern int DAT_00471b64; /* 0x471b64 */
 
 extern int asdModelForwardChecked(unsigned int *, unsigned int, unsigned int, unsigned int);
-extern unsigned int FUN_002c30c4(unsigned int);
+extern unsigned int libc_strlen(unsigned int);
 
 
 int FUN_00106e10(void)
@@ -17,7 +17,7 @@ int FUN_00106e10(void)
   int temp_v1;
   
   if (DAT_00471b64 == 0) {
-    temp_v0 = FUN_002c30c4(0x425d76);
+    temp_v0 = libc_strlen(0x425d76);
     temp_v1 = asdModelForwardChecked((unsigned int *)&DAT_00471b64,0x425d76,temp_v0,0);
     if (temp_v1 < 0) {
       return temp_v1;

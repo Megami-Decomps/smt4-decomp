@@ -7,14 +7,14 @@ extern "C" {
 int FUN_0027e974(void);
 int FUN_0028727c(void);
 int FUN_002898e4(void);
-int FUN_0028d6d0(void);
+int buttonHelpCreate(void);
 int FUN_0028d9b0(void);
-int FUN_002917b8(void);
-int FUN_00291944(void);
+int buttonHelpRelease(void);
+int uiFadeRelease(void);
 int FUN_00296fec(void);
-int FUN_0029c3b0(int);
+int soundChannelStopAll(int);
 int FUN_002a03d8(...);
-int FUN_002b2368(void);
+int asdMemFreeNonNull(void);
 int asdOperatorNew(void);
 int FUN_002c5700(void);
 int asdSequenceRequest(int, int *);
@@ -32,14 +32,14 @@ typedef struct {
 /* Supplied declaration required: FUN_0027e974. */
 /* Supplied declaration required: FUN_0028727c. */
 /* Supplied declaration required: FUN_002898e4. */
-/* Supplied declaration required: FUN_0028d6d0. */
+/* Supplied declaration required: buttonHelpCreate. */
 /* Supplied declaration required: FUN_0028d9b0. */
-/* Supplied declaration required: FUN_002917b8. */
-/* Supplied declaration required: FUN_00291944. */
+/* Supplied declaration required: buttonHelpRelease. */
+/* Supplied declaration required: uiFadeRelease. */
 /* Supplied declaration required: FUN_00296fec. */
-/* Supplied declaration required: FUN_0029c3b0. */
+/* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: FUN_002a03d8. */
-/* Supplied declaration required: FUN_002b2368. */
+/* Supplied declaration required: asdMemFreeNonNull. */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_002c5700. */
 /* Supplied declaration required: asdSequenceRequest. */
@@ -71,7 +71,7 @@ unsigned int FUN_001b4fec(int *param_1,unsigned int param_2,unsigned int param_3
         if (*(char *)(temp_v3 + 0x19) != '\0') {
           FUN_002a03d8(0,1);
           FUN_002a03d8(1);
-          FUN_0029c3b0(0xf);
+          soundChannelStopAll(0xf);
         }
         else {
           temp_v4 = romwright_piece_3_1((int)((unsigned int)param_4 >> 8),1);
@@ -81,12 +81,12 @@ unsigned int FUN_001b4fec(int *param_1,unsigned int param_2,unsigned int param_3
         *(unsigned char *)(temp_v3 + 0x18) = 1;
         if ((*(int *)(temp_v3 + 0x1c) != 0) && (FUN_002c5700(), *(int *)(temp_v3 + 0x1c) != 0)) {
           FUN_0027e974();
-          FUN_002b2368();
+          asdMemFreeNonNull();
           *(unsigned int *)(temp_v3 + 0x1c) = 0;
         }
-        FUN_002917b8();
+        buttonHelpRelease();
         FUN_0028727c();
-        FUN_00291944();
+        uiFadeRelease();
       }
     }
     else {
@@ -99,7 +99,7 @@ unsigned int FUN_001b4fec(int *param_1,unsigned int param_2,unsigned int param_3
   else {
     FUN_002898e4();
     FUN_0028d9b0();
-    FUN_0028d6d0();
+    buttonHelpCreate();
     temp_v1 = 0x2434;
     asdOperatorNew();
     temp_v2 = 0;

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0016e800(void);
-int FUN_00188b60(int);
+int nn_os_CriticalSection_Initialize(int);
 int nn_fs_GetPriority(void);
 
 typedef int romwright_code(...);
@@ -31,7 +31,7 @@ typedef struct {
 } param_7_stack;
 
 /* Supplied declaration required: FUN_0016e800. */
-/* Supplied declaration required: FUN_00188b60. */
+/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
 extern void nn_fnd_UnitHeapBase_Initialize(unsigned int, unsigned int, unsigned int, unsigned int, int, unsigned int);
 /* Supplied declaration required: nn_fs_GetPriority. */
 
@@ -167,9 +167,9 @@ int FUN_0019fc70(int param_1,unsigned int *param_2,int param_3,int param_4,unsig
   *(unsigned int *)(param_1 + 0x5c) = 0;
   *(int *)(param_1 + 0x60) = temp_v17;
   nn_fnd_UnitHeapBase_Initialize(param_1 + 0xb8,0x20,param_5,temp_v0,4,0);
-  FUN_00188b60(param_1 + 0xe8);
+  nn_os_CriticalSection_Initialize(param_1 + 0xe8);
   nn_fnd_UnitHeapBase_Initialize(param_1 + 0xf4,0x18,param_5 + temp_v0,param_4 * 0x18,4,0);
-  FUN_00188b60(param_1 + 0x124);
+  nn_os_CriticalSection_Initialize(param_1 + 0x124);
   *(unsigned int *)(param_1 + 0xb0) = temp_v18;
   temp_v1 = param_1 + 4;
   nn_fs_GetPriority();

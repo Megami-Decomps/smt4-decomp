@@ -14,12 +14,12 @@ typedef struct SlotTable {
     /* 0x2A0 */ Slot slots[1];
 } SlotTable;
 
-SlotTable *FUN_001ab940(int index);
+SlotTable *gameFlagBlockGet(int index);
 
 /* Sets or clears the enabled flag (bit 2) of slot `index`, if the slot is configurable. */
 void FUN_004187e8(int index, int enabled)
 {
-    Slot *slot = &FUN_001ab940(index)->slots[index];
+    Slot *slot = &gameFlagBlockGet(index)->slots[index];
 
     if ((slot->state & 2) != 0) {
         u8 flags;

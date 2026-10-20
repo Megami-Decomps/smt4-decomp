@@ -2,13 +2,13 @@
 
 extern "C" {
 
-extern Sub68Owner *DAT_00587f28;
+extern Sub68Owner *g_naviMain;
 extern s32 block12DCOwnerStart6(u8 *sub);
 
 void sub68OwnerCall7(void)
 {
-    if (DAT_00587f28 != NULL) {
-        block12DCOwnerStart6(DAT_00587f28->sub);
+    if (g_naviMain != NULL) {
+        block12DCOwnerStart6(g_naviMain->sub);
     }
 }
 

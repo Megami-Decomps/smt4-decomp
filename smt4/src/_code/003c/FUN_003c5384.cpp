@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0022a3a8(...);
-int FUN_0022a400(...);
-int FUN_0025c2ec(unsigned int, int);
+int asdListBoxSetItemMode3(...);
+int asdListBoxSetItemMode2(...);
+int asdListBoxSetByteValue(unsigned int, int);
 int asdListBoxAddItems(void);
 int FUN_0025c58c(unsigned int, int, int);
 int FUN_00262914(unsigned int, unsigned char *);
@@ -62,9 +62,9 @@ typedef struct {
 
 extern unsigned char LAB_003c56c4; /* 0x3c56c4 */
 
-/* Supplied declaration required: FUN_0022a3a8. */
-/* Supplied declaration required: FUN_0022a400. */
-/* Supplied declaration required: FUN_0025c2ec. */
+/* Supplied declaration required: asdListBoxSetItemMode3. */
+/* Supplied declaration required: asdListBoxSetItemMode2. */
+/* Supplied declaration required: asdListBoxSetByteValue. */
 /* Supplied declaration required: asdListBoxAddItems. */
 /* Supplied declaration required: FUN_0025c58c. */
 /* Supplied declaration required: FUN_00262914. */
@@ -80,34 +80,34 @@ void FUN_003c5384(int param_1,fn_003c5384_arg1 *param_2)
   FUN_0025c58c(temp_v0,0x73,0);
   *(unsigned int *)(param_1 + 0x10) = temp_v0;
   asdListBoxAddItems();
-  FUN_0025c2ec(*(unsigned int *)(param_1 + 0x10),1);
+  asdListBoxSetByteValue(*(unsigned int *)(param_1 + 0x10),1);
   FUN_00262914(*(unsigned int *)(param_1 + 0x10),&LAB_003c56c4);
-  FUN_0022a400(*(unsigned int *)(param_1 + 0x10),0);
-  FUN_0022a400(*(unsigned int *)(param_1 + 0x10),1);
-  FUN_0022a400(*(unsigned int *)(param_1 + 0x10),2);
-  FUN_0022a3a8(*(unsigned int *)(param_1 + 0x10),3,*(unsigned int *)&param_2->field_0x22b4,0,9,0);
-  FUN_0022a3a8(*(unsigned int *)(param_1 + 0x10),4,*(unsigned int *)&param_2->field_0x22b8,0,2,0);
-  FUN_0022a400(*(unsigned int *)(param_1 + 0x10),5);
-  FUN_0022a400(*(unsigned int *)(param_1 + 0x10),6);
-  FUN_0022a400(*(unsigned int *)(param_1 + 0x10),7);
-  FUN_0022a400(*(unsigned int *)(param_1 + 0x10),8);
-  FUN_0022a3a8(*(unsigned int *)(param_1 + 0x10),9,*(unsigned int *)&param_2->field_0x22cc,0,999,0);
-  FUN_0022a3a8(*(unsigned int *)(param_1 + 0x10),10,*(unsigned int *)&param_2->field_0x22d0,0,4,0);
-  FUN_0022a3a8(*(unsigned int *)(param_1 + 0x10),0xb,*(unsigned int *)&param_2->field_0x22d4,0,0x1f,0);
-  FUN_0022a3a8(*(unsigned int *)(param_1 + 0x10),0xc,*(unsigned int *)&param_2->field_0x22d8,0,2,0);
-  FUN_0022a3a8(*(unsigned int *)(param_1 + 0x10),0xd,*(unsigned int *)&param_2->field_0x22dc,0,7,0);
-  FUN_0022a400(*(unsigned int *)(param_1 + 0x10),0xe);
-  FUN_0022a3a8(*(unsigned int *)(param_1 + 0x10),0xf,*(unsigned int *)&param_2->field_0x22e4,0,2,0);
-  FUN_0022a3a8(*(unsigned int *)(param_1 + 0x10),0x10,*(unsigned int *)&param_2->field_0x22e8,0,2,0);
-  FUN_0022a400(*(unsigned int *)(param_1 + 0x10),0x11);
-  FUN_0022a3a8(*(unsigned int *)(param_1 + 0x10),0x12,*(unsigned int *)&param_2->field_0x22f0,0,3,0);
-  FUN_0022a3a8(*(unsigned int *)(param_1 + 0x10),0x13,*(unsigned int *)&param_2->field_0x22f4,0,2,0);
-  FUN_0022a400(*(unsigned int *)(param_1 + 0x10),0x14);
-  FUN_0022a400(*(unsigned int *)(param_1 + 0x10),0x15);
-  FUN_0022a400(*(unsigned int *)(param_1 + 0x10),0x16);
-  FUN_0022a400(*(unsigned int *)(param_1 + 0x10),0x17);
-  FUN_0022a400(*(unsigned int *)(param_1 + 0x10),0x18);
-  FUN_0022a3a8(*(unsigned int *)(param_1 + 0x10),0x19,*(unsigned int *)(param_2 + 1),0,9,0);
+  asdListBoxSetItemMode2(*(unsigned int *)(param_1 + 0x10),0);
+  asdListBoxSetItemMode2(*(unsigned int *)(param_1 + 0x10),1);
+  asdListBoxSetItemMode2(*(unsigned int *)(param_1 + 0x10),2);
+  asdListBoxSetItemMode3(*(unsigned int *)(param_1 + 0x10),3,*(unsigned int *)&param_2->field_0x22b4,0,9,0);
+  asdListBoxSetItemMode3(*(unsigned int *)(param_1 + 0x10),4,*(unsigned int *)&param_2->field_0x22b8,0,2,0);
+  asdListBoxSetItemMode2(*(unsigned int *)(param_1 + 0x10),5);
+  asdListBoxSetItemMode2(*(unsigned int *)(param_1 + 0x10),6);
+  asdListBoxSetItemMode2(*(unsigned int *)(param_1 + 0x10),7);
+  asdListBoxSetItemMode2(*(unsigned int *)(param_1 + 0x10),8);
+  asdListBoxSetItemMode3(*(unsigned int *)(param_1 + 0x10),9,*(unsigned int *)&param_2->field_0x22cc,0,999,0);
+  asdListBoxSetItemMode3(*(unsigned int *)(param_1 + 0x10),10,*(unsigned int *)&param_2->field_0x22d0,0,4,0);
+  asdListBoxSetItemMode3(*(unsigned int *)(param_1 + 0x10),0xb,*(unsigned int *)&param_2->field_0x22d4,0,0x1f,0);
+  asdListBoxSetItemMode3(*(unsigned int *)(param_1 + 0x10),0xc,*(unsigned int *)&param_2->field_0x22d8,0,2,0);
+  asdListBoxSetItemMode3(*(unsigned int *)(param_1 + 0x10),0xd,*(unsigned int *)&param_2->field_0x22dc,0,7,0);
+  asdListBoxSetItemMode2(*(unsigned int *)(param_1 + 0x10),0xe);
+  asdListBoxSetItemMode3(*(unsigned int *)(param_1 + 0x10),0xf,*(unsigned int *)&param_2->field_0x22e4,0,2,0);
+  asdListBoxSetItemMode3(*(unsigned int *)(param_1 + 0x10),0x10,*(unsigned int *)&param_2->field_0x22e8,0,2,0);
+  asdListBoxSetItemMode2(*(unsigned int *)(param_1 + 0x10),0x11);
+  asdListBoxSetItemMode3(*(unsigned int *)(param_1 + 0x10),0x12,*(unsigned int *)&param_2->field_0x22f0,0,3,0);
+  asdListBoxSetItemMode3(*(unsigned int *)(param_1 + 0x10),0x13,*(unsigned int *)&param_2->field_0x22f4,0,2,0);
+  asdListBoxSetItemMode2(*(unsigned int *)(param_1 + 0x10),0x14);
+  asdListBoxSetItemMode2(*(unsigned int *)(param_1 + 0x10),0x15);
+  asdListBoxSetItemMode2(*(unsigned int *)(param_1 + 0x10),0x16);
+  asdListBoxSetItemMode2(*(unsigned int *)(param_1 + 0x10),0x17);
+  asdListBoxSetItemMode2(*(unsigned int *)(param_1 + 0x10),0x18);
+  asdListBoxSetItemMode3(*(unsigned int *)(param_1 + 0x10),0x19,*(unsigned int *)(param_2 + 1),0,9,0);
   return;
 }
 

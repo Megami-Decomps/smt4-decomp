@@ -2,11 +2,11 @@
 
 extern "C" {
 
-int FUN_002b47f4(int id);
+int fileSlotGetBuffer(int id);
 
 void FUN_002cf11c(void)
 {
-    FUN_002b47f4(0x13);
+    fileSlotGetBuffer(0x13);
 }
 
 } /* extern "C" */

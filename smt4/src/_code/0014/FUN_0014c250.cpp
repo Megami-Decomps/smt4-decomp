@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0014c494(unsigned char [12], unsigned int, int);
+int slotTableReplace(unsigned char [12], unsigned int, int);
 int FUN_00150d2c(int *, unsigned int, int *, unsigned int);
 int FUN_002a4b0c(int, int *);
 int FUN_002a78c0(int *, unsigned int, int, int *, unsigned int, unsigned int);
@@ -20,7 +20,7 @@ typedef struct {
     unsigned int sp60; /* 0x60: local_60 */
 } param_5_stack;
 
-/* Supplied declaration required: FUN_0014c494. */
+/* Supplied declaration required: slotTableReplace. */
 /* Supplied declaration required: FUN_00150d2c. */
 extern int *FUN_001522ac(unsigned char *, unsigned int);
 extern unsigned int FUN_001522d4(unsigned char *, unsigned int);
@@ -82,7 +82,7 @@ FUN_0014c250(int *param_1,unsigned int param_2,unsigned int param_3,int *param_4
       temp_v5 = FUN_001522d4(temp_v8,param_3);
       FUN_002a78c0(param_1,temp_v0,temp_v1,piVar2,temp_v5,param_5);
       if (param_1 == piVar2) {
-        FUN_0014c494(temp_v8,param_3,temp_v1);
+        slotTableReplace(temp_v8,param_3,temp_v1);
         FUN_002a4b0c(temp_v1,piVar2);
         return 1;
       }

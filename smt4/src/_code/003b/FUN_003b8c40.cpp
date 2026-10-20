@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_0022b064(int);
-int FUN_0027e774(int);
+int dialogOpen(int);
 int FUN_0027e7b4(unsigned int, int);
-int FUN_00290d74(...);
-int FUN_00296f4c(unsigned int, unsigned int);
+int tableGroupFindEntryIndex(...);
+int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int FUN_00297060(int, unsigned int);
-int FUN_002b8838(int);
+int buttonHelpSetPreset(int);
 
 extern unsigned char LAB_003b8e04; /* 0x3b8e04 */
 extern unsigned char LAB_003b8e14; /* 0x3b8e14 */
@@ -22,12 +22,12 @@ extern int FUN_0019e0c0(unsigned int);
 /* Supplied declaration required: FUN_0022b064. */
 extern int FUN_0022b14c(int);
 extern unsigned short FUN_0023360c(int);
-/* Supplied declaration required: FUN_0027e774. */
+/* Supplied declaration required: dialogOpen. */
 /* Supplied declaration required: FUN_0027e7b4. */
-/* Supplied declaration required: FUN_00290d74. */
-/* Supplied declaration required: FUN_00296f4c. */
+/* Supplied declaration required: tableGroupFindEntryIndex. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297060. */
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 extern unsigned int FUN_002c5c04(unsigned char *);
 
 
@@ -52,9 +52,9 @@ void FUN_003b8c40(int param_1)
         if (temp_v1 == 2) {
           *(unsigned int *)(param_1 + 0x28) = 9;
           *(unsigned int *)(param_1 + 0x2c) = 0;
-          FUN_002b8838(0x9e);
-          temp_v3 = FUN_00290d74(*(unsigned int *)(param_1 + 0xd94),&LAB_003b8e04);
-          FUN_00296f4c(*(unsigned int *)(param_1 + 0xd9c),temp_v3);
+          buttonHelpSetPreset(0x9e);
+          temp_v3 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0xd94),&LAB_003b8e04);
+          scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0xd9c),temp_v3);
           *(unsigned int *)(param_1 + 0xdb0) = 0;
           return;
         }
@@ -69,20 +69,20 @@ void FUN_003b8c40(int param_1)
           FUN_00297060(temp_v1,temp_v3);
           *(int *)(param_1 + 0xda8) = temp_v1;
           *(unsigned int *)(temp_v1 + 0x108) = 3;
-          temp_v3 = FUN_00290d74(*(int *)(param_1 + 0xda0),&LAB_003b8e40);
-          FUN_00296f4c(*(unsigned int *)(param_1 + 0xda8),temp_v3);
+          temp_v3 = tableGroupFindEntryIndex(*(int *)(param_1 + 0xda0),&LAB_003b8e40);
+          scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0xda8),temp_v3);
           *(unsigned int *)(param_1 + 0xdb0) = 0;
           return;
         }
         if (temp_v1 != 4) {
-          FUN_0027e774(0);
+          dialogOpen(0);
           FUN_0027e7b4(*(unsigned int *)(param_1 + 0xd80),
                        *(unsigned char *)(*(int *)(param_1 + 0xd5c) + 0x3f));
           *(unsigned int *)(param_1 + 0x28) = 5;
           *(unsigned int *)(param_1 + 0x2c) = 0;
           return;
         }
-        FUN_0027e774(0);
+        dialogOpen(0);
         FUN_0027e7b4(*(unsigned int *)(param_1 + 0xd80),
                      *(unsigned char *)(*(int *)(param_1 + 0xd5c) + 0x3f));
         *(unsigned int *)(param_1 + 0x28) = 5;
@@ -91,8 +91,8 @@ void FUN_003b8c40(int param_1)
       else {
         *(unsigned int *)(param_1 + 0x28) = 9;
         *(unsigned int *)(param_1 + 0x2c) = 0;
-        temp_v3 = FUN_00290d74(*(unsigned int *)(param_1 + 0xd94),&LAB_003b8e04);
-        FUN_00296f4c(*(unsigned int *)(param_1 + 0xd9c),temp_v3);
+        temp_v3 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0xd94),&LAB_003b8e04);
+        scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0xd9c),temp_v3);
       }
       *(unsigned int *)(param_1 + 0xdb0) = 0;
       return;

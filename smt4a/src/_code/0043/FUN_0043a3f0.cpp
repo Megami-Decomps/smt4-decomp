@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00188ca4(void);
-int FUN_00195fc8(void);
+int sysFatalBreak(void);
 int FUN_001af3b8(void);
 int FUN_0043a8f8(unsigned int, unsigned int, unsigned int, unsigned int);
 
@@ -16,7 +16,7 @@ typedef struct {
 
 extern int FUN_00188c94(void);
 /* Supplied declaration required: FUN_00188ca4. */
-/* Supplied declaration required: FUN_00195fc8. */
+/* Supplied declaration required: sysFatalBreak. */
 extern int FUN_001a0ca4(void);
 extern int FUN_001af3a8(void);
 /* Supplied declaration required: FUN_001af3b8. */
@@ -42,17 +42,17 @@ void FUN_0043a3f0(unsigned int param_1,unsigned int param_2,unsigned int param_3
     temp_v1 = FUN_001af3b8();
     temp_v2 = FUN_001af3a8();
     if (param_1 >= (unsigned int)(temp_v1 + temp_v2)) {
-      FUN_00195fc8();
+      sysFatalBreak();
     }
   }
   else {
-    FUN_00195fc8();
+    sysFatalBreak();
   }
 LAB_0043a470:
   temp_v1 = -0x7fff;
   FUN_0043a8f8(0xffff8001,param_1,param_2,param_3);
   if (temp_v1 < 0) {
-    FUN_00195fc8();
+    sysFatalBreak();
     return;
   }
   return;

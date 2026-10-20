@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00152bec(unsigned int);
+int asdMdlManagerMarkDestroy(unsigned int);
 int dataTable2eSub1GetCount(void);
 int dataTable2eSub0GetCount(void);
 int FUN_002a0428(unsigned int, int);
@@ -24,13 +24,13 @@ extern unsigned int DAT_0049fbd0; /* 0x49fbd0 */
 extern int DAT_0049fd08; /* 0x49fd08 */
 extern short *DAT_0049fd0c; /* 0x49fd0c */
 
-/* Supplied declaration required: FUN_00152bec. */
+/* Supplied declaration required: asdMdlManagerMarkDestroy. */
 /* Supplied declaration required: dataTable2eSub1GetCount. */
 /* Supplied declaration required: dataTable2eSub0GetCount. */
 extern unsigned int asdMdlManagerCreateFromSource(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002a0428. */
 /* Supplied declaration required: asdMdlManagerDestroy. */
-extern unsigned short *FUN_002b63ac(void);
+extern unsigned short *gameGetPlayerData(void);
 extern short *dataTable2eSub1GetRecord(int);
 extern short *dataTable2eSub0GetRecord(int);
 
@@ -45,7 +45,7 @@ unsigned int FUN_002d400c(void)
   unsigned int *puVar4;
   int temp_v1;
   
-  puVar1 = (unsigned short *)FUN_002b63ac();
+  puVar1 = (unsigned short *)gameGetPlayerData();
   temp_v1 = *(int *)(g_lmapScene + 0xb8);
   if (temp_v1 != 0) {
     if (temp_v1 != 1) {
@@ -96,7 +96,7 @@ unsigned int FUN_002d400c(void)
       }
     }
     else {
-      FUN_00152bec(*(unsigned int *)(g_lmapScene + 0xb2));
+      asdMdlManagerMarkDestroy(*(unsigned int *)(g_lmapScene + 0xb2));
       *(int *)(g_lmapScene + 0xb8) = *(int *)(g_lmapScene + 0xb8) + 1;
     }
     return 0;

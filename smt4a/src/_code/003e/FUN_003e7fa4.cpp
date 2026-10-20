@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001568f8(int, int);
-int FUN_0019cac4(void);
+int dataTable00FindById(void);
 int FUN_00348ee8(void);
 int FUN_003f0e20(int, int);
 int FUN_003fb9f0(unsigned int, int *);
@@ -20,8 +20,8 @@ typedef struct {
 /* Supplied declaration required: FUN_001568f8. */
 extern int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
-/* Supplied declaration required: FUN_0019cac4. */
-extern unsigned int FUN_001a6f60(int, unsigned int);
+/* Supplied declaration required: dataTable00FindById. */
+extern unsigned int dataTableFileGetTable(int, unsigned int);
 /* Supplied declaration required: FUN_00348ee8. */
 extern unsigned int FUN_003ec620(int, unsigned int);
 /* Supplied declaration required: FUN_003f0e20. */
@@ -50,7 +50,7 @@ void FUN_003e7fa4(int param_1,int param_2,int param_3)
     FUN_001568f8(param_1,param_2);
     temp_v0 = *(unsigned short *)(temp_v5 + 2);
     if (*(int *)(param_1 + 0x2294) != 0) {
-      temp_v1 = FUN_001a6f60(*(int *)(param_1 + 0x2294),0);
+      temp_v1 = dataTableFileGetTable(*(int *)(param_1 + 0x2294),0);
       temp_v5 = dataTableGetEntries();
       temp_v2 = dataTableGetCount(temp_v1);
       temp_v3 = 0;
@@ -104,7 +104,7 @@ LAB_003e80ac:
       temp_v8 = puVar5[1];
       temp_v9 = (float)puVar5[2] + temp_v6;
       FUN_001568f8(param_1,param_2);
-      FUN_0019cac4();
+      dataTable00FindById();
     }
   }
   return;

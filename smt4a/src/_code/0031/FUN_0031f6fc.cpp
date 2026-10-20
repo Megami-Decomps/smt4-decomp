@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned char DAT_00588fd0; /* 0x588fd0 */
+extern unsigned char g_gameGlobals; /* 0x588fd0 */
 
 
 int FUN_0031f6fc(void)
@@ -13,8 +13,8 @@ int FUN_0031f6fc(void)
   int temp_v0;
   
   temp_v0 = 0;
-  if ((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) != 0) {
-    temp_v0 = (int)*(char *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x2010);
+  if ((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) != 0) {
+    temp_v0 = (int)*(char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x2010);
   }
   return temp_v0;
 }

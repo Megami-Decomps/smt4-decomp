@@ -5,14 +5,14 @@
 extern "C" {
 
 int FUN_00132764(int);
-int FUN_002e7232(void);
+int sharedRefRelease(void);
 int FUN_002ecac4(int);
 
 extern unsigned char DAT_0055955c; /* 0x55955c */
 
 extern int FUN_0010eec4(int);
 /* Supplied declaration required: FUN_00132764. */
-/* Supplied declaration required: FUN_002e7232. */
+/* Supplied declaration required: sharedRefRelease. */
 extern int FUN_002ea00c(int);
 /* Supplied declaration required: FUN_002ecac4. */
 extern int FUN_002f8760(unsigned int *);
@@ -26,10 +26,10 @@ void FUN_0011234c(unsigned int *param_1)
   
   *param_1 = (unsigned int)&DAT_0055955c;
   if (param_1[0x5f] != 0) {
-    FUN_002e7232();
+    sharedRefRelease();
   }
   if (param_1[0x60] != 0) {
-    FUN_002e7232();
+    sharedRefRelease();
   }
   temp_v0 = FUN_002f8760(param_1 + 100);
   temp_v0 = FUN_002ea00c(temp_v0 - 0x78);

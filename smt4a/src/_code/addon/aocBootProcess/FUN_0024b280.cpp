@@ -37,7 +37,7 @@ extern int FUN_001af210(int);
 /* Supplied declaration required: FUN_001b57a8. */
 extern unsigned int *FUN_001b5acc(unsigned int *);
 /* Supplied declaration required: FUN_001d0fcc. */
-extern int FUN_001d10ac(unsigned int *);
+extern int byteIsAtLeast100(unsigned int *);
 /* Supplied declaration required: FUN_00429f38. */
 /* Supplied declaration required: aocClearDisplayFlag. */
 /* Supplied declaration required: FUN_0046e2d0. */
@@ -142,7 +142,7 @@ unsigned int FUN_0024b280(void)
           return 0;
         }
         temp_v3 = isEmptyString((unsigned int *)&temp_v6);
-        if ((temp_v3 == 0) && (temp_v3 = FUN_001d10ac((unsigned int *)&temp_v6), temp_v3 == 0)) {
+        if ((temp_v3 == 0) && (temp_v3 = byteIsAtLeast100((unsigned int *)&temp_v6), temp_v3 == 0)) {
           return 0;
         }
         *(unsigned char *)(temp_v0 + 8) = 2;

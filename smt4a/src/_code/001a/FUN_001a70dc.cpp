@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001a72b0(int *, char [256], unsigned int);
 int wstrlen(...);
 int FUN_002e59f8(char *, char [256], unsigned int);
-int FUN_002e6dd0(char [256], int);
+int rt_aeabi_memclr(char [256], int);
 int __aeabi_uidivmod(int);
 
 /* stack frame of param_2: 2 slot(s), 2 byte(s) */
@@ -16,12 +16,12 @@ typedef struct {
     unsigned char sp120; /* 0x120: local_120 */
 } param_2_stack;
 
-extern char FUN_00100790(int);
-extern int FUN_0019a37c(int, char *, unsigned int);
+extern char libc_toupper(int);
+extern int libc_strncmp(int, char *, unsigned int);
 /* Supplied declaration required: FUN_001a72b0. */
 /* Supplied declaration required: wstrlen. */
 /* Supplied declaration required: FUN_002e59f8. */
-/* Supplied declaration required: FUN_002e6dd0. */
+/* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: __aeabi_uidivmod. */
 
 
@@ -59,7 +59,7 @@ int * FUN_001a70dc(int *param_1,char *param_2)
       }
       if (((*pcVar1 == 'H' && pcVar4 == (char *)0x0) && (param_2 != (char *)0x0)) &&
          (*param_2 != '\0')) {
-        FUN_002e6dd0(temp_v10,0x100);
+        rt_aeabi_memclr(temp_v10,0x100);
         temp_v2 = wstrlen(param_2);
         FUN_002e59f8(param_2,temp_v10,temp_v2);
         temp_v2 = wstrlen(temp_v10);
@@ -71,13 +71,13 @@ int * FUN_001a70dc(int *param_1,char *param_2)
         else {
           temp_v7 = temp_v3 & 1;
           if (temp_v7 == 1) {
-            temp_v10[0] = FUN_00100790((int)temp_v10[0]);
+            temp_v10[0] = libc_toupper((int)temp_v10[0]);
           }
         }
         for (; (int)temp_v7 < (int)temp_v3; temp_v7 = temp_v7 + 2) {
-          temp_v1 = FUN_00100790((int)temp_v10[temp_v7]);
+          temp_v1 = libc_toupper((int)temp_v10[temp_v7]);
           temp_v10[temp_v7] = temp_v1;
-          temp_v1 = FUN_00100790((int)temp_v10[temp_v7 + 1]);
+          temp_v1 = libc_toupper((int)temp_v10[temp_v7 + 1]);
           temp_v10[temp_v7 + 1] = temp_v1;
         }
         temp_v6 = 0;
@@ -101,7 +101,7 @@ int * FUN_001a70dc(int *param_1,char *param_2)
             piVar11 = (int *)(param_1[2] + ((unsigned int)temp_v0 + temp_v6) * 0x10);
             temp_v8 = param_1[3] + *piVar11;
             temp_v4 = wstrlen(temp_v8);
-            if ((temp_v4 == temp_v3) && (temp_v8 = FUN_0019a37c(temp_v8,temp_v10,temp_v3), temp_v8 == 0)) {
+            if ((temp_v4 == temp_v3) && (temp_v8 = libc_strncmp(temp_v8,temp_v10,temp_v3), temp_v8 == 0)) {
               return piVar11;
             }
             temp_v6 = temp_v6 + 1;

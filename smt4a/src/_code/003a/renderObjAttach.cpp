@@ -12,10 +12,10 @@ typedef struct RenderRes {
     /* 0x08 */ u32 unk08;
 } RenderRes;
 
-extern ScriptObj *DAT_00573c50;
+extern ScriptObj *g_btlPartnerAttack;
 extern u32 g_renderCtx;
 extern void jobGetWork(u32 job);
-extern RenderRes *FUN_001861c4(s32 a, s32 b);
+extern RenderRes *asdTMTexTableGetNode(s32 a, s32 b);
 extern void FUN_0016c4b8(u32 ctx, u32 value);
 extern void FUN_00157558(u32 ctx);
 extern void FUN_00416664(void *p);
@@ -26,9 +26,9 @@ u32 renderObjAttach(u32 job)
     RenderRes *res;
 
     jobGetWork(job);
-    obj = DAT_00573c50;
+    obj = g_btlPartnerAttack;
     if (obj != NULL && obj->unk30 != NULL) {
-        res = FUN_001861c4(8, 0);
+        res = asdTMTexTableGetNode(8, 0);
         FUN_0016c4b8(g_renderCtx, res->unk08);
         FUN_00157558(g_renderCtx);
         FUN_00416664(obj->unk30);

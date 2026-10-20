@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_0019cac4(void);
+int dataTable00FindById(void);
 int scrGetArg(int);
 int scrSetResult(void);
 int FUN_003e00f8(int);
 
-/* Supplied declaration required: FUN_0019cac4. */
+/* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: scrGetArg. */
 /* Supplied declaration required: scrSetResult. */
 /* Supplied declaration required: FUN_003e00f8. */
@@ -25,7 +25,7 @@ unsigned int FUN_003bcd44(void)
   temp_v0 = scrGetArg(0);
   FUN_003e00f8(temp_v0);
   temp_v1 = scrGetArg(1);
-  FUN_0019cac4();
+  dataTable00FindById();
   if (temp_v1 != 0) {
     switch(temp_v0) {
     case 0:

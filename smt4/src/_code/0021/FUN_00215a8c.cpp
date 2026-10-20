@@ -5,18 +5,18 @@
 extern "C" {
 
 int FUN_0029f848(int, int, int, int, int, int);
-int FUN_002b8838(unsigned int);
+int buttonHelpSetPreset(unsigned int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-extern int DAT_0044e190; /* 0x44e190 */
+extern int g_statusDown; /* 0x44e190 */
 
 extern int FUN_0029ac94(void);
 /* Supplied declaration required: FUN_0029f848. */
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 
 
 void FUN_00215a8c(unsigned int *param_1)
@@ -27,8 +27,8 @@ void FUN_00215a8c(unsigned int *param_1)
   int temp_v1;
   unsigned int temp_v2;
   
-  temp_v0 = DAT_0044e190;
-  if ((-1 < *(short *)(DAT_0044e190 + 0x47e)) && (*(char *)(DAT_0044e190 + 0x3fc) == '\x01')) {
+  temp_v0 = g_statusDown;
+  if ((-1 < *(short *)(g_statusDown + 0x47e)) && (*(char *)(g_statusDown + 0x3fc) == '\x01')) {
     temp_v1 = FUN_0029ac94();
     if ((temp_v1 == 0xd) || (temp_v1 == 6)) {
       temp_v2 = 0x2f;
@@ -36,7 +36,7 @@ void FUN_00215a8c(unsigned int *param_1)
     else {
       temp_v2 = 0x1f;
     }
-    FUN_002b8838(temp_v2);
+    buttonHelpSetPreset(temp_v2);
   }
   *(unsigned short *)(temp_v0 + 0x47e) = 0xffff;
   *(unsigned int *)(temp_v0 + 0x554) = *param_1;

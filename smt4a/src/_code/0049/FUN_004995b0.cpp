@@ -6,7 +6,7 @@ extern "C" {
 
 int sysPlaySe(...);
 int FUN_00184528(...);
-int FUN_00275f44(...);
+int scrScriptProcessStartEntry(...);
 int FUN_0040a55c(...);
 
 int FUN_00148bb8(...);
@@ -36,19 +36,19 @@ extern unsigned char LAB_004999c8; /* 0x4999c8 */
 
 /* Supplied declaration required: FUN_00148bb8. */
 /* Supplied declaration required: FUN_00163aa4. */
-extern unsigned int FUN_001654d8(unsigned int *);
-extern unsigned int FUN_001654e4(unsigned int *);
+extern unsigned int vec2GetXInt(unsigned int *);
+extern unsigned int vec2GetYInt(unsigned int *);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00184528. */
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_00224880. */
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002a4b60(void);
 extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_0031d62c. */
 extern int panelIsMissingOrFlagClear(void);
 /* Supplied declaration required: obj04Finish. */
-extern unsigned int FUN_00357bc8(unsigned int, unsigned char *);
+extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_00388758. */
 extern int FUN_0040a4cc(unsigned int);
 /* Supplied declaration required: FUN_0040a55c. */
@@ -81,8 +81,8 @@ void FUN_004995b0(unsigned int *param_1)
         FUN_00224880(param_1[99]);
         FUN_00224880(param_1[100]);
         FUN_00163aa4(puVar6);
-        temp_v1 = FUN_001654e4(puVar6);
-        temp_v2 = FUN_001654d8(puVar6);
+        temp_v1 = vec2GetYInt(puVar6);
+        temp_v2 = vec2GetXInt(puVar6);
         FUN_004935b0(param_1 + 0xe9,temp_v2,temp_v1);
         temp_v3 = FUN_0031d62c((int)*(char *)((int)param_1 + 0x502));
         if (temp_v3 != 0) {
@@ -122,8 +122,8 @@ void FUN_004995b0(unsigned int *param_1)
       FUN_00224880(param_1[99]);
       FUN_00224880(param_1[100]);
       FUN_00163aa4(puVar6);
-      temp_v1 = FUN_001654e4(puVar6);
-      temp_v2 = FUN_001654d8(puVar6);
+      temp_v1 = vec2GetYInt(puVar6);
+      temp_v2 = vec2GetXInt(puVar6);
       FUN_004935b0(param_1 + 0xe9,temp_v2,temp_v1);
       if (*(char *)((int)param_1 + 0x502) != '\0') {
         *param_1 = *param_1 & 0xfffff0ff;
@@ -216,16 +216,16 @@ void FUN_004995b0(unsigned int *param_1)
     FUN_00148bb8(temp_v0,1);
     if ((temp_v4 == 0) || (temp_v3 = FUN_0040a4cc(temp_v0), temp_v3 != 0)) {
       if (!(param_1[4] == 4 || param_1[4] == 1)) {
-        temp_v1 = FUN_00357bc8(param_1[0x61],&LAB_0049999c);
-        FUN_00275f44(param_1[99],temp_v1);
+        temp_v1 = tableGroupFindEntryIndex(param_1[0x61],&LAB_0049999c);
+        scrScriptProcessStartEntry(param_1[99],temp_v1);
       }
       else if (*(char *)((int)param_1 + 0x21) != '\0') {
-        temp_v1 = FUN_00357bc8(param_1[0x61],&LAB_004999b8);
-        FUN_00275f44(param_1[99],temp_v1);
+        temp_v1 = tableGroupFindEntryIndex(param_1[0x61],&LAB_004999b8);
+        scrScriptProcessStartEntry(param_1[99],temp_v1);
       }
       else {
-        temp_v1 = FUN_00357bc8(param_1[0x61],&LAB_004999c8);
-        FUN_00275f44(param_1[99],temp_v1);
+        temp_v1 = tableGroupFindEntryIndex(param_1[0x61],&LAB_004999c8);
+        scrScriptProcessStartEntry(param_1[99],temp_v1);
       }
       FUN_00224880(param_1[99]);
       FUN_00497690(param_1,0);
@@ -235,8 +235,8 @@ void FUN_004995b0(unsigned int *param_1)
       return;
     }
     FUN_0040a55c(temp_v0,1);
-    temp_v1 = FUN_00357bc8(param_1[0x61],&LAB_004999a8);
-    FUN_00275f44(param_1[99],temp_v1);
+    temp_v1 = tableGroupFindEntryIndex(param_1[0x61],&LAB_004999a8);
+    scrScriptProcessStartEntry(param_1[99],temp_v1);
     FUN_00224880(param_1[99]);
     sysPlaySe(0xa0);
     param_1[4] = param_1[1];

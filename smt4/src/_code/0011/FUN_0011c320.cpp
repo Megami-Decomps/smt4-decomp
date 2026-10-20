@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c52f8(void);
+int asdFatalError(void);
 int nn_os_SharedMemoryBlock_AttachAndMap(unsigned int *, int, int, int);
 
 /* stack frame of param_2: 7 slot(s), 28 byte(s) */
@@ -24,8 +24,8 @@ extern unsigned int DAT_00472ab0; /* 0x472ab0 */
 extern int FUN_00128c30(unsigned int *, unsigned int *, unsigned int *, unsigned int *, unsigned int *, unsigned int *);
 extern int asdModelForwardChecked(unsigned int *, unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_002c1398(unsigned int);
-extern unsigned int FUN_002c30c4(unsigned int);
-/* Supplied declaration required: FUN_002c52f8. */
+extern unsigned int libc_strlen(unsigned int);
+/* Supplied declaration required: asdFatalError. */
 /* Supplied declaration required: nn_os_SharedMemoryBlock_AttachAndMap. */
 
 
@@ -55,16 +55,16 @@ unsigned int FUN_0011c320(unsigned int *param_1,unsigned int param_2)
   else {
     temp_v1 = FUN_002c1398(0);
     if ((temp_v1 & 0x3ff) != 0x3f9 && (int)temp_v1 < 0) {
-      FUN_002c52f8();
+      asdFatalError();
     }
-    temp_v0 = FUN_002c30c4(param_2);
+    temp_v0 = libc_strlen(param_2);
     temp_v2 = asdModelForwardChecked(&DAT_00472ab0,param_2,temp_v0,0);
     if (temp_v2 < 0) {
-      FUN_002c52f8();
+      asdFatalError();
     }
     temp_v2 = FUN_00128c30((unsigned int *)&temp_v3,(unsigned int *)&temp_v4,(unsigned int *)&temp_v5,(unsigned int *)&temp_v6,(unsigned int *)&temp_v7,(unsigned int *)&temp_v8);
     if (temp_v2 < 0) {
-      FUN_002c52f8();
+      asdFatalError();
     }
     nn_os_SharedMemoryBlock_AttachAndMap(param_1 + 0xb,temp_v3,0x2b0,1);
     temp_v2 = param_1[0xd];

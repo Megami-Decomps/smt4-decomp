@@ -8,7 +8,7 @@ int CONCAT44(double, double);
 int FUN_002a8a58(...);
 int FUN_002b7064(void);
 int FUN_002b70cc(void);
-int FUN_002b90f8(...);
+int cameraSetViewMatrix(...);
 int FUN_002ba12c(...);
 int FUN_002c1ac8(...);
 int FUN_002c1b64(...);
@@ -48,7 +48,7 @@ extern float DAT_004efd34; /* 0x4efd34 */
 /* Supplied declaration required: FUN_002a8a58. */
 /* Supplied declaration required: FUN_002b7064. */
 /* Supplied declaration required: FUN_002b70cc. */
-/* Supplied declaration required: FUN_002b90f8. */
+/* Supplied declaration required: cameraSetViewMatrix. */
 /* Supplied declaration required: FUN_002ba12c. */
 extern int __cxa_guard_acquire(unsigned int *);
 extern unsigned int FUN_002c15ac(unsigned int);
@@ -340,7 +340,7 @@ unsigned int FUN_002a8ac4(unsigned short *param_1,unsigned int *param_2,int para
   }
   FUN_002c1ac8(puVar13,puVar14,puVar11,puVar12);
   if (temp_v2) {
-    FUN_002b90f8(g_titleScene,temp_v22);
+    cameraSetViewMatrix(g_titleScene,temp_v22);
   }
   return 1;
 }

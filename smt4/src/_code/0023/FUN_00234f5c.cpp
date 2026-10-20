@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0028c640(unsigned int, int, unsigned int *);
+int nodeSetTranslation(unsigned int, int, unsigned int *);
 int asdMdlManagerCreateLoaded(unsigned char [128], int);
 int FUN_002a0428(void);
 int FUN_002a04f0(int);
@@ -21,7 +21,7 @@ extern unsigned char LAB_0023522c; /* 0x23522c */
 extern unsigned char LAB_0023523c; /* 0x23523c */
 
 extern int FUN_00100c4c(int, unsigned char *);
-/* Supplied declaration required: FUN_0028c640. */
+/* Supplied declaration required: nodeSetTranslation. */
 /* Supplied declaration required: asdMdlManagerCreateLoaded. */
 /* Supplied declaration required: FUN_002a0428. */
 /* Supplied declaration required: FUN_002a04f0. */
@@ -162,7 +162,7 @@ void FUN_00234f5c(unsigned int *param_1,unsigned int param_2,int param_3)
     param_1[0x596] = param_1[0x59c];
     param_1[0x597] = param_1[0x59d];
     param_1[0x598] = param_1[0x59e];
-    FUN_0028c640(*(unsigned int *)(param_1[8] + 8),0,param_1 + 0x596);
+    nodeSetTranslation(*(unsigned int *)(param_1[8] + 8),0,param_1 + 0x596);
   }
   return;
 }

@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } void_stack;
 
-extern int FUN_002499b4(void);
+extern int btlMainFindActiveEntry(void);
 /* Supplied declaration required: FUN_002499fc. */
 extern unsigned int FUN_00249a54(void);
 /* Supplied declaration required: scrSetResult. */
@@ -77,7 +77,7 @@ unsigned int FUN_002ff624(void)
   temp_v2 = btlGetMainState();
   if (*(char *)(temp_v2 + 0x49c5) != '\0') {
     btlGetMainState();
-    temp_v2 = FUN_002499b4();
+    temp_v2 = btlMainFindActiveEntry();
     if (((temp_v2 != 0) && (*(unsigned short *)(temp_v2 + 0xce) == temp_v0)) &&
        (*(short *)(temp_v2 + temp_v6 * 2 + 0x72) == temp_v3)) {
       scrSetResult(1);

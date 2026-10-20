@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_00195fc8(void);
+int sysFatalBreak(void);
 int software_interrupt(int);
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_00195fc8. */
+/* Supplied declaration required: sysFatalBreak. */
 
 
 int FUN_001a0d70(int *param_1)
@@ -24,7 +24,7 @@ int FUN_001a0d70(int *param_1)
   else {
     software_interrupt(0x23);
     if (temp_v0 < 0) {
-      FUN_00195fc8();
+      sysFatalBreak();
     }
     *param_1 = 0;
   }

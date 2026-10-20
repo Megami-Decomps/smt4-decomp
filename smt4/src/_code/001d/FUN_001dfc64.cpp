@@ -5,9 +5,9 @@
 extern "C" {
 
 int aocHandleButtons(...);
-int FUN_002ae898(...);
+int asdTMTexTableReleaseNode(...);
 int FUN_002ae8e4(...);
-int FUN_002b8e84(...);
+int eventQueueAddUnique(...);
 int jobStop(...);
 int FUN_002c58c8(...);
 int VectorSignedToFloat(...);
@@ -57,12 +57,12 @@ extern int FUN_00293a04(int, unsigned int);
 extern unsigned int FUN_00294090(int, unsigned int);
 extern int FUN_00294fe0(unsigned int);
 extern int FUN_0029505c(unsigned int);
-extern int FUN_00296d6c(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002ae898. */
+extern int randBetween(unsigned int, unsigned int);
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
 /* Supplied declaration required: FUN_002ae8e4. */
 extern int FUN_002ae98c(unsigned int, unsigned int, unsigned int, unsigned int);
 extern int FUN_002b8660(void);
-/* Supplied declaration required: FUN_002b8e84. */
+/* Supplied declaration required: eventQueueAddUnique. */
 extern int jobGetWork(void);
 extern int FUN_002c1d5c(void);
 /* Supplied declaration required: jobStop. */
@@ -142,7 +142,7 @@ unsigned int FUN_001dfc64(fn_001dfc64_arg0 *param_1)
       return 0;
     }
     *(unsigned int *)(temp_v0 + 0xc) = 0;
-    temp_v1 = FUN_00296d6c(0,4);
+    temp_v1 = randBetween(0,4);
     temp_v7 = VectorSignedToFloat(temp_v1 << 2,(unsigned char)(in_fpscr >> 0x16) & 3);
     *(unsigned int *)(temp_v0 + 0x58) = temp_v7;
     return 0;
@@ -179,7 +179,7 @@ unsigned int FUN_001dfc64(fn_001dfc64_arg0 *param_1)
   }
   if (*(char *)(temp_v0 + 100) != '\0') {
     if (*(char *)(temp_v0 + 0x70) == '\0') {
-      FUN_002b8e84(0x1000171);
+      eventQueueAddUnique(0x1000171);
       *(unsigned char *)(temp_v0 + 0x70) = 1;
     }
     *(int *)(temp_v0 + 0x6c) = (*(int *)(temp_v0 + 0x6c) + 1) % 0x96;
@@ -199,7 +199,7 @@ unsigned int FUN_001dfc64(fn_001dfc64_arg0 *param_1)
     if (((*(float *)(temp_v0 + 0x2c) != temp_v6) &&
         (temp_v8 = *(float *)(temp_v0 + 0x2c) - 0.166f, *(float *)(temp_v0 + 0x2c) = temp_v8, temp_v8 <= temp_v6)
         ) && (*(float *)(temp_v0 + 0x2c) = temp_v6, -1 < *(int *)(temp_v0 + 0x44))) {
-      FUN_002ae898(*(unsigned int *)(temp_v0 + 0x3c));
+      asdTMTexTableReleaseNode(*(unsigned int *)(temp_v0 + 0x3c));
       *(unsigned int *)(temp_v0 + 0x44) = 0xffffffff;
     }
     return 0;
@@ -213,7 +213,7 @@ unsigned int FUN_001dfc64(fn_001dfc64_arg0 *param_1)
     else {
       if (*(char *)(temp_v0 + 0x71) == '\0') {
         *(unsigned char *)(temp_v0 + 0x71) = 1;
-        FUN_002b8e84(0x1000172);
+        eventQueueAddUnique(0x1000172);
       }
       temp_v5 = *(float *)(temp_v0 + 0x24) + *(float *)(temp_v0 + 0x28);
       *(float *)(temp_v0 + 0x24) = temp_v5;
@@ -246,7 +246,7 @@ unsigned int FUN_001dfc64(fn_001dfc64_arg0 *param_1)
   if (((*(float *)(temp_v0 + 0x2c) != temp_v6) &&
       (temp_v8 = *(float *)(temp_v0 + 0x2c) - 0.166f, *(float *)(temp_v0 + 0x2c) = temp_v8, temp_v8 <= temp_v6))
      && (*(float *)(temp_v0 + 0x2c) = temp_v6, -1 < *(int *)(temp_v0 + 0x44))) {
-    FUN_002ae898(*(unsigned int *)(temp_v0 + 0x3c));
+    asdTMTexTableReleaseNode(*(unsigned int *)(temp_v0 + 0x3c));
     *(unsigned int *)(temp_v0 + 0x44) = 0xffffffff;
   }
   return 0;

@@ -7,10 +7,10 @@ extern "C" {
 int asdProcessCreateSimple(...);
 int taskCreateDraw(...);
 int asdMemoryAlloc(int, int, int, int, int);
-int FUN_001cd24c(unsigned int *);
-int FUN_0031a400(void);
-int FUN_00342010(void);
-int FUN_003fd63c(...);
+int wordTripleClear(unsigned int *);
+int campCommonBgAcquire(void);
+int campButtonHelpAcquire(void);
+int gameFlagSetValue(...);
 int VectorSignedToFloat(int, int);
 
 /* stack frame of param_1: 4 slot(s), 16 byte(s) */
@@ -38,12 +38,12 @@ extern unsigned int *DAT_00589170; /* 0x589170 */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAlloc. */
 extern int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001cd24c. */
+/* Supplied declaration required: wordTripleClear. */
 extern int jyoucyuGetLevel(void);
-/* Supplied declaration required: FUN_0031a400. */
-/* Supplied declaration required: FUN_00342010. */
-/* Supplied declaration required: FUN_003fd63c. */
-extern int FUN_0046c458(unsigned int, unsigned int);
+/* Supplied declaration required: campCommonBgAcquire. */
+/* Supplied declaration required: campButtonHelpAcquire. */
+/* Supplied declaration required: gameFlagSetValue. */
+extern int aocHasType36(unsigned int, unsigned int);
 
 
 void FUN_002a1358(unsigned char *param_1)
@@ -81,7 +81,7 @@ void FUN_002a1358(unsigned char *param_1)
   puVar1[0x17] = 2;
   *(unsigned short *)(puVar1 + 0x13) = 0;
   *(unsigned short *)((int)puVar1 + 0x4e) = 0;
-  FUN_001cd24c(puVar1 + 0x14);
+  wordTripleClear(puVar1 + 0x14);
   puVar1[0x10] = temp_v2;
   puVar1[0x11] = temp_v2;
   *(unsigned char *)((int)puVar1 + 0x5a) = 0;
@@ -123,16 +123,16 @@ void FUN_002a1358(unsigned char *param_1)
     temp_v1 = VectorSignedToFloat((int)*(short *)(temp_v0 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
     puVar1[0xd] = temp_v2;
     puVar1[0xe] = temp_v1;
-    FUN_00342010();
-    FUN_0031a400();
+    campButtonHelpAcquire();
+    campCommonBgAcquire();
     *(unsigned char *)((int)puVar1 + 0x61) = 1;
   }
-  temp_v0 = FUN_0046c458(g_aocSystem,0x534);
+  temp_v0 = aocHasType36(g_aocSystem,0x534);
   if (temp_v0 != 0) {
-    FUN_003fd63c(0x534,1,1);
+    gameFlagSetValue(0x534,1,1);
   }
   else {
-    FUN_003fd63c(0x534,0,1);
+    gameFlagSetValue(0x534,0,1);
   }
   *(unsigned char *)(puVar1 + 1) = 0;
   if (param_1 != (unsigned char *)0x0) {

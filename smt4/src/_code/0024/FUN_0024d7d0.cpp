@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00269bd0(int, unsigned int);
 int FUN_00269bf0(void);
 int FUN_002bd06c(unsigned int);
-int FUN_002bf694(unsigned short *, unsigned int);
+int libc_strcpy(unsigned short *, unsigned int);
 int memClear(unsigned short *, int);
 int rt_memcpy_w(unsigned short *, int, int);
 
@@ -21,7 +21,7 @@ typedef struct {
 extern int FUN_00295c60(unsigned short, unsigned char);
 extern int FUN_0029c8f4(int);
 /* Supplied declaration required: FUN_002bd06c. */
-/* Supplied declaration required: FUN_002bf694. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -73,7 +73,7 @@ void FUN_0024d7d0(unsigned short *param_1,int param_2)
   rt_memcpy_w(param_1 + 0x24,param_2 + 0x34,temp_v3 << 1);
   temp_v4 = (unsigned int)*(unsigned short *)(param_2 + 0x46);
   FUN_002bd06c(temp_v4);
-  FUN_002bf694(param_1 + 0x2ce,temp_v4);
+  libc_strcpy(param_1 + 0x2ce,temp_v4);
   if ((short)param_1[0xd] >= 1000) {
     param_1[0xd] = 999;
   }

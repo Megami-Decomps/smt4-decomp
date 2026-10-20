@@ -17,7 +17,7 @@ extern unsigned char LAB_00123718; /* 0x123718 */
 
 /* Supplied declaration required: FUN_00103a74. */
 /* Supplied declaration required: FUN_002e7908. */
-extern int FUN_002e92dc(int, unsigned char *);
+extern int wstrstrU16(int, unsigned char *);
 
 
 void FUN_0012369c(unsigned int param_1,int param_2,int param_3,unsigned int param_4)
@@ -40,7 +40,7 @@ void FUN_0012369c(unsigned int param_1,int param_2,int param_3,unsigned int para
   temp_v5 = param_4;
   if (*(int *)(param_2 + 0x60) != 0) {
     if (param_3 != 0) {
-      temp_v0 = FUN_002e92dc(*(int *)(param_2 + 0x60),&LAB_00123718);
+      temp_v0 = wstrstrU16(*(int *)(param_2 + 0x60),&LAB_00123718);
       if ((temp_v0 != 0) && (temp_v1 = *(int *)(param_2 + 0x60), temp_v1 != temp_v0)) {
         temp_v4 = (temp_v0 - temp_v1) >> 1;
         temp_v3 = 0;

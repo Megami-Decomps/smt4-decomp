@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_00163aa4(...);
-int FUN_001846d0(...);
-int FUN_00184b80(...);
+int uiSpriteSelectAnim(...);
+int pairSetFirstResetSecond(...);
 int SBORROW4(int, int);
 
 /* stack frame of param_1: 4 slot(s), 16 byte(s) */
@@ -19,8 +19,8 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_00163aa4. */
-/* Supplied declaration required: FUN_001846d0. */
-/* Supplied declaration required: FUN_00184b80. */
+/* Supplied declaration required: uiSpriteSelectAnim. */
+/* Supplied declaration required: pairSetFirstResetSecond. */
 extern int FUN_00291e14(void);
 
 
@@ -126,7 +126,7 @@ void FUN_002b1838(int param_1)
             FUN_00163aa4();
             FUN_00163aa4();
             if ((*(char *)(temp_v2 + 0x1112) != '\0') && (*(int *)(temp_v2 + 0x59c) == 6)) {
-              FUN_001846d0(temp_v2 + 0x598,0);
+              uiSpriteSelectAnim(temp_v2 + 0x598,0);
             }
           }
         }
@@ -138,9 +138,9 @@ void FUN_002b1838(int param_1)
     if (0 < *(short *)(param_1 + 0x2448)) {
       do {
         temp_v1 = param_1 + temp_v9 * 0x8c;
-        FUN_001846d0(temp_v1 + 0xb10,6);
-        FUN_001846d0(temp_v1 + 0x1088,4);
-        FUN_001846d0(temp_v1 + 0x598,0);
+        uiSpriteSelectAnim(temp_v1 + 0xb10,6);
+        uiSpriteSelectAnim(temp_v1 + 0x1088,4);
+        uiSpriteSelectAnim(temp_v1 + 0x598,0);
         temp_v9 = temp_v9 + 1;
       } while (temp_v9 < *(short *)(param_1 + 0x2448));
     }
@@ -149,10 +149,10 @@ void FUN_002b1838(int param_1)
       do {
         temp_v3 = (*(short *)(param_1 + 0x2448) - temp_v9) - 1;
         temp_v1 = param_1 + temp_v3 * 0x8c;
-        FUN_00184b80(temp_v1 + 0x598,6);
-        FUN_001846d0(temp_v1 + 0x598,1);
-        FUN_001846d0(temp_v1 + 0xb10,6);
-        FUN_001846d0(temp_v1 + 0x1088,4);
+        pairSetFirstResetSecond(temp_v1 + 0x598,6);
+        uiSpriteSelectAnim(temp_v1 + 0x598,1);
+        uiSpriteSelectAnim(temp_v1 + 0xb10,6);
+        uiSpriteSelectAnim(temp_v1 + 0x1088,4);
         if ((temp_v3 < 10) && (temp_v1 = param_1 + temp_v3 * 2, *(short *)(temp_v1 + 0x24a0) < 0)) {
           *(unsigned short *)(temp_v1 + 0x24a0) = 0;
         }
@@ -346,9 +346,9 @@ LAB_002b2058:
     if (0 < temp_v0) {
       do {
         temp_v1 = param_1 + temp_v9 * 0x8c;
-        FUN_001846d0(temp_v1 + 0xb10,6);
-        FUN_001846d0(temp_v1 + 0x1088,4);
-        FUN_001846d0(temp_v1 + 0x598,0);
+        uiSpriteSelectAnim(temp_v1 + 0xb10,6);
+        uiSpriteSelectAnim(temp_v1 + 0x1088,4);
+        uiSpriteSelectAnim(temp_v1 + 0x598,0);
         temp_v9 = temp_v9 + 1;
       } while (temp_v9 < *(short *)(param_1 + 0x2448));
     }
@@ -356,10 +356,10 @@ LAB_002b2058:
       temp_v9 = 0;
       do {
         temp_v1 = param_1 + ((*(short *)(param_1 + 0x2448) - temp_v9) - 1) * 0x8c;
-        FUN_00184b80(temp_v1 + 0x598,6);
-        FUN_001846d0(temp_v1 + 0x598,1);
-        FUN_001846d0(temp_v1 + 0xb10,6);
-        FUN_001846d0(temp_v1 + 0x1088,4);
+        pairSetFirstResetSecond(temp_v1 + 0x598,6);
+        uiSpriteSelectAnim(temp_v1 + 0x598,1);
+        uiSpriteSelectAnim(temp_v1 + 0xb10,6);
+        uiSpriteSelectAnim(temp_v1 + 0x1088,4);
         temp_v9 = temp_v9 + 1;
       } while (temp_v9 < *(short *)(param_1 + 0x244a));
     }
@@ -440,7 +440,7 @@ LAB_002b2058:
       else {
         if (temp_v0 < 0xf) {
           if (temp_v0 == 1) {
-            FUN_001846d0(param_1 + temp_v9 * 0x8c + 0x1600,0xb);
+            uiSpriteSelectAnim(param_1 + temp_v9 * 0x8c + 0x1600,0xb);
           }
           if (*(short *)(temp_v1 + 0x24a0) == 0) {
             if (*piVar14 != 0) {
@@ -457,7 +457,7 @@ LAB_002b2058:
               }
               temp_v2 = param_1 + temp_v9 * 0x8c + 0x20;
             }
-            FUN_00184b80(temp_v2,temp_v5);
+            pairSetFirstResetSecond(temp_v2,temp_v5);
           }
         }
         else if (temp_v0 == 0xf) {
@@ -475,7 +475,7 @@ LAB_002b2058:
             }
             temp_v2 = param_1 + temp_v9 * 0x8c + 0x20;
           }
-          FUN_00184b80(temp_v2,temp_v5);
+          pairSetFirstResetSecond(temp_v2,temp_v5);
         }
         FUN_00163aa4(param_1 + temp_v9 * 0x8c + 0x1600);
       }

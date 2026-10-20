@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c3944(void);
+int rt_memclr(void);
 int asdMemAlloc(int, int, int, int, int);
 int asdTMTexTableLoadSprites(int);
 int asdTMTexTableLoadTmx(int, int);
@@ -18,7 +18,7 @@ extern signed char DAT_0044e158; /* 0x44e158 */
 extern int DAT_0044e15c; /* 0x44e15c */
 extern int DAT_0044e160; /* 0x44e160 */
 
-/* Supplied declaration required: FUN_002c3944. */
+/* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: asdTMTexTableLoadSprites. */
 /* Supplied declaration required: asdTMTexTableLoadTmx. */
@@ -37,13 +37,13 @@ void FUN_00223b84(void)
       temp_v0 = 0x100;
       asdMemAlloc(0x100,0x100,0,0x266,1);
       DAT_0044e15c = temp_v0;
-      FUN_002c3944();
+      rt_memclr();
     }
     if (DAT_0044e160 == 0) {
       temp_v0 = 0x100;
       asdMemAlloc(0x100,0x100,0,0x81,1);
       DAT_0044e160 = temp_v0;
-      FUN_002c3944();
+      rt_memclr();
     }
   }
   DAT_0044e158 = DAT_0044e158 + '\x01';

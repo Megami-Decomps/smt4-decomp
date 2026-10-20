@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern Sub68Owner *DAT_00587f28;
+extern Sub68Owner *g_naviMain;
 
 u32 FUN_00492c70(void)
 {
-    return DAT_00587f28->unk34;
+    return g_naviMain->unk34;
 }
 
 } /* extern "C" */

@@ -8,10 +8,10 @@ int FUN_00100388(int, int [19], unsigned int *);
 int FUN_00152f44(void);
 int FUN_00180118(unsigned int *);
 int FUN_00184310(void);
-int FUN_0018719c(...);
+int gameFlagIsSet(...);
 int dataTableGetCount(unsigned int);
 int dataTableGetEntries(void);
-int FUN_0019cac4(void);
+int dataTable00FindById(void);
 int SBORROW4(...);
 int rt_memcpy(int [19], int, int);
 
@@ -32,17 +32,17 @@ extern unsigned char DAT_005f190c; /* 0x5f190c */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_00100388. */
-extern int FUN_0014bef4(unsigned int);
+extern int randRange(unsigned int);
 /* Supplied declaration required: FUN_00152f44. */
 extern int saveSlotFindSelected(void);
 /* Supplied declaration required: FUN_00180118. */
-extern int FUN_001801a4(void);
+extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00184310. */
 extern unsigned int dataTableGet(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0018719c. */
+/* Supplied declaration required: gameFlagIsSet. */
 /* Supplied declaration required: dataTableGetCount. */
 /* Supplied declaration required: dataTableGetEntries. */
-/* Supplied declaration required: FUN_0019cac4. */
+/* Supplied declaration required: dataTable00FindById. */
 extern int FUN_002a4b28(unsigned short);
 extern int FUN_002d8b58(unsigned int, unsigned short);
 extern int FUN_004bb80c(unsigned int);
@@ -73,10 +73,10 @@ void FUN_00294cfc(unsigned int param_1)
   
   FUN_00152f44();
   if ((((*g_popupState == 0) && (temp_v0 = saveSlotFindSelected(), temp_v0 != 0)) &&
-      ((temp_v1 = FUN_0018719c(0x1a2), temp_v1 == 0 || (temp_v1 = FUN_0014bef4(99), temp_v1 + 1 >= 0x33))))
-     && (temp_v1 = FUN_0018719c(0x15), temp_v1 != 0)) {
+      ((temp_v1 = gameFlagIsSet(0x1a2), temp_v1 == 0 || (temp_v1 = randRange(99), temp_v1 + 1 >= 0x33))))
+     && (temp_v1 = gameFlagIsSet(0x15), temp_v1 != 0)) {
     temp_v1 = FUN_004bb80c(param_1);
-    temp_v2 = FUN_001801a4();
+    temp_v2 = gameGetPlayerData();
     temp_v7 = (unsigned int)*(unsigned short *)(temp_v2 + 0x62);
     temp_v2 = 0;
     temp_v9[0] = temp_v7 - 6;
@@ -86,11 +86,11 @@ void FUN_00294cfc(unsigned int param_1)
       if (temp_v3 == 0) {
         puVar14 = (unsigned int *)(unsigned int)*(unsigned short *)(temp_v6 + 0x14);
         puVar8 = puVar14;
-        FUN_0019cac4();
+        dataTable00FindById();
         puVar11 = puVar14;
         FUN_00184310();
         if (((*(unsigned short *)((int)puVar11 + 10) & 1) != 0) &&
-           (puVar11 = puVar14, FUN_0019cac4(), (*(unsigned short *)((int)puVar11 + 0x16) & 4) != 0)) {
+           (puVar11 = puVar14, dataTable00FindById(), (*(unsigned short *)((int)puVar11 + 0x16) & 4) != 0)) {
           temp_v3 = 0;
           do {
             puVar11 = &g_gameState + temp_v3;
@@ -140,9 +140,9 @@ LAB_00294e4c:
           puVar13 = (unsigned int *)(temp_v2 + temp_v7 * 0x20);
         }
         if ((((puVar13[1] == 10) && (*puVar13 == (unsigned int)*(unsigned short *)(temp_v0 + 300))) &&
-            (((short)puVar13[2] == 0 || (temp_v2 = FUN_0018719c(), temp_v2 != 0)))) &&
-           (((*(short *)((int)puVar13 + 10) == 0 || (temp_v2 = FUN_0018719c(), temp_v2 == 0)) &&
-            (temp_v2 = FUN_0014bef4(99), piVar1 = g_popupState, temp_v2 + 1 <= (int)(short)puVar13[3])))
+            (((short)puVar13[2] == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 != 0)))) &&
+           (((*(short *)((int)puVar13 + 10) == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 == 0)) &&
+            (temp_v2 = randRange(99), piVar1 = g_popupState, temp_v2 + 1 <= (int)(short)puVar13[3])))
            ) break;
         temp_v7 = temp_v7 + 1;
         if (temp_v1 <= (int)temp_v7) {

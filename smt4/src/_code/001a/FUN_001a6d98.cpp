@@ -31,7 +31,7 @@ typedef struct {
 } void_stack;
 
 extern unsigned char LAB_001a7270; /* 0x1a7270 */
-extern int DAT_0043dd50; /* 0x43dd50 */
+extern int g_uiQuest; /* 0x43dd50 */
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -49,8 +49,8 @@ extern int FUN_0029efc0(int);
 extern unsigned int FUN_002bcddc(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: FUN_002be624. */
-extern int FUN_002bed98(int);
-extern int FUN_002beda4(int);
+extern int vec2GetYInt(int);
+extern int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf4f8. */
@@ -78,9 +78,9 @@ void FUN_001a6d98(void)
   unsigned int in_fpscr;
   unsigned char temp_v13 [84];
   
-  temp_v0 = DAT_0043dd50;
-  temp_v1 = FUN_002beda4(DAT_0043dd50 + 0x34);
-  temp_v2 = FUN_002bed98(temp_v0 + 0x34);
+  temp_v0 = g_uiQuest;
+  temp_v1 = vec2GetXInt(g_uiQuest + 0x34);
+  temp_v2 = vec2GetYInt(temp_v0 + 0x34);
   if (*(char *)(temp_v0 + 0x5c4) != '\0') {
     temp_v3 = temp_v0 + 0x5fc;
     temp_v12 = temp_v0 + 0x6c4;
@@ -169,8 +169,8 @@ void FUN_001a6d98(void)
       FUN_002bf288(2,0x29,0xad,temp_v5,temp_v4,0xa1);
     }
     temp_v4 = FUN_002bf4f8(0x29,0xac);
-    temp_v5 = FUN_002beda4(temp_v0 + 0x14c);
-    temp_v8 = FUN_002bed98(temp_v0 + 0x14c);
+    temp_v5 = vec2GetXInt(temp_v0 + 0x14c);
+    temp_v8 = vec2GetYInt(temp_v0 + 0x14c);
     temp_v12 = g_titleScene;
     piVar12 = (int *)(g_titleScene + 0x130c);
     temp_v9 = piVar12[*piVar12 + 2];

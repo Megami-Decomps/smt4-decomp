@@ -4,16 +4,16 @@
 
 extern "C" {
 
-int FUN_00300900(int, int);
-int FUN_00300934(int, int *);
+int streamExtractU8(int, int);
+int streamReadWord(int, int *);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_00300900. */
-/* Supplied declaration required: FUN_00300934. */
+/* Supplied declaration required: streamExtractU8. */
+/* Supplied declaration required: streamReadWord. */
 
 
 void FUN_00306ce4(int param_1,int param_2)
@@ -25,8 +25,8 @@ void FUN_00306ce4(int param_1,int param_2)
   *(unsigned char *)(param_2 + 4) = 0;
   temp_v0 = 0;
   if ((*(char *)(param_1 + 0x3b) == '\0') &&
-     (FUN_00300900(param_1,param_2 + 4), *(char *)(param_1 + 4) == '\0')) {
-    FUN_00300934(param_1,&temp_v0);
+     (streamExtractU8(param_1,param_2 + 4), *(char *)(param_1 + 4) == '\0')) {
+    streamReadWord(param_1,&temp_v0);
   }
   return;
 }

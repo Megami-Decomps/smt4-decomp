@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int *DAT_005738e8; /* 0x5738e8 */
+extern int *g_btlHelp; /* 0x5738e8 */
 
 extern int FUN_001632fc(void);
 
@@ -15,7 +15,7 @@ unsigned int FUN_004c8a9c(void)
   int temp_v0;
   int temp_v1;
   
-  temp_v1 = *DAT_005738e8;
+  temp_v1 = *g_btlHelp;
   do {
     temp_v0 = temp_v1;
     if (temp_v0 == 0) {

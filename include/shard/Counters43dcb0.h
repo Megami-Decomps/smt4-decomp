@@ -1,4 +1,4 @@
-/* The counter block referenced from DAT_0043dcb0 + 4. */
+/* The counter block referenced from g_ifTouch + 4. */
 #ifndef SHARD_COUNTERS43DCB0_H
 #define SHARD_COUNTERS43DCB0_H
 
@@ -26,6 +26,6 @@ typedef struct Holder43dcb0 {
     /* 0x4 */ Counters43dcb0 *counters;
 } Holder43dcb0;
 
-extern Holder43dcb0 DAT_0043dcb0;
+extern Holder43dcb0 g_ifTouch;
 
 #endif

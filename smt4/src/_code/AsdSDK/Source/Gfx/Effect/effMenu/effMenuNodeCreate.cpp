@@ -4,7 +4,7 @@
 extern "C" {
 
 void *memAlloc(int, int, int, int size, int align, int);
-void FUN_002bf694(char *dst, const char *src);
+void libc_strcpy(char *dst, const char *src);
 
 /* Creates a menu effect node named `name`. */
 EffMenuNode *effMenuNodeCreate(const char *name)
@@ -21,7 +21,7 @@ EffMenuNode *effMenuNodeCreate(const char *name)
     node->unk10 = 0;
     node->unk0c = 0;
     node->unk18 = 0;
-    FUN_002bf694(node->name, name);
+    libc_strcpy(node->name, name);
     return node;
 }
 

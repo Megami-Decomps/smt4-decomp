@@ -3,7 +3,7 @@
 extern "C" {
 
 extern s32 FUN_00224880(u32 job);
-extern u8 *FUN_0036d18c(u32 index);
+extern u8 *dataTable15Sub0FindEntry(u32 index);
 extern void FUN_0019de98(u8 *obj, u32 color);
 extern void sysPlaySe(u32 id);
 extern void FUN_002277d8(void);
@@ -15,7 +15,7 @@ u32 jobSceneWaitStep(JobScene *scene)
 
     if (FUN_00224880(scene->job) == 2) {
         scene->unk144 = 1;
-        u8 *obj = FUN_0036d18c(0x34);
+        u8 *obj = dataTable15Sub0FindEntry(0x34);
         FUN_0019de98(obj, 0xF4F4F4FF);
         sysPlaySe(0x10D);
         FUN_002277d8();

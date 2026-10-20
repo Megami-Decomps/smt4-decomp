@@ -15,12 +15,12 @@ typedef struct {
 extern int FUN_0023dcb8(void);
 extern int FUN_00292914(int);
 /* Supplied declaration required: FUN_00292960. */
-extern int padIsButtonDown(void);
+extern int flagBitIsSet(void);
 extern int FUN_00293988(void);
 /* Supplied declaration required: btlGetMainState. */
-extern int FUN_002a8740(void);
-extern int FUN_002a8764(void);
-extern int FUN_002c09d0(void);
+extern int gameGetUnitRecord(void);
+extern int gameGetSlotTable(void);
+extern int gameFlagIsSet(void);
 
 
 char FUN_00330f80(int param_1,int param_2,unsigned int param_3,unsigned int param_4)
@@ -37,7 +37,7 @@ char FUN_00330f80(int param_1,int param_2,unsigned int param_3,unsigned int para
   
   temp_v4 = 0;
   temp_v5 = param_1;
-  temp_v0 = FUN_002a8764();
+  temp_v0 = gameGetSlotTable();
   temp_v2 = 0;
   do {
     pcVar2 = (char *)(temp_v2 & 0xff);
@@ -45,11 +45,11 @@ char FUN_00330f80(int param_1,int param_2,unsigned int param_3,unsigned int para
     temp_v3 = 0;
     if ((*(int *)(param_1 + 0x305c) != 0) &&
        (-1 < *(char *)(*(int *)(param_1 + 0x305c) + temp_v0 + 0x9107))) {
-      temp_v3 = FUN_002a8740();
+      temp_v3 = gameGetUnitRecord();
     }
     if (((((pcVar2 != (char *)0x0) && (pcVar2[1] == '\x01')) &&
-         ((*(short *)(pcVar2 + 0x5c) == 0 || (temp_v1 = FUN_002c09d0(), temp_v1 != 0)))) &&
-        ((*(short *)(pcVar2 + 0x5e) == 0 || (temp_v1 = padIsButtonDown(), temp_v1 != 0)))) &&
+         ((*(short *)(pcVar2 + 0x5c) == 0 || (temp_v1 = gameFlagIsSet(), temp_v1 != 0)))) &&
+        ((*(short *)(pcVar2 + 0x5e) == 0 || (temp_v1 = flagBitIsSet(), temp_v1 != 0)))) &&
        ((pcVar2[0x5b] == '\0' ||
         (temp_v1 = btlGetMainState(), (*(unsigned int *)(temp_v1 + 0x44a0) & 0x40000) == 0)))) {
       if (*pcVar2 != '\x05') {

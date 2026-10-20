@@ -15,7 +15,7 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: coproc_movefrom_User_R_Thread_and_Process_ID (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-extern unsigned int *FUN_002ad264(void);
+extern unsigned int *nn_gxlow_CTR_GetGpu(void);
 /* Supplied declaration required: FUN_002c2424. */
 
 
@@ -42,7 +42,7 @@ unsigned int FUN_002c2390(int param_1)
   }
   temp_v3 = *(int *)(param_1 + 0x2c);
   temp_v2 = *(unsigned int *)(param_1 + (unsigned int)(*(char *)(param_1 + 0x30) != '\0') * 4 + 0x1f8);
-  puVar1 = (unsigned int *)FUN_002ad264();
+  puVar1 = (unsigned int *)nn_gxlow_CTR_GetGpu();
   temp_v1 = coproc_movefrom_User_R_Thread_and_Process_ID();
   *(unsigned int *)(temp_v1 + 0x80) = 0x80082;
   *(unsigned int *)(temp_v1 + 0x90) = 0xffff8001;

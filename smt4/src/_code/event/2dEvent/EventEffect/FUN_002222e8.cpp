@@ -17,7 +17,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } void_stack;
 
-extern int DAT_0043dee8; /* 0x43dee8 */
+extern int g_eventEffect; /* 0x43dee8 */
 extern unsigned int DAT_0043df00; /* 0x43df00 */
 extern int DAT_0043df04; /* 0x43df04 */
 extern unsigned int DAT_0043df0c; /* 0x43df0c */
@@ -44,8 +44,8 @@ unsigned char FUN_002222e8(void)
   int *piVar5;
   int temp_v4;
   
-  temp_v0 = DAT_0043dee8;
-  if (*(char *)(DAT_0043dee8 + 0x18) != '\0') {
+  temp_v0 = g_eventEffect;
+  if (*(char *)(g_eventEffect + 0x18) != '\0') {
     FUN_002bed3c();
     FUN_002c39a4(g_titleScene);
     temp_v4 = g_titleScene;

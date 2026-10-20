@@ -35,13 +35,13 @@ extern unsigned char LAB_002d0adc; /* 0x2d0adc */
 extern unsigned char LAB_002d0b08; /* 0x2d0b08 */
 extern unsigned char LAB_002d13d0; /* 0x2d13d0 */
 extern unsigned char LAB_002d13ec; /* 0x2d13ec */
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern int g_mapDepartWork; /* 0x58069c */
 extern int DAT_005f1bdc; /* 0x5f1bdc */
 
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_00178b04. */
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_001cd3ec. */
 extern int mapTableGetValue(int);
 /* Supplied declaration required: FUN_003fd76c. */
@@ -107,10 +107,10 @@ unsigned int FUN_002d06f8(void)
                    *(unsigned int *)(*(int *)(g_mapDepartWork + 0x14) + 0xc));
       moriModelContentCreateBody(*(unsigned int *)(g_mapDepartWork + 0xc),0);
       temp_v3 = *(unsigned int *)(*(int *)(g_mapDepartWork + 0xc) + 4);
-      FUN_0040ace8(DAT_0056fcc0,temp_v3);
+      FUN_0040ace8(g_handleRegistry,temp_v3);
       FUN_003fd924(temp_v3,0,2);
       FUN_003fd7c0(temp_v3,0,2);
-      temp_v2 = FUN_0018719c(0x8a);
+      temp_v2 = gameFlagIsSet(0x8a);
       if (((temp_v2 != 0) && (*(short *)(g_mapDepartWork + 0x20) == 0x27)) &&
          ((temp_v0 = *(short *)(g_mapDepartWork + 0x22), temp_v0 == 6 || temp_v0 == 7 ||
           ((((temp_v0 == 8 || temp_v0 == 9 || (temp_v0 == 10 || temp_v0 == 0xb)) ||
@@ -118,11 +118,11 @@ unsigned int FUN_002d06f8(void)
            ((temp_v0 == 2 || temp_v0 == 3 || (temp_v0 == 4 || temp_v0 == 5)))))))) {
         FUN_003fda08(temp_v3,1,2);
       }
-      temp_v2 = FUN_0018719c(0x170);
+      temp_v2 = gameFlagIsSet(0x170);
       if ((temp_v2 != 0) && (*(short *)(g_mapDepartWork + 0x20) == 0x14)) {
         FUN_003fda08(temp_v3,1,2);
       }
-      temp_v2 = FUN_0018719c(0x184);
+      temp_v2 = gameFlagIsSet(0x184);
       if ((((((temp_v2 == 0) || (*(short *)(g_mapDepartWork + 0x20) != 0x1a)) ||
             ((*(short *)(g_mapDepartWork + 0x22) == 2 &&
              (FUN_003fd7c0(temp_v3,1,2), *(short *)(g_mapDepartWork + 0x20) != 0x1a)))) ||
@@ -163,10 +163,10 @@ LAB_002d0a48:
       FUN_0040aad4(*(unsigned int *)(g_mapDepartWork + 0x10),0);
       temp_v3 = *(unsigned int *)(*(int *)(g_mapDepartWork + 0x10) + 4);
       FUN_003fe86c(temp_v3,0,2);
-      if ((*(int *)(g_mapDepartWork + 0x1c) == 0xd) && (temp_v2 = FUN_0018719c(0x184), temp_v2 != 0)) {
+      if ((*(int *)(g_mapDepartWork + 0x1c) == 0xd) && (temp_v2 = gameFlagIsSet(0x184), temp_v2 != 0)) {
         FUN_003fd7c0(temp_v3,1,2);
       }
-      FUN_0040ace8(DAT_0056fcc0,temp_v3);
+      FUN_0040ace8(g_handleRegistry,temp_v3);
       if (*(short *)(g_mapDepartWork + 4) == 0x1a) {
         temp_v0 = *(short *)(g_mapDepartWork + 6);
         temp_v9 = (unsigned int)temp_v4;
@@ -249,10 +249,10 @@ LAB_002d0a48:
         FUN_0040aad4(*(unsigned int *)(g_mapDepartWork + 0x10),0);
         temp_v3 = *(unsigned int *)(*(int *)(g_mapDepartWork + 0x10) + 4);
         FUN_003fe86c(temp_v3,0,2);
-        if ((*(int *)(g_mapDepartWork + 0x1c) == 0xd) && (temp_v2 = FUN_0018719c(0x184), temp_v2 != 0)) {
+        if ((*(int *)(g_mapDepartWork + 0x1c) == 0xd) && (temp_v2 = gameFlagIsSet(0x184), temp_v2 != 0)) {
           FUN_003fd7c0(temp_v3,1,2);
         }
-        FUN_0040ace8(DAT_0056fcc0,temp_v3);
+        FUN_0040ace8(g_handleRegistry,temp_v3);
       }
       if (*(short *)(g_mapDepartWork + 4) == 0x1a) {
         temp_v0 = *(short *)(g_mapDepartWork + 6);
@@ -322,10 +322,10 @@ LAB_002d0a48:
                  *(unsigned int *)(*(int *)(g_mapDepartWork + 0x14) + 0xc));
     moriModelContentCreateBody(*(unsigned int *)(g_mapDepartWork + 0xc),0);
     temp_v3 = *(unsigned int *)(*(int *)(g_mapDepartWork + 0xc) + 4);
-    FUN_0040ace8(DAT_0056fcc0,temp_v3);
+    FUN_0040ace8(g_handleRegistry,temp_v3);
     FUN_003fd924(temp_v3,0,2);
     FUN_003fd7c0(temp_v3,0,2);
-    temp_v2 = FUN_0018719c(0x8a);
+    temp_v2 = gameFlagIsSet(0x8a);
     if (((temp_v2 != 0) && (*(short *)(g_mapDepartWork + 0x20) == 0x27)) &&
        ((((temp_v0 = *(short *)(g_mapDepartWork + 0x22), temp_v0 == 6 || temp_v0 == 7 ||
           (temp_v0 == 8 || temp_v0 == 9)) || (temp_v0 == 10 || temp_v0 == 0xb)) ||
@@ -333,11 +333,11 @@ LAB_002d0a48:
         ))) {
       FUN_003fda08(temp_v3,1,2);
     }
-    temp_v2 = FUN_0018719c(0x170);
+    temp_v2 = gameFlagIsSet(0x170);
     if ((temp_v2 != 0) && (*(short *)(g_mapDepartWork + 0x20) == 0x14)) {
       FUN_003fda08(temp_v3,1,2);
     }
-    temp_v2 = FUN_0018719c(0x184);
+    temp_v2 = gameFlagIsSet(0x184);
     if ((((temp_v2 == 0) || (*(short *)(g_mapDepartWork + 0x20) != 0x1a)) ||
         (((*(short *)(g_mapDepartWork + 0x22) == 2 &&
           (FUN_003fd7c0(temp_v3,1,2), *(short *)(g_mapDepartWork + 0x20) != 0x1a)) ||
@@ -372,7 +372,7 @@ LAB_002d0a48:
   *(unsigned int *)(g_mapDepartWork + 0xc) = temp_v3;
   temp_v1 = (int)*(short *)(temp_v2 + 0x20);
   FUN_00100388(temp_v8,&LAB_002d13d0,temp_v1,temp_v1,(int)*(short *)(temp_v2 + 0x22));
-  temp_v2 = FUN_0018719c(0x9d);
+  temp_v2 = gameFlagIsSet(0x9d);
   if ((((temp_v2 != 0) && (*(short *)(g_mapDepartWork + 0x20) == 0x27)) &&
       ((*(short *)(g_mapDepartWork + 0x22) != 1 ||
        (FUN_00100388(temp_v8,&LAB_002d13d0,0x27,0x27,0xf),
@@ -417,7 +417,7 @@ LAB_002d0a48:
   *(unsigned int *)(g_mapDepartWork + 0x14) = temp_v3;
   temp_v1 = (int)*(short *)(temp_v2 + 0x20);
   FUN_00100388(temp_v8,&LAB_002d13ec,temp_v1,temp_v1,(int)*(short *)(temp_v2 + 0x22));
-  temp_v2 = FUN_0018719c(0x9d);
+  temp_v2 = gameFlagIsSet(0x9d);
   if ((((((temp_v2 != 0) && (*(short *)(g_mapDepartWork + 0x20) == 0x27)) &&
         ((*(short *)(g_mapDepartWork + 0x22) != 1 ||
          (FUN_00100388(temp_v8,&LAB_002d13ec,0x27,0x27,0xf),

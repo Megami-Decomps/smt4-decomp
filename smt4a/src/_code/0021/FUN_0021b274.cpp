@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_00184758(int, int, unsigned int);
-int FUN_00184c00(...);
+int uiSpriteSetKeyframe(int, int, unsigned int);
+int uiSpriteSetImageKeyframe(...);
 
 typedef struct fn_0021b274_arg0 fn_0021b274_arg0;
 struct fn_0021b274_arg0 {
@@ -27,10 +27,10 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_3_stack;
 
-extern int DAT_0057f108; /* 0x57f108 */
+extern int g_camp; /* 0x57f108 */
 
-/* Supplied declaration required: FUN_00184758. */
-/* Supplied declaration required: FUN_00184c00. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 
 
 void FUN_0021b274(fn_0021b274_arg0 *param_1,short param_2,unsigned int param_3)
@@ -43,27 +43,27 @@ void FUN_0021b274(fn_0021b274_arg0 *param_1,short param_2,unsigned int param_3)
   short temp_v2;
   unsigned char *pbVar5;
   
-  temp_v0 = DAT_0057f108;
-  puVar3 = (unsigned int *)&DAT_0057f108;
-  pbVar5 = (unsigned char *)(DAT_0057f108 + 0x1b20);
+  temp_v0 = g_camp;
+  puVar3 = (unsigned int *)&g_camp;
+  pbVar5 = (unsigned char *)(g_camp + 0x1b20);
   if (!(param_1 == (fn_0021b274_arg0 *)0x1 || param_1 == (fn_0021b274_arg0 *)0x2)) {
     if (param_1 == (fn_0021b274_arg0 *)0x3 || param_1 == (fn_0021b274_arg0 *)0x4) {
-      if (DAT_0057f108 != 0) {
+      if (g_camp != 0) {
         puVar3 = (unsigned int *)(unsigned int)*pbVar5;
       }
-      if ((DAT_0057f108 != 0 && puVar3 != (unsigned int *)0x4) && puVar3 != (unsigned int *)0x3) {
-        FUN_00184c00(DAT_0057f108 + 0x1a08,0x18,0);
+      if ((g_camp != 0 && puVar3 != (unsigned int *)0x4) && puVar3 != (unsigned int *)0x3) {
+        uiSpriteSetImageKeyframe(g_camp + 0x1a08,0x18,0);
         temp_v1 = 3;
         *pbVar5 = temp_v1;
       }
     }
   }
   else {
-    if (DAT_0057f108 != 0) {
+    if (g_camp != 0) {
       puVar3 = (unsigned int *)(unsigned int)*pbVar5;
     }
-    if ((DAT_0057f108 != 0 && puVar3 != (unsigned int *)0x2) && puVar3 != (unsigned int *)0x1) {
-      FUN_00184c00(DAT_0057f108 + 0x1a08,0x17,0);
+    if ((g_camp != 0 && puVar3 != (unsigned int *)0x2) && puVar3 != (unsigned int *)0x1) {
+      uiSpriteSetImageKeyframe(g_camp + 0x1a08,0x17,0);
       temp_v1 = 1;
       *pbVar5 = temp_v1;
     }
@@ -86,14 +86,14 @@ void FUN_0021b274(fn_0021b274_arg0 *param_1,short param_2,unsigned int param_3)
       if (param_1 == (fn_0021b274_arg0 *)0x3 || param_1 == (fn_0021b274_arg0 *)0x4) {
         param_2 = 0x14;
       }
-      FUN_00184758(temp_v0 + 0x6e4,(int)temp_v2,param_3);
-      FUN_00184c00(temp_v0 + 0x6e4,(int)param_2,param_3);
+      uiSpriteSetKeyframe(temp_v0 + 0x6e4,(int)temp_v2,param_3);
+      uiSpriteSetImageKeyframe(temp_v0 + 0x6e4,(int)param_2,param_3);
       return;
     }
   }
   param_2 = 0x13;
-  FUN_00184758(temp_v0 + 0x6e4,(int)temp_v2,param_3);
-  FUN_00184c00(temp_v0 + 0x6e4,(int)param_2,param_3);
+  uiSpriteSetKeyframe(temp_v0 + 0x6e4,(int)temp_v2,param_3);
+  uiSpriteSetImageKeyframe(temp_v0 + 0x6e4,(int)param_2,param_3);
   return;
 }
 

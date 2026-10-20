@@ -6,11 +6,11 @@ extern "C" {
 
 int sysPlaySe(...);
 int FUN_00224880(unsigned int);
-int FUN_00275f44(unsigned int, int);
+int scrScriptProcessStartEntry(unsigned int, int);
 int FUN_00333dc8(int);
 int obj04Finish(void);
 int FUN_0037e078(void);
-int FUN_0039c388(void);
+int stateHolderEnterState7(void);
 int FUN_0039c448(void);
 int FUN_003a7b74(void);
 int FUN_003b0744(void);
@@ -18,14 +18,14 @@ int FUN_003b0744(void);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00224880. */
 extern int FUN_0026272c(void);
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_00333dc8. */
 /* Supplied declaration required: obj04Finish. */
 extern int stateHolderCountMinus1(void);
 extern int stateHolderStateIs8Or10(void);
 /* Supplied declaration required: FUN_0037e078. */
-/* Supplied declaration required: FUN_0039c388. */
+/* Supplied declaration required: stateHolderEnterState7. */
 extern unsigned short stateHolderGetCurrentEntry(void);
 extern int stateHolderStateIs0xD(void);
 /* Supplied declaration required: FUN_0039c448. */
@@ -48,7 +48,7 @@ unsigned int FUN_00417234(int param_1)
     FUN_0039c448();
     *(unsigned int *)(param_1 + 0xc) = 1;
   case 1:
-    FUN_00275f44(*(unsigned int *)(param_1 + 0x1c),0xf);
+    scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x1c),0xf);
     *(unsigned short *)(param_1 + 0x3a) = 0;
     sysPlaySe(0x69);
     *(unsigned int *)(param_1 + 0xc) = 2;
@@ -84,7 +84,7 @@ unsigned int FUN_00417234(int param_1)
     *(unsigned int *)(param_1 + 0x3c) = temp_v2;
     temp_v0 = stateHolderGetCurrentEntry();
     *(unsigned short *)(param_1 + 0x3a) = temp_v0;
-    FUN_00275f44(*(unsigned int *)(param_1 + 0x1c),0x11);
+    scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x1c),0x11);
     *(unsigned int *)(param_1 + 0xc) = 4;
   case 4:
     temp_v3 = FUN_00224880(*(unsigned int *)(param_1 + 0x1c));
@@ -124,7 +124,7 @@ unsigned int FUN_00417234(int param_1)
       return 0;
     }
     *(unsigned int *)(param_1 + 0x3c) = 0xffffffff;
-    FUN_00275f44(*(unsigned int *)(param_1 + 0x1c),0x10);
+    scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x1c),0x10);
     *(unsigned int *)(param_1 + 0xc) = 8;
   case 8:
     temp_v3 = FUN_00224880(*(unsigned int *)(param_1 + 0x1c));
@@ -143,7 +143,7 @@ unsigned int FUN_00417234(int param_1)
   default:
     return 0;
   }
-  FUN_0039c388();
+  stateHolderEnterState7();
   *(unsigned int *)(param_1 + 0xc) = 1;
   return 0;
 }

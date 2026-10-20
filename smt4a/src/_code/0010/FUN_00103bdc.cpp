@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002e95c4(...);
+int onlineUrlSetText(...);
 int FUN_002e9768(...);
-int FUN_002e97b4(...);
+int onlineSockAddrFormatIpv4(...);
 int FUN_002e9802(...);
 int wordRefsDiffer_002e9832(...);
 int FUN_002e98a4(...);
@@ -48,16 +48,16 @@ extern unsigned char LAB_00103e20; /* 0x103e20 */
 extern unsigned char LAB_00103e34; /* 0x103e34 */
 extern unsigned char LAB_00103e48; /* 0x103e48 */
 
-extern int FUN_002e783c(unsigned char *);
-/* Supplied declaration required: FUN_002e95c4. */
+extern int wstrlenU16(unsigned char *);
+/* Supplied declaration required: onlineUrlSetText. */
 /* Supplied declaration required: FUN_002e9768. */
-/* Supplied declaration required: FUN_002e97b4. */
+/* Supplied declaration required: onlineSockAddrFormatIpv4. */
 extern int wordRefsEqual_002e97e2(int *, void **);
 extern int wordRefsEqual_002e97f2(int *, void **);
 /* Supplied declaration required: FUN_002e9802. */
 /* Supplied declaration required: wordRefsDiffer_002e9832. */
 extern int wordRefsDiffer_002e9842(int *, void **);
-extern int FUN_002e9854(int, int);
+extern int onlineStringLess(int, int);
 /* Supplied declaration required: FUN_002e98a4. */
 
 
@@ -122,8 +122,8 @@ void FUN_00103bdc(fn_00103bdc_arg0 *param_1)
     FUN_002e9768(puVar9,0x400,&LAB_00103e0c,"address",&LAB_00103e04);
     puVar9 = puVar9 + (int)puVar14;
     puVar14 = temp_v17 + (int)puVar9 * 2;
-    FUN_002e97b4(param_1->field_0x4,puVar14,0x400 - (int)puVar9);
-    temp_v8 = FUN_002e783c(puVar14);
+    onlineSockAddrFormatIpv4(param_1->field_0x4,puVar14,0x400 - (int)puVar9);
+    temp_v8 = wstrlenU16(puVar14);
     puVar14 = puVar9 + temp_v8;
   }
   temp_v2 = ((temp_v5 || temp_v6) || temp_v4) || temp_v3;
@@ -174,7 +174,7 @@ void FUN_00103bdc(fn_00103bdc_arg0 *param_1)
             FUN_002e9802(&temp_v14);
           }
         }
-        FUN_002e95c4(param_1,temp_v17);
+        onlineUrlSetText(param_1,temp_v17);
         param_1->field_0x64 = 1;
         param_1->field_0x66 = 1;
         return;
@@ -191,7 +191,7 @@ void FUN_00103bdc(fn_00103bdc_arg0 *param_1)
     if (temp_v8 == 0) {
       temp_v10 = param_1->field_0x1c;
       temp_v8 = wordRefsEqual_002e97f2(&temp_v12,&temp_v10);
-      if ((temp_v8 != 0) || (temp_v8 = FUN_002e9854(temp_v11 + 0x10,temp_v12 + 0x10), temp_v8 != 0))
+      if ((temp_v8 != 0) || (temp_v8 = onlineStringLess(temp_v11 + 0x10,temp_v12 + 0x10), temp_v8 != 0))
       {
         temp_v9 = *(unsigned int *)(temp_v11 + 0x14);
         pvVar11 = *(void **)(temp_v11 + 0x1c);

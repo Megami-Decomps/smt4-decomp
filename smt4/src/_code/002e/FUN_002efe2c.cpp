@@ -8,10 +8,10 @@ int FUN_002efe2c(void)
 {
     int count;
 
-    if (DAT_0044e190 == NULL) {
+    if (g_statusDown == NULL) {
         return 0;
     }
-    count = FUN_0029ee54(DAT_0044e190->unk4D4);
+    count = FUN_0029ee54(g_statusDown->unk4D4);
     return count - 1;
 }
 

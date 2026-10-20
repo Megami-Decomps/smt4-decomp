@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00162e8c(void);
+int gameFlagsGetBlock(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -13,7 +13,7 @@ typedef struct {
 
 extern unsigned char g_gameState; /* 0x5f15fc */
 
-/* Supplied declaration required: FUN_00162e8c. */
+/* Supplied declaration required: gameFlagsGetBlock. */
 extern int FUN_001ba570(void);
 extern int FUN_001bd118(unsigned short);
 extern int FUN_003de830(unsigned short);
@@ -34,7 +34,7 @@ int FUN_002b9324(void)
   int temp_v5 [3];
   
   temp_v4 = 0;
-  FUN_00162e8c();
+  gameFlagsGetBlock();
   if ((*(signed char *)((unsigned char *)&g_gameState + 0xdc)) != '\0') {
     temp_v4 = 4;
   }

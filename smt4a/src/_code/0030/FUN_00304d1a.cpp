@@ -25,7 +25,7 @@ typedef struct {
 #endif
 /* Supplied declaration required: FUN_001344c4. */
 /* Supplied declaration required: FUN_001345a0. */
-extern int FUN_002ed28c(unsigned int, unsigned int *);
+extern int streamReadU32(unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_00303698. */
 /* Supplied declaration required: FUN_0030d02e. */
 /* Supplied declaration required: vectorTeardown_0030d03c. */
@@ -48,7 +48,7 @@ unsigned long long FUN_00304d1a(unsigned int param_1,int param_2,unsigned int pa
   temp_v4 = param_3;
   temp_v5 = param_4;
   FUN_0030d052(param_2);
-  temp_v0 = FUN_002ed28c(param_1,&temp_v2);
+  temp_v0 = streamReadU32(param_1,&temp_v2);
   if (temp_v0 != 0) {
     FUN_001345a0(param_2,temp_v2);
     for (temp_v1 = 0; temp_v1 < temp_v2; temp_v1 = temp_v1 + 1) {

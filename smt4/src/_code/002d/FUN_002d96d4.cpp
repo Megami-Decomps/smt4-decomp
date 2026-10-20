@@ -15,11 +15,11 @@ int FUN_0029f7d4(void);
 int FUN_002b066c(...);
 int FUN_002b6758(...);
 int FUN_002b6dd8(...);
-int FUN_002b9024(void);
+int devilGetRecord(void);
 int FUN_002bce30(...);
 int FUN_002bd068(...);
 int FUN_002bdf94(...);
-int FUN_002be304(...);
+int drawSetColorFromRGBA8(...);
 int FUN_002be5a4(...);
 int FUN_002be624(...);
 int FUN_002bed3c(void);
@@ -94,16 +94,16 @@ extern int FUN_002a0d0c(void);
 /* Supplied declaration required: FUN_002b066c. */
 /* Supplied declaration required: FUN_002b6758. */
 /* Supplied declaration required: FUN_002b6dd8. */
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: FUN_002bce30. */
 /* Supplied declaration required: FUN_002bd068. */
 /* Supplied declaration required: FUN_002bdf94. */
-/* Supplied declaration required: FUN_002be304. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002bed3c. */
-extern int FUN_002bed98(unsigned int *);
-extern int FUN_002beda4(unsigned int *);
+extern int vec2GetYInt(unsigned int *);
+extern int vec2GetXInt(unsigned int *);
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf4f8. */
@@ -196,7 +196,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
           if ((temp_v27 == 0) || (temp_v3 = FUN_0029efa8(temp_v21), temp_v3 != temp_v4)) {
             temp_v3 = (int)temp_v22 + temp_v4;
             psVar8 = (short *)(unsigned int)*(unsigned short *)((int)puVar4 + temp_v3 * 2 + 0x6278);
-            FUN_002b9024();
+            devilGetRecord();
             temp_v25 = 0;
             if (temp_v26 != 0) {
               temp_v13 = 0;
@@ -257,7 +257,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
                                 (unsigned char)(in_fpscr >> 0x16) & 3);
             FUN_002be5a4(2,temp_v24,temp_v20,(int)*(short *)(temp_v13 + 8));
             temp_v13 = FUN_002bf4f8(0x24,0xf7);
-            FUN_002be304(temp_v5);
+            drawSetColorFromRGBA8(temp_v5);
             FUN_002bdf94(0,(int)&param_1->field_0x0 +
                            (int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v13 + 8),
                          (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v13 + 10) + param_2,1,2,
@@ -299,7 +299,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
       temp_v4 = FUN_0029efc0(temp_v21);
       temp_v13 = FUN_0029efa8(temp_v21);
       psVar8 = (short *)(unsigned int)*(unsigned short *)((int)puVar4 + (temp_v13 + temp_v4) * 2 + 0x6278);
-      FUN_002b9024();
+      devilGetRecord();
       if (temp_v27 != 0) {
         temp_v25 = 0;
         if (temp_v26 != 0) {
@@ -354,9 +354,9 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
                      (int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v13 + 8),
                      (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v13 + 10) + param_2,
                      (int)**(short **)(temp_v13 + 0xc),(int)(*(short **)(temp_v13 + 0xc))[1],1);
-        temp_v4 = FUN_002bed98(puVar4 + 0x2c);
+        temp_v4 = vec2GetYInt(puVar4 + 0x2c);
         temp_v0 = *(short *)(temp_v3 + 10);
-        temp_v13 = FUN_002beda4(puVar4 + 0x2c);
+        temp_v13 = vec2GetXInt(puVar4 + 0x2c);
         FUN_002bf288(2,0x24,0x3e,(int)&param_1->field_0x0 + *(short *)(temp_v3 + 8) + temp_v13,
                      temp_v4 + param_2 + (int)temp_v0,0x83);
         temp_v4 = g_titleScene;
@@ -407,7 +407,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
                             (unsigned char)(in_fpscr >> 0x16) & 3);
         FUN_002be5a4(3,temp_v9,temp_v20,(int)*(short *)(temp_v4 + 8));
         temp_v4 = FUN_002bf4f8(0x24,0xfd);
-        FUN_002be304(temp_v5);
+        drawSetColorFromRGBA8(temp_v5);
         FUN_002bdf94(0,(int)&param_1->field_0x0 +
                        (int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v4 + 8),
                      (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v3 + 10) + param_2,1,2,0x83,
@@ -457,7 +457,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
         do {
           temp_v4 = temp_v3 + temp_v13;
           puVar10 = (unsigned short *)(unsigned int)*(unsigned short *)((int)puVar4 + temp_v4 * 2 + 0x6278);
-          FUN_002b9024();
+          devilGetRecord();
           temp_v25 = 0;
           if (temp_v26 != 0) {
             temp_v10 = 0;
@@ -498,15 +498,15 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
             (**(romwright_code **)(temp_v10 + 0x12c8))();
             *(unsigned char *)(temp_v10 + 0x12c4) = 0;
           }
-          FUN_002be304(0xffffffff);
+          drawSetColorFromRGBA8(0xffffffff);
           if (temp_v25 != 0) {
-            FUN_002be304(0xff);
+            drawSetColorFromRGBA8(0xff);
             FUN_002bf538();
           }
           else {
             temp_v6 = FUN_0029dde0();
             if (temp_v6 < *(unsigned char *)((int)puVar10 + 3)) {
-              FUN_002be304(0x5a5a5aff);
+              drawSetColorFromRGBA8(0x5a5a5aff);
               FUN_002bf538();
             }
           }
@@ -590,7 +590,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
                               (unsigned char)(in_fpscr >> 0x16) & 3);
           FUN_002be5a4(2,0xffffffff,temp_v20,(int)*(short *)(temp_v7 + 8));
           temp_v4 = FUN_002bf4f8(0x24,0xdf);
-          FUN_002be304(temp_v9);
+          drawSetColorFromRGBA8(temp_v9);
           FUN_002bdf94(0,(int)&param_1->field_0x0 +
                          (int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v7 + 8),
                        (int)*(short *)(temp_v7 + 10) + (int)*(short *)(temp_v4 + 10) + param_2,1,2,0x6f
@@ -629,7 +629,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
       if (0 < temp_v4) {
         do {
           puVar10 = (unsigned short *)(unsigned int)*(unsigned short *)((int)puVar4 + (temp_v3 + temp_v13) * 2 + 0x6278);
-          FUN_002b9024();
+          devilGetRecord();
           temp_v4 = FUN_002bf4f8(0x24,temp_v13 + 0xe3);
           temp_v10 = FUN_002bf4f8(0x24,0xdb);
           temp_v7 = FUN_0029ea68(*puVar10);

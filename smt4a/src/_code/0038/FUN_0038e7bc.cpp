@@ -6,7 +6,7 @@ extern "C" {
 
 int CONCAT44(...);
 int FUN_001a1ee0(void);
-int FUN_001acf08(void);
+int effGetFrameStep(void);
 int FUN_001bc460(void);
 int FUN_0027134c(int, float *);
 int FUN_002fe2e8(int, float *);
@@ -71,7 +71,7 @@ static float romwright_sqrt_4(float value)
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
 /* Supplied declaration required: FUN_001a1ee0. */
-/* Supplied declaration required: FUN_001acf08. */
+/* Supplied declaration required: effGetFrameStep. */
 /* Supplied declaration required: FUN_001bc460. */
 /* Supplied declaration required: FUN_0027134c. */
 /* Supplied declaration required: FUN_002fe2e8. */
@@ -125,7 +125,7 @@ void FUN_0038e7bc(int param_1)
   char temp_v27 [4];
   float temp_v28;
   
-  temp_v1 = FUN_001acf08();
+  temp_v1 = effGetFrameStep();
   temp_v2 = *(unsigned int *)(param_1 + 0xc);
   pfVar10 = *(float **)(param_1 + 0x20);
   temp_v7 = *(unsigned int *)(param_1 + 4);
@@ -215,7 +215,7 @@ void FUN_0038e7bc(int param_1)
             pfVar7[7] = temp_v9 * temp_v8;
             pfVar7[7] = temp_v9 * temp_v8 + pfVar8[0xe];
             FUN_0027134c(param_1,pfVar7);
-            temp_v3 = FUN_001acf08();
+            temp_v3 = effGetFrameStep();
             pfVar7[4] = (float)(temp_v3 + (int)temp_v20);
           }
           else if (temp_v24 != 0) {
@@ -379,7 +379,7 @@ void FUN_0038e7bc(int param_1)
             pfVar7[7] = temp_v20 * temp_v8 + pfVar8[0xe];
             if (temp_v27[0] != '\0') {
               FUN_00321e98(param_1,pfVar7);
-              temp_v3 = FUN_001acf08();
+              temp_v3 = effGetFrameStep();
               pfVar7[4] = (float)(temp_v3 + (int)pfVar7[4]);
             }
             temp_v24 = temp_v24 - 1;

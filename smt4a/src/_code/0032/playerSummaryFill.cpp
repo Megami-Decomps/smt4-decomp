@@ -7,12 +7,12 @@ typedef struct Block21D90 {
     /* 0x21D90 */ u32 unk21D90;
 } Block21D90;
 
-extern SummarySource *FUN_001ab888(void);
-extern Block21D90 *FUN_0014af84(void);
-extern u8 FUN_0031cf94(void);
-extern void FUN_0031f0a8(u8 id, s32 value);
+extern SummarySource *gameGetSlotTable(void);
+extern Block21D90 *gameDataBlocksGetSaveData(void);
+extern u8 gameDataBlocksGetFlagByte(void);
+extern void gameDataBlocksSetFlagBits(u8 id, s32 value);
 extern u32 gameDataBlocksGetWord27E90(void);
-extern u8 FUN_0018719c(u32 id);
+extern u8 gameFlagIsSet(u32 id);
 extern Lookup62_64 *saveSlotFindSelected(void);
 extern Lookup62_64 *FUN_00228ab0(s32 index);
 extern s32 wstrlen(const u16 *str);
@@ -21,19 +21,19 @@ extern void FUN_002e59f8(const u16 *src, u16 *dst, u32 size);
 /* Fills the player summary from the party data; stats and name already set are kept. */
 void playerSummaryFill(PlayerSummary *summary)
 {
-    SummarySource *party = FUN_001ab888();
+    SummarySource *party = gameGetSlotTable();
     Lookup62_64 *entry;
     Lookup62_64 *member;
     Block21D90 *block;
     s32 i;
 
     summary->unk36 = party->unk66;
-    block = FUN_0014af84();
+    block = gameDataBlocksGetSaveData();
     summary->unk28 = block->unk21D90;
-    summary->unk20 = FUN_0031cf94();
-    FUN_0031f0a8(0x10, 1);
-    if (FUN_0018719c(0x581) != 0) {
-        FUN_0031f0a8(4, 1);
+    summary->unk20 = gameDataBlocksGetFlagByte();
+    gameDataBlocksSetFlagBits(0x10, 1);
+    if (gameFlagIsSet(0x581) != 0) {
+        gameDataBlocksSetFlagBits(4, 1);
     }
     summary->unk30 = gameDataBlocksGetWord27E90();
     summary->unk38 = party->unk2C4C;

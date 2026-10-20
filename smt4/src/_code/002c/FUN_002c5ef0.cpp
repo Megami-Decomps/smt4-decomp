@@ -21,8 +21,8 @@ struct Table002c5ef0 {
     /* 0x200 */ Slot002c5ef0 slots[400];
 };
 
-Entry002c5ef0 *FUN_002b63c0(u32 index);
-Table002c5ef0 *FUN_002adc88(void);
+Entry002c5ef0 *dataTable1bOr1cGetRecord(u32 index);
+Table002c5ef0 *gameGetFlagBlock(void);
 
 s32 FUN_002c5ef0(void)
 {
@@ -31,13 +31,13 @@ s32 FUN_002c5ef0(void)
     s32 i;
 
     for (i = 0; i < 400; i++) {
-        Entry002c5ef0 *entry = FUN_002b63c0((u16)i);
+        Entry002c5ef0 *entry = dataTable1bOr1cGetRecord((u16)i);
 
         if (entry != NULL && (entry->flags & 0x80)) {
             u16 index = i;
 
             active++;
-            if (FUN_002adc88()->slots[index].marked) {
+            if (gameGetFlagBlock()->slots[index].marked) {
                 marked++;
             }
         }

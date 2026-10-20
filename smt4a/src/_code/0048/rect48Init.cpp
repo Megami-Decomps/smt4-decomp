@@ -9,11 +9,11 @@ typedef struct Rect48 {
     /* 0xAC */ u32 unkAC;
 } Rect48;
 
-extern void FUN_004853fc(Rect48 *obj, s32 state);
+extern void stateSetterEnterState(Rect48 *obj, s32 state);
 
 void rect48Init(Rect48 *obj)
 {
-    FUN_004853fc(obj, 1);
+    stateSetterEnterState(obj, 1);
     obj->unkA4 = 0x140;
     obj->unkA8 = 0;
     obj->unkAC = 0x140;

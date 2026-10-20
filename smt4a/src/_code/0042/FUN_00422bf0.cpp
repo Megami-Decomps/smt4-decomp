@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_001bcd48(int, int);
+int svcSleepThread(int, int);
 int FUN_001c76b8(void);
 int FUN_00422c48(unsigned int);
 
 extern signed char DAT_005880d0; /* 0x5880d0 */
 
-/* Supplied declaration required: FUN_001bcd48. */
+/* Supplied declaration required: svcSleepThread. */
 /* Supplied declaration required: FUN_001c76b8. */
 /* Supplied declaration required: FUN_00422c48. */
 
@@ -26,7 +26,7 @@ void FUN_00422bf0(unsigned int param_1)
   while (temp_v0) {
     FUN_00422c48(param_1);
     FUN_001c76b8();
-    FUN_001bcd48(500000,0);
+    svcSleepThread(500000,0);
     temp_v0 = DAT_005880d0 != '\0';
   }
   return;

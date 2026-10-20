@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern PanelRef DAT_0057f588;
+extern PanelRef g_messageMain;
 
 void FUN_003c5fc4(u8 value)
 {
-    if (DAT_0057f588.panel != NULL) {
-        DAT_0057f588.panel->unk2F = value;
+    if (g_messageMain.panel != NULL) {
+        g_messageMain.panel->unk2F = value;
     }
 }
 

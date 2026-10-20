@@ -11,14 +11,14 @@ typedef struct {
     u8 flag;            /* 0x1b6d */
 } GameBlock;
 
-extern GameBlock *DAT_0057f108;
+extern GameBlock *g_camp;
 
-int FUN_001641c4(void);
+int ifTouchRegionRemove(void);
 
-/* Empties the three slots' id tables, running FUN_001641c4 four times per slot, then clears the flag. */
+/* Empties the three slots' id tables, running ifTouchRegionRemove four times per slot, then clears the flag. */
 void FUN_0026f0c4(void)
 {
-    GameBlock *block = DAT_0057f108;
+    GameBlock *block = g_camp;
     int i;
 
     for (i = 0; i < 3; i++) {
@@ -26,10 +26,10 @@ void FUN_0026f0c4(void)
         block->rest[i][0] = -1;
         block->rest[i][1] = -1;
         block->rest[i][2] = -1;
-        FUN_001641c4();
-        FUN_001641c4();
-        FUN_001641c4();
-        FUN_001641c4();
+        ifTouchRegionRemove();
+        ifTouchRegionRemove();
+        ifTouchRegionRemove();
+        ifTouchRegionRemove();
     }
     block->flag = 0;
 }

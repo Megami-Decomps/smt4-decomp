@@ -16,7 +16,7 @@ int FUN_002302d8(...);
 int FUN_00231240(...);
 int FUN_00233240(unsigned int *, int);
 int FUN_00296e90(void);
-int FUN_00296f4c(unsigned int, unsigned int);
+int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int FUN_0029ee6c(...);
 int FUN_002bf818(...);
 
@@ -38,17 +38,17 @@ extern unsigned char LAB_003a3798; /* 0x3a3798 */
 /* Supplied declaration required: FUN_002302d8. */
 /* Supplied declaration required: FUN_00231240. */
 /* Supplied declaration required: FUN_00233240. */
-extern unsigned int FUN_00290d74(unsigned int, unsigned char *);
+extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 extern int FUN_00290e78(void);
 extern int FUN_00290e9c(void);
 extern int FUN_00290eb0(void);
 /* Supplied declaration required: FUN_00296e90. */
-/* Supplied declaration required: FUN_00296f4c. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002973d8(void);
 /* Supplied declaration required: FUN_0029cc44. */
 /* Supplied declaration required: FUN_0029ee6c. */
-extern unsigned int FUN_002bed98(unsigned int *);
-extern unsigned int FUN_002beda4(unsigned int *);
+extern unsigned int vec2GetYInt(unsigned int *);
+extern unsigned int vec2GetXInt(unsigned int *);
 /* Supplied declaration required: FUN_002bf818. */
 
 
@@ -67,16 +67,16 @@ void FUN_003a3354(unsigned int *param_1,unsigned int param_2,unsigned int param_
   temp_v4 = param_4;
   if (temp_v0 == 0) {
     if ((*param_1 & 4) != 0) {
-      temp_v1 = FUN_00290d74(param_1[0x58],&LAB_003a377c);
-      FUN_00296f4c(param_1[0x5a],temp_v1);
+      temp_v1 = tableGroupFindEntryIndex(param_1[0x58],&LAB_003a377c);
+      scrScriptProcessStartEntry(param_1[0x5a],temp_v1);
     }
     else if (*(char *)((int)param_1 + 0x1d) != '\0') {
-      temp_v1 = FUN_00290d74(param_1[0x58],&LAB_003a3788);
-      FUN_00296f4c(param_1[0x5a],temp_v1);
+      temp_v1 = tableGroupFindEntryIndex(param_1[0x58],&LAB_003a3788);
+      scrScriptProcessStartEntry(param_1[0x5a],temp_v1);
     }
     else {
-      temp_v1 = FUN_00290d74(param_1[0x58],&LAB_003a3798);
-      FUN_00296f4c(param_1[0x5a],temp_v1);
+      temp_v1 = tableGroupFindEntryIndex(param_1[0x58],&LAB_003a3798);
+      scrScriptProcessStartEntry(param_1[0x5a],temp_v1);
     }
     FUN_0019e0c0(param_1[0x5a]);
     *param_1 = *param_1 | 4;
@@ -92,8 +92,8 @@ void FUN_003a3354(unsigned int *param_1,unsigned int param_2,unsigned int param_
       FUN_0019e0c0(param_1[0x5a]);
       FUN_0019e0c0(param_1[0x5b]);
       FUN_002bf818(puVar5);
-      temp_v1 = FUN_002bed98(puVar5);
-      temp_v2 = FUN_002beda4(puVar5);
+      temp_v1 = vec2GetYInt(puVar5);
+      temp_v2 = vec2GetXInt(puVar5);
       FUN_00231240(param_1 + 0xe0,temp_v2,temp_v1);
       if (*(char *)((int)param_1 + 0x4de) != '\0') {
         temp_v3 = FUN_00290eb0();
@@ -134,8 +134,8 @@ void FUN_003a3354(unsigned int *param_1,unsigned int param_2,unsigned int param_
     FUN_0019e0c0(param_1[0x5a]);
     FUN_0019e0c0(param_1[0x5b]);
     FUN_002bf818(puVar5);
-    temp_v1 = FUN_002bed98(puVar5);
-    temp_v2 = FUN_002beda4(puVar5);
+    temp_v1 = vec2GetYInt(puVar5);
+    temp_v2 = vec2GetXInt(puVar5);
     FUN_00231240(param_1 + 0xe0,temp_v2,temp_v1);
     if (*(char *)((int)param_1 + 0x4de) != '\0') {
       *param_1 = *param_1 & 0xfffff0ff;

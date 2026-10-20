@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0036fad8(int);
 
-extern int FUN_002deb84(void);
+extern int scrGetCommandFrame(void);
 extern int FUN_002e58d8(void);
 extern int FUN_0031cb5c(void);
 /* Supplied declaration required: FUN_0036fad8. */
@@ -18,7 +18,7 @@ unsigned int FUN_0031a3a0(void)
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_002deb84();
+  temp_v0 = scrGetCommandFrame();
   if (temp_v0 != 0) {
     temp_v0 = FUN_002e58d8();
     if (temp_v0 == 0) {

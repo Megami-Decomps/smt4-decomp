@@ -9,7 +9,7 @@ int FUN_002bb140(int);
 int FUN_002bb150(int, int);
 int FUN_002bb180(void);
 int FUN_002bb194(int);
-int FUN_002bb308(void);
+int nn_applet_CTR_detail_CloseSession(void);
 int FUN_002bb378(void);
 int FUN_002bbb2c(...);
 int FUN_002c1148(int, int);
@@ -23,7 +23,7 @@ extern unsigned int FUN_0011d744(unsigned char *, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bb150. */
 /* Supplied declaration required: FUN_002bb180. */
 /* Supplied declaration required: FUN_002bb194. */
-/* Supplied declaration required: FUN_002bb308. */
+/* Supplied declaration required: nn_applet_CTR_detail_CloseSession. */
 /* Supplied declaration required: FUN_002bb378. */
 /* Supplied declaration required: FUN_002bbb2c. */
 /* Supplied declaration required: FUN_002c1148. */
@@ -45,7 +45,7 @@ unsigned int nn_applet_CTR_detail_CloseApplication(unsigned char *param_1,unsign
       FUN_002bb378();
       temp_v0 = 1;
       FUN_0011d888();
-      FUN_002bb308();
+      nn_applet_CTR_detail_CloseSession();
       if ((temp_v0 != -0x375f3010 && temp_v0 != -0x1f5f33f8) && temp_v0 != -0x375f33fe) break;
       FUN_002bb150(10000000,0);
     }
@@ -58,7 +58,7 @@ unsigned int nn_applet_CTR_detail_CloseApplication(unsigned char *param_1,unsign
   while( 1 ) {
     FUN_002bb378();
     temp_v1 = FUN_0011d744(param_1,param_2,param_3);
-    FUN_002bb308();
+    nn_applet_CTR_detail_CloseSession();
     if ((temp_v1 != 0xc8a0cff0 && temp_v1 != 0xe0a0cc08) && temp_v1 != 0xc8a0cc02) break;
     FUN_002bb150(10000000,0);
   }

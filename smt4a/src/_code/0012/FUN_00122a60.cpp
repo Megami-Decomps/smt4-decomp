@@ -8,7 +8,7 @@ int FUN_0010a0c4(unsigned int, int);
 int FUN_0010d128(int, unsigned char *, int [2]);
 int FUN_002ea2a8(...);
 int FUN_002ea2b4(int, unsigned int);
-int FUN_002ea2d2(unsigned char [8]);
+int ptrHolderDestroy(unsigned char [8]);
 
 extern unsigned char LAB_00122799; /* 0x122799 */
 extern unsigned char DAT_0055b300; /* 0x55b300 */
@@ -17,12 +17,12 @@ extern unsigned int *initVtable00558510(void);
 extern unsigned int constructObj00558838(int, int);
 /* Supplied declaration required: FUN_0010a0c4. */
 /* Supplied declaration required: FUN_0010d128. */
-extern int FUN_002e760a(unsigned int);
+extern int operatorNew(unsigned int);
 extern int FUN_002e7908(unsigned int *, unsigned int *);
 extern unsigned int FUN_002ea268(void);
 /* Supplied declaration required: FUN_002ea2a8. */
 /* Supplied declaration required: FUN_002ea2b4. */
-/* Supplied declaration required: FUN_002ea2d2. */
+/* Supplied declaration required: ptrHolderDestroy. */
 extern unsigned int FUN_002ea704(void);
 
 
@@ -58,15 +58,15 @@ int FUN_00122a60(void)
   FUN_0010a0c4(temp_v1,0);
   aiStack_28[0] = temp_v3;
   FUN_0010d128(temp_v3,&LAB_00122799,aiStack_28);
-  temp_v2 = FUN_002e760a(0x1c);
+  temp_v2 = operatorNew(0x1c);
   temp_v1 = 0;
   if (temp_v2 != 0) {
     temp_v1 = FUN_002ea268();
   }
   temp_v1 = FUN_002ea2a8(temp_v4,temp_v1);
   FUN_002ea2b4(temp_v0,temp_v1);
-  FUN_002ea2d2(temp_v4);
-  temp_v2 = FUN_002e760a(8);
+  ptrHolderDestroy(temp_v4);
+  temp_v2 = operatorNew(8);
   temp_v1 = 0;
   if (temp_v2 != 0) {
     temp_v1 = constructObj00558838(temp_v2,temp_v3);

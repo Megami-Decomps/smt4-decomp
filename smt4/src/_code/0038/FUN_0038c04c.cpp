@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_001a9f28(void);
+int bufferPairFree(void);
 int asdMemFree(unsigned int);
 
 extern unsigned char DAT_0042221c; /* 0x42221c */
 
-/* Supplied declaration required: FUN_001a9f28. */
+/* Supplied declaration required: bufferPairFree. */
 /* Supplied declaration required: asdMemFree. */
 
 
@@ -19,7 +19,7 @@ unsigned int * FUN_0038c04c(unsigned int *param_1)
 /* irregular: 2 native warning(s); review required */
   *param_1 = (unsigned int)&DAT_0042221c;
   if (param_1[2] != 0) {
-    FUN_001a9f28();
+    bufferPairFree();
     asdMemFree(param_1[2]);
     param_1[2] = 0;
   }

@@ -12,7 +12,7 @@ int FUN_002907c4(...);
 int FUN_0029ee6c(int, int);
 int FUN_002ae038(...);
 int FUN_002b6758(...);
-int FUN_002be304(...);
+int drawSetColorFromRGBA8(...);
 int FUN_002be5a4(...);
 int FUN_002be624(...);
 int FUN_002bed3c(void);
@@ -77,7 +77,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_0029ee6c. */
 /* Supplied declaration required: FUN_002ae038. */
 /* Supplied declaration required: FUN_002b6758. */
-/* Supplied declaration required: FUN_002be304. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002bed3c. */
@@ -87,7 +87,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002bf538. */
 extern int dataTableGetEntries(void);
 /* Supplied declaration required: dataTableGet. */
-extern int FUN_002c30c4(unsigned char *);
+extern int libc_strlen(unsigned char *);
 extern int FUN_002c5d80(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
@@ -273,7 +273,7 @@ unsigned int FUN_00214a60(void)
           FUN_0025086c(temp_v10 % 10,temp_v32);
           puStack_120 = temp_v32;
           FUN_002be624(temp_v27,&LAB_00215490,temp_v28,temp_v33,temp_v30,temp_v31);
-          temp_v9 = FUN_002c30c4(temp_v27);
+          temp_v9 = libc_strlen(temp_v27);
           VectorSignedToFloat((int)**(short **)(temp_v23 + 0xc) - (temp_v9 * 9) / 2,
                               (unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat((int)*(short *)(temp_v23 + 10) + (int)*(short *)(temp_v6 + 10),
@@ -316,7 +316,7 @@ unsigned int FUN_00214a60(void)
           if (*(short *)(temp_v17 + 0x2b2) != 0) {
             temp_v9 = g_saveLoadUI + temp_v4 * 4;
             FUN_002bf288(2,0x36,0x6e,*(unsigned int *)(temp_v9 + 0x68),(int)*(short *)(temp_v6 + 10),2);
-            FUN_002be304(0x72e02700);
+            drawSetColorFromRGBA8(0x72e02700);
             temp_v7 = (unsigned int)*(unsigned short *)(temp_v17 + 0x2b2);
             temp_v14 = (temp_v7 + 1) / 1000;
             temp_v8 = (temp_v14 * -1000 + 1 + temp_v7) / 100;

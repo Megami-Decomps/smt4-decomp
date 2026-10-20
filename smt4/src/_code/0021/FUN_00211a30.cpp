@@ -8,7 +8,7 @@ int FUN_00295660(unsigned int, unsigned char [132]);
 int FUN_0029ede8(unsigned int, unsigned int, unsigned int, int);
 int FUN_002bd06c(unsigned int);
 int FUN_002be650(unsigned int, int);
-int FUN_002bf694(unsigned char [132], unsigned int);
+int libc_strcpy(unsigned char [132], unsigned int);
 int memClear(unsigned char [132], int);
 
 extern unsigned int FUN_0028e934(int, unsigned int);
@@ -18,7 +18,7 @@ extern unsigned int scrGetArg(unsigned int);
 extern unsigned int FUN_002bce00(unsigned int);
 /* Supplied declaration required: FUN_002bd06c. */
 /* Supplied declaration required: FUN_002be650. */
-/* Supplied declaration required: FUN_002bf694. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: memClear. */
 
 
@@ -48,7 +48,7 @@ unsigned int FUN_00211a30(void)
   case 0x22:
   case 0x23:
     FUN_002be650(temp_v1,1);
-    FUN_002bf694(temp_v3,temp_v1);
+    libc_strcpy(temp_v3,temp_v1);
     FUN_00295660(temp_v0,temp_v3);
     break;
   case 8:
@@ -61,7 +61,7 @@ unsigned int FUN_00211a30(void)
   case 0xf:
     temp_v1 = temp_v1 & 0xffff;
     FUN_002bd06c(temp_v1);
-    FUN_002bf694(temp_v3,temp_v1);
+    libc_strcpy(temp_v3,temp_v1);
     FUN_00295660(temp_v0,temp_v3);
     break;
   case 0x10:
@@ -69,7 +69,7 @@ unsigned int FUN_00211a30(void)
   case 0x12:
   case 0x13:
     temp_v2 = FUN_0028e934((int)(short)temp_v1,1);
-    FUN_002bf694(temp_v3,temp_v2);
+    libc_strcpy(temp_v3,temp_v2);
     FUN_00295660(temp_v0,temp_v3);
     break;
   case 0x14:
@@ -77,7 +77,7 @@ unsigned int FUN_00211a30(void)
   case 0x16:
   case 0x17:
     temp_v2 = FUN_002bce00(temp_v1);
-    FUN_002bf694(temp_v3,temp_v2);
+    libc_strcpy(temp_v3,temp_v2);
     FUN_00295660(temp_v0,temp_v3);
     break;
   case 0x18:

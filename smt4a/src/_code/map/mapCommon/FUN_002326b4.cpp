@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00100388(...);
-int FUN_0014384c(int);
+int asdTMTexTableLoadSprites(int);
 int FUN_0014afd0(int, int);
 int FUN_00178b04(...);
 int FUN_0020214c(void);
@@ -53,7 +53,7 @@ extern unsigned int DAT_005f1b64; /* 0x5f1b64 */
 extern unsigned int DAT_005f1b6c; /* 0x5f1b6c */
 
 /* Supplied declaration required: FUN_00100388. */
-/* Supplied declaration required: FUN_0014384c. */
+/* Supplied declaration required: asdTMTexTableLoadSprites. */
 /* Supplied declaration required: FUN_0014afd0. */
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_0020214c. */
@@ -81,7 +81,7 @@ void FUN_002326b4(void)
   FUN_0020f0e8();
   FUN_002d7f08();
   FUN_0037b150();
-  FUN_0014384c(0x13);
+  asdTMTexTableLoadSprites(0x13);
   FUN_0014afd0(0x13,3);
   FUN_0014afd0(0x13,4);
   puVar1 = &LAB_00232a70;

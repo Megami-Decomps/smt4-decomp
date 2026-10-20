@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002a4d14(void);
+int asdWorkAreaReset(void);
 int asdMemFree(void *ptr);               /* heap free */
-int FUN_002c6a10(u32 movie);
+int asdOperatorDelete(u32 movie);
 extern MobiclipProcessWork *jobGetWork(u32 arg);
 
 extern MobiclipProcessGlobals g_mobiclipProcess;
@@ -15,10 +15,10 @@ void mobiclipProcessDestroy(u32 arg)
 {
     MobiclipProcessWork *work;
 
-    FUN_002a4d14();
+    asdWorkAreaReset();
     work = jobGetWork(arg);
     if (work->movie != 0) {
-        FUN_002c6a10(work->movie);
+        asdOperatorDelete(work->movie);
         work->movie = 0;
     }
     asdMemFree(work);

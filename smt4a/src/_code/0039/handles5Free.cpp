@@ -10,16 +10,16 @@ typedef struct Handles5 {
     /* 0x10 */ u32 h4;
 } Handles5;
 
-extern void FUN_00237210(u32 handle);
+extern void asdMemFreeSlot(u32 handle);
 extern void asdMemFree(void *ptr);
 
 /* Releases the four handles and the block itself. */
 void handles5Free(Handles5 *block)
 {
-    FUN_00237210(block->h0);
-    FUN_00237210(block->h1);
-    FUN_00237210(block->h2);
-    FUN_00237210(block->h4);
+    asdMemFreeSlot(block->h0);
+    asdMemFreeSlot(block->h1);
+    asdMemFreeSlot(block->h2);
+    asdMemFreeSlot(block->h4);
     asdMemFree(block);
 }
 

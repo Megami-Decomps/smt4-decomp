@@ -10,7 +10,7 @@ int dataTableGetEntry0e(...);
 int timerStart(int, int, int);
 int FUN_002bee58(int, int);
 
-extern unsigned char DAT_0043da28; /* 0x43da28 */
+extern unsigned char g_buttonHelp; /* 0x43da28 */
 
 /* Supplied declaration required: FUN_002a87e8. */
 /* Supplied declaration required: FUN_002a9fdc. */
@@ -28,9 +28,9 @@ void FUN_002b827c(unsigned int param_1)
   int temp_v2;
   int temp_v3;
   
-  temp_v2 = dataTableGetEntry0e(*(unsigned char *)((*(int *)((unsigned char *)&DAT_0043da28 + 0x4)) + 0x4c9));
+  temp_v2 = dataTableGetEntry0e(*(unsigned char *)((*(int *)((unsigned char *)&g_buttonHelp + 0x4)) + 0x4c9));
   temp_v3 = dataTableGetEntry0e(param_1);
-  temp_v1 = (*(int *)((unsigned char *)&DAT_0043da28 + 0x4));
+  temp_v1 = (*(int *)((unsigned char *)&g_buttonHelp + 0x4));
   if (temp_v2 != 0 && temp_v3 != 0) {
     if (*(char *)(temp_v2 + 0xc) != '\0') {
       temp_v2 = 0;
@@ -94,8 +94,8 @@ void FUN_002b827c(unsigned int param_1)
         } while (temp_v2 < 6);
       }
     }
-    temp_v1 = (*(int *)((unsigned char *)&DAT_0043da28 + 0x4));
-    *(unsigned int *)((*(int *)((unsigned char *)&DAT_0043da28 + 0x4)) + 0xc) = 0;
+    temp_v1 = (*(int *)((unsigned char *)&g_buttonHelp + 0x4));
+    *(unsigned int *)((*(int *)((unsigned char *)&g_buttonHelp + 0x4)) + 0xc) = 0;
     *(unsigned int *)(temp_v1 + 0x10) = 3;
   }
   return;

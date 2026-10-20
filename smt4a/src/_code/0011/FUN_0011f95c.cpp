@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002e75fa(unsigned int);
+int sharedRefAddRef(unsigned int);
 int FUN_002ea2e8(unsigned char [4]);
 int FUN_002ea3a8(...);
-int FUN_002ea9dc(...);
+int onlineUrlDestroy(...);
 int FUN_002ec8f8(unsigned int *);
 int FUN_002ee568(unsigned char [104], unsigned int);
-int FUN_002f32f8(...);
-int FUN_002f7cb0(int);
+int wideBufferAppend(...);
+int onlineJobSetStateWaiting(int);
 int FUN_002f7cba(...);
 int FUN_0030568e(unsigned int, int);
 int FUN_003056a0(int, int, unsigned char [104], int);
@@ -34,17 +34,17 @@ extern unsigned char LAB_0011fa80; /* 0x11fa80 */
 extern unsigned char LAB_0011fa94; /* 0x11fa94 */
 extern unsigned char LAB_0011faa0; /* 0x11faa0 */
 
-/* Supplied declaration required: FUN_002e75fa. */
-extern int FUN_002e760a(unsigned int);
+/* Supplied declaration required: sharedRefAddRef. */
+extern int operatorNew(unsigned int);
 extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
 /* Supplied declaration required: FUN_002ea2e8. */
 /* Supplied declaration required: FUN_002ea3a8. */
 extern unsigned int FUN_002ea3c0(int, unsigned char *, unsigned int, unsigned char *);
-/* Supplied declaration required: FUN_002ea9dc. */
+/* Supplied declaration required: onlineUrlDestroy. */
 /* Supplied declaration required: FUN_002ec8f8. */
 /* Supplied declaration required: FUN_002ee568. */
-/* Supplied declaration required: FUN_002f32f8. */
-/* Supplied declaration required: FUN_002f7cb0. */
+/* Supplied declaration required: wideBufferAppend. */
+/* Supplied declaration required: onlineJobSetStateWaiting. */
 /* Supplied declaration required: FUN_002f7cba. */
 extern unsigned int FUN_002fbd00(unsigned int, int);
 /* Supplied declaration required: FUN_0030568e. */
@@ -71,15 +71,15 @@ void FUN_0011f95c(int param_1)
   unsigned char temp_v10 [16];
   
   FUN_002ea2e8(temp_v5);
-  temp_v0 = FUN_002f32f8(temp_v5,&LAB_0011fa50);
+  temp_v0 = wideBufferAppend(temp_v5,&LAB_0011fa50);
   temp_v0 = FUN_002fbd00(temp_v0,param_1 + 0x70);
-  temp_v0 = FUN_002f32f8(temp_v0,&LAB_0011fa70);
+  temp_v0 = wideBufferAppend(temp_v0,&LAB_0011fa70);
   temp_v0 = FUN_0030568e(temp_v0,*(unsigned short *)(param_1 + 0x78));
-  temp_v0 = FUN_002f32f8(temp_v0,&LAB_0011fa80);
+  temp_v0 = wideBufferAppend(temp_v0,&LAB_0011fa80);
   temp_v0 = FUN_0030568e(temp_v0,10);
-  temp_v0 = FUN_002f32f8(temp_v0,&LAB_0011fa94);
+  temp_v0 = wideBufferAppend(temp_v0,&LAB_0011fa94);
   temp_v0 = FUN_0030568e(temp_v0,1);
-  temp_v0 = FUN_002f32f8(temp_v0,&LAB_0011faa0);
+  temp_v0 = wideBufferAppend(temp_v0,&LAB_0011faa0);
   FUN_0030568e(temp_v0,2);
   FUN_002ee568(temp_v9,temp_v6);
   temp_v7 = *(unsigned int *)(param_1 + 800);
@@ -92,9 +92,9 @@ void FUN_0011f95c(int param_1)
   temp_v4 = param_1 + 0x310;
   FUN_003056a0(temp_v1,param_1 + 0x80,temp_v9,param_1 + 0x314);
   if (temp_v1 != 0) {
-    FUN_002e75fa(*(unsigned int *)(param_1 + 0x310));
-    FUN_002f7cb0(param_1);
-    temp_v1 = FUN_002e760a(0x10);
+    sharedRefAddRef(*(unsigned int *)(param_1 + 0x310));
+    onlineJobSetStateWaiting(param_1);
+    temp_v1 = operatorNew(0x10);
     temp_v0 = 0;
     if (temp_v1 != 0) {
       temp_v0 = FUN_002ea3c0(temp_v1,&LAB_0011f835,0,&LAB_0011fa7c);
@@ -106,7 +106,7 @@ void FUN_0011f95c(int param_1)
     temp_v0 = FUN_002e7908(temp_v10,(unsigned int *)&temp_v3);
     FUN_00310784(param_1,temp_v0);
   }
-  FUN_002ea9dc(temp_v9);
+  onlineUrlDestroy(temp_v9);
   FUN_002ea3a8(temp_v5);
   return;
 }

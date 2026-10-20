@@ -6,7 +6,7 @@ extern "C" {
 
 int strAssign(int, unsigned int, unsigned int, unsigned int);
 int FUN_002e7614(int, int);
-int FUN_002e7658(unsigned char [16]);
+int sharedRefHolderDestroy(unsigned char [16]);
 int FUN_002ece58(int, int);
 int FUN_002ed258(unsigned char [16], unsigned int);
 int ringSetLimit(int, int);
@@ -19,15 +19,15 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: strAssign. */
-extern int FUN_002e760a(unsigned int);
+extern int operatorNew(unsigned int);
 /* Supplied declaration required: FUN_002e7614. */
-/* Supplied declaration required: FUN_002e7658. */
-extern unsigned int FUN_002e76b6(void);
+/* Supplied declaration required: sharedRefHolderDestroy. */
+extern unsigned int onlineBufferGetData(void);
 /* Supplied declaration required: FUN_002ece58. */
 /* Supplied declaration required: FUN_002ed258. */
 /* Supplied declaration required: ringSetLimit. */
 /* Supplied declaration required: FUN_002ed84a. */
-extern int FUN_002ed882(unsigned char *, int);
+extern int streamWriterWriteU32(unsigned char *, int);
 
 
 unsigned int FUN_001067ae(unsigned int param_1,int param_2)
@@ -52,14 +52,14 @@ unsigned int FUN_001067ae(unsigned int param_1,int param_2)
   temp_v6 = param_2;
   if ((temp_v0 != 0) && (*(int *)(temp_v0 + 0x10) != 0)) {
     if (*(int *)(temp_v0 + 0x18) != 0xc) {
-      temp_v1 = FUN_002e760a(0x20);
+      temp_v1 = operatorNew(0x20);
       temp_v0 = 0;
       if (temp_v1 != 0) {
         temp_v0 = FUN_002e7614(temp_v1,*(int *)(*(int *)(param_2 + 0xd8) + 0x10) + 0xc);
       }
       *(unsigned int *)(temp_v0 + 0x10) = 0xc;
       temp_v3 = *(unsigned int *)(*(int *)(param_2 + 0xd8) + 0x10);
-      temp_v2 = FUN_002e76b6();
+      temp_v2 = onlineBufferGetData();
       strAssign(temp_v0,temp_v2,temp_v3,0xffffffff);
       FUN_002ece58(temp_v6,temp_v0);
     }
@@ -68,7 +68,7 @@ unsigned int FUN_001067ae(unsigned int param_1,int param_2)
     }
   }
   else {
-    temp_v1 = FUN_002e760a(0x20);
+    temp_v1 = operatorNew(0x20);
     temp_v0 = 0;
     if (temp_v1 != 0) {
       temp_v0 = FUN_002e7614(temp_v1,0xc);
@@ -88,19 +88,19 @@ unsigned int FUN_001067ae(unsigned int param_1,int param_2)
       puVar4 = temp_v4;
       FUN_002ed84a(temp_v4,temp_v5);
       if (puVar4 == (unsigned char *)0x0) {
-        FUN_002e7658(temp_v4);
+        sharedRefHolderDestroy(temp_v4);
         return 0;
       }
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < 2);
-    temp_v0 = FUN_002ed882(temp_v4,temp_v6 + 0xc0);
-    if ((temp_v0 != 0) && (temp_v0 = FUN_002ed882(temp_v4,temp_v6 + 0xc4), temp_v0 != 0)) {
+    temp_v0 = streamWriterWriteU32(temp_v4,temp_v6 + 0xc0);
+    if ((temp_v0 != 0) && (temp_v0 = streamWriterWriteU32(temp_v4,temp_v6 + 0xc4), temp_v0 != 0)) {
       *(unsigned int *)(*(int *)(param_2 + 0xd8) + 0x10) = temp_v2;
-      FUN_002e7658(temp_v4);
+      sharedRefHolderDestroy(temp_v4);
       return 1;
     }
   }
-  FUN_002e7658(temp_v4);
+  sharedRefHolderDestroy(temp_v4);
   return 0;
 }
 

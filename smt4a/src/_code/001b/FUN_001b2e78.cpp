@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100854(unsigned char [32], unsigned int, unsigned int, int, unsigned char *);
+int libc_bsearch(unsigned char [32], unsigned int, unsigned int, int, unsigned char *);
 
 /* stack frame of param_2: 3 slot(s), 10 byte(s) */
 typedef struct {
@@ -15,7 +15,7 @@ typedef struct {
 
 extern unsigned char LAB_001b9fc4; /* 0x1b9fc4 */
 
-/* Supplied declaration required: FUN_00100854. */
+/* Supplied declaration required: libc_bsearch. */
 
 
 void FUN_001b2e78(int param_1,unsigned short param_2)
@@ -27,7 +27,7 @@ void FUN_001b2e78(int param_1,unsigned short param_2)
   
   if (*(int *)(param_1 + 0x43c) != 0) {
     temp_v1 = param_2;
-    FUN_00100854(temp_v0,*(unsigned int *)(param_1 + 0x440),*(unsigned int *)(param_1 + 0x43c),0x48,
+    libc_bsearch(temp_v0,*(unsigned int *)(param_1 + 0x440),*(unsigned int *)(param_1 + 0x43c),0x48,
                  &LAB_001b9fc4);
                     /* WARNING: Treating indirect jump as return */
     return;

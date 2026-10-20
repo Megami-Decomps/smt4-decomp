@@ -7,7 +7,7 @@ extern "C" {
 int bitsetSetBit(unsigned short *, int);
 int FUN_00288154(int, unsigned char [2]);
 int FUN_0029c6b0(unsigned short *);
-int FUN_002b9024(void);
+int devilGetRecord(void);
 int memClear(unsigned short *, int);
 
 /* stack frame of param_2: 23 slot(s), 47 byte(s) */
@@ -40,7 +40,7 @@ typedef struct {
 /* Supplied declaration required: bitsetSetBit. */
 /* Supplied declaration required: FUN_00288154. */
 /* Supplied declaration required: FUN_0029c6b0. */
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: memClear. */
 
 
@@ -74,7 +74,7 @@ void FUN_0029d770(int param_1,unsigned short *param_2)
   unsigned int temp_v23;
   
   temp_v0 = param_1;
-  FUN_002b9024();
+  devilGetRecord();
   FUN_00288154(param_1,temp_v1);
   memClear(param_2,0x604);
   param_2[0x23] = (short)param_1;

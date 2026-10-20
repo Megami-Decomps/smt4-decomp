@@ -1,4 +1,4 @@
-/* Compares two ids: by FUN_0028fb40 key (descending), then by the byte at +0x6F of their FUN_002b4670 records. */
+/* Compares two ids: by FUN_0028fb40 key (descending), then by the byte at +0x6F of their dataTable08Sub1GetRecord records. */
 #include "common.h"
 
 extern "C" {
@@ -9,7 +9,7 @@ typedef struct Record {
 } Record;
 
 extern s32 FUN_0028fb40(u16 id);
-extern Record *FUN_002b4670(u32 id);
+extern Record *dataTable08Sub1GetRecord(u32 id);
 
 s32 FUN_00207094(u16 *a, u16 *b)
 {
@@ -18,8 +18,8 @@ s32 FUN_00207094(u16 *a, u16 *b)
     s32 diff = keyB - keyA;
 
     if (diff == 0) {
-        Record *recordA = FUN_002b4670(*a);
-        Record *recordB = FUN_002b4670(*b);
+        Record *recordA = dataTable08Sub1GetRecord(*a);
+        Record *recordB = dataTable08Sub1GetRecord(*b);
 
         diff = recordA->rank - recordB->rank;
     }

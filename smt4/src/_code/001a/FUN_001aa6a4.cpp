@@ -6,10 +6,10 @@ extern "C" {
 
 int FUN_0019552c(int, int);
 int FUN_00286198(...);
-int FUN_0028648c(...);
+int mtxMakeTranslation(...);
 int FUN_002880a8(int);
 int FUN_002b2144(...);
-int FUN_002b90f8(...);
+int cameraSetViewMatrix(...);
 int FUN_002ba1e0(...);
 int mtx44Copy(unsigned char [72], unsigned int);
 int FUN_002c1b64(...);
@@ -66,11 +66,11 @@ extern float DAT_004efd98; /* 0x4efd98 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0019552c. */
 /* Supplied declaration required: FUN_00286198. */
-/* Supplied declaration required: FUN_0028648c. */
+/* Supplied declaration required: mtxMakeTranslation. */
 /* Supplied declaration required: FUN_002880a8. */
 extern unsigned int FUN_002a7bc0(void);
 /* Supplied declaration required: FUN_002b2144. */
-/* Supplied declaration required: FUN_002b90f8. */
+/* Supplied declaration required: cameraSetViewMatrix. */
 /* Supplied declaration required: FUN_002ba1e0. */
 /* Supplied declaration required: mtx44Copy. */
 extern int __cxa_guard_acquire(unsigned int *);
@@ -191,19 +191,19 @@ void FUN_001aa6a4(int param_1)
     temp_v14 = *pfVar2 * 0.03125f;
     temp_v15 = pfVar2[1] * 0.03125f;
     temp_v16 = 0.0f;
-    FUN_0028648c(temp_v30,&temp_v14);
+    mtxMakeTranslation(temp_v30,&temp_v14);
     nn_math_ARMv6_MTX44MultAsm(temp_v18,temp_v18,temp_v30);
   }
   temp_v32 = *(unsigned int *)(param_1 + 0x120);
   temp_v34 = *(unsigned int *)(param_1 + 0x128);
   temp_v33 = -*(float *)(param_1 + 0x124);
-  FUN_0028648c(temp_v29,&temp_v32);
+  mtxMakeTranslation(temp_v29,&temp_v32);
   nn_math_ARMv6_MTX44MultAsm(temp_v18,temp_v18,temp_v29);
   if (*(char *)(param_1 + 0x380) == '\x01') {
     temp_v14 = *(float *)(param_1 + 0x358);
     temp_v15 = *(float *)(param_1 + 0x35c);
     temp_v16 = *(float *)(param_1 + 0x360);
-    FUN_0028648c(temp_v30,&temp_v14);
+    mtxMakeTranslation(temp_v30,&temp_v14);
     nn_math_ARMv6_MTX44MultAsm(temp_v18,temp_v18,temp_v30);
   }
   if (*(char *)(param_1 + 0x380) == '\x03') {
@@ -303,7 +303,7 @@ void FUN_001aa6a4(int param_1)
       temp_v14 = temp_v14 * temp_v12;
       temp_v15 = temp_v15 * temp_v13;
       temp_v16 = temp_v11;
-      FUN_0028648c(temp_v30,&temp_v14);
+      mtxMakeTranslation(temp_v30,&temp_v14);
       nn_math_ARMv6_MTX44MultAsm(temp_v18,temp_v18,temp_v30);
       temp_v9 = temp_v6;
     }
@@ -319,7 +319,7 @@ void FUN_001aa6a4(int param_1)
     temp_v14 = temp_v14 * temp_v13;
     temp_v15 = temp_v15 * temp_v12;
     temp_v16 = temp_v11;
-    FUN_0028648c(temp_v30,&temp_v14);
+    mtxMakeTranslation(temp_v30,&temp_v14);
     nn_math_ARMv6_MTX44MultAsm(temp_v18,temp_v18,temp_v30);
   }
   temp_v19[0] = *(float *)(param_1 + 500) * *(float *)(param_1 + 0x1f8);
@@ -351,10 +351,10 @@ void FUN_001aa6a4(int param_1)
     temp_v14 = temp_v14 * temp_v12;
     temp_v15 = temp_v15 * temp_v13;
     temp_v16 = temp_v11;
-    FUN_0028648c(temp_v30,&temp_v14);
+    mtxMakeTranslation(temp_v30,&temp_v14);
     nn_math_ARMv6_MTX44MultAsm(temp_v18,temp_v18,temp_v30);
   }
-  FUN_002b90f8(g_titleScene,temp_v18);
+  cameraSetViewMatrix(g_titleScene,temp_v18);
   FUN_002c1b64(g_titleScene,*(unsigned int *)(param_1 + 300));
   temp_v14 = temp_v10;
   temp_v15 = temp_v11;

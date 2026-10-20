@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002c3944(int, int);
+int rt_memclr(int, int);
 
-/* Supplied declaration required: FUN_002c3944. */
+/* Supplied declaration required: rt_memclr. */
 
 
 void FUN_0035ea88(int *param_1,int param_2)
@@ -16,7 +16,7 @@ void FUN_0035ea88(int *param_1,int param_2)
   *param_1 = param_2;
   param_1[1] = param_2 + 0xc00;
   param_1[2] = 0;
-  FUN_002c3944(param_2,0xc00);
+  rt_memclr(param_2,0xc00);
   return;
 }
 

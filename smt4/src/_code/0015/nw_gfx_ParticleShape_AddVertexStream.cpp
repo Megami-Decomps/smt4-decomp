@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002c3944(...);
+int rt_memclr(...);
 
-/* Supplied declaration required: FUN_002c3944. */
+/* Supplied declaration required: rt_memclr. */
 
 
 int nw_gfx_ParticleShape_AddVertexStream
@@ -26,8 +26,8 @@ int nw_gfx_ParticleShape_AddVertexStream
   temp_v0 = (param_5 + 8) * param_4 * temp_v0;
   temp_v2 = temp_v1 + temp_v0;
   *param_6 = temp_v2 + temp_v0;
-  FUN_002c3944(temp_v1,temp_v0);
-  FUN_002c3944(temp_v2,temp_v0);
+  rt_memclr(temp_v1,temp_v0);
+  rt_memclr(temp_v2,temp_v0);
   *(unsigned int *)(param_1 + *(int *)(param_1 + 0x34) * 0x1c + 0x38) = param_2;
   *(int *)(param_1 + *(int *)(param_1 + 0x34) * 0x1c + 0x3c) = param_3;
   *(char *)(param_1 + *(int *)(param_1 + 0x34) * 0x1c + 0x40) = (char)param_4;

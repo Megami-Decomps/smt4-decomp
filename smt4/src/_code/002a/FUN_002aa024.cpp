@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned char DAT_0043dcb0; /* 0x43dcb0 */
+extern unsigned char g_ifTouch; /* 0x43dcb0 */
 
 extern int FUN_002bf4f8(void);
 
@@ -23,18 +23,18 @@ int FUN_002aa024(void)
   unsigned short *puVar9;
   int temp_v8;
   
-  temp_v7 = (*(int *)((unsigned char *)&DAT_0043dcb0 + 0x4));
+  temp_v7 = (*(int *)((unsigned char *)&g_ifTouch + 0x4));
   temp_v6 = FUN_002bf4f8();
-  temp_v5 = (*(int *)((unsigned char *)&DAT_0043dcb0 + 0x4));
+  temp_v5 = (*(int *)((unsigned char *)&g_ifTouch + 0x4));
   if (*(short *)(temp_v7 + 0x64c) < 10) {
     puVar9 = *(unsigned short **)(temp_v6 + 0xc);
     if (puVar9 != (unsigned short *)0x0) {
       temp_v2 = *puVar9;
       temp_v3 = puVar9[1];
       temp_v4 = *(unsigned short *)(temp_v6 + 10);
-      temp_v7 = (int)*(short *)((*(int *)((unsigned char *)&DAT_0043dcb0 + 0x4)) + 0x64c);
+      temp_v7 = (int)*(short *)((*(int *)((unsigned char *)&g_ifTouch + 0x4)) + 0x64c);
       if (temp_v7 < 10) {
-        temp_v8 = (*(int *)((unsigned char *)&DAT_0043dcb0 + 0x4)) + temp_v7 * 8;
+        temp_v8 = (*(int *)((unsigned char *)&g_ifTouch + 0x4)) + temp_v7 * 8;
         *(unsigned short *)(temp_v8 + 10) = *(unsigned short *)(temp_v6 + 8);
         *(unsigned short *)(temp_v8 + 0xc) = temp_v4;
         *(unsigned short *)(temp_v8 + 0xe) = temp_v2;
@@ -47,9 +47,9 @@ int FUN_002aa024(void)
       temp_v0 = *(unsigned short *)(temp_v6 + 6);
       temp_v1 = *(unsigned short *)(temp_v6 + 4);
       temp_v2 = *(unsigned short *)(temp_v6 + 10);
-      temp_v7 = (int)*(short *)((*(int *)((unsigned char *)&DAT_0043dcb0 + 0x4)) + 0x64c);
+      temp_v7 = (int)*(short *)((*(int *)((unsigned char *)&g_ifTouch + 0x4)) + 0x64c);
       if (temp_v7 < 10) {
-        temp_v8 = (*(int *)((unsigned char *)&DAT_0043dcb0 + 0x4)) + temp_v7 * 8;
+        temp_v8 = (*(int *)((unsigned char *)&g_ifTouch + 0x4)) + temp_v7 * 8;
         *(unsigned short *)(temp_v8 + 10) = *(unsigned short *)(temp_v6 + 8);
         *(unsigned short *)(temp_v8 + 0xc) = temp_v2;
         *(unsigned short *)(temp_v8 + 0xe) = temp_v1 & 0x7fff;

@@ -4,22 +4,22 @@
 
 extern "C" {
 
-int FUN_0019cac4(void);
+int dataTable00FindById(void);
 int FUN_003d209c(void);
 
 int FUN_00100388(...);
 int jobStop(unsigned int, int);
 int asdMemFree(void);
 int scrScriptProcessDestroy(void);
-int FUN_00237210(unsigned int);
+int asdMemFreeSlot(unsigned int);
 int FUN_0023a55c(void);
 int FUN_0026812c(void);
 int FUN_00275bc8(...);
-int FUN_00275f44(...);
+int scrScriptProcessStartEntry(...);
 int FUN_00283498(void);
 int FUN_0028520c(void);
 int FUN_0028c258(void);
-int FUN_002e6dd0(unsigned char [140], int);
+int rt_aeabi_memclr(unsigned char [140], int);
 int FUN_002ef750(void);
 int FUN_0035bea0(void);
 int bustupCutAnimStopJob(void);
@@ -36,25 +36,25 @@ extern unsigned int *g_bustupViewer; /* 0x588ff0 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: jobStop. */
-extern int FUN_00164af0(unsigned int);
-extern int FUN_001656a0(unsigned int);
+extern int padButtonRepeat(unsigned int);
+extern int padButtonIsPressed(unsigned int);
 extern int dataTableGet(unsigned int, unsigned char);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: FUN_0019cac4. */
+/* Supplied declaration required: dataTable00FindById. */
 extern int FUN_0019e378(void);
 extern int FUN_00224880(void);
-/* Supplied declaration required: FUN_00237210. */
+/* Supplied declaration required: asdMemFreeSlot. */
 /* Supplied declaration required: FUN_0023a55c. */
 /* Supplied declaration required: FUN_0026812c. */
 /* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00283498. */
 /* Supplied declaration required: FUN_0028520c. */
 /* Supplied declaration required: FUN_0028c258. */
-/* Supplied declaration required: FUN_002e6dd0. */
+/* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: FUN_002ef750. */
-extern unsigned int FUN_00357bc8(unsigned int, unsigned char *);
+extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_0035bea0. */
 /* Supplied declaration required: bustupCutAnimStopJob. */
 /* Supplied declaration required: FUN_0037d038. */
@@ -82,7 +82,7 @@ unsigned int FUN_003150f4(void)
   unsigned char temp_v11 [140];
   
   puVar2 = g_bustupViewer;
-  if ((g_bustupViewer[2] != 2) && (temp_v1 = FUN_001656a0(2), temp_v1 != 0)) {
+  if ((g_bustupViewer[2] != 2) && (temp_v1 = padButtonIsPressed(2), temp_v1 != 0)) {
     puVar2[2] = 2;
   }
   puVar3 = g_bustupViewer;
@@ -92,7 +92,7 @@ unsigned int FUN_003150f4(void)
   }
   else if (temp_v1 != 1) {
     if (temp_v1 == 2) {
-      FUN_00237210(g_bustupViewer[0x28]);
+      asdMemFreeSlot(g_bustupViewer[0x28]);
       FUN_0035bea0();
       bustupCutAnimStopJob();
       temp_v1 = 0;
@@ -126,7 +126,7 @@ unsigned int FUN_003150f4(void)
         *(unsigned char *)(puVar2 + 0x11) = 0;
       }
     }
-    temp_v1 = FUN_00164af0(5);
+    temp_v1 = padButtonRepeat(5);
     if (temp_v1 != 0) {
       temp_v1 = -1;
 LAB_00315654:
@@ -208,12 +208,12 @@ LAB_0031565c:
         goto LAB_0031585c;
       }
     }
-    temp_v1 = FUN_00164af0(6);
+    temp_v1 = padButtonRepeat(6);
     if (temp_v1 != 0) {
       temp_v1 = 1;
       goto LAB_00315654;
     }
-    temp_v1 = FUN_00164af0(4);
+    temp_v1 = padButtonRepeat(4);
     if (temp_v1 != 0) {
       temp_v1 = -1;
 LAB_00315864:
@@ -429,22 +429,22 @@ LAB_00315864:
       }
     }
     else {
-      temp_v1 = FUN_00164af0(3);
+      temp_v1 = padButtonRepeat(3);
       if (temp_v1 != 0) {
         temp_v1 = 1;
         goto LAB_00315864;
       }
-      temp_v1 = FUN_00164af0(8);
+      temp_v1 = padButtonRepeat(8);
       if (temp_v1 != 0) {
         temp_v1 = -10;
         goto LAB_00315864;
       }
-      temp_v1 = FUN_00164af0(7);
+      temp_v1 = padButtonRepeat(7);
       if (temp_v1 != 0) {
         temp_v1 = 10;
         goto LAB_00315864;
       }
-      temp_v1 = FUN_001656a0(0);
+      temp_v1 = padButtonIsPressed(0);
       puVar3 = g_bustupViewer;
       if (temp_v1 != 0) {
         if (temp_v6) {
@@ -453,7 +453,7 @@ LAB_00315864:
           }
           return 0;
         }
-        FUN_002e6dd0(temp_v11,0x80);
+        rt_aeabi_memclr(temp_v11,0x80);
         if (puVar3[3] != 3) {
           if (puVar3[3] != 4) {
             temp_v1 = puVar3[6];
@@ -582,8 +582,8 @@ LAB_003153fc:
                     puVar3[0x27] = temp_v1;
                   }
                   *(unsigned int *)(temp_v1 + 0x108) = 2;
-                  temp_v2 = FUN_00357bc8(puVar3[0x26],temp_v11);
-                  FUN_00275f44(puVar3[0x27],temp_v2);
+                  temp_v2 = tableGroupFindEntryIndex(puVar3[0x26],temp_v11);
+                  scrScriptProcessStartEntry(puVar3[0x27],temp_v2);
 LAB_0031585c:
                   if ((int)puVar2[0x10] < 0) {
                     puVar2[0x10] = puVar2[0x10] + 1;
@@ -629,7 +629,7 @@ LAB_00315308:
           }
           else {
             temp_v3 = temp_v3 & 0xffff;
-            FUN_0019cac4();
+            dataTable00FindById();
             if ((temp_v3 != 0) && (0 < *(short *)(temp_v3 + 0x8c))) goto LAB_00315308;
           }
         }
@@ -639,7 +639,7 @@ LAB_00315308:
         }
         return 0;
       }
-      temp_v1 = FUN_001656a0(10);
+      temp_v1 = padButtonIsPressed(10);
       if (temp_v1 == 0) {
         if ((int)puVar2[0x10] < 0) {
           puVar2[0x10] = puVar2[0x10] + 1;

@@ -9,7 +9,7 @@ typedef struct DrawOwner {
     /* 0x04 */ s32 state;
 } DrawOwner;
 
-int FUN_0016c410(RenderCtxA *ctx);
+int renderCtxResetColorScale(RenderCtxA *ctx);
 int FUN_0016c560(RenderCtxA *ctx);
 
 extern RenderCtxA *g_renderCtx;
@@ -18,7 +18,7 @@ void renderCtxEndPass(DrawOwner *owner)
 {
     if (owner->state > 2) {
         FUN_0016c560(g_renderCtx);
-        FUN_0016c410(g_renderCtx);
+        renderCtxResetColorScale(g_renderCtx);
     }
 }
 

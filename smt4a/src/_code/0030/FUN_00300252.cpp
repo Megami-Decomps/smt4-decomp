@@ -5,14 +5,14 @@
 extern "C" {
 
 int FUN_00133508(int, int, unsigned char [32]);
-int FUN_002f73e4(void);
-int FUN_002f73fc(void);
+int onlineMutexLock(void);
+int onlineMutexUnlock(void);
 int FUN_0030ed3c(int, int);
 int rt_memcpy_w(unsigned char [32], unsigned int, int);
 
 /* Supplied declaration required: FUN_00133508. */
-/* Supplied declaration required: FUN_002f73e4. */
-/* Supplied declaration required: FUN_002f73fc. */
+/* Supplied declaration required: onlineMutexLock. */
+/* Supplied declaration required: onlineMutexUnlock. */
 /* Supplied declaration required: FUN_0030ed3c. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -26,7 +26,7 @@ void FUN_00300252(int *param_1,int param_2)
   unsigned char temp_v2 [32];
   
   if (param_1[4] != 0) {
-    FUN_002f73e4();
+    onlineMutexLock();
   }
   for (temp_v1 = 0; temp_v1 < (unsigned int)param_1[1]; temp_v1 = temp_v1 + 1) {
     rt_memcpy_w(temp_v2,*param_1 + temp_v1 * 0x34 + 0x14,0x20);
@@ -40,7 +40,7 @@ void FUN_00300252(int *param_1,int param_2)
     }
   }
   if (param_1[4] != 0) {
-    FUN_002f73fc();
+    onlineMutexUnlock();
   }
   return;
 }

@@ -5,7 +5,7 @@
 extern "C" {
 
 int qsort(unsigned int, unsigned int, int, unsigned char *);
-int FUN_00312830(...);
+int arraySortQsort(...);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -26,7 +26,7 @@ extern int *dataTableValueOrZero(unsigned int);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern unsigned int dataTableGetEntries(void);
-/* Supplied declaration required: FUN_00312830. */
+/* Supplied declaration required: arraySortQsort. */
 
 
 void FUN_003b078c(void)
@@ -66,7 +66,7 @@ void FUN_003b078c(void)
   temp_v0 = dataTableGetCount(temp_v0);
   qsort(temp_v1,temp_v0,4,&LAB_0034f3a4);
   piVar3 = (int *)dataTableValueOrZero(0x1f);
-  FUN_00312830(piVar3 + 1,(*piVar3 - 4U) >> 3,8,&LAB_0029092c);
+  arraySortQsort(piVar3 + 1,(*piVar3 - 4U) >> 3,8,&LAB_0029092c);
   return;
 }
 

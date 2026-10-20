@@ -4,7 +4,7 @@ extern "C" {
 
 int FUN_002305e8(int a);
 int FUN_0026374c(void *text);
-int FUN_0027e774(int a, int b);
+int dialogOpen(int a, int b);
 int FUN_0027e7b4(u32 a, int b);
 int scrScriptProcessDestroy(u32 process);
 int asdMemFree(u32 ptr);
@@ -41,7 +41,7 @@ void FUN_003b8a68(Scene *scene)
         scene->bufferA = 0;
         asdMemFree(scene->bufferB);
         scene->bufferB = 0;
-        FUN_0027e774(0, 0);
+        dialogOpen(0, 0);
         FUN_0027e7b4(scene->unkD80, scene->inner->unk3F);
         scene->unk28 = 5;
         scene->unk2C = 0;

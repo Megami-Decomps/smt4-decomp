@@ -23,8 +23,8 @@ extern union romwright_storage_s__B_B_B_B_B_B_00435d00_25_1 s__B_B_B_B_B_B_00435
 extern int FUN_00227668(int);
 extern int FUN_00293230(void);
 /* Supplied declaration required: btlGetMainState. */
-extern int FUN_002b4414(int, unsigned int, unsigned int);
-extern unsigned int FUN_002c30c4(unsigned int);
+extern int libc_strncmp(int, unsigned int, unsigned int);
+extern unsigned int libc_strlen(unsigned int);
 
 
 int FUN_003dcc48(int param_1)
@@ -50,8 +50,8 @@ int FUN_003dcc48(int param_1)
       do {
         temp_v3 = *piVar5 + temp_v2 * 0x16 + 0x108;
         if (temp_v3 != 0) {
-          temp_v1 = FUN_002c30c4((*(unsigned int *)&s__B_B_B_B_B_B_00435d00.u1[0]));
-          temp_v3 = FUN_002b4414(temp_v3,(*(unsigned int *)&s__B_B_B_B_B_B_00435d00.u1[0]),temp_v1);
+          temp_v1 = libc_strlen((*(unsigned int *)&s__B_B_B_B_B_B_00435d00.u1[0]));
+          temp_v3 = libc_strncmp(temp_v3,(*(unsigned int *)&s__B_B_B_B_B_B_00435d00.u1[0]),temp_v1);
           if (temp_v3 == 0) {
             temp_v0 = *piVar5 + temp_v2 * 0x16 + 0x108;
             if (temp_v0 == 0) {

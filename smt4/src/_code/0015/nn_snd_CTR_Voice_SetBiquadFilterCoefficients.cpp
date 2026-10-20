@@ -17,15 +17,15 @@ typedef struct Voice {
     struct VoiceBody *body;        /* 0x68 */
 } Voice;
 
-void FUN_0015a4c0(struct VoiceBody *body, const BiquadCoefficients *coefficients);
+void nn_snd_CTR_VoiceImpl_SetBiquadFilterCoefficients(struct VoiceBody *body, const BiquadCoefficients *coefficients);
 
-/* Copies the coefficients into the voice, then passes them to FUN_0015a4c0 (the function that follows it) for the voice's body. */
+/* Copies the coefficients into the voice, then passes them to nn_snd_CTR_VoiceImpl_SetBiquadFilterCoefficients (the function that follows it) for the voice's body. */
 void nn_snd_CTR_Voice_SetBiquadFilterCoefficients(Voice *voice, const BiquadCoefficients *coefficients)
 {
     voice->biquad.coef0 = coefficients->coef0;
     voice->biquad.coef1 = coefficients->coef1;
     voice->biquad.coef2 = coefficients->coef2;
-    FUN_0015a4c0(voice->body, &voice->biquad);
+    nn_snd_CTR_VoiceImpl_SetBiquadFilterCoefficients(voice->body, &voice->biquad);
 }
 
 } /* extern "C" */

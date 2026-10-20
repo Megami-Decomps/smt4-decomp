@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_001319d0(void);
-int FUN_002b47bc(unsigned int, unsigned int, int);
+int fileSectionGetData(unsigned int, unsigned int, int);
 int FUN_002b4828(unsigned int);
 
 /* Supplied declaration required: FUN_001319d0. */
-/* Supplied declaration required: FUN_002b47bc. */
-extern unsigned int FUN_002b47f4(unsigned int);
+/* Supplied declaration required: fileSectionGetData. */
+extern unsigned int fileSlotGetBuffer(unsigned int);
 /* Supplied declaration required: FUN_002b4828. */
 extern int jobGetWork(void);
 
@@ -30,8 +30,8 @@ unsigned int FUN_00121e5c(void)
     if (((temp_v1 & 8) == 0) || ((temp_v1 & 2) != 0)) {
       if (((temp_v1 & 4) != 0) && ((temp_v1 & 2) == 0)) {
         temp_v3 = *(unsigned int *)(temp_v0 + 0xd54);
-        temp_v2 = FUN_002b47f4(0x42);
-        FUN_002b47bc(temp_v2,temp_v3,0);
+        temp_v2 = fileSlotGetBuffer(0x42);
+        fileSectionGetData(temp_v2,temp_v3,0);
         FUN_001319d0();
         *(unsigned int *)(temp_v0 + 0x754) = *(unsigned int *)(temp_v0 + 0x754) & 0xfffffff8;
       }

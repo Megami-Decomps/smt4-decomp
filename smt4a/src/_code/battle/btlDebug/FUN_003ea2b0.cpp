@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019cac4(void);
+int dataTable00FindById(void);
 int aocHandleButtons(unsigned int, int);
 int FUN_003fce8c(unsigned int, int);
 int FUN_004cae0c(int, int, int);
@@ -22,7 +22,7 @@ typedef struct {
 } param_2_stack;
 
 extern unsigned int g_btlScriptUnit; /* 0x57113c */
-extern int DAT_00571508; /* 0x571508 */
+extern int g_btlCamera; /* 0x571508 */
 extern int DAT_00573808; /* 0x573808 */
 extern int g_btlMain; /* 0x573920 */
 extern unsigned int DAT_00573978; /* 0x573978 */
@@ -36,7 +36,7 @@ extern unsigned int DAT_0057aa1c; /* 0x57aa1c */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Unsupported intrinsic, declaration required: SCARRY4 (INT_SCARRY). */
-/* Supplied declaration required: FUN_0019cac4. */
+/* Supplied declaration required: dataTable00FindById. */
 extern unsigned int FUN_003ec620(int, unsigned int);
 /* Supplied declaration required: aocHandleButtons. */
 extern int FUN_003fce08(unsigned int, unsigned int);
@@ -76,7 +76,7 @@ unsigned int FUN_003ea2b0(int param_1,unsigned int param_2)
   }
   else {
     param_2 = param_2 & 0xffff;
-    FUN_0019cac4();
+    dataTable00FindById();
     pbVar12 = (unsigned char *)(param_1 + 0x4550);
     temp_v5 = (unsigned int)*pbVar12;
     if (temp_v5 != 0) {
@@ -193,7 +193,7 @@ unsigned int FUN_003ea2b0(int param_1,unsigned int param_2)
       } while (temp_v6 < 0x2a);
       *(int *)(param_1 + 0x2020) = (int)*(short *)(param_2 + 0x8c);
 LAB_003ea3c8:
-      *(unsigned int *)(DAT_00571508 + 0x64c) = *(unsigned int *)(DAT_00571508 + 0x64c) | 0x4000;
+      *(unsigned int *)(g_btlCamera + 0x64c) = *(unsigned int *)(g_btlCamera + 0x64c) | 0x4000;
       if ((*(unsigned int *)(DAT_00573808 + 0x339c) & 0x400) != 0) {
         FUN_004f9450();
       }

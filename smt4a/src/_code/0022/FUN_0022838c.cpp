@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_00184310(void);
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 int FUN_002a2cbc(void);
 int FUN_002e6340(void);
 int sysMemClear(int, int);
-int FUN_002e6dd4(int, int);
+int rt_memclr(int, int);
 int FUN_003339ec(void);
 int FUN_0034c8e8(void);
 int partyFlagRange(void);
@@ -24,11 +24,11 @@ extern int DAT_0057f69c; /* 0x57f69c */
 extern unsigned int *DAT_0057f6a4; /* 0x57f6a4 */
 
 /* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: FUN_002a2cbc. */
 /* Supplied declaration required: FUN_002e6340. */
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_002e6dd4. */
+/* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: FUN_003339ec. */
 /* Supplied declaration required: FUN_0034c8e8. */
 /* Supplied declaration required: partyFlagRange. */
@@ -74,7 +74,7 @@ void FUN_0022838c(void)
   *(unsigned char *)(temp_v4 + 0x1d2e) = 0xff;
   *(unsigned int *)(temp_v4 + 0x2db4) = 0;
   *(unsigned int *)(temp_v4 + 0x2db8) = 0;
-  FUN_002e6dd4(temp_v4 + 0x2d68,0x4c);
+  rt_memclr(temp_v4 + 0x2d68,0x4c);
   puVar1 = DAT_0057f6a4;
   temp_v4 = DAT_0057f69c;
   temp_v0 = 0;
@@ -121,7 +121,7 @@ void FUN_0022838c(void)
       temp_v4 = 0;
       do {
         temp_v1 = (unsigned int)(unsigned short)puVar8[temp_v4 + 0xe];
-        if (((temp_v1 != 0) && (FUN_001aba54(), temp_v1 != 0)) && (*(unsigned short *)(temp_v1 + 0x26) < 0x12)) {
+        if (((temp_v1 != 0) && (dataTable04FindById(), temp_v1 != 0)) && (*(unsigned short *)(temp_v1 + 0x26) < 0x12)) {
           *(unsigned char *)((int)puVar8 + temp_v4 + 0x2c) =
                *(unsigned char *)((int)puVar8 + *(unsigned short *)(temp_v1 + 0x26) + 0x3c);
         }
@@ -329,7 +329,7 @@ void FUN_0022838c(void)
   FUN_002e6340();
   FUN_004bb880();
   FUN_004cd960();
-  FUN_002e6dd4(DAT_0057f69c + 0x21550,0x80);
+  rt_memclr(DAT_0057f69c + 0x21550,0x80);
   FUN_003339ec();
   FUN_0034c8e8();
   FUN_002a2cbc();

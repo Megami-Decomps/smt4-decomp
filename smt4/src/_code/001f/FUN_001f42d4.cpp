@@ -14,7 +14,7 @@ extern int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_00285584. */
 extern int FUN_002865c0(unsigned int);
-extern int FUN_002b722c(unsigned int);
+extern int jobGetStatus(unsigned int);
 extern int jobIsValid(unsigned int);
 extern int jobGetWork(void);
 /* Supplied declaration required: FUN_002c18e4. */
@@ -81,7 +81,7 @@ unsigned int FUN_001f42d4(void)
       }
       else {
         temp_v2 = jobIsValid(*(unsigned int *)(temp_v1 + 4));
-        if ((temp_v2 != 0) && (temp_v2 = FUN_002b722c(*(unsigned int *)(temp_v1 + 4)), temp_v2 == 4)) {
+        if ((temp_v2 != 0) && (temp_v2 = jobGetStatus(*(unsigned int *)(temp_v1 + 4)), temp_v2 == 4)) {
           FUN_00285584(*(unsigned int *)(temp_v1 + 4),(int)*(float *)(temp_v0 + 0x60),
                        (int)*(float *)(temp_v0 + 100));
         }

@@ -17,7 +17,7 @@ typedef struct {
 extern unsigned char LAB_00102b04; /* 0x102b04 */
 extern unsigned char LAB_00107d28; /* 0x107d28 */
 extern unsigned char LAB_0010a2f4; /* 0x10a2f4 */
-extern signed char DAT_0043dcb0; /* 0x43dcb0 */
+extern signed char g_ifTouch; /* 0x43dcb0 */
 extern unsigned int *DAT_0043dcb4; /* 0x43dcb4 */
 
 /* Supplied declaration required: memClear. */
@@ -32,7 +32,7 @@ void FUN_00102a10(void)
   unsigned int *puVar1;
   unsigned char *puVar2;
   
-  if (DAT_0043dcb0 < '\x01') {
+  if (g_ifTouch < '\x01') {
     if (DAT_0043dcb4 == (unsigned int *)0x0) {
       puVar1 = (unsigned int *)0x100;
       asdMemAlloc(0x100,0x100,0,0x680,1);
@@ -47,7 +47,7 @@ void FUN_00102a10(void)
     *(unsigned short *)((int)puVar1 + 0x64a) = 10;
     *(unsigned short *)(puVar1 + 0x193) = 0;
   }
-  DAT_0043dcb0 = DAT_0043dcb0 + '\x01';
+  g_ifTouch = g_ifTouch + '\x01';
   return;
 }
 

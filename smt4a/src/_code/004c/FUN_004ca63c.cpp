@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0019cac4(void);
+int dataTable00FindById(void);
 int sysMemClear(unsigned int *, int);
-int FUN_002e6dd4(int, int);
+int rt_memclr(int, int);
 int FUN_003edaf0(unsigned int *, int);
 int FUN_003f1138(void);
 int FUN_0041a7dc(int);
@@ -38,12 +38,12 @@ extern unsigned int DAT_0057aa90; /* 0x57aa90 */
 extern unsigned int DAT_0057aa94; /* 0x57aa94 */
 
 extern unsigned int saveSlotFindSelected(void);
-extern unsigned int FUN_001801a4(void);
-/* Supplied declaration required: FUN_0019cac4. */
-extern unsigned int FUN_001ab854(void);
+extern unsigned int gameGetPlayerData(void);
+/* Supplied declaration required: dataTable00FindById. */
+extern unsigned int gameGetSlotRecord(void);
 extern unsigned int btlMainGetUnk14(void);
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_002e6dd4. */
+/* Supplied declaration required: rt_memclr. */
 extern unsigned int *FUN_003e83b4(unsigned int *, int, unsigned int);
 /* Supplied declaration required: FUN_003edaf0. */
 /* Supplied declaration required: FUN_003f1138. */
@@ -70,7 +70,7 @@ void FUN_004ca63c(unsigned int *param_1,int param_2,int param_3,int param_4,int 
   *(unsigned int *)(param_2 + 0x228) = 0;
   clearTwoWords(param_2 + 0x1be);
   clearTwoWords(param_2 + 0x1c6);
-  FUN_002e6dd4(param_2 + 0x1d6,0x50);
+  rt_memclr(param_2 + 0x1d6,0x50);
   if (param_3 != 0) {
     if (param_3 != 1) {
       if (param_3 == 2) {
@@ -101,7 +101,7 @@ void FUN_004ca63c(unsigned int *param_1,int param_2,int param_3,int param_4,int 
       *puVar3 = DAT_0057aa48 | DAT_0057aa30;
       puVar3[1] = temp_v1;
       temp_v1 = (unsigned int)*(unsigned short *)((int)puVar3 + 0x166);
-      FUN_0019cac4();
+      dataTable00FindById();
       puVar3[0x101] = temp_v1;
       if ((char)puVar3[0x8e] == '\x01') {
         temp_v1 = puVar3[1] | DAT_0057aa64;
@@ -118,7 +118,7 @@ void FUN_004ca63c(unsigned int *param_1,int param_2,int param_3,int param_4,int 
       temp_v1 = DAT_0057aa3c | DAT_0057aa34;
       *puVar3 = DAT_0057aa38 | DAT_0057aa30;
       puVar3[1] = temp_v1;
-      temp_v1 = FUN_001801a4();
+      temp_v1 = gameGetPlayerData();
       puVar3[0xfe] = temp_v1;
     }
     else {
@@ -126,7 +126,7 @@ void FUN_004ca63c(unsigned int *param_1,int param_2,int param_3,int param_4,int 
       *puVar3 = DAT_0057aa40 | DAT_0057aa30;
       puVar3[1] = temp_v1;
       if ((short)puVar3[0x5b] >= 0) {
-        temp_v1 = FUN_001ab854();
+        temp_v1 = gameGetSlotRecord();
       }
       else {
         temp_v1 = btlMainGetUnk14();

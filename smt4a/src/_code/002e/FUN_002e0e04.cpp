@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00100388(...);
 int wstrlen(...);
-int FUN_002e6dd0(...);
+int rt_aeabi_memclr(...);
 int SBORROW4(...);
 
 /* stack frame of param_3: 1 slot(s), 1 byte(s) */
@@ -22,7 +22,7 @@ extern unsigned int DAT_005b40c0; /* 0x5b40c0 */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: wstrlen. */
-/* Supplied declaration required: FUN_002e6dd0. */
+/* Supplied declaration required: rt_aeabi_memclr. */
 
 
 unsigned int FUN_002e0e04(int param_1,short *param_2,int param_3)
@@ -69,8 +69,8 @@ unsigned int FUN_002e0e04(int param_1,short *param_2,int param_3)
       } while (temp_v4 < temp_v3);
     }
   }
-  FUN_002e6dd0(param_2,0x1f0);
-  FUN_002e6dd0(acStack_129 + 1,0x118);
+  rt_aeabi_memclr(param_2,0x1f0);
+  rt_aeabi_memclr(acStack_129 + 1,0x118);
   if (param_3 != 0) {
     if (param_3 != 1) {
       if (param_3 != 2) {

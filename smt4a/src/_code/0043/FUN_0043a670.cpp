@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00195fc8(void);
+int sysFatalBreak(void);
 int software_interrupt(int);
 
 extern signed char DAT_005c0b48; /* 0x5c0b48 */
@@ -12,7 +12,7 @@ extern signed char DAT_005c0b48; /* 0x5c0b48 */
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 extern int FUN_0016f864(unsigned int);
 extern int FUN_0016f988(int *, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00195fc8. */
+/* Supplied declaration required: sysFatalBreak. */
 extern unsigned int wstrlen(unsigned int);
 extern int FUN_0043ab50(void);
 
@@ -29,7 +29,7 @@ unsigned int FUN_0043a670(int *param_1,unsigned int param_2)
   }
   temp_v0 = FUN_0016f864(0);
   if (temp_v0 < 0) {
-    FUN_00195fc8();
+    sysFatalBreak();
   }
   temp_v1 = wstrlen(param_2);
   temp_v0 = FUN_0016f988(param_1,param_2,temp_v1,1);
@@ -38,14 +38,14 @@ unsigned int FUN_0043a670(int *param_1,unsigned int param_2)
       return 0;
     }
     if (temp_v0 < 0) {
-      FUN_00195fc8();
+      sysFatalBreak();
     }
   }
   temp_v0 = FUN_0043ab50();
   if (temp_v0 < 0) {
     software_interrupt(0x23);
     if (*param_1 < 0) {
-      FUN_00195fc8();
+      sysFatalBreak();
     }
     return 0;
   }

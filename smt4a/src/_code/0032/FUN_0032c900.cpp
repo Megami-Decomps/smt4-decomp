@@ -7,14 +7,14 @@ extern "C" {
 int FUN_0013ebd8(...);
 int FUN_001883b0(int *, unsigned char [500], int);
 int vcallSlot12IfValid(unsigned int);
-int FUN_00195fc8(void);
+int sysFatalBreak(void);
 int FUN_002e0e04(int, unsigned char [500], int);
 
 typedef int romwright_code(...);
 /* Supplied declaration required: FUN_0013ebd8. */
 /* Supplied declaration required: FUN_001883b0. */
 /* Supplied declaration required: vcallSlot12IfValid. */
-/* Supplied declaration required: FUN_00195fc8. */
+/* Supplied declaration required: sysFatalBreak. */
 /* Supplied declaration required: FUN_002e0e04. */
 
 
@@ -45,7 +45,7 @@ int * FUN_0032c900(int *param_1,int param_2,unsigned int param_3)
   if ((int)piVar1 < 0) {
     if ((param_1[2] & 0xfffffffeU) != 0) {
       if ((param_1[2] & 1U) != 0) {
-        FUN_00195fc8();
+        sysFatalBreak();
       }
       vcallSlot12IfValid(param_1[2] & 0xfffffffe);
       param_1[2] = 0;

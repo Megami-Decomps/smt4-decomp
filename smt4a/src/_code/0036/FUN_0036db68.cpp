@@ -23,16 +23,16 @@ typedef struct {
     MenuState *state;  /* 0x08 */
 } MenuGlobals;
 
-extern MenuGlobals DAT_0057f588;
+extern MenuGlobals g_messageMain;
 
 u32 FUN_001ba3d4(void);
 void FUN_0014e188(void *widget, s32 a, u32 b, void *slots, s32 c, f32 scale);
-void FUN_001846d0(void *widget, s32 a);
-void FUN_00184b80(void *widget, s32 a);
+void uiSpriteSelectAnim(void *widget, s32 a);
+void pairSetFirstResetSecond(void *widget, s32 a);
 
 u32 FUN_0036db68(u32 param)
 {
-    MenuState *state = DAT_0057f588.state;
+    MenuState *state = g_messageMain.state;
     u32 tick;
 
     state->active = 1;
@@ -42,8 +42,8 @@ u32 FUN_0036db68(u32 param)
     state->startTick = tick;
     state->lastTick = tick;
     FUN_0014e188(state->widget, 8, 0xffffffff, state->slots, 0xb, 1.0f);
-    FUN_00184b80(state->widget, 10);
-    FUN_001846d0(state->widget, 6);
+    pairSetFirstResetSecond(state->widget, 10);
+    uiSpriteSelectAnim(state->widget, 6);
     return 1;
 }
 

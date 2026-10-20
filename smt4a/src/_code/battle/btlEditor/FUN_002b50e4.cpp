@@ -24,11 +24,11 @@ extern unsigned char LAB_002b5238; /* 0x2b5238 */
 extern unsigned char LAB_002b524c; /* 0x2b524c */
 extern int FUN_002decb4(...); /* 0x2decb4 */
 extern int FUN_003285dc(...); /* 0x3285dc */
-extern int DAT_00571508; /* 0x571508 */
+extern int g_btlCamera; /* 0x571508 */
 extern unsigned int *DAT_005737e0; /* 0x5737e0 */
 extern unsigned int DAT_005737e8; /* 0x5737e8 */
 extern unsigned int DAT_005737ec; /* 0x5737ec */
-extern int DAT_0057a9c8; /* 0x57a9c8 */
+extern int g_btlUiBlock; /* 0x57a9c8 */
 
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
@@ -59,9 +59,9 @@ void FUN_002b50e4(unsigned int *param_1)
   *(unsigned short *)(puVar2 + 4) = 0xffff;
   *(unsigned char *)((int)puVar2 + 0x12) = 0xff;
   *(unsigned char *)((int)puVar2 + 0x13) = 0xff;
-  if (DAT_00571508 != 0) {
-    if ((-1 < *(int *)(DAT_00571508 + 0x7cc)) &&
-       (temp_v0 = FUN_004f2708(DAT_00571508,param_1,1), temp_v0 != 0)) {
+  if (g_btlCamera != 0) {
+    if ((-1 < *(int *)(g_btlCamera + 0x7cc)) &&
+       (temp_v0 = FUN_004f2708(g_btlCamera,param_1,1), temp_v0 != 0)) {
       FUN_004fb670(0,0);
     }
     FUN_004feecc(1,0);
@@ -69,8 +69,8 @@ void FUN_002b50e4(unsigned int *param_1)
   temp_v1 = param_1[0x116b] | DAT_005737ec;
   param_1[0x116a] = DAT_005737e8 | param_1[0x116a];
   param_1[0x116b] = temp_v1;
-  if (DAT_0057a9c8 != 0) {
-    FUN_004aa780(DAT_0057a9c8,1);
+  if (g_btlUiBlock != 0) {
+    FUN_004aa780(g_btlUiBlock,1);
     return;
   }
   return;

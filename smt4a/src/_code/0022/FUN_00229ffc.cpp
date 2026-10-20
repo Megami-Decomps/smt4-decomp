@@ -3,12 +3,12 @@
 
 extern "C" {
 
-void *FUN_00203a5c(void *obj);
-void FUN_0022a00c(void *obj);
+void *eventCommandGetPendingCleanup(void *obj);
+void rangeIsValid(void *obj);
 
 void FUN_00229ffc(void *obj)
 {
-    FUN_0022a00c(FUN_00203a5c(obj));
+    rangeIsValid(eventCommandGetPendingCleanup(obj));
 }
 
 }

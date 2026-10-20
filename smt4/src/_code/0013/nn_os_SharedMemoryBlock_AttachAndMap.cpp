@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_4_stack;
 
-extern unsigned char DAT_004eac5c; /* 0x4eac5c */
+extern unsigned char g_nnosAddressSpaceManagerHeap; /* 0x4eac5c */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 extern unsigned int nn_os_AddressSpaceManager_Allocate(unsigned int, unsigned int, unsigned int, unsigned int);
@@ -33,7 +33,7 @@ int nn_os_SharedMemoryBlock_AttachAndMap
   }
   else {
     temp_v1 = nn_os_AddressSpaceManager_Allocate
-                      ((unsigned int)&DAT_004eac5c,param_1,(param_3 + 0xfffU) & 0xfffff000,0x1000);
+                      ((unsigned int)&g_nnosAddressSpaceManagerHeap,param_1,(param_3 + 0xfffU) & 0xfffff000,0x1000);
     if (temp_v1 == 0) {
       temp_v0 = -0x279fe7c9;
     }

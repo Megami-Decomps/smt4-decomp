@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b9024(void);
+int devilGetRecord(void);
 
 /* stack frame of param_2: 1 slot(s), 2 byte(s) */
 typedef struct {
@@ -12,8 +12,8 @@ typedef struct {
 } param_2_stack;
 
 extern int FUN_00288154(unsigned short, unsigned char *);
-/* Supplied declaration required: FUN_002b9024. */
-extern int FUN_002c09d0(void);
+/* Supplied declaration required: devilGetRecord. */
+extern int gameFlagIsSet(void);
 
 
 unsigned int FUN_0029eaa4(unsigned int param_1,unsigned short *param_2)
@@ -25,9 +25,9 @@ unsigned int FUN_0029eaa4(unsigned int param_1,unsigned short *param_2)
   unsigned char temp_v2 [46];
   unsigned short temp_v3;
   
-  FUN_002b9024();
+  devilGetRecord();
   if (((param_2 != (unsigned short *)0x0) && ((*(unsigned int *)(param_2 + 0x16) & 0x200000) == 0)) &&
-     ((param_2[0x1b] == 0 || (temp_v1 = FUN_002c09d0(), temp_v1 != 0)))) {
+     ((param_2[0x1b] == 0 || (temp_v1 = gameFlagIsSet(), temp_v1 != 0)))) {
     temp_v0 = param_2[0x1a];
     if ((temp_v0 & 1) != 0) {
       if ((temp_v0 & 0xfffe) != 0) {

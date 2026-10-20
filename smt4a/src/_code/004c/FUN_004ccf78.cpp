@@ -33,7 +33,7 @@ typedef struct {
 #define ROMWRIGHT_PIECE_1_3_DEFINED
 #define romwright_piece_1_3(upper, lower) ((unsigned int)(((unsigned int)(unsigned char)(upper) << 24) | ((unsigned int)(lower) & 0xffffffULL)))
 #endif
-extern int FUN_001801a4(void);
+extern int gameGetPlayerData(void);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: dataTableGetCount. */
 /* Supplied declaration required: dataTableGetEntries. */
@@ -64,7 +64,7 @@ void FUN_004ccf78(void)
   unsigned int temp_v11;
   unsigned int temp_v12;
   
-  temp_v2 = FUN_001801a4();
+  temp_v2 = gameGetPlayerData();
   *(unsigned short *)(temp_v2 + 0x62) = 1;
   *(unsigned int *)(temp_v2 + 0x30) = 0;
   *(unsigned short *)(temp_v2 + 0x5e) = 0;

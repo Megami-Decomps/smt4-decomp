@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0023aa3c(int, unsigned char [16]);
 int FUN_0023ac2c(int, float *);
 int FUN_0023adf4(unsigned int, int, unsigned char [16]);
-int FUN_0028c640(unsigned int, int, float *);
+int nodeSetTranslation(unsigned int, int, float *);
 int FUN_003108b0(unsigned char [520], int);
 int FUN_0032360c(int, int, unsigned char [520]);
 
@@ -21,7 +21,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0023aa3c. */
 /* Supplied declaration required: FUN_0023ac2c. */
 /* Supplied declaration required: FUN_0023adf4. */
-/* Supplied declaration required: FUN_0028c640. */
+/* Supplied declaration required: nodeSetTranslation. */
 /* Supplied declaration required: FUN_003108b0. */
 /* Supplied declaration required: FUN_0032360c. */
 
@@ -64,7 +64,7 @@ unsigned int FUN_003daf6c(int param_1)
           temp_v5 = temp_v5 + *(float *)(temp_v0 + 0x1a0);
           temp_v6 = temp_v6 + *(float *)(temp_v0 + 0x1a4);
           temp_v7 = temp_v7 + *(float *)(temp_v0 + 0x1a8);
-          FUN_0028c640(*(unsigned int *)(*piVar5 + 8),0,&temp_v5);
+          nodeSetTranslation(*(unsigned int *)(*piVar5 + 8),0,&temp_v5);
           FUN_003108b0(temp_v4,*piVar5);
           FUN_0032360c(*piVar5,temp_v2 + 0x13a0,temp_v4);
           break;

@@ -5,11 +5,11 @@ extern "C" {
 void FUN_003d2150(u32 id);
 void FUN_004a99bc(u32 arg);
 
-extern u32 DAT_0057a9c8;
+extern u32 g_btlUiBlock;
 
 void FUN_003f220c(void)
 {
-    FUN_004a99bc(DAT_0057a9c8);
+    FUN_004a99bc(g_btlUiBlock);
     FUN_003d2150(0x100026A);
 }
 

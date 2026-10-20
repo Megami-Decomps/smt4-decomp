@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern ObjBRef DAT_00588fd0;
+extern ObjBRef g_gameGlobals;
 extern void FUN_0026fd50(u8 *block, u32 a, s32 b, u32 c);
 
 void objBInitBlock19D0(u32 a, s32 copyPair, u32 c)
 {
-    ObjB *obj = DAT_00588fd0.instance;
+    ObjB *obj = g_gameGlobals.instance;
 
     FUN_0026fd50(obj->block19D0, a, 0, c);
     if (copyPair != 0) {

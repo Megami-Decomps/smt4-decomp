@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_4_stack;
 
-extern unsigned int FUN_002ea93c(unsigned int);
+extern unsigned int onlineUrlGetAddress(unsigned int);
 
 
 void FUN_00113cd0(int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -35,7 +35,7 @@ void FUN_00113cd0(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
   uStack_20 = param_2;
   temp_v4 = param_3;
   uStack_18 = param_4;
-  temp_v2 = FUN_002ea93c(param_2);
+  temp_v2 = onlineUrlGetAddress(param_2);
   (**(romwright_code **)(*param_1 + 0x18))
             (temp_v3,param_1,temp_v2,(char)temp_v1,(char)temp_v0,temp_v4,param_4,0);
   return;

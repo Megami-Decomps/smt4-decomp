@@ -3,7 +3,7 @@
 extern "C" {
 
 extern const u8 DAT_0055a520[];  /* vtable */
-void FUN_002e7232(void *buffer);
+void sharedRefRelease(void *buffer);
 u8 *FUN_0011c110(u8 *member);
 void FUN_00306c8c(u8 *member);
 
@@ -20,7 +20,7 @@ void destroyObj0055a520(Object55a520 *self)
     u8 *member;
 
     self->vtbl = DAT_0055a520;
-    FUN_002e7232(self->buffer);
+    sharedRefRelease(self->buffer);
     member = FUN_0011c110(self->member58);
     FUN_00306c8c(member - 0x58);
 }

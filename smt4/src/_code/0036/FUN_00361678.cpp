@@ -30,7 +30,7 @@ extern int DAT_004d462c; /* 0x4d462c */
 /* Supplied declaration required: FUN_002a7f28. */
 extern int FUN_002a808c(unsigned int);
 /* Supplied declaration required: FUN_002c0d50. */
-extern int FUN_002c52f8(void);
+extern int asdFatalError(void);
 /* Supplied declaration required: FUN_003618b8. */
 /* Supplied declaration required: nn_os_TransferMemoryBlock_Finalize. */
 /* Supplied declaration required: nn_os_TransferMemoryBlock_Initialize. */
@@ -64,7 +64,7 @@ FUN_00361678(unsigned char *param_1,int param_2,int param_3,int param_4,unsigned
       temp_v0 = -0x375f3004;
     }
     if (temp_v1 < 0 && temp_v1 != temp_v0) {
-      temp_v1 = FUN_002c52f8();
+      temp_v1 = asdFatalError();
     }
     if (param_3 != 0 && param_4 != 0) {
       temp_v1 = *(int *)(param_2 + 0x130);

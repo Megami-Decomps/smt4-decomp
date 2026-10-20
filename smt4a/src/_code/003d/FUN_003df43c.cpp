@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-extern int FUN_001ab940(void);
+extern int gameFlagBlockGet(void);
 /* Supplied declaration required: FUN_001ad9b4. */
 extern int partyEntryFlagsBit3(int);
 
@@ -30,7 +30,7 @@ void FUN_003df43c(int param_1)
     temp_v0 = *(short *)(temp_v1 + 0xde);
   }
   if ((temp_v1 != 0 && temp_v0 != 0) && (temp_v1 = partyEntryFlagsBit3(param_1), temp_v1 != 0)) {
-    temp_v1 = FUN_001ab940();
+    temp_v1 = gameFlagBlockGet();
     temp_v1 = temp_v1 + param_1 * 4;
     *(unsigned char *)(temp_v1 + 0x2a2) = *(unsigned char *)(temp_v1 + 0x2a2) | 8;
     return;

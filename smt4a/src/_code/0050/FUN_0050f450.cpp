@@ -12,9 +12,9 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned char LAB_0042ce3c; /* 0x42ce3c */
-extern unsigned int DAT_005b4098; /* 0x5b4098 */
+extern unsigned int g_appletHomeButtonEvent; /* 0x5b4098 */
 extern unsigned int DAT_005b409c; /* 0x5b409c */
-extern unsigned int DAT_00640550; /* 0x640550 */
+extern unsigned int g_nnAppletCriticalSection; /* 0x640550 */
 extern unsigned int DAT_00640554; /* 0x640554 */
 extern unsigned int DAT_00640558; /* 0x640558 */
 
@@ -27,12 +27,12 @@ void FUN_0050f450(unsigned int *param_1)
 /* irregular: 1 native warning(s); review required */
   *param_1 = 0;
   param_1[1] = 0;
-  DAT_005b4098 = 0;
+  g_appletHomeButtonEvent = 0;
   DAT_005b409c = 0;
-  DAT_00640550 = 0;
+  g_nnAppletCriticalSection = 0;
   DAT_00640558 = 0xffffffff;
   DAT_00640554 = 0;
-  emptyStub_002f4370(&DAT_00640550,&LAB_0042ce3c,0x100000);
+  emptyStub_002f4370(&g_nnAppletCriticalSection,&LAB_0042ce3c,0x100000);
   return;
 }
 

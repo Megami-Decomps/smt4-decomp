@@ -7,11 +7,11 @@ typedef struct Work {
     /* 0xE8C */ u8 value;
 } Work;
 
-extern Work *DAT_0043e278;
+extern Work *g_frameTex;
 
 void FUN_0024ac7c(u8 value)
 {
-    DAT_0043e278->value = value;
+    g_frameTex->value = value;
 }
 
 } /* extern "C" */

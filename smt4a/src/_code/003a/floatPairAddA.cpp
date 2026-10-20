@@ -8,11 +8,11 @@ typedef struct FloatPair {
     /* 0x08 */ f32 b;
 } FloatPair;
 
-extern FloatPair DAT_005c10c0;
+extern FloatPair g_effMenuState;
 
 void floatPairAddA(f32 delta)
 {
-    DAT_005c10c0.a += delta;
+    g_effMenuState.a += delta;
 }
 
 } /* extern "C" */

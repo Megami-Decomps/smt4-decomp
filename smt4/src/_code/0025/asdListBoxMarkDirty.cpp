@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0024ee4c(unsigned char *, unsigned char *);
 int FUN_002be624(...);
-int FUN_002c30c4(...);
+int libc_strlen(...);
 int SUB84(double, int);
 int VectorSignedToFloat(int, int);
 
@@ -26,7 +26,7 @@ extern unsigned char LAB_00259dc4; /* 0x259dc4 */
 /* Supplied declaration required: FUN_0024ee4c. */
 /* Supplied declaration required: FUN_002be624. */
 extern int *jobGetWork(void);
-/* Supplied declaration required: FUN_002c30c4. */
+/* Supplied declaration required: libc_strlen. */
 
 
 void asdListBoxMarkDirty(void)
@@ -48,7 +48,7 @@ void asdListBoxMarkDirty(void)
   unsigned long long temp_v9;
   
   piVar1 = (int *)jobGetWork();
-  temp_v0 = FUN_002c30c4(piVar1 + 0x23);
+  temp_v0 = libc_strlen(piVar1 + 0x23);
   temp_v3 = *piVar1;
   temp_v4 = temp_v3 != 0;
   if (temp_v4) {
@@ -91,12 +91,12 @@ void asdListBoxMarkDirty(void)
       }
     }
     else {
-      temp_v1 = FUN_002c30c4(temp_v0 + 6);
+      temp_v1 = libc_strlen(temp_v0 + 6);
       temp_v2 = piVar1[0x16];
       temp_v1 = temp_v1 * temp_v2;
       switch(*(unsigned char *)(temp_v0 + 4)) {
       case 1:
-        temp_v0 = FUN_002c30c4(temp_v0 + 0x106);
+        temp_v0 = libc_strlen(temp_v0 + 0x106);
         temp_v1 = (temp_v0 + 1) * piVar1[0x16] + temp_v1;
         break;
       case 2:

@@ -18,7 +18,7 @@ extern unsigned char LAB_0040b958; /* 0x40b958 */
 extern unsigned char LAB_0040b990; /* 0x40b990 */
 
 /* Supplied declaration required: FUN_00100388. */
-extern int FUN_001801a4(void);
+extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00192608. */
 /* Supplied declaration required: FUN_003e573c. */
 extern unsigned int FUN_0040b11c(unsigned int, unsigned int, unsigned short, unsigned short, unsigned int);
@@ -37,7 +37,7 @@ void FUN_0040b730(unsigned int param_1,int param_2,unsigned int param_3)
   unsigned int temp_v2;
   unsigned char temp_v3 [68];
   
-  temp_v0 = FUN_001801a4();
+  temp_v0 = gameGetPlayerData();
   if (param_2 != 0) {
     if (param_2 != 1) {
       if (param_2 == 2) {

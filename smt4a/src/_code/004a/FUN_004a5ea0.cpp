@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00100388(...);
 int FUN_0018349c(...);
-int FUN_0019cac4(void);
+int dataTable00FindById(void);
 int FUN_00493408(...);
 int FUN_004a7814(...);
 int FUN_004a7a50(int, int, unsigned int, int, int, int);
@@ -32,7 +32,7 @@ extern unsigned char LAB_004a612c; /* 0x4a612c */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_0018349c. */
-/* Supplied declaration required: FUN_0019cac4. */
+/* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: FUN_00493408. */
 /* Supplied declaration required: FUN_004a7814. */
 /* Supplied declaration required: FUN_004a7a50. */
@@ -87,14 +87,14 @@ void FUN_004a5ea0(int param_1,int param_2,int param_3,unsigned int param_4)
   FUN_004a7fb8(param_1,param_4,temp_v11,param_3,(int)*(char *)(param_1 + 0x829),temp_v6);
   temp_v5 = param_4 & 0xffff;
   temp_v7 = 0;
-  FUN_0019cac4();
+  dataTable00FindById();
   if (temp_v5 != 0) {
     temp_v7 = *(unsigned short *)(temp_v5 + 2) & 0x7fff;
   }
   FUN_004a7814(param_1,temp_v7,temp_v11,param_3,temp_v6,0xffffffff);
   temp_v5 = param_4 & 0xffff;
   temp_v8 = 0;
-  FUN_0019cac4();
+  dataTable00FindById();
   if (temp_v5 != 0) {
     temp_v8 = *(unsigned int *)(temp_v5 + 4);
   }
@@ -113,7 +113,7 @@ void FUN_004a5ea0(int param_1,int param_2,int param_3,unsigned int param_4)
                temp_v5 | (temp_v9 & 0xff),temp_v6,temp_v10);
   param_4 = param_4 & 0xffff;
   temp_v8 = 0;
-  FUN_0019cac4();
+  dataTable00FindById();
   if (param_4 != 0) {
     temp_v8 = *(unsigned int *)(param_4 + 8);
   }

@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_001846d0(int, int);
-int FUN_00184b80(int, int);
+int uiSpriteSelectAnim(int, int);
+int pairSetFirstResetSecond(int, int);
 int FUN_002a1850(float *, int, unsigned int);
 int FUN_00358e94(int, int, int);
 int FUN_00387240(int, int, int);
@@ -19,14 +19,14 @@ typedef struct {
     unsigned int sp50; /* 0x50: local_50 */
 } param_7_stack;
 
-extern unsigned char DAT_0057a9b8; /* 0x57a9b8 */
+extern unsigned char g_btlUi; /* 0x57a9b8 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 extern unsigned int FUN_00152f54(void);
 extern int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001846d0. */
-/* Supplied declaration required: FUN_00184b80. */
+/* Supplied declaration required: uiSpriteSelectAnim. */
+/* Supplied declaration required: pairSetFirstResetSecond. */
 /* Supplied declaration required: FUN_002a1850. */
 /* Supplied declaration required: FUN_00358e94. */
 /* Supplied declaration required: FUN_00387240. */
@@ -60,7 +60,7 @@ void FUN_004a9740(unsigned int param_1,int param_2,int param_3,unsigned int para
   int iStack_2c;
   unsigned int uStack_28;
   
-  temp_v6 = (*(int *)((unsigned char *)&DAT_0057a9b8 + 0x10));
+  temp_v6 = (*(int *)((unsigned char *)&g_btlUi + 0x10));
   temp_v9 = in_s0;
   temp_v8 = in_s1;
   temp_v11 = in_s2;
@@ -105,7 +105,7 @@ void FUN_004a9740(unsigned int param_1,int param_2,int param_3,unsigned int para
   do {
     *(unsigned int *)(temp_v6 + temp_v3 * 4 + 0x7998) = 0;
     temp_v7 = temp_v6 + temp_v3 * 0x8c + 0x75b4;
-    FUN_001846d0(temp_v7,3);
+    uiSpriteSelectAnim(temp_v7,3);
     FUN_00387240(temp_v7,0xd,temp_v3 + 0x41a);
     temp_v8 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_00358e94(temp_v7,(int)(short)(int)(temp_v9 + temp_v8),(int)(short)(int)temp_v10);
@@ -127,7 +127,7 @@ void FUN_004a9740(unsigned int param_1,int param_2,int param_3,unsigned int para
       temp_v4 = __aeabi_idivmod(param_3,temp_v5);
       temp_v4 = temp_v4 + 0x7ee;
     }
-    FUN_00184b80(temp_v7,temp_v4);
+    pairSetFirstResetSecond(temp_v7,temp_v4);
     temp_v7 = __aeabi_idivmod(param_3,temp_v5);
     temp_v3 = temp_v3 - 1;
     param_3 = param_3 - temp_v7 * temp_v5;

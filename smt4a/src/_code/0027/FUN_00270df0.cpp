@@ -43,7 +43,7 @@ static float romwright_sqrt_4(float value)
 #define romwright_subpiece_4_2_0(value, offset) ((unsigned short)(unsigned int)(value))
 #endif
 extern unsigned int FUN_001931d8(void);
-extern int FUN_001acf08(void);
+extern int effGetFrameStep(void);
 extern int asdModelBankGetModel(int, unsigned int);
 /* Supplied declaration required: FUN_0034f8b4. */
 /* Supplied declaration required: FUN_0038136c. */
@@ -74,7 +74,7 @@ void FUN_00270df0(float *param_1)
   unsigned long long temp_v14;
   float temp_v15 [11];
   
-  temp_v0 = FUN_001acf08();
+  temp_v0 = effGetFrameStep();
   temp_v5 = param_1[0x2f];
   pfVar6 = param_1 + 0x39;
   temp_v4 = (float)(temp_v0 + (int)param_1[0xb]);

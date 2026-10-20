@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned short *FUN_001a8d28(unsigned int);
+extern unsigned short *nw_snd_internal_SoundArchiveFile_InfoBlockBody_GetSoundArchivePlayerInfo(unsigned int);
 
 
 unsigned int FUN_00195034(int param_1,unsigned int *param_2)
@@ -14,7 +14,7 @@ unsigned int FUN_00195034(int param_1,unsigned int *param_2)
   unsigned int temp_v0;
   unsigned int temp_v1;
   
-  puVar1 = (unsigned short *)FUN_001a8d28(*(unsigned int *)(param_1 + 0x3c));
+  puVar1 = (unsigned short *)nw_snd_internal_SoundArchiveFile_InfoBlockBody_GetSoundArchivePlayerInfo(*(unsigned int *)(param_1 + 0x3c));
   temp_v0 = 0;
   if (puVar1 != (unsigned short *)0x0) {
     *param_2 = (unsigned int)*puVar1;

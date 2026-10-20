@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_001800b8(void);
+int asdTextureRelease(void);
 int asdMemFree(...);
-int FUN_0019a7f4(int);
+int asdTMTexTableReleaseNode(int);
 int FUN_001b2d54(unsigned int, int, unsigned int);
 int FUN_00419e38(void);
 int aocClearFlagD_C(void);
@@ -36,9 +36,9 @@ struct fn_003fcfe8_arg0 {
 
 extern unsigned int g_aocSystem; /* 0x570280 */
 
-/* Supplied declaration required: FUN_001800b8. */
+/* Supplied declaration required: asdTextureRelease. */
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_0019a7f4. */
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
 /* Supplied declaration required: FUN_001b2d54. */
 /* Supplied declaration required: FUN_00419e38. */
 /* Supplied declaration required: aocClearFlagD_C. */
@@ -57,11 +57,11 @@ void FUN_003fcfe8(fn_003fcfe8_arg0 *param_1)
       temp_v1 = param_1->field_0x14 + temp_v0 * 0x20;
       if (*(int *)(temp_v1 + 0x18) != 0) {
         if (*(int *)(temp_v1 + 0x1c) >= 0) {
-          FUN_0019a7f4(param_1->field_0x8);
+          asdTMTexTableReleaseNode(param_1->field_0x8);
           FUN_001b2d54(g_aocSystem,param_1->field_0x8,*(unsigned int *)(temp_v1 + 0x1c));
         }
         else {
-          FUN_001800b8();
+          asdTextureRelease();
         }
         *(unsigned int *)(temp_v1 + 0x18) = 0;
         *(unsigned int *)(temp_v1 + 0x1c) = 0xffffffff;

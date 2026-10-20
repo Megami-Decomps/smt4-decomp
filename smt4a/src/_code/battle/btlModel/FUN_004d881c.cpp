@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00178b04(int, unsigned char *, int);
 int FUN_001cd3ec(void);
-int FUN_002e342c(unsigned int *);
+int libc_strcpy(unsigned int *);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -17,7 +17,7 @@ extern unsigned char LAB_004d8858; /* 0x4d8858 */
 
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_001cd3ec. */
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 extern unsigned int FUN_0040ac08(void);
 
 
@@ -28,7 +28,7 @@ void FUN_004d881c(unsigned int *param_1)
   int temp_v0;
   unsigned int temp_v1;
   
-  FUN_002e342c(param_1 + 1);
+  libc_strcpy(param_1 + 1);
   temp_v0 = 0x20;
   FUN_00178b04(0x20,&LAB_004d8858,0x44);
   temp_v1 = 0;

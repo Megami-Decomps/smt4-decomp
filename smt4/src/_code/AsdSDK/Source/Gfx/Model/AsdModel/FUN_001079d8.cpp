@@ -41,7 +41,7 @@ extern unsigned char *DAT_00464b18; /* 0x464b18 */
 extern unsigned int DAT_00464b1c; /* 0x464b1c */
 extern int DAT_00464b34; /* 0x464b34 */
 extern float DAT_00464b40; /* 0x464b40 */
-extern unsigned int DAT_00464b9c; /* 0x464b9c */
+extern unsigned int g_asdModelSlotArray0; /* 0x464b9c */
 extern unsigned int DAT_00464ba0; /* 0x464ba0 */
 
 #ifndef ROMWRIGHT_PIECE_3_1_DEFINED
@@ -153,7 +153,7 @@ void FUN_001079d8(void)
     piVar3 = (int *)puVar7[1];
     (**(romwright_code **)(*piVar3 + 0xc))(piVar3,puVar7);
   }
-  nw_gfx_SceneNode_AttachChild(DAT_00464b9c,DAT_00464b10);
+  nw_gfx_SceneNode_AttachChild(g_asdModelSlotArray0,DAT_00464b10);
   puVar7 = (unsigned int *)((unsigned long long)temp_v3 >> 0x20);
   temp_v2 = (unsigned int)temp_v3;
   if (DAT_00464af4 != 0) {
@@ -185,7 +185,7 @@ void FUN_001079d8(void)
     *(float *)(temp_v1 + 0x294) = temp_v4 / DAT_00464b40;
     FUN_00120b5c();
   }
-  nw_gfx_SceneNode_AttachChild(DAT_00464b9c,DAT_00464b34);
+  nw_gfx_SceneNode_AttachChild(g_asdModelSlotArray0,DAT_00464b34);
   temp_v16 = (unsigned int)temp_v3;
   uStack_5c = (unsigned int)((unsigned long long)temp_v3 >> 0x20);
   temp_v17 = temp_v16;

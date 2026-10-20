@@ -5,13 +5,13 @@
 extern "C" {
 
 int FUN_00186f58(void);
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 int FUN_0034a304(unsigned int, int, int);
 
 /* Supplied declaration required: FUN_00186f58. */
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: FUN_0034a304. */
-extern int FUN_003e46f4(unsigned int);
+extern int gameDataFlagTestBit(unsigned int);
 
 
 void FUN_004bcbb4(int param_1,unsigned int param_2)
@@ -23,21 +23,21 @@ void FUN_004bcbb4(int param_1,unsigned int param_2)
   int temp_v2;
   
   temp_v0 = param_2;
-  FUN_001aba54();
+  dataTable04FindById();
   if (temp_v0 != 0) {
-    temp_v1 = FUN_003e46f4(0xc);
+    temp_v1 = gameDataFlagTestBit(0xc);
     if (temp_v1 != 0) {
       FUN_00186f58();
     }
-    temp_v1 = FUN_003e46f4(0xd);
+    temp_v1 = gameDataFlagTestBit(0xd);
     if (temp_v1 != 0) {
       FUN_00186f58();
     }
-    temp_v1 = FUN_003e46f4(0xe);
+    temp_v1 = gameDataFlagTestBit(0xe);
     if (temp_v1 != 0) {
       FUN_00186f58();
     }
-    temp_v1 = FUN_003e46f4(0xf);
+    temp_v1 = gameDataFlagTestBit(0xf);
     if (temp_v1 != 0) {
       FUN_00186f58();
     }

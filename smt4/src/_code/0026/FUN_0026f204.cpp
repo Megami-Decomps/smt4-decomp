@@ -15,7 +15,7 @@ int FUN_002bcfc0(...);
 int FUN_002bd06c(void);
 int FUN_002be624(...);
 int FUN_002be650(int, int);
-int FUN_002bf694(unsigned short *, short *);
+int libc_strcpy(unsigned short *, short *);
 int rt_memcpy_w(unsigned short *, unsigned char *, int);
 
 extern unsigned char LAB_0026f584; /* 0x26f584 */
@@ -31,14 +31,14 @@ extern unsigned char LAB_0026f778; /* 0x26f778 */
 /* Supplied declaration required: FUN_002958f8. */
 /* Supplied declaration required: FUN_00296b3c. */
 /* Supplied declaration required: FUN_002a7c80. */
-extern unsigned int FUN_002b47bc(int, unsigned int, unsigned int);
+extern unsigned int fileSectionGetData(int, unsigned int, unsigned int);
 extern unsigned int FUN_002bce00(void);
 extern unsigned int FUN_002bce30(short, unsigned int);
 /* Supplied declaration required: FUN_002bcfc0. */
 /* Supplied declaration required: FUN_002bd06c. */
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002be650. */
-/* Supplied declaration required: FUN_002bf694. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -59,7 +59,7 @@ void FUN_0026f204(unsigned int *param_1,short *param_2,int param_3)
   if (param_1 == (unsigned int *)0x0 || param_2 == (short *)0x0) {
     return;
   }
-  FUN_002bf694(&uStack_a8,param_2 + 7);
+  libc_strcpy(&uStack_a8,param_2 + 7);
   FUN_00296b3c(param_1[1],4,0xffffffff,0,0,&uStack_a8);
   if ((*(unsigned char *)(param_2 + 0x10) & 2) != 0) {
     rt_memcpy_w(&uStack_a8,&LAB_0026f584,0x13);
@@ -69,7 +69,7 @@ void FUN_0026f204(unsigned int *param_1,short *param_2,int param_3)
   }
   FUN_00296b3c(*param_1,4,0xffffffff,0,0,&uStack_a8);
   if (param_3 != 0) {
-    temp_v1 = FUN_002b47bc(param_3,*(unsigned int *)(param_2 + 0x12),0);
+    temp_v1 = fileSectionGetData(param_3,*(unsigned int *)(param_2 + 0x12),0);
     FUN_00296b3c(param_1[0xd],2,0xffffffff,0,0,&LAB_0026f5a8,temp_v1);
   }
   else {

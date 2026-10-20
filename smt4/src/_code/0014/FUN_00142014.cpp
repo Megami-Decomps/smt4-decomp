@@ -4,12 +4,12 @@ extern "C" {
 
 struct PlayerParams;
 
-u8 FUN_0014201c(SoundArchiveRef *ref, u32 unused, PlayerParams *out);
+u8 nw_snd_internal_SoundArchiveFileReader_ReadPlayerInfo(SoundArchiveRef *ref, u32 unused, PlayerParams *out);
 
-/* Passes the wrapper's ref on to FUN_0014201c, the function that follows it. */
+/* Passes the wrapper's ref on to nw_snd_internal_SoundArchiveFileReader_ReadPlayerInfo, the function that follows it. */
 u8 FUN_00142014(SoundArchiveWrapper *wrapper, u32 unused, PlayerParams *out)
 {
-    return FUN_0014201c(wrapper->ref, unused, out);
+    return nw_snd_internal_SoundArchiveFileReader_ReadPlayerInfo(wrapper->ref, unused, out);
 }
 
 } /* extern "C" */

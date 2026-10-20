@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100854(unsigned int *, unsigned int, unsigned int, int, unsigned char *);
+int libc_bsearch(unsigned int *, unsigned int, unsigned int, int, unsigned char *);
 int efctSetSpeed(...);
 int FUN_001834a4(int, int);
 int FUN_00185dd4(...);
@@ -24,7 +24,7 @@ typedef struct {
 } void_stack;
 
 extern unsigned char LAB_002321f8; /* 0x2321f8 */
-extern int DAT_0057f57c; /* 0x57f57c */
+extern int g_sWin; /* 0x57f57c */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 #ifndef ROMWRIGHT_PIECE_2_2_DEFINED
@@ -34,7 +34,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00100854. */
+/* Supplied declaration required: libc_bsearch. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001834a4. */
@@ -71,15 +71,15 @@ unsigned int FUN_003d02bc(void)
   unsigned int temp_v15;
   unsigned int temp_v16 [3];
   
-  temp_v8 = DAT_0057f57c;
-  if (*(int *)(DAT_0057f57c + 8) != 0) {
-    temp_v9 = *(unsigned int *)(DAT_0057f57c + 0x14);
+  temp_v8 = g_sWin;
+  if (*(int *)(g_sWin + 8) != 0) {
+    temp_v9 = *(unsigned int *)(g_sWin + 0x14);
     temp_v0 = dataTableGet(0x47,0);
     temp_v1 = dataTableGetEntries();
     temp_v0 = dataTableGetCount(temp_v0);
     puVar3 = &temp_v15;
     temp_v15 = romwright_piece_2_2((*(unsigned short *)((unsigned char *)&temp_v15 + 2)),(short)temp_v9);
-    FUN_00100854(puVar3,temp_v1,temp_v0,4,&LAB_002321f8);
+    libc_bsearch(puVar3,temp_v1,temp_v0,4,&LAB_002321f8);
     temp_v2 = 0;
     if (puVar3 != (unsigned int *)0x0) {
       temp_v2 = (int)*(short *)((int)puVar3 + 2);
@@ -131,7 +131,7 @@ unsigned int FUN_003d02bc(void)
         temp_v0 = dataTableGetCount(temp_v0);
         puVar3 = temp_v16;
         temp_v16[0] = romwright_piece_2_2((((unsigned int)(temp_v16[0]) >> 16) & 0xffffU),(short)temp_v1);
-        FUN_00100854(puVar3,temp_v15,temp_v0,4,&LAB_002321f8);
+        libc_bsearch(puVar3,temp_v15,temp_v0,4,&LAB_002321f8);
         if (puVar3 != (unsigned int *)0x0) {
           temp_v10 = (int)*(short *)((int)puVar3 + 2);
         }

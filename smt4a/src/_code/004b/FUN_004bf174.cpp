@@ -8,8 +8,8 @@ int sysPlaySe(...);
 int FUN_00183f58(int, int, int);
 int FUN_0023b45c(int);
 int FUN_002a7324(int);
-int FUN_0031d1b4(int, int);
-int FUN_0031d1d8(int, int);
+int flaggedEntrySetValueB(int, int);
+int flaggedEntrySetValueA(int, int);
 int FUN_0037e0d0(unsigned int, int);
 int FUN_003e4d68(unsigned int);
 int FUN_004be990(...);
@@ -26,8 +26,8 @@ extern int FUN_0022e714(void);
 extern int FUN_0023b3b8(void);
 /* Supplied declaration required: FUN_0023b45c. */
 /* Supplied declaration required: FUN_002a7324. */
-/* Supplied declaration required: FUN_0031d1b4. */
-/* Supplied declaration required: FUN_0031d1d8. */
+/* Supplied declaration required: flaggedEntrySetValueB. */
+/* Supplied declaration required: flaggedEntrySetValueA. */
 extern int FUN_0035db94(void);
 extern int FUN_0037df48(void);
 /* Supplied declaration required: FUN_0037e0d0. */
@@ -51,8 +51,8 @@ void FUN_004bf174(int param_1)
     else if (temp_v0 < 0) {
       temp_v0 = *(int *)(param_1 + 0x324) - 1;
     }
-    FUN_0031d1b4(param_1 + 0x260,temp_v0 % 4);
-    FUN_0031d1d8(param_1 + 0x260,(int)(temp_v0 + ((unsigned int)(temp_v0 >> 0x1f) >> 0x1e)) >> 2);
+    flaggedEntrySetValueB(param_1 + 0x260,temp_v0 % 4);
+    flaggedEntrySetValueA(param_1 + 0x260,(int)(temp_v0 + ((unsigned int)(temp_v0 >> 0x1f) >> 0x1e)) >> 2);
     *(int *)(param_1 + 0x2f4) = temp_v0;
     *(int *)(param_1 + 0x32c) = temp_v0;
     FUN_0023b45c(0);

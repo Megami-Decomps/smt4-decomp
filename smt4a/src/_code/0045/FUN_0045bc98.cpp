@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_001b4a90(...);
+int __aeabi_memset4(...);
 
 typedef struct fn_0045bc98_arg0 fn_0045bc98_arg0;
 struct fn_0045bc98_arg0 {
@@ -19,7 +19,7 @@ struct fn_0045bc98_arg0 {
     undefined1 field_0xa; /* +0xa */
 };
 
-/* Supplied declaration required: FUN_001b4a90. */
+/* Supplied declaration required: __aeabi_memset4. */
 
 
 unsigned char * FUN_0045bc98(fn_0045bc98_arg0 *param_1)
@@ -35,7 +35,7 @@ unsigned char * FUN_0045bc98(fn_0045bc98_arg0 *param_1)
   param_1->field_0x8 = 0;
   param_1->field_0x9 = 0;
   param_1->field_0xa = 0;
-  FUN_001b4a90(param_1 + 1,2,0xffffffff);
+  __aeabi_memset4(param_1 + 1,2,0xffffffff);
   *(unsigned short *)&param_1->field_0x5 = 0;
   return &param_1->field_0x0;
 }

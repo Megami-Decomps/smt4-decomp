@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern u8 DAT_004215ac;
+extern u8 g_nwGfxLookAtTargetViewUpdaterVtable;
 
 /* Allocates and initializes a 16-byte object from `heap`; returns it, or NULL if the allocation failed. */
 HeapObject *FUN_0013ec9c(Heap *heap, u32 value)
@@ -12,7 +12,7 @@ HeapObject *FUN_0013ec9c(Heap *heap, u32 value)
     if (obj != NULL) {
         obj->heap = heap;
         obj->flag = 0;
-        obj->vtbl = &DAT_004215ac;
+        obj->vtbl = &g_nwGfxLookAtTargetViewUpdaterVtable;
         obj->value = value;
     }
     return obj;

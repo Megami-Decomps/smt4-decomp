@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_002542a4(void);
+extern int gameGetCounters(void);
 extern unsigned int scrGetArg(unsigned int);
 
 
@@ -17,9 +17,9 @@ unsigned int FUN_002cde88(void)
   
   temp_v0 = scrGetArg(0);
   temp_v1 = scrGetArg(1);
-  temp_v2 = FUN_002542a4();
+  temp_v2 = gameGetCounters();
   if (*(unsigned int *)(temp_v2 + (temp_v0 & 0xff) * 4) < temp_v1) {
-    temp_v2 = FUN_002542a4();
+    temp_v2 = gameGetCounters();
     *(unsigned int *)(temp_v2 + (temp_v0 & 0xff) * 4) = temp_v1;
   }
   return 1;

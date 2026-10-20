@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e9afe(int, unsigned int);
+int vectorCopyHeader(int, unsigned int);
 
 typedef struct fn_002eca44_arg0 fn_002eca44_arg0;
 struct fn_002eca44_arg0 {
@@ -40,8 +40,8 @@ typedef struct {
 extern unsigned char DAT_005585a4; /* 0x5585a4 */
 
 extern unsigned int FUN_002e7908(fn_002eca44_arg0 **, unsigned int *);
-/* Supplied declaration required: FUN_002e9afe. */
-extern unsigned int *FUN_002e9f80(void);
+/* Supplied declaration required: vectorCopyHeader. */
+extern unsigned int *sharedRefInit(void);
 extern unsigned int FUN_002e9f94(unsigned int *, unsigned int);
 extern int FUN_002e9ff4(unsigned int *);
 
@@ -62,7 +62,7 @@ int FUN_002eca44(fn_002eca44_arg0 *param_1,unsigned int param_2,unsigned int par
   uStack_1c = param_2;
   uStack_18 = param_3;
   temp_v2 = param_4;
-  puVar1 = (unsigned int *)FUN_002e9f80();
+  puVar1 = (unsigned int *)sharedRefInit();
   *puVar1 = (unsigned int)&DAT_005585a4;
   *(unsigned char *)(puVar1 + 4) = 0;
   puVar1[5] = 0;
@@ -87,7 +87,7 @@ int FUN_002eca44(fn_002eca44_arg0 *param_1,unsigned int param_2,unsigned int par
   puVar1 = (unsigned int *)(temp_v1 + 0x20);
   temp_v2 = 0x80010001;
   temp_v0 = FUN_002e7908(&pfStack_20,(unsigned int *)&temp_v2);
-  FUN_002e9afe(temp_v1,temp_v0);
+  vectorCopyHeader(temp_v1,temp_v0);
   *(unsigned int *)(temp_v1 - 0x2c) = 0;
   *puVar1 = 0;
   puVar1[1] = 0;

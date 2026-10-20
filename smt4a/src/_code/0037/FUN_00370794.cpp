@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern PanelRef DAT_0057f588;
+extern PanelRef g_messageMain;
 
 u32 FUN_00370794(void)
 {
-    return DAT_0057f588.panel->unk20;
+    return g_messageMain.panel->unk20;
 }
 
 } /* extern "C" */

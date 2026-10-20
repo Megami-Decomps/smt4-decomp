@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_0015ab30(int, unsigned char [4], int *, int *, unsigned int [2]);
 int FUN_00189a38(void);
-int FUN_0018b868(void);
-int FUN_0018b964(void);
+int nn_applet_CTR_detail_OpenSession(void);
+int nn_applet_CTR_detail_CloseSession(void);
 
 /* stack frame of param_5: 5 slot(s), 17 byte(s) */
 typedef struct {
@@ -20,8 +20,8 @@ typedef struct {
 
 /* Supplied declaration required: FUN_0015ab30. */
 /* Supplied declaration required: FUN_00189a38. */
-/* Supplied declaration required: FUN_0018b868. */
-/* Supplied declaration required: FUN_0018b964. */
+/* Supplied declaration required: nn_applet_CTR_detail_OpenSession. */
+/* Supplied declaration required: nn_applet_CTR_detail_CloseSession. */
 
 
 void nn_applet_CTR_detail_GetAppletManInfo
@@ -35,12 +35,12 @@ void nn_applet_CTR_detail_GetAppletManInfo
   int temp_v2;
   unsigned int temp_v3 [2];
   
-  FUN_0018b868();
+  nn_applet_CTR_detail_OpenSession();
   FUN_0015ab30(param_1,temp_v0,&temp_v1,&temp_v2,temp_v3);
   if (param_1 < 0) {
     FUN_00189a38();
   }
-  FUN_0018b964();
+  nn_applet_CTR_detail_CloseSession();
   if (param_2 != (unsigned char *)0x0) {
     *param_2 = temp_v0[0];
   }

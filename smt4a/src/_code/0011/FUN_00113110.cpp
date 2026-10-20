@@ -4,16 +4,16 @@
 
 extern "C" {
 
-int FUN_002e9538(int, unsigned int);
+int onlineSockAddrCopy(int, unsigned int);
 int FUN_002ea3d0(int, unsigned int);
 
 extern unsigned char LAB_00112a0d; /* 0x112a0d */
 extern unsigned char LAB_0011316c; /* 0x11316c */
 
-/* Supplied declaration required: FUN_002e9538. */
+/* Supplied declaration required: onlineSockAddrCopy. */
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned char *, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
-extern int FUN_002fd6f8(void);
+extern int mapIsEmpty4(void);
 extern unsigned int FUN_002fda98(int);
 
 
@@ -29,14 +29,14 @@ void FUN_00113110(int param_1)
   unsigned char *puVar3;
   
   puVar3 = temp_v2;
-  temp_v0 = FUN_002fd6f8();
+  temp_v0 = mapIsEmpty4();
   if (temp_v0 != 0) {
     puVar4 = &LAB_00112a0d;
     puVar3 = temp_v3;
   }
   else {
     temp_v1 = FUN_002fda98(param_1 + 0x120);
-    FUN_002e9538(param_1 + 0x2f0,temp_v1);
+    onlineSockAddrCopy(param_1 + 0x2f0,temp_v1);
     *(unsigned int *)(param_1 + 0x2d0) = 1;
     *(unsigned int *)(param_1 + 0x2cc) = 0x9c4;
     puVar4 = (unsigned char *)0x112dd1;

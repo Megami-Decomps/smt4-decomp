@@ -24,7 +24,7 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_4_stack;
 
-extern int DAT_005712f0; /* 0x5712f0 */
+extern int g_btlActionReflect; /* 0x5712f0 */
 
 extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_004102d8. */
@@ -50,8 +50,8 @@ FUN_004fe618(short param_1,unsigned int param_2,unsigned int param_3,fn_004fe618
       if ((param_4->field_0x104 != *(int *)(temp_v3 + 0x104)) ||
          (param_4->field_0x104 < 0 || *(int *)(temp_v3 + 0x104) < 0)) {
         if (*(float *)(temp_v3 + 0x14) > param_4->field_0x14) {
-          temp_v1 = DAT_005712f0;
-          FUN_004102d8(DAT_005712f0,(int)param_1,0,param_2);
+          temp_v1 = g_btlActionReflect;
+          FUN_004102d8(g_btlActionReflect,(int)param_1,0,param_2);
           *(unsigned char *)(temp_v1 + 5) = *(unsigned char *)(temp_v1 + 5) | 4;
           *(int *)(temp_v1 + 0x14) = temp_v3;
           *(unsigned char *)(temp_v1 + 4) = 0x2c;
@@ -59,8 +59,8 @@ FUN_004fe618(short param_1,unsigned int param_2,unsigned int param_3,fn_004fe618
           *(unsigned int *)(temp_v1 + 0x4c) = 0;
         }
         else {
-          temp_v1 = DAT_005712f0;
-          FUN_004102d8(DAT_005712f0,(int)param_1,0,param_2);
+          temp_v1 = g_btlActionReflect;
+          FUN_004102d8(g_btlActionReflect,(int)param_1,0,param_2);
           *(unsigned char *)(temp_v1 + 5) = *(unsigned char *)(temp_v1 + 5) | 4;
           *(int *)(temp_v1 + 0x14) = temp_v3;
           *(unsigned char *)(temp_v1 + 4) = 0x2b;

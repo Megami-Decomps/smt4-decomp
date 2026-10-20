@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_002e6e14(int);
-int FUN_002e9598(...);
+int asdOperatorDeleteArray(int);
+int onlineStringAssign(...);
 int FUN_003079ae(int *);
 int FUN_003079c6(...);
 int FUN_0030d3ba(...);
@@ -16,8 +16,8 @@ typedef struct {
 } param_4_stack;
 
 extern int rt_malloc(void);
-/* Supplied declaration required: FUN_002e6e14. */
-/* Supplied declaration required: FUN_002e9598. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
+/* Supplied declaration required: onlineStringAssign. */
 /* Supplied declaration required: FUN_003079ae. */
 /* Supplied declaration required: FUN_003079c6. */
 /* Supplied declaration required: FUN_0030d3ba. */
@@ -43,9 +43,9 @@ void FUN_0013400a(int *param_1,int param_2,unsigned int param_3,unsigned int par
     while (param_2 != temp_v4) {
       temp_v4 = temp_v4 - 8;
       temp_v3 = temp_v3 - 8;
-      FUN_002e9598(temp_v3,temp_v4);
+      onlineStringAssign(temp_v3,temp_v4);
     }
-    FUN_002e9598(param_2,param_3);
+    onlineStringAssign(param_2,param_3);
     return;
   }
   temp_v2 = (temp_v0 >> 1) + temp_v0 + (temp_v0 >> 3);
@@ -60,7 +60,7 @@ void FUN_0013400a(int *param_1,int param_2,unsigned int param_3,unsigned int par
   temp_v5 = param_1[1];
   temp_v4 = *param_1;
   FUN_003079ae(param_1);
-  FUN_002e6e14(*param_1);
+  asdOperatorDeleteArray(*param_1);
   *param_1 = temp_v3;
   param_1[2] = temp_v1 * 8 + temp_v3;
   param_1[1] = ((temp_v5 - temp_v4) >> 3) * 8 + temp_v3 + 8;

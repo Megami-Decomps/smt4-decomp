@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00296e90(void);
 
-extern int DAT_0043dd68; /* 0x43dd68 */
+extern int g_unite; /* 0x43dd68 */
 
 /* Supplied declaration required: FUN_00296e90. */
 extern int sys43e188GetState(void);
@@ -18,12 +18,12 @@ void FUN_002a035c(void)
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   
-  if (DAT_0043dd68 != 0) {
-    if ((*(char *)(DAT_0043dd68 + 0x430) != '\0') && (temp_v0 = sys43e188GetState(), temp_v0 == 0)) {
+  if (g_unite != 0) {
+    if ((*(char *)(g_unite + 0x430) != '\0') && (temp_v0 = sys43e188GetState(), temp_v0 == 0)) {
       FUN_00296e90();
     }
-    if (DAT_0043dd68 != 0) {
-      *(unsigned int *)(DAT_0043dd68 + 0x478) = 0xffffffff;
+    if (g_unite != 0) {
+      *(unsigned int *)(g_unite + 0x478) = 0xffffffff;
     }
   }
   return;

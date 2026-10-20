@@ -18,7 +18,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } void_stack;
 
-extern int DAT_0043dcf0; /* 0x43dcf0 */
+extern int g_partyPanel; /* 0x43dcf0 */
 
 /* Supplied declaration required: FUN_0026bc6c. */
 /* Supplied declaration required: FUN_0029e8b8. */
@@ -26,7 +26,7 @@ extern int DAT_0043dcf0; /* 0x43dcf0 */
 /* Supplied declaration required: FUN_0029eb5c. */
 extern unsigned int FUN_0029efa8(int);
 /* Supplied declaration required: FUN_0029f848. */
-extern int FUN_002a8764(void);
+extern int gameGetSlotTable(void);
 
 
 void FUN_0026b9bc(void)
@@ -46,17 +46,17 @@ void FUN_0026b9bc(void)
   int temp_v9;
   unsigned char temp_v10;
   
-  temp_v6 = DAT_0043dcf0;
+  temp_v6 = g_partyPanel;
   temp_v9 = 0;
-  *(unsigned int *)(DAT_0043dcf0 + 0x28) = 0;
+  *(unsigned int *)(g_partyPanel + 0x28) = 0;
   do {
-    temp_v1 = FUN_002a8764();
+    temp_v1 = gameGetSlotTable();
     if (-1 < *(char *)(temp_v1 + temp_v9 + 0x90f0)) {
       *(int *)(temp_v6 + 0x28) = *(int *)(temp_v6 + 0x28) + 1;
     }
     temp_v9 = temp_v9 + 1;
   } while (temp_v9 < 0x18);
-  temp_v9 = FUN_002a8764();
+  temp_v9 = gameGetSlotTable();
   if (*(unsigned char *)(temp_v9 + 0x910b) < 0xd) {
     temp_v2 = 1;
   }
@@ -64,7 +64,7 @@ void FUN_0026b9bc(void)
     temp_v2 = 2;
   }
   *(unsigned int *)(temp_v6 + 0x30) = temp_v2;
-  temp_v9 = FUN_002a8764();
+  temp_v9 = gameGetSlotTable();
   temp_v1 = 0;
   temp_v8 = 0x18;
   pcVar4 = (char *)(temp_v9 + 0x90f0);

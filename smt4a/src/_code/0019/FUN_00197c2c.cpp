@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0030ea58(void);
+int libc_strcmp(void);
 
-/* Supplied declaration required: FUN_0030ea58. */
+/* Supplied declaration required: libc_strcmp. */
 
 
 char * FUN_00197c2c(unsigned int param_1,char *param_2)
@@ -17,7 +17,7 @@ char * FUN_00197c2c(unsigned int param_1,char *param_2)
   
   if ((param_2 != (char *)0x0) && (*param_2 != '\0')) {
     pcVar1 = "SJIS";
-    FUN_0030ea58();
+    libc_strcmp();
     if (pcVar1 != (char *)0x0) {
       return (char *)0x0;
     }

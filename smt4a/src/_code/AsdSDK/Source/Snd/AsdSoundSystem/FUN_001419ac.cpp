@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00153cd0(int, unsigned int, unsigned int, unsigned int);
 int asdMemoryAllocTracked(int, int, int, int, int);
-int FUN_001afdc4(void);
+int nn_snd_CTR_FreeVoice(void);
 int sysMemClear(int, int);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
@@ -20,7 +20,7 @@ extern unsigned char DAT_0063f4f0; /* 0x63f4f0 */
 
 /* Supplied declaration required: FUN_00153cd0. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: FUN_001afdc4. */
+/* Supplied declaration required: nn_snd_CTR_FreeVoice. */
 /* Supplied declaration required: sysMemClear. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
@@ -78,7 +78,7 @@ LAB_00141a6c:
     if (0 < *(int *)(temp_v0 + 0xec)) {
       do {
         if (*(int *)(temp_v0 + temp_v1 * 4 + 0x68) != 0) {
-          FUN_001afdc4();
+          nn_snd_CTR_FreeVoice();
         }
         temp_v1 = temp_v1 + 1;
       } while (temp_v1 < *(int *)(temp_v0 + 0xec));

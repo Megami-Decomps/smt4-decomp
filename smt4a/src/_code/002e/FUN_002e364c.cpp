@@ -28,7 +28,7 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_1_stack;
 
-extern unsigned char DAT_00580204; /* 0x580204 */
+extern unsigned char g_mapCollision; /* 0x580204 */
 extern unsigned char DAT_00580205; /* 0x580205 */
 extern int DAT_00580218; /* 0x580218 */
 extern unsigned int DAT_005ed634; /* 0x5ed634 */
@@ -96,7 +96,7 @@ unsigned int FUN_002e364c(float *param_1)
   temp_v5 = 0;
   temp_v3 = 0x5e2714;
   temp_v4 = 0;
-  DAT_00580204 = 0;
+  g_mapCollision = 0;
   DAT_00580205 = 0;
   temp_v10 = 0;
   temp_v7 = 65.0f;
@@ -251,7 +251,7 @@ unsigned int FUN_002e364c(float *param_1)
                   DAT_005ed658 = *(unsigned int *)(temp_v3 + 0x80);
                   DAT_005ed65c = *(unsigned int *)(temp_v3 + 0x84);
                   DAT_005ed660 = *(unsigned int *)(temp_v3 + 0x88);
-                  DAT_00580204 = 1;
+                  g_mapCollision = 1;
                   DAT_00580205 = 1;
                 }
               }
@@ -276,7 +276,7 @@ unsigned int FUN_002e364c(float *param_1)
                 DAT_005ed658 = *(unsigned int *)(temp_v3 + 0x80);
                 DAT_005ed65c = *(unsigned int *)(temp_v3 + 0x84);
                 DAT_005ed660 = *(unsigned int *)(temp_v3 + 0x88);
-                DAT_00580204 = 1;
+                g_mapCollision = 1;
               }
             }
           }

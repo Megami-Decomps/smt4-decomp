@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00336dec(int, int);
 int FUN_003d8a18(int, int);
 
-extern int FUN_002b8cec(unsigned int);
+extern int padIsButtonRepeat(unsigned int);
 /* Supplied declaration required: FUN_00336dec. */
 /* Supplied declaration required: FUN_003d8a18. */
 
@@ -20,7 +20,7 @@ void FUN_003d88dc(int param_1,int param_2)
   int temp_v1;
   int temp_v2;
   
-  temp_v1 = FUN_002b8cec(5);
+  temp_v1 = padIsButtonRepeat(5);
   if (temp_v1 != 0) {
     temp_v0 = *(char *)(param_1 + 0x12) + '\x01';
     *(char *)(param_1 + 0x12) = temp_v0;
@@ -29,7 +29,7 @@ void FUN_003d88dc(int param_1,int param_2)
     }
   }
   else {
-    temp_v1 = FUN_002b8cec(6);
+    temp_v1 = padIsButtonRepeat(6);
     if (temp_v1 != 0) {
       temp_v0 = *(char *)(param_1 + 0x12) - '\x01';
       *(char *)(param_1 + 0x12) = temp_v0;
@@ -38,12 +38,12 @@ void FUN_003d88dc(int param_1,int param_2)
       }
     }
     else {
-      temp_v1 = FUN_002b8cec(4);
+      temp_v1 = padIsButtonRepeat(4);
       if (temp_v1 != 0) {
         temp_v0 = *(char *)(param_1 + 0x13) - '\x01';
       }
       else {
-        temp_v1 = FUN_002b8cec(3);
+        temp_v1 = padIsButtonRepeat(3);
         if (temp_v1 == 0) goto LAB_003d89b4;
         temp_v0 = *(char *)(param_1 + 0x13) + '\x01';
       }

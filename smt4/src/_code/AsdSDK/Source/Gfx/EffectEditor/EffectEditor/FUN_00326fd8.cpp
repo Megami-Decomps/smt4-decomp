@@ -7,8 +7,8 @@ extern "C" {
 int CONCAT44(...);
 int FUN_0024dd00(int, int, int, unsigned char *);
 int FUN_0024dd80(int);
-int FUN_002b8cec(...);
-int FUN_002bfde4(...);
+int padIsButtonRepeat(...);
+int padIsButtonPressed(...);
 int FUN_003f6cd8(void);
 
 extern unsigned char LAB_003272bc; /* 0x3272bc */
@@ -53,8 +53,8 @@ static float romwright_sqrt_4(float value)
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Supplied declaration required: FUN_0024dd00. */
 /* Supplied declaration required: FUN_0024dd80. */
-/* Supplied declaration required: FUN_002b8cec. */
-/* Supplied declaration required: FUN_002bfde4. */
+/* Supplied declaration required: padIsButtonRepeat. */
+/* Supplied declaration required: padIsButtonPressed. */
 /* Supplied declaration required: FUN_003f6cd8. */
 
 
@@ -78,20 +78,20 @@ unsigned int FUN_00326fd8(void)
   FUN_0024dd00(8,8,0,&LAB_003272bc);
   FUN_0024dd00(8,0x14,0,&LAB_003272d4);
   FUN_0024dd00(8,0x20,0,&LAB_003272e8);
-  temp_v2 = FUN_002b8cec(5);
+  temp_v2 = padIsButtonRepeat(5);
   temp_v5 = 10.0f;
   if (temp_v2 == 0) {
     FUN_0024dd80(5);
-    temp_v2 = FUN_002b8cec();
+    temp_v2 = padIsButtonRepeat();
     if (temp_v2 != 0) {
       DAT_004d9274 = DAT_004d9274 - temp_v5;
       temp_v3 = 3;
     }
     else {
-      temp_v2 = FUN_002b8cec(6);
+      temp_v2 = padIsButtonRepeat(6);
       if (temp_v2 == 0) {
         FUN_0024dd80(6);
-        temp_v2 = FUN_002b8cec();
+        temp_v2 = padIsButtonRepeat();
         if (temp_v2 != 0) {
           DAT_004d9274 = DAT_004d9274 + temp_v5;
           temp_v3 = 3;
@@ -107,20 +107,20 @@ unsigned int FUN_00326fd8(void)
     DAT_004d9274 = DAT_004d9274 - temp_v5;
     temp_v3 = 3;
   }
-  temp_v2 = FUN_002b8cec(7);
+  temp_v2 = padIsButtonRepeat(7);
   temp_v6 = (unsigned long long)(unsigned int)temp_v5 << 0x20;
   if (temp_v2 == 0) {
     FUN_0024dd80(7);
-    temp_v2 = FUN_002b8cec();
+    temp_v2 = padIsButtonRepeat();
     if (temp_v2 != 0) {
       temp_v3 = temp_v3 | 2;
       temp_v6 = romwright_piece_4_4(0xc1200000,(int)temp_v6);
     }
     else {
-      temp_v2 = FUN_002b8cec(8);
+      temp_v2 = padIsButtonRepeat(8);
       if (temp_v2 == 0) {
         FUN_0024dd80(8);
-        temp_v2 = FUN_002b8cec();
+        temp_v2 = padIsButtonRepeat();
         if (temp_v2 == 0) {
           temp_v6 = romwright_piece_4_4((int)temp_v6,(int)temp_v6);
         }
@@ -147,21 +147,21 @@ unsigned int FUN_00326fd8(void)
     temp_v7 = DAT_004d9278;
     DAT_004ea920 = temp_v5;
     DAT_004ea928 = temp_v5;
-    temp_v2 = FUN_002b8cec(3);
+    temp_v2 = padIsButtonRepeat(3);
     temp_v10 = 100.0f;
     if (temp_v2 == 0) {
       FUN_0024dd80(3);
-      temp_v2 = FUN_002b8cec();
+      temp_v2 = padIsButtonRepeat();
       if (temp_v2 != 0) {
         temp_v3 = temp_v3 | 2;
         temp_v6 = CONCAT44((int)((unsigned long long)temp_v6 >> 0x20),
                          (temp_v10 / (float)((unsigned long long)temp_v9 >> 0x20)) * 0.08726646f);
       }
       else {
-        temp_v2 = FUN_002b8cec(4);
+        temp_v2 = padIsButtonRepeat(4);
         if (temp_v2 == 0) {
           FUN_0024dd80(4);
-          temp_v2 = FUN_002b8cec();
+          temp_v2 = padIsButtonRepeat();
           if (temp_v2 != 0) {
             temp_v3 = temp_v3 | 2;
             temp_v6 = CONCAT44((int)((unsigned long long)temp_v6 >> 0x20),
@@ -212,10 +212,10 @@ unsigned int FUN_00326fd8(void)
   temp_v5 = (float)((unsigned long long)temp_v6 >> 0x20);
   DAT_004d9270 = DAT_004d9270 + DAT_0044fea0 * temp_v5;
   DAT_004d9278 = DAT_004d9278 + DAT_0044fea8 * temp_v5;
-  temp_v2 = FUN_002bfde4(1);
+  temp_v2 = padIsButtonPressed(1);
   if (temp_v2 == 0) {
     FUN_0024dd80(1);
-    temp_v2 = FUN_002bfde4();
+    temp_v2 = padIsButtonPressed();
     if (temp_v2 == 0) {
       return temp_v3 | 0x200000;
     }

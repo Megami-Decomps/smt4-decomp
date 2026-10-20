@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0016780c(unsigned int, int, int);
+int fileSectionGetData(unsigned int, int, int);
 int FUN_001688c4(unsigned int);
 int FUN_00203b40(int, int, int, int, int, int);
 int FUN_002a1f60(unsigned int, int, unsigned int, int, int, unsigned int, int);
@@ -18,7 +18,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_0016780c. */
+/* Supplied declaration required: fileSectionGetData. */
 /* Supplied declaration required: FUN_001688c4. */
 /* Supplied declaration required: FUN_00203b40. */
 /* Supplied declaration required: FUN_002a1f60. */
@@ -43,7 +43,7 @@ void FUN_003f6abc(int param_1)
   *(unsigned char *)(param_1 + 0x120) = 0;
   *(unsigned int *)(param_1 + 0x128) = 0;
   temp_v1 = **(unsigned short **)(param_1 + 0x5e0);
-  FUN_0016780c(*(unsigned int *)(param_1 + 0x28),temp_v1,0);
+  fileSectionGetData(*(unsigned int *)(param_1 + 0x28),temp_v1,0);
   FUN_002a1f60(*(unsigned int *)(param_1 + 0x5d8),3,0xffffffff,0,3,*(unsigned int *)(param_1 + 0x28),
                temp_v1);
   temp_v2 = FUN_001688c4(*(unsigned int *)(param_1 + 0x5d8));

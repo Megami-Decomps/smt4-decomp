@@ -2,12 +2,12 @@
 
 extern "C" {
 
-u8 *FUN_002840e0(void);
+u8 *flagsBGetPtr(void);
 
 /* Sets the low two flag bits and clears bit 2. */
 void FUN_003ff160(void)
 {
-    u8 *flags = FUN_002840e0();
+    u8 *flags = flagsBGetPtr();
 
     *flags = (*flags & ~4) | 3;
 }

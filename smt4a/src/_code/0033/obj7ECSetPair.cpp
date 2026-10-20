@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern Obj7ECRef DAT_0057f27c;
+extern Obj7ECRef g_useCounter;
 
 void obj7ECSetPair(u32 a, u32 b)
 {
-    Obj7EC *obj = DAT_0057f27c.instance;
+    Obj7EC *obj = g_useCounter.instance;
 
     obj->unk7EC = a;
     obj->unk7F0 = b;

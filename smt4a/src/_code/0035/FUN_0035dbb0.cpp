@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern ObjBRef DAT_00588fd0;
+extern ObjBRef g_gameGlobals;
 
 u8 FUN_0035dbb0(void)
 {
-    return DAT_00588fd0.instance->unk20AD == 0;
+    return g_gameGlobals.instance->unk20AD == 0;
 }
 
 } /* extern "C" */

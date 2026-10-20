@@ -18,29 +18,29 @@ int FUN_00282bfc(...);
 int btlTalkBustUpSetUnk2F4(...);
 int FUN_002954f4(...);
 int FUN_00295660(...);
-int FUN_0029c3b0(...);
+int soundChannelStopAll(...);
 int FUN_0029c3c0(...);
 int scrScriptProcessDestroy(...);
 int FUN_002bd06c(...);
 int FUN_002bee58(...);
-int FUN_002bf694(...);
+int libc_strcpy(...);
 int asdMemFree(...);
 
-int FUN_00152bec(...);
+int asdMdlManagerMarkDestroy(...);
 int FUN_00210194(...);
-int FUN_00263588(...);
+int gfxObjectDestroy(...);
 int FUN_00293a04(unsigned int, int);
 int FUN_00295d28(void);
-int FUN_00296f4c(...);
+int scrScriptProcessStartEntry(...);
 int asdMdlManagerCreateLoaded(...);
 int FUN_0029c2cc(...);
-int FUN_002a03a0(int, int, int);
+int soundChannelRequestIfEnabled(int, int, int);
 int FUN_002a03d8(...);
 int FUN_002a0428(...);
 int FUN_002a043c(...);
 int asdMdlManagerDestroy(...);
 int sndObjectForwardField8(void);
-int FUN_002b8838(...);
+int buttonHelpSetPreset(...);
 int FUN_002b8ee0(int, int);
 int FUN_002bf810(...);
 int FUN_002bf818(...);
@@ -73,14 +73,14 @@ extern int DAT_0043dd90; /* 0x43dd90 */
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
-/* Supplied declaration required: FUN_00152bec. */
+/* Supplied declaration required: asdMdlManagerMarkDestroy. */
 extern int FUN_0019e0c0(unsigned int);
 /* Supplied declaration required: FUN_00210194. */
 /* Supplied declaration required: FUN_00241d58. */
 /* Supplied declaration required: FUN_00258170. */
 /* Supplied declaration required: FUN_00258408. */
 /* Supplied declaration required: FUN_00258618. */
-/* Supplied declaration required: FUN_00263588. */
+/* Supplied declaration required: gfxObjectDestroy. */
 extern int FUN_002636e4(unsigned int);
 extern unsigned int FUN_00263c1c(unsigned char *);
 /* Supplied declaration required: FUN_00282bfc. */
@@ -95,26 +95,26 @@ extern int FUN_00295618(void);
 /* Supplied declaration required: FUN_00295660. */
 /* Supplied declaration required: FUN_002958f8. */
 /* Supplied declaration required: FUN_00295d28. */
-/* Supplied declaration required: FUN_00296f4c. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: asdMdlManagerCreateLoaded. */
 /* Supplied declaration required: FUN_0029c2cc. */
-/* Supplied declaration required: FUN_0029c3b0. */
+/* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: FUN_0029c3c0. */
-/* Supplied declaration required: FUN_002a03a0. */
+/* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: FUN_002a03d8. */
 /* Supplied declaration required: FUN_002a0428. */
 /* Supplied declaration required: FUN_002a043c. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: asdMdlManagerDestroy. */
 /* Supplied declaration required: sndObjectForwardField8. */
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 extern int FUN_002b89a4(unsigned int);
 /* Supplied declaration required: FUN_002b8ee0. */
 extern unsigned int FUN_002bce30(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002bd06c. */
 /* Supplied declaration required: FUN_002bee58. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002bf694. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_002bf810. */
 /* Supplied declaration required: FUN_002bf818. */
 /* Supplied declaration required: FUN_002c1658. */
@@ -161,7 +161,7 @@ unsigned int FUN_00329b70(void)
     if (temp_v7 == 0) break;
     FUN_002a03d8(0,10);
     FUN_002a03d8(1,10);
-    FUN_002a03a0(0x100006b,10,0x3c);
+    soundChannelRequestIfEnabled(0x100006b,10,0x3c);
     temp_v0 = *(short *)(temp_v2 + 0x1e);
     *(unsigned int *)(temp_v2 + 0x24) = 0xffffffff;
     if (temp_v0 != 2) {
@@ -297,17 +297,17 @@ unsigned int FUN_00329b70(void)
         *(unsigned int *)(temp_v2 + 0x90) = temp_v6;
       }
       FUN_0029c2cc(*(unsigned int *)(temp_v2 + 0x8c),0);
-      FUN_00263588(*(unsigned int *)(temp_v2 + 0x8c));
+      gfxObjectDestroy(*(unsigned int *)(temp_v2 + 0x8c));
       *(unsigned int *)(temp_v2 + 0x8c) = 0;
       FUN_002a0428(*(unsigned int *)(temp_v2 + 0x88),1);
       FUN_002a043c(*(unsigned int *)(temp_v2 + 0x90),0);
-      FUN_00152bec(*(unsigned int *)(temp_v2 + 0x84));
+      asdMdlManagerMarkDestroy(*(unsigned int *)(temp_v2 + 0x84));
       asdMdlManagerDestroy(*(unsigned int *)(temp_v2 + 0x84));
       *(unsigned int *)(temp_v2 + 0x84) = 0;
       temp_v7 = DAT_0043dd90;
       if (*(char *)(temp_v2 + 0x20) != '\0') {
-        FUN_00296f4c(*(unsigned int *)(temp_v2 + 0x2a0),0x11);
-        FUN_002b8838(0x58);
+        scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x2a0),0x11);
+        buttonHelpSetPreset(0x58);
         temp_v7 = DAT_0043dd90;
         *(unsigned int *)(DAT_0043dd90 + 4) = 4;
         *(unsigned int *)(temp_v7 + 8) = 0;
@@ -490,13 +490,13 @@ LAB_0032a1a4:
   case 5:
     temp_v5 = (unsigned int)*(unsigned short *)(temp_v2 + 0xc);
     FUN_002bd06c(temp_v5);
-    FUN_002bf694(temp_v14,temp_v5);
+    libc_strcpy(temp_v14,temp_v5);
     FUN_00295660(8,temp_v14);
     temp_v6 = FUN_002bce30(*(unsigned short *)(temp_v2 + 0xc),1);
-    FUN_002bf694(temp_v14,temp_v6);
+    libc_strcpy(temp_v14,temp_v6);
     FUN_00295660(0x10,temp_v14);
-    FUN_00296f4c(*(unsigned int *)(temp_v2 + 0x2a0),0x10);
-    FUN_002b8838(0x58);
+    scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x2a0),0x10);
+    buttonHelpSetPreset(0x58);
     FUN_002954f4(*(unsigned short *)(temp_v2 + 0xc),1);
     btlTalkBustUpSetUnk2F4(1);
     temp_v7 = DAT_0043dd90;
@@ -509,7 +509,7 @@ LAB_0032a1a4:
     if ((temp_v7 == 2) && (*(char *)(temp_v2 + 0x60e) != '\0')) {
       FUN_0029c3c0(0,10,0xff);
       FUN_0029c3c0(1,10,0xff);
-      FUN_0029c3b0(10);
+      soundChannelStopAll(10);
       temp_v7 = DAT_0043dd90;
       *(unsigned int *)(DAT_0043dd90 + 4) = 7;
       *(unsigned int *)(temp_v7 + 8) = 0;
@@ -535,11 +535,11 @@ LAB_0032a1a4:
       FUN_00294f64(*(unsigned int *)(temp_v2 + 0x80));
       *(unsigned int *)(temp_v2 + 0x80) = 0;
       FUN_0028bf2c();
-      FUN_00152bec(*(unsigned int *)(temp_v2 + 0x88));
+      asdMdlManagerMarkDestroy(*(unsigned int *)(temp_v2 + 0x88));
       asdMdlManagerDestroy(*(unsigned int *)(temp_v2 + 0x88));
       *(unsigned int *)(temp_v2 + 0x88) = 0;
       FUN_0029c2cc(*(unsigned int *)(temp_v2 + 0x90),0);
-      FUN_00263588(*(unsigned int *)(temp_v2 + 0x90));
+      gfxObjectDestroy(*(unsigned int *)(temp_v2 + 0x90));
       *(unsigned int *)(temp_v2 + 0x90) = 0;
       statusCameraDestroy();
       FUN_00294e18(1);

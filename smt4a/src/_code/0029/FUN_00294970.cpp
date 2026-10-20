@@ -5,7 +5,7 @@
 extern "C" {
 
 typedef int romwright_code(...);
-extern int DAT_00581038; /* 0x581038 */
+extern int g_mapHakai; /* 0x581038 */
 
 
 void FUN_00294970(void)
@@ -19,7 +19,7 @@ void FUN_00294970(void)
   
   temp_v0 = 0;
   do {
-    temp_v1 = DAT_00581038 + temp_v0 * 0x54;
+    temp_v1 = g_mapHakai + temp_v0 * 0x54;
     temp_v2 = *(char *)(temp_v1 + 0x5c) != '\0';
     piVar1 = (int *)0x0;
     if (temp_v2) {
@@ -39,10 +39,10 @@ void FUN_00294970(void)
   do {
     temp_v1 = 0;
     do {
-      piVar1 = *(int **)(DAT_00581038 + temp_v0 * 0x20 + temp_v1 * 4 + 0x20);
+      piVar1 = *(int **)(g_mapHakai + temp_v0 * 0x20 + temp_v1 * 4 + 0x20);
       if (piVar1 != (int *)0x0) {
         (**(romwright_code **)(*piVar1 + 4))();
-        *(unsigned int *)(DAT_00581038 + temp_v0 * 0x20 + temp_v1 * 4 + 0x20) = 0;
+        *(unsigned int *)(g_mapHakai + temp_v0 * 0x20 + temp_v1 * 4 + 0x20) = 0;
       }
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < 7);

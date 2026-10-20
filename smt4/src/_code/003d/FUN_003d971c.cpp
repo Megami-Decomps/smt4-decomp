@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00152bec(void);
+int asdMdlManagerMarkDestroy(void);
 int FUN_0022708c(void);
 int FUN_002276f8(int);
 int FUN_00241d58(int);
@@ -14,7 +14,7 @@ int asdMemFree(void);
 int memClear(int, int);
 
 typedef int romwright_code(...);
-/* Supplied declaration required: FUN_00152bec. */
+/* Supplied declaration required: asdMdlManagerMarkDestroy. */
 /* Supplied declaration required: FUN_0022708c. */
 /* Supplied declaration required: FUN_002276f8. */
 /* Supplied declaration required: FUN_00241d58. */
@@ -50,7 +50,7 @@ void FUN_003d971c(int param_1)
     }
     if (*piVar2 != 0) {
       if (-1 < *(int *)(*(int *)(*piVar2 + 8) + 0xc)) {
-        FUN_00152bec();
+        asdMdlManagerMarkDestroy();
       }
       asdMdlManagerDestroy(*piVar2);
       *piVar2 = 0;

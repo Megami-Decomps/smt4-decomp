@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern u8 DAT_004d4674;
+extern u8 g_mwmoCriticalSection;
 extern void nn_os_CriticalSection_Enter(void *section);
 extern void nn_os_CriticalSection_Leave(void *section);
 
@@ -14,9 +14,9 @@ typedef struct Obj {
 /* Reads obj->value under the critical section. */
 u32 criticalSectionReadValue38(Obj *obj, u32 *out)
 {
-    nn_os_CriticalSection_Enter(&DAT_004d4674);
+    nn_os_CriticalSection_Enter(&g_mwmoCriticalSection);
     *out = obj->value;
-    nn_os_CriticalSection_Leave(&DAT_004d4674);
+    nn_os_CriticalSection_Leave(&g_mwmoCriticalSection);
     return 1;
 }
 

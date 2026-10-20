@@ -8,10 +8,10 @@ typedef struct Record {
     /* 0x04 */ u16 second;
 } Record;
 
-Record *FUN_001801a4(void);
-s32 FUN_0018719c(u32 flag);
+Record *gameGetPlayerData(void);
+s32 gameFlagIsSet(u32 flag);
 
-/* Returns 1 when flag 0x410 is set and the record FUN_001801a4 returns has both halfwords (at 2 and 4) nonzero. */
+/* Returns 1 when flag 0x410 is set and the record gameGetPlayerData returns has both halfwords (at 2 and 4) nonzero. */
 u32 FUN_002fa75c(void)
 {
     s32 flag;
@@ -19,9 +19,9 @@ u32 FUN_002fa75c(void)
     u8 present;
     u32 value;
 
-    flag = FUN_0018719c(0x410);
+    flag = gameFlagIsSet(0x410);
     if (flag != 0) {
-        record = FUN_001801a4();
+        record = gameGetPlayerData();
         present = record->first != 0;
         if (present) {
             value = (u32)record->second;

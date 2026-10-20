@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_002e75fa(void);
+int sharedRefAddRef(void);
 int FUN_002ecf28(void);
 int FUN_002f3d88(void);
 
 extern unsigned char DAT_00558c98; /* 0x558c98 */
 
-/* Supplied declaration required: FUN_002e75fa. */
+/* Supplied declaration required: sharedRefAddRef. */
 /* Supplied declaration required: FUN_002ecf28. */
 /* Supplied declaration required: FUN_002f3d88. */
 
@@ -28,7 +28,7 @@ unsigned int * FUN_00300ae8(unsigned int *param_1,unsigned int param_2)
   temp_v0 = FUN_002ecf28();
   if (temp_v0 != 0) {
     FUN_002ecf28();
-    FUN_002e75fa();
+    sharedRefAddRef();
   }
   else {
     FUN_002f3d88();

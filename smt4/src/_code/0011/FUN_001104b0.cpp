@@ -5,14 +5,14 @@
 extern "C" {
 
 int FUN_0011d58c(int);
-int FUN_00129bd0(void);
+int nn_gxlow_CTR_SaveVramSysArea(void);
 int FUN_0012a7c8(void);
 int FUN_002bb0e0(...);
 int FUN_002bb150(int, int);
 int FUN_002bb180(void);
 int FUN_002bb194(int);
 int FUN_002bb20c(void);
-int FUN_002bb308(void);
+int nn_applet_CTR_detail_CloseSession(void);
 int FUN_002bb378(void);
 int FUN_002bbb2c(int, int);
 int FUN_002c5434(int);
@@ -30,7 +30,7 @@ extern unsigned char DAT_0044e364; /* 0x44e364 */
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_0011d58c. */
 extern int FUN_0011d808(int, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00129bd0. */
+/* Supplied declaration required: nn_gxlow_CTR_SaveVramSysArea. */
 /* Supplied declaration required: FUN_0012a7c8. */
 extern int FUN_002bb0d0(void);
 /* Supplied declaration required: FUN_002bb0e0. */
@@ -38,9 +38,9 @@ extern int FUN_002bb0d0(void);
 /* Supplied declaration required: FUN_002bb180. */
 /* Supplied declaration required: FUN_002bb194. */
 /* Supplied declaration required: FUN_002bb20c. */
-extern int FUN_002bb274(void);
+extern int nn_snd_CTR_Dspsnd_IsInitialized(void);
 extern int FUN_002bb2c8(void);
-/* Supplied declaration required: FUN_002bb308. */
+/* Supplied declaration required: nn_applet_CTR_detail_CloseSession. */
 /* Supplied declaration required: FUN_002bb378. */
 /* Supplied declaration required: FUN_002bbb2c. */
 /* Supplied declaration required: FUN_002c5434. */
@@ -67,8 +67,8 @@ int FUN_001104b0(int param_1,unsigned int param_2,unsigned int param_3,unsigned 
       temp_v0 = FUN_002bb2c8();
       if (temp_v0 != 0) {
         DAT_0044e361 = 1;
-        FUN_00129bd0();
-        temp_v0 = FUN_002bb274();
+        nn_gxlow_CTR_SaveVramSysArea();
+        temp_v0 = nn_snd_CTR_Dspsnd_IsInitialized();
         if (temp_v0 != 0) {
           FUN_002bb20c();
           DAT_0044e364 = 1;
@@ -84,7 +84,7 @@ int FUN_001104b0(int param_1,unsigned int param_2,unsigned int param_3,unsigned 
     while( 1 ) {
       FUN_002bb378();
       temp_v1 = FUN_0011d808(param_1,param_2,param_3,param_4);
-      FUN_002bb308();
+      nn_applet_CTR_detail_CloseSession();
       if ((temp_v1 != -0x375f3010 && temp_v1 != -0x1f5f33f8) && temp_v1 != -0x375f33fe) break;
       FUN_002bb150(10000000,0);
     }

@@ -4,8 +4,8 @@ extern "C" {
 
 AsdMdlObject *asdMdlObjectNew(void);
 void *FUN_002b2988(void *source, void *arg);
-void FUN_002a91f4(AsdMdlNode *node, u32 param);
-void FUN_002b2770(AsdMdlObject *obj);
+void asdMdlNodeInit(AsdMdlNode *node, u32 param);
+void asdMdlObjectBuildBounds(AsdMdlObject *obj);
 void asdListAdd(u32 *list, AsdMdlObject *obj, s32 arg);
 
 extern u32 g_asdMdlList;
@@ -18,8 +18,8 @@ AsdMdlObject *asdMdlManagerCreateFromSource(void *source, void *arg, u32 param)
 
     obj->node->param = param;
     obj->node->data = FUN_002b2988(source, arg);
-    FUN_002a91f4(obj->node, param);
-    FUN_002b2770(obj);
+    asdMdlNodeInit(obj->node, param);
+    asdMdlObjectBuildBounds(obj);
     asdListAdd(&g_asdMdlList, obj, 0);
     return obj;
 }

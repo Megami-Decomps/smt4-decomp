@@ -37,7 +37,7 @@ extern unsigned int FUN_002c2c68(int);
 extern int FUN_003e4230(unsigned int);
 extern int FUN_003e44ec(unsigned int);
 /* Supplied declaration required: FUN_003e4574. */
-extern int FUN_003e46f4(unsigned int);
+extern int gameDataFlagTestBit(unsigned int);
 
 
 void FUN_003d1aa0(int param_1)
@@ -76,7 +76,7 @@ void FUN_003d1aa0(int param_1)
       temp_v0 = temp_v4;
       FUN_00186f58();
       if ((temp_v0 != 0) &&
-         ((temp_v1 = FUN_003e46f4(temp_v4), temp_v1 != 0 || (temp_v1 = FUN_003e4230(temp_v4), temp_v1 != 2)))) {
+         ((temp_v1 = gameDataFlagTestBit(temp_v4), temp_v1 != 0 || (temp_v1 = FUN_003e4230(temp_v4), temp_v1 != 2)))) {
         temp_v1 = FUN_003e44ec(temp_v4);
         if (temp_v1 == 0) {
           FUN_003e4574(temp_v4,1);

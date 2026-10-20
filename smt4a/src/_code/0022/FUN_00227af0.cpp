@@ -4,15 +4,15 @@
 
 extern "C" {
 
-int FUN_001aba54(int);
+int dataTable04FindById(int);
 int sysMemClear(int, int);
 int rt_memcpy(int, int, int);
 
 extern int g_menuState; /* 0x57f56c */
 
 extern int FUN_0019f240(int);
-extern unsigned int FUN_001ab854(void);
-/* Supplied declaration required: FUN_001aba54. */
+extern unsigned int gameGetSlotRecord(void);
+/* Supplied declaration required: dataTable04FindById. */
 extern int FUN_001ba514(unsigned int);
 /* Supplied declaration required: sysMemClear. */
 extern int FUN_004bd098(unsigned int, int);
@@ -61,12 +61,12 @@ void FUN_00227af0(int param_1)
           if (temp_v1 < 0) {
             return;
           }
-          temp_v2 = FUN_001ab854();
+          temp_v2 = gameGetSlotRecord();
           temp_v1 = FUN_004bd098(temp_v2,(int)*(short *)(temp_v0 + 0x18));
         }
         else {
           temp_v1 = (int)*(short *)(temp_v0 + 0x18);
-          FUN_001aba54(temp_v1);
+          dataTable04FindById(temp_v1);
           temp_v1 = FUN_004c6bd0((int)(short)*(unsigned int *)(temp_v0 + 0x2ac),temp_v1);
         }
       }

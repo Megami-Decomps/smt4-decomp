@@ -8,7 +8,7 @@ int FUN_004f1530(int);
 int FUN_004f1c5c(int, int);
 int FUN_004f1edc(int);
 
-extern int DAT_00571508; /* 0x571508 */
+extern int g_btlCamera; /* 0x571508 */
 
 extern int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_004f1530. */
@@ -24,11 +24,11 @@ unsigned int FUN_003b1d34(void)
   int temp_v1;
   
   temp_v1 = scrGetArg(0);
-  temp_v0 = DAT_00571508;
-  if (DAT_00571508 != 0) {
+  temp_v0 = g_btlCamera;
+  if (g_btlCamera != 0) {
     if (temp_v1 != 0) {
       if (temp_v1 == 1) {
-        FUN_004f1530(DAT_00571508);
+        FUN_004f1530(g_btlCamera);
         *(unsigned int *)(temp_v0 + 0x3c) = 0;
         *(unsigned int *)(temp_v0 + 0x38) = 1;
         *(unsigned int *)(temp_v0 + 0xc) = 0;
@@ -36,7 +36,7 @@ unsigned int FUN_003b1d34(void)
       }
     }
     else {
-      FUN_004f1c5c(DAT_00571508,0);
+      FUN_004f1c5c(g_btlCamera,0);
       FUN_004f1edc(temp_v0);
       *(unsigned int *)(temp_v0 + 0x3c) = 0;
       *(unsigned int *)(temp_v0 + 0x38) = 1;

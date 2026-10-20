@@ -14,8 +14,8 @@ typedef struct {
 } void_stack;
 
 /* Supplied declaration required: FUN_00184310. */
-extern int FUN_0018719c(void);
-extern int FUN_001ab888(void);
+extern int gameFlagIsSet(void);
+extern int gameGetSlotTable(void);
 extern int FUN_00239234(unsigned short, unsigned char *);
 extern int FUN_002a4b28(unsigned short);
 /* Supplied declaration required: FUN_0035dd74. */
@@ -36,7 +36,7 @@ short FUN_004dbdf8(void)
   unsigned short temp_v6;
   
   temp_v1 = 0;
-  temp_v2 = FUN_001ab888();
+  temp_v2 = gameGetSlotTable();
   temp_v4 = 0;
   dataTable5Count();
   if (temp_v2 != 0) {
@@ -46,7 +46,7 @@ short FUN_004dbdf8(void)
       if (temp_v3 != 0) {
         puVar4 = (unsigned short *)(unsigned int)*(unsigned short *)(temp_v3 + 0x1a);
         FUN_00184310();
-        if ((puVar4[0x1f] == 0) || (temp_v2 = FUN_0018719c(), temp_v2 != 0)) {
+        if ((puVar4[0x1f] == 0) || (temp_v2 = gameFlagIsSet(), temp_v2 != 0)) {
           temp_v0 = puVar4[0x1e];
           if ((temp_v0 & 1) != 0) {
             if ((temp_v0 & 0xfffe) != 0) {

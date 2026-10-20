@@ -7,8 +7,8 @@ extern "C" {
 int memAlloc(int, int, int, int, int, int);
 int FUN_00271d28(void);
 int FUN_002b2d74(unsigned int, unsigned int, int);
-int FUN_002b2f08(void);
-int FUN_002e6dd4(void);
+int objectBufferFree(void);
+int rt_memclr(void);
 int effParticleParamCopy(unsigned int *, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -19,8 +19,8 @@ typedef struct {
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_00271d28. */
 /* Supplied declaration required: FUN_002b2d74. */
-/* Supplied declaration required: FUN_002b2f08. */
-/* Supplied declaration required: FUN_002e6dd4. */
+/* Supplied declaration required: objectBufferFree. */
+/* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: effParticleParamCopy. */
 
 
@@ -44,13 +44,13 @@ unsigned int * FUN_002720d4(int param_1)
   }
   puVar1 = (unsigned int *)0x10000;
   memAlloc(0x10000,0x100,0,0x5c,0x10,1);
-  FUN_002e6dd4();
+  rt_memclr();
   puVar1[1] = 0xffffffff;
   *puVar1 = temp_v2;
   puVar1[2] = 0x3f800000;
   temp_v2 = (unsigned int)**(unsigned short **)(param_1 + 0x4c);
   if (puVar1[0x13] != 0) {
-    FUN_002b2f08();
+    objectBufferFree();
   }
   FUN_002b2d74(temp_v2,*puVar1,temp_v1);
   puVar1[0x13] = temp_v2;

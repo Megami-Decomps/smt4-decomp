@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } void_stack;
 
-extern int DAT_005712f0; /* 0x5712f0 */
+extern int g_btlActionReflect; /* 0x5712f0 */
 
 /* Supplied declaration required: jobStop. */
 extern int jobGetWork(void);
@@ -28,8 +28,8 @@ void FUN_003a3a48(void)
   int temp_v2;
   
   temp_v1 = jobGetWork();
-  temp_v0 = DAT_005712f0;
-  temp_v2 = *(int *)(DAT_005712f0 + 8);
+  temp_v0 = g_btlActionReflect;
+  temp_v2 = *(int *)(g_btlActionReflect + 8);
   while (temp_v2 != 0) {
     if (*(int *)(temp_v2 + 0x10) == 0) {
       *(unsigned int *)(temp_v0 + 8) = *(unsigned int *)(temp_v2 + 0xc);
@@ -47,9 +47,9 @@ void FUN_003a3a48(void)
     asdMemFree();
     temp_v2 = *(int *)(temp_v0 + 8);
   }
-  if (DAT_005712f0 != 0) {
+  if (g_btlActionReflect != 0) {
     asdMemFree();
-    DAT_005712f0 = 0;
+    g_btlActionReflect = 0;
   }
   jobStop(*(unsigned int *)(temp_v1 + 0x48),0);
   return;

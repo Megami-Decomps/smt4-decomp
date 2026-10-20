@@ -7,7 +7,7 @@ extern "C" {
 int gameGetOptions(void);
 int memClear(unsigned short *, int);
 
-extern int FUN_002b63ac(void);
+extern int gameGetPlayerData(void);
 extern int FUN_002b6a54(unsigned int, unsigned int);
 /* Supplied declaration required: gameGetOptions. */
 extern int randNextInRange(short);
@@ -64,7 +64,7 @@ void FUN_003c86bc(void)
   } while( 1 );
   while (temp_v8 = temp_v8 + 1, temp_v8 < 3) {
     if ((unsigned short)puVar12[temp_v8 + 0x305] == temp_v12) {
-      temp_v8 = FUN_002b63ac();
+      temp_v8 = gameGetPlayerData();
       temp_v13 = FUN_002eea80(temp_v12,*(unsigned char *)(temp_v8 + 0x76));
       break;
     }

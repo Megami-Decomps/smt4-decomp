@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_001bcd48(int, int);
+int svcSleepThread(int, int);
 
 extern signed char DAT_005b4487; /* 0x5b4487 */
 extern signed char DAT_005b4488; /* 0x5b4488 */
 extern unsigned int DAT_006426b4; /* 0x6426b4 */
 
-/* Supplied declaration required: FUN_001bcd48. */
+/* Supplied declaration required: svcSleepThread. */
 extern int FUN_004320e4(unsigned int);
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
@@ -33,7 +33,7 @@ int FUN_0042d6a8(void)
       nn_os_CriticalSection_Leave((unsigned int)&DAT_006426b4);
       return temp_v0;
     }
-    FUN_001bcd48(16000000,0);
+    svcSleepThread(16000000,0);
     DAT_005b4488 = '\x01';
     nn_os_CriticalSection_Leave((unsigned int)&DAT_006426b4);
   }

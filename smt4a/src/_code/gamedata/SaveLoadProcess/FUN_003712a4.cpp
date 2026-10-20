@@ -4,15 +4,15 @@
 
 extern "C" {
 
-int FUN_0014af84(void);
+int gameDataBlocksGetSaveData(void);
 int asdMemoryAlloc(int, int, int, unsigned int, int);
 int asdMemFree(unsigned int);
-int FUN_001a9110(unsigned int, int);
+int wordPairCopy(unsigned int, int);
 int FUN_00268250(...);
 int FUN_002c9104(void);
 int FUN_002f4374(void);
 int FUN_00388068(void);
-int FUN_003fd63c(int, int);
+int gameFlagSetValue(int, int);
 int FUN_0046e238(unsigned int);
 int bitsAt60Clear(int, int);
 int FUN_004d0c4c(void);
@@ -25,30 +25,30 @@ typedef struct {
 } void_stack;
 
 extern unsigned int g_aocSystem; /* 0x570280 */
-extern unsigned char DAT_0057f6bc; /* 0x57f6bc */
+extern unsigned char g_saveLoadProcess; /* 0x57f6bc */
 extern unsigned char DAT_0057f6bf; /* 0x57f6bf */
 extern unsigned short DAT_0057f6c2; /* 0x57f6c2 */
 extern int DAT_0057f6c4; /* 0x57f6c4 */
 
-/* Supplied declaration required: FUN_0014af84. */
+/* Supplied declaration required: gameDataBlocksGetSaveData. */
 /* Supplied declaration required: asdMemoryAlloc. */
 extern int jobGetWork(void);
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_001a9110. */
-extern int FUN_001ab854(int);
-extern int FUN_001ab888(void);
+/* Supplied declaration required: wordPairCopy. */
+extern int gameGetSlotRecord(int);
+extern int gameGetSlotTable(void);
 extern int FUN_001ba514(unsigned int);
-extern unsigned int FUN_00228af0(void);
+extern unsigned int configGetSettings(void);
 extern int FUN_00229c9c(void);
 extern unsigned int *FUN_00239294(void);
-extern unsigned int FUN_00261458(void);
+extern unsigned int gameDataBlocksGetTable(void);
 /* Supplied declaration required: FUN_00268250. */
 /* Supplied declaration required: FUN_002c9104. */
 /* Supplied declaration required: FUN_002f4374. */
 extern int byte1IsZero(void);
 /* Supplied declaration required: FUN_00388068. */
-/* Supplied declaration required: FUN_003fd63c. */
+/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_0046e238. */
 extern int bitsAt60Test(int, unsigned int);
 /* Supplied declaration required: bitsAt60Clear. */
@@ -97,17 +97,17 @@ unsigned int FUN_003712a4(void)
     temp_v4 = byte1IsZero();
     if (temp_v4 == 0) {
       temp_v4 = *(int *)(temp_v1 + 8);
-      temp_v6 = FUN_00261458();
+      temp_v6 = gameDataBlocksGetTable();
       rt_memcpy_w(temp_v6,temp_v4,0x80);
-      temp_v6 = FUN_00228af0();
-      FUN_001a9110(temp_v6,temp_v4 + 0x80);
-      temp_v6 = FUN_0014af84();
+      temp_v6 = configGetSettings();
+      wordPairCopy(temp_v6,temp_v4 + 0x80);
+      temp_v6 = gameDataBlocksGetSaveData();
       rt_memcpy_w(temp_v6,temp_v4 + 0x88,0x2a71c);
       FUN_002f4374();
       if (*(char *)(temp_v1 + 0x18) == '\0') {
-        temp_v4 = FUN_0018719c(0x595);
+        temp_v4 = gameFlagIsSet(0x595);
         if (temp_v4 == 0) {
-          FUN_003fd63c(0x595,1);
+          gameFlagSetValue(0x595,1);
           temp_v4 = 0;
           do {
             temp_v2 = FUN_001ba514(0);
@@ -118,7 +118,7 @@ unsigned int FUN_003712a4(void)
           } while (temp_v4 < 0x18);
           temp_v4 = 0;
           do {
-            temp_v2 = FUN_001ab888();
+            temp_v2 = gameGetSlotTable();
             temp_v10 = *(char *)(temp_v2 + temp_v4 + 0x1c88);
             temp_v3 = temp_v4 + 1;
             if (0 < 0x18 - temp_v3) {
@@ -138,7 +138,7 @@ unsigned int FUN_003712a4(void)
           FUN_004d0c4c();
           temp_v4 = 0;
           do {
-            temp_v2 = FUN_001ab854(temp_v4);
+            temp_v2 = gameGetSlotRecord(temp_v4);
             if (((temp_v2 != 0) && (*(short *)(temp_v2 + 0x62) == 0)) &&
                (temp_v3 = bitsAt60Test(temp_v2,2), temp_v3 != 0)) {
               bitsAt60Clear(temp_v2,4);
@@ -147,11 +147,11 @@ unsigned int FUN_003712a4(void)
           } while (temp_v4 < 0x18);
           temp_v4 = 0;
           do {
-            temp_v2 = FUN_001ab854(temp_v4);
+            temp_v2 = gameGetSlotRecord(temp_v4);
             if ((temp_v2 != 0) && (temp_v2 = bitsAt60Test(temp_v2,2), temp_v2 != 0)) goto LAB_0037156c;
             temp_v4 = temp_v4 + 1;
           } while (temp_v4 < 0x18);
-          temp_v4 = FUN_0014af84();
+          temp_v4 = gameDataBlocksGetSaveData();
           *(unsigned short *)(temp_v4 + 0x27e0c) = 0;
         }
 LAB_0037156c:
@@ -166,7 +166,7 @@ LAB_0037156c:
         temp_v10 = temp_v0;
       }
       if (*(char *)(temp_v1 + 0x18) == '\0') {
-        temp_v4 = FUN_0014af84();
+        temp_v4 = gameDataBlocksGetSaveData();
         *(char *)(temp_v4 + 3) = temp_v10;
         FUN_002c9104();
         if (*(char *)(temp_v1 + 0x18) == '\0') {
@@ -232,11 +232,11 @@ joined_r0x003716c0:
     break;
   case 10:
     DAT_0057f6bf = 1;
-    DAT_0057f6bc = 1;
+    g_saveLoadProcess = 1;
     return 0xffffffff;
   case 0xb:
     DAT_0057f6bf = 0;
-    DAT_0057f6bc = 1;
+    g_saveLoadProcess = 1;
     return 0xffffffff;
   }
   return 0;

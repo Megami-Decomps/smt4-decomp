@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_002e7232(void);
+void sharedRefRelease(void);
 
 typedef struct Part {
     /* 0x00 */ u8 unk00[0x18];
@@ -20,7 +20,7 @@ u32 FUN_002ece58(Holder *object, u32 handle)
     Part *part = &object->part;
 
     if (part->handle != 0) {
-        FUN_002e7232();
+        sharedRefRelease();
     }
     part->handle = handle;
     return 1;

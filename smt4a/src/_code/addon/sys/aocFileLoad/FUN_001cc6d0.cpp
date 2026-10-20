@@ -14,7 +14,7 @@ int FUN_001642e4(int, int, unsigned int, unsigned int);
 int jyoucyuGetTableEntry(...);
 int FUN_001883b0(unsigned int *, int *, unsigned int);
 int vcallSlot12IfValid(...);
-int FUN_00195fc8(void);
+int sysFatalBreak(void);
 int asdMemFree(void);
 int asdMemoryAllocAligned(...);
 int FUN_001b57a8(...);
@@ -64,7 +64,7 @@ extern int FUN_00100836(int, unsigned int, unsigned int *);
 /* Supplied declaration required: jyoucyuGetTableEntry. */
 /* Supplied declaration required: FUN_001883b0. */
 /* Supplied declaration required: vcallSlot12IfValid. */
-/* Supplied declaration required: FUN_00195fc8. */
+/* Supplied declaration required: sysFatalBreak. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: asdMemoryAllocAligned. */
 extern int FUN_001af210(int);
@@ -76,8 +76,8 @@ extern unsigned int FUN_001b5acc(char *);
 /* Supplied declaration required: FUN_001d0ea0. */
 /* Supplied declaration required: FUN_001d0fcc. */
 /* Supplied declaration required: FUN_001d1038. */
-extern int FUN_001d109c(int);
-extern int FUN_001d10ac(unsigned int *);
+extern int objGetFlagBit16(int);
+extern int byteIsAtLeast100(unsigned int *);
 /* Supplied declaration required: FUN_001d10c0. */
 /* Supplied declaration required: FUN_001d1108. */
 /* Supplied declaration required: FUN_001d25ec. */
@@ -199,7 +199,7 @@ void FUN_001cc6d0(int param_1,int param_2)
     }
   }
   else {
-    temp_v3 = FUN_001d109c(g_aocMain);
+    temp_v3 = objGetFlagBit16(g_aocMain);
     if (temp_v3 != 0) {
       temp_v3 = FUN_001af210(g_aocMain + 0x98);
       if (temp_v3 != 0) {
@@ -216,7 +216,7 @@ void FUN_001cc6d0(int param_1,int param_2)
         uStack_298 = uStack_50;
         temp_v17 = uStack_4c;
         uStack_290 = uStack_48;
-        temp_v3 = FUN_001d10ac((unsigned int *)&temp_v15);
+        temp_v3 = byteIsAtLeast100((unsigned int *)&temp_v15);
         if (temp_v3 == 0) {
           temp_v10 = 0;
           temp_v11 = 0;
@@ -256,7 +256,7 @@ void FUN_001cc6d0(int param_1,int param_2)
           if (temp_v3 < 0) {
             if ((temp_v10 & 0xfffffffe) != 0) {
               if ((temp_v10 & 1) != 0) {
-                FUN_00195fc8();
+                sysFatalBreak();
               }
               vcallSlot12IfValid(temp_v10 & 0xfffffffe);
               temp_v10 = 0;
@@ -274,7 +274,7 @@ void FUN_001cc6d0(int param_1,int param_2)
             if (temp_v3 < 0) {
               if ((temp_v10 & 0xfffffffe) != 0) {
                 if ((temp_v10 & 1) != 0) {
-                  FUN_00195fc8();
+                  sysFatalBreak();
                 }
                 vcallSlot12IfValid(temp_v10 & 0xfffffffe);
                 temp_v10 = 0;
@@ -333,7 +333,7 @@ void FUN_001cc6d0(int param_1,int param_2)
               if (temp_v3 < 0) {
                 if ((temp_v10 & 0xfffffffe) != 0) {
                   if ((temp_v10 & 1) != 0) {
-                    FUN_00195fc8();
+                    sysFatalBreak();
                   }
                   vcallSlot12IfValid(temp_v10 & 0xfffffffe);
                   temp_v10 = 0;
@@ -342,7 +342,7 @@ void FUN_001cc6d0(int param_1,int param_2)
               else {
                 if ((temp_v10 & 0xfffffffe) != 0) {
                   if ((temp_v10 & 1) != 0) {
-                    FUN_00195fc8();
+                    sysFatalBreak();
                   }
                   vcallSlot12IfValid(temp_v10 & 0xfffffffe);
                   temp_v10 = 0;
@@ -371,7 +371,7 @@ LAB_001ccc7c:
                     return;
                   }
                   if ((temp_v10 & 1) != 0) {
-                    FUN_00195fc8();
+                    sysFatalBreak();
                   }
                   vcallSlot12IfValid(temp_v10 & 0xfffffffe);
                   return;
@@ -385,14 +385,14 @@ LAB_001ccc7c:
                 uStack_298 = uStack_284;
                 temp_v17 = uStack_280;
                 uStack_290 = uStack_27c;
-                temp_v3 = FUN_001d10ac((unsigned int *)&temp_v15);
+                temp_v3 = byteIsAtLeast100((unsigned int *)&temp_v15);
                 if (temp_v3 == 0) goto LAB_001ccc7c;
               }
             }
           }
           if ((temp_v10 & 0xfffffffe) != 0) {
             if ((temp_v10 & 1) != 0) {
-              FUN_00195fc8();
+              sysFatalBreak();
             }
             vcallSlot12IfValid(temp_v10 & 0xfffffffe);
             temp_v10 = 0;
@@ -474,7 +474,7 @@ LAB_001cce80:
         temp_v5 = temp_v5 >> 0x1b;
       }
       if ((temp_v5 == 0xfffffffc) && (temp_v3 = FUN_001d25ec(temp_v16), temp_v3 < 0)) {
-        FUN_00195fc8();
+        sysFatalBreak();
       }
       temp_v5 = FUN_001d25ec(temp_v16);
       if ((temp_v5 & 0x80000000) != 0) {
@@ -488,7 +488,7 @@ LAB_001cce80:
       }
       temp_v3 = FUN_001d25ec(temp_v16);
       if (temp_v3 < 0) {
-        FUN_00195fc8();
+        sysFatalBreak();
       }
       return;
     }

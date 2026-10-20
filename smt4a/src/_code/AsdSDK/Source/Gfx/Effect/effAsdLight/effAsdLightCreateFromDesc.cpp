@@ -13,7 +13,7 @@ void rt_memcpy(void *dst, const void *src, s32 size);
 void sceneTraverserVisit(s32 handle, u32 arg);
 
 extern s32 g_effAsdLightHandle;
-extern u32 DAT_005b3c88;
+extern u32 g_asdModelTransformBuilder;
 
 /* Creates a light effect object from an effect description (kind and parameters) and notifies
  * the registered handler, if any. */
@@ -39,7 +39,7 @@ EffAsdLight *effAsdLightCreateFromDesc(EffAsdLightDesc *desc)
         light->kind = desc->kind;
         rt_memcpy(light->params, FUN_002b41c4(desc), 0xb4);
         if (g_effAsdLightHandle != 0) {
-            sceneTraverserVisit(g_effAsdLightHandle, DAT_005b3c88);
+            sceneTraverserVisit(g_effAsdLightHandle, g_asdModelTransformBuilder);
         }
     }
     return light;

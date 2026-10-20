@@ -22,9 +22,9 @@ int jobStop(void *context, int arg);
 int FUN_001695a0(void);
 int asdMemFree(void);
 int scrScriptProcessDestroy(void);
-int FUN_001add24(int arg);
-int FUN_002e3328(void);
-int FUN_00321744(void);
+int dataTableFree(int arg);
+int asdOperatorDelete(void);
+int btlTalkBustUpDestroy(void);
 
 /* Releases every resource held by the global scene resources and frees the structure. */
 void FUN_0035ab90(void)
@@ -39,7 +39,7 @@ void FUN_0035ab90(void)
         asdMemFree();
         res->resource24 = NULL;
     }
-    FUN_00321744();
+    btlTalkBustUpDestroy();
     if (res->resource14 != NULL) {
         scrScriptProcessDestroy();
     }
@@ -53,12 +53,12 @@ void FUN_0035ab90(void)
         asdMemFree();
     }
     FUN_001695a0();
-    FUN_001add24(0x3e);
-    FUN_001add24(0x25);
-    FUN_001add24(0x14);
+    dataTableFree(0x3e);
+    dataTableFree(0x25);
+    dataTableFree(0x14);
     jobStop(res->context, 0);
     if (DAT_0057f134 != NULL) {
-        FUN_002e3328();
+        asdOperatorDelete();
         DAT_0057f134 = NULL;
     }
 }

@@ -2,17 +2,17 @@
 
 extern "C" {
 
-void FUN_00152bec(u32 handle);
+void asdMdlManagerMarkDestroy(u32 handle);
 
 extern MapDepartWork *g_mapDepartWork;
 
 void mapDepartUpdateHandles(void)
 {
     if (g_mapDepartWork->handleA != 0) {
-        FUN_00152bec(g_mapDepartWork->handleA);
+        asdMdlManagerMarkDestroy(g_mapDepartWork->handleA);
     }
     if (g_mapDepartWork->handleB != 0) {
-        FUN_00152bec(g_mapDepartWork->handleB);
+        asdMdlManagerMarkDestroy(g_mapDepartWork->handleB);
     }
 }
 

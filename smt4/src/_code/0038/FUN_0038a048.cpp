@@ -21,7 +21,7 @@ extern unsigned char LAB_0038bc4c; /* 0x38bc4c */
 
 /* Supplied declaration required: asdOperatorNewB. */
 /* Supplied declaration required: FUN_002a1130. */
-extern int FUN_002a1520(unsigned int *);
+extern int byteIsAtLeast100(unsigned int *);
 /* Supplied declaration required: FUN_002c5d5c. */
 /* Supplied declaration required: FUN_0038b6d8. */
 
@@ -72,7 +72,7 @@ void FUN_0038a048(int param_1)
     do {
       FUN_0038b6d8(&temp_v9,*(int *)(param_1 + 0x318) + temp_v5 * 0x50,param_1 + temp_v5 * 0x18 + 0x10)
       ;
-      temp_v0 = FUN_002a1520((unsigned int *)&temp_v9);
+      temp_v0 = byteIsAtLeast100((unsigned int *)&temp_v9);
       temp_v1 = temp_v10;
       temp_v2 = uStack_14;
       temp_v3 = temp_v9;

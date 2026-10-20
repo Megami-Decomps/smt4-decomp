@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001029f4(...);
 int FUN_00102bbc(...);
-int FUN_00102c28(...);
+int libc_strtok(...);
 int FUN_0043bd0c(...);
 int FUN_0043c2f4(...);
 int strncpy(...);
@@ -23,7 +23,7 @@ extern unsigned char DAT_00536cd4; /* 0x536cd4 */
 
 /* Supplied declaration required: FUN_001029f4. */
 /* Supplied declaration required: FUN_00102bbc. */
-/* Supplied declaration required: FUN_00102c28. */
+/* Supplied declaration required: libc_strtok. */
 extern int wstrlen(int);
 /* Supplied declaration required: FUN_0043bd0c. */
 /* Supplied declaration required: FUN_0043c2f4. */
@@ -46,8 +46,8 @@ unsigned int FUN_004285d4(int param_1,unsigned int param_2,int param_3)
   
   strncpy(temp_v6,param_2,0x20);
   temp_v7 = 0;
-  temp_v0 = FUN_00102c28(temp_v6,&DAT_00536ccc,&temp_v3);
-  temp_v1 = FUN_00102c28(0,&DAT_00536ccc,&temp_v3);
+  temp_v0 = libc_strtok(temp_v6,&DAT_00536ccc,&temp_v3);
+  temp_v1 = libc_strtok(0,&DAT_00536ccc,&temp_v3);
   FUN_001029f4(temp_v0,&temp_v4,10);
   if (*temp_v4 == '\0') {
     if (temp_v1 != 0) {

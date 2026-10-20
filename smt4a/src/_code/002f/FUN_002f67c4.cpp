@@ -23,7 +23,7 @@ typedef struct {
 extern unsigned char LAB_002f6b80; /* 0x2f6b80 */
 extern unsigned char LAB_002f6b8c; /* 0x2f6b8c */
 extern unsigned char LAB_002f6b94; /* 0x2f6b94 */
-extern int DAT_00588fe8; /* 0x588fe8 */
+extern int g_statusDown; /* 0x588fe8 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00100388. */
@@ -52,9 +52,9 @@ void FUN_002f67c4(int param_1,int param_2,int param_3,int param_4)
   unsigned int temp_v5;
   unsigned char temp_v6 [84];
   
-  temp_v2 = DAT_00588fe8;
+  temp_v2 = g_statusDown;
   temp_v5 = 0xffffffff;
-  temp_v0 = *(short *)(DAT_00588fe8 + 0x24ac + param_1 * 8);
+  temp_v0 = *(short *)(g_statusDown + 0x24ac + param_1 * 8);
   efctSetSpeed();
   FUN_001835b4(2,0x12,0x556,param_2,param_3,param_4);
   FUN_001835b4(2,0x12,0x557,param_2,param_3,param_4);

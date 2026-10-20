@@ -9,7 +9,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } void_stack;
 
-extern unsigned char DAT_0060fc08; /* 0x60fc08 */
+extern unsigned char g_mapRndMaze; /* 0x60fc08 */
 extern int DAT_0060fd08; /* 0x60fd08 */
 extern int DAT_0060fd0c; /* 0x60fd0c */
 extern int DAT_0060ff94; /* 0x60ff94 */
@@ -17,8 +17,8 @@ extern int DAT_0060ff98; /* 0x60ff98 */
 extern int DAT_0060ffa0; /* 0x60ffa0 */
 extern int DAT_006105e4; /* 0x6105e4 */
 
-extern int FUN_0014bef4(unsigned int);
-extern int FUN_00162e8c(void);
+extern int randRange(unsigned int);
+extern int gameFlagsGetBlock(void);
 extern int FUN_003683b8(int);
 extern int FUN_00376f94(void);
 
@@ -50,7 +50,7 @@ void FUN_00332764(void)
   unsigned int temp_v14;
   unsigned int temp_v15;
   
-  temp_v3 = FUN_00162e8c();
+  temp_v3 = gameFlagsGetBlock();
   *(unsigned char *)(temp_v3 + 0xe09) = 0;
   *(unsigned char *)(temp_v3 + 0xe0a) = 0;
   *(unsigned char *)(temp_v3 + 0xe0b) = 0;
@@ -109,7 +109,7 @@ void FUN_00332764(void)
       } while (temp_v8 < DAT_0060ff94 - 1);
     }
     if (DAT_0060ff94 / 2 >= 2) {
-      temp_v8 = FUN_0014bef4((DAT_0060ff94 / 2 - 1U) & 0xffff);
+      temp_v8 = randRange((DAT_0060ff94 / 2 - 1U) & 0xffff);
       unaff_r7 = (DAT_0060ff94 - temp_v8) - 1;
       if (*(int *)(unaff_r7 * 0xc + 0x60fd10) < 5) {
         unaff_r7 = DAT_0060ff94 - 1;
@@ -167,7 +167,7 @@ void FUN_00332764(void)
     if (DAT_0060ff98 < 1) {
       return;
     }
-    temp_v5 = FUN_0014bef4((DAT_0060ff98 - 1U) & 0xffff);
+    temp_v5 = randRange((DAT_0060ff98 - 1U) & 0xffff);
     *(unsigned char *)(temp_v3 + 0xe09) = 1;
     *(char *)(temp_v3 + 0xe0a) = (char)*(unsigned int *)(temp_v5 * 8 + 0x60fdc8);
     *(char *)(temp_v3 + 0xe0b) = (char)*(unsigned int *)(temp_v5 * 8 + 0x60fdcc);
@@ -304,12 +304,12 @@ void FUN_00332764(void)
   }
   else {
     if (DAT_0060ff94 >= 3) {
-      temp_v5 = FUN_0014bef4((DAT_0060ff94 - 3U) & 0xffff);
+      temp_v5 = randRange((DAT_0060ff94 - 3U) & 0xffff);
       temp_v13 = 0;
       temp_v9 = 0;
       if (temp_v9 < DAT_0060ff94) {
         do {
-          puVar12 = &DAT_0060fc08 + temp_v9 * 0xc;
+          puVar12 = &g_mapRndMaze + temp_v9 * 0xc;
           temp_v10 = (&DAT_0060fd08)[temp_v9 * 3];
           if (temp_v10 == temp_v8) {
             unaff_r7 = (&DAT_0060fd0c)[temp_v9 * 3];
@@ -368,7 +368,7 @@ void FUN_00332764(void)
       } while (temp_v5 < *(char *)(temp_v3 + 0xe05));
     }
     if (0 < DAT_006105e4) {
-      temp_v5 = FUN_0014bef4((DAT_006105e4 - 1U) & 0xffff);
+      temp_v5 = randRange((DAT_006105e4 - 1U) & 0xffff);
       *(unsigned char *)(temp_v3 + 0xe09) = 1;
       *(char *)(temp_v3 + 0xe0a) = (char)*(unsigned int *)(temp_v5 * 8 + 0x6105e8);
       temp_v1 = (unsigned char)*(unsigned int *)(temp_v5 * 8 + 0x6105ec);
@@ -409,7 +409,7 @@ LAB_00332d68:
     } while (temp_v5 < *(char *)(temp_v3 + 0xe05));
   }
   if (0 < DAT_0060ffa0) {
-    temp_v5 = FUN_0014bef4((DAT_0060ffa0 - 1U) & 0xffff);
+    temp_v5 = randRange((DAT_0060ffa0 - 1U) & 0xffff);
     *(unsigned char *)(temp_v3 + 0x1664) = 1;
     *(char *)(temp_v3 + 0x1665) = (char)*(unsigned int *)(temp_v5 * 8 + 0x60fe48);
     *(char *)(temp_v3 + 0x1666) = (char)*(unsigned int *)(temp_v5 * 8 + 0x60fe4c);

@@ -20,7 +20,7 @@ struct fn_004cbab0_arg0 {
     undefined4 field_0xe8; /* +0xe8 */
 };
 
-extern int FUN_0014bef4(unsigned int);
+extern int randRange(unsigned int);
 
 
 void FUN_004cbab0(fn_004cbab0_arg0 *param_1,int param_2)
@@ -49,7 +49,7 @@ void FUN_004cbab0(fn_004cbab0_arg0 *param_1,int param_2)
   else {
     param_1->field_0xb0 = in_s0;
   }
-  temp_v0 = FUN_0014bef4(1);
+  temp_v0 = randRange(1);
   if (temp_v0 == 0) {
     temp_v1 = 0x3f800000;
   }

@@ -17,12 +17,12 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } void_stack;
 
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
-extern int DAT_00580ca0; /* 0x580ca0 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
+extern int g_mapGimic; /* 0x580ca0 */
 extern unsigned char DAT_00580ca8; /* 0x580ca8 */
 
 /* Supplied declaration required: FUN_00178b04. */
-extern int FUN_0018719c(void);
+extern int gameFlagIsSet(void);
 /* Supplied declaration required: FUN_003fd76c. */
 /* Supplied declaration required: FUN_003fdb18. */
 /* Supplied declaration required: FUN_003fe86c. */
@@ -42,22 +42,22 @@ void FUN_003b51a4(void)
   unsigned int temp_v3;
   int temp_v4;
   
-  temp_v1 = DAT_00580ca0;
+  temp_v1 = g_mapGimic;
   temp_v4 = 0;
-  while ((temp_v0 = temp_v4 * 0x30, *(int *)(&DAT_00580ca8 + temp_v0) != (int)*(short *)(DAT_00580ca0 + 6)
-         || (*(int *)(temp_v0 + 0x580cac) != (int)*(short *)(DAT_00580ca0 + 8)))) {
+  while ((temp_v0 = temp_v4 * 0x30, *(int *)(&DAT_00580ca8 + temp_v0) != (int)*(short *)(g_mapGimic + 6)
+         || (*(int *)(temp_v0 + 0x580cac) != (int)*(short *)(g_mapGimic + 8)))) {
     temp_v4 = temp_v4 + 1;
     if (temp_v4 >= 0x13) {
       return;
     }
   }
-  *(int *)(DAT_00580ca0 + 0x9dc) = temp_v4;
+  *(int *)(g_mapGimic + 0x9dc) = temp_v4;
   *(unsigned int *)(temp_v1 + 0x9b8) = *(unsigned int *)(temp_v0 + 0x580cb0);
   *(unsigned int *)(temp_v1 + 0x9bc) = *(unsigned int *)(temp_v0 + 0x580cb4);
   *(unsigned int *)(temp_v1 + 0x9c0) = *(unsigned int *)(temp_v0 + 0x580cb8);
   *(unsigned int *)(temp_v1 + 0x9c4) = *(unsigned int *)(temp_v0 + 0x580cbc);
   *(unsigned int *)(temp_v1 + 0x9d8) = *(unsigned int *)(temp_v0 + 0x580cd4);
-  temp_v4 = FUN_0018719c();
+  temp_v4 = gameFlagIsSet();
   temp_v2 = 0;
   if (temp_v4 != 0) {
     temp_v2 = 2;
@@ -77,7 +77,7 @@ void FUN_003b51a4(void)
   FUN_003fd76c(temp_v3,temp_v1 + 0x9b8);
   FUN_003fdb18(temp_v3);
   FUN_003fe86c(temp_v3,(int)*(short *)(temp_v1 + 0x9b6),2);
-  FUN_0040ace8(DAT_0056fcc0,temp_v3);
+  FUN_0040ace8(g_handleRegistry,temp_v3);
   return;
 }
 

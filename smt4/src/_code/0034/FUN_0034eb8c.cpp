@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002a8554(unsigned int, int *, int, int, int, int, unsigned int, unsigned int);
-int FUN_002bd430(void);
+int sndVoiceFree(void);
 int hasExclusiveAccess(int);
 
 typedef int romwright_code(...);
@@ -19,7 +19,7 @@ extern int DAT_004c4100; /* 0x4c4100 */
 
 /* Unsupported intrinsic, declaration required: hasExclusiveAccess (CALLOTHER). */
 /* Supplied declaration required: FUN_002a8554. */
-/* Supplied declaration required: FUN_002bd430. */
+/* Supplied declaration required: sndVoiceFree. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 
 
@@ -42,7 +42,7 @@ void FUN_0034eb8c(unsigned int param_1)
   nn_os_CriticalSection_Enter((unsigned int)&DAT_004c40f8);
   piVar2 = (int *)(DAT_0044d100 + param_1 * 0x70);
   if (*piVar2 != 0) {
-    FUN_002bd430();
+    sndVoiceFree();
     *piVar2 = 0;
   }
   if (piVar2[1] != 0) {

@@ -16,8 +16,8 @@ struct BattleSlot002cfd90 {
 u32 scrGetArg(u32 index);
 void scrSetResult(u32 value);
 void *btlGetMainState(void);
-BattleSlot002cfd90 *FUN_00282924(void *state, u32 index);
-Unit002cfd90 *FUN_002a8740(u32 index);
+BattleSlot002cfd90 *btlMainFindEntryByListedId(void *state, u32 index);
+Unit002cfd90 *gameGetUnitRecord(u32 index);
 
 u32 scrCommGetUnitValue(u32 index)
 {
@@ -25,9 +25,9 @@ u32 scrCommGetUnitValue(u32 index)
     Unit002cfd90 *unit;
 
     if (arg < 109) {
-        unit = FUN_00282924(btlGetMainState(), arg)->unit;
+        unit = btlMainFindEntryByListedId(btlGetMainState(), arg)->unit;
     } else {
-        unit = FUN_002a8740(arg - 109);
+        unit = gameGetUnitRecord(arg - 109);
     }
     scrSetResult(unit->value);
     return 1;

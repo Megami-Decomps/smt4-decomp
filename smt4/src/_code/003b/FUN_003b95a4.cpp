@@ -14,7 +14,7 @@ int FUN_0026374c(...);
 int FUN_002a0400(unsigned int, unsigned int, unsigned int);
 int FUN_002be624(...);
 int FUN_003ba754(int);
-int FUN_003bbae0(void);
+int dataTable33GetEntries(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -33,12 +33,12 @@ extern int FUN_0022b8c0(int);
 /* Supplied declaration required: FUN_00234f5c. */
 /* Supplied declaration required: FUN_0026374c. */
 /* Supplied declaration required: FUN_002a0400. */
-extern int FUN_002a60b4(unsigned int, unsigned int);
+extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002be624. */
-extern int FUN_002c09d0(void);
+extern int gameFlagIsSet(void);
 extern unsigned int FUN_002c3124(unsigned char *, int, unsigned int);
 /* Supplied declaration required: FUN_003ba754. */
-/* Supplied declaration required: FUN_003bbae0. */
+/* Supplied declaration required: dataTable33GetEntries. */
 
 
 void FUN_003b95a4(int param_1)
@@ -57,7 +57,7 @@ void FUN_003b95a4(int param_1)
   unsigned char temp_v6 [128];
   unsigned char temp_v7 [4];
   
-  temp_v0 = FUN_002a60b4(0x21,*(unsigned int *)(param_1 + 0x90));
+  temp_v0 = asdTMTexTableNodeIsLoaded(0x21,*(unsigned int *)(param_1 + 0x90));
   temp_v1 = 0;
   if (temp_v0 != 0) {
     temp_v1 = *(int *)(param_1 + 0xd6c);
@@ -71,8 +71,8 @@ void FUN_003b95a4(int param_1)
       FUN_002be624(temp_v5,&LAB_003b97f0,*(int *)(param_1 + 0xd5c) + 0x40);
       puVar8 = (unsigned int *)(param_1 + 0xe5c);
       if (((*(short *)(*(int *)(param_1 + 0xd5c) + 100) != 0) &&
-          (temp_v1 = FUN_002c09d0(), temp_v1 != 0)) ||
-         ((*(short *)(*(int *)(param_1 + 0xd5c) + 0x66) != 0 && (temp_v1 = FUN_002c09d0(), temp_v1 != 0)
+          (temp_v1 = gameFlagIsSet(), temp_v1 != 0)) ||
+         ((*(short *)(*(int *)(param_1 + 0xd5c) + 0x66) != 0 && (temp_v1 = gameFlagIsSet(), temp_v1 != 0)
           ))) {
         FUN_002be624(temp_v6,&LAB_003b97f0,*(int *)(param_1 + 0xd5c) + 0x68);
         FUN_00234f5c(*(unsigned int *)(param_1 + 0xe5c),temp_v5,temp_v6);
@@ -85,7 +85,7 @@ void FUN_003b95a4(int param_1)
       FUN_00234cd8(*puVar8,(int)*(short *)(temp_v1 + 0x28),1);
       if (-1 < *(int *)(*(int *)(param_1 + 0xd5c) + 0x60)) {
         puVar6 = temp_v7;
-        FUN_003bbae0();
+        dataTable33GetEntries();
         if (puVar6 != (unsigned char *)0x0) {
           temp_v0 = 0;
           puVar3 = temp_v7;

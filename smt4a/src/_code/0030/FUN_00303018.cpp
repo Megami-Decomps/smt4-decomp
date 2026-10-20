@@ -2,12 +2,12 @@
 
 extern "C" {
 
-void FUN_00311248(void *dest, const void *source, s32 size, s32 flag);
+void streamWriterWriteArray(void *dest, const void *source, s32 size, s32 flag);
 
-/* Copies 4 bytes from `source` to `dest` through FUN_00311248 and returns `dest`. */
+/* Copies 4 bytes from `source` to `dest` through streamWriterWriteArray and returns `dest`. */
 void *FUN_00303018(void *dest, const void *source)
 {
-    FUN_00311248(dest, source, 4, 1);
+    streamWriterWriteArray(dest, source, 4, 1);
     return dest;
 }
 

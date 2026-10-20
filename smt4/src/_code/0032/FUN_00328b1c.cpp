@@ -10,7 +10,7 @@ int dataTableGet(int, int);
 extern int g_aocSystem; /* 0x433158 */
 
 extern int FUN_00298dc8(unsigned int);
-extern int FUN_002c09d0(void);
+extern int gameFlagIsSet(void);
 /* Supplied declaration required: dataTableGetCount. */
 extern int dataTableGetEntries(void);
 /* Supplied declaration required: dataTableGet. */
@@ -44,8 +44,8 @@ int * FUN_00328b1c(int param_1)
         }
       }
       if ((((*piVar5 == param_1) &&
-           (((short)piVar5[1] == 0 || (temp_v0 = FUN_002c09d0(), temp_v0 != 0)))) &&
-          ((*(short *)((int)piVar5 + 6) == 0 || (temp_v0 = FUN_002c09d0(), temp_v0 == 0)))) &&
+           (((short)piVar5[1] == 0 || (temp_v0 = gameFlagIsSet(), temp_v0 != 0)))) &&
+          ((*(short *)((int)piVar5 + 6) == 0 || (temp_v0 = gameFlagIsSet(), temp_v0 == 0)))) &&
          ((piVar5[2] == 0 || (temp_v0 = FUN_00298dc8(piVar5[2] & 0xffff), temp_v0 != 0)))) {
         return piVar5;
       }

@@ -47,7 +47,7 @@ extern int FUN_0023a0d8(unsigned int, int *, int);
 extern unsigned int FUN_002b5c44(void);
 /* Supplied declaration required: FUN_002baa40. */
 extern int FUN_002c55b4(void);
-extern int FUN_002c55c4(void);
+extern int appletIsExitRequested(void);
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -72,7 +72,7 @@ void FUN_00353fd8(unsigned int param_1,int *param_2)
       DAT_004c7074.s1[0] = *(char *)(temp_v0 + 0x98);
       temp_v1 = FUN_00239f84(temp_v4,&DAT_004c7000,0);
       if (-1 < temp_v1) {
-        temp_v1 = FUN_002c55c4();
+        temp_v1 = appletIsExitRequested();
         if ((temp_v1 == 0) && (temp_v1 = FUN_002c55b4(), temp_v1 == 0)) {
           if ((*(char *)(temp_v3 + 0x98) == '\0') && ((char)DAT_004c7074.whole != '\0')) {
             *(unsigned char *)(temp_v3 + 0x98) = 1;

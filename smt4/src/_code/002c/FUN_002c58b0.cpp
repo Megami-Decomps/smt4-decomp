@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002b9178(void);
-int FUN_002bd540(void);
+int asdTextureSetImage(void);
 int asdTMTexTableLoadSprites(void);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -15,7 +15,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_002b9178. */
 extern int asdTMTexTableCallFileB(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002bd540. */
+/* Supplied declaration required: asdTextureSetImage. */
 /* Supplied declaration required: asdTMTexTableLoadSprites. */
 
 
@@ -33,7 +33,7 @@ int FUN_002c58b0(unsigned int param_1,unsigned int param_2,unsigned int param_3,
     if (*(int *)(temp_v0 + 8) != 0) {
       *(unsigned int *)(*(int *)(temp_v0 + 8) + 8) = 0x10000;
       if (*(int *)(temp_v0 + 8) != 0) {
-        FUN_002bd540();
+        asdTextureSetImage();
         *(unsigned int *)(temp_v0 + 0x10) = *(unsigned int *)(temp_v0 + 0x10) | 4;
       }
     }

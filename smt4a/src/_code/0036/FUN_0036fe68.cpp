@@ -77,7 +77,7 @@ extern int mikadoIsCameraNotState7(void);
 /* Supplied declaration required: FUN_003794bc. */
 /* Supplied declaration required: FUN_00379be8. */
 /* Supplied declaration required: FUN_0037a078. */
-extern int FUN_003b582c(void);
+extern int naviMainIsActive(void);
 /* Supplied declaration required: linkHolderClearFlag. */
 
 
@@ -153,7 +153,7 @@ unsigned int FUN_0036fe68(void)
     DAT_005806b8 = DAT_005806b8 + 1;
   }
   if (DAT_005806b8 < 100) {
-    if ((DAT_005806b8 >= 0xd) && (temp_v0 = FUN_003b582c(), temp_v0 != 0)) {
+    if ((DAT_005806b8 >= 0xd) && (temp_v0 = naviMainIsActive(), temp_v0 != 0)) {
       FUN_002c2358();
       FUN_0033a988();
       FUN_00249a08();

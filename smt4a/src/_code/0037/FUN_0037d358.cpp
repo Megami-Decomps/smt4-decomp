@@ -6,7 +6,7 @@ extern "C" {
 
 int scrSetResult(int);
 
-extern int FUN_0014bef4(int);
+extern int randRange(int);
 extern int gameGetOptions(void);
 extern int FUN_001b34b8(void);
 /* Supplied declaration required: scrSetResult. */
@@ -35,7 +35,7 @@ unsigned int FUN_0037d358(void)
     if (*(short *)(temp_v0 + 0x136) != 0) {
       temp_v2 = temp_v2 + 1;
     }
-    temp_v2 = FUN_0014bef4(temp_v2);
+    temp_v2 = randRange(temp_v2);
     temp_v1 = *(short *)(temp_v0 + 0x132);
     if (temp_v1 != 0) {
       if (temp_v2 == 0) {

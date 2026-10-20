@@ -16,9 +16,9 @@ int nngxGetVramEndAddr(u32 heapId);
 u32 FUN_002c3994(void);
 u32 FUN_002c3984(void);
 u32 FUN_002c37a0(u32 heapId);
-void FUN_002c3944(u32 base, u32 size);
+void rt_memclr(u32 base, u32 size);
 void FUN_002c3918(void *expHeap, u32 base, u32 size, u32 flags);
-void FUN_002c38fc(void *lock);
+void nn_os_CriticalSection_Initialize(void *lock);
 void FUN_0011bfec(void *expHeap, u32 block, u32 size);
 void FUN_0010a174(u32 mainBase, u32 mainSize, u32 extraBase, u32 extraSize, u32 vramABase, u32 vramASize, u32 vramBBase, u32 vramBSize);
 void *asdMemoryAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
@@ -36,9 +36,9 @@ void asdMemoryInit(void)
 
     sys->extra.base = FUN_002c3994();
     sys->extra.size = FUN_002c3984();
-    FUN_002c3944(sys->extra.base, sys->extra.size);
+    rt_memclr(sys->extra.base, sys->extra.size);
     FUN_002c3918(sys->extraHeap, sys->extra.base, sys->extra.size, 0x100);
-    FUN_002c38fc(sys->extraLock);
+    nn_os_CriticalSection_Initialize(sys->extraLock);
 
     /* Large extra regions give up their tail: grab all but 32 MB from the back and trim it. */
     if (sys->extra.size > 0x2000100) {

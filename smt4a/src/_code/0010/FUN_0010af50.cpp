@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0012e1dc(...);
-int FUN_002e6e14(...);
+int asdOperatorDeleteArray(...);
 int FUN_002e6e34(...);
 int FUN_002e6e5c(...);
 int FUN_002f27de(...);
@@ -26,10 +26,10 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_0012e1dc. */
-/* Supplied declaration required: FUN_002e6e14. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-extern unsigned int FUN_002ea714(void);
+extern unsigned int onlineGetActiveLock(void);
 extern int FUN_002eb624(void **);
 /* Supplied declaration required: FUN_002f27de. */
 
@@ -48,7 +48,7 @@ int FUN_0010af50(fn_0010af50_arg0 *param_1)
   int temp_v5;
   unsigned char temp_v6 [8];
   
-  temp_v0 = FUN_002ea714();
+  temp_v0 = onlineGetActiveLock();
   FUN_002e6e34(temp_v3,temp_v0);
   FUN_002f27de(param_1);
   FUN_002e6e5c(temp_v3);
@@ -63,8 +63,8 @@ int FUN_0010af50(fn_0010af50_arg0 *param_1)
     *(int *)(temp_v1 - 0x3c) = temp_v2;
     while (piVar4 = (int *)*piVar5, piVar4 != (int *)0x0) {
       *piVar5 = *piVar4;
-      FUN_002e6e14(piVar4[2]);
-      FUN_002e6e14(piVar4);
+      asdOperatorDeleteArray(piVar4[2]);
+      asdOperatorDeleteArray(piVar4);
     }
   }
   return temp_v1 - 0x44;

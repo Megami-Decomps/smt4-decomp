@@ -10,7 +10,7 @@ int scrGetArg(int);
 extern unsigned int jobGetWork(void);
 /* Supplied declaration required: FUN_0019d96c. */
 /* Supplied declaration required: scrGetArg. */
-extern int FUN_002deb84(void);
+extern int scrGetCommandFrame(void);
 
 
 unsigned int FUN_003cc910(void)
@@ -22,9 +22,9 @@ unsigned int FUN_003cc910(void)
   unsigned int temp_v2;
   
   temp_v0 = scrGetArg(1);
-  temp_v1 = FUN_002deb84();
+  temp_v1 = scrGetCommandFrame();
   if (temp_v1 != 0) {
-    temp_v1 = FUN_002deb84();
+    temp_v1 = scrGetCommandFrame();
     if (temp_v1 == temp_v0) {
       return 1;
     }

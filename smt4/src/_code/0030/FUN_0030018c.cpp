@@ -10,7 +10,7 @@ typedef struct {
 
 u32 scrGetArg(u32 index);
 void *btlGetMainState(void);
-ValueRecord *FUN_00282924(void *context, u32 id);
+ValueRecord *btlMainFindEntryByListedId(void *context, u32 id);
 int scrSetResult(int value);
 
 /* Looks up the record for entry 0 and passes its value (0 when missing) to scrSetResult. */
@@ -18,7 +18,7 @@ u32 FUN_0030018c(void)
 {
     u32 id = scrGetArg(0);
     int value = 0;
-    ValueRecord *record = FUN_00282924(btlGetMainState(), id);
+    ValueRecord *record = btlMainFindEntryByListedId(btlGetMainState(), id);
 
     if (record != NULL) {
         value = record->value;

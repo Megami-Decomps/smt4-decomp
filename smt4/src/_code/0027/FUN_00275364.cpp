@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00287098(unsigned int, unsigned int);
 int FUN_0028c618(unsigned int, int);
-int FUN_0028c640(unsigned int, int, int);
+int nodeSetTranslation(unsigned int, int, int);
 int FUN_002a5710(unsigned int);
 
 extern int DAT_0044cd88; /* 0x44cd88 */
@@ -14,7 +14,7 @@ extern unsigned char g_gameState; /* 0x49f91c */
 
 /* Supplied declaration required: FUN_00287098. */
 /* Supplied declaration required: FUN_0028c618. */
-/* Supplied declaration required: FUN_0028c640. */
+/* Supplied declaration required: nodeSetTranslation. */
 /* Supplied declaration required: FUN_002a5710. */
 
 
@@ -47,7 +47,7 @@ void FUN_00275364(void)
             *(unsigned char *)(*(int *)(puVar5[2] + 0x2c) + 0x1f6) = 1;
           }
           if (*(char *)(temp_v2 + 0x9f8) != '\0') {
-            FUN_0028c640(puVar5[2],0,temp_v2 + 0x9e4);
+            nodeSetTranslation(puVar5[2],0,temp_v2 + 0x9e4);
             FUN_0028c618(puVar5[2],0);
             if (*(int *)(puVar5[2] + 0x38) != *(int *)(temp_v2 + 0x9f4)) {
               FUN_002a5710(puVar5[2]);
@@ -88,7 +88,7 @@ void FUN_00275364(void)
           *(unsigned char *)(*(int *)(puVar5[2] + 0x2c) + 0x1f6) = 1;
         }
         if (*(char *)(temp_v3 + 0x78) != '\0') {
-          FUN_0028c640(puVar5[2],0,temp_v3 + 100);
+          nodeSetTranslation(puVar5[2],0,temp_v3 + 100);
           FUN_0028c618(puVar5[2],0);
           if (*(int *)(puVar5[2] + 0x38) != *(int *)(temp_v3 + 0x74)) {
             FUN_002a5710(puVar5[2]);

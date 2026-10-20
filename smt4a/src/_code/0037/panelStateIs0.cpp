@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern PanelRef DAT_0057f588;
+extern PanelRef g_messageMain;
 
 u8 panelStateIs0(void)
 {
-    return DAT_0057f588.panel->state == 0;
+    return g_messageMain.panel->state == 0;
 }
 
 } /* extern "C" */

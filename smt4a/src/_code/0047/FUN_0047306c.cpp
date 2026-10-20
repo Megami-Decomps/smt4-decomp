@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00151408(unsigned int, int, int);
 int FUN_001527d8(unsigned int, unsigned int);
-int FUN_00237210(void);
+int asdMemFreeSlot(void);
 int FUN_002a1f60(unsigned int, int, unsigned int, int, int, unsigned int, unsigned int);
 int FUN_00472f58(unsigned int *, unsigned int, unsigned int, unsigned int);
 int FUN_00473910(unsigned int, unsigned int);
@@ -23,7 +23,7 @@ extern unsigned int g_aocMain; /* 0x570260 */
 extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: FUN_00151408. */
 /* Supplied declaration required: FUN_001527d8. */
-/* Supplied declaration required: FUN_00237210. */
+/* Supplied declaration required: asdMemFreeSlot. */
 extern unsigned int FUN_0023b4a4(unsigned int);
 /* Supplied declaration required: FUN_002a1f60. */
 /* Supplied declaration required: FUN_00472f58. */
@@ -41,7 +41,7 @@ void FUN_0047306c(unsigned int *param_1,unsigned int param_2,unsigned int param_
   *param_1 = *param_1 | 0x40;
   puVar3 = param_1 + 0x107;
   if (param_1[0x107] != 0) {
-    FUN_00237210();
+    asdMemFreeSlot();
     *puVar3 = 0;
   }
   temp_v0 = spriteHandleCreate(0);

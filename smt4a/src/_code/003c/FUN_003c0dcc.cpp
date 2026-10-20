@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0018719c(int);
+int gameFlagIsSet(int);
 int dataTableGetEntries(void);
 int FUN_0039b984(void);
 int FUN_0040a76c(unsigned int, unsigned int);
@@ -16,7 +16,7 @@ int FUN_0040a864(unsigned int, int);
 extern unsigned int g_aocSystem; /* 0x570280 */
 
 extern unsigned int dataTableGet(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0018719c. */
+/* Supplied declaration required: gameFlagIsSet. */
 extern int dataTableGetCount(unsigned int);
 /* Supplied declaration required: dataTableGetEntries. */
 /* Supplied declaration required: FUN_0039b984. */
@@ -47,7 +47,7 @@ unsigned int FUN_003c0dcc(void)
   unsigned int temp_v7;
   int temp_v8;
   
-  temp_v0 = FUN_0018719c(0x40e);
+  temp_v0 = gameFlagIsSet(0x40e);
   if (temp_v0 != 0) {
     temp_v1 = dataTableGet(0x45,0);
     dataTableGetEntries();
@@ -64,7 +64,7 @@ unsigned int FUN_003c0dcc(void)
       if ((psVar4 != (short *)0x0) && (temp_v8 = temp_v8 + 1, *psVar4 != 0)) {
         temp_v3 = tableFlagBit0(temp_v7);
         if (temp_v3 != 0) {
-          temp_v3 = FUN_0018719c(psVar4[0x2d]);
+          temp_v3 = gameFlagIsSet(psVar4[0x2d]);
           if (!(psVar4[0x2d] == 0 || temp_v3 == 0)) {
             FUN_0040a7b4();
           }
@@ -83,7 +83,7 @@ unsigned int FUN_003c0dcc(void)
               temp_v5 = 0;
               temp_v6 = temp_v5;
               do {
-                temp_v3 = FUN_0018719c(psVar4[temp_v5 + 0x2f]);
+                temp_v3 = gameFlagIsSet(psVar4[temp_v5 + 0x2f]);
                 if (temp_v3 != 0) {
                   temp_v6 = (temp_v6 + 1) & 0xff;
                 }
@@ -97,9 +97,9 @@ unsigned int FUN_003c0dcc(void)
           }
         }
         else {
-          temp_v3 = FUN_0018719c(psVar4[0x2d]);
+          temp_v3 = gameFlagIsSet(psVar4[0x2d]);
           if ((psVar4[0x2d] == 0 || temp_v3 == 0) &&
-             ((temp_v3 = FUN_0018719c(psVar4[0x2e]), psVar4[0x2e] == 0 || (temp_v3 != 0)))) {
+             ((temp_v3 = gameFlagIsSet(psVar4[0x2e]), psVar4[0x2e] == 0 || (temp_v3 != 0)))) {
             FUN_0040a790(temp_v7);
             if (psVar4[0x2c] == 1) {
               FUN_0040a864(temp_v7,0);

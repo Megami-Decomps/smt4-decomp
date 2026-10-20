@@ -5,14 +5,14 @@
 extern "C" {
 
 int FUN_0028727c(void);
-int FUN_002917b8(void);
-int FUN_00291944(void);
+int buttonHelpRelease(void);
+int uiFadeRelease(void);
 int FUN_00292c0c(void);
 int FUN_0029a128(int);
 int FUN_002a0cc8(int);
 int scrScriptProcessDestroy(void);
 int asdTMTexTableFreeEntry(int);
-int FUN_002ae898(int, int);
+int asdTMTexTableReleaseNode(int, int);
 int asdMemFree(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -21,14 +21,14 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_0028727c. */
-/* Supplied declaration required: FUN_002917b8. */
-/* Supplied declaration required: FUN_00291944. */
+/* Supplied declaration required: buttonHelpRelease. */
+/* Supplied declaration required: uiFadeRelease. */
 /* Supplied declaration required: FUN_00292c0c. */
 /* Supplied declaration required: FUN_0029a128. */
 /* Supplied declaration required: FUN_002a0cc8. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: asdTMTexTableFreeEntry. */
-/* Supplied declaration required: FUN_002ae898. */
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
 /* Supplied declaration required: asdMemFree. */
 
 
@@ -56,7 +56,7 @@ void FUN_003ad4d8(int param_1)
   if (*(char *)(param_1 + 0x1e) != '\0') {
     temp_v0 = 0;
     do {
-      FUN_002ae898(0x1d,temp_v0);
+      asdTMTexTableReleaseNode(0x1d,temp_v0);
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < 3);
     asdTMTexTableFreeEntry(0x1d);
@@ -66,11 +66,11 @@ void FUN_003ad4d8(int param_1)
     *(unsigned char *)(param_1 + 0x1d) = 0;
   }
   if (*(char *)(param_1 + 0x1c) != '\0') {
-    FUN_002917b8();
+    buttonHelpRelease();
     FUN_0028727c();
     *(unsigned char *)(param_1 + 0x1c) = 0;
   }
-  FUN_00291944();
+  uiFadeRelease();
   return;
 }
 

@@ -8,10 +8,10 @@ int FUN_00100388(...);
 int FUN_00157558(int);
 int FUN_00162790(...);
 int FUN_00164b5c(int, int, int, unsigned int, unsigned int, int);
-int FUN_001654d8(int);
-int FUN_001654e4(int);
+int vec2GetXInt(int);
+int vec2GetYInt(int);
 int efctSetSpeed(void);
-int FUN_0016c410(...);
+int renderCtxResetColorScale(...);
 int FUN_0016c560(...);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
@@ -41,12 +41,12 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_00157558. */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164b5c. */
-/* Supplied declaration required: FUN_001654d8. */
-/* Supplied declaration required: FUN_001654e4. */
+/* Supplied declaration required: vec2GetXInt. */
+/* Supplied declaration required: vec2GetYInt. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0016c410. */
+/* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: FUN_0016c560. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
@@ -106,8 +106,8 @@ void FUN_002027fc(void)
   }
   FUN_002a4860(temp_v0);
   FUN_002a4894(temp_v0);
-  temp_v3 = FUN_001654d8(temp_v0 + 0xe8);
-  temp_v4 = FUN_001654e4(temp_v0 + 0xe8);
+  temp_v3 = vec2GetXInt(temp_v0 + 0xe8);
+  temp_v4 = vec2GetYInt(temp_v0 + 0xe8);
   efctSetSpeed();
   FUN_00164b5c(2,0x24,0,temp_v3,temp_v4,0xb);
   FUN_00164b5c(2,0x24,0xd,temp_v3,temp_v4,0xb);
@@ -130,8 +130,8 @@ void FUN_002027fc(void)
         temp_v11 = temp_v5 + temp_v10;
         temp_v6 = FUN_001834a4(0x24,temp_v11);
         temp_v13 = temp_v0 + temp_v10 * 0x8c;
-        temp_v7 = FUN_001654d8(temp_v13 + 0x174);
-        temp_v13 = FUN_001654e4(temp_v13 + 0x174);
+        temp_v7 = vec2GetXInt(temp_v13 + 0x174);
+        temp_v13 = vec2GetYInt(temp_v13 + 0x174);
         temp_v3 = 0;
         if (*(int *)(temp_v0 + 0x88) == temp_v10) {
           temp_v17 = 0x2bceffff;
@@ -217,7 +217,7 @@ void FUN_002027fc(void)
     *(unsigned char *)(temp_v0 + 0x1270) = 0;
   }
   FUN_0016c560(g_renderCtx);
-  FUN_0016c410(g_renderCtx);
+  renderCtxResetColorScale(g_renderCtx);
   return;
 }
 

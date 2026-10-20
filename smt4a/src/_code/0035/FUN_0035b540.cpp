@@ -13,8 +13,8 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_4_stack;
 
-extern int FUN_001654d8(int);
-extern int FUN_001654e4(int);
+extern int vec2GetXInt(int);
+extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001835b4. */
 extern int FUN_00284140(int);
@@ -52,13 +52,13 @@ void FUN_0035b540(int param_1,int param_2,int param_3,int param_4)
   }
   efctSetSpeed();
   if (!((temp_v0 == 1 || temp_v0 == 2) || temp_v0 == 6)) {
-    temp_v0 = FUN_001654e4(param_1 + 0xb0);
-    temp_v1 = FUN_001654d8(param_1 + 0xb0);
+    temp_v0 = vec2GetYInt(param_1 + 0xb0);
+    temp_v1 = vec2GetXInt(param_1 + 0xb0);
     FUN_001835b4(2,0x1a,0x19e,temp_v1 + param_2,param_3 + temp_v0,0x83);
   }
   else {
-    temp_v0 = FUN_001654e4(param_1 + 0xb0);
-    temp_v1 = FUN_001654d8(param_1 + 0xb0);
+    temp_v0 = vec2GetYInt(param_1 + 0xb0);
+    temp_v1 = vec2GetXInt(param_1 + 0xb0);
     FUN_001835b4(2,0x1a,0x293,temp_v1 + param_2,param_3 + temp_v0,0x83);
   }
   efctSetSpeed();

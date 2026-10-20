@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_00152bec(void);
+int asdMdlManagerMarkDestroy(void);
 
 extern unsigned char DAT_004bce8c; /* 0x4bce8c */
 
-/* Supplied declaration required: FUN_00152bec. */
+/* Supplied declaration required: asdMdlManagerMarkDestroy. */
 
 
 void FUN_002236e0(void)
@@ -24,12 +24,12 @@ void FUN_002236e0(void)
     temp_v0 = 1;
     do {
       if (*(int *)(temp_v1 * 0x100 + temp_v0 * 4 + 0x4bd110) != 0) {
-        FUN_00152bec();
+        asdMdlManagerMarkDestroy();
       }
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < 0x40);
     if (*(int *)(temp_v1 * 4 + 0x4bd0f8) != 0) {
-      FUN_00152bec();
+      asdMdlManagerMarkDestroy();
     }
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 6);

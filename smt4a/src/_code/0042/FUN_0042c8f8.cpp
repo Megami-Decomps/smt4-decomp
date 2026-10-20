@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0018b19c(unsigned int, int);
+int nn_gxlow_CTR_FlushDataCacheForward(unsigned int, int);
 int FUN_004ff4e0(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, int, unsigned char *, unsigned int, unsigned int);
 int nn_gr_CTR_Vertex_DisableAttr(unsigned int *, int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 
@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_5_stack;
 
-/* Supplied declaration required: FUN_0018b19c. */
+/* Supplied declaration required: nn_gxlow_CTR_FlushDataCacheForward. */
 extern unsigned int FUN_001bc2ec(unsigned int);
 /* Supplied declaration required: FUN_004ff4e0. */
 /* Supplied declaration required: nn_gr_CTR_Vertex_DisableAttr. */
@@ -87,8 +87,8 @@ void FUN_0042c8f8(int param_1,unsigned char *param_2,unsigned int param_3,unsign
       psVar20 = psVar20 + 6;
     } while (temp_v8 != 0);
   }
-  FUN_0018b19c(*(unsigned int *)(param_1 + 8),*(int *)(param_1 + 4) * 0x90);
-  FUN_0018b19c(*(unsigned int *)(param_1 + 0xc),*(int *)(param_1 + 4) * 0xc);
+  nn_gxlow_CTR_FlushDataCacheForward(*(unsigned int *)(param_1 + 8),*(int *)(param_1 + 4) * 0x90);
+  nn_gxlow_CTR_FlushDataCacheForward(*(unsigned int *)(param_1 + 0xc),*(int *)(param_1 + 4) * 0xc);
   temp_v3 = FUN_001bc2ec(*(unsigned int *)(param_1 + 0xc));
   *(unsigned int *)(param_1 + 0x7a0) = temp_v3;
   *(unsigned char *)(param_1 + 0x7a8) = 0;

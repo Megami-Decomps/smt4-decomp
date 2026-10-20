@@ -6,7 +6,7 @@ extern "C" {
 
 int asdMdlManagerCreateLoaded(unsigned char *, int);
 int FUN_002a0428(unsigned int, int);
-int FUN_002c2950(void);
+int gameGetMapBlock(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -18,7 +18,7 @@ extern int DAT_0044cd88; /* 0x44cd88 */
 
 /* Supplied declaration required: asdMdlManagerCreateLoaded. */
 /* Supplied declaration required: FUN_002a0428. */
-/* Supplied declaration required: FUN_002c2950. */
+/* Supplied declaration required: gameGetMapBlock. */
 
 
 void FUN_002e0274(int param_1)
@@ -33,7 +33,7 @@ void FUN_002e0274(int param_1)
   unsigned int in_s1;
   unsigned int in_s2;
   
-  FUN_002c2950();
+  gameGetMapBlock();
   temp_v0 = DAT_0044cd88;
   *(unsigned short *)(DAT_0044cd88 + 8) = 0;
   *(unsigned short *)(temp_v0 + 4) = 0x18;

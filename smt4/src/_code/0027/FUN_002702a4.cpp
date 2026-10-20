@@ -15,11 +15,11 @@ typedef struct {
     Entry entries[64];  /* 0x30 */
 } EntryTable;
 
-int FUN_00152bec(void);
+int asdMdlManagerMarkDestroy(void);
 
 extern EntryTable *DAT_00447e58;
 
-/* Walks the 64 entries from last to first and runs FUN_00152bec for each one with a handler set. */
+/* Walks the 64 entries from last to first and runs asdMdlManagerMarkDestroy for each one with a handler set. */
 void FUN_002702a4(void)
 {
     int i;
@@ -28,7 +28,7 @@ void FUN_002702a4(void)
         Entry *entry = &DAT_00447e58->entries[i];
 
         if (entry->handler != 0) {
-            FUN_00152bec();
+            asdMdlManagerMarkDestroy();
         }
     }
 }

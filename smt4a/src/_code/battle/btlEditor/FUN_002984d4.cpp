@@ -11,10 +11,10 @@ int asdLoadFileSetUseRawPaths(...);
 int asdListBoxCreate(...);
 int asdListBoxAddItem(...);
 int FUN_002e0898(...);
-int FUN_002e342c(...);
+int libc_strcpy(...);
 int sysMemClear(...);
 int FUN_002ea508(...);
-int FUN_00317508(...);
+int asdListBoxSetByteValue(...);
 int jobSetWork7C(void);
 int FUN_003874fc(unsigned int);
 int FUN_004f43f0(unsigned int *, int);
@@ -29,24 +29,24 @@ typedef struct {
 } void_stack;
 
 extern unsigned char DAT_00528144; /* 0x528144 */
-extern unsigned int *DAT_00571508; /* 0x571508 */
+extern unsigned int *g_btlCamera; /* 0x571508 */
 extern unsigned int *DAT_005737e0; /* 0x5737e0 */
 
 /* Supplied declaration required: FUN_001568f8. */
 /* Supplied declaration required: jobStop. */
 extern int jobGetWork(void);
-extern int FUN_001656a0(unsigned int);
+extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: FUN_0020214c. */
 /* Supplied declaration required: asdLoadFileSetUseRawPaths. */
 extern unsigned int asdLoadFileGetUseRawPaths(void);
 /* Supplied declaration required: asdListBoxCreate. */
 /* Supplied declaration required: asdListBoxAddItem. */
 /* Supplied declaration required: FUN_002e0898. */
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002ea508. */
 extern unsigned int asdListBoxGetIntValuePtr(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00317508. */
+/* Supplied declaration required: asdListBoxSetByteValue. */
 extern unsigned int asdListBoxGetFloatValuePtr(unsigned int, unsigned int);
 /* Supplied declaration required: jobSetWork7C. */
 /* Supplied declaration required: FUN_003874fc. */
@@ -122,13 +122,13 @@ unsigned int FUN_002984d4(void)
     asdListBoxAddItem(puVar8[3],0x528214);
     asdListBoxAddItem(puVar8[3],0x52820c);
     asdListBoxAddItem(puVar8[3],0x528204);
-    FUN_00317508(puVar8[3],1);
+    asdListBoxSetByteValue(puVar8[3],1);
     temp_v2 = 1;
     break;
   case 1:
-    temp_v4 = FUN_001656a0(0);
+    temp_v4 = padButtonIsPressed(0);
     if (temp_v4 == 0) {
-      temp_v1 = FUN_001656a0(1);
+      temp_v1 = padButtonIsPressed(1);
       if (temp_v1 == 0) {
         return 0;
       }
@@ -151,7 +151,7 @@ unsigned int FUN_002984d4(void)
     }
     break;
   case 2:
-    temp_v4 = FUN_001656a0(0);
+    temp_v4 = padButtonIsPressed(0);
     if (temp_v4 != 0) {
       temp_v4 = FUN_003874fc(puVar8[3]);
       jobStop(puVar8[3],0);
@@ -164,7 +164,7 @@ unsigned int FUN_002984d4(void)
       if (temp_v4 == 1) goto code_r0x004f4d58;
     }
     else {
-      temp_v1 = FUN_001656a0(1);
+      temp_v1 = padButtonIsPressed(1);
       if (temp_v1 == 0) {
         return 0;
       }
@@ -175,9 +175,9 @@ unsigned int FUN_002984d4(void)
     temp_v2 = 0;
     break;
   case 3:
-    temp_v4 = FUN_001656a0(0);
+    temp_v4 = padButtonIsPressed(0);
     if (temp_v4 == 0) {
-      temp_v4 = FUN_001656a0(1);
+      temp_v4 = padButtonIsPressed(1);
       if (temp_v4 == 0) {
         FUN_004f43f0(puVar8,temp_v1);
         return 0;
@@ -189,7 +189,7 @@ unsigned int FUN_002984d4(void)
     temp_v2 = 7;
     break;
   case 4:
-    temp_v4 = FUN_001656a0(0);
+    temp_v4 = padButtonIsPressed(0);
     if (temp_v4 != 0) {
       temp_v3 = FUN_003874fc(puVar8[3]);
       jobStop(puVar8[3],0);
@@ -201,7 +201,7 @@ unsigned int FUN_002984d4(void)
       }
     }
     else {
-      temp_v4 = FUN_001656a0(1);
+      temp_v4 = padButtonIsPressed(1);
       if (temp_v4 == 0) {
         return 0;
       }
@@ -218,13 +218,13 @@ code_r0x004f4c54:
     FUN_002ea508(puVar8[3],"MODE");
     asdListBoxAddItem(puVar8[3],"슌쪕튕垏");
     asdListBoxAddItem(puVar8[3],"䪃膃覃튕垏");
-    FUN_00317508(puVar8[3],1);
+    asdListBoxSetByteValue(puVar8[3],1);
     temp_v2 = 2;
     break;
   case 6:
     sysMemClear(temp_v7,0x80);
     temp_v2 = FUN_003efa38(temp_v1);
-    FUN_002e342c(temp_v7,temp_v2);
+    libc_strcpy(temp_v7,temp_v2);
     temp_v2 = asdLoadFileGetUseRawPaths();
     asdLoadFileSetUseRawPaths(1);
     FUN_0020214c();
@@ -235,7 +235,7 @@ code_r0x004f4c54:
     *puVar8 = 0;
     return 0;
   case 7:
-    temp_v4 = FUN_001656a0(1);
+    temp_v4 = padButtonIsPressed(1);
     if (temp_v4 == 0) {
       temp_v2 = puVar8[3];
       temp_v4 = *(int *)(temp_v1 + 0x1ed4) + *(short *)(puVar8 + 4) * 0x1d0;
@@ -260,7 +260,7 @@ code_r0x004f4c54:
     temp_v2 = 3;
     break;
   case 8:
-    temp_v4 = FUN_001656a0(1);
+    temp_v4 = padButtonIsPressed(1);
     if (temp_v4 == 0) {
       temp_v0 = *(short *)(puVar8 + 5);
       temp_v2 = puVar8[3];
@@ -269,16 +269,16 @@ code_r0x004f4c54:
           return 0;
         }
         puVar8 = (unsigned int *)asdListBoxGetIntValuePtr(temp_v2,0);
-        DAT_00571508[0xd] = *puVar8;
+        g_btlCamera[0xd] = *puVar8;
         return 0;
       }
       if (temp_v0 == 0) {
         puVar8 = (unsigned int *)(temp_v1 + 0x1ee0);
-        puVar4 = DAT_00571508 + 7;
+        puVar4 = g_btlCamera + 7;
       }
       else {
         puVar8 = (unsigned int *)(temp_v1 + 0x1eec);
-        puVar4 = DAT_00571508 + 10;
+        puVar4 = g_btlCamera + 10;
       }
       puVar7 = (unsigned int *)asdListBoxGetFloatValuePtr(temp_v2,0);
       *puVar4 = *puVar7;
@@ -291,10 +291,10 @@ code_r0x004f4c54:
       *puVar8 = *puVar4;
       puVar8[1] = temp_v2;
       puVar8[2] = temp_v6;
-      puVar8 = DAT_00571508;
+      puVar8 = g_btlCamera;
       temp_v2 = puVar4[1];
       temp_v6 = puVar4[2];
-      *DAT_00571508 = *puVar4;
+      *g_btlCamera = *puVar4;
       puVar8[1] = temp_v2;
       puVar8[2] = temp_v6;
       return 0;
@@ -312,7 +312,7 @@ code_r0x004f4d58:
     asdListBoxAddItem(puVar8[3],0x52815c);
     asdListBoxAddItem(puVar8[3],0x528154);
     asdListBoxAddItem(puVar8[3],&DAT_00528144);
-    FUN_00317508(puVar8[3],1);
+    asdListBoxSetByteValue(puVar8[3],1);
     *puVar8 = 4;
     return 0;
   case 9:

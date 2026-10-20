@@ -5,18 +5,18 @@
 extern "C" {
 
 int jobStop(unsigned int, int);
-int FUN_001641c4(void);
+int ifTouchRegionRemove(void);
 int asdMemFree(void);
 int FUN_002a49b4(void);
-int FUN_002e3328(void);
+int asdOperatorDelete(void);
 
 extern unsigned char DAT_0057f25c; /* 0x57f25c */
 
 /* Supplied declaration required: jobStop. */
-/* Supplied declaration required: FUN_001641c4. */
+/* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002a49b4. */
-/* Supplied declaration required: FUN_002e3328. */
+/* Supplied declaration required: asdOperatorDelete. */
 
 
 void FUN_003492dc(void)
@@ -38,7 +38,7 @@ void FUN_003492dc(void)
     (*(unsigned int * *)((unsigned char *)&DAT_0057f25c + 0x4))[0xc4] = temp_v0 + 1;
     if (0 < temp_v0) {
       do {
-        FUN_001641c4();
+        ifTouchRegionRemove();
         temp_v0 = temp_v1 * 2;
         temp_v1 = temp_v1 + 1;
         *(unsigned short *)((int)puVar1 + temp_v0 + 0x2f8) = unaff_r9;
@@ -63,7 +63,7 @@ void FUN_003492dc(void)
   }
   jobStop(*puVar1,0);
   if ((*(unsigned int * *)((unsigned char *)&DAT_0057f25c + 0x4)) != (unsigned int *)0x0) {
-    FUN_002e3328();
+    asdOperatorDelete();
     (*(unsigned int * *)((unsigned char *)&DAT_0057f25c + 0x4)) = (unsigned int *)0x0;
   }
   return;

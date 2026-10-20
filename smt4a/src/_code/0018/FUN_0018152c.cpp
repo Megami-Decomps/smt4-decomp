@@ -8,10 +8,10 @@ int FUN_001835b4(int, int, int, unsigned int, unsigned int, unsigned int);
 int FUN_00183bb0(void);
 int FUN_00184310(void);
 int FUN_001849bc(...);
-int FUN_00184e64(void);
+int drawSetColorFromRGBA8(void);
 int FUN_00191ea8(...);
 int FUN_00191f18(unsigned int, int);
-int FUN_0019cac4(void);
+int dataTable00FindById(void);
 int FUN_0019e130(int);
 
 /* stack frame of param_5: 8 slot(s), 32 byte(s) */
@@ -32,11 +32,11 @@ extern unsigned int g_aocSystem; /* 0x570280 */
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: FUN_001849bc. */
-/* Supplied declaration required: FUN_00184e64. */
-extern int FUN_0018719c(unsigned int);
+/* Supplied declaration required: drawSetColorFromRGBA8. */
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_00191ea8. */
 /* Supplied declaration required: FUN_00191f18. */
-/* Supplied declaration required: FUN_0019cac4. */
+/* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: FUN_0019e130. */
 extern int slotRecordFindById(unsigned int);
 
@@ -54,7 +54,7 @@ void FUN_0018152c(unsigned int param_1,unsigned int param_2,unsigned int param_3
   int temp_v6;
   
   if ((int)param_1 < 0) {
-    temp_v0 = FUN_0018719c(0x11);
+    temp_v0 = gameFlagIsSet(0x11);
     if (temp_v0 == 0) {
       temp_v0 = FUN_00191f18(g_aocSystem,0x25d);
       if (temp_v0 == 0) {
@@ -74,7 +74,7 @@ void FUN_0018152c(unsigned int param_1,unsigned int param_2,unsigned int param_3
     temp_v1 = param_1 & 0xffff;
     FUN_00184310();
     temp_v2 = param_1;
-    FUN_0019cac4();
+    dataTable00FindById();
     if ((*(unsigned short *)(temp_v2 + 2) & 0x8000) != 0) {
       FUN_001835b4(2,0x1b,2000,param_2,param_3,param_4);
       return;
@@ -82,7 +82,7 @@ void FUN_0018152c(unsigned int param_1,unsigned int param_2,unsigned int param_3
     if (((param_5 != 0) && (temp_v0 = slotRecordFindById(param_1 & 0xffff), temp_v0 != 0)) &&
        ((*(unsigned short *)(temp_v0 + 0x60) & 2) != 0)) {
       FUN_0019e130(1);
-      FUN_00184e64();
+      drawSetColorFromRGBA8();
     }
     temp_v0 = FUN_00191f18(g_aocSystem,*(unsigned short *)(temp_v1 + 0x9c));
     if (temp_v0 != 0) {

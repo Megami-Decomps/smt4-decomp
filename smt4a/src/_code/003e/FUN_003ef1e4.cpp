@@ -6,7 +6,7 @@ extern "C" {
 
 int lcgRandomRange(int);
 int FUN_00184310(void);
-int FUN_0019cac4(void);
+int dataTable00FindById(void);
 int SBORROW4(int, int);
 int VectorSignedToFloat(int, int);
 int VectorUnsignedToFloat(int, int);
@@ -38,10 +38,10 @@ extern unsigned int DAT_00573b74; /* 0x573b74 */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: lcgRandomRange. */
-extern int FUN_001801a4(void);
+extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: FUN_0019cac4. */
-extern int FUN_001ab888(void);
+/* Supplied declaration required: dataTable00FindById. */
+extern int gameGetSlotTable(void);
 extern int FUN_00213b5c(void);
 extern int FUN_00228ab0(int);
 
@@ -155,17 +155,17 @@ void FUN_003ef1e4(int param_1,int param_2)
   }
   temp_v17 = 0.0f;
   temp_v18 = temp_v17;
-  temp_v9 = FUN_001801a4();
+  temp_v9 = gameGetPlayerData();
   if ((*(unsigned short *)(temp_v9 + 0x5e) & 2) == 0) {
-    temp_v9 = FUN_001801a4();
+    temp_v9 = gameGetPlayerData();
     temp_v1 = *(short *)(temp_v9 + 0x26);
-    temp_v9 = FUN_001801a4();
+    temp_v9 = gameGetPlayerData();
     temp_v17 = (float)VectorSignedToFloat((int)*(short *)(temp_v9 + 0x28) + (int)temp_v1,
                                         (unsigned char)(in_fpscr >> 0x16) & 3);
   }
   temp_v9 = 0;
   do {
-    temp_v6 = FUN_001ab888();
+    temp_v6 = gameGetSlotTable();
     if ((-1 < *(char *)(temp_v6 + temp_v9 + 0x1ca0)) &&
        (temp_v6 = FUN_00228ab0(temp_v9),
        (*(unsigned short *)(temp_v6 + 0x60) & 2) == 0 && (*(unsigned short *)(temp_v6 + 0x60) & 0x400) == 0)) {
@@ -186,7 +186,7 @@ void FUN_003ef1e4(int param_1,int param_2)
     temp_v5 = *(unsigned int *)(param_1 + temp_v9 * 4 + 0xf4);
     if (temp_v5 != 0) {
       temp_v5 = temp_v5 & 0xffff;
-      FUN_0019cac4();
+      dataTable00FindById();
       if (temp_v5 != 0) {
         temp_v6 = (unsigned int)*(unsigned short *)(temp_v5 + 0x14) + (unsigned int)*(unsigned short *)(temp_v5 + 0x12);
         temp_v15 = (float)VectorUnsignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);

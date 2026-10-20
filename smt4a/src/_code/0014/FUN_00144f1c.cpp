@@ -11,7 +11,7 @@ int FUN_00161694(int);
 int FUN_0017d294(void);
 int __aeabi_uidivmod(int, int);
 
-extern unsigned int DAT_0063fd88; /* 0x63fd88 */
+extern unsigned int g_asdGxPresets; /* 0x63fd88 */
 extern int DAT_0063fd8c; /* 0x63fd8c */
 extern unsigned char DAT_0063fd90; /* 0x63fd90 */
 extern int DAT_0063fd9c; /* 0x63fd9c */
@@ -57,7 +57,7 @@ void FUN_00144f1c(int param_1,int param_2)
     puVar1 = &DAT_0063fdb4;
   }
   else {
-    puVar1 = &DAT_0063fd88;
+    puVar1 = &g_asdGxPresets;
   }
   temp_v4 = (puVar1 + temp_v0)[2];
   asdGfxSetMode(0x410);
@@ -71,7 +71,7 @@ void FUN_00144f1c(int param_1,int param_2)
   FUN_00161074(temp_v4);
   if (param_1 != 0) {
     FUN_0017d294();
-    FUN_00154ca4(&DAT_0063fd88,1);
+    FUN_00154ca4(&g_asdGxPresets,1);
     FUN_00154ca4(&DAT_0063fdb4,param_2);
     FUN_00154ca4(&DAT_0063fde0,1);
   }

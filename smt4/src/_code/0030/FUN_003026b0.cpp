@@ -8,13 +8,13 @@ struct Obj003026b0 {
     /* 0x44 */ void *resource;
 };
 
-void FUN_0025715c(void *resource);
+void handleBlockRefDrop(void *resource);
 void *FUN_002491b4(u32 arg);
 
 void FUN_003026b0(Obj003026b0 *obj, u32 arg)
 {
     if (obj->resource != NULL) {
-        FUN_0025715c(obj->resource);
+        handleBlockRefDrop(obj->resource);
     }
     obj->resource = FUN_002491b4(arg);
 }

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002e6e34(int *, int *);
 int FUN_002e6e5c(int *);
-int FUN_002fe9ea(int **);
+int listIteratorNext3(int **);
 
 typedef int romwright_code(...);
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -22,7 +22,7 @@ extern unsigned char g_flagBlock; /* 0x594958 */
 #endif
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-/* Supplied declaration required: FUN_002fe9ea. */
+/* Supplied declaration required: listIteratorNext3. */
 extern int wordRefsDiffer_002fe9f2(int **, int *);
 
 
@@ -45,7 +45,7 @@ unsigned long long FUN_00113d9c(int *param_1,unsigned int param_2,unsigned int p
     temp_v1 = (int *)param_1[2];
     while (temp_v0 = wordRefsDiffer_002fe9f2(&temp_v1,param_1 + 4), temp_v0 != 0) {
       (**(romwright_code **)(*temp_v1 + 8))();
-      FUN_002fe9ea(&temp_v1);
+      listIteratorNext3(&temp_v1);
     }
     FUN_002e6e5c(&uStack_14);
   }

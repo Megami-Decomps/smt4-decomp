@@ -8,12 +8,12 @@ int FUN_00100388(...);
 int sysPlaySe(...);
 int asdMemFree(void);
 int FUN_00275bc8(...);
-int FUN_00275f44(...);
+int scrScriptProcessStartEntry(...);
 int FUN_002804b0(...);
 int sysMemClear(...);
 int FUN_003756c8(...);
-int FUN_0046c010(unsigned int, unsigned int, unsigned int *, unsigned char [120]);
-int FUN_0046c084(...);
+int aocQueueType20(unsigned int, unsigned int, unsigned int *, unsigned char [120]);
+int aocQueueType1f(...);
 int FUN_0046e1c4(unsigned int, unsigned int, unsigned int *, unsigned char [8]);
 int FUN_004aa8b0(...);
 int FUN_004f741c(...);
@@ -30,14 +30,14 @@ typedef struct {
 
 extern int g_aocMain; /* 0x570260 */
 extern unsigned int g_aocSystem; /* 0x570280 */
-extern int DAT_00571508; /* 0x571508 */
+extern int g_btlCamera; /* 0x571508 */
 extern int DAT_00573808; /* 0x573808 */
 extern unsigned int *g_btlEvent; /* 0x573898 */
 extern unsigned int DAT_005738b8; /* 0x5738b8 */
 extern unsigned int DAT_005738bc; /* 0x5738bc */
 extern unsigned int DAT_005738c0; /* 0x5738c0 */
 extern unsigned int DAT_005738c4; /* 0x5738c4 */
-extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
+extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
 /* Supplied declaration required: FUN_00100388. */
 extern int jobGetWork(void);
@@ -45,15 +45,15 @@ extern int jobGetWork(void);
 extern unsigned int dataTableGetCount(unsigned int);
 extern unsigned int dataTableGetEntries(void);
 /* Supplied declaration required: asdMemFree. */
-extern unsigned int FUN_001a6f60(int, unsigned int);
+extern unsigned int dataTableFileGetTable(int, unsigned int);
 extern int FUN_00224880(unsigned int);
 /* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_002804b0. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003756c8. */
-/* Supplied declaration required: FUN_0046c010. */
-/* Supplied declaration required: FUN_0046c084. */
+/* Supplied declaration required: aocQueueType20. */
+/* Supplied declaration required: aocQueueType1f. */
 extern int FUN_0046c4b4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0046e1c4. */
 /* Supplied declaration required: FUN_004aa8b0. */
@@ -105,7 +105,7 @@ unsigned int FUN_002761fc(void)
     if (puVar2[2] == 0) {
       return 0;
     }
-    temp_v4 = FUN_001a6f60(puVar2[2],0);
+    temp_v4 = dataTableFileGetTable(puVar2[2],0);
     temp_v3 = dataTableGetEntries();
     puVar2[6] = temp_v3;
     temp_v4 = dataTableGetCount(temp_v4);
@@ -117,7 +117,7 @@ unsigned int FUN_002761fc(void)
     if (g_btlEvent[2] == 0) {
       return 0;
     }
-    temp_v4 = FUN_001a6f60(g_btlEvent[2],0);
+    temp_v4 = dataTableFileGetTable(g_btlEvent[2],0);
     temp_v3 = dataTableGetEntries();
     puVar2[6] = temp_v3;
     temp_v4 = dataTableGetCount(temp_v4);
@@ -130,7 +130,7 @@ code_r0x004d83b4:
     FUN_00100388(temp_v6,"battle/event/%s/%s.mbm",temp_v1 + 0x130);
     temp_v2 = FUN_0046c4b4(g_aocSystem,*(unsigned int *)(temp_v1 + 0xf0));
     if (temp_v2 != 0) {
-      FUN_0046c010(g_aocSystem,*(unsigned int *)(temp_v1 + 0xf0),puVar2 + 3,temp_v6);
+      aocQueueType20(g_aocSystem,*(unsigned int *)(temp_v1 + 0xf0),puVar2 + 3,temp_v6);
     }
     else {
       FUN_002804b0(temp_v6,puVar2 + 3,0);
@@ -143,7 +143,7 @@ code_r0x004d83b4:
       FUN_00100388(temp_v8,"battle/event/%s/%s.bf",temp_v1 + 0x130);
       temp_v2 = FUN_0046c4b4(g_aocSystem,*(unsigned int *)(temp_v1 + 0xf0));
       if (temp_v2 != 0) {
-        FUN_0046c084(g_aocSystem,*(unsigned int *)(temp_v1 + 0xf0),puVar2 + 4,temp_v8);
+        aocQueueType1f(g_aocSystem,*(unsigned int *)(temp_v1 + 0xf0),puVar2 + 4,temp_v8);
       }
       else {
         FUN_002804b0(temp_v8,puVar2 + 4,0);
@@ -167,7 +167,7 @@ code_r0x004d83b4:
     FUN_00100388(temp_v7,"battle/event/%s/%s.bf",temp_v1 + 0x130);
     temp_v2 = FUN_0046c4b4(g_aocSystem,*(unsigned int *)(temp_v1 + 0xf0));
     if (temp_v2 != 0) {
-      FUN_0046c084(g_aocSystem,*(unsigned int *)(temp_v1 + 0xf0),puVar2 + 4,temp_v7);
+      aocQueueType1f(g_aocSystem,*(unsigned int *)(temp_v1 + 0xf0),puVar2 + 4,temp_v7);
     }
     else {
       FUN_002804b0(temp_v7,puVar2 + 4,0);
@@ -185,7 +185,7 @@ code_r0x004d83b4:
     FUN_00100388(temp_v7,"battle/event/%s/%s.bf",temp_v1 + 0x130);
     temp_v2 = FUN_0046c4b4(g_aocSystem,*(unsigned int *)(temp_v1 + 0xf0));
     if (temp_v2 != 0) {
-      FUN_0046c084(g_aocSystem,*(unsigned int *)(temp_v1 + 0xf0),puVar2 + 4,temp_v7);
+      aocQueueType1f(g_aocSystem,*(unsigned int *)(temp_v1 + 0xf0),puVar2 + 4,temp_v7);
     }
     else {
       FUN_002804b0(temp_v7,puVar2 + 4,0);
@@ -263,7 +263,7 @@ LAB_004d7f68:
     if ((int)puVar2[8] < 0) {
       return 0;
     }
-    FUN_00275f44(puVar2[5]);
+    scrScriptProcessStartEntry(puVar2[5]);
     *puVar2 = 10;
     puVar8 = (unsigned int *)(temp_v1 + 0x45a0);
     puVar2[10] = 0;
@@ -280,8 +280,8 @@ FUN_004d7ca8:
     puVar8 = (unsigned int *)(temp_v1 + 0x45a0);
     if (((*puVar8 & DAT_005738b8) != 0 || (*(unsigned int *)(temp_v1 + 0x45a4) & DAT_005738bc) != 0) &&
        ((puVar2[1] & 1) == 0)) {
-      if ((-1 < *(int *)(DAT_00571508 + 0x7cc)) &&
-         (temp_v2 = FUN_004f2708(DAT_00571508,temp_v1,1), temp_v2 != 0)) {
+      if ((-1 < *(int *)(g_btlCamera + 0x7cc)) &&
+         (temp_v2 = FUN_004f2708(g_btlCamera,temp_v1,1), temp_v2 != 0)) {
         FUN_004fb670(0,0);
       }
       FUN_004feecc(1,0);
@@ -292,7 +292,7 @@ FUN_004d7ca8:
       if (((DAT_005738b8 & *puVar8) != 0 || (*(unsigned int *)(temp_v1 + 0x45a4) & DAT_005738bc) != 0) &&
          (FUN_003756c8(0),
          (*puVar8 & DAT_005738c0) != 0 || (*(unsigned int *)(temp_v1 + 0x45a4) & DAT_005738c4) != 0)) {
-        FUN_004aa8b0(DAT_0057a9c8,0);
+        FUN_004aa8b0(g_btlUiBlock,0);
         temp_v5 = ~DAT_005738c4;
         *puVar8 = *puVar8 & ~DAT_005738c0;
         *(unsigned int *)(temp_v1 + 0x45a4) = *(unsigned int *)(temp_v1 + 0x45a4) & temp_v5;
@@ -309,7 +309,7 @@ FUN_004d7ca8:
     return 0;
   case 9:
     if (-1 < (int)g_btlEvent[8]) {
-      FUN_00275f44(g_btlEvent[5]);
+      scrScriptProcessStartEntry(g_btlEvent[5]);
       *puVar2 = 10;
       puVar8 = (unsigned int *)(temp_v1 + 0x45a0);
       puVar2[10] = 0;

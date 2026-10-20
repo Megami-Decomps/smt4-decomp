@@ -11,9 +11,9 @@ int FUN_0029f7d4(void);
 extern int FUN_0029ea68(unsigned short);
 extern int flagWordTestBit(int, unsigned int);
 /* Supplied declaration required: FUN_0029f7d4. */
-extern int FUN_002a8740(void);
-extern int FUN_002a8764(void);
-extern int FUN_002a8778(void);
+extern int gameGetUnitRecord(void);
+extern int gameGetSlotTable(void);
+extern int gameCountUnits(void);
 
 
 void FUN_0029b7b8(unsigned int param_1,int param_2,unsigned int *param_3)
@@ -30,7 +30,7 @@ void FUN_0029b7b8(unsigned int param_1,int param_2,unsigned int *param_3)
   int temp_v6;
   
   temp_v6 = 0;
-  temp_v0 = FUN_002a8764();
+  temp_v0 = gameGetSlotTable();
   FUN_0029f7d4();
   if (param_2 != 0) {
     *param_3 = 0;
@@ -44,11 +44,11 @@ void FUN_0029b7b8(unsigned int param_1,int param_2,unsigned int *param_3)
       temp_v5 = param_2 + temp_v4 * 2;
       if (*(short *)(temp_v5 + 2) != 0) {
         temp_v3 = 0;
-        temp_v1 = FUN_002a8778();
+        temp_v1 = gameCountUnits();
         if (0 < temp_v1) {
           do {
             if (-1 < *(char *)(temp_v0 + temp_v3 + 0x90f0)) {
-              temp_v1 = FUN_002a8740();
+              temp_v1 = gameGetUnitRecord();
               temp_v2 = flagWordTestBit(temp_v1,10);
               if (((temp_v2 == 0) && (temp_v2 = flagWordTestBit(temp_v1,2), temp_v2 == 0)) &&
                  (*(short *)(temp_v1 + 0x46) == *(short *)(temp_v5 + 2))) {
@@ -57,7 +57,7 @@ void FUN_0029b7b8(unsigned int param_1,int param_2,unsigned int *param_3)
               }
             }
             temp_v3 = temp_v3 + 1;
-            temp_v1 = FUN_002a8778();
+            temp_v1 = gameCountUnits();
           } while (temp_v3 < temp_v1);
         }
         psVar5 = (short *)((int)param_3 + temp_v4 * 2);

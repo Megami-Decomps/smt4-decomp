@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002b73a8(int, unsigned int);
 int FUN_002be624(...);
-int FUN_002bf694(...);
+int libc_strcpy(...);
 
 /* stack frame of param_2: 2 slot(s), 5 byte(s) */
 typedef struct {
@@ -23,7 +23,7 @@ extern int DAT_0044ea2c; /* 0x44ea2c */
 extern unsigned char *FUN_0010024c(char *, unsigned int);
 /* Supplied declaration required: FUN_002b73a8. */
 /* Supplied declaration required: FUN_002be624. */
-/* Supplied declaration required: FUN_002bf694. */
+/* Supplied declaration required: libc_strcpy. */
 extern int FUN_002c3124(unsigned char *, unsigned char *, unsigned char);
 
 
@@ -54,7 +54,7 @@ int * asdTMTexTableLoadTmx(int param_1,unsigned int param_2)
   puVar10 = (unsigned int *)(g_texTable + param_1 * 0x18);
   piVar2 = (int *)*puVar10;
   if (piVar2 == (int *)0x0) {
-    FUN_002bf694(&temp_v10,DAT_0044ea2c);
+    libc_strcpy(&temp_v10,DAT_0044ea2c);
     pcVar8 = &temp_v10;
     temp_v0 = temp_v10;
     while (temp_v0 != '\0') {
@@ -65,7 +65,7 @@ int * asdTMTexTableLoadTmx(int param_1,unsigned int param_2)
       pcVar8 = pcVar8 + 1;
       temp_v0 = *pcVar8;
     }
-    FUN_002bf694(temp_v1,&temp_v10);
+    libc_strcpy(temp_v1,&temp_v10);
     FUN_002be624(temp_v9,&LAB_002c5b84,temp_v1,puVar10 + 2,&LAB_002c5b80);
     temp_v7 = (param_2 & 1) != 0;
     if ((param_2 & 2) != 0) {
@@ -130,7 +130,7 @@ int * asdTMTexTableLoadTmx(int param_1,unsigned int param_2)
       piVar2[2] = temp_v1;
       temp_v2 = DAT_0044ea2c;
       temp_v3 = DAT_0044ea2c + 0x80;
-      FUN_002bf694(&temp_v10,temp_v3);
+      libc_strcpy(&temp_v10,temp_v3);
       pcVar8 = &temp_v10;
       while (temp_v10 != '\0') {
         puVar3 = (unsigned char *)FUN_0010024c(pcVar8,0x5c);
@@ -140,7 +140,7 @@ int * asdTMTexTableLoadTmx(int param_1,unsigned int param_2)
         pcVar8 = pcVar8 + 1;
         temp_v10 = *pcVar8;
       }
-      FUN_002bf694(temp_v3,&temp_v10);
+      libc_strcpy(temp_v3,&temp_v10);
       FUN_002be624(piVar2 + 3,&LAB_002c5b98,temp_v2 + 0x80,temp_v1 + 4);
       *puVar10 = (unsigned int)piVar2;
     }

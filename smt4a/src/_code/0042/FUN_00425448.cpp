@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001bcd48(int, int, int, int, unsigned int, unsigned int);
+int svcSleepThread(int, int, int, int, unsigned int, unsigned int);
 int FUN_00423298(int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -16,7 +16,7 @@ typedef struct {
 #define ROMWRIGHT_CARRY_4_DEFINED
 #define romwright_carry_4(left, right) ((unsigned char)((unsigned long long)(unsigned int)(left) + (unsigned long long)(unsigned int)(right) > 0xffffffffULL))
 #endif
-/* Supplied declaration required: FUN_001bcd48. */
+/* Supplied declaration required: svcSleepThread. */
 /* Supplied declaration required: FUN_00423298. */
 extern int FUN_0042343c(int);
 
@@ -104,7 +104,7 @@ void FUN_00425448(int param_1)
            temp_v0 + *(int *)(param_1 + 0x13c) + (unsigned int)romwright_carry_4(*(unsigned int *)(param_1 + 0x138),temp_v3);
       return;
     }
-    FUN_001bcd48(500000,0,temp_v4,*(int *)(temp_v1 + 0x474),unaff_r4,in_lr);
+    svcSleepThread(500000,0,temp_v4,*(int *)(temp_v1 + 0x474),unaff_r4,in_lr);
   } while( 1 );
 }
 

@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-extern int DAT_0056fcc0; /* 0x56fcc0 */
+extern int g_handleRegistry; /* 0x56fcc0 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 
@@ -33,7 +33,7 @@ void FUN_00401198(int param_1)
   float temp_v9;
   unsigned int temp_v10;
   
-  temp_v0 = *(int *)(DAT_0056fcc0 + 4);
+  temp_v0 = *(int *)(g_handleRegistry + 4);
   if (temp_v0 == 0) {
     return;
   }

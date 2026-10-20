@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c424c(int, int, unsigned int);
+int __aeabi_memset4(int, int, unsigned int);
 int nw_ut_internal_LinkListImpl_insert(unsigned char *, unsigned char *, int);
 
 /* stack frame of param_5: 1 slot(s), 4 byte(s) */
@@ -27,7 +27,7 @@ typedef char romwright_storage_s________004765e4_19_1_s1_width_check[(sizeof(((u
 extern union romwright_storage_s________004765e4_19_1 s________004765e4; /* 0x4765e4 */
 extern unsigned char DAT_004ef9c0; /* 0x4ef9c0 */
 
-/* Supplied declaration required: FUN_002c424c. */
+/* Supplied declaration required: __aeabi_memset4. */
 extern int nw_ut_HeapBase_FindContainHeap(unsigned char *, int);
 /* Supplied declaration required: nw_ut_internal_LinkListImpl_insert. */
 
@@ -44,7 +44,7 @@ void FUN_00148470(int param_1,unsigned int param_2,int param_3,int param_4,unsig
   *(int *)(param_1 + 0xc) = param_3;
   *(int *)(param_1 + 0x10) = param_4;
   if ((param_5 & 2) != 0) {
-    FUN_002c424c(param_3,param_4 - param_3,(*(unsigned int *)&s________004765e4.u1[0]));
+    __aeabi_memset4(param_3,param_4 - param_3,(*(unsigned int *)&s________004765e4.u1[0]));
   }
   puVar2 = &DAT_004ef9c0;
   temp_v0 = nw_ut_HeapBase_FindContainHeap(&DAT_004ef9c0,param_1);

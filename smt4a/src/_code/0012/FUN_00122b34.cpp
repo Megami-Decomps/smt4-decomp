@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_0010391c(int);
-int FUN_002e6f1c(unsigned char [96], unsigned int);
-int FUN_002e7232(unsigned int);
+int onlineCallContextWait(unsigned char [96], unsigned int);
+int sharedRefRelease(unsigned int);
 int FUN_002ea00c(unsigned char [96]);
-int FUN_002ea43c(void);
+int onlineJobSetStateDone(void);
 int FUN_002eca44(unsigned char [96]);
 int FUN_002f7290(unsigned int *, unsigned char [96]);
 
@@ -16,13 +16,13 @@ typedef int romwright_code(...);
 extern unsigned char DAT_0055b300; /* 0x55b300 */
 
 /* Supplied declaration required: FUN_0010391c. */
-/* Supplied declaration required: FUN_002e6f1c. */
-/* Supplied declaration required: FUN_002e7232. */
+/* Supplied declaration required: onlineCallContextWait. */
+/* Supplied declaration required: sharedRefRelease. */
 /* Supplied declaration required: FUN_002ea00c. */
-/* Supplied declaration required: FUN_002ea43c. */
+/* Supplied declaration required: onlineJobSetStateDone. */
 /* Supplied declaration required: FUN_002eca44. */
 /* Supplied declaration required: FUN_002f7290. */
-extern int FUN_0030fc0c(unsigned int *);
+extern int ptrHolderDestroyAlias(unsigned int *);
 
 
 void FUN_00122b34(unsigned int *param_1)
@@ -37,7 +37,7 @@ void FUN_00122b34(unsigned int *param_1)
   if (param_1[0x1e] != 0) {
     FUN_002eca44(temp_v1);
     FUN_002f7290(param_1,temp_v1);
-    FUN_002e6f1c(temp_v1,0xffffffff);
+    onlineCallContextWait(temp_v1,0xffffffff);
     FUN_002ea00c(temp_v1);
   }
   piVar1 = (int *)param_1[0x52];
@@ -47,22 +47,22 @@ void FUN_00122b34(unsigned int *param_1)
   }
   if (param_1[0x47] != 0) {
     if (*(char *)(param_1[0x47] + 0x22) != '\x05') {
-      FUN_002ea43c();
+      onlineJobSetStateDone();
     }
-    FUN_002e7232(param_1[0x47]);
+    sharedRefRelease(param_1[0x47]);
     param_1[0x47] = 0;
   }
   if (param_1[0x48] != 0) {
     if (*(char *)(param_1[0x48] + 0x22) != '\x05') {
-      FUN_002ea43c();
+      onlineJobSetStateDone();
     }
-    FUN_002e7232(param_1[0x48]);
+    sharedRefRelease(param_1[0x48]);
     param_1[0x48] = 0;
   }
   if ((int *)param_1[0x49] != (int *)0x0) {
     (**(romwright_code **)(*(int *)param_1[0x49] + 4))();
   }
-  temp_v0 = FUN_0030fc0c(param_1 + 0x51);
+  temp_v0 = ptrHolderDestroyAlias(param_1 + 0x51);
   FUN_0010391c(temp_v0 - 0x144);
   return;
 }

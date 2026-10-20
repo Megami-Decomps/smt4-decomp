@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00192550(void);
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 int FUN_00280030(void);
 int FUN_002ccde8(int, short [4], short [2]);
 int FUN_002fa7a8(int);
@@ -19,10 +19,10 @@ typedef struct {
     unsigned short sp30; /* 0x30: local_30 */
 } void_stack;
 
-extern unsigned char DAT_0057a9b8; /* 0x57a9b8 */
+extern unsigned char g_btlUi; /* 0x57a9b8 */
 
 /* Supplied declaration required: FUN_00192550. */
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: FUN_00280030. */
 /* Supplied declaration required: FUN_002ccde8. */
 /* Supplied declaration required: FUN_002fa7a8. */
@@ -44,8 +44,8 @@ void FUN_004aa8c8(void)
   short temp_v4 [2];
   short temp_v5 [4];
   
-  temp_v0 = (*(int *)((unsigned char *)&DAT_0057a9b8 + 0x10));
-  puVar5 = (unsigned char *)((*(int *)((unsigned char *)&DAT_0057a9b8 + 0x10)) + 0x74b0);
+  temp_v0 = (*(int *)((unsigned char *)&g_btlUi + 0x10));
+  puVar5 = (unsigned char *)((*(int *)((unsigned char *)&g_btlUi + 0x10)) + 0x74b0);
   *puVar5 = 0;
   temp_v5[0] = 0;
   temp_v4[0] = 0;
@@ -57,7 +57,7 @@ void FUN_004aa8c8(void)
       FUN_00192550();
       temp_v3 = (unsigned int)*(unsigned short *)(temp_v2 + 0x32);
       if (temp_v3 != 0) {
-        FUN_001aba54();
+        dataTable04FindById();
         temp_v3 = *(unsigned int *)(temp_v3 + 0x28);
         if (!(((temp_v3 & 0x1ff) >> 5 != 2 && (temp_v3 & 0x1ff) >> 5 != 3) && (temp_v3 & 0x1ff) >> 5 != 4)
            ) {
@@ -75,7 +75,7 @@ void FUN_004aa8c8(void)
   }
   else {
     temp_v2 = (int)temp_v4[0];
-    FUN_001aba54();
+    dataTable04FindById();
     temp_v3 = *(unsigned int *)(temp_v2 + 0x28);
     if (!(((temp_v3 & 0x1ff) >> 5 != 2 && (temp_v3 & 0x1ff) >> 5 != 3) && (temp_v3 & 0x1ff) >> 5 != 4)) {
       *puVar5 = 1;
@@ -88,8 +88,8 @@ void FUN_004aa8c8(void)
   else {
     *(unsigned int *)(temp_v0 + 0x74a0) = 0xc;
     menu32EnterState27(temp_v1);
-    temp_v0 = (*(int *)((unsigned char *)&DAT_0057a9b8 + 0x10));
-    temp_v1 = menu32ModeIsNot5((*(int *)((unsigned char *)&DAT_0057a9b8 + 0x10)) + 8);
+    temp_v0 = (*(int *)((unsigned char *)&g_btlUi + 0x10));
+    temp_v1 = menu32ModeIsNot5((*(int *)((unsigned char *)&g_btlUi + 0x10)) + 8);
     if (temp_v1 != 0) {
       temp_v1 = temp_v0 + 0x24bc;
       FUN_00280030();

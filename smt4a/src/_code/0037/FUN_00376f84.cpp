@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern Flags0C0C *FUN_00162e8c(void);
+extern Flags0C0C *gameFlagsGetBlock(void);
 
 s32 FUN_00376f84(void)
 {
-    return FUN_00162e8c()->unk20;
+    return gameFlagsGetBlock()->unk20;
 }
 
 } /* extern "C" */

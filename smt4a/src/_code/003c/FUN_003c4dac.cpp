@@ -9,7 +9,7 @@ int FUN_003e503c(void);
 
 extern unsigned char DAT_00588c40; /* 0x588c40 */
 
-extern unsigned int FUN_001ab854(void);
+extern unsigned int gameGetSlotRecord(void);
 extern int scrGetArg(void);
 /* Supplied declaration required: scrSetResult. */
 extern unsigned int FUN_0032fac0(void);
@@ -42,7 +42,7 @@ unsigned int FUN_003c4dac(void)
         FUN_003e503c();
       }
       else {
-        temp_v2 = FUN_001ab854();
+        temp_v2 = gameGetSlotRecord();
       }
       temp_v2 = (unsigned int)*(unsigned short *)(temp_v2 + 0x62);
     }

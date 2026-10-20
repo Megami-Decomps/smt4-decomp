@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern s8 DAT_00580204;
+extern s8 g_mapCollision;
 
 bool FUN_003303fc(void)
 {
-    return DAT_00580204 != 0;
+    return g_mapCollision != 0;
 }
 
 } /* extern "C" */

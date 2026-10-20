@@ -16,9 +16,9 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_2_stack;
 
-extern int DAT_0057f268; /* 0x57f268 */
+extern int g_partyPanel; /* 0x57f268 */
 
-extern int FUN_001ab888(void);
+extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_002a4878. */
 extern int FUN_002a4894(unsigned int);
 /* Supplied declaration required: FUN_002cbca8. */
@@ -39,8 +39,8 @@ void FUN_002707d8(unsigned int param_1,int param_2)
   int temp_v5;
   int temp_v6;
   
-  temp_v0 = DAT_0057f268;
-  temp_v1 = FUN_001ab888();
+  temp_v0 = g_partyPanel;
+  temp_v1 = gameGetSlotTable();
   temp_v4 = 0;
   temp_v5 = 0;
   temp_v6 = 0;

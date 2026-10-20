@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002e9ec8(int, unsigned int);
+int onlineInstanceTableFind(int, unsigned int);
 int FUN_002ea3d0(int, unsigned int);
-int FUN_002ea446(int, int);
+int onlineJobSetStateTimed(int, int);
 int FUN_002fdce8(int, unsigned int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -22,11 +22,11 @@ extern unsigned char LAB_00113500; /* 0x113500 */
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 extern unsigned int FUN_002e7908(int *, unsigned int *);
-extern int FUN_002e9af4(void);
-/* Supplied declaration required: FUN_002e9ec8. */
+extern int onlineInstanceTableGetCurrent(void);
+/* Supplied declaration required: onlineInstanceTableFind. */
 extern unsigned int FUN_002ea3c0(int *, unsigned char *, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
-/* Supplied declaration required: FUN_002ea446. */
+/* Supplied declaration required: onlineJobSetStateTimed. */
 /* Supplied declaration required: FUN_002fdce8. */
 
 
@@ -47,12 +47,12 @@ unsigned long long FUN_00113494(int param_1,unsigned int param_2,unsigned int pa
   uStack_14 = param_2;
   uStack_10 = param_3;
   temp_v3 = param_4;
-  temp_v1 = FUN_002e9af4();
-  FUN_002e9ec8(temp_v1,*(unsigned int *)(param_1 + 0xd0));
+  temp_v1 = onlineInstanceTableGetCurrent();
+  onlineInstanceTableFind(temp_v1,*(unsigned int *)(param_1 + 0xd0));
   if (temp_v1 != 0) {
     temp_v0 = *(char *)(param_1 + 0x150);
     if (temp_v0 == '\x01') {
-      FUN_002ea446(param_1,10);
+      onlineJobSetStateTimed(param_1,10);
       return romwright_piece_4_4(uStack_14,iStack_18);
     }
     if ((temp_v0 != '\x02') && (temp_v0 == '\x03')) {

@@ -49,8 +49,8 @@ extern float DAT_0049fad0; /* 0x49fad0 */
 /* Supplied declaration required: FUN_00287aec. */
 /* Supplied declaration required: FUN_00287be4. */
 /* Supplied declaration required: FUN_00291e40. */
-extern int FUN_002b63ac(void);
-extern int FUN_002c2950(void);
+extern int gameGetPlayerData(void);
+extern int gameGetMapBlock(void);
 
 
 unsigned int FUN_00253968(fn_00253968_arg0 *param_1)
@@ -66,8 +66,8 @@ unsigned int FUN_00253968(fn_00253968_arg0 *param_1)
   float temp_v6;
   float temp_v7;
   
-  temp_v1 = FUN_002c2950();
-  temp_v2 = FUN_002b63ac();
+  temp_v1 = gameGetMapBlock();
+  temp_v2 = gameGetPlayerData();
   temp_v0 = 0;
   if (DAT_0049fa98 != '\0') {
     temp_v0 = DAT_0049faae;

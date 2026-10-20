@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_001582dc(u32 handle);
+int mobiclipPlayerReleaseHandle(u32 handle);
 int FUN_0015836c(S4Player *player);
 
-extern u8 DAT_00588020;
+extern u8 g_mobiclipCtrl;
 extern S4Player DAT_00617f40;
 
 void mobiclipCtrlClosePlayer(int reason)
@@ -15,11 +15,11 @@ void mobiclipCtrlClosePlayer(int reason)
     S4Player *player = &DAT_00617f40;
 
     if (player->handle != 0) {
-        FUN_001582dc(player->handle);
+        mobiclipPlayerReleaseHandle(player->handle);
     }
     FUN_0015836c(player);
     if (reason == 3) {
-        DAT_00588020 = 1;
+        g_mobiclipCtrl = 1;
     }
 }
 

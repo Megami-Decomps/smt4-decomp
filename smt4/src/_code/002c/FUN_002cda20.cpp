@@ -4,8 +4,8 @@
 
 extern "C" {
 
-extern int DAT_00433278; /* 0x433278 */
-extern unsigned char DAT_00478000; /* 0x478000 */
+extern int g_keyedRecordCount; /* 0x433278 */
+extern unsigned char g_keyedRecords; /* 0x478000 */
 
 
 unsigned char * FUN_002cda20(int param_1,int param_2)
@@ -14,15 +14,15 @@ unsigned char * FUN_002cda20(int param_1,int param_2)
   int temp_v0;
   int temp_v1;
   
-  if (-1 < (DAT_00433278 - param_1) - 1) {
+  if (-1 < (g_keyedRecordCount - param_1) - 1) {
     temp_v1 = 0;
     do {
       temp_v0 = temp_v1 * 0x18 + param_1 * 0x148;
-      if (*(int *)(&DAT_00478000 + temp_v0 + 0x30) == param_2) {
-        return &DAT_00478000 + temp_v1 * 0x18 + param_1 * 0x148 + 0x2c;
+      if (*(int *)(&g_keyedRecords + temp_v0 + 0x30) == param_2) {
+        return &g_keyedRecords + temp_v1 * 0x18 + param_1 * 0x148 + 0x2c;
       }
-      if (*(int *)(&DAT_00478000 + temp_v0 + 0x48) == param_2) {
-        return &DAT_00478000 + temp_v1 * 0x18 + param_1 * 0x148 + 0x44;
+      if (*(int *)(&g_keyedRecords + temp_v0 + 0x48) == param_2) {
+        return &g_keyedRecords + temp_v1 * 0x18 + param_1 * 0x148 + 0x44;
       }
       temp_v1 = temp_v1 + 2;
     } while (temp_v1 < 6);

@@ -21,7 +21,7 @@ typedef struct {
 
 extern int FUN_00163fd4(void);
 /* Supplied declaration required: FUN_001641b4. */
-extern int FUN_001656a0(unsigned char);
+extern int padButtonIsPressed(unsigned char);
 /* Supplied declaration required: FUN_002be8d0. */
 /* Supplied declaration required: FUN_0032c49c. */
 /* Supplied declaration required: FUN_00340f2c. */
@@ -96,8 +96,8 @@ unsigned char FUN_00228b04(int param_1,int param_2)
     __aeabi_idivmod(temp_v9,temp_v8);
     if ((temp_v14 != 0) && (temp_v9 <= (temp_v6 + temp_v7) * temp_v8 + temp_v4)) {
       if ((temp_v4 == temp_v5 + 1) &&
-         (((temp_v4 = FUN_001656a0(*(unsigned char *)(param_1 + 0x2c)), temp_v4 != 0 ||
-           (temp_v4 = FUN_001656a0(*(unsigned char *)(param_1 + 0x30)), temp_v4 != 0)) &&
+         (((temp_v4 = padButtonIsPressed(*(unsigned char *)(param_1 + 0x2c)), temp_v4 != 0 ||
+           (temp_v4 = padButtonIsPressed(*(unsigned char *)(param_1 + 0x30)), temp_v4 != 0)) &&
           ((*(unsigned int *)(param_1 + 0x28) & 4) != 0)))) {
         FUN_0032c49c(param_1 + 0x28,0);
       }

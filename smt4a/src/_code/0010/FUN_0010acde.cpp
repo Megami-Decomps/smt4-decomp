@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002e6e34(...);
 int FUN_002e6e5c(...);
-int FUN_002e7232(...);
+int sharedRefRelease(...);
 int FUN_002eb310(int, int *);
 int wordMoveOut_002f1324(unsigned char [4], int [3], int);
 int FUN_002f3df8(int [3], int, int);
@@ -35,8 +35,8 @@ typedef struct {
 
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-/* Supplied declaration required: FUN_002e7232. */
-extern unsigned int FUN_002ea714(void);
+/* Supplied declaration required: sharedRefRelease. */
+extern unsigned int onlineGetActiveLock(void);
 /* Supplied declaration required: FUN_002eb310. */
 extern int FUN_002eb5f4(void);
 /* Supplied declaration required: wordMoveOut_002f1324. */
@@ -81,7 +81,7 @@ void FUN_0010acde(int param_1,int param_2,int param_3)
   iStack_20 = param_1;
   temp_v19 = param_2;
   iStack_18 = param_3;
-  temp_v1 = FUN_002ea714();
+  temp_v1 = onlineGetActiveLock();
   FUN_002e6e34(temp_v11,temp_v1);
   FUN_002f3df8(temp_v10,param_1 + 4,temp_v19);
   temp_v12 = *(unsigned int *)(param_1 + 0x14);
@@ -130,7 +130,7 @@ void FUN_0010acde(int param_1,int param_2,int param_3)
     if ((*(unsigned short *)(temp_v2 + 0x3c) & 0xf) == 2) {
       *(int *)(param_1 + 0x3c) = *(int *)(param_1 + 0x3c) - 1;
     }
-    FUN_002e7232(temp_v2);
+    sharedRefRelease(temp_v2);
   }
   FUN_002e6e5c(temp_v11);
   return;

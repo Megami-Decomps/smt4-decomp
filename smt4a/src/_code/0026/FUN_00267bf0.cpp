@@ -6,17 +6,17 @@ extern "C" {
 
 int FUN_001695a0(void);
 int asdMemFree(...);
-int FUN_0019a7f4(int, int);
+int asdTMTexTableReleaseNode(int, int);
 int scrScriptProcessDestroy(unsigned int);
-int FUN_001add24(int);
+int dataTableFree(int);
 
 extern unsigned char DAT_00588c40; /* 0x588c40 */
 
 /* Supplied declaration required: FUN_001695a0. */
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_0019a7f4. */
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: FUN_001add24. */
+/* Supplied declaration required: dataTableFree. */
 
 
 void FUN_00267bf0(void)
@@ -32,11 +32,11 @@ void FUN_00267bf0(void)
     asdMemFree(*(unsigned int *)(temp_v0 + 0x43a4));
     FUN_001695a0();
     asdMemFree(*(unsigned int *)(temp_v0 + 0x43a8));
-    FUN_001add24(0x14);
-    FUN_001add24(0x25);
+    dataTableFree(0x14);
+    dataTableFree(0x25);
     temp_v0 = 0;
     do {
-      FUN_0019a7f4(0x1d,temp_v0);
+      asdTMTexTableReleaseNode(0x1d,temp_v0);
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < 3);
     asdMemFree((*(int *)((unsigned char *)&DAT_00588c40 + 0x4)));

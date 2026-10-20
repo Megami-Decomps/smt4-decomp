@@ -50,8 +50,8 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164b5c. */
-extern int FUN_001654d8(int);
-extern int FUN_001654e4(int);
+extern int vec2GetXInt(int);
+extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001834a4. */
@@ -104,8 +104,8 @@ unsigned int FUN_0032ba8c(void)
   int temp_v30;
   
   temp_v1 = g_titleConfig;
-  temp_v2 = FUN_001654d8(g_titleConfig + 0x5c);
-  temp_v3 = FUN_001654e4(temp_v1 + 0x5c);
+  temp_v2 = vec2GetXInt(g_titleConfig + 0x5c);
+  temp_v3 = vec2GetYInt(temp_v1 + 0x5c);
   temp_v26 = (unsigned int)(*(int *)(temp_v1 + 8) == 1);
   temp_v10 = 0;
   temp_v11 = 0;

@@ -23,8 +23,8 @@ extern int FUN_002ca030(...); /* 0x2ca030 */
 extern int btlGameOverDestroy(...); /* 0x2e06b4 */
 extern int g_btlGameOver; /* 0x435d60 */
 
-extern int FUN_002c09bc(void);
-extern int FUN_002c09d0(unsigned int);
+extern int gameDataBlocksGetSaveData(void);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: taskCreateDraw. */
 
@@ -45,8 +45,8 @@ void FUN_0021af44(unsigned int *param_1)
   temp_v0 = 0x100;
   asdMemAlloc(0x100,0x100,0,0x40,1);
   g_btlGameOver = temp_v0;
-  temp_v1 = FUN_002c09bc();
-  if ((*(char *)(temp_v1 + 0x24b29) != '\0') && (temp_v1 = FUN_002c09d0(0x557), temp_v1 == 0)) {
+  temp_v1 = gameDataBlocksGetSaveData();
+  if ((*(char *)(temp_v1 + 0x24b29) != '\0') && (temp_v1 = gameFlagIsSet(0x557), temp_v1 == 0)) {
     *(unsigned int *)(temp_v0 + 4) = *(unsigned int *)(temp_v0 + 4) | 1;
     param_1[0x1128] = param_1[0x1128] | 0x80000000;
   }

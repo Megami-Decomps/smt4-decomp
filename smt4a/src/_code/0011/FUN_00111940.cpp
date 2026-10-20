@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_0011164c(unsigned int, int);
-int FUN_002e75fa(int);
-int FUN_002e9afe(int, unsigned char [16]);
+int sharedRefAddRef(int);
+int vectorCopyHeader(int, unsigned char [16]);
 int FUN_002ea3d0(int, unsigned int);
 int FUN_002f674e(unsigned int);
-int FUN_002f7cb0(int);
+int onlineJobSetStateWaiting(int);
 int FUN_002fd412(int);
 
 typedef int romwright_code(...);
@@ -27,13 +27,13 @@ extern unsigned char LAB_00111a00; /* 0x111a00 */
 
 extern int FUN_00111594(unsigned int, int);
 /* Supplied declaration required: FUN_0011164c. */
-/* Supplied declaration required: FUN_002e75fa. */
-/* Supplied declaration required: FUN_002e9afe. */
+/* Supplied declaration required: sharedRefAddRef. */
+/* Supplied declaration required: vectorCopyHeader. */
 extern unsigned int FUN_002ea3c0(unsigned char **, unsigned int, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
 extern int FUN_002ea6fc(int, unsigned char *);
 /* Supplied declaration required: FUN_002f674e. */
-/* Supplied declaration required: FUN_002f7cb0. */
+/* Supplied declaration required: onlineJobSetStateWaiting. */
 /* Supplied declaration required: FUN_002fd412. */
 
 
@@ -66,12 +66,12 @@ void FUN_00111940(int param_1)
               (temp_v7,*(int **)(param_1 + 0x78),*(unsigned int *)(param_1 + 0x17c),
                *(unsigned int *)(param_1 + 0x180));
     temp_v0 = param_1 + 0x7c;
-    FUN_002e9afe(temp_v0,temp_v7);
+    vectorCopyHeader(temp_v0,temp_v7);
     temp_v5[0] = 0;
     temp_v0 = FUN_002ea6fc(temp_v0,temp_v5);
     if (temp_v0 == 0) {
-      FUN_002e75fa(param_1);
-      FUN_002f7cb0(param_1);
+      sharedRefAddRef(param_1);
+      onlineJobSetStateWaiting(param_1);
       temp_v1 = 0x111f49;
       temp_v1 = FUN_002ea3c0(&temp_v2,temp_v1,0,&LAB_00111a00);
       FUN_002ea3d0(param_1,temp_v1);

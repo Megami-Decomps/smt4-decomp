@@ -8,15 +8,15 @@ struct PairFUN_003f5fc4 {
     /* 0x04 */ u32 second;
 };
 
-extern PairFUN_003f5fc4 DAT_0044e948;
+extern PairFUN_003f5fc4 g_mwmofilterDeblocker;
 
 __weak void FUN_003f5fc4_hook(s32 zero, u32 code);
 
 void FUN_003f5fc4(u32 first, u32 second)
 {
     FUN_003f5fc4_hook(0, 0x0400008a);
-    DAT_0044e948.first = first;
-    DAT_0044e948.second = second;
+    g_mwmofilterDeblocker.first = first;
+    g_mwmofilterDeblocker.second = second;
 }
 
 }

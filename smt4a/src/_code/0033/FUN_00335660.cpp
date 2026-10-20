@@ -4,19 +4,19 @@
 
 extern "C" {
 
-int FUN_001a6f60(...);
+int dataTableFileGetTable(...);
 int FUN_002bf384(...);
-int FUN_0030ea58(int, unsigned char *);
+int libc_strcmp(int, unsigned char *);
 int FUN_00318100(void);
-int FUN_0048168c(void);
+int tbcrBlockGetPayload(void);
 
 extern unsigned int dataTableValueOrZero(unsigned int);
 extern int dataTableGetEntries(void);
-/* Supplied declaration required: FUN_001a6f60. */
+/* Supplied declaration required: dataTableFileGetTable. */
 /* Supplied declaration required: FUN_002bf384. */
-/* Supplied declaration required: FUN_0030ea58. */
+/* Supplied declaration required: libc_strcmp. */
 /* Supplied declaration required: FUN_00318100. */
-/* Supplied declaration required: FUN_0048168c. */
+/* Supplied declaration required: tbcrBlockGetPayload. */
 
 
 int FUN_00335660(int param_1,int param_2,int param_3)
@@ -35,7 +35,7 @@ int FUN_00335660(int param_1,int param_2,int param_3)
   temp_v4 = 0;
   do {
     temp_v0 = param_2;
-    FUN_0030ea58(param_2,pbVar4 + 2);
+    libc_strcmp(param_2,pbVar4 + 2);
     if (temp_v0 == 0) {
       if (pbVar4 != (unsigned char *)0x0) {
         temp_v5 = (unsigned int)*pbVar4;
@@ -46,11 +46,11 @@ int FUN_00335660(int param_1,int param_2,int param_3)
           temp_v5 = 0;
         }
         FUN_002bf384(temp_v1,temp_v5);
-        temp_v2 = FUN_0048168c();
+        temp_v2 = tbcrBlockGetPayload();
         if (temp_v2 <= temp_v3) {
           temp_v3 = 0;
         }
-        FUN_001a6f60(temp_v1,temp_v3);
+        dataTableFileGetTable(temp_v1,temp_v3);
         temp_v4 = dataTableGetEntries();
         temp_v2 = (unsigned int)(param_1 != 0);
         if (param_3 != 0) {
@@ -66,8 +66,8 @@ int FUN_00335660(int param_1,int param_2,int param_3)
   temp_v1 = dataTableValueOrZero(7);
   FUN_00318100();
   FUN_002bf384(temp_v1,0);
-  FUN_0048168c();
-  FUN_001a6f60(temp_v1,0);
+  tbcrBlockGetPayload();
+  dataTableFileGetTable(temp_v1,0);
   temp_v4 = dataTableGetEntries();
   temp_v2 = (unsigned int)(param_1 != 0);
   if (param_3 != 0) {

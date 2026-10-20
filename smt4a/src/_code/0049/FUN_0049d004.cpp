@@ -6,7 +6,7 @@ extern "C" {
 
 extern unsigned char DAT_00588f9c; /* 0x588f9c */
 
-extern unsigned int FUN_001add24(unsigned int);
+extern unsigned int dataTableFree(unsigned int);
 
 
 unsigned int FUN_0049d004(void)
@@ -16,7 +16,7 @@ unsigned int FUN_0049d004(void)
   
   (*(int *)((unsigned char *)&DAT_00588f9c + 0x4)) = (*(int *)((unsigned char *)&DAT_00588f9c + 0x4)) - 1;
   if ((*(int *)((unsigned char *)&DAT_00588f9c + 0x4)) < 1) {
-    temp_v0 = FUN_001add24(0x17);
+    temp_v0 = dataTableFree(0x17);
     return temp_v0;
   }
   return 1;

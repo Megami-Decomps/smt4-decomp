@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001883b0(unsigned int *, unsigned char [132], int);
 int vcallSlot12IfValid(unsigned int);
-int FUN_00195fc8(void);
+int sysFatalBreak(void);
 int FUN_002e9768(unsigned char [132], int, unsigned char *, int);
 int FUN_00438e28(unsigned int *, unsigned int *, char [4], unsigned int, unsigned int);
 int FUN_00439394(unsigned int *, unsigned char [8], int *, unsigned int);
@@ -28,7 +28,7 @@ extern unsigned char LAB_00438e04; /* 0x438e04 */
 
 /* Supplied declaration required: FUN_001883b0. */
 /* Supplied declaration required: vcallSlot12IfValid. */
-/* Supplied declaration required: FUN_00195fc8. */
+/* Supplied declaration required: sysFatalBreak. */
 /* Supplied declaration required: FUN_002e9768. */
 /* Supplied declaration required: FUN_00438e28. */
 /* Supplied declaration required: FUN_00439394. */
@@ -100,7 +100,7 @@ joined_r0x00438d38:
           return puVar1;
         }
         if ((temp_v4 & 1) != 0) {
-          FUN_00195fc8();
+          sysFatalBreak();
         }
         vcallSlot12IfValid(temp_v4 & 0xfffffffe);
         return puVar1;
@@ -111,7 +111,7 @@ joined_r0x00438d38:
       if ((int)puVar1 < 0) goto joined_r0x00438d38;
       if ((temp_v4 & 0xfffffffe) != 0) {
         if ((temp_v4 & 1) != 0) {
-          FUN_00195fc8();
+          sysFatalBreak();
         }
         vcallSlot12IfValid(temp_v4 & 0xfffffffe);
         temp_v4 = 0;

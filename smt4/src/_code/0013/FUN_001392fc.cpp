@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c38fc(unsigned int *);
+int nn_os_CriticalSection_Initialize(unsigned int *);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -27,7 +27,7 @@ extern unsigned int DAT_004d4318; /* 0x4d4318 */
 extern unsigned int DAT_004d43d0; /* 0x4d43d0 */
 
 extern int __cxa_guard_acquire(unsigned int *);
-/* Supplied declaration required: FUN_002c38fc. */
+/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
 extern void nn_fnd_UnitHeapBase_Initialize(unsigned int, unsigned int, unsigned int, unsigned int, int, unsigned int);
 extern unsigned int nn_fnd_UnitHeapTemplate_nn_os_LockPolicy_Object_nn_os_CriticalSection_Allocate(void);
 extern void nn_os_CriticalSection_Enter(unsigned int);
@@ -54,7 +54,7 @@ unsigned int FUN_001392fc(void)
     DAT_004d4318 = 0xffffffff;
     DAT_004d4314 = 0;
     nn_fnd_UnitHeapBase_Initialize((unsigned int)&DAT_004d42e0,0x130,0x430940,0x1300,4,0);
-    FUN_002c38fc(&DAT_004d4310);
+    nn_os_CriticalSection_Initialize(&DAT_004d4310);
   }
   DAT_0044e654 = (unsigned int *)&DAT_004d42e0;
   temp_v1 = nn_fnd_UnitHeapTemplate_nn_os_LockPolicy_Object_nn_os_CriticalSection_Allocate();

@@ -9,8 +9,8 @@ int FUN_00250d84(int, int);
 int FUN_00295a18(void);
 int FUN_00295c04(int);
 int FUN_0029be5c(int, int);
-int FUN_002b45e8(void);
-int FUN_002b4670(void);
+int dataTable08Sub2GetRecord(void);
+int dataTable08Sub1GetRecord(void);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -24,8 +24,8 @@ typedef struct {
 extern int FUN_002973ec(void);
 /* Supplied declaration required: FUN_0029be5c. */
 extern unsigned int FUN_002ae3c4(unsigned int);
-/* Supplied declaration required: FUN_002b45e8. */
-/* Supplied declaration required: FUN_002b4670. */
+/* Supplied declaration required: dataTable08Sub2GetRecord. */
+/* Supplied declaration required: dataTable08Sub1GetRecord. */
 
 
 void FUN_002306f8(unsigned short *param_1,int param_2,int param_3)
@@ -47,7 +47,7 @@ void FUN_002306f8(unsigned short *param_1,int param_2,int param_3)
         temp_v2 = 0;
         switch(temp_v0) {
         case 1:
-          FUN_002b4670();
+          dataTable08Sub1GetRecord();
           temp_v2 = temp_v3;
           if (temp_v1 != 0) {
             temp_v2 = *(int *)(temp_v1 + 0x7c);
@@ -60,7 +60,7 @@ void FUN_002306f8(unsigned short *param_1,int param_2,int param_3)
         case 6:
         case 7:
         case 8:
-          FUN_002b45e8();
+          dataTable08Sub2GetRecord();
           temp_v2 = temp_v3;
           if (temp_v1 != 0) {
             temp_v2 = *(int *)(temp_v1 + 0xa0);
@@ -94,7 +94,7 @@ void FUN_002306f8(unsigned short *param_1,int param_2,int param_3)
         temp_v2 = 0;
         switch(temp_v0) {
         case 1:
-          FUN_002b4670();
+          dataTable08Sub1GetRecord();
           temp_v2 = temp_v3;
           if (temp_v1 != 0) {
             temp_v2 = *(int *)(temp_v1 + 0x78);
@@ -107,7 +107,7 @@ void FUN_002306f8(unsigned short *param_1,int param_2,int param_3)
         case 6:
         case 7:
         case 8:
-          FUN_002b45e8();
+          dataTable08Sub2GetRecord();
           temp_v2 = temp_v3;
           if (temp_v1 != 0) {
             temp_v2 = *(int *)(temp_v1 + 0x9c);

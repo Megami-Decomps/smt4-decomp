@@ -11,11 +11,11 @@ typedef struct Obj {
     /* 0x78A */ u16 values[1];
 } Obj;
 
-extern Obj *DAT_0043dd50;
+extern Obj *g_uiQuest;
 
 u16 FUN_00223ca0(void)
 {
-    Obj *obj = DAT_0043dd50;
+    Obj *obj = g_uiQuest;
     int a = FUN_0029efc0(obj->block);
     int b = FUN_0029efa8(obj->block);
 

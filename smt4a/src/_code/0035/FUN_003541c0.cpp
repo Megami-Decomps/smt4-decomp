@@ -59,7 +59,7 @@ extern signed char DAT_005f1c7e; /* 0x5f1c7e */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-extern int FUN_00162e8c(void);
+extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
 /* Supplied declaration required: FUN_001f3f34. */
@@ -116,7 +116,7 @@ void FUN_003541c0(void)
   
   piVar5 = &temp_v15;
   piVar6 = &temp_v15;
-  temp_v0 = FUN_00162e8c();
+  temp_v0 = gameFlagsGetBlock();
   piVar4 = g_lmapScene;
   if (((*g_lmapScene == 0xd || *g_lmapScene == 0x15) && (g_lmapScene[99] != 0)) &&
      (g_lmapScene[1] == 0xb)) {

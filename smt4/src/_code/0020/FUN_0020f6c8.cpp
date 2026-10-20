@@ -77,7 +77,7 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: FUN_0028250c. */
 /* Supplied declaration required: FUN_002ba1e0. */
 /* Supplied declaration required: FUN_002c1b64. */
-extern int FUN_002c2950(void);
+extern int gameGetMapBlock(void);
 extern int lmapMainIsAtLeastHalf(void);
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
 
@@ -142,7 +142,7 @@ void FUN_0020f6c8(void)
   unsigned int temp_v45;
   
   temp_v1 = g_mapIf;
-  temp_v2 = FUN_002c2950();
+  temp_v2 = gameGetMapBlock();
   DAT_00447a80 = DAT_00447a80 + 1;
   temp_v4 = 0xffffffff;
   DAT_00447a84 = DAT_00447a84 + 0.2f;

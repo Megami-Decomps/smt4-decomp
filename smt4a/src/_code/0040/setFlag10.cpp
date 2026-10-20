@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern Flag10Obj *FUN_001519ac(void);
+extern Flag10Obj *gameDataBlocksGetStats(void);
 
 void setFlag10(void)
 {
-    FUN_001519ac()->unk10 = 1;
+    gameDataBlocksGetStats()->unk10 = 1;
 }
 
 } /* extern "C" */

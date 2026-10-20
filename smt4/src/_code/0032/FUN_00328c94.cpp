@@ -17,16 +17,16 @@ typedef struct Party {
 
 int scrSetResult(int value);
 int FUN_00295408(void);
-u16 *FUN_002a8740(int id);
+u16 *gameGetUnitRecord(int id);
 
-/* Script command: looks up a value for the current party entry (from FUN_002a8740's table at FUN_00295408()) and passes it to scrSetResult. */
+/* Script command: looks up a value for the current party entry (from gameGetUnitRecord's table at FUN_00295408()) and passes it to scrSetResult. */
 u32 FUN_00328c94(Party **partyPtr)
 {
     Party *party = *partyPtr;
 
     if (party != NULL) {
         PartyEntry *entry = &party->entries[party->current];
-        u8 *table = (u8 *)FUN_002a8740(entry->id);
+        u8 *table = (u8 *)gameGetUnitRecord(entry->id);
         int index = FUN_00295408();
 
         scrSetResult(*(u16 *)(table + index * 2 + 0x34));

@@ -8,7 +8,7 @@ int FUN_00162790(...);
 int FUN_001634b4(unsigned int *);
 int FUN_00164168(...);
 int efctSetSpeed(void);
-int FUN_0016c410(...);
+int renderCtxResetColorScale(...);
 int FUN_0016c560(...);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
@@ -36,12 +36,12 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_001634b4. */
 /* Supplied declaration required: FUN_00164168. */
 extern unsigned int *jobGetWork(void);
-extern int FUN_001654d8(void);
-extern int FUN_001654e4(unsigned int *);
+extern int vec2GetXInt(void);
+extern int vec2GetYInt(unsigned int *);
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0016c410. */
+/* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: FUN_0016c560. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
@@ -127,9 +127,9 @@ unsigned int FUN_00472820(void)
     }
     if (((*(char *)((int)puVar2 + 0x4ca) != '\0') && ((char)puVar2[0x132] != '\0')) &&
        ((*puVar2 & 0x20) != 0)) {
-      temp_v1 = FUN_001654d8();
+      temp_v1 = vec2GetXInt();
       temp_v1 = temp_v1 + temp_v14;
-      temp_v6 = FUN_001654e4(puVar2 + 0x133);
+      temp_v6 = vec2GetYInt(puVar2 + 0x133);
       temp_v2 = g_renderCtx;
       temp_v7 = FUN_001692ac(1,0);
       piVar12 = (int *)(temp_v2 + 0x1258);
@@ -231,7 +231,7 @@ unsigned int FUN_00472820(void)
       FUN_00183bb0();
       efctSetSpeed();
       FUN_0016c560(g_renderCtx);
-      FUN_0016c410(g_renderCtx);
+      renderCtxResetColorScale(g_renderCtx);
     }
   }
   return 0;

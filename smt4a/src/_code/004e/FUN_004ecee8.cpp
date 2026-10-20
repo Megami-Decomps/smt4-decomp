@@ -27,7 +27,7 @@ extern unsigned int DAT_00571168; /* 0x571168 */
 extern unsigned int DAT_0057116c; /* 0x57116c */
 extern unsigned int DAT_00571170; /* 0x571170 */
 extern unsigned int DAT_00571174; /* 0x571174 */
-extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
+extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
 extern unsigned int FUN_0019acdc(unsigned short, unsigned int);
 extern int FUN_003e7adc(int);
@@ -64,7 +64,7 @@ void FUN_004ecee8(int *param_1,unsigned int *param_2)
   if ((short)puVar3[0xcd] >= 1) {
     if ((*puVar3 & (DAT_00571168 | DAT_00571170)) == 0 &&
         (puVar3[1] & (DAT_00571174 | DAT_0057116c)) == 0) {
-      FUN_004a9308(DAT_0057a9c8,(short)param_2[0xb],0);
+      FUN_004a9308(g_btlUiBlock,(short)param_2[0xb],0);
     }
     FUN_004fd508(temp_v4,param_2,0,param_2[9],1);
     temp_v2 = param_2[8];

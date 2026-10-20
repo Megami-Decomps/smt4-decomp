@@ -9,7 +9,7 @@ int FUN_0011d444(int, int, unsigned int, int);
 int FUN_002ea3c0(...);
 int FUN_002ea3d0(int, unsigned int);
 int FUN_002f451c(int *, unsigned int);
-int FUN_002f7cb0(int);
+int onlineJobSetStateWaiting(int);
 int FUN_002f7cba(int, int, unsigned int);
 int FUN_0030202c(int, int, unsigned int);
 
@@ -29,12 +29,12 @@ extern unsigned char LAB_0011633c; /* 0x11633c */
 
 /* Supplied declaration required: FUN_0011ce04. */
 /* Supplied declaration required: FUN_0011d444. */
-extern int FUN_002e760a(unsigned int);
+extern int operatorNew(unsigned int);
 extern unsigned int FUN_002e7908(unsigned int *, unsigned int *);
 /* Supplied declaration required: FUN_002ea3c0. */
 /* Supplied declaration required: FUN_002ea3d0. */
 /* Supplied declaration required: FUN_002f451c. */
-/* Supplied declaration required: FUN_002f7cb0. */
+/* Supplied declaration required: onlineJobSetStateWaiting. */
 /* Supplied declaration required: FUN_002f7cba. */
 /* Supplied declaration required: FUN_0030202c. */
 
@@ -80,8 +80,8 @@ void FUN_00116254(int param_1)
       FUN_002ea3d0(param_1,temp_v0);
     }
     else {
-      FUN_002f7cb0(param_1);
-      temp_v1 = FUN_002e760a(0x10);
+      onlineJobSetStateWaiting(param_1);
+      temp_v1 = operatorNew(0x10);
       temp_v0 = 0;
       if (temp_v1 != 0) {
         temp_v0 = FUN_002ea3c0(temp_v1,0x116345,0,&LAB_0011633c);

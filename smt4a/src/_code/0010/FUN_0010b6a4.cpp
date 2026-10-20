@@ -28,7 +28,7 @@ typedef struct {
 extern int FUN_002f4dea(unsigned int);
 /* Supplied declaration required: FUN_002f4e14. */
 extern int FUN_002f4e70(int);
-extern int FUN_002f4e86(unsigned int *);
+extern int refIsNonNegative(unsigned int *);
 
 
 void FUN_0010b6a4(int *param_1,int param_2,unsigned int param_3)
@@ -60,7 +60,7 @@ void FUN_0010b6a4(int *param_1,int param_2,unsigned int param_3)
     return;
   }
   if (*(char *)(param_2 + 4) == '\0') {
-    temp_v1 = FUN_002f4e86((unsigned int *)&temp_v4);
+    temp_v1 = refIsNonNegative((unsigned int *)&temp_v4);
     if (temp_v1 == 0) {
       temp_v5 = temp_v4;
       uStack_24 = uStack_30;

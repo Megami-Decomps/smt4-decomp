@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_0010032e(unsigned int *);
+int syncWaitHandleForever(unsigned int *);
 int asdFileHashPackClose(void);
 int FUN_001469a8(unsigned int);
 int FUN_001a0380(int);
-int FUN_001a08d8(unsigned int *);
+int nn_os_LightEvent_Signal(unsigned int *);
 int FUN_001a0d08(unsigned int *);
 int FUN_002e3140(void);
 int nn_os_detail_ConvertLibraryToSvcPriority(int);
@@ -26,11 +26,11 @@ extern unsigned char DAT_005b3fd0; /* 0x5b3fd0 */
 extern unsigned int g_asdFileEvent; /* 0x5b3fd4 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_0010032e. */
+/* Supplied declaration required: syncWaitHandleForever. */
 /* Supplied declaration required: asdFileHashPackClose. */
 /* Supplied declaration required: FUN_001469a8. */
 /* Supplied declaration required: FUN_001a0380. */
-/* Supplied declaration required: FUN_001a08d8. */
+/* Supplied declaration required: nn_os_LightEvent_Signal. */
 /* Supplied declaration required: FUN_001a0d08. */
 /* Supplied declaration required: FUN_002e3140. */
 /* Supplied declaration required: nn_os_detail_ConvertLibraryToSvcPriority. */
@@ -55,8 +55,8 @@ void FUN_00137f94(void)
         FUN_002e3140();
       }
       g_asdFile = 1;
-      FUN_001a08d8(&g_asdFileEvent);
-      FUN_0010032e(&DAT_005b3fcc);
+      nn_os_LightEvent_Signal(&g_asdFileEvent);
+      syncWaitHandleForever(&DAT_005b3fcc);
       DAT_005b3fd0 = 1;
       FUN_001a0d08(&DAT_005b3fcc);
       if (DAT_005b3fcc != 0) {

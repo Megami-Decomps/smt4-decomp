@@ -6,7 +6,7 @@ extern "C" {
 
 int timerStart(int, int, int);
 
-extern int DAT_0044e190; /* 0x44e190 */
+extern int g_statusDown; /* 0x44e190 */
 
 /* Supplied declaration required: timerStart. */
 
@@ -20,10 +20,10 @@ void FUN_001ddbbc(void)
   unsigned int *puVar3;
   unsigned int temp_v2;
   
-  temp_v0 = DAT_0044e190;
-  timerStart(DAT_0044e190 + 0x28,1,0);
-  temp_v1 = DAT_0044e190;
-  *(unsigned int *)(DAT_0044e190 + 0x40c) = 0;
+  temp_v0 = g_statusDown;
+  timerStart(g_statusDown + 0x28,1,0);
+  temp_v1 = g_statusDown;
+  *(unsigned int *)(g_statusDown + 0x40c) = 0;
   puVar3 = (unsigned int *)(temp_v1 + 0x400);
   temp_v2 = *puVar3;
   *puVar3 = 1;

@@ -6,7 +6,7 @@ extern "C" {
 
 int memAlloc(...);
 int FUN_002e59f8(char *, unsigned int, unsigned int);
-int FUN_002e6dd4(void);
+int rt_memclr(void);
 int FUN_003aa57c(unsigned int *, int, int);
 int FUN_003b8ecc(unsigned int *);
 int rt_memcpy_w(unsigned int *, int, int);
@@ -40,7 +40,7 @@ typedef struct {
 extern char *FUN_002721e4(fn_003aa6c0_arg0 *);
 extern int FUN_002b41c4(void);
 /* Supplied declaration required: FUN_002e59f8. */
-/* Supplied declaration required: FUN_002e6dd4. */
+/* Supplied declaration required: rt_memclr. */
 extern unsigned int asdMdlManagerCreateFromSource(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_003aa57c. */
 /* Supplied declaration required: FUN_003b8ecc. */
@@ -72,7 +72,7 @@ unsigned int * FUN_003aa6c0(fn_003aa6c0_arg0 *param_1)
   }
   puVar4 = (unsigned int *)0x10000;
   memAlloc(0x10000,0x100,0,0xa8,0x10,1);
-  FUN_002e6dd4();
+  rt_memclr();
   puVar4[1] = 0xffffffff;
   *puVar4 = temp_v3;
   puVar4[2] = 0x3f800000;

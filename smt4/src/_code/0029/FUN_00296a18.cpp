@@ -8,7 +8,7 @@ int FUN_00297060(int, int);
 
 extern int FUN_0023ea6c(unsigned int);
 /* Supplied declaration required: FUN_00297060. */
-extern int FUN_002a60b4(unsigned int, int);
+extern int asdTMTexTableNodeIsLoaded(unsigned int, int);
 
 
 unsigned int FUN_00296a18(int param_1)
@@ -25,7 +25,7 @@ unsigned int FUN_00296a18(int param_1)
     temp_v2 = 0;
     temp_v0 = temp_v2;
     do {
-      temp_v1 = FUN_002a60b4(0x28,temp_v2);
+      temp_v1 = asdTMTexTableNodeIsLoaded(0x28,temp_v2);
       if (temp_v1 != 0) {
         temp_v0 = temp_v0 + 1;
       }

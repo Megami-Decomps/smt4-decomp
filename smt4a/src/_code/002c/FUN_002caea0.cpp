@@ -10,18 +10,18 @@ int FUN_001523b8(...);
 int FUN_00183764(...);
 int FUN_00186e2c(...);
 int FUN_001ac2d4(...);
-int FUN_001f42b0(...);
+int asdModelSlotRelease(...);
 int FUN_001f474c(...);
 int asdMdlManagerDestroy(...);
 int FUN_00212204(...);
 int FUN_00280c5c(...);
-int FUN_00280d2c(...);
+int asdMdlManagerMarkDestroy(...);
 int FUN_002e08c8(...);
 int faderSetValue(...);
 int FUN_00359370(...);
 int FUN_00359510(...);
 int FUN_0037a898(...);
-int FUN_003ae864(...);
+int gfxObjectDestroy(...);
 int FUN_003ba560(...);
 int FUN_003d502c(...);
 int FUN_003d54f8(...);
@@ -40,20 +40,20 @@ extern int jobGetWork(void);
 /* Supplied declaration required: FUN_00186e2c. */
 extern int FUN_001ab8c0(void);
 /* Supplied declaration required: FUN_001ac2d4. */
-/* Supplied declaration required: FUN_001f42b0. */
+/* Supplied declaration required: asdModelSlotRelease. */
 /* Supplied declaration required: FUN_001f474c. */
 /* Supplied declaration required: asdMdlManagerDestroy. */
 extern unsigned int asdMdlManagerCreateSecondList(char *, unsigned int);
 /* Supplied declaration required: FUN_00212204. */
 /* Supplied declaration required: FUN_00280c5c. */
-/* Supplied declaration required: FUN_00280d2c. */
+/* Supplied declaration required: asdMdlManagerMarkDestroy. */
 /* Supplied declaration required: FUN_002e08c8. */
 /* Supplied declaration required: faderSetValue. */
 /* Supplied declaration required: FUN_00359370. */
 /* Supplied declaration required: FUN_00359510. */
 /* Supplied declaration required: FUN_0037a898. */
 extern unsigned int FUN_00387350(char *);
-/* Supplied declaration required: FUN_003ae864. */
+/* Supplied declaration required: gfxObjectDestroy. */
 extern int floatOwnerIsDone(unsigned int);
 /* Supplied declaration required: FUN_003ba560. */
 /* Supplied declaration required: FUN_003d502c. */
@@ -153,11 +153,11 @@ unsigned int FUN_002caea0(void)
       if (*(char *)(temp_v0 + 0x570) != '\0') {
         FUN_00359370(*(unsigned int *)(temp_v0 + 0x55c),0);
       }
-      FUN_003ae864(*(unsigned int *)(temp_v0 + 0x560));
-      FUN_003ae864(*(unsigned int *)(temp_v0 + 0x564));
+      gfxObjectDestroy(*(unsigned int *)(temp_v0 + 0x560));
+      gfxObjectDestroy(*(unsigned int *)(temp_v0 + 0x564));
       *(unsigned int *)(temp_v0 + 0x560) = 0;
       *(unsigned int *)(temp_v0 + 0x564) = 0;
-      FUN_001f42b0(0);
+      asdModelSlotRelease(0);
       if (*(int *)(temp_v0 + 0x558) != 0) {
         asdMdlManagerDestroy();
       }
@@ -165,7 +165,7 @@ unsigned int FUN_002caea0(void)
       *(unsigned int *)(temp_v0 + 0x558) = 0;
       return 0xffffffff;
     }
-    FUN_00280d2c(*(unsigned int *)(temp_v0 + 0x558));
+    asdMdlManagerMarkDestroy(*(unsigned int *)(temp_v0 + 0x558));
     *(int *)(temp_v0 + 0x56c) = *(int *)(temp_v0 + 0x56c) + 1;
   }
   return 0;

@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdMemoryFreeRegion(unsigned int *);
-int FUN_002a780c(unsigned int);
+int asdMemFreeSlot(unsigned int);
 int FUN_002a8554(unsigned int, int *, int, int, int, int, unsigned int, unsigned int);
 int hasExclusiveAccess(int *);
 
@@ -19,7 +19,7 @@ extern unsigned int DAT_00471b58; /* 0x471b58 */
 /* Unsupported intrinsic, declaration required: hasExclusiveAccess (CALLOTHER). */
 /* Supplied declaration required: asdMemoryFreeRegion. */
 extern unsigned int *FUN_001246cc(unsigned int *);
-/* Supplied declaration required: FUN_002a780c. */
+/* Supplied declaration required: asdMemFreeSlot. */
 /* Supplied declaration required: FUN_002a8554. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 
@@ -38,9 +38,9 @@ void FUN_00309e94(unsigned int *param_1)
   if (param_1 == (unsigned int *)0x0) {
     return;
   }
-  FUN_002a780c(*param_1);
-  FUN_002a780c(param_1[1]);
-  FUN_002a780c(param_1[2]);
+  asdMemFreeSlot(*param_1);
+  asdMemFreeSlot(param_1[1]);
+  asdMemFreeSlot(param_1[2]);
   nn_os_CriticalSection_Enter((unsigned int)DAT_00465124);
   if ((((unsigned int)param_1 < DAT_00465144) || ((unsigned int *)(DAT_00465154 + (int)DAT_00465144) < param_1)) &&
      (((unsigned int)param_1 < DAT_00465148 || ((unsigned int *)((int)DAT_00465148 + DAT_00465158) < param_1)))) {

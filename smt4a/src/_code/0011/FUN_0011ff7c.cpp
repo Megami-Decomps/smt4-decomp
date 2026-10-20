@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6e14(...);
+int asdOperatorDeleteArray(...);
 int FUN_002f67bc(unsigned int *);
 int FUN_003106f0(int *, int *, int *, int *);
 
@@ -16,7 +16,7 @@ typedef struct {
 
 extern unsigned char DAT_0055acc0; /* 0x55acc0 */
 
-/* Supplied declaration required: FUN_002e6e14. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
 /* Supplied declaration required: FUN_002f67bc. */
 /* Supplied declaration required: FUN_003106f0. */
 
@@ -48,8 +48,8 @@ void FUN_0011ff7c(unsigned int *param_1,unsigned int param_2,unsigned int param_
     param_1[0x11] = temp_v0;
     while (piVar3 = (int *)*piVar1, piVar3 != (int *)0x0) {
       *piVar1 = *piVar3;
-      FUN_002e6e14(piVar3[2]);
-      FUN_002e6e14(piVar3);
+      asdOperatorDeleteArray(piVar3[2]);
+      asdOperatorDeleteArray(piVar3);
     }
   }
   FUN_002f67bc(param_1);

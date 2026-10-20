@@ -8,7 +8,7 @@ int FUN_00336de4(int, int);
 int btlTalkBustUpSetUnk2F4(int);
 
 extern unsigned short scrGetArg(void);
-extern int FUN_002deb84(void);
+extern int scrGetCommandFrame(void);
 /* Supplied declaration required: FUN_00336de4. */
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 extern int FUN_003811b4(unsigned short);
@@ -22,7 +22,7 @@ unsigned char FUN_0038d860(void)
   int temp_v1;
   
   temp_v0 = scrGetArg();
-  temp_v1 = FUN_002deb84();
+  temp_v1 = scrGetCommandFrame();
   if (temp_v1 == 0) {
     FUN_00336de4(temp_v0,1);
     btlTalkBustUpSetUnk2F4(1);

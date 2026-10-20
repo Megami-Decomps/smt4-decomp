@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_002c3944(void *block, int size);
+int rt_memclr(void *block, int size);
 
 typedef struct Obj {
     /* 0x00 */ u8 unk00[0x62];
@@ -11,7 +11,7 @@ typedef struct Obj {
 
 void FUN_0039bcf8(Obj *obj)
 {
-    FUN_002c3944(obj->block, 0x100);
+    rt_memclr(obj->block, 0x100);
 }
 
 } /* extern "C" */

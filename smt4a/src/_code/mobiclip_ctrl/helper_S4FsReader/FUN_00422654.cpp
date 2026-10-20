@@ -8,7 +8,7 @@ int FUN_001469a8(...);
 int asdMemFree(unsigned int);
 int FUN_001a0d08(unsigned int *);
 int FUN_002e3140(void);
-int FUN_002e3328(int);
+int asdOperatorDelete(int);
 int software_interrupt(int);
 
 typedef int romwright_code(...);
@@ -20,7 +20,7 @@ extern int DAT_005880fc; /* 0x5880fc */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_001a0d08. */
 /* Supplied declaration required: FUN_002e3140. */
-/* Supplied declaration required: FUN_002e3328. */
+/* Supplied declaration required: asdOperatorDelete. */
 
 
 void FUN_00422654(unsigned int *param_1)
@@ -48,7 +48,7 @@ void FUN_00422654(unsigned int *param_1)
     temp_v0 = DAT_005880fc;
     if (DAT_005880fc != 0) {
       FUN_001469a8();
-      FUN_002e3328(temp_v0);
+      asdOperatorDelete(temp_v0);
     }
     DAT_005880fc = 0;
     asdMemFree(DAT_005880f8);

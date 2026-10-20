@@ -11,7 +11,7 @@ typedef struct Global57f110 {
     /* 0x00 */ u8 unk00[4];
     /* 0x04 */ Object *object;
 } Global57f110;
-extern Global57f110 DAT_0057f110;
+extern Global57f110 g_campCec;
 
 s32 FUN_00224880(u32 handle);
 
@@ -20,8 +20,8 @@ u8 FUN_00237620(void)
 {
     s32 state;
 
-    if (DAT_0057f110.object != NULL) {
-        state = FUN_00224880(DAT_0057f110.object->handle);
+    if (g_campCec.object != NULL) {
+        state = FUN_00224880(g_campCec.object->handle);
         if (state == 2) {
             return 0;
         }

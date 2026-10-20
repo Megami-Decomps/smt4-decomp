@@ -7,8 +7,8 @@ extern "C" {
 int FUN_002621b4(...);
 
 /* Supplied declaration required: FUN_002621b4. */
-extern int FUN_002a8764(void);
-extern int FUN_002a8778(void);
+extern int gameGetSlotTable(void);
+extern int gameCountUnits(void);
 
 
 unsigned int FUN_003a65f4(unsigned int param_1,int param_2,unsigned int param_3,unsigned int param_4)
@@ -31,12 +31,12 @@ unsigned int FUN_003a65f4(unsigned int param_1,int param_2,unsigned int param_3,
       return 0;
     }
     temp_v3 = 3;
-    temp_v0 = FUN_002a8764();
+    temp_v0 = gameGetSlotTable();
     temp_v0 = temp_v0 + 0x9108;
   }
   else {
-    temp_v3 = FUN_002a8778();
-    temp_v0 = FUN_002a8764();
+    temp_v3 = gameCountUnits();
+    temp_v0 = gameGetSlotTable();
     temp_v0 = temp_v0 + 0x90f0;
   }
   temp_v2 = 0;

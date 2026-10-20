@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002b8cc8(void);
+int ifTouchRegionRemove(void);
 
 extern unsigned char DAT_0042259c; /* 0x42259c */
 
-/* Supplied declaration required: FUN_002b8cc8. */
+/* Supplied declaration required: ifTouchRegionRemove. */
 
 
 unsigned int * FUN_00234660(unsigned int *param_1)
@@ -21,7 +21,7 @@ unsigned int * FUN_00234660(unsigned int *param_1)
   *param_1 = (unsigned int)&DAT_0042259c;
   if (0 < *(short *)((int)param_1 + 0x5a)) {
     do {
-      FUN_002b8cc8();
+      ifTouchRegionRemove();
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < *(short *)((int)param_1 + 0x5a));
   }

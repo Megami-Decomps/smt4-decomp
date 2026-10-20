@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_2_stack;
 
-extern int FUN_001ab888(void);
+extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_003e5170. */
 
 
@@ -30,7 +30,7 @@ void FUN_003e4f04(unsigned int param_1,unsigned int param_2)
       temp_v0 = 0;
     }
     else {
-      temp_v0 = FUN_001ab888();
+      temp_v0 = gameGetSlotTable();
       temp_v0 = temp_v0 + (temp_v1 & 0xffff) * 0x134 + 0x1ddc;
     }
     if (*(unsigned short *)(temp_v0 + 300) == param_1) break;
@@ -46,7 +46,7 @@ void FUN_003e4f04(unsigned int param_1,unsigned int param_2)
         temp_v0 = 0;
       }
       else {
-        temp_v0 = FUN_001ab888();
+        temp_v0 = gameGetSlotTable();
         temp_v0 = temp_v0 + (temp_v2 & 0xffff) * 0x134 + 0x1ddc;
       }
       *(short *)(temp_v0 + 300) = (short)param_1;

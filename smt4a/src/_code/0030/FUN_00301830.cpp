@@ -4,13 +4,13 @@
 
 extern "C" {
 
-extern int DAT_0057f568; /* 0x57f568 */
+extern int g_aocJob; /* 0x57f568 */
 
 
 void FUN_00301830(void)
 
 {
-  *(unsigned char *)(DAT_0057f568 + 0x38) = 1;
+  *(unsigned char *)(g_aocJob + 0x38) = 1;
   return;
 }
 

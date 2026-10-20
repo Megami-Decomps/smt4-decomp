@@ -11,9 +11,9 @@ int FUN_00100388(unsigned char [32], unsigned char *, int);
 int sysPlaySe(...);
 int FUN_0019de98(int, unsigned int);
 int FUN_0019ea64(...);
-int FUN_001f4e20(...);
-int FUN_00203d04(int);
-int FUN_00275f44(...);
+int dialogOpen(...);
+int dialogClose(int);
+int scrScriptProcessStartEntry(...);
 int FUN_002bf4f4(...);
 int FUN_004072b0(unsigned int, unsigned char *, int);
 int linkSlotSetFlag1C(unsigned int, int);
@@ -36,13 +36,13 @@ extern int DAT_0058800c; /* 0x58800c */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_0019ea64. */
-/* Supplied declaration required: FUN_001f4e20. */
-/* Supplied declaration required: FUN_00203d04. */
+/* Supplied declaration required: dialogOpen. */
+/* Supplied declaration required: dialogClose. */
 extern int FUN_00224880(unsigned int);
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_002a49e4. */
 /* Supplied declaration required: FUN_002bf4f4. */
-extern unsigned int FUN_00357bc8(unsigned int, unsigned char *);
+extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_004072b0. */
 /* Supplied declaration required: linkSlotSetFlag1C. */
 /* Supplied declaration required: FUN_0040738c. */
@@ -103,7 +103,7 @@ void FUN_004b7e20(int param_1)
               FUN_0019ea64(1);
               if ((*(char *)(*(int *)(param_1 + 0x111c) + 0x7c) != '\0') &&
                  (temp_v2 = FUN_004186e0(), temp_v2 != 0)) {
-                FUN_00275f44(*(unsigned int *)(param_1 + 0x1158),0x3b);
+                scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x1158),0x3b);
                 if (*(char *)(param_1 + 0xa88) == '\0') {
                   *(unsigned char *)(param_1 + 0xa88) = 1;
                 }
@@ -162,7 +162,7 @@ void FUN_004b7e20(int param_1)
           return;
         }
         DAT_0058800c = 0;
-        FUN_00203d04(0);
+        dialogClose(0);
         temp_v2 = 10;
       }
       *(int *)(param_1 + 0x2c) = temp_v2;
@@ -174,10 +174,10 @@ void FUN_004b7e20(int param_1)
         return;
       }
       FUN_00100388(temp_v4,&LAB_004b8200,*(int *)(param_1 + 0x111c) + 0x6c);
-      temp_v1 = FUN_00357bc8(*(unsigned int *)(param_1 + 0x1128),temp_v4);
+      temp_v1 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x1128),temp_v4);
       FUN_0019ea64(0);
       sysPlaySe(0x92);
-      FUN_00275f44(*(unsigned int *)(param_1 + 0x1130),temp_v1);
+      scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x1130),temp_v1);
       *(unsigned char *)(param_1 + 0xa88) = 1;
       temp_v2 = *(int *)(param_1 + 0x2c) + 1;
       *(int *)(param_1 + 0x2c) = temp_v2;
@@ -198,7 +198,7 @@ void FUN_004b7e20(int param_1)
       *(unsigned char *)(param_1 + 0xa88) = 0;
       DAT_0058800c = 0;
       FUN_002bf4f4(1);
-      FUN_001f4e20(0);
+      dialogOpen(0);
       FUN_002a49e4(*(unsigned int *)(param_1 + 0x113c),
                    *(unsigned char *)(*(int *)(param_1 + 0x1118) + 0x3f));
       return;
@@ -229,7 +229,7 @@ void FUN_004b7e20(int param_1)
   }
   *(unsigned int *)(param_1 + 0x2c) = 0;
   *(unsigned int *)(param_1 + 0x28) = 5;
-  FUN_001f4e20(0);
+  dialogOpen(0);
   FUN_002a49e4(*(unsigned int *)(param_1 + 0x113c),*(unsigned char *)(*(int *)(param_1 + 0x1118) + 0x3f))
   ;
   DAT_0058800c = 0;

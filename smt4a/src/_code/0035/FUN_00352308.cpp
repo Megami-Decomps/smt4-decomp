@@ -14,7 +14,7 @@ extern unsigned int DAT_005f0d08; /* 0x5f0d08 */
 extern unsigned int DAT_005f0d0c; /* 0x5f0d0c */
 extern unsigned int DAT_005f0d10; /* 0x5f0d10 */
 
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 
 
 void FUN_00352308(void)
@@ -29,7 +29,7 @@ void FUN_00352308(void)
   unsigned int in_s4;
   unsigned int in_s5;
   
-  temp_v0 = FUN_0018719c(0x4d0);
+  temp_v0 = gameFlagIsSet(0x4d0);
   if (temp_v0 != 0) {
     DAT_005f0cf9 = 1;
     DAT_005f0cfc = in_s0;
@@ -38,7 +38,7 @@ void FUN_00352308(void)
     DAT_005f0d08 = in_s3;
     DAT_005f0d0c = in_s4;
     DAT_005f0d10 = in_s5;
-    temp_v0 = FUN_0018719c(0x4d0);
+    temp_v0 = gameFlagIsSet(0x4d0);
     if (temp_v0 != 0) {
       DAT_005f0ca8 = 0xb;
       DAT_005f0ce4 = 0;

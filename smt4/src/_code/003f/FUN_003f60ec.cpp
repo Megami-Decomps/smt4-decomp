@@ -8,7 +8,7 @@ struct Pair003f60ec {
     /* 0x04 */ u32 second;
 };
 
-extern Pair003f60ec DAT_0044e960;
+extern Pair003f60ec g_mwmoimaadpcmDecoder;
 
 void FUN_0017f9f4(u8 *a, u8 *b, u8 *c);
 __weak void FUN_003f60ec_hook(s32 zero, u32 code);
@@ -21,8 +21,8 @@ void FUN_003f60ec(u32 first, u32 second)
 
     FUN_003f60ec_hook(0, 0x040000a9);
     FUN_0017f9f4(a, b, c);
-    DAT_0044e960.first = first;
-    DAT_0044e960.second = second;
+    g_mwmoimaadpcmDecoder.first = first;
+    g_mwmoimaadpcmDecoder.second = second;
 }
 
 }

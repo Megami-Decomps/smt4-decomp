@@ -6,14 +6,14 @@ extern "C" {
 
 int FUN_0011b7b0(unsigned int, int);
 int FUN_00120960(unsigned int, unsigned int, unsigned int *, unsigned int);
-int FUN_002e7232(...);
+int sharedRefRelease(...);
 int strAssign(...);
-int FUN_002e75fa(...);
-int FUN_002eb588(unsigned int *);
-int FUN_002eb6b8(unsigned int *);
+int sharedRefAddRef(...);
+int onlineTimeGetNow(unsigned int *);
+int listIteratorNext(unsigned int *);
 int FUN_002eb744(int);
-int FUN_002ed838(int *);
-int FUN_002eea5c(...);
+int streamReset(int *);
+int strHolderAssignOneWide(...);
 int FUN_002f2aa0(void);
 int FUN_002f2b24(...);
 int FUN_002f2b5c(int, unsigned int, int);
@@ -76,23 +76,23 @@ extern unsigned int DAT_00594a24; /* 0x594a24 */
 #endif
 /* Supplied declaration required: FUN_0011b7b0. */
 /* Supplied declaration required: FUN_00120960. */
-/* Supplied declaration required: FUN_002e7232. */
+/* Supplied declaration required: sharedRefRelease. */
 /* Supplied declaration required: strAssign. */
-/* Supplied declaration required: FUN_002e75fa. */
-extern int FUN_002e760a(unsigned int);
-extern int FUN_002e76b6(void);
+/* Supplied declaration required: sharedRefAddRef. */
+extern int operatorNew(unsigned int);
+extern int onlineBufferGetData(void);
 extern int FUN_002eac34(unsigned char);
-/* Supplied declaration required: FUN_002eb588. */
+/* Supplied declaration required: onlineTimeGetNow. */
 extern int FUN_002eb5f4(void);
 extern int wordRefsDiffer_002eb690(unsigned int *, int *);
 extern int FUN_002eb6ae(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002eb6b8. */
+/* Supplied declaration required: listIteratorNext. */
 /* Supplied declaration required: FUN_002eb744. */
 extern int FUN_002eb7d0(unsigned int, unsigned int);
 extern int FUN_002eba9c(unsigned int *, unsigned int *);
 extern int *FUN_002ed258(int, int *);
-/* Supplied declaration required: FUN_002ed838. */
-/* Supplied declaration required: FUN_002eea5c. */
+/* Supplied declaration required: streamReset. */
+/* Supplied declaration required: strHolderAssignOneWide. */
 extern int *FUN_002eff58(int, unsigned int);
 extern int FUN_002eff84(int *);
 extern int FUN_002f14a8(int, unsigned int);
@@ -195,22 +195,22 @@ int FUN_001099b8(int param_1,int *param_2,unsigned int param_3,unsigned int para
     if (piVar3 != (int *)0x0) {
       temp_v1 = FUN_002eff84(piVar3);
       if (((temp_v1 != 0) && (piVar4 != (int *)0x0)) && (temp_v1 = FUN_002eff84(piVar4), temp_v1 != 0)) {
-        temp_v1 = FUN_002e760a(0x10);
+        temp_v1 = operatorNew(0x10);
         if (temp_v1 != 0) {
           piVar3 = (int *)FUN_002ed258(temp_v1,piVar3);
         }
         else {
           piVar3 = (int *)0x0;
         }
-        FUN_002e7232(piVar3[2]);
-        temp_v1 = FUN_002e760a(0x10);
+        sharedRefRelease(piVar3[2]);
+        temp_v1 = operatorNew(0x10);
         if (temp_v1 != 0) {
           piVar4 = (int *)FUN_002ed258(temp_v1,piVar4);
         }
         else {
           piVar4 = (int *)0x0;
         }
-        FUN_002e7232(piVar4[2]);
+        sharedRefRelease(piVar4[2]);
         goto LAB_00109b02;
       }
       (**(romwright_code **)(*piVar3 + 4))(piVar3);
@@ -221,14 +221,14 @@ int FUN_001099b8(int param_1,int *param_2,unsigned int param_3,unsigned int para
     temp_v1 = 0;
   }
   else {
-    temp_v1 = FUN_002e760a(0x10);
+    temp_v1 = operatorNew(0x10);
     if (temp_v1 != 0) {
       piVar3 = (int *)FUN_002f2afc();
     }
     else {
       piVar3 = (int *)0x0;
     }
-    temp_v1 = FUN_002e760a(0x10);
+    temp_v1 = operatorNew(0x10);
     if (temp_v1 != 0) {
       piVar4 = (int *)FUN_002f2afc();
     }
@@ -239,7 +239,7 @@ LAB_00109b02:
     temp_v20 = temp_v25 + 0x20;
     if (*(char *)(temp_v25 + 0x38) != '\0') {
       temp_v11 = (int *)((unsigned int)temp_v11 & 0xffff0000);
-      FUN_002eea5c(piVar3,&temp_v11);
+      strHolderAssignOneWide(piVar3,&temp_v11);
     }
     temp_v1 = FUN_002eb5f4();
     temp_v11 = (int *)(temp_v1 + 0xd4);
@@ -248,7 +248,7 @@ LAB_00109b02:
       temp_v21 = temp_v26[4];
       temp_v1 = wordRefsDiffer_002eb690(&temp_v10,&temp_v21);
       if (temp_v1 == 0) break;
-      FUN_002ed838(piVar4);
+      streamReset(piVar4);
       (**(romwright_code **)(*temp_v11 + 0x20))(temp_v11,temp_v3,piVar4);
       temp_v1 = FUN_002eb6ae(temp_v3,0x20);
       if ((temp_v1 != 0) || (temp_v1 = FUN_002eb6ae(temp_v3,0x800), temp_v1 == 0)) {
@@ -262,7 +262,7 @@ LAB_00109b02:
         piVar5 = piVar3;
         if (((*(char *)(temp_v20 + 0x18) != '\0') && (temp_v1 = FUN_002eb6ae(temp_v3,0x100), temp_v1 != 0)
             ) && (piVar5 = piVar9, piVar9 == (int *)0x0)) {
-          temp_v1 = FUN_002e760a(0x10);
+          temp_v1 = operatorNew(0x10);
           if (temp_v1 != 0) {
             piVar5 = (int *)FUN_002f2afc();
             piVar9 = piVar5;
@@ -273,7 +273,7 @@ LAB_00109b02:
           }
         }
         FUN_002f2b24(piVar5,piVar4);
-        FUN_002e75fa(temp_v3);
+        sharedRefAddRef(temp_v3);
         temp_v16 = temp_v10;
         (**(romwright_code **)(*temp_v26 + 0x14))(&temp_v22,temp_v26,&temp_v16);
         temp_v10 = temp_v22;
@@ -303,10 +303,10 @@ LAB_00109b02:
               }
               if (temp_v6 <= temp_v4) break;
             }
-            FUN_002eb6b8(&temp_v10);
+            listIteratorNext(&temp_v10);
           }
         }
-        FUN_002e7232(temp_v3);
+        sharedRefRelease(temp_v3);
         temp_v3 = temp_v10;
       }
       else {
@@ -334,13 +334,13 @@ LAB_00109b02:
     temp_v17 = temp_v17 - (*(int *)(piVar3[2] + 0x10) + temp_v1);
     piVar5 = piVar3;
     if (0 < (int)temp_v17) {
-      FUN_002ed838(piVar4);
+      streamReset(piVar4);
       temp_v16 = 0;
       if (*(char *)(temp_v20 + 0x18) != '\0') {
-        FUN_002eea5c(piVar4);
+        strHolderAssignOneWide(piVar4);
         temp_v16 = 2;
       }
-      FUN_002eb588(&temp_v8);
+      onlineTimeGetNow(&temp_v8);
       temp_v23 = (int)DAT_00594a1c >> 0x1f;
       temp_v22 = DAT_00594a1c;
       temp_v1 = FUN_002eba9c(&temp_v8,&temp_v22);
@@ -363,7 +363,7 @@ LAB_00109b02:
       FUN_00120960(temp_v27,temp_v19,&temp_v14,temp_v17);
       if (temp_v16 < *(unsigned int *)(piVar4[2] + 0x10)) {
         temp_v8 = *(int *)(piVar3[2] + 0x10) - temp_v16;
-        temp_v1 = FUN_002e76b6();
+        temp_v1 = onlineBufferGetData();
         strAssign(piVar4[2],temp_v1 + temp_v16,temp_v8,0xffffffff);
         piVar5 = piVar4;
         piVar4 = piVar3;
@@ -412,7 +412,7 @@ LAB_00109dda:
         if (temp_v18 != 0) {
           *(unsigned char *)(temp_v1 + 0x1c) = *(unsigned char *)(temp_v1 + 0x1c) | 1;
         }
-        FUN_002e75fa(temp_v1);
+        sharedRefAddRef(temp_v1);
       }
       (**(romwright_code **)(*piVar3 + 4))(piVar3);
     }

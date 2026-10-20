@@ -8,8 +8,8 @@ u8 FUN_002f5b74(u32 index)
     u8 value;
     u32 *slot;
 
-    if ((DAT_0043da28.obj != NULL) && (index < 6)) {
-        slot = (u32 *)DAT_0043da28.obj + index;
+    if ((g_buttonHelp.obj != NULL) && (index < 6)) {
+        slot = (u32 *)g_buttonHelp.obj + index;
         value = ((u8 *)slot)[0x494];
     } else {
         value = 0;

@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_00188b60(void);
+int nn_os_CriticalSection_Initialize(void);
 
 extern unsigned char DAT_00558eb0; /* 0x558eb0 */
 
 extern int FUN_0010378a(unsigned int *);
-/* Supplied declaration required: FUN_00188b60. */
+/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
 
 
 int FUN_002f7414(unsigned int *param_1)
@@ -20,7 +20,7 @@ int FUN_002f7414(unsigned int *param_1)
   
   *param_1 = (unsigned int)&DAT_00558eb0;
   temp_v0 = FUN_0010378a(param_1 + 1);
-  FUN_00188b60();
+  nn_os_CriticalSection_Initialize();
   return temp_v0 - 4;
 }
 

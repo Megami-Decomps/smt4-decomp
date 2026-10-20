@@ -20,18 +20,18 @@ typedef struct Actor {
     Vec3 positionC;   /* 0xa8 */
 } Actor;
 
-extern void FUN_0028c640(u32 handle, int slot, Vec3 *position);
+extern void nodeSetTranslation(u32 handle, int slot, Vec3 *position);
 extern void FUN_0028c618(u32 handle, int slot, f32 x, f32 y, f32 z);
 extern void FUN_0023adf4(u32 handle, int slot, Vec3 *position);
-extern void FUN_002b2368(Actor *actor);
+extern void asdMemFreeNonNull(Actor *actor);
 
 void FUN_0034b0e8(Actor *actor, u32 id)
 {
     actor->id = id;
-    FUN_0028c640(actor->holder->handle, 0, &actor->positionA);
+    nodeSetTranslation(actor->holder->handle, 0, &actor->positionA);
     FUN_0028c618(actor->holder->handle, 0, actor->positionB.x, actor->positionB.y, actor->positionB.z);
     FUN_0023adf4(actor->holder->handle, 0, &actor->positionC);
-    FUN_002b2368(actor);
+    asdMemFreeNonNull(actor);
 }
 
 } /* extern "C" */

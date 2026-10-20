@@ -6,11 +6,11 @@ extern "C" {
 
 int FUN_0017760c(...);
 int FUN_00184310(void);
-int FUN_001a9110(unsigned char *, unsigned int);
+int wordPairCopy(unsigned char *, unsigned int);
 int FUN_0023e51c(int, unsigned int [2], unsigned int, unsigned int);
 int asdOperatorNewD(void);
-int FUN_002e6490(...);
-int FUN_002e6dd4(void);
+int asdOperatorDeleteC(...);
+int rt_memclr(void);
 int FUN_0031f0f4(int, int);
 int FUN_003da99c(int, int *);
 int FUN_003daaf8(int, int *);
@@ -33,17 +33,17 @@ int SBORROW4(int, int);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
-/* Supplied declaration required: FUN_001a9110. */
+/* Supplied declaration required: wordPairCopy. */
 extern unsigned int FUN_00203b1c(void);
 /* Supplied declaration required: FUN_0023e51c. */
 /* Supplied declaration required: asdOperatorNewD. */
-/* Supplied declaration required: FUN_002e6490. */
-/* Supplied declaration required: FUN_002e6dd4. */
+/* Supplied declaration required: asdOperatorDeleteC. */
+/* Supplied declaration required: rt_memclr. */
 extern int FUN_0031cfd0(unsigned short);
 /* Supplied declaration required: FUN_0031f0f4. */
 /* Supplied declaration required: FUN_003da99c. */
 /* Supplied declaration required: FUN_003daaf8. */
-extern int FUN_003e46f4(unsigned int);
+extern int gameDataFlagTestBit(unsigned int);
 extern int FUN_003e4de4(unsigned int);
 /* Supplied declaration required: FUN_004bcd90. */
 extern int bitsAt60Test(int, unsigned int);
@@ -140,12 +140,12 @@ void FUN_004cd4b8(int param_1,int param_2)
   temp_v16[0] = 0;
   temp_v6 = (temp_v12 + 1) * 8;
   asdOperatorNewD();
-  FUN_002e6dd4();
+  rt_memclr();
   FUN_0023e51c(temp_v6,temp_v16,uStack_60 & 0xff,(unsigned int)*(unsigned short *)(param_1 + 100) + param_2);
   temp_v11 = 0;
   do {
     if (temp_v12 + 1U <= temp_v11) break;
-    FUN_001a9110(temp_v17 + temp_v11 * 8,temp_v6 + temp_v11 * 8);
+    wordPairCopy(temp_v17 + temp_v11 * 8,temp_v6 + temp_v11 * 8);
     temp_v11 = temp_v11 + 1;
   } while ((int)temp_v11 < 3);
   if (0 < param_2) {
@@ -203,7 +203,7 @@ void FUN_004cd4b8(int param_1,int param_2)
         } while (temp_v11 < temp_v16[0]);
       }
       if (*(unsigned short *)(param_1 + 100) < 100) {
-        temp_v12 = FUN_003e46f4(7);
+        temp_v12 = gameDataFlagTestBit(7);
         temp_v14 = temp_v12 != 0;
         temp_v12 = 0;
         temp_v9 = 0;
@@ -216,7 +216,7 @@ void FUN_004cd4b8(int param_1,int param_2)
           *(short *)(param_1 + 4) = (short)temp_v9 + 1;
           *(short *)(param_1 + 0x20) = *(short *)(param_1 + 0x20) + 1;
         }
-        temp_v12 = FUN_003e46f4(8);
+        temp_v12 = gameDataFlagTestBit(8);
         temp_v14 = temp_v12 != 0;
         temp_v12 = 0;
         temp_v9 = 0;
@@ -229,7 +229,7 @@ void FUN_004cd4b8(int param_1,int param_2)
           *(short *)(param_1 + 10) = (short)temp_v9 + 1;
           *(short *)(param_1 + 0x26) = *(short *)(param_1 + 0x26) + 1;
         }
-        temp_v12 = FUN_003e46f4(9);
+        temp_v12 = gameDataFlagTestBit(9);
         temp_v14 = temp_v12 != 0;
         temp_v12 = 0;
         temp_v9 = 0;
@@ -242,7 +242,7 @@ void FUN_004cd4b8(int param_1,int param_2)
           *(short *)(param_1 + 0xc) = (short)temp_v9 + 1;
           *(short *)(param_1 + 0x28) = *(short *)(param_1 + 0x28) + 1;
         }
-        temp_v12 = FUN_003e46f4(10);
+        temp_v12 = gameDataFlagTestBit(10);
         temp_v14 = temp_v12 != 0;
         temp_v12 = 0;
         temp_v9 = 0;
@@ -255,7 +255,7 @@ void FUN_004cd4b8(int param_1,int param_2)
           *(short *)(param_1 + 8) = (short)temp_v9 + 1;
           *(short *)(param_1 + 0x24) = *(short *)(param_1 + 0x24) + 1;
         }
-        temp_v12 = FUN_003e46f4(0xb);
+        temp_v12 = gameDataFlagTestBit(0xb);
         temp_v14 = temp_v12 != 0;
         temp_v12 = 0;
         temp_v9 = 0;
@@ -283,14 +283,14 @@ void FUN_004cd4b8(int param_1,int param_2)
   if (temp_v8 != 0) {
     bitsAt60Set(param_1,2);
   }
-  temp_v8 = FUN_003e46f4(0x83);
+  temp_v8 = gameDataFlagTestBit(0x83);
   if (temp_v8 != 0) {
     temp_v5 = FUN_0017760c(param_1);
     *(unsigned short *)(param_1 + 0x2a) = temp_v5;
     *(unsigned short *)(param_1 + 0x2c) = *(unsigned short *)(param_1 + 0x10);
   }
   else {
-    temp_v8 = FUN_003e46f4(0x82);
+    temp_v8 = gameDataFlagTestBit(0x82);
     if (temp_v8 != 0) {
       temp_v8 = FUN_0017760c(param_1);
       *(short *)(param_1 + 0x2a) =
@@ -300,7 +300,7 @@ void FUN_004cd4b8(int param_1,int param_2)
            (short)(((int)*(short *)(param_1 + 0x10) - (int)*(short *)(param_1 + 0x2c)) / 2);
     }
   }
-  FUN_002e6490(temp_v6);
+  asdOperatorDeleteC(temp_v6);
   return;
 }
 

@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002e9318(unsigned char [12]);
-int FUN_002e9520(int, unsigned int);
+int onlineStringDestroy(unsigned char [12]);
+int onlineStringCopyConstruct(int, unsigned int);
 
 extern int rt_malloc(int);
-/* Supplied declaration required: FUN_002e9318. */
-/* Supplied declaration required: FUN_002e9520. */
+/* Supplied declaration required: onlineStringDestroy. */
+/* Supplied declaration required: onlineStringCopyConstruct. */
 extern unsigned int constructObj0055affc(unsigned char *);
 
 
@@ -35,13 +35,13 @@ int * FUN_0030395c(int *param_1,unsigned int param_2)
   *param_1 = temp_v1;
   for (temp_v2 = param_2; temp_v2 != 0; temp_v2 = temp_v2 - 1) {
     if (temp_v1 != 0) {
-      FUN_002e9520(temp_v1,temp_v0);
+      onlineStringCopyConstruct(temp_v1,temp_v0);
     }
     temp_v1 = temp_v1 + 8;
   }
   param_1[2] = *param_1 + temp_v3 * 8;
   param_1[1] = *param_1 + param_2 * 8;
-  FUN_002e9318(temp_v4);
+  onlineStringDestroy(temp_v4);
   return param_1;
 }
 

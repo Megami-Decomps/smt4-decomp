@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_002c52f8(void);
+int asdFatalError(void);
 
 typedef int romwright_code(...);
 extern int *DAT_0044e658; /* 0x44e658 */
 extern unsigned char DAT_004d43e0; /* 0x4d43e0 */
 
-/* Supplied declaration required: FUN_002c52f8. */
+/* Supplied declaration required: asdFatalError. */
 
 
 unsigned int FUN_002c3dfc(int param_1)
@@ -47,7 +47,7 @@ unsigned int FUN_002c3dfc(int param_1)
     acStack_18[temp_v4] = temp_v1;
     temp_v4 = temp_v4 + 1;
   } while (temp_v4 < 8);
-  FUN_002c52f8();
+  asdFatalError();
   temp_v3 = 0;
   temp_v2 = 0;
   temp_v4 = 0;

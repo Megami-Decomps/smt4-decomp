@@ -3,11 +3,11 @@
 extern "C" {
 
 extern u32 DAT_00570ab4;
-extern void FUN_00285834(u32 handle);
+extern void nodeTreeReleaseItem(u32 handle);
 
 void FUN_003307dc(void)
 {
-    FUN_00285834(DAT_00570ab4);
+    nodeTreeReleaseItem(DAT_00570ab4);
     DAT_00570ab4 = 0;
 }
 

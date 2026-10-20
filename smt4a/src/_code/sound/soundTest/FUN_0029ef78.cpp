@@ -5,23 +5,23 @@
 extern "C" {
 
 int jobStop(unsigned int, int);
-int FUN_001656a0(int);
-int FUN_00201f30(unsigned int, int, int);
+int padButtonIsPressed(int);
+int bgmPlay(unsigned int, int, int);
 int FUN_0021c118(...);
-int FUN_003d2d34(unsigned int, int, int);
-int FUN_003d2d6c(int);
+int soundChannelRequestIfEnabled(unsigned int, int, int);
+int soundChannelStopAll(int);
 int FUN_003d4c68(int);
 int FUN_003de02c(int);
 
 extern unsigned int *DAT_00588fc8; /* 0x588fc8 */
 
 /* Supplied declaration required: jobStop. */
-extern int FUN_00164af0(unsigned int);
-/* Supplied declaration required: FUN_001656a0. */
-/* Supplied declaration required: FUN_00201f30. */
+extern int padButtonRepeat(unsigned int);
+/* Supplied declaration required: padButtonIsPressed. */
+/* Supplied declaration required: bgmPlay. */
 /* Supplied declaration required: FUN_0021c118. */
-/* Supplied declaration required: FUN_003d2d34. */
-/* Supplied declaration required: FUN_003d2d6c. */
+/* Supplied declaration required: soundChannelRequestIfEnabled. */
+/* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: FUN_003d4c68. */
 /* Supplied declaration required: FUN_003de02c. */
 
@@ -35,7 +35,7 @@ unsigned int FUN_0029ef78(void)
   unsigned int temp_v1;
   
   puVar1 = DAT_00588fc8;
-  if ((DAT_00588fc8[2] != 99) && (temp_v0 = FUN_001656a0(2), temp_v0 != 0)) {
+  if ((DAT_00588fc8[2] != 99) && (temp_v0 = padButtonIsPressed(2), temp_v0 != 0)) {
     puVar1[2] = 99;
   }
   temp_v0 = puVar1[2];
@@ -51,7 +51,7 @@ unsigned int FUN_0029ef78(void)
     jobStop(*DAT_00588fc8,0);
     return 0xffffffff;
   }
-  temp_v0 = FUN_00164af0(4);
+  temp_v0 = padButtonRepeat(4);
   if (temp_v0 != 0) {
     temp_v0 = puVar1[4] - 1;
     if (temp_v0 >= 10) {
@@ -65,7 +65,7 @@ unsigned int FUN_0029ef78(void)
     }
     puVar1[4] = temp_v0;
   }
-  temp_v0 = FUN_00164af0(3);
+  temp_v0 = padButtonRepeat(3);
   if (temp_v0 != 0) {
     temp_v0 = puVar1[4] + 1;
     if (temp_v0 >= 10) {
@@ -79,9 +79,9 @@ unsigned int FUN_0029ef78(void)
     }
     puVar1[4] = temp_v0;
   }
-  temp_v0 = FUN_001656a0(0);
+  temp_v0 = padButtonIsPressed(0);
   if (temp_v0 == 0) {
-    FUN_001656a0(1);
+    padButtonIsPressed(1);
     return 0;
   }
   switch(puVar1[4]) {
@@ -93,22 +93,22 @@ unsigned int FUN_0029ef78(void)
     break;
   case 2:
     temp_v1 = 0x1000003;
-    FUN_003d2d34(temp_v1,0,0x3c);
+    soundChannelRequestIfEnabled(temp_v1,0,0x3c);
     break;
   case 3:
     temp_v1 = 0x1000006;
-    FUN_003d2d34(temp_v1,0,0x3c);
+    soundChannelRequestIfEnabled(temp_v1,0,0x3c);
     break;
   case 4:
-    FUN_003d2d6c(0xf);
+    soundChannelStopAll(0xf);
     break;
   case 5:
     temp_v1 = 0x1000008;
-    FUN_00201f30(temp_v1,0,0x3c);
+    bgmPlay(temp_v1,0,0x3c);
     break;
   case 6:
     temp_v1 = 0x1000005;
-    FUN_00201f30(temp_v1,0,0x3c);
+    bgmPlay(temp_v1,0,0x3c);
     break;
   case 7:
     temp_v1 = 0x100000f;

@@ -7,7 +7,7 @@ extern "C" {
 int sysPlaySe(int);
 int FUN_0019de98(int, int);
 int FUN_00224880(unsigned int);
-int FUN_00275f44(unsigned int, unsigned int);
+int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int panelSetTarget(int);
 int FUN_0037c8e4(int, int);
 int FUN_0049a5b4(unsigned int *);
@@ -24,12 +24,12 @@ extern unsigned char LAB_00494d4c; /* 0x494d4c */
 extern unsigned int DAT_005f1990; /* 0x5f1990 */
 
 /* Supplied declaration required: sysPlaySe. */
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0019de98. */
 extern int FUN_001ba3d4(unsigned int);
 /* Supplied declaration required: FUN_00224880. */
-/* Supplied declaration required: FUN_00275f44. */
-extern unsigned int FUN_00357bc8(unsigned int, unsigned char *);
+/* Supplied declaration required: scrScriptProcessStartEntry. */
+extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: panelSetTarget. */
 /* Supplied declaration required: FUN_0037c8e4. */
 extern int FUN_00481100(unsigned int);
@@ -100,11 +100,11 @@ LAB_00494cb0:
   else {
     *param_1 = *param_1 | 4;
     if (param_1[7] != 9) {
-      if (((char)param_1[0x5813] == '\x01') && (temp_v1 = FUN_0018719c(0x170), temp_v1 != 0)) {
-        temp_v1 = FUN_0018719c(0x1cf);
+      if (((char)param_1[0x5813] == '\x01') && (temp_v1 = gameFlagIsSet(0x170), temp_v1 != 0)) {
+        temp_v1 = gameFlagIsSet(0x1cf);
         if (temp_v1 == 0) {
-          temp_v2 = FUN_00357bc8(param_1[0x61],&LAB_00494d28);
-          FUN_00275f44(param_1[99],temp_v2);
+          temp_v2 = tableGroupFindEntryIndex(param_1[0x61],&LAB_00494d28);
+          scrScriptProcessStartEntry(param_1[99],temp_v2);
           FUN_00224880(param_1[99]);
           param_1[2] = 1;
           sysPlaySe(0xa0);
@@ -114,12 +114,12 @@ LAB_00494cb0:
     }
     else {
       temp_v1 = FUN_001ba3d4(0x363);
-      if ((0 < temp_v1) && (temp_v1 = FUN_0018719c(0x114), temp_v1 == 0)) goto LAB_00494b40;
-      temp_v1 = FUN_0018719c(0x113);
+      if ((0 < temp_v1) && (temp_v1 = gameFlagIsSet(0x114), temp_v1 == 0)) goto LAB_00494b40;
+      temp_v1 = gameFlagIsSet(0x113);
       if (temp_v1 == 0) {
 LAB_00494b40:
-        temp_v2 = FUN_00357bc8(param_1[0x61],&LAB_00494d28);
-        FUN_00275f44(param_1[99],temp_v2);
+        temp_v2 = tableGroupFindEntryIndex(param_1[0x61],&LAB_00494d28);
+        scrScriptProcessStartEntry(param_1[99],temp_v2);
         FUN_00224880(param_1[99]);
         param_1[2] = 1;
         sysPlaySe(0xa0);
@@ -136,12 +136,12 @@ LAB_00494b40:
       if (temp_v1 != 0) {
 LAB_00494bb0:
         if (*(char *)((int)param_1 + 0x21) != '\0') {
-          temp_v2 = FUN_00357bc8(param_1[0x61],&LAB_00494d34);
-          FUN_00275f44(param_1[99],temp_v2);
+          temp_v2 = tableGroupFindEntryIndex(param_1[0x61],&LAB_00494d34);
+          scrScriptProcessStartEntry(param_1[99],temp_v2);
         }
         else {
-          temp_v2 = FUN_00357bc8(param_1[0x61],&LAB_00494d4c);
-          FUN_00275f44(param_1[99],temp_v2);
+          temp_v2 = tableGroupFindEntryIndex(param_1[0x61],&LAB_00494d4c);
+          scrScriptProcessStartEntry(param_1[99],temp_v2);
         }
         FUN_00224880(param_1[99]);
         param_1[2] = 2;

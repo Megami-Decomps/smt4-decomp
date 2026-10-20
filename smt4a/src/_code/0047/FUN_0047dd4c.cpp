@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdSequenceRequest(unsigned int, unsigned int *, unsigned int);
-int FUN_00324bc8(unsigned int, unsigned int);
+int mapPlaceSet(unsigned int, unsigned int);
 int FUN_003b5050(void);
 int FUN_003d54f8(int, int);
 int FUN_004731d8(void);
@@ -29,7 +29,7 @@ extern unsigned int DAT_005f1b90; /* 0x5f1b90 */
 extern int FUN_002cf854(void);
 extern int lmapMainGetUnk74(void);
 extern int gameStateIsFlagSetAndLarge(void);
-/* Supplied declaration required: FUN_00324bc8. */
+/* Supplied declaration required: mapPlaceSet. */
 /* Supplied declaration required: FUN_003b5050. */
 /* Supplied declaration required: FUN_003d54f8. */
 extern char *gameBlockGetArea27E98(void);
@@ -73,7 +73,7 @@ void FUN_0047dd4c(int param_1,unsigned int param_2,unsigned int param_3,unsigned
             }
             FUN_003d54f8(0,10);
             FUN_003d54f8(1,10);
-            FUN_00324bc8(0xffffffff,0xffffffff);
+            mapPlaceSet(0xffffffff,0xffffffff);
             FUN_004731d8();
             *(unsigned char *)(param_1 + 0x19) = 1;
             FUN_003b5050();
@@ -125,7 +125,7 @@ void FUN_0047dd4c(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   asdSequenceRequest(temp_v2,puVar5,temp_v3);
   FUN_003d54f8(0,10);
   FUN_003d54f8(1,10);
-  FUN_00324bc8(0xffffffff,0xffffffff);
+  mapPlaceSet(0xffffffff,0xffffffff);
   FUN_004731d8();
   *(unsigned char *)(param_1 + 0x19) = 1;
   FUN_003b5050();

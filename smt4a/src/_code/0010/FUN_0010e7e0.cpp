@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002f9048(...);
+int mapIsEmpty2(...);
 
 typedef int romwright_code(...);
-/* Supplied declaration required: FUN_002f9048. */
+/* Supplied declaration required: mapIsEmpty2. */
 
 
 unsigned int FUN_0010e7e0(int param_1)
@@ -24,8 +24,8 @@ unsigned int FUN_0010e7e0(int param_1)
   do {
     if (*(int *)(param_1 + 0x168) == temp_v3) {
       if (((*(char *)(param_1 + 0x148) != '\0' || temp_v0) ||
-          (temp_v3 = FUN_002f9048(*(unsigned int *)(param_1 + 500)), temp_v3 == 0)) ||
-         (temp_v3 = FUN_002f9048(param_1 + 0x1d4), temp_v3 == 0)) {
+          (temp_v3 = mapIsEmpty2(*(unsigned int *)(param_1 + 500)), temp_v3 == 0)) ||
+         (temp_v3 = mapIsEmpty2(param_1 + 0x1d4), temp_v3 == 0)) {
         temp_v2 = 1;
       }
       else {
@@ -37,8 +37,8 @@ unsigned int FUN_0010e7e0(int param_1)
     if (temp_v1 != 0) {
       temp_v0 = 1;
       if (((*(char *)(param_1 + 0x148) != '\0' || temp_v0) ||
-          (temp_v3 = FUN_002f9048(*(unsigned int *)(param_1 + 500)), temp_v3 == 0)) ||
-         (temp_v3 = FUN_002f9048(param_1 + 0x1d4), temp_v3 == 0)) {
+          (temp_v3 = mapIsEmpty2(*(unsigned int *)(param_1 + 500)), temp_v3 == 0)) ||
+         (temp_v3 = mapIsEmpty2(param_1 + 0x1d4), temp_v3 == 0)) {
         temp_v2 = 1;
       }
       else {

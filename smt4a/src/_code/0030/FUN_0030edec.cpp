@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e9598(int, int);
+int onlineStringAssign(int, int);
 int FUN_003079ae(int *, int, int);
 
 /* stack frame of param_3: 2 slot(s), 8 byte(s) */
@@ -17,7 +17,7 @@ typedef struct {
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: FUN_002e9598. */
+/* Supplied declaration required: onlineStringAssign. */
 /* Supplied declaration required: FUN_003079ae. */
 
 
@@ -34,7 +34,7 @@ unsigned long long FUN_0030edec(int *param_1,int param_2,int param_3)
   temp_v1 = param_3;
   if (*param_1 != temp_v2) {
     for (; temp_v1 != temp_v2; temp_v1 = temp_v1 + 8) {
-      FUN_002e9598(temp_v0,temp_v1);
+      onlineStringAssign(temp_v0,temp_v1);
       temp_v0 = temp_v0 + 8;
     }
     FUN_003079ae(param_1,temp_v0,param_1[1]);

@@ -64,7 +64,7 @@ extern unsigned char DAT_00646b38; /* 0x646b38 */
 /* Supplied declaration required: FUN_001c23b0. */
 /* Supplied declaration required: FUN_001c246c. */
 /* Supplied declaration required: FUN_001c2478. */
-extern unsigned int FUN_001c2484(void);
+extern unsigned int nw_snd_internal_driver_VoiceManager_GetInstance(void);
 /* Supplied declaration required: FUN_001c2538. */
 /* Supplied declaration required: FUN_001c2a18. */
 /* Supplied declaration required: FUN_001c2a58. */
@@ -310,7 +310,7 @@ void FUN_001b8e48(int *param_1)
       FUN_001c1efc(&DAT_00646b38,(char)param_1[4],param_1[6]);
       break;
     case 0x3a:
-      temp_v1 = FUN_001c2484();
+      temp_v1 = nw_snd_internal_driver_VoiceManager_GetInstance();
       nw_snd_internal_driver_VoiceManager_UpdateAllVoicesSync(temp_v1,param_1[4]);
     }
     param_1 = (int *)*param_1;

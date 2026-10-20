@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001643b4(int, int);
 
-extern int DAT_0057f108; /* 0x57f108 */
+extern int g_camp; /* 0x57f108 */
 
 /* Supplied declaration required: FUN_001643b4. */
 extern int FUN_002c2c68(unsigned int);
@@ -22,7 +22,7 @@ void FUN_002cb278(unsigned int param_1,int param_2)
   int temp_v2;
   int temp_v3;
   
-  temp_v0 = DAT_0057f108;
+  temp_v0 = g_camp;
   temp_v2 = FUN_002c2c68(param_1);
   temp_v3 = FUN_00348ed0(param_1);
   if (temp_v3 < temp_v2) {

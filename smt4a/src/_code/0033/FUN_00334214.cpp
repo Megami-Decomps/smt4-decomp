@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019cac4(...);
+int dataTable00FindById(...);
 int FUN_0026fd50(...);
 int FUN_0034dae0(...);
 
@@ -24,10 +24,10 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_4_stack;
 
-extern unsigned char DAT_00588fd0; /* 0x588fd0 */
+extern unsigned char g_gameGlobals; /* 0x588fd0 */
 
 extern int btlMainIsRunning(void);
-/* Supplied declaration required: FUN_0019cac4. */
+/* Supplied declaration required: dataTable00FindById. */
 extern int FUN_002626e0(void);
 /* Supplied declaration required: FUN_0026fd50. */
 extern int FUN_00291e14(void);
@@ -48,9 +48,9 @@ void FUN_00334214(fn_00334214_arg0 *param_1,int param_2,unsigned int param_3,uns
   fn_00334214_arg0 *pfVar7;
   unsigned int temp_v6;
   
-  temp_v0 = (*(int *)((unsigned char *)&DAT_00588fd0 + 0x4));
+  temp_v0 = (*(int *)((unsigned char *)&g_gameGlobals + 0x4));
   temp_v5 = 1;
-  *(unsigned char *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x2010) = 1;
+  *(unsigned char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x2010) = 1;
   pfVar7 = param_1;
   temp_v3 = param_2;
   temp_v6 = param_4;
@@ -84,7 +84,7 @@ void FUN_00334214(fn_00334214_arg0 *param_1,int param_2,unsigned int param_3,uns
     }
     else {
       temp_v4 = (unsigned int)param_1->field_0x62;
-      FUN_0019cac4();
+      dataTable00FindById();
       if (temp_v4 != 0) {
         *(unsigned int *)(temp_v0 + 0x1398) = *(unsigned int *)(temp_v4 + 4);
         *(unsigned int *)(temp_v0 + 0x139c) = *(unsigned int *)(temp_v4 + 8);
@@ -102,13 +102,13 @@ void FUN_00334214(fn_00334214_arg0 *param_1,int param_2,unsigned int param_3,uns
   *(unsigned char *)(temp_v0 + 0x2025) = 0;
   if (-1 < (short)param_1->field_0x62) {
     temp_v4 = (unsigned int)param_1->field_0x62;
-    FUN_0019cac4();
+    dataTable00FindById();
     if (temp_v4 == 0) {
       temp_v5 = 0;
     }
     else {
       temp_v5 = (*(unsigned short *)(temp_v4 + 0x16) & 0x400) == 0;
-      if (((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) != 0) && (*(char *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x2017) == '\x11')) {
+      if (((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) != 0) && (*(char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x2017) == '\x11')) {
         temp_v5 = 0;
       }
     }

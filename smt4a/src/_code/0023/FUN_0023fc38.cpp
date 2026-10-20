@@ -13,11 +13,11 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } void_stack;
 
-extern int DAT_0057f268; /* 0x57f268 */
+extern int g_partyPanel; /* 0x57f268 */
 
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00183f58. */
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 extern int FUN_0022e714(void);
 extern int FUN_00237608(void);
 /* Supplied declaration required: FUN_002c7e24. */
@@ -38,7 +38,7 @@ void FUN_0023fc38(void)
   unsigned int temp_v4;
   int temp_v5;
   
-  temp_v5 = DAT_0057f268;
+  temp_v5 = g_partyPanel;
   FUN_002c7e24();
   temp_v0 = *(unsigned char *)(temp_v5 + 0x9b4);
   temp_v1 = 1;
@@ -64,7 +64,7 @@ void FUN_0023fc38(void)
         temp_v4 = 0xba;
       }
     }
-    else if ((*(char *)(temp_v5 + 0x9b4) == '\f') && (temp_v2 = FUN_0018719c(0x401), temp_v2 != 0)) {
+    else if ((*(char *)(temp_v5 + 0x9b4) == '\f') && (temp_v2 = gameFlagIsSet(0x401), temp_v2 != 0)) {
       if (*(char *)(temp_v5 + 0x42) == '\0') {
         temp_v4 = 0xc0;
       }
@@ -110,7 +110,7 @@ void FUN_0023fc38(void)
         temp_v4 = 0xbd;
       }
     }
-    else if ((*(char *)(temp_v5 + 0x9b4) == '\f') && (temp_v2 = FUN_0018719c(0x401), temp_v2 != 0)) {
+    else if ((*(char *)(temp_v5 + 0x9b4) == '\f') && (temp_v2 = gameFlagIsSet(0x401), temp_v2 != 0)) {
       if (*(char *)(temp_v5 + 0x42) == '\0') {
         temp_v4 = 0xc4;
       }

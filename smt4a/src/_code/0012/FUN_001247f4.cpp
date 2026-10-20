@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdOperatorNewC(void);
-int FUN_0030ea58(int, unsigned char *);
+int libc_strcmp(int, unsigned char *);
 int FUN_0030eca8(int *);
 int FUN_0030ed04(int *, int, int);
 
@@ -19,7 +19,7 @@ extern unsigned char DAT_0055780c; /* 0x55780c */
 #endif
 extern int *FUN_002e2a98(void);
 /* Supplied declaration required: asdOperatorNewC. */
-/* Supplied declaration required: FUN_0030ea58. */
+/* Supplied declaration required: libc_strcmp. */
 /* Supplied declaration required: FUN_0030eca8. */
 /* Supplied declaration required: FUN_0030ed04. */
 
@@ -43,8 +43,8 @@ unsigned long long FUN_001247f4(int param_1,unsigned int param_2,unsigned int pa
   uStack_20 = param_2;
   uStack_1c = param_3;
   uStack_18 = param_4;
-  FUN_0030ea58(param_1,&LAB_001248b0);
-  if ((temp_v1 != 0) && (temp_v1 = param_1, FUN_0030ea58(param_1,&LAB_001248b4), temp_v1 != 0)) {
+  libc_strcmp(param_1,&LAB_001248b0);
+  if ((temp_v1 != 0) && (temp_v1 = param_1, libc_strcmp(param_1,&LAB_001248b4), temp_v1 != 0)) {
     temp_v1 = 0x200;
     asdOperatorNewC();
     FUN_0030ed04(&uStack_20,param_1,2);

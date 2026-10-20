@@ -12,7 +12,7 @@ int FUN_0029cde0(...);
 int FUN_0029dc74(...);
 int FUN_002b6758(...);
 int FUN_002b6c34(...);
-int FUN_002b9024(void);
+int devilGetRecord(void);
 int FUN_002bdf94(...);
 int FUN_002be5a4(...);
 int FUN_002be624(...);
@@ -78,15 +78,15 @@ extern int FUN_0029efa8(int);
 extern int FUN_0029efc0(int);
 /* Supplied declaration required: FUN_002b6758. */
 /* Supplied declaration required: FUN_002b6c34. */
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: devilGetRecord. */
 extern unsigned int FUN_002bce00(unsigned short);
 extern unsigned int FUN_002bce30(short, unsigned int);
 extern unsigned int FUN_002bd068(short);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: FUN_002be624. */
-extern int FUN_002bed98(int);
-extern int FUN_002beda4(int);
+extern int vec2GetYInt(int);
+extern int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf4f8. */
@@ -169,16 +169,16 @@ void FUN_001f0540(int param_1,int param_2,int param_3,int param_4,int param_5,in
     FUN_002bf288(2,0x24,0x4f,temp_v4,temp_v13,0x6a);
     if (temp_v25 != 0) {
       psVar4 = (short *)(unsigned int)*(unsigned short *)(temp_v1 + 0x5210);
-      FUN_002b9024();
+      devilGetRecord();
     }
     else if (param_6 != 0) {
       psVar4 = (short *)((*(unsigned int *)(temp_v1 + 0x1394) & 0x1ffff) >> 2);
-      FUN_002b9024();
+      devilGetRecord();
     }
     else {
       psVar4 = (short *)((*(unsigned int *)(temp_v1 + (unsigned int)*(unsigned short *)(temp_v1 + 0x6ce2) * 8 + 0x1394) &
                          0x1ffff) >> 2);
-      FUN_002b9024();
+      devilGetRecord();
     }
     temp_v2 = FUN_002bf4f8(0x24,0x4d);
     temp_v3 = FUN_002bd068(*psVar4);
@@ -289,9 +289,9 @@ void FUN_001f0540(int param_1,int param_2,int param_3,int param_4,int param_5,in
               temp_v10 = FUN_0029efa8(temp_v17);
               if (*(short *)(temp_v1 + temp_v12 * 2 + 0x9010) ==
                   *(short *)(temp_v1 + (temp_v10 + temp_v14) * 2 + 0x9020)) {
-                temp_v14 = FUN_002beda4(temp_v1 + 0x2e0);
+                temp_v14 = vec2GetXInt(temp_v1 + 0x2e0);
                 temp_v13 = temp_v13 + temp_v14;
-                temp_v14 = FUN_002bed98(temp_v1 + 0x2e0);
+                temp_v14 = vec2GetYInt(temp_v1 + 0x2e0);
                 temp_v2 = temp_v2 + temp_v14;
                 FUN_002bf538();
               }
@@ -513,9 +513,9 @@ void FUN_001f0540(int param_1,int param_2,int param_3,int param_4,int param_5,in
       FUN_0029a17c((int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v8 + 8) + temp_v13,
                    (int)*(short *)(temp_v10 + 10) + (int)*(short *)(temp_v8 + 10) + temp_v2,
                    (int)**(short **)(temp_v8 + 0xc),(int)(*(short **)(temp_v8 + 0xc))[1],1);
-      temp_v7 = FUN_002bed98(temp_v1 + 0xb0);
+      temp_v7 = vec2GetYInt(temp_v1 + 0xb0);
       temp_v0 = *(short *)(temp_v10 + 10);
-      temp_v8 = FUN_002beda4(temp_v1 + 0xb0);
+      temp_v8 = vec2GetXInt(temp_v1 + 0xb0);
       FUN_002bf288(2,0x24,0x19e,temp_v8 + temp_v13 + (int)*(short *)(temp_v10 + 8),
                    temp_v7 + temp_v2 + (int)temp_v0,0x83);
       temp_v7 = g_titleScene;

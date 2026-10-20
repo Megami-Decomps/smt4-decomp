@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0016c410(unsigned int);
+int renderCtxResetColorScale(unsigned int);
 int FUN_0016c560(unsigned int);
 int FUN_00183bb0(void);
 
@@ -16,7 +16,7 @@ typedef struct {
 
 extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
-/* Supplied declaration required: FUN_0016c410. */
+/* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: FUN_0016c560. */
 /* Supplied declaration required: FUN_00183bb0. */
 
@@ -40,7 +40,7 @@ void FUN_004a1510(int param_1)
     (*pcVar2)();
   }
   FUN_0016c560(g_renderCtx);
-  FUN_0016c410(g_renderCtx);
+  renderCtxResetColorScale(g_renderCtx);
   return;
 }
 

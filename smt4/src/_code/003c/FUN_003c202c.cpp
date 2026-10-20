@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0026b780(...);
-int FUN_002b9024(void);
+int devilGetRecord(void);
 
 typedef struct fn_003c202c_arg0 fn_003c202c_arg0;
 struct fn_003c202c_arg0 {
@@ -30,7 +30,7 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: FUN_0026b780. */
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: devilGetRecord. */
 
 
 unsigned int FUN_003c202c(fn_003c202c_arg0 *param_1,int param_2,int param_3)
@@ -58,7 +58,7 @@ unsigned int FUN_003c202c(fn_003c202c_arg0 *param_1,int param_2,int param_3)
     pfStack_30 = param_1;
     iStack_2c = param_2;
     temp_v9 = param_3;
-    FUN_002b9024();
+    devilGetRecord();
     temp_v8[0] = 0;
     temp_v8[1] = 0;
     temp_v8[2] = 0;

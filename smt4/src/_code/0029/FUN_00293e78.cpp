@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_0028c640(u32 a, int b, u32 c);
+int nodeSetTranslation(u32 a, int b, u32 c);
 
 typedef struct Inner {
     /* 0x0 */ u8 unk0[8];
@@ -27,12 +27,12 @@ void FUN_00293e78(Obj *obj, u32 value)
     Inner *inner;
     int i;
 
-    FUN_0028c640(obj->main->unk8, 0, value);
+    nodeSetTranslation(obj->main->unk8, 0, value);
     i = 0;
     do {
         inner = obj->slots[i].inner;
         if (inner != NULL) {
-            FUN_0028c640(inner->unk8, 0, value);
+            nodeSetTranslation(inner->unk8, 0, value);
         }
         i = i + 1;
     } while (i < 3);

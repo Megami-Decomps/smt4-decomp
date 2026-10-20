@@ -18,9 +18,9 @@ extern unsigned char DAT_0044e7c2; /* 0x44e7c2 */
 extern unsigned char DAT_0044e7c3; /* 0x44e7c3 */
 extern unsigned char DAT_0044e7c4; /* 0x44e7c4 */
 extern unsigned char DAT_0044e7c5; /* 0x44e7c5 */
-extern unsigned char DAT_004e6f14; /* 0x4e6f14 */
+extern unsigned char g_nnSndMasterManager; /* 0x4e6f14 */
 extern unsigned char g_dspsndState; /* 0x4e6f64 */
-extern unsigned char DAT_004e8568; /* 0x4e8568 */
+extern unsigned char g_nnSndVoiceManager; /* 0x4e8568 */
 extern unsigned char uRam1ff810c0; /* 0x1ff810c0 */
 
 /* Supplied declaration required: FUN_0012852c. */
@@ -46,9 +46,9 @@ void FUN_0011cc1c(void)
     FUN_00129214(&g_dspsndState,0);
     if (-1 < (int)puVar2) {
       DAT_0044e7c4 = uRam1ff810c0;
-      FUN_00146e40(&DAT_004e6f14);
-      nn_snd_CTR_VoiceManager_Initialize((unsigned int)&DAT_004e8568);
-      FUN_00128e20(&DAT_004e6f14);
+      FUN_00146e40(&g_nnSndMasterManager);
+      nn_snd_CTR_VoiceManager_Initialize((unsigned int)&g_nnSndVoiceManager);
+      FUN_00128e20(&g_nnSndMasterManager);
       temp_v1 = FUN_002bb470();
       nn_snd_CTR_DspFxManager_Initialize(temp_v1);
       FUN_0012852c(FUN_00129084,FUN_00129478,&LAB_00128f60);

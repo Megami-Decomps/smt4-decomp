@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00100388(...);
 int asdMemFree(...);
 int FUN_002804b0(...);
-int FUN_002e342c(...);
+int libc_strcpy(...);
 int sysMemClear(...);
 
 /* stack frame of param_1: 5 slot(s), 20 byte(s) */
@@ -24,7 +24,7 @@ extern int FUN_00100d60(unsigned char *, unsigned int);
 extern unsigned int btlGetMainState(void);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002804b0. */
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: sysMemClear. */
 extern int findRecordByKey(int);
 extern int FUN_003f01d0(unsigned int, unsigned int);
@@ -53,7 +53,7 @@ unsigned int FUN_004f913c(int param_1)
     temp_v8 = 0;
     temp_v9 = 0;
     temp_v0 = FUN_003f01d0(temp_v5,*(unsigned int *)(*(int *)(param_1 + 0x33c8) + temp_v2 * 8 + 0x7c));
-    FUN_002e342c(&temp_v6,temp_v0 + 4);
+    libc_strcpy(&temp_v6,temp_v0 + 4);
     temp_v0 = param_1 + temp_v2 * 0x8c;
     *(unsigned char *)(temp_v0 + 0x33e4) = 0xff;
     sysMemClear(temp_v0 + 0x33ec,0x80);
@@ -65,9 +65,9 @@ unsigned int FUN_004f913c(int param_1)
     sysMemClear(temp_v3,0x80);
     sysMemClear(temp_v4,0x80);
     FUN_00100388(temp_v4,"battle/effect/%s.eft",&temp_v6);
-    FUN_002e342c(temp_v3,temp_v4);
+    libc_strcpy(temp_v3,temp_v4);
     temp_v1 = FUN_00100d60(temp_v3,0x2f);
-    FUN_002e342c(temp_v0 + 0x33ec,temp_v1 + 1);
+    libc_strcpy(temp_v0 + 0x33ec,temp_v1 + 1);
     temp_v1 = findRecordByKey(temp_v0 + 0x33ec);
     if (temp_v1 == 0xff) {
       FUN_002804b0(temp_v3,temp_v0 + 0x33e8,1);

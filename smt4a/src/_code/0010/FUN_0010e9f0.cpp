@@ -7,11 +7,11 @@ extern "C" {
 int FUN_002e6e34(unsigned char [12], unsigned int);
 int FUN_002e6e5c(unsigned char [12]);
 int FUN_002ea974(unsigned char [104]);
-int FUN_002ea9c0(unsigned char [104], int);
-int FUN_002ea9dc(unsigned char [104]);
+int onlineUrlSetAddress(unsigned char [104], int);
+int onlineUrlDestroy(unsigned char [104]);
 int FUN_002eab08(int *);
 int FUN_002eb17c(int, unsigned int);
-int FUN_002eb462(unsigned char [8], unsigned int, unsigned int);
+int packNibbles(unsigned char [8], unsigned int, unsigned int);
 int FUN_002f9dd4(int, unsigned int);
 
 typedef int romwright_code(...);
@@ -25,14 +25,14 @@ typedef struct {
 
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-extern unsigned int FUN_002ea714(void);
-extern unsigned int FUN_002ea93c(unsigned char *);
+extern unsigned int onlineGetActiveLock(void);
+extern unsigned int onlineUrlGetAddress(unsigned char *);
 /* Supplied declaration required: FUN_002ea974. */
-/* Supplied declaration required: FUN_002ea9c0. */
-/* Supplied declaration required: FUN_002ea9dc. */
+/* Supplied declaration required: onlineUrlSetAddress. */
+/* Supplied declaration required: onlineUrlDestroy. */
 /* Supplied declaration required: FUN_002eab08. */
 /* Supplied declaration required: FUN_002eb17c. */
-/* Supplied declaration required: FUN_002eb462. */
+/* Supplied declaration required: packNibbles. */
 extern int FUN_002f86cc(int, unsigned int);
 /* Supplied declaration required: FUN_002f9dd4. */
 
@@ -65,13 +65,13 @@ void FUN_0010e9f0(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   uStack_20 = param_2;
   temp_v7 = param_3;
   temp_v8 = param_4;
-  temp_v0 = FUN_002eb462(temp_v6,param_3,param_4);
+  temp_v0 = packNibbles(temp_v6,param_3,param_4);
   temp_v1 = param_1 + 0xa4;
   FUN_002f9dd4(temp_v1,temp_v0);
   if (temp_v1 == 0) {
     return;
   }
-  temp_v0 = FUN_002ea714();
+  temp_v0 = onlineGetActiveLock();
   FUN_002e6e34(temp_v5,temp_v0);
   temp_v1 = FUN_002f86cc(param_1,param_2);
   if (temp_v1 == 0) {
@@ -80,12 +80,12 @@ void FUN_0010e9f0(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   }
   if (*(int *)(param_1 + 0xbc) != 0) {
     FUN_002ea974(temp_v4);
-    FUN_002ea9c0(temp_v4,param_6 + 0xdc);
+    onlineUrlSetAddress(temp_v4,param_6 + 0xdc);
     temp_v1 = (**(romwright_code **)(**(int **)(param_1 + 0xbc) + 8))
                       (*(int **)(param_1 + 0xbc),temp_v4,param_2);
-    temp_v0 = FUN_002ea93c(temp_v4);
+    temp_v0 = onlineUrlGetAddress(temp_v4);
     FUN_002eb17c(param_6,temp_v0);
-    FUN_002ea9dc(temp_v4);
+    onlineUrlDestroy(temp_v4);
     if (temp_v1 != 0) {
       FUN_002e6e5c(temp_v5);
       return;
@@ -94,9 +94,9 @@ void FUN_0010e9f0(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   FUN_002eab08(&temp_v2);
   *(unsigned int *)(param_6 + 0x100) = temp_v2;
   *(unsigned int *)(param_6 + 0x104) = temp_v3;
-  puVar3 = (unsigned char *)FUN_002eb462(temp_v6,temp_v7,temp_v8);
+  puVar3 = (unsigned char *)packNibbles(temp_v6,temp_v7,temp_v8);
   *(unsigned char *)(param_6 + 0x25) = *puVar3;
-  puVar3 = (unsigned char *)FUN_002eb462(temp_v6,temp_v7,param_5);
+  puVar3 = (unsigned char *)packNibbles(temp_v6,temp_v7,param_5);
   *(unsigned char *)(param_6 + 0x26) = *puVar3;
   *(short *)(param_6 + 0x86) = (short)param_2;
   (**(romwright_code **)(**(int **)(param_1 + 500) + 0xc))(*(int **)(param_1 + 500),param_6,1);

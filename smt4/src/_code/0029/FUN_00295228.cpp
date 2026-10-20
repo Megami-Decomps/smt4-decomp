@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_002b9024(void);
+int devilGetRecord(void);
 int FUN_002bfc24(int, int, unsigned int, int);
 int dataTableGet(int, int);
 int rt_memcpy_w(unsigned char [4], int, int);
 
 extern char randRange(unsigned int);
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: FUN_002bfc24. */
 extern unsigned int FUN_002bfdc4(void);
 extern int dataTableGetCount(void);
@@ -44,7 +44,7 @@ void FUN_00295228(unsigned int param_1,int param_2)
     dataTableGet(0x3f,0);
     temp_v2 = dataTableGetCount();
     param_1 = param_1 & 0xffff;
-    FUN_002b9024();
+    devilGetRecord();
     if (param_1 != 0) {
       if (0 < temp_v2) {
         param_1 = (unsigned int)*(unsigned char *)(param_1 + 0x92);

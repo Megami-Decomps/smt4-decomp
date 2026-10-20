@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00184964(...);
-int FUN_00184b80(int);
+int pairSetFirstResetSecond(int);
 int SBORROW4(int, int);
 int rt_memcpy_w(int [27], unsigned char *, int);
 
@@ -18,7 +18,7 @@ extern unsigned char DAT_00530e50; /* 0x530e50 */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_00184964. */
-/* Supplied declaration required: FUN_00184b80. */
+/* Supplied declaration required: pairSetFirstResetSecond. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -98,7 +98,7 @@ void FUN_00169b30(int param_1,int param_2)
   temp_v6 = temp_v9 + temp_v13 * 4;
   *(int *)(temp_v6 + 0x120) = *(int *)(temp_v6 + 0x120) - 1;
   *(int *)(temp_v10 + 0x60) = temp_v2;
-  FUN_00184b80(param_1 + param_2 * 0x8c + 0x54);
+  pairSetFirstResetSecond(param_1 + param_2 * 0x8c + 0x54);
   temp_v6 = *(int *)(temp_v9 + 300);
   temp_v2 = temp_v6;
   if (temp_v6 < 1) {

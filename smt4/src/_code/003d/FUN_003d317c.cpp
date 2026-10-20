@@ -30,7 +30,7 @@ typedef struct {
 extern int g_btlScriptUnit; /* 0x43427c */
 extern int g_btlMain; /* 0x4342c8 */
 extern unsigned int DAT_00435d18; /* 0x435d18 */
-extern int DAT_00439ca8; /* 0x439ca8 */
+extern int g_btlUiBlock; /* 0x439ca8 */
 
 /* Supplied declaration required: FUN_00227ab4. */
 /* Supplied declaration required: FUN_00229a24. */
@@ -124,13 +124,13 @@ unsigned int FUN_003d317c(int *param_1,unsigned int *param_2)
     *param_2 = temp_v5;
   }
   temp_v7 = FUN_00293230(*param_1);
-  if ((temp_v7 != 0) && (temp_v7 = FUN_003af0fc(DAT_00439ca8), temp_v7 == 0)) {
+  if ((temp_v7 != 0) && (temp_v7 = FUN_003af0fc(g_btlUiBlock), temp_v7 == 0)) {
     return 0;
   }
   temp_v7 = *param_1;
   puVar10 = (unsigned int *)(temp_v7 + 0x44a0);
   if ((*puVar10 & 0x20000) != 0) {
-    temp_v7 = FUN_0027e350(DAT_00439ca8);
+    temp_v7 = FUN_0027e350(g_btlUiBlock);
     if (temp_v7 == 0) {
       return 0;
     }
@@ -142,7 +142,7 @@ unsigned int FUN_003d317c(int *param_1,unsigned int *param_2)
     temp_v4 = *param_1;
     *(unsigned int *)(temp_v4 + 0x44a4) = *(unsigned int *)(temp_v7 + 0x44a4);
     *(unsigned int *)(temp_v4 + 0x44a0) = (temp_v5 & 0xfffdffff) | 0x2000;
-    *(unsigned int *)(DAT_00439ca8 + 0x7e38) = 0;
+    *(unsigned int *)(g_btlUiBlock + 0x7e38) = 0;
     FUN_00229a24();
     temp_v7 = g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c;
   }

@@ -10,7 +10,7 @@ int FUN_00231bcc(int, int, int, int, unsigned int, int);
 int FUN_002332e8(...);
 int FUN_00240d5c(int);
 int FUN_0029e924(int);
-int FUN_002b63ac(void);
+int gameGetPlayerData(void);
 int FUN_003a07a0(int, unsigned int);
 
 typedef int romwright_code(...);
@@ -30,7 +30,7 @@ extern int FUN_0023360c(int);
 extern int FUN_00233718(int);
 /* Supplied declaration required: FUN_00240d5c. */
 /* Supplied declaration required: FUN_0029e924. */
-/* Supplied declaration required: FUN_002b63ac. */
+/* Supplied declaration required: gameGetPlayerData. */
 /* Supplied declaration required: FUN_003a07a0. */
 
 
@@ -85,31 +85,31 @@ void FUN_003a2960(int param_1,unsigned int param_2)
   temp_v0 = 0;
   switch(*(unsigned int *)(param_1 + 0x860)) {
   case 0:
-    puVar2 = (unsigned short *)FUN_002b63ac();
+    puVar2 = (unsigned short *)gameGetPlayerData();
     temp_v0 = *puVar2;
     break;
   case 1:
-    temp_v1 = FUN_002b63ac();
+    temp_v1 = gameGetPlayerData();
     temp_v0 = *(unsigned short *)(temp_v1 + 2);
     break;
   case 2:
-    temp_v1 = FUN_002b63ac();
+    temp_v1 = gameGetPlayerData();
     temp_v0 = *(unsigned short *)(temp_v1 + 4);
     break;
   case 3:
-    temp_v1 = FUN_002b63ac();
+    temp_v1 = gameGetPlayerData();
     temp_v0 = *(unsigned short *)(temp_v1 + 6);
     break;
   case 4:
-    temp_v1 = FUN_002b63ac();
+    temp_v1 = gameGetPlayerData();
     temp_v0 = *(unsigned short *)(temp_v1 + 8);
     break;
   case 5:
-    temp_v1 = FUN_002b63ac();
+    temp_v1 = gameGetPlayerData();
     temp_v0 = *(unsigned short *)(temp_v1 + 10);
     break;
   case 6:
-    temp_v1 = FUN_002b63ac();
+    temp_v1 = gameGetPlayerData();
     temp_v0 = *(unsigned short *)(temp_v1 + 0xc);
   }
   temp_v12 = temp_v0;

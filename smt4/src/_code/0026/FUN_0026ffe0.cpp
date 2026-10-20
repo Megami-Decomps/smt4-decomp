@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002ae898(int, unsigned int);
+int asdTMTexTableReleaseNode(int, unsigned int);
 int asdMemFree(void);
 
 extern int g_mapTable; /* 0x448c58 */
 extern int DAT_00448c88; /* 0x448c88 */
 extern unsigned int DAT_00448c8c; /* 0x448c8c */
 
-/* Supplied declaration required: FUN_002ae898. */
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
 /* Supplied declaration required: asdMemFree. */
 
 
@@ -24,7 +24,7 @@ void FUN_0026ffe0(void)
     g_mapTable = 0;
   }
   if (DAT_00448c88 != 0) {
-    FUN_002ae898(0x38,DAT_00448c8c);
+    asdTMTexTableReleaseNode(0x38,DAT_00448c8c);
     DAT_00448c8c = 0;
     DAT_00448c88 = 0;
   }

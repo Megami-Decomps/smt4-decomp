@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002c526c(void);
-int FUN_002c52f8(void);
+int asdFatalError(void);
 int FUN_003573a4(int *, int *, int, int, unsigned int, unsigned int);
 int ll_sdiv(int, int, int, int);
 
@@ -21,7 +21,7 @@ typedef struct {
 #define romwright_carry_4(left, right) ((unsigned char)((unsigned long long)(unsigned int)(left) + (unsigned long long)(unsigned int)(right) > 0xffffffffULL))
 #endif
 /* Supplied declaration required: FUN_002c526c. */
-/* Supplied declaration required: FUN_002c52f8. */
+/* Supplied declaration required: asdFatalError. */
 /* Supplied declaration required: FUN_003573a4. */
 /* Supplied declaration required: ll_sdiv. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
@@ -64,7 +64,7 @@ void FUN_0034e020(int *param_1)
       ll_sdiv(param_1[2],param_1[3],0x40000,0);
       temp_v0 = (**(romwright_code **)(*piVar4 + 0x2c))(piVar4,temp_v1 + param_1[8],temp_v2);
       if (temp_v0 != temp_v2) {
-        FUN_002c52f8();
+        asdFatalError();
       }
       temp_v2 = param_1[2];
       param_1[2] = temp_v2 + temp_v0;

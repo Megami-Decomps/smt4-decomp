@@ -12,7 +12,7 @@ int FUN_00254f58(...);
 int FUN_00270028(int);
 int FUN_0027da30(int, int);
 int FUN_00297468(unsigned char [128], unsigned int *, int);
-int FUN_002bf694(unsigned char [128], unsigned int);
+int libc_strcpy(unsigned char [128], unsigned int);
 int FUN_002c29d8(...);
 int asdMemFree(void);
 int memClear(unsigned char [128], int);
@@ -43,7 +43,7 @@ extern int FUN_002405c8(int, unsigned short);
 /* Supplied declaration required: FUN_0027da30. */
 extern int FUN_002896bc(void);
 /* Supplied declaration required: FUN_00297468. */
-/* Supplied declaration required: FUN_002bf694. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_002c29d8. */
 extern int FUN_002c2a04(unsigned int);
 /* Supplied declaration required: asdMemFree. */
@@ -70,13 +70,13 @@ void FUN_0023f500(unsigned int *param_1,int param_2)
   
   memClear(temp_v4,0x80);
   temp_v0 = FUN_00240448(param_2);
-  FUN_002bf694(temp_v4,temp_v0);
+  libc_strcpy(temp_v4,temp_v0);
   temp_v2 = FUN_002402c4(param_2,temp_v4);
   if (temp_v2 != 0) {
     *param_1 = 0xb;
     memClear(temp_v5,0x80);
     temp_v0 = FUN_00240448(param_2);
-    FUN_002bf694(temp_v5,temp_v0);
+    libc_strcpy(temp_v5,temp_v0);
     if (param_1[1] != 0) {
       asdMemFree();
       param_1[1] = 0;

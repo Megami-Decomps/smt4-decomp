@@ -12,7 +12,7 @@ int nnnstdMemCpy(...);
 int itemVariantReselect(unsigned int);
 int aocTexCtrlInit(...);
 int asdOperatorNewB(...);
-int FUN_002ac068(...);
+int dataTableFileGetTable(...);
 int FUN_002ac0c4(void);
 int FUN_002ac0f8(void);
 int FUN_002ac12c(...);
@@ -154,7 +154,7 @@ extern unsigned char LAB_00387c68; /* 0x387c68 */
 /* Supplied declaration required: itemVariantReselect. */
 /* Supplied declaration required: aocTexCtrlInit. */
 /* Supplied declaration required: asdOperatorNewB. */
-/* Supplied declaration required: FUN_002ac068. */
+/* Supplied declaration required: dataTableFileGetTable. */
 /* Supplied declaration required: FUN_002ac0c4. */
 /* Supplied declaration required: FUN_002ac0f8. */
 /* Supplied declaration required: FUN_002ac12c. */
@@ -293,7 +293,7 @@ void FUN_00385f74(fn_00385f74_arg0 *param_1)
                           temp_v35 = (int)temp_v47;
                           temp_v36 = temp_v48;
                           do {
-                            FUN_002ac068(temp_v14,unaff_r5);
+                            dataTableFileGetTable(temp_v14,unaff_r5);
                             temp_v2 = dataTableGetCount();
                             ppiVar1 = &temp_v34 + unaff_r5;
                             unaff_r5 = unaff_r5 + 1;
@@ -302,22 +302,22 @@ void FUN_00385f74(fn_00385f74_arg0 *param_1)
                         }
                       }
                       else {
-                        FUN_002ac068(temp_v14,2);
+                        dataTableFileGetTable(temp_v14,2);
                         temp_v2 = dataTableGetCount();
                         param_1->field_0x36c = temp_v2 + param_1->field_0x36c;
-                        FUN_002ac068(temp_v14,1);
+                        dataTableFileGetTable(temp_v14,1);
                         temp_v2 = dataTableGetCount();
                         param_1->field_0x374 = temp_v2 + param_1->field_0x374;
-                        FUN_002ac068(temp_v14,0);
+                        dataTableFileGetTable(temp_v14,0);
                         temp_v2 = dataTableGetCount();
                         param_1->field_0x37c = temp_v2 + param_1->field_0x37c;
                       }
                     }
                     else {
-                      FUN_002ac068(temp_v14,0);
+                      dataTableFileGetTable(temp_v14,0);
                       temp_v2 = dataTableGetCount();
                       param_1->field_0x35c = temp_v2 + param_1->field_0x35c;
-                      FUN_002ac068(temp_v14,1);
+                      dataTableFileGetTable(temp_v14,1);
                       temp_v2 = dataTableGetCount();
                       param_1->field_0x364 = temp_v2 + param_1->field_0x364;
                     }
@@ -340,7 +340,7 @@ void FUN_00385f74(fn_00385f74_arg0 *param_1)
                       temp_v30 = temp_v41;
                       temp_v31 = temp_v42;
                       do {
-                        FUN_002ac068(temp_v14,unaff_r5);
+                        dataTableFileGetTable(temp_v14,unaff_r5);
                         temp_v2 = dataTableGetCount();
                         ppiVar1 = temp_v24 + unaff_r5;
                         unaff_r5 = unaff_r5 + 1;
@@ -361,7 +361,7 @@ void FUN_00385f74(fn_00385f74_arg0 *param_1)
                   temp_v20 = temp_v53;
                   temp_v21 = temp_v54;
                   do {
-                    FUN_002ac068(temp_v14,unaff_r5);
+                    dataTableFileGetTable(temp_v14,unaff_r5);
                     temp_v2 = dataTableGetCount();
                     ppiVar1 = &temp_v16 + unaff_r5;
                     unaff_r5 = unaff_r5 + 1;
@@ -423,7 +423,7 @@ void FUN_00385f74(fn_00385f74_arg0 *param_1)
                 }
                 else if (temp_v0 != '+') {
                   if (temp_v0 == ',') {
-                    FUN_002ac068(temp_v14,0);
+                    dataTableFileGetTable(temp_v14,0);
                     temp_v2 = dataTableGetCount();
                     *temp_v45 = temp_v2 + param_1->field_0x42c;
                   }
@@ -433,7 +433,7 @@ void FUN_00385f74(fn_00385f74_arg0 *param_1)
                   temp_v32 = temp_v43;
                   temp_v33 = (int)temp_v44;
                   do {
-                    FUN_002ac068(temp_v14,unaff_r5);
+                    dataTableFileGetTable(temp_v14,unaff_r5);
                     temp_v2 = dataTableGetCount();
                     ppiVar1 = &temp_v32 + unaff_r5;
                     unaff_r5 = unaff_r5 + 1;
@@ -658,7 +658,7 @@ void FUN_00385f74(fn_00385f74_arg0 *param_1)
                 if (temp_v0 != '\0') {
                   if (temp_v0 != '\x01') {
                     if (temp_v0 == '\x02') {
-                      temp_v14 = FUN_002ac068(temp_v48,0);
+                      temp_v14 = dataTableFileGetTable(temp_v48,0);
                       temp_v2 = dataTableGetCount();
                       if (temp_v2 != 0) {
                         temp_v14 = dataTableGetEntries(temp_v14);
@@ -666,14 +666,14 @@ void FUN_00385f74(fn_00385f74_arg0 *param_1)
                                      temp_v2 * 0x1b4);
                         temp_v42 = (int *)((int)temp_v42 + temp_v2);
                       }
-                      temp_v14 = FUN_002ac068(temp_v48,1);
+                      temp_v14 = dataTableFileGetTable(temp_v48,1);
                       temp_v2 = dataTableGetCount();
                       if (temp_v2 != 0) {
                         temp_v14 = dataTableGetEntries(temp_v14);
                         nnnstdMemCpy(param_1->field_0x390 + temp_v25 * 0x54,temp_v14,temp_v2 * 0x54);
                         temp_v25 = temp_v25 + temp_v2;
                       }
-                      temp_v14 = FUN_002ac068(temp_v48,2);
+                      temp_v14 = dataTableFileGetTable(temp_v48,2);
                       temp_v2 = dataTableGetCount();
                       piVar17 = temp_v20;
                       if (temp_v2 != 0) {
@@ -685,21 +685,21 @@ void FUN_00385f74(fn_00385f74_arg0 *param_1)
                     }
                   }
                   else {
-                    temp_v14 = FUN_002ac068(temp_v48,2);
+                    temp_v14 = dataTableFileGetTable(temp_v48,2);
                     temp_v2 = dataTableGetCount();
                     if (temp_v2 != 0) {
                       temp_v14 = dataTableGetEntries(temp_v14);
                       nnnstdMemCpy(param_1->field_0x370 + (int)temp_v31 * 4,temp_v14,temp_v2 << 2);
                       temp_v31 = (int *)((int)temp_v31 + temp_v2);
                     }
-                    temp_v14 = FUN_002ac068(temp_v48,1);
+                    temp_v14 = dataTableFileGetTable(temp_v48,1);
                     temp_v2 = dataTableGetCount();
                     if (temp_v2 != 0) {
                       temp_v14 = dataTableGetEntries(temp_v14);
                       nnnstdMemCpy(param_1->field_0x378 + (int)temp_v40 * 0x28,temp_v14,temp_v2 * 0x28);
                       temp_v40 = (int *)((int)temp_v40 + temp_v2);
                     }
-                    temp_v14 = FUN_002ac068(temp_v48,0);
+                    temp_v14 = dataTableFileGetTable(temp_v48,0);
                     temp_v2 = dataTableGetCount();
                     piVar17 = temp_v20;
                     if (temp_v2 != 0) {
@@ -711,14 +711,14 @@ void FUN_00385f74(fn_00385f74_arg0 *param_1)
                   }
                 }
                 else {
-                  temp_v14 = FUN_002ac068(temp_v48,0);
+                  temp_v14 = dataTableFileGetTable(temp_v48,0);
                   temp_v2 = dataTableGetCount();
                   if (temp_v2 != 0) {
                     temp_v14 = dataTableGetEntries(temp_v14);
                     nnnstdMemCpy(param_1->field_0x360 + (int)temp_v29 * 0x94,temp_v14,temp_v2 * 0x94);
                     temp_v29 = (int *)((int)temp_v29 + temp_v2);
                   }
-                  temp_v14 = FUN_002ac068(temp_v48,1);
+                  temp_v14 = dataTableFileGetTable(temp_v48,1);
                   temp_v2 = dataTableGetCount();
                   piVar17 = temp_v20;
                   if (temp_v2 != 0) {
@@ -732,7 +732,7 @@ void FUN_00385f74(fn_00385f74_arg0 *param_1)
               else if (temp_v0 != '\x12') {
                 if (temp_v0 != '+') {
                   if (temp_v0 == ',') {
-                    temp_v14 = FUN_002ac068(temp_v48,0);
+                    temp_v14 = dataTableFileGetTable(temp_v48,0);
                     temp_v2 = dataTableGetCount();
                     piVar17 = temp_v20;
                     if (temp_v2 != 0) {
@@ -744,14 +744,14 @@ void FUN_00385f74(fn_00385f74_arg0 *param_1)
                   }
                 }
                 else {
-                  temp_v14 = FUN_002ac068(temp_v48,0);
+                  temp_v14 = dataTableFileGetTable(temp_v48,0);
                   temp_v2 = dataTableGetCount();
                   if (temp_v2 != 0) {
                     temp_v14 = dataTableGetEntries(temp_v14);
                     nnnstdMemCpy(param_1->field_0x438 + (int)temp_v32 * 0x68,temp_v14,temp_v2 * 0x68);
                     temp_v32 = (int *)((int)temp_v32 + temp_v2);
                   }
-                  temp_v14 = FUN_002ac068(temp_v48,1);
+                  temp_v14 = dataTableFileGetTable(temp_v48,1);
                   temp_v2 = dataTableGetCount();
                   piVar17 = temp_v20;
                   if (temp_v2 != 0) {
@@ -763,63 +763,63 @@ void FUN_00385f74(fn_00385f74_arg0 *param_1)
                 }
               }
               else {
-                temp_v14 = FUN_002ac068(temp_v48,0);
+                temp_v14 = dataTableFileGetTable(temp_v48,0);
                 temp_v2 = dataTableGetCount();
                 if (temp_v2 != 0) {
                   temp_v14 = dataTableGetEntries(temp_v14);
                   nnnstdMemCpy(param_1->field_0x3e8 + temp_v15 * 0x20,temp_v14,temp_v2 << 5);
                   temp_v15 = temp_v15 + temp_v2;
                 }
-                temp_v14 = FUN_002ac068(temp_v48,1);
+                temp_v14 = dataTableFileGetTable(temp_v48,1);
                 temp_v2 = dataTableGetCount();
                 if (temp_v2 != 0) {
                   temp_v14 = dataTableGetEntries(temp_v14);
                   nnnstdMemCpy(param_1->field_0x3f0 + temp_v33 * 0xc,temp_v14,temp_v2 * 0xc);
                   temp_v33 = temp_v33 + temp_v2;
                 }
-                temp_v14 = FUN_002ac068(temp_v48,2);
+                temp_v14 = dataTableFileGetTable(temp_v48,2);
                 temp_v2 = dataTableGetCount();
                 if (temp_v2 != 0) {
                   temp_v14 = dataTableGetEntries(temp_v14);
                   nnnstdMemCpy(param_1->field_0x3f8 + (int)temp_v26 * 0x20,temp_v14,temp_v2 << 5);
                   temp_v26 = (int *)((int)temp_v26 + temp_v2);
                 }
-                temp_v14 = FUN_002ac068(temp_v48,3);
+                temp_v14 = dataTableFileGetTable(temp_v48,3);
                 temp_v2 = dataTableGetCount();
                 if (temp_v2 != 0) {
                   temp_v14 = dataTableGetEntries(temp_v14);
                   nnnstdMemCpy(param_1->field_0x400 + (int)temp_v27 * 0x14,temp_v14,temp_v2 * 0x14);
                   temp_v27 = (int *)((int)temp_v27 + temp_v2);
                 }
-                temp_v14 = FUN_002ac068(temp_v48,4);
+                temp_v14 = dataTableFileGetTable(temp_v48,4);
                 temp_v2 = dataTableGetCount();
                 if (temp_v2 != 0) {
                   temp_v14 = dataTableGetEntries(temp_v14);
                   nnnstdMemCpy(param_1->field_0x408 + (int)temp_v34 * 0x1c,temp_v14,temp_v2 * 0x1c);
                   temp_v34 = (int *)((int)temp_v34 + temp_v2);
                 }
-                temp_v14 = FUN_002ac068(temp_v48,5);
+                temp_v14 = dataTableFileGetTable(temp_v48,5);
                 temp_v2 = dataTableGetCount();
                 if (temp_v2 != 0) {
                   temp_v14 = dataTableGetEntries(temp_v14);
                   nnnstdMemCpy(param_1->field_0x410 + temp_v17 * 0x2c,temp_v14,temp_v2 * 0x2c);
                   temp_v17 = temp_v17 + temp_v2;
                 }
-                temp_v14 = FUN_002ac068(temp_v48,6);
+                temp_v14 = dataTableFileGetTable(temp_v48,6);
                 temp_v2 = dataTableGetCount();
                 if (temp_v2 != 0) {
                   temp_v14 = dataTableGetEntries(temp_v14);
                   nnnstdMemCpy(param_1->field_0x418 + temp_v35 * 0xc,temp_v14,temp_v2 * 0xc);
                   temp_v35 = temp_v35 + temp_v2;
                 }
-                temp_v14 = FUN_002ac068(temp_v48,7);
+                temp_v14 = dataTableFileGetTable(temp_v48,7);
                 temp_v2 = dataTableGetCount();
                 if (temp_v2 != 0) {
                   temp_v14 = dataTableGetEntries(temp_v14);
                   nnnstdMemCpy(param_1->field_0x420 + (int)temp_v28 * 0xc,temp_v14,temp_v2 * 0xc);
                   temp_v28 = (int *)((int)temp_v28 + temp_v2);
                 }
-                temp_v14 = FUN_002ac068(temp_v48,8);
+                temp_v14 = dataTableFileGetTable(temp_v48,8);
                 temp_v2 = dataTableGetCount();
                 piVar17 = temp_v20;
                 if (temp_v2 != 0) {
@@ -831,7 +831,7 @@ void FUN_00385f74(fn_00385f74_arg0 *param_1)
               }
             }
             else {
-              temp_v14 = FUN_002ac068(temp_v48,0);
+              temp_v14 = dataTableFileGetTable(temp_v48,0);
               temp_v2 = dataTableGetCount();
               piVar17 = temp_v30;
               if (temp_v2 != 0) {
@@ -861,7 +861,7 @@ void FUN_00385f74(fn_00385f74_arg0 *param_1)
                 }
               }
               temp_v30 = piVar17;
-              temp_v14 = FUN_002ac068(temp_v48,1);
+              temp_v14 = dataTableFileGetTable(temp_v48,1);
               temp_v2 = dataTableGetCount();
               piVar17 = temp_v16;
               if (temp_v2 != 0) {
@@ -891,7 +891,7 @@ void FUN_00385f74(fn_00385f74_arg0 *param_1)
                 }
               }
               temp_v16 = piVar17;
-              temp_v14 = FUN_002ac068(temp_v48,2);
+              temp_v14 = dataTableFileGetTable(temp_v48,2);
               temp_v2 = dataTableGetCount();
               temp_v12 = temp_v22;
               if (temp_v2 != 0) {
@@ -920,7 +920,7 @@ void FUN_00385f74(fn_00385f74_arg0 *param_1)
                 }
               }
               temp_v22 = temp_v12;
-              temp_v14 = FUN_002ac068(temp_v48,3);
+              temp_v14 = dataTableFileGetTable(temp_v48,3);
               temp_v2 = dataTableGetCount();
               if (temp_v2 != 0) {
                 temp_v14 = dataTableGetEntries(temp_v14);
@@ -947,7 +947,7 @@ void FUN_00385f74(fn_00385f74_arg0 *param_1)
                   }
                 }
               }
-              temp_v14 = FUN_002ac068(temp_v48,4);
+              temp_v14 = dataTableFileGetTable(temp_v48,4);
               temp_v2 = dataTableGetCount();
               piVar17 = temp_v38;
               if (temp_v2 != 0) {
@@ -977,7 +977,7 @@ void FUN_00385f74(fn_00385f74_arg0 *param_1)
                 }
               }
               temp_v38 = piVar17;
-              temp_v14 = FUN_002ac068(temp_v48,5);
+              temp_v14 = dataTableFileGetTable(temp_v48,5);
               temp_v2 = dataTableGetCount();
               piVar17 = temp_v20;
               if (temp_v2 != 0) {

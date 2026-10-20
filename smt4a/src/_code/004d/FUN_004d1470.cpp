@@ -22,8 +22,8 @@ extern unsigned int DAT_00571618; /* 0x571618 */
 extern unsigned int DAT_0057161c; /* 0x57161c */
 
 extern int FUN_00163fd4(unsigned int, unsigned int);
-extern int FUN_001ab854(void);
-extern int FUN_001ab888(void);
+extern int gameGetSlotRecord(void);
+extern int gameGetSlotTable(void);
 extern unsigned int *asdListBoxGetIntValuePtr(unsigned int);
 /* Supplied declaration required: FUN_0032c430. */
 extern unsigned int FUN_003874fc(unsigned int);
@@ -213,13 +213,13 @@ void FUN_004d1470(int param_1,int param_2)
       } while (temp_v8 < 0x6d);
     }
     if (*(char *)(param_1 + 0x16) != '\0') {
-      temp_v8 = FUN_001ab888();
+      temp_v8 = gameGetSlotTable();
       temp_v4 = 0;
       temp_v1 = *(unsigned char *)(temp_v8 + 0x1ca3);
       if (temp_v1 != 0) {
         do {
-          temp_v8 = FUN_001ab888();
-          if (((-1 < *(char *)(temp_v8 + temp_v4 + 0x1c88)) && (temp_v8 = FUN_001ab854(), temp_v8 != 0))
+          temp_v8 = gameGetSlotTable();
+          if (((-1 < *(char *)(temp_v8 + temp_v4 + 0x1c88)) && (temp_v8 = gameGetSlotRecord(), temp_v8 != 0))
              && (temp_v5 = FUN_004bd0d8(), temp_v5 == 0)) {
             temp_v7 = 0;
             do {
@@ -290,13 +290,13 @@ void FUN_004d1470(int param_1,int param_2)
         } while (temp_v8 < 0x6d);
       }
       if (*(char *)(param_1 + 0x16) != '\0') {
-        temp_v8 = FUN_001ab888();
+        temp_v8 = gameGetSlotTable();
         temp_v4 = 0;
         temp_v1 = *(unsigned char *)(temp_v8 + 0x1ca3);
         if (temp_v1 != 0) {
           do {
-            temp_v8 = FUN_001ab888();
-            if (((-1 < *(char *)(temp_v8 + temp_v4 + 0x1c88)) && (temp_v8 = FUN_001ab854(), temp_v8 != 0)
+            temp_v8 = gameGetSlotTable();
+            if (((-1 < *(char *)(temp_v8 + temp_v4 + 0x1c88)) && (temp_v8 = gameGetSlotRecord(), temp_v8 != 0)
                 ) && (temp_v5 = FUN_004bd0d8(), temp_v5 == 0)) {
               bitsAt60Clear(temp_v8,*(unsigned int *)(param_1 + 0x18) & 0xffff);
             }

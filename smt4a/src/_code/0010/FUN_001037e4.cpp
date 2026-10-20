@@ -9,8 +9,8 @@ typedef struct {
     unsigned char sp10; /* 0x10: local_10 */
 } param_4_stack;
 
-extern int FUN_002e7328(int, unsigned int, unsigned int, unsigned int, unsigned int);
-extern int FUN_002e76b6(unsigned int);
+extern int streamReaderHasBytes(int, unsigned int, unsigned int, unsigned int, unsigned int);
+extern int onlineBufferGetData(unsigned int);
 
 
 int FUN_001037e4(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -19,9 +19,9 @@ int FUN_001037e4(int param_1,unsigned int param_2,unsigned int param_3,unsigned 
   int temp_v0;
   char temp_v1;
   
-  temp_v0 = FUN_002e7328(param_1,1,param_3,param_4,param_4);
+  temp_v0 = streamReaderHasBytes(param_1,1,param_3,param_4,param_4);
   if (temp_v0 != 0) {
-    temp_v0 = FUN_002e76b6(*(unsigned int *)(param_1 + 8));
+    temp_v0 = onlineBufferGetData(*(unsigned int *)(param_1 + 8));
     temp_v1 = *(char *)(temp_v0 + *(int *)(param_1 + 0xc));
     *(int *)(param_1 + 0xc) = *(int *)(param_1 + 0xc) + 1;
   }

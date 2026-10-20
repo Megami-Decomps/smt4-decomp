@@ -6,7 +6,7 @@ extern "C" {
 
 int CONCAT44(double, double);
 int efctSetSpeed(void);
-int FUN_0016c410(...);
+int renderCtxResetColorScale(...);
 int FUN_0016c560(...);
 int FUN_0018291c(...);
 int camSetMatrixA(...);
@@ -79,10 +79,10 @@ extern float DAT_0064c0c0; /* 0x64c0c0 */
 #endif
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_0016c410. */
+/* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: FUN_0016c560. */
 /* Supplied declaration required: FUN_0018291c. */
-extern unsigned int FUN_001861c4(unsigned int, unsigned int);
+extern unsigned int asdTMTexTableGetNode(unsigned int, unsigned int);
 /* Supplied declaration required: camSetMatrixA. */
 /* Supplied declaration required: mtx44Copy. */
 /* Supplied declaration required: FUN_0019a0fc. */
@@ -349,7 +349,7 @@ void FUN_0046ed94(unsigned int param_1,unsigned int param_2,unsigned int param_3
         if (temp_v0 == 0) {
           puVar4 = (unsigned int *)0x0;
         }
-        temp_v2 = FUN_001861c4(*param_4,param_3);
+        temp_v2 = asdTMTexTableGetNode(*param_4,param_3);
         FUN_001ab8e0(temp_v29,temp_v3,0,0,(int)*(short *)(param_4 + 0xe));
         FUN_0019b770(**(unsigned int **)(*(int *)*puVar4 + 4),temp_v29,temp_v2,0);
       }
@@ -372,7 +372,7 @@ void FUN_0046ed94(unsigned int param_1,unsigned int param_2,unsigned int param_3
       temp_v28 = temp_v8;
       FUN_0018291c(&temp_v13,&temp_v17,&temp_v21,&temp_v25,0,1);
       FUN_0016c560(g_renderCtx);
-      FUN_0016c410(g_renderCtx);
+      renderCtxResetColorScale(g_renderCtx);
     }
   }
   return;

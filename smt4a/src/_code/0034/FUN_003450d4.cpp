@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_00169ddc(int);
+int eventQueueAddUnique(int);
 int FUN_00284140(int);
 int FUN_002e2848(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, int, int);
-int FUN_0031d1b4(void);
-int FUN_0031d1d8(unsigned int, int);
+int flaggedEntrySetValueB(void);
+int flaggedEntrySetValueA(unsigned int, int);
 
 typedef struct fn_003450d4_arg1 fn_003450d4_arg1;
 struct fn_003450d4_arg1 {
@@ -26,15 +26,15 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } param_9_stack;
 
-/* Supplied declaration required: FUN_00169ddc. */
+/* Supplied declaration required: eventQueueAddUnique. */
 /* Supplied declaration required: FUN_00284140. */
 extern int FUN_002a4844(unsigned int);
 extern int FUN_002a4860(unsigned int);
 extern int FUN_002a4878(unsigned int);
 extern int FUN_002a4894(unsigned int);
 /* Supplied declaration required: FUN_002e2848. */
-/* Supplied declaration required: FUN_0031d1b4. */
-/* Supplied declaration required: FUN_0031d1d8. */
+/* Supplied declaration required: flaggedEntrySetValueB. */
+/* Supplied declaration required: flaggedEntrySetValueA. */
 extern int FUN_00348eb4(unsigned int);
 extern int FUN_00348ed0(unsigned int);
 
@@ -85,10 +85,10 @@ LAB_00345180:
   temp_v3 = FUN_002a4894(param_1);
   if (temp_v4 >= 0) {
     if (param_8 != 0) {
-      FUN_0031d1b4();
+      flaggedEntrySetValueB();
     }
     else {
-      FUN_0031d1d8(param_1,temp_v4);
+      flaggedEntrySetValueA(param_1,temp_v4);
     }
     temp_v8 = 1;
   }
@@ -110,7 +110,7 @@ LAB_00345180:
         return temp_v8;
       }
     }
-    FUN_00169ddc(0x100020d);
+    eventQueueAddUnique(0x100020d);
   }
   *param_7 = temp_v0;
   return temp_v8;

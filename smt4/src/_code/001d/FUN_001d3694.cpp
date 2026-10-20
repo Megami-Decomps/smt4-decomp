@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_00152bec(u32 handle);
+int asdMdlManagerMarkDestroy(u32 handle);
 
 typedef struct MapEntry {
     /* 0x00 */ u8 unk00[0x3C];
@@ -10,7 +10,7 @@ typedef struct MapEntry {
     /* 0x40 */ u8 unk40[8];
 } MapEntry;
 
-extern MapEntry *DAT_00447e70;
+extern MapEntry *g_mapObj;
 
 /* Updates every active handle of the 24 entries. */
 void FUN_001d3694(void)
@@ -18,8 +18,8 @@ void FUN_001d3694(void)
     s32 i = 0;
 
     do {
-        if (DAT_00447e70[i].handle != 0) {
-            FUN_00152bec(DAT_00447e70[i].handle);
+        if (g_mapObj[i].handle != 0) {
+            asdMdlManagerMarkDestroy(g_mapObj[i].handle);
         }
         i++;
     } while (i < 0x18);

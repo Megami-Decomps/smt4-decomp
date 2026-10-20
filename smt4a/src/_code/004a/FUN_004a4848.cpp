@@ -6,7 +6,7 @@ extern "C" {
 
 int jyoucyuGetTableEntry(int);
 int FUN_00184310(void);
-int FUN_0019cac4(void);
+int dataTable00FindById(void);
 int FUN_004a5b20(int);
 int FUN_004a6610(int, int);
 int FUN_004a83f8(void);
@@ -28,7 +28,7 @@ typedef struct {
 
 /* Supplied declaration required: jyoucyuGetTableEntry. */
 /* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: FUN_0019cac4. */
+/* Supplied declaration required: dataTable00FindById. */
 extern int FUN_0026264c(unsigned short);
 /* Supplied declaration required: FUN_004a5b20. */
 /* Supplied declaration required: FUN_004a6610. */
@@ -66,7 +66,7 @@ void FUN_004a4848(int param_1)
       puVar3 = (unsigned short *)(temp_v3 & 0xffff);
       FUN_00184310();
       temp_v1 = temp_v3;
-      FUN_0019cac4();
+      dataTable00FindById();
       if ((puVar3 != (unsigned short *)0x0 && temp_v1 != 0) && ((*(unsigned short *)(temp_v1 + 0x16) & 1) != 0)) {
         temp_v4 = temp_v4 + 1;
         temp_v2 = FUN_0026264c(*puVar3);

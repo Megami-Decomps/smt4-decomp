@@ -15,7 +15,7 @@ extern unsigned int *g_btlMain; /* 0x4342c8 */
 extern unsigned int DAT_004342cc; /* 0x4342cc */
 extern unsigned int DAT_004342d0; /* 0x4342d0 */
 
-extern unsigned int *FUN_0022a344(unsigned int, unsigned int);
+extern unsigned int *asdListBoxGetItemText(unsigned int, unsigned int);
 extern int FUN_0022a444(unsigned int);
 /* Supplied declaration required: FUN_003d88a0. */
 
@@ -60,27 +60,27 @@ void FUN_003c63a8(int param_1,unsigned int param_2,unsigned int param_3)
     temp_v2 = g_btlMain[0x18d] | 0x80;
     break;
   case 3:
-    puVar3 = (unsigned int *)FUN_0022a344(*(unsigned int *)(param_1 + 0x10),param_3);
+    puVar3 = (unsigned int *)asdListBoxGetItemText(*(unsigned int *)(param_1 + 0x10),param_3);
     temp_v1 = *puVar3;
     puVar3 = &DAT_004342cc;
     *puVar3 = temp_v1;
     return;
   case 4:
-    puVar3 = (unsigned int *)FUN_0022a344(*(unsigned int *)(param_1 + 0x10),param_3);
+    puVar3 = (unsigned int *)asdListBoxGetItemText(*(unsigned int *)(param_1 + 0x10),param_3);
     temp_v1 = *puVar3;
     puVar3 = &DAT_004342d0;
     *puVar3 = temp_v1;
     return;
   case 5:
-    puVar3 = (unsigned int *)FUN_0022a344(*(unsigned int *)(param_1 + 0x10),param_3);
+    puVar3 = (unsigned int *)asdListBoxGetItemText(*(unsigned int *)(param_1 + 0x10),param_3);
     *g_btlMain = *puVar3;
     return;
   case 6:
-    puVar3 = (unsigned int *)FUN_0022a344(*(unsigned int *)(param_1 + 0x10),param_3);
+    puVar3 = (unsigned int *)asdListBoxGetItemText(*(unsigned int *)(param_1 + 0x10),param_3);
     g_btlMain[1] = *puVar3;
     return;
   case 7:
-    puVar3 = (unsigned int *)FUN_0022a344(*(unsigned int *)(param_1 + 0x10),param_3);
+    puVar3 = (unsigned int *)asdListBoxGetItemText(*(unsigned int *)(param_1 + 0x10),param_3);
     g_btlMain[2] = *puVar3;
     return;
   default:

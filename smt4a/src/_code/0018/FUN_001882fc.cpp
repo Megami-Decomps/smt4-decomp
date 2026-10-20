@@ -19,7 +19,7 @@ typedef struct Owner {
     /* 0x1C */ ItemList list;
 } Owner;
 
-void FUN_0019c8c0(u32 handle);
+void resOwnerRunNodeHandlers(u32 handle);
 
 /* Releases the handle of every item in the list that has bit 1 set. */
 void FUN_001882fc(Owner *owner)
@@ -34,7 +34,7 @@ void FUN_001882fc(Owner *owner)
         do {
             item = list->items[i];
             if ((item->flags & 2) != 0) {
-                FUN_0019c8c0(item->handle);
+                resOwnerRunNodeHandlers(item->handle);
             }
             i = i + 1;
         } while (i < list->count);

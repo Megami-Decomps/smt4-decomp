@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_0017fd20(...);
-int FUN_00188b60(...);
-int FUN_001a089c(...);
+int nn_os_CriticalSection_Initialize(...);
+int nn_os_LightEvent_Initialize(...);
 int FUN_001a2420(...);
 int FUN_002e3140(...);
 int FUN_002fb0d4(...);
@@ -32,12 +32,12 @@ extern unsigned char LAB_00100df3; /* 0x100df3 */
 extern int FUN_001a26e4(...); /* 0x1a26e4 */
 
 /* Supplied declaration required: FUN_0017fd20. */
-/* Supplied declaration required: FUN_00188b60. */
+/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
 extern int nngxCheckVramBank(void);
-/* Supplied declaration required: FUN_001a089c. */
+/* Supplied declaration required: nn_os_LightEvent_Initialize. */
 /* Supplied declaration required: FUN_001a2420. */
 extern int FUN_001a2a3c(void);
-extern unsigned int FUN_001a2a5c(void);
+extern unsigned int nn_gxlow_CTR_GetGpu(void);
 /* Supplied declaration required: FUN_002e3140. */
 /* Supplied declaration required: FUN_002fb0d4. */
 extern unsigned int nn_gxlow_CTR_Gpu_RegisterInterruptRelayQueue(unsigned int, unsigned int, unsigned int, unsigned int, int *);
@@ -64,7 +64,7 @@ void FUN_0018b28c(int param_1)
   
   puVar1 = (unsigned char *)&temp_v2;
   temp_v4 = 0;
-  FUN_00188b60();
+  nn_os_CriticalSection_Initialize();
   nn_os_CriticalSection_Enter(param_1);
   *(unsigned int *)(param_1 + 0x10) = 0;
   *(unsigned int *)(param_1 + 0x14) = 0;
@@ -89,8 +89,8 @@ void FUN_0018b28c(int param_1)
   }
   *(unsigned char *)(param_1 + 0x77) = 0;
   *(unsigned char *)(param_1 + 0x76) = 0;
-  FUN_001a089c(param_1 + 100,0);
-  temp_v2 = FUN_001a2a5c();
+  nn_os_LightEvent_Initialize(param_1 + 100,0);
+  temp_v2 = nn_gxlow_CTR_GetGpu();
   temp_v0 = nngxCheckVramBank();
   if (temp_v0 == 0) {
     temp_v1 = 1;

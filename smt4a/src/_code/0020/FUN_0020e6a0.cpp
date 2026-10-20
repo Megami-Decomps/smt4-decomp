@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_002e3328(void);
+void asdOperatorDelete(void);
 s32 jobStop(u32 job, s32 flag);
 
 typedef struct Object Object;
@@ -41,7 +41,7 @@ void FUN_0020e6a0(void)
         task->stopped = 1;
         jobStop(task->job, 0);
         if (DAT_00588e2c != NULL) {
-            FUN_002e3328();
+            asdOperatorDelete();
             DAT_00588e2c = NULL;
         }
     }

@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_0017572c(int, int);
+int listAppendNode(int, int);
 int FUN_0019102c(int, int);
 int FUN_001912cc(int, unsigned int);
 
 extern int FUN_00175678(void);
-/* Supplied declaration required: FUN_0017572c. */
+/* Supplied declaration required: listAppendNode. */
 /* Supplied declaration required: FUN_0019102c. */
 extern unsigned int FUN_001911a4(int, unsigned int);
 /* Supplied declaration required: FUN_001912cc. */
@@ -29,7 +29,7 @@ void FUN_00173c1c(int param_1)
   *(unsigned int *)(temp_v1 + 0xc) = *(unsigned int *)(temp_v0 + 0x184);
   *(unsigned char *)(temp_v1 + 4) = 0x33;
   *(int *)(temp_v1 + 0x10) = param_1;
-  FUN_0017572c(temp_v0,temp_v1);
+  listAppendNode(temp_v0,temp_v1);
   temp_v2 = FUN_001911a4(temp_v0,1);
   FUN_001912cc(temp_v0,temp_v2);
   *(unsigned int *)(param_1 + 0x21c) = 0;

@@ -11,7 +11,7 @@ extern signed char DAT_005f1c60; /* 0x5f1c60 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-extern int FUN_00162e8c(void);
+extern int gameFlagsGetBlock(void);
 extern float *sub68OwnerGetBlock60(int);
 
 
@@ -38,7 +38,7 @@ void FUN_0048d67c(int param_1)
   unsigned int temp_v12;
   float temp_v13;
   
-  temp_v1 = FUN_00162e8c();
+  temp_v1 = gameFlagsGetBlock();
   pfVar3 = (float *)sub68OwnerGetBlock60(param_1 + 0x4cc);
   piVar7 = (int *)(param_1 + 0x204f8);
   piVar6 = (int *)(param_1 + 0x204fc);

@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0018719c(int);
-int FUN_003fd63c(...);
+int gameFlagIsSet(int);
+int gameFlagSetValue(...);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -54,9 +54,9 @@ extern union romwright_storage_s__V___0058126c_9_1 s__V___0058126c; /* 0x58126c 
 extern int g_gameState; /* 0x5f15fc */
 extern int DAT_005f1af8; /* 0x5f1af8 */
 
-extern int FUN_00162e8c(void);
-/* Supplied declaration required: FUN_0018719c. */
-/* Supplied declaration required: FUN_003fd63c. */
+extern int gameFlagsGetBlock(void);
+/* Supplied declaration required: gameFlagIsSet. */
+/* Supplied declaration required: gameFlagSetValue. */
 
 
 void FUN_00295434(void)
@@ -79,10 +79,10 @@ void FUN_00295434(void)
       }
     }
     else {
-      temp_v1 = FUN_00162e8c();
-      temp_v2 = FUN_0018719c(0x11f6);
+      temp_v1 = gameFlagsGetBlock();
+      temp_v2 = gameFlagIsSet(0x11f6);
       if ((temp_v2 == 0) && (DAT_005f1af8 >= 2)) {
-        temp_v3 = FUN_0018719c(0x4c9);
+        temp_v3 = gameFlagIsSet(0x4c9);
         temp_v4 = DAT_005811a0;
         temp_v2 = DAT_00581090;
         piVar1 = g_popupState;
@@ -99,13 +99,13 @@ void FUN_00295434(void)
         piVar1 = g_popupState;
         g_popupState[1] = 0;
         *piVar1 = 5;
-        FUN_003fd63c(0x11f6,1,1,temp_v1);
+        gameFlagSetValue(0x11f6,1,1,temp_v1);
         return;
       }
-      temp_v2 = FUN_0018719c(0x11f4);
+      temp_v2 = gameFlagIsSet(0x11f4);
       if ((temp_v2 == 0) && (DAT_005f1af8 >= 4)) {
         if (*(char *)(temp_v1 + 0xd8e) == '\f') {
-          temp_v4 = FUN_0018719c(0x4c9);
+          temp_v4 = gameFlagIsSet(0x4c9);
           temp_v2 = DAT_00581228;
           temp_v0 = (*(unsigned int *)&s__V___2_00581118.u1[0]);
           piVar1 = g_popupState;
@@ -122,14 +122,14 @@ void FUN_00295434(void)
           piVar1 = g_popupState;
           g_popupState[1] = 0;
           *piVar1 = 5;
-          FUN_003fd63c(0x11f4,1,1,temp_v1);
+          gameFlagSetValue(0x11f4,1,1,temp_v1);
           return;
         }
-        FUN_003fd63c(0x11f4,1);
+        gameFlagSetValue(0x11f4,1);
       }
-      temp_v2 = FUN_0018719c(0x11f7);
+      temp_v2 = gameFlagIsSet(0x11f7);
       if ((temp_v2 == 0) && (DAT_005f1af8 >= 6)) {
-        temp_v3 = FUN_0018719c(0x4c9);
+        temp_v3 = gameFlagIsSet(0x4c9);
         temp_v4 = DAT_005811e4;
         temp_v2 = DAT_005810d4;
         piVar1 = g_popupState;
@@ -146,16 +146,16 @@ void FUN_00295434(void)
         piVar1 = g_popupState;
         g_popupState[1] = 0;
         *piVar1 = 5;
-        FUN_003fd63c(0x11f7,1,1,temp_v1);
+        gameFlagSetValue(0x11f7,1,1,temp_v1);
         return;
       }
-      temp_v4 = FUN_0018719c(0x11f8);
+      temp_v4 = gameFlagIsSet(0x11f8);
       temp_v2 = temp_v4;
       if (temp_v4 == 0) {
         temp_v2 = g_gameState;
       }
       if (temp_v4 == 0 && temp_v2 == 0x1f) {
-        FUN_0018719c(0x4c9);
+        gameFlagIsSet(0x4c9);
         temp_v0 = (*(unsigned int *)&s__V___0058126c.u1[0]);
         piVar1 = g_popupState;
         g_popupState[7] = (int)s_I012002_0058122c;
@@ -164,7 +164,7 @@ void FUN_00295434(void)
         piVar1 = g_popupState;
         g_popupState[1] = 0;
         *piVar1 = 5;
-        FUN_003fd63c(0x11f8,1,1,temp_v1);
+        gameFlagSetValue(0x11f8,1,1,temp_v1);
         return;
       }
     }

@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_00188b60(...);
-int FUN_001a089c(...);
+int nn_os_CriticalSection_Initialize(...);
+int nn_os_LightEvent_Initialize(...);
 int emptyStub_002f4370(...);
 int FUN_002f5020(...);
 
@@ -36,8 +36,8 @@ extern unsigned char DAT_0064606e; /* 0x64606e */
 extern unsigned int DAT_00646070; /* 0x646070 */
 extern unsigned int DAT_00646074; /* 0x646074 */
 
-/* Supplied declaration required: FUN_00188b60. */
-/* Supplied declaration required: FUN_001a089c. */
+/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
+/* Supplied declaration required: nn_os_LightEvent_Initialize. */
 /* Supplied declaration required: emptyStub_002f4370. */
 /* Supplied declaration required: FUN_002f5020. */
 
@@ -59,10 +59,10 @@ void FUN_00511fb8(unsigned int *param_1)
   DAT_00646034 = 0;
   DAT_00646038 = 0;
   DAT_0064603c = 0;
-  FUN_00188b60(&DAT_0064603c,FUN_0042d1cc,0x100000);
+  nn_os_CriticalSection_Initialize(&DAT_0064603c,FUN_0042d1cc,0x100000);
   DAT_00646048 = 0;
   DAT_0064604c = 0;
-  FUN_001a089c(&DAT_00646048,0);
+  nn_os_LightEvent_Initialize(&DAT_00646048,0);
   DAT_00646050 = 0;
   DAT_00646054 = 0;
   DAT_00646058 = 0;

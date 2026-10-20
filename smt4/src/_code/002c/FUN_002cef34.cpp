@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002bd420(...);
+int memCopy(...);
 
 typedef struct fn_002cef34_arg0 fn_002cef34_arg0;
 struct fn_002cef34_arg0 {
@@ -39,7 +39,7 @@ typedef struct {
 
 extern int DAT_0043e2ac; /* 0x43e2ac */
 
-/* Supplied declaration required: FUN_002bd420. */
+/* Supplied declaration required: memCopy. */
 
 
 void FUN_002cef34(fn_002cef34_arg0 *param_1)
@@ -76,13 +76,13 @@ LAB_002cefa0:
             temp_v0 = DAT_0043e2ac + temp_v1 * 0x4c + 0x24814;
           }
           if (temp_v3 - temp_v2 < 0xc) {
-            FUN_002bd420(temp_v0,DAT_0043e2ac + (temp_v3 - temp_v2) * 0x4c + 0x24814,0x4c);
+            memCopy(temp_v0,DAT_0043e2ac + (temp_v3 - temp_v2) * 0x4c + 0x24814,0x4c);
           }
           temp_v2 = temp_v2 + 1;
         }
         temp_v2 = DAT_0043e2ac + 0x88;
       }
-      FUN_002bd420(param_1,temp_v2 + 0x2478c,0x4c);
+      memCopy(param_1,temp_v2 + 0x2478c,0x4c);
       return;
     }
   }

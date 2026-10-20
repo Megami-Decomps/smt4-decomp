@@ -11,10 +11,10 @@ int FUN_0025cc8c(void);
 int FUN_00290994(...);
 int FUN_0029a17c(...);
 int FUN_002b6db0(...);
-int FUN_002b9024(void);
+int devilGetRecord(void);
 
 int FUN_0028cfd8(void);
-int FUN_0028d2e8(...);
+int listGetU16OrZero(...);
 int btlGetMainState(void);
 int FUN_002b6c34(...);
 int FUN_002bce00(...);
@@ -23,7 +23,7 @@ int FUN_002be370(...);
 int FUN_002be5a4(...);
 int FUN_002be624(...);
 int FUN_002be650(...);
-int FUN_002beda4(...);
+int vec2GetXInt(...);
 int FUN_002bf288(...);
 int FUN_002bf4f8(...);
 int FUN_002bf538(void);
@@ -73,10 +73,10 @@ extern int FUN_0025cc54(void);
 /* Supplied declaration required: FUN_0025cc8c. */
 /* Supplied declaration required: FUN_0028cfd8. */
 extern short FUN_0028d24c(void);
-/* Supplied declaration required: FUN_0028d2e8. */
+/* Supplied declaration required: listGetU16OrZero. */
 extern unsigned int FUN_0028fb40(int);
 /* Supplied declaration required: FUN_00290994. */
-extern int padIsButtonDown(int);
+extern int flagBitIsSet(int);
 /* Supplied declaration required: btlGetMainState. */
 extern int FUN_00297ca4(int, unsigned int);
 /* Supplied declaration required: FUN_0029a17c. */
@@ -87,23 +87,23 @@ extern int FUN_0029d65c(int);
 extern int FUN_0029ee54(unsigned int);
 extern int FUN_0029efa8(unsigned int);
 extern int FUN_0029efc0(unsigned int);
-extern int FUN_002a8740(int);
-extern int FUN_002a8764(void);
+extern int gameGetUnitRecord(int);
+extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_002b6c34. */
 /* Supplied declaration required: FUN_002b6db0. */
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: FUN_002bce00. */
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: FUN_002be370. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002be650. */
-extern int FUN_002bed98(int);
-/* Supplied declaration required: FUN_002beda4. */
+extern int vec2GetYInt(int);
+/* Supplied declaration required: vec2GetXInt. */
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf4f8. */
 /* Supplied declaration required: FUN_002bf538. */
-extern int FUN_002c09d0(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 
 
 void FUN_0025d1c4(int param_1)
@@ -180,8 +180,8 @@ void FUN_0025d1c4(int param_1)
     temp_v23 = 1;
   }
   temp_v22 = FUN_00297ca4(param_1,0);
-  temp_v6 = FUN_002beda4();
-  temp_v7 = FUN_002bed98(param_1 + 0x12b8);
+  temp_v6 = vec2GetXInt();
+  temp_v7 = vec2GetYInt(param_1 + 0x12b8);
   temp_v5 = 0;
   temp_v21 = 0;
   temp_v8 = FUN_0029efc0(*temp_v20);
@@ -212,7 +212,7 @@ void FUN_0025d1c4(int param_1)
                   temp_v15 = 0;
                   temp_v14 = temp_v8 + temp_v16;
                   do {
-                    temp_v11 = padIsButtonDown(temp_v15 + 0x2e);
+                    temp_v11 = flagBitIsSet(temp_v15 + 0x2e);
                     if (temp_v11 != 0) {
                       if (temp_v14 == temp_v10) {
                         temp_v21 = 1;
@@ -296,7 +296,7 @@ void FUN_0025d1c4(int param_1)
             temp_v5 = btlGetMainState();
             if ((*(unsigned int *)(temp_v5 + 0x44a8) & 0x40) != 0) {
               temp_v13 = btlGetMainState();
-              temp_v1 = FUN_0028d2e8(temp_v13,temp_v8 + temp_v16);
+              temp_v1 = listGetU16OrZero(temp_v13,temp_v8 + temp_v16);
             }
             else {
               btlGetMainState();
@@ -333,8 +333,8 @@ void FUN_0025d1c4(int param_1)
           if (*(int *)(temp_v2 + 0x5c) != 0) {
             temp_v0 = 1;
             temp_v25 = 0;
-            temp_v10 = FUN_002a8764();
-            temp_v10 = FUN_002a8740((int)*(char *)(*(int *)(temp_v2 + 0x5c) + temp_v10 + 0x9107));
+            temp_v10 = gameGetSlotTable();
+            temp_v10 = gameGetUnitRecord((int)*(char *)(*(int *)(temp_v2 + 0x5c) + temp_v10 + 0x9107));
             temp_v14 = temp_v8 + temp_v16;
             if (temp_v14 != 0) {
               temp_v5 = btlGetMainState();
@@ -358,7 +358,7 @@ void FUN_0025d1c4(int param_1)
             }
             else {
               temp_v15 = (unsigned int)*(unsigned short *)(temp_v10 + 0x46);
-              FUN_002b9024();
+              devilGetRecord();
               if (*(char *)(temp_v15 + 10) != '\x01') {
                 FUN_002be624(temp_v19,&LAB_0025d64c,&LAB_0025d650);
               }
@@ -421,7 +421,7 @@ void FUN_0025d1c4(int param_1)
               temp_v5 = (int)temp_v1;
               temp_v0 = 0;
             }
-            temp_v14 = FUN_002c09d0(0x525);
+            temp_v14 = gameFlagIsSet(0x525);
             if (temp_v14 != 0) {
               if (temp_v10 == 0) {
                 temp_v21 = 1;
@@ -510,9 +510,9 @@ void FUN_0025d1c4(int param_1)
   FUN_0029a17c((int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v8 + 8) + temp_v6,
                (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v8 + 10) + temp_v7,
                (int)**(short **)(temp_v8 + 0xc),(int)(*(short **)(temp_v8 + 0xc))[1],1);
-  temp_v4 = FUN_002bed98(param_1 + 0x6b0);
+  temp_v4 = vec2GetYInt(param_1 + 0x6b0);
   temp_v1 = *(short *)(temp_v3 + 10);
-  temp_v8 = FUN_002beda4(param_1 + 0x6b0);
+  temp_v8 = vec2GetXInt(param_1 + 0x6b0);
   FUN_002bf288(2,0x15,0x9c,temp_v8 + temp_v6 + (int)*(short *)(temp_v3 + 8),temp_v4 + temp_v7 + (int)temp_v1,
                0x6f);
   temp_v4 = g_titleScene;
@@ -534,7 +534,7 @@ void FUN_0025d1c4(int param_1)
             temp_v17 = 0;
             temp_v18 = temp_v17;
             do {
-              temp_v4 = padIsButtonDown(temp_v17 + 0x2e);
+              temp_v4 = flagBitIsSet(temp_v17 + 0x2e);
               if (temp_v4 != 0) {
                 if (temp_v18 == temp_v15) {
                   temp_v21 = 1;
@@ -632,7 +632,7 @@ void FUN_0025d1c4(int param_1)
       temp_v4 = btlGetMainState();
       if ((*(unsigned int *)(temp_v4 + 0x44a8) & 0x40) != 0) {
         temp_v13 = btlGetMainState();
-        temp_v1 = FUN_0028d2e8(temp_v13,temp_v15);
+        temp_v1 = listGetU16OrZero(temp_v13,temp_v15);
       }
       else {
         btlGetMainState();
@@ -670,8 +670,8 @@ void FUN_0025d1c4(int param_1)
     if (*(int *)(temp_v2 + 0x5c) != 0) {
       temp_v13 = 0;
       temp_v0 = 1;
-      temp_v4 = FUN_002a8764();
-      temp_v4 = FUN_002a8740((int)*(char *)(*(int *)(temp_v2 + 0x5c) + temp_v4 + 0x9107));
+      temp_v4 = gameGetSlotTable();
+      temp_v4 = gameGetUnitRecord((int)*(char *)(*(int *)(temp_v2 + 0x5c) + temp_v4 + 0x9107));
       if (temp_v15 != 0) {
         temp_v4 = btlGetMainState();
         if ((*(unsigned int *)(temp_v4 + 0x44a8) & 0x40) != 0) {
@@ -693,7 +693,7 @@ void FUN_0025d1c4(int param_1)
       }
       else {
         temp_v15 = (unsigned int)*(unsigned short *)(temp_v4 + 0x46);
-        FUN_002b9024();
+        devilGetRecord();
         if (*(char *)(temp_v15 + 10) != '\x01') {
           FUN_002be624(temp_v19,&LAB_0025e4d8,&LAB_0025e4dc);
         }

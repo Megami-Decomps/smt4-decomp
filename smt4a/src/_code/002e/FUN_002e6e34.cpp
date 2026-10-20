@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002eaa50(unsigned int);
+int onlineMutexLockIfNeeded(unsigned int);
 
 extern unsigned char DAT_0055b294; /* 0x55b294 */
 
-/* Supplied declaration required: FUN_002eaa50. */
+/* Supplied declaration required: onlineMutexLockIfNeeded. */
 
 
 unsigned int * FUN_002e6e34(unsigned int *param_1,unsigned int param_2)
@@ -18,7 +18,7 @@ unsigned int * FUN_002e6e34(unsigned int *param_1,unsigned int param_2)
   param_1[2] = param_2;
   *param_1 = (unsigned int)&DAT_0055b294;
   *(unsigned char *)(param_1 + 1) = 1;
-  FUN_002eaa50(param_2);
+  onlineMutexLockIfNeeded(param_2);
   return param_1;
 }
 

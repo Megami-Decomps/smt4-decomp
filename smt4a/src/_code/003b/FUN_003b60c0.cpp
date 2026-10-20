@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_0018206c(unsigned int, unsigned int);
+extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 extern unsigned int FUN_002adba8(int);
 
 
@@ -16,7 +16,7 @@ void FUN_003b60c0(int param_1,int param_2)
   
   if (param_1 != 0) {
     temp_v0 = FUN_002adba8(param_2);
-    temp_v1 = FUN_0018206c(0x2e,temp_v0);
+    temp_v1 = asdTMTexTableNodeIsLoaded(0x2e,temp_v0);
     if (temp_v1 == 0) {
       param_1 = param_1 + param_2 * 4;
       temp_v1 = *(int *)(param_1 + 0x94);

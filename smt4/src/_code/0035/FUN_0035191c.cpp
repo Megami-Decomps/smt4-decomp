@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_0034f050(unsigned int *);
-int FUN_003516c0(void);
+int mobiclipDeblockerRelease(unsigned int *);
+int mobiclipS4PlayerDestroy(void);
 int mwmofilterDeblockerRelease(unsigned int);
 int software_interrupt(int);
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_0034f050. */
-/* Supplied declaration required: FUN_003516c0. */
+/* Supplied declaration required: mobiclipDeblockerRelease. */
+/* Supplied declaration required: mobiclipS4PlayerDestroy. */
 /* Supplied declaration required: mwmofilterDeblockerRelease. */
 extern void nn_os_Thread_FinalizeImpl(unsigned int);
 
@@ -23,9 +23,9 @@ int FUN_0035191c(int param_1)
   unsigned int *puVar1;
   int *piVar2;
   
-  FUN_003516c0();
+  mobiclipS4PlayerDestroy();
   puVar1 = (unsigned int *)(param_1 + 0x158);
-  FUN_0034f050(puVar1);
+  mobiclipDeblockerRelease(puVar1);
   mwmofilterDeblockerRelease(*puVar1);
   *puVar1 = 0;
   piVar2 = (int *)(param_1 + 0x28);

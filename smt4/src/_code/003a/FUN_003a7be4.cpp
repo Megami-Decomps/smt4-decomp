@@ -14,7 +14,7 @@ int FUN_0029cc44(int);
 int FUN_0029ee6c(int, int);
 int FUN_002a0cb0(void);
 int FUN_002a0cc8(int);
-int FUN_002b8838(void);
+int buttonHelpSetPreset(void);
 
 /* stack frame of param_1: 17 slot(s), 39 byte(s) */
 typedef struct {
@@ -50,7 +50,7 @@ extern int FUN_002973d8(void);
 /* Supplied declaration required: FUN_0029ee6c. */
 /* Supplied declaration required: FUN_002a0cb0. */
 /* Supplied declaration required: FUN_002a0cc8. */
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 extern unsigned short *FUN_003ad6e0(unsigned short);
 
 
@@ -120,7 +120,7 @@ void FUN_003a7be4(int param_1)
       FUN_0022d434(param_1);
     }
     FUN_002a0cb0();
-    FUN_002b8838();
+    buttonHelpSetPreset();
     FUN_002a0cc8(0);
     if (*(short *)(param_1 + 0x5a8) < 1) {
       if (*(char *)(param_1 + 0x5a4) == '\0') {

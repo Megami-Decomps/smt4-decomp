@@ -8,9 +8,9 @@ int FUN_001317c8(unsigned char *, unsigned char *);
 int FUN_00131898(unsigned char *, unsigned char *);
 int FUN_0014162c(unsigned char *, unsigned char *);
 int FUN_002b4504(unsigned char *, unsigned char *);
-int FUN_002b45e8(void);
-int FUN_002b4670(void);
-int FUN_002b46f8(unsigned char *, unsigned int, unsigned int, int, unsigned char *);
+int dataTable08Sub2GetRecord(void);
+int dataTable08Sub1GetRecord(void);
+int libc_bsearch(unsigned char *, unsigned int, unsigned int, int, unsigned char *);
 
 /* stack frame of param_2: 4 slot(s), 10 byte(s) */
 typedef struct {
@@ -34,9 +34,9 @@ extern unsigned char *g_aocSystem; /* 0x433158 */
 /* Supplied declaration required: FUN_00131898. */
 /* Supplied declaration required: FUN_0014162c. */
 /* Supplied declaration required: FUN_002b4504. */
-/* Supplied declaration required: FUN_002b45e8. */
-/* Supplied declaration required: FUN_002b4670. */
-/* Supplied declaration required: FUN_002b46f8. */
+/* Supplied declaration required: dataTable08Sub2GetRecord. */
+/* Supplied declaration required: dataTable08Sub1GetRecord. */
+/* Supplied declaration required: libc_bsearch. */
 extern int FUN_002b4748(void);
 extern unsigned int dataTableGetCount(int);
 extern unsigned int dataTableGetEntries(void);
@@ -80,7 +80,7 @@ unsigned char * FUN_002be650(unsigned char *param_1,int param_2)
       temp_v2 = dataTableGetEntries();
       temp_v3 = dataTableGetCount(temp_v1);
       puVar3 = temp_v5;
-      FUN_002b46f8(puVar3,temp_v2,temp_v3,0x58,&LAB_00138944);
+      libc_bsearch(puVar3,temp_v2,temp_v3,0x58,&LAB_00138944);
     }
     if (puVar3 == (unsigned char *)0x0) {
       return (unsigned char *)0x0;
@@ -90,7 +90,7 @@ unsigned char * FUN_002be650(unsigned char *param_1,int param_2)
     }
     return puVar3 + 0x20;
   case 1:
-    FUN_002b4670();
+    dataTable08Sub1GetRecord();
     puVar3 = param_1;
     if (puVar3 == (unsigned char *)0x0) {
       return (unsigned char *)0x0;
@@ -106,7 +106,7 @@ unsigned char * FUN_002be650(unsigned char *param_1,int param_2)
   case 6:
   case 7:
   case 8:
-    FUN_002b45e8();
+    dataTable08Sub2GetRecord();
     puVar3 = param_1;
     if (puVar3 == (unsigned char *)0x0) {
       return (unsigned char *)0x0;
@@ -125,7 +125,7 @@ unsigned char * FUN_002be650(unsigned char *param_1,int param_2)
       temp_v2 = dataTableGetEntries();
       temp_v3 = dataTableGetCount(temp_v1);
       puVar3 = temp_v4;
-      FUN_002b46f8(puVar3,temp_v2,temp_v3,0x3c,&LAB_00125e54);
+      libc_bsearch(puVar3,temp_v2,temp_v3,0x3c,&LAB_00125e54);
     }
     break;
   case 10:
@@ -139,7 +139,7 @@ unsigned char * FUN_002be650(unsigned char *param_1,int param_2)
       temp_v2 = dataTableGetEntries();
       temp_v3 = dataTableGetCount(temp_v1);
       puVar3 = temp_v5;
-      FUN_002b46f8(puVar3,temp_v2,temp_v3,0x30,&LAB_0012654c);
+      libc_bsearch(puVar3,temp_v2,temp_v3,0x30,&LAB_0012654c);
     }
     break;
   case 0xb:
@@ -152,7 +152,7 @@ unsigned char * FUN_002be650(unsigned char *param_1,int param_2)
       temp_v2 = dataTableGetEntries();
       temp_v3 = dataTableGetCount(temp_v1);
       puVar3 = temp_v4;
-      FUN_002b46f8(puVar3,temp_v2,temp_v3,0x2c,&LAB_001264b4);
+      libc_bsearch(puVar3,temp_v2,temp_v3,0x2c,&LAB_001264b4);
     }
     break;
   default:

@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002a5ed0(...);
+int asdTMTexTableLoadEntryAsync(...);
 int FUN_002a5ee4(...);
 int FUN_002a60cc(...);
 int FUN_002a880c(...);
-int FUN_002ae898(...);
+int asdTMTexTableReleaseNode(...);
 
 typedef struct fn_002aeb38_arg0 fn_002aeb38_arg0;
 struct fn_002aeb38_arg0 {
@@ -37,12 +37,12 @@ typedef struct {
 
 extern int g_aocSystem; /* 0x433158 */
 
-/* Supplied declaration required: FUN_002a5ed0. */
+/* Supplied declaration required: asdTMTexTableLoadEntryAsync. */
 /* Supplied declaration required: FUN_002a5ee4. */
-extern int FUN_002a60b4(unsigned int);
+extern int asdTMTexTableNodeIsLoaded(unsigned int);
 /* Supplied declaration required: FUN_002a60cc. */
 /* Supplied declaration required: FUN_002a880c. */
-/* Supplied declaration required: FUN_002ae898. */
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
 extern int FUN_002ae98c(int, unsigned int, int, unsigned int);
 extern int FUN_002c1d5c(void);
 
@@ -56,7 +56,7 @@ void FUN_002aeb38(fn_002aeb38_arg0 *param_1,int param_2,int param_3)
   if (param_1->field_0x14 != param_2) {
     if (param_1->field_0x7c != 0) {
       if (param_1->field_0x84 != -1) {
-        FUN_002ae898(param_1->field_0x10);
+        asdTMTexTableReleaseNode(param_1->field_0x10);
         FUN_002a60cc(g_aocSystem,param_1->field_0x10,param_1->field_0x84);
         param_1->field_0x84 = -1;
         param_1->field_0x80 = 0;
@@ -64,7 +64,7 @@ void FUN_002aeb38(fn_002aeb38_arg0 *param_1,int param_2,int param_3)
       param_1->field_0x14 = param_2;
     }
     else if (param_1->field_0x8d == 0) {
-      if ((param_1->field_0x14 != -1) && (temp_v0 = FUN_002a60b4(param_1->field_0x10), temp_v0 == 0)) {
+      if ((param_1->field_0x14 != -1) && (temp_v0 = asdTMTexTableNodeIsLoaded(param_1->field_0x10), temp_v0 == 0)) {
         if (param_1->field_0x18 == -1) {
           param_1->field_0x18 = param_2;
         }
@@ -72,7 +72,7 @@ void FUN_002aeb38(fn_002aeb38_arg0 *param_1,int param_2,int param_3)
       }
       if (((param_1->field_0x30 == 0) || (param_1->field_0x28 == 0.0f)) && (param_1->field_0xc != 0))
       {
-        FUN_002ae898(param_1->field_0x10,param_1->field_0x14);
+        asdTMTexTableReleaseNode(param_1->field_0x10,param_1->field_0x14);
         FUN_002a60cc(g_aocSystem,param_1->field_0x10,param_1->field_0x14);
         param_1->field_0xc = 0;
       }
@@ -93,7 +93,7 @@ void FUN_002aeb38(fn_002aeb38_arg0 *param_1,int param_2,int param_3)
         }
         else {
           temp_v0 = param_1->field_0x10;
-          FUN_002a5ed0(temp_v0,param_1->field_0x14);
+          asdTMTexTableLoadEntryAsync(temp_v0,param_1->field_0x14);
         }
         param_1->field_0xc = temp_v0;
         if (param_1->field_0x80 != 0) {

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002eeaf0(unsigned int, int *);
+int streamReaderReadU64(unsigned int, int *);
 int FUN_002f6ed2(unsigned int, int *);
 
 /* stack frame of param_4: 4 slot(s), 16 byte(s) */
@@ -19,7 +19,7 @@ typedef struct {
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: FUN_002eeaf0. */
+/* Supplied declaration required: streamReaderReadU64. */
 /* Supplied declaration required: FUN_002f6ed2. */
 
 
@@ -36,7 +36,7 @@ unsigned long long FUN_003026bc(unsigned int param_1,unsigned int param_2,unsign
   temp_v1 = param_2;
   temp_v2 = param_3;
   temp_v3 = param_4;
-  FUN_002eeaf0(param_1,&temp_v2);
+  streamReaderReadU64(param_1,&temp_v2);
   temp_v1 = temp_v3;
   temp_v0 = temp_v2;
   FUN_002f6ed2(param_2,&temp_v0);

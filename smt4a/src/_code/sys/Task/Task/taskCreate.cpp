@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdMemoryAlloc(int, int, int, int, int);
-int FUN_002e6dd4(unsigned short *, int);
+int rt_memclr(unsigned short *, int);
 
 /* stack frame of param_9: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -19,7 +19,7 @@ extern unsigned int DAT_0061998c; /* 0x61998c */
 extern unsigned int DAT_00619990; /* 0x619990 */
 
 /* Supplied declaration required: asdMemoryAlloc. */
-/* Supplied declaration required: FUN_002e6dd4. */
+/* Supplied declaration required: rt_memclr. */
 
 
 void taskCreate(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
@@ -109,7 +109,7 @@ void taskCreate(unsigned int param_1,unsigned int param_2,unsigned int param_3,u
     }
     (&DAT_00619990)[param_7 * 4] = (&DAT_00619990)[param_7 * 4] + 1;
     if (param_9 != 0) {
-      FUN_002e6dd4(puVar2 + 0x1a,param_6);
+      rt_memclr(puVar2 + 0x1a,param_6);
     }
   }
   return;

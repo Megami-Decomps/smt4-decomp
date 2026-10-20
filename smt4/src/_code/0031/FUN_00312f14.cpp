@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002451ac(unsigned int, int);
+int btlMainGetDataTable(unsigned int, int);
 int scrSetResult(unsigned int);
 int scrGetArg(int);
 int FUN_002ad8b4(unsigned short *, int);
@@ -20,7 +20,7 @@ typedef struct {
 } void_stack;
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_002451ac. */
+/* Supplied declaration required: btlMainGetDataTable. */
 /* Supplied declaration required: scrSetResult. */
 extern unsigned int btlGetMainState(void);
 /* Supplied declaration required: scrGetArg. */
@@ -57,11 +57,11 @@ unsigned int FUN_00312f14(void)
   temp_v1 = scrGetArg(0);
   scrGetArg(1);
   temp_v2 = btlGetMainState();
-  temp_v2 = FUN_002451ac(temp_v2,6);
+  temp_v2 = btlMainGetDataTable(temp_v2,6);
   temp_v3 = dataTableGetEntries();
   dataTableGetCount(temp_v2);
   temp_v2 = btlGetMainState();
-  FUN_002451ac(temp_v2,7);
+  btlMainGetDataTable(temp_v2,7);
   temp_v4 = dataTableGetEntries();
   FUN_002ad8b4(&temp_v13,temp_v4 + temp_v1 * 8);
   psVar6 = (short *)(temp_v3 + temp_v1 * 8);

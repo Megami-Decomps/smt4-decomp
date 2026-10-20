@@ -8,7 +8,7 @@ int FUN_00288790(...);
 int FUN_002b05d0(int);
 int FUN_002b6758(...);
 int FUN_002ba12c(int);
-int FUN_002be304(void);
+int drawSetColorFromRGBA8(void);
 int FUN_002be5a4(...);
 int FUN_002be624(...);
 int FUN_002bed3c(void);
@@ -40,7 +40,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002b05d0. */
 /* Supplied declaration required: FUN_002b6758. */
 /* Supplied declaration required: FUN_002ba12c. */
-/* Supplied declaration required: FUN_002be304. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002bed3c. */
@@ -123,7 +123,7 @@ void FUN_0033c72c(int param_1,int param_2,int param_3)
   temp_v5 = (unsigned int)((unsigned long long)temp_v19 >> 0x20);
   if (*(int *)(param_3 + 0x2c) != 0) {
     FUN_002b05d0((int)(short)*(unsigned int *)(param_3 + *(int *)(param_3 + 0x30) * 4));
-    FUN_002be304();
+    drawSetColorFromRGBA8();
   }
   temp_v13 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_002b6758((int)(short)*(unsigned int *)(param_3 + 0x3c),

@@ -8,9 +8,9 @@ int FUN_00109240(int, int, unsigned int, int);
 int FUN_0012df8a(unsigned char [8], int, int);
 int FUN_002e6e34(unsigned char [12], unsigned int);
 int FUN_002e6e5c(unsigned char [12]);
-int FUN_002e995c(unsigned char [32]);
+int onlineSockAddrConstruct(unsigned char [32]);
 int FUN_002ea852(int, unsigned int, unsigned char [4]);
-int FUN_002ea93c(...);
+int onlineUrlGetAddress(...);
 
 /* stack frame of param_4: 4 slot(s), 10 byte(s) */
 typedef struct {
@@ -25,12 +25,12 @@ extern int FUN_00123820(unsigned int);
 /* Supplied declaration required: FUN_0012df8a. */
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-extern int FUN_002e760a(unsigned int);
-/* Supplied declaration required: FUN_002e995c. */
-extern unsigned int FUN_002ea714(void);
+extern int operatorNew(unsigned int);
+/* Supplied declaration required: onlineSockAddrConstruct. */
+extern unsigned int onlineGetActiveLock(void);
 /* Supplied declaration required: FUN_002ea852. */
 extern unsigned char FUN_002ea928(unsigned int);
-/* Supplied declaration required: FUN_002ea93c. */
+/* Supplied declaration required: onlineUrlGetAddress. */
 extern unsigned int FUN_002ea948(unsigned char *, unsigned int, unsigned char);
 extern int FUN_002ea962(unsigned char *, unsigned int);
 
@@ -61,18 +61,18 @@ int FUN_002ea774(int param_1,unsigned int param_2,unsigned int param_3,unsigned 
   temp_v12 = param_2;
   uStack_1c = param_3;
   uStack_18 = param_4;
-  temp_v1 = FUN_002ea714();
+  temp_v1 = onlineGetActiveLock();
   FUN_002e6e34(temp_v8,temp_v1);
-  FUN_002e995c(temp_v7);
+  onlineSockAddrConstruct(temp_v7);
   temp_v2 = FUN_00123820(temp_v12);
   if (temp_v2 != 0) {
     temp_v5[0] = FUN_002ea928(temp_v12);
-    temp_v1 = FUN_002ea93c(temp_v12);
+    temp_v1 = onlineUrlGetAddress(temp_v12);
     temp_v2 = param_1 + 0x54;
     temp_v4 = temp_v2;
     FUN_002ea852(temp_v2,temp_v1,temp_v5);
     if (temp_v4 == 0) {
-      temp_v4 = FUN_002e760a(0x360);
+      temp_v4 = operatorNew(0x360);
       if (temp_v4 != 0) {
         FUN_00109240(temp_v4,param_1,temp_v12,param_1 + 0xa4);
       }
@@ -82,7 +82,7 @@ int FUN_002ea774(int param_1,unsigned int param_2,unsigned int param_3,unsigned 
       *(short *)(temp_v4 + 0x8e) = (short)param_3;
       temp_v0 = FUN_002ea928(temp_v12);
       temp_v6 = temp_v0;
-      temp_v1 = FUN_002ea93c(temp_v4 + 8);
+      temp_v1 = onlineUrlGetAddress(temp_v4 + 8);
       temp_v1 = FUN_002ea948(temp_v10,temp_v1,temp_v0);
       temp_v3 = FUN_002ea962(temp_v9,temp_v1);
       *(int *)(temp_v3 + 0x24) = temp_v4;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 int FUN_003e8bb0(unsigned char [4], int, unsigned int);
 int btlResetSlot(int, int, int);
 int FUN_003f2aac(...);
@@ -39,11 +39,11 @@ extern unsigned int DAT_005712b8; /* 0x5712b8 */
 extern unsigned int DAT_005712bc; /* 0x5712bc */
 extern unsigned int DAT_005712c0; /* 0x5712c0 */
 extern unsigned int DAT_005712c4; /* 0x5712c4 */
-extern unsigned int DAT_005712f0; /* 0x5712f0 */
+extern unsigned int g_btlActionReflect; /* 0x5712f0 */
 extern int DAT_00573808; /* 0x573808 */
-extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
+extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: dataTable04FindById. */
 extern int FUN_003e7adc(int);
 /* Supplied declaration required: FUN_003e8bb0. */
 /* Supplied declaration required: btlResetSlot. */
@@ -129,7 +129,7 @@ unsigned int FUN_004ddd10(int *param_1,unsigned int *param_2)
       param_2[2] = 5;
       break;
     }
-    FUN_004ab8e4(DAT_0057a9c8);
+    FUN_004ab8e4(g_btlUiBlock);
     temp_v4 = 6;
     param_2[2] = temp_v4;
     break;
@@ -159,7 +159,7 @@ unsigned int FUN_004ddd10(int *param_1,unsigned int *param_2)
         if (*(short *)(param_2[10] + 0x1be) == 2) {
           temp_v5 = (int)*(short *)(param_2[10] + 0x1c0);
           temp_v2 = temp_v5;
-          FUN_001aba54();
+          dataTable04FindById();
           temp_v0 = '\0';
           if (temp_v2 != 0) {
             temp_v0 = *(char *)(temp_v2 + 0x4d);
@@ -246,7 +246,7 @@ unsigned int FUN_004ddd10(int *param_1,unsigned int *param_2)
       else {
         temp_v5 = (int)*(short *)(param_2[10] + 0x1c0);
         temp_v2 = temp_v5;
-        FUN_001aba54();
+        dataTable04FindById();
         if ((*(short *)(temp_v2 + 0x86) != 0) && (temp_v2 = FUN_004c6b8c(param_2[8],temp_v5), temp_v2 == 0))
         {
           FUN_003f2aac(*param_1,(int)*(short *)(param_2[9] + 0x6a),0);
@@ -260,11 +260,11 @@ unsigned int FUN_004ddd10(int *param_1,unsigned int *param_2)
     FUN_003f2aac(*param_1,(int)*(short *)(param_2[9] + 0x6a),0);
     return 1;
   case 6:
-    temp_v2 = chainCountIdUnflagged(DAT_005712f0,param_2);
+    temp_v2 = chainCountIdUnflagged(g_btlActionReflect,param_2);
     if (0 < temp_v2) {
       return 0;
     }
-    temp_v2 = FUN_004ab8bc(DAT_0057a9c8);
+    temp_v2 = FUN_004ab8bc(g_btlUiBlock);
     if (temp_v2 == 0) {
       return 0;
     }

@@ -10,9 +10,9 @@ int FUN_0012055e(unsigned int, unsigned char **);
 int FUN_0012083e(...);
 int FUN_001304a8(...);
 int rt_malloc(...);
-int FUN_002e6e14(...);
-int FUN_002e9318(unsigned char [8]);
-int FUN_002e9598(unsigned int, unsigned int);
+int asdOperatorDeleteArray(...);
+int onlineStringDestroy(unsigned char [8]);
+int onlineStringAssign(unsigned int, unsigned int);
 int FUN_002f4cac(unsigned int);
 int FUN_00522bf4(unsigned int, unsigned int **);
 
@@ -77,10 +77,10 @@ extern unsigned char DAT_0055add0; /* 0x55add0 */
 /* Supplied declaration required: FUN_0012083e. */
 /* Supplied declaration required: FUN_001304a8. */
 /* Supplied declaration required: rt_malloc. */
-/* Supplied declaration required: FUN_002e6e14. */
-extern unsigned int FUN_002e9300(unsigned char *, unsigned char *);
-/* Supplied declaration required: FUN_002e9318. */
-/* Supplied declaration required: FUN_002e9598. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
+extern unsigned int onlineStringConstruct(unsigned char *, unsigned char *);
+/* Supplied declaration required: onlineStringDestroy. */
+/* Supplied declaration required: onlineStringAssign. */
 /* Supplied declaration required: FUN_002f4cac. */
 extern unsigned int FUN_00303928(unsigned char **, unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_00522bf4. */
@@ -146,9 +146,9 @@ void FUN_00432dd8(unsigned int param_1)
   
   *(unsigned int *)(param_1 + 8) = 0;
   temp_v45 = param_1;
-  temp_v2 = FUN_002e9300(temp_v43,&LAB_0043313c);
-  FUN_002e9598(param_1 + 0xc,temp_v2);
-  FUN_002e9318(temp_v43);
+  temp_v2 = onlineStringConstruct(temp_v43,&LAB_0043313c);
+  onlineStringAssign(param_1 + 0xc,temp_v2);
+  onlineStringDestroy(temp_v43);
   temp_v1 = temp_v45;
   *(unsigned short *)(temp_v45 + 0x14) = 0;
   temp_v37 = 0;
@@ -157,8 +157,8 @@ void FUN_00432dd8(unsigned int param_1)
   temp_v2 = FUN_00303928(temp_v20,3,(unsigned int *)&temp_v37);
   FUN_0011b272(temp_v1 + 0x38,temp_v2);
   temp_v20[0] = &DAT_0055a4c0;
-  FUN_002e6e14(temp_v21);
-  FUN_002e6e14(temp_v37);
+  asdOperatorDeleteArray(temp_v21);
+  asdOperatorDeleteArray(temp_v37);
   temp_v1 = temp_v45;
   temp_v37 = 0;
   temp_v38 = 0;
@@ -166,8 +166,8 @@ void FUN_00432dd8(unsigned int param_1)
   temp_v2 = FUN_00303928(temp_v20,3,(unsigned int *)&temp_v37);
   FUN_0011b272(temp_v1 + 0x4c,temp_v2);
   temp_v20[0] = &DAT_0055a4c0;
-  FUN_002e6e14(temp_v21);
-  FUN_002e6e14(temp_v37);
+  asdOperatorDeleteArray(temp_v21);
+  asdOperatorDeleteArray(temp_v37);
   *(unsigned int *)(temp_v45 + 0x60) = 0;
   *(unsigned short *)(temp_v45 + 100) = 0x5a;
   *(unsigned int *)(temp_v45 + 0x68) = 0;
@@ -179,7 +179,7 @@ void FUN_00432dd8(unsigned int param_1)
   for (puVar8 = temp_v40; puVar8 != puVar4; puVar8 = puVar8 + 2) {
     (**(romwright_code **)*puVar8)(puVar8);
   }
-  FUN_002e6e14(temp_v40);
+  asdOperatorDeleteArray(temp_v40);
   FUN_002f4cac(temp_v45 + 0x18);
   temp_v4 = 0;
   temp_v6 = 1;
@@ -372,7 +372,7 @@ void FUN_00432dd8(unsigned int param_1)
           for (; puVar8 != puVar4; puVar8 = puVar8 + 10) {
             (**(romwright_code **)*puVar8)(puVar8);
           }
-          FUN_002e6e14(*piVar10);
+          asdOperatorDeleteArray(*piVar10);
           *piVar10 = (int)temp_v19;
           *(unsigned int **)(temp_v1 + 0x7c) = temp_v19 + temp_v22 * 10 + 10;
           *(unsigned int **)(temp_v1 + 0x80) = temp_v19 + temp_v44 * 10;
@@ -409,8 +409,8 @@ void FUN_00432dd8(unsigned int param_1)
     piVar10 = (int *)temp_v8;
     while (temp_v8 = (unsigned int *)piVar10, piVar10 != (int *)0x0) {
       temp_v8 = (unsigned int *)*piVar10;
-      FUN_002e6e14(piVar10[2]);
-      FUN_002e6e14(piVar10);
+      asdOperatorDeleteArray(piVar10[2]);
+      asdOperatorDeleteArray(piVar10);
       piVar10 = (int *)temp_v8;
     }
   }

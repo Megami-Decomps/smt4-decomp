@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001e1a70(void);
 int FUN_002430c8(unsigned char *, int, unsigned char [200]);
 int FUN_002629f0(unsigned char *, int);
-int FUN_002bf694(unsigned char *, unsigned char [56]);
+int libc_strcpy(unsigned char *, unsigned char [56]);
 int rt_memcpy_w(unsigned int *, unsigned char *, int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -27,7 +27,7 @@ extern unsigned int DAT_004d8c20; /* 0x4d8c20 */
 /* Supplied declaration required: FUN_001e1a70. */
 /* Supplied declaration required: FUN_002430c8. */
 /* Supplied declaration required: FUN_002629f0. */
-/* Supplied declaration required: FUN_002bf694. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -51,7 +51,7 @@ unsigned char * FUN_0032465c(void)
     if (DAT_0044ea94 != (unsigned char *)0x0) {
       FUN_002629f0(DAT_0044ea94,3);
     }
-    FUN_002bf694(&DAT_004d8bd0,temp_v1);
+    libc_strcpy(&DAT_004d8bd0,temp_v1);
     FUN_001e1a70();
     DAT_0044ea94 = puVar1;
     rt_memcpy_w(&DAT_004d8c20,puVar1,0x80);

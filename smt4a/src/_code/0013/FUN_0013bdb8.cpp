@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_0014af84(void);
+extern int gameDataBlocksGetSaveData(void);
 
 
 int FUN_0013bdb8(short param_1)
@@ -17,7 +17,7 @@ int FUN_0013bdb8(short param_1)
   unsigned char temp_v3;
   unsigned short temp_v4;
   
-  temp_v1 = FUN_0014af84();
+  temp_v1 = gameDataBlocksGetSaveData();
   temp_v4 = *(short *)(temp_v1 + 0x2158a) + param_1;
   temp_v2 = temp_v1;
   if (temp_v4 < 900) {

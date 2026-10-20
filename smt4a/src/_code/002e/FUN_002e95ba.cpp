@@ -2,12 +2,12 @@
 
 extern "C" {
 
-void FUN_002fbb86(void);
+void onlineUrlGetText(void);
 
-/* Forwards to FUN_002fbb86. */
+/* Forwards to onlineUrlGetText. */
 void FUN_002e95ba(void)
 {
-    FUN_002fbb86();
+    onlineUrlGetText();
 }
 
 } /* extern "C" */

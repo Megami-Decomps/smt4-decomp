@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002e342c(unsigned int *, unsigned int);
+int libc_strcpy(unsigned int *, unsigned int);
 
 extern unsigned int DAT_005f1658; /* 0x5f1658 */
 extern unsigned int DAT_005f1660; /* 0x5f1660 */
 
 extern unsigned int scrGetArg(void);
-extern unsigned int FUN_002360dc(unsigned int);
-/* Supplied declaration required: FUN_002e342c. */
+extern unsigned int scrGetArgString(unsigned int);
+/* Supplied declaration required: libc_strcpy. */
 
 
 unsigned int FUN_00370228(void)
@@ -22,9 +22,9 @@ unsigned int FUN_00370228(void)
   unsigned int temp_v1;
   
   temp_v0 = scrGetArg();
-  temp_v1 = FUN_002360dc(1);
+  temp_v1 = scrGetArgString(1);
   DAT_005f1658 = temp_v0;
-  FUN_002e342c(&DAT_005f1660,temp_v1);
+  libc_strcpy(&DAT_005f1660,temp_v1);
   return 1;
 }
 

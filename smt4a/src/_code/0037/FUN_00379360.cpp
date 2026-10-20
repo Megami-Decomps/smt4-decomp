@@ -15,7 +15,7 @@ extern int DAT_005806d4; /* 0x5806d4 */
 extern int g_lmapScene; /* 0x581288 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_00162e8c(void);
+extern int gameFlagsGetBlock(void);
 extern int FUN_00376f94(void);
 
 
@@ -34,7 +34,7 @@ void FUN_00379360(void)
   float temp_v7;
   float temp_v8;
   
-  temp_v1 = FUN_00162e8c();
+  temp_v1 = gameFlagsGetBlock();
   temp_v2 = FUN_00376f94();
   if ((*(char *)(temp_v1 + 0x1664) != '\0') && (temp_v2 >= 100)) {
     temp_v8 = (float)VectorSignedToFloat((int)*(char *)(temp_v1 + 0x1665),(unsigned char)(in_fpscr >> 0x16) & 3);

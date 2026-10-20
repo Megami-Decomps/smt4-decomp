@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_002b9024(void);
+int devilGetRecord(void);
 int dataTableGetCount(unsigned int);
 
 extern unsigned int g_aocSystem; /* 0x433158 */
 
-extern int FUN_002b8fdc(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002b9024. */
+extern int entryListFindById(unsigned int, unsigned int);
+/* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: dataTableGetCount. */
 extern int dataTableGetEntries(void);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
@@ -26,10 +26,10 @@ int FUN_002bce30(int param_1,int param_2)
   int temp_v3;
   unsigned int temp_v4;
   
-  FUN_002b9024();
+  devilGetRecord();
   if (param_1 != 0) {
     temp_v4 = (unsigned int)*(unsigned char *)(param_1 + 2);
-    temp_v0 = FUN_002b8fdc(g_aocSystem,temp_v4);
+    temp_v0 = entryListFindById(g_aocSystem,temp_v4);
     if (temp_v0 == 0) {
       temp_v1 = dataTableGet(1,0);
       temp_v0 = dataTableGetEntries();
@@ -41,7 +41,7 @@ int FUN_002bce30(int param_1,int param_2)
     }
   }
   else {
-    temp_v0 = FUN_002b8fdc(g_aocSystem,0);
+    temp_v0 = entryListFindById(g_aocSystem,0);
     if (temp_v0 == 0) {
       temp_v1 = dataTableGet(1,0);
       temp_v0 = dataTableGetEntries();

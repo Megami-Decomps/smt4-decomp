@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00114504(void);
 int FUN_002ea704(void);
-int FUN_002eb588(int *);
+int onlineTimeGetNow(int *);
 int FUN_002f3490(...);
 int FUN_002fa434(...);
 int FUN_00300048(void);
@@ -21,7 +21,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00114504. */
 /* Supplied declaration required: FUN_002ea704. */
-/* Supplied declaration required: FUN_002eb588. */
+/* Supplied declaration required: onlineTimeGetNow. */
 extern int FUN_002eb5f4(void);
 extern unsigned long long FUN_002ecfe4(int);
 /* Supplied declaration required: FUN_002f3490. */
@@ -97,7 +97,7 @@ void FUN_001148a8(int param_1)
   temp_v1 = *(int *)(temp_v1 + 0xe4);
   temp_v3 = FUN_002ecfe4(param_1 + 0x80);
   *(unsigned long long *)(temp_v1 + 0x30) = temp_v3;
-  FUN_002eb588(&temp_v7);
+  onlineTimeGetNow(&temp_v7);
   *(unsigned int *)(temp_v1 + 0x2c) = temp_v8;
   *(unsigned int *)(temp_v1 + 0x28) = temp_v7;
   piVar3 = (int *)FUN_002ea704();

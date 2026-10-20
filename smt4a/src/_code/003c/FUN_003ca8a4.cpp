@@ -18,13 +18,13 @@ typedef struct SceneHolder {
     /* 0x08 */ Scene *scene;
 } SceneHolder;
 
-extern SceneHolder DAT_0057f588;
+extern SceneHolder g_messageMain;
 
 extern void FUN_0014e188(void *player, s32 animId, s32 loops, void *data, s32 count, f32 speed);
 
 u32 FUN_003ca8a4(void)
 {
-    Scene *scene = DAT_0057f588.scene;
+    Scene *scene = g_messageMain.scene;
 
     scene->mode = 2;
     scene->step = 0;

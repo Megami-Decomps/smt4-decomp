@@ -34,8 +34,8 @@ extern unsigned char LAB_002c8db8; /* 0x2c8db8 */
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164b5c. */
-extern int FUN_001654d8(int);
-extern int FUN_001654e4(int);
+extern int vec2GetXInt(int);
+extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
@@ -150,16 +150,16 @@ void FUN_002c8940(int param_1,int param_2)
   }
   efctSetSpeed();
   if (!((temp_v5 == 1 || temp_v5 == 2) || temp_v5 == 6)) {
-    temp_v6 = FUN_001654e4(temp_v1 + 0xb0);
+    temp_v6 = vec2GetYInt(temp_v1 + 0xb0);
     temp_v0 = *(short *)(temp_v8 + 10);
-    temp_v7 = FUN_001654d8(temp_v1 + 0xb0);
+    temp_v7 = vec2GetXInt(temp_v1 + 0xb0);
     FUN_001835b4(2,0x1a,0x3e,temp_v7 + param_1 + (int)*(short *)(temp_v8 + 8),
                  temp_v6 + param_2 + (int)temp_v0,0x83);
   }
   else {
-    temp_v6 = FUN_001654e4(temp_v1 + 0xb0);
+    temp_v6 = vec2GetYInt(temp_v1 + 0xb0);
     temp_v0 = *(short *)(temp_v8 + 10);
-    temp_v7 = FUN_001654d8(temp_v1 + 0xb0);
+    temp_v7 = vec2GetXInt(temp_v1 + 0xb0);
     FUN_001835b4(2,0x1a,0x27e,temp_v7 + param_1 + (int)*(short *)(temp_v8 + 8),
                  temp_v6 + param_2 + (int)temp_v0,0x83);
   }

@@ -14,14 +14,14 @@ typedef struct Holder {
     /* 0xAD6 */ u16 values[1];
 } Holder;
 
-extern Holder *DAT_0057f28c;
+extern Holder *g_uiQuest;
 
 extern s32 FUN_002a4860(Cursor *cursor);
 extern s32 FUN_002a4894(Cursor *cursor);
 
 u16 FUN_0031f8cc(void)
 {
-    Holder *holder = DAT_0057f28c;
+    Holder *holder = g_uiQuest;
     Cursor *cursor = &holder->cursor;
     s32 base = FUN_002a4860(cursor);
     s32 offset = FUN_002a4894(cursor);

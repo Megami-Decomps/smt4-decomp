@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001a0990(unsigned int *);
+int nn_os_LightEvent_ClearSignal(unsigned int *);
 int FUN_001b4a58(unsigned int, int *, int, int, int, int, unsigned int, unsigned int);
 int sysMemClear(int, int);
 int hasExclusiveAccess(int *);
@@ -20,7 +20,7 @@ extern unsigned char DAT_0055c284; /* 0x55c284 */
 extern unsigned int DAT_005c0ad8; /* 0x5c0ad8 */
 
 /* Unsupported intrinsic, declaration required: hasExclusiveAccess (CALLOTHER). */
-/* Supplied declaration required: FUN_001a0990. */
+/* Supplied declaration required: nn_os_LightEvent_ClearSignal. */
 extern int FUN_001b1998(void);
 /* Supplied declaration required: FUN_001b4a58. */
 extern unsigned int *FUN_001b95dc(int);
@@ -82,7 +82,7 @@ void FUN_001cc084(int param_1,unsigned int *param_2,unsigned int param_3,unsigne
   temp_v1 = FUN_001b1998();
   piVar7 = (int *)(temp_v1 + 0x2c);
   nn_os_CriticalSection_Enter((unsigned int)piVar7);
-  FUN_001a0990(puVar6 + 3);
+  nn_os_LightEvent_ClearSignal(puVar6 + 3);
   *(unsigned char *)(puVar6 + 5) = 1;
   temp_v3 = temp_v1 + (param_6 & 0xff) * 0xc;
   nw_ut_internal_LinkListImpl_insert(temp_v3,temp_v3 + 4,puVar6 + 1);

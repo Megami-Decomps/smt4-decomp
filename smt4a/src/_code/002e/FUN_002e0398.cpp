@@ -8,9 +8,9 @@ int FUN_00100388(unsigned char [128], unsigned char *, unsigned int, unsigned in
 int FUN_001695a0(void);
 int asdMemFree(...);
 int FUN_0020214c(void);
-int FUN_0024b0c0(unsigned int, int);
+int scrScriptProcessGetEntry(unsigned int, int);
 int FUN_00275bc8(int, unsigned char *);
-int FUN_00275f44(unsigned int, int, unsigned int);
+int scrScriptProcessStartEntry(unsigned int, int, unsigned int);
 int aocDrawText8(unsigned char *, unsigned int, int);
 int aocDrawText7(unsigned char *, unsigned int, int);
 
@@ -25,10 +25,10 @@ extern signed char DAT_005f1c72; /* 0x5f1c72 */
 /* Supplied declaration required: FUN_001695a0. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_0020214c. */
-/* Supplied declaration required: FUN_0024b0c0. */
+/* Supplied declaration required: scrScriptProcessGetEntry. */
 /* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: FUN_00275f44. */
-extern int FUN_00357bc8(unsigned int, int);
+/* Supplied declaration required: scrScriptProcessStartEntry. */
+extern int tableGroupFindEntryIndex(unsigned int, int);
 /* Supplied declaration required: aocDrawText8. */
 /* Supplied declaration required: aocDrawText7. */
 extern int FUN_0046e08c(unsigned char *, unsigned int, unsigned int);
@@ -84,7 +84,7 @@ LAB_002e0474:
   *(unsigned int *)(temp_v1 + 0x108) = 2;
   if (DAT_005f1c72 != '\0') {
     DAT_005f1c72 = '\0';
-    FUN_0024b0c0(*(unsigned int *)(temp_v0 + 0x98),(int)DAT_005f172e);
+    scrScriptProcessGetEntry(*(unsigned int *)(temp_v0 + 0x98),(int)DAT_005f172e);
     *(unsigned int *)(temp_v0 + 0x9c) = 0;
     temp_v1 = (int)DAT_005f172e;
     temp_v2 = *(unsigned int *)(temp_v0 + 0x98);
@@ -92,11 +92,11 @@ LAB_002e0474:
   }
   else {
     *(unsigned int *)(temp_v0 + 0x9c) = 0;
-    temp_v1 = FUN_00357bc8(*(unsigned int *)(temp_v0 + 0x90),temp_v0 + 0x6c);
+    temp_v1 = tableGroupFindEntryIndex(*(unsigned int *)(temp_v0 + 0x90),temp_v0 + 0x6c);
     temp_v2 = *(unsigned int *)(temp_v0 + 0x98);
     temp_v3 = temp_v2;
   }
-  FUN_00275f44(temp_v2,temp_v1,temp_v3);
+  scrScriptProcessStartEntry(temp_v2,temp_v1,temp_v3);
   return 1;
 }
 

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00249ddc(void);
-int FUN_0024dcec(void);
+int eventCommandSetPendingCleanup(void);
 int FUN_00298d50(unsigned int *);
 int FUN_002c1568(unsigned int *);
 int FUN_002c1e30(unsigned int *, int);
@@ -24,7 +24,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_00249ddc. */
-/* Supplied declaration required: FUN_0024dcec. */
+/* Supplied declaration required: eventCommandSetPendingCleanup. */
 /* Supplied declaration required: FUN_00298d50. */
 /* Supplied declaration required: FUN_002c1568. */
 /* Supplied declaration required: FUN_002c1e30. */
@@ -135,7 +135,7 @@ void FUN_003d5830(unsigned int *param_1)
   param_1[0x1d8] = 0xffffffff;
   FUN_00249ddc();
   param_1[0xb] = temp_v1;
-  FUN_0024dcec();
+  eventCommandSetPendingCleanup();
   param_1[0xc] = 0;
   param_1[0xd] = 0;
   param_1[0xe] = 0;

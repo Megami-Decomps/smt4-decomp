@@ -6,7 +6,7 @@ extern "C" {
 
 int sysMemClear(char *, int);
 
-extern int FUN_0014af84(void);
+extern int gameDataBlocksGetSaveData(void);
 extern int FUN_002a46f8(void);
 extern int FUN_002a4b28(unsigned int);
 /* Supplied declaration required: sysMemClear. */
@@ -31,7 +31,7 @@ int FUN_004dad8c(void)
     do {
       temp_v1 = FUN_002a4b28(temp_v3 & 0xffff);
       if (temp_v1 != 0) {
-        temp_v1 = FUN_0014af84();
+        temp_v1 = gameDataBlocksGetSaveData();
         temp_v2 = (unsigned int)*(unsigned short *)(temp_v1 + temp_v3 * 0x50 + 0x5e84);
         if ((temp_v2 - 1 < 999) && ((unsigned char)acStack_405[temp_v2 + 5] < 0x14)) {
           acStack_405[temp_v2 + 5] = acStack_405[temp_v2 + 5] + 1;

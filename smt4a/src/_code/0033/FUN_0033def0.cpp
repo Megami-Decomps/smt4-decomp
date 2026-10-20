@@ -15,7 +15,7 @@ typedef struct {
 
 extern signed char DAT_005f161f; /* 0x5f161f */
 
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_003fd76c. */
 /* Supplied declaration required: FUN_003fdb18. */
 /* Supplied declaration required: FUN_003fe86c. */
@@ -55,8 +55,8 @@ void FUN_0033def0(char *param_1)
     temp_v0 = temp_v0 | 3;
     *(unsigned int *)(temp_v2 + 4) = temp_v0;
   }
-  temp_v1 = FUN_0018719c(0xc);
-  if ((temp_v1 != 0) && (temp_v1 = FUN_0018719c(0x10), temp_v1 == 0)) {
+  temp_v1 = gameFlagIsSet(0xc);
+  if ((temp_v1 != 0) && (temp_v1 = gameFlagIsSet(0x10), temp_v1 == 0)) {
     *(unsigned int *)(temp_v2 + 4) = *(unsigned int *)(temp_v2 + 4) | 3;
   }
   FUN_003fd76c(temp_v2,param_1 + 0xc);

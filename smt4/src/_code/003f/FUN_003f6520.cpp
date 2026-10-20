@@ -4,27 +4,27 @@
 
 extern "C" {
 
-int FUN_002c38fc(unsigned char *, int);
+int nn_os_CriticalSection_Initialize(unsigned char *, int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_2_stack;
 
-extern unsigned int DAT_0044e978; /* 0x44e978 */
+extern unsigned int g_mobiclipAllocator; /* 0x44e978 */
 extern unsigned int DAT_0044e97c; /* 0x44e97c */
-extern unsigned char DAT_004d4674; /* 0x4d4674 */
+extern unsigned char g_mwmoCriticalSection; /* 0x4d4674 */
 
-/* Supplied declaration required: FUN_002c38fc. */
+/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
 
 
 void FUN_003f6520(unsigned int param_1,unsigned int param_2)
 
 {
 /* irregular: 1 native warning(s); review required */
-  DAT_0044e978 = param_1;
+  g_mobiclipAllocator = param_1;
   DAT_0044e97c = param_2;
-  FUN_002c38fc(&DAT_004d4674,0x40000ca);
+  nn_os_CriticalSection_Initialize(&g_mwmoCriticalSection,0x40000ca);
   return;
 }
 

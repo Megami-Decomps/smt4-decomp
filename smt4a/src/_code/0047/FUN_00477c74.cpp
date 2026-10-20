@@ -8,7 +8,7 @@ int FUN_00183318(int);
 int FUN_0019d36c(void);
 int FUN_001f4908(int, int, int);
 int FUN_003423cc(int, unsigned int, int, unsigned int, unsigned int, unsigned int, unsigned int);
-int FUN_003d2d6c(int);
+int soundChannelStopAll(int);
 
 typedef int romwright_code(...);
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -21,7 +21,7 @@ typedef struct {
 /* Supplied declaration required: FUN_001f4908. */
 extern int FUN_002e07f4(void);
 /* Supplied declaration required: FUN_003423cc. */
-/* Supplied declaration required: FUN_003d2d6c. */
+/* Supplied declaration required: soundChannelStopAll. */
 
 
 void FUN_00477c74(unsigned int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -44,7 +44,7 @@ void FUN_00477c74(unsigned int *param_1,unsigned int param_2,unsigned int param_
     }
     return;
   }
-  FUN_003d2d6c(0xf);
+  soundChannelStopAll(0xf);
   FUN_001f4908(0,10,0xff);
   FUN_001f4908(1,10,0xff);
   param_1[2] = 1;

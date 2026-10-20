@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_002e93da(void *object);
+void onlineUrlEnsureParsed(void *object);
 
 typedef struct Optional {
     /* 0x00 */ u8 unk00[8];
@@ -14,7 +14,7 @@ typedef struct Optional {
 /* Resets the optional, stores `value` and clears `valid`. */
 void FUN_002e99e4(Optional *object, u8 value)
 {
-    FUN_002e93da(object);
+    onlineUrlEnsureParsed(object);
     object->value = value;
     object->valid = 0;
 }

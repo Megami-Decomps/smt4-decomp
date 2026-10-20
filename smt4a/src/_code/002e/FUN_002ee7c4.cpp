@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_002ee7f2(u32 cursor, u8 *table);
+void wstrcatU16(u32 cursor, u8 *table);
 extern u8 DAT_0053a778[];
 
 typedef struct Writer {
@@ -16,7 +16,7 @@ typedef struct Writer {
 void FUN_002ee7c4(Writer *writer)
 {
     if (writer->enabled != 0) {
-        FUN_002ee7f2(writer->cursor, DAT_0053a778);
+        wstrcatU16(writer->cursor, DAT_0053a778);
         writer->cursor = writer->cursor + 4;
     }
 }

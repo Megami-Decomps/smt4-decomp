@@ -7,9 +7,9 @@ extern "C" {
 int dataTableGet(int, int);
 int FUN_00409d00(void);
 
-extern int FUN_0014af84(void);
+extern int gameDataBlocksGetSaveData(void);
 /* Supplied declaration required: dataTableGet. */
-extern int FUN_0018719c(void);
+extern int gameFlagIsSet(void);
 extern int dataTableGetCount(void);
 extern int dataTableGetEntries(void);
 extern unsigned int FUN_003dfd44(void);
@@ -43,7 +43,7 @@ void FUN_0032ed10(void)
   if (temp_v10 < temp_v5) {
     do {
       temp_v0 = (int)(temp_v10 + ((unsigned int)(temp_v10 >> 0x1f) >> 0x1d)) >> 3;
-      temp_v6 = FUN_0014af84();
+      temp_v6 = gameDataBlocksGetSaveData();
       temp_v1 = 1 << ((temp_v10 % 8) & 0xffU);
       if ((*(unsigned char *)(temp_v6 + temp_v0 + 0x282ec) & temp_v1) == 0) {
         dataTableGet(0x4a,0);
@@ -51,7 +51,7 @@ void FUN_0032ed10(void)
         temp_v6 = temp_v6 + temp_v10 * 0x2c;
         if (temp_v6 != 0) {
           temp_v3 = 1;
-          if ((*(int *)(temp_v6 + 0x28) != 0) && (temp_v7 = FUN_0018719c(), temp_v7 == 0)) {
+          if ((*(int *)(temp_v6 + 0x28) != 0) && (temp_v7 = gameFlagIsSet(), temp_v7 == 0)) {
             temp_v3 = 0;
           }
           temp_v2 = *(unsigned short *)(temp_v6 + 0x22);
@@ -121,11 +121,11 @@ void FUN_0032ed10(void)
           if (*(unsigned int *)(temp_v6 + 0x24) <= temp_v8) {
 LAB_0032eeb4:
             if (temp_v3) {
-              temp_v6 = FUN_0014af84();
+              temp_v6 = gameDataBlocksGetSaveData();
               pbVar11 = (unsigned char *)(temp_v6 + temp_v0 + 0x282ec);
               temp_v4 = (unsigned char)temp_v1;
               *pbVar11 = *pbVar11 | temp_v4;
-              temp_v6 = FUN_0014af84();
+              temp_v6 = gameDataBlocksGetSaveData();
               pbVar11 = (unsigned char *)(temp_v6 + temp_v0 + 0x282fc);
               *pbVar11 = *pbVar11 | temp_v4;
             }

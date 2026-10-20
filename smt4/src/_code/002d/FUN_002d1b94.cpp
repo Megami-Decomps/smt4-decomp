@@ -9,7 +9,7 @@ int FUN_002664d8(int);
 int FUN_002666a0(int, int, unsigned int);
 int FUN_00266a2c(void);
 int FUN_002702dc(void);
-int FUN_002769b4(...);
+int mapDepartSetTarget(...);
 int FUN_0027b2b4(unsigned int, unsigned int);
 int FUN_0027d7b0(unsigned int, unsigned int, unsigned int);
 int VectorSignedToFloat(int, int);
@@ -29,7 +29,7 @@ extern unsigned int DAT_0049f920; /* 0x49f920 */
 /* Supplied declaration required: FUN_002666a0. */
 /* Supplied declaration required: FUN_00266a2c. */
 /* Supplied declaration required: FUN_002702dc. */
-/* Supplied declaration required: FUN_002769b4. */
+/* Supplied declaration required: mapDepartSetTarget. */
 /* Supplied declaration required: FUN_0027b2b4. */
 extern char *FUN_0027d748(void);
 /* Supplied declaration required: FUN_0027d7b0. */
@@ -48,7 +48,7 @@ void FUN_002d1b94(unsigned int param_1,unsigned int param_2)
   temp_v0 = g_lmapMainState;
   FUN_0027d7b0(*(unsigned int *)(g_lmapMainState + 0x40),param_1,param_2);
   pcVar3 = (char *)FUN_0027d748();
-  FUN_002769b4((int)*pcVar3,(int)pcVar3[1],pcVar3[2]);
+  mapDepartSetTarget((int)*pcVar3,(int)pcVar3[1],pcVar3[2]);
   *(unsigned int *)(temp_v0 + 0x48) = param_1;
   temp_v1 = g_lmapScene;
   temp_v2 = VectorSignedToFloat((int)*(short *)(pcVar3 + 4),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -78,7 +78,7 @@ void FUN_002d1b94(unsigned int param_1,unsigned int param_2)
     *(unsigned int *)(temp_v0 + 0xd0) = 0;
     *(unsigned int *)(temp_v0 + 0xd4) = 0;
   }
-  FUN_002769b4(0xffffffff,0xffffffff);
+  mapDepartSetTarget(0xffffffff,0xffffffff);
   return;
 }
 

@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002e9318(...);
+int onlineStringDestroy(...);
 
 extern unsigned char DAT_00559ed4; /* 0x559ed4 */
 
-/* Supplied declaration required: FUN_002e9318. */
+/* Supplied declaration required: onlineStringDestroy. */
 
 
 int FUN_002f7b80(unsigned int *param_1)
@@ -18,8 +18,8 @@ int FUN_002f7b80(unsigned int *param_1)
   int temp_v0;
   
   *param_1 = (unsigned int)&DAT_00559ed4;
-  temp_v0 = FUN_002e9318(param_1 + 4);
-  temp_v0 = FUN_002e9318(temp_v0 - 8);
+  temp_v0 = onlineStringDestroy(param_1 + 4);
+  temp_v0 = onlineStringDestroy(temp_v0 - 8);
   return temp_v0 - 8;
 }
 

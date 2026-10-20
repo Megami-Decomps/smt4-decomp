@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00289508(void);
+int gameJumpRequestClear(void);
 int FUN_00289574(...);
 int FUN_002bd808(int, unsigned short [6]);
 
@@ -17,9 +17,9 @@ typedef struct {
 
 extern unsigned char g_gameState; /* 0x49f91c */
 
-/* Supplied declaration required: FUN_00289508. */
+/* Supplied declaration required: gameJumpRequestClear. */
 /* Supplied declaration required: FUN_00289574. */
-extern char *FUN_00289594(void);
+extern char *gameJumpRequestGet(void);
 /* Supplied declaration required: FUN_002bd808. */
 
 
@@ -32,20 +32,20 @@ void FUN_003ba1d8(int param_1)
   unsigned int temp_v1;
   unsigned short temp_v2 [6];
   
-  pcVar2 = (char *)FUN_00289594();
+  pcVar2 = (char *)gameJumpRequestGet();
   temp_v0 = *pcVar2;
   if (temp_v0 != '\x01') {
     if (temp_v0 == '\x02') {
       FUN_00289574((unsigned char)pcVar2[1] + 100,pcVar2[2],0xffffffff);
       (*(unsigned int *)((unsigned char *)&g_gameState + 0x8)) = 0xffffffff;
       *(unsigned int *)(param_1 + 0x20) = *(unsigned int *)(param_1 + 0x20) | 0x80010;
-      FUN_00289508();
+      gameJumpRequestClear();
       *(unsigned int *)(param_1 + 0x28) = 5;
       *(unsigned int *)(param_1 + 0x2c) = 0;
       return;
     }
     if (temp_v0 != '\x03') {
-      FUN_00289508();
+      gameJumpRequestClear();
       *(unsigned int *)(param_1 + 0x28) = 5;
       *(unsigned int *)(param_1 + 0x2c) = 0;
       return;
@@ -61,7 +61,7 @@ void FUN_003ba1d8(int param_1)
     temp_v1 = *(unsigned int *)(param_1 + 0x20) | 0x80010;
   }
   *(unsigned int *)(param_1 + 0x20) = temp_v1;
-  FUN_00289508();
+  gameJumpRequestClear();
   *(unsigned int *)(param_1 + 0x28) = 5;
   *(unsigned int *)(param_1 + 0x2c) = 0;
   return;

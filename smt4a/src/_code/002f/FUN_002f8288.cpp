@@ -12,10 +12,10 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-extern int DAT_0057f268; /* 0x57f268 */
+extern int g_partyPanel; /* 0x57f268 */
 
-extern unsigned int FUN_001ab854(unsigned int);
-extern int FUN_001ab888(void);
+extern unsigned int gameGetSlotRecord(unsigned int);
+extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_002c7bb0. */
 /* Supplied declaration required: FUN_003344b4. */
 extern int FUN_003df57c(unsigned short, unsigned int);
@@ -35,16 +35,16 @@ void FUN_002f8288(void)
   int temp_v5;
   int temp_v6;
   
-  temp_v0 = DAT_0057f268;
+  temp_v0 = g_partyPanel;
   temp_v6 = in_r3;
-  temp_v1 = FUN_001ab888();
+  temp_v1 = gameGetSlotTable();
   temp_v6 = 0;
   if (*(short *)(temp_v0 + 0x38) >= 0) {
     temp_v4 = 0;
     do {
       if ((int)*(char *)(temp_v1 + temp_v4 + 0x1ca0) == (int)*(short *)(temp_v0 + 0x38)) {
         temp_v5 = temp_v0 + temp_v4 * 4;
-        temp_v2 = FUN_001ab854(*(unsigned int *)(*(int *)(temp_v5 + 0xa14) + 0x34));
+        temp_v2 = gameGetSlotRecord(*(unsigned int *)(*(int *)(temp_v5 + 0xa14) + 0x34));
         temp_v3 = FUN_004bcbb4(temp_v2,*(unsigned short *)(temp_v0 + 0x36));
         *(int *)(*(int *)(temp_v5 + 0xa14) + 0x44) = -temp_v3;
       }
@@ -54,7 +54,7 @@ void FUN_002f8288(void)
     do {
       if (*(int *)(temp_v0 + temp_v4 * 8 + 0xa80) == (int)*(short *)(temp_v0 + 0x38)) {
         temp_v5 = temp_v0 + temp_v4 * 4;
-        temp_v2 = FUN_001ab854(*(unsigned int *)(*(int *)(temp_v5 + 0xa20) + 0x34));
+        temp_v2 = gameGetSlotRecord(*(unsigned int *)(*(int *)(temp_v5 + 0xa20) + 0x34));
         temp_v3 = FUN_004bcbb4(temp_v2,*(unsigned short *)(temp_v0 + 0x36));
         *(int *)(*(int *)(temp_v5 + 0xa20) + 0x44) = -temp_v3;
       }

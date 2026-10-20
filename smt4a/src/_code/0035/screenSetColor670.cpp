@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern ScreenRef DAT_0057f0c4;
+extern ScreenRef g_buttonHelp;
 
 void screenSetColor670(u32 a, u8 b, u8 c, u8 d)
 {
-    ScreenObj *screen = DAT_0057f0c4.instance;
+    ScreenObj *screen = g_buttonHelp.instance;
 
     screen->unk670 = a;
     screen->unk674 = b;

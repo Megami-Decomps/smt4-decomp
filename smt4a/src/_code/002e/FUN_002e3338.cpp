@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00100df4(void);
 int asdOperatorNewC(void);
-int FUN_002e3494(unsigned char *);
+int asdOperatorDeleteB(unsigned char *);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -15,7 +15,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00100df4. */
 /* Supplied declaration required: asdOperatorNewC. */
-/* Supplied declaration required: FUN_002e3494. */
+/* Supplied declaration required: asdOperatorDeleteB. */
 
 
 unsigned char * FUN_002e3338(unsigned char *param_1,unsigned char *param_2)
@@ -50,7 +50,7 @@ LAB_002e3358:
       puVar2 = (unsigned char *)((int)puVar2 << 1);
     }
     if (param_2 != (unsigned char *)0x0) break;
-    FUN_002e3494(param_1);
+    asdOperatorDeleteB(param_1);
   }
   return (unsigned char *)0x0;
 }

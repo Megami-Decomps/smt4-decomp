@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_0018719c(...);
+int gameFlagIsSet(...);
 int dataTableGetCount(unsigned int);
 int dataTableGetEntries(void);
 int FUN_002d8c90(int);
-int FUN_003fd63c(...);
+int gameFlagSetValue(...);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -19,14 +19,14 @@ extern int *g_popupState; /* 0x58104c */
 extern int g_gameState; /* 0x5f15fc */
 extern int DAT_005f1994; /* 0x5f1994 */
 
-extern int FUN_0014bef4(unsigned int);
+extern int randRange(unsigned int);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0018719c. */
+/* Supplied declaration required: gameFlagIsSet. */
 /* Supplied declaration required: dataTableGetCount. */
 /* Supplied declaration required: dataTableGetEntries. */
 extern int FUN_002d8b58(unsigned int);
 /* Supplied declaration required: FUN_002d8c90. */
-/* Supplied declaration required: FUN_003fd63c. */
+/* Supplied declaration required: gameFlagSetValue. */
 
 
 void FUN_00295108(int param_1)
@@ -49,40 +49,40 @@ void FUN_00295108(int param_1)
     if (*g_popupState == 0x12) {
       return;
     }
-    temp_v1 = FUN_0014bef4(99);
+    temp_v1 = randRange(99);
     if (temp_v1 + 1 >= 11) {
       return;
     }
     FUN_002d8c90(0x12);
     return;
   }
-  temp_v1 = FUN_0018719c(0x8d);
-  if ((temp_v1 == 0) || (temp_v1 = FUN_0018719c(0x8e), temp_v1 != 0)) {
-    temp_v1 = FUN_0018719c(0x90);
-    if ((temp_v1 == 0) || (temp_v1 = FUN_0018719c(0x92), temp_v1 != 0)) {
-      temp_v1 = FUN_0018719c(0x95);
-      if ((temp_v1 == 0) || (temp_v1 = FUN_0018719c(0x98), temp_v1 != 0)) {
-        temp_v1 = FUN_0018719c(0xd9);
-        if ((temp_v1 == 0) || (temp_v1 = FUN_0018719c(0xed), temp_v1 != 0)) goto LAB_002952c0;
+  temp_v1 = gameFlagIsSet(0x8d);
+  if ((temp_v1 == 0) || (temp_v1 = gameFlagIsSet(0x8e), temp_v1 != 0)) {
+    temp_v1 = gameFlagIsSet(0x90);
+    if ((temp_v1 == 0) || (temp_v1 = gameFlagIsSet(0x92), temp_v1 != 0)) {
+      temp_v1 = gameFlagIsSet(0x95);
+      if ((temp_v1 == 0) || (temp_v1 = gameFlagIsSet(0x98), temp_v1 != 0)) {
+        temp_v1 = gameFlagIsSet(0xd9);
+        if ((temp_v1 == 0) || (temp_v1 = gameFlagIsSet(0xed), temp_v1 != 0)) goto LAB_002952c0;
         temp_v2 = 0x542;
-        temp_v1 = FUN_0018719c(0x542);
+        temp_v1 = gameFlagIsSet(0x542);
       }
       else {
         temp_v2 = 0x541;
-        temp_v1 = FUN_0018719c(0x541);
+        temp_v1 = gameFlagIsSet(0x541);
       }
 joined_r0x002952a0:
       if (temp_v1 == 0) {
-        FUN_003fd63c(temp_v2,1);
+        gameFlagSetValue(temp_v2,1);
         temp_v0 = 1;
         DAT_005f1994 = 0;
         goto LAB_002952dc;
       }
     }
     else {
-      temp_v1 = FUN_0018719c(0xc2);
-      if ((temp_v1 != 0) && (temp_v1 = FUN_0018719c(0x540), temp_v1 == 0)) {
-        FUN_003fd63c(0x540,1);
+      temp_v1 = gameFlagIsSet(0xc2);
+      if ((temp_v1 != 0) && (temp_v1 = gameFlagIsSet(0x540), temp_v1 == 0)) {
+        gameFlagSetValue(0x540,1);
         temp_v0 = 1;
         DAT_005f1994 = 0;
         goto LAB_002952dc;
@@ -90,10 +90,10 @@ joined_r0x002952a0:
     }
   }
   else {
-    temp_v1 = FUN_0018719c(0xc2);
+    temp_v1 = gameFlagIsSet(0xc2);
     if (temp_v1 != 0) {
       temp_v2 = 0x535;
-      temp_v1 = FUN_0018719c(0x535);
+      temp_v1 = gameFlagIsSet(0x535);
       goto joined_r0x002952a0;
     }
   }
@@ -117,13 +117,13 @@ LAB_002952dc:
       else {
         piVar7 = (int *)(temp_v3 + temp_v5 * 0x20);
       }
-      if ((((piVar7[1] == 0x13) && (((short)piVar7[2] == 0 || (temp_v3 = FUN_0018719c(), temp_v3 != 0)))
-           ) && ((*(short *)((int)piVar7 + 10) == 0 || (temp_v3 = FUN_0018719c(), temp_v3 == 0)))) &&
+      if ((((piVar7[1] == 0x13) && (((short)piVar7[2] == 0 || (temp_v3 = gameFlagIsSet(), temp_v3 != 0)))
+           ) && ((*(short *)((int)piVar7 + 10) == 0 || (temp_v3 = gameFlagIsSet(), temp_v3 == 0)))) &&
          ((((*piVar7 != 0xad || (g_gameState == 0x1c)) ||
            (g_gameState == 0x1d || g_gameState == 0x1e)) ||
           (g_gameState == 0x1f || g_gameState == 0x20)))) {
         if ((param_1 == 0 && !temp_v0) &&
-           (temp_v3 = FUN_0014bef4(99), temp_v3 + 1 <= (int)(short)piVar7[3])) {
+           (temp_v3 = randRange(99), temp_v3 + 1 <= (int)(short)piVar7[3])) {
           return;
         }
         if (DAT_005f1994 == 0) {

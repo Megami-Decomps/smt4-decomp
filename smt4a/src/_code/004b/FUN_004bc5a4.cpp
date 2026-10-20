@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_001801a4(void);
+int gameGetPlayerData(void);
 int FUN_001ad9b4(void);
 
-/* Supplied declaration required: FUN_001801a4. */
+/* Supplied declaration required: gameGetPlayerData. */
 /* Supplied declaration required: FUN_001ad9b4. */
 extern int FUN_001ada74(unsigned short);
 extern int FUN_001ba3d4(unsigned int);
@@ -130,7 +130,7 @@ void FUN_004bc5a4(int param_1)
     temp_v2 = (unsigned int)*(unsigned short *)(temp_v0 + 0xc);
     FUN_001ad9b4();
     if (temp_v2 != 0) {
-      FUN_001801a4();
+      gameGetPlayerData();
     }
   }
   return;

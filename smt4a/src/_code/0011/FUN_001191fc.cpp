@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00103e4c(unsigned int *, unsigned int);
 int FUN_002e6e34(unsigned char [12], int);
 int FUN_002e6e5c(unsigned char [12]);
-int FUN_002e9318(...);
+int onlineStringDestroy(...);
 int FUN_002e93c2(int, unsigned int);
 int FUN_002ea3d0(int, unsigned int);
 int FUN_002ea41e(unsigned int **, int);
@@ -33,7 +33,7 @@ extern unsigned char LAB_0011987d; /* 0x11987d */
 /* Supplied declaration required: FUN_00103e4c. */
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-/* Supplied declaration required: FUN_002e9318. */
+/* Supplied declaration required: onlineStringDestroy. */
 /* Supplied declaration required: FUN_002e93c2. */
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned char *, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
@@ -107,8 +107,8 @@ LAB_00119254:
         FUN_002ee938(temp_v6,temp_v0);
         FUN_002ee938(&uStack_3c,temp_v5 + 2);
         temp_v2 = FUN_002ee96a((unsigned int *)&uStack_3c,temp_v6);
-        FUN_002e9318(&uStack_3c);
-        FUN_002e9318(temp_v6);
+        onlineStringDestroy(&uStack_3c);
+        onlineStringDestroy(temp_v6);
         if (temp_v2 != 0) {
           temp_v3 = FUN_002fd444(temp_v0);
           FUN_00103e4c(temp_v5 + 2,temp_v3);

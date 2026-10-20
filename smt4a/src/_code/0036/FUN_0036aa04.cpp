@@ -34,7 +34,7 @@ typedef struct {
 extern int g_lmapScene; /* 0x581288 */
 extern unsigned char g_gameState; /* 0x5f15fc */
 
-extern int FUN_00162e8c(void);
+extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_003fd76c. */
 /* Supplied declaration required: FUN_003fd784. */
 /* Supplied declaration required: FUN_003fd7c0. */
@@ -99,7 +99,7 @@ void FUN_0036aa04(fn_0036aa04_arg0 *param_1)
     if (temp_v0 != 0) {
       FUN_003fe86c(temp_v3,0,2);
     }
-    temp_v0 = FUN_00162e8c();
+    temp_v0 = gameFlagsGetBlock();
     if (param_1->field_0xec != (void *)0x0) {
       if (*(int *)(temp_v0 + 0xdf4) == 0) {
         temp_v3 = *(int *)(temp_v0 + 0x15b4);

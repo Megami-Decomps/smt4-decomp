@@ -6,22 +6,22 @@ extern "C" {
 
 int FUN_00184310(void);
 int FUN_002e59f8(int, int, int);
-int FUN_0031f0a8(int, int);
+int gameDataBlocksSetFlagBits(int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern int FUN_0014af84(void);
+extern int gameDataBlocksGetSaveData(void);
 extern int saveSlotFindSelected(void);
 /* Supplied declaration required: FUN_00184310. */
-extern int FUN_0018719c(unsigned int);
-extern int FUN_001ab888(void);
+extern int gameFlagIsSet(unsigned int);
+extern int gameGetSlotTable(void);
 extern int FUN_00228ab0(int);
 /* Supplied declaration required: FUN_002e59f8. */
-extern unsigned char FUN_0031cf94(void);
-/* Supplied declaration required: FUN_0031f0a8. */
+extern unsigned char gameDataBlocksGetFlagByte(void);
+/* Supplied declaration required: gameDataBlocksSetFlagBits. */
 extern unsigned int gameDataBlocksGetWord27E90(void);
 
 
@@ -34,19 +34,19 @@ void FUN_00387edc(int param_1)
   int temp_v2;
   unsigned int temp_v3;
   
-  temp_v1 = FUN_001ab888();
+  temp_v1 = gameGetSlotTable();
   FUN_002e59f8(temp_v1 + 4,param_1,0xe);
   FUN_002e59f8(temp_v1 + 0x50,param_1 + 0xe,0x12);
   *(unsigned short *)(param_1 + 0x36) = *(unsigned short *)(temp_v1 + 0x66);
-  temp_v2 = FUN_0014af84();
+  temp_v2 = gameDataBlocksGetSaveData();
   *(unsigned int *)(param_1 + 0x28) = *(unsigned int *)(temp_v2 + 0x21d90);
   *(unsigned int *)(param_1 + 0x24) = 0;
-  temp_v0 = FUN_0031cf94();
+  temp_v0 = gameDataBlocksGetFlagByte();
   *(unsigned char *)(param_1 + 0x20) = temp_v0;
-  FUN_0031f0a8(0x10,1);
-  temp_v2 = FUN_0018719c(0x581);
+  gameDataBlocksSetFlagBits(0x10,1);
+  temp_v2 = gameFlagIsSet(0x581);
   if (temp_v2 != 0) {
-    FUN_0031f0a8(4,1);
+    gameDataBlocksSetFlagBits(4,1);
   }
   *(unsigned char *)(param_1 + 0x21) = 0;
   temp_v3 = gameDataBlocksGetWord27E90();

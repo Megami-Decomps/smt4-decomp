@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00188b60(unsigned char *);
+int nn_os_CriticalSection_Initialize(unsigned char *);
 int coproc_moveto_Data_Memory_Barrier(int);
 
 typedef int romwright_code(...);
@@ -14,7 +14,7 @@ extern unsigned char DAT_0063f4f0; /* 0x63f4f0 */
 extern unsigned char DAT_0063f4fd; /* 0x63f4fd */
 
 /* Unsupported intrinsic, declaration required: coproc_moveto_Data_Memory_Barrier (CALLOTHER). */
-/* Supplied declaration required: FUN_00188b60. */
+/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
 extern int FUN_001b1f04(void);
 
 
@@ -24,7 +24,7 @@ void FUN_00143800(void)
 /* irregular: 3 native warning(s); review required */
   int temp_v0;
   
-  FUN_00188b60(&DAT_0063f4f0);
+  nn_os_CriticalSection_Initialize(&DAT_0063f4f0);
   temp_v0 = FUN_001b1f04();
   *(unsigned int *)(temp_v0 + 0x1ec) = 0;
   coproc_moveto_Data_Memory_Barrier(0);

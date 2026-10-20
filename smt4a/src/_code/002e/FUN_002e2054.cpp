@@ -14,11 +14,11 @@ struct GlobalFUN_002e2054 {
     /* 0x04 */ ObjFUN_002e2054 *current;
 };
 
-extern GlobalFUN_002e2054 DAT_0057f110;
+extern GlobalFUN_002e2054 g_campCec;
 
 s32 FUN_002e2054(void)
 {
-    ObjFUN_002e2054 *obj = DAT_0057f110.current;
+    ObjFUN_002e2054 *obj = g_campCec.current;
     s32 result = 0;
 
     if (obj != NULL) {

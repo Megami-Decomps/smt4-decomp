@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002630e0(...);
-int FUN_002b06c4(...);
+int dataTable00FindById(...);
 int FUN_002bd06c(...);
 int FUN_002be624(...);
 
@@ -37,7 +37,7 @@ extern int *g_btlTargetSelect; /* 0x439c60 */
 /* Supplied declaration required: FUN_002630e0. */
 extern unsigned int FUN_0027db08(unsigned int);
 extern unsigned char FUN_0029e9cc(fn_002eb3dc_arg1 *);
-/* Supplied declaration required: FUN_002b06c4. */
+/* Supplied declaration required: dataTable00FindById. */
 extern unsigned int FUN_002bce30(fn_002eb3dc_arg1 *, unsigned int);
 /* Supplied declaration required: FUN_002bd06c. */
 /* Supplied declaration required: FUN_002be624. */
@@ -66,7 +66,7 @@ void FUN_002eb3dc(unsigned int *param_1,fn_002eb3dc_arg1 *param_2,unsigned int p
   temp_v4 = param_2;
   uStack_2c = param_3;
   temp_v5 = param_4;
-  FUN_002b06c4();
+  dataTable00FindById();
   pfVar3 = temp_v4;
   FUN_002bd06c(temp_v4);
   FUN_002be624(*piVar1 + 4,&LAB_002eb5ac,pfVar3);

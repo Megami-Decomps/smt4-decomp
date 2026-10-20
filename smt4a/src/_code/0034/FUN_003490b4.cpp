@@ -3,18 +3,18 @@
 extern "C" {
 
 void asdSequenceRequest(s32 a, s32 b, s32 c);
-void FUN_00321744(void);
-void FUN_003fd63c(s32 a, s32 b, s32 c);
-s32 FUN_0018719c(u32 id);
+void btlTalkBustUpDestroy(void);
+void gameFlagSetValue(s32 a, s32 b, s32 c);
+s32 gameFlagIsSet(u32 id);
 
 extern GameStateA g_gameState;
 extern s32 DAT_005f1c98;
 
 s32 FUN_003490b4(void)
 {
-    if (FUN_0018719c(0x593) != 0) {
-        FUN_00321744();
-        FUN_003fd63c(0x593, 0, 1);
+    if (gameFlagIsSet(0x593) != 0) {
+        btlTalkBustUpDestroy();
+        gameFlagSetValue(0x593, 0, 1);
     }
     if (g_gameState.unk574 != 0 || DAT_005f1c98 != -1) {
         asdSequenceRequest(8, 0, 0);

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00168fbc(double, double, int);
-int FUN_0018b19c(unsigned int, unsigned int);
+int nn_gxlow_CTR_FlushDataCacheForward(unsigned int, unsigned int);
 int asdTextureCreate(void);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(int, int);
@@ -13,7 +13,7 @@ int VectorSignedToFloat(int, int);
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: FUN_00168fbc. */
-/* Supplied declaration required: FUN_0018b19c. */
+/* Supplied declaration required: nn_gxlow_CTR_FlushDataCacheForward. */
 /* Supplied declaration required: asdTextureCreate. */
 extern unsigned int FUN_001bc2ec(unsigned int);
 
@@ -51,7 +51,7 @@ void FUN_00422184(float *param_1,unsigned int param_2,unsigned int param_3,unsig
   temp_v3 = (float)VectorSignedToFloat(*(int *)((int)temp_v0 + 0x14) * *(int *)((int)temp_v0 + 0x18),
                                      (unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v2 = VectorFloatToUnsigned(temp_v3 * temp_v1,3);
-  FUN_0018b19c(*(unsigned int *)((int)temp_v0 + 0x24),temp_v2);
+  nn_gxlow_CTR_FlushDataCacheForward(*(unsigned int *)((int)temp_v0 + 0x24),temp_v2);
   temp_v2 = FUN_001bc2ec(*(unsigned int *)((int)param_1[4] + 0x24));
   *(unsigned int *)((int)param_1[4] + 0x30) = temp_v2;
   param_1[6] = 1.0f;

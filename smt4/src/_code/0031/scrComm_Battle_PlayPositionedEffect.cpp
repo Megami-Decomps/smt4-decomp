@@ -9,10 +9,10 @@ int FUN_00245420(int, unsigned int, int, unsigned int);
 int FUN_002454c4(int, int *, int, int);
 int FUN_0024550c(void);
 int FUN_00282820(int, unsigned int, int, int);
-int FUN_00282924(unsigned int *, int);
+int btlMainFindEntryByListedId(unsigned int *, int);
 int btlGetMainState(void);
 int scrGetArg(int);
-int FUN_002aa568(int, unsigned char *);
+int libc_strcmp(int, unsigned char *);
 
 /* stack frame of void: 13 slot(s), 52 byte(s) */
 typedef struct {
@@ -43,12 +43,12 @@ extern unsigned int g_btlEvent; /* 0x435d48 */
 extern int FUN_0027e3b8(unsigned int);
 extern unsigned int btlUnitGet(unsigned int);
 /* Supplied declaration required: FUN_00282820. */
-/* Supplied declaration required: FUN_00282924. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 extern int FUN_0028299c(int);
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: scrGetArg. */
-/* Supplied declaration required: FUN_002aa568. */
-extern int FUN_002c30c4(int);
+/* Supplied declaration required: libc_strcmp. */
+extern int libc_strlen(int);
 
 
 void scrComm_Battle_PlayPositionedEffect(void)
@@ -124,8 +124,8 @@ void scrComm_Battle_PlayPositionedEffect(void)
         do {
           temp_v4 = temp_v5 + temp_v1 * 0x16;
           temp_v6 = temp_v4 + 0x58;
-          temp_v2 = FUN_002c30c4(temp_v6);
-          if ((temp_v2 != 0) && (FUN_002aa568(temp_v6,&DAT_00400440), temp_v6 != 0)) {
+          temp_v2 = libc_strlen(temp_v6);
+          if ((temp_v2 != 0) && (libc_strcmp(temp_v6,&DAT_00400440), temp_v6 != 0)) {
             temp_v3 = (unsigned int)*(unsigned short *)(temp_v4 + 0x6a);
             temp_v2 = FUN_0028299c(DAT_00435d18);
             temp_v6 = 2;
@@ -141,7 +141,7 @@ void scrComm_Battle_PlayPositionedEffect(void)
             case 5:
             case 0xc:
               if ((((temp_v3 != 0xc) || (temp_v12 < 0)) ||
-                  (puVar3 = temp_v18, FUN_00282924(temp_v18,temp_v12), puVar3 == (unsigned int *)0x0)) ||
+                  (puVar3 = temp_v18, btlMainFindEntryByListedId(temp_v18,temp_v12), puVar3 == (unsigned int *)0x0)) ||
                  ((*puVar3 & 2) != 0)) {
                 temp_v11 = temp_v4 + 0x58;
                 temp_v8 = 6;

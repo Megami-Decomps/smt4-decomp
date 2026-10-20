@@ -8,8 +8,8 @@ int FUN_002630e0(unsigned int *, int, unsigned int);
 int btlGetMainState(void);
 int FUN_00295eb0(...);
 int FUN_002963ec(...);
-int FUN_002af5c0(int, int, int);
-int FUN_002b8da0(int, unsigned int);
+int uiSpriteSetImageKeyframe(int, int, int);
+int pairSetFirstResetSecond(int, unsigned int);
 int FUN_002bee58(...);
 int FUN_002bf818(int);
 int FUN_003adca8(int, int, unsigned int);
@@ -21,15 +21,15 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_1_stack;
 
-extern int DAT_00439ca8; /* 0x439ca8 */
+extern int g_btlUiBlock; /* 0x439ca8 */
 
 /* Supplied declaration required: FUN_002630e0. */
 extern int FUN_00293230(void);
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_00295eb0. */
 /* Supplied declaration required: FUN_002963ec. */
-/* Supplied declaration required: FUN_002af5c0. */
-/* Supplied declaration required: FUN_002b8da0. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
+/* Supplied declaration required: pairSetFirstResetSecond. */
 /* Supplied declaration required: FUN_002bee58. */
 /* Supplied declaration required: FUN_002bf818. */
 extern unsigned int FUN_002c501c(void);
@@ -84,12 +84,12 @@ void FUN_00205cc8(int param_1)
           temp_v6 = 0;
           if (temp_v6 < temp_v3) {
             do {
-              FUN_002af5c0(temp_v7 + temp_v6 * 0x8c + 0x7f4c,0xc,0);
+              uiSpriteSetImageKeyframe(temp_v7 + temp_v6 * 0x8c + 0x7f4c,0xc,0);
               temp_v6 = temp_v6 + 1;
             } while (temp_v6 < temp_v3);
           }
-          FUN_002af5c0(temp_v7 + 0x8208,0xc,0);
-          FUN_002af5c0(temp_v7 + 0x8294,0xc,0);
+          uiSpriteSetImageKeyframe(temp_v7 + 0x8208,0xc,0);
+          uiSpriteSetImageKeyframe(temp_v7 + 0x8294,0xc,0);
         }
         else if (*(char *)(temp_v7 + 0x7fd6) != '\0') {
           *(unsigned char *)(temp_v7 + 0x832c) = 0;
@@ -157,7 +157,7 @@ LAB_00205ea4:
           if (*(int *)(temp_v7 + 0xbfe8) >= 0xc) {
 LAB_00205fe0:
             if (*(short *)(temp_v7 + 0xbfa8) != 0xc) {
-              FUN_002af5c0(temp_v7 + 0xbf4c,0xc,0);
+              uiSpriteSetImageKeyframe(temp_v7 + 0xbf4c,0xc,0);
               if (*(int *)(temp_v7 + 0xbfe8) >= 3) {
                 FUN_002bf818(temp_v7 + 0xbf4c);
               }
@@ -186,7 +186,7 @@ LAB_00205fe0:
     }
     else {
 LAB_00206088:
-      temp_v3 = DAT_00439ca8;
+      temp_v3 = g_btlUiBlock;
       temp_v6 = param_1 + temp_v8;
       if ((int)*(char *)(temp_v6 + 0xe00c) < (int)*(char *)(temp_v6 + 0xe01c)) {
         temp_v7 = temp_v7 + *(char *)(temp_v6 + 0xe00c) * 0x14;
@@ -222,7 +222,7 @@ LAB_00206088:
           }
         }
         temp_v4 = temp_v3 + 0xbf4c;
-        FUN_002b8da0(temp_v4,temp_v5);
+        pairSetFirstResetSecond(temp_v4,temp_v5);
         FUN_00295eb0(temp_v4,0x15,0x416);
         FUN_002963ec(temp_v4,(int)(short)(int)*(float *)(temp_v3 + 0xbfd8),
                      (int)(short)(int)*(float *)(temp_v3 + 0xbfdc));

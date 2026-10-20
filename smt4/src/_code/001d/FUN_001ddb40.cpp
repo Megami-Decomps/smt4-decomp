@@ -10,7 +10,7 @@ typedef struct {
 
 extern UseCounter g_useCounter;
 
-int FUN_00297410(int id);
+int fileSlotLoad(int id);
 int FUN_002b7bca(u32 first, u32 second, int size, u8 *table);
 int asdTMTexTableLoadSprites(int id);
 int FUN_002c58c8(int id, int arg);
@@ -27,7 +27,7 @@ void FUN_001ddb40(void)
 
         asdTMTexTableLoadSprites(0x1e);
         FUN_002c58c8(0x1e, 0);
-        FUN_00297410(0x38);
+        fileSlotLoad(0x38);
         first = dataTableGet(0x38, 0);
         second = dataTableGetEntries();
         first = dataTableGetCount(first);

@@ -24,7 +24,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: FUN_001676b0. */
 extern int FUN_001834a4(unsigned int, unsigned int);
-extern int FUN_001ab854(int);
+extern int gameGetSlotRecord(int);
 /* Supplied declaration required: FUN_0035ae58. */
 /* Supplied declaration required: __aeabi_idivmod. */
 
@@ -57,7 +57,7 @@ void FUN_004b42b0(int param_1,int param_2,int param_3,int param_4)
   temp_v11 = 0;
   temp_v0 = 0;
   if (-1 < param_2) {
-    temp_v2 = FUN_001ab854(param_2);
+    temp_v2 = gameGetSlotRecord(param_2);
     temp_v7 = (unsigned int)*(unsigned short *)(temp_v2 + 0x60);
   }
   param_1 = param_1 + param_2 * 4;

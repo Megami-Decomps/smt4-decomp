@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00162330(char *, char *);
-int FUN_00167bc8(char *, char *, int);
+int memCopyWords(char *, char *, int);
 int FUN_0018aa5c(char *, char *, char *, char *);
 int FUN_0018af48(char *, char *, int *);
 int nn_math_ARMv6_MTX44TransposeAsm(char *, char *);
@@ -24,7 +24,7 @@ static float romwright_sqrt_4(float value)
 }
 #endif
 /* Supplied declaration required: FUN_00162330. */
-/* Supplied declaration required: FUN_00167bc8. */
+/* Supplied declaration required: memCopyWords. */
 /* Supplied declaration required: FUN_0018aa5c. */
 /* Supplied declaration required: FUN_0018af48. */
 /* Supplied declaration required: nn_math_ARMv6_MTX44TransposeAsm. */
@@ -82,7 +82,7 @@ void FUN_0014f0dc(char *param_1,unsigned int *param_2,float *param_3,float *para
       uStack_10 = in_s16;
       FUN_0018aa5c(param_1 + 0x38,param_1 + 4,param_1 + 0x1c,param_1 + 0x10);
       FUN_00162330(param_1 + 0x128,param_1 + 0x38);
-      FUN_00167bc8(param_1 + 0x38,param_1 + 0x68,0x30);
+      memCopyWords(param_1 + 0x38,param_1 + 0x68,0x30);
       *(unsigned int *)(param_1 + 0x98) = temp_v6;
       *(unsigned int *)(param_1 + 0x9c) = temp_v6;
       *(unsigned int *)(param_1 + 0xa0) = temp_v6;

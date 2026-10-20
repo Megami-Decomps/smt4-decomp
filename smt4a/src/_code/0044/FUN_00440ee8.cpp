@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001a08d8(unsigned int *);
+int nn_os_LightEvent_Signal(unsigned int *);
 
 /* stack frame of param_7: 5 slot(s), 20 byte(s) */
 typedef struct {
@@ -27,7 +27,7 @@ extern int DAT_00646058; /* 0x646058 */
 extern signed char DAT_0064606d; /* 0x64606d */
 extern signed char DAT_0064606e; /* 0x64606e */
 
-/* Supplied declaration required: FUN_001a08d8. */
+/* Supplied declaration required: nn_os_LightEvent_Signal. */
 extern int FUN_0043de60(unsigned int *);
 extern int FUN_00440814(int *, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned char *, unsigned int);
 extern void nn_os_CriticalSection_Enter(unsigned int);
@@ -161,7 +161,7 @@ int FUN_00440ee8(unsigned int param_1,unsigned int param_2,unsigned int param_3,
             }
             DAT_00646054 = DAT_00646054 + 1;
           }
-          FUN_001a08d8(&DAT_00646048);
+          nn_os_LightEvent_Signal(&DAT_00646048);
           nn_os_CriticalSection_Leave((unsigned int)&DAT_0064603c);
         }
         else {
@@ -219,7 +219,7 @@ int FUN_00440ee8(unsigned int param_1,unsigned int param_2,unsigned int param_3,
           }
           DAT_00646054 = DAT_00646054 + 1;
         }
-        FUN_001a08d8(&DAT_00646048);
+        nn_os_LightEvent_Signal(&DAT_00646048);
         nn_os_CriticalSection_Leave((unsigned int)&DAT_0064603c);
       }
     }

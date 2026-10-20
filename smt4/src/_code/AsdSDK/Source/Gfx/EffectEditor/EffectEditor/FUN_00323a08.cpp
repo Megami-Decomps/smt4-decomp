@@ -9,11 +9,11 @@ int FUN_0021a250(float *, unsigned int, int);
 int FUN_00243224(...);
 int FUN_00249678(void);
 int FUN_002496cc(int);
-int FUN_0024dd48(unsigned char *);
+int effEditorNodeChainApply(unsigned char *);
 int FUN_0024dd80(int);
 int FUN_0024dd90(unsigned char *);
 int effMenuListAppend(void);
-int FUN_002bfde4(...);
+int padIsButtonPressed(...);
 int memAlloc(int, int, int, int, int, int);
 
 /* stack frame of param_2: 13 slot(s), 52 byte(s) */
@@ -70,11 +70,11 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_00243224. */
 /* Supplied declaration required: FUN_00249678. */
 /* Supplied declaration required: FUN_002496cc. */
-/* Supplied declaration required: FUN_0024dd48. */
+/* Supplied declaration required: effEditorNodeChainApply. */
 /* Supplied declaration required: FUN_0024dd80. */
 /* Supplied declaration required: FUN_0024dd90. */
 /* Supplied declaration required: effMenuListAppend. */
-/* Supplied declaration required: FUN_002bfde4. */
+/* Supplied declaration required: padIsButtonPressed. */
 /* Supplied declaration required: memAlloc. */
 
 
@@ -115,10 +115,10 @@ unsigned int FUN_00323a08(int param_1,int param_2)
   
   temp_v6 = 1;
   if ((DAT_0044f910 & 2) == 0) {
-    temp_v5 = FUN_002bfde4(1);
+    temp_v5 = padIsButtonPressed(1);
     if (temp_v5 == 0) {
       FUN_0024dd80(1);
-      temp_v5 = FUN_002bfde4();
+      temp_v5 = padIsButtonPressed();
       if (temp_v5 != 0) {
         temp_v6 = 0;
       }
@@ -134,7 +134,7 @@ unsigned int FUN_00323a08(int param_1,int param_2)
   if (DAT_0044ea89 == '\0') {
     FUN_0024dd90(&DAT_0044f900);
   }
-  FUN_0024dd48(&DAT_0044f900);
+  effEditorNodeChainApply(&DAT_0044f900);
   temp_v1 = DAT_004d927c;
   temp_v0 = DAT_004d9278;
   temp_v11 = DAT_004d9274;

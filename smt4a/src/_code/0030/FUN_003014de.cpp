@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002e76b6(unsigned int);
+int onlineBufferGetData(unsigned int);
 
-/* Supplied declaration required: FUN_002e76b6. */
+/* Supplied declaration required: onlineBufferGetData. */
 
 
 unsigned int FUN_003014de(int param_1)
@@ -16,9 +16,9 @@ unsigned int FUN_003014de(int param_1)
   char *pcVar1;
   int temp_v0;
   
-  pcVar1 = (char *)FUN_002e76b6(*(unsigned int *)(param_1 + 8));
+  pcVar1 = (char *)onlineBufferGetData(*(unsigned int *)(param_1 + 8));
   if ((*pcVar1 == -0xb) &&
-     (temp_v0 = FUN_002e76b6(*(unsigned int *)(param_1 + 8)), *(unsigned char *)(temp_v0 + 1) == 0xd0)) {
+     (temp_v0 = onlineBufferGetData(*(unsigned int *)(param_1 + 8)), *(unsigned char *)(temp_v0 + 1) == 0xd0)) {
     return 1;
   }
   return 0;

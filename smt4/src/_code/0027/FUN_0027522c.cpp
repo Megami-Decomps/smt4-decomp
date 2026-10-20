@@ -5,15 +5,15 @@
 extern "C" {
 
 int FUN_0028c618(unsigned int, int);
-int FUN_0028c640(unsigned int, int, int);
+int nodeSetTranslation(unsigned int, int, int);
 int FUN_0029bb14(unsigned int);
 int FUN_002a5710(unsigned int);
 
-extern int DAT_00447e70; /* 0x447e70 */
+extern int g_mapObj; /* 0x447e70 */
 extern unsigned char g_gameState; /* 0x49f91c */
 
 /* Supplied declaration required: FUN_0028c618. */
-/* Supplied declaration required: FUN_0028c640. */
+/* Supplied declaration required: nodeSetTranslation. */
 /* Supplied declaration required: FUN_0029bb14. */
 /* Supplied declaration required: FUN_002a5710. */
 
@@ -29,7 +29,7 @@ void FUN_0027522c(void)
   
   temp_v1 = 0;
   do {
-    temp_v2 = DAT_00447e70 + temp_v1 * 0x48;
+    temp_v2 = g_mapObj + temp_v1 * 0x48;
     if (*(char *)(temp_v2 + 0x14) != '\0') {
       puVar2 = *(unsigned int **)(temp_v2 + 0x3c);
       temp_v0 = *puVar2;
@@ -46,7 +46,7 @@ void FUN_0027522c(void)
         }
         if (*(char *)(temp_v2 + 0x15) != '\0') {
           if (*(char *)(temp_v2 + 0x16) != '\0') {
-            FUN_0028c640(*(unsigned int *)(*(int *)(temp_v2 + 0x3c) + 8),0,temp_v2 + 0x18);
+            nodeSetTranslation(*(unsigned int *)(*(int *)(temp_v2 + 0x3c) + 8),0,temp_v2 + 0x18);
             FUN_0028c618(*(unsigned int *)(*(int *)(temp_v2 + 0x3c) + 8),0);
           }
           if (*(int *)(*(int *)(*(int *)(temp_v2 + 0x3c) + 8) + 0x38) != *(int *)(temp_v2 + 0x34)) {

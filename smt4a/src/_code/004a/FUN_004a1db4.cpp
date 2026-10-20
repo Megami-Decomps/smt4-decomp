@@ -27,13 +27,13 @@ typedef struct {
 
 extern unsigned char DAT_0057f0b4; /* 0x57f0b4 */
 
-extern unsigned int FUN_001654d8(int);
-extern unsigned int FUN_001654e4(int);
+extern unsigned int vec2GetXInt(int);
+extern unsigned int vec2GetYInt(int);
 /* Supplied declaration required: FUN_00167f08. */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00183f58. */
 /* Supplied declaration required: FUN_00184528. */
-extern int FUN_0023b258(void);
+extern int useCounterIsFinished(void);
 extern int FUN_002a482c(int);
 extern int FUN_002a4b28(unsigned short);
 extern int FUN_002c7ca0(void);
@@ -70,14 +70,14 @@ void FUN_004a1db4(int param_1)
   int temp_v7;
   unsigned int temp_v8;
   
-  temp_v3 = FUN_0023b258();
+  temp_v3 = useCounterIsFinished();
   if (temp_v3 == 0) {
     return;
   }
   FUN_004cf8dc(param_1 + 0xdc,(int)*(short *)(param_1 + 0xa874));
   temp_v3 = param_1 + *(short *)(param_1 + 0xa874) * 0x8c + 0xfc;
-  temp_v4 = FUN_001654e4(temp_v3);
-  temp_v5 = FUN_001654d8(temp_v3);
+  temp_v4 = vec2GetYInt(temp_v3);
+  temp_v5 = vec2GetXInt(temp_v3);
   FUN_004935b0(param_1 + 200,temp_v5,temp_v4);
   temp_v3 = FUN_002f036c();
   if ((temp_v3 != 0) && (temp_v3 = FUN_002c7ca0(), temp_v3 == 0)) {

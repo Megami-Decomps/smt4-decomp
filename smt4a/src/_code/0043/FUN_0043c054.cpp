@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00170f68(unsigned int *, unsigned int, int, int *, int);
 int FUN_001a2d04(int, int, int, double);
-int FUN_001bcd48(...);
+int svcSleepThread(...);
 int FUN_00439ea0(void);
 int FUN_00439eb0(void);
 int nn_os_TransferMemoryBlock_Finalize(int *);
@@ -37,7 +37,7 @@ extern unsigned int DAT_005891cc; /* 0x5891cc */
 /* Supplied declaration required: FUN_00170f68. */
 /* Supplied declaration required: FUN_001a2d04. */
 extern unsigned int FUN_001a324c(unsigned int);
-/* Supplied declaration required: FUN_001bcd48. */
+/* Supplied declaration required: svcSleepThread. */
 /* Supplied declaration required: FUN_00439ea0. */
 /* Supplied declaration required: FUN_00439eb0. */
 /* Supplied declaration required: nn_os_TransferMemoryBlock_Finalize. */
@@ -99,7 +99,7 @@ unsigned int FUN_0043c054(unsigned char *param_1,unsigned int param_2,int param_
             in_s0 = temp_v1;
           }
           FUN_00439eb0();
-          FUN_001bcd48(&LAB_004c4b40,0);
+          svcSleepThread(&LAB_004c4b40,0);
         } while (temp_v1 < in_s0);
       }
       temp_v6 = DAT_005891c8;
@@ -115,7 +115,7 @@ unsigned int FUN_0043c054(unsigned char *param_1,unsigned int param_2,int param_
             in_s0 = temp_v2;
           }
           FUN_00439eb0();
-          temp_v1 = (float)FUN_001bcd48(&LAB_004c4b40,0);
+          temp_v1 = (float)svcSleepThread(&LAB_004c4b40,0);
         } while (in_s0 < temp_v2);
       }
       if (param_3 != 0) {
@@ -132,7 +132,7 @@ unsigned int FUN_0043c054(unsigned char *param_1,unsigned int param_2,int param_
       return temp_v0;
     }
     if (temp_v0 == 0xe0a0cc08) {
-      FUN_001bcd48(10000000,0);
+      svcSleepThread(10000000,0);
     }
   }
   nn_os_TransferMemoryBlock_Finalize(&temp_v7);

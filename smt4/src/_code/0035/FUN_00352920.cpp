@@ -30,7 +30,7 @@ extern unsigned char LAB_00352b68; /* 0x352b68 */
 /* Supplied declaration required: FUN_0023a118. */
 /* Supplied declaration required: FUN_0023a154. */
 /* Supplied declaration required: FUN_002ac8b0. */
-extern int FUN_002b5a48(void);
+extern int wstrlenU16(void);
 /* Supplied declaration required: FUN_00355d68. */
 /* Supplied declaration required: FUN_0035a0b4. */
 extern void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(unsigned int);
@@ -70,7 +70,7 @@ int * FUN_00352920(unsigned int *param_1)
   temp_v10 = temp_v13;
   piVar4 = &temp_v12;
   temp_v9 = 4;
-  temp_v0 = FUN_002b5a48();
+  temp_v0 = wstrlenU16();
   temp_v11 = (temp_v0 + 1) * 2;
   FUN_00355d68(piVar4,temp_v2,temp_v3,&temp_v9,1);
   if (((((unsigned int)piVar4 & 0x3fc00) != 0x4400) || (99 >= ((unsigned int)piVar4 & 0x3ff))) ||

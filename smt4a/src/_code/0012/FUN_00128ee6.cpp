@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0013400a(int, int, int *);
 int FUN_001341d4(int, unsigned int);
-int FUN_002e9318(int *);
+int onlineStringDestroy(int *);
 int constructObj0055affc(int *);
 int FUN_002fbc1a(int, int *);
 int FUN_00306d44(...);
@@ -19,9 +19,9 @@ typedef struct {
 
 /* Supplied declaration required: FUN_0013400a. */
 /* Supplied declaration required: FUN_001341d4. */
-/* Supplied declaration required: FUN_002e9318. */
+/* Supplied declaration required: onlineStringDestroy. */
 /* Supplied declaration required: constructObj0055affc. */
-extern int FUN_002ed28c(int, unsigned int *);
+extern int streamReadU32(int, unsigned int *);
 /* Supplied declaration required: FUN_002fbc1a. */
 /* Supplied declaration required: FUN_00306d44. */
 /* Supplied declaration required: FUN_0030d3ba. */
@@ -41,7 +41,7 @@ void FUN_00128ee6(int param_1,int param_2,unsigned int param_3,unsigned int para
   uStack_1c = param_3;
   temp_v2 = param_4;
   FUN_00306d44(param_2);
-  temp_v0 = FUN_002ed28c(param_1,&temp_v2);
+  temp_v0 = streamReadU32(param_1,&temp_v2);
   if (temp_v0 != 0) {
     FUN_001341d4(param_2,temp_v2);
     for (temp_v1 = 0; temp_v1 < temp_v2; temp_v1 = temp_v1 + 1) {
@@ -52,7 +52,7 @@ void FUN_00128ee6(int param_1,int param_2,unsigned int param_3,unsigned int para
       FUN_002fbc1a(param_1,&iStack_20);
       if (*(char *)(param_1 + 4) != '\0') {
         FUN_00306d44();
-        FUN_002e9318(&iStack_20);
+        onlineStringDestroy(&iStack_20);
         return;
       }
       temp_v0 = *(int *)(param_2 + 4);
@@ -63,7 +63,7 @@ void FUN_00128ee6(int param_1,int param_2,unsigned int param_3,unsigned int para
       else {
         FUN_0013400a(param_2,temp_v0,&iStack_20);
       }
-      FUN_002e9318(&iStack_20);
+      onlineStringDestroy(&iStack_20);
     }
   }
   return;

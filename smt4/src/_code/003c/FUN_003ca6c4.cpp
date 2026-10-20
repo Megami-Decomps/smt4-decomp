@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_00282924(unsigned int *, int);
+int btlMainFindEntryByListedId(unsigned int *, int);
 int FUN_002ae164(void);
-int FUN_002b4670(void);
-int FUN_002c3944(int, int);
-int FUN_002c424c(unsigned int *, int, unsigned int);
+int dataTable08Sub1GetRecord(void);
+int rt_memclr(int, int);
+int __aeabi_memset4(unsigned int *, int, unsigned int);
 int memClear(unsigned int *, int);
 int FUN_003ae850(unsigned int, int, int);
 int FUN_003aeaa4(unsigned int, int, int, int, int, int);
@@ -19,13 +19,13 @@ typedef struct {
 } param_2_stack;
 
 extern unsigned int g_btlAction; /* 0x434278 */
-extern unsigned int DAT_00439ca8; /* 0x439ca8 */
+extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 
-/* Supplied declaration required: FUN_00282924. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_002ae164. */
-/* Supplied declaration required: FUN_002b4670. */
-/* Supplied declaration required: FUN_002c3944. */
-/* Supplied declaration required: FUN_002c424c. */
+/* Supplied declaration required: dataTable08Sub1GetRecord. */
+/* Supplied declaration required: rt_memclr. */
+/* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: FUN_003ae850. */
 /* Supplied declaration required: FUN_003aeaa4. */
@@ -63,7 +63,7 @@ void FUN_003ca6c4(int *param_1,unsigned int *param_2)
   temp_v4 = *(unsigned int *)(*(int *)(*param_1 + 0x1fc0) + (unsigned int)(unsigned short)param_2[0xb] * 0x288);
   temp_v5 = temp_v10;
   FUN_002ae164();
-  FUN_002b4670();
+  dataTable08Sub1GetRecord();
   if (temp_v2 != 2) {
     if (temp_v2 == 8) {
       temp_v8 = 0;
@@ -132,8 +132,8 @@ joined_r0x003ca8d4:
 LAB_003ca908:
     temp_v5 = temp_v5 + 1;
     if (temp_v5 >= 0x6d) {
-      FUN_002c424c(param_2 + 0x51,0x214,0xffffffff);
-      FUN_002c424c(param_2 + 0xd6,0x214,0xffffffff);
+      __aeabi_memset4(param_2 + 0x51,0x214,0xffffffff);
+      __aeabi_memset4(param_2 + 0xd6,0x214,0xffffffff);
       temp_v10 = 0;
       temp_v5 = 0;
       do {
@@ -141,11 +141,11 @@ LAB_003ca908:
         temp_v9 = puVar7[0x7a6] + temp_v10 * 0x114;
         temp_v7 = temp_v5;
         if ((*(unsigned int *)(temp_v9 + 0x50) & 4) != 0 && (*(unsigned int *)(temp_v9 + 0x50) & 0x400) != 0) {
-          FUN_00282924(puVar7,(int)*(short *)(temp_v9 + 0x62));
+          btlMainFindEntryByListedId(puVar7,(int)*(short *)(temp_v9 + 0x62));
           if (((*puVar7 & 0x10) != 0) &&
              (((*puVar7 & 0x100) == 0 || ((short)puVar7[2] == *(short *)(temp_v9 + 0x62))))) {
-            temp_v4 = DAT_00439ca8;
-            FUN_003aeaa4(DAT_00439ca8,*(unsigned short *)((int)puVar7 + 0xce),
+            temp_v4 = g_btlUiBlock;
+            FUN_003aeaa4(g_btlUiBlock,*(unsigned short *)((int)puVar7 + 0xce),
                          (int)*(char *)(temp_v9 + 0x3c),(int)*(short *)((int)puVar7 + 0x1b6),
                          (int)*(short *)((int)puVar7 + 0x1ba),*(unsigned short *)((int)puVar7 + 0x1c6));
             temp_v7 = temp_v5 + 1;
@@ -156,9 +156,9 @@ LAB_003ca908:
         temp_v10 = temp_v10 + 1;
         temp_v5 = temp_v7;
       } while (temp_v10 < 0x85);
-      FUN_003ae850(DAT_00439ca8,*param_1 + 0x1e8c,5);
+      FUN_003ae850(g_btlUiBlock,*param_1 + 0x1e8c,5);
       memClear(param_2 + 0xe,0x85);
-      FUN_002c3944((int)param_2 + 0xbd,0x85);
+      rt_memclr((int)param_2 + 0xbd,0x85);
       g_btlAction = 0xffffffff;
       temp_v5 = 0;
       do {

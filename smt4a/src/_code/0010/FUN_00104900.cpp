@@ -29,8 +29,8 @@ typedef struct Context {
 } Context; /* 0x68 */
 
 extern void FUN_002ea974(Context *context);
-extern void FUN_002ea9c0(Context *context, u32 arg);
-extern void FUN_002ea9dc(Context *context);
+extern void onlineUrlSetAddress(Context *context, u32 arg);
+extern void onlineUrlDestroy(Context *context);
 
 void FUN_00104900(Owner *owner, u32 arg, Item *item)
 {
@@ -38,13 +38,13 @@ void FUN_00104900(Owner *owner, u32 arg, Item *item)
         Context context;
 
         FUN_002ea974(&context);
-        FUN_002ea9c0(&context, arg);
+        onlineUrlSetAddress(&context, arg);
         if (item->link != 0) {
             owner->handler->vtbl->process(owner->handler, owner, item, &context);
         } else {
             owner->handler->vtbl->process(owner->handler, owner, NULL, &context);
         }
-        FUN_002ea9dc(&context);
+        onlineUrlDestroy(&context);
     }
 }
 

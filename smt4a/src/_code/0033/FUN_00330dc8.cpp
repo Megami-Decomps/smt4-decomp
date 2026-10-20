@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_1_stack;
 
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 extern int scrGetArg(unsigned int);
 /* Supplied declaration required: scrSetResult. */
 
@@ -45,7 +45,7 @@ unsigned int FUN_00330dc8(unsigned int *param_1)
         temp_v2 = 1;
         continue;
       }
-      temp_v1 = FUN_0018719c(temp_v4[temp_v2]);
+      temp_v1 = gameFlagIsSet(temp_v4[temp_v2]);
       if (temp_v1 != 0) {
         temp_v3 = temp_v3 + 1;
       }

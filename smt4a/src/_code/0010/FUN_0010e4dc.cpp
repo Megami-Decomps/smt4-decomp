@@ -6,12 +6,12 @@ extern "C" {
 
 int FUN_0011bc64(void);
 int FUN_00122fcc(unsigned int, unsigned int, int);
-int FUN_002e6e14(void);
+int asdOperatorDeleteArray(void);
 int FUN_002e6e26(void);
-int FUN_002e75fa(unsigned int);
-int FUN_002e760a(int);
-int FUN_002e9300(unsigned char [4], unsigned char *);
-int FUN_002e9318(unsigned char [4]);
+int sharedRefAddRef(unsigned int);
+int operatorNew(int);
+int onlineStringConstruct(unsigned char [4], unsigned char *);
+int onlineStringDestroy(unsigned char [4]);
 int onlineObjectThreadRootStart(int, int);
 int FUN_002f8da8(void);
 
@@ -50,12 +50,12 @@ extern unsigned int FUN_0010efb6(int, unsigned int, unsigned int);
 extern int *FUN_00116770(void);
 /* Supplied declaration required: FUN_0011bc64. */
 /* Supplied declaration required: FUN_00122fcc. */
-/* Supplied declaration required: FUN_002e6e14. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
 /* Supplied declaration required: FUN_002e6e26. */
-/* Supplied declaration required: FUN_002e75fa. */
-/* Supplied declaration required: FUN_002e760a. */
-/* Supplied declaration required: FUN_002e9300. */
-/* Supplied declaration required: FUN_002e9318. */
+/* Supplied declaration required: sharedRefAddRef. */
+/* Supplied declaration required: operatorNew. */
+/* Supplied declaration required: onlineStringConstruct. */
+/* Supplied declaration required: onlineStringDestroy. */
 extern unsigned int *FUN_002eb77c(int, unsigned int, unsigned char *);
 /* Supplied declaration required: onlineObjectThreadRootStart. */
 extern unsigned int *FUN_002f58d0(int, unsigned char *, unsigned int);
@@ -76,16 +76,16 @@ void FUN_0010e4dc(int param_1)
   
   if ((DAT_00594967 != '\0') || (DAT_00594969 != '\0')) {
     if (*(int *)(param_1 + 0x14c) == 0) {
-      temp_v0 = FUN_002e760a(0x34);
+      temp_v0 = operatorNew(0x34);
       if (temp_v0 != 0) {
-        FUN_002e9300(temp_v3,&LAB_0010e638);
+        onlineStringConstruct(temp_v3,&LAB_0010e638);
         puVar2 = (unsigned int *)FUN_002f58d0(temp_v0,temp_v3,DAT_00594a40);
         puVar2[0xb] = 0;
         *puVar2 = (unsigned int)&DAT_0055888c;
         puVar2[10] = 0;
         puVar2[9] = 0;
         *(unsigned int **)(param_1 + 0x14c) = puVar2;
-        FUN_002e9318(temp_v3);
+        onlineStringDestroy(temp_v3);
       }
       else {
         *(unsigned int *)(param_1 + 0x14c) = 0;
@@ -99,21 +99,21 @@ void FUN_0010e4dc(int param_1)
     }
   }
   else if ((*(int *)(param_1 + 0x154) == 0) && (temp_v0 = FUN_002e6e26(), temp_v0 != 0)) {
-    temp_v0 = FUN_002e760a(0x40);
+    temp_v0 = operatorNew(0x40);
     if (temp_v0 != 0) {
-      FUN_002e9300(temp_v2,&LAB_0010e664);
+      onlineStringConstruct(temp_v2,&LAB_0010e664);
       puVar2 = (unsigned int *)FUN_002eb77c(temp_v0,0,temp_v4);
       puVar2[0xf] = param_1;
       *puVar2 = (unsigned int)&DAT_00559154;
       *(unsigned int **)(param_1 + 0x154) = puVar2;
-      FUN_002e9318(temp_v2);
+      onlineStringDestroy(temp_v2);
       temp_v1 = *(unsigned int *)(param_1 + 0x154);
     }
     else {
       *(unsigned int *)(param_1 + 0x154) = 0;
       temp_v1 = 0;
     }
-    FUN_002e75fa(temp_v1);
+    sharedRefAddRef(temp_v1);
     temp_v1 = FUN_002e6e26();
     FUN_00122fcc(temp_v1,*(unsigned int *)(param_1 + 0x154),0);
   }
@@ -126,12 +126,12 @@ void FUN_0010e4dc(int param_1)
       *(unsigned int *)(param_1 + 0x150) = 0;
       if (*(int *)(param_1 + 0x2d0) != 0) {
         FUN_002f8da8();
-        FUN_002e6e14();
+        asdOperatorDeleteArray();
         *(unsigned int *)(param_1 + 0x2d0) = 0;
       }
     }
     if (DAT_0059497a != '\0') {
-      temp_v0 = FUN_002e760a(0x38);
+      temp_v0 = operatorNew(0x38);
       temp_v1 = 0;
       if (temp_v0 != 0) {
         temp_v1 = FUN_0010efb6(temp_v0,DAT_00594a44,*(unsigned int *)(param_1 + 100));
@@ -142,14 +142,14 @@ void FUN_0010e4dc(int param_1)
       *(unsigned int *)(param_1 + 0x2d0) = 0;
     }
     if (s______0059496b.whole[0] != '\x01') {
-      temp_v0 = FUN_002e760a(0x7c);
+      temp_v0 = operatorNew(0x7c);
       piVar4 = (int *)0x0;
       if (temp_v0 != 0) {
         piVar4 = (int *)FUN_00116770();
       }
     }
     else {
-      piVar4 = (int *)FUN_002e760a(0x11c);
+      piVar4 = (int *)operatorNew(0x11c);
       if (piVar4 != (int *)0x0) {
         FUN_0011bc64();
       }

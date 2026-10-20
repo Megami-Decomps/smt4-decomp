@@ -14,7 +14,7 @@ struct fn_00132aec_arg0 {
     int field_0x14; /* +0x14 */
 };
 
-extern unsigned int *FUN_00310186(fn_00132aec_arg0 *, unsigned int);
+extern unsigned int *poolAllocElement12(fn_00132aec_arg0 *, unsigned int);
 
 
 void FUN_00132aec(fn_00132aec_arg0 *param_1,int *param_2)
@@ -25,7 +25,7 @@ void FUN_00132aec(fn_00132aec_arg0 *param_1,int *param_2)
   void *pvVar3;
   
   pvVar3 = param_1->field_0x10;
-  puVar1 = (unsigned int *)FUN_00310186(param_1,0);
+  puVar1 = (unsigned int *)poolAllocElement12(param_1,0);
   temp_v0 = *param_2;
   *puVar1 = (unsigned int)pvVar3;
   puVar1[2] = temp_v0;

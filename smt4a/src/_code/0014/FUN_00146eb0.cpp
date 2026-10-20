@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00159468(...);
 
-extern unsigned char DAT_00643098; /* 0x643098 */
+extern unsigned char g_nnHidServiceHandle; /* 0x643098 */
 
 /* Supplied declaration required: FUN_00159468. */
 
@@ -15,7 +15,7 @@ void FUN_00146eb0(void)
 
 {
 /* irregular: 1 native warning(s); review required */
-  FUN_00159468(&DAT_00643098,"hid:USER");
+  FUN_00159468(&g_nnHidServiceHandle,"hid:USER");
   return;
 }
 

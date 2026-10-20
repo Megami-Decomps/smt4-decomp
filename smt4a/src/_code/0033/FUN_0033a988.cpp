@@ -11,7 +11,7 @@ extern unsigned int DAT_005f1600; /* 0x5f1600 */
 extern unsigned int DAT_005f1604; /* 0x5f1604 */
 extern unsigned int DAT_005f1610; /* 0x5f1610 */
 
-extern unsigned char *FUN_00162e8c(void);
+extern unsigned char *gameFlagsGetBlock(void);
 
 
 void FUN_0033a988(void)
@@ -22,7 +22,7 @@ void FUN_0033a988(void)
   unsigned char *puVar3;
   unsigned char temp_v2;
   
-  puVar3 = (unsigned char *)FUN_00162e8c();
+  puVar3 = (unsigned char *)gameFlagsGetBlock();
   temp_v2 = DAT_005f1610;
   *puVar3 = (char)DAT_005f1610;
   temp_v0 = (unsigned char)g_gameState;

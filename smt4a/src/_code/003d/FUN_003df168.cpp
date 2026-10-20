@@ -5,7 +5,7 @@
 extern "C" {
 
 int dataTableGetCount(...);
-int FUN_001abac8(...);
+int gameFlagBlockGetEntry(...);
 int FUN_001ad9b4(...);
 int FUN_00203b1c(...);
 int FUN_004ccbf0(...);
@@ -23,12 +23,12 @@ struct fn_003df168_arg1 {
 
 extern int g_aocSystem; /* 0x570280 */
 
-extern int FUN_0014bef4(short);
-extern int FUN_001801a4(void);
+extern int randRange(short);
+extern int gameGetPlayerData(void);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: dataTableGetCount. */
 extern int dataTableGetEntries(void);
-/* Supplied declaration required: FUN_001abac8. */
+/* Supplied declaration required: gameFlagBlockGetEntry. */
 /* Supplied declaration required: FUN_001ad9b4. */
 /* Supplied declaration required: FUN_00203b1c. */
 /* Supplied declaration required: FUN_004ccbf0. */
@@ -57,7 +57,7 @@ void FUN_003df168(unsigned int *param_1,fn_003df168_arg1 *param_2)
   pfVar4 = param_2;
   FUN_001ad9b4();
   if (pfVar4 != (fn_003df168_arg1 *)0x0) {
-    FUN_001abac8(param_2);
+    gameFlagBlockGetEntry(param_2);
     temp_v0 = pfVar4->field_0xf0;
     if (temp_v0 != 1) {
       if (temp_v0 == 3) {
@@ -112,7 +112,7 @@ LAB_003df23c:
         temp_v9 = 0;
         if (temp_v6 != 0) {
           do {
-            temp_v4 = FUN_0014bef4(temp_v10 - 1);
+            temp_v4 = randRange(temp_v10 - 1);
             temp_v5 = 0;
             do {
               temp_v7 = (unsigned int)*(unsigned short *)((int)puVar5 + temp_v5 * 4 + 0x22);
@@ -139,7 +139,7 @@ LAB_003df23c:
       pvVar10 = pfVar4->field_0xfc;
     }
     else {
-      temp_v6 = FUN_001801a4();
+      temp_v6 = gameGetPlayerData();
       temp_v7 = FUN_00203b1c();
       if (*(unsigned short *)(temp_v6 + 0x62) >= temp_v7) {
         temp_v6 = FUN_00203b1c();

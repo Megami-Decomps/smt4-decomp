@@ -29,7 +29,7 @@ extern unsigned int DAT_005711a0; /* 0x5711a0 */
 extern unsigned int DAT_005711a4; /* 0x5711a4 */
 extern unsigned int DAT_005711a8; /* 0x5711a8 */
 extern unsigned int DAT_005711ac; /* 0x5711ac */
-extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
+extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: FUN_004a9308. */
@@ -81,7 +81,7 @@ unsigned int FUN_004ed14c(int *param_1,unsigned int *param_2)
   if ((temp_v1 & 0x80) != 0) {
     if (((DAT_00571168 | DAT_00571170) & *(unsigned int *)param_2[8]) == 0 &&
         ((DAT_0057116c | DAT_00571174) & ((unsigned int *)param_2[8])[1]) == 0) {
-      FUN_004a9308(DAT_0057a9c8,(short)param_2[0xb],0);
+      FUN_004a9308(g_btlUiBlock,(short)param_2[0xb],0);
     }
     FUN_004c9160(0xb,param_2[8],0,1);
     FUN_004fd508(temp_v3,param_2,0,param_2[9],1);
@@ -91,7 +91,7 @@ unsigned int FUN_004ed14c(int *param_1,unsigned int *param_2)
   else if ((temp_v1 & 0x100) != 0) {
     if (((DAT_00571168 | DAT_00571170) & *(unsigned int *)param_2[8]) == 0 &&
         ((DAT_0057116c | DAT_00571174) & ((unsigned int *)param_2[8])[1]) == 0) {
-      FUN_004a9308(DAT_0057a9c8,(short)param_2[0xb],0);
+      FUN_004a9308(g_btlUiBlock,(short)param_2[0xb],0);
     }
     puVar9 = (unsigned int *)param_2[8];
     temp_v4 = 0xc;
@@ -107,7 +107,7 @@ unsigned int FUN_004ed14c(int *param_1,unsigned int *param_2)
          (temp_v7 & (DAT_005711a4 | DAT_005711ac)) == 0)) {
       if ((temp_v5 & (DAT_00571168 | DAT_00571170)) == 0 &&
           (temp_v7 & (DAT_0057116c | DAT_00571174)) == 0) {
-        FUN_004a9308(DAT_0057a9c8,(short)param_2[0xb],0);
+        FUN_004a9308(g_btlUiBlock,(short)param_2[0xb],0);
       }
       temp_v9 = FUN_004c3a98((int)*(short *)(param_2[9] + 0x6a),0x1a);
       puVar9 = (unsigned int *)param_2[8];
@@ -134,7 +134,7 @@ unsigned int FUN_004ed14c(int *param_1,unsigned int *param_2)
     else if ((temp_v1 & 0x1000) != 0) {
       if ((temp_v5 & (DAT_00571168 | DAT_00571170)) == 0 &&
           (temp_v7 & (DAT_0057116c | DAT_00571174)) == 0) {
-        FUN_004a9308(DAT_0057a9c8,(short)param_2[0xb],0);
+        FUN_004a9308(g_btlUiBlock,(short)param_2[0xb],0);
       }
       FUN_004c571c((int)*(short *)(param_2[9] + 0x6a),0x20,1,0);
       FUN_004c9160(0x26,param_2[8],0,1);

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b06c4(...);
+int dataTable00FindById(...);
 int memClear(...);
 int asdMemAlloc(...);
 int taskCreateDraw(...);
@@ -26,7 +26,7 @@ extern int FUN_002db9a0(...); /* 0x2db9a0 */
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 extern unsigned int FUN_00294090(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002b06c4. */
+/* Supplied declaration required: dataTable00FindById. */
 extern int FUN_002c1d5c(void);
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: asdMemAlloc. */
@@ -60,7 +60,7 @@ char * FUN_00317b94(unsigned int param_1)
   *(unsigned char *)(puVar1 + 5) = 0;
   temp_v0 = param_1 & 0xffff;
   *(unsigned char *)((int)puVar1 + 0x17) = 0;
-  FUN_002b06c4();
+  dataTable00FindById();
   puVar1[0xe] = (int)*(short *)(temp_v0 + 0x88);
   *(unsigned char *)(puVar1 + 0x11) = 1;
   temp_v1 = FUN_002c1d5c();

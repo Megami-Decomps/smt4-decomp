@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_2_stack;
 
-extern int FUN_0019c6bc(unsigned int);
+extern int idIsAbove400(unsigned int);
 /* Supplied declaration required: FUN_003811ec. */
 /* Supplied declaration required: FUN_0039a598. */
 
@@ -24,14 +24,14 @@ void FUN_00375874(unsigned int *param_1,unsigned int *param_2)
   int temp_v0;
   int temp_v1;
   
-  temp_v0 = FUN_0019c6bc(*param_1);
+  temp_v0 = idIsAbove400(*param_1);
   if (temp_v0 != 0) {
     temp_v0 = 99;
   }
   else {
     temp_v0 = FUN_0039a598(*param_1);
   }
-  temp_v1 = FUN_0019c6bc(*param_2);
+  temp_v1 = idIsAbove400(*param_2);
   if (temp_v1 != 0) {
     temp_v1 = 99;
   }

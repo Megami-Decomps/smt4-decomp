@@ -20,7 +20,7 @@ typedef struct {
 } param_2_stack;
 
 extern int g_btlScriptUnit; /* 0x43427c */
-extern unsigned int DAT_00439ca8; /* 0x439ca8 */
+extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 
 /* Supplied declaration required: FUN_00227ab4. */
 /* Supplied declaration required: FUN_00227b14. */
@@ -58,7 +58,7 @@ unsigned int FUN_003d2ea0(int *param_1,unsigned int *param_2)
   }
   if ((temp_v0 & 0x80) != 0) {
     if ((*(unsigned int *)param_2[8] & 0x30) == 0) {
-      FUN_00227b14(DAT_00439ca8,(short)param_2[0xb],0);
+      FUN_00227b14(g_btlUiBlock,(short)param_2[0xb],0);
     }
     puVar5 = (unsigned int *)param_2[8];
     temp_v1 = 0xb;
@@ -69,7 +69,7 @@ unsigned int FUN_003d2ea0(int *param_1,unsigned int *param_2)
   }
   else if ((temp_v0 & 0x100) != 0) {
     if ((*(unsigned int *)param_2[8] & 0x30) == 0) {
-      FUN_00227b14(DAT_00439ca8,(short)param_2[0xb],0);
+      FUN_00227b14(g_btlUiBlock,(short)param_2[0xb],0);
     }
     puVar5 = (unsigned int *)param_2[8];
     temp_v1 = 0xc;
@@ -80,7 +80,7 @@ unsigned int FUN_003d2ea0(int *param_1,unsigned int *param_2)
   }
   else if ((*(unsigned int *)param_2[8] & 0x60000) != 0) {
     if ((*(unsigned int *)param_2[8] & 0x30) == 0) {
-      FUN_00227b14(DAT_00439ca8,(short)param_2[0xb],0);
+      FUN_00227b14(g_btlUiBlock,(short)param_2[0xb],0);
     }
     temp_v2 = FUN_00255158((int)*(short *)(param_2[9] + 0x62),0x15);
     puVar5 = (unsigned int *)param_2[8];

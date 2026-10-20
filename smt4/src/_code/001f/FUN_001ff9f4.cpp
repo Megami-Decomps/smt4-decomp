@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00254824(int);
 int FUN_002c3510(...);
-int FUN_002c52f8(void);
+int asdFatalError(void);
 
 typedef int romwright_code(...);
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -16,7 +16,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00254824. */
 /* Supplied declaration required: FUN_002c3510. */
-/* Supplied declaration required: FUN_002c52f8. */
+/* Supplied declaration required: asdFatalError. */
 extern void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(unsigned int);
 
 
@@ -50,7 +50,7 @@ int FUN_001ff9f4(int *param_1,unsigned int param_2,unsigned int param_3,int para
   }
   if ((temp_v1 & 0xfffffffe) != 0) {
     if ((temp_v1 & 1) != 0) {
-      FUN_002c52f8();
+      asdFatalError();
     }
     nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(param_1[2] & 0xfffffffe);
     param_1[2] = 0;

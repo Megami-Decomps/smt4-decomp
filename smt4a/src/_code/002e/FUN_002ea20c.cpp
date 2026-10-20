@@ -2,12 +2,12 @@
 
 extern "C" {
 
-void FUN_002eb588(void);
+void onlineTimeGetNow(void);
 
-/* Forwards to FUN_002eb588. */
+/* Forwards to onlineTimeGetNow. */
 void FUN_002ea20c(void)
 {
-    FUN_002eb588();
+    onlineTimeGetNow();
 }
 
 } /* extern "C" */

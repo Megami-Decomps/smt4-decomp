@@ -8,15 +8,15 @@ int FUN_0026dafc(unsigned int);
 int memClear(unsigned char [4], int);
 int __aeabi_idivmod(int, int);
 
-extern int DAT_0043da90; /* 0x43da90 */
+extern int g_camp; /* 0x43da90 */
 
 /* Supplied declaration required: FUN_0026dafc. */
 extern int FUN_0029ee54(int);
 extern int FUN_0029efa8(int);
 extern int FUN_0029efc0(int);
-extern int FUN_002a8740(int);
+extern int gameGetUnitRecord(int);
 extern unsigned int FUN_002b05d0(int);
-extern int FUN_002b63ac(void);
+extern int gameGetPlayerData(void);
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: __aeabi_idivmod. */
 
@@ -40,8 +40,8 @@ void FUN_00298940(void)
   unsigned char temp_v10 [4];
   int aiStack_84 [24];
   
-  temp_v1 = DAT_0043da90;
-  temp_v2 = FUN_0029ee54(DAT_0043da90 + 0x1dc);
+  temp_v1 = g_camp;
+  temp_v2 = FUN_0029ee54(g_camp + 0x1dc);
   temp_v3 = FUN_0029ee54(temp_v1 + 0x1dc);
   if (temp_v3 < temp_v2) {
     temp_v2 = FUN_0029ee54(temp_v1 + 0x1dc);
@@ -54,11 +54,11 @@ void FUN_00298940(void)
       if (aiStack_84[temp_v8] == 0) {
         aiStack_84[temp_v8] = 1;
         if (temp_v8 < 0) {
-          temp_v4 = FUN_002b63ac();
+          temp_v4 = gameGetPlayerData();
           temp_v0 = *(unsigned short *)(temp_v4 + 0x72);
         }
         else {
-          temp_v4 = FUN_002a8740(temp_v8);
+          temp_v4 = gameGetUnitRecord(temp_v8);
           temp_v0 = *(unsigned short *)(temp_v4 + 0x44);
         }
         temp_v4 = 0;

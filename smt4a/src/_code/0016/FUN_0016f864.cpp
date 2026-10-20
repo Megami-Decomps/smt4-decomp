@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_00188b60(...);
+int nn_os_CriticalSection_Initialize(...);
 int FUN_0019a300(...);
-int FUN_001bcd48(...);
+int svcSleepThread(...);
 
 extern signed char DAT_005c0b10; /* 0x5c0b10 */
 extern int DAT_005c0b14; /* 0x5c0b14 */
@@ -55,9 +55,9 @@ typedef char romwright_storage_DAT_00646094_1_1_s1_width_check[(sizeof(((union r
 extern union romwright_storage_DAT_00646094_1_1 DAT_00646094; /* 0x646094 */
 
 extern unsigned int *FUN_00147268(void);
-/* Supplied declaration required: FUN_00188b60. */
+/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
 /* Supplied declaration required: FUN_0019a300. */
-/* Supplied declaration required: FUN_001bcd48. */
+/* Supplied declaration required: svcSleepThread. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
 
@@ -74,13 +74,13 @@ unsigned int * FUN_0016f864(void)
   
   if (DAT_005c0b10 == '\0') {
     DAT_00646078.whole = 0;
-    FUN_00188b60();
+    nn_os_CriticalSection_Initialize();
     DAT_00646084 = 0;
     DAT_00646088.whole = 0;
     uRam0064608c = 1;
     DAT_00646090 = 0;
     DAT_00646094.whole = 0;
-    FUN_00188b60(&DAT_00646094.whole);
+    nn_os_CriticalSection_Initialize(&DAT_00646094.whole);
     DAT_005c0b10 = '\x01';
   }
   nn_os_CriticalSection_Enter((unsigned int)&DAT_00646078.whole);
@@ -103,7 +103,7 @@ unsigned int * FUN_0016f864(void)
       temp_v0 = (unsigned int)puVar1 & 0x3ff;
     }
     if (!temp_v1 || temp_v0 != 0x3fa) break;
-    FUN_001bcd48(500000,0);
+    svcSleepThread(500000,0);
   }
   if (-1 < (int)puVar1) {
     puVar1 = (unsigned int *)FUN_00147268();

@@ -19,7 +19,7 @@ typedef struct {
 extern int FUN_002984a0(...); /* 0x2984a0 */
 extern unsigned char LAB_002b5094; /* 0x2b5094 */
 extern int FUN_0032850c(...); /* 0x32850c */
-extern int DAT_00571508; /* 0x571508 */
+extern int g_btlCamera; /* 0x571508 */
 
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
@@ -36,10 +36,10 @@ void FUN_002b5000(unsigned int *param_1)
   puVar1 = &LAB_002b5094;
   taskCreateDraw(&LAB_002b5094,4,0,0,FUN_002984a0,FUN_0032850c,param_1,*param_1);
   param_1[0x1a] = (unsigned int)puVar1;
-  if (DAT_00571508 == 0) {
+  if (g_btlCamera == 0) {
     temp_v0 = 0x100;
     asdMemoryAllocTracked(0x100,0x100,0,0x8b4,1);
-    DAT_00571508 = temp_v0;
+    g_btlCamera = temp_v0;
   }
   FUN_004f0e20();
   return;

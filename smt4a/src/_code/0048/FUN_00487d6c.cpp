@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001654e4(int);
+int vec2GetYInt(int);
 int efctSetSpeed(void);
 int FUN_0016c69c(...);
 int FUN_0016c6f0(int, int, unsigned int);
@@ -32,9 +32,9 @@ extern int g_gameState; /* 0x5f15fc */
 extern signed char DAT_005f161d; /* 0x5f161d */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_00162e8c(void);
-extern unsigned int FUN_001654d8(void);
-/* Supplied declaration required: FUN_001654e4. */
+extern int gameFlagsGetBlock(void);
+extern unsigned int vec2GetXInt(void);
+/* Supplied declaration required: vec2GetYInt. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_001692ac(unsigned int, unsigned int);
@@ -68,7 +68,7 @@ void FUN_00487d6c(int param_1)
   float temp_v7;
   unsigned int temp_v8;
   
-  temp_v0 = FUN_00162e8c();
+  temp_v0 = gameFlagsGetBlock();
   if (g_gameState >= 100) {
     temp_v1 = lmapMainGetUnkCC();
     if (temp_v1 == 8) {
@@ -96,10 +96,10 @@ void FUN_00487d6c(int param_1)
     NaviMain_GetCurrentMap(temp_v1);
     temp_v1 = gameFlagsClassify();
     if ((temp_v1 != 2) && (temp_v1 != 3)) {
-      temp_v2 = FUN_001654d8();
+      temp_v2 = vec2GetXInt();
       temp_v5 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v6 = (int)(temp_v5 + temp_v7);
-      FUN_001654e4(param_1 + 0x10a0);
+      vec2GetYInt(param_1 + 0x10a0);
       temp_v1 = g_renderCtx;
       if (DAT_005f161d != '\0') {
         temp_v3 = packNibblesAndByte(6,1,0);

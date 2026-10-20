@@ -20,11 +20,11 @@ typedef struct {
 } void_stack;
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_001801a4(void);
+extern int gameGetPlayerData(void);
 extern int FUN_0018416c(unsigned short);
-extern int FUN_001ab854(void);
-extern int FUN_001ab888(void);
-extern int FUN_003e46f4(unsigned int);
+extern int gameGetSlotRecord(void);
+extern int gameGetSlotTable(void);
+extern int gameDataFlagTestBit(unsigned int);
 
 
 void FUN_004a0524(void)
@@ -51,27 +51,27 @@ void FUN_004a0524(void)
   unsigned int temp_v16;
   
   temp_v7 = 0;
-  temp_v1 = FUN_001801a4();
+  temp_v1 = gameGetPlayerData();
   if ((*(unsigned short *)(temp_v1 + 0x5e) & 2) == 0) {
-    temp_v1 = FUN_003e46f4(0x6b);
-    if ((temp_v1 != 0) || (temp_v1 = FUN_003e46f4(0x69), temp_v1 != 0)) {
+    temp_v1 = gameDataFlagTestBit(0x6b);
+    if ((temp_v1 != 0) || (temp_v1 = gameDataFlagTestBit(0x69), temp_v1 != 0)) {
       temp_v7 = 5;
     }
     else {
-      temp_v1 = FUN_003e46f4(0x68);
+      temp_v1 = gameDataFlagTestBit(0x68);
       if (temp_v1 != 0) {
         temp_v7 = 2;
       }
     }
-    temp_v2 = FUN_001801a4();
+    temp_v2 = gameGetPlayerData();
     temp_v1 = temp_v7;
     if (*(short *)(temp_v2 + 0xc) == 0x2a6) {
       temp_v1 = temp_v7 + 2;
     }
     if (temp_v1 != 0) {
-      temp_v2 = FUN_001801a4();
+      temp_v2 = gameGetPlayerData();
       temp_v6 = (int)*(short *)(temp_v2 + 0x1c);
-      temp_v2 = FUN_001801a4();
+      temp_v2 = gameGetPlayerData();
       temp_v1 = (temp_v6 * temp_v1) / 100;
       if (temp_v1 < 0) {
         temp_v1 = 0;
@@ -81,7 +81,7 @@ void FUN_004a0524(void)
         temp_v1 = temp_v6;
       }
       temp_v0 = (short)temp_v1;
-      temp_v1 = FUN_001801a4();
+      temp_v1 = gameGetPlayerData();
       temp_v5 = *(short *)(temp_v1 + 0x1c);
       if ((temp_v0 <= *(short *)(temp_v1 + 0x1c)) && (temp_v5 = temp_v0, temp_v0 < 1)) {
         temp_v5 = 1;
@@ -89,12 +89,12 @@ void FUN_004a0524(void)
       *(short *)(temp_v1 + 0x2a) = temp_v5;
     }
     temp_v10 = 0x3fa00000;
-    if ((temp_v7 != 0) && (temp_v1 = FUN_003e46f4(0x6b), temp_v1 != 0)) {
-      temp_v1 = FUN_001ab888();
+    if ((temp_v7 != 0) && (temp_v1 = gameDataFlagTestBit(0x6b), temp_v1 != 0)) {
+      temp_v1 = gameGetSlotTable();
       temp_v2 = 0;
       do {
         if ((-1 < *(char *)(temp_v1 + 0x1ca0 + temp_v2)) &&
-           (temp_v6 = FUN_001ab854(),
+           (temp_v6 = gameGetSlotRecord(),
            (*(unsigned short *)(temp_v6 + 0x60) & 2) == 0 && (*(unsigned short *)(temp_v6 + 0x60) & 0x400) == 0)) {
           temp_v8 = 0;
           if (temp_v6 != 0) {
@@ -131,11 +131,11 @@ void FUN_004a0524(void)
         temp_v2 = temp_v2 + 1;
       } while (temp_v2 < 3);
     }
-    temp_v1 = FUN_001ab888();
+    temp_v1 = gameGetSlotTable();
     temp_v7 = 0;
     do {
       if ((-1 < *(char *)(temp_v1 + 0x1ca0 + temp_v7)) &&
-         (temp_v2 = FUN_001ab854(),
+         (temp_v2 = gameGetSlotRecord(),
          (*(unsigned short *)(temp_v2 + 0x60) & 2) == 0 && (*(unsigned short *)(temp_v2 + 0x60) & 0x400) == 0)) {
         temp_v12 = 0;
         temp_v13 = 0;

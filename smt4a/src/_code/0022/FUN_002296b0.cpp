@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0014bef4(int);
+int randRange(int);
 
-extern unsigned char DAT_0060fc08; /* 0x60fc08 */
+extern unsigned char g_mapRndMaze; /* 0x60fc08 */
 extern unsigned char DAT_0060fc09; /* 0x60fc09 */
 extern unsigned int DAT_0060ff8c; /* 0x60ff8c */
 extern unsigned int DAT_0060ff94; /* 0x60ff94 */
@@ -15,8 +15,8 @@ extern unsigned char DAT_0060ff9c; /* 0x60ff9c */
 extern unsigned int DAT_0060ffa0; /* 0x60ffa0 */
 extern unsigned int DAT_006105e4; /* 0x6105e4 */
 
-/* Supplied declaration required: FUN_0014bef4. */
-extern int FUN_00162e8c(void);
+/* Supplied declaration required: randRange. */
+extern int gameFlagsGetBlock(void);
 
 
 void FUN_002296b0(int param_1)
@@ -30,7 +30,7 @@ void FUN_002296b0(int param_1)
   unsigned char temp_v4;
   int temp_v5;
   
-  temp_v1 = FUN_00162e8c();
+  temp_v1 = gameFlagsGetBlock();
   if (param_1 == 0) {
     *(unsigned char *)(temp_v1 + 0xe04) = 0xb;
     *(unsigned char *)(temp_v1 + 0xe05) = 0xb;
@@ -46,7 +46,7 @@ void FUN_002296b0(int param_1)
   *(unsigned char *)(temp_v1 + 0xe0a) = 0;
   *(unsigned char *)(temp_v1 + 0xe0b) = 0;
   DAT_006105e4 = 0;
-  DAT_0060fc08 = *(unsigned char *)(temp_v1 + 0xe06);
+  g_mapRndMaze = *(unsigned char *)(temp_v1 + 0xe06);
   DAT_0060fc09 = *(unsigned char *)(temp_v1 + 0xe07);
   temp_v3 = 0;
   DAT_0060ff8c = 1;
@@ -72,29 +72,29 @@ void FUN_002296b0(int param_1)
       temp_v3 = temp_v3 + 1;
     } while ((int)temp_v3 < (int)*(char *)(temp_v1 + 0xe05));
   }
-  temp_v3 = FUN_0014bef4(100);
+  temp_v3 = randRange(100);
   if (temp_v3 >= 0x32) {
-    temp_v5 = FUN_0014bef4(*(char *)(temp_v1 + 0xe04) - 8);
+    temp_v5 = randRange(*(char *)(temp_v1 + 0xe04) - 8);
     *(unsigned char *)(temp_v1 + ((temp_v5 + 4U) & 0xfffefffe) * 8 + 0xb4) = 1;
-    temp_v5 = FUN_0014bef4(*(char *)(temp_v1 + 0xe04) - 8);
+    temp_v5 = randRange(*(char *)(temp_v1 + 0xe04) - 8);
     *(unsigned char *)
      (temp_v1 + (*(char *)(temp_v1 + 0xe05) - 2) * 0x78 + ((temp_v5 + 4U) & 0xfffefffe) * 8 + 0x3c) = 1;
-    temp_v5 = FUN_0014bef4(*(char *)(temp_v1 + 0xe05) - 4);
+    temp_v5 = randRange(*(char *)(temp_v1 + 0xe05) - 4);
     *(unsigned char *)(temp_v1 + ((temp_v5 + 2U) & 0xfffefffe) * 0x78 + 0x44) = 1;
     temp_v0 = *(char *)(temp_v1 + 0xe04);
-    temp_v5 = FUN_0014bef4(*(char *)(temp_v1 + 0xe05) - 4);
+    temp_v5 = randRange(*(char *)(temp_v1 + 0xe05) - 4);
     *(unsigned char *)(temp_v1 + ((temp_v5 + 2U) & 0xfffefffe) * 0x78 + (temp_v0 - 2) * 8 + 0x3c) = 1;
     return;
   }
-  temp_v5 = FUN_0014bef4(*(char *)(temp_v1 + 0xe04) - 4);
+  temp_v5 = randRange(*(char *)(temp_v1 + 0xe04) - 4);
   *(unsigned char *)(temp_v1 + ((temp_v5 + 2U) & 0xfffefffe) * 8 + 0xb4) = 1;
-  temp_v5 = FUN_0014bef4(*(char *)(temp_v1 + 0xe04) - 4);
+  temp_v5 = randRange(*(char *)(temp_v1 + 0xe04) - 4);
   *(unsigned char *)
    (temp_v1 + (*(char *)(temp_v1 + 0xe05) - 2) * 0x78 + ((temp_v5 + 2U) & 0xfffefffe) * 8 + 0x3c) = 1;
-  temp_v5 = FUN_0014bef4(*(char *)(temp_v1 + 0xe05) - 8);
+  temp_v5 = randRange(*(char *)(temp_v1 + 0xe05) - 8);
   *(unsigned char *)(temp_v1 + ((temp_v5 + 4U) & 0xfffefffe) * 0x78 + 0x44) = 1;
   temp_v0 = *(char *)(temp_v1 + 0xe04);
-  temp_v5 = FUN_0014bef4(*(char *)(temp_v1 + 0xe05) - 8);
+  temp_v5 = randRange(*(char *)(temp_v1 + 0xe05) - 8);
   *(unsigned char *)(temp_v1 + ((temp_v5 + 4U) & 0xfffefffe) * 0x78 + (temp_v0 - 2) * 8 + 0x3c) = 1;
   return;
 }

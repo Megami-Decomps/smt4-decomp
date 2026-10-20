@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_002c2950(void);
+extern int gameGetMapBlock(void);
 
 
 void FUN_001f8d7c(void)
@@ -12,7 +12,7 @@ void FUN_001f8d7c(void)
 {
   int temp_v0;
   
-  temp_v0 = FUN_002c2950();
+  temp_v0 = gameGetMapBlock();
   *(unsigned int *)(temp_v0 + 0xdc0) = 1;
   *(unsigned int *)(temp_v0 + 0xdc4) = 0;
   *(unsigned char *)(temp_v0 + 0xdc8) = 0;

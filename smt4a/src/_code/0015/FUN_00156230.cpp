@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_00163aa4(int);
-int FUN_001846d0(int, int);
+int uiSpriteSelectAnim(int, int);
 
 extern int g_menuState; /* 0x57f56c */
 
 /* Supplied declaration required: FUN_00163aa4. */
-/* Supplied declaration required: FUN_001846d0. */
+/* Supplied declaration required: uiSpriteSelectAnim. */
 
 
 unsigned int FUN_00156230(void)
@@ -60,7 +60,7 @@ unsigned int FUN_00156230(void)
       }
       temp_v1 = g_menuState + 0x1e0;
       *(unsigned int *)(g_menuState + 0x2c8) = *(unsigned int *)(g_menuState + 0x2c4);
-      FUN_001846d0(temp_v1,5);
+      uiSpriteSelectAnim(temp_v1,5);
       *(unsigned int *)(temp_v0 + 700) = 3;
     }
     temp_v1 = FUN_00163aa4(temp_v0 + 0x1e0);

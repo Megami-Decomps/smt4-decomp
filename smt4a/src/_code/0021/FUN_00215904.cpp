@@ -9,7 +9,7 @@ typedef struct {
     unsigned int spC; /* 0xc: local_c */
 } void_stack;
 
-extern unsigned char DAT_0060fc08; /* 0x60fc08 */
+extern unsigned char g_mapRndMaze; /* 0x60fc08 */
 extern unsigned int DAT_006105d4; /* 0x6105d4 */
 extern unsigned int DAT_006105d8; /* 0x6105d8 */
 extern unsigned int DAT_006105dc; /* 0x6105dc */
@@ -32,9 +32,9 @@ void FUN_00215904(void)
     do {
       temp_v2 = temp_v1 + 1;
       temp_v0 = temp_v0 + 2;
-      *(unsigned int *)(&DAT_0060fc08 + temp_v1 * 4 + temp_v3 * 0x100 + 0x3cc) = 0;
+      *(unsigned int *)(&g_mapRndMaze + temp_v1 * 4 + temp_v3 * 0x100 + 0x3cc) = 0;
       temp_v1 = temp_v1 + 2;
-      *(unsigned int *)(&DAT_0060fc08 + temp_v2 * 4 + temp_v3 * 0x100 + 0x3cc) = 0;
+      *(unsigned int *)(&g_mapRndMaze + temp_v2 * 4 + temp_v3 * 0x100 + 0x3cc) = 0;
     } while (temp_v0 < 0x40);
     temp_v3 = temp_v3 + 1;
   } while (temp_v3 < 6);

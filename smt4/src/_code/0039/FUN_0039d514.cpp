@@ -4,8 +4,8 @@
 
 extern "C" {
 
-extern int padIsButtonDown(unsigned int);
-extern int FUN_002c09d0(unsigned int);
+extern int flagBitIsSet(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 
 
 unsigned int FUN_0039d514(void)
@@ -14,9 +14,9 @@ unsigned int FUN_0039d514(void)
   int temp_v0;
   unsigned int temp_v1;
   
-  temp_v0 = FUN_002c09d0(0x400);
+  temp_v0 = gameFlagIsSet(0x400);
   temp_v1 = 0;
-  if ((temp_v0 != 0) && (temp_v0 = padIsButtonDown(0x76), temp_v1 = 0, temp_v0 != 0)) {
+  if ((temp_v0 != 0) && (temp_v0 = flagBitIsSet(0x76), temp_v1 = 0, temp_v0 != 0)) {
     temp_v1 = 1;
   }
   return temp_v1;

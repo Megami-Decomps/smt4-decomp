@@ -9,12 +9,12 @@ typedef struct Obj {
     /* 0x26 */ u8 unk26;
 } Obj;
 
-extern u8 DAT_004ead10;
+extern u8 g_nnSndMasterManagerImpl;
 
 void FUN_00146e40(Obj *obj, u8 value)
 {
     obj->unk26 = value;
-    FUN_0013ac54(&DAT_004ead10);
+    FUN_0013ac54(&g_nnSndMasterManagerImpl);
 }
 
 } /* extern "C" */

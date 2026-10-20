@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_002bbb5c(void);
+extern int gameGetQuestCenterBlock(void);
 
 
 void QcMain_SetFlag(unsigned int param_1,int param_2)
@@ -16,7 +16,7 @@ void QcMain_SetFlag(unsigned int param_1,int param_2)
   unsigned char temp_v2;
   
   if (param_1 < 0x20) {
-    temp_v1 = FUN_002bbb5c();
+    temp_v1 = gameGetQuestCenterBlock();
     pbVar3 = (unsigned char *)(temp_v1 + 0xc + (param_1 >> 3));
     temp_v0 = *pbVar3;
     temp_v2 = (unsigned char)(1 << (param_1 & 7));

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00184758(...);
+int uiSpriteSetKeyframe(...);
 int FUN_00317af8(float *, float [3], int);
 int FUN_00357a48(void);
 int FUN_003a35a4(void);
@@ -72,10 +72,10 @@ static float romwright_fabs_4(float value)
     return value < (float)0 ? -value : value;
 }
 #endif
-extern int FUN_00162e8c(void);
-extern int FUN_001656a0(unsigned int);
+extern int gameFlagsGetBlock(void);
+extern int padButtonIsPressed(unsigned int);
 extern int FUN_00167c0c(unsigned int *, unsigned int *);
-/* Supplied declaration required: FUN_00184758. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: FUN_00317af8. */
 /* Supplied declaration required: FUN_00357a48. */
 extern int FUN_00384cf4(void);
@@ -132,7 +132,7 @@ void FUN_0048c394(int param_1)
   int temp_v18;
   float temp_v19 [3];
   
-  temp_v0 = FUN_00162e8c();
+  temp_v0 = gameFlagsGetBlock();
   ppppppuVar14 = (unsigned int ******)0x0;
   temp_v11 = param_1 + 0x4cc;
   puVar6 = (unsigned char *)(param_1 + 0x7b91);
@@ -245,7 +245,7 @@ void FUN_0048c394(int param_1)
           }
         }
         else {
-          temp_v0 = FUN_001656a0(5);
+          temp_v0 = padButtonIsPressed(5);
           if (temp_v0 != 0) {
             if ((DAT_005f1a5e != '\0') && (temp_v0 = FUN_00384cf4(), temp_v0 == 0)) {
               return;
@@ -266,7 +266,7 @@ void FUN_0048c394(int param_1)
             }
           }
           else {
-            temp_v0 = FUN_001656a0(6);
+            temp_v0 = padButtonIsPressed(6);
             if (temp_v0 != 0) {
               if ((DAT_005f1a5e != '\0') && (temp_v0 = FUN_00384cf4(), temp_v0 == 0)) {
                 return;
@@ -297,7 +297,7 @@ void FUN_0048c394(int param_1)
                     FUN_00357a48();
                     temp_v0 = 0;
                     do {
-                      FUN_00184758(param_1 + temp_v0 * 0x8c + 0xc40,7,0);
+                      uiSpriteSetKeyframe(param_1 + temp_v0 * 0x8c + 0xc40,7,0);
                       temp_v0 = temp_v0 + 1;
                     } while (temp_v0 < 6);
                     *(unsigned char *)(param_1 + 0x20644) = 1;
@@ -328,7 +328,7 @@ void FUN_0048c394(int param_1)
                 *(unsigned int *)(param_1 + 4) = 0xe;
                 *(unsigned int *)(param_1 + 8) = 0;
                 do {
-                  FUN_00184758(param_1 + temp_v0 * 0x8c + 0xc40,7,0);
+                  uiSpriteSetKeyframe(param_1 + temp_v0 * 0x8c + 0xc40,7,0);
                   temp_v0 = temp_v0 + 1;
                 } while (temp_v0 < 6);
               }

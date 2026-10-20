@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002bdf94(unsigned int, int, int, unsigned int, unsigned int, unsigned int, unsigned char *, unsigned int);
-int FUN_002be304(unsigned int);
+int drawSetColorFromRGBA8(unsigned int);
 int FUN_002bed3c(void);
 int VectorSignedToFloat(unsigned int, int);
 
@@ -21,7 +21,7 @@ extern unsigned char LAB_00230b8c; /* 0x230b8c */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002bdf94. */
-/* Supplied declaration required: FUN_002be304. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_002bed3c. */
 
 
@@ -35,7 +35,7 @@ void FUN_00230aec(float *param_1,unsigned int param_2,unsigned int param_3,unsig
   float temp_v0;
   float temp_v1;
   
-  FUN_002be304(param_7);
+  drawSetColorFromRGBA8(param_7);
   temp_v0 = (float)VectorSignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v1 = (float)VectorSignedToFloat(param_4,(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_002bdf94(param_2,(int)(*param_1 + param_1[2] + temp_v0),(int)(param_1[1] + param_1[3] + temp_v1),

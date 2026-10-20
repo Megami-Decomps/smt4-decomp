@@ -9,7 +9,7 @@ typedef struct Record {
 
 int scrSetResult(int value);
 int btlGetMainState(void);
-Record *FUN_002499b4(void);
+Record *btlMainFindActiveEntry(void);
 u32 scrGetArg(int index);
 
 /* Script command: passes to scrSetResult whether flag bit (script argument 0) is set in the current record's flags. */
@@ -19,7 +19,7 @@ u32 FUN_002ff2cc(int firstArg)
     Record *record;
 
     btlGetMainState();
-    record = FUN_002499b4();
+    record = btlMainFindActiveEntry();
     if (record != NULL && (record->flags & (1 << (bit & 0xff))) != 0) {
         scrSetResult(1);
         return 1;

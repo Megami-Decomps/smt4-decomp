@@ -24,9 +24,9 @@ extern unsigned int DAT_00571108; /* 0x571108 */
 extern unsigned int DAT_0057110c; /* 0x57110c */
 
 extern int btlGetMainState(void);
-extern char FUN_0014bef4(unsigned int);
-extern int FUN_001ab854(int);
-extern int FUN_001ab888(void);
+extern char randRange(unsigned int);
+extern int gameGetSlotRecord(int);
+extern int gameGetSlotTable(void);
 extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: scrSetResult. */
 extern int FUN_004bd0d8(int);
@@ -79,13 +79,13 @@ unsigned int FUN_003b1b00(void)
   temp_v10[0x15] = '\0';
   temp_v10[0x16] = '\0';
   temp_v10[0x17] = '\0';
-  temp_v3 = FUN_001ab888();
+  temp_v3 = gameGetSlotTable();
   if (*(char *)(temp_v3 + 0x1ca3) != '\0') {
     do {
-      temp_v3 = FUN_001ab888();
+      temp_v3 = gameGetSlotTable();
       temp_v0 = *(char *)(temp_v3 + temp_v6 + 0x1c88);
       if (-1 < temp_v0) {
-        temp_v3 = FUN_001ab854((int)temp_v0);
+        temp_v3 = gameGetSlotRecord((int)temp_v0);
         temp_v4 = bitsAt60Test(temp_v3,1);
         if (((temp_v4 == 0) && (temp_v4 = bitsAt60Test(temp_v3,10), temp_v4 == 0)) &&
            (*(unsigned short *)(temp_v3 + 0x62) != temp_v2)) {
@@ -100,14 +100,14 @@ unsigned int FUN_003b1b00(void)
         }
       }
       temp_v6 = temp_v6 + 1;
-      temp_v3 = FUN_001ab888();
+      temp_v3 = gameGetSlotTable();
     } while (temp_v6 < (int)(unsigned int)*(unsigned char *)(temp_v3 + 0x1ca3));
     if (temp_v7 >= 1) {
-      temp_v0 = FUN_0014bef4((temp_v7 - 1U) & 0xffff);
+      temp_v0 = randRange((temp_v7 - 1U) & 0xffff);
       temp_v9 = temp_v10[temp_v0] + 0x6d;
     }
     else if (0 < temp_v8) {
-      temp_v1 = FUN_0014bef4((temp_v8 - 1U) & 0xffff);
+      temp_v1 = randRange((temp_v8 - 1U) & 0xffff);
       temp_v0 = '\0';
       temp_v3 = 0;
       do {

@@ -14,7 +14,7 @@ int FUN_0036b824(...);
 int FUN_003f9e80(...);
 int FUN_00407598(...);
 
-extern int DAT_0056fcc0; /* 0x56fcc0 */
+extern int g_handleRegistry; /* 0x56fcc0 */
 
 /* Supplied declaration required: FUN_0013c174. */
 /* Supplied declaration required: FUN_0013c884. */
@@ -67,7 +67,7 @@ void FUN_00407110(unsigned int *param_1,unsigned int param_2,unsigned int param_
   FUN_0014f0dc(param_1 + 0x14,param_1 + 0x157,param_1 + 0x15a,param_1 + 0x161);
   FUN_001523b8(param_1 + 0x14,1);
   FUN_0036b824(param_1 + 0x14);
-  *(unsigned int **)(DAT_0056fcc0 + 0xc) = param_1 + 0x14;
+  *(unsigned int **)(g_handleRegistry + 0xc) = param_1 + 0x14;
   if (0 < (int)*param_1) {
     param_1[1] = 0;
     param_1[0x166] = 0xffffffff;

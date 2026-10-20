@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002eb164(...);
-int FUN_002eb588(unsigned char [8]);
+int onlineTimeGetNow(unsigned char [8]);
 int FUN_002ef268(int *, int);
 int FUN_002ef33c(unsigned char [4], unsigned char [8], int);
 int FUN_002ef34c(unsigned char [12], int *, int);
@@ -25,7 +25,7 @@ extern unsigned char DAT_00594978; /* 0x594978 */
 extern int FUN_002ea704(void);
 extern unsigned long long FUN_002eab1c(unsigned char *, int *);
 /* Supplied declaration required: FUN_002eb164. */
-/* Supplied declaration required: FUN_002eb588. */
+/* Supplied declaration required: onlineTimeGetNow. */
 extern int FUN_002ef01c(int);
 /* Supplied declaration required: FUN_002ef268. */
 /* Supplied declaration required: FUN_002ef33c. */
@@ -50,7 +50,7 @@ void FUN_001072cc(int *param_1)
   unsigned short temp_v10;
   unsigned char temp_v11 [12];
   
-  FUN_002eb588(temp_v7);
+  onlineTimeGetNow(temp_v7);
   temp_v1 = param_1[0x30];
   if (temp_v1 == 0) {
     temp_v1 = FUN_002ea704();

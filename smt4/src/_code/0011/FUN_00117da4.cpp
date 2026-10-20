@@ -19,7 +19,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_1_stack;
 
-extern int DAT_0043e278; /* 0x43e278 */
+extern int g_frameTex; /* 0x43e278 */
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -49,10 +49,10 @@ void FUN_00117da4(int param_1)
   float temp_v9;
   float temp_v10;
   
-  temp_v1 = DAT_0043e278;
-  piVar7 = (int *)(DAT_0043e278 + 0xfdc);
+  temp_v1 = g_frameTex;
+  piVar7 = (int *)(g_frameTex + 0xfdc);
   if (param_1 != 0) {
-    *(unsigned int *)(*(int *)(DAT_0043e278 + 0xf20) + 0x14) = 0x200;
+    *(unsigned int *)(*(int *)(g_frameTex + 0xf20) + 0x14) = 0x200;
     *(unsigned int *)(*(int *)(temp_v1 + 0xf20) + 0x18) = 0x200;
     *(unsigned int *)(*(int *)(temp_v1 + 0xfdc) + 0x14) =
          *(unsigned int *)(*(int *)(temp_v1 + 0xf20) + 0x14);
@@ -62,7 +62,7 @@ void FUN_00117da4(int param_1)
     *(int *)(*piVar7 + 0x18) = *(int *)(*piVar7 + 0x18) >> 1;
   }
   else {
-    *(unsigned int *)(*(int *)(DAT_0043e278 + 0xf24) + 0x14) = 0x200;
+    *(unsigned int *)(*(int *)(g_frameTex + 0xf24) + 0x14) = 0x200;
     *(unsigned int *)(*(int *)(temp_v1 + 0xf24) + 0x18) = 0x200;
     *(unsigned int *)(*(int *)(temp_v1 + 0xfdc) + 0x14) =
          *(unsigned int *)(*(int *)(temp_v1 + 0xf24) + 0x14);

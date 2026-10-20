@@ -6,13 +6,13 @@ extern "C" {
 
 int FUN_00233818(unsigned int *);
 int FUN_00233854(unsigned int *);
-int FUN_00233d78(unsigned int *);
+int jobStopAndClearFlags(unsigned int *);
 int FUN_0027eb30(unsigned int *);
 int scrScriptProcessDestroy(void);
-int FUN_002a780c(unsigned int);
+int asdMemFreeSlot(unsigned int);
 int asdTMTexTableFreeEntry(int);
-int FUN_002ae898(int, int);
-int FUN_002b8cc8(void);
+int asdTMTexTableReleaseNode(int, int);
+int ifTouchRegionRemove(void);
 int asdMemFree(void);
 int jobStop(unsigned int, int);
 
@@ -22,13 +22,13 @@ extern int g_aocDisplay; /* 0x433130 */
 
 /* Supplied declaration required: FUN_00233818. */
 /* Supplied declaration required: FUN_00233854. */
-/* Supplied declaration required: FUN_00233d78. */
+/* Supplied declaration required: jobStopAndClearFlags. */
 /* Supplied declaration required: FUN_0027eb30. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: FUN_002a780c. */
+/* Supplied declaration required: asdMemFreeSlot. */
 /* Supplied declaration required: asdTMTexTableFreeEntry. */
-/* Supplied declaration required: FUN_002ae898. */
-/* Supplied declaration required: FUN_002b8cc8. */
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
+/* Supplied declaration required: ifTouchRegionRemove. */
 extern int jobIsValid(unsigned int);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: jobStop. */
@@ -49,17 +49,17 @@ void FUN_0038f5d4(unsigned int *param_1)
   FUN_00233854(param_1 + 0xba);
   FUN_00233818(param_1 + 0xad);
   FUN_0027eb30(param_1 + 0x46c);
-  FUN_00233d78(param_1);
+  jobStopAndClearFlags(param_1);
   temp_v0 = jobIsValid(param_1[0x5e8]);
   if (temp_v0 != 0) {
     if (param_1[0x5eb] != 0xffffffff) {
       param_1[0x5eb] = 0xffffffff;
-      FUN_002b8cc8();
+      ifTouchRegionRemove();
     }
     *param_1 = *param_1 & 0xffffcfff;
     jobStop(param_1[0x5e8],0);
   }
-  FUN_002a780c(param_1[0x70c]);
+  asdMemFreeSlot(param_1[0x70c]);
   param_1[0x70c] = 0;
   if (param_1[0xd6] != 0) {
     scrScriptProcessDestroy();
@@ -71,7 +71,7 @@ void FUN_0038f5d4(unsigned int *param_1)
   }
   temp_v0 = 0;
   do {
-    FUN_002ae898(0x3a,temp_v0);
+    asdTMTexTableReleaseNode(0x3a,temp_v0);
     temp_v0 = temp_v0 + 1;
   } while (temp_v0 < 3);
   asdTMTexTableFreeEntry(0x3a);

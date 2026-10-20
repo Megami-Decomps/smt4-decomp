@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002e6e34(unsigned char [16], int);
 int FUN_002e6e5c(unsigned char [16]);
-int FUN_002e7232(void);
+int sharedRefRelease(void);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -16,7 +16,7 @@ typedef struct {
 extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-/* Supplied declaration required: FUN_002e7232. */
+/* Supplied declaration required: sharedRefRelease. */
 extern unsigned int FUN_002f71b0(int, unsigned int, unsigned int);
 
 
@@ -42,7 +42,7 @@ unsigned int FUN_002e7a20(int param_1,unsigned int param_2,unsigned int param_3)
       temp_v1 = 0;
       return temp_v1;
     }
-    FUN_002e7232();
+    sharedRefRelease();
     *(unsigned int *)(param_1 + 0x9c) = 0;
   }
   if (*(int *)(param_1 + 0x94) != 0) {
@@ -51,7 +51,7 @@ unsigned int FUN_002e7a20(int param_1,unsigned int param_2,unsigned int param_3)
       temp_v1 = 0;
       return temp_v1;
     }
-    FUN_002e7232();
+    sharedRefRelease();
     *(unsigned int *)(param_1 + 0x94) = 0;
   }
   temp_v1 = FUN_002f71b0(param_1,param_2,temp_v3);

@@ -9,11 +9,11 @@ u32 FUN_0028a318(void)
     u8 state;
     u32 result;
 
-    if (DAT_0043dcf0 != NULL) {
-        if (DAT_0043dcf0->unk1C != 0x17) {
+    if (g_partyPanel != NULL) {
+        if (g_partyPanel->unk1C != 0x17) {
             return 0;
         }
-        state = DAT_0043dcf0->state;
+        state = g_partyPanel->state;
         if ((state != 1 && state != 6) && ((state != 7 && state != 13) && state != 12)) {
             result = FUN_00295618();
             return result;

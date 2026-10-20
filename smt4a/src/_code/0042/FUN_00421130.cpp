@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_001aea28(unsigned int, int);
+int ptrListRemoveClearOwner(unsigned int, int);
 int FUN_0040619c(int, int);
 int objectVectorClear(unsigned int);
 
 typedef int romwright_code(...);
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 
-/* Supplied declaration required: FUN_001aea28. */
+/* Supplied declaration required: ptrListRemoveClearOwner. */
 /* Supplied declaration required: FUN_0040619c. */
 /* Supplied declaration required: objectVectorClear. */
 
@@ -51,7 +51,7 @@ void FUN_00421130(int param_1)
       temp_v0 = *(int *)(*(int *)(param_1 + 8) + 8);
       FUN_0040619c(temp_v0,temp_v1);
       if (temp_v0 != 0) {
-        FUN_001aea28(DAT_0056fcc0,temp_v0);
+        ptrListRemoveClearOwner(g_handleRegistry,temp_v0);
       }
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < temp_v2);

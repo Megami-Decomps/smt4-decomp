@@ -10,7 +10,7 @@ typedef struct Request {
 /* Code address of the request's completion callback (a local label in retail). */
 #define REQUEST_CALLBACK ((u8 *)0x003d4e88)
 
-int FUN_00100854(Request *request, u32 arg1, u32 arg2, int size, u8 *callback);
+int libc_bsearch(Request *request, u32 arg1, u32 arg2, int size, u8 *callback);
 u32 dataTableGet(u32 arg0, u32 arg1);
 u32 dataTableGetCount(u32 arg);
 u32 dataTableGetEntries(void);
@@ -31,7 +31,7 @@ int requestSubmitScrLookup(u8 value, int flag)
     other = dataTableGetEntries();
     selected = dataTableGetCount(selected);
     request.value = value;
-    result = FUN_00100854(&request, other, selected, 100, REQUEST_CALLBACK);
+    result = libc_bsearch(&request, other, selected, 100, REQUEST_CALLBACK);
     if (result != 0) {
         result += 3;
     }

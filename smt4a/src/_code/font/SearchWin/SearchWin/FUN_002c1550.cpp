@@ -5,7 +5,7 @@
 extern "C" {
 
 int jobStop(unsigned int, int);
-int FUN_001846d0(unsigned int *, int);
+int uiSpriteSelectAnim(unsigned int *, int);
 int asdMemFree(unsigned int *);
 int FUN_003d2150(int);
 
@@ -13,7 +13,7 @@ extern unsigned int *DAT_0057f584; /* 0x57f584 */
 
 extern int FUN_00162ea4(void);
 /* Supplied declaration required: jobStop. */
-/* Supplied declaration required: FUN_001846d0. */
+/* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_003d2150. */
 
@@ -48,7 +48,7 @@ unsigned int FUN_002c1550(void)
           else {
             DAT_0057f584[3] = 3;
           }
-          FUN_001846d0(puVar2 + 0xe,1);
+          uiSpriteSelectAnim(puVar2 + 0xe,1);
           FUN_003d2150(0x10000cf);
           return 0;
         }

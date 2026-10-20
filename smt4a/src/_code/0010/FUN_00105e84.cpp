@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e7526(...);
+int writeU16Le(...);
 int FUN_002eb164(...);
 int FUN_002ec674(...);
 int destroyObj0055ae64(...);
@@ -38,7 +38,7 @@ typedef struct {
     unsigned char sp40; /* 0x40: local_40 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_002e7526. */
+/* Supplied declaration required: writeU16Le. */
 extern int FUN_002eac34(unsigned char);
 /* Supplied declaration required: FUN_002eb164. */
 extern int FUN_002eb6ae(fn_00105e84_arg1 *, unsigned int);
@@ -90,7 +90,7 @@ void FUN_00105e84(int param_1,fn_00105e84_arg1 *param_2)
         temp_v4 = FUN_002ec674(temp_v8);
         rt_memcpy(temp_v4,temp_v3,0x20);
         FUN_002eb164(temp_v6,param_2);
-        FUN_002e7526(temp_v7);
+        writeU16Le(temp_v7);
         pcVar7 = (char *)FUN_002ec674(temp_v8);
         *pcVar7 = *pcVar7 + temp_v0;
         temp_v1 = FUN_002ec674(temp_v8);

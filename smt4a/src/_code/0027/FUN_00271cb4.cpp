@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001800b8(int);
+int asdTextureRelease(int);
 int asdMemFree(...);
 
 typedef int romwright_code(...);
@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_001800b8. */
+/* Supplied declaration required: asdTextureRelease. */
 /* Supplied declaration required: asdMemFree. */
 
 
@@ -30,7 +30,7 @@ void FUN_00271cb4(int param_1)
   piVar2 = *(int **)(param_1 + 0x28);
   if ((piVar2 != (int *)0x0) && (temp_v0 = piVar2[1], piVar2[1] = temp_v0 - 1, temp_v0 - 1 == 0)) {
     if (*piVar2 != 4) {
-      FUN_001800b8(piVar2[2]);
+      asdTextureRelease(piVar2[2]);
     }
     asdMemFree(piVar2);
   }

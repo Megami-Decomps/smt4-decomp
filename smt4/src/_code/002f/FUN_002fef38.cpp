@@ -6,13 +6,13 @@ extern "C" {
 
 int scrSetResult(int);
 int FUN_002ae164(void);
-int FUN_002b9024(void);
+int devilGetRecord(void);
 
 /* Supplied declaration required: scrSetResult. */
 extern int btlGetMainState(void);
 extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_002ae164. */
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: devilGetRecord. */
 
 
 unsigned int FUN_002fef38(void)
@@ -65,7 +65,7 @@ unsigned int FUN_002fef38(void)
         }
         if (puVar5[0xa1] != 0) {
           temp_v2 = (unsigned int)*(unsigned short *)((int)puVar5 + 0xce);
-          FUN_002b9024();
+          devilGetRecord();
           temp_v1 = 0;
           do {
             temp_v3 = (unsigned int)*(unsigned short *)(temp_v2 + temp_v1 * 2 + 0x3c);

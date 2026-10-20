@@ -10,7 +10,7 @@ int mtx44Copy(...);
 int FUN_0019a0fc(...);
 int FUN_001d3e14(...);
 int FUN_001d3e54(...);
-int FUN_00212500(...);
+int refCountIncrement(...);
 int FUN_00290c28(...);
 int FUN_00290e04(...);
 int FUN_00291644(...);
@@ -126,10 +126,10 @@ extern unsigned int DAT_0064c0c0; /* 0x64c0c0 */
 /* Supplied declaration required: FUN_0018a924. */
 /* Supplied declaration required: mtx44Copy. */
 /* Supplied declaration required: FUN_0019a0fc. */
-extern int FUN_001acf08(void);
+extern int effGetFrameStep(void);
 /* Supplied declaration required: FUN_001d3e14. */
 /* Supplied declaration required: FUN_001d3e54. */
-/* Supplied declaration required: FUN_00212500. */
+/* Supplied declaration required: refCountIncrement. */
 /* Supplied declaration required: FUN_00290c28. */
 /* Supplied declaration required: FUN_00290e04. */
 /* Supplied declaration required: FUN_00291644. */
@@ -243,7 +243,7 @@ void FUN_002b4358(int param_1)
   unsigned int temp_v81;
   unsigned int temp_v82;
   
-  temp_v1 = FUN_001acf08();
+  temp_v1 = effGetFrameStep();
   *(int *)(param_1 + 0x2c) = temp_v1 + *(int *)(param_1 + 0x2c);
   temp_v5 = *(int *)(param_1 + 0x2c);
   temp_v4 = *(int *)(param_1 + 0xbc);
@@ -311,7 +311,7 @@ void FUN_002b4358(int param_1)
     temp_v69 = (temp_v1 << 0x10) | (temp_v3 & 0xffff);
     temp_v67 = (temp_v2 & 0xffff) | (temp_v1 << 0x10);
     temp_v75 = (temp_v3 & 0xffff) | (temp_v4 << 0x10);
-    FUN_00212500(temp_v39);
+    refCountIncrement(temp_v39);
   }
   else {
     temp_v36 = temp_v7;
@@ -336,7 +336,7 @@ void FUN_002b4358(int param_1)
       temp_v8 = temp_v8 * temp_v11;
       temp_v11 = temp_v7 * temp_v11;
       temp_v7 = temp_v36;
-      FUN_00212500(temp_v79);
+      refCountIncrement(temp_v79);
     }
     else {
       childHolderCopyOut(puVar8,&temp_v72);

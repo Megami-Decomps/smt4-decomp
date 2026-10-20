@@ -9,7 +9,7 @@ int FUN_00133644(unsigned int *, unsigned int);
 int FUN_001370a8(int *);
 int FUN_00137cc4(void);
 int FUN_00142a5c(unsigned int *);
-int FUN_002bf0dc(void);
+int nngxGetError(void);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -24,7 +24,7 @@ extern unsigned int *DAT_004655c0; /* 0x4655c0 */
 /* Supplied declaration required: FUN_001370a8. */
 /* Supplied declaration required: FUN_00137cc4. */
 /* Supplied declaration required: FUN_00142a5c. */
-/* Supplied declaration required: FUN_002bf0dc. */
+/* Supplied declaration required: nngxGetError. */
 
 
 void FUN_00123750(unsigned int param_1,int param_2,unsigned int param_3,unsigned int param_4)
@@ -36,7 +36,7 @@ void FUN_00123750(unsigned int param_1,int param_2,unsigned int param_3,unsigned
   
   puVar1 = DAT_004655c0;
   temp_v0 = param_4;
-  FUN_002bf0dc();
+  nngxGetError();
   param_1 = param_1 & ~puVar1[2];
   if ((puVar1[1] & param_1 & 0x2000) != 0) {
     FUN_00137cc4();
@@ -96,7 +96,7 @@ void FUN_00123750(unsigned int param_1,int param_2,unsigned int param_3,unsigned
     *puVar1 = *puVar1 & 0xfffffdff;
   }
   puVar1[1] = puVar1[1] & ~param_1;
-  FUN_002bf0dc();
+  nngxGetError();
   return;
 }
 

@@ -20,7 +20,7 @@ typedef struct {
 extern unsigned int g_btlScriptUnit; /* 0x43427c */
 
 /* Supplied declaration required: FUN_0022a444. */
-extern unsigned int *FUN_0022a464(unsigned int, unsigned int);
+extern unsigned int *asdListBoxGetItemValuePtr(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00246d38. */
 /* Supplied declaration required: FUN_00246e24. */
 /* Supplied declaration required: FUN_002561d8. */
@@ -29,8 +29,8 @@ extern unsigned int FUN_0025628c(unsigned int);
 /* Supplied declaration required: FUN_0026e61c. */
 extern unsigned int btlUnitGet(unsigned int);
 extern int FUN_00295d7c(void);
-extern int FUN_002a8740(void);
-extern int FUN_002a8764(void);
+extern int gameGetUnitRecord(void);
+extern int gameGetSlotTable(void);
 extern int FUN_002c15fc(unsigned int);
 
 
@@ -55,7 +55,7 @@ void FUN_003c33c8(int param_1,int param_2)
   temp_v8 = 0;
   switch(temp_v3) {
   case 0:
-    puVar5 = (unsigned int *)FUN_0022a464(*(unsigned int *)(param_1 + 0x10),temp_v3);
+    puVar5 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v3);
     *(unsigned int *)(param_1 + 0x1c) = *puVar5;
     return;
   case 1:
@@ -182,13 +182,13 @@ void FUN_003c33c8(int param_1,int param_2)
       } while (temp_v8 < 0x6d);
     }
     if (*(char *)(param_1 + 0x16) != '\0') {
-      temp_v8 = FUN_002a8764();
+      temp_v8 = gameGetSlotTable();
       temp_v4 = 0;
       temp_v1 = *(unsigned char *)(temp_v8 + 0x910b);
       if (temp_v1 != 0) {
         do {
-          temp_v8 = FUN_002a8764();
-          if (((-1 < *(char *)(temp_v8 + temp_v4 + 0x90f0)) && (temp_v8 = FUN_002a8740(), temp_v8 != 0))
+          temp_v8 = gameGetSlotTable();
+          if (((-1 < *(char *)(temp_v8 + temp_v4 + 0x90f0)) && (temp_v8 = gameGetUnitRecord(), temp_v8 != 0))
              && (temp_v5 = FUN_00295d7c(), temp_v5 == 0)) {
             temp_v7 = 0;
             do {
@@ -257,13 +257,13 @@ void FUN_003c33c8(int param_1,int param_2)
         } while (temp_v8 < 0x6d);
       }
       if (*(char *)(param_1 + 0x16) != '\0') {
-        temp_v8 = FUN_002a8764();
+        temp_v8 = gameGetSlotTable();
         temp_v4 = 0;
         temp_v1 = *(unsigned char *)(temp_v8 + 0x910b);
         if (temp_v1 != 0) {
           do {
-            temp_v8 = FUN_002a8764();
-            if (((-1 < *(char *)(temp_v8 + temp_v4 + 0x90f0)) && (temp_v8 = FUN_002a8740(), temp_v8 != 0)
+            temp_v8 = gameGetSlotTable();
+            if (((-1 < *(char *)(temp_v8 + temp_v4 + 0x90f0)) && (temp_v8 = gameGetUnitRecord(), temp_v8 != 0)
                 ) && (temp_v5 = FUN_00295d7c(), temp_v5 == 0)) {
               FUN_00262f68(temp_v8,*(unsigned int *)(param_1 + 0x18) & 0xffff);
             }

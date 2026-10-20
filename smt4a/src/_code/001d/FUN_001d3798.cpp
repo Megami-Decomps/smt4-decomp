@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001d1438(unsigned int *);
 
 extern unsigned int FUN_001c6da0(unsigned int, unsigned int);
-extern int FUN_001c6e20(void);
+extern int nn_snd_CTR_Dspsnd_IsInitialized(void);
 /* Supplied declaration required: FUN_001d1438. */
 
 
@@ -25,7 +25,7 @@ unsigned int FUN_001d3798(int param_1,int param_2,unsigned int *param_3,unsigned
   unsigned int *puVar8;
   unsigned char temp_v7;
   
-  temp_v1 = FUN_001c6e20();
+  temp_v1 = nn_snd_CTR_Dspsnd_IsInitialized();
   if (temp_v1 == 0) {
     return 0;
   }

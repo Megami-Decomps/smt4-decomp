@@ -3,7 +3,7 @@
 extern "C" {
 
 extern u32 scrGetArg(s32 index);
-extern s32 FUN_002deb84(void);
+extern s32 scrGetCommandFrame(void);
 extern void FUN_002c76c0(s32 value);
 extern void FUN_002f0c18(void);
 extern void FUN_0038b710(u32 scene);
@@ -18,7 +18,7 @@ u8 scrCommRunScene(s32 argIndex)
     u16 scene = scrGetArg(argIndex);
     s32 running;
 
-    if (FUN_002deb84() == 0) {
+    if (scrGetCommandFrame() == 0) {
         FUN_002c76c0(1);
         FUN_002f0c18();
         FUN_0038b710(scene);

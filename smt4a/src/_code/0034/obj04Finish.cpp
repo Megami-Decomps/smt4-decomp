@@ -2,15 +2,15 @@
 
 extern "C" {
 
-extern PanelRef DAT_0057f588;
+extern PanelRef g_messageMain;
 extern void FUN_00165088(Obj04 *obj, u32 value);
 
 void obj04Finish(void)
 {
-    Obj04 *obj = DAT_0057f588.unk04;
+    Obj04 *obj = g_messageMain.unk04;
 
-    if (DAT_0057f588.unk04 != NULL && DAT_0057f588.unk04->state != 0) {
-        DAT_0057f588.unk04->unk35 = 1;
+    if (g_messageMain.unk04 != NULL && g_messageMain.unk04->state != 0) {
+        g_messageMain.unk04->unk35 = 1;
         obj->unk19C4 = 1;
         FUN_00165088(obj, obj->unk09);
         obj->state = 3;

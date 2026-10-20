@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0039ebcc(void);
 
-extern unsigned char DAT_0057a9b8; /* 0x57a9b8 */
+extern unsigned char g_btlUi; /* 0x57a9b8 */
 
 extern int menu32ModeIsNot6(int);
 /* Supplied declaration required: FUN_0039ebcc. */
@@ -18,7 +18,7 @@ void FUN_004abb54(void)
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = menu32ModeIsNot6((*(int *)((unsigned char *)&DAT_0057a9b8 + 0x10)) + 8);
+  temp_v0 = menu32ModeIsNot6((*(int *)((unsigned char *)&g_btlUi + 0x10)) + 8);
   if (temp_v0 != 0) {
     FUN_0039ebcc();
   }

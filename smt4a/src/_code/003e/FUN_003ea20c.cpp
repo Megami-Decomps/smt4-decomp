@@ -14,7 +14,7 @@ extern unsigned int DAT_00573a0c; /* 0x573a0c */
 extern unsigned int DAT_00573b38; /* 0x573b38 */
 extern unsigned int DAT_00573b3c; /* 0x573b3c */
 
-extern unsigned int FUN_003e46f4(unsigned int);
+extern unsigned int gameDataFlagTestBit(unsigned int);
 
 
 unsigned int FUN_003ea20c(int param_1)
@@ -29,7 +29,7 @@ unsigned int FUN_003ea20c(int param_1)
   else {
     if ((*(unsigned int *)(param_1 + 0x45a8) & DAT_00573b38) == 0 &&
         (DAT_00573b3c & *(unsigned int *)(param_1 + 0x45ac)) == 0) {
-      temp_v0 = FUN_003e46f4(0x10);
+      temp_v0 = gameDataFlagTestBit(0x10);
       return temp_v0;
     }
     temp_v0 = 1;

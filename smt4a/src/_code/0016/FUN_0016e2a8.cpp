@@ -14,7 +14,7 @@ int FUN_00188e28(void);
 int FUN_00188e44(unsigned char **);
 int FUN_00189cbc(unsigned int *, int *);
 int FUN_00193038(int *, int *);
-int FUN_00195fc8(void);
+int sysFatalBreak(void);
 int FUN_0030fc80(int *);
 
 /* stack frame of void: 30 slot(s), 85 byte(s) */
@@ -64,7 +64,7 @@ extern unsigned char DAT_005c0adc; /* 0x5c0adc */
 /* Supplied declaration required: FUN_00188e44. */
 /* Supplied declaration required: FUN_00189cbc. */
 /* Supplied declaration required: FUN_00193038. */
-/* Supplied declaration required: FUN_00195fc8. */
+/* Supplied declaration required: sysFatalBreak. */
 /* Supplied declaration required: FUN_0030fc80. */
 
 
@@ -152,7 +152,7 @@ void FUN_0016e2a8(void)
     FUN_0016e1a8(&temp_v5,&temp_v20);
     if ((temp_v7 & 0xfffffffe) != 0) {
       if ((temp_v7 & 1) != 0) {
-        FUN_00195fc8();
+        sysFatalBreak();
       }
       vcallSlot12IfValid(temp_v7 & 0xfffffffe);
     }

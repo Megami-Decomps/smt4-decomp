@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002c52f8(void);
+int asdFatalError(void);
 
 extern unsigned char DAT_004d43e0; /* 0x4d43e0 */
 
-/* Supplied declaration required: FUN_002c52f8. */
+/* Supplied declaration required: asdFatalError. */
 
 
 unsigned int FUN_002bb99c(int param_1,unsigned int param_2,unsigned char param_3,unsigned char param_4)
@@ -46,7 +46,7 @@ unsigned int FUN_002bb99c(int param_1,unsigned int param_2,unsigned char param_3
     acStack_20[temp_v4] = temp_v2;
     temp_v4 = temp_v4 + 1;
   } while (temp_v4 < 8);
-  FUN_002c52f8();
+  asdFatalError();
   temp_v6 = 0;
   temp_v7 = 0;
   temp_v4 = 0;

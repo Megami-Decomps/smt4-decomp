@@ -4,7 +4,7 @@ extern "C" {
 
 int FUN_001f71b4(void);
 int FUN_0024ad88(u32 obj);
-int FUN_00269334(void);
+int objectBufferFree(void);
 int asdMemFree(int ptr);
 
 typedef struct Sub {
@@ -34,7 +34,7 @@ void FUN_002d1918(Obj *obj)
         asdMemFree((int)sub);
     }
     if (obj->unk30 != 0) {
-        FUN_00269334();
+        objectBufferFree();
     }
     asdMemFree((int)obj);
 }

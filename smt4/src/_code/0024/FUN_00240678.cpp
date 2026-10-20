@@ -4,14 +4,14 @@
 
 extern "C" {
 
-extern unsigned int DAT_00434290; /* 0x434290 */
+extern unsigned int g_btlActionReflect; /* 0x434290 */
 extern int g_btlMain; /* 0x4342c8 */
 extern unsigned int DAT_00435d18; /* 0x435d18 */
-extern unsigned int DAT_00439ca8; /* 0x439ca8 */
+extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 
 extern int FUN_002404e8(unsigned int);
 extern int FUN_00256940(int, int, unsigned int);
-extern int FUN_0027e6bc(unsigned int, unsigned int *);
+extern int nodeListCountActiveById(unsigned int, unsigned int *);
 extern int stateBlockCall(unsigned int);
 
 
@@ -26,9 +26,9 @@ unsigned int FUN_00240678(unsigned int *param_1,int param_2)
   unsigned int temp_v4;
   
   if ((((*(char *)(param_2 + 0x44b7) == '\0') ||
-       (temp_v1 = FUN_0027e6bc(DAT_00434290,param_1), temp_v1 < 1)) &&
+       (temp_v1 = nodeListCountActiveById(g_btlActionReflect,param_1), temp_v1 < 1)) &&
       (temp_v1 = FUN_002404e8(DAT_00435d18), temp_v1 != 0)) &&
-     (((*(unsigned int *)(param_2 + 0x44a0) & 8) == 0 || (temp_v1 = stateBlockCall(DAT_00439ca8), temp_v1 != 0))))
+     (((*(unsigned int *)(param_2 + 0x44a0) & 8) == 0 || (temp_v1 = stateBlockCall(g_btlUiBlock), temp_v1 != 0))))
   {
     if ((*(unsigned int *)(param_2 + 0xe0) & 0x4000000) != 0) {
       temp_v3 = 4;

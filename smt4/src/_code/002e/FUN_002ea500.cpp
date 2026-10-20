@@ -23,7 +23,7 @@ int FUN_00282390(void);
 int FUN_0028250c(void);
 int FUN_00287be4(void);
 int FUN_00291e40(...);
-int FUN_002b8838(int);
+int buttonHelpSetPreset(int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -61,11 +61,11 @@ extern int FUN_0027ee9c(void);
 /* Supplied declaration required: FUN_00287be4. */
 extern int FUN_002896bc(void);
 /* Supplied declaration required: FUN_00291e40. */
-extern int FUN_00296d6c(unsigned int, unsigned int);
+extern int randBetween(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0029c3c0. */
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: FUN_002bf810. */
-extern int FUN_002bfde4(unsigned int);
+extern int padIsButtonPressed(unsigned int);
 
 
 void FUN_002ea500(void)
@@ -122,7 +122,7 @@ void FUN_002ea500(void)
                   *(unsigned int *)(temp_v0 + 8) = 0;
                 }
                 else {
-                  temp_v0 = FUN_002bfde4(5);
+                  temp_v0 = padIsButtonPressed(5);
                   if ((temp_v0 != 0) || (temp_v0 = FUN_002762e0(), temp_v0 != 0)) {
                     temp_v0 = DAT_004474f4;
                     *(unsigned int *)(DAT_004474f4 + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
@@ -179,7 +179,7 @@ void FUN_002ea500(void)
           *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + temp_v5 * temp_v3;
           FUN_0027fc14(10);
           *(unsigned int *)(DAT_004474f4 + 0xac) = 0xffffffff;
-          FUN_002b8838(0xdb);
+          buttonHelpSetPreset(0xdb);
           FUN_0024f034(1,DAT_0049f99c);
           FUN_0028250c();
           FUN_00282390();
@@ -253,7 +253,7 @@ LAB_002ea9b4:
         FUN_0027fca0(0xffffffff);
         FUN_0028250c();
         FUN_00282390();
-        temp_v0 = FUN_00296d6c(0,1);
+        temp_v0 = randBetween(0,1);
         FUN_00291e40(temp_v0 + 0x100023c);
         temp_v0 = g_lmapScene;
         *(unsigned int *)(g_lmapScene + 0x68) = 0x41000000;

@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern ObjBRef DAT_00588fd0;
+extern ObjBRef g_gameGlobals;
 
 void FUN_003343d8(u8 value)
 {
-    DAT_00588fd0.instance->unk137E = value;
+    g_gameGlobals.instance->unk137E = value;
 }
 
 } /* extern "C" */

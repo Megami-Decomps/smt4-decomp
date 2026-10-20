@@ -6,7 +6,7 @@ extern "C" {
 
 int efctSetSpeed(...);
 int FUN_00183bb0(...);
-int FUN_00184e64(...);
+int drawSetColorFromRGBA8(...);
 int FUN_0019d880(...);
 int FUN_00230a50(...);
 int FUN_002f752c(...);
@@ -40,7 +40,7 @@ typedef struct {
 /* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001834a4(unsigned int, int);
 /* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_00184e64. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_0019d880. */
 /* Supplied declaration required: FUN_00230a50. */
 extern int FUN_0026264c(unsigned short);
@@ -73,7 +73,7 @@ void FUN_00334e1c(fn_00334e1c_arg0 *param_1,int param_2)
   temp_v8 = 0;
   temp_v9 = 0;
   temp_v10[0] = 0;
-  FUN_00184e64(0xffffffff);
+  drawSetColorFromRGBA8(0xffffffff);
   FUN_00230a50(&temp_v7,&temp_v8,param_2 + 0x12);
   FUN_0019d880();
   efctSetSpeed();
@@ -90,10 +90,10 @@ void FUN_00334e1c(fn_00334e1c_arg0 *param_1,int param_2)
       temp_v3 = -1;
     }
     if (temp_v6 < temp_v9) {
-      FUN_00184e64(0x72e027ff);
+      drawSetColorFromRGBA8(0x72e027ff);
     }
     else {
-      FUN_00184e64(temp_v3);
+      drawSetColorFromRGBA8(temp_v3);
     }
     temp_v3 = temp_v9 - temp_v6;
     temp_v4 = temp_v10[0] - temp_v11[0];

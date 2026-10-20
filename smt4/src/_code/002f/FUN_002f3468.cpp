@@ -2,9 +2,9 @@
 
 extern "C" {
 
-int FUN_002570a8(u32 value);
-int FUN_00257108(void);
-int FUN_0025715c(void);
+int geometryDestroy(u32 value);
+int handleBlockUnref(void);
+int handleBlockRefDrop(void);
 int asdMemFree(void *ptr);
 
 typedef struct Obj {
@@ -17,12 +17,12 @@ typedef struct Obj {
 void FUN_002f3468(Obj *obj)
 {
     if (obj->unk140 != 0) {
-        FUN_00257108();
+        handleBlockUnref();
     }
     if (obj->unk144 != 0) {
-        FUN_0025715c();
+        handleBlockRefDrop();
     }
-    FUN_002570a8(obj->unk13C);
+    geometryDestroy(obj->unk13C);
     asdMemFree(obj);
 }
 

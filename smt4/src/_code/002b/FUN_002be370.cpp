@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002ae238(void);
+int dataTable08Sub0GetRecord(void);
 int FUN_002ae2c0(...);
 int FUN_002ae9ec(...);
-int FUN_002b4670(void);
-int FUN_002b63ac(void);
+int dataTable08Sub1GetRecord(void);
+int gameGetPlayerData(void);
 int FUN_002bf288(...);
 
 /* stack frame of param_5: 2 slot(s), 8 byte(s) */
@@ -17,12 +17,12 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_5_stack;
 
-/* Supplied declaration required: FUN_002ae238. */
+/* Supplied declaration required: dataTable08Sub0GetRecord. */
 /* Supplied declaration required: FUN_002ae2c0. */
 extern unsigned int FUN_002ae3c4(void);
 /* Supplied declaration required: FUN_002ae9ec. */
-/* Supplied declaration required: FUN_002b4670. */
-/* Supplied declaration required: FUN_002b63ac. */
+/* Supplied declaration required: dataTable08Sub1GetRecord. */
+/* Supplied declaration required: gameGetPlayerData. */
 /* Supplied declaration required: FUN_002bf288. */
 
 
@@ -42,7 +42,7 @@ void FUN_002be370(unsigned int param_1,unsigned int param_2,unsigned int param_3
   temp_v2 = FUN_002ae3c4();
   switch(temp_v2) {
   case 0:
-    FUN_002ae238();
+    dataTable08Sub0GetRecord();
     if (*(char *)(param_1 + 0x53) == '\0') {
       temp_v4 = 0x3ff;
     }
@@ -56,7 +56,7 @@ void FUN_002be370(unsigned int param_1,unsigned int param_2,unsigned int param_3
     }
     return;
   case 1:
-    FUN_002b4670();
+    dataTable08Sub1GetRecord();
     temp_v4 = FUN_002ae2c0(*(unsigned char *)(param_1 + 0x6c));
     FUN_002ae9ec(2,0x13,temp_v4,param_2,param_3,param_4);
     if (temp_v1) {
@@ -66,7 +66,7 @@ void FUN_002be370(unsigned int param_1,unsigned int param_2,unsigned int param_3
   case 2:
     temp_v4 = 0x3f7;
     if (param_5 == 0) break;
-    puVar4 = (unsigned short *)FUN_002b63ac();
+    puVar4 = (unsigned short *)gameGetPlayerData();
     temp_v0 = *puVar4;
 joined_r0x002be4f0:
     if (temp_v0 != param_1) break;
@@ -75,7 +75,7 @@ joined_r0x002be4f0:
   case 3:
     temp_v4 = 0x3f8;
     if (param_5 == 0) break;
-    temp_v3 = FUN_002b63ac();
+    temp_v3 = gameGetPlayerData();
     temp_v0 = *(unsigned short *)(temp_v3 + 2);
 joined_r0x002be470:
     if (temp_v0 != param_1) break;
@@ -84,31 +84,31 @@ joined_r0x002be470:
   case 4:
     temp_v4 = 0x3fa;
     if (param_5 == 0) break;
-    temp_v3 = FUN_002b63ac();
+    temp_v3 = gameGetPlayerData();
     temp_v0 = *(unsigned short *)(temp_v3 + 6);
     goto joined_r0x002be470;
   case 5:
     temp_v4 = 0x3fb;
     if (param_5 == 0) break;
-    temp_v3 = FUN_002b63ac();
+    temp_v3 = gameGetPlayerData();
     temp_v0 = *(unsigned short *)(temp_v3 + 8);
     goto joined_r0x002be4f0;
   case 6:
     temp_v4 = 0x3fc;
     if (param_5 == 0) break;
-    temp_v3 = FUN_002b63ac();
+    temp_v3 = gameGetPlayerData();
     temp_v0 = *(unsigned short *)(temp_v3 + 10);
     goto joined_r0x002be4f0;
   case 7:
     temp_v4 = 0x3fd;
     if (param_5 == 0) break;
-    temp_v3 = FUN_002b63ac();
+    temp_v3 = gameGetPlayerData();
     temp_v0 = *(unsigned short *)(temp_v3 + 0xc);
     goto joined_r0x002be4f0;
   case 8:
     temp_v4 = 0x3f9;
     if (param_5 == 0) break;
-    temp_v3 = FUN_002b63ac();
+    temp_v3 = gameGetPlayerData();
     temp_v0 = *(unsigned short *)(temp_v3 + 4);
     goto joined_r0x002be4f0;
   case 9:

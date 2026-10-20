@@ -9,19 +9,19 @@ typedef struct {
     u8 settings[1];       /* 0x12334 */
 } Manager;
 
-extern Manager *DAT_0044cdf0;
+extern Manager *g_naviMain;
 
-void FUN_00399b30(u8 *state);
+void NaviMain_EnterState1(u8 *state);
 void FUN_0039bbd4(u8 *state);
 void FUN_003c28a8(u8 *settings, s8 value);
 
 void FUN_00276968(s32 reapply, s32 value)
 {
-    Manager *manager = DAT_0044cdf0;
+    Manager *manager = g_naviMain;
 
     if (manager != NULL) {
         FUN_003c28a8(manager->settings, value);
-        FUN_00399b30(manager->state);
+        NaviMain_EnterState1(manager->state);
         if (reapply != 0) {
             FUN_0039bbd4(manager->state);
         }

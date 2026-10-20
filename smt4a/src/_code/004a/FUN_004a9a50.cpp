@@ -4,11 +4,11 @@ extern "C" {
 
 void FUN_0028fce8(BtlUiObjAA *obj);
 
-extern BtlUiGlobalsA DAT_0057a9b8;
+extern BtlUiGlobalsA g_btlUi;
 
 void FUN_004a9a50(void)
 {
-    FUN_0028fce8(&DAT_0057a9b8.ui->objA);
+    FUN_0028fce8(&g_btlUi.ui->objA);
 }
 
 } /* extern "C" */

@@ -13,7 +13,7 @@ typedef struct {
 } void_stack;
 
 extern unsigned char LAB_00250844; /* 0x250844 */
-extern int DAT_0043dd50; /* 0x43dd50 */
+extern int g_uiQuest; /* 0x43dd50 */
 
 /* Supplied declaration required: FUN_002bd81c. */
 /* Supplied declaration required: FUN_002bd82c. */
@@ -28,7 +28,7 @@ void FUN_00250798(void)
   int temp_v0;
   unsigned int temp_v1;
   
-  temp_v0 = DAT_0043dd50;
+  temp_v0 = g_uiQuest;
   temp_v1 = FUN_002c5c04(&LAB_00250844);
   *(unsigned int *)(temp_v0 + 0x5e4) = temp_v1;
   temp_v1 = asdTextCreate(0);

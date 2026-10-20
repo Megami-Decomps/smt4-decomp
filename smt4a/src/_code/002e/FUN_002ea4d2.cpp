@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002ea20c(int *);
-int FUN_002ea446(int, int);
+int onlineJobSetStateTimed(int, int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -13,7 +13,7 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_002ea20c. */
-/* Supplied declaration required: FUN_002ea446. */
+/* Supplied declaration required: onlineJobSetStateTimed. */
 
 
 unsigned int FUN_002ea4d2(int param_1,unsigned int param_2,int param_3,unsigned int param_4)
@@ -29,7 +29,7 @@ unsigned int FUN_002ea4d2(int param_1,unsigned int param_2,int param_3,unsigned 
      (FUN_002ea20c(&temp_v0), *(int *)(param_1 + 0xf8) <= temp_v0 - *(int *)(param_1 + 0x100))) {
     return 0;
   }
-  FUN_002ea446(param_1,0xfa);
+  onlineJobSetStateTimed(param_1,0xfa);
   return 1;
 }
 

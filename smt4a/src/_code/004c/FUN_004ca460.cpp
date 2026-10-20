@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019cac4(void);
+int dataTable00FindById(void);
 int FUN_003e9cec(int, unsigned char [684], int, int);
 int FUN_003eb314(int, unsigned char [684]);
 int FUN_004a9c24(unsigned int, int, int, int);
@@ -20,13 +20,13 @@ typedef struct {
     unsigned int sp458; /* 0x458: local_458 */
 } param_4_stack;
 
-extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
+extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
 extern int btlGetMainState(void);
 extern unsigned short FUN_0017760c(int);
-/* Supplied declaration required: FUN_0019cac4. */
-extern int FUN_001ab854(int);
-extern int FUN_001ab888(void);
+/* Supplied declaration required: dataTable00FindById. */
+extern int gameGetSlotRecord(int);
+extern int gameGetSlotTable(void);
 extern int FUN_003e83b4(int, int, unsigned int);
 /* Supplied declaration required: FUN_003e9cec. */
 /* Supplied declaration required: FUN_003eb314. */
@@ -61,16 +61,16 @@ void FUN_004ca460(int param_1,int param_2,int param_3,int param_4)
   temp_v1 = btlGetMainState();
   if (param_1 != 0) {
     temp_v2 = *(unsigned int *)(temp_v1 + param_2 * 8 + 0x2008) & 0xffff;
-    FUN_0019cac4();
+    dataTable00FindById();
     if (temp_v2 == 0) {
       return;
     }
     FUN_003eb314(temp_v1,temp_v7);
   }
   else {
-    temp_v3 = FUN_001ab888();
+    temp_v3 = gameGetSlotTable();
     param_2 = temp_v3 + param_2;
-    temp_v4 = FUN_001ab854((int)*(char *)(param_2 + 0x1c88));
+    temp_v4 = gameGetSlotRecord((int)*(char *)(param_2 + 0x1c88));
     temp_v5 = bitsAt60Test(temp_v4,1);
     if (temp_v5 != 0) {
       temp_v0 = FUN_0017760c(temp_v4);
@@ -85,7 +85,7 @@ void FUN_004ca460(int param_1,int param_2,int param_3,int param_4)
       if (param_4 >= 1) {
         FUN_004fb43c(0,0,0x1000271,0,0,0,0);
       }
-      FUN_004a9c24(DAT_0057a9c8,(int)*(short *)(temp_v4 + 0x6e),(int)*(char *)(param_2 + 0x1c88),
+      FUN_004a9c24(g_btlUiBlock,(int)*(short *)(temp_v4 + 0x6e),(int)*(char *)(param_2 + 0x1c88),
                    param_4 < 1);
     }
   }

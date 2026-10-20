@@ -31,7 +31,7 @@ extern short DAT_005f187e; /* 0x5f187e */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-extern unsigned int FUN_0014bef4(unsigned int);
+extern unsigned int randRange(unsigned int);
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
 /* Supplied declaration required: FUN_0025ef68. */
@@ -96,18 +96,18 @@ unsigned int FUN_00353200(int param_1)
           temp_v6 = temp_v6 + temp_v4 * (float)temp_v8;
         }
         if ((int)temp_v0 >= 0xd) {
-          temp_v1 = FUN_0014bef4(0x32);
+          temp_v1 = randRange(0x32);
           temp_v4 = (float)VectorUnsignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v4 = temp_v4 + temp_v12;
         }
         else {
-          temp_v1 = FUN_0014bef4(0x32);
+          temp_v1 = randRange(0x32);
           temp_v4 = (float)VectorUnsignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v4 = temp_v4 + temp_v9;
         }
       }
       else {
-        temp_v1 = FUN_0014bef4(0x32);
+        temp_v1 = randRange(0x32);
         temp_v4 = (float)VectorUnsignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v4 = temp_v4 + temp_v9;
       }
@@ -123,12 +123,12 @@ unsigned int FUN_00353200(int param_1)
         }
       }
       if ((int)temp_v0 >= 0xd) {
-        temp_v1 = FUN_0014bef4(0x32);
+        temp_v1 = randRange(0x32);
         temp_v4 = (float)VectorUnsignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v4 = temp_v4 + temp_v10;
       }
       else {
-        temp_v1 = FUN_0014bef4(0x32);
+        temp_v1 = randRange(0x32);
         temp_v4 = (float)VectorUnsignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v4 = temp_v4 + temp_v11;
       }

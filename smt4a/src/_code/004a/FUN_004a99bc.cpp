@@ -15,7 +15,7 @@ typedef struct {
 } param_3_stack;
 
 extern unsigned char LAB_004a9a34; /* 0x4a9a34 */
-extern int DAT_0057a9c8; /* 0x57a9c8 */
+extern int g_btlUiBlock; /* 0x57a9c8 */
 
 /* Supplied declaration required: FUN_00100388. */
 extern unsigned int FUN_00186f54(unsigned short);
@@ -32,8 +32,8 @@ void FUN_004a99bc(unsigned int param_1,short param_2,unsigned int param_3)
   unsigned int temp_v1;
   unsigned char temp_v2 [64];
   
-  temp_v0 = DAT_0057a9c8;
-  *(unsigned char *)(DAT_0057a9c8 + 0xc040) = 1;
+  temp_v0 = g_btlUiBlock;
+  *(unsigned char *)(g_btlUiBlock + 0xc040) = 1;
   *(unsigned int *)(temp_v0 + 0xc04c) = 0x12;
   *(short *)(temp_v0 + 0xc050) = param_2;
   *(unsigned int *)(temp_v0 + 0xc048) = 0;

@@ -7,18 +7,18 @@ extern "C" {
 int FUN_003306cc(void);
 int FUN_00342334(int);
 int FUN_00370b8c(int, unsigned int);
-int FUN_003fd63c(int, int);
+int gameFlagSetValue(int, int);
 
 extern unsigned char g_eventCommand; /* 0x57f554 */
 
 extern int FUN_0016345c(void);
 extern int jobIsValid(int);
-extern unsigned int FUN_0018719c(void);
+extern unsigned int gameFlagIsSet(void);
 extern int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_003306cc. */
 /* Supplied declaration required: FUN_00342334. */
 /* Supplied declaration required: FUN_00370b8c. */
-/* Supplied declaration required: FUN_003fd63c. */
+/* Supplied declaration required: gameFlagSetValue. */
 
 
 unsigned int FUN_002a3e10(void)
@@ -38,10 +38,10 @@ unsigned int FUN_002a3e10(void)
     FUN_00342334(0);
     FUN_003306cc();
     temp_v1 = temp_v0 + 0x800;
-    temp_v2 = FUN_0018719c();
+    temp_v2 = gameFlagIsSet();
     FUN_00370b8c(temp_v0,temp_v2);
     (*(int *)((unsigned char *)&g_eventCommand + 0x8)) = temp_v0;
-    FUN_003fd63c(temp_v1,1);
+    gameFlagSetValue(temp_v1,1);
   }
   temp_v0 = jobIsValid((*(int *)((unsigned char *)&g_eventCommand + 0x8)));
   if (temp_v0 != 0) {

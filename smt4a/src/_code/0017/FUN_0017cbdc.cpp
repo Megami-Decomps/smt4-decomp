@@ -7,8 +7,8 @@ extern "C" {
 int FUN_00196644(unsigned int, int);
 int FUN_001975ec(unsigned int, int);
 
-extern unsigned int *DAT_005b40e0; /* 0x5b40e0 */
-extern unsigned int DAT_005b40e4; /* 0x5b40e4 */
+extern unsigned int *g_commandBufferCursor; /* 0x5b40e0 */
+extern unsigned int g_commandBufferEnd; /* 0x5b40e4 */
 extern int DAT_005b4400; /* 0x5b4400 */
 extern unsigned int *DAT_005b4428; /* 0x5b4428 */
 
@@ -59,15 +59,15 @@ void FUN_0017cbdc(int param_1)
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 3);
     if ((temp_v0) && (temp_v5 = *(unsigned int *)(temp_v1 + 0x770), (temp_v5 & 7) != 0)) {
-      if ((unsigned int)DAT_005b40e0 < DAT_005b40e4) {
-        DAT_005b40e0[1] = 0x10080;
-        *DAT_005b40e0 = temp_v5;
-        DAT_005b40e0 = DAT_005b40e0 + 2;
+      if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+        g_commandBufferCursor[1] = 0x10080;
+        *g_commandBufferCursor = temp_v5;
+        g_commandBufferCursor = g_commandBufferCursor + 2;
       }
-      if ((unsigned int)DAT_005b40e0 < DAT_005b40e4) {
-        DAT_005b40e0[1] = 0x50080;
-        *DAT_005b40e0 = 0x10000;
-        DAT_005b40e0 = DAT_005b40e0 + 2;
+      if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+        g_commandBufferCursor[1] = 0x50080;
+        *g_commandBufferCursor = 0x10000;
+        g_commandBufferCursor = g_commandBufferCursor + 2;
       }
     }
   }

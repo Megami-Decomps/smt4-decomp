@@ -8,7 +8,7 @@ int FUN_0022aa38(int, unsigned int);
 int FUN_0022ab08(int, unsigned int *);
 int FUN_00246134(unsigned int, int, int, unsigned int);
 int FUN_00247478(unsigned char [2], unsigned int, unsigned int);
-int FUN_00282924(...);
+int btlMainFindEntryByListedId(...);
 int btlGetMainState(void);
 int FUN_003bd9e8(unsigned int, int);
 int VectorSignedToFloat(int, int);
@@ -25,7 +25,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0022ab08. */
 /* Supplied declaration required: FUN_00246134. */
 /* Supplied declaration required: FUN_00247478. */
-/* Supplied declaration required: FUN_00282924. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_003bd9e8. */
 
@@ -47,7 +47,7 @@ void FUN_003bd1d8(unsigned int param_1,unsigned int param_2)
   
   temp_v0 = btlGetMainState();
   temp_v1 = btlGetMainState();
-  FUN_00282924(temp_v1,param_1);
+  btlMainFindEntryByListedId(temp_v1,param_1);
   temp_v2 = btlGetMainState();
   FUN_00247478(temp_v6,temp_v2,temp_v1);
   if ((int)temp_v8 - 3U >= 8) {
@@ -57,7 +57,7 @@ void FUN_003bd1d8(unsigned int param_1,unsigned int param_2)
       temp_v4 = 100;
     }
     temp_v3 = temp_v0;
-    FUN_00282924(temp_v0,param_1);
+    btlMainFindEntryByListedId(temp_v0,param_1);
     FUN_0022ab08(temp_v7,&temp_v5);
     FUN_0022aa38(temp_v3,temp_v5 & 0xff);
     if ((temp_v3 != 0) && (temp_v4 < 100)) {

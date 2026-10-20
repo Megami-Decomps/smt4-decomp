@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-extern int DAT_0057f28c; /* 0x57f28c */
+extern int g_uiQuest; /* 0x57f28c */
 
 extern int FUN_002a4860(int);
 extern int FUN_002a4894(int);
@@ -32,14 +32,14 @@ void FUN_002ae320(void)
   unsigned int temp_v4;
   int temp_v5;
   
-  temp_v2 = DAT_0057f28c;
-  if (*(char *)(DAT_0057f28c + 0x90c) != '\0') {
-    temp_v5 = DAT_0057f28c + 0x948;
-    temp_v3 = DAT_0057f28c + 0xa10;
+  temp_v2 = g_uiQuest;
+  if (*(char *)(g_uiQuest + 0x90c) != '\0') {
+    temp_v5 = g_uiQuest + 0x948;
+    temp_v3 = g_uiQuest + 0xa10;
   }
   else {
-    temp_v5 = DAT_0057f28c + 0x9ac;
-    temp_v3 = DAT_0057f28c + 0xad6;
+    temp_v5 = g_uiQuest + 0x9ac;
+    temp_v3 = g_uiQuest + 0xad6;
   }
   temp_v0 = FUN_002a4860(temp_v5);
   temp_v5 = FUN_002a4894(temp_v5);

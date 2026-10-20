@@ -6,7 +6,7 @@ extern "C" {
 
 int asdMemoryFreeRegion(unsigned int *);
 int FUN_002958f8(int, int);
-int FUN_002a780c(unsigned int);
+int asdMemFreeSlot(unsigned int);
 int FUN_002a8554(unsigned int, int *, int, int, int, int, unsigned int, unsigned int);
 int hasExclusiveAccess(int *);
 
@@ -21,7 +21,7 @@ extern unsigned int DAT_00471b58; /* 0x471b58 */
 /* Supplied declaration required: asdMemoryFreeRegion. */
 extern unsigned int *FUN_001246cc(unsigned int *);
 /* Supplied declaration required: FUN_002958f8. */
-/* Supplied declaration required: FUN_002a780c. */
+/* Supplied declaration required: asdMemFreeSlot. */
 /* Supplied declaration required: FUN_002a8554. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 
@@ -42,20 +42,20 @@ void FUN_0031b970(unsigned int *param_1)
   }
   temp_v2 = 0;
   do {
-    FUN_002a780c(param_1[temp_v2 + 2]);
+    asdMemFreeSlot(param_1[temp_v2 + 2]);
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 7);
-  FUN_002a780c(param_1[1]);
-  FUN_002a780c(*param_1);
-  FUN_002a780c(param_1[0xd]);
+  asdMemFreeSlot(param_1[1]);
+  asdMemFreeSlot(*param_1);
+  asdMemFreeSlot(param_1[0xd]);
   temp_v2 = 0;
   do {
-    FUN_002a780c(param_1[temp_v2 + 0x12]);
+    asdMemFreeSlot(param_1[temp_v2 + 0x12]);
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 8);
-  FUN_002a780c(param_1[0xe]);
-  FUN_002a780c(param_1[0x10]);
-  FUN_002a780c(param_1[0x23]);
+  asdMemFreeSlot(param_1[0xe]);
+  asdMemFreeSlot(param_1[0x10]);
+  asdMemFreeSlot(param_1[0x23]);
   FUN_002958f8((int)*(short *)(param_1 + 0x22),1);
   nn_os_CriticalSection_Enter((unsigned int)DAT_00465124);
   if ((((unsigned int)param_1 < DAT_00465144) || ((unsigned int *)(DAT_00465154 + (int)DAT_00465144) < param_1)) &&

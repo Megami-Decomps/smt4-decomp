@@ -45,7 +45,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002bf538. */
 extern int dataTableGetEntries(void);
 /* Supplied declaration required: dataTableGet. */
-extern int FUN_002c30c4(int);
+extern int libc_strlen(int);
 extern int FUN_002c5d80(unsigned int, unsigned int);
 
 
@@ -105,7 +105,7 @@ unsigned char FUN_001ed9a0(void)
         dataTableGet(0x3d,0);
         temp_v5 = dataTableGetEntries();
         temp_v5 = temp_v5 + temp_v0 * 0x54;
-        temp_v3 = FUN_002c30c4(temp_v5);
+        temp_v3 = libc_strlen(temp_v5);
         temp_v11 = (float)VectorSignedToFloat(temp_v3 * temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)temp_v1 - (int)(temp_v11 * 0.5f),(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)*(short *)(temp_v4 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);

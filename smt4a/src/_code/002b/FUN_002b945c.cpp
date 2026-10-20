@@ -26,8 +26,8 @@ struct fn_002b945c_arg0 {
 };
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern unsigned short FUN_0014bef4(unsigned int);
-extern int FUN_00162e8c(void);
+extern unsigned short randRange(unsigned int);
+extern int gameFlagsGetBlock(void);
 extern int dataTable4CGetEntry(fn_002b945c_arg0 *);
 
 
@@ -42,7 +42,7 @@ void FUN_002b945c(fn_002b945c_arg0 *param_1)
   unsigned int in_fpscr;
   unsigned int temp_v4;
   
-  temp_v2 = FUN_00162e8c();
+  temp_v2 = gameFlagsGetBlock();
   temp_v3 = dataTable4CGetEntry(param_1);
   *(unsigned char *)(temp_v2 + 0x7c6) = 1;
   *(char *)(temp_v2 + 0x3a) = (char)*(unsigned short *)(temp_v3 + 4);
@@ -52,9 +52,9 @@ void FUN_002b945c(fn_002b945c_arg0 *param_1)
   *(unsigned char *)(temp_v2 + 0x7c6) = 100;
   *(unsigned int *)(temp_v2 + 0x1520) = 0;
   *(unsigned int *)(temp_v2 + 0x15c4) = temp_v4;
-  temp_v1 = FUN_0014bef4(4);
+  temp_v1 = randRange(4);
   *(unsigned short *)(temp_v2 + 0x1668) = temp_v1;
-  temp_v1 = FUN_0014bef4(100);
+  temp_v1 = randRange(100);
   *(unsigned short *)(temp_v2 + 0x166a) = temp_v1;
   if (*(char *)(temp_v2 + 0x7c5) == '\0') {
     temp_v0 = 0xff;

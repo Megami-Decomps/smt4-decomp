@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern ScreenRef DAT_0057f0c4;
+extern ScreenRef g_buttonHelp;
 
 void FUN_00318df4(u8 value)
 {
-    DAT_0057f0c4.instance->unk67C = value;
+    g_buttonHelp.instance->unk67C = value;
 }
 
 } /* extern "C" */

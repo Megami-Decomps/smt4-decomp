@@ -17,7 +17,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } void_stack;
 
-extern unsigned char DAT_00588fd0; /* 0x588fd0 */
+extern unsigned char g_gameGlobals; /* 0x588fd0 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: FUN_00157558. */
@@ -41,8 +41,8 @@ unsigned int FUN_0026c1a8(void)
   
   temp_v4 = 0;
   temp_v5[0] = 0;
-  if ((*(char *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x2012) != '\0') &&
-     (*(char *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x2018) == '\x03' || *(char *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x2018) == '\n')) {
+  if ((*(char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x2012) != '\0') &&
+     (*(char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x2018) == '\x03' || *(char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x2018) == '\n')) {
     FUN_00157558(g_renderCtx);
     temp_v0 = g_renderCtx;
     temp_v1 = FUN_001692ac(1,0);

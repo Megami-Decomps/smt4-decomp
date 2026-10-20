@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0017145c(void);
-int FUN_00195fc8(void);
+int sysFatalBreak(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -13,7 +13,7 @@ typedef struct {
 } void_stack;
 
 /* Supplied declaration required: FUN_0017145c. */
-/* Supplied declaration required: FUN_00195fc8. */
+/* Supplied declaration required: sysFatalBreak. */
 
 
 void FUN_00441f54(void)
@@ -32,7 +32,7 @@ void FUN_00441f54(void)
   if (temp_v0 >= 0 || temp_v0 == temp_v1) {
     return;
   }
-  FUN_00195fc8();
+  sysFatalBreak();
   return;
 }
 

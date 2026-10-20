@@ -1,0 +1,47 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `dataTable08Sub1GetRecord` (_code @ 0x2b4670, 0x80 bytes) from smt4_v1.2.0.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+extern "C" {
+
+int FUN_0014148c(int, unsigned int);
+int libc_bsearch(unsigned char [96], unsigned int, unsigned int, int, unsigned char *);
+
+/* stack frame of param_1: 2 slot(s), 6 byte(s) */
+typedef struct {
+    unsigned short sp30; /* 0x30: local_30 */
+    unsigned int sp98; /* 0x98: local_98 */
+} param_1_stack;
+
+extern unsigned char LAB_001385bc; /* 0x1385bc */
+extern int g_aocSystem; /* 0x433158 */
+
+/* Supplied declaration required: FUN_0014148c. */
+/* Supplied declaration required: libc_bsearch. */
+extern unsigned int dataTableGetCount(int);
+extern unsigned int dataTableGetEntries(void);
+extern int dataTableGet(unsigned int, unsigned int);
+
+
+void dataTable08Sub1GetRecord(unsigned int param_1)
+
+{
+/* irregular: 2 native warning(s); review required */
+  int temp_v0;
+  unsigned int temp_v1;
+  unsigned int temp_v2;
+  unsigned char temp_v3 [96];
+  unsigned short temp_v4;
+  
+  temp_v4 = (unsigned short)param_1;
+  if (((*(int *)(g_aocSystem + 0x3ac) == 0) ||
+      (temp_v0 = g_aocSystem, FUN_0014148c(g_aocSystem,param_1), temp_v0 == 0)) &&
+     (temp_v0 = dataTableGet(8,1), temp_v0 != 0)) {
+    temp_v1 = dataTableGetEntries();
+    temp_v2 = dataTableGetCount(temp_v0);
+    libc_bsearch(temp_v3,temp_v1,temp_v2,0x80,&LAB_001385bc);
+  }
+  return;
+}
+
+} /* extern "C" */

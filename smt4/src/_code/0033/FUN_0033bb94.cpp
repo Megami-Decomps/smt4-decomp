@@ -24,8 +24,8 @@ extern int FUN_0026b780(int);
 /* Supplied declaration required: FUN_0029c1c8. */
 /* Supplied declaration required: FUN_0029c6b0. */
 extern unsigned int FUN_0029c8f4(int);
-extern int FUN_002a8740(unsigned int);
-extern int FUN_002a8764(void);
+extern int gameGetUnitRecord(unsigned int);
+extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_002b7bca. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -48,7 +48,7 @@ unsigned int FUN_0033bb94(int param_1,unsigned int param_2,int param_3)
   unsigned char temp_v9 [1476];
   
   rt_memcpy_w(temp_v7,param_1,0x604);
-  temp_v1 = FUN_002a8764();
+  temp_v1 = gameGetSlotTable();
   temp_v5 = (unsigned int)temp_v8;
   temp_v6 = -1;
   if ((int)*(char *)(temp_v1 + 0x9108) == temp_v5) {
@@ -62,7 +62,7 @@ unsigned int FUN_0033bb94(int param_1,unsigned int param_2,int param_3)
   }
   FUN_0029bbc8(*(unsigned char *)(param_1 + 0x4a));
   FUN_0029c1c8(temp_v5,param_2,0);
-  temp_v2 = FUN_002a8740(temp_v5);
+  temp_v2 = gameGetUnitRecord(temp_v5);
   if (-1 < temp_v6) {
     *(unsigned char *)(temp_v1 + temp_v6 + 0x9108) = *(unsigned char *)(temp_v2 + 0x4a);
   }

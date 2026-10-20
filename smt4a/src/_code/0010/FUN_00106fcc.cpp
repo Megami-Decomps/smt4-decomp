@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_002e7674(unsigned int, int, undefined4);
-int FUN_002ee9c0(unsigned int, int *);
+int strHolderAssignBytes(unsigned int, int, undefined4);
+int strHolderAssignU32(unsigned int, int *);
 
 typedef struct fn_00106fcc_arg1 fn_00106fcc_arg1;
 struct fn_00106fcc_arg1 {
@@ -21,8 +21,8 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_002e7674. */
-/* Supplied declaration required: FUN_002ee9c0. */
+/* Supplied declaration required: strHolderAssignBytes. */
+/* Supplied declaration required: strHolderAssignU32. */
 
 
 void FUN_00106fcc(unsigned int param_1,fn_00106fcc_arg1 *param_2)
@@ -32,8 +32,8 @@ void FUN_00106fcc(unsigned int param_1,fn_00106fcc_arg1 *param_2)
   int temp_v0;
   
   temp_v0 = param_2->field_0x10;
-  FUN_002ee9c0(param_1,&temp_v0);
-  FUN_002e7674(param_1,param_2->field_0xc + param_2->field_0x18,param_2->field_0x10);
+  strHolderAssignU32(param_1,&temp_v0);
+  strHolderAssignBytes(param_1,param_2->field_0xc + param_2->field_0x18,param_2->field_0x10);
   return;
 }
 

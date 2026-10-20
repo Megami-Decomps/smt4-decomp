@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b46f8(unsigned int [2], unsigned int, unsigned int, int, unsigned char *);
+int libc_bsearch(unsigned int [2], unsigned int, unsigned int, int, unsigned char *);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -18,7 +18,7 @@ extern unsigned char LAB_002d06dc; /* 0x2d06dc */
 #define ROMWRIGHT_PIECE_3_1_DEFINED
 #define romwright_piece_3_1(upper, lower) ((unsigned int)(((unsigned int)(unsigned int)(upper) << 8) | (unsigned char)(lower)))
 #endif
-/* Supplied declaration required: FUN_002b46f8. */
+/* Supplied declaration required: libc_bsearch. */
 extern unsigned int dataTableGetCount(unsigned int);
 extern unsigned int dataTableGetEntries(void);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
@@ -37,7 +37,7 @@ void FUN_00229e94(unsigned char param_1,int param_2)
   temp_v0 = dataTableGetCount(temp_v0);
   temp_v2[0] = romwright_piece_3_1((((unsigned int)(temp_v2[0]) >> 8) & 0xffffffU),param_1);
   temp_v2[0] = (temp_v2[0] & 0xff0000ff) | (param_2 << 8);
-  FUN_002b46f8(temp_v2,temp_v1,temp_v0,4,&LAB_002d06dc);
+  libc_bsearch(temp_v2,temp_v1,temp_v0,4,&LAB_002d06dc);
   return;
 }
 

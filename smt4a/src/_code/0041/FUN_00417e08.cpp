@@ -9,7 +9,7 @@ int FUN_004bb6d8(unsigned int, int);
 int clearThreeWords(...);
 int clearTwoWords(int);
 
-extern int FUN_001ab940(void);
+extern int gameFlagBlockGet(void);
 /* Supplied declaration required: FUN_001ad9b4. */
 extern int FUN_001ada74(unsigned int);
 extern int FUN_001bd100(unsigned int);
@@ -35,9 +35,9 @@ unsigned int FUN_00417e08(unsigned int param_1)
   unsigned int temp_v9;
   unsigned char *pbVar11;
   
-  temp_v4 = FUN_001ab940();
+  temp_v4 = gameFlagBlockGet();
   temp_v4 = temp_v4 + param_1 * 4;
-  temp_v5 = FUN_001ab940();
+  temp_v5 = gameFlagBlockGet();
   pbVar11 = (unsigned char *)(temp_v4 + 0x2a0);
   if (((*pbVar11 & 1) != 0) || (param_1 >= 0x15e)) {
     temp_v6 = FUN_001bd118(param_1);
@@ -101,7 +101,7 @@ unsigned int FUN_00417e08(unsigned int param_1)
         }
         temp_v8 = 0x500;
         do {
-          temp_v4 = FUN_001ab940();
+          temp_v4 = gameFlagBlockGet();
           FUN_004bb6d8(temp_v8,0);
           temp_v9 = temp_v8 & 7;
           temp_v0 = temp_v8 >> 3;

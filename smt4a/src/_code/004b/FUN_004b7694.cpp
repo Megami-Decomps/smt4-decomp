@@ -23,7 +23,7 @@ typedef struct {
 extern unsigned char DAT_005f16fc; /* 0x5f16fc */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0033a988. */
 /* Supplied declaration required: linkSlotSetFlag1C. */
 /* Supplied declaration required: linkSlotSetFlag20. */
@@ -128,7 +128,7 @@ void FUN_004b7694(int param_1)
       return;
     }
     if (((temp_v6 & 0x80) != 0) ||
-       ((temp_v2 = FUN_0018719c(0x404), temp_v2 != 0 && (temp_v2 = FUN_004d0524(), temp_v2 != 0)))) {
+       ((temp_v2 = gameFlagIsSet(0x404), temp_v2 != 0 && (temp_v2 = FUN_004d0524(), temp_v2 != 0)))) {
       *(unsigned int *)(param_1 + 0x20) = *(unsigned int *)(param_1 + 0x20) & 0xffffff7f;
       FUN_0033a988();
       *(unsigned int *)(param_1 + 0x28) = 7;

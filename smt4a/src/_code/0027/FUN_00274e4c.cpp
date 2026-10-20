@@ -7,7 +7,7 @@ extern "C" {
 int CONCAT44(double, double);
 int FUN_00234044(...);
 int FUN_002b5cb4(void);
-int FUN_002e342c(int, int);
+int libc_strcpy(int, int);
 int FUN_00327678(void);
 int FUN_00384830(void);
 
@@ -23,7 +23,7 @@ extern unsigned char DAT_005f1724; /* 0x5f1724 */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Supplied declaration required: FUN_00234044. */
 /* Supplied declaration required: FUN_002b5cb4. */
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_00327678. */
 /* Supplied declaration required: FUN_00384830. */
 
@@ -118,7 +118,7 @@ void FUN_00274e4c(void)
         FUN_00384830();
         DAT_005f1724 = temp_v3 < 0x42dc0000;
         FUN_00234044(1,temp_v4);
-        FUN_002e342c(DAT_00581280 + 0xf20,temp_v2 + 0xc);
+        libc_strcpy(DAT_00581280 + 0xf20,temp_v2 + 0xc);
         *(unsigned int *)(DAT_00581280 + 0xf1c) = *(unsigned int *)(temp_v2 + 8);
       }
       else {

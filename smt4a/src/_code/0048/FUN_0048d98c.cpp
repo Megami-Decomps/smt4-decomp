@@ -12,7 +12,7 @@ int FUN_0016c4b8(...);
 int FUN_0016c69c(...);
 int FUN_0016c6f0(...);
 int FUN_001835b4(...);
-int FUN_00184e64(...);
+int drawSetColorFromRGBA8(...);
 int FUN_00185dd4(...);
 int FUN_0037b138(...);
 int words2Copy(int, float *);
@@ -45,9 +45,9 @@ extern unsigned char DAT_00616ee4; /* 0x616ee4 */
 /* Supplied declaration required: FUN_0016c6f0. */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_00184e64. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_00185dd4. */
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 extern int gameOwnedBitTest(unsigned int);
 /* Supplied declaration required: FUN_0037b138. */
 /* Supplied declaration required: words2Copy. */
@@ -172,9 +172,9 @@ void FUN_0048d98c(int param_1)
         do {
           temp_v2 = param_1 + temp_v4 * 100;
           if (*(short *)(temp_v2 + 0x7bc8) != 0) {
-            FUN_00184e64(*(unsigned int *)(temp_v2 + 0x7bdc));
+            drawSetColorFromRGBA8(*(unsigned int *)(temp_v2 + 0x7bdc));
             FUN_0037b138(*(unsigned int *)(temp_v2 + 0x7bdc) & 0xff);
-            temp_v1 = FUN_0018719c(0x3b);
+            temp_v1 = gameFlagIsSet(0x3b);
             if (((temp_v1 == 0) || (*(unsigned char *)(temp_v2 + 0x7b98) != 0xa6)) &&
                (temp_v15[temp_v6] == (unsigned int)*(unsigned char *)(temp_v2 + 0x7b98))) {
               temp_v9 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v2 + 0x7bd0),
@@ -297,7 +297,7 @@ LAB_0048dfc4:
       temp_v4 = param_1 + temp_v6 * 100;
       puVar8 = (unsigned int *)(temp_v4 + 0x178c);
       if (*(short *)(temp_v4 + 0x17c0) != 0) {
-        FUN_00184e64(*(unsigned int *)(temp_v4 + 0x17d4));
+        drawSetColorFromRGBA8(*(unsigned int *)(temp_v4 + 0x17d4));
         FUN_0037b138(*(unsigned int *)(temp_v4 + 0x17d4) & 0xff);
         if (*(char *)(temp_v4 + 0x17dc) != '\0') {
           *(unsigned int *)(temp_v4 + 0x17d4) = 0xffffff66;
@@ -305,7 +305,7 @@ LAB_0048dfc4:
         }
         if (*(short *)(temp_v4 + 0x17c2) == 0x1bc8 || *(short *)(temp_v4 + 0x17c2) == 0x1bc9) {
           *(unsigned int *)(temp_v4 + 0x17d4) = 0xffffffff;
-          FUN_00184e64(0xffffffff);
+          drawSetColorFromRGBA8(0xffffffff);
           FUN_0037b138(*(unsigned int *)(temp_v4 + 0x17d4) & 0xff);
         }
         if (*(short *)(temp_v4 + 0x17c2) == 0x1bd2) {

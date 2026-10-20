@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_00183e58(void);
-int FUN_00184c00(int, int, int);
-int FUN_00275f44(unsigned int, unsigned int);
+int uiSpriteSetImageKeyframe(int, int, int);
+int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int FUN_002bf4f4(int);
-int FUN_004853fc(int, int);
+int stateSetterEnterState(int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -16,14 +16,14 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_00183e58. */
-/* Supplied declaration required: FUN_00184c00. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 extern int FUN_00224880(unsigned int);
 extern int FUN_0026272c(void);
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_002bf4f4. */
 extern int FUN_00318dc4(void);
-/* Supplied declaration required: FUN_004853fc. */
+/* Supplied declaration required: stateSetterEnterState. */
 
 
 /* WARNING: Removing unreachable block (ram,0x00485420) */
@@ -60,7 +60,7 @@ void FUN_00485308(int param_1)
       if (temp_v0 != 0) {
         if (*(char *)(param_1 + 0x261) == '\x04') {
           *(unsigned char *)(param_1 + 0x260) = 0;
-          FUN_00184c00(param_1 + 0x3ac,0,1);
+          uiSpriteSetImageKeyframe(param_1 + 0x3ac,0,1);
           FUN_00183e58();
           *(unsigned int *)(param_1 + 0xc) = 0;
           *(unsigned char *)(param_1 + 1) = 8;
@@ -72,7 +72,7 @@ void FUN_00485308(int param_1)
         *(unsigned int *)(param_1 + 0xbc) = *(unsigned int *)(param_1 + 0xce);
         *(unsigned short *)(param_1 + 0xc0) = *(unsigned short *)(param_1 + 0xd2);
       }
-      FUN_004853fc(param_1,2);
+      stateSetterEnterState(param_1,2);
       return;
     }
   }
@@ -85,7 +85,7 @@ void FUN_00485308(int param_1)
       else {
         temp_v1 = 3;
       }
-      FUN_00275f44(*(unsigned int *)(param_1 + 0x26c),temp_v1);
+      scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x26c),temp_v1);
       *(unsigned char *)(param_1 + 0x270) = 1;
     }
   }

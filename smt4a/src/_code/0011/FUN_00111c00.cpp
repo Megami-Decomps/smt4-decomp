@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002ea3c0(...);
 int FUN_002ea3d0(int, unsigned int);
 int FUN_002ea974(unsigned char [104]);
-int FUN_002ea9dc(unsigned char [104]);
+int onlineUrlDestroy(unsigned char [104]);
 int FUN_002fd412(int);
 
 extern unsigned char LAB_00111b05; /* 0x111b05 */
@@ -16,7 +16,7 @@ extern unsigned char LAB_00111c78; /* 0x111c78 */
 /* Supplied declaration required: FUN_002ea3c0. */
 /* Supplied declaration required: FUN_002ea3d0. */
 /* Supplied declaration required: FUN_002ea974. */
-/* Supplied declaration required: FUN_002ea9dc. */
+/* Supplied declaration required: onlineUrlDestroy. */
 extern int FUN_002eb5f4(void);
 /* Supplied declaration required: FUN_002fd412. */
 extern int FUN_002fd546(int);
@@ -42,7 +42,7 @@ void FUN_00111c00(int param_1)
     }
     temp_v1 = FUN_002ea3c0(temp_v3,0x111a09,0,&LAB_00111c78);
     FUN_002ea3d0(param_1,temp_v1);
-    FUN_002ea9dc(temp_v2);
+    onlineUrlDestroy(temp_v2);
   }
   else {
     temp_v1 = FUN_002ea3c0(temp_v4,&LAB_00111b05,0,&LAB_00111c78);

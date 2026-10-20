@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00240d88(...);
 int FUN_0029a268(int);
-int FUN_002beda4(...);
+int vec2GetXInt(...);
 int FUN_002bf288(...);
 int FUN_002bf380(int, int, int, unsigned int, unsigned int, int);
 int FUN_002bf538(void);
@@ -29,8 +29,8 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_00240d88. */
 /* Supplied declaration required: FUN_0029a268. */
-extern unsigned int FUN_002bed98(int);
-/* Supplied declaration required: FUN_002beda4. */
+extern unsigned int vec2GetYInt(int);
+/* Supplied declaration required: vec2GetXInt. */
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf538. */
@@ -117,8 +117,8 @@ unsigned int FUN_00330ac8(void)
       FUN_002bf538();
     }
   }
-  temp_v3 = FUN_002beda4(temp_v1 + 0x2c8);
-  temp_v4 = FUN_002bed98(temp_v1 + 0x2c8);
+  temp_v3 = vec2GetXInt(temp_v1 + 0x2c8);
+  temp_v4 = vec2GetYInt(temp_v1 + 0x2c8);
   FUN_002bf380(2,0x24,1,temp_v3,temp_v4,0x65);
   FUN_002bf288(2,0x24,0x206,temp_v3,temp_v4,0x65);
   temp_v0 = *(short *)(temp_v1 + 0x1e);
@@ -157,13 +157,13 @@ unsigned int FUN_00330ac8(void)
   } while (temp_v7 < 4);
   FUN_0029a268(temp_v1 + 0x840);
   if (*(int *)(temp_v1 + 4) < 3) {
-    temp_v3 = FUN_002beda4();
-    temp_v4 = FUN_002bed98(temp_v1 + 0x4f8);
+    temp_v3 = vec2GetXInt();
+    temp_v4 = vec2GetYInt(temp_v1 + 0x4f8);
     FUN_002bf288(2,0x24,0x21d,temp_v3,temp_v4,0x79);
   }
   else if (*(int *)(temp_v1 + 4) >= 4) {
-    temp_v3 = FUN_002beda4();
-    temp_v4 = FUN_002bed98(temp_v1 + 0x584);
+    temp_v3 = vec2GetXInt();
+    temp_v4 = vec2GetYInt(temp_v1 + 0x584);
     if (*(char *)(temp_v1 + 0x20) != '\0') {
       temp_v7 = *(int *)(temp_v1 + 8);
       if (temp_v7 % 0x14 >= 11) {

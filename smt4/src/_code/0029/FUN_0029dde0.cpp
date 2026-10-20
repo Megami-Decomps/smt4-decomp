@@ -16,34 +16,34 @@ typedef struct StateHolder {
 
 extern StateHolder g_gameDataBlocks;
 
-extern s32 padIsButtonDown(u32 button);
+extern s32 flagBitIsSet(u32 button);
 
 u32 FUN_0029dde0(void)
 {
     u32 result = g_gameDataBlocks.state->level;
 
-    if (padIsButtonDown(0x25) != 0) {
+    if (flagBitIsSet(0x25) != 0) {
         result = g_gameDataBlocks.state->level + 1;
     }
-    if (padIsButtonDown(0x26) != 0) {
+    if (flagBitIsSet(0x26) != 0) {
         result = g_gameDataBlocks.state->level + 2;
     }
-    if (padIsButtonDown(0x27) != 0) {
+    if (flagBitIsSet(0x27) != 0) {
         result = g_gameDataBlocks.state->level + 4;
     }
-    if (padIsButtonDown(0x28) != 0) {
+    if (flagBitIsSet(0x28) != 0) {
         result = g_gameDataBlocks.state->level + 6;
     }
-    if (padIsButtonDown(1) != 0) {
+    if (flagBitIsSet(1) != 0) {
         result = g_gameDataBlocks.state->level + 9;
     }
-    if (padIsButtonDown(2) != 0) {
+    if (flagBitIsSet(2) != 0) {
         result = g_gameDataBlocks.state->level + 12;
     }
-    if (padIsButtonDown(3) != 0) {
+    if (flagBitIsSet(3) != 0) {
         result = g_gameDataBlocks.state->level + 15;
     }
-    if (padIsButtonDown(0x29) != 0 || result > 99) {
+    if (flagBitIsSet(0x29) != 0 || result > 99) {
         result = 99;
     }
     return result;

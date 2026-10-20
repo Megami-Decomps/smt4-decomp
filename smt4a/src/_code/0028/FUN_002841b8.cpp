@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_0016431c(unsigned int);
+int msgBoxFlagsSetBit7(unsigned int);
 int FUN_0021bdac(unsigned int, int, int, int, int, int);
 int FUN_0023723c(unsigned int, int, unsigned int, int, int, unsigned char *, unsigned char *);
-int FUN_0023b27c(void);
+int useCounterStart(void);
 int FUN_002686b8(void);
 int FUN_002c76c0(int);
 int FUN_0031f208(int);
@@ -33,12 +33,12 @@ extern unsigned char DAT_005a6665; /* 0x5a6665 */
 extern unsigned char g_lmapMain; /* 0x5f1afc */
 extern unsigned char g_gameState; /* 0x5f15fc */
 
-/* Supplied declaration required: FUN_0016431c. */
-extern int FUN_0018719c(unsigned int);
+/* Supplied declaration required: msgBoxFlagsSetBit7. */
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0021bdac. */
 /* Supplied declaration required: FUN_0023723c. */
-extern int FUN_0023b258(void);
-/* Supplied declaration required: FUN_0023b27c. */
+extern int useCounterIsFinished(void);
+/* Supplied declaration required: useCounterStart. */
 /* Supplied declaration required: FUN_002686b8. */
 /* Supplied declaration required: FUN_002c76c0. */
 extern unsigned int FUN_002c7c54(void);
@@ -91,7 +91,7 @@ unsigned int FUN_002841b8(int param_1,int param_2,unsigned int param_3)
   temp_v5 = 0;
   temp_v4 = 0;
   do {
-    temp_v1 = FUN_0018719c(temp_v6[temp_v4]);
+    temp_v1 = gameFlagIsSet(temp_v6[temp_v4]);
     temp_v0 = DAT_0057f58c;
     if (temp_v1 != 0) {
       temp_v5 = temp_v5 + 1;
@@ -110,22 +110,22 @@ unsigned int FUN_002841b8(int param_1,int param_2,unsigned int param_3)
       }
       FUN_0021bdac(param_3,0,0,6,0,0);
       FUN_0023723c(*(unsigned int *)(temp_v0 + 4),4,0xffffffff,0,3,&LAB_002844dc,&LAB_002844a0);
-      FUN_0016431c(*(unsigned int *)(temp_v0 + 4));
+      msgBoxFlagsSetBit7(*(unsigned int *)(temp_v0 + 4));
       *(unsigned char *)(temp_v0 + 0x19c4) = 0;
       *(unsigned int *)(temp_v0 + 0xc) = *(unsigned int *)(temp_v0 + 0xc) | 0x20;
       FUN_0031f27c(0xffffffff,3);
       temp_v4 = 0;
       do {
-        temp_v5 = FUN_0018719c(temp_v6[temp_v4]);
+        temp_v5 = gameFlagIsSet(temp_v6[temp_v4]);
         if (temp_v5 != 0) {
           FUN_0031f208(temp_v7[temp_v4]);
         }
         temp_v4 = temp_v4 + 1;
       } while (temp_v4 < 0x13);
-      FUN_0023b27c();
+      useCounterStart();
     }
     temp_v3 = FUN_002c7c54();
-    temp_v4 = FUN_0023b258();
+    temp_v4 = useCounterIsFinished();
     if (temp_v4 != 0) {
       g_lmapMain = 0;
       (*(unsigned int *)((unsigned char *)&g_gameState + 0x504)) = 0;

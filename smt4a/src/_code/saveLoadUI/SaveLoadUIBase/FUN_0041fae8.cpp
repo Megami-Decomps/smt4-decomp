@@ -37,7 +37,7 @@ struct fn_0041fae8_arg0 {
     int field_0x2f4; /* +0x2f4 */
 };
 
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_00215bd0. */
@@ -88,7 +88,7 @@ void FUN_0041fae8(fn_0041fae8_arg0 *param_1)
     FUN_0040aad4(param_1->field_0x58,0);
     FUN_0045b538(*(int *)((int)param_1->field_0x58 + 0xc) + 0xc);
     temp_v0 = *(int *)((int)param_1->field_0x58 + 4);
-    FUN_0040ace8(DAT_0056fcc0,temp_v0);
+    FUN_0040ace8(g_handleRegistry,temp_v0);
     FUN_003fe86c(temp_v0,0,2);
     FUN_003fd7b4(temp_v0);
     *(unsigned int *)(temp_v0 + 4) = *(unsigned int *)(temp_v0 + 4) | 1;

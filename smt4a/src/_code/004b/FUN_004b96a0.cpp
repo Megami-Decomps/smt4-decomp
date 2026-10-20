@@ -7,10 +7,10 @@ extern "C" {
 int FUN_001b4aa0(void);
 int FUN_00215978(int);
 int FUN_00239b10(int);
-int FUN_00270b00(void);
+int bgmReleaseStopped(void);
 int FUN_00275bc8(int, unsigned int);
-int FUN_00324bc8(unsigned int, unsigned int);
-int FUN_003d2d34(int, int, int);
+int mapPlaceSet(unsigned int, unsigned int);
+int soundChannelRequestIfEnabled(int, int, int);
 int FUN_003d54f8(int, int);
 int FUN_004b6bc4(int, int, unsigned int);
 
@@ -26,16 +26,16 @@ extern unsigned char DAT_005f1634; /* 0x5f1634 */
 extern signed char DAT_005f1b70; /* 0x5f1b70 */
 
 extern int FUN_0013def0(unsigned int);
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_001b4aa0. */
 extern int FUN_001bd118(void);
 /* Supplied declaration required: FUN_00215978. */
 /* Supplied declaration required: FUN_00239b10. */
-/* Supplied declaration required: FUN_00270b00. */
+/* Supplied declaration required: bgmReleaseStopped. */
 /* Supplied declaration required: FUN_00275bc8. */
 extern int FUN_0031d230(void);
-/* Supplied declaration required: FUN_00324bc8. */
-/* Supplied declaration required: FUN_003d2d34. */
+/* Supplied declaration required: mapPlaceSet. */
+/* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: FUN_003d54f8. */
 extern int FUN_004186e0(void);
 /* Supplied declaration required: FUN_004b6bc4. */
@@ -72,7 +72,7 @@ void FUN_004b96a0(int param_1)
     FUN_003d54f8(1,10);
   }
   *(unsigned int *)(param_1 + 0x116c) = 0;
-  FUN_00270b00();
+  bgmReleaseStopped();
   if (DAT_005f1b70 != '\0') {
     if (temp_v0) {
       temp_v2 = FUN_001b4aa0();
@@ -117,22 +117,22 @@ void FUN_004b96a0(int param_1)
   DAT_005f1634 = 0;
   DAT_005f1610 = 3;
   DAT_005f1b70 = 0;
-  FUN_00324bc8(0xffffffff,0xffffffff);
+  mapPlaceSet(0xffffffff,0xffffffff);
   if (temp_v3 == 3 || temp_v3 == 4) {
     temp_v1 = 0x100004a;
   }
   else {
     temp_v1 = 0x100003d;
   }
-  temp_v3 = FUN_0018719c(0x12e);
-  if ((temp_v3 != 0) && (temp_v3 = FUN_0018719c(0x135), temp_v3 == 0)) {
+  temp_v3 = gameFlagIsSet(0x12e);
+  if ((temp_v3 != 0) && (temp_v3 = gameFlagIsSet(0x135), temp_v3 == 0)) {
     temp_v1 = 0x100003f;
   }
   if (*(int *)(param_1 + 0x34) == temp_v1) {
     return;
   }
   *(int *)(param_1 + 0x34) = temp_v1;
-  FUN_003d2d34(temp_v1,0,0x3c);
+  soundChannelRequestIfEnabled(temp_v1,0,0x3c);
   return;
 }
 

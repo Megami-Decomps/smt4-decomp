@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdMemFree(unsigned int);
-int FUN_002ce8d8(unsigned int);
+int geometryDestroy(unsigned int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -13,7 +13,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_002ce8d8. */
+/* Supplied declaration required: geometryDestroy. */
 
 
 void FUN_003aca7c(int param_1)
@@ -30,7 +30,7 @@ void FUN_003aca7c(int param_1)
   puVar1 = (unsigned int *)*puVar4;
   temp_v1 = *(unsigned int *)(*(int *)(param_1 + 0x34) + 0x38);
   for (; temp_v0 < temp_v1; temp_v0++) {
-    FUN_002ce8d8(*puVar1);
+    geometryDestroy(*puVar1);
     puVar1 = puVar1 + 0xc;
   }
   asdMemFree(puVar4[3]);

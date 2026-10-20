@@ -16,7 +16,7 @@ extern unsigned int DAT_004719e8; /* 0x4719e8 */
 
 /* Unsupported intrinsic, declaration required: coproc_movefrom_User_R_Thread_and_Process_ID (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-extern int FUN_002c30c4(void);
+extern int libc_strlen(void);
 
 
 unsigned int FUN_0035fb7c(int param_1)
@@ -31,7 +31,7 @@ unsigned int FUN_0035fb7c(int param_1)
     temp_v1 = 0;
   }
   else {
-    temp_v1 = FUN_002c30c4();
+    temp_v1 = libc_strlen();
     temp_v1 = temp_v1 + 1;
   }
   temp_v2 = coproc_movefrom_User_R_Thread_and_Process_ID();

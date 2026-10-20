@@ -38,7 +38,7 @@ extern unsigned int DAT_00435d98; /* 0x435d98 */
 
 /* Supplied declaration required: FUN_001b6b98. */
 extern unsigned int FUN_00282be4(void);
-extern unsigned int FUN_002a8764(void);
+extern unsigned int gameGetSlotTable(void);
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdProcessCreateSimple. */
@@ -65,7 +65,7 @@ void FUN_001b0db4(unsigned int *param_1,int param_2)
   g_btlMainState = puVar2;
   asdMemAlloc(0x100,0x100,0,0x97e8,1);
   DAT_00435d94 = temp_v1;
-  temp_v1 = FUN_002a8764();
+  temp_v1 = gameGetSlotTable();
   rt_memcpy_w(DAT_00435d94,temp_v1,0x97e8);
   temp_v1 = 0x100;
   asdMemAlloc(0x100,0x100,0,0x104a,1);

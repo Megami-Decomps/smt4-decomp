@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_00581284; /* 0x581284 */
+extern int g_mapObj; /* 0x581284 */
 #ifndef ROMWRIGHT_STORAGE_s__a_a_00587f08_9_1_DEFINED
 #define ROMWRIGHT_STORAGE_s__a_a_00587f08_9_1_DEFINED
 /* Storage views; not a recovered source structure. */
@@ -33,9 +33,9 @@ void FUN_003b959c(void)
   
   temp_v1 = (int)(*(short *)((unsigned char *)&DAT_005f17fc + 0xbe));
   temp_v0 = FUN_0032530c();
-  DAT_005f17f4 = temp_v1 - (*(int *)((*(int *)((unsigned char *)&DAT_00581284 - 0x4)) + 8) +
+  DAT_005f17f4 = temp_v1 - (*(int *)((*(int *)((unsigned char *)&g_mapObj - 0x4)) + 8) +
                          (temp_v0 + *(int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 0x10) +
-                                  *(int *)(DAT_00581284 + 0x10)) / 3);
+                                  *(int *)(g_mapObj + 0x10)) / 3);
   if (DAT_005f17f4 < (*(short *)((unsigned char *)&g_gameState + 0x2c0))) {
     DAT_005f17f4 = (int)(*(short *)((unsigned char *)&g_gameState + 0x2c0));
   }

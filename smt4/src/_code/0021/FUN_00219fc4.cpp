@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_00207498(int *, int, int, int);
-int FUN_002694f8(void);
+int refCountIncrement(void);
 
 /* Supplied declaration required: FUN_00207498. */
-/* Supplied declaration required: FUN_002694f8. */
+/* Supplied declaration required: refCountIncrement. */
 
 
 int * FUN_00219fc4(int *param_1)
@@ -32,7 +32,7 @@ int * FUN_00219fc4(int *param_1)
                *(unsigned short *)((int)param_1 + 0x12));
   if (param_1[5] != 0) {
     piVar2[5] = param_1[5];
-    FUN_002694f8();
+    refCountIncrement();
   }
   temp_v1 = *(unsigned int *)(*param_1 + 0x18);
   temp_v2 = 0;

@@ -17,12 +17,12 @@ typedef struct {
     Slot slots[1];  /* 0x200 */
 } SlotTable;
 
-SlotTable *FUN_002adc88(void);
+SlotTable *gameGetFlagBlock(void);
 
 /* Stores `value` into bit 1 of the flags of slot `index`. */
 void FUN_0028784c(int index, char value)
 {
-    Slot *slot = &FUN_002adc88()->slots[index];
+    Slot *slot = &gameGetFlagBlock()->slots[index];
 
     slot->flags = (slot->flags & ~2) | (value << 1);
 }

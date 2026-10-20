@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_0018206c(unsigned int, unsigned int);
+extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 
 
 unsigned int FUN_0028a230(int param_1)
@@ -18,22 +18,22 @@ unsigned int FUN_0028a230(int param_1)
       if (temp_v0 != 7 && temp_v0 != 8) {
         return 1;
       }
-      temp_v0 = FUN_0018206c(0x2a,0);
+      temp_v0 = asdTMTexTableNodeIsLoaded(0x2a,0);
       if (temp_v0 == 0) {
         return 0;
       }
-      temp_v0 = FUN_0018206c(0x2a,1);
+      temp_v0 = asdTMTexTableNodeIsLoaded(0x2a,1);
       if (temp_v0 == 0) {
         return 0;
       }
-      temp_v0 = FUN_0018206c(0x2a,2);
+      temp_v0 = asdTMTexTableNodeIsLoaded(0x2a,2);
     }
     else {
-      temp_v0 = FUN_0018206c(0x2a,7);
+      temp_v0 = asdTMTexTableNodeIsLoaded(0x2a,7);
     }
   }
   else {
-    temp_v0 = FUN_0018206c(0x2a,6);
+    temp_v0 = asdTMTexTableNodeIsLoaded(0x2a,6);
   }
   if (temp_v0 != 0) {
     return 1;

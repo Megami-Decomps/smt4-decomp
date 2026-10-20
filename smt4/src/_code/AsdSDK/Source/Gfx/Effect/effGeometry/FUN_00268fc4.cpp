@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001f6998(unsigned int, unsigned int, int);
 int FUN_002693b4(unsigned int, int, int, unsigned int);
-int FUN_002694f8(void);
+int refCountIncrement(void);
 int asdOperatorNew(int, unsigned short *);
 int memAlloc(int, int, int, int, int, int);
 
@@ -24,7 +24,7 @@ extern unsigned int DAT_00473814; /* 0x473814 */
 /* Supplied declaration required: FUN_001f6998. */
 /* Supplied declaration required: FUN_002693b4. */
 extern unsigned int FUN_002693e4(void);
-/* Supplied declaration required: FUN_002694f8. */
+/* Supplied declaration required: refCountIncrement. */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: memAlloc. */
 
@@ -66,7 +66,7 @@ unsigned short * FUN_00268fc4(unsigned short *param_1)
     *(unsigned int *)(*(int *)(puVar3 + 6) + 0x60) = 0;
     if (*(int *)(*(int *)(param_1 + 6) + 0xb4) != 0) {
       *(int *)(*(int *)(puVar3 + 6) + 0xb4) = *(int *)(*(int *)(param_1 + 6) + 0xb4);
-      FUN_002694f8();
+      refCountIncrement();
     }
   }
   else {
@@ -90,7 +90,7 @@ unsigned short * FUN_00268fc4(unsigned short *param_1)
     puVar3[0x2b] = 0;
     if (*(int *)(param_1 + 2) != 0) {
       *(int *)(puVar3 + 2) = *(int *)(param_1 + 2);
-      FUN_002694f8();
+      refCountIncrement();
     }
     temp_v4 = *(unsigned int *)(*(int *)(param_1 + 4) + 0x18);
     temp_v5 = 0;

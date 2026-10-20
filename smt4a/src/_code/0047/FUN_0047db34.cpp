@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdSequenceRequest(...);
-int FUN_00324bc8(int, int);
+int mapPlaceSet(int, int);
 int FUN_00324c48(...);
 int FUN_004731d8(void);
 
@@ -18,7 +18,7 @@ extern unsigned int DAT_005f1604; /* 0x5f1604 */
 extern unsigned char DAT_005f1b70; /* 0x5f1b70 */
 
 /* Supplied declaration required: asdSequenceRequest. */
-/* Supplied declaration required: FUN_00324bc8. */
+/* Supplied declaration required: mapPlaceSet. */
 /* Supplied declaration required: FUN_00324c48. */
 extern char *gameBlockGetArea27E98(void);
 /* Supplied declaration required: FUN_004731d8. */
@@ -47,7 +47,7 @@ unsigned int FUN_0047db34(unsigned int param_1,int param_2,unsigned int param_3,
           DAT_005f1b70 = 0;
         }
         else {
-          FUN_00324bc8((unsigned char)pcVar2[1] + 200,0);
+          mapPlaceSet((unsigned char)pcVar2[1] + 200,0);
         }
       }
     }

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_003e52bc(void);
-int FUN_003fd63c(int, int);
+int gameFlagSetValue(int, int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -14,13 +14,13 @@ typedef struct {
 
 extern unsigned int g_aocSystem; /* 0x570280 */
 
-extern int FUN_0014af84(void);
+extern int gameDataBlocksGetSaveData(void);
 extern int FUN_0017760c(int);
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 extern int slotRecordFindById(void);
 /* Supplied declaration required: FUN_003e52bc. */
-/* Supplied declaration required: FUN_003fd63c. */
-extern int FUN_0046c458(unsigned int, unsigned int);
+/* Supplied declaration required: gameFlagSetValue. */
+extern int aocHasType36(unsigned int, unsigned int);
 extern int bitsAt60Test(int, unsigned int);
 
 
@@ -34,11 +34,11 @@ void FUN_00388068(void)
   int temp_v3;
   int temp_v4;
   
-  temp_v1 = FUN_0046c458(g_aocSystem,0x4f6);
-  if ((temp_v1 != 0) && (temp_v1 = FUN_0018719c(0x4f6), temp_v1 == 0)) {
-    temp_v1 = FUN_0014af84();
-    FUN_003fd63c(0x45b,1);
-    FUN_003fd63c(0x4f6,1);
+  temp_v1 = aocHasType36(g_aocSystem,0x4f6);
+  if ((temp_v1 != 0) && (temp_v1 = gameFlagIsSet(0x4f6), temp_v1 == 0)) {
+    temp_v1 = gameDataBlocksGetSaveData();
+    gameFlagSetValue(0x45b,1);
+    gameFlagSetValue(0x4f6,1);
     temp_v4 = 0;
     do {
       if ((((*(unsigned int *)(temp_v1 + temp_v4 * 4 + 0x28310) & 0xffff) != 0) &&
@@ -54,10 +54,10 @@ void FUN_00388068(void)
       temp_v4 = temp_v4 + 1;
     } while (temp_v4 < 10);
   }
-  temp_v1 = FUN_0046c458(g_aocSystem,0x4f7);
-  if ((temp_v1 != 0) && (temp_v1 = FUN_0018719c(0x4f7), temp_v1 == 0)) {
-    FUN_003fd63c(0x45b,1);
-    FUN_003fd63c(0x4f7,1);
+  temp_v1 = aocHasType36(g_aocSystem,0x4f7);
+  if ((temp_v1 != 0) && (temp_v1 = gameFlagIsSet(0x4f7), temp_v1 == 0)) {
+    gameFlagSetValue(0x45b,1);
+    gameFlagSetValue(0x4f7,1);
     FUN_003e52bc();
     return;
   }

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001cd24c(int);
+int wordTripleClear(int);
 int FUN_001cda70(unsigned int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_001cd24c. */
+/* Supplied declaration required: wordTripleClear. */
 /* Supplied declaration required: FUN_001cda70. */
 
 
@@ -29,7 +29,7 @@ void nn_snd_CTR_Voice_Initialize(int param_1)
   *(unsigned char *)(param_1 + 5) = 0;
   *(unsigned char *)(param_1 + 7) = 0;
   *(unsigned int *)(param_1 + 8) = 0;
-  FUN_001cd24c(param_1 + 0xc);
+  wordTripleClear(param_1 + 0xc);
   *(unsigned int *)(param_1 + 100) = temp_v0;
   *(unsigned int *)(param_1 + 0x20) = 0;
   *(unsigned int *)(param_1 + 0x24) = 0;

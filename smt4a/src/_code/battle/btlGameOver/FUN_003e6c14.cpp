@@ -33,10 +33,10 @@ extern int DAT_0057a698; /* 0x57a698 */
 extern unsigned int DAT_0057a69c; /* 0x57a69c */
 extern unsigned int DAT_0057a6a0; /* 0x57a6a0 */
 extern unsigned int DAT_0057a6a4; /* 0x57a6a4 */
-extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
+extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
 extern int btlGetMainState(unsigned int);
-extern int FUN_0014af84(void);
+extern int gameDataBlocksGetSaveData(void);
 /* Supplied declaration required: FUN_001f4908. */
 /* Supplied declaration required: FUN_002804b0. */
 /* Supplied declaration required: FUN_003e6dc8. */
@@ -55,7 +55,7 @@ void FUN_003e6c14(unsigned int *param_1)
   
   if (param_1[2] == DAT_0057a684) {
     FUN_004fdcd8(0,0,0,0,7,0,0xb,0);
-    FUN_004ab854(DAT_0057a9c8);
+    FUN_004ab854(g_btlUiBlock);
   }
   if (param_1[2] == DAT_0057a698) {
     FUN_004fddf4(0,0,DAT_0057a69c,0x10,0,DAT_0057a6a0,0,2,0xffffffff);
@@ -73,7 +73,7 @@ void FUN_003e6c14(unsigned int *param_1)
       *param_1 = 3;
       FUN_002804b0("battle/gameover/gameover.bf",param_1 + 4,0);
       FUN_002804b0("battle/gameover/gameover.mbm",param_1 + 6,0);
-      temp_v1 = FUN_0014af84();
+      temp_v1 = gameDataBlocksGetSaveData();
       temp_v0 = *(char *)(temp_v1 + 0x27e3d);
       if (temp_v0 != -1) {
         *(char *)(temp_v1 + 0x27e3d) = temp_v0 + '\x01';

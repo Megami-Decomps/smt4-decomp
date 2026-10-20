@@ -18,10 +18,10 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_00163aa4. */
-extern unsigned int FUN_001654d8(int);
-extern unsigned int FUN_001654e4(int);
+extern unsigned int vec2GetXInt(int);
+extern unsigned int vec2GetYInt(int);
 /* Supplied declaration required: FUN_00224880. */
-extern unsigned int FUN_00261458(void);
+extern unsigned int gameDataBlocksGetTable(void);
 /* Supplied declaration required: sysMemClear. */
 extern int byteTripleGetV0(void);
 extern int byteArr5Get3(void);
@@ -80,8 +80,8 @@ void FUN_00420874(int param_1)
             temp_v1 = temp_v1 + 1;
           } while (temp_v1 < *(int *)(param_1 + 0x18));
         }
-        temp_v2 = FUN_001654d8(param_1 + 0x474);
-        temp_v3 = FUN_001654e4(param_1 + 0x474);
+        temp_v2 = vec2GetXInt(param_1 + 0x474);
+        temp_v3 = vec2GetYInt(param_1 + 0x474);
         *(unsigned int *)(param_1 + 0x624) = temp_v2;
         *(unsigned int *)(param_1 + 0x628) = temp_v3;
         *(unsigned int *)(param_1 + 0x62c) = *(unsigned int *)(param_1 + 0x494);
@@ -89,8 +89,8 @@ void FUN_00420874(int param_1)
         if (0 < *(int *)(param_1 + 0x18)) {
           do {
             temp_v5 = param_1 + temp_v1 * 0x8c;
-            temp_v2 = FUN_001654d8(temp_v5 + 0x500);
-            temp_v3 = FUN_001654e4(temp_v5 + 0x500);
+            temp_v2 = vec2GetXInt(temp_v5 + 0x500);
+            temp_v3 = vec2GetYInt(temp_v5 + 0x500);
             temp_v6 = *(unsigned int *)(temp_v5 + 0x520);
             temp_v5 = temp_v1 + 1;
             temp_v1 = param_1 + temp_v1 * 0x44;
@@ -100,8 +100,8 @@ void FUN_00420874(int param_1)
             temp_v1 = temp_v5;
           } while (temp_v5 < *(int *)(param_1 + 0x18));
         }
-        temp_v2 = FUN_001654d8(param_1 + 0x500);
-        temp_v3 = FUN_001654e4(param_1 + 0x500);
+        temp_v2 = vec2GetXInt(param_1 + 0x500);
+        temp_v3 = vec2GetYInt(param_1 + 0x500);
         *(unsigned int *)(param_1 + 0x710) = temp_v2;
         *(unsigned int *)(param_1 + 0x714) = temp_v3;
         *(unsigned int *)(param_1 + 0x718) = *(unsigned int *)(param_1 + 0x520);
@@ -133,7 +133,7 @@ void FUN_00420874(int param_1)
     }
     temp_v1 = byteArr5Get3();
     if (temp_v1 != 0) {
-      temp_v2 = FUN_00261458();
+      temp_v2 = gameDataBlocksGetTable();
       rt_memcpy_w(param_1 + temp_v4 * 0x80 + 0x6c,temp_v2,0x80);
       *(unsigned char *)(param_1 + temp_v4 + 0x2ec) = 1;
     }

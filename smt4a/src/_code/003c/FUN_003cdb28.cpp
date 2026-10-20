@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001028b8(unsigned char [128], int, unsigned char *, unsigned char *, char *);
 int FUN_0013c174(unsigned char *, int *, int);
 int asdTextureCreate(void);
-int FUN_002267b0(int, unsigned char *, int, int);
+int asdTexTgaLoadNw4c(int, unsigned char *, int, int);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -22,7 +22,7 @@ extern char s_flar02_02_00570300[10]; /* 0x570300 */
 /* Supplied declaration required: FUN_001028b8. */
 /* Supplied declaration required: FUN_0013c174. */
 /* Supplied declaration required: asdTextureCreate. */
-/* Supplied declaration required: FUN_002267b0. */
+/* Supplied declaration required: asdTexTgaLoadNw4c. */
 
 
 void FUN_003cdb28(void)
@@ -49,7 +49,7 @@ void FUN_003cdb28(void)
       puVar3 = temp_v4;
       FUN_0013c174(puVar3,&temp_v3,0);
       *(unsigned char **)(temp_v0 + 0x570340) = puVar3;
-      FUN_002267b0(*piVar5,puVar3,temp_v3,0x10000);
+      asdTexTgaLoadNw4c(*piVar5,puVar3,temp_v3,0x10000);
     }
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 0x1a);

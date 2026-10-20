@@ -6,7 +6,7 @@ extern "C" {
 
 int btlGetMainState(void);
 int FUN_001f4908(int, int, int);
-int FUN_00203d04(int);
+int dialogClose(int);
 int FUN_003eb26c(void);
 int FUN_00411bb4(int);
 int FUN_004a9d1c(unsigned int);
@@ -21,19 +21,19 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned int DAT_00573808; /* 0x573808 */
-extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
+extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
 extern int FUN_0013def0(unsigned int);
 /* Supplied declaration required: btlGetMainState. */
 extern int FUN_00163e84(unsigned int);
 /* Supplied declaration required: FUN_001f4908. */
-/* Supplied declaration required: FUN_00203d04. */
-extern int FUN_002619e0(void);
+/* Supplied declaration required: dialogClose. */
+extern int dialogIsActive(void);
 /* Supplied declaration required: FUN_003eb26c. */
 extern int btlStartEntries(void);
 /* Supplied declaration required: FUN_00411bb4. */
 /* Supplied declaration required: FUN_004a9d1c. */
-extern int FUN_004ab6b4(unsigned int);
+extern int btlUiIsIdleB(unsigned int);
 /* Supplied declaration required: FUN_004f5238. */
 /* Supplied declaration required: FUN_004f8f08. */
 
@@ -68,9 +68,9 @@ void FUN_004112c4(int param_1)
       }
     }
     else {
-      temp_v0 = FUN_004ab6b4(DAT_0057a9c8);
+      temp_v0 = btlUiIsIdleB(g_btlUiBlock);
       if ((temp_v0 != 0) &&
-         ((temp_v0 = FUN_002619e0(), temp_v0 == 0 || (*(unsigned int *)(param_1 + 0xc) >= 0x37)))) {
+         ((temp_v0 = dialogIsActive(), temp_v0 == 0 || (*(unsigned int *)(param_1 + 0xc) >= 0x37)))) {
         FUN_001f4908(0,10,0xff);
         *(int *)(param_1 + 0x10) = *(int *)(param_1 + 0x10) + 1;
         return;
@@ -82,10 +82,10 @@ void FUN_004112c4(int param_1)
     if (temp_v0 == 3) {
       FUN_00411bb4(param_1);
       FUN_004f5238(DAT_00573808,0,0,9,0,6,0,1,0);
-      FUN_004a9d1c(DAT_0057a9c8);
-      temp_v0 = FUN_002619e0();
+      FUN_004a9d1c(g_btlUiBlock);
+      temp_v0 = dialogIsActive();
       if (temp_v0 != 0) {
-        FUN_00203d04(1);
+        dialogClose(1);
       }
       *(int *)(param_1 + 0x10) = *(int *)(param_1 + 0x10) + 1;
       return;

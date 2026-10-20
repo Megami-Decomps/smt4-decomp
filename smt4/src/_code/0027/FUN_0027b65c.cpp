@@ -12,8 +12,8 @@ int dataTable2fSub0GetCount(void);
 int FUN_0025b670(void);
 int FUN_00263cb8(...);
 int FUN_00298dc8(int);
-int FUN_002bf694(...);
-int FUN_002c09d0(void);
+int libc_strcpy(...);
+int gameFlagIsSet(void);
 int FUN_002dfe08(...);
 int FUN_002eaec0(int, unsigned char [20]);
 int FUN_00308cd4(...);
@@ -63,8 +63,8 @@ extern unsigned char DAT_004a1264; /* 0x4a1264 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int FUN_002481b0(void);
 /* Supplied declaration required: FUN_002481e8. */
-extern unsigned int *FUN_00248248(unsigned int);
-extern int FUN_002482a8(void);
+extern unsigned int *dataTable23Sub0GetEntry(unsigned int);
+extern int dataTable23Type0CountWithAoc(void);
 /* Supplied declaration required: FUN_0024f24c. */
 /* Supplied declaration required: dataTable2fSub0GetCount. */
 /* Supplied declaration required: FUN_0025b670. */
@@ -76,8 +76,8 @@ extern int FUN_0027d968(void);
 extern unsigned int *dataTable2fSub1GetRecord(int);
 /* Supplied declaration required: FUN_00298dc8. */
 /* Supplied declaration required: FUN_002a7c80. */
-/* Supplied declaration required: FUN_002bf694. */
-/* Supplied declaration required: FUN_002c09d0. */
+/* Supplied declaration required: libc_strcpy. */
+/* Supplied declaration required: gameFlagIsSet. */
 extern unsigned int FUN_002df80c(int);
 /* Supplied declaration required: FUN_002dfe08. */
 extern unsigned int FUN_002e0164(int);
@@ -89,7 +89,7 @@ extern int FUN_002f3614(int);
 extern int FUN_0030f6cc(void);
 extern unsigned int *dataTable2fSub2GetRecord(int);
 extern unsigned int FUN_0031b7b0(void);
-extern int FUN_003218b4(void);
+extern int dataTable23Type4CountWithAoc(void);
 /* Supplied declaration required: dataTable2fSub1GetCount. */
 /* Supplied declaration required: dataTable2fSub2GetCount. */
 
@@ -143,11 +143,11 @@ void FUN_0027b65c(int param_1,int param_2)
   
   temp_v35 = param_1;
   temp_v36 = param_2;
-  temp_v32 = FUN_002482a8();
+  temp_v32 = dataTable23Type0CountWithAoc();
   temp_v14 = 0;
   if ((int)temp_v14 < temp_v32) {
     do {
-      puVar2 = (unsigned int *)FUN_00248248(temp_v14);
+      puVar2 = (unsigned int *)dataTable23Sub0GetEntry(temp_v14);
       temp_v1 = (int)(char)puVar2[2];
       if (temp_v1 == -1) {
         return;
@@ -167,7 +167,7 @@ void FUN_0027b65c(int param_1,int param_2)
         }
         else if (temp_v12 != 0) {
           if (temp_v12 >= 0x100) {
-            temp_v1 = FUN_003218b4();
+            temp_v1 = dataTable23Type4CountWithAoc();
             temp_v10 = 0;
             if (0 < temp_v1) {
               do {
@@ -175,8 +175,8 @@ void FUN_0027b65c(int param_1,int param_2)
                 if (*puVar4 == 0xffffffff) break;
                 temp_v2 = FUN_00298dc8((short)puVar4[1]);
                 if ((((temp_v2 != 0) && (*puVar4 == temp_v12)) &&
-                    ((*(short *)((int)puVar4 + 6) == 0 || (temp_v2 = FUN_002c09d0(), temp_v2 != 0)))) &&
-                   (((short)puVar4[2] == 0 || (temp_v2 = FUN_002c09d0(), temp_v2 == 0)))) {
+                    ((*(short *)((int)puVar4 + 6) == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 != 0)))) &&
+                   (((short)puVar4[2] == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 == 0)))) {
                   temp_v34 = temp_v10;
                   if (temp_v10 != -1) goto LAB_0027bc48;
                   goto LAB_0027b7d0;
@@ -196,8 +196,8 @@ LAB_0027b7d0:
                 temp_v4 = *puVar4;
                 if (temp_v4 == 0xffffffff) break;
                 if (temp_v4 == temp_v11) {
-                  if ((((short)puVar4[1] == 0) || (temp_v1 = FUN_002c09d0(), temp_v1 != 0)) &&
-                     ((*(short *)((int)puVar4 + 6) == 0 || (temp_v1 = FUN_002c09d0(), temp_v1 == 0)))) {
+                  if ((((short)puVar4[1] == 0) || (temp_v1 = gameFlagIsSet(), temp_v1 != 0)) &&
+                     ((*(short *)((int)puVar4 + 6) == 0 || (temp_v1 = gameFlagIsSet(), temp_v1 == 0)))) {
                     temp_v4 = (unsigned int)*(short *)((int)puVar4 + 10);
                     if (temp_v4 != 0xffffffff) {
                       if (temp_v13 == -2) {
@@ -270,12 +270,12 @@ LAB_0027b92c:
                 if (temp_v4 == 0xffffffff) break;
                 if (temp_v4 == temp_v3) {
                   if ((short)puVar4[1] != 0) {
-                    temp_v10 = FUN_002c09d0();
+                    temp_v10 = gameFlagIsSet();
                     temp_v4 = 0;
                     if (temp_v10 == 0) goto LAB_0027b99c;
                   }
                   temp_v4 = 0;
-                  if ((*(short *)((int)puVar4 + 6) == 0) || (temp_v4 = FUN_002c09d0(), temp_v4 == 0)) {
+                  if ((*(short *)((int)puVar4 + 6) == 0) || (temp_v4 = gameFlagIsSet(), temp_v4 == 0)) {
                     temp_v33 = temp_v1;
                     if (temp_v1 == -1) goto LAB_0027ba18;
                     temp_v29 = 1;
@@ -299,11 +299,11 @@ LAB_0027ba18:
                 if (temp_v4 == 0xffffffff) break;
                 if (temp_v4 == temp_v3) {
                   if (*(short *)((int)puVar4 + 6) != 0) {
-                    temp_v10 = FUN_002c09d0();
+                    temp_v10 = gameFlagIsSet();
                     temp_v4 = 0;
                     if (temp_v10 == 0) goto LAB_0027baf8;
                   }
-                  if (((short)puVar4[2] == 0) || (temp_v4 = FUN_002c09d0(), temp_v4 == 0)) {
+                  if (((short)puVar4[2] == 0) || (temp_v4 = gameFlagIsSet(), temp_v4 == 0)) {
                     if ((short)puVar4[1] != 0) {
                       temp_v10 = FUN_00298dc8((short)puVar4[1]);
                       temp_v4 = 0;
@@ -338,11 +338,11 @@ LAB_0027bb14:
                 if (temp_v4 == 0xffffffff) break;
                 if (temp_v4 == temp_v3) {
                   if ((short)puVar4[1] != 0) {
-                    temp_v10 = FUN_002c09d0();
+                    temp_v10 = gameFlagIsSet();
                     temp_v4 = 0;
                     if (temp_v10 == 0) goto LAB_0027bbb0;
                   }
-                  if (((*(short *)((int)puVar4 + 6) == 0) || (temp_v4 = FUN_002c09d0(), temp_v4 == 0))
+                  if (((*(short *)((int)puVar4 + 6) == 0) || (temp_v4 = gameFlagIsSet(), temp_v4 == 0))
                      && (temp_v4 = FUN_002df80c(temp_v1), (int)temp_v4 < 1)) {
                     temp_v33 = temp_v1;
                     if (temp_v1 == -1) goto LAB_0027bbcc;
@@ -418,7 +418,7 @@ LAB_0027bccc:
           do {
             temp_v2 = FUN_00276264(temp_v10);
             if (*(int *)(temp_v2 + 0x20) == -1) break;
-            if (((*(short *)(temp_v2 + 0x26) == 0) || (temp_v5 = FUN_002c09d0(), temp_v5 == 0)) &&
+            if (((*(short *)(temp_v2 + 0x26) == 0) || (temp_v5 = gameFlagIsSet(), temp_v5 == 0)) &&
                ((*(unsigned int *)(temp_v2 + 0x20) == temp_v12 &&
                 (temp_v2 = FUN_00298dc8(*(unsigned short *)(temp_v2 + 0x24)), temp_v2 == 0)))) {
               temp_v9 = (short)temp_v10;
@@ -546,7 +546,7 @@ LAB_0027bef0:
               puVar13 = *(unsigned char **)(temp_v1 * 0x178 + 0x4a1390);
               if (puVar13 == (unsigned char *)*piVar11) {
                 *(int *)(temp_v1 * 0x178 + 0x4a1398) = (int)*(short *)((int)piVar11 + 10);
-                FUN_002bf694(temp_v1 * 0x178 + 0x4a139c,piVar11 + 3);
+                libc_strcpy(temp_v1 * 0x178 + 0x4a139c,piVar11 + 3);
                 break;
               }
               temp_v1 = temp_v1 + 1;
@@ -590,7 +590,7 @@ LAB_0027bef0:
               do {
                 if (*(int *)(temp_v1 * 0x178 + 0x4a1390) == *piVar11) {
                   *(int *)(temp_v1 * 0x178 + 0x4a1398) = (int)*(short *)((int)piVar11 + 10);
-                  FUN_002bf694(temp_v1 * 0x178 + 0x4a139c,piVar11 + 3);
+                  libc_strcpy(temp_v1 * 0x178 + 0x4a139c,piVar11 + 3);
                   break;
                 }
                 temp_v1 = temp_v1 + 1;

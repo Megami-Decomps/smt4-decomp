@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00100388(...);
 int FUN_00244bb4(int, int);
 int FUN_002b7af0(int, int);
-int FUN_002e342c(...);
+int libc_strcpy(...);
 int FUN_0032725c(int, unsigned int, unsigned int);
 
 /* stack frame of param_5: 5 slot(s), 20 byte(s) */
@@ -45,10 +45,10 @@ extern unsigned char DAT_00560fe3; /* 0x560fe3 */
 extern unsigned char DAT_00561547; /* 0x561547 */
 
 /* Supplied declaration required: FUN_00100388. */
-extern int FUN_00162e8c(void);
+extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_00244bb4. */
 /* Supplied declaration required: FUN_002b7af0. */
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_0032725c. */
 
 
@@ -93,7 +93,7 @@ void FUN_003849cc(int param_1,int param_2,int param_3,unsigned int param_4,unsig
   iStack_30 = param_2;
   iStack_2c = param_3;
   temp_v13 = param_4;
-  temp_v0 = FUN_00162e8c();
+  temp_v0 = gameFlagsGetBlock();
   temp_v10[0] = &DAT_00561547;
   temp_v10[1] = &DAT_00560ef6;
   temp_v10[2] = &DAT_0055e4e1;
@@ -121,8 +121,8 @@ void FUN_003849cc(int param_1,int param_2,int param_3,unsigned int param_4,unsig
   puStack_b8 = &DAT_00560e7b;
   puStack_b4 = &DAT_00560d72;
   if (param_3 != 2) {
-    temp_v1 = FUN_00162e8c();
-    temp_v2 = FUN_00162e8c();
+    temp_v1 = gameFlagsGetBlock();
+    temp_v2 = gameFlagsGetBlock();
     temp_v5 = 0;
     if (*(char *)(temp_v2 + 3) != '\x01') {
       if (param_1 == 0x18) {
@@ -133,7 +133,7 @@ void FUN_003849cc(int param_1,int param_2,int param_3,unsigned int param_4,unsig
       temp_v5 = 1;
     }
     if (param_3 == 0) {
-      temp_v1 = FUN_00162e8c();
+      temp_v1 = gameFlagsGetBlock();
       temp_v3 = (unsigned int)*(unsigned char *)(temp_v1 + 3);
       if (temp_v3 >= 100) {
         FUN_0032725c(param_2 - 100,temp_v13,0xffffffff);
@@ -180,24 +180,24 @@ void FUN_003849cc(int param_1,int param_2,int param_3,unsigned int param_4,unsig
     }
     if (param_1 == 0x65) {
       temp_v4 = FUN_002b7af0(0x65,param_2);
-      FUN_002e342c(temp_v7,temp_v4);
+      libc_strcpy(temp_v7,temp_v4);
       FUN_00100388(temp_v13,&LAB_00384c88,temp_v7);
       FUN_00244bb4(0x65,param_2);
-      FUN_002e342c(temp_v12,param_1);
+      libc_strcpy(temp_v12,param_1);
       FUN_00100388(temp_v13,&LAB_00384c8c,temp_v7,temp_v12);
       return;
     }
   }
   if ((param_1 != 0xcb) && ((param_1 == 0x65 || (param_1 < 0x66)))) {
     temp_v4 = FUN_002b7af0(param_1,param_2);
-    FUN_002e342c(temp_v7,temp_v4);
+    libc_strcpy(temp_v7,temp_v4);
     FUN_00244bb4(param_1,param_2);
-    FUN_002e342c(temp_v12,param_1);
+    libc_strcpy(temp_v12,param_1);
     FUN_00100388(temp_v13,&LAB_00384c8c,temp_v7,temp_v12);
     return;
   }
   temp_v4 = FUN_002b7af0(param_1,param_2);
-  FUN_002e342c(temp_v7,temp_v4);
+  libc_strcpy(temp_v7,temp_v4);
   FUN_00100388(temp_v13,&LAB_00384c88,temp_v7);
   return;
 }

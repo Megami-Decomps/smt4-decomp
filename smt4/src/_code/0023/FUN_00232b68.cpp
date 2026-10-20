@@ -49,8 +49,8 @@ typedef struct {
 extern int btlGetMainState(void);
 extern int FUN_00295d08(unsigned int);
 extern int flagWordTestBit(int, unsigned int);
-extern int FUN_002a8740(void);
-extern int FUN_002b63ac(void);
+extern int gameGetUnitRecord(void);
+extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_002e33f4. */
 extern fn_00232b68_arg0 *FUN_0031c344(fn_00232b68_arg0 *, fn_00232b68_arg1 *);
 extern int FUN_0032b1b4(fn_00232b68_arg1 *, unsigned short);
@@ -82,10 +82,10 @@ int FUN_00232b68(fn_00232b68_arg0 *param_1,fn_00232b68_arg1 *param_2,unsigned in
   temp_v6 = 0;
   puVar6 = param_3;
   if ((int)param_1 < 0) {
-    temp_v5 = FUN_002b63ac();
+    temp_v5 = gameGetPlayerData();
   }
   else {
-    temp_v6 = FUN_002a8740();
+    temp_v6 = gameGetUnitRecord();
     if (temp_v6 == 0) {
       return 1;
     }

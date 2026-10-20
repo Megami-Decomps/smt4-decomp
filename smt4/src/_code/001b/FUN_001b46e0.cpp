@@ -6,7 +6,7 @@ extern "C" {
 
 int asdMdlManagerDestroy(void);
 
-extern int DAT_00447e70; /* 0x447e70 */
+extern int g_mapObj; /* 0x447e70 */
 
 /* Supplied declaration required: asdMdlManagerDestroy. */
 
@@ -22,11 +22,11 @@ void FUN_001b46e0(void)
   
   temp_v3 = 0;
   do {
-    if (*(int *)(DAT_00447e70 + temp_v3 * 0x48 + 0x3c) != 0) {
+    if (*(int *)(g_mapObj + temp_v3 * 0x48 + 0x3c) != 0) {
       asdMdlManagerDestroy();
-      *(unsigned int *)(DAT_00447e70 + temp_v3 * 0x48 + 0x3c) = 0;
+      *(unsigned int *)(g_mapObj + temp_v3 * 0x48 + 0x3c) = 0;
     }
-    temp_v0 = DAT_00447e70;
+    temp_v0 = g_mapObj;
     temp_v3 = temp_v3 + 1;
   } while (temp_v3 < 0x18);
   temp_v1 = 0;

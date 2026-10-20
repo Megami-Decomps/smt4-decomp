@@ -4,19 +4,19 @@
 
 extern "C" {
 
-int FUN_002e5700(int *, unsigned char *, int, int);
+int rt_vec_dtor(int *, unsigned char *, int, int);
 int FUN_002f5020(int *, unsigned char *, int, int);
 int FUN_002fbc1a(...);
-int FUN_00300934(int, unsigned int *);
+int streamReadWord(int, unsigned int *);
 int FUN_00304d10(unsigned int, int);
 
 extern unsigned char LAB_002e9319; /* 0x2e9319 */
 extern unsigned char LAB_002ea0e5; /* 0x2ea0e5 */
 
-/* Supplied declaration required: FUN_002e5700. */
+/* Supplied declaration required: rt_vec_dtor. */
 /* Supplied declaration required: FUN_002f5020. */
 /* Supplied declaration required: FUN_002fbc1a. */
-/* Supplied declaration required: FUN_00300934. */
+/* Supplied declaration required: streamReadWord. */
 /* Supplied declaration required: FUN_00304d10. */
 
 
@@ -37,13 +37,13 @@ void FUN_0011f510(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   if (puVar1 != (unsigned int *)0x0) {
     puVar3 = puVar1;
   }
-  FUN_00300934(param_1,puVar3);
+  streamReadWord(param_1,puVar3);
   if (*(char *)(param_1 + 4) == '\0') {
     temp_v0 = FUN_00304d10(param_2,1);
     if (temp_v0 == 0) {
       FUN_002f5020(&uStack_18,&LAB_002ea0e5,8,1);
       FUN_002fbc1a(param_1,&uStack_18);
-      FUN_002e5700(&uStack_18,&LAB_002e9319,8,1);
+      rt_vec_dtor(&uStack_18,&LAB_002e9319,8,1);
       return;
     }
     FUN_002fbc1a(param_1,temp_v0);

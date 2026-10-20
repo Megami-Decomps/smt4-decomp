@@ -8,7 +8,7 @@ int FUN_001077d6(...);
 int wordRefMax(...);
 int FUN_002eac34(int);
 int FUN_002eb108(int, int, int, int);
-int FUN_002eb588(unsigned char [12]);
+int onlineTimeGetNow(unsigned char [12]);
 int FUN_002eb5c0(int);
 int FUN_002f13c2(int, unsigned int, unsigned int);
 int FUN_002f1798(int, int);
@@ -73,12 +73,12 @@ extern int FUN_00105f86(int);
 extern int FUN_0012094c(unsigned int *, unsigned int);
 /* Supplied declaration required: wordRefMax. */
 extern unsigned int *rt_malloc(int);
-extern int FUN_002e760a(unsigned int);
+extern int operatorNew(unsigned int);
 /* Supplied declaration required: FUN_002eac34. */
 extern unsigned int FUN_002eac54(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002eb108. */
 extern int FUN_002eb530(int);
-/* Supplied declaration required: FUN_002eb588. */
+/* Supplied declaration required: onlineTimeGetNow. */
 /* Supplied declaration required: FUN_002eb5c0. */
 extern int constructObj00559344(unsigned char *, unsigned int);
 extern int FUN_002eb5f4(void);
@@ -225,7 +225,7 @@ int FUN_00109240(fn_00109240_arg0 *param_1,unsigned int param_2,unsigned int par
   *(unsigned char *)(temp_v4 - 0x284) = 0;
   *(unsigned char *)(temp_v4 - 0x283) = 0;
   *(unsigned char *)(temp_v4 - 0xd4) = 0;
-  temp_v3 = FUN_002e760a(0x28);
+  temp_v3 = operatorNew(0x28);
   if (temp_v3 != 0) {
     temp_v5 = FUN_002f1378();
   }
@@ -234,7 +234,7 @@ int FUN_00109240(fn_00109240_arg0 *param_1,unsigned int param_2,unsigned int par
   }
   puVar4 = (unsigned int *)arrayElementAddress_002efa50(temp_v4 - 0x2b0,0);
   *puVar4 = temp_v5;
-  temp_v3 = FUN_002e760a(0x74);
+  temp_v3 = operatorNew(0x74);
   if (temp_v3 != 0) {
     temp_v6 = FUN_002ef01c(*(unsigned int *)(temp_v4 - 0x33c));
     temp_v5 = *(unsigned int *)(temp_v6 + 0x7c);
@@ -276,7 +276,7 @@ int FUN_00109240(fn_00109240_arg0 *param_1,unsigned int param_2,unsigned int par
   temp_v3 = FUN_002eac34(*(unsigned char *)(*(int *)(temp_v4 - 0x33c) + 4));
   temp_v13 = temp_v4 - 0x240;
   *(unsigned short *)(temp_v4 - 0x23c) = (unsigned short)*(unsigned char *)(temp_v3 + 0xa0);
-  temp_v3 = FUN_002e760a(0x150);
+  temp_v3 = operatorNew(0x150);
   if (temp_v3 != 0) {
     temp_v10 = 0;
     FUN_002eb108(temp_v3,temp_v8,0,0x40);
@@ -293,7 +293,7 @@ int FUN_00109240(fn_00109240_arg0 *param_1,unsigned int param_2,unsigned int par
     FUN_002f1950(&DAT_00630324);
   }
   else {
-    FUN_002eb588(temp_v17);
+    onlineTimeGetNow(temp_v17);
     FUN_002eb5c0(0xff);
   }
   FUN_002f27c0(&DAT_00630324);

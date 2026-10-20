@@ -13,7 +13,7 @@ typedef struct {
 } void_stack;
 
 extern int btlGetMainState(void);
-extern int FUN_001ab888(void);
+extern int gameGetSlotTable(void);
 extern int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_004fcf0c. */
 
@@ -39,7 +39,7 @@ unsigned int FUN_003359f8(void)
         if (temp_v5 < 0) {
           return 1;
         }
-        temp_v2 = FUN_001ab888();
+        temp_v2 = gameGetSlotTable();
         temp_v3 = 0;
         temp_v1 = -1;
         if (*(unsigned char *)(temp_v2 + 0x1ca3) == 0) {

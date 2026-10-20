@@ -6,13 +6,13 @@ extern "C" {
 
 int FUN_0023d9b8(int, int, unsigned int);
 int FUN_002ae164(void);
-int FUN_002b4670(void);
+int dataTable08Sub1GetRecord(void);
 int FUN_0033fe6c(int, int, int);
 
 /* Supplied declaration required: FUN_0023d9b8. */
 extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_002ae164. */
-/* Supplied declaration required: FUN_002b4670. */
+/* Supplied declaration required: dataTable08Sub1GetRecord. */
 /* Supplied declaration required: FUN_0033fe6c. */
 
 
@@ -24,7 +24,7 @@ unsigned int FUN_0025043c(int param_1,int param_2)
   int temp_v1;
   unsigned int temp_v2;
   
-  if ((param_2 == 0) || (FUN_002b4670(), param_2 == 0)) {
+  if ((param_2 == 0) || (dataTable08Sub1GetRecord(), param_2 == 0)) {
     return 1;
   }
   if ((*(char *)(param_2 + 0x6d) != '\x02' && *(char *)(param_2 + 0x6d) != '\x03') ||

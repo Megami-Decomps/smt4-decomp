@@ -6,7 +6,7 @@ extern "C" {
 
 int scrSetResult(int);
 
-extern unsigned int FUN_002451ac(unsigned int, unsigned int);
+extern unsigned int btlMainGetDataTable(unsigned int, unsigned int);
 /* Supplied declaration required: scrSetResult. */
 extern unsigned int btlGetMainState(void);
 extern int scrGetArg(unsigned int);
@@ -34,17 +34,17 @@ unsigned int FUN_00312c6c(void)
     if (temp_v0 != 2) {
       if (temp_v0 == 3) {
         temp_v6 = btlGetMainState();
-        temp_v6 = FUN_002451ac(temp_v6,0xc);
+        temp_v6 = btlMainGetDataTable(temp_v6,0xc);
       }
     }
     else {
       temp_v6 = btlGetMainState();
-      temp_v6 = FUN_002451ac(temp_v6,0xb);
+      temp_v6 = btlMainGetDataTable(temp_v6,0xb);
     }
   }
   else {
     temp_v6 = btlGetMainState();
-    temp_v6 = FUN_002451ac(temp_v6,10);
+    temp_v6 = btlMainGetDataTable(temp_v6,10);
   }
   temp_v1 = dataTableGetEntries(temp_v6);
   temp_v2 = dataTableGetCount(temp_v6);

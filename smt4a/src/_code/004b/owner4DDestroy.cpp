@@ -19,14 +19,14 @@ typedef struct Owner4D {
 extern void asdMemFree(u32 ptr);
 extern void scrScriptProcessDestroy(u32 process);
 extern void freeTexEntry1F(u8 *block);
-extern void FUN_004bb1a0(u8 *block);
+extern void dataTable33Unload(u8 *block);
 extern void FUN_00493154(void);
-extern u32 FUN_002619e0(void);
-extern void FUN_00203d04(s32 a);
+extern u32 dialogIsActive(void);
+extern void dialogClose(s32 a);
 extern void FUN_00168980(u32 id);
-extern void FUN_0037b450(void);
+extern void campButtonHelpRelease(void);
 extern void FUN_00318d6c(void);
-extern void FUN_0035b304(void);
+extern void campCommonBgRelease(void);
 extern void asdTMTexTableFreeEntry(s32 index);
 
 /* Tears the screen down: frees buffers and script processes, then the textures and helper state. */
@@ -57,15 +57,15 @@ void owner4DDestroy(Owner4D *obj)
         obj->buf113C = 0;
     }
     freeTexEntry1F(obj->block9C);
-    FUN_004bb1a0(obj->block1114);
+    dataTable33Unload(obj->block1114);
     FUN_00493154();
-    if (FUN_002619e0() != 0) {
-        FUN_00203d04(0);
+    if (dialogIsActive() != 0) {
+        dialogClose(0);
     }
     FUN_00168980(3);
-    FUN_0037b450();
+    campButtonHelpRelease();
     FUN_00318d6c();
-    FUN_0035b304();
+    campCommonBgRelease();
     asdTMTexTableFreeEntry(0x18);
 }
 

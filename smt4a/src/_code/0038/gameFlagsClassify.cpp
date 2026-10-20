@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern Flags0C0C *FUN_00162e8c(void);
+extern Flags0C0C *gameFlagsGetBlock(void);
 
 u32 gameFlagsClassify(s32 id)
 {
-    Flags0C0C *first = FUN_00162e8c();
-    Flags0C0C *second = FUN_00162e8c();
+    Flags0C0C *first = gameFlagsGetBlock();
+    Flags0C0C *second = gameFlagsGetBlock();
 
     if (second->unk03 != 1) {
         if (id == 0x18) {

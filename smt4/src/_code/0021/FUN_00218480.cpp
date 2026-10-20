@@ -9,11 +9,11 @@ int FUN_002621b4(...);
 int FUN_0028caf8(...);
 int FUN_0028cb40(...);
 int FUN_0028cdec(...);
-int FUN_00298140(int, int, int);
-int FUN_002992bc(...);
+int playSceneSetState(int, int, int);
+int flaggedEntrySetValueB(...);
 int FUN_002ae164(void);
-int FUN_002b4670(...);
-int FUN_002b8838(int);
+int dataTable08Sub1GetRecord(...);
+int buttonHelpSetPreset(int);
 int FUN_0033fd64(...);
 
 /* stack frame of param_1: 8 slot(s), 20 byte(s) */
@@ -34,13 +34,13 @@ typedef struct {
 /* Supplied declaration required: FUN_0028cb40. */
 /* Supplied declaration required: FUN_0028cdec. */
 extern int FUN_00295d08(unsigned int);
-/* Supplied declaration required: FUN_00298140. */
-/* Supplied declaration required: FUN_002992bc. */
+/* Supplied declaration required: playSceneSetState. */
+/* Supplied declaration required: flaggedEntrySetValueB. */
 extern int FUN_0029e908(int);
-extern int FUN_002a8764(void);
+extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_002ae164. */
-/* Supplied declaration required: FUN_002b4670. */
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: dataTable08Sub1GetRecord. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: FUN_0033fd64. */
 
 
@@ -67,10 +67,10 @@ void FUN_00218480(int param_1)
   unsigned short temp_v15 [14];
   
   temp_v11 = param_1 + 0x33a8;
-  FUN_002992bc(temp_v11,0);
+  flaggedEntrySetValueB(temp_v11,0);
   *(unsigned int *)(param_1 + 0x3064) = 0xffffffff;
-  FUN_00298140(param_1,0x22,1);
-  FUN_002b8838(0x38);
+  playSceneSetState(param_1,0x22,1);
+  buttonHelpSetPreset(0x38);
   temp_v12[0] = 0;
   temp_v8[0] = 0;
   FUN_0028cb40(param_1,temp_v12,temp_v8);
@@ -92,7 +92,7 @@ void FUN_00218480(int param_1)
       FUN_002621b4(*(int *)(param_1 + 0x305c) - 1,0xffffffff,(int)temp_v10[0],temp_v9);
       temp_v6 = 1;
       do {
-        temp_v3 = FUN_002a8764();
+        temp_v3 = gameGetSlotTable();
         FUN_002621b4(*(int *)(param_1 + 0x305c) - 1,(int)*(char *)(temp_v3 + temp_v6 + 0x9107),
                      (int)temp_v10[0],param_1 + temp_v6 * 4 + 0x3460);
         temp_v6 = temp_v6 + 1;
@@ -109,7 +109,7 @@ void FUN_00218480(int param_1)
     }
     if ((*(unsigned int *)(temp_v2 + 0x28) & 0x1ff) >> 5 == 4) {
       *(unsigned int *)(param_1 + 0x3048) = 0x24;
-      FUN_002992bc(temp_v11,*(unsigned int *)(param_1 + 0x305c));
+      flaggedEntrySetValueB(temp_v11,*(unsigned int *)(param_1 + 0x305c));
     }
     temp_v6 = FUN_0033fd64(0xffffffff,(int)temp_v8[0]);
     temp_v3 = 0;
@@ -117,7 +117,7 @@ void FUN_00218480(int param_1)
       *(unsigned char *)puVar8 = 0;
     }
     do {
-      temp_v6 = FUN_002a8764();
+      temp_v6 = gameGetSlotTable();
       if ((*(char *)(temp_v6 + temp_v3 + 0x9108) < '\0') ||
          (temp_v6 = FUN_0033fd64(temp_v3,(int)temp_v8[0]), temp_v6 != 0)) {
         *(unsigned char *)(param_1 + temp_v3 + 0x345d) = 0;
@@ -133,7 +133,7 @@ void FUN_00218480(int param_1)
       temp_v2 = 0;
       do {
         if (*(char *)(param_1 + temp_v2 + 0x345d) != '\0') {
-          FUN_002992bc(temp_v11,temp_v2 + 1);
+          flaggedEntrySetValueB(temp_v11,temp_v2 + 1);
           break;
         }
         temp_v2 = temp_v2 + 1;
@@ -146,7 +146,7 @@ void FUN_00218480(int param_1)
     *(unsigned int *)(param_1 + 0x3478) = 0;
     *(unsigned int *)(param_1 + 0x347c) = 0;
     temp_v2 = (int)temp_v8[0];
-    FUN_002b4670();
+    dataTable08Sub1GetRecord();
     temp_v4 = (unsigned int)*(unsigned short *)(temp_v2 + 0x62);
     if (temp_v4 != 0) {
       FUN_002ae164();
@@ -158,7 +158,7 @@ void FUN_00218480(int param_1)
         FUN_002621b4(*(int *)(param_1 + 0x305c) - 1,0xffffffff,(int)temp_v10[0],temp_v9);
         temp_v2 = 1;
         do {
-          temp_v6 = FUN_002a8764();
+          temp_v6 = gameGetSlotTable();
           FUN_002621b4(*(int *)(param_1 + 0x305c) - 1,(int)*(char *)(temp_v6 + temp_v2 + 0x9107),
                        (int)temp_v10[0],param_1 + temp_v2 * 4 + 0x3460);
           temp_v2 = temp_v2 + 1;
@@ -175,7 +175,7 @@ void FUN_00218480(int param_1)
       }
       if ((*(unsigned int *)(temp_v4 + 0x28) & 0x1ff) >> 5 == 4) {
         *(unsigned int *)(param_1 + 0x3048) = 0x24;
-        FUN_002992bc(temp_v11,*(unsigned int *)(param_1 + 0x305c));
+        flaggedEntrySetValueB(temp_v11,*(unsigned int *)(param_1 + 0x305c));
       }
       temp_v2 = FUN_0025043c(0xffffffff,(int)temp_v8[0]);
       temp_v6 = 0;
@@ -183,7 +183,7 @@ void FUN_00218480(int param_1)
         *(unsigned char *)puVar8 = 0;
       }
       do {
-        temp_v2 = FUN_002a8764();
+        temp_v2 = gameGetSlotTable();
         if ((*(char *)(temp_v2 + temp_v6 + 0x9108) < '\0') ||
            (temp_v2 = FUN_0025043c(temp_v6,(int)temp_v8[0]), temp_v2 != 0)) {
           *(unsigned char *)(param_1 + temp_v6 + 0x345d) = 0;
@@ -199,7 +199,7 @@ void FUN_00218480(int param_1)
         temp_v2 = 0;
         do {
           if (*(char *)(param_1 + temp_v2 + 0x345d) != '\0') {
-            FUN_002992bc(temp_v11,temp_v2 + 1);
+            flaggedEntrySetValueB(temp_v11,temp_v2 + 1);
             return;
           }
           temp_v2 = temp_v2 + 1;
@@ -208,7 +208,7 @@ void FUN_00218480(int param_1)
     }
     else {
       temp_v2 = (int)temp_v8[0];
-      FUN_002b4670();
+      dataTable08Sub1GetRecord();
       if ((*(unsigned char *)(temp_v2 + 0x6a) & 0x80) != 0) {
         *(unsigned int *)(param_1 + 0x3048) = 0x23;
         temp_v14[0] = 0;
@@ -217,7 +217,7 @@ void FUN_00218480(int param_1)
         FUN_0028caf8(0xffffffff,(int)temp_v10[0],temp_v9,param_1 + 0x3470);
         temp_v6 = 1;
         do {
-          temp_v3 = FUN_002a8764();
+          temp_v3 = gameGetSlotTable();
           temp_v5 = param_1 + temp_v6 * 4;
           FUN_0028caf8((int)*(char *)(temp_v3 + temp_v6 + 0x9107),(int)temp_v10[0],temp_v5 + 0x3460,
                        temp_v5 + 0x3470);
@@ -230,13 +230,13 @@ void FUN_00218480(int param_1)
         FUN_0028cb40(param_1,temp_v14,temp_v10);
         temp_v6 = FUN_0029e908(temp_v11);
         if (temp_v6 != 0) {
-          temp_v3 = FUN_002a8764();
+          temp_v3 = gameGetSlotTable();
           temp_v5 = param_1 + temp_v6 * 4;
           FUN_0028caf8((int)*(char *)(temp_v3 + temp_v6 + 0x9107),(int)temp_v10[0],temp_v5 + 0x3460,
                        temp_v5 + 0x3470);
-          temp_v3 = FUN_002a8764();
+          temp_v3 = gameGetSlotTable();
           if (*(char *)(temp_v3 + temp_v6 + 0x9107) < '\0') {
-            FUN_002b4670((int)temp_v10[0]);
+            dataTable08Sub1GetRecord((int)temp_v10[0]);
           }
         }
         else {
@@ -249,7 +249,7 @@ void FUN_00218480(int param_1)
         *(unsigned char *)puVar8 = 0;
       }
       do {
-        temp_v6 = FUN_002a8764();
+        temp_v6 = gameGetSlotTable();
         if ((*(char *)(temp_v6 + temp_v3 + 0x9108) < '\0') ||
            (temp_v6 = FUN_0025043c(temp_v3,(int)temp_v8[0]), temp_v6 != 0)) {
           *(unsigned char *)(param_1 + temp_v3 + 0x345d) = 0;
@@ -281,7 +281,7 @@ void FUN_00218480(int param_1)
               return;
             }
           }
-          FUN_002992bc(temp_v11,temp_v2 + 1);
+          flaggedEntrySetValueB(temp_v11,temp_v2 + 1);
           return;
         }
       }

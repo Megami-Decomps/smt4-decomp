@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0018b600(void);
-int FUN_0018b610(void);
+int globalCriticalSectionEnterForward(void);
+int globalCriticalSectionLeaveForward(void);
 int FUN_001963e0(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -18,8 +18,8 @@ extern unsigned char DAT_0061a482; /* 0x61a482 */
 extern int DAT_0061a50c; /* 0x61a50c */
 extern int DAT_0061a510; /* 0x61a510 */
 
-/* Supplied declaration required: FUN_0018b600. */
-/* Supplied declaration required: FUN_0018b610. */
+/* Supplied declaration required: globalCriticalSectionEnterForward. */
+/* Supplied declaration required: globalCriticalSectionLeaveForward. */
 /* Supplied declaration required: FUN_001963e0. */
 
 
@@ -42,9 +42,9 @@ void nngxRunCmdlist(void)
   if (*(int *)(DAT_0061a50c + 0x2c) != 0x300) {
     return;
   }
-  FUN_0018b600();
+  globalCriticalSectionEnterForward();
   FUN_001963e0();
-  FUN_0018b610();
+  globalCriticalSectionLeaveForward();
   return;
 }
 

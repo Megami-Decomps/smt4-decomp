@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0013b608(void);
-int FUN_0013b618(void);
+int nngxLockEnter(void);
+int nngxLockLeave(void);
 int FUN_002ba2b8(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -18,8 +18,8 @@ extern unsigned char DAT_004c62a2; /* 0x4c62a2 */
 extern int DAT_004c632c; /* 0x4c632c */
 extern int DAT_004c6330; /* 0x4c6330 */
 
-/* Supplied declaration required: FUN_0013b608. */
-/* Supplied declaration required: FUN_0013b618. */
+/* Supplied declaration required: nngxLockEnter. */
+/* Supplied declaration required: nngxLockLeave. */
 /* Supplied declaration required: FUN_002ba2b8. */
 
 
@@ -42,9 +42,9 @@ void nngxRunCmdlist(void)
   if (*(int *)(DAT_004c632c + 0x2c) != 0x300) {
     return;
   }
-  FUN_0013b608();
+  nngxLockEnter();
   FUN_002ba2b8();
-  FUN_0013b618();
+  nngxLockLeave();
   return;
 }
 

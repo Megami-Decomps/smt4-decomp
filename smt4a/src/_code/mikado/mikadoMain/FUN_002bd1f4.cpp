@@ -6,7 +6,7 @@ extern "C" {
 
 int asdOperatorNew(void);
 int FUN_0019e290(void);
-int FUN_002e3328(int);
+int asdOperatorDelete(int);
 int FUN_004b6fc4(void);
 int menu4CSetValue42(unsigned int, unsigned short [2]);
 int FUN_004ba890(unsigned int);
@@ -25,7 +25,7 @@ extern unsigned int DAT_0058801c; /* 0x58801c */
 
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_0019e290. */
-/* Supplied declaration required: FUN_002e3328. */
+/* Supplied declaration required: asdOperatorDelete. */
 /* Supplied declaration required: FUN_004b6fc4. */
 /* Supplied declaration required: menu4CSetValue42. */
 /* Supplied declaration required: FUN_004ba890. */
@@ -61,7 +61,7 @@ unsigned int FUN_002bd1f4(void)
           FUN_0019e290();
           if (*(int *)(temp_v1 + 8) != 0) {
             temp_v2 = FUN_004d08d0(*(int *)(temp_v1 + 8) + 0x110);
-            FUN_002e3328(temp_v2 - 0x110);
+            asdOperatorDelete(temp_v2 - 0x110);
           }
           *(unsigned int *)(temp_v1 + 8) = 0;
         }

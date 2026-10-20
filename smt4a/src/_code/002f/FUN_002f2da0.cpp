@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e7232(unsigned int);
+int sharedRefRelease(unsigned int);
 int FUN_002f9d6a(unsigned int **, unsigned int, int *);
 
 /* stack frame of param_3: 2 slot(s), 8 byte(s) */
@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_002e7232. */
+/* Supplied declaration required: sharedRefRelease. */
 /* Supplied declaration required: FUN_002f9d6a. */
 
 
@@ -30,7 +30,7 @@ void FUN_002f2da0(unsigned int *param_1,unsigned int param_2,unsigned int *param
   temp_v2 = temp_v0;
   FUN_002f9d6a(&temp_v1,param_2,&temp_v2);
   *param_3 = (unsigned int)temp_v1;
-  FUN_002e7232(temp_v0);
+  sharedRefRelease(temp_v0);
   *param_1 = *param_3;
   return;
 }

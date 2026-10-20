@@ -7,8 +7,8 @@ extern "C" {
 int FUN_0023eab0(...);
 int FUN_002505c0(int, int, int, int, int, int, int);
 int FUN_00262f68(...);
-int FUN_002c3944(...);
-int FUN_002c424c(...);
+int rt_memclr(...);
+int __aeabi_memset4(...);
 int memClear(...);
 int FUN_003369e0(int, unsigned int, int);
 int FUN_00336a70(int);
@@ -28,16 +28,16 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } param_4_stack;
 
-extern unsigned int DAT_00439ca8; /* 0x439ca8 */
+extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 
 /* Supplied declaration required: FUN_0023eab0. */
 /* Supplied declaration required: FUN_002505c0. */
 /* Supplied declaration required: FUN_00262f68. */
 extern int btlGetMainState(void);
 extern int flagWordTestBit(unsigned int, unsigned int);
-extern int FUN_002a8764(void);
-/* Supplied declaration required: FUN_002c3944. */
-/* Supplied declaration required: FUN_002c424c. */
+extern int gameGetSlotTable(void);
+/* Supplied declaration required: rt_memclr. */
+/* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: FUN_003369e0. */
 /* Supplied declaration required: FUN_00336a70. */
@@ -164,12 +164,12 @@ void FUN_003c0d70(int param_1,unsigned int param_2,int param_3,int param_4)
           }
         }
         else {
-          temp_v5 = FUN_002a8764();
+          temp_v5 = gameGetSlotTable();
           temp_v5 = temp_v5 + (param_1 - 1);
           if (-1 < *(char *)(temp_v5 + 0x9108)) {
             *(unsigned char *)(temp_v5 + 0x9108) = 0xff;
             if (param_3 == 0) {
-              FUN_003ae2d0(DAT_00439ca8,param_1,0xffffffff,1);
+              FUN_003ae2d0(g_btlUiBlock,param_1,0xffffffff,1);
               FUN_002505c0(0,0,0x1000172,0,0,0,0);
             }
             temp_v2 = puVar6[0x9f];
@@ -226,12 +226,12 @@ void FUN_003c0d70(int param_1,unsigned int param_2,int param_3,int param_4)
       *puVar6 = *puVar6 | 0x11;
     }
     if (temp_v0 == 0 && temp_v4 == 0) {
-      FUN_002c424c(puVar6 + 2,100,0xffffffff);
+      __aeabi_memset4(puVar6 + 2,100,0xffffffff);
       *(unsigned short *)(puVar6 + 2) = 0;
       memClear(puVar6 + 0x33,0x18c);
     }
     *(unsigned short *)(puVar6 + 0x1b) = 0xffff;
-    FUN_002c3944((int)puVar6 + 0x72,0x3c);
+    rt_memclr((int)puVar6 + 0x72,0x3c);
     *(unsigned int *)((int)puVar6 + 0xae) = 0;
     *(unsigned int *)((int)puVar6 + 0xb2) = 0;
     *(unsigned int *)((int)puVar6 + 0xb6) = 0;

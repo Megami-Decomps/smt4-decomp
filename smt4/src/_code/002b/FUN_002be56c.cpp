@@ -33,7 +33,7 @@ extern unsigned int *DAT_00464a74; /* 0x464a74 */
 /* Supplied declaration required: FUN_002aa200. */
 /* Supplied declaration required: FUN_002aea44. */
 /* Supplied declaration required: FUN_002aea50. */
-extern int FUN_002c30c4(int);
+extern int libc_strlen(int);
 extern int __aeabi_uidivmod(unsigned int, int);
 
 
@@ -107,7 +107,7 @@ void FUN_002be56c(float *param_1,unsigned int *param_2,unsigned int param_3,int 
   uStack_24 = (unsigned int)((unsigned long long)in_d8 >> 0x20);
   temp_v16 = 0.0f;
   uStack_20 = in_d9;
-  temp_v6 = FUN_002c30c4(param_4);
+  temp_v6 = libc_strlen(param_4);
   uStack_64 = romwright_piece_4_4(uStack_24,uStack_28);
   temp_v14 = 1.0f;
   uStack_5c = uStack_20;

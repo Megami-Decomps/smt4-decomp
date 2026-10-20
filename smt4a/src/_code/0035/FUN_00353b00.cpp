@@ -14,10 +14,10 @@ extern unsigned char DAT_0060a198; /* 0x60a198 */
 
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_00152f44. */
-extern int FUN_00162e8c(void);
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagsGetBlock(void);
+extern int gameFlagIsSet(unsigned int);
 extern int FUN_003e4230(unsigned int);
-extern int FUN_003e46f4(unsigned int);
+extern int gameDataFlagTestBit(unsigned int);
 
 
 void FUN_00353b00(int param_1)
@@ -37,20 +37,20 @@ void FUN_00353b00(int param_1)
   temp_v5 = 1;
   temp_v1 = 0;
   do {
-    temp_v3 = FUN_00162e8c();
+    temp_v3 = gameFlagsGetBlock();
     temp_v4 = (int)(temp_v5 + ((unsigned int)((int)temp_v5 >> 0x1f) >> 0x1d)) >> 3;
     temp_v0 = 1 << (((int)temp_v5 % 8) & 0xffU);
     if ((*(unsigned char *)(temp_v3 + temp_v4 + 0xdd0) & temp_v0) == 0) {
-      temp_v3 = FUN_003e46f4(temp_v5);
+      temp_v3 = gameDataFlagTestBit(temp_v5);
       temp_v2 = (unsigned char)temp_v0;
       if (temp_v3 != 0) {
-        temp_v3 = FUN_00162e8c();
+        temp_v3 = gameFlagsGetBlock();
         *(unsigned char *)(temp_v3 + temp_v4 + 0xdd0) = *(unsigned char *)(temp_v3 + temp_v4 + 0xdd0) | temp_v2;
       }
       else {
         temp_v3 = FUN_003e4230(temp_v5);
         if (temp_v3 != 2) {
-          temp_v3 = FUN_00162e8c();
+          temp_v3 = gameFlagsGetBlock();
           temp_v1 = 1;
           *(unsigned char *)(temp_v3 + temp_v4 + 0xdd0) = *(unsigned char *)(temp_v3 + temp_v4 + 0xdd0) | temp_v2;
         }
@@ -59,7 +59,7 @@ void FUN_00353b00(int param_1)
     temp_v5 = temp_v5 + 1;
   } while (temp_v5 < 0x8d);
   if ((((param_1 == 0) && (temp_v1)) && (g_gameState != 0x24)) &&
-     (temp_v4 = FUN_0018719c(0x408), temp_v4 != 0)) {
+     (temp_v4 = gameFlagIsSet(0x408), temp_v4 != 0)) {
     FUN_00100388(&DAT_0060a198,&DAT_00531ac8);
     puVar4 = g_popupState;
     puVar7 = g_popupState + 1;

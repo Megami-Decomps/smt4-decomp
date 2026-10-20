@@ -22,7 +22,7 @@ extern int FUN_002d0470(...); /* 0x2d0470 */
 extern int FUN_002d04ac(...); /* 0x2d04ac */
 extern int FUN_002dcb60(...); /* 0x2dcb60 */
 extern int FUN_002f2798(...); /* 0x2f2798 */
-extern int DAT_0043dd50; /* 0x43dd50 */
+extern int g_uiQuest; /* 0x43dd50 */
 
 /* Supplied declaration required: FUN_0027f3dc. */
 extern unsigned int FUN_0029ee54(int);
@@ -41,7 +41,7 @@ void FUN_0032aa84(int param_1)
   int temp_v3;
   int temp_v4;
   
-  temp_v4 = DAT_0043dd50;
+  temp_v4 = g_uiQuest;
   if (param_1 == 0) {
     temp_v0 = FUN_002a0d0c();
     pbVar3 = (unsigned char *)(temp_v0 + 0xe);

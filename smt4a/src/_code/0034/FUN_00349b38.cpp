@@ -7,8 +7,8 @@ extern "C" {
 int FUN_00100388(...);
 int FUN_002c7388(unsigned int, unsigned char [128], int);
 int asdSaveReadBlock(int, unsigned char [128], unsigned char [140], unsigned int, unsigned int);
-int FUN_002e342c(unsigned char [128], unsigned char *);
-int FUN_002e6dd0(unsigned char *, int);
+int libc_strcpy(unsigned char [128], unsigned char *);
+int rt_aeabi_memclr(unsigned char *, int);
 int FUN_003416a0(int, unsigned char [128]);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -24,8 +24,8 @@ extern unsigned char DAT_005e2114; /* 0x5e2114 */
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_002c7388. */
 /* Supplied declaration required: asdSaveReadBlock. */
-/* Supplied declaration required: FUN_002e342c. */
-/* Supplied declaration required: FUN_002e6dd0. */
+/* Supplied declaration required: libc_strcpy. */
+/* Supplied declaration required: rt_aeabi_memclr. */
 extern int FUN_002ef7f0(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_003416a0. */
 
@@ -45,14 +45,14 @@ void FUN_00349b38(unsigned int param_1)
   temp_v1 = *(int *)(DAT_0057f6d0 + 4);
   temp_v2 = *(unsigned int *)(DAT_0057f6d0 + 8);
   if (temp_v1 != 1) {
-    FUN_002e6dd0(&DAT_005e2114,0x80);
+    rt_aeabi_memclr(&DAT_005e2114,0x80);
     FUN_00100388(&DAT_005e2114,"sdds4game%d.sav",temp_v2);
   }
   else {
-    FUN_002e6dd0(&DAT_005e2114,0x80);
+    rt_aeabi_memclr(&DAT_005e2114,0x80);
     FUN_00100388(&DAT_005e2114,"%ssdds4game%d.sav","sdds4/",temp_v2);
   }
-  FUN_002e342c(temp_v4,&DAT_005e2114);
+  libc_strcpy(temp_v4,&DAT_005e2114);
   temp_v2 = *(unsigned int *)(DAT_0057f6d0 + 0x14);
   temp_v3 = *(unsigned int *)(DAT_0057f6d0 + 0x18);
   temp_v0 = *(int *)(DAT_0057f6d0 + 4);

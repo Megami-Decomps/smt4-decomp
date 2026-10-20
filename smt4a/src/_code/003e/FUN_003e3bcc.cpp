@@ -9,7 +9,7 @@ int FUN_00180118(unsigned int);
 int FUN_0019de98(...);
 int FUN_0022e774(void);
 int FUN_0023b45c(...);
-int FUN_00275f44(...);
+int scrScriptProcessStartEntry(...);
 int FUN_002a5e7c(int);
 int FUN_002a7288(void);
 int FUN_002c8538(...);
@@ -62,12 +62,12 @@ extern unsigned char LAB_003e400c; /* 0x3e400c */
 /* Supplied declaration required: FUN_00180118. */
 /* Supplied declaration required: FUN_0019de98. */
 extern int slotRecordFindById(unsigned short);
-extern unsigned int *FUN_001ab888(void);
+extern unsigned int *gameGetSlotTable(void);
 extern int FUN_00224880(unsigned int);
 /* Supplied declaration required: FUN_0022e774. */
 /* Supplied declaration required: FUN_0023b45c. */
 extern int FUN_0026c3a0(void);
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002a4b28(void);
 extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_002a5e7c. */
@@ -77,7 +77,7 @@ extern int FUN_002a4b74(void);
 /* Supplied declaration required: panelSetMode3. */
 /* Supplied declaration required: FUN_00333dc8. */
 /* Supplied declaration required: FUN_003343f0. */
-extern int FUN_00357bc8(unsigned int, unsigned char *);
+extern int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_00359974. */
 extern int panelStateIs0(void);
 /* Supplied declaration required: panelSetTarget. */
@@ -190,12 +190,12 @@ void FUN_003e3bcc(fn_003e3bcc_arg0 *param_1)
         temp_v0 = FUN_004d0bf0(*(unsigned int *)((int)param_1 + *(int *)&param_1[5].field_0x14 * 0x24 + 0x20)
                              >> 0x10);
         if (temp_v0 != 0) {
-          temp_v0 = FUN_00357bc8(*(unsigned int *)&param_1->field_0x14,&LAB_003e3fe4);
+          temp_v0 = tableGroupFindEntryIndex(*(unsigned int *)&param_1->field_0x14,&LAB_003e3fe4);
         }
         else {
           temp_v0 = FUN_004d0eec();
           if (temp_v0 != 0) {
-            puVar2 = (unsigned int *)FUN_001ab888();
+            puVar2 = (unsigned int *)gameGetSlotTable();
             if (temp_v5 <= *puVar2) {
               panelSetMode3(-*(int *)((int)param_1 + *(int *)&param_1[5].field_0x14 * 0x24 + 0x24),0)
               ;
@@ -203,14 +203,14 @@ void FUN_003e3bcc(fn_003e3bcc_arg0 *param_1)
               param_1->field_0x8 = temp_v0;
               return;
             }
-            temp_v0 = FUN_00357bc8(*(unsigned int *)&param_1->field_0x14,&LAB_003e3ff8);
+            temp_v0 = tableGroupFindEntryIndex(*(unsigned int *)&param_1->field_0x14,&LAB_003e3ff8);
           }
           else {
-            temp_v0 = FUN_00357bc8(*(unsigned int *)&param_1->field_0x14,&LAB_003e400c);
+            temp_v0 = tableGroupFindEntryIndex(*(unsigned int *)&param_1->field_0x14,&LAB_003e400c);
           }
         }
         if (-1 < temp_v0) {
-          FUN_00275f44(param_1->field_0x18,temp_v0);
+          scrScriptProcessStartEntry(param_1->field_0x18,temp_v0);
         }
         param_1->field_0x8 = 3;
         return;
@@ -235,9 +235,9 @@ void FUN_003e3bcc(fn_003e3bcc_arg0 *param_1)
     FUN_003c1060();
     FUN_003c5fc4(1);
     sysPlaySe(0xa4);
-    temp_v0 = FUN_00357bc8(*(unsigned int *)&param_1->field_0x14,&LAB_003e3fd0);
+    temp_v0 = tableGroupFindEntryIndex(*(unsigned int *)&param_1->field_0x14,&LAB_003e3fd0);
     if (-1 < temp_v0) {
-      FUN_00275f44(param_1->field_0x18,temp_v0);
+      scrScriptProcessStartEntry(param_1->field_0x18,temp_v0);
     }
     temp_v0 = 1;
   }

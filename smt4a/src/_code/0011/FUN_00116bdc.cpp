@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e9ec8(int, unsigned int);
+int onlineInstanceTableFind(int, unsigned int);
 int FUN_00302f88(int, unsigned int);
 
 typedef int romwright_code(...);
@@ -14,8 +14,8 @@ typedef struct {
 } param_2_stack;
 
 extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
-extern int FUN_002e9af4(void);
-/* Supplied declaration required: FUN_002e9ec8. */
+extern int onlineInstanceTableGetCurrent(void);
+/* Supplied declaration required: onlineInstanceTableFind. */
 /* Supplied declaration required: FUN_00302f88. */
 
 
@@ -30,8 +30,8 @@ void FUN_00116bdc(int param_1,int *param_2)
   unsigned char temp_v3 [12];
   unsigned int temp_v4 [2];
   
-  temp_v0 = FUN_002e9af4();
-  FUN_002e9ec8(temp_v0,*(unsigned int *)(param_1 + 0x6c));
+  temp_v0 = onlineInstanceTableGetCurrent();
+  onlineInstanceTableFind(temp_v0,*(unsigned int *)(param_1 + 0x6c));
   if (temp_v0 != 0) {
     temp_v2 = 0;
     do {

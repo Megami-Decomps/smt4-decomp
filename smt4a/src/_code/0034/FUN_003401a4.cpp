@@ -8,10 +8,10 @@ int FUN_001695a0(void);
 int FUN_002237a0(void);
 int FUN_00234b30(void);
 int FUN_0025cb1c(void);
-int FUN_00275f44(unsigned int, unsigned int);
+int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int FUN_002d88e0(void);
 int FUN_0031297c(void);
-int FUN_00324bc8(unsigned int, unsigned int);
+int mapPlaceSet(unsigned int, unsigned int);
 int FUN_003254a0(void);
 int FUN_0033e014(unsigned int, unsigned int);
 int FUN_00353a88(void);
@@ -60,14 +60,14 @@ static float romwright_fabs_4(float value)
 extern int FUN_00224880(unsigned int);
 /* Supplied declaration required: FUN_00234b30. */
 /* Supplied declaration required: FUN_0025cb1c. */
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_002d88e0. */
 /* Supplied declaration required: FUN_0031297c. */
-/* Supplied declaration required: FUN_00324bc8. */
+/* Supplied declaration required: mapPlaceSet. */
 /* Supplied declaration required: FUN_003254a0. */
 /* Supplied declaration required: FUN_0033e014. */
 /* Supplied declaration required: FUN_00353a88. */
-extern unsigned int FUN_00357bc8(unsigned int, unsigned int *);
+extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned int *);
 /* Supplied declaration required: mapIfClose. */
 /* Supplied declaration required: mapIfReleaseSlot0AndReset. */
 /* Supplied declaration required: sub68OwnerCall7. */
@@ -75,7 +75,7 @@ extern unsigned int FUN_00357bc8(unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_003868dc. */
 /* Supplied declaration required: FUN_003d2150. */
 /* Supplied declaration required: FUN_003d4ed8. */
-extern int FUN_003e46f4(unsigned int);
+extern int gameDataFlagTestBit(unsigned int);
 /* Supplied declaration required: FUN_00483834. */
 /* Supplied declaration required: FUN_0049f700. */
 /* Supplied declaration required: FUN_0049f8a4. */
@@ -221,7 +221,7 @@ void FUN_003401a4(int param_1)
       FUN_003d4ed8(0x1000224);
       temp_v12 = 3.0f;
       temp_v9 = 15.0f;
-      temp_v7 = FUN_003e46f4(0x84);
+      temp_v7 = gameDataFlagTestBit(0x84);
       if (temp_v7 != 0) {
         temp_v12 = 1.5f;
         temp_v9 = 7.5f;
@@ -335,14 +335,14 @@ void FUN_003401a4(int param_1)
       *(unsigned int *)(temp_v7 + 0x2c) = *puVar10;
       *(unsigned int *)(temp_v7 + 0x30) = temp_v4;
       FUN_001695a0();
-      FUN_00324bc8(0xffffffff,0xffffffff);
+      mapPlaceSet(0xffffffff,0xffffffff);
       DAT_005f1658 = 0;
       DAT_005f1668 = 0x747331;
       DAT_005f1660 = 0x5f726373;
       DAT_005f1664 = 0x70616d6c;
-      temp_v4 = FUN_00357bc8(*(unsigned int *)(param_1 + 0x9ec),&DAT_005f1660);
+      temp_v4 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x9ec),&DAT_005f1660);
       *(unsigned int *)(param_1 + 0x9e4) = temp_v4;
-      FUN_00275f44(*(unsigned int *)(param_1 + 0x9f4),temp_v4);
+      scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x9f4),temp_v4);
       *(int *)(param_1 + 0xd0) = *(int *)(param_1 + 0xd0) + 1;
       *(unsigned int *)(param_1 + 0xd4) = 0;
       return;

@@ -10,7 +10,7 @@ int FUN_0027fae4(void);
 int FUN_0027fca0(...);
 int FUN_00282390(void);
 int FUN_00291e40(...);
-int FUN_002b8838(int);
+int buttonHelpSetPreset(int);
 
 int FUN_0024ac90(void);
 int mapIfReleaseSlot3(void);
@@ -59,11 +59,11 @@ extern int FUN_0027ee9c(void);
 /* Supplied declaration required: FUN_0028250c. */
 extern int FUN_002896bc(void);
 /* Supplied declaration required: FUN_00291e40. */
-extern int FUN_00296d6c(unsigned int, unsigned int);
+extern int randBetween(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0029c3c0. */
-/* Supplied declaration required: FUN_002b8838. */
-extern int FUN_002bfde4(unsigned int);
-extern int FUN_002c09d0(unsigned int);
+/* Supplied declaration required: buttonHelpSetPreset. */
+extern int padIsButtonPressed(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 
 
 void FUN_002d424c(void)
@@ -185,7 +185,7 @@ void FUN_002d424c(void)
               *(unsigned int *)(temp_v0 + 8) = 0;
             }
             else {
-              temp_v0 = FUN_002bfde4(6);
+              temp_v0 = padIsButtonPressed(6);
               if ((temp_v0 != 0) || (temp_v0 = FUN_002762e0(), temp_v0 != 0)) {
                 temp_v0 = DAT_004474f4;
                 *(unsigned int *)(DAT_004474f4 + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
@@ -238,7 +238,7 @@ void FUN_002d424c(void)
       *(unsigned int *)(temp_v0 + 0x50) = DAT_0049f9ac;
       FUN_0027fc14(0xd);
       *(unsigned int *)(DAT_004474f4 + 0xac) = 1;
-      FUN_002b8838(0xda);
+      buttonHelpSetPreset(0xda);
       FUN_0024f034(1,DAT_0049f99c);
       FUN_0019db68();
     }
@@ -248,7 +248,7 @@ void FUN_002d424c(void)
         FUN_00280364();
         return;
       }
-      if ((DAT_0049f958 == 0x3303001) && (temp_v0 = FUN_002c09d0(0x292), temp_v0 != 0)) {
+      if ((DAT_0049f958 == 0x3303001) && (temp_v0 = gameFlagIsSet(0x292), temp_v0 != 0)) {
         temp_v0 = FUN_002896bc();
         if (temp_v0 == 0) {
           FUN_002804ec(g_lmapScene + 0x28);
@@ -304,9 +304,9 @@ void FUN_002d424c(void)
       FUN_0027fca0(0xffffffff);
       FUN_0028250c();
       FUN_00282390();
-      temp_v0 = FUN_00296d6c(0,1);
+      temp_v0 = randBetween(0,1);
       FUN_00291e40(temp_v0 + 0x100023c);
-      if ((DAT_0049f958 == 0x3303001) && (temp_v0 = FUN_002c09d0(0x292), temp_v0 != 0)) {
+      if ((DAT_0049f958 == 0x3303001) && (temp_v0 = gameFlagIsSet(0x292), temp_v0 != 0)) {
         FUN_0029c3c0(0,0xf,0xff);
         temp_v1 = 0xf;
         temp_v4 = 1;

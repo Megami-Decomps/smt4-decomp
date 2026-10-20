@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002ff3c8(void **);
+int mapIteratorNext7(void **);
 int rbTreeRotateRight_00309776(...);
 int rbTreeRotateLeft_003097a8(...);
 
@@ -25,7 +25,7 @@ typedef struct {
 } param_3_stack;
 
 extern int wordRefsEqual_002ff370(void **, void **);
-/* Supplied declaration required: FUN_002ff3c8. */
+/* Supplied declaration required: mapIteratorNext7. */
 /* Supplied declaration required: rbTreeRotateRight_00309776. */
 /* Supplied declaration required: rbTreeRotateLeft_003097a8. */
 
@@ -58,7 +58,7 @@ void FUN_002ff0ea(unsigned int *param_1,fn_002ff0ea_arg1 *param_2,unsigned int *
     *temp_v4 = (unsigned int)temp_v2;
     return;
   }
-  FUN_002ff3c8(&temp_v2);
+  mapIteratorNext7(&temp_v2);
   pcVar6 = (char *)*param_3;
   pcVar3 = *(char **)(pcVar6 + 8);
   pcVar7 = pcVar6;

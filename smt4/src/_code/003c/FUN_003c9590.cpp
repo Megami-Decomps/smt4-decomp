@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b9024(void);
+int devilGetRecord(void);
 
 typedef struct fn_003c9590_arg0 fn_003c9590_arg0;
 struct fn_003c9590_arg0 {
@@ -37,9 +37,9 @@ typedef struct {
     unsigned int sp58; /* 0x58: local_58 */
 } param_2_stack;
 
-extern int FUN_00229e84(void);
+extern int gameDataBlocksGetCounterPtr(void);
 extern int FUN_0029ea68(unsigned int);
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: devilGetRecord. */
 extern int dataTableGetCount(unsigned int);
 extern unsigned char *dataTableGetEntries(void);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
@@ -130,7 +130,7 @@ int FUN_003c9590(fn_003c9590_arg0 *param_1,int param_2)
     }
     else {
       temp_v5 = (unsigned int)param_1->field_0x11a;
-      FUN_002b9024();
+      devilGetRecord();
       temp_v5 = (unsigned int)*(unsigned char *)(temp_v5 + 2);
     }
     temp_v2 = dataTableGet(5,1);
@@ -154,16 +154,16 @@ int FUN_003c9590(fn_003c9590_arg0 *param_1,int param_2)
       temp_v7[0x26] = 1;
       temp_v7[temp_v5] = '\x01';
     }
-    temp_v3 = FUN_00229e84();
+    temp_v3 = gameDataBlocksGetCounterPtr();
     temp_v5 = (unsigned int)*(unsigned short *)(temp_v3 + 8);
-    temp_v3 = FUN_00229e84();
+    temp_v3 = gameDataBlocksGetCounterPtr();
     temp_v0 = *(unsigned short *)(temp_v3 + 10);
     if (temp_v5 <= temp_v0) {
       do {
         temp_v3 = FUN_0029ea68(temp_v5 & 0xffff);
         if (temp_v3 != 0) {
           temp_v4 = temp_v5;
-          FUN_002b9024();
+          devilGetRecord();
           if (temp_v7[*(unsigned char *)(temp_v4 + 2)] != '\0') {
             temp_v3 = temp_v6 * 2;
             temp_v6 = temp_v6 + 1;
@@ -175,9 +175,9 @@ int FUN_003c9590(fn_003c9590_arg0 *param_1,int param_2)
     }
   }
   else {
-    temp_v3 = FUN_00229e84();
+    temp_v3 = gameDataBlocksGetCounterPtr();
     temp_v5 = (unsigned int)*(unsigned short *)(temp_v3 + 8);
-    temp_v3 = FUN_00229e84();
+    temp_v3 = gameDataBlocksGetCounterPtr();
     temp_v0 = *(unsigned short *)(temp_v3 + 10);
     if (temp_v5 <= temp_v0) {
       do {

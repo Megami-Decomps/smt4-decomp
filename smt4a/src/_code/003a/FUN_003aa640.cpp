@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_00271b64(...);
+int effBehaviorRun(...);
 int FUN_00362900(...);
 int FUN_00390368(...);
 
@@ -50,7 +50,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_00271b64. */
+/* Supplied declaration required: effBehaviorRun. */
 /* Supplied declaration required: FUN_00362900. */
 /* Supplied declaration required: FUN_00390368. */
 
@@ -66,7 +66,7 @@ void FUN_003aa640(fn_003aa640_arg0 *param_1)
   fn_003aa640_arg0_pa0 *pfVar4;
   int temp_v3;
   
-  FUN_00271b64(param_1->field_0x9c);
+  effBehaviorRun(param_1->field_0x9c);
   pfVar1 = param_1->field_0x9c;
   temp_v3 = pfVar1->field_0x8;
   temp_v1 = temp_v0;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0016c410(...);
+int renderCtxResetColorScale(...);
 int FUN_0016c560(...);
 
 int FUN_00157558(int);
@@ -40,7 +40,7 @@ extern int jobGetWork(void);
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0016c410. */
+/* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: FUN_0016c560. */
 /* Supplied declaration required: FUN_0018098c. */
 /* Supplied declaration required: FUN_001834a4. */
@@ -379,7 +379,7 @@ unsigned int FUN_0036dff4(void)
     *(unsigned char *)(temp_v3 + 0x1270) = 0;
   }
   FUN_0016c560(g_renderCtx);
-  FUN_0016c410(g_renderCtx);
+  renderCtxResetColorScale(g_renderCtx);
   return 0;
 }
 

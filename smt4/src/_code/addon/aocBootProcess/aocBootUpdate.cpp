@@ -33,12 +33,12 @@ extern int g_aocSystem; /* 0x433158 */
 #endif
 /* Supplied declaration required: aocClearDisplayFlag. */
 /* Supplied declaration required: FUN_0027e9c0. */
-extern int FUN_0027ea14(unsigned int *);
+extern int strIsEmpty(unsigned int *);
 /* Supplied declaration required: FUN_0027ea28. */
 /* Supplied declaration required: FUN_0027eafc. */
 /* Supplied declaration required: FUN_0027eb30. */
 /* Supplied declaration required: FUN_002a126c. */
-extern int FUN_002a1520(unsigned int *);
+extern int byteIsAtLeast100(unsigned int *);
 extern int FUN_002ad1e0(int);
 /* Supplied declaration required: FUN_002ba9ac. */
 /* Supplied declaration required: FUN_002baa40. */
@@ -141,8 +141,8 @@ unsigned int aocBootUpdate(void)
           *(unsigned char *)(temp_v0 + 9) = 1;
           return 0;
         }
-        temp_v3 = FUN_0027ea14((unsigned int *)&temp_v6);
-        if ((temp_v3 == 0) && (temp_v3 = FUN_002a1520((unsigned int *)&temp_v6), temp_v3 == 0)) {
+        temp_v3 = strIsEmpty((unsigned int *)&temp_v6);
+        if ((temp_v3 == 0) && (temp_v3 = byteIsAtLeast100((unsigned int *)&temp_v6), temp_v3 == 0)) {
           return 0;
         }
         *(unsigned char *)(temp_v0 + 8) = 2;

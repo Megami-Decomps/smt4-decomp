@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdMemFree(int);
-int FUN_001afdc4(void);
+int nn_snd_CTR_FreeVoice(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -17,7 +17,7 @@ extern int DAT_0063f4e8; /* 0x63f4e8 */
 extern unsigned char DAT_0063f4f0; /* 0x63f4f0 */
 
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_001afdc4. */
+/* Supplied declaration required: nn_snd_CTR_FreeVoice. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
 
@@ -70,7 +70,7 @@ LAB_00152c74:
   if (0 < *(int *)(param_1 + 0xec)) {
     do {
       if (*(int *)(param_1 + temp_v0 * 4 + 0x68) != 0) {
-        FUN_001afdc4();
+        nn_snd_CTR_FreeVoice();
       }
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < *(int *)(param_1 + 0xec));

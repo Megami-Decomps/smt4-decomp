@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_5_stack;
 
-extern int FUN_002ede60(char *, int);
+extern int onlineSockAddrConstruct2(char *, int);
 /* Supplied declaration required: FUN_002ede78. */
 extern char *FUN_002ee46c(int);
 /* Supplied declaration required: rbTreeRotateRight_0030c41a. */
@@ -35,7 +35,7 @@ void FUN_0030c2e6(unsigned int *param_1,int param_2,int param_3,int param_4,int 
   
   pcVar1 = (char *)FUN_002ee46c(param_2);
   if (pcVar1 + 0x10 != (char *)0x0) {
-    temp_v0 = FUN_002ede60(pcVar1 + 0x10,param_5);
+    temp_v0 = onlineSockAddrConstruct2(pcVar1 + 0x10,param_5);
     FUN_002ede78(temp_v0 + 0x20,param_5 + 0x20);
   }
   *(int *)(param_2 + 0x14) = *(int *)(param_2 + 0x14) + 1;

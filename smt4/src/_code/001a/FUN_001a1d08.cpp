@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00103c9c(void);
 int FUN_00223898(unsigned char *, int);
-int FUN_00296f4c(unsigned int, int);
+int scrScriptProcessStartEntry(unsigned int, int);
 int FUN_00297060(void);
 int scrScriptProcessDestroy(void);
 int FUN_002c40f8(unsigned char *, int *, int, int, int, int);
@@ -33,7 +33,7 @@ extern int DAT_0043e31c; /* 0x43e31c */
 extern int FUN_0019e0c0(unsigned int);
 extern unsigned int FUN_001c0954(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00223898. */
-/* Supplied declaration required: FUN_00296f4c. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297060. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_002c40f8. */
@@ -107,7 +107,7 @@ unsigned int FUN_001a1d08(unsigned int param_1,int param_2)
         FUN_002c5728(1);
         FUN_002c56dc(1);
         *(unsigned int *)(puVar1 + 0xc) = 10;
-        FUN_00296f4c(*(unsigned int *)(puVar1 + 0x58),DAT_0043e31c);
+        scrScriptProcessStartEntry(*(unsigned int *)(puVar1 + 0x58),DAT_0043e31c);
         *(int *)(puVar1 + 0x10) = *(int *)(puVar1 + 0x10) + 1;
         return 0;
       }

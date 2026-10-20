@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0028975c(...);
+int gameFlagSetValue(...);
 int asdMemAlloc(...);
 int taskCreateDraw(...);
 int jyoucyuGetTableEntry(...);
@@ -31,7 +31,7 @@ extern int DAT_0044db90; /* 0x44db90 */
 extern int DAT_0044db94; /* 0x44db94 */
 extern int DAT_0044db98; /* 0x44db98 */
 
-/* Supplied declaration required: FUN_0028975c. */
+/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: jyoucyuGetTableEntry. */
@@ -74,11 +74,11 @@ void QcMain_Register(int *param_1,int param_2)
   else {
     DAT_0044db94 = 0;
     DAT_0044db98 = 1;
-    FUN_0028975c(0x50,1);
-    FUN_0028975c(0x20,1);
-    FUN_0028975c(0x5f,1);
-    FUN_0028975c(0x143,1);
-    FUN_0028975c(0x157,1);
+    gameFlagSetValue(0x50,1);
+    gameFlagSetValue(0x20,1);
+    gameFlagSetValue(0x5f,1);
+    gameFlagSetValue(0x143,1);
+    gameFlagSetValue(0x157,1);
   }
   puVar2 = &LAB_001a99dc;
   asdProcessCreateSimple(&LAB_001a99dc,2,0,0,QuestCenterMainProcUpdate,&LAB_001fe158,DAT_0044db8c);

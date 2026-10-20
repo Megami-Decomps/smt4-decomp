@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0029f848(int, unsigned int, int, int, int, int);
 int rt_memcpy(int, unsigned int, unsigned int);
 
-extern int DAT_0044e190; /* 0x44e190 */
+extern int g_statusDown; /* 0x44e190 */
 
 /* Supplied declaration required: FUN_0029f848. */
 /* Supplied declaration required: rt_memcpy. */
@@ -31,15 +31,15 @@ void FUN_002e2fb0(unsigned int param_1,unsigned int param_2)
   unsigned int uStack_20;
   unsigned int uStack_1c;
   
-  temp_v2 = DAT_0044e190;
+  temp_v2 = g_statusDown;
   if (param_2 >= 0x11) {
     return;
   }
-  uStack_28 = *(unsigned int *)(DAT_0044e190 + 0x482);
-  uStack_24 = *(unsigned int *)(DAT_0044e190 + 0x486);
-  uStack_20 = *(unsigned int *)(DAT_0044e190 + 0x48a);
-  uStack_1c = *(unsigned int *)(DAT_0044e190 + 0x48e);
-  *(unsigned int *)(DAT_0044e190 + 0x4c2) = 0;
+  uStack_28 = *(unsigned int *)(g_statusDown + 0x482);
+  uStack_24 = *(unsigned int *)(g_statusDown + 0x486);
+  uStack_20 = *(unsigned int *)(g_statusDown + 0x48a);
+  uStack_1c = *(unsigned int *)(g_statusDown + 0x48e);
+  *(unsigned int *)(g_statusDown + 0x4c2) = 0;
   *(unsigned int *)(temp_v2 + 0x4c6) = 0;
   *(unsigned int *)(temp_v2 + 0x4ca) = 0;
   *(unsigned int *)(temp_v2 + 0x4ce) = 0;

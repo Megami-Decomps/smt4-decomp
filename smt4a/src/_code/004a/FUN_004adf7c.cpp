@@ -7,7 +7,7 @@ extern "C" {
 int FUN_004ac1fc(...);
 int FUN_004ad228(...);
 int FUN_004d8f4c(...);
-int FUN_004d8ffc(...);
+int treeRebalanceAfterErase(...);
 int FUN_0050d0ac(...);
 int vtblCopyAssign(...);
 int listNodeUnlinkOrFree(...);
@@ -61,7 +61,7 @@ extern unsigned char LAB_004ae5dc; /* 0x4ae5dc */
 /* Supplied declaration required: FUN_004ad228. */
 extern int *****FUN_004d8f18(int *****);
 /* Supplied declaration required: FUN_004d8f4c. */
-/* Supplied declaration required: FUN_004d8ffc. */
+/* Supplied declaration required: treeRebalanceAfterErase. */
 extern romwright_code ***FUN_004d91b0(romwright_code *****);
 extern romwright_code ***FUN_004d9234(romwright_code *****);
 /* Supplied declaration required: FUN_0050d0ac. */
@@ -839,11 +839,11 @@ int FUN_004adf7c(unsigned int *param_1,int param_2,unsigned int *param_3,unsigne
           if ((romwright_code ****)*ppppcVar10 != ppppcVar4) {
             ppppcVar16 = ppppcVar10 + 1;
           }
-          FUN_004d8ffc(ppppcVar16);
+          treeRebalanceAfterErase(ppppcVar16);
           ppppcVar4 = ppppcVar10;
           ppppcVar16 = (romwright_code ****)ppppcVar10[2];
         }
-        FUN_004d8ffc(ppppcVar15);
+        treeRebalanceAfterErase(ppppcVar15);
         ppppcVar15[3] = *ppppcVar15;
       }
 LAB_004af14c:

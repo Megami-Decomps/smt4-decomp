@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00270bfc(int);
 
-extern unsigned char DAT_0057a9b8; /* 0x57a9b8 */
+extern unsigned char g_btlUi; /* 0x57a9b8 */
 
 /* Supplied declaration required: FUN_00270bfc. */
 
@@ -15,8 +15,8 @@ void FUN_004a96d4(void)
 
 {
 /* irregular: 1 native warning(s); review required */
-  if ((*(int *)((unsigned char *)&DAT_0057a9b8 + 0x10)) != 0) {
-    FUN_00270bfc((*(int *)((unsigned char *)&DAT_0057a9b8 + 0x10)) + 0x28c4);
+  if ((*(int *)((unsigned char *)&g_btlUi + 0x10)) != 0) {
+    FUN_00270bfc((*(int *)((unsigned char *)&g_btlUi + 0x10)) + 0x28c4);
     return;
   }
   return;

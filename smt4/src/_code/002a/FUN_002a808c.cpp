@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002bb140(int);
 int FUN_002bb150(int, int);
-int FUN_002bb308(void);
+int nn_applet_CTR_detail_CloseSession(void);
 int FUN_002bb378(void);
 int FUN_002c5434(int);
 int FUN_002c55d4(int);
@@ -15,7 +15,7 @@ extern int FUN_0015007c(unsigned int);
 extern int FUN_002bb0d0(void);
 /* Supplied declaration required: FUN_002bb140. */
 /* Supplied declaration required: FUN_002bb150. */
-/* Supplied declaration required: FUN_002bb308. */
+/* Supplied declaration required: nn_applet_CTR_detail_CloseSession. */
 /* Supplied declaration required: FUN_002bb378. */
 /* Supplied declaration required: FUN_002c5434. */
 /* Supplied declaration required: FUN_002c55d4. */
@@ -36,7 +36,7 @@ int FUN_002a808c(unsigned int param_1)
   while( 1 ) {
     FUN_002bb378();
     temp_v1 = FUN_0015007c(param_1);
-    FUN_002bb308();
+    nn_applet_CTR_detail_CloseSession();
     if ((temp_v1 != -0x375f3010 && temp_v1 != -0x1f5f33f8) && temp_v1 != -0x375f33fe) break;
     FUN_002bb150(10000000,0);
   }

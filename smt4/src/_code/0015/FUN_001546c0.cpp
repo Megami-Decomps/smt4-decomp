@@ -11,7 +11,7 @@ int FUN_00157938(...);
 int FUN_0015799c(...);
 int FUN_0015821c(...);
 int FUN_00158a10(...);
-int FUN_002a215c(...);
+int linkListEraseObject(...);
 int FUN_002a2164(...);
 int nw_snd_internal_TaskManager_AppendTask(...);
 int nw_snd_internal_driver_HardwareManager_ClearEffect(...);
@@ -97,7 +97,7 @@ extern int FUN_001584f8(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001588c8. */
 /* Supplied declaration required: FUN_00158988. */
 /* Supplied declaration required: FUN_00158a10. */
-/* Supplied declaration required: FUN_002a215c. */
+/* Supplied declaration required: linkListEraseObject. */
 /* Supplied declaration required: FUN_002a2164. */
 extern unsigned int FUN_002a2174(void);
 extern unsigned int FUN_002baf30(void);
@@ -291,7 +291,7 @@ void FUN_001546c0(int *param_1)
       break;
     case 0x32:
       temp_v1 = FUN_002a2174();
-      FUN_002a215c(temp_v1,param_1[4]);
+      linkListEraseObject(temp_v1,param_1[4]);
       break;
     case 0x33:
       FUN_0015799c(&DAT_004ea168,*(unsigned char *)(param_1 + 4),param_1[5]);

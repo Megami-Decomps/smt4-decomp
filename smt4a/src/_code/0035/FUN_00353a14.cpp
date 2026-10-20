@@ -4,16 +4,16 @@
 
 extern "C" {
 
-int FUN_001aea28(unsigned int);
+int ptrListRemoveClearOwner(unsigned int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 
-/* Supplied declaration required: FUN_001aea28. */
+/* Supplied declaration required: ptrListRemoveClearOwner. */
 
 
 void FUN_00353a14(int *param_1)
@@ -24,15 +24,15 @@ void FUN_00353a14(int *param_1)
   
   temp_v0 = *param_1;
   if (*(int *)(*(int *)(temp_v0 + 0xcc9c) + 4) != 0) {
-    FUN_001aea28(DAT_0056fcc0);
+    ptrListRemoveClearOwner(g_handleRegistry);
   }
   if (*(int *)(*(int *)(temp_v0 + 0xccc0) + 4) != 0) {
-    FUN_001aea28(DAT_0056fcc0);
+    ptrListRemoveClearOwner(g_handleRegistry);
   }
   if (*(int *)(*(int *)(temp_v0 + 0xcce4) + 4) == 0) {
     return;
   }
-  FUN_001aea28(DAT_0056fcc0);
+  ptrListRemoveClearOwner(g_handleRegistry);
   return;
 }
 

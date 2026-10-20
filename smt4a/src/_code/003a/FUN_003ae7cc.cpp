@@ -7,7 +7,7 @@ extern "C" {
 int jobGetWork(void);
 int FUN_00411458(int);
 
-extern int DAT_00573c50; /* 0x573c50 */
+extern int g_btlPartnerAttack; /* 0x573c50 */
 
 extern int btlGetMainState(unsigned int *);
 /* Supplied declaration required: jobGetWork. */
@@ -22,8 +22,8 @@ unsigned int FUN_003ae7cc(void)
   int temp_v1;
   
   jobGetWork();
-  temp_v0 = DAT_00573c50;
-  if ((DAT_00573c50 != 0) && (temp_v1 = btlGetMainState((unsigned int *)&DAT_00573c50), temp_v1 != 0)) {
+  temp_v0 = g_btlPartnerAttack;
+  if ((g_btlPartnerAttack != 0) && (temp_v1 = btlGetMainState((unsigned int *)&g_btlPartnerAttack), temp_v1 != 0)) {
     FUN_00411458(temp_v0);
   }
   return 0;

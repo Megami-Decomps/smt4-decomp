@@ -4,20 +4,20 @@
 
 extern "C" {
 
-int FUN_002e6dd0(int, int);
+int rt_aeabi_memclr(int, int);
 int FUN_003e48dc(int);
 int FUN_003e4e4c(int);
 int FUN_003e503c(void);
-int FUN_003fd63c(int, int);
+int gameFlagSetValue(int, int);
 
-extern int FUN_0014af84(void);
+extern int gameDataBlocksGetSaveData(void);
 extern int saveSlotFindById(short);
 extern int FUN_00187168(void);
-/* Supplied declaration required: FUN_002e6dd0. */
+/* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: FUN_003e48dc. */
 /* Supplied declaration required: FUN_003e4e4c. */
 /* Supplied declaration required: FUN_003e503c. */
-/* Supplied declaration required: FUN_003fd63c. */
+/* Supplied declaration required: gameFlagSetValue. */
 
 
 unsigned int FUN_003a37f0(void)
@@ -31,8 +31,8 @@ unsigned int FUN_003a37f0(void)
   unsigned int temp_v4;
   int temp_v5;
   
-  temp_v1 = FUN_0014af84();
-  FUN_002e6dd0(temp_v1 + 0x29814,0x18);
+  temp_v1 = gameDataBlocksGetSaveData();
+  rt_aeabi_memclr(temp_v1 + 0x29814,0x18);
   temp_v5 = 0;
   temp_v4 = 0;
   do {
@@ -55,7 +55,7 @@ unsigned int FUN_003a37f0(void)
     }
     temp_v5 = temp_v5 + 1;
   } while (temp_v5 < 0xc);
-  FUN_003fd63c(0x4f8,1);
+  gameFlagSetValue(0x4f8,1);
   return 1;
 }
 

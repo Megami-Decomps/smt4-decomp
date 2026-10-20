@@ -24,7 +24,7 @@ extern unsigned int DAT_0057116c; /* 0x57116c */
 extern unsigned int DAT_005711b8; /* 0x5711b8 */
 extern unsigned int DAT_005711bc; /* 0x5711bc */
 
-extern int FUN_001ab888(void);
+extern int gameGetSlotTable(void);
 extern int FUN_003eade4(int);
 /* Supplied declaration required: FUN_004e0114. */
 /* Supplied declaration required: FUN_004fcde0. */
@@ -144,7 +144,7 @@ LAB_004eac84:
       if ((-1 < (short)temp_v12[0x5b]) &&
          (((int)temp_v6 < 0 ||
           (((*param_2 & 0x4000) == 0 &&
-           (temp_v4 = FUN_001ab888(),
+           (temp_v4 = gameGetSlotTable(),
            (int)*(char *)(temp_v4 + temp_v6 + 0x1c88) == (int)(short)temp_v12[0x5b])))))) {
         FUN_004e0114(param_1,param_2,(int)*(short *)(param_2[9] + 0x6a),param_6,0xf,0x14);
         return 1;

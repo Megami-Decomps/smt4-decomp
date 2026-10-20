@@ -9,11 +9,11 @@ int FUN_002271e8(...);
 int FUN_00227200(void);
 int FUN_0025628c(unsigned int);
 int asdLoadFileSetUseRawPaths(...);
-int FUN_0025c2ec(...);
+int asdListBoxSetByteValue(...);
 int FUN_00262914(...);
 int asdListBoxCreate(...);
 int FUN_0027da30(...);
-int FUN_002bf694(...);
+int libc_strcpy(...);
 int jobStop(...);
 int memClear(...);
 int FUN_003d88dc(unsigned int *, int);
@@ -34,18 +34,18 @@ extern unsigned int *DAT_00435ce8; /* 0x435ce8 */
 /* Supplied declaration required: asdListBoxAddItem. */
 /* Supplied declaration required: FUN_002271e8. */
 /* Supplied declaration required: FUN_00227200. */
-extern unsigned int *FUN_0022a344(unsigned int, unsigned int);
-extern unsigned int *FUN_0022a464(unsigned int, unsigned int);
+extern unsigned int *asdListBoxGetItemText(unsigned int, unsigned int);
+extern unsigned int *asdListBoxGetItemValuePtr(unsigned int, unsigned int);
 extern unsigned int FUN_00240448(int);
 /* Supplied declaration required: FUN_0025628c. */
 /* Supplied declaration required: asdLoadFileSetUseRawPaths. */
 extern unsigned int asdLoadFileGetUseRawPaths(void);
-/* Supplied declaration required: FUN_0025c2ec. */
+/* Supplied declaration required: asdListBoxSetByteValue. */
 /* Supplied declaration required: FUN_00262914. */
 /* Supplied declaration required: asdListBoxCreate. */
 /* Supplied declaration required: FUN_0027da30. */
-/* Supplied declaration required: FUN_002bf694. */
-extern int FUN_002bfde4(unsigned int);
+/* Supplied declaration required: libc_strcpy. */
+extern int padIsButtonPressed(unsigned int);
 extern int jobGetWork(void);
 /* Supplied declaration required: jobStop. */
 /* Supplied declaration required: memClear. */
@@ -120,13 +120,13 @@ unsigned int FUN_001e4a50(void)
     asdListBoxAddItem(puVar7[3],0x400658);
     asdListBoxAddItem(puVar7[3],0x400650);
     asdListBoxAddItem(puVar7[3],0x400648);
-    FUN_0025c2ec(puVar7[3],1);
+    asdListBoxSetByteValue(puVar7[3],1);
     temp_v2 = 1;
     break;
   case 1:
-    temp_v4 = FUN_002bfde4(0);
+    temp_v4 = padIsButtonPressed(0);
     if (temp_v4 == 0) {
-      temp_v1 = FUN_002bfde4(1);
+      temp_v1 = padIsButtonPressed(1);
       if (temp_v1 == 0) {
         return 0;
       }
@@ -149,7 +149,7 @@ unsigned int FUN_001e4a50(void)
     }
     break;
   case 2:
-    temp_v4 = FUN_002bfde4(0);
+    temp_v4 = padIsButtonPressed(0);
     if (temp_v4 != 0) {
       temp_v4 = FUN_0025628c(puVar7[3]);
       jobStop(puVar7[3],0);
@@ -162,7 +162,7 @@ unsigned int FUN_001e4a50(void)
       if (temp_v4 == 1) goto code_r0x003d9244;
     }
     else {
-      temp_v1 = FUN_002bfde4(1);
+      temp_v1 = padIsButtonPressed(1);
       if (temp_v1 == 0) {
         return 0;
       }
@@ -173,9 +173,9 @@ unsigned int FUN_001e4a50(void)
     temp_v2 = 0;
     break;
   case 3:
-    temp_v4 = FUN_002bfde4(0);
+    temp_v4 = padIsButtonPressed(0);
     if (temp_v4 == 0) {
-      temp_v4 = FUN_002bfde4(1);
+      temp_v4 = padIsButtonPressed(1);
       if (temp_v4 == 0) {
         FUN_003d88dc(puVar7,temp_v1);
         return 0;
@@ -187,7 +187,7 @@ unsigned int FUN_001e4a50(void)
     temp_v2 = 7;
     break;
   case 4:
-    temp_v4 = FUN_002bfde4(0);
+    temp_v4 = padIsButtonPressed(0);
     if (temp_v4 != 0) {
       temp_v3 = FUN_0025628c(puVar7[3]);
       jobStop(puVar7[3],0);
@@ -199,7 +199,7 @@ unsigned int FUN_001e4a50(void)
       }
     }
     else {
-      temp_v4 = FUN_002bfde4(1);
+      temp_v4 = padIsButtonPressed(1);
       if (temp_v4 == 0) {
         return 0;
       }
@@ -216,13 +216,13 @@ code_r0x003d9140:
     FUN_00262914(puVar7[3],"MODE");
     asdListBoxAddItem(puVar7[3],"슌쪕튕垏");
     asdListBoxAddItem(puVar7[3],"䪃膃覃튕垏");
-    FUN_0025c2ec(puVar7[3],1);
+    asdListBoxSetByteValue(puVar7[3],1);
     temp_v2 = 2;
     break;
   case 6:
     memClear(temp_v7,0x80);
     temp_v2 = FUN_00240448(temp_v1);
-    FUN_002bf694(temp_v7,temp_v2);
+    libc_strcpy(temp_v7,temp_v2);
     temp_v2 = asdLoadFileGetUseRawPaths();
     asdLoadFileSetUseRawPaths(1);
     temp_v4 = FUN_002c5c04(temp_v7);
@@ -233,17 +233,17 @@ code_r0x003d9140:
     *puVar7 = 0;
     return 0;
   case 7:
-    temp_v4 = FUN_002bfde4(1);
+    temp_v4 = padIsButtonPressed(1);
     if (temp_v4 == 0) {
       temp_v2 = puVar7[3];
       temp_v4 = *(int *)(temp_v1 + 0x1e98) + *(short *)(puVar7 + 4) * 0x114;
       FUN_0027da30(temp_v1);
       temp_v1 = func_0x0033a5ec(temp_v1,(int)*(short *)(puVar7 + 4));
-      puVar7 = (unsigned int *)FUN_0022a344(temp_v2,1);
+      puVar7 = (unsigned int *)asdListBoxGetItemText(temp_v2,1);
       *(unsigned int *)(temp_v4 + 0xc) = *puVar7;
-      puVar7 = (unsigned int *)FUN_0022a344(temp_v2,2);
+      puVar7 = (unsigned int *)asdListBoxGetItemText(temp_v2,2);
       *(unsigned int *)(temp_v4 + 0x10) = *puVar7;
-      puVar7 = (unsigned int *)FUN_0022a344(temp_v2,3);
+      puVar7 = (unsigned int *)asdListBoxGetItemText(temp_v2,3);
       *(unsigned int *)(temp_v4 + 0x14) = *puVar7;
       *(unsigned int *)(temp_v1 + 0xc) = *(unsigned int *)(temp_v4 + 0xc);
       *(unsigned int *)(temp_v1 + 0x10) = *(unsigned int *)(temp_v4 + 0x10);
@@ -255,7 +255,7 @@ code_r0x003d9140:
     temp_v2 = 3;
     break;
   case 8:
-    temp_v4 = FUN_002bfde4(1);
+    temp_v4 = padIsButtonPressed(1);
     if (temp_v4 == 0) {
       temp_v0 = *(short *)(puVar7 + 5);
       temp_v2 = puVar7[3];
@@ -263,7 +263,7 @@ code_r0x003d9140:
         if (temp_v0 != 2) {
           return 0;
         }
-        puVar7 = (unsigned int *)FUN_0022a464(temp_v2,0);
+        puVar7 = (unsigned int *)asdListBoxGetItemValuePtr(temp_v2,0);
         g_btlMain[9] = *puVar7;
         return 0;
       }
@@ -275,11 +275,11 @@ code_r0x003d9140:
         puVar7 = (unsigned int *)(temp_v1 + 0x1eb0);
         puVar11 = g_btlMain + 6;
       }
-      puVar6 = (unsigned int *)FUN_0022a344(temp_v2,0);
+      puVar6 = (unsigned int *)asdListBoxGetItemText(temp_v2,0);
       *puVar11 = *puVar6;
-      puVar6 = (unsigned int *)FUN_0022a344(temp_v2,1);
+      puVar6 = (unsigned int *)asdListBoxGetItemText(temp_v2,1);
       puVar11[1] = *puVar6;
-      puVar6 = (unsigned int *)FUN_0022a344(temp_v2,2);
+      puVar6 = (unsigned int *)asdListBoxGetItemText(temp_v2,2);
       puVar11[2] = *puVar6;
       temp_v2 = puVar11[1];
       temp_v6 = puVar11[2];
@@ -307,7 +307,7 @@ code_r0x003d9244:
     asdListBoxAddItem(puVar7[3],0x4005a0);
     asdListBoxAddItem(puVar7[3],0x400598);
     asdListBoxAddItem(puVar7[3],&DAT_00400588);
-    FUN_0025c2ec(puVar7[3],1);
+    asdListBoxSetByteValue(puVar7[3],1);
     *puVar7 = 4;
     return 0;
   case 9:

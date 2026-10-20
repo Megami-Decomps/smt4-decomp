@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_002f8242(void);
 
-extern int FUN_002ede60(unsigned int, unsigned int);
-extern unsigned int *FUN_002f8236(int);
+extern int onlineSockAddrConstruct2(unsigned int, unsigned int);
+extern unsigned int *clearWords4(int);
 /* Supplied declaration required: FUN_002f8242. */
 
 
@@ -18,8 +18,8 @@ unsigned int * FUN_002fff64(unsigned int param_1,unsigned int param_2,unsigned i
   int temp_v0;
   unsigned int *puVar2;
   
-  temp_v0 = FUN_002ede60(param_1,param_3);
-  puVar2 = (unsigned int *)FUN_002f8236(temp_v0 + 0x20);
+  temp_v0 = onlineSockAddrConstruct2(param_1,param_3);
+  puVar2 = (unsigned int *)clearWords4(temp_v0 + 0x20);
   *puVar2 = param_2;
   FUN_002f8242();
   return puVar2 + -8;

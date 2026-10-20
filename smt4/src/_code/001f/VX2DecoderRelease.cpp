@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_002580c4(u32 buffer);
+int mobiclipAllocatorFree(u32 buffer);
 
 typedef struct VX2Decoder {
     /* 0x0 */ u32 buffer;
@@ -14,12 +14,12 @@ void VX2DecoderRelease(VX2Decoder *decoder)
 {
     u32 i;
 
-    FUN_002580c4(decoder->buffer);
+    mobiclipAllocatorFree(decoder->buffer);
     if (decoder->planes != NULL) {
         for (i = 0; i < decoder->planeCount; i++) {
-            FUN_002580c4(decoder->planes[i]);
+            mobiclipAllocatorFree(decoder->planes[i]);
         }
-        FUN_002580c4((u32)decoder->planes);
+        mobiclipAllocatorFree((u32)decoder->planes);
         return;
     }
 }

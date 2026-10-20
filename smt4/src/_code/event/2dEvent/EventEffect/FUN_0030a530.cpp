@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002a5ed0(...);
+int asdTMTexTableLoadEntryAsync(...);
 int asdMemAlloc(...);
 int taskCreateDraw(...);
 int asdProcessCreateSimple(...);
@@ -23,13 +23,13 @@ extern int FUN_00222520(...); /* 0x222520 */
 extern unsigned char LAB_0030a6dc; /* 0x30a6dc */
 extern unsigned char LAB_0030a6f0; /* 0x30a6f0 */
 extern unsigned char LAB_0030a708; /* 0x30a708 */
-extern unsigned int *DAT_0043dee8; /* 0x43dee8 */
+extern unsigned int *g_eventEffect; /* 0x43dee8 */
 extern unsigned int DAT_0043df00; /* 0x43df00 */
 extern unsigned int DAT_0043df04; /* 0x43df04 */
 
 extern int FUN_0024bb10(unsigned int);
-/* Supplied declaration required: FUN_002a5ed0. */
-extern int FUN_002a60b4(unsigned int, unsigned int);
+/* Supplied declaration required: asdTMTexTableLoadEntryAsync. */
+extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdProcessCreateSimple. */
@@ -45,14 +45,14 @@ void FUN_0030a530(void)
   int temp_v0;
   int temp_v1;
   
-  if (DAT_0043dee8 == (unsigned int *)0x0) {
+  if (g_eventEffect == (unsigned int *)0x0) {
     puVar1 = (unsigned int *)0x100;
     asdMemAlloc(0x100,0x100,0,0x1c,1);
-    DAT_0043dee8 = puVar1;
+    g_eventEffect = puVar1;
   }
-  puVar1 = DAT_0043dee8;
+  puVar1 = g_eventEffect;
   temp_v1 = 0;
-  *DAT_0043dee8 = 0;
+  *g_eventEffect = 0;
   puVar1[1] = 0;
   puVar1[2] = 0;
   puVar1[3] = 0;
@@ -75,9 +75,9 @@ void FUN_0030a530(void)
       asdTMTexTableLoadTmx((&DAT_0043df00)[temp_v1 * 3],0);
       *(unsigned char *)(temp_v1 * 0xc + 0x43df09) = 1;
     }
-    temp_v0 = FUN_002a60b4((&DAT_0043df00)[temp_v1 * 3],(&DAT_0043df04)[temp_v1 * 3]);
+    temp_v0 = asdTMTexTableNodeIsLoaded((&DAT_0043df00)[temp_v1 * 3],(&DAT_0043df04)[temp_v1 * 3]);
     if (temp_v0 == 0) {
-      FUN_002a5ed0((&DAT_0043df00)[temp_v1 * 3],(&DAT_0043df04)[temp_v1 * 3]);
+      asdTMTexTableLoadEntryAsync((&DAT_0043df00)[temp_v1 * 3],(&DAT_0043df04)[temp_v1 * 3]);
       *(unsigned char *)(temp_v1 * 0xc + 0x43df08) = 1;
     }
     temp_v1 = temp_v1 + 1;

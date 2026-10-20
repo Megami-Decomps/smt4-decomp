@@ -4,7 +4,7 @@ extern "C" {
 
 extern void asdMemFree(void *ptr);
 extern void scrScriptProcessDestroy(u32 process);
-extern void FUN_0037b450(void);
+extern void campButtonHelpRelease(void);
 
 /* Frees the two buffers and the script process held by the object. */
 void scriptHolderFree3(ScriptHolder *holder)

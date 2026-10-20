@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002a87e8(void);
 int FUN_002bee58(int, int);
 
-extern unsigned char DAT_0043da28; /* 0x43da28 */
+extern unsigned char g_buttonHelp; /* 0x43da28 */
 
 /* Supplied declaration required: FUN_002a87e8. */
 /* Supplied declaration required: FUN_002bee58. */
@@ -22,7 +22,7 @@ void FUN_0026a704(void)
   int temp_v2;
   int temp_v3;
   
-  temp_v1 = (*(int *)((unsigned char *)&DAT_0043da28 + 0x4));
+  temp_v1 = (*(int *)((unsigned char *)&g_buttonHelp + 0x4));
   temp_v2 = 0;
   do {
     FUN_002bee58(temp_v1 + temp_v2 * 0x8c + 0x34,1);
@@ -38,10 +38,10 @@ void FUN_0026a704(void)
       }
       FUN_002a87e8();
     }
-    temp_v3 = (*(int *)((unsigned char *)&DAT_0043da28 + 0x4));
+    temp_v3 = (*(int *)((unsigned char *)&g_buttonHelp + 0x4));
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 6);
-  *(unsigned int *)((*(int *)((unsigned char *)&DAT_0043da28 + 0x4)) + 0xc) = 0;
+  *(unsigned int *)((*(int *)((unsigned char *)&g_buttonHelp + 0x4)) + 0xc) = 0;
   *(unsigned int *)(temp_v3 + 0x10) = 3;
   return;
 }

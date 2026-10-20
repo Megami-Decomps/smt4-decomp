@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-extern int DAT_0057f268; /* 0x57f268 */
+extern int g_partyPanel; /* 0x57f268 */
 
 /* Supplied declaration required: FUN_0020b718. */
 /* Supplied declaration required: FUN_0022e774. */
@@ -31,9 +31,9 @@ void FUN_002a5cf4(void)
   char temp_v0;
   int temp_v1;
   
-  temp_v1 = DAT_0057f268;
-  if (DAT_0057f268 != 0) {
-    temp_v0 = *(char *)(DAT_0057f268 + 0x9b4);
+  temp_v1 = g_partyPanel;
+  if (g_partyPanel != 0) {
+    temp_v0 = *(char *)(g_partyPanel + 0x9b4);
     if ((temp_v0 != '\f' && temp_v0 != '\x04') &&
        ((temp_v0 != '\x0f' && temp_v0 != '\x11') && temp_v0 != '\x13')) {
       FUN_00230ac0(7,0xffffffff,0);

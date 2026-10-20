@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_002a3188(int, int *);
+int slistPushFront(int, int *);
 int FUN_0037ead4(int *, int *);
 int nw_snd_internal_driver_Voice_Pause(int, unsigned int);
 int nw_ut_internal_LinkListImpl_erase_2B743C(int, int *);
 
 typedef int romwright_code(...);
-/* Supplied declaration required: FUN_002a3188. */
+/* Supplied declaration required: slistPushFront. */
 /* Supplied declaration required: FUN_0037ead4. */
 /* Supplied declaration required: nw_snd_internal_driver_Voice_Pause. */
 /* Supplied declaration required: nw_ut_internal_LinkListImpl_erase_2B743C. */
@@ -38,7 +38,7 @@ void FUN_0037ef24(int *param_1)
       nw_ut_internal_LinkListImpl_erase_2B743C(temp_v2 + 0x80,piVar4);
       if (piVar2 != (int *)0x0) {
         (**(romwright_code **)*piVar2)(piVar2);
-        FUN_002a3188(temp_v2 + 0x8c,piVar2);
+        slistPushFront(temp_v2 + 0x8c,piVar2);
       }
       piVar4 = piVar5;
     } while (piVar5 != (int *)(temp_v2 + 0x84));

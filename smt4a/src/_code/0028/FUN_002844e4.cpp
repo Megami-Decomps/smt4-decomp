@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00165088(int, int);
 
-extern unsigned char DAT_0057f588; /* 0x57f588 */
+extern unsigned char g_messageMain; /* 0x57f588 */
 
 /* Supplied declaration required: FUN_00165088. */
 
@@ -17,9 +17,9 @@ void FUN_002844e4(void)
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = (*(int *)((unsigned char *)&DAT_0057f588 + 0x4));
-  if (*(char *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x4)) + 8) != '\0' && (*(int *)((unsigned char *)&DAT_0057f588 + 0x4)) != 0) {
-    FUN_00165088((*(int *)((unsigned char *)&DAT_0057f588 + 0x4)),*(unsigned char *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x4)) + 9));
+  temp_v0 = (*(int *)((unsigned char *)&g_messageMain + 0x4));
+  if (*(char *)((*(int *)((unsigned char *)&g_messageMain + 0x4)) + 8) != '\0' && (*(int *)((unsigned char *)&g_messageMain + 0x4)) != 0) {
+    FUN_00165088((*(int *)((unsigned char *)&g_messageMain + 0x4)),*(unsigned char *)((*(int *)((unsigned char *)&g_messageMain + 0x4)) + 9));
     *(unsigned char *)(temp_v0 + 8) = 3;
     *(unsigned char *)(temp_v0 + 0x35) = 0;
   }

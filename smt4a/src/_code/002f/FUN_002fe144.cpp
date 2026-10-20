@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: dataTable04FindById. */
 extern short FUN_003df57c(unsigned short, unsigned int);
 
 
@@ -24,9 +24,9 @@ int FUN_002fe144(unsigned short *param_1,unsigned short *param_2)
     return 0;
   }
   if (*param_2 != 0) {
-    FUN_001aba54();
+    dataTable04FindById();
     temp_v3 = (unsigned int)*param_2;
-    FUN_001aba54();
+    dataTable04FindById();
     if (temp_v2 != 0) {
       if (temp_v3 == 0) {
         return 0;

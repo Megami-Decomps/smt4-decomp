@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6e14(void);
+int asdOperatorDeleteArray(void);
 int FUN_002e6e34(int *, int);
 int FUN_002e6e5c(int *);
 int FUN_002e9f00(unsigned int *, int);
@@ -13,7 +13,7 @@ int FUN_00300820(unsigned int *, int);
 
 extern unsigned char DAT_0055970c; /* 0x55970c */
 
-/* Supplied declaration required: FUN_002e6e14. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
 extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
@@ -46,7 +46,7 @@ void FUN_002fb028(unsigned int *param_1,unsigned int param_2,unsigned int param_
   FUN_00300820(param_1,0);
   for (temp_v0 = param_1[0x18]; temp_v0 != param_1[0x19]; temp_v0 = temp_v0 + 4) {
   }
-  FUN_002e6e14();
+  asdOperatorDeleteArray();
   FUN_002ea00c(param_1);
   return;
 }

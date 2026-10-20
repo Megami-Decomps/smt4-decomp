@@ -2,12 +2,12 @@
 
 extern "C" {
 
-void FUN_002e9974(void);
+void onlineUrlCopy(void);
 
-/* Runs FUN_002e9974 and returns `object`. */
+/* Runs onlineUrlCopy and returns `object`. */
 void *FUN_002ee5b8(void *object)
 {
-    FUN_002e9974();
+    onlineUrlCopy();
     return object;
 }
 

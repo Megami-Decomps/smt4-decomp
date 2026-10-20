@@ -4,9 +4,9 @@
 
 extern "C" {
 
-extern int FUN_002a8740(int);
-extern int FUN_002a8764(void);
-extern int FUN_002b63ac(void);
+extern int gameGetUnitRecord(int);
+extern int gameGetSlotTable(void);
+extern int gameGetPlayerData(void);
 extern int gameGetOptions(void);
 
 
@@ -26,7 +26,7 @@ void FUN_0028da40(int param_1,int param_2,int param_3)
     *(unsigned short *)(temp_v0 + 0x38f4) = 0xffff;
   }
   if (param_2 == 0) {
-    temp_v0 = FUN_002b63ac();
+    temp_v0 = gameGetPlayerData();
     *(unsigned short *)(param_1 + 0x38d6) = *(unsigned short *)(temp_v0 + 0x2a);
     *(unsigned short *)(param_1 + 0x38e0) = *(unsigned short *)(temp_v0 + 0x2c);
     *(unsigned short *)(param_1 + 0x38ea) = (unsigned short)*(unsigned char *)(temp_v0 + 0x76);
@@ -45,7 +45,7 @@ void FUN_0028da40(int param_1,int param_2,int param_3)
     *(unsigned short *)(param_1 + 0x38fc) = 0xffff;
     return;
   }
-  temp_v1 = FUN_002a8764();
+  temp_v1 = gameGetSlotTable();
   if (0 < *(int *)(param_1 + param_2 * 4 + 0x340c)) {
     if (param_3 != 0) {
       *(short *)(temp_v0 + 0x38f4) = (short)*(char *)(temp_v1 + param_2 + 0x9107);
@@ -53,7 +53,7 @@ void FUN_0028da40(int param_1,int param_2,int param_3)
     param_1 = param_1 + param_2;
     puVar4 = (unsigned char *)(param_1 + 0x38d1);
     if (*(short *)(temp_v0 + 0x38f4) >= 0) {
-      temp_v2 = FUN_002a8740((int)*(short *)(temp_v0 + 0x38f4));
+      temp_v2 = gameGetUnitRecord((int)*(short *)(temp_v0 + 0x38f4));
       if ((*(unsigned short *)(temp_v2 + 0x44) & 0x400) == 0) {
         *(unsigned short *)(temp_v0 + 0x38d6) = *(unsigned short *)(temp_v2 + 0x2a);
         *(unsigned short *)(temp_v0 + 0x38e0) = *(unsigned short *)(temp_v2 + 0x2c);

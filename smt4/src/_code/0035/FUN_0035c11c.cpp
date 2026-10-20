@@ -21,7 +21,7 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_00238998. */
-extern unsigned int FUN_002b5a48(fn_0035c11c_arg2 *);
+extern unsigned int wstrlenU16(fn_0035c11c_arg2 *);
 
 
 unsigned int FUN_0035c11c(unsigned int *param_1,int param_2,fn_0035c11c_arg2 *param_3,int param_4)
@@ -39,7 +39,7 @@ unsigned int FUN_0035c11c(unsigned int *param_1,int param_2,fn_0035c11c_arg2 *pa
   
   *param_1 = (unsigned int)param_3;
   temp_v7 = param_4;
-  temp_v1 = FUN_002b5a48(param_3);
+  temp_v1 = wstrlenU16(param_3);
   param_1[1] = temp_v1;
   temp_v7 = *(int *)(param_2 + 4);
   temp_v0 = *(char *)(temp_v7 + 8);

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00199808(int);
 int FUN_002a60cc(...);
-int FUN_002ae898(int);
+int asdTMTexTableReleaseNode(int);
 int FUN_002bee58(int, int);
 int FUN_002bf818(int);
 int FUN_002e0da0(int);
@@ -18,9 +18,9 @@ extern int g_btlTalkBustUp; /* 0x434210 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00199808. */
-extern int FUN_002a60b4(unsigned int, unsigned int);
+extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002a60cc. */
-/* Supplied declaration required: FUN_002ae898. */
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
 /* Supplied declaration required: FUN_002bee58. */
 /* Supplied declaration required: FUN_002bf818. */
 extern int randNextInRange(unsigned int);
@@ -207,7 +207,7 @@ unsigned int FUN_00206528(void)
         }
         else if (g_btlTalkBustUp != 0) {
           if (-1 < *(int *)(g_btlTalkBustUp + 0x2f8)) {
-            FUN_002ae898(0x18);
+            asdTMTexTableReleaseNode(0x18);
             if (g_btlTalkBustUp != 0) {
               *(unsigned char *)(g_btlTalkBustUp + 0x2f4) = 0;
             }
@@ -221,7 +221,7 @@ unsigned int FUN_00206528(void)
     }
   }
   else {
-    temp_v1 = FUN_002a60b4(0x18,*(unsigned int *)(g_btlTalkBustUp + 0x2f8));
+    temp_v1 = asdTMTexTableNodeIsLoaded(0x18,*(unsigned int *)(g_btlTalkBustUp + 0x2f8));
     if (temp_v1 != 0) {
       FUN_0032c3fc(temp_v0);
       *(unsigned int *)(temp_v0 + 0x2e8) = 2;

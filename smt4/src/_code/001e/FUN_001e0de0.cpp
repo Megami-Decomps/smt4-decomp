@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002b8da0(...);
+int pairSetFirstResetSecond(...);
 int FUN_002bee58(...);
 int FUN_002bf810(int);
 
-/* Supplied declaration required: FUN_002b8da0. */
+/* Supplied declaration required: pairSetFirstResetSecond. */
 /* Supplied declaration required: FUN_002bee58. */
 /* Supplied declaration required: FUN_002bf810. */
 
@@ -50,7 +50,7 @@ void FUN_001e0de0(int param_1,int param_2,int param_3)
         else {
           temp_v1 = 8;
         }
-        FUN_002b8da0(param_1 + (((temp_v2 - *(short *)(param_1 + 0x218e)) - (int)puVar3) + 0x13) *
+        pairSetFirstResetSecond(param_1 + (((temp_v2 - *(short *)(param_1 + 0x218e)) - (int)puVar3) + 0x13) *
                                0x8c + 0x20,temp_v1);
         temp_v3 = param_1 + (((temp_v2 - *(short *)(param_1 + 0x218e)) - (int)puVar3) + 0x31) * 0x8c;
         FUN_002bee58(temp_v3 + 0x20,10);
@@ -58,7 +58,7 @@ void FUN_001e0de0(int param_1,int param_2,int param_3)
         if (*(int *)(param_1 + 0x2184) != 0) {
           temp_v1 = 0xfa7;
         }
-        FUN_002b8da0(temp_v3 + 0x20,temp_v1);
+        pairSetFirstResetSecond(temp_v3 + 0x20,temp_v1);
         puVar3 = (unsigned int *)((int)puVar3 + 1);
       } while ((int)puVar3 < (int)*(short *)(param_1 + 0x2192));
     }
@@ -76,20 +76,20 @@ void FUN_001e0de0(int param_1,int param_2,int param_3)
       FUN_002bee58(param_1 + ((int)*(short *)(param_1 + 0x218c) + (int)puVar3) * 0x8c + 0x598,2);
       temp_v3 = param_1 + ((int)*(short *)(param_1 + 0x218c) + (int)puVar3) * 0x8c + 0x20;
       if (*(int *)(param_1 + 0x2184) != 0) {
-        FUN_002b8da0(temp_v3,1);
-        FUN_002b8da0(param_1 + ((int)*(short *)(param_1 + 0x218c) + (int)puVar3) * 0x8c + 0xb10,8);
-        FUN_002b8da0(param_1 + ((int)*(short *)(param_1 + 0x218c) + (int)puVar3) * 0x8c + 0x1088,3);
+        pairSetFirstResetSecond(temp_v3,1);
+        pairSetFirstResetSecond(param_1 + ((int)*(short *)(param_1 + 0x218c) + (int)puVar3) * 0x8c + 0xb10,8);
+        pairSetFirstResetSecond(param_1 + ((int)*(short *)(param_1 + 0x218c) + (int)puVar3) * 0x8c + 0x1088,3);
         temp_v0 = *(short *)(param_1 + 0x218c);
         temp_v3 = temp_v2;
       }
       else {
-        FUN_002b8da0(temp_v3,0);
-        FUN_002b8da0(param_1 + ((int)*(short *)(param_1 + 0x218c) + (int)puVar3) * 0x8c + 0xb10,7);
-        FUN_002b8da0(param_1 + ((int)*(short *)(param_1 + 0x218c) + (int)puVar3) * 0x8c + 0x1088,2);
+        pairSetFirstResetSecond(temp_v3,0);
+        pairSetFirstResetSecond(param_1 + ((int)*(short *)(param_1 + 0x218c) + (int)puVar3) * 0x8c + 0xb10,7);
+        pairSetFirstResetSecond(param_1 + ((int)*(short *)(param_1 + 0x218c) + (int)puVar3) * 0x8c + 0x1088,2);
         temp_v0 = *(short *)(param_1 + 0x218c);
         temp_v3 = 4000;
       }
-      FUN_002b8da0(param_1 + ((int)temp_v0 + (int)puVar3) * 0x8c + 0x1600,temp_v3);
+      pairSetFirstResetSecond(param_1 + ((int)temp_v0 + (int)puVar3) * 0x8c + 0x1600,temp_v3);
       puVar3 = (unsigned int *)((int)puVar3 + 1);
     } while ((int)puVar3 < (int)*(short *)(param_1 + 0x2190));
   }

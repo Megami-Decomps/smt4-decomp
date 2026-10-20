@@ -13,7 +13,7 @@ extern unsigned char DAT_00559ee4; /* 0x559ee4 */
 
 /* Supplied declaration required: FUN_00122024. */
 /* Supplied declaration required: FUN_0012211c. */
-extern int FUN_002e9520(unsigned int *, int);
+extern int onlineStringCopyConstruct(unsigned int *, int);
 extern int FUN_00303146(int, int);
 /* Supplied declaration required: FUN_0030382c. */
 /* Supplied declaration required: FUN_003038a0. */
@@ -33,7 +33,7 @@ int FUN_00117a90(unsigned int *param_1,int param_2)
   param_1[2] = temp_v1;
   param_1[4] = *(unsigned int *)(param_2 + 0x10);
   param_1[5] = *(unsigned int *)(param_2 + 0x14);
-  temp_v0 = FUN_002e9520(param_1 + 6,param_2 + 0x18);
+  temp_v0 = onlineStringCopyConstruct(param_1 + 6,param_2 + 0x18);
   *(unsigned short *)(temp_v0 + 8) = *(unsigned short *)(param_2 + 0x20);
   temp_v0 = temp_v0 + 0xc;
   FUN_00122024(temp_v0,param_2 + 0x24);

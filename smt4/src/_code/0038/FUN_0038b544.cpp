@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_00100c74(unsigned char [131], unsigned int, int);
 int FUN_00147390(void);
-int FUN_002c3944(int, unsigned int);
-int FUN_002c52f8(void);
+int rt_memclr(int, unsigned int);
+int asdFatalError(void);
 int FUN_0035a404(int, int *, unsigned char *, int *);
 int FUN_00361678(unsigned char *, unsigned int [2], unsigned char *, unsigned int *);
 int FUN_003617bc(void);
@@ -39,8 +39,8 @@ extern unsigned char DAT_00477fff; /* 0x477fff */
 
 /* Supplied declaration required: FUN_00100c74. */
 /* Supplied declaration required: FUN_00147390. */
-/* Supplied declaration required: FUN_002c3944. */
-/* Supplied declaration required: FUN_002c52f8. */
+/* Supplied declaration required: rt_memclr. */
+/* Supplied declaration required: asdFatalError. */
 /* Supplied declaration required: FUN_0035a404. */
 /* Supplied declaration required: FUN_00361678. */
 /* Supplied declaration required: FUN_003617bc. */
@@ -108,12 +108,12 @@ FUN_0038b544(unsigned int param_1,int param_2,unsigned int param_3,unsigned int 
     temp_v0 = 0;
     FUN_0035a404(0,&temp_v2,&DAT_00477000 + temp_v17 * 2,&temp_v1);
     if (temp_v0 < 0) {
-      FUN_002c52f8();
+      asdFatalError();
     }
-    FUN_002c3944(param_2,param_4);
+    rt_memclr(param_2,param_4);
     FUN_0035a404(param_2,&temp_v2,&DAT_00477000 + temp_v17 * 2,&temp_v1);
     if (param_2 < 0) {
-      FUN_002c52f8();
+      asdFatalError();
     }
     return 1;
   }

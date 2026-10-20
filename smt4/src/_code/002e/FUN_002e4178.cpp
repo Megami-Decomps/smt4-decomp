@@ -31,7 +31,7 @@ typedef struct {
 
 extern unsigned int g_btlScriptUnit; /* 0x43427c */
 
-extern int FUN_002499b4(void);
+extern int btlMainFindActiveEntry(void);
 /* Supplied declaration required: FUN_002505c0. */
 /* Supplied declaration required: FUN_00250720. */
 /* Supplied declaration required: FUN_002551ac. */
@@ -52,7 +52,7 @@ unsigned int FUN_002e4178(void)
   
   temp_v1 = scrGetArg(0);
   temp_v2 = btlGetMainState();
-  temp_v3 = FUN_002499b4();
+  temp_v3 = btlMainFindActiveEntry();
   temp_v0 = *(short *)(temp_v3 + 0x1b6);
   temp_v4 = btlUnitGet(g_btlScriptUnit);
   if (-1 < *(short *)(temp_v3 + 8)) {

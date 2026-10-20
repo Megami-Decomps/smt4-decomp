@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_002c3944(int, int);
+int rt_memclr(int, int);
 int memClear(unsigned int *, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -10,7 +10,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_002c3944. */
+/* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: memClear. */
 
 
@@ -29,7 +29,7 @@ void nn_swkbd_CTR_InitializeConfig(unsigned int *param_1)
   *(unsigned short *)(param_1 + 8) = 65000;
   *(unsigned short *)((int)param_1 + 0x22) = 0;
   *(unsigned short *)(param_1 + 9) = 0;
-  FUN_002c3944((int)param_1 + 0x26,0x66);
+  rt_memclr((int)param_1 + 0x26,0x66);
   param_1[0x23] = 0;
   memClear(param_1 + 0x24,0x82);
   *(unsigned char *)((int)param_1 + 0x112) = 0;

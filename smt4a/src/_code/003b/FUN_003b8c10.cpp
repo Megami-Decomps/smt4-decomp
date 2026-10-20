@@ -8,7 +8,7 @@ int FUN_004ab7f4(unsigned int, int);
 
 extern unsigned int DAT_00570da0; /* 0x570da0 */
 extern unsigned int DAT_00570da4; /* 0x570da4 */
-extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
+extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
 extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_004ab7f4. */
@@ -27,7 +27,7 @@ unsigned int FUN_003b8c10(void)
   temp_v1 = puVar2[1] | DAT_00570da4;
   *puVar2 = DAT_00570da0 | *puVar2;
   puVar2[1] = temp_v1;
-  FUN_004ab7f4(DAT_0057a9c8,1);
+  FUN_004ab7f4(g_btlUiBlock,1);
   return 1;
 }
 

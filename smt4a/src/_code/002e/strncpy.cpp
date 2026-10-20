@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002e6dd4(unsigned int *, int);
+int rt_memclr(unsigned int *, int);
 
-/* Supplied declaration required: FUN_002e6dd4. */
+/* Supplied declaration required: rt_memclr. */
 
 
 unsigned int * strncpy(unsigned int *param_1,unsigned int *param_2,int param_3)
@@ -41,7 +41,7 @@ unsigned int * strncpy(unsigned int *param_1,unsigned int *param_2,int param_3)
     param_2 = (unsigned int *)((int)param_2 + 1);
     param_3 = temp_v0;
   } while ((char)temp_v1 != '\0');
-  FUN_002e6dd4(puVar2,temp_v0);
+  rt_memclr(puVar2,temp_v0);
   return param_1;
 }
 

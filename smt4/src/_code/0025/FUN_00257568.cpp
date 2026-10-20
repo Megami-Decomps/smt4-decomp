@@ -8,9 +8,9 @@ int FUN_002ae164(void);
 
 extern int FUN_0024c5a0(int);
 extern int FUN_002503d4(int);
-extern int FUN_002a8740(void);
+extern int gameGetUnitRecord(void);
 /* Supplied declaration required: FUN_002ae164. */
-extern int FUN_002ae1d8(int);
+extern int idIsAbove400(int);
 
 
 int FUN_00257568(int *param_1,int *param_2)
@@ -26,7 +26,7 @@ int FUN_00257568(int *param_1,int *param_2)
   int temp_v6;
   unsigned char temp_v7;
   
-  temp_v0 = FUN_002ae1d8(*param_1);
+  temp_v0 = idIsAbove400(*param_1);
   if (temp_v0 != 0) {
     temp_v5 = 99;
     temp_v0 = 99;
@@ -39,7 +39,7 @@ int FUN_00257568(int *param_1,int *param_2)
     FUN_002ae164();
     temp_v4 = (unsigned int)*(unsigned short *)(temp_v1 + 0x2c);
   }
-  temp_v1 = FUN_002ae1d8(*param_2);
+  temp_v1 = idIsAbove400(*param_2);
   if (temp_v1 != 0) {
     temp_v1 = 99;
     temp_v6 = 99;
@@ -64,14 +64,14 @@ int FUN_00257568(int *param_1,int *param_2)
       temp_v4 = 0;
     }
     else {
-      temp_v0 = FUN_002a8740();
+      temp_v0 = gameGetUnitRecord();
       temp_v4 = (unsigned int)*(unsigned short *)(temp_v0 + 0x46);
     }
     if (param_2[1] < 0) {
       temp_v3 = 0;
     }
     else {
-      temp_v0 = FUN_002a8740();
+      temp_v0 = gameGetUnitRecord();
       temp_v3 = (unsigned int)*(unsigned short *)(temp_v0 + 0x46);
     }
     temp_v5 = temp_v4 - temp_v3;

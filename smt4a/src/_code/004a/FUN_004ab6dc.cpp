@@ -4,11 +4,11 @@ extern "C" {
 
 void menu32State387CIs0x30(BtlUiObjCA *obj);
 
-extern BtlUiGlobalsA DAT_0057a9b8;
+extern BtlUiGlobalsA g_btlUi;
 
 void FUN_004ab6dc(void)
 {
-    menu32State387CIs0x30(&DAT_0057a9b8.ui->objC);
+    menu32State387CIs0x30(&g_btlUi.ui->objC);
 }
 
 } /* extern "C" */

@@ -8,9 +8,9 @@ int FUN_002ae164(unsigned int);
 
 extern int FUN_0029a924(unsigned int);
 extern int FUN_0029a9d4(unsigned int, unsigned int);
-extern int FUN_002a8740(int);
+extern int gameGetUnitRecord(int);
 /* Supplied declaration required: FUN_002ae164. */
-extern int FUN_002b63ac(void);
+extern int gameGetPlayerData(void);
 
 
 unsigned int FUN_002987d8(int param_1,unsigned int param_2)
@@ -22,14 +22,14 @@ unsigned int FUN_002987d8(int param_1,unsigned int param_2)
   
   FUN_002ae164(param_2);
   if (param_1 < 0) {
-    temp_v0 = FUN_002b63ac();
+    temp_v0 = gameGetPlayerData();
     temp_v1 = FUN_0029a9d4(param_2,1);
     if (*(short *)(temp_v0 + 0x2c) < temp_v1) {
       return 0;
     }
   }
   else {
-    temp_v0 = FUN_002a8740(param_1);
+    temp_v0 = gameGetUnitRecord(param_1);
     temp_v1 = FUN_0029a924(param_2);
     if (*(short *)(temp_v0 + 0x2c) < temp_v1) {
       return 0;

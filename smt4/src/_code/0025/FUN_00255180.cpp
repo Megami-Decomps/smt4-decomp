@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_00282924(int, unsigned int);
+int btlMainFindEntryByListedId(int, unsigned int);
 
-/* Supplied declaration required: FUN_00282924. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 extern int btlGetMainState(void);
 
 
@@ -17,7 +17,7 @@ void FUN_00255180(unsigned int param_1,int param_2,unsigned short param_3)
   int temp_v0;
   
   temp_v0 = btlGetMainState();
-  FUN_00282924(temp_v0,param_1);
+  btlMainFindEntryByListedId(temp_v0,param_1);
   if (temp_v0 != 0) {
     *(unsigned short *)(temp_v0 + param_2 * 2 + 0x72) = param_3;
   }

@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002ce8d8(void);
+int geometryDestroy(void);
 int FUN_00350cf4(unsigned int, int);
 
-/* Supplied declaration required: FUN_002ce8d8. */
+/* Supplied declaration required: geometryDestroy. */
 /* Supplied declaration required: FUN_00350cf4. */
 
 
@@ -16,7 +16,7 @@ void FUN_0035105c(int param_1,unsigned int param_2,unsigned int param_3)
 {
 /* irregular: 2 native warning(s); review required */
   if (*(int *)(param_1 + 0x50) != 0) {
-    FUN_002ce8d8();
+    geometryDestroy();
   }
   switch(param_3) {
   default:

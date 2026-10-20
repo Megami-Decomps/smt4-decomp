@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001a08d8(int);
+int nn_os_LightEvent_Signal(int);
 int FUN_002e3140(void);
 int hasExclusiveAccess(unsigned int *);
 int software_interrupt(int);
@@ -12,7 +12,7 @@ int software_interrupt(int);
 typedef int romwright_code(...);
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: hasExclusiveAccess (CALLOTHER). */
-/* Supplied declaration required: FUN_001a08d8. */
+/* Supplied declaration required: nn_os_LightEvent_Signal. */
 /* Supplied declaration required: FUN_002e3140. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
@@ -68,7 +68,7 @@ void FUN_001a26e4(int param_1)
       temp_v0 = *(char *)(param_1 + 0x76);
       *(unsigned char *)(param_1 + 0x76) = 2;
       if (temp_v0 == '\x01') {
-        FUN_001a08d8(param_1 + 100);
+        nn_os_LightEvent_Signal(param_1 + 100);
       }
       nn_os_CriticalSection_Leave(param_1);
     }

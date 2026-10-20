@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b8da0(...);
+int pairSetFirstResetSecond(...);
 int FUN_002bee58(...);
 int FUN_002bf818(...);
 int SBORROW4(unsigned int, int);
@@ -16,7 +16,7 @@ typedef struct {
 } param_1_stack;
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_002b8da0. */
+/* Supplied declaration required: pairSetFirstResetSecond. */
 /* Supplied declaration required: FUN_002bee58. */
 /* Supplied declaration required: FUN_002bf818. */
 
@@ -129,7 +129,7 @@ void FUN_001f53d0(int param_1)
       do {
         temp_v6 = (*(short *)(param_1 + 0x218c) - temp_v9) - 1;
         temp_v3 = param_1 + temp_v6 * 0x8c;
-        FUN_002b8da0(temp_v3 + 0x598,6);
+        pairSetFirstResetSecond(temp_v3 + 0x598,6);
         FUN_002bee58(temp_v3 + 0x598,1);
         FUN_002bee58(temp_v3 + 0xb10,6);
         FUN_002bee58(temp_v3 + 0x1088,4);
@@ -314,7 +314,7 @@ LAB_001f5adc:
       temp_v9 = 0;
       do {
         temp_v3 = param_1 + ((*(short *)(param_1 + 0x218c) - temp_v9) - 1) * 0x8c;
-        FUN_002b8da0(temp_v3 + 0x598,6);
+        pairSetFirstResetSecond(temp_v3 + 0x598,6);
         FUN_002bee58(temp_v3 + 0x598,1);
         FUN_002bee58(temp_v3 + 0xb10,6);
         FUN_002bee58(temp_v3 + 0x1088,4);
@@ -398,12 +398,12 @@ LAB_001f5adc:
             if (*(int *)(param_1 + 0x2184) == 0) {
               temp_v6 = 4000;
             }
-            FUN_002b8da0(param_1 + temp_v9 * 0x8c + 0x20,temp_v6);
+            pairSetFirstResetSecond(param_1 + temp_v9 * 0x8c + 0x20,temp_v6);
           }
         }
         else if (temp_v2 == 0xf) {
           temp_v6 = (unsigned int)(*(int *)(param_1 + 0x2184) != 0);
-          FUN_002b8da0(param_1 + temp_v9 * 0x8c + 0x20,temp_v6);
+          pairSetFirstResetSecond(param_1 + temp_v9 * 0x8c + 0x20,temp_v6);
         }
         FUN_002bf818(param_1 + temp_v9 * 0x8c + 0x1600);
       }

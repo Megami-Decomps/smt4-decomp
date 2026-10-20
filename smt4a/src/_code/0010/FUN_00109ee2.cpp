@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e995c(unsigned char [32]);
+int onlineSockAddrConstruct(unsigned char [32]);
 int FUN_002f2ed4(int *, int *, unsigned char [32]);
 int FUN_002f2f82(int *, int);
 
@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_002e995c. */
+/* Supplied declaration required: onlineSockAddrConstruct. */
 /* Supplied declaration required: FUN_002f2ed4. */
 /* Supplied declaration required: FUN_002f2f82. */
 
@@ -30,7 +30,7 @@ unsigned int FUN_00109ee2(int *param_1)
   int temp_v2;
   
   if ((char)param_1[0x14] == '\0') {
-    FUN_002e995c(temp_v1);
+    onlineSockAddrConstruct(temp_v1);
     piVar1 = param_1 + 0x1e;
     piVar2 = piVar1;
     FUN_002f2ed4(piVar1,&temp_v2,temp_v1);

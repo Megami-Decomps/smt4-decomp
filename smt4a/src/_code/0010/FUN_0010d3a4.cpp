@@ -25,7 +25,7 @@ extern int FUN_00122230(int);
 extern int FUN_001224b0(int);
 /* Supplied declaration required: FUN_0012922c. */
 extern int FUN_0012cfb6(int);
-extern unsigned int *FUN_002e9f80(void);
+extern unsigned int *sharedRefInit(void);
 extern int constructObj0055affc(unsigned int *);
 /* Supplied declaration required: FUN_002f74ec. */
 extern int FUN_002f7664(void);
@@ -44,7 +44,7 @@ int FUN_0010d3a4(void)
   int temp_v4;
   unsigned int temp_v5 [2];
   
-  puVar1 = (unsigned int *)FUN_002e9f80();
+  puVar1 = (unsigned int *)sharedRefInit();
   *puVar1 = (unsigned int)&DAT_00559114;
   temp_v0 = constructObj0055affc(puVar1 + 3);
   temp_v0 = temp_v0 + 8;

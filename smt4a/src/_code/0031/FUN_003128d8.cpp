@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002b5cb4(void);
 
-extern int DAT_00580ca0; /* 0x580ca0 */
+extern int g_mapGimic; /* 0x580ca0 */
 extern int g_lmapScene; /* 0x581288 */
 
 /* Supplied declaration required: FUN_002b5cb4. */
@@ -26,7 +26,7 @@ void FUN_003128d8(void)
   temp_v1 = 0;
   temp_v3 = 99999;
   do {
-    temp_v0 = DAT_00580ca0 + temp_v1 * 0x3c;
+    temp_v0 = g_mapGimic + temp_v1 * 0x3c;
     if ((*(char *)(temp_v0 + 0x90) != '\0') && (*(short *)(temp_v0 + 0xa6) == 0xf)) {
       temp_v4 = *(float *)(g_lmapScene + 0x1c);
       FUN_002b5cb4();
@@ -38,7 +38,7 @@ void FUN_003128d8(void)
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 0x23);
   if (temp_v2 != -1) {
-    temp_v2 = DAT_00580ca0 + temp_v2 * 0x3c;
+    temp_v2 = g_mapGimic + temp_v2 * 0x3c;
     *(unsigned short *)(temp_v2 + 0xa4) = 1;
     *(unsigned char *)(temp_v2 + 0x91) = 1;
   }

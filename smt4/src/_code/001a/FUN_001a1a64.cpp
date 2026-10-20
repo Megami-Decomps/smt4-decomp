@@ -14,7 +14,7 @@ typedef struct {
 extern unsigned char g_gameDataBlocks; /* 0x43e2a8 */
 
 extern int FUN_00288f78(unsigned char);
-extern int FUN_002c09d0(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -43,19 +43,19 @@ void FUN_001a1a64(unsigned short *param_1)
   *(unsigned short *)(temp_v0 + 0x4a) = param_1[0x11];
   *(unsigned char *)(temp_v0 + 0x4c) = *(unsigned char *)(param_1 + 0x3f);
   *(unsigned char *)(temp_v0 + 0x4d) = 0;
-  temp_v1 = FUN_002c09d0(0x67a);
+  temp_v1 = gameFlagIsSet(0x67a);
   if (temp_v1 != 0) {
     *(unsigned char *)(temp_v0 + 0x4d) = *(unsigned char *)(temp_v0 + 0x4d) | 1;
   }
-  temp_v1 = FUN_002c09d0(0x67b);
+  temp_v1 = gameFlagIsSet(0x67b);
   if (temp_v1 != 0) {
     *(unsigned char *)(temp_v0 + 0x4d) = *(unsigned char *)(temp_v0 + 0x4d) | 2;
   }
-  temp_v1 = FUN_002c09d0(0x679);
+  temp_v1 = gameFlagIsSet(0x679);
   if (temp_v1 != 0) {
     *(unsigned char *)(temp_v0 + 0x4d) = *(unsigned char *)(temp_v0 + 0x4d) | 4;
   }
-  temp_v1 = FUN_002c09d0(0x678);
+  temp_v1 = gameFlagIsSet(0x678);
   if (temp_v1 != 0) {
     *(unsigned char *)(temp_v0 + 0x4d) = *(unsigned char *)(temp_v0 + 0x4d) | 8;
   }
@@ -81,7 +81,7 @@ void FUN_001a1a64(unsigned short *param_1)
     *(unsigned short *)(temp_v0 + 0x5a) = (unsigned short)*(unsigned char *)((int)param_1 + 0xa83b);
   }
   *(unsigned char *)(temp_v0 + 99) = *(unsigned char *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x24bb0);
-  temp_v1 = FUN_002c09d0(0x410);
+  temp_v1 = gameFlagIsSet(0x410);
   if (temp_v1 != 0) {
     *(unsigned char *)(temp_v0 + 100) = 1;
   }

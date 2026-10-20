@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002adc88(void);
+int gameGetFlagBlock(void);
 int asdMemoryAlloc(int, int, int, int, int);
 int rt_memcpy(void);
 
@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-/* Supplied declaration required: FUN_002adc88. */
+/* Supplied declaration required: gameGetFlagBlock. */
 /* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: rt_memcpy. */
 
@@ -24,7 +24,7 @@ unsigned int FUN_0033f6d8(void)
 /* irregular: 3 native warning(s); review required */
   unsigned int temp_v0;
   
-  FUN_002adc88();
+  gameGetFlagBlock();
   temp_v0 = 0x100;
   asdMemoryAlloc(0x100,0x100,0,0x44,1);
   rt_memcpy();

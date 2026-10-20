@@ -1,4 +1,4 @@
-/* Calls FUN_001aea28 for every slot (last to first) whose entry has a linked child. */
+/* Calls ptrListRemoveClearOwner for every slot (last to first) whose entry has a linked child. */
 #include "common.h"
 
 extern "C" {
@@ -18,20 +18,20 @@ typedef struct SlotTable {
     /* 0xA8 */ Slot slots[35];
 } SlotTable;
 
-extern u32 DAT_0056fcc0;
-extern SlotTable *DAT_00580ca0;
+extern u32 g_handleRegistry;
+extern SlotTable *g_mapGimic;
 
-extern void FUN_001aea28(u32 arg, void *child);
+extern void ptrListRemoveClearOwner(u32 arg, void *child);
 
 void FUN_002b7be0(void)
 {
     s32 i;
 
     for (i = 34; i >= 0; i--) {
-        Entry *entry = DAT_00580ca0->slots[i].entry;
+        Entry *entry = g_mapGimic->slots[i].entry;
 
         if (entry != NULL && entry->child != NULL) {
-            FUN_001aea28(DAT_0056fcc0, entry->child);
+            ptrListRemoveClearOwner(g_handleRegistry, entry->child);
         }
     }
 }

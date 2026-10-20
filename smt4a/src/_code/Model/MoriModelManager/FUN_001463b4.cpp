@@ -10,7 +10,7 @@ int FUN_00157d5c(...);
 int FUN_00157fa0(...);
 int FUN_001642e4(...);
 int FUN_00178b04(...);
-int FUN_002e6dd0(...);
+int rt_aeabi_memclr(...);
 
 typedef struct fn_001463b4_arg0 fn_001463b4_arg0;
 struct fn_001463b4_arg0 {
@@ -42,7 +42,7 @@ extern unsigned int FUN_001581dc(unsigned char **);
 extern unsigned int FUN_001582d0(void);
 /* Supplied declaration required: FUN_001642e4. */
 /* Supplied declaration required: FUN_00178b04. */
-/* Supplied declaration required: FUN_002e6dd0. */
+/* Supplied declaration required: rt_aeabi_memclr. */
 
 
 void FUN_001463b4(fn_001463b4_arg0 *param_1)
@@ -61,7 +61,7 @@ void FUN_001463b4(fn_001463b4_arg0 *param_1)
   unsigned char temp_v8;
   unsigned char temp_v9 [68];
   
-  FUN_002e6dd0(temp_v9,0x40);
+  rt_aeabi_memclr(temp_v9,0x40);
   FUN_00100388(temp_v9,"ddefshader.bch");
   puVar1 = temp_v9;
   FUN_001642e4(puVar1,0,1,0x80);

@@ -12,7 +12,7 @@ int FUN_00297468(...);
 int FUN_0029e788(...);
 int FUN_0029e874(...);
 int FUN_0029f848(...);
-int FUN_002a8764(...);
+int gameGetSlotTable(...);
 int timerStart(...);
 int FUN_002bd954(...);
 int FUN_002bee58(...);
@@ -47,7 +47,7 @@ extern unsigned char DAT_00402a4c; /* 0x402a4c */
 extern unsigned char DAT_00402ab8; /* 0x402ab8 */
 extern unsigned char DAT_00402af4; /* 0x402af4 */
 extern unsigned char DAT_00402b0c; /* 0x402b0c */
-extern unsigned int *DAT_0043dcf0; /* 0x43dcf0 */
+extern unsigned int *g_partyPanel; /* 0x43dcf0 */
 
 /* Supplied declaration required: FUN_00269c7c. */
 /* Supplied declaration required: FUN_0026b9bc. */
@@ -58,7 +58,7 @@ extern unsigned int *DAT_0043dcf0; /* 0x43dcf0 */
 /* Supplied declaration required: FUN_0029e874. */
 /* Supplied declaration required: FUN_0029f848. */
 extern int FUN_002a0d0c(void);
-/* Supplied declaration required: FUN_002a8764. */
+/* Supplied declaration required: gameGetSlotTable. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002bee58. */
@@ -87,12 +87,12 @@ void FUN_0028b7f8(int param_1)
   unsigned int temp_v4;
   unsigned char temp_v5;
   
-  if (DAT_0043dcf0 == (unsigned int *)0x0) {
+  if (g_partyPanel == (unsigned int *)0x0) {
     puVar2 = (unsigned int *)0x100;
     asdMemAlloc(0x100,0x100,0,0x17f8,1);
-    DAT_0043dcf0 = puVar2;
+    g_partyPanel = puVar2;
   }
-  puVar2 = DAT_0043dcf0;
+  puVar2 = g_partyPanel;
   memClear();
   temp_v1 = FUN_002a0d0c();
   *(unsigned char *)((int)puVar2 + 0x42) = *(unsigned char *)(temp_v1 + 0x40);
@@ -119,7 +119,7 @@ void FUN_0028b7f8(int param_1)
   }
   puVar2[0x457] = temp_v1;
   *(unsigned char *)(temp_v1 + 0x142) = 1;
-  FUN_002a8764();
+  gameGetSlotTable();
   temp_v1 = 0x54;
   asdOperatorNew();
   puVar2[0x1b2] = temp_v1;
@@ -143,9 +143,9 @@ void FUN_0028b7f8(int param_1)
     temp_v1 = temp_v2;
   } while (temp_v2 < 0x18);
   FUN_0026bc6c();
-  puVar2 = DAT_0043dcf0;
-  puVar8 = DAT_0043dcf0 + 0x12;
-  *(unsigned short *)((int)DAT_0043dcf0 + 0x36) = 0;
+  puVar2 = g_partyPanel;
+  puVar8 = g_partyPanel + 0x12;
+  *(unsigned short *)((int)g_partyPanel + 0x36) = 0;
   *(unsigned short *)(puVar2 + 0xe) = 0xffff;
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(puVar8);
   FUN_002c312c(puVar2 + 0x12,&DAT_00402a4c,0x6c,&DAT_00402ab8,0x3c,&DAT_00402af4,0x18,0,0,
@@ -177,7 +177,7 @@ void FUN_0028b7f8(int param_1)
   FUN_002bd954(puVar2 + 0x178,0x19,1000,puVar2 + 0x12,0xc9);
   FUN_002bee58(puVar2 + 0x178,4);
   FUN_0029f848(puVar2 + 0x237,4,1,4,1,1);
-  temp_v1 = FUN_002a8764();
+  temp_v1 = gameGetSlotTable();
   temp_v0 = *(unsigned char *)(temp_v1 + 0x910b);
   temp_v4 = (unsigned int)temp_v0;
   temp_v5 = temp_v0 >> 2;

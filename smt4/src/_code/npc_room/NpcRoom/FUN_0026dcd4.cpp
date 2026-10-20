@@ -8,14 +8,14 @@ int FUN_00252190(...);
 int FUN_00285e44(...);
 int FUN_00289880(...);
 int FUN_002898e4(...);
-int FUN_0028d6d0(...);
+int buttonHelpCreate(...);
 int FUN_00290d5c(...);
 int FUN_00297060(...);
-int FUN_00297410(...);
+int fileSlotLoad(...);
 int dataTableGetCount(...);
 int dataTableGetEntries(...);
-int FUN_002c424c(...);
-int FUN_002c425c(...);
+int __aeabi_memset4(...);
+int jobSetParent(...);
 int memClear(...);
 int asdMemAlloc(...);
 int taskCreateDraw(...);
@@ -50,16 +50,16 @@ extern unsigned int *g_npcRoom; /* 0x44d198 */
 /* Supplied declaration required: FUN_00285e44. */
 /* Supplied declaration required: FUN_00289880. */
 /* Supplied declaration required: FUN_002898e4. */
-/* Supplied declaration required: FUN_0028d6d0. */
+/* Supplied declaration required: buttonHelpCreate. */
 /* Supplied declaration required: FUN_00290d5c. */
 /* Supplied declaration required: FUN_00297060. */
-/* Supplied declaration required: FUN_00297410. */
-extern int FUN_002c09d0(void);
+/* Supplied declaration required: fileSlotLoad. */
+extern int gameFlagIsSet(void);
 /* Supplied declaration required: dataTableGetCount. */
 /* Supplied declaration required: dataTableGetEntries. */
 extern unsigned int dataTableGet(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002c424c. */
-/* Supplied declaration required: FUN_002c425c. */
+/* Supplied declaration required: __aeabi_memset4. */
+/* Supplied declaration required: jobSetParent. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: taskCreateDraw. */
@@ -106,8 +106,8 @@ void FUN_0026dcd4(unsigned int param_1)
   taskCreateDraw(&LAB_0026e018,0x7a,0,0,&LAB_001aba44,0,0,puVar7);
   taskCreateDraw(&LAB_0026e02c,0xd8,0,0,&LAB_001aba44,0,0,*puVar6);
   taskCreateDraw(&LAB_0026e044,0xe6,0,0,&LAB_001dd8e8,0,0,*puVar6);
-  FUN_00297410(0x35);
-  FUN_00297410(0x1a);
+  fileSlotLoad(0x35);
+  fileSlotLoad(0x1a);
   *(short *)(puVar6 + 0x40) = (short)param_1;
   puVar5 = g_npcRoom;
   g_npcRoom[9] = 0;
@@ -138,10 +138,10 @@ void FUN_0026dcd4(unsigned int param_1)
   puVar5[0x3d] = 0;
   if (temp_v5 != 0) {
     do {
-      if ((((*psVar11 == temp_v1) && ((psVar11[7] == 0 || (temp_v6 = FUN_002c09d0(), temp_v6 != 0)))) &&
-          ((psVar11[8] == 0 || (temp_v6 = FUN_002c09d0(), temp_v6 != 0)))) &&
-         (((psVar11[9] == 0 || (temp_v6 = FUN_002c09d0(), temp_v6 == 0)) &&
-          ((psVar11[10] == 0 || (temp_v6 = FUN_002c09d0(), temp_v6 == 0)))))) {
+      if ((((*psVar11 == temp_v1) && ((psVar11[7] == 0 || (temp_v6 = gameFlagIsSet(), temp_v6 != 0)))) &&
+          ((psVar11[8] == 0 || (temp_v6 = gameFlagIsSet(), temp_v6 != 0)))) &&
+         (((psVar11[9] == 0 || (temp_v6 = gameFlagIsSet(), temp_v6 == 0)) &&
+          ((psVar11[10] == 0 || (temp_v6 = gameFlagIsSet(), temp_v6 == 0)))))) {
         puVar5[puVar5[0x3d] + 10] = (unsigned int)psVar11;
         temp_v6 = puVar5[0x3d];
         puVar5[0x3d] = temp_v6 + 1;
@@ -153,7 +153,7 @@ void FUN_0026dcd4(unsigned int param_1)
   }
   temp_v6 = 0;
   do {
-    FUN_002c424c(puVar6 + temp_v6 * 4 + 0x19,0x10,0xffffffff);
+    __aeabi_memset4(puVar6 + temp_v6 * 4 + 0x19,0x10,0xffffffff);
     temp_v6 = temp_v6 + 1;
   } while (temp_v6 < 8);
   temp_v5 = 0;
@@ -258,7 +258,7 @@ LAB_0026e0ac:
         FUN_00285e44(temp_v5,0,(int)*(short *)(temp_v8 + 8) + (int)*(short *)(temp_v8 + 6));
       }
       puVar6[temp_v6 + 1] = temp_v5;
-      FUN_002c425c(*puVar6,puVar6[temp_v6 + 1]);
+      jobSetParent(*puVar6,puVar6[temp_v6 + 1]);
       FUN_002fdfe0(puVar6[temp_v6 + 1],*(unsigned char *)(puVar6[temp_v6 + 10] + 0xd) + 3);
     }
     temp_v6 = temp_v6 + 1;
@@ -271,7 +271,7 @@ LAB_0026e0ac:
   FUN_002c58c8(2);
   FUN_002898e4();
   FUN_00289880();
-  FUN_0028d6d0();
+  buttonHelpCreate();
   FUN_00290d5c(0xa0);
   return;
 }

@@ -7,7 +7,7 @@ extern "C" {
 int sysPlaySe(int);
 int FUN_00182054(void);
 int FUN_00275bc8(int, unsigned int);
-int FUN_00281720(...);
+int linkHolderApplyFlag(...);
 int FUN_002e1c94(int, int, unsigned int);
 int FUN_002e207c(void);
 int FUN_002e2114(void);
@@ -22,10 +22,10 @@ int FUN_003e5810(unsigned int, int);
 int FUN_003e5c68(unsigned int, int);
 
 /* Supplied declaration required: sysPlaySe. */
-extern unsigned int FUN_001801a4(void);
+extern unsigned int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00182054. */
 /* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: FUN_00281720. */
+/* Supplied declaration required: linkHolderApplyFlag. */
 /* Supplied declaration required: FUN_002e1c94. */
 /* Supplied declaration required: FUN_002e207c. */
 /* Supplied declaration required: FUN_002e2114. */
@@ -63,7 +63,7 @@ void FUN_00359dc4(int param_1)
       FUN_003e5810(*(unsigned int *)(temp_v0 + 0x1c),1);
       temp_v0 = overlayGetStatusScene();
       FUN_003e5810(*(unsigned int *)(temp_v0 + 0x1c),2);
-      temp_v1 = FUN_001801a4();
+      temp_v1 = gameGetPlayerData();
       temp_v2 = overlayGetStatusScene();
       FUN_002e2184(temp_v2,temp_v1);
       overlayGetStatusScene();
@@ -93,7 +93,7 @@ void FUN_00359dc4(int param_1)
           *(int *)(param_1 + 0x4c) = temp_v0;
           *(unsigned int *)(temp_v0 + 0x108) = 2;
           *(unsigned char *)(param_1 + 0x10e) = 1;
-          FUN_00281720(*(unsigned int *)(param_1 + 4),1);
+          linkHolderApplyFlag(*(unsigned int *)(param_1 + 4),1);
           FUN_0035a0bc(*(unsigned int *)(param_1 + 4),*(unsigned char *)(*(int *)(param_1 + 8) + 0x42));
           FUN_003a4980(*(unsigned int *)(param_1 + 0xc),*(unsigned int *)(param_1 + 8),
                        *(unsigned int *)(param_1 + 0x58));
@@ -123,7 +123,7 @@ void FUN_00359dc4(int param_1)
         }
       }
     }
-    FUN_00281720(*(unsigned int *)(param_1 + 4),0);
+    linkHolderApplyFlag(*(unsigned int *)(param_1 + 4),0);
   }
   return;
 }

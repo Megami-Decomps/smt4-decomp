@@ -4,19 +4,19 @@
 
 extern "C" {
 
-int FUN_0028975c(unsigned int, int);
+int gameFlagSetValue(unsigned int, int);
 int FUN_00295a18(unsigned int, int);
 int FUN_002ac0c4(void);
 int FUN_002ac0f8(void);
 int jyoucyuGetTableEntry(int);
 
-/* Supplied declaration required: FUN_0028975c. */
-extern int FUN_0028e9d4(unsigned int);
+/* Supplied declaration required: gameFlagSetValue. */
+extern int flagValueIsPositive(unsigned int);
 /* Supplied declaration required: FUN_00295a18. */
 /* Supplied declaration required: FUN_002ac0c4. */
 /* Supplied declaration required: FUN_002ac0f8. */
 extern int FUN_002ac12c(unsigned int);
-extern int FUN_002c09d0(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: jyoucyuGetTableEntry. */
 
 
@@ -47,15 +47,15 @@ void FUN_0026e324(int param_1)
             pcVar5 = (char *)(temp_v1 + temp_v3 * 0x40);
             if (*pcVar5 != '0') {
               if (*pcVar5 == '1') {
-                temp_v0 = FUN_002c09d0(*(unsigned int *)(pcVar5 + 0x3c));
+                temp_v0 = gameFlagIsSet(*(unsigned int *)(pcVar5 + 0x3c));
                 if (temp_v0 != 0) break;
-                FUN_0028975c(*(unsigned int *)(pcVar5 + 0x3c),1);
+                gameFlagSetValue(*(unsigned int *)(pcVar5 + 0x3c),1);
                 jyoucyuGetTableEntry(0);
               }
             }
             else {
               temp_v4 = *(unsigned int *)(pcVar5 + 0x3c);
-              temp_v0 = FUN_0028e9d4(temp_v4);
+              temp_v0 = flagValueIsPositive(temp_v4);
               if (temp_v0 == 0) {
                 FUN_00295a18(temp_v4,1);
                 jyoucyuGetTableEntry(0);

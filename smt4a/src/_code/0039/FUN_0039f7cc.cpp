@@ -6,7 +6,7 @@ extern "C" {
 
 int CONCAT44(...);
 int FUN_001a1ee0(void);
-int FUN_001acf08(void);
+int effGetFrameStep(void);
 int FUN_001b63b0(void);
 int FUN_001bc460(void);
 int FUN_0027134c(int, float *);
@@ -59,7 +59,7 @@ extern float DAT_00647348; /* 0x647348 */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_001a1ee0. */
-/* Supplied declaration required: FUN_001acf08. */
+/* Supplied declaration required: effGetFrameStep. */
 /* Supplied declaration required: FUN_001b63b0. */
 /* Supplied declaration required: FUN_001bc460. */
 /* Supplied declaration required: FUN_0027134c. */
@@ -113,7 +113,7 @@ void FUN_0039f7cc(int param_1)
   unsigned int temp_v26;
   int temp_v27;
   
-  temp_v0 = FUN_001acf08();
+  temp_v0 = effGetFrameStep();
   temp_v1 = *(unsigned int *)(param_1 + 0xc);
   puVar8 = *(unsigned int **)(param_1 + 0x20);
   temp_v7 = *(unsigned int *)(param_1 + 4);
@@ -223,7 +223,7 @@ void FUN_0039f7cc(int param_1)
             temp_v10 = temp_v20 * temp_v10 + pfVar7[7];
             pfVar6[7] = temp_v10;
             FUN_0027134c(param_1,pfVar6);
-            temp_v3 = FUN_001acf08();
+            temp_v3 = effGetFrameStep();
             pfVar6[4] = (float)(temp_v3 + (int)temp_v2);
           }
           else if (temp_v23 != 0) {
@@ -376,7 +376,7 @@ void FUN_0039f7cc(int param_1)
             pfVar6[7] = temp_v10;
             if (temp_v25[0] != '\0') {
               FUN_00321e98(param_1,pfVar6);
-              temp_v3 = FUN_001acf08();
+              temp_v3 = effGetFrameStep();
               pfVar6[4] = (float)(temp_v3 + (int)pfVar6[4]);
             }
             temp_v23 = temp_v23 - 1;

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0018aa5c(unsigned int, float *, float *, float *);
-int FUN_00195fc8(void);
+int sysFatalBreak(void);
 int nn_math_ARMv6_MTX44FrustumC_FAST(unsigned int);
 int nn_math_ARMv6_MTX44PivotC_FAST(unsigned int, unsigned int);
 
@@ -53,7 +53,7 @@ static float romwright_fabs_4(float value)
 }
 #endif
 /* Supplied declaration required: FUN_0018aa5c. */
-/* Supplied declaration required: FUN_00195fc8. */
+/* Supplied declaration required: sysFatalBreak. */
 /* Supplied declaration required: nn_math_ARMv6_MTX44FrustumC_FAST. */
 /* Supplied declaration required: nn_math_ARMv6_MTX44PivotC_FAST. */
 
@@ -102,7 +102,7 @@ void FUN_0016fd04(float *param_1,unsigned int param_2,unsigned int param_3,unsig
   
   temp_v3 = 0.0f;
   if ((in_s1 < 0.0f) || ((int)in_s1 >= 0x3f800001)) {
-    FUN_00195fc8();
+    sysFatalBreak();
   }
   param_1[0x14] = in_s0;
   temp_v2 = param_1[4] * DAT_0062d6e4;

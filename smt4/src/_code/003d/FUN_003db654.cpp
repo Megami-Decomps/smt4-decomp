@@ -5,14 +5,14 @@
 extern "C" {
 
 int btlGetMainState(void);
-int FUN_002aa568(int, unsigned char *);
+int libc_strcmp(int, unsigned char *);
 
 extern unsigned char LAB_003db7b0; /* 0x3db7b0 */
 
 extern int FUN_00293230(void);
 /* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: FUN_002aa568. */
-extern int FUN_002c30c4(int);
+/* Supplied declaration required: libc_strcmp. */
+extern int libc_strlen(int);
 
 
 int FUN_003db654(int param_1)
@@ -30,18 +30,18 @@ int FUN_003db654(int param_1)
     temp_v0 = FUN_00293230();
     if (temp_v0 == 0) {
       temp_v0 = 0;
-      temp_v1 = FUN_002c30c4(*piVar3);
+      temp_v1 = libc_strlen(*piVar3);
       if (temp_v1 != 0) {
         temp_v1 = *piVar3;
-        FUN_002aa568(temp_v1,&LAB_003db7b0);
+        libc_strcmp(temp_v1,&LAB_003db7b0);
         if ((temp_v1 != 0) && (0 < *(short *)(*piVar3 + 0x10))) {
           temp_v0 = (int)*(short *)(*piVar3 + 0x10);
         }
       }
-      temp_v1 = FUN_002c30c4(*piVar3 + 0x16);
+      temp_v1 = libc_strlen(*piVar3 + 0x16);
       if (temp_v1 != 0) {
         temp_v1 = *piVar3 + 0x16;
-        FUN_002aa568(temp_v1,&LAB_003db7b0);
+        libc_strcmp(temp_v1,&LAB_003db7b0);
         if (temp_v1 != 0) {
           temp_v1 = (int)*(short *)(*piVar3 + 0x26);
           temp_v2 = temp_v1 == 0;
@@ -53,10 +53,10 @@ int FUN_003db654(int param_1)
           }
         }
       }
-      temp_v1 = FUN_002c30c4(*piVar3 + 0x2c);
+      temp_v1 = libc_strlen(*piVar3 + 0x2c);
       if (temp_v1 != 0) {
         temp_v1 = *piVar3 + 0x2c;
-        FUN_002aa568(temp_v1,&LAB_003db7b0);
+        libc_strcmp(temp_v1,&LAB_003db7b0);
         if (temp_v1 != 0) {
           temp_v1 = (int)*(short *)(*piVar3 + 0x3c);
           temp_v2 = temp_v1 == 0;
@@ -68,10 +68,10 @@ int FUN_003db654(int param_1)
           }
         }
       }
-      temp_v1 = FUN_002c30c4(*piVar3 + 0x42);
+      temp_v1 = libc_strlen(*piVar3 + 0x42);
       if (temp_v1 != 0) {
         temp_v1 = *piVar3 + 0x42;
-        FUN_002aa568(temp_v1,&LAB_003db7b0);
+        libc_strcmp(temp_v1,&LAB_003db7b0);
         if (temp_v1 != 0) {
           temp_v1 = (int)*(short *)(*piVar3 + 0x52);
           temp_v2 = temp_v1 == 0;

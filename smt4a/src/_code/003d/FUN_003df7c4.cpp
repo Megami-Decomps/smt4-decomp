@@ -24,7 +24,7 @@ typedef struct {
     unsigned int sp5C; /* 0x5c: local_5c */
 } param_1_stack;
 
-extern unsigned short *FUN_001801a4(void);
+extern unsigned short *gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00192608. */
 /* Supplied declaration required: FUN_0034cb50. */
 extern short FUN_003da998(unsigned int, unsigned int *);
@@ -65,7 +65,7 @@ void FUN_003df7c4(unsigned short *param_1)
   unsigned short temp_v16;
   
   if (param_1 == (unsigned short *)0x0) {
-    param_1 = (unsigned short *)FUN_001801a4();
+    param_1 = (unsigned short *)gameGetPlayerData();
   }
   temp_v5 = 0;
   temp_v1 = 0;

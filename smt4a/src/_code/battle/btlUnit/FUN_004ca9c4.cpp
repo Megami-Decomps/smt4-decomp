@@ -61,7 +61,7 @@ typedef struct {
     unsigned int sp58; /* 0x58: local_58 */
 } param_2_stack;
 
-extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
+extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 extern unsigned int DAT_0057aa1c; /* 0x57aa1c */
 
 /* Supplied declaration required: FUN_00100388. */
@@ -144,7 +144,7 @@ void FUN_004ca9c4(int param_1,fn_004ca9c4_arg1 *param_2)
       param_2->field_0x50 = param_2->field_0x50 | 0x200002;
       FUN_004d854c(param_2->field_0x1bc);
       FUN_001568f8(param_1,(int)param_2->field_0x6a);
-      FUN_004ac0d4(DAT_0057a9c8,*(unsigned short *)(param_1 + 2));
+      FUN_004ac0d4(g_btlUiBlock,*(unsigned short *)(param_1 + 2));
       param_2->field_0x3c = 0;
       param_2->field_0xc = 0;
       param_2->field_0x10 = 0;

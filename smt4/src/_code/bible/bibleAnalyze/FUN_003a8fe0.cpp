@@ -11,7 +11,7 @@ int FUN_00233228(void);
 int FUN_0023346c(...);
 int FUN_00233670(...);
 int FUN_00240cec(int);
-int FUN_00297410(...);
+int fileSlotLoad(...);
 int FUN_0029dd7c(int);
 int asdOperatorNew(void);
 int asdMemAlloc(int, int, int, int, int);
@@ -48,7 +48,7 @@ extern int *DAT_0043d990; /* 0x43d990 */
 /* Supplied declaration required: FUN_00233670. */
 extern int FUN_00233718(int *);
 /* Supplied declaration required: FUN_00240cec. */
-/* Supplied declaration required: FUN_00297410. */
+/* Supplied declaration required: fileSlotLoad. */
 /* Supplied declaration required: FUN_0029dd7c. */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: asdMemAlloc. */
@@ -154,7 +154,7 @@ void FUN_003a8fe0(int *param_1)
     } while (temp_v1 < temp_v0);
   }
   FUN_0023346c(param_1 + 0x37);
-  FUN_00297410(0x22);
+  fileSlotLoad(0x22);
   if ((char)param_1[0x169] != '\0') {
     FUN_0023266c(param_1 + 0x32,0x140,0,0x1c);
   }

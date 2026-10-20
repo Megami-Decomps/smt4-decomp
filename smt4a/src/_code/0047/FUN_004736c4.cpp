@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001b3428(int);
-int FUN_002e3328(unsigned int *);
+int asdOperatorDelete(unsigned int *);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -15,7 +15,7 @@ typedef struct {
 extern int g_aocMain; /* 0x570260 */
 
 /* Supplied declaration required: FUN_001b3428. */
-/* Supplied declaration required: FUN_002e3328. */
+/* Supplied declaration required: asdOperatorDelete. */
 
 
 void FUN_004736c4(unsigned int *param_1,unsigned int param_2)
@@ -24,7 +24,7 @@ void FUN_004736c4(unsigned int *param_1,unsigned int param_2)
 /* irregular: 2 native warning(s); review required */
   *param_1 = param_2;
   FUN_001b3428(g_aocMain + 0x88);
-  FUN_002e3328(param_1);
+  asdOperatorDelete(param_1);
   return;
 }
 

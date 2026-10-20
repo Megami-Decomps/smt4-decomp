@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001139e8(...);
 int FUN_002e9acc(...);
 int FUN_002ea3d0(...);
-int FUN_002ea9dc(...);
+int onlineUrlDestroy(...);
 
 typedef struct fn_00111d0c_arg0 fn_00111d0c_arg0;
 struct fn_00111d0c_arg0 {
@@ -38,7 +38,7 @@ extern unsigned int DAT_00594a14; /* 0x594a14 */
 /* Supplied declaration required: FUN_002e9acc. */
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned char *, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
-/* Supplied declaration required: FUN_002ea9dc. */
+/* Supplied declaration required: onlineUrlDestroy. */
 extern int FUN_002eb5f4(void);
 extern int FUN_002ee5c4(unsigned int, int);
 extern unsigned int FUN_002fd5d4(unsigned char *, int);
@@ -79,7 +79,7 @@ void FUN_00111d0c(fn_00111d0c_arg0 *param_1)
       temp_v0 = FUN_002eb5f4();
       temp_v0 = *(int *)(temp_v0 + 0xd0);
       FUN_001139e8(temp_v0,temp_v1);
-      FUN_002ea9dc(temp_v6);
+      onlineUrlDestroy(temp_v6);
       if (temp_v0 == 0) {
         puVar4 = (unsigned char *)0x111b95;
         puVar3 = temp_v3;

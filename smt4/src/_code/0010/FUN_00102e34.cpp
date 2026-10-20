@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c425c(...);
+int jobSetParent(...);
 int jobStop(...);
 int asdProcessCreateSimple(...);
 
@@ -22,7 +22,7 @@ extern char *DAT_00465130; /* 0x465130 */
 extern char *DAT_00465134; /* 0x465134 */
 extern unsigned int DAT_0046515c; /* 0x46515c */
 
-/* Supplied declaration required: FUN_002c425c. */
+/* Supplied declaration required: jobSetParent. */
 /* Supplied declaration required: jobStop. */
 /* Supplied declaration required: asdProcessCreateSimple. */
 
@@ -45,7 +45,7 @@ void FUN_00102e34(void)
       pcVar2 = (char *)0x0;
     }
     else {
-      FUN_002c425c(0,pcVar2);
+      jobSetParent(0,pcVar2);
       DAT_00465130 = pcVar2;
     }
     DAT_00465134 = pcVar2;

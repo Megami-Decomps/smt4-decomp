@@ -14,8 +14,8 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_0023e434. */
-extern int FUN_002a8740(void);
-extern int FUN_002b63ac(void);
+extern int gameGetUnitRecord(void);
+extern int gameGetPlayerData(void);
 /* Supplied declaration required: __aeabi_idivmod. */
 
 
@@ -53,11 +53,11 @@ void FUN_0033c468(int *param_1)
   else {
     temp_v2 = 0;
     if (param_1[0xd] < 0) {
-      temp_v4 = FUN_002b63ac();
+      temp_v4 = gameGetPlayerData();
       temp_v0 = *(unsigned short *)(temp_v4 + 0x72);
     }
     else {
-      temp_v4 = FUN_002a8740();
+      temp_v4 = gameGetUnitRecord();
       temp_v0 = *(unsigned short *)(temp_v4 + 0x44);
     }
     temp_v1 = 1;

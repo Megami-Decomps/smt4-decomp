@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_00162e8c(void);
+int gameFlagsGetBlock(void);
 int dataTable2ECount(void);
-int FUN_003fd63c(int, int);
+int gameFlagSetValue(int, int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -14,11 +14,11 @@ typedef struct {
 } param_4_stack;
 
 extern int FUN_00152978(int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00162e8c. */
-extern int FUN_0018719c(void);
+/* Supplied declaration required: gameFlagsGetBlock. */
+extern int gameFlagIsSet(void);
 extern int dataTable2EGetEntry(int);
 /* Supplied declaration required: dataTable2ECount. */
-/* Supplied declaration required: FUN_003fd63c. */
+/* Supplied declaration required: gameFlagSetValue. */
 
 
 void FUN_004bc95c(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -40,8 +40,8 @@ void FUN_004bc95c(int param_1,unsigned int param_2,unsigned int param_3,unsigned
       temp_v1 = (int)*(short *)(temp_v0 + 0x20);
       if (temp_v1 == -1) break;
       if (temp_v1 == param_1) {
-        if ((*(short *)(temp_v0 + 0x22) != 0) && (temp_v2 = FUN_0018719c(), temp_v2 == 0)) {
-          FUN_003fd63c((int)*(short *)(temp_v0 + 0x22),1);
+        if ((*(short *)(temp_v0 + 0x22) != 0) && (temp_v2 = gameFlagIsSet(), temp_v2 == 0)) {
+          gameFlagSetValue((int)*(short *)(temp_v0 + 0x22),1);
         }
         break;
       }
@@ -50,7 +50,7 @@ void FUN_004bc95c(int param_1,unsigned int param_2,unsigned int param_3,unsigned
       if (temp_v1 <= temp_v2) break;
     }
   }
-  FUN_00162e8c();
+  gameFlagsGetBlock();
   temp_v0 = FUN_00152978(param_1,param_2,1,param_4,unaff_r4,in_lr);
   *(unsigned char *)(temp_v0 + 3) = (*(unsigned char *)(temp_v0 + 3) & 0xbf) | 0x40;
   return;

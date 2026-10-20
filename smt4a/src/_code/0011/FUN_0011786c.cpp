@@ -11,10 +11,10 @@ typedef struct Record {
     /* 0x10 */ u8 field10[8];
 } Record;
 
-int FUN_002ee9da(Reader *reader);
+int streamSeek(Reader *reader);
 int FUN_002fbc1a(Reader *reader, void *out);
-int FUN_00300900(Reader *reader, void *out);
-int FUN_00300934(Reader *reader, void *out);
+int streamExtractU8(Reader *reader, void *out);
+int streamReadWord(Reader *reader, void *out);
 
 /* Reads a record from `reader`; on success checks that it consumed exactly the declared size and marks the reader finished. */
 void FUN_0011786c(Reader *reader, Record *record)
@@ -27,11 +27,11 @@ void FUN_0011786c(Reader *reader, Record *record)
     headerless = reader->headerless;
     size = 0;
     if (headerless == 0) {
-        FUN_00300900(reader, &record->flag);
+        streamExtractU8(reader, &record->flag);
         if (reader->error != 0) {
             return;
         }
-        FUN_00300934(reader, &size);
+        streamReadWord(reader, &size);
         if (reader->error != 0) {
             return;
         }
@@ -51,7 +51,7 @@ void FUN_0011786c(Reader *reader, Record *record)
     if (headerless != 0) {
         return;
     }
-    if (reader->pos > start + size || FUN_002ee9da(reader) == 0) {
+    if (reader->pos > start + size || streamSeek(reader) == 0) {
         reader->error = 1;
     }
 }

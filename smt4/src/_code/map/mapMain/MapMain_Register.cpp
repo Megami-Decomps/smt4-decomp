@@ -39,7 +39,7 @@ extern unsigned char DAT_0049fb47; /* 0x49fb47 */
 /* Supplied declaration required: FUN_001b3da4. */
 /* Supplied declaration required: FUN_001b4764. */
 /* Supplied declaration required: FUN_00280ac0. */
-extern int FUN_002c2950(void);
+extern int gameGetMapBlock(void);
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdProcessCreateSimple. */
@@ -58,7 +58,7 @@ void MapMain_Register(void)
   puVar1 = (unsigned int *)0x100;
   asdMemAlloc(0x100,0x100,0,200,1);
   g_mapMain = puVar1;
-  temp_v0 = FUN_002c2950();
+  temp_v0 = gameGetMapBlock();
   FUN_00280ac0(1);
   *(unsigned char *)((int)puVar1 + 0xd) = 0;
   *(unsigned char *)((int)puVar1 + 0xe) = 0;

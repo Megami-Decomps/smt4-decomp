@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002592d8(int);
+int scrGetArgString(int);
 
 extern unsigned int FUN_00100bd4(void);
 extern int FUN_001eb398(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002592d8. */
+/* Supplied declaration required: scrGetArgString. */
 extern unsigned int scrGetArg(unsigned int);
 
 
@@ -21,7 +21,7 @@ unsigned char FUN_001ed5c0(void)
   int temp_v2;
   
   temp_v0 = scrGetArg(0);
-  FUN_002592d8(1);
+  scrGetArgString(1);
   temp_v1 = FUN_00100bd4();
   temp_v2 = FUN_001eb398(temp_v0,temp_v1);
   return temp_v2 != 0;

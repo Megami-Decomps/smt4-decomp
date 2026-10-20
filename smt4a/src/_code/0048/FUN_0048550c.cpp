@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00484264(int, unsigned int *);
-int FUN_004853fc(int, int);
+int stateSetterEnterState(int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -14,10 +14,10 @@ typedef struct {
 
 extern unsigned int *FUN_0015687c(void);
 extern int FUN_00163aa4(int);
-extern unsigned int *FUN_00261828(void);
+extern unsigned int *gameDataGetPlayerName(void);
 extern unsigned int *gameBlockGetArea221AA(void);
 /* Supplied declaration required: FUN_00484264. */
-/* Supplied declaration required: FUN_004853fc. */
+/* Supplied declaration required: stateSetterEnterState. */
 
 
 void FUN_0048550c(int param_1)
@@ -39,7 +39,7 @@ void FUN_0048550c(int param_1)
       FUN_00484264(param_1,puVar2);
     }
     if (*(char *)(param_1 + 0x261) == '\x01') {
-      puVar2 = (unsigned int *)FUN_00261828();
+      puVar2 = (unsigned int *)gameDataGetPlayerName();
       *puVar2 = 0;
       puVar2[1] = 0;
       puVar2[2] = 0;
@@ -65,7 +65,7 @@ void FUN_0048550c(int param_1)
       *(unsigned short *)(puVar2 + 4) = 0;
       FUN_00484264(param_1,puVar2);
     }
-    FUN_004853fc(param_1,8);
+    stateSetterEnterState(param_1,8);
     return;
   }
   return;

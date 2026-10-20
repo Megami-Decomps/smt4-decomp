@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_0039309c(void *target);
+int stateHandlerCall(void *target);
 
 typedef struct Target {
     /* 0x00 */ u8 unk00[0x1A];
@@ -22,7 +22,7 @@ u32 FUN_0020ed30(Target **owner)
             sub = target->unk1C;
         }
         if (target != NULL && sub != NULL) {
-            FUN_0039309c(sub);
+            stateHandlerCall(sub);
         }
     }
     return 0;

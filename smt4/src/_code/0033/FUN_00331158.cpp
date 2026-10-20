@@ -12,7 +12,7 @@ int FUN_00299900(...);
 int FUN_00299bc4(...);
 int FUN_0029cc44(...);
 int FUN_0029e328(int);
-int FUN_0029e39c(int, int);
+int sortMenuCreate(int, int);
 int FUN_0029ee6c(int, int);
 int FUN_0029efd8(int, int);
 int FUN_0029f5d8(int, unsigned int, int, int, int, int, char [4], int, int);
@@ -29,7 +29,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_1_stack;
 
-extern int DAT_0043da90; /* 0x43da90 */
+extern int g_camp; /* 0x43da90 */
 
 /* Supplied declaration required: guestWinRequestClose. */
 /* Supplied declaration required: FUN_0028fc60. */
@@ -39,7 +39,7 @@ extern int DAT_0043da90; /* 0x43da90 */
 /* Supplied declaration required: FUN_00299bc4. */
 /* Supplied declaration required: FUN_0029cc44. */
 /* Supplied declaration required: FUN_0029e328. */
-/* Supplied declaration required: FUN_0029e39c. */
+/* Supplied declaration required: sortMenuCreate. */
 extern unsigned int FUN_0029e908(int);
 /* Supplied declaration required: FUN_0029ee6c. */
 extern int FUN_0029efa8(int);
@@ -67,19 +67,19 @@ void FUN_00331158(int param_1)
   int temp_v6;
   char temp_v7 [4];
   
-  temp_v0 = DAT_0043da90;
+  temp_v0 = g_camp;
   temp_v6 = 0;
   if (param_1 == 0xb) {
-    temp_v6 = DAT_0043da90 + 0xb0;
+    temp_v6 = g_camp + 0xb0;
   }
   else if (param_1 == 0xc) {
-    temp_v6 = DAT_0043da90 + 0x114;
+    temp_v6 = g_camp + 0x114;
   }
   else if (param_1 == 0xd) {
-    temp_v6 = DAT_0043da90 + 0x178;
+    temp_v6 = g_camp + 0x178;
   }
-  if (*(int *)(DAT_0043da90 + 0x1c) != 0) {
-    if (*(int *)(DAT_0043da90 + 0x1c) == 1) {
+  if (*(int *)(g_camp + 0x1c) != 0) {
+    if (*(int *)(g_camp + 0x1c) == 1) {
       temp_v7[0] = '\0';
       temp_v2 = FUN_002bf4f8(0x1d,0x56d);
       temp_v3 = temp_v6;
@@ -100,9 +100,9 @@ void FUN_00331158(int param_1)
           FUN_00299900(0);
           timerStart(temp_v0 + 0x6d4,3,0);
           *(unsigned int *)(temp_v0 + 0x20) = 6;
-          temp_v0 = DAT_0043da90;
-          puVar7 = (unsigned int *)(DAT_0043da90 + 0x18);
-          *(unsigned int *)(DAT_0043da90 + 0x24) = *(unsigned int *)(DAT_0043da90 + 0x18);
+          temp_v0 = g_camp;
+          puVar7 = (unsigned int *)(g_camp + 0x18);
+          *(unsigned int *)(g_camp + 0x24) = *(unsigned int *)(g_camp + 0x18);
           *puVar7 = 5;
           *(unsigned int *)(temp_v0 + 0x1c) = 0;
           *(unsigned int *)(temp_v0 + 0x14) = 0;
@@ -119,14 +119,14 @@ void FUN_00331158(int param_1)
           }
           if (param_1 != 0xb) {
             if (param_1 == 0xd) {
-              FUN_0029e39c(4,0);
+              sortMenuCreate(4,0);
               FUN_0029e328(0x21);
               FUN_0029e328(0x10);
               FUN_0029e328(3);
             }
           }
           else {
-            FUN_0029e39c(3,0);
+            sortMenuCreate(3,0);
             FUN_0029e328(0xc);
             FUN_0029e328(0x10);
             FUN_0029e328(3);
@@ -134,9 +134,9 @@ void FUN_00331158(int param_1)
           FUN_0029ee6c(0,0x323232ff);
           temp_v1 = FUN_002b898c();
           *(unsigned char *)(temp_v0 + 0x31) = temp_v1;
-          temp_v0 = DAT_0043da90;
-          puVar7 = (unsigned int *)(DAT_0043da90 + 0x18);
-          *(unsigned int *)(DAT_0043da90 + 0x24) = *(unsigned int *)(DAT_0043da90 + 0x18);
+          temp_v0 = g_camp;
+          puVar7 = (unsigned int *)(g_camp + 0x18);
+          *(unsigned int *)(g_camp + 0x24) = *(unsigned int *)(g_camp + 0x18);
           *puVar7 = 0x28;
           *(unsigned int *)(temp_v0 + 0x1c) = 0;
           *(unsigned int *)(temp_v0 + 0x14) = 0;
@@ -152,9 +152,9 @@ void FUN_00331158(int param_1)
           *(unsigned int *)(temp_v0 + 0x2c) = (unsigned int)*(unsigned short *)(temp_v3 + 0x147c);
           timerStart(temp_v0 + 0x6d4,3,0);
           *(unsigned int *)(temp_v0 + 0x20) = 0xb;
-          temp_v0 = DAT_0043da90;
-          puVar7 = (unsigned int *)(DAT_0043da90 + 0x18);
-          *(unsigned int *)(DAT_0043da90 + 0x24) = *(unsigned int *)(DAT_0043da90 + 0x18);
+          temp_v0 = g_camp;
+          puVar7 = (unsigned int *)(g_camp + 0x18);
+          *(unsigned int *)(g_camp + 0x24) = *(unsigned int *)(g_camp + 0x18);
           *puVar7 = 5;
           *(unsigned int *)(temp_v0 + 0x1c) = 0;
           *(unsigned int *)(temp_v0 + 0x14) = 0;

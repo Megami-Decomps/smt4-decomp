@@ -4,19 +4,19 @@ extern "C" {
 
 u32 FUN_0030a2c0(u32 a, u32 b, u32 c, u32 d);
 extern u32 DAT_0043df58;
-extern u32 FUN_002592d8(u32 index);
-extern int FUN_002893d8(void);
+extern u32 scrGetArgString(u32 index);
+extern int scrGetCommandFrame(void);
 extern u32 scrGetArg(u32 index);
 extern int jobIsValid(u32 job);
 
 u32 FUN_002220ac(void)
 {
-    u32 a = FUN_002592d8(0);
+    u32 a = scrGetArgString(0);
     u32 b = scrGetArg(1);
     u32 c = scrGetArg(2);
     u32 d = scrGetArg(3);
 
-    if (FUN_002893d8() != 0) {
+    if (scrGetCommandFrame() != 0) {
         if (jobIsValid(DAT_0043df58) == 0) {
             return 1;
         }

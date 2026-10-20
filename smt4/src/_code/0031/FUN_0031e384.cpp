@@ -24,9 +24,9 @@ extern int DAT_0043e2c4; /* 0x43e2c4 */
 
 /* Supplied declaration required: FUN_0027f958. */
 /* Supplied declaration required: FUN_00281e34. */
-extern int FUN_002b8cec(unsigned int);
+extern int padIsButtonRepeat(unsigned int);
 /* Supplied declaration required: FUN_002bf810. */
-extern int FUN_002bfde4(unsigned int);
+extern int padIsButtonPressed(unsigned int);
 extern int FUN_002c15fc(unsigned int);
 
 
@@ -168,29 +168,29 @@ unsigned char FUN_0031e384(void)
     return temp_v0;
   }
   if (DAT_0043e2c4 == 0xc) {
-    temp_v1 = FUN_002bfde4(10);
+    temp_v1 = padIsButtonPressed(10);
     if (temp_v1 == 0) {
-      temp_v1 = FUN_002b8cec(2);
+      temp_v1 = padIsButtonRepeat(2);
       if (temp_v1 != 0) {
         DAT_0043e2c4 = 0;
         return temp_v0;
       }
-      temp_v1 = FUN_002b8cec(1);
+      temp_v1 = padIsButtonRepeat(1);
       if (temp_v1 != 0) {
         DAT_0043e2c4 = 0;
         return temp_v0;
       }
-      temp_v1 = FUN_002b8cec(9);
+      temp_v1 = padIsButtonRepeat(9);
       if (temp_v1 != 0) {
         DAT_0043e2c4 = 0;
         return temp_v0;
       }
-      temp_v1 = FUN_002b8cec(10);
+      temp_v1 = padIsButtonRepeat(10);
       if (temp_v1 != 0) {
         DAT_0043e2c4 = 0;
         return temp_v0;
       }
-      temp_v1 = FUN_002b8cec(0);
+      temp_v1 = padIsButtonRepeat(0);
       if (temp_v1 != 0) {
         DAT_0043e2c4 = 0;
         return temp_v0;
@@ -202,32 +202,32 @@ unsigned char FUN_0031e384(void)
   }
   else if (DAT_0043e2c4 != 0xd) {
     if (DAT_0043e2c4 == 0xe) {
-      temp_v1 = FUN_002bfde4(6);
+      temp_v1 = padIsButtonPressed(6);
       if (temp_v1 != 0) {
         DAT_0043e2c4 = DAT_0043e2c4 + 1;
       }
       else {
-        temp_v1 = FUN_002b8cec(2);
+        temp_v1 = padIsButtonRepeat(2);
         if (temp_v1 != 0) {
           DAT_0043e2c4 = 0;
           return temp_v0;
         }
-        temp_v1 = FUN_002b8cec(1);
+        temp_v1 = padIsButtonRepeat(1);
         if (temp_v1 != 0) {
           DAT_0043e2c4 = 0;
           return temp_v0;
         }
-        temp_v1 = FUN_002b8cec(9);
+        temp_v1 = padIsButtonRepeat(9);
         if (temp_v1 != 0) {
           DAT_0043e2c4 = 0;
           return temp_v0;
         }
-        temp_v1 = FUN_002b8cec(10);
+        temp_v1 = padIsButtonRepeat(10);
         if (temp_v1 != 0) {
           DAT_0043e2c4 = 0;
           return temp_v0;
         }
-        temp_v1 = FUN_002b8cec(0);
+        temp_v1 = padIsButtonRepeat(0);
         if (temp_v1 != 0) {
           DAT_0043e2c4 = 0;
           return temp_v0;
@@ -236,29 +236,29 @@ unsigned char FUN_0031e384(void)
     }
   }
   else {
-    temp_v1 = FUN_002bfde4(5);
+    temp_v1 = padIsButtonPressed(5);
     if (temp_v1 == 0) {
-      temp_v1 = FUN_002b8cec(2);
+      temp_v1 = padIsButtonRepeat(2);
       if (temp_v1 != 0) {
         DAT_0043e2c4 = 0;
         return temp_v0;
       }
-      temp_v1 = FUN_002b8cec(1);
+      temp_v1 = padIsButtonRepeat(1);
       if (temp_v1 != 0) {
         DAT_0043e2c4 = 0;
         return temp_v0;
       }
-      temp_v1 = FUN_002b8cec(9);
+      temp_v1 = padIsButtonRepeat(9);
       if (temp_v1 != 0) {
         DAT_0043e2c4 = 0;
         return temp_v0;
       }
-      temp_v1 = FUN_002b8cec(10);
+      temp_v1 = padIsButtonRepeat(10);
       if (temp_v1 != 0) {
         DAT_0043e2c4 = 0;
         return temp_v0;
       }
-      temp_v1 = FUN_002b8cec(0);
+      temp_v1 = padIsButtonRepeat(0);
       if (temp_v1 != 0) {
         DAT_0043e2c4 = 0;
         return temp_v0;

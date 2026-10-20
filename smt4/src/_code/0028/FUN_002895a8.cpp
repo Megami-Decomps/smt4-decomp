@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_002917b8(void);
+int buttonHelpRelease(void);
 int scrScriptProcessDestroy(u32 process);
 int asdMemFree(u32 ptr);
 
@@ -30,7 +30,7 @@ void FUN_002895a8(Obj *obj)
         obj->script = 0;
     }
     if (obj->unk08 != 0) {
-        FUN_002917b8();
+        buttonHelpRelease();
         return;
     }
 }

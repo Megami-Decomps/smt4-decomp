@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_00146a74(void);
-int FUN_00146c58(void);
-int FUN_00146c6c(void);
+int nnosInitAddressSpaceApplication(void);
+int nnosInitAddressSpaceHeap(void);
 int FUN_00146cbc(void);
 int FUN_0017fc74(void);
 int FUN_002e3140(void);
@@ -19,8 +19,8 @@ typedef struct {
 extern unsigned int DAT_005c1be8; /* 0x5c1be8 */
 
 /* Supplied declaration required: FUN_00146a74. */
-/* Supplied declaration required: FUN_00146c58. */
-/* Supplied declaration required: FUN_00146c6c. */
+/* Supplied declaration required: nnosInitAddressSpaceApplication. */
+/* Supplied declaration required: nnosInitAddressSpaceHeap. */
 /* Supplied declaration required: FUN_00146cbc. */
 /* Supplied declaration required: FUN_0017fc74. */
 /* Supplied declaration required: FUN_002e3140. */
@@ -36,8 +36,8 @@ void FUN_00146c34(void)
   
   FUN_00146a74();
   FUN_00146cbc();
-  FUN_00146c6c();
-  FUN_00146c58();
+  nnosInitAddressSpaceHeap();
+  nnosInitAddressSpaceApplication();
   FUN_0017fc74();
   temp_v0 = func_0x001623b4(temp_v1,0xffff8001,0x14);
   if ((temp_v0 & 0x80000000) != 0) {

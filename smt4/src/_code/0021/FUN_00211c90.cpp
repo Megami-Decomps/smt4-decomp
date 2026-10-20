@@ -4,16 +4,16 @@
 
 extern "C" {
 
-int FUN_00291414(unsigned int);
-int FUN_002916ac(int);
+int nodeTreeReleaseItemClearOwner(unsigned int);
+int nodeTreeReleaseItem(int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_00291414. */
-/* Supplied declaration required: FUN_002916ac. */
+/* Supplied declaration required: nodeTreeReleaseItemClearOwner. */
+/* Supplied declaration required: nodeTreeReleaseItem. */
 
 
 void FUN_00211c90(int param_1)
@@ -32,7 +32,7 @@ void FUN_00211c90(int param_1)
   }
   *(unsigned int *)(param_1 + 0x24) = unaff_r6;
   do {
-    FUN_00291414(*(unsigned int *)(param_1 + temp_v0 * 4 + 0x264));
+    nodeTreeReleaseItemClearOwner(*(unsigned int *)(param_1 + temp_v0 * 4 + 0x264));
     temp_v0 = temp_v0 + 1;
   } while (temp_v0 < 0x32);
   *(unsigned int *)(param_1 + 0x24) = unaff_r6;
@@ -45,7 +45,7 @@ void FUN_00211c90(int param_1)
   if (*(unsigned int **)(param_1 + 0x254) != (unsigned int *)0x0) {
     **(unsigned int **)(param_1 + 0x254) = unaff_r6;
   }
-  FUN_002916ac(param_1);
+  nodeTreeReleaseItem(param_1);
   return;
 }
 

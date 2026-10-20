@@ -7,13 +7,13 @@ extern "C" {
 int FUN_00293f10(int, int);
 int FUN_002942c4(int, int);
 int FUN_002958f8(int, int);
-int FUN_002af5c0(...);
+int uiSpriteSetImageKeyframe(...);
 
 /* Supplied declaration required: FUN_00293f10. */
 /* Supplied declaration required: FUN_002942c4. */
 /* Supplied declaration required: FUN_002958f8. */
-extern int FUN_002a60b4(unsigned int, int);
-/* Supplied declaration required: FUN_002af5c0. */
+extern int asdTMTexTableNodeIsLoaded(unsigned int, int);
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 extern int FUN_002bf818(int);
 
 
@@ -41,7 +41,7 @@ unsigned int FUN_003ac484(int param_1)
   case 2:
     temp_v3 = 0;
     do {
-      temp_v2 = FUN_002a60b4(0x22,temp_v3);
+      temp_v2 = asdTMTexTableNodeIsLoaded(0x22,temp_v3);
       if (temp_v2 == 0) goto LAB_003ac5a4;
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 2);
@@ -117,8 +117,8 @@ LAB_003ac5a4:
       return 0;
     }
     *(unsigned char *)(temp_v4 + 0x1e) = 4;
-    FUN_002af5c0(temp_v4 + 0xcc,0);
-    FUN_002af5c0(temp_v4 + 0x1e4,1,0);
+    uiSpriteSetImageKeyframe(temp_v4 + 0xcc,0);
+    uiSpriteSetImageKeyframe(temp_v4 + 0x1e4,1,0);
     *(unsigned int *)(temp_v4 + 0x14) = *(unsigned int *)(temp_v4 + 0xc);
     *(unsigned int *)(temp_v4 + 0x18) = *(unsigned int *)(temp_v4 + 0x10);
     temp_v0 = *(short *)(temp_v4 + 0x18);

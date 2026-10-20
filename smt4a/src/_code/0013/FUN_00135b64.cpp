@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_001003ea(unsigned int *, unsigned int *, int);
-int FUN_00100b14(unsigned int *, unsigned int *, int);
-int FUN_001028f4(void);
-int FUN_00102984(void);
+int libc_printfStr(unsigned int *, unsigned int *, int);
+int libc_printfWstr(unsigned int *, unsigned int *, int);
+int libc_wprintfStr(void);
+int libc_wprintfWstr(void);
 int FUN_002e31ea(unsigned int *);
-int FUN_002e6e14(void);
+int asdOperatorDeleteArray(void);
 int FUN_003077e8(void);
 int SBORROW4(...);
 int coprocessor_loadlong(int, unsigned int, unsigned int *);
@@ -20,16 +20,16 @@ typedef int romwright_code(...);
 /* Unsupported intrinsic, declaration required: romwright_set_sp (a write of the stack pointer). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Unsupported intrinsic, declaration required: coprocessor_loadlong (CALLOTHER). */
-/* Supplied declaration required: FUN_001003ea. */
-/* Supplied declaration required: FUN_00100b14. */
+/* Supplied declaration required: libc_printfStr. */
+/* Supplied declaration required: libc_printfWstr. */
 extern unsigned int FUN_00100c50(unsigned int *, int, int, unsigned int);
-/* Supplied declaration required: FUN_001028f4. */
-/* Supplied declaration required: FUN_00102984. */
+/* Supplied declaration required: libc_wprintfStr. */
+/* Supplied declaration required: libc_wprintfWstr. */
 /* Supplied declaration required: FUN_002e31ea. */
 extern unsigned int FUN_002e3216(unsigned int *);
 extern unsigned long long FUN_002e354a(unsigned int, unsigned int *, unsigned int *, unsigned int);
 extern int FUN_002e3f88(unsigned int, unsigned short, unsigned int);
-/* Supplied declaration required: FUN_002e6e14. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
 extern int vectorCount4_002f1370(void);
 /* Supplied declaration required: FUN_003077e8. */
 
@@ -181,10 +181,10 @@ unsigned int * FUN_00135b64(unsigned int *param_1,unsigned int param_2,unsigned 
           *(unsigned char *)(param_1 + 9) = (unsigned char)*param_3;
           *(unsigned char *)((int)param_1 + 0x25) = 0;
           if (param_1[5] != 0) {
-            FUN_001028f4();
+            libc_wprintfStr();
           }
           else {
-            FUN_001003ea(param_1,param_1 + 9,1);
+            libc_printfStr(param_1,param_1 + 9,1);
           }
           return (unsigned int *)0x1;
         }
@@ -197,10 +197,10 @@ unsigned int * FUN_00135b64(unsigned int *param_1,unsigned int param_2,unsigned 
           ((unsigned char *)((int)param_1 + 0x26))[0] = 0;
           ((unsigned char *)((int)param_1 + 0x26))[1] = 0;
           if (param_1[5] != 0) {
-            FUN_00102984();
+            libc_wprintfWstr();
           }
           else {
-            FUN_00100b14(param_1,param_1 + 9,1);
+            libc_printfWstr(param_1,param_1 + 9,1);
           }
           return (unsigned int *)0x1;
         }
@@ -233,7 +233,7 @@ unsigned int * FUN_00135b64(unsigned int *param_1,unsigned int param_2,unsigned 
     temp_v1 = vectorCount4_002f1370();
     for (temp_v2 = *unaff_r6; temp_v2 != unaff_r6[1]; temp_v2 = temp_v2 + 4) {
     }
-    FUN_002e6e14();
+    asdOperatorDeleteArray();
     temp_v3 = *(int *)((unsigned int)__current_sp());
     *unaff_r6 = unaff_r5;
     temp_v4 = *(int *)((int)((unsigned int)__current_sp()) + 4);

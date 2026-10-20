@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00219908(void);
 int FUN_002629a8(int, int);
 int FUN_002629f0(int, int);
-int FUN_002c0894(void);
+int asdTextureRelease(void);
 int FUN_002c15fc(int);
 int FUN_002fcd98(int);
 int effMenuListsClear(void);
@@ -21,7 +21,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } void_stack;
 
-extern signed char DAT_0044ea80; /* 0x44ea80 */
+extern signed char g_effectEditor; /* 0x44ea80 */
 extern unsigned char DAT_0044ea86; /* 0x44ea86 */
 extern signed char DAT_0044ea88; /* 0x44ea88 */
 extern unsigned int DAT_0044ea8c; /* 0x44ea8c */
@@ -43,8 +43,8 @@ extern unsigned int DAT_0044f864; /* 0x44f864 */
 /* Supplied declaration required: FUN_00219908. */
 /* Supplied declaration required: FUN_002629a8. */
 /* Supplied declaration required: FUN_002629f0. */
-extern int FUN_002bfde4(unsigned int);
-/* Supplied declaration required: FUN_002c0894. */
+extern int padIsButtonPressed(unsigned int);
+/* Supplied declaration required: asdTextureRelease. */
 /* Supplied declaration required: FUN_002c15fc. */
 /* Supplied declaration required: FUN_002fcd98. */
 /* Supplied declaration required: effMenuListsClear. */
@@ -86,12 +86,12 @@ unsigned int FUN_001dcc64(void)
     effMenuListsClear();
     FUN_002fcd98(0);
     temp_v1 = FUN_002c15fc(0x1c);
-    if ((temp_v1 != 0) && (temp_v1 = FUN_002bfde4(0x1b), temp_v1 != 0)) {
-      if (DAT_0044ea80 == '\0') {
-        DAT_0044ea80 = '\x01';
+    if ((temp_v1 != 0) && (temp_v1 = padIsButtonPressed(0x1b), temp_v1 != 0)) {
+      if (g_effectEditor == '\0') {
+        g_effectEditor = '\x01';
       }
       else {
-        DAT_0044ea80 = '\0';
+        g_effectEditor = '\0';
       }
     }
     return 1;
@@ -120,7 +120,7 @@ unsigned int FUN_001dcc64(void)
   DAT_0044eae8 = 0;
   DAT_0044ea88 = 0;
   if (DAT_0044eab0 != 0) {
-    FUN_002c0894();
+    asdTextureRelease();
     DAT_0044eab0 = 0;
   }
   return 0;

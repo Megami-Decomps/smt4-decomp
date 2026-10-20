@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001ad9b4(void);
 
 /* Supplied declaration required: FUN_001ad9b4. */
-extern int FUN_001b564c(unsigned short);
+extern int gameCountersGetWord(unsigned short);
 extern int FUN_001b5660(int);
 extern int FUN_001ba3d4(unsigned short);
 extern int FUN_001ba514(unsigned short);
@@ -37,7 +37,7 @@ void FUN_003df004(int param_1,int param_2,int *param_3)
           }
           temp_v1 = *(unsigned short *)(temp_v4 + 0x102);
           *(unsigned short *)(param_3 + 1) = temp_v1;
-          temp_v3 = FUN_001b564c(temp_v1 & 0xff);
+          temp_v3 = gameCountersGetWord(temp_v1 & 0xff);
           param_3[2] = temp_v3;
           temp_v3 = *(int *)(temp_v4 + 0x104) - temp_v3;
           *param_3 = temp_v3;

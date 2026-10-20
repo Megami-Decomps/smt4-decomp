@@ -14,8 +14,8 @@ typedef int romwright_code(...);
 #endif
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-extern unsigned int FUN_002ea714(void);
-extern int FUN_002f8782(int *);
+extern unsigned int onlineGetActiveLock(void);
+extern int rangeIsEmpty3(int *);
 
 
 long long FUN_0010e290(int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -31,10 +31,10 @@ long long FUN_0010e290(int *param_1,unsigned int param_2,unsigned int param_3,un
   uStack_18 = param_2;
   uStack_14 = param_3;
   uStack_10 = param_4;
-  temp_v0 = FUN_002ea714();
+  temp_v0 = onlineGetActiveLock();
   FUN_002e6e34(&uStack_18,temp_v0);
   do {
-    temp_v1 = FUN_002f8782(param_1 + 0x58);
+    temp_v1 = rangeIsEmpty3(param_1 + 0x58);
     if (temp_v1 != 0) {
       FUN_002e6e5c(&uStack_18);
       return romwright_piece_4_4(uStack_18,1);

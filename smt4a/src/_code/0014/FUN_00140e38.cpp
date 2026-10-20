@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned char DAT_0059dbc0; /* 0x59dbc0 */
+extern unsigned char g_asdCamera; /* 0x59dbc0 */
 
 
 void FUN_00140e38(unsigned int param_1)
@@ -14,8 +14,8 @@ void FUN_00140e38(unsigned int param_1)
   
   temp_v0 = 0;
   do {
-    if (*(int *)((*(int *)((unsigned char *)&DAT_0059dbc0 + 0x4)) + temp_v0 * 4) == 0) {
-      *(unsigned int *)((*(int *)((unsigned char *)&DAT_0059dbc0 + 0x4)) + temp_v0 * 4) = param_1;
+    if (*(int *)((*(int *)((unsigned char *)&g_asdCamera + 0x4)) + temp_v0 * 4) == 0) {
+      *(unsigned int *)((*(int *)((unsigned char *)&g_asdCamera + 0x4)) + temp_v0 * 4) = param_1;
       return;
     }
     temp_v0 = temp_v0 + 1;

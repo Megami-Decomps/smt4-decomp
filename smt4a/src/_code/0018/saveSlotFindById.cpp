@@ -13,7 +13,7 @@ typedef struct SaveState {
     /* 0x1DDC */ Slot slots[12];
 } SaveState;
 
-SaveState *FUN_001ab888(void);
+SaveState *gameGetSlotTable(void);
 
 /* Returns the slot with the given index, or NULL when the index is out of range. */
 static __inline Slot *getSlot(u16 index)
@@ -21,7 +21,7 @@ static __inline Slot *getSlot(u16 index)
     if (index >= 12) {
         return NULL;
     }
-    return &FUN_001ab888()->slots[index];
+    return &gameGetSlotTable()->slots[index];
 }
 
 /* Returns the slot with the given id, or NULL. */

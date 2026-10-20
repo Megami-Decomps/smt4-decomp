@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_0019a7f4(int, unsigned int);
+int asdTMTexTableReleaseNode(int, unsigned int);
 int FUN_001acf98(int, unsigned int);
 
-extern int FUN_0018206c(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0019a7f4. */
+extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
 /* Supplied declaration required: FUN_001acf98. */
 extern unsigned int FUN_002adba8(int);
 
@@ -32,17 +32,17 @@ void FUN_003aedc8(int param_1,int param_2)
         *(unsigned int *)(temp_v5 + 0x94) = 0;
       }
       temp_v1 = FUN_002adba8(temp_v4);
-      temp_v2 = FUN_0018206c(0x2e,temp_v1);
+      temp_v2 = asdTMTexTableNodeIsLoaded(0x2e,temp_v1);
       if (((temp_v2 != 0) && (*(int *)(temp_v5 + 0x94) == 3)) && (param_1 != 0)) {
         temp_v1 = FUN_002adba8(temp_v4);
-        temp_v3 = FUN_0018206c(0x2e,temp_v1);
+        temp_v3 = asdTMTexTableNodeIsLoaded(0x2e,temp_v1);
         temp_v2 = 0;
         if (temp_v3 != 0) {
           temp_v2 = *(int *)(temp_v5 + 0x94);
         }
         if (temp_v3 != 0 && temp_v2 != 2) {
           temp_v1 = FUN_002adba8(temp_v4);
-          FUN_0019a7f4(0x2e,temp_v1);
+          asdTMTexTableReleaseNode(0x2e,temp_v1);
           *(unsigned int *)(temp_v5 + 0x94) = 0;
         }
       }
@@ -55,7 +55,7 @@ void FUN_003aedc8(int param_1,int param_2)
     temp_v5 = param_1 + temp_v4 * 4;
     if (*(int *)(temp_v5 + 0x94) == 2) {
       temp_v1 = FUN_002adba8(temp_v4);
-      temp_v2 = FUN_0018206c(0x2e,temp_v1);
+      temp_v2 = asdTMTexTableNodeIsLoaded(0x2e,temp_v1);
       if (temp_v2 == 0) {
         temp_v0 = 1;
       }
@@ -75,7 +75,7 @@ void FUN_003aedc8(int param_1,int param_2)
     }
     if (param_1 != 0) {
       temp_v1 = FUN_002adba8(temp_v4);
-      temp_v5 = FUN_0018206c(0x2e,temp_v1);
+      temp_v5 = asdTMTexTableNodeIsLoaded(0x2e,temp_v1);
       if ((temp_v5 == 0) &&
          (param_1 = param_1 + temp_v4 * 4, temp_v5 = *(int *)(param_1 + 0x94), temp_v5 != 3 && temp_v5 != 2)
          ) {

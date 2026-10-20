@@ -6,7 +6,7 @@ extern "C" {
 
 int qsort(...);
 int screenShowMessage(...);
-int FUN_00493e14(...);
+int cellListAppend(...);
 int FUN_004964e0(...);
 int FUN_004cfeb0(...);
 int FUN_004cff88(...);
@@ -24,7 +24,7 @@ extern unsigned char LAB_0049cf3c; /* 0x49cf3c */
 /* Supplied declaration required: qsort. */
 /* Supplied declaration required: screenShowMessage. */
 extern int FUN_00481100(unsigned int);
-/* Supplied declaration required: FUN_00493e14. */
+/* Supplied declaration required: cellListAppend. */
 /* Supplied declaration required: FUN_004964e0. */
 extern int FUN_004cfe4c(int);
 /* Supplied declaration required: FUN_004cfeb0. */
@@ -53,7 +53,7 @@ void FUN_00496a0c(int param_1,unsigned int param_2)
           do {
             temp_v0 = FUN_00481100(temp_v4);
             if (temp_v0 != 0) {
-              FUN_00493e14(param_1 + 0x8f84,temp_v4 & 0xffff,0,0,0);
+              cellListAppend(param_1 + 0x8f84,temp_v4 & 0xffff,0,0,0);
             }
             temp_v4 = temp_v4 + 1;
           } while ((int)temp_v4 < 0x3d);
@@ -61,7 +61,7 @@ void FUN_00496a0c(int param_1,unsigned int param_2)
           do {
             temp_v0 = FUN_00481100(temp_v4);
             if (temp_v0 != 0) {
-              FUN_00493e14(param_1 + 0x8f84,temp_v4 & 0xffff,0,0,0);
+              cellListAppend(param_1 + 0x8f84,temp_v4 & 0xffff,0,0,0);
             }
             temp_v4 = temp_v4 + 1;
           } while ((int)temp_v4 < 0x7df);
@@ -71,7 +71,7 @@ void FUN_00496a0c(int param_1,unsigned int param_2)
         do {
           temp_v0 = FUN_00481100(temp_v3);
           if (temp_v0 != 0) {
-            FUN_00493e14(param_1 + 0x8f84,temp_v3 & 0xffff,0,0,0);
+            cellListAppend(param_1 + 0x8f84,temp_v3 & 0xffff,0,0,0);
           }
           temp_v3 = temp_v3 + 1;
         } while ((int)temp_v3 < 0x1a5);
@@ -79,7 +79,7 @@ void FUN_00496a0c(int param_1,unsigned int param_2)
         do {
           temp_v0 = FUN_00481100(temp_v4);
           if (temp_v0 != 0) {
-            FUN_00493e14(param_1 + 0x8f84,temp_v4 & 0xffff,0,0,0);
+            cellListAppend(param_1 + 0x8f84,temp_v4 & 0xffff,0,0,0);
           }
           temp_v4 = temp_v4 + 1;
         } while ((int)temp_v4 < 0x21d);
@@ -87,7 +87,7 @@ void FUN_00496a0c(int param_1,unsigned int param_2)
         do {
           temp_v0 = FUN_00481100(temp_v4);
           if (temp_v0 != 0) {
-            FUN_00493e14(param_1 + 0x8f84,temp_v4 & 0xffff,0,0,0);
+            cellListAppend(param_1 + 0x8f84,temp_v4 & 0xffff,0,0,0);
           }
           temp_v4 = temp_v4 + 1;
         } while ((int)temp_v4 < 0x295);
@@ -95,7 +95,7 @@ void FUN_00496a0c(int param_1,unsigned int param_2)
         do {
           temp_v0 = FUN_00481100(temp_v4);
           if (temp_v0 != 0) {
-            FUN_00493e14(param_1 + 0x8f84,temp_v4 & 0xffff,0,0,0);
+            cellListAppend(param_1 + 0x8f84,temp_v4 & 0xffff,0,0,0);
           }
           temp_v4 = temp_v4 + 1;
         } while ((int)temp_v4 < 0x30d);
@@ -106,7 +106,7 @@ void FUN_00496a0c(int param_1,unsigned int param_2)
       do {
         temp_v0 = FUN_00481100(temp_v3);
         if (temp_v0 != 0) {
-          FUN_00493e14(param_1 + 0x8f84,temp_v3 & 0xffff,0,0,0);
+          cellListAppend(param_1 + 0x8f84,temp_v3 & 0xffff,0,0,0);
         }
         temp_v3 = temp_v3 + 1;
       } while ((int)temp_v3 < 0xb5);
@@ -114,14 +114,14 @@ void FUN_00496a0c(int param_1,unsigned int param_2)
       do {
         temp_v0 = FUN_00481100(temp_v3);
         if (temp_v0 != 0) {
-          FUN_00493e14(param_1 + 0x8f84,temp_v3 & 0xffff,0,0,0);
+          cellListAppend(param_1 + 0x8f84,temp_v3 & 0xffff,0,0,0);
         }
         temp_v3 = temp_v3 + 1;
       } while ((int)temp_v3 < 0x12d);
       do {
         temp_v0 = FUN_00481100(temp_v4);
         if (temp_v0 != 0) {
-          FUN_00493e14(param_1 + 0x8f84,temp_v4 & 0xffff,0,0,0);
+          cellListAppend(param_1 + 0x8f84,temp_v4 & 0xffff,0,0,0);
         }
         temp_v4 = temp_v4 + 1;
       } while ((int)temp_v4 < 0x33f);
@@ -133,7 +133,7 @@ void FUN_00496a0c(int param_1,unsigned int param_2)
     do {
       temp_v1 = FUN_00481100(temp_v2);
       if (temp_v1 != 0) {
-        FUN_00493e14(temp_v0,temp_v2 & 0xffff,0,0,0);
+        cellListAppend(temp_v0,temp_v2 & 0xffff,0,0,0);
       }
       temp_v2 = temp_v2 + 1;
     } while ((int)temp_v2 < 0x3d);
@@ -142,7 +142,7 @@ void FUN_00496a0c(int param_1,unsigned int param_2)
     do {
       temp_v1 = FUN_00481100(temp_v2);
       if (temp_v1 != 0) {
-        FUN_00493e14(temp_v0,temp_v2 & 0xffff,0,0,0);
+        cellListAppend(temp_v0,temp_v2 & 0xffff,0,0,0);
       }
       temp_v2 = temp_v2 + 1;
     } while ((int)temp_v2 < 0xb5);
@@ -151,21 +151,21 @@ void FUN_00496a0c(int param_1,unsigned int param_2)
     do {
       temp_v1 = FUN_00481100(temp_v2);
       if (temp_v1 != 0) {
-        FUN_00493e14(temp_v0,temp_v2 & 0xffff,0,0,0);
+        cellListAppend(temp_v0,temp_v2 & 0xffff,0,0,0);
       }
       temp_v2 = temp_v2 + 1;
     } while ((int)temp_v2 < 0x12d);
     do {
       temp_v0 = FUN_00481100(temp_v4);
       if (temp_v0 != 0) {
-        FUN_00493e14(param_1 + 0x8f84,temp_v4 & 0xffff,0,0,0);
+        cellListAppend(param_1 + 0x8f84,temp_v4 & 0xffff,0,0,0);
       }
       temp_v4 = temp_v4 + 1;
     } while ((int)temp_v4 < 0x33f);
     do {
       temp_v0 = FUN_00481100(temp_v3);
       if (temp_v0 != 0) {
-        FUN_00493e14(param_1 + 0x8f84,temp_v3 & 0xffff,0,0,0);
+        cellListAppend(param_1 + 0x8f84,temp_v3 & 0xffff,0,0,0);
       }
       temp_v3 = temp_v3 + 1;
     } while ((int)temp_v3 < 0x1a5);
@@ -173,7 +173,7 @@ void FUN_00496a0c(int param_1,unsigned int param_2)
     do {
       temp_v0 = FUN_00481100(temp_v4);
       if (temp_v0 != 0) {
-        FUN_00493e14(param_1 + 0x8f84,temp_v4 & 0xffff,0,0,0);
+        cellListAppend(param_1 + 0x8f84,temp_v4 & 0xffff,0,0,0);
       }
       temp_v4 = temp_v4 + 1;
     } while ((int)temp_v4 < 0x21d);
@@ -181,7 +181,7 @@ void FUN_00496a0c(int param_1,unsigned int param_2)
     do {
       temp_v0 = FUN_00481100(temp_v4);
       if (temp_v0 != 0) {
-        FUN_00493e14(param_1 + 0x8f84,temp_v4 & 0xffff,0,0,0);
+        cellListAppend(param_1 + 0x8f84,temp_v4 & 0xffff,0,0,0);
       }
       temp_v4 = temp_v4 + 1;
     } while ((int)temp_v4 < 0x295);
@@ -189,7 +189,7 @@ void FUN_00496a0c(int param_1,unsigned int param_2)
     do {
       temp_v0 = FUN_00481100(temp_v4);
       if (temp_v0 != 0) {
-        FUN_00493e14(param_1 + 0x8f84,temp_v4 & 0xffff,0,0,0);
+        cellListAppend(param_1 + 0x8f84,temp_v4 & 0xffff,0,0,0);
       }
       temp_v4 = temp_v4 + 1;
     } while ((int)temp_v4 < 0x30d);
@@ -197,7 +197,7 @@ void FUN_00496a0c(int param_1,unsigned int param_2)
     do {
       temp_v0 = FUN_00481100(temp_v4);
       if (temp_v0 != 0) {
-        FUN_00493e14(param_1 + 0x8f84,temp_v4 & 0xffff,0,0,0);
+        cellListAppend(param_1 + 0x8f84,temp_v4 & 0xffff,0,0,0);
       }
       temp_v4 = temp_v4 + 1;
     } while ((int)temp_v4 < 0x7df);

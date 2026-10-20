@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002a46d8(int id);
-int FUN_002ae898(int type, int index);
-int FUN_002b8cc8(void);
+int fileSlotFree(int id);
+int asdTMTexTableReleaseNode(int type, int index);
+int ifTouchRegionRemove(void);
 int asdMemFree(void *ptr);               /* heap free */
 
 extern PlayLogWork *g_playLog;
@@ -16,10 +16,10 @@ void playLogDestroy(void)
     PlayLogWork *log = g_playLog;
     int i;
 
-    FUN_002ae898(0x30, 0);
-    FUN_002a46d8(0x37);
+    asdTMTexTableReleaseNode(0x30, 0);
+    fileSlotFree(0x37);
     for (i = 0; i < log->count; i++) {
-        FUN_002b8cc8();
+        ifTouchRegionRemove();
     }
     if (log != NULL) {
         asdMemFree(log);

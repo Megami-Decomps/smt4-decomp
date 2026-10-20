@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0028975c(int, int);
+int gameFlagSetValue(int, int);
 int FUN_002897b0(int);
 int FUN_002897d0(int);
 int FUN_0028dc68(int);
@@ -14,7 +14,7 @@ int asdMemFree(unsigned int);
 
 extern int FUN_0019e0c0(unsigned int);
 extern int FUN_002896bc(void);
-/* Supplied declaration required: FUN_0028975c. */
+/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_002897b0. */
 extern int FUN_002897c0(void);
 /* Supplied declaration required: FUN_002897d0. */
@@ -63,7 +63,7 @@ unsigned int FUN_00270cc8(int *param_1)
     temp_v0 = FUN_0019e0c0(*(unsigned int *)(temp_v1 + 0x94));
     if (temp_v0 == 2) {
       if (*(int *)(temp_v1 + 0x98) != 0) {
-        FUN_0028975c(*(int *)(temp_v1 + 0x98),1);
+        gameFlagSetValue(*(int *)(temp_v1 + 0x98),1);
       }
       FUN_0028dc68(0);
       scrScriptProcessDestroy(*(unsigned int *)(temp_v1 + 0x94));

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00164b5c(...);
-int FUN_001801a4(void);
+int gameGetPlayerData(void);
 int FUN_001835b4(...);
 int FUN_0023d150(...);
 int FUN_002ac470(...);
@@ -23,12 +23,12 @@ typedef struct {
     unsigned int sp88; /* 0x88: local_88 */
 } param_4_stack;
 
-extern int DAT_0057f108; /* 0x57f108 */
+extern int g_camp; /* 0x57f108 */
 
 /* Supplied declaration required: FUN_00164b5c. */
-/* Supplied declaration required: FUN_001801a4. */
+/* Supplied declaration required: gameGetPlayerData. */
 /* Supplied declaration required: FUN_001835b4. */
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0023d150. */
 extern int FUN_002a4860(int);
 extern int FUN_002a4894(int);
@@ -89,69 +89,69 @@ void FUN_0023c8c0(int *param_1,unsigned int param_2,unsigned int param_3,int par
       goto LAB_0023c964;
     case (unsigned int)0x14:
 LAB_0023ca18:
-      temp_v9 = DAT_0057f108 + 0x318;
-      temp_v6 = DAT_0057f108 + 0x2c58;
+      temp_v9 = g_camp + 0x318;
+      temp_v6 = g_camp + 0x2c58;
       FUN_00164b5c(2,0x14,4,param_2,param_3,0x65);
       FUN_001835b4(2,0x14,0x4f2,temp_v11,param_3,0x6a);
       FUN_001835b4(2,0x14,0x50a,temp_v11,param_3,0x6a);
       FUN_001835b4(2,0x14,0x50c,temp_v11,param_3,0x6a);
       FUN_001835b4(2,0x14,0x50d,temp_v11,param_3,0x6a);
-      temp_v3 = FUN_001801a4();
+      temp_v3 = gameGetPlayerData();
       FUN_002ac470(temp_v10,0,*(unsigned short *)(temp_v3 + 2),temp_v11,param_3,0xffffffff);
       break;
     case (unsigned int)0x15:
 LAB_0023cae4:
-      temp_v9 = DAT_0057f108 + 0x37c;
-      temp_v6 = DAT_0057f108 + 0x2d48;
+      temp_v9 = g_camp + 0x37c;
+      temp_v6 = g_camp + 0x2d48;
       FUN_00164b5c(2,0x14,4,param_2,param_3,0x65);
       FUN_001835b4(2,0x14,0x4f3,temp_v11,param_3,0x6a);
       FUN_001835b4(2,0x14,0x50a,temp_v11,param_3,0x6a);
       FUN_001835b4(2,0x14,0x50b,temp_v11,param_3,0x6a);
-      temp_v3 = FUN_001801a4();
+      temp_v3 = gameGetPlayerData();
       FUN_002ac470(temp_v10,0,*(unsigned short *)(temp_v3 + 4),temp_v11,param_3,0xffffffff);
       break;
     case (unsigned int)0x16:
 LAB_0023cb98:
-      temp_v9 = DAT_0057f108 + 0x3e0;
-      temp_v6 = DAT_0057f108 + 0x2dac;
+      temp_v9 = g_camp + 0x3e0;
+      temp_v6 = g_camp + 0x2dac;
       FUN_00164b5c(2,0x14,5,param_2,param_3,0x65);
       FUN_001835b4(2,0x14,0x4f4,temp_v11,param_3,0x6a);
       FUN_001835b4(2,0x14,0x50e,temp_v11,param_3,0x6a);
       FUN_001835b4(2,0x14,0x50f,temp_v11,param_3,0x6a);
-      temp_v3 = FUN_001801a4();
+      temp_v3 = gameGetPlayerData();
       FUN_002ac470(temp_v10,0,*(unsigned short *)(temp_v3 + 6),temp_v11,param_3,0xffffffff);
       break;
     case (unsigned int)0x17:
 LAB_0023cc4c:
-      temp_v9 = DAT_0057f108 + 0x444;
-      temp_v6 = DAT_0057f108 + 0x2e9c;
+      temp_v9 = g_camp + 0x444;
+      temp_v6 = g_camp + 0x2e9c;
       FUN_00164b5c(2,0x14,5,param_2,param_3,0x65);
       FUN_001835b4(2,0x14,0x4f5,temp_v11,param_3,0x6a);
       FUN_001835b4(2,0x14,0x50e,temp_v11,param_3,0x6a);
       FUN_001835b4(2,0x14,0x50f,temp_v11,param_3,0x6a);
-      temp_v3 = FUN_001801a4();
+      temp_v3 = gameGetPlayerData();
       FUN_002ac470(temp_v10,0,*(unsigned short *)(temp_v3 + 8),temp_v11,param_3,0xffffffff);
       break;
     case (unsigned int)0x18:
 LAB_0023cd04:
-      temp_v9 = DAT_0057f108 + 0x4a8;
-      temp_v6 = DAT_0057f108 + 0x2f8c;
+      temp_v9 = g_camp + 0x4a8;
+      temp_v6 = g_camp + 0x2f8c;
       FUN_00164b5c(2,0x14,5,param_2,param_3,0x65);
       FUN_001835b4(2,0x14,0x4f6,temp_v11,param_3,0x6a);
       FUN_001835b4(2,0x14,0x50e,temp_v11,param_3,0x6a);
       FUN_001835b4(2,0x14,0x50f,temp_v11,param_3,0x6a);
-      temp_v3 = FUN_001801a4();
+      temp_v3 = gameGetPlayerData();
       FUN_002ac470(temp_v10,0,*(unsigned short *)(temp_v3 + 10),temp_v11,param_3,0xffffffff);
       break;
     case (unsigned int)0x19:
 LAB_0023cdbc:
-      temp_v9 = DAT_0057f108 + 0x50c;
-      temp_v6 = DAT_0057f108 + 0x307c;
+      temp_v9 = g_camp + 0x50c;
+      temp_v6 = g_camp + 0x307c;
       FUN_00164b5c(2,0x14,5,param_2,param_3,0x65);
       FUN_001835b4(2,0x14,0x4f7,temp_v11,param_3,0x6a);
       FUN_001835b4(2,0x14,0x50e,temp_v11,param_3,0x6a);
       FUN_001835b4(2,0x14,0x50f,temp_v11,param_3,0x6a);
-      temp_v3 = FUN_001801a4();
+      temp_v3 = gameGetPlayerData();
       FUN_002ac470(temp_v10,0,*(unsigned short *)(temp_v3 + 0xc),temp_v11,param_3,0xffffffff);
     default:
       break;
@@ -159,17 +159,17 @@ LAB_0023cdbc:
   }
   else {
 LAB_0023c964:
-    temp_v9 = DAT_0057f108 + 0x2b4;
-    temp_v6 = DAT_0057f108 + 0x2b68;
+    temp_v9 = g_camp + 0x2b4;
+    temp_v6 = g_camp + 0x2b68;
     FUN_00164b5c(2,0x14,4,param_2,param_3,0x65);
     FUN_001835b4(2,0x14,0x4f1,temp_v11,param_3,0x6a);
     FUN_001835b4(2,0x14,0x509,temp_v11,param_3,0x6a);
     FUN_001835b4(2,0x14,0x50b,temp_v11,param_3,0x6a);
-    puVar2 = (unsigned short *)FUN_001801a4();
+    puVar2 = (unsigned short *)gameGetPlayerData();
     FUN_002ac470(temp_v10,0,*puVar2,temp_v11,param_3,0xffffffff);
   }
 LAB_0023ce68:
-  temp_v3 = DAT_0057f108;
+  temp_v3 = g_camp;
   piVar5 = temp_v7;
   temp_v8 = temp_v11;
   temp_v1 = 0;
@@ -196,7 +196,7 @@ LAB_0023ce68:
       temp_v1 = 6;
     }
     if (((temp_v7[temp_v1] != 0x14 && temp_v7[temp_v1] != 0x15) ||
-        (temp_v2 = FUN_0018719c(0x410), temp_v2 != 0)) &&
+        (temp_v2 = gameFlagIsSet(0x410), temp_v2 != 0)) &&
        (temp_v2 = FUN_002c2c68(temp_v3 + temp_v1 * 100 + 0x2b4), 0 < temp_v2)) {
       FUN_001835b4(2,0x14,0x4f8,temp_v8,param_3,0x6a);
       FUN_001835b4(2,0x14,temp_v1 + 0x4fa,temp_v8,param_3,0x6a);
@@ -211,7 +211,7 @@ LAB_0023ce68:
       temp_v4 = 0;
     }
     if (((temp_v7[temp_v4] != 0x14 && temp_v7[temp_v4] != 0x15) ||
-        (temp_v5 = FUN_0018719c(0x410), temp_v5 != 0)) &&
+        (temp_v5 = gameFlagIsSet(0x410), temp_v5 != 0)) &&
        (temp_v5 = FUN_002c2c68(temp_v3 + temp_v4 * 100 + 0x2b4), 0 < temp_v5)) {
       FUN_001835b4(2,0x14,0x4f9,temp_v8,param_3,0x6a);
       FUN_001835b4(2,0x14,temp_v4 + 0x501,temp_v8,param_3,0x6a);

@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern Settings5B DAT_005b3bf4;
+extern Settings5B g_gfxSettings;
 
 void settings5BAddFlags(u32 flags)
 {
-    DAT_005b3bf4.flags |= flags;
+    g_gfxSettings.flags |= flags;
 }
 
 } /* extern "C" */

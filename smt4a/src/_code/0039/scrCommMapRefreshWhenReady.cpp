@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern u32 FUN_002deb84(void);
+extern u32 scrGetCommandFrame(void);
 extern void FUN_0031cea0(s8 value);
 extern u32 FUN_00239194(void);
 extern s32 mapMainIsBusy(void);
@@ -14,7 +14,7 @@ extern void FUN_00301830(void);
 /* Script command: on the first frame starts FUN_0031cea0(3); then, once FUN_00239194 allows it, runs the map refresh. */
 u32 scrCommMapRefreshWhenReady(void)
 {
-    if (FUN_002deb84() == 0) {
+    if (scrGetCommandFrame() == 0) {
         FUN_0031cea0(3);
     }
     if (FUN_00239194() != 0) {

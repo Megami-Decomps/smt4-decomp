@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002c3510(void);
 int FUN_00354dac(int, int, unsigned int, unsigned int);
 
-extern unsigned char DAT_00465228; /* 0x465228 */
+extern unsigned char g_appletBusyFlag; /* 0x465228 */
 
 /* Supplied declaration required: FUN_002c3510. */
 extern unsigned long long FUN_002c3520(void);
@@ -26,7 +26,7 @@ int FUN_001c0954(unsigned int param_1,unsigned int param_2)
   FUN_00354dac(temp_v0,(int)((unsigned long long)temp_v1 >> 0x20),param_1,param_2);
   FUN_002c3510();
   if (-1 < temp_v0) {
-    DAT_00465228 = 1;
+    g_appletBusyFlag = 1;
   }
   return temp_v0;
 }

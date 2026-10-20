@@ -9,9 +9,9 @@ int dataTableGetEntries(void);
 
 extern int g_popupState; /* 0x58104c */
 
-extern int FUN_0014bef4(unsigned int);
+extern int randRange(unsigned int);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern int FUN_0018719c(void);
+extern int gameFlagIsSet(void);
 /* Supplied declaration required: dataTableGetCount. */
 /* Supplied declaration required: dataTableGetEntries. */
 extern int FUN_00365bc4(int);
@@ -51,10 +51,10 @@ int FUN_002d8b58(int param_1,int param_2)
           temp_v2 = *piVar7;
         }
         if (((temp_v7 && temp_v2 == param_2) &&
-            (((short)piVar7[2] == 0 || (temp_v2 = FUN_0018719c(), temp_v2 != 0)))) &&
-           ((*(short *)((int)piVar7 + 10) == 0 || (temp_v2 = FUN_0018719c(), temp_v2 == 0)))) {
+            (((short)piVar7[2] == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 != 0)))) &&
+           ((*(short *)((int)piVar7 + 10) == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 == 0)))) {
           temp_v5 = 0;
-          temp_v2 = FUN_0014bef4(99);
+          temp_v2 = randRange(99);
           temp_v4 = 0;
           do {
             temp_v5 = temp_v5 + *(short *)((int)piVar7 + temp_v4 * 4 + 0x12);

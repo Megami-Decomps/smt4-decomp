@@ -8,9 +8,9 @@ int FUN_00164168(unsigned int, int, int, int, int, int);
 int efctSetSpeed(void);
 int FUN_0016c4b8(unsigned int, int);
 int FUN_00183bb0(void);
-int FUN_00184e64(int);
+int drawSetColorFromRGBA8(int);
 int FUN_0025cba0(int, int, int, int, int);
-int FUN_002e6dd0(unsigned char [72], int);
+int rt_aeabi_memclr(unsigned char [72], int);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -26,9 +26,9 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_0016c4b8. */
 extern int FUN_001834a4(unsigned int, int);
 /* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_00184e64. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_0025cba0. */
-/* Supplied declaration required: FUN_002e6dd0. */
+/* Supplied declaration required: rt_aeabi_memclr. */
 
 
 unsigned int FUN_0027dbac(void)
@@ -43,11 +43,11 @@ unsigned int FUN_0027dbac(void)
   temp_v0 = g_s4Load;
   efctSetSpeed();
   FUN_00183bb0();
-  FUN_002e6dd0(temp_v3,0x40);
+  rt_aeabi_memclr(temp_v3,0x40);
   switch(*(unsigned int *)(temp_v0 + 8)) {
   case 1:
   case 2:
-    FUN_00184e64(0xff);
+    drawSetColorFromRGBA8(0xff);
     efctSetSpeed();
     FUN_0016c4b8(g_renderCtx,0);
     FUN_0025cba0(0,0,400,0xf0,0x65);
@@ -82,7 +82,7 @@ unsigned int FUN_0027dbac(void)
   case 0x1c:
   case 0x1d:
   case 0x1e:
-    FUN_00184e64(0xff);
+    drawSetColorFromRGBA8(0xff);
     FUN_0016c4b8(g_renderCtx,0);
     FUN_0025cba0(0,0,400,0xf0,0x65);
     FUN_00183bb0();

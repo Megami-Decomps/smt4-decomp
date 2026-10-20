@@ -14,7 +14,7 @@ int FUN_002ba12c(unsigned int);
 int FUN_002bcf4c(void);
 int FUN_002be5a4(...);
 int FUN_002bed3c(void);
-int FUN_002beda4(...);
+int vec2GetXInt(...);
 int FUN_002bf380(...);
 int FUN_002bf538(void);
 int dataTable26GroupGetRecordS2(unsigned int *, int, int);
@@ -55,8 +55,8 @@ extern int FUN_00287704(unsigned char);
 extern unsigned int FUN_002bd1fc(void);
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: FUN_002bed3c. */
-extern unsigned int FUN_002bed98(unsigned int *);
-/* Supplied declaration required: FUN_002beda4. */
+extern unsigned int vec2GetYInt(unsigned int *);
+/* Supplied declaration required: vec2GetXInt. */
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf538. */
 /* Supplied declaration required: dataTable26GroupGetRecordS2. */
@@ -128,8 +128,8 @@ void FUN_0038368c(unsigned int *param_1)
     temp_v12 = 0.35f;
     FUN_002ba12c(g_titleScene);
     temp_v15 = (int)temp_v12;
-    temp_v2 = FUN_002beda4(param_1 + 0x11);
-    temp_v3 = FUN_002bed98(param_1 + 0x11);
+    temp_v2 = vec2GetXInt(param_1 + 0x11);
+    temp_v3 = vec2GetYInt(param_1 + 0x11);
     FUN_002bf380(2,0x31,0,temp_v2 + (int)temp_v11,temp_v3,0x1f);
     FUN_002592b8(param_1[0xa3]);
     temp_v22 = temp_v10 | 0x5d2a0000;
@@ -145,8 +145,8 @@ void FUN_0038368c(unsigned int *param_1)
                  (int)((float)param_1[0x127] + temp_v14 +
                       temp_v13 + ((float)param_1[0xe7] - temp_v12) * 0.5f),
                  (int)((float)param_1[0x128] + temp_v11),0x20,0x80,0);
-    temp_v3 = FUN_002beda4(param_1 + 0x34);
-    temp_v4 = FUN_002bed98(param_1 + 0x34);
+    temp_v3 = vec2GetXInt(param_1 + 0x34);
+    temp_v4 = vec2GetYInt(param_1 + 0x34);
     temp_v12 = (float)VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
     param_1[0x9d] = param_1[0x9f];
     param_1[0x9e] = param_1[0xa0];
@@ -208,8 +208,8 @@ void FUN_0038368c(unsigned int *param_1)
                  (int)((float)param_1[0xa1] + (float)param_1[0x12d] +
                       temp_v11 + ((float)param_1[0xed] - temp_v12) * temp_v20),
                  (int)((float)param_1[0xa2] + (float)param_1[0x12e]),0x20,0x80,0);
-    temp_v2 = FUN_002beda4(param_1 + 0x57);
-    temp_v3 = FUN_002bed98(param_1 + 0x57);
+    temp_v2 = vec2GetXInt(param_1 + 0x57);
+    temp_v3 = vec2GetYInt(param_1 + 0x57);
     temp_v16 = 4;
     do {
       temp_v11 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);

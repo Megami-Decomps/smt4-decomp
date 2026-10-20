@@ -25,18 +25,18 @@ typedef struct {
     u32 second;         /* 0x84 */
 } Owner;
 
-int FUN_002ea43c(Owner *owner);
-int FUN_002ea446(Owner *owner, u32 arg);
+int onlineJobSetStateDone(Owner *owner);
+int onlineJobSetStateTimed(Owner *owner, u32 arg);
 
 /* Applies the record through the target, then runs the mode-specific follow-up. */
 void FUN_0011b3fe(Owner *owner)
 {
     owner->target->Apply(owner->record, owner->first, owner->second);
     if (owner->mode != 0) {
-        FUN_002ea446(owner, owner->arg74);
+        onlineJobSetStateTimed(owner, owner->arg74);
         return;
     }
-    FUN_002ea43c(owner);
+    onlineJobSetStateDone(owner);
 }
 
 } /* extern "C" */

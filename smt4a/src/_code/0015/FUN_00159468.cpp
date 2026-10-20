@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00195fc8(void);
+int sysFatalBreak(void);
 int nn_os_SharedMemoryBlock_AttachAndMap(unsigned int *, int, int, int);
 
 /* stack frame of param_2: 7 slot(s), 28 byte(s) */
@@ -24,7 +24,7 @@ extern unsigned int DAT_005c14bc; /* 0x5c14bc */
 extern int FUN_0016f06c(unsigned int *, unsigned int *, unsigned int *, unsigned int *, unsigned int *, unsigned int *);
 extern unsigned int FUN_0016f864(unsigned int);
 extern int FUN_0016f988(unsigned int *, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00195fc8. */
+/* Supplied declaration required: sysFatalBreak. */
 extern unsigned int wstrlen(unsigned int);
 /* Supplied declaration required: nn_os_SharedMemoryBlock_AttachAndMap. */
 
@@ -55,16 +55,16 @@ unsigned int FUN_00159468(unsigned int *param_1,unsigned int param_2)
   else {
     temp_v1 = FUN_0016f864(0);
     if ((temp_v1 & 0x3ff) != 0x3f9 && (int)temp_v1 < 0) {
-      FUN_00195fc8();
+      sysFatalBreak();
     }
     temp_v0 = wstrlen(param_2);
     temp_v2 = FUN_0016f988(&DAT_005c14bc,param_2,temp_v0,0);
     if (temp_v2 < 0) {
-      FUN_00195fc8();
+      sysFatalBreak();
     }
     temp_v2 = FUN_0016f06c((unsigned int *)&temp_v3,(unsigned int *)&temp_v4,(unsigned int *)&temp_v5,(unsigned int *)&temp_v6,(unsigned int *)&temp_v7,(unsigned int *)&temp_v8);
     if (temp_v2 < 0) {
-      FUN_00195fc8();
+      sysFatalBreak();
     }
     nn_os_SharedMemoryBlock_AttachAndMap(param_1 + 0xb,temp_v3,0x2b0,1);
     temp_v2 = param_1[0xd];

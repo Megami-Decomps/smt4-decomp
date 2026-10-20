@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002ecac4(int);
-int FUN_002f9f12(void);
+int operatorDeleteArray2(void);
 
 extern unsigned char DAT_0055aaa0; /* 0x55aaa0 */
 
@@ -13,7 +13,7 @@ extern int FUN_002ea00c(int);
 extern int destroyObj0055ae64(int);
 extern int strDestroy(unsigned int *);
 /* Supplied declaration required: FUN_002ecac4. */
-/* Supplied declaration required: FUN_002f9f12. */
+/* Supplied declaration required: operatorDeleteArray2. */
 extern int FUN_002fb028(int);
 
 
@@ -25,7 +25,7 @@ void FUN_0011e178(unsigned int *param_1)
   
   *param_1 = (unsigned int)&DAT_0055aaa0;
   if (param_1[0x3c] != 0) {
-    FUN_002f9f12();
+    operatorDeleteArray2();
   }
   temp_v0 = strDestroy(param_1 + 0x5e);
   temp_v0 = FUN_002fb028(temp_v0 - 0x78);

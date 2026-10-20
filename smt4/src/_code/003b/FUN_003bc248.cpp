@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002aa568(unsigned char *, unsigned int *);
+int libc_strcmp(unsigned char *, unsigned int *);
 int memClear(unsigned int *, int);
 int FUN_0038959c(unsigned int *, unsigned int);
 int VectorUnsignedToFloat(unsigned int, int);
@@ -13,7 +13,7 @@ extern unsigned char LAB_003bc65c; /* 0x3bc65c */
 extern unsigned int *g_aocSystem; /* 0x433158 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_002aa568. */
+/* Supplied declaration required: libc_strcmp. */
 extern unsigned int dataTableGetCount(unsigned int);
 extern unsigned int *dataTableGetEntries(void);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
@@ -181,7 +181,7 @@ void FUN_003bc248(unsigned int *param_1,unsigned int param_2,unsigned char param
   *(short *)((int)param_1 + 0x52) = (short)puVar6[0x10];
   *(unsigned short *)(param_1 + 0x15) = *(unsigned short *)((int)puVar6 + 0x42);
   puVar7 = &LAB_003bc65c;
-  FUN_002aa568(&LAB_003bc65c,puVar6 + 0x12);
+  libc_strcmp(&LAB_003bc65c,puVar6 + 0x12);
   if (puVar7 == (unsigned char *)0x0) {
     *(unsigned char *)((int)param_1 + 0x56) = 0;
   }

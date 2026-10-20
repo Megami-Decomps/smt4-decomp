@@ -19,7 +19,7 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } param_2_stack;
 
-extern int DAT_0057a9c8; /* 0x57a9c8 */
+extern int g_btlUiBlock; /* 0x57a9c8 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -55,7 +55,7 @@ void FUN_0041a534(int param_1,unsigned int param_2)
   float temp_v13;
   float temp_v14;
   
-  if (((*(int *)(param_1 + 0x38) != 0) && (DAT_0057a9c8 != 0)) &&
+  if (((*(int *)(param_1 + 0x38) != 0) && (g_btlUiBlock != 0)) &&
      (temp_v1 = FUN_004ab718(), temp_v3 = g_renderCtx, temp_v1 == 0)) {
     temp_v1 = FUN_001692ac(1,0);
     piVar7 = (int *)(temp_v3 + 0x1258);

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00147a7c(...);
+int nnosConvertVirtToPhys(...);
 int FUN_002aa6ac(int, int, int [3]);
 int FUN_002ab92c(unsigned int, unsigned int, int);
 int FUN_002c4e98(unsigned int);
@@ -23,7 +23,7 @@ extern unsigned char DAT_004dad85; /* 0x4dad85 */
 extern unsigned int DAT_004dad88; /* 0x4dad88 */
 extern unsigned int *DAT_004dad90; /* 0x4dad90 */
 
-/* Supplied declaration required: FUN_00147a7c. */
+/* Supplied declaration required: nnosConvertVirtToPhys. */
 /* Supplied declaration required: FUN_002aa6ac. */
 /* Supplied declaration required: FUN_002ab92c. */
 /* Supplied declaration required: FUN_002c4e98. */
@@ -80,9 +80,9 @@ void FUN_0013290c(unsigned int param_1,unsigned int param_2)
   }
   aiStack_28[0] = aiStack_28[0] >> 3;
   aiStack_28[1] = 0;
-  aiStack_28[2] = FUN_00147a7c(temp_v3);
+  aiStack_28[2] = nnosConvertVirtToPhys(temp_v3);
   aiStack_28[2] = (unsigned int)aiStack_28[2] >> 3;
-  uStack_1c = FUN_00147a7c(*(int *)(temp_v0 + 4) + *(int *)(temp_v0 + 0xc));
+  uStack_1c = nnosConvertVirtToPhys(*(int *)(temp_v0 + 4) + *(int *)(temp_v0 + 0xc));
   uStack_1c = uStack_1c >> 3;
   uStack_18 = 1;
   if (*(int *)(temp_v0 + 0x30) == 0) {

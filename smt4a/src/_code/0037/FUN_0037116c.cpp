@@ -8,9 +8,9 @@ int FUN_00229fc0(int);
 int FUN_00268250(int, unsigned int, int, int, int);
 int FUN_002bf464(void);
 int FUN_00318d6c(void);
-int FUN_00342010(void);
-int FUN_0035b304(void);
-int FUN_0037b450(void);
+int campButtonHelpAcquire(void);
+int campCommonBgRelease(void);
+int campButtonHelpRelease(void);
 int FUN_003a76a8(int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -29,9 +29,9 @@ extern int FUN_00213cfc(void);
 extern int FUN_002a60f8(void);
 /* Supplied declaration required: FUN_002bf464. */
 /* Supplied declaration required: FUN_00318d6c. */
-/* Supplied declaration required: FUN_00342010. */
-/* Supplied declaration required: FUN_0035b304. */
-/* Supplied declaration required: FUN_0037b450. */
+/* Supplied declaration required: campButtonHelpAcquire. */
+/* Supplied declaration required: campCommonBgRelease. */
+/* Supplied declaration required: campButtonHelpRelease. */
 /* Supplied declaration required: FUN_003a76a8. */
 
 
@@ -52,11 +52,11 @@ unsigned int FUN_0037116c(void)
       }
       temp_v0 = FUN_00213cfc();
       if (temp_v0 != 0) {
-        FUN_0035b304();
+        campCommonBgRelease();
         FUN_00229fc0(0);
       }
       FUN_003a76a8(1);
-      FUN_0037b450();
+      campButtonHelpRelease();
       FUN_00318d6c();
       DAT_0057f6be = 1;
       return 0xffffffff;
@@ -78,7 +78,7 @@ unsigned int FUN_0037116c(void)
   }
   else {
     FUN_002bf464();
-    FUN_00342010();
+    campButtonHelpAcquire();
     FUN_003a76a8(0);
     FUN_00268250(0,*(unsigned int *)(temp_v0 + 0x14),0,0,0);
     temp_v2 = 0xd;

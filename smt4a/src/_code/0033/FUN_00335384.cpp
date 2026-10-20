@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_00163aa4(...);
-int FUN_001846d0(int, int);
+int uiSpriteSelectAnim(int, int);
 
 /* Supplied declaration required: FUN_00163aa4. */
-/* Supplied declaration required: FUN_001846d0. */
+/* Supplied declaration required: uiSpriteSelectAnim. */
 
 
 unsigned int FUN_00335384(int param_1)
@@ -47,7 +47,7 @@ LAB_00335454:
         *(int *)(param_1 + 0xd4c) = *(int *)(param_1 + 0xd4c) + 1;
         return temp_v1;
       }
-      FUN_001846d0(param_1 + 0x7dc,9);
+      uiSpriteSelectAnim(param_1 + 0x7dc,9);
       *piVar2 = *(int *)(param_1 + 0xd48) + 1;
     }
     temp_v1 = 1;

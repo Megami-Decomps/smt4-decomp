@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002b23f4(void);
 int FUN_002b24d8(unsigned int *, unsigned int, unsigned int, unsigned int, unsigned int);
-int FUN_002c3944(int, int);
+int rt_memclr(int, int);
 
 /* stack frame of param_6: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -17,7 +17,7 @@ extern unsigned char DAT_00465120; /* 0x465120 */
 
 /* Supplied declaration required: FUN_002b23f4. */
 /* Supplied declaration required: FUN_002b24d8. */
-/* Supplied declaration required: FUN_002c3944. */
+/* Supplied declaration required: rt_memclr. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
 
@@ -44,7 +44,7 @@ int memAlloc(unsigned int *param_1,unsigned int param_2,unsigned int param_3,int
   temp_v0 = (int)param_1 + temp_v1 + 0x3c;
   *(unsigned int **)((int)param_1 + temp_v1 + 0x38) = param_1;
   FUN_002b23f4();
-  FUN_002c3944(temp_v0,param_4);
+  rt_memclr(temp_v0,param_4);
   nn_os_CriticalSection_Leave((*(unsigned int *)((unsigned char *)&DAT_00465120 + 0x4)));
   return temp_v0;
 }

@@ -5,9 +5,9 @@
 extern "C" {
 
 int FUN_0014e188(...);
-int FUN_001846d0(int, int);
-int FUN_00184758(int, int, int);
-int FUN_00184c00(...);
+int uiSpriteSelectAnim(int, int);
+int uiSpriteSetKeyframe(int, int, int);
+int uiSpriteSetImageKeyframe(...);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -16,9 +16,9 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: FUN_001846d0. */
-/* Supplied declaration required: FUN_00184758. */
-/* Supplied declaration required: FUN_00184c00. */
+/* Supplied declaration required: uiSpriteSelectAnim. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 
 
 void FUN_002f78a0(int param_1)
@@ -34,17 +34,17 @@ void FUN_002f78a0(int param_1)
   do {
     temp_v1 = param_1 + temp_v0 * 0x8c + 0xe8c;
     FUN_0014e188(temp_v1,0x14,0xbb9,temp_v2,0xc9);
-    FUN_00184758(temp_v1,10,0);
-    FUN_00184c00(temp_v1,0x13,0);
+    uiSpriteSetKeyframe(temp_v1,10,0);
+    uiSpriteSetImageKeyframe(temp_v1,0x13,0);
     temp_v0 = temp_v0 + 1;
   } while (temp_v0 < 0xd);
   FUN_0014e188(param_1 + 0x15a8,0x14,0xbd8,temp_v2,0xc9);
-  FUN_00184c00(param_1 + 0x15a8,6,0);
+  uiSpriteSetImageKeyframe(param_1 + 0x15a8,6,0);
   FUN_0014e188(param_1 + 0x197c,0x14,0xbd8,temp_v2,0xc9);
-  FUN_001846d0(param_1 + 0x197c,8);
+  uiSpriteSelectAnim(param_1 + 0x197c,8);
   *(unsigned int *)(param_1 + 0x18) = 0;
   FUN_0014e188(param_1 + 0x1634,0x14,0xbd8,temp_v2,0xc9);
-  FUN_00184c00(param_1 + 0x1634,0x16,0);
+  uiSpriteSetImageKeyframe(param_1 + 0x1634,0x16,0);
   return;
 }
 

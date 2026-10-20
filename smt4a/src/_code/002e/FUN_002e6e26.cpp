@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_002ea4bc(void);
+extern int onlineInstantiationContextGetCurrent(void);
 
 
 unsigned int FUN_002e6e26(void)
@@ -13,7 +13,7 @@ unsigned int FUN_002e6e26(void)
   int temp_v0;
   unsigned int temp_v1;
   
-  temp_v0 = FUN_002ea4bc();
+  temp_v0 = onlineInstantiationContextGetCurrent();
   temp_v1 = 0;
   if (temp_v0 != 0) {
     temp_v1 = *(unsigned int *)(temp_v0 + 0xc);

@@ -22,7 +22,7 @@ extern int FUN_001059f4(int, unsigned int, unsigned int, unsigned int, unsigned 
 /* Supplied declaration required: FUN_002e6e26. */
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-extern int FUN_002e760a(unsigned int);
+extern int operatorNew(unsigned int);
 extern int FUN_002e789a(int);
 /* Supplied declaration required: FUN_002e78d0. */
 /* Supplied declaration required: strDestroy. */
@@ -54,7 +54,7 @@ FUN_00111482(int param_1,unsigned int param_2,unsigned int param_3,unsigned int 
   temp_v0 = FUN_002e789a(param_1);
   if (temp_v0 != 0) {
     FUN_002ece14(temp_v3,temp_v6);
-    temp_v1 = FUN_002e760a(0x98);
+    temp_v1 = operatorNew(0x98);
     temp_v0 = 0;
     if (temp_v1 != 0) {
       temp_v0 = FUN_001059f4(temp_v1,param_7,*(unsigned int *)(param_1 + 0x44),temp_v5,temp_v3,param_4

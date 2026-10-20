@@ -16,7 +16,7 @@ typedef struct {
 extern int DAT_005737e0; /* 0x5737e0 */
 extern unsigned int DAT_005737e8; /* 0x5737e8 */
 extern unsigned int DAT_005737ec; /* 0x5737ec */
-extern int DAT_0057a9c8; /* 0x57a9c8 */
+extern int g_btlUiBlock; /* 0x57a9c8 */
 
 /* Supplied declaration required: jobStop. */
 extern int jobGetWork(void);
@@ -35,8 +35,8 @@ void FUN_003285dc(void)
   unsigned int temp_v3;
   
   temp_v0 = jobGetWork();
-  if (DAT_0057a9c8 != 0) {
-    FUN_004aa780(DAT_0057a9c8,0);
+  if (g_btlUiBlock != 0) {
+    FUN_004aa780(g_btlUiBlock,0);
   }
   if (DAT_005737e0 != 0) {
     if (temp_v0 != 0) {

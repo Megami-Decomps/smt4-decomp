@@ -4,8 +4,8 @@
 
 extern "C" {
 
-extern int FUN_002a8740(unsigned int);
-extern int FUN_002a8764(void);
+extern int gameGetUnitRecord(unsigned int);
+extern int gameGetSlotTable(void);
 
 
 unsigned int FUN_0029bbc8(unsigned int param_1)
@@ -22,9 +22,9 @@ unsigned int FUN_0029bbc8(unsigned int param_1)
     temp_v1 = 0;
   }
   else {
-    temp_v2 = FUN_002a8740(param_1);
+    temp_v2 = gameGetUnitRecord(param_1);
     *(unsigned short *)(temp_v2 + 0x46) = 0;
-    temp_v2 = FUN_002a8764();
+    temp_v2 = gameGetSlotTable();
     if ((int)*(char *)(temp_v2 + 0x9108) == param_1) {
       *(unsigned char *)(temp_v2 + 0x9108) = 0xff;
     }
@@ -40,7 +40,7 @@ unsigned int FUN_0029bbc8(unsigned int param_1)
     }
     *(unsigned char *)(temp_v3 + temp_v2 + 0x90f0) = 0xff;
 LAB_0029bc70:
-    temp_v2 = FUN_002a8764();
+    temp_v2 = gameGetSlotTable();
     temp_v3 = 0;
     do {
       temp_v0 = temp_v3;

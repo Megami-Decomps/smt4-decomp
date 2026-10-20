@@ -8,11 +8,11 @@ extern "C" {
 
 typedef void (*VoidFunc)(void);
 
-int FUN_00296d6c(int low, int high);                    /* random integer in [low, high] */
-int FUN_0029c3b0(int id);
-int FUN_002a03a0(u32 handle, int arg1, int arg2);
-int FUN_002a5ed0(int type, int index);
-int FUN_002b9024(void);
+int randBetween(int low, int high);                    /* random integer in [low, high] */
+int soundChannelStopAll(int id);
+int soundChannelRequestIfEnabled(u32 handle, int arg1, int arg2);
+int asdTMTexTableLoadEntryAsync(int type, int index);
+int devilGetRecord(void);
 int memClear(void *ptr, int size);                  /* zero a block */
 u32 taskCreateDraw(VoidFunc fn, int priority, int arg2, int arg3, VoidFunc cb, int arg5, void *work, u32 parent);
 void *asdMemoryAlloc(int heap, int align, int arg2, int size, int arg4);
@@ -49,7 +49,7 @@ void whisperEffectStart(u32 devilId)
     memClear(fx, 0x1b8);
     asdTMTexTableLoadTmx(0x37, 0);
     for (i = 0; i < 5; i++) {
-        FUN_002a5ed0(0x37, i);
+        asdTMTexTableLoadEntryAsync(0x37, i);
     }
 
     fx->unk10 = 1.0f;
@@ -83,21 +83,21 @@ void whisperEffectStart(u32 devilId)
     fx->lines[4].textB = DAT_0044ddf8;
     fx->lines[4].name = DAT_0044de08;
 
-    fx->phaseA = (f32)FUN_00296d6c(0, 0xff);
-    fx->phaseB = (f32)FUN_00296d6c(0, 0xff);
+    fx->phaseA = (f32)randBetween(0, 0xff);
+    fx->phaseB = (f32)randBetween(0, 0xff);
     for (i = 0; i < 5; i++) {
-        fx->lines[i].pick = FUN_00296d6c(0, fx->lines[i].count - 1);
+        fx->lines[i].pick = randBetween(0, fx->lines[i].count - 1);
     }
 
     devilId &= 0xffff;
-    FUN_002b9024();
+    devilGetRecord();
     fx = g_whisperEffect;
     fx->handle = ((u8 *)devilId)[0x32] + 0x100008a;
     fx->task = asdProcessCreateSimple(LAB_002f6a28, 2, 0, 0, LAB_00203cfc, whisperEffectDestroy, fx);
     taskCreateDraw(LAB_002f6a40, 0x7d, 0, 0, FUN_0022413c, 0, fx, fx->task);
     taskCreateDraw(LAB_002f6a5c, 0xdb, 0, 0, FUN_0022413c, 0, g_whisperEffect, g_whisperEffect->task);
-    FUN_0029c3b0(0);
-    FUN_002a03a0(g_whisperEffect->handle, 0, 0x3c);
+    soundChannelStopAll(0);
+    soundChannelRequestIfEnabled(g_whisperEffect->handle, 0, 0x3c);
 }
 
 } /* extern "C" */

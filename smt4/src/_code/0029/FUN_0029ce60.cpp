@@ -10,7 +10,7 @@ int FUN_0029c6b0(unsigned char [72]);
 int FUN_0029d770(unsigned int, unsigned char [72]);
 int FUN_0029dc74(...);
 int dataTable06Sub1GetRecord(void);
-int FUN_002b9024(void);
+int devilGetRecord(void);
 int FUN_002b99b8(void);
 int dataTableGetEntries(void);
 int dataTableGet(...);
@@ -63,14 +63,14 @@ extern signed char DAT_0043d9b0; /* 0x43d9b0 */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: bitsetSetBit. */
 /* Supplied declaration required: FUN_00269bd0. */
-extern int padIsButtonDown(unsigned int);
+extern int flagBitIsSet(unsigned int);
 extern int FUN_002973ec(void);
 /* Supplied declaration required: FUN_0029c6b0. */
 /* Supplied declaration required: FUN_0029d770. */
 /* Supplied declaration required: FUN_0029dc74. */
 /* Supplied declaration required: dataTable06Sub1GetRecord. */
-extern int FUN_002a8764(void);
-/* Supplied declaration required: FUN_002b9024. */
+extern int gameGetSlotTable(void);
+/* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: FUN_002b99b8. */
 /* Supplied declaration required: dataTableGetEntries. */
 /* Supplied declaration required: dataTableGet. */
@@ -150,7 +150,7 @@ unsigned int FUN_0029ce60(unsigned int param_1,int param_2,int param_3,unsigned 
   iStack_34 = param_2;
   iStack_30 = param_3;
   uStack_2c = param_4;
-  FUN_002b9024();
+  devilGetRecord();
   temp_v41 = param_1;
   if (param_3 != 0) {
     if (param_2 != 0) {
@@ -175,7 +175,7 @@ unsigned int FUN_0029ce60(unsigned int param_1,int param_2,int param_3,unsigned 
     if (temp_v7 != 1) {
       puVar12 = (unsigned char *)0x0;
       if (temp_v7 == 2) {
-        temp_v7 = FUN_002a8764();
+        temp_v7 = gameGetSlotTable();
         temp_v4 = 0;
         if (temp_v4 < *(unsigned char *)(temp_v7 + 0x910b)) {
           do {
@@ -206,7 +206,7 @@ LAB_0029cf80:
         temp_v36 = 0;
         temp_v37 = 0;
         memClear(temp_v38,0x500);
-        FUN_002b9024();
+        devilGetRecord();
         bitsetSetBit(temp_v20,*(unsigned short *)(temp_v6 + 0x38));
         FUN_0029c6b0(temp_v20);
         puVar12 = temp_v20;
@@ -340,7 +340,7 @@ LAB_0029cf80:
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 8);
   temp_v6 = (unsigned int)*(unsigned short *)(puVar12 + 0x46);
-  FUN_002b9024();
+  devilGetRecord();
   temp_v4 = 0;
   temp_v2 = 0;
   do {
@@ -391,25 +391,25 @@ LAB_0029cf80:
         jyoucyuGetTableEntry(0);
         jyoucyuGetTableEntry(0);
       }
-      temp_v7 = padIsButtonDown(0x2d);
+      temp_v7 = flagBitIsSet(0x2d);
       if (temp_v7 != 0) {
         temp_v8 = (float)VectorUnsignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v6 = VectorFloatToUnsigned(temp_v8 * 0.5f,3);
       }
       else {
-        temp_v7 = padIsButtonDown(0x2c);
+        temp_v7 = flagBitIsSet(0x2c);
         if (temp_v7 != 0) {
           temp_v8 = (float)VectorUnsignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v6 = VectorFloatToUnsigned(temp_v8 * 0.8f,3);
         }
         else {
-          temp_v7 = padIsButtonDown(0x2b);
+          temp_v7 = flagBitIsSet(0x2b);
           if (temp_v7 != 0) {
             temp_v8 = (float)VectorUnsignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
             temp_v6 = VectorFloatToUnsigned(temp_v8 * 0.9f,3);
           }
           else {
-            temp_v7 = padIsButtonDown(0x2a);
+            temp_v7 = flagBitIsSet(0x2a);
             if (temp_v7 != 0) {
               temp_v8 = (float)VectorUnsignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
               temp_v6 = VectorFloatToUnsigned(temp_v8 * 0.95f,3);

@@ -5,7 +5,7 @@
 extern "C" {
 
 int sceneTraverserVisit(unsigned int, unsigned int);
-int FUN_002b2368(int);
+int asdMemFreeNonNull(int);
 int FUN_002b74cc(unsigned int **, unsigned int **, unsigned int **);
 int asdMemFree(...);
 int nw_gfx_res_ResGraphicsFile_Cleanup(int [2]);
@@ -18,10 +18,10 @@ typedef struct {
 } param_4_stack;
 
 extern unsigned int DAT_00464b7c; /* 0x464b7c */
-extern unsigned int DAT_00464b84; /* 0x464b84 */
+extern unsigned int g_asdModelTransformBuilder; /* 0x464b84 */
 
 /* Supplied declaration required: sceneTraverserVisit. */
-/* Supplied declaration required: FUN_002b2368. */
+/* Supplied declaration required: asdMemFreeNonNull. */
 /* Supplied declaration required: FUN_002b74cc. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: nw_gfx_res_ResGraphicsFile_Cleanup. */
@@ -129,10 +129,10 @@ void FUN_00263e50(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
   if (temp_v1[0] != 0) {
     nw_gfx_res_ResGraphicsFile_Cleanup(temp_v1);
   }
-  FUN_002b2368(param_1[8]);
+  asdMemFreeNonNull(param_1[8]);
   asdMemFree(param_1[9]);
   asdMemFree(param_1);
-  sceneTraverserVisit(DAT_00464b7c,DAT_00464b84);
+  sceneTraverserVisit(DAT_00464b7c,g_asdModelTransformBuilder);
   return;
 }
 

@@ -5,24 +5,24 @@
 extern "C" {
 
 int jobStop(unsigned int, int);
-int FUN_001641c4(void);
+int ifTouchRegionRemove(void);
 int asdMemFree(void);
-int FUN_0019a7f4(int, int);
-int FUN_00237210(unsigned int);
+int asdTMTexTableReleaseNode(int, int);
+int asdMemFreeSlot(unsigned int);
 int asdTMTexTableFreeEntry(...);
-int FUN_002e3328(void);
+int asdOperatorDelete(void);
 int FUN_00471340(unsigned int);
 
 extern unsigned int g_aocSystem; /* 0x570280 */
 extern unsigned int *DAT_0057f244; /* 0x57f244 */
 
 /* Supplied declaration required: jobStop. */
-/* Supplied declaration required: FUN_001641c4. */
+/* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_0019a7f4. */
-/* Supplied declaration required: FUN_00237210. */
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
+/* Supplied declaration required: asdMemFreeSlot. */
 /* Supplied declaration required: asdTMTexTableFreeEntry. */
-/* Supplied declaration required: FUN_002e3328. */
+/* Supplied declaration required: asdOperatorDelete. */
 /* Supplied declaration required: FUN_00471340. */
 
 
@@ -40,13 +40,13 @@ void FUN_003b01e8(void)
   temp_v1 = 0;
   if (*(short *)(DAT_0057f244 + 0x4a) != 0) {
     do {
-      FUN_001641c4();
+      ifTouchRegionRemove();
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < (int)(unsigned int)*(unsigned short *)(puVar1 + 0x4a));
   }
   temp_v1 = 0;
   do {
-    FUN_00237210(puVar1[temp_v1 + 0x19b]);
+    asdMemFreeSlot(puVar1[temp_v1 + 0x19b]);
     temp_v2 = temp_v1 + 1;
     puVar1[temp_v1 + 0x19b] = 0;
     temp_v1 = temp_v2;
@@ -70,7 +70,7 @@ void FUN_003b01e8(void)
   } while ((int)temp_v3 < 2);
   temp_v1 = 0;
   do {
-    FUN_0019a7f4(0x32,temp_v1);
+    asdTMTexTableReleaseNode(0x32,temp_v1);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 2);
   asdTMTexTableFreeEntry(0x32);
@@ -85,7 +85,7 @@ void FUN_003b01e8(void)
   FUN_00471340(g_aocSystem);
   jobStop(*puVar1,0);
   if (DAT_0057f244 != (unsigned int *)0x0) {
-    FUN_002e3328();
+    asdOperatorDelete();
     DAT_0057f244 = (unsigned int *)0x0;
   }
   return;

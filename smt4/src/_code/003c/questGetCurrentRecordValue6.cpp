@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern int FUN_00229f30(u16 id);
+extern int questRecordFindById(u16 id);
 extern GameOptions *gameGetOptions(void);
 extern int FUN_002b6b38(void);
 
@@ -19,7 +19,7 @@ u16 questGetCurrentRecordValue6(void)
 
     if (FUN_002b6b38() == 2) {
         options = gameGetOptions();
-        record = (Record *)FUN_00229f30(options->unk46);
+        record = (Record *)questRecordFindById(options->unk46);
         value = record->unk6;
     }
     return value;

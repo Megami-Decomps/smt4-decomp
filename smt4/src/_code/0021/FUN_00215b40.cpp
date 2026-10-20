@@ -7,12 +7,12 @@ typedef struct Obj {
     /* 0x47E */ u16 unk47E;
 } Obj;
 
-extern Obj *DAT_0044e190;
+extern Obj *g_statusDown;
 
 void FUN_00215b40(u16 value)
 {
-    if (DAT_0044e190 != NULL) {
-        DAT_0044e190->unk47E = value;
+    if (g_statusDown != NULL) {
+        g_statusDown->unk47E = value;
     }
 }
 

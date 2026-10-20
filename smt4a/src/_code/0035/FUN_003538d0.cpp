@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_0018719c(...);
-int FUN_001cd24c(unsigned int *);
+int gameFlagIsSet(...);
+int wordTripleClear(unsigned int *);
 int FUN_00319f64(int);
 
-extern unsigned int *DAT_00580ca0; /* 0x580ca0 */
+extern unsigned int *g_mapGimic; /* 0x580ca0 */
 
-/* Supplied declaration required: FUN_0018719c. */
-/* Supplied declaration required: FUN_001cd24c. */
+/* Supplied declaration required: gameFlagIsSet. */
+/* Supplied declaration required: wordTripleClear. */
 /* Supplied declaration required: FUN_00319f64. */
 
 
@@ -25,18 +25,18 @@ void FUN_003538d0(void)
   int temp_v1;
   int temp_v2;
   
-  puVar1 = DAT_00580ca0;
-  puVar2 = DAT_00580ca0 + 0xd;
-  *(unsigned char *)(DAT_00580ca0 + 1) = 1;
+  puVar1 = g_mapGimic;
+  puVar2 = g_mapGimic + 0xd;
+  *(unsigned char *)(g_mapGimic + 1) = 1;
   *puVar1 = 0;
   *(unsigned short *)((int)puVar1 + 10) = 0;
   *(unsigned short *)(puVar1 + 3) = 0;
   puVar1[4] = 0;
   puVar1[0x20] = 0;
-  FUN_001cd24c(puVar2);
-  puVar1 = DAT_00580ca0;
+  wordTripleClear(puVar2);
+  puVar1 = g_mapGimic;
   temp_v1 = 0;
-  DAT_00580ca0[0x10] = 0;
+  g_mapGimic[0x10] = 0;
   puVar1[0x11] = 0;
   puVar1[0x12] = 0;
   puVar1[0x13] = 0;
@@ -47,13 +47,13 @@ void FUN_003538d0(void)
   puVar1[0x18] = 0;
   puVar1[0x19] = 0;
   do {
-    puVar1 = DAT_00580ca0;
-    if (*(char *)(DAT_00580ca0 + temp_v1 * 0xf + 0x24) != '\0') {
-      if (*(short *)((int)DAT_00580ca0 + temp_v1 * 0x3c + 0xa6) != 0x4d) {
-        temp_v2 = (int)*(short *)((int)DAT_00580ca0 + temp_v1 * 0x3c + 0xb2);
-        if (((*(short *)(DAT_00580ca0 + temp_v1 * 0xf + 0x2c) == 0) ||
-            (temp_v0 = FUN_0018719c(), temp_v0 != 0)) &&
-           ((temp_v2 == 0 || (temp_v2 = FUN_0018719c(temp_v2), temp_v2 == 0)))) {
+    puVar1 = g_mapGimic;
+    if (*(char *)(g_mapGimic + temp_v1 * 0xf + 0x24) != '\0') {
+      if (*(short *)((int)g_mapGimic + temp_v1 * 0x3c + 0xa6) != 0x4d) {
+        temp_v2 = (int)*(short *)((int)g_mapGimic + temp_v1 * 0x3c + 0xb2);
+        if (((*(short *)(g_mapGimic + temp_v1 * 0xf + 0x2c) == 0) ||
+            (temp_v0 = gameFlagIsSet(), temp_v0 != 0)) &&
+           ((temp_v2 == 0 || (temp_v2 = gameFlagIsSet(temp_v2), temp_v2 == 0)))) {
           temp_v1 = temp_v1 + 1;
           if (temp_v1 >= 0x23) {
             return;

@@ -39,8 +39,8 @@ extern int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_00288790. */
 /* Supplied declaration required: FUN_0029a17c. */
-extern int FUN_002a8740(void);
-extern int FUN_002b63ac(void);
+extern int gameGetUnitRecord(void);
+extern int gameGetPlayerData(void);
 extern int FUN_002bf4f8(unsigned int, unsigned int);
 /* Supplied declaration required: __aeabi_idivmod. */
 
@@ -75,11 +75,11 @@ void FUN_0033c1bc(fn_0033c1bc_arg0 *param_1,int param_2,int param_3)
   temp_v9 = 0;
   temp_v2 = 0;
   if ((int)param_1->field_0x34 < 0) {
-    temp_v4 = FUN_002b63ac();
+    temp_v4 = gameGetPlayerData();
     temp_v0 = *(unsigned short *)(temp_v4 + 0x72);
   }
   else {
-    temp_v4 = FUN_002a8740();
+    temp_v4 = gameGetUnitRecord();
     temp_v0 = *(unsigned short *)(temp_v4 + 0x44);
   }
   temp_v10 = (unsigned int)temp_v0;

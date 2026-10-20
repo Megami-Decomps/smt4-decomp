@@ -6,8 +6,8 @@ extern "C" {
 
 int btlGetMainState(void);
 int sysPlaySe(int);
-int FUN_001846d0(int, int);
-int FUN_00184c00(int, int);
+int uiSpriteSelectAnim(int, int);
+int uiSpriteSetImageKeyframe(int, int);
 int FUN_0019de98(int, unsigned int);
 int FUN_0020acd8(int, unsigned int, unsigned int);
 int FUN_0020ad6c(int, int, int);
@@ -24,8 +24,8 @@ extern unsigned int DAT_00573bac; /* 0x573bac */
 /* Supplied declaration required: btlGetMainState. */
 extern int FUN_00167f08(void);
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_001846d0. */
-/* Supplied declaration required: FUN_00184c00. */
+/* Supplied declaration required: uiSpriteSelectAnim. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_0020acd8. */
 /* Supplied declaration required: FUN_0020ad6c. */
@@ -46,7 +46,7 @@ void FUN_003363a8(int param_1,unsigned int param_2,unsigned char param_3,unsigne
   if (*(char *)(param_1 + 0x38b4) == '\0') {
     temp_v0 = 0;
     do {
-      FUN_00184c00(param_1 + temp_v0 * 0x8c + 0xe58,0);
+      uiSpriteSetImageKeyframe(param_1 + temp_v0 * 0x8c + 0xe58,0);
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < 6);
     if (*(char *)(param_1 + 0x38b4) == '\0') {
@@ -60,10 +60,10 @@ void FUN_003363a8(int param_1,unsigned int param_2,unsigned char param_3,unsigne
           FUN_0020acd8(param_1,*(unsigned int *)(param_1 + 0x3890),param_4);
           return;
         }
-        FUN_001846d0(param_1 + 0x20,0x1b);
+        uiSpriteSelectAnim(param_1 + 0x20,0x1b);
         temp_v0 = 0;
         do {
-          FUN_001846d0(param_1 + temp_v0 * 0x8c + 0x138,0x1b);
+          uiSpriteSelectAnim(param_1 + temp_v0 * 0x8c + 0x138,0x1b);
           temp_v0 = temp_v0 + 1;
         } while (temp_v0 < 8);
         *(unsigned int *)(param_1 + 0x3888) = 0x11;

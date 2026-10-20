@@ -15,7 +15,7 @@ extern unsigned int FUN_001ba3d4(unsigned int);
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: FUN_00359974. */
 /* Supplied declaration required: screenStartOrClear. */
-extern int FUN_003f86c8(unsigned int);
+extern int loadSlotIsLoaded(unsigned int);
 
 
 void FUN_003e600c(int param_1)
@@ -41,7 +41,7 @@ void FUN_003e600c(int param_1)
   if (temp_v11) {
     temp_v0 = *(int *)(param_1 + 0x14);
   }
-  if ((temp_v11 && temp_v0 != 0) && (temp_v0 = FUN_003f86c8(0x4f), temp_v0 != 0)) {
+  if ((temp_v11 && temp_v0 != 0) && (temp_v0 = loadSlotIsLoaded(0x4f), temp_v0 != 0)) {
     temp_v0 = *(int *)(param_1 + 0x14);
     FUN_00275bc8(temp_v0,*(unsigned int *)(param_1 + 0x10));
     *(int *)(param_1 + 0x18) = temp_v0;

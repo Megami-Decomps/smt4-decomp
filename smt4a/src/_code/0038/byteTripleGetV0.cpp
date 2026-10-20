@@ -8,11 +8,11 @@ typedef struct ByteTriple {
     /* 0x02 */ s8 v2;
 } ByteTriple;
 
-extern ByteTriple DAT_0057f6bc;
+extern ByteTriple g_saveLoadProcess;
 
 s32 byteTripleGetV0(void)
 {
-    return DAT_0057f6bc.v0;
+    return g_saveLoadProcess.v0;
 }
 
 } /* extern "C" */

@@ -9,7 +9,7 @@ void FUN_002d8b34(u32 arg);
 void dispatchIfFound(u32 result, u32 arg, s32 flag);
 u32 FUN_004d0cd4(void);
 
-extern u32 DAT_0057a9c8;
+extern u32 g_btlUiBlock;
 __weak void FUN_0039cd08_hook(u32 value);
 
 u32 FUN_0039cd08(void)
@@ -19,7 +19,7 @@ u32 FUN_0039cd08(void)
 
     FUN_002d8b34(arg);
     dispatchIfFound(result, arg, 0);
-    FUN_0039cd08_hook(DAT_0057a9c8);
+    FUN_0039cd08_hook(g_btlUiBlock);
     scrSetResult(result);
     return 1;
 }

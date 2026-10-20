@@ -41,8 +41,8 @@ extern unsigned char LAB_002c59d0; /* 0x2c59d0 */
 extern unsigned char LAB_002c5a04; /* 0x2c5a04 */
 extern unsigned char LAB_002c5db0; /* 0x2c5db0 */
 extern unsigned char LAB_002c5dc8; /* 0x2c5dc8 */
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
-extern unsigned char DAT_0060fc08; /* 0x60fc08 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
+extern unsigned char g_mapRndMaze; /* 0x60fc08 */
 extern unsigned char DAT_0060fc18; /* 0x60fc18 */
 extern int DAT_0060ffa4; /* 0x60ffa4 */
 extern int DAT_0060ffa8; /* 0x60ffa8 */
@@ -57,7 +57,7 @@ extern int DAT_006105e0; /* 0x6105e0 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00100388. */
-extern int FUN_00162e8c(void);
+extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_0035d1e0. */
 extern int FUN_00376f94(void);
@@ -102,7 +102,7 @@ void FUN_002c553c(void)
   int temp_v17;
   int temp_v18;
   
-  temp_v3 = FUN_00162e8c();
+  temp_v3 = gameFlagsGetBlock();
   temp_v16 = temp_v3 + 0xe00;
   temp_v4 = 0;
   do {
@@ -221,7 +221,7 @@ void FUN_002c553c(void)
     FUN_0040aad4(DAT_006105d4,0);
     temp_v6 = *(unsigned int *)(DAT_006105d4 + 4);
     FUN_003fe86c(temp_v6,0,2);
-    FUN_0040ace8(DAT_0056fcc0,temp_v6);
+    FUN_0040ace8(g_handleRegistry,temp_v6);
     temp_v9 = 0x20;
     FUN_00178b04(0x20,&LAB_002c59d0,0x86f);
     temp_v7 = 0;
@@ -232,7 +232,7 @@ void FUN_002c553c(void)
     moriModelContentCopyBody();
     temp_v6 = *(unsigned int *)(DAT_006105d8 + 4);
     FUN_003fe86c(temp_v6,0,2);
-    FUN_0040ace8(DAT_0056fcc0,temp_v6);
+    FUN_0040ace8(g_handleRegistry,temp_v6);
     FUN_00100388(temp_v12,&LAB_002c5a04);
     temp_v9 = 0x20;
     FUN_00178b04(0x20,&LAB_002c59d0,0x878);
@@ -245,7 +245,7 @@ void FUN_002c553c(void)
     FUN_0040aad4(DAT_006105e0,0);
     temp_v6 = *(unsigned int *)(DAT_006105e0 + 4);
     FUN_003fe86c(temp_v6,0,2);
-    FUN_0040ace8(DAT_0056fcc0,temp_v6);
+    FUN_0040ace8(g_handleRegistry,temp_v6);
   }
   DAT_0060ffb8 = 2;
   temp_v7 = 0;
@@ -282,7 +282,7 @@ void FUN_002c553c(void)
           FUN_0040aad4(*(unsigned int *)(temp_v3 + 0x60ffbc),0);
           temp_v6 = *(unsigned int *)(*(int *)(temp_v3 + 0x60ffbc) + 4);
           FUN_003fe86c(temp_v6,0,2);
-          FUN_0040ace8(DAT_0056fcc0,temp_v6);
+          FUN_0040ace8(g_handleRegistry,temp_v6);
           if (temp_v7 != 5) {
             FUN_003fd784(*(unsigned int *)(*(int *)(temp_v3 + 0x60ffbc) + 4));
           }
@@ -302,7 +302,7 @@ void FUN_002c553c(void)
           FUN_0040aad4(*(unsigned int *)(temp_v14 + 0x3b4),0);
           temp_v6 = *(unsigned int *)(*(int *)(temp_v14 + 0x3b4) + 4);
           FUN_003fe86c(temp_v6,0,2);
-          FUN_0040ace8(DAT_0056fcc0,temp_v6);
+          FUN_0040ace8(g_handleRegistry,temp_v6);
           FUN_003fd784(*(unsigned int *)(*(int *)(temp_v3 + 0x60ffbc) + 4));
         }
       }
@@ -321,7 +321,7 @@ void FUN_002c553c(void)
         FUN_0040aad4(*(unsigned int *)(temp_v3 + 0x60ffbc),0);
         temp_v6 = *(unsigned int *)(*(int *)(temp_v3 + 0x60ffbc) + 4);
         FUN_003fe86c(temp_v6,0,2);
-        FUN_0040ace8(DAT_0056fcc0,temp_v6);
+        FUN_0040ace8(g_handleRegistry,temp_v6);
         if (temp_v7 != 5) {
           FUN_003fd784(*(unsigned int *)(*(int *)(temp_v3 + 0x60ffbc) + 4));
         }
@@ -341,13 +341,13 @@ void FUN_002c553c(void)
               temp_v6 = FUN_0040ac08();
             }
             temp_v11 = temp_v9 * 4 + temp_v7 * 0x100;
-            *(unsigned int *)(&DAT_0060fc08 + temp_v11 + 0x3cc) = temp_v6;
+            *(unsigned int *)(&g_mapRndMaze + temp_v11 + 0x3cc) = temp_v6;
             FUN_0040ab7c();
-            moriModelContentCopyBody(*(unsigned int *)(&DAT_0060fc08 + temp_v11 + 0x3cc),
+            moriModelContentCopyBody(*(unsigned int *)(&g_mapRndMaze + temp_v11 + 0x3cc),
                          *(unsigned int *)(temp_v3 + 0x60ffbc),0);
-            temp_v6 = *(unsigned int *)(*(int *)(&DAT_0060fc08 + temp_v11 + 0x3cc) + 4);
+            temp_v6 = *(unsigned int *)(*(int *)(&g_mapRndMaze + temp_v11 + 0x3cc) + 4);
             FUN_003fe86c(temp_v6,0,2);
-            FUN_0040ace8(DAT_0056fcc0,temp_v6);
+            FUN_0040ace8(g_handleRegistry,temp_v6);
             if (temp_v7 != 5) {
               FUN_003fd784(temp_v6);
             }

@@ -30,19 +30,19 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned char DAT_0052bfdc; /* 0x52bfdc */
-extern int DAT_0057f108; /* 0x57f108 */
+extern int g_camp; /* 0x57f108 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0015f858. */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164b5c. */
-extern int FUN_001654d8(int);
-extern int FUN_001654e4(int);
+extern int vec2GetXInt(int);
+extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001689e8. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0019d880. */
 extern int FUN_002a4860(void);
 extern int FUN_002a4894(int);
@@ -72,9 +72,9 @@ void FUN_00288538(int param_1)
   int temp_v12;
   int temp_v13;
   
-  temp_v0 = DAT_0057f108 + 0x914;
-  temp_v1 = FUN_001654d8(temp_v0);
-  temp_v0 = FUN_001654e4(temp_v0);
+  temp_v0 = g_camp + 0x914;
+  temp_v1 = vec2GetXInt(temp_v0);
+  temp_v0 = vec2GetYInt(temp_v0);
   FUN_0019d880();
   efctSetSpeed();
   if (param_1 == 0) {
@@ -137,14 +137,14 @@ void FUN_00288538(int param_1)
           efctSetSpeed();
           return;
         }
-      } while ((temp_v2 == 1 || temp_v2 == 2) && (temp_v0 = FUN_0018719c(0x410), temp_v0 == 0));
+      } while ((temp_v2 == 1 || temp_v2 == 2) && (temp_v0 = gameFlagIsSet(0x410), temp_v0 == 0));
     } while( 1 );
   }
   FUN_00164b5c(2,0x12,0xc,temp_v1,temp_v0,0xbf);
-  temp_v11 = DAT_0057f108;
+  temp_v11 = g_camp;
   temp_v10 = 0;
   temp_v9 = 0;
-  temp_v2 = DAT_0057f108 + 0x32b8;
+  temp_v2 = g_camp + 0x32b8;
   temp_v12 = temp_v1;
   temp_v13 = temp_v0;
   temp_v0 = FUN_002a4860();
@@ -228,7 +228,7 @@ void FUN_00288538(int param_1)
         efctSetSpeed();
         return;
       }
-    } while ((temp_v1 == 1 || temp_v1 == 2) && (temp_v2 = FUN_0018719c(0x410), temp_v2 == 0));
+    } while ((temp_v1 == 1 || temp_v1 == 2) && (temp_v2 = gameFlagIsSet(0x410), temp_v2 == 0));
   } while( 1 );
 }
 

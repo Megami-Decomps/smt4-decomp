@@ -3,12 +3,12 @@
 extern "C" {
 
 void *destroyObj0055ae64(void *self);
-void FUN_002e6e14(void *memory);
+void asdOperatorDeleteArray(void *memory);
 
 /* Deleting destructor: runs the destructor body, then frees the object. */
 void deletingDtor_001208f2(void *self)
 {
-    FUN_002e6e14(destroyObj0055ae64(self));
+    asdOperatorDeleteArray(destroyObj0055ae64(self));
 }
 
 } /* extern "C" */

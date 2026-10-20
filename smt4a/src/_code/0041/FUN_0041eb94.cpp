@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0023b45c(int);
 int FUN_002c8538(int);
-int FUN_002e342c(...);
+int libc_strcpy(...);
 int FUN_002f0384(int);
 int FUN_0033440c(int);
 int FUN_0033449c(int);
@@ -21,10 +21,10 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern int FUN_0014af84(void);
+extern int gameDataBlocksGetSaveData(void);
 /* Supplied declaration required: FUN_0023b45c. */
 /* Supplied declaration required: FUN_002c8538. */
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_002f0384. */
 /* Supplied declaration required: FUN_0033440c. */
 /* Supplied declaration required: FUN_0033449c. */
@@ -60,10 +60,10 @@ void FUN_0041eb94(int param_1)
   *(unsigned short *)((int)puVar3 + 0x2a) = *(unsigned short *)(temp_v0 + 0x90);
   *(unsigned short *)(puVar3 + 0xb) = *(unsigned short *)(temp_v0 + 0x92);
   puVar3[0xc] = *(unsigned int *)(temp_v0 + 0x8c);
-  FUN_002e342c(puVar3 + 0x13,temp_v0 + 0x6c);
+  libc_strcpy(puVar3 + 0x13,temp_v0 + 0x6c);
   *(unsigned short *)((int)puVar3 + 0x62) = *(unsigned short *)(temp_v0 + 0xd0);
-  temp_v1 = FUN_0014af84();
-  FUN_002e342c(temp_v1 + 0x54,temp_v0 + 0x6c);
+  temp_v1 = gameDataBlocksGetSaveData();
+  libc_strcpy(temp_v1 + 0x54,temp_v0 + 0x6c);
   FUN_0033440c(*(unsigned char *)(param_1 + *(int *)(param_1 + 0x2f8) * 0x80 + 0xd6));
   FUN_003720a0(*(unsigned int *)(param_1 + 0x54),0);
   temp_v0 = param_1 + *(int *)(param_1 + 0x2f8) * 0x80;

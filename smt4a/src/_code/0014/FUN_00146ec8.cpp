@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0016f198(int);
-int FUN_00195fc8(void);
+int sysFatalBreak(void);
 int coproc_movefrom_User_R_Thread_and_Process_ID(void);
 int software_interrupt(int);
 
@@ -22,7 +22,7 @@ extern int FUN_0015997c(void);
 extern unsigned int FUN_0015a318(void);
 /* Supplied declaration required: FUN_0016f198. */
 extern int FUN_00170404(unsigned int);
-/* Supplied declaration required: FUN_00195fc8. */
+/* Supplied declaration required: sysFatalBreak. */
 
 
 unsigned int FUN_00146ec8(unsigned int param_1)
@@ -37,7 +37,7 @@ unsigned int FUN_00146ec8(unsigned int param_1)
   if ((temp_v0 != 0) && (temp_v1 = FUN_0015a318(), temp_v1 == 0)) {
     temp_v0 = FUN_0015997c();
     if (temp_v0 < 0) {
-      FUN_00195fc8();
+      sysFatalBreak();
     }
     FUN_0016f198(0xf);
     temp_v0 = coproc_movefrom_User_R_Thread_and_Process_ID();

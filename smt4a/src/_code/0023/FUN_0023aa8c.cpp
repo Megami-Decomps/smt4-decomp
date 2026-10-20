@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_005702f8; /* 0x5702f8 */
+extern int g_keyedRecordCount; /* 0x5702f8 */
 
 
 void FUN_0023aa8c(int param_1,unsigned int *param_2)
@@ -18,7 +18,7 @@ void FUN_0023aa8c(int param_1,unsigned int *param_2)
   unsigned int temp_v5;
   unsigned int temp_v6;
   
-  if (-1 < (DAT_005702f8 - param_1) - 1) {
+  if (-1 < (g_keyedRecordCount - param_1) - 1) {
     temp_v0 = param_2[1];
     temp_v1 = param_2[2];
     temp_v2 = param_2[3];

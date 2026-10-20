@@ -30,7 +30,7 @@ int FUN_003adc58(...);
 int FUN_003b5714(...);
 int FUN_003d2158(...);
 int FUN_003e0090(...);
-int FUN_00480fc0(...);
+int flagValueSub(...);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
 
@@ -52,7 +52,7 @@ int FUN_00324e38(...);
 int FUN_003d2150(...);
 int FUN_003d4ed8(...);
 int FUN_003e54b8(...);
-int FUN_003fd63c(...);
+int gameFlagSetValue(...);
 
 /* stack frame of void: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -93,11 +93,11 @@ extern unsigned int FUN_00145868(void);
 extern unsigned int FUN_00152f44(void);
 /* Supplied declaration required: FUN_0015f858. */
 /* Supplied declaration required: FUN_001628c0. */
-extern int FUN_00162e8c(void);
+extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_001681c4. */
 /* Supplied declaration required: sysPlaySe. */
 extern int FUN_00184964(unsigned int, unsigned int);
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
 /* Supplied declaration required: FUN_001f4908. */
@@ -141,8 +141,8 @@ extern int linkHolderCallFirst(unsigned int);
 /* Supplied declaration required: FUN_003e54b8. */
 extern int linkHolderCheckFirst(unsigned int);
 /* Supplied declaration required: FUN_003e5728. */
-/* Supplied declaration required: FUN_003fd63c. */
-/* Supplied declaration required: FUN_00480fc0. */
+/* Supplied declaration required: gameFlagSetValue. */
+/* Supplied declaration required: flagValueSub. */
 extern int FUN_004d04f4(void);
 
 
@@ -167,7 +167,7 @@ void FUN_002d9b50(void)
   float temp_v10;
   unsigned int temp_v11;
   
-  temp_v0 = FUN_00162e8c();
+  temp_v0 = gameFlagsGetBlock();
   temp_v1 = FUN_00145868();
   temp_v6 = g_lmapScene;
   temp_v10 = 0.0f;
@@ -201,7 +201,7 @@ void FUN_002d9b50(void)
         *(int *)(g_lmapScene + 4) = *(int *)(g_lmapScene + 4) + 1;
         *(unsigned int *)(temp_v6 + 8) = 0;
         *(unsigned int *)(temp_v6 + 0x270) = 0;
-        temp_v6 = FUN_0018719c(0x68);
+        temp_v6 = gameFlagIsSet(0x68);
         if (temp_v6 != 0) {
           FUN_002c2d44(
                       "碂辂閂暁銂薂䂁钂銂膂邂邂薂蒂䦁䂁熂膂邂覂蒂貂馂䂁邂銂薂鎂鎂䂁钂袂薂䂁瞂䂁憂閂钂钂辂躂䒁"
@@ -233,13 +233,13 @@ void FUN_002d9b50(void)
         if (g_gameState == 0x18) {
           temp_v6 = *(int *)(temp_v0 + 0x1520);
           if (temp_v6 != 0) {
-            FUN_003fd63c(temp_v6,1);
+            gameFlagSetValue(temp_v6,1);
             *(int *)(temp_v0 + 0x1520) = 0;
           }
         }
         break;
       case 2:
-        temp_v6 = FUN_0018719c(0x68);
+        temp_v6 = gameFlagIsSet(0x68);
         if (temp_v6 == 0) {
           FUN_00312db0(&LAB_002d9efc);
           *(unsigned int *)(g_lmapScene + 4) = 99;
@@ -498,7 +498,7 @@ LAB_002da3cc:
             temp_v2 = temp_v3;
             FUN_0015f858();
             FUN_003180c4(0,temp_v2);
-            FUN_00480fc0(temp_v3,1);
+            flagValueSub(temp_v3,1);
             FUN_00312db0(&LAB_002dab1c);
           }
           else {
@@ -534,7 +534,7 @@ LAB_002da3cc:
             temp_v2 = temp_v3;
             FUN_0015f858(temp_v3,0);
             FUN_003180c4(0,temp_v2);
-            FUN_00480fc0(temp_v3,1);
+            flagValueSub(temp_v3,1);
             temp_v11 = 0x2dab4c;
           }
           FUN_00312db0(temp_v11);
@@ -799,7 +799,7 @@ LAB_002dad8c:
           temp_v0 = temp_v6;
           FUN_0015f858(temp_v6,0);
           FUN_003180c4(0,temp_v0);
-          FUN_00480fc0(temp_v6,1);
+          flagValueSub(temp_v6,1);
           FUN_00312db0(&LAB_002dae40);
           FUN_001681c4();
         }

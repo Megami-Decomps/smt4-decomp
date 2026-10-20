@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 int FUN_002a690c(int, int, int);
 int FUN_00333694(...);
 
-extern int FUN_001ab888(void);
-/* Supplied declaration required: FUN_001aba54. */
+extern int gameGetSlotTable(void);
+/* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: FUN_002a690c. */
 /* Supplied declaration required: FUN_00333694. */
 
@@ -29,7 +29,7 @@ unsigned int FUN_002684d0(int param_1,int param_2)
   unsigned char temp_v8;
   
   temp_v0 = param_1;
-  FUN_001aba54();
+  dataTable04FindById();
   if (temp_v0 != 0) {
     temp_v2 = *(unsigned int *)(temp_v0 + 0x28);
     temp_v6 = (temp_v2 & 0x7ff) >> 9 == 1;
@@ -45,7 +45,7 @@ unsigned int FUN_002684d0(int param_1,int param_2)
         temp_v3 = 8;
       }
       if (temp_v8 && temp_v3 != (temp_v2 & 0x1ff) >> 5) {
-        temp_v0 = FUN_001ab888();
+        temp_v0 = gameGetSlotTable();
         temp_v5 = -1;
         do {
           temp_v1 = param_2;

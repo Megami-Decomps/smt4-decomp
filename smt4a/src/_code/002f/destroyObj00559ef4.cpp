@@ -3,7 +3,7 @@
 extern "C" {
 
 extern const u8 DAT_00559ef4[];  /* vtable */
-u8 *FUN_002e9318(u8 *member);
+u8 *onlineStringDestroy(u8 *member);
 
 typedef struct Object559ef4 {
     /* 0x00 */ const void *vtbl;
@@ -17,7 +17,7 @@ u8 *destroyObj00559ef4(Object559ef4 *self)
     u8 *member;
 
     self->vtbl = DAT_00559ef4;
-    member = FUN_002e9318(self->member18);
+    member = onlineStringDestroy(self->member18);
     return member - 0x18;
 }
 

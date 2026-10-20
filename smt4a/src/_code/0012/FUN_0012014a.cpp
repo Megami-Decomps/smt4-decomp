@@ -14,9 +14,9 @@ typedef struct {
 int FUN_00103e62(StreamReader *reader, u8 *out);
 int FUN_0012939c(StreamReader *reader, u8 *out);
 
-int FUN_00300900(StreamReader *reader, u8 *out);
-int FUN_00300934(StreamReader *reader, int *out);
-int FUN_002ee9da(StreamReader *reader);
+int streamExtractU8(StreamReader *reader, u8 *out);
+int streamReadWord(StreamReader *reader, int *out);
+int streamSeek(StreamReader *reader);
 
 /* Reads one length-prefixed record; sets the reader's error flag when the declared length overruns. */
 void FUN_0012014a(StreamReader *reader, Record *record)
@@ -29,11 +29,11 @@ void FUN_0012014a(StreamReader *reader, Record *record)
     skipHeader = reader->skipHeader;
     length = 0;
     if (skipHeader == 0) {
-        FUN_00300900(reader, &record->unk04);
+        streamExtractU8(reader, &record->unk04);
         if (reader->error != 0) {
             return;
         }
-        FUN_00300934(reader, &length);
+        streamReadWord(reader, &length);
         if (reader->error != 0) {
             return;
         }
@@ -50,7 +50,7 @@ void FUN_0012014a(StreamReader *reader, Record *record)
     if (reader->error != 0) {
         return;
     }
-    if (skipHeader == 0 && (reader->position > start + length || FUN_002ee9da(reader) == 0)) {
+    if (skipHeader == 0 && (reader->position > start + length || streamSeek(reader) == 0)) {
         reader->error = 1;
     }
 }

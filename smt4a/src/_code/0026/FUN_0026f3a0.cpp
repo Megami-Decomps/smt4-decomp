@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001ab854(...);
+int gameGetSlotRecord(...);
 int FUN_002ade88(void);
 int FUN_0035e540(void);
 int FUN_003f3a04(unsigned int, int);
@@ -16,10 +16,10 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } void_stack;
 
-extern int DAT_0057f268; /* 0x57f268 */
+extern int g_partyPanel; /* 0x57f268 */
 
-/* Supplied declaration required: FUN_001ab854. */
-extern int FUN_001ab888(void);
+/* Supplied declaration required: gameGetSlotRecord. */
+extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_002ade88. */
 /* Supplied declaration required: FUN_0035e540. */
 /* Supplied declaration required: FUN_003f3a04. */
@@ -39,8 +39,8 @@ void FUN_0026f3a0(void)
   int temp_v3;
   int temp_v4;
   
-  temp_v0 = DAT_0057f268;
-  temp_v1 = FUN_001ab888();
+  temp_v0 = g_partyPanel;
+  temp_v1 = gameGetSlotTable();
   piVar4 = (int *)(temp_v0 + 0xa10);
   FUN_003f5220(*(unsigned int *)(temp_v0 + 0xa10),0);
   FUN_003f3a04(*(unsigned int *)(temp_v0 + 0xa10),*(char *)(temp_v0 + 0x42) == '\x01');
@@ -61,7 +61,7 @@ void FUN_0026f3a0(void)
     else {
       *(unsigned char *)(*(int *)(temp_v4 + 0xa14) + 0x20) = 0;
       *(int *)(*piVar4 + 0x34) = (int)*(char *)(temp_v2 + 0x1ca0);
-      temp_v2 = FUN_001ab854((int)*(char *)(temp_v2 + 0x1ca0));
+      temp_v2 = gameGetSlotRecord((int)*(char *)(temp_v2 + 0x1ca0));
       *(unsigned char *)(*(int *)(temp_v4 + 0xa14) + 0x29) = (*(unsigned short *)(temp_v2 + 0x60) & 4) != 0;
     }
     *(unsigned char *)(*(int *)(temp_v4 + 0xa14) + 0x25) = 0;
@@ -86,7 +86,7 @@ void FUN_0026f3a0(void)
     else {
       *(unsigned char *)(*(int *)(temp_v3 + 0xa20) + 0x20) = 0;
       *(unsigned int *)(*piVar4 + 0x34) = *(unsigned int *)(temp_v2 + 0xa80);
-      temp_v2 = FUN_001ab854(*(unsigned int *)(temp_v2 + 0xa80));
+      temp_v2 = gameGetSlotRecord(*(unsigned int *)(temp_v2 + 0xa80));
       temp_v4 = FUN_004bd0d8();
       *(unsigned char *)(*(int *)(temp_v3 + 0xa20) + 0x23) = temp_v4 != 0;
       *(unsigned char *)(*(int *)(temp_v3 + 0xa20) + 0x24) = (*(unsigned short *)(temp_v2 + 0x60) & 0x400) != 0;

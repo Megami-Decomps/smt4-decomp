@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: dataTable04FindById. */
 
 
 unsigned int FUN_003a6868(int param_1)
@@ -14,7 +14,7 @@ unsigned int FUN_003a6868(int param_1)
 {
 /* irregular: 1 native warning(s); review required */
   if (param_1 != 0) {
-    FUN_001aba54();
+    dataTable04FindById();
     switch(*(unsigned char *)(param_1 + 0x23)) {
     default:
       return 0;

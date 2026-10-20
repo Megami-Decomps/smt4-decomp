@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002866b4(unsigned int, unsigned int, unsigned int, int, int, int);
-int FUN_002893d8(void);
+int scrGetCommandFrame(void);
 int FUN_0028dc98(int);
 int QuestCenter_GetActiveEntry(void);
 
@@ -16,11 +16,11 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } void_stack;
 
-extern unsigned char DAT_0043e188; /* 0x43e188 */
+extern unsigned char g_messageMain; /* 0x43e188 */
 
 extern unsigned int FUN_002865f8(void);
 /* Supplied declaration required: FUN_002866b4. */
-/* Supplied declaration required: FUN_002893d8. */
+/* Supplied declaration required: scrGetCommandFrame. */
 /* Supplied declaration required: FUN_0028dc98. */
 extern unsigned int scrGetArg(unsigned int);
 extern unsigned char FUN_003821b8(void);
@@ -41,17 +41,17 @@ void scrComm_Message_ShowFromQuestStateWaitLock(void)
   QuestCenter_GetActiveEntry();
   temp_v1 = FUN_003821b8();
   FUN_0028dc98(0);
-  temp_v2 = FUN_002893d8();
-  temp_v0 = (*(int *)((unsigned char *)&DAT_0043e188 + 0x8));
+  temp_v2 = scrGetCommandFrame();
+  temp_v0 = (*(int *)((unsigned char *)&g_messageMain + 0x8));
   if (temp_v2 == 0) {
-    if ((*(int *)((unsigned char *)&DAT_0043e188 + 0x8)) != 0) {
-      *(unsigned char *)((*(int *)((unsigned char *)&DAT_0043e188 + 0x8)) + 0x30) = 1;
+    if ((*(int *)((unsigned char *)&g_messageMain + 0x8)) != 0) {
+      *(unsigned char *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x30) = 1;
     }
     *(unsigned char *)(temp_v0 + 0x31) = 1;
   }
   temp_v3 = FUN_002865f8();
   temp_v4 = scrGetArg(0);
-  temp_v5 = FUN_002893d8();
+  temp_v5 = scrGetCommandFrame();
   FUN_002866b4(temp_v3,temp_v4,temp_v5,temp_v1,1,0);
   return;
 }

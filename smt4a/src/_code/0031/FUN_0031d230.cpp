@@ -16,15 +16,15 @@ typedef struct {
 
 extern GameGlobals g_gameDataBlocks;
 
-int FUN_0018719c(u32 id);
+int gameFlagIsSet(u32 id);
 
-/* True when the data flag is set or FUN_0018719c(0x528) succeeds. */
+/* True when the data flag is set or gameFlagIsSet(0x528) succeeds. */
 u32 FUN_0031d230(void)
 {
     if (g_gameDataBlocks.data->flag != 0) {
         return 1;
     }
-    if (FUN_0018719c(0x528) == 0) {
+    if (gameFlagIsSet(0x528) == 0) {
         return 0;
     }
     return 1;

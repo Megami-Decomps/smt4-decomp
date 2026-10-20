@@ -8,7 +8,7 @@ int FUN_00250798(void);
 int FUN_0028fe0c(int, int);
 int timerStart(int, int);
 
-extern int DAT_0043dd50; /* 0x43dd50 */
+extern int g_uiQuest; /* 0x43dd50 */
 
 /* Supplied declaration required: FUN_00250798. */
 /* Supplied declaration required: FUN_0028fe0c. */
@@ -25,15 +25,15 @@ void FUN_002cf780(void)
   int temp_v1;
   int temp_v2;
   
-  temp_v0 = DAT_0043dd50;
-  *(unsigned char *)(DAT_0043dd50 + 0x5c4) = 1;
+  temp_v0 = g_uiQuest;
+  *(unsigned char *)(g_uiQuest + 0x5c4) = 1;
   FUN_00250798();
   temp_v1 = FUN_0029efc0();
   temp_v2 = FUN_0029efa8(temp_v0 + 0x5fc);
   FUN_0028fe0c(*(unsigned short *)(temp_v0 + (temp_v2 + temp_v1) * 2 + 0x6c4),1);
   timerStart(temp_v0 + 0x34,0);
-  temp_v0 = DAT_0043dd50;
-  *(unsigned int *)(DAT_0043dd50 + 8) = *(unsigned int *)(DAT_0043dd50 + 4);
+  temp_v0 = g_uiQuest;
+  *(unsigned int *)(g_uiQuest + 8) = *(unsigned int *)(g_uiQuest + 4);
   *(unsigned int *)(temp_v0 + 4) = 1;
   *(unsigned int *)(temp_v0 + 0x10) = 0;
   return;

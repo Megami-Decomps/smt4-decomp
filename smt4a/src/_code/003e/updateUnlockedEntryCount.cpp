@@ -3,7 +3,7 @@
 extern "C" {
 
 extern u8 *gameDataBlockGetArea2D68(void);
-extern SummarySource *FUN_001ab888(void);
+extern SummarySource *gameGetSlotTable(void);
 
 /* Counts the unlocked entries: 8, plus the bits set in bytes 9..11 of the table at gameDataBlockGetArea2D68 (the first one jumps to 9), at most 0x18. */
 void updateUnlockedEntryCount(void)
@@ -61,7 +61,7 @@ void updateUnlockedEntryCount(void)
     if (count > 0x18) {
         count = 0x18;
     }
-    FUN_001ab888()->unk1CA3 = count;
+    gameGetSlotTable()->unk1CA3 = count;
 }
 
 } /* extern "C" */

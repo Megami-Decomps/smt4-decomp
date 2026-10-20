@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00117828(int);
 int FUN_0012d86c(int *, unsigned int *, int *, int *);
 int FUN_00132cd6(int);
-int FUN_002e6e14(...);
+int asdOperatorDeleteArray(...);
 int FUN_002f3474(unsigned int *, unsigned int, int);
 
 typedef int romwright_code(...);
@@ -26,8 +26,8 @@ extern unsigned char DAT_00558c30; /* 0x558c30 */
 /* Supplied declaration required: FUN_00117828. */
 /* Supplied declaration required: FUN_0012d86c. */
 /* Supplied declaration required: FUN_00132cd6. */
-/* Supplied declaration required: FUN_002e6e14. */
-extern int FUN_002e9318(unsigned int *);
+/* Supplied declaration required: asdOperatorDeleteArray. */
+extern int onlineStringDestroy(unsigned int *);
 extern int FUN_002eb624(int);
 extern int *arrayElementAddress_002f32d4(unsigned int *, int);
 /* Supplied declaration required: FUN_002f3474. */
@@ -70,16 +70,16 @@ unsigned long long FUN_002f33b4(unsigned int *param_1,unsigned int param_2,int p
       FUN_002f3474(puVar4,*(unsigned int *)(temp_v1 + 0x14),0);
       while (puVar5 = (unsigned int *)*puVar4, puVar5 != (unsigned int *)0x0) {
         *puVar4 = *puVar5;
-        FUN_002e6e14(puVar5[2]);
-        FUN_002e6e14(puVar5);
+        asdOperatorDeleteArray(puVar5[2]);
+        asdOperatorDeleteArray(puVar5);
       }
     }
-    FUN_002e6e14(temp_v1);
+    asdOperatorDeleteArray(temp_v1);
   }
-  temp_v1 = FUN_002e9318(param_1 + 0x50);
+  temp_v1 = onlineStringDestroy(param_1 + 0x50);
   for (temp_v0 = *(int *)(temp_v1 - 0x2c); temp_v0 != *(int *)(temp_v1 - 0x28); temp_v0 = temp_v0 + 4) {
   }
-  FUN_002e6e14();
+  asdOperatorDeleteArray();
   temp_v1 = FUN_002f3490(temp_v1 - 100);
   temp_v1 = temp_v1 - 0x18;
   FUN_00132cd6(temp_v1);

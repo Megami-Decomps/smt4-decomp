@@ -9,12 +9,12 @@ int FUN_0017fe8c(...);
 int FUN_0018003c(...);
 int FUN_0019a300(...);
 int asdMemFree(...);
-int FUN_001a089c(...);
+int nn_os_LightEvent_Initialize(...);
 int FUN_001a1204(...);
 int FUN_001ab838(...);
-int FUN_001af148(...);
-int FUN_001bcd48(...);
-int FUN_00212500(...);
+int nn_os_LightEvent_Wait(...);
+int svcSleepThread(...);
+int refCountIncrement(...);
 int asdEffectTextureCreate(...);
 int software_interrupt(...);
 
@@ -47,12 +47,12 @@ extern unsigned char bRam1ff80014; /* 0x1ff80014 */
 /* Supplied declaration required: FUN_0018003c. */
 /* Supplied declaration required: FUN_0019a300. */
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_001a089c. */
+/* Supplied declaration required: nn_os_LightEvent_Initialize. */
 /* Supplied declaration required: FUN_001a1204. */
 /* Supplied declaration required: FUN_001ab838. */
-/* Supplied declaration required: FUN_001af148. */
-/* Supplied declaration required: FUN_001bcd48. */
-/* Supplied declaration required: FUN_00212500. */
+/* Supplied declaration required: nn_os_LightEvent_Wait. */
+/* Supplied declaration required: svcSleepThread. */
+/* Supplied declaration required: refCountIncrement. */
 extern int FUN_0025cc50(int *);
 extern int *FUN_0037a7f4(void);
 /* Supplied declaration required: asdEffectTextureCreate. */
@@ -83,7 +83,7 @@ int * FUN_00180070(int param_1,int *param_2)
     param_2 = (int *)FUN_0037a7f4();
   }
   *(int **)(param_1 + 0x14) = param_2;
-  FUN_00212500();
+  refCountIncrement();
   temp_v0 = *param_2;
   *param_2 = temp_v0 - 1;
   if (temp_v0 - 1 != 0) {
@@ -164,8 +164,8 @@ LAB_00189b20:
       if (piVar5 != (int *)0x2 && piVar5 != (int *)0x5) {
         aiStack_20[0] = 0;
         aiStack_20[1] = 0;
-        FUN_001a089c(aiStack_20,1);
-        FUN_001af148(aiStack_20);
+        nn_os_LightEvent_Initialize(aiStack_20,1);
+        nn_os_LightEvent_Wait(aiStack_20);
         piVar5 = piVar4;
       }
       return piVar5;
@@ -175,7 +175,7 @@ LAB_00189b20:
       puVar3 = (unsigned int *)(unsigned int)DAT_0062d200;
     }
     if (!temp_v2 || puVar3 != (unsigned int *)0x2) goto LAB_00189b20;
-    FUN_001bcd48(&LAB_004c4b40,0);
+    svcSleepThread(&LAB_004c4b40,0);
     nn_os_CriticalSection_Leave((unsigned int)&DAT_0062d280);
   } while( 1 );
 }

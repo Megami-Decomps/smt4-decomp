@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00122692(int, unsigned char [4]);
-int FUN_002ee54c(unsigned char [4]);
+int sharedRefHolderDestroy2(unsigned char [4]);
 int FUN_002fde5c(unsigned char [4]);
 int FUN_003031e4(unsigned char [4], int *);
 
@@ -16,7 +16,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_00122692. */
-/* Supplied declaration required: FUN_002ee54c. */
+/* Supplied declaration required: sharedRefHolderDestroy2. */
 /* Supplied declaration required: FUN_002fde5c. */
 /* Supplied declaration required: FUN_003031e4. */
 
@@ -34,11 +34,11 @@ unsigned int FUN_00117300(int param_1,int param_2)
   FUN_00122692(param_1,temp_v1);
   if (((*(char *)(param_1 + 4) == '\0') && (FUN_003031e4(temp_v1,&temp_v3), temp_v2 == '\0'))
      && (temp_v3 == param_2 + 1)) {
-    FUN_002ee54c(temp_v1);
+    sharedRefHolderDestroy2(temp_v1);
     temp_v0 = 1;
   }
   else {
-    FUN_002ee54c(temp_v1);
+    sharedRefHolderDestroy2(temp_v1);
     temp_v0 = 0;
   }
   return temp_v0;

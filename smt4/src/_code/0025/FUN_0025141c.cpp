@@ -11,7 +11,7 @@ int FUN_002888a8(...);
 int FUN_00288ddc(...);
 int FUN_002b6758(...);
 int FUN_002bdf94(...);
-int FUN_002be304(...);
+int drawSetColorFromRGBA8(...);
 int FUN_002be624(...);
 int FUN_002be90c(...);
 int FUN_002bed3c(void);
@@ -76,14 +76,14 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002888a8. */
 extern int isLowThreshold(int, int);
 /* Supplied declaration required: FUN_00288ddc. */
-extern int FUN_002a8740(void);
+extern int gameGetUnitRecord(void);
 extern unsigned int FUN_002b05d0(int);
-extern int FUN_002b63ac(void);
+extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_002b6758. */
 extern unsigned int FUN_002bd068(unsigned short);
 extern unsigned int FUN_002bd1fc(void);
 /* Supplied declaration required: FUN_002bdf94. */
-/* Supplied declaration required: FUN_002be304. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002be90c. */
 /* Supplied declaration required: FUN_002bed3c. */
@@ -128,7 +128,7 @@ void FUN_0025141c(fn_0025141c_arg0 *param_1,int param_2,int param_3)
   param_3 = param_1->field_0x30 + param_3;
   temp_v14 = 0;
   if ((int)param_1->field_0x34 < 0) {
-    temp_v7 = FUN_002b63ac();
+    temp_v7 = gameGetPlayerData();
     temp_v2 = FUN_002bd1fc();
     FUN_002be624(temp_v17,&LAB_00251798,temp_v2);
     temp_v12 = (unsigned int)*(unsigned char *)(temp_v7 + 0x76);
@@ -136,12 +136,12 @@ void FUN_0025141c(fn_0025141c_arg0 *param_1,int param_2,int param_3)
     temp_v13 = (int)*(short *)(temp_v7 + 0x2c);
     temp_v8 = (int)*(short *)(temp_v7 + 0x2a);
     FUN_0026242c(temp_v7);
-    temp_v3 = FUN_002b63ac();
+    temp_v3 = gameGetPlayerData();
     temp_v14 = (int)*(short *)(temp_v3 + 0x1e);
     temp_v15 = FUN_00288ddc((int)(short)temp_v7,0xffffffff);
   }
   else {
-    temp_v3 = FUN_002a8740();
+    temp_v3 = gameGetUnitRecord();
     if (temp_v3 != 0) {
       temp_v2 = FUN_002bd068(*(unsigned short *)(temp_v3 + 0x46));
       FUN_002be624(temp_v17,&LAB_00251798,temp_v2);
@@ -197,11 +197,11 @@ void FUN_0025141c(fn_0025141c_arg0 *param_1,int param_2,int param_3)
       temp_v2 = 0xffffffff;
       if (param_1->field_0x23 == 0) {
         if ((int)param_1->field_0x34 < 0) {
-          temp_v3 = FUN_002b63ac();
+          temp_v3 = gameGetPlayerData();
           temp_v1 = *(unsigned short *)(temp_v3 + 0x72);
         }
         else {
-          temp_v3 = FUN_002a8740();
+          temp_v3 = gameGetUnitRecord();
           temp_v1 = *(unsigned short *)(temp_v3 + 0x44);
         }
         temp_v5 = 1;
@@ -217,7 +217,7 @@ void FUN_0025141c(fn_0025141c_arg0 *param_1,int param_2,int param_3)
           temp_v5 = temp_v5 + 1;
         } while ((int)temp_v5 < 0xb);
       }
-      FUN_002be304(temp_v2);
+      drawSetColorFromRGBA8(temp_v2);
       if (param_1->field_0x23 != 0) {
         FUN_002bf538();
       }
@@ -240,7 +240,7 @@ void FUN_0025141c(fn_0025141c_arg0 *param_1,int param_2,int param_3)
       }
       else {
         FUN_002bf288(2,0x19,0x3f,param_2,param_3,0x6f);
-        FUN_002be304(0x292929ff);
+        drawSetColorFromRGBA8(0x292929ff);
         FUN_002be624(temp_v16,&LAB_00251c04,temp_v12);
         temp_v9 = FUN_002bf4f8(0x19,0x53);
         FUN_002bdf94(1,*(short *)(temp_v9 + 8) + param_2,*(short *)(temp_v9 + 10) + param_3,1,2,0x79,
@@ -263,7 +263,7 @@ void FUN_0025141c(fn_0025141c_arg0 *param_1,int param_2,int param_3)
             *(unsigned char *)(temp_v7 + 0x12c4) = 0;
           }
           FUN_0025765c(*(unsigned int *)(param_1 + 1),*(unsigned int *)&param_1[1].field_0x4);
-          FUN_002be304();
+          drawSetColorFromRGBA8();
           FUN_002bf288(2,0x19,0x7d1,param_2,param_3,0x79);
           FUN_002bed3c();
           temp_v7 = g_titleScene;
@@ -309,11 +309,11 @@ void FUN_0025141c(fn_0025141c_arg0 *param_1,int param_2,int param_3)
       temp_v7 = isLowThreshold((int)(short)temp_v8,(int)(short)temp_v7);
       if (temp_v7 != 0) {
         temp_v2 = 0xdc0f14ff;
-        FUN_002be304(temp_v2);
+        drawSetColorFromRGBA8(temp_v2);
       }
       else if (temp_v15 != 0) {
         temp_v2 = 0x6ef0ffff;
-        FUN_002be304(temp_v2);
+        drawSetColorFromRGBA8(temp_v2);
       }
       FUN_002be624(temp_v16,&LAB_00251c04,temp_v8);
       temp_v7 = FUN_002bf4f8(0x19);
@@ -336,7 +336,7 @@ void FUN_0025141c(fn_0025141c_arg0 *param_1,int param_2,int param_3)
           *(unsigned char *)(temp_v7 + 0x12c4) = 0;
         }
         FUN_0025765c(*(unsigned int *)(param_1 + 1),*(unsigned int *)&param_1[1].field_0x4);
-        FUN_002be304();
+        drawSetColorFromRGBA8();
         FUN_002bf288(2,0x19,2000,param_2,param_3,0x79);
         FUN_002bed3c();
         temp_v7 = g_titleScene;

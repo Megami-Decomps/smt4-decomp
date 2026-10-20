@@ -8,7 +8,7 @@ int coproc_movefrom_User_R_Thread_and_Process_ID(void);
 int software_interrupt(int);
 
 extern unsigned char LAB_00110104; /* 0x110104 */
-extern unsigned int DAT_005c1fc4; /* 0x5c1fc4 */
+extern unsigned int g_nnCecdHandle; /* 0x5c1fc4 */
 
 /* Unsupported intrinsic, declaration required: coproc_movefrom_User_R_Thread_and_Process_ID (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
@@ -32,8 +32,8 @@ unsigned int FUN_00430084(unsigned int param_1,int param_2,unsigned int param_3,
   *(unsigned int *)(temp_v1 + 0xa0) = param_1;
   *(unsigned int *)(temp_v1 + 0x9c) = (param_2 << 4) | 10;
   software_interrupt(0x32);
-  temp_v0 = DAT_005c1fc4;
-  if ((DAT_005c1fc4 & 0x80000000) == 0) {
+  temp_v0 = g_nnCecdHandle;
+  if ((g_nnCecdHandle & 0x80000000) == 0) {
     temp_v0 = *(unsigned int *)(temp_v1 + 0x84);
   }
   return temp_v0;

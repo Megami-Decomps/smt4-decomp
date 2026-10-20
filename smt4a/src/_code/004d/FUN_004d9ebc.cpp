@@ -40,7 +40,7 @@ struct fn_004d9ebc_arg0 {
 };
 
 extern int FUN_00168518(fn_004d9ebc_arg0 *, unsigned int);
-extern int FUN_001801a4(void);
+extern int gameGetPlayerData(void);
 extern unsigned short *gameGetOptions(void);
 /* Supplied declaration required: sysMemClear. */
 extern unsigned int FUN_0036fd64(fn_004d9ebc_arg0 *, unsigned short);
@@ -66,7 +66,7 @@ void FUN_004d9ebc(fn_004d9ebc_arg0 *param_1)
   temp_v7 = 0;
   do {
     if ((fn_004d9ebc_arg0 *)(unsigned int)(unsigned short)puVar8[temp_v7 + 0x99] == param_1) {
-      temp_v7 = FUN_001801a4();
+      temp_v7 = gameGetPlayerData();
       temp_v8 = FUN_0036fd64(param_1,*(unsigned short *)(temp_v7 + 0x62));
       break;
     }

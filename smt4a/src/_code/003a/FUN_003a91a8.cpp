@@ -18,7 +18,7 @@ typedef struct {
 } void_stack;
 
 extern unsigned int g_btlScriptUnit; /* 0x57113c */
-extern unsigned int DAT_005712f0; /* 0x5712f0 */
+extern unsigned int g_btlActionReflect; /* 0x5712f0 */
 extern int DAT_00573808; /* 0x573808 */
 extern unsigned int g_btlEvent; /* 0x573898 */
 
@@ -65,7 +65,7 @@ unsigned char FUN_003a91a8(void)
   else if (temp_v2 != 0) {
     temp_v3 = btlUnitGet(g_btlScriptUnit);
     if (*(int *)(temp_v3 + 0x1250) != 0) {
-      temp_v0 = chainCountIdUnflagged(DAT_005712f0);
+      temp_v0 = chainCountIdUnflagged(g_btlActionReflect);
       if (temp_v0 < 1) {
         *(unsigned int *)(temp_v3 + 0x1250) = 0;
       }

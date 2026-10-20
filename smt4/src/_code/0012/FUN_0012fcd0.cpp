@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002b99b8(void);
-int FUN_002c3944(unsigned int, unsigned int);
+int rt_memclr(unsigned int, unsigned int);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(unsigned int, int);
 int VectorUnsignedToFloat(unsigned int, int);
@@ -19,7 +19,7 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002b99b8. */
-/* Supplied declaration required: FUN_002c3944. */
+/* Supplied declaration required: rt_memclr. */
 
 
 void FUN_0012fcd0(int param_1)
@@ -85,7 +85,7 @@ void FUN_0012fcd0(int param_1)
     *(int *)(param_1 + 0xf4) = (int)(temp_v1 * -128.0f);
     *(int *)(param_1 + 0xf0) = (int)((temp_v1 - 1.0f) * temp_v2);
   }
-  FUN_002c3944(*(unsigned int *)(param_1 + 0x30),*(unsigned int *)(param_1 + 0x34));
+  rt_memclr(*(unsigned int *)(param_1 + 0x30),*(unsigned int *)(param_1 + 0x34));
   return;
 }
 

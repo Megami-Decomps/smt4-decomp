@@ -1,4 +1,4 @@
-/* The work block returned by FUN_002c2950(). */
+/* The work block returned by gameGetMapBlock(). */
 #ifndef SHARD_SAVEWORK_H
 #define SHARD_SAVEWORK_H
 

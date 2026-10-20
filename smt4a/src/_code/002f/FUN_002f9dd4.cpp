@@ -22,7 +22,7 @@ extern unsigned char g_flagBlock; /* 0x594958 */
 #endif
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-extern unsigned int FUN_002ea714(void);
+extern unsigned int onlineGetActiveLock(void);
 /* Supplied declaration required: FUN_003034ec. */
 
 
@@ -42,7 +42,7 @@ FUN_002f9dd4(unsigned int param_1,unsigned char *param_2,unsigned int param_3,un
   temp_v2 = param_4;
   if ((*(signed char *)((unsigned char *)&g_flagBlock + 0x14)) != '\0') {
     temp_v1 = param_1;
-    temp_v0 = FUN_002ea714();
+    temp_v0 = onlineGetActiveLock();
     FUN_002e6e34(&temp_v1,temp_v0);
     temp_v2 = romwright_piece_3_1((((unsigned int)(temp_v2) >> 8) & 0xffffffU),*param_2);
     temp_v0 = FUN_003034ec(param_1,&temp_v2);

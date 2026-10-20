@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_002629a0(u32 value, int a);
+int bgmStopNoForce(u32 value, int a);
 int scrGetArg(...);
 
 /* Script command: argument 1 is clamped to be non-negative. */
@@ -14,7 +14,7 @@ u32 FUN_001dd114(void)
     if (a < 0) {
         a = 0;
     }
-    FUN_002629a0(value, a);
+    bgmStopNoForce(value, a);
     return 1;
 }
 

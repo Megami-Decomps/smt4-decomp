@@ -29,10 +29,10 @@ extern unsigned char DAT_00561384; /* 0x561384 */
 extern int *g_popupState; /* 0x58104c */
 
 /* Supplied declaration required: FUN_00100388. */
-extern int FUN_0014bef4(unsigned int);
+extern int randRange(unsigned int);
 /* Supplied declaration required: FUN_00152f44. */
 extern int saveSlotFindSelected(void);
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 extern int FUN_002d8b58(unsigned int, unsigned short);
 /* Supplied declaration required: rt_memcpy. */
 
@@ -58,9 +58,9 @@ unsigned int FUN_00234528(int param_1,int param_2)
   
   FUN_00152f44();
   if ((((*g_popupState == 0) && (temp_v0 = saveSlotFindSelected(), temp_v0 != 0)) &&
-      ((temp_v1 = FUN_0018719c(0x8d), temp_v1 == 0 ||
-       ((temp_v1 = FUN_0018719c(0xc2), temp_v1 != 0 || (*(short *)(temp_v0 + 300) != 0xb1)))))) &&
-     ((temp_v1 = FUN_0018719c(0x1a2), temp_v1 == 0 || (temp_v1 = FUN_0014bef4(99), temp_v1 + 1 >= 0x33)))) {
+      ((temp_v1 = gameFlagIsSet(0x8d), temp_v1 == 0 ||
+       ((temp_v1 = gameFlagIsSet(0xc2), temp_v1 != 0 || (*(short *)(temp_v0 + 300) != 0xb1)))))) &&
+     ((temp_v1 = gameFlagIsSet(0x1a2), temp_v1 == 0 || (temp_v1 = randRange(99), temp_v1 + 1 >= 0x33)))) {
     piVar1 = g_popupState;
     temp_v2 = 0xc;
     temp_v3[0] = &DAT_00561366;

@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_0047c5a8(void);
+void stateHandlerCall(void);
 
 typedef struct Target {
     /* 0x00 */ u8 unk00[0x1A];
@@ -11,7 +11,7 @@ typedef struct Target {
     /* 0x1C */ s32 handle;
 } Target;
 
-/* When the target `*ref` is in mode 1, 2 or 3 and has a handle, runs FUN_0047c5a8; always returns 0. */
+/* When the target `*ref` is in mode 1, 2 or 3 and has a handle, runs stateHandlerCall; always returns 0. */
 u32 FUN_002dec0c(Target **ref)
 {
     u8 mode;
@@ -26,7 +26,7 @@ u32 FUN_002dec0c(Target **ref)
             handle = target->handle;
         }
         if (target != NULL && handle != 0) {
-            FUN_0047c5a8();
+            stateHandlerCall();
         }
     }
     return 0;

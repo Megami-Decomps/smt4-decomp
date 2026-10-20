@@ -7,8 +7,8 @@ extern "C" {
 extern unsigned int g_btlScriptUnit; /* 0x43427c */
 
 extern int btlUnitGet(unsigned int);
-extern int FUN_002a8740(void);
-extern int FUN_002a8764(void);
+extern int gameGetUnitRecord(void);
+extern int gameGetSlotTable(void);
 
 
 unsigned int FUN_0033fb2c(unsigned int *param_1)
@@ -24,11 +24,11 @@ unsigned int FUN_0033fb2c(unsigned int *param_1)
     if ((*param_1 & 2) != 0) {
       temp_v1 = btlUnitGet(g_btlScriptUnit);
       if ((*(unsigned int **)(temp_v1 + 0x20) != (unsigned int *)0x0) && ((**(unsigned int **)(temp_v1 + 0x20) & 2) != 0)) {
-        temp_v1 = FUN_002a8764();
+        temp_v1 = gameGetSlotTable();
         temp_v4 = 0;
         if (*(char *)(temp_v1 + 0x910b) != '\0') {
           do {
-            if (((-1 < *(char *)(temp_v1 + temp_v4 + 0x90f0)) && (temp_v2 = FUN_002a8740(), temp_v2 != 0))
+            if (((-1 < *(char *)(temp_v1 + temp_v4 + 0x90f0)) && (temp_v2 = gameGetUnitRecord(), temp_v2 != 0))
                && (-1 < *(char *)(temp_v1 + temp_v4 + 0x90f0))) {
               return 1;
             }
@@ -38,12 +38,12 @@ unsigned int FUN_0033fb2c(unsigned int *param_1)
       }
     }
     else if (((*param_1 & 8) != 0) && (temp_v0 = *(short *)((int)param_1 + 0xce), (int)temp_v0 != 0)) {
-      temp_v1 = FUN_002a8764();
+      temp_v1 = gameGetSlotTable();
       temp_v4 = 0;
       if (*(char *)(temp_v1 + 0x910b) != '\0') {
         do {
           if (-1 < *(char *)(temp_v1 + temp_v4 + 0x90f0)) {
-            temp_v2 = FUN_002a8740();
+            temp_v2 = gameGetUnitRecord();
             temp_v3 = 0;
             if (temp_v2 != 0) {
               temp_v3 = (unsigned int)*(unsigned short *)(temp_v2 + 0x46);

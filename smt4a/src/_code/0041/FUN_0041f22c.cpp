@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_001656a0(...);
-int FUN_00169ddc(int);
+int padButtonIsPressed(...);
+int eventQueueAddUnique(int);
 int FUN_0019de98(int, unsigned int);
 int FUN_0023b45c(int);
 int FUN_002c8538(int);
@@ -26,9 +26,9 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_001656a0. */
-/* Supplied declaration required: FUN_00169ddc. */
-extern unsigned int FUN_001801a4(void);
+/* Supplied declaration required: padButtonIsPressed. */
+/* Supplied declaration required: eventQueueAddUnique. */
+extern unsigned int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_0023b45c. */
 /* Supplied declaration required: FUN_002c8538. */
@@ -103,9 +103,9 @@ LAB_0041f2b8:
   FUN_0041fc24(param_1);
   FUN_0041e2d8(param_1);
   temp_v2 = objBStateAllowsAction();
-  if (((temp_v2 != 0) && (temp_v2 = FUN_001656a0(1), temp_v2 != 0)) ||
+  if (((temp_v2 != 0) && (temp_v2 = padButtonIsPressed(1), temp_v2 != 0)) ||
      (temp_v2 = FUN_002e1a18(2), temp_v2 != 0)) {
-    FUN_00169ddc(0x100020f);
+    eventQueueAddUnique(0x100020f);
     FUN_0033449c(0);
     FUN_0023b45c(1);
     FUN_002c8538(1);
@@ -114,7 +114,7 @@ LAB_0041f2b8:
     if (*(char *)(*(int *)(param_1 + 0x2f8) + param_1 + 0x2ec) == '\0') {
       FUN_0023b45c(0);
     }
-    temp_v3 = FUN_001801a4();
+    temp_v3 = gameGetPlayerData();
     rt_memcpy_w(temp_v3,param_1 + 0x28,0xe);
     FUN_0038b5fc(1,*(unsigned short *)(param_1 + 0x30));
     FUN_0038b5fc(2,*(unsigned short *)(param_1 + 0x32));
@@ -128,7 +128,7 @@ LAB_0041f2b8:
     *(unsigned char *)(param_1 + 0xc) = 0;
   }
   else {
-    temp_v4 = FUN_001656a0(0);
+    temp_v4 = padButtonIsPressed(0);
     temp_v5 = temp_v4 != 0;
     if (!temp_v5) {
       temp_v4 = (unsigned int)*(unsigned char *)(param_1 + 0x44c);
@@ -137,7 +137,7 @@ LAB_0041f2b8:
       FUN_0041e9d4(param_1);
       return;
     }
-    temp_v4 = FUN_001656a0(10);
+    temp_v4 = padButtonIsPressed(10);
     temp_v5 = temp_v4 == 0;
     if (temp_v5) {
       temp_v4 = (unsigned int)*(unsigned char *)(param_1 + 0x44d);

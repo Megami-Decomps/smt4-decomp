@@ -37,7 +37,7 @@ extern unsigned char LAB_0013f4ac; /* 0x13f4ac */
 extern unsigned char LAB_0013f7b0; /* 0x13f7b0 */
 extern unsigned char LAB_001447b0; /* 0x1447b0 */
 extern unsigned char LAB_0019a598; /* 0x19a598 */
-extern unsigned int DAT_0063fd88; /* 0x63fd88 */
+extern unsigned int g_asdGxPresets; /* 0x63fd88 */
 extern unsigned int DAT_0063fd8c; /* 0x63fd8c */
 extern unsigned char DAT_0063fd90; /* 0x63fd90 */
 extern unsigned int DAT_0063fda0; /* 0x63fda0 */
@@ -155,7 +155,7 @@ void FUN_00139c90(unsigned int *param_1)
   temp_v11 = 0x10000;
   temp_v10 = 0x10000;
   temp_v9 = 0x10000;
-  DAT_0063fd88 = 0x400;
+  g_asdGxPresets = 0x400;
   DAT_0063fda0 = 0xf0;
   DAT_0063fda4 = 400;
   temp_v7 = temp_v4;

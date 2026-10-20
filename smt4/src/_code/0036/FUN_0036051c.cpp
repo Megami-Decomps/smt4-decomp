@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002c52f8(void);
+int asdFatalError(void);
 
 /* stack frame of void: 1 slot(s), 1 byte(s) */
 typedef struct {
     unsigned char sp8; /* 0x8: local_8 */
 } void_stack;
 
-/* Supplied declaration required: FUN_002c52f8. */
+/* Supplied declaration required: asdFatalError. */
 extern int FUN_00360908(unsigned int *);
 
 
@@ -26,7 +26,7 @@ int FUN_0036051c(void)
   temp_v1[0] = in_r3;
   temp_v0 = FUN_00360908(temp_v1);
   if (temp_v0 < 0) {
-    FUN_002c52f8();
+    asdFatalError();
   }
   return (int)(char)temp_v1[0];
 }

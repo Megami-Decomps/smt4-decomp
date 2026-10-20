@@ -14,7 +14,7 @@ extern int DAT_0044cd88; /* 0x44cd88 */
 extern int FUN_0028fb40(unsigned short);
 /* Supplied declaration required: FUN_00295a18. */
 extern int FUN_002b8dc0(unsigned short);
-extern int FUN_002c09d0(void);
+extern int gameFlagIsSet(void);
 extern int randNextInRange(unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
@@ -61,7 +61,7 @@ unsigned short FUN_0021e7f4(unsigned int param_1,int param_2)
       temp_v6 = 0;
       do {
         psVar9 = (short *)(temp_v1 + temp_v6 * 8);
-        if ((*psVar9 != 0) && ((psVar9[2] == 0 || (temp_v3 = FUN_002c09d0(), temp_v3 != 0)))) {
+        if ((*psVar9 != 0) && ((psVar9[2] == 0 || (temp_v3 = gameFlagIsSet(), temp_v3 != 0)))) {
           temp_v7 = temp_v7 + (unsigned int)(unsigned short)psVar9[1];
         }
         temp_v6 = temp_v6 + 1;
@@ -71,7 +71,7 @@ unsigned short FUN_0021e7f4(unsigned int param_1,int param_2)
         temp_v3 = 0;
         temp_v7 = 0;
         while ((psVar9 = (short *)(temp_v1 + temp_v7 * 8), *psVar9 == 0 ||
-               (((psVar9[2] != 0 && (temp_v4 = FUN_002c09d0(), temp_v4 == 0)) ||
+               (((psVar9[2] != 0 && (temp_v4 = gameFlagIsSet(), temp_v4 == 0)) ||
                 (temp_v3 = temp_v3 + (unsigned int)(unsigned short)psVar9[1], temp_v3 < temp_v6))))) {
           temp_v7 = temp_v7 + 1;
           if (temp_v7 >= 4) {

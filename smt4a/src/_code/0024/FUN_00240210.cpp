@@ -13,8 +13,8 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_4_stack;
 
-extern int FUN_001ab854(int);
-extern int FUN_001ab888(void);
+extern int gameGetSlotRecord(int);
+extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_0021b390. */
 extern int FUN_0026140c(void);
 extern int bitsAt60Test(int, unsigned int);
@@ -55,15 +55,15 @@ unsigned char FUN_00240210(int param_1,int param_2,unsigned int param_3,int para
     temp_v8 = 0;
     temp_v5 = temp_v8;
     do {
-      temp_v3 = FUN_001ab888();
+      temp_v3 = gameGetSlotTable();
       if (-1 < *(char *)(temp_v3 + temp_v8 + 0x1c88)) {
-        temp_v3 = FUN_001ab888();
-        temp_v3 = FUN_001ab854((int)*(char *)(temp_v3 + temp_v8 + 0x1c88));
+        temp_v3 = gameGetSlotTable();
+        temp_v3 = gameGetSlotRecord((int)*(char *)(temp_v3 + temp_v8 + 0x1c88));
         temp_v4 = bitsAt60Test(temp_v3,10);
         if (temp_v4 == 0) {
           if (temp_v5 == temp_v7) {
             FUN_0021b390(param_1,0xe,*(unsigned short *)(temp_v3 + 0x62),param_3);
-            temp_v5 = FUN_001ab888();
+            temp_v5 = gameGetSlotTable();
             temp_v9 = (int)*(char *)(temp_v5 + temp_v8 + 0x1c88) == (int)*(short *)(temp_v1 + 0x22);
             break;
           }
@@ -158,15 +158,15 @@ LAB_00240390:
     temp_v8 = 0;
     temp_v5 = temp_v8;
     do {
-      temp_v3 = FUN_001ab888();
+      temp_v3 = gameGetSlotTable();
       if (-1 < *(char *)(temp_v3 + temp_v8 + 0x1c88)) {
-        temp_v3 = FUN_001ab888();
-        temp_v3 = FUN_001ab854((int)*(char *)(temp_v3 + temp_v8 + 0x1c88));
+        temp_v3 = gameGetSlotTable();
+        temp_v3 = gameGetSlotRecord((int)*(char *)(temp_v3 + temp_v8 + 0x1c88));
         temp_v4 = bitsAt60Test(temp_v3,10);
         if (temp_v4 == 0) {
           if (temp_v5 == temp_v7) {
             FUN_0021b390(param_1,0,*(unsigned short *)(temp_v3 + 0x62),param_3);
-            temp_v5 = FUN_001ab888();
+            temp_v5 = gameGetSlotTable();
             temp_v9 = (int)*(char *)(temp_v5 + temp_v8 + 0x1c88) == (int)*(short *)(temp_v1 + 0x20);
             break;
           }

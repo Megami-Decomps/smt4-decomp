@@ -10,7 +10,7 @@ int FUN_0015f378(...);
 int FUN_0016ccb4(...);
 int FUN_0016ce28(...);
 int FUN_0019a46c(...);
-int FUN_001a089c(...);
+int nn_os_LightEvent_Initialize(...);
 int FUN_001b57a8(...);
 int sysMemClear(...);
 
@@ -37,7 +37,7 @@ extern int FUN_0016cd08(int);
 extern int FUN_0016cd0c(int);
 /* Supplied declaration required: FUN_0016ce28. */
 /* Supplied declaration required: FUN_0019a46c. */
-/* Supplied declaration required: FUN_001a089c. */
+/* Supplied declaration required: nn_os_LightEvent_Initialize. */
 /* Supplied declaration required: FUN_001b57a8. */
 extern unsigned int *FUN_001b5acc(int);
 /* Supplied declaration required: sysMemClear. */
@@ -67,10 +67,10 @@ unsigned int * FUN_001482c0(int param_1)
   temp_v0 = FUN_0015f434(temp_v0 + 4);
   *(unsigned int *)(temp_v0 + 0x10) = 0;
   *(unsigned int *)(temp_v0 + 0x14) = 0;
-  FUN_001a089c((unsigned int *)(temp_v0 + 0x10),0);
+  nn_os_LightEvent_Initialize((unsigned int *)(temp_v0 + 0x10),0);
   *(unsigned int *)(temp_v0 + 0x18) = 0;
   *(unsigned int *)(temp_v0 + 0x1c) = 0;
-  FUN_001a089c(temp_v0 + 0x18,0);
+  nn_os_LightEvent_Initialize(temp_v0 + 0x18,0);
   temp_v0 = FUN_0015f448(temp_v0 + 0x20);
   *(unsigned int *)(temp_v0 + 700) = 0;
   *(unsigned int *)(temp_v0 + 0x500) = 0;

@@ -8,7 +8,7 @@ int scrSetResult(int);
 
 extern int g_gameState; /* 0x5f15fc */
 
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: scrSetResult. */
 
 
@@ -21,7 +21,7 @@ unsigned int FUN_003b9a48(int param_1)
   unsigned char temp_v2;
   
   temp_v0 = *(int *)(param_1 + 0x578);
-  temp_v1 = FUN_0018719c(0x594);
+  temp_v1 = gameFlagIsSet(0x594);
   temp_v2 = temp_v1 == 0 && temp_v0 - 200U < 100;
   if (g_gameState == 0x1a) {
     temp_v2 = 2;

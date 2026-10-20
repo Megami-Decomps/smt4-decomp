@@ -5,7 +5,7 @@
 extern "C" {
 
 extern unsigned int scrGetArg(unsigned int);
-extern unsigned int FUN_002360dc(unsigned int);
+extern unsigned int scrGetArgString(unsigned int);
 extern int FUN_002a1738(unsigned int, unsigned int);
 
 
@@ -17,7 +17,7 @@ unsigned char FUN_002a3f0c(void)
   int temp_v2;
   
   temp_v0 = scrGetArg(0);
-  temp_v1 = FUN_002360dc(1);
+  temp_v1 = scrGetArgString(1);
   temp_v2 = FUN_002a1738(temp_v0,temp_v1);
   return temp_v2 != 0;
 }

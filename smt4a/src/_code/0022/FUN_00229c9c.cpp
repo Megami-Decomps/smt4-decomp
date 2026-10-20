@@ -12,7 +12,7 @@ int asdMemFree(void);
 int scrScriptProcessDestroy(void);
 int FUN_00224880(int);
 int FUN_00275bc8(void);
-int FUN_00275f44(...);
+int scrScriptProcessStartEntry(...);
 int FUN_0031ed60(char *, int);
 int obj04Finish(void);
 int FUN_0035d7bc(char *);
@@ -33,7 +33,7 @@ extern int DAT_005e2110; /* 0x5e2110 */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_00224880. */
 /* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_0031ed60. */
 /* Supplied declaration required: obj04Finish. */
 /* Supplied declaration required: FUN_0035d7bc. */
@@ -79,7 +79,7 @@ unsigned int FUN_00229c9c(unsigned int param_1,int param_2)
   }
   if (*(int *)(pcVar2 + 0x58) != -1) {
     *(int *)(pcVar2 + 0x20) = *(int *)(pcVar2 + 0x58);
-    FUN_00275f44(DAT_005e2110);
+    scrScriptProcessStartEntry(DAT_005e2110);
     pcVar2[0x5c] = '\x01';
     pcVar2[0x54] = '\0';
     obj04Finish();
@@ -188,7 +188,7 @@ unsigned int FUN_00229c9c(unsigned int param_1,int param_2)
         pcVar2[0xd] = '\0';
         pcVar2[0xe] = '\0';
         pcVar2[0xf] = '\0';
-        FUN_00275f44(DAT_005e2110,DAT_0057f6d8);
+        scrScriptProcessStartEntry(DAT_005e2110,DAT_0057f6d8);
         *(int *)(pcVar2 + 0x10) = *(int *)(pcVar2 + 0x10) + 1;
         return 0;
       }

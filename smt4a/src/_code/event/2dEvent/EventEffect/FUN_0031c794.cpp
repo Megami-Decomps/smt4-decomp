@@ -8,13 +8,13 @@ int FUN_00162808(...);
 int FUN_00212204(int);
 int FUN_00226724(...);
 
-extern int DAT_0057f3b4; /* 0x57f3b4 */
+extern int g_eventEffect; /* 0x57f3b4 */
 extern unsigned int DAT_0057f3d0; /* 0x57f3d0 */
 extern unsigned int DAT_0057f3d4; /* 0x57f3d4 */
 
 /* Supplied declaration required: FUN_00162808. */
 extern int FUN_00162ea4(void);
-extern int FUN_0018206c(unsigned int, unsigned int);
+extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 extern int FUN_00203d74(void);
 /* Supplied declaration required: FUN_00212204. */
 /* Supplied declaration required: FUN_00226724. */
@@ -35,14 +35,14 @@ unsigned int FUN_0031c794(void)
   unsigned long long temp_v8;
   unsigned int temp_v9;
   
-  temp_v0 = DAT_0057f3b4;
+  temp_v0 = g_eventEffect;
   temp_v9 = 0x3f800000;
   temp_v8 = 0x3f80000000000000;
-  if (*(int *)(DAT_0057f3b4 + 8) == 0) {
+  if (*(int *)(g_eventEffect + 8) == 0) {
     temp_v5 = 0;
     temp_v1 = temp_v5;
     do {
-      temp_v3 = FUN_0018206c((&DAT_0057f3d0)[temp_v5 * 3],(&DAT_0057f3d4)[temp_v5 * 3]);
+      temp_v3 = asdTMTexTableNodeIsLoaded((&DAT_0057f3d0)[temp_v5 * 3],(&DAT_0057f3d4)[temp_v5 * 3]);
       temp_v9 = (unsigned int)((unsigned long long)temp_v8 >> 0x20);
       if (temp_v3 != 0) {
         temp_v1 = temp_v1 + 1;
@@ -64,11 +64,11 @@ unsigned int FUN_0031c794(void)
       }
     }
   }
-  else if (*(int *)(DAT_0057f3b4 + 8) == 1) {
-    if (*(char *)(DAT_0057f3b4 + 0x19) != '\0') {
-      temp_v6 = *(float *)(DAT_0057f3b4 + 0x14) - 0.1f;
-      temp_v1 = *(int *)(DAT_0057f3b4 + 0xc) - 0x16;
-      *(int *)(DAT_0057f3b4 + 0xc) = temp_v1;
+  else if (*(int *)(g_eventEffect + 8) == 1) {
+    if (*(char *)(g_eventEffect + 0x19) != '\0') {
+      temp_v6 = *(float *)(g_eventEffect + 0x14) - 0.1f;
+      temp_v1 = *(int *)(g_eventEffect + 0xc) - 0x16;
+      *(int *)(g_eventEffect + 0xc) = temp_v1;
       *(float *)(temp_v0 + 0x14) = temp_v6;
       if (temp_v1 < -0xb3) {
         if (temp_v6 <= 0.0f) {
@@ -90,7 +90,7 @@ unsigned int FUN_0031c794(void)
       *(float *)(temp_v0 + 0x14) = temp_v7;
     }
     else {
-      temp_v4 = *(int *)(DAT_0057f3b4 + 0x10) - 0xf;
+      temp_v4 = *(int *)(g_eventEffect + 0x10) - 0xf;
       if (temp_v4 < 0x79) {
         temp_v2 = FUN_00226724(0x28,0xffffff4c,0x78,temp_v4);
         *(unsigned int *)(temp_v0 + 0xc) = temp_v2;
@@ -157,7 +157,7 @@ unsigned int FUN_0031c794(void)
     temp_v5 = 0;
     temp_v1 = temp_v5;
     do {
-      temp_v3 = FUN_0018206c((&DAT_0057f3d0)[temp_v5 * 3],(&DAT_0057f3d4)[temp_v5 * 3]);
+      temp_v3 = asdTMTexTableNodeIsLoaded((&DAT_0057f3d0)[temp_v5 * 3],(&DAT_0057f3d4)[temp_v5 * 3]);
       if (temp_v3 != 0) {
         temp_v1 = temp_v1 + 1;
       }

@@ -6,9 +6,9 @@ extern "C" {
 
 int FUN_001480c8(void);
 int FUN_002bb150(int, int);
-int FUN_002bb308(void);
+int nn_applet_CTR_detail_CloseSession(void);
 int FUN_002bb378(void);
-int FUN_002c52f8(void);
+int asdFatalError(void);
 int SBORROW4(...);
 int software_interrupt(int);
 
@@ -37,9 +37,9 @@ extern unsigned int DAT_0044e37c; /* 0x44e37c */
 extern int FUN_001482f8(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_002bb100(void);
 /* Supplied declaration required: FUN_002bb150. */
-/* Supplied declaration required: FUN_002bb308. */
+/* Supplied declaration required: nn_applet_CTR_detail_CloseSession. */
 /* Supplied declaration required: FUN_002bb378. */
-/* Supplied declaration required: FUN_002c52f8. */
+/* Supplied declaration required: asdFatalError. */
 
 
 int FUN_002b563c(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,unsigned int param_5,
@@ -73,7 +73,7 @@ int FUN_002b563c(unsigned int param_1,unsigned int param_2,unsigned int param_3,
   }
   while( 1 ) {
     if (param_4 >= 0x1001) {
-      FUN_002c52f8();
+      asdFatalError();
     }
     temp_v6 = param_4;
     temp_v4 = param_3;
@@ -87,7 +87,7 @@ int FUN_002b563c(unsigned int param_1,unsigned int param_2,unsigned int param_3,
     if ((-1 < temp_v3) && ((param_2 & 0x10000) != 0)) {
       FUN_001480c8();
     }
-    FUN_002bb308();
+    nn_applet_CTR_detail_CloseSession();
     if (((-1 < temp_v3) || (temp_v3 != -0x375f33fe)) ||
        (DAT_0044e378 == param_7 && DAT_0044e37c == param_8)) break;
     temp_v4 = (param_8 ^ DAT_0044e374) | (DAT_0044e370 ^ param_7);

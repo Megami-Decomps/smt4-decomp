@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e9318(unsigned char [12]);
+int onlineStringDestroy(unsigned char [12]);
 int FUN_002eb924(int);
 int FUN_002fd210(int);
 int FUN_002fd25e(unsigned int, int);
@@ -39,9 +39,9 @@ extern unsigned char DAT_005594dc; /* 0x5594dc */
 
 extern int FUN_0010557c(int);
 extern unsigned int *FUN_00116854(void);
-extern unsigned int FUN_002e9300(unsigned char *, unsigned char *);
-/* Supplied declaration required: FUN_002e9318. */
-extern int FUN_002e995c(unsigned int *);
+extern unsigned int onlineStringConstruct(unsigned char *, unsigned char *);
+/* Supplied declaration required: onlineStringDestroy. */
+extern int onlineSockAddrConstruct(unsigned int *);
 extern int *FUN_002ea704(void);
 extern unsigned int FUN_002eb56c(void);
 /* Supplied declaration required: FUN_002eb924. */
@@ -73,11 +73,11 @@ int FUN_0011169c(fn_0011169c_arg0 *param_1,unsigned int param_2,unsigned int par
   temp_v5 = param_4;
   puVar1 = (unsigned int *)FUN_00116854();
   *puVar1 = (unsigned int)&DAT_005594dc;
-  temp_v0 = FUN_002e9300(temp_v4,&LAB_0011175c);
+  temp_v0 = onlineStringConstruct(temp_v4,&LAB_0011175c);
   puVar1 = (unsigned int *)FUN_002fd1e8(puVar1 + 2,temp_v0);
   *puVar1 = (unsigned int)&DAT_00558d8c;
-  FUN_002e9318(temp_v4);
-  temp_v1 = FUN_002e995c(puVar1 + 8);
+  onlineStringDestroy(temp_v4);
+  temp_v1 = onlineSockAddrConstruct(puVar1 + 8);
   *(unsigned int *)(temp_v1 + 0x24) = 0;
   *(unsigned int *)(temp_v1 + 0x2c) = param_2;
   temp_v1 = FUN_0010557c(temp_v1 + 0x30);

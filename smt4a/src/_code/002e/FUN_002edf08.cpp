@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0014bef4(...);
+int randRange(...);
 int FUN_002296b0(int);
 int FUN_00332764(void);
 
@@ -18,7 +18,7 @@ typedef struct {
     unsigned int sp60; /* 0x60: local_60 */
 } void_stack;
 
-extern unsigned char DAT_0060fc08; /* 0x60fc08 */
+extern unsigned char g_mapRndMaze; /* 0x60fc08 */
 extern unsigned char DAT_0060fc09; /* 0x60fc09 */
 extern unsigned int DAT_0060fd08; /* 0x60fd08 */
 extern unsigned int DAT_0060fd0c; /* 0x60fd0c */
@@ -29,8 +29,8 @@ extern unsigned char DAT_0060ff92; /* 0x60ff92 */
 extern unsigned char DAT_0060ff93; /* 0x60ff93 */
 extern int DAT_0060ff94; /* 0x60ff94 */
 
-/* Supplied declaration required: FUN_0014bef4. */
-extern int FUN_00162e8c(void);
+/* Supplied declaration required: randRange. */
+extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_002296b0. */
 /* Supplied declaration required: FUN_00332764. */
 
@@ -54,8 +54,8 @@ void FUN_002edf08(void)
   unsigned char temp_v12;
   unsigned char temp_v13;
   
-  temp_v4 = FUN_00162e8c();
-  temp_v3 = FUN_0014bef4(4);
+  temp_v4 = gameFlagsGetBlock();
+  temp_v3 = randRange(4);
   temp_v11 = 0;
   temp_v2 = 0;
   temp_v3 = temp_v3 + '\x01';
@@ -68,9 +68,9 @@ void FUN_002edf08(void)
   *(unsigned char *)(temp_v4 + 0x7c5) = 0xff;
 LAB_002edf80:
   do {
-    temp_v5 = FUN_0014bef4(0x17);
+    temp_v5 = randRange(0x17);
     if (*(char *)(temp_v5 * 4 + 0x581444) == temp_v3) {
-      temp_v5 = FUN_0014bef4();
+      temp_v5 = randRange();
     }
     DAT_0060ff90 = *(unsigned char *)(temp_v5 * 4 + 0x581444);
     temp_v5 = temp_v5 * 4;
@@ -83,7 +83,7 @@ LAB_002edf80:
       temp_v8 = (int)*(char *)(temp_v4 + 0xe06);
       temp_v0 = (&DAT_0060ff90)[temp_v7];
       temp_v9 = (int)*(char *)(temp_v4 + 0xe07);
-      temp_v5 = FUN_00162e8c();
+      temp_v5 = gameFlagsGetBlock();
       if (temp_v0 != '\x01') {
         if (temp_v0 != '\x02') {
           if (temp_v0 != '\x03') {
@@ -133,7 +133,7 @@ LAB_002edf80:
       temp_v7 = temp_v7 + 1;
     } while (temp_v7 < 4);
     if (temp_v10 >= 2) {
-      temp_v6 = FUN_0014bef4(99);
+      temp_v6 = randRange(99);
       if (temp_v6 < 0x3c) {
         temp_v11 = 1;
       }
@@ -147,7 +147,7 @@ LAB_002edf80:
       temp_v10 = (int)*(char *)(temp_v4 + 0xe06);
       temp_v0 = (&DAT_0060ff90)[temp_v5];
       temp_v8 = (int)*(char *)(temp_v4 + 0xe07);
-      temp_v7 = FUN_00162e8c();
+      temp_v7 = gameFlagsGetBlock();
       if (temp_v0 != '\x01') {
         if (temp_v0 != '\x02') {
           if (temp_v0 != '\x03') {
@@ -191,8 +191,8 @@ LAB_002ee194:
           temp_v1 = *(char *)(temp_v4 + 0xe07);
           temp_v8 = (int)temp_v1;
           temp_v3 = (&DAT_0060ff90)[temp_v5];
-          temp_v7 = FUN_00162e8c();
-          (&DAT_0060fc08)[DAT_0060ff8c * 2] = temp_v0;
+          temp_v7 = gameFlagsGetBlock();
+          (&g_mapRndMaze)[DAT_0060ff8c * 2] = temp_v0;
           (&DAT_0060fc09)[DAT_0060ff8c * 2] = temp_v1;
           DAT_0060ff8c = DAT_0060ff8c + 1;
           if (temp_v3 != '\x01') {
@@ -280,13 +280,13 @@ LAB_002ee194:
         FUN_00332764();
         return;
       }
-      temp_v5 = FUN_00162e8c();
-      temp_v7 = FUN_0014bef4((DAT_0060ff8c - 1U) & 0xffff);
+      temp_v5 = gameFlagsGetBlock();
+      temp_v7 = randRange((DAT_0060ff8c - 1U) & 0xffff);
       temp_v8 = 0;
       temp_v9 = DAT_0060ff8c - 1;
       temp_v10 = 0;
       DAT_0060ff8c = temp_v9;
-      *(unsigned char *)(temp_v5 + 0xe06) = (&DAT_0060fc08)[temp_v7 * 2];
+      *(unsigned char *)(temp_v5 + 0xe06) = (&g_mapRndMaze)[temp_v7 * 2];
       *(unsigned char *)(temp_v5 + 0xe07) = (&DAT_0060fc09)[temp_v7 * 2];
       if (0 < temp_v9) {
         do {
@@ -297,7 +297,7 @@ LAB_002ee194:
           temp_v9 = temp_v8 * 2;
           temp_v10 = temp_v10 + 1;
           temp_v8 = temp_v8 + 1;
-          *(unsigned short *)(&DAT_0060fc08 + temp_v5) = *(unsigned short *)(&DAT_0060fc08 + temp_v9);
+          *(unsigned short *)(&g_mapRndMaze + temp_v5) = *(unsigned short *)(&g_mapRndMaze + temp_v9);
         } while (temp_v10 < DAT_0060ff8c);
       }
     }

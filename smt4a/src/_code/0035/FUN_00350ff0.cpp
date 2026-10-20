@@ -5,10 +5,10 @@
 extern "C" {
 
 int effTlpCreate(void);
-int FUN_00222434(void);
+int handleBlockUnref(void);
 
 /* Supplied declaration required: effTlpCreate. */
-/* Supplied declaration required: FUN_00222434. */
+/* Supplied declaration required: handleBlockUnref. */
 
 
 void FUN_00350ff0(int param_1,unsigned int param_2)
@@ -16,7 +16,7 @@ void FUN_00350ff0(int param_1,unsigned int param_2)
 {
 /* irregular: 2 native warning(s); review required */
   if (*(int *)(param_1 + 0x48) != 0) {
-    FUN_00222434();
+    handleBlockUnref();
   }
   effTlpCreate();
   *(unsigned int *)(param_1 + 0x48) = param_2;

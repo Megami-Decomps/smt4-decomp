@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002e7232(void);
+int sharedRefRelease(void);
 
-/* Supplied declaration required: FUN_002e7232. */
+/* Supplied declaration required: sharedRefRelease. */
 
 
 void FUN_002f9cc8(int param_1)
@@ -22,7 +22,7 @@ void FUN_002f9cc8(int param_1)
   puVar2[1] = 0;
   *(unsigned int *)(*(int *)(param_1 + 0x48) + 0x38) = 0;
   if (temp_v0 != 0) {
-    FUN_002e7232();
+    sharedRefRelease();
   }
   *(unsigned char *)(*(int *)(param_1 + 0x48) + 0x34) = 0;
   *(unsigned char *)(param_1 + 0x50) = 0;

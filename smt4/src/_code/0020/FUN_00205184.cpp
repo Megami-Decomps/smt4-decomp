@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_00152bec(...);
+int asdMdlManagerMarkDestroy(...);
 int FUN_00254a2c(...);
-int FUN_00263588(...);
+int gfxObjectDestroy(...);
 int FUN_0028703c(...);
 int FUN_00287728(...);
 int FUN_0029bb14(...);
@@ -17,7 +17,7 @@ int FUN_002a043c(...);
 int FUN_002a04f0(...);
 int FUN_002a09b4(...);
 int FUN_002a5710(...);
-int FUN_002a72c0(...);
+int asdModelSlotRelease(...);
 int asdMdlManagerDestroy(...);
 int FUN_002adf00(...);
 int FUN_002b2b64(...);
@@ -31,10 +31,10 @@ typedef int romwright_code(...);
 extern int nw_anim_PlayPolicy_Loop(...); /* 0x151500 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00152bec. */
+/* Supplied declaration required: asdMdlManagerMarkDestroy. */
 /* Supplied declaration required: FUN_00254a2c. */
-/* Supplied declaration required: FUN_00263588. */
-extern int FUN_00263720(unsigned int);
+/* Supplied declaration required: gfxObjectDestroy. */
+extern int effTimelineIsDone(unsigned int);
 extern unsigned int FUN_00263c1c(char *);
 /* Supplied declaration required: FUN_0028703c. */
 /* Supplied declaration required: FUN_00287728. */
@@ -47,7 +47,7 @@ extern unsigned int asdMdlManagerCreateSecondList(char *, unsigned int);
 /* Supplied declaration required: FUN_002a04f0. */
 /* Supplied declaration required: FUN_002a09b4. */
 /* Supplied declaration required: FUN_002a5710. */
-/* Supplied declaration required: FUN_002a72c0. */
+/* Supplied declaration required: asdModelSlotRelease. */
 /* Supplied declaration required: asdMdlManagerDestroy. */
 extern int FUN_002adee0(void);
 /* Supplied declaration required: FUN_002adf00. */
@@ -118,7 +118,7 @@ unsigned int FUN_00205184(void)
     }
     break;
   case 2:
-    temp_v1 = FUN_00263720(*(unsigned int *)(temp_v0 + 0x558));
+    temp_v1 = effTimelineIsDone(*(unsigned int *)(temp_v0 + 0x558));
     if ((temp_v1 != 0) || (temp_v1 = FUN_002c1d5c(), temp_v1 != 0)) {
       piVar5 = (int *)(temp_v0 + 0x554);
       FUN_002b2b64(*(unsigned int *)(*(int *)(temp_v0 + 0x554) + 8));
@@ -153,11 +153,11 @@ unsigned int FUN_00205184(void)
       if (*(char *)(temp_v0 + 0x56c) != '\0') {
         FUN_0029c2cc(*(unsigned int *)(temp_v0 + 0x558),0);
       }
-      FUN_00263588(*(unsigned int *)(temp_v0 + 0x55c));
-      FUN_00263588(*(unsigned int *)(temp_v0 + 0x560));
+      gfxObjectDestroy(*(unsigned int *)(temp_v0 + 0x55c));
+      gfxObjectDestroy(*(unsigned int *)(temp_v0 + 0x560));
       *(unsigned int *)(temp_v0 + 0x55c) = 0;
       *(unsigned int *)(temp_v0 + 0x560) = 0;
-      FUN_002a72c0(0);
+      asdModelSlotRelease(0);
       if (*(int *)(temp_v0 + 0x554) != 0) {
         asdMdlManagerDestroy();
       }
@@ -165,7 +165,7 @@ unsigned int FUN_00205184(void)
       *(unsigned int *)(temp_v0 + 0x554) = 0;
       return 0xffffffff;
     }
-    FUN_00152bec(*(unsigned int *)(temp_v0 + 0x554));
+    asdMdlManagerMarkDestroy(*(unsigned int *)(temp_v0 + 0x554));
     *(int *)(temp_v0 + 0x568) = *(int *)(temp_v0 + 0x568) + 1;
   }
   return 0;

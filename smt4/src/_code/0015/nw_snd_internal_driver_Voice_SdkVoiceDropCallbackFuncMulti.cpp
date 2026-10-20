@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002bd430(int);
+int sndVoiceFree(int);
 int nw_snd_internal_driver_VoiceManager_FreeVoice(unsigned int, int);
 
 typedef int romwright_code(...);
@@ -14,7 +14,7 @@ typedef struct {
 } param_2_stack;
 
 extern unsigned int FUN_002baf30(void);
-/* Supplied declaration required: FUN_002bd430. */
+/* Supplied declaration required: sndVoiceFree. */
 extern void nn_snd_CTR_Voice_SetState(unsigned int, int);
 /* Supplied declaration required: nw_snd_internal_driver_VoiceManager_FreeVoice. */
 
@@ -48,7 +48,7 @@ void nw_snd_internal_driver_Voice_SdkVoiceDropCallbackFuncMulti(int param_1,int 
         if (temp_v2 != 0) {
           if (temp_v2 != param_1) {
             nn_snd_CTR_Voice_SetState(temp_v2,1);
-            FUN_002bd430(temp_v2);
+            sndVoiceFree(temp_v2);
           }
           *(unsigned int *)(param_2 + temp_v0 * 4) = 0;
         }

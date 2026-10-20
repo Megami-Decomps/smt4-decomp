@@ -12,7 +12,7 @@ extern unsigned int g_commandBufferEnd; /* 0x4652a4 */
 extern int DAT_004655c0; /* 0x4655c0 */
 
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-extern unsigned int FUN_00147a7c(int);
+extern unsigned int nnosConvertVirtToPhys(int);
 /* Supplied declaration required: FUN_002aa6ac. */
 
 
@@ -221,17 +221,17 @@ int FUN_00144228(int *param_1,int param_2)
   }
   *(unsigned int *)(temp_v0 + 0x77c) = (*(unsigned int *)(temp_v0 + 0x77c) & 0xffffffcf) | (temp_v4 << 4);
 LAB_00144764:
-  temp_v2 = FUN_00147a7c(param_1[0xd]);
+  temp_v2 = nnosConvertVirtToPhys(param_1[0xd]);
   *(unsigned int *)(temp_v0 + 0x784) = (*(unsigned int *)(temp_v0 + 0x784) & 0xc0000000) | (temp_v2 >> 3);
-  temp_v2 = FUN_00147a7c(param_1[0x1e]);
+  temp_v2 = nnosConvertVirtToPhys(param_1[0x1e]);
   *(unsigned int *)(temp_v0 + 0x788) = (*(unsigned int *)(temp_v0 + 0x788) & 0xffc00000) | ((temp_v2 >> 3) & 0xe03fffff);
-  temp_v2 = FUN_00147a7c(param_1[0x2f]);
+  temp_v2 = nnosConvertVirtToPhys(param_1[0x2f]);
   *(unsigned int *)(temp_v0 + 0x78c) = (*(unsigned int *)(temp_v0 + 0x78c) & 0xffc00000) | ((temp_v2 >> 3) & 0xe03fffff);
-  temp_v2 = FUN_00147a7c(param_1[0x40]);
+  temp_v2 = nnosConvertVirtToPhys(param_1[0x40]);
   *(unsigned int *)(temp_v0 + 0x790) = (*(unsigned int *)(temp_v0 + 0x790) & 0xffc00000) | ((temp_v2 >> 3) & 0xe03fffff);
-  temp_v2 = FUN_00147a7c(param_1[0x51]);
+  temp_v2 = nnosConvertVirtToPhys(param_1[0x51]);
   *(unsigned int *)(temp_v0 + 0x794) = (*(unsigned int *)(temp_v0 + 0x794) & 0xffc00000) | ((temp_v2 >> 3) & 0xe03fffff);
-  temp_v2 = FUN_00147a7c(param_1[0x62]);
+  temp_v2 = nnosConvertVirtToPhys(param_1[0x62]);
   *(unsigned int *)(temp_v0 + 0x798) = (*(unsigned int *)(temp_v0 + 0x798) & 0xffc00000) | ((temp_v2 >> 3) & 0xe03fffff);
   *puVar3 = *puVar3 | 1;
   FUN_002aa6ac(0x81,10,temp_v0 + 0x774);

@@ -10,7 +10,7 @@ int words3Clear(int);
 /* Supplied declaration required: FUN_0023ddbc. */
 extern int FUN_00287894(unsigned int);
 extern int FUN_00298f88(unsigned int);
-extern int FUN_002adc88(void);
+extern int gameGetFlagBlock(void);
 /* Supplied declaration required: words3Clear. */
 
 
@@ -29,9 +29,9 @@ unsigned int FUN_0028eeb8(unsigned int param_1)
   unsigned char *pbVar9;
   unsigned int temp_v8;
   
-  temp_v3 = FUN_002adc88();
+  temp_v3 = gameGetFlagBlock();
   temp_v3 = temp_v3 + param_1 * 4;
-  temp_v4 = FUN_002adc88();
+  temp_v4 = gameGetFlagBlock();
   pbVar9 = (unsigned char *)(temp_v3 + 0x200);
   if (((*pbVar9 & 1) != 0) || (param_1 >= 0x15e)) {
     temp_v5 = FUN_00287894(param_1);
@@ -72,7 +72,7 @@ unsigned int FUN_0028eeb8(unsigned int param_1)
         temp_v8 = 0x500;
         *(unsigned short *)(temp_v4 + 0x886) = 0;
         do {
-          temp_v3 = FUN_002adc88();
+          temp_v3 = gameGetFlagBlock();
           FUN_0023ddbc(temp_v8,0);
           temp_v7 = temp_v8 & 7;
           temp_v0 = temp_v8 >> 3;

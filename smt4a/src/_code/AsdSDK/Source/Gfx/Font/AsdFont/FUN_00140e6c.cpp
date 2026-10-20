@@ -7,10 +7,10 @@ extern "C" {
 int FUN_0015ef04(void);
 int asdMemoryAlloc(int, int, int, unsigned int, int);
 int FUN_00178b04(int, unsigned char *, int);
-int FUN_001800b8(unsigned int);
+int asdTextureRelease(unsigned int);
 int asdMemFree(...);
 int asdTextureCreate(void);
-int FUN_0019a840(void);
+int asdTextureSetImage(void);
 
 typedef int romwright_code(...);
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -26,10 +26,10 @@ extern unsigned int *DAT_005b3bc4; /* 0x5b3bc4 */
 extern int initVtable0055c618(void);
 /* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: FUN_00178b04. */
-/* Supplied declaration required: FUN_001800b8. */
+/* Supplied declaration required: asdTextureRelease. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: asdTextureCreate. */
-/* Supplied declaration required: FUN_0019a840. */
+/* Supplied declaration required: asdTextureSetImage. */
 
 
 unsigned int FUN_00140e6c(unsigned int *param_1,int param_2)
@@ -64,7 +64,7 @@ unsigned int FUN_00140e6c(unsigned int *param_1,int param_2)
           temp_v7 = 0;
           do {
             *(unsigned int *)(*(int *)(piVar11[3] + temp_v7 * 4) + 0x24) = 0;
-            FUN_001800b8(*(unsigned int *)(piVar11[3] + temp_v7 * 4));
+            asdTextureRelease(*(unsigned int *)(piVar11[3] + temp_v7 * 4));
             temp_v7 = temp_v7 + 1;
           } while (temp_v7 < (unsigned int)piVar11[4]);
         }
@@ -202,7 +202,7 @@ unsigned int FUN_00140e6c(unsigned int *param_1,int param_2)
           *(int *)(temp_v5 + 0x20) = temp_v10;
           *(int *)(temp_v5 + 0x24) = temp_v6 + temp_v4;
           *(unsigned int *)(temp_v5 + 0x28) = temp_v8;
-          FUN_0019a840();
+          asdTextureSetImage();
           temp_v7 = temp_v7 + 1;
           temp_v4 = temp_v4 + *(int *)(temp_v3 + 4);
         } while (temp_v7 < (unsigned int)piVar11[4]);

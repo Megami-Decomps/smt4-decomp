@@ -5,7 +5,7 @@
 extern "C" {
 
 int sysMemClear(int, int);
-int FUN_002e6490(unsigned int);
+int asdOperatorDeleteC(unsigned int);
 int FUN_002e6cc0(int);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
@@ -19,7 +19,7 @@ typedef struct {
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_002e6490. */
+/* Supplied declaration required: asdOperatorDeleteC. */
 /* Supplied declaration required: FUN_002e6cc0. */
 extern int returnMinusOne1(unsigned int);
 
@@ -41,7 +41,7 @@ long long FUN_002e61e8(int param_1)
     temp_v1 = returnMinusOne1(temp_v3);
     if (-1 < temp_v1) {
       if ((int)(temp_v2 << 0x14) < 0) {
-        FUN_002e6490(temp_v0);
+        asdOperatorDeleteC(temp_v0);
       }
       sysMemClear(param_1,0x48);
       *(unsigned int *)(param_1 + 0x4c) = *(unsigned int *)(param_1 + 0x4c) & 0xfffffffe;

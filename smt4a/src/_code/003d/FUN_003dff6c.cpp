@@ -24,7 +24,7 @@ typedef struct WorkRecord {
     /* 0x62 */ u16 level;
 } WorkRecord;
 
-extern WorkRecord *FUN_001801a4(void);
+extern WorkRecord *gameGetPlayerData(void);
 extern void sysMemClear(void *buffer, s32 size);
 extern void FUN_003df7c4(s32 arg);
 extern void FUN_004cc6d4(WorkRecord *record, s32 levels, s32 arg);
@@ -33,7 +33,7 @@ extern char *strncpy(char *dest, const char *src, u32 count);
 
 void FUN_003dff6c(s32 level, const char *name, const u16 *stats)
 {
-    WorkRecord *record = FUN_001801a4();
+    WorkRecord *record = gameGetPlayerData();
 
     sysMemClear(record, 100);
     record->level = level;

@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_001641c4(void);
+int ifTouchRegionRemove(void);
 int FUN_00167458(int, int);
 int sysPlaySe(int);
 int FUN_00184528(int, int);
 int FUN_00224880(unsigned int);
-int FUN_00275f44(unsigned int, unsigned int);
+int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int panelSetMode3(unsigned int, int);
 int screenShowMessage(int);
 int obj04Finish(void);
@@ -32,19 +32,19 @@ typedef struct {
 extern unsigned char LAB_00498dc0; /* 0x498dc0 */
 extern unsigned char LAB_00498dd0; /* 0x498dd0 */
 
-/* Supplied declaration required: FUN_001641c4. */
-extern unsigned int FUN_001654d8(int);
-extern unsigned int FUN_001654e4(int);
+/* Supplied declaration required: ifTouchRegionRemove. */
+extern unsigned int vec2GetXInt(int);
+extern unsigned int vec2GetYInt(int);
 /* Supplied declaration required: FUN_00167458. */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00184528. */
 /* Supplied declaration required: FUN_00224880. */
 extern int FUN_0026272c(void);
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: panelSetMode3. */
 /* Supplied declaration required: screenShowMessage. */
 /* Supplied declaration required: obj04Finish. */
-extern unsigned int FUN_00357bc8(unsigned int, unsigned char *);
+extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 extern int panelStateIs0(void);
 /* Supplied declaration required: panelSetTarget. */
 /* Supplied declaration required: FUN_004935b0. */
@@ -70,8 +70,8 @@ void FUN_00498ac0(int param_1)
   
   switch(*(unsigned int *)(param_1 + 8)) {
   case 0:
-    temp_v2 = FUN_00357bc8(*(unsigned int *)(param_1 + 0x184),&LAB_00498dc0);
-    FUN_00275f44(*(unsigned int *)(param_1 + 0x18c),temp_v2);
+    temp_v2 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x184),&LAB_00498dc0);
+    scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x18c),temp_v2);
     FUN_00224880(*(unsigned int *)(param_1 + 0x18c));
     *(unsigned int *)(param_1 + 0xc) = 0;
     *(unsigned int *)(param_1 + 0x16038) = 0;
@@ -101,8 +101,8 @@ void FUN_00498ac0(int param_1)
   case 2:
     temp_v1 = FUN_0026272c();
     if (temp_v1 != 0) {
-      temp_v2 = FUN_00357bc8(*(unsigned int *)(param_1 + 0x184),&LAB_00498dd0);
-      FUN_00275f44(*(unsigned int *)(param_1 + 0x18c),temp_v2);
+      temp_v2 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x184),&LAB_00498dd0);
+      scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x18c),temp_v2);
       FUN_00224880(*(unsigned int *)(param_1 + 0x18c));
       FUN_00184528(param_1 + 0x3cc,0);
       sysPlaySe(0x79);
@@ -114,8 +114,8 @@ void FUN_00498ac0(int param_1)
   case 3:
     temp_v1 = param_1 + 0x3ec;
     FUN_00167458(temp_v1,0);
-    temp_v2 = FUN_001654e4(temp_v1);
-    temp_v0 = FUN_001654d8(temp_v1);
+    temp_v2 = vec2GetYInt(temp_v1);
+    temp_v0 = vec2GetXInt(temp_v1);
     FUN_004935b0(param_1 + 0x3a4,temp_v0,temp_v2);
     FUN_00224880(*(unsigned int *)(param_1 + 0x18c));
     if (*(char *)(param_1 + 0x476) != '\0') {
@@ -154,7 +154,7 @@ void FUN_00498ac0(int param_1)
       temp_v1 = 0;
       if (temp_v1 < *(short *)(param_1 + 0x16030)) {
         do {
-          FUN_001641c4();
+          ifTouchRegionRemove();
           temp_v1 = temp_v1 + 1;
         } while (temp_v1 < *(short *)(param_1 + 0x16030));
       }

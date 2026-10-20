@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_003fd63c(int, int);
+int gameFlagSetValue(int, int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -14,7 +14,7 @@ typedef struct {
 extern signed char DAT_005e20c0; /* 0x5e20c0 */
 extern unsigned char DAT_005e20c1; /* 0x5e20c1 */
 
-/* Supplied declaration required: FUN_003fd63c. */
+/* Supplied declaration required: gameFlagSetValue. */
 
 
 void FUN_002f4374(void)
@@ -22,19 +22,19 @@ void FUN_002f4374(void)
 {
 /* irregular: 1 native warning(s); review required */
   if (DAT_005e20c0 != '\0') {
-    FUN_003fd63c(0x581,1);
+    gameFlagSetValue(0x581,1);
   }
   if ((DAT_005e20c1 & 4) != 0) {
-    FUN_003fd63c(0x582,1);
+    gameFlagSetValue(0x582,1);
   }
   if ((DAT_005e20c1 & 2) != 0) {
-    FUN_003fd63c(0x583,1);
+    gameFlagSetValue(0x583,1);
   }
   if ((DAT_005e20c1 & 1) != 0) {
-    FUN_003fd63c(0x584,1);
+    gameFlagSetValue(0x584,1);
   }
   if ((DAT_005e20c1 & 8) != 0) {
-    FUN_003fd63c(0x585,1);
+    gameFlagSetValue(0x585,1);
     return;
   }
   return;

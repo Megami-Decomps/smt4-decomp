@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6e14(...);
+int asdOperatorDeleteArray(...);
 int FUN_002fedf4(int);
 int FUN_002fee58(int *);
 int FUN_002fee98(int *, int *, int *, int *);
@@ -21,8 +21,8 @@ extern unsigned char DAT_0055962c; /* 0x55962c */
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: FUN_002e6e14. */
-extern int FUN_002e9318(unsigned int *);
+/* Supplied declaration required: asdOperatorDeleteArray. */
+extern int onlineStringDestroy(unsigned int *);
 /* Supplied declaration required: FUN_002fedf4. */
 /* Supplied declaration required: FUN_002fee58. */
 extern int wordRefsDiffer_002fee88(int *, int *);
@@ -53,7 +53,7 @@ FUN_00114048(unsigned int *param_1,unsigned int param_2,unsigned int param_3,uns
       FUN_002fedf4(temp_v0);
       temp_v0 = temp_v0 - 0x24;
       FUN_002fedf4(temp_v0);
-      FUN_002e6e14(temp_v0 - 4);
+      asdOperatorDeleteArray(temp_v0 - 4);
     }
     FUN_002fee58(&temp_v1);
   }
@@ -71,11 +71,11 @@ FUN_00114048(unsigned int *param_1,unsigned int param_2,unsigned int param_3,uns
     param_1[4] = temp_v0;
     while (piVar2 = (int *)*piVar3, piVar2 != (int *)0x0) {
       *piVar3 = *piVar2;
-      FUN_002e6e14(piVar2[2]);
-      FUN_002e6e14(piVar2);
+      asdOperatorDeleteArray(piVar2[2]);
+      asdOperatorDeleteArray(piVar2);
     }
   }
-  temp_v0 = FUN_002e9318(param_1 + 1);
+  temp_v0 = onlineStringDestroy(param_1 + 1);
   return romwright_piece_4_4(temp_v1,temp_v0 - 4);
 }
 

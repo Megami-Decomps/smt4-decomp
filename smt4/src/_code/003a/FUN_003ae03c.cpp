@@ -2,16 +2,16 @@
 
 extern "C" {
 
-void FUN_002af5c0(BtlUiObjD *obj, s32 a, s32 b);
+void uiSpriteSetImageKeyframe(BtlUiObjD *obj, s32 a, s32 b);
 
-extern BtlUiGlobals DAT_00439c88;
+extern BtlUiGlobals g_btlUi;
 
 void FUN_003ae03c(void)
 {
-    BtlUi *ui = DAT_00439c88.ui;
+    BtlUi *ui = g_btlUi.ui;
 
     ui->unk7E4B = 1;
-    FUN_002af5c0(&ui->objD, 0xD, 0);
+    uiSpriteSetImageKeyframe(&ui->objD, 0xD, 0);
 }
 
 } /* extern "C" */

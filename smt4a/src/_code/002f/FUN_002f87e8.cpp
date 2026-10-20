@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e7232(int, int);
+int sharedRefRelease(int, int);
 int FUN_002eb6c0(int **, int, int *);
 
 /* stack frame of param_4: 4 slot(s), 16 byte(s) */
@@ -19,7 +19,7 @@ typedef struct {
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: FUN_002e7232. */
+/* Supplied declaration required: sharedRefRelease. */
 /* Supplied declaration required: FUN_002eb6c0. */
 
 
@@ -44,7 +44,7 @@ unsigned long long FUN_002f87e8(int *param_1,int param_2,int *param_3,unsigned i
   temp_v3 = (int *)0x0;
   *(unsigned int *)(temp_v0 + 0x108) = 0;
   *(unsigned int *)(temp_v0 + 0x10c) = 0;
-  FUN_002e7232(temp_v0,temp_v0 + 0x110);
+  sharedRefRelease(temp_v0,temp_v0 + 0x110);
   *param_1 = *param_3;
   return romwright_piece_4_4(temp_v2,temp_v1);
 }

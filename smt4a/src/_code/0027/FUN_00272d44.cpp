@@ -9,7 +9,7 @@ int FUN_004a00f4(int);
 
 extern int g_gameState; /* 0x5f15fc */
 
-extern int FUN_0014bef4(unsigned int);
+extern int randRange(unsigned int);
 extern int FUN_0015fa74(int, int);
 extern int FUN_00352c60(void);
 /* Supplied declaration required: FUN_00352e04. */
@@ -53,7 +53,7 @@ int FUN_00272d44(void)
           return 0;
         }
         FUN_00352e04((int)(short)temp_v0,1);
-        temp_v1 = FUN_0014bef4(1);
+        temp_v1 = randRange(1);
         temp_v1 = temp_v1 + 1;
       }
       return temp_v1;

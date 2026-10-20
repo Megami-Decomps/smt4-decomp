@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_002e74bc(unsigned int);
-int FUN_002e995c(unsigned char [32]);
+int onlineBufferReset(unsigned int);
+int onlineSockAddrConstruct(unsigned char [32]);
 int FUN_002f2e3c(int, unsigned int, unsigned int, unsigned char [32], unsigned int, int);
 int FUN_003111ae(int, unsigned int, unsigned char [32]);
 
@@ -17,9 +17,9 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_002e74bc. */
-extern unsigned int FUN_002e76b6(unsigned int);
-/* Supplied declaration required: FUN_002e995c. */
+/* Supplied declaration required: onlineBufferReset. */
+extern unsigned int onlineBufferGetData(unsigned int);
+/* Supplied declaration required: onlineSockAddrConstruct. */
 /* Supplied declaration required: FUN_002f2e3c. */
 /* Supplied declaration required: FUN_003111ae. */
 extern int stateObjIsFinished(unsigned int);
@@ -42,14 +42,14 @@ unsigned int FUN_0011cb32(int param_1,int param_2)
   if ((*(char *)(param_1 + 0x149) != '\x01') && (*(char *)(param_1 + 0x41) != '\0')) {
     iStack_1c = param_1;
     temp_v6 = param_2;
-    FUN_002e995c(temp_v4);
-    FUN_002e74bc(*(unsigned int *)(param_1 + 0x1d4));
+    onlineSockAddrConstruct(temp_v4);
+    onlineBufferReset(*(unsigned int *)(param_1 + 0x1d4));
     *(unsigned int *)(*(int *)(param_1 + 0x18c) + 8) = 0;
     *(unsigned int *)(*(int *)(param_1 + 0x18c) + 0x38) = *(unsigned int *)(param_1 + 0x1d4);
     temp_v3 = temp_v6 != 0;
     temp_v0 = *(unsigned int *)(param_1 + 0x18c);
     temp_v5 = rangeObjRemaining(*(unsigned int *)(param_1 + 0x1d4));
-    temp_v1 = FUN_002e76b6(*(unsigned int *)(param_1 + 0x1d4));
+    temp_v1 = onlineBufferGetData(*(unsigned int *)(param_1 + 0x1d4));
     temp_v2 = param_1;
     FUN_002f2e3c(param_1,temp_v1,temp_v5,temp_v4,temp_v0,temp_v3);
     if ((temp_v2 == 0) && (temp_v2 = stateObjIsFinished(*(unsigned int *)(param_1 + 0x18c)), temp_v2 != 0)) {

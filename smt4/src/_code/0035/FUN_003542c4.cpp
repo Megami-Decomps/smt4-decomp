@@ -23,7 +23,7 @@ extern unsigned char DAT_004c7080; /* 0x4c7080 */
 extern unsigned int DAT_004c70a0; /* 0x4c70a0 */
 extern unsigned char DAT_004c70a4; /* 0x4c70a4 */
 
-extern unsigned char FUN_00100b44(void);
+extern unsigned char libc_toupper(void);
 /* Supplied declaration required: FUN_00239e14. */
 /* Supplied declaration required: FUN_00239ed0. */
 extern int FUN_00239f84(unsigned char *, unsigned char *, unsigned int);
@@ -32,7 +32,7 @@ extern unsigned int FUN_002b5c44(void);
 /* Supplied declaration required: FUN_002ba81c. */
 /* Supplied declaration required: FUN_002baa40. */
 extern int FUN_002c55b4(void);
-extern int FUN_002c55c4(void);
+extern int appletIsExitRequested(void);
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -71,7 +71,7 @@ void FUN_003542c4(unsigned int param_1,int *param_2,unsigned int *param_3,unsign
       DAT_004c707c = DAT_004c707c | 0x40000;
       DAT_004c7078 = (unsigned int)*(unsigned char *)((int)param_3 + 5) | ((*param_3 & 0xff0fffff) << 8);
       for (temp_v4 = 0; (temp_v4 < 0x1f && (*(char *)(param_5 + temp_v4) != '\0')); temp_v4 = temp_v4 + 1) {
-        temp_v1 = FUN_00100b44();
+        temp_v1 = libc_toupper();
         (&DAT_004c7080)[temp_v4] = temp_v1;
       }
       (&DAT_004c7080)[temp_v4] = 0;
@@ -79,7 +79,7 @@ void FUN_003542c4(unsigned int param_1,int *param_2,unsigned int *param_3,unsign
       FUN_002ba81c(&DAT_004c70a4,param_4 + 1,0x14);
       temp_v2 = FUN_00239f84(temp_v6,&DAT_004c7000,0);
       if (-1 < temp_v2) {
-        temp_v2 = FUN_002c55c4();
+        temp_v2 = appletIsExitRequested();
         if ((temp_v2 == 0) && (temp_v2 = FUN_002c55b4(), temp_v2 == 0)) {
           FUN_00239ed0(param_1,&DAT_004c7000);
           return;

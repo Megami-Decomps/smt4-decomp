@@ -42,7 +42,7 @@ extern unsigned char DAT_004e655c; /* 0x4e655c */
 extern unsigned char DAT_004e675c; /* 0x4e675c */
 
 /* Supplied declaration required: FUN_0023a20c. */
-extern int FUN_002b4414(unsigned int, unsigned char *, unsigned int);
+extern int libc_strncmp(unsigned int, unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002c5e80. */
 /* Supplied declaration required: FUN_00353098. */
 /* Supplied declaration required: FUN_0035313c. */
@@ -158,7 +158,7 @@ int FUN_003523a8(int param_1,int param_2,unsigned int param_3,int *param_4)
           temp_v4 = 0;
           if (temp_v4 < temp_v7) {
             do {
-              temp_v0 = FUN_002b4414(*(unsigned int *)(puVar6[6] + temp_v4 * 8),&LAB_00352690,0x40);
+              temp_v0 = libc_strncmp(*(unsigned int *)(puVar6[6] + temp_v4 * 8),&LAB_00352690,0x40);
               if (temp_v0 == 0) {
                 temp_v4 = *(unsigned int *)(puVar6[6] + temp_v4 * 8 + 4);
                 goto LAB_00352594;

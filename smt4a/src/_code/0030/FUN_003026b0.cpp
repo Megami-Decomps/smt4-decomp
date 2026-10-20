@@ -2,12 +2,12 @@
 
 extern "C" {
 
-void FUN_002e75c2(void);
+void streamReaderReadU32(void);
 
-/* Runs FUN_002e75c2 and returns `object`. */
+/* Runs streamReaderReadU32 and returns `object`. */
 void *FUN_003026b0(void *object)
 {
-    FUN_002e75c2();
+    streamReaderReadU32();
     return object;
 }
 

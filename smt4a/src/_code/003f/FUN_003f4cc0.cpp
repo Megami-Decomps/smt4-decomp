@@ -7,13 +7,13 @@ extern "C" {
 int FUN_00100388(...);
 int FUN_00162790(...);
 int efctSetSpeed(void);
-int FUN_001801a4(...);
+int gameGetPlayerData(...);
 int FUN_00180310(int, int, int, int);
 int FUN_0018152c(...);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
 int FUN_0018408c(int *, int);
-int FUN_00184e64(...);
+int drawSetColorFromRGBA8(...);
 int VectorSignedToFloat(...);
 
 /* stack frame of param_4: 4 slot(s), 16 byte(s) */
@@ -33,15 +33,15 @@ extern unsigned int FUN_0015687c(void);
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: efctSetSpeed. */
 extern unsigned int FUN_00180114(unsigned short);
-/* Supplied declaration required: FUN_001801a4. */
+/* Supplied declaration required: gameGetPlayerData. */
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: FUN_0018152c. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_0018408c. */
-/* Supplied declaration required: FUN_00184e64. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 extern unsigned int FUN_0019e130(int);
-extern int FUN_001ab854(void);
+extern int gameGetSlotRecord(void);
 extern int btlMainGetUnk14(void);
 
 
@@ -85,7 +85,7 @@ void FUN_003f4cc0(int param_1,int param_2,int param_3,int param_4)
           temp_v12 = temp_v13;
           if (*(int *)(param_1 + 0x34) != -1) {
             if (*(int *)(param_1 + 0x34) != -2) {
-              temp_v5 = FUN_001ab854();
+              temp_v5 = gameGetSlotRecord();
             }
             else {
               temp_v5 = btlMainGetUnk14();
@@ -97,7 +97,7 @@ void FUN_003f4cc0(int param_1,int param_2,int param_3,int param_4)
             FUN_00100388(temp_v13,&LAB_003f5218,0);
           }
           else {
-            temp_v5 = FUN_001801a4();
+            temp_v5 = gameGetPlayerData();
             temp_v7 = *(unsigned short *)(temp_v5 + 0x62);
 LAB_003f510c:
             FUN_00100388(temp_v13,&LAB_003f5218,temp_v7);
@@ -124,7 +124,7 @@ LAB_003f510c:
         else if (*(char *)(param_1 + 0x20) == '\0') {
           if (*(int *)(param_1 + 0x34) != -1) {
             if (*(int *)(param_1 + 0x34) != -2) {
-              temp_v5 = FUN_001ab854();
+              temp_v5 = gameGetSlotRecord();
             }
             else {
               temp_v5 = btlMainGetUnk14();
@@ -135,7 +135,7 @@ LAB_003f510c:
             }
           }
           else {
-            FUN_001801a4();
+            gameGetPlayerData();
             temp_v3 = FUN_0015687c();
             FUN_00100388(&temp_v10,&LAB_003f5208,temp_v3);
           }
@@ -149,7 +149,7 @@ LAB_003f510c:
           if (temp_v4 != -1) {
             if (temp_v4 != -2) {
               if (-1 < temp_v4) {
-                temp_v4 = FUN_001ab854();
+                temp_v4 = gameGetSlotRecord();
                 temp_v7 = *(unsigned short *)(temp_v4 + 0x60);
               }
             }
@@ -161,7 +161,7 @@ LAB_003f510c:
             }
           }
           else {
-            temp_v4 = FUN_001801a4(0xffffffff,(int)temp_v0,(int)temp_v1);
+            temp_v4 = gameGetPlayerData(0xffffffff,(int)temp_v0,(int)temp_v1);
             temp_v7 = *(unsigned short *)(temp_v4 + 0x5e);
           }
           if ((temp_v7 & 2) != 0) {
@@ -178,7 +178,7 @@ LAB_003f510c:
         if (*(char *)(param_1 + 0x20) == '\0') {
           if (*(int *)(param_1 + 0x34) != -1) {
             if (*(int *)(param_1 + 0x34) != -2) {
-              temp_v4 = FUN_001ab854();
+              temp_v4 = gameGetSlotRecord();
             }
             else {
               temp_v4 = btlMainGetUnk14();
@@ -188,7 +188,7 @@ LAB_003f510c:
             }
           }
           else {
-            FUN_001801a4();
+            gameGetPlayerData();
             temp_v5 = -1;
           }
           temp_v8 = 0;
@@ -198,7 +198,7 @@ LAB_003f510c:
             if (temp_v4 != -1) {
               if (temp_v4 != -2) {
                 if (-1 < temp_v4) {
-                  temp_v4 = FUN_001ab854();
+                  temp_v4 = gameGetSlotRecord();
                   temp_v8 = (unsigned int)*(unsigned short *)(temp_v4 + 0x60);
                 }
               }
@@ -210,7 +210,7 @@ LAB_003f510c:
               }
             }
             else {
-              temp_v4 = FUN_001801a4();
+              temp_v4 = gameGetPlayerData();
               temp_v8 = (unsigned int)*(unsigned short *)(temp_v4 + 0x5e);
             }
             temp_v2 = 1;
@@ -230,7 +230,7 @@ LAB_003f510c:
               }
             } while( 1 );
           }
-          FUN_00184e64(temp_v3);
+          drawSetColorFromRGBA8(temp_v3);
           if (*(char *)(param_1 + 0x23) != '\0') {
             efctSetSpeed();
           }

@@ -9,7 +9,7 @@ int FUN_004324d4(unsigned int *, unsigned int, unsigned int);
 extern unsigned char DAT_00559684; /* 0x559684 */
 
 extern unsigned int FUN_0011c5d8(void);
-extern int FUN_002e760a(unsigned int);
+extern int operatorNew(unsigned int);
 extern unsigned int FUN_002ea704(void);
 /* Supplied declaration required: FUN_004324d4. */
 
@@ -25,7 +25,7 @@ unsigned int * FUN_001144a4(unsigned int *param_1,unsigned int param_2)
   FUN_004324d4(param_1,param_2,temp_v0);
   param_1[10] = 0;
   *param_1 = (unsigned int)&DAT_00559684;
-  temp_v1 = FUN_002e760a(0x94);
+  temp_v1 = operatorNew(0x94);
   temp_v0 = 0;
   if (temp_v1 != 0) {
     temp_v0 = FUN_0011c5d8();

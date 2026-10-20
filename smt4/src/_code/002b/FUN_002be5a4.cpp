@@ -12,7 +12,7 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: FUN_002b2b88. */
-extern unsigned int FUN_002c30c4(unsigned int);
+extern unsigned int libc_strlen(unsigned int);
 
 
 void FUN_002be5a4(unsigned int param_1,unsigned int param_2,unsigned int param_3)
@@ -21,7 +21,7 @@ void FUN_002be5a4(unsigned int param_1,unsigned int param_2,unsigned int param_3
 /* irregular: 1 native warning(s); review required */
   unsigned int temp_v0;
   
-  temp_v0 = FUN_002c30c4(param_3);
+  temp_v0 = libc_strlen(param_3);
   FUN_002b2b88(param_2,param_1,param_3,temp_v0);
   return;
 }

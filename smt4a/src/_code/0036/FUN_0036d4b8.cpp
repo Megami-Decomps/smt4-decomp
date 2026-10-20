@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e59f8(int, unsigned int, int);
-int FUN_002e6dd0(int, int);
+int rt_aeabi_memclr(int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -15,7 +15,7 @@ typedef struct {
 extern int DAT_0057f69c; /* 0x57f69c */
 
 /* Supplied declaration required: FUN_002e59f8. */
-/* Supplied declaration required: FUN_002e6dd0. */
+/* Supplied declaration required: rt_aeabi_memclr. */
 
 
 void FUN_0036d4b8(unsigned int param_1)
@@ -33,7 +33,7 @@ void FUN_0036d4b8(unsigned int param_1)
       FUN_002e59f8(temp_v0,DAT_0057f69c + param_1 * 100 + 0x2720c,100);
     }
   }
-  FUN_002e6dd0(DAT_0057f69c + 0x27e28,100);
+  rt_aeabi_memclr(DAT_0057f69c + 0x27e28,100);
   return;
 }
 

@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_002ea0b8(unsigned int *);
+int sharedRefInitEmpty(unsigned int *);
 int FUN_002f4364(void);
 
 typedef int romwright_code(...);
 extern unsigned char DAT_00558cc4; /* 0x558cc4 */
 
-/* Supplied declaration required: FUN_002ea0b8. */
+/* Supplied declaration required: sharedRefInitEmpty. */
 /* Supplied declaration required: FUN_002f4364. */
 
 
@@ -50,7 +50,7 @@ void FUN_002f42ec(unsigned int *param_1,unsigned int param_2,unsigned int param_
     (**(romwright_code **)(*(int *)param_1[5] + 4))();
   }
   FUN_002f4364();
-  FUN_002ea0b8(param_1);
+  sharedRefInitEmpty(param_1);
   return;
 }
 

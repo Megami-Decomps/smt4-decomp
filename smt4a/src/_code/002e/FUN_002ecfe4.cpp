@@ -13,7 +13,7 @@ extern unsigned int FUN_00124402(unsigned int *);
 extern unsigned int FUN_00124416(unsigned int *);
 extern unsigned int FUN_00124426(unsigned int *);
 extern unsigned int FUN_0012443a(void);
-extern long long FUN_0030fbe0(unsigned int, unsigned int);
+extern long long mulU32ToU64(unsigned int, unsigned int);
 extern long long FUN_0050d6d8(void);
 
 
@@ -28,9 +28,9 @@ long long FUN_002ecfe4(unsigned int *param_1)
   long long temp_v4;
   
   temp_v0 = FUN_0012443a();
-  temp_v2 = FUN_0030fbe0(temp_v0,0x3c);
+  temp_v2 = mulU32ToU64(temp_v0,0x3c);
   temp_v0 = FUN_00124402(param_1);
-  temp_v3 = FUN_0030fbe0(temp_v0,0xe10);
+  temp_v3 = mulU32ToU64(temp_v0,0xe10);
   FUN_001243ee(param_1);
   temp_v0 = FUN_00124426(param_1);
   temp_v1 = FUN_00124416(param_1);

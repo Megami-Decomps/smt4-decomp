@@ -10,11 +10,11 @@ typedef struct Counters {
 extern struct {
     u8 unk0[4];
     Counters *counters;
-} DAT_0043dcb0;
+} g_ifTouch;
 
 s32 FUN_002015a4(void)
 {
-    return (s16)DAT_0043dcb0.counters->unk670;
+    return (s16)g_ifTouch.counters->unk670;
 }
 
 } /* extern "C" */

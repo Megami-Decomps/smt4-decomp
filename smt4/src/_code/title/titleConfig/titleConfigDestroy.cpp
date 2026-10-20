@@ -6,7 +6,7 @@ void asdMemFree(void *block);
 void jobStop(u32 job, s32 arg);
 s32 jobIsValid(u32 job);
 void scrScriptProcessDestroy(void *process);
-void FUN_002b8cc8(void);
+void ifTouchRegionRemove(void);
 
 extern TitleConfig *g_titleConfig;
 
@@ -19,10 +19,10 @@ void titleConfigDestroy(void)
 
     config->closing = 1;
     for (i = 0; i < config->countA; i++) {
-        FUN_002b8cc8();
+        ifTouchRegionRemove();
     }
     for (i = 0; i < config->countB; i++) {
-        FUN_002b8cc8();
+        ifTouchRegionRemove();
     }
     if (config->process != NULL) {
         scrScriptProcessDestroy(config->process);

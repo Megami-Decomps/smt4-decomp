@@ -8,12 +8,12 @@ typedef struct Counter {
     u16 value; /* 0x14 */
 } Counter;
 
-extern Counter *FUN_001519ac(void);
+extern Counter *gameDataBlocksGetStats(void);
 
 /* Adds `amount` to the counter, saturating at 0xffff. */
 void FUN_0040a3c8(s32 amount)
 {
-    Counter *counter = FUN_001519ac();
+    Counter *counter = gameDataBlocksGetStats();
     s32 sum = counter->value + amount;
 
     if (sum >= 0x10000) {

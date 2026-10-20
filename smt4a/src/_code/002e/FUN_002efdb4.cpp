@@ -2,14 +2,14 @@
 
 extern "C" {
 
-void FUN_002ea714(void);
-void FUN_002eabe8(void);
+void onlineGetActiveLock(void);
+void onlineMutexUnlockIfNeeded(void);
 
-/* Runs FUN_002ea714, then FUN_002eabe8. */
+/* Runs onlineGetActiveLock, then onlineMutexUnlockIfNeeded. */
 void FUN_002efdb4(void)
 {
-    FUN_002ea714();
-    FUN_002eabe8();
+    onlineGetActiveLock();
+    onlineMutexUnlockIfNeeded();
 }
 
 } /* extern "C" */

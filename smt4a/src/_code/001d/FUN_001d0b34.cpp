@@ -3,7 +3,7 @@
 extern "C" {
 
 void FUN_001d1f5c(void);
-void FUN_001d2384(void *voice);
+void voiceClearCallback(void *voice);
 void FUN_001d239c(void *voice);
 
 typedef struct Voice {
@@ -20,7 +20,7 @@ typedef struct Owner {
     /* 0x130 */ Voice *voices;
 } Owner;
 
-/* Stops the owner's voice list: FUN_001d1f5c, then FUN_001d239c on every playing voice, FUN_001d2384 on every voice, and clears the list and the active flag. */
+/* Stops the owner's voice list: FUN_001d1f5c, then FUN_001d239c on every playing voice, voiceClearCallback on every voice, and clears the list and the active flag. */
 void FUN_001d0b34(Owner *owner)
 {
     Voice *voice;
@@ -32,7 +32,7 @@ void FUN_001d0b34(Owner *owner)
         }
     }
     for (voice = owner->voices; voice != NULL; voice = voice->next) {
-        FUN_001d2384(voice);
+        voiceClearCallback(voice);
     }
     owner->voices = NULL;
     owner->active = 0;

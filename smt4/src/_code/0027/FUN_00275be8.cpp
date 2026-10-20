@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00295eb0(int, int, int);
 int FUN_002a9fdc(int, int);
-int FUN_002af5c0(...);
+int uiSpriteSetImageKeyframe(...);
 int FUN_002bd954(int, int, int, int, int);
 int FUN_002bee58(int, int);
 int FUN_002bf810(int);
@@ -19,11 +19,11 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_1_stack;
 
-extern int DAT_0043e278; /* 0x43e278 */
+extern int g_frameTex; /* 0x43e278 */
 
 /* Supplied declaration required: FUN_00295eb0. */
 /* Supplied declaration required: FUN_002a9fdc. */
-/* Supplied declaration required: FUN_002af5c0. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002bee58. */
 /* Supplied declaration required: FUN_002bf810. */
@@ -38,10 +38,10 @@ void FUN_00275be8(int param_1)
   int temp_v2;
   char temp_v3 [32];
   
-  temp_v0 = DAT_0043e278;
+  temp_v0 = g_frameTex;
   if (param_1 != 0) {
     if (param_1 == 1) {
-      *(unsigned char *)(DAT_0043e278 + 0x1c) = 1;
+      *(unsigned char *)(g_frameTex + 0x1c) = 1;
       *(unsigned int *)(temp_v0 + 0x20) = 0;
       *(unsigned char *)(temp_v0 + 0x24) = 0;
       *(unsigned int *)(temp_v0 + 0x28) = 0x3e800000;
@@ -49,7 +49,7 @@ void FUN_00275be8(int param_1)
       *(unsigned int *)(temp_v0 + 0x30) = 0x41a00000;
       *(unsigned char *)(temp_v0 + 0x25) = 1;
       FUN_002bd954(temp_v0 + 0xd74,0x1d,2000,temp_v0 + 0x34,0xb);
-      FUN_002af5c0(temp_v0 + 0xd74,0);
+      uiSpriteSetImageKeyframe(temp_v0 + 0xd74,0);
       FUN_002bd954(temp_v0 + 0xe00,0x1d,2000,temp_v0 + 0x34,0xb);
       FUN_002bee58(temp_v0 + 0xe00,0);
       temp_v3[0x14] = '\0';
@@ -91,12 +91,12 @@ void FUN_00275be8(int param_1)
       *(unsigned int *)(temp_v0 + 0x20) = 0;
       *(unsigned char *)(temp_v0 + 0x24) = 1;
       *(unsigned int *)(temp_v0 + 0x30) = 0x40e00000;
-      FUN_002af5c0(temp_v0 + 0xd74,0,1);
+      uiSpriteSetImageKeyframe(temp_v0 + 0xd74,0,1);
       return;
     }
   }
   else {
-    *(unsigned char *)(DAT_0043e278 + 0x1c) = 0;
+    *(unsigned char *)(g_frameTex + 0x1c) = 0;
     *(unsigned int *)(temp_v0 + 0x20) = 0;
     *(unsigned char *)(temp_v0 + 0x24) = 0;
     *(unsigned int *)(temp_v0 + 0x28) = 0x3e800000;

@@ -20,7 +20,7 @@ extern unsigned int DAT_004c7014; /* 0x4c7014 */
 extern unsigned int DAT_004c7018; /* 0x4c7018 */
 extern unsigned char DAT_004c8000; /* 0x4c8000 */
 
-extern unsigned long long FUN_00100bf6(int, unsigned int, unsigned int);
+extern unsigned long long libc_strtoul(int, unsigned int, unsigned int);
 extern int FUN_0023a0d8(unsigned int, int *, unsigned int);
 extern unsigned int FUN_002b5c44(void);
 /* Supplied declaration required: FUN_00361140. */
@@ -62,7 +62,7 @@ int FUN_00239e14(unsigned int param_1,unsigned int param_2,unsigned int param_3,
     }
     DAT_004c7008 = ((temp_v4 & 0xffff) >> 8) | ((temp_v3 & 0xff0fffff) << 8);
     DAT_004c700c = DAT_004c700c | 0x40000;
-    temp_v5 = FUN_00100bf6(temp_v1,0,10);
+    temp_v5 = libc_strtoul(temp_v1,0,10);
     DAT_004c7014 = (unsigned int)((unsigned long long)temp_v5 >> 0x20);
     DAT_004c7010 = (unsigned int)temp_v5;
     DAT_004c7018 = param_2;

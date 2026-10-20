@@ -22,7 +22,7 @@ extern int FUN_0025cac0(...); /* 0x25cac0 */
 extern unsigned char LAB_0025cb2c; /* 0x25cb2c */
 extern int FUN_00291f5c(...); /* 0x291f5c */
 extern unsigned char LAB_00291fc8; /* 0x291fc8 */
-extern int DAT_0043dcf0; /* 0x43dcf0 */
+extern int g_partyPanel; /* 0x43dcf0 */
 
 /* Supplied declaration required: FUN_001d13b0. */
 extern unsigned char *FUN_002a0d0c(void);
@@ -37,7 +37,7 @@ void FUN_0026bc6c(void)
   unsigned char *pbVar2;
   unsigned char temp_v1;
   
-  temp_v0 = DAT_0043dcf0;
+  temp_v0 = g_partyPanel;
   pbVar2 = (unsigned char *)FUN_002a0d0c();
   temp_v1 = ~(*pbVar2 >> 7) & 1;
   if ((*pbVar2 & 0x7f) == 2) {

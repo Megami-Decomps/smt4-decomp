@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0028f048(...);
 int FUN_0029a17c(...);
 int FUN_002b6dd8(...);
-int FUN_002b9024(void);
+int devilGetRecord(void);
 int FUN_002bdf94(...);
 int FUN_002be5a4(...);
 int FUN_002be624(...);
@@ -39,14 +39,14 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_0028f048. */
 /* Supplied declaration required: FUN_0029a17c. */
 /* Supplied declaration required: FUN_002b6dd8. */
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: devilGetRecord. */
 extern unsigned int FUN_002bce30(short, unsigned int);
 extern unsigned int FUN_002bd068(short);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: FUN_002be624. */
-extern int FUN_002bed98(int);
-extern int FUN_002beda4(int);
+extern int vec2GetYInt(int);
+extern int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf4f8. */
@@ -86,8 +86,8 @@ void FUN_00240d88(int param_1,int param_2,int param_3)
   iStack_30 = param_1;
   temp_v15 = param_2;
   temp_v16 = param_3;
-  temp_v1 = FUN_002beda4(temp_v9 + 0x354);
-  temp_v2 = FUN_002bed98(temp_v9 + 0x354);
+  temp_v1 = vec2GetXInt(temp_v9 + 0x354);
+  temp_v2 = vec2GetYInt(temp_v9 + 0x354);
   temp_v11 = 0xffffffff;
   temp_v10 = 0.0f;
   temp_v0 = *(short *)(DAT_0043dd90 + 0x1e);
@@ -131,7 +131,7 @@ void FUN_00240d88(int param_1,int param_2,int param_3)
   if (param_1 < (int)(unsigned int)*(unsigned short *)(temp_v7 + 0x1e)) {
     temp_v14 = temp_v7 + param_1 * 2;
     psVar7 = (short *)(unsigned int)*(unsigned short *)(temp_v14 + 0xe);
-    FUN_002b9024();
+    devilGetRecord();
     if (temp_v16 == 0) {
       temp_v4 = FUN_002bf4f8(0x24,0xd2);
       temp_v5 = g_titleScene;
@@ -296,9 +296,9 @@ void FUN_00240d88(int param_1,int param_2,int param_3)
     }
     else {
       if (temp_v16 != 0) {
-        temp_v5 = FUN_002beda4(temp_v9 + 0x610);
+        temp_v5 = vec2GetXInt(temp_v9 + 0x610);
         temp_v5 = temp_v5 + *(short *)(temp_v3 + 8);
-        temp_v4 = FUN_002bed98(temp_v9 + 0x610);
+        temp_v4 = vec2GetYInt(temp_v9 + 0x610);
         temp_v4 = temp_v4 + *(short *)(temp_v3 + 10);
         if (temp_v10 < *(float *)(temp_v9 + 0x630)) {
           FUN_002bf538();

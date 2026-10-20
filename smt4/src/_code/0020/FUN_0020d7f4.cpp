@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0025beb8(unsigned int, int);
 int FUN_0028c618(unsigned int, int);
-int FUN_0028c640(unsigned int, int, int);
+int nodeSetTranslation(unsigned int, int, int);
 int asdMdlManagerCreateLoaded(unsigned char [132], int);
 int FUN_002a0428(void);
 int FUN_002be624(unsigned char [132], unsigned char *);
@@ -17,7 +17,7 @@ extern int g_mapIf; /* 0x447a78 */
 
 /* Supplied declaration required: FUN_0025beb8. */
 /* Supplied declaration required: FUN_0028c618. */
-/* Supplied declaration required: FUN_0028c640. */
+/* Supplied declaration required: nodeSetTranslation. */
 /* Supplied declaration required: asdMdlManagerCreateLoaded. */
 /* Supplied declaration required: FUN_002a0428. */
 /* Supplied declaration required: FUN_002be624. */
@@ -49,7 +49,7 @@ void FUN_0020d7f4(void)
   asdMdlManagerCreateLoaded(temp_v1,7);
   *(unsigned char **)(temp_v0 + 0xcbec) = puVar2;
   FUN_002a0428();
-  FUN_0028c640(*(unsigned int *)(*(int *)(temp_v0 + 0xcbec) + 8),0,temp_v0 + 0xcbdc);
+  nodeSetTranslation(*(unsigned int *)(*(int *)(temp_v0 + 0xcbec) + 8),0,temp_v0 + 0xcbdc);
   FUN_0028c618(*(unsigned int *)(*(int *)(temp_v0 + 0xcbec) + 8),0);
   FUN_0025beb8(*(unsigned int *)(*(int *)(temp_v0 + 0xcbec) + 8),0);
   FUN_002c58c8(10,0x25);

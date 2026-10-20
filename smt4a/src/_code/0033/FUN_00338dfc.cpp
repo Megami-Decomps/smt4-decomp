@@ -37,12 +37,12 @@ extern int DAT_005f1ab0; /* 0x5f1ab0 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00100388. */
-extern int FUN_0014bef4(unsigned int);
+extern int randRange(unsigned int);
 extern int FUN_0017760c(void);
-extern int FUN_0018719c(unsigned int);
-extern int FUN_001ab854(void);
-extern int FUN_001ab888(void);
-extern int FUN_001b347c(void);
+extern int gameFlagIsSet(unsigned int);
+extern int gameGetSlotRecord(void);
+extern int gameGetSlotTable(void);
+extern int gameSlotTableFindFree(void);
 extern int FUN_00272d44(void);
 /* Supplied declaration required: FUN_002b5540. */
 /* Supplied declaration required: FUN_002c263c. */
@@ -72,7 +72,7 @@ void FUN_00338dfc(void)
   unsigned int uStack_3c;
   unsigned long long temp_v10;
   
-  temp_v0 = FUN_0018719c(0x4d0);
+  temp_v0 = gameFlagIsSet(0x4d0);
   if (temp_v0 == 0) {
     return;
   }
@@ -87,13 +87,13 @@ void FUN_00338dfc(void)
         DAT_005f1aa8 = 5;
         temp_v0 = playerHasFlagBit(5);
         if (temp_v0 != 0) {
-          temp_v0 = FUN_0014bef4(1);
+          temp_v0 = randRange(1);
           temp_v0 = temp_v0 + 1;
         }
         else {
           temp_v0 = playerHasFlagBit(9);
           if (temp_v0 == 0) goto LAB_00338f14;
-          temp_v0 = FUN_0014bef4(1);
+          temp_v0 = randRange(1);
           temp_v0 = temp_v0 + 3;
         }
         if (temp_v0 != 0) {
@@ -111,14 +111,14 @@ LAB_00338f14:
     if (DAT_005f1aac == 0) {
       temp_v0 = FUN_003e0024();
       temp_v1 = FUN_003e0154();
-      temp_v2 = FUN_001b347c();
-      temp_v3 = FUN_001ab888();
+      temp_v2 = gameSlotTableFindFree();
+      temp_v3 = gameGetSlotTable();
       temp_v8 = (float)temp_v10;
       temp_v5 = 0;
       if (temp_v5 < temp_v2) {
         do {
           if (-1 < *(char *)(temp_v3 + 0x1c88 + temp_v5)) {
-            temp_v4 = FUN_001ab854();
+            temp_v4 = gameGetSlotRecord();
             temp_v0 = temp_v0 + *(short *)(temp_v4 + 0x2a);
             temp_v4 = FUN_0017760c();
             temp_v1 = temp_v1 + temp_v4;
@@ -134,7 +134,7 @@ LAB_00338f14:
         temp_v0 = playerHasFlagBit(5);
         if ((temp_v0 == 0) && (temp_v0 = playerHasFlagBit(9), temp_v0 == 0)) {
           DAT_005f1aac = 5;
-          temp_v0 = FUN_0014bef4(1);
+          temp_v0 = randRange(1);
           temp_v0 = temp_v0 + 1;
 LAB_00339020:
           if (temp_v0 != 0) {
@@ -145,7 +145,7 @@ LAB_00339020:
       }
       else if ((int)in_s0 < 0x42200001) {
         DAT_005f1aac = 5;
-        temp_v0 = FUN_0014bef4(1);
+        temp_v0 = randRange(1);
         temp_v0 = temp_v0 + 3;
         goto LAB_00339020;
       }
@@ -156,7 +156,7 @@ LAB_00339020:
     temp_v9[2] = 1.0f;
     temp_v9[3] = 1.25f;
     uStack_3c = 0x3fc00000;
-    temp_v0 = FUN_0018719c(0x646);
+    temp_v0 = gameFlagIsSet(0x646);
     if (temp_v0 != 0) {
       temp_v6 = 1.25f;
     }
@@ -164,7 +164,7 @@ LAB_00339020:
     if (((int)in_s0 >= 0x41700000) && (DAT_005f1ab0 == 0)) {
       DAT_005f1ab0 = 5;
       FUN_002c263c();
-      temp_v0 = FUN_0014bef4(4);
+      temp_v0 = randRange(4);
       temp_v0 = (int)(temp_v9[temp_v0] * in_s0 * temp_v6 * temp_v8);
       FUN_0031e6b0();
       if (temp_v0 != 0) {

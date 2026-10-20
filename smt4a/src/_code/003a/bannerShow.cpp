@@ -17,23 +17,23 @@ typedef struct Globals {
     /* 0x08 */ Banner *banner;
 } Globals;
 
-extern Globals DAT_0057f588;
+extern Globals g_messageMain;
 
-int FUN_001846d0(void *window, int arg);
-int FUN_00184b80(void *window, int arg);
+int uiSpriteSelectAnim(void *window, int arg);
+int pairSetFirstResetSecond(void *window, int arg);
 int FUN_0014e188(void *window, int arg1, u32 arg2, void *text, float scale, int arg5);
 
 /* Script command: turns on the banner's flags, sets up its window with the text and starts it. */
 u32 bannerShow(void)
 {
-    Banner *banner = DAT_0057f588.banner;
+    Banner *banner = g_messageMain.banner;
 
     banner->flagA = 1;
     banner->flagB = 1;
     banner->flagC = 1;
     FUN_0014e188(banner->window, 19, 0xffffffff, banner->text, 1.0f, 11);
-    FUN_00184b80(banner->window, 38);
-    FUN_001846d0(banner->window, 28);
+    pairSetFirstResetSecond(banner->window, 38);
+    uiSpriteSelectAnim(banner->window, 28);
     return 1;
 }
 

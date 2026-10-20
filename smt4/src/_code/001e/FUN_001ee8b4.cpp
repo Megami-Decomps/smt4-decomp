@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0029e8b8(int, int);
 int FUN_0029eb5c(...);
 int FUN_0029f848(int, int, int, int, int, int);
-int FUN_002b9024(void);
+int devilGetRecord(void);
 int memClear(int, int);
 int FUN_0032c288(void);
 
@@ -17,12 +17,12 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-extern int DAT_0044e190; /* 0x44e190 */
+extern int g_statusDown; /* 0x44e190 */
 
 /* Supplied declaration required: FUN_0029e8b8. */
 /* Supplied declaration required: FUN_0029eb5c. */
 /* Supplied declaration required: FUN_0029f848. */
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: FUN_0032c288. */
 
@@ -39,14 +39,14 @@ void FUN_001ee8b4(int param_1)
   int temp_v4;
   unsigned short *puVar7;
   
-  temp_v2 = DAT_0044e190;
-  *(unsigned short *)(DAT_0044e190 + 0x2230) = 0;
+  temp_v2 = g_statusDown;
+  *(unsigned short *)(g_statusDown + 0x2230) = 0;
   *(unsigned short *)(temp_v2 + 0x2232) = 0;
   memClear(temp_v2 + 0xe30,0x1400);
   puVar7 = (unsigned short *)0x0;
   do {
     puVar4 = puVar7;
-    FUN_002b9024();
+    devilGetRecord();
     if ((puVar4 != (unsigned short *)0x0) && ((puVar4[3] & 1) != 0)) {
       if (*(char *)(param_1 + (unsigned int)*puVar4) != '\0') {
         *(unsigned short *)(temp_v2 + *(short *)(temp_v2 + 0x2230) * 4 + 0xe30) = *puVar4;

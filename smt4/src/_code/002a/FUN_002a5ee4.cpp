@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0014ed4c(void);
 int FUN_00151b98(unsigned int, unsigned char [132], unsigned char [128], int, unsigned int, unsigned char *, int *, int, int);
 int libc_strcat(...);
-int FUN_002bf694(...);
+int libc_strcpy(...);
 int memClear(unsigned char [128], int);
 
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
@@ -27,8 +27,8 @@ extern int FUN_002a6e7c(unsigned int, int, unsigned int, unsigned char *);
 extern int FUN_002a6f48(unsigned int);
 /* Supplied declaration required: libc_strcat. */
 extern int *asdTMTexTableCallFileB(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002bf694. */
-extern int FUN_002c30c4(unsigned int);
+/* Supplied declaration required: libc_strcpy. */
+extern int libc_strlen(unsigned int);
 /* Supplied declaration required: memClear. */
 
 
@@ -63,7 +63,7 @@ int * FUN_002a5ee4(unsigned int param_1,unsigned int param_2,unsigned int param_
   }
   temp_v3 = piVar2[1];
   FUN_0014ed4c();
-  FUN_002bf694(temp_v4,*piVar2 + 0xc);
+  libc_strcpy(temp_v4,*piVar2 + 0xc);
   pcVar5 = *(char **)(temp_v3 + 8);
   if (*pcVar5 != '-') {
     libc_strcat(temp_v4);
@@ -77,12 +77,12 @@ int * FUN_002a5ee4(unsigned int param_1,unsigned int param_2,unsigned int param_
   else {
     libc_strcat(temp_v4,&LAB_002a60a4);
   }
-  temp_v3 = FUN_002c30c4(*(unsigned int *)(temp_v3 + 8));
+  temp_v3 = libc_strlen(*(unsigned int *)(temp_v3 + 8));
   if (temp_v3 == 0) {
     piVar2[2] = 0;
     return piVar2;
   }
-  FUN_002bf694(temp_v6,temp_v5);
+  libc_strcpy(temp_v6,temp_v5);
   temp_v1 = piVar2[4];
   if ((temp_v1 & 0xfffeffff) != 0) {
     return piVar2;

@@ -39,8 +39,8 @@ extern int FUN_00293b8c(void);
 extern int gameGetFlagByte12e8(void);
 extern int FUN_0029e0f8(void);
 extern int FUN_0029e924(int);
-extern unsigned int FUN_002bed98(int);
-extern unsigned int FUN_002beda4(int);
+extern unsigned int vec2GetYInt(int);
+extern unsigned int vec2GetXInt(int);
 /* Supplied declaration required: FUN_003a98b8. */
 /* Supplied declaration required: FUN_003aab78. */
 /* Supplied declaration required: FUN_003c2b74. */
@@ -68,8 +68,8 @@ void FUN_003aa510(int param_1)
   else {
     FUN_00233344(param_1 + 0xdc,(int)*(short *)(param_1 + 0xa5b2));
     temp_v7 = param_1 + *(short *)(param_1 + 0xa5b2) * 0x8c + 0xfc;
-    temp_v3 = FUN_002bed98(temp_v7);
-    temp_v4 = FUN_002beda4(temp_v7);
+    temp_v3 = vec2GetYInt(temp_v7);
+    temp_v4 = vec2GetXInt(temp_v7);
     FUN_00231240(param_1 + 200,temp_v4,temp_v3);
     temp_v7 = FUN_0026c63c();
     if ((temp_v7 == 0) || (temp_v7 = FUN_00293aac(), temp_v7 != 0)) {

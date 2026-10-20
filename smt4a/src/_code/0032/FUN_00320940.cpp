@@ -20,9 +20,9 @@ typedef struct {
     unsigned short sp80; /* 0x80: local_80 */
 } param_1_stack;
 
-extern int DAT_0057f108; /* 0x57f108 */
+extern int g_camp; /* 0x57f108 */
 
-extern unsigned int FUN_001801a4(void);
+extern unsigned int gameGetPlayerData(void);
 extern int FUN_002a4860(int);
 extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_003343c0. */
@@ -47,8 +47,8 @@ void FUN_00320940(int param_1)
   unsigned short temp_v9;
   unsigned short temp_v10;
   
-  temp_v1 = DAT_0057f108;
-  temp_v0 = FUN_001801a4();
+  temp_v1 = g_camp;
+  temp_v0 = gameGetPlayerData();
   temp_v3 = 0;
   temp_v2 = 0;
   if (param_1 == 0x13 || param_1 == 0x48) {

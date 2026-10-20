@@ -3,7 +3,7 @@
 extern "C" {
 
 int asdCecReadInboxMessage(int index, void *message);
-extern int FUN_00248a9c(void);
+extern int asdCecInboxGetMessageCount(void);
 
 /* Reads up to `count` inbox messages starting at `first` into the 0x4C-byte message slots at `messages`. */
 void cecInboxReadMessages(u32 unused, u8 *messages, int first, int count)
@@ -11,7 +11,7 @@ void cecInboxReadMessages(u32 unused, u8 *messages, int first, int count)
     int total;
     int i;
 
-    total = FUN_00248a9c();
+    total = asdCecInboxGetMessageCount();
     i = 0;
     if (i < count) {
         do {

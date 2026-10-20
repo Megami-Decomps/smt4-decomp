@@ -1,4 +1,4 @@
-/* The scene block held in DAT_0043dcf0: four character timers at 0x298, a title timer at 0x4C8 and the state byte at 0x66C. */
+/* The scene block held in g_partyPanel: four character timers at 0x298, a title timer at 0x4C8 and the state byte at 0x66C. */
 #ifndef SHARD_SCENE43DCF0_H
 #define SHARD_SCENE43DCF0_H
 
@@ -30,6 +30,6 @@ typedef struct Scene43dcf0 {
     /* 0x06D8 */ u32 unk6D8[0x18];
 } Scene43dcf0;
 
-extern Scene43dcf0 *DAT_0043dcf0;
+extern Scene43dcf0 *g_partyPanel;
 
 #endif

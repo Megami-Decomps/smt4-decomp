@@ -4,16 +4,16 @@
 
 extern "C" {
 
-int FUN_002e9af4(void);
-int FUN_002e9e80(...);
+int onlineInstanceTableGetCurrent(void);
+int vectorInitEmpty(...);
 int FUN_002e9e8a(unsigned int, unsigned int, int *);
-int FUN_002e9ec8(int, unsigned int);
+int onlineInstanceTableFind(int, unsigned int);
 int FUN_002e9f00(void);
-int FUN_002e9f64(...);
+int vectorDestroyWords(...);
 int FUN_002f3dde(unsigned int, unsigned int);
 int FUN_002ff3b0(unsigned int **, unsigned int *, int, unsigned int);
 int wordMoveOut_002ff3b8(int *, int *, int);
-int FUN_002ff3c8(int *);
+int mapIteratorNext7(int *);
 
 /* stack frame of param_3: 8 slot(s), 32 byte(s) */
 typedef struct {
@@ -28,16 +28,16 @@ typedef struct {
 } param_3_stack;
 
 extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
-/* Supplied declaration required: FUN_002e9af4. */
-/* Supplied declaration required: FUN_002e9e80. */
+/* Supplied declaration required: onlineInstanceTableGetCurrent. */
+/* Supplied declaration required: vectorInitEmpty. */
 /* Supplied declaration required: FUN_002e9e8a. */
-/* Supplied declaration required: FUN_002e9ec8. */
+/* Supplied declaration required: onlineInstanceTableFind. */
 /* Supplied declaration required: FUN_002e9f00. */
-/* Supplied declaration required: FUN_002e9f64. */
+/* Supplied declaration required: vectorDestroyWords. */
 /* Supplied declaration required: FUN_002f3dde. */
 /* Supplied declaration required: FUN_002ff3b0. */
 /* Supplied declaration required: wordMoveOut_002ff3b8. */
-/* Supplied declaration required: FUN_002ff3c8. */
+/* Supplied declaration required: mapIteratorNext7. */
 extern int wordRefsDiffer_002ff3f8(int *, unsigned int *);
 
 
@@ -59,7 +59,7 @@ void FUN_00306d9c(int param_1,int param_2,int param_3)
   int temp_v10;
   unsigned char temp_v11 [12];
   
-  FUN_002e9e80(&temp_v3);
+  vectorInitEmpty(&temp_v3);
   temp_v7 = *(int *)(*(int *)(param_1 + 0x30) + 8);
   while( 1 ) {
     temp_v9 = *(unsigned int *)(param_1 + 0x30);
@@ -70,29 +70,29 @@ void FUN_00306d9c(int param_1,int param_2,int param_3)
     if ((*(char *)(temp_v1 + 0x10) == '\x01') &&
        ((*(int *)(temp_v1 + 0x48) == param_2 ||
         ((param_3 != 0 && (*(int *)(temp_v1 + 0x4c) == param_3)))))) {
-      FUN_002e9e80(&temp_v5);
+      vectorInitEmpty(&temp_v5);
       temp_v2 = *(unsigned int *)(*(int *)(temp_v7 + 0x14) + 0x44);
-      temp_v0 = FUN_002e9af4();
+      temp_v0 = onlineInstanceTableGetCurrent();
       FUN_002e9e8a(temp_v0,temp_v2,&temp_v5);
       FUN_002ff3b0(&temp_v3,temp_v4,temp_v5,temp_v6);
       temp_v10 = 0x80010004;
       temp_v0 = FUN_002e7908(temp_v11,(unsigned int *)&temp_v10);
       wordMoveOut_002ff3b8(&temp_v8,&temp_v7,0);
       FUN_002f3dde(*(unsigned int *)(temp_v8 + 0x14),temp_v0);
-      FUN_002e9f64(&temp_v5);
+      vectorDestroyWords(&temp_v5);
     }
     else {
-      FUN_002ff3c8(&temp_v7);
+      mapIteratorNext7(&temp_v7);
     }
   }
   for (; temp_v4 != puVar3; puVar3 = puVar3 + 1) {
-    temp_v1 = FUN_002e9af4();
-    FUN_002e9ec8(temp_v1,*puVar3);
+    temp_v1 = onlineInstanceTableGetCurrent();
+    onlineInstanceTableFind(temp_v1,*puVar3);
     if (temp_v1 != 0) {
       FUN_002e9f00();
     }
   }
-  FUN_002e9f64(&temp_v3);
+  vectorDestroyWords(&temp_v3);
   return;
 }
 

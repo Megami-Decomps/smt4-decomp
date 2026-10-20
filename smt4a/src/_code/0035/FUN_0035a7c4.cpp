@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00275f44(undefined4, int);
+int scrScriptProcessStartEntry(undefined4, int);
 
 typedef struct fn_0035a7c4_arg0 fn_0035a7c4_arg0;
 struct fn_0035a7c4_arg0 {
@@ -19,7 +19,7 @@ struct fn_0035a7c4_arg0 {
 };
 
 extern int FUN_00224880(unsigned int);
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 extern unsigned int maskToCode(void);
 
 
@@ -42,7 +42,7 @@ unsigned int FUN_0035a7c4(fn_0035a7c4_arg0 *param_1)
     }
   }
   else {
-    FUN_00275f44(param_1->field_0x360,0x22);
+    scrScriptProcessStartEntry(param_1->field_0x360,0x22);
     param_1->field_0x3bc = param_1->field_0x3bc + 1;
   }
   return temp_v2;

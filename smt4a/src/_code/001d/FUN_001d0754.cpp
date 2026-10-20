@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001a0990(unsigned int *);
+int nn_os_LightEvent_ClearSignal(unsigned int *);
 int nn_os_detail_BlockingQueueBase_nn_os_CriticalSection_TryEnqueue(int, int);
 int nw_ut_internal_LinkListImpl_insert(int, int, unsigned int *, unsigned int, unsigned int);
 
@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_4_stack;
 
-/* Supplied declaration required: FUN_001a0990. */
+/* Supplied declaration required: nn_os_LightEvent_ClearSignal. */
 extern int FUN_001b1998(void);
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
@@ -35,7 +35,7 @@ void FUN_001d0754(unsigned int *param_1,unsigned int param_2,unsigned int param_
   *param_1 = param_1[5];
   temp_v0 = FUN_001b1998();
   nn_os_CriticalSection_Enter(temp_v0 + 0x2c);
-  FUN_001a0990(param_1 + 0x1c);
+  nn_os_LightEvent_ClearSignal(param_1 + 0x1c);
   *(unsigned char *)(param_1 + 0x1e) = 1;
   nw_ut_internal_LinkListImpl_insert(temp_v0 + 0xc,temp_v0 + 0x10,param_1 + 0x1a,param_4,unaff_r4);
   nn_os_detail_BlockingQueueBase_nn_os_CriticalSection_TryEnqueue(temp_v0 + 0x38,0);

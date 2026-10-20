@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0029efa8(int);
 
-extern int DAT_0044e190; /* 0x44e190 */
+extern int g_statusDown; /* 0x44e190 */
 
 /* Supplied declaration required: FUN_0029efa8. */
 
@@ -15,8 +15,8 @@ void FUN_00322e44(void)
 
 {
 /* irregular: 1 native warning(s); review required */
-  if (DAT_0044e190 != 0) {
-    FUN_0029efa8(DAT_0044e190 + 0x4d4);
+  if (g_statusDown != 0) {
+    FUN_0029efa8(g_statusDown + 0x4d4);
     return;
   }
   return;

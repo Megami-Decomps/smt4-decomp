@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_001a9110(int);
+int wordPairCopy(int);
 
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
-/* Supplied declaration required: FUN_001a9110. */
+/* Supplied declaration required: wordPairCopy. */
 
 
 void FUN_0023e51c(int param_1,int *param_2,unsigned int param_3,int param_4)
@@ -31,7 +31,7 @@ void FUN_0023e51c(int param_1,int *param_2,unsigned int param_3,int param_4)
     do {
       puVar4 = (unsigned short *)(temp_v1 + temp_v3 * 8);
       if (((unsigned char)puVar4[2] == param_3) && ((int)(unsigned int)*puVar4 <= param_4)) {
-        FUN_001a9110(param_1 + *param_2 * 8);
+        wordPairCopy(param_1 + *param_2 * 8);
         *param_2 = *param_2 + 1;
       }
       temp_v3 = temp_v3 + 1;

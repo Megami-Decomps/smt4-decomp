@@ -2,14 +2,14 @@
 
 extern "C" {
 
-extern u32 FUN_001656a0(u32 id);
+extern u32 padButtonIsPressed(u32 id);
 
 u32 getMaskB5(s32 includeExtra)
 {
-    u32 mask = FUN_001656a0(0x5);
+    u32 mask = padButtonIsPressed(0x5);
 
     if (includeExtra != 0) {
-        mask = mask | FUN_001656a0(0xe);
+        mask = mask | padButtonIsPressed(0xe);
     }
     return mask;
 }

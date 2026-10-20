@@ -15,7 +15,7 @@ extern int g_aocMain; /* 0x570260 */
 /* Supplied declaration required: FUN_00261a14. */
 /* Supplied declaration required: FUN_004731d8. */
 extern int gameBlockByte27E98Is1To3(void);
-extern int FUN_0047dfec(int);
+extern int scriptHolderUpdateForward(int);
 /* Supplied declaration required: scriptHolderFree2. */
 /* Supplied declaration required: FUN_0047e430. */
 /* Supplied declaration required: FUN_004b7d88. */
@@ -28,7 +28,7 @@ void FUN_004b92d4(int param_1)
   int temp_v0;
   
   if (*(int *)(param_1 + 0x2c) != 0) {
-    if ((*(int *)(param_1 + 0x2c) == 1) && (temp_v0 = FUN_0047dfec(g_aocMain + 0xa8), temp_v0 != 0))
+    if ((*(int *)(param_1 + 0x2c) == 1) && (temp_v0 = scriptHolderUpdateForward(g_aocMain + 0xa8), temp_v0 != 0))
     {
       scriptHolderFree2(g_aocMain + 0xa8);
       temp_v0 = gameBlockByte27E98Is1To3();

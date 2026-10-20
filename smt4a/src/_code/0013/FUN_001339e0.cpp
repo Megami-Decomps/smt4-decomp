@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6e14(int);
+int asdOperatorDeleteArray(int);
 int FUN_00307ad6(...);
 int FUN_00307af8(...);
 int vectorSize12B(int *);
@@ -17,7 +17,7 @@ typedef struct {
 } param_3_stack;
 
 extern int rt_malloc(void);
-/* Supplied declaration required: FUN_002e6e14. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
 /* Supplied declaration required: FUN_00307ad6. */
 /* Supplied declaration required: FUN_00307af8. */
 extern int bufGrowCapacity5(unsigned int, int *);
@@ -78,7 +78,7 @@ void FUN_001339e0(int *param_1,unsigned int *param_2,unsigned int *param_3)
     for (temp_v4 = temp_v8; temp_v4 != param_1[1]; temp_v4 = temp_v4 + 0xc) {
     }
     FUN_00307af8(param_1);
-    FUN_002e6e14(temp_v8);
+    asdOperatorDeleteArray(temp_v8);
     *param_1 = temp_v3;
     param_1[1] = temp_v5 * 0xc + temp_v3 + 0xc;
     param_1[2] = temp_v2 * 0xc + temp_v3;

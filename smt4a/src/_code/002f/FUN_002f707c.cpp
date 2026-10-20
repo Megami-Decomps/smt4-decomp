@@ -18,12 +18,12 @@ typedef struct {
     unsigned int sp14; /* 0x14: local_14 */
 } param_3_stack;
 
-extern int DAT_0057f268; /* 0x57f268 */
+extern int g_partyPanel; /* 0x57f268 */
 
 /* Supplied declaration required: FUN_001641b4. */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_0020b718. */
-extern int FUN_00275f44(unsigned int, unsigned int);
+extern int scrScriptProcessStartEntry(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002a7324. */
 /* Supplied declaration required: FUN_0031f718. */
 /* Supplied declaration required: unitRecordBuild. */
@@ -41,7 +41,7 @@ void FUN_002f707c(unsigned int param_1,unsigned int param_2,int param_3)
   unsigned char temp_v3;
   unsigned char temp_v4 [300];
   
-  temp_v0 = DAT_0057f268;
+  temp_v0 = g_partyPanel;
   temp_v2 = 5;
   temp_v3 = 1;
   if ((param_1 & 1) != 0) {
@@ -64,7 +64,7 @@ void FUN_002f707c(unsigned int param_1,unsigned int param_2,int param_3)
     }
   }
   if ((param_1 != 0 && temp_v3) &&
-     (temp_v1 = FUN_00275f44(*(unsigned int *)(DAT_0057f268 + 0x14),temp_v2), temp_v1 != 0)) {
+     (temp_v1 = scrScriptProcessStartEntry(*(unsigned int *)(g_partyPanel + 0x14),temp_v2), temp_v1 != 0)) {
     *(unsigned char *)(*(int *)(temp_v0 + 0xe84) + temp_v0 + 0xe88) = 0;
     *(unsigned int *)(temp_v0 + *(int *)(temp_v0 + 0xe84) * 4 + 0xe7c) = param_2;
     *(int *)(temp_v0 + 0xe84) = *(int *)(temp_v0 + 0xe84) + 1;

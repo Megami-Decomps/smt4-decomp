@@ -5,25 +5,25 @@
 extern "C" {
 
 int FUN_0014afd0(...);
-int FUN_0014bdb4(...);
+int jobSetParent(...);
 int asdProcessCreateSimple(...);
 int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
-int FUN_0018719c(...);
+int gameFlagIsSet(...);
 int dataTableGetCount(...);
 int dataTableGetEntries(...);
-int FUN_001b4a90(...);
+int __aeabi_memset4(...);
 int FUN_0020214c(...);
 int FUN_00275bc8(...);
 int sysMemClear(...);
-int FUN_0031a400(...);
-int FUN_00342010(...);
+int campCommonBgAcquire(...);
+int campButtonHelpAcquire(...);
 int FUN_003423cc(...);
 int jobSetWork3C(...);
 int FUN_0039af48(...);
 int FUN_003afe2c(...);
 int FUN_003b61ec(...);
-int FUN_003f86f8(...);
+int loadSlotEnsureLoaded(...);
 
 /* stack frame of param_1: 7 slot(s), 28 byte(s) */
 typedef struct {
@@ -48,26 +48,26 @@ extern unsigned char LAB_002e6b68; /* 0x2e6b68 */
 extern unsigned int *g_npcRoom; /* 0x588124 */
 
 /* Supplied declaration required: FUN_0014afd0. */
-/* Supplied declaration required: FUN_0014bdb4. */
+/* Supplied declaration required: jobSetParent. */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 extern unsigned int dataTableGet(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0018719c. */
+/* Supplied declaration required: gameFlagIsSet. */
 /* Supplied declaration required: dataTableGetCount. */
 /* Supplied declaration required: dataTableGetEntries. */
-/* Supplied declaration required: FUN_001b4a90. */
+/* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: FUN_0020214c. */
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_0031a400. */
-/* Supplied declaration required: FUN_00342010. */
+/* Supplied declaration required: campCommonBgAcquire. */
+/* Supplied declaration required: campButtonHelpAcquire. */
 /* Supplied declaration required: FUN_003423cc. */
 /* Supplied declaration required: jobSetWork3C. */
 /* Supplied declaration required: FUN_0039af48. */
 /* Supplied declaration required: FUN_003afe2c. */
 /* Supplied declaration required: FUN_003b61ec. */
-/* Supplied declaration required: FUN_003f86f8. */
+/* Supplied declaration required: loadSlotEnsureLoaded. */
 
 
 void FUN_002e64a0(unsigned int param_1)
@@ -110,7 +110,7 @@ void FUN_002e64a0(unsigned int param_1)
   taskCreateDraw(&LAB_002e682c,0x7e,0,0,FUN_002394a8,0,0,puVar9);
   taskCreateDraw(&LAB_002e6840,0xda,0,0,FUN_002394a8,0,0,*puVar8);
   taskCreateDraw(&LAB_002e6858,0xea,0,0,&LAB_00284dbc,0,0,*puVar8);
-  FUN_003f86f8(0x1a);
+  loadSlotEnsureLoaded(0x1a);
   puVar21 = (unsigned short *)(puVar8 + 0x40);
   *puVar21 = (unsigned short)param_1;
   puVar6 = g_npcRoom;
@@ -142,10 +142,10 @@ void FUN_002e64a0(unsigned int param_1)
   puVar6[0x3d] = 0;
   if (temp_v7 != 0) {
     do {
-      if ((((*puVar11 == temp_v1) && ((puVar11[7] == 0 || (temp_v9 = FUN_0018719c(), temp_v9 != 0)))) &&
-          ((puVar11[8] == 0 || (temp_v9 = FUN_0018719c(), temp_v9 != 0)))) &&
-         (((puVar11[9] == 0 || (temp_v9 = FUN_0018719c(), temp_v9 == 0)) &&
-          ((puVar11[10] == 0 || (temp_v9 = FUN_0018719c(), temp_v9 == 0)))))) {
+      if ((((*puVar11 == temp_v1) && ((puVar11[7] == 0 || (temp_v9 = gameFlagIsSet(), temp_v9 != 0)))) &&
+          ((puVar11[8] == 0 || (temp_v9 = gameFlagIsSet(), temp_v9 != 0)))) &&
+         (((puVar11[9] == 0 || (temp_v9 = gameFlagIsSet(), temp_v9 == 0)) &&
+          ((puVar11[10] == 0 || (temp_v9 = gameFlagIsSet(), temp_v9 == 0)))))) {
         puVar6[puVar6[0x3d] + 10] = (unsigned int)puVar11;
         temp_v9 = puVar6[0x3d];
         puVar6[0x3d] = temp_v9 + 1;
@@ -157,7 +157,7 @@ void FUN_002e64a0(unsigned int param_1)
   }
   temp_v9 = 0;
   do {
-    FUN_001b4a90(puVar8 + temp_v9 * 4 + 0x19,0x10,0xffffffff);
+    __aeabi_memset4(puVar8 + temp_v9 * 4 + 0x19,0x10,0xffffffff);
     temp_v9 = temp_v9 + 1;
   } while (temp_v9 < 8);
   temp_v7 = 0;
@@ -264,7 +264,7 @@ LAB_002e6874:
         FUN_0039af48(temp_v7,0,(int)*(short *)(temp_v11 + 8) + (int)*(short *)(temp_v11 + 6));
       }
       puVar8[temp_v9 + 1] = temp_v7;
-      FUN_0014bdb4(*puVar8,puVar8[temp_v9 + 1]);
+      jobSetParent(*puVar8,puVar8[temp_v9 + 1]);
       jobSetWork3C(puVar8[temp_v9 + 1],*(unsigned char *)(puVar8[temp_v9 + 10] + 0xd) + 3);
     }
     temp_v9 = temp_v9 + 1;
@@ -280,30 +280,30 @@ LAB_002e6874:
       if ((!(temp_v1 != 0x7e && temp_v1 != 0x7f)) || (!(temp_v1 != 0x80 && temp_v1 != 0x81)))
       goto LAB_002e6b3c;
       FUN_0014afd0(0,*(unsigned short *)((int)puVar8 + 0x102));
-      FUN_0031a400();
+      campCommonBgAcquire();
       FUN_003b61ec();
-      FUN_00342010();
+      campButtonHelpAcquire();
       FUN_003423cc(0xa2);
       return;
     }
     if (temp_v1 == 0x41 || temp_v1 == 0x42) goto LAB_002e6b3c;
-    if ((!(temp_v1 != 0x60 && temp_v1 != 0x61)) && (temp_v9 = FUN_0018719c(0x9d), temp_v9 != 0)) {
+    if ((!(temp_v1 != 0x60 && temp_v1 != 0x61)) && (temp_v9 = gameFlagIsSet(0x9d), temp_v9 != 0)) {
       temp_v5 = 0xfb;
       *(unsigned short *)((int)puVar8 + 0x102) = temp_v5;
     }
   }
   else {
 LAB_002e6b3c:
-    temp_v9 = FUN_0018719c(0x170);
+    temp_v9 = gameFlagIsSet(0x170);
     if (temp_v9 == 0) goto LAB_002e6af4;
     temp_v5 = 0x3f;
     *(unsigned short *)((int)puVar8 + 0x102) = temp_v5;
   }
 LAB_002e6af4:
   FUN_0014afd0(0,*(unsigned short *)((int)puVar8 + 0x102));
-  FUN_0031a400();
+  campCommonBgAcquire();
   FUN_003b61ec();
-  FUN_00342010();
+  campButtonHelpAcquire();
   FUN_003423cc(0xa2);
   return;
 }

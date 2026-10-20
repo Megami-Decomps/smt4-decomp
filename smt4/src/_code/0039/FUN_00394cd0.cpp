@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00232b68(...);
 int FUN_00250d84(int, int);
-int FUN_002b4670(void);
+int dataTable08Sub1GetRecord(void);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -15,8 +15,8 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00232b68. */
 /* Supplied declaration required: FUN_00250d84. */
-extern int FUN_002a8764(void);
-/* Supplied declaration required: FUN_002b4670. */
+extern int gameGetSlotTable(void);
+/* Supplied declaration required: dataTable08Sub1GetRecord. */
 
 
 unsigned int FUN_00394cd0(int param_1,int param_2)
@@ -30,12 +30,12 @@ unsigned int FUN_00394cd0(int param_1,int param_2)
   unsigned char temp_v4;
   
   temp_v0 = param_1;
-  FUN_002b4670();
+  dataTable08Sub1GetRecord();
   if (temp_v0 != 0) {
     temp_v1 = -1;
     FUN_00232b68(0xffffffff,temp_v0,param_2,0,0);
     temp_v4 = temp_v1 == 0;
-    temp_v1 = FUN_002a8764();
+    temp_v1 = gameGetSlotTable();
     temp_v3 = 0;
     do {
       temp_v2 = (int)*(char *)(temp_v1 + temp_v3 + 0x90f0);

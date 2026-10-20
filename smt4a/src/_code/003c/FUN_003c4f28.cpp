@@ -8,7 +8,7 @@ int FUN_001517b4(...);
 int FUN_001834a4(...);
 int sysMemClear(int, int);
 int FUN_0035e6d4(...);
-int FUN_003d2d34(int, int, int);
+int soundChannelRequestIfEnabled(int, int, int);
 int FUN_003d54f8(int, int);
 int VectorSignedToFloat(...);
 
@@ -23,7 +23,7 @@ extern unsigned long long FUN_002121c4(unsigned int);
 extern int FUN_0028a230(int);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_0035e6d4. */
-/* Supplied declaration required: FUN_003d2d34. */
+/* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: FUN_003d54f8. */
 
 
@@ -85,7 +85,7 @@ LAB_003c4fac:
     if (temp_v2 != 0) {
       FUN_003d54f8(0,10);
       *(unsigned char *)(param_1 + 0x60) = 1;
-      FUN_003d2d34(0x1000001,0,0x3c);
+      soundChannelRequestIfEnabled(0x1000001,0,0x3c);
       sysMemClear(param_1 + 0x9c,0x1c4);
       temp_v2 = FUN_001834a4(0x2a,4);
       *(unsigned int *)(param_1 + 0x104) = 4;

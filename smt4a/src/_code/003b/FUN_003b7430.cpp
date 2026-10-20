@@ -7,8 +7,8 @@ extern "C" {
 int FUN_003df7c4(int);
 int FUN_004bcd90(short *);
 
-extern int FUN_001801a4(void);
-extern short *FUN_001ab854(void);
+extern int gameGetPlayerData(void);
+extern short *gameGetSlotRecord(void);
 /* Supplied declaration required: FUN_003df7c4. */
 extern int playerHasFlagBit(unsigned int);
 /* Supplied declaration required: FUN_004bcd90. */
@@ -29,11 +29,11 @@ unsigned char FUN_003b7430(int param_1,int param_2,int param_3)
   temp_v3 = 0;
   psVar4 = (short *)0x0;
   if (param_1 < 0) {
-    temp_v3 = FUN_001801a4();
+    temp_v3 = gameGetPlayerData();
     temp_v1 = playerHasFlagBit(1);
   }
   else {
-    psVar4 = (short *)FUN_001ab854();
+    psVar4 = (short *)gameGetSlotRecord();
     if (psVar4 == (short *)0x0) {
       return 1;
     }

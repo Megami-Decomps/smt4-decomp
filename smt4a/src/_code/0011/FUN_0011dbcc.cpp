@@ -6,14 +6,14 @@ extern "C" {
 
 int FUN_0010b1d8(int, unsigned int);
 int FUN_0011d3d0(int, unsigned char [64], int, int, int, int);
-int FUN_002e75fa(void);
+int sharedRefAddRef(void);
 int FUN_002e9c64(int, unsigned char *, int *, int);
 int FUN_002ea3d0(int, unsigned int);
 int FUN_002f451c(int *, unsigned int);
 int FUN_002f4db0(unsigned char [12], int, unsigned int, int, int, int, int);
-int FUN_002f4e86(unsigned char [12]);
+int refIsNonNegative(unsigned char [12]);
 int FUN_002f4f00(unsigned char [64]);
-int FUN_002f7cb0(int);
+int onlineJobSetStateWaiting(int);
 int FUN_00303cd8(unsigned char [64]);
 int FUN_00303d10(unsigned char [64], int, int);
 int FUN_00310e5e(...);
@@ -33,17 +33,17 @@ extern unsigned char LAB_0011dd97; /* 0x11dd97 */
 
 /* Supplied declaration required: FUN_0010b1d8. */
 /* Supplied declaration required: FUN_0011d3d0. */
-/* Supplied declaration required: FUN_002e75fa. */
+/* Supplied declaration required: sharedRefAddRef. */
 /* Supplied declaration required: FUN_002e9c64. */
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned int, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
-extern unsigned int FUN_002ee9ce(unsigned char *);
+extern unsigned int streamWriterFinish(unsigned char *);
 /* Supplied declaration required: FUN_002f451c. */
 extern int FUN_002f4d9c(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002f4db0. */
-/* Supplied declaration required: FUN_002f4e86. */
+/* Supplied declaration required: refIsNonNegative. */
 /* Supplied declaration required: FUN_002f4f00. */
-/* Supplied declaration required: FUN_002f7cb0. */
+/* Supplied declaration required: onlineJobSetStateWaiting. */
 /* Supplied declaration required: FUN_00303cd8. */
 /* Supplied declaration required: FUN_00303d10. */
 /* Supplied declaration required: FUN_00310e5e. */
@@ -66,7 +66,7 @@ void FUN_0011dbcc(int param_1)
   FUN_0010b1d8(temp_v0,*(unsigned int *)(param_1 + 0x74));
   if (temp_v0 != 0) {
     **(int **)(param_1 + 0x78) = temp_v0;
-    FUN_002e75fa();
+    sharedRefAddRef();
     temp_v1 = 2;
   }
   else {
@@ -83,12 +83,12 @@ void FUN_0011dbcc(int param_1)
       temp_v0 = FUN_002f4d9c(*(unsigned int *)(*(int *)(*(int *)(param_1 + 0x6c) + 0x20) + 8),10);
       *(unsigned int *)(param_1 + 0xcc) = *(unsigned int *)(temp_v0 + 0x78);
       *(int *)(param_1 + 200) = temp_v0;
-      temp_v1 = FUN_002ee9ce(temp_v2);
+      temp_v1 = streamWriterFinish(temp_v2);
       FUN_002f4db0(temp_v6,temp_v0,temp_v1,1,0,0,0);
-      FUN_002f4e86(temp_v6);
+      refIsNonNegative(temp_v6);
       temp_v1 = FUN_002ea3c0(temp_v7,0x11dcb9,0,&LAB_0011dcb0);
       FUN_002ea3d0(param_1,temp_v1);
-      FUN_002f7cb0(param_1);
+      onlineJobSetStateWaiting(param_1);
       FUN_002f4f00(temp_v2);
       return;
     }

@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_00152bec(void);
+int asdMdlManagerMarkDestroy(void);
 int FUN_00297468(unsigned int, int, int);
-int FUN_002aa568(int, unsigned int);
+int libc_strcmp(int, unsigned int);
 int strncpy(int, unsigned int, int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -14,9 +14,9 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_4_stack;
 
-/* Supplied declaration required: FUN_00152bec. */
+/* Supplied declaration required: asdMdlManagerMarkDestroy. */
 /* Supplied declaration required: FUN_00297468. */
-/* Supplied declaration required: FUN_002aa568. */
+/* Supplied declaration required: libc_strcmp. */
 
 
 void FUN_0023f2e4(int param_1,int param_2,unsigned int param_3,unsigned short param_4)
@@ -31,7 +31,7 @@ void FUN_0023f2e4(int param_1,int param_2,unsigned int param_3,unsigned short pa
   *(unsigned short *)(temp_v1 + 0x14) = param_4;
   if (*(int *)(temp_v1 + 0x18) != 0) {
     temp_v0 = temp_v1 + 0x20;
-    FUN_002aa568(temp_v0,param_3);
+    libc_strcmp(temp_v0,param_3);
     if (temp_v0 == 0) {
       return;
     }
@@ -41,7 +41,7 @@ void FUN_0023f2e4(int param_1,int param_2,unsigned int param_3,unsigned short pa
       *puVar2 = *puVar2 | 2;
       *(unsigned char *)(*(int *)(puVar2[2] + 0x2c) + 0x1f6) = 0;
       if (-1 < *(int *)(*(int *)(*(int *)(temp_v1 + 0x18) + 8) + 0xc)) {
-        FUN_00152bec();
+        asdMdlManagerMarkDestroy();
       }
     }
   }

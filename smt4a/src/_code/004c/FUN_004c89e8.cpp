@@ -5,13 +5,13 @@
 extern "C" {
 
 int asdMemFree(void);
-int FUN_00203d04(int);
+int dialogClose(int);
 
-extern int *DAT_005738e8; /* 0x5738e8 */
+extern int *g_btlHelp; /* 0x5738e8 */
 
 extern int FUN_001632fc(void);
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_00203d04. */
+/* Supplied declaration required: dialogClose. */
 
 
 void FUN_004c89e8(void)
@@ -23,16 +23,16 @@ void FUN_004c89e8(void)
   int temp_v1;
   int temp_v2;
   
-  temp_v0 = *DAT_005738e8;
+  temp_v0 = *g_btlHelp;
   while (temp_v0 != 0) {
     temp_v2 = *(int *)(temp_v0 + 0x874);
     if ((((-1 < *(short *)(temp_v0 + 0x872)) && (*(short *)(temp_v0 + 2) == 1)) &&
         ((*(unsigned short *)(temp_v0 + 6) & 1) == 0)) && (temp_v1 = FUN_001632fc(), temp_v1 != 0)) {
-      FUN_00203d04(1);
+      dialogClose(1);
     }
-    piVar2 = DAT_005738e8;
+    piVar2 = g_btlHelp;
     if (*(int *)(temp_v0 + 0x878) == 0) {
-      *DAT_005738e8 = *(int *)(temp_v0 + 0x874);
+      *g_btlHelp = *(int *)(temp_v0 + 0x874);
     }
     else {
       *(unsigned int *)(*(int *)(temp_v0 + 0x878) + 0x874) = *(unsigned int *)(temp_v0 + 0x874);

@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_00192550(void);
-int FUN_001aba54(void);
-int FUN_001b4a90(unsigned int *, int, unsigned int);
+int dataTable04FindById(void);
+int __aeabi_memset4(unsigned int *, int, unsigned int);
 int sysMemClear(unsigned int *, int);
-int FUN_002e6dd4(int, int);
+int rt_memclr(int, int);
 int FUN_003f0e20(unsigned int *, int);
 int FUN_004aa798(unsigned int, int, int);
 int FUN_004aaebc(unsigned int, int, int, int, int, int, int);
@@ -48,13 +48,13 @@ extern unsigned int DAT_00571218; /* 0x571218 */
 extern unsigned int DAT_0057121c; /* 0x57121c */
 extern unsigned int DAT_00571228; /* 0x571228 */
 extern unsigned int DAT_0057122c; /* 0x57122c */
-extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
+extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
 /* Supplied declaration required: FUN_00192550. */
-/* Supplied declaration required: FUN_001aba54. */
-/* Supplied declaration required: FUN_001b4a90. */
+/* Supplied declaration required: dataTable04FindById. */
+/* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_002e6dd4. */
+/* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: FUN_004aa798. */
 /* Supplied declaration required: FUN_004aaebc. */
@@ -104,7 +104,7 @@ void FUN_004dd0c4(int *param_1,unsigned int *param_2)
   temp_v2 = *(short *)(param_2[10] + 0x1be);
   temp_v11 = *(unsigned int *)(*(int *)(*param_1 + 0x1ffc) + (unsigned int)(unsigned short)param_2[0xb] * 0x408);
   temp_v12 = temp_v21;
-  FUN_001aba54();
+  dataTable04FindById();
   FUN_00192550();
   if (temp_v2 != 2) {
     if (temp_v2 == 8) {
@@ -113,7 +113,7 @@ void FUN_004dd0c4(int *param_1,unsigned int *param_2)
         temp_v16 = (unsigned int)*(unsigned short *)(temp_v21 + 0x32);
       }
       if ((!(temp_v21 == 0 || temp_v16 == 0)) &&
-         ((FUN_001aba54(), temp_v16 == 0 ||
+         ((dataTable04FindById(), temp_v16 == 0 ||
           (temp_v16 = (*(unsigned int *)(temp_v16 + 0x28) & 0x1ff) >> 5,
           !((temp_v16 != 2 && temp_v16 != 3) && temp_v16 != 4))))) {
         temp_v3 = 0;
@@ -180,8 +180,8 @@ LAB_004dd43c:
     }
     temp_v12 = temp_v12 + 1;
     if (temp_v12 >= 0x6d) {
-      FUN_001b4a90(param_2 + 0x51,0x214,0xffffffff);
-      FUN_001b4a90(param_2 + 0xd6,0x214,0xffffffff);
+      __aeabi_memset4(param_2 + 0x51,0x214,0xffffffff);
+      __aeabi_memset4(param_2 + 0xd6,0x214,0xffffffff);
       temp_v21 = 0;
       temp_v12 = 0;
       do {
@@ -193,8 +193,8 @@ LAB_004dd43c:
           if (((DAT_00571168 & *puVar20) != 0 || (DAT_0057116c & puVar20[1]) != 0) &&
              (((puVar20[1] & DAT_0057118c) == 0 && (DAT_00571188 & *puVar20) == 0 ||
               ((short)puVar20[2] == *(short *)(temp_v20 + 0x6a))))) {
-            temp_v11 = DAT_0057a9c8;
-            FUN_004aaebc(DAT_0057a9c8,*(unsigned short *)((int)puVar20 + 0x166),
+            temp_v11 = g_btlUiBlock;
+            FUN_004aaebc(g_btlUiBlock,*(unsigned short *)((int)puVar20 + 0x166),
                          (int)*(char *)(temp_v20 + 0x3c),(int)(short)puVar20[0x97],
                          (int)(short)puVar20[0x99],(short)puVar20[0x9d],0);
             temp_v17 = temp_v12 + 1;
@@ -205,9 +205,9 @@ LAB_004dd43c:
         temp_v21 = temp_v21 + 1;
         temp_v12 = temp_v17;
       } while (temp_v21 < 0x85);
-      FUN_004aa798(DAT_0057a9c8,*param_1 + 0x1ec8,5);
+      FUN_004aa798(g_btlUiBlock,*param_1 + 0x1ec8,5);
       sysMemClear(param_2 + 0xe,0x85);
-      FUN_002e6dd4((int)param_2 + 0xbd,0x85);
+      rt_memclr((int)param_2 + 0xbd,0x85);
       g_btlAction = 0xffffffff;
       temp_v12 = 0;
       do {

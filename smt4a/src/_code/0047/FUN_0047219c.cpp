@@ -33,7 +33,7 @@ extern unsigned int *FUN_001b5acc(unsigned int *);
 /* Supplied declaration required: FUN_001ba1c0. */
 /* Supplied declaration required: FUN_001d0fcc. */
 /* Supplied declaration required: FUN_001d1038. */
-extern int FUN_001d10ac(unsigned int *);
+extern int byteIsAtLeast100(unsigned int *);
 extern int FUN_001d25ec(unsigned int *);
 
 
@@ -89,7 +89,7 @@ unsigned int FUN_0047219c(void)
     uStack_48 = uStack_34;
     temp_v4 = uStack_30;
     uStack_40 = uStack_2c;
-    temp_v0 = FUN_001d10ac((unsigned int *)&temp_v2);
+    temp_v0 = byteIsAtLeast100((unsigned int *)&temp_v2);
     if (temp_v0 == 0) {
       return 1;
     }

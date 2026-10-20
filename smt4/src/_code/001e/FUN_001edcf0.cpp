@@ -8,13 +8,13 @@ int FUN_0019e0c0(...);
 int FUN_00223898(int, int);
 int FUN_00259274(int);
 int FUN_00259294(int);
-int FUN_0026b584(int);
+int gameDataBlocksAddFlags(int);
 int FUN_00289880(void);
 int FUN_002898e4(void);
 int FUN_00296e90(void);
-int FUN_00296f4c(...);
+int scrScriptProcessStartEntry(...);
 int FUN_00297060(void);
-int FUN_002b8838(int);
+int buttonHelpSetPreset(int);
 int FUN_002c40f8(unsigned char *, int *, int, int, int, int);
 int FUN_002c526c(void);
 int FUN_002c56dc(...);
@@ -27,7 +27,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_2_stack;
 
-extern unsigned char DAT_0043e310; /* 0x43e310 */
+extern unsigned char g_saveLoadThread; /* 0x43e310 */
 extern signed char DAT_0043e311; /* 0x43e311 */
 extern unsigned char DAT_0043e312; /* 0x43e312 */
 extern signed char DAT_0043e313; /* 0x43e313 */
@@ -38,14 +38,14 @@ extern int FUN_002103dc(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00223898. */
 /* Supplied declaration required: FUN_00259274. */
 /* Supplied declaration required: FUN_00259294. */
-/* Supplied declaration required: FUN_0026b584. */
+/* Supplied declaration required: gameDataBlocksAddFlags. */
 /* Supplied declaration required: FUN_00289880. */
 /* Supplied declaration required: FUN_002898e4. */
 /* Supplied declaration required: FUN_00296e90. */
-/* Supplied declaration required: FUN_00296f4c. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297060. */
 extern int FUN_0029ee2c(void);
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: FUN_002c40f8. */
 /* Supplied declaration required: FUN_002c526c. */
 /* Supplied declaration required: FUN_002c56dc. */
@@ -85,23 +85,23 @@ unsigned int FUN_001edcf0(unsigned int param_1,int param_2)
       if (temp_v0 != 3) {
         if (temp_v0 != 4) {
           temp_v1 = 8;
-          DAT_0043e310 = 1;
+          g_saveLoadThread = 1;
         }
         else {
-          DAT_0043e310 = 1;
-          FUN_00296f4c(*(unsigned int *)(temp_v2 + 0x58),3);
+          g_saveLoadThread = 1;
+          scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x58),3);
           temp_v1 = 4;
         }
       }
       else {
-        DAT_0043e310 = 1;
-        FUN_00296f4c(*(unsigned int *)(temp_v2 + 0x58),0);
+        g_saveLoadThread = 1;
+        scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x58),0);
         temp_v1 = 4;
       }
     }
     else {
-      DAT_0043e310 = 0;
-      FUN_00296f4c(*(unsigned int *)(temp_v2 + 0x58),4);
+      g_saveLoadThread = 0;
+      scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x58),4);
       temp_v1 = 9;
     }
     break;
@@ -111,7 +111,7 @@ unsigned int FUN_001edcf0(unsigned int param_1,int param_2)
     FUN_002c5758(1);
     FUN_002c5728(1);
     FUN_002c56dc(1);
-    FUN_002b8838(0xe6);
+    buttonHelpSetPreset(0xe6);
     if (DAT_0043e313 == '\0') {
       FUN_002898e4();
       FUN_00289880();
@@ -121,14 +121,14 @@ unsigned int FUN_001edcf0(unsigned int param_1,int param_2)
     if (temp_v0 != 2) {
       return 0;
     }
-    FUN_0026b584(1);
+    gameDataBlocksAddFlags(1);
     FUN_00259294(1);
     FUN_00259274(1);
-    FUN_00296f4c(*(unsigned int *)(temp_v2 + 0x58),1);
+    scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x58),1);
     temp_v1 = 5;
     break;
   case 5:
-    FUN_002b8838(0xe7);
+    buttonHelpSetPreset(0xe7);
     FUN_0019e0c0(*(unsigned int *)(temp_v2 + 0x58));
     FUN_00223898(temp_v2,1);
     temp_v1 = 6;
@@ -151,14 +151,14 @@ unsigned int FUN_001edcf0(unsigned int param_1,int param_2)
       }
     }
     FUN_002e2f14(temp_v2);
-    FUN_002b8838(0xe6);
+    buttonHelpSetPreset(0xe6);
     if (DAT_0043e311 != '\0') {
       FUN_002c5758(1);
       FUN_002c5728(1);
       FUN_002c56dc(1);
       FUN_00296e90();
       DAT_0043e312 = 0;
-      FUN_00296f4c(*(unsigned int *)(temp_v2 + 0x58),2);
+      scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x58),2);
       temp_v1 = 7;
     }
     else {
@@ -167,7 +167,7 @@ unsigned int FUN_001edcf0(unsigned int param_1,int param_2)
       FUN_002c56dc(1);
       FUN_00296e90();
       DAT_0043e312 = 0;
-      FUN_00296f4c(*(unsigned int *)(temp_v2 + 0x58),5);
+      scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x58),5);
       temp_v1 = 9;
     }
     break;

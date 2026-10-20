@@ -30,7 +30,7 @@ extern int DAT_00439a84; /* 0x439a84 */
 extern unsigned int DAT_00439a88; /* 0x439a88 */
 extern unsigned int DAT_00439a8c; /* 0x439a8c */
 extern unsigned int DAT_00439a90; /* 0x439a90 */
-extern unsigned int DAT_00439ca8; /* 0x439ca8 */
+extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 
 /* Supplied declaration required: FUN_0023f194. */
 /* Supplied declaration required: FUN_0023f27c. */
@@ -38,7 +38,7 @@ extern unsigned int DAT_00439ca8; /* 0x439ca8 */
 /* Supplied declaration required: FUN_00282820. */
 /* Supplied declaration required: FUN_00297468. */
 /* Supplied declaration required: FUN_0029c3c0. */
-extern int FUN_002c09bc(void);
+extern int gameDataBlocksGetSaveData(void);
 
 
 unsigned int * FUN_003357c0(unsigned int *param_1)
@@ -51,7 +51,7 @@ unsigned int * FUN_003357c0(unsigned int *param_1)
   
   if (param_1[2] == DAT_00439a70) {
     FUN_00282820(0,0,0,0,8,0,0xb,0);
-    FUN_00267d3c(DAT_00439ca8);
+    FUN_00267d3c(g_btlUiBlock);
   }
   if (param_1[2] == DAT_00439a84) {
     FUN_0023f27c(0,0,DAT_00439a88,0x10,0,DAT_00439a8c,0,2,0xffffffff);
@@ -78,7 +78,7 @@ unsigned int * FUN_003357c0(unsigned int *param_1)
       pcVar2 = "battle/gameover/level_event.mbm";
     }
     FUN_00297468(pcVar2,param_1 + 5,0);
-    temp_v1 = FUN_002c09bc();
+    temp_v1 = gameDataBlocksGetSaveData();
     temp_v0 = *(char *)(temp_v1 + 0x24b29);
     if (temp_v0 != -1) {
       *(char *)(temp_v1 + 0x24b29) = temp_v0 + '\x01';

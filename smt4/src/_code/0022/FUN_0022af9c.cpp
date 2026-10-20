@@ -7,11 +7,11 @@ typedef struct Obj {
     /* 0x20 */ u8 unk20;
 } Obj;
 
-extern Obj *DAT_0043e128;
+extern Obj *g_infoWin;
 
 void FUN_0022af9c(u8 value)
 {
-    DAT_0043e128->unk20 = value;
+    g_infoWin->unk20 = value;
 }
 
 } /* extern "C" */

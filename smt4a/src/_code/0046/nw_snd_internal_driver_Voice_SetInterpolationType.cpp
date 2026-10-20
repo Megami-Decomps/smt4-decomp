@@ -7,7 +7,7 @@ typedef struct VoiceList {
     /* 0x08 */ s32 count;
 } VoiceList;
 
-extern void FUN_00439fa4(s32 voice, u8 mode);
+extern void nn_snd_CTR_Voice_SetInterpolationType(s32 voice, u8 mode);
 
 void nw_snd_internal_driver_Voice_SetInterpolationType(VoiceList *list, s32 type)
 {
@@ -22,7 +22,7 @@ void nw_snd_internal_driver_Voice_SetInterpolationType(VoiceList *list, s32 type
             if (type != 0 && (mode = type == 1, !mode) && type == 2) {
                 mode = 2;
             }
-            FUN_00439fa4(voice, mode);
+            nn_snd_CTR_Voice_SetInterpolationType(voice, mode);
         }
     }
 }

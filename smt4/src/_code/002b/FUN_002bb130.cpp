@@ -4,7 +4,7 @@ extern "C" {
 
 void FUN_002bb130(u8 value)
 {
-    DAT_0044e380.unk05 = value;
+    g_nnAppletState.unk05 = value;
 }
 
 } /* extern "C" */

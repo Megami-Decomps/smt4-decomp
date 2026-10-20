@@ -8,11 +8,11 @@ int asdTMTexTableLoadTmx(int, int);
 int FUN_0014e188(...);
 int FUN_0014e220(...);
 int FUN_001505ac(unsigned char *, unsigned char *, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
-int FUN_00184758(...);
-int FUN_00184c00(...);
+int uiSpriteSetKeyframe(...);
+int uiSpriteSetImageKeyframe(...);
 int FUN_001a90e0(unsigned char *);
 int sysMemClear(...);
-int FUN_002e6dd4(unsigned char *, int);
+int rt_memclr(unsigned char *, int);
 int FUN_0048738c(unsigned char *);
 int FUN_00493660(unsigned char *, int, int, int);
 int FUN_004cf7cc(...);
@@ -39,12 +39,12 @@ extern unsigned char DAT_00616ee4; /* 0x616ee4 */
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: FUN_0014e220. */
 /* Supplied declaration required: FUN_001505ac. */
-extern int FUN_00162e8c(void);
-/* Supplied declaration required: FUN_00184758. */
-/* Supplied declaration required: FUN_00184c00. */
+extern int gameFlagsGetBlock(void);
+/* Supplied declaration required: uiSpriteSetKeyframe. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_001a90e0. */
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_002e6dd4. */
+/* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: FUN_0048738c. */
 /* Supplied declaration required: FUN_00493660. */
 /* Supplied declaration required: FUN_004cf7cc. */
@@ -60,7 +60,7 @@ void FUN_00485e74(unsigned char *param_1)
   int temp_v1;
   int temp_v2;
   
-  temp_v1 = FUN_00162e8c();
+  temp_v1 = gameFlagsGetBlock();
   FUN_0048738c(param_1);
   asdTMTexTableLoadTmx(0x28,0);
   param_1[0xc] = 0xff;
@@ -68,7 +68,7 @@ void FUN_00485e74(unsigned char *param_1)
   *param_1 = 0;
   param_1[0x55] = 0;
   *(unsigned int *)(param_1 + 0x10) = 0;
-  FUN_002e6dd4(param_1 + 0x66,0x100);
+  rt_memclr(param_1 + 0x66,0x100);
   param_1[100] = 0;
   param_1[0x65] = 0;
   FUN_00493660(param_1 + 0x4d0,0,0,0x13);
@@ -100,17 +100,17 @@ void FUN_00485e74(unsigned char *param_1)
   temp_v2 = 0;
   do {
     FUN_0014e188(param_1 + temp_v2 * 0x8c + 0xc40,0x13,0xfa1,param_1 + 0xc20,0x15);
-    FUN_00184758(param_1 + temp_v2 * 0x8c + 0xc40,4,0);
+    uiSpriteSetKeyframe(param_1 + temp_v2 * 0x8c + 0xc40,4,0);
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 6);
   FUN_0014e188(param_1 + 0x10a0,0x13,0x112d,param_1 + 0xc20,0x15);
-  FUN_00184758(param_1 + 0x10a0,4,0);
+  uiSpriteSetKeyframe(param_1 + 0x10a0,4,0);
   FUN_0014e188(param_1 + 0x11b8,0x13,0x1135,param_1 + 0xc20,0x15);
-  FUN_00184c00(param_1 + 0x11b8,3,0);
+  uiSpriteSetImageKeyframe(param_1 + 0x11b8,3,0);
   FUN_0014e188(param_1 + 0x1244,0x13,0x112e,param_1 + 0xc20,0x15);
-  FUN_00184c00(param_1 + 0x1244,5,0);
+  uiSpriteSetImageKeyframe(param_1 + 0x1244,5,0);
   FUN_0014e188(param_1 + 0x112c,0x13,0x112e,param_1 + 0xc20,0x15);
-  FUN_00184758(param_1 + 0x112c,4,0);
+  uiSpriteSetKeyframe(param_1 + 0x112c,4,0);
   FUN_004cf7cc(param_1 + 0x4e4);
   *(unsigned int *)(param_1 + 0x1480) = 0;
   *(unsigned int *)(param_1 + 0x1484) = 0xa0;
@@ -163,12 +163,12 @@ void FUN_00485e74(unsigned char *param_1)
   param_1[0x12d2] = 0;
   *(unsigned int *)(param_1 + 0x12d4) = 0;
   FUN_0014e220(param_1 + 0x12dc,0x13,0x1121,0x1d,param_1 + 0xc20,0x15);
-  FUN_00184758(param_1 + 0x12dc,0);
+  uiSpriteSetKeyframe(param_1 + 0x12dc,0);
   param_1[0x1368] = 0;
   param_1[0x1369] = 0;
   param_1[0x136a] = 0;
   FUN_0014e220(param_1 + 0x136c,0x13,0x111a,0x1c,param_1 + 0xc20,0x15);
-  FUN_00184758(param_1 + 0x136c,5,0);
+  uiSpriteSetKeyframe(param_1 + 0x136c,5,0);
   sysMemClear(&DAT_00616ee4,0x400);
   DAT_00587f24 = 0;
   return;

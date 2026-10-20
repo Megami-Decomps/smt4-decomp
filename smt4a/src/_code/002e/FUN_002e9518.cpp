@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_0030ff80(unsigned int *, unsigned int);
+int strDuplicateInto(unsigned int *, unsigned int);
 
 extern unsigned char DAT_0055affc; /* 0x55affc */
 
-/* Supplied declaration required: FUN_0030ff80. */
+/* Supplied declaration required: strDuplicateInto. */
 
 
 unsigned int * FUN_002e9518(unsigned int *param_1,int param_2)
@@ -16,7 +16,7 @@ unsigned int * FUN_002e9518(unsigned int *param_1,int param_2)
 {
 /* irregular: 1 native warning(s); review required */
   *param_1 = (unsigned int)&DAT_0055affc;
-  FUN_0030ff80(param_1 + 1,*(unsigned int *)(param_2 + 4));
+  strDuplicateInto(param_1 + 1,*(unsigned int *)(param_2 + 4));
   return param_1;
 }
 

@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_002e93da(void);
+int onlineUrlEnsureParsed(void);
 int FUN_002e954a(int, unsigned int);
-int FUN_002e9598(void);
+int onlineStringAssign(void);
 
-/* Supplied declaration required: FUN_002e93da. */
+/* Supplied declaration required: onlineUrlEnsureParsed. */
 /* Supplied declaration required: FUN_002e954a. */
-/* Supplied declaration required: FUN_002e9598. */
+/* Supplied declaration required: onlineStringAssign. */
 
 
 unsigned int FUN_00103afc(int param_1,unsigned int param_2,unsigned int param_3,int param_4)
@@ -19,7 +19,7 @@ unsigned int FUN_00103afc(int param_1,unsigned int param_2,unsigned int param_3,
 /* irregular: 3 native warning(s); review required */
   int temp_v0;
   
-  FUN_002e93da();
+  onlineUrlEnsureParsed();
   if (param_4 != 0) {
     temp_v0 = param_1 + 0x44;
   }
@@ -27,7 +27,7 @@ unsigned int FUN_00103afc(int param_1,unsigned int param_2,unsigned int param_3,
     temp_v0 = param_1 + 0x28;
   }
   FUN_002e954a(temp_v0,param_2);
-  FUN_002e9598();
+  onlineStringAssign();
   *(unsigned char *)(param_1 + 0x65) = 0;
   return 1;
 }

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0023346c(int);
-int FUN_002af5c0(int, int);
+int uiSpriteSetImageKeyframe(int, int);
 int FUN_002bd954(int, int, int, int, int);
 int FUN_002c312c(int, unsigned char *, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(void);
@@ -26,7 +26,7 @@ extern unsigned char DAT_00404e14; /* 0x404e14 */
 extern unsigned char DAT_00404e2c; /* 0x404e2c */
 
 /* Supplied declaration required: FUN_0023346c. */
-/* Supplied declaration required: FUN_002af5c0. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002c312c. */
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
@@ -74,7 +74,7 @@ void FUN_003bb1f0(int param_1)
   do {
     temp_v2 = param_1 + temp_v1 * 0x8c + 0x654;
     FUN_002bd954(temp_v2,0x2a,0,temp_v0,0x15);
-    FUN_002af5c0(temp_v2,0);
+    uiSpriteSetImageKeyframe(temp_v2,0);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 10);
   FUN_002bd954(param_1 + 0xbcc,0x2a,0,temp_v0,0x15);

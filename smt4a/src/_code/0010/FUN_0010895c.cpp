@@ -6,15 +6,15 @@ extern "C" {
 
 int FUN_002e6e34(unsigned char [12], unsigned int);
 int FUN_002e6e5c(...);
-int FUN_002e7232(...);
+int sharedRefRelease(...);
 int strAssign(int *, unsigned int, unsigned int, unsigned int);
-int FUN_002e760a(int);
+int operatorNew(int);
 int FUN_002e7908(...);
 int FUN_002eb108(int *, int, unsigned int, int);
 int FUN_002eb7d0(int, int);
 int FUN_002eb7e0(int *, int, unsigned int, int);
 int FUN_002ef34c(int *, int, int);
-int FUN_002f143e(int **);
+int vectorInitEmpty4(int **);
 int FUN_002f1448(int **, int *[3]);
 int FUN_002f1468(int *, int *);
 int FUN_002f1486(...);
@@ -47,13 +47,13 @@ typedef struct {
 
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-/* Supplied declaration required: FUN_002e7232. */
+/* Supplied declaration required: sharedRefRelease. */
 /* Supplied declaration required: strAssign. */
-/* Supplied declaration required: FUN_002e760a. */
+/* Supplied declaration required: operatorNew. */
 extern int *FUN_002e7614(int, unsigned int);
 /* Supplied declaration required: FUN_002e7908. */
 extern int FUN_002ea6fc(int *, int **);
-extern unsigned int FUN_002ea714(void);
+extern unsigned int onlineGetActiveLock(void);
 /* Supplied declaration required: FUN_002eb108. */
 /* Supplied declaration required: FUN_002eb7d0. */
 /* Supplied declaration required: FUN_002eb7e0. */
@@ -61,7 +61,7 @@ extern int FUN_002eb83c(void);
 /* Supplied declaration required: FUN_002ef34c. */
 extern int *FUN_002eff58(int, unsigned int);
 extern int FUN_002eff84(void);
-/* Supplied declaration required: FUN_002f143e. */
+/* Supplied declaration required: vectorInitEmpty4. */
 /* Supplied declaration required: FUN_002f1448. */
 /* Supplied declaration required: FUN_002f1468. */
 /* Supplied declaration required: FUN_002f1486. */
@@ -103,9 +103,9 @@ void FUN_0010895c(int *param_1,int param_2,fn_0010895c_arg2 *param_3,unsigned in
   temp_v16 = param_2;
   pfStack_1c = param_3;
   temp_v17 = param_4;
-  temp_v0 = FUN_002ea714();
+  temp_v0 = onlineGetActiveLock();
   FUN_002e6e34(temp_v11,temp_v0);
-  FUN_002f143e(&temp_v9);
+  vectorInitEmpty4(&temp_v9);
   while (piVar3 = temp_v9, temp_v5 < (unsigned int)param_3->field_0x10) {
     piVar6 = (int *)0x0;
     if ((int)((unsigned int)param_3->field_0x1c << 0x1d) < 0) {
@@ -125,7 +125,7 @@ void FUN_0010895c(int *param_1,int param_2,fn_0010895c_arg2 *param_3,unsigned in
       }
       break;
     }
-    temp_v1 = FUN_002e760a(0x20);
+    temp_v1 = operatorNew(0x20);
     if (temp_v1 != 0) {
       piVar6 = (int *)FUN_002e7614(temp_v1,temp_v17);
     }
@@ -148,7 +148,7 @@ LAB_001089c6:
       }
       temp_v8[0] = piVar3;
       if ((piVar3 == (int *)0x0) || (temp_v1 = FUN_002eb83c(), piVar3 = temp_v8[0], temp_v1 == 0)) {
-        FUN_002e7232(piVar6);
+        sharedRefRelease(piVar6);
         piVar3 = temp_v9;
         if (temp_v8[0] != (int *)0x0) {
           pcVar4 = *(romwright_code **)(*temp_v8[0] + 4);
@@ -160,7 +160,7 @@ LAB_001089c6:
       }
     }
     else {
-      piVar3 = (int *)FUN_002e760a(0x150);
+      piVar3 = (int *)operatorNew(0x150);
       if (piVar3 != (int *)0x0) {
         temp_v7 = param_9;
         temp_v6 = piVar6;
@@ -193,14 +193,14 @@ LAB_001089c6:
     temp_v6 = (int *)((unsigned int)temp_v6 & 0xffffff00);
     temp_v1 = FUN_002ea6fc(&temp_v7,&temp_v6);
     if (temp_v1 != 0) break;
-    FUN_002e7232(temp_v3);
-    FUN_002e7232(temp_v14);
+    sharedRefRelease(temp_v3);
+    sharedRefRelease(temp_v14);
     piVar3 = piVar3 + 1;
   } while( 1 );
   for (; temp_v10 != piVar3; piVar3 = piVar3 + 1) {
     temp_v0 = *(unsigned int *)(*piVar3 + 0xd8);
-    FUN_002e7232();
-    FUN_002e7232(temp_v0);
+    sharedRefRelease();
+    sharedRefRelease(temp_v0);
   }
   *temp_v15 = temp_v7;
   temp_v15[1] = iStack_58;

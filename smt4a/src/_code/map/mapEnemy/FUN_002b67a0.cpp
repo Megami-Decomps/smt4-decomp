@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00162e8c(void);
+int gameFlagsGetBlock(void);
 int FUN_00178b04(int, unsigned char *, int);
 int FUN_002b5cb4(void);
 int FUN_002d7c88(unsigned int);
@@ -25,7 +25,7 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned char LAB_002b6c7c; /* 0x2b6c7c */
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern int DAT_005806d4; /* 0x5806d4 */
 extern int g_lmapScene; /* 0x581288 */
 
@@ -34,10 +34,10 @@ extern int g_lmapScene; /* 0x581288 */
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-extern int FUN_0014bef4(unsigned int);
-/* Supplied declaration required: FUN_00162e8c. */
+extern int randRange(unsigned int);
+/* Supplied declaration required: gameFlagsGetBlock. */
 /* Supplied declaration required: FUN_00178b04. */
-extern int FUN_0018719c(void);
+extern int gameFlagIsSet(void);
 /* Supplied declaration required: FUN_002b5cb4. */
 /* Supplied declaration required: FUN_002d7c88. */
 /* Supplied declaration required: FUN_00357b18. */
@@ -71,7 +71,7 @@ unsigned int FUN_002b67a0(int param_1)
   short temp_v10;
   
   temp_v0 = DAT_005806d4;
-  FUN_00162e8c();
+  gameFlagsGetBlock();
   pcVar7 = (char *)0x0;
   *(unsigned char *)(temp_v0 + 0x3d88) = 0;
   temp_v2 = FUN_003b99d4();
@@ -96,9 +96,9 @@ unsigned int FUN_002b67a0(int param_1)
           temp_v7 = romwright_piece_4_4(temp_v6,temp_v9);
           temp_v2 = FUN_00364444();
           if ((temp_v2 == 0) &&
-             ((*(short *)(pcVar4 + 0x14) == 0 || (temp_v2 = FUN_0018719c(), temp_v2 != 0)))) {
+             ((*(short *)(pcVar4 + 0x14) == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 != 0)))) {
             if (*(short *)(pcVar4 + 0x16) != 0) {
-              temp_v2 = FUN_0018719c();
+              temp_v2 = gameFlagIsSet();
               temp_v5 = temp_v2 != 0;
               if (temp_v5) {
                 sub68OwnerStart1();
@@ -164,11 +164,11 @@ unsigned int FUN_002b67a0(int param_1)
 LAB_002b6a7c:
                     *(unsigned int *)(temp_v4 + 0xb8) = 2;
                     *(unsigned int *)(temp_v4 + 0xbc) = 0;
-                    temp_v2 = FUN_0014bef4(200);
+                    temp_v2 = randRange(200);
                     *(int *)(temp_v4 + 0xc0) = temp_v2 + 0x3c;
                     *(unsigned int *)(temp_v4 + 0xc4) = 0;
                     *(unsigned int *)(temp_v4 + 0x1a4) = 0;
-                    temp_v2 = FUN_0014bef4(0x96);
+                    temp_v2 = randRange(0x96);
                     *(int *)(temp_v4 + 0xd8) = temp_v2 + 1;
                     *(unsigned char *)(temp_v4 + 0x170) = 0;
                     *(unsigned char *)(temp_v4 + 0x171) = 0;
@@ -190,7 +190,7 @@ LAB_002b6ad4:
                       }
                       *(unsigned int *)(temp_v4 + 0x1b4) = temp_v9;
                       moriModelContentCopyBody();
-                      FUN_0040ace8(DAT_0056fcc0,*(unsigned int *)(*(int *)(temp_v4 + 0x1b4) + 4));
+                      FUN_0040ace8(g_handleRegistry,*(unsigned int *)(*(int *)(temp_v4 + 0x1b4) + 4));
                       *(unsigned char *)(temp_v4 + 0x1b9) = 1;
                     }
                     else {
@@ -231,8 +231,8 @@ LAB_002b6ad4:
         else {
           temp_v2 = FUN_00364444((int)temp_v10);
           if (((temp_v2 != 0) ||
-              ((*(short *)(pcVar4 + 0x14) != 0 && (temp_v2 = FUN_0018719c(), temp_v2 == 0)))) ||
-             ((*(short *)(pcVar4 + 0x16) != 0 && (temp_v2 = FUN_0018719c(), temp_v2 != 0)))) {
+              ((*(short *)(pcVar4 + 0x14) != 0 && (temp_v2 = gameFlagIsSet(), temp_v2 == 0)))) ||
+             ((*(short *)(pcVar4 + 0x16) != 0 && (temp_v2 = gameFlagIsSet(), temp_v2 != 0)))) {
             sub68OwnerStart1(pcVar7);
           }
         }

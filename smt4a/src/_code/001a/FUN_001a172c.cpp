@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001a08d8(int);
+int nn_os_LightEvent_Signal(int);
 int FUN_001a0d08(int);
 int FUN_002e3140(void);
 int coproc_moveto_Data_Synchronization(int);
@@ -14,7 +14,7 @@ extern unsigned char DAT_0064497c; /* 0x64497c */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: coproc_moveto_Data_Synchronization (CALLOTHER). */
-/* Supplied declaration required: FUN_001a08d8. */
+/* Supplied declaration required: nn_os_LightEvent_Signal. */
 /* Supplied declaration required: FUN_001a0d08. */
 /* Supplied declaration required: FUN_002e3140. */
 
@@ -37,7 +37,7 @@ void FUN_001a172c(int param_1)
     }
     *(unsigned char *)(param_1 + 0xe) = 0;
     coproc_moveto_Data_Synchronization(0);
-    FUN_001a08d8(param_1 + 0x48);
+    nn_os_LightEvent_Signal(param_1 + 0x48);
   }
   if (*(char *)(param_1 + 0xc) != '\0') {
     *(unsigned char *)(param_1 + 0xd) = 0;

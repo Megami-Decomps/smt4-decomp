@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_00293a04(int, int);
-int FUN_00296d6c(...);
+int randBetween(...);
 int __aeabi_idivmod(int, double);
 
 /* Supplied declaration required: FUN_00293a04. */
-/* Supplied declaration required: FUN_00296d6c. */
+/* Supplied declaration required: randBetween. */
 /* Supplied declaration required: __aeabi_idivmod. */
 
 
@@ -37,12 +37,12 @@ void FUN_002e27c4(int param_1,int param_2,int param_3,int param_4)
         }
         else if (param_3 != 1) {
           if (param_3 == 2) {
-            temp_v0 = FUN_00296d6c(0,temp_v4);
+            temp_v0 = randBetween(0,temp_v4);
             *(short *)(temp_v3 + 4) = temp_v0;
           }
         }
         else {
-          temp_v0 = FUN_00296d6c(0,4);
+          temp_v0 = randBetween(0,4);
           temp_v0 = temp_v0 << 2;
           *(short *)(temp_v3 + 4) = temp_v0;
         }

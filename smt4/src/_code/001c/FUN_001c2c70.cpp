@@ -12,9 +12,9 @@ int FUN_0029118c(int, double, int);
 int FUN_00291234(int, double, int);
 int FUN_00291310(double, float *, float *, int);
 int FUN_00291340(float *, float *, float *, float *);
-int FUN_00291414(double);
+int nodeTreeReleaseItemClearOwner(double);
 int FUN_00291620(...);
-int FUN_002916ac(...);
+int nodeTreeReleaseItem(...);
 int FUN_002a7bc0(...);
 int FUN_002b2144(...);
 int mtx44Copy(...);
@@ -70,10 +70,10 @@ extern int DAT_00433238; /* 0x433238 */
 /* Supplied declaration required: FUN_00291234. */
 /* Supplied declaration required: FUN_00291310. */
 /* Supplied declaration required: FUN_00291340. */
-/* Supplied declaration required: FUN_00291414. */
+/* Supplied declaration required: nodeTreeReleaseItemClearOwner. */
 /* Supplied declaration required: FUN_00291620. */
-/* Supplied declaration required: FUN_002916ac. */
-extern int FUN_00296d6c(unsigned int, unsigned int);
+/* Supplied declaration required: nodeTreeReleaseItem. */
+extern int randBetween(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002a7bc0. */
 /* Supplied declaration required: FUN_002b2144. */
 /* Supplied declaration required: mtx44Copy. */
@@ -133,7 +133,7 @@ void FUN_001c2c70(float *param_1)
       temp_v7 = 0;
       if (param_1 != (float *)0x0) {
         do {
-          FUN_00291414(param_1[temp_v7 + 0x99]);
+          nodeTreeReleaseItemClearOwner(param_1[temp_v7 + 0x99]);
           temp_v7 = temp_v7 + 1;
         } while (temp_v7 < 0x32);
         param_1[9] = 0.0f;
@@ -146,7 +146,7 @@ void FUN_001c2c70(float *param_1)
         if ((unsigned int *)romwright_f2u((float)(param_1[0x95])) != (unsigned int *)0x0) {
           *(unsigned int *)romwright_f2u((float)(param_1[0x95])) = 0;
         }
-        FUN_002916ac(param_1);
+        nodeTreeReleaseItem(param_1);
         return;
       }
     }
@@ -182,7 +182,7 @@ void FUN_001c2c70(float *param_1)
         param_1[0x97] = 0.0f;
       }
       else if (param_1[(int)temp_v8 + 0x99] != 0.0f) {
-        FUN_002916ac();
+        nodeTreeReleaseItem();
       }
       temp_v20 = param_1[0x93];
       temp_v19 = (float *)(unsigned int)*(unsigned char *)(param_1 + 0x96);
@@ -218,7 +218,7 @@ void FUN_001c2c70(float *param_1)
           }
         }
         else {
-          temp_v6 = FUN_00296d6c(0,8);
+          temp_v6 = randBetween(0,8);
           unaff_r6 = temp_v6 * -0x2d;
         }
       }

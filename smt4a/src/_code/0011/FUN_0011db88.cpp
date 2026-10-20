@@ -11,9 +11,9 @@ extern unsigned char DAT_0055a9f8; /* 0x55a9f8 */
 extern unsigned char DAT_0055aa44; /* 0x55aa44 */
 
 extern int FUN_00120458(int);
-extern int FUN_002e9318(int);
+extern int onlineStringDestroy(int);
 /* Supplied declaration required: FUN_002ecac4. */
-extern int FUN_002eda5a(unsigned int *);
+extern int vectorDestroyBytes(unsigned int *);
 extern int FUN_002fb028(int);
 
 
@@ -28,10 +28,10 @@ void FUN_0011db88(unsigned int *param_1)
   if ((int *)param_1[0x1d] != (int *)0x0) {
     (**(romwright_code **)(*(int *)param_1[0x1d] + 4))();
   }
-  temp_v0 = FUN_002eda5a(param_1 + 0x54);
+  temp_v0 = vectorDestroyBytes(param_1 + 0x54);
   temp_v0 = FUN_00120458(temp_v0 - 0x2c);
   temp_v0 = FUN_002fb028(temp_v0 - 0x94);
-  temp_v0 = FUN_002e9318(temp_v0 - 0x14);
+  temp_v0 = onlineStringDestroy(temp_v0 - 0x14);
   FUN_002ecac4(temp_v0 - 0x7c);
   return;
 }

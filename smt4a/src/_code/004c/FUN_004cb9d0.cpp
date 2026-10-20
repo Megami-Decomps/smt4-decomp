@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0050dda4(void);
 
-extern int DAT_00571508; /* 0x571508 */
+extern int g_btlCamera; /* 0x571508 */
 
 /* Supplied declaration required: FUN_0050dda4. */
 
@@ -21,15 +21,15 @@ void FUN_004cb9d0(int param_1)
   float temp_v3;
   float temp_v4;
   
-  temp_v1 = DAT_00571508;
+  temp_v1 = g_btlCamera;
   if ((*(unsigned int *)(param_1 + 0x50) & 0x200000) != 0) {
     *(unsigned int *)(param_1 + 0x40) = 0x3f800000;
   }
   else {
     temp_v0 = *(char *)(param_1 + 0x3c);
     temp_v3 = 0.1f;
-    temp_v4 = *(float *)(DAT_00571508 + 0x588);
-    temp_v2 = *(float *)(DAT_00571508 + 0x5c0) * 0.5f * 0.0055555557f * 3.1415927f;
+    temp_v4 = *(float *)(g_btlCamera + 0x588);
+    temp_v2 = *(float *)(g_btlCamera + 0x5c0) * 0.5f * 0.0055555557f * 3.1415927f;
     FUN_0050dda4();
     temp_v4 = temp_v4 / (120.0f / temp_v2);
     temp_v2 = temp_v4;

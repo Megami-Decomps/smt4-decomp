@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_0028d6d0(void);
+int buttonHelpCreate(void);
 int FUN_00297060(unsigned int, unsigned int);
 int FUN_0029f848(unsigned char *, int, int, int, int, int);
-int FUN_002af5c0(...);
+int uiSpriteSetImageKeyframe(...);
 int timerStart(...);
 int FUN_002bd954(...);
 int FUN_002bee58(...);
@@ -44,12 +44,12 @@ extern unsigned char DAT_004055d0; /* 0x4055d0 */
 extern unsigned char DAT_004055e8; /* 0x4055e8 */
 extern unsigned char DAT_0040560c; /* 0x40560c */
 
-extern unsigned int *FUN_0024bb38(void);
-extern unsigned int *FUN_00288f60(void);
-/* Supplied declaration required: FUN_0028d6d0. */
+extern unsigned int *gameDataGetSecondName(void);
+extern unsigned int *gameDataGetPlayerName(void);
+/* Supplied declaration required: buttonHelpCreate. */
 /* Supplied declaration required: FUN_00297060. */
 /* Supplied declaration required: FUN_0029f848. */
-/* Supplied declaration required: FUN_002af5c0. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 extern unsigned int *FUN_002bd1fc(void);
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
@@ -120,7 +120,7 @@ void FUN_003984ac(unsigned char *param_1,unsigned char param_2)
     *(unsigned short *)(param_1 + 0xc0) = *(unsigned short *)(puVar1 + 4);
   }
   if (param_1[0x649] == '\x01') {
-    puVar1 = (unsigned int *)FUN_00288f60();
+    puVar1 = (unsigned int *)gameDataGetPlayerName();
     *(unsigned int *)(param_1 + 0xb0) = *puVar1;
     *(unsigned int *)(param_1 + 0xb4) = puVar1[1];
     *(unsigned int *)(param_1 + 0xb8) = puVar1[2];
@@ -128,7 +128,7 @@ void FUN_003984ac(unsigned char *param_1,unsigned char param_2)
     *(unsigned short *)(param_1 + 0xc0) = *(unsigned short *)(puVar1 + 4);
   }
   if (param_1[0x649] == '\x02') {
-    puVar1 = (unsigned int *)FUN_0024bb38();
+    puVar1 = (unsigned int *)gameDataGetSecondName();
     *(unsigned int *)(param_1 + 0xb0) = *puVar1;
     *(unsigned int *)(param_1 + 0xb4) = puVar1[1];
     *(unsigned int *)(param_1 + 0xb8) = puVar1[2];
@@ -158,8 +158,8 @@ void FUN_003984ac(unsigned char *param_1,unsigned char param_2)
   FUN_002bd954(param_1 + 0x708,0x2e,0,puVar3,1);
   timerStart(param_1 + 0x708,0);
   FUN_002bd954(param_1 + 0x794,0x2e,0,puVar3,1);
-  FUN_002af5c0(param_1 + 0x794,0);
-  FUN_0028d6d0();
+  uiSpriteSetImageKeyframe(param_1 + 0x794,0);
+  buttonHelpCreate();
   *(unsigned short *)(param_1 + 0x940) = 0x95;
   return;
 }

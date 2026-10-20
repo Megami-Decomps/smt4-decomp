@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_002e7908(unsigned char [12], int *);
-int FUN_002e9a64(unsigned int, char [4]);
-int FUN_002e9afe(unsigned int, unsigned char *);
+int streamReaderExtractU8(unsigned int, char [4]);
+int vectorCopyHeader(unsigned int, unsigned char *);
 int FUN_002f4d2c(unsigned int, int *);
 
 /* stack frame of param_2: 2 slot(s), 5 byte(s) */
@@ -16,8 +16,8 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_002e7908. */
-/* Supplied declaration required: FUN_002e9a64. */
-/* Supplied declaration required: FUN_002e9afe. */
+/* Supplied declaration required: streamReaderExtractU8. */
+/* Supplied declaration required: vectorCopyHeader. */
 /* Supplied declaration required: FUN_002f4d2c. */
 
 
@@ -32,7 +32,7 @@ void FUN_002f4e14(unsigned int param_1,unsigned int param_2)
   
   puVar1 = temp_v0;
   temp_v1[0] = -1;
-  FUN_002e9a64(param_1,temp_v1);
+  streamReaderExtractU8(param_1,temp_v1);
   if (temp_v1[0] != '\0') {
     if (temp_v1[0] == '\x01') {
       temp_v2 = 0x10001;
@@ -46,7 +46,7 @@ void FUN_002f4e14(unsigned int param_1,unsigned int param_2)
     FUN_002f4d2c(param_1,&temp_v2);
     FUN_002e7908(temp_v0,&temp_v2);
   }
-  FUN_002e9afe(param_2,puVar1);
+  vectorCopyHeader(param_2,puVar1);
   return;
 }
 

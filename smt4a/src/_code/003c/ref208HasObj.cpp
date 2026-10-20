@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern Ref208B DAT_0057f208;
+extern Ref208B g_commonBg;
 
 u8 ref208HasObj(void)
 {
-    return DAT_0057f208.obj != NULL;
+    return g_commonBg.obj != NULL;
 }
 
 } /* extern "C" */

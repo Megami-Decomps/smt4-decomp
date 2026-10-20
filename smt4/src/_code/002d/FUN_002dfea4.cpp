@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdMdlManagerDestroy(unsigned int);
-int FUN_002ae898(int, int);
+int asdTMTexTableReleaseNode(int, int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -15,7 +15,7 @@ typedef struct {
 extern int g_mapIf; /* 0x447a78 */
 
 /* Supplied declaration required: asdMdlManagerDestroy. */
-/* Supplied declaration required: FUN_002ae898. */
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
 
 
 void FUN_002dfea4(void)
@@ -30,7 +30,7 @@ void FUN_002dfea4(void)
   asdMdlManagerDestroy(*(unsigned int *)(g_mapIf + 0xcbec));
   *(unsigned int *)(temp_v0 + 0xcbec) = 0;
   *puVar2 = 0;
-  FUN_002ae898(10,0x25);
+  asdTMTexTableReleaseNode(10,0x25);
   return;
 }
 

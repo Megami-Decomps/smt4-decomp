@@ -7,7 +7,7 @@ extern "C" {
 int scrGetArg(...);
 int scrSetResult(int);
 
-extern int FUN_0014bef4(unsigned int);
+extern int randRange(unsigned int);
 /* Supplied declaration required: scrGetArg. */
 /* Supplied declaration required: scrSetResult. */
 
@@ -23,7 +23,7 @@ unsigned int FUN_002cc320(void)
   temp_v0 = scrGetArg();
   temp_v1 = scrGetArg(1);
   if (temp_v0 < (int)temp_v1) {
-    temp_v2 = FUN_0014bef4(temp_v1 & 0xffff);
+    temp_v2 = randRange(temp_v1 & 0xffff);
     scrSetResult(temp_v2 < temp_v0);
     return 1;
   }

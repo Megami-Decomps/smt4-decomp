@@ -6,7 +6,7 @@ extern "C" {
 
 extern unsigned char g_gameDataBlocks; /* 0x57f698 */
 
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 extern unsigned int FUN_0019e52c(unsigned int);
 
 
@@ -24,14 +24,14 @@ unsigned int FUN_0018416c(unsigned int param_1)
   unsigned int temp_v7;
   int temp_v8;
   
-  temp_v0 = FUN_0018719c(0x45b);
+  temp_v0 = gameFlagIsSet(0x45b);
   if (temp_v0 == 0) {
     return 0;
   }
   temp_v6 = 0;
   temp_v5 = 0;
   temp_v8 = (*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x88;
-  temp_v0 = FUN_0018719c(0x4f6);
+  temp_v0 = gameFlagIsSet(0x4f6);
   if (temp_v0 != 0) {
     temp_v0 = 0;
     do {
@@ -50,7 +50,7 @@ unsigned int FUN_0018416c(unsigned int param_1)
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < 0x14);
   }
-  temp_v0 = FUN_0018719c(0x4f7);
+  temp_v0 = gameFlagIsSet(0x4f7);
   if (temp_v0 != 0) {
     temp_v0 = 0;
     do {

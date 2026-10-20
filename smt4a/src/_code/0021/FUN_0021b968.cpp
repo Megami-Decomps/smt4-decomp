@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0015f490(unsigned int, int, int, int);
 
 /* Supplied declaration required: FUN_0015f490. */
-extern int FUN_001ab888(void);
+extern int gameGetSlotTable(void);
 
 
 void FUN_0021b968(int param_1,int param_2,unsigned int param_3,int param_4)
@@ -18,7 +18,7 @@ void FUN_0021b968(int param_1,int param_2,unsigned int param_3,int param_4)
   unsigned char *puVar2;
   int temp_v1;
   
-  temp_v0 = FUN_001ab888();
+  temp_v0 = gameGetSlotTable();
   temp_v1 = 0;
   if ((*(char *)(temp_v0 + 0x1ca0) < '\0') ||
      (*(char *)(temp_v0 + 0x1ca0) != *(char *)(temp_v0 + param_2 + 0x1c88))) {

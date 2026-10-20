@@ -9,12 +9,12 @@ int FUN_0015f858(int, int);
 int FUN_001654f8(...);
 int FUN_00168594(...);
 int FUN_00180118(...);
-int FUN_0019a7f4(...);
+int asdTMTexTableReleaseNode(...);
 int FUN_0019e52c(...);
 int FUN_001a90f0(unsigned short *, unsigned char *);
 int FUN_0023723c(...);
 int FUN_002adba8(...);
-int FUN_002e6dd0(...);
+int rt_aeabi_memclr(...);
 int FUN_00371c3c(...);
 int FUN_0038b3f8(...);
 int FUN_003a7a88(...);
@@ -40,17 +40,17 @@ extern unsigned int FUN_0014bd84(void);
 extern unsigned int FUN_0014bf3c(short, unsigned int);
 /* Supplied declaration required: FUN_0015f858. */
 /* Supplied declaration required: FUN_001654f8. */
-extern unsigned int FUN_0016780c(int, unsigned int, unsigned int);
+extern unsigned int fileSectionGetData(int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00168594. */
 /* Supplied declaration required: FUN_00180118. */
-extern int FUN_0018206c(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0019a7f4. */
+extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
 extern unsigned int FUN_0019acdc(short, unsigned int);
 /* Supplied declaration required: FUN_0019e52c. */
 /* Supplied declaration required: FUN_001a90f0. */
 /* Supplied declaration required: FUN_0023723c. */
 /* Supplied declaration required: FUN_002adba8. */
-/* Supplied declaration required: FUN_002e6dd0. */
+/* Supplied declaration required: rt_aeabi_memclr. */
 extern int dataTable4AGetEntry2C(unsigned char);
 extern unsigned short FUN_0036fcd0(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00371c3c. */
@@ -90,11 +90,11 @@ void FUN_003a498c(unsigned int *param_1,short *param_2,int param_3)
     FUN_001654f8(temp_v2,&temp_v12,0);
   }
   else {
-    FUN_002e6dd0(&temp_v12,0x80);
+    rt_aeabi_memclr(&temp_v12,0x80);
   }
   FUN_0023723c(*param_1,2,0xffffffff,0,0,&temp_v12);
   if (param_3 != 0) {
-    temp_v3 = FUN_0016780c(param_3,*(unsigned int *)(param_2 + 0x12),0);
+    temp_v3 = fileSectionGetData(param_3,*(unsigned int *)(param_2 + 0x12),0);
     FUN_0023723c(param_1[0xd],2,0xffffffff,0,0,&LAB_003a4d44,temp_v3);
   }
   else {
@@ -251,35 +251,35 @@ void FUN_003a498c(unsigned int *param_1,short *param_2,int param_3)
     param_1[0x13] = (int)temp_v11;
   }
   else {
-    FUN_002e6dd0(&temp_v12,0x80);
+    rt_aeabi_memclr(&temp_v12,0x80);
     FUN_0023723c(param_1[0x12],2,0xffffffff,0,0,&temp_v12);
     param_1[0x13] = 0;
   }
   temp_v2 = 0;
   do {
     temp_v3 = FUN_002adba8(temp_v2);
-    temp_v4 = FUN_0018206c(0x2e,temp_v3);
+    temp_v4 = asdTMTexTableNodeIsLoaded(0x2e,temp_v3);
     temp_v10 = temp_v2;
     if (temp_v4 != 0) break;
     temp_v2 = temp_v2 + 1;
     temp_v10 = 0;
   } while (temp_v2 < 9);
   temp_v3 = FUN_002adba8((char)param_2[0x11]);
-  temp_v2 = FUN_0018206c(0x2e,temp_v3);
+  temp_v2 = asdTMTexTableNodeIsLoaded(0x2e,temp_v3);
   if (temp_v2 == 0) {
     if (param_1 != (unsigned int *)0x0) {
       temp_v3 = FUN_002adba8(temp_v10);
-      temp_v2 = FUN_0018206c(0x2e,temp_v3);
+      temp_v2 = asdTMTexTableNodeIsLoaded(0x2e,temp_v3);
       if ((temp_v2 != 0) && (param_1[temp_v10 + 0x25] != 2)) {
         temp_v3 = FUN_002adba8(temp_v10);
-        FUN_0019a7f4(0x2e,temp_v3);
+        asdTMTexTableReleaseNode(0x2e,temp_v3);
         param_1[temp_v10 + 0x25] = 0;
       }
     }
     temp_v6 = (unsigned int)*(unsigned char *)(param_2 + 0x11);
     if (param_1 != (unsigned int *)0x0) {
       temp_v3 = FUN_002adba8(temp_v6);
-      temp_v2 = FUN_0018206c(0x2e,temp_v3);
+      temp_v2 = asdTMTexTableNodeIsLoaded(0x2e,temp_v3);
       if ((temp_v2 == 0) && (param_1[temp_v6 + 0x25] != 3 && param_1[temp_v6 + 0x25] != 2)) {
         param_1[temp_v6 + 0x25] = 1;
       }

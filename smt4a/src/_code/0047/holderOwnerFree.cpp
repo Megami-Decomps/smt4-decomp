@@ -7,13 +7,13 @@ typedef struct HolderOwner {
     /* 0x08 */ void *holder;
 } HolderOwner;
 
-extern void FUN_002371cc(void *holder);
+extern void bufferPairFree(void *holder);
 extern void asdMemFree(void *ptr);
 
 void holderOwnerFree(HolderOwner *owner)
 {
     if (owner->holder != NULL) {
-        FUN_002371cc(owner->holder);
+        bufferPairFree(owner->holder);
         asdMemFree(owner->holder);
         owner->holder = NULL;
     }

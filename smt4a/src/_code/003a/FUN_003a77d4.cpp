@@ -5,15 +5,15 @@
 extern "C" {
 
 int FUN_001ad9b4(void);
-int FUN_003fd63c(int, int);
+int gameFlagSetValue(int, int);
 int FUN_00417b70(unsigned int);
 
-extern int FUN_001801a4(void);
+extern int gameGetPlayerData(void);
 extern int FUN_0019f1a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001ad9b4. */
 extern int FUN_003de734(unsigned int);
 extern int FUN_003df390(unsigned int);
-/* Supplied declaration required: FUN_003fd63c. */
+/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_00417b70. */
 
 
@@ -26,7 +26,7 @@ unsigned int FUN_003a77d4(void)
   unsigned short temp_v2;
   unsigned int temp_v3;
   
-  temp_v1 = FUN_001801a4();
+  temp_v1 = gameGetPlayerData();
   temp_v0 = *(unsigned short *)(temp_v1 + 0x62);
   temp_v3 = 100;
   do {
@@ -39,7 +39,7 @@ unsigned int FUN_003a77d4(void)
       {
         temp_v1 = FUN_003de734(temp_v3 & 0xffff);
         if (temp_v1 != 0) {
-          FUN_003fd63c(temp_v1,1);
+          gameFlagSetValue(temp_v1,1);
         }
         FUN_00417b70(temp_v3 & 0xffff);
       }

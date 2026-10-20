@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0017ffa8(...);
-int FUN_001801a4(void);
+int gameGetPlayerData(void);
 int FUN_001835b4(...);
 int FUN_0018439c(...);
 int FUN_00192550(void);
@@ -18,7 +18,7 @@ typedef struct {
 } param_5_stack;
 
 /* Supplied declaration required: FUN_0017ffa8. */
-/* Supplied declaration required: FUN_001801a4. */
+/* Supplied declaration required: gameGetPlayerData. */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_0018439c. */
 /* Supplied declaration required: FUN_00192550. */
@@ -67,7 +67,7 @@ void FUN_001689e8(unsigned int param_1,unsigned int param_2,unsigned int param_3
   case 2:
     temp_v4 = 0x3f7;
     if (param_5 == 0) break;
-    puVar4 = (unsigned short *)FUN_001801a4();
+    puVar4 = (unsigned short *)gameGetPlayerData();
     temp_v0 = *puVar4;
 joined_r0x00168b70:
     if (temp_v0 != param_1) break;
@@ -76,7 +76,7 @@ joined_r0x00168b70:
   case 3:
     temp_v4 = 0x3f8;
     if (param_5 == 0) break;
-    temp_v3 = FUN_001801a4();
+    temp_v3 = gameGetPlayerData();
     temp_v0 = *(unsigned short *)(temp_v3 + 2);
 joined_r0x00168af0:
     if (temp_v0 != param_1) break;
@@ -85,31 +85,31 @@ joined_r0x00168af0:
   case 4:
     temp_v4 = 0x3fa;
     if (param_5 == 0) break;
-    temp_v3 = FUN_001801a4();
+    temp_v3 = gameGetPlayerData();
     temp_v0 = *(unsigned short *)(temp_v3 + 6);
     goto joined_r0x00168af0;
   case 5:
     temp_v4 = 0x3fb;
     if (param_5 == 0) break;
-    temp_v3 = FUN_001801a4();
+    temp_v3 = gameGetPlayerData();
     temp_v0 = *(unsigned short *)(temp_v3 + 8);
     goto joined_r0x00168b70;
   case 6:
     temp_v4 = 0x3fc;
     if (param_5 == 0) break;
-    temp_v3 = FUN_001801a4();
+    temp_v3 = gameGetPlayerData();
     temp_v0 = *(unsigned short *)(temp_v3 + 10);
     goto joined_r0x00168b70;
   case 7:
     temp_v4 = 0x3fd;
     if (param_5 == 0) break;
-    temp_v3 = FUN_001801a4();
+    temp_v3 = gameGetPlayerData();
     temp_v0 = *(unsigned short *)(temp_v3 + 0xc);
     goto joined_r0x00168b70;
   case 8:
     temp_v4 = 0x3f9;
     if (param_5 == 0) break;
-    temp_v3 = FUN_001801a4();
+    temp_v3 = gameGetPlayerData();
     temp_v0 = *(unsigned short *)(temp_v3 + 4);
     goto joined_r0x00168b70;
   case 9:

@@ -72,7 +72,7 @@ static float romwright_fabs_4(float value)
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0014f0dc. */
 extern int FUN_00163fd4(unsigned int);
-extern int FUN_001656a0(unsigned int, float *, float *, float *, unsigned int);
+extern int padButtonIsPressed(unsigned int, float *, float *, float *, unsigned int);
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
 
 
@@ -124,7 +124,7 @@ void FUN_002fe590(void)
   float temp_v39;
   float temp_v40 [4];
   
-  temp_v1 = FUN_001656a0(0x1b,&temp_v38,&temp_v39,temp_v40,0);
+  temp_v1 = padButtonIsPressed(0x1b,&temp_v38,&temp_v39,temp_v40,0);
   temp_v15 = 0.0f;
   if (temp_v1 != 0) {
     DAT_006352d0 = 0.0f;

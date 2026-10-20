@@ -17,8 +17,8 @@ typedef struct {
 extern int g_aocMain; /* 0x570260 */
 
 /* Supplied declaration required: jyoucyuGetTableEntry. */
-extern int FUN_001a7470(unsigned int *);
-extern int FUN_001a747c(void);
+extern int objGetFlagBit0(unsigned int *);
+extern int objGetFlagBit1(void);
 extern unsigned char *FUN_001d25a0(unsigned int, unsigned int);
 extern int FUN_001d25ec(unsigned char *);
 /* Supplied declaration required: FUN_005004a8. */
@@ -69,7 +69,7 @@ void FUN_0046fb60(unsigned int param_1,int param_2)
     temp_v0 = 0;
     if (0 < temp_v8[0]) {
       do {
-        temp_v2 = FUN_001a747c();
+        temp_v2 = objGetFlagBit1();
         if (temp_v2 != 0) {
           temp_v2 = *(int *)(param_2 + 0x310);
           *(int *)(param_2 + 0x310) = temp_v2 + 1;
@@ -85,7 +85,7 @@ void FUN_0046fb60(unsigned int param_1,int param_2)
           *(unsigned int *)(temp_v2 + 0x1c) = temp_v4;
           *(unsigned int *)(temp_v2 + 0x20) = temp_v5;
           *(unsigned int *)(temp_v2 + 0x24) = temp_v6;
-          temp_v2 = FUN_001a7470(temp_v7 + temp_v0 * 6);
+          temp_v2 = objGetFlagBit0(temp_v7 + temp_v0 * 6);
           if (temp_v2 != 0) {
             *(int *)(param_2 + 0x314) = *(int *)(param_2 + 0x314) + 1;
           }

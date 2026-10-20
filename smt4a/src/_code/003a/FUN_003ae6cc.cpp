@@ -9,7 +9,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-extern int DAT_00587f28; /* 0x587f28 */
+extern int g_naviMain; /* 0x587f28 */
 
 extern int FUN_0048e40c(int);
 
@@ -20,8 +20,8 @@ void FUN_003ae6cc(void)
   int temp_v0;
   int temp_v1;
   
-  temp_v0 = DAT_00587f28;
-  if ((DAT_00587f28 != 0) && (temp_v1 = FUN_0048e40c(DAT_00587f28 + 0x68), temp_v1 != 0)) {
+  temp_v0 = g_naviMain;
+  if ((g_naviMain != 0) && (temp_v1 = FUN_0048e40c(g_naviMain + 0x68), temp_v1 != 0)) {
     *(unsigned char *)(temp_v0 + 0x7bf8) = 1;
     return;
   }

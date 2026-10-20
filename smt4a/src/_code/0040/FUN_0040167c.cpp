@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001912cc(...);
-int FUN_002e5700(...);
+int rt_vec_dtor(...);
 int nw_snd_internal_FrameHeap_Clear(...);
 int nw_snd_internal_FrameHeap_Destroy(...);
 
@@ -20,7 +20,7 @@ extern unsigned char DAT_0055c3f4; /* 0x55c3f4 */
 extern unsigned int FUN_00175678(void);
 extern unsigned int FUN_001911a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001912cc. */
-/* Supplied declaration required: FUN_002e5700. */
+/* Supplied declaration required: rt_vec_dtor. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
 /* Supplied declaration required: nw_snd_internal_FrameHeap_Clear. */
@@ -37,7 +37,7 @@ int FUN_0040167c(unsigned int *param_1)
   int temp_v2;
   unsigned int *puVar4;
   
-  FUN_002e5700(param_1 + 8,soundHandleDetachReturn,4,0x10);
+  rt_vec_dtor(param_1 + 8,soundHandleDetachReturn,4,0x10);
   puVar4 = param_1 + 1;
   *param_1 = (unsigned int)&DAT_0055c3f4;
   nn_os_CriticalSection_Enter((unsigned int)puVar4);

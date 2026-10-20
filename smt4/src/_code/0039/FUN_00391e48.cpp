@@ -9,12 +9,12 @@ int FUN_00233818(unsigned int *);
 int FUN_00233854(unsigned int *);
 int FUN_0023392c(...);
 int FUN_002353b4(void);
-int FUN_002629a0(int, int);
+int bgmStopNoForce(int, int);
 int FUN_0028971c(void);
-int FUN_00296f4c(unsigned int, unsigned int);
+int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int FUN_002a126c(unsigned char [4], unsigned int);
 int FUN_002b8244(int);
-int FUN_002b8cc8(void);
+int ifTouchRegionRemove(void);
 int FUN_002baa40(unsigned int *, int);
 int FUN_002bc01c(int);
 int FUN_002c1658(void);
@@ -37,15 +37,15 @@ extern int FUN_0019e0c0(unsigned int);
 /* Supplied declaration required: FUN_00233854. */
 /* Supplied declaration required: FUN_0023392c. */
 /* Supplied declaration required: FUN_002353b4. */
-/* Supplied declaration required: FUN_002629a0. */
+/* Supplied declaration required: bgmStopNoForce. */
 extern int FUN_0026b564(void);
 /* Supplied declaration required: FUN_0028971c. */
-extern unsigned int FUN_00290d74(unsigned int, unsigned char *);
-/* Supplied declaration required: FUN_00296f4c. */
+extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002973d8(void);
 /* Supplied declaration required: FUN_002a126c. */
 /* Supplied declaration required: FUN_002b8244. */
-/* Supplied declaration required: FUN_002b8cc8. */
+/* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: FUN_002baa40. */
 extern unsigned int *FUN_002bad5c(unsigned char *);
 /* Supplied declaration required: FUN_002bc01c. */
@@ -81,8 +81,8 @@ void FUN_00391e48(unsigned int *param_1)
     FUN_00233854(param_1 + 0xba);
     FUN_00233818(param_1 + 0xad);
     *(unsigned char *)(g_aocMain + 0xd50) = 2;
-    temp_v2 = FUN_00290d74(param_1[0xd4],&LAB_003920c0);
-    FUN_00296f4c(param_1[0xd6],temp_v2);
+    temp_v2 = tableGroupFindEntryIndex(param_1[0xd4],&LAB_003920c0);
+    scrScriptProcessStartEntry(param_1[0xd6],temp_v2);
     FUN_0023392c(param_1,0,1);
     param_1[2] = 1;
     return;
@@ -124,7 +124,7 @@ void FUN_00391e48(unsigned int *param_1)
         param_1[0x87] = temp_v4;
         param_1[0x88] = temp_v5;
         FUN_0023392c(param_1,0xffffffff,0);
-        FUN_002629a0(0x1000001,10);
+        bgmStopNoForce(0x1000001,10);
         return;
       }
       if (temp_v1 != 1) {
@@ -153,8 +153,8 @@ void FUN_00391e48(unsigned int *param_1)
     FUN_0028971c();
     FUN_002353b4();
     FUN_002fea6c();
-    FUN_002b8cc8();
-    FUN_002b8cc8();
+    ifTouchRegionRemove();
+    ifTouchRegionRemove();
     piVar3 = (int *)param_1[0x82];
     param_1[1] = 0xf;
     param_1[2] = 0;

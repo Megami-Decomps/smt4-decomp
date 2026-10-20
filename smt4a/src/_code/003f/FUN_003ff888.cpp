@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_001b4a90(char [28], int, unsigned int);
+int __aeabi_memset4(char [28], int, unsigned int);
 
-extern int FUN_0018719c(unsigned int);
-extern int FUN_001ab854(int);
-extern int FUN_001ab888(void);
-/* Supplied declaration required: FUN_001b4a90. */
+extern int gameFlagIsSet(unsigned int);
+extern int gameGetSlotRecord(int);
+extern int gameGetSlotTable(void);
+/* Supplied declaration required: __aeabi_memset4. */
 extern int FUN_004bd0d8(int);
 extern int bitsAt60Test(int, unsigned int);
 extern int FUN_004bd730(void);
@@ -27,11 +27,11 @@ unsigned int FUN_003ff888(void)
   unsigned char temp_v4;
   char acStack_30 [28];
   
-  temp_v0 = FUN_0018719c(0x401);
+  temp_v0 = gameFlagIsSet(0x401);
   if (temp_v0 != 0) {
-    temp_v0 = FUN_001ab888();
+    temp_v0 = gameGetSlotTable();
     temp_v4 = 0;
-    FUN_001b4a90(acStack_30,0x18,0xffffffff);
+    __aeabi_memset4(acStack_30,0x18,0xffffffff);
     temp_v3 = (unsigned int)*(unsigned char *)(temp_v0 + 0x1ca3);
     if (temp_v3 != 0) {
       pcVar2 = (char *)(temp_v0 + 0x1c88);
@@ -46,7 +46,7 @@ unsigned int FUN_003ff888(void)
       temp_v0 = 0;
       if (temp_v4 != 0) {
         do {
-          temp_v1 = FUN_001ab854((int)acStack_30[temp_v0]);
+          temp_v1 = gameGetSlotRecord((int)acStack_30[temp_v0]);
           if ((((temp_v1 != 0) && (temp_v2 = FUN_004bd730(), temp_v2 != 0)) &&
               (temp_v2 = FUN_004bd0d8(temp_v1), temp_v2 == 0)) &&
              ((temp_v2 = bitsAt60Test(temp_v1,1), temp_v2 == 0 &&

@@ -24,7 +24,7 @@ typedef struct {
 
 extern int FUN_001cc198(...); /* 0x1cc198 */
 
-extern int FUN_001c2484(void);
+extern int nw_snd_internal_driver_VoiceManager_GetInstance(void);
 /* Supplied declaration required: FUN_001cb7c8. */
 /* Supplied declaration required: FUN_001cb954. */
 /* Supplied declaration required: FUN_001cb9dc. */
@@ -91,7 +91,7 @@ void FUN_001c2ab8(int param_1,unsigned char *param_2)
           *(unsigned int *)(param_1 + 0x70) = 0;
           *(unsigned int *)(param_1 + 0x74) = 0;
           *(unsigned int *)(param_1 + 0x78) = 0;
-          temp_v0 = FUN_001c2484();
+          temp_v0 = nw_snd_internal_driver_VoiceManager_GetInstance();
           temp_v1 = *(unsigned int *)(param_1 + 0x220);
           if (*(unsigned int *)(temp_v0 + 0x20) >= temp_v1) {
             if (temp_v1 != 0) {
@@ -101,7 +101,7 @@ void FUN_001c2ab8(int param_1,unsigned char *param_2)
             if (temp_v1 != 0) {
               do {
                 temp_v0 = param_1 + temp_v3 * 0x3c8;
-                temp_v2 = FUN_001c2484();
+                temp_v2 = nw_snd_internal_driver_VoiceManager_GetInstance();
                 FUN_001cbf64(temp_v2,1,unaff_r9,FUN_001cc198,temp_v0 + 0x228);
                 if (temp_v2 == 0) {
                   temp_v1 = 0;

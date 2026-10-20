@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_00188b60(int);
-int FUN_001af264(void);
+int nn_os_CriticalSection_Initialize(int);
+int nn_os_SimpleLock_Initialize(void);
 int hasExclusiveAccess(...);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -14,8 +14,8 @@ typedef struct {
 } param_1_stack;
 
 /* Unsupported intrinsic, declaration required: hasExclusiveAccess (CALLOTHER). */
-/* Supplied declaration required: FUN_00188b60. */
-/* Supplied declaration required: FUN_001af264. */
+/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
+/* Supplied declaration required: nn_os_SimpleLock_Initialize. */
 
 
 void nw_snd_internal_TaskManager_Initialize(int param_1)
@@ -24,7 +24,7 @@ void nw_snd_internal_TaskManager_Initialize(int param_1)
 /* irregular: 3 native warning(s); review required */
   unsigned char temp_v0;
   
-  FUN_00188b60(param_1 + 0x2c);
+  nn_os_CriticalSection_Initialize(param_1 + 0x2c);
   *(int *)(param_1 + 0x38) = param_1 + 0x6c;
   *(unsigned int *)(param_1 + 0x58) = 0x20;
   *(unsigned int *)(param_1 + 0x5c) = 0;
@@ -55,7 +55,7 @@ void nw_snd_internal_TaskManager_Initialize(int param_1)
   } while (!temp_v0);
   *(unsigned short *)(param_1 + 0x48) = 0;
   *(unsigned short *)(param_1 + 0x4a) = 0x7fff;
-  FUN_001af264();
+  nn_os_SimpleLock_Initialize();
   *(unsigned int *)(param_1 + 0x50) = 0;
   *(unsigned int *)(param_1 + 0x54) = 0;
   return;

@@ -22,7 +22,7 @@ extern int FUN_00290a8c(...); /* 0x290a8c */
 extern unsigned char LAB_002ce670; /* 0x2ce670 */
 extern int FUN_002ce730(...); /* 0x2ce730 */
 extern int FUN_002fddd8(...); /* 0x2fddd8 */
-extern int DAT_0057f268; /* 0x57f268 */
+extern int g_partyPanel; /* 0x57f268 */
 
 /* Supplied declaration required: qsort. */
 extern unsigned char *FUN_0026140c(void);
@@ -37,7 +37,7 @@ void FUN_003d1d6c(void)
   unsigned char *pbVar2;
   unsigned char temp_v1;
   
-  temp_v0 = DAT_0057f268;
+  temp_v0 = g_partyPanel;
   pbVar2 = (unsigned char *)FUN_0026140c();
   temp_v1 = ~(*pbVar2 >> 7) & 1;
   if ((*pbVar2 & 0x7f) == 2) {

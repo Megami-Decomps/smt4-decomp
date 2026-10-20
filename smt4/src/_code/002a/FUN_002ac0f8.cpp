@@ -9,7 +9,7 @@ typedef struct Effect {
     /* 0x48 */ void *target;
 } Effect;
 
-int FUN_002ac068(void *target, int arg);
+int dataTableFileGetTable(void *target, int arg);
 int dataTableGetEntries(void);
 
 /* If the effect is active and has a target, releases the target and returns dataTableGetEntries(); otherwise returns 0. */
@@ -21,7 +21,7 @@ int FUN_002ac0f8(Effect *effect)
     if (effect->target == NULL) {
         return 0;
     }
-    FUN_002ac068(effect->target, 0);
+    dataTableFileGetTable(effect->target, 0);
     return dataTableGetEntries();
 }
 

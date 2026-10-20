@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0026b9bc(void);
 int FUN_0028a368(int);
 int FUN_0028a924(int, int, unsigned int);
-int FUN_00296f4c(...);
+int scrScriptProcessStartEntry(...);
 
 typedef struct fn_001ebe10_arg0 fn_001ebe10_arg0;
 struct fn_001ebe10_arg0 {
@@ -27,7 +27,7 @@ extern int FUN_0019e0c0(unsigned int);
 /* Supplied declaration required: FUN_0026b9bc. */
 /* Supplied declaration required: FUN_0028a368. */
 /* Supplied declaration required: FUN_0028a924. */
-/* Supplied declaration required: FUN_00296f4c. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 
 
 unsigned int FUN_001ebe10(fn_001ebe10_arg0 *param_1)
@@ -51,10 +51,10 @@ unsigned int FUN_001ebe10(fn_001ebe10_arg0 *param_1)
   }
   else {
     if (param_1->field_0xd28 != 10) {
-      FUN_00296f4c(param_1->field_0xd04);
+      scrScriptProcessStartEntry(param_1->field_0xd04);
     }
     else {
-      FUN_00296f4c(param_1->field_0xd04,0x10);
+      scrScriptProcessStartEntry(param_1->field_0xd04,0x10);
     }
     param_1->field_0xd38 = param_1->field_0xd38 + 1;
   }

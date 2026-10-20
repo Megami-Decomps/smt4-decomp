@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00295eb0(...);
-int FUN_002b8838(...);
+int buttonHelpSetPreset(...);
 
 int FUN_00258170(...);
 int FUN_00258408(...);
@@ -16,7 +16,7 @@ int FUN_00294e18(int);
 int FUN_00297060(...);
 int asdMdlManagerCreateLoaded(unsigned char *, int);
 int FUN_002a9fdc(...);
-int FUN_002b9024(void);
+int devilGetRecord(void);
 int timerStart(...);
 int FUN_002bd954(...);
 int FUN_002be624(...);
@@ -67,8 +67,8 @@ extern unsigned int FUN_00294090(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_00297060. */
 /* Supplied declaration required: asdMdlManagerCreateLoaded. */
 /* Supplied declaration required: FUN_002a9fdc. */
-/* Supplied declaration required: FUN_002b8838. */
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: buttonHelpSetPreset. */
+/* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002be624. */
@@ -103,7 +103,7 @@ void FUN_001eea88(void)
   if (*(short *)(temp_v0 + 0x1e) != 0) {
     do {
       temp_v1 = (unsigned int)*(unsigned short *)(temp_v0 + temp_v4 * 2 + 0xe);
-      FUN_002b9024();
+      devilGetRecord();
       temp_v2 = FUN_00294090(*(unsigned short *)(temp_v1 + 0x90),0);
       *(unsigned int *)(temp_v0 + temp_v4 * 4 + 0x28) = temp_v2;
       FUN_0033dcec(temp_v2,7,1);
@@ -120,7 +120,7 @@ void FUN_001eea88(void)
   }
   FUN_00258618(temp_v0 + 0x38);
   temp_v1 = (unsigned int)*(unsigned short *)(temp_v0 + 0xc);
-  FUN_002b9024();
+  devilGetRecord();
   temp_v2 = FUN_00294090(*(unsigned short *)(temp_v1 + 0x90),0);
   *(unsigned int *)(temp_v0 + 0x80) = temp_v2;
   FUN_0033dcec(temp_v2,7,1);
@@ -170,7 +170,7 @@ void FUN_001eea88(void)
   temp_v2 = FUN_002c5c04(&LAB_001eef58);
   *(unsigned int *)(temp_v0 + 0x29c) = temp_v2;
   temp_v1 = (unsigned int)*(unsigned short *)(temp_v0 + 0xc);
-  FUN_002b9024();
+  devilGetRecord();
   temp_v4 = FUN_002cdecc((int)*(char *)(temp_v1 + 0x30));
   FUN_002be624(temp_v6,&LAB_001eef6c,temp_v4 + 1);
   temp_v2 = FUN_002c5c04(temp_v6);
@@ -202,7 +202,7 @@ void FUN_001eea88(void)
   *(unsigned char *)(temp_v0 + 0x87c) = 1;
   FUN_002bd954(temp_v0 + 0x8cc,0x24,0,temp_v0 + 0x2a8,1);
   FUN_002bee58(temp_v0 + 0x8cc,2);
-  FUN_002b8838(0x61);
+  buttonHelpSetPreset(0x61);
   temp_v0 = DAT_0043dd90;
   *(unsigned int *)(DAT_0043dd90 + 4) = 1;
   *(unsigned int *)(temp_v0 + 8) = 0;

@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern s8 DAT_005c0ad4;
+extern s8 g_nnosAddressSpaceInitialized;
 
 s32 FUN_0042d2ec(void)
 {
-    return DAT_005c0ad4;
+    return g_nnosAddressSpaceInitialized;
 }
 
 } /* extern "C" */

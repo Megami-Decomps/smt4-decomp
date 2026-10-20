@@ -16,7 +16,7 @@ extern int DAT_0057f58c; /* 0x57f58c */
 extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_0021bdac. */
 extern unsigned int scrGetArg(unsigned int);
-extern unsigned int FUN_002deb84(void);
+extern unsigned int scrGetCommandFrame(void);
 
 
 void FUN_002e48a8(void)
@@ -32,7 +32,7 @@ void FUN_002e48a8(void)
   temp_v0 = btlGetMainState();
   temp_v1 = *(unsigned int *)(temp_v0 + 0x226c);
   temp_v2 = scrGetArg(0);
-  temp_v3 = FUN_002deb84();
+  temp_v3 = scrGetCommandFrame();
   if (DAT_0057f58c != 0) {
     *(unsigned char *)(DAT_0057f58c + 0x19c5) = 0x15;
   }

@@ -15,9 +15,9 @@ typedef struct JobScene360 {
 
 extern s32 FUN_00224880(u32 job);
 extern void FUN_002e0798(s32 id);
-extern void FUN_003fd63c(s32 index, s32 value, s32 flag);
+extern void gameFlagSetValue(s32 index, s32 value, s32 flag);
 extern u32 maskToCode(void);
-extern void FUN_00169ddc(u32 value);
+extern void eventQueueAddUnique(u32 value);
 
 /* Waits for the job to finish; then updates the scene flags and moves to state 3. */
 u32 jobScene360WaitStep(JobScene360 *scene)
@@ -27,10 +27,10 @@ u32 jobScene360WaitStep(JobScene360 *scene)
     if (FUN_00224880(scene->job) == 2) {
         scene->unk3BC = 0;
         FUN_002e0798(0x28);
-        FUN_003fd63c(0x551, 1, 1);
+        gameFlagSetValue(0x551, 1, 1);
         scene->flags &= ~8;
         scene->unk3B0 = maskToCode();
-        FUN_00169ddc(0x100021E);
+        eventQueueAddUnique(0x100021E);
         next = 3;
     }
     return next;

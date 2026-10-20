@@ -5,20 +5,20 @@
 extern "C" {
 
 int FUN_00249974(void);
-int FUN_0028bf9c(int);
-int FUN_0028bfac(int);
+int playSceneTimerSubStartReverse(int);
+int playSceneFadeOutStart(int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-extern unsigned char DAT_00439c88; /* 0x439c88 */
+extern unsigned char g_btlUi; /* 0x439c88 */
 
 /* Supplied declaration required: FUN_00249974. */
-/* Supplied declaration required: FUN_0028bf9c. */
-/* Supplied declaration required: FUN_0028bfac. */
-extern int FUN_0028c5e8(int);
+/* Supplied declaration required: playSceneTimerSubStartReverse. */
+/* Supplied declaration required: playSceneFadeOutStart. */
+extern int playSceneIsFadeInDone(int);
 
 
 void FUN_00267d3c(void)
@@ -28,14 +28,14 @@ void FUN_00267d3c(void)
   int temp_v0;
   int temp_v1;
   
-  temp_v0 = (*(int *)((unsigned char *)&DAT_00439c88 + 0x20));
-  temp_v1 = FUN_0028c5e8((*(int *)((unsigned char *)&DAT_00439c88 + 0x20)) + 8);
+  temp_v0 = (*(int *)((unsigned char *)&g_btlUi + 0x20));
+  temp_v1 = playSceneIsFadeInDone((*(int *)((unsigned char *)&g_btlUi + 0x20)) + 8);
   if (temp_v1 != 0) {
     temp_v1 = temp_v0 + 0x2200;
     FUN_00249974();
     if (temp_v1 != 0) {
-      FUN_0028bfac(temp_v0 + 8);
-      FUN_0028bf9c(temp_v0 + 0x2200);
+      playSceneFadeOutStart(temp_v0 + 8);
+      playSceneTimerSubStartReverse(temp_v0 + 0x2200);
       return;
     }
   }

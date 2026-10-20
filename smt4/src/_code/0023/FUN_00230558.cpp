@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern unsigned char DAT_0043e188; /* 0x43e188 */
+extern unsigned char g_messageMain; /* 0x43e188 */
 
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
@@ -24,14 +24,14 @@ unsigned int FUN_00230558(int param_1)
 /* irregular: 2 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = (*(int *)((unsigned char *)&DAT_0043e188 + 0x8));
+  temp_v0 = (*(int *)((unsigned char *)&g_messageMain + 0x8));
   if (param_1 != 0) {
-    *(unsigned char *)((*(int *)((unsigned char *)&DAT_0043e188 + 0x8)) + 0x82) = 1;
+    *(unsigned char *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x82) = 1;
     FUN_002bd954(temp_v0 + 0x7e0,0xe,0,temp_v0 + 0xa4,0xb);
     timerStart(temp_v0 + 0x7e0,8,0);
   }
   else {
-    *(unsigned char *)((*(int *)((unsigned char *)&DAT_0043e188 + 0x8)) + 0x82) = 2;
+    *(unsigned char *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x82) = 2;
     FUN_002bd954(temp_v0 + 0x7e0,0xe,0,temp_v0 + 0xa4,0xb);
     timerStart(temp_v0 + 0x7e0,9,0);
   }

@@ -4,7 +4,7 @@ extern "C" {
 
 extern const u8 DAT_0055affc[];  /* vtable */
 extern u8 DAT_0053a204[];
-void FUN_0030ff80(u32 *member, u8 *value);
+void strDuplicateInto(u32 *member, u8 *value);
 
 typedef struct Object55affc {
     /* 0x00 */ const void *vtbl;
@@ -15,7 +15,7 @@ typedef struct Object55affc {
 Object55affc *constructObj0055affc(Object55affc *self)
 {
     self->vtbl = DAT_0055affc;
-    FUN_0030ff80(&self->member04, DAT_0053a204);
+    strDuplicateInto(&self->member04, DAT_0053a204);
     return self;
 }
 

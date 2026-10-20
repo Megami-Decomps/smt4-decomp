@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern s32 FUN_0031670c(void);
+extern s32 asdCecOutboxGetMessageCount(void);
 
 u8 FUN_004bb308(void)
 {
-    return FUN_0031670c() != 0;
+    return asdCecOutboxGetMessageCount() != 0;
 }
 
 } /* extern "C" */

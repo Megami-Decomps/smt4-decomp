@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00163fd4(int);
-int FUN_001800b8(void);
+int asdTextureRelease(void);
 int FUN_002fe590(void);
 int FUN_00388aac(int);
 int FUN_00390274(void);
@@ -21,7 +21,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } void_stack;
 
-extern signed char DAT_0059dbe0; /* 0x59dbe0 */
+extern signed char g_effectEditor; /* 0x59dbe0 */
 extern unsigned char DAT_0059dbe6; /* 0x59dbe6 */
 extern signed char DAT_0059dbe8; /* 0x59dbe8 */
 extern unsigned int DAT_0059dbec; /* 0x59dbec */
@@ -41,8 +41,8 @@ extern unsigned int DAT_0059dc48; /* 0x59dc48 */
 extern unsigned int DAT_0059e9b4; /* 0x59e9b4 */
 
 /* Supplied declaration required: FUN_00163fd4. */
-extern int FUN_001656a0(unsigned int);
-/* Supplied declaration required: FUN_001800b8. */
+extern int padButtonIsPressed(unsigned int);
+/* Supplied declaration required: asdTextureRelease. */
 /* Supplied declaration required: FUN_002fe590. */
 /* Supplied declaration required: FUN_00388aac. */
 /* Supplied declaration required: FUN_00390274. */
@@ -86,12 +86,12 @@ unsigned int FUN_00282f00(void)
     FUN_00390274();
     FUN_00388aac(0);
     temp_v1 = FUN_00163fd4(0x1c);
-    if ((temp_v1 != 0) && (temp_v1 = FUN_001656a0(0x1b), temp_v1 != 0)) {
-      if (DAT_0059dbe0 == '\0') {
-        DAT_0059dbe0 = '\x01';
+    if ((temp_v1 != 0) && (temp_v1 = padButtonIsPressed(0x1b), temp_v1 != 0)) {
+      if (g_effectEditor == '\0') {
+        g_effectEditor = '\x01';
       }
       else {
-        DAT_0059dbe0 = '\0';
+        g_effectEditor = '\0';
       }
     }
     return 1;
@@ -120,7 +120,7 @@ unsigned int FUN_00282f00(void)
   DAT_0059dc48 = 0;
   DAT_0059dbe8 = 0;
   if (DAT_0059dc10 != 0) {
-    FUN_001800b8();
+    asdTextureRelease();
     DAT_0059dc10 = 0;
   }
   return 0;

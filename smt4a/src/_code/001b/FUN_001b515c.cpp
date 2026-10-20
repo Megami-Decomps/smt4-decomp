@@ -6,7 +6,7 @@ extern "C" {
 
 int asdMemFree(int);
 int asdTextureCreate(void);
-int FUN_0019a840(void);
+int asdTextureSetImage(void);
 int asdTMSprDecompress(int, unsigned int, int);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
@@ -16,7 +16,7 @@ typedef struct {
 
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: asdTextureCreate. */
-/* Supplied declaration required: FUN_0019a840. */
+/* Supplied declaration required: asdTextureSetImage. */
 /* Supplied declaration required: asdTMSprDecompress. */
 extern int rt_memcmp(int, char *, unsigned int);
 
@@ -68,7 +68,7 @@ void FUN_001b515c(int param_1,int param_2,int param_3)
     if ((temp_v1 & 0x20) != 0) {
       if (param_2 == 0) {
         if (*(int *)(param_2 + 8) != 0) {
-          FUN_0019a840();
+          asdTextureSetImage();
           *(unsigned int *)(param_2 + 0x10) = *(unsigned int *)(param_2 + 0x10) | 4;
         }
         return;
@@ -90,7 +90,7 @@ void FUN_001b515c(int param_1,int param_2,int param_3)
     }
   }
   if (*(int *)(param_2 + 8) != 0) {
-    FUN_0019a840();
+    asdTextureSetImage();
     *(unsigned int *)(param_2 + 0x10) = *(unsigned int *)(param_2 + 0x10) | 4;
   }
   return;

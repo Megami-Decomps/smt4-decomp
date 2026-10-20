@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_003fd63c(int, int);
+int gameFlagSetValue(int, int);
 
 extern unsigned int DAT_005702e0; /* 0x5702e0 */
 extern unsigned int DAT_005702e4; /* 0x5702e4 */
@@ -14,7 +14,7 @@ extern unsigned int g_btlScriptUnit; /* 0x57113c */
 
 extern int btlGetMainState(void);
 extern int scrGetArg(unsigned int);
-/* Supplied declaration required: FUN_003fd63c. */
+/* Supplied declaration required: gameFlagSetValue. */
 extern int btlUnitGet(unsigned int);
 
 
@@ -40,7 +40,7 @@ unsigned int FUN_0035e9fc(void)
        ((*(unsigned int *)(temp_v0 + 0x45a4) & DAT_005702ec) == 0 &&
         (DAT_005702e8 & *(unsigned int *)(temp_v0 + 0x45a0)) == 0)) && (*(short *)(temp_v1 + 2) == 0x1b6)) &&
      (((*(unsigned short *)(temp_v1 + 0x110) & 0x10) != 0 && (*(short *)(temp_v1 + 0x1c0) == 0x9b)))) {
-    FUN_003fd63c(0x596,1);
+    gameFlagSetValue(0x596,1);
   }
   return 1;
 }

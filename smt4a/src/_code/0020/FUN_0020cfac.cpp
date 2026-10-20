@@ -5,7 +5,7 @@
 extern "C" {
 
 int qsort(...);
-int FUN_00312830(...);
+int arraySortQsort(...);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -20,11 +20,11 @@ extern int FUN_00321cc0(...); /* 0x321cc0 */
 extern int FUN_0034f6fc(...); /* 0x34f6fc */
 extern int FUN_003603a0(...); /* 0x3603a0 */
 extern int FUN_00375b80(...); /* 0x375b80 */
-extern int DAT_0057f290; /* 0x57f290 */
+extern int g_unite; /* 0x57f290 */
 
 /* Supplied declaration required: qsort. */
 extern int FUN_0026140c(void);
-/* Supplied declaration required: FUN_00312830. */
+/* Supplied declaration required: arraySortQsort. */
 
 
 void FUN_0020cfac(void)
@@ -36,8 +36,8 @@ void FUN_0020cfac(void)
   unsigned char *pbVar3;
   unsigned char temp_v2;
   
-  temp_v0 = DAT_0057f290;
-  if (*(char *)(DAT_0057f290 + 0x420) != '\x02') {
+  temp_v0 = g_unite;
+  if (*(char *)(g_unite + 0x420) != '\x02') {
     temp_v1 = FUN_0026140c();
     pbVar3 = (unsigned char *)(temp_v1 + 0x11);
   }
@@ -74,10 +74,10 @@ void FUN_0020cfac(void)
     return;
   }
   if (temp_v2 == 0) {
-    FUN_00312830(temp_v0 + 0x62a0,*(unsigned int *)(temp_v0 + 0x6698),2,FUN_0034f6fc);
+    arraySortQsort(temp_v0 + 0x62a0,*(unsigned int *)(temp_v0 + 0x6698),2,FUN_0034f6fc);
     return;
   }
-  FUN_00312830(temp_v0 + 0x62a0,*(unsigned int *)(temp_v0 + 0x6698),2,FUN_002b2ca8);
+  arraySortQsort(temp_v0 + 0x62a0,*(unsigned int *)(temp_v0 + 0x6698),2,FUN_002b2ca8);
   return;
 }
 

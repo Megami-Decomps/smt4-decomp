@@ -77,9 +77,9 @@ extern int FUN_0025a140(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00287b0c. */
 extern unsigned int FUN_00291e40(unsigned int);
 /* Supplied declaration required: FUN_0029be5c. */
-extern int FUN_002b8cec(unsigned int);
-extern int FUN_002bfde4(unsigned int);
-extern int FUN_002c2950(void);
+extern int padIsButtonRepeat(unsigned int);
+extern int padIsButtonPressed(unsigned int);
+extern int gameGetMapBlock(void);
 /* Supplied declaration required: mapEnemyAdvancePursuit. */
 /* Supplied declaration required: FUN_003a66c4. */
 /* Supplied declaration required: FUN_003a6988. */
@@ -121,7 +121,7 @@ void FUN_001fa8e4(void)
   unsigned int uStack_5c;
   unsigned int uStack_58;
   
-  temp_v2 = FUN_002c2950();
+  temp_v2 = gameGetMapBlock();
   temp_v21 = 20.0f;
   temp_v0 = 0;
   temp_v17 = 0.0f;
@@ -183,22 +183,22 @@ void FUN_001fa8e4(void)
     }
     if (DAT_0049fc84 == 1) {
       if (DAT_0049fce8 != '\0') {
-        temp_v8 = FUN_002bfde4(1);
+        temp_v8 = padIsButtonPressed(1);
         if (temp_v8 != 0) {
           DAT_0049fce8 = '\0';
         }
-        temp_v8 = FUN_002b8cec(5);
+        temp_v8 = padIsButtonRepeat(5);
         temp_v20 = 50.0f;
         if (temp_v8 != 0) {
           *(float *)(g_lmapScene + 0x2c) = *(float *)(g_lmapScene + 0x2c) + 50.0f;
         }
-        temp_v8 = FUN_002b8cec(6);
+        temp_v8 = padIsButtonRepeat(6);
         if (temp_v8 != 0) {
           *(float *)(g_lmapScene + 0x2c) = *(float *)(g_lmapScene + 0x2c) - temp_v20;
         }
       }
       else {
-        temp_v8 = FUN_002bfde4(1);
+        temp_v8 = padIsButtonPressed(1);
         if (temp_v8 != 0) {
           DAT_0049fce8 = '\x01';
         }

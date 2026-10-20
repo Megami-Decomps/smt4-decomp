@@ -8,7 +8,7 @@ int FUN_00102bbc(float *, int, int);
 int FUN_00157558(int);
 int FUN_00162790(...);
 int FUN_00167618(float *);
-int FUN_0016c410(int);
+int renderCtxResetColorScale(int);
 int FUN_0016c4b8(int, int);
 int FUN_0016c560(int);
 int FUN_003d1fac(void);
@@ -33,7 +33,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 extern int jobGetWork(void);
 /* Supplied declaration required: FUN_00167618. */
 extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0016c410. */
+/* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: FUN_0016c4b8. */
 /* Supplied declaration required: FUN_0016c560. */
 /* Supplied declaration required: FUN_003d1fac. */
@@ -118,7 +118,7 @@ unsigned int FUN_002c3038(void)
       temp_v1 = temp_v2;
       if (temp_v2 < 1) {
         FUN_0016c560(g_renderCtx);
-        FUN_0016c410(g_renderCtx);
+        renderCtxResetColorScale(g_renderCtx);
         return 0;
       }
     }
@@ -140,7 +140,7 @@ unsigned int FUN_002c3038(void)
     } while (temp_v2 < temp_v1);
   }
   FUN_0016c560(g_renderCtx);
-  FUN_0016c410(g_renderCtx);
+  renderCtxResetColorScale(g_renderCtx);
   return 0;
 }
 

@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern u8 FUN_0018206c(s32 a, s32 b);
+extern u8 asdTMTexTableNodeIsLoaded(s32 a, s32 b);
 
 u8 FUN_003ae848(void)
 {
-    return FUN_0018206c(0x24, 0) != 0;
+    return asdTMTexTableNodeIsLoaded(0x24, 0) != 0;
 }
 
 } /* extern "C" */

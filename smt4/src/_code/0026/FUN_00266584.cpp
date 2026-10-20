@@ -33,7 +33,7 @@ extern int g_lmapMainState; /* 0x447060 */
 /* Supplied declaration required: FUN_0027b65c. */
 /* Supplied declaration required: FUN_00284838. */
 /* Supplied declaration required: FUN_00297a00. */
-extern int FUN_002c09d0(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 
 
 void FUN_00266584(unsigned int param_1)
@@ -48,7 +48,7 @@ void FUN_00266584(unsigned int param_1)
   FUN_0027b65c(param_1,0);
   FUN_00284838();
   temp_v0 = g_lmapMainState;
-  temp_v1 = FUN_002c09d0(0x261);
+  temp_v1 = gameFlagIsSet(0x261);
   if ((temp_v1 != 0) && (*(int *)(temp_v0 + 0x40) == 0x65)) {
     temp_v2 = 0;
     do {

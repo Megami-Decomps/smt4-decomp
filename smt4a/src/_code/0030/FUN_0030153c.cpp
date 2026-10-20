@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002e6e14(void);
+int asdOperatorDeleteArray(void);
 
 typedef int romwright_code(...);
 extern unsigned char DAT_00559854; /* 0x559854 */
 
-/* Supplied declaration required: FUN_002e6e14. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
 
 
 unsigned int * FUN_0030153c(unsigned int *param_1)
@@ -32,7 +32,7 @@ unsigned int * FUN_0030153c(unsigned int *param_1)
   }
   for (temp_v0 = param_1[1]; temp_v0 != param_1[2]; temp_v0 = temp_v0 + 4) {
   }
-  FUN_002e6e14();
+  asdOperatorDeleteArray();
   return param_1;
 }
 

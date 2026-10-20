@@ -7,18 +7,18 @@ extern "C" {
 int sysPlaySe(int);
 int dataTableValueOrZero(int);
 int FUN_001ad9b4(...);
-int FUN_00275bb0(int);
-int FUN_00275fe4(...);
+int scrWorkGetValue(int);
+int scrWorkSetValue(...);
 int FUN_002852f0(int);
 int FUN_002c76c0(...);
-int FUN_002cd8fc(void);
+int btlTalkBustUpCreate(void);
 int eventTexSetFlag(int);
 int scrSetResult(int);
 int FUN_00336de4(unsigned int, int);
 int bustupCutAnimSetFlag(int);
 int btlTalkBustUpSetUnk2F4(int);
 int FUN_003deea4(int);
-int FUN_003fd63c(...);
+int gameFlagSetValue(...);
 int FUN_00417a60(int);
 int optionsClearFlag1(void);
 
@@ -27,12 +27,12 @@ int optionsClearFlag1(void);
 /* Supplied declaration required: FUN_001ad9b4. */
 extern int FUN_001ada74(unsigned int);
 extern unsigned int scrGetArg(unsigned int);
-/* Supplied declaration required: FUN_00275bb0. */
-/* Supplied declaration required: FUN_00275fe4. */
+/* Supplied declaration required: scrWorkGetValue. */
+/* Supplied declaration required: scrWorkSetValue. */
 /* Supplied declaration required: FUN_002852f0. */
 /* Supplied declaration required: FUN_002c76c0. */
-/* Supplied declaration required: FUN_002cd8fc. */
-extern int FUN_002deb84(void);
+/* Supplied declaration required: btlTalkBustUpCreate. */
+extern int scrGetCommandFrame(void);
 /* Supplied declaration required: eventTexSetFlag. */
 extern int btlTalkBustUpExists(void);
 /* Supplied declaration required: scrSetResult. */
@@ -42,7 +42,7 @@ extern int FUN_0035fcbc(void);
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 extern unsigned int FUN_00375848(void);
 /* Supplied declaration required: FUN_003deea4. */
-/* Supplied declaration required: FUN_003fd63c. */
+/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_00417a60. */
 extern int FUN_004186a4(void);
 extern unsigned int FUN_004186e0(void);
@@ -62,24 +62,24 @@ unsigned int FUN_0037dbc8(void)
   int temp_v6;
   
   temp_v1 = scrGetArg(0);
-  temp_v2 = FUN_002deb84();
+  temp_v2 = scrGetCommandFrame();
   if (temp_v2 != 0) {
     dataTableValueOrZero(0x1e);
     FUN_001ad9b4(temp_v1);
-    temp_v2 = FUN_00275bb0(0);
+    temp_v2 = scrWorkGetValue(0);
     if (temp_v2 != 0) {
       if (temp_v2 == 1) {
         FUN_002c76c0(0xffffffff);
         FUN_002852f0(0);
         sysPlaySe(0x92);
-        FUN_00275bb0(3);
+        scrWorkGetValue(3);
         eventTexSetFlag(1);
         bustupCutAnimSetFlag(1);
-        temp_v4 = FUN_00275bb0(2);
+        temp_v4 = scrWorkGetValue(2);
         if (-1 < (int)temp_v4) {
           temp_v2 = btlTalkBustUpExists();
           if (temp_v2 == 0) {
-            FUN_002cd8fc();
+            btlTalkBustUpCreate();
           }
           if ((temp_v4 != 0) && (temp_v5 = FUN_00375848(), temp_v5 != temp_v4)) {
             FUN_00336de4(temp_v4 & 0xffff,0);
@@ -103,19 +103,19 @@ unsigned int FUN_0037dbc8(void)
       temp_v2 = btlTalkBustUpExists();
       if (temp_v2 != 0) {
         temp_v3 = FUN_00375848();
-        FUN_00275fe4(2,temp_v3);
+        scrWorkSetValue(2,temp_v3);
       }
       else {
-        FUN_00275fe4(2,0xffffffff);
+        scrWorkSetValue(2,0xffffffff);
       }
       btlTalkBustUpSetUnk2F4(0);
-      FUN_00275fe4(3,0);
+      scrWorkSetValue(3,0);
       FUN_002c76c0(1);
-      FUN_00275fe4(0,1);
+      scrWorkSetValue(0,1);
     }
   }
   else {
-    FUN_00275fe4(0);
+    scrWorkSetValue(0);
     temp_v4 = temp_v1;
     FUN_001ad9b4();
     temp_v2 = FUN_001ada74(temp_v1);
@@ -123,17 +123,17 @@ unsigned int FUN_0037dbc8(void)
       scrSetResult(0);
       return 1;
     }
-    FUN_00275fe4(0);
+    scrWorkSetValue(0);
     temp_v2 = 0;
     do {
       temp_v6 = temp_v4 + temp_v2 * 2;
       temp_v0 = *(short *)(temp_v6 + 0xe0);
       if (temp_v0 != 0) {
-        FUN_003fd63c(temp_v0,1);
+        gameFlagSetValue(temp_v0,1);
       }
       temp_v0 = *(short *)(temp_v6 + 0xe6);
       if (temp_v0 != 0) {
-        FUN_003fd63c(temp_v0,0,1);
+        gameFlagSetValue(temp_v0,0,1);
       }
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < 3);

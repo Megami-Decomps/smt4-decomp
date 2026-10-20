@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e5fa6(unsigned int, int *, int *, int);
-int FUN_002e5fcc(int, int *);
+int cursorPushU16(int, int *);
 
 /* stack frame of param_4: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -15,7 +15,7 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_002e5fa6. */
-/* Supplied declaration required: FUN_002e5fcc. */
+/* Supplied declaration required: cursorPushU16. */
 
 
 unsigned int FUN_002e9768(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -35,7 +35,7 @@ unsigned int FUN_002e9768(int param_1,unsigned int param_2,unsigned int param_3,
   FUN_002e5fa6(param_3,&temp_v0,&uStack_4,0x2e5fcd);
   if (param_2 != 0) {
     temp_v1 = temp_v1 + 2;
-    FUN_002e5fcc(0,&temp_v0);
+    cursorPushU16(0,&temp_v0);
   }
   if (param_2 <= param_3) {
     param_3 = 0xffffffff;

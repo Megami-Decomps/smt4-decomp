@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 
 extern unsigned int DAT_005702a0; /* 0x5702a0 */
 extern unsigned int DAT_005702a4; /* 0x5702a4 */
 extern unsigned int DAT_005702a8; /* 0x5702a8 */
 extern unsigned int DAT_005702ac; /* 0x5702ac */
 
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: dataTable04FindById. */
 extern int FUN_002a6a38(void);
 
 
@@ -30,7 +30,7 @@ unsigned int FUN_003248e4(unsigned int *param_1)
       temp_v0 = *(short *)((int)param_1 + temp_v2 * 8 + 0x33a);
       if (temp_v0 == 2 || temp_v0 == 3) {
         temp_v1 = (int)(short)param_1[temp_v2 * 2 + 0xcf];
-        FUN_001aba54();
+        dataTable04FindById();
         if ((temp_v1 != 0) && (temp_v1 = FUN_002a6a38(), temp_v1 != 0)) {
           return 1;
         }
@@ -40,7 +40,7 @@ unsigned int FUN_003248e4(unsigned int *param_1)
   }
   else if (*(short *)((int)param_1 + 0x32a) == 2 || *(short *)((int)param_1 + 0x32a) == 3) {
     temp_v2 = (int)(short)param_1[0xcb];
-    FUN_001aba54();
+    dataTable04FindById();
     if ((temp_v2 != 0) && (temp_v2 = FUN_002a6a38(), temp_v2 != 0)) {
       return 1;
     }

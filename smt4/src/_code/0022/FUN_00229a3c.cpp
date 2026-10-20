@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0022699c(int, int, int, unsigned int);
 
-extern int DAT_00434290; /* 0x434290 */
+extern int g_btlActionReflect; /* 0x434290 */
 
 /* Supplied declaration required: FUN_0022699c. */
 
@@ -22,10 +22,10 @@ void FUN_00229a3c(short param_1,unsigned int param_2,unsigned int param_3,int pa
   unsigned char temp_v3;
   unsigned char temp_v4;
   
-  temp_v1 = DAT_00434290;
-  FUN_0022699c(DAT_00434290,(int)param_1,0,param_2);
+  temp_v1 = g_btlActionReflect;
+  FUN_0022699c(g_btlActionReflect,(int)param_1,0,param_2);
   if (param_5 != 0) {
-    temp_v0 = *(int *)(DAT_00434290 + 8);
+    temp_v0 = *(int *)(g_btlActionReflect + 8);
     do {
       if (temp_v0 == 0) {
         *(unsigned int *)(temp_v1 + 0x28) = param_3;

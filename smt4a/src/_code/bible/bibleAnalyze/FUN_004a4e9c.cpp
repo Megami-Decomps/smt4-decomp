@@ -10,7 +10,7 @@ int asdOperatorNew(void);
 int asdMemoryAllocTracked(int, int, int, int, int);
 int FUN_002c8550(int);
 int FUN_0031f718(int, int);
-int FUN_003f86f8(...);
+int loadSlotEnsureLoaded(...);
 int FUN_004930e4(int);
 int FUN_00493660(...);
 int FUN_004a4848(...);
@@ -39,7 +39,7 @@ extern unsigned char LAB_004a7238; /* 0x4a7238 */
 extern unsigned char LAB_004a7588; /* 0x4a7588 */
 extern unsigned char DAT_0055c86c; /* 0x55c86c */
 extern unsigned char DAT_0055c90c; /* 0x55c90c */
-extern int DAT_0056fcc0; /* 0x56fcc0 */
+extern int g_handleRegistry; /* 0x56fcc0 */
 extern int *DAT_0057f0a0; /* 0x57f0a0 */
 
 /* Supplied declaration required: asdProcessCreateSimple. */
@@ -48,7 +48,7 @@ extern int *DAT_0057f0a0; /* 0x57f0a0 */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_002c8550. */
 /* Supplied declaration required: FUN_0031f718. */
-/* Supplied declaration required: FUN_003f86f8. */
+/* Supplied declaration required: loadSlotEnsureLoaded. */
 extern int FUN_004082f8(int);
 /* Supplied declaration required: FUN_004930e4. */
 /* Supplied declaration required: FUN_00493660. */
@@ -159,7 +159,7 @@ void FUN_004a4e9c(int *param_1)
     } while (temp_v1 < temp_v0);
   }
   FUN_004cf7cc(param_1 + 0x37);
-  FUN_003f86f8(0x22);
+  loadSlotEnsureLoaded(0x22);
   if ((char)param_1[0x218] != '\0') {
     FUN_00493660(param_1 + 0x32,0x140,0,0x13);
   }
@@ -168,7 +168,7 @@ void FUN_004a4e9c(int *param_1)
   }
   param_1[5] = 0;
   param_1[6] = 0;
-  *(unsigned int *)(DAT_0056fcc0 + 0x34) = *(unsigned int *)(DAT_0056fcc0 + 0x34) | 3;
+  *(unsigned int *)(g_handleRegistry + 0x34) = *(unsigned int *)(g_handleRegistry + 0x34) | 3;
   return;
 }
 

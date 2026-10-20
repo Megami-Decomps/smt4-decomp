@@ -25,8 +25,8 @@ typedef struct {
 /* Supplied declaration required: FUN_00128fd8. */
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-extern unsigned int FUN_002ea714(void);
-extern unsigned char *FUN_002eb462(unsigned int *, unsigned char, unsigned int);
+extern unsigned int onlineGetActiveLock(void);
+extern unsigned char *packNibbles(unsigned int *, unsigned char, unsigned int);
 /* Supplied declaration required: FUN_002f9dd4. */
 
 
@@ -52,11 +52,11 @@ unsigned int FUN_00117620(int param_1,int param_2,unsigned int param_3,unsigned 
   temp_v8 = param_2;
   uStack_18 = param_3;
   puStack_14 = param_4;
-  temp_v0 = FUN_002ea714();
+  temp_v0 = onlineGetActiveLock();
   FUN_002e6e34(temp_v4,temp_v0);
   temp_v5 = temp_v5 & 0xffffff00;
   if (param_3 != 0) {
-    puVar2 = (unsigned char *)FUN_002eb462(&temp_v2,*(unsigned char *)(temp_v8 + 4),param_3);
+    puVar2 = (unsigned char *)packNibbles(&temp_v2,*(unsigned char *)(temp_v8 + 4),param_3);
     temp_v5 = romwright_piece_3_1((((unsigned int)(temp_v5) >> 8) & 0xffffffU),*puVar2);
 LAB_00117688:
     temp_v6 = temp_v5;
@@ -77,7 +77,7 @@ LAB_00117688:
     param_3 = 0xf;
     temp_v2 = temp_v2 & 0xffffff00;
     do {
-      puVar2 = (unsigned char *)FUN_002eb462(&temp_v2,*(unsigned char *)(temp_v8 + 4),param_3);
+      puVar2 = (unsigned char *)packNibbles(&temp_v2,*(unsigned char *)(temp_v8 + 4),param_3);
       temp_v5 = romwright_piece_3_1((((unsigned int)(temp_v5) >> 8) & 0xffffffU),*puVar2);
       temp_v2 = temp_v5;
       temp_v1 = param_1;

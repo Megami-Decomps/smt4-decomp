@@ -4,14 +4,14 @@
 
 extern "C" {
 
-extern int DAT_0043dcf0; /* 0x43dcf0 */
+extern int g_partyPanel; /* 0x43dcf0 */
 
 
 void FUN_0026a38c(int param_1)
 
 {
-  if (DAT_0043dcf0 != 0) {
-    *(unsigned char *)(DAT_0043dcf0 + 0x17f0) = param_1 == 0;
+  if (g_partyPanel != 0) {
+    *(unsigned char *)(g_partyPanel + 0x17f0) = param_1 == 0;
   }
   return;
 }

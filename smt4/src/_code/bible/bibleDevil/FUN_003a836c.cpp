@@ -8,7 +8,7 @@ int FUN_0022d1a8(...);
 int FUN_0022e0fc(...);
 int FUN_0029e17c(...);
 int FUN_002a0cc8(...);
-int FUN_002b8838(...);
+int buttonHelpSetPreset(...);
 
 typedef struct fn_003a836c_arg0 fn_003a836c_arg0;
 struct fn_003a836c_arg0 {
@@ -39,10 +39,10 @@ extern unsigned char DAT_0043d9c8; /* 0x43d9c8 */
 /* Supplied declaration required: FUN_0022e0fc. */
 extern int FUN_0029e130(void);
 /* Supplied declaration required: FUN_0029e17c. */
-extern int FUN_0029e1c8(void);
+extern int useCounterIsFinished(void);
 /* Supplied declaration required: FUN_002a0cc8. */
 extern int FUN_002a0d0c(void);
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 
 
 void FUN_003a836c(fn_003a836c_arg0 *param_1)
@@ -54,10 +54,10 @@ void FUN_003a836c(fn_003a836c_arg0 *param_1)
   unsigned char *pbVar3;
   unsigned char temp_v2;
   
-  temp_v1 = FUN_0029e1c8();
+  temp_v1 = useCounterIsFinished();
   if (temp_v1 != 0) {
     FUN_0029e17c();
-    FUN_002b8838(0x2d);
+    buttonHelpSetPreset(0x2d);
     FUN_002a0cc8(0);
     *(unsigned int *)&param_1->field_0x14 = 2;
     *(unsigned int *)&param_1->field_0x18 = 0;

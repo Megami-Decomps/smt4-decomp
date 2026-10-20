@@ -9,7 +9,7 @@ int FUN_00233670(...);
 int FUN_0029da34(...);
 int FUN_0029ee6c(...);
 int FUN_002a0cc8(...);
-int FUN_002b8838(...);
+int buttonHelpSetPreset(...);
 int FUN_002be624(...);
 
 typedef int romwright_code(...);
@@ -28,10 +28,10 @@ extern int FUN_0023360c(int);
 /* Supplied declaration required: FUN_0029da34. */
 /* Supplied declaration required: FUN_0029ee6c. */
 /* Supplied declaration required: FUN_002a0cc8. */
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: FUN_002be624. */
-extern unsigned int FUN_002bed98(int);
-extern unsigned int FUN_002beda4(int);
+extern unsigned int vec2GetYInt(int);
+extern unsigned int vec2GetXInt(int);
 
 
 void FUN_003a88f4(int param_1)
@@ -48,8 +48,8 @@ void FUN_003a88f4(int param_1)
   
   temp_v0 = FUN_00233344(param_1 + 0xdc,(int)*(short *)(param_1 + 0xa5b2));
   temp_v3 = param_1 + *(short *)(param_1 + 0xa5b2) * 0x8c + 0xfc;
-  temp_v1 = FUN_002bed98(temp_v3);
-  temp_v2 = FUN_002beda4(temp_v3);
+  temp_v1 = vec2GetYInt(temp_v3);
+  temp_v2 = vec2GetXInt(temp_v3);
   FUN_00231240(param_1 + 200,temp_v2,temp_v1);
   if (temp_v0 == 0) {
     return;
@@ -60,7 +60,7 @@ void FUN_003a88f4(int param_1)
   else {
     temp_v1 = 0x46;
   }
-  FUN_002b8838(temp_v1);
+  buttonHelpSetPreset(temp_v1);
   if (*(char *)(param_1 + 0x5a4) != '\0') {
     temp_v0 = FUN_0022caa4(temp_v5,*(unsigned int *)(param_1 + 0xa5b4));
     if (temp_v0 == 0) {

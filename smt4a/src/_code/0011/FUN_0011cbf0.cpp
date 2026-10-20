@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002e9538(int, int *, int, int, unsigned int);
+int onlineSockAddrCopy(int, int *, int, int, unsigned int);
 int FUN_0031111c(int, int, unsigned int);
 int FUN_0031113e(int, int *);
 
-/* Supplied declaration required: FUN_002e9538. */
+/* Supplied declaration required: onlineSockAddrCopy. */
 /* Supplied declaration required: FUN_0031111c. */
 /* Supplied declaration required: FUN_0031113e. */
 extern int *FUN_0031115e(void);
@@ -39,7 +39,7 @@ void FUN_0011cbf0(int param_1,unsigned int param_2,unsigned int param_3,unsigned
     piVar3[1] = temp_v2;
     *piVar1 = 0;
     *(unsigned int *)(*(int *)(param_1 + 0x44) + 8) = *(unsigned int *)(temp_v0 + 0x10);
-    FUN_002e9538(param_1 + 0x54,piVar1 + 1,temp_v1,temp_v2,param_4);
+    onlineSockAddrCopy(param_1 + 0x54,piVar1 + 1,temp_v1,temp_v2,param_4);
     *(int *)(*(int *)(param_1 + 0x44) + 0x30) = param_1 + 0x54;
     FUN_0031111c(param_1,1,*(unsigned int *)(param_1 + 0x44));
     FUN_0031113e(param_1 + 0x148,piVar1);

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002903f0(int);
 
-extern int DAT_0043dd50; /* 0x43dd50 */
+extern int g_uiQuest; /* 0x43dd50 */
 
 /* Supplied declaration required: FUN_002903f0. */
 
@@ -15,7 +15,7 @@ void FUN_0030aba4(void)
 
 {
 /* irregular: 1 native warning(s); review required */
-  if (*(char *)(DAT_0043dd50 + 0x5c4) == '\0') {
+  if (*(char *)(g_uiQuest + 0x5c4) == '\0') {
     FUN_002903f0(0);
     return;
   }

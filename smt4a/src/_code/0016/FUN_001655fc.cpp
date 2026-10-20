@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00100348(unsigned char *, int, unsigned int, int *);
 int FUN_00181ae0(unsigned int, unsigned int, unsigned char *);
-int FUN_002e6dd4(unsigned char *, int);
+int rt_memclr(unsigned char *, int);
 
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -20,7 +20,7 @@ extern unsigned char DAT_00635800; /* 0x635800 */
 
 /* Supplied declaration required: FUN_00100348. */
 /* Supplied declaration required: FUN_00181ae0. */
-/* Supplied declaration required: FUN_002e6dd4. */
+/* Supplied declaration required: rt_memclr. */
 
 
 void FUN_001655fc(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -31,7 +31,7 @@ void FUN_001655fc(unsigned int param_1,unsigned int param_2,unsigned int param_3
   int uStack_4;
   
   uStack_4 = param_4;
-  FUN_002e6dd4(&DAT_00635800,0x100);
+  rt_memclr(&DAT_00635800,0x100);
   puVar1 = &DAT_00635800;
   FUN_00100348(&DAT_00635800,0x100,param_3,&uStack_4);
   if (puVar1 != (unsigned char *)0x0) {

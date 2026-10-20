@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001aea28(unsigned int);
+int ptrListRemoveClearOwner(unsigned int);
 int FUN_001bc124(void);
 int FUN_001f3eec(void);
 int FUN_003fd76c(int, int *);
@@ -18,12 +18,12 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } void_stack;
 
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern int g_lmapScene; /* 0x581288 */
 extern float DAT_0058128c; /* 0x58128c */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_001aea28. */
+/* Supplied declaration required: ptrListRemoveClearOwner. */
 /* Supplied declaration required: FUN_001bc124. */
 /* Supplied declaration required: FUN_001f3eec. */
 /* Supplied declaration required: FUN_003fd76c. */
@@ -73,7 +73,7 @@ void FUN_00379108(void)
   }
   else {
     if ((*(int *)(g_lmapScene + 400) != 0) && (*(int *)(*(int *)(g_lmapScene + 400) + 4) != 0)) {
-      FUN_001aea28(DAT_0056fcc0);
+      ptrListRemoveClearOwner(g_handleRegistry);
     }
     temp_v0 = 2;
   }

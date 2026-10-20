@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_004a9308(...);
 
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 int FUN_003e8bb0(...);
 int FUN_004c9160(...);
 int FUN_004e0114(...);
@@ -36,11 +36,11 @@ extern unsigned int DAT_00571168; /* 0x571168 */
 extern unsigned int DAT_0057116c; /* 0x57116c */
 extern unsigned int DAT_00571170; /* 0x571170 */
 extern unsigned int DAT_00571174; /* 0x571174 */
-extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
+extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
-extern int FUN_0014bef4(unsigned int);
+extern int randRange(unsigned int);
 extern int lcgRandomRange(unsigned int);
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: FUN_003e8bb0. */
 /* Supplied declaration required: FUN_004a9308. */
 /* Supplied declaration required: FUN_004c9160. */
@@ -93,7 +93,7 @@ LAB_004ddb40:
       piVar3 = param_1;
       FUN_004e8b54(param_1,param_2);
       if (piVar3 == (int *)0x0) {
-        temp_v1 = FUN_0014bef4(99);
+        temp_v1 = randRange(99);
         if (temp_v1 < 0x19) {
           if ((*param_2 & 0x1080) == 0) {
             temp_v5 = 0x32;
@@ -130,7 +130,7 @@ LAB_004ddb40:
         }
       }
       else {
-        FUN_001aba54();
+        dataTable04FindById();
         if ((piVar3[0xf] & 0x7fU) != 0) {
           temp_v2 = piVar3[0xf] & 0x7f;
           if (temp_v2 != 4) {
@@ -225,7 +225,7 @@ LAB_004ddb48:
       ((DAT_00571168 | DAT_00571170) & *(unsigned int *)param_2[8]) != 0) {
     return;
   }
-  FUN_004a9308(DAT_0057a9c8,(short)param_2[0xb],0);
+  FUN_004a9308(g_btlUiBlock,(short)param_2[0xb],0);
   return;
 }
 

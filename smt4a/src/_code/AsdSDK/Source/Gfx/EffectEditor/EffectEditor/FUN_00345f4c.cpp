@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_00164af0(...);
-int FUN_001656a0(...);
+int padButtonRepeat(...);
+int padButtonIsPressed(...);
 int memAlloc(...);
 int FUN_00200bcc(unsigned char *);
 int FUN_00202178(...);
-int FUN_0020e9dc(unsigned char *);
+int effEditorNodeChainApply(unsigned char *);
 int FUN_00243ce8(...);
 int FUN_002b3fd8(int, int, int, int);
 int FUN_002cf28c(int, int, int, int, unsigned int, unsigned int);
@@ -49,12 +49,12 @@ extern float DAT_00635340; /* 0x635340 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-/* Supplied declaration required: FUN_00164af0. */
-/* Supplied declaration required: FUN_001656a0. */
+/* Supplied declaration required: padButtonRepeat. */
+/* Supplied declaration required: padButtonIsPressed. */
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_00200bcc. */
 /* Supplied declaration required: FUN_00202178. */
-/* Supplied declaration required: FUN_0020e9dc. */
+/* Supplied declaration required: effEditorNodeChainApply. */
 /* Supplied declaration required: FUN_00243ce8. */
 /* Supplied declaration required: FUN_002b3fd8. */
 /* Supplied declaration required: FUN_002cf28c. */
@@ -103,7 +103,7 @@ unsigned char * FUN_00345f4c(unsigned int *param_1,int param_2)
   if (DAT_0059dbe9 == '\0') {
     FUN_00200bcc(&DAT_0059efb8);
   }
-  temp_v2 = FUN_00164af0(0x20);
+  temp_v2 = padButtonRepeat(0x20);
   puVar8 = &LAB_00400003;
   temp_v12 = 10.0f;
   if (temp_v2 != 0) {
@@ -120,7 +120,7 @@ unsigned char * FUN_00345f4c(unsigned int *param_1,int param_2)
     }
   }
   else {
-    temp_v2 = FUN_00164af0(0x20);
+    temp_v2 = padButtonRepeat(0x20);
     if (temp_v2 != 0) {
       temp_v7 = DAT_0059dc34 == 1;
       temp_v9 = DAT_0063533c;
@@ -135,24 +135,24 @@ unsigned char * FUN_00345f4c(unsigned int *param_1,int param_2)
       }
     }
     else {
-      temp_v2 = FUN_00164af0(3);
+      temp_v2 = padButtonRepeat(3);
       if (temp_v2 == 0) {
         FUN_00202178(3);
-        temp_v2 = FUN_00164af0();
+        temp_v2 = padButtonRepeat();
         if (temp_v2 != 0) goto LAB_0034605c;
-        temp_v2 = FUN_00164af0(4);
+        temp_v2 = padButtonRepeat(4);
         if (temp_v2 == 0) {
           FUN_00202178(4);
-          temp_v2 = FUN_00164af0();
+          temp_v2 = padButtonRepeat();
           if (temp_v2 == 0) {
-            temp_v2 = FUN_00164af0(5);
+            temp_v2 = padButtonRepeat(5);
             puVar8 = &LAB_00400001;
             if (temp_v2 == 0) {
               FUN_00202178(5);
-              temp_v2 = FUN_00164af0();
-              if ((temp_v2 == 0) && (temp_v2 = FUN_00164af0(6), temp_v2 == 0)) {
+              temp_v2 = padButtonRepeat();
+              if ((temp_v2 == 0) && (temp_v2 = padButtonRepeat(6), temp_v2 == 0)) {
                 FUN_00202178(6);
-                temp_v2 = FUN_00164af0();
+                temp_v2 = padButtonRepeat();
                 temp_v8 = DAT_0063533c;
                 if (temp_v2 == 0) goto LAB_00346144;
               }
@@ -226,7 +226,7 @@ LAB_00346144:
   *(float *)&param_1[2] = temp_v8;
   *(float *)&param_1[3] = temp_v12;
   FUN_002b3fd8(0xa0,0x6c,0xdc,0x4c);
-  FUN_0020e9dc(&DAT_0059efb8);
+  effEditorNodeChainApply(&DAT_0059efb8);
   temp_v14[0] = 0;
   temp_v15[0] = (float)((unsigned long long)temp_v13 >> 0x20);
   temp_v14[1] = 0xff;
@@ -298,10 +298,10 @@ LAB_00346144:
   *(unsigned int *)(temp_v2 + 0x18) = 0xffffffff;
   FUN_00300124();
   FUN_00243ce8(0xa4,0x8c,8,&LAB_0034659c,temp_v16);
-  temp_v2 = FUN_001656a0(1);
+  temp_v2 = padButtonIsPressed(1);
   if (temp_v2 == 0) {
     FUN_00202178(1);
-    temp_v2 = FUN_001656a0();
+    temp_v2 = padButtonIsPressed();
     if (temp_v2 == 0) {
       return puVar8;
     }

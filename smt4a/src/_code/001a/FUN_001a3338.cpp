@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_0018b868(void);
-int FUN_0018b964(void);
-int FUN_00195fc8(void);
+int nn_applet_CTR_detail_OpenSession(void);
+int nn_applet_CTR_detail_CloseSession(void);
+int sysFatalBreak(void);
 int FUN_001a2f70(void);
-int FUN_001bcd48(int, int);
+int svcSleepThread(int, int);
 int SBORROW4(...);
 int software_interrupt(int);
 
@@ -35,12 +35,12 @@ extern unsigned int DAT_005891d4; /* 0x5891d4 */
 #endif
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 extern unsigned int FUN_0018b70c(void);
-/* Supplied declaration required: FUN_0018b868. */
-/* Supplied declaration required: FUN_0018b964. */
-/* Supplied declaration required: FUN_00195fc8. */
+/* Supplied declaration required: nn_applet_CTR_detail_OpenSession. */
+/* Supplied declaration required: nn_applet_CTR_detail_CloseSession. */
+/* Supplied declaration required: sysFatalBreak. */
 /* Supplied declaration required: FUN_001a2f70. */
 extern int FUN_001a352c(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001bcd48. */
+/* Supplied declaration required: svcSleepThread. */
 
 
 int FUN_001a3338(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,unsigned int param_5,
@@ -74,7 +74,7 @@ int FUN_001a3338(unsigned int param_1,unsigned int param_2,unsigned int param_3,
   }
   while( 1 ) {
     if (param_4 >= 0x1001) {
-      FUN_00195fc8();
+      sysFatalBreak();
     }
     temp_v4 = param_4;
     temp_v3 = param_3;
@@ -82,13 +82,13 @@ int FUN_001a3338(unsigned int param_1,unsigned int param_2,unsigned int param_3,
       temp_v4 = 0;
       temp_v3 = temp_v4;
     }
-    FUN_0018b868();
+    nn_applet_CTR_detail_OpenSession();
     temp_v1 = FUN_0018b70c();
     temp_v2 = FUN_001a352c(temp_v1,param_1,param_2,temp_v3,temp_v4,param_5);
     if ((-1 < temp_v2) && ((param_2 & 0x10000) != 0)) {
       FUN_001a2f70();
     }
-    FUN_0018b964();
+    nn_applet_CTR_detail_CloseSession();
     if (((-1 < temp_v2) || (temp_v2 != -0x375f33fe)) ||
        (DAT_005891d0 == param_7 && DAT_005891d4 == param_8)) break;
     temp_v3 = (param_8 ^ DAT_005891cc) | (param_7 ^ DAT_005891c8);
@@ -108,7 +108,7 @@ int FUN_001a3338(unsigned int param_1,unsigned int param_2,unsigned int param_3,
         return -0x375f33fe;
       }
     }
-    FUN_001bcd48(10000000,0);
+    svcSleepThread(10000000,0);
   }
   return temp_v2;
 }

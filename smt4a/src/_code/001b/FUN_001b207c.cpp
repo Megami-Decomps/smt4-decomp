@@ -19,7 +19,7 @@ typedef struct {
 extern int entryIsAllowed(void);
 extern int FUN_001b5b8c(void);
 /* Supplied declaration required: FUN_001c2278. */
-extern unsigned int FUN_001c2484(void);
+extern unsigned int nw_snd_internal_driver_VoiceManager_GetInstance(void);
 /* Supplied declaration required: FUN_001c7714. */
 /* Supplied declaration required: nw_snd_internal_driver_VoiceManager_UpdateAllVoicesSync. */
 
@@ -124,7 +124,7 @@ LAB_001b20f8:
     if ((int)temp_v8 >= 2) {
       if (*(int *)(param_1 + 0x10) < *(int *)(param_1 + 0xc)) {
         *(int *)(param_1 + 0x10) = *(int *)(param_1 + 0x10) + 1;
-        temp_v5 = FUN_001c2484();
+        temp_v5 = nw_snd_internal_driver_VoiceManager_GetInstance();
         nw_snd_internal_driver_VoiceManager_UpdateAllVoicesSync(temp_v5,0x40);
         return;
       }

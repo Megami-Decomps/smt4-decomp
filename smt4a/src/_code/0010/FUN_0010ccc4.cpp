@@ -19,7 +19,7 @@ typedef struct Descriptor {
     /* 0x1A */ u16 height;
 } Descriptor;
 
-int FUN_002e7194(void *dst, void *src);
+int onlineObjectCopyValue(void *dst, void *src);
 
 /* Copy-assigns a Descriptor and returns the destination. */
 Descriptor *FUN_0010ccc4(Descriptor *dst, Descriptor *src)
@@ -29,7 +29,7 @@ Descriptor *FUN_0010ccc4(Descriptor *dst, Descriptor *src)
     dst->range = src->range;
     dst->width = src->width;
     dst->height = src->height;
-    FUN_002e7194(dst + 1, src + 1);
+    onlineObjectCopyValue(dst + 1, src + 1);
     return dst;
 }
 

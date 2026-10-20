@@ -14,7 +14,7 @@ typedef struct {
 } param_4_stack;
 
 extern int g_btlScriptUnit; /* 0x43427c */
-extern int DAT_0043dcf0; /* 0x43dcf0 */
+extern int g_partyPanel; /* 0x43dcf0 */
 
 /* Supplied declaration required: FUN_002621b4. */
 extern int btlUnitGet(void);
@@ -24,7 +24,7 @@ extern int FUN_0029a924(unsigned short);
 extern int FUN_0029a9d4(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_0029e908. */
 extern int FUN_0029efa8(unsigned int);
-extern int FUN_002a8764(void);
+extern int gameGetSlotTable(void);
 
 
 void FUN_0026d144(unsigned int param_1,int param_2,unsigned int param_3,unsigned int param_4)
@@ -39,9 +39,9 @@ void FUN_0026d144(unsigned int param_1,int param_2,unsigned int param_3,unsigned
   int temp_v5;
   int temp_v6;
   
-  temp_v5 = DAT_0043dcf0;
+  temp_v5 = g_partyPanel;
   temp_v6 = param_4;
-  temp_v2 = FUN_002a8764();
+  temp_v2 = gameGetSlotTable();
   temp_v6 = 0;
   if (((*(short *)(temp_v5 + 0x36) == 0x7d) && (temp_v3 = btlGetMainState(), temp_v3 != 0)) &&
      (g_btlScriptUnit != 0)) {

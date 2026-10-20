@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0014bef4(...);
+int randRange(...);
 int FUN_00184310(void);
 int FUN_003c3f1c(void);
 int FUN_003f39ac(void);
@@ -45,10 +45,10 @@ typedef struct {
 #define ROMWRIGHT_PIECE_2_2_DEFINED
 #define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
 #endif
-/* Supplied declaration required: FUN_0014bef4. */
+/* Supplied declaration required: randRange. */
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: FUN_003c3f1c. */
-extern int FUN_003e46f4(unsigned int);
+extern int gameDataFlagTestBit(unsigned int);
 /* Supplied declaration required: FUN_003f39ac. */
 
 
@@ -86,7 +86,7 @@ short FUN_003f36a4(unsigned int *param_1,int param_2,fn_003f36a4_arg2 *param_3)
   FUN_003f39ac();
   temp_v7 = 0;
   temp_v6 = 0;
-  temp_v3 = FUN_0014bef4(99);
+  temp_v3 = randRange(99);
   do {
     temp_v6 = *(unsigned char *)(temp_v1 + 1 + temp_v7) + temp_v6;
     if (temp_v3 < temp_v6) break;
@@ -108,7 +108,7 @@ short FUN_003f36a4(unsigned int *param_1,int param_2,fn_003f36a4_arg2 *param_3)
   else if (temp_v2 >= 2) {
     temp_v2 = (temp_v2 - 2) & 0xff;
   }
-  temp_v4 = FUN_003e46f4(5);
+  temp_v4 = gameDataFlagTestBit(5);
   if (temp_v4 != 0) {
     temp_v2 = (temp_v2 + 1) & 0xff;
   }
@@ -143,7 +143,7 @@ LAB_003f384c:
     psVar9 = (short *)(((int)psVar9 + 1U) & 0xffff);
   } while (psVar9 < (short *)0x1f5);
   if (temp_v4 != 0) {
-    temp_v4 = FUN_0014bef4((temp_v4 - 1U) & 0xffff);
+    temp_v4 = randRange((temp_v4 - 1U) & 0xffff);
     psVar9 = (short *)0x1;
     do {
       psVar6 = psVar9;

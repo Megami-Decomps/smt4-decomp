@@ -15,7 +15,7 @@ extern unsigned char g_gameGlobals; /* 0x44e140 */
 /* Supplied declaration required: FUN_0024d94c. */
 /* Supplied declaration required: FUN_0026a858. */
 /* Supplied declaration required: FUN_0029dc74. */
-extern unsigned int FUN_002b63ac(void);
+extern unsigned int gameGetPlayerData(void);
 
 
 void FUN_0029defc(unsigned int param_1,int param_2)
@@ -29,7 +29,7 @@ void FUN_0029defc(unsigned int param_1,int param_2)
   
   temp_v0 = (*(int *)((unsigned char *)&g_gameGlobals + 0x4));
   if ((int)param_1 < 0) {
-    temp_v1 = FUN_002b63ac();
+    temp_v1 = gameGetPlayerData();
     FUN_0024d94c(temp_v0 + 0x1300,temp_v1);
     temp_v2 = 0;
   }

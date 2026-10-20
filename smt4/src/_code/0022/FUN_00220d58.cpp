@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002975ac(unsigned int);
-int FUN_002b8838(int);
+int buttonHelpSetPreset(int);
 int FUN_002bf810(int);
 int FUN_002bff6c(int, int, int, int, int);
 int FUN_002ebfbc(int);
@@ -18,11 +18,11 @@ typedef struct {
 extern int FUN_0026ee68(unsigned int);
 extern int FUN_0026f024(int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002975ac. */
-/* Supplied declaration required: FUN_002b8838. */
-extern int FUN_002b8cec(unsigned int);
+/* Supplied declaration required: buttonHelpSetPreset. */
+extern int padIsButtonRepeat(unsigned int);
 extern int FUN_002bf4f8(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bf810. */
-extern int FUN_002bfde4(unsigned int);
+extern int padIsButtonPressed(unsigned int);
 /* Supplied declaration required: FUN_002bff6c. */
 /* Supplied declaration required: FUN_002ebfbc. */
 
@@ -54,22 +54,22 @@ unsigned int FUN_00220d58(int param_1)
     }
     *(unsigned int *)(param_1 + 0x118) = 0;
   }
-  temp_v1 = FUN_002bfde4(0);
+  temp_v1 = padIsButtonPressed(0);
   if ((temp_v1 != 0) || (temp_v1 = FUN_0026ee68(1), temp_v1 != 0)) {
     *(unsigned int *)(param_1 + 0x110) = 2;
     FUN_002bf810(0x100016d);
-    FUN_002b8838(0xe2);
+    buttonHelpSetPreset(0xe2);
     temp_v3 = 2;
   }
   else {
-    temp_v1 = FUN_002bfde4(1);
+    temp_v1 = padIsButtonPressed(1);
     if ((temp_v1 != 0) || (temp_v1 = FUN_0026ee68(2), temp_v1 != 0)) {
       *(unsigned int *)(param_1 + 0x110) = 8;
       FUN_002bf810(0x100016e);
       temp_v3 = 2;
     }
     else {
-      temp_v1 = FUN_002b8cec(10);
+      temp_v1 = padIsButtonRepeat(10);
       if ((temp_v1 != 0) || (temp_v1 = FUN_0026ee68(4), temp_v1 != 0)) {
         if (*(char *)(param_1 + 0x127) != '\0') {
           *(unsigned char *)(param_1 + 0x127) = 0;

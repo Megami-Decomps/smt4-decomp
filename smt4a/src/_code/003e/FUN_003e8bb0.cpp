@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00184310(void);
 int FUN_00192550(void);
 int FUN_00192608(void);
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 
 /* stack frame of param_3: 16 slot(s), 64 byte(s) */
 typedef struct {
@@ -50,7 +50,7 @@ extern unsigned int DAT_0057399c; /* 0x57399c */
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: FUN_00192550. */
 /* Supplied declaration required: FUN_00192608. */
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: dataTable04FindById. */
 
 
 void FUN_003e8bb0(unsigned int *param_1,unsigned int param_2,unsigned int *param_3)
@@ -195,7 +195,7 @@ LAB_003e9284:
 LAB_003e9384:
     temp_v11 = temp_v5 << 0x10;
     temp_v6 = temp_v5;
-    FUN_001aba54();
+    dataTable04FindById();
     if (temp_v6 != 0) {
       temp_v8 = *(unsigned int *)(temp_v6 + 0x28);
       temp_v11 = temp_v11 | *(unsigned char *)(temp_v6 + 0x31);

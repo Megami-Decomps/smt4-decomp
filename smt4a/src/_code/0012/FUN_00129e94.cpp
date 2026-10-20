@@ -6,14 +6,14 @@ extern "C" {
 
 int FUN_00129de8(unsigned int *);
 int FUN_0030cb80(...);
-int FUN_0030ccc0(unsigned char *, unsigned int *);
+int onlineObjectListRemove(unsigned char *, unsigned int *);
 
 extern unsigned char DAT_00559a40; /* 0x559a40 */
 extern unsigned char DAT_00594b24; /* 0x594b24 */
 
 /* Supplied declaration required: FUN_00129de8. */
 /* Supplied declaration required: FUN_0030cb80. */
-/* Supplied declaration required: FUN_0030ccc0. */
+/* Supplied declaration required: onlineObjectListRemove. */
 
 
 int FUN_00129e94(unsigned int *param_1)
@@ -23,7 +23,7 @@ int FUN_00129e94(unsigned int *param_1)
   int temp_v0;
   
   *param_1 = (unsigned int)&DAT_00559a40;
-  FUN_0030ccc0(&DAT_00594b24,param_1);
+  onlineObjectListRemove(&DAT_00594b24,param_1);
   FUN_00129de8(param_1);
   temp_v0 = FUN_0030cb80(param_1 + 8);
   temp_v0 = FUN_0030cb80(temp_v0 - 0x14);

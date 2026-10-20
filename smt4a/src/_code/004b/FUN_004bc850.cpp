@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0019cac4(void);
+int dataTable00FindById(void);
 
-/* Supplied declaration required: FUN_0019cac4. */
+/* Supplied declaration required: dataTable00FindById. */
 extern int FUN_004bb80c(void);
 
 
@@ -29,12 +29,12 @@ unsigned int FUN_004bc850(void)
   temp_v5 = temp_v4;
   do {
     temp_v3 = (unsigned int)*(unsigned short *)(temp_v0 + temp_v4 * 2 + 0x14);
-    if ((temp_v3 != 0) && (temp_v1 = temp_v3, FUN_0019cac4(), temp_v1 != 0)) {
+    if ((temp_v3 != 0) && (temp_v1 = temp_v3, dataTable00FindById(), temp_v1 != 0)) {
       if ((*(unsigned short *)(temp_v1 + 2) & 0x8000) != 0) {
         return temp_v3;
       }
       if ((temp_v5 == 0) ||
-         (temp_v2 = temp_v5, FUN_0019cac4(),
+         (temp_v2 = temp_v5, dataTable00FindById(),
          (*(unsigned short *)(temp_v2 + 2) & 0x7fff) < (*(unsigned short *)(temp_v1 + 2) & 0x7fff))) {
         temp_v5 = temp_v3;
       }

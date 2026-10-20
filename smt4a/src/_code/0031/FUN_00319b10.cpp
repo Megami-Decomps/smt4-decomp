@@ -8,7 +8,7 @@ int asdProcessCreateSimple(unsigned char *, int, int, int, unsigned char *, int,
 int taskCreateDraw(...);
 int asdOperatorNew(void);
 int FUN_002804b0(...);
-int FUN_003f881c(...);
+int loadSlotRequestAsync(...);
 
 /* stack frame of void: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -31,7 +31,7 @@ extern unsigned int *DAT_0057f134; /* 0x57f134 */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_002804b0. */
-/* Supplied declaration required: FUN_003f881c. */
+/* Supplied declaration required: loadSlotRequestAsync. */
 
 
 void FUN_00319b10(void)
@@ -52,9 +52,9 @@ void FUN_00319b10(void)
   taskCreateDraw(&LAB_00319c8c,0xeb,0,0,&LAB_0032fab0,0,0,*puVar1);
   puVar1[0xb] = 0xffffffff;
   puVar1[0xc] = 0xffffffff;
-  FUN_003f881c(0x14,0);
-  FUN_003f881c(0x25,0);
-  FUN_003f881c(0x3e,0);
+  loadSlotRequestAsync(0x14,0);
+  loadSlotRequestAsync(0x25,0);
+  loadSlotRequestAsync(0x3e,0);
   puVar1[4] = 0;
   puVar1[6] = 0;
   puVar1[7] = 0;

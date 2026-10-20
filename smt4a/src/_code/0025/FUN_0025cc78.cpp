@@ -21,7 +21,7 @@ typedef struct {
 } param_4_stack;
 
 extern unsigned int g_renderCtx; /* 0x59dbb4 */
-extern signed char DAT_005b3d54; /* 0x5b3d54 */
+extern signed char g_asdTextDefaults; /* 0x5b3d54 */
 extern int DAT_005b3d64; /* 0x5b3d64 */
 extern romwright_code *DAT_005b3d74; /* 0x5b3d74 */
 extern unsigned int DAT_005b3d78; /* 0x5b3d78 */
@@ -130,7 +130,7 @@ void FUN_0025cc78(int *param_1,unsigned int param_2,unsigned int param_3,int par
   temp_v25 = 0;
   iStack_a0 = 0;
   piStack_30 = param_1;
-  if (DAT_005b3d54 != '\0') {
+  if (g_asdTextDefaults != '\0') {
     FUN_001879d0(g_renderCtx);
     temp_v15 = temp_v17 + temp_v15;
   }

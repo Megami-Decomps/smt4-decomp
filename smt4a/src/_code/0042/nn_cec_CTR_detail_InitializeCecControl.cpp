@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-extern unsigned int DAT_005c1fc4; /* 0x5c1fc4 */
+extern unsigned int g_nnCecdHandle; /* 0x5c1fc4 */
 
 extern int FUN_0016f864(void);
 /* Supplied declaration required: FUN_0016f988. */
@@ -28,7 +28,7 @@ void nn_cec_CTR_detail_InitializeCecControl(void)
   temp_v0 = FUN_0016f864();
   if (-1 < temp_v0) {
     temp_v1 = wstrlen("cecd:u");
-    FUN_0016f988(&DAT_005c1fc4,"cecd:u",temp_v1,0);
+    FUN_0016f988(&g_nnCecdHandle,"cecd:u",temp_v1,0);
     return;
   }
   return;

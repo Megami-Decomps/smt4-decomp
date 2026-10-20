@@ -8,7 +8,7 @@ int FUN_004f3ee0(int, int, int);
 int FUN_004f3f1c(...);
 int FUN_004f41b0(int, int, int);
 
-extern int DAT_00571508; /* 0x571508 */
+extern int g_btlCamera; /* 0x571508 */
 
 /* Supplied declaration required: FUN_004f3ee0. */
 /* Supplied declaration required: FUN_004f3f1c. */
@@ -22,13 +22,13 @@ unsigned int FUN_004e81bc(unsigned int param_1,int param_2,int param_3)
   int temp_v0;
   int temp_v1;
   
-  temp_v0 = DAT_00571508;
+  temp_v0 = g_btlCamera;
   temp_v1 = *(int *)(param_2 + 0x56c);
   if (param_3 != 0) {
     if (temp_v1 == 0xf) {
-      *(unsigned int *)(DAT_00571508 + 0x64c) = *(unsigned int *)(DAT_00571508 + 0x64c) | 0x100000;
+      *(unsigned int *)(g_btlCamera + 0x64c) = *(unsigned int *)(g_btlCamera + 0x64c) | 0x100000;
       FUN_004f3ee0(temp_v0,0x32,1);
-      FUN_004f3f1c(DAT_00571508,0x32,1,0);
+      FUN_004f3f1c(g_btlCamera,0x32,1,0);
     }
     if (*(unsigned int *)(param_2 + 0x56c) < 0x42) {
       return 0;
@@ -38,17 +38,17 @@ unsigned int FUN_004e81bc(unsigned int param_1,int param_2,int param_3)
     if (temp_v1 != 0xf) {
       if (temp_v1 != 0x23) {
         if (temp_v1 == 0x29) {
-          FUN_004f41b0(DAT_00571508,0,2);
+          FUN_004f41b0(g_btlCamera,0,2);
         }
       }
       else {
-        FUN_004f3ee0(DAT_00571508,6,1);
-        FUN_004f3f1c(DAT_00571508,6,1);
+        FUN_004f3ee0(g_btlCamera,6,1);
+        FUN_004f3f1c(g_btlCamera,6,1);
       }
     }
     else {
-      FUN_004f3ee0(DAT_00571508,0x32,1);
-      FUN_004f3f1c(DAT_00571508,0x32,1,0);
+      FUN_004f3ee0(g_btlCamera,0x32,1);
+      FUN_004f3f1c(g_btlCamera,0x32,1,0);
     }
     if (*(unsigned int *)(param_2 + 0x56c) < 0x2c) {
       return 0;

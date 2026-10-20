@@ -5,11 +5,11 @@
 extern "C" {
 
 int asdMemFree(void);
-int FUN_002e3328(void);
+int asdOperatorDelete(void);
 int FUN_004279cc(void);
 
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_002e3328. */
+/* Supplied declaration required: asdOperatorDelete. */
 /* Supplied declaration required: FUN_004279cc. */
 
 
@@ -19,7 +19,7 @@ void FUN_00473710(int param_1)
 /* irregular: 3 native warning(s); review required */
   if (*(int *)(param_1 + 0x5a8) != 0) {
     FUN_004279cc();
-    FUN_002e3328();
+    asdOperatorDelete();
     *(unsigned int *)(param_1 + 0x5a8) = 0;
   }
   if (*(int *)(param_1 + 0x5ac) != 0) {

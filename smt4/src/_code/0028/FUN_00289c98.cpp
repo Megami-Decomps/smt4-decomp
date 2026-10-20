@@ -9,7 +9,7 @@ int FUN_002a9fdc(int, int, int);
 int timerStart(int, int, int);
 int FUN_002bee58(int, int);
 
-extern unsigned char DAT_0043da28; /* 0x43da28 */
+extern unsigned char g_buttonHelp; /* 0x43da28 */
 
 /* Supplied declaration required: FUN_002a87e8. */
 /* Supplied declaration required: FUN_002a9fdc. */
@@ -25,7 +25,7 @@ void FUN_00289c98(int param_1)
   int temp_v1;
   int temp_v2;
   
-  temp_v0 = (*(int *)((unsigned char *)&DAT_0043da28 + 0x4));
+  temp_v0 = (*(int *)((unsigned char *)&g_buttonHelp + 0x4));
   temp_v2 = 0;
   do {
     FUN_002bee58(temp_v0 + temp_v2 * 0x8c + 0x34,1);
@@ -47,10 +47,10 @@ void FUN_00289c98(int param_1)
     else {
       timerStart(temp_v1,3,0);
     }
-    temp_v1 = (*(int *)((unsigned char *)&DAT_0043da28 + 0x4));
+    temp_v1 = (*(int *)((unsigned char *)&g_buttonHelp + 0x4));
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 2);
-  *(unsigned int *)((*(int *)((unsigned char *)&DAT_0043da28 + 0x4)) + 0xc) = 0;
+  *(unsigned int *)((*(int *)((unsigned char *)&g_buttonHelp + 0x4)) + 0xc) = 0;
   *(unsigned int *)(temp_v1 + 0x10) = 3;
   return;
 }

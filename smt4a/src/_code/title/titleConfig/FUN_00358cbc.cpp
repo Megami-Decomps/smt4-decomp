@@ -10,7 +10,7 @@ extern unsigned char DAT_00588fc2; /* 0x588fc2 */
 extern unsigned char DAT_00588fc3; /* 0x588fc3 */
 extern signed char DAT_00588fc4; /* 0x588fc4 */
 
-extern int FUN_0014af84(void);
+extern int gameDataBlocksGetSaveData(void);
 
 
 void FUN_00358cbc(void)
@@ -18,7 +18,7 @@ void FUN_00358cbc(void)
 {
   int temp_v0;
   
-  temp_v0 = FUN_0014af84();
+  temp_v0 = gameDataBlocksGetSaveData();
   if (temp_v0 != 0) {
     if (DAT_00588fc4 == '\0') {
       if (*(char *)(temp_v0 + 0x27e94) != '\0') {

@@ -6,10 +6,10 @@ extern "C" {
 
 int FUN_00249974(void);
 
-extern unsigned char DAT_00439c88; /* 0x439c88 */
+extern unsigned char g_btlUi; /* 0x439c88 */
 
 /* Supplied declaration required: FUN_00249974. */
-extern int FUN_0028c5e8(int);
+extern int playSceneIsFadeInDone(int);
 
 
 void FUN_0027e350(void)
@@ -18,7 +18,7 @@ void FUN_0027e350(void)
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_0028c5e8((*(int *)((unsigned char *)&DAT_00439c88 + 0x20)) + 8);
+  temp_v0 = playSceneIsFadeInDone((*(int *)((unsigned char *)&g_btlUi + 0x20)) + 8);
   if (temp_v0 != 0) {
     FUN_00249974();
   }

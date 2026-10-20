@@ -11,12 +11,12 @@ extern u8 DAT_00559aac;
 extern u8 DAT_00594b24; /* registry */
 
 void FUN_00129ff0(RegisteredObject *self);
-void FUN_0030ccc0(u8 *registry, RegisteredObject *self);
+void onlineObjectListRemove(u8 *registry, RegisteredObject *self);
 
 RegisteredObject *FUN_0012a05c(RegisteredObject *self)
 {
     self->vtbl = &DAT_00559aac;
-    FUN_0030ccc0(&DAT_00594b24, self);
+    onlineObjectListRemove(&DAT_00594b24, self);
     FUN_00129ff0(self);
     return self;
 }

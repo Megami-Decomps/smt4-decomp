@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_002b63c0(void);
-int FUN_002c09d0(...);
+int dataTable1bOr1cGetRecord(void);
+int gameFlagIsSet(...);
 
 extern int FUN_00240a6c(unsigned int);
 extern int FUN_00298e20(void);
-/* Supplied declaration required: FUN_002b63c0. */
-/* Supplied declaration required: FUN_002c09d0. */
+/* Supplied declaration required: dataTable1bOr1cGetRecord. */
+/* Supplied declaration required: gameFlagIsSet. */
 
 
 unsigned int FUN_0028f1bc(unsigned int param_1)
@@ -22,7 +22,7 @@ unsigned int FUN_0028f1bc(unsigned int param_1)
   int temp_v2;
   
   temp_v1 = param_1;
-  FUN_002b63c0();
+  dataTable1bOr1cGetRecord();
   if (temp_v1 == 0) {
     return 0;
   }
@@ -41,38 +41,38 @@ unsigned int FUN_0028f1bc(unsigned int param_1)
     if (temp_v0 != 0) {
       if (temp_v0 != 1) {
         if (temp_v0 != 2) {
-          if (((*(short *)(temp_v1 + 0x1b0) != 0) && (temp_v2 = FUN_002c09d0(), temp_v2 != 0)) &&
-             ((*(short *)(temp_v1 + 0x1b2) == 0 || (temp_v2 = FUN_002c09d0(), temp_v2 == 0)))) {
+          if (((*(short *)(temp_v1 + 0x1b0) != 0) && (temp_v2 = gameFlagIsSet(), temp_v2 != 0)) &&
+             ((*(short *)(temp_v1 + 0x1b2) == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 == 0)))) {
             return 0;
           }
           return 1;
         }
-        temp_v2 = FUN_002c09d0(0x224);
+        temp_v2 = gameFlagIsSet(0x224);
       }
       else {
-        temp_v2 = FUN_002c09d0(0x223);
+        temp_v2 = gameFlagIsSet(0x223);
       }
       if (temp_v2 == 0) {
         return 0;
       }
     }
     else {
-      temp_v2 = FUN_002c09d0(0x223);
+      temp_v2 = gameFlagIsSet(0x223);
       if (temp_v2 != 0) {
         return 0;
       }
-      temp_v2 = FUN_002c09d0(0x224);
+      temp_v2 = gameFlagIsSet(0x224);
       if (temp_v2 != 0) {
         return 0;
       }
-      temp_v2 = FUN_002c09d0(0x295);
+      temp_v2 = gameFlagIsSet(0x295);
       if (temp_v2 != 0) {
         return 0;
       }
     }
   }
-  if (((*(short *)(temp_v1 + 0x1b0) != 0) && (temp_v2 = FUN_002c09d0(), temp_v2 != 0)) &&
-     ((*(short *)(temp_v1 + 0x1b2) == 0 || (temp_v2 = FUN_002c09d0(), temp_v2 == 0)))) {
+  if (((*(short *)(temp_v1 + 0x1b0) != 0) && (temp_v2 = gameFlagIsSet(), temp_v2 != 0)) &&
+     ((*(short *)(temp_v1 + 0x1b2) == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 == 0)))) {
     return 0;
   }
   return 1;

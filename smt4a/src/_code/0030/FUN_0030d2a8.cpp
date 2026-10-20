@@ -14,7 +14,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_00307bce. */
-extern int FUN_0030c6a2(int *);
+extern int rangeIsEmpty4(int *);
 /* Supplied declaration required: FUN_0030fdc0. */
 extern int __aeabi_idivmod(int, unsigned int);
 
@@ -31,7 +31,7 @@ void FUN_0030d2a8(int *param_1)
   
   temp_v4 = *param_1;
   temp_v0 = param_1[1];
-  temp_v1 = FUN_0030c6a2(param_1);
+  temp_v1 = rangeIsEmpty4(param_1);
   if (temp_v1 == 0) {
     temp_v2 = param_1[1];
     temp_v1 = temp_v4;

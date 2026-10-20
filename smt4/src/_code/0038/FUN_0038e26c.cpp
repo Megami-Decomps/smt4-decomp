@@ -10,15 +10,15 @@ typedef struct Manager {
 
 extern Manager *g_aocMain;
 
-int FUN_002b2368(u32 *slot);
+int asdMemFreeNonNull(u32 *slot);
 int FUN_002ba8f4(void *list);
 
-/* Stores `value` in `slot`, then notifies the manager's list and runs FUN_002b2368 on the slot. */
+/* Stores `value` in `slot`, then notifies the manager's list and runs asdMemFreeNonNull on the slot. */
 void FUN_0038e26c(u32 *slot, u32 value)
 {
     *slot = value;
     FUN_002ba8f4(g_aocMain->list);
-    FUN_002b2368(slot);
+    asdMemFreeNonNull(slot);
 }
 
 } /* extern "C" */

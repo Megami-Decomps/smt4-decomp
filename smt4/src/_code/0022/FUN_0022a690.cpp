@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_00282924(unsigned int, int);
+int btlMainFindEntryByListedId(unsigned int, int);
 
 extern unsigned int g_btlScriptUnit; /* 0x43427c */
 
 extern unsigned int *btlUnitGet(unsigned int);
-/* Supplied declaration required: FUN_00282924. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 extern unsigned int btlGetMainState(void);
 
 
@@ -25,9 +25,9 @@ void FUN_0022a690(int param_1)
   
   temp_v2 = (int)in_s0;
   temp_v0 = btlGetMainState();
-  FUN_00282924(temp_v0,(int)in_s0);
+  btlMainFindEntryByListedId(temp_v0,(int)in_s0);
   temp_v0 = btlGetMainState();
-  FUN_00282924(temp_v0,temp_v2);
+  btlMainFindEntryByListedId(temp_v0,temp_v2);
   switch(param_1) {
   case 7:
   case 8:
@@ -35,7 +35,7 @@ void FUN_0022a690(int param_1)
   case 9:
     temp_v1 = temp_v2;
     temp_v0 = btlGetMainState();
-    FUN_00282924(temp_v0,temp_v2);
+    btlMainFindEntryByListedId(temp_v0,temp_v2);
     temp_v2 = temp_v1;
     break;
   case 10:
@@ -43,7 +43,7 @@ void FUN_0022a690(int param_1)
   case 0xb:
     temp_v1 = temp_v2;
     temp_v0 = btlGetMainState();
-    FUN_00282924(temp_v0,temp_v2);
+    btlMainFindEntryByListedId(temp_v0,temp_v2);
     temp_v2 = temp_v1;
   }
   puVar2 = (unsigned int *)btlUnitGet(g_btlScriptUnit);
@@ -52,20 +52,20 @@ void FUN_0022a690(int param_1)
       if (param_1 == 7) {
         temp_v1 = temp_v2;
         temp_v0 = btlGetMainState();
-        FUN_00282924(temp_v0,temp_v2);
+        btlMainFindEntryByListedId(temp_v0,temp_v2);
         temp_v0 = btlGetMainState();
-        FUN_00282924(temp_v0,temp_v1);
+        btlMainFindEntryByListedId(temp_v0,temp_v1);
       }
     }
     else {
       temp_v1 = temp_v2;
       temp_v0 = btlGetMainState();
-      FUN_00282924(temp_v0,temp_v2);
+      btlMainFindEntryByListedId(temp_v0,temp_v2);
       temp_v2 = temp_v1;
       temp_v0 = btlGetMainState();
-      FUN_00282924(temp_v0,temp_v1);
+      btlMainFindEntryByListedId(temp_v0,temp_v1);
       temp_v0 = btlGetMainState();
-      FUN_00282924(temp_v0,temp_v2);
+      btlMainFindEntryByListedId(temp_v0,temp_v2);
     }
   }
   return;

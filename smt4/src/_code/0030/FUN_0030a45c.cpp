@@ -19,7 +19,7 @@ extern unsigned int DAT_0043e070; /* 0x43e070 */
 /* Supplied declaration required: scrGetArg. */
 /* Supplied declaration required: FUN_002bf6fc. */
 extern unsigned int *jobGetWork(void);
-extern int FUN_002c09d0(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 
 
 unsigned int FUN_0030a45c(void)
@@ -36,7 +36,7 @@ unsigned int FUN_0030a45c(void)
   temp_v2 = *puVar1;
   temp_v0 = scrGetArg(1);
   FUN_002bf6fc(temp_v2,temp_v0,1,1,0xffffffff);
-  temp_v1 = FUN_002c09d0(0x522);
+  temp_v1 = gameFlagIsSet(0x522);
   if (temp_v1 != 0) {
     DAT_0043e06c = 1;
     DAT_0043e070 = 1;

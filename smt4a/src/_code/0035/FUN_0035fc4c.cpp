@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_0019a7f4(int);
+int asdTMTexTableReleaseNode(int);
 int FUN_001b2d54(unsigned int, int, unsigned int);
 
 extern unsigned int g_aocSystem; /* 0x570280 */
 extern int g_btlTalkBustUp; /* 0x5710dc */
 
-/* Supplied declaration required: FUN_0019a7f4. */
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
 /* Supplied declaration required: FUN_001b2d54. */
 
 
@@ -23,7 +23,7 @@ void FUN_0035fc4c(void)
   temp_v0 = g_btlTalkBustUp;
   if (g_btlTalkBustUp != 0) {
     if (-1 < *(int *)(g_btlTalkBustUp + 0x2f8)) {
-      FUN_0019a7f4(0x10);
+      asdTMTexTableReleaseNode(0x10);
       if (g_btlTalkBustUp != 0) {
         *(unsigned char *)(g_btlTalkBustUp + 0x2f4) = 0;
       }

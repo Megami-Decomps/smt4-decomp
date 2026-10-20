@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00145e24(int, unsigned int);
-int FUN_0016c410(int);
+int renderCtxResetColorScale(int);
 int FUN_0016c560(int);
 int FUN_00182540(void);
 int requestDispatch(void);
@@ -14,7 +14,7 @@ int FUN_00409718(int);
 
 typedef int romwright_code(...);
 extern int g_renderCtx; /* 0x59dbb4 */
-extern signed char DAT_0059dbe0; /* 0x59dbe0 */
+extern signed char g_effectEditor; /* 0x59dbe0 */
 extern int DAT_0059dbf0; /* 0x59dbf0 */
 extern int DAT_0059dc00; /* 0x59dc00 */
 extern int DAT_0059dc0c; /* 0x59dc0c */
@@ -22,7 +22,7 @@ extern int DAT_0059dc0c; /* 0x59dc0c */
 /* Supplied declaration required: FUN_00145e24. */
 extern unsigned int FUN_00152f54(void);
 extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0016c410. */
+/* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: FUN_0016c560. */
 /* Supplied declaration required: FUN_00182540. */
 /* Supplied declaration required: requestDispatch. */
@@ -73,7 +73,7 @@ void FUN_00345cd4(void)
     (**(romwright_code **)(temp_v0 + 0x12d4))();
     *(unsigned char *)(temp_v0 + 0x12d0) = 0;
   }
-  if (DAT_0059dbe0 != '\0') {
+  if (g_effectEditor != '\0') {
     FUN_00409718(g_renderCtx);
   }
   else {
@@ -90,7 +90,7 @@ void FUN_00345cd4(void)
   if (DAT_0059dc0c != 0) {
     requestDispatch();
   }
-  FUN_0016c410(g_renderCtx);
+  renderCtxResetColorScale(g_renderCtx);
   FUN_0016c560(g_renderCtx);
   temp_v0 = g_renderCtx;
   piVar6 = (int *)(g_renderCtx + 0x11f8);

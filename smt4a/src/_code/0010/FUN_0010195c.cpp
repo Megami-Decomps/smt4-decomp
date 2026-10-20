@@ -34,7 +34,7 @@ typedef struct {
 extern unsigned int *__aeabi_errno_addr(void);
 extern unsigned int FUN_002e418c(unsigned int);
 /* Supplied declaration required: FUN_002e4194. */
-extern long long FUN_002e49c4(int, int, unsigned int, unsigned int);
+extern long long rt_lmul(int, int, unsigned int, unsigned int);
 
 
 void FUN_0010195c(int *param_1,unsigned char *param_2,unsigned char *param_3,int param_4)
@@ -103,7 +103,7 @@ void FUN_0010195c(int *param_1,unsigned char *param_2,unsigned char *param_3,int
     if (temp_v0 == 0xff) break;
     temp_v16 = temp_v16 + 1;
     temp_v10 = 0;
-    temp_v8 = FUN_002e49c4((int)temp_v1,temp_v6,10,0);
+    temp_v8 = rt_lmul((int)temp_v1,temp_v6,10,0);
     temp_v1 = temp_v8 + romwright_piece_4_4(temp_v10,(unsigned int)temp_v0);
   }
   temp_v2 = FUN_002e418c(0);

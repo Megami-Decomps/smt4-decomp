@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } void_stack;
 
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern int g_mapIf; /* 0x58103c */
 extern int DAT_005f1b30; /* 0x5f1b30 */
 extern int DAT_005f1b34; /* 0x5f1b34 */
@@ -36,7 +36,7 @@ void FUN_002d8748(void)
   puVar2 = (unsigned char *)(g_mapIf + 0xcc7c);
   *(int *)(g_mapIf + 0xcc9c) = DAT_005f1b30;
   temp_v1 = *(int *)(temp_v1 + 4);
-  FUN_0040ace8(DAT_0056fcc0,temp_v1);
+  FUN_0040ace8(g_handleRegistry,temp_v1);
   *(unsigned int *)(temp_v1 + 4) = *(unsigned int *)(temp_v1 + 4) | 3;
   *puVar2 = 1;
   *(unsigned char *)(temp_v0 + 0xcc7d) = 0;
@@ -53,7 +53,7 @@ void FUN_002d8748(void)
   temp_v1 = DAT_005f1b34;
   *(int *)(temp_v0 + 0xccc0) = DAT_005f1b34;
   temp_v1 = *(int *)(temp_v1 + 4);
-  FUN_0040ace8(DAT_0056fcc0,temp_v1);
+  FUN_0040ace8(g_handleRegistry,temp_v1);
   *(unsigned int *)(temp_v1 + 4) = *(unsigned int *)(temp_v1 + 4) | 3;
   *(unsigned char *)(temp_v0 + 0xcca0) = 1;
   *(unsigned char *)(temp_v0 + 0xcca1) = 0;
@@ -69,7 +69,7 @@ void FUN_002d8748(void)
   temp_v1 = DAT_005f1b38;
   *(int *)(temp_v0 + 0xcce4) = DAT_005f1b38;
   temp_v1 = *(int *)(temp_v1 + 4);
-  FUN_0040ace8(DAT_0056fcc0,temp_v1);
+  FUN_0040ace8(g_handleRegistry,temp_v1);
   *(unsigned int *)(temp_v1 + 4) = *(unsigned int *)(temp_v1 + 4) | 3;
   *(unsigned char *)(temp_v0 + 0xccc4) = 1;
   *(unsigned char *)(temp_v0 + 0xccc5) = 0;

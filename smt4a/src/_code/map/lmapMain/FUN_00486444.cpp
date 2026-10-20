@@ -53,7 +53,7 @@ extern float DAT_005f1c88; /* 0x5f1c88 */
 extern float DAT_005f1c8c; /* 0x5f1c8c */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_00162e8c(void);
+extern int gameFlagsGetBlock(void);
 extern unsigned int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c69c. */
 /* Supplied declaration required: FUN_0016c6f0. */
@@ -114,7 +114,7 @@ void FUN_00486444(int param_1)
   float temp_v16;
   float temp_v17;
   
-  temp_v2 = FUN_00162e8c();
+  temp_v2 = gameFlagsGetBlock();
   temp_v3 = param_1 + 0x4cc;
   temp_v1 = 0;
   pfVar5 = (float *)lmapSceneGetObj();

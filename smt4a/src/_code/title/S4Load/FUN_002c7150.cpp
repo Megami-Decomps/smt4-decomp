@@ -10,7 +10,7 @@ int asdMemoryAllocTracked(...);
 int asdMemoryAlloc(...);
 int FUN_002804b0(...);
 int FUN_002a2d14(...);
-int FUN_002e6dd0(...);
+int rt_aeabi_memclr(...);
 
 /* stack frame of void: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -39,7 +39,7 @@ extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: FUN_002804b0. */
 /* Supplied declaration required: FUN_002a2d14. */
-/* Supplied declaration required: FUN_002e6dd0. */
+/* Supplied declaration required: rt_aeabi_memclr. */
 
 
 unsigned int FUN_002c7150(void)
@@ -58,7 +58,7 @@ unsigned int FUN_002c7150(void)
   puVar1[2] = 0;
   temp_v1 = 0;
   do {
-    FUN_002e6dd0(puVar1 + temp_v1 * 0x20 + 0xaf,0x80);
+    rt_aeabi_memclr(puVar1 + temp_v1 * 0x20 + 0xaf,0x80);
     temp_v2 = temp_v1 + 1;
     *(unsigned char *)((int)puVar1 + temp_v1 + 0xa4) = 0;
     temp_v1 = temp_v2;

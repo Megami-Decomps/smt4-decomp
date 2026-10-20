@@ -3,11 +3,11 @@
 
 extern "C" {
 
-void FUN_0037ed3c(void);
+void campCommonBgCreateCrazingSumaho(void);
 
 void FUN_0037ed38(void)
 {
-    FUN_0037ed3c();
+    campCommonBgCreateCrazingSumaho();
 }
 
 }

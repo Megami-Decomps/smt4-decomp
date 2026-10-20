@@ -6,7 +6,7 @@ extern "C" {
 
 extern unsigned char DAT_0056fd38; /* 0x56fd38 */
 
-extern int FUN_00261828(void);
+extern int gameDataGetPlayerName(void);
 
 
 int FUN_00358e28(int param_1)
@@ -15,7 +15,7 @@ int FUN_00358e28(int param_1)
   int temp_v0;
   
   if (param_1 >= 201) {
-    temp_v0 = FUN_00261828();
+    temp_v0 = gameDataGetPlayerName();
     return temp_v0;
   }
   temp_v0 = 0;

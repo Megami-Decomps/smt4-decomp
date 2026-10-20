@@ -5,7 +5,7 @@
 extern "C" {
 
 int jobIsValid(...);
-int FUN_0016c410(int);
+int renderCtxResetColorScale(int);
 int FUN_0016c560(int);
 int FUN_00281428(unsigned int);
 int FUN_002a2194(...);
@@ -15,7 +15,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: jobIsValid. */
 extern int jobGetWork(void);
-/* Supplied declaration required: FUN_0016c410. */
+/* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: FUN_0016c560. */
 /* Supplied declaration required: FUN_00281428. */
 /* Supplied declaration required: FUN_002a2194. */
@@ -110,7 +110,7 @@ unsigned int FUN_00334848(void)
     *(unsigned char *)(temp_v1 + 0x1290) = 0;
   }
   FUN_0016c560(g_renderCtx);
-  FUN_0016c410(g_renderCtx);
+  renderCtxResetColorScale(g_renderCtx);
   return 0;
 }
 

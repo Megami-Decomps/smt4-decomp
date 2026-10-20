@@ -2,14 +2,14 @@
 
 extern "C" {
 
-void FUN_001070b4(void *object, u32 a, u32 b, s32 flag);
+void onlineInstantiationContextClearByIndex(void *object, u32 a, u32 b, s32 flag);
 void onlineInstantiationContextClearSlot(u8 *slot);
 
-/* With `flag` set forwards to FUN_001070b4, otherwise clears the slot at +4. */
+/* With `flag` set forwards to onlineInstantiationContextClearByIndex, otherwise clears the slot at +4. */
 void FUN_00107008(u8 *object, u32 a, u32 b, s32 flag)
 {
     if (flag != 0) {
-        FUN_001070b4(object, a, b, flag);
+        onlineInstantiationContextClearByIndex(object, a, b, flag);
         return;
     }
     onlineInstantiationContextClearSlot(object + 4);

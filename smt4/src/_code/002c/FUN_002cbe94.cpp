@@ -7,13 +7,13 @@ extern "C" {
 int FUN_00254884(int, unsigned char [500], int);
 int FUN_002bb5a4(int *, unsigned char [500], int);
 int FUN_002c3510(...);
-int FUN_002c52f8(void);
+int asdFatalError(void);
 
 typedef int romwright_code(...);
 /* Supplied declaration required: FUN_00254884. */
 /* Supplied declaration required: FUN_002bb5a4. */
 /* Supplied declaration required: FUN_002c3510. */
-/* Supplied declaration required: FUN_002c52f8. */
+/* Supplied declaration required: asdFatalError. */
 extern void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(unsigned int);
 
 
@@ -44,7 +44,7 @@ int * FUN_002cbe94(int *param_1,int param_2,unsigned int param_3)
   if ((int)piVar1 < 0) {
     if ((param_1[2] & 0xfffffffeU) != 0) {
       if ((param_1[2] & 1U) != 0) {
-        FUN_002c52f8();
+        asdFatalError();
       }
       nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(param_1[2] & 0xfffffffe);
       param_1[2] = 0;

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00100388(int, unsigned char *, int, unsigned int);
 int FUN_001654f8(unsigned int, int);
 int FUN_00224880(unsigned int);
-int FUN_00275f44(unsigned int, unsigned int);
+int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int sysMemClear(int, int);
 int FUN_003c5fc4(int);
 
@@ -17,9 +17,9 @@ extern unsigned char LAB_00498ab4; /* 0x498ab4 */
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_001654f8. */
 /* Supplied declaration required: FUN_00224880. */
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: sysMemClear. */
-extern unsigned int FUN_00357bc8(unsigned int, unsigned char *);
+extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_003c5fc4. */
 extern unsigned int dataTable17Type0GetEntry(unsigned int *, int);
 
@@ -51,8 +51,8 @@ void FUN_004989f0(int param_1,int param_2,unsigned int param_3,unsigned int para
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < *(int *)(param_1 + 0x1601c));
   }
-  temp_v1 = FUN_00357bc8(*(unsigned int *)(param_1 + 0x184),&LAB_00498aa8);
-  FUN_00275f44(*(unsigned int *)(param_1 + 400),temp_v1);
+  temp_v1 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x184),&LAB_00498aa8);
+  scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 400),temp_v1);
   FUN_00224880(*(unsigned int *)(param_1 + 400));
   FUN_003c5fc4(1);
   return;

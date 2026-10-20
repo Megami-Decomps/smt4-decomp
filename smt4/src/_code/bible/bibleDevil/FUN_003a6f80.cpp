@@ -11,16 +11,16 @@ int FUN_00233818(int);
 int FUN_00233854(unsigned int);
 int FUN_0026c57c(void);
 int FUN_00295660(int, int [388]);
-int FUN_00296f4c(...);
+int scrScriptProcessStartEntry(...);
 int FUN_0029ca58(void);
 int FUN_0029cc44(int);
 int FUN_0029d770(int, int [388]);
 int FUN_0029da34(...);
 int FUN_0029ee6c(int, int);
 int FUN_002a0cc8(...);
-int FUN_002b8838(unsigned int);
+int buttonHelpSetPreset(unsigned int);
 int FUN_002bd06c(unsigned int);
-int FUN_002bf694(int [388], unsigned int);
+int libc_strcpy(int [388], unsigned int);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -43,7 +43,7 @@ extern int FUN_0026c63c(void);
 extern int FUN_002762e0(void);
 extern int FUN_0027ee9c(void);
 /* Supplied declaration required: FUN_00295660. */
-/* Supplied declaration required: FUN_00296f4c. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_0029ca58. */
 /* Supplied declaration required: FUN_0029cc44. */
 /* Supplied declaration required: FUN_0029d770. */
@@ -52,10 +52,10 @@ extern int gameGetFlagByte12e8(void);
 /* Supplied declaration required: FUN_0029ee6c. */
 /* Supplied declaration required: FUN_002a0cc8. */
 extern unsigned int FUN_002b066c(unsigned short);
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 extern unsigned int FUN_002bce30(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bd06c. */
-/* Supplied declaration required: FUN_002bf694. */
+/* Supplied declaration required: libc_strcpy. */
 
 
 void FUN_003a6f80(int param_1)
@@ -111,12 +111,12 @@ void FUN_003a6f80(int param_1)
     temp_v6 = (unsigned int)*(unsigned short *)(param_1 + 0x5a8 + temp_v2 * 0x20 + 4);
     temp_v4 = temp_v6;
     FUN_002bd06c(temp_v6);
-    FUN_002bf694(temp_v10,temp_v4);
+    libc_strcpy(temp_v10,temp_v4);
     FUN_00295660(8,temp_v10);
     temp_v5 = FUN_002bce30(temp_v6,1);
-    FUN_002bf694(temp_v10,temp_v5);
+    libc_strcpy(temp_v10,temp_v5);
     FUN_00295660(0x10,temp_v10);
-    FUN_00296f4c(*(unsigned int *)(param_1 + 0x5a0),6);
+    scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x5a0),6);
     FUN_002a0cc8(1);
     *(unsigned int *)(param_1 + 0x14) = 7;
     *(unsigned int *)(param_1 + 0x18) = 0;
@@ -152,7 +152,7 @@ void FUN_003a6f80(int param_1)
       else {
         temp_v5 = 0x4d;
       }
-      FUN_002b8838(temp_v5);
+      buttonHelpSetPreset(temp_v5);
       temp_v2 = FUN_0023360c(param_1 + 0x20);
       temp_v0 = *(unsigned short *)(param_1 + 0x5a8 + temp_v2 * 0x20 + 4);
       if (*(char *)(param_1 + 0x5a5) == '\x01') {
@@ -169,7 +169,7 @@ void FUN_003a6f80(int param_1)
       FUN_002a0cc8(1);
       *(unsigned int *)(param_1 + 0x14) = 8;
       *(unsigned int *)(param_1 + 0x18) = 0;
-      FUN_00296f4c(*(unsigned int *)(param_1 + 0x5a0),7);
+      scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x5a0),7);
       FUN_002328b4();
       return;
     }

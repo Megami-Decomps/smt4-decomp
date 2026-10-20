@@ -11,7 +11,7 @@ typedef struct FlagObj {
     /* 0x558 */ u8 block558[4];
 } FlagObj;
 
-extern void FUN_00184c00(u8 *block, s32 a, s32 b);
+extern void uiSpriteSetImageKeyframe(u8 *block, s32 a, s32 b);
 
 /* When both flag bits 0x10 and 0x20 are set: enters state 3, clears 0x20 and resets two sub-blocks. */
 void flagObjAdvance(FlagObj *obj)
@@ -21,8 +21,8 @@ void flagObjAdvance(FlagObj *obj)
     if ((flags & 0x10) != 0 && (flags & 0x20) != 0) {
         obj->state = 3;
         obj->flags = flags & ~0x20u;
-        FUN_00184c00(obj->block440, 2, 0);
-        FUN_00184c00(obj->block558, 2, 0);
+        uiSpriteSetImageKeyframe(obj->block440, 2, 0);
+        uiSpriteSetImageKeyframe(obj->block558, 2, 0);
     }
 }
 

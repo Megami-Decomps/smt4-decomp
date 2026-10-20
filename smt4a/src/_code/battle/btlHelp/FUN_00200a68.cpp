@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_8_stack;
 
-extern int *DAT_005738e8; /* 0x5738e8 */
+extern int *g_btlHelp; /* 0x5738e8 */
 
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: rt_memcpy_w. */
@@ -64,9 +64,9 @@ FUN_00200a68(unsigned int param_1,unsigned short param_2,unsigned int param_3,un
   *(unsigned int *)(puVar2 + 0x434) = 0;
   *(unsigned int *)(puVar2 + 0x43a) = 0;
   *(unsigned int *)(puVar2 + 0x43c) = 0;
-  piVar1 = DAT_005738e8;
-  if (*DAT_005738e8 == 0) {
-    *DAT_005738e8 = (int)puVar2;
+  piVar1 = g_btlHelp;
+  if (*g_btlHelp == 0) {
+    *g_btlHelp = (int)puVar2;
   }
   if (piVar1[1] == 0) {
     piVar1[1] = (int)puVar2;

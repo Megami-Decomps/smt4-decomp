@@ -28,7 +28,7 @@ extern unsigned char LAB_0035290c; /* 0x35290c */
 #endif
 /* Supplied declaration required: FUN_0023a154. */
 /* Supplied declaration required: FUN_002ac8b0. */
-extern int FUN_002b5a48(void);
+extern int wstrlenU16(void);
 /* Supplied declaration required: FUN_002baa40. */
 /* Supplied declaration required: FUN_00355d68. */
 extern void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(unsigned int);
@@ -68,7 +68,7 @@ void FUN_00352764(unsigned int *param_1,int *param_2,unsigned int param_3)
   temp_v7 = temp_v5;
   piVar2 = &temp_v9;
   temp_v6 = 4;
-  temp_v0 = FUN_002b5a48();
+  temp_v0 = wstrlenU16();
   temp_v8 = (temp_v0 + 1) * 2;
   temp_v4 = 1;
   FUN_00355d68(piVar2,temp_v3,temp_v2,&temp_v6);

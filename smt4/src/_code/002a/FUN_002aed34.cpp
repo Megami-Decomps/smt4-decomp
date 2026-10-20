@@ -14,7 +14,7 @@ typedef struct {
 extern unsigned int DAT_00464a7c; /* 0x464a7c */
 
 /* Supplied declaration required: FUN_002b2b88. */
-extern int FUN_002c30c4(unsigned int);
+extern int libc_strlen(unsigned int);
 
 
 void FUN_002aed34(unsigned int param_1,unsigned int param_2)
@@ -23,7 +23,7 @@ void FUN_002aed34(unsigned int param_1,unsigned int param_2)
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   
-  if ((param_1 < 9) && (temp_v0 = FUN_002c30c4(param_2), temp_v0 != 0)) {
+  if ((param_1 < 9) && (temp_v0 = libc_strlen(param_2), temp_v0 != 0)) {
     FUN_002b2b88(*(unsigned int *)(param_1 * 4 + 0x4093bc),DAT_00464a7c,param_2);
     return;
   }

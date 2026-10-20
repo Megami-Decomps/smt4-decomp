@@ -41,7 +41,7 @@ extern unsigned int DAT_0063f504; /* 0x63f504 */
 extern int DAT_0063f50c; /* 0x63f50c */
 
 /* Supplied declaration required: FUN_00154890. */
-extern int FUN_0015fe30(unsigned char *);
+extern int nw_snd_SoundArchive_IsAvailable(unsigned char *);
 /* Supplied declaration required: FUN_00169614. */
 /* Supplied declaration required: FUN_00173a94. */
 /* Supplied declaration required: FUN_00173c1c. */
@@ -64,7 +64,7 @@ void FUN_00150784(void)
   int temp_v3;
   int *piVar6;
   
-  temp_v0 = FUN_0015fe30(&DAT_0063e1e8);
+  temp_v0 = nw_snd_SoundArchive_IsAvailable(&DAT_0063e1e8);
   temp_v3 = DAT_0063f500;
   if (temp_v0 != 0) {
     if (DAT_0063f500 != 0) {

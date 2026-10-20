@@ -21,7 +21,7 @@ extern unsigned char LAB_0046867c; /* 0x46867c */
 
 extern int FUN_0013def0(unsigned int);
 /* Supplied declaration required: sysPlaySe. */
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0019ea64. */
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: FUN_003c1060. */
@@ -58,7 +58,7 @@ void FUN_00468574(int param_1,int param_2)
       FUN_00275bc8(temp_v1,*(unsigned int *)(param_1 + 0x294));
       *(int *)(param_1 + 0x298) = temp_v1;
       *(unsigned int *)(temp_v1 + 0x108) = 2;
-      temp_v1 = FUN_0018719c(0x467);
+      temp_v1 = gameFlagIsSet(0x467);
       if (temp_v1 != 0) {
         FUN_003c1060();
         FUN_0019ea64(1);

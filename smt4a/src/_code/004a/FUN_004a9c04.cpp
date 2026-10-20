@@ -2,13 +2,13 @@
 
 extern "C" {
 
-void FUN_00184c00(BtlUiObjDA *obj, s32 a, s32 b);
+void uiSpriteSetImageKeyframe(BtlUiObjDA *obj, s32 a, s32 b);
 
-extern BtlUiGlobalsA DAT_0057a9b8;
+extern BtlUiGlobalsA g_btlUi;
 
 void FUN_004a9c04(void)
 {
-    FUN_00184c00(&DAT_0057a9b8.ui->objD, 0xE, 0);
+    uiSpriteSetImageKeyframe(&g_btlUi.ui->objD, 0xE, 0);
 }
 
 } /* extern "C" */

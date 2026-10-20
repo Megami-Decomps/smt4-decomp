@@ -5,7 +5,7 @@
 extern "C" {
 
 extern int FUN_0022a444(unsigned int, unsigned int);
-extern unsigned int *FUN_0022a464(unsigned int);
+extern unsigned int *asdListBoxGetItemValuePtr(unsigned int);
 extern unsigned int FUN_0025628c(unsigned int);
 
 
@@ -40,7 +40,7 @@ void FUN_003c4524(int param_1,int param_2)
     }
     break;
   case 2:
-    puVar2 = (unsigned int *)FUN_0022a464(*(unsigned int *)(param_1 + 0x10));
+    puVar2 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10));
     *(unsigned int *)(param_2 + 0x2268) = *puVar2;
     return;
   case 3:

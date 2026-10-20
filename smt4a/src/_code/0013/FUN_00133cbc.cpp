@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002e6e14(int);
+int asdOperatorDeleteArray(int);
 int FUN_00307a7a(int, int, int);
 int vectorCapacity40(int *);
-int FUN_0030fd28(...);
+int destroyRangeElem40(...);
 int FUN_0030fd40(...);
 int vectorCountx28_0030fd70(...);
 
@@ -23,12 +23,12 @@ typedef struct {
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 extern int *wordRefMax(unsigned int *, unsigned int *);
-/* Supplied declaration required: FUN_002e6e14. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
 /* Supplied declaration required: FUN_00307a7a. */
 /* Supplied declaration required: vectorCapacity40. */
-/* Supplied declaration required: FUN_0030fd28. */
+/* Supplied declaration required: destroyRangeElem40. */
 /* Supplied declaration required: FUN_0030fd40. */
-extern int *FUN_0030fd62(int *, int, unsigned int);
+extern int *vectorAllocx28(int *, int, unsigned int);
 /* Supplied declaration required: vectorCountx28_0030fd70. */
 extern unsigned int vectorGrowCapacity_0030fd7e(unsigned int, int *);
 
@@ -59,12 +59,12 @@ unsigned long long FUN_00133cbc(int *param_1,int *param_2,unsigned int param_3,u
       temp_v6 = vectorCountx28_0030fd70(param_2);
       piVar4 = (int *)wordRefMax((unsigned int *)&temp_v6,(unsigned int *)&temp_v7);
       temp_v3 = *piVar4;
-      temp_v5 = (int *)FUN_0030fd62(param_1,temp_v3,0);
+      temp_v5 = (int *)vectorAllocx28(param_1,temp_v3,0);
       FUN_0030fd40(*param_2,param_2[1],temp_v5,param_1);
-      FUN_0030fd28(param_1,*param_1,param_1[1]);
+      destroyRangeElem40(param_1,*param_1,param_1[1]);
       temp_v4 = *param_1;
       vectorCapacity40(param_1);
-      FUN_002e6e14(temp_v4);
+      asdOperatorDeleteArray(temp_v4);
       *param_1 = (int)temp_v5;
       temp_v4 = vectorCountx28_0030fd70(param_2);
       temp_v3 = *param_1 + temp_v3 * 0x28;
@@ -83,7 +83,7 @@ unsigned long long FUN_00133cbc(int *param_1,int *param_2,unsigned int param_3,u
         return romwright_piece_4_4(temp_v5,param_1);
       }
       temp_v2 = FUN_00307a7a(*param_2,param_2[1],*param_1);
-      FUN_0030fd28(param_1,temp_v2,param_1[1]);
+      destroyRangeElem40(param_1,temp_v2,param_1[1]);
       temp_v3 = vectorCountx28_0030fd70(param_2);
       temp_v3 = temp_v3 * 0x28 + *param_1;
       param_1[1] = temp_v3;

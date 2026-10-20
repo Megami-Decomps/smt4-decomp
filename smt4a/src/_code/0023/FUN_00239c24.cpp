@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0014bef4(...);
+int randRange(...);
 int FUN_001bbf0c(void);
 int FUN_001bc124(int, int);
 int FUN_002296b0(int);
@@ -37,9 +37,9 @@ extern int DAT_0060ff94; /* 0x60ff94 */
 extern unsigned char DAT_0060ff9c; /* 0x60ff9c */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0014bef4. */
-extern int FUN_00162e8c(void);
-extern int FUN_0018719c(unsigned int);
+/* Supplied declaration required: randRange. */
+extern int gameFlagsGetBlock(void);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
 /* Supplied declaration required: FUN_002296b0. */
@@ -93,8 +93,8 @@ void FUN_00239c24(void)
   unsigned long long temp_v18;
   float temp_v19;
   
-  temp_v3 = FUN_00162e8c();
-  FUN_0014bef4(4);
+  temp_v3 = gameFlagsGetBlock();
+  randRange(4);
   temp_v4 = FUN_00376f94();
   temp_v5 = FUN_003adc40();
   if (temp_v4 >= 0x65) {
@@ -198,9 +198,9 @@ void FUN_00239c24(void)
   FUN_002c670c(0);
   temp_v17 = 0.0f;
   if (temp_v4 < 100) {
-    temp_v3 = FUN_00162e8c();
+    temp_v3 = gameFlagsGetBlock();
     if ((*(char *)(temp_v3 + 0xe09) != '\0') &&
-       (temp_v4 = FUN_0018719c(*(unsigned int *)(temp_v3 + 0x1520)), temp_v4 == 0)) {
+       (temp_v4 = gameFlagIsSet(*(unsigned int *)(temp_v3 + 0x1520)), temp_v4 == 0)) {
       temp_v4 = (short)*(char *)(temp_v3 + 0xe0b) * 700;
       temp_v3 = (short)*(char *)(temp_v3 + 0xe0a) * 700;
       VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -216,7 +216,7 @@ void FUN_00239c24(void)
       }
     }
     else {
-      temp_v3 = FUN_00162e8c();
+      temp_v3 = gameFlagsGetBlock();
       temp_v4 = temp_v3 + *(char *)(temp_v3 + 0xe0b) * 0x78 + *(char *)(temp_v3 + 0xe0a) * 8;
       temp_v9 = (unsigned int)(*(char *)(temp_v4 + 0x34) == '\x01');
       if (*(char *)(temp_v4 + 0x44) == '\x01') {
@@ -269,7 +269,7 @@ void FUN_00239c24(void)
       }
       FUN_00281b94((int)(short)(int)temp_v17);
     }
-    temp_v3 = FUN_00162e8c();
+    temp_v3 = gameFlagsGetBlock();
     if (*(char *)(temp_v3 + 0x1664) != '\0') {
       temp_v4 = (short)*(char *)(temp_v3 + 0x1665) * 700 + 0x15e;
       temp_v3 = (short)*(char *)(temp_v3 + 0x1666) * 700 + 0x15e;
@@ -278,7 +278,7 @@ void FUN_00239c24(void)
       FUN_003ae3c4(temp_v4,temp_v3);
     }
   }
-  temp_v3 = FUN_00162e8c();
+  temp_v3 = gameFlagsGetBlock();
   temp_v4 = FUN_00376f94();
   temp_v18 = 0x442f000043af0000;
   if (temp_v4 != 8) {
@@ -309,7 +309,7 @@ void FUN_00239c24(void)
                 if (temp_v14 && temp_v7 == temp_v9) {
                   temp_v15 = *(char *)(temp_v3 + 0x1666) == temp_v11;
                 }
-                if ((!temp_v15) && (temp_v7 = FUN_0014bef4(100), temp_v7 < 0x28)) {
+                if ((!temp_v15) && (temp_v7 = randRange(100), temp_v7 < 0x28)) {
                   temp_v16 = (float)VectorSignedToFloat(temp_v9,(unsigned char)(in_fpscr >> 0x16) & 3);
                   temp_v17 = (float)VectorSignedToFloat(temp_v11,(unsigned char)(in_fpscr >> 0x16) & 3);
                   temp_v6 = DAT_0060ff88 * 0xc;
@@ -364,7 +364,7 @@ LAB_0023a490:
               temp_v2 = *(char *)(temp_v6 + 0x3f);
             }
             if (((temp_v14 && temp_v2 != '\x01') && (*(char *)(temp_v6 + 0x3c) == '\x02')) &&
-               (temp_v9 = FUN_0014bef4(100), temp_v9 < 0x28)) {
+               (temp_v9 = randRange(100), temp_v9 < 0x28)) {
               temp_v17 = (float)VectorSignedToFloat(temp_v11,(unsigned char)(in_fpscr >> 0x16) & 3);
               temp_v16 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
               temp_v6 = DAT_0060ff88 * 0xc;
@@ -386,7 +386,7 @@ LAB_0023a490:
   }
 LAB_0023a4d8:
   DAT_0060ff9c = 1;
-  temp_v3 = FUN_00162e8c();
+  temp_v3 = gameFlagsGetBlock();
   temp_v4 = 0;
   if (temp_v4 < *(char *)(temp_v3 + 0xe05)) {
     do {

@@ -5,9 +5,9 @@
 extern "C" {
 
 int FUN_00212204(int layer);
-int FUN_003d2d6c(int id);
+int soundChannelStopAll(int id);
 int asdTMTexTableFreeEntry(int type);
-int FUN_0019a7f4(int type, int index);
+int asdTMTexTableReleaseNode(int type, int index);
 int asdMemFree(void *ptr);               /* heap free */
 int jobStop(u32 task, int flags);     /* kill a task */
 
@@ -24,10 +24,10 @@ void staffRollClose(void)
         FUN_00212204(1);
     }
     for (i = 0; i < 12; i++) {
-        FUN_0019a7f4(0x29, i);
+        asdTMTexTableReleaseNode(0x29, i);
     }
     asdTMTexTableFreeEntry(0x29);
-    FUN_003d2d6c(0xf);
+    soundChannelStopAll(0xf);
     jobStop(work->task, 0);
     asdMemFree(work);
     g_staffRoll = NULL;

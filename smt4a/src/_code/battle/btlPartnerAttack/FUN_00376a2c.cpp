@@ -27,7 +27,7 @@ extern unsigned char LAB_00376bf8; /* 0x376bf8 */
 extern int scriptObjDestroy(...); /* 0x3a3ae0 */
 extern int renderObjAttach(...); /* 0x3ae770 */
 extern int FUN_003ae7cc(...); /* 0x3ae7cc */
-extern unsigned int *DAT_00573c50; /* 0x573c50 */
+extern unsigned int *g_btlPartnerAttack; /* 0x573c50 */
 
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdOperatorNew. */
@@ -50,13 +50,13 @@ void FUN_00376a2c(unsigned int *param_1)
   puVar1 = (unsigned int *)0x100;
   asdMemoryAllocTracked(0x100,0x100,0,0x1cc,1);
   puVar2 = &LAB_00376bbc;
-  DAT_00573c50 = puVar1;
+  g_btlPartnerAttack = puVar1;
   taskCreateDraw(&LAB_00376bbc,4,0,0,&LAB_00369280,scriptObjDestroy,param_1,*param_1);
   param_1[0x14] = (unsigned int)puVar2;
   taskCreateDraw(&LAB_00376bd8,0x71,0,0,FUN_003ae7cc,0,0,puVar2);
   taskCreateDraw(&LAB_00376bf8,0x75,0,0,renderObjAttach,0,0,param_1[0x14]);
-  puVar1 = DAT_00573c50;
-  *DAT_00573c50 = 0;
+  puVar1 = g_btlPartnerAttack;
+  *g_btlPartnerAttack = 0;
   puVar1[1] = 0;
   puVar1[2] = 0;
   puVar1[3] = 0;
@@ -75,7 +75,7 @@ void FUN_00376a2c(unsigned int *param_1)
   }
   temp_v0 = 0x860;
   puVar1[0xb] = 0;
-  asdOperatorNew(0x860,&DAT_00573c50);
+  asdOperatorNew(0x860,&g_btlPartnerAttack);
   if (temp_v0 != 0) {
     FUN_00416b70();
   }

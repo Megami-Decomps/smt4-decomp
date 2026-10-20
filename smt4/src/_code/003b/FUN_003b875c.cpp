@@ -37,7 +37,7 @@ extern int FUN_0024c278(void);
 /* Supplied declaration required: FUN_002758d8. */
 extern int FUN_002762e0(void);
 /* Supplied declaration required: FUN_002a0400. */
-extern int FUN_002c09d0(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_00341a10. */
 /* Supplied declaration required: FUN_003b9c00. */
 extern int FUN_003bb620(int);
@@ -134,7 +134,7 @@ void FUN_003b875c(int param_1)
       return;
     }
     if (((temp_v6 & 0x80) != 0) ||
-       ((temp_v2 = FUN_002c09d0(0x404), temp_v2 != 0 && (temp_v2 = FUN_0024c278(), temp_v2 != 0)))) {
+       ((temp_v2 = gameFlagIsSet(0x404), temp_v2 != 0 && (temp_v2 = FUN_0024c278(), temp_v2 != 0)))) {
       *(unsigned int *)(param_1 + 0x20) = *(unsigned int *)(param_1 + 0x20) & 0xffffff7f;
       FUN_002758d8();
       *(unsigned int *)(param_1 + 0x28) = 7;

@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002e342c(int, unsigned int);
+int libc_strcpy(int, unsigned int);
 
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 
 
 void FUN_003980ec(int param_1,unsigned int param_2,unsigned int param_3)
@@ -14,7 +14,7 @@ void FUN_003980ec(int param_1,unsigned int param_2,unsigned int param_3)
 {
 /* irregular: 1 native warning(s); review required */
   *(unsigned int *)(param_1 * 0x17c + 0x5f33d4) = param_2;
-  FUN_002e342c(param_1 * 0x17c + 0x5f33d8,param_3);
+  libc_strcpy(param_1 * 0x17c + 0x5f33d8,param_3);
   return;
 }
 

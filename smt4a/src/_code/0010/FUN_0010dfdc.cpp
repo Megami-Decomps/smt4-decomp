@@ -7,12 +7,12 @@ typedef struct Entry {
     /* 0x10 */ u32 value;
 } Entry;
 
-Entry *FUN_002f8236(void);
+Entry *clearWords4(void);
 
-/* Clears the value field of the entry FUN_002f8236 returns. */
+/* Clears the value field of the entry clearWords4 returns. */
 void FUN_0010dfdc(void)
 {
-    Entry *entry = FUN_002f8236();
+    Entry *entry = clearWords4();
     entry->value = 0;
 }
 

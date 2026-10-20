@@ -6,13 +6,13 @@ extern "C" {
 
 int FUN_0018a8a8(int, int);
 int FUN_0018a8c8(int, unsigned int);
-int FUN_00439fa4(int, unsigned int);
+int nn_snd_CTR_Voice_SetInterpolationType(int, unsigned int);
 
 extern unsigned char DAT_00646b38; /* 0x646b38 */
 
 /* Supplied declaration required: FUN_0018a8a8. */
 /* Supplied declaration required: FUN_0018a8c8. */
-/* Supplied declaration required: FUN_00439fa4. */
+/* Supplied declaration required: nn_snd_CTR_Voice_SetInterpolationType. */
 extern void nn_snd_CTR_Voice_SetSampleRate(unsigned int, int);
 
 
@@ -48,7 +48,7 @@ void FUN_00461a54(int param_1,unsigned char *param_2)
         else if ((*(signed char *)((unsigned char *)&DAT_00646b38 + 0x2)) == '\x01') {
           temp_v0 = 1;
         }
-        FUN_00439fa4(temp_v1,temp_v0);
+        nn_snd_CTR_Voice_SetInterpolationType(temp_v1,temp_v0);
       }
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < *(int *)(param_1 + 8));

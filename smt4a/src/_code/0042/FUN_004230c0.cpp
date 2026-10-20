@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001afdc4(void);
+int nn_snd_CTR_FreeVoice(void);
 int FUN_001b4a58(unsigned int, int *, int, int, int, int, unsigned int, unsigned int);
 int hasExclusiveAccess(int);
 
@@ -18,7 +18,7 @@ extern unsigned int DAT_0061851c; /* 0x61851c */
 extern int DAT_00618520; /* 0x618520 */
 
 /* Unsupported intrinsic, declaration required: hasExclusiveAccess (CALLOTHER). */
-/* Supplied declaration required: FUN_001afdc4. */
+/* Supplied declaration required: nn_snd_CTR_FreeVoice. */
 /* Supplied declaration required: FUN_001b4a58. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 
@@ -42,7 +42,7 @@ void FUN_004230c0(unsigned int param_1)
   nn_os_CriticalSection_Enter((unsigned int)&DAT_00618518);
   piVar2 = (int *)(DAT_005880d8 + param_1 * 0x70);
   if (*piVar2 != 0) {
-    FUN_001afdc4();
+    nn_snd_CTR_FreeVoice();
     *piVar2 = 0;
   }
   if (piVar2[1] != 0) {

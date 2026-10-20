@@ -11,12 +11,12 @@ typedef struct Global57f588 {
     /* 0x00 */ u8 unk00[8];
     /* 0x08 */ Record *record;
 } Global57f588;
-extern Global57f588 DAT_0057f588;
+extern Global57f588 g_messageMain;
 
 /* Returns the word at 0x18 of the record at 0x57F588 + 8. */
 u32 FUN_002a4b60(void)
 {
-    return DAT_0057f588.record->value;
+    return g_messageMain.record->value;
 }
 
 } /* extern "C" */

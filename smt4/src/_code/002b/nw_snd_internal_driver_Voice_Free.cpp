@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_002bd430(u32 sdkVoice);
+int sndVoiceFree(u32 sdkVoice);
 int nw_snd_internal_driver_VoiceManager_FreeVoice(u32 manager, void *voice);
 extern u32 FUN_002baf30(void);
 
@@ -27,7 +27,7 @@ void nw_snd_internal_driver_Voice_Free(Voice *voice)
         if (i < voice->count) {
             do {
                 if (voice->sdkVoices[i] != 0) {
-                    FUN_002bd430(voice->sdkVoices[i]);
+                    sndVoiceFree(voice->sdkVoices[i]);
                     voice->sdkVoices[i] = 0;
                 }
                 i = i + 1;

@@ -17,7 +17,7 @@ typedef struct {
 
 /* Supplied declaration required: sysPlaySe. */
 extern unsigned int FUN_002a4860(int);
-extern int FUN_0031d1a0(int);
+extern int flaggedEntryGetValueA(int);
 /* Supplied declaration required: FUN_0041e2d8. */
 /* Supplied declaration required: FUN_0041f020. */
 /* Supplied declaration required: FUN_0041fc24. */
@@ -54,7 +54,7 @@ void FUN_0041dbdc(int param_1,int param_2)
   }
   temp_v0 = FUN_002a4860(param_1 + 0x3d8);
   *(unsigned int *)(param_1 + 0x304) = temp_v0;
-  temp_v1 = FUN_0031d1a0(param_1 + 0x3d8);
+  temp_v1 = flaggedEntryGetValueA(param_1 + 0x3d8);
   *(int *)(param_1 + 0x308) = temp_v1;
   *(unsigned int *)(param_1 + 0x2fc) = *(unsigned int *)(param_1 + 0x2f8);
   *(int *)(param_1 + 0x2f8) = temp_v1 + *(int *)(param_1 + 0x304) + *(int *)(param_1 + 0x300);

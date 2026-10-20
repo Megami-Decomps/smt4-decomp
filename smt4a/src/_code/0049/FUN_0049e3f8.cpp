@@ -38,8 +38,8 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00164168. */
-extern int FUN_001654d8(int);
-extern int FUN_001654e4(int);
+extern int vec2GetXInt(int);
+extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00168770. */
 /* Supplied declaration required: FUN_00168e00. */
@@ -76,8 +76,8 @@ void FUN_0049e3f8(int param_1)
   float temp_v14;
   unsigned long long temp_v15;
   
-  temp_v1 = FUN_001654d8(param_1 + 0x2c8);
-  temp_v2 = FUN_001654e4(param_1 + 0x2c8);
+  temp_v1 = vec2GetXInt(param_1 + 0x2c8);
+  temp_v2 = vec2GetYInt(param_1 + 0x2c8);
   efctSetSpeed();
   temp_v15 = 0x3e80000000000000;
   FUN_001879d0(g_renderCtx);

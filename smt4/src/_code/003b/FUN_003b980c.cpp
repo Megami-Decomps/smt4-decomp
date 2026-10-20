@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_0028727c(void);
-int FUN_002917b8(void);
-int FUN_00291944(void);
+int buttonHelpRelease(void);
+int uiFadeRelease(void);
 int FUN_00291998(void);
 int FUN_00295ba4(int);
 int scrScriptProcessDestroy(void);
@@ -22,11 +22,11 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_0028727c. */
-/* Supplied declaration required: FUN_002917b8. */
-/* Supplied declaration required: FUN_00291944. */
+/* Supplied declaration required: buttonHelpRelease. */
+/* Supplied declaration required: uiFadeRelease. */
 /* Supplied declaration required: FUN_00291998. */
 /* Supplied declaration required: FUN_00295ba4. */
-extern int FUN_00295bd0(void);
+extern int dialogIsActive(void);
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: asdTMTexTableFreeEntry. */
 /* Supplied declaration required: FUN_002b827c. */
@@ -68,14 +68,14 @@ void FUN_003b980c(int param_1)
   spriteTable2aFree(param_1 + 0x9c);
   FUN_003bbafc(param_1 + 0xd58);
   FUN_00291998();
-  temp_v0 = FUN_00295bd0();
+  temp_v0 = dialogIsActive();
   if (temp_v0 != 0) {
     FUN_00295ba4(0);
   }
   FUN_002b827c(3);
-  FUN_002917b8();
+  buttonHelpRelease();
   FUN_0028727c();
-  FUN_00291944();
+  uiFadeRelease();
   asdTMTexTableFreeEntry(0x21);
   return;
 }

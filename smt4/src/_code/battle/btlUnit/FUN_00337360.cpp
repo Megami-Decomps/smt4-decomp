@@ -10,7 +10,7 @@ int FUN_0024057c(int, int, int);
 int FUN_00240614(void);
 int FUN_002451c4(int, unsigned int, int, int, int, int);
 int aocHandleButtons(unsigned int, int);
-int FUN_002b06c4(void);
+int dataTable00FindById(void);
 int FUN_003c1964(int);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
@@ -40,7 +40,7 @@ extern unsigned int btlUnitGet(unsigned int);
 extern unsigned int FUN_00294090(int, unsigned int);
 extern int FUN_00294fe0(unsigned int);
 extern int FUN_0029505c(unsigned int);
-/* Supplied declaration required: FUN_002b06c4. */
+/* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: FUN_003c1964. */
 
 
@@ -67,7 +67,7 @@ unsigned int FUN_00337360(int param_1,unsigned int param_2)
   }
   else {
     param_2 = param_2 & 0xffff;
-    FUN_002b06c4();
+    dataTable00FindById();
     pcVar11 = (char *)(param_1 + 0x4450);
     piVar9 = (int *)(param_1 + 0x1fe8);
     puVar7 = (unsigned int *)(param_1 + 0x1fe4);

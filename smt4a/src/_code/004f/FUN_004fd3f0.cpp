@@ -8,7 +8,7 @@ int btlGetMainState(void);
 int FUN_004102d8(int, int, int, unsigned int);
 int FUN_0047effc(int, unsigned int, unsigned int);
 
-extern int DAT_005712f0; /* 0x5712f0 */
+extern int g_btlActionReflect; /* 0x5712f0 */
 
 /* Supplied declaration required: btlGetMainState. */
 extern int FUN_003e8430(void);
@@ -30,28 +30,28 @@ unsigned int FUN_004fd3f0(unsigned int param_1,unsigned int param_2,unsigned int
   if (temp_v0 != 0) {
     FUN_0047effc(0,param_2,param_1);
     temp_v2 = 0;
-    temp_v0 = DAT_005712f0;
-    FUN_004102d8(DAT_005712f0,temp_v1,0,param_2);
+    temp_v0 = g_btlActionReflect;
+    FUN_004102d8(g_btlActionReflect,temp_v1,0,param_2);
     *(unsigned char *)(temp_v0 + 5) = *(unsigned char *)(temp_v0 + 5) | 4;
     *(unsigned char *)(temp_v0 + 4) = 0x2b;
     *(unsigned int *)(temp_v0 + 0x14) = param_3;
     *(unsigned int *)(temp_v0 + 0x28) = 0;
     *(unsigned int *)(temp_v0 + 0x4c) = 0;
-    temp_v0 = DAT_005712f0;
-    FUN_004102d8(DAT_005712f0,temp_v1,0,param_2);
+    temp_v0 = g_btlActionReflect;
+    FUN_004102d8(g_btlActionReflect,temp_v1,0,param_2);
   }
   else {
     FUN_0047effc(0,param_2,param_1);
     temp_v2 = 0x10;
-    temp_v0 = DAT_005712f0;
-    FUN_004102d8(DAT_005712f0,temp_v1,0,param_2);
+    temp_v0 = g_btlActionReflect;
+    FUN_004102d8(g_btlActionReflect,temp_v1,0,param_2);
     *(unsigned char *)(temp_v0 + 5) = *(unsigned char *)(temp_v0 + 5) | 4;
     *(unsigned char *)(temp_v0 + 4) = 0x2b;
     *(unsigned int *)(temp_v0 + 0x14) = param_3;
     *(unsigned int *)(temp_v0 + 0x28) = 0;
     *(unsigned int *)(temp_v0 + 0x4c) = 0;
-    temp_v0 = DAT_005712f0;
-    FUN_004102d8(DAT_005712f0,temp_v1,0,param_2);
+    temp_v0 = g_btlActionReflect;
+    FUN_004102d8(g_btlActionReflect,temp_v1,0,param_2);
   }
   *(unsigned char *)(temp_v0 + 5) = *(unsigned char *)(temp_v0 + 5) | 4;
   *(unsigned int *)(temp_v0 + 0x14) = param_3;

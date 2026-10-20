@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001142cc(unsigned int, int);
 
 /* Supplied declaration required: FUN_001142cc. */
-extern unsigned int FUN_002e9af4(void);
+extern unsigned int onlineInstanceTableGetCurrent(void);
 
 
 void FUN_00103f7c(int param_1)
@@ -16,7 +16,7 @@ void FUN_00103f7c(int param_1)
 /* irregular: 1 native warning(s); review required */
   unsigned int temp_v0;
   
-  temp_v0 = FUN_002e9af4();
+  temp_v0 = onlineInstanceTableGetCurrent();
   FUN_001142cc(temp_v0,param_1);
   *(unsigned int *)(param_1 + 0x44) = temp_v0;
   return;

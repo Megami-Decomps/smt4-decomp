@@ -52,14 +52,14 @@ typedef struct {
 } param_1_stack;
 
 extern int FUN_0034f3b4(...); /* 0x34f3b4 */
-extern int *DAT_0057f290; /* 0x57f290 */
+extern int *g_unite; /* 0x57f290 */
 
 /* Supplied declaration required: qsort. */
-extern int FUN_0014bef4(unsigned int);
+extern int randRange(unsigned int);
 extern unsigned short FUN_0017760c(int);
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: slotRecordFindById. */
-extern int FUN_001ab854(void);
+extern int gameGetSlotRecord(void);
 /* Supplied declaration required: FUN_001ba514. */
 extern int FUN_002a4b28(unsigned int);
 /* Supplied declaration required: FUN_002a5e7c. */
@@ -143,10 +143,10 @@ unsigned char FUN_001ff014(int param_1)
   unsigned int uStack_cc;
   unsigned char *temp_v38;
   
-  piVar1 = DAT_0057f290;
+  piVar1 = g_unite;
   temp_v10 = 0;
-  temp_v5 = (unsigned int)DAT_0057f290[param_1 * 2 + 0x4ee] >> 0x1e;
-  temp_v2 = DAT_0057f290[param_1 * 2 + 0x4ee] & 0x7fff;
+  temp_v5 = (unsigned int)g_unite[param_1 * 2 + 0x4ee] >> 0x1e;
+  temp_v2 = g_unite[param_1 * 2 + 0x4ee] & 0x7fff;
   if (temp_v5 != 1) {
     if (temp_v5 == 3) {
       FUN_0035ad50(temp_v2,temp_v32);
@@ -179,11 +179,11 @@ unsigned char FUN_001ff014(int param_1)
     }
   }
   temp_v2 = FUN_001ba514(temp_v33);
-  if ((temp_v2 < 0x18) && (temp_v1 = FUN_001ab854(), temp_v1 != 0)) {
+  if ((temp_v2 < 0x18) && (temp_v1 = gameGetSlotRecord(), temp_v1 != 0)) {
     bitsAt60Clear(temp_v1,4);
   }
   temp_v2 = FUN_001ba514(temp_v31);
-  if ((temp_v2 < 0x18) && (temp_v1 = FUN_001ab854(), temp_v1 != 0)) {
+  if ((temp_v2 < 0x18) && (temp_v1 = gameGetSlotRecord(), temp_v1 != 0)) {
     bitsAt60Clear(temp_v1,4);
   }
   if ((unsigned int)piVar1[param_1 * 2 + 0x4ee] >> 0x1e == 1) {
@@ -283,7 +283,7 @@ unsigned char FUN_001ff014(int param_1)
                 }
                 temp_v6 = temp_v6 + 2;
               } while (temp_v6 < 0x20);
-              temp_v6 = FUN_0014bef4((temp_v6 - 1U) & 0xffff);
+              temp_v6 = randRange((temp_v6 - 1U) & 0xffff);
               puVar10 = (unsigned short *)((int)&temp_v14 + temp_v6 * 2);
               *(unsigned short *)(temp_v9 + 0x34) = *puVar10;
               *puVar10 = 0;

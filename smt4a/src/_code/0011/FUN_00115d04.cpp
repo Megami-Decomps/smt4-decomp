@@ -4,19 +4,19 @@
 
 extern "C" {
 
-int FUN_002e9ec8(int, unsigned int);
+int onlineInstanceTableFind(int, unsigned int);
 int FUN_002ea3d0(int, unsigned int);
-int FUN_002ea43c(int);
+int onlineJobSetStateDone(int);
 int FUN_002fa18c(int);
 
 extern unsigned char LAB_0010dc81; /* 0x10dc81 */
 extern unsigned char LAB_00115d5c; /* 0x115d5c */
 
-extern int FUN_002e9af4(void);
-/* Supplied declaration required: FUN_002e9ec8. */
+extern int onlineInstanceTableGetCurrent(void);
+/* Supplied declaration required: onlineInstanceTableFind. */
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned char *, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
-/* Supplied declaration required: FUN_002ea43c. */
+/* Supplied declaration required: onlineJobSetStateDone. */
 /* Supplied declaration required: FUN_002fa18c. */
 extern int FUN_002ffdb0(int);
 
@@ -34,13 +34,13 @@ void FUN_00115d04(int param_1)
   unsigned char *puVar4;
   
   puVar4 = temp_v3;
-  temp_v0 = FUN_002e9af4();
-  FUN_002e9ec8(temp_v0,*(unsigned int *)(param_1 + 0x114));
+  temp_v0 = onlineInstanceTableGetCurrent();
+  onlineInstanceTableFind(temp_v0,*(unsigned int *)(param_1 + 0x114));
   if (temp_v0 != 0) {
     temp_v1 = FUN_002ffdb0(param_1);
     if (temp_v1 == 0) {
       FUN_002fa18c(temp_v0);
-      FUN_002ea43c(param_1);
+      onlineJobSetStateDone(param_1);
       return;
     }
     puVar5 = (unsigned char *)0x115d61;

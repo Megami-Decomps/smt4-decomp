@@ -9,7 +9,7 @@ int asdMemoryAllocTracked(int, int, int, int, int);
 int jobStop(...);
 int FUN_00280328(...);
 int FUN_002ea508(...);
-int FUN_00317508(...);
+int asdListBoxSetByteValue(...);
 int asdListBoxAddItems(void);
 int FUN_003592dc(unsigned int);
 int FUN_004aa780(...);
@@ -35,7 +35,7 @@ extern unsigned short DAT_005715fa; /* 0x5715fa */
 extern unsigned int *DAT_00571600; /* 0x571600 */
 extern unsigned int DAT_00571638; /* 0x571638 */
 extern unsigned int DAT_0057163c; /* 0x57163c */
-extern int DAT_0057a9c8; /* 0x57a9c8 */
+extern int g_btlUiBlock; /* 0x57a9c8 */
 
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
@@ -43,7 +43,7 @@ extern int DAT_0057a9c8; /* 0x57a9c8 */
 extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_00280328. */
 /* Supplied declaration required: FUN_002ea508. */
-/* Supplied declaration required: FUN_00317508. */
+/* Supplied declaration required: asdListBoxSetByteValue. */
 /* Supplied declaration required: asdListBoxAddItems. */
 /* Supplied declaration required: FUN_003592dc. */
 /* Supplied declaration required: FUN_004aa780. */
@@ -84,14 +84,14 @@ void FUN_002919b4(unsigned int *param_1,int param_2)
     FUN_00280328(temp_v1,0x75,0);
     puVar2[4] = temp_v1;
     asdListBoxAddItems();
-    FUN_00317508(puVar2[4],1);
+    asdListBoxSetByteValue(puVar2[4],1);
     FUN_002ea508(puVar2[4],"btl Debug Menu");
   }
   else {
     FUN_004d48d0();
   }
-  if (DAT_0057a9c8 != 0) {
-    FUN_004aa780(DAT_0057a9c8,1);
+  if (g_btlUiBlock != 0) {
+    FUN_004aa780(g_btlUiBlock,1);
     return;
   }
   return;

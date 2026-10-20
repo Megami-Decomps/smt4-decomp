@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-extern unsigned char DAT_005b3d54; /* 0x5b3d54 */
+extern unsigned char g_asdTextDefaults; /* 0x5b3d54 */
 #ifndef ROMWRIGHT_STORAGE_s________005b3d7c_13_1_DEFINED
 #define ROMWRIGHT_STORAGE_s________005b3d7c_13_1_DEFINED
 /* Storage views; not a recovered source structure. */
@@ -27,7 +27,7 @@ typedef char romwright_storage_s________005b3d7c_13_1_s1_width_check[(sizeof(((u
 #endif
 extern union romwright_storage_s________005b3d7c_13_1 s________005b3d7c; /* 0x5b3d7c */
 
-extern int FUN_001656a0(unsigned int);
+extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: FUN_00182a9c. */
 
 
@@ -97,7 +97,7 @@ void FUN_001624b8(int *param_1)
             temp_v3 = (param_1[0xd] & 0x400U) != 0;
             UNRECOVERED_JUMPTABLE = (romwright_code *)param_1[2];
             if (temp_v3) {
-              UNRECOVERED_JUMPTABLE = (*(romwright_code * *)((unsigned char *)&DAT_005b3d54 + 0x1c));
+              UNRECOVERED_JUMPTABLE = (*(romwright_code * *)((unsigned char *)&g_asdTextDefaults + 0x1c));
             }
             if (temp_v3 && UNRECOVERED_JUMPTABLE != (romwright_code *)0x0) {
                     /* WARNING: Could not recover jumptable at 0x001626e8. Too many branches */
@@ -120,14 +120,14 @@ void FUN_001624b8(int *param_1)
           param_1[4] = 0;
         }
         if (((temp_v1 == 1) && ((param_1[0xd] & 0x400U) != 0)) &&
-           (UNRECOVERED_JUMPTABLE = (*(romwright_code * *)((unsigned char *)&DAT_005b3d54 + 0x1c)), (*(romwright_code * *)((unsigned char *)&DAT_005b3d54 + 0x1c)) != (romwright_code *)0x0)) {
+           (UNRECOVERED_JUMPTABLE = (*(romwright_code * *)((unsigned char *)&g_asdTextDefaults + 0x1c)), (*(romwright_code * *)((unsigned char *)&g_asdTextDefaults + 0x1c)) != (romwright_code *)0x0)) {
           (*UNRECOVERED_JUMPTABLE)(0);
           return;
         }
       }
       break;
     case 3:
-      temp_v1 = FUN_001656a0(0);
+      temp_v1 = padButtonIsPressed(0);
       if (temp_v1 != 0) {
         *(unsigned char *)(param_1 + 0x11) = 1;
       }

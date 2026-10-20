@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_0017dd84(void);
-int FUN_0018b600(void);
-int FUN_0018b610(void);
+int globalCriticalSectionEnterForward(void);
+int globalCriticalSectionLeaveForward(void);
 int FUN_001963e0(void);
 int rt_memcpy_w(int, unsigned int, unsigned int);
 
@@ -15,15 +15,15 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_3_stack;
 
-extern int DAT_005b40e0; /* 0x5b40e0 */
+extern int g_commandBufferCursor; /* 0x5b40e0 */
 extern signed char DAT_0061a481; /* 0x61a481 */
 extern signed char DAT_0061a482; /* 0x61a482 */
 extern int DAT_0061a50c; /* 0x61a50c */
 extern int DAT_0061a510; /* 0x61a510 */
 
 /* Supplied declaration required: FUN_0017dd84. */
-/* Supplied declaration required: FUN_0018b600. */
-/* Supplied declaration required: FUN_0018b610. */
+/* Supplied declaration required: globalCriticalSectionEnterForward. */
+/* Supplied declaration required: globalCriticalSectionLeaveForward. */
 /* Supplied declaration required: FUN_001963e0. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -38,12 +38,12 @@ void FUN_001b4128(unsigned int param_1,unsigned int param_2,int param_3)
   unsigned char *puVar4;
   
   temp_v1 = DAT_0061a50c;
-  temp_v0 = DAT_005b40e0;
-  temp_v2 = DAT_005b40e0 - *(int *)(DAT_0061a50c + 4);
+  temp_v0 = g_commandBufferCursor;
+  temp_v2 = g_commandBufferCursor - *(int *)(DAT_0061a50c + 4);
   *(int *)(DAT_0061a50c + 0xc) = temp_v2;
   if (param_3 != 0) {
     rt_memcpy_w(temp_v0,param_1,param_2);
-    DAT_005b40e0 = DAT_005b40e0 + (param_2 & 0xfffffffc);
+    g_commandBufferCursor = g_commandBufferCursor + (param_2 & 0xfffffffc);
   }
   else {
     if (*(int *)(temp_v1 + 0x14) != temp_v2) {
@@ -55,13 +55,13 @@ void FUN_001b4128(unsigned int param_1,unsigned int param_2,int param_3)
       *(unsigned int *)(puVar4 + 8) = param_2;
       *(unsigned int *)(puVar4 + 4) = param_1;
       *(unsigned int *)(puVar4 + 0xc) = *(unsigned int *)(puVar4 + 0xc) | 2;
-      FUN_0018b600();
+      globalCriticalSectionEnterForward();
       *(int *)(temp_v1 + 0x20) = *(int *)(temp_v1 + 0x20) + 1;
       if (((DAT_0061a510 == temp_v1) && (DAT_0061a482 != '\0')) && (DAT_0061a481 == '\0')) {
         DAT_0061a481 = '\x01';
         FUN_001963e0();
       }
-      FUN_0018b610();
+      globalCriticalSectionLeaveForward();
       return;
     }
   }

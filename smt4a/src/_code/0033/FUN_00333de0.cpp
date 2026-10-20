@@ -17,7 +17,7 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned int g_aocSystem; /* 0x570280 */
-extern int DAT_00588fe8; /* 0x588fe8 */
+extern int g_statusDown; /* 0x588fe8 */
 
 /* Supplied declaration required: sysPlaySe. */
 extern unsigned int FUN_001688c4(unsigned int);
@@ -39,9 +39,9 @@ void FUN_00333de0(int param_1)
   int temp_v1;
   unsigned int temp_v2;
   
-  temp_v0 = DAT_00588fe8;
-  if (((*(short *)(DAT_00588fe8 + 0x598) < 0) && (-1 < param_1)) &&
-     (*(char *)(DAT_00588fe8 + 0x514) == '\x01')) {
+  temp_v0 = g_statusDown;
+  if (((*(short *)(g_statusDown + 0x598) < 0) && (-1 < param_1)) &&
+     (*(char *)(g_statusDown + 0x514) == '\x01')) {
     temp_v1 = FUN_002c7e3c();
     if (temp_v1 == 0xe || temp_v1 == 7) {
       temp_v2 = 0x33;

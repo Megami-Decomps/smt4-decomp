@@ -54,8 +54,8 @@ typedef struct {
 extern int btlGetMainState(void);
 extern int btlMainIsRunning(void);
 /* Supplied declaration required: FUN_0017760c. */
-extern int FUN_001801a4(void);
-extern int FUN_001ab854(void);
+extern int gameGetPlayerData(void);
+extern int gameGetSlotRecord(void);
 extern int btlMainGetUnk14(void);
 extern int FUN_00291e14(void);
 /* Supplied declaration required: FUN_002b4dcc. */
@@ -114,11 +114,11 @@ int FUN_00287790(fn_00287790_arg0 *param_1,fn_00287790_arg1 *param_2,int param_3
       temp_v7 = btlMainGetUnk14();
     }
     else {
-      temp_v6 = FUN_001801a4();
+      temp_v6 = gameGetPlayerData();
     }
   }
   else {
-    temp_v7 = FUN_001ab854();
+    temp_v7 = gameGetSlotRecord();
     if (temp_v7 == 0) {
       return 1;
     }

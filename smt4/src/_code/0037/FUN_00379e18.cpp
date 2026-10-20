@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_002b4f40(int);
+int listAppendNode(int);
 int FUN_002b4f64(int, int);
 int FUN_00379618(void);
 int VectorSignedToFloat(int, int);
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_002b4f40. */
+/* Supplied declaration required: listAppendNode. */
 /* Supplied declaration required: FUN_002b4f64. */
 extern int FUN_002baed8(void);
 /* Supplied declaration required: FUN_00379618. */
@@ -52,7 +52,7 @@ void FUN_00379e18(int param_1)
                 *(float *)(temp_v2 + 0x2984);
       }
       *(float *)(temp_v1 + 0x18) = temp_v5;
-      FUN_002b4f40(temp_v0);
+      listAppendNode(temp_v0);
     }
     temp_v3 = temp_v3 + 1;
     temp_v4 = temp_v4 >> 1;

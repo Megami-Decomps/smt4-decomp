@@ -16,7 +16,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_5_stack;
 
-extern int DAT_0057f108; /* 0x57f108 */
+extern int g_camp; /* 0x57f108 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 #ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
@@ -28,7 +28,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0019d880. */
 
 
@@ -49,17 +49,17 @@ void FUN_0026e8b8(int param_1,int param_2,int param_3,unsigned int param_4,int p
   float in_s0;
   
   if (param_1 == 0x1e) {
-    temp_v0 = *(char *)(DAT_0057f108 + 0x32b1);
+    temp_v0 = *(char *)(g_camp + 0x32b1);
   }
   else if (param_1 < 0x1e) {
     if (param_1 != 0x11) {
       if (0x11 >= param_1) {
         if (param_1 != 3) {
           if (param_1 == 6) {
-            temp_v0 = *(char *)(DAT_0057f108 + 0x32b0);
+            temp_v0 = *(char *)(g_camp + 0x32b0);
             temp_v6 = temp_v0 == '\0';
             if (temp_v6) {
-              temp_v0 = *(char *)(DAT_0057f108 + 0x32b1);
+              temp_v0 = *(char *)(g_camp + 0x32b1);
             }
             if (temp_v6 && temp_v0 == '\0') {
               return;
@@ -69,32 +69,32 @@ void FUN_0026e8b8(int param_1,int param_2,int param_3,unsigned int param_4,int p
           if (param_1 != 8) {
             return;
           }
-          if (*(char *)(DAT_0057f108 + 0x32b5) != '\0') goto LAB_0026e9d8;
-          temp_v1 = FUN_0018719c(0x464);
+          if (*(char *)(g_camp + 0x32b5) != '\0') goto LAB_0026e9d8;
+          temp_v1 = gameFlagIsSet(0x464);
           if (temp_v1 == 0) {
             return;
           }
-          temp_v1 = FUN_0018719c(0x4ca);
+          temp_v1 = gameFlagIsSet(0x4ca);
           goto joined_r0x0026ea94;
         }
-        temp_v0 = *(char *)(DAT_0057f108 + 0x32b4);
+        temp_v0 = *(char *)(g_camp + 0x32b4);
       }
       else if (param_1 == 0x1c) {
-        temp_v0 = *(char *)(DAT_0057f108 + 0x32b5);
+        temp_v0 = *(char *)(g_camp + 0x32b5);
       }
       else {
         if (param_1 != 0x1d) {
           return;
         }
-        temp_v0 = *(char *)(DAT_0057f108 + 0x32b0);
+        temp_v0 = *(char *)(g_camp + 0x32b0);
       }
     }
     else {
-      temp_v0 = *(char *)(DAT_0057f108 + 0x32b4);
+      temp_v0 = *(char *)(g_camp + 0x32b4);
     }
   }
   else if (param_1 == 0x42) {
-    temp_v0 = *(char *)(DAT_0057f108 + 0x32b2);
+    temp_v0 = *(char *)(g_camp + 0x32b2);
   }
   else {
     if (param_1 < 0x42) {
@@ -103,21 +103,21 @@ void FUN_0026e8b8(int param_1,int param_2,int param_3,unsigned int param_4,int p
           if (param_1 != 0x3b) {
             return;
           }
-          temp_v0 = *(char *)(DAT_0057f108 + 0x32b6);
+          temp_v0 = *(char *)(g_camp + 0x32b6);
           goto LAB_0026e9d0;
         }
-        temp_v1 = FUN_0018719c(0x45b);
+        temp_v1 = gameFlagIsSet(0x45b);
         if (temp_v1 == 0) {
           return;
         }
-        temp_v1 = FUN_0018719c(0x4c7);
+        temp_v1 = gameFlagIsSet(0x4c7);
       }
       else {
-        temp_v1 = FUN_0018719c(0x464);
+        temp_v1 = gameFlagIsSet(0x464);
         if (temp_v1 == 0) {
           return;
         }
-        temp_v1 = FUN_0018719c(0x4ca);
+        temp_v1 = gameFlagIsSet(0x4ca);
       }
 joined_r0x0026ea94:
       if (temp_v1 == 0) {
@@ -126,10 +126,10 @@ joined_r0x0026ea94:
       goto LAB_0026e9d8;
     }
     if (param_1 == 0x43) {
-      temp_v0 = *(char *)(DAT_0057f108 + 0x32b2);
+      temp_v0 = *(char *)(g_camp + 0x32b2);
       temp_v6 = temp_v0 == '\0';
       if (temp_v6) {
-        temp_v0 = *(char *)(DAT_0057f108 + 0x32b3);
+        temp_v0 = *(char *)(g_camp + 0x32b3);
       }
       if (temp_v6 && temp_v0 == '\0') {
         return;
@@ -139,7 +139,7 @@ joined_r0x0026ea94:
     if (param_1 != 0x45) {
       return;
     }
-    temp_v0 = *(char *)(DAT_0057f108 + 0x32b3);
+    temp_v0 = *(char *)(g_camp + 0x32b3);
   }
 LAB_0026e9d0:
   if (temp_v0 == '\0') {

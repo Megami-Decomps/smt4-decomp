@@ -1,4 +1,4 @@
-/* Adds `amount` to the saturating halfword counter (+0x1a) of the object FUN_002bbb5c returns, capped at 0xffff. */
+/* Adds `amount` to the saturating halfword counter (+0x1a) of the object gameGetQuestCenterBlock returns, capped at 0xffff. */
 #include "common.h"
 
 extern "C" {
@@ -8,11 +8,11 @@ struct Obj00343a04 {
     /* 0x1a */ u16 counter;
 };
 
-Obj00343a04 *FUN_002bbb5c(void);
+Obj00343a04 *gameGetQuestCenterBlock(void);
 
 void FUN_00343a04(s32 amount)
 {
-    Obj00343a04 *obj = FUN_002bbb5c();
+    Obj00343a04 *obj = gameGetQuestCenterBlock();
     s32 value = obj->counter + amount;
 
     obj->counter = value >= 0x10000 ? 0xffff : value;

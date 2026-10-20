@@ -2,10 +2,10 @@
 
 extern "C" {
 
-int FUN_0023d02c(u32 texture);
-int FUN_002b2368(void *object);
+int bufferHandleRelease(u32 texture);
+int asdMemFreeNonNull(void *object);
 int asdMemFree(u32 ptr);
-int FUN_002c6a10(u32 ptr);
+int asdOperatorDelete(u32 ptr);
 extern u8 DAT_00420840;
 
 typedef struct ObjectVtbl {
@@ -34,12 +34,12 @@ void FUN_003486ec(Filter4Poly *filter)
 {
     filter->vtbl = &DAT_00420840;
     if (filter->extra != 0) {
-        FUN_002c6a10(filter->extra);
+        asdOperatorDelete(filter->extra);
         filter->extra = 0;
     }
     filter->vtbl = &g_filter4PolyBaseVtable;
     if (filter->texture != 0) {
-        FUN_0023d02c(filter->texture);
+        bufferHandleRelease(filter->texture);
         filter->texture = 0;
     }
     if (filter->buffer != 0) {
@@ -50,7 +50,7 @@ void FUN_003486ec(Filter4Poly *filter)
         filter->child->vtbl->destroy(filter->child);
         filter->child = NULL;
     }
-    FUN_002b2368(filter);
+    asdMemFreeNonNull(filter);
 }
 
 } /* extern "C" */

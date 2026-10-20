@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_001654d8(...);
-int FUN_001654e4(...);
+int vec2GetXInt(...);
+int vec2GetYInt(...);
 int efctSetSpeed(void);
 int FUN_001835b4(...);
 int FUN_0026e8b8(...);
@@ -30,18 +30,18 @@ typedef struct {
     unsigned int sp80; /* 0x80: local_80 */
 } void_stack;
 
-extern int DAT_0057f108; /* 0x57f108 */
+extern int g_camp; /* 0x57f108 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
-/* Supplied declaration required: FUN_001654d8. */
-/* Supplied declaration required: FUN_001654e4. */
+/* Supplied declaration required: vec2GetXInt. */
+/* Supplied declaration required: vec2GetYInt. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001834a4(unsigned int, int);
 /* Supplied declaration required: FUN_001835b4. */
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 extern int FUN_0020a2fc(void);
-extern int FUN_0021a410(unsigned int);
+extern int idListAnyValid(unsigned int);
 extern int FUN_0023c068(void);
 /* Supplied declaration required: FUN_0026e8b8. */
 extern int FUN_00284140(int);
@@ -84,22 +84,22 @@ void FUN_00217f14(void)
   int temp_v21;
   int temp_v22;
   
-  temp_v0 = DAT_0057f108;
+  temp_v0 = g_camp;
   temp_v20 = 0;
   temp_v16 = 0;
   temp_v17[0] = 0;
   temp_v1 = FUN_0020a2fc();
-  if (((((temp_v1 == 0) && (temp_v1 = FUN_0018719c(0x418), temp_v1 == 0)) ||
+  if (((((temp_v1 == 0) && (temp_v1 = gameFlagIsSet(0x418), temp_v1 == 0)) ||
        ((temp_v1 = FUN_0020a2fc(), temp_v1 == 0 &&
-        ((temp_v1 = FUN_0018719c(0x453), temp_v1 != 0 && (temp_v1 = FUN_0018719c(0x425), temp_v1 == 0))))))
+        ((temp_v1 = gameFlagIsSet(0x453), temp_v1 != 0 && (temp_v1 = gameFlagIsSet(0x425), temp_v1 == 0))))))
       || ((temp_v1 = FUN_0020a2fc(), temp_v1 == 0 && (temp_v1 = region9100IsClear(), temp_v1 == 0)))) ||
      ((temp_v1 = FUN_0035dde8(), temp_v1 != 0 ||
-      ((((temp_v1 = FUN_0020a2fc(), temp_v1 == 0 && (temp_v1 = FUN_0018719c(0x459), temp_v1 == 0)) &&
+      ((((temp_v1 = FUN_0020a2fc(), temp_v1 == 0 && (temp_v1 = gameFlagIsSet(0x459), temp_v1 == 0)) &&
         (temp_v1 = FUN_002ab790(), temp_v1 == 0x19)) && (temp_v1 = FUN_0023c068(), temp_v1 == 0)))))) {
     temp_v20 = 1;
   }
-  temp_v2 = FUN_001654d8();
-  temp_v3 = FUN_001654e4(temp_v0 + 0x658);
+  temp_v2 = vec2GetXInt();
+  temp_v3 = vec2GetYInt(temp_v0 + 0x658);
   efctSetSpeed();
   temp_v1 = temp_v2;
   if (temp_v2 < 0) {
@@ -116,8 +116,8 @@ void FUN_00217f14(void)
       temp_v22 = (int)(7 - temp_v4) / 2 + 0x14;
       do {
         temp_v11 = temp_v0 + temp_v10 * 0x8c + 0x914;
-        temp_v1 = FUN_001654d8(temp_v11);
-        temp_v2 = FUN_001654e4(temp_v11);
+        temp_v1 = vec2GetXInt(temp_v11);
+        temp_v2 = vec2GetYInt(temp_v11);
         efctSetSpeed();
         temp_v5 = FUN_002a4878(temp_v0 + 0x40);
         temp_v13 = temp_v5 == temp_v10;
@@ -128,7 +128,7 @@ void FUN_00217f14(void)
         if (temp_v13 && temp_v5 == 3) {
           temp_v14 = temp_v20 == 0;
         }
-        if (((!temp_v14) || (temp_v11 = FUN_001654d8(temp_v11), temp_v11 != 0)) ||
+        if (((!temp_v14) || (temp_v11 = vec2GetXInt(temp_v11), temp_v11 != 0)) ||
            ((temp_v11 = *(int *)(temp_v0 + 0x1c), temp_v11 == 3 || (temp_v11 == 0x21 || temp_v11 == 0x22)))) {
           temp_v3 = FUN_003da8f4((int)*(char *)(temp_v0 + 0xa4),temp_v10);
           temp_v11 = temp_v21;
@@ -145,7 +145,7 @@ void FUN_00217f14(void)
           temp_v18 = 0;
           temp_v19[0] = 0;
           FUN_0032ef5c(temp_v15,&temp_v18,temp_v19,0);
-          temp_v7 = FUN_0021a410(temp_v6);
+          temp_v7 = idListAnyValid(temp_v6);
           if (temp_v7 != 0) {
             efctSetSpeed();
           }
@@ -167,11 +167,11 @@ void FUN_00217f14(void)
     }
     if (temp_v5 == 3 && temp_v10 == 0) {
       temp_v2 = temp_v0 + temp_v1 * 0x8c + 0x914;
-      temp_v11 = FUN_001654d8();
+      temp_v11 = vec2GetXInt();
       if (((temp_v11 == 0) && (temp_v11 = *(int *)(temp_v0 + 0x1c), temp_v11 != 3)) &&
          (temp_v11 != 0x21 && temp_v11 != 0x22)) {
-        temp_v11 = FUN_001654d8(temp_v2);
-        temp_v2 = FUN_001654e4(temp_v2);
+        temp_v11 = vec2GetXInt(temp_v2);
+        temp_v2 = vec2GetYInt(temp_v2);
         efctSetSpeed();
         temp_v1 = FUN_00284140((int)*(short *)(temp_v0 + temp_v1 * 2 + 0x1b22));
         if (temp_v1 == 2) {
@@ -179,8 +179,8 @@ void FUN_00217f14(void)
           temp_v1 = temp_v7;
         }
         else {
-          temp_v1 = FUN_001654d8();
-          temp_v7 = FUN_001654e4(temp_v0 + 0xd74);
+          temp_v1 = vec2GetXInt();
+          temp_v7 = vec2GetYInt(temp_v0 + 0xd74);
         }
         temp_v3 = FUN_002a4878(temp_v0 + 0x40);
         temp_v3 = FUN_003da8f4((int)*(char *)(temp_v0 + 0xa4),temp_v3);

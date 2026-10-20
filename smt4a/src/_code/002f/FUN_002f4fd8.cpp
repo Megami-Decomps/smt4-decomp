@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_002ea0b8(int);
+int sharedRefInitEmpty(int);
 int _ZN9Obj55922c5resetEPv(unsigned int *, int);
 
 extern unsigned char DAT_00559234; /* 0x559234 */
 
-extern int FUN_002e9318(unsigned int *);
-/* Supplied declaration required: FUN_002ea0b8. */
+extern int onlineStringDestroy(unsigned int *);
+/* Supplied declaration required: sharedRefInitEmpty. */
 /* Supplied declaration required: _ZN9Obj55922c5resetEPv. */
 
 
@@ -22,8 +22,8 @@ void FUN_002f4fd8(unsigned int *param_1)
   
   *param_1 = (unsigned int)&DAT_00559234;
   _ZN9Obj55922c5resetEPv(param_1,0);
-  temp_v0 = FUN_002e9318(param_1 + 3);
-  FUN_002ea0b8(temp_v0 - 0xc);
+  temp_v0 = onlineStringDestroy(param_1 + 3);
+  sharedRefInitEmpty(temp_v0 - 0xc);
   return;
 }
 

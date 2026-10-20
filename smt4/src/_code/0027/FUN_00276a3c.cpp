@@ -18,7 +18,7 @@ int FUN_002adf00(float [3], int);
 int FUN_002c159c(unsigned char *);
 int FUN_002c1e30(...);
 int FUN_002c1edc(...);
-int FUN_002c2950(void);
+int gameGetMapBlock(void);
 int VectorUnsignedToFloat(unsigned int, int);
 
 /* stack frame of void: 8 slot(s), 32 byte(s) */
@@ -70,7 +70,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_002c159c. */
 /* Supplied declaration required: FUN_002c1e30. */
 /* Supplied declaration required: FUN_002c1edc. */
-/* Supplied declaration required: FUN_002c2950. */
+/* Supplied declaration required: gameGetMapBlock. */
 extern short __aeabi_idivmod(short, int);
 
 
@@ -115,7 +115,7 @@ void FUN_00276a3c(void)
   unsigned long long temp_v27;
   unsigned long long temp_v28;
   
-  FUN_002c2950();
+  gameGetMapBlock();
   piVar4 = DAT_004474f4;
   if ((char)DAT_004474f4[0xac] != '\0') {
     FUN_002adf00(temp_v24,DAT_004474f4[0xad]);
@@ -277,7 +277,7 @@ void FUN_00276a3c(void)
     return;
   }
   if (!(temp_v3 == 6 || temp_v3 == 0xf)) {
-    temp_v2 = FUN_002c2950();
+    temp_v2 = gameGetMapBlock();
     temp_v3 = g_lmapScene;
     piVar4 = DAT_004474f4;
     temp_v4 = DAT_004474f4[0x82];

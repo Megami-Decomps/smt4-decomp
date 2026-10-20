@@ -6,7 +6,7 @@ extern "C" {
 
 int qsort(...);
 int asdOperatorNewD(void);
-int FUN_002e6490(float *);
+int asdOperatorDeleteC(float *);
 int SBORROW4(unsigned int, unsigned int);
 int VectorUnsignedToFloat(unsigned int, int);
 
@@ -23,7 +23,7 @@ extern unsigned char DAT_0057a6e4; /* 0x57a6e4 */
 /* Supplied declaration required: qsort. */
 extern int lcgRandomRange(unsigned int);
 /* Supplied declaration required: asdOperatorNewD. */
-/* Supplied declaration required: FUN_002e6490. */
+/* Supplied declaration required: asdOperatorDeleteC. */
 extern int FUN_003e8430(int);
 
 
@@ -232,7 +232,7 @@ LAB_004e66b8:
           *(int *)(temp_v12[temp_v5 + 1] + 100) = (int)(pfVar5 + temp_v5)[1];
         }
       }
-      FUN_002e6490(pfVar5);
+      asdOperatorDeleteC(pfVar5);
     }
   }
 LAB_004e6630:

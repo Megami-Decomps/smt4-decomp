@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern int FUN_00269a58(void);
+extern int effGetFrameCounter(void);
 
 typedef struct Obj {
     /* 0x00 */ u8 unk00[0x2C];
@@ -11,7 +11,7 @@ typedef struct Obj {
 
 void FUN_002de9d0(Obj *obj)
 {
-    int value = FUN_00269a58();
+    int value = effGetFrameCounter();
 
     obj->total = value + obj->total;
 }

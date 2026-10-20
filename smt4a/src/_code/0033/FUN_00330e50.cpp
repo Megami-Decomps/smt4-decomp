@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } void_stack;
 
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 extern int scrGetArg(unsigned int);
 /* Supplied declaration required: scrSetResult. */
 
@@ -36,7 +36,7 @@ unsigned int FUN_00330e50(void)
   temp_v0 = scrGetArg(0);
   temp_v2 = 0;
   do {
-    if ((temp_v0 != temp_v2) && (temp_v1 = FUN_0018719c(temp_v4[temp_v2]), temp_v1 != 0)) {
+    if ((temp_v0 != temp_v2) && (temp_v1 = gameFlagIsSet(temp_v4[temp_v2]), temp_v1 != 0)) {
       temp_v3 = temp_v3 + 1;
     }
     temp_v2 = temp_v2 + 1;

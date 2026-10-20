@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern BtlUiGlobalsA DAT_0057a9b8;
+extern BtlUiGlobalsA g_btlUi;
 
 bool FUN_004ab8bc(void)
 {
-    if (DAT_0057a9b8.ui->state == 0x13) {
+    if (g_btlUi.ui->state == 0x13) {
         return false;
     }
     return true;

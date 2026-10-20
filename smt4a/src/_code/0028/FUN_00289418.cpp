@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00100388(...);
 int FUN_00162790(...);
-int FUN_001654e4(...);
+int vec2GetYInt(...);
 int efctSetSpeed(...);
 int FUN_001834a4(...);
 int FUN_0018408c(...);
@@ -24,12 +24,12 @@ typedef struct {
     unsigned int sp6C; /* 0x6c: local_6c */
 } param_2_stack;
 
-extern int DAT_00588fe8; /* 0x588fe8 */
+extern int g_statusDown; /* 0x588fe8 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_00162790. */
-/* Supplied declaration required: FUN_001654e4. */
+/* Supplied declaration required: vec2GetYInt. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_0018408c. */
@@ -60,10 +60,10 @@ void FUN_00289418(int param_1,int param_2)
   unsigned int temp_v10;
   unsigned char temp_v11 [44];
   
-  temp_v6 = DAT_00588fe8;
+  temp_v6 = g_statusDown;
   temp_v8 = 0;
-  temp_v3 = FUN_002a4894(DAT_00588fe8 + 0x2500);
-  temp_v5 = DAT_00588fe8;
+  temp_v3 = FUN_002a4894(g_statusDown + 0x2500);
+  temp_v5 = g_statusDown;
   if ((temp_v3 >= *(int *)(temp_v6 + 0x24ec)) && (temp_v8 = *(char *)(temp_v6 + 0x2578) != '\0', temp_v8)) {
     temp_v10 = 0x9fe7ffff;
     temp_v4 = FUN_001834a4(0x12,0x58d);
@@ -91,12 +91,12 @@ void FUN_00289418(int param_1,int param_2)
     FUN_00334ad0(param_1,param_2);
   }
   if (*(char *)(temp_v6 + 0x2578) == '\0') {
-    temp_v5 = FUN_001654e4(temp_v6 + 0x3fc);
+    temp_v5 = vec2GetYInt(temp_v6 + 0x3fc);
     temp_v7 = *(int *)(temp_v6 + 0x24f4);
     temp_v4 = FUN_001834a4(0x12,temp_v7 + 0x566);
     FUN_002f67c4(temp_v7,*(short *)(temp_v4 + 8) + param_1,param_2 + temp_v5 + (int)*(short *)(temp_v4 + 10)
                  ,0x65);
-    temp_v5 = FUN_001654e4();
+    temp_v5 = vec2GetYInt();
     temp_v7 = *(int *)(temp_v6 + 0x24f8);
     temp_v4 = FUN_001834a4(0x12,temp_v7 + 0x566);
     FUN_002f67c4(temp_v7,*(short *)(temp_v4 + 8) + param_1,(int)*(short *)(temp_v4 + 10) + param_2 + temp_v5

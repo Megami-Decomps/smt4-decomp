@@ -3,7 +3,7 @@
 extern "C" {
 
 extern int FUN_002b8ee0(void *block, u32 a);
-extern u32 FUN_002beda4(void *block);
+extern u32 vec2GetXInt(void *block);
 
 typedef struct Obj {
     /* 0x000 */ u8 unk000[1];
@@ -24,7 +24,7 @@ void FUN_00398830(Obj *obj)
         obj->unk001 = 2;
         obj->unk00C = 0;
     }
-    value = FUN_002beda4(obj->block);
+    value = vec2GetXInt(obj->block);
     obj->unk0A4 = value;
 }
 

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002ea3d0(int, unsigned int);
-int FUN_002ea446(int, int);
+int onlineJobSetStateTimed(int, int);
 
 extern unsigned char LAB_0011c694; /* 0x11c694 */
 extern unsigned char LAB_0011c6ed; /* 0x11c6ed */
@@ -16,7 +16,7 @@ extern unsigned char LAB_0011c6ed; /* 0x11c6ed */
 #endif
 extern unsigned int FUN_002ea3c0(int *, unsigned char *, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
-/* Supplied declaration required: FUN_002ea446. */
+/* Supplied declaration required: onlineJobSetStateTimed. */
 extern int childOwnerHasActiveChild(unsigned int);
 
 
@@ -37,7 +37,7 @@ unsigned long long FUN_0011c664(int param_1,unsigned int param_2,unsigned int pa
   uStack_c = param_4;
   temp_v0 = childOwnerHasActiveChild(*(unsigned int *)(param_1 + 0x68));
   if (temp_v0 != 0) {
-    FUN_002ea446(param_1,100);
+    onlineJobSetStateTimed(param_1,100);
     return romwright_piece_4_4(uStack_14,iStack_18);
   }
   temp_v1 = FUN_002ea3c0(&iStack_18,&LAB_0011c6ed,0,&LAB_0011c694);

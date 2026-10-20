@@ -12,7 +12,7 @@ void *FUN_0024c3c8(u32 id);
 void *FUN_0028c814(u32 *resource);
 void *asdEffectTextureCreate(u32 *resource);
 void *memAlloc(int, int, int, int size, int align, int);
-void FUN_002c3944(void *block, s32 size);
+void rt_memclr(void *block, s32 size);
 
 extern EffMiscKind g_effMiscKinds[];
 
@@ -36,7 +36,7 @@ EffMiscObject *effMiscCreateFromDesc(EffMiscDesc *desc)
     type = desc->resourceType;
     asdDebugTrace(DAT_00410204, 450);
     shared = (EffMiscShared *)memAlloc(0x10000, 0x100, 0, 0xc, 0x10, 1);
-    FUN_002c3944(shared, 0xc);
+    rt_memclr(shared, 0xc);
     shared->type = type;
     shared->refCount = 1;
     switch (type) {

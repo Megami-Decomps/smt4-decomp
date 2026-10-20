@@ -25,7 +25,7 @@ extern unsigned char LAB_0010f064; /* 0x10f064 */
 /* Supplied declaration required: FUN_0012736c. */
 /* Supplied declaration required: inflateInitDefault. */
 /* Supplied declaration required: sysMemClear. */
-extern int FUN_002e760a(unsigned int);
+extern int operatorNew(unsigned int);
 
 
 void FUN_0010eff8(int param_1,unsigned int param_2,unsigned int param_3)
@@ -36,7 +36,7 @@ void FUN_0010eff8(int param_1,unsigned int param_2,unsigned int param_3)
   int temp_v1;
   
   temp_v1 = param_1;
-  temp_v0 = FUN_002e760a(0x70);
+  temp_v0 = operatorNew(0x70);
   if (temp_v0 != 0) {
     sysMemClear(temp_v0,0x70);
   }

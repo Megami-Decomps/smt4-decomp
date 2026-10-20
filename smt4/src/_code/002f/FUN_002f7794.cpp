@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002505c0(int, unsigned int, int, int, int, int, int);
 int FUN_0027df30(int, unsigned int, int, int, int, unsigned int, unsigned int, int, int, int, int, int, int);
-int FUN_00282924(int, int);
+int btlMainFindEntryByListedId(int, int);
 
 /* stack frame of void: 6 slot(s), 24 byte(s) */
 typedef struct {
@@ -23,7 +23,7 @@ extern unsigned int g_btlScriptUnit; /* 0x43427c */
 /* Supplied declaration required: FUN_002505c0. */
 /* Supplied declaration required: FUN_0027df30. */
 extern unsigned int btlUnitGet(unsigned int);
-/* Supplied declaration required: FUN_00282924. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 extern int btlGetMainState(void);
 extern int scrGetArg(unsigned int);
 
@@ -41,7 +41,7 @@ unsigned int FUN_002f7794(void)
   temp_v1 = scrGetArg(1);
   temp_v2 = btlUnitGet(g_btlScriptUnit);
   temp_v3 = btlGetMainState();
-  FUN_00282924(temp_v3,temp_v0);
+  btlMainFindEntryByListedId(temp_v3,temp_v0);
   temp_v1 = (*(short *)(temp_v3 + 0x1b6) * temp_v1) / 100;
   if (temp_v1 == 0) {
     temp_v1 = -1;

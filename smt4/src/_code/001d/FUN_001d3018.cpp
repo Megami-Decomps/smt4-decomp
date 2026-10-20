@@ -11,7 +11,7 @@ int FUN_0028250c(void);
 int FUN_00287b0c(void);
 int FUN_00287be4(void);
 int FUN_0028c618(unsigned int, int);
-int FUN_0028c640(unsigned int, int, int *);
+int nodeSetTranslation(unsigned int, int, int *);
 int FUN_0029bb14(unsigned int);
 int FUN_002a5710(unsigned int, unsigned int);
 int FUN_0031d49c(void);
@@ -60,7 +60,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_00287b0c. */
 /* Supplied declaration required: FUN_00287be4. */
 /* Supplied declaration required: FUN_0028c618. */
-/* Supplied declaration required: FUN_0028c640. */
+/* Supplied declaration required: nodeSetTranslation. */
 /* Supplied declaration required: FUN_0029bb14. */
 /* Supplied declaration required: FUN_002a5710. */
 /* Supplied declaration required: FUN_0031d49c. */
@@ -240,7 +240,7 @@ void FUN_001d3018(void)
           *puVar6 = *puVar6 & 0xfffffffd;
           *(unsigned char *)(*(int *)(puVar6[2] + 0x2c) + 0x1f6) = 1;
         }
-        FUN_0028c640(*(unsigned int *)(*(int *)(temp_v4 + 0x1ac) + 8),0,&temp_v23);
+        nodeSetTranslation(*(unsigned int *)(*(int *)(temp_v4 + 0x1ac) + 8),0,&temp_v23);
         FUN_0028c618(*(unsigned int *)(*(int *)(temp_v4 + 0x1ac) + 8),0);
         if (*(int *)(temp_v4 + 100) != *(int *)(temp_v4 + 0x68)) {
           *(int *)(temp_v4 + 0x68) = *(int *)(temp_v4 + 100);

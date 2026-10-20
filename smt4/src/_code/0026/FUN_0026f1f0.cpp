@@ -7,11 +7,11 @@ typedef struct Scene {
     /* 0xCF8 */ u32 unkCF8;
 } Scene;
 
-extern Scene *DAT_0043daa8;
+extern Scene *g_campCec;
 
 u32 FUN_0026f1f0(void)
 {
-    return DAT_0043daa8->unkCF8;
+    return g_campCec->unkCF8;
 }
 
 } /* extern "C" */

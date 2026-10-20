@@ -5,7 +5,7 @@
 extern "C" {
 
 int scrGetArg(int);
-int FUN_002c425c(unsigned int, unsigned int *);
+int jobSetParent(unsigned int, unsigned int *);
 int FUN_002ebe68(unsigned int *, unsigned int *, int, unsigned int, int, int, int);
 int VectorSignedToFloat(unsigned int, int);
 
@@ -19,7 +19,7 @@ extern unsigned int *g_eventTex; /* 0x43ded0 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: scrGetArg. */
 extern int jobIsValid(void);
-/* Supplied declaration required: FUN_002c425c. */
+/* Supplied declaration required: jobSetParent. */
 /* Supplied declaration required: FUN_002ebe68. */
 
 
@@ -40,7 +40,7 @@ unsigned int FUN_0018c054(void)
   FUN_002ebe68(puVar2,g_eventTex + 0x19,0x40c00000,in_r3,0x40000000,0x40800000,0x40c00000);
   temp_v1 = jobIsValid();
   if (temp_v1 != 0) {
-    FUN_002c425c(*g_eventTex,puVar2);
+    jobSetParent(*g_eventTex,puVar2);
   }
   return 1;
 }

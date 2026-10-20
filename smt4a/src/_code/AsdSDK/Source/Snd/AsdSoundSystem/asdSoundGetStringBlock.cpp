@@ -13,7 +13,7 @@ typedef struct AsdSoundArchive {
 
 extern AsdSoundArchive DAT_0063e1e8;
 
-extern s32 FUN_0015fe30(void *reader);
+extern s32 nw_snd_SoundArchive_IsAvailable(void *reader);
 extern u32 nw_snd_internal_SoundArchiveFile_FileHeader_GetStringBlockSize(void *fileHeader);
 extern void *asdMemoryAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
 extern void FUN_0015e978(void *reader, void *stringBlock, u32 size);
@@ -24,7 +24,7 @@ void *asdSoundGetStringBlock(void)
     AsdSoundArchive *archive = &DAT_0063e1e8;
     void **stringBlock = &archive->stringBlock;
 
-    if (FUN_0015fe30(archive->reader)) {
+    if (nw_snd_SoundArchive_IsAvailable(archive->reader)) {
         u32 size = nw_snd_internal_SoundArchiveFile_FileHeader_GetStringBlockSize(archive->fileHeader);
 
         asdDebugTrace("c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Snd\\AsdSoundSystem.cpp", 1103);

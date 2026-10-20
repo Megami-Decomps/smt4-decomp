@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001aea28(...);
+int ptrListRemoveClearOwner(...);
 int FUN_0022e774(...);
 int FUN_0041e3a0(...);
 int FUN_00420a2c(...);
@@ -25,9 +25,9 @@ struct fn_0041f110_arg0 {
 };
 
 typedef int romwright_code(...);
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 
-/* Supplied declaration required: FUN_001aea28. */
+/* Supplied declaration required: ptrListRemoveClearOwner. */
 extern int FUN_0022e72c(void);
 /* Supplied declaration required: FUN_0022e774. */
 extern int objBStateAllowsAction(void);
@@ -70,7 +70,7 @@ void FUN_0041f110(fn_0041f110_arg0 *param_1)
      ) {
     *(unsigned char *)&param_1[3].field_0x8 = 0;
     if (*(int *)&param_1[3].field_0x4 != 0) {
-      FUN_001aea28(DAT_0056fcc0,*(unsigned int *)(*(int *)&param_1[3].field_0x4 + 4));
+      ptrListRemoveClearOwner(g_handleRegistry,*(unsigned int *)(*(int *)&param_1[3].field_0x4 + 4));
       if (*(int **)&param_1[3].field_0x4 != (int *)0x0) {
         (**(romwright_code **)(**(int **)&param_1[3].field_0x4 + 4))();
         *(unsigned int *)&param_1[3].field_0x4 = 0;

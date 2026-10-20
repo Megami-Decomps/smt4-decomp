@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_0014bdb4(...);
+int jobSetParent(...);
 int asdProcessCreateSimple(...);
 int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
-int FUN_00165058(...);
+int jobGetStatus(...);
 int sysMemClear(...);
 int jobSetWork31(...);
 
@@ -27,12 +27,12 @@ extern unsigned char LAB_0036f710; /* 0x36f710 */
 extern unsigned char LAB_0036f720; /* 0x36f720 */
 extern unsigned int *g_eventTex; /* 0x57f3b0 */
 
-/* Supplied declaration required: FUN_0014bdb4. */
+/* Supplied declaration required: jobSetParent. */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 extern int jobIsValid(unsigned int);
-/* Supplied declaration required: FUN_00165058. */
+/* Supplied declaration required: jobGetStatus. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: jobSetWork31. */
 
@@ -69,7 +69,7 @@ LAB_0036f4fc:
   temp_v1 = jobIsValid(*(unsigned int *)(temp_v6 * 4 + 0x5e1f3c));
   if (temp_v1 != 0) {
     jobSetWork31(*(unsigned int *)(temp_v6 * 4 + 0x5e1f3c),1);
-    FUN_0014bdb4(*g_eventTex,*(unsigned int *)(temp_v6 * 4 + 0x5e1f3c));
+    jobSetParent(*g_eventTex,*(unsigned int *)(temp_v6 * 4 + 0x5e1f3c));
     puVar2 = g_eventTex;
     temp_v5 = *(unsigned int *)(temp_v6 * 4 + 0x5e1f3c);
     temp_v1 = 0;
@@ -126,8 +126,8 @@ LAB_0036f5f4:
     do {
       if (puVar2[temp_v1 + 1] != 0) {
         if (puVar2[temp_v1 + 2] != 0) {
-          temp_v2 = FUN_00165058();
-          temp_v4 = FUN_00165058(puVar2[temp_v1 + 2]);
+          temp_v2 = jobGetStatus();
+          temp_v4 = jobGetStatus(puVar2[temp_v1 + 2]);
           if (temp_v4 < temp_v2) {
             temp_v5 = puVar2[temp_v1 + 1];
             temp_v0 = 1;

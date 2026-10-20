@@ -10,13 +10,13 @@ typedef struct Stream {
     /* 0x0C */ s32 pos;
 } Stream;
 
-extern s32 FUN_002e7328(Stream *stream, u32 count);
-extern u8 *FUN_002e76b6(u32 source);
+extern s32 streamReaderHasBytes(Stream *stream, u32 count);
+extern u8 *onlineBufferGetData(u32 source);
 
 void FUN_00103e62(Stream *stream, u8 *out)
 {
-    if (FUN_002e7328(stream, 1) != 0) {
-        u8 *data = FUN_002e76b6(stream->source);
+    if (streamReaderHasBytes(stream, 1) != 0) {
+        u8 *data = onlineBufferGetData(stream->source);
         u8 *byte = data + stream->pos;
 
         *out = *byte;

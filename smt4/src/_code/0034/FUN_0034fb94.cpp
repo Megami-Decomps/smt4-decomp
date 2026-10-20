@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_002c3424(void *event);
+int nn_os_LightEvent_Wait(void *event);
 int FUN_003511cc(void *obj);
 
 typedef struct Obj {
@@ -15,7 +15,7 @@ typedef struct Obj {
 /* Waits on the event, running FUN_003511cc until the object is done. */
 void FUN_0034fb94(Obj *obj)
 {
-    while (FUN_002c3424(obj->event), obj->done != 1) {
+    while (nn_os_LightEvent_Wait(obj->event), obj->done != 1) {
         FUN_003511cc(obj);
     }
 }

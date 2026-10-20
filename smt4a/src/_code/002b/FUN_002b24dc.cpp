@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_00184758(u8 *member, s32 a, s32 b);
+void uiSpriteSetKeyframe(u8 *member, s32 a, s32 b);
 
 typedef struct Holder {
     /* 0x000 */ u8 unk000[0x2DC];
@@ -14,7 +14,7 @@ typedef struct Holder {
 void FUN_002b24dc(Holder *object)
 {
     if (object->done == 0) {
-        FUN_00184758(object->member2DC, 2, 1);
+        uiSpriteSetKeyframe(object->member2DC, 2, 1);
         return;
     }
 }

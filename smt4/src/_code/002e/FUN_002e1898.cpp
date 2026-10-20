@@ -6,10 +6,10 @@ extern "C" {
 
 int FUN_002990a0(void);
 int FUN_0029e648(int, int);
-int FUN_002b8838(...);
+int buttonHelpSetPreset(...);
 int FUN_0031e384(void);
 
-extern int DAT_0043daa8; /* 0x43daa8 */
+extern int g_campCec; /* 0x43daa8 */
 
 extern unsigned int FUN_002228d4(void);
 extern int gameDataBlockTestFlag(unsigned int);
@@ -17,7 +17,7 @@ extern int FUN_00262f14(void);
 extern int FUN_0026efec(int);
 /* Supplied declaration required: FUN_002990a0. */
 /* Supplied declaration required: FUN_0029e648. */
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: FUN_0031e384. */
 
 
@@ -51,7 +51,7 @@ unsigned int FUN_002e1898(int param_1)
           temp_v3 = 8;
         }
         else {
-          FUN_002b8838(0x3c);
+          buttonHelpSetPreset(0x3c);
           temp_v3 = 10;
         }
         *(unsigned int *)(param_1 + 0xd2c) = temp_v3;
@@ -66,7 +66,7 @@ unsigned int FUN_002e1898(int param_1)
         temp_v3 = 7;
       }
       else {
-        FUN_002b8838(0x3c);
+        buttonHelpSetPreset(0x3c);
         temp_v3 = 0xb;
       }
       *(unsigned int *)(param_1 + 0xd2c) = temp_v3;
@@ -84,7 +84,7 @@ LAB_002e1920:
     else {
       temp_v3 = 4;
     }
-    FUN_002b8838(temp_v3);
+    buttonHelpSetPreset(temp_v3);
     *(unsigned char *)(param_1 + 0xd61) = 1;
   }
   if (*(char *)(param_1 + 0xd63) != '\0') {
@@ -97,12 +97,12 @@ LAB_002e1920:
   if ((temp_v1 & 2) != 0) {
     temp_v1 = FUN_002228d4();
     if ((temp_v1 & 2) != 0) {
-      temp_v4 = *(unsigned char *)(DAT_0043daa8 + 0x68) | 2;
+      temp_v4 = *(unsigned char *)(g_campCec + 0x68) | 2;
     }
     else {
-      temp_v4 = *(unsigned char *)(DAT_0043daa8 + 0x68) & 0xfd;
+      temp_v4 = *(unsigned char *)(g_campCec + 0x68) & 0xfd;
     }
-    *(unsigned char *)(DAT_0043daa8 + 0x68) = temp_v4;
+    *(unsigned char *)(g_campCec + 0x68) = temp_v4;
   }
   return temp_v6;
 }

@@ -5,9 +5,9 @@
 extern "C" {
 
 int btlGetMainState(void);
-int FUN_001641c4(void);
+int ifTouchRegionRemove(void);
 int sysPlaySe(void);
-int FUN_001b4a90(int, int, unsigned int);
+int __aeabi_memset4(int, int, unsigned int);
 int FUN_00203b40(int, int, int, int, int, int);
 int FUN_0020ad6c(int, int, int);
 int FUN_00270104(void);
@@ -21,10 +21,10 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: FUN_001641c4. */
+/* Supplied declaration required: ifTouchRegionRemove. */
 extern int FUN_00167f08(void);
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_001b4a90. */
+/* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: FUN_00203b40. */
 /* Supplied declaration required: FUN_0020ad6c. */
 /* Supplied declaration required: FUN_00270104. */
@@ -170,12 +170,12 @@ void FUN_0020acd8(int param_1,unsigned int param_2,int param_3)
     *(unsigned int *)(param_1 + 0x3878) = 0;
     if (0 < *(short *)(param_1 + 0x480c)) {
       do {
-        FUN_001641c4();
+        ifTouchRegionRemove();
         temp_v0 = temp_v0 + 1;
       } while (temp_v0 < *(short *)(param_1 + 0x480c));
     }
     *(unsigned short *)(param_1 + 0x480c) = 0;
-    FUN_001b4a90(param_1 + 0x480e,0x40,0xffffffff);
+    __aeabi_memset4(param_1 + 0x480e,0x40,0xffffffff);
     return;
   }
   FUN_0020ad6c(param_1,0x29,1);

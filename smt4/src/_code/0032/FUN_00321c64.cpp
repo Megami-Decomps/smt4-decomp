@@ -12,7 +12,7 @@ typedef struct {
 } void_stack;
 
 extern unsigned char DAT_00400002; /* 0x400002 */
-extern unsigned char DAT_0044ea80; /* 0x44ea80 */
+extern unsigned char g_effectEditor; /* 0x44ea80 */
 
 /* Supplied declaration required: effBlockSetBlobB. */
 
@@ -24,7 +24,7 @@ unsigned char * FUN_00321c64(void)
   unsigned int temp_v0 [2];
   
   temp_v0[0] = 0;
-  effBlockSetBlobB((*(unsigned int *)((unsigned char *)&DAT_0044ea80 + 0x1c)),temp_v0,4);
+  effBlockSetBlobB((*(unsigned int *)((unsigned char *)&g_effectEditor + 0x1c)),temp_v0,4);
   return &DAT_00400002;
 }
 

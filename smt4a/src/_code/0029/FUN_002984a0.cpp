@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern void *DAT_00571508;
+extern void *g_btlCamera;
 
 int FUN_004f2c40(void *obj, u32 arg);
 u32 jobGetWork(void);
@@ -12,8 +12,8 @@ int FUN_002984a0(void)
 {
     u32 arg = jobGetWork();
 
-    if (DAT_00571508 != NULL) {
-        return FUN_004f2c40(DAT_00571508, arg);
+    if (g_btlCamera != NULL) {
+        return FUN_004f2c40(g_btlCamera, arg);
     }
     return 0;
 }

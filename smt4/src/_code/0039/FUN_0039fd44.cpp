@@ -4,15 +4,15 @@
 
 extern "C" {
 
-int FUN_002ae238(void);
-int FUN_002b45e8(void);
-int FUN_002b4670(void);
+int dataTable08Sub0GetRecord(void);
+int dataTable08Sub2GetRecord(void);
+int dataTable08Sub1GetRecord(void);
 
 extern int FUN_00230f44(unsigned short *);
-/* Supplied declaration required: FUN_002ae238. */
+/* Supplied declaration required: dataTable08Sub0GetRecord. */
 extern unsigned int FUN_002ae3c0(unsigned int);
-/* Supplied declaration required: FUN_002b45e8. */
-/* Supplied declaration required: FUN_002b4670. */
+/* Supplied declaration required: dataTable08Sub2GetRecord. */
+/* Supplied declaration required: dataTable08Sub1GetRecord. */
 
 
 int FUN_0039fd44(unsigned short *param_1,unsigned short *param_2)
@@ -31,11 +31,11 @@ int FUN_0039fd44(unsigned short *param_1,unsigned short *param_2)
   temp_v0 = FUN_002ae3c0(temp_v4);
   switch(temp_v0) {
   case 0:
-    FUN_002ae238();
+    dataTable08Sub0GetRecord();
     temp_v3 = (unsigned int)*(unsigned char *)(temp_v4 + 0x55);
     break;
   case 1:
-    FUN_002b4670();
+    dataTable08Sub1GetRecord();
     temp_v3 = *(unsigned int *)(temp_v4 + 0x70) & 0xff;
     break;
   case 2:
@@ -45,7 +45,7 @@ int FUN_0039fd44(unsigned short *param_1,unsigned short *param_2)
   case 6:
   case 7:
   case 8:
-    FUN_002b45e8();
+    dataTable08Sub2GetRecord();
     temp_v3 = (unsigned int)*(unsigned short *)(temp_v4 + 0xa6);
   }
   temp_v4 = (unsigned int)*param_2;
@@ -53,11 +53,11 @@ int FUN_0039fd44(unsigned short *param_1,unsigned short *param_2)
   temp_v0 = FUN_002ae3c0(temp_v4);
   switch(temp_v0) {
   case 0:
-    FUN_002ae238();
+    dataTable08Sub0GetRecord();
     temp_v5 = (unsigned int)*(unsigned char *)(temp_v4 + 0x55);
     break;
   case 1:
-    FUN_002b4670();
+    dataTable08Sub1GetRecord();
     temp_v5 = *(unsigned int *)(temp_v4 + 0x70) & 0xff;
     break;
   case 2:
@@ -67,7 +67,7 @@ int FUN_0039fd44(unsigned short *param_1,unsigned short *param_2)
   case 6:
   case 7:
   case 8:
-    FUN_002b45e8();
+    dataTable08Sub2GetRecord();
     temp_v5 = (unsigned int)*(unsigned short *)(temp_v4 + 0xa6);
   }
   temp_v1 = temp_v3 - temp_v5;

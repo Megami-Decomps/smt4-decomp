@@ -2,9 +2,9 @@
 
 extern "C" {
 
-int FUN_00152bec(void);
+int asdMdlManagerMarkDestroy(void);
 int asdMdlManagerDestroy(u32 model);
-int FUN_002b2368(void *object);
+int asdMemFreeNonNull(void *object);
 extern u8 DAT_0042231c;
 
 struct Object;
@@ -33,11 +33,11 @@ void FUN_003962b8(Obj *obj)
         obj->child = NULL;
     }
     if (obj->model != 0) {
-        FUN_00152bec();
+        asdMdlManagerMarkDestroy();
         asdMdlManagerDestroy(obj->model);
         obj->model = 0;
     }
-    FUN_002b2368(obj);
+    asdMemFreeNonNull(obj);
 }
 
 } /* extern "C" */

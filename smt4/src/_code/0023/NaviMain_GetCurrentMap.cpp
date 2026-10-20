@@ -4,7 +4,7 @@ extern "C" {
 
 u32 NaviMain_GetCurrentMap(void)
 {
-    return DAT_0044cdf0->currentMap;
+    return g_naviMain->currentMap;
 }
 
 } /* extern "C" */

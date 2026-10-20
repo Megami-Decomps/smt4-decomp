@@ -5,9 +5,9 @@
 extern "C" {
 
 int sysPlaySe(int);
-int FUN_001846d0(int, int);
-int FUN_00184758(int, int, int);
-int FUN_00184c00(int, int, int);
+int uiSpriteSelectAnim(int, int);
+int uiSpriteSetKeyframe(int, int, int);
+int uiSpriteSetImageKeyframe(int, int, int);
 int FUN_003d2150(int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -15,12 +15,12 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-extern int DAT_0057f28c; /* 0x57f28c */
+extern int g_uiQuest; /* 0x57f28c */
 
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_001846d0. */
-/* Supplied declaration required: FUN_00184758. */
-/* Supplied declaration required: FUN_00184c00. */
+/* Supplied declaration required: uiSpriteSelectAnim. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_003d2150. */
 
 
@@ -31,27 +31,27 @@ void FUN_002c8778(unsigned short param_1)
   int temp_v0;
   unsigned int temp_v1;
   
-  temp_v0 = DAT_0057f28c;
-  *(unsigned short *)(DAT_0057f28c + 0xcca) = param_1;
+  temp_v0 = g_uiQuest;
+  *(unsigned short *)(g_uiQuest + 0xcca) = param_1;
   *(unsigned int *)(temp_v0 + 0x934) = 0;
-  FUN_00184758(temp_v0 + 0x34,1,0);
-  FUN_00184c00(temp_v0 + 0x34,8,0);
+  uiSpriteSetKeyframe(temp_v0 + 0x34,1,0);
+  uiSpriteSetImageKeyframe(temp_v0 + 0x34,8,0);
   if (temp_v0 != 0) {
-    FUN_00184758(temp_v0 + 0x5ac,7,0);
-    FUN_00184c00(temp_v0 + 0x5ac,0xb,0);
-    FUN_00184758(temp_v0 + 0x638,8,0);
-    FUN_00184c00(temp_v0 + 0x638,0xb,0);
-    FUN_001846d0(temp_v0 + 0x6c4,6);
-    FUN_001846d0(temp_v0 + 0x750,7);
-    FUN_001846d0(temp_v0 + 0x7dc,8);
+    uiSpriteSetKeyframe(temp_v0 + 0x5ac,7,0);
+    uiSpriteSetImageKeyframe(temp_v0 + 0x5ac,0xb,0);
+    uiSpriteSetKeyframe(temp_v0 + 0x638,8,0);
+    uiSpriteSetImageKeyframe(temp_v0 + 0x638,0xb,0);
+    uiSpriteSelectAnim(temp_v0 + 0x6c4,6);
+    uiSpriteSelectAnim(temp_v0 + 0x750,7);
+    uiSpriteSelectAnim(temp_v0 + 0x7dc,8);
     *(unsigned short *)(temp_v0 + 0x816) = 2;
-    FUN_001846d0(temp_v0 + 0x868,10);
+    uiSpriteSelectAnim(temp_v0 + 0x868,10);
     *(unsigned int *)(temp_v0 + 0xd48) = 0;
     *(unsigned int *)(temp_v0 + 0xd4c) = 0;
   }
-  temp_v0 = DAT_0057f28c;
-  temp_v1 = *(unsigned int *)(DAT_0057f28c + 4);
-  *(unsigned int *)(DAT_0057f28c + 4) = 0x11;
+  temp_v0 = g_uiQuest;
+  temp_v1 = *(unsigned int *)(g_uiQuest + 4);
+  *(unsigned int *)(g_uiQuest + 4) = 0x11;
   *(unsigned int *)(temp_v0 + 8) = temp_v1;
   *(unsigned int *)(temp_v0 + 0x10) = 0;
   sysPlaySe(0x1a);

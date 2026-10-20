@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0013b608(void);
-int FUN_0013b618(void);
+int nngxLockEnter(void);
+int nngxLockLeave(void);
 int FUN_002ba2b8(void);
 
 typedef int romwright_code(...);
@@ -19,8 +19,8 @@ extern unsigned char DAT_004c62a2; /* 0x4c62a2 */
 extern unsigned char DAT_004c62a8; /* 0x4c62a8 */
 extern int DAT_004c6330; /* 0x4c6330 */
 
-/* Supplied declaration required: FUN_0013b608. */
-/* Supplied declaration required: FUN_0013b618. */
+/* Supplied declaration required: nngxLockEnter. */
+/* Supplied declaration required: nngxLockLeave. */
 /* Supplied declaration required: FUN_002ba2b8. */
 
 
@@ -37,7 +37,7 @@ void FUN_002b39f0(void)
   temp_v0 = DAT_004c6330;
   UNRECOVERED_JUMPTABLE = (romwright_code *)0x0;
   temp_v2 = *(int *)(DAT_004c6330 + 0x18) + *(int *)(DAT_004c6330 + 0x28) * 0x1c;
-  FUN_0013b608();
+  nngxLockEnter();
   temp_v1 = *(int *)(temp_v0 + 0x28) + 1;
   *(int *)(temp_v0 + 0x28) = temp_v1;
   if ((*(romwright_code **)(temp_v0 + 0x38) != (romwright_code *)0x0) &&
@@ -57,7 +57,7 @@ void FUN_002b39f0(void)
   else {
     FUN_002ba2b8();
   }
-  FUN_0013b618();
+  nngxLockLeave();
   if (UNRECOVERED_JUMPTABLE != (romwright_code *)0x0) {
                     /* WARNING: Could not recover jumptable at 0x002b3a94. Too many branches */
                     /* WARNING: Treating indirect jump as call */

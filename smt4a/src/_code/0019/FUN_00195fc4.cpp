@@ -3,11 +3,11 @@
 
 extern "C" {
 
-void FUN_00195fc8(void);
+void sysFatalBreak(void);
 
 void FUN_00195fc4(void)
 {
-    FUN_00195fc8();
+    sysFatalBreak();
 }
 
 }

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00199b9c(int, int);
 int FUN_001f50ac(int);
 int FUN_002069d8(int);
-int FUN_002af5c0(...);
+int uiSpriteSetImageKeyframe(...);
 int FUN_002bd954(...);
 int FUN_002bee58(...);
 int asdOperatorNew(...);
@@ -47,12 +47,12 @@ extern unsigned char DAT_004019cc; /* 0x4019cc */
 extern unsigned char DAT_00401ac8; /* 0x401ac8 */
 extern unsigned char DAT_00401bac; /* 0x401bac */
 extern unsigned char DAT_00401c6c; /* 0x401c6c */
-extern int DAT_00439ca8; /* 0x439ca8 */
+extern int g_btlUiBlock; /* 0x439ca8 */
 
 /* Supplied declaration required: FUN_00199b9c. */
 /* Supplied declaration required: FUN_001f50ac. */
 /* Supplied declaration required: FUN_002069d8. */
-/* Supplied declaration required: FUN_002af5c0. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002bee58. */
 /* Supplied declaration required: asdOperatorNew. */
@@ -73,16 +73,16 @@ void FUN_003ad76c(fn_003ad76c_arg0 *param_1,int param_2)
   int temp_v5;
   int temp_v6;
   
-  temp_v0 = DAT_00439ca8;
-  *(unsigned int *)(DAT_00439ca8 + 0x7e38) = 0;
+  temp_v0 = g_btlUiBlock;
+  *(unsigned int *)(g_btlUiBlock + 0x7e38) = 0;
   *(unsigned int *)(temp_v0 + 0x7e3c) = 0;
   *(unsigned char *)(temp_v0 + 0x7e9d) = 0;
   *(unsigned char *)(temp_v0 + 0x7e9e) = 0;
   FUN_001f50ac(temp_v0 + 8);
   FUN_002069d8(temp_v0 + 0x2200);
   FUN_00199b9c(temp_v0 + 0x2460,param_2);
-  temp_v1 = DAT_00439ca8;
-  *(unsigned short *)(DAT_00439ca8 + 0x5da6) = 0;
+  temp_v1 = g_btlUiBlock;
+  *(unsigned short *)(g_btlUiBlock + 0x5da6) = 0;
   *(unsigned short *)(temp_v1 + 0x63aa) = 0;
   *(unsigned short *)(temp_v1 + 0x69ae) = 0;
   *(unsigned short *)(temp_v1 + 0x6fb2) = 0;
@@ -135,7 +135,7 @@ void FUN_003ad76c(fn_003ad76c_arg0 *param_1,int param_2)
     *(unsigned char *)(temp_v0 + 0x54d0) = 1;
   }
   FUN_002bd954(temp_v0 + 0x7ec0,0xe,0,temp_v1,1);
-  FUN_002af5c0(temp_v0 + 0x7ec0,0xd,0);
+  uiSpriteSetImageKeyframe(temp_v0 + 0x7ec0,0xd,0);
   return;
 }
 

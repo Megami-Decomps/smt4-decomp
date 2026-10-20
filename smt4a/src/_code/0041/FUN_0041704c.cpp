@@ -6,7 +6,7 @@ extern "C" {
 
 int sysPlaySe(unsigned int);
 int FUN_00215bd0(void);
-int FUN_00275f44(unsigned int, int);
+int scrScriptProcessStartEntry(unsigned int, int);
 int FUN_002a7324(int);
 int FUN_002c8538(int);
 int FUN_002c85b0(int);
@@ -29,7 +29,7 @@ extern unsigned int saveSlotFindById(unsigned int);
 /* Supplied declaration required: FUN_00215bd0. */
 extern int FUN_00224880(unsigned int);
 extern int FUN_0023b3d0(void);
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_002a7324. */
 extern int FUN_002c7cb4(void);
 /* Supplied declaration required: FUN_002c8538. */
@@ -93,7 +93,7 @@ LAB_004170bc:
         *(unsigned int *)(param_1 + 0xc) = 5;
       }
       else {
-        FUN_00275f44(*(unsigned int *)(param_1 + 0x1c),0xe);
+        scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x1c),0xe);
         FUN_00333dc8(1);
         *(unsigned int *)(param_1 + 0xc) = 4;
       }

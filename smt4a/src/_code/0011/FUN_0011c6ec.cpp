@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002f71b0(void);
-int FUN_002f7cb0(int);
+int onlineJobSetStateWaiting(int);
 int FUN_002f7cba(int, int, unsigned int);
 int FUN_0031126c(int, int, unsigned int);
 
@@ -21,11 +21,11 @@ extern unsigned char LAB_0011c744; /* 0x11c744 */
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-extern int FUN_002e760a(unsigned int);
+extern int operatorNew(unsigned int);
 extern unsigned int FUN_002e7908(int *, unsigned int *);
 extern unsigned int FUN_002ea3c0(int, unsigned char *, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002f71b0. */
-/* Supplied declaration required: FUN_002f7cb0. */
+/* Supplied declaration required: onlineJobSetStateWaiting. */
 /* Supplied declaration required: FUN_002f7cba. */
 /* Supplied declaration required: FUN_0031126c. */
 
@@ -47,8 +47,8 @@ unsigned long long FUN_0011c6ec(int param_1,unsigned int param_2,unsigned int pa
   if (*(int *)(*(int *)(param_1 + 0x68) + 0x78) != 0) {
     temp_v2 = param_4;
     FUN_002f71b0();
-    FUN_002f7cb0(param_1);
-    temp_v0 = FUN_002e760a(0x10);
+    onlineJobSetStateWaiting(param_1);
+    temp_v0 = operatorNew(0x10);
     temp_v1 = 0;
     if (temp_v0 != 0) {
       temp_v1 = FUN_002ea3c0(temp_v0,&LAB_0011c63b,0,&LAB_0011c744);

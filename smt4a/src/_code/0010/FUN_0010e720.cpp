@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002eb588(int *);
+int onlineTimeGetNow(int *);
 int FUN_002f8cc4(int);
 int FUN_002f8cf8(int);
 
@@ -19,9 +19,9 @@ extern unsigned int DAT_00594b30; /* 0x594b30 */
 extern unsigned int DAT_00594b34; /* 0x594b34 */
 
 extern int FUN_0010e7e0(int);
-/* Supplied declaration required: FUN_002eb588. */
+/* Supplied declaration required: onlineTimeGetNow. */
 extern int FUN_002f7f00(int, unsigned int);
-extern int FUN_002f8782(int);
+extern int rangeIsEmpty3(int);
 /* Supplied declaration required: FUN_002f8cc4. */
 /* Supplied declaration required: FUN_002f8cf8. */
 
@@ -40,9 +40,9 @@ void FUN_0010e720(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   temp_v2 = param_2;
   temp_v3 = param_3;
   uStack_18 = param_4;
-  temp_v0 = FUN_002f8782(param_1 + 0x160);
+  temp_v0 = rangeIsEmpty3(param_1 + 0x160);
   if (temp_v0 == 0) {
-    FUN_002eb588(&temp_v2);
+    onlineTimeGetNow(&temp_v2);
     DAT_00594b34 = temp_v3;
     DAT_00594b30 = temp_v2;
     FUN_002f8cf8(param_1);

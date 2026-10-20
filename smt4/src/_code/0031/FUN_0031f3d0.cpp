@@ -3,7 +3,7 @@
 extern "C" {
 
 int scrSetResult(int result);
-int FUN_002b06c4(u32 id);
+int dataTable00FindById(u32 id);
 extern u32 scrGetArg(void);
 
 typedef struct Record {
@@ -14,7 +14,7 @@ typedef struct Record {
 u32 FUN_0031f3d0(void)
 {
     u16 id = scrGetArg();
-    Record *record = (Record *)FUN_002b06c4(id);
+    Record *record = (Record *)dataTable00FindById(id);
 
     scrSetResult((record->flags & 3) >> 1);
     return 1;

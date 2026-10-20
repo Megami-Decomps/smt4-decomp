@@ -9,7 +9,7 @@ int FUN_00263028(...);
 int FUN_002630e0(...);
 int FUN_002b7064(void);
 int FUN_002b70cc(void);
-int FUN_002b77b0(int, float *, int);
+int memCopyWords(int, float *, int);
 
 /* stack frame of param_3: 22 slot(s), 88 byte(s) */
 typedef struct {
@@ -44,7 +44,7 @@ extern unsigned int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002630e0. */
 /* Supplied declaration required: FUN_002b7064. */
 /* Supplied declaration required: FUN_002b70cc. */
-/* Supplied declaration required: FUN_002b77b0. */
+/* Supplied declaration required: memCopyWords. */
 extern unsigned int FUN_002c501c(void);
 extern int FUN_00343318(unsigned int);
 
@@ -97,7 +97,7 @@ void FUN_002cbc40(float *param_1,unsigned int param_2,int param_3)
   if (param_3 == 0) {
     param_3 = FUN_00343318(g_titleScene);
   }
-  FUN_002b77b0(param_3,&temp_v10,0x40);
+  memCopyWords(param_3,&temp_v10,0x40);
   temp_v13 = *param_1;
   temp_v17 = param_1[1];
   temp_v21 = param_1[2];

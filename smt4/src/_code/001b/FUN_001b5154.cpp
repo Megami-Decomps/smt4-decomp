@@ -11,13 +11,13 @@ int FUN_002c1658(...);
 int FUN_003c033c(...);
 
 extern int g_btlScriptUnit; /* 0x43427c */
-extern unsigned int DAT_00434290; /* 0x434290 */
-extern int DAT_00439ca8; /* 0x439ca8 */
+extern unsigned int g_btlActionReflect; /* 0x434290 */
+extern int g_btlUiBlock; /* 0x439ca8 */
 
 /* Supplied declaration required: FUN_0027e874. */
 extern int btlUnitGet(void);
 /* Supplied declaration required: FUN_00295ba4. */
-extern int FUN_00295bd0(void);
+extern int dialogIsActive(void);
 /* Supplied declaration required: FUN_002bc01c. */
 extern int jobIsValid(unsigned int);
 extern int jobGetWork(void);
@@ -45,14 +45,14 @@ unsigned int FUN_001b5154(void)
   temp_v1 = jobGetWork();
   if ((*(unsigned int *)(temp_v1 + 0x44a8) & 0x80001) != 0) {
     *(unsigned int *)(temp_v1 + 0x44a0) = *(unsigned int *)(temp_v1 + 0x44a0) & 0xfffffebf;
-    temp_v1 = FUN_00295bd0();
+    temp_v1 = dialogIsActive();
   }
   else {
     puVar6 = (unsigned int *)(temp_v1 + 0x44a0);
     temp_v2 = *puVar6;
     if ((temp_v2 & 0x100000) != 0) {
       *puVar6 = temp_v2 & 0xfffffebf;
-      temp_v1 = FUN_00295bd0();
+      temp_v1 = dialogIsActive();
     }
     else {
       if ((temp_v2 & 0x200) != 0) {
@@ -62,11 +62,11 @@ unsigned int FUN_001b5154(void)
       temp_v3 = jobIsValid(*(unsigned int *)(temp_v1 + 0x20));
       if (temp_v3 != 0) {
         *puVar6 = *puVar6 & 0xfffffebf;
-        temp_v1 = FUN_00295bd0();
+        temp_v1 = dialogIsActive();
       }
       else if ((*(unsigned int *)(temp_v1 + 0x7c) & 1) != 0) {
         *puVar6 = *puVar6 & 0xfffffebf;
-        temp_v1 = FUN_00295bd0();
+        temp_v1 = dialogIsActive();
       }
       else {
         temp_v3 = *(int *)(temp_v1 + 100);
@@ -84,18 +84,18 @@ unsigned int FUN_001b5154(void)
             if ((temp_v4 != 0 && temp_v3 != 0) &&
                (temp_v0 = *(short *)(temp_v3 + 0x14c), (temp_v0 == 7 || temp_v0 == 9) || temp_v0 == 0xd)) {
               *puVar6 = *puVar6 & 0xfffffebf;
-              temp_v1 = FUN_00295bd0();
+              temp_v1 = dialogIsActive();
               if (temp_v1 != 0) {
                 FUN_00295ba4(1);
               }
               return 0;
             }
           }
-          temp_v3 = FUN_00344f2c(DAT_00434290,0x2a);
+          temp_v3 = FUN_00344f2c(g_btlActionReflect,0x2a);
           if (0 < temp_v3) {
             return 0;
           }
-          if (((DAT_00439ca8 == 0) || (temp_v3 = FUN_003adab8(), temp_v3 == 0)) ||
+          if (((g_btlUiBlock == 0) || (temp_v3 = FUN_003adab8(), temp_v3 == 0)) ||
              (temp_v3 = FUN_003382e8(temp_v1), temp_v3 == 0)) {
             return 0;
           }
@@ -148,7 +148,7 @@ unsigned int FUN_001b5154(void)
           return 0;
         }
         *puVar6 = *puVar6 & 0xfffffebf;
-        temp_v1 = FUN_00295bd0();
+        temp_v1 = dialogIsActive();
       }
     }
   }

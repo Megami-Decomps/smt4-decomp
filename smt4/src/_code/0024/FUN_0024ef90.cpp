@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_00155b74(void);
+int dlistFreeAll(void);
 
-/* Supplied declaration required: FUN_00155b74. */
+/* Supplied declaration required: dlistFreeAll. */
 extern int jobGetWork(void);
 
 
@@ -17,7 +17,7 @@ void FUN_0024ef90(void)
   int temp_v0;
   
   temp_v0 = jobGetWork();
-  FUN_00155b74();
+  dlistFreeAll();
   *(unsigned int *)(temp_v0 + 0x70) = 0;
   *(unsigned int *)(temp_v0 + 0x6c) = 0;
   *(unsigned int *)(temp_v0 + 0x60) = 0;

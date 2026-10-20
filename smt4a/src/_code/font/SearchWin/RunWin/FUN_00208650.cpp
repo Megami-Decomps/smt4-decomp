@@ -30,8 +30,8 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_00157558. */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164b5c. */
-extern int FUN_001654d8(int);
-extern int FUN_001654e4(int);
+extern int vec2GetXInt(int);
+extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001834a4. */
@@ -69,11 +69,11 @@ char FUN_00208650(void)
   if (temp_v11 && temp_v1 != '\0') {
     FUN_00157558(g_renderCtx);
     FUN_001835b4(2,8,0x14f,0,0,0x6d);
-    temp_v2 = FUN_001654d8(temp_v10 + 0x38);
+    temp_v2 = vec2GetXInt(temp_v10 + 0x38);
     temp_v12 = 0.25f;
     FUN_001879d0(g_renderCtx);
     temp_v2 = temp_v2 + (int)temp_v12;
-    temp_v3 = FUN_001654e4(temp_v10 + 0x38);
+    temp_v3 = vec2GetYInt(temp_v10 + 0x38);
     efctSetSpeed();
     FUN_00164b5c(2,8,0x13,temp_v2,temp_v3,0x6e);
     temp_v5 = g_renderCtx;

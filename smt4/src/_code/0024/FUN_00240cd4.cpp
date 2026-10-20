@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern int FUN_002adc88(void);
+extern int gameGetFlagBlock(void);
 
 int FUN_00240cd4(int index)
 {
-    int base = FUN_002adc88();
+    int base = gameGetFlagBlock();
 
     return base + index * 4 + 0x200;
 }

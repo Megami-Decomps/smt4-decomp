@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002e9318(unsigned char [8]);
-int FUN_002e9598(int, unsigned char [8]);
-int FUN_002e9ec8(int, unsigned int);
+int onlineStringDestroy(unsigned char [8]);
+int onlineStringAssign(int, unsigned char [8]);
+int onlineInstanceTableFind(int, unsigned int);
 int FUN_002ea41e(unsigned char [12], int);
 int FUN_002fecdc(unsigned char [8], int, unsigned char *);
 int FUN_00306f3e(int, unsigned char *);
@@ -25,10 +25,10 @@ extern unsigned char LAB_0011da28; /* 0x11da28 */
 extern unsigned char LAB_0011da38; /* 0x11da38 */
 
 extern unsigned char *FUN_002e7908(unsigned char *, unsigned int *);
-/* Supplied declaration required: FUN_002e9318. */
-/* Supplied declaration required: FUN_002e9598. */
-extern int FUN_002e9af4(void);
-/* Supplied declaration required: FUN_002e9ec8. */
+/* Supplied declaration required: onlineStringDestroy. */
+/* Supplied declaration required: onlineStringAssign. */
+extern int onlineInstanceTableGetCurrent(void);
+/* Supplied declaration required: onlineInstanceTableFind. */
 /* Supplied declaration required: FUN_002ea41e. */
 /* Supplied declaration required: FUN_002fecdc. */
 /* Supplied declaration required: FUN_00306f3e. */
@@ -52,8 +52,8 @@ void FUN_0011d93c(int param_1)
   unsigned char temp_v6 [12];
   int temp_v7;
   
-  temp_v0 = FUN_002e9af4();
-  FUN_002e9ec8(temp_v0,*(unsigned int *)(param_1 + 0x6c));
+  temp_v0 = onlineInstanceTableGetCurrent();
+  onlineInstanceTableFind(temp_v0,*(unsigned int *)(param_1 + 0x6c));
   if (temp_v0 != 0) {
     if (*(char *)(param_1 + 0xa0) != '\x02') {
       **(unsigned char **)(param_1 + 0x164) = 1;
@@ -65,9 +65,9 @@ void FUN_0011d93c(int param_1)
     FUN_00310e7a(temp_v2,param_1 + 300);
     FUN_00310e7a(temp_v3,temp_v2,param_1 + 0x13c);
     temp_v1 = param_1 + 0x7c;
-    FUN_002e9598(temp_v1,temp_v3);
-    FUN_002e9318(temp_v3);
-    FUN_002e9318(temp_v2);
+    onlineStringAssign(temp_v1,temp_v3);
+    onlineStringDestroy(temp_v3);
+    onlineStringDestroy(temp_v2);
     temp_v0 = temp_v1;
     FUN_00306f3e(temp_v1,&LAB_0011da18);
     if ((temp_v0 != 0) && (temp_v0 = temp_v1, FUN_00306f3e(temp_v1,&LAB_0011da28), temp_v0 != 0)) {
@@ -76,8 +76,8 @@ void FUN_0011d93c(int param_1)
     else {
       FUN_002fecdc(temp_v2,temp_v1,&LAB_0011da38);
     }
-    FUN_002e9598(temp_v1,temp_v2);
-    FUN_002e9318(temp_v2);
+    onlineStringAssign(temp_v1,temp_v2);
+    onlineStringDestroy(temp_v2);
     if (*(int *)(param_1 + 0x11c) == 0) {
       *(unsigned int *)(param_1 + 0x11c) = 1;
     }

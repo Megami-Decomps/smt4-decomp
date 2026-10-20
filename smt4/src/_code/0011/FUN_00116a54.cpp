@@ -15,7 +15,7 @@ int FUN_00124d24(int);
 int FUN_00126194(int);
 int FUN_002ba12c(...);
 int FUN_002bed3c(void);
-int FUN_002bed98(...);
+int vec2GetYInt(...);
 int FUN_002bedb0(...);
 int FUN_002bee04(...);
 int FUN_002bf288(...);
@@ -54,8 +54,8 @@ extern int asdTMTexTableCallFileB(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002ba12c. */
 /* Supplied declaration required: FUN_002bd82c. */
 /* Supplied declaration required: FUN_002bed3c. */
-/* Supplied declaration required: FUN_002bed98. */
-extern int FUN_002beda4(int);
+/* Supplied declaration required: vec2GetYInt. */
+extern int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bedb0. */
 /* Supplied declaration required: FUN_002bee04. */
 /* Supplied declaration required: FUN_002bf288. */
@@ -155,9 +155,9 @@ char FUN_00116a54(void)
         {
           temp_v6 = FUN_002c5d80(1,0);
           FUN_002bee04(g_titleScene,3,temp_v6);
-          temp_v8 = FUN_002beda4(temp_v4 + 0x2f4);
+          temp_v8 = vec2GetXInt(temp_v4 + 0x2f4);
           temp_v8 = temp_v8 + temp_v5;
-          temp_v9 = FUN_002bed98(temp_v4 + 0x2f4);
+          temp_v9 = vec2GetYInt(temp_v4 + 0x2f4);
           FUN_002bf538();
           FUN_002bed3c();
           temp_v0 = *(char *)(temp_v4 + 9);
@@ -212,8 +212,8 @@ char FUN_00116a54(void)
     if ((temp_v4 == 0) || (*(char *)(temp_v4 + 8) != '\x04')) goto LAB_00117048;
     if ((*(char *)(DAT_0043e190 + 8) != '\0') &&
        ((*(char *)(DAT_0043e190 + 0x5f) == '\0' && (*(char *)(DAT_0043e18c + 0x5f) == '\0')))) {
-      temp_v8 = FUN_002beda4(temp_v4 + 0x2f4);
-      FUN_002bed98(temp_v4 + 0x2f4);
+      temp_v8 = vec2GetXInt(temp_v4 + 0x2f4);
+      vec2GetYInt(temp_v4 + 0x2f4);
       temp_v6 = FUN_002c5d80(1,0);
       FUN_002bee04(g_titleScene,3,temp_v6);
       FUN_002bf538();

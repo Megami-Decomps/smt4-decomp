@@ -17,7 +17,7 @@ typedef struct {
 extern unsigned char LAB_0024bcac; /* 0x24bcac */
 extern unsigned char LAB_0027253c; /* 0x27253c */
 extern int FUN_002deeb8(...); /* 0x2deeb8 */
-extern unsigned int *DAT_005738e8; /* 0x5738e8 */
+extern unsigned int *g_btlHelp; /* 0x5738e8 */
 
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
@@ -39,7 +39,7 @@ void FUN_0027249c(unsigned int *param_1)
     param_1[0x1c] = (unsigned int)puVar2;
     puVar3 = (unsigned int *)0x100;
     asdMemoryAllocTracked(0x100,0x100,0,0xc,1);
-    DAT_005738e8 = puVar3;
+    g_btlHelp = puVar3;
     *puVar3 = 0;
     puVar3[1] = 0;
     puVar3[2] = 0;

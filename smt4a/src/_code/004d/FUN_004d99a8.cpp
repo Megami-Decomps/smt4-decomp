@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e3328(int);
+int asdOperatorDelete(int);
 int FUN_002e9ef8(unsigned int, int);
 
 typedef int romwright_code(...);
@@ -15,8 +15,8 @@ typedef struct {
 
 extern unsigned char DAT_0055ca64; /* 0x55ca64 */
 
-/* Supplied declaration required: FUN_002e3328. */
-extern int FUN_002e9318(unsigned int *);
+/* Supplied declaration required: asdOperatorDelete. */
+extern int onlineStringDestroy(unsigned int *);
 /* Supplied declaration required: FUN_002e9ef8. */
 
 
@@ -33,8 +33,8 @@ void FUN_004d99a8(unsigned int *param_1)
   if ((int *)param_1[0xb] != (int *)0x0) {
     (**(romwright_code **)(*(int *)param_1[0xb] + 4))();
   }
-  temp_v0 = FUN_002e9318(param_1 + 7);
-  FUN_002e3328(temp_v0 - 0x1c);
+  temp_v0 = onlineStringDestroy(param_1 + 7);
+  asdOperatorDelete(temp_v0 - 0x1c);
   return;
 }
 

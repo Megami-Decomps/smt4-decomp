@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100854(...);
+int libc_bsearch(...);
 
 /* stack frame of param_1: 3 slot(s), 10 byte(s) */
 typedef struct {
@@ -16,7 +16,7 @@ typedef struct {
 extern unsigned char LAB_001861dc; /* 0x1861dc */
 extern int g_aocSystem; /* 0x570280 */
 
-/* Supplied declaration required: FUN_00100854. */
+/* Supplied declaration required: libc_bsearch. */
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern unsigned int dataTableGetEntries(void);
@@ -38,7 +38,7 @@ void FUN_001ad9b4(unsigned short param_1)
   temp_v3[0] = param_1;
   if (*(int *)(g_aocSystem + 0x388) != 0) {
     puVar1 = temp_v3;
-    FUN_00100854(puVar1,*(int *)(g_aocSystem + 0x388),*(unsigned int *)(g_aocSystem + 900),0x134,
+    libc_bsearch(puVar1,*(int *)(g_aocSystem + 0x388),*(unsigned int *)(g_aocSystem + 900),0x134,
                  &LAB_001861dc);
     if (puVar1 != (unsigned short *)0x0) {
       return;
@@ -50,7 +50,7 @@ void FUN_001ad9b4(unsigned short param_1)
     temp_v1 = dataTableGetEntries();
     temp_v0 = dataTableGetCount(temp_v0);
     puVar1 = temp_v3;
-    FUN_00100854(puVar1,temp_v1,temp_v0,0x134,&LAB_001861dc);
+    libc_bsearch(puVar1,temp_v1,temp_v0,0x134,&LAB_001861dc);
     if (puVar1 != (unsigned short *)0x0) {
       return;
     }

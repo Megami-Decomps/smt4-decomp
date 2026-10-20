@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_002ad66c(int *, int *);
-int FUN_002bd420(int, unsigned int *, int);
-int FUN_002c3940(unsigned int *, int);
+int memCopy(int, unsigned int *, int);
+int rt_aeabi_memclr(unsigned int *, int);
 int FUN_002c567c(int *);
 
 /* stack frame of param_6: 2 slot(s), 8 byte(s) */
@@ -16,8 +16,8 @@ typedef struct {
 } param_6_stack;
 
 /* Supplied declaration required: FUN_002ad66c. */
-/* Supplied declaration required: FUN_002bd420. */
-/* Supplied declaration required: FUN_002c3940. */
+/* Supplied declaration required: memCopy. */
+/* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: FUN_002c567c. */
 
 
@@ -33,7 +33,7 @@ void FUN_001db90c(unsigned int *param_1,unsigned int param_2,unsigned int param_
   unsigned int uStack_2c;
   unsigned int uStack_28;
   
-  FUN_002c3940(param_1,0x80);
+  rt_aeabi_memclr(param_1,0x80);
   *param_1 = param_2;
   param_1[1] = param_3;
   param_1[2] = param_4;
@@ -48,7 +48,7 @@ void FUN_001db90c(unsigned int *param_1,unsigned int param_2,unsigned int param_
   param_1[6] = uStack_28;
   param_1[0x10] = temp_v0;
   if (param_6 != 0) {
-    FUN_002bd420(param_6,param_1 + 0x11,0x3c);
+    memCopy(param_6,param_1 + 0x11,0x3c);
   }
   return;
 }

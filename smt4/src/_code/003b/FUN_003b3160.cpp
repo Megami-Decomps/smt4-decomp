@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0022c564(unsigned int *, int, unsigned int);
-int FUN_00397080(void);
+int treeDestroyAllNodes(void);
 int FUN_003fb11c(unsigned char [8], unsigned int *, int *, int *);
 
 typedef int romwright_code(...);
@@ -18,7 +18,7 @@ typedef struct {
 extern unsigned char DAT_00422370; /* 0x422370 */
 
 /* Supplied declaration required: FUN_0022c564. */
-/* Supplied declaration required: FUN_00397080. */
+/* Supplied declaration required: treeDestroyAllNodes. */
 /* Supplied declaration required: FUN_003fb11c. */
 
 
@@ -48,7 +48,7 @@ unsigned int * FUN_003b3160(unsigned int *param_1)
     *(unsigned char *)((int)param_1 + 0x1486) = 0;
   }
   param_1[0x511] = (unsigned int)&DAT_00422370;
-  FUN_00397080();
+  treeDestroyAllNodes();
   FUN_0022c564(puVar2,0,param_1[0x510]);
   (**(romwright_code **)(*(int *)*puVar2 + 4))((int *)*puVar2,param_1[0x50e]);
   param_1[0x50e] = 0;

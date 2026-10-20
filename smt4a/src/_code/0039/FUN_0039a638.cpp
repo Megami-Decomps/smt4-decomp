@@ -20,20 +20,20 @@ typedef struct {
     u32 flag;           /* 0x21d8c */
 } GameData;
 
-extern MenuBlock DAT_0057f588;
+extern MenuBlock g_messageMain;
 
-GameData *FUN_0014af84(void);
-int FUN_001846d0(u8 *panel, int arg);
+GameData *gameDataBlocksGetSaveData(void);
+int uiSpriteSelectAnim(u8 *panel, int arg);
 
 /* Starts the menu panel animation 7 when the game data flag is set; always reports success. */
 u32 FUN_0039a638(void)
 {
-    Menu *menu = DAT_0057f588.menu;
+    Menu *menu = g_messageMain.menu;
 
-    if (FUN_0014af84()->flag == 0) {
+    if (gameDataBlocksGetSaveData()->flag == 0) {
         return 1;
     }
-    FUN_001846d0(menu->panel, 7);
+    uiSpriteSelectAnim(menu->panel, 7);
     return 1;
 }
 

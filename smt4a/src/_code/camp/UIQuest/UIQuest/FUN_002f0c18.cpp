@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0014384c(...);
+int asdTMTexTableLoadSprites(...);
 int FUN_0014afd0(...);
 int FUN_0014e188(...);
 int FUN_0014e220(...);
@@ -12,9 +12,9 @@ int asdProcessCreateSimple(...);
 int FUN_001505ac(...);
 int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
-int FUN_001846d0(...);
-int FUN_00184758(...);
-int FUN_00184c00(...);
+int uiSpriteSelectAnim(...);
+int uiSpriteSetKeyframe(...);
+int uiSpriteSetImageKeyframe(...);
 int FUN_00184c40(...);
 int FUN_001ad9b4(...);
 int FUN_001ff724(...);
@@ -24,7 +24,7 @@ int FUN_00275bc8(...);
 int sysMemClear(...);
 int FUN_00387240(...);
 int FUN_003872b8(...);
-int FUN_003f86f8(...);
+int loadSlotEnsureLoaded(...);
 int FUN_00417de8(...);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
 
@@ -52,9 +52,9 @@ extern unsigned char DAT_0052e8ec; /* 0x52e8ec */
 extern unsigned char DAT_0052e97c; /* 0x52e97c */
 extern unsigned char DAT_0052eaa8; /* 0x52eaa8 */
 extern unsigned char DAT_0052eb44; /* 0x52eb44 */
-extern unsigned int *DAT_0057f28c; /* 0x57f28c */
+extern unsigned int *g_uiQuest; /* 0x57f28c */
 
-/* Supplied declaration required: FUN_0014384c. */
+/* Supplied declaration required: asdTMTexTableLoadSprites. */
 /* Supplied declaration required: FUN_0014afd0. */
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: FUN_0014e220. */
@@ -62,12 +62,12 @@ extern unsigned int *DAT_0057f28c; /* 0x57f28c */
 /* Supplied declaration required: FUN_001505ac. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: FUN_001846d0. */
-/* Supplied declaration required: FUN_00184758. */
-/* Supplied declaration required: FUN_00184c00. */
+/* Supplied declaration required: uiSpriteSelectAnim. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_00184c40. */
 extern int FUN_0019f1a4(unsigned short, unsigned int);
-extern int FUN_001ab940(void);
+extern int gameFlagBlockGet(void);
 /* Supplied declaration required: FUN_001ad9b4. */
 extern int FUN_001bd100(unsigned short);
 /* Supplied declaration required: FUN_001ff724. */
@@ -79,7 +79,7 @@ extern int FUN_001bd100(unsigned short);
 /* Supplied declaration required: FUN_003872b8. */
 extern int partyEntryGetBit5(unsigned short);
 extern int partyEntryGetBit6(unsigned short);
-/* Supplied declaration required: FUN_003f86f8. */
+/* Supplied declaration required: loadSlotEnsureLoaded. */
 /* Supplied declaration required: FUN_00417de8. */
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
 
@@ -98,12 +98,12 @@ void FUN_002f0c18(void)
   unsigned int temp_v3;
   unsigned short temp_v4;
   
-  if (DAT_0057f28c == (unsigned int *)0x0) {
+  if (g_uiQuest == (unsigned int *)0x0) {
     puVar2 = (unsigned int *)0x100;
     asdMemoryAllocTracked(0x100,0x100,0,0xd50,1);
-    DAT_0057f28c = puVar2;
+    g_uiQuest = puVar2;
   }
-  puVar2 = DAT_0057f28c;
+  puVar2 = g_uiQuest;
   sysMemClear();
   puVar3 = &LAB_002f1034;
   asdProcessCreateSimple(&LAB_002f1034,4,0,0,FUN_00215cb8,0,0);
@@ -111,7 +111,7 @@ void FUN_002f0c18(void)
   taskCreateDraw(&LAB_002f1048,0x81,0,0,FUN_0023b4cc,0,0,puVar3);
   taskCreateDraw(&LAB_002f105c,0xdd,0,0,FUN_0023b4cc,0,0,*puVar2);
   taskCreateDraw(&LAB_002f1074,0xea,0,0,&LAB_0028587c,0,0,*puVar2);
-  puVar2 = DAT_0057f28c;
+  puVar2 = g_uiQuest;
   uiFadeSetVisible(0);
   puVar3 = &LAB_002f1084;
   FUN_0020214c();
@@ -123,15 +123,15 @@ void FUN_002f0c18(void)
   puVar2[0x23f] = (unsigned int)puVar3;
   *(unsigned short *)((int)puVar2 + 0xcce) = 0;
   *(unsigned short *)(puVar2 + 0x334) = 0;
-  FUN_0014384c(0x1e);
+  asdTMTexTableLoadSprites(0x1e);
   FUN_0014afd0(0x1e,0);
-  FUN_003f86f8(0x34);
+  loadSlotEnsureLoaded(0x34);
   temp_v4 = 0x65;
   do {
     temp_v1 = temp_v4;
     FUN_001ad9b4();
     if (temp_v1 == 0) {
-      temp_v2 = FUN_001ab940();
+      temp_v2 = gameFlagBlockGet();
       pbVar6 = (unsigned char *)(temp_v2 + temp_v4 * 4 + 0x2a0);
       if (pbVar6 != (unsigned char *)0x0) {
         *pbVar6 = *pbVar6 & 0xfe;
@@ -162,43 +162,43 @@ void FUN_002f0c18(void)
   FUN_001505ac(puVar2 + 5,&DAT_0052e8ec,0x90,&DAT_0052e97c,300,&DAT_0052eaa8,0x9c,0,0,&DAT_0052eb44,
                0x40c);
   FUN_0014e188(puVar2 + 0xd,0x1e,0,puVar2 + 5,0xc9);
-  FUN_00184758(puVar2 + 0xd,0);
-  FUN_00184c00(puVar2 + 0xd,8,0);
+  uiSpriteSetKeyframe(puVar2 + 0xd,0);
+  uiSpriteSetImageKeyframe(puVar2 + 0xd,8,0);
   FUN_0014e188(puVar2 + 0x30,0x1e,0,puVar2 + 5,0xc9);
-  FUN_001846d0(puVar2 + 0x30,0);
+  uiSpriteSelectAnim(puVar2 + 0x30,0);
   FUN_0014e188(puVar2 + 0x53,0x1e,0,puVar2 + 5,0xc9);
-  FUN_00184758(puVar2 + 0x53,6,0);
+  uiSpriteSetKeyframe(puVar2 + 0x53,6,0);
   FUN_0014e188(puVar2 + 0x76,0x1e,0,puVar2 + 5,0xc9);
   FUN_0014e188(puVar2 + 0x99,0x1e,0x61,puVar2 + 5,0x68);
-  FUN_001846d0(puVar2 + 0x99,2);
+  uiSpriteSelectAnim(puVar2 + 0x99,2);
   FUN_003872b8(puVar2 + 0x99,0x1e,0x2a,0x61);
   FUN_0014e188(puVar2 + 0xbc,0x1e,0x5d,puVar2 + 5,0xa1);
-  FUN_001846d0(puVar2 + 0xbc,2);
+  uiSpriteSelectAnim(puVar2 + 0xbc,2);
   FUN_00387240(puVar2 + 0xbc,0x1e,0x53);
   FUN_0014e220(puVar2 + 0xdf,0x1e,0xffffffff,0x12,puVar2 + 5,0xc9);
-  FUN_001846d0(puVar2 + 0xdf,3);
+  uiSpriteSelectAnim(puVar2 + 0xdf,3);
   *(unsigned short *)((int)puVar2 + 0x3b6) = 2;
   FUN_00184c40(puVar2 + 0xdf,0,0x78);
   puVar7 = puVar2 + 0x102;
   FUN_0014e188(puVar7,0x1e,0x5c,puVar2 + 5,0xa1);
-  FUN_00184758(puVar7,0);
-  FUN_00184c00(puVar7,8,0);
+  uiSpriteSetKeyframe(puVar7,0);
+  uiSpriteSetImageKeyframe(puVar7,8,0);
   FUN_003872b8(puVar7,0x1e,0x5a,0x5c);
   puVar7 = puVar2 + 0x125;
   FUN_0014e188(puVar7,0x1e,0,puVar2 + 5,0xc9);
-  FUN_00184758(puVar7,2,0);
-  FUN_00184c00(puVar7,9,0);
+  uiSpriteSetKeyframe(puVar7,2,0);
+  uiSpriteSetImageKeyframe(puVar7,9,0);
   FUN_0014e188(puVar2 + 0x148,0x1e,0,puVar2 + 5,0xc9);
-  FUN_001846d0(puVar2 + 0x148,5);
+  uiSpriteSelectAnim(puVar2 + 0x148,5);
   FUN_0014e188(puVar2 + 0x16b,0x1e,0x4c,puVar2 + 5,0xc9);
   FUN_0014e188(puVar2 + 0x18e,0x1e,0,puVar2 + 5,0xc9);
   FUN_0014e188(puVar2 + 0x1b1,0x1e,0x5d,puVar2 + 5,0xc9);
   FUN_0014e188(puVar2 + 0x1d4,0x1e,0x57,puVar2 + 5,0xc9);
   FUN_0014e188(puVar2 + 0x1f7,0x1e,0x4b,puVar2 + 5,0xc9);
   FUN_0014e188(puVar2 + 0x21a,0x1e,0x4d,puVar2 + 5,0xc9);
-  puVar2 = DAT_0057f28c;
-  temp_v3 = DAT_0057f28c[1];
-  DAT_0057f28c[1] = 0;
+  puVar2 = g_uiQuest;
+  temp_v3 = g_uiQuest[1];
+  g_uiQuest[1] = 0;
   puVar2[2] = temp_v3;
   puVar2[4] = 0;
   return;

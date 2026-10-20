@@ -2,9 +2,9 @@
 
 extern "C" {
 
-int FUN_002a780c(u32 value);
+int asdMemFreeSlot(u32 value);
 int asdTMTexTableFreeEntry(int table);
-int FUN_002ae898(int table, int index);
+int asdTMTexTableReleaseNode(int table, int index);
 int asdMemFree(void *ptr);
 
 typedef struct JobWork {
@@ -19,12 +19,12 @@ void FUN_002ed5dc(void)
 {
     JobWork *work = jobGetWork();
 
-    FUN_002a780c(work->unk0C);
-    FUN_002a780c(work->unk10);
-    FUN_002ae898(0x2d, 0);
+    asdMemFreeSlot(work->unk0C);
+    asdMemFreeSlot(work->unk10);
+    asdTMTexTableReleaseNode(0x2d, 0);
     asdTMTexTableFreeEntry(0x2d);
     asdMemFree(work);
-    DAT_0043dc20.obj = NULL;
+    g_commonBg.obj = NULL;
 }
 
 } /* extern "C" */

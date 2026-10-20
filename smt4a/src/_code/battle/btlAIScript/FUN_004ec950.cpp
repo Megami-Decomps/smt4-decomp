@@ -6,7 +6,7 @@ extern "C" {
 
 int sysMemClear(int, int);
 int FUN_003e8bb0(unsigned char [2], int, unsigned int);
-int FUN_003fd63c(int, int, int);
+int gameFlagSetValue(int, int, int);
 int FUN_004abdfc(unsigned int, int, int);
 int btlUnitSetParam(...);
 int FUN_004e5b5c(int *);
@@ -29,10 +29,10 @@ extern unsigned int DAT_005712b8; /* 0x5712b8 */
 extern unsigned int DAT_005712bc; /* 0x5712bc */
 extern unsigned int DAT_005712c0; /* 0x5712c0 */
 extern unsigned int DAT_005712c4; /* 0x5712c4 */
-extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
+extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
 extern int jobIsValid(unsigned int);
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: sysMemClear. */
 extern int stateAtCIs4(unsigned int);
 extern int FUN_003e8430(int);
@@ -46,7 +46,7 @@ extern unsigned short FUN_003f1a9c(int, unsigned int);
 extern unsigned short FUN_003f217c(int);
 extern int FUN_003f23fc(int);
 extern int FUN_003f25e8(int);
-/* Supplied declaration required: FUN_003fd63c. */
+/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_004abdfc. */
 extern int FUN_004c87e0(void);
 /* Supplied declaration required: btlUnitSetParam. */
@@ -110,14 +110,14 @@ unsigned int FUN_004ec950(int *param_1,int param_2)
           FUN_004e5b5c(param_1);
         }
       }
-      temp_v2 = FUN_0018719c(0x596);
+      temp_v2 = gameFlagIsSet(0x596);
       if (temp_v2 != 0) {
         *(unsigned short *)(*(int *)(param_2 + 0x28) + 0x1be) = 2;
         *(unsigned short *)(*(int *)(param_2 + 0x28) + 0x1c0) = 0x9b;
         FUN_004e8454(param_1);
         sysMemClear(param_2 + 0x38,0x85);
         btlUnitSetParam(param_1,2,0,1);
-        FUN_003fd63c(0x596,0,1);
+        gameFlagSetValue(0x596,0,1);
       }
       temp_v2 = *param_1;
       temp_v3 = temp_v2 + 0x4c00;
@@ -162,7 +162,7 @@ unsigned int FUN_004ec950(int *param_1,int param_2)
         (temp_v4 = FUN_003f25e8(*param_1), temp_v4 != 0)) &&
        (((temp_v4 = FUN_003e8430(*param_1), temp_v4 == 0 && (temp_v4 = FUN_003eb1cc(*param_1), temp_v4 == 0)
          ) && (temp_v2 != 0)))) {
-      FUN_004abdfc(DAT_0057a9c8,(int)(short)temp_v2,1);
+      FUN_004abdfc(g_btlUiBlock,(int)(short)temp_v2,1);
       *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 4;
     }
     else {

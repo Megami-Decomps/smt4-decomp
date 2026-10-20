@@ -17,7 +17,7 @@ int FUN_001835b4(...);
 int FUN_00183bb0(void);
 int FUN_0018408c(...);
 int FUN_00184310(void);
-int FUN_00184e64(...);
+int drawSetColorFromRGBA8(...);
 int slotRecordFindById(...);
 int FUN_0020caec(...);
 int FUN_00239234(...);
@@ -61,8 +61,8 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_0014bf3c. */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164b5c. */
-extern int FUN_001654d8(int);
-extern int FUN_001654e4(int);
+extern int vec2GetXInt(int);
+extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00180114. */
@@ -73,9 +73,9 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: FUN_0018408c. */
 /* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: FUN_00184e64. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: slotRecordFindById. */
-extern int *FUN_001ab888(void);
+extern int *gameGetSlotTable(void);
 /* Supplied declaration required: FUN_0020caec. */
 extern int FUN_0022e9b8(void);
 /* Supplied declaration required: FUN_00239234. */
@@ -169,7 +169,7 @@ void FUN_002a7bb8(int param_1,int param_2,int param_3)
   VectorSignedToFloat(*(short *)(temp_v4 + 10) + temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(*(short *)(temp_v4 + 8) + temp_v9,(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_00162790(2,0x57d8ffff,temp_v20);
-  FUN_00184e64(temp_v17);
+  drawSetColorFromRGBA8(temp_v17);
   if ((unsigned short)puVar5[3] >= 100) {
     temp_v4 = FUN_001834a4(0x1a,0x51);
     FUN_00180310(0,*(short *)(temp_v4 + 8) + temp_v9,*(short *)(temp_v4 + 10) + temp_v8,1,3,0x6f,
@@ -260,7 +260,7 @@ void FUN_002a7bb8(int param_1,int param_2,int param_3)
       temp_v16 = *(short *)(temp_v11 + 8) + temp_v8;
       if (temp_v0 >= 100) {
         FUN_001835b4(2,0x1a,0x266,temp_v16,temp_v12,0x6f);
-        FUN_00184e64(0xffffffff);
+        drawSetColorFromRGBA8(0xffffffff);
         temp_v12 = FUN_001834a4(0x1a,0x269);
         FUN_00180310(0,(int)*(short *)(temp_v11 + 8) + (int)*(short *)(temp_v12 + 8) + temp_v8,
                      (int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v6,1,3,0x79,
@@ -269,7 +269,7 @@ void FUN_002a7bb8(int param_1,int param_2,int param_3)
       else {
         FUN_001835b4(2,0x1a,0x114,temp_v16,temp_v12,0x6f);
         temp_v12 = FUN_001834a4(0x1a,0x117);
-        FUN_00184e64(0xffffffff);
+        drawSetColorFromRGBA8(0xffffffff);
         FUN_00180310(0,(int)*(short *)(temp_v11 + 8) + (int)*(short *)(temp_v12 + 8) + temp_v8,
                      (int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v6,1,2,0x79,
                      &LAB_002a80fc,temp_v0);
@@ -321,7 +321,7 @@ void FUN_002a7bb8(int param_1,int param_2,int param_3)
       if (temp_v0 >= 100) {
         FUN_001835b4(2,0x1a,0x266,temp_v12,temp_v10,0x6f);
         temp_v10 = FUN_001834a4(0x1a,0x269);
-        FUN_00184e64(0xffffffff);
+        drawSetColorFromRGBA8(0xffffffff);
         FUN_00180310(0,(int)*(short *)(temp_v11 + 8) + (int)*(short *)(temp_v10 + 8) + temp_v8,
                      (int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v10 + 10) + temp_v6,1,3,0x79,
                      &LAB_002a896c,temp_v0);
@@ -329,7 +329,7 @@ void FUN_002a7bb8(int param_1,int param_2,int param_3)
       else {
         FUN_001835b4(2,0x1a,0x114,temp_v12,temp_v10,0x6f);
         temp_v10 = FUN_001834a4(0x1a,0x117);
-        FUN_00184e64(0xffffffff);
+        drawSetColorFromRGBA8(0xffffffff);
         FUN_00180310(0,(int)*(short *)(temp_v11 + 8) + (int)*(short *)(temp_v10 + 8) + temp_v8,
                      (int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v10 + 10) + temp_v6,1,2,0x79,
                      &LAB_002a896c,temp_v0);
@@ -351,14 +351,14 @@ void FUN_002a7bb8(int param_1,int param_2,int param_3)
       else {
         FUN_00100388(temp_v22,&LAB_002a896c,temp_v14);
       }
-      piVar21 = (int *)FUN_001ab888();
+      piVar21 = (int *)gameGetSlotTable();
       if (*piVar21 < temp_v14) {
         temp_v17 = 0xa50000ff;
       }
       else {
         temp_v17 = 0xff;
       }
-      FUN_00184e64(temp_v17);
+      drawSetColorFromRGBA8(temp_v17);
       FUN_00180310(0,*(short *)(temp_v10 + 8) + temp_v8,*(short *)(temp_v10 + 10) + temp_v6,1,8,0x79,
                    temp_v22);
       FUN_00183bb0();
@@ -417,16 +417,16 @@ void FUN_002a7bb8(int param_1,int param_2,int param_3)
   efctSetSpeed();
   if (((!(temp_v6 == 1 || temp_v6 == 2)) && (!(temp_v6 == 6 || temp_v14 == 1))) &&
      ((!(temp_v14 == 2 || temp_v14 == 6) && (!((temp_v10 == 1 || temp_v10 == 2) || temp_v10 == 6))))) {
-    temp_v11 = FUN_001654e4(temp_v2 + 0xb0);
+    temp_v11 = vec2GetYInt(temp_v2 + 0xb0);
     temp_v1 = *(short *)(temp_v4 + 10);
-    temp_v12 = FUN_001654d8(temp_v2 + 0xb0);
+    temp_v12 = vec2GetXInt(temp_v2 + 0xb0);
     FUN_001835b4(2,0x1a,0x131,temp_v12 + temp_v9 + (int)*(short *)(temp_v4 + 8),
                  temp_v11 + temp_v8 + (int)temp_v1,0x83);
   }
   else {
-    temp_v11 = FUN_001654e4(temp_v2 + 0xb0);
+    temp_v11 = vec2GetYInt(temp_v2 + 0xb0);
     temp_v1 = *(short *)(temp_v4 + 10);
-    temp_v12 = FUN_001654d8(temp_v2 + 0xb0);
+    temp_v12 = vec2GetXInt(temp_v2 + 0xb0);
     FUN_001835b4(2,0x1a,0x28a,temp_v12 + temp_v9 + (int)*(short *)(temp_v4 + 8),
                  temp_v11 + temp_v8 + (int)temp_v1,0x83);
   }
@@ -622,14 +622,14 @@ void FUN_002a7bb8(int param_1,int param_2,int param_3)
   else {
     FUN_00100388(temp_v22,&LAB_002a9680,temp_v16);
   }
-  piVar21 = (int *)FUN_001ab888();
+  piVar21 = (int *)gameGetSlotTable();
   if (*piVar21 < temp_v16) {
     temp_v17 = 0xdc0f14ff;
   }
   else {
     temp_v17 = 0xffffffff;
   }
-  FUN_00184e64(temp_v17);
+  drawSetColorFromRGBA8(temp_v17);
   temp_v3 = FUN_001834a4(0x1a,0x144);
   FUN_00180310(0,*(short *)(temp_v3 + 8) + temp_v9,*(short *)(temp_v3 + 10) + temp_v8,1,8,0x8d,temp_v22)
   ;

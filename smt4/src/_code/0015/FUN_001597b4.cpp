@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned char DAT_004eac5c; /* 0x4eac5c */
+extern unsigned char g_nnosAddressSpaceManagerHeap; /* 0x4eac5c */
 
 extern unsigned int nn_os_AddressSpaceManager_Allocate(unsigned int, unsigned int, unsigned int, unsigned int);
 
@@ -12,7 +12,7 @@ extern unsigned int nn_os_AddressSpaceManager_Allocate(unsigned int, unsigned in
 void FUN_001597b4(unsigned int param_1,unsigned int param_2)
 
 {
-  nn_os_AddressSpaceManager_Allocate((unsigned int)&DAT_004eac5c,param_1,param_2,0x1000);
+  nn_os_AddressSpaceManager_Allocate((unsigned int)&g_nnosAddressSpaceManagerHeap,param_1,param_2,0x1000);
   return;
 }
 

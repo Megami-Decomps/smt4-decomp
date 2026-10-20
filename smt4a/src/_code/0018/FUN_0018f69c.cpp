@@ -8,7 +8,7 @@ int FUN_001a081c(unsigned char [60]);
 int FUN_001a5678(int, int *, unsigned char [60], int, int, int, unsigned int, unsigned int);
 int FUN_001a7a20(...);
 int wstrlen(...);
-int FUN_0030ea58(int, int);
+int libc_strcmp(int, int);
 
 /* stack frame of param_4: 13 slot(s), 52 byte(s) */
 typedef struct {
@@ -31,7 +31,7 @@ typedef struct {
 /* Supplied declaration required: FUN_001a5678. */
 /* Supplied declaration required: FUN_001a7a20. */
 /* Supplied declaration required: wstrlen. */
-/* Supplied declaration required: FUN_0030ea58. */
+/* Supplied declaration required: libc_strcmp. */
 
 
 unsigned int FUN_0018f69c(int param_1,int param_2,unsigned int param_3,unsigned int param_4)
@@ -110,7 +110,7 @@ unsigned int FUN_0018f69c(int param_1,int param_2,unsigned int param_3,unsigned 
                 temp_v7 = temp_v2 + piVar11[1] * 0x10;
                 for (; temp_v2 != temp_v7; temp_v2 = temp_v2 + 0x10) {
                   temp_v3 = *(int *)(temp_v2 + 0xc);
-                  FUN_0030ea58(temp_v3,temp_v4);
+                  libc_strcmp(temp_v3,temp_v4);
                   if (temp_v3 == 0) break;
                 }
                 if (temp_v2 == *piVar11 + piVar11[1] * 0x10) {

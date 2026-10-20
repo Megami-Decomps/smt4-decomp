@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00250680(unsigned int, int, int, int);
 int FUN_0027da30(int, int);
-int FUN_00282924(unsigned int *, int);
+int btlMainFindEntryByListedId(unsigned int *, int);
 int FUN_00336b98(int, int);
 int FUN_003be7d0(unsigned int *);
 
@@ -17,7 +17,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00250680. */
 /* Supplied declaration required: FUN_0027da30. */
-/* Supplied declaration required: FUN_00282924. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 extern int FUN_00293230(int);
 /* Supplied declaration required: FUN_00336b98. */
 /* Supplied declaration required: FUN_003be7d0. */
@@ -32,7 +32,7 @@ void FUN_00227c60(int *param_1,int param_2,int param_3,unsigned int param_4,int 
   unsigned int temp_v1;
   
   puVar1 = (unsigned int *)*param_1;
-  FUN_00282924(puVar1,param_3);
+  btlMainFindEntryByListedId(puVar1,param_3);
   if ((puVar1 != (unsigned int *)0x0) && ((*puVar1 & 0x40) == 0)) {
     temp_v1 = (unsigned int)*(unsigned short *)(param_2 + param_3 * 10 + 0x9d2);
     if ((*puVar1 & 0x10) != 0) {

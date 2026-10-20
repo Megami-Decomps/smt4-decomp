@@ -6,7 +6,7 @@ extern "C" {
 
 int sysPlaySe(int);
 int FUN_0019de98(int, unsigned int);
-int FUN_0023b27c(void);
+int useCounterStart(void);
 int FUN_0031f208(int);
 int FUN_0031f27c(int, int);
 int FUN_003343f0(int);
@@ -24,7 +24,7 @@ struct fn_0049706c_arg0 {
 
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_0019de98. */
-/* Supplied declaration required: FUN_0023b27c. */
+/* Supplied declaration required: useCounterStart. */
 /* Supplied declaration required: FUN_0031f208. */
 /* Supplied declaration required: FUN_0031f27c. */
 /* Supplied declaration required: FUN_003343f0. */
@@ -52,7 +52,7 @@ void FUN_0049706c(fn_0049706c_arg0 *param_1)
     FUN_0031f208(0x10);
     FUN_0031f208(0xf);
   }
-  FUN_0023b27c();
+  useCounterStart();
   sysPlaySe(5);
   FUN_0019de98(0,0xf4f4f4ff);
   param_1->field_0x10 = param_1->field_0x4;

@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern u8 *FUN_002b63ac(void);
+extern u8 *gameGetPlayerData(void);
 
 u8 *FUN_002bd1fc(void)
 {
-    u8 *pad = FUN_002b63ac();
+    u8 *pad = gameGetPlayerData();
 
     return pad + 0x4c;
 }

@@ -12,12 +12,12 @@ typedef struct Global00471a70 {
     Inner00129d38 *inner;          /* 0x1C */
 } Global00471a70;
 
-extern Global00471a70 DAT_00471a70;
+extern Global00471a70 g_nngxState;
 
-/* Returns the signed byte at +0x75 of the object DAT_00471a70 points to. */
+/* Returns the signed byte at +0x75 of the object g_nngxState points to. */
 int FUN_00129d38(void)
 {
-    return DAT_00471a70.inner->value;
+    return g_nngxState.inner->value;
 }
 
 } /* extern "C" */

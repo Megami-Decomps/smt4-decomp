@@ -8,15 +8,15 @@ typedef struct BtlUnit24 {
 } BtlUnit24;
 
 extern BtlUnit24 *btlUnitGet(u32 id);
-extern s32 FUN_003389d0(void *p, u32 mask);
+extern s32 btlUnitCheckAgainstActivePeers(void *p, u32 mask);
 extern void scrSetResult(s32 value);
 
-/* Script command: result is whether FUN_003389d0 accepts the unit's +0x24 object with mask 0x20000. */
+/* Script command: result is whether btlUnitCheckAgainstActivePeers accepts the unit's +0x24 object with mask 0x20000. */
 u32 scrCommUnitHasFlag20000(u32 *unitId)
 {
     BtlUnit24 *unit = btlUnitGet(*unitId);
 
-    scrSetResult(FUN_003389d0(unit->unk24, 0x20000) != 0);
+    scrSetResult(btlUnitCheckAgainstActivePeers(unit->unk24, 0x20000) != 0);
     return 1;
 }
 

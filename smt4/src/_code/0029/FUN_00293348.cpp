@@ -9,7 +9,7 @@ int FUN_00292be4(unsigned int, int);
 int FUN_00298d28(int);
 int FUN_002a0cc8(int);
 
-extern int DAT_0043dcf0; /* 0x43dcf0 */
+extern int g_partyPanel; /* 0x43dcf0 */
 
 /* Supplied declaration required: FUN_00292bcc. */
 /* Supplied declaration required: FUN_00292be4. */
@@ -25,9 +25,9 @@ void FUN_00293348(int param_1,int param_2)
   int temp_v1;
   int temp_v2;
   
-  temp_v0 = DAT_0043dcf0;
+  temp_v0 = g_partyPanel;
   if (param_2 != 0) {
-    *(unsigned int *)(DAT_0043dcf0 + 0x24) = *(unsigned int *)(DAT_0043dcf0 + 0x1c);
+    *(unsigned int *)(g_partyPanel + 0x24) = *(unsigned int *)(g_partyPanel + 0x1c);
   }
   *(int *)(temp_v0 + 0x1c) = param_1;
   *(unsigned int *)(temp_v0 + 0x18) = 0;

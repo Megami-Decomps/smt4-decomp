@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_002015d0(...);
-int FUN_0027e774(int);
+int dialogOpen(int);
 int FUN_0027e7b4(unsigned int, unsigned int);
 int FUN_00295660(int, int *);
 int FUN_00295ba4(int);
 int FUN_002bd06c(unsigned int);
-int FUN_002bf694(int *, unsigned int);
+int libc_strcpy(int *, unsigned int);
 
 /* stack frame of param_2: 9 slot(s), 36 byte(s) */
 typedef struct {
@@ -25,21 +25,21 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_2_stack;
 
-extern int DAT_0043e128; /* 0x43e128 */
+extern int g_infoWin; /* 0x43e128 */
 
 extern int FUN_001ab9dc(void);
-extern int FUN_002015bc(void);
+extern int dialogGetTimer(void);
 /* Supplied declaration required: FUN_002015d0. */
-/* Supplied declaration required: FUN_0027e774. */
+/* Supplied declaration required: dialogOpen. */
 /* Supplied declaration required: FUN_0027e7b4. */
 /* Supplied declaration required: FUN_00295660. */
 /* Supplied declaration required: FUN_00295ba4. */
-extern int FUN_00295bd0(void);
-extern int FUN_002a8740(int);
+extern int dialogIsActive(void);
+extern int gameGetUnitRecord(int);
 extern int FUN_002b6b04(void);
 extern unsigned int FUN_002bce30(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002bd06c. */
-/* Supplied declaration required: FUN_002bf694. */
+/* Supplied declaration required: libc_strcpy. */
 
 
 void FUN_00295f54(int param_1,int param_2)
@@ -81,7 +81,7 @@ void FUN_00295f54(int param_1,int param_2)
         }
         temp_v0 = temp_v0 + 1;
       } while (temp_v0 < 0x19);
-      temp_v0 = FUN_002a8740(temp_v3 - 1);
+      temp_v0 = gameGetUnitRecord(temp_v3 - 1);
       temp_v5 = 0;
       temp_v6 = 0;
       temp_v7 = 0;
@@ -92,28 +92,28 @@ void FUN_00295f54(int param_1,int param_2)
       temp_v12 = 0;
       temp_v2 = (unsigned int)*(unsigned short *)(temp_v0 + 0x46);
       FUN_002bd06c(temp_v2);
-      FUN_002bf694(&temp_v5,temp_v2);
+      libc_strcpy(&temp_v5,temp_v2);
       FUN_00295660(8,&temp_v5);
       temp_v1 = FUN_002bce30(*(unsigned short *)(temp_v0 + 0x46),0);
-      FUN_002bf694(&temp_v5,temp_v1);
+      libc_strcpy(&temp_v5,temp_v1);
       FUN_00295660(0x10,&temp_v5);
       temp_v1 = *(unsigned int *)(param_1 + 0x356c);
       temp_v4 = 0xc9;
 LAB_00296090:
       FUN_0027e7b4(temp_v1,temp_v4);
       *(short *)(param_1 + 0xcfc8) = *(short *)(param_1 + 0xcfc8) + 1;
-      FUN_0027e774(1);
+      dialogOpen(1);
       if (*(short *)(param_1 + 0xcfca) == *(short *)(param_1 + 0xcfc8)) {
         FUN_002015d0(0xffffffff);
-        *(unsigned int *)(DAT_0043e128 + 0xc) = 0;
+        *(unsigned int *)(g_infoWin + 0xc) = 0;
         return;
       }
       FUN_002015d0(0x5a);
       return;
     }
-    temp_v0 = FUN_00295bd0();
+    temp_v0 = dialogIsActive();
     if ((((temp_v0 != 0) && (temp_v0 = FUN_001ab9dc(), temp_v0 >= 0x5b)) &&
-        (temp_v0 = FUN_002015bc(), temp_v0 == -1)) &&
+        (temp_v0 = dialogGetTimer(), temp_v0 == -1)) &&
        (*(short *)(param_1 + 0xcfca) != *(short *)(param_1 + 0xcfc8))) {
       FUN_00295ba4(1);
       return;

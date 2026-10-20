@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern unsigned int DAT_0063fd88; /* 0x63fd88 */
+extern unsigned int g_asdGxPresets; /* 0x63fd88 */
 extern unsigned int DAT_0063fdb4; /* 0x63fdb4 */
 extern unsigned int DAT_0063fde0; /* 0x63fde0 */
 extern int DAT_0063fe0c; /* 0x63fe0c */
@@ -45,7 +45,7 @@ void FUN_00144ab4(int param_1)
   temp_v2 = 0;
   if (param_1 == 0) {
     DAT_0063fef8 = &DAT_0063fe10;
-    DAT_0063fef4 = &DAT_0063fd88;
+    DAT_0063fef4 = &g_asdGxPresets;
   }
   else if (param_1 != 1) {
     if (param_1 == 2) {

@@ -5,7 +5,7 @@
 extern "C" {
 
 extern unsigned int FUN_002ae3c0(unsigned int);
-extern unsigned short *FUN_002b63ac(void);
+extern unsigned short *gameGetPlayerData(void);
 
 
 unsigned int FUN_00230b90(unsigned int param_1,unsigned int param_2)
@@ -15,7 +15,7 @@ unsigned int FUN_00230b90(unsigned int param_1,unsigned int param_2)
   unsigned int temp_v0;
   unsigned int temp_v1;
   
-  puVar1 = (unsigned short *)FUN_002b63ac();
+  puVar1 = (unsigned short *)gameGetPlayerData();
   temp_v0 = FUN_002ae3c0(param_2);
   switch(temp_v0) {
   case 2:

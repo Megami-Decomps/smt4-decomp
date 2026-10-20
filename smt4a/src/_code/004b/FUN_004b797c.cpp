@@ -26,7 +26,7 @@ typedef struct Menu {
 
 int asdMemFree(void *resource);
 int scrScriptProcessDestroy(void *handle);
-int FUN_001f4e20(int arg0, int arg1);
+int dialogOpen(int arg0, int arg1);
 int FUN_0020401c(u8 *name);
 int FUN_00224880(void *handle);
 int FUN_00284f90(int arg);
@@ -42,7 +42,7 @@ void FUN_004b797c(Menu *menu)
         menu->resourceA = NULL;
         asdMemFree(menu->resourceB);
         menu->resourceB = NULL;
-        FUN_001f4e20(0, 0);
+        dialogOpen(0, 0);
         u32 owner = menu->owner;
         FUN_002a49e4(owner, menu->entry->kind);
         menu->state = 5;

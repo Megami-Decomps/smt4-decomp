@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002e9520(...);
+int onlineStringCopyConstruct(...);
 
 extern unsigned char DAT_00559504; /* 0x559504 */
 extern unsigned char DAT_00559ed4; /* 0x559ed4 */
 
-/* Supplied declaration required: FUN_002e9520. */
+/* Supplied declaration required: onlineStringCopyConstruct. */
 
 
 void FUN_0030c5d8(unsigned int param_1,unsigned int *param_2,int param_3)
@@ -21,8 +21,8 @@ void FUN_0030c5d8(unsigned int param_1,unsigned int *param_2,int param_3)
   if (param_2 != (unsigned int *)0x0) {
     *param_2 = (unsigned int)&DAT_00559ed4;
     *(unsigned char *)(param_2 + 1) = *(unsigned char *)(param_3 + 4);
-    temp_v0 = FUN_002e9520(param_2 + 2,param_3 + 8);
-    temp_v0 = FUN_002e9520(temp_v0 + 8,param_3 + 0x10);
+    temp_v0 = onlineStringCopyConstruct(param_2 + 2,param_3 + 8);
+    temp_v0 = onlineStringCopyConstruct(temp_v0 + 8,param_3 + 0x10);
     *(unsigned char **)(temp_v0 - 0x10) = &DAT_00559504;
   }
   return;

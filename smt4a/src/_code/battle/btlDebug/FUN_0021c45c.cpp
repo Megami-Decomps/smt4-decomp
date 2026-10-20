@@ -9,20 +9,20 @@ int FUN_0014e188(...);
 int FUN_0014e220(...);
 int FUN_001505ac(int, unsigned char *, int, unsigned char *, int, unsigned char *, int, int, int, unsigned char *, int);
 int FUN_00184310(void);
-int FUN_001846d0(...);
-int FUN_00184758(...);
-int FUN_00184c00(...);
+int uiSpriteSelectAnim(...);
+int uiSpriteSetKeyframe(...);
+int uiSpriteSetImageKeyframe(...);
 int FUN_0019e330(...);
-int FUN_001ab854(...);
-int FUN_001cd24c(...);
+int gameGetSlotRecord(...);
+int wordTripleClear(...);
 int FUN_00203b40(...);
 int FUN_0020d3d4(...);
 int FUN_0023f328(...);
 int FUN_0023f788(...);
 int FUN_002804b0(...);
-int FUN_0028cae8(void);
+int dataSet16LoadAndSort(void);
 int FUN_002bf464(void);
-int FUN_00342010(void);
+int campButtonHelpAcquire(void);
 int FUN_00371c3c(...);
 int FUN_00387240(...);
 int FUN_003eb200(void);
@@ -54,31 +54,31 @@ extern unsigned int DAT_005e1560; /* 0x5e1560 */
 /* Supplied declaration required: FUN_0014e220. */
 /* Supplied declaration required: FUN_001505ac. */
 /* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: FUN_001846d0. */
-/* Supplied declaration required: FUN_00184758. */
-/* Supplied declaration required: FUN_00184c00. */
+/* Supplied declaration required: uiSpriteSelectAnim. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 extern int FUN_00187168(void);
 /* Supplied declaration required: FUN_0019e330. */
-/* Supplied declaration required: FUN_001ab854. */
-extern int FUN_001ab888(void);
-/* Supplied declaration required: FUN_001cd24c. */
+/* Supplied declaration required: gameGetSlotRecord. */
+extern int gameGetSlotTable(void);
+/* Supplied declaration required: wordTripleClear. */
 /* Supplied declaration required: FUN_00203b40. */
 /* Supplied declaration required: FUN_0020d3d4. */
 /* Supplied declaration required: FUN_0023f328. */
 /* Supplied declaration required: FUN_0023f788. */
 /* Supplied declaration required: FUN_002804b0. */
-/* Supplied declaration required: FUN_0028cae8. */
+/* Supplied declaration required: dataSet16LoadAndSort. */
 /* Supplied declaration required: FUN_002bf464. */
-/* Supplied declaration required: FUN_00342010. */
+/* Supplied declaration required: campButtonHelpAcquire. */
 /* Supplied declaration required: FUN_00371c3c. */
 /* Supplied declaration required: FUN_00387240. */
-extern int FUN_003e46f4(int *);
+extern int gameDataFlagTestBit(int *);
 extern int FUN_003e48bc(void);
 extern int FUN_003e4d68(unsigned int);
 extern unsigned short FUN_003e53ec(void);
 /* Supplied declaration required: FUN_003eb200. */
 extern int FUN_0047fbb4(unsigned int);
-extern int FUN_00481104(unsigned int);
+extern int flagValueIsPositive(unsigned int);
 extern int bitsAt60Test(int, unsigned int);
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
 
@@ -118,7 +118,7 @@ void FUN_0021c45c(int param_1,int param_2)
   *(unsigned int *)(param_1 + 0x4ba4) = 0;
   *(unsigned int *)(param_1 + 0x4bc0) = 0;
   *(unsigned char *)(param_1 + 0x3db0) = 0;
-  FUN_0028cae8();
+  dataSet16LoadAndSort();
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(param_1);
   FUN_001505ac(param_1,&DAT_005288c8,0x114,&DAT_005289dc,600,&DAT_00528c34,0xd8,0,0,&DAT_00528d0c,
                0x9f4);
@@ -128,7 +128,7 @@ void FUN_0021c45c(int param_1,int param_2)
   do {
     temp_v6 = param_1 + temp_v5 * 0x8c;
     FUN_0014e188(temp_v6 + 0x73c,0xd,0,param_1,6);
-    FUN_001846d0(temp_v6 + 0x73c,0);
+    uiSpriteSelectAnim(temp_v6 + 0x73c,0);
     temp_v2 = temp_v6 + 0x9f8;
     FUN_0014e188(temp_v2,0xd,0,param_1,6);
     if (temp_v5 == 0) {
@@ -138,46 +138,46 @@ void FUN_0021c45c(int param_1,int param_2)
     else {
       temp_v4 = 10;
     }
-    FUN_00184c00(temp_v2,temp_v4,0);
+    uiSpriteSetImageKeyframe(temp_v2,temp_v4,0);
     temp_v2 = temp_v6 + 0xc28;
     FUN_0014e188(temp_v2,0xd,0x1b,param_1,0x1f);
     FUN_00387240(temp_v2,0xd,0x45);
-    FUN_001846d0(temp_v2,6);
+    uiSpriteSelectAnim(temp_v2,6);
     FUN_0014e188(temp_v6 + 0x145c,0xd,0x1c8,param_1,0x1a);
-    FUN_001846d0(temp_v6 + 0x145c,0xb);
+    uiSpriteSelectAnim(temp_v6 + 0x145c,0xb);
     temp_v2 = temp_v6 + 0x168c;
     FUN_0014e188(temp_v2,0xd,0xbba,param_1,0x1a);
     FUN_00387240(temp_v2,0xd,0x1ca);
-    FUN_001846d0(temp_v2,0xd);
+    uiSpriteSelectAnim(temp_v2,0xd);
     temp_v6 = temp_v6 + 0x18bc;
     FUN_0014e188(temp_v6,0xd,0xbbe,param_1,0x25);
     FUN_00387240(temp_v6,0xd,0x1ca);
-    FUN_001846d0(temp_v6,0xe);
+    uiSpriteSelectAnim(temp_v6,0xe);
     temp_v5 = temp_v5 + 1;
   } while (temp_v5 < 4);
   FUN_0014e188(param_1 + 0x96c,0xd,0x5e,param_1,6);
   temp_v1 = *temp_v9[3];
   FUN_003eb200();
   if (temp_v1 != 0) {
-    FUN_00184758(param_1 + 0x96c,0xd,0);
+    uiSpriteSetKeyframe(param_1 + 0x96c,0xd,0);
   }
   FUN_0014e188(param_1 + 0x20,0xd,0xdb,param_1,6);
-  FUN_001846d0(param_1 + 0x20,0x1b);
+  uiSpriteSelectAnim(param_1 + 0x20,0x1b);
   temp_v1 = 0;
   do {
     temp_v5 = param_1 + temp_v1 * 0x8c;
     FUN_0014e188(temp_v5 + 0x138,0xd,0xdd,param_1,6);
-    FUN_001846d0(temp_v5 + 0x138,0x1b);
+    uiSpriteSelectAnim(temp_v5 + 0x138,0x1b);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 8);
   FUN_0014e188(param_1 + 0xac,0xd,0xde,param_1,6);
-  FUN_001846d0(param_1 + 0xac,1);
+  uiSpriteSelectAnim(param_1 + 0xac,1);
   FUN_0014e188(param_1 + 0x598,0xd,0x4a,param_1,6);
-  FUN_001846d0(param_1 + 0x598,2);
+  uiSpriteSelectAnim(param_1 + 0x598,2);
   FUN_0014e188(param_1 + 0x624,0xd,0x96,param_1,6);
-  FUN_001846d0(param_1 + 0x624,3);
+  uiSpriteSelectAnim(param_1 + 0x624,3);
   FUN_0014e188(param_1 + 0x6b0,0xd,0x9c,param_1,6);
-  FUN_001846d0(param_1 + 0x6b0,0x1e);
+  uiSpriteSelectAnim(param_1 + 0x6b0,0x1e);
   temp_v1 = 0;
   do {
     FUN_0014e188(param_1 + temp_v1 * 0x8c + 0xe58,0xd,0x72,param_1,6);
@@ -187,54 +187,54 @@ void FUN_0021c45c(int param_1,int param_2)
   do {
     temp_v5 = param_1 + temp_v1 * 0x8c + 0x2294;
     FUN_0014e188(temp_v5,7,2000,param_1,0xf1);
-    FUN_001846d0(temp_v5,4);
+    uiSpriteSelectAnim(temp_v5,4);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 0x19);
   temp_v1 = 0;
   do {
     temp_v5 = param_1 + temp_v1 * 0x8c;
     FUN_0014e188(temp_v5 + 0x3040,0xd,1000,param_1,0xf1);
-    FUN_001846d0(temp_v5 + 0x3040,5);
+    uiSpriteSelectAnim(temp_v5 + 0x3040,5);
     FUN_0014e188(temp_v5 + 0x32fc,0xd,0x3ea,param_1,0xf1);
-    FUN_001846d0(temp_v5 + 0x32fc,5);
+    uiSpriteSelectAnim(temp_v5 + 0x32fc,5);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 5);
   temp_v1 = 0;
   do {
     temp_v5 = param_1 + temp_v1 * 0x8c + 0x35b8;
     FUN_0014e220(temp_v5,0xd,0xffffffff,0xf,param_1,0xf1);
-    FUN_001846d0(temp_v5,7);
+    uiSpriteSelectAnim(temp_v5,7);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 5);
   FUN_0014e188(param_1 + 0x11a0,0xd,0x110,param_1,6);
-  FUN_001846d0(param_1 + 0x11a0,0x1b);
+  uiSpriteSelectAnim(param_1 + 0x11a0,0x1b);
   FUN_0014e188(param_1 + 0x1344,0xd,0,param_1,6);
-  FUN_001846d0(param_1 + 0x1344,9);
+  uiSpriteSelectAnim(param_1 + 0x1344,9);
   FUN_0014e188(param_1 + 0x13d0,0xd,0,param_1,6);
-  FUN_001846d0(param_1 + 0x13d0,9);
+  uiSpriteSelectAnim(param_1 + 0x13d0,9);
   FUN_0020d3d4(param_1);
   FUN_0014e188(param_1 + 0x122c,0xd,0x124,param_1,6);
-  FUN_001846d0(param_1 + 0x122c,8);
+  uiSpriteSelectAnim(param_1 + 0x122c,8);
   FUN_0014e188(param_1 + 0x12b8,0xd,0,param_1,6);
   FUN_0014e188(param_1 + 0x2208,0xd,0,param_1,6);
   FUN_0014e188(param_1 + 0x1aec,0xd,0xfa9,param_1,0x42);
-  FUN_00184c00(param_1 + 0x1aec,0x1b,0);
+  uiSpriteSetImageKeyframe(param_1 + 0x1aec,0x1b,0);
   FUN_0014e188(param_1 + 0x1b78,0xd,0xfa9,param_1,0x42);
-  FUN_001846d0(param_1 + 0x1b78,0x14);
+  uiSpriteSelectAnim(param_1 + 0x1b78,0x14);
   temp_v1 = param_1 + 0x1c04;
   FUN_0014e188(temp_v1,0xd,0xfbd,param_1,0x42);
   FUN_0014e188(param_1 + 0x1c90,0xd,0xfbe,param_1,0x42);
-  FUN_001846d0(param_1 + 0x1c90,0x15);
+  uiSpriteSelectAnim(param_1 + 0x1c90,0x15);
   FUN_00387240(temp_v1,0xd,0xfc1);
   temp_v5 = param_1 + 0x1d1c;
   FUN_0014e188(temp_v5,0xd,0xfbf,param_1,0x42);
-  FUN_001846d0(temp_v5,0x16);
+  uiSpriteSelectAnim(temp_v5,0x16);
   FUN_0019e330(temp_v5,0xe,0);
   FUN_00387240(temp_v1,0xd,0xfc2);
   temp_v1 = 0;
   do {
     FUN_0014e188(param_1 + temp_v1 * 0x8c + 0x1da8,0xd,0xfbf,param_1,0x42);
-    FUN_00184c00(temp_v5,0x28,0);
+    uiSpriteSetImageKeyframe(temp_v5,0x28,0);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 8);
   temp_v0 = FUN_003e53ec();
@@ -253,15 +253,15 @@ void FUN_0021c45c(int param_1,int param_2)
   temp_v1 = 0;
   *(unsigned int *)(param_1 + 0x4bb0) = 0xffffffff;
   do {
-    temp_v5 = FUN_001ab888();
+    temp_v5 = gameGetSlotTable();
     if (*(char *)(temp_v5 + temp_v1 + 0x1ca0) >= '\0') {
-      temp_v5 = FUN_001ab888();
-      temp_v5 = FUN_001ab854((int)*(char *)(temp_v5 + temp_v1 + 0x1ca0));
+      temp_v5 = gameGetSlotTable();
+      temp_v5 = gameGetSlotRecord((int)*(char *)(temp_v5 + temp_v1 + 0x1ca0));
       FUN_00371c3c((int)*(short *)(temp_v5 + 0x62),1);
       temp_v2 = param_1 + temp_v1 * 4;
       *(unsigned int *)(temp_v2 + 0x4bb4) = (unsigned int)*(unsigned short *)(temp_v5 + 0x62);
       *(unsigned int *)(temp_v2 + 0x4220) = (unsigned int)*(unsigned short *)(temp_v5 + 0x62);
-      temp_v5 = FUN_001ab888();
+      temp_v5 = gameGetSlotTable();
       *(short *)(param_1 + temp_v1 * 2 + 0x4212) = (short)*(char *)(temp_v5 + temp_v1 + 0x1ca0);
       *(unsigned char *)(param_1 + temp_v1 + 0x41ee) = 0;
     }
@@ -294,7 +294,7 @@ void FUN_0021c45c(int param_1,int param_2)
   FUN_0023f328(param_1,4,1);
   temp_v1 = 1;
   do {
-    if (((*(short *)(param_1 + temp_v1 * 2 + 0x4210) < 0) || (temp_v5 = FUN_001ab854(), temp_v5 == 0)) ||
+    if (((*(short *)(param_1 + temp_v1 * 2 + 0x4210) < 0) || (temp_v5 = gameGetSlotRecord(), temp_v5 == 0)) ||
        (temp_v5 = bitsAt60Test(temp_v5,1), temp_v5 != 0)) {
       *(unsigned char *)(param_1 + temp_v1 + 0x41ed) = 1;
     }
@@ -334,7 +334,7 @@ void FUN_0021c45c(int param_1,int param_2)
   temp_v1 = 0;
   temp_v7 = 1;
   do {
-    temp_v5 = FUN_00481104(temp_v7);
+    temp_v5 = flagValueIsPositive(temp_v7);
     if ((temp_v5 != 0) && (temp_v5 = FUN_0047fbb4(temp_v7), temp_v5 != 0)) {
       temp_v5 = temp_v1 * 2;
       temp_v1 = temp_v1 + 1;
@@ -344,7 +344,7 @@ void FUN_0021c45c(int param_1,int param_2)
   } while (temp_v7 < 0x3d);
   temp_v7 = 0x79f;
   do {
-    temp_v5 = FUN_00481104(temp_v7);
+    temp_v5 = flagValueIsPositive(temp_v7);
     if ((temp_v5 != 0) && (temp_v5 = FUN_0047fbb4(temp_v7), temp_v5 != 0)) {
       temp_v5 = temp_v1 * 2;
       temp_v1 = temp_v1 + 1;
@@ -361,7 +361,7 @@ void FUN_0021c45c(int param_1,int param_2)
   temp_v9[1] = (int *)0x32;
   temp_v9[2] = (int *)0x33;
   do {
-    temp_v2 = FUN_003e46f4(temp_v9[temp_v1]);
+    temp_v2 = gameDataFlagTestBit(temp_v9[temp_v1]);
     if (temp_v2 != 0) {
       temp_v5 = temp_v5 + 1;
     }
@@ -369,9 +369,9 @@ void FUN_0021c45c(int param_1,int param_2)
   } while (temp_v1 < 3);
   FUN_00203b40(param_1 + 0x3b78,temp_v5,6,1,0,1);
   FUN_002bf464();
-  FUN_00342010();
+  campButtonHelpAcquire();
   FUN_002804b0(&LAB_0021d124,param_1 + 0x4b98,0);
-  FUN_001cd24c(&DAT_005e1560);
+  wordTripleClear(&DAT_005e1560);
   return;
 }
 

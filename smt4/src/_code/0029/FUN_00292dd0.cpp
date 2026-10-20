@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b8838(int);
+int buttonHelpSetPreset(int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -13,9 +13,9 @@ typedef struct {
 
 extern int g_btlMainState; /* 0x435d90 */
 
-extern int padIsButtonDown(unsigned int);
-/* Supplied declaration required: FUN_002b8838. */
-extern int FUN_002c09d0(unsigned int);
+extern int flagBitIsSet(unsigned int);
+/* Supplied declaration required: buttonHelpSetPreset. */
+extern int gameFlagIsSet(unsigned int);
 
 
 void FUN_00292dd0(int param_1)
@@ -25,56 +25,56 @@ void FUN_00292dd0(int param_1)
   int temp_v0;
   
   if ((*(unsigned int *)(g_btlMainState + 0x44a0) & 0x1004) != 0) {
-    temp_v0 = FUN_002c09d0(0x525);
+    temp_v0 = gameFlagIsSet(0x525);
     if (temp_v0 != 0) {
-      FUN_002b8838(0xe4);
+      buttonHelpSetPreset(0xe4);
       return;
     }
-    temp_v0 = padIsButtonDown(0x10);
+    temp_v0 = flagBitIsSet(0x10);
     if (temp_v0 != 0) {
-      FUN_002b8838(0xb3);
+      buttonHelpSetPreset(0xb3);
       return;
     }
-    FUN_002b8838(0xb4);
+    buttonHelpSetPreset(0xb4);
     return;
   }
-  temp_v0 = FUN_002c09d0(0x525);
+  temp_v0 = gameFlagIsSet(0x525);
   if (temp_v0 != 0) {
-    FUN_002b8838(0xe5);
+    buttonHelpSetPreset(0xe5);
     return;
   }
-  temp_v0 = padIsButtonDown(0x10);
+  temp_v0 = flagBitIsSet(0x10);
   if (temp_v0 == 0) {
-    temp_v0 = padIsButtonDown(0x7f);
+    temp_v0 = flagBitIsSet(0x7f);
     if (temp_v0 == 0) {
       if (param_1 != 0) {
-        FUN_002b8838(199);
+        buttonHelpSetPreset(199);
         return;
       }
-      FUN_002b8838(0xad);
+      buttonHelpSetPreset(0xad);
       return;
     }
     if (param_1 != 0) {
-      FUN_002b8838(0x36);
+      buttonHelpSetPreset(0x36);
       return;
     }
-    FUN_002b8838(0x37);
+    buttonHelpSetPreset(0x37);
     return;
   }
-  temp_v0 = padIsButtonDown(0x7f);
+  temp_v0 = flagBitIsSet(0x7f);
   if (temp_v0 == 0) {
     if (param_1 != 0) {
-      FUN_002b8838(0xc6);
+      buttonHelpSetPreset(0xc6);
       return;
     }
-    FUN_002b8838(0xac);
+    buttonHelpSetPreset(0xac);
     return;
   }
   if (param_1 != 0) {
-    FUN_002b8838(0x34);
+    buttonHelpSetPreset(0x34);
     return;
   }
-  FUN_002b8838(0x35);
+  buttonHelpSetPreset(0x35);
   return;
 }
 

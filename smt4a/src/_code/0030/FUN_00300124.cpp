@@ -4,15 +4,15 @@
 
 extern "C" {
 
-extern unsigned int DAT_00647194; /* 0x647194 */
+extern unsigned int g_effMenuHandles; /* 0x647194 */
 extern unsigned int DAT_006471a8; /* 0x6471a8 */
 
 
 void FUN_00300124(unsigned int *param_1,int param_2)
 
 {
-  if ((&DAT_00647194)[param_2] == 0) {
-    (&DAT_00647194)[param_2] = (unsigned int)param_1;
+  if ((&g_effMenuHandles)[param_2] == 0) {
+    (&g_effMenuHandles)[param_2] = (unsigned int)param_1;
   }
   else {
     *(unsigned int **)(&DAT_006471a8)[param_2] = param_1;

@@ -5,7 +5,7 @@
 extern "C" {
 
 int libc_sprintf(...);
-int FUN_002e342c(...);
+int libc_strcpy(...);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -14,7 +14,7 @@ typedef struct {
 
 /* Supplied declaration required: libc_sprintf. */
 extern unsigned int wstrlen(int);
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 
 
 void FUN_001add78(int param_1,int param_2)
@@ -38,7 +38,7 @@ void FUN_001add78(int param_1,int param_2)
     if (temp_v1 != 0) {
       do {
         if (*(char *)(param_2 + temp_v2) == ':') {
-          FUN_002e342c(param_1 + 0x2c,param_2);
+          libc_strcpy(param_1 + 0x2c,param_2);
           return;
         }
         temp_v2 = temp_v2 + 1;
@@ -53,7 +53,7 @@ void FUN_001add78(int param_1,int param_2)
     if ((*(char *)(param_2 + temp_v1) == ':') || (*(char *)(param_2 + temp_v1 + 1) == ':')) break;
     temp_v1 = temp_v1 + 2;
   }
-  FUN_002e342c(param_1 + 0x2c,param_2);
+  libc_strcpy(param_1 + 0x2c,param_2);
   return;
 }
 

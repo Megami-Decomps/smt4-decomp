@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002e5700(int *, unsigned char *, int, int);
+int rt_vec_dtor(int *, unsigned char *, int, int);
 int FUN_002f5020(int *, unsigned char *, int, int);
 int FUN_00304e8e(...);
 
 extern unsigned char LAB_001220f1; /* 0x1220f1 */
 extern unsigned char LAB_0012cfd5; /* 0x12cfd5 */
 
-/* Supplied declaration required: FUN_002e5700. */
+/* Supplied declaration required: rt_vec_dtor. */
 /* Supplied declaration required: FUN_002f5020. */
 extern int FUN_00304d10(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00304e8e. */
@@ -36,7 +36,7 @@ void FUN_001189f0(unsigned int param_1,unsigned int param_2,unsigned int param_3
   }
   FUN_002f5020(&uStack_18,&LAB_0012cfd5,0xc,1);
   FUN_00304e8e(param_1,&uStack_18);
-  FUN_002e5700(&uStack_18,&LAB_001220f1,0xc,1);
+  rt_vec_dtor(&uStack_18,&LAB_001220f1,0xc,1);
   return;
 }
 

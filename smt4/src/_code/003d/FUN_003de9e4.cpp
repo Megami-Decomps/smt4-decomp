@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0022699c(int, int, int, unsigned int);
 
-extern int DAT_00434290; /* 0x434290 */
+extern int g_btlActionReflect; /* 0x434290 */
 
 /* Supplied declaration required: FUN_0022699c. */
 extern int btlGetMainState(void);
@@ -25,8 +25,8 @@ unsigned int FUN_003de9e4(short param_1,unsigned int param_2,unsigned int param_
     temp_v0 = btlGetMainState();
     temp_v0 = *(int *)(temp_v0 + 0x1e98) + temp_v2 * 0x114;
     if ((*(unsigned int *)(temp_v0 + 0x50) & 0x8000) != 0) {
-      temp_v1 = DAT_00434290;
-      FUN_0022699c(DAT_00434290,(int)param_1,0,param_2);
+      temp_v1 = g_btlActionReflect;
+      FUN_0022699c(g_btlActionReflect,(int)param_1,0,param_2);
       *(unsigned char *)(temp_v1 + 5) = *(unsigned char *)(temp_v1 + 5) | 4;
       *(int *)(temp_v1 + 0x14) = temp_v0;
       *(unsigned char *)(temp_v1 + 4) = 0x22;

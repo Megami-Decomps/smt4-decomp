@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002b2368(void);
+int asdMemFreeNonNull(void);
 int asdOperatorNew(void);
-int FUN_002c3944(void);
+int rt_memclr(void);
 int asdMemFree(void);
-int FUN_002c52f8(void);
+int asdFatalError(void);
 int asdMemoryAlloc(int, int, int, int);
 int FUN_00352f0c(void);
 
@@ -17,11 +17,11 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_002b2368. */
+/* Supplied declaration required: asdMemFreeNonNull. */
 /* Supplied declaration required: asdOperatorNew. */
-/* Supplied declaration required: FUN_002c3944. */
+/* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_002c52f8. */
+/* Supplied declaration required: asdFatalError. */
 /* Supplied declaration required: asdMemoryAlloc. */
 extern unsigned int FUN_00352ee8(void);
 /* Supplied declaration required: FUN_00352f0c. */
@@ -36,7 +36,7 @@ void FUN_0038b174(int param_1)
   
   if (*(int *)(param_1 + 0x5a8) != 0) {
     FUN_00352f0c();
-    FUN_002b2368();
+    asdMemFreeNonNull();
     *(unsigned int *)(param_1 + 0x5a8) = 0;
   }
   if (*(int *)(param_1 + 0x5ac) != 0) {
@@ -46,7 +46,7 @@ void FUN_0038b174(int param_1)
   temp_v0 = 0x10000;
   asdMemoryAlloc(0x10000,0x100,0,0x20000);
   *(unsigned int *)(param_1 + 0x5ac) = temp_v0;
-  FUN_002c3944();
+  rt_memclr();
   if (*(int *)(param_1 + 0x5ac) != 0) {
     temp_v1 = 0x10;
     asdOperatorNew();
@@ -57,7 +57,7 @@ void FUN_0038b174(int param_1)
     *(unsigned int *)(param_1 + 0x5a8) = temp_v0;
     return;
   }
-  FUN_002c52f8();
+  asdFatalError();
   return;
 }
 

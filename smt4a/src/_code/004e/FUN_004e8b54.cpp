@@ -6,7 +6,7 @@ extern "C" {
 
 int qsort(unsigned short [18], int, int, unsigned char *);
 int lcgRandomRange(...);
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 int FUN_004e9168(int *, unsigned int, int, unsigned int *, int *);
 int FUN_004ea634(int *, int, unsigned int);
 
@@ -45,7 +45,7 @@ extern unsigned int DAT_0057117c; /* 0x57117c */
 
 /* Supplied declaration required: qsort. */
 /* Supplied declaration required: lcgRandomRange. */
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: FUN_004e9168. */
 /* Supplied declaration required: FUN_004ea634. */
 
@@ -105,7 +105,7 @@ unsigned int FUN_004e8b54(int *param_1,int param_2)
   temp_v20 = param_2;
   do {
     temp_v1 = (unsigned int)*(unsigned short *)(temp_v2 + temp_v6 * 2 + 0x27c);
-    FUN_001aba54();
+    dataTable04FindById();
     piVar3 = temp_v19;
     temp_v11 = temp_v1;
     if ((((temp_v1 != 0) && ((*(unsigned short *)(temp_v17 + 0x74) & 0x2000) == 0)) &&

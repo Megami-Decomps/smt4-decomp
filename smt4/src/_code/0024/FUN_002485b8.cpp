@@ -10,11 +10,11 @@ typedef struct Target {
 extern struct {
     u8 unk00[8];
     Target *target;
-} DAT_0043e188;
+} g_messageMain;
 
 u8 FUN_002485b8(void)
 {
-    return DAT_0043e188.target->unk7D != 0;
+    return g_messageMain.target->unk7D != 0;
 }
 
 } /* extern "C" */

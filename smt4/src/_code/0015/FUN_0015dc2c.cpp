@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0015e6f4(unsigned int, int, int, unsigned int, unsigned int, int);
 int FUN_002a1130(unsigned int, int);
-int FUN_002aa568(unsigned int *, int);
+int libc_strcmp(unsigned int *, int);
 
 /* stack frame of param_3: 6 slot(s), 24 byte(s) */
 typedef struct {
@@ -20,8 +20,8 @@ typedef struct {
 
 /* Supplied declaration required: FUN_0015e6f4. */
 /* Supplied declaration required: FUN_002a1130. */
-/* Supplied declaration required: FUN_002aa568. */
-extern int FUN_002c30c4(int);
+/* Supplied declaration required: libc_strcmp. */
+extern int libc_strlen(int);
 
 
 void FUN_0015dc2c(unsigned int param_1,int param_2,int param_3)
@@ -50,7 +50,7 @@ void FUN_0015dc2c(unsigned int param_1,int param_2,int param_3)
     temp_v7 = 0;
     temp_v8 = 0;
     temp_v9 = 0;
-    temp_v1 = FUN_002c30c4(param_3);
+    temp_v1 = libc_strlen(param_3);
     if (temp_v1 >= 9) {
       temp_v1 = 8;
     }
@@ -76,7 +76,7 @@ void FUN_0015dc2c(unsigned int param_1,int param_2,int param_3)
           do {
             temp_v2 = *(int *)(param_2 + 0x318) + temp_v1 * 0x50;
             puVar5 = &temp_v6;
-            FUN_002aa568(puVar5,temp_v2 + 0x24);
+            libc_strcmp(puVar5,temp_v2 + 0x24);
             if (puVar5 == (unsigned int *)0x0) {
               FUN_0015e6f4(param_1,param_2,temp_v2 + 0x24,*(unsigned int *)(temp_v2 + 0x20),
                            *(unsigned int *)(temp_v2 + 0x34),*(unsigned short *)(temp_v2 + 8));

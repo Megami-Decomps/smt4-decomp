@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00192550(void);
-int FUN_001aba54(...);
+int dataTable04FindById(...);
 int FUN_004a92d0(unsigned int, int, int);
 int FUN_004a96b8(unsigned int);
 int FUN_004a9c40(unsigned int, unsigned int, unsigned int);
@@ -23,11 +23,11 @@ extern unsigned int DAT_00571228; /* 0x571228 */
 extern unsigned int DAT_0057122c; /* 0x57122c */
 extern unsigned int DAT_00571250; /* 0x571250 */
 extern unsigned int DAT_00571254; /* 0x571254 */
-extern unsigned int DAT_005712f0; /* 0x5712f0 */
-extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
+extern unsigned int g_btlActionReflect; /* 0x5712f0 */
+extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
 /* Supplied declaration required: FUN_00192550. */
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: dataTable04FindById. */
 extern int FUN_00333758(void);
 extern int FUN_003e7adc(int);
 extern int chainCountIdUnflagged(unsigned int, unsigned int);
@@ -54,7 +54,7 @@ unsigned int FUN_004dc72c(int *param_1,unsigned int *param_2)
   
   if ((*(unsigned int *)(*param_1 + 0x45a0) & DAT_00571250) != 0 ||
       (DAT_00571254 & *(unsigned int *)(*param_1 + 0x45a4)) != 0) {
-    temp_v1 = chainCountIdUnflagged(DAT_005712f0,0);
+    temp_v1 = chainCountIdUnflagged(g_btlActionReflect,0);
     if (0 < temp_v1) {
       return 0;
     }
@@ -62,31 +62,31 @@ unsigned int FUN_004dc72c(int *param_1,unsigned int *param_2)
     temp_v2 = ~DAT_00571250;
     *(unsigned int *)(temp_v1 + 0x45a4) = *(unsigned int *)(temp_v1 + 0x45a4) & ~DAT_00571254;
     *(unsigned int *)(temp_v1 + 0x45a0) = *(unsigned int *)(temp_v1 + 0x45a0) & temp_v2;
-    FUN_004a96b8(DAT_0057a9c8);
+    FUN_004a96b8(g_btlUiBlock);
   }
-  temp_v1 = FUN_004abb54(DAT_0057a9c8);
+  temp_v1 = FUN_004abb54(g_btlUiBlock);
   if (temp_v1 != 0) {
     temp_v2 = *(unsigned int *)(*param_1 + 0x45a0);
     temp_v3 = *(unsigned int *)(*param_1 + 0x45a4);
     if (!((DAT_0057121c & temp_v3) == 0 && (DAT_00571218 & temp_v2) == 0)) {
       if ((*param_2 & 0x80) == 0) {
         *param_2 = *param_2 | 0x80;
-        FUN_004aa7c8(DAT_0057a9c8);
-        FUN_004a92d0(DAT_0057a9c8,(short)param_2[0xb],1);
+        FUN_004aa7c8(g_btlUiBlock);
+        FUN_004a92d0(g_btlUiBlock,(short)param_2[0xb],1);
       }
     }
     else if (((temp_v3 & DAT_0057122c) != 0 || (DAT_00571228 & temp_v2) != 0) &&
             ((*param_2 & 0x1000) == 0)) {
       *param_2 = *param_2 | 0x1000;
-      FUN_004aa7c8(DAT_0057a9c8);
-      FUN_004a92d0(DAT_0057a9c8,(short)param_2[0xb],1);
+      FUN_004aa7c8(g_btlUiBlock);
+      FUN_004a92d0(g_btlUiBlock,(short)param_2[0xb],1);
     }
   }
-  temp_v1 = FUN_004aa020(DAT_0057a9c8);
+  temp_v1 = FUN_004aa020(g_btlUiBlock);
   if (temp_v1 == 0) {
     return 0;
   }
-  FUN_004a9c40(DAT_0057a9c8,param_2[10] + 0x1be,param_2[10] + 0x1c0);
+  FUN_004a9c40(g_btlUiBlock,param_2[10] + 0x1be,param_2[10] + 0x1c0);
   if (((*param_2 & 0x80) != 0) || ((*param_2 & 0x1000) != 0)) {
     *(unsigned short *)(param_2[10] + 0x1be) = 1;
     *(unsigned short *)(param_2[10] + 0x1c0) = 1;
@@ -98,7 +98,7 @@ unsigned int FUN_004dc72c(int *param_1,unsigned int *param_2)
     break;
   case 2:
   case 3:
-    FUN_001aba54((int)*(short *)(param_2[10] + 0x1c0));
+    dataTable04FindById((int)*(short *)(param_2[10] + 0x1c0));
     temp_v1 = FUN_00333758();
 joined_r0x004dca3c:
     if (temp_v1 != 0) {
@@ -128,7 +128,7 @@ joined_r0x004dca3c:
     temp_v1 = (int)*(short *)(param_2[10] + 0x1c0);
     FUN_00192550();
     if (*(short *)(temp_v1 + 0x32) != 0) {
-      FUN_001aba54();
+      dataTable04FindById();
       temp_v1 = FUN_00333758();
       goto joined_r0x004dca3c;
     }

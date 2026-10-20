@@ -5,9 +5,9 @@
 extern "C" {
 
 int FUN_00288790(...);
-int FUN_002b45e8(void);
+int dataTable08Sub2GetRecord(void);
 int FUN_002bdf94(...);
-int FUN_002be304(...);
+int drawSetColorFromRGBA8(...);
 int FUN_002be370(...);
 int FUN_002be5a4(...);
 int FUN_002be624(...);
@@ -44,10 +44,10 @@ extern unsigned char LAB_00284814; /* 0x284814 */
 /* Supplied declaration required: FUN_00288790. */
 extern unsigned int FUN_0028fb40(int);
 extern int FUN_002995d8(int);
-/* Supplied declaration required: FUN_002b45e8. */
-extern unsigned short *FUN_002b63ac(void);
+/* Supplied declaration required: dataTable08Sub2GetRecord. */
+extern unsigned short *gameGetPlayerData(void);
 /* Supplied declaration required: FUN_002bdf94. */
-/* Supplied declaration required: FUN_002be304. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_002be370. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: FUN_002be624. */
@@ -84,12 +84,12 @@ void FUN_00283f80(int param_1,int param_2,int param_3,int param_4,int param_5)
   iStack_30 = param_2;
   temp_v13 = param_3;
   iStack_28 = param_4;
-  puVar3 = (unsigned short *)FUN_002b63ac();
+  puVar3 = (unsigned short *)gameGetPlayerData();
   if (temp_v13 == 0) {
     return;
   }
   temp_v7 = temp_v13;
-  FUN_002b45e8();
+  dataTable08Sub2GetRecord();
   temp_v10 = 0;
   temp_v2 = FUN_002bf4f8(0x1d,param_2 + 0x40d);
   temp_v3 = FUN_002bf4f8(0x1d,0x514);
@@ -110,7 +110,7 @@ void FUN_00283f80(int param_1,int param_2,int param_3,int param_4,int param_5)
   temp_v5 = FUN_002bf4f8(0x1d,0x520);
   temp_v11 = FUN_0028fb40(temp_v13);
   FUN_002be624(temp_v12,&LAB_002843d8,temp_v11);
-  FUN_002be304(0xff);
+  drawSetColorFromRGBA8(0xff);
   FUN_002bdf94(0,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v2 + 8) + param_4,
                (int)*(short *)(temp_v5 + 10) + (int)*(short *)(temp_v2 + 10) + param_5,1,2,0x6f,
                temp_v12);
@@ -127,7 +127,7 @@ void FUN_00283f80(int param_1,int param_2,int param_3,int param_4,int param_5)
 LAB_00284174:
       temp_v10 = (unsigned int)temp_v1;
       if (temp_v10 != 0) {
-        FUN_002b45e8();
+        dataTable08Sub2GetRecord();
         temp_v10 = *(unsigned int *)(temp_v10 + 0x54) & 0x3ff;
       }
       else {
@@ -141,7 +141,7 @@ LAB_00284174:
       }
       temp_v10 = 0;
     }
-    FUN_002be304(0xff);
+    drawSetColorFromRGBA8(0xff);
     temp_v8 = *(unsigned int *)(temp_v7 + 0x54) & 0x3ff;
     temp_v6 = temp_v8;
     if (temp_v8 < temp_v10) {
@@ -151,7 +151,7 @@ LAB_00284174:
       temp_v6 = 0x8400ff;
     }
     if (temp_v8 != temp_v10) {
-      FUN_002be304(temp_v6);
+      drawSetColorFromRGBA8(temp_v6);
     }
     temp_v5 = FUN_002bf4f8(0x1d,0x518);
     FUN_002be624(temp_v12,&LAB_002843d8,*(unsigned int *)(temp_v7 + 0x54) & 0x3ff);
@@ -205,10 +205,10 @@ LAB_00284174:
       temp_v10 = 0;
     }
     else {
-      FUN_002b45e8();
+      dataTable08Sub2GetRecord();
       temp_v10 = *(unsigned int *)(temp_v10 + 0x54) & 0x3ff;
     }
-    FUN_002be304(0xff);
+    drawSetColorFromRGBA8(0xff);
     temp_v8 = *(unsigned int *)(temp_v7 + 0x54) & 0x3ff;
     temp_v6 = temp_v8;
     if (temp_v8 < temp_v10) {
@@ -218,7 +218,7 @@ LAB_00284174:
       temp_v6 = 0x8400ff;
     }
     if (temp_v8 != temp_v10) {
-      FUN_002be304(temp_v6);
+      drawSetColorFromRGBA8(temp_v6);
     }
     temp_v5 = FUN_002bf4f8(0x1d,0x535);
     FUN_002be624(temp_v12,&LAB_002843d8,*(unsigned int *)(temp_v7 + 0x54) & 0x3ff);
@@ -248,7 +248,7 @@ LAB_00284174:
     else {
       FUN_002be624(temp_v12,&LAB_00284814,temp_v0 & 0xf,temp_v0 >> 4);
     }
-    FUN_002be304(0xff);
+    drawSetColorFromRGBA8(0xff);
     temp_v7 = FUN_002bf4f8(0x1d,0x539);
     FUN_002bdf94(0,(int)*(short *)(temp_v7 + 8) + (int)*(short *)(temp_v2 + 8) + param_4,
                  (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v7 + 10) + param_5,1,3,0x6f,
@@ -277,12 +277,12 @@ LAB_00284174:
     }
     else {
       temp_v8 = temp_v10;
-      FUN_002b45e8();
+      dataTable08Sub2GetRecord();
       temp_v5 = (int)*(short *)(temp_v8 + 0x66);
-      FUN_002b45e8();
+      dataTable08Sub2GetRecord();
       temp_v3 = (int)*(short *)(temp_v10 + 0x68);
     }
-    FUN_002be304(0xff);
+    drawSetColorFromRGBA8(0xff);
     temp_v9 = (int)*(short *)(temp_v7 + 0x66);
     temp_v4 = temp_v9;
     if (temp_v9 < temp_v5) {
@@ -292,7 +292,7 @@ LAB_00284174:
       temp_v4 = 0x8400ff;
     }
     if (temp_v9 != temp_v5) {
-      FUN_002be304(temp_v4);
+      drawSetColorFromRGBA8(temp_v4);
     }
     temp_v5 = FUN_002bf4f8(0x1d,0x54f);
     FUN_002be624(temp_v12,&LAB_002843d8,(int)*(short *)(temp_v7 + 0x66));
@@ -300,7 +300,7 @@ LAB_00284174:
                  (int)*(short *)(temp_v5 + 10) + (int)*(short *)(temp_v2 + 10) + param_5,1,5,0x6f,
                  temp_v12);
     FUN_002bed3c();
-    FUN_002be304(0xff);
+    drawSetColorFromRGBA8(0xff);
     temp_v4 = (int)*(short *)(temp_v7 + 0x68);
     temp_v5 = temp_v4;
     if (temp_v4 < temp_v3) {
@@ -310,7 +310,7 @@ LAB_00284174:
       temp_v5 = 0x8400ff;
     }
     if (temp_v4 != temp_v3) {
-      FUN_002be304(temp_v5);
+      drawSetColorFromRGBA8(temp_v5);
     }
     temp_v5 = FUN_002bf4f8(0x1d,0x554);
     FUN_002be624(temp_v12,&LAB_002843d8,(int)*(short *)(temp_v7 + 0x68));

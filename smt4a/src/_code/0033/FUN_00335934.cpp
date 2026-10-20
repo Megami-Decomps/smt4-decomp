@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e342c(int *, unsigned int);
+int libc_strcpy(int *, unsigned int);
 int FUN_004f7b84(unsigned int, int *);
 
 /* stack frame of void: 17 slot(s), 68 byte(s) */
@@ -30,8 +30,8 @@ typedef struct {
 
 extern unsigned int DAT_00573808; /* 0x573808 */
 
-extern unsigned int FUN_002360dc(unsigned int);
-/* Supplied declaration required: FUN_002e342c. */
+extern unsigned int scrGetArgString(unsigned int);
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_004f7b84. */
 
 
@@ -57,7 +57,7 @@ unsigned int FUN_00335934(void)
   unsigned int temp_v15;
   unsigned int temp_v16;
   
-  temp_v0 = FUN_002360dc(0);
+  temp_v0 = scrGetArgString(0);
   temp_v1 = 0;
   temp_v2 = 0;
   temp_v3 = 0;
@@ -74,7 +74,7 @@ unsigned int FUN_00335934(void)
   temp_v14 = 0;
   temp_v15 = 0;
   temp_v16 = 0;
-  FUN_002e342c(&temp_v1,temp_v0);
+  libc_strcpy(&temp_v1,temp_v0);
   FUN_004f7b84(DAT_00573808,&temp_v1);
                     /* WARNING: Treating indirect jump as return */
   return 1;

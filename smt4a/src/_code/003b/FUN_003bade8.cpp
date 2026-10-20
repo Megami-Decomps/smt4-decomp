@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e71ac(unsigned int, unsigned int);
+int rt_memcpy_w144(unsigned int, unsigned int);
 
 extern int DAT_0059dbec; /* 0x59dbec */
 extern unsigned int DAT_0059dbf4; /* 0x59dbf4 */
@@ -13,7 +13,7 @@ extern unsigned int DAT_0059e69c; /* 0x59e69c */
 extern unsigned char DAT_0059e9a8; /* 0x59e9a8 */
 extern int DAT_0059e9b4; /* 0x59e9b4 */
 
-/* Supplied declaration required: FUN_002e71ac. */
+/* Supplied declaration required: rt_memcpy_w144. */
 extern unsigned int FUN_00300778(unsigned int, int);
 extern unsigned int FUN_0037658c(unsigned int, unsigned int);
 
@@ -28,7 +28,7 @@ unsigned int FUN_003bade8(void)
   temp_v0 = FUN_00300778(DAT_0059dbf4,DAT_0059dbec + DAT_0059e9b4);
   temp_v1 = FUN_0037658c(DAT_0059dbf4,temp_v0);
   DAT_0059e69c = 0;
-  FUN_002e71ac(temp_v1,temp_v0);
+  rt_memcpy_w144(temp_v1,temp_v0);
   DAT_0059dc18 = &DAT_0059e9a8;
   return 0;
 }

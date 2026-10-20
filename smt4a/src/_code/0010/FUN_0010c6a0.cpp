@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_0010c144(int, int, int);
-int FUN_002e74bc(unsigned int);
+int onlineBufferReset(unsigned int);
 int strAssign(int, int, int, unsigned int);
 int FUN_002e7908(int *[3], int *);
-int FUN_002ed280(int, int);
+int streamSkip(int, int);
 int FUN_002f5c90(int, int, int, int *);
 
 typedef int romwright_code(...);
@@ -28,12 +28,12 @@ typedef struct {
 #define romwright_piece_3_1(upper, lower) ((unsigned int)(((unsigned int)(unsigned int)(upper) << 8) | (unsigned char)(lower)))
 #endif
 /* Supplied declaration required: FUN_0010c144. */
-/* Supplied declaration required: FUN_002e74bc. */
+/* Supplied declaration required: onlineBufferReset. */
 /* Supplied declaration required: strAssign. */
 /* Supplied declaration required: FUN_002e7908. */
 extern int FUN_002eac34(unsigned int);
-/* Supplied declaration required: FUN_002ed280. */
-extern int FUN_002ed420(int, int, unsigned int);
+/* Supplied declaration required: streamSkip. */
+extern int streamReadBytes(int, int, unsigned int);
 extern int FUN_002f5c4c(int, unsigned int);
 /* Supplied declaration required: FUN_002f5c90. */
 
@@ -64,7 +64,7 @@ void FUN_0010c6a0(int param_1,int param_2,int param_3,unsigned int *param_4)
     iStack_1c = param_3;
     temp_v6 = param_4;
     FUN_002f5c90(param_1,param_2,param_3,temp_v3 + 2);
-    if ((param_1 != 0) && (temp_v0 = FUN_002ed420(param_2,param_3 + 0x28,0x10), temp_v0 != 0)) {
+    if ((param_1 != 0) && (temp_v0 = streamReadBytes(param_2,param_3 + 0x28,0x10), temp_v0 != 0)) {
       *(unsigned int *)(param_3 + 0x38) = 0x10;
       temp_v0 = *(int *)(param_2 + 8);
       if ((temp_v3[2] == 0) ||
@@ -72,7 +72,7 @@ void FUN_0010c6a0(int param_1,int param_2,int param_3,unsigned int *param_4)
         temp_v2[0] = (int *)romwright_piece_3_1((((unsigned int)(temp_v2[0]) >> 8) & 0xffffffU),*(unsigned char *)(param_3 + 0x25));
         temp_v4 = (unsigned int)(*(unsigned char *)(param_3 + 0x25) >> 4);
         if (temp_v4 < 0xc) {
-          FUN_002e74bc(*(unsigned int *)(param_3 + 0xd8));
+          onlineBufferReset(*(unsigned int *)(param_3 + 0xd8));
           if (temp_v3[0] != 0) {
             if (*(unsigned int *)(temp_v0 + 0x10) < (unsigned int)(*(int *)(param_2 + 0xc) + temp_v3[0])) {
               return;
@@ -81,7 +81,7 @@ void FUN_0010c6a0(int param_1,int param_2,int param_3,unsigned int *param_4)
             strAssign(temp_v1,*(int *)(temp_v0 + 0xc) + *(int *)(temp_v0 + 0x18) +
                                *(int *)(param_2 + 0xc),temp_v3[0],0xffffffff);
             if ((temp_v1 != 0) &&
-               (FUN_002ed280(param_2,temp_v3[0]), *(int *)(*(int *)(param_3 + 0xd8) + 0x10) != 0))
+               (streamSkip(param_2,temp_v3[0]), *(int *)(*(int *)(param_3 + 0xd8) + 0x10) != 0))
             {
               temp_v0 = FUN_002eac34(temp_v4);
               piVar3 = *(int **)(temp_v0 + 0x14);

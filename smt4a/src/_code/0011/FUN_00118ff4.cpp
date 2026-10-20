@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e5700(...);
+int rt_vec_dtor(...);
 int FUN_002f5020(unsigned char [56], unsigned char *, int, int);
 int FUN_00304efc(...);
 int FUN_0030540c(...);
@@ -13,7 +13,7 @@ extern unsigned char LAB_001145e5; /* 0x1145e5 */
 extern unsigned char LAB_00114615; /* 0x114615 */
 extern unsigned char LAB_0030ca9d; /* 0x30ca9d */
 
-/* Supplied declaration required: FUN_002e5700. */
+/* Supplied declaration required: rt_vec_dtor. */
 /* Supplied declaration required: FUN_002f5020. */
 extern int FUN_00304d10(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00304efc. */
@@ -42,10 +42,10 @@ void FUN_00118ff4(int param_1,unsigned int param_2)
     if (*(char *)(param_1 + 4) != '\0') {
       puVar2 = &LAB_00114615;
       temp_v1 = 0x38;
-      FUN_002e5700(temp_v2,puVar2,temp_v1,1);
+      rt_vec_dtor(temp_v2,puVar2,temp_v1,1);
       return;
     }
-    FUN_002e5700(temp_v2,&LAB_00114615,0x38,1);
+    rt_vec_dtor(temp_v2,&LAB_00114615,0x38,1);
   }
   temp_v0 = FUN_00304d10(param_2,1);
   if (temp_v0 != 0) {
@@ -56,7 +56,7 @@ void FUN_00118ff4(int param_1,unsigned int param_2)
   FUN_0030540c(param_1,temp_v2);
   puVar2 = (unsigned char *)0x30ca93;
   temp_v1 = 0x30;
-  FUN_002e5700(temp_v2,puVar2,temp_v1,1);
+  rt_vec_dtor(temp_v2,puVar2,temp_v1,1);
   return;
 }
 

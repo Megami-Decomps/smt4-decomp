@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_0025a03c(unsigned int);
+extern int effIsFinished(unsigned int);
 extern int FUN_002d5748(unsigned int);
 extern int FUN_002d57a8(unsigned int);
 
@@ -15,7 +15,7 @@ unsigned int FUN_002636e4(int param_1)
   int temp_v0;
   unsigned int temp_v1;
   
-  temp_v0 = FUN_0025a03c(*(unsigned int *)(param_1 + 8));
+  temp_v0 = effIsFinished(*(unsigned int *)(param_1 + 8));
   temp_v1 = 0;
   if (((temp_v0 != 0) && (temp_v0 = FUN_002d5748(*(unsigned int *)(param_1 + 8)), temp_v1 = 0, temp_v0 != 0))
      && (temp_v0 = FUN_002d57a8(*(unsigned int *)(param_1 + 8)), temp_v1 = 0, temp_v0 != 0)) {

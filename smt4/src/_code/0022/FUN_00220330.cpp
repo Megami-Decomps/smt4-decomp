@@ -10,7 +10,7 @@ int FUN_002ad80c(unsigned char [496], unsigned int, unsigned int, int);
 int FUN_002ad888(void);
 int FUN_002bb5a4(unsigned char *, unsigned char [496], int);
 int FUN_002c3510(void);
-int FUN_002c52f8(void);
+int asdFatalError(void);
 
 /* Supplied declaration required: FUN_00254824. */
 /* Supplied declaration required: FUN_00254884. */
@@ -18,7 +18,7 @@ int FUN_002c52f8(void);
 /* Supplied declaration required: FUN_002ad888. */
 /* Supplied declaration required: FUN_002bb5a4. */
 /* Supplied declaration required: FUN_002c3510. */
-/* Supplied declaration required: FUN_002c52f8. */
+/* Supplied declaration required: asdFatalError. */
 extern void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(unsigned int);
 
 
@@ -54,7 +54,7 @@ unsigned char * FUN_00220330(int param_1,int param_2,unsigned int param_3)
     FUN_00254824(puVar1);
     if ((*(unsigned int *)(param_1 + 8) & 0xfffffffe) != 0) {
       if ((*(unsigned int *)(param_1 + 8) & 1) != 0) {
-        FUN_002c52f8();
+        asdFatalError();
       }
       nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(*(unsigned int *)(param_1 + 8) & 0xfffffffe);
       *(unsigned int *)(param_1 + 8) = 0;

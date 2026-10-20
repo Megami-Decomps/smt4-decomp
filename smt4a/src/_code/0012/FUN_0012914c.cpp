@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001290ba(unsigned int *);
 int FUN_00130664(int *, int *, int *, int *);
-int FUN_002e6e14(...);
+int asdOperatorDeleteArray(...);
 int FUN_00303350(int);
 int FUN_0030cdc0(int);
 int FUN_0030cde0(int *, unsigned int, int);
@@ -21,7 +21,7 @@ extern unsigned char DAT_00559038; /* 0x559038 */
 
 /* Supplied declaration required: FUN_001290ba. */
 /* Supplied declaration required: FUN_00130664. */
-/* Supplied declaration required: FUN_002e6e14. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
 extern int FUN_002f5966(unsigned int *);
 /* Supplied declaration required: FUN_00303350. */
 /* Supplied declaration required: FUN_0030cdc0. */
@@ -53,8 +53,8 @@ void FUN_0012914c(unsigned int *param_1,unsigned int param_2,int param_3,unsigne
     FUN_0030cde0(piVar3,param_1[0x19],0);
     while (piVar2 = (int *)*piVar3, piVar2 != (int *)0x0) {
       *piVar3 = *piVar2;
-      FUN_002e6e14(piVar2[2]);
-      FUN_002e6e14(piVar2);
+      asdOperatorDeleteArray(piVar2[2]);
+      asdOperatorDeleteArray(piVar2);
     }
   }
   temp_v0 = FUN_002f5966(param_1 + 9);

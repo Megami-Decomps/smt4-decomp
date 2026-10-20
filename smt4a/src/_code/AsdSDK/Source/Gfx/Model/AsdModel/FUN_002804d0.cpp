@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001801e4(unsigned char *, int);
 int resourceListDestroy(unsigned int);
 int asdMemFree(...);
-int FUN_001ab878(int);
+int asdFileRequestRelease(int);
 int nw_gfx_res_ResGraphicsFile_Cleanup(int *);
 
 typedef int romwright_code(...);
@@ -25,7 +25,7 @@ extern unsigned char DAT_00636ec8; /* 0x636ec8 */
 /* Supplied declaration required: FUN_001801e4. */
 /* Supplied declaration required: resourceListDestroy. */
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_001ab878. */
+/* Supplied declaration required: asdFileRequestRelease. */
 extern int FUN_0037a86c(unsigned char *, unsigned int *);
 /* Supplied declaration required: nw_gfx_res_ResGraphicsFile_Cleanup. */
 
@@ -154,7 +154,7 @@ void FUN_002804d0(unsigned int *param_1,int param_2,unsigned int param_3,int par
     asdMemFree(puVar1);
     DAT_005b3c2c = DAT_005b3c2c - 1;
     if (param_2 != 0) {
-      FUN_001ab878(param_2);
+      asdFileRequestRelease(param_2);
     }
   }
   asdMemFree(param_1[9]);

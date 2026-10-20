@@ -5,22 +5,22 @@
 extern "C" {
 
 int FUN_001a08d0(int);
-int FUN_001af214(void);
+int nn_os_LightEvent_TryWait(void);
 int FUN_001b6660(unsigned int, int);
 int FUN_001d0b28(unsigned int, int);
-int FUN_001d2384(unsigned int);
+int voiceClearCallback(unsigned int);
 int FUN_001d239c(unsigned int);
 int FUN_0045b96c(void);
 int FUN_00462b74(int);
 int nw_ut_internal_LinkListImpl_insert(int, int, int);
 
 /* Supplied declaration required: FUN_001a08d0. */
-/* Supplied declaration required: FUN_001af214. */
+/* Supplied declaration required: nn_os_LightEvent_TryWait. */
 extern unsigned int FUN_001b1f04(void);
 /* Supplied declaration required: FUN_001b6660. */
 extern unsigned int FUN_001c35d8(void);
 /* Supplied declaration required: FUN_001d0b28. */
-/* Supplied declaration required: FUN_001d2384. */
+/* Supplied declaration required: voiceClearCallback. */
 /* Supplied declaration required: FUN_001d239c. */
 /* Supplied declaration required: FUN_0045b96c. */
 /* Supplied declaration required: FUN_00462b74. */
@@ -53,12 +53,12 @@ void FUN_004630d0(int param_1)
         FUN_00462b74(param_1);
         FUN_001d239c(*(unsigned int *)(param_1 + 0x9c));
         if (*(int *)(param_1 + 0x9c) != 0) {
-          FUN_001d2384(*(unsigned int *)(param_1 + 0x9c));
+          voiceClearCallback(*(unsigned int *)(param_1 + 0x9c));
           *(unsigned int *)(param_1 + 0x9c) = 0;
         }
       }
       else {
-        FUN_001d2384(*(unsigned int *)(param_1 + 0x9c));
+        voiceClearCallback(*(unsigned int *)(param_1 + 0x9c));
         *(unsigned int *)(param_1 + 0x9c) = 0;
       }
     }
@@ -72,7 +72,7 @@ void FUN_004630d0(int param_1)
   if (temp_v2 != 0) {
     temp_v3 = *(int *)(param_1 + 0xa4);
     temp_v1 = temp_v2 + 0xc;
-    FUN_001af214();
+    nn_os_LightEvent_TryWait();
     if (temp_v1 != 0) {
       if (*(int *)(temp_v2 + 0x3c) != 0) {
         FUN_0045b96c();

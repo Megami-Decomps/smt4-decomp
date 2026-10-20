@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern Settings5B DAT_005b3bf4;
+extern Settings5B g_gfxSettings;
 
 void settings5BClearFlags(u32 mask)
 {
-    DAT_005b3bf4.flags &= ~mask;
+    g_gfxSettings.flags &= ~mask;
 }
 
 } /* extern "C" */

@@ -7,7 +7,7 @@ typedef struct Group {
     /* 0x62 */ u16 key;
 } Group;
 
-Group *FUN_001ab854(int id);
+Group *gameGetSlotRecord(int id);
 int dataTableGetEntry0102Value(u16 key);
 
 /* Comparator: entries without a group (id < 0) sort last; otherwise orders by the groups' keys (a - b). */
@@ -21,8 +21,8 @@ int groupKeyCompare(u32 unused, int *a, int *b)
         }
     } else {
         if (*a >= 0) {
-            Group *groupB = FUN_001ab854(*b);
-            Group *groupA = FUN_001ab854(*a);
+            Group *groupB = gameGetSlotRecord(*b);
+            Group *groupA = gameGetSlotRecord(*a);
             int keyB = dataTableGetEntry0102Value(groupB->key);
             int keyA = dataTableGetEntry0102Value(groupA->key);
 

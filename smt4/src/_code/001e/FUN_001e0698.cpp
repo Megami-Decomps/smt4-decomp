@@ -7,15 +7,15 @@ extern u8 LAB_0032c6c8;
 #define REQUEST_CALLBACK (&LAB_0032c6c8)
 
 int FUN_002b7bca(u32 arg0, u32 arg1, int size, u8 *callback);
-u32 FUN_00297410(u32 arg);
+u32 fileSlotLoad(u32 arg);
 u32 dataTableGetCount(u32 arg);
 u32 dataTableGetEntries(void);
 u32 dataTableGet(u32 arg0, u32 arg1);
 
-/* Submits the 0x60-byte request for lookup index (0x16, 0), then for (0x16, 1); returns FUN_00297410(0x16). */
+/* Submits the 0x60-byte request for lookup index (0x16, 0), then for (0x16, 1); returns fileSlotLoad(0x16). */
 u32 FUN_001e0698(void)
 {
-    u32 result = FUN_00297410(0x16);
+    u32 result = fileSlotLoad(0x16);
     u32 selected;
     u32 other;
 

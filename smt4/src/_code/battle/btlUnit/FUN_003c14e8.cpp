@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00282924(unsigned int *, int);
+int btlMainFindEntryByListedId(unsigned int *, int);
 int VectorSignedToFloat(...);
 
 typedef struct fn_003c14e8_arg1 fn_003c14e8_arg1;
@@ -30,7 +30,7 @@ extern int DAT_00439cec; /* 0x439cec */
 extern unsigned int DAT_00439cf8; /* 0x439cf8 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00282924. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 
 
 void FUN_003c14e8(unsigned int *param_1,fn_003c14e8_arg1 *param_2)
@@ -52,7 +52,7 @@ void FUN_003c14e8(unsigned int *param_1,fn_003c14e8_arg1 *param_2)
   
   temp_v0 = DAT_00439cec;
   if (((param_2->field_0x50 & 2) != 0) &&
-     (FUN_00282924(param_1,(int)param_2->field_0x62), param_1 != (unsigned int *)0x0)) {
+     (btlMainFindEntryByListedId(param_1,(int)param_2->field_0x62), param_1 != (unsigned int *)0x0)) {
     if (((*param_1 & 0x80000) == 0) || (param_2->field_0x64 == 0xffff)) {
       param_2->field_0x6c = 0xffffffff;
     }

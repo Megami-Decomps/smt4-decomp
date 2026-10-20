@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0022abe0(void);
-int FUN_00282924(unsigned int, unsigned int);
+int btlMainFindEntryByListedId(unsigned int, unsigned int);
 int FUN_00283e48(void);
 
 /* stack frame of param_1: 5 slot(s), 20 byte(s) */
@@ -19,7 +19,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_0022abe0. */
 extern int randRange(unsigned int);
-/* Supplied declaration required: FUN_00282924. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_00283e48. */
 extern unsigned int btlGetMainState(void);
 
@@ -36,7 +36,7 @@ unsigned short FUN_003bee64(unsigned int param_1)
   unsigned short temp_v4 [12];
   
   temp_v0 = btlGetMainState();
-  FUN_00282924(temp_v0,param_1);
+  btlMainFindEntryByListedId(temp_v0,param_1);
   temp_v4[0] = 0;
   temp_v4[1] = 0;
   temp_v4[2] = 0;

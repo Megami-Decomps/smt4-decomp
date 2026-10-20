@@ -26,7 +26,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_3_stack;
 
-extern int DAT_005b40e0; /* 0x5b40e0 */
+extern int g_commandBufferCursor; /* 0x5b40e0 */
 
 /* Supplied declaration required: FUN_001b0928. */
 /* Supplied declaration required: FUN_001b0c5c. */
@@ -77,8 +77,8 @@ void FUN_001a38c8(int param_1,int param_2,fn_001a38c8_arg2 *param_3)
     FUN_001b1434(*(unsigned int *)(param_1 + 8),param_2);
     FUN_001b0c5c(param_1,param_3,piVar4,*(unsigned int *)(param_2 + 0x28));
     temp_v1 = *(unsigned int *)(param_2 + 0x6c);
-    nnnstdMemCpy(DAT_005b40e0,*(unsigned int *)(param_2 + 0x68),temp_v1);
-    DAT_005b40e0 = DAT_005b40e0 + (temp_v1 & 0xfffffffc);
+    nnnstdMemCpy(g_commandBufferCursor,*(unsigned int *)(param_2 + 0x68),temp_v1);
+    g_commandBufferCursor = g_commandBufferCursor + (temp_v1 & 0xfffffffc);
   }
   return;
 }

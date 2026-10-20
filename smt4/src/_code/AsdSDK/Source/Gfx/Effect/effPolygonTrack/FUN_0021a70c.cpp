@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0026933c(int);
+int effBehaviorRun(int);
 int FUN_002c74ac(...);
 int FUN_002f9f90(...);
 int VectorFloatToUnsigned(double, int);
@@ -33,7 +33,7 @@ extern float DAT_004ea938; /* 0x4ea938 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: FUN_0026933c. */
+/* Supplied declaration required: effBehaviorRun. */
 /* Supplied declaration required: FUN_002c74ac. */
 /* Supplied declaration required: FUN_002f9f90. */
 
@@ -68,7 +68,7 @@ void FUN_0021a70c(int *param_1)
   unsigned int temp_v20;
   
   if (*param_1 != 0) {
-    FUN_0026933c(param_1[0xc]);
+    effBehaviorRun(param_1[0xc]);
     temp_v1 = param_1[1];
     temp_v16 = 0.003921569f;
     temp_v2 = 0;

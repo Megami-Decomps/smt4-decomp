@@ -25,6 +25,6 @@ typedef struct Sys44e380 {
     /* 0x18 */ u32 unk18;
 } Sys44e380;
 
-extern Sys44e380 DAT_0044e380;
+extern Sys44e380 g_nnAppletState;
 
 #endif

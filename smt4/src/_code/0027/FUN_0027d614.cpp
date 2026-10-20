@@ -9,7 +9,7 @@ int dataTableGet(int, int);
 
 extern int g_aocSystem; /* 0x433158 */
 
-extern int FUN_002c09d0(void);
+extern int gameFlagIsSet(void);
 /* Supplied declaration required: dataTableGetCount. */
 extern int dataTableGetEntries(void);
 /* Supplied declaration required: dataTableGet. */
@@ -46,8 +46,8 @@ char * FUN_0027d614(int param_1,int param_2)
         return (char *)0x0;
       }
       if ((((*pcVar5 == param_1) && (pcVar5[1] == param_2)) &&
-          ((*(short *)(pcVar5 + 2) == 0 || (temp_v0 = FUN_002c09d0(), temp_v0 != 0)))) &&
-         ((*(short *)(pcVar5 + 4) == 0 || (temp_v0 = FUN_002c09d0(), temp_v0 == 0)))) {
+          ((*(short *)(pcVar5 + 2) == 0 || (temp_v0 = gameFlagIsSet(), temp_v0 != 0)))) &&
+         ((*(short *)(pcVar5 + 4) == 0 || (temp_v0 = gameFlagIsSet(), temp_v0 == 0)))) {
         return pcVar5;
       }
       temp_v3 = temp_v3 + 1;

@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern ObjectE0 *DAT_0057f65c;
+extern ObjectE0 *g_frameTex;
 
 void objectE0Reset(u32 value)
 {
-    ObjectE0 *obj = DAT_0057f65c;
+    ObjectE0 *obj = g_frameTex;
 
     obj->unk144E = 1;
     obj->unk1450 = 0;

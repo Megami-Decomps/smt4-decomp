@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00100388(unsigned char [44], unsigned char *, char *);
 int asdMemoryAllocTracked(int, int, int, int);
 int FUN_001642e4(unsigned char *, unsigned int [2], int, int);
-int FUN_0018719c(...);
+int gameFlagIsSet(...);
 int FUN_001abbc4(void);
 int FUN_001b4eb8(void);
 int FUN_003275c0(void);
@@ -25,7 +25,7 @@ extern unsigned int *g_mapEpl; /* 0x580c88 */
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_001642e4. */
-/* Supplied declaration required: FUN_0018719c. */
+/* Supplied declaration required: gameFlagIsSet. */
 /* Supplied declaration required: FUN_001abbc4. */
 /* Supplied declaration required: FUN_001b4eb8. */
 /* Supplied declaration required: FUN_003275c0. */
@@ -81,8 +81,8 @@ void FUN_002b77bc(int param_1,int param_2)
       FUN_003275c0();
       if (((*pcVar4 != -1) &&
           ((temp_v0 = *(short *)(pcVar4 + 0x1a), *(short *)(pcVar4 + 0x18) == 0 ||
-           (temp_v1 = FUN_0018719c(), temp_v1 != 0)))) &&
-         ((temp_v0 == 0 || (temp_v1 = FUN_0018719c((int)temp_v0), temp_v1 == 0)))) {
+           (temp_v1 = gameFlagIsSet(), temp_v1 != 0)))) &&
+         ((temp_v0 == 0 || (temp_v1 = gameFlagIsSet((int)temp_v0), temp_v1 == 0)))) {
         temp_v1 = (int)*pcVar4;
         temp_v3 = temp_v1 == param_1;
         if (temp_v3) {

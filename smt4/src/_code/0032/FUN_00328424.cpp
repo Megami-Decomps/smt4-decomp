@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern int FUN_002bfde4(u32 mode);
+extern int padIsButtonPressed(u32 mode);
 
 u8 FUN_00328424(void)
 {
-    return FUN_002bfde4(0) != 0;
+    return padIsButtonPressed(0) != 0;
 }
 
 } /* extern "C" */

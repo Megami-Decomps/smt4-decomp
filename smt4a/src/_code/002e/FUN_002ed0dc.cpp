@@ -5,7 +5,7 @@
 extern "C" {
 
 int sysMemClear(unsigned int *, int);
-int FUN_002e9318(unsigned char [12]);
+int onlineStringDestroy(unsigned char [12]);
 int FUN_00307134(unsigned int *, unsigned int);
 
 typedef struct fn_002ed0dc_arg0 fn_002ed0dc_arg0;
@@ -39,8 +39,8 @@ extern unsigned char DAT_0055a400; /* 0x55a400 */
 
 extern int FUN_0012f32c(void);
 /* Supplied declaration required: sysMemClear. */
-extern unsigned int FUN_002e9300(unsigned char *, unsigned char *);
-/* Supplied declaration required: FUN_002e9318. */
+extern unsigned int onlineStringConstruct(unsigned char *, unsigned char *);
+/* Supplied declaration required: onlineStringDestroy. */
 extern unsigned int *initVtable00558fb4(fn_002ed0dc_arg0 *, unsigned int);
 extern unsigned int FUN_0030710c(unsigned int *, unsigned int);
 /* Supplied declaration required: FUN_00307134. */
@@ -87,9 +87,9 @@ unsigned int * FUN_002ed0dc(fn_002ed0dc_arg0 *param_1,unsigned int param_2)
   puVar1[0x1e] = 0;
   puVar1[0x1f] = 0;
   puVar1[0xb] = puVar1[0xb] | 8;
-  temp_v1 = FUN_002e9300(temp_v2,&LAB_002ed16c);
+  temp_v1 = onlineStringConstruct(temp_v2,&LAB_002ed16c);
   FUN_00307134(puVar1,temp_v1);
-  FUN_002e9318(temp_v2);
+  onlineStringDestroy(temp_v2);
   return puVar1;
 }
 

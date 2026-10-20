@@ -16,7 +16,7 @@ int FUN_004f7f08(void);
 int FUN_004f8fa0(int);
 
 typedef int romwright_code(...);
-extern int DAT_00571508; /* 0x571508 */
+extern int g_btlCamera; /* 0x571508 */
 
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: sysMemClear. */
@@ -62,8 +62,8 @@ void FUN_004f5e6c(int param_1)
   *(unsigned int *)(param_1 + 0x3050) = 0;
   FUN_0035bbc4();
   FUN_0035bb70();
-  if (DAT_00571508 != 0) {
-    *(unsigned int *)(DAT_00571508 + 0x64c) = *(unsigned int *)(DAT_00571508 + 0x64c) & 0xf7ffffff;
+  if (g_btlCamera != 0) {
+    *(unsigned int *)(g_btlCamera + 0x64c) = *(unsigned int *)(g_btlCamera + 0x64c) & 0xf7ffffff;
   }
   FUN_004f8fa0(param_1);
   obj4FSlots28Reset(param_1);

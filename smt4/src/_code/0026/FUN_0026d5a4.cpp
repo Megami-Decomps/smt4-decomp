@@ -10,14 +10,14 @@ int timerStart(void *timer, int a, int b);
 
 void FUN_0026d5a4(void)
 {
-    Scene43dcf0 *scene = DAT_0043dcf0;
+    Scene43dcf0 *scene = g_partyPanel;
     u8 state;
     int i;
 
-    if (DAT_0043dcf0 == NULL) {
+    if (g_partyPanel == NULL) {
         return;
     }
-    state = DAT_0043dcf0->state;
+    state = g_partyPanel->state;
     if ((state != 12 && state != 4) && (state != 15)) {
         i = 0;
         do {

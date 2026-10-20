@@ -9,7 +9,7 @@ typedef struct {
     unsigned int spC; /* 0xc: local_c */
 } void_stack;
 
-extern int DAT_0044e190; /* 0x44e190 */
+extern int g_statusDown; /* 0x44e190 */
 
 
 void FUN_0026adb4(void)
@@ -22,7 +22,7 @@ void FUN_0026adb4(void)
   int temp_v4;
   int temp_v5;
   
-  temp_v1 = DAT_0044e190;
+  temp_v1 = g_statusDown;
   temp_v3 = 8;
   temp_v2 = 0;
   do {

@@ -2,10 +2,10 @@
 #include "AsdSDK/AsdDebug.h"
 
 extern "C" {
-extern const char DAT_0053d660[]; /* __FILE__ of AsdGxCommandList.cpp */
+extern const char g_asdGxCommandListSourcePath[]; /* __FILE__ of AsdGxCommandList.cpp */
 u32 FUN_00196068(u32 id, u32 a, u32 b, u32 c, u32 d, u32 size, void *buffer);
 void *asdMemoryAllocAligned(int heap, int alignClass, int unk08, u32 size, u32 align, int fromFront);
-void FUN_0017cdb4(void);
+void nngxGetError(void);
 void asdMemFree(void *block);
 
 /* Refreshes the heap copy of a list's first state entry: frees the old copy, asks the library
@@ -19,11 +19,11 @@ void asdGxCommandListRefreshCopy(AsdGxCommandList *list)
     if (list->entries[0].values[1] != 0) {
         list->entries[0].copySize = FUN_00196068(list->id, list->entries[0].values[0], list->entries[0].values[1],
                                                  list->entries[0].values[2], list->entries[0].values[3], 0, NULL);
-        asdDebugTrace(DAT_0053d660, 211);
+        asdDebugTrace(g_asdGxCommandListSourcePath, 211);
         list->entries[0].copy = asdMemoryAllocAligned(0x100, 0x100, 0, list->entries[0].copySize, 0x10, 1);
         FUN_00196068(list->id, list->entries[0].values[0], list->entries[0].values[1], list->entries[0].values[2],
                      list->entries[0].values[3], list->entries[0].copySize, list->entries[0].copy);
-        FUN_0017cdb4();
+        nngxGetError();
     }
 }
 

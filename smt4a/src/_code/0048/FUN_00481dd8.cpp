@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0014bef4(...);
+int randRange(...);
 int VectorFloatToUnsigned(...);
 int VectorUnsignedToFloat(unsigned int, int);
 int nn_math_ARMv6_VEC3TransformAsm_2AD44C(float *, float *);
@@ -55,7 +55,7 @@ static float romwright_sqrt_4(float value)
     return (float)sqrt((double)value);
 }
 #endif
-/* Supplied declaration required: FUN_0014bef4. */
+/* Supplied declaration required: randRange. */
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
 
 
@@ -101,7 +101,7 @@ void FUN_00481dd8(int param_1)
   
   temp_v0 = *(int *)(param_1 + 0xc);
   temp_v14 = 40.0f;
-  temp_v1 = FUN_0014bef4(99);
+  temp_v1 = randRange(99);
   temp_v15 = 1.0f;
   if (temp_v1 % 10 == 0) {
     temp_v10 = *(float *)(g_lmapScene + 0x1c) - *(float *)(temp_v0 + 0x2c);
@@ -113,7 +113,7 @@ void FUN_00481dd8(int param_1)
     *(float *)(param_1 + 0x18) = temp_v9 * temp_v11 * temp_v14;
     return;
   }
-  temp_v2 = FUN_0014bef4(0x168,(temp_v1 / 10) * -5,temp_v1 * -0x33333333);
+  temp_v2 = randRange(0x168,(temp_v1 / 10) * -5,temp_v1 * -0x33333333);
   temp_v5 = (float)VectorUnsignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v1 = (in_fpscr & 0xfffffff) | ((unsigned int)(0.0f <= temp_v5 * 0.7111111f) << 0x1d);
   for (temp_v5 = romwright_fabs_4(temp_v5 * 0.7111111f); (int)temp_v5 >= 0x47800000; temp_v5 = temp_v5 - 65536.0f) {

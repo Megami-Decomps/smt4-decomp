@@ -5,9 +5,9 @@
 extern "C" {
 
 int sysPlaySe(...);
-int FUN_00169ddc(...);
-int FUN_001801a4(void);
-int FUN_001846d0(...);
+int eventQueueAddUnique(...);
+int gameGetPlayerData(void);
+int uiSpriteSelectAnim(...);
 int FUN_0020b490(...);
 int roundObjFinish(...);
 
@@ -22,11 +22,11 @@ int FUN_0020214c(void);
 int FUN_0022e774(void);
 int FUN_0026c3c4(int);
 int FUN_00275bc8(...);
-int FUN_00275f44(...);
+int scrScriptProcessStartEntry(...);
 int FUN_00285774(void);
 int FUN_002a5e7c(...);
 int FUN_002a7288(void);
-int FUN_002e342c(unsigned char [32], unsigned int);
+int libc_strcpy(unsigned char [32], unsigned int);
 int FUN_002f01c4(int);
 int FUN_003180c4(...);
 int FUN_00333dc8(...);
@@ -64,17 +64,17 @@ extern unsigned char LAB_00321c94; /* 0x321c94 */
 extern unsigned int FUN_0014bf3c(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_00163aa4. */
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_00169ddc. */
+/* Supplied declaration required: eventQueueAddUnique. */
 /* Supplied declaration required: FUN_00180118. */
-/* Supplied declaration required: FUN_001801a4. */
+/* Supplied declaration required: gameGetPlayerData. */
 /* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: FUN_001846d0. */
+/* Supplied declaration required: uiSpriteSelectAnim. */
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern unsigned int dataTableGetEntries(void);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
-extern int FUN_001ab854(int);
+extern int gameGetSlotRecord(int);
 /* Supplied declaration required: FUN_0020214c. */
 /* Supplied declaration required: FUN_0020b490. */
 extern int FUN_00224880(unsigned int);
@@ -83,13 +83,13 @@ extern int FUN_0026272c(void);
 extern int FUN_0026c3a0(void);
 /* Supplied declaration required: FUN_0026c3c4. */
 /* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00285774. */
 extern int FUN_002a4b28(void);
 extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_002a5e7c. */
 /* Supplied declaration required: FUN_002a7288. */
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_002f01c4. */
 /* Supplied declaration required: FUN_003180c4. */
 extern int FUN_0032169c(void);
@@ -147,7 +147,7 @@ void FUN_002f5064(int param_1)
   
   temp_v11 = param_1 + *(int *)(param_1 + 0x74c0) * 0x150;
   pcVar14 = (char *)(temp_v11 + 0x442c);
-  temp_v2 = FUN_001ab854((int)*pcVar14);
+  temp_v2 = gameGetSlotRecord((int)*pcVar14);
   temp_v3 = *(int *)(param_1 + 0x436c);
   temp_v13 = param_1 + 0x854;
   if (temp_v3 == 5) {
@@ -258,10 +258,10 @@ void FUN_002f5064(int param_1)
       FUN_00285774();
       temp_v5 = (unsigned int)*(unsigned short *)(temp_v2 + 0x62);
       FUN_00180118(temp_v5);
-      FUN_002e342c(temp_v18,temp_v5);
+      libc_strcpy(temp_v18,temp_v5);
       FUN_003180c4(8,temp_v18);
       temp_v4 = FUN_0014bf3c(*(unsigned short *)(temp_v2 + 0x62),0);
-      FUN_002e342c(temp_v18,temp_v4);
+      libc_strcpy(temp_v18,temp_v4);
       FUN_003180c4(0x10,temp_v18);
       scrScriptProcessDestroy(*(unsigned int *)(param_1 + 0x43ac));
       asdMemFree(*(unsigned int *)(param_1 + 0x43b0));
@@ -298,7 +298,7 @@ LAB_002f56d4:
     if (*(char *)(temp_v13 + 0x8a) == '\0') {
       return;
     }
-    FUN_00275f44(*(unsigned int *)(param_1 + 0x43ac),4);
+    scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x43ac),4);
     if (*(char *)(temp_v20 + 0xd4) == '\0') {
       if (*(char *)(param_1 + 0x7f2c) != '\0') {
         FUN_002a5e7c(*(unsigned short *)(temp_v2 + 0x62));
@@ -324,7 +324,7 @@ LAB_002f56d4:
       temp_v5 = (unsigned int)*(unsigned short *)(temp_v2 + 0x62);
       FUN_00184310();
       FUN_00184310(*(unsigned short *)(temp_v5 + 0x32));
-      FUN_001801a4();
+      gameGetPlayerData();
       if (((int)(*(unsigned short *)(temp_v5 + 0x30) - 2) <= (int)(unsigned int)*(unsigned short *)(temp_v2 + 100)) &&
          ((unsigned int)*(unsigned short *)(temp_v2 + 100) < (unsigned int)*(unsigned short *)(temp_v5 + 0x30))) {
         FUN_0022e774();
@@ -344,7 +344,7 @@ LAB_002f56d4:
         }
         temp_v2 = *(int *)(temp_v11 + 0x4574);
         if (temp_v2 == 0) {
-          FUN_00275f44(*(unsigned int *)(param_1 + 0x43ac),0);
+          scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x43ac),0);
           sysPlaySe(0x67);
           *(int *)(param_1 + 0x436c) = *(int *)(param_1 + 0x436c) + 1;
           *(unsigned int *)(param_1 + 0x437c) = 0;
@@ -354,13 +354,13 @@ LAB_002f56d4:
           if (temp_v2 != 3) {
             return;
           }
-          FUN_00275f44(*(unsigned int *)(param_1 + 0x43ac),1);
+          scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x43ac),1);
           sysPlaySe(0x67);
           temp_v2 = 0xb;
         }
         else {
           FUN_00333dc8(1);
-          FUN_00275f44(*(unsigned int *)(param_1 + 0x43ac),1);
+          scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x43ac),1);
           sysPlaySe(0x67);
           temp_v2 = 0x14;
         }
@@ -389,7 +389,7 @@ LAB_002f56d4:
       }
       temp_v4 = *(unsigned int *)(param_1 + 0x43ac);
       temp_v7 = 2;
-      FUN_00275f44(temp_v4,temp_v7);
+      scrScriptProcessStartEntry(temp_v4,temp_v7);
       *(int *)(param_1 + 0x436c) = *(int *)(param_1 + 0x436c) + 1;
       return;
     case 4:
@@ -397,9 +397,9 @@ LAB_002f56d4:
       if (temp_v2 == 2) {
         *(int *)(param_1 + 0x436c) = *(int *)(param_1 + 0x436c) + 1;
         *(unsigned int *)(param_1 + 0x437c) = 0;
-        FUN_001846d0(temp_v13,8);
+        uiSpriteSelectAnim(temp_v13,8);
         FUN_002a7288();
-        FUN_00169ddc(0x100013f);
+        eventQueueAddUnique(0x100013f);
         return;
       }
     }
@@ -425,7 +425,7 @@ LAB_002f56d4:
         FUN_00333dc8(1);
         temp_v4 = *(unsigned int *)(param_1 + 0x43ac);
         temp_v7 = 3;
-        FUN_00275f44(temp_v4,temp_v7);
+        scrScriptProcessStartEntry(temp_v4,temp_v7);
         *(int *)(param_1 + 0x436c) = *(int *)(param_1 + 0x436c) + 1;
         return;
       }

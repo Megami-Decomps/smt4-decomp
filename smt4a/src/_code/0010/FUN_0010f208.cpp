@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002e9ec8(int, unsigned int);
+int onlineInstanceTableFind(int, unsigned int);
 int FUN_002ea3d0(int, unsigned int);
-int FUN_002ea446(int, int);
+int onlineJobSetStateTimed(int, int);
 int FUN_002ea704(void);
-int FUN_002eb588(unsigned char [8]);
+int onlineTimeGetNow(unsigned char [8]);
 int FUN_002f3490(unsigned char [40]);
 int FUN_002fa434(unsigned char [40], unsigned int);
 
@@ -16,13 +16,13 @@ extern unsigned char LAB_0010f1e9; /* 0x10f1e9 */
 extern unsigned char LAB_0010f2ac; /* 0x10f2ac */
 extern unsigned char LAB_0010f425; /* 0x10f425 */
 
-extern int FUN_002e9af4(void);
-/* Supplied declaration required: FUN_002e9ec8. */
+extern int onlineInstanceTableGetCurrent(void);
+/* Supplied declaration required: onlineInstanceTableFind. */
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned char *, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
-/* Supplied declaration required: FUN_002ea446. */
+/* Supplied declaration required: onlineJobSetStateTimed. */
 /* Supplied declaration required: FUN_002ea704. */
-/* Supplied declaration required: FUN_002eb588. */
+/* Supplied declaration required: onlineTimeGetNow. */
 extern int FUN_002eba9c(unsigned char *, int);
 /* Supplied declaration required: FUN_002f3490. */
 /* Supplied declaration required: FUN_002fa434. */
@@ -40,10 +40,10 @@ void FUN_0010f208(int param_1)
   
   temp_v0 = FUN_002ea704();
   if (temp_v0 != 0) {
-    temp_v0 = FUN_002e9af4();
-    FUN_002e9ec8(temp_v0,*(unsigned int *)(param_1 + 0x68));
+    temp_v0 = onlineInstanceTableGetCurrent();
+    onlineInstanceTableFind(temp_v0,*(unsigned int *)(param_1 + 0x68));
     if (temp_v0 != 0) {
-      FUN_002eb588(temp_v3);
+      onlineTimeGetNow(temp_v3);
       temp_v0 = FUN_002eba9c(temp_v3,param_1 + 0xd0);
       if (temp_v0 == 0) {
         if (*(char *)(param_1 + 0x80) != '\x02') {
@@ -51,7 +51,7 @@ void FUN_0010f208(int param_1)
             temp_v1 = FUN_002ea3c0(temp_v2,&LAB_0010f1e9,0,&LAB_0010f2ac);
             FUN_002ea3d0(param_1,temp_v1);
           }
-          FUN_002ea446(param_1,0x32);
+          onlineJobSetStateTimed(param_1,0x32);
           return;
         }
         temp_v1 = FUN_002ea704();

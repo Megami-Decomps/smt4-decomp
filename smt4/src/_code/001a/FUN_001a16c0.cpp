@@ -18,12 +18,12 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } void_stack;
 
-extern int DAT_0044dc20; /* 0x44dc20 */
+extern int g_result; /* 0x44dc20 */
 extern int g_titleScene; /* 0x44ea00 */
 
 extern int FUN_00296a18(int);
-extern unsigned int FUN_002bed98(int);
-extern unsigned int FUN_002beda4(int);
+extern unsigned int vec2GetYInt(int);
+extern unsigned int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf538. */
 /* Supplied declaration required: FUN_002c18e4. */
@@ -47,8 +47,8 @@ unsigned int FUN_001a16c0(void)
   int temp_v6;
   int *piVar8;
   
-  temp_v0 = DAT_0044dc20;
-  if ((DAT_0044dc20 != 0) && (temp_v1 = FUN_00296a18(DAT_0044dc20), temp_v1 != 0)) {
+  temp_v0 = g_result;
+  if ((g_result != 0) && (temp_v1 = FUN_00296a18(g_result), temp_v1 != 0)) {
     FUN_002c39a4(g_titleScene);
     temp_v1 = g_titleScene;
     temp_v2 = FUN_002c5d80(1,0);
@@ -121,8 +121,8 @@ unsigned int FUN_001a16c0(void)
           (**(romwright_code **)(temp_v1 + 0x1268))();
           *(unsigned char *)(temp_v1 + 0x1264) = 0;
         }
-        temp_v3 = FUN_002beda4(temp_v0 + 0x20);
-        temp_v4 = FUN_002bed98(temp_v0 + 0x20);
+        temp_v3 = vec2GetXInt(temp_v0 + 0x20);
+        temp_v4 = vec2GetYInt(temp_v0 + 0x20);
         FUN_003b3388(temp_v0,temp_v3,temp_v4);
         temp_v0 = g_titleScene;
         piVar8 = (int *)(g_titleScene + 0x124c);

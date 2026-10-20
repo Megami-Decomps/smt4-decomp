@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0025086c(int, unsigned char [8]);
 int dialogSetText(unsigned char [128]);
-int FUN_0027e774(int, int);
+int dialogOpen(int, int);
 int FUN_002bcfc0(void);
 int FUN_002bd06c(unsigned int);
 int FUN_002be624(...);
@@ -18,7 +18,7 @@ extern int g_mapIf; /* 0x447a78 */
 
 /* Supplied declaration required: FUN_0025086c. */
 /* Supplied declaration required: dialogSetText. */
-/* Supplied declaration required: FUN_0027e774. */
+/* Supplied declaration required: dialogOpen. */
 /* Supplied declaration required: FUN_002bcfc0. */
 /* Supplied declaration required: FUN_002bd06c. */
 /* Supplied declaration required: FUN_002be624. */
@@ -62,7 +62,7 @@ void FUN_002e8598(unsigned int param_1,unsigned int param_2,int param_3)
     FUN_002be624(temp_v4,&LAB_002e8764,param_2,temp_v5);
   }
   dialogSetText(temp_v4);
-  FUN_0027e774(0,1);
+  dialogOpen(0,1);
   if (temp_v3 == 0) {
     if (param_3 == 0) {
       return;

@@ -21,7 +21,7 @@ typedef struct BtlReflectWork {
 void *taskCreateDraw(const char *name, int type, int a, int b, void *calc, void *draw, void *arg, void *value);
 void *asdMemAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
 void FUN_0030fa74(void);
-extern BtlReflectWork *DAT_00434290;
+extern BtlReflectWork *g_btlActionReflect;
 
 /* Creates the reflect effect's draw task and its work block. */
 void FUN_002f34cc(BtlReflect *reflect)
@@ -31,7 +31,7 @@ void FUN_002f34cc(BtlReflect *reflect)
     reflect->drawTask = taskCreateDraw("btlActionReflect Calc", 2, 0, 0, (void *)0x002eb5b4, (void *)FUN_0030fa74, reflect, reflect->owner);
     asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\battle\\btlActionReflect.cpp", 3138);
     work = (BtlReflectWork *)asdMemAlloc(0x100, 0x100, 0, sizeof(BtlReflectWork), 1);
-    DAT_00434290 = work;
+    g_btlActionReflect = work;
     work->unk04 = 0;
     work->reflect = reflect;
     work->unk08 = 0;

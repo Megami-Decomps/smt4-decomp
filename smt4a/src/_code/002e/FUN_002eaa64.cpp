@@ -28,7 +28,7 @@ typedef struct {
 #endif
 /* Supplied declaration required: FUN_00132aec. */
 /* Supplied declaration required: FUN_002ea852. */
-extern unsigned int FUN_002ea93c(int *);
+extern unsigned int onlineUrlGetAddress(int *);
 /* Supplied declaration required: FUN_002ea948. */
 /* Supplied declaration required: FUN_002eac60. */
 /* Supplied declaration required: FUN_002eac8e. */
@@ -61,12 +61,12 @@ void FUN_002eaa64(int param_1,int *param_2)
     FUN_002eac60(temp_v10,0);
     FUN_002eac8e(temp_v10,0);
     temp_v5[0] = FUN_002eacbc(temp_v10);
-    temp_v2 = FUN_002ea93c(temp_v10 + 2);
+    temp_v2 = onlineUrlGetAddress(temp_v10 + 2);
     temp_v3 = param_1 + 0x54;
     temp_v1 = temp_v3;
     FUN_002ea852(temp_v3,temp_v2,temp_v5);
     if (temp_v1 != 0) {
-      temp_v2 = FUN_002ea93c(temp_v10 + 2);
+      temp_v2 = onlineUrlGetAddress(temp_v10 + 2);
       temp_v0 = FUN_002eacbc(temp_v10);
       temp_v4 = romwright_piece_3_1((((unsigned int)(temp_v4) >> 8) & 0xffffffU),temp_v0);
       FUN_002ea948(temp_v6,temp_v2,temp_v0);

@@ -7,7 +7,7 @@ extern "C" {
 int asdMemFree(unsigned int *);
 int FUN_003fd478(void);
 int partyCopyRecord100(unsigned int *);
-int FUN_003fd63c(int, int);
+int gameFlagSetValue(int, int);
 int rt_memcpy_w(int, unsigned int, int);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
@@ -20,11 +20,11 @@ typedef struct {
 extern int DAT_0057f69c; /* 0x57f69c */
 extern unsigned int DAT_0057f6a0; /* 0x57f6a0 */
 
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_003fd478. */
 /* Supplied declaration required: partyCopyRecord100. */
-/* Supplied declaration required: FUN_003fd63c. */
+/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -48,9 +48,9 @@ void FUN_00239b10(int param_1)
   puVar8 = (unsigned char *)(DAT_0057f69c + 0x27ec5);
   temp_v0 = *puVar8;
   temp_v6 = *(unsigned int *)(DAT_0057f69c + 0x8c);
-  temp_v2 = FUN_0018719c(0x556);
-  temp_v3 = FUN_0018719c(0x557);
-  temp_v4 = FUN_0018719c(0x421);
+  temp_v2 = gameFlagIsSet(0x556);
+  temp_v3 = gameFlagIsSet(0x557);
+  temp_v4 = gameFlagIsSet(0x421);
   puVar6 = (unsigned int *)(temp_v1 + 0x21e14);
   temp_v7 = *puVar6;
   FUN_003fd478();
@@ -61,13 +61,13 @@ void FUN_00239b10(int param_1)
     *(unsigned int *)(DAT_0057f69c + 0x8c) = temp_v6;
     *puVar8 = temp_v0;
     if (temp_v2 != 0) {
-      FUN_003fd63c(0x556,1);
+      gameFlagSetValue(0x556,1);
     }
     if (temp_v3 != 0) {
-      FUN_003fd63c(0x557,1);
+      gameFlagSetValue(0x557,1);
     }
     if (temp_v4 != 0) {
-      FUN_003fd63c(0x421,1);
+      gameFlagSetValue(0x421,1);
     }
   }
   asdMemFree(puVar6);

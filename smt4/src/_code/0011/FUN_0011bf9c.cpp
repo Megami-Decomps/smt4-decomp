@@ -5,7 +5,7 @@
 extern "C" {
 
 extern unsigned char DAT_004c6484; /* 0x4c6484 */
-extern unsigned char DAT_004c64a4; /* 0x4c64a4 */
+extern unsigned char g_callbackFuncs; /* 0x4c64a4 */
 
 
 unsigned int FUN_0011bf9c(int param_1)
@@ -18,7 +18,7 @@ unsigned int FUN_0011bf9c(int param_1)
     if (*(int *)(temp_v0 * 4 + 0x4c6464) == param_1) {
       *(unsigned int *)(temp_v0 * 4 + 0x4c6464) = 0;
       *(unsigned int *)(&DAT_004c6484 + temp_v0 * 4) = 0;
-      *(unsigned int *)(&DAT_004c64a4 + temp_v0 * 4) = 0;
+      *(unsigned int *)(&g_callbackFuncs + temp_v0 * 4) = 0;
       return 1;
     }
     temp_v0 = temp_v0 + 1;

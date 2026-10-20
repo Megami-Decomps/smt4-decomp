@@ -9,10 +9,10 @@ int FUN_0023266c(int, int, int, int);
 int FUN_0023346c(int);
 int FUN_002637c8(void);
 int FUN_00282bfc(int, int);
-int FUN_0028d6d0(void);
+int buttonHelpCreate(void);
 int FUN_0028d9b0(void);
 int FUN_0029be5c(...);
-int FUN_002a03a0(...);
+int soundChannelRequestIfEnabled(...);
 int FUN_002a03d8(...);
 int asdOperatorNew(void);
 int asdTMTexTableLoadSprites(int);
@@ -36,11 +36,11 @@ extern unsigned int *FUN_00233228(void);
 /* Supplied declaration required: FUN_002637c8. */
 /* Supplied declaration required: FUN_00282bfc. */
 extern int FUN_00287314(int);
-extern int FUN_00287468(unsigned int);
-/* Supplied declaration required: FUN_0028d6d0. */
+extern int bgmGetStateById(unsigned int);
+/* Supplied declaration required: buttonHelpCreate. */
 /* Supplied declaration required: FUN_0028d9b0. */
 /* Supplied declaration required: FUN_0029be5c. */
-/* Supplied declaration required: FUN_002a03a0. */
+/* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: FUN_002a03d8. */
 extern short *FUN_002c0a2c(unsigned char, unsigned int);
 /* Supplied declaration required: asdOperatorNew. */
@@ -117,7 +117,7 @@ unsigned int * FUN_003a5e30(unsigned int *param_1,unsigned int param_2,int param
     *(unsigned int *)(temp_v1 - 0x9ca4) = 0xd;
     *(unsigned int *)(temp_v1 - 0x9ca0) = 0;
     FUN_0028d9b0();
-    FUN_0028d6d0();
+    buttonHelpCreate();
     asdTMTexTableLoadSprites(0x2b);
     FUN_002c58c8(0x2b,0);
     *(unsigned int *)(temp_v1 - 0x992c) = 0x83;
@@ -141,16 +141,16 @@ unsigned int * FUN_003a5e30(unsigned int *param_1,unsigned int param_2,int param
       if (param_4 != 5) {
         if (param_4 != 9) {
           temp_v3 = 0x100005c;
-          temp_v2 = FUN_00287468(0x100005c);
+          temp_v2 = bgmGetStateById(0x100005c);
           if (temp_v2 != 1) {
-            FUN_002a03a0(temp_v3,0,0x3c);
+            soundChannelRequestIfEnabled(temp_v3,0,0x3c);
           }
         }
       }
       else {
-        temp_v2 = FUN_00287468(0x1000060);
+        temp_v2 = bgmGetStateById(0x1000060);
         if (temp_v2 != 1) {
-          FUN_002a03a0(temp_v3,0,0x3c);
+          soundChannelRequestIfEnabled(temp_v3,0,0x3c);
         }
       }
     }
@@ -160,16 +160,16 @@ unsigned int * FUN_003a5e30(unsigned int *param_1,unsigned int param_2,int param
     if (!(param_4 == 6 || param_4 == 7)) {
       if (param_4 != 8) {
         temp_v3 = 0x100005b;
-        temp_v2 = FUN_00287468(0x100005b);
+        temp_v2 = bgmGetStateById(0x100005b);
         if (temp_v2 != 1) {
-          FUN_002a03a0(temp_v3,0,0x3c);
+          soundChannelRequestIfEnabled(temp_v3,0,0x3c);
         }
       }
     }
     else {
-      temp_v2 = FUN_00287468(0x1000060);
+      temp_v2 = bgmGetStateById(0x1000060);
       if (temp_v2 != 1) {
-        FUN_002a03a0(temp_v3,0,0x3c);
+        soundChannelRequestIfEnabled(temp_v3,0,0x3c);
       }
     }
   }

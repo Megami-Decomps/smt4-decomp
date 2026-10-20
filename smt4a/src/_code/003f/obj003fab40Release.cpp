@@ -4,7 +4,7 @@
 extern "C" {
 
 void asdMemFree(void *ptr);
-void *FUN_002e3328(void *handle);
+void *asdOperatorDelete(void *handle);
 void *FUN_003f2f1c(void *handle);
 void *FUN_00414a24(void *handle);
 
@@ -35,7 +35,7 @@ struct Obj003fab40 {
 extern "C" Obj003fab40 *obj003fab40Release(Obj003fab40 *obj)
 {
     if (obj->handleA != NULL) {
-        FUN_002e3328(FUN_003f2f1c(obj->handleA));
+        asdOperatorDelete(FUN_003f2f1c(obj->handleA));
         obj->handleA = NULL;
     }
     if (obj->resourceA != NULL) {
@@ -51,7 +51,7 @@ extern "C" Obj003fab40 *obj003fab40Release(Obj003fab40 *obj)
         obj->resourceC = NULL;
     }
     if (obj->handleB != NULL) {
-        FUN_002e3328(FUN_00414a24(obj->handleB));
+        asdOperatorDelete(FUN_00414a24(obj->handleB));
         obj->handleB = NULL;
     }
     if (obj->buffer != NULL) {

@@ -8,7 +8,7 @@ int scrSetResult(unsigned int);
 int scrGetArg(int);
 int dataTableGetCount(unsigned int);
 
-extern unsigned int FUN_002451ac(unsigned int, unsigned int);
+extern unsigned int btlMainGetDataTable(unsigned int, unsigned int);
 /* Supplied declaration required: scrSetResult. */
 extern unsigned int btlGetMainState(void);
 /* Supplied declaration required: scrGetArg. */
@@ -29,7 +29,7 @@ unsigned int FUN_00312da8(void)
   temp_v0 = scrGetArg(0);
   temp_v1 = scrGetArg(1);
   temp_v2 = btlGetMainState();
-  temp_v2 = FUN_002451ac(temp_v2,0xe);
+  temp_v2 = btlMainGetDataTable(temp_v2,0xe);
   temp_v3 = dataTableGetEntries();
   dataTableGetCount(temp_v2);
   temp_v4 = 0xffffffff;

@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 int FUN_003eaf20(void);
 int FUN_004c6cb0(int, int);
 
 extern unsigned int DAT_00573ae0; /* 0x573ae0 */
 extern unsigned int DAT_00573ae4; /* 0x573ae4 */
 
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: FUN_003eaf20. */
 /* Supplied declaration required: FUN_004c6cb0. */
 
@@ -30,7 +30,7 @@ void FUN_003f1a9c(int param_1,int param_2)
      (temp_v0 = param_1, FUN_003eaf20(), temp_v0 != 0)) {
     temp_v0 = (int)*(short *)(temp_v0 + 8);
     FUN_004c6cb0(temp_v0,param_2);
-    if (((temp_v0 != 0) && (FUN_001aba54(), temp_v0 != 0)) && (param_2 != 0)) {
+    if (((temp_v0 != 0) && (dataTable04FindById(), temp_v0 != 0)) && (param_2 != 0)) {
       temp_v1 = DAT_00573ae4 | *(unsigned int *)(param_1 + 0x45a4);
       *puVar3 = DAT_00573ae0 | *puVar3;
       *(unsigned int *)(param_1 + 0x45a4) = temp_v1;

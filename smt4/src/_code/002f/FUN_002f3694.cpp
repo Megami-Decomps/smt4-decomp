@@ -23,7 +23,7 @@ extern int dataTable2eSub2GetRecord(int);
 /* Supplied declaration required: FUN_0025b670. */
 /* Supplied declaration required: FUN_0027ee24. */
 extern int randNextInRange(unsigned int);
-extern int FUN_002c2950(void);
+extern int gameGetMapBlock(void);
 
 
 void FUN_002f3694(void)
@@ -41,7 +41,7 @@ void FUN_002f3694(void)
   int temp_v6;
   int temp_v7;
   
-  temp_v0 = FUN_002c2950();
+  temp_v0 = gameGetMapBlock();
   temp_v7 = 0;
   temp_v1 = temp_v0;
   dataTable2eSub2GetCount();
@@ -63,7 +63,7 @@ void FUN_002f3694(void)
             FUN_0025b670();
             if ((*(int *)(temp_v1 + 0x20) != -1) && (*(char *)(temp_v1 + 0x26) == temp_v4)) {
               temp_v2 = (int)*(short *)(temp_v1 + 0x24);
-              temp_v1 = FUN_002c2950();
+              temp_v1 = gameGetMapBlock();
               temp_v1 = temp_v1 + ((int)(temp_v2 + ((unsigned int)(temp_v2 >> 0x1f) >> 0x1b)) >> 5) * 4;
               *(unsigned int *)(temp_v1 + 0xc98) = *(unsigned int *)(temp_v1 + 0xc98) | (1 << ((temp_v2 % 0x20) & 0xffU));
             }
@@ -73,7 +73,7 @@ void FUN_002f3694(void)
         }
         temp_v1 = 0;
         do {
-          temp_v2 = FUN_002c2950();
+          temp_v2 = gameGetMapBlock();
           temp_v5 = 0;
           pcVar6 = (char *)0x0;
           temp_v3 = FUN_00248dfc();

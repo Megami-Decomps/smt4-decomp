@@ -24,7 +24,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_2_stack;
 
-extern int DAT_00571508; /* 0x571508 */
+extern int g_btlCamera; /* 0x571508 */
 extern unsigned int DAT_00573808; /* 0x573808 */
 
 /* Supplied declaration required: btlGetMainState. */
@@ -73,7 +73,7 @@ void FUN_0040c888(unsigned int param_1,fn_0040c888_arg1 *param_2)
     }
     break;
   default:
-    temp_v0 = *(float *)(DAT_00571508 + 0x58c);
+    temp_v0 = *(float *)(g_btlCamera + 0x58c);
     if (in_s0 < temp_v0 + -17.0f) {
       temp_v1 = 5;
       FUN_004fb43c(0,*(unsigned int *)&param_2->field_0x8,temp_v2,0,0,temp_v1,0);

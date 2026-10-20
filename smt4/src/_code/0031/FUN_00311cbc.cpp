@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b46f8(unsigned short *, int *, unsigned int, int, unsigned char *);
+int libc_bsearch(unsigned short *, int *, unsigned int, int, unsigned char *);
 
 /* stack frame of param_2: 3 slot(s), 8 byte(s) */
 typedef struct {
@@ -15,8 +15,8 @@ typedef struct {
 
 extern unsigned char LAB_001e16bc; /* 0x1e16bc */
 
-/* Supplied declaration required: FUN_002b46f8. */
-extern int *FUN_002b47f4(unsigned int);
+/* Supplied declaration required: libc_bsearch. */
+extern int *fileSlotGetBuffer(unsigned int);
 
 
 void FUN_00311cbc(unsigned short param_1,unsigned short param_2)
@@ -27,10 +27,10 @@ void FUN_00311cbc(unsigned short param_1,unsigned short param_2)
   unsigned short temp_v0;
   unsigned short temp_v1;
   
-  piVar1 = (int *)FUN_002b47f4(0x1f);
+  piVar1 = (int *)fileSlotGetBuffer(0x1f);
   temp_v0 = param_2;
   temp_v1 = param_1;
-  FUN_002b46f8(&temp_v0,piVar1 + 1,(*piVar1 - 4U) >> 3,8,&LAB_001e16bc);
+  libc_bsearch(&temp_v0,piVar1 + 1,(*piVar1 - 4U) >> 3,8,&LAB_001e16bc);
   return;
 }
 

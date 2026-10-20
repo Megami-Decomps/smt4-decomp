@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0030ea58(int, int);
+int libc_strcmp(int, int);
 
 typedef int romwright_code(...);
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
@@ -13,7 +13,7 @@ typedef struct {
 } param_3_stack;
 
 extern int wstrlen(int);
-/* Supplied declaration required: FUN_0030ea58. */
+/* Supplied declaration required: libc_strcmp. */
 
 
 /* WARNING: Removing unreachable block (ram,0x00508660) */
@@ -67,7 +67,7 @@ void FUN_00507c74(int param_1,int param_2,unsigned int param_3)
       if ((temp_v3 != 0xffffffff) && (temp_v1 = *(int *)(temp_v1 + 4) + temp_v1, temp_v1 != 0)) {
         temp_v4 = temp_v1 + *(int *)(temp_v1 + temp_v3 * 0xc + 8);
       }
-      FUN_0030ea58(param_2,temp_v4);
+      libc_strcmp(param_2,temp_v4);
     }
   }
   return;

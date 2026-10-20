@@ -10,7 +10,7 @@ int FUN_00103a60(unsigned int, int);
 int FUN_00103ab8(unsigned int, int);
 int FUN_002e6e34(unsigned char [12], int);
 int FUN_002e6e5c(unsigned char [12]);
-int FUN_002e9318(unsigned char [8]);
+int onlineStringDestroy(unsigned char [8]);
 int FUN_002ee938(...);
 int FUN_002ee978(...);
 int FUN_002fbac6(int, unsigned int);
@@ -30,7 +30,7 @@ extern int FUN_00123f04(int, unsigned int, unsigned int);
 extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-/* Supplied declaration required: FUN_002e9318. */
+/* Supplied declaration required: onlineStringDestroy. */
 extern int wordRefsDiffer_002ee774(unsigned int **, unsigned int *);
 /* Supplied declaration required: FUN_002ee938. */
 extern int FUN_002ee96a(unsigned char *, unsigned char *);
@@ -86,8 +86,8 @@ unsigned int FUN_001139e8(int param_1,unsigned int param_2)
       else {
         temp_v0 = 0;
       }
-      FUN_002e9318(temp_v5);
-      FUN_002e9318(temp_v6);
+      onlineStringDestroy(temp_v5);
+      onlineStringDestroy(temp_v6);
     } while (!temp_v0);
     temp_v7[0] = *(unsigned int *)(param_1 + 0x2c);
     temp_v1 = wordRefsEqual_002fd432(&temp_v4,temp_v7);

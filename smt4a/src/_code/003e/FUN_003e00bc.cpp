@@ -8,11 +8,11 @@ typedef struct {
     u16 mask;        /* 0x5e */
 } MaskOwner;
 
-MaskOwner *FUN_001801a4(void);
+MaskOwner *gameGetPlayerData(void);
 
 void FUN_003e00bc(u32 bit)
 {
-    MaskOwner *owner = FUN_001801a4();
+    MaskOwner *owner = gameGetPlayerData();
 
     owner->mask |= 1 << bit;
 }

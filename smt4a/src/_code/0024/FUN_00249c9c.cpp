@@ -5,26 +5,26 @@
 extern "C" {
 
 int asdMemFree(void);
-int FUN_0019a7f4(int, unsigned int);
+int asdTMTexTableReleaseNode(int, unsigned int);
 
-extern int DAT_005821c4; /* 0x5821c4 */
+extern int g_mapTable; /* 0x5821c4 */
 extern int DAT_005821f4; /* 0x5821f4 */
 extern unsigned int DAT_005821f8; /* 0x5821f8 */
 
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_0019a7f4. */
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
 
 
 void FUN_00249c9c(void)
 
 {
 /* irregular: 2 native warning(s); review required */
-  if (DAT_005821c4 != 0) {
+  if (g_mapTable != 0) {
     asdMemFree();
-    DAT_005821c4 = 0;
+    g_mapTable = 0;
   }
   if (DAT_005821f4 != 0) {
-    FUN_0019a7f4(0x2d,DAT_005821f8);
+    asdTMTexTableReleaseNode(0x2d,DAT_005821f8);
     DAT_005821f8 = 0;
     DAT_005821f4 = 0;
   }

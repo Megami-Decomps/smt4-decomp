@@ -10,12 +10,12 @@ int FUN_002344d8(...);
 int FUN_0026281c(...);
 int asdOperatorNewB(...);
 int FUN_002b4b80(int, int);
-int FUN_002b5a48(...);
+int wstrlenU16(...);
 int memClear(...);
 int jyoucyuGetTableEntry(...);
 int FUN_002c5d5c(unsigned int *, unsigned char *, int, int);
 int FUN_002c5e80(...);
-int FUN_002c6a10(...);
+int asdOperatorDelete(...);
 int FUN_00352764(...);
 int FUN_0038bee4(...);
 int FUN_003df318(unsigned char [4], unsigned int, unsigned int);
@@ -66,15 +66,15 @@ extern unsigned int FUN_00234468(int);
 /* Supplied declaration required: FUN_0026281c. */
 /* Supplied declaration required: asdOperatorNewB. */
 extern int FUN_002a12d8(int);
-extern unsigned char FUN_002a2dec(int);
-extern unsigned char FUN_002a2df8(int);
+extern unsigned char objGetFlagBit0(int);
+extern unsigned char objGetFlagBit1(int);
 /* Supplied declaration required: FUN_002b4b80. */
-/* Supplied declaration required: FUN_002b5a48. */
+/* Supplied declaration required: wstrlenU16. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: jyoucyuGetTableEntry. */
 /* Supplied declaration required: FUN_002c5d5c. */
 /* Supplied declaration required: FUN_002c5e80. */
-/* Supplied declaration required: FUN_002c6a10. */
+/* Supplied declaration required: asdOperatorDelete. */
 /* Supplied declaration required: FUN_00352764. */
 /* Supplied declaration required: FUN_0038bee4. */
 /* Supplied declaration required: FUN_003df318. */
@@ -363,7 +363,7 @@ int FUN_0038d598(int param_1)
       uStack_1be4 = 0xf80484ae;
       uStack_1be0 = 0x2542ff0d;
       temp_v22 = 0x817c84be;
-      temp_v9 = FUN_002b5a48(asStack_830);
+      temp_v9 = wstrlenU16(asStack_830);
       temp_v5 = 0;
       if (temp_v5 < temp_v9) {
         do {
@@ -380,7 +380,7 @@ int FUN_0038d598(int param_1)
         } while (temp_v5 < temp_v9);
       }
       FUN_0026281c(temp_v12 + 0x180,asStack_830,0x800);
-      temp_v9 = FUN_002b5a48(temp_v12 + 0x180);
+      temp_v9 = wstrlenU16(temp_v12 + 0x180);
       temp_v5 = 0;
       if (temp_v5 < temp_v9) {
         do {
@@ -470,7 +470,7 @@ int FUN_0038d598(int param_1)
       *(unsigned int *)(temp_v42 + 0x10) = uStack_1bfc;
       temp_v5 = FUN_002a12d8(temp_v42 + 0xc);
       if (temp_v5 < 0) {
-        FUN_002c6a10(temp_v9);
+        asdOperatorDelete(temp_v9);
         temp_v7 = FUN_002a12d8(temp_v42 + 0xc);
         return temp_v7;
       }
@@ -480,9 +480,9 @@ int FUN_0038d598(int param_1)
       if (temp_v5 < temp_v15) {
         do {
           temp_v8 = temp_v9 + temp_v5 * 0x18;
-          temp_v1 = FUN_002a2df8(temp_v8);
+          temp_v1 = objGetFlagBit1(temp_v8);
           temp_v1 = temp_v10 & temp_v1;
-          temp_v2 = FUN_002a2dec(temp_v8);
+          temp_v2 = objGetFlagBit0(temp_v8);
           temp_v2 = temp_v11 & temp_v2;
           temp_v5 = temp_v5 + 1;
           temp_v10 = temp_v1;
@@ -491,7 +491,7 @@ int FUN_0038d598(int param_1)
       }
       *(unsigned char *)(temp_v12 + 0x9ac) = temp_v1;
       *(unsigned char *)(temp_v12 + 0x9ad) = temp_v2;
-      FUN_002c6a10(temp_v9);
+      asdOperatorDelete(temp_v9);
       temp_v31 = temp_v31 + 1;
     } while (temp_v31 < *(unsigned int *)(temp_v7 + 0x68c));
   }

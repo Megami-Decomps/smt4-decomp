@@ -21,7 +21,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } void_stack;
 
-extern int DAT_0043daa8; /* 0x43daa8 */
+extern int g_campCec; /* 0x43daa8 */
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -54,11 +54,11 @@ unsigned int FUN_0018b06c(void)
   temp_v6 = 0x3f800000;
   temp_v7 = 0x3f800000;
   temp_v8 = 0x3f800000;
-  switch(*(unsigned int *)(DAT_0043daa8 + 0xd28)) {
+  switch(*(unsigned int *)(g_campCec + 0xd28)) {
   case 3:
   case 4:
   case 5:
-    if (*(char *)(DAT_0043daa8 + 0xd62) != '\0') {
+    if (*(char *)(g_campCec + 0xd62) != '\0') {
       FUN_002bed3c();
       FUN_002c39a4(g_titleScene);
       temp_v0 = g_titleScene;

@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002e9318(unsigned char [8]);
-int FUN_002e9af4(void);
+int onlineStringDestroy(unsigned char [8]);
+int onlineInstanceTableGetCurrent(void);
 int FUN_002e9c0c(void);
-int FUN_002e9ec8(int, unsigned int);
+int onlineInstanceTableFind(int, unsigned int);
 int FUN_002f7c94(unsigned int, unsigned int, unsigned int);
-int FUN_002f7cb0(int);
+int onlineJobSetStateWaiting(int);
 int FUN_002f7cba(int, int, unsigned int);
 int FUN_0030c720(int, unsigned int);
 
@@ -30,16 +30,16 @@ typedef struct {
 extern unsigned char LAB_0012ca14; /* 0x12ca14 */
 extern unsigned char LAB_0012ca81; /* 0x12ca81 */
 
-extern int FUN_002e760a(unsigned int);
+extern int operatorNew(unsigned int);
 extern unsigned int FUN_002e7908(unsigned int *, unsigned int *);
-/* Supplied declaration required: FUN_002e9318. */
-/* Supplied declaration required: FUN_002e9af4. */
+/* Supplied declaration required: onlineStringDestroy. */
+/* Supplied declaration required: onlineInstanceTableGetCurrent. */
 /* Supplied declaration required: FUN_002e9c0c. */
-/* Supplied declaration required: FUN_002e9ec8. */
+/* Supplied declaration required: onlineInstanceTableFind. */
 extern unsigned int FUN_002ea100(unsigned char *, int);
 extern unsigned int FUN_002ea3c0(int, unsigned char *, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002f7c94. */
-/* Supplied declaration required: FUN_002f7cb0. */
+/* Supplied declaration required: onlineJobSetStateWaiting. */
 /* Supplied declaration required: FUN_002f7cba. */
 /* Supplied declaration required: FUN_0030c720. */
 
@@ -64,8 +64,8 @@ void FUN_0012c928(int param_1)
   int temp_v12;
   unsigned char temp_v13 [8];
   
-  temp_v0 = FUN_002e9af4();
-  FUN_002e9ec8(temp_v0,*(unsigned int *)(param_1 + 0x68));
+  temp_v0 = onlineInstanceTableGetCurrent();
+  onlineInstanceTableFind(temp_v0,*(unsigned int *)(param_1 + 0x68));
   if (temp_v0 != 0) {
     temp_v12 = param_1 + 0x80;
     FUN_002e9c0c();
@@ -84,13 +84,13 @@ void FUN_0012c928(int param_1)
     temp_v4 = temp_v2;
     temp_v5 = temp_v3;
     temp_v0 = (**(romwright_code **)(*piVar5 + 0x38))(piVar5,temp_v12,temp_v1,param_1 + 0x100);
-    FUN_002e9318(temp_v13);
+    onlineStringDestroy(temp_v13);
     if (temp_v0 != 0) {
       temp_v2 = *(unsigned int *)(temp_v12 + 0x44);
-      temp_v1 = FUN_002e9af4();
+      temp_v1 = onlineInstanceTableGetCurrent();
       FUN_002f7c94(temp_v1,*(unsigned int *)(param_1 + 0x68),temp_v2);
-      FUN_002f7cb0(param_1);
-      temp_v0 = FUN_002e760a(0x10);
+      onlineJobSetStateWaiting(param_1);
+      temp_v0 = operatorNew(0x10);
       temp_v1 = 0;
       if (temp_v0 != 0) {
         temp_v1 = FUN_002ea3c0(temp_v0,&LAB_0012ca81,0,&LAB_0012ca14);

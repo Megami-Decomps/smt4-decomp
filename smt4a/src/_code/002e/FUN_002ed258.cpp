@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002e75fa(void);
+int sharedRefAddRef(void);
 
 extern unsigned char DAT_00558490; /* 0x558490 */
 
-/* Supplied declaration required: FUN_002e75fa. */
+/* Supplied declaration required: sharedRefAddRef. */
 
 
 unsigned int * FUN_002ed258(unsigned int *param_1,unsigned int param_2)
@@ -17,7 +17,7 @@ unsigned int * FUN_002ed258(unsigned int *param_1,unsigned int param_2)
 /* irregular: 1 native warning(s); review required */
   *param_1 = (unsigned int)&DAT_00558490;
   param_1[2] = param_2;
-  FUN_002e75fa();
+  sharedRefAddRef();
   *(unsigned char *)(param_1 + 1) = 0;
   param_1[3] = 0;
   return param_1;

@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_3_stack;
 
-extern int DAT_005712f0; /* 0x5712f0 */
+extern int g_btlActionReflect; /* 0x5712f0 */
 extern unsigned int DAT_00573c20; /* 0x573c20 */
 extern unsigned int DAT_00573c24; /* 0x573c24 */
 
@@ -39,8 +39,8 @@ unsigned int FUN_004fcde0(short param_1,unsigned int param_2,unsigned int *param
       if ((temp_v1 != 0) &&
          (((temp_v3 = *(unsigned int *)(temp_v1 + 0x50), (temp_v3 & 1) != 0 && (temp_v3 & 2) != 0 &&
            (*(short *)(temp_v1 + 0x68) == temp_v0)) && ((temp_v3 & 0x400) != 0)))) {
-        temp_v2 = DAT_005712f0;
-        FUN_004102d8(DAT_005712f0,(int)param_1,0,param_2);
+        temp_v2 = g_btlActionReflect;
+        FUN_004102d8(g_btlActionReflect,(int)param_1,0,param_2);
         *(unsigned char *)(temp_v2 + 5) = *(unsigned char *)(temp_v2 + 5) | 4;
         *(int *)(temp_v2 + 0x14) = temp_v1;
         *(unsigned char *)(temp_v2 + 4) = 0x2c;
@@ -53,8 +53,8 @@ unsigned int FUN_004fcde0(short param_1,unsigned int param_2,unsigned int *param
   temp_v3 = DAT_00573c24 | param_3[1];
   *param_3 = DAT_00573c20 | *param_3;
   param_3[1] = temp_v3;
-  temp_v4 = DAT_005712f0;
-  FUN_004102d8(DAT_005712f0,(int)(short)(param_1 + 0x14),0,param_2);
+  temp_v4 = g_btlActionReflect;
+  FUN_004102d8(g_btlActionReflect,(int)(short)(param_1 + 0x14),0,param_2);
   *(unsigned char *)(temp_v4 + 4) = 0x2e;
   *(unsigned int **)(temp_v4 + 0x18) = param_3;
   *(unsigned int *)(temp_v4 + 0x28) = 0;

@@ -2,8 +2,8 @@
 
 extern "C" {
 
-int FUN_00257c2c(void *block, u32 a, u32 b, int c);
-int FUN_002bd540(void *block);
+int asdTexTgaLoadNw4c(void *block, u32 a, u32 b, int c);
+int asdTextureSetImage(void *block);
 
 typedef struct Block {
     /* 0x00 */ u8 unk00[0xC];
@@ -23,12 +23,12 @@ typedef struct Request {
 
 void FUN_001f4b3c(u32 unused, Request *request, u32 arg)
 {
-    FUN_00257c2c(request->block, request->unk44, arg, 0x10000);
+    asdTexTgaLoadNw4c(request->block, request->unk44, arg, 0x10000);
     request->block->unk0C = 0x2000000;
     request->block->unk3C = 1;
     request->block->unk40 = 1;
     request->block->unk38 = 0;
-    FUN_002bd540(request->block);
+    asdTextureSetImage(request->block);
     request->ready = 1;
 }
 

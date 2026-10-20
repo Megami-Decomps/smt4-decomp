@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_001846d0(int, int);
-int FUN_00184758(...);
-int FUN_00184c00(int, int, int);
+int uiSpriteSelectAnim(int, int);
+int uiSpriteSetKeyframe(...);
+int uiSpriteSetImageKeyframe(int, int, int);
 int FUN_001aeafc(void);
-int FUN_0020b6d4(...);
+int gameStateChange(...);
 int statusCameraDestroy(void);
 int FUN_003857b4(int);
 int linkHolderRunAll(unsigned int, int *);
@@ -22,16 +22,16 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } void_stack;
 
-extern int DAT_0056fcc0; /* 0x56fcc0 */
+extern int g_handleRegistry; /* 0x56fcc0 */
 extern signed char DAT_00588fd2; /* 0x588fd2 */
 extern int DAT_00588fd4; /* 0x588fd4 */
 
 extern int lmapMainIsRunning(void);
-/* Supplied declaration required: FUN_001846d0. */
-/* Supplied declaration required: FUN_00184758. */
-/* Supplied declaration required: FUN_00184c00. */
+/* Supplied declaration required: uiSpriteSelectAnim. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_001aeafc. */
-/* Supplied declaration required: FUN_0020b6d4. */
+/* Supplied declaration required: gameStateChange. */
 /* Supplied declaration required: statusCameraDestroy. */
 extern int lmapSceneGetScript(void);
 /* Supplied declaration required: FUN_003857b4. */
@@ -73,10 +73,10 @@ void FUN_0022e774(void)
       FUN_003e5c00();
       temp_v1 = lmapMainIsRunning();
       if (temp_v1 != 0) {
-        *(unsigned char *)(*(int *)(DAT_0056fcc0 + 0x14) + 0xc4) = *(unsigned char *)(temp_v0 + 0x20e6);
+        *(unsigned char *)(*(int *)(g_handleRegistry + 0x14) + 0xc4) = *(unsigned char *)(temp_v0 + 0x20e6);
       }
       else {
-        *(unsigned char *)(*(int *)(DAT_0056fcc0 + 0x14) + 0xc4) = *(unsigned char *)(temp_v0 + 0x20e6);
+        *(unsigned char *)(*(int *)(g_handleRegistry + 0x14) + 0xc4) = *(unsigned char *)(temp_v0 + 0x20e6);
         FUN_001aeafc();
       }
       if (DAT_00588fd2 != '\0') {
@@ -92,26 +92,26 @@ void FUN_0022e774(void)
       }
     }
   }
-  FUN_00184758(temp_v0 + 0x418,5,0);
-  FUN_001846d0(temp_v0 + 0x4a4,3);
-  FUN_001846d0(temp_v0 + 0x530,3);
-  FUN_001846d0(temp_v0 + 0x5bc,3);
-  FUN_00184758(temp_v0 + 0x648,5,0);
-  FUN_001846d0(temp_v0 + 0x6d4,3);
-  FUN_001846d0(temp_v0 + 0x760,3);
+  uiSpriteSetKeyframe(temp_v0 + 0x418,5,0);
+  uiSpriteSelectAnim(temp_v0 + 0x4a4,3);
+  uiSpriteSelectAnim(temp_v0 + 0x530,3);
+  uiSpriteSelectAnim(temp_v0 + 0x5bc,3);
+  uiSpriteSetKeyframe(temp_v0 + 0x648,5,0);
+  uiSpriteSelectAnim(temp_v0 + 0x6d4,3);
+  uiSpriteSelectAnim(temp_v0 + 0x760,3);
   temp_v1 = 0;
   do {
     temp_v2 = temp_v0 + temp_v1 * 0x8c;
     temp_v3 = temp_v2 + 0x7ec;
-    FUN_00184758(temp_v3,0x11,0);
-    FUN_00184c00(temp_v3,0xe,0);
-    FUN_00184758(temp_v2 + 0xd64,5,0);
+    uiSpriteSetKeyframe(temp_v3,0x11,0);
+    uiSpriteSetImageKeyframe(temp_v3,0xe,0);
+    uiSpriteSetKeyframe(temp_v2 + 0xd64,5,0);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 10);
   if (*(char *)(temp_v0 + 0x2017) == '\x05') {
-    FUN_00184758(temp_v0 + 0x12dc,5,0);
+    uiSpriteSetKeyframe(temp_v0 + 0x12dc,5,0);
   }
-  FUN_0020b6d4(3);
+  gameStateChange(3);
   return;
 }
 

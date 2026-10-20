@@ -22,7 +22,7 @@ typedef struct {
 
 extern int g_aocMain; /* 0x570260 */
 
-extern int FUN_001d10ac(unsigned int *);
+extern int byteIsAtLeast100(unsigned int *);
 extern int FUN_001d25ec(unsigned int *);
 /* Supplied declaration required: FUN_00473980. */
 /* Supplied declaration required: FUN_00474734. */
@@ -97,7 +97,7 @@ void FUN_0047b4b4(int param_1)
           *(unsigned int *)(param_1 + 8) = temp_v3;
           return;
         }
-        temp_v2 = FUN_001d10ac(&temp_v4);
+        temp_v2 = byteIsAtLeast100(&temp_v4);
         if (temp_v2 != 0) {
           if ((temp_v4 & 0xff) == 0x66) goto LAB_0047b624;
           if ((temp_v4 & 0xff) != 0x67) goto LAB_0047b644;
@@ -165,7 +165,7 @@ void FUN_0047b4b4(int param_1)
       *(unsigned int *)(param_1 + 0x208) = 0;
       return;
     }
-    temp_v2 = FUN_001d10ac(&temp_v4);
+    temp_v2 = byteIsAtLeast100(&temp_v4);
     if (temp_v2 != 0) {
       if ((temp_v4 & 0xff) == 0x66) {
 LAB_0047b624:

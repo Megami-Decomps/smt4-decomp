@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00152ed8(int);
-int FUN_0028c640(unsigned int, int, int);
+int nodeSetTranslation(unsigned int, int, int);
 int FUN_003416bc(int, unsigned int, unsigned int);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
@@ -14,7 +14,7 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: FUN_00152ed8. */
-/* Supplied declaration required: FUN_0028c640. */
+/* Supplied declaration required: nodeSetTranslation. */
 /* Supplied declaration required: FUN_003416bc. */
 
 
@@ -30,7 +30,7 @@ void FUN_0022afc4(int param_1,unsigned int param_2,unsigned int param_3)
     *(unsigned int *)(param_1 + 0x1658) = *(unsigned int *)(param_1 + 0x1664);
     *(unsigned int *)(param_1 + 0x165c) = *(unsigned int *)(param_1 + 0x1668);
     *(unsigned int *)(param_1 + 0x1660) = *(unsigned int *)(param_1 + 0x166c);
-    FUN_0028c640(*(unsigned int *)(*(int *)(param_1 + 0x20) + 8),0,param_1 + 0x1658);
+    nodeSetTranslation(*(unsigned int *)(*(int *)(param_1 + 0x20) + 8),0,param_1 + 0x1658);
     return;
   }
   return;

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0022ac3c(int, unsigned int);
-int FUN_002b06c4(void);
+int dataTable00FindById(void);
 int FUN_002ba764(...);
 int FUN_002c0a9c(unsigned int, unsigned int, int);
 int dataTableGet(...);
@@ -20,7 +20,7 @@ typedef struct {
 extern int g_aocSystem; /* 0x433158 */
 
 /* Supplied declaration required: FUN_0022ac3c. */
-/* Supplied declaration required: FUN_002b06c4. */
+/* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: FUN_002ba764. */
 extern int randNextInRange(short);
 /* Supplied declaration required: FUN_002c0a9c. */
@@ -77,7 +77,7 @@ unsigned short FUN_002533f4(unsigned int param_1,unsigned int param_2,int param_
         temp_v3 = 0;
         do {
           temp_v4 = (unsigned int)*(unsigned short *)(temp_v5 + temp_v3 * 2 + 0xc);
-          if (((temp_v4 != 0) && (FUN_002b06c4(), temp_v4 != 0)) &&
+          if (((temp_v4 != 0) && (dataTable00FindById(), temp_v4 != 0)) &&
              ((*(char *)(temp_v4 + 0x9e) != '\0' || (*(char *)(temp_v4 + 0x9f) != '\0'))))
           goto LAB_00253568;
           temp_v3 = temp_v3 + 1;

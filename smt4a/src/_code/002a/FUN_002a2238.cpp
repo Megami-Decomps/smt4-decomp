@@ -13,7 +13,7 @@ int FUN_00180310(...);
 int FUN_001835b4(...);
 int FUN_00183bb0(void);
 int FUN_00184310(void);
-int FUN_00184e64(...);
+int drawSetColorFromRGBA8(...);
 int FUN_0025cc78(...);
 int FUN_002e1b64(...);
 
@@ -38,7 +38,7 @@ extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: FUN_00184e64. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 extern unsigned int FUN_0019acdc(short, unsigned int);
 extern int FUN_0019e52c(unsigned short);
 /* Supplied declaration required: FUN_0025cc78. */
@@ -123,12 +123,12 @@ void FUN_002a2238(unsigned int *param_1,int param_2,int param_3,int param_4,int 
     FUN_00169a1c(*(unsigned short *)(temp_v1 + 0x9c),*(short *)(temp_v3 + 8) + param_4,
                  *(short *)(temp_v3 + 10) + param_5,0x67);
   }
-  FUN_00184e64(unaff_r11);
+  drawSetColorFromRGBA8(unaff_r11);
   FUN_00100388(temp_v9,&LAB_002a2624,*(unsigned short *)(param_2 + 0x36));
   temp_v1 = FUN_001834a4(0x2e,0x74);
   FUN_00180310(0,*(short *)(temp_v1 + 8) + param_4,*(short *)(temp_v1 + 10) + param_5,0,5,0x6a,
                temp_v9);
-  FUN_00184e64(0xb9d7d700);
+  drawSetColorFromRGBA8(0xb9d7d700);
   temp_v2 = *(unsigned int *)(param_2 + 0x28) / 0xe10;
   temp_v4 = *(unsigned int *)(param_2 + 0x28) % 0xe10;
   FUN_00100388(temp_v10,&LAB_002a2634,temp_v4 % 0x3c);

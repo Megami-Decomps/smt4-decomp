@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_00275bc8(...);
-int FUN_00275f44(...);
+int scrScriptProcessStartEntry(...);
 int FUN_002804b0(...);
-int FUN_0035b304(...);
-int FUN_0037b450(...);
+int campCommonBgRelease(...);
+int campButtonHelpRelease(...);
 int FUN_003e6c14(...);
 int stepStateBattleStart(...);
 int FUN_004f6d34(...);
@@ -22,13 +22,13 @@ typedef struct {
 extern int DAT_00573808; /* 0x573808 */
 
 extern int btlGetMainState(void);
-extern int FUN_0014af84(void);
+extern int gameDataBlocksGetSaveData(void);
 extern int FUN_00224880(unsigned int);
 /* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_002804b0. */
-/* Supplied declaration required: FUN_0035b304. */
-/* Supplied declaration required: FUN_0037b450. */
+/* Supplied declaration required: campCommonBgRelease. */
+/* Supplied declaration required: campButtonHelpRelease. */
 /* Supplied declaration required: FUN_003e6c14. */
 extern unsigned int *FUN_003e6dc8(unsigned int *);
 /* Supplied declaration required: stepStateBattleStart. */
@@ -75,7 +75,7 @@ unsigned int * FUN_003e6f50(unsigned int *param_1)
   case 3:
     FUN_002804b0("battle/gameover/gameover.bf",param_1 + 4,0);
     FUN_002804b0("battle/gameover/gameover.mbm",param_1 + 6,0);
-    temp_v2 = FUN_0014af84();
+    temp_v2 = gameDataBlocksGetSaveData();
     temp_v0 = *(char *)(temp_v2 + 0x27e3d);
     if (temp_v0 != -1) {
       *(char *)(temp_v2 + 0x27e3d) = temp_v0 + '\x01';
@@ -112,8 +112,8 @@ unsigned int * FUN_003e6f50(unsigned int *param_1)
       FUN_00275bc8(temp_v2,param_1[6]);
       param_1[5] = temp_v2;
       *(unsigned int *)(temp_v2 + 0x108) = 1;
-      FUN_00275f44(param_1[5],0);
-      FUN_00275f44(param_1[5],4);
+      scrScriptProcessStartEntry(param_1[5],0);
+      scrScriptProcessStartEntry(param_1[5],4);
       temp_v1 = 1;
     }
     param_1[3] = temp_v1;
@@ -124,8 +124,8 @@ unsigned int * FUN_003e6f50(unsigned int *param_1)
   case 8:
     temp_v2 = FUN_00224880(param_1[5]);
     if (temp_v2 == 2) {
-      FUN_0035b304();
-      FUN_0037b450();
+      campCommonBgRelease();
+      campButtonHelpRelease();
       temp_v2 = btlGetMainState();
       if (*(int *)(temp_v2 + 0x4c80) != 1) {
         *param_1 = 9;

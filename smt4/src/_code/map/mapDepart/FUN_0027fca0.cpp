@@ -17,7 +17,7 @@ extern int DAT_0049fb38; /* 0x49fb38 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00291e40. */
-extern unsigned int FUN_00296d6c(unsigned int, unsigned int);
+extern unsigned int randBetween(unsigned int, unsigned int);
 
 
 void FUN_0027fca0(int param_1)
@@ -30,11 +30,11 @@ void FUN_0027fca0(int param_1)
   unsigned int in_fpscr;
   
   DAT_00447538 = (DAT_00447538 + 1) & 1;
-  temp_v0 = FUN_00296d6c(0xfffffff6,10);
+  temp_v0 = randBetween(0xfffffff6,10);
   VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v0 = FUN_00296d6c(0xfffffff1,0xf);
+  temp_v0 = randBetween(0xfffffff1,0xf);
   VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v1 = FUN_00296d6c(0xfffffff1,0xf);
+  temp_v1 = randBetween(0xfffffff1,0xf);
   temp_v2 = temp_v1;
   if (param_1 == 0) {
     temp_v2 = 0;

@@ -7,9 +7,9 @@ extern "C" {
 int sysPlaySe(int);
 int FUN_00180118(unsigned int);
 int FUN_0019de98(...);
-int FUN_0023b27c(void);
-int FUN_00275f44(...);
-int FUN_002e342c(unsigned int [32], unsigned int);
+int useCounterStart(void);
+int scrScriptProcessStartEntry(...);
+int libc_strcpy(unsigned int [32], unsigned int);
 int FUN_003180c4(int, unsigned int [32]);
 int FUN_0031f208(...);
 int FUN_0031f27c(...);
@@ -38,10 +38,10 @@ extern unsigned int FUN_0014bf3c(unsigned short, unsigned int);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00180118. */
 /* Supplied declaration required: FUN_0019de98. */
-/* Supplied declaration required: FUN_0023b27c. */
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: useCounterStart. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002a4b28(unsigned short);
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 extern int FUN_002f036c(void);
 /* Supplied declaration required: FUN_003180c4. */
 /* Supplied declaration required: FUN_0031f208. */
@@ -121,12 +121,12 @@ void FUN_004a41d8(int param_1)
     if (temp_v1 != 0) {
       temp_v2 = (unsigned int)temp_v0;
       FUN_00180118(temp_v2);
-      FUN_002e342c(temp_v8,temp_v2);
+      libc_strcpy(temp_v8,temp_v2);
       FUN_003180c4(8,temp_v8);
       temp_v5 = FUN_0014bf3c(temp_v0,0);
-      FUN_002e342c(temp_v8,temp_v5);
+      libc_strcpy(temp_v8,temp_v5);
       FUN_003180c4(0x10,temp_v8);
-      FUN_00275f44(*(unsigned int *)(param_1 + 0x85c),*pcVar8 == '\a');
+      scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x85c),*pcVar8 == '\a');
       *(unsigned int *)(param_1 + 0x14) = 3;
       *(unsigned int *)(param_1 + 0x18) = 0;
     }
@@ -153,7 +153,7 @@ void FUN_004a41d8(int param_1)
       case '\x05':
         temp_v5 = 6;
       }
-      FUN_00275f44(*(unsigned int *)(param_1 + 0x85c),temp_v5);
+      scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x85c),temp_v5);
       *(unsigned int *)(param_1 + 0x14) = 6;
       *(unsigned int *)(param_1 + 0x18) = 0;
       sysPlaySe(0xa0);
@@ -171,7 +171,7 @@ void FUN_004a41d8(int param_1)
       FUN_0031f208(2);
       FUN_0031f208(7);
       FUN_0031f208(3);
-      FUN_0023b27c();
+      useCounterStart();
       FUN_003343f0(1);
       *(unsigned int *)(param_1 + 0x14) = 7;
       *(unsigned int *)(param_1 + 0x18) = 0;

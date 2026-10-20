@@ -3,15 +3,15 @@
 extern "C" {
 
 int FUN_0028727c(void);
-int FUN_002917b8(void);
-int FUN_00291944(void);
+int buttonHelpRelease(void);
+int uiFadeRelease(void);
 int FUN_00292c0c(void);
 int FUN_0029a128(int a);
 int FUN_002a71fc(int a);
 int scrScriptProcessDestroy(void);
 int FUN_002a7890(void);
 int asdTMTexTableFreeEntry(int table);
-int FUN_002ae898(int table, int index);
+int asdTMTexTableReleaseNode(int table, int index);
 int FUN_002bff50(void);
 int asdMemFree(void);
 int jobStop(u32 job, int mode);
@@ -75,7 +75,7 @@ void FUN_003a3914(Scene *scene)
     if (jobIsValid(scene->jobB) != 0) {
         jobStop(scene->jobB, 0);
     }
-    FUN_002ae898(0x2b, 0);
+    asdTMTexTableReleaseNode(0x2b, 0);
     asdTMTexTableFreeEntry(0x2b);
     if (scene->scriptA != 0) {
         scrScriptProcessDestroy();
@@ -98,9 +98,9 @@ void FUN_003a3914(Scene *scene)
         FUN_00292c0c();
     }
     if (scene->mode != 1) {
-        FUN_00291944();
+        uiFadeRelease();
     }
-    FUN_002917b8();
+    buttonHelpRelease();
     FUN_0028727c();
     FUN_002bff50();
     FUN_002a71fc(1);

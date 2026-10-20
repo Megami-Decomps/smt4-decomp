@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e9ec8(int, unsigned int);
+int onlineInstanceTableFind(int, unsigned int);
 int FUN_002ea41e(unsigned int [3], int);
 int FUN_0030cae0(int, unsigned int *);
 
@@ -16,8 +16,8 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned int *FUN_002e7908(unsigned int *, unsigned int *);
-extern int FUN_002e9af4(void);
-/* Supplied declaration required: FUN_002e9ec8. */
+extern int onlineInstanceTableGetCurrent(void);
+/* Supplied declaration required: onlineInstanceTableFind. */
 /* Supplied declaration required: FUN_002ea41e. */
 /* Supplied declaration required: FUN_0030cae0. */
 
@@ -37,8 +37,8 @@ void FUN_0012a8a4(int param_1)
   
   puVar3 = temp_v1;
   puVar2 = temp_v1;
-  temp_v0 = FUN_002e9af4();
-  FUN_002e9ec8(temp_v0,*(unsigned int *)(param_1 + 0x6c));
+  temp_v0 = onlineInstanceTableGetCurrent();
+  onlineInstanceTableFind(temp_v0,*(unsigned int *)(param_1 + 0x6c));
   if (temp_v0 != 0) {
     if (*(char *)(param_1 + 0xa8) != '\x02') {
       if (*(char *)(param_1 + 400) != '\0') {

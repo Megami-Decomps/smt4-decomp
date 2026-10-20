@@ -6,12 +6,12 @@ extern "C" {
 
 int FUN_002e6e34(int *, int);
 int FUN_002e6e5c(int *);
-int FUN_002e9538(int *, unsigned int);
+int onlineSockAddrCopy(int *, unsigned int);
 int FUN_002ec8a8(int, unsigned int);
 
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-/* Supplied declaration required: FUN_002e9538. */
+/* Supplied declaration required: onlineSockAddrCopy. */
 /* Supplied declaration required: FUN_002ec8a8. */
 extern int *FUN_00311202(int);
 
@@ -32,7 +32,7 @@ void FUN_003111ae(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   piVar1 = (int *)FUN_00311202(param_1 + 0x148);
   if ((piVar1 != (int *)0x0) && (*piVar1 != 0)) {
     FUN_002ec8a8(*piVar1,param_2);
-    FUN_002e9538(piVar1 + 1,param_3);
+    onlineSockAddrCopy(piVar1 + 1,param_3);
   }
   FUN_002e6e5c(&uStack_20);
   return;

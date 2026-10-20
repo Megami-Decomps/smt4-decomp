@@ -7,7 +7,7 @@ extern "C" {
 int jobStop(unsigned int, int);
 
 extern int DAT_0043dc24; /* 0x43dc24 */
-extern unsigned char DAT_0043dc20; /* 0x43dc20 */
+extern unsigned char g_commonBg; /* 0x43dc20 */
 
 extern int jobIsValid(unsigned int);
 /* Supplied declaration required: jobStop. */
@@ -21,8 +21,8 @@ void FUN_00211bd0(void)
   int temp_v1;
   
   temp_v0 = DAT_0043dc24;
-  if (((*(unsigned int * *)((unsigned char *)&DAT_0043dc20 + 0x8)) != (unsigned int *)0x0) && (temp_v1 = jobIsValid(*(*(unsigned int * *)((unsigned char *)&DAT_0043dc20 + 0x8))), temp_v1 != 0)) {
-    jobStop(*(*(unsigned int * *)((unsigned char *)&DAT_0043dc20 + 0x8)),0);
+  if (((*(unsigned int * *)((unsigned char *)&g_commonBg + 0x8)) != (unsigned int *)0x0) && (temp_v1 = jobIsValid(*(*(unsigned int * *)((unsigned char *)&g_commonBg + 0x8))), temp_v1 != 0)) {
+    jobStop(*(*(unsigned int * *)((unsigned char *)&g_commonBg + 0x8)),0);
   }
   *(unsigned int *)(temp_v0 + 8) = 5;
   *(unsigned int *)(temp_v0 + 0x10) = 0;

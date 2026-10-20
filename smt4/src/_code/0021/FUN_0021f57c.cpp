@@ -21,7 +21,7 @@ extern unsigned char g_asdCec; /* 0x464fa8 */
 /* Supplied declaration required: asdCecMessageBoxClose. */
 /* Supplied declaration required: FUN_0024ee68. */
 /* Supplied declaration required: asdCecMessageBoxOpen. */
-extern int FUN_002b5a48(unsigned int);
+extern int wstrlenU16(unsigned int);
 /* Supplied declaration required: FUN_00357a24. */
 /* Supplied declaration required: nn_cec_CTR_Message_Message_sub_object. */
 /* Supplied declaration required: nn_cec_CTR_Message_NewMessage. */
@@ -48,7 +48,7 @@ unsigned int FUN_0021f57c(unsigned int param_1,unsigned int param_2,unsigned int
                *(unsigned char *)((int)(*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4)) + 9),*(unsigned char *)((int)(*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4)) + 10),
                *(unsigned char *)((int)(*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4)) + 0xb));
     nn_cec_CTR_Message_SetExHeader((unsigned int)temp_v3,2,param_3,param_2);
-    temp_v1 = FUN_002b5a48(param_1);
+    temp_v1 = wstrlenU16(param_1);
     nn_cec_CTR_Message_SetExHeader((unsigned int)temp_v3,4,temp_v1 << 1,param_1);
     nn_cec_CTR_Message_SetMessageBody((unsigned int)temp_v3,param_4,param_5);
     temp_v0 = (*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4))[6];

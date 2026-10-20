@@ -6,7 +6,7 @@ extern "C" {
 
 int jyoucyuGetTableEntry(int);
 int FUN_001d25ec(int);
-int FUN_002e3494(int);
+int asdOperatorDeleteB(int);
 int asdOperatorNewE(void);
 int FUN_0042979c(int *, int, int);
 int FUN_004ffee0(int *, unsigned char [4], unsigned char [8], unsigned short [12]);
@@ -25,9 +25,9 @@ typedef struct {
 extern int g_aocMain; /* 0x570260 */
 
 /* Supplied declaration required: jyoucyuGetTableEntry. */
-extern int FUN_001a7470(unsigned short *);
+extern int objGetFlagBit0(unsigned short *);
 /* Supplied declaration required: FUN_001d25ec. */
-/* Supplied declaration required: FUN_002e3494. */
+/* Supplied declaration required: asdOperatorDeleteB. */
 /* Supplied declaration required: asdOperatorNewE. */
 /* Supplied declaration required: FUN_0042979c. */
 extern unsigned int FUN_004ffd4c(unsigned char *);
@@ -81,10 +81,10 @@ unsigned char * FUN_004733cc(int param_1)
         temp_v2 = FUN_001d25ec(param_1 + 0xc);
         if (temp_v2 < 0) {
           FUN_001d25ec(param_1 + 0xc);
-          FUN_002e3494(temp_v0);
+          asdOperatorDeleteB(temp_v0);
           return temp_v9;
         }
-        temp_v2 = FUN_001a7470(temp_v11);
+        temp_v2 = objGetFlagBit0(temp_v11);
         if (temp_v2 != 0) {
           temp_v2 = temp_v5 * 2;
           temp_v5 = temp_v5 + 1;
@@ -99,11 +99,11 @@ unsigned char * FUN_004733cc(int param_1)
     temp_v3 = FUN_001d25ec(param_1 + 0xc);
     if (temp_v3 < 0) {
       FUN_001d25ec(param_1 + 0xc);
-      FUN_002e3494(temp_v0);
+      asdOperatorDeleteB(temp_v0);
       return temp_v9;
     }
     jyoucyuGetTableEntry(0);
-    FUN_002e3494(temp_v0);
+    asdOperatorDeleteB(temp_v0);
   }
   return temp_v9;
 }

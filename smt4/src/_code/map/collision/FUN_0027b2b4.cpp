@@ -20,7 +20,7 @@ typedef struct {
 extern unsigned char LAB_0027b5d0; /* 0x27b5d0 */
 extern unsigned char LAB_0027b5ec; /* 0x27b5ec */
 extern unsigned char LAB_0027b608; /* 0x27b608 */
-extern unsigned char DAT_00446fe8; /* 0x446fe8 */
+extern unsigned char g_mapCollision; /* 0x446fe8 */
 extern unsigned int DAT_00446fec; /* 0x446fec */
 extern unsigned int DAT_00446ff0; /* 0x446ff0 */
 extern unsigned int DAT_00446ff4; /* 0x446ff4 */
@@ -63,7 +63,7 @@ void FUN_0027b2b4(int param_1,unsigned int param_2,int param_3,unsigned int para
   DAT_00446ff8 = 0;
   DAT_00446ffc = 0;
   temp_v0 = 0;
-  DAT_00446fe8 = 0;
+  g_mapCollision = 0;
   if (!((param_1 == 0x29 || param_1 == 0x2a) || param_1 == 0x2b)) {
     if (param_1 != 100) {
       if (param_1 - 0x65U < 99) {

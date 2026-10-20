@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_001bcd48(int, int);
+int svcSleepThread(int, int);
 
 extern int FUN_001a3010(unsigned int);
-/* Supplied declaration required: FUN_001bcd48. */
+/* Supplied declaration required: svcSleepThread. */
 
 
 void FUN_0043bff8(void)
@@ -18,7 +18,7 @@ void FUN_0043bff8(void)
   
   while (temp_v0 = FUN_001a3010(0x407), temp_v0 < 0 && temp_v0 != -0x375f3004) {
     if (temp_v0 == -0x1f5f33f8) {
-      FUN_001bcd48(10000000,0);
+      svcSleepThread(10000000,0);
     }
   }
   return;

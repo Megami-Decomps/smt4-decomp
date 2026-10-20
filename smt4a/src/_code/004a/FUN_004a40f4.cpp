@@ -36,7 +36,7 @@ typedef struct {
 extern unsigned char DAT_0057f0b4; /* 0x57f0b4 */
 
 /* Supplied declaration required: sysPlaySe. */
-extern int FUN_0023b258(void);
+extern int useCounterIsFinished(void);
 extern int FUN_0026140c(void);
 extern int FUN_002c7c54(void);
 /* Supplied declaration required: FUN_003343f0. */
@@ -54,7 +54,7 @@ void FUN_004a40f4(fn_004a40f4_arg0 *param_1)
   unsigned char *pbVar3;
   unsigned char temp_v2;
   
-  temp_v1 = FUN_0023b258();
+  temp_v1 = useCounterIsFinished();
   if (temp_v1 != 0) {
     FUN_0035d8a4();
     sysPlaySe(0x2f);

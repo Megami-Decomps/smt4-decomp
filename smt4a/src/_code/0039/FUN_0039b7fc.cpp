@@ -6,7 +6,7 @@ extern "C" {
 
 int jobStop(unsigned int, int);
 int asdMemFree(unsigned int *);
-int FUN_0019a7f4(unsigned int, unsigned int);
+int asdTMTexTableReleaseNode(unsigned int, unsigned int);
 int asdTMTexTableFreeEntry(int);
 
 extern unsigned int *DAT_0057f3b8; /* 0x57f3b8 */
@@ -14,9 +14,9 @@ extern int DAT_0057f3c4; /* 0x57f3c4 */
 extern unsigned char DAT_0057f3e8; /* 0x57f3e8 */
 
 /* Supplied declaration required: jobStop. */
-extern int FUN_0018206c(unsigned int, unsigned int);
+extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_0019a7f4. */
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
 /* Supplied declaration required: asdTMTexTableFreeEntry. */
 extern int FUN_00341940(unsigned int);
 
@@ -35,10 +35,10 @@ void FUN_0039b7fc(void)
   if (temp_v0 < 6) {
     temp_v2 = temp_v0 * 0xc;
     if (*(char *)(temp_v2 + 0x57f3f0) != '\0') {
-      temp_v1 = FUN_0018206c(*(unsigned int *)(&DAT_0057f3e8 + temp_v0 * 0xc),
+      temp_v1 = asdTMTexTableNodeIsLoaded(*(unsigned int *)(&DAT_0057f3e8 + temp_v0 * 0xc),
                            *(unsigned int *)(temp_v2 + 0x57f3ec));
       if (temp_v1 != 0) {
-        FUN_0019a7f4(*(unsigned int *)(&DAT_0057f3e8 + temp_v0 * 0xc),*(unsigned int *)(temp_v2 + 0x57f3ec))
+        asdTMTexTableReleaseNode(*(unsigned int *)(&DAT_0057f3e8 + temp_v0 * 0xc),*(unsigned int *)(temp_v2 + 0x57f3ec))
         ;
       }
       *(unsigned char *)(temp_v2 + 0x57f3f0) = 0;

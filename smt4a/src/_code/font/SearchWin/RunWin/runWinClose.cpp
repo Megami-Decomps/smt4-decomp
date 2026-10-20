@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001846d0(void *ui, int arg);
+int uiSpriteSelectAnim(void *ui, int arg);
 int FUN_003d2150(int id);
 
 extern RunWinWork *g_runWin;
@@ -18,7 +18,7 @@ void runWinClose(void)
     } else {
         run->nextState = 3;
     }
-    FUN_001846d0(run->ui, 1);
+    uiSpriteSelectAnim(run->ui, 1);
     FUN_003d2150(0x10002aa);
 }
 

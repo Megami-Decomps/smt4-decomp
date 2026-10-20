@@ -23,7 +23,7 @@ typedef struct {
 
 extern int g_aocMain; /* 0x570260 */
 
-extern int FUN_001d10ac(unsigned int *);
+extern int byteIsAtLeast100(unsigned int *);
 extern int FUN_002e19f8(void);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_00474734. */
@@ -113,7 +113,7 @@ void FUN_004772b0(unsigned int *param_1)
           param_1[0x82] = (unsigned int)puVar3;
           return;
         }
-        temp_v1 = FUN_001d10ac(&temp_v2);
+        temp_v1 = byteIsAtLeast100(&temp_v2);
         if (temp_v1 == 0) {
           return;
         }
@@ -140,7 +140,7 @@ void FUN_004772b0(unsigned int *param_1)
         param_1[2] = 2;
         return;
       }
-      temp_v1 = FUN_001d10ac(&temp_v2);
+      temp_v1 = byteIsAtLeast100(&temp_v2);
       if (temp_v1 == 0) {
         return;
       }
@@ -218,7 +218,7 @@ void FUN_004772b0(unsigned int *param_1)
         sysMemClear(temp_v1 + 0x6d4,0x80);
         return;
       }
-      temp_v1 = FUN_001d10ac(&temp_v2);
+      temp_v1 = byteIsAtLeast100(&temp_v2);
       if (temp_v1 == 0) {
         return;
       }
@@ -241,7 +241,7 @@ void FUN_004772b0(unsigned int *param_1)
       FUN_0047bcdc(param_1,1);
       return;
     }
-    temp_v1 = FUN_001d10ac(&temp_v2);
+    temp_v1 = byteIsAtLeast100(&temp_v2);
     if (temp_v1 == 0) {
       return;
     }

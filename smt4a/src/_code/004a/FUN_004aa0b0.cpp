@@ -9,7 +9,7 @@ typedef struct {
     unsigned int spC; /* 0xc: local_c */
 } param_3_stack;
 
-extern unsigned char DAT_0057a9b8; /* 0x57a9b8 */
+extern unsigned char g_btlUi; /* 0x57a9b8 */
 
 
 unsigned int FUN_004aa0b0(unsigned int param_1,unsigned char param_2,unsigned char param_3)
@@ -30,9 +30,9 @@ unsigned int FUN_004aa0b0(unsigned int param_1,unsigned char param_2,unsigned ch
   temp_v0 = 0xffffffff;
   temp_v1 = 0;
   do {
-    temp_v4 = (int)*(char *)((*(int *)((unsigned char *)&DAT_0057a9b8 + 0x10)) + temp_v1 + 0x11884);
+    temp_v4 = (int)*(char *)((*(int *)((unsigned char *)&g_btlUi + 0x10)) + temp_v1 + 0x11884);
     if (temp_v4 - 1U < 0x1f) {
-      temp_v4 = (*(int *)((unsigned char *)&DAT_0057a9b8 + 0x10)) + temp_v1 * 0x280 + temp_v4 * 0x14;
+      temp_v4 = (*(int *)((unsigned char *)&g_btlUi + 0x10)) + temp_v1 * 0x280 + temp_v4 * 0x14;
       temp_v5 = 0;
       if (*(float *)(temp_v4 + 0xf060) == in_s0) {
         temp_v5 = *(float *)(temp_v4 + 0xf064) == in_s1;
@@ -52,15 +52,15 @@ unsigned int FUN_004aa0b0(unsigned int param_1,unsigned char param_2,unsigned ch
   temp_v2 = 0;
   do {
     temp_v1 = temp_v2;
-    if (*(char *)((*(int *)((unsigned char *)&DAT_0057a9b8 + 0x10)) + temp_v1 + 0x11884) < '\x01') break;
+    if (*(char *)((*(int *)((unsigned char *)&g_btlUi + 0x10)) + temp_v1 + 0x11884) < '\x01') break;
     temp_v2 = temp_v1 + 1;
     temp_v1 = temp_v0;
   } while ((int)temp_v2 < 0x10);
 LAB_004aa15c:
   if (temp_v1 < 0x11) {
-    temp_v4 = (*(int *)((unsigned char *)&DAT_0057a9b8 + 0x10)) + temp_v1;
+    temp_v4 = (*(int *)((unsigned char *)&g_btlUi + 0x10)) + temp_v1;
     if (*(char *)(temp_v4 + 0x11884) < 0x20) {
-      temp_v3 = (*(int *)((unsigned char *)&DAT_0057a9b8 + 0x10)) + temp_v1 * 0x280 + *(char *)(temp_v4 + 0x11884) * 0x14;
+      temp_v3 = (*(int *)((unsigned char *)&g_btlUi + 0x10)) + temp_v1 * 0x280 + *(char *)(temp_v4 + 0x11884) * 0x14;
       *(unsigned char *)(temp_v3 + 0xf080) = 1;
       *(unsigned char *)(temp_v3 + 0xf081) = param_3;
       *(float *)(temp_v3 + 0xf074) = in_s0;

@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_003d2d34(int a, int b, int c);
+int soundChannelRequestIfEnabled(int a, int b, int c);
 
 extern StaffRollWork *g_staffRoll;
 
@@ -14,7 +14,7 @@ extern int FUN_002e07f4(void);
 void staffRollEnterState2(void)
 {
     if (FUN_002e07f4() != 0) {
-        FUN_003d2d34(0x1000000, 0, 0x3c);
+        soundChannelRequestIfEnabled(0x1000000, 0, 0x3c);
         g_staffRoll->state = 2;
     }
 }

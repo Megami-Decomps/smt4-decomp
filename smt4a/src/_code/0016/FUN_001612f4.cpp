@@ -7,8 +7,8 @@ extern "C" {
 typedef int romwright_code(...);
 extern romwright_code *DAT_00589190; /* 0x589190 */
 extern unsigned int DAT_00589194; /* 0x589194 */
-extern unsigned int DAT_005b40e0; /* 0x5b40e0 */
-extern unsigned int DAT_005b40e4; /* 0x5b40e4 */
+extern unsigned int g_commandBufferCursor; /* 0x5b40e0 */
+extern unsigned int g_commandBufferEnd; /* 0x5b40e4 */
 extern unsigned char DAT_0061a482; /* 0x61a482 */
 extern unsigned int *DAT_0061a50c; /* 0x61a50c */
 extern unsigned int *DAT_0061a510; /* 0x61a510 */
@@ -40,8 +40,8 @@ void FUN_001612f4(int param_1,int param_2)
                 DAT_0061a482 = 0;
               }
               if (DAT_0061a50c == puVar3) {
-                DAT_005b40e4 = 0;
-                DAT_005b40e0 = 0;
+                g_commandBufferEnd = 0;
+                g_commandBufferCursor = 0;
                 DAT_0061a50c = (unsigned int *)0x0;
               }
               if (puVar3[1] != 0) {

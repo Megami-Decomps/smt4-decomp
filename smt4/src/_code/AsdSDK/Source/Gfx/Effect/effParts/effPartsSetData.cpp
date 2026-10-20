@@ -3,7 +3,7 @@
 
 extern "C" {
 
-extern const char DAT_00409378[]; /* effParts.cpp: __FILE__ */
+extern const char g_effPartsSourcePath[]; /* effParts.cpp: __FILE__ */
 
 /* A copy of a block of data owned by an effect part. */
 typedef struct EffPartsData {
@@ -31,7 +31,7 @@ void effPartsSetData(EffPartsData *part, const void *src, int size, u16 type)
         part->block = NULL;
     }
     if (src != NULL && size > 0) {
-        asdDebugTrace(DAT_00409378, 1080);
+        asdDebugTrace(g_effPartsSourcePath, 1080);
         copy = memAlloc(0x10000, 0x100, 0, size, 0x10, 1);
         part->type = type;
         part->block = copy;

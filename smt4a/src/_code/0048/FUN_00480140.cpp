@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00192550(void);
 int FUN_00287790(int, int, int, int, int);
-int FUN_00480fc0(int, int);
+int flagValueSub(int, int);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -15,7 +15,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00192550. */
 /* Supplied declaration required: FUN_00287790. */
-/* Supplied declaration required: FUN_00480fc0. */
+/* Supplied declaration required: flagValueSub. */
 
 
 void FUN_00480140(int param_1,int param_2,int param_3)
@@ -28,7 +28,7 @@ void FUN_00480140(int param_1,int param_2,int param_3)
   FUN_00192550();
   if (((temp_v0 != 0) && (FUN_00287790(param_1,temp_v0,param_3,0,0), param_1 == 0 && param_3 == 0)) &&
      ((*(unsigned char *)(temp_v0 + 0x42) & 1) == 0)) {
-    FUN_00480fc0(param_2,1);
+    flagValueSub(param_2,1);
   }
   return;
 }

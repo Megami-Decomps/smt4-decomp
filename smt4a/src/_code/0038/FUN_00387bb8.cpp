@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_00281720(unsigned int, int);
+int linkHolderApplyFlag(unsigned int, int);
 int FUN_002c0b5c(int);
 int FUN_002e264c(int);
 int FUN_002e2680(int);
-int FUN_002e6dd0(int, int);
+int rt_aeabi_memclr(int, int);
 int FUN_002f4014(int);
 int cecProcessCall2(void);
 int FUN_0031d890(void);
@@ -40,14 +40,14 @@ struct fn_00387bb8_arg0 {
     undefined4 field_0x14c; /* +0x14c */
 };
 
-/* Supplied declaration required: FUN_00281720. */
+/* Supplied declaration required: linkHolderApplyFlag. */
 extern int FUN_00284e94(void);
 extern int FUN_002a2cf0(void);
 /* Supplied declaration required: FUN_002c0b5c. */
 extern int FUN_002c334c(void);
 /* Supplied declaration required: FUN_002e264c. */
 /* Supplied declaration required: FUN_002e2680. */
-/* Supplied declaration required: FUN_002e6dd0. */
+/* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: FUN_002f4014. */
 /* Supplied declaration required: cecProcessCall2. */
 /* Supplied declaration required: FUN_0031d890. */
@@ -77,13 +77,13 @@ unsigned int FUN_00387bb8(fn_00387bb8_arg0 *param_1)
       FUN_002c0b5c(param_1->field_0x8);
     }
     if (param_1->field_0x108 == 0) {
-      FUN_002e6dd0(param_1->field_0x8 + 0x50,0x14);
+      rt_aeabi_memclr(param_1->field_0x8 + 0x50,0x14);
     }
     FUN_003a4980(*(unsigned int *)&param_1->field_0xc,param_1->field_0x8,
                  *(unsigned int *)&param_1->field_0x58);
     FUN_002e264c(param_1->field_0x8);
     FUN_002f4014(param_1->field_0x8);
-    FUN_00281720(*(unsigned int *)&param_1->field_0x4,1);
+    linkHolderApplyFlag(*(unsigned int *)&param_1->field_0x4,1);
     param_1->field_0xe8 = 0xffffffff;
     param_1->field_0xf8 = 1;
     param_1->field_0xec = 0xffffffff;

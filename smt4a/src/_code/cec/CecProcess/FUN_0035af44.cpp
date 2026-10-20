@@ -6,7 +6,7 @@ extern "C" {
 
 int memAlloc(...);
 int FUN_0016dfc4(...);
-int FUN_00188b60(...);
+int nn_os_CriticalSection_Initialize(...);
 int FUN_002e3140(...);
 int FUN_002fb0d4(...);
 
@@ -28,10 +28,10 @@ extern unsigned char LAB_00514b7c; /* 0x514b7c */
 
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_0016dfc4. */
-/* Supplied declaration required: FUN_00188b60. */
+/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
 /* Supplied declaration required: FUN_002e3140. */
 /* Supplied declaration required: FUN_002fb0d4. */
-extern unsigned int FUN_003166c0(void);
+extern unsigned int asdCecInboxGetMessageCount(void);
 
 
 void FUN_0035af44(int param_1)
@@ -46,9 +46,9 @@ void FUN_0035af44(int param_1)
   unsigned char *temp_v5;
   int temp_v6;
   
-  FUN_00188b60(param_1 + 0xd28);
+  nn_os_CriticalSection_Initialize(param_1 + 0xd28);
   *(unsigned int *)(param_1 + 0x84) = 0;
-  temp_v0 = FUN_003166c0();
+  temp_v0 = asdCecInboxGetMessageCount();
   *(unsigned int *)(param_1 + 0x88) = temp_v0;
   *(unsigned int *)(param_1 + 0x90) = 0;
   *(unsigned int *)(param_1 + 0x94) = 0;

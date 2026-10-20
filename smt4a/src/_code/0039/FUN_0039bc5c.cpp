@@ -8,7 +8,7 @@ int scrSetResult(unsigned int);
 
 extern unsigned char DAT_005f0c7c; /* 0x5f0c7c */
 
-extern int FUN_0018719c(void);
+extern int gameFlagIsSet(void);
 /* Supplied declaration required: scrSetResult. */
 
 
@@ -18,7 +18,7 @@ unsigned int FUN_0039bc5c(void)
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_0018719c();
+  temp_v0 = gameFlagIsSet();
   if (temp_v0 != 0) {
     scrSetResult((*(unsigned int *)((unsigned char *)&DAT_005f0c7c + 0x78)));
   }

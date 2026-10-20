@@ -6,10 +6,10 @@ extern "C" {
 
 int FUN_002c3dfc(unsigned char *);
 int FUN_002c3f5c(unsigned int);
-int FUN_002c4040(unsigned int *);
+int nn_os_LightEvent_Signal(unsigned int *);
 int FUN_002c40f8(...);
 int FUN_002c526c(void);
-int FUN_002c52f8(void);
+int asdFatalError(void);
 int nn_os_detail_ConvertLibraryToSvcPriority(int);
 int software_interrupt(int);
 
@@ -31,10 +31,10 @@ extern unsigned int g_asdFileEvent; /* 0x465028 */
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_002c3dfc. */
 /* Supplied declaration required: FUN_002c3f5c. */
-/* Supplied declaration required: FUN_002c4040. */
+/* Supplied declaration required: nn_os_LightEvent_Signal. */
 /* Supplied declaration required: FUN_002c40f8. */
 /* Supplied declaration required: FUN_002c526c. */
-/* Supplied declaration required: FUN_002c52f8. */
+/* Supplied declaration required: asdFatalError. */
 extern void nn_os_Thread_FinalizeImpl(unsigned int);
 /* Supplied declaration required: nn_os_detail_ConvertLibraryToSvcPriority. */
 
@@ -62,7 +62,7 @@ void FUN_00103504(void)
         FUN_002c526c();
       }
       g_asdFile = 1;
-      FUN_002c4040(&g_asdFileEvent);
+      nn_os_LightEvent_Signal(&g_asdFileEvent);
       iStack_18 = DAT_00465020;
       puVar1 = temp_v1;
       FUN_002c40f8(puVar1,&iStack_18,1,0,0xffffffff,0xffffffff);
@@ -83,7 +83,7 @@ void FUN_00103504(void)
   if (-1 < temp_v0) {
     return;
   }
-  FUN_002c52f8();
+  asdFatalError();
   return;
 }
 

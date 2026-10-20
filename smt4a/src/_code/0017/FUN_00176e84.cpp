@@ -30,11 +30,11 @@ typedef struct {
 } param_4_stack;
 
 extern unsigned int g_effAsdLightHandle; /* 0x5b3c80 */
-extern unsigned int DAT_005b3c88; /* 0x5b3c88 */
+extern unsigned int g_asdModelTransformBuilder; /* 0x5b3c88 */
 extern unsigned int DAT_005b3c90; /* 0x5b3c90 */
 extern unsigned int DAT_005b3c98; /* 0x5b3c98 */
-extern unsigned int *DAT_005b40e0; /* 0x5b40e0 */
-extern unsigned int DAT_005b40e4; /* 0x5b40e4 */
+extern unsigned int *g_commandBufferCursor; /* 0x5b40e0 */
+extern unsigned int g_commandBufferEnd; /* 0x5b40e4 */
 extern int DAT_0061a50c; /* 0x61a50c */
 extern unsigned char DAT_00636e04; /* 0x636e04 */
 extern unsigned char DAT_00636e05; /* 0x636e05 */
@@ -91,8 +91,8 @@ void FUN_00176e84(int param_1,unsigned int param_2,int param_3,int param_4)
   iStack_2c = param_3;
   temp_v8 = param_4;
   if (((&DAT_00636e04)[temp_v0] != '\0') && ((&DAT_00636e05)[temp_v0] == '\0')) {
-    FUN_00197eb0((&DAT_005b3c88)[temp_v2] + 0x10,(&DAT_005b3c90)[temp_v2]);
-    piVar9 = (int *)(&DAT_005b3c88)[temp_v2];
+    FUN_00197eb0((&g_asdModelTransformBuilder)[temp_v2] + 0x10,(&DAT_005b3c90)[temp_v2]);
+    piVar9 = (int *)(&g_asdModelTransformBuilder)[temp_v2];
     temp_v3 = (&g_effAsdLightHandle)[temp_v2];
     nw_gfx_SceneTraverser_Begin(*(unsigned int *)(temp_v3 + 8),*(unsigned int *)(temp_v3 + 4));
     (**(romwright_code **)(*piVar9 + 0x10))(piVar9,*(unsigned int *)(temp_v3 + 8));
@@ -102,9 +102,9 @@ void FUN_00176e84(int param_1,unsigned int param_2,int param_3,int param_4)
                  *(unsigned int *)(*(int *)(param_1 + 0x14) + 0x10),temp_v4,
                  *(unsigned int *)(param_1 + 0x18));
     asdGxCommandListEnd((&DAT_00636e08)[temp_v2 * 6],0);
-    FUN_0018e9d8((&DAT_005b3c88)[temp_v2],(&DAT_005b3c90)[temp_v2]);
-    FUN_00197eb0((&DAT_005b3c88)[temp_v2] + 0x10,(&DAT_005b3c98)[temp_v2]);
-    piVar9 = (int *)(&DAT_005b3c88)[temp_v2];
+    FUN_0018e9d8((&g_asdModelTransformBuilder)[temp_v2],(&DAT_005b3c90)[temp_v2]);
+    FUN_00197eb0((&g_asdModelTransformBuilder)[temp_v2] + 0x10,(&DAT_005b3c98)[temp_v2]);
+    piVar9 = (int *)(&g_asdModelTransformBuilder)[temp_v2];
     temp_v3 = (&g_effAsdLightHandle)[temp_v2];
     nw_gfx_SceneTraverser_Begin(*(unsigned int *)(temp_v3 + 8),*(unsigned int *)(temp_v3 + 4));
     (**(romwright_code **)(*piVar9 + 0x10))(piVar9,*(unsigned int *)(temp_v3 + 8));
@@ -118,14 +118,14 @@ void FUN_00176e84(int param_1,unsigned int param_2,int param_3,int param_4)
     else {
       asdGxCommandListStartRecord(DAT_00636e10);
     }
-    puVar5 = DAT_005b40e0;
+    puVar5 = g_commandBufferCursor;
     if (temp_v8 != 0) {
       FUN_00199d58(temp_v6,*(unsigned int *)(*(int *)(param_1 + 0x14) + 0xc),
                    *(unsigned int *)(*(int *)(param_1 + 0x14) + 0x10),temp_v4,
                    *(unsigned int *)(param_1 + 0x18));
       puVar3 = (unsigned int *)0x0;
       if (puVar5 != (unsigned int *)0x0) {
-        puVar3 = DAT_005b40e0;
+        puVar3 = g_commandBufferCursor;
       }
       if ((puVar5 != (unsigned int *)0x0 && puVar3 != (unsigned int *)0x0) && puVar3 != puVar5) {
         puVar7 = (unsigned char *)0x0;
@@ -173,9 +173,9 @@ void FUN_00176e84(int param_1,unsigned int param_2,int param_3,int param_4)
     return;
   }
   temp_v4 = *DAT_00636e10;
-  temp_v2 = (int)DAT_005b40e0 - *(int *)(DAT_0061a50c + 4);
+  temp_v2 = (int)g_commandBufferCursor - *(int *)(DAT_0061a50c + 4);
   temp_v5 = (temp_v2 & 8) != 0;
-  puVar5 = DAT_005b40e0;
+  puVar5 = g_commandBufferCursor;
   if (temp_v5) {
     puVar5 = (unsigned int *)(temp_v2 + 0x18);
   }
@@ -185,8 +185,8 @@ void FUN_00176e84(int param_1,unsigned int param_2,int param_3,int param_4)
   }
   else {
     *(unsigned int *)(temp_v0 + 0xc) = temp_v2 + 0x20;
-    if ((unsigned int)puVar5 < DAT_005b40e4) {
-      DAT_005b40e0 = puVar5 + 2;
+    if ((unsigned int)puVar5 < g_commandBufferEnd) {
+      g_commandBufferCursor = puVar5 + 2;
       puVar5[1] = 0x8025e;
       *puVar5 = 0;
     }
@@ -199,9 +199,9 @@ void FUN_00176e84(int param_1,unsigned int param_2,int param_3,int param_4)
   }
   temp_v3 = *(int *)(temp_v0 + 0x34);
   if (temp_v3 != 0) {
-    *(unsigned int *)(temp_v3 + 8) = (unsigned int)((int)DAT_005b40e0 - temp_v3) >> 3;
+    *(unsigned int *)(temp_v3 + 8) = (unsigned int)((int)g_commandBufferCursor - temp_v3) >> 3;
   }
-  *(unsigned int **)(temp_v0 + 0x34) = DAT_005b40e0;
+  *(unsigned int **)(temp_v0 + 0x34) = g_commandBufferCursor;
   FUN_001a9380(0x238,5,&temp_v8);
   return;
 }

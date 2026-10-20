@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_002e9598(u8 *dest, const u8 *source);
+void onlineStringAssign(u8 *dest, const u8 *source);
 void FUN_002f6ed2(u8 *dest, const u8 *source);
 void FUN_003039f4(u8 *dest, const u8 *source);
 void FUN_00303a22(u8 *dest, const u8 *source);
@@ -43,7 +43,7 @@ Record *FUN_00117bc8(Record *dest, const Record *source)
     dest->value08 = source->value08;
     dest->word10 = source->word10;
     dest->word14 = source->word14;
-    FUN_002e9598(dest->part18, source->part18);
+    onlineStringAssign(dest->part18, source->part18);
     dest->half20 = source->half20;
     FUN_003039f4(dest->part24, source->part24);
     FUN_00303a22(dest->part44, source->part44);

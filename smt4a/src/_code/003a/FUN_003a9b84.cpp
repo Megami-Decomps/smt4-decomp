@@ -4,12 +4,12 @@
 extern "C" {
 
 extern u32 btlGetMainState(void);
-extern s32 FUN_0014bef4(u16 count);
+extern s32 randRange(u16 count);
 extern u16 dataTableGetCount(u32 table);
 extern u16 *dataTableGetEntries(u32 table);
 extern s32 scrGetArg(s32 arg);
 extern void scrSetResult(u32 value);
-extern u32 FUN_003ef960(u32 owner, u32 kind);
+extern u32 btlGetTable(u32 owner, u32 kind);
 
 s32 FUN_003a9b84(void)
 {
@@ -20,9 +20,9 @@ s32 FUN_003a9b84(void)
     if (scrGetArg(0) != 0) {
         kind = 0x12;
     }
-    table = FUN_003ef960(btlGetMainState(), kind);
+    table = btlGetTable(btlGetMainState(), kind);
     entries = dataTableGetEntries(table);
-    scrSetResult(entries[FUN_0014bef4(dataTableGetCount(table) - 1)]);
+    scrSetResult(entries[randRange(dataTableGetCount(table) - 1)]);
     return 1;
 }
 

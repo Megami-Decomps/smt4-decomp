@@ -5,13 +5,13 @@
 extern "C" {
 
 int FUN_00163aa4(int);
-int FUN_001846d0(int, int);
+int uiSpriteSelectAnim(int, int);
 int FUN_001f4908(int, int, unsigned int);
 int FUN_00212204(int);
 
 /* Supplied declaration required: FUN_00163aa4. */
 extern int FUN_00163e84(unsigned int);
-/* Supplied declaration required: FUN_001846d0. */
+/* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: FUN_001f4908. */
 /* Supplied declaration required: FUN_00212204. */
 
@@ -31,9 +31,9 @@ void FUN_002cdd18(int param_1)
     temp_v0 = FUN_00163aa4(param_1 + 0x20);
     if (((temp_v0 != 0) && (temp_v0 = FUN_00163aa4(param_1 + 0xac), temp_v0 != 0)) &&
        (temp_v0 = FUN_00163aa4(param_1 + 0x138), temp_v0 != 0)) {
-      FUN_001846d0(param_1 + 0x20,3);
-      FUN_001846d0(param_1 + 0xac,3);
-      FUN_001846d0(param_1 + 0x1c4,3);
+      uiSpriteSelectAnim(param_1 + 0x20,3);
+      uiSpriteSelectAnim(param_1 + 0xac,3);
+      uiSpriteSelectAnim(param_1 + 0x1c4,3);
       *(unsigned int *)(param_1 + 0x3f4) = 0;
       *(unsigned int *)(param_1 + 0x3f8) = 3;
     }

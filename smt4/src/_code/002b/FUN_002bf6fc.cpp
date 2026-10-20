@@ -14,7 +14,7 @@ typedef struct {
 extern int g_bustupCutAnim; /* 0x43dfc0 */
 
 /* Supplied declaration required: FUN_002aead8. */
-extern int FUN_002b7174(unsigned int);
+extern int jobWorkGetFirstWord(unsigned int);
 extern int jobIsValid(unsigned int);
 
 
@@ -36,7 +36,7 @@ FUN_002bf6fc(int param_1,unsigned int param_2,unsigned int param_3,unsigned int 
     do {
       temp_v3 = temp_v0 + temp_v2 * 4;
       temp_v1 = jobIsValid(*(unsigned int *)(temp_v3 + 0x630));
-      if ((temp_v1 != 0) && (temp_v1 = FUN_002b7174(*(unsigned int *)(temp_v3 + 0x630)), temp_v1 == param_1))
+      if ((temp_v1 != 0) && (temp_v1 = jobWorkGetFirstWord(*(unsigned int *)(temp_v3 + 0x630)), temp_v1 == param_1))
       {
         FUN_002aead8(*(unsigned int *)(temp_v0 + temp_v2 * 4 + 0x630),param_2,param_3,param_4,(int)temp_v4);
         return 1;

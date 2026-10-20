@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00122070(...);
 int FUN_002e6e26(...);
 int FUN_002e7908(...);
-int FUN_002e9afe(...);
+int vectorCopyHeader(...);
 int FUN_002e9d28(...);
 int FUN_002e9d6c(...);
 int FUN_002e9d98(...);
@@ -33,7 +33,7 @@ extern unsigned char LAB_00122ea4; /* 0x122ea4 */
 /* Supplied declaration required: FUN_00122070. */
 /* Supplied declaration required: FUN_002e6e26. */
 /* Supplied declaration required: FUN_002e7908. */
-/* Supplied declaration required: FUN_002e9afe. */
+/* Supplied declaration required: vectorCopyHeader. */
 /* Supplied declaration required: FUN_002e9d28. */
 /* Supplied declaration required: FUN_002e9d6c. */
 /* Supplied declaration required: FUN_002e9d98. */
@@ -98,7 +98,7 @@ FUN_00122ddc(int param_1,unsigned int param_2,romwright_code *param_3,unsigned i
             puVar6 = (unsigned int *)temp_v9;
             temp_v3 = 0x8001000b;
             piVar5 = (int *)FUN_002e7908(puVar6,puVar7);
-            FUN_002e9afe(param_5,piVar5);
+            vectorCopyHeader(param_5,piVar5);
             temp_v2 = 1;
             return temp_v2;
           }
@@ -109,7 +109,7 @@ FUN_00122ddc(int param_1,unsigned int param_2,romwright_code *param_3,unsigned i
       }
       piVar5 = temp_v4;
     }
-    FUN_002e9afe(param_5,piVar5);
+    vectorCopyHeader(param_5,piVar5);
     temp_v2 = 1;
   }
   return temp_v2;

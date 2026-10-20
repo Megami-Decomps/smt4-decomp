@@ -15,7 +15,7 @@ typedef struct {
     unsigned short spD6; /* 0xd6: local_d6 */
 } void_stack;
 
-extern int DAT_0057f108; /* 0x57f108 */
+extern int g_camp; /* 0x57f108 */
 
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_002f3bc4. */
@@ -34,10 +34,10 @@ void FUN_002add8c(void)
   unsigned char temp_v2 [98];
   unsigned short temp_v3;
   
-  temp_v0 = DAT_0057f108;
+  temp_v0 = g_camp;
   puVar2 = temp_v2;
-  if (*(char *)(DAT_0057f108 + 0xb7) != '\0') {
-    if (*(char *)(DAT_0057f108 + 0xb9) != '\x03') {
+  if (*(char *)(g_camp + 0xb7) != '\0') {
+    if (*(char *)(g_camp + 0xb9) != '\x03') {
       sysPlaySe(0x52);
       FUN_002f3bc4(temp_v2,(int)*(char *)(temp_v0 + 0xb9),(int)*(char *)(temp_v0 + 0xb8));
       if (puVar2 != (unsigned char *)0x0) {

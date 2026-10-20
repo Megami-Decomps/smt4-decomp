@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002eb588(int);
+int onlineTimeGetNow(int);
 
-/* Supplied declaration required: FUN_002eb588. */
+/* Supplied declaration required: onlineTimeGetNow. */
 extern int FUN_002ee46c(void);
 
 
@@ -30,7 +30,7 @@ int FUN_002eb9b0(int param_1,unsigned int param_2)
   *(int *)(*(int *)(param_1 + 0x14) + 8) = *(int *)(param_1 + 0x14);
   *(int *)(*(int *)(param_1 + 0x14) + 0xc) = *(int *)(param_1 + 0x14);
   *(unsigned int *)(param_1 + 0x20) = param_2;
-  FUN_002eb588(param_1 + 0x28);
+  onlineTimeGetNow(param_1 + 0x28);
   return param_1;
 }
 

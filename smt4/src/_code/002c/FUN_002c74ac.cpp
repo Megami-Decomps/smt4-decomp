@@ -5,17 +5,17 @@
 extern "C" {
 
 int CONCAT44(double, double);
-int FUN_001a84ac(...);
+int eventDispatchIfSet(...);
 int FUN_0024c370(...);
-int FUN_0024c39c(...);
+int handlerTableCall(...);
 int FUN_0024f880(...);
 int FUN_0024f890(...);
-int FUN_002501e0(...);
+int eventDispatch(...);
 int FUN_00281bb0(...);
 int FUN_002a2c7c(...);
 int FUN_002a36fc(...);
 int FUN_002a3ab0(...);
-int FUN_002b2b08(...);
+int resOwnerRunNodeHandlers(...);
 
 typedef struct fn_002c74ac_arg0 fn_002c74ac_arg0;
 typedef struct fn_002c74ac_arg0_p4c fn_002c74ac_arg0_p4c;
@@ -75,17 +75,17 @@ extern float DAT_004ea994; /* 0x4ea994 */
 extern float DAT_004ea998; /* 0x4ea998 */
 
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
-/* Supplied declaration required: FUN_001a84ac. */
+/* Supplied declaration required: eventDispatchIfSet. */
 /* Supplied declaration required: FUN_0024c370. */
-/* Supplied declaration required: FUN_0024c39c. */
+/* Supplied declaration required: handlerTableCall. */
 /* Supplied declaration required: FUN_0024f880. */
 /* Supplied declaration required: FUN_0024f890. */
-/* Supplied declaration required: FUN_002501e0. */
+/* Supplied declaration required: eventDispatch. */
 /* Supplied declaration required: FUN_00281bb0. */
 /* Supplied declaration required: FUN_002a2c7c. */
 /* Supplied declaration required: FUN_002a36fc. */
 /* Supplied declaration required: FUN_002a3ab0. */
-/* Supplied declaration required: FUN_002b2b08. */
+/* Supplied declaration required: resOwnerRunNodeHandlers. */
 
 
 void FUN_002c74ac(fn_002c74ac_arg0 *param_1)
@@ -162,7 +162,7 @@ void FUN_002c74ac(fn_002c74ac_arg0 *param_1)
         if (0 < temp_v2) {
           do {
             if (pfVar2[4] == 0.0f) {
-              FUN_002b2b08(*puVar3);
+              resOwnerRunNodeHandlers(*puVar3);
             }
             if (-1 < (int)pfVar2[4]) {
               DAT_004ea968 = (float)temp_v16;
@@ -212,7 +212,7 @@ void FUN_002c74ac(fn_002c74ac_arg0 *param_1)
         if (0 < temp_v2) {
           do {
             if (pfVar2[4] == 0.0f) {
-              FUN_002b2b08(*puVar3);
+              resOwnerRunNodeHandlers(*puVar3);
             }
             if (-1 < (int)pfVar2[4]) {
               FUN_002a36fc(*puVar3);
@@ -289,9 +289,9 @@ void FUN_002c74ac(fn_002c74ac_arg0 *param_1)
             DAT_004ea980 = temp_v17;
             DAT_004ea984 = temp_v18;
             DAT_004ea998 = temp_v25;
-            FUN_0024c39c(*puVar3);
+            handlerTableCall(*puVar3);
             FUN_0024c370(*puVar3,&temp_v27);
-            FUN_002501e0(*puVar3);
+            eventDispatch(*puVar3);
           }
           temp_v1 = temp_v1 + 1;
           pfVar2 = pfVar2 + 10;
@@ -305,12 +305,12 @@ void FUN_002c74ac(fn_002c74ac_arg0 *param_1)
       if (0 < temp_v2) {
         do {
           if (pfVar2[4] == 0.0f) {
-            FUN_001a84ac(*puVar3);
+            eventDispatchIfSet(*puVar3);
           }
           if (-1 < (int)pfVar2[4]) {
-            FUN_0024c39c(*puVar3);
+            handlerTableCall(*puVar3);
             FUN_0024c370(*puVar3,pfVar2);
-            FUN_002501e0(*puVar3);
+            eventDispatch(*puVar3);
           }
           temp_v1 = temp_v1 + 1;
           pfVar2 = pfVar2 + 10;

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0017ffa8(...);
 int FUN_00183bb0(void);
-int FUN_00184e64(...);
+int drawSetColorFromRGBA8(...);
 int FUN_001ad9b4(void);
 
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
@@ -17,8 +17,8 @@ typedef struct {
 
 /* Supplied declaration required: FUN_0017ffa8. */
 /* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_00184e64. */
-extern int FUN_0019f18c(int);
+/* Supplied declaration required: drawSetColorFromRGBA8. */
+extern int idIsAtLeast350(int);
 /* Supplied declaration required: FUN_001ad9b4. */
 extern int FUN_001bd100(int);
 extern int partyEntryFlagsBit3(void);
@@ -45,7 +45,7 @@ void FUN_0037ce80(int param_1,unsigned int param_2,unsigned int param_3,unsigned
     temp_v3 = 0x40f;
   }
   else {
-    temp_v1 = FUN_0019f18c(param_1);
+    temp_v1 = idIsAtLeast350(param_1);
     temp_v3 = 0x41b;
     temp_v2 = 0x41a;
     if (temp_v1 != 0) goto joined_r0x0037cee4;
@@ -118,7 +118,7 @@ joined_r0x0037cee4:
     }
   }
   temp_v2 = temp_v3;
-  FUN_00184e64(0x57d8ffff);
+  drawSetColorFromRGBA8(0x57d8ffff);
   FUN_0017ffa8(2,0xb,temp_v2,param_2,param_3,param_4);
   FUN_00183bb0();
   return;

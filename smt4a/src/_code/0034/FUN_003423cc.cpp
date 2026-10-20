@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern ScreenRef DAT_0057f0c4;
+extern ScreenRef g_buttonHelp;
 
 void FUN_003423cc(u16 value)
 {
-    if (DAT_0057f0c4.instance != NULL) {
-        DAT_0057f0c4.instance->unk5E6 = value;
+    if (g_buttonHelp.instance != NULL) {
+        g_buttonHelp.instance->unk5E6 = value;
     }
 }
 

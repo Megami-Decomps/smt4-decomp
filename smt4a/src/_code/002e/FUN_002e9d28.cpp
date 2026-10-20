@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002eb588(int *);
+int onlineTimeGetNow(int *);
 
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -14,7 +14,7 @@ typedef struct {
 
 extern unsigned char DAT_0055b2a4; /* 0x55b2a4 */
 
-/* Supplied declaration required: FUN_002eb588. */
+/* Supplied declaration required: onlineTimeGetNow. */
 
 
 unsigned int *
@@ -32,7 +32,7 @@ FUN_002e9d28(unsigned int *param_1,unsigned int param_2,unsigned int param_3,uns
   param_1[7] = param_2;
   temp_v0 = param_3;
   temp_v1 = param_4;
-  FUN_002eb588(&temp_v0);
+  onlineTimeGetNow(&temp_v0);
   param_1[4] = temp_v0;
   param_1[5] = temp_v1;
   param_1[8] = 1000;

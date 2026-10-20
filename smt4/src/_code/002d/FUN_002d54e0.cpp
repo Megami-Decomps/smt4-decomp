@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002a7838(int);
-int FUN_002b2368(int);
+int asdMemFreeNonNull(int);
 int jyoucyuGetTableEntry(int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -15,7 +15,7 @@ typedef struct {
 
 extern int FUN_00263c34(int);
 /* Supplied declaration required: FUN_002a7838. */
-/* Supplied declaration required: FUN_002b2368. */
+/* Supplied declaration required: asdMemFreeNonNull. */
 /* Supplied declaration required: jyoucyuGetTableEntry. */
 
 
@@ -32,7 +32,7 @@ void FUN_002d54e0(int param_1)
     FUN_002a7838(*(int *)(temp_v1 + 8));
     if (*(int *)(temp_v1 + 8) != 0) {
       temp_v0 = FUN_00263c34(*(int *)(temp_v1 + 8) + 0x110);
-      FUN_002b2368(temp_v0 - 0x110);
+      asdMemFreeNonNull(temp_v0 - 0x110);
     }
     *(unsigned int *)(temp_v1 + 8) = 0;
   }

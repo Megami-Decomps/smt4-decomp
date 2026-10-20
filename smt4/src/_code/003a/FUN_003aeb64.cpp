@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00255158(int, int);
 int FUN_0027e6f4(int, int);
-int FUN_00282924(unsigned int *, int);
+int btlMainFindEntryByListedId(unsigned int *, int);
 int btlGetMainState(void);
 int FUN_002b7bca(...);
 
@@ -23,7 +23,7 @@ extern unsigned char LAB_0021778c; /* 0x21778c */
 extern int FUN_002542ec(int);
 /* Supplied declaration required: FUN_00255158. */
 /* Supplied declaration required: FUN_0027e6f4. */
-/* Supplied declaration required: FUN_00282924. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_002b7bca. */
 
@@ -63,7 +63,7 @@ int FUN_003aeb64(unsigned int param_1,int param_2)
     piVar9 = (int *)(*(int *)(temp_v2 + 0x1e98) + temp_v5 * 0x114);
     if (piVar9 != (int *)0x0) {
       puVar4 = (unsigned int *)btlGetMainState();
-      FUN_00282924(puVar4,(int)*(short *)((int)piVar9 + 0x62));
+      btlMainFindEntryByListedId(puVar4,(int)*(short *)((int)piVar9 + 0x62));
       if (((puVar4 != (unsigned int *)0x0) && ((*puVar4 & 0x10) != 0)) && (piVar9[0x3c] < 0)) {
         temp_v6 = 0;
         temp_v2 = btlGetMainState();
@@ -113,7 +113,7 @@ int FUN_003aeb64(unsigned int param_1,int param_2)
     temp_v6 = *(int *)(temp_v6 + 0x1e98) + temp_v5 * 0x114;
     if (temp_v6 != 0) {
       puVar4 = (unsigned int *)btlGetMainState();
-      FUN_00282924(puVar4,(int)*(short *)(temp_v6 + 0x62));
+      btlMainFindEntryByListedId(puVar4,(int)*(short *)(temp_v6 + 0x62));
       if ((puVar4 != (unsigned int *)0x0) && (temp_v4 = *puVar4, (temp_v4 & 1) != 0)) {
         puVar10 = (unsigned int *)(temp_v11 + temp_v2 * 0x18);
         if ((temp_v4 & 2) != 0) {

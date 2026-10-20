@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002b47f4(int);
+int fileSlotGetBuffer(int);
 int dataTableGetEntries(void);
 int dataTableGet(...);
 
-extern unsigned int FUN_00254484(void);
-/* Supplied declaration required: FUN_002b47f4. */
+extern unsigned int tbcrBlockGetPayload(void);
+/* Supplied declaration required: fileSlotGetBuffer. */
 extern unsigned int dataTableGetCount(unsigned int);
 /* Supplied declaration required: dataTableGetEntries. */
 /* Supplied declaration required: dataTableGet. */
@@ -27,8 +27,8 @@ void FUN_002012f0(void)
   unsigned int temp_v4;
   unsigned int temp_v5;
   
-  FUN_002b47f4(0x19);
-  temp_v0 = FUN_00254484();
+  fileSlotGetBuffer(0x19);
+  temp_v0 = tbcrBlockGetPayload();
   temp_v1 = dataTableGet(0x19,0);
   temp_v2 = dataTableGetEntries();
   temp_v3 = dataTableGetCount(temp_v1);

@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_00163aa4(int);
-int FUN_00184c00(int, int, int);
+int uiSpriteSetImageKeyframe(int, int, int);
 int FUN_0048a378(int);
 
 /* Supplied declaration required: FUN_00163aa4. */
-/* Supplied declaration required: FUN_00184c00. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 extern int FUN_002bf444(void);
 /* Supplied declaration required: FUN_0048a378. */
 
@@ -21,8 +21,8 @@ void FUN_0048cd48(int param_1)
   int temp_v0;
   
   if (*(int *)(param_1 + 8) == 0) {
-    FUN_00184c00(param_1 + 0x11b8,3,0);
-    FUN_00184c00(param_1 + 0x1244,5,0);
+    uiSpriteSetImageKeyframe(param_1 + 0x11b8,3,0);
+    uiSpriteSetImageKeyframe(param_1 + 0x1244,5,0);
     FUN_0048a378(param_1);
     *(unsigned int *)(param_1 + 8) = 1;
     return;

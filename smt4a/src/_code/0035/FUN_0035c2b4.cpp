@@ -5,17 +5,17 @@ extern "C" {
 void jobStop(u32 job, s32 arg);
 void asdMemFree(void *block);
 
-extern EventEffectGlobalsA DAT_0057f3b4;
+extern EventEffectGlobalsA g_eventEffect;
 
 /* Stops the effect's job and frees it. */
 void FUN_0035c2b4(void)
 {
-    EventEffectA *effect = DAT_0057f3b4.effect;
+    EventEffectA *effect = g_eventEffect.effect;
 
-    if (DAT_0057f3b4.effect != NULL) {
-        jobStop(DAT_0057f3b4.effect->job, 0);
+    if (g_eventEffect.effect != NULL) {
+        jobStop(g_eventEffect.effect->job, 0);
         asdMemFree(effect);
-        DAT_0057f3b4.effect = NULL;
+        g_eventEffect.effect = NULL;
     }
 }
 

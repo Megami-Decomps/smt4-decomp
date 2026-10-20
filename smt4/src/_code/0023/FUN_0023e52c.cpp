@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00250d74(float *);
+int asdMemFreeIfNotNull(float *);
 int FUN_002b7bca(...);
 int asdOperatorNewC(void);
 int SBORROW4(unsigned int, unsigned int);
@@ -21,7 +21,7 @@ extern unsigned char DAT_00439ad0; /* 0x439ad0 */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 extern int randRange(unsigned int);
-/* Supplied declaration required: FUN_00250d74. */
+/* Supplied declaration required: asdMemFreeIfNotNull. */
 extern int FUN_00293230(int);
 /* Supplied declaration required: FUN_002b7bca. */
 /* Supplied declaration required: asdOperatorNewC. */
@@ -232,7 +232,7 @@ LAB_0023e858:
           *(int *)(temp_v12[temp_v5 + 1] + 0x5c) = (int)(pfVar5 + temp_v5)[1];
         }
       }
-      FUN_00250d74(pfVar5);
+      asdMemFreeIfNotNull(pfVar5);
     }
   }
 LAB_0023e7d0:

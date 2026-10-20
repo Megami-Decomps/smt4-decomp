@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_2_stack;
 
-extern int DAT_0044e190; /* 0x44e190 */
+extern int g_statusDown; /* 0x44e190 */
 
 /* Supplied declaration required: FUN_0029f848. */
 /* Supplied declaration required: rt_memcpy. */
@@ -28,8 +28,8 @@ void FUN_00215b64(unsigned int param_1,unsigned int param_2)
   int temp_v2;
   unsigned int temp_v3;
   
-  temp_v0 = DAT_0044e190;
-  *(unsigned int *)(DAT_0044e190 + 0x4c2) = 0;
+  temp_v0 = g_statusDown;
+  *(unsigned int *)(g_statusDown + 0x4c2) = 0;
   *(unsigned int *)(temp_v0 + 0x4c6) = 0;
   *(unsigned int *)(temp_v0 + 0x4ca) = 0;
   *(unsigned int *)(temp_v0 + 0x4ce) = 0;

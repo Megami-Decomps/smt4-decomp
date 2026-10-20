@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0023a62c(...);
-int FUN_002c3944(int, int);
+int rt_memclr(int, int);
 
 typedef struct fn_0034f0fc_arg1 fn_0034f0fc_arg1;
 struct fn_0034f0fc_arg1 {
@@ -35,7 +35,7 @@ typedef struct {
 } param_5_stack;
 
 /* Supplied declaration required: FUN_0023a62c. */
-/* Supplied declaration required: FUN_002c3944. */
+/* Supplied declaration required: rt_memclr. */
 
 
 unsigned int
@@ -96,7 +96,7 @@ LAB_0034f1b8:
     param_3[temp_v1] = temp_v2;
     temp_v3 = 0;
     if (temp_v2 != 0) {
-      FUN_002c3944(temp_v2,*param_5 * temp_v8 * 3);
+      rt_memclr(temp_v2,*param_5 * temp_v8 * 3);
       do {
         temp_v2 = param_2->field_0x8;
         if (!(temp_v2 == 4 || temp_v2 == 5)) {

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019a7f4(...);
+int asdTMTexTableReleaseNode(...);
 int FUN_0019e378(...);
 int FUN_001a6568(unsigned int, unsigned int, unsigned int, int);
 int FUN_001acf98(unsigned int, unsigned int);
@@ -34,8 +34,8 @@ extern unsigned int g_aocSystem; /* 0x570280 */
 
 extern int FUN_00162ea4(void);
 extern int jobGetWork(void);
-extern int FUN_0018206c(unsigned int);
-/* Supplied declaration required: FUN_0019a7f4. */
+extern int asdTMTexTableNodeIsLoaded(unsigned int);
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
 /* Supplied declaration required: FUN_0019e378. */
 extern int FUN_001a6508(unsigned int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001a6568. */
@@ -88,7 +88,7 @@ void FUN_0019c6cc(fn_0019c6cc_arg0 *param_1,int param_2,int param_3,int param_4,
     }
     if (*(char *)(temp_v0 + 0x7c) != '\0') {
       if (*(int *)(temp_v0 + 0x84) != -1) {
-        FUN_0019a7f4(*(unsigned int *)(temp_v0 + 0x10));
+        asdTMTexTableReleaseNode(*(unsigned int *)(temp_v0 + 0x10));
         FUN_001b2d54(g_aocSystem,*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 0x84));
         *(unsigned int *)(temp_v0 + 0x84) = 0xffffffff;
         *(unsigned int *)(temp_v0 + 0x80) = 0;
@@ -100,7 +100,7 @@ void FUN_0019c6cc(fn_0019c6cc_arg0 *param_1,int param_2,int param_3,int param_4,
       return;
     }
     if ((*(unsigned int *)(temp_v0 + 0x14) != 0xffffffff) &&
-       (temp_v1 = FUN_0018206c(*(unsigned int *)(temp_v0 + 0x10)), temp_v1 == 0)) {
+       (temp_v1 = asdTMTexTableNodeIsLoaded(*(unsigned int *)(temp_v0 + 0x10)), temp_v1 == 0)) {
       if (*(int *)(temp_v0 + 0x18) == -1) {
         *(unsigned int *)(temp_v0 + 0x18) = temp_v3;
       }
@@ -108,7 +108,7 @@ void FUN_0019c6cc(fn_0019c6cc_arg0 *param_1,int param_2,int param_3,int param_4,
     }
     if (((*(char *)(temp_v0 + 0x30) == '\0') || (*(float *)(temp_v0 + 0x28) == 0.0f)) &&
        (*(int *)(temp_v0 + 0xc) != 0)) {
-      FUN_0019a7f4(*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 0x14));
+      asdTMTexTableReleaseNode(*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 0x14));
       FUN_001b2d54(g_aocSystem,*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 0x14));
       *(unsigned int *)(temp_v0 + 0xc) = 0;
     }

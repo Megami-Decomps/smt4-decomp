@@ -4,11 +4,11 @@
 
 extern "C" {
 
-extern int FUN_001801a4(void);
-extern int FUN_0018719c(unsigned int);
-extern int FUN_001ab854(void);
-extern int FUN_001ab888(void);
-extern int FUN_001b347c(void);
+extern int gameGetPlayerData(void);
+extern int gameFlagIsSet(unsigned int);
+extern int gameGetSlotRecord(void);
+extern int gameGetSlotTable(void);
+extern int gameSlotTableFindFree(void);
 extern int FUN_003df57c(unsigned int, unsigned int);
 extern int FUN_004bcbb4(int, unsigned int);
 
@@ -27,11 +27,11 @@ unsigned int FUN_004a0404(void)
   int temp_v7;
   unsigned char temp_v8;
   
-  temp_v0 = FUN_0018719c(0x401);
+  temp_v0 = gameFlagIsSet(0x401);
   if (temp_v0 == 0) {
     return 0;
   }
-  temp_v0 = FUN_001801a4();
+  temp_v0 = gameGetPlayerData();
   temp_v2 = 0;
   do {
     temp_v4 = temp_v0 + temp_v2 * 2;
@@ -40,19 +40,19 @@ unsigned int FUN_004a0404(void)
       temp_v4 = (unsigned int)*(unsigned short *)(temp_v4 + 0x36);
     }
     if (temp_v6 == 0x8c || temp_v4 == 0x8c) {
-      temp_v0 = FUN_001801a4();
+      temp_v0 = gameGetPlayerData();
       temp_v2 = FUN_003df57c(0x8c,1);
       if (temp_v2 >= *(short *)(temp_v0 + 0x2c)) break;
       return 1;
     }
     temp_v2 = temp_v2 + 2;
   } while (7 >= temp_v2);
-  temp_v0 = FUN_001b347c();
-  temp_v2 = FUN_001ab888();
+  temp_v0 = gameSlotTableFindFree();
+  temp_v2 = gameGetSlotTable();
   temp_v7 = 0;
   if (temp_v7 < temp_v0) {
     do {
-      if ((-1 < *(char *)(temp_v2 + 0x1c88 + temp_v7)) && (temp_v1 = FUN_001ab854(), temp_v1 != 0)) {
+      if ((-1 < *(char *)(temp_v2 + 0x1c88 + temp_v7)) && (temp_v1 = gameGetSlotRecord(), temp_v1 != 0)) {
         temp_v3 = 0;
         do {
           temp_v5 = temp_v1 + temp_v3 * 2;

@@ -16,12 +16,12 @@ typedef struct Global588fd0 {
     /* 0x02 */ u8 unk02[2];
     /* 0x04 */ Game *game;
 } Global588fd0;
-extern Global588fd0 DAT_00588fd0;
+extern Global588fd0 g_gameGlobals;
 
 /* Returns whether there is a game record. */
 u8 FUN_0023b3f8(void)
 {
-    return DAT_00588fd0.game != NULL;
+    return g_gameGlobals.game != NULL;
 }
 
 } /* extern "C" */

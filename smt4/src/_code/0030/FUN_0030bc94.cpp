@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00262f94(void);
 int scrSetResult(int);
 
-extern int DAT_0043daa8; /* 0x43daa8 */
+extern int g_campCec; /* 0x43daa8 */
 
 /* Supplied declaration required: FUN_00262f94. */
 /* Supplied declaration required: scrSetResult. */
@@ -22,12 +22,12 @@ unsigned int FUN_0030bc94(void)
   int temp_v1;
   
   temp_v1 = scrGetArg();
-  if (DAT_0043daa8 == 0) {
+  if (g_campCec == 0) {
     temp_v0 = 0;
   }
   else {
     if (temp_v1 != 0) {
-      scrSetResult(*(unsigned short *)(DAT_0043daa8 + 0x126));
+      scrSetResult(*(unsigned short *)(g_campCec + 0x126));
       return 1;
     }
     FUN_00262f94();

@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_002e6e14(void);
-int FUN_002ea0b8(unsigned int *);
+int asdOperatorDeleteArray(void);
+int sharedRefInitEmpty(unsigned int *);
 
 extern unsigned char DAT_0055b10c; /* 0x55b10c */
 
-/* Supplied declaration required: FUN_002e6e14. */
-/* Supplied declaration required: FUN_002ea0b8. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
+/* Supplied declaration required: sharedRefInitEmpty. */
 
 
 void FUN_003106d0(unsigned int *param_1)
@@ -19,9 +19,9 @@ void FUN_003106d0(unsigned int *param_1)
 /* irregular: 2 native warning(s); review required */
   *param_1 = (unsigned int)&DAT_0055b10c;
   if (param_1[3] != 0) {
-    FUN_002e6e14();
+    asdOperatorDeleteArray();
   }
-  FUN_002ea0b8(param_1);
+  sharedRefInitEmpty(param_1);
   return;
 }
 

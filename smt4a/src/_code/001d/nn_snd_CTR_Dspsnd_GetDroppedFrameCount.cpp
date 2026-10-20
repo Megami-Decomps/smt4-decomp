@@ -2,7 +2,7 @@
 
 extern "C" {
 
-s32 FUN_001c6e20(void);
+s32 nn_snd_CTR_Dspsnd_IsInitialized(void);
 
 /* Returns the dropped frame count of the active status block, or -1 when the DSP is not available. */
 s32 nn_snd_CTR_Dspsnd_GetDroppedFrameCount(DspsndState *state)
@@ -10,7 +10,7 @@ s32 nn_snd_CTR_Dspsnd_GetDroppedFrameCount(DspsndState *state)
     s32 result;
     u32 count;
 
-    result = FUN_001c6e20();
+    result = nn_snd_CTR_Dspsnd_IsInitialized();
     if (result == 0) {
         count = 0xFFFFFFFF;
     } else {

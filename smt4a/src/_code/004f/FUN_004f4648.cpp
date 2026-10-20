@@ -10,7 +10,7 @@ int asdListBoxAddItem(...);
 int FUN_002e0898(...);
 int FUN_002ea508(...);
 int asdListBoxSetIntItem(...);
-int FUN_00317508(...);
+int asdListBoxSetByteValue(...);
 int FUN_00340edc(...);
 int jobSetWork7C(...);
 
@@ -28,7 +28,7 @@ extern unsigned char DAT_005281bc; /* 0x5281bc */
 /* Supplied declaration required: FUN_002e0898. */
 /* Supplied declaration required: FUN_002ea508. */
 /* Supplied declaration required: asdListBoxSetIntItem. */
-/* Supplied declaration required: FUN_00317508. */
+/* Supplied declaration required: asdListBoxSetByteValue. */
 /* Supplied declaration required: FUN_00340edc. */
 /* Supplied declaration required: jobSetWork7C. */
 
@@ -51,7 +51,7 @@ void FUN_004f4648(int param_1,int param_2,unsigned int param_3)
   FUN_00340edc(param_3,1,0xfffffc18);
   FUN_00340edc(param_3,2,0xfffffc18,1000);
   FUN_00340edc(param_3,3,0xfffffc18,1000);
-  FUN_00317508(param_3,1);
+  asdListBoxSetByteValue(param_3,1);
   return;
 }
 

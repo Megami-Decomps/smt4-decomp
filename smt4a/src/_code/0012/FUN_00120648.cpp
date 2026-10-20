@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002e9598(int, int, unsigned int, unsigned int, unsigned int);
+int onlineStringAssign(int, int, unsigned int, unsigned int, unsigned int);
 int FUN_003039f4(int, int);
 int FUN_00303a22(int, int);
 int FUN_00303a2e(void);
 
-/* Supplied declaration required: FUN_002e9598. */
+/* Supplied declaration required: onlineStringAssign. */
 /* Supplied declaration required: FUN_003039f4. */
 /* Supplied declaration required: FUN_00303a22. */
 /* Supplied declaration required: FUN_00303a2e. */
@@ -21,7 +21,7 @@ int FUN_00120648(int param_1,int param_2,unsigned int param_3,unsigned int param
 /* irregular: 4 native warning(s); review required */
   *(unsigned char *)(param_1 + 4) = *(unsigned char *)(param_2 + 4);
   *(unsigned int *)(param_1 + 8) = *(unsigned int *)(param_2 + 8);
-  FUN_002e9598(param_1 + 0xc,param_2 + 0xc,param_3,param_4,param_4);
+  onlineStringAssign(param_1 + 0xc,param_2 + 0xc,param_3,param_4,param_4);
   FUN_00303a22(param_1 + 0x14,param_2 + 0x14);
   FUN_00303a22(param_1 + 0x28,param_2 + 0x28);
   *(unsigned short *)(param_1 + 0x3c) = *(unsigned short *)(param_2 + 0x3c);

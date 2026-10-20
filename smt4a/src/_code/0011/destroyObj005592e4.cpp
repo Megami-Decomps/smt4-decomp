@@ -3,13 +3,13 @@
 extern "C" {
 
 extern const u8 DAT_005592e4[];  /* vtable */
-void FUN_002f6bf0(u32 handle);
+void operatorDeleteArrayNullable(u32 handle);
 void FUN_002faf62(void *self);
 u8 *FUN_002fb028(u8 *member);
 u8 *FUN_002ea00c(u8 *member);
 u8 *destroyObj0055ae64(u8 *member);
-u8 *FUN_002ea2d2(u8 *member);
-u8 *FUN_002e9318(u8 *member);
+u8 *ptrHolderDestroy(u8 *member);
+u8 *onlineStringDestroy(u8 *member);
 void FUN_002ecac4(u8 *member);
 
 typedef struct Object5592e4 {
@@ -26,16 +26,16 @@ void destroyObj005592e4(Object5592e4 *self)
     u8 *member;
 
     self->vtbl = DAT_005592e4;
-    FUN_002f6bf0(self->handle);
+    operatorDeleteArrayNullable(self->handle);
     FUN_002faf62(self);
     member = FUN_002fb028(self->member130);
     member = FUN_002ea00c(member - 0x60);
     member = destroyObj0055ae64(member - 0x24);
-    member = FUN_002ea2d2(member - 0x10);
-    member = FUN_002ea2d2(member - 8);
-    member = FUN_002ea2d2(member - 8);
-    member = FUN_002e9318(member - 0xC);
-    member = FUN_002e9318(member - 0x10);
+    member = ptrHolderDestroy(member - 0x10);
+    member = ptrHolderDestroy(member - 8);
+    member = ptrHolderDestroy(member - 8);
+    member = onlineStringDestroy(member - 0xC);
+    member = onlineStringDestroy(member - 0x10);
     FUN_002ecac4(member - 0x70);
 }
 

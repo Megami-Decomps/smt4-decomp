@@ -8,7 +8,7 @@ int FUN_0028ed3c(...);
 int FUN_0028ffb8(int);
 int FUN_00296ae8(unsigned int, int, unsigned int, int);
 int FUN_00296b3c(unsigned int, int, unsigned int, int);
-int FUN_002b63c0(void);
+int dataTable1bOr1cGetRecord(void);
 int FUN_002bcfc0(int, int);
 int FUN_002be624(int *, unsigned char *, int);
 
@@ -23,14 +23,14 @@ typedef struct {
 extern unsigned char LAB_0028ff98; /* 0x28ff98 */
 extern unsigned char LAB_0028ffb4; /* 0x28ffb4 */
 extern unsigned int g_aocSystem; /* 0x433158 */
-extern int DAT_0043dd50; /* 0x43dd50 */
+extern int g_uiQuest; /* 0x43dd50 */
 
 extern int FUN_00241c40(int);
 /* Supplied declaration required: FUN_0028ed3c. */
 /* Supplied declaration required: FUN_0028ffb8. */
 /* Supplied declaration required: FUN_00296ae8. */
 /* Supplied declaration required: FUN_00296b3c. */
-/* Supplied declaration required: FUN_002b63c0. */
+/* Supplied declaration required: dataTable1bOr1cGetRecord. */
 /* Supplied declaration required: FUN_002bcfc0. */
 /* Supplied declaration required: FUN_002be624. */
 extern unsigned char *FUN_002c5c04(unsigned int *);
@@ -48,7 +48,7 @@ void FUN_0028fe0c(int param_1,unsigned int param_2)
   unsigned char *temp_v3;
   int temp_v4;
   
-  temp_v0 = DAT_0043dd50;
+  temp_v0 = g_uiQuest;
   if (param_1 != 0) {
     FUN_0028ed3c(param_1,1);
     temp_v3 = (unsigned char *)FUN_00385ccc(g_aocSystem,param_1);
@@ -76,7 +76,7 @@ void FUN_0028fe0c(int param_1,unsigned int param_2)
     temp_v1 = FUN_003336dc(param_1,param_2);
     if (temp_v1 < 0) {
       temp_v1 = param_1;
-      FUN_002b63c0();
+      dataTable1bOr1cGetRecord();
       temp_v1 = temp_v1 + 0xe8;
       FUN_002bcfc0(temp_v1,0);
       temp_v3 = &LAB_0028ffb4;

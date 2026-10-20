@@ -9,7 +9,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-extern int DAT_0057f65c; /* 0x57f65c */
+extern int g_frameTex; /* 0x57f65c */
 
 
 void FUN_003bb210(void)
@@ -19,10 +19,10 @@ void FUN_003bb210(void)
   unsigned char *puVar2;
   unsigned char *puVar3;
   
-  temp_v0 = DAT_0057f65c;
-  puVar3 = (unsigned char *)(DAT_0057f65c + 0x1417);
-  puVar2 = (unsigned char *)(DAT_0057f65c + 0x1418);
-  *(unsigned char *)(DAT_0057f65c + 0x1414) = 1;
+  temp_v0 = g_frameTex;
+  puVar3 = (unsigned char *)(g_frameTex + 0x1417);
+  puVar2 = (unsigned char *)(g_frameTex + 0x1418);
+  *(unsigned char *)(g_frameTex + 0x1414) = 1;
   *puVar3 = 0;
   *puVar2 = 0;
   *(unsigned char *)(temp_v0 + 0x1419) = 0;

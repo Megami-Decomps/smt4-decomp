@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002b63c0(void);
+int dataTable1bOr1cGetRecord(void);
 
-/* Supplied declaration required: FUN_002b63c0. */
+/* Supplied declaration required: dataTable1bOr1cGetRecord. */
 
 
 void FUN_00333aac(unsigned int param_1)
@@ -14,7 +14,7 @@ void FUN_00333aac(unsigned int param_1)
 {
 /* irregular: 1 native warning(s); review required */
   if (param_1 >= 0x15e) {
-    FUN_002b63c0();
+    dataTable1bOr1cGetRecord();
   }
   return;
 }

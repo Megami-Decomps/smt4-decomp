@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0032c718(unsigned int, int, int);
+int soundChannelRequest(unsigned int, int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -22,7 +22,7 @@ extern unsigned int DAT_004c53ec; /* 0x4c53ec */
 extern unsigned int DAT_004c5400; /* 0x4c5400 */
 
 extern int jyoucyuGetTableEntry(unsigned int);
-/* Supplied declaration required: FUN_0032c718. */
+/* Supplied declaration required: soundChannelRequest. */
 
 
 void FUN_00287328(unsigned int param_1)
@@ -67,7 +67,7 @@ void FUN_00287328(unsigned int param_1)
     else {
       temp_v0 = jyoucyuGetTableEntry(1);
       if (temp_v0 == 0) {
-        FUN_0032c718(param_1,0,0x3c);
+        soundChannelRequest(param_1,0,0x3c);
         return;
       }
     }

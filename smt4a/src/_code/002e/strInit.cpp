@@ -9,13 +9,13 @@ typedef struct Object {
 
 extern u8 DAT_0055af54;
 
-extern Object *FUN_002e9f80(void);
+extern Object *sharedRefInit(void);
 extern u32 FUN_00121234(void);
 extern void FUN_002ecad4(Object *obj, u32 value, s32 arg);
 
 Object *strInit(void)
 {
-    Object *obj = FUN_002e9f80();
+    Object *obj = sharedRefInit();
 
     obj->vtbl = &DAT_0055af54;
     FUN_002ecad4(obj, FUN_00121234(), 0);

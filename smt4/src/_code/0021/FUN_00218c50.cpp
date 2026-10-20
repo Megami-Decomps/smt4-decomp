@@ -15,7 +15,7 @@ extern int g_titleScene; /* 0x44ea00 */
 extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_002b93c8. */
 /* Supplied declaration required: FUN_002ba12c. */
-extern int FUN_002beda4(int);
+extern int vec2GetXInt(int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
 
@@ -37,7 +37,7 @@ void FUN_00218c50(int param_1)
      (temp_v0 = btlGetMainState(), (*(unsigned int *)(temp_v0 + 0x44a0) & 0x200) == 0)) {
     temp_v6 = 0.29f;
     FUN_002ba12c(g_titleScene);
-    temp_v0 = FUN_002beda4(param_1 + 0x20f0);
+    temp_v0 = vec2GetXInt(param_1 + 0x20f0);
     temp_v0 = temp_v0 + (int)temp_v6;
     temp_v5 = 0;
     do {

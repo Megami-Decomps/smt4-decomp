@@ -5,13 +5,13 @@
 extern "C" {
 
 int asdTMTexTableFreeEntry(int);
-int FUN_002ae898(int);
+int asdTMTexTableReleaseNode(int);
 int asdMemFree(void);
 
 extern int DAT_0044e2e8; /* 0x44e2e8 */
 
 /* Supplied declaration required: asdTMTexTableFreeEntry. */
-/* Supplied declaration required: FUN_002ae898. */
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
 /* Supplied declaration required: asdMemFree. */
 
 
@@ -20,7 +20,7 @@ void FUN_00126420(void)
 {
 /* irregular: 3 native warning(s); review required */
   *(unsigned char *)(DAT_0044e2e8 + 4) = 1;
-  FUN_002ae898(0);
+  asdTMTexTableReleaseNode(0);
   asdTMTexTableFreeEntry(0);
   if (DAT_0044e2e8 != 0) {
     asdMemFree();

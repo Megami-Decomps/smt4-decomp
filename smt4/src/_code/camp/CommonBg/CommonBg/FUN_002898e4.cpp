@@ -27,7 +27,7 @@ extern unsigned char LAB_001ed134; /* 0x1ed134 */
 extern unsigned char LAB_00289c44; /* 0x289c44 */
 extern unsigned char LAB_00289c54; /* 0x289c54 */
 extern unsigned char LAB_00289c68; /* 0x289c68 */
-extern signed char DAT_0043dc20; /* 0x43dc20 */
+extern signed char g_commonBg; /* 0x43dc20 */
 extern unsigned int *DAT_0043dc24; /* 0x43dc24 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
@@ -36,7 +36,7 @@ extern unsigned int *DAT_0043dc24; /* 0x43dc24 */
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
 /* Supplied declaration required: uiFadeOpen. */
-extern int FUN_002c09d0(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: randNextInRange. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: asdMemAlloc. */
@@ -65,7 +65,7 @@ void FUN_002898e4(void)
   unsigned long long temp_v11;
   
   temp_v10 = 0x3f800000;
-  if (DAT_0043dc20 < '\x01') {
+  if (g_commonBg < '\x01') {
     if (DAT_0043dc24 == (unsigned int *)0x0) {
       puVar3 = (unsigned int *)0x100;
       asdMemAlloc(0x100,0x100,0,0xe0,1);
@@ -151,7 +151,7 @@ void FUN_002898e4(void)
   }
   puVar3 = DAT_0043dc24;
   if ((DAT_0043dc24 != (unsigned int *)0x0) && (DAT_0043dc24[2] == 0)) {
-    temp_v5 = FUN_002c09d0(0x400);
+    temp_v5 = gameFlagIsSet(0x400);
     if (temp_v5 != 0) {
       puVar3[3] = 0;
     }
@@ -162,7 +162,7 @@ void FUN_002898e4(void)
     puVar3[4] = temp_v10;
     puVar3[5] = 0;
   }
-  DAT_0043dc20 = DAT_0043dc20 + '\x01';
+  g_commonBg = g_commonBg + '\x01';
   return;
 }
 

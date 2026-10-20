@@ -14,7 +14,7 @@ typedef struct {
 
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
-extern unsigned int FUN_001a6f60(unsigned int, unsigned int);
+extern unsigned int dataTableFileGetTable(unsigned int, unsigned int);
 extern int FUN_001b315c(unsigned int);
 /* Supplied declaration required: FUN_001b31ac. */
 /* Supplied declaration required: FUN_001b31e0. */
@@ -49,7 +49,7 @@ int FUN_0046fd8c(int param_1,int param_2)
         if (temp_v7 < temp_v2) {
           do {
             if (*(char *)(temp_v1 + temp_v7 * 0x40) == '\x1b') {
-              temp_v3 = FUN_001a6f60(*(unsigned int *)(*(int *)(temp_v8 + 0x4c) + temp_v7 * 0x10),0);
+              temp_v3 = dataTableFileGetTable(*(unsigned int *)(*(int *)(temp_v8 + 0x4c) + temp_v7 * 0x10),0);
               temp_v0 = dataTableGetEntries();
               temp_v4 = dataTableGetCount(temp_v3);
               if ((int)temp_v4 < 1) {

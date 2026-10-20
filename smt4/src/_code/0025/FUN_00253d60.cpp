@@ -19,7 +19,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00283e48. */
 /* Supplied declaration required: FUN_0029903c. */
-extern int FUN_002b63ac(void);
+extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00394edc. */
 
 
@@ -58,7 +58,7 @@ void FUN_00253d60(int param_1,unsigned int param_2)
   if (temp_v8 && temp_v5 != temp_v0 >> 10) {
     *(unsigned short *)(param_1 + 0xc) = (temp_v0 & 0x3ff) | 0x400;
   }
-  temp_v2 = FUN_002b63ac();
+  temp_v2 = gameGetPlayerData();
   temp_v7 = 0;
   temp_v9 = *(unsigned int *)(temp_v2 + 0x34);
   temp_v10 = *(unsigned int *)(temp_v2 + 0x38);

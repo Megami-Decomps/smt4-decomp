@@ -8,7 +8,7 @@ int dataTable2fSub0GetCount(void);
 
 /* Supplied declaration required: dataTable2fSub0GetCount. */
 extern int *dataTable2fSub0GetRecord(int);
-extern int FUN_002c09d0(void);
+extern int gameFlagIsSet(void);
 
 
 int FUN_0030f528(int param_1)
@@ -32,15 +32,15 @@ int FUN_0030f528(int param_1)
       }
       if (temp_v0 == param_1) {
         if ((short)piVar1[1] != 0) {
-          temp_v1 = FUN_002c09d0();
+          temp_v1 = gameFlagIsSet();
           temp_v0 = 0;
           if (temp_v1 != 0) {
-            if ((*(short *)((int)piVar1 + 6) == 0) || (temp_v0 = FUN_002c09d0(), temp_v0 == 0)) {
+            if ((*(short *)((int)piVar1 + 6) == 0) || (temp_v0 = gameFlagIsSet(), temp_v0 == 0)) {
               return temp_v2;
             }
           }
         }
-        else if ((*(short *)((int)piVar1 + 6) == 0) || (temp_v0 = FUN_002c09d0(), temp_v0 == 0)) {
+        else if ((*(short *)((int)piVar1 + 6) == 0) || (temp_v0 = gameFlagIsSet(), temp_v0 == 0)) {
           return temp_v2;
         }
       }

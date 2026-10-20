@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b63c0(void);
+int dataTable1bOr1cGetRecord(void);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -13,9 +13,9 @@ typedef struct {
 } param_2_stack;
 
 extern unsigned int FUN_0028fb40(unsigned int);
-extern int FUN_002adc88(void);
-/* Supplied declaration required: FUN_002b63c0. */
-extern int FUN_002c2950(void);
+extern int gameGetFlagBlock(void);
+/* Supplied declaration required: dataTable1bOr1cGetRecord. */
+extern int gameGetMapBlock(void);
 
 
 void FUN_00348e88(unsigned int param_1,int param_2)
@@ -31,13 +31,13 @@ void FUN_00348e88(unsigned int param_1,int param_2)
   unsigned int temp_v6;
   unsigned char temp_v7;
   
-  temp_v0 = FUN_002c2950();
+  temp_v0 = gameGetMapBlock();
   temp_v6 = 0;
   do {
-    temp_v1 = FUN_002adc88();
+    temp_v1 = gameGetFlagBlock();
     if ((*(unsigned char *)(temp_v1 + (temp_v6 & 0xffff) * 4 + 0x200) & 2) != 0) {
       temp_v2 = temp_v6;
-      FUN_002b63c0();
+      dataTable1bOr1cGetRecord();
       if ((temp_v2 != 0) && (*(char *)(temp_v2 + 6) == '\0')) {
         temp_v1 = 0;
         do {
@@ -49,7 +49,7 @@ void FUN_00348e88(unsigned int param_1,int param_2)
           }
           if ((temp_v7 && temp_v3 == param_1) &&
              (temp_v3 = FUN_0028fb40(param_1), temp_v3 < *(unsigned int *)(temp_v5 + 0x170))) {
-            temp_v4 = FUN_002adc88();
+            temp_v4 = gameGetFlagBlock();
             temp_v4 = temp_v4 + (temp_v6 & 0xffff) * 4;
             *(unsigned char *)(temp_v4 + 0x202) = *(unsigned char *)(temp_v4 + 0x202) | 2;
             if (param_2 + temp_v3 >= *(unsigned int *)(temp_v5 + 0x170)) {

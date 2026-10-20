@@ -6,11 +6,11 @@ extern "C" {
 
 int FUN_001137c8(int, unsigned int);
 int FUN_002e93c2(int, unsigned int);
-int FUN_002e9ec8(int, unsigned int);
+int onlineInstanceTableFind(int, unsigned int);
 int FUN_002ea3d0(int, unsigned int);
 int FUN_002ea704(void);
 int FUN_002eb338(int *, unsigned char [8], unsigned int);
-int FUN_002eb588(unsigned char [8]);
+int onlineTimeGetNow(unsigned char [8]);
 int FUN_002f3490(unsigned char [24]);
 int FUN_002fa434(unsigned char [24], unsigned int);
 
@@ -32,13 +32,13 @@ extern unsigned int FUN_0010a0fc(void);
 /* Supplied declaration required: FUN_001137c8. */
 extern int FUN_00123808(int);
 /* Supplied declaration required: FUN_002e93c2. */
-extern int FUN_002e9af4(void);
-/* Supplied declaration required: FUN_002e9ec8. */
+extern int onlineInstanceTableGetCurrent(void);
+/* Supplied declaration required: onlineInstanceTableFind. */
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned char *, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
 /* Supplied declaration required: FUN_002ea704. */
 /* Supplied declaration required: FUN_002eb338. */
-/* Supplied declaration required: FUN_002eb588. */
+/* Supplied declaration required: onlineTimeGetNow. */
 extern int FUN_002eb5f4(void);
 /* Supplied declaration required: FUN_002f3490. */
 extern unsigned int FUN_002f8744(int);
@@ -65,8 +65,8 @@ void FUN_0010f424(int param_1)
   
   temp_v0 = FUN_002eb5f4();
   if ((temp_v0 != 0) && (temp_v0 = FUN_002ea704(), temp_v0 != 0)) {
-    temp_v0 = FUN_002e9af4();
-    FUN_002e9ec8(temp_v0,*(unsigned int *)(param_1 + 0x68));
+    temp_v0 = onlineInstanceTableGetCurrent();
+    onlineInstanceTableFind(temp_v0,*(unsigned int *)(param_1 + 0x68));
     if (temp_v0 != 0) {
       temp_v0 = FUN_002eb5f4();
       temp_v0 = *(int *)(temp_v0 + 0xd0);
@@ -87,7 +87,7 @@ void FUN_0010f424(int param_1)
         FUN_002ea3d0(param_1,temp_v1);
         FUN_002ea704();
         temp_v1 = FUN_0010a0fc();
-        FUN_002eb588(temp_v9);
+        onlineTimeGetNow(temp_v9);
         FUN_002eb338(&temp_v7,temp_v9,temp_v1);
         *(unsigned int *)(param_1 + 0xd0) = temp_v7;
         *(unsigned int *)(param_1 + 0xd4) = temp_v8;

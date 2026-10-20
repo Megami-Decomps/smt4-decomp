@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0029e8b8(...);
 int FUN_0029e93c(...);
 int FUN_0029eb5c(...);
-int FUN_002b8e84(int);
+int eventQueueAddUnique(int);
 
 /* stack frame of param_8: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -25,7 +25,7 @@ extern int FUN_0029e958(unsigned int);
 extern int FUN_0029ee54(unsigned int);
 extern int FUN_0029efa8(unsigned int);
 extern int FUN_0029efc0(unsigned int);
-/* Supplied declaration required: FUN_002b8e84. */
+/* Supplied declaration required: eventQueueAddUnique. */
 extern short __aeabi_idivmod(int);
 
 
@@ -84,7 +84,7 @@ FUN_0026ab64(unsigned int param_1,unsigned int param_2,int param_3,short param_4
       temp_v1 = FUN_0029efa8(param_1);
       temp_v2 = FUN_0029efc0(param_1);
       if (temp_v2 + temp_v1 != (int)temp_v0 && param_8 != 0) {
-        FUN_002b8e84(0x100016c);
+        eventQueueAddUnique(0x100016c);
       }
       FUN_0029eb5c(param_1,(int)temp_v0);
       return 1;
@@ -130,7 +130,7 @@ FUN_0026ab64(unsigned int param_1,unsigned int param_2,int param_3,short param_4
     }
   }
   if (param_8 != 0) {
-    FUN_002b8e84(0x100016c);
+    eventQueueAddUnique(0x100016c);
   }
   return 1;
 }

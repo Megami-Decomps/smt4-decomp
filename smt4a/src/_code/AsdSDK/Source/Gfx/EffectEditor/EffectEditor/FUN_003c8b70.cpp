@@ -5,8 +5,8 @@
 extern "C" {
 
 int CONCAT44(...);
-int FUN_00164af0(...);
-int FUN_001656a0(...);
+int padButtonRepeat(...);
+int padButtonIsPressed(...);
 int FUN_00202178(int);
 int FUN_00243ce8(int, int, int, unsigned char *);
 int FUN_00514878(void);
@@ -51,8 +51,8 @@ static float romwright_sqrt_4(float value)
 }
 #endif
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
-/* Supplied declaration required: FUN_00164af0. */
-/* Supplied declaration required: FUN_001656a0. */
+/* Supplied declaration required: padButtonRepeat. */
+/* Supplied declaration required: padButtonIsPressed. */
 /* Supplied declaration required: FUN_00202178. */
 /* Supplied declaration required: FUN_00243ce8. */
 /* Supplied declaration required: FUN_00514878. */
@@ -78,20 +78,20 @@ unsigned int FUN_003c8b70(void)
   FUN_00243ce8(8,8,0,&LAB_003c8e54);
   FUN_00243ce8(8,0x14,0,&LAB_003c8e6c);
   FUN_00243ce8(8,0x20,0,&LAB_003c8e80);
-  temp_v2 = FUN_00164af0(5);
+  temp_v2 = padButtonRepeat(5);
   temp_v5 = 10.0f;
   if (temp_v2 == 0) {
     FUN_00202178(5);
-    temp_v2 = FUN_00164af0();
+    temp_v2 = padButtonRepeat();
     if (temp_v2 != 0) {
       DAT_006352f4 = DAT_006352f4 - temp_v5;
       temp_v3 = 3;
     }
     else {
-      temp_v2 = FUN_00164af0(6);
+      temp_v2 = padButtonRepeat(6);
       if (temp_v2 == 0) {
         FUN_00202178(6);
-        temp_v2 = FUN_00164af0();
+        temp_v2 = padButtonRepeat();
         if (temp_v2 != 0) {
           DAT_006352f4 = DAT_006352f4 + temp_v5;
           temp_v3 = 3;
@@ -107,20 +107,20 @@ unsigned int FUN_003c8b70(void)
     DAT_006352f4 = DAT_006352f4 - temp_v5;
     temp_v3 = 3;
   }
-  temp_v2 = FUN_00164af0(7);
+  temp_v2 = padButtonRepeat(7);
   temp_v6 = (unsigned long long)(unsigned int)temp_v5 << 0x20;
   if (temp_v2 == 0) {
     FUN_00202178(7);
-    temp_v2 = FUN_00164af0();
+    temp_v2 = padButtonRepeat();
     if (temp_v2 != 0) {
       temp_v3 = temp_v3 | 2;
       temp_v6 = romwright_piece_4_4(0xc1200000,(int)temp_v6);
     }
     else {
-      temp_v2 = FUN_00164af0(8);
+      temp_v2 = padButtonRepeat(8);
       if (temp_v2 == 0) {
         FUN_00202178(8);
-        temp_v2 = FUN_00164af0();
+        temp_v2 = padButtonRepeat();
         if (temp_v2 == 0) {
           temp_v6 = romwright_piece_4_4((int)temp_v6,(int)temp_v6);
         }
@@ -147,21 +147,21 @@ unsigned int FUN_003c8b70(void)
     temp_v7 = DAT_006352f8;
     DAT_006472e0 = temp_v5;
     DAT_006472e8 = temp_v5;
-    temp_v2 = FUN_00164af0(3);
+    temp_v2 = padButtonRepeat(3);
     temp_v10 = 100.0f;
     if (temp_v2 == 0) {
       FUN_00202178(3);
-      temp_v2 = FUN_00164af0();
+      temp_v2 = padButtonRepeat();
       if (temp_v2 != 0) {
         temp_v3 = temp_v3 | 2;
         temp_v6 = CONCAT44((int)((unsigned long long)temp_v6 >> 0x20),
                          (temp_v10 / (float)((unsigned long long)temp_v9 >> 0x20)) * 0.08726646f);
       }
       else {
-        temp_v2 = FUN_00164af0(4);
+        temp_v2 = padButtonRepeat(4);
         if (temp_v2 == 0) {
           FUN_00202178(4);
-          temp_v2 = FUN_00164af0();
+          temp_v2 = padButtonRepeat();
           if (temp_v2 != 0) {
             temp_v3 = temp_v3 | 2;
             temp_v6 = CONCAT44((int)((unsigned long long)temp_v6 >> 0x20),
@@ -212,10 +212,10 @@ unsigned int FUN_003c8b70(void)
   temp_v5 = (float)((unsigned long long)temp_v6 >> 0x20);
   DAT_006352f0 = DAT_006352f0 + DAT_0059f020 * temp_v5;
   DAT_006352f8 = DAT_006352f8 + DAT_0059f028 * temp_v5;
-  temp_v2 = FUN_001656a0(1);
+  temp_v2 = padButtonIsPressed(1);
   if (temp_v2 == 0) {
     FUN_00202178(1);
-    temp_v2 = FUN_001656a0();
+    temp_v2 = padButtonIsPressed();
     if (temp_v2 == 0) {
       return temp_v3 | 0x200000;
     }

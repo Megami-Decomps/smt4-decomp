@@ -35,7 +35,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
-extern int FUN_002c09d0(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
@@ -93,17 +93,17 @@ void FUN_0018b49c(int param_1,int param_2)
   }
   FUN_002bf380(2,0x2f,1,temp_v13,temp_v11,0x10);
   temp_v10 = 0xffffffff;
-  temp_v5 = FUN_002c09d0(0x555);
-  if ((temp_v5 != 0) && (temp_v5 = FUN_002c09d0(0x557), temp_v5 != 0)) {
+  temp_v5 = gameFlagIsSet(0x555);
+  if ((temp_v5 != 0) && (temp_v5 = gameFlagIsSet(0x557), temp_v5 != 0)) {
     temp_v10 = 2;
   }
   else {
-    temp_v5 = FUN_002c09d0(0x557);
+    temp_v5 = gameFlagIsSet(0x557);
     if (temp_v5 != 0) {
       temp_v10 = 1;
     }
     else {
-      temp_v5 = FUN_002c09d0(0x555);
+      temp_v5 = gameFlagIsSet(0x555);
       if (temp_v5 != 0) {
         temp_v10 = 0;
       }

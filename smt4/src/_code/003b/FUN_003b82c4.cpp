@@ -6,12 +6,12 @@ extern "C" {
 
 int FUN_00297060(unsigned int, unsigned int);
 int FUN_00297468(...);
-int FUN_002a5ed0(int, unsigned int);
+int asdTMTexTableLoadEntryAsync(int, unsigned int);
 int FUN_002be624(...);
 
 /* Supplied declaration required: FUN_00297060. */
 /* Supplied declaration required: FUN_00297468. */
-/* Supplied declaration required: FUN_002a5ed0. */
+/* Supplied declaration required: asdTMTexTableLoadEntryAsync. */
 /* Supplied declaration required: FUN_002be624. */
 extern unsigned int FUN_002c5c04(char *);
 
@@ -46,7 +46,7 @@ void FUN_003b82c4(int param_1)
     *(unsigned int *)(param_1 + 0x90) = temp_v0;
     *(unsigned int *)(param_1 + 0x94) = temp_v1;
   }
-  FUN_002a5ed0(0x21,*(unsigned int *)(param_1 + 0x90));
+  asdTMTexTableLoadEntryAsync(0x21,*(unsigned int *)(param_1 + 0x90));
   FUN_002be624(temp_v3,"mikado/m%03d/m%03d.bf",(int)*(short *)(param_1 + 0x3c),
                (int)*(short *)(param_1 + 0x3c));
   FUN_002be624(temp_v4,"mikado/m%03d/m%03d.mbm",(int)*(short *)(param_1 + 0x3c),

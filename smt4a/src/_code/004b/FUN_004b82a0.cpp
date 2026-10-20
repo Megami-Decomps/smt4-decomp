@@ -8,11 +8,11 @@ int ARM_common_memcpy4_9(unsigned int *, unsigned char *);
 int asdSequenceRequest(...);
 int FUN_001ad9b4(void);
 int FUN_00237418(void);
-int FUN_00270b00(void);
+int bgmReleaseStopped(void);
 int FUN_00270c58(int);
-int FUN_002e342c(...);
+int libc_strcpy(...);
 int obj04Finish(void);
-int FUN_003d2d6c(int);
+int soundChannelStopAll(int);
 int FUN_003d54f8(int, int);
 int FUN_004b7a08(int);
 
@@ -36,11 +36,11 @@ extern int DAT_005f1c98; /* 0x5f1c98 */
 /* Supplied declaration required: FUN_001ad9b4. */
 extern int FUN_001bd118(void);
 /* Supplied declaration required: FUN_00237418. */
-/* Supplied declaration required: FUN_00270b00. */
+/* Supplied declaration required: bgmReleaseStopped. */
 /* Supplied declaration required: FUN_00270c58. */
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: obj04Finish. */
-/* Supplied declaration required: FUN_003d2d6c. */
+/* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: FUN_003d54f8. */
 extern int FUN_004186e0(void);
 /* Supplied declaration required: FUN_004b7a08. */
@@ -97,7 +97,7 @@ void FUN_004b82a0(int param_1)
       FUN_00237418();
       temp_v5[0] = *(unsigned int *)(*(int *)(param_1 + 0x111c) + 0x40);
       temp_v5[1] = 0xffffffff;
-      FUN_002e342c(temp_v5 + 2,*(int *)(param_1 + 0x111c) + 0x44);
+      libc_strcpy(temp_v5 + 2,*(int *)(param_1 + 0x111c) + 0x44);
       temp_v4 = 0x20;
       temp_v2 = 4;
       puVar5 = temp_v5;
@@ -106,7 +106,7 @@ void FUN_004b82a0(int param_1)
       FUN_00237418();
       temp_v5[0] = DAT_005f1658;
       temp_v5[1] = 0xffffffff;
-      FUN_002e342c(temp_v5 + 2,&DAT_005f1660);
+      libc_strcpy(temp_v5 + 2,&DAT_005f1660);
       temp_v4 = 0x20;
       temp_v2 = 4;
       puVar5 = temp_v5;
@@ -162,8 +162,8 @@ void FUN_004b82a0(int param_1)
     }
     else {
       if (*(char *)(param_1 + 0x4b) == '\0') goto LAB_004b8550;
-      FUN_00270b00();
-      FUN_003d2d6c(0xf);
+      bgmReleaseStopped();
+      soundChannelStopAll(0xf);
       DAT_005f1634 = 1;
       temp_v5[0] = 1;
       temp_v5[1] = 0xffffffff;

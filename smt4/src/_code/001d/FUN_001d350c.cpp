@@ -8,7 +8,7 @@ int FUN_00266f30(void);
 int FUN_00266fac(int);
 int FUN_00287a78(void);
 int FUN_00287aec(void);
-int FUN_002bf694(int, int);
+int libc_strcpy(int, int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -22,7 +22,7 @@ extern unsigned char g_gameState; /* 0x49f91c */
 /* Supplied declaration required: FUN_00266fac. */
 /* Supplied declaration required: FUN_00287a78. */
 /* Supplied declaration required: FUN_00287aec. */
-/* Supplied declaration required: FUN_002bf694. */
+/* Supplied declaration required: libc_strcpy. */
 
 
 void FUN_001d350c(void)
@@ -78,7 +78,7 @@ void FUN_001d350c(void)
             pcVar2 = (char *)(unsigned int)*(unsigned char *)(temp_v1 + 9);
           }
           if (temp_v0 != '0' || pcVar2 != (char *)0x0) {
-            FUN_002bf694(DAT_00447e58 + 0xe1c,temp_v1 + 8);
+            libc_strcpy(DAT_00447e58 + 0xe1c,temp_v1 + 8);
             return;
           }
         }

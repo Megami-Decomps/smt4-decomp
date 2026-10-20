@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern MapGimic *DAT_00580ca0;
+extern MapGimic *g_mapGimic;
 
 void FUN_00294928(void)
 {
-    DAT_00580ca0->unk84 = 1;
+    g_mapGimic->unk84 = 1;
 }
 
 } /* extern "C" */

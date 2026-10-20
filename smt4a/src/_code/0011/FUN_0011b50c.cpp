@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_00110ab0(...);
-int FUN_002fbb60(...);
-int FUN_002fbb68(...);
+int bufferAssignByteAlias(...);
+int strHolderAssignU32Alias(...);
 int FUN_002fbb70(...);
 int FUN_00307254(int, int);
-int FUN_00307408(int, int);
+int strHolderAssignU16(int, int);
 int FUN_00307412(int, int);
 int FUN_0030742a(int, int);
 int FUN_00307454(...);
@@ -24,11 +24,11 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00110ab0. */
 extern unsigned int byteRefMin(unsigned char *, unsigned char *);
-/* Supplied declaration required: FUN_002fbb60. */
-/* Supplied declaration required: FUN_002fbb68. */
+/* Supplied declaration required: bufferAssignByteAlias. */
+/* Supplied declaration required: strHolderAssignU32Alias. */
 /* Supplied declaration required: FUN_002fbb70. */
 /* Supplied declaration required: FUN_00307254. */
-/* Supplied declaration required: FUN_00307408. */
+/* Supplied declaration required: strHolderAssignU16. */
 /* Supplied declaration required: FUN_00307412. */
 /* Supplied declaration required: FUN_0030742a. */
 /* Supplied declaration required: FUN_00307454. */
@@ -53,27 +53,27 @@ void FUN_0011b50c(int param_1,int param_2)
     temp_v7[0] = 1;
     temp_v6[0] = *(unsigned char *)(param_2 + 4);
     temp_v1 = byteRefMin(temp_v6,temp_v7);
-    FUN_002fbb60(param_1,temp_v1);
+    bufferAssignByteAlias(param_1,temp_v1);
     temp_v3 = *(int *)(*(int *)(param_1 + 8) + 0x10);
     temp_v4 = 0;
-    FUN_002fbb68(param_1,&temp_v4);
+    strHolderAssignU32Alias(param_1,&temp_v4);
   }
-  FUN_002fbb60(param_1,param_2 + 5);
+  bufferAssignByteAlias(param_1,param_2 + 5);
   FUN_00307254(param_1,param_2 + 8);
-  FUN_002fbb60(param_1,param_2 + 0x14);
+  bufferAssignByteAlias(param_1,param_2 + 0x14);
   FUN_00307254(param_1,param_2 + 0x18);
-  FUN_00307408(param_1,param_2 + 0x24);
+  strHolderAssignU16(param_1,param_2 + 0x24);
   FUN_00307412(param_1,param_2 + 0x28);
   FUN_00307412(param_1,param_2 + 0x30);
   FUN_00307412(param_1,param_2 + 0x38);
   FUN_00307412(param_1,param_2 + 0x40);
-  FUN_002fbb68(param_1,param_2 + 0x48);
+  strHolderAssignU32Alias(param_1,param_2 + 0x48);
   FUN_0030742a(param_1,param_2 + 0x4c);
-  FUN_002fbb60(param_1,param_2 + 0x58);
-  FUN_002fbb60(param_1,param_2 + 0x59);
+  bufferAssignByteAlias(param_1,param_2 + 0x58);
+  bufferAssignByteAlias(param_1,param_2 + 0x59);
   FUN_00110ab0(param_1,param_2 + 0x5c);
-  FUN_002fbb60(param_1,param_2 + 0x6c);
-  FUN_002fbb68(param_1,param_2 + 0x70);
+  bufferAssignByteAlias(param_1,param_2 + 0x6c);
+  strHolderAssignU32Alias(param_1,param_2 + 0x70);
   if (temp_v0 == '\0') {
     if (*(char *)(param_2 + 4) != '\0') {
       FUN_00307454(param_1,param_2 + 0x74);
@@ -81,7 +81,7 @@ void FUN_0011b50c(int param_1,int param_2)
     temp_v2 = *(int *)(*(int *)(param_1 + 8) + 0x10);
     FUN_002fbb70(param_1,temp_v3);
     temp_v5 = (temp_v2 - temp_v3) - 4;
-    FUN_002fbb68(param_1,&temp_v5);
+    strHolderAssignU32Alias(param_1,&temp_v5);
     FUN_002fbb70(param_1,temp_v2);
   }
   return;

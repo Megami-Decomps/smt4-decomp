@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0017572c(int, int);
+int listAppendNode(int, int);
 int FUN_0019102c(int, int);
 
 typedef int romwright_code(...);
@@ -24,7 +24,7 @@ typedef struct {
 } param_1_stack;
 
 extern int FUN_00175678(void);
-/* Supplied declaration required: FUN_0017572c. */
+/* Supplied declaration required: listAppendNode. */
 /* Supplied declaration required: FUN_0019102c. */
 
 
@@ -69,7 +69,7 @@ void FUN_001743b8(int *param_1)
     *(unsigned char *)(temp_v2 + 4) = 0xc;
     temp_v4 = (**(romwright_code **)(*param_1 + 0x20))(param_1);
     *(unsigned int *)(temp_v2 + 0x10) = temp_v4;
-    FUN_0017572c(temp_v3,temp_v2);
+    listAppendNode(temp_v3,temp_v2);
   }
   else {
     temp_v2 = (**(romwright_code **)(*param_1 + 0x14))(param_1);
@@ -190,7 +190,7 @@ LAB_00174528:
         *(unsigned char *)(temp_v3 + 4) = 5;
         temp_v4 = (**(romwright_code **)(*param_1 + 0x20))(param_1);
         *(unsigned int *)(temp_v3 + 0x10) = temp_v4;
-        FUN_0017572c(temp_v2,temp_v3);
+        listAppendNode(temp_v2,temp_v3);
         *(unsigned char *)((int)param_1 + 0x99) = 1;
         *(unsigned char *)(param_1 + 0x26) = 0;
       }
@@ -207,7 +207,7 @@ LAB_00174528:
         temp_v4 = (**(romwright_code **)(*param_1 + 0x20))(param_1);
         *(unsigned int *)(temp_v3 + 0x10) = temp_v4;
         *(unsigned char *)(temp_v3 + 0x14) = 1;
-        FUN_0017572c(temp_v2,temp_v3);
+        listAppendNode(temp_v2,temp_v3);
         *(unsigned char *)((int)param_1 + 0xa1) = 2;
       }
       if (*(char *)((int)param_1 + 0xa3) != '\0') {
@@ -218,7 +218,7 @@ LAB_00174528:
         temp_v4 = (**(romwright_code **)(*param_1 + 0x20))(param_1);
         *(unsigned int *)(temp_v3 + 0x10) = temp_v4;
         *(unsigned char *)(temp_v3 + 0x14) = 0;
-        FUN_0017572c(temp_v2,temp_v3);
+        listAppendNode(temp_v2,temp_v3);
         *(unsigned char *)((int)param_1 + 0xa3) = 0;
       }
       if (*(char *)((int)param_1 + 0xa2) != '\x01') {

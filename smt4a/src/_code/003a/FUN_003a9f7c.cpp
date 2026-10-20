@@ -15,7 +15,7 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_001634b4. */
-extern int FUN_001654d8(int);
+extern int vec2GetXInt(int);
 /* Supplied declaration required: FUN_001879d0. */
 
 
@@ -34,7 +34,7 @@ void FUN_003a9f7c(int param_1)
         (*(unsigned int *)(temp_v0 + 0x45a4) & DAT_00573c74) == 0) {
       temp_v2 = 0.29f;
       FUN_001879d0(g_renderCtx);
-      temp_v0 = FUN_001654d8(param_1 + 0x20f0);
+      temp_v0 = vec2GetXInt(param_1 + 0x20f0);
       temp_v1 = 0;
       do {
         if ((temp_v1 < 4) && (*(char *)(param_1 + 0x2201) != '\0')) {

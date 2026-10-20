@@ -8,8 +8,8 @@ int FUN_001028b8(int, int, unsigned char *, unsigned int);
 int sysMemClear(unsigned char *, int);
 
 extern unsigned char LAB_002e4d80; /* 0x2e4d80 */
-extern unsigned int DAT_005702f8; /* 0x5702f8 */
-extern unsigned char DAT_005c6000; /* 0x5c6000 */
+extern unsigned int g_keyedRecordCount; /* 0x5702f8 */
+extern unsigned char g_keyedRecords; /* 0x5c6000 */
 
 extern unsigned char *FUN_00100d60(int, unsigned int);
 /* Supplied declaration required: FUN_001028b8. */
@@ -24,15 +24,15 @@ unsigned int FUN_002e4c2c(unsigned int param_1)
   unsigned char temp_v0;
   int temp_v1;
   
-  sysMemClear(&DAT_005c6000 + DAT_005702f8 * 0x148,0x148);
-  temp_v1 = DAT_005702f8 * 0x148 + 0x5c6001;
+  sysMemClear(&g_keyedRecords + g_keyedRecordCount * 0x148,0x148);
+  temp_v1 = g_keyedRecordCount * 0x148 + 0x5c6001;
   FUN_001028b8(temp_v1,0x1f,&LAB_002e4d80,param_1);
   puVar1 = (unsigned char *)FUN_00100d60(temp_v1,0x2e);
   if (puVar1 != (unsigned char *)0x0) {
     *puVar1 = 0;
   }
-  temp_v0 = DAT_005702f8;
-  temp_v1 = DAT_005702f8 * 0x148;
+  temp_v0 = g_keyedRecordCount;
+  temp_v1 = g_keyedRecordCount * 0x148;
   *(unsigned char *)(temp_v1 + 0x5c6136) = 0xff;
   *(unsigned char *)(temp_v1 + 0x5c6135) = 0xff;
   *(unsigned char *)(temp_v1 + 0x5c6134) = 0xff;
@@ -81,7 +81,7 @@ unsigned int FUN_002e4c2c(unsigned int param_1)
   *(unsigned char *)(temp_v1 + 0x5c60be) = 0xff;
   *(unsigned char *)(temp_v1 + 0x5c60bd) = 0xff;
   *(unsigned char *)(temp_v1 + 0x5c60bc) = 0xff;
-  DAT_005702f8 = DAT_005702f8 + 1;
+  g_keyedRecordCount = g_keyedRecordCount + 1;
   return temp_v0;
 }
 

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_004102d8(int, int, int, unsigned int);
 
-extern int DAT_005712f0; /* 0x5712f0 */
+extern int g_btlActionReflect; /* 0x5712f0 */
 
 /* Supplied declaration required: FUN_004102d8. */
 
@@ -18,8 +18,8 @@ void FUN_004fb528(short param_1,unsigned int param_2,unsigned int param_3,unsign
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = DAT_005712f0;
-  FUN_004102d8(DAT_005712f0,(int)param_1,0,param_2);
+  temp_v0 = g_btlActionReflect;
+  FUN_004102d8(g_btlActionReflect,(int)param_1,0,param_2);
   *(unsigned char *)(temp_v0 + 4) = 0x25;
   *(unsigned int *)(temp_v0 + 0x14) = param_3;
   *(unsigned int *)(temp_v0 + 0x28) = param_5;

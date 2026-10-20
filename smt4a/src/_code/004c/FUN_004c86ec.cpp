@@ -4,16 +4,16 @@
 
 extern "C" {
 
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: dataTable04FindById. */
 
 
 unsigned int FUN_004c86ec(int param_1)
 
 {
 /* irregular: 1 native warning(s); review required */
-  if (((param_1 != 0) && (FUN_001aba54(), param_1 != 0)) &&
+  if (((param_1 != 0) && (dataTable04FindById(), param_1 != 0)) &&
      ((*(unsigned char *)(param_1 + 0x32) == 0xfb || *(unsigned char *)(param_1 + 0x32) == 0xf9 ||
       (((*(unsigned char *)(param_1 + 0x33) == 0xfb || *(unsigned char *)(param_1 + 0x33) == 0xf9 ||
         (*(unsigned char *)(param_1 + 0x34) == 0xfb || *(unsigned char *)(param_1 + 0x34) == 0xf9)) ||

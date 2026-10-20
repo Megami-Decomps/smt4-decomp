@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002e9318(int **);
-int FUN_002e9ec8(int, unsigned int);
+int onlineStringDestroy(int **);
+int onlineInstanceTableFind(int, unsigned int);
 int FUN_002e9f00(int, int, int);
 int constructObj0055affc(int **);
 int FUN_002f6be2(int **, int *);
-int FUN_002f6bf0(int);
+int operatorDeleteArrayNullable(int);
 int FUN_00302428(int, int *, int);
 
 typedef int romwright_code(...);
@@ -26,13 +26,13 @@ extern unsigned char LAB_0012ad90; /* 0x12ad90 */
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: FUN_002e9318. */
-extern int FUN_002e9af4(void);
-/* Supplied declaration required: FUN_002e9ec8. */
+/* Supplied declaration required: onlineStringDestroy. */
+extern int onlineInstanceTableGetCurrent(void);
+/* Supplied declaration required: onlineInstanceTableFind. */
 /* Supplied declaration required: FUN_002e9f00. */
 /* Supplied declaration required: constructObj0055affc. */
 /* Supplied declaration required: FUN_002f6be2. */
-/* Supplied declaration required: FUN_002f6bf0. */
+/* Supplied declaration required: operatorDeleteArrayNullable. */
 /* Supplied declaration required: FUN_00302428. */
 
 
@@ -50,8 +50,8 @@ unsigned long long FUN_0012ad10(int param_1,int *param_2,int param_3,unsigned in
   piStack_1c = param_2;
   temp_v2 = param_3;
   temp_v3 = param_4;
-  temp_v0 = FUN_002e9af4();
-  FUN_002e9ec8(temp_v0,*(unsigned int *)(param_1 + 0x6c));
+  temp_v0 = onlineInstanceTableGetCurrent();
+  onlineInstanceTableFind(temp_v0,*(unsigned int *)(param_1 + 0x6c));
   if (temp_v0 != 0) {
     constructObj0055affc(&piStack_1c);
     temp_v0 = (**(romwright_code **)(*param_2 + 0x4c))(param_2,&LAB_0012ad90,&piStack_1c);
@@ -61,14 +61,14 @@ unsigned long long FUN_0012ad10(int param_1,int *param_2,int param_3,unsigned in
       FUN_002f6be2(&piStack_1c,&temp_v1);
       temp_v0 = temp_v1;
       FUN_00302428(temp_v1,&temp_v3,10);
-      FUN_002f6bf0(temp_v1);
+      operatorDeleteArrayNullable(temp_v1);
       if ((temp_v0 != 0) && (*(int *)(param_1 + 0x16c) != temp_v0)) {
         temp_v1 = temp_v2;
         *(unsigned char *)(param_1 + 0x1cd) = 1;
         FUN_002e9f00(param_1 + 0x98,4,temp_v0);
       }
     }
-    FUN_002e9318(&piStack_1c);
+    onlineStringDestroy(&piStack_1c);
   }
   return romwright_piece_4_4(piStack_1c,temp_v1);
 }

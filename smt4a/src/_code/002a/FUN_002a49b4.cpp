@@ -7,8 +7,8 @@ void FUN_002a49b4(void)
 {
     Record57f248 *record;
 
-    record = DAT_0057f248.record;
-    if (DAT_0057f248.record != NULL) {
+    record = g_ifTouch.record;
+    if (g_ifTouch.record != NULL) {
         record->unk64E = 0xFFFF;
         record->unk008 = 0;
         record->unk650 = 0;

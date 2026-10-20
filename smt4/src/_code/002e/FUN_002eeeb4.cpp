@@ -2,21 +2,21 @@
 
 extern "C" {
 
-void FUN_002769b4(s32 a, s32 b, s32 c);
+void mapDepartSetTarget(s32 a, s32 b, s32 c);
 void FUN_0027d5ac(u32 value);
 u32 scrGetArg(...);
 void asdSequenceRequest(s32 a, s32 b, s32 c);
 
 extern GameState g_gameState;
 
-/* Script command: passes the script's first argument to FUN_0027d5ac, then runs FUN_002769b4 and asdSequenceRequest. */
+/* Script command: passes the script's first argument to FUN_0027d5ac, then runs mapDepartSetTarget and asdSequenceRequest. */
 s32 FUN_002eeeb4(void)
 {
     u32 value = scrGetArg();
 
     scrGetArg(1);
     FUN_0027d5ac(value);
-    FUN_002769b4(0x18, 1, 0);
+    mapDepartSetTarget(0x18, 1, 0);
     g_gameState.unk2F8 = 0;
     asdSequenceRequest(6, 0, 0);
     return 1;

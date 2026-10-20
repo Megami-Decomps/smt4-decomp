@@ -13,7 +13,7 @@ typedef struct VoiceOwnerV {
 extern u8 DAT_0055c1b0;
 extern void FUN_001d1f5c(VoiceOwnerV *owner);
 extern void FUN_001d239c(VoiceB *voice);
-extern void FUN_001d2384(VoiceB *voice);
+extern void voiceClearCallback(VoiceB *voice);
 
 /* Destroy hook: restores the vtable, stops and releases every voice and resets the owner. */
 VoiceOwnerV *voiceOwnerDestroy(VoiceOwnerV *owner)
@@ -28,7 +28,7 @@ VoiceOwnerV *voiceOwnerDestroy(VoiceOwnerV *owner)
         }
     }
     for (voice = owner->voices; voice != NULL; voice = voice->next) {
-        FUN_001d2384(voice);
+        voiceClearCallback(voice);
     }
     owner->voices = NULL;
     owner->unk05 = 0;

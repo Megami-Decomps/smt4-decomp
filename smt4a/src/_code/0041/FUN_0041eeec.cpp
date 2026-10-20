@@ -6,7 +6,7 @@ extern "C" {
 
 int dataTableGet(int, int);
 int FUN_0019de98(int, unsigned int);
-int FUN_001aea28(unsigned int, unsigned int);
+int ptrListRemoveClearOwner(unsigned int, unsigned int);
 int FUN_0022e774(void);
 int FUN_002f0384(int);
 int FUN_0041de6c(int);
@@ -18,13 +18,13 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
-extern unsigned char DAT_00588e14; /* 0x588e14 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
+extern unsigned char g_saveLoadUIBase; /* 0x588e14 */
 
 /* Supplied declaration required: dataTableGet. */
 extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_0019de98. */
-/* Supplied declaration required: FUN_001aea28. */
+/* Supplied declaration required: ptrListRemoveClearOwner. */
 /* Supplied declaration required: FUN_0022e774. */
 /* Supplied declaration required: FUN_002f0384. */
 extern int objBStateAllowsAction(void);
@@ -46,9 +46,9 @@ void FUN_0041eeec(int param_1)
     *(unsigned char *)(param_1 + 0x68) = 1;
   }
   FUN_0041de6c(param_1);
-  if ((*(signed char *)((unsigned char *)&DAT_00588e14 + 0x1)) != '\0') {
+  if ((*(signed char *)((unsigned char *)&g_saveLoadUIBase + 0x1)) != '\0') {
     if (*(int *)(param_1 + 0x58) != 0) {
-      FUN_001aea28(DAT_0056fcc0,*(unsigned int *)(*(int *)(param_1 + 0x58) + 4));
+      ptrListRemoveClearOwner(g_handleRegistry,*(unsigned int *)(*(int *)(param_1 + 0x58) + 4));
       if (*(int **)(param_1 + 0x58) != (int *)0x0) {
         (**(romwright_code **)(**(int **)(param_1 + 0x58) + 4))();
         *(unsigned int *)(param_1 + 0x58) = 0;

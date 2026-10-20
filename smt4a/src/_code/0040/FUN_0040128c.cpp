@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-extern int DAT_0057f65c; /* 0x57f65c */
+extern int g_frameTex; /* 0x57f65c */
 
 /* Supplied declaration required: FUN_00348c28. */
 
@@ -33,11 +33,11 @@ void FUN_0040128c(int param_1)
   ;
   *(unsigned int *)(param_1 + 0x98) = (*(unsigned int *)(param_1 + 0x98) & 0xffffff00) | *(unsigned int *)(param_1 + 0x8c);
   FUN_00348c28(1);
-  temp_v0 = DAT_0057f65c;
+  temp_v0 = g_frameTex;
   temp_v1 = *(unsigned int *)(param_1 + 0x94);
   temp_v3 = *(unsigned int *)(param_1 + 0x98);
   temp_v4 = *(unsigned int *)(param_1 + 0x9c);
-  *(unsigned int *)(DAT_0057f65c + 0xfb0) = 0xc0400000;
+  *(unsigned int *)(g_frameTex + 0xfb0) = 0xc0400000;
   *(unsigned int *)(temp_v0 + 0xfb4) = 0x43c98000;
   *(unsigned int *)(temp_v0 + 0xfb8) = 0xc0400000;
   *(unsigned int *)(temp_v0 + 0xfbc) = 0x43c98000;

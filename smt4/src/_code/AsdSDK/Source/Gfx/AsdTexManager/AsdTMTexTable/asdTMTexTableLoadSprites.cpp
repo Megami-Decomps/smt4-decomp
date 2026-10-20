@@ -7,7 +7,7 @@ void *asdMemAlloc(int, int, int, s32 size, int);
 void *FUN_002c3124(char *path, u8 *size, u32 flags);
 TexFile *asdTMTexTableLoadTmx(s32 idx, u32 flags);
 char *FUN_0010024c(char *str, u32 ch);
-void FUN_002bf694(char *dst, const char *src);
+void libc_strcpy(char *dst, const char *src);
 void FUN_002be624(char *dst, const char *format, ...);
 void rt_memcpy_w(void *dst, const void *src, s32 size);
 void asdMemFree(void *block);
@@ -33,14 +33,14 @@ s32 asdTMTexTableLoadSprites(s32 idx)
         char *p;
         u32 *file;
 
-        FUN_002bf694(dir, header->dirPrefix);
+        libc_strcpy(dir, header->dirPrefix);
         for (p = dir; *p != '\0'; p++) {
             char *slash = FUN_0010024c(p, 0x5c);
             if (slash != NULL) {
                 *slash = '/';
             }
         }
-        FUN_002bf694(header->dirPrefix, dir);
+        libc_strcpy(header->dirPrefix, dir);
         FUN_002be624(path, LAB_002c4e84, header->dirPrefix, entry->name, LAB_002c4e78, LAB_002c4e74);
         file = (u32 *)FUN_002c3124(path, size, 0);
         if (file != NULL) {

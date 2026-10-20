@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001006ec(int, int, int);
 int FUN_00192550(void);
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 int sysMemClear(int [21], int);
 
 extern unsigned int DAT_00570288; /* 0x570288 */
@@ -20,9 +20,9 @@ extern unsigned short *FUN_001006c2(int, unsigned int);
 /* Supplied declaration required: FUN_001006ec. */
 extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_00192550. */
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: sysMemClear. */
-extern int FUN_00481104(int);
+extern int flagValueIsPositive(int);
 
 
 void FUN_00335c6c(void)
@@ -68,7 +68,7 @@ void FUN_00335c6c(void)
   }
   temp_v9 = 1;
   do {
-    temp_v7 = FUN_00481104(temp_v9);
+    temp_v7 = flagValueIsPositive(temp_v9);
     if (temp_v7 != 0) {
       temp_v1 = (unsigned short)temp_v9;
       puVar10 = *(unsigned short **)(temp_v6 + 0x4e5c);
@@ -141,7 +141,7 @@ void FUN_00335c6c(void)
   } while (temp_v9 < 0x3c);
   temp_v9 = 0x79f;
   do {
-    temp_v7 = FUN_00481104(temp_v9);
+    temp_v7 = flagValueIsPositive(temp_v9);
     if (temp_v7 != 0) {
       puVar10 = *(unsigned short **)(temp_v6 + 0x4e5c);
       temp_v1 = (unsigned short)temp_v9;
@@ -245,7 +245,7 @@ void FUN_00335c6c(void)
         temp_v5 = 0;
         FUN_00192550();
         temp_v8 = (unsigned int)*(unsigned short *)(temp_v8 + 0x32);
-        FUN_001aba54();
+        dataTable04FindById();
         if ((temp_v2 && temp_v8 != 0) && (*(char *)(temp_v8 + 0x23) == '\0')) {
           temp_v5 = 1;
         }
@@ -324,7 +324,7 @@ LAB_00336174:
           temp_v8 = (unsigned int)*puVar23;
           FUN_00192550();
           temp_v8 = (unsigned int)*(unsigned short *)(temp_v8 + 0x32);
-          FUN_001aba54();
+          dataTable04FindById();
           if (temp_v8 != 0) {
             temp_v11 = *(unsigned int *)(temp_v8 + 0x28);
             temp_v8 = (temp_v11 & 0xffff) >> 0xb;

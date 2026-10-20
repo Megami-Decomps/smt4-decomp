@@ -2,10 +2,10 @@
 
 extern "C" {
 
-void FUN_00203d04(s32 flag);
+void dialogClose(s32 flag);
 s32 jobStop(u32 job, s32 flag);
 s32 jobIsValid(u32 job);
-s32 FUN_002619e0(void);
+s32 dialogIsActive(void);
 
 typedef struct Task {
     /* 0x00 */ u8 unk00[0x44];
@@ -13,7 +13,7 @@ typedef struct Task {
 } Task;
 Task *jobGetWork(void);
 
-/* Stops the task's job if it is valid, first running FUN_00203d04(1) when FUN_002619e0 allows it. */
+/* Stops the task's job if it is valid, first running dialogClose(1) when dialogIsActive allows it. */
 void FUN_002dec74(void)
 {
     Task *task;
@@ -24,9 +24,9 @@ void FUN_002dec74(void)
     if (result == 0) {
         return;
     }
-    result = FUN_002619e0();
+    result = dialogIsActive();
     if (result != 0) {
-        FUN_00203d04(1);
+        dialogClose(1);
     }
     jobStop(task->job, 0);
 }

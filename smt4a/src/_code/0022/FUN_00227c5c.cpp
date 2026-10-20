@@ -14,7 +14,7 @@ extern unsigned int *DAT_0057f214; /* 0x57f214 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: jobStop. */
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: asdMemFree. */
 extern int FUN_002ef9f0(void);
 
@@ -81,7 +81,7 @@ unsigned int FUN_00227c5c(void)
   temp_v2 = FUN_002ef9f0();
   if ((temp_v2 == 0) && ((DAT_0057f214 == (unsigned int *)0x0 || (*(char *)(DAT_0057f214 + 7) == '\0')))
      ) {
-    temp_v2 = FUN_0018719c(0x11);
+    temp_v2 = gameFlagIsSet(0x11);
     if (temp_v2 != 0) {
       unaff_r5 = DAT_0057f214;
     }

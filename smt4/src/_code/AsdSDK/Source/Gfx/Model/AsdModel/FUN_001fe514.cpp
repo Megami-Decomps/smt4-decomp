@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } void_stack;
 
-extern unsigned char DAT_00464af0; /* 0x464af0 */
+extern unsigned char g_gfxSettings; /* 0x464af0 */
 extern unsigned char DAT_004dae48; /* 0x4dae48 */
 
 /* Supplied declaration required: asdListAdd. */
@@ -55,7 +55,7 @@ int FUN_001fe514(void)
   *(unsigned int *)(temp_v0 + 0x88) = 0;
   *(unsigned int *)(temp_v0 + 0x84) = 0;
   asdListAdd(&DAT_004dae48,temp_v0,0);
-  (*(int *)((unsigned char *)&DAT_00464af0 + 0x3c)) = (*(int *)((unsigned char *)&DAT_00464af0 + 0x3c)) + 1;
+  (*(int *)((unsigned char *)&g_gfxSettings + 0x3c)) = (*(int *)((unsigned char *)&g_gfxSettings + 0x3c)) + 1;
   return temp_v0;
 }
 

@@ -11,7 +11,7 @@ int FUN_0010d3f8(int);
 int FUN_0010d494(int);
 int FUN_00119da8(int);
 int asdSoundSlotBCreate(...);
-int FUN_002c3940(unsigned int *, int);
+int rt_aeabi_memclr(unsigned int *, int);
 
 extern unsigned char LAB_00220000; /* 0x220000 */
 extern unsigned char LAB_00280000; /* 0x280000 */
@@ -26,7 +26,7 @@ extern unsigned int DAT_004c53e4; /* 0x4c53e4 */
 /* Supplied declaration required: FUN_0010d494. */
 /* Supplied declaration required: FUN_00119da8. */
 /* Supplied declaration required: asdSoundSlotBCreate. */
-/* Supplied declaration required: FUN_002c3940. */
+/* Supplied declaration required: rt_aeabi_memclr. */
 extern int jyoucyuGetTableEntry(unsigned int);
 
 
@@ -57,7 +57,7 @@ void FUN_00106080(void)
     asdSoundSlotBCreate(3,&LAB_00280000);
     asdSoundSlotAActivate(0);
     FUN_00119da8(0);
-    FUN_002c3940(&DAT_004c53c4,0x40);
+    rt_aeabi_memclr(&DAT_004c53c4,0x40);
     DAT_0044e09c = 0;
     DAT_004c53c4 = 0;
     DAT_004c53e4 = 1;

@@ -6,7 +6,7 @@ extern "C" {
 
 int btlGetMainState(...);
 int FUN_00192550(...);
-int FUN_001aba54(...);
+int dataTable04FindById(...);
 int sysMemClear(...);
 int FUN_0034a290(...);
 int FUN_003e8bb0(...);
@@ -72,7 +72,7 @@ extern unsigned int DAT_0057149c; /* 0x57149c */
 /* Supplied declaration required: btlGetMainState. */
 extern int lcgRandomRange(unsigned int);
 /* Supplied declaration required: FUN_00192550. */
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: dataTable04FindById. */
 extern int FUN_0028cb6c(void);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_0034a290. */
@@ -150,7 +150,7 @@ FUN_004bfcfc(int param_1,unsigned int param_2,fn_004bfcfc_arg2 *param_3,unsigned
   temp_v41 = param_4;
   temp_v29 = (unsigned int *)btlGetMainState();
   temp_v37 = 0;
-  FUN_001aba54();
+  dataTable04FindById();
   if (param_1 != 0) {
     switch(*(unsigned char *)(param_1 + 0x23)) {
     case 0:

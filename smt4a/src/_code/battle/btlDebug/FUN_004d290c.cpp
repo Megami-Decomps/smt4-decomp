@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001ab888(void);
+int gameGetSlotTable(void);
 
 extern unsigned int DAT_00571640; /* 0x571640 */
 extern unsigned int DAT_00571644; /* 0x571644 */
@@ -58,7 +58,7 @@ extern unsigned int DAT_00571778; /* 0x571778 */
 extern unsigned int DAT_0057177c; /* 0x57177c */
 extern unsigned int DAT_0057a6e8; /* 0x57a6e8 */
 
-/* Supplied declaration required: FUN_001ab888. */
+/* Supplied declaration required: gameGetSlotTable. */
 extern unsigned int *asdListBoxGetIntValuePtr(unsigned int, unsigned int);
 extern int FUN_0032c430(unsigned int);
 extern unsigned int FUN_003874fc(unsigned int);
@@ -230,7 +230,7 @@ void FUN_004d290c(int param_1,int param_2)
   case 0xd:
     puVar4 = (unsigned int *)asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v0);
     temp_v0 = *puVar4;
-    puVar4 = (unsigned int *)FUN_001ab888();
+    puVar4 = (unsigned int *)gameGetSlotTable();
     *puVar4 = temp_v0;
     return;
   case 0xe:
@@ -413,7 +413,7 @@ void FUN_004d290c(int param_1,int param_2)
   case 0x1e:
     puVar4 = (unsigned int *)asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v0);
     temp_v0 = *puVar4;
-    temp_v1 = FUN_001ab888();
+    temp_v1 = gameGetSlotTable();
     *(short *)(temp_v1 + 0x2c4e) = (short)temp_v0;
     return;
   case 0x1f:

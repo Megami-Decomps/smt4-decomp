@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern Flag10Obj *FUN_001519ac(void);
+extern Flag10Obj *gameDataBlocksGetStats(void);
 
 u8 isFlag10Set(void)
 {
-    return FUN_001519ac()->unk10 != 0;
+    return gameDataBlocksGetStats()->unk10 != 0;
 }
 
 } /* extern "C" */

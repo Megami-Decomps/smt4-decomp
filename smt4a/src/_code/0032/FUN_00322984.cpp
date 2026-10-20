@@ -7,11 +7,11 @@ extern "C" {
 int FUN_00182540(...);
 int FUN_001b4c1c(...);
 int FUN_001bc460(void);
-int FUN_00212500(void);
+int refCountIncrement(void);
 int requestDispatch(...);
 int FUN_00290c28(...);
 int FUN_00290e04(...);
-int FUN_00290e6c(...);
+int handlerTableCallWithValue(...);
 int FUN_002b3538(...);
 int FUN_002b3c9c(...);
 int FUN_002e59f8(...);
@@ -105,12 +105,12 @@ extern float DAT_00647358; /* 0x647358 */
 /* Supplied declaration required: FUN_00182540. */
 /* Supplied declaration required: FUN_001b4c1c. */
 /* Supplied declaration required: FUN_001bc460. */
-/* Supplied declaration required: FUN_00212500. */
+/* Supplied declaration required: refCountIncrement. */
 /* Supplied declaration required: requestDispatch. */
 /* Supplied declaration required: FUN_00290c28. */
-extern unsigned int FUN_00290df4(unsigned int, unsigned int);
+extern unsigned int tableOwnerGetEntry(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00290e04. */
-/* Supplied declaration required: FUN_00290e6c. */
+/* Supplied declaration required: handlerTableCallWithValue. */
 /* Supplied declaration required: FUN_002b3538. */
 /* Supplied declaration required: FUN_002b3c9c. */
 /* Supplied declaration required: FUN_002e59f8. */
@@ -399,9 +399,9 @@ void FUN_00322984(fn_00322984_arg0 *param_1)
       FUN_002b3538(temp_v34,0x20,&temp_v48);
       FUN_002b3538(temp_v34,0x80,&temp_v33);
       temp_v1 = temp_v34;
-      temp_v3 = FUN_00290df4(temp_v2,0);
+      temp_v3 = tableOwnerGetEntry(temp_v2,0);
       *(unsigned int *)(temp_v1 + 0xb4) = temp_v3;
-      FUN_00212500();
+      refCountIncrement();
       temp_v14 = (float)temp_v29;
       if ((*(unsigned int *)((int)pvVar11 + 0xc) & 1) != 0) {
         quadSourceCopyOut(pvVar11,&temp_v59);
@@ -641,7 +641,7 @@ void FUN_00322984(fn_00322984_arg0 *param_1)
             DAT_006472f0 = temp_v18;
             DAT_006472f4 = temp_v23;
             DAT_006472f8 = temp_v14;
-            FUN_00290e6c(*puVar2,(temp_v13 & 0xff) |
+            handlerTableCallWithValue(*puVar2,(temp_v13 & 0xff) |
                                  (temp_v7 << 0x18) | ((temp_v17 & 0xff) << 0x10) |
                                  ((temp_v0 & 0xff) << 8));
             requestDispatch(*puVar2);

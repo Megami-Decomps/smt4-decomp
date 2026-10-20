@@ -13,7 +13,7 @@ int asdMdlManagerCreateLoaded(unsigned char *, int);
 int FUN_002a0428(unsigned int, int);
 int FUN_002be624(unsigned char [64], unsigned char *, int);
 int randNextInRange(...);
-int FUN_002c2950(void);
+int gameGetMapBlock(void);
 int FUN_002ce4e4(void);
 int FUN_002e0274(...);
 int FUN_002e29c0(void);
@@ -74,9 +74,9 @@ extern int FUN_00285574(void);
 /* Supplied declaration required: asdMdlManagerCreateLoaded. */
 /* Supplied declaration required: FUN_002a0428. */
 /* Supplied declaration required: FUN_002be624. */
-extern int FUN_002c09d0(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: randNextInRange. */
-/* Supplied declaration required: FUN_002c2950. */
+/* Supplied declaration required: gameGetMapBlock. */
 /* Supplied declaration required: FUN_002ce4e4. */
 /* Supplied declaration required: FUN_002e0274. */
 /* Supplied declaration required: FUN_002e29c0. */
@@ -127,7 +127,7 @@ void FUN_001abb98(void)
   int temp_v26;
   int temp_v27;
   
-  puVar8 = (unsigned int *)FUN_002c2950();
+  puVar8 = (unsigned int *)gameGetMapBlock();
   temp_v23[7] = 1;
   temp_v6 = randNextInRange(4);
   temp_v23[6] = 0;
@@ -228,7 +228,7 @@ void FUN_001abb98(void)
           temp_v8 = (int)*(char *)((int)puVar8 + 0xdd2);
           temp_v1 = (&DAT_004bd0d4)[temp_v7];
           temp_v13 = (int)*(char *)((int)puVar8 + 0xdd3);
-          temp_v6 = FUN_002c2950();
+          temp_v6 = gameGetMapBlock();
           if (temp_v1 != '\x01') {
             if (temp_v1 != '\x02') {
               if (temp_v1 != '\x03') {
@@ -292,7 +292,7 @@ void FUN_001abb98(void)
           temp_v8 = (int)*(char *)((int)puVar8 + 0xdd2);
           temp_v1 = (&DAT_004bd0d4)[temp_v6];
           temp_v13 = (int)*(char *)((int)puVar8 + 0xdd3);
-          temp_v15 = FUN_002c2950();
+          temp_v15 = gameGetMapBlock();
           if (temp_v1 != '\x01') {
             if (temp_v1 != '\x02') {
               if (temp_v1 != '\x03') {
@@ -336,7 +336,7 @@ LAB_001abfec:
               temp_v3 = *(char *)((int)puVar8 + 0xdd3);
               temp_v8 = (int)temp_v3;
               temp_v1 = (&DAT_004bd0d4)[temp_v6];
-              temp_v7 = FUN_002c2950();
+              temp_v7 = gameGetMapBlock();
               (&DAT_004bce8c)[DAT_004bd0d0 * 2] = temp_v4;
               (&DAT_004bce8d)[DAT_004bd0d0 * 2] = temp_v3;
               DAT_004bd0d0 = DAT_004bd0d0 + 1;
@@ -403,7 +403,7 @@ LAB_001abfec:
             temp_v23[3] = 0;
           }
           if (DAT_004bd0d0 == 0) break;
-          temp_v6 = FUN_002c2950();
+          temp_v6 = gameGetMapBlock();
           temp_v7 = randNextInRange((DAT_004bd0d0 - 1U) & 0xffff);
           temp_v8 = 0;
           temp_v13 = DAT_004bd0d0 - 1;
@@ -445,7 +445,7 @@ LAB_001ac248:;
           temp_v6 = temp_v6 + 1;
         } while (temp_v6 < *(char *)((int)puVar8 + 0xdd1));
       }
-      temp_v15 = FUN_002c2950();
+      temp_v15 = gameGetMapBlock();
       *(unsigned char *)(temp_v15 + 0xdd5) = 0;
       *(unsigned char *)(temp_v15 + 0xdd6) = 0;
       *(unsigned char *)(temp_v15 + 0xdd7) = 0;
@@ -546,13 +546,13 @@ LAB_001ac248:;
                     *(unsigned char *)(temp_v15 + 0xdd5) = 1;
                     *(char *)(temp_v15 + 0xdd6) = (char)(&DAT_004bcf8c)[temp_v13 * 3];
                     *(char *)(temp_v15 + 0xdd7) = (char)(int)(&DAT_004bcf90)[temp_v13 * 3];
-                    temp_v6 = FUN_002c09d0(0x648);
+                    temp_v6 = gameFlagIsSet(0x648);
                     if (temp_v6 != 0) {
                       temp_v5 = randNextInRange(4);
                       *(short *)(temp_v15 + 0xdb0) = temp_v5 + 0x1c2;
                     }
                     else {
-                      temp_v6 = FUN_002c09d0(0x6d2);
+                      temp_v6 = gameFlagIsSet(0x6d2);
                       if (temp_v6 != 0) {
                         temp_v5 = randNextInRange(3);
                         *(short *)(temp_v15 + 0xdb0) = temp_v5 + 0x1c2;
@@ -573,7 +573,7 @@ LAB_001ac248:;
         }
       }
     }
-    temp_v6 = FUN_002c2950();
+    temp_v6 = gameGetMapBlock();
     temp_v7 = 1;
     if (1 < *(char *)(temp_v6 + 0xdd1) - 1) {
       do {
@@ -606,7 +606,7 @@ LAB_001ac248:;
     }
     FUN_0028527c(1);
   }
-  temp_v6 = FUN_002c2950();
+  temp_v6 = gameGetMapBlock();
   temp_v25 = temp_v6 + 0xd00;
   temp_v10 = 0;
   do {
@@ -762,7 +762,7 @@ LAB_001aca98:
     if (5 < temp_v6) {
       FUN_002ce4e4();
       FUN_002849a4(0);
-      temp_v6 = FUN_002c2950();
+      temp_v6 = gameGetMapBlock();
       if (*(char *)(temp_v6 + 0xdd5) != '\0') {
         temp_v15 = *(char *)(temp_v6 + 0xdd7) * 500 + 0xfa;
         temp_v7 = *(char *)(temp_v6 + 0xdd6) * 500 + 0xfa;
@@ -771,7 +771,7 @@ LAB_001aca98:
         FUN_002e0274((int)*(short *)(temp_v6 + 0xdb0),temp_v7,temp_v15);
         FUN_00284838();
       }
-      temp_v6 = FUN_002c2950();
+      temp_v6 = gameGetMapBlock();
       temp_v7 = FUN_00285574();
       if (temp_v7 != 8) {
         DAT_004bd0cc = 0;

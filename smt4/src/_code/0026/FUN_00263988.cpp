@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00263630(int);
+int asdModelSlotSetColor(int);
 int FUN_00263670(int);
 int FUN_0029c2cc(unsigned int, int);
 int FUN_002a043c(unsigned int, int);
@@ -21,7 +21,7 @@ typedef struct {
 extern int nw_anim_PlayPolicy_Loop(...); /* 0x151500 */
 extern unsigned char LAB_00155650; /* 0x155650 */
 
-/* Supplied declaration required: FUN_00263630. */
+/* Supplied declaration required: asdModelSlotSetColor. */
 /* Supplied declaration required: FUN_00263670. */
 /* Supplied declaration required: FUN_0029c2cc. */
 /* Supplied declaration required: FUN_002a043c. */
@@ -71,7 +71,7 @@ void FUN_00263988(int param_1,int param_2)
       *(unsigned char **)(temp_v0 + 0x4c) = &LAB_00155650;
       *(unsigned char *)(temp_v0 + 0x58) = 1;
       FUN_00263670(0);
-      FUN_00263630(0);
+      asdModelSlotSetColor(0);
       return;
     }
     if (param_2 == 1) {
@@ -80,7 +80,7 @@ void FUN_00263988(int param_1,int param_2)
       *(unsigned char **)(temp_v0 + 0x4c) = &LAB_00155650;
       *(unsigned char *)(temp_v0 + 0x58) = 1;
       FUN_00263670(0);
-      FUN_00263630(0);
+      asdModelSlotSetColor(0);
       return;
     }
     if (param_2 == 2) {
@@ -89,7 +89,7 @@ void FUN_00263988(int param_1,int param_2)
       *(romwright_code **)(temp_v0 + 0x4c) = nw_anim_PlayPolicy_Loop;
       *(unsigned char *)(temp_v0 + 0x58) = 1;
       FUN_00263670(0);
-      FUN_00263630(0);
+      asdModelSlotSetColor(0);
       return;
     }
   }

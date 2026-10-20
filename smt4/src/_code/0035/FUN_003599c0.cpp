@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern int DAT_00473848; /* 0x473848 */
+extern int g_nnCecdHandle; /* 0x473848 */
 extern int DAT_0047384c; /* 0x47384c */
 
 /* Supplied declaration required: FUN_00359458. */
@@ -29,7 +29,7 @@ void FUN_003599c0(unsigned int param_1)
     FUN_003598d0();
   }
   else {
-    temp_v0 = DAT_00473848 == 0;
+    temp_v0 = g_nnCecdHandle == 0;
     if (!temp_v0) {
       FUN_00359458(param_1);
     }

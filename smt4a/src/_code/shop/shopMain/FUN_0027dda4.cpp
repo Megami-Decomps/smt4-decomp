@@ -8,8 +8,8 @@ int FUN_00100388(unsigned char [24], unsigned char *, int, unsigned int);
 int asdSequenceRequest(...);
 int asdOperatorNew(void);
 int FUN_0019ea5c(unsigned int);
-int FUN_002e3328(int);
-int FUN_003d2d6c(int);
+int asdOperatorDelete(int);
+int soundChannelStopAll(int);
 int FUN_003d54f8(...);
 int setFlag10(void);
 int FUN_00499338(void);
@@ -34,16 +34,16 @@ extern int DAT_005f1b74; /* 0x5f1b74 */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_0019ea5c. */
 extern int lmapMainGetUnk74(void);
-/* Supplied declaration required: FUN_002e3328. */
+/* Supplied declaration required: asdOperatorDelete. */
 extern int gameStateIsFlagSetAndLarge(void);
-/* Supplied declaration required: FUN_003d2d6c. */
+/* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: FUN_003d54f8. */
 extern int isFlag10Set(void);
 /* Supplied declaration required: setFlag10. */
 /* Supplied declaration required: FUN_00499338. */
 /* Supplied declaration required: FUN_00499c84. */
 /* Supplied declaration required: FUN_0049c3c0. */
-extern int FUN_0049ca48(void);
+extern int storyFlagRangeAnySet(void);
 /* Supplied declaration required: FUN_0049cf9c. */
 /* Supplied declaration required: FUN_0049d004. */
 extern int FUN_004d08d0(int);
@@ -140,7 +140,7 @@ unsigned int FUN_0027dda4(void)
           else {
             FUN_003d54f8(0,1);
             FUN_003d54f8(1);
-            FUN_003d2d6c(0xf);
+            soundChannelStopAll(0xf);
           }
         }
         return 0xffffffff;
@@ -149,7 +149,7 @@ unsigned int FUN_0027dda4(void)
         FUN_00499c84();
         if (*(int *)(temp_v4 + 0x18) != 0) {
           temp_v3 = FUN_004d08d0(*(int *)(temp_v4 + 0x18) + 0xb08);
-          FUN_002e3328(temp_v3 - 0xb08);
+          asdOperatorDelete(temp_v3 - 0xb08);
         }
         FUN_0049d004(temp_v8);
       }
@@ -171,7 +171,7 @@ unsigned int FUN_0027dda4(void)
     *(unsigned char *)(temp_v4 + 5) = temp_v1;
   }
   else {
-    temp_v3 = FUN_0049ca48();
+    temp_v3 = storyFlagRangeAnySet();
     if ((temp_v3 != 0) && (temp_v3 = isFlag10Set(), temp_v3 == 0)) {
       setFlag10();
     }

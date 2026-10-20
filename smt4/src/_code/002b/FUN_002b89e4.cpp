@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002af5c0(int, int, int);
+int uiSpriteSetImageKeyframe(int, int, int);
 int FUN_002bee58(int, int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_002af5c0. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_002bee58. */
 
 
@@ -27,7 +27,7 @@ void FUN_002b89e4(int param_1,unsigned int param_2)
     return;
   case 1:
   case 10:
-    FUN_002af5c0(param_1 + 0xc4,2,0);
+    uiSpriteSetImageKeyframe(param_1 + 0xc4,2,0);
     return;
   case 2:
   case 3:
@@ -36,21 +36,21 @@ void FUN_002b89e4(int param_1,unsigned int param_2)
   case 0x10:
   case 0x11:
   case 0x12:
-    FUN_002af5c0(param_1 + 0xc4,2,0);
-    FUN_002af5c0(param_1 + 0x1dc,2,0);
+    uiSpriteSetImageKeyframe(param_1 + 0xc4,2,0);
+    uiSpriteSetImageKeyframe(param_1 + 0x1dc,2,0);
     param_1 = param_1 + 0x150;
     break;
   case 6:
     if (*(int *)(param_1 + 0xe4) != 0x3f800000) {
       return;
     }
-    FUN_002af5c0(param_1 + 0xc4,2,0);
+    uiSpriteSetImageKeyframe(param_1 + 0xc4,2,0);
     return;
   case 7:
   case 8:
   case 9:
-    FUN_002af5c0(param_1 + 0xc4,2,0);
-    FUN_002af5c0(param_1 + 0x40c,2,0);
+    uiSpriteSetImageKeyframe(param_1 + 0xc4,2,0);
+    uiSpriteSetImageKeyframe(param_1 + 0x40c,2,0);
     return;
   case 0xb:
     FUN_002bee58(param_1 + 0xc4,7);
@@ -61,7 +61,7 @@ void FUN_002b89e4(int param_1,unsigned int param_2)
     temp_v0 = 0;
     do {
       if (*(char *)(param_1 + temp_v0 + 0x37) != '\0') {
-        FUN_002af5c0(param_1 + temp_v0 * 0x8c + 0x498,5,0);
+        uiSpriteSetImageKeyframe(param_1 + temp_v0 * 0x8c + 0x498,5,0);
       }
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < 5);

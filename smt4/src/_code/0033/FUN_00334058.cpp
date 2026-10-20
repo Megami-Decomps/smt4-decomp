@@ -7,8 +7,8 @@ extern "C" {
 int FUN_001386f8(void);
 
 /* Supplied declaration required: FUN_001386f8. */
-extern int padIsButtonDown(unsigned int);
-extern int FUN_002b63ac(void);
+extern int flagBitIsSet(unsigned int);
+extern int gameGetPlayerData(void);
 
 
 void FUN_00334058(unsigned int param_1)
@@ -20,21 +20,21 @@ void FUN_00334058(unsigned int param_1)
   int temp_v2;
   unsigned int temp_v3;
   
-  temp_v1 = FUN_002b63ac();
+  temp_v1 = gameGetPlayerData();
   temp_v3 = 4;
-  temp_v2 = padIsButtonDown(0x77);
+  temp_v2 = flagBitIsSet(0x77);
   if (temp_v2 != 0) {
     temp_v3 = 5;
   }
-  temp_v2 = padIsButtonDown(0x78);
+  temp_v2 = flagBitIsSet(0x78);
   if (temp_v2 != 0) {
     temp_v3 = temp_v3 + 1;
   }
-  temp_v2 = padIsButtonDown(0x79);
+  temp_v2 = flagBitIsSet(0x79);
   if (temp_v2 != 0) {
     temp_v3 = temp_v3 + 1;
   }
-  temp_v2 = padIsButtonDown(0x7a);
+  temp_v2 = flagBitIsSet(0x7a);
   if (temp_v2 != 0) {
     temp_v3 = temp_v3 + 1;
   }

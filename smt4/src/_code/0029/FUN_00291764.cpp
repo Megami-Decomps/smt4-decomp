@@ -5,7 +5,7 @@
 extern "C" {
 
 int scrScriptProcessDestroy(...);
-int FUN_002a780c(unsigned int);
+int asdMemFreeSlot(unsigned int);
 int FUN_002a87e8(void);
 int FUN_002bee58(unsigned int *, int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 int asdMemFree(...);
@@ -16,11 +16,11 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_4_stack;
 
-extern signed char DAT_0043da28; /* 0x43da28 */
+extern signed char g_buttonHelp; /* 0x43da28 */
 extern unsigned int *DAT_0043da2c; /* 0x43da2c */
 
 /* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: FUN_002a780c. */
+/* Supplied declaration required: asdMemFreeSlot. */
 /* Supplied declaration required: FUN_002a87e8. */
 /* Supplied declaration required: FUN_002bee58. */
 /* Supplied declaration required: asdMemFree. */
@@ -51,9 +51,9 @@ void FUN_00291764(unsigned int *param_1,unsigned int param_2,unsigned int param_
     param_1[5] = 0;
   }
   puVar1 = DAT_0043da2c;
-  DAT_0043da28 = DAT_0043da28 - '\x01';
-  if (DAT_0043da28 < '\x01') {
-    FUN_002a780c(DAT_0043da2c[0x156]);
+  g_buttonHelp = g_buttonHelp - '\x01';
+  if (g_buttonHelp < '\x01') {
+    asdMemFreeSlot(DAT_0043da2c[0x156]);
     puVar1[0x156] = 0;
     if (puVar1[4] != 3) {
       temp_v0 = 0;
@@ -69,7 +69,7 @@ void FUN_00291764(unsigned int *param_1,unsigned int param_2,unsigned int param_
     jobStop(*puVar1,0);
     asdMemFree(puVar1);
     DAT_0043da2c = (unsigned int *)0x0;
-    DAT_0043da28 = '\0';
+    g_buttonHelp = '\0';
   }
   return;
 }

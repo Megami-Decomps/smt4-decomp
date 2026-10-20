@@ -16,7 +16,7 @@ extern int FUN_001321d2(int);
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned char *, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
 /* Supplied declaration required: FUN_002eb5f4. */
-extern int FUN_002fd634(int);
+extern int mapIsEmpty3(int);
 
 
 void FUN_001120d0(int param_1)
@@ -36,7 +36,7 @@ void FUN_001120d0(int param_1)
     FUN_002eb5f4();
     FUN_00121bf8();
     temp_v0 = FUN_001321d2(param_1 + 400);
-    if ((temp_v0 != 0) || (temp_v0 = FUN_002fd634(param_1 + 0x9c), temp_v0 != 0)) {
+    if ((temp_v0 != 0) || (temp_v0 = mapIsEmpty3(param_1 + 0x9c), temp_v0 != 0)) {
       *(unsigned int *)(param_1 + 0x98) = 0;
     }
     puVar4 = (unsigned char *)0x112049;

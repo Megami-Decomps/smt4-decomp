@@ -66,7 +66,7 @@ extern unsigned int *g_campCecRecv; /* 0x57f128 */
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_0016dfc4. */
-extern unsigned int FUN_002684ac(unsigned int);
+extern unsigned int gameDataBlocksAddFlags(unsigned int);
 /* Supplied declaration required: FUN_002804b0. */
 extern unsigned int FUN_002a2cf0(void);
 /* Supplied declaration required: runWinOpen. */
@@ -178,7 +178,7 @@ void FUN_00344348(unsigned char param_1)
     runWinOpen();
     runWinOpenState();
     FUN_002c76d8(2);
-    temp_v0 = FUN_002684ac(2);
+    temp_v0 = gameDataBlocksAddFlags(2);
     campCecDrawListCreate();
     puVar1[0x1f6] = temp_v0;
     *(unsigned char *)(puVar1 + 0x1fc) = 0;

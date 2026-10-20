@@ -7,11 +7,11 @@ typedef struct Obj {
     /* 0x10 */ u32 unk10;
 } Obj;
 
-extern Obj *DAT_0043e128;
+extern Obj *g_infoWin;
 
 void FUN_002015d0(u32 value)
 {
-    DAT_0043e128->unk10 = value;
+    g_infoWin->unk10 = value;
 }
 
 } /* extern "C" */

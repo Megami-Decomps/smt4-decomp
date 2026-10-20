@@ -9,7 +9,7 @@ int FUN_00206368(unsigned int *, unsigned int, int, int);
 int FUN_0026c77c(int);
 int FUN_0026c7a0(void);
 int FUN_0026c7b8(unsigned char *);
-int FUN_0027eb88(unsigned int *, unsigned int);
+int memFill8(unsigned int *, unsigned int);
 int FUN_002ad8a8(unsigned int *, unsigned int *);
 int FUN_002dc464(void);
 int FUN_002e439c(unsigned int *);
@@ -44,7 +44,7 @@ typedef struct {
 } param_6_stack;
 
 extern unsigned char LAB_003ae294; /* 0x3ae294 */
-extern unsigned char DAT_00439c88; /* 0x439c88 */
+extern unsigned char g_btlUi; /* 0x439c88 */
 
 /* Supplied declaration required: FUN_001e1104. */
 /* Supplied declaration required: FUN_00206368. */
@@ -52,7 +52,7 @@ extern unsigned short FUN_0022c930(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0026c77c. */
 /* Supplied declaration required: FUN_0026c7a0. */
 /* Supplied declaration required: FUN_0026c7b8. */
-/* Supplied declaration required: FUN_0027eb88. */
+/* Supplied declaration required: memFill8. */
 /* Supplied declaration required: FUN_002ad8a8. */
 /* Supplied declaration required: FUN_002dc464. */
 /* Supplied declaration required: FUN_002e439c. */
@@ -69,8 +69,8 @@ void FUN_003ae134(fn_003ae134_arg0 *param_1,int param_2,unsigned char param_3,un
   unsigned int *puVar4;
   int temp_v1;
   
-  puVar1 = (*(unsigned int * *)((unsigned char *)&DAT_00439c88 + 0x20));
-  (*(unsigned int * *)((unsigned char *)&DAT_00439c88 + 0x20))[0x1f8e] = 1;
+  puVar1 = (*(unsigned int * *)((unsigned char *)&g_btlUi + 0x20));
+  (*(unsigned int * *)((unsigned char *)&g_btlUi + 0x20))[0x1f8e] = 1;
   puVar1[0x1f91] = 0;
   puVar1[0x1f8f] = param_2;
   *(unsigned char *)((int)puVar1 + 0x7e9d) = param_3;
@@ -90,10 +90,10 @@ void FUN_003ae134(fn_003ae134_arg0 *param_1,int param_2,unsigned char param_3,un
     FUN_0026c7a0();
     FUN_0026c77c(0);
   }
-  puVar2 = (*(unsigned int * *)((unsigned char *)&DAT_00439c88 + 0x20));
+  puVar2 = (*(unsigned int * *)((unsigned char *)&g_btlUi + 0x20));
   if (param_6 != 0 || param_2 != 0) {
-    puVar4 = (*(unsigned int * *)((unsigned char *)&DAT_00439c88 + 0x20)) + 0x1fa5;
-    FUN_0027eb88(puVar4,0xffffffff);
+    puVar4 = (*(unsigned int * *)((unsigned char *)&g_btlUi + 0x20)) + 0x1fa5;
+    memFill8(puVar4,0xffffffff);
     temp_v0 = FUN_0022c930(*puVar2,0);
     *(unsigned short *)(puVar2 + 0x1fa5) = temp_v0;
     temp_v0 = FUN_0022c930(*puVar2,1);

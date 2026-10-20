@@ -16,8 +16,8 @@ typedef struct {
 extern int g_lmapScene; /* 0x581288 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_00162e8c(void);
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagsGetBlock(void);
+extern int gameFlagIsSet(unsigned int);
 extern int FUN_002e5db4(void);
 extern int FUN_00325340(void);
 /* Supplied declaration required: FUN_003fd7c0. */
@@ -35,7 +35,7 @@ void FUN_0033f224(unsigned char param_1)
   unsigned int temp_v3;
   unsigned int temp_v4;
   
-  temp_v0 = FUN_00162e8c();
+  temp_v0 = gameFlagsGetBlock();
   temp_v1 = g_lmapScene;
   if (*(int *)(temp_v0 + 0x109c) == 0) {
     return;
@@ -52,14 +52,14 @@ void FUN_0033f224(unsigned char param_1)
   if (temp_v0 != 0) {
     *(unsigned int *)(g_lmapScene + 0x1d0) = 10;
     *(unsigned char *)(temp_v1 + 0x214) = param_1;
-    temp_v1 = FUN_0018719c(0x4c9);
+    temp_v1 = gameFlagIsSet(0x4c9);
     if ((temp_v1 == 0) || (temp_v1 = FUN_002e5db4(), temp_v1 != 0)) {
       temp_v1 = g_lmapScene;
       *(unsigned int *)(g_lmapScene + 0x228) = 4;
       *(unsigned int *)(temp_v1 + 0x238) = 4;
     }
     *(unsigned int *)(g_lmapScene + 0x240) = 0x40000000;
-    temp_v1 = FUN_0018719c(0x4c9);
+    temp_v1 = gameFlagIsSet(0x4c9);
     if ((temp_v1 != 0) && (temp_v1 = FUN_002e5db4(), temp_v1 == 0)) {
       temp_v3 = *(unsigned int *)(*(int *)(g_lmapScene + 0x18c) + 4);
       FUN_003fd7c0(temp_v3,4,2);
@@ -71,14 +71,14 @@ void FUN_0033f224(unsigned char param_1)
   else {
     *(unsigned int *)(g_lmapScene + 0x1d0) = 2;
     *(unsigned char *)(temp_v1 + 0x214) = param_1;
-    temp_v1 = FUN_0018719c(0x4c9);
+    temp_v1 = gameFlagIsSet(0x4c9);
     if ((temp_v1 == 0) || (temp_v1 = FUN_002e5db4(), temp_v1 != 0)) {
       temp_v1 = g_lmapScene;
       *(unsigned int *)(g_lmapScene + 0x228) = 10;
       *(unsigned int *)(temp_v1 + 0x238) = 10;
     }
     *(unsigned int *)(g_lmapScene + 0x240) = temp_v4;
-    temp_v1 = FUN_0018719c(0x4c9);
+    temp_v1 = gameFlagIsSet(0x4c9);
     if ((temp_v1 != 0) && (temp_v1 = FUN_002e5db4(), temp_v1 == 0)) {
       temp_v1 = *(int *)(*(int *)(g_lmapScene + 0x18c) + 4);
       *(unsigned int *)(temp_v1 + 0x1fc) = 0x3f800000;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_002e9520(int, int);
+extern int onlineStringCopyConstruct(int, int);
 extern int FUN_0031037a(void);
 
 
@@ -16,7 +16,7 @@ int FUN_0030ab8e(unsigned int param_1,int param_2)
   
   temp_v0 = FUN_0031037a();
   if (temp_v0 + 0x10 != 0) {
-    temp_v1 = FUN_002e9520(temp_v0 + 0x10,param_2);
+    temp_v1 = onlineStringCopyConstruct(temp_v0 + 0x10,param_2);
     *(unsigned int *)(temp_v1 + 8) = *(unsigned int *)(param_2 + 8);
   }
   return temp_v0;

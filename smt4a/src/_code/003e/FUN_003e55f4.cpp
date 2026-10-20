@@ -25,9 +25,9 @@ typedef struct Holder {
     /* 0x24 */ Slot slots[3];
 } Holder;
 
-extern u32 DAT_0056fcc0;
+extern u32 g_handleRegistry;
 
-extern void FUN_001aea28(u32 arg, Child *child);
+extern void ptrListRemoveClearOwner(u32 arg, Child *child);
 
 void FUN_003e55f4(Holder *holder)
 {
@@ -37,13 +37,13 @@ void FUN_003e55f4(Holder *holder)
     child = holder->primary->child;
     if (child != NULL) {
         child->flags |= 3;
-        FUN_001aea28(DAT_0056fcc0, child);
+        ptrListRemoveClearOwner(g_handleRegistry, child);
     }
     for (i = 0; i < 3; i++) {
         child = holder->slots[i].entry->child;
         if (child != NULL) {
             child->flags |= 3;
-            FUN_001aea28(DAT_0056fcc0, child);
+            ptrListRemoveClearOwner(g_handleRegistry, child);
         }
     }
 }

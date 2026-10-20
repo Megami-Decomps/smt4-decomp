@@ -1,4 +1,4 @@
-/* Sets the object's vtable, registers it (FUN_0030ccc0), runs the base setup and returns it. */
+/* Sets the object's vtable, registers it (onlineObjectListRemove), runs the base setup and returns it. */
 #include "common.h"
 
 extern "C" {
@@ -10,14 +10,14 @@ struct Obj0012a1fc {
 extern const u8 DAT_00559b18[];
 extern u8 DAT_00594b24[];
 
-void FUN_0030ccc0(u8 *table, Obj0012a1fc *obj);
+void onlineObjectListRemove(u8 *table, Obj0012a1fc *obj);
 void FUN_0012a190(Obj0012a1fc *obj);
 __weak Obj0012a1fc *FUN_0012a1fc_baseInit(Obj0012a1fc *obj);
 
 Obj0012a1fc *FUN_0012a1fc(Obj0012a1fc *obj)
 {
     obj->vtable = DAT_00559b18;
-    FUN_0030ccc0(DAT_00594b24, obj);
+    onlineObjectListRemove(DAT_00594b24, obj);
     FUN_0012a190(obj);
     return FUN_0012a1fc_baseInit(obj);
 }

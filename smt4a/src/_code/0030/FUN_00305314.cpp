@@ -22,7 +22,7 @@ extern unsigned char DAT_00559bb8; /* 0x559bb8 */
 /* Supplied declaration required: FUN_0011bfa6. */
 /* Supplied declaration required: FUN_001335cc. */
 /* Supplied declaration required: FUN_001336a8. */
-extern int FUN_002ed28c(int, unsigned int *);
+extern int streamReadU32(int, unsigned int *);
 /* Supplied declaration required: FUN_0030d27c. */
 /* Supplied declaration required: FUN_0030d2a8. */
 
@@ -38,7 +38,7 @@ void FUN_00305314(int param_1,int param_2)
   unsigned char temp_v4;
   
   FUN_0030d2a8(param_2);
-  temp_v0 = FUN_002ed28c(param_1,temp_v2);
+  temp_v0 = streamReadU32(param_1,temp_v2);
   if (temp_v0 != 0) {
     FUN_001336a8(param_2,temp_v2[0]);
     temp_v1 = 0;

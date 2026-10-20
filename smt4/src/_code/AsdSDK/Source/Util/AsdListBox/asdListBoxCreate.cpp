@@ -4,14 +4,14 @@
 
 extern "C" {
 s32 FUN_001fe640(u32 handle);
-void FUN_001ff458(u32 handle);
+void asdListBoxDestroy(u32 handle);
 
 void *asdMemAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
 u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay, AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, void *owner);
 s32 jobIsValid(void *parent);
-void FUN_002c425c(void *parent, u32 handle);
+void jobSetParent(void *parent, u32 handle);
 void FUN_00296c80(void *widget, s32 rows, s32 unk);
-void FUN_00296c60(void *widget, s32 a, s32 b, s32 c, s32 d);
+void colorSetRgba(void *widget, s32 a, s32 b, s32 c, s32 d);
 
 /* Creates a list box process at (x, y) in `group` and registers it with `parent`. */
 u32 asdListBoxCreate(void *parent, s32 group, s32 x, s32 y, u8 flag)
@@ -24,9 +24,9 @@ u32 asdListBoxCreate(void *parent, s32 group, s32 x, s32 y, u8 flag)
         return 0;
     }
 
-    handle = asdProcessCreateSimple((const s8 *)"AsdListBox", group, 0, 0, FUN_001fe640, FUN_001ff458, box);
+    handle = asdProcessCreateSimple((const s8 *)"AsdListBox", group, 0, 0, FUN_001fe640, asdListBoxDestroy, box);
     if (jobIsValid(parent) != 0) {
-        FUN_002c425c(parent, handle);
+        jobSetParent(parent, handle);
     }
 
     box->unk3c = flag;
@@ -39,7 +39,7 @@ u32 asdListBoxCreate(void *parent, s32 group, s32 x, s32 y, u8 flag)
     box->flags |= 4;
     box->unk68 = 10;
     FUN_00296c80(box->widget, 10, 0);
-    FUN_00296c60(box->widget, 6, 5, 32, 32);
+    colorSetRgba(box->widget, 6, 5, 32, 32);
     box->unk34 = 0;
     return handle;
 }

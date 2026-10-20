@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_001846d0(int, int);
+int uiSpriteSelectAnim(int, int);
 
-/* Supplied declaration required: FUN_001846d0. */
+/* Supplied declaration required: uiSpriteSelectAnim. */
 
 
 void FUN_002fb4b8(int param_1)
@@ -23,13 +23,13 @@ void FUN_002fb4b8(int param_1)
   if (temp_v0 < *(short *)(param_1 + 0x2448)) {
     do {
       temp_v1 = param_1 + temp_v0 * 0x8c;
-      FUN_001846d0(temp_v1 + 0x20,8);
-      FUN_001846d0(temp_v1 + 0x598,8);
+      uiSpriteSelectAnim(temp_v1 + 0x20,8);
+      uiSpriteSelectAnim(temp_v1 + 0x598,8);
       if (temp_v0 < 4) {
         if (temp_v0 == 0) {
-          FUN_001846d0(param_1 + 0x217c,0xd);
+          uiSpriteSelectAnim(param_1 + 0x217c,0xd);
         }
-        FUN_001846d0(temp_v1 + 0x2208,0xd);
+        uiSpriteSelectAnim(temp_v1 + 0x2208,0xd);
       }
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < *(short *)(param_1 + 0x2448));

@@ -6,7 +6,7 @@ extern "C" {
 
 int asdMemFree(void);
 
-extern unsigned char DAT_00580204; /* 0x580204 */
+extern unsigned char g_mapCollision; /* 0x580204 */
 extern unsigned char DAT_00580205; /* 0x580205 */
 extern unsigned int DAT_00580208; /* 0x580208 */
 extern unsigned int DAT_0058020c; /* 0x58020c */
@@ -46,7 +46,7 @@ void FUN_00227a70(void)
   DAT_00580210 = 0;
   DAT_00580214 = 0;
   DAT_00580218 = 0;
-  DAT_00580204 = 0;
+  g_mapCollision = 0;
   DAT_00580205 = 0;
   return;
 }

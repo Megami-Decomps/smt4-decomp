@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned int FUN_002e75fa(void);
+extern unsigned int sharedRefAddRef(void);
 
 
 void FUN_002ef6c4(int param_1,int param_2,unsigned int param_3,unsigned int param_4,unsigned int *param_5)
@@ -14,7 +14,7 @@ void FUN_002ef6c4(int param_1,int param_2,unsigned int param_3,unsigned int para
   
   temp_v0 = 0;
   if (param_2 != 0) {
-    temp_v0 = FUN_002e75fa();
+    temp_v0 = sharedRefAddRef();
   }
   *(unsigned int *)(param_1 + 0xc) = param_4;
   *(unsigned int *)(param_1 + 4) = param_3;

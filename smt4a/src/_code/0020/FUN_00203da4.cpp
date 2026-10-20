@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0014bf2c(unsigned int, int);
+int objFlagsSetBits(unsigned int, int);
 int FUN_0023723c(unsigned int, int, unsigned int, int, int, unsigned char *, int);
 int FUN_002a1f60(...);
 int bustupCutAnimClearFlags(void);
@@ -44,7 +44,7 @@ typedef struct {
 
 extern unsigned char LAB_00204014; /* 0x204014 */
 
-/* Supplied declaration required: FUN_0014bf2c. */
+/* Supplied declaration required: objFlagsSetBits. */
 extern int FUN_00163e84(unsigned int);
 /* Supplied declaration required: FUN_0023723c. */
 /* Supplied declaration required: FUN_002a1f60. */
@@ -70,7 +70,7 @@ void FUN_00203da4(fn_00203da4_arg0 *param_1,int param_2,unsigned int param_3,int
   temp_v6 = param_1->field_0x19ec;
   temp_v0 = param_1->field_0x8;
   temp_v3 = param_1->field_0xc;
-  FUN_0014bf2c(temp_v5,8);
+  objFlagsSetBits(temp_v5,8);
   bustupCutAnimClearFlags();
   eventTexClearFlagB8();
   if (param_2 == 0) {

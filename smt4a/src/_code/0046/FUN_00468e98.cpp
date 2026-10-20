@@ -36,7 +36,7 @@ typedef struct {
 
 extern unsigned char DAT_005f16fc; /* 0x5f16fc */
 
-extern int FUN_00162e8c(void);
+extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_00183318. */
 /* Supplied declaration required: FUN_0019de98. */
 extern int FUN_002a746c(void);
@@ -80,7 +80,7 @@ void FUN_00468e98(fn_00468e98_arg0 *param_1)
     FUN_00334518();
     temp_v5 = 0;
     if (param_1->field_0xa64 != 0) {
-      temp_v4 = FUN_00162e8c();
+      temp_v4 = gameFlagsGetBlock();
       *(unsigned short *)(temp_v4 + 0x22) = 0;
       temp_v5 = clearFlags310To31F();
       if (temp_v3 == 0) {

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00192550(void);
 int FUN_00192608(void);
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 
 extern unsigned int DAT_005702a0; /* 0x5702a0 */
 extern unsigned int DAT_005702a4; /* 0x5702a4 */
@@ -15,7 +15,7 @@ extern unsigned int DAT_005702ac; /* 0x5702ac */
 
 /* Supplied declaration required: FUN_00192550. */
 /* Supplied declaration required: FUN_00192608. */
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: dataTable04FindById. */
 
 
 int FUN_00352144(unsigned int *param_1,unsigned int param_2)
@@ -37,7 +37,7 @@ int FUN_00352144(unsigned int *param_1,unsigned int param_2)
       temp_v0 = *(short *)((int)param_1 + temp_v3 * 8 + 0x33a);
       if (temp_v0 == 2 || temp_v0 == 3) {
         temp_v2 = (int)(short)param_1[temp_v3 * 2 + 0xcf];
-        FUN_001aba54();
+        dataTable04FindById();
         if ((temp_v2 != 0) && (param_2 == (*(unsigned int *)(temp_v2 + 0x28) & 0xffff) >> 0xb)) {
           temp_v4 = temp_v4 + 1;
         }
@@ -46,7 +46,7 @@ int FUN_00352144(unsigned int *param_1,unsigned int param_2)
         temp_v2 = (int)(short)param_1[temp_v3 * 2 + 0xcf];
         FUN_00192550();
         if (((temp_v2 != 0) && (temp_v1 = (unsigned int)*(unsigned short *)(temp_v2 + 0x32), temp_v1 != 0)) &&
-           ((FUN_001aba54(), temp_v1 != 0 && (param_2 == (*(unsigned int *)(temp_v1 + 0x28) & 0xffff) >> 0xb))))
+           ((dataTable04FindById(), temp_v1 != 0 && (param_2 == (*(unsigned int *)(temp_v1 + 0x28) & 0xffff) >> 0xb))))
         {
           temp_v4 = temp_v4 + 1;
         }
@@ -69,7 +69,7 @@ int FUN_00352144(unsigned int *param_1,unsigned int param_2)
   else {
     if (*(short *)((int)param_1 + 0x32a) == 2 || *(short *)((int)param_1 + 0x32a) == 3) {
       temp_v3 = (int)(short)param_1[0xcb];
-      FUN_001aba54();
+      dataTable04FindById();
       if ((temp_v3 != 0) && (param_2 == (*(unsigned int *)(temp_v3 + 0x28) & 0xffff) >> 0xb)) {
         temp_v4 = 1;
       }
@@ -78,7 +78,7 @@ int FUN_00352144(unsigned int *param_1,unsigned int param_2)
       temp_v3 = (int)(short)param_1[0xcb];
       FUN_00192550();
       if ((((temp_v3 != 0) && (temp_v1 = (unsigned int)*(unsigned short *)(temp_v3 + 0x32), temp_v1 != 0)) &&
-          (FUN_001aba54(), temp_v1 != 0)) && (param_2 == (*(unsigned int *)(temp_v1 + 0x28) & 0xffff) >> 0xb)) {
+          (dataTable04FindById(), temp_v1 != 0)) && (param_2 == (*(unsigned int *)(temp_v1 + 0x28) & 0xffff) >> 0xb)) {
         temp_v4 = temp_v4 + 1;
       }
     }

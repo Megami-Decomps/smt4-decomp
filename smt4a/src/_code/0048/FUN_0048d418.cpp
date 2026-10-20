@@ -29,7 +29,7 @@ typedef struct {
 extern int DAT_005f1600; /* 0x5f1600 */
 extern int DAT_005f1c5c; /* 0x5f1c5c */
 
-extern int FUN_0018719c(void);
+extern int gameFlagIsSet(void);
 extern int FUN_004083a8(char, char);
 extern char *dataTable2BType1GetEntry(unsigned char *, int);
 /* Supplied declaration required: dataTable2BType1Count. */
@@ -99,8 +99,8 @@ void FUN_0048d418(int param_1,int param_2)
             ((DAT_005f1600 != 4 && DAT_005f1600 != 5 ||
              ((temp_v0 = pcVar5[1], temp_v0 != 'y' && temp_v0 != 'z' && (temp_v0 != '}' && temp_v0 != '~')))))
             ))) && ((DAT_005f1c5c != 0 ||
-                    ((((*(short *)(pcVar5 + 4) == 0 || (temp_v3 = FUN_0018719c(), temp_v3 != 0)) &&
-                      ((*(short *)(pcVar5 + 6) == 0 || (temp_v3 = FUN_0018719c(), temp_v3 == 0)))) &&
+                    ((((*(short *)(pcVar5 + 4) == 0 || (temp_v3 = gameFlagIsSet(), temp_v3 != 0)) &&
+                      ((*(short *)(pcVar5 + 6) == 0 || (temp_v3 = gameFlagIsSet(), temp_v3 == 0)))) &&
                      (temp_v3 = FUN_004083a8(pcVar5[1],pcVar5[2]), temp_v3 != 0)))))))) {
         if (0 < temp_v6) {
           psVar7 = temp_v7;

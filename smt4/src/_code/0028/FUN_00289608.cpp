@@ -14,7 +14,7 @@ typedef struct {
     void *resource;     /* 0x14 */
 } Task;
 
-int FUN_0028d6d0(void);
+int buttonHelpCreate(void);
 int FUN_002a03d8(int index, int value);
 int scrScriptProcessDestroy(void *resource);
 int FUN_002c2a04(int index);
@@ -39,7 +39,7 @@ void FUN_00289608(Task *task, u8 flag)
         task->resource = NULL;
     }
     if (task->flag != 0) {
-        FUN_0028d6d0();
+        buttonHelpCreate();
     }
     task->phase = 12;
     if (FUN_002c2a04(0) == 3) {

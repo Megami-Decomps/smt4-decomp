@@ -7,8 +7,8 @@ extern "C" {
 int FUN_00159eb8(void);
 int FUN_00159fd8(void);
 int FUN_002a208c(void);
-int FUN_002c3424(void);
-int FUN_002c4040(int *);
+int nn_os_LightEvent_Wait(void);
+int nn_os_LightEvent_Signal(int *);
 int coproc_moveto_Data_Synchronization(int);
 int nn_snd_CTR_MasterManager_GetAuxCallback(...);
 int software_interrupt(int);
@@ -21,7 +21,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } void_stack;
 
-extern unsigned char DAT_004e6f14; /* 0x4e6f14 */
+extern unsigned char g_nnSndMasterManager; /* 0x4e6f14 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: coproc_moveto_Data_Synchronization (CALLOTHER). */
@@ -33,8 +33,8 @@ extern unsigned char DAT_004e6f14; /* 0x4e6f14 */
 /* Supplied declaration required: FUN_00159fd8. */
 /* Supplied declaration required: FUN_002a208c. */
 extern int *FUN_002ad3a4(void);
-/* Supplied declaration required: FUN_002c3424. */
-/* Supplied declaration required: FUN_002c4040. */
+/* Supplied declaration required: nn_os_LightEvent_Wait. */
+/* Supplied declaration required: nn_os_LightEvent_Signal. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
 /* Supplied declaration required: nn_snd_CTR_MasterManager_GetAuxCallback. */
@@ -80,8 +80,8 @@ void FUN_001560c4(void)
     temp_v0 = *(char *)((int)piVar2 + 0xe);
     temp_v2 = 0;
     if ((int)temp_v0 != 0) {
-      nn_snd_CTR_MasterManager_GetAuxCallback(&DAT_004e6f14,0,&temp_v6,temp_v8);
-      nn_snd_CTR_MasterManager_GetAuxCallback(&DAT_004e6f14,1,&iStack_34,temp_v9);
+      nn_snd_CTR_MasterManager_GetAuxCallback(&g_nnSndMasterManager,0,&temp_v6,temp_v8);
+      nn_snd_CTR_MasterManager_GetAuxCallback(&g_nnSndMasterManager,1,&iStack_34,temp_v9);
       temp_v2 = 0;
       if (temp_v6 != 0 || iStack_34 != 0) {
         temp_v2 = 1;
@@ -90,7 +90,7 @@ void FUN_001560c4(void)
     temp_v2 = (int)temp_v0 & (temp_v2 | temp_v1 != 0);
     if (temp_v2 != 0) {
       coproc_moveto_Data_Synchronization(0);
-      FUN_002c4040(piVar2 + 0x10);
+      nn_os_LightEvent_Signal(piVar2 + 0x10);
     }
     if (((char)piVar2[0xc] == '\0') && ((romwright_code *)piVar2[10] != (romwright_code *)0x0)) {
       (*(romwright_code *)piVar2[10])(piVar2[0xb]);
@@ -101,7 +101,7 @@ void FUN_001560c4(void)
       nn_os_CriticalSection_Leave((unsigned int)(piVar2 + 0xd));
     }
     if (temp_v2 != 0) {
-      FUN_002c3424();
+      nn_os_LightEvent_Wait();
     }
     nn_os_CriticalSection_Enter((unsigned int)(piVar2 + 0xd));
     FUN_00159fd8();

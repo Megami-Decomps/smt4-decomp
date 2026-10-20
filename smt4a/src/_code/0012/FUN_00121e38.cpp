@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_00113baa(unsigned int);
 int FUN_00121c48(void);
-int FUN_002e6e14(void);
-int FUN_002ea0b8(int);
+int asdOperatorDeleteArray(void);
+int sharedRefInitEmpty(int);
 int FUN_002eb624(...);
 int FUN_002ecf40(void);
 
@@ -19,9 +19,9 @@ extern unsigned char DAT_00594a58; /* 0x594a58 */
 extern int FUN_001145a0(int);
 /* Supplied declaration required: FUN_00121c48. */
 extern int FUN_00129380(int);
-/* Supplied declaration required: FUN_002e6e14. */
-extern int FUN_002e9f64(int);
-/* Supplied declaration required: FUN_002ea0b8. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
+extern int vectorDestroyWords(int);
+/* Supplied declaration required: sharedRefInitEmpty. */
 extern int FUN_002eac34(unsigned int);
 /* Supplied declaration required: FUN_002eb624. */
 /* Supplied declaration required: FUN_002ecf40. */
@@ -83,17 +83,17 @@ void FUN_00121e38(unsigned int *param_1)
   temp_v0 = temp_v0 - temp_v1;
   for (temp_v1 = *(int *)(temp_v0 + 0x388); temp_v1 != *(int *)(temp_v0 + 0x38c); temp_v1 = temp_v1 + 8) {
   }
-  FUN_002e6e14();
+  asdOperatorDeleteArray();
   temp_v1 = 0x358;
   temp_v0 = FUN_002eb624(temp_v0 + 0x358);
-  temp_v0 = FUN_002e9f64((temp_v0 - temp_v1) + 0x34c);
+  temp_v0 = vectorDestroyWords((temp_v0 - temp_v1) + 0x34c);
   temp_v0 = FUN_002f31cc(temp_v0 - 0x264);
   temp_v0 = FUN_0030153c(temp_v0 - 0x14);
   temp_v0 = FUN_001145a0(temp_v0 - 0x30);
   temp_v0 = FUN_00129380(temp_v0 - 0x50);
   temp_v0 = FUN_002ed250(temp_v0 - 0x14);
   temp_v0 = FUN_002eb624(temp_v0 - 0x30);
-  FUN_002ea0b8(temp_v0 - 0x10);
+  sharedRefInitEmpty(temp_v0 - 0x10);
   return;
 }
 

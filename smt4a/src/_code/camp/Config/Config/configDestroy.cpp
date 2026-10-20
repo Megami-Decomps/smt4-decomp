@@ -6,10 +6,10 @@
 extern "C" {
 
 int asdMemFree(void *ptr);               /* heap free */
-int FUN_0019a7f4(int type);
+int asdTMTexTableReleaseNode(int type);
 int scrScriptProcessDestroy(u32 resource);
-int FUN_001641c4(void);
-int FUN_001add24(int id);
+int ifTouchRegionRemove(void);
+int dataTableFree(int id);
 int asdTMTexTableFreeEntry(int type);
 int obj04Finish(void);
 
@@ -22,16 +22,16 @@ void configDestroy(void)
 
     if (g_config != NULL) {
         if (config->hasType24B != 0) {
-            FUN_0019a7f4(0x24);
+            asdTMTexTableReleaseNode(0x24);
             config->hasType24B = 0;
         }
         if (config->hasType24A != 0) {
             asdTMTexTableFreeEntry(0x24);
             config->hasType24A = 0;
         }
-        FUN_001add24(0x36);
+        dataTableFree(0x36);
         for (i = 0; i < config->count; i++) {
-            FUN_001641c4();
+            ifTouchRegionRemove();
         }
         obj04Finish();
         if (config->resource != 0) {

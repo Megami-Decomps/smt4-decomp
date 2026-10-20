@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_002e7232(int *);
-int FUN_002eea5c(int *, unsigned short [4]);
+int sharedRefRelease(int *);
+int strHolderAssignOneWide(int *, unsigned short [4]);
 int FUN_002effdc(int *);
 int FUN_002f012e(int, int, unsigned int, int);
 
@@ -21,11 +21,11 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_002e7232. */
-extern int FUN_002e760a(unsigned int);
+/* Supplied declaration required: sharedRefRelease. */
+extern int operatorNew(unsigned int);
 extern int FUN_002eb7d0(unsigned int, unsigned int);
 extern int *FUN_002ed258(int, int *);
-/* Supplied declaration required: FUN_002eea5c. */
+/* Supplied declaration required: strHolderAssignOneWide. */
 extern int *arrayElementAddress_002efa50(int, unsigned int);
 extern int *FUN_002eff58(int, unsigned int);
 extern int FUN_002eff84(void);
@@ -85,18 +85,18 @@ void FUN_00107b28(int param_1)
       (*pcVar9)(piVar7);
       return;
     }
-    temp_v4 = FUN_002e760a(0x10);
+    temp_v4 = operatorNew(0x10);
     if (temp_v4 != 0) {
       piVar4 = (int *)FUN_002ed258(temp_v4,piVar7);
     }
     else {
       piVar4 = (int *)0x0;
     }
-    FUN_002e7232(piVar7);
+    sharedRefRelease(piVar7);
   }
   else {
     temp_v2 = 0;
-    temp_v4 = FUN_002e760a(0x10);
+    temp_v4 = operatorNew(0x10);
     if (temp_v4 != 0) {
       piVar4 = (int *)FUN_002eff90(temp_v4,0xfe);
     }
@@ -112,7 +112,7 @@ void FUN_00107b28(int param_1)
     temp_v5 = wordRefsDiffer_002f000c(&temp_v7,temp_v8);
     if ((temp_v5 == 0) || (temp_v5 = FUN_002f00f0(piVar7[2],2), temp_v5 == 0)) break;
     temp_v10[0] = *(unsigned short *)(temp_v7 + 0x14);
-    FUN_002eea5c(piVar7,temp_v10);
+    strHolderAssignOneWide(piVar7,temp_v10);
     temp_v4 = temp_v4 + 1;
     piVar4 = piVar7;
     if (temp_v4 >= 500) {
@@ -136,15 +136,15 @@ void FUN_00107b28(int param_1)
           (*pcVar9)(piVar7);
           return;
         }
-        temp_v5 = FUN_002e760a(0x10);
+        temp_v5 = operatorNew(0x10);
         piVar4 = (int *)0x0;
         if (temp_v5 != 0) {
           piVar4 = (int *)FUN_002ed258(temp_v5,piVar7);
         }
-        FUN_002e7232(piVar7);
+        sharedRefRelease(piVar7);
       }
       else {
-        temp_v5 = FUN_002e760a(0x10);
+        temp_v5 = operatorNew(0x10);
         piVar4 = (int *)0x0;
         if (temp_v5 != 0) {
           piVar4 = (int *)FUN_002eff90(temp_v5,0xfe);

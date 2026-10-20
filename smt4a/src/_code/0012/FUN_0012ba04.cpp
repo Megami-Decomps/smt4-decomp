@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e9ec8(int, unsigned int);
+int onlineInstanceTableFind(int, unsigned int);
 int FUN_002ea41e(unsigned char [12], int);
 int FUN_0030c910(int, unsigned char *);
 
@@ -15,10 +15,10 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned char *FUN_002e7908(unsigned char *, unsigned int *);
-extern int FUN_002e9af4(void);
-/* Supplied declaration required: FUN_002e9ec8. */
+extern int onlineInstanceTableGetCurrent(void);
+/* Supplied declaration required: onlineInstanceTableFind. */
 /* Supplied declaration required: FUN_002ea41e. */
-extern int FUN_002f4e86(void);
+extern int refIsNonNegative(void);
 /* Supplied declaration required: FUN_0030c910. */
 
 
@@ -36,11 +36,11 @@ void FUN_0012ba04(int param_1)
   unsigned int temp_v4 [2];
   
   puVar3 = temp_v1;
-  temp_v0 = FUN_002e9af4();
-  FUN_002e9ec8(temp_v0,*(unsigned int *)(param_1 + 0x68));
+  temp_v0 = onlineInstanceTableGetCurrent();
+  onlineInstanceTableFind(temp_v0,*(unsigned int *)(param_1 + 0x68));
   if (temp_v0 != 0) {
     puVar2 = (unsigned char *)(param_1 + 0x1f0);
-    temp_v0 = FUN_002f4e86();
+    temp_v0 = refIsNonNegative();
     if (temp_v0 == 0) {
       FUN_0030c910(param_1,puVar2);
       return;

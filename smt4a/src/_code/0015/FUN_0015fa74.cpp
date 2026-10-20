@@ -9,9 +9,9 @@ int FUN_00176124(int, unsigned int, unsigned int);
 extern int g_aocSystem; /* 0x570280 */
 
 /* Supplied declaration required: FUN_00176124. */
-extern int FUN_001801a4(void);
+extern int gameGetPlayerData(void);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern int FUN_0018719c(void);
+extern int gameFlagIsSet(void);
 extern int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
 
@@ -38,9 +38,9 @@ int FUN_0015fa74(unsigned int param_1,unsigned int param_2)
       do {
         if ((((*(unsigned char *)(temp_v1 + temp_v4 * 0xa4) == param_1) &&
              (temp_v5 = temp_v1 + temp_v4 * 0xa4, *(unsigned char *)(temp_v5 + 1) == param_2)) &&
-            ((*(short *)(temp_v5 + 0xe) == 0 || (temp_v3 = FUN_0018719c(), temp_v3 != 0)))) &&
-           (((*(short *)(temp_v5 + 0x10) == 0 || (temp_v3 = FUN_0018719c(), temp_v3 == 0)) &&
-            (temp_v3 = FUN_001801a4(),
+            ((*(short *)(temp_v5 + 0xe) == 0 || (temp_v3 = gameFlagIsSet(), temp_v3 != 0)))) &&
+           (((*(short *)(temp_v5 + 0x10) == 0 || (temp_v3 = gameFlagIsSet(), temp_v3 == 0)) &&
+            (temp_v3 = gameGetPlayerData(),
             *(unsigned short *)(temp_v5 + 10) == 0 || *(unsigned short *)(temp_v5 + 10) <= *(unsigned short *)(temp_v3 + 0x62)))))
         {
           return temp_v1 + temp_v4 * 0xa4;

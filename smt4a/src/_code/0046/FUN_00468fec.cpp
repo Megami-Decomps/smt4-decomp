@@ -18,7 +18,7 @@ int FUN_003fe86c(int, int);
 
 extern unsigned char DAT_005333bb; /* 0x5333bb */
 
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 extern unsigned int FUN_0019de98(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00214da4. */
 extern int FUN_00224880(unsigned int);
@@ -87,7 +87,7 @@ void FUN_00468fec(unsigned int *param_1)
             FUN_003c5fc4(1);
           }
         }
-        if (((char)param_1[4] == '\x0e') && (temp_v1 = FUN_0018719c(0x491), temp_v1 == 0)) {
+        if (((char)param_1[4] == '\x0e') && (temp_v1 = gameFlagIsSet(0x491), temp_v1 == 0)) {
           if (temp_v0 != 3) {
             if (param_1[0x338] != 0) {
               param_1[0x338] = 0;

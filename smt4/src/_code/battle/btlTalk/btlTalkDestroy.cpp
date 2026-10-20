@@ -9,7 +9,7 @@ void jobStop(u32 job, s32 arg);
 BtlTalkOwner *jobGetWork(u32 job);
 
 extern BtlTalk *g_btlTalk;
-extern u32 DAT_00439ca8;
+extern u32 g_btlUiBlock;
 
 /* Destroy callback of the talk screen: frees its blocks and stops the owner job. */
 void btlTalkDestroy(u32 job)
@@ -18,7 +18,7 @@ void btlTalkDestroy(u32 job)
     BtlTalk *talk = g_btlTalk;
 
     if (g_btlTalk != NULL) {
-        FUN_0026c820(DAT_00439ca8);
+        FUN_0026c820(g_btlUiBlock);
         if (talk->dataA != NULL) {
             asdMemFree(talk->dataA);
             talk->dataA = NULL;

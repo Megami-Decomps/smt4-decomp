@@ -18,7 +18,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 
 /* Supplied declaration required: FUN_00178b04. */
 extern unsigned int asdVramBGetFreeBytes(void);
@@ -60,7 +60,7 @@ void FUN_0035dec0(int param_1)
     FUN_0040a918(*(unsigned int *)(param_1 + 0x920c),temp_v3);
     FUN_0040aad4(*(unsigned int *)(param_1 + 0x920c),0);
     temp_v1 = *(int *)(*(int *)(param_1 + 0x920c) + 4);
-    FUN_0040ace8(DAT_0056fcc0,temp_v1);
+    FUN_0040ace8(g_handleRegistry,temp_v1);
     FUN_003fe86c(temp_v1,0,2);
     *(unsigned int *)(temp_v1 + 4) = *(unsigned int *)(temp_v1 + 4) & 0xfffffffc;
     FUN_003fe86c(temp_v1,0,2);

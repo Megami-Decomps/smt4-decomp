@@ -9,7 +9,7 @@ typedef struct Table {
     /* 0x27E04 */ u16 unk27E04[5];
 } Table;
 
-Table *FUN_0014af84(void);
+Table *gameDataBlocksGetSaveData(void);
 
 /* Clears the halfword at 0x27E0C of the table and runs FUN_004d0d70 for each of the 0x18 entries; returns 1. */
 u32 FUN_002c1408(void)
@@ -18,7 +18,7 @@ u32 FUN_002c1408(void)
     s32 i;
     u16 *values;
 
-    table = FUN_0014af84();
+    table = gameDataBlocksGetSaveData();
     i = 0;
     values = table->unk27E04;
     values[4] = 0;

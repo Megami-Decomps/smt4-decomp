@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_0029e908(...);
-int FUN_002bed98(...);
-int FUN_002beda4(...);
+int vec2GetYInt(...);
+int vec2GetXInt(...);
 int FUN_002bf288(...);
 int FUN_002bf538(void);
 int FUN_002ccc28(...);
@@ -24,10 +24,10 @@ typedef struct {
     unsigned int sp50; /* 0x50: local_50 */
 } void_stack;
 
-extern int DAT_0043da90; /* 0x43da90 */
+extern int g_camp; /* 0x43da90 */
 extern int g_titleScene; /* 0x44ea00 */
 
-extern int FUN_00198f84(unsigned int);
+extern int idListAnyValid(unsigned int);
 extern int FUN_00224090(void);
 extern int FUN_0028f670(void);
 extern unsigned int FUN_00292844(unsigned int);
@@ -35,12 +35,12 @@ extern unsigned int FUN_00299218(int, unsigned int);
 extern int FUN_0029d65c(int);
 /* Supplied declaration required: FUN_0029e908. */
 extern unsigned int FUN_0029e958(int);
-/* Supplied declaration required: FUN_002bed98. */
-/* Supplied declaration required: FUN_002beda4. */
+/* Supplied declaration required: vec2GetYInt. */
+/* Supplied declaration required: vec2GetXInt. */
 /* Supplied declaration required: FUN_002bf288. */
 extern int FUN_002bf4f8(unsigned int, int);
 /* Supplied declaration required: FUN_002bf538. */
-extern int FUN_002c09d0(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002ccc28. */
 
@@ -73,19 +73,19 @@ void FUN_001978b4(void)
   int temp_v20;
   int temp_v21;
   
-  temp_v0 = DAT_0043da90;
+  temp_v0 = g_camp;
   temp_v19 = 0;
   temp_v15 = 0;
   temp_v16 = 0;
   temp_v1 = FUN_0028f670();
-  if ((((temp_v1 == 0) && (temp_v1 = FUN_002c09d0(0x418), temp_v1 == 0)) ||
+  if ((((temp_v1 == 0) && (temp_v1 = gameFlagIsSet(0x418), temp_v1 == 0)) ||
       ((temp_v1 = FUN_0028f670(), temp_v1 == 0 &&
-       ((temp_v1 = FUN_002c09d0(0x453), temp_v1 != 0 && (temp_v1 = FUN_002c09d0(0x425), temp_v1 == 0))))))
+       ((temp_v1 = gameFlagIsSet(0x453), temp_v1 != 0 && (temp_v1 = gameFlagIsSet(0x425), temp_v1 == 0))))))
      || ((temp_v1 = FUN_0028f670(), temp_v1 == 0 && (temp_v1 = FUN_00224090(), temp_v1 == 0)))) {
     temp_v19 = 1;
   }
-  temp_v2 = FUN_002beda4();
-  temp_v3 = FUN_002bed98(temp_v0 + 0x648);
+  temp_v2 = vec2GetXInt();
+  temp_v3 = vec2GetYInt(temp_v0 + 0x648);
   temp_v1 = temp_v2;
   if (temp_v2 < 0) {
     temp_v1 = -temp_v2;
@@ -100,8 +100,8 @@ void FUN_001978b4(void)
       temp_v21 = (int)(7 - temp_v4) / 2 + 0x14;
       do {
         temp_v11 = temp_v0 + temp_v10 * 0x8c + 0x904;
-        temp_v1 = FUN_002beda4(temp_v11);
-        temp_v2 = FUN_002bed98(temp_v11);
+        temp_v1 = vec2GetXInt(temp_v11);
+        temp_v2 = vec2GetYInt(temp_v11);
         temp_v5 = FUN_0029e908(temp_v0 + 0x34);
         temp_v13 = temp_v5 == temp_v10;
         if (temp_v13) {
@@ -111,7 +111,7 @@ void FUN_001978b4(void)
         if (temp_v13 && temp_v5 == 3) {
           temp_v14 = temp_v19 == 0;
         }
-        if ((((!temp_v14) || (temp_v11 = FUN_002beda4(temp_v11), temp_v11 != 0)) ||
+        if ((((!temp_v14) || (temp_v11 = vec2GetXInt(temp_v11), temp_v11 != 0)) ||
             (temp_v11 = *(int *)(temp_v0 + 0x18), temp_v11 == 3)) || (temp_v11 == 0x1e || temp_v11 == 0x1f)) {
           temp_v3 = FUN_00299218((int)*(char *)(temp_v0 + 0x98),temp_v10);
           temp_v11 = temp_v20;
@@ -127,7 +127,7 @@ void FUN_001978b4(void)
           temp_v17 = 0;
           temp_v18 = 0;
           FUN_002ccc28(temp_v3,&temp_v17,&temp_v18,0);
-          temp_v11 = FUN_00198f84(temp_v6);
+          temp_v11 = idListAnyValid(temp_v6);
           if (temp_v11 != 0) {
             FUN_002bf538();
           }
@@ -146,19 +146,19 @@ void FUN_001978b4(void)
     }
     if (temp_v5 == 3 && temp_v10 == 0) {
       temp_v2 = temp_v0 + temp_v1 * 0x8c + 0x904;
-      temp_v11 = FUN_002beda4();
+      temp_v11 = vec2GetXInt();
       if (((temp_v11 == 0) && (temp_v11 = *(int *)(temp_v0 + 0x18), temp_v11 != 3)) &&
          (temp_v11 != 0x1e && temp_v11 != 0x1f)) {
-        temp_v11 = FUN_002beda4(temp_v2);
-        temp_v2 = FUN_002bed98(temp_v2);
+        temp_v11 = vec2GetXInt(temp_v2);
+        temp_v2 = vec2GetYInt(temp_v2);
         temp_v1 = FUN_0029d65c((int)*(short *)(temp_v0 + temp_v1 * 2 + 0xdf0));
         if (temp_v1 == 2) {
           temp_v12 = 0;
           temp_v1 = temp_v12;
         }
         else {
-          temp_v1 = FUN_002beda4();
-          temp_v12 = FUN_002bed98(temp_v0 + 0xd64);
+          temp_v1 = vec2GetXInt();
+          temp_v12 = vec2GetYInt(temp_v0 + 0xd64);
         }
         temp_v3 = FUN_0029e908(temp_v0 + 0x34);
         temp_v3 = FUN_00299218((int)*(char *)(temp_v0 + 0x98),temp_v3);

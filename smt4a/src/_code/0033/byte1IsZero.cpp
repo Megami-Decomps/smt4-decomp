@@ -7,11 +7,11 @@ typedef struct Byte1Holder {
     /* 0x01 */ s8 unk01;
 } Byte1Holder;
 
-extern Byte1Holder DAT_0057f6c8;
+extern Byte1Holder g_saveLoadThread;
 
 u8 byte1IsZero(void)
 {
-    return DAT_0057f6c8.unk01 == 0;
+    return g_saveLoadThread.unk01 == 0;
 }
 
 } /* extern "C" */

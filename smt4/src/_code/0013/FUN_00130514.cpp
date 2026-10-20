@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0014db9c(...);
 int FUN_002bb020(...);
 int FUN_002bcc60(...);
-int FUN_002c38fc(...);
+int nn_os_CriticalSection_Initialize(...);
 int FUN_002c40f8(...);
 int FUN_002c526c(...);
 int software_interrupt(...);
@@ -32,7 +32,7 @@ extern unsigned char LAB_00152604; /* 0x152604 */
 /* Supplied declaration required: FUN_0014db9c. */
 /* Supplied declaration required: FUN_002bb020. */
 /* Supplied declaration required: FUN_002bcc60. */
-/* Supplied declaration required: FUN_002c38fc. */
+/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
 /* Supplied declaration required: FUN_002c40f8. */
 /* Supplied declaration required: FUN_002c526c. */
 extern void nn_os_Thread_FinalizeImpl(unsigned int);
@@ -72,7 +72,7 @@ unsigned char FUN_00130514(int *param_1,unsigned int param_2,int *param_3)
     *(unsigned char *)((int)param_1 + 0x15) = 0;
   }
   *(unsigned char *)(param_1 + 5) = 0;
-  FUN_002c38fc(param_1 + 2);
+  nn_os_CriticalSection_Initialize(param_1 + 2);
   uStack_30 = 4;
   temp_v3 = &LAB_0014da38;
   temp_v4 = &LAB_00152604;

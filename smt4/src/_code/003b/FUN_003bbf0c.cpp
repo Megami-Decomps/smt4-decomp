@@ -2,8 +2,8 @@
 
 extern "C" {
 
-int FUN_001a9ebc(void);
-int FUN_002b2368(void *object);
+int asdCecShutdown(void);
+int asdMemFreeNonNull(void *object);
 int asdMemFree(u32 ptr);
 
 typedef struct Obj {
@@ -17,8 +17,8 @@ void FUN_003bbf0c(Obj *obj, u32 value)
     obj->unk0 = value;
     asdMemFree(obj->bufferA);
     asdMemFree(obj->bufferB);
-    FUN_001a9ebc();
-    FUN_002b2368(obj);
+    asdCecShutdown();
+    asdMemFreeNonNull(obj);
 }
 
 } /* extern "C" */

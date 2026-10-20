@@ -9,7 +9,7 @@ int FUN_0018408c(unsigned char [84], int);
 int VectorSignedToFloat(...);
 int rt_memcpy(...);
 
-extern unsigned char DAT_0057f0c4; /* 0x57f0c4 */
+extern unsigned char g_buttonHelp; /* 0x57f0c4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00162790. */
@@ -30,11 +30,11 @@ void FUN_002acfc8(int param_1,int param_2,unsigned int param_3)
   unsigned int in_fpscr;
   unsigned char temp_v2 [84];
   
-  temp_v1 = (*(int *)((unsigned char *)&DAT_0057f0c4 + 0x4));
+  temp_v1 = (*(int *)((unsigned char *)&g_buttonHelp + 0x4));
   puVar3 = temp_v2;
   puVar4 = temp_v2;
-  temp_v0 = *(unsigned char *)((*(int *)((unsigned char *)&DAT_0057f0c4 + 0x4)) + 0x675);
-  pbVar6 = (unsigned char *)((*(int *)((unsigned char *)&DAT_0057f0c4 + 0x4)) + 0x675);
+  temp_v0 = *(unsigned char *)((*(int *)((unsigned char *)&g_buttonHelp + 0x4)) + 0x675);
+  pbVar6 = (unsigned char *)((*(int *)((unsigned char *)&g_buttonHelp + 0x4)) + 0x675);
   puVar5 = (unsigned char *)0x0;
   if (temp_v0 != 0) {
     rt_memcpy(temp_v2,param_1);

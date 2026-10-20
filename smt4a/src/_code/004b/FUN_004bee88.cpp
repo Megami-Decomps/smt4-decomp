@@ -8,7 +8,7 @@ int FUN_00100388(...);
 int FUN_00157558(...);
 int FUN_00162790(...);
 int efctSetSpeed(...);
-int FUN_0016c410(...);
+int renderCtxResetColorScale(...);
 int FUN_0016c560(...);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
@@ -33,7 +33,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0016c410. */
+/* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: FUN_0016c560. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
@@ -125,7 +125,7 @@ void FUN_004bee88(int param_1,int param_2,int param_3)
     *(unsigned char *)(temp_v3 + 0x1270) = 0;
   }
   FUN_0016c560(g_renderCtx);
-  FUN_0016c410(g_renderCtx);
+  renderCtxResetColorScale(g_renderCtx);
   return;
 }
 

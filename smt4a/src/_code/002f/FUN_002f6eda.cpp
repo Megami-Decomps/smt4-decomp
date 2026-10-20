@@ -7,8 +7,8 @@ extern "C" {
 int FUN_002e6e26(void);
 int FUN_002e6e34(unsigned int *, int);
 int FUN_002e6e5c(unsigned int *);
-int FUN_002e7232(void);
-int FUN_002e75fa(void);
+int sharedRefRelease(void);
+int sharedRefAddRef(void);
 int FUN_002e78d0(unsigned int, unsigned int, int);
 
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
@@ -19,11 +19,11 @@ extern unsigned int FUN_0011c750(int, unsigned int, int);
 /* Supplied declaration required: FUN_002e6e26. */
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-/* Supplied declaration required: FUN_002e7232. */
-/* Supplied declaration required: FUN_002e75fa. */
-extern int FUN_002e760a(unsigned int);
+/* Supplied declaration required: sharedRefRelease. */
+/* Supplied declaration required: sharedRefAddRef. */
+extern int operatorNew(unsigned int);
 /* Supplied declaration required: FUN_002e78d0. */
-extern int FUN_002f7064(int);
+extern int onlineOwnerHasPendingJob(int);
 
 
 long long FUN_002f6eda(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -41,22 +41,22 @@ long long FUN_002f6eda(int param_1,unsigned int param_2,unsigned int param_3,uns
   uStack_10 = param_4;
   temp_v0 = FUN_002e6e26();
   FUN_002e6e34(&uStack_18,temp_v0 + 0x58);
-  temp_v0 = FUN_002f7064(param_1);
+  temp_v0 = onlineOwnerHasPendingJob(param_1);
   if (temp_v0 != 0) {
     FUN_002e6e5c(&uStack_18);
     return (unsigned long long)uStack_18 << 0x20;
   }
   if (*(int *)(param_1 + 0x9c) != 0) {
-    FUN_002e7232();
+    sharedRefRelease();
     *(unsigned int *)(param_1 + 0x9c) = 0;
   }
-  temp_v0 = FUN_002e760a(0xd0);
+  temp_v0 = operatorNew(0xd0);
   temp_v1 = 0;
   if (temp_v0 != 0) {
     temp_v1 = FUN_0011c750(temp_v0,*(unsigned int *)(*(int *)(param_1 + 0x70) + 0x44),param_1);
   }
   *(unsigned int *)(param_1 + 0x9c) = temp_v1;
-  FUN_002e75fa();
+  sharedRefAddRef();
   temp_v1 = FUN_002e6e26();
   FUN_002e78d0(temp_v1,*(unsigned int *)(param_1 + 0x9c),0);
   FUN_002e6e5c(&uStack_18);

@@ -9,8 +9,8 @@ int taskCreateDraw(...);
 int asdMemFree(void);
 int scrScriptProcessDestroy(void);
 int FUN_002c1e9c(void);
-int FUN_002e342c(unsigned char *, unsigned int *);
-int FUN_002e6dd0(unsigned int *, int);
+int libc_strcpy(unsigned char *, unsigned int *);
+int rt_aeabi_memclr(unsigned int *, int);
 int FUN_003f876c(int);
 
 /* stack frame of param_1: 4 slot(s), 16 byte(s) */
@@ -32,7 +32,7 @@ extern unsigned char LAB_00328774; /* 0x328774 */
 extern unsigned char LAB_0032878c; /* 0x32878c */
 extern unsigned char LAB_00357f98; /* 0x357f98 */
 extern unsigned char LAB_00379d54; /* 0x379d54 */
-extern unsigned int *DAT_0057f568; /* 0x57f568 */
+extern unsigned int *g_aocJob; /* 0x57f568 */
 extern unsigned int DAT_005e1f70; /* 0x5e1f70 */
 extern int DAT_005e1f74; /* 0x5e1f74 */
 extern unsigned char DAT_005e1f78; /* 0x5e1f78 */
@@ -43,8 +43,8 @@ extern int jyoucyuGetTableEntry(unsigned int);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_002c1e9c. */
-/* Supplied declaration required: FUN_002e342c. */
-/* Supplied declaration required: FUN_002e6dd0. */
+/* Supplied declaration required: libc_strcpy. */
+/* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: FUN_003f876c. */
 
 
@@ -56,8 +56,8 @@ void FUN_00291728(unsigned int *param_1)
   unsigned char *puVar2;
   int temp_v0;
   
-  puVar1 = DAT_0057f568;
-  if (DAT_0057f568[0xc] != 0) {
+  puVar1 = g_aocJob;
+  if (g_aocJob[0xc] != 0) {
     scrScriptProcessDestroy();
     puVar1[0xc] = 0;
   }
@@ -85,7 +85,7 @@ void FUN_00291728(unsigned int *param_1)
   *(unsigned char *)(puVar1 + 9) = 0;
   *(unsigned char *)(puVar1 + 0xe) = 0;
   *(unsigned char *)(puVar1 + 0x1f) = 0;
-  FUN_002e6dd0(puVar1 + 0xf,0x40);
+  rt_aeabi_memclr(puVar1 + 0xf,0x40);
   *(unsigned char *)(puVar1 + 1) = 0;
   if (param_1 == (unsigned int *)0x0) {
     temp_v0 = jyoucyuGetTableEntry(0);
@@ -108,7 +108,7 @@ void FUN_00291728(unsigned int *param_1)
     DAT_005e1f78 = 0;
   }
   else {
-    FUN_002e342c(&DAT_005e1f78,param_1 + 2);
+    libc_strcpy(&DAT_005e1f78,param_1 + 2);
   }
   puVar2 = &LAB_00291910;
   asdProcessCreateSimple(&LAB_00291910,4,0,0,FUN_00225ddc,&LAB_00328774,0);

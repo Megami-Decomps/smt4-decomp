@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdMemFree(unsigned int *);
-int FUN_002e3328(void);
+int asdOperatorDelete(void);
 int FUN_0047c5f0(void);
 int FUN_0047c950(void);
 
@@ -13,7 +13,7 @@ extern unsigned int *DAT_00570278; /* 0x570278 */
 
 extern int jobFind(unsigned int);
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_002e3328. */
+/* Supplied declaration required: asdOperatorDelete. */
 /* Supplied declaration required: FUN_0047c5f0. */
 /* Supplied declaration required: FUN_0047c950. */
 
@@ -39,7 +39,7 @@ unsigned int FUN_00270a70(void)
         FUN_0047c5f0();
         if (puVar2[7] != 0) {
           FUN_0047c950();
-          FUN_002e3328();
+          asdOperatorDelete();
           puVar2[7] = 0;
         }
       }

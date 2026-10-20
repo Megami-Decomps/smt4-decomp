@@ -26,8 +26,8 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned int DAT_00464b7c; /* 0x464b7c */
-extern unsigned int DAT_00464b84; /* 0x464b84 */
-extern int DAT_004dad80; /* 0x4dad80 */
+extern unsigned int g_asdModelTransformBuilder; /* 0x464b84 */
+extern int g_asdLightCount; /* 0x4dad80 */
 
 extern int FUN_00252394(unsigned int);
 /* Supplied declaration required: sceneTraverserVisit. */
@@ -148,10 +148,10 @@ LAB_0031d040:
       }
       temp_v4 = temp_v4 + 1;
       piVar11 = piVar11 + 7;
-      DAT_004dad80 = DAT_004dad80 + 1;
+      g_asdLightCount = g_asdLightCount + 1;
     } while (temp_v4 < *(unsigned int *)(*(int *)(param_1 + 0x9c) + 8));
   }
-  sceneTraverserVisit(DAT_00464b7c,DAT_00464b84);
+  sceneTraverserVisit(DAT_00464b7c,g_asdModelTransformBuilder);
   return;
 }
 

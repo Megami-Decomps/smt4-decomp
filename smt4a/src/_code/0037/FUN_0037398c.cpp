@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_00192550(void);
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 
 extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_00192550. */
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: dataTable04FindById. */
 extern int scrGetArg(unsigned int);
 
 
@@ -37,7 +37,7 @@ unsigned int FUN_0037398c(void)
         temp_v3 = (unsigned int)*puVar9;
         FUN_00192550();
         temp_v4 = (unsigned int)*(unsigned short *)(temp_v3 + 0x32);
-        FUN_001aba54();
+        dataTable04FindById();
         if (temp_v4 != 0) {
           if (temp_v1 == 0) {
             if ((*(unsigned int *)(temp_v4 + 0x28) & 0x1e0) == 0) goto LAB_00373a68;

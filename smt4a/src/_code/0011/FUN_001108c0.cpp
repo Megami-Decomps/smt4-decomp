@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_0010b830(unsigned int [2]);
-int FUN_002e995c(unsigned char [8]);
-int FUN_002ea9c0(...);
-int FUN_002ea9dc(...);
+int onlineSockAddrConstruct(unsigned char [8]);
+int onlineUrlSetAddress(...);
+int onlineUrlDestroy(...);
 int FUN_002ee568(...);
 int FUN_002f5044(unsigned int [2]);
-int FUN_002f9ef0(unsigned int [2]);
+int clearWords2(unsigned int [2]);
 int FUN_002fbabc(...);
 int FUN_002fbac6(...);
 
@@ -24,12 +24,12 @@ typedef struct {
 extern unsigned char LAB_00110984; /* 0x110984 */
 
 /* Supplied declaration required: FUN_0010b830. */
-/* Supplied declaration required: FUN_002e995c. */
-/* Supplied declaration required: FUN_002ea9c0. */
-/* Supplied declaration required: FUN_002ea9dc. */
+/* Supplied declaration required: onlineSockAddrConstruct. */
+/* Supplied declaration required: onlineUrlSetAddress. */
+/* Supplied declaration required: onlineUrlDestroy. */
 /* Supplied declaration required: FUN_002ee568. */
 /* Supplied declaration required: FUN_002f5044. */
-/* Supplied declaration required: FUN_002f9ef0. */
+/* Supplied declaration required: clearWords2. */
 /* Supplied declaration required: FUN_002fbabc. */
 /* Supplied declaration required: FUN_002fbac6. */
 
@@ -48,29 +48,29 @@ unsigned int FUN_001108c0(int *param_1,int param_2)
   unsigned char temp_v6 [4];
   unsigned char temp_v7 [108];
   
-  FUN_002f9ef0(temp_v5);
+  clearWords2(temp_v5);
   FUN_0010b830(temp_v5);
   if (temp_v5[0] != 0) {
     for (temp_v2 = 0; temp_v2 < temp_v5[0]; temp_v2 = temp_v2 + 1) {
       temp_v0 = FUN_002fbabc(temp_v5,temp_v2);
       if (-1 < *(int *)(temp_v0 + 0xc) << 0x1d) {
         FUN_002ee568(temp_v7,&LAB_00110984);
-        FUN_002e995c(temp_v3);
+        onlineSockAddrConstruct(temp_v3);
         puVar2 = (unsigned int *)FUN_002fbabc(temp_v5,temp_v2);
         temp_v4 = *puVar2;
-        FUN_002ea9c0(temp_v7,temp_v3);
+        onlineUrlSetAddress(temp_v7,temp_v3);
         FUN_002fbac6(param_2,temp_v7);
-        FUN_002ea9dc(temp_v7);
+        onlineUrlDestroy(temp_v7);
       }
     }
     if (*(int *)(param_2 + 0x14) == 0) {
       FUN_002ee568(temp_v6,&LAB_00110984);
-      FUN_002e995c(temp_v3);
+      onlineSockAddrConstruct(temp_v3);
       puVar2 = (unsigned int *)FUN_002fbabc(temp_v5,0);
       temp_v4 = *puVar2;
-      FUN_002ea9c0(temp_v6,temp_v3);
+      onlineUrlSetAddress(temp_v6,temp_v3);
       FUN_002fbac6(param_2,temp_v6);
-      FUN_002ea9dc(temp_v6);
+      onlineUrlDestroy(temp_v6);
     }
     temp_v1 = FUN_002fbabc(temp_v5,0);
     (**(romwright_code **)(*param_1 + 0x28))(param_1,temp_v1);

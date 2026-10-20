@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00291050(void);
+int cecMessageIdClear(void);
 int FUN_002ad8b4(...);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
@@ -13,7 +13,7 @@ typedef struct {
 } param_3_stack;
 
 extern unsigned int FUN_00238c80(unsigned char *, int);
-/* Supplied declaration required: FUN_00291050. */
+/* Supplied declaration required: cecMessageIdClear. */
 /* Supplied declaration required: FUN_002ad8b4. */
 
 
@@ -32,7 +32,7 @@ unsigned int nn_cec_CTR_Message_GetMessageId(unsigned int param_1,int param_2,in
     FUN_002ad8b4();
   }
   else {
-    FUN_00291050();
+    cecMessageIdClear();
   }
   return param_1;
 }

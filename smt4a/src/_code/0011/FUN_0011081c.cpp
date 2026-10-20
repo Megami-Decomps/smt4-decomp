@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_002e9300(int *, unsigned char *);
-int FUN_002e9318(int *);
+int onlineStringConstruct(int *, unsigned char *);
+int onlineStringDestroy(int *);
 int FUN_002fb58c(...);
 int FUN_002fba58(unsigned int *, unsigned int);
 
@@ -23,9 +23,9 @@ extern unsigned char LAB_00110878; /* 0x110878 */
 extern unsigned char LAB_001108a0; /* 0x1108a0 */
 extern unsigned char DAT_005593d0; /* 0x5593d0 */
 
-extern int FUN_002e760a(unsigned int);
-/* Supplied declaration required: FUN_002e9300. */
-/* Supplied declaration required: FUN_002e9318. */
+extern int operatorNew(unsigned int);
+/* Supplied declaration required: onlineStringConstruct. */
+/* Supplied declaration required: onlineStringDestroy. */
 /* Supplied declaration required: FUN_002fb58c. */
 /* Supplied declaration required: FUN_002fba58. */
 
@@ -43,19 +43,19 @@ FUN_0011081c(fn_0011081c_arg0 *param_1,unsigned int param_2,unsigned int param_3
   
   uStack_18 = param_3;
   uStack_14 = param_4;
-  temp_v0 = FUN_002e9300(&uStack_18,&LAB_00110878);
+  temp_v0 = onlineStringConstruct(&uStack_18,&LAB_00110878);
   puVar2 = (unsigned int *)FUN_002fb58c(param_1,temp_v0);
-  FUN_002e9318(&uStack_18);
+  onlineStringDestroy(&uStack_18);
   puVar2[0xe] = 0;
   puVar2[0xf] = 0;
   puVar2[0x10] = 0;
   *puVar2 = (unsigned int)&DAT_005593d0;
-  temp_v1 = FUN_002e760a(0x38);
+  temp_v1 = operatorNew(0x38);
   if (temp_v1 != 0) {
-    FUN_002e9300(&uStack_18,&LAB_001108a0);
+    onlineStringConstruct(&uStack_18,&LAB_001108a0);
     temp_v0 = FUN_002fb58c(temp_v1,&uStack_18);
     puVar2[0x11] = temp_v0;
-    FUN_002e9318(&uStack_18);
+    onlineStringDestroy(&uStack_18);
   }
   else {
     puVar2[0x11] = 0;

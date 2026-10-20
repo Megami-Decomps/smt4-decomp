@@ -5,14 +5,14 @@
 extern "C" {
 
 int FUN_0022699c(int, int, int, unsigned int);
-int FUN_00282924(unsigned int *, int);
+int btlMainFindEntryByListedId(unsigned int *, int);
 
-extern int DAT_00434290; /* 0x434290 */
+extern int g_btlActionReflect; /* 0x434290 */
 extern unsigned int g_btlEvent; /* 0x435d48 */
 
 /* Supplied declaration required: FUN_0022699c. */
 extern int FUN_0027e3e8(unsigned int, int, unsigned int);
-/* Supplied declaration required: FUN_00282924. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 extern unsigned int *btlGetMainState(void);
 
 
@@ -25,12 +25,12 @@ unsigned int FUN_00250680(short param_1,unsigned int param_2,int param_3)
   
   if ((*(unsigned int *)(param_3 + 0x50) & 1) != 0 && (*(unsigned int *)(param_3 + 0x50) & 0x80) != 0) {
     puVar1 = (unsigned int *)btlGetMainState();
-    FUN_00282924(puVar1,(int)*(short *)(param_3 + 0x62));
+    btlMainFindEntryByListedId(puVar1,(int)*(short *)(param_3 + 0x62));
     *puVar1 = *puVar1 | 0x240;
     temp_v0 = FUN_0027e3e8(g_btlEvent,param_3,1);
     if ((temp_v0 == 0) || ((*puVar1 & 0x10) == 0)) {
-      temp_v0 = DAT_00434290;
-      FUN_0022699c(DAT_00434290,(int)param_1,0,param_2);
+      temp_v0 = g_btlActionReflect;
+      FUN_0022699c(g_btlActionReflect,(int)param_1,0,param_2);
       *(unsigned char *)(temp_v0 + 4) = 0x24;
       *(unsigned int **)(temp_v0 + 0x18) = puVar1;
       *(unsigned int *)(temp_v0 + 0x28) = 1;

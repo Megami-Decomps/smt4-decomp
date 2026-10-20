@@ -10,7 +10,7 @@ int FUN_00157e98(unsigned int, int);
 int FUN_00158124(void);
 
 extern int DAT_0056fcb8; /* 0x56fcb8 */
-extern int DAT_0056fcc0; /* 0x56fcc0 */
+extern int g_handleRegistry; /* 0x56fcc0 */
 extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: FUN_00145e24. */
@@ -30,8 +30,8 @@ unsigned int FUN_00146314(void)
   unsigned int *puVar4;
   unsigned int *puVar5;
   
-  temp_v0 = DAT_0056fcc0;
-  temp_v2 = DAT_0056fcc0;
+  temp_v0 = g_handleRegistry;
+  temp_v2 = g_handleRegistry;
   FUN_00158124();
   if (temp_v2 != 0) {
     if ((DAT_0056fcb8 != 0) &&
@@ -45,8 +45,8 @@ unsigned int FUN_00146314(void)
   }
   temp_v1 = FUN_00152f54();
   FUN_00145e24(g_renderCtx,temp_v1);
-  puVar5 = *(unsigned int **)(DAT_0056fcc0 + 0x1c);
-  for (puVar4 = *(unsigned int **)(DAT_0056fcc0 + 0x18); puVar4 != puVar5; puVar4 = puVar4 + 1) {
+  puVar5 = *(unsigned int **)(g_handleRegistry + 0x1c);
+  for (puVar4 = *(unsigned int **)(g_handleRegistry + 0x18); puVar4 != puVar5; puVar4 = puVar4 + 1) {
     FUN_00156974(*puVar4);
   }
   return 0;

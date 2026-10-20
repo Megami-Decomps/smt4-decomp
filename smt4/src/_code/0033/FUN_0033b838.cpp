@@ -5,12 +5,12 @@
 extern "C" {
 
 int dataTable06Sub1GetRecord(void);
-int FUN_002b9024(void);
+int devilGetRecord(void);
 
 extern int FUN_00245768(unsigned short);
-extern int padIsButtonDown(unsigned int);
+extern int flagBitIsSet(unsigned int);
 /* Supplied declaration required: dataTable06Sub1GetRecord. */
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: devilGetRecord. */
 extern int randNextInRange(unsigned int);
 
 
@@ -25,10 +25,10 @@ unsigned int FUN_0033b838(int param_1,int param_2,int param_3)
   
   if (0 < param_2) {
     temp_v0 = (unsigned int)*(unsigned short *)(param_1 + 0x46);
-    FUN_002b9024();
+    devilGetRecord();
     temp_v1 = FUN_00245768(*(unsigned short *)(param_1 + 0x46));
     temp_v3 = temp_v1 / 500 + (*(unsigned int *)(temp_v0 + 0x2c) & 0x7f);
-    temp_v1 = padIsButtonDown(5);
+    temp_v1 = flagBitIsSet(5);
     if (temp_v1 != 0) {
       temp_v3 = temp_v3 + 0x1e;
     }

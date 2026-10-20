@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_001654d8(int);
-int FUN_001654e4(int);
+int vec2GetXInt(int);
+int vec2GetYInt(int);
 int efctSetSpeed(void);
 int FUN_001835b4(int, int, int, int, unsigned int, int);
 int FUN_001879d0(unsigned int);
@@ -21,8 +21,8 @@ typedef struct {
 
 extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
-/* Supplied declaration required: FUN_001654d8. */
-/* Supplied declaration required: FUN_001654e4. */
+/* Supplied declaration required: vec2GetXInt. */
+/* Supplied declaration required: vec2GetYInt. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_001879d0. */
@@ -41,8 +41,8 @@ void FUN_003f6e24(int param_1,int param_2,unsigned int param_3)
   int temp_v3;
   float temp_v4;
   
-  FUN_001654d8(param_1 + 0x540);
-  FUN_001654e4(param_1 + 0x540);
+  vec2GetXInt(param_1 + 0x540);
+  vec2GetYInt(param_1 + 0x540);
   temp_v4 = 0.26f;
   FUN_001879d0(g_renderCtx);
   param_2 = param_2 + (int)temp_v4;
@@ -50,11 +50,11 @@ void FUN_003f6e24(int param_1,int param_2,unsigned int param_3)
   FUN_001835b4(2,0x31,0,param_2,param_3,0x8d);
   FUN_001835b4(2,0x31,1,param_2,param_3,0x8d);
   FUN_001835b4(2,0x31,9,param_2,param_3,0x8d);
-  temp_v0 = FUN_001654d8(param_1 + 0x1f8);
-  temp_v1 = FUN_001654e4(param_1 + 0x1f8);
+  temp_v0 = vec2GetXInt(param_1 + 0x1f8);
+  temp_v1 = vec2GetYInt(param_1 + 0x1f8);
   FUN_003f5b14(param_1,temp_v0,temp_v1,0x17,0x1a);
-  temp_v2 = FUN_001654d8(param_1 + 0x284);
-  temp_v3 = FUN_001654e4(param_1 + 0x284);
+  temp_v2 = vec2GetXInt(param_1 + 0x284);
+  temp_v3 = vec2GetYInt(param_1 + 0x284);
   FUN_003f54c4(param_1,temp_v2 + temp_v0,temp_v3 + temp_v1);
   FUN_003f61b4(param_1,temp_v0,temp_v1);
   return;

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0018c87c(int);
-int FUN_001a0990(int);
+int nn_os_LightEvent_ClearSignal(int);
 int FUN_001b4a58(unsigned int, int *, int, int);
 int FUN_001cb774(int *, unsigned int);
 int FUN_001cb83c(int *, unsigned int, int);
@@ -49,7 +49,7 @@ extern unsigned int DAT_005c0ad8; /* 0x5c0ad8 */
 /* Unsupported intrinsic, declaration required: hasExclusiveAccess (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0018c87c. */
-/* Supplied declaration required: FUN_001a0990. */
+/* Supplied declaration required: nn_os_LightEvent_ClearSignal. */
 extern int FUN_001b1998(void);
 /* Supplied declaration required: FUN_001b4a58. */
 extern unsigned int FUN_001c35d8(void);
@@ -175,7 +175,7 @@ void FUN_00465cc4(int *param_1)
     temp_v2 = FUN_001b1998();
     piVar7 = (int *)(temp_v2 + 0x2c);
     nn_os_CriticalSection_Enter((unsigned int)piVar7);
-    FUN_001a0990(temp_v5 + 0xc);
+    nn_os_LightEvent_ClearSignal(temp_v5 + 0xc);
     *(unsigned char *)(temp_v5 + 0x14) = 1;
     nw_ut_internal_LinkListImpl_insert(temp_v2 + 0xc,temp_v2 + 0x10,temp_v5 + 4);
     nn_os_detail_BlockingQueueBase_nn_os_CriticalSection_TryEnqueue(temp_v2 + 0x38,0);

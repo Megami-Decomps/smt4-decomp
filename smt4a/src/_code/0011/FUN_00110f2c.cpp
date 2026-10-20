@@ -6,15 +6,15 @@ extern "C" {
 
 int FUN_002e6e34(unsigned char [12], int);
 int FUN_002e6e5c(...);
-int FUN_002e9afe(...);
-int FUN_002edb54(...);
+int vectorCopyHeader(...);
+int vectorResizeBytes(...);
 int FUN_002f7824(...);
 int FUN_002f8b88(int);
 int FUN_002fb208(void);
 int FUN_002fbe90(...);
 int FUN_002fbfe8(...);
 int FUN_002fc056(unsigned int, int, int);
-int FUN_002fc088(unsigned int, int);
+int ringBufferConsume(unsigned int, int);
 int FUN_0043af40(int);
 int FUN_00502374(...);
 int FUN_005023d0(int, int *);
@@ -37,17 +37,17 @@ typedef struct {
 
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-/* Supplied declaration required: FUN_002e9afe. */
+/* Supplied declaration required: vectorCopyHeader. */
 extern int wordRefsEqual_002ea4ac(int *, unsigned int *);
-/* Supplied declaration required: FUN_002edb54. */
+/* Supplied declaration required: vectorResizeBytes. */
 /* Supplied declaration required: FUN_002f7824. */
 /* Supplied declaration required: FUN_002f8b88. */
 /* Supplied declaration required: FUN_002fb208. */
 /* Supplied declaration required: FUN_002fbe90. */
 /* Supplied declaration required: FUN_002fbfe8. */
-extern int FUN_002fc046(int *);
+extern int rangeIsEmpty(int *);
 /* Supplied declaration required: FUN_002fc056. */
-/* Supplied declaration required: FUN_002fc088. */
+/* Supplied declaration required: ringBufferConsume. */
 extern int FUN_0043aeac(int, int, int);
 /* Supplied declaration required: FUN_0043af40. */
 extern int FUN_0043af60(int, int, int);
@@ -90,7 +90,7 @@ void FUN_00110f2c(int param_1)
   piVar3 = (int *)(param_1 + 0x10a0);
 LAB_00110f60:
   do {
-    if ((*(char *)(param_1 + 0x108c) != '\0') && (temp_v1 = FUN_002fc046(piVar3), temp_v1 != 0)) {
+    if ((*(char *)(param_1 + 0x108c) != '\0') && (temp_v1 = rangeIsEmpty(piVar3), temp_v1 != 0)) {
       return;
     }
     if (*(char *)(param_1 + 0x108d) != '\0') {
@@ -102,9 +102,9 @@ LAB_00110f60:
     FUN_002e6e34(temp_v15,temp_v13);
     temp_v1 = *(int *)(*(int *)(param_1 + 0x109c) + 0x18);
     if (temp_v1 != 0) {
-      FUN_002edb54(piVar3,temp_v1,0);
+      vectorResizeBytes(piVar3,temp_v1,0);
       FUN_002fc056(*(unsigned int *)(param_1 + 0x109c),*piVar3,*(int *)(param_1 + 0x10a4) - *piVar3);
-      FUN_002fc088(*(unsigned int *)(param_1 + 0x109c),*(int *)(param_1 + 0x10a4) - *piVar3);
+      ringBufferConsume(*(unsigned int *)(param_1 + 0x109c),*(int *)(param_1 + 0x10a4) - *piVar3);
       temp_v1 = *(int *)(param_1 + 0x109c);
       *(unsigned int *)(temp_v1 + 0x18) = 0;
       *(unsigned int *)(temp_v1 + 0x10) = 0;
@@ -112,7 +112,7 @@ LAB_00110f60:
     }
     *(unsigned char *)(param_1 + 0x108f) = *(unsigned char *)(param_1 + 0x108e);
     FUN_002e6e5c(temp_v15);
-    temp_v1 = FUN_002fc046(piVar3);
+    temp_v1 = rangeIsEmpty(piVar3);
     if (temp_v1 == 0) {
       temp_v1 = FUN_0043aeac(temp_v4,*piVar3,*(int *)(param_1 + 0x10a4) - *piVar3);
       if (-1 < temp_v1) {
@@ -120,7 +120,7 @@ LAB_00110f60:
         continue;
       }
       FUN_002fbe90(&temp_v3);
-      FUN_002e9afe(temp_v12,&temp_v3);
+      vectorCopyHeader(temp_v12,&temp_v3);
       return;
     }
   } while (*(char *)(param_1 + 0x108f) == '\0');
@@ -128,8 +128,8 @@ LAB_00110f60:
 LAB_00111002:
   temp_v11 = -0x181c0001;
   temp_v2 = 0;
-  if ((*(char *)(param_1 + 0x108c) == '\0') && (temp_v1 = FUN_002fc046(piVar3), temp_v1 != 0)) {
-    FUN_002edb54(piVar3,*(unsigned int *)(param_1 + 0x1098),0);
+  if ((*(char *)(param_1 + 0x108c) == '\0') && (temp_v1 = rangeIsEmpty(piVar3), temp_v1 != 0)) {
+    vectorResizeBytes(piVar3,*(unsigned int *)(param_1 + 0x1098),0);
     temp_v11 = FUN_0043af60(temp_v4,*piVar3,*(int *)(param_1 + 0x10a4) - *piVar3);
     temp_v2 = 1;
   }
@@ -143,7 +143,7 @@ LAB_00111002:
     temp_v1 = FUN_00502424(temp_v4,(unsigned int *)&temp_v7);
     if (temp_v1 < 0) {
       FUN_002fbe90(&temp_v3);
-      FUN_002e9afe(temp_v12,&temp_v3);
+      vectorCopyHeader(temp_v12,&temp_v3);
       return;
     }
     temp_v6 = 1;
@@ -164,7 +164,7 @@ LAB_00111096:
           FUN_005023d0(temp_v4,&temp_v5);
         }
         FUN_002fbe90(temp_v16,temp_v11);
-        FUN_002e9afe(temp_v12,temp_v16);
+        vectorCopyHeader(temp_v12,temp_v16);
       }
       FUN_002e6e5c(temp_v15);
       return;
@@ -174,12 +174,12 @@ LAB_00111096:
     FUN_00502374(temp_v4,&temp_v8,&temp_v10);
     temp_v1 = temp_v9;
     temp_v9 = temp_v8;
-    FUN_002edb54(piVar3,temp_v8 - temp_v1,0);
+    vectorResizeBytes(piVar3,temp_v8 - temp_v1,0);
     if (-1 < temp_v11) {
       *(unsigned char *)(param_1 + 0x108c) = 1;
     }
   }
-  temp_v1 = FUN_002fc046(piVar3);
+  temp_v1 = rangeIsEmpty(piVar3);
   if ((temp_v1 == 0) &&
      ((unsigned int)(*(int *)(param_1 + 0x10a4) - *piVar3) <=
       (unsigned int)(*(int *)(*(int *)(param_1 + 0x109c) + 0x1c) -

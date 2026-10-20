@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002869e8(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, int);
 int FUN_002b23bc(int, int, unsigned int, unsigned char *);
-int FUN_002c30c4(...);
+int libc_strlen(...);
 int asdMemFree(int);
 int asdMemAlloc(int, int, int, int, int);
 
@@ -19,7 +19,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_002869e8. */
 /* Supplied declaration required: FUN_002b23bc. */
-/* Supplied declaration required: FUN_002c30c4. */
+/* Supplied declaration required: libc_strlen. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: asdMemAlloc. */
 
@@ -36,10 +36,10 @@ void FUN_00296b3c(unsigned int param_1,unsigned int param_2,unsigned int param_3
   
   temp_v0 = 0x100;
   asdMemAlloc(0x100,0x100,0,0x1000,0);
-  FUN_002c30c4(param_6);
+  libc_strlen(param_6);
   FUN_002b23bc(temp_v0,0x1000,param_6,&uStack00000008);
   *(unsigned char *)(temp_v0 + 0xfff) = 0;
-  temp_v1 = FUN_002c30c4(temp_v0);
+  temp_v1 = libc_strlen(temp_v0);
   if (temp_v1 >= 0xffd) {
     *(unsigned char *)(temp_v0 + 0xffc) = 0xff;
     *(unsigned char *)(temp_v0 + 0xffd) = 0xff;

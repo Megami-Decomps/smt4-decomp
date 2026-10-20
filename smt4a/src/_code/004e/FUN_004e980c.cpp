@@ -6,9 +6,9 @@ extern "C" {
 
 int qsort(unsigned char *, unsigned int, int, unsigned char *);
 int FUN_00184310(void);
-int FUN_001b4a90(int, int, unsigned int);
+int __aeabi_memset4(int, int, unsigned int);
 int asdOperatorNewD(void);
-int FUN_002e6490(unsigned char *);
+int asdOperatorDeleteC(unsigned char *);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -25,11 +25,11 @@ extern unsigned int DAT_00571174; /* 0x571174 */
 
 /* Supplied declaration required: qsort. */
 /* Supplied declaration required: FUN_00184310. */
-extern int FUN_001ab854(int);
-extern int FUN_001ab888(void);
-/* Supplied declaration required: FUN_001b4a90. */
+extern int gameGetSlotRecord(int);
+extern int gameGetSlotTable(void);
+/* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: asdOperatorNewD. */
-/* Supplied declaration required: FUN_002e6490. */
+/* Supplied declaration required: asdOperatorDeleteC. */
 extern int bitsAt60Test(int, unsigned int);
 
 
@@ -72,8 +72,8 @@ void FUN_004e980c(int *param_1,int param_2)
     }
     temp_v7 = temp_v7 + 1;
   } while (temp_v7 < 4);
-  FUN_001b4a90(*param_1 + 0x2018,3,0xffffffff);
-  temp_v7 = FUN_001ab888();
+  __aeabi_memset4(*param_1 + 0x2018,3,0xffffffff);
+  temp_v7 = gameGetSlotTable();
   temp_v10 = (unsigned int)*(unsigned char *)(temp_v7 + 0x1ca3);
   pbVar5 = (unsigned char *)(temp_v10 * 6);
   asdOperatorNewD();
@@ -96,10 +96,10 @@ void FUN_004e980c(int *param_1,int param_2)
   temp_v7 = 0;
   if (temp_v10 != 0) {
     do {
-      temp_v4 = FUN_001ab888();
+      temp_v4 = gameGetSlotTable();
       if (-1 < *(char *)(temp_v4 + temp_v7 + 0x1c88)) {
-        temp_v4 = FUN_001ab888();
-        temp_v4 = FUN_001ab854((int)*(char *)(temp_v4 + temp_v7 + 0x1c88));
+        temp_v4 = gameGetSlotTable();
+        temp_v4 = gameGetSlotRecord((int)*(char *)(temp_v4 + temp_v7 + 0x1c88));
         if (((temp_v4 != 0) && (temp_v5 = bitsAt60Test(temp_v4,1), temp_v5 == 0)) &&
            (temp_v5 = bitsAt60Test(temp_v4,10), temp_v5 == 0)) {
           pbVar16 = pbVar5 + temp_v9 * 6;
@@ -146,7 +146,7 @@ void FUN_004e980c(int *param_1,int param_2)
       }
     }
   }
-  FUN_002e6490(pbVar5);
+  asdOperatorDeleteC(pbVar5);
   return;
 }
 

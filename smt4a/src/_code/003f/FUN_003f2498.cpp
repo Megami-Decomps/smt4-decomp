@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_0021c118(int, int);
-int FUN_003d2d34(int, int, int);
+int soundChannelRequestIfEnabled(int, int, int);
 
 /* Supplied declaration required: FUN_0021c118. */
-/* Supplied declaration required: FUN_003d2d34. */
+/* Supplied declaration required: soundChannelRequestIfEnabled. */
 
 
 void FUN_003f2498(int param_1,int param_2)
@@ -23,7 +23,7 @@ void FUN_003f2498(int param_1,int param_2)
       if (temp_v0 != -1) {
         FUN_0021c118(temp_v0,0);
       }
-      FUN_003d2d34(param_2,0,10);
+      soundChannelRequestIfEnabled(param_2,0,10);
       *(int *)(param_1 + 0x4ce4) = param_2;
     }
     return;

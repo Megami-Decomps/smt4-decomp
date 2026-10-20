@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00103822(unsigned int, unsigned short *);
-int FUN_002e9a64(unsigned int, unsigned int *, unsigned short *, unsigned int, unsigned short *);
+int streamReaderExtractU8(unsigned int, unsigned int *, unsigned short *, unsigned int, unsigned short *);
 
 /* stack frame of param_4: 2 slot(s), 2 byte(s) */
 typedef struct {
@@ -14,7 +14,7 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_00103822. */
-/* Supplied declaration required: FUN_002e9a64. */
+/* Supplied declaration required: streamReaderExtractU8. */
 
 
 void FUN_002f4ecc(unsigned int param_1,unsigned char *param_2,unsigned short *param_3,unsigned int param_4)
@@ -24,7 +24,7 @@ void FUN_002f4ecc(unsigned int param_1,unsigned char *param_2,unsigned short *pa
   unsigned int temp_v0;
   
   temp_v0 = param_4;
-  FUN_002e9a64(param_1,&temp_v0,param_3,param_4,param_3);
+  streamReaderExtractU8(param_1,&temp_v0,param_3,param_4,param_3);
   *param_2 = (unsigned char)temp_v0 >> 7;
   *param_3 = (short)(temp_v0 & 0x7f);
   if ((temp_v0 & 0x7f) == 0x7f) {

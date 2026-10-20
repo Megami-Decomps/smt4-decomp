@@ -4,7 +4,7 @@
 #include "AsdSDK/AsdDebug.h"
 
 extern "C" {
-extern AsdGxPresets DAT_0063fd88;
+extern AsdGxPresets g_asdGxPresets;
 
 AsdGxTexture *asdTextureCreate(s32 unk);
 void *asdMemoryAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
@@ -19,11 +19,11 @@ AsdGxTexture *asdGxIndexBufferCreate(u32 kind)
 
     if (kind == 0 || kind == 1) {
         tex->width = 0x200;
-        preset = &DAT_0063fd88.small;
+        preset = &g_asdGxPresets.small;
         tex->height = 0x200;
     } else if (kind == 2) {
         tex->width = 0x200;
-        preset = &DAT_0063fd88.large;
+        preset = &g_asdGxPresets.large;
         tex->height = 0x200;
     }
     tex->unk10 = 0;

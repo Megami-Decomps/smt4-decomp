@@ -11,12 +11,12 @@ typedef struct Global588e3c {
     /* 0x00 */ u8 unk00[0x20];
     /* 0x20 */ Table *table;
 } Global588e3c;
-extern Global588e3c DAT_00588e3c;
+extern Global588e3c g_scrContext;
 
 /* Returns the word at 0xC0 of the table at 0x20 of the global at 0x588E3C. */
 u32 FUN_002ba85c(void)
 {
-    return DAT_00588e3c.table->value;
+    return g_scrContext.table->value;
 }
 
 } /* extern "C" */

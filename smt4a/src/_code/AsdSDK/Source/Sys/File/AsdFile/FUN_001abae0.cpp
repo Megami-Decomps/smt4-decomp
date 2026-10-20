@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0010032e(unsigned int *);
+int syncWaitHandleForever(unsigned int *);
 int asdMemoryAllocTracked(int, int, int, int);
 int FUN_0019a364(unsigned int *, unsigned int, int);
 int FUN_002e3140(void);
@@ -19,7 +19,7 @@ typedef struct {
 extern int DAT_005b3fbc; /* 0x5b3fbc */
 extern unsigned int g_asdFileMutex; /* 0x5b3fc0 */
 
-/* Supplied declaration required: FUN_0010032e. */
+/* Supplied declaration required: syncWaitHandleForever. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_0019a364. */
 /* Supplied declaration required: FUN_002e3140. */
@@ -39,7 +39,7 @@ int FUN_001abae0(unsigned int param_1,unsigned int param_2,unsigned int param_3,
   
   puVar4 = (unsigned int *)&temp_v3;
   temp_v3 = param_4;
-  FUN_0010032e(&g_asdFileMutex);
+  syncWaitHandleForever(&g_asdFileMutex);
   temp_v3 = 1;
   temp_v1 = 0x100;
   asdMemoryAllocTracked(0x100,0x100,0,0x154);

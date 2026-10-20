@@ -8,14 +8,14 @@ typedef struct Rec16 {
 } Rec16;
 
 extern u32 scrGetArg(s32 index);
-extern Rec16 *FUN_0019cac4(u16 id);
+extern Rec16 *dataTable00FindById(u16 id);
 extern void scrSetResult(u32 value);
 
 /* Script command: result is the record's halfword at +0x16, masked with 0x1f and shifted right by 4. */
 u32 scrCommGetFlagBit4(s32 argIndex)
 {
     u16 id = scrGetArg(argIndex);
-    Rec16 *rec = FUN_0019cac4(id);
+    Rec16 *rec = dataTable00FindById(id);
 
     scrSetResult((rec->unk16 & 0x1f) >> 4);
     return 1;

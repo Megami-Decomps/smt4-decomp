@@ -26,7 +26,7 @@ extern float DAT_006472f4; /* 0x6472f4 */
 extern float DAT_006472f8; /* 0x6472f8 */
 
 /* Supplied declaration required: FUN_001acb48. */
-extern int FUN_001acf08(void);
+extern int effGetFrameStep(void);
 /* Supplied declaration required: FUN_001ad5ec. */
 
 
@@ -124,7 +124,7 @@ void FUN_0019c0e0(float *param_1)
     } while (temp_v1 != 0.0f);
   }
   param_1[0x1a] = (float)((unsigned int)param_1[0x1a] | 0x80000000);
-  temp_v0 = FUN_001acf08();
+  temp_v0 = effGetFrameStep();
   param_1[0x21] = (float)(temp_v0 + (int)param_1[0x21]);
   return;
 }

@@ -20,10 +20,10 @@ extern signed char DAT_005f1891; /* 0x5f1891 */
 extern signed char DAT_005f1a5c; /* 0x5f1a5c */
 extern signed char DAT_005f1a5e; /* 0x5f1a5e */
 
-extern int FUN_00162e8c(void);
+extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00183e58. */
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 extern int FUN_00384cf4(void);
 /* Supplied declaration required: FUN_003adc58. */
 /* Supplied declaration required: FUN_003b61ec. */
@@ -37,18 +37,18 @@ void FUN_0048a378(int param_1)
   int temp_v0;
   int temp_v1;
   
-  temp_v0 = FUN_00162e8c();
+  temp_v0 = gameFlagsGetBlock();
   if (DAT_005f1891 != '\0') {
     DAT_005f1891 = '\0';
-    temp_v1 = FUN_0018719c(0x49a);
+    temp_v1 = gameFlagIsSet(0x49a);
     if (temp_v1 != 0) {
       FUN_003c5848();
     }
     else {
       FUN_003b61ec();
     }
-    temp_v1 = FUN_0018719c(0xc);
-    if ((temp_v1 != 0) && (temp_v1 = FUN_0018719c(0x10), temp_v1 == 0)) {
+    temp_v1 = gameFlagIsSet(0xc);
+    if ((temp_v1 != 0) && (temp_v1 = gameFlagIsSet(0x10), temp_v1 == 0)) {
       FUN_003b61ec();
     }
   }

@@ -12,7 +12,7 @@ extern signed char DAT_0044e7c1; /* 0x44e7c1 */
 extern signed char DAT_0044e7c3; /* 0x44e7c3 */
 extern unsigned char DAT_0044e7c4; /* 0x44e7c4 */
 extern signed char DAT_0044e7c5; /* 0x44e7c5 */
-extern unsigned char DAT_004e6f14; /* 0x4e6f14 */
+extern unsigned char g_nnSndMasterManager; /* 0x4e6f14 */
 extern unsigned char g_dspsndState; /* 0x4e6f64 */
 extern unsigned char uRam1ff810c0; /* 0x1ff810c0 */
 
@@ -30,7 +30,7 @@ void FUN_00159fd8(void)
       FUN_002a208c();
     }
     DAT_0044e7c4 = uRam1ff810c0;
-    FUN_00146e40(&DAT_004e6f14);
+    FUN_00146e40(&g_nnSndMasterManager);
     FUN_0015d254(&g_dspsndState);
     DAT_0044e7c5 = '\x01';
   }

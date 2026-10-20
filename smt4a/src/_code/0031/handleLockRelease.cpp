@@ -2,15 +2,15 @@
 
 extern "C" {
 
-extern void FUN_001a08d8(s32 *handle);
-extern s32 *FUN_001a0990(s32 *handle);
+extern void nn_os_LightEvent_Signal(s32 *handle);
+extern s32 *nn_os_LightEvent_ClearSignal(s32 *handle);
 
 /* Releases the handle, and the lock taken on it when `locked` is set. */
 void handleLockRelease(HandleLock *lock)
 {
-    FUN_001a08d8(lock->handle);
+    nn_os_LightEvent_Signal(lock->handle);
     if (lock->locked != 0) {
-        FUN_001a0990(lock->handle);
+        nn_os_LightEvent_ClearSignal(lock->handle);
     }
 }
 

@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002aa568(...);
+int libc_strcmp(...);
 
-/* Supplied declaration required: FUN_002aa568. */
+/* Supplied declaration required: libc_strcmp. */
 
 
 void asdLoadFileIsPatched(int param_1)
@@ -16,9 +16,9 @@ void asdLoadFileIsPatched(int param_1)
   int temp_v0;
   
   temp_v0 = param_1;
-  FUN_002aa568(param_1,"battle/event/BtlEvent064/BtlEvent064.mbm");
-  if ((temp_v0 != 0) && (temp_v0 = param_1, FUN_002aa568(param_1,"event/e007/e007.mbm"), temp_v0 != 0)) {
-    FUN_002aa568(param_1,"event/quest/quest122.mbm");
+  libc_strcmp(param_1,"battle/event/BtlEvent064/BtlEvent064.mbm");
+  if ((temp_v0 != 0) && (temp_v0 = param_1, libc_strcmp(param_1,"event/e007/e007.mbm"), temp_v0 != 0)) {
+    libc_strcmp(param_1,"event/quest/quest122.mbm");
   }
   return;
 }

@@ -10,14 +10,14 @@ typedef struct EventTex {
 
 extern EventTex *g_eventTex;
 
-extern void *FUN_00203a5c(void);
+extern void *eventCommandGetPendingCleanup(void);
 extern void FUN_003d8f24(void);
 extern f32 *FUN_00208bfc(void *entry);
 
 /* Script command: applies the current entry's 2D offset (times 30) to the event texture; returns 0. */
 u32 FUN_002ad130(void)
 {
-    void *entry = FUN_00203a5c();
+    void *entry = eventCommandGetPendingCleanup();
 
     if (entry != NULL) {
         f32 *offset;

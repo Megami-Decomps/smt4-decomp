@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_00148bb8(unsigned int, int);
-int FUN_00192730(void);
-int FUN_00192780(void);
+int dataTable18Sub0GetCount(void);
+int dataTable18Sub0GetEntries(void);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -20,10 +20,10 @@ extern unsigned short *FUN_00145f04(char, unsigned int, short);
 extern int FUN_00145f5c(unsigned int);
 /* Supplied declaration required: FUN_00148bb8. */
 extern unsigned short *FUN_00148c30(char, unsigned int, short);
-extern unsigned int FUN_0014bef4(unsigned int);
+extern unsigned int randRange(unsigned int);
 extern int FUN_0015fb68(void);
-/* Supplied declaration required: FUN_00192730. */
-/* Supplied declaration required: FUN_00192780. */
+/* Supplied declaration required: dataTable18Sub0GetCount. */
+/* Supplied declaration required: dataTable18Sub0GetEntries. */
 
 
 void FUN_0013bb34(int param_1)
@@ -48,9 +48,9 @@ void FUN_0013bb34(int param_1)
   short temp_v12;
   unsigned short temp_v13;
   
-  FUN_00192780();
+  dataTable18Sub0GetEntries();
   temp_v3 = param_1;
-  FUN_00192730();
+  dataTable18Sub0GetCount();
   temp_v10 = 0;
   if (temp_v10 < temp_v3) {
     do {
@@ -94,7 +94,7 @@ void FUN_0013bb34(int param_1)
           temp_v13 = 0;
         }
         else if (temp_v7 < 1000) {
-          temp_v5 = FUN_0014bef4(99);
+          temp_v5 = randRange(99);
           if ((temp_v5 < puVar7[temp_v6 * 3 + 3]) && (temp_v1 = puVar7[temp_v6 * 3 + 2], temp_v1 != 0)) {
             temp_v13 = temp_v1;
           }
@@ -116,7 +116,7 @@ void FUN_0013bb34(int param_1)
                 temp_v8 = temp_v8 - 1;
               } while (temp_v8 != 0);
             }
-            temp_v5 = FUN_0014bef4(99);
+            temp_v5 = randRange(99);
             if (temp_v5 < temp_v11) {
               temp_v13 = puVar7[temp_v6 * 3 + 2];
               *(unsigned char *)(puVar6 + 1) = (unsigned char)temp_v7 | (unsigned char)puVar6[1];

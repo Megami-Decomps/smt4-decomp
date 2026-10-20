@@ -15,14 +15,14 @@ typedef struct {
     ListNode *head;         /* 0x04 */
 } List;
 
-int FUN_002e9318(ListNode *payload);
+int onlineStringDestroy(ListNode *payload);
 
 /* Pushes `node` on the front of `list`, initialising its payload first when asked. */
 void FUN_002ebcc8(List *list, ListNode *node, int initPayload)
 {
     node->next = list->head;
     if (initPayload != 0) {
-        FUN_002e9318(node + 1);
+        onlineStringDestroy(node + 1);
     }
     list->head = node;
 }

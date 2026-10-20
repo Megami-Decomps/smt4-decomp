@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002ae164(void);
-int FUN_002b9024(void);
+int devilGetRecord(void);
 
 typedef struct fn_001d2ac8_arg0 fn_001d2ac8_arg0;
 struct fn_001d2ac8_arg0 {
@@ -19,7 +19,7 @@ struct fn_001d2ac8_arg0 {
 };
 
 /* Supplied declaration required: FUN_002ae164. */
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: devilGetRecord. */
 
 
 unsigned int FUN_001d2ac8(fn_001d2ac8_arg0 *param_1)
@@ -54,7 +54,7 @@ unsigned int FUN_001d2ac8(fn_001d2ac8_arg0 *param_1)
   }
   if (param_1->field_0x284 != 0) {
     temp_v0 = (unsigned int)param_1->field_0xce;
-    FUN_002b9024();
+    devilGetRecord();
     temp_v2 = 0;
     do {
       temp_v1 = (unsigned int)*(unsigned short *)(temp_v0 + temp_v2 * 2 + 0x3c);

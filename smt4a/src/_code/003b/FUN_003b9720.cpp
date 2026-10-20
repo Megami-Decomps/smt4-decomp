@@ -11,8 +11,8 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_2_stack;
 
-extern int FUN_0014bef4(unsigned int);
-extern int FUN_00162e8c(void);
+extern int randRange(unsigned int);
+extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_003689d0. */
 extern int FUN_003b57f4(void);
 
@@ -31,7 +31,7 @@ void FUN_003b9720(int param_1,int param_2)
   int temp_v5;
   int temp_v6;
   
-  temp_v2 = FUN_00162e8c();
+  temp_v2 = gameFlagsGetBlock();
   temp_v4 = 0;
   pcVar6 = (char *)0x0;
   temp_v3 = FUN_003b57f4();
@@ -56,7 +56,7 @@ void FUN_003b9720(int param_1,int param_2)
         temp_v3 = 0;
       }
       else {
-        temp_v3 = FUN_0014bef4((temp_v4 - 1U) & 0xffff);
+        temp_v3 = randRange((temp_v4 - 1U) & 0xffff);
       }
       temp_v5 = 0;
       pcVar6 = (char *)0x0;
@@ -76,7 +76,7 @@ void FUN_003b9720(int param_1,int param_2)
                      *(unsigned int *)(temp_v4 + 0x7c8) | (1 << (((int)pcVar6 % 0x20) & 0xffU)),
                 *(short *)(pcVar5 + 0x28) != 0)))) {
               temp_v6 = (int)*(short *)(pcVar5 + 0x28);
-              temp_v4 = FUN_00162e8c();
+              temp_v4 = gameFlagsGetBlock();
               if ((*(unsigned int *)(temp_v4 + ((int)(temp_v6 + ((unsigned int)(temp_v6 >> 0x1f) >> 0x1b)) >> 5) * 4 +
                             0xd4c) & (1 << ((temp_v6 % 0x20) & 0xffU))) == 0) {
                 temp_v4 = temp_v2 + ((int)(pcVar6 + (temp_v0 >> 0x1b)) >> 5) * 4;

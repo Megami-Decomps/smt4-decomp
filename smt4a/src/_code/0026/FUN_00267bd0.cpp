@@ -10,14 +10,14 @@ typedef struct State {
     /* 0x10 */ s8 value;
 } State;
 
-extern State *DAT_0057f578;
+extern State *g_placeWin;
 
 s32 FUN_00267bd0(void)
 {
     s32 value;
 
-    if (DAT_0057f578->active != 0) {
-        value = DAT_0057f578->value;
+    if (g_placeWin->active != 0) {
+        value = g_placeWin->value;
     } else {
         value = 0;
     }

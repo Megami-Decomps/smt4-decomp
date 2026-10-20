@@ -11,9 +11,9 @@ int FUN_003b6820(int, int, unsigned int);
 
 extern int jobIsValid(void);
 extern int jobGetWork(unsigned int);
-extern int FUN_0018206c(unsigned int, unsigned int);
+extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 /* Supplied declaration required: scrGetArg. */
-extern int FUN_002deb84(void);
+extern int scrGetCommandFrame(void);
 /* Supplied declaration required: eventTexSetCurrent. */
 /* Supplied declaration required: FUN_0036f298. */
 extern int FUN_0039af04(void);
@@ -31,13 +31,13 @@ unsigned int FUN_002a3b10(void)
   
   temp_v0 = scrGetArg(0);
   temp_v1 = scrGetArg(1);
-  temp_v2 = FUN_002deb84();
+  temp_v2 = scrGetCommandFrame();
   if (temp_v2 != 0) {
     temp_v1 = FUN_003b6808();
     temp_v2 = jobIsValid();
     if (temp_v2 != 0) {
       temp_v2 = jobGetWork(temp_v1);
-      temp_v2 = FUN_0018206c(*(unsigned int *)(temp_v2 + 0x40),*(unsigned int *)(temp_v2 + 0x44));
+      temp_v2 = asdTMTexTableNodeIsLoaded(*(unsigned int *)(temp_v2 + 0x40),*(unsigned int *)(temp_v2 + 0x44));
       if (temp_v2 == 0) {
         return 0;
       }

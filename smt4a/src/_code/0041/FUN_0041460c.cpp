@@ -6,9 +6,9 @@ extern "C" {
 
 int FUN_00100388(int *, unsigned char *, unsigned int, unsigned int);
 int FUN_00117bc8(int, int);
-int FUN_002e9318(...);
+int onlineStringDestroy(...);
 int FUN_002e9590(...);
-int FUN_002e9afe(int);
+int vectorCopyHeader(int);
 int FUN_002ea100(...);
 int FUN_004130c0(int, int);
 int FUN_004311c0(int);
@@ -32,12 +32,12 @@ extern unsigned char LAB_0041480c; /* 0x41480c */
 
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_00117bc8. */
-/* Supplied declaration required: FUN_002e9318. */
+/* Supplied declaration required: onlineStringDestroy. */
 /* Supplied declaration required: FUN_002e9590. */
-/* Supplied declaration required: FUN_002e9afe. */
+/* Supplied declaration required: vectorCopyHeader. */
 /* Supplied declaration required: FUN_002ea100. */
-extern int FUN_002f4e86(int);
-extern int FUN_0030ffe0(unsigned int, unsigned int);
+extern int refIsNonNegative(int);
+extern int strEqualsNullSafe(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_004130c0. */
 /* Supplied declaration required: FUN_004311c0. */
 
@@ -69,8 +69,8 @@ void FUN_0041460c(int param_1,int param_2)
   temp_v16 = *(unsigned int *)(param_2 + 0x40);
   temp_v15 = *(unsigned int *)(param_2 + 0x38);
   uStack_2c = *(unsigned int *)(param_2 + 0x3c);
-  FUN_002e9afe(param_1 + 0x7c);
-  temp_v0 = FUN_002f4e86(param_1 + 0x7c);
+  vectorCopyHeader(param_1 + 0x7c);
+  temp_v0 = refIsNonNegative(param_1 + 0x7c);
   if (temp_v0 == 0) {
     *(unsigned char *)(param_1 + 0xfc) = 1;
   }
@@ -96,10 +96,10 @@ LAB_00414778:
         FUN_002e9590(temp_v7);
       }
       temp_v2 = FUN_002ea100(temp_v17,&temp_v9);
-      temp_v2 = FUN_0030ffe0(temp_v8,*(unsigned int *)(temp_v2 + 4));
-      FUN_002e9318(temp_v17);
+      temp_v2 = strEqualsNullSafe(temp_v8,*(unsigned int *)(temp_v2 + 4));
+      onlineStringDestroy(temp_v17);
       if (temp_v2 == 0) {
-        FUN_002e9318(temp_v7);
+        onlineStringDestroy(temp_v7);
         goto LAB_00414778;
       }
       temp_v5 = *(int *)(param_1 + 0xec);
@@ -118,7 +118,7 @@ LAB_00414778:
         (*(romwright_code *)**(unsigned int **)(*(int *)(param_1 + 0xec) - 0xb8))();
         *(int *)(param_1 + 0xec) = *(int *)(param_1 + 0xec) - 0xb8;
       }
-      FUN_002e9318(temp_v7);
+      onlineStringDestroy(temp_v7);
     }
 LAB_00414788:
     temp_v0 = *(int *)(param_1 + 0xe8);
@@ -129,7 +129,7 @@ LAB_00414788:
           if ((*(int *)(temp_v0 + 0xa4) - *(int *)(temp_v0 + 0xa0)) >> 3 != 0) {
             FUN_002e9590(temp_v6);
           }
-          FUN_002e9318(temp_v6);
+          onlineStringDestroy(temp_v6);
         }
         temp_v0 = temp_v0 + 0xb8;
       } while (*(int *)(param_1 + 0xec) != temp_v0);

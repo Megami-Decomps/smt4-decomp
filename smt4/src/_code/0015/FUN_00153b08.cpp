@@ -2,8 +2,8 @@
 
 extern "C" {
 
-int FUN_002c3944(u32 a, u32 b);
-int FUN_002c424c(u32 a, u32 b, u32 c);
+int rt_memclr(u32 a, u32 b);
+int __aeabi_memset4(u32 a, u32 b, u32 c);
 
 typedef struct Obj {
     /* 0x00 */ u8 unk00[0x24];
@@ -18,11 +18,11 @@ extern struct {
 void FUN_00153b08(Obj *obj, u32 a, u32 b)
 {
     if ((obj->flags & 1) != 0) {
-        FUN_002c3944(a, b);
+        rt_memclr(a, b);
         return;
     }
     if ((obj->flags & 2) != 0) {
-        FUN_002c424c(a, b, DAT_004765e4.unk4);
+        __aeabi_memset4(a, b, DAT_004765e4.unk4);
         return;
     }
 }

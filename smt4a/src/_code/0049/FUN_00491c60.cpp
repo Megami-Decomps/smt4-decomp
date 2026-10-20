@@ -13,7 +13,7 @@ extern int g_gameState; /* 0x5f15fc */
 extern unsigned int DAT_005f1600; /* 0x5f1600 */
 extern int DAT_005f1c5c; /* 0x5f1c5c */
 
-extern int FUN_0018719c(void);
+extern int gameFlagIsSet(void);
 extern int dataTableHasMatchingEntry35(unsigned int);
 extern int FUN_002e707c(void);
 extern unsigned long long FUN_00376fcc(int);
@@ -63,8 +63,8 @@ void FUN_00491c60(int param_1)
               temp_v2 = FUN_004083a8(*(unsigned char *)(temp_v1 + 0x1790));
               if (temp_v2 != 0) {
                 temp_v6 = 0;
-                if (((*(short *)(temp_v1 + 0x17bc) != 0) && (temp_v2 = FUN_0018719c(), temp_v2 == 0)) ||
-                   ((*(short *)(temp_v1 + 0x17be) != 0 && (temp_v2 = FUN_0018719c(), temp_v2 != 0)))) {
+                if (((*(short *)(temp_v1 + 0x17bc) != 0) && (temp_v2 = gameFlagIsSet(), temp_v2 == 0)) ||
+                   ((*(short *)(temp_v1 + 0x17be) != 0 && (temp_v2 = gameFlagIsSet(), temp_v2 != 0)))) {
                   temp_v6 = 1;
                 }
                 if ((((*(int *)(temp_v1 + 0x17d8) == 0) || (temp_v2 = FUN_002e707c(), temp_v2 != 0)) ||
@@ -175,8 +175,8 @@ LAB_00491eb4:
           if (*(unsigned char *)(temp_v5 + 0x7b99) != 0xfd) {
             temp_v2 = FUN_004083a8(*(unsigned char *)(temp_v5 + 0x7b98));
             if (temp_v2 != 0) {
-              if (((*(short *)(temp_v5 + 0x7bc4) != 0) && (temp_v2 = FUN_0018719c(), temp_v2 == 0)) ||
-                 ((*(short *)(temp_v5 + 0x7bc6) != 0 && (temp_v2 = FUN_0018719c(), temp_v2 != 0)))) {
+              if (((*(short *)(temp_v5 + 0x7bc4) != 0) && (temp_v2 = gameFlagIsSet(), temp_v2 == 0)) ||
+                 ((*(short *)(temp_v5 + 0x7bc6) != 0 && (temp_v2 = gameFlagIsSet(), temp_v2 != 0)))) {
                 *(unsigned short *)(temp_v5 + 0x7bc8) = 0;
               }
               else {

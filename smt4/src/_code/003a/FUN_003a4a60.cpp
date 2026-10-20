@@ -5,13 +5,13 @@
 extern "C" {
 
 int FUN_0019e0c0(...);
-int FUN_0022e4a4(...);
+int panelSetScrollPosition(...);
 int FUN_0022e500(...);
 int FUN_0022fcb8(...);
 int FUN_002306f8(...);
 int FUN_0023553c(...);
 int FUN_00295660(...);
-int FUN_00296f4c(...);
+int scrScriptProcessStartEntry(...);
 int FUN_00299370(...);
 int FUN_002996d8(...);
 int FUN_0029a0cc(...);
@@ -37,8 +37,8 @@ int FUN_002937c8(...);
 int FUN_00296e90(void);
 int FUN_00297050(...);
 int FUN_0029e620(...);
-int FUN_002b8838(...);
-int FUN_002b8cc8(void);
+int buttonHelpSetPreset(...);
+int ifTouchRegionRemove(void);
 int FUN_0039fe64(void);
 
 typedef int romwright_code(...);
@@ -50,7 +50,7 @@ extern unsigned char LAB_003a5744; /* 0x3a5744 */
 extern unsigned char LAB_003a5754; /* 0x3a5754 */
 
 /* Supplied declaration required: FUN_0019e0c0. */
-/* Supplied declaration required: FUN_0022e4a4. */
+/* Supplied declaration required: panelSetScrollPosition. */
 /* Supplied declaration required: FUN_0022e500. */
 extern int FUN_0022e520(void);
 /* Supplied declaration required: FUN_0022e538. */
@@ -77,12 +77,12 @@ extern int FUN_002762e0(void);
 extern int FUN_0027ee9c(void);
 extern int FUN_0028e9d0(unsigned short);
 extern unsigned int FUN_0028fb3c(unsigned short);
-extern unsigned int FUN_00290d74(unsigned int, unsigned char *);
+extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_0029212c. */
 /* Supplied declaration required: FUN_002937c8. */
 /* Supplied declaration required: FUN_00295660. */
 /* Supplied declaration required: FUN_00296e90. */
-/* Supplied declaration required: FUN_00296f4c. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297050. */
 extern int FUN_002973d8(void);
 /* Supplied declaration required: FUN_00299370. */
@@ -97,11 +97,11 @@ extern int FUN_0029e924(unsigned int *);
 /* Supplied declaration required: FUN_0029ede8. */
 extern int sys43e188GetState(void);
 extern unsigned int FUN_002ae3c0(unsigned short);
-extern unsigned short *FUN_002b63ac(void);
-/* Supplied declaration required: FUN_002b8838. */
-/* Supplied declaration required: FUN_002b8cc8. */
-extern unsigned int FUN_002bed98(unsigned int *);
-extern unsigned int FUN_002beda4(unsigned int *);
+extern unsigned short *gameGetPlayerData(void);
+/* Supplied declaration required: buttonHelpSetPreset. */
+/* Supplied declaration required: ifTouchRegionRemove. */
+extern unsigned int vec2GetYInt(unsigned int *);
+extern unsigned int vec2GetXInt(unsigned int *);
 /* Supplied declaration required: FUN_002bf810. */
 /* Supplied declaration required: FUN_0039fe64. */
 
@@ -132,15 +132,15 @@ void FUN_003a4a60(unsigned int *param_1)
     FUN_00233240(param_1 + 0xea,7);
     FUN_0023266c(param_1 + 0xe5,0x140,0,0x2b);
     param_1[2] = 1;
-    FUN_002b8838(0x85);
+    buttonHelpSetPreset(0x85);
     param_1[0x575a] = 0xffffffff;
     temp_v6 = FUN_0023360c(param_1 + param_1[0x218] * 0x1d + 0x220);
     param_1[0x575a] = temp_v6;
     break;
   case 1:
     FUN_00233344(param_1 + 0xea,6);
-    temp_v4 = FUN_002bed98(param_1 + 0x1c4);
-    temp_v2 = FUN_002beda4(param_1 + 0x1c4);
+    temp_v4 = vec2GetYInt(param_1 + 0x1c4);
+    temp_v2 = vec2GetXInt(param_1 + 0x1c4);
     FUN_00231240(param_1 + 0xe5,temp_v2,temp_v4);
     if (*(char *)((int)param_1 + 0x79a) != '\0') {
       FUN_0022e538(param_1 + 0x21a);
@@ -195,8 +195,8 @@ void FUN_003a4a60(unsigned int *param_1)
     if ((temp_v5 != 0) && (param_1[0x575a] == temp_v1)) {
       if ((int)param_1[0x21a] >= 1) {
         if (!(param_1[0x218] == 7 || param_1[0x218] == 8)) {
-          FUN_002b8cc8();
-          FUN_002b8cc8();
+          ifTouchRegionRemove();
+          ifTouchRegionRemove();
           temp_v6 = 5;
         }
         else {
@@ -204,31 +204,31 @@ void FUN_003a4a60(unsigned int *param_1)
           if (param_1[1] == 0xb) {
             FUN_00297050(1);
           }
-          FUN_002b8cc8();
-          FUN_002b8cc8();
+          ifTouchRegionRemove();
+          ifTouchRegionRemove();
           temp_v6 = 4;
         }
         param_1[2] = temp_v6;
         FUN_002328b4();
       }
       else {
-        FUN_002b8cc8();
-        FUN_002b8cc8();
+        ifTouchRegionRemove();
+        ifTouchRegionRemove();
         param_1[2] = 3;
       }
     }
     temp_v5 = FUN_002762e0();
     if (temp_v5 != 0) {
-      FUN_002b8cc8();
-      FUN_002b8cc8();
+      ifTouchRegionRemove();
+      ifTouchRegionRemove();
       FUN_00232848();
       param_1[2] = 3;
     }
     else if (param_1[0x575a] != temp_v1) {
       param_1[0x575a] = temp_v1;
       param_1[0x21a] = 0;
-      FUN_002b8cc8();
-      FUN_002b8cc8();
+      ifTouchRegionRemove();
+      ifTouchRegionRemove();
       temp_v5 = FUN_00240d5c(param_1 + param_1[0x218] * 0x1d + 0x220);
       temp_v6 = *puVar9;
       if (temp_v6 == 7 || temp_v6 == 8) {
@@ -271,8 +271,8 @@ void FUN_003a4a60(unsigned int *param_1)
   case 3:
     if ((*param_1 & 0x1000) != 0) {
       FUN_00233344(param_1 + 0xea,7);
-      temp_v4 = FUN_002bed98(param_1 + 0x1e7);
-      temp_v2 = FUN_002beda4(param_1 + 0x1e7);
+      temp_v4 = vec2GetYInt(param_1 + 0x1e7);
+      temp_v2 = vec2GetXInt(param_1 + 0x1e7);
       FUN_00231240(param_1 + 0xe5,temp_v2,temp_v4);
       if (*(char *)((int)param_1 + 0x826) == '\0') break;
     }
@@ -322,12 +322,12 @@ void FUN_003a4a60(unsigned int *param_1)
     FUN_0029ede8(0x18,param_1[0x21a],0xffffffff,0);
     FUN_0029ede8(0x19,temp_v5,0xffffffff,0);
     if (param_1[0x218] != 8) {
-      temp_v4 = FUN_00290d74(param_1[0x58],&LAB_003a54c0);
-      FUN_00296f4c(param_1[0x5a],temp_v4);
+      temp_v4 = tableGroupFindEntryIndex(param_1[0x58],&LAB_003a54c0);
+      scrScriptProcessStartEntry(param_1[0x5a],temp_v4);
     }
     else {
-      temp_v4 = FUN_00290d74(param_1[0x58],&LAB_003a54d0);
-      FUN_00296f4c(param_1[0x5a],temp_v4);
+      temp_v4 = tableGroupFindEntryIndex(param_1[0x58],&LAB_003a54d0);
+      scrScriptProcessStartEntry(param_1[0x5a],temp_v4);
     }
     FUN_0023553c(1);
     temp_v5 = FUN_0022e520();
@@ -343,7 +343,7 @@ void FUN_003a4a60(unsigned int *param_1)
     temp_v5 = FUN_002973d8();
     if (temp_v5 == 0) {
       param_1[2] = 7;
-      FUN_002b8838(0x76);
+      buttonHelpSetPreset(0x76);
       break;
     }
     temp_v5 = FUN_0022e520();
@@ -352,19 +352,19 @@ void FUN_003a4a60(unsigned int *param_1)
     }
     FUN_0022e538(param_1 + 0x21a);
     param_1[2] = 2;
-    FUN_002b8838(0x85);
+    buttonHelpSetPreset(0x85);
     temp_v6 = param_1[0x218];
     if (temp_v6 == 8) {
       FUN_00297050(0);
-      temp_v4 = FUN_00290d74(param_1[0x58],&LAB_003a5754);
-      FUN_00296f4c(param_1[0x5a],temp_v4);
+      temp_v4 = tableGroupFindEntryIndex(param_1[0x58],&LAB_003a5754);
+      scrScriptProcessStartEntry(param_1[0x5a],temp_v4);
       FUN_0019e0c0(param_1[0x5a]);
       break;
     }
 joined_r0x003a5580:
     if (temp_v6 != 7) break;
-    temp_v4 = FUN_00290d74(param_1[0x58],&LAB_003a54e4);
-    FUN_00296f4c(param_1[0x5a],temp_v4);
+    temp_v4 = tableGroupFindEntryIndex(param_1[0x58],&LAB_003a54e4);
+    scrScriptProcessStartEntry(param_1[0x5a],temp_v4);
     FUN_0019e0c0(param_1[0x5a]);
     break;
   case 7:
@@ -384,8 +384,8 @@ joined_r0x003a5580:
     }
     FUN_0029c43c(temp_v3,0);
     param_1[2] = 8;
-    temp_v4 = FUN_00290d74(param_1[0x58],&LAB_003a54f4);
-    FUN_00296f4c(param_1[0x5a],temp_v4);
+    temp_v4 = tableGroupFindEntryIndex(param_1[0x58],&LAB_003a54f4);
+    scrScriptProcessStartEntry(param_1[0x5a],temp_v4);
     FUN_0019e0c0(param_1[0x5a]);
     param_1[3] = 0;
     break;
@@ -394,8 +394,8 @@ joined_r0x003a5580:
     FUN_0019e0c0(param_1[0x5a]);
     if ((*param_1 & 0x1000) != 0) {
       FUN_00233344(param_1 + 0xea,7);
-      temp_v4 = FUN_002bed98(param_1 + 0x1e7);
-      temp_v2 = FUN_002beda4(param_1 + 0x1e7);
+      temp_v4 = vec2GetYInt(param_1 + 0x1e7);
+      temp_v2 = vec2GetXInt(param_1 + 0x1e7);
       FUN_00231240(param_1 + 0xe5,temp_v2,temp_v4);
       if (*(char *)((int)param_1 + 0x826) != '\0') {
         *param_1 = *param_1 & 0xffffefff;
@@ -424,7 +424,7 @@ joined_r0x003a5580:
         else if ((temp_v3 != 0) && ((int)param_1[temp_v6 * 0x1d + 0x222] <= temp_v3 + temp_v5)) {
           temp_v3 = temp_v3 - 1;
         }
-        FUN_0022e4a4(puVar9,temp_v5,temp_v3);
+        panelSetScrollPosition(puVar9,temp_v5,temp_v3);
       }
     }
     break;
@@ -437,8 +437,8 @@ joined_r0x003a5580:
       temp_v5 = FUN_00230b90(param_1,*(unsigned short *)
                                     ((int)param_1 + temp_v5 * 4 + temp_v6 * 0x1002 + 0xc94));
       if (temp_v5 == 0) {
-        temp_v4 = FUN_00290d74(param_1[0x58],&LAB_003a5744);
-        FUN_00296f4c(param_1[0x5a],temp_v4);
+        temp_v4 = tableGroupFindEntryIndex(param_1[0x58],&LAB_003a5744);
+        scrScriptProcessStartEntry(param_1[0x5a],temp_v4);
         FUN_0023553c(1);
         temp_v6 = 10;
         param_1[2] = temp_v6;
@@ -448,8 +448,8 @@ joined_r0x003a5580:
     temp_v6 = param_1[0x218];
     param_1[2] = 3;
     if (temp_v6 != 8) goto joined_r0x003a5580;
-    temp_v4 = FUN_00290d74(param_1[0x58],&LAB_003a5754);
-    FUN_00296f4c(param_1[0x5a],temp_v4);
+    temp_v4 = tableGroupFindEntryIndex(param_1[0x58],&LAB_003a5754);
+    scrScriptProcessStartEntry(param_1[0x5a],temp_v4);
     FUN_0019e0c0(param_1[0x5a]);
     break;
   case 10:
@@ -460,7 +460,7 @@ joined_r0x003a5580:
       temp_v6 = param_1[0x218];
       temp_v5 = FUN_0023360c(param_1 + temp_v6 * 0x1d + 0x220);
       temp_v0 = *(unsigned short *)((int)param_1 + temp_v5 * 4 + temp_v6 * 0x1002 + 0xc94);
-      puVar5 = (unsigned short *)FUN_002b63ac();
+      puVar5 = (unsigned short *)gameGetPlayerData();
       temp_v4 = FUN_002ae3c0(temp_v0);
       switch(temp_v4) {
       case 2:

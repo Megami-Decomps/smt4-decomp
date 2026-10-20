@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_00152bec(u32 handle);
+int asdMdlManagerMarkDestroy(u32 handle);
 
 typedef struct HandleSlot {
     /* 0x0 */ u32 handle;
@@ -36,7 +36,7 @@ void FUN_001fa6b8(void)
         entry = (Entry *)((u8 *)DAT_00447a60 + 0x24) + i;
         if (entry->active != 0 && entry->valid != 0) {
             if (entry->enabled != 0 && entry->handle != 0) {
-                FUN_00152bec(entry->handle);
+                asdMdlManagerMarkDestroy(entry->handle);
             }
         }
         i++;
@@ -44,7 +44,7 @@ void FUN_001fa6b8(void)
     i = 0;
     do {
         if (DAT_00447a60->slots[i].handle != 0) {
-            FUN_00152bec(DAT_00447a60->slots[i].handle);
+            asdMdlManagerMarkDestroy(DAT_00447a60->slots[i].handle);
         }
         i++;
     } while (i < 2);

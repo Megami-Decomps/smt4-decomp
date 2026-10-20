@@ -12,11 +12,11 @@ int FUN_00246134(unsigned int, unsigned int, int, unsigned int);
 int FUN_002463e8(...);
 int FUN_00247478(...);
 int FUN_0027da30(unsigned int *, unsigned int);
-int FUN_00282924(...);
+int btlMainFindEntryByListedId(...);
 int FUN_00283e48(void);
 int btlGetMainState(void);
 int FUN_002ae164(void);
-int FUN_002b4670(void);
+int dataTable08Sub1GetRecord(void);
 int memClear(...);
 int SBORROW4(...);
 int VectorSignedToFloat(...);
@@ -65,11 +65,11 @@ extern unsigned short FUN_00245cc0(unsigned int);
 /* Supplied declaration required: FUN_002463e8. */
 /* Supplied declaration required: FUN_00247478. */
 /* Supplied declaration required: FUN_0027da30. */
-/* Supplied declaration required: FUN_00282924. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_00283e48. */
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_002ae164. */
-/* Supplied declaration required: FUN_002b4670. */
+/* Supplied declaration required: dataTable08Sub1GetRecord. */
 /* Supplied declaration required: memClear. */
 
 
@@ -141,7 +141,7 @@ FUN_0022899c(int param_1,unsigned int param_2,fn_0022899c_arg2 *param_3,unsigned
       return 0;
     }
   }
-  FUN_002b4670();
+  dataTable08Sub1GetRecord();
   if (param_3 != (fn_0022899c_arg2 *)0x0) {
     temp_v2 = param_3->field_0x64;
     temp_v12 = temp_v2 == 0;
@@ -169,13 +169,13 @@ FUN_0022899c(int param_1,unsigned int param_2,fn_0022899c_arg2 *param_3,unsigned
   temp_v29 = puVar5;
   FUN_0027da30(temp_v27,param_5);
   puVar5 = temp_v27;
-  FUN_00282924(temp_v27,temp_v31);
+  btlMainFindEntryByListedId(temp_v27,temp_v31);
   puVar7 = temp_v27;
   temp_v26 = puVar5;
-  FUN_00282924(temp_v27,param_5);
+  btlMainFindEntryByListedId(temp_v27,param_5);
   temp_v5 = temp_v31;
   temp_v4 = btlGetMainState();
-  FUN_00282924(temp_v4,temp_v5);
+  btlMainFindEntryByListedId(temp_v4,temp_v5);
   temp_v5 = btlGetMainState();
   FUN_00247478(&temp_v16,temp_v5,temp_v4);
   temp_v9 = temp_v16 >> 0x10;
@@ -308,7 +308,7 @@ LAB_00228c48:
   }
 LAB_00228de4:
   puVar5 = temp_v27;
-  FUN_00282924(temp_v27,temp_v31);
+  btlMainFindEntryByListedId(temp_v27,temp_v31);
   if ((*puVar5 & 0x1000) == 0) {
     if ((temp_v27[0x38] & 0x20000000) != 0) {
       if (((temp_v6 & 0x400000) != 0) && (param_6 == 0)) {
@@ -335,7 +335,7 @@ LAB_00228de4:
         }
         temp_v15 = 0x3f800000;
         temp_v8 = btlGetMainState();
-        FUN_00282924(temp_v8,temp_v5);
+        btlMainFindEntryByListedId(temp_v8,temp_v5);
         temp_v14 = (float)temp_v15;
         if (temp_v8 != 0) {
           temp_v17 = 0;
@@ -409,7 +409,7 @@ LAB_00228de4:
         }
         temp_v3 = FUN_00245cc0(0x1a);
         temp_v10 = btlGetMainState();
-        FUN_00282924(temp_v10,temp_v5);
+        btlMainFindEntryByListedId(temp_v10,temp_v5);
         if (temp_v10 != 0) {
           *(unsigned short *)(temp_v10 + 0xa6) = temp_v3;
         }

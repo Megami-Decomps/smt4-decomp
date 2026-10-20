@@ -31,7 +31,7 @@ struct fn_00333ef8_arg0 {
 };
 
 /* Supplied declaration required: FUN_00299370. */
-extern unsigned short *FUN_002b63ac(void);
+extern unsigned short *gameGetPlayerData(void);
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: FUN_003c1b18. */
 /* Supplied declaration required: FUN_003c1ef4. */
@@ -43,7 +43,7 @@ void FUN_00333ef8(fn_00333ef8_arg0 *param_1,unsigned int param_2,unsigned short 
 /* irregular: 4 native warning(s); review required */
   unsigned short *puVar1;
   
-  puVar1 = (unsigned short *)FUN_002b63ac();
+  puVar1 = (unsigned short *)gameGetPlayerData();
   memClear(puVar1,0x8c);
   *(char *)(puVar1 + 0x3b) = (char)(int)param_1;
   puVar1[0x3a] = 0;

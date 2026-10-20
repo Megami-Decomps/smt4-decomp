@@ -5,7 +5,7 @@
 extern "C" {
 
 typedef int romwright_code(...);
-extern unsigned char DAT_004215ac; /* 0x4215ac */
+extern unsigned char g_nwGfxLookAtTargetViewUpdaterVtable; /* 0x4215ac */
 extern unsigned int DAT_004ead50; /* 0x4ead50 */
 extern unsigned int DAT_004ead54; /* 0x4ead54 */
 extern unsigned int DAT_004ead58; /* 0x4ead58 */
@@ -61,7 +61,7 @@ void FUN_0012d318(int *param_1)
     puVar4[1] = (unsigned int)param_1;
     *(unsigned char *)(puVar4 + 2) = 1;
     puVar4[3] = (unsigned int)puVar5;
-    *puVar4 = (unsigned int)&DAT_004215ac;
+    *puVar4 = (unsigned int)&g_nwGfxLookAtTargetViewUpdaterVtable;
   }
   return;
 }

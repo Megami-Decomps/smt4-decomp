@@ -3,11 +3,11 @@
 
 extern "C" {
 
-void FUN_0028e9d4(void);
+void flagValueIsPositive(void);
 
 void FUN_0028e9d0(void)
 {
-    FUN_0028e9d4();
+    flagValueIsPositive();
 }
 
 }

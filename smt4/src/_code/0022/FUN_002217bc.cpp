@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002aa568(int *, unsigned int);
+int libc_strcmp(int *, unsigned int);
 int asdTextureCreate(void);
 int memClear(int, int);
 int strncpy(int, unsigned int, int);
 
 extern int DAT_0047e500; /* 0x47e500 */
 
-/* Supplied declaration required: FUN_002aa568. */
+/* Supplied declaration required: libc_strcmp. */
 /* Supplied declaration required: asdTextureCreate. */
 /* Supplied declaration required: memClear. */
 
@@ -29,7 +29,7 @@ void FUN_002217bc(unsigned int param_1)
   piVar3 = (int *)0x4332a0;
   do {
     piVar1 = piVar3 + 1;
-    FUN_002aa568(piVar1,param_1);
+    libc_strcmp(piVar1,param_1);
     if (piVar1 == (int *)0x0) goto LAB_002218b8;
     temp_v1 = temp_v1 + 1;
     piVar3 = piVar3 + 0x13;
@@ -40,7 +40,7 @@ void FUN_002217bc(unsigned int param_1)
     do {
       if (*piVar3 != 0) {
         piVar1 = piVar3 + 1;
-        FUN_002aa568(piVar1,param_1);
+        libc_strcmp(piVar1,param_1);
         if (piVar1 == (int *)0x0) {
           if (*piVar3 != 0) {
             return;

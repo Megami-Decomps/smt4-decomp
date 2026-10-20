@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_002ae9ec(...);
-int FUN_002b63c0(void);
-int FUN_002be304(...);
+int dataTable1bOr1cGetRecord(void);
+int drawSetColorFromRGBA8(...);
 int FUN_002bed3c(void);
 
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
@@ -15,12 +15,12 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_4_stack;
 
-extern int FUN_00298de8(int);
+extern int idIsAtLeast350(int);
 extern int FUN_00298e20(void);
 extern int FUN_00298f88(int);
 /* Supplied declaration required: FUN_002ae9ec. */
-/* Supplied declaration required: FUN_002b63c0. */
-/* Supplied declaration required: FUN_002be304. */
+/* Supplied declaration required: dataTable1bOr1cGetRecord. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_002bed3c. */
 
 
@@ -45,11 +45,11 @@ void FUN_0029acc4(int param_1,unsigned int param_2,unsigned int param_3,unsigned
     temp_v3 = 0x40f;
   }
   else {
-    temp_v1 = FUN_00298de8(param_1);
+    temp_v1 = idIsAtLeast350(param_1);
     temp_v3 = 0x41b;
     temp_v2 = 0x41a;
     if (temp_v1 != 0) goto joined_r0x0029ad28;
-    FUN_002b63c0();
+    dataTable1bOr1cGetRecord();
     switch(*(unsigned char *)(param_1 + 6)) {
     case 0:
       if (temp_v0 == 0) {
@@ -108,7 +108,7 @@ joined_r0x0029ad28:
     }
   }
   temp_v2 = temp_v3;
-  FUN_002be304(0xf49800ff);
+  drawSetColorFromRGBA8(0xf49800ff);
   FUN_002ae9ec(2,0x13,temp_v2,param_2,param_3,param_4);
   FUN_002bed3c();
   return;

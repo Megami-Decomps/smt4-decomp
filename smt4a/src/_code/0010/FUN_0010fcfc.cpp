@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002e9ec8(int, unsigned int);
+int onlineInstanceTableFind(int, unsigned int);
 int FUN_002ea3c0(...);
 int FUN_002ea3d0(int, unsigned int);
-int FUN_002f7cb0(int);
+int onlineJobSetStateWaiting(int);
 int FUN_002f7cba(int, int, unsigned int);
 int FUN_002fa6e8(int);
 int FUN_002fa6f8(int, int, unsigned int);
@@ -22,13 +22,13 @@ extern unsigned char LAB_0010fd90; /* 0x10fd90 */
 extern unsigned char LAB_001100a9; /* 0x1100a9 */
 
 extern int serviceDispatch(int, unsigned int, int);
-extern int FUN_002e760a(unsigned int);
+extern int operatorNew(unsigned int);
 extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
-extern int FUN_002e9af4(void);
-/* Supplied declaration required: FUN_002e9ec8. */
+extern int onlineInstanceTableGetCurrent(void);
+/* Supplied declaration required: onlineInstanceTableFind. */
 /* Supplied declaration required: FUN_002ea3c0. */
 /* Supplied declaration required: FUN_002ea3d0. */
-/* Supplied declaration required: FUN_002f7cb0. */
+/* Supplied declaration required: onlineJobSetStateWaiting. */
 /* Supplied declaration required: FUN_002f7cba. */
 /* Supplied declaration required: FUN_002fa6e8. */
 /* Supplied declaration required: FUN_002fa6f8. */
@@ -44,10 +44,10 @@ void FUN_0010fcfc(int param_1)
   int temp_v3;
   unsigned char temp_v4 [16];
   
-  temp_v0 = FUN_002e9af4();
-  FUN_002e9ec8(temp_v0,*(unsigned int *)(param_1 + 0x68));
+  temp_v0 = onlineInstanceTableGetCurrent();
+  onlineInstanceTableFind(temp_v0,*(unsigned int *)(param_1 + 0x68));
   if (temp_v0 != 0) {
-    temp_v0 = FUN_002e760a(0x10);
+    temp_v0 = operatorNew(0x10);
     temp_v1 = 0;
     if (temp_v0 != 0) {
       temp_v1 = FUN_002ea3c0(temp_v0,&LAB_001100a9,0,&LAB_0010fd90);
@@ -60,7 +60,7 @@ void FUN_0010fcfc(int param_1)
         FUN_002ea3d0(param_1,temp_v1);
       }
       else {
-        FUN_002f7cb0(param_1);
+        onlineJobSetStateWaiting(param_1);
       }
     }
     else {

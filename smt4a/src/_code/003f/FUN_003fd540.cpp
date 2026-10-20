@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_0014af84(void);
+extern int gameDataBlocksGetSaveData(void);
 
 
 void FUN_003fd540(void)
@@ -12,7 +12,7 @@ void FUN_003fd540(void)
 {
   int temp_v0;
   
-  temp_v0 = FUN_0014af84();
+  temp_v0 = gameDataBlocksGetSaveData();
   *(unsigned int *)(temp_v0 + 0x221aa) = 0;
   *(unsigned int *)(temp_v0 + 0x221ae) = 0;
   *(unsigned int *)(temp_v0 + 0x221b2) = 0;

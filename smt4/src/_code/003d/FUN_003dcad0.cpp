@@ -5,14 +5,14 @@
 extern "C" {
 
 int btlGetMainState(void);
-int FUN_002aa568(int, unsigned int);
+int libc_strcmp(int, unsigned int);
 
 extern unsigned int DAT_00435d10; /* 0x435d10 */
 
 extern int FUN_00227668(int);
 extern int FUN_00293230(void);
 /* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: FUN_002aa568. */
+/* Supplied declaration required: libc_strcmp. */
 
 
 int FUN_003dcad0(int param_1)
@@ -36,7 +36,7 @@ int FUN_003dcad0(int param_1)
       temp_v2 = 0;
       do {
         temp_v1 = *piVar4 + temp_v2 * 0x16 + 0xb0;
-        if ((temp_v1 != 0) && (FUN_002aa568(temp_v1,DAT_00435d10), temp_v1 == 0)) {
+        if ((temp_v1 != 0) && (libc_strcmp(temp_v1,DAT_00435d10), temp_v1 == 0)) {
           temp_v2 = *piVar4 + temp_v2 * 0x16 + 0xb0;
           if (temp_v2 == 0) {
             temp_v0 = FUN_00227668(param_1);

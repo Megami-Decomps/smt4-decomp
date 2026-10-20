@@ -10,7 +10,7 @@ int FUN_002b1fc4(...);
 int FUN_002b7064(void);
 int FUN_002b70cc(void);
 int FUN_002b76d0(...);
-int FUN_002b90f8(...);
+int cameraSetViewMatrix(...);
 int FUN_002ba12c(...);
 int FUN_002bf538(void);
 int FUN_002c1b64(...);
@@ -80,7 +80,7 @@ extern unsigned int DAT_004d4914; /* 0x4d4914 */
 /* Supplied declaration required: FUN_002b7064. */
 /* Supplied declaration required: FUN_002b70cc. */
 /* Supplied declaration required: FUN_002b76d0. */
-/* Supplied declaration required: FUN_002b90f8. */
+/* Supplied declaration required: cameraSetViewMatrix. */
 /* Supplied declaration required: FUN_002ba12c. */
 /* Supplied declaration required: FUN_002bf538. */
 /* Supplied declaration required: FUN_002c1b64. */
@@ -411,7 +411,7 @@ LAB_002af7a0:
         VectorSignedToFloat(param_3[1],(unsigned char)(in_fpscr >> 0x16) & 3);
         FUN_002b76d0(&DAT_004d46ac,&DAT_004d46bc,&DAT_004d46cc,&DAT_004d46dc);
         if (temp_v2) {
-          FUN_002b90f8(g_titleScene,temp_v24 + 0x20);
+          cameraSetViewMatrix(g_titleScene,temp_v24 + 0x20);
         }
         if (temp_v3) {
           FUN_002bf538();

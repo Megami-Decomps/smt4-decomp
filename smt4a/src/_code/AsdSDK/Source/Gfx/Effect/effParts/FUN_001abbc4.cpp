@@ -12,7 +12,7 @@ int FUN_001b4c1c(...);
 int FUN_001b4ddc(...);
 int FUN_001b4e80(void);
 int FUN_001b4eb8(...);
-int FUN_002e342c(...);
+int libc_strcpy(...);
 int sysMemClear(...);
 int rt_memcpy_w(...);
 
@@ -40,7 +40,7 @@ extern char s______________________005b3274[113]; /* 0x5b3274 */
 /* Supplied declaration required: FUN_001b4ddc. */
 /* Supplied declaration required: FUN_001b4e80. */
 /* Supplied declaration required: FUN_001b4eb8. */
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -173,7 +173,7 @@ unsigned int * FUN_001abbc4(unsigned int *param_1)
         *(unsigned int **)(temp_v1 + 0x90) = puVar6;
       }
       rt_memcpy_w(temp_v1,temp_v9,0x90);
-      FUN_002e342c(temp_v1 + 0x9c,temp_v9 + 0x9c);
+      libc_strcpy(temp_v1 + 0x9c,temp_v9 + 0x9c);
       *(unsigned int *)(temp_v1 + 0xac) = 0;
       if (puVar2[0x22] != 0) {
         *(int *)(puVar2[0x22] + 0xac) = temp_v1;
@@ -304,7 +304,7 @@ unsigned int * FUN_001abbc4(unsigned int *param_1)
           }
         }
         rt_memcpy_w(temp_v3,temp_v10,0x90);
-        FUN_002e342c(temp_v3 + 0x9c,temp_v10 + 0x9c);
+        libc_strcpy(temp_v3 + 0x9c,temp_v10 + 0x9c);
         *(unsigned int *)(temp_v3 + 0xac) = 0;
         temp_v1 = temp_v1 + 1;
         temp_v10 = temp_v10 + 0xc0;

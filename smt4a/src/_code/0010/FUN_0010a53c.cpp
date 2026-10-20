@@ -13,7 +13,7 @@ int FUN_002e6e5c(int *);
 #endif
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-extern int FUN_002f34ac(int, int);
+extern int onlineSockAddrEquals(int, int);
 
 
 unsigned long long FUN_0010a53c(int param_1,int param_2,unsigned int param_3,unsigned int param_4)
@@ -38,8 +38,8 @@ unsigned long long FUN_0010a53c(int param_1,int param_2,unsigned int param_3,uns
   temp_v3 = 0;
   temp_v2 = *(int *)(*(int *)(param_1 + 0x18) + 8);
   while (temp_v2 != *(int *)(param_1 + 0x18)) {
-    temp_v0 = FUN_002f34ac(temp_v2 + 0x10,param_2);
-    if ((temp_v0 != 0) || (temp_v0 = FUN_002f34ac(temp_v2 + 0x30,param_2), temp_v0 != 0)) {
+    temp_v0 = onlineSockAddrEquals(temp_v2 + 0x10,param_2);
+    if ((temp_v0 != 0) || (temp_v0 = onlineSockAddrEquals(temp_v2 + 0x30,param_2), temp_v0 != 0)) {
       temp_v3 = temp_v3 + 1;
     }
     temp_v0 = *(int *)(temp_v2 + 0xc);

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c09d0(...);
+int gameFlagIsSet(...);
 int dataTableGetCount(...);
 int dataTableGet(int, int);
 
@@ -21,11 +21,11 @@ extern signed char DAT_0049f942; /* 0x49f942 */
 extern int FUN_002757c8(void);
 extern unsigned int FUN_00285574(void);
 extern int FUN_00298dc8(short);
-/* Supplied declaration required: FUN_002c09d0. */
+/* Supplied declaration required: gameFlagIsSet. */
 /* Supplied declaration required: dataTableGetCount. */
 extern int dataTableGetEntries(void);
 /* Supplied declaration required: dataTableGet. */
-extern int FUN_002c2950(void);
+extern int gameGetMapBlock(void);
 
 
 unsigned char * FUN_002765d0(void)
@@ -42,7 +42,7 @@ unsigned char * FUN_002765d0(void)
   unsigned char *pbVar8;
   unsigned char temp_v7;
   
-  temp_v0 = FUN_002c2950();
+  temp_v0 = gameGetMapBlock();
   temp_v1 = FUN_002757c8();
   if (DAT_0049f942 != '\0') {
     temp_v2 = FUN_00285574();
@@ -71,7 +71,7 @@ unsigned char * FUN_002765d0(void)
           }
           if (temp_v7 && temp_v5 == temp_v2) {
             if (*(short *)(pbVar8 + 4) != 0) {
-              temp_v3 = FUN_002c09d0();
+              temp_v3 = gameFlagIsSet();
               if (temp_v3 != 0) {
                 if (*(short *)(pbVar8 + 6) != 0) goto LAB_002766cc;
                 if (((*(short *)(pbVar8 + 8) == 0) ||
@@ -87,7 +87,7 @@ unsigned char * FUN_002765d0(void)
             }
             else if (*(short *)(pbVar8 + 6) != 0) {
 LAB_002766cc:
-              temp_v3 = FUN_002c09d0((int)*(short *)(pbVar8 + 6));
+              temp_v3 = gameFlagIsSet((int)*(short *)(pbVar8 + 6));
               if (temp_v3 == 0) {
                 if (((*(short *)(pbVar8 + 8) == 0) ||
                     (temp_v3 = FUN_00298dc8(*(short *)(pbVar8 + 8)), temp_v3 != 0)) &&
@@ -129,7 +129,7 @@ LAB_002766cc:
         if (((*pbVar8 == 1) && ((char)pbVar8[1] == g_gameState)) &&
            ((char)pbVar8[2] == DAT_0049f920)) {
           if (*(short *)(pbVar8 + 4) != 0) {
-            temp_v3 = FUN_002c09d0();
+            temp_v3 = gameFlagIsSet();
             if (temp_v3 != 0) {
               if (*(short *)(pbVar8 + 6) != 0) goto LAB_00276848;
 LAB_00276870:
@@ -146,7 +146,7 @@ LAB_00276870:
           }
           else if (*(short *)(pbVar8 + 6) != 0) {
 LAB_00276848:
-            temp_v3 = FUN_002c09d0((int)*(short *)(pbVar8 + 6));
+            temp_v3 = gameFlagIsSet((int)*(short *)(pbVar8 + 6));
             if (temp_v3 == 0) goto LAB_00276870;
           }
         }

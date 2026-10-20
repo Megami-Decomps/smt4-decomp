@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_002e32a4(int, unsigned char *, unsigned char *);
-int FUN_002e6e14(int);
+int asdOperatorDeleteArray(int);
 int FUN_00301bd4(int *);
 int FUN_003078bc(int, int, int, int *);
-int FUN_0030fce0(int *, int, int);
+int destroyRangeElem12(int *, int, int);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -25,11 +25,11 @@ extern unsigned char LAB_00134628; /* 0x134628 */
 /* Supplied declaration required: FUN_002e32a4. */
 extern int *wordRefMax(unsigned int *, unsigned int *);
 extern int rt_malloc(void);
-/* Supplied declaration required: FUN_002e6e14. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
 /* Supplied declaration required: FUN_00301bd4. */
 /* Supplied declaration required: FUN_003078bc. */
 extern unsigned int vectorGrowCapacity_003078de(unsigned int, int *);
-/* Supplied declaration required: FUN_0030fce0. */
+/* Supplied declaration required: destroyRangeElem12. */
 extern unsigned int __aeabi_idivmod(int, unsigned int);
 
 
@@ -62,8 +62,8 @@ unsigned long long FUN_001345a0(int *param_1,unsigned int param_2)
     temp_v2 = *piVar3;
     temp_v3 = rt_malloc();
     FUN_003078bc(*param_1,param_1[1],temp_v3,param_1);
-    FUN_0030fce0(param_1,*param_1,param_1[1]);
-    FUN_002e6e14(*param_1);
+    destroyRangeElem12(param_1,*param_1,param_1[1]);
+    asdOperatorDeleteArray(*param_1);
     temp_v4 = FUN_00301bd4(param_1);
     *param_1 = temp_v3;
     param_1[2] = temp_v3 + temp_v2 * 0xc;

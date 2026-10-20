@@ -104,9 +104,9 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: FUN_00291ba4. */
 /* Supplied declaration required: FUN_00291c20. */
 /* Supplied declaration required: dataTable2cSub0GetCount. */
-extern int FUN_002c09d0(void);
+extern int gameFlagIsSet(void);
 extern int randNextInRange(unsigned int);
-extern int FUN_002c2950(void);
+extern int gameGetMapBlock(void);
 extern unsigned int *FUN_002d2a00(int);
 extern char *dataTable2cSub0GetRecord(int);
 extern char *dataTable2cSub3GetRecord(int);
@@ -219,7 +219,7 @@ void FUN_00277d2c(unsigned int *param_1,unsigned int *param_2)
   int temp_v63;
   int temp_v64;
   
-  temp_v1 = FUN_002c2950();
+  temp_v1 = gameGetMapBlock();
   DAT_004bf898 = (unsigned int *)0x0;
   temp_v61 = (int *)&DAT_004c149c;
   DAT_004c149c = 0;
@@ -795,8 +795,8 @@ void FUN_00277d2c(unsigned int *param_1,unsigned int *param_2)
             temp_v0 = *(char *)(temp_v2 + 0xdec);
             temp_v2 = (int)temp_v0;
             FUN_00291ba4();
-            if (((*(short *)(temp_v2 + 0x10) == 0) || (temp_v3 = FUN_002c09d0(), temp_v3 != 0)) &&
-               ((*(short *)(temp_v2 + 0x12) == 0 || (temp_v3 = FUN_002c09d0(), temp_v3 == 0)))) {
+            if (((*(short *)(temp_v2 + 0x10) == 0) || (temp_v3 = gameFlagIsSet(), temp_v3 != 0)) &&
+               ((*(short *)(temp_v2 + 0x12) == 0 || (temp_v3 = gameFlagIsSet(), temp_v3 == 0)))) {
               temp_v8 = (float)((unsigned long long)temp_v29 >> 0x20);
               temp_v53 = (float)VectorSignedToFloat((int)*(short *)(temp_v2 + 8),
                                                     (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -982,8 +982,8 @@ void FUN_00277d2c(unsigned int *param_1,unsigned int *param_2)
         else {
           temp_v2 = (int)*(char *)(temp_v2 + 0xdec);
           FUN_0030f654();
-          if (((*(short *)(temp_v2 + 0x10) == 0) || (temp_v3 = FUN_002c09d0(), temp_v3 != 0)) &&
-             ((*(short *)(temp_v2 + 0x12) == 0 || (temp_v3 = FUN_002c09d0(), temp_v3 == 0)))) {
+          if (((*(short *)(temp_v2 + 0x10) == 0) || (temp_v3 = gameFlagIsSet(), temp_v3 != 0)) &&
+             ((*(short *)(temp_v2 + 0x12) == 0 || (temp_v3 = gameFlagIsSet(), temp_v3 == 0)))) {
             temp_v8 = (float)((unsigned long long)temp_v29 >> 0x20);
             temp_v53 = (float)VectorSignedToFloat((int)*(short *)(temp_v2 + 8),
                                                   (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -1199,10 +1199,10 @@ void FUN_00277d2c(unsigned int *param_1,unsigned int *param_2)
         if (((((unsigned int *)(int)*pcVar6 != (unsigned int *)0xffffffff) &&
              ((unsigned int *)(int)*pcVar6 == param_1)) &&
             (((unsigned int *)(int)pcVar6[1] == param_2 &&
-             ((temp_v5 = 0, *(short *)(pcVar6 + 0x10) == 0 || (temp_v4 = FUN_002c09d0(), temp_v4 != 0)))))
-            ) && ((*(short *)(pcVar6 + 0x12) == 0 || (temp_v4 = FUN_002c09d0(), temp_v4 == 0)))) {
+             ((temp_v5 = 0, *(short *)(pcVar6 + 0x10) == 0 || (temp_v4 = gameFlagIsSet(), temp_v4 != 0)))))
+            ) && ((*(short *)(pcVar6 + 0x12) == 0 || (temp_v4 = gameFlagIsSet(), temp_v4 == 0)))) {
           if (*(short *)(pcVar6 + 0x14) != 0) {
-            temp_v4 = FUN_002c09d0();
+            temp_v4 = gameFlagIsSet();
             if (temp_v4 != 0) {
               temp_v4 = randNextInRange(99);
               if (temp_v4 <= pcVar6[0x17]) {
@@ -1420,10 +1420,10 @@ LAB_0027907c:
         FUN_00291ba4();
         if ((((((unsigned int *)(int)*pcVar6 != (unsigned int *)0xffffffff) &&
               ((unsigned int *)(int)*pcVar6 == param_1)) && ((unsigned int *)(int)pcVar6[1] == param_2))
-            && ((temp_v5 = 0, *(short *)(pcVar6 + 0x10) == 0 || (temp_v4 = FUN_002c09d0(), temp_v4 != 0)))
-            ) && ((*(short *)(pcVar6 + 0x12) == 0 || (temp_v4 = FUN_002c09d0(), temp_v4 == 0)))) {
+            && ((temp_v5 = 0, *(short *)(pcVar6 + 0x10) == 0 || (temp_v4 = gameFlagIsSet(), temp_v4 != 0)))
+            ) && ((*(short *)(pcVar6 + 0x12) == 0 || (temp_v4 = gameFlagIsSet(), temp_v4 == 0)))) {
           if (*(short *)(pcVar6 + 0x14) != 0) {
-            temp_v4 = FUN_002c09d0();
+            temp_v4 = gameFlagIsSet();
             if (temp_v4 != 0) {
               temp_v4 = randNextInRange(99);
               if (temp_v4 <= pcVar6[0x17]) {

@@ -9,8 +9,8 @@ int libc_strcat(unsigned char [64], unsigned int);
 int asdSoundGetObjectCount(void);
 int FUN_00167f94(void);
 int FUN_00168750(unsigned char [64], int, int, unsigned char *, unsigned char *);
-int FUN_002e342c(int, unsigned char [64]);
-int FUN_002e6dd0(...);
+int libc_strcpy(int, unsigned char [64]);
+int rt_aeabi_memclr(...);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -28,8 +28,8 @@ extern int FUN_00162ea4(void);
 /* Supplied declaration required: FUN_00167f94. */
 /* Supplied declaration required: FUN_00168750. */
 extern int jyoucyuGetTableEntry(unsigned int);
-/* Supplied declaration required: FUN_002e342c. */
-/* Supplied declaration required: FUN_002e6dd0. */
+/* Supplied declaration required: libc_strcpy. */
+/* Supplied declaration required: rt_aeabi_memclr. */
 
 
 unsigned int FUN_001628c0(unsigned int param_1,int param_2,unsigned char param_3,unsigned char param_4)
@@ -46,9 +46,9 @@ unsigned int FUN_001628c0(unsigned int param_1,int param_2,unsigned char param_3
   unsigned char temp_v3 [64];
   unsigned char temp_v4 [76];
   
-  FUN_002e6dd0(temp_v2,0x40);
-  FUN_002e6dd0(temp_v3,0x40);
-  FUN_002e6dd0(temp_v4,0x40);
+  rt_aeabi_memclr(temp_v2,0x40);
+  rt_aeabi_memclr(temp_v3,0x40);
+  rt_aeabi_memclr(temp_v4,0x40);
   temp_v0 = jyoucyuGetTableEntry(1);
   if ((((temp_v0 != 0) || (temp_v0 = FUN_00162ea4(), temp_v0 != 0)) || (DAT_00619972 != '\0')) ||
      (param_2 == 0)) {
@@ -88,7 +88,7 @@ unsigned int FUN_001628c0(unsigned int param_1,int param_2,unsigned char param_3
         *(int *)(temp_v0 + 0x6197e8) = (int)((unsigned long long)in_d0 >> 0x20);
         *(char *)(temp_v0 + 0x619801) = (char)param_2;
         *(unsigned char *)(temp_v0 + 0x619803) = param_4;
-        FUN_002e342c(temp_v0 + 0x61978d,temp_v2);
+        libc_strcpy(temp_v0 + 0x61978d,temp_v2);
         FUN_00168750(temp_v2,0,3,&LAB_00167f44,puVar4);
         return temp_v1;
       }

@@ -8,7 +8,7 @@ int FUN_0023553c(int);
 int FUN_0029c43c(unsigned int, int);
 int FUN_0029ce60(unsigned int, int, int);
 int FUN_002a0cc8(int);
-int FUN_002b8838(int);
+int buttonHelpSetPreset(int);
 int FUN_002e3150(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -23,7 +23,7 @@ extern int FUN_002973d8(void);
 /* Supplied declaration required: FUN_0029c43c. */
 /* Supplied declaration required: FUN_0029ce60. */
 /* Supplied declaration required: FUN_002a0cc8. */
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: FUN_002e3150. */
 
 
@@ -48,14 +48,14 @@ void FUN_003a8240(int param_1)
     *(unsigned int *)(param_1 + 0x14) = 4;
     *(unsigned int *)(param_1 + 0x18) = 0;
     FUN_002e3150();
-    FUN_002b8838(0x2d);
+    buttonHelpSetPreset(0x2d);
     return;
   }
   FUN_0023553c(0);
   FUN_002a0cc8(0);
   *(unsigned int *)(param_1 + 0x14) = 2;
   *(unsigned int *)(param_1 + 0x18) = 0;
-  FUN_002b8838(0x2d);
+  buttonHelpSetPreset(0x2d);
   return;
 }
 

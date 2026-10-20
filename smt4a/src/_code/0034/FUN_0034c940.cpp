@@ -22,7 +22,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-extern int DAT_0057f290; /* 0x57f290 */
+extern int g_unite; /* 0x57f290 */
 
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_0020b908. */
@@ -49,8 +49,8 @@ void FUN_0034c940(int param_1)
   unsigned int temp_v3;
   unsigned int temp_v4;
   
-  temp_v0 = DAT_0057f290;
-  *(unsigned char *)(DAT_0057f290 + 0x9071) = 1;
+  temp_v0 = g_unite;
+  *(unsigned char *)(g_unite + 0x9071) = 1;
   FUN_002f3bc4(temp_v0 + 0x669c,param_1,0);
   temp_v2 = temp_v0 + param_1 * 8;
   *(unsigned int *)(temp_v0 + 0x8b60) = *(unsigned int *)(temp_v0 + 0x66d0);

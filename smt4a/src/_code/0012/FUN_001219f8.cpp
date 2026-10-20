@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002e7674(unsigned int, int, int);
+int strHolderAssignBytes(unsigned int, int, int);
 
-/* Supplied declaration required: FUN_002e7674. */
-extern int FUN_002e76b6(void);
+/* Supplied declaration required: strHolderAssignBytes. */
+extern int onlineBufferGetData(void);
 
 
 void FUN_001219f8(unsigned int param_1,int param_2)
@@ -18,8 +18,8 @@ void FUN_001219f8(unsigned int param_1,int param_2)
   int temp_v1;
   
   temp_v1 = *(int *)(*(int *)(param_2 + 8) + 0x10);
-  temp_v0 = FUN_002e76b6();
-  FUN_002e7674(param_1,temp_v0 + 4,temp_v1 - 4);
+  temp_v0 = onlineBufferGetData();
+  strHolderAssignBytes(param_1,temp_v0 + 4,temp_v1 - 4);
   return;
 }
 

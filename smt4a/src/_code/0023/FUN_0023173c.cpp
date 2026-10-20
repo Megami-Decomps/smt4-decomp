@@ -7,12 +7,12 @@ extern "C" {
 int FUN_0015f858(...);
 int FUN_00180118(...);
 int asdMemFree(void);
-int FUN_001f4e20(...);
+int dialogOpen(...);
 int FUN_002392b8(...);
 int FUN_002a49e4(...);
 int FUN_002c2cc4(...);
 int FUN_002c2d5c(void);
-int FUN_002e342c(...);
+int libc_strcpy(...);
 int FUN_002e5c6c(...);
 int sysMemClear(unsigned char [104], int);
 int FUN_003180c4(...);
@@ -23,7 +23,7 @@ typedef struct {
     unsigned int sp80; /* 0x80: local_80 */
 } param_1_stack;
 
-extern unsigned int *DAT_005738e8; /* 0x5738e8 */
+extern unsigned int *g_btlHelp; /* 0x5738e8 */
 extern unsigned int uRam005738f0; /* 0x5738f0 */
 extern unsigned int uRam005738f4; /* 0x5738f4 */
 
@@ -33,13 +33,13 @@ extern unsigned int FUN_0015687c(void);
 extern int FUN_001632fc(void);
 /* Supplied declaration required: FUN_00180118. */
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_001f4e20. */
+/* Supplied declaration required: dialogOpen. */
 /* Supplied declaration required: FUN_002392b8. */
-extern int FUN_002619e0(void);
+extern int dialogIsActive(void);
 /* Supplied declaration required: FUN_002a49e4. */
 /* Supplied declaration required: FUN_002c2cc4. */
 /* Supplied declaration required: FUN_002c2d5c. */
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_002e5c6c. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003180c4. */
@@ -60,14 +60,14 @@ unsigned int FUN_0023173c(unsigned int *param_1)
   unsigned char temp_v4 [104];
   
   puVar1 = (unsigned short *)*param_1;
-  puVar2 = DAT_005738e8;
+  puVar2 = g_btlHelp;
   while( 1 ) {
     if (puVar1 == (unsigned short *)0x0) {
-      DAT_005738e8 = puVar2;
+      g_btlHelp = puVar2;
       return 0;
     }
     puVar6 = *(unsigned short **)(puVar1 + 0x43a);
-    DAT_005738e8 = puVar2;
+    g_btlHelp = puVar2;
     if (-1 < (short)puVar1[0x439]) break;
     if (*(int *)(puVar1 + 0x43c) == 0) {
       *puVar2 = (unsigned int)puVar6;
@@ -84,7 +84,7 @@ unsigned int FUN_0023173c(unsigned int *param_1)
     puVar2[2] = puVar2[2] - 1;
     asdMemFree();
     puVar1 = puVar6;
-    puVar2 = DAT_005738e8;
+    puVar2 = g_btlHelp;
   }
   if (puVar1[1] != 0) {
     if ((puVar1[1] != 1) || (temp_v2 = FUN_001632fc(), temp_v2 == 0)) {
@@ -96,7 +96,7 @@ unsigned int FUN_0023173c(unsigned int *param_1)
   }
   else {
     temp_v2 = FUN_001632fc();
-    if ((temp_v2 != 0) || (temp_v2 = FUN_002619e0(), temp_v2 != 0)) {
+    if ((temp_v2 != 0) || (temp_v2 = dialogIsActive(), temp_v2 != 0)) {
       puVar1[0x439] = 1;
       puVar1[0x439] = puVar1[0x439] - 1;
       puVar1[0x438] = puVar1[0x438] + 1;
@@ -106,7 +106,7 @@ unsigned int FUN_0023173c(unsigned int *param_1)
     switch(*puVar1) {
     case 0:
       FUN_002a49e4(*(unsigned int *)(puVar1 + 6),*(unsigned int *)(puVar1 + 4) & 0xffff);
-      FUN_001f4e20((int)*(char *)(puVar1 + 0x410),1);
+      dialogOpen((int)*(char *)(puVar1 + 0x410),1);
       temp_v2 = *(int *)(puVar1 + 0x436);
       goto joined_r0x002318b0;
     case 1:
@@ -115,17 +115,17 @@ unsigned int FUN_0023173c(unsigned int *param_1)
         if (!((*(unsigned int *)(puVar1 + 10) & uRam005738f4) == 0 &&
              (*(unsigned int *)(puVar1 + 8) & uRam005738f0) == 0)) {
           temp_v0 = FUN_0015687c();
-          FUN_002e342c(temp_v4,temp_v0);
+          libc_strcpy(temp_v4,temp_v0);
         }
         else {
           temp_v1 = (unsigned int)(unsigned short)puVar1[0xbb];
           FUN_00180118(temp_v1);
-          FUN_002e342c(temp_v4,temp_v1);
+          libc_strcpy(temp_v4,temp_v1);
         }
         FUN_003180c4(*(unsigned int *)(puVar1 + 0x412),temp_v4);
       }
       FUN_002a49e4(*(unsigned int *)(puVar1 + 6),*(unsigned int *)(puVar1 + 4) & 0xffff);
-      FUN_001f4e20((int)*(char *)(puVar1 + 0x410),1);
+      dialogOpen((int)*(char *)(puVar1 + 0x410),1);
       temp_v2 = *(int *)(puVar1 + 0x436);
 joined_r0x002318b0:
       if (temp_v2 < 1) {
@@ -152,29 +152,29 @@ joined_r0x002318b0:
           if (!((*(unsigned int *)(puVar1 + 10) & uRam005738f4) == 0 &&
                (*(unsigned int *)(puVar1 + 8) & uRam005738f0) == 0)) {
             temp_v0 = FUN_0015687c();
-            FUN_002e342c(temp_v4,temp_v0);
+            libc_strcpy(temp_v4,temp_v0);
           }
           else {
             temp_v1 = (unsigned int)(unsigned short)puVar1[0xbb];
             FUN_00180118(temp_v1);
-            FUN_002e342c(temp_v4,temp_v1);
+            libc_strcpy(temp_v4,temp_v1);
           }
           FUN_003180c4(*(unsigned int *)(puVar1 + 0x412),temp_v4);
           if (!((*(unsigned int *)(puVar1 + 0x20c) & uRam005738f0) == 0 &&
                (*(unsigned int *)(puVar1 + 0x20e) & uRam005738f4) == 0)) {
             temp_v0 = FUN_0015687c();
-            FUN_002e342c(temp_v4,temp_v0);
+            libc_strcpy(temp_v4,temp_v0);
           }
           else {
             temp_v1 = (unsigned int)(unsigned short)puVar1[0x2bf];
             FUN_00180118(temp_v1);
-            FUN_002e342c(temp_v4,temp_v1);
+            libc_strcpy(temp_v4,temp_v1);
           }
           FUN_003180c4(*(unsigned int *)(puVar1 + 0x414),temp_v4);
         }
       }
       FUN_002a49e4(*(unsigned int *)(puVar1 + 6),*(unsigned int *)(puVar1 + 4) & 0xffff);
-      FUN_001f4e20((int)*(char *)(puVar1 + 0x410),1);
+      dialogOpen((int)*(char *)(puVar1 + 0x410),1);
       temp_v2 = *(int *)(puVar1 + 0x436);
       break;
     case 3:
@@ -183,12 +183,12 @@ joined_r0x002318b0:
         if (!((*(unsigned int *)(puVar1 + 10) & uRam005738f4) == 0 &&
              (uRam005738f0 & *(unsigned int *)(puVar1 + 8)) == 0)) {
           temp_v0 = FUN_0015687c();
-          FUN_002e342c(temp_v4,temp_v0);
+          libc_strcpy(temp_v4,temp_v0);
         }
         else {
           temp_v1 = (unsigned int)(unsigned short)puVar1[0xbb];
           FUN_00180118(temp_v1);
-          FUN_002e342c(temp_v4,temp_v1);
+          libc_strcpy(temp_v4,temp_v1);
         }
         FUN_003180c4(*(unsigned int *)(puVar1 + 0x412),temp_v4);
       }
@@ -198,23 +198,23 @@ joined_r0x002318b0:
     case 4:
       temp_v2 = (int)(short)puVar1[2];
       FUN_0015f858(temp_v2,0);
-      FUN_002e342c(temp_v4,temp_v2);
+      libc_strcpy(temp_v4,temp_v2);
       FUN_003180c4(*(unsigned int *)(puVar1 + 0x412),temp_v4);
       FUN_002a49e4(*(unsigned int *)(puVar1 + 6),*(unsigned int *)(puVar1 + 4) & 0xffff);
-      FUN_001f4e20((int)*(char *)(puVar1 + 0x410),1);
+      dialogOpen((int)*(char *)(puVar1 + 0x410),1);
       temp_v2 = *(int *)(puVar1 + 0x436);
       break;
     case 5:
       temp_v0 = FUN_0014bd84((int)(short)puVar1[2]);
-      FUN_002e342c(temp_v4,temp_v0);
+      libc_strcpy(temp_v4,temp_v0);
       FUN_003180c4(*(unsigned int *)(puVar1 + 0x412),temp_v4);
       FUN_002a49e4(*(unsigned int *)(puVar1 + 6),*(unsigned int *)(puVar1 + 4) & 0xffff);
-      FUN_001f4e20((int)*(char *)(puVar1 + 0x410),1);
+      dialogOpen((int)*(char *)(puVar1 + 0x410),1);
       temp_v2 = *(int *)(puVar1 + 0x436);
       break;
     case 6:
       FUN_002392b8(puVar1 + 0x416);
-      FUN_001f4e20((int)*(char *)(puVar1 + 0x410),1);
+      dialogOpen((int)*(char *)(puVar1 + 0x410),1);
       temp_v2 = *(int *)(puVar1 + 0x436);
       break;
     case 7:
@@ -228,19 +228,19 @@ joined_r0x002318b0:
           if (!((*(unsigned int *)(puVar1 + 8) & uRam005738f0) == 0 &&
                (*(unsigned int *)(puVar1 + 10) & uRam005738f4) == 0)) {
             temp_v0 = FUN_0015687c();
-            FUN_002e342c(temp_v4,temp_v0);
+            libc_strcpy(temp_v4,temp_v0);
           }
           else {
             temp_v1 = (unsigned int)(unsigned short)puVar1[0xbb];
             FUN_00180118(temp_v1);
-            FUN_002e342c(temp_v4,temp_v1);
+            libc_strcpy(temp_v4,temp_v1);
           }
           FUN_003180c4(*(unsigned int *)(puVar1 + 0x412),temp_v4);
           FUN_003180c4(*(unsigned int *)(puVar1 + 0x414),puVar1 + 0x416);
         }
       }
       FUN_002a49e4(*(unsigned int *)(puVar1 + 6),*(unsigned int *)(puVar1 + 4) & 0xffff);
-      FUN_001f4e20((int)*(char *)(puVar1 + 0x410),1);
+      dialogOpen((int)*(char *)(puVar1 + 0x410),1);
       temp_v2 = *(int *)(puVar1 + 0x436);
       break;
     case 8:

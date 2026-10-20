@@ -7,7 +7,7 @@ extern "C" {
 int sysPlaySe(int);
 int FUN_001f4908(int, int, int);
 int FUN_00275bc8(void);
-int FUN_00275f44(unsigned int, unsigned int);
+int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int FUN_002804b0(unsigned char *, int, int);
 int gameDataBlocksGetWord(void);
 int FUN_0035d03c(...);
@@ -28,11 +28,11 @@ extern unsigned char LAB_00499598; /* 0x499598 */
 extern int FUN_00224880(unsigned int);
 extern int FUN_0026272c(void);
 /* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002802c8(void);
 /* Supplied declaration required: FUN_002804b0. */
 /* Supplied declaration required: gameDataBlocksGetWord. */
-extern unsigned int FUN_00357bc8(unsigned int, unsigned char *);
+extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_0035d03c. */
 /* Supplied declaration required: FUN_00388758. */
 extern unsigned int FUN_004d05b4(void);
@@ -51,8 +51,8 @@ void FUN_00499390(int param_1,int param_2)
   case 0:
     temp_v3 = FUN_0026272c();
     if (temp_v3 != 0) {
-      temp_v2 = FUN_00357bc8(*(unsigned int *)(param_1 + 0x184),&LAB_00499560);
-      FUN_00275f44(*(unsigned int *)(param_1 + 0x18c),temp_v2);
+      temp_v2 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x184),&LAB_00499560);
+      scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x18c),temp_v2);
       sysPlaySe(0xa0);
       *(unsigned int *)(param_1 + 8) = 1;
       FUN_0035d03c();
@@ -91,8 +91,8 @@ void FUN_00499390(int param_1,int param_2)
       FUN_00275bc8();
       *(int *)(param_1 + 0x39c) = temp_v3;
       *(unsigned int *)(temp_v3 + 0x108) = 2;
-      temp_v2 = FUN_00357bc8(*(unsigned int *)(param_1 + 0x394),&LAB_00499598);
-      FUN_00275f44(*(unsigned int *)(param_1 + 0x39c),temp_v2);
+      temp_v2 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x394),&LAB_00499598);
+      scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x39c),temp_v2);
       temp_v2 = 4;
       *(unsigned int *)(param_1 + 8) = temp_v2;
       return;

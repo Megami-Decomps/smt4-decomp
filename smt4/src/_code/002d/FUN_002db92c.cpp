@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00294f64(void);
-int FUN_002ae898(...);
+int asdTMTexTableReleaseNode(...);
 int asdMemFree(int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -14,7 +14,7 @@ typedef struct {
 } void_stack;
 
 /* Supplied declaration required: FUN_00294f64. */
-/* Supplied declaration required: FUN_002ae898. */
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
 extern int jobGetWork(void);
 /* Supplied declaration required: asdMemFree. */
 
@@ -31,12 +31,12 @@ void FUN_002db92c(void)
     *(unsigned int *)(temp_v0 + 0x48) = 0;
   }
   else if (*(int *)(temp_v0 + 0xc) != 1) {
-    FUN_002ae898(*(unsigned int *)(temp_v0 + 0x3c),*(unsigned int *)(temp_v0 + 0x40));
+    asdTMTexTableReleaseNode(*(unsigned int *)(temp_v0 + 0x3c),*(unsigned int *)(temp_v0 + 0x40));
     if (-1 < *(int *)(temp_v0 + 0x44)) {
-      FUN_002ae898(*(unsigned int *)(temp_v0 + 0x3c));
+      asdTMTexTableReleaseNode(*(unsigned int *)(temp_v0 + 0x3c));
     }
     if (*(char *)(temp_v0 + 100) != '\0') {
-      FUN_002ae898(0x32,0);
+      asdTMTexTableReleaseNode(0x32,0);
     }
   }
   asdMemFree(temp_v0);

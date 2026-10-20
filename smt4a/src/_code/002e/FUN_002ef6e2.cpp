@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002eb338(int *, int *, int);
-int FUN_002eb588(int *);
+int onlineTimeGetNow(int *);
 
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -18,7 +18,7 @@ typedef struct {
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Supplied declaration required: FUN_002eb338. */
-/* Supplied declaration required: FUN_002eb588. */
+/* Supplied declaration required: onlineTimeGetNow. */
 
 
 unsigned long long FUN_002ef6e2(int param_1,int param_2,unsigned int param_3,unsigned int param_4)
@@ -34,7 +34,7 @@ unsigned long long FUN_002ef6e2(int param_1,int param_2,unsigned int param_3,uns
   temp_v1 = param_2;
   uStack_18 = param_3;
   uStack_14 = param_4;
-  FUN_002eb588(&uStack_18);
+  onlineTimeGetNow(&uStack_18);
   FUN_002eb338(&temp_v0,&uStack_18,param_2);
   *(int *)(param_1 + 0x18) = param_2;
   *(int *)(param_1 + 0x14) = temp_v1;

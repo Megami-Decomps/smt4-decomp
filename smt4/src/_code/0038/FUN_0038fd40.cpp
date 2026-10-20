@@ -6,13 +6,13 @@ extern "C" {
 
 int FUN_0019e0c0(unsigned int);
 int FUN_0023392c(...);
-int FUN_00233d78(unsigned int *);
+int jobStopAndClearFlags(unsigned int *);
 int FUN_00233db8(unsigned int *, int);
 int FUN_00233e70(unsigned int *, int, int);
 int FUN_00233fcc(unsigned int *, int);
 int FUN_002340e4(unsigned int *);
 int FUN_00296e90(void);
-int FUN_00296f4c(unsigned int, unsigned int);
+int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int FUN_002b8244(int);
 int FUN_002bc01c(int);
 
@@ -30,20 +30,20 @@ extern int g_aocMain; /* 0x432fc8 */
 /* Supplied declaration required: FUN_0019e0c0. */
 extern int FUN_0023360c(unsigned int *);
 /* Supplied declaration required: FUN_0023392c. */
-/* Supplied declaration required: FUN_00233d78. */
+/* Supplied declaration required: jobStopAndClearFlags. */
 /* Supplied declaration required: FUN_00233db8. */
 /* Supplied declaration required: FUN_00233e70. */
 /* Supplied declaration required: FUN_00233fcc. */
 /* Supplied declaration required: FUN_002340e4. */
 extern int FUN_0026b564(void);
 extern int FUN_0026ee68(unsigned int);
-extern int FUN_0027ea14(unsigned int *);
-extern unsigned int FUN_00290d74(unsigned int, unsigned char *);
+extern int strIsEmpty(unsigned int *);
+extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 extern int FUN_00290e78(void);
 /* Supplied declaration required: FUN_00296e90. */
-/* Supplied declaration required: FUN_00296f4c. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int sys43e188GetState(void);
-extern int FUN_002a1520(unsigned int *);
+extern int byteIsAtLeast100(unsigned int *);
 /* Supplied declaration required: FUN_002b8244. */
 /* Supplied declaration required: FUN_002bc01c. */
 
@@ -76,8 +76,8 @@ void FUN_0038fd40(unsigned int *param_1)
       if (temp_v0 == 0) {
         *param_1 = *param_1 | 0x10000;
         FUN_00233db8(param_1,3);
-        temp_v2 = FUN_00290d74(param_1[0xd4],&LAB_0039000c);
-        FUN_00296f4c(param_1[0xd6],temp_v2);
+        temp_v2 = tableGroupFindEntryIndex(param_1[0xd4],&LAB_0039000c);
+        scrScriptProcessStartEntry(param_1[0xd6],temp_v2);
         param_1[2] = 1;
         FUN_0023392c(param_1,0xffffffff,0);
         return;
@@ -91,16 +91,16 @@ void FUN_0038fd40(unsigned int *param_1)
           uStack_30 = uStack_1c;
           uStack_2c = uStack_18;
           uStack_28 = uStack_14;
-          temp_v1 = FUN_0027ea14(&temp_v4);
+          temp_v1 = strIsEmpty(&temp_v4);
           if (temp_v1 != 0) {
-            FUN_00233d78(param_1);
+            jobStopAndClearFlags(param_1);
             FUN_00296e90();
             param_1[2] = 3;
           }
           else {
-            temp_v1 = FUN_002a1520(&temp_v4);
+            temp_v1 = byteIsAtLeast100(&temp_v4);
             if (temp_v1 != 0) {
-              FUN_00233d78(param_1);
+              jobStopAndClearFlags(param_1);
               FUN_00296e90();
               param_1[2] = 9999;
               param_1[0x84] = temp_v4;
@@ -162,8 +162,8 @@ void FUN_0038fd40(unsigned int *param_1)
   else {
     temp_v1 = sys43e188GetState();
     if (temp_v1 != 0) {
-      temp_v2 = FUN_00290d74(param_1[0xd4],&LAB_00390028);
-      FUN_00296f4c(param_1[0xd6],temp_v2);
+      temp_v2 = tableGroupFindEntryIndex(param_1[0xd4],&LAB_00390028);
+      scrScriptProcessStartEntry(param_1[0xd6],temp_v2);
       FUN_002b8244(0);
       FUN_0023392c(param_1,3,1);
       temp_v0 = 4;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00195fc8(void);
+int sysFatalBreak(void);
 int initBlockE30(unsigned char *);
 int clearBlock10808(unsigned char *);
 
@@ -22,7 +22,7 @@ extern unsigned int DAT_0061b018; /* 0x61b018 */
 extern unsigned char DAT_0061c000; /* 0x61c000 */
 
 extern unsigned int FUN_0016ccfc(void);
-/* Supplied declaration required: FUN_00195fc8. */
+/* Supplied declaration required: sysFatalBreak. */
 extern unsigned long long FUN_00302420(int, unsigned int, unsigned int);
 extern int FUN_004287ac(unsigned int, int *, unsigned int);
 /* Supplied declaration required: initBlockE30. */
@@ -74,7 +74,7 @@ int FUN_00427e68(unsigned int param_1,unsigned int param_2,unsigned int param_3,
         temp_v4 = 2;
       }
       else {
-        FUN_00195fc8();
+        sysFatalBreak();
         temp_v4 = 0;
       }
     }

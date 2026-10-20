@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_001a90f0(...);
-int FUN_002e342c(...);
+int libc_strcpy(...);
 int FUN_003539b4(...);
 
-int FUN_0018719c(void);
+int gameFlagIsSet(void);
 int FUN_001bbf0c(void);
 int FUN_001bc124(void);
 int FUN_003534b0(...);
@@ -68,11 +68,11 @@ extern unsigned char DAT_00580c9c; /* 0x580c9c */
 extern unsigned char DAT_005f32a0; /* 0x5f32a0 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0018719c. */
+/* Supplied declaration required: gameFlagIsSet. */
 /* Supplied declaration required: FUN_001a90f0. */
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 extern unsigned int gameFlagsGet(unsigned char *);
 extern unsigned int gameFlags2Get(unsigned char *);
 /* Supplied declaration required: FUN_003534b0. */
@@ -85,7 +85,7 @@ extern unsigned int FUN_003683c8(int);
 extern int FUN_00368868(void);
 extern int gameOwnedBitTest(int);
 /* Supplied declaration required: FUN_003796d4. */
-extern unsigned int *FUN_00379890(unsigned int);
+extern unsigned int *dataTable23Sub0GetEntry(unsigned int);
 /* Supplied declaration required: FUN_003799d0. */
 /* Supplied declaration required: FUN_003983b8. */
 extern int FUN_003a320c(void);
@@ -93,9 +93,9 @@ extern unsigned int *dataTable2FType0GetEntry(unsigned char *);
 extern unsigned int *dataTable2FType1GetEntry(unsigned char *);
 extern unsigned int *dataTable2FType2GetEntry(unsigned char *);
 extern unsigned int FUN_003b5620(void);
-extern int FUN_003b56bc(void);
+extern int dataTable23Type0CountWithAoc(void);
 extern int FUN_003b9a0c(void);
-extern int FUN_003bf814(void);
+extern int dataTable23Type4CountWithAoc(void);
 /* Supplied declaration required: dataTable2FType0Count. */
 /* Supplied declaration required: dataTable2FType1Count. */
 /* Supplied declaration required: dataTable2FType2Count. */
@@ -154,11 +154,11 @@ void FUN_00364740(int param_1,unsigned int *param_2,unsigned int *param_3)
   
   iStack_2c = param_1;
   temp_v35 = param_2;
-  temp_v2 = FUN_003b56bc();
+  temp_v2 = dataTable23Type0CountWithAoc();
   temp_v10 = 0;
   if ((int)temp_v10 < temp_v2) {
     do {
-      puVar4 = (unsigned int *)FUN_00379890(temp_v10);
+      puVar4 = (unsigned int *)dataTable23Sub0GetEntry(temp_v10);
       temp_v3 = (int)(char)puVar4[2];
       if (temp_v3 == -1) {
         return;
@@ -209,7 +209,7 @@ LAB_003647c0:
                       }
                       else if (puVar16 != (unsigned int *)0x0) {
                         if ((unsigned int *)0xff < puVar16) {
-                          temp_v3 = FUN_003bf814();
+                          temp_v3 = dataTable23Type4CountWithAoc();
                           temp_v7 = 0;
                           if (0 < temp_v3) {
                             do {
@@ -218,8 +218,8 @@ LAB_003647c0:
                               temp_v4 = partyEntryFlagsBit1((short)piVar6[1]);
                               if ((((temp_v4 != 0) && ((unsigned int *)*piVar6 == puVar16)) &&
                                   ((*(short *)((int)piVar6 + 6) == 0 ||
-                                   (temp_v4 = FUN_0018719c(), temp_v4 != 0)))) &&
-                                 (((short)piVar6[2] == 0 || (temp_v4 = FUN_0018719c(), temp_v4 == 0))))
+                                   (temp_v4 = gameFlagIsSet(), temp_v4 != 0)))) &&
+                                 (((short)piVar6[2] == 0 || (temp_v4 = gameFlagIsSet(), temp_v4 == 0))))
                               {
                                 temp_v33 = temp_v7;
                                 if (temp_v7 == -1) goto LAB_00364944;
@@ -241,9 +241,9 @@ LAB_00364944:
                               if (temp_v6 == 0xffffffff) break;
                               if (temp_v6 == temp_v9) {
                                 if ((((short)puVar11[1] != 0) &&
-                                    (temp_v3 = FUN_0018719c(), temp_v3 == 0)) ||
+                                    (temp_v3 = gameFlagIsSet(), temp_v3 == 0)) ||
                                    ((*(short *)((int)puVar11 + 6) != 0 &&
-                                    (temp_v3 = FUN_0018719c(), temp_v3 != 0)))) {
+                                    (temp_v3 = gameFlagIsSet(), temp_v3 != 0)))) {
                                   temp_v6 = (unsigned int)*(short *)((int)puVar11 + 10);
                                   if (temp_v6 != 0xffffffff) goto LAB_003649bc;
                                 }
@@ -301,13 +301,13 @@ LAB_00364aa0:
                               if (temp_v8 == 0xffffffff) break;
                               if (temp_v8 == temp_v6) {
                                 if ((short)puVar11[1] != 0) {
-                                  temp_v3 = FUN_0018719c();
+                                  temp_v3 = gameFlagIsSet();
                                   temp_v8 = 0;
                                   if (temp_v3 == 0) goto LAB_00364b10;
                                 }
                                 temp_v8 = 0;
                                 if ((*(short *)((int)puVar11 + 6) == 0) ||
-                                   (temp_v8 = FUN_0018719c(), temp_v8 == 0)) {
+                                   (temp_v8 = gameFlagIsSet(), temp_v8 == 0)) {
                                   temp_v30 = puVar14;
                                   if (puVar14 == (unsigned char *)0xffffffff) goto LAB_00364b74;
                                   temp_v31 = 1;
@@ -331,12 +331,12 @@ LAB_00364b74:
                               if (temp_v8 == 0xffffffff) break;
                               if (temp_v8 == temp_v6) {
                                 if (*(short *)((int)puVar11 + 6) != 0) {
-                                  temp_v3 = FUN_0018719c();
+                                  temp_v3 = gameFlagIsSet();
                                   temp_v8 = 0;
                                   if (temp_v3 == 0) goto LAB_00364c54;
                                 }
                                 if (((short)puVar11[2] == 0) ||
-                                   (temp_v8 = FUN_0018719c(), temp_v8 == 0)) {
+                                   (temp_v8 = gameFlagIsSet(), temp_v8 == 0)) {
                                   if ((short)puVar11[1] != 0) {
                                     temp_v3 = partyEntryFlagsBit1((short)puVar11[1]);
                                     temp_v8 = 0;
@@ -372,12 +372,12 @@ LAB_00364c70:
                               if (temp_v8 == 0xffffffff) break;
                               if (temp_v8 == temp_v6) {
                                 if ((short)puVar11[1] != 0) {
-                                  temp_v3 = FUN_0018719c();
+                                  temp_v3 = gameFlagIsSet();
                                   temp_v8 = 0;
                                   if (temp_v3 == 0) goto LAB_00364d0c;
                                 }
                                 if (((*(short *)((int)puVar11 + 6) == 0) ||
-                                    (temp_v8 = FUN_0018719c(), temp_v8 == 0)) &&
+                                    (temp_v8 = gameFlagIsSet(), temp_v8 == 0)) &&
                                    (temp_v8 = gameFlags2Get(puVar14), (int)temp_v8 < 1)) {
                                   temp_v30 = puVar14;
                                   if (puVar14 == (unsigned char *)0xffffffff) goto LAB_00364d28;
@@ -458,7 +458,7 @@ LAB_00364e34:
                           temp_v7 = FUN_00356380(temp_v16);
                           if (*(int *)(temp_v7 + 0x20) == -1) break;
                           if (((*(short *)(temp_v7 + 0x26) == 0) ||
-                              (temp_v4 = FUN_0018719c(), temp_v4 == 0)) &&
+                              (temp_v4 = gameFlagIsSet(), temp_v4 == 0)) &&
                              ((*(unsigned int **)(temp_v7 + 0x20) == puVar11 &&
                               (temp_v7 = partyEntryFlagsBit1(*(unsigned short *)(temp_v7 + 0x24)), temp_v7 == 0)))
                              ) {
@@ -587,7 +587,7 @@ LAB_003652e4:
                             if (*(int *)(temp_v3 * 0x17c + 0x5f33cc) == *piVar6) {
                               *(int *)(temp_v3 * 0x17c + 0x5f33d4) = (int)*(short *)((int)piVar6 + 10)
                               ;
-                              FUN_002e342c(temp_v3 * 0x17c + 0x5f33d8,piVar6 + 3);
+                              libc_strcpy(temp_v3 * 0x17c + 0x5f33d8,piVar6 + 3);
                               break;
                             }
                             temp_v3 = temp_v3 + 1;
@@ -636,7 +636,7 @@ LAB_003652e4:
                               if (*(int *)(temp_v3 * 0x17c + 0x5f33cc) == *piVar6) {
                                 *(int *)(temp_v3 * 0x17c + 0x5f33d4) =
                                      (int)*(short *)((int)piVar6 + 10);
-                                FUN_002e342c(temp_v3 * 0x17c + 0x5f33d8,piVar6 + 3);
+                                libc_strcpy(temp_v3 * 0x17c + 0x5f33d8,piVar6 + 3);
                                 break;
                               }
                               temp_v3 = temp_v3 + 1;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00184758(...);
+int uiSpriteSetKeyframe(...);
 int FUN_002304d0(...);
 int FUN_002a4878(...);
 int FUN_002a4914(...);
@@ -14,9 +14,9 @@ int FUN_003f5220(...);
 
 int sysPlaySe(...);
 int FUN_00192550(void);
-int FUN_001ab854(...);
-int FUN_001aba54(void);
-int FUN_001b4a90(int, int, int);
+int gameGetSlotRecord(...);
+int dataTable04FindById(void);
+int __aeabi_memset4(int, int, int);
 int FUN_0020b718(...);
 int FUN_0020d934(void);
 int FUN_00228ab0(...);
@@ -38,18 +38,18 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_3_stack;
 
-extern int DAT_0057f268; /* 0x57f268 */
+extern int g_partyPanel; /* 0x57f268 */
 extern unsigned int DAT_0057f270; /* 0x57f270 */
 extern unsigned int DAT_0057f274; /* 0x57f274 */
 
 extern int btlGetMainState(void);
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_00184758. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: FUN_00192550. */
-/* Supplied declaration required: FUN_001ab854. */
-extern int FUN_001ab888(void);
-/* Supplied declaration required: FUN_001aba54. */
-/* Supplied declaration required: FUN_001b4a90. */
+/* Supplied declaration required: gameGetSlotRecord. */
+extern int gameGetSlotTable(void);
+/* Supplied declaration required: dataTable04FindById. */
+/* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: FUN_0020b718. */
 /* Supplied declaration required: FUN_0020d934. */
 /* Supplied declaration required: FUN_00228ab0. */
@@ -96,10 +96,10 @@ void FUN_002c39dc(int param_1,unsigned int param_2,unsigned short param_3)
   unsigned char temp_v14;
   unsigned long long temp_v15;
   
-  temp_v0 = DAT_0057f268;
-  temp_v2 = FUN_001ab888();
+  temp_v0 = g_partyPanel;
+  temp_v2 = gameGetSlotTable();
   *(char *)(temp_v0 + 0x9b4) = (char)param_1;
-  FUN_001b4a90(temp_v0 + 0x9c0,4,1);
+  __aeabi_memset4(temp_v0 + 0x9c0,4,1);
   temp_v3 = 0;
   temp_v9 = 0;
   do {
@@ -153,7 +153,7 @@ void FUN_002c39dc(int param_1,unsigned int param_2,unsigned short param_3)
     temp_v3 = 0;
     *(unsigned char *)(temp_v0 + 0x9c0) = 0;
     do {
-      if (((-1 < *(char *)(temp_v2 + temp_v3 + 0x1ca0)) && (temp_v9 = FUN_001ab854(), param_1 == 0xf)) &&
+      if (((-1 < *(char *)(temp_v2 + temp_v3 + 0x1ca0)) && (temp_v9 = gameGetSlotRecord(), param_1 == 0xf)) &&
          ((*(unsigned short *)(temp_v9 + 0x60) & 4) != 0)) {
         *(unsigned char *)(temp_v0 + temp_v3 + 0x9c1) = 0;
       }
@@ -163,7 +163,7 @@ void FUN_002c39dc(int param_1,unsigned int param_2,unsigned short param_3)
     do {
       temp_v9 = temp_v0 + temp_v3 * 8;
       if ((((*(int *)(temp_v9 + 0xa80) < 0) ||
-           ((temp_v4 = FUN_001ab854(), param_1 != 0xf && ((*(unsigned short *)(temp_v4 + 0x60) & 2) != 0)))) ||
+           ((temp_v4 = gameGetSlotRecord(), param_1 != 0xf && ((*(unsigned short *)(temp_v4 + 0x60) & 2) != 0)))) ||
           ((*(unsigned short *)(temp_v4 + 0x60) & 0x400) != 0)) ||
          ((param_1 == 0xf && ((*(unsigned short *)(temp_v4 + 0x60) & 4) != 0)))) {
         *(unsigned short *)(temp_v9 + 0xa84) = 0;
@@ -192,7 +192,7 @@ void FUN_002c39dc(int param_1,unsigned int param_2,unsigned short param_3)
     do {
       temp_v9 = temp_v0 + temp_v3 * 8;
       if ((*(int *)(temp_v9 + 0xa80) < 0) ||
-         (temp_v4 = FUN_001ab854(), (*(unsigned short *)(temp_v4 + 0x60) & 0x402) != 0)) {
+         (temp_v4 = gameGetSlotRecord(), (*(unsigned short *)(temp_v4 + 0x60) & 0x402) != 0)) {
         *(unsigned short *)(temp_v9 + 0xa84) = 0;
       }
       temp_v3 = temp_v3 + 1;
@@ -200,11 +200,11 @@ void FUN_002c39dc(int param_1,unsigned int param_2,unsigned short param_3)
     temp_v3 = 0;
     do {
       if ((*(int *)(temp_v0 + 0x9b8) - 1 != temp_v3) && (-1 < *(char *)(temp_v2 + temp_v3 + 0x1ca0))) {
-        temp_v9 = FUN_001ab854();
+        temp_v9 = gameGetSlotRecord();
         temp_v4 = 0;
         do {
           if ((-1 < *(int *)(temp_v0 + temp_v4 * 8 + 0xa80)) &&
-             (temp_v13 = FUN_001ab854(), *(short *)(temp_v13 + 0x62) == *(short *)(temp_v9 + 0x62))) {
+             (temp_v13 = gameGetSlotRecord(), *(short *)(temp_v13 + 0x62) == *(short *)(temp_v9 + 0x62))) {
             *(unsigned short *)(temp_v0 + temp_v4 * 8 + 0xa84) = 0;
             break;
           }
@@ -247,7 +247,7 @@ void FUN_002c39dc(int param_1,unsigned int param_2,unsigned short param_3)
     do {
       temp_v9 = temp_v0 + temp_v3 * 8;
       if ((*(int *)(temp_v9 + 0xa80) < 0) ||
-         (temp_v4 = FUN_001ab854(), (*(unsigned short *)(temp_v4 + 0x60) & 0x400) != 0)) {
+         (temp_v4 = gameGetSlotRecord(), (*(unsigned short *)(temp_v4 + 0x60) & 0x400) != 0)) {
         *(unsigned short *)(temp_v9 + 0xa84) = 0;
       }
       temp_v3 = temp_v3 + 1;
@@ -386,7 +386,7 @@ LAB_002c4018:
       }
     }
     temp_v6 = temp_v5;
-    FUN_001aba54();
+    dataTable04FindById();
     if ((*(unsigned char *)(temp_v6 + 0x38) & 4) != 0) {
       *(unsigned char *)(temp_v0 + 0x35) = 1;
       *(unsigned int *)(temp_v0 + 0x20) = 10;
@@ -451,7 +451,7 @@ LAB_002c4018:
           temp_v2 = -1;
           temp_v3 = 0;
           do {
-            temp_v9 = FUN_001ab888();
+            temp_v9 = gameGetSlotTable();
             if ((int)*(char *)(temp_v9 + temp_v3 + 0x1ca0) == (int)*(short *)(temp_v0 + 0x38)) {
               temp_v2 = temp_v3;
             }
@@ -461,7 +461,7 @@ LAB_002c4018:
             *(unsigned char *)(temp_v0 + temp_v2 + 0x9c1) = 0;
             FUN_00228ab0(temp_v2);
           }
-          FUN_001ab854((int)*(short *)(temp_v0 + 0x38));
+          gameGetSlotRecord((int)*(short *)(temp_v0 + 0x38));
           temp_v12 = temp_v10;
         }
         if ((*(unsigned int *)(temp_v6 + 0x3c) & 0x7f) != 1) {
@@ -469,7 +469,7 @@ LAB_002c4018:
           do {
             temp_v3 = temp_v0 + temp_v2 * 8;
             if (-1 < *(int *)(temp_v3 + 0xa80)) {
-              temp_v15 = FUN_001ab854();
+              temp_v15 = gameGetSlotRecord();
               temp_v12 = (unsigned int)((unsigned long long)temp_v15 >> 0x20);
               if ((*(unsigned short *)((int)temp_v15 + 0x60) & 2) != 0) {
                 *(unsigned short *)(temp_v3 + 0xa84) = 0;
@@ -532,10 +532,10 @@ LAB_002c4018:
     do {
       temp_v9 = temp_v2 + temp_v3;
       if ((*(char *)(temp_v9 + 0x1ca0) < '\0') ||
-         (((temp_v4 = FUN_001ab854(), (*(unsigned short *)(temp_v4 + 0x60) & 0x400) != 0 ||
-           (temp_v4 = FUN_001ab854((int)*(char *)(temp_v9 + 0x1ca0)),
+         (((temp_v4 = gameGetSlotRecord(), (*(unsigned short *)(temp_v4 + 0x60) & 0x400) != 0 ||
+           (temp_v4 = gameGetSlotRecord((int)*(char *)(temp_v9 + 0x1ca0)),
            (*(unsigned short *)(temp_v4 + 0x60) & 2) != 0)) &&
-          (temp_v9 = FUN_001ab854((int)*(char *)(temp_v9 + 0x1ca0)),
+          (temp_v9 = gameGetSlotRecord((int)*(char *)(temp_v9 + 0x1ca0)),
           (*(unsigned short *)(temp_v9 + 0x60) & 4) == 0)))) {
         *(unsigned char *)(temp_v0 + temp_v3 + 0x9c1) = 0;
       }
@@ -545,7 +545,7 @@ LAB_002c4018:
     do {
       temp_v3 = temp_v0 + temp_v2 * 8;
       if (*(int *)(temp_v3 + 0xa80) >= 0) {
-        temp_v9 = FUN_001ab854();
+        temp_v9 = gameGetSlotRecord();
         if (((*(unsigned short *)(temp_v9 + 0x60) & 0x402) != 0) && ((*(unsigned short *)(temp_v9 + 0x60) & 4) == 0))
         {
           *(unsigned short *)(temp_v3 + 0xa84) = 0;
@@ -565,7 +565,7 @@ LAB_002c4018:
     do {
       temp_v9 = temp_v0 + temp_v3 * 4;
       if (*(char *)(*(int *)(temp_v9 + 0xa10) + 0x20) == '\0') {
-        FUN_001ab854(*(unsigned int *)(*(int *)(temp_v9 + 0xa10) + 0x34));
+        gameGetSlotRecord(*(unsigned int *)(*(int *)(temp_v9 + 0xa10) + 0x34));
         temp_v9 = FUN_0025e684();
         if (temp_v9 == 0) {
           *(unsigned char *)(temp_v0 + temp_v3 + 0x9c0) = 0;
@@ -580,7 +580,7 @@ LAB_002c4018:
     do {
       temp_v9 = temp_v0 + temp_v3 * 8;
       if (*(int *)(temp_v9 + 0xa80) >= 0) {
-        temp_v4 = FUN_001ab854();
+        temp_v4 = gameGetSlotRecord();
         if (((param_1 != 0xf) && ((*(unsigned short *)(temp_v4 + 0x60) & 2) != 0)) ||
            ((*(unsigned short *)(temp_v4 + 0x60) & 0x400) != 0)) {
           *(unsigned short *)(temp_v9 + 0xa84) = 0;
@@ -646,7 +646,7 @@ LAB_002c45c0:
           do {
             temp_v9 = ((int)(temp_v2 + ((unsigned int)(temp_v2 >> 0x1f) >> 0x1e)) >> 2) + 1;
             if (temp_v9 != 0) {
-              if (*(short *)(DAT_0057f268 + ((temp_v9 * 4 - 4) + temp_v2 % 4) * 8 + 0xa84) != 0) {
+              if (*(short *)(g_partyPanel + ((temp_v9 * 4 - 4) + temp_v2 % 4) * 8 + 0xa84) != 0) {
 LAB_002c4664:
                 FUN_002a4914(temp_v3,temp_v2 % 4);
                 FUN_002a4964(temp_v3,((int)(temp_v2 + ((unsigned int)(temp_v2 >> 0x1f) >> 0x1e)) >> 2) + 1);
@@ -654,12 +654,12 @@ LAB_002c4664:
                 break;
               }
             }
-            else if (*(char *)(DAT_0057f268 + temp_v2 % 4 + 0x9c0) != '\0') goto LAB_002c4664;
+            else if (*(char *)(g_partyPanel + temp_v2 % 4 + 0x9c0) != '\0') goto LAB_002c4664;
             temp_v2 = temp_v2 + 1;
           } while (temp_v2 < 0x18);
           temp_v2 = 0;
           do {
-            if (*(char *)(DAT_0057f268 + temp_v2 + 0x9c0) != '\0') {
+            if (*(char *)(g_partyPanel + temp_v2 + 0x9c0) != '\0') {
               FUN_002a4914(temp_v3);
               temp_v2 = 0;
               FUN_002a4964(temp_v3,temp_v2);
@@ -670,7 +670,7 @@ LAB_002c4664:
         }
         else {
           do {
-            if (*(char *)(DAT_0057f268 + temp_v2 + 0x9c0) != '\0') {
+            if (*(char *)(g_partyPanel + temp_v2 + 0x9c0) != '\0') {
               FUN_002a4914(temp_v3,temp_v2);
               FUN_002a4964(temp_v3,0);
               if (temp_v2 < 4) goto LAB_002c4a2c;
@@ -682,14 +682,14 @@ LAB_002c4664:
           do {
             temp_v9 = ((int)(temp_v2 + ((unsigned int)(temp_v2 >> 0x1f) >> 0x1e)) >> 2) + 1;
             if (temp_v9 != 0) {
-              if (*(short *)(DAT_0057f268 + ((temp_v9 * 4 - 4) + temp_v2 % 4) * 8 + 0xa84) != 0) {
+              if (*(short *)(g_partyPanel + ((temp_v9 * 4 - 4) + temp_v2 % 4) * 8 + 0xa84) != 0) {
                 FUN_002a4914(temp_v3,temp_v2 % 4);
                 temp_v2 = ((int)(temp_v2 + ((unsigned int)(temp_v2 >> 0x1f) >> 0x1e)) >> 2) + 1;
                 FUN_002a4964(temp_v3,temp_v2);
                 break;
               }
             }
-            else if (*(char *)(DAT_0057f268 + temp_v2 % 4 + 0x9c0) != '\0') {
+            else if (*(char *)(g_partyPanel + temp_v2 % 4 + 0x9c0) != '\0') {
               FUN_002a4914(temp_v3,temp_v2 % 4);
               temp_v2 = ((int)(temp_v2 + ((unsigned int)(temp_v2 >> 0x1f) >> 0x1e)) >> 2) + 1;
               FUN_002a4964(temp_v3,temp_v2);
@@ -712,7 +712,7 @@ LAB_002c4664:
             temp_v3 = ((int)(temp_v2 + ((unsigned int)(temp_v2 >> 0x1f) >> 0x1e)) >> 2) + 1;
             temp_v9 = temp_v2 % 4 + *(int *)(temp_v0 + 0x2c) * 0xc;
             if (temp_v3 != 0) {
-              if (*(short *)(DAT_0057f268 + ((temp_v3 * 4 - 4) + temp_v9) * 8 + 0xa84) != 0) {
+              if (*(short *)(g_partyPanel + ((temp_v3 * 4 - 4) + temp_v9) * 8 + 0xa84) != 0) {
 LAB_002c4858:
                 temp_v3 = temp_v2 + *(int *)(temp_v0 + 0x2c) * 0xc;
                 if (temp_v3 < 0xc) {
@@ -732,12 +732,12 @@ LAB_002c4858:
                 break;
               }
             }
-            else if (*(char *)(DAT_0057f268 + temp_v9 + 0x9c0) != '\0') goto LAB_002c4858;
+            else if (*(char *)(g_partyPanel + temp_v9 + 0x9c0) != '\0') goto LAB_002c4858;
             temp_v2 = temp_v2 + 1;
           } while (temp_v2 < 0x18);
           temp_v2 = 0;
           do {
-            if (*(char *)(DAT_0057f268 + temp_v2 + 0x9c0) != '\0') {
+            if (*(char *)(g_partyPanel + temp_v2 + 0x9c0) != '\0') {
               FUN_002a4914(temp_v0 + 0xd50);
               temp_v2 = 0;
               temp_v3 = temp_v0 + 0xd50;
@@ -749,7 +749,7 @@ LAB_002c4858:
         }
         else {
           do {
-            if (*(char *)(DAT_0057f268 + temp_v2 + 0x9c0) != '\0') {
+            if (*(char *)(g_partyPanel + temp_v2 + 0x9c0) != '\0') {
               FUN_002a4914(temp_v0 + 0xd50,temp_v2);
               FUN_002a4964(temp_v0 + 0xd50,0);
               if (temp_v2 < 4) goto LAB_002c4a2c;
@@ -757,12 +757,12 @@ LAB_002c4858:
             }
             temp_v2 = temp_v2 + 1;
           } while (temp_v2 < 4);
-          temp_v2 = DAT_0057f268;
+          temp_v2 = g_partyPanel;
           temp_v3 = 0;
           do {
             temp_v9 = ((int)(temp_v3 + ((unsigned int)(temp_v3 >> 0x1f) >> 0x1e)) >> 2) + 1;
             if (temp_v9 != 0) {
-              if (*(short *)(DAT_0057f268 + (temp_v3 % 4 + (temp_v9 * 4 - 4)) * 8 + 0xa84) == 0)
+              if (*(short *)(g_partyPanel + (temp_v3 % 4 + (temp_v9 * 4 - 4)) * 8 + 0xa84) == 0)
               goto LAB_002c4a1c;
 LAB_002c49c4:
               if (temp_v3 < 0xc) {
@@ -770,8 +770,8 @@ LAB_002c49c4:
                   *(unsigned int *)(temp_v0 + 0x2c) = 0;
                 }
                 else {
-                  *(unsigned int *)(DAT_0057f268 + 0x2c) = *(unsigned int *)(DAT_0057f268 + 0x2c) ^ 1;
-                  FUN_00184758(temp_v2 + 0x180,5,0);
+                  *(unsigned int *)(g_partyPanel + 0x2c) = *(unsigned int *)(g_partyPanel + 0x2c) ^ 1;
+                  uiSpriteSetKeyframe(temp_v2 + 0x180,5,0);
                   temp_v9 = 0;
                   do {
                     FUN_003f5220(*(unsigned int *)(temp_v2 + temp_v9 * 4 + 0xa10),
@@ -794,8 +794,8 @@ LAB_002c49c4:
                 *(unsigned int *)(temp_v0 + 0x2c) = 1;
               }
               else {
-                *(unsigned int *)(DAT_0057f268 + 0x2c) = *(unsigned int *)(DAT_0057f268 + 0x2c) ^ 1;
-                FUN_00184758(temp_v2 + 0x180,4,0);
+                *(unsigned int *)(g_partyPanel + 0x2c) = *(unsigned int *)(g_partyPanel + 0x2c) ^ 1;
+                uiSpriteSetKeyframe(temp_v2 + 0x180,4,0);
                 temp_v9 = 0;
                 do {
                   FUN_003f5220(*(unsigned int *)(temp_v2 + temp_v9 * 4 + 0xa10),
@@ -816,7 +816,7 @@ LAB_002c49c4:
               FUN_002a4964(temp_v3,temp_v2);
               break;
             }
-            if (*(char *)(DAT_0057f268 + temp_v3 % 4 + 0x9c0) != '\0') goto LAB_002c49c4;
+            if (*(char *)(g_partyPanel + temp_v3 % 4 + 0x9c0) != '\0') goto LAB_002c49c4;
 LAB_002c4a1c:
             temp_v3 = temp_v3 + 1;
           } while (temp_v3 < 0x18);

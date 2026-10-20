@@ -14,12 +14,12 @@ typedef struct Obj {
 extern struct {
     u8 unk0[4];
     Obj *obj;
-} DAT_0043da28;
+} g_buttonHelp;
 
 /* Address of the 0x40-byte entry `index` at +0x4D0 of the object. */
 int FUN_002cc2a4(int index)
 {
-    Obj *obj = DAT_0043da28.obj;
+    Obj *obj = g_buttonHelp.obj;
 
     return (int)&obj->entries[index];
 }

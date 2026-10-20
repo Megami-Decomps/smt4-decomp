@@ -3,7 +3,7 @@
 
 extern "C" {
 extern AsdSequence g_asdSequence;
-extern const char DAT_0053d858[]; /* __FILE__ of AsdSequence.cpp */
+extern const char g_asdSequenceSourcePath[]; /* __FILE__ of AsdSequence.cpp */
 
 void *asdMemoryAllocTracked(int heap, int alignClass, int unk08, u32 size, int fromFront);
 void rt_memcpy(void *dst, const void *src, u32 size);
@@ -19,7 +19,7 @@ void asdSequenceRequest(s32 state, const void *arg, u32 size)
     }
     seq->next = state;
     if (arg != NULL) {
-        asdDebugTrace(DAT_0053d858, 132);
+        asdDebugTrace(g_asdSequenceSourcePath, 132);
         seq->nextArg = asdMemoryAllocTracked(0x100, 0x100, 0, size, 1);
         seq->nextArgSize = size;
         rt_memcpy(seq->nextArg, arg, size);

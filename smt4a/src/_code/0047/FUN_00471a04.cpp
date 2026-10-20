@@ -19,7 +19,7 @@ typedef struct {
     unsigned int sp80; /* 0x80: local_80 */
 } param_11_stack;
 
-extern unsigned int FUN_001861c4(unsigned int, unsigned int);
+extern unsigned int asdTMTexTableGetNode(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0019b770. */
 /* Supplied declaration required: FUN_001ab8e0. */
 extern int FUN_001b2ca4(unsigned int, unsigned int, unsigned int);
@@ -56,7 +56,7 @@ void FUN_00471a04(unsigned int param_1,unsigned int param_2,unsigned int param_3
   if (temp_v0 != 0) {
     puVar4 = *(unsigned int **)(temp_v0 + 4);
   }
-  temp_v1 = FUN_001861c4(0xf,param_4);
+  temp_v1 = asdTMTexTableGetNode(0xf,param_4);
   FUN_001ab8e0(temp_v2,temp_v8,param_8,param_9,param_7);
   temp_v2[0] = temp_v2[0] | 0x28000;
   puVar3 = (unsigned short *)(**(int **)(*(int *)*puVar4 + 4) + 0x14);

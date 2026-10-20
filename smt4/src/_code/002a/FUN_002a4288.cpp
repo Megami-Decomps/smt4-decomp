@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002c52f8(void);
+int asdFatalError(void);
 
 extern unsigned char DAT_00420f78; /* 0x420f78 */
 
-/* Supplied declaration required: FUN_002c52f8. */
+/* Supplied declaration required: asdFatalError. */
 
 
 unsigned int * FUN_002a4288(unsigned int *param_1)
@@ -20,10 +20,10 @@ unsigned int * FUN_002a4288(unsigned int *param_1)
   
   *param_1 = (unsigned int)&DAT_00420f78;
   if (param_1[3] != 0) {
-    FUN_002c52f8();
+    asdFatalError();
   }
   if (param_1[4] != 0) {
-    FUN_002c52f8();
+    asdFatalError();
   }
   puVar1 = (unsigned int *)param_1[4];
   if (puVar1 != (unsigned int *)0x0) {

@@ -12,19 +12,19 @@ int FUN_00336de4(...);
 int FUN_0035fc4c(void);
 int btlTalkBustUpSetUnk2F4(...);
 int FUN_0038b3f8(...);
-int FUN_003d2d6c(...);
+int soundChannelStopAll(...);
 int workOwnerRelease(...);
 int FUN_0040a244(...);
 
 int FUN_001517b4(...);
 int sysPlaySe(...);
 int FUN_00180118(...);
-int FUN_001846d0(...);
-int FUN_001aea28(...);
+int uiSpriteSelectAnim(...);
+int ptrListRemoveClearOwner(...);
 int FUN_001fc348(...);
 int FUN_0022677c(...);
-int FUN_00275f44(...);
-int FUN_002e342c(...);
+int scrScriptProcessStartEntry(...);
+int libc_strcpy(...);
 int uniteCameraDestroy(void);
 int FUN_003d2158(...);
 int FUN_003d2a00(...);
@@ -39,7 +39,7 @@ int FUN_0019eb14(void);
 int FUN_002859d8(...);
 int FUN_002c8894(void);
 int FUN_003d2150(...);
-int FUN_003d2d34(int, int, int);
+int soundChannelRequestIfEnabled(int, int, int);
 int FUN_003d54f8(...);
 int FUN_003f9ac4(...);
 int FUN_003f9c3c(...);
@@ -69,7 +69,7 @@ extern unsigned char LAB_003cf86c; /* 0x3cf86c */
 extern unsigned char LAB_003d009c; /* 0x3d009c */
 extern unsigned char LAB_003d00a8; /* 0x3d00a8 */
 extern unsigned char LAB_003d00b4; /* 0x3d00b4 */
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern int DAT_0057f2c4; /* 0x57f2c4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -88,20 +88,20 @@ extern int FUN_00163e84(unsigned int);
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_00180118. */
 extern int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001846d0. */
+/* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_0019eb14. */
-/* Supplied declaration required: FUN_001aea28. */
+/* Supplied declaration required: ptrListRemoveClearOwner. */
 /* Supplied declaration required: FUN_001f4908. */
 /* Supplied declaration required: FUN_001fc348. */
 extern int FUN_00224880(unsigned int);
 /* Supplied declaration required: FUN_0022677c. */
 extern int FUN_0026c3a0(void);
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_002859d8. */
 /* Supplied declaration required: FUN_002c8894. */
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: uniteCameraDestroy. */
 /* Supplied declaration required: FUN_003180c4. */
 /* Supplied declaration required: FUN_00336de4. */
@@ -111,8 +111,8 @@ extern int FUN_0026c3a0(void);
 /* Supplied declaration required: FUN_003d2150. */
 /* Supplied declaration required: FUN_003d2158. */
 /* Supplied declaration required: FUN_003d2a00. */
-/* Supplied declaration required: FUN_003d2d34. */
-/* Supplied declaration required: FUN_003d2d6c. */
+/* Supplied declaration required: soundChannelRequestIfEnabled. */
+/* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: FUN_003d54f8. */
 /* Supplied declaration required: FUN_003f9ac4. */
 /* Supplied declaration required: FUN_003f9c3c. */
@@ -177,7 +177,7 @@ unsigned int FUN_003cf02c(void)
     if (temp_v6 == 0) break;
     FUN_003d54f8(0,10);
     FUN_003d54f8(1,10);
-    FUN_003d2d34(0x1000052,10,0x3c);
+    soundChannelRequestIfEnabled(0x1000052,10,0x3c);
     temp_v0 = *(short *)(temp_v2 + 0x1e);
     *(unsigned int *)(temp_v2 + 0x24) = 0xffffffff;
     if (temp_v0 != 2) {
@@ -216,7 +216,7 @@ unsigned int FUN_003cf02c(void)
     if (((temp_v6 != 0) && (temp_v6 = FUN_00163e84(1), temp_v6 != 0)) &&
        (*(char *)(temp_v2 + 0x61a) != '\0')) {
       temp_v6 = *(int *)(*(int *)(temp_v2 + 0x90) + 4);
-      FUN_0040ace8(DAT_0056fcc0,temp_v6);
+      FUN_0040ace8(g_handleRegistry,temp_v6);
       FUN_003fe86c(temp_v6,0,2);
       *(unsigned int *)(temp_v6 + 4) = *(unsigned int *)(temp_v6 + 4) & 0xfffffffc;
       temp_v6 = *(int *)(temp_v2 + 0x98);
@@ -382,7 +382,7 @@ unsigned int FUN_003cf02c(void)
       }
       uniteCameraDestroy();
       temp_v6 = *(int *)(*(int *)(temp_v2 + 0x94) + 4);
-      FUN_0040ace8(DAT_0056fcc0,temp_v6);
+      FUN_0040ace8(g_handleRegistry,temp_v6);
       FUN_003fe86c(temp_v6,0,2);
       *(unsigned int *)(temp_v6 + 4) = *(unsigned int *)(temp_v6 + 4) & 0xfffffffc;
       temp_v6 = *(int *)(temp_v2 + 0x9c);
@@ -412,14 +412,14 @@ unsigned int FUN_003cf02c(void)
         FUN_0019eb14();
       }
       FUN_002859d8(temp_v2 + 0xe4);
-      FUN_001aea28(DAT_0056fcc0,temp_v10);
+      ptrListRemoveClearOwner(g_handleRegistry,temp_v10);
       if (*(int **)(temp_v2 + 0x90) != (int *)0x0) {
         (**(romwright_code **)(**(int **)(temp_v2 + 0x90) + 4))();
         *(unsigned int *)(temp_v2 + 0x90) = 0;
       }
       temp_v6 = DAT_0057f2c4;
       if (*(char *)(temp_v2 + 0x20) != '\0') {
-        FUN_00275f44(*(unsigned int *)(temp_v2 + 0x338),0x11);
+        scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x338),0x11);
         sysPlaySe(0x5a);
         temp_v6 = DAT_0057f2c4;
         *(unsigned int *)(DAT_0057f2c4 + 4) = 4;
@@ -508,7 +508,7 @@ LAB_003cf9bc:
         temp_v3 = 6;
         *(int *)(temp_v2 + 8) = temp_v10;
         do {
-          FUN_001846d0(temp_v2 + temp_v3 * 0x8c + 0x360,1);
+          uiSpriteSelectAnim(temp_v2 + temp_v3 * 0x8c + 0x360,1);
           temp_v3 = temp_v3 + 1;
         } while (temp_v3 < 10);
       }
@@ -522,7 +522,7 @@ LAB_003cf9bc:
       temp_v3 = 0;
       do {
         if (*(int *)(temp_v2 + 8) == temp_v10 + temp_v3 * 4) {
-          FUN_001846d0(temp_v2 + temp_v3 * 0x8c + 0x6a8,0);
+          uiSpriteSelectAnim(temp_v2 + temp_v3 * 0x8c + 0x6a8,0);
         }
         temp_v3 = temp_v3 + 1;
       } while (temp_v3 < 4);
@@ -625,12 +625,12 @@ LAB_003cf9bc:
   case 5:
     temp_v4 = (unsigned int)*(unsigned short *)(temp_v2 + 0xc);
     FUN_00180118(temp_v4);
-    FUN_002e342c(temp_v17,temp_v4);
+    libc_strcpy(temp_v17,temp_v4);
     FUN_003180c4(8,temp_v17);
     temp_v5 = FUN_0014bf3c(*(unsigned short *)(temp_v2 + 0xc),0);
-    FUN_002e342c(temp_v17,temp_v5);
+    libc_strcpy(temp_v17,temp_v5);
     FUN_003180c4(0x10,temp_v17);
-    FUN_00275f44(*(unsigned int *)(temp_v2 + 0x338),0x10);
+    scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x338),0x10);
     sysPlaySe(0x5a);
     FUN_00336de4(*(unsigned short *)(temp_v2 + 0xc),1);
     btlTalkBustUpSetUnk2F4(1);
@@ -644,7 +644,7 @@ LAB_003cf9bc:
     if ((temp_v6 == 2) && (*(char *)(temp_v2 + 0x6a6) != '\0')) {
       FUN_001f4908(0,10,0xff);
       FUN_001f4908(1,10,0xff);
-      FUN_003d2d6c(10);
+      soundChannelStopAll(10);
       temp_v6 = DAT_0057f2c4;
       *(unsigned int *)(DAT_0057f2c4 + 4) = 7;
       *(unsigned int *)(temp_v6 + 8) = 0;
@@ -670,7 +670,7 @@ LAB_003cf9bc:
       FUN_0040a244(*(unsigned int *)(temp_v2 + 0x8c));
       *(unsigned int *)(temp_v2 + 0x8c) = 0;
       FUN_0035fc4c();
-      FUN_001aea28(DAT_0056fcc0,*(unsigned int *)(*(int *)(temp_v2 + 0x94) + 4));
+      ptrListRemoveClearOwner(g_handleRegistry,*(unsigned int *)(*(int *)(temp_v2 + 0x94) + 4));
       if (*(int **)(temp_v2 + 0x94) != (int *)0x0) {
         (**(romwright_code **)(**(int **)(temp_v2 + 0x94) + 4))();
         *(unsigned int *)(temp_v2 + 0x94) = 0;

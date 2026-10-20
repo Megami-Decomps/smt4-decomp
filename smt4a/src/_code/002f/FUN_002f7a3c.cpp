@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002e9318(int *);
-int FUN_002e9598(unsigned int, int *);
+int onlineStringDestroy(int *);
+int onlineStringAssign(unsigned int, int *);
 int FUN_00310e7a(int *, unsigned int, unsigned int);
 
-/* Supplied declaration required: FUN_002e9318. */
-/* Supplied declaration required: FUN_002e9598. */
+/* Supplied declaration required: onlineStringDestroy. */
+/* Supplied declaration required: onlineStringAssign. */
 /* Supplied declaration required: FUN_00310e7a. */
 
 
@@ -23,8 +23,8 @@ unsigned int FUN_002f7a3c(unsigned int param_1,unsigned int param_2,unsigned int
   uStack_10 = param_3;
   uStack_c = param_4;
   FUN_00310e7a(&uStack_10,param_1,param_2);
-  FUN_002e9598(param_1,&uStack_10);
-  FUN_002e9318(&uStack_10);
+  onlineStringAssign(param_1,&uStack_10);
+  onlineStringDestroy(&uStack_10);
   return param_1;
 }
 

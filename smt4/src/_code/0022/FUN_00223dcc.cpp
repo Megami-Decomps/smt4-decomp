@@ -4,18 +4,18 @@
 
 extern "C" {
 
-int FUN_00152bec(int);
-int FUN_00263588(int);
+int asdMdlManagerMarkDestroy(int);
+int gfxObjectDestroy(int);
 int statusCameraDestroy(void);
 int FUN_00294834(int, int, int, int, int, int);
 int FUN_002958f8(int, int);
 int FUN_0029be5c(int, int);
 int FUN_0029c2cc(int, int);
-int FUN_002a46d8(...);
+int fileSlotFree(...);
 int scrScriptProcessDestroy(int);
-int FUN_002a72c0(int);
+int asdModelSlotRelease(int);
 int asdMdlManagerDestroy(int);
-int FUN_002b2368(...);
+int asdMemFreeNonNull(...);
 int FUN_002c3f5c(...);
 int FUN_002c40f8(int *, int [6], int, int, unsigned int, unsigned int);
 int asdMemFree(...);
@@ -38,11 +38,11 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } void_stack;
 
-extern int *DAT_0043dd68; /* 0x43dd68 */
+extern int *g_unite; /* 0x43dd68 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_00152bec. */
-/* Supplied declaration required: FUN_00263588. */
+/* Supplied declaration required: asdMdlManagerMarkDestroy. */
+/* Supplied declaration required: gfxObjectDestroy. */
 /* Supplied declaration required: statusCameraDestroy. */
 extern int FUN_002907a8(void);
 /* Supplied declaration required: FUN_00294834. */
@@ -50,11 +50,11 @@ extern int FUN_002907a8(void);
 /* Supplied declaration required: FUN_0029be5c. */
 /* Supplied declaration required: FUN_0029c2cc. */
 extern int lmapSceneGetScript(void);
-/* Supplied declaration required: FUN_002a46d8. */
+/* Supplied declaration required: fileSlotFree. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: FUN_002a72c0. */
+/* Supplied declaration required: asdModelSlotRelease. */
 /* Supplied declaration required: asdMdlManagerDestroy. */
-/* Supplied declaration required: FUN_002b2368. */
+/* Supplied declaration required: asdMemFreeNonNull. */
 extern int lmapMainIsRunning(void);
 /* Supplied declaration required: FUN_002c3f5c. */
 /* Supplied declaration required: FUN_002c40f8. */
@@ -78,10 +78,10 @@ void FUN_00223dcc(void)
   int *piVar4;
   int temp_v1 [6];
   
-  piVar1 = DAT_0043dd68;
-  if (DAT_0043dd68 != (int *)0x0) {
-    piVar4 = DAT_0043dd68 + 0x257a;
-    *(unsigned char *)(DAT_0043dd68 + 0x2578) = 1;
+  piVar1 = g_unite;
+  if (g_unite != (int *)0x0) {
+    piVar4 = g_unite + 0x257a;
+    *(unsigned char *)(g_unite + 0x2578) = 1;
     temp_v1[0] = *piVar4;
     piVar2 = temp_v1 + 1;
     FUN_002c40f8(piVar2,temp_v1,1,0,0xffffffff,0xffffffff);
@@ -99,7 +99,7 @@ void FUN_00223dcc(void)
     temp_v0 = *piVar2;
     if (temp_v0 != 0) {
       FUN_002c3f5c();
-      FUN_002b2368(temp_v0);
+      asdMemFreeNonNull(temp_v0);
     }
     *piVar2 = 0;
     asdMemFree(piVar1[0x257c]);
@@ -117,17 +117,17 @@ void FUN_00223dcc(void)
       FUN_00294834(200,200,200,0x82,0x82,0x82);
     }
     else {
-      FUN_002a72c0(0);
+      asdModelSlotRelease(0);
     }
     piVar2 = piVar1 + 0x2574;
     FUN_0029c2cc(*piVar2,0);
-    FUN_00263588(*piVar2);
+    gfxObjectDestroy(*piVar2);
     *piVar2 = 0;
     statusCameraDestroy();
     piVar2 = piVar1 + 0x2572;
-    FUN_00152bec(*piVar2);
+    asdMdlManagerMarkDestroy(*piVar2);
     piVar4 = piVar1 + 0x2573;
-    FUN_00152bec(*piVar4);
+    asdMdlManagerMarkDestroy(*piVar4);
     asdMdlManagerDestroy(*piVar2);
     asdMdlManagerDestroy(*piVar4);
     *piVar2 = 0;
@@ -144,14 +144,14 @@ void FUN_00223dcc(void)
     asdMemFree(piVar1[0x109]);
     if (*piVar1 != 0) {
       bufferArrayFree();
-      FUN_002b2368();
+      asdMemFreeNonNull();
     }
     *piVar1 = 0;
     jobStop(piVar1[0xfe],0);
     asdMemFree(piVar1);
-    DAT_0043dd68 = (int *)0x0;
-    FUN_002a46d8(0x24);
-    FUN_002a46d8(0x22);
+    g_unite = (int *)0x0;
+    fileSlotFree(0x24);
+    fileSlotFree(0x22);
     mapMainCallIfFlag(1);
     return;
   }

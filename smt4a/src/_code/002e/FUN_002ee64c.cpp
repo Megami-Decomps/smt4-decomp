@@ -6,11 +6,11 @@ extern "C" {
 
 int FUN_002e6e34(unsigned char [16], int);
 int FUN_002e6e5c(unsigned char [16]);
-int FUN_002e9318(unsigned char [8]);
+int onlineStringDestroy(unsigned char [8]);
 int FUN_002ee938(...);
 int FUN_002ee978(...);
 int FUN_002fe1b8(int, unsigned int);
-int FUN_002fe35c(int *);
+int mapIteratorNext6(int *);
 
 /* stack frame of param_2: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -23,13 +23,13 @@ typedef struct {
 extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-/* Supplied declaration required: FUN_002e9318. */
+/* Supplied declaration required: onlineStringDestroy. */
 extern int wordRefsDiffer_002ee774(unsigned int **, unsigned int *);
 /* Supplied declaration required: FUN_002ee938. */
 extern int FUN_002ee96a(unsigned char *, unsigned char *);
 /* Supplied declaration required: FUN_002ee978. */
 /* Supplied declaration required: FUN_002fe1b8. */
-/* Supplied declaration required: FUN_002fe35c. */
+/* Supplied declaration required: mapIteratorNext6. */
 extern int wordRefsDiffer_002fe38c(int *, unsigned int *);
 
 
@@ -85,8 +85,8 @@ unsigned char FUN_002ee64c(int param_1,unsigned int param_2)
         else {
           temp_v2 = 0;
         }
-        FUN_002e9318(temp_v6);
-        FUN_002e9318(temp_v9);
+        onlineStringDestroy(temp_v6);
+        onlineStringDestroy(temp_v9);
       } while (!temp_v2);
     }
     FUN_002e6e5c(temp_v3);
@@ -117,14 +117,14 @@ LAB_002ee75a:
   else {
     temp_v2 = 0;
   }
-  FUN_002e9318(temp_v6);
-  FUN_002e9318(temp_v9);
+  onlineStringDestroy(temp_v6);
+  onlineStringDestroy(temp_v9);
   if (temp_v2) {
     FUN_002e6e5c(temp_v3);
     temp_v2 = 0;
     return temp_v2;
   }
-  FUN_002fe35c(&temp_v5);
+  mapIteratorNext6(&temp_v5);
   goto LAB_002ee75a;
 }
 

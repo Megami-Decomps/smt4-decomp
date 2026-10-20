@@ -3,7 +3,7 @@
 extern "C" {
 
 void FUN_002e9f00(u8 *member, s32 value);
-u32 *FUN_002fafba(u32 *slot);
+u32 *ptrTake(u32 *slot);
 
 typedef struct Object Object;
 typedef struct ObjectVtbl {
@@ -30,11 +30,11 @@ void FUN_002faf62(Owner *owner)
     Object *object;
 
     if ((owner->slotA != 0) &&
-        (object = (Object *)FUN_002fafba(&owner->slotA), object != NULL)) {
+        (object = (Object *)ptrTake(&owner->slotA), object != NULL)) {
         object->vtbl->destroy(object);
     }
     if ((owner->slotB != 0) &&
-        (object = (Object *)FUN_002fafba(&owner->slotB), object != NULL)) {
+        (object = (Object *)ptrTake(&owner->slotB), object != NULL)) {
         object->vtbl->destroy(object);
     }
     FUN_002e9f00(owner->memberD0, 4);

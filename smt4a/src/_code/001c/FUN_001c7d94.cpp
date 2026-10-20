@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_2_stack;
 
-extern unsigned int FUN_001a2a5c(void);
+extern unsigned int nn_gxlow_CTR_GetGpu(void);
 /* Supplied declaration required: FUN_001cdb78. */
 
 
@@ -21,7 +21,7 @@ void FUN_001c7d94(unsigned int param_1,unsigned int param_2)
 /* irregular: 1 native warning(s); review required */
   unsigned int temp_v0;
   
-  temp_v0 = FUN_001a2a5c();
+  temp_v0 = nn_gxlow_CTR_GetGpu();
   FUN_001cdb78(temp_v0,0xffff8001,param_1,param_2);
   return;
 }

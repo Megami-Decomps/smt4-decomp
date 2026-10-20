@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_0027f958(float *, float [3], int);
 int FUN_00281e34(void);
-int FUN_002b8cec(...);
-int FUN_002bfde4(...);
+int padIsButtonRepeat(...);
+int padIsButtonPressed(...);
 int FUN_002c15fc(...);
 int VectorSignedToFloat(int, int);
 
@@ -46,8 +46,8 @@ extern signed char DAT_00465288; /* 0x465288 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0027f958. */
 /* Supplied declaration required: FUN_00281e34. */
-/* Supplied declaration required: FUN_002b8cec. */
-/* Supplied declaration required: FUN_002bfde4. */
+/* Supplied declaration required: padIsButtonRepeat. */
+/* Supplied declaration required: padIsButtonPressed. */
 /* Supplied declaration required: FUN_002c15fc. */
 
 
@@ -83,8 +83,8 @@ unsigned int FUN_00254a68(int param_1,int param_2,int param_3)
       }
     }
     else {
-      temp_v4 = FUN_002b8cec();
-      temp_v3 = FUN_002b8cec(param_2);
+      temp_v4 = padIsButtonRepeat();
+      temp_v3 = padIsButtonRepeat(param_2);
       temp_v6 = FUN_002c15fc(param_1);
       if ((temp_v6 != 0) && (temp_v6 = FUN_002c15fc(param_2), temp_v6 != 0)) {
         temp_v3 = 0;
@@ -93,8 +93,8 @@ unsigned int FUN_00254a68(int param_1,int param_2,int param_3)
     }
   }
   else {
-    temp_v4 = FUN_002bfde4();
-    temp_v3 = FUN_002bfde4(param_2);
+    temp_v4 = padIsButtonPressed();
+    temp_v3 = padIsButtonPressed(param_2);
     temp_v5 = temp_v4 | temp_v3;
   }
   if ((!(param_1 == 0xc || param_1 == 0xd)) && (!(param_1 == 0xe || param_1 == 0xf))) {

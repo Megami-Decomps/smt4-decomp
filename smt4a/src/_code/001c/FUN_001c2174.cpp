@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_4_stack;
 
-extern unsigned char DAT_00647708; /* 0x647708 */
+extern unsigned char g_nnSndMasterManagerImpl; /* 0x647708 */
 
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
 #define ROMWRIGHT_PIECE_4_4_DEFINED
@@ -61,12 +61,12 @@ unsigned int FUN_001c2174(int param_1,int param_2,int param_3,unsigned int param
     }
     *(unsigned int *)(temp_v0 + 0x6433b4) = 0;
     *(unsigned int *)(temp_v0 + 0x6433b8) = 0;
-    FUN_001cd658(&DAT_00647708,temp_v1,0,param_4,temp_v2,unaff_r6);
+    FUN_001cd658(&g_nnSndMasterManagerImpl,temp_v1,0,param_4,temp_v2,unaff_r6);
     nn_os_CriticalSection_Leave(0x6433c4);
     nn_os_CriticalSection_Enter(0x6433c4);
     *(int *)(temp_v0 + 0x6433b8) = param_3;
     nn_snd_CTR_FxReverb_Initialize(param_3);
-    FUN_001cd658(&DAT_00647708,temp_v1,1);
+    FUN_001cd658(&g_nnSndMasterManagerImpl,temp_v1,1);
     nn_os_CriticalSection_Leave(0x6433c4);
     return 1;
   }

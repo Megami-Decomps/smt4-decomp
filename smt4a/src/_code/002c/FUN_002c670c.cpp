@@ -38,7 +38,7 @@ extern unsigned char LAB_002c6e70; /* 0x2c6e70 */
 extern unsigned char LAB_002c6fd4; /* 0x2c6fd4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_00162e8c(void);
+extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_00281b94. */
 /* Supplied declaration required: FUN_002b7a78. */
 /* Supplied declaration required: FUN_003126a0. */
@@ -61,7 +61,7 @@ void FUN_002c670c(int param_1)
   int temp_v5;
   unsigned int in_fpscr;
   
-  temp_v1 = FUN_00162e8c();
+  temp_v1 = gameFlagsGetBlock();
   temp_v2 = FUN_00376f94();
   if (temp_v2 >= 100) {
     FUN_00313974((int)*(float *)(temp_v1 + 0x15c4));

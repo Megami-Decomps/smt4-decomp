@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00188b60(unsigned int *);
+int nn_os_CriticalSection_Initialize(unsigned int *);
 int emptyStub_002f4370(unsigned char **, int, int);
 int FUN_002f5020(unsigned char *, unsigned char *, int, int);
 
@@ -51,7 +51,7 @@ extern unsigned int DAT_0062d3fc; /* 0x62d3fc */
 extern unsigned int DAT_0062d400; /* 0x62d400 */
 extern unsigned char DAT_0062d410; /* 0x62d410 */
 
-/* Supplied declaration required: FUN_00188b60. */
+/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
 /* Supplied declaration required: emptyStub_002f4370. */
 /* Supplied declaration required: FUN_002f5020. */
 extern void nn_fnd_UnitHeapBase_Initialize(unsigned int, unsigned int, unsigned int, unsigned int, int, unsigned int);
@@ -64,7 +64,7 @@ void FUN_00511c60(void)
   FUN_002f5020(&DAT_0062d410,&LAB_0042b478,0x10,0x20);
   DAT_005893a8 = 0;
   DAT_0062d400 = 0;
-  FUN_00188b60(&DAT_0062d400);
+  nn_os_CriticalSection_Initialize(&DAT_0062d400);
   DAT_0062d350 = 0;
   DAT_0062d354 = 0;
   DAT_0062d358 = 0;
@@ -76,7 +76,7 @@ void FUN_00511c60(void)
   DAT_0062d384 = 0xffffffff;
   DAT_0062d34c = &DAT_00558438;
   nn_fnd_UnitHeapBase_Initialize((unsigned int)&DAT_0062d34c,0x10,0x56d6c0,0x100,4,0);
-  FUN_00188b60(&DAT_0062d37c);
+  nn_os_CriticalSection_Initialize(&DAT_0062d37c);
   DAT_0062d38c = 0;
   DAT_0062d390 = 0;
   DAT_0062d394 = 0;
@@ -88,7 +88,7 @@ void FUN_00511c60(void)
   DAT_0062d3c0 = 0xffffffff;
   DAT_0062d388 = &DAT_00558438;
   nn_fnd_UnitHeapBase_Initialize((unsigned int)&DAT_0062d388,8,0x56d7c0,0x100,4,0);
-  FUN_00188b60(&DAT_0062d3b8);
+  nn_os_CriticalSection_Initialize(&DAT_0062d3b8);
   DAT_0062d3c8 = 0;
   DAT_0062d3cc = 0;
   DAT_0062d3d0 = 0;
@@ -100,7 +100,7 @@ void FUN_00511c60(void)
   DAT_0062d3fc = 0xffffffff;
   DAT_0062d3c4 = &DAT_00558438;
   nn_fnd_UnitHeapBase_Initialize((unsigned int)&DAT_0062d3c4,8,0x56d8c0,0x80,4,0);
-  FUN_00188b60(&DAT_0062d3f4);
+  nn_os_CriticalSection_Initialize(&DAT_0062d3f4);
   emptyStub_002f4370(&DAT_0062d3c4,0x1aa330,0x100000);
   return;
 }

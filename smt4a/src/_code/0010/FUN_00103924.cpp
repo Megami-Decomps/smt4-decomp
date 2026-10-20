@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_00103afc(unsigned int, unsigned int, unsigned int, int);
-int FUN_002e92dc(unsigned short *, unsigned char *);
-int FUN_002e9318(unsigned char [8]);
+int wstrstrU16(unsigned short *, unsigned char *);
+int onlineStringDestroy(unsigned char [8]);
 int FUN_002e934e(unsigned short *, int, int);
 int FUN_002e93c2(unsigned int, unsigned int);
 
@@ -19,11 +19,11 @@ typedef struct {
 extern unsigned char LAB_001039cc; /* 0x1039cc */
 
 /* Supplied declaration required: FUN_00103afc. */
-/* Supplied declaration required: FUN_002e92dc. */
-extern int FUN_002e92e4(unsigned short *, char *);
-extern unsigned int FUN_002e9300(unsigned char *, unsigned short *);
-/* Supplied declaration required: FUN_002e9318. */
-extern unsigned int FUN_002e9334(unsigned int, unsigned short *);
+/* Supplied declaration required: wstrstrU16. */
+extern int wstrcmpU16(unsigned short *, char *);
+extern unsigned int onlineStringConstruct(unsigned char *, unsigned short *);
+/* Supplied declaration required: onlineStringDestroy. */
+extern unsigned int onlineUrlSetHost(unsigned int, unsigned short *);
 /* Supplied declaration required: FUN_002e934e. */
 /* Supplied declaration required: FUN_002e93c2. */
 
@@ -47,22 +47,22 @@ unsigned int FUN_00103924(unsigned int param_1,unsigned short *param_2,int param
   temp_v6 = param_1;
   puStack_1c = param_2;
   temp_v7 = param_3;
-  puVar1 = (unsigned short *)FUN_002e92dc(param_2,&LAB_001039cc);
+  puVar1 = (unsigned short *)wstrstrU16(param_2,&LAB_001039cc);
   if ((((puVar1 == (unsigned short *)0x0) || (param_2 == puVar1)) ||
       (puVar5 = puVar1 + 1, puVar1[1] == 0)) ||
-     (temp_v0 = FUN_002e92dc(puVar5,&LAB_001039cc), temp_v0 != 0)) {
+     (temp_v0 = wstrstrU16(puVar5,&LAB_001039cc), temp_v0 != 0)) {
     return 0;
   }
   temp_v3 = 1;
   *puVar1 = 0;
   if (temp_v7 == 0) {
-    temp_v0 = FUN_002e92e4(param_2,"address");
+    temp_v0 = wstrcmpU16(param_2,"address");
     if (temp_v0 == 0) {
-      temp_v3 = FUN_002e9334(temp_v6,puVar5);
+      temp_v3 = onlineUrlSetHost(temp_v6,puVar5);
       *puVar1 = 0x3d;
       return temp_v3;
     }
-    temp_v0 = FUN_002e92e4(param_2,"port");
+    temp_v0 = wstrcmpU16(param_2,"port");
     if (temp_v0 == 0) {
       FUN_002e934e(puVar5,0,10);
       FUN_002e93c2(temp_v6,(unsigned int)puVar5 & 0xffff);
@@ -70,11 +70,11 @@ unsigned int FUN_00103924(unsigned int param_1,unsigned short *param_2,int param
       return temp_v3;
     }
   }
-  temp_v1 = FUN_002e9300(temp_v5,puVar5);
-  temp_v2 = FUN_002e9300(temp_v4,param_2);
+  temp_v1 = onlineStringConstruct(temp_v5,puVar5);
+  temp_v2 = onlineStringConstruct(temp_v4,param_2);
   FUN_00103afc(temp_v6,temp_v2,temp_v1,temp_v7);
-  FUN_002e9318(temp_v4);
-  FUN_002e9318(temp_v5);
+  onlineStringDestroy(temp_v4);
+  onlineStringDestroy(temp_v5);
   *puVar1 = 0x3d;
   return temp_v3;
 }

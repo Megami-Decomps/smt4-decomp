@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern PartyBlockB *FUN_001ab940(void);
+extern PartyBlockB *gameFlagBlockGet(void);
 
 void partyEntrySetBit0AndFlag80(s32 index)
 {
-    PartyEntryB *entry = &FUN_001ab940()->e[index];
+    PartyEntryB *entry = &gameFlagBlockGet()->e[index];
 
     entry->bits |= 1;
     entry->flags |= 0x80;

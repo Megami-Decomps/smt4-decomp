@@ -4,11 +4,11 @@ extern "C" {
 
 int resourceListDestroy(void);
 int asdMemFree(void);
-int FUN_002e3328(int);
+int asdOperatorDelete(int);
 
 /* Supplied declaration required: resourceListDestroy. */
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_002e3328. */
+/* Supplied declaration required: asdOperatorDelete. */
 
 
 void itemTableClear(int *param_1)
@@ -29,7 +29,7 @@ void itemTableClear(int *param_1)
           resourceListDestroy();
           *(unsigned int *)(temp_v0 + 0xc) = 0;
         }
-        FUN_002e3328(temp_v0);
+        asdOperatorDelete(temp_v0);
         *(unsigned int *)(param_1[1] + unaff_r4 * 4) = 0;
       }
       unaff_r4 = unaff_r4 + 1;

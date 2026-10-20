@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_001641c4(void);
+int ifTouchRegionRemove(void);
 int asdMemFree(void);
-int FUN_0019a7f4(int, int);
+int asdTMTexTableReleaseNode(int, int);
 int scrScriptProcessDestroy(void);
 int FUN_0019de98(int, unsigned int);
-int FUN_001add24(int);
-int FUN_001aea28(unsigned int, unsigned int);
+int dataTableFree(int);
+int ptrListRemoveClearOwner(unsigned int, unsigned int);
 int FUN_002844e4(void);
 int FUN_002c1648(void);
 int FUN_002c85b0(int);
@@ -26,15 +26,15 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 
-/* Supplied declaration required: FUN_001641c4. */
+/* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_0019a7f4. */
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_0019de98. */
-/* Supplied declaration required: FUN_001add24. */
-/* Supplied declaration required: FUN_001aea28. */
+/* Supplied declaration required: dataTableFree. */
+/* Supplied declaration required: ptrListRemoveClearOwner. */
 /* Supplied declaration required: FUN_002844e4. */
 /* Supplied declaration required: FUN_002c1648. */
 /* Supplied declaration required: FUN_002c85b0. */
@@ -75,24 +75,24 @@ void FUN_00420b70(int param_1)
     asdMemFree();
     *(unsigned int *)(param_1 + 0x3c) = 0;
   }
-  FUN_0019a7f4(0x2b,0);
+  asdTMTexTableReleaseNode(0x2b,0);
   asdTMTexTableFreeEntry(0x2b);
   FUN_002c1648();
-  FUN_001add24(0x3d);
+  dataTableFree(0x3d);
   FUN_002844e4();
   if (*(int *)(param_1 + 0x54) != 0) {
     asdMemFree();
     *(unsigned int *)(param_1 + 0x54) = 0;
   }
   if (*(int *)(param_1 + 0x58) != 0) {
-    FUN_001aea28(DAT_0056fcc0,*(unsigned int *)(*(int *)(param_1 + 0x58) + 4));
+    ptrListRemoveClearOwner(g_handleRegistry,*(unsigned int *)(*(int *)(param_1 + 0x58) + 4));
     if (*(int **)(param_1 + 0x58) != (int *)0x0) {
       (**(romwright_code **)(**(int **)(param_1 + 0x58) + 4))(*(int **)(param_1 + 0x58));
       *(unsigned int *)(param_1 + 0x58) = 0;
     }
   }
   for (temp_v0 = 0; temp_v0 < *(int *)(param_1 + 0x448); temp_v0++) {
-    FUN_001641c4();
+    ifTouchRegionRemove();
   }
   *(unsigned int *)(param_1 + 0x448) = 0;
   fillThreeWordsWithByte(param_1 + 0x43c,0xffffffff);

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0023dc38(unsigned int *, int);
-int FUN_002b4670(void);
+int dataTable08Sub1GetRecord(void);
 int FUN_0033fe6c(int, int, int);
 int SCARRY4(unsigned int, int);
 
@@ -18,8 +18,8 @@ typedef struct {
 /* Supplied declaration required: FUN_0023dc38. */
 extern unsigned int FUN_0028d320(void);
 extern int btlGetMainState(void);
-extern int FUN_002a8764(void);
-/* Supplied declaration required: FUN_002b4670. */
+extern int gameGetSlotTable(void);
+/* Supplied declaration required: dataTable08Sub1GetRecord. */
 /* Supplied declaration required: FUN_0033fe6c. */
 
 
@@ -37,7 +37,7 @@ unsigned int FUN_0028cfd8(int param_1,unsigned int param_2,unsigned int param_3,
   int temp_v6;
   unsigned int temp_v7;
   
-  if ((param_1 != 0) && (temp_v7 = param_4, FUN_002b4670(), param_1 != 0)) {
+  if ((param_1 != 0) && (temp_v7 = param_4, dataTable08Sub1GetRecord(), param_1 != 0)) {
     if ((*(char *)(param_1 + 0x6d) != '\x02' && *(char *)(param_1 + 0x6d) != '\x03') ||
        (*(char *)(param_1 + 0x6b) != '\x01')) {
       return 2;
@@ -90,7 +90,7 @@ unsigned int FUN_0028cfd8(int param_1,unsigned int param_2,unsigned int param_3,
         temp_v6 = temp_v6 + 1;
         if (temp_v6 >= 4) {
           if ((*(unsigned char *)(param_1 + 0x6a) & 0x7f) == 1) {
-            temp_v1 = FUN_002a8764();
+            temp_v1 = gameGetSlotTable();
             temp_v6 = -1;
             if (*(unsigned char *)(temp_v1 + 0x910b) != 0xffffffff &&
                 !SCARRY4((unsigned int)*(unsigned char *)(temp_v1 + 0x910b),1)) {

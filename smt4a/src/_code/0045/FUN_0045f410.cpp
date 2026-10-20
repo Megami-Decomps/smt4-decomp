@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0017572c(int, int);
+int listAppendNode(int, int);
 int FUN_0019102c(int, int);
 
 typedef int romwright_code(...);
@@ -14,7 +14,7 @@ typedef struct {
 } param_2_stack;
 
 extern int FUN_00175678(void);
-/* Supplied declaration required: FUN_0017572c. */
+/* Supplied declaration required: listAppendNode. */
 /* Supplied declaration required: FUN_0019102c. */
 
 
@@ -34,7 +34,7 @@ void FUN_0045f410(int *param_1,unsigned char param_2)
   temp_v2 = (**(romwright_code **)(*param_1 + 0x20))(param_1);
   *(unsigned int *)(temp_v1 + 0x10) = temp_v2;
   *(unsigned char *)(temp_v1 + 0x15) = param_2;
-  FUN_0017572c(temp_v0,temp_v1);
+  listAppendNode(temp_v0,temp_v1);
   return;
 }
 

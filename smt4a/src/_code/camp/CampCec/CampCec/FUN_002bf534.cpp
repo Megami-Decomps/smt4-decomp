@@ -7,14 +7,14 @@ extern "C" {
 int FUN_002a6480(...);
 int FUN_0037b5e0(void);
 
-int FUN_0014384c(...);
+int asdTMTexTableLoadSprites(...);
 int asdProcessCreateSimple(unsigned char *, int, int, int);
 int taskCreateDraw(unsigned char *, int, int);
 int asdMemoryAllocTracked(int, int, int, int);
 int FUN_0019ea64(int);
 int FUN_001acf98(...);
 int cecProcessStart(void);
-int FUN_002316c8(int);
+int bgmRestart(int);
 int FUN_002804b0(...);
 int FUN_002a4664(...);
 int FUN_002a469c(void);
@@ -22,9 +22,9 @@ int FUN_002a4aa4(void);
 int FUN_002c0b10(...);
 int FUN_002c0b5c(...);
 int sysMemClear(void);
-int FUN_002e6dd0(...);
+int rt_aeabi_memclr(...);
 int cecProcessCall2(void);
-int FUN_0031f0a8(...);
+int gameDataBlocksSetFlagBits(...);
 int FUN_0032e25c(...);
 int FUN_00331380(int);
 int ownerSetName(...);
@@ -32,8 +32,8 @@ int FUN_00343d04(unsigned int *);
 int FUN_0035a074(...);
 int FUN_00387edc(...);
 int campCecDrawSetCreate(void);
-int FUN_003d2d34(int, int, int);
-int FUN_003f881c(...);
+int soundChannelRequestIfEnabled(int, int, int);
+int loadSlotRequestAsync(...);
 int FUN_004310c0(void);
 int nn_cfg_CTR_IsRestrictP2pCec(void);
 
@@ -68,24 +68,24 @@ extern int jobSceneWaitStep(...); /* 0x31934c */
 extern unsigned char LAB_003193a0; /* 0x3193a0 */
 extern unsigned char LAB_0035a2a4; /* 0x35a2a4 */
 extern int FUN_0036cfb0(...); /* 0x36cfb0 */
-extern unsigned char DAT_0057f110; /* 0x57f110 */
+extern unsigned char g_campCec; /* 0x57f110 */
 extern unsigned int *DAT_0057f114; /* 0x57f114 */
 
 #ifndef ROMWRIGHT_PIECE_2_2_DEFINED
 #define ROMWRIGHT_PIECE_2_2_DEFINED
 #define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
 #endif
-/* Supplied declaration required: FUN_0014384c. */
+/* Supplied declaration required: asdTMTexTableLoadSprites. */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0019ea64. */
-extern int FUN_001ab854(void);
-extern int FUN_001ab888(void);
+extern int gameGetSlotRecord(void);
+extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_001acf98. */
 /* Supplied declaration required: cecProcessStart. */
-/* Supplied declaration required: FUN_002316c8. */
+/* Supplied declaration required: bgmRestart. */
 extern unsigned char FUN_002391e0(void);
 /* Supplied declaration required: FUN_002804b0. */
 extern unsigned int FUN_002840ac(void);
@@ -100,11 +100,11 @@ extern unsigned char FUN_002a46d8(void);
 /* Supplied declaration required: FUN_002c0b5c. */
 extern int wstrlen(int);
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_002e6dd0. */
+/* Supplied declaration required: rt_aeabi_memclr. */
 extern int rt_memcmp(unsigned char *, unsigned int *, unsigned int);
 /* Supplied declaration required: cecProcessCall2. */
 extern unsigned char FUN_0031cee0(void);
-/* Supplied declaration required: FUN_0031f0a8. */
+/* Supplied declaration required: gameDataBlocksSetFlagBits. */
 /* Supplied declaration required: FUN_0032e25c. */
 extern unsigned int gameDataBlocksGetWord27E8C(void);
 /* Supplied declaration required: FUN_00331380. */
@@ -115,9 +115,9 @@ extern int FUN_00345388(unsigned int);
 /* Supplied declaration required: FUN_0037b5e0. */
 /* Supplied declaration required: FUN_00387edc. */
 /* Supplied declaration required: campCecDrawSetCreate. */
-/* Supplied declaration required: FUN_003d2d34. */
-/* Supplied declaration required: FUN_003f881c. */
-extern int FUN_003fd63c(unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: soundChannelRequestIfEnabled. */
+/* Supplied declaration required: loadSlotRequestAsync. */
+extern int gameFlagSetValue(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_004310c0. */
 extern int bitsAt60Test(int, unsigned int);
 /* Supplied declaration required: nn_cfg_CTR_IsRestrictP2pCec. */
@@ -185,7 +185,7 @@ void FUN_002bf534(int param_1)
   puVar4[0x68] = 0;
   *(unsigned char *)(puVar4 + 0x69) = 0;
   if (param_1 == 0) {
-    DAT_0057f110 = 0;
+    g_campCec = 0;
   }
   puVar4[2] = (unsigned int)FUN_002e2284;
   puVar4[3] = (unsigned int)&LAB_0035a2a4;
@@ -199,7 +199,7 @@ void FUN_002bf534(int param_1)
   puVar4[0xc] = (unsigned int)FUN_0036cfb0;
   puVar4[0xe] = (unsigned int)&LAB_003193a0;
   puVar4[0xf] = (unsigned int)jobSceneWaitStep;
-  temp_v2 = FUN_003fd63c(0x4ca,0,1);
+  temp_v2 = gameFlagSetValue(0x4ca,0,1);
   puVar4[0x5a] = 0;
   nn_cfg_CTR_IsRestrictP2pCec();
   if (temp_v2 != 0) {
@@ -228,17 +228,17 @@ void FUN_002bf534(int param_1)
   FUN_00331380(0);
   FUN_00343d04(DAT_0057f114 + 0x2c);
   if (param_1 == 0) {
-    FUN_002316c8(0);
-    FUN_003d2d34(0x1000049,0,0x3c);
+    bgmRestart(0);
+    soundChannelRequestIfEnabled(0x1000049,0,0x3c);
   }
   FUN_002804b0(&LAB_002bf9d0,puVar4 + 0x39,0);
   FUN_002804b0(&LAB_002bf9e4,puVar4 + 0x3a,0);
-  FUN_0014384c(0x2e);
+  asdTMTexTableLoadSprites(0x2e);
   FUN_001acf98(0x2e,0);
-  FUN_003f881c(0x4a,0);
-  temp_v2 = FUN_0018719c(0x581);
+  loadSlotRequestAsync(0x4a,0);
+  temp_v2 = gameFlagIsSet(0x581);
   if (temp_v2 != 0) {
-    FUN_0031f0a8(4,1);
+    gameDataBlocksSetFlagBits(4,1);
   }
   FUN_00387edc(DAT_0057f114 + 0x10);
   temp_v1 = FUN_0031cee0();
@@ -308,9 +308,9 @@ void FUN_002bf534(int param_1)
   temp_v3 = gameDataBlocksGetWord27E8C();
   DAT_0057f114[0x19] = temp_v3;
 LAB_002bfb8c:
-  temp_v2 = FUN_001ab888();
+  temp_v2 = gameGetSlotTable();
   temp_v7 = 0;
-  while (((*(char *)(temp_v2 + temp_v7 + 0x1c88) < '\0' || (temp_v4 = FUN_001ab854(), temp_v4 == 0)) ||
+  while (((*(char *)(temp_v2 + temp_v7 + 0x1c88) < '\0' || (temp_v4 = gameGetSlotRecord(), temp_v4 == 0)) ||
          (temp_v5 = bitsAt60Test(temp_v4,2), temp_v5 == 0))) {
     temp_v7 = temp_v7 + 1;
     if (temp_v7 >= 0x18) {
@@ -329,14 +329,14 @@ LAB_002bfc18:
       }
       temp_v2 = FUN_002a469c();
       if (temp_v2 == 0) {
-        temp_v2 = FUN_002e6dd0(DAT_0057f114 + 0x24,0x14);
+        temp_v2 = rt_aeabi_memclr(DAT_0057f114 + 0x24,0x14);
       }
       campCecDrawSetCreate();
       puVar4[0x5d] = temp_v2;
       FUN_0037b5e0();
       temp_v2 = 0;
       do {
-        FUN_002e6dd0(puVar4 + temp_v2 * 5 + 0x5e,0x14);
+        rt_aeabi_memclr(puVar4 + temp_v2 * 5 + 0x5e,0x14);
         temp_v7 = temp_v2 + 1;
         puVar4[temp_v2 * 5 + 0x5f] = 0x14a;
         temp_v2 = temp_v7;

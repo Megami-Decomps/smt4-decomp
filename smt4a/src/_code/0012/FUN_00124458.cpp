@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002e49c4(int, int, int, int);
+int rt_lmul(int, int, int, int);
 int FUN_002ecfe4(...);
 
-/* Supplied declaration required: FUN_002e49c4. */
+/* Supplied declaration required: rt_lmul. */
 /* Supplied declaration required: FUN_002ecfe4. */
 
 
@@ -20,7 +20,7 @@ void FUN_00124458(unsigned int param_1,unsigned int param_2)
   
   temp_v0 = FUN_002ecfe4();
   temp_v1 = FUN_002ecfe4(param_2);
-  FUN_002e49c4((int)(temp_v0 - temp_v1),(int)((unsigned long long)(temp_v0 - temp_v1) >> 0x20),1000,0);
+  rt_lmul((int)(temp_v0 - temp_v1),(int)((unsigned long long)(temp_v0 - temp_v1) >> 0x20),1000,0);
   return;
 }
 

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e342c(int, unsigned int);
+int libc_strcpy(int, unsigned int);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -13,7 +13,7 @@ typedef struct {
 
 extern int DAT_00580c94; /* 0x580c94 */
 
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 
 
 void FUN_003126a0(int param_1,unsigned int param_2,unsigned int param_3)
@@ -27,7 +27,7 @@ void FUN_003126a0(int param_1,unsigned int param_2,unsigned int param_3)
     do {
       if (*(int *)(temp_v0 * 0x17c + 0x5f33cc) == param_1) {
         *(unsigned int *)(temp_v0 * 0x17c + 0x5f33d4) = param_2;
-        FUN_002e342c(temp_v0 * 0x17c + 0x5f33d8,param_3);
+        libc_strcpy(temp_v0 * 0x17c + 0x5f33d8,param_3);
         return;
       }
       temp_v0 = temp_v0 + 1;

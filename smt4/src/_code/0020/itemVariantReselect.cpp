@@ -16,16 +16,16 @@ typedef struct Item {
 
 typedef struct Owner Owner;
 
-u32 FUN_00254484(void);
-u32 FUN_002ac068(Owner *owner, u32 index);
+u32 tbcrBlockGetPayload(void);
+u32 dataTableFileGetTable(Owner *owner, u32 index);
 Item *dataTableGetEntries(void);
 u32 dataTableGetCount(u32 arg);
 
 /* For each item of the owner's list that already has a variant set, re-selects the variant (1..count-1) whose id matches the item's id. */
 void itemVariantReselect(Owner *owner)
 {
-    u32 variantCount = FUN_00254484();
-    u32 base = FUN_002ac068(owner, 0);
+    u32 variantCount = tbcrBlockGetPayload();
+    u32 base = dataTableFileGetTable(owner, 0);
     Item *item = dataTableGetEntries();
     u32 itemCount = dataTableGetCount(base);
     u32 i;
@@ -37,7 +37,7 @@ void itemVariantReselect(Owner *owner)
             for (v = 1; v < variantCount; v++) {
                 Variant *variant;
 
-                FUN_002ac068(owner, v);
+                dataTableFileGetTable(owner, v);
                 variant = (Variant *)dataTableGetEntries();
                 if (variant->id == item->id) {
                     item->variant = v;

@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_002b06c4(void);
-int FUN_002b9024(void);
+int dataTable00FindById(void);
+int devilGetRecord(void);
 int VectorSignedToFloat(int, int);
 int VectorUnsignedToFloat(int, int);
 
@@ -16,10 +16,10 @@ extern int FUN_0023ea94(void);
 extern int randRange(unsigned int);
 extern int FUN_002542ec(int);
 extern int FUN_002973ec(void);
-extern int FUN_002a8764(void);
-/* Supplied declaration required: FUN_002b06c4. */
-extern int FUN_002b63ac(void);
-/* Supplied declaration required: FUN_002b9024. */
+extern int gameGetSlotTable(void);
+/* Supplied declaration required: dataTable00FindById. */
+extern int gameGetPlayerData(void);
+/* Supplied declaration required: devilGetRecord. */
 
 
 void FUN_00338cfc(int param_1,int param_2)
@@ -78,7 +78,7 @@ void FUN_00338cfc(int param_1,int param_2)
         temp_v4 = *(unsigned int *)(param_1 + temp_v7 * 4 + 200);
         if (temp_v4 != 0) {
           temp_v4 = temp_v4 & 0xffff;
-          FUN_002b9024();
+          devilGetRecord();
           if ((temp_v4 != 0) && (*(char *)(temp_v4 + 2) == '\'')) goto LAB_00338da0;
         }
         temp_v7 = temp_v7 + 1;
@@ -97,17 +97,17 @@ void FUN_00338cfc(int param_1,int param_2)
 LAB_00338da0:
     temp_v9 = 0.0f;
     temp_v10 = temp_v9;
-    temp_v7 = FUN_002b63ac();
+    temp_v7 = gameGetPlayerData();
     if ((*(unsigned short *)(temp_v7 + 0x72) & 2) == 0) {
-      temp_v7 = FUN_002b63ac();
+      temp_v7 = gameGetPlayerData();
       temp_v2 = *(short *)(temp_v7 + 0x26);
-      temp_v7 = FUN_002b63ac();
+      temp_v7 = gameGetPlayerData();
       temp_v9 = (float)VectorSignedToFloat((int)*(short *)(temp_v7 + 0x28) + (int)temp_v2,
                                           (unsigned char)(in_fpscr >> 0x16) & 3);
     }
     temp_v7 = 0;
     do {
-      temp_v6 = FUN_002a8764();
+      temp_v6 = gameGetSlotTable();
       if (-1 < *(char *)(temp_v6 + temp_v7 + 0x9108)) {
         temp_v6 = FUN_002542ec(temp_v7);
         temp_v1 = *(unsigned short *)(temp_v6 + 0x44);
@@ -130,7 +130,7 @@ LAB_00338da0:
       temp_v4 = *(unsigned int *)(param_1 + temp_v7 * 4 + 200);
       if (temp_v4 != 0) {
         temp_v4 = temp_v4 & 0xffff;
-        FUN_002b06c4();
+        dataTable00FindById();
         if (temp_v4 != 0) {
           temp_v6 = (unsigned int)*(unsigned short *)(temp_v4 + 0x14) + (unsigned int)*(unsigned short *)(temp_v4 + 0x12);
           temp_v8 = (float)VectorUnsignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);

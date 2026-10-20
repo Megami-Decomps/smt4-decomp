@@ -2,14 +2,14 @@
 
 extern "C" {
 
-int FUN_002523f0(void);
+int btlTalkBustUpDestroy(void);
 int FUN_00296774(int, int);
 int FUN_0029e788(void);
 int FUN_0029e874(int);
 int scrScriptProcessDestroy(unsigned int);
 int asdMemFree(unsigned int);
 
-/* Supplied declaration required: FUN_002523f0. */
+/* Supplied declaration required: btlTalkBustUpDestroy. */
 /* Supplied declaration required: FUN_00296774. */
 /* Supplied declaration required: FUN_0029e788. */
 /* Supplied declaration required: FUN_0029e874. */
@@ -25,7 +25,7 @@ unsigned int FUN_0029541c(int param_1)
   
   scrScriptProcessDestroy(*(unsigned int *)(param_1 + 0x3574));
   asdMemFree(*(unsigned int *)(param_1 + 0x3578));
-  FUN_002523f0();
+  btlTalkBustUpDestroy();
   *(unsigned char *)(param_1 + 0xd640) = 0;
   temp_v0 = *(int *)(param_1 + 0xcf78) + 1;
   *(int *)(param_1 + 0xcf78) = temp_v0;

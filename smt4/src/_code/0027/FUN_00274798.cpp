@@ -10,7 +10,7 @@ int FUN_00287aec(void);
 int FUN_00287b0c(void);
 int FUN_00287be4(void);
 int FUN_0028c618(unsigned int, int);
-int FUN_0028c640(unsigned int, int);
+int nodeSetTranslation(unsigned int, int);
 int FUN_00291e40(unsigned int);
 int FUN_002a5710(unsigned int);
 int FUN_002b2b64(unsigned int);
@@ -39,7 +39,7 @@ extern signed char DAT_0049f93e; /* 0x49f93e */
 /* Supplied declaration required: FUN_00287b0c. */
 /* Supplied declaration required: FUN_00287be4. */
 /* Supplied declaration required: FUN_0028c618. */
-/* Supplied declaration required: FUN_0028c640. */
+/* Supplied declaration required: nodeSetTranslation. */
 /* Supplied declaration required: FUN_00291e40. */
 /* Supplied declaration required: FUN_002a5710. */
 /* Supplied declaration required: FUN_002b2b64. */
@@ -256,7 +256,7 @@ LAB_002748b4:
                 temp_v8 = temp_v8 + 1;
               } while (temp_v8 < 0x40);
             }
-            FUN_0028c640(*(unsigned int *)(*(int *)(temp_v1 + 0x3c) + 8),0);
+            nodeSetTranslation(*(unsigned int *)(*(int *)(temp_v1 + 0x3c) + 8),0);
             temp_v8 = (int)temp_v13;
             FUN_0028c618(*(unsigned int *)(*(int *)(temp_v1 + 0x3c) + 8),0);
             if (*(int *)(*(int *)(*(int *)(temp_v1 + 0x3c) + 8) + 0x38) != *(int *)(temp_v1 + 0x2c)) {

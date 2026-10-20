@@ -7,9 +7,9 @@ extern "C" {
 int FUN_0023adf4(unsigned int, int, int);
 int FUN_0023e388(...);
 int FUN_0028c618(unsigned int, int);
-int FUN_0028c640(unsigned int, int, int);
+int nodeSetTranslation(unsigned int, int, int);
 int FUN_002929d8(unsigned char [48], int);
-int FUN_0031052c(unsigned int, int);
+int nodeCopyMatrixMarkDirty(unsigned int, int);
 int nn_math_ARMv6_MTX34CopyAsm(int, unsigned int *);
 int nn_math_ARMv6_MTX34MultAsm(int, unsigned char [48]);
 
@@ -37,10 +37,10 @@ extern unsigned int DAT_004efd98; /* 0x4efd98 */
 /* Supplied declaration required: FUN_0023adf4. */
 /* Supplied declaration required: FUN_0023e388. */
 /* Supplied declaration required: FUN_0028c618. */
-/* Supplied declaration required: FUN_0028c640. */
+/* Supplied declaration required: nodeSetTranslation. */
 /* Supplied declaration required: FUN_002929d8. */
 extern int __cxa_guard_acquire(unsigned int *);
-/* Supplied declaration required: FUN_0031052c. */
+/* Supplied declaration required: nodeCopyMatrixMarkDirty. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34MultAsm. */
 
@@ -62,7 +62,7 @@ void FUN_0034ad94(int param_1)
     puVar2 = *(unsigned int **)(param_1 + 4);
     *puVar2 = *puVar2 | 2;
     *(unsigned char *)(*(int *)(puVar2[2] + 0x2c) + 0x1f6) = 0;
-    FUN_0028c640(*(unsigned int *)(*(int *)(param_1 + 4) + 8),0,param_1 + 0x90);
+    nodeSetTranslation(*(unsigned int *)(*(int *)(param_1 + 4) + 8),0,param_1 + 0x90);
     FUN_0028c618(*(unsigned int *)(*(int *)(param_1 + 4) + 8),0);
     FUN_0023adf4(*(unsigned int *)(*(int *)(param_1 + 4) + 8),0,param_1 + 0xa8);
     return;
@@ -99,7 +99,7 @@ void FUN_0034ad94(int param_1)
   nn_math_ARMv6_MTX34MultAsm(param_1 + 0x60,temp_v1);
   FUN_0023e388(param_1 + 0x60,param_1 + 0xc);
   FUN_0023e388(param_1 + 0x60,param_1 + 0x18);
-  FUN_0031052c(*(unsigned int *)(*(int *)(param_1 + 4) + 8),param_1 + 0x60);
+  nodeCopyMatrixMarkDirty(*(unsigned int *)(*(int *)(param_1 + 4) + 8),param_1 + 0x60);
   return;
 }
 

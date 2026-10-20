@@ -9,7 +9,7 @@ int FUN_001233d4(unsigned int, unsigned int *);
 int asdGfxSetCmdBufferUnk38(unsigned char *);
 int asdGfxSetCmdBufferState(int, int);
 int FUN_00123560(void);
-int FUN_002bef70(unsigned int);
+int nngxBindCmdlist(unsigned int);
 int asdModelResetCommandBuffer(void);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -25,7 +25,7 @@ extern int DAT_004c632c; /* 0x4c632c */
 /* Supplied declaration required: asdGfxSetCmdBufferUnk38. */
 /* Supplied declaration required: asdGfxSetCmdBufferState. */
 /* Supplied declaration required: FUN_00123560. */
-/* Supplied declaration required: FUN_002bef70. */
+/* Supplied declaration required: nngxBindCmdlist. */
 /* Supplied declaration required: asdModelResetCommandBuffer. */
 
 
@@ -52,14 +52,14 @@ void FUN_002c2890(unsigned int *param_1,int param_2,unsigned int param_3,unsigne
   temp_v0 = 0;
   if (temp_v0 < (unsigned int)param_1[2]) {
     do {
-      FUN_002bef70(param_1[temp_v0]);
+      nngxBindCmdlist(param_1[temp_v0]);
       FUN_0012316c(param_1[3],param_1[4]);
       asdGfxSetCmdBufferState(0x200,0x300);
       asdModelResetCommandBuffer();
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < (unsigned int)param_1[2]);
   }
-  FUN_002bef70(*param_1);
+  nngxBindCmdlist(*param_1);
   FUN_00123560();
   asdGfxSetCmdBufferUnk38(&LAB_001192c4);
   if (DAT_004c632c != 0) {

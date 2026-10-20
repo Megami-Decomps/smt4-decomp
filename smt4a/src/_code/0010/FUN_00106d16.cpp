@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_001170c8(unsigned char *, unsigned char [24], unsigned int, unsigned int [2], int *);
-int FUN_002e7232(int);
+int sharedRefRelease(int);
 int FUN_002eac60(int *, unsigned int);
 int FUN_002eac8e(int *, unsigned int);
 int FUN_002ee524(...);
-int FUN_002ee54c(unsigned char [24]);
+int sharedRefHolderDestroy2(unsigned char [24]);
 
 typedef int romwright_code(...);
 /* stack frame of param_4: 3 slot(s), 12 byte(s) */
@@ -20,11 +20,11 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_001170c8. */
-/* Supplied declaration required: FUN_002e7232. */
+/* Supplied declaration required: sharedRefRelease. */
 /* Supplied declaration required: FUN_002eac60. */
 /* Supplied declaration required: FUN_002eac8e. */
 /* Supplied declaration required: FUN_002ee524. */
-/* Supplied declaration required: FUN_002ee54c. */
+/* Supplied declaration required: sharedRefHolderDestroy2. */
 
 
 unsigned int FUN_00106d16(int param_1,int param_2,unsigned int param_3,int *param_4)
@@ -52,13 +52,13 @@ unsigned int FUN_00106d16(int param_1,int param_2,unsigned int param_3,int *para
         FUN_002eac60(param_4,temp_v4[0]);
         (**(romwright_code **)(*param_4 + 0x8c))(param_4,temp_v3 + 0x34);
       }
-      FUN_002e7232(temp_v3);
-      FUN_002ee54c(temp_v2);
-      FUN_002ee54c(temp_v1);
+      sharedRefRelease(temp_v3);
+      sharedRefHolderDestroy2(temp_v2);
+      sharedRefHolderDestroy2(temp_v1);
       return 1;
     }
-    FUN_002ee54c(temp_v2);
-    FUN_002ee54c(temp_v1);
+    sharedRefHolderDestroy2(temp_v2);
+    sharedRefHolderDestroy2(temp_v1);
   }
   return 0;
 }

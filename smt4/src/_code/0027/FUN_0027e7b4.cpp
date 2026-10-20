@@ -14,12 +14,12 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_2_stack;
 
-extern int DAT_0043e128; /* 0x43e128 */
+extern int g_infoWin; /* 0x43e128 */
 
 /* Supplied declaration required: FUN_002592b8. */
 /* Supplied declaration required: FUN_00296ae8. */
 /* Supplied declaration required: timerStart. */
-extern int FUN_002beda4(int);
+extern int vec2GetXInt(int);
 
 
 void FUN_0027e7b4(int param_1,unsigned int param_2)
@@ -30,8 +30,8 @@ void FUN_0027e7b4(int param_1,unsigned int param_2)
   int temp_v1;
   float in_s0;
   
-  temp_v0 = DAT_0043e128;
-  *(unsigned char *)(DAT_0043e128 + 0x21) = 0;
+  temp_v0 = g_infoWin;
+  *(unsigned char *)(g_infoWin + 0x21) = 0;
   if (param_1 != 0) {
     *(unsigned char *)(temp_v0 + 0x21) = 1;
     FUN_00296ae8(*(unsigned int *)(temp_v0 + 0x1b8),3,0xffffffff,0,3,param_1,param_2);
@@ -44,7 +44,7 @@ void FUN_0027e7b4(int param_1,unsigned int param_2)
       *(unsigned char *)(temp_v0 + 0x22) = 0;
     }
     timerStart(temp_v0 + 0xd0,2,0);
-    temp_v1 = FUN_002beda4(temp_v0 + 0xd0);
+    temp_v1 = vec2GetXInt(temp_v0 + 0xd0);
     *(int *)(temp_v0 + 0x18) = temp_v1;
     *(int *)(temp_v0 + 0x1c) = temp_v1 + *(int *)(temp_v0 + 0x14) + 0x2a;
     if (*(int *)(temp_v0 + 8) == 3) {

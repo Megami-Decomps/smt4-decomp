@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_00480fc0(unsigned int, unsigned int);
+int flagValueSub(unsigned int, unsigned int);
 
 extern unsigned int FUN_001ba3d4(unsigned int);
-/* Supplied declaration required: FUN_00480fc0. */
+/* Supplied declaration required: flagValueSub. */
 
 
 unsigned int FUN_0035b0dc(void)
@@ -31,7 +31,7 @@ unsigned int FUN_0035b0dc(void)
     }
     if (!temp_v4 || temp_v3) {
       temp_v1 = FUN_001ba3d4(temp_v2);
-      FUN_00480fc0(temp_v2,temp_v1);
+      flagValueSub(temp_v2,temp_v1);
     }
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 0x7df);

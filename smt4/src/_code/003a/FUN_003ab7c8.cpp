@@ -11,8 +11,8 @@ int FUN_002bf818(int);
 extern int FUN_00241a44(void);
 extern int FUN_0026b564(void);
 extern int FUN_00295618(void);
-extern unsigned int FUN_002bed98(int);
-extern unsigned int FUN_002beda4(int);
+extern unsigned int vec2GetYInt(int);
+extern unsigned int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bf818. */
 
 
@@ -26,8 +26,8 @@ void FUN_003ab7c8(int param_1)
   
   temp_v2 = param_1 + 0x188;
   FUN_002bf818(temp_v2);
-  temp_v0 = FUN_002bed98(temp_v2);
-  temp_v1 = FUN_002beda4(temp_v2);
+  temp_v0 = vec2GetYInt(temp_v2);
+  temp_v1 = vec2GetXInt(temp_v2);
   FUN_00231240(param_1 + 200,temp_v1,temp_v0);
   if ((((*(char *)(param_1 + 0x212) != '\0') && (temp_v2 = FUN_0026b564(), temp_v2 != 0)) &&
       (temp_v2 = FUN_00241a44(), temp_v2 != 0)) && (temp_v2 = FUN_00295618(), temp_v2 != 0)) {

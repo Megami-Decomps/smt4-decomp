@@ -8,7 +8,7 @@ int asdTMTexTableLoadTmx(int, int);
 int FUN_0014e188(...);
 int FUN_001505ac(int, unsigned char *, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
 int FUN_001527d8(unsigned int, unsigned int);
-int FUN_001846d0(...);
+int uiSpriteSelectAnim(...);
 int FUN_001acf98(int, int);
 int FUN_002804b0(...);
 int sysMemClear(int, int);
@@ -35,7 +35,7 @@ extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: FUN_001505ac. */
 /* Supplied declaration required: FUN_001527d8. */
-/* Supplied declaration required: FUN_001846d0. */
+/* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: FUN_001acf98. */
 /* Supplied declaration required: FUN_002804b0. */
 /* Supplied declaration required: sysMemClear. */
@@ -71,13 +71,13 @@ void FUN_0049d3f0(int param_1)
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(param_1 + 0x21c);
   FUN_001505ac(param_1 + 0x21c,&DAT_0052cd2c,0x24,&DAT_0052cd50,0x48,0,0,0,0,&DAT_0052cd98,0x150);
   FUN_0014e188(param_1 + 0x23c,0x33,0,param_1 + 0x21c,0xc9);
-  FUN_001846d0(param_1 + 0x23c,0);
+  uiSpriteSelectAnim(param_1 + 0x23c,0);
   FUN_0014e188(param_1 + 0x2c8,0x33,0,param_1 + 0x21c,0xc9);
-  FUN_001846d0(param_1 + 0x2c8,0);
+  uiSpriteSelectAnim(param_1 + 0x2c8,0);
   FUN_0014e188(param_1 + 0x354,0x33,0,param_1 + 0x21c,0xc9);
-  FUN_001846d0(param_1 + 0x354,2);
+  uiSpriteSelectAnim(param_1 + 0x354,2);
   FUN_0014e188(param_1 + 0x3e0,0x33,0,param_1 + 0x21c,0xc9);
-  FUN_001846d0(param_1 + 0x3e0,3);
+  uiSpriteSelectAnim(param_1 + 0x3e0,3);
   return;
 }
 

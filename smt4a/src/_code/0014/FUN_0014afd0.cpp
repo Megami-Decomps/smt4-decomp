@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_00169310(void);
-int FUN_0019a840(void);
+int asdTextureSetImage(void);
 
 /* Supplied declaration required: FUN_00169310. */
-extern int FUN_001861c4(void);
-/* Supplied declaration required: FUN_0019a840. */
+extern int asdTMTexTableGetNode(void);
+/* Supplied declaration required: asdTextureSetImage. */
 
 
 int FUN_0014afd0(void)
@@ -18,13 +18,13 @@ int FUN_0014afd0(void)
 /* irregular: 2 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_001861c4();
+  temp_v0 = asdTMTexTableGetNode();
   if (temp_v0 != 0) {
     FUN_00169310();
     if (*(int *)(temp_v0 + 8) != 0) {
       *(unsigned int *)(*(int *)(temp_v0 + 8) + 8) = 0x10000;
       if (*(int *)(temp_v0 + 8) != 0) {
-        FUN_0019a840();
+        asdTextureSetImage();
         *(unsigned int *)(temp_v0 + 0x10) = *(unsigned int *)(temp_v0 + 0x10) | 4;
       }
     }

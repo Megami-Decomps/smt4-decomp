@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002e6e14(unsigned int);
+int asdOperatorDeleteArray(unsigned int);
 
 typedef int romwright_code(...);
 extern unsigned char DAT_0055a4c0; /* 0x55a4c0 */
 extern unsigned char DAT_0055ac40; /* 0x55ac40 */
 
-/* Supplied declaration required: FUN_002e6e14. */
-extern int FUN_002e9318(int);
+/* Supplied declaration required: asdOperatorDeleteArray. */
+extern int onlineStringDestroy(int);
 extern int FUN_003106d0(unsigned int *);
 
 
@@ -28,23 +28,23 @@ int FUN_0043378c(unsigned int *param_1)
   for (puVar2 = (unsigned int *)param_1[0x24]; puVar2 != puVar3; puVar2 = puVar2 + 2) {
     (**(romwright_code **)*puVar2)(puVar2);
   }
-  FUN_002e6e14(param_1[0x24]);
+  asdOperatorDeleteArray(param_1[0x24]);
   puVar3 = (unsigned int *)param_1[0x1f];
   for (puVar2 = (unsigned int *)param_1[0x1e]; puVar2 != puVar3; puVar2 = puVar2 + 10) {
     (**(romwright_code **)*puVar2)(puVar2);
   }
-  FUN_002e6e14(param_1[0x1e]);
+  asdOperatorDeleteArray(param_1[0x1e]);
   puVar3 = (unsigned int *)param_1[0x1c];
   for (puVar2 = (unsigned int *)param_1[0x1b]; puVar2 != puVar3; puVar2 = puVar2 + 2) {
     (**(romwright_code **)*puVar2)(puVar2);
   }
-  FUN_002e6e14(param_1[0x1b]);
+  asdOperatorDeleteArray(param_1[0x1b]);
   param_1[0x13] = (unsigned int)&DAT_0055a4c0;
-  FUN_002e6e14(param_1[0x15]);
+  asdOperatorDeleteArray(param_1[0x15]);
   param_1[0xe] = (unsigned int)&DAT_0055a4c0;
-  FUN_002e6e14(param_1[0x10]);
+  asdOperatorDeleteArray(param_1[0x10]);
   temp_v0 = FUN_003106d0(param_1 + 6);
-  temp_v0 = FUN_002e9318(temp_v0 - 0xc);
+  temp_v0 = onlineStringDestroy(temp_v0 - 0xc);
   return temp_v0 - 0xc;
 }
 

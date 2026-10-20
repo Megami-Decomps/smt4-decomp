@@ -18,7 +18,7 @@ extern int FUN_001b1fb8(...); /* 0x1b1fb8 */
 
 /* Supplied declaration required: FUN_00191548. */
 /* Supplied declaration required: FUN_001b2040. */
-extern int FUN_001c2484(void);
+extern int nw_snd_internal_driver_VoiceManager_GetInstance(void);
 /* Supplied declaration required: FUN_001cbf64. */
 extern int FUN_004626dc(void);
 /* Supplied declaration required: FUN_004669c8. */
@@ -36,7 +36,7 @@ int FUN_00466478(unsigned int param_1,unsigned int param_2,unsigned int param_3,
   temp_v0 = FUN_004626dc();
   if (temp_v0 != 0) {
     *(unsigned char *)(temp_v0 + 0x13a) = 1;
-    temp_v1 = FUN_001c2484();
+    temp_v1 = nw_snd_internal_driver_VoiceManager_GetInstance();
     FUN_001cbf64(temp_v1,param_1,param_2,FUN_001b1fb8,temp_v0);
     if (temp_v1 == 0) {
       temp_v2 = FUN_00191548();

@@ -17,7 +17,7 @@ int VectorUnsignedToFloat(unsigned int, int);
 /* Supplied declaration required: FUN_0013c1ec. */
 extern unsigned int FUN_00145868(void);
 extern unsigned int scrGetArg(unsigned int);
-extern int FUN_002360dc(unsigned int);
+extern int scrGetArgString(unsigned int);
 /* Supplied declaration required: FUN_002bf09c. */
 /* Supplied declaration required: scrSetResult. */
 extern unsigned int FUN_003d2150(void);
@@ -41,7 +41,7 @@ void FUN_00348b68(void)
   temp_v5 = (float)VectorUnsignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v4 = VectorFloatToUnsigned(temp_v3 * temp_v5 * 0.0125f,3);
   FUN_0013c1ec(temp_v4 & 0xff);
-  temp_v2 = FUN_002360dc(0);
+  temp_v2 = scrGetArgString(0);
   FUN_002bf09c();
   if (-1 < temp_v2) {
     temp_v0 = FUN_003d2150();

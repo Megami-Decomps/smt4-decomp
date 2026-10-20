@@ -35,16 +35,16 @@ extern int FUN_001156fc(int);
 extern int FUN_001210b0(int);
 /* Supplied declaration required: FUN_001212a0. */
 extern int FUN_00121328(int);
-extern int FUN_002e760a(unsigned int);
-extern unsigned int FUN_002ea714(void);
+extern int operatorNew(unsigned int);
+extern unsigned int onlineGetActiveLock(void);
 extern unsigned int FUN_002eb56c(void);
 /* Supplied declaration required: FUN_002ecef0. */
 extern int FUN_002f1858(int, unsigned char *, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002f3024. */
 /* Supplied declaration required: FUN_002f8d9c. */
-extern int FUN_002f9e5c(unsigned int *);
+extern int vectorInitEmpty5(unsigned int *);
 /* Supplied declaration required: FUN_002f9e68. */
-extern int FUN_002f9ef0(int);
+extern int clearWords2(int);
 
 
 int FUN_0010eb10(unsigned int *param_1)
@@ -60,10 +60,10 @@ int FUN_0010eb10(unsigned int *param_1)
   FUN_0010a3a0();
   *param_1 = (unsigned int)&DAT_0055918c;
   *(unsigned char *)(param_1 + 0x52) = 0;
-  temp_v0 = FUN_002f9e5c(param_1 + 0x59);
+  temp_v0 = vectorInitEmpty5(param_1 + 0x59);
   FUN_002f9e68(temp_v0,2);
   temp_v0 = FUN_001156fc(temp_v0 + 0xc);
-  temp_v0 = FUN_002f9ef0(temp_v0 + 0x5c);
+  temp_v0 = clearWords2(temp_v0 + 0x5c);
   temp_v0 = FUN_002f3024(temp_v0 + 8,&LAB_0010ec48);
   *(unsigned int *)(temp_v0 + 0x28) = 0;
   *(unsigned int *)(temp_v0 + 0x2c) = 0;
@@ -79,17 +79,17 @@ int FUN_0010eb10(unsigned int *param_1)
   *(unsigned char *)(temp_v0 + 0x54) = 0;
   FUN_002ecef0();
   if (DAT_0059496c != '\0') {
-    temp_v1 = FUN_002e760a(0x24);
+    temp_v1 = operatorNew(0x24);
     puVar4 = (unsigned int *)0x0;
     if (temp_v1 != 0) {
-      temp_v2 = FUN_002ea714();
+      temp_v2 = onlineGetActiveLock();
       puVar4 = (unsigned int *)FUN_002f3024(temp_v1,&LAB_0010eca0);
       *puVar4 = (unsigned int)&DAT_00559890;
       puVar4[8] = temp_v2;
     }
   }
   else {
-    temp_v1 = FUN_002e760a(0x20);
+    temp_v1 = operatorNew(0x20);
     puVar4 = (unsigned int *)0x0;
     if (temp_v1 != 0) {
       puVar4 = (unsigned int *)FUN_002f3024(temp_v1,&LAB_0010eca0);

@@ -3,15 +3,15 @@
 extern "C" {
 
 void sysMemClear(void *block, s32 size);
-extern s32 DAT_005b40e0;
-extern s32 DAT_005b40e4;
+extern s32 g_commandBufferCursor;
+extern s32 g_commandBufferEnd;
 
 /* Resets the pool: clears its entry records and counters, then publishes its start and end in the two globals. Does nothing when there is no pool or it has neither a range nor entries. */
 void asdModelResetCommandBuffer(void)
 {
     Pool *pool;
 
-    pool = DAT_0061a470.pool;
+    pool = g_asdGfxContext.pool;
     if (pool == NULL) {
         return;
     }
@@ -27,8 +27,8 @@ void asdModelResetCommandBuffer(void)
     pool->unk24 = 0;
     pool->unk34 = 0;
     pool->unk30 = 0;
-    DAT_005b40e0 = pool->start;
-    DAT_005b40e4 = DAT_005b40e0 + pool->length;
+    g_commandBufferCursor = pool->start;
+    g_commandBufferEnd = g_commandBufferCursor + pool->length;
 }
 
 } /* extern "C" */

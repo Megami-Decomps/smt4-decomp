@@ -14,10 +14,10 @@ typedef struct {
 } param_3_stack;
 
 extern int saveSlotFindSelected(void);
-extern int FUN_001801a4(void);
+extern int gameGetPlayerData(void);
 extern int FUN_00187168(void);
-extern int FUN_001ab854(int);
-extern int FUN_001ab888(void);
+extern int gameGetSlotRecord(int);
+extern int gameGetSlotTable(void);
 extern int btlMainGetUnk14(void);
 extern int FUN_003e8430(unsigned int);
 extern int FUN_003e9b54(unsigned int, int);
@@ -93,7 +93,7 @@ void FUN_0023f328(int param_1,int param_2,int param_3)
       }
     }
     else {
-      temp_v4 = FUN_001801a4();
+      temp_v4 = gameGetPlayerData();
       *(unsigned short *)(param_1 + 0x41f2) = *(unsigned short *)(temp_v4 + 0x2a);
       *(unsigned short *)(param_1 + 0x41fc) = *(unsigned short *)(temp_v4 + 0x2c);
       *(unsigned short *)(param_1 + 0x4206) = *(unsigned short *)(temp_v4 + 0x62);
@@ -109,7 +109,7 @@ void FUN_0023f328(int param_1,int param_2,int param_3)
       return;
     }
   }
-  temp_v2 = FUN_001ab888();
+  temp_v2 = gameGetSlotTable();
   if (0 < *(int *)(temp_v5 + 0x4bb0)) {
     if (param_3 != 0) {
       *(short *)(temp_v4 + 0x4210) = (short)*(char *)(temp_v2 + param_2 + 0x1c9f);
@@ -117,7 +117,7 @@ void FUN_0023f328(int param_1,int param_2,int param_3)
     temp_v5 = param_1 + param_2;
     temp_v7 = temp_v5 + 0x4000;
     if (*(short *)(temp_v4 + 0x4210) >= 0) {
-      temp_v3 = FUN_001ab854((int)*(short *)(temp_v4 + 0x4210));
+      temp_v3 = gameGetSlotRecord((int)*(short *)(temp_v4 + 0x4210));
       if ((*(unsigned short *)(temp_v3 + 0x60) & 0x400) != 0) {
         *(unsigned char *)(temp_v2 + param_2 + 0x1c9f) = 0xff;
         *(unsigned char *)(temp_v5 + 0x41ed) = 1;

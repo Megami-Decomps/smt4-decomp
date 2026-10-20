@@ -4,15 +4,15 @@
 
 extern "C" {
 
-int FUN_002c52f8(void);
+int asdFatalError(void);
 
 extern unsigned char DAT_00465710; /* 0x465710 */
 extern int DAT_00472a50; /* 0x472a50 */
 
 extern unsigned int asdModelForwardChecked(unsigned int *, char *, unsigned int, unsigned int);
 extern int FUN_002c1398(void);
-extern unsigned int FUN_002c30c4(char *);
-/* Supplied declaration required: FUN_002c52f8. */
+extern unsigned int libc_strlen(char *);
+/* Supplied declaration required: asdFatalError. */
 
 
 unsigned int FUN_00128334(void)
@@ -26,13 +26,13 @@ unsigned int FUN_00128334(void)
   if ((*(int *)((unsigned char *)&DAT_00465710 + 0x4)) == 0) {
     temp_v0 = FUN_002c1398();
     if (temp_v0 < 0) {
-      FUN_002c52f8();
+      asdFatalError();
     }
     if (DAT_00472a50 != 0) {
       temp_v2 = 0xd8a103f9;
     }
     else {
-      temp_v1 = FUN_002c30c4("cfg:u");
+      temp_v1 = libc_strlen("cfg:u");
       temp_v2 = asdModelForwardChecked((unsigned int *)&DAT_00472a50,"cfg:u",temp_v1,0);
       if ((temp_v2 & 0x80000000) != 0) {
         temp_v2 = 0xd92103fb;

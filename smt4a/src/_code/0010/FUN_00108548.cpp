@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e7232(int);
+int sharedRefRelease(int);
 int FUN_002eb108(int, int, int, int, int, int);
 int FUN_002ef34c(unsigned char [12], int, int);
 
@@ -14,8 +14,8 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_002e7232. */
-extern int FUN_002e760a(unsigned int);
+/* Supplied declaration required: sharedRefRelease. */
+extern int operatorNew(unsigned int);
 /* Supplied declaration required: FUN_002eb108. */
 /* Supplied declaration required: FUN_002ef34c. */
 
@@ -30,13 +30,13 @@ void FUN_00108548(int param_1)
   
   temp_v1 = 0;
   do {
-    temp_v0 = FUN_002e760a(0x150);
+    temp_v0 = operatorNew(0x150);
     if (temp_v0 != 0) {
       FUN_002eb108(temp_v0,param_1,3,0,0,0);
     }
     *(unsigned char *)(temp_v0 + 0x24) = *(unsigned char *)(param_1 + 0x14c);
     FUN_002ef34c(temp_v2,param_1,temp_v0);
-    FUN_002e7232(temp_v0);
+    sharedRefRelease(temp_v0);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 2);
   return;

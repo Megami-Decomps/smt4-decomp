@@ -8,7 +8,7 @@ int FUN_002a4914(int, int);
 int FUN_002a4964(int, int);
 int FUN_002a7324(int);
 int FUN_0037e0d0(unsigned int, int);
-int FUN_00480fc0(unsigned int, int);
+int flagValueSub(unsigned int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -21,8 +21,8 @@ typedef struct {
 /* Supplied declaration required: FUN_0037e0d0. */
 extern unsigned int FUN_003e4d68(unsigned int);
 extern int FUN_004801ac(unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00480fc0. */
-extern int FUN_00481104(unsigned int);
+/* Supplied declaration required: flagValueSub. */
+extern int flagValueIsPositive(unsigned int);
 
 
 void FUN_004be49c(int param_1)
@@ -35,8 +35,8 @@ void FUN_004be49c(int param_1)
   int temp_v3;
   int temp_v4;
   
-  FUN_00480fc0(*(unsigned int *)(param_1 + 0x334),1);
-  temp_v0 = FUN_00481104(*(unsigned int *)(param_1 + 0x334));
+  flagValueSub(*(unsigned int *)(param_1 + 0x334),1);
+  temp_v0 = flagValueIsPositive(*(unsigned int *)(param_1 + 0x334));
   if (temp_v0 == 0) {
     *(unsigned int *)(param_1 + 8) = 0xd;
     return;

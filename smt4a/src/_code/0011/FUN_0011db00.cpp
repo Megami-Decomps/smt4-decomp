@@ -38,9 +38,9 @@ extern unsigned char DAT_0055a9f8; /* 0x55a9f8 */
 extern unsigned char DAT_0055aa44; /* 0x55aa44 */
 
 extern int FUN_00120424(int);
-extern int FUN_002e9300(unsigned int *, unsigned char *);
+extern int onlineStringConstruct(unsigned int *, unsigned char *);
 extern unsigned int *FUN_002eca10(fn_0011db00_arg0 *, unsigned int, unsigned int *);
-extern int FUN_002ed912(int);
+extern int vectorInitEmpty2(int);
 extern int FUN_002fafd8(int, unsigned int);
 
 
@@ -60,7 +60,7 @@ void FUN_0011db00(fn_0011db00_arg0 *param_1,unsigned int param_2,unsigned int pa
   puVar1[0x1e] = 0;
   *puVar1 = (unsigned int)&DAT_0055a9f8;
   puVar1[0x1a] = (unsigned int)&DAT_0055aa44;
-  temp_v0 = FUN_002e9300(puVar1 + 0x1f,&LAB_0011db78);
+  temp_v0 = onlineStringConstruct(puVar1 + 0x1f,&LAB_0011db78);
   *(unsigned int *)(temp_v0 + 8) = 0;
   *(unsigned int *)(temp_v0 + 0xc) = 0;
   temp_v0 = FUN_002fafd8(temp_v0 + 0x14,0);
@@ -71,7 +71,7 @@ void FUN_0011db00(fn_0011db00_arg0 *param_1,unsigned int param_2,unsigned int pa
   *(unsigned int *)(temp_v0 + 0x90) = 0;
   *(unsigned int *)(temp_v0 + 0x84) = 0;
   temp_v0 = FUN_00120424(temp_v0 + 0x94);
-  temp_v0 = FUN_002ed912(temp_v0 + 0x2c);
+  temp_v0 = vectorInitEmpty2(temp_v0 + 0x2c);
   *(unsigned int *)(temp_v0 + 0xc) = 0;
   *(unsigned char *)(temp_v0 + 0x10) = 0;
   *(unsigned char *)(temp_v0 + 0x11) = 0;

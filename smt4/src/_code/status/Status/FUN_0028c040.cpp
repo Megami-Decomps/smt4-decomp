@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002af5c0(...);
+int uiSpriteSetImageKeyframe(...);
 int timerStart(...);
 int FUN_002bd954(...);
 int FUN_002bee58(...);
@@ -42,7 +42,7 @@ extern signed char g_gameGlobals; /* 0x44e140 */
 extern unsigned char DAT_0044e142; /* 0x44e142 */
 extern unsigned int *DAT_0044e144; /* 0x44e144 */
 
-/* Supplied declaration required: FUN_002af5c0. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002bee58. */
@@ -116,7 +116,7 @@ void FUN_0028c040(void)
     FUN_002bd954(puVar1 + 0x11,0x1a,0,puVar1 + 9,1);
     timerStart(puVar1 + 0x11,6,0);
     FUN_002bd954(puVar1 + 0x57,0x1a,0,puVar1 + 9,1);
-    FUN_002af5c0(puVar1 + 0x57,4,0);
+    uiSpriteSetImageKeyframe(puVar1 + 0x57,4,0);
     FUN_002bd954(puVar1 + 0x7a,0x1a,0,puVar1 + 9,1);
     FUN_002bee58(puVar1 + 0x7a,6);
     FUN_002bd954(puVar1 + 0x9d,0x1a,0,puVar1 + 9,1);

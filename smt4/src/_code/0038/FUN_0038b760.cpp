@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdOperatorNewB(void);
-int FUN_002ac068(int, int);
+int dataTableFileGetTable(int, int);
 int dataTableGetEntries(void);
 int FUN_002c5d5c(void);
 
@@ -19,7 +19,7 @@ struct fn_0038b760_arg0 {
 };
 
 /* Supplied declaration required: asdOperatorNewB. */
-/* Supplied declaration required: FUN_002ac068. */
+/* Supplied declaration required: dataTableFileGetTable. */
 extern int dataTableGetCount(void);
 /* Supplied declaration required: dataTableGetEntries. */
 /* Supplied declaration required: FUN_002c5d5c. */
@@ -38,7 +38,7 @@ void FUN_0038b760(fn_0038b760_arg0 *param_1)
     temp_v0 = param_1->field_0x48;
   }
   if (temp_v1 && temp_v0 != 0) {
-    FUN_002ac068(temp_v0,0);
+    dataTableFileGetTable(temp_v0,0);
     dataTableGetEntries();
   }
   temp_v1 = param_1->field_0x45 != 0;
@@ -47,7 +47,7 @@ void FUN_0038b760(fn_0038b760_arg0 *param_1)
     temp_v0 = param_1->field_0x48;
   }
   if (temp_v1 && temp_v0 != 0) {
-    FUN_002ac068(temp_v0,0);
+    dataTableFileGetTable(temp_v0,0);
     temp_v0 = dataTableGetCount();
     if (temp_v0 != 0) {
       temp_v0 = temp_v0 << 4;

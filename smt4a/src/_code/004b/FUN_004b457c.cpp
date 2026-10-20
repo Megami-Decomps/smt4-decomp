@@ -13,10 +13,10 @@ int FUN_0018152c(...);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
 int FUN_00183bb0(void);
-int FUN_00184e64(...);
+int drawSetColorFromRGBA8(...);
 int FUN_00185dd4(...);
 int FUN_001879d0(...);
-int FUN_002e342c(...);
+int libc_strcpy(...);
 int SBORROW4(...);
 int VectorSignedToFloat(...);
 
@@ -66,10 +66,10 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_00184e64. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_00185dd4. */
 /* Supplied declaration required: FUN_001879d0. */
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 extern int FUN_003e4940(void);
 extern int FUN_004ccbf0(int);
 
@@ -185,7 +185,7 @@ void FUN_004b457c(int param_1,int param_2,int param_3)
     temp_v2 = FUN_001834a4(temp_v28,0x14c);
     temp_v3 = (unsigned int)*(unsigned short *)(temp_v0 + 300);
     FUN_0016432c(temp_v3);
-    FUN_002e342c(&temp_v11,temp_v3);
+    libc_strcpy(&temp_v11,temp_v3);
     VectorSignedToFloat(*(short *)(temp_v2 + 10) + param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v2 + 8) + temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_00162790(3,0xff,&temp_v11);
@@ -208,12 +208,12 @@ void FUN_004b457c(int param_1,int param_2,int param_3)
       FUN_001835b4(2,temp_v28,0x140,temp_v7,param_3,0x74);
     }
     temp_v2 = FUN_001834a4(temp_v28,0x149);
-    FUN_00184e64(0xff);
+    drawSetColorFromRGBA8(0xff);
     FUN_00180310(6,*(short *)(temp_v2 + 8) + temp_v7,*(short *)(temp_v2 + 10) + param_3,1,3,0x79,
                  &LAB_004b4d30,(int)*(short *)(param_1 + 0x7c72) + temp_v8);
     FUN_00183bb0();
     temp_v2 = FUN_001834a4(temp_v28,0x148);
-    FUN_00184e64(0x57d8ffff);
+    drawSetColorFromRGBA8(0x57d8ffff);
     if (*(char *)(param_1 + 0x7c76) != '\0') {
       temp_v0 = 0;
     }

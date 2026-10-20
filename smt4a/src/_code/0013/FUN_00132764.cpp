@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6e14(...);
+int asdOperatorDeleteArray(...);
 int FUN_002fd642(unsigned int **, int *, unsigned int **);
 
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_4_stack;
 
-/* Supplied declaration required: FUN_002e6e14. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
 /* Supplied declaration required: FUN_002fd642. */
 
 
@@ -42,8 +42,8 @@ int * FUN_00132764(int *param_1,unsigned int param_2,unsigned int *param_3,unsig
     param_1[1] = (int)piVar2;
     while (piVar2 = (int *)*param_1, piVar2 != (int *)0x0) {
       *param_1 = *piVar2;
-      FUN_002e6e14(piVar2[2]);
-      FUN_002e6e14(piVar2);
+      asdOperatorDeleteArray(piVar2[2]);
+      asdOperatorDeleteArray(piVar2);
     }
     param_1[1] = 0;
     param_1[2] = 0;

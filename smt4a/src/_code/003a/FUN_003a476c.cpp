@@ -21,7 +21,7 @@ typedef struct {
 
 extern unsigned char g_asdCec; /* 0x5b3f94 */
 
-extern int FUN_002e783c(unsigned int);
+extern int wstrlenU16(unsigned int);
 /* Supplied declaration required: asdCecMessageBoxOpen. */
 /* Supplied declaration required: asdCecMessageBoxClose. */
 /* Supplied declaration required: FUN_0042ed58. */
@@ -48,7 +48,7 @@ FUN_003a476c(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsi
       }
       return 2;
     }
-    temp_v0 = FUN_002e783c(param_6);
+    temp_v0 = wstrlenU16(param_6);
     temp_v1 = (*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4))[6];
     FUN_0042ed58(temp_v1,param_1,param_2,param_3,param_4,param_5,param_6,temp_v0 << 1,0x80000,0x80000,
                  param_7,param_8,0x19000);

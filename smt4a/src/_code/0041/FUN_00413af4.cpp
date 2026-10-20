@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e32a4(int, unsigned char *, unsigned char *, unsigned int, int);
-int FUN_002e6e14(void);
+int asdOperatorDeleteArray(void);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -16,7 +16,7 @@ extern unsigned char LAB_00413e24; /* 0x413e24 */
 
 /* Supplied declaration required: FUN_002e32a4. */
 extern unsigned char *rt_malloc(void);
-/* Supplied declaration required: FUN_002e6e14. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
 
 
 /* WARNING: Removing unreachable block (ram,0x00413b8c) */
@@ -95,7 +95,7 @@ void FUN_00413af4(int *param_1,int param_2,unsigned int param_3)
       }
       temp_v0 = *param_1;
       temp_v3 = param_1[1];
-      FUN_002e6e14();
+      asdOperatorDeleteArray();
       *param_1 = (int)puVar7;
       param_1[1] = (int)(puVar7 + temp_v2 + (temp_v3 - temp_v0));
       param_1[2] = (int)(puVar7 + (int)puVar10);

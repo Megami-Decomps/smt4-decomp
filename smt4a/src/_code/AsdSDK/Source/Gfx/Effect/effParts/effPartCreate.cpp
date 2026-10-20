@@ -3,7 +3,7 @@
 #include "AsdSDK/AsdDebug.h"
 
 extern "C" {
-extern const char DAT_0053d0f8[]; /* "c:\SMT4F\SMT4F\AsdSDK\Source\Gfx\Effect\effParts.cpp": __FILE__ */
+extern const char g_effPartsSourcePath[]; /* "c:\SMT4F\SMT4F\AsdSDK\Source\Gfx\Effect\effParts.cpp": __FILE__ */
 
 
 void *memAlloc(int, int, int, int size, int align, int);
@@ -13,7 +13,7 @@ void FUN_001b4ddc(EffPart *part);
 /* Creates a part object: a zeroed 0x90-byte block with unk80/unk84 cleared, then initialized. */
 EffPart *effPartCreate(void)
 {
-    asdDebugTrace(DAT_0053d0f8, 1443);
+    asdDebugTrace(g_effPartsSourcePath, 1443);
     EffPart *part = (EffPart *)memAlloc(0x10000, 0x100, 0, 0x90, 0x10, 1);
 
     sysMemClear(part, 0x90);

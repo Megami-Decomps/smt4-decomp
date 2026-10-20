@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002e6e34(int *, unsigned char *);
 int FUN_002e6e5c(int *);
-int FUN_002e7232(void);
+int sharedRefRelease(void);
 
 typedef int romwright_code(...);
 extern int DAT_005949dc; /* 0x5949dc */
@@ -15,7 +15,7 @@ extern unsigned char DAT_00630344; /* 0x630344 */
 
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-/* Supplied declaration required: FUN_002e7232. */
+/* Supplied declaration required: sharedRefRelease. */
 
 
 void FUN_0010d35c(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -32,10 +32,10 @@ void FUN_0010d35c(unsigned int param_1,unsigned int param_2,unsigned int param_3
   FUN_002e6e34(&uStack_20,&DAT_00630344);
   if (DAT_005949dc != 0) {
     if (*(int *)(DAT_005949dc + 4) != 1) {
-      FUN_002e7232();
+      sharedRefRelease();
     }
     else {
-      FUN_002e7232();
+      sharedRefRelease();
       DAT_005949dc = 0;
       if (DAT_00594abc != (int *)0x0) {
         (**(romwright_code **)(*DAT_00594abc + 4))();

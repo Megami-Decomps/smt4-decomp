@@ -5,7 +5,7 @@
 extern "C" {
 
 typedef int romwright_code(...);
-extern int DAT_00581284; /* 0x581284 */
+extern int g_mapObj; /* 0x581284 */
 
 
 void FUN_00246b48(void)
@@ -19,12 +19,12 @@ void FUN_00246b48(void)
   
   temp_v3 = 0;
   do {
-    piVar2 = *(int **)(DAT_00581284 + temp_v3 * 0x48 + 0x3c);
+    piVar2 = *(int **)(g_mapObj + temp_v3 * 0x48 + 0x3c);
     if (piVar2 != (int *)0x0) {
       (**(romwright_code **)(*piVar2 + 4))();
-      *(unsigned int *)(DAT_00581284 + temp_v3 * 0x48 + 0x3c) = 0;
+      *(unsigned int *)(g_mapObj + temp_v3 * 0x48 + 0x3c) = 0;
     }
-    temp_v0 = DAT_00581284;
+    temp_v0 = g_mapObj;
     temp_v3 = temp_v3 + 1;
   } while (temp_v3 < 0x18);
   temp_v1 = 0;

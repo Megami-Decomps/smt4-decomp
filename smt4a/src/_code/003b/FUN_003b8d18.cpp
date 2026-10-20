@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019cac4(void);
+int dataTable00FindById(void);
 int sysMemClear(unsigned int [129], int);
 int scrSetResult(unsigned int);
 
@@ -14,14 +14,14 @@ typedef struct {
 } void_stack;
 
 extern unsigned int btlGetMainState(void);
-extern int FUN_0014bef4(unsigned int);
+extern int randRange(unsigned int);
 extern int dataTableGetCount(unsigned int);
 extern unsigned short *dataTableGetEntries(void);
-/* Supplied declaration required: FUN_0019cac4. */
+/* Supplied declaration required: dataTable00FindById. */
 extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: scrSetResult. */
-extern unsigned int FUN_003ef960(unsigned int, unsigned int);
+extern unsigned int btlGetTable(unsigned int, unsigned int);
 
 
 unsigned int FUN_003b8d18(void)
@@ -38,7 +38,7 @@ unsigned int FUN_003b8d18(void)
   unsigned int temp_v6 [129];
   
   temp_v0 = scrGetArg(0) & 0xffff;
-  FUN_0019cac4();
+  dataTable00FindById();
   sysMemClear(temp_v6,0x200);
   temp_v3 = (unsigned int)*(unsigned short *)(temp_v0 + 0x60);
   if (temp_v3 != 0x7b6 && temp_v3 != 0) {
@@ -58,7 +58,7 @@ unsigned int FUN_003b8d18(void)
     temp_v6[temp_v3] = temp_v4;
   }
   temp_v1 = btlGetMainState();
-  temp_v1 = FUN_003ef960(temp_v1,0x10);
+  temp_v1 = btlGetTable(temp_v1,0x10);
   puVar3 = (unsigned short *)dataTableGetEntries();
   temp_v2 = dataTableGetCount(temp_v1);
   if (0 < temp_v2) {
@@ -71,7 +71,7 @@ unsigned int FUN_003b8d18(void)
       puVar3 = puVar3 + 1;
     } while (temp_v2 != 0);
   }
-  temp_v2 = FUN_0014bef4((temp_v0 - 1) & 0xffff);
+  temp_v2 = randRange((temp_v0 - 1) & 0xffff);
   scrSetResult(temp_v6[temp_v2]);
   return 1;
 }

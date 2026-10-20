@@ -29,9 +29,9 @@ typedef struct {
 extern unsigned char LAB_00311b68; /* 0x311b68 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_0014bef4(unsigned int);
-extern int FUN_00162e8c(void);
-extern int FUN_0018719c(void);
+extern int randRange(unsigned int);
+extern int gameFlagsGetBlock(void);
+extern int gameFlagIsSet(void);
 /* Supplied declaration required: FUN_0035363c. */
 /* Supplied declaration required: FUN_003a30e8. */
 extern int FUN_003c30e4(void);
@@ -50,7 +50,7 @@ void FUN_00311880(int param_1,int param_2,int param_3)
   unsigned short temp_v4;
   unsigned int in_fpscr;
   
-  temp_v0 = FUN_00162e8c();
+  temp_v0 = gameFlagsGetBlock();
   if (param_3 != 0) {
     temp_v2 = 0;
     if ('\0' < *(char *)(temp_v0 + 0xe17)) {
@@ -82,9 +82,9 @@ void FUN_00311880(int param_1,int param_2,int param_3)
         if (((*pcVar2 != -1) && (*pcVar2 == param_1)) && (pcVar2[1] == param_2)) {
           temp_v4 = 0;
           if (*(short *)(pcVar2 + 0x14) != 0) {
-            temp_v2 = FUN_0018719c();
+            temp_v2 = gameFlagIsSet();
             if (temp_v2 != 0) {
-              temp_v2 = FUN_0014bef4(99);
+              temp_v2 = randRange(99);
               if (temp_v2 <= pcVar2[0x17]) {
 LAB_00311990:
                 if (*(char *)(temp_v0 + 0xe17) < '\x0f') {
@@ -105,7 +105,7 @@ LAB_00311990:
               }
             }
             else {
-              temp_v2 = FUN_0014bef4(99);
+              temp_v2 = randRange(99);
               if (temp_v2 <= pcVar2[0x16]) {
                 temp_v4 = *(unsigned short *)(pcVar2 + 0x14);
                 goto LAB_00311990;
@@ -113,7 +113,7 @@ LAB_00311990:
             }
           }
           else {
-            temp_v2 = FUN_0014bef4(99);
+            temp_v2 = randRange(99);
             if (temp_v2 <= pcVar2[0x17]) goto LAB_00311990;
           }
         }

@@ -4,7 +4,7 @@ extern "C" {
 
 AsdMdlObject *asdMdlObjectNew(void);
 void *asdFileQueueRequest(void *source, s32 arg);
-void FUN_002b0184(void *data, s32 arg);
+void asdFileRequestSetHeapKind(void *data, s32 arg);
 void asdListAdd(u32 *list, AsdMdlObject *obj, s32 arg);
 
 extern u32 g_asdMdlList2;
@@ -17,7 +17,7 @@ AsdMdlObject *asdMdlManagerCreateSecondList(void *source, u32 param)
 
     obj->node->param = param;
     obj->request = asdFileQueueRequest(source, 0);
-    FUN_002b0184(obj->request, 1);
+    asdFileRequestSetHeapKind(obj->request, 1);
     asdListAdd(&g_asdMdlList2, obj, 0);
     return obj;
 }

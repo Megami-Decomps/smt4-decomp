@@ -15,11 +15,11 @@ typedef struct {
 } param_4_stack;
 
 extern int g_btlScriptUnit; /* 0x57113c */
-extern int DAT_0057f268; /* 0x57f268 */
+extern int g_partyPanel; /* 0x57f268 */
 
 extern int btlGetMainState(void);
-extern unsigned int FUN_001ab854(unsigned int);
-extern int FUN_001ab888(void);
+extern unsigned int gameGetSlotRecord(unsigned int);
+extern int gameGetSlotTable(void);
 extern int btlMainGetUnk14(void);
 /* Supplied declaration required: FUN_002a4878. */
 extern int FUN_002a4894(unsigned int);
@@ -44,9 +44,9 @@ void FUN_0028c2ec(unsigned int param_1,int param_2,unsigned int param_3,unsigned
   int temp_v7;
   int temp_v8;
   
-  temp_v6 = DAT_0057f268;
+  temp_v6 = g_partyPanel;
   temp_v8 = param_4;
-  temp_v2 = FUN_001ab888();
+  temp_v2 = gameGetSlotTable();
   temp_v8 = 0;
   if (((*(short *)(temp_v6 + 0x36) == 0x7d) && (temp_v3 = btlGetMainState(), temp_v3 != 0)) &&
      (g_btlScriptUnit != 0)) {
@@ -73,7 +73,7 @@ void FUN_0028c2ec(unsigned int param_1,int param_2,unsigned int param_3,unsigned
   do {
     if ((int)*(char *)(temp_v2 + temp_v3 + 0x1ca0) == (int)*(short *)(temp_v6 + 0x38)) {
       temp_v7 = temp_v6 + temp_v3 * 4;
-      temp_v4 = FUN_001ab854(*(unsigned int *)(*(int *)(temp_v7 + 0xa14) + 0x34));
+      temp_v4 = gameGetSlotRecord(*(unsigned int *)(*(int *)(temp_v7 + 0xa14) + 0x34));
       temp_v5 = FUN_004bcbb4(temp_v4,*(unsigned short *)(temp_v6 + 0x36));
       *(int *)(*(int *)(temp_v7 + 0xa14) + 0x44) = -temp_v5;
     }
@@ -83,7 +83,7 @@ void FUN_0028c2ec(unsigned int param_1,int param_2,unsigned int param_3,unsigned
   do {
     if (*(int *)(temp_v6 + temp_v3 * 8 + 0xa80) == (int)*(short *)(temp_v6 + 0x38)) {
       temp_v7 = temp_v6 + temp_v3 * 4;
-      temp_v4 = FUN_001ab854(*(unsigned int *)(*(int *)(temp_v7 + 0xa20) + 0x34));
+      temp_v4 = gameGetSlotRecord(*(unsigned int *)(*(int *)(temp_v7 + 0xa20) + 0x34));
       temp_v5 = FUN_004bcbb4(temp_v4,*(unsigned short *)(temp_v6 + 0x36));
       *(int *)(*(int *)(temp_v7 + 0xa20) + 0x44) = -temp_v5;
     }

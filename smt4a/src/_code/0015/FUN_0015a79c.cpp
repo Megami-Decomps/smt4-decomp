@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0017fd20(...);
-int FUN_001a089c(...);
+int nn_os_LightEvent_Initialize(...);
 int FUN_002e3140(...);
 int FUN_002fb0d4(...);
 int software_interrupt(...);
@@ -34,7 +34,7 @@ extern unsigned int *DAT_006416b0; /* 0x6416b0 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_0017fd20. */
-/* Supplied declaration required: FUN_001a089c. */
+/* Supplied declaration required: nn_os_LightEvent_Initialize. */
 /* Supplied declaration required: FUN_002e3140. */
 /* Supplied declaration required: FUN_002fb0d4. */
 
@@ -100,7 +100,7 @@ void FUN_0015a79c(unsigned int param_1,unsigned int param_2,unsigned int param_3
   if ((int)puVar5 < 0) {
     FUN_002e3140();
   }
-  FUN_001a089c(&DAT_005b445c,1);
+  nn_os_LightEvent_Initialize(&DAT_005b445c,1);
   DAT_005b4448 = 0;
   temp_v2 = 4;
   puVar6 = &DAT_005b4454;

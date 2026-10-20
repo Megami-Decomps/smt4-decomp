@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00300248(int *);
+int vectorInitEmpty6(int *);
 int FUN_00300252(int, int *);
 int FUN_003002ae(int *);
 
@@ -17,7 +17,7 @@ typedef struct {
 extern int DAT_00594b28; /* 0x594b28 */
 extern int DAT_00594b2c; /* 0x594b2c */
 
-/* Supplied declaration required: FUN_00300248. */
+/* Supplied declaration required: vectorInitEmpty6. */
 /* Supplied declaration required: FUN_00300252. */
 /* Supplied declaration required: FUN_003002ae. */
 
@@ -35,14 +35,14 @@ void FUN_00114a30(unsigned int param_1,int param_2,int param_3,unsigned int para
   temp_v2 = param_3;
   uStack_10 = param_4;
   if (DAT_00594b28 != 0) {
-    FUN_00300248(&temp_v1);
+    vectorInitEmpty6(&temp_v1);
     FUN_00300252(DAT_00594b28,&temp_v1);
     for (temp_v0 = temp_v1; temp_v2 != temp_v0; temp_v0 = temp_v0 + 0x20) {
     }
     FUN_003002ae(&temp_v1);
   }
   if (DAT_00594b2c != 0) {
-    FUN_00300248(&temp_v1);
+    vectorInitEmpty6(&temp_v1);
     FUN_00300252(DAT_00594b2c,&temp_v1);
     for (temp_v0 = temp_v1; temp_v2 != temp_v0; temp_v0 = temp_v0 + 0x20) {
     }

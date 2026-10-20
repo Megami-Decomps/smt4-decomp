@@ -7,7 +7,7 @@ extern "C" {
 extern int FUN_00162858(void);
 extern int FUN_00162880(void);
 extern int FUN_00167e54(void);
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 extern int FUN_00270a70(void);
 extern int FUN_00284d94(void);
 extern int namePollShutdown(void);
@@ -52,10 +52,10 @@ unsigned int FUN_0039a7b0(int param_1)
     }
   }
   if (*(char *)(temp_v2 + 0x1c) == '\0') {
-    temp_v1 = FUN_0018719c(0x51);
+    temp_v1 = gameFlagIsSet(0x51);
     if ((temp_v1 != 0) &&
-       (((temp_v1 = FUN_0018719c(0xc), temp_v1 == 0 || (temp_v1 = FUN_0018719c(0x10), temp_v1 != 0)) &&
-        (temp_v1 = FUN_0018719c(0x11), temp_v1 == 0)))) {
+       (((temp_v1 = gameFlagIsSet(0xc), temp_v1 == 0 || (temp_v1 = gameFlagIsSet(0x10), temp_v1 != 0)) &&
+        (temp_v1 = gameFlagIsSet(0x11), temp_v1 == 0)))) {
       temp_v1 = FUN_00167e54();
       if (temp_v1 != 0) {
         temp_v1 = FUN_00162880();

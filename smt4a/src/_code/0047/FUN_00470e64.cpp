@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_00100388(...);
-int FUN_001a6f60(...);
+int dataTableFileGetTable(...);
 int FUN_001b2ebc(...);
 int FUN_001b31ac(...);
 int FUN_001b31e0(...);
-int FUN_002e3494(...);
+int asdOperatorDeleteB(...);
 int sysMemClear(...);
 int FUN_002f5020(...);
 int asdOperatorNewE(...);
@@ -48,13 +48,13 @@ extern unsigned int g_aocDisplay; /* 0x57027c */
 /* Supplied declaration required: FUN_00100388. */
 extern int dataTableGetCount(void);
 extern unsigned int dataTableGetEntries(unsigned int);
-/* Supplied declaration required: FUN_001a6f60. */
+/* Supplied declaration required: dataTableFileGetTable. */
 /* Supplied declaration required: FUN_001b2ebc. */
 extern int FUN_001b315c(void);
 /* Supplied declaration required: FUN_001b31ac. */
 /* Supplied declaration required: FUN_001b31e0. */
-extern int FUN_001d109c(void);
-/* Supplied declaration required: FUN_002e3494. */
+extern int objGetFlagBit16(void);
+/* Supplied declaration required: asdOperatorDeleteB. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002f5020. */
 /* Supplied declaration required: asdOperatorNewE. */
@@ -88,11 +88,11 @@ void FUN_00470e64(fn_00470e64_arg0 *param_1)
   int temp_v15;
   
   if (param_1->field_0x458 != 0) {
-    FUN_002e3494();
+    asdOperatorDeleteB();
     param_1->field_0x458 = 0;
   }
   if (param_1->field_0x454 != 0) {
-    FUN_002e3494();
+    asdOperatorDeleteB();
     param_1->field_0x454 = 0;
   }
   piVar1 = &param_1->field_0x45c;
@@ -103,7 +103,7 @@ void FUN_00470e64(fn_00470e64_arg0 *param_1)
     *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
     return;
   }
-  temp_v0 = FUN_001d109c();
+  temp_v0 = objGetFlagBit16();
   if (temp_v0 != 0) {
     sysMemClear(temp_v11,0x80);
     temp_v0 = FUN_0046bc7c(param_1,0x37);
@@ -157,7 +157,7 @@ LAB_00471070:
       do {
         temp_v1 = *(int *)(param_1->field_0x454 + temp_v7 * 0x10);
         if (temp_v1 != 0) {
-          FUN_001a6f60(temp_v1,0);
+          dataTableFileGetTable(temp_v1,0);
           temp_v1 = dataTableGetCount();
           *temp_v13 = param_1->field_0x45c + temp_v1;
         }
@@ -174,8 +174,8 @@ LAB_00471070:
         do {
           temp_v1 = *(int *)(param_1->field_0x454 + temp_v6 * 0x10);
           if (temp_v1 != 0) {
-            FUN_001a6f60(temp_v1,0);
-            temp_v4 = FUN_001a6f60(temp_v1,0);
+            dataTableFileGetTable(temp_v1,0);
+            temp_v4 = dataTableFileGetTable(temp_v1,0);
             temp_v1 = dataTableGetCount();
             if (temp_v1 != 0) {
               temp_v4 = dataTableGetEntries(temp_v4);

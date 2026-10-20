@@ -13,7 +13,7 @@ int FUN_00231bcc(...);
 int FUN_00231d2c(...);
 int FUN_00232554(...);
 int FUN_002b04e8(...);
-int FUN_002c2950(void);
+int gameGetMapBlock(void);
 int FUN_0039e8b8(...);
 int FUN_0039eb4c(...);
 int NaviMain_GetPosY(int);
@@ -64,8 +64,8 @@ extern float *lmapSceneGetObj(int);
 extern int FUN_00288f78(int);
 /* Supplied declaration required: FUN_002b04e8. */
 extern int FUN_002b8694(void);
-extern int FUN_002c09d0(unsigned int);
-/* Supplied declaration required: FUN_002c2950. */
+extern int gameFlagIsSet(unsigned int);
+/* Supplied declaration required: gameGetMapBlock. */
 /* Supplied declaration required: FUN_0039e8b8. */
 /* Supplied declaration required: FUN_0039eb4c. */
 extern unsigned int *NaviMain_GetCursorPos(int);
@@ -129,7 +129,7 @@ void FUN_00399d0c(int param_1)
   int temp_v44;
   
   temp_v44 = param_1;
-  FUN_002c2950();
+  gameGetMapBlock();
   temp_v37 = temp_v44 + 0x162;
   temp_v3 = NaviMain_GetPosX();
   NaviMain_GetPosY(temp_v37);
@@ -145,7 +145,7 @@ void FUN_00399d0c(int param_1)
     DAT_0044cdd8 = 0xb;
     return;
   }
-  temp_v4 = FUN_002c09d0(0x529);
+  temp_v4 = gameFlagIsSet(0x529);
   if (temp_v4 == 0) {
     return;
   }

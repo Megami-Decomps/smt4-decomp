@@ -15,7 +15,7 @@ struct Obj00129db4 {
 extern const u8 DAT_00559a1c[];
 extern u8 DAT_00594b24[];
 
-void FUN_0030ccc0(u8 *table, Obj00129db4 *obj);
+void onlineObjectListRemove(u8 *table, Obj00129db4 *obj);
 void FUN_00129d08(Obj00129db4 *obj);
 u8 *FUN_0030cb88(u8 *member);
 __weak Obj00129db4 *FUN_00129db4_baseDtor(Obj00129db4 *obj);
@@ -25,7 +25,7 @@ Obj00129db4 *FUN_00129db4(Obj00129db4 *obj)
     u8 *member;
 
     obj->vtable = DAT_00559a1c;
-    FUN_0030ccc0(DAT_00594b24, obj);
+    onlineObjectListRemove(DAT_00594b24, obj);
     FUN_00129d08(obj);
     member = FUN_0030cb88(obj->member20);
     member = FUN_0030cb88(member - (offsetof(Obj00129db4, member20) - offsetof(Obj00129db4, member0c)));

@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_002ac068(int, int);
-int FUN_002c0894(unsigned int);
+int dataTableFileGetTable(int, int);
+int asdTextureRelease(unsigned int);
 int asdMemFree(...);
 
 typedef struct fn_00141710_arg0 fn_00141710_arg0;
@@ -25,8 +25,8 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_002ac068. */
-/* Supplied declaration required: FUN_002c0894. */
+/* Supplied declaration required: dataTableFileGetTable. */
+/* Supplied declaration required: asdTextureRelease. */
 extern unsigned int dataTableGetCount(void);
 extern int dataTableGetEntries(void);
 /* Supplied declaration required: asdMemFree. */
@@ -56,14 +56,14 @@ void FUN_00141710(fn_00141710_arg0 *param_1,int param_2)
     temp_v4 = param_1->field_0x4c;
   }
   if ((temp_v2 != 0 && temp_v4 != 0) && (param_1->field_0x45 != 0)) {
-    FUN_002ac068(temp_v2,0);
+    dataTableFileGetTable(temp_v2,0);
     temp_v4 = dataTableGetEntries();
     temp_v0 = 0;
     if (temp_v4 != 0) {
       temp_v0 = param_1->field_0x45;
     }
     if ((temp_v4 != 0 && temp_v0 != 0) && (param_1->field_0x48 != 0)) {
-      FUN_002ac068(param_1->field_0x48,0);
+      dataTableFileGetTable(param_1->field_0x48,0);
       temp_v3 = dataTableGetCount();
       temp_v7 = 0;
       if (temp_v7 < temp_v3) {
@@ -132,7 +132,7 @@ LAB_00141864:
                     puVar5[1] = 0;
                   }
                   if ((*pcVar7 == '\x1a') && (*(int *)*puVar5 != 0)) {
-                    FUN_002c0894(*(unsigned int *)(*(int *)*puVar5 + 8));
+                    asdTextureRelease(*(unsigned int *)(*(int *)*puVar5 + 8));
                   }
                   piVar9 = (int *)*puVar5;
                   if (*piVar9 != 0) {

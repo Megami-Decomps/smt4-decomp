@@ -7,9 +7,9 @@ extern "C" {
 int FUN_00113f00(...);
 int FUN_002e6e34(...);
 int FUN_002e6e5c(...);
-int FUN_002e75fa(...);
-int FUN_002e9538(...);
-int FUN_002eb588(...);
+int sharedRefAddRef(...);
+int onlineSockAddrCopy(...);
+int onlineTimeGetNow(...);
 int FUN_002ec8a8(...);
 int FUN_00301484(...);
 int handleLockRelease(...);
@@ -34,9 +34,9 @@ typedef struct {
 /* Supplied declaration required: FUN_00113f00. */
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-/* Supplied declaration required: FUN_002e75fa. */
-/* Supplied declaration required: FUN_002e9538. */
-/* Supplied declaration required: FUN_002eb588. */
+/* Supplied declaration required: sharedRefAddRef. */
+/* Supplied declaration required: onlineSockAddrCopy. */
+/* Supplied declaration required: onlineTimeGetNow. */
 /* Supplied declaration required: FUN_002ec8a8. */
 /* Supplied declaration required: FUN_00301484. */
 extern int *FUN_00311202(int);
@@ -66,20 +66,20 @@ unsigned int FUN_0011ca76(int param_1,fn_0011ca76_arg1 *param_2,unsigned int par
     piVar1 = (int *)FUN_00311202(param_1 + 0x1d8);
     if ((piVar1 != (int *)0x0) && (*piVar1 != 0)) {
       FUN_002ec8a8(*piVar1,param_2);
-      FUN_002e9538(piVar1 + 1,temp_v5);
-      FUN_002eb588(&temp_v2);
+      onlineSockAddrCopy(piVar1 + 1,temp_v5);
+      onlineTimeGetNow(&temp_v2);
       piVar1[0xb] = temp_v3;
       piVar1[10] = temp_v2;
       FUN_00113f00(param_1 + 0x1d8,piVar1 + 10);
       *(unsigned char *)(param_1 + 0x50) = 1;
-      FUN_002e75fa(param_2);
+      sharedRefAddRef(param_2);
       *(int *)(*(int *)(param_1 + 0x48) + 0x3c) = param_1;
       *(unsigned char *)(*(int *)(param_1 + 0x48) + 0x35) = 2;
       piVar1 = *(int **)(param_1 + 0x48);
       temp_v0 = param_2->field_0x10;
       *piVar1 = param_2->field_0xc + param_2->field_0x18;
       piVar1[1] = temp_v0;
-      FUN_002e9538(*(int *)(param_1 + 0x48) + 0x10,temp_v5);
+      onlineSockAddrCopy(*(int *)(param_1 + 0x48) + 0x10,temp_v5);
       *(unsigned int *)(*(int *)(param_1 + 0x48) + 0xc) = 0;
       FUN_00301484(*(unsigned int *)(param_1 + 0x48));
       temp_v1 = 1;

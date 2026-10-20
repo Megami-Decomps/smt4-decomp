@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00247478(unsigned char [29], unsigned int, unsigned int);
-int FUN_00282924(unsigned int, unsigned int);
+int btlMainFindEntryByListedId(unsigned int, unsigned int);
 int VectorUnsignedToFloat(unsigned int, int);
 
 /* stack frame of param_1: 1 slot(s), 1 byte(s) */
@@ -15,7 +15,7 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00247478. */
-/* Supplied declaration required: FUN_00282924. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 extern unsigned int btlGetMainState(void);
 
 
@@ -30,7 +30,7 @@ unsigned int FUN_003be8c8(unsigned int param_1)
   unsigned char temp_v3;
   
   temp_v0 = btlGetMainState();
-  FUN_00282924(temp_v0,param_1);
+  btlMainFindEntryByListedId(temp_v0,param_1);
   temp_v1 = btlGetMainState();
   FUN_00247478(temp_v2,temp_v1,temp_v0);
   VectorUnsignedToFloat((unsigned int)temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);

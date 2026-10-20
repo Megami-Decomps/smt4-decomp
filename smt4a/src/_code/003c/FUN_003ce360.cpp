@@ -5,10 +5,10 @@
 extern "C" {
 
 int asdMemFree(unsigned int);
-int FUN_0019a840(int);
+int asdTextureSetImage(int);
 
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_0019a840. */
+/* Supplied declaration required: asdTextureSetImage. */
 
 
 void FUN_003ce360(void)
@@ -35,7 +35,7 @@ void FUN_003ce360(void)
       *(unsigned int *)(*piVar3 + 0x3c) = 1;
       *(unsigned int *)(*piVar3 + 0x40) = 1;
       *(unsigned int *)(*piVar3 + 0x38) = 0;
-      FUN_0019a840(*piVar3);
+      asdTextureSetImage(*piVar3);
       *(unsigned char *)(temp_v0 + 0x570344) = 1;
       asdMemFree(*(unsigned int *)(temp_v0 + 0x570340));
       *(unsigned int *)(temp_v0 + 0x570340) = 0;

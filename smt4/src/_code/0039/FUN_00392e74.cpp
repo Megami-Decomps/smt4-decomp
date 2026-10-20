@@ -6,10 +6,10 @@ extern "C" {
 
 int FUN_00126fb8(int);
 int FUN_0023392c(unsigned int *, unsigned int, int);
-int FUN_00233d78(unsigned int *);
+int jobStopAndClearFlags(unsigned int *);
 int aocClearDisplayFlag(unsigned int);
 int FUN_0027eb30(unsigned int *);
-int FUN_002b8cc8(void);
+int ifTouchRegionRemove(void);
 int FUN_002ba9ac(unsigned int);
 int FUN_002baa40(unsigned int [3], int);
 int FUN_002bf818(unsigned int *);
@@ -26,11 +26,11 @@ extern unsigned int g_aocSystem; /* 0x433158 */
 
 /* Supplied declaration required: FUN_00126fb8. */
 /* Supplied declaration required: FUN_0023392c. */
-/* Supplied declaration required: FUN_00233d78. */
+/* Supplied declaration required: jobStopAndClearFlags. */
 /* Supplied declaration required: aocClearDisplayFlag. */
 /* Supplied declaration required: FUN_0027eb30. */
 extern int FUN_002ad1e0(int);
-/* Supplied declaration required: FUN_002b8cc8. */
+/* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: FUN_002ba9ac. */
 /* Supplied declaration required: FUN_002baa40. */
 extern int jobIsValid(unsigned int);
@@ -79,12 +79,12 @@ void FUN_00392e74(unsigned int *param_1)
   *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
   FUN_0023392c(param_1,0xffffffff,0);
   FUN_0027eb30(param_1 + 0x46c);
-  FUN_00233d78(param_1);
+  jobStopAndClearFlags(param_1);
   temp_v0 = jobIsValid(param_1[0x5e8]);
   if (temp_v0 != 0) {
     if (param_1[0x5eb] != 0xffffffff) {
       param_1[0x5eb] = 0xffffffff;
-      FUN_002b8cc8();
+      ifTouchRegionRemove();
     }
     *param_1 = *param_1 & 0xffffcfff;
     jobStop(param_1[0x5e8],0);

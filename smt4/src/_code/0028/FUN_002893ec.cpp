@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_002769b4(int, int);
-int FUN_00289508(void);
+int mapDepartSetTarget(int, int);
+int gameJumpRequestClear(void);
 int FUN_00289574(...);
 int asdSequenceRequest(...);
 
@@ -17,10 +17,10 @@ typedef struct {
 extern unsigned int DAT_0049f924; /* 0x49f924 */
 extern unsigned char DAT_0049fc14; /* 0x49fc14 */
 
-/* Supplied declaration required: FUN_002769b4. */
-/* Supplied declaration required: FUN_00289508. */
+/* Supplied declaration required: mapDepartSetTarget. */
+/* Supplied declaration required: gameJumpRequestClear. */
 /* Supplied declaration required: FUN_00289574. */
-extern char *FUN_00289594(void);
+extern char *gameJumpRequestGet(void);
 /* Supplied declaration required: asdSequenceRequest. */
 
 
@@ -34,7 +34,7 @@ unsigned int FUN_002893ec(unsigned int param_1,int param_2,unsigned int param_3,
   unsigned int temp_v2;
   
   temp_v2 = param_4;
-  pcVar2 = (char *)FUN_00289594();
+  pcVar2 = (char *)gameJumpRequestGet();
   temp_v0 = *pcVar2;
   temp_v1 = 0;
   if (temp_v0 != '\x01') {
@@ -47,7 +47,7 @@ unsigned int FUN_002893ec(unsigned int param_1,int param_2,unsigned int param_3,
           DAT_0049fc14 = 0;
         }
         else {
-          FUN_002769b4((unsigned char)pcVar2[1] + 200,0);
+          mapDepartSetTarget((unsigned char)pcVar2[1] + 200,0);
         }
       }
     }
@@ -69,7 +69,7 @@ unsigned int FUN_002893ec(unsigned int param_1,int param_2,unsigned int param_3,
       DAT_0049fc14 = 0;
     }
   }
-  FUN_00289508();
+  gameJumpRequestClear();
   return temp_v1;
 }
 

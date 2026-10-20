@@ -15,7 +15,7 @@ typedef struct {
 /* Supplied declaration required: FUN_002497f8. */
 extern int FUN_0024c52c(int);
 /* Supplied declaration required: FUN_002ae164. */
-extern int FUN_002ae1d8(int);
+extern int idIsAbove400(int);
 
 
 void FUN_002f8120(int *param_1,int *param_2)
@@ -28,7 +28,7 @@ void FUN_002f8120(int *param_1,int *param_2)
   short temp_v3;
   short temp_v4;
   
-  temp_v0 = FUN_002ae1d8(*param_1);
+  temp_v0 = idIsAbove400(*param_1);
   if (temp_v0 != 0) {
     temp_v0 = 99;
     temp_v4 = 0;
@@ -39,7 +39,7 @@ void FUN_002f8120(int *param_1,int *param_2)
     FUN_002ae164();
     temp_v4 = *(short *)(temp_v1 + 0x2c);
   }
-  temp_v1 = FUN_002ae1d8(*param_2);
+  temp_v1 = idIsAbove400(*param_2);
   if (temp_v1 != 0) {
     temp_v1 = 99;
     temp_v3 = 0;

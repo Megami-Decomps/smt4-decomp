@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0014384c(int);
+int asdTMTexTableLoadSprites(int);
 int FUN_00148bb8(int, int);
 int FUN_0014afd0(int, int);
 int asdOperatorNew(void);
@@ -12,8 +12,8 @@ int FUN_0022677c(int, int);
 int FUN_002bf464(void);
 int FUN_002f5020(...);
 int FUN_0031e198(void);
-int FUN_00342010(void);
-int FUN_003d2d34(...);
+int campButtonHelpAcquire(void);
+int soundChannelRequestIfEnabled(...);
 int FUN_003d54f8(...);
 int FUN_00408184(...);
 int FUN_0040a42c(...);
@@ -31,18 +31,18 @@ extern unsigned char LAB_00493e80; /* 0x493e80 */
 extern unsigned char DAT_0055c888; /* 0x55c888 */
 extern unsigned char DAT_0055ca10; /* 0x55ca10 */
 
-/* Supplied declaration required: FUN_0014384c. */
+/* Supplied declaration required: asdTMTexTableLoadSprites. */
 extern short *FUN_00145f04(unsigned char, unsigned int);
 /* Supplied declaration required: FUN_00148bb8. */
 /* Supplied declaration required: FUN_0014afd0. */
 /* Supplied declaration required: asdOperatorNew. */
-extern int FUN_002009a8(unsigned int);
+extern int bgmGetStateById(unsigned int);
 /* Supplied declaration required: FUN_0022677c. */
 /* Supplied declaration required: FUN_002bf464. */
 /* Supplied declaration required: FUN_002f5020. */
 /* Supplied declaration required: FUN_0031e198. */
-/* Supplied declaration required: FUN_00342010. */
-/* Supplied declaration required: FUN_003d2d34. */
+/* Supplied declaration required: campButtonHelpAcquire. */
+/* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: FUN_003d54f8. */
 /* Supplied declaration required: FUN_00408184. */
 /* Supplied declaration required: FUN_0040a42c. */
@@ -129,8 +129,8 @@ unsigned int * FUN_0049c3c0(unsigned int *param_1,unsigned int param_2,int param
     *(unsigned int *)(temp_v1 - 0x9f84) = 0xf;
     *(unsigned int *)(temp_v1 - 0x9f80) = 0;
     FUN_002bf464();
-    FUN_00342010();
-    FUN_0014384c(0x20);
+    campButtonHelpAcquire();
+    asdTMTexTableLoadSprites(0x20);
     FUN_0014afd0(0x20,0);
     *(unsigned int *)(temp_v1 - 0x9be8) = 0x83;
     puVar4 = puVar7;
@@ -154,16 +154,16 @@ unsigned int * FUN_0049c3c0(unsigned int *param_1,unsigned int param_2,int param
       if (param_4 != 5) {
         if (param_4 != 9) {
           temp_v3 = 0x1000043;
-          temp_v2 = FUN_002009a8(0x1000043);
+          temp_v2 = bgmGetStateById(0x1000043);
           if (temp_v2 != 1) {
-            FUN_003d2d34(temp_v3,0,0x3c);
+            soundChannelRequestIfEnabled(temp_v3,0,0x3c);
           }
         }
       }
       else {
-        temp_v2 = FUN_002009a8(0x1000047);
+        temp_v2 = bgmGetStateById(0x1000047);
         if (temp_v2 != 1) {
-          FUN_003d2d34(temp_v3,0,0x3c);
+          soundChannelRequestIfEnabled(temp_v3,0,0x3c);
         }
       }
     }
@@ -173,16 +173,16 @@ unsigned int * FUN_0049c3c0(unsigned int *param_1,unsigned int param_2,int param
     if (!((param_4 == 6 || param_4 == 7) || param_4 == 9)) {
       if (param_4 != 8) {
         temp_v3 = 0x1000042;
-        temp_v2 = FUN_002009a8(0x1000042);
+        temp_v2 = bgmGetStateById(0x1000042);
         if (temp_v2 != 1) {
-          FUN_003d2d34(temp_v3,0,0x3c);
+          soundChannelRequestIfEnabled(temp_v3,0,0x3c);
         }
       }
     }
     else {
-      temp_v2 = FUN_002009a8(0x1000047);
+      temp_v2 = bgmGetStateById(0x1000047);
       if (temp_v2 != 1) {
-        FUN_003d2d34(temp_v3,0,0x3c);
+        soundChannelRequestIfEnabled(temp_v3,0,0x3c);
       }
     }
   }

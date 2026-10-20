@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b8838(int);
+int buttonHelpSetPreset(int);
 
 typedef struct fn_002305fc_arg0 fn_002305fc_arg0;
 struct fn_002305fc_arg0 {
@@ -26,8 +26,8 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_002b8838. */
-extern int FUN_002c09d0(unsigned int);
+/* Supplied declaration required: buttonHelpSetPreset. */
+extern int gameFlagIsSet(unsigned int);
 
 
 void FUN_002305fc(fn_002305fc_arg0 *param_1)
@@ -54,14 +54,14 @@ void FUN_002305fc(fn_002305fc_arg0 *param_1)
     if (param_1->field_0x10 != 1) {
       temp_v1 = *(unsigned char *)((int)&temp_v2 + temp_v0);
       if ((((param_1->field_0x14 != 0) || (param_1->field_0x18 == 8)) ||
-          (temp_v0 = FUN_002c09d0(0x410), temp_v0 == 0)) && (param_1->field_0x860 == 0)) {
+          (temp_v0 = gameFlagIsSet(0x410), temp_v0 == 0)) && (param_1->field_0x860 == 0)) {
         temp_v1 = 0x78;
       }
     }
     else {
       temp_v1 = *(unsigned char *)((int)&temp_v3 + temp_v0);
       if (((param_1->field_0x14 != 0) || (param_1->field_0x18 == 8)) ||
-         (temp_v0 = FUN_002c09d0(0x410), temp_v0 == 0)) {
+         (temp_v0 = gameFlagIsSet(0x410), temp_v0 == 0)) {
         if (param_1->field_0x860 == 0) {
           temp_v1 = 0x86;
         }
@@ -75,7 +75,7 @@ void FUN_002305fc(fn_002305fc_arg0 *param_1)
     temp_v2 = 0x84838281;
     temp_v1 = *(unsigned char *)((int)&temp_v2 + param_1->field_0x864);
   }
-  FUN_002b8838(temp_v1);
+  buttonHelpSetPreset(temp_v1);
   return;
 }
 

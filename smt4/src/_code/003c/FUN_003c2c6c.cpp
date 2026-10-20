@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_0022a478(char *, int);
 int FUN_00298d64(char *, int);
-int FUN_002992bc(char *, int);
-int FUN_0029d620(char *, int);
+int flaggedEntrySetValueB(char *, int);
+int flaggedEntrySetValueA(char *, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -15,11 +15,11 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_0022a478. */
-extern int FUN_00240d74(char *);
+extern int flaggedEntryGetValueB(char *);
 /* Supplied declaration required: FUN_00298d64. */
-/* Supplied declaration required: FUN_002992bc. */
-/* Supplied declaration required: FUN_0029d620. */
-extern int FUN_0029e11c(void);
+/* Supplied declaration required: flaggedEntrySetValueB. */
+/* Supplied declaration required: flaggedEntrySetValueA. */
+extern int flaggedEntryGetValueA(void);
 extern int FUN_0029e93c(char *);
 extern int FUN_0029efc0(void);
 
@@ -39,10 +39,10 @@ void FUN_003c2c6c(char *param_1)
     temp_v0 = FUN_0029e93c(param_1 + 0x10);
   }
   if (*param_1 != '\x01') {
-    temp_v1 = FUN_0029e11c();
+    temp_v1 = flaggedEntryGetValueA();
   }
   else {
-    temp_v1 = FUN_00240d74(param_1 + 0x10);
+    temp_v1 = flaggedEntryGetValueB(param_1 + 0x10);
   }
   if (temp_v0 >= 1) {
     temp_v0 = temp_v0 - 1;
@@ -64,13 +64,13 @@ void FUN_003c2c6c(char *param_1)
   }
   if (*param_1 == '\0') {
     FUN_00298d64(param_1 + 0x10,temp_v0);
-    FUN_0029d620(param_1 + 0x10,temp_v1);
+    flaggedEntrySetValueA(param_1 + 0x10,temp_v1);
   }
   if (*param_1 != '\x01') {
     return;
   }
   FUN_0022a478(param_1 + 0x10,temp_v0);
-  FUN_002992bc(param_1 + 0x10,temp_v1);
+  flaggedEntrySetValueB(param_1 + 0x10,temp_v1);
   return;
 }
 

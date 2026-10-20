@@ -6,14 +6,14 @@ extern "C" {
 
 int FUN_001037a2(unsigned char [8], unsigned char [12]);
 int FUN_00113cd0(int, unsigned char [104], int, int);
-int FUN_002e7658(unsigned char [8]);
+int sharedRefHolderDestroy(unsigned char [8]);
 int FUN_002e99e4(unsigned char [104], int);
-int FUN_002e9a56(unsigned char [8], unsigned char [4]);
+int bufferAssignByte(unsigned char [8], unsigned char [4]);
 int FUN_002ea974(unsigned char [104]);
-int FUN_002ea9c0(unsigned char [104], unsigned int);
-int FUN_002ea9dc(unsigned char [104]);
-int FUN_002eb588(unsigned char [12]);
-int FUN_002ee9c0(unsigned char [8], int);
+int onlineUrlSetAddress(unsigned char [104], unsigned int);
+int onlineUrlDestroy(unsigned char [104]);
+int onlineTimeGetNow(unsigned char [12]);
+int strHolderAssignU32(unsigned char [8], int);
 int FUN_002f2afc(unsigned char [8]);
 
 typedef int romwright_code(...);
@@ -28,14 +28,14 @@ extern unsigned char DAT_00594a58; /* 0x594a58 */
 
 /* Supplied declaration required: FUN_001037a2. */
 /* Supplied declaration required: FUN_00113cd0. */
-/* Supplied declaration required: FUN_002e7658. */
+/* Supplied declaration required: sharedRefHolderDestroy. */
 /* Supplied declaration required: FUN_002e99e4. */
-/* Supplied declaration required: FUN_002e9a56. */
+/* Supplied declaration required: bufferAssignByte. */
 /* Supplied declaration required: FUN_002ea974. */
-/* Supplied declaration required: FUN_002ea9c0. */
-/* Supplied declaration required: FUN_002ea9dc. */
-/* Supplied declaration required: FUN_002eb588. */
-/* Supplied declaration required: FUN_002ee9c0. */
+/* Supplied declaration required: onlineUrlSetAddress. */
+/* Supplied declaration required: onlineUrlDestroy. */
+/* Supplied declaration required: onlineTimeGetNow. */
+/* Supplied declaration required: strHolderAssignU32. */
 /* Supplied declaration required: FUN_002f2afc. */
 
 
@@ -52,13 +52,13 @@ void FUN_0011394c(int param_1,unsigned int param_2)
   unsigned char temp_v5 [12];
   
   FUN_002ea974(temp_v4);
-  FUN_002ea9c0(temp_v4,param_2);
+  onlineUrlSetAddress(temp_v4,param_2);
   FUN_002e99e4(temp_v4,3);
   FUN_002f2afc(temp_v1);
   temp_v3[0] = 0;
-  FUN_002e9a56(temp_v1,temp_v3);
-  FUN_002ee9c0(temp_v1,param_1 + 0x14);
-  FUN_002eb588(temp_v5);
+  bufferAssignByte(temp_v1,temp_v3);
+  strHolderAssignU32(temp_v1,param_1 + 0x14);
+  onlineTimeGetNow(temp_v5);
   FUN_001037a2(temp_v1,temp_v5);
   for (temp_v0 = 0; temp_v0 < (*(unsigned int *)((unsigned char *)&DAT_00594a58 + 0x4c)); temp_v0 = temp_v0 + 1) {
     piVar1 = *(int **)(param_1 + 0x18);
@@ -71,8 +71,8 @@ void FUN_0011394c(int param_1,unsigned int param_2)
       FUN_00113cd0(*(int *)(param_1 + 0x10),temp_v4,temp_v2,0);
     }
   }
-  FUN_002e7658(temp_v1);
-  FUN_002ea9dc(temp_v4);
+  sharedRefHolderDestroy(temp_v1);
+  onlineUrlDestroy(temp_v4);
   return;
 }
 

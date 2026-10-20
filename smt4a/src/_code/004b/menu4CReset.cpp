@@ -3,11 +3,11 @@
 extern "C" {
 
 int FUN_00184528(int, int);
-int FUN_00184c00(int, int, int);
+int uiSpriteSetImageKeyframe(int, int, int);
 int FUN_001acf98(int);
 
 /* Supplied declaration required: FUN_00184528. */
-/* Supplied declaration required: FUN_00184c00. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_001acf98. */
 extern int FUN_004cfe4c(int);
 
@@ -27,7 +27,7 @@ void menu4CReset(int param_1)
   temp_v2 = 0;
   *(unsigned int *)(param_1 + 0x1074) = 0;
   do {
-    FUN_00184c00(param_1 + temp_v2 * 0x8c + 0xa10,0,0);
+    uiSpriteSetImageKeyframe(param_1 + temp_v2 * 0x8c + 0xa10,0,0);
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 10);
   FUN_00184528(param_1 + 0xa8,0);

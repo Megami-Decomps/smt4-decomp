@@ -10,8 +10,8 @@ int effBlockCreateFromBlock(void);
 int FUN_00250200(void);
 int FUN_0025c650(unsigned int, unsigned int *);
 int FUN_002629a8(int, int);
-int FUN_002bcd60(unsigned int *, int);
-int FUN_002bf694(unsigned int *, unsigned int);
+int rt_memcpy_w144(unsigned int *, int);
+int libc_strcpy(unsigned int *, unsigned int);
 int FUN_002de944(unsigned int, unsigned int);
 int rt_memcpy(unsigned int, unsigned int, unsigned int);
 int rt_memcpy_w(unsigned char *, unsigned int *, int);
@@ -37,15 +37,15 @@ extern unsigned char DAT_004d8ca0; /* 0x4d8ca0 */
 
 /* Supplied declaration required: FUN_00246854. */
 extern int FUN_002468e0(unsigned int, int);
-extern unsigned int FUN_00246908(unsigned int);
+extern unsigned int effEditorNodeListCount(unsigned int);
 /* Supplied declaration required: effPartsSetData. */
 extern unsigned int FUN_0024c3f8(unsigned int);
 /* Supplied declaration required: effBlockCreateFromBlock. */
 /* Supplied declaration required: FUN_00250200. */
 /* Supplied declaration required: FUN_0025c650. */
 /* Supplied declaration required: FUN_002629a8. */
-/* Supplied declaration required: FUN_002bcd60. */
-/* Supplied declaration required: FUN_002bf694. */
+/* Supplied declaration required: rt_memcpy_w144. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_002de944. */
 extern unsigned int *FUN_002f3208(unsigned int, unsigned int);
 /* Supplied declaration required: rt_memcpy. */
@@ -68,7 +68,7 @@ unsigned int FUN_00324714(void)
   temp_v0 = FUN_002468e0(DAT_0044ea94,DAT_0044ea8c + DAT_0044f864);
   puVar2 = (unsigned int *)FUN_002f3208(DAT_0044ea94,*(unsigned int *)(temp_v0 + 0x90));
   DAT_0044eaa4 = puVar2;
-  FUN_002bcd60(puVar2,temp_v0);
+  rt_memcpy_w144(puVar2,temp_v0);
   if ((*(unsigned int *)(temp_v0 + 0x98) & 2) != 0) {
     FUN_002de944(DAT_0044ea94,*(unsigned int *)(temp_v0 + 0x94));
   }
@@ -78,7 +78,7 @@ unsigned int FUN_00324714(void)
   DAT_0044ea9c = puVar2[0x24];
   puVar3 = puVar2;
   FUN_00246854();
-  FUN_002bf694(puVar2 + 0x27,*puVar3);
+  libc_strcpy(puVar2 + 0x27,*puVar3);
   if (*(short *)(puVar3 + 1) != 0x1b) {
     temp_v1 = FUN_0024c3f8(DAT_0044ea9c);
     rt_memcpy(puVar3[3],temp_v1,puVar3[4]);
@@ -115,7 +115,7 @@ unsigned int FUN_00324714(void)
 LAB_00324888:
       DAT_0044ea98 = temp_v1;
       *(unsigned char **)(DAT_0044eab8 + 0x34) = &DAT_0044f858;
-      temp_v2 = FUN_00246908(DAT_0044ea94);
+      temp_v2 = effEditorNodeListCount(DAT_0044ea94);
       if (temp_v2 >= 0x16) {
         DAT_0044ea8c = temp_v2 - 0x15;
         DAT_0044f864 = 0x14;

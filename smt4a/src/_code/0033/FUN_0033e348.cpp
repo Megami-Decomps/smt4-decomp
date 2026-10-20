@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_00162e8c(void);
-int FUN_001aea28(unsigned int);
+int gameFlagsGetBlock(void);
+int ptrListRemoveClearOwner(unsigned int);
 int dataTable2EType1Count(void);
 int dataTable2EType0Count(void);
 int FUN_0040ace8(unsigned int, int);
 
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern short *g_lmapScene; /* 0x581288 */
 extern int DAT_005f1848; /* 0x5f1848 */
 extern short *DAT_005f184c; /* 0x5f184c */
@@ -21,9 +21,9 @@ extern int DAT_005f1b20; /* 0x5f1b20 */
 extern int DAT_005f1c68; /* 0x5f1c68 */
 extern short *DAT_005f1c6c; /* 0x5f1c6c */
 
-/* Supplied declaration required: FUN_00162e8c. */
-extern unsigned short *FUN_001801a4(void);
-/* Supplied declaration required: FUN_001aea28. */
+/* Supplied declaration required: gameFlagsGetBlock. */
+extern unsigned short *gameGetPlayerData(void);
+/* Supplied declaration required: ptrListRemoveClearOwner. */
 extern short *dataTable2EType1GetEntry(int);
 extern short *dataTable2EType0GetEntry(int);
 /* Supplied declaration required: dataTable2EType1Count. */
@@ -42,8 +42,8 @@ unsigned int FUN_0033e348(void)
   int temp_v2;
   int temp_v3;
   
-  puVar1 = (unsigned short *)FUN_001801a4();
-  FUN_00162e8c();
+  puVar1 = (unsigned short *)gameGetPlayerData();
+  gameFlagsGetBlock();
   psVar2 = g_lmapScene;
   temp_v2 = *(int *)(g_lmapScene + 0xb6);
   if (temp_v2 != 0) {
@@ -59,7 +59,7 @@ unsigned int FUN_0033e348(void)
           *(int *)(g_lmapScene + 0xb8) = temp_v2;
         }
         temp_v2 = *(int *)(*(int *)(psVar2 + 0xb8) + 4);
-        FUN_0040ace8(DAT_0056fcc0,temp_v2);
+        FUN_0040ace8(g_handleRegistry,temp_v2);
         *(unsigned int *)(temp_v2 + 4) = *(unsigned int *)(temp_v2 + 4) | 3;
         psVar2 = g_lmapScene;
         psVar2[0xb2] = 0;
@@ -71,7 +71,7 @@ unsigned int FUN_0033e348(void)
         psVar2[0xb7] = 0;
         *(int *)(psVar2 + 0xc2) = DAT_005f1b14;
         temp_v2 = *(int *)(temp_v2 + 4);
-        FUN_0040ace8(DAT_0056fcc0,temp_v2);
+        FUN_0040ace8(g_handleRegistry,temp_v2);
         *(unsigned int *)(temp_v2 + 4) = *(unsigned int *)(temp_v2 + 4) | 3;
         psVar2 = g_lmapScene;
         psVar2[0xb2] = 0;
@@ -88,7 +88,7 @@ unsigned int FUN_0033e348(void)
       temp_v2 = 1;
       if ((*(int *)(g_lmapScene + 0xb8) != 0) &&
          (temp_v2 = 0, *(int *)(*(int *)(g_lmapScene + 0xb8) + 4) != 0)) {
-        FUN_001aea28(DAT_0056fcc0);
+        ptrListRemoveClearOwner(g_handleRegistry);
         temp_v2 = temp_v3;
       }
       temp_v1 = *(int *)(g_lmapScene + 0xc2);
@@ -96,7 +96,7 @@ unsigned int FUN_0033e348(void)
         temp_v2 = *(int *)(temp_v1 + 4);
       }
       if (temp_v1 != 0 && temp_v2 != 0) {
-        FUN_001aea28(DAT_0056fcc0);
+        ptrListRemoveClearOwner(g_handleRegistry);
       }
       temp_v2 = *(int *)(g_lmapScene + 0xb6) + 1;
     }

@@ -7,9 +7,9 @@ extern "C" {
 int FUN_00282bfc(...);
 int FUN_00289880(...);
 int FUN_002898e4(...);
-int FUN_0028d6d0(...);
+int buttonHelpCreate(...);
 int FUN_00297060(...);
-int FUN_00297410(...);
+int fileSlotLoad(...);
 int memClear(...);
 int taskCreateDraw(...);
 int asdMemoryAlloc(...);
@@ -36,9 +36,9 @@ extern unsigned int *g_clearSave; /* 0x43de80 */
 /* Supplied declaration required: FUN_00282bfc. */
 /* Supplied declaration required: FUN_00289880. */
 /* Supplied declaration required: FUN_002898e4. */
-/* Supplied declaration required: FUN_0028d6d0. */
+/* Supplied declaration required: buttonHelpCreate. */
 /* Supplied declaration required: FUN_00297060. */
-/* Supplied declaration required: FUN_00297410. */
+/* Supplied declaration required: fileSlotLoad. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAlloc. */
@@ -64,9 +64,9 @@ void FUN_001e121c(int param_1)
     *(unsigned char *)(g_clearSave + 2) = 1;
   }
   puVar1 = g_clearSave;
-  FUN_00297410(0x3c);
+  fileSlotLoad(0x3c);
   FUN_002898e4();
-  FUN_0028d6d0();
+  buttonHelpCreate();
   FUN_00289880();
   temp_v0 = FUN_002c5c04(&LAB_001e139c);
   puVar1[0x22] = temp_v0;

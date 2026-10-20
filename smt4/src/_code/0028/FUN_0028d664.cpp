@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00262210(...);
-int FUN_002769b4(...);
+int mapDepartSetTarget(...);
 int FUN_00295eb0(...);
 int FUN_00297060(...);
 int scrScriptProcessDestroy(...);
@@ -33,13 +33,13 @@ extern unsigned char LAB_0028d988; /* 0x28d988 */
 extern unsigned char DAT_00402538; /* 0x402538 */
 extern unsigned char DAT_00402544; /* 0x402544 */
 extern unsigned char DAT_00402550; /* 0x402550 */
-extern signed char DAT_0043da28; /* 0x43da28 */
+extern signed char g_buttonHelp; /* 0x43da28 */
 extern unsigned int *DAT_0043da2c; /* 0x43da2c */
 extern unsigned int DAT_0043da30; /* 0x43da30 */
 extern unsigned int DAT_0043da34; /* 0x43da34 */
 
 /* Supplied declaration required: FUN_00262210. */
-/* Supplied declaration required: FUN_002769b4. */
+/* Supplied declaration required: mapDepartSetTarget. */
 /* Supplied declaration required: FUN_00295eb0. */
 /* Supplied declaration required: FUN_00297060. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
@@ -83,8 +83,8 @@ void FUN_0028d664(unsigned int *param_1,unsigned char param_2)
     scrScriptProcessDestroy();
     param_1[5] = 0;
   }
-  FUN_002769b4(0xffffffff,0xffffffff);
-  if (DAT_0043da28 < '\x01') {
+  mapDepartSetTarget(0xffffffff,0xffffffff);
+  if (g_buttonHelp < '\x01') {
     if (DAT_0043da2c == (unsigned int *)0x0) {
       puVar3 = (unsigned int *)0x100;
       asdMemAlloc(0x100,0x100,0,0x564,1);
@@ -135,7 +135,7 @@ void FUN_0028d664(unsigned int *param_1,unsigned char param_2)
     FUN_00297060(DAT_0043da34,DAT_0043da30);
     puVar3[0x158] = temp_v0;
   }
-  DAT_0043da28 = DAT_0043da28 + '\x01';
+  g_buttonHelp = g_buttonHelp + '\x01';
   return;
 }
 

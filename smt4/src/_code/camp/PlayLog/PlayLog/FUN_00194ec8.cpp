@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_00297410(int);
+int fileSlotLoad(int);
 int FUN_0029f848(...);
-int FUN_002a5ed0(int, int);
+int asdTMTexTableLoadEntryAsync(int, int);
 int timerStart(int, int);
 int FUN_002bd954(int, int, int, int, int);
 int dataTableGetCount(...);
@@ -31,11 +31,11 @@ typedef struct {
 extern unsigned char DAT_00402d04; /* 0x402d04 */
 extern int g_playLog; /* 0x43dd08 */
 
-extern int FUN_00290794(unsigned short);
+extern int gameCountersGetWord(unsigned short);
 extern int FUN_002907a8(void);
-/* Supplied declaration required: FUN_00297410. */
+/* Supplied declaration required: fileSlotLoad. */
 /* Supplied declaration required: FUN_0029f848. */
-/* Supplied declaration required: FUN_002a5ed0. */
+/* Supplied declaration required: asdTMTexTableLoadEntryAsync. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: dataTableGetCount. */
@@ -70,8 +70,8 @@ void FUN_00194ec8(void)
   memClear();
   *(unsigned int *)(temp_v0 + 0x344) = 0;
   asdTMTexTableLoadSprites(0x30);
-  FUN_002a5ed0(0x30,0);
-  FUN_00297410(0x37);
+  asdTMTexTableLoadEntryAsync(0x30,0);
+  fileSlotLoad(0x37);
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(temp_v0);
   FUN_002c312c(temp_v0,&DAT_00402d04,0x18,0,0,0,0,0,0,0,0);
   temp_v4 = 0;
@@ -94,7 +94,7 @@ void FUN_00194ec8(void)
       if (temp_v5 >= temp_v2) {
         puVar8 = (unsigned short *)0x0;
 LAB_001950d4:
-        temp_v4 = FUN_00290794(*puVar8 & 0xff);
+        temp_v4 = gameCountersGetWord(*puVar8 & 0xff);
         temp_v3 = temp_v0 + temp_v5 * 4;
         *(int *)(temp_v3 + 0x35c) = temp_v4;
         if ((*puVar8 & 0xff) != 0x29) {

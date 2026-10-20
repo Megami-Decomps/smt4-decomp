@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_2_stack;
 
-extern unsigned int FUN_002c30c4(int);
+extern unsigned int libc_strlen(int);
 /* Supplied declaration required: FUN_0037356c. */
 /* Supplied declaration required: FUN_003e5e60. */
 extern int nw_ut_ResDicPatricia_Get(int *, int, unsigned int);
@@ -85,7 +85,7 @@ void FUN_00370fa8(int param_1,int param_2)
         temp_v8[0] = (int)piVar1 + temp_v2;
       }
       if (!(temp_v8[0] == 0 || temp_v1 == 0)) {
-        temp_v0 = FUN_002c30c4(temp_v1);
+        temp_v0 = libc_strlen(temp_v1);
         temp_v2 = nw_ut_ResDicPatricia_Get(temp_v8,temp_v1,temp_v0);
         if (temp_v2 != 0) {
           temp_v2 = ((temp_v2 - temp_v8[0]) - 0x1c) >> 4;

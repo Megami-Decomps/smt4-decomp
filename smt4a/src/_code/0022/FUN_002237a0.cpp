@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001628c0(...);
-int FUN_00169ddc(...);
+int eventQueueAddUnique(...);
 int FUN_00234880(void);
 int FUN_00295108(void);
 int mapIfStart(void);
@@ -24,11 +24,11 @@ extern int DAT_005f1908; /* 0x5f1908 */
 extern unsigned char DAT_005f19ee; /* 0x5f19ee */
 
 extern unsigned int FUN_0014af98(void);
-extern int FUN_0014bef4(unsigned int);
+extern int randRange(unsigned int);
 extern unsigned int FUN_00152f44(void);
 extern int saveSlotFindSelected(void);
 /* Supplied declaration required: FUN_001628c0. */
-/* Supplied declaration required: FUN_00169ddc. */
+/* Supplied declaration required: eventQueueAddUnique. */
 /* Supplied declaration required: FUN_00234880. */
 /* Supplied declaration required: FUN_00295108. */
 /* Supplied declaration required: mapIfStart. */
@@ -250,7 +250,7 @@ LAB_00223df0:
       else {
         temp_v1 = 0x1000212;
       }
-      FUN_00169ddc(temp_v1);
+      eventQueueAddUnique(temp_v1);
       DAT_005f19ee = 1;
       goto LAB_00223df0;
     }
@@ -332,7 +332,7 @@ LAB_00223c28:
       FUN_00234880();
       DAT_005f18e4 = 0;
       if ((*g_popupState != 0 && *g_popupState != 0x12) &&
-         (temp_v3 = FUN_0014bef4(99), temp_v3 + 1 < 0xb)) {
+         (temp_v3 = randRange(99), temp_v3 + 1 < 0xb)) {
         FUN_002d8c90(0x12);
       }
     }

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002b945c(int);
-int FUN_00324bc8(int, int, int);
+int mapPlaceSet(int, int, int);
 int FUN_00376fb8(int);
 
 extern int g_lmapScene; /* 0x581288 */
@@ -17,9 +17,9 @@ extern float DAT_005f16bc; /* 0x5f16bc */
 extern float DAT_005f16cc; /* 0x5f16cc */
 extern unsigned char DAT_005f1b70; /* 0x5f1b70 */
 
-extern int FUN_00162e8c(void);
+extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_002b945c. */
-/* Supplied declaration required: FUN_00324bc8. */
+/* Supplied declaration required: mapPlaceSet. */
 /* Supplied declaration required: FUN_00376fb8. */
 
 
@@ -30,9 +30,9 @@ unsigned int FUN_003b0310(void)
   int temp_v0;
   int temp_v1;
   
-  temp_v1 = FUN_00162e8c();
+  temp_v1 = gameFlagsGetBlock();
   FUN_00376fb8(0x65);
-  FUN_00324bc8(0x18,1,0);
+  mapPlaceSet(0x18,1,0);
   FUN_002b945c(1);
   DAT_005f1623 = 1;
   DAT_005f1b70 = 0;

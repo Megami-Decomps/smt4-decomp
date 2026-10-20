@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e76b6(...);
+int onlineBufferGetData(...);
 int FUN_002ed2b0(unsigned char [16], int, unsigned int, unsigned int, unsigned int, int, int);
 
 /* stack frame of param_5: 5 slot(s), 20 byte(s) */
@@ -16,7 +16,7 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } param_5_stack;
 
-/* Supplied declaration required: FUN_002e76b6. */
+/* Supplied declaration required: onlineBufferGetData. */
 extern int FUN_002ea908(unsigned char *, int);
 /* Supplied declaration required: FUN_002ed2b0. */
 
@@ -41,8 +41,8 @@ unsigned char FUN_0010632c(unsigned int param_1,int param_2,int param_3,unsigned
   iStack_20 = param_2;
   iStack_1c = param_3;
   temp_v5 = param_4;
-  temp_v0 = FUN_002e76b6();
-  temp_v1 = FUN_002e76b6(*(unsigned int *)(param_2 + 8));
+  temp_v0 = onlineBufferGetData();
+  temp_v1 = onlineBufferGetData(*(unsigned int *)(param_2 + 8));
   FUN_002ed2b0(temp_v3,*(unsigned short *)(param_3 + 0xa2) & 0xf,temp_v5,param_5,temp_v1,temp_v0 + 0x2c,
                temp_v2 - 0x2c);
   temp_v0 = FUN_002ea908(temp_v3,param_3 + 0x28);

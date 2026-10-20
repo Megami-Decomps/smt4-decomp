@@ -4,19 +4,19 @@
 
 extern "C" {
 
-int FUN_002e3494(void);
-int FUN_002e4e92(void);
+int asdOperatorDeleteB(void);
+int rt_vec_delete(void);
 
-/* Supplied declaration required: FUN_002e3494. */
-/* Supplied declaration required: FUN_002e4e92. */
+/* Supplied declaration required: asdOperatorDeleteB. */
+/* Supplied declaration required: rt_vec_delete. */
 
 
 void FUN_002e56e4(void)
 
 {
 /* irregular: 2 native warning(s); review required */
-  FUN_002e4e92();
-  FUN_002e3494();
+  rt_vec_delete();
+  asdOperatorDeleteB();
   return;
 }
 

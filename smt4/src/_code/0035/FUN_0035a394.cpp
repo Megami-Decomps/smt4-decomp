@@ -5,7 +5,7 @@
 extern "C" {
 
 typedef int romwright_code(...);
-extern unsigned char DAT_0044e458; /* 0x44e458 */
+extern unsigned char g_callbackState; /* 0x44e458 */
 extern unsigned char DAT_0044e459; /* 0x44e459 */
 extern unsigned char DAT_0044e45a; /* 0x44e45a */
 extern unsigned int DAT_0044e460; /* 0x44e460 */
@@ -37,7 +37,7 @@ void FUN_0035a394(void)
     temp_v0 = 1;
     DAT_0044e45a = 1;
   }
-  DAT_0044e458 = temp_v0;
+  g_callbackState = temp_v0;
   return;
 }
 

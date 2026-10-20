@@ -11,7 +11,7 @@ extern int FUN_0030cbf0(...); /* 0x30cbf0 */
 extern unsigned char DAT_005949d8; /* 0x5949d8 */
 
 extern unsigned int rt_malloc(int);
-extern unsigned int *FUN_002f5010(unsigned int);
+extern unsigned int *operatorNewArray(unsigned int);
 /* Supplied declaration required: FUN_002f5020. */
 /* Supplied declaration required: FUN_004325f4. */
 
@@ -26,7 +26,7 @@ void FUN_001294fc(int param_1)
   unsigned int temp_v2;
   
   if (((*(unsigned int *)((unsigned char *)&DAT_005949d8 + 0x28)) == 0xffffffff) &&
-     (puVar1 = (unsigned int *)FUN_002f5010(0xffffff30), puVar1 != (unsigned int *)0x0)) {
+     (puVar1 = (unsigned int *)operatorNewArray(0xffffff30), puVar1 != (unsigned int *)0x0)) {
     puVar1[1] = 0xffffffff;
     *puVar1 = 0xd8;
     FUN_002f5020(puVar1 + 2,FUN_0030cbf0,0xd8,0xffffffff);

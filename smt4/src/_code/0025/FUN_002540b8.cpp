@@ -13,10 +13,10 @@ typedef struct {
 
 extern int FUN_002886b0(unsigned short);
 /* Supplied declaration required: FUN_002886c8. */
-extern int FUN_00298de8(unsigned short);
+extern int idIsAtLeast350(unsigned short);
 extern int FUN_00298f88(unsigned short);
 extern int FUN_00298fa0(unsigned short, unsigned int);
-extern int FUN_002adc88(void);
+extern int gameGetFlagBlock(void);
 
 
 void FUN_002540b8(int param_1)
@@ -38,7 +38,7 @@ void FUN_002540b8(int param_1)
     temp_v1 = FUN_002886c8(*(unsigned short *)(param_1 + 0x982));
     if (temp_v1 != 0) {
       temp_v0 = *(unsigned short *)(param_1 + 0x982);
-      temp_v1 = FUN_002adc88();
+      temp_v1 = gameGetFlagBlock();
       temp_v1 = temp_v1 + (unsigned int)temp_v0 * 4;
       *(unsigned char *)(temp_v1 + 0x200) = *(unsigned char *)(temp_v1 + 0x200) & 0x9f;
       return;
@@ -49,14 +49,14 @@ void FUN_002540b8(int param_1)
     }
   }
   else {
-    temp_v1 = FUN_00298de8(*(unsigned short *)(param_1 + 0x982));
+    temp_v1 = idIsAtLeast350(*(unsigned short *)(param_1 + 0x982));
     if (temp_v1 != 0) {
       temp_v1 = FUN_002886c8();
       if (temp_v1 == 0) {
         return;
       }
       temp_v0 = *(unsigned short *)(param_1 + 0x982);
-      temp_v1 = FUN_002adc88();
+      temp_v1 = gameGetFlagBlock();
       temp_v1 = temp_v1 + (unsigned int)temp_v0 * 4;
       *(unsigned char *)(temp_v1 + 0x200) = *(unsigned char *)(temp_v1 + 0x200) & 0x9f;
       return;
@@ -78,7 +78,7 @@ void FUN_002540b8(int param_1)
     }
   }
   temp_v0 = *(unsigned short *)(param_1 + 0x982);
-  temp_v1 = FUN_002adc88();
+  temp_v1 = gameGetFlagBlock();
   temp_v1 = temp_v1 + (unsigned int)temp_v0 * 4;
   *(unsigned char *)(temp_v1 + 0x200) = *(unsigned char *)(temp_v1 + 0x200) & 0x9f;
   return;

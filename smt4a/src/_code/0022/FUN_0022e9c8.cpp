@@ -24,7 +24,7 @@ typedef struct {
 } void_stack;
 
 extern unsigned char LAB_0022ecd0; /* 0x22ecd0 */
-extern unsigned char DAT_00588fd0; /* 0x588fd0 */
+extern unsigned char g_gameGlobals; /* 0x588fd0 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00162790. */
@@ -60,11 +60,11 @@ void FUN_0022e9c8(void)
   unsigned int temp_v14;
   unsigned short *temp_v15;
   
-  temp_v7 = (*(int *)((unsigned char *)&DAT_00588fd0 + 0x4));
-  if (*(char *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x2017) != '\0' && *(char *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x2017) != '\x04') {
+  temp_v7 = (*(int *)((unsigned char *)&g_gameGlobals + 0x4));
+  if (*(char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x2017) != '\0' && *(char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x2017) != '\x04') {
     temp_v11 = 0;
     temp_v12[0] = 0;
-    temp_v0 = *(unsigned short *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x19a8);
+    temp_v0 = *(unsigned short *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x19a8);
     FUN_00230a50(&temp_v11,temp_v12,0x17);
     efctSetSpeed();
     FUN_001835b4(2,0x12,0x119,temp_v11,temp_v12[0],0xdd);

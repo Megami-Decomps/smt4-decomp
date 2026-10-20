@@ -10,9 +10,9 @@ int FUN_00146e30(void);
 int FUN_00147120(void);
 int asdMemFree(unsigned int);
 int FUN_001a0d08(int *);
-int FUN_001afdc4(void);
+int nn_snd_CTR_FreeVoice(void);
 int FUN_002e3140(void);
-int FUN_002e3328(int);
+int asdOperatorDelete(int);
 int software_interrupt(int);
 
 typedef int romwright_code(...);
@@ -40,9 +40,9 @@ extern unsigned int DAT_00618520; /* 0x618520 */
 /* Supplied declaration required: FUN_00147120. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_001a0d08. */
-/* Supplied declaration required: FUN_001afdc4. */
+/* Supplied declaration required: nn_snd_CTR_FreeVoice. */
 /* Supplied declaration required: FUN_002e3140. */
-/* Supplied declaration required: FUN_002e3328. */
+/* Supplied declaration required: asdOperatorDelete. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
 extern void nn_snd_CTR_Voice_SetState(unsigned int, int);
@@ -88,7 +88,7 @@ void FUN_00422ef8(void)
   temp_v0 = DAT_005880e0;
   if (DAT_005880e0 != 0) {
     FUN_001469a8(DAT_005880e0);
-    FUN_002e3328(temp_v0);
+    asdOperatorDelete(temp_v0);
   }
   DAT_005880e0 = 0;
   asdMemFree(DAT_005880dc);
@@ -109,7 +109,7 @@ LAB_00423070:
       nn_os_CriticalSection_Enter((unsigned int)&DAT_00618518);
       piVar3 = (int *)(DAT_005880d8 + temp_v1 * 0x70);
       if (*piVar3 != 0) {
-        FUN_001afdc4();
+        nn_snd_CTR_FreeVoice();
         *piVar3 = 0;
       }
       if (piVar3[1] != 0) {

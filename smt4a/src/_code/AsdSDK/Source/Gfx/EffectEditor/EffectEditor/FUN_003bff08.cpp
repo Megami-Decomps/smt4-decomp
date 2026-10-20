@@ -5,8 +5,8 @@
 extern "C" {
 
 int CONCAT44(double, double);
-int FUN_00164af0(...);
-int FUN_001656a0(...);
+int padButtonRepeat(...);
+int padButtonIsPressed(...);
 int memAlloc(int, int, int, int, int, int);
 int FUN_001a1ee0(void);
 int FUN_001b63b0(void);
@@ -95,8 +95,8 @@ static float romwright_sqrt_4(float value)
 }
 #endif
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-/* Supplied declaration required: FUN_00164af0. */
-/* Supplied declaration required: FUN_001656a0. */
+/* Supplied declaration required: padButtonRepeat. */
+/* Supplied declaration required: padButtonIsPressed. */
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_001a1ee0. */
 /* Supplied declaration required: FUN_001b63b0. */
@@ -157,15 +157,15 @@ unsigned int FUN_003bff08(void)
   FUN_00243ce8(8,8,0,&LAB_003c02d8);
   FUN_00243ce8(8,0x14,0,&LAB_003c02f0);
   FUN_00243ce8(8,0x20,0,&LAB_003c0304);
-  temp_v9 = FUN_00164af0(5);
+  temp_v9 = padButtonRepeat(5);
   if (temp_v9 == 0) {
     FUN_00202178(5);
-    temp_v9 = FUN_00164af0();
+    temp_v9 = padButtonRepeat();
     if (temp_v9 != 0) goto LAB_003bff88;
-    temp_v9 = FUN_00164af0(6);
+    temp_v9 = padButtonRepeat(6);
     if (temp_v9 == 0) {
       FUN_00202178(6);
-      temp_v9 = FUN_00164af0();
+      temp_v9 = padButtonRepeat();
       if (temp_v9 != 0) goto LAB_003c002c;
     }
     else {
@@ -215,15 +215,15 @@ LAB_003bff88:
     DAT_0059dbe2 = DAT_0059dbe5 + DAT_0059dbe2;
     temp_v12 = 3;
   }
-  temp_v9 = FUN_00164af0(3);
+  temp_v9 = padButtonRepeat(3);
   if (temp_v9 == 0) {
     FUN_00202178(3);
-    temp_v9 = FUN_00164af0();
+    temp_v9 = padButtonRepeat();
     if (temp_v9 != 0) goto LAB_003c00cc;
-    temp_v9 = FUN_00164af0(4);
+    temp_v9 = padButtonRepeat(4);
     if (temp_v9 == 0) {
       FUN_00202178(4);
-      temp_v9 = FUN_00164af0();
+      temp_v9 = padButtonRepeat();
       if (temp_v9 != 0) goto LAB_003c0144;
       goto LAB_003c00f8;
     }
@@ -257,15 +257,15 @@ LAB_003c00cc:
 LAB_003c00f4:
       temp_v12 = temp_v12 | 2;
 LAB_003c00f8:
-      temp_v9 = FUN_00164af0(7);
+      temp_v9 = padButtonRepeat(7);
       if (temp_v9 == 0) {
         FUN_00202178(7);
-        temp_v9 = FUN_00164af0();
+        temp_v9 = padButtonRepeat();
         if (temp_v9 == 0) {
-          temp_v9 = FUN_00164af0(8);
+          temp_v9 = padButtonRepeat(8);
           if (temp_v9 == 0) {
             FUN_00202178(8);
-            temp_v9 = FUN_00164af0();
+            temp_v9 = padButtonRepeat();
             if (temp_v9 == 0) goto LAB_003c01a8;
           }
           goto LAB_003c03d4;
@@ -477,10 +477,10 @@ LAB_003c01a8:
   DAT_00634c48 = DAT_0059dbe2;
   DAT_00634c49 = DAT_0059dbe3;
   DAT_00634c4a = DAT_0059dbe4;
-  temp_v9 = FUN_001656a0(1);
+  temp_v9 = padButtonIsPressed(1);
   if (temp_v9 == 0) {
     FUN_00202178(1);
-    temp_v9 = FUN_001656a0();
+    temp_v9 = padButtonIsPressed();
     if (temp_v9 == 0) {
       return temp_v12 | 0x200000;
     }

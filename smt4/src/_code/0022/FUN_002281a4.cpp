@@ -5,11 +5,11 @@
 extern "C" {
 
 int btlGetMainState(...);
-int FUN_002aa568(...);
+int libc_strcmp(...);
 
 extern int FUN_00293230(void);
 /* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: FUN_002aa568. */
+/* Supplied declaration required: libc_strcmp. */
 
 
 int FUN_002281a4(int param_1)
@@ -30,7 +30,7 @@ int FUN_002281a4(int param_1)
     do {
       temp_v1 = *(int *)(param_1 + 0x1cfc) + temp_v0 * 0x16 + 0x58;
       pcVar2 = "NOT_EFT";
-      FUN_002aa568("NOT_EFT",temp_v1);
+      libc_strcmp("NOT_EFT",temp_v1);
       if (pcVar2 == (char *)0x0) {
         return (int)*(short *)(temp_v1 + 0x10);
       }

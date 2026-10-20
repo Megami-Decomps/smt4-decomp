@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001b43f0(...);
 int FUN_00246944(...);
 int FUN_002be624(...);
-int FUN_002bf694(...);
+int libc_strcpy(...);
 
 extern unsigned char LAB_00250c4c; /* 0x250c4c */
 extern unsigned char LAB_00250c54; /* 0x250c54 */
@@ -28,9 +28,9 @@ extern unsigned char *DAT_00447578; /* 0x447578 */
 /* Supplied declaration required: FUN_001b43f0. */
 /* Supplied declaration required: FUN_00246944. */
 /* Supplied declaration required: FUN_002be624. */
-/* Supplied declaration required: FUN_002bf694. */
-extern int FUN_002c09d0(unsigned int);
-extern int FUN_002c2950(void);
+/* Supplied declaration required: libc_strcpy. */
+extern int gameFlagIsSet(unsigned int);
+extern int gameGetMapBlock(void);
 
 
 void FUN_0025090c(char *param_1,unsigned char *param_2,int param_3,unsigned int param_4)
@@ -48,15 +48,15 @@ void FUN_0025090c(char *param_1,unsigned char *param_2,int param_3,unsigned int 
   unsigned char temp_v6 [68];
   
   if (param_3 != 2) {
-    temp_v1 = FUN_002c2950();
+    temp_v1 = gameGetMapBlock();
     if ((((param_1 + -0x19 < (char *)0x6) || (param_1 == (char *)0x66)) &&
-        (temp_v2 = FUN_002c09d0(0x144), temp_v2 == 0)) ||
+        (temp_v2 = gameFlagIsSet(0x144), temp_v2 == 0)) ||
        (((param_1 + -0x1f < (char *)0x5 || (param_1 == (char *)0x67)) &&
-        (temp_v2 = FUN_002c09d0(0x15a), temp_v2 == 0)))) {
+        (temp_v2 = gameFlagIsSet(0x15a), temp_v2 == 0)))) {
       FUN_002be624(param_4,&LAB_00250c4c);
       return;
     }
-    temp_v2 = FUN_002c2950();
+    temp_v2 = gameGetMapBlock();
     temp_v4 = 0;
     if (*(char *)(temp_v2 + 3) != '\x01') {
       if (param_1 == (char *)0x18) {
@@ -76,7 +76,7 @@ void FUN_0025090c(char *param_1,unsigned char *param_2,int param_3,unsigned int 
       }
     }
     if (param_3 == 0) {
-      temp_v1 = FUN_002c2950();
+      temp_v1 = gameGetMapBlock();
       if (*(unsigned char *)(temp_v1 + 3) != 0) {
         FUN_002be624(param_4,*(unsigned int *)
                               (s__B_B_B_B_B_B_B_B_B_B_00447550 + (unsigned int)*(unsigned char *)(temp_v1 + 3) * 4));
@@ -84,7 +84,7 @@ void FUN_0025090c(char *param_1,unsigned char *param_2,int param_3,unsigned int 
       }
     }
     if (temp_v4 == 2) {
-      temp_v1 = FUN_002c2950();
+      temp_v1 = gameGetMapBlock();
       if (*(char *)(temp_v1 + 0x792) == 0) {
         FUN_002be624(param_4,&LAB_00250c64);
         return;
@@ -118,10 +118,10 @@ void FUN_0025090c(char *param_1,unsigned char *param_2,int param_3,unsigned int 
     }
     if (param_1 == (char *)0x65) {
       temp_v3 = FUN_00246944(pcVar3,puVar6);
-      FUN_002bf694(temp_v5,temp_v3);
+      libc_strcpy(temp_v5,temp_v3);
       FUN_002be624(param_4,&LAB_00250c54,temp_v5);
       FUN_001b43f0(0x65,param_2);
-      FUN_002bf694(temp_v6,param_1);
+      libc_strcpy(temp_v6,param_1);
       FUN_002be624(param_4,&LAB_00250c58,temp_v5,temp_v6);
       return;
     }
@@ -134,9 +134,9 @@ void FUN_0025090c(char *param_1,unsigned char *param_2,int param_3,unsigned int 
           return;
         }
         temp_v3 = FUN_00246944(param_1);
-        FUN_002bf694(temp_v5,temp_v3);
+        libc_strcpy(temp_v5,temp_v3);
         FUN_001b43f0(param_1,param_2);
-        FUN_002bf694(temp_v6,param_1);
+        libc_strcpy(temp_v6,param_1);
         FUN_002be624(param_4,&LAB_00250c58,temp_v5,temp_v6);
         return;
       }
@@ -150,7 +150,7 @@ void FUN_0025090c(char *param_1,unsigned char *param_2,int param_3,unsigned int 
                   if ((param_1 == (char *)0xcb) ||
                      ((param_1 != (char *)0x65 && ((int)param_1 >= 0x66)))) {
                     temp_v3 = FUN_00246944(param_1);
-                    FUN_002bf694(temp_v5,temp_v3);
+                    libc_strcpy(temp_v5,temp_v3);
                     FUN_002be624(param_4,&LAB_00250c54,temp_v5);
                     return;
                   }
@@ -183,9 +183,9 @@ void FUN_0025090c(char *param_1,unsigned char *param_2,int param_3,unsigned int 
           return;
         }
         temp_v3 = FUN_00246944(param_1);
-        FUN_002bf694(temp_v5,temp_v3);
+        libc_strcpy(temp_v5,temp_v3);
         FUN_001b43f0(param_1,param_2);
-        FUN_002bf694(temp_v6,param_1);
+        libc_strcpy(temp_v6,param_1);
         FUN_002be624(param_4,&LAB_00250c58,temp_v5,temp_v6);
         return;
       }
@@ -204,9 +204,9 @@ void FUN_0025090c(char *param_1,unsigned char *param_2,int param_3,unsigned int 
     return;
   }
   temp_v3 = FUN_00246944(param_1);
-  FUN_002bf694(temp_v5,temp_v3);
+  libc_strcpy(temp_v5,temp_v3);
   FUN_001b43f0(param_1,param_2);
-  FUN_002bf694(temp_v6,param_1);
+  libc_strcpy(temp_v6,param_1);
   FUN_002be624(param_4,&LAB_00250c58,temp_v5,temp_v6);
   return;
 }

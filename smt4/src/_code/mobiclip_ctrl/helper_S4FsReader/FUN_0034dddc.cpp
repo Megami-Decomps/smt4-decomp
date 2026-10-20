@@ -9,7 +9,7 @@ int FUN_002bcc60(...);
 int FUN_002bcd44(...);
 int asdOperatorNew(...);
 int memAlloc(...);
-int FUN_002c38fc(...);
+int nn_os_CriticalSection_Initialize(...);
 int FUN_002c526c(...);
 int software_interrupt(...);
 
@@ -37,7 +37,7 @@ extern unsigned int *DAT_0044d134; /* 0x44d134 */
 /* Supplied declaration required: FUN_002bcd44. */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: memAlloc. */
-/* Supplied declaration required: FUN_002c38fc. */
+/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
 /* Supplied declaration required: FUN_002c526c. */
 
 
@@ -71,7 +71,7 @@ unsigned int FUN_0034dddc(unsigned int *param_1,int *param_2,unsigned int *param
   param_1[3] = 0;
   param_1[6] = 0;
   param_1[7] = 0;
-  FUN_002c38fc(param_1 + 0x10);
+  nn_os_CriticalSection_Initialize(param_1 + 0x10);
   temp_v1[0] = 0;
   FUN_002b5820(temp_v1,0);
   if (-1 < (int)piVar2) {

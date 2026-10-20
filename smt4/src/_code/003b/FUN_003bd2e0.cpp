@@ -11,12 +11,12 @@ int FUN_0022abe0(void);
 int FUN_00246134(unsigned int, unsigned int, int, unsigned int);
 int FUN_00247478(...);
 int FUN_0027da30(unsigned int *, unsigned int);
-int FUN_00282924(...);
+int btlMainFindEntryByListedId(...);
 int FUN_00283e48(void);
 int FUN_00283ebc(...);
 int btlGetMainState(void);
 int FUN_002ae164(void);
-int FUN_002b4670(void);
+int dataTable08Sub1GetRecord(void);
 int memClear(...);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
@@ -74,13 +74,13 @@ extern unsigned int FUN_002463e8(unsigned int);
 /* Supplied declaration required: FUN_00247478. */
 extern unsigned int FUN_00255de0(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0027da30. */
-/* Supplied declaration required: FUN_00282924. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_00283e48. */
 /* Supplied declaration required: FUN_00283ebc. */
 /* Supplied declaration required: btlGetMainState. */
 extern unsigned int FUN_002ae108(unsigned int);
 /* Supplied declaration required: FUN_002ae164. */
-/* Supplied declaration required: FUN_002b4670. */
+/* Supplied declaration required: dataTable08Sub1GetRecord. */
 /* Supplied declaration required: memClear. */
 extern unsigned int FUN_003bf554(unsigned int);
 
@@ -147,7 +147,7 @@ unsigned int FUN_003bd2e0(unsigned int param_1,unsigned int param_2,int param_3,
   temp_v1 = temp_v39;
   FUN_002ae164();
   temp_v37 = temp_v1;
-  FUN_002b4670();
+  dataTable08Sub1GetRecord();
   temp_v1 = 0;
   if (param_3 != 0) {
     temp_v1 = (unsigned int)*(unsigned short *)(param_3 + 0x62);
@@ -157,9 +157,9 @@ unsigned int FUN_003bd2e0(unsigned int param_1,unsigned int param_2,int param_3,
     temp_v37 = temp_v1;
   }
   puVar3 = temp_v32;
-  FUN_00282924(temp_v32,temp_v40);
+  btlMainFindEntryByListedId(temp_v32,temp_v40);
   puVar7 = temp_v32;
-  FUN_00282924(temp_v32,param_5);
+  btlMainFindEntryByListedId(temp_v32,param_5);
   temp_v34 = puVar7;
   FUN_00247478(temp_v23,temp_v32,puVar3);
   temp_v3 = temp_v40;
@@ -179,7 +179,7 @@ unsigned int FUN_003bd2e0(unsigned int param_1,unsigned int param_2,int param_3,
   }
   temp_v14 = (float)VectorUnsignedToFloat((unsigned int)temp_v26,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v2 = btlGetMainState();
-  FUN_00282924(temp_v2,temp_v3);
+  btlMainFindEntryByListedId(temp_v2,temp_v3);
   temp_v3 = btlGetMainState();
   FUN_00247478(temp_v20,temp_v3,temp_v2);
   memClear(temp_v28,0x48);
@@ -311,7 +311,7 @@ unsigned int FUN_003bd2e0(unsigned int param_1,unsigned int param_2,int param_3,
             temp_v3 = temp_v40;
             temp_v8 = temp_v39;
             puVar7 = (unsigned int *)btlGetMainState();
-            FUN_00282924(puVar7,temp_v3);
+            btlMainFindEntryByListedId(puVar7,temp_v3);
             if (((*puVar7 & 2) != 0) && (temp_v6 = temp_v8, FUN_002ae164(), temp_v6 != 0)) {
               temp_v3 = FUN_002ae108(temp_v8);
               FUN_00283ebc(temp_v6,temp_v3,3);
@@ -329,7 +329,7 @@ unsigned int FUN_003bd2e0(unsigned int param_1,unsigned int param_2,int param_3,
             temp_v8 = temp_v27[temp_v13] & 0xffff;
             temp_v16 = CONCAT44(temp_v2,temp_v14 + temp_v11 * (float)temp_v18 * temp_v14);
             temp_v9 = btlGetMainState();
-            FUN_00282924(temp_v9,param_5);
+            btlMainFindEntryByListedId(temp_v9,param_5);
             if (temp_v9 == 0) {
               temp_v14 = (float)temp_v15;
             }

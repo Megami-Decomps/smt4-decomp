@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00224880(...);
-int FUN_00275f44(...);
+int scrScriptProcessStartEntry(...);
 int FUN_002f0384(...);
 int FUN_003180c4(...);
 int panelSetMode3(...);
@@ -20,7 +20,7 @@ int FUN_00496a0c(...);
 int FUN_0049cd18(...);
 int setListWindow(...);
 
-int FUN_001641c4(void);
+int ifTouchRegionRemove(void);
 int sysPlaySe(...);
 int FUN_00184528(unsigned int *, int);
 int FUN_002c2c80(...);
@@ -49,18 +49,18 @@ extern unsigned char LAB_0049baac; /* 0x49baac */
 extern unsigned char LAB_0049bcfc; /* 0x49bcfc */
 extern unsigned char LAB_0049bd0c; /* 0x49bd0c */
 
-/* Supplied declaration required: FUN_001641c4. */
-extern unsigned int FUN_001654d8(unsigned int *);
-extern unsigned int FUN_001654e4(unsigned int *);
+/* Supplied declaration required: ifTouchRegionRemove. */
+extern unsigned int vec2GetXInt(unsigned int *);
+extern unsigned int vec2GetYInt(unsigned int *);
 /* Supplied declaration required: sysPlaySe. */
-extern unsigned short *FUN_001801a4(void);
+extern unsigned short *gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00184528. */
 extern unsigned int FUN_00192718(unsigned short);
 extern unsigned int FUN_001ba3d0(unsigned short);
 /* Supplied declaration required: FUN_00224880. */
 extern int FUN_0023b3f8(void);
 extern int FUN_0026272c(void);
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002a482c(unsigned int *);
 extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_002c2c80. */
@@ -71,7 +71,7 @@ extern int FUN_0031d174(unsigned int *);
 extern int objBStateAllowsAction(void);
 /* Supplied declaration required: screenShowMessage. */
 /* Supplied declaration required: obj04Finish. */
-extern unsigned int FUN_00357bc8(unsigned int, unsigned char *);
+extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_00359974. */
 /* Supplied declaration required: FUN_003720a0. */
 /* Supplied declaration required: FUN_003720e4. */
@@ -139,8 +139,8 @@ void FUN_0049b00c(unsigned int *param_1)
     break;
   case 1:
     FUN_004cf8dc(param_1 + 0xf3,6);
-    temp_v4 = FUN_001654e4(param_1 + 0x1cd);
-    temp_v2 = FUN_001654d8(param_1 + 0x1cd);
+    temp_v4 = vec2GetYInt(param_1 + 0x1cd);
+    temp_v2 = vec2GetXInt(param_1 + 0x1cd);
     FUN_004935b0(param_1 + 0xee,temp_v2,temp_v4);
     if (*(char *)((int)param_1 + 0x7be) != '\0') {
       FUN_00493a7c(param_1 + 0x2d2);
@@ -195,8 +195,8 @@ void FUN_0049b00c(unsigned int *param_1)
     if ((temp_v5 != 0) && (param_1[0x5812] == temp_v1)) {
       if ((int)param_1[0x2d2] >= 1) {
         if (!(param_1[0x2d0] == 7 || param_1[0x2d0] == 8)) {
-          FUN_001641c4();
-          FUN_001641c4();
+          ifTouchRegionRemove();
+          ifTouchRegionRemove();
           temp_v6 = 5;
         }
         else {
@@ -204,31 +204,31 @@ void FUN_0049b00c(unsigned int *param_1)
           if (param_1[1] == 0xd) {
             FUN_003a76a8(1);
           }
-          FUN_001641c4();
-          FUN_001641c4();
+          ifTouchRegionRemove();
+          ifTouchRegionRemove();
           temp_v6 = 4;
         }
         param_1[2] = temp_v6;
         sendEvent100020E();
       }
       else {
-        FUN_001641c4();
-        FUN_001641c4();
+        ifTouchRegionRemove();
+        ifTouchRegionRemove();
         param_1[2] = 3;
       }
     }
     temp_v5 = FUN_004d0554();
     if (temp_v5 != 0) {
-      FUN_001641c4();
-      FUN_001641c4();
+      ifTouchRegionRemove();
+      ifTouchRegionRemove();
       sendEvent100020F();
       param_1[2] = 3;
     }
     else if (param_1[0x5812] != temp_v1) {
       param_1[0x5812] = temp_v1;
       param_1[0x2d2] = 0;
-      FUN_001641c4();
-      FUN_001641c4();
+      ifTouchRegionRemove();
+      ifTouchRegionRemove();
       temp_v5 = FUN_0031d174(param_1 + param_1[0x2d0] * 0x1d + 0x2d8);
       temp_v6 = *puVar9;
       if (temp_v6 == 7 || temp_v6 == 8) {
@@ -271,8 +271,8 @@ void FUN_0049b00c(unsigned int *param_1)
   case 3:
     if ((*param_1 & 0x1000) != 0) {
       FUN_004cf8dc(param_1 + 0xf3,7);
-      temp_v4 = FUN_001654e4(param_1 + 0x1f0);
-      temp_v2 = FUN_001654d8(param_1 + 0x1f0);
+      temp_v4 = vec2GetYInt(param_1 + 0x1f0);
+      temp_v2 = vec2GetXInt(param_1 + 0x1f0);
       FUN_004935b0(param_1 + 0xee,temp_v2,temp_v4);
       if (*(char *)((int)param_1 + 0x84a) == '\0') break;
     }
@@ -324,12 +324,12 @@ void FUN_0049b00c(unsigned int *param_1)
     FUN_00359974(0x18,param_1[0x2d2],0xffffffff,0);
     FUN_00359974(0x19,temp_v5,0xffffffff,0);
     if (param_1[0x2d0] != 8) {
-      temp_v4 = FUN_00357bc8(param_1[0x61],&LAB_0049ba78);
-      FUN_00275f44(param_1[99],temp_v4);
+      temp_v4 = tableGroupFindEntryIndex(param_1[0x61],&LAB_0049ba78);
+      scrScriptProcessStartEntry(param_1[99],temp_v4);
     }
     else {
-      temp_v4 = FUN_00357bc8(param_1[0x61],&LAB_0049ba88);
-      FUN_00275f44(param_1[99],temp_v4);
+      temp_v4 = tableGroupFindEntryIndex(param_1[0x61],&LAB_0049ba88);
+      scrScriptProcessStartEntry(param_1[99],temp_v4);
     }
     FUN_003c5fc4(1);
     temp_v5 = FUN_0023b3f8();
@@ -358,15 +358,15 @@ void FUN_0049b00c(unsigned int *param_1)
     temp_v6 = param_1[0x2d0];
     if (temp_v6 == 8) {
       FUN_003a76a8(0);
-      temp_v4 = FUN_00357bc8(param_1[0x61],&LAB_0049bd0c);
-      FUN_00275f44(param_1[99],temp_v4);
+      temp_v4 = tableGroupFindEntryIndex(param_1[0x61],&LAB_0049bd0c);
+      scrScriptProcessStartEntry(param_1[99],temp_v4);
       FUN_00224880(param_1[99]);
       break;
     }
 joined_r0x0049bb38:
     if (temp_v6 != 7) break;
-    temp_v4 = FUN_00357bc8(param_1[0x61],&LAB_0049ba9c);
-    FUN_00275f44(param_1[99],temp_v4);
+    temp_v4 = tableGroupFindEntryIndex(param_1[0x61],&LAB_0049ba9c);
+    scrScriptProcessStartEntry(param_1[99],temp_v4);
     FUN_00224880(param_1[99]);
     break;
   case 7:
@@ -386,8 +386,8 @@ joined_r0x0049bb38:
     }
     panelSetMode3(temp_v3,0);
     param_1[2] = 8;
-    temp_v4 = FUN_00357bc8(param_1[0x61],&LAB_0049baac);
-    FUN_00275f44(param_1[99],temp_v4);
+    temp_v4 = tableGroupFindEntryIndex(param_1[0x61],&LAB_0049baac);
+    scrScriptProcessStartEntry(param_1[99],temp_v4);
     FUN_00224880(param_1[99]);
     param_1[3] = 0;
     break;
@@ -396,8 +396,8 @@ joined_r0x0049bb38:
     FUN_00224880(param_1[99]);
     if ((*param_1 & 0x1000) != 0) {
       FUN_004cf8dc(param_1 + 0xf3,7);
-      temp_v4 = FUN_001654e4(param_1 + 0x1f0);
-      temp_v2 = FUN_001654d8(param_1 + 0x1f0);
+      temp_v4 = vec2GetYInt(param_1 + 0x1f0);
+      temp_v2 = vec2GetXInt(param_1 + 0x1f0);
       FUN_004935b0(param_1 + 0xee,temp_v2,temp_v4);
       if (*(char *)((int)param_1 + 0x84a) != '\0') {
         *param_1 = *param_1 & 0xffffefff;
@@ -439,8 +439,8 @@ joined_r0x0049bb38:
       temp_v5 = FUN_00498408(param_1,*(unsigned short *)
                                     ((int)param_1 + temp_v5 * 4 + temp_v6 * 0x1002 + 0xf74));
       if (temp_v5 == 0) {
-        temp_v4 = FUN_00357bc8(param_1[0x61],&LAB_0049bcfc);
-        FUN_00275f44(param_1[99],temp_v4);
+        temp_v4 = tableGroupFindEntryIndex(param_1[0x61],&LAB_0049bcfc);
+        scrScriptProcessStartEntry(param_1[99],temp_v4);
         FUN_003c5fc4(1);
         temp_v6 = 10;
         param_1[2] = temp_v6;
@@ -450,8 +450,8 @@ joined_r0x0049bb38:
     temp_v6 = param_1[0x2d0];
     param_1[2] = 3;
     if (temp_v6 != 8) goto joined_r0x0049bb38;
-    temp_v4 = FUN_00357bc8(param_1[0x61],&LAB_0049bd0c);
-    FUN_00275f44(param_1[99],temp_v4);
+    temp_v4 = tableGroupFindEntryIndex(param_1[0x61],&LAB_0049bd0c);
+    scrScriptProcessStartEntry(param_1[99],temp_v4);
     FUN_00224880(param_1[99]);
     break;
   case 10:
@@ -462,7 +462,7 @@ joined_r0x0049bb38:
       temp_v6 = param_1[0x2d0];
       temp_v5 = FUN_004cfe4c(param_1 + temp_v6 * 0x1d + 0x2d8);
       temp_v0 = *(unsigned short *)((int)param_1 + temp_v5 * 4 + temp_v6 * 0x1002 + 0xf74);
-      puVar5 = (unsigned short *)FUN_001801a4();
+      puVar5 = (unsigned short *)gameGetPlayerData();
       temp_v4 = FUN_00192718(temp_v0);
       switch(temp_v4) {
       case 2:

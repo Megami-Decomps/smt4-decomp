@@ -12,9 +12,9 @@ int FUN_00233818(int);
 int FUN_00233854(unsigned int);
 int FUN_0029ca58(void);
 int FUN_0029da34(int, int, int);
-int FUN_0029e1ec(void);
+int useCounterStart(void);
 int FUN_0029e328(int);
-int FUN_0029e39c(int, int);
+int sortMenuCreate(int, int);
 int FUN_0029ee6c(int, int);
 int FUN_002a0cc8(...);
 int FUN_003a8aa0(int);
@@ -41,9 +41,9 @@ extern int FUN_002762e0(void);
 /* Supplied declaration required: FUN_0029ca58. */
 /* Supplied declaration required: FUN_0029da34. */
 extern int gameGetFlagByte12e8(void);
-/* Supplied declaration required: FUN_0029e1ec. */
+/* Supplied declaration required: useCounterStart. */
 /* Supplied declaration required: FUN_0029e328. */
-/* Supplied declaration required: FUN_0029e39c. */
+/* Supplied declaration required: sortMenuCreate. */
 /* Supplied declaration required: FUN_0029ee6c. */
 /* Supplied declaration required: FUN_002a0cc8. */
 extern int FUN_002bf4f0(int, int);
@@ -143,13 +143,13 @@ void FUN_003a98b8(int param_1)
     if (temp_v9 == 0) {
       return;
     }
-    FUN_0029e39c(0xc,0);
+    sortMenuCreate(0xc,0);
     FUN_0029e328(1);
     FUN_0029e328(2);
     FUN_0029e328(4);
     FUN_0029e328(5);
     FUN_0029e328(3);
-    FUN_0029e1ec();
+    useCounterStart();
     FUN_002a0cc8(1);
     *(unsigned int *)(param_1 + 0x14) = 3;
     *(unsigned int *)(param_1 + 0x18) = 0;

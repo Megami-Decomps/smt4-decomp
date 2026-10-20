@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_003fd63c(int, int);
+int gameFlagSetValue(int, int);
 
 extern int scrGetArg(unsigned int);
-/* Supplied declaration required: FUN_003fd63c. */
+/* Supplied declaration required: gameFlagSetValue. */
 
 
 unsigned int FUN_002ba7b8(void)
@@ -17,18 +17,18 @@ unsigned int FUN_002ba7b8(void)
   int temp_v0;
   
   temp_v0 = scrGetArg(0);
-  FUN_003fd63c(temp_v0,1);
+  gameFlagSetValue(temp_v0,1);
   if (temp_v0 == 0x206) {
-    FUN_003fd63c(0x593,1);
+    gameFlagSetValue(0x593,1);
   }
   else if (temp_v0 == 0x18b) {
-    FUN_003fd63c(0x11f9,1);
+    gameFlagSetValue(0x11f9,1);
     return 1;
   }
   if (temp_v0 != 0x1a6) {
     return 1;
   }
-  FUN_003fd63c(0x11f9,1);
+  gameFlagSetValue(0x11f9,1);
   return 1;
 }
 

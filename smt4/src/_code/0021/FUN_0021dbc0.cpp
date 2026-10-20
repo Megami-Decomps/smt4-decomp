@@ -32,9 +32,9 @@ extern unsigned char LAB_0021dea0; /* 0x21dea0 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0024f24c. */
 /* Supplied declaration required: FUN_0025663c. */
-extern int FUN_002c09d0(void);
+extern int gameFlagIsSet(void);
 extern int randNextInRange(unsigned int);
-extern int FUN_002c2950(void);
+extern int gameGetMapBlock(void);
 extern int FUN_00323538(void);
 
 
@@ -51,7 +51,7 @@ void FUN_0021dbc0(int param_1,int param_2,int param_3)
   unsigned short temp_v4;
   unsigned int in_fpscr;
   
-  temp_v0 = FUN_002c2950();
+  temp_v0 = gameGetMapBlock();
   if (param_3 != 0) {
     temp_v2 = 0;
     if ('\0' < *(char *)(temp_v0 + 0xde3)) {
@@ -83,7 +83,7 @@ void FUN_0021dbc0(int param_1,int param_2,int param_3)
         if (((*pcVar2 != -1) && (*pcVar2 == param_1)) && (pcVar2[1] == param_2)) {
           temp_v4 = 0;
           if (*(short *)(pcVar2 + 0x10) != 0) {
-            temp_v2 = FUN_002c09d0();
+            temp_v2 = gameFlagIsSet();
             if (temp_v2 != 0) {
               temp_v2 = randNextInRange(99);
               if (temp_v2 <= pcVar2[0x13]) {

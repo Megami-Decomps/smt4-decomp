@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00228220(int, int, int, int, int, int, int, unsigned char [4]);
 int FUN_0022899c(int, int, int, int, int, int);
 int FUN_00247478(unsigned short [18], unsigned int, unsigned int);
-int FUN_002b45e8(void);
+int dataTable08Sub2GetRecord(void);
 
 /* stack frame of param_5: 10 slot(s), 35 byte(s) */
 typedef struct {
@@ -27,8 +27,8 @@ typedef struct {
 /* Supplied declaration required: FUN_0022899c. */
 /* Supplied declaration required: FUN_00247478. */
 extern int FUN_0029e9cc(unsigned short);
-/* Supplied declaration required: FUN_002b45e8. */
-extern int FUN_002b63ac(void);
+/* Supplied declaration required: dataTable08Sub2GetRecord. */
+extern int gameGetPlayerData(void);
 
 
 unsigned int FUN_003d10a0(unsigned int *param_1,int param_2,int param_3,unsigned int param_4,int param_5)
@@ -62,9 +62,9 @@ unsigned int FUN_003d10a0(unsigned int *param_1,int param_2,int param_3,unsigned
   else {
     temp_v5 = 1;
     temp_v6[0] = 1;
-    temp_v0 = FUN_002b63ac();
+    temp_v0 = gameGetPlayerData();
     temp_v1 = (unsigned int)*(unsigned short *)(temp_v0 + 2);
-    FUN_002b45e8();
+    dataTable08Sub2GetRecord();
     if (temp_v1 != 0) {
       temp_v5 = 2;
       temp_v6[1] = 2;

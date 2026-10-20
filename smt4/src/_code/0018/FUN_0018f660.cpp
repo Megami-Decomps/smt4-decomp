@@ -8,7 +8,7 @@ int FUN_00293a04(...);
 int FUN_00293ba8(void);
 int FUN_00296284(...);
 int statusCameraApply(void);
-int FUN_002b8e84(...);
+int eventQueueAddUnique(...);
 int FUN_002b8ee0(...);
 int FUN_002bc01c(...);
 int timerStart(...);
@@ -37,7 +37,7 @@ int FUN_00297684(...);
 int FUN_0029ae60(int);
 int lmapSceneSetUnk134(int);
 int FUN_002a09b4(unsigned char *, int);
-int FUN_002b06c4(void);
+int dataTable00FindById(void);
 int FUN_002bf818(...);
 int asdOperatorNew(void);
 int VectorSignedToFloat(...);
@@ -110,22 +110,22 @@ extern int FUN_0029505c(unsigned int);
 /* Supplied declaration required: lmapSceneSetUnk134. */
 extern int FUN_0029c46c(void);
 extern int FUN_0029c48c(void);
-extern int FUN_0029e1c8(void);
+extern int useCounterIsFinished(void);
 extern int FUN_0029e9cc(unsigned short);
 /* Supplied declaration required: FUN_002a09b4. */
 extern int lmapSceneGetScript(void);
 /* Supplied declaration required: statusCameraApply. */
 extern unsigned int FUN_002b05d0(unsigned int);
-/* Supplied declaration required: FUN_002b06c4. */
+/* Supplied declaration required: dataTable00FindById. */
 extern int lmapMainIsRunning(void);
-/* Supplied declaration required: FUN_002b8e84. */
+/* Supplied declaration required: eventQueueAddUnique. */
 /* Supplied declaration required: FUN_002b8ee0. */
 /* Supplied declaration required: FUN_002bc01c. */
 /* Supplied declaration required: timerStart. */
-extern unsigned int FUN_002beda4(char *);
+extern unsigned int vec2GetXInt(char *);
 /* Supplied declaration required: FUN_002bee58. */
 /* Supplied declaration required: FUN_002bf818. */
-extern int FUN_002bfde4(unsigned int);
+extern int padIsButtonPressed(unsigned int);
 extern int FUN_002c15fc(unsigned int);
 /* Supplied declaration required: FUN_002c1658. */
 /* Supplied declaration required: asdOperatorNew. */
@@ -259,7 +259,7 @@ unsigned int FUN_0018f660(void)
       puVar12 = (unsigned short *)(pcVar4 + 0x1300);
       temp_v14 = DAT_0044e144;
       temp_v3 = (unsigned int)*puVar12;
-      FUN_002b06c4();
+      dataTable00FindById();
       if ((((temp_v3 == 0) || (temp_v5 = *(unsigned char *)(temp_v3 + 0xa5), (temp_v5 & 1) == 0)) &&
           ((temp_v5 = temp_v14[0x12ed], temp_v5 == 0 ||
            ((temp_v3 != 0 && ((*(unsigned char *)(temp_v3 + 3) & 1) != 0)))))) || ((short)*puVar12 < 0)) {
@@ -275,7 +275,7 @@ unsigned int FUN_0018f660(void)
       }
       else {
         temp_v3 = (unsigned int)*puVar12;
-        FUN_002b06c4();
+        dataTable00FindById();
         if (*(short *)(temp_v3 + 0xa6) < 1) {
           *(unsigned short *)(pcVar4 + 0x12fe) = *(unsigned short *)(temp_v3 + 0x88);
         }
@@ -441,7 +441,7 @@ LAB_0018fbe4:
       FUN_00297684(*(unsigned int *)pcVar13);
       temp_v7 = FUN_00293edc(*(unsigned int *)pcVar13);
       if (temp_v7 != 0) {
-        temp_v6 = FUN_002beda4(pcVar4 + 0x38c);
+        temp_v6 = vec2GetXInt(pcVar4 + 0x38c);
         temp_v15 = *(float *)(pcVar4 + 0x1e88);
         temp_v16 = *(unsigned int *)(pcVar4 + 0x1e8c);
         temp_v10 = (float)VectorSignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -596,7 +596,7 @@ LAB_0018ffcc:
           FUN_00293db0(*(unsigned int *)pcVar5,pcVar4 + 0x1e90);
           statusCameraApply();
           FUN_00297684(*(unsigned int *)pcVar5);
-          temp_v6 = FUN_002beda4(pcVar4 + 0x38c);
+          temp_v6 = vec2GetXInt(pcVar4 + 0x38c);
           temp_v16 = *(unsigned int *)(pcVar4 + 0x1e88);
           temp_v17 = *(unsigned int *)(pcVar4 + 0x1e8c);
           temp_v12 = (float)VectorSignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -606,7 +606,7 @@ LAB_0018ffcc:
         }
       }
 LAB_00190190:
-      if ((pcVar4[0x1e64] == '\0') && (temp_v7 = FUN_0029e1c8(), temp_v7 != 0)) {
+      if ((pcVar4[0x1e64] == '\0') && (temp_v7 = useCounterIsFinished(), temp_v7 != 0)) {
         temp_v4 = FUN_00293b8c();
         pcVar4[0x12ec] = (char)temp_v4;
         temp_v6 = 0x100016c;
@@ -624,10 +624,10 @@ LAB_00190190:
           *(int *)(pcVar4 + 0x12e8) = temp_v7;
         }
         if (temp_v4 == 0) {
-          temp_v7 = FUN_002bfde4(2);
+          temp_v7 = padIsButtonPressed(2);
           pcVar5 = DAT_0044e144;
           if (temp_v7 != 0) {
-            FUN_002b8e84(0x100016d);
+            eventQueueAddUnique(0x100016d);
             if (!(*temp_v14 == '\x03' || *temp_v14 == '\t')) {
               if (*(short *)(pcVar4 + 0x12fc) != 0) {
                 FUN_002958f8((int)*(short *)(pcVar4 + 0x12fc),1);

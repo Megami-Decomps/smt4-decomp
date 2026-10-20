@@ -4,15 +4,15 @@
 
 extern "C" {
 
-int FUN_0027eb88(int, unsigned int);
+int memFill8(int, unsigned int);
 int FUN_0029e054(int, int, int, int);
-int FUN_002b8cc8(void);
+int ifTouchRegionRemove(void);
 int FUN_002bf4f8(int, int);
 
-/* Supplied declaration required: FUN_0027eb88. */
+/* Supplied declaration required: memFill8. */
 /* Supplied declaration required: FUN_0029e054. */
 extern int FUN_0029efa8(int);
-/* Supplied declaration required: FUN_002b8cc8. */
+/* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: FUN_002bf4f8. */
 
 
@@ -29,11 +29,11 @@ void FUN_00259e9c(int *param_1)
   temp_v3 = *param_1;
   if (0 < *(short *)(temp_v3 + 0x24)) {
     do {
-      FUN_002b8cc8();
+      ifTouchRegionRemove();
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < *(short *)(temp_v3 + 0x24));
   }
-  FUN_0027eb88(temp_v3 + 0x1c,0xffffffff);
+  memFill8(temp_v3 + 0x1c,0xffffffff);
   *(unsigned short *)(temp_v3 + 0x24) = 0;
   temp_v2 = FUN_0029efa8(temp_v3 + 0xe8);
   temp_v2 = FUN_002bf4f8(0x2f,temp_v2 + 0x1f);

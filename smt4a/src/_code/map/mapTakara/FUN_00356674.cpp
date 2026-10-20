@@ -22,7 +22,7 @@ typedef struct {
 } void_stack;
 
 extern unsigned char LAB_00356bcc; /* 0x356bcc */
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 #ifndef ROMWRIGHT_STORAGE_s__a_a_00587f08_9_1_DEFINED
 #define ROMWRIGHT_STORAGE_s__a_a_00587f08_9_1_DEFINED
 /* Storage views; not a recovered source structure. */
@@ -38,9 +38,9 @@ typedef char romwright_storage_s__a_a_00587f08_9_1_s1_width_check[(sizeof(((unio
 extern union romwright_storage_s__a_a_00587f08_9_1 s__a_a_00587f08; /* 0x587f08 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_00162e8c(void);
+extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_00178b04. */
-extern int FUN_0018719c(void);
+extern int gameFlagIsSet(void);
 extern int FUN_0033aaac(void);
 extern int FUN_00364484(int);
 /* Supplied declaration required: FUN_003689d0. */
@@ -75,7 +75,7 @@ unsigned int FUN_00356674(void)
   unsigned int in_fpscr;
   int temp_v10;
   
-  temp_v0 = FUN_00162e8c();
+  temp_v0 = gameFlagsGetBlock();
   temp_v3 = *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 8);
   if (temp_v3 != 0) {
     if (temp_v3 != 1) {
@@ -127,8 +127,8 @@ unsigned int FUN_00356674(void)
               if ((((((temp_v7 != 1 && temp_v7 != 0xb) && temp_v7 != 0xc) ||
                     (temp_v6 = FUN_00364484((int)(short)(int)pcVar8), temp_v6 == 0)) &&
                    ((!temp_v9 &&
-                    ((*(short *)(pcVar2 + 0xc) == 0 || (temp_v6 = FUN_0018719c(), temp_v6 != 0)))))) &&
-                  ((*(short *)(pcVar2 + 0xe) == 0 || (temp_v6 = FUN_0018719c(), temp_v6 == 0)))) &&
+                    ((*(short *)(pcVar2 + 0xc) == 0 || (temp_v6 = gameFlagIsSet(), temp_v6 != 0)))))) &&
+                  ((*(short *)(pcVar2 + 0xe) == 0 || (temp_v6 = gameFlagIsSet(), temp_v6 == 0)))) &&
                  ((*(short *)(pcVar2 + 0x28) == 0 || (temp_v6 = FUN_0033aaac(), temp_v6 == 0)))) {
                 temp_v5 = temp_v5 + 1;
                 temp_v10 = temp_v10 + 1;
@@ -540,7 +540,7 @@ LAB_003572ac:
   }
   if (temp_v9 && temp_v3 == 3) {
     temp_v1 = *(int *)(*(int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 0x38) + 4);
-    FUN_0040ace8(DAT_0056fcc0,temp_v1);
+    FUN_0040ace8(g_handleRegistry,temp_v1);
     temp_v6 = 0;
     *(unsigned int *)(temp_v1 + 4) = *(unsigned int *)(temp_v1 + 4) | 3;
     do {
@@ -559,7 +559,7 @@ LAB_003572ac:
       *(unsigned int *)(temp_v5 + 0xbd4) = temp_v2;
       moriModelContentCopyBody();
       temp_v1 = *(int *)(*(int *)(temp_v5 + 0xbd4) + 4);
-      FUN_0040ace8(DAT_0056fcc0,temp_v1);
+      FUN_0040ace8(g_handleRegistry,temp_v1);
       FUN_003fd784(temp_v1);
       temp_v6 = temp_v6 + 1;
       *(unsigned int *)(temp_v1 + 4) = *(unsigned int *)(temp_v1 + 4) | 3;
@@ -588,8 +588,8 @@ LAB_003572ac:
           }
           if ((((((temp_v1 != 1 && temp_v1 != 0xb) && temp_v1 != 0xc) ||
                 (temp_v1 = FUN_00364484((int)(short)(int)pcVar8), temp_v1 == 0)) && (!temp_v9)) &&
-              ((*(short *)(pcVar2 + 0xc) == 0 || (temp_v1 = FUN_0018719c(), temp_v1 != 0)))) &&
-             (((*(short *)(pcVar2 + 0xe) == 0 || (temp_v1 = FUN_0018719c(), temp_v1 == 0)) &&
+              ((*(short *)(pcVar2 + 0xc) == 0 || (temp_v1 = gameFlagIsSet(), temp_v1 != 0)))) &&
+             (((*(short *)(pcVar2 + 0xe) == 0 || (temp_v1 = gameFlagIsSet(), temp_v1 == 0)) &&
               ((*(short *)(pcVar2 + 0x28) == 0 || (temp_v1 = FUN_0033aaac(), temp_v1 == 0)))))) {
             temp_v2 = (*(unsigned int *)&s__a_a_00587f08.u1[0]);
             temp_v1 = 0;
@@ -663,7 +663,7 @@ LAB_0035755c:
                 }
                 *(unsigned int *)(temp_v7 + 0xd4) = temp_v2;
                 moriModelContentCopyBody();
-                FUN_0040ace8(DAT_0056fcc0,*(unsigned int *)(*(int *)(temp_v7 + 0xd4) + 4));
+                FUN_0040ace8(g_handleRegistry,*(unsigned int *)(*(int *)(temp_v7 + 0xd4) + 4));
                 if (*(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 4) >= 100) {
                   FUN_003fd784(*(unsigned int *)(*(int *)(temp_v7 + 0xd4) + 4));
                 }
@@ -674,7 +674,7 @@ LAB_0035755c:
                 *(unsigned char *)(temp_v7 + 0xd8) = 0;
                 temp_v1 = (int)*(short *)(temp_v2 + 10);
                 *(int *)(temp_v7 + 0xdc) = temp_v1;
-                FUN_0040ace8(DAT_0056fcc0,*(unsigned int *)(*(int *)(temp_v2 + temp_v1 * 8 + 0x20) + 4));
+                FUN_0040ace8(g_handleRegistry,*(unsigned int *)(*(int *)(temp_v2 + temp_v1 * 8 + 0x20) + 4));
                 if (*(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 4) >= 100) {
                   FUN_003fd784(*(unsigned int *)
                                 (*(int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(int *)(temp_v7 + 0xdc) * 8 + 0x20

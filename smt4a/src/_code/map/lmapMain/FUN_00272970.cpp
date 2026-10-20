@@ -24,7 +24,7 @@ extern int FUN_00276264(...); /* 0x276264 */
 extern int FUN_002bc62c(...); /* 0x2bc62c */
 extern unsigned char LAB_00315cf4; /* 0x315cf4 */
 extern unsigned char LAB_0033feb4; /* 0x33feb4 */
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern unsigned int *g_lmapMainState; /* 0x580238 */
 extern int g_lmapScene; /* 0x581288 */
 extern unsigned char DAT_005f161d; /* 0x5f161d */
@@ -32,7 +32,7 @@ extern unsigned char DAT_005f185b; /* 0x5f185b */
 
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: taskCreateDraw. */
-extern int FUN_00162e8c(void);
+extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_002442ac. */
 /* Supplied declaration required: FUN_002c23cc. */
@@ -55,7 +55,7 @@ void FUN_00272970(void)
   puVar3 = (unsigned int *)0x100;
   asdMemoryAllocTracked(0x100,0x100,0,0x9370,1);
   g_lmapMainState = puVar3;
-  temp_v1 = FUN_00162e8c();
+  temp_v1 = gameFlagsGetBlock();
   FUN_002c23cc(1);
   *(unsigned char *)((int)puVar3 + 9) = 0;
   *(unsigned char *)((int)puVar3 + 10) = 0;
@@ -168,7 +168,7 @@ void FUN_00272970(void)
   *(unsigned char *)((int)puVar3 + 0x936a) = 0;
   puVar3[0x3c] = 0;
   puVar3[0x3b] = 0;
-  puVar3[0x24db] = DAT_0056fcc0;
+  puVar3[0x24db] = g_handleRegistry;
   puVar3[0x2b8] = 0;
   puVar3[0x13bf] = 0;
   *(unsigned char *)(puVar3 + 2) = 0;

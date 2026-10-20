@@ -8,7 +8,7 @@ int dataTableGet(int, int);
 
 /* Supplied declaration required: dataTableGet. */
 extern int dataTableGetEntries(void);
-extern int FUN_003f86c8(unsigned int);
+extern int loadSlotIsLoaded(unsigned int);
 
 
 char * FUN_0031a914(int param_1)
@@ -19,7 +19,7 @@ char * FUN_0031a914(int param_1)
   char *pcVar2;
   int temp_v1;
   
-  temp_v0 = FUN_003f86c8(0x36);
+  temp_v0 = loadSlotIsLoaded(0x36);
   if (temp_v0 == 0) {
     pcVar2 = "NoTableLoaded";
   }

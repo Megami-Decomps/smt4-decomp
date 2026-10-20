@@ -50,8 +50,8 @@ extern int FUN_0029efa8(int);
 extern int FUN_0029efc0(int);
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: FUN_002be624. */
-extern int FUN_002bed98(int);
-extern int FUN_002beda4(int);
+extern int vec2GetYInt(int);
+extern int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf4f8. */
@@ -98,8 +98,8 @@ unsigned int FUN_002cb054(void)
   unsigned int temp_v29;
   
   temp_v1 = g_titleConfig;
-  temp_v2 = FUN_002beda4(g_titleConfig + 0x5c);
-  temp_v3 = FUN_002bed98(temp_v1 + 0x5c);
+  temp_v2 = vec2GetXInt(g_titleConfig + 0x5c);
+  temp_v3 = vec2GetYInt(temp_v1 + 0x5c);
   temp_v26 = (unsigned int)(*(int *)(temp_v1 + 8) == 1);
   temp_v10 = 0;
   temp_v13 = 0;

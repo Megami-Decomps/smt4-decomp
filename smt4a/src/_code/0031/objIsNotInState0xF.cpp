@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern StateHolder1C *DAT_0057f268;
+extern StateHolder1C *g_partyPanel;
 
 /* True unless the global object exists and is in state 0xF. */
 u32 objIsNotInState0xF(void)
 {
-    if (DAT_0057f268 == NULL || DAT_0057f268->state != 0xF) {
+    if (g_partyPanel == NULL || g_partyPanel->state != 0xF) {
         return 1;
     }
     return 0;

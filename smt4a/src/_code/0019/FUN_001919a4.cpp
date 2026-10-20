@@ -13,9 +13,9 @@ int FUN_0019ea64(int);
 int FUN_0019f548(void);
 int FUN_001a6500(int);
 int FUN_001add1c(int);
-int FUN_001aea28(unsigned int, unsigned int);
+int ptrListRemoveClearOwner(unsigned int, unsigned int);
 int FUN_001aeafc(unsigned int);
-int FUN_002e3328(int);
+int asdOperatorDelete(int);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -23,7 +23,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 
 /* Supplied declaration required: FUN_001695a0. */
 /* Supplied declaration required: asdMemFree. */
@@ -34,9 +34,9 @@ extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
 /* Supplied declaration required: FUN_0019f548. */
 /* Supplied declaration required: FUN_001a6500. */
 /* Supplied declaration required: FUN_001add1c. */
-/* Supplied declaration required: FUN_001aea28. */
+/* Supplied declaration required: ptrListRemoveClearOwner. */
 /* Supplied declaration required: FUN_001aeafc. */
-/* Supplied declaration required: FUN_002e3328. */
+/* Supplied declaration required: asdOperatorDelete. */
 
 
 void FUN_001919a4(int param_1)
@@ -53,13 +53,13 @@ void FUN_001919a4(int param_1)
   if (*(int *)(param_1 + 0xcdc) != 0) {
     FUN_0019f548();
     if (*(int *)(param_1 + 0xcdc) != 0) {
-      FUN_002e3328(*(int *)(param_1 + 0xcdc));
+      asdOperatorDelete(*(int *)(param_1 + 0xcdc));
     }
     *(unsigned int *)(param_1 + 0xcdc) = 0;
   }
-  FUN_001aeafc(DAT_0056fcc0);
+  FUN_001aeafc(g_handleRegistry);
   if (*(int *)(param_1 + 0xce8) != 0) {
-    FUN_001aea28(DAT_0056fcc0,*(unsigned int *)(*(int *)(param_1 + 0xce8) + 4));
+    ptrListRemoveClearOwner(g_handleRegistry,*(unsigned int *)(*(int *)(param_1 + 0xce8) + 4));
     if (*(int **)(param_1 + 0xce8) != (int *)0x0) {
       (**(romwright_code **)(**(int **)(param_1 + 0xce8) + 4))();
       *(unsigned int *)(param_1 + 0xce8) = 0;
@@ -69,12 +69,12 @@ void FUN_001919a4(int param_1)
   if (temp_v0 < *(int *)(param_1 + 0xabc)) {
     do {
       temp_v1 = param_1 + temp_v0 * 4;
-      FUN_001aea28(DAT_0056fcc0,*(unsigned int *)(*(int *)(temp_v1 + 0xa10) + 4));
+      ptrListRemoveClearOwner(g_handleRegistry,*(unsigned int *)(*(int *)(temp_v1 + 0xa10) + 4));
       if (*(int **)(temp_v1 + 0xa10) != (int *)0x0) {
         (**(romwright_code **)(**(int **)(temp_v1 + 0xa10) + 4))();
         *(unsigned int *)(temp_v1 + 0xa10) = 0;
       }
-      FUN_001aea28(DAT_0056fcc0,*(unsigned int *)(*(int *)(temp_v1 + 0xa34) + 4));
+      ptrListRemoveClearOwner(g_handleRegistry,*(unsigned int *)(*(int *)(temp_v1 + 0xa34) + 4));
       if (*(int **)(temp_v1 + 0xa34) != (int *)0x0) {
         (**(romwright_code **)(**(int **)(temp_v1 + 0xa34) + 4))();
         *(unsigned int *)(temp_v1 + 0xa34) = 0;

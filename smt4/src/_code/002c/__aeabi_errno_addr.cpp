@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern u8 DAT_004efce0;
+extern u8 g_errno;
 
 u8 *__aeabi_errno_addr(void)
 {
-    return &DAT_004efce0;
+    return &g_errno;
 }
 
 } /* extern "C" */

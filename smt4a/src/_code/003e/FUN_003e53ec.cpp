@@ -4,8 +4,8 @@
 
 extern "C" {
 
-extern int FUN_0018719c(unsigned int);
-extern int FUN_001ab888(void);
+extern int gameFlagIsSet(unsigned int);
+extern int gameGetSlotTable(void);
 
 
 unsigned short FUN_003e53ec(void)
@@ -14,10 +14,10 @@ unsigned short FUN_003e53ec(void)
   unsigned short temp_v0;
   int temp_v1;
   
-  temp_v1 = FUN_0018719c(0x533);
+  temp_v1 = gameFlagIsSet(0x533);
   temp_v0 = 0;
   if (temp_v1 != 0) {
-    temp_v1 = FUN_001ab888();
+    temp_v1 = gameGetSlotTable();
     temp_v0 = *(unsigned short *)(temp_v1 + 0x2c4e);
   }
   return temp_v0;

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001a0af4(unsigned char *, unsigned int, unsigned int, int);
 
-extern unsigned char DAT_00647660; /* 0x647660 */
+extern unsigned char g_nnosAddressSpaceManagerHeap; /* 0x647660 */
 
 /* Supplied declaration required: FUN_001a0af4. */
 
@@ -15,7 +15,7 @@ void FUN_001c6e04(unsigned int param_1,unsigned int param_2)
 
 {
 /* irregular: 1 native warning(s); review required */
-  FUN_001a0af4(&DAT_00647660,param_1,param_2,0x1000);
+  FUN_001a0af4(&g_nnosAddressSpaceManagerHeap,param_1,param_2,0x1000);
   return;
 }
 

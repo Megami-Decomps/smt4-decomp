@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_002bf09c(void);
-int FUN_003d2d34(void);
+int soundChannelRequestIfEnabled(void);
 
-extern int FUN_002360dc(void);
+extern int scrGetArgString(void);
 /* Supplied declaration required: FUN_002bf09c. */
-/* Supplied declaration required: FUN_003d2d34. */
+/* Supplied declaration required: soundChannelRequestIfEnabled. */
 
 
 void FUN_002e5830(void)
@@ -18,10 +18,10 @@ void FUN_002e5830(void)
 /* irregular: 2 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_002360dc();
+  temp_v0 = scrGetArgString();
   FUN_002bf09c();
   if (-1 < temp_v0) {
-    FUN_003d2d34();
+    soundChannelRequestIfEnabled();
   }
   return;
 }

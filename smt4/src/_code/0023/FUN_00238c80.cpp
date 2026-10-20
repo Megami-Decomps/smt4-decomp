@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_00291050(void);
+int cecMessageIdClear(void);
 int FUN_002ad8b4(void);
 
 u32 FUN_00238c80(u32 value, int flag)
@@ -10,7 +10,7 @@ u32 FUN_00238c80(u32 value, int flag)
     if (flag != 0) {
         FUN_002ad8b4();
     } else {
-        FUN_00291050();
+        cecMessageIdClear();
     }
     return value;
 }

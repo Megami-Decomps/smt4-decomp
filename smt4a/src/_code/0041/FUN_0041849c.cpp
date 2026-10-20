@@ -12,8 +12,8 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_2_stack;
 
-extern int FUN_00162e8c(void);
-extern int FUN_001ab940(void);
+extern int gameFlagsGetBlock(void);
+extern int gameFlagBlockGet(void);
 /* Supplied declaration required: FUN_001ad9b4. */
 extern unsigned int FUN_001ba3d4(short *);
 
@@ -32,10 +32,10 @@ void FUN_0041849c(short *param_1,int param_2)
   int temp_v6;
   unsigned int temp_v7;
   
-  temp_v1 = FUN_00162e8c();
+  temp_v1 = gameFlagsGetBlock();
   temp_v7 = 0;
   do {
-    temp_v2 = FUN_001ab940();
+    temp_v2 = gameFlagBlockGet();
     if ((*(unsigned char *)(temp_v2 + (temp_v7 & 0xffff) * 4 + 0x2a0) & 2) != 0) {
       temp_v3 = temp_v7;
       FUN_001ad9b4();
@@ -50,7 +50,7 @@ void FUN_0041849c(short *param_1,int param_2)
           }
           if ((temp_v0 == 1 && psVar5 == param_1) &&
              (temp_v4 = FUN_001ba3d4(param_1), temp_v4 < *(unsigned int *)(temp_v6 + 0x104))) {
-            temp_v5 = FUN_001ab940();
+            temp_v5 = gameFlagBlockGet();
             temp_v5 = temp_v5 + (temp_v7 & 0xffff) * 4;
             *(unsigned char *)(temp_v5 + 0x2a2) = *(unsigned char *)(temp_v5 + 0x2a2) | 2;
             if (param_2 + temp_v4 >= *(unsigned int *)(temp_v6 + 0x104)) {

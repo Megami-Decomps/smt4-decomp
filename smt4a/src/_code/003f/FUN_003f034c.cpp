@@ -9,7 +9,7 @@ int FUN_003eafa0(int, int);
 int FUN_003eb0cc(int, int);
 int FUN_003f22fc(int, int);
 int FUN_003f26d4(int);
-int FUN_003fd63c(int, int);
+int gameFlagSetValue(int, int);
 int FUN_004a9d1c(unsigned int);
 int FUN_004abbe8(unsigned int);
 int FUN_004fbf90(int);
@@ -40,14 +40,14 @@ extern unsigned int DAT_00573ae0; /* 0x573ae0 */
 extern unsigned int DAT_00573ae4; /* 0x573ae4 */
 extern unsigned int DAT_00573af0; /* 0x573af0 */
 extern unsigned int DAT_00573af4; /* 0x573af4 */
-extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
+extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
 /* Supplied declaration required: FUN_003eaf20. */
 /* Supplied declaration required: FUN_003eafa0. */
 /* Supplied declaration required: FUN_003eb0cc. */
 /* Supplied declaration required: FUN_003f22fc. */
 /* Supplied declaration required: FUN_003f26d4. */
-/* Supplied declaration required: FUN_003fd63c. */
+/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_004a9d1c. */
 /* Supplied declaration required: FUN_004abbe8. */
 /* Supplied declaration required: FUN_004fbf90. */
@@ -71,7 +71,7 @@ void FUN_003f034c(int param_1)
   unsigned int temp_v7;
   unsigned int temp_v8;
   
-  FUN_003fd63c(0x591,0);
+  gameFlagSetValue(0x591,0);
   puVar7 = (unsigned int *)(param_1 + 0x45a0);
   temp_v0 = ~DAT_00573a30;
   temp_v7 = ~DAT_00573a70;
@@ -96,7 +96,7 @@ void FUN_003f034c(int param_1)
   *puVar7 = temp_v3 & ~DAT_00573ad8 & ~DAT_00573ae0;
   *(unsigned int *)(param_1 + 0x45a4) = temp_v5 & temp_v7 & temp_v0;
   if (temp_v8 == 0 && temp_v6 == 0) {
-    FUN_004a9d1c(DAT_0057a9c8);
+    FUN_004a9d1c(g_btlUiBlock);
     piVar9 = (int *)(param_1 + 0x4ce0);
     pcVar10 = (char *)(param_1 + 0x45b9);
     if ((*puVar7 & DAT_005739f0) != 0 || (*(unsigned int *)(param_1 + 0x45a4) & DAT_005739f4) != 0) {
@@ -170,7 +170,7 @@ void FUN_003f034c(int param_1)
     return;
   }
   FUN_003f26d4(param_1);
-  FUN_004abbe8(DAT_0057a9c8);
+  FUN_004abbe8(g_btlUiBlock);
   temp_v3 = ~DAT_00573a14;
   temp_v0 = ~DAT_00573a74;
   *puVar7 = *puVar7 & ~DAT_00573a10 & ~DAT_00573a70;

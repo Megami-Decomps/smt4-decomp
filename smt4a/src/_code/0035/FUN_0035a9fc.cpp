@@ -6,7 +6,7 @@ extern "C" {
 
 int dataTableGet(int, int);
 
-extern int FUN_0014af84(void);
+extern int gameDataBlocksGetSaveData(void);
 /* Supplied declaration required: dataTableGet. */
 extern int dataTableGetCount(void);
 extern int dataTableGetEntries(void);
@@ -30,7 +30,7 @@ int FUN_0035a9fc(void)
       dataTableGet(0x4a,0);
       temp_v1 = dataTableGetEntries();
       if ((temp_v1 + temp_v2 * 0x2c != 0) &&
-         (temp_v1 = FUN_0014af84(),
+         (temp_v1 = gameDataBlocksGetSaveData(),
          ((unsigned int)*(unsigned char *)(temp_v1 + ((int)(temp_v2 + ((unsigned int)(temp_v2 >> 0x1f) >> 0x1d)) >> 3) + 0x282ec) &
          (1 << ((temp_v2 % 8) & 0xffU))) != 0)) {
         temp_v3 = temp_v3 + 1;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002f44ec(...);
+int lessU32(...);
 int FUN_00308a88(char **, int, int, char *, unsigned int);
 
 /* stack frame of param_3: 5 slot(s), 20 byte(s) */
@@ -16,7 +16,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_002f44ec. */
+/* Supplied declaration required: lessU32. */
 /* Supplied declaration required: FUN_00308a88. */
 extern int wordRefsEqual_00308e9c(char **, char **);
 
@@ -41,7 +41,7 @@ void FUN_00131392(unsigned int *param_1,int param_2,unsigned int param_3)
   pcVar4 = *(char **)(temp_v5 + 4);
   while (pcVar4 != (char *)0x0) {
     temp_v5 = pcVar4;
-    temp_v1 = FUN_002f44ec(temp_v2,param_3,pcVar4 + 0x10);
+    temp_v1 = lessU32(temp_v2,param_3,pcVar4 + 0x10);
     if (temp_v1 != 0) {
       pcVar4 = *(char **)(pcVar4 + 8);
     }
@@ -82,7 +82,7 @@ void FUN_00131392(unsigned int *param_1,int param_2,unsigned int param_3)
         }
       }
     }
-    temp_v1 = FUN_002f44ec(temp_v2,temp_v4 + 0x10,param_3);
+    temp_v1 = lessU32(temp_v2,temp_v4 + 0x10,param_3);
     if (temp_v1 == 0) {
       temp_v0 = 0;
       temp_v6 = temp_v4;

@@ -6,11 +6,11 @@ extern "C" {
 
 int asdTMTexTableLoadTmx(int, int);
 int asdMemFree(void);
-int FUN_0019a7f4(int, int);
+int asdTMTexTableReleaseNode(int, int);
 int scrScriptProcessDestroy(void);
 int FUN_001acf98(int, int);
 int FUN_00275bc8(int, unsigned int);
-int FUN_00275f44(unsigned int, int);
+int scrScriptProcessStartEntry(unsigned int, int);
 int FUN_002804b0(...);
 int asdTMTexTableFreeEntry(int);
 int FUN_00342334(int);
@@ -23,18 +23,18 @@ typedef struct {
 
 /* Supplied declaration required: asdTMTexTableLoadTmx. */
 extern int jobIsValid(unsigned int);
-extern int FUN_0018206c(unsigned int, int);
+extern int asdTMTexTableNodeIsLoaded(unsigned int, int);
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_0019a7f4. */
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_001acf98. */
 extern int FUN_00224880(unsigned int);
 /* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_002804b0. */
 /* Supplied declaration required: asdTMTexTableFreeEntry. */
 /* Supplied declaration required: FUN_00342334. */
-extern int FUN_00399e04(void);
+extern int campButtonHelpIsActive(void);
 extern int FUN_004cf140(int);
 /* Supplied declaration required: FUN_004cf370. */
 
@@ -84,7 +84,7 @@ int FUN_002e5ba4(int *param_1)
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < 7);
     *(unsigned int *)(temp_v3 + 0x10) = 1;
-    if ((*(char *)(temp_v3 + 8) == '\x03') && (temp_v0 = FUN_00399e04(), temp_v0 != 0)) {
+    if ((*(char *)(temp_v3 + 8) == '\x03') && (temp_v0 = campButtonHelpIsActive(), temp_v0 != 0)) {
       FUN_00342334(0);
     }
   case 1:
@@ -96,7 +96,7 @@ int FUN_002e5ba4(int *param_1)
     if (temp_v4 && temp_v0 != 0) {
       temp_v0 = 1;
       do {
-        temp_v1 = FUN_0018206c(0x22,temp_v0);
+        temp_v1 = asdTMTexTableNodeIsLoaded(0x22,temp_v0);
         if (temp_v1 == 0) {
           return 0;
         }
@@ -106,12 +106,12 @@ int FUN_002e5ba4(int *param_1)
       FUN_00275bc8(temp_v0,*(unsigned int *)(temp_v3 + 0x20));
       *(int *)(temp_v3 + 0x1c) = temp_v0;
       *(unsigned int *)(temp_v0 + 0x108) = 1;
-      FUN_00275f44(*(unsigned int *)(temp_v3 + 0x1c),0);
+      scrScriptProcessStartEntry(*(unsigned int *)(temp_v3 + 0x1c),0);
       if (*(char *)(temp_v3 + 8) != '\x02') {
         *(unsigned int *)(temp_v3 + 0x10) = 4;
       }
       else {
-        FUN_00275f44(*(unsigned int *)(temp_v3 + 0x1c),4);
+        scrScriptProcessStartEntry(*(unsigned int *)(temp_v3 + 0x1c),4);
         temp_v2 = 2;
         *(unsigned int *)(temp_v3 + 0x10) = temp_v2;
       }
@@ -120,7 +120,7 @@ int FUN_002e5ba4(int *param_1)
   case 2:
     temp_v0 = FUN_00224880(*(unsigned int *)(temp_v3 + 0x1c));
     if (temp_v0 == 2) {
-      FUN_00275f44(*(unsigned int *)(temp_v3 + 0x1c),3);
+      scrScriptProcessStartEntry(*(unsigned int *)(temp_v3 + 0x1c),3);
       *(unsigned int *)(temp_v3 + 0x10) = 3;
     }
     break;
@@ -139,12 +139,12 @@ int FUN_002e5ba4(int *param_1)
     *(unsigned int *)(temp_v3 + 0x10) = temp_v2;
     break;
   case 5:
-    if ((*(char *)(temp_v3 + 8) == '\x03') && (temp_v0 = FUN_00399e04(), temp_v0 != 0)) {
+    if ((*(char *)(temp_v3 + 8) == '\x03') && (temp_v0 = campButtonHelpIsActive(), temp_v0 != 0)) {
       FUN_00342334(1);
     }
     temp_v0 = 1;
     do {
-      FUN_0019a7f4(0x22,temp_v0);
+      asdTMTexTableReleaseNode(0x22,temp_v0);
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < 7);
     asdTMTexTableFreeEntry(0x22);

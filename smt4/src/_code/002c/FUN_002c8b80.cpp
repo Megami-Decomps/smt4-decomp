@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_6_stack;
 
-extern int DAT_00447e70; /* 0x447e70 */
+extern int g_mapObj; /* 0x447e70 */
 
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
 #define ROMWRIGHT_PIECE_4_4_DEFINED
@@ -61,11 +61,11 @@ void FUN_002c8b80(int param_1,int param_2,int param_3,unsigned int *param_4,unsi
     do {
       psVar3 = psVar4;
       FUN_0025be44();
-      if (((-1 < *psVar3) && (*psVar3 == *(short *)(DAT_00447e70 + 4))) &&
-         ((int)psVar3[1] == (int)*(short *)(DAT_00447e70 + 6))) {
+      if (((-1 < *psVar3) && (*psVar3 == *(short *)(g_mapObj + 4))) &&
+         ((int)psVar3[1] == (int)*(short *)(g_mapObj + 6))) {
         temp_v1 = (int)psVar3[2];
         if (temp_v1 != param_1) {
-          temp_v0 = (int)*(short *)(DAT_00447e70 + 6);
+          temp_v0 = (int)*(short *)(g_mapObj + 6);
           if (temp_v1 != param_2) {
             temp_v0 = param_3;
           }

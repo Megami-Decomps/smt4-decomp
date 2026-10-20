@@ -24,7 +24,7 @@ extern unsigned int DAT_005702b0; /* 0x5702b0 */
 extern unsigned int DAT_005702b4; /* 0x5702b4 */
 
 extern int btlGetMainState(void);
-extern int FUN_0014bef4(unsigned int);
+extern int randRange(unsigned int);
 extern unsigned int FUN_00232388(void);
 /* Supplied declaration required: scrGetArg. */
 /* Supplied declaration required: FUN_00301a08. */
@@ -81,7 +81,7 @@ unsigned int FUN_0039d87c(void)
     }
   }
   if (temp_v6 != 0) {
-    temp_v5 = FUN_0014bef4((temp_v6 - 1U) & 0xffff);
+    temp_v5 = randRange((temp_v6 - 1U) & 0xffff);
     scrSetResult(temp_v7[temp_v5]);
     return 1;
   }

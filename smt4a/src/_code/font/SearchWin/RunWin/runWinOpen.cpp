@@ -9,7 +9,7 @@ extern "C" {
 typedef void (*VoidFunc)(void);
 
 int FUN_0014e188(void *ui, int a, int b, void *sound, int c);
-int FUN_001846d0(void *ui, int arg);
+int uiSpriteSelectAnim(void *ui, int arg);
 int FUN_001505ac(void *sound, const void *a, int na, const void *b, int nb, int c, int d, int e, int f, const void *g, int ng);
 int sysMemClear(void *ptr, int size);                  /* zero a block */
 void *asdMemoryAllocTracked(int heap, int align, int arg2, int size, int arg4);
@@ -40,7 +40,7 @@ void runWinOpen(void)
     Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(run->sound);
     FUN_001505ac(run->sound, DAT_0052fbfc, 0x24, DAT_0052fc20, 0x24, 0, 0, 0, 0, DAT_0052fc44, 0x70);
     FUN_0014e188(run->ui, 8, 0x87, run->sound, 1);
-    FUN_001846d0(run->ui, 0);
+    uiSpriteSelectAnim(run->ui, 0);
 }
 
 } /* extern "C" */

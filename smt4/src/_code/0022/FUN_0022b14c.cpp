@@ -10,7 +10,7 @@ int SBORROW4(int, int);
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 extern int FUN_00233718(int);
-extern int FUN_002a60b4(unsigned int);
+extern int asdTMTexTableNodeIsLoaded(unsigned int);
 /* Supplied declaration required: FUN_002b8ee0. */
 /* Supplied declaration required: FUN_002bf818. */
 
@@ -27,7 +27,7 @@ int FUN_0022b14c(int param_1)
   if (*(int *)(param_1 + 8) == 0) {
     temp_v0 = 1;
   }
-  else if ((*(int *)(param_1 + 0xc64) == -1) || (temp_v1 = FUN_002a60b4(0x2a), temp_v0 = 0, temp_v1 != 0))
+  else if ((*(int *)(param_1 + 0xc64) == -1) || (temp_v1 = asdTMTexTableNodeIsLoaded(0x2a), temp_v0 = 0, temp_v1 != 0))
   {
     temp_v0 = FUN_00233718(param_1);
     temp_v1 = 0;

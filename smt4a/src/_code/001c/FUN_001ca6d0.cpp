@@ -22,7 +22,7 @@ typedef struct {
     u32 value;            /* 0x0c */
 } AllocObject;
 
-extern u8 DAT_0055b9c8;
+extern u8 g_nwGfxLookAtTargetViewUpdaterVtable;
 
 AllocObject *FUN_001ca6d0(Allocator *allocator, u32 value)
 {
@@ -31,7 +31,7 @@ AllocObject *FUN_001ca6d0(Allocator *allocator, u32 value)
     if (obj != NULL) {
         obj->allocator = allocator;
         obj->flag = 0;
-        obj->vtbl = &DAT_0055b9c8;
+        obj->vtbl = &g_nwGfxLookAtTargetViewUpdaterVtable;
         obj->value = value;
     }
     return obj;

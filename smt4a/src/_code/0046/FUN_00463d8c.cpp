@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_001b6668(int, int *);
-int FUN_001b9f8c(int, int *);
+int slistPushFront(int, int *);
 
 typedef int romwright_code(...);
 /* Supplied declaration required: FUN_001b6668. */
-/* Supplied declaration required: FUN_001b9f8c. */
+/* Supplied declaration required: slistPushFront. */
 
 
 void FUN_00463d8c(int param_1)
@@ -31,7 +31,7 @@ void FUN_00463d8c(int param_1)
       FUN_001b6668(param_1 + 0x84,piVar2);
       if (piVar1 != (int *)0x0) {
         (**(romwright_code **)*piVar1)(piVar1);
-        FUN_001b9f8c(param_1 + 0x90,piVar1);
+        slistPushFront(param_1 + 0x90,piVar1);
       }
       piVar2 = piVar3;
     } while (piVar3 != (int *)(param_1 + 0x88));

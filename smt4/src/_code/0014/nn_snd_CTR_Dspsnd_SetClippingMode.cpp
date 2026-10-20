@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern int FUN_002bb274(void);
+extern int nn_snd_CTR_Dspsnd_IsInitialized(void);
 
 u8 nn_snd_CTR_Dspsnd_SetClippingMode(DspsndState *state, u16 value)
 {
-    int ok = FUN_002bb274();
+    int ok = nn_snd_CTR_Dspsnd_IsInitialized();
 
     if (ok != 0) {
         DspCommand *params = state->commands[state->current];

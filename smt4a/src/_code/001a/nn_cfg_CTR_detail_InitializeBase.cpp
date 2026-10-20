@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_00195fc8(void);
+int sysFatalBreak(void);
 
 extern int FUN_0016f864(void);
 extern unsigned int FUN_0016f988(int *, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00195fc8. */
+/* Supplied declaration required: sysFatalBreak. */
 extern unsigned int wstrlen(unsigned int);
 
 
@@ -22,7 +22,7 @@ unsigned int nn_cfg_CTR_detail_InitializeBase(int *param_1,unsigned int param_2)
   
   temp_v0 = FUN_0016f864();
   if (temp_v0 < 0) {
-    FUN_00195fc8();
+    sysFatalBreak();
   }
   if (*param_1 != 0) {
     temp_v1 = 0xd8a103f9;

@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002b45e8(void);
+int dataTable08Sub2GetRecord(void);
 
-/* Supplied declaration required: FUN_002b45e8. */
-extern int FUN_002b63ac(void);
+/* Supplied declaration required: dataTable08Sub2GetRecord. */
+extern int gameGetPlayerData(void);
 
 
 unsigned int FUN_0023cef0(unsigned int param_1,int param_2,int param_3,int param_4,unsigned int param_5)
@@ -24,10 +24,10 @@ unsigned int FUN_0023cef0(unsigned int param_1,int param_2,int param_3,int param
   unsigned int temp_v7;
   
   if (param_5 == 0) {
-    temp_v1 = FUN_002b63ac();
+    temp_v1 = gameGetPlayerData();
     param_5 = (unsigned int)*(unsigned short *)(temp_v1 + 8);
   }
-  FUN_002b45e8();
+  dataTable08Sub2GetRecord();
   temp_v1 = 0x44d35c;
   temp_v5 = 0xf;
   temp_v7 = (param_4 + param_3 * 1000) & 0xffff;

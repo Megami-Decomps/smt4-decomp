@@ -4,8 +4,8 @@ extern "C" {
 
 u8 FUN_0029d65c(int id)
 {
-    if (DAT_0043dcb0.counters->unk64E == id) {
-        return DAT_0043dcb0.counters->unk08;
+    if (g_ifTouch.counters->unk64E == id) {
+        return g_ifTouch.counters->unk08;
     }
     return 0;
 }

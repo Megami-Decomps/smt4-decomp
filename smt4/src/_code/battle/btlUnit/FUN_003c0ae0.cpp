@@ -8,7 +8,7 @@ int FUN_0027da30(int, int);
 int FUN_0027e6f4(int, int);
 int FUN_002881bc(void);
 int FUN_00293a04(unsigned int, int);
-int FUN_002b06c4(void);
+int dataTable00FindById(void);
 
 typedef struct fn_003c0ae0_arg1 fn_003c0ae0_arg1;
 struct fn_003c0ae0_arg1 {
@@ -49,7 +49,7 @@ extern int FUN_0027dab0(int, fn_003c0ae0_arg1 *);
 /* Supplied declaration required: FUN_0027e6f4. */
 /* Supplied declaration required: FUN_002881bc. */
 /* Supplied declaration required: FUN_00293a04. */
-/* Supplied declaration required: FUN_002b06c4. */
+/* Supplied declaration required: dataTable00FindById. */
 extern unsigned short randNextInRange(unsigned int);
 
 
@@ -96,7 +96,7 @@ LAB_003c0ba0:
             temp_v3 = param_1;
             FUN_0027e6f4(param_1,1);
             temp_v2 = (unsigned int)*(unsigned short *)(*(int *)(param_1 + 0x1fc0) + temp_v3 * 0x288 + 0xce);
-            FUN_002b06c4();
+            dataTable00FindById();
             if (*(char *)(temp_v2 + 0x9e) == '\x01' || *(char *)(temp_v2 + 0x9e) == '\x03')
             goto LAB_003c0ba0;
           }

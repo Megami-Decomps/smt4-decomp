@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001afdc4(int);
+int nn_snd_CTR_FreeVoice(int);
 int nw_snd_internal_driver_VoiceManager_FreeVoice(unsigned int, int);
 
 typedef int romwright_code(...);
@@ -13,8 +13,8 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_001afdc4. */
-extern unsigned int FUN_001c2484(void);
+/* Supplied declaration required: nn_snd_CTR_FreeVoice. */
+extern unsigned int nw_snd_internal_driver_VoiceManager_GetInstance(void);
 extern void nn_snd_CTR_Voice_SetState(unsigned int, int);
 /* Supplied declaration required: nw_snd_internal_driver_VoiceManager_FreeVoice. */
 
@@ -48,7 +48,7 @@ void nw_snd_internal_driver_Voice_SdkVoiceDropCallbackFuncMulti(int param_1,int 
         if (temp_v2 != 0) {
           if (temp_v2 != param_1) {
             nn_snd_CTR_Voice_SetState(temp_v2,1);
-            FUN_001afdc4(temp_v2);
+            nn_snd_CTR_FreeVoice(temp_v2);
           }
           *(unsigned int *)(param_2 + temp_v0 * 4) = 0;
         }
@@ -59,7 +59,7 @@ void nw_snd_internal_driver_Voice_SdkVoiceDropCallbackFuncMulti(int param_1,int 
   *(unsigned char *)(param_2 + 0x17) = 0;
   *(unsigned char *)(param_2 + 0x15) = 0;
   *(unsigned int *)(param_2 + 8) = 0;
-  temp_v1 = FUN_001c2484();
+  temp_v1 = nw_snd_internal_driver_VoiceManager_GetInstance();
   nw_snd_internal_driver_VoiceManager_FreeVoice(temp_v1,param_2);
   *(unsigned char *)(param_2 + 0x14) = 0;
   if (*(romwright_code **)(param_2 + 0xc) == (romwright_code *)0x0) {

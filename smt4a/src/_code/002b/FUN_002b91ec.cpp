@@ -6,8 +6,8 @@ extern "C" {
 
 extern int g_lmapScene; /* 0x581288 */
 
-extern int FUN_00162e8c(void);
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagsGetBlock(void);
+extern int gameFlagIsSet(unsigned int);
 extern int FUN_002e5db4(void);
 
 
@@ -17,8 +17,8 @@ void FUN_002b91ec(void)
   int temp_v0;
   int temp_v1;
   
-  temp_v0 = FUN_00162e8c();
-  temp_v1 = FUN_0018719c(0x4c9);
+  temp_v0 = gameFlagsGetBlock();
+  temp_v1 = gameFlagIsSet(0x4c9);
   if ((temp_v1 == 0) || (temp_v1 = FUN_002e5db4(), temp_v1 != 0)) {
     *(unsigned int *)(g_lmapScene + 0x1d0) = 0xf;
   }
@@ -33,7 +33,7 @@ void FUN_002b91ec(void)
   *(unsigned int *)(temp_v0 + 0x10a0) = 0;
   *(unsigned int *)(temp_v0 + 0x109c) = 0;
   *(unsigned int *)(temp_v0 + 0x10a4) = 0;
-  temp_v0 = FUN_0018719c(0x4c9);
+  temp_v0 = gameFlagIsSet(0x4c9);
   if ((temp_v0 == 0) || (temp_v0 = FUN_002e5db4(), temp_v0 != 0)) {
     *(unsigned int *)(g_lmapScene + 0x238) = 6;
   }

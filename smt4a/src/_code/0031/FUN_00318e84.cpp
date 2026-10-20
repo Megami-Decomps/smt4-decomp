@@ -8,10 +8,10 @@ int FUN_00152cf8(int, int, int, int, int);
 int sysPlaySe(...);
 int FUN_0019ea64(int);
 int FUN_00215bbc(void);
-int FUN_00281720(...);
+int linkHolderApplyFlag(...);
 int FUN_00284ee4(...);
 int FUN_002c39dc(...);
-int FUN_002e6dd0(...);
+int rt_aeabi_memclr(...);
 int FUN_00319aec(...);
 int FUN_003c1060(void);
 int FUN_003c1094(...);
@@ -23,17 +23,17 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_00152cf8. */
-extern int FUN_00164af0(unsigned int);
+extern int padButtonRepeat(unsigned int);
 /* Supplied declaration required: sysPlaySe. */
 extern int FUN_001834a4(unsigned int, unsigned int);
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0019ea64. */
 /* Supplied declaration required: FUN_00215bbc. */
-/* Supplied declaration required: FUN_00281720. */
+/* Supplied declaration required: linkHolderApplyFlag. */
 /* Supplied declaration required: FUN_00284ee4. */
 /* Supplied declaration required: FUN_002c39dc. */
 extern int FUN_002e1a18(unsigned int);
-/* Supplied declaration required: FUN_002e6dd0. */
+/* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: FUN_00319aec. */
 extern int FUN_0039a2d8(int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_003c1060. */
@@ -63,7 +63,7 @@ unsigned int FUN_00318e84(int param_1)
                  (int)**(short **)(temp_v0 + 0xc),(int)(*(short **)(temp_v0 + 0xc))[1],3);
     *(unsigned int *)(param_1 + 0x100) = 0;
   }
-  temp_v0 = FUN_00164af0(10);
+  temp_v0 = padButtonRepeat(10);
   if ((temp_v0 != 0) || (temp_v0 = FUN_002e1a18(4), temp_v0 != 0)) {
     if (*(char *)(param_1 + 0x111) != '\0') {
       *(unsigned char *)(param_1 + 0x111) = 0;
@@ -83,12 +83,12 @@ unsigned int FUN_00318e84(int param_1)
       FUN_00319aec(0);
       *(unsigned int *)(param_1 + 0x134) = 300;
       FUN_003c1060();
-      FUN_002e6dd0(param_1 + 0x38,0x14);
+      rt_aeabi_memclr(param_1 + 0x38,0x14);
       *(unsigned int *)(param_1 + 0x3c) = 0x1e;
       *(unsigned char *)(param_1 + 0x12d) = 0;
       *(unsigned int *)(param_1 + 0x128) = 0;
       *(unsigned int *)(param_1 + 0x120) = 0;
-      temp_v0 = FUN_0018719c(0x49b);
+      temp_v0 = gameFlagIsSet(0x49b);
       if (temp_v0 == 0) {
         temp_v2 = 0x92;
       }
@@ -97,7 +97,7 @@ unsigned int FUN_00318e84(int param_1)
       }
       sysPlaySe(temp_v2);
       *(unsigned int *)(param_1 + 0xe8) = 0xffffffff;
-      temp_v0 = FUN_0018719c(0x49b);
+      temp_v0 = gameFlagIsSet(0x49b);
       if (temp_v0 == 0) {
         temp_v2 = 0x15;
       }
@@ -110,12 +110,12 @@ unsigned int FUN_00318e84(int param_1)
       break;
     case 2:
       FUN_00319aec(0);
-      FUN_002e6dd0(param_1 + 0x38,0x14);
+      rt_aeabi_memclr(param_1 + 0x38,0x14);
       *(unsigned int *)(param_1 + 0x3c) = 0x1e;
       *(unsigned char *)(param_1 + 0x12d) = 0;
       *(unsigned int *)(param_1 + 0x128) = 0;
       *(unsigned int *)(param_1 + 0x120) = 0;
-      temp_v0 = FUN_0018719c(0x49c);
+      temp_v0 = gameFlagIsSet(0x49c);
       if (temp_v0 == 0) {
         temp_v2 = 0x92;
       }
@@ -124,7 +124,7 @@ unsigned int FUN_00318e84(int param_1)
       }
       sysPlaySe(temp_v2);
       *(unsigned int *)(param_1 + 0xe8) = 0xffffffff;
-      temp_v0 = FUN_0018719c(0x49c);
+      temp_v0 = gameFlagIsSet(0x49c);
       if (temp_v0 == 0) {
         temp_v2 = 0xb;
       }
@@ -138,9 +138,9 @@ unsigned int FUN_00318e84(int param_1)
     case 3:
       FUN_00319aec(0);
       *(unsigned char *)(param_1 + 0x154) = 0;
-      FUN_00281720(*(unsigned int *)(param_1 + 4),0);
+      linkHolderApplyFlag(*(unsigned int *)(param_1 + 4),0);
       FUN_0019ea64(1);
-      temp_v0 = FUN_0018719c(0x49d);
+      temp_v0 = gameFlagIsSet(0x49d);
       if (temp_v0 == 0) {
         temp_v2 = 0x92;
       }
@@ -161,7 +161,7 @@ unsigned int FUN_00318e84(int param_1)
       *(unsigned int *)(param_1 + 0x182) = puVar3[2];
       *(unsigned short *)(param_1 + 0x186) = *(unsigned short *)(puVar3 + 3);
       *(unsigned int *)(param_1 + 0xe8) = 0xffffffff;
-      temp_v0 = FUN_0018719c(0x49e);
+      temp_v0 = gameFlagIsSet(0x49e);
       if (temp_v0 == 0) {
         temp_v2 = 0xf;
       }
@@ -170,7 +170,7 @@ unsigned int FUN_00318e84(int param_1)
       }
       *(unsigned int *)(param_1 + 0xec) = temp_v2;
       *(unsigned int *)(param_1 + 0xf8) = 2;
-      temp_v0 = FUN_0018719c(0x49e);
+      temp_v0 = gameFlagIsSet(0x49e);
       if (temp_v0 == 0) {
         sysPlaySe(0x92);
       }
@@ -179,10 +179,10 @@ unsigned int FUN_00318e84(int param_1)
     case 5:
       FUN_00319aec(0);
       *(unsigned int *)(param_1 + 0x134) = 400;
-      FUN_002e6dd0(param_1 + 0x38,0x14);
+      rt_aeabi_memclr(param_1 + 0x38,0x14);
       *(unsigned int *)(param_1 + 0x3c) = 0x1e;
       *(unsigned char *)(param_1 + 0x12d) = 0;
-      temp_v0 = FUN_0018719c(0x49f);
+      temp_v0 = gameFlagIsSet(0x49f);
       if (temp_v0 == 0) {
         temp_v2 = 0x92;
       }
@@ -191,7 +191,7 @@ unsigned int FUN_00318e84(int param_1)
       }
       sysPlaySe(temp_v2);
       *(unsigned int *)(param_1 + 0xe8) = 0xffffffff;
-      temp_v0 = FUN_0018719c(0x49f);
+      temp_v0 = gameFlagIsSet(0x49f);
       if (temp_v0 == 0) {
         temp_v2 = 0x12;
       }
@@ -209,12 +209,12 @@ unsigned int FUN_00318e84(int param_1)
       *(unsigned char *)(param_1 + 0x20) = 0;
       *(unsigned int *)(param_1 + 0x30) = 0;
       *(unsigned char *)(param_1 + 0x34) = 0;
-      FUN_00281720(*(unsigned int *)(param_1 + 4),0);
+      linkHolderApplyFlag(*(unsigned int *)(param_1 + 4),0);
       FUN_002c39dc(0x10,0,0xffffffff);
       FUN_003c1094(0);
       FUN_00215bbc();
       FUN_00284ee4(1);
-      temp_v0 = FUN_0018719c(0x4a0);
+      temp_v0 = gameFlagIsSet(0x4a0);
       if (temp_v0 == 0) {
         temp_v2 = 0x92;
       }
@@ -235,10 +235,10 @@ unsigned int FUN_00318e84(int param_1)
       break;
     case 7:
       FUN_00319aec(0);
-      FUN_002e6dd0(param_1 + 0x38,0x14);
+      rt_aeabi_memclr(param_1 + 0x38,0x14);
       *(unsigned int *)(param_1 + 0x3c) = 0x1e;
       *(unsigned char *)(param_1 + 0x12d) = 0;
-      temp_v0 = FUN_0018719c(0x4a1);
+      temp_v0 = gameFlagIsSet(0x4a1);
       if (temp_v0 == 0) {
         temp_v2 = 0x92;
       }
@@ -247,7 +247,7 @@ unsigned int FUN_00318e84(int param_1)
       }
       sysPlaySe(temp_v2);
       *(unsigned int *)(param_1 + 0xe8) = 0xffffffff;
-      temp_v0 = FUN_0018719c(0x4a1);
+      temp_v0 = gameFlagIsSet(0x4a1);
       if (temp_v0 == 0) {
         temp_v2 = 8;
       }

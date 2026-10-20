@@ -14,7 +14,7 @@ typedef struct {
 
 extern int g_btlScriptUnit; /* 0x57113c */
 
-extern int FUN_0014af84(void);
+extern int gameDataBlocksGetSaveData(void);
 /* Supplied declaration required: FUN_003e77cc. */
 /* Supplied declaration required: FUN_003e81bc. */
 extern int FUN_003edca0(int);
@@ -43,7 +43,7 @@ void FUN_004eb740(int *param_1)
     FUN_003e81bc();
     FUN_003e77cc(*param_1,1,(int)*(short *)(*(int *)(*param_1 + 0x1ed4) + 0x68),
                  (int)*(short *)(temp_v0 + 0x6e),in_s16);
-    temp_v0 = FUN_0014af84();
+    temp_v0 = gameDataBlocksGetSaveData();
     *(unsigned char *)(temp_v0 + 0x27e3e) = 0;
   }
   *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x26;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6e14(int);
+int asdOperatorDeleteArray(int);
 int FUN_002e6e34(int *, int *);
 int FUN_002e6e5c(int *);
 int ringPop(int);
@@ -14,7 +14,7 @@ typedef int romwright_code(...);
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: FUN_002e6e14. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
 extern int FUN_002f2910(int);
@@ -47,7 +47,7 @@ unsigned long long FUN_002f8da8(int *param_1,unsigned int param_2,unsigned int p
   }
   if (temp_v0 != 0) {
     temp_v0 = FUN_002f2910(temp_v0 + 4);
-    FUN_002e6e14(temp_v0 - 4);
+    asdOperatorDeleteArray(temp_v0 - 4);
   }
   *param_1 = 0;
   FUN_002e6e5c(&uStack_18);

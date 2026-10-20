@@ -8,7 +8,7 @@ int FUN_002be5a4(unsigned int, unsigned int, int);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(unsigned int, int);
 
-extern unsigned char DAT_00464d48; /* 0x464d48 */
+extern unsigned char g_asdTextDefaults; /* 0x464d48 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
@@ -42,7 +42,7 @@ void FUN_00124c60(int param_1,unsigned int param_2,unsigned int param_3)
     else {
       temp_v1 = VectorFloatToUnsigned(in_s0 * 255.0f,3);
     }
-    FUN_002be5a4(*(unsigned int *)(param_1 + 0x50),(*(unsigned int *)((unsigned char *)&DAT_00464d48 + 0xc)) | temp_v1,param_1 + 0x5c);
+    FUN_002be5a4(*(unsigned int *)(param_1 + 0x50),(*(unsigned int *)((unsigned char *)&g_asdTextDefaults + 0xc)) | temp_v1,param_1 + 0x5c);
   }
   return;
 }

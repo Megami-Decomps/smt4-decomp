@@ -2,8 +2,8 @@
 
 extern "C" {
 
-int FUN_002a4d14(void);
-int FUN_002a72c0(int arg);
+int asdWorkAreaReset(void);
+int asdModelSlotRelease(int arg);
 int asdMdlManagerDestroy(int handle);
 int asdMemFree(void *ptr);
 
@@ -20,14 +20,14 @@ void FUN_002fe144(void)
     JobWork *work = jobGetWork();
 
     if (work->active != 0) {
-        FUN_002a72c0(0);
+        asdModelSlotRelease(0);
         work->active = 0;
     }
     if (work->model != 0) {
         asdMdlManagerDestroy(work->model);
         work->model = 0;
     }
-    FUN_002a4d14();
+    asdWorkAreaReset();
     asdMemFree(work);
 }
 

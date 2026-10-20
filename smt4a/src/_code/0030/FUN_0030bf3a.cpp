@@ -2,12 +2,12 @@
 
 extern "C" {
 
-void FUN_002efd36(u32 value);
+void seq16IsGreater(u32 value);
 
-/* Passes the third argument to FUN_002efd36. */
+/* Passes the third argument to seq16IsGreater. */
 void FUN_0030bf3a(u32 unused1, u32 unused2, u32 value)
 {
-    FUN_002efd36(value);
+    seq16IsGreater(value);
 }
 
 } /* extern "C" */

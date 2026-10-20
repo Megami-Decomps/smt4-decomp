@@ -16,7 +16,7 @@ typedef struct {
 } param_4_stack;
 
 extern unsigned char LAB_0016caa4; /* 0x16caa4 */
-extern int DAT_0056fcc0; /* 0x56fcc0 */
+extern int g_handleRegistry; /* 0x56fcc0 */
 
 /* Supplied declaration required: FUN_00178b04. */
 extern unsigned int FUN_00186118(unsigned int, unsigned int *);
@@ -73,9 +73,9 @@ void FUN_0016c88c(unsigned int *param_1,int param_2,unsigned int param_3,unsigne
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < temp_v4);
   }
-  if (DAT_0056fcc0 != 0) {
+  if (g_handleRegistry != 0) {
     if ((*(unsigned int *)(param_2 + 8) & 2) != 0) {
-      temp_v0 = *(int *)(*(int *)(DAT_0056fcc0 + 0x14) + 0x1c);
+      temp_v0 = *(int *)(*(int *)(g_handleRegistry + 0x14) + 0x1c);
       if (temp_v0 != 0) {
         temp_v2 = 0;
         temp_v4 = (unsigned int)*(unsigned short *)(*(int *)(param_2 + 0x3c) + 4);
@@ -88,9 +88,9 @@ void FUN_0016c88c(unsigned int *param_1,int param_2,unsigned int param_3,unsigne
           } while (temp_v2 < temp_v4);
         }
       }
-      if (DAT_0056fcc0 == 0) goto LAB_0016ca7c;
+      if (g_handleRegistry == 0) goto LAB_0016ca7c;
     }
-    temp_v0 = *(int *)(DAT_0056fcc0 + 8);
+    temp_v0 = *(int *)(g_handleRegistry + 8);
     if (temp_v0 != 0) {
       temp_v3 = 0;
       temp_v2 = (unsigned int)*(unsigned short *)(*(int *)(param_2 + 0x3c) + 4);

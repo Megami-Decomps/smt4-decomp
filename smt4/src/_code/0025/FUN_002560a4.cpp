@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001a7dbc(int, unsigned int, int, int);
-int FUN_0028975c(int, int);
+int gameFlagSetValue(int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -13,7 +13,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_001a7dbc. */
-/* Supplied declaration required: FUN_0028975c. */
+/* Supplied declaration required: gameFlagSetValue. */
 extern int gameGetOptions(void);
 
 
@@ -28,11 +28,11 @@ void FUN_002560a4(int param_1)
     FUN_001a7dbc(temp_v0,0xffffffff,param_1,3);
     *(unsigned short *)(temp_v0 + 0x604) = 0;
     if (param_1 == 0x2a3) {
-      FUN_0028975c(0x262,1);
+      gameFlagSetValue(0x262,1);
       return;
     }
     if (param_1 == 0x2a5) {
-      FUN_0028975c(0x263,1);
+      gameFlagSetValue(0x263,1);
       return;
     }
   }

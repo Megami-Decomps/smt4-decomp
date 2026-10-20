@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b2368(void);
+int asdMemFreeNonNull(void);
 int FUN_00381114(void);
 int FUN_00381254(unsigned int *);
 
@@ -15,7 +15,7 @@ typedef struct {
 
 extern unsigned char DAT_00422110; /* 0x422110 */
 
-/* Supplied declaration required: FUN_002b2368. */
+/* Supplied declaration required: asdMemFreeNonNull. */
 /* Supplied declaration required: FUN_00381114. */
 /* Supplied declaration required: FUN_00381254. */
 
@@ -29,7 +29,7 @@ void FUN_0038125c(unsigned int *param_1)
     FUN_00381114();
   }
   FUN_00381254(param_1);
-  FUN_002b2368();
+  asdMemFreeNonNull();
   return;
 }
 

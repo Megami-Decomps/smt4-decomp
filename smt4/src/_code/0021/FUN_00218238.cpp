@@ -20,8 +20,8 @@ typedef struct {
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_00224ce0. */
-extern int FUN_002bed98(int);
-extern int FUN_002beda4(int);
+extern int vec2GetYInt(int);
+extern int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf538. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
@@ -47,8 +47,8 @@ void FUN_00218238(int param_1,unsigned int param_2,int param_3,int param_4,int p
     temp_v4 = 0;
     temp_v1 = 0;
     if (*(int *)(param_1 + 0x3048) == 1) {
-      temp_v4 = FUN_002beda4(param_1 + 0xac);
-      temp_v1 = FUN_002bed98(param_1 + 0xac);
+      temp_v4 = vec2GetXInt(param_1 + 0xac);
+      temp_v1 = vec2GetYInt(param_1 + 0xac);
     }
     temp_v1 = param_4 + temp_v1;
     temp_v4 = param_3 + temp_v4;

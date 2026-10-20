@@ -5,13 +5,13 @@
 extern "C" {
 
 int FUN_0028c040(void);
-int FUN_0028d6d0(void);
+int buttonHelpCreate(void);
 int FUN_00292ca0(...);
 int FUN_002942c4(...);
 int FUN_00297468(...);
 int FUN_0029a128(...);
 int FUN_0029e874(...);
-int FUN_002a5ed0(int, int);
+int asdTMTexTableLoadEntryAsync(int, int);
 int timerStart(...);
 int FUN_002bd954(...);
 int FUN_002bee58(...);
@@ -35,15 +35,15 @@ extern unsigned char DAT_00405a30; /* 0x405a30 */
 extern unsigned char DAT_00405a4c; /* 0x405a4c */
 
 /* Supplied declaration required: FUN_0028c040. */
-/* Supplied declaration required: FUN_0028d6d0. */
+/* Supplied declaration required: buttonHelpCreate. */
 /* Supplied declaration required: FUN_00292ca0. */
 /* Supplied declaration required: FUN_002942c4. */
 /* Supplied declaration required: FUN_00297468. */
 /* Supplied declaration required: FUN_0029a128. */
 /* Supplied declaration required: FUN_0029e874. */
-/* Supplied declaration required: FUN_002a5ed0. */
-extern int FUN_002a8740(void);
-extern int FUN_002a8764(void);
+/* Supplied declaration required: asdTMTexTableLoadEntryAsync. */
+extern int gameGetUnitRecord(void);
+extern int gameGetSlotTable(void);
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002bee58. */
@@ -64,15 +64,15 @@ void FUN_003b7b58(int param_1)
   
   temp_v1 = 0;
   do {
-    FUN_002a5ed0(0x28,temp_v1);
+    asdTMTexTableLoadEntryAsync(0x28,temp_v1);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 2);
-  temp_v1 = FUN_002a8764();
+  temp_v1 = gameGetSlotTable();
   FUN_002942c4(0xffffffff,1);
   temp_v2 = 0;
   do {
     if (-1 < *(char *)(temp_v1 + temp_v2 + 0x9108)) {
-      temp_v0 = FUN_002a8740();
+      temp_v0 = gameGetUnitRecord();
       FUN_002942c4((int)*(short *)(temp_v0 + 0x46),1);
     }
     temp_v2 = temp_v2 + 1;
@@ -195,7 +195,7 @@ void FUN_003b7b58(int param_1)
   FUN_0029a128(0);
   FUN_00292ca0(0);
   FUN_0029e874(0);
-  FUN_0028d6d0();
+  buttonHelpCreate();
   return;
 }
 

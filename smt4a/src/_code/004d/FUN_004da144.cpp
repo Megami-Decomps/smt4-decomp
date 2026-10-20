@@ -7,9 +7,9 @@ extern "C" {
 int gameGetOptions(void);
 int sysMemClear(unsigned short *, int);
 
-extern int FUN_0014bef4(short);
+extern int randRange(short);
 extern int FUN_00168518(unsigned int, unsigned int);
-extern int FUN_001801a4(void);
+extern int gameGetPlayerData(void);
 /* Supplied declaration required: gameGetOptions. */
 /* Supplied declaration required: sysMemClear. */
 extern unsigned int FUN_0036fd64(unsigned int, unsigned short);
@@ -43,7 +43,7 @@ void FUN_004da144(void)
   if (*(short *)(temp_v8 + 0x136) != 0) {
     temp_v11 = temp_v11 + 1;
   }
-  temp_v9 = FUN_0014bef4(temp_v11 - 1);
+  temp_v9 = randRange(temp_v11 - 1);
   temp_v10 = 0;
   do {
     if (*(short *)(temp_v8 + temp_v10 * 2 + 0x132) != 0) {
@@ -64,7 +64,7 @@ void FUN_004da144(void)
   } while( 1 );
   while (temp_v8 = temp_v8 + 1, temp_v8 < 3) {
     if ((unsigned short)puVar12[temp_v8 + 0x99] == temp_v12) {
-      temp_v8 = FUN_001801a4();
+      temp_v8 = gameGetPlayerData();
       temp_v13 = FUN_0036fd64(temp_v12,*(unsigned short *)(temp_v8 + 0x62));
       break;
     }

@@ -23,7 +23,7 @@ extern int FUN_00219260(...); /* 0x219260 */
 extern int FUN_002d02b0(...); /* 0x2d02b0 */
 extern int FUN_002dc7a0(...); /* 0x2dc7a0 */
 extern int FUN_002dc8a8(...); /* 0x2dc8a8 */
-extern int DAT_0043dd68; /* 0x43dd68 */
+extern int g_unite; /* 0x43dd68 */
 
 /* Supplied declaration required: FUN_0027f3dc. */
 /* Supplied declaration required: FUN_0029ce60. */
@@ -46,7 +46,7 @@ void FUN_00196d78(void)
   unsigned int *puVar9;
   unsigned char *pbVar10;
   
-  temp_v0 = DAT_0043dd68;
+  temp_v0 = g_unite;
   temp_v2 = FUN_002a0d0c();
   pbVar10 = (unsigned char *)(temp_v2 + 0x13);
   temp_v1 = ~(*(unsigned char *)(temp_v2 + 0x13) >> 7) & 1;

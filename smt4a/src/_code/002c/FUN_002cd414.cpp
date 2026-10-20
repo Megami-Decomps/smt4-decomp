@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_00163aa4(int);
-int FUN_001846d0(int, int);
-int FUN_0019a7f4(int);
+int uiSpriteSelectAnim(int, int);
+int asdTMTexTableReleaseNode(int);
 int FUN_001b2d54(...);
 int FUN_0021ba5c(int);
 int FUN_00358f1c(int);
@@ -17,11 +17,11 @@ extern unsigned int g_aocSystem; /* 0x570280 */
 extern int g_btlTalkBustUp; /* 0x5710dc */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_0014bef4(unsigned int);
+extern int randRange(unsigned int);
 /* Supplied declaration required: FUN_00163aa4. */
-extern int FUN_0018206c(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001846d0. */
-/* Supplied declaration required: FUN_0019a7f4. */
+extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
+/* Supplied declaration required: uiSpriteSelectAnim. */
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
 /* Supplied declaration required: FUN_001b2d54. */
 /* Supplied declaration required: FUN_0021ba5c. */
 /* Supplied declaration required: FUN_00358f1c. */
@@ -134,9 +134,9 @@ unsigned int FUN_002cd414(void)
               *(unsigned char *)(temp_v4 + 0x2dc) = 0;
             }
           }
-          else if ((*(int *)(temp_v0 + 0x2ec) % 10 == 0) && (temp_v2 = FUN_0014bef4(3), temp_v2 == temp_v1))
+          else if ((*(int *)(temp_v0 + 0x2ec) % 10 == 0) && (temp_v2 = randRange(3), temp_v2 == temp_v1))
           {
-            FUN_001846d0(temp_v0 + temp_v1 * 0x8c + 0xac,6);
+            uiSpriteSelectAnim(temp_v0 + temp_v1 * 0x8c + 0xac,6);
             *(unsigned char *)(temp_v4 + 0x2dc) = 1;
           }
           temp_v1 = temp_v1 + 1;
@@ -207,7 +207,7 @@ unsigned int FUN_002cd414(void)
         }
         else if (g_btlTalkBustUp != 0) {
           if (-1 < *(int *)(g_btlTalkBustUp + 0x2f8)) {
-            FUN_0019a7f4(0x10);
+            asdTMTexTableReleaseNode(0x10);
             if (g_btlTalkBustUp != 0) {
               *(unsigned char *)(g_btlTalkBustUp + 0x2f4) = 0;
             }
@@ -221,7 +221,7 @@ unsigned int FUN_002cd414(void)
     }
   }
   else {
-    temp_v1 = FUN_0018206c(0x10,*(unsigned int *)(g_btlTalkBustUp + 0x2f8));
+    temp_v1 = asdTMTexTableNodeIsLoaded(0x10,*(unsigned int *)(g_btlTalkBustUp + 0x2f8));
     if (temp_v1 != 0) {
       FUN_003d44ac(temp_v0);
       *(unsigned int *)(temp_v0 + 0x2e8) = 2;

@@ -5,15 +5,15 @@
 extern "C" {
 
 int FUN_00170474(int);
-int FUN_0018b868(void);
-int FUN_0018b964(void);
-int FUN_001bcd48(int, int);
+int nn_applet_CTR_detail_OpenSession(void);
+int nn_applet_CTR_detail_CloseSession(void);
+int svcSleepThread(int, int);
 
 extern unsigned int FUN_0015abf0(void);
 /* Supplied declaration required: FUN_00170474. */
-/* Supplied declaration required: FUN_0018b868. */
-/* Supplied declaration required: FUN_0018b964. */
-/* Supplied declaration required: FUN_001bcd48. */
+/* Supplied declaration required: nn_applet_CTR_detail_OpenSession. */
+/* Supplied declaration required: nn_applet_CTR_detail_CloseSession. */
+/* Supplied declaration required: svcSleepThread. */
 
 
 unsigned int nn_applet_CTR_detail_PrepareToJumpToHomeMenu(void)
@@ -24,11 +24,11 @@ unsigned int nn_applet_CTR_detail_PrepareToJumpToHomeMenu(void)
   
   FUN_00170474(0xe);
   while( 1 ) {
-    FUN_0018b868();
+    nn_applet_CTR_detail_OpenSession();
     temp_v0 = FUN_0015abf0();
-    FUN_0018b964();
+    nn_applet_CTR_detail_CloseSession();
     if ((temp_v0 != 0xc8a0cff0 && temp_v0 != 0xe0a0cc08) && temp_v0 != 0xc8a0cc02) break;
-    FUN_001bcd48(10000000,0);
+    svcSleepThread(10000000,0);
   }
   return temp_v0;
 }

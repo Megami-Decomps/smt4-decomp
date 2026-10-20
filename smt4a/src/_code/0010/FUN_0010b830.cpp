@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00107120(unsigned int, unsigned int, int, int);
-int FUN_002e995c(unsigned char [8]);
+int onlineSockAddrConstruct(unsigned char [8]);
 int FUN_002f5020(unsigned int *, unsigned char *, int, int);
 int FUN_00441db8(unsigned int *);
 
@@ -18,8 +18,8 @@ typedef struct {
 extern unsigned char LAB_00107239; /* 0x107239 */
 
 /* Supplied declaration required: FUN_00107120. */
-/* Supplied declaration required: FUN_002e995c. */
-extern unsigned int *FUN_002f5010(unsigned int);
+/* Supplied declaration required: onlineSockAddrConstruct. */
+extern unsigned int *operatorNewArray(unsigned int);
 /* Supplied declaration required: FUN_002f5020. */
 /* Supplied declaration required: FUN_00441db8. */
 
@@ -34,7 +34,7 @@ unsigned int FUN_0010b830(unsigned int *param_1)
   unsigned char temp_v1 [8];
   unsigned int temp_v2;
   
-  puVar1 = (unsigned int *)FUN_002f5010(0x20);
+  puVar1 = (unsigned int *)operatorNewArray(0x20);
   puVar2 = (unsigned int *)0x0;
   if (puVar1 != (unsigned int *)0x0) {
     puVar2 = puVar1 + 2;
@@ -43,7 +43,7 @@ unsigned int FUN_0010b830(unsigned int *param_1)
     FUN_002f5020(puVar2,&LAB_00107239,0x18,1);
   }
   param_1[1] = (unsigned int)puVar2;
-  FUN_002e995c(temp_v1);
+  onlineSockAddrConstruct(temp_v1);
   temp_v0 = 0;
   FUN_00441db8(&temp_v0);
   temp_v2 = temp_v0;

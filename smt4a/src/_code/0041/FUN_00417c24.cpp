@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_004bb6d8(unsigned int, int);
 
-extern int FUN_001ab940(void);
+extern int gameFlagBlockGet(void);
 /* Supplied declaration required: FUN_004bb6d8. */
 
 
@@ -24,7 +24,7 @@ unsigned int FUN_00417c24(unsigned int param_1)
   unsigned int temp_v6;
   unsigned char *pbVar9;
   
-  temp_v2 = FUN_001ab940();
+  temp_v2 = gameFlagBlockGet();
   temp_v2 = temp_v2 + param_1 * 4;
   pbVar9 = (unsigned char *)(temp_v2 + 0x2a0);
   temp_v1 = *pbVar9;
@@ -34,20 +34,20 @@ unsigned int FUN_00417c24(unsigned int param_1)
   else {
     if ((temp_v1 & 4) == 0) {
       if ((temp_v1 & 2) != 0) {
-        temp_v4 = FUN_001ab940();
+        temp_v4 = gameFlagBlockGet();
         pbVar7 = (unsigned char *)(temp_v4 + param_1 * 4 + 0x2a0);
         if ((*pbVar7 & 2) != 0) {
-          temp_v4 = FUN_001ab940();
+          temp_v4 = gameFlagBlockGet();
           if (*(unsigned short *)(temp_v4 + 0x8e0) != param_1) {
             *pbVar7 = *pbVar7 & 0xf9;
           }
           else {
             *pbVar7 = *pbVar7 & 0xb9;
-            temp_v4 = FUN_001ab940();
+            temp_v4 = gameFlagBlockGet();
             temp_v6 = 0x500;
             *(unsigned short *)(temp_v4 + 0x8e0) = 0;
             do {
-              temp_v4 = FUN_001ab940();
+              temp_v4 = gameFlagBlockGet();
               FUN_004bb6d8(temp_v6,0);
               temp_v5 = temp_v6 & 7;
               temp_v0 = temp_v6 >> 3;

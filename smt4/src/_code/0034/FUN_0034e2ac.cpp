@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_0034e140(void);
+int mobiclipS4FsReaderDestroy(void);
 int software_interrupt(int);
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_0034e140. */
+/* Supplied declaration required: mobiclipS4FsReaderDestroy. */
 extern void nn_os_Thread_FinalizeImpl(unsigned int);
 
 
@@ -18,7 +18,7 @@ int FUN_0034e2ac(int param_1)
 /* irregular: 2 native warning(s); review required */
   int *piVar1;
   
-  FUN_0034e140();
+  mobiclipS4FsReaderDestroy();
   if (*(int *)(param_1 + 0x50) != 0) {
     software_interrupt(0x23);
     *(int *)(param_1 + 0x50) = 0;

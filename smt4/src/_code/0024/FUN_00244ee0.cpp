@@ -4,21 +4,21 @@
 
 extern "C" {
 
-int FUN_002b9024(void);
+int devilGetRecord(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: devilGetRecord. */
 
 
 unsigned int FUN_00244ee0(int param_1)
 
 {
 /* irregular: 1 native warning(s); review required */
-  FUN_002b9024();
+  devilGetRecord();
   switch(*(unsigned char *)(param_1 + 10)) {
   case 0:
     return 0x3ef;

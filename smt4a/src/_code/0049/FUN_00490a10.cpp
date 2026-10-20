@@ -8,7 +8,7 @@ int FUN_0016c69c(...);
 int FUN_0016c6f0(unsigned int, int, unsigned int);
 int FUN_001835b4(...);
 int FUN_00183bb0(void);
-int FUN_00184e64(unsigned int);
+int drawSetColorFromRGBA8(unsigned int);
 int FUN_00185dd4(...);
 int FUN_002e1208(...);
 int FUN_0037b138(...);
@@ -30,13 +30,13 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 extern unsigned char g_gameState; /* 0x5f15fc */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_00162e8c(void);
+extern int gameFlagsGetBlock(void);
 extern unsigned int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c69c. */
 /* Supplied declaration required: FUN_0016c6f0. */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_00184e64. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_00185dd4. */
 /* Supplied declaration required: FUN_002e1208. */
 /* Supplied declaration required: FUN_0037b138. */
@@ -69,7 +69,7 @@ void FUN_00490a10(int param_1)
   int temp_v17;
   int temp_v18 [15];
   
-  temp_v2 = FUN_00162e8c();
+  temp_v2 = gameFlagsGetBlock();
   words2Copy(param_1 + 0x4d0,&temp_v15);
   temp_v12 = 0.0f;
   temp_v18[0] = 0;
@@ -98,7 +98,7 @@ void FUN_00490a10(int param_1)
                (temp_v1 != 10 && temp_v1 != 0xc)) {
 LAB_00490b04:
               if ((*(short *)(temp_v6 + 0x17c0) != 0) || ((*(int *)((unsigned char *)&g_gameState + 0x660)) != 0)) {
-                FUN_00184e64(*(unsigned int *)(temp_v6 + 0x17d4));
+                drawSetColorFromRGBA8(*(unsigned int *)(temp_v6 + 0x17d4));
                 FUN_0037b138(*(unsigned int *)(temp_v6 + 0x17d4) & 0xff);
                 if (*(short *)(temp_v6 + 0x17c2) == 0x1bd2) {
                   if (*(int *)(param_1 + 0x4c0) != 0) {

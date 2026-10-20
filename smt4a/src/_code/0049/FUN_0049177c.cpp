@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00162e8c(void);
+int gameFlagsGetBlock(void);
 int words2Copy(int, float *);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(...);
@@ -28,8 +28,8 @@ extern int DAT_005f1c5c; /* 0x5f1c5c */
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
-/* Supplied declaration required: FUN_00162e8c. */
-extern int FUN_0018719c(void);
+/* Supplied declaration required: gameFlagsGetBlock. */
+extern int gameFlagIsSet(void);
 extern int FUN_00376fcc(int);
 extern int FUN_00384d34(int);
 extern int gameOwnedBitTest2(int);
@@ -67,7 +67,7 @@ void FUN_0049177c(int param_1)
   float temp_v17;
   unsigned long long temp_v18;
   
-  FUN_00162e8c();
+  gameFlagsGetBlock();
   temp_v2 = param_1 + 0x4cc;
   temp_v3 = FUN_00492bc0();
   pfVar5 = (float *)lmapSceneGetObj(temp_v2);
@@ -105,8 +105,8 @@ void FUN_0049177c(int param_1)
       temp_v4 = param_1 + temp_v3 * 100;
       if ((DAT_005f1c5c == 0) &&
          (((temp_v5 = FUN_004083a8(*(unsigned char *)(temp_v4 + 0x1790),*(unsigned char *)(temp_v4 + 0x1791)),
-           temp_v5 == 0 || ((*(short *)(temp_v4 + 0x17bc) != 0 && (temp_v5 = FUN_0018719c(), temp_v5 == 0)))
-           ) || ((*(short *)(temp_v4 + 0x17be) != 0 && (temp_v5 = FUN_0018719c(), temp_v5 != 0)))))) {
+           temp_v5 == 0 || ((*(short *)(temp_v4 + 0x17bc) != 0 && (temp_v5 = gameFlagIsSet(), temp_v5 == 0)))
+           ) || ((*(short *)(temp_v4 + 0x17be) != 0 && (temp_v5 = gameFlagIsSet(), temp_v5 != 0)))))) {
         *(unsigned short *)(temp_v4 + 0x17c0) = 0;
       }
       else {

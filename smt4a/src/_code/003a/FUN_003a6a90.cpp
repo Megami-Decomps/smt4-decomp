@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_0014e188(int, int, unsigned int, int, int);
-int FUN_001846d0(int, int);
-int FUN_00184b80(int, int);
+int uiSpriteSelectAnim(int, int);
+int pairSetFirstResetSecond(int, int);
 int VectorUnsignedToFloat(unsigned int, int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -16,9 +16,9 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: FUN_001846d0. */
-/* Supplied declaration required: FUN_00184b80. */
-extern unsigned int FUN_00203b08(void);
+/* Supplied declaration required: uiSpriteSelectAnim. */
+/* Supplied declaration required: pairSetFirstResetSecond. */
+extern unsigned int gameDataBlocksGetCounter(void);
 
 
 unsigned int FUN_003a6a90(unsigned int param_1,int param_2)
@@ -32,15 +32,15 @@ unsigned int FUN_003a6a90(unsigned int param_1,int param_2)
   temp_v1 = *(int *)(param_2 + 8);
   *(unsigned int *)(temp_v1 + 0x150) = 10;
   *(unsigned int *)(temp_v1 + 0x158) = 1;
-  temp_v0 = FUN_00203b08();
+  temp_v0 = gameDataBlocksGetCounter();
   *(short *)(temp_v1 + 0x15c) = (short)temp_v0;
   *(short *)(temp_v1 + 0x15e) = (short)temp_v0;
   temp_v0 = VectorUnsignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
   *(unsigned int *)(temp_v1 + 0x160) = temp_v0;
   *(unsigned char *)(temp_v1 + 0x154) = 1;
   FUN_0014e188(temp_v1 + 0xd30,8,0xffffffff,temp_v1 + 0x194,0xb);
-  FUN_00184b80(temp_v1 + 0xd30,0x11);
-  FUN_001846d0(temp_v1 + 0xd30,6);
+  pairSetFirstResetSecond(temp_v1 + 0xd30,0x11);
+  uiSpriteSelectAnim(temp_v1 + 0xd30,6);
   return 1;
 }
 

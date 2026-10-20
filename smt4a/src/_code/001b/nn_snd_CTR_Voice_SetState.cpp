@@ -12,7 +12,7 @@ typedef struct {
 extern unsigned char g_dspsndState; /* 0x6433d0 */
 extern unsigned short uRam006446ea; /* 0x6446ea */
 
-extern int FUN_001c6e20(void);
+extern int nn_snd_CTR_Dspsnd_IsInitialized(void);
 extern unsigned char nn_snd_CTR_Dspsnd_SetChannelPlayStop(unsigned int, unsigned char);
 extern void nn_snd_CTR_VoiceImpl_ReleaseWaveBuffer(unsigned int);
 
@@ -35,7 +35,7 @@ void nn_snd_CTR_Voice_SetState(int param_1,int param_2)
       nn_snd_CTR_Dspsnd_SetChannelPlayStop((unsigned int)&g_dspsndState,(unsigned char)*puVar1);
       *(unsigned char *)(puVar1 + 3) = 0;
       temp_v0 = *puVar1;
-      temp_v1 = FUN_001c6e20();
+      temp_v1 = nn_snd_CTR_Dspsnd_IsInitialized();
       if (temp_v1 != 0) {
         puVar1 = *(unsigned int **)((uRam006446ea & 1) * 0x60 + (temp_v0 & 0xff) * 4 + 0x644480);
         *puVar1 = *puVar1 | 0x20000000;
@@ -44,7 +44,7 @@ void nn_snd_CTR_Voice_SetState(int param_1,int param_2)
     }
     if (param_2 == 2) {
       temp_v0 = *puVar1;
-      temp_v1 = FUN_001c6e20();
+      temp_v1 = nn_snd_CTR_Dspsnd_IsInitialized();
       if (temp_v1 != 0) {
         puVar1 = *(unsigned int **)((uRam006446ea & 1) * 0x60 + (temp_v0 & 0xff) * 4 + 0x644480);
         *(unsigned short *)(puVar1 + 0x28) = (unsigned short)puVar1[0x28] & 0xff00;

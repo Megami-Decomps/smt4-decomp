@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b7430(unsigned int, int);
+int linkListEraseManagerNode(unsigned int, int);
 int VectorUnsignedToFloat(unsigned int, int);
 int nw_snd_internal_driver_SequenceTrack_Close(void);
 int nw_snd_internal_driver_SequenceTrack_FreeAllChannel(int);
@@ -20,8 +20,8 @@ typedef struct {
 extern int DAT_00472360; /* 0x472360 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_002b7430. */
-extern unsigned int FUN_002bd440(void);
+/* Supplied declaration required: linkListEraseManagerNode. */
+extern unsigned int nw_snd_internal_driver_SoundThread_GetInstance(void);
 extern int FUN_0037d70c(int, unsigned int);
 /* Supplied declaration required: nw_snd_internal_driver_SequenceTrack_Close. */
 /* Supplied declaration required: nw_snd_internal_driver_SequenceTrack_FreeAllChannel. */
@@ -107,8 +107,8 @@ void FUN_0037f770(int param_1)
     *(int *)(param_1 + 0xec) = *(int *)(param_1 + 0xec) + 1;
   }
   if (*(char *)(param_1 + 0xd) != '\0') {
-    temp_v2 = FUN_002bd440();
-    FUN_002b7430(temp_v2,param_1 + 0x50);
+    temp_v2 = nw_snd_internal_driver_SoundThread_GetInstance();
+    linkListEraseManagerNode(temp_v2,param_1 + 0x50);
     *(unsigned char *)(param_1 + 0xd) = 0;
   }
   temp_v3 = 0;

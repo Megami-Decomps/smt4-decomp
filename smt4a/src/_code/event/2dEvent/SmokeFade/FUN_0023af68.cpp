@@ -16,7 +16,7 @@ extern unsigned int DAT_0057f484; /* 0x57f484 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00162808. */
 extern int FUN_00162ea4(void);
-extern int FUN_0018206c(unsigned int, unsigned int);
+extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001f4908. */
 extern int FUN_00203d74(void);
 /* Supplied declaration required: FUN_003d54f8. */
@@ -40,7 +40,7 @@ unsigned int FUN_0023af68(void)
   temp_v3 = 0;
   temp_v2 = 0;
   do {
-    temp_v1 = FUN_0018206c((&DAT_0057f480)[temp_v2 * 3],(&DAT_0057f484)[temp_v2 * 3]);
+    temp_v1 = asdTMTexTableNodeIsLoaded((&DAT_0057f480)[temp_v2 * 3],(&DAT_0057f484)[temp_v2 * 3]);
     if (temp_v1 != 0) {
       temp_v3 = temp_v3 + 1;
     }
@@ -58,7 +58,7 @@ unsigned int FUN_0023af68(void)
     temp_v3 = 0;
     temp_v2 = 0;
     do {
-      temp_v1 = FUN_0018206c((&DAT_0057f480)[temp_v2 * 3],(&DAT_0057f484)[temp_v2 * 3]);
+      temp_v1 = asdTMTexTableNodeIsLoaded((&DAT_0057f480)[temp_v2 * 3],(&DAT_0057f484)[temp_v2 * 3]);
       if (temp_v1 != 0) {
         temp_v3 = temp_v3 + 1;
       }

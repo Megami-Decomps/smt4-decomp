@@ -8,7 +8,7 @@ int FUN_00184528(...);
 int FUN_0019de98(int, unsigned int);
 int FUN_00212724(void);
 int FUN_0022e774(void);
-int FUN_0023b27c(void);
+int useCounterStart(void);
 int FUN_0031f208(int);
 int FUN_0031f27c(int, int);
 int FUN_0032d0c8(int, int, int);
@@ -35,7 +35,7 @@ extern int FUN_0018349c(int, int);
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_00212724. */
 /* Supplied declaration required: FUN_0022e774. */
-/* Supplied declaration required: FUN_0023b27c. */
+/* Supplied declaration required: useCounterStart. */
 extern int FUN_002f036c(void);
 /* Supplied declaration required: FUN_0031f208. */
 /* Supplied declaration required: FUN_0031f27c. */
@@ -152,7 +152,7 @@ void FUN_004a580c(int param_1)
     FUN_0031f208(4);
     FUN_0031f208(5);
     FUN_0031f208(3);
-    FUN_0023b27c();
+    useCounterStart();
     FUN_003343f0(1);
     *(unsigned int *)(param_1 + 0x14) = 3;
     *(unsigned int *)(param_1 + 0x18) = 0;

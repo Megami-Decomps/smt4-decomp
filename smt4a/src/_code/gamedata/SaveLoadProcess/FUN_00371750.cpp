@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_0014af84(void);
+int gameDataBlocksGetSaveData(void);
 int asdMemoryAlloc(int, int, int, unsigned int, int);
 int asdMemFree(...);
-int FUN_001a9110(...);
+int wordPairCopy(...);
 int FUN_00239294(void);
 int FUN_00268250(...);
 int FUN_002c9104(void);
@@ -27,15 +27,15 @@ extern unsigned short DAT_0057f6c2; /* 0x57f6c2 */
 extern int DAT_0057f6c4; /* 0x57f6c4 */
 extern int DAT_00588e2c; /* 0x588e2c */
 
-/* Supplied declaration required: FUN_0014af84. */
+/* Supplied declaration required: gameDataBlocksGetSaveData. */
 /* Supplied declaration required: asdMemoryAlloc. */
 extern int jobGetWork(void);
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_001a9110. */
-extern unsigned int FUN_00228af0(void);
+/* Supplied declaration required: wordPairCopy. */
+extern unsigned int configGetSettings(void);
 extern int FUN_00229c9c(void);
 /* Supplied declaration required: FUN_00239294. */
-extern unsigned int FUN_00261458(void);
+extern unsigned int gameDataBlocksGetTable(void);
 /* Supplied declaration required: FUN_00268250. */
 /* Supplied declaration required: FUN_002c9104. */
 extern unsigned int FUN_00330b58(void);
@@ -132,15 +132,15 @@ unsigned int FUN_00371750(void)
     if (*(int *)(temp_v1 + 0x14) == 1) {
       temp_v5 = temp_v0;
     }
-    temp_v4 = FUN_0014af84();
+    temp_v4 = gameDataBlocksGetSaveData();
     *(char *)(temp_v4 + 3) = temp_v5;
-    temp_v3 = FUN_00261458();
+    temp_v3 = gameDataBlocksGetTable();
     rt_memcpy(*(unsigned int *)(temp_v1 + 8),temp_v3,0x80);
-    temp_v3 = FUN_00228af0();
-    FUN_001a9110(*(int *)(temp_v1 + 8) + 0x80,temp_v3);
+    temp_v3 = configGetSettings();
+    wordPairCopy(*(int *)(temp_v1 + 8) + 0x80,temp_v3);
     temp_v4 = *(int *)(temp_v1 + 8);
     puVar8 = (unsigned short *)(temp_v4 + 0x88);
-    temp_v3 = FUN_0014af84();
+    temp_v3 = gameDataBlocksGetSaveData();
     rt_memcpy_w(puVar8,temp_v3,0x2a71c);
     *puVar8 = 4;
     *(unsigned char *)(temp_v4 + 0x8a) = *(unsigned char *)(temp_v1 + 0x19);

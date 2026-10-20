@@ -8,7 +8,7 @@ int FUN_00371c3c(int, int);
 int FUN_0038b3f8(int, int);
 int FUN_003a7a88(int, int);
 
-extern int DAT_0057f290; /* 0x57f290 */
+extern int g_unite; /* 0x57f290 */
 
 extern unsigned long long FUN_002a4844(int);
 /* Supplied declaration required: FUN_00371c3c. */
@@ -33,8 +33,8 @@ void FUN_00231574(void)
   unsigned char temp_v10;
   unsigned long long temp_v11;
   
-  temp_v0 = DAT_0057f290;
-  temp_v11 = FUN_002a4844(DAT_0057f290 + 0x623c);
+  temp_v0 = g_unite;
+  temp_v11 = FUN_002a4844(g_unite + 0x623c);
   if (*(char *)(temp_v0 + 0x420) == '\x02') {
     temp_v11 = FUN_002a4844(temp_v0 + 0x8f14);
   }

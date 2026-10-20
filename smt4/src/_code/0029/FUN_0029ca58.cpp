@@ -5,10 +5,10 @@
 extern "C" {
 
 int statusCameraDestroy(void);
-int FUN_00288728(void);
+int mdlPartsRelease(void);
 int FUN_00293e78(int, int *);
 int lmapSceneSetUnk134(int);
-int FUN_002a72c0(int);
+int asdModelSlotRelease(int);
 int timerStart(int, int, int);
 int FUN_002bee58(int, int);
 
@@ -23,11 +23,11 @@ extern signed char DAT_0044e142; /* 0x44e142 */
 extern int DAT_0044e144; /* 0x44e144 */
 
 /* Supplied declaration required: statusCameraDestroy. */
-/* Supplied declaration required: FUN_00288728. */
+/* Supplied declaration required: mdlPartsRelease. */
 /* Supplied declaration required: FUN_00293e78. */
 /* Supplied declaration required: lmapSceneSetUnk134. */
 extern int lmapSceneGetScript(void);
-/* Supplied declaration required: FUN_002a72c0. */
+/* Supplied declaration required: asdModelSlotRelease. */
 extern int lmapMainIsRunning(void);
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bee58. */
@@ -64,10 +64,10 @@ void FUN_0029ca58(void)
       }
     }
     else if (*(int *)(temp_v0 + 0x1e80) != 0) {
-      FUN_00288728();
+      mdlPartsRelease();
       temp_v1 = lmapMainIsRunning();
       if (temp_v1 == 0) {
-        FUN_002a72c0(0);
+        asdModelSlotRelease(0);
       }
       if (DAT_0044e142 != '\0') {
         piVar3 = *(int **)(temp_v0 + 0x1e80);

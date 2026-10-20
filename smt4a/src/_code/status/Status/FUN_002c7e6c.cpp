@@ -12,9 +12,9 @@ int FUN_00151408(...);
 int taskCreateDraw(...);
 int FUN_001527d8(...);
 int asdMemoryAllocTracked(...);
-int FUN_001846d0(...);
-int FUN_00184758(...);
-int FUN_00184c00(...);
+int uiSpriteSelectAnim(...);
+int uiSpriteSetKeyframe(...);
+int uiSpriteSetImageKeyframe(...);
 int FUN_002804b0(...);
 int sysMemClear(...);
 int FUN_0034a544(...);
@@ -45,7 +45,7 @@ extern unsigned char LAB_002c8308; /* 0x2c8308 */
 extern unsigned char DAT_005362a8; /* 0x5362a8 */
 extern unsigned char DAT_0053638c; /* 0x53638c */
 extern unsigned char DAT_00536458; /* 0x536458 */
-extern signed char DAT_00588fd0; /* 0x588fd0 */
+extern signed char g_gameGlobals; /* 0x588fd0 */
 extern unsigned char DAT_00588fd2; /* 0x588fd2 */
 extern unsigned int *DAT_00588fd4; /* 0x588fd4 */
 
@@ -58,9 +58,9 @@ extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: FUN_001527d8. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: FUN_001846d0. */
-/* Supplied declaration required: FUN_00184758. */
-/* Supplied declaration required: FUN_00184c00. */
+/* Supplied declaration required: uiSpriteSelectAnim. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_002804b0. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_0034a544. */
@@ -78,7 +78,7 @@ void FUN_002c7e6c(void)
   int temp_v1;
   unsigned int *puVar5;
   
-  if (DAT_00588fd0 < '\x01') {
+  if (g_gameGlobals < '\x01') {
     if (DAT_00588fd4 == (unsigned int *)0x0) {
       puVar1 = (unsigned int *)0x100;
       asdMemoryAllocTracked(0x100,0x100,0,0x20f4,1);
@@ -130,51 +130,51 @@ void FUN_002c7e6c(void)
     Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(puVar1 + 9);
     FUN_001505ac(puVar1 + 9,&DAT_005362a8,0xe4,&DAT_0053638c,0xcc,0,0,0,0,&DAT_00536458,0x3f0);
     FUN_0014e188(puVar1 + 0x106,0xf,0,puVar1 + 9,1);
-    FUN_00184758(puVar1 + 0x106,1,0);
+    uiSpriteSetKeyframe(puVar1 + 0x106,1,0);
     FUN_0014e188(puVar1 + 0x129,0x12,1,puVar1 + 9,1);
-    FUN_001846d0(puVar1 + 0x129,0);
+    uiSpriteSelectAnim(puVar1 + 0x129,0);
     FUN_0014e188(puVar1 + 0x14c,0x12,2,puVar1 + 9,1);
-    FUN_001846d0(puVar1 + 0x14c,1);
+    uiSpriteSelectAnim(puVar1 + 0x14c,1);
     FUN_0014e188(puVar1 + 0x16f,0x12,0,puVar1 + 9,1);
-    FUN_001846d0(puVar1 + 0x16f,2);
+    uiSpriteSelectAnim(puVar1 + 0x16f,2);
     FUN_0014e188(puVar1 + 0x192,0x12,0,puVar1 + 9,1);
-    FUN_00184758(puVar1 + 0x192,7,0);
+    uiSpriteSetKeyframe(puVar1 + 0x192,7,0);
     temp_v1 = 0;
     do {
       puVar5 = puVar1 + temp_v1 * 0x23 + 0x1fb;
       FUN_0014e188(puVar5,0x12,0,puVar1 + 9,1);
-      FUN_00184758(puVar5,0x10,0);
-      FUN_00184c00(puVar5,0xd,0);
+      uiSpriteSetKeyframe(puVar5,0x10,0);
+      uiSpriteSetImageKeyframe(puVar5,0xd,0);
       FUN_0014e188(puVar1 + temp_v1 * 0x23 + 0x359,0x12,0,puVar1 + 9,1);
-      FUN_00184758(puVar1 + temp_v1 * 0x23 + 0x359,1,0);
+      uiSpriteSetKeyframe(puVar1 + temp_v1 * 0x23 + 0x359,1,0);
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < 10);
     FUN_0014e188(puVar1 + 0x4b7,0x12,0,puVar1 + 9,1);
     FUN_0014e188(puVar1 + 0x11,0x12,0,puVar1 + 9,1);
-    FUN_00184758(puVar1 + 0x11,6,0);
+    uiSpriteSetKeyframe(puVar1 + 0x11,6,0);
     FUN_0014e188(puVar1 + 0x57,0x12,0,puVar1 + 9,1);
-    FUN_00184c00(puVar1 + 0x57,4,0);
+    uiSpriteSetImageKeyframe(puVar1 + 0x57,4,0);
     FUN_0014e188(puVar1 + 0x7a,0x12,0,puVar1 + 9,1);
-    FUN_001846d0(puVar1 + 0x7a,6);
+    uiSpriteSelectAnim(puVar1 + 0x7a,6);
     FUN_0014e188(puVar1 + 0x9d,0x12,0,puVar1 + 9,1);
-    FUN_001846d0(puVar1 + 0x9d,7);
+    uiSpriteSelectAnim(puVar1 + 0x9d,7);
     FUN_0014e188(puVar1 + 0xc0,0x12,0,puVar1 + 9,1);
-    FUN_001846d0(puVar1 + 0xc0,8);
+    uiSpriteSelectAnim(puVar1 + 0xc0,8);
     FUN_0014e188(puVar1 + 0x34,0x12,0,puVar1 + 9,1);
-    FUN_001846d0(puVar1 + 0x34,4);
+    uiSpriteSelectAnim(puVar1 + 0x34,4);
     FUN_0014e188(puVar1 + 0x1b5,0x12,0,puVar1 + 9,1);
-    FUN_00184758(puVar1 + 0x1b5,8,0);
+    uiSpriteSetKeyframe(puVar1 + 0x1b5,8,0);
     FUN_0014e188(puVar1 + 0x1d8,0x12,0,puVar1 + 9,1);
-    FUN_00184758(puVar1 + 0x1d8,8,0);
+    uiSpriteSetKeyframe(puVar1 + 0x1d8,8,0);
     FUN_0014e188(puVar1 + 0xe3,0x12,0,puVar1 + 9,1);
-    FUN_001846d0(puVar1 + 0xe3,10);
+    uiSpriteSelectAnim(puVar1 + 0xe3,10);
     puVar1 = DAT_00588fd4;
     if (DAT_00588fd4 != (unsigned int *)0x0) {
       *(unsigned char *)((int)DAT_00588fd4 + 0x20d1) = 0;
       FUN_003e4140(puVar1 + 0x835);
     }
   }
-  DAT_00588fd0 = DAT_00588fd0 + '\x01';
+  g_gameGlobals = g_gameGlobals + '\x01';
   return;
 }
 

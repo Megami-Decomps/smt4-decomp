@@ -9,12 +9,12 @@ int FUN_0012e494(int **, int, int *);
 int FUN_0012fce0(int **, int, int *);
 int FUN_002e6e34(unsigned char [12], unsigned int);
 int FUN_002e6e5c(unsigned char [12]);
-int FUN_002e7232(int);
-int FUN_002e75fa(int);
+int sharedRefRelease(int);
+int sharedRefAddRef(int);
 int FUN_002f6c54(int *, unsigned int);
 int FUN_002f6c70(int, int **);
 int FUN_002f6c82(int, int *);
-int FUN_002f6d1c(int **);
+int mapIteratorNext5(int **);
 
 /* stack frame of param_2: 11 slot(s), 44 byte(s) */
 typedef struct {
@@ -40,15 +40,15 @@ typedef struct {
 /* Supplied declaration required: FUN_0012fce0. */
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-/* Supplied declaration required: FUN_002e7232. */
-/* Supplied declaration required: FUN_002e75fa. */
-extern unsigned int FUN_002ea714(void);
+/* Supplied declaration required: sharedRefRelease. */
+/* Supplied declaration required: sharedRefAddRef. */
+extern unsigned int onlineGetActiveLock(void);
 /* Supplied declaration required: FUN_002f6c54. */
 /* Supplied declaration required: FUN_002f6c70. */
 /* Supplied declaration required: FUN_002f6c82. */
-/* Supplied declaration required: FUN_002f6d1c. */
+/* Supplied declaration required: mapIteratorNext5. */
 extern int wordRefsDiffer_002f6d4c(int **, int *);
-extern int FUN_002f6d5c(int, int *, int *);
+extern int lessU32Alt(int, int *, int *);
 extern int wordRefsEqual_002f6d6c(int **, unsigned int *);
 
 
@@ -77,7 +77,7 @@ void FUN_002ef584(int param_1,int param_2)
   
   iStack_1c = param_1;
   temp_v14 = param_2;
-  temp_v1 = FUN_002ea714();
+  temp_v1 = onlineGetActiveLock();
   FUN_002e6e34(temp_v13,temp_v1);
   temp_v5 = param_1 + 0x20;
   if ((*(char *)(param_1 + 0x3c) != '\0') &&
@@ -91,13 +91,13 @@ void FUN_002ef584(int param_1,int param_2)
     *(unsigned int *)(temp_v2 + 0x10) = 1;
   }
   FUN_00121f78(*(unsigned int *)(temp_v14 + 0x118));
-  FUN_002e75fa(temp_v14);
+  sharedRefAddRef(temp_v14);
   temp_v3 = &temp_v14;
   temp_v4 = param_1 + 0x1d;
   piVar3 = (int *)(*(int **)(param_1 + 0x14))[1];
   temp_v6 = *(int **)(param_1 + 0x14);
   while (piVar5 = piVar3, piVar5 != (int *)0x0) {
-    temp_v2 = FUN_002f6d5c(temp_v4,piVar5 + 4,temp_v3);
+    temp_v2 = lessU32Alt(temp_v4,piVar5 + 4,temp_v3);
     if (temp_v2 != 0) {
       piVar3 = (int *)piVar5[3];
     }
@@ -109,7 +109,7 @@ void FUN_002ef584(int param_1,int param_2)
   temp_v7[0] = *(unsigned int *)(param_1 + 0x14);
   temp_v2 = wordRefsEqual_002f6d6c(&temp_v6,temp_v7);
   if ((temp_v2 != 0) ||
-     (temp_v2 = FUN_002f6d5c(temp_v4,temp_v3,temp_v6 + 4), piVar3 = temp_v6, temp_v2 != 0)) {
+     (temp_v2 = lessU32Alt(temp_v4,temp_v3,temp_v6 + 4), piVar3 = temp_v6, temp_v2 != 0)) {
     piVar3 = *(int **)(param_1 + 0x14);
   }
   if (piVar3 != *(int **)(param_1 + 0x14)) {
@@ -122,10 +122,10 @@ void FUN_002ef584(int param_1,int param_2)
         temp_v6 = temp_v3;
         FUN_002f6c70(temp_v5,&temp_v6);
         FUN_002f6c82(param_1 + 4,&temp_v14);
-        FUN_002e7232(temp_v14);
+        sharedRefRelease(temp_v14);
         break;
       }
-      FUN_002f6d1c(&temp_v3);
+      mapIteratorNext5(&temp_v3);
     }
   }
   FUN_0012fce0(&temp_v3,param_1 + 4,&temp_v14);

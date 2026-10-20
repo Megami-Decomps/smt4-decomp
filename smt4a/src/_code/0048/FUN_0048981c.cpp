@@ -49,7 +49,7 @@ extern signed char DAT_005f1614; /* 0x5f1614 */
 extern signed char DAT_005f161d; /* 0x5f161d */
 extern signed char DAT_005f1a5e; /* 0x5f1a5e */
 
-extern unsigned int *FUN_00162e8c(void);
+extern unsigned int *gameFlagsGetBlock(void);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00183e58. */
 extern int FUN_00325064(void);
@@ -94,7 +94,7 @@ unsigned int FUN_0048981c(int param_1)
   unsigned int *temp_v11;
   unsigned int *temp_v12;
   
-  temp_v10 = (unsigned int *)FUN_00162e8c();
+  temp_v10 = (unsigned int *)gameFlagsGetBlock();
   temp_v3 = 0;
   temp_v0 = param_1 + 0x4cc;
   puVar7 = (unsigned char *)(param_1 + 0x7b90);

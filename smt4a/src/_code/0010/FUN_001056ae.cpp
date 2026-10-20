@@ -15,7 +15,7 @@ int FUN_002ebd94(int, unsigned int);
 extern unsigned int FUN_00120f44(int, int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-extern int FUN_002e760a(unsigned int);
+extern int operatorNew(unsigned int);
 /* Supplied declaration required: FUN_002ebd94. */
 
 
@@ -38,7 +38,7 @@ unsigned long long FUN_001056ae(int param_1,unsigned int param_2,unsigned int pa
       (temp_v2 < (int)(unsigned int)*(unsigned short *)(param_1 + 0x40) &&
       (*(int *)(*(int *)(param_1 + 0x38) + temp_v2 * 4) != 0)); temp_v2 = temp_v2 + 1) {
   }
-  temp_v0 = FUN_002e760a(0x14);
+  temp_v0 = operatorNew(0x14);
   temp_v1 = 0;
   if (temp_v0 != 0) {
     temp_v1 = FUN_00120f44(temp_v0,param_1,param_2,param_3);

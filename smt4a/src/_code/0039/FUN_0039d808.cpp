@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 int scrSetResult(int);
 
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: scrSetResult. */
 extern int btlUnitGet(unsigned int);
 
@@ -27,7 +27,7 @@ unsigned int FUN_0039d808(unsigned int *param_1)
   temp_v0 = 0;
   do {
     temp_v1 = (unsigned int)*(unsigned short *)(temp_v2 + temp_v0 * 2 + 0x118);
-    if ((temp_v1 != 0) && (FUN_001aba54(), temp_v1 != 0)) {
+    if ((temp_v1 != 0) && (dataTable04FindById(), temp_v1 != 0)) {
       temp_v3 = temp_v3 + 1;
     }
     temp_v0 = temp_v0 + 1;

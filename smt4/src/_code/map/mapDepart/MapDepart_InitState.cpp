@@ -45,7 +45,7 @@ extern unsigned short DAT_0049fddc; /* 0x49fddc */
 extern unsigned short DAT_0049fdde; /* 0x49fdde */
 
 /* Supplied declaration required: FUN_00270f70. */
-extern int FUN_002c2950(void);
+extern int gameGetMapBlock(void);
 /* Supplied declaration required: FUN_002df86c. */
 
 
@@ -55,7 +55,7 @@ void MapDepart_InitState(fn_0025c13c_arg0 *param_1,int param_2)
 /* irregular: 2 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_002c2950();
+  temp_v0 = gameGetMapBlock();
   param_1->field_0x18 = 0;
   param_1->field_0x1c = 0;
   param_1->field_0x20 = 0;

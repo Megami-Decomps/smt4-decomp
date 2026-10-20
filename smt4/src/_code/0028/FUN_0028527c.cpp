@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern SaveWork *FUN_002c2950(void);
+extern SaveWork *gameGetMapBlock(void);
 
 void FUN_0028527c(int value)
 {
-    SaveWork *work = FUN_002c2950();
+    SaveWork *work = gameGetMapBlock();
 
     work->unk1C = value != 0;
 }

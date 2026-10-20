@@ -9,13 +9,13 @@ int FUN_002005a0(int *);
 int FUN_00259784(int);
 int FUN_002597c0(void);
 int FUN_00262f78(void);
-int FUN_00295720(void);
-int FUN_00297410(int);
+int btlTalkBustUpCreate(void);
+int fileSlotLoad(int);
 int FUN_00297468(unsigned char *, int *, int);
-int FUN_002a5ed0(int, int);
+int asdTMTexTableLoadEntryAsync(int, int);
 int FUN_002bb150(...);
 int FUN_002bd2b4(...);
-int FUN_002c3940(...);
+int rt_aeabi_memclr(...);
 int asdTMTexTableLoadSprites(int);
 
 typedef struct fn_001ec6e0_arg0 fn_001ec6e0_arg0;
@@ -45,7 +45,7 @@ extern unsigned char LAB_001ec94c; /* 0x1ec94c */
 extern unsigned char LAB_001ec964; /* 0x1ec964 */
 extern unsigned char LAB_001ec97c; /* 0x1ec97c */
 extern unsigned char LAB_001ec990; /* 0x1ec990 */
-extern int DAT_0043daa8; /* 0x43daa8 */
+extern int g_campCec; /* 0x43daa8 */
 
 /* Supplied declaration required: cecProcessStart. */
 /* Supplied declaration required: FUN_002005a0. */
@@ -56,14 +56,14 @@ extern int FUN_002595bc(void);
 extern unsigned int FUN_002597e0(void);
 extern unsigned int FUN_00259800(void);
 /* Supplied declaration required: FUN_00262f78. */
-/* Supplied declaration required: FUN_00295720. */
-/* Supplied declaration required: FUN_00297410. */
+/* Supplied declaration required: btlTalkBustUpCreate. */
+/* Supplied declaration required: fileSlotLoad. */
 /* Supplied declaration required: FUN_00297468. */
-/* Supplied declaration required: FUN_002a5ed0. */
+/* Supplied declaration required: asdTMTexTableLoadEntryAsync. */
 /* Supplied declaration required: FUN_002bb150. */
 /* Supplied declaration required: FUN_002bd2b4. */
 extern int rt_memcmp(unsigned char *, int, unsigned int);
-/* Supplied declaration required: FUN_002c3940. */
+/* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: asdTMTexTableLoadSprites. */
 
 
@@ -96,39 +96,39 @@ void FUN_001ec6e0(fn_001ec6e0_arg0 *param_1)
     }
     else {
       cecProcessStart();
-      FUN_00297410(0x25);
-      FUN_00295720();
+      fileSlotLoad(0x25);
+      btlTalkBustUpCreate();
       FUN_00297468(&LAB_001ec94c,&param_1->field_0xcec,0);
       FUN_00297468(&LAB_001ec964,&param_1->field_0xcf0,0);
       FUN_00297468(&LAB_001ec97c,&param_1->field_0xcf4,0);
       FUN_00297468(&LAB_001ec990,temp_v6,0);
       asdTMTexTableLoadSprites(0x39);
-      FUN_002a5ed0(0x39,0);
+      asdTMTexTableLoadEntryAsync(0x39,0);
       temp_v4 = FUN_00259800();
       temp_v3 = FUN_002597e0();
       temp_v0 = FUN_00262f78();
-      FUN_002bd2b4(DAT_0043daa8 + 0x48,temp_v0,temp_v3,temp_v4);
+      FUN_002bd2b4(g_campCec + 0x48,temp_v0,temp_v3,temp_v4);
       temp_v1 = FUN_00262f78();
       if (temp_v1 == 0) {
-        FUN_002c3940(DAT_0043daa8 + 0x80,0x14);
+        rt_aeabi_memclr(g_campCec + 0x80,0x14);
       }
       temp_v1 = FUN_002595bc();
       param_1->field_0xd60 = (char)temp_v1;
       if ((temp_v1 != 0) && (temp_v1 = gameDataBlockTestFlag(0x20), temp_v1 != 0)) {
         FUN_002005a0(&temp_v3);
-        temp_v1 = rt_memcmp(temp_v5,DAT_0043daa8 + 0x80,0x14);
+        temp_v1 = rt_memcmp(temp_v5,g_campCec + 0x80,0x14);
         if (temp_v1 != 0) {
-          if (*(short *)(DAT_0043daa8 + 0x90) != 0) {
+          if (*(short *)(g_campCec + 0x90) != 0) {
             FUN_002597c0();
-            FUN_00259784(DAT_0043daa8 + 0x48);
+            FUN_00259784(g_campCec + 0x48);
           }
           else {
             temp_v7 = FUN_00259800();
             temp_v0 = FUN_002597e0();
-            FUN_002bd2b4(DAT_0043daa8 + 0x48,0,temp_v0,temp_v7);
+            FUN_002bd2b4(g_campCec + 0x48,0,temp_v0,temp_v7);
             FUN_002597c0();
-            FUN_00259784(DAT_0043daa8 + 0x48);
-            FUN_002c3940(DAT_0043daa8 + 0x80,0x14);
+            FUN_00259784(g_campCec + 0x48);
+            rt_aeabi_memclr(g_campCec + 0x80,0x14);
           }
         }
       }

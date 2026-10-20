@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned char DAT_00464af0; /* 0x464af0 */
+extern unsigned char g_gfxSettings; /* 0x464af0 */
 extern signed char DAT_00464af1; /* 0x464af1 */
 extern unsigned char DAT_00464af2; /* 0x464af2 */
 
@@ -14,7 +14,7 @@ unsigned char FUN_001385d4(void)
 {
   unsigned char *puVar1;
   
-  puVar1 = &DAT_00464af0;
+  puVar1 = &g_gfxSettings;
   if (DAT_00464af1 != '\0') {
     puVar1 = (unsigned char *)(unsigned int)DAT_00464af2;
   }

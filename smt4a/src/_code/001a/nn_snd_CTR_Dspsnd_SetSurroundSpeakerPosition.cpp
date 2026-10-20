@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_001c6e20(void);
+extern int nn_snd_CTR_Dspsnd_IsInitialized(void);
 
 
 unsigned int nn_snd_CTR_Dspsnd_SetSurroundSpeakerPosition(int param_1,unsigned int param_2)
@@ -14,7 +14,7 @@ unsigned int nn_snd_CTR_Dspsnd_SetSurroundSpeakerPosition(int param_1,unsigned i
   unsigned int temp_v1;
   unsigned int *puVar3;
   
-  temp_v0 = FUN_001c6e20();
+  temp_v0 = nn_snd_CTR_Dspsnd_IsInitialized();
   temp_v1 = 0;
   if (temp_v0 != 0) {
     if (param_2 >= 2) {

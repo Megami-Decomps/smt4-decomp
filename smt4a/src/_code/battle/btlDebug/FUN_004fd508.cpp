@@ -16,7 +16,7 @@ typedef struct {
     unsigned int sp50; /* 0x50: local_50 */
 } param_5_stack;
 
-extern int DAT_005712f0; /* 0x5712f0 */
+extern int g_btlActionReflect; /* 0x5712f0 */
 extern unsigned int DAT_00573c40; /* 0x573c40 */
 extern unsigned int DAT_00573c44; /* 0x573c44 */
 extern unsigned int DAT_00573c48; /* 0x573c48 */
@@ -218,8 +218,8 @@ FUN_004fd508(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsi
   }
   temp_v8 = (float)VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v9 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v1 = DAT_005712f0;
-  FUN_004102d8(DAT_005712f0,(int)(short)param_1,0,param_2);
+  temp_v1 = g_btlActionReflect;
+  FUN_004102d8(g_btlActionReflect,(int)(short)param_1,0,param_2);
   *(unsigned char *)(temp_v1 + 4) = 0x27;
   *(short *)(temp_v1 + 0x24) = (short)(int)temp_v8;
   *(short *)(temp_v1 + 0x26) = (short)(int)temp_v9;

@@ -4,7 +4,7 @@ extern "C" {
 
 void FUN_00295214(u8 value)
 {
-    DAT_0043da28.obj->unk4CB = value;
+    g_buttonHelp.obj->unk4CB = value;
 }
 
 } /* extern "C" */

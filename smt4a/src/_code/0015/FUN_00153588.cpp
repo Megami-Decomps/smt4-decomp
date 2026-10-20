@@ -11,7 +11,7 @@ extern int g_bustupCutAnim; /* 0x57f4c4 */
 
 extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_00164ce0. */
-extern int FUN_00166f90(unsigned int);
+extern int jobGetWorkId(unsigned int);
 /* Supplied declaration required: FUN_00167f24. */
 extern unsigned char FUN_0016917c(unsigned int, unsigned int);
 
@@ -38,7 +38,7 @@ unsigned int FUN_00153588(int param_1)
       temp_v5 = temp_v0 + temp_v4 * 4;
       temp_v3 = jobIsValid(*(unsigned int *)(temp_v5 + 0x634));
       if (temp_v3 != 0) {
-        temp_v3 = FUN_00166f90(*(unsigned int *)(temp_v5 + 0x634));
+        temp_v3 = jobGetWorkId(*(unsigned int *)(temp_v5 + 0x634));
         if (temp_v3 == param_1) {
           FUN_00164ce0(*(unsigned int *)(temp_v5 + 0x634),1);
           temp_v2 = 1;

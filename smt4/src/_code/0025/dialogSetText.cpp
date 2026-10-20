@@ -22,18 +22,18 @@ typedef struct Dialog {
     /* 0x1B8 */ u32 handle;
 } Dialog;
 
-extern Dialog *DAT_0043e128;
+extern Dialog *g_infoWin;
 
 int FUN_00296b3c(u32 handle, int arg1, u32 arg2, int arg3, int arg4, void *text);
 int timerStart(void *window, int arg1, int arg2);
-int FUN_002beda4(void *window);
+int vec2GetXInt(void *window);
 int memClear(void *buffer, int size);
 void *rt_memcpy(void *dst, const void *src, u32 size);
 
 /* Sets the dialog text (NUL-terminated, at most 0x5a bytes): copies it, sizes the window around it and starts the message. */
 void dialogSetText(const char *text)
 {
-    Dialog *dialog = DAT_0043e128;
+    Dialog *dialog = g_infoWin;
     int length;
 
     dialog->hasText = 0;
@@ -53,7 +53,7 @@ void dialogSetText(const char *text)
                 dialog->scroll = (length / 2) * 14;
             }
             timerStart(dialog->window, 2, 0);
-            dialog->textWidth = FUN_002beda4(dialog->window);
+            dialog->textWidth = vec2GetXInt(dialog->window);
             dialog->totalWidth = dialog->textWidth + dialog->scroll + 42;
             if (dialog->state == 3) {
                 dialog->state = 2;

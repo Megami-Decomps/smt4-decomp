@@ -3,7 +3,7 @@
 extern "C" {
 
 extern void FUN_0021c118(s32 a, s32 b);
-extern void FUN_003d2d34(s32 a, s32 b, s32 c);
+extern void soundChannelRequestIfEnabled(s32 a, s32 b, s32 c);
 
 /* Switches the current id: stops the previous one (unless none) and starts `id`. */
 void btlSwitchId4CE4(BtlStateB *state, s32 id)
@@ -14,7 +14,7 @@ void btlSwitchId4CE4(BtlStateB *state, s32 id)
         if (current != -1) {
             FUN_0021c118(current, 0);
         }
-        FUN_003d2d34(id, 0, 10);
+        soundChannelRequestIfEnabled(id, 0, 10);
         state->unk4CE4 = id;
     }
 }

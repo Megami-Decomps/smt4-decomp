@@ -11,7 +11,7 @@ int FUN_002569ac(int *, unsigned int, unsigned int *, unsigned int, unsigned int
 int FUN_0027dd9c(unsigned int);
 int FUN_0027e6f4(int, int);
 int FUN_002ae164(void);
-int FUN_002b4670(void);
+int dataTable08Sub1GetRecord(void);
 int FUN_00338370(int);
 int FUN_003cc944(int *, int, int);
 int FUN_003cee94(int *, int);
@@ -36,7 +36,7 @@ extern int FUN_00227ecc(unsigned int, unsigned char);
 /* Supplied declaration required: FUN_0027dd9c. */
 /* Supplied declaration required: FUN_0027e6f4. */
 /* Supplied declaration required: FUN_002ae164. */
-/* Supplied declaration required: FUN_002b4670. */
+/* Supplied declaration required: dataTable08Sub1GetRecord. */
 /* Supplied declaration required: FUN_00338370. */
 /* Supplied declaration required: FUN_003cc944. */
 /* Supplied declaration required: FUN_003cee94. */
@@ -104,7 +104,7 @@ void FUN_003d3944(int *param_1,int param_2,unsigned int param_3,unsigned int par
       }
       else if (temp_v0 == 8) {
         temp_v1 = (int)*(short *)(temp_v1 + 0x14e);
-        FUN_002b4670();
+        dataTable08Sub1GetRecord();
         temp_v2 = (unsigned int)*(unsigned short *)(temp_v1 + 0x62);
         if (temp_v2 != 0) {
           if (0 < (int)temp_v2) {

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_002bbb5c(void);
+extern int gameGetQuestCenterBlock(void);
 
 
 void FUN_00343a2c(int param_1)
@@ -12,7 +12,7 @@ void FUN_00343a2c(int param_1)
 {
   int temp_v0;
   
-  temp_v0 = FUN_002bbb5c();
+  temp_v0 = gameGetQuestCenterBlock();
   param_1 = (unsigned int)*(unsigned short *)(temp_v0 + 0x16) + param_1;
   if (param_1 >= 0x10000) {
     param_1 = 0xffff;

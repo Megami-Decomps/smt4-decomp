@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00100388(unsigned char [100], unsigned char *, unsigned char *, unsigned char [50]);
-int FUN_002e342c(unsigned char *, unsigned char [50]);
+int libc_strcpy(unsigned char *, unsigned char [50]);
 int FUN_00362768(unsigned int *, unsigned char [50]);
 int FUN_00375ec8(void);
 int FUN_003762a8(unsigned int *, unsigned char [50]);
@@ -26,7 +26,7 @@ extern unsigned int *DAT_0059dc28; /* 0x59dc28 */
 extern unsigned char DAT_00634c50; /* 0x634c50 */
 
 /* Supplied declaration required: FUN_00100388. */
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_00362768. */
 /* Supplied declaration required: FUN_00375ec8. */
 /* Supplied declaration required: FUN_003762a8. */
@@ -67,7 +67,7 @@ unsigned char * FUN_00362584(void)
     puVar2 = (unsigned char *)0x400000;
   }
   else if ((temp_v2 == 1) && (DAT_0059dbf4 != 0)) {
-    FUN_002e342c(&DAT_00634c50,temp_v1);
+    libc_strcpy(&DAT_00634c50,temp_v1);
     FUN_00100388(temp_v3,&LAB_003626b0,&LAB_00362694,temp_v0);
     puVar2 = &LAB_00400002;
   }

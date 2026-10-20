@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern u8 *FUN_002bbb5c(void);
+extern u8 *gameGetQuestCenterBlock(void);
 
 void FUN_00343b48(void)
 {
-    u8 *block = FUN_002bbb5c();
+    u8 *block = gameGetQuestCenterBlock();
 
     block[0x10] = 1;
 }

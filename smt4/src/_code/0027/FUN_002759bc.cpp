@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002c0894(void);
+int asdTextureRelease(void);
 
-extern int DAT_0043e278; /* 0x43e278 */
+extern int g_frameTex; /* 0x43e278 */
 
-/* Supplied declaration required: FUN_002c0894. */
+/* Supplied declaration required: asdTextureRelease. */
 
 
 void FUN_002759bc(void)
@@ -17,18 +17,18 @@ void FUN_002759bc(void)
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = DAT_0043e278;
-  *(unsigned char *)(DAT_0043e278 + 0xe8c) = 0;
+  temp_v0 = g_frameTex;
+  *(unsigned char *)(g_frameTex + 0xe8c) = 0;
   if (*(int *)(temp_v0 + 0xfdc) != 0) {
-    FUN_002c0894();
+    asdTextureRelease();
     *(unsigned int *)(temp_v0 + 0xfdc) = 0;
   }
   if (*(int *)(temp_v0 + 0xfe8) != 0) {
-    FUN_002c0894();
+    asdTextureRelease();
     *(unsigned int *)(temp_v0 + 0xfe8) = 0;
   }
   if (*(int *)(temp_v0 + 0xfe4) != 0) {
-    FUN_002c0894();
+    asdTextureRelease();
     *(unsigned int *)(temp_v0 + 0xfe4) = 0;
   }
   return;

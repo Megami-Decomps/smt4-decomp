@@ -3,7 +3,7 @@
 
 extern "C" {
 
-extern const char DAT_004093e0[]; /* "c:\SMT4\XRD686\sdds4\Patch\AsdSDK\Source\Gfx\Model\AsdMdlManager.cpp": __FILE__ */
+extern const char g_asdMdlManagerSourcePath[]; /* "c:\SMT4\XRD686\sdds4\Patch\AsdSDK\Source\Gfx\Model\AsdMdlManager.cpp": __FILE__ */
 
 void *asdMemoryAlloc(int, int, int, s32 size, int align);
 AsdMdlNode *FUN_001fe514(void);
@@ -11,7 +11,7 @@ AsdMdlNode *FUN_001fe514(void);
 /* Allocates a zeroed model object and gives it a node. */
 AsdMdlObject *asdMdlObjectNew(void)
 {
-    asdDebugTrace(DAT_004093e0, 101);
+    asdDebugTrace(g_asdMdlManagerSourcePath, 101);
     AsdMdlObject *obj = (AsdMdlObject *)asdMemoryAlloc(0x100, 0x100, 0, 0x1c, 1);
 
     obj->flags = 0;

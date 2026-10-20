@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00188b60(unsigned int *);
+int nn_os_CriticalSection_Initialize(unsigned int *);
 int FUN_00442800(int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -23,7 +23,7 @@ extern unsigned int DAT_0062d2a4; /* 0x62d2a4 */
 
 extern unsigned int FUN_0016f864(void);
 extern unsigned int FUN_0016f988(unsigned int *, unsigned char *, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00188b60. */
+/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
 extern unsigned int wstrlen(unsigned char *);
 extern int FUN_00442280(void);
 extern unsigned int FUN_00442724(unsigned char *);
@@ -64,9 +64,9 @@ unsigned int FUN_00441f84(void)
         if (-1 < (int)temp_v2) {
           DAT_00589384 = DAT_00589384 + 1;
           FUN_00442800(0xb0101c8);
-          FUN_00188b60(&DAT_0062d28c);
+          nn_os_CriticalSection_Initialize(&DAT_0062d28c);
           DAT_00589380 = 0;
-          FUN_00188b60(&DAT_0062d298);
+          nn_os_CriticalSection_Initialize(&DAT_0062d298);
           nn_os_CriticalSection_Enter((unsigned int)&DAT_0062d2a4);
           temp_v3 = DAT_00589384 == 0;
           nn_os_CriticalSection_Leave((unsigned int)&DAT_0062d2a4);

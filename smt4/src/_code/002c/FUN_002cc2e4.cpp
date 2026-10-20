@@ -13,7 +13,7 @@ int FUN_002b659c(int, int, int, int);
 int FUN_002ba12c(...);
 int FUN_002bd82c(...);
 int FUN_002bdf94(...);
-int FUN_002be304(...);
+int drawSetColorFromRGBA8(...);
 int FUN_002be370(...);
 int FUN_002be624(...);
 int FUN_002bed3c(void);
@@ -55,7 +55,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002ba12c. */
 /* Supplied declaration required: FUN_002bd82c. */
 /* Supplied declaration required: FUN_002bdf94. */
-/* Supplied declaration required: FUN_002be304. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_002be370. */
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002bed3c. */
@@ -148,7 +148,7 @@ void FUN_002cc2e4(unsigned int *param_1,int param_2,int param_3,int param_4,int 
     else {
       FUN_002be624(temp_v14,&LAB_002cc8b8);
     }
-    FUN_002be304(0);
+    drawSetColorFromRGBA8(0);
     FUN_002bdf94(0,*(short *)(temp_v3 + 8) + temp_v4,*(short *)(temp_v3 + 10) + param_5,0,5,0x73,
                  temp_v14);
     FUN_002bed3c();
@@ -255,7 +255,7 @@ void FUN_002cc2e4(unsigned int *param_1,int param_2,int param_3,int param_4,int 
     else {
       FUN_002be624(temp_v14,&LAB_002ccb78);
     }
-    FUN_002be304(temp_v13);
+    drawSetColorFromRGBA8(temp_v13);
     FUN_002bdf94(0,param_4 + temp_v5 + (int)*(short *)(temp_v3 + 8),*(short *)(temp_v3 + 10) + param_5,0,5
                  ,0x74,temp_v14);
     FUN_002bed3c();

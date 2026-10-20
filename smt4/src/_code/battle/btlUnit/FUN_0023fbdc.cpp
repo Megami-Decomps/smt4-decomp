@@ -39,7 +39,7 @@ extern unsigned int DAT_00439a2c; /* 0x439a2c */
 extern unsigned int DAT_00439a30; /* 0x439a30 */
 extern unsigned int DAT_00439a34; /* 0x439a34 */
 extern unsigned int DAT_00439a38; /* 0x439a38 */
-extern unsigned int DAT_00439ca8; /* 0x439ca8 */
+extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 
 /* Supplied declaration required: FUN_00240530. */
 /* Supplied declaration required: FUN_0024057c. */
@@ -99,7 +99,7 @@ void FUN_0023fbdc(unsigned int *param_1,int param_2)
     else {
       FUN_00254f58(param_2);
       *puVar9 = *puVar9 | 0x200000;
-      FUN_003ae720(DAT_00439ca8,0);
+      FUN_003ae720(g_btlUiBlock,0);
     }
     param_1[3] = 0;
     *param_1 = 0xf;
@@ -178,7 +178,7 @@ void FUN_0023fbdc(unsigned int *param_1,int param_2)
     if ((*puVar9 & 2) == 0) {
       FUN_00254f58(param_2);
       *puVar9 = *puVar9 | 0x200000;
-      FUN_003ae720(DAT_00439ca8,0);
+      FUN_003ae720(g_btlUiBlock,0);
     }
     param_1[3] = 0;
     *param_1 = 0xf;

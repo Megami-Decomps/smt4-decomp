@@ -17,19 +17,19 @@ int FUN_00235250(void);
 int FUN_0026374c(...);
 int FUN_00270028(...);
 int FUN_00275dec(void);
-int FUN_0027e774(...);
+int dialogOpen(...);
 int FUN_0027e7b4(...);
 int FUN_002a03d8(int, int);
 int FUN_002a0400(...);
-int FUN_002b8e84(...);
+int eventQueueAddUnique(...);
 int FUN_002be624(...);
 int asdOperatorNew(void);
-int FUN_003bbae0(void);
+int dataTable33GetEntries(void);
 
 int FUN_0022af9c(...);
 int FUN_0022b29c(int, int, unsigned int);
 int FUN_0022b778(void);
-int FUN_0022b8d8(int, int);
+int listScrollToId(int, int);
 int FUN_002305e8(...);
 int FUN_00233808(int);
 int FUN_002636b0(void);
@@ -51,9 +51,9 @@ int FUN_00295ba4(int);
 int FUN_00296e90(void);
 int FUN_0029c3c0(int, int, int);
 int FUN_002a4bac(unsigned int);
-int FUN_002b2368(int);
-int FUN_002b63c0(void);
-int FUN_002bf694(unsigned char *, unsigned int);
+int asdMemFreeNonNull(int);
+int dataTable1bOr1cGetRecord(void);
+int libc_strcpy(unsigned char *, unsigned int);
 int asdMemFree(void);
 int FUN_002e1ba8(void);
 
@@ -84,7 +84,7 @@ extern int FUN_0022b14c(int);
 /* Supplied declaration required: FUN_0022b6c4. */
 /* Supplied declaration required: FUN_0022b778. */
 extern int FUN_0022b8c0(int);
-/* Supplied declaration required: FUN_0022b8d8. */
+/* Supplied declaration required: listScrollToId. */
 /* Supplied declaration required: FUN_002305e8. */
 extern unsigned short FUN_0023360c(int);
 /* Supplied declaration required: FUN_00233808. */
@@ -107,7 +107,7 @@ extern unsigned short FUN_0023360c(int);
 /* Supplied declaration required: FUN_00275dec. */
 /* Supplied declaration required: FUN_0027d908. */
 /* Supplied declaration required: FUN_0027d948. */
-/* Supplied declaration required: FUN_0027e774. */
+/* Supplied declaration required: dialogOpen. */
 /* Supplied declaration required: FUN_0027e7b4. */
 extern int FUN_00282b28(void);
 /* Supplied declaration required: FUN_00287c34. */
@@ -119,21 +119,21 @@ extern int FUN_00282b28(void);
 /* Supplied declaration required: FUN_002a03d8. */
 /* Supplied declaration required: FUN_002a0400. */
 /* Supplied declaration required: FUN_002a4bac. */
-/* Supplied declaration required: FUN_002b2368. */
-/* Supplied declaration required: FUN_002b63c0. */
+/* Supplied declaration required: asdMemFreeNonNull. */
+/* Supplied declaration required: dataTable1bOr1cGetRecord. */
 extern int FUN_002b8694(void);
-/* Supplied declaration required: FUN_002b8e84. */
+/* Supplied declaration required: eventQueueAddUnique. */
 /* Supplied declaration required: FUN_002be624. */
-/* Supplied declaration required: FUN_002bf694. */
-extern int FUN_002c09bc(void);
-extern int FUN_002c09d0(void);
+/* Supplied declaration required: libc_strcpy. */
+extern int gameDataBlocksGetSaveData(void);
+extern int gameFlagIsSet(void);
 extern int FUN_002c2218(int);
 /* Supplied declaration required: asdOperatorNew. */
-extern int FUN_002c2950(void);
+extern int gameGetMapBlock(void);
 extern unsigned int FUN_002c3124(unsigned char *, int, unsigned int);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002e1ba8. */
-/* Supplied declaration required: FUN_003bbae0. */
+/* Supplied declaration required: dataTable33GetEntries. */
 
 
 void FUN_003ba998(int param_1)
@@ -181,7 +181,7 @@ void FUN_003ba998(int param_1)
     if (*(char *)(param_1 + 0xe58) != '\0') {
       FUN_002a4bac(*(unsigned int *)(param_1 + 0xe5c));
       if (*piVar12 != 0) {
-        FUN_002b2368(*piVar12);
+        asdMemFreeNonNull(*piVar12);
       }
       temp_v6 = 0;
       *(unsigned int *)(param_1 + 0xe5c) = 0;
@@ -229,15 +229,15 @@ void FUN_003ba998(int param_1)
     if (pcVar4[4] != '\0') {
       if (pcVar4[1] != '\0') {
         temp_v3 = (unsigned int)*(unsigned short *)(pcVar4 + 8);
-        FUN_002b63c0();
+        dataTable1bOr1cGetRecord();
         DAT_0049fa82 = *(unsigned short *)(temp_v3 + 2);
-        FUN_002bf694(&DAT_0049fa84,temp_v3 + 0x138);
+        libc_strcpy(&DAT_0049fa84,temp_v3 + 0x138);
         DAT_0049fa80 = 1;
       }
       else if (pcVar4[3] != '\0') {
         DAT_0049fa96 = 1;
       }
-      temp_v6 = FUN_002c2950();
+      temp_v6 = gameGetMapBlock();
       *(unsigned short *)(temp_v6 + 0x22) = 0;
       FUN_00273f5c();
       FUN_0027d948();
@@ -249,7 +249,7 @@ void FUN_003ba998(int param_1)
         *(unsigned char *)(param_1 + 0xdac) = 1;
       }
       else {
-        temp_v6 = FUN_002c2950();
+        temp_v6 = gameGetMapBlock();
         *(unsigned short *)(temp_v6 + 0x1e) = *(unsigned short *)(pcVar4 + 6);
         FUN_00273d34();
         FUN_00273c54();
@@ -262,7 +262,7 @@ void FUN_003ba998(int param_1)
       FUN_0026ff54();
       FUN_00287c34(1);
       FUN_00275be8(0);
-      temp_v6 = FUN_002c09bc();
+      temp_v6 = gameDataBlocksGetSaveData();
       if (*(unsigned char *)(temp_v6 + 2) >= 2) {
         if (*(unsigned char *)(temp_v6 + 2) == 2) {
           *(unsigned char *)(param_1 + 0x4b) = 1;
@@ -291,7 +291,7 @@ void FUN_003ba998(int param_1)
       temp_v6 = FUN_0022b8c0(param_1 + 0x9c);
       temp_v0 = *(unsigned char *)(temp_v6 + 0x20);
       FUN_0022b29c(param_1,(int)*(short *)(param_1 + 0x3c),*(unsigned int *)(param_1 + 0xd64));
-      FUN_0022b8d8(param_1 + 0x9c,temp_v0);
+      listScrollToId(param_1 + 0x9c,temp_v0);
       temp_v2 = FUN_0023360c(param_1 + 0x9c);
       *(unsigned short *)(param_1 + 0x4c) = temp_v2;
     }
@@ -323,8 +323,8 @@ void FUN_003ba998(int param_1)
       FUN_00235250();
       FUN_002be624(temp_v9,&LAB_003bb08c,*(int *)(param_1 + 0xd5c) + 0x40);
       if (((*(short *)(*(int *)(param_1 + 0xd5c) + 100) != 0) &&
-          (temp_v6 = FUN_002c09d0(), temp_v6 != 0)) ||
-         ((*(short *)(*(int *)(param_1 + 0xd5c) + 0x66) != 0 && (temp_v6 = FUN_002c09d0(), temp_v6 != 0)
+          (temp_v6 = gameFlagIsSet(), temp_v6 != 0)) ||
+         ((*(short *)(*(int *)(param_1 + 0xd5c) + 0x66) != 0 && (temp_v6 = gameFlagIsSet(), temp_v6 != 0)
           ))) {
         FUN_002be624(temp_v10,&LAB_003bb08c,*(int *)(param_1 + 0xd5c) + 0x68);
         FUN_00234f5c(*(unsigned int *)(param_1 + 0xe5c),temp_v9,temp_v10);
@@ -337,7 +337,7 @@ void FUN_003ba998(int param_1)
       FUN_00234cd8(*piVar12,(int)*(short *)(temp_v6 + 0x28),1);
       if (-1 < *(int *)(*(int *)(param_1 + 0xd5c) + 0x60)) {
         puVar10 = temp_v11;
-        FUN_003bbae0();
+        dataTable33GetEntries();
         if (puVar10 != (unsigned char *)0x0) {
           temp_v4 = 0;
           puVar7 = temp_v11;
@@ -373,7 +373,7 @@ void FUN_003ba998(int param_1)
       FUN_00234f04(temp_v6,temp_v5);
     }
     if (*(char *)(param_1 + 0xdac) == '\0') {
-      FUN_0027e774(0);
+      dialogOpen(0);
       FUN_0027e7b4(*(unsigned int *)(param_1 + 0xd80),
                    *(unsigned char *)(*(int *)(param_1 + 0xd5c) + 0x3f));
       FUN_0026374c(*(int *)(param_1 + 0xd5c) + 2);
@@ -390,7 +390,7 @@ void FUN_003ba998(int param_1)
         piVar12 = (int *)(param_1 + 0x28);
       }
       else {
-        FUN_002b8e84(0x1000184);
+        eventQueueAddUnique(0x1000184);
         FUN_00275dec();
         piVar12 = (int *)(param_1 + 0x2c);
         temp_v6 = *piVar12 + 1;

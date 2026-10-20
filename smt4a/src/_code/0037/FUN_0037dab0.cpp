@@ -18,13 +18,13 @@ typedef struct Obj37dab0 {
     /* 0x107C */ void *resourceC;
 } Obj37dab0;
 
-extern Obj37dab0 *DAT_0057f268;
+extern Obj37dab0 *g_partyPanel;
 
 __weak void *FUN_0037dab0_hook(void *p);
 u8 *FUN_0026140c(void);
 void scrScriptProcessDestroy(void);
 void asdMemFree(void *p);
-void FUN_002e3328(void *p);
+void asdOperatorDelete(void *p);
 void *ptrTable44FreeAll(void *p);
 void FUN_00333f6c(void);
 void jobStop(u32 job, int arg);
@@ -32,7 +32,7 @@ void jobStop(u32 job, int arg);
 /* Destroys the object: frees its buffers and resources, stops its job and clears the global. */
 void FUN_0037dab0(void)
 {
-    Obj37dab0 *obj = DAT_0057f268;
+    Obj37dab0 *obj = g_partyPanel;
     int i;
 
     FUN_0026140c()[0x44] = obj->flag;
@@ -47,22 +47,22 @@ void FUN_0037dab0(void)
     }
     for (i = 0; i < 4; i++) {
         if (obj->resourceA[i] != NULL) {
-            FUN_002e3328(FUN_0037dab0_hook(obj->resourceA[i]));
+            asdOperatorDelete(FUN_0037dab0_hook(obj->resourceA[i]));
         }
     }
     for (i = 0; i < 24; i++) {
         if (obj->resourceB[i] != NULL) {
-            FUN_002e3328(FUN_0037dab0_hook(obj->resourceB[i]));
+            asdOperatorDelete(FUN_0037dab0_hook(obj->resourceB[i]));
         }
     }
     if (obj->resourceC != NULL) {
-        FUN_002e3328(ptrTable44FreeAll(obj->resourceC));
+        asdOperatorDelete(ptrTable44FreeAll(obj->resourceC));
     }
     obj->resourceC = NULL;
     FUN_00333f6c();
     jobStop(obj->job, 0);
     asdMemFree(obj);
-    DAT_0057f268 = NULL;
+    g_partyPanel = NULL;
 }
 
 } /* extern "C" */

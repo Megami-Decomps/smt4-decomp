@@ -12,7 +12,7 @@ int FUN_00256cd8(...);
 int FUN_00256dbc(...);
 int FUN_00256f88(...);
 int FUN_00257320(...);
-int FUN_002694f8(...);
+int refCountIncrement(...);
 int FUN_00269508(...);
 int FUN_00269694(unsigned int, int, int, int);
 int FUN_002ad314(...);
@@ -142,10 +142,10 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_00256dbc. */
 /* Supplied declaration required: FUN_00256f88. */
 /* Supplied declaration required: FUN_00257320. */
-/* Supplied declaration required: FUN_002694f8. */
+/* Supplied declaration required: refCountIncrement. */
 /* Supplied declaration required: FUN_00269508. */
 /* Supplied declaration required: FUN_00269694. */
-extern int FUN_00269a58(void);
+extern int effGetFrameCounter(void);
 /* Supplied declaration required: FUN_002ad314. */
 /* Supplied declaration required: mtx44Copy. */
 extern int __cxa_guard_acquire(unsigned int *);
@@ -262,7 +262,7 @@ void FUN_002dea74(int param_1)
   float temp_v88;
   int temp_v89;
   
-  temp_v1 = FUN_00269a58();
+  temp_v1 = effGetFrameCounter();
   *(int *)(param_1 + 0x2c) = temp_v1 + *(int *)(param_1 + 0x2c);
   temp_v4 = *(int *)(param_1 + 0x2c);
   temp_v5 = *(int *)(param_1 + 0xbc);
@@ -334,7 +334,7 @@ void FUN_002dea74(int param_1)
     temp_v69 = (temp_v1 << 0x10) | (temp_v3 & 0xffff);
     temp_v70 = (temp_v2 & 0xffff) | (temp_v1 << 0x10);
     temp_v71 = (temp_v3 & 0xffff) | (temp_v4 << 0x10);
-    FUN_002694f8(temp_v77);
+    refCountIncrement(temp_v77);
   }
   else if (*(int *)(param_1 + 0x140) != 0) {
     FUN_00256cd8(*(int *)(param_1 + 0x140),temp_v4,&temp_v82);
@@ -358,7 +358,7 @@ void FUN_002dea74(int param_1)
     temp_v77 = temp_v85;
     temp_v74 = temp_v11;
     fStack_cc = temp_v11;
-    FUN_002694f8(temp_v77);
+    refCountIncrement(temp_v77);
   }
   else {
     FUN_002f81b0(puVar9,&temp_v80);

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00100c74(int, int, unsigned int);
 int asdOperatorNewB(int, int);
-int FUN_002c6a10(int);
+int asdOperatorDelete(int);
 int FUN_0035a418(...);
 
 /* stack frame of param_4: 4 slot(s), 16 byte(s) */
@@ -19,7 +19,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00100c74. */
 /* Supplied declaration required: asdOperatorNewB. */
-/* Supplied declaration required: FUN_002c6a10. */
+/* Supplied declaration required: asdOperatorDelete. */
 /* Supplied declaration required: FUN_0035a418. */
 
 
@@ -60,7 +60,7 @@ void FUN_002344d8(unsigned int param_1,int param_2,unsigned int param_3,unsigned
       FUN_00100c74(param_2,temp_v1,*puVar3);
       *(unsigned short *)((param_2 + temp_v3 * 2) - 2) = 0;
     }
-    FUN_002c6a10(temp_v1);
+    asdOperatorDelete(temp_v1);
   }
   return;
 }

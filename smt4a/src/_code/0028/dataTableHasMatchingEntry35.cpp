@@ -13,7 +13,7 @@ typedef struct Entry {
 } Entry;                        /* 0x54 */
 
 u32 dataTableGet(u32 table, u32 arg);
-s32 FUN_0018719c(u32 flag);
+s32 gameFlagIsSet(u32 flag);
 u32 dataTableGetCount(u32 table);
 Entry *dataTableGetEntries(void);
 
@@ -30,10 +30,10 @@ u32 dataTableHasMatchingEntry35(u32 id)
     entry = dataTableGetEntries();
     count = dataTableGetCount(table);
     for (i = 0; i < count; i++) {
-        if ((((entry->id == id) && ((entry->needSetA == 0 || (flag = FUN_0018719c(entry->needSetA), flag != 0)))) &&
-             ((entry->needSetB == 0 || (flag = FUN_0018719c(entry->needSetB), flag != 0)))) &&
-            (((entry->needClearA == 0 || (flag = FUN_0018719c(entry->needClearA), flag == 0)) &&
-              ((entry->needClearB == 0 || (flag = FUN_0018719c(entry->needClearB), flag == 0)))))) {
+        if ((((entry->id == id) && ((entry->needSetA == 0 || (flag = gameFlagIsSet(entry->needSetA), flag != 0)))) &&
+             ((entry->needSetB == 0 || (flag = gameFlagIsSet(entry->needSetB), flag != 0)))) &&
+            (((entry->needClearA == 0 || (flag = gameFlagIsSet(entry->needClearA), flag == 0)) &&
+              ((entry->needClearB == 0 || (flag = gameFlagIsSet(entry->needClearB), flag == 0)))))) {
             return 1;
         }
         entry = entry + 1;

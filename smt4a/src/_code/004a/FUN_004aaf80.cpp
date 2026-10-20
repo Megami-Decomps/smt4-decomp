@@ -4,11 +4,11 @@ extern "C" {
 
 void menu32ModeIsNot3(BtlUiObjAA *obj);
 
-extern BtlUiGlobalsA DAT_0057a9b8;
+extern BtlUiGlobalsA g_btlUi;
 
 void FUN_004aaf80(void)
 {
-    menu32ModeIsNot3(&DAT_0057a9b8.ui->objA);
+    menu32ModeIsNot3(&g_btlUi.ui->objA);
 }
 
 } /* extern "C" */

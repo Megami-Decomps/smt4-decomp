@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern ObjBRef DAT_00588fd0;
+extern ObjBRef g_gameGlobals;
 
 s32 FUN_0034a9ac(void)
 {
-    return DAT_00588fd0.instance->unk138C;
+    return g_gameGlobals.instance->unk138C;
 }
 
 } /* extern "C" */

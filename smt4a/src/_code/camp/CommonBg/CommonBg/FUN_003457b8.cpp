@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0014384c(int);
+int asdTMTexTableLoadSprites(int);
 int FUN_0014afd0(int, int);
 int taskCreateDraw(...);
 int asdMemoryAlloc(int, int, int, int, int);
@@ -28,7 +28,7 @@ extern int FUN_0036dff4(...); /* 0x36dff4 */
 extern unsigned int *DAT_0057f20c; /* 0x57f20c */
 extern unsigned int *DAT_0057f210; /* 0x57f210 */
 
-/* Supplied declaration required: FUN_0014384c. */
+/* Supplied declaration required: asdTMTexTableLoadSprites. */
 /* Supplied declaration required: FUN_0014afd0. */
 extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: taskCreateDraw. */
@@ -62,7 +62,7 @@ void FUN_003457b8(void)
   temp_v0 = spriteHandleCreate(0);
   puVar1[4] = temp_v0;
   FUN_0023723c(temp_v0,2,0xffffffff,0,0,&LAB_00345934);
-  FUN_0014384c(0x22);
+  asdTMTexTableLoadSprites(0x22);
   FUN_0014afd0(0x22,0);
   puVar3 = &LAB_0034596c;
   taskCreateDraw(&LAB_0034596c,4,8,0,FUN_0031a5e4,ref208Destroy,puVar1,*DAT_0057f20c);

@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_00184758(...);
-int FUN_00184c00(int, int, int);
+int uiSpriteSetKeyframe(...);
+int uiSpriteSetImageKeyframe(int, int, int);
 int FUN_00202400(void);
 int FUN_002ae320(void);
 int FUN_003423cc(int);
@@ -18,11 +18,11 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } void_stack;
 
-extern int DAT_0057f28c; /* 0x57f28c */
+extern int g_uiQuest; /* 0x57f28c */
 
 extern int FUN_00162858(void);
-/* Supplied declaration required: FUN_00184758. */
-/* Supplied declaration required: FUN_00184c00. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_00202400. */
 extern int FUN_002a4860(void);
 extern int FUN_002a4894(int);
@@ -48,14 +48,14 @@ void FUN_0031f924(void)
   unsigned int temp_v6;
   unsigned int temp_v7;
   
-  temp_v5 = DAT_0057f28c;
-  *(unsigned char *)(DAT_0057f28c + 0x90c) = 0;
+  temp_v5 = g_uiQuest;
+  *(unsigned char *)(g_uiQuest + 0x90c) = 0;
   if (*(int *)(temp_v5 + 4) == 0xd) {
-    FUN_00184758(temp_v5 + 0x34,2,0);
-    FUN_00184c00(temp_v5 + 0x34,9,0);
-    temp_v5 = DAT_0057f28c;
-    temp_v6 = *(unsigned int *)(DAT_0057f28c + 4);
-    *(unsigned int *)(DAT_0057f28c + 4) = 3;
+    uiSpriteSetKeyframe(temp_v5 + 0x34,2,0);
+    uiSpriteSetImageKeyframe(temp_v5 + 0x34,9,0);
+    temp_v5 = g_uiQuest;
+    temp_v6 = *(unsigned int *)(g_uiQuest + 4);
+    *(unsigned int *)(g_uiQuest + 4) = 3;
     *(unsigned int *)(temp_v5 + 8) = temp_v6;
     *(unsigned int *)(temp_v5 + 0x10) = 0;
     FUN_003423cc(0xa2);
@@ -67,10 +67,10 @@ void FUN_0031f924(void)
   temp_v0 = *(unsigned short *)(temp_v5 + (temp_v2 + temp_v1) * 2 + 0xad6);
   temp_v7 = (unsigned int)temp_v0;
   FUN_003d498c(temp_v7,1);
-  FUN_00184758(temp_v5 + 0x34,0);
-  FUN_00184c00(temp_v5 + 0x34,8,0);
+  uiSpriteSetKeyframe(temp_v5 + 0x34,0);
+  uiSpriteSetImageKeyframe(temp_v5 + 0x34,8,0);
   *(unsigned short *)(temp_v5 + 0xcce) = temp_v0;
-  temp_v1 = DAT_0057f28c;
+  temp_v1 = g_uiQuest;
   temp_v2 = partyEntryBitsBit4(temp_v7);
   if ((temp_v2 == 0) && (temp_v3 = temp_v7, FUN_003defe0(), temp_v3 != 0)) {
     temp_v2 = 0;
@@ -94,9 +94,9 @@ void FUN_0031f924(void)
   if (temp_v5 != 0) {
     FUN_00202400();
   }
-  temp_v5 = DAT_0057f28c;
-  temp_v6 = *(unsigned int *)(DAT_0057f28c + 4);
-  *(unsigned int *)(DAT_0057f28c + 4) = 1;
+  temp_v5 = g_uiQuest;
+  temp_v6 = *(unsigned int *)(g_uiQuest + 4);
+  *(unsigned int *)(g_uiQuest + 4) = 1;
   *(unsigned int *)(temp_v5 + 8) = temp_v6;
   *(unsigned int *)(temp_v5 + 0x10) = 0;
   return;

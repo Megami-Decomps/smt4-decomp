@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_001aea28(unsigned int, unsigned int);
-int FUN_002e3328(unsigned int *);
+int ptrListRemoveClearOwner(unsigned int, unsigned int);
+int asdOperatorDelete(unsigned int *);
 int FUN_003fd790(int);
 
 typedef int romwright_code(...);
@@ -14,10 +14,10 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_2_stack;
 
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 
-/* Supplied declaration required: FUN_001aea28. */
-/* Supplied declaration required: FUN_002e3328. */
+/* Supplied declaration required: ptrListRemoveClearOwner. */
+/* Supplied declaration required: asdOperatorDelete. */
 /* Supplied declaration required: FUN_003fd790. */
 
 
@@ -34,7 +34,7 @@ void FUN_0040ac40(unsigned int *param_1,unsigned int param_2)
     if ((*(unsigned int *)(temp_v0 + 4) & 4) != 0) {
       FUN_003fd790(temp_v0);
     }
-    FUN_001aea28(DAT_0056fcc0,param_1[1]);
+    ptrListRemoveClearOwner(g_handleRegistry,param_1[1]);
   }
   if ((int *)param_1[2] != (int *)0x0) {
     (**(romwright_code **)(*(int *)param_1[2] + 4))();
@@ -48,7 +48,7 @@ void FUN_0040ac40(unsigned int *param_1,unsigned int param_2)
     (**(romwright_code **)(*(int *)param_1[3] + 4))();
     param_1[3] = 0;
   }
-  FUN_002e3328(param_1);
+  asdOperatorDelete(param_1);
   return;
 }
 

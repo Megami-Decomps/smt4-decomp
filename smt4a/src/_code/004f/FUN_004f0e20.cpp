@@ -8,7 +8,7 @@ int FUN_0013c884(unsigned int *, int);
 int FUN_00140e38(unsigned int *);
 int FUN_0014f0dc(unsigned int *, unsigned int *, float *, int *);
 int FUN_001523b8(unsigned int *, int);
-int FUN_00203a6c(void);
+int eventCommandSetPendingCleanup(void);
 int FUN_00208b84(void);
 int FUN_00348c50(int);
 int FUN_0036b824(unsigned int *);
@@ -24,14 +24,14 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_1_stack;
 
-extern int DAT_0056fcc0; /* 0x56fcc0 */
+extern int g_handleRegistry; /* 0x56fcc0 */
 extern int DAT_00589144; /* 0x589144 */
 
 /* Supplied declaration required: FUN_0013c884. */
 /* Supplied declaration required: FUN_00140e38. */
 /* Supplied declaration required: FUN_0014f0dc. */
 /* Supplied declaration required: FUN_001523b8. */
-/* Supplied declaration required: FUN_00203a6c. */
+/* Supplied declaration required: eventCommandSetPendingCleanup. */
 /* Supplied declaration required: FUN_00208b84. */
 /* Supplied declaration required: FUN_00348c50. */
 /* Supplied declaration required: FUN_0036b824. */
@@ -84,7 +84,7 @@ void FUN_004f0e20(unsigned int *param_1)
   FUN_001523b8(param_1 + 0x1b,1);
   FUN_0036b824(param_1 + 0x1b);
   FUN_00140e38(param_1 + 0x1b);
-  *(unsigned int **)(DAT_0056fcc0 + 0xc) = param_1 + 0x1b;
+  *(unsigned int **)(g_handleRegistry + 0xc) = param_1 + 0x1b;
   param_1[0x1ad] = temp_v2;
   param_1[0x1ac] = temp_v2;
   param_1[0x1ab] = temp_v2;
@@ -147,7 +147,7 @@ void FUN_004f0e20(unsigned int *param_1)
   *(unsigned char *)(param_1 + 0x1aa) = 0;
   FUN_00208b84();
   param_1[0x10] = temp_v0;
-  FUN_00203a6c();
+  eventCommandSetPendingCleanup();
   param_1[0x11] = 0;
   param_1[0x12] = 0;
   param_1[0x13] = 0;

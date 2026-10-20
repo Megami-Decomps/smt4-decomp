@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002e75fa(...);
+int sharedRefAddRef(...);
 int FUN_002e78d0(...);
-int FUN_002e9300(...);
-int FUN_002e9318(...);
+int onlineStringConstruct(...);
+int onlineStringDestroy(...);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -21,11 +21,11 @@ extern unsigned int DAT_0063030c; /* 0x63030c */
 
 extern unsigned int *FUN_0010531c(int, unsigned int, unsigned char *);
 extern unsigned int FUN_002e6e26(void);
-/* Supplied declaration required: FUN_002e75fa. */
-extern int FUN_002e760a(unsigned int);
+/* Supplied declaration required: sharedRefAddRef. */
+extern int operatorNew(unsigned int);
 /* Supplied declaration required: FUN_002e78d0. */
-/* Supplied declaration required: FUN_002e9300. */
-/* Supplied declaration required: FUN_002e9318. */
+/* Supplied declaration required: onlineStringConstruct. */
+/* Supplied declaration required: onlineStringDestroy. */
 
 
 void FUN_00114250(int param_1)
@@ -39,9 +39,9 @@ void FUN_00114250(int param_1)
   unsigned int temp_v3;
   unsigned char temp_v4 [4];
   
-  temp_v0 = FUN_002e760a(0x50);
+  temp_v0 = operatorNew(0x50);
   if (temp_v0 != 0) {
-    FUN_002e9300(temp_v2,"CallContextRegister::CheckExpiredCalls");
+    onlineStringConstruct(temp_v2,"CallContextRegister::CheckExpiredCalls");
     temp_v3 = 0;
     puVar2 = (unsigned int *)FUN_0010531c(temp_v0,0,temp_v4);
     puVar2[0x10] = (unsigned int)&LAB_00114139;
@@ -50,13 +50,13 @@ void FUN_00114250(int param_1)
     puVar2[0x11] = temp_v3;
     puVar2[0x13] = 0;
     *(unsigned int **)(param_1 + 0x5c) = puVar2;
-    FUN_002e9318(temp_v2);
+    onlineStringDestroy(temp_v2);
   }
   else {
     *(unsigned int *)(param_1 + 0x5c) = 0;
   }
   *(unsigned int *)(*(int *)(param_1 + 0x5c) + 0x3c) = DAT_0063030c;
-  FUN_002e75fa(*(unsigned int *)(param_1 + 0x5c));
+  sharedRefAddRef(*(unsigned int *)(param_1 + 0x5c));
   temp_v1 = FUN_002e6e26();
   FUN_002e78d0(temp_v1,*(unsigned int *)(param_1 + 0x5c),0);
   return;

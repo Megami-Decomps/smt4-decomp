@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002bb150(int, int);
-int FUN_002bb308(void);
+int nn_applet_CTR_detail_CloseSession(void);
 int FUN_002bb378(void);
 int FUN_002c131c(int, int);
 int SBORROW4(...);
@@ -30,7 +30,7 @@ extern unsigned int DAT_0044e37c; /* 0x44e37c */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_002bb150. */
 extern int FUN_002bb284(unsigned int, unsigned int *);
-/* Supplied declaration required: FUN_002bb308. */
+/* Supplied declaration required: nn_applet_CTR_detail_CloseSession. */
 /* Supplied declaration required: FUN_002bb378. */
 /* Supplied declaration required: FUN_002c131c. */
 
@@ -70,7 +70,7 @@ unsigned int FUN_00147e44(unsigned int param_1,unsigned int param_2,unsigned int
     if (temp_v2 < 0) {
       FUN_002c131c(temp_v2,0x147ec8);
     }
-    FUN_002bb308();
+    nn_applet_CTR_detail_CloseSession();
     if ((char)temp_v7 != '\0') break;
     if (param_3 == DAT_0044e378 && DAT_0044e37c == param_4) {
       return 0;

@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_002b9024(u32 id);
+int devilGetRecord(u32 id);
 
 typedef struct Source {
     /* 0x00 */ u8 unk00[0x46];
@@ -16,7 +16,7 @@ typedef struct Record {
 
 u16 FUN_0033c0c0(Source *source)
 {
-    Record *record = (Record *)FUN_002b9024(source->id);
+    Record *record = (Record *)devilGetRecord(source->id);
 
     return record->unk2A;
 }

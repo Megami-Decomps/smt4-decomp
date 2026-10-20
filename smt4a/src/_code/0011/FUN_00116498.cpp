@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_002e342c(unsigned int, unsigned int);
-int FUN_002e9598(int, unsigned int);
+int libc_strcpy(unsigned int, unsigned int);
+int onlineStringAssign(int, unsigned int);
 int FUN_002ea3d0(int, unsigned int);
 int FUN_002eca44(unsigned int *);
 
@@ -27,10 +27,10 @@ extern unsigned char LAB_0011653c; /* 0x11653c */
 extern unsigned char DAT_00559ce4; /* 0x559ce4 */
 
 extern int wstrlen(unsigned int);
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 extern int strInit(int);
 extern unsigned int FUN_002e784e(int, unsigned char *, unsigned int);
-/* Supplied declaration required: FUN_002e9598. */
+/* Supplied declaration required: onlineStringAssign. */
 extern int constructObj0055affc(int);
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned int, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
@@ -63,11 +63,11 @@ int FUN_00116498(fn_00116498_arg0 *param_1,unsigned int param_2,unsigned int par
   temp_v0 = strInit(temp_v0 + 0x78);
   *(unsigned int *)(temp_v0 - 0x11c) = param_3;
   *(unsigned int *)(temp_v0 - 0x120) = param_2;
-  FUN_002e9598(temp_v0 - 0x98,param_5);
+  onlineStringAssign(temp_v0 - 0x98,param_5);
   temp_v1 = wstrlen(param_6);
   temp_v2 = FUN_002e784e(temp_v1 + 1,&LAB_0011653c,0);
   *(unsigned int *)(temp_v0 - 0x90) = temp_v2;
-  FUN_002e342c(temp_v2,param_6);
+  libc_strcpy(temp_v2,param_6);
   *(unsigned int *)(temp_v0 - 0x8c) = param_7;
   *(unsigned int *)(temp_v0 + 0x20) = param_4;
   *(unsigned int *)(temp_v0 - 0x88) = param_9;

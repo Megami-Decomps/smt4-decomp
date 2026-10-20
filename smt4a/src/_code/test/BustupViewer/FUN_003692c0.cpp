@@ -7,8 +7,8 @@ extern "C" {
 int FUN_00100388(...);
 int FUN_001527d8(unsigned int, unsigned int);
 int FUN_0025cc78(unsigned int, int, int, int);
-int FUN_002e342c(unsigned char [268], unsigned char *);
-int FUN_002e6dd0(...);
+int libc_strcpy(unsigned char [268], unsigned char *);
+int rt_aeabi_memclr(...);
 
 extern unsigned char LAB_003695dc; /* 0x3695dc */
 extern unsigned char LAB_003695e4; /* 0x3695e4 */
@@ -36,8 +36,8 @@ extern unsigned char DAT_006199d8; /* 0x6199d8 */
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_001527d8. */
 /* Supplied declaration required: FUN_0025cc78. */
-/* Supplied declaration required: FUN_002e342c. */
-/* Supplied declaration required: FUN_002e6dd0. */
+/* Supplied declaration required: libc_strcpy. */
+/* Supplied declaration required: rt_aeabi_memclr. */
 
 
 unsigned int FUN_003692c0(void)
@@ -55,8 +55,8 @@ unsigned int FUN_003692c0(void)
   unsigned char temp_v8 [268];
   
   temp_v0 = g_bustupViewer;
-  FUN_002e6dd0(temp_v7,0x100);
-  FUN_002e6dd0(temp_v8,0x100);
+  rt_aeabi_memclr(temp_v7,0x100);
+  rt_aeabi_memclr(temp_v8,0x100);
   temp_v6 = 16.0f;
   temp_v5 = 17.0f;
   temp_v3 = 0;
@@ -260,7 +260,7 @@ LAB_0036981c:
           }
           temp_v1 = 0;
         }
-        FUN_002e6dd0(&DAT_006199d8,0x80);
+        rt_aeabi_memclr(&DAT_006199d8,0x80);
         if (temp_v1 < 100) {
           FUN_00100388(&DAT_006199d8,&LAB_00369918,
                        *(unsigned int *)(s__V_V_V_V_V_V_V_V_V_V_005890d4 + temp_v1 * 4));
@@ -269,7 +269,7 @@ LAB_0036981c:
           FUN_00100388(&DAT_006199d8,&LAB_00369910,
                        *(unsigned int *)(s__V_V_V_V_V_V_V_V_V_V_005890d4 + (temp_v1 - 100) * 4));
         }
-        FUN_002e342c(temp_v8,&DAT_006199d8);
+        libc_strcpy(temp_v8,&DAT_006199d8);
         FUN_00100388(temp_v7,&LAB_00369924,temp_v8);
         break;
       case 0xf:

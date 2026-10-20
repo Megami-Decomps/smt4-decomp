@@ -6,7 +6,7 @@ extern "C" {
 
 int NaviMain_UpdateDiscovery(int);
 
-extern int DAT_0044cdf0; /* 0x44cdf0 */
+extern int g_naviMain; /* 0x44cdf0 */
 
 extern int FUN_00287758(void);
 /* Supplied declaration required: NaviMain_UpdateDiscovery. */
@@ -19,8 +19,8 @@ unsigned int NAVI_DOWN(void)
   int temp_v0;
   
   temp_v0 = FUN_00287758();
-  if ((temp_v0 != 0) && (*(int *)(DAT_0044cdf0 + 0x30) == 0)) {
-    NaviMain_UpdateDiscovery(DAT_0044cdf0 + 0x40);
+  if ((temp_v0 != 0) && (*(int *)(g_naviMain + 0x30) == 0)) {
+    NaviMain_UpdateDiscovery(g_naviMain + 0x40);
   }
   return 0;
 }

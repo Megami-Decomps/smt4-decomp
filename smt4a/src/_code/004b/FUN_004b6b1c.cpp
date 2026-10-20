@@ -16,9 +16,9 @@ struct fn_004b6b1c_arg0 {
     int field_0x43a8; /* +0x43a8 */
 };
 
-extern int FUN_0018206c(unsigned int, int);
+extern int asdTMTexTableNodeIsLoaded(unsigned int, int);
 /* Supplied declaration required: FUN_00275bc8. */
-extern int FUN_003f86c8(unsigned int);
+extern int loadSlotIsLoaded(unsigned int);
 
 
 unsigned int FUN_004b6b1c(fn_004b6b1c_arg0 *param_1)
@@ -40,12 +40,12 @@ unsigned int FUN_004b6b1c(fn_004b6b1c_arg0 *param_1)
   if (temp_v3 && temp_v4) {
     temp_v0 = param_1->field_0x43a8;
   }
-  if ((((temp_v3 && temp_v4) && temp_v0 != 0) && (temp_v0 = FUN_003f86c8(0x14), temp_v0 != 0)) &&
-     (temp_v0 = FUN_003f86c8(0x25), temp_v0 != 0)) {
+  if ((((temp_v3 && temp_v4) && temp_v0 != 0) && (temp_v0 = loadSlotIsLoaded(0x14), temp_v0 != 0)) &&
+     (temp_v0 = loadSlotIsLoaded(0x25), temp_v0 != 0)) {
     temp_v2 = 0;
     temp_v0 = temp_v2;
     do {
-      temp_v1 = FUN_0018206c(0x1d,temp_v2);
+      temp_v1 = asdTMTexTableNodeIsLoaded(0x1d,temp_v2);
       if (temp_v1 != 0) {
         temp_v0 = temp_v0 + 1;
       }

@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_0014384c(int);
+int asdTMTexTableLoadSprites(int);
 int FUN_0014afd0(int, int);
-int FUN_0019cac4(void);
+int dataTable00FindById(void);
 int FUN_002804b0(unsigned char *, unsigned int *, int);
 int FUN_002bf464(void);
-int FUN_0031a400(void);
+int campCommonBgAcquire(void);
 int FUN_0031bca4(void);
-int FUN_00342010(void);
+int campButtonHelpAcquire(void);
 int FUN_00389fe0(...);
 int FUN_0039af48(...);
 int FUN_003b61ec(void);
@@ -31,14 +31,14 @@ extern unsigned char LAB_0049695c; /* 0x49695c */
 extern unsigned char LAB_00496978; /* 0x496978 */
 extern unsigned char LAB_00496990; /* 0x496990 */
 
-/* Supplied declaration required: FUN_0014384c. */
+/* Supplied declaration required: asdTMTexTableLoadSprites. */
 /* Supplied declaration required: FUN_0014afd0. */
-/* Supplied declaration required: FUN_0019cac4. */
+/* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: FUN_002804b0. */
 /* Supplied declaration required: FUN_002bf464. */
-/* Supplied declaration required: FUN_0031a400. */
+/* Supplied declaration required: campCommonBgAcquire. */
 /* Supplied declaration required: FUN_0031bca4. */
-/* Supplied declaration required: FUN_00342010. */
+/* Supplied declaration required: campButtonHelpAcquire. */
 /* Supplied declaration required: FUN_00389fe0. */
 /* Supplied declaration required: FUN_0039af48. */
 /* Supplied declaration required: FUN_003b61ec. */
@@ -55,12 +55,12 @@ void FUN_0049669c(unsigned int *param_1)
   unsigned int temp_v2;
   int temp_v3;
   
-  FUN_0031a400();
+  campCommonBgAcquire();
   FUN_003b61ec();
   FUN_002bf464();
-  FUN_00342010();
+  campButtonHelpAcquire();
   FUN_002804b0(&LAB_004968ec,param_1 + 0x61,0);
-  FUN_0014384c(0x20);
+  asdTMTexTableLoadSprites(0x20);
   FUN_0014afd0(0x20,0);
   temp_v1 = 0;
   temp_v2 = 0;
@@ -144,7 +144,7 @@ void FUN_0049669c(unsigned int *param_1)
       FUN_0040a244();
       param_1[0x5815] = 0;
     }
-    FUN_0019cac4();
+    dataTable00FindById();
     temp_v1 = FUN_00409fe8((int)*(short *)(temp_v3 + 0x8c),1);
     param_1[0x5814] = 0;
     param_1[0x5815] = temp_v1;

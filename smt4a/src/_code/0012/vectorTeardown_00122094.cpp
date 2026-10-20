@@ -2,19 +2,19 @@
 
 extern "C" {
 
-void FUN_0030fdd8(void *vector, void *begin, void *end);
-void FUN_002e6e14(void *memory);
+void vectorDestroyRangeStride184(void *vector, void *begin, void *end);
+void asdOperatorDeleteArray(void *memory);
 
 typedef struct Vector {
     /* 0x00 */ void *begin;
     /* 0x04 */ void *end;
 } Vector;
 
-/* Vector teardown: destroys the elements in [begin, end) through FUN_0030fdd8, frees the storage and returns the vector. */
+/* Vector teardown: destroys the elements in [begin, end) through vectorDestroyRangeStride184, frees the storage and returns the vector. */
 Vector *vectorTeardown_00122094(Vector *vector)
 {
-    FUN_0030fdd8(vector, vector->begin, vector->end);
-    FUN_002e6e14(vector->begin);
+    vectorDestroyRangeStride184(vector, vector->begin, vector->end);
+    asdOperatorDeleteArray(vector->begin);
     return vector;
 }
 

@@ -14,8 +14,8 @@ int FUN_0029d684(...);
 int FUN_0029d8f4(unsigned char [8], int, int);
 int FUN_0029da34(...);
 int FUN_002a0cc8(...);
-int FUN_002b06c4(void);
-int FUN_002b8838(...);
+int dataTable00FindById(void);
+int buttonHelpSetPreset(...);
 int FUN_002bc01c(int);
 int timerStart(...);
 int FUN_002bf818(int);
@@ -53,9 +53,9 @@ extern int FUN_0029e02c(void);
 extern int FUN_0029e0f8(void);
 extern int FUN_0029e9cc(unsigned short);
 /* Supplied declaration required: FUN_002a0cc8. */
-/* Supplied declaration required: FUN_002b06c4. */
+/* Supplied declaration required: dataTable00FindById. */
 extern unsigned short FUN_002b8584(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 extern int FUN_002b8d54(void);
 extern int FUN_002b8d68(void);
 extern int FUN_002b8ee0(int, unsigned int);
@@ -129,7 +129,7 @@ LAB_002179dc:
         do {
           temp_v1 = param_1 + temp_v6 * 0x2c;
           temp_v4 = (unsigned int)*(unsigned short *)(temp_v1 + 0x5760);
-          FUN_002b06c4();
+          dataTable00FindById();
           if ((*(unsigned char *)(temp_v4 + 3) & 1) != 0) {
             if (*(char *)(param_1 + 0x575f) != '\0') {
               temp_v0 = FUN_002b8584(0x15,0x1a0);
@@ -190,12 +190,12 @@ joined_r0x00217be4:
             FUN_0026a858(*(unsigned short *)(temp_v1 + 0x5760),temp_v9);
             puVar7 = (unsigned short *)FUN_0029acb0();
             temp_v4 = (unsigned int)*puVar7;
-            FUN_002b06c4();
+            dataTable00FindById();
             temp_v21 = temp_v4;
             psVar6 = (short *)FUN_0029acb0();
             if ((*psVar6 < 1) || ((temp_v21 == 0 || ((*(unsigned short *)(temp_v21 + 0x16) & 1) != 0)))) {
               temp_v4 = (unsigned int)*(unsigned short *)(temp_v1 + 0x5760);
-              FUN_002b06c4();
+              dataTable00FindById();
               if ((temp_v4 != 0) && ((*(unsigned short *)(temp_v4 + 0x16) & 1) == 0)) {
                 temp_v13 = 0;
                 temp_v14 = 0;
@@ -334,7 +334,7 @@ LAB_00217e94:
         FUN_0026a858((unsigned int)*(unsigned short *)(param_1 + 0x5760),temp_v9);
         puVar7 = (unsigned short *)FUN_0029acb0();
         temp_v4 = (unsigned int)*puVar7;
-        FUN_002b06c4();
+        dataTable00FindById();
         if ((temp_v4 != 0) && ((*(unsigned short *)(temp_v4 + 0x16) & 1) == 0)) {
           temp_v13 = 0;
           temp_v14 = 0;
@@ -364,7 +364,7 @@ LAB_00217e94:
           timerStart(temp_v18,0xc,0);
         }
       }
-      FUN_002b8838(0x33);
+      buttonHelpSetPreset(0x33);
       puVar5 = (unsigned short *)FUN_0029acb0();
       temp_v6 = FUN_0029e9cc(*puVar5);
       if (temp_v6 != 0) {

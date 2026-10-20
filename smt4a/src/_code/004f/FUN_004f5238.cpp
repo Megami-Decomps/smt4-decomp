@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e342c(...);
+int libc_strcpy(...);
 int FUN_004f5750(...);
 
 /* stack frame of param_9: 20 slot(s), 80 byte(s) */
@@ -35,7 +35,7 @@ typedef struct {
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_004f5750. */
 
 
@@ -92,7 +92,7 @@ int FUN_004f5238(int param_1,unsigned int param_2,unsigned int param_3,int param
     }
     temp_v0 = param_1 + param_5 * 0x8c;
     temp_v1 = *(unsigned char *)(temp_v0 + 0x1f5c);
-    FUN_002e342c(&temp_v3,temp_v0 + 0x1f64);
+    libc_strcpy(&temp_v3,temp_v0 + 0x1f64);
     break;
   case 1:
     if (param_5 >= 4) {
@@ -100,7 +100,7 @@ int FUN_004f5238(int param_1,unsigned int param_2,unsigned int param_3,int param
     }
     temp_v0 = param_1 + param_5 * 0x8c;
     temp_v1 = *(unsigned char *)(temp_v0 + 0x218c);
-    FUN_002e342c(&temp_v3,temp_v0 + 0x2194);
+    libc_strcpy(&temp_v3,temp_v0 + 0x2194);
     break;
   case 2:
     if (param_5 >= 4) {
@@ -108,7 +108,7 @@ int FUN_004f5238(int param_1,unsigned int param_2,unsigned int param_3,int param
     }
     temp_v0 = param_1 + param_5 * 0x8c;
     temp_v1 = *(unsigned char *)(temp_v0 + 0x23bc);
-    FUN_002e342c(&temp_v3,temp_v0 + 0x23c4);
+    libc_strcpy(&temp_v3,temp_v0 + 0x23c4);
     break;
   case 3:
     if (param_5 >= 4) {
@@ -116,7 +116,7 @@ int FUN_004f5238(int param_1,unsigned int param_2,unsigned int param_3,int param
     }
     temp_v0 = param_1 + param_5 * 0x8c;
     temp_v1 = *(unsigned char *)(temp_v0 + 0x25ec);
-    FUN_002e342c(&temp_v3,temp_v0 + 0x25f4);
+    libc_strcpy(&temp_v3,temp_v0 + 0x25f4);
     break;
   case 4:
     if (param_5 >= 11) {
@@ -124,7 +124,7 @@ int FUN_004f5238(int param_1,unsigned int param_2,unsigned int param_3,int param
     }
     temp_v0 = param_1 + param_5 * 0x8c;
     temp_v1 = *(unsigned char *)(temp_v0 + 0x281c);
-    FUN_002e342c(&temp_v3,temp_v0 + 0x2824);
+    libc_strcpy(&temp_v3,temp_v0 + 0x2824);
     break;
   case 5:
     if (param_5 >= 4) {
@@ -132,7 +132,7 @@ int FUN_004f5238(int param_1,unsigned int param_2,unsigned int param_3,int param
     }
     temp_v0 = param_1 + param_5 * 0x8c;
     temp_v1 = *(unsigned char *)(temp_v0 + 0x2e20);
-    FUN_002e342c(&temp_v3,temp_v0 + 0x2e28);
+    libc_strcpy(&temp_v3,temp_v0 + 0x2e28);
     break;
   case 6:
     if (param_5 >= 3) {
@@ -140,21 +140,21 @@ int FUN_004f5238(int param_1,unsigned int param_2,unsigned int param_3,int param
     }
     temp_v0 = param_1 + param_5 * 0x8c;
     temp_v1 = *(unsigned char *)(temp_v0 + 0x33e4);
-    FUN_002e342c(&temp_v3,temp_v0 + 0x33ec);
+    libc_strcpy(&temp_v3,temp_v0 + 0x33ec);
     break;
   case 7:
     if (param_5 != 0) {
       return 0;
     }
     temp_v1 = *(unsigned char *)(param_1 + 0x358c);
-    FUN_002e342c(&temp_v3,param_1 + 0x3594);
+    libc_strcpy(&temp_v3,param_1 + 0x3594);
     break;
   case 8:
     if (param_5 != 0) {
       return 0;
     }
     temp_v1 = *(unsigned char *)(param_1 + 0x3054);
-    FUN_002e342c(&temp_v3,param_1 + 0x305c);
+    libc_strcpy(&temp_v3,param_1 + 0x305c);
     break;
   case 9:
     if (param_5 >= 3) {
@@ -162,7 +162,7 @@ int FUN_004f5238(int param_1,unsigned int param_2,unsigned int param_3,int param
     }
     temp_v0 = param_1 + param_5 * 0x8c;
     temp_v1 = *(unsigned char *)(temp_v0 + 0x30e0);
-    FUN_002e342c(&temp_v3,temp_v0 + 0x30e8);
+    libc_strcpy(&temp_v3,temp_v0 + 0x30e8);
     break;
   case 10:
     if (param_5 >= 2) {
@@ -170,10 +170,10 @@ int FUN_004f5238(int param_1,unsigned int param_2,unsigned int param_3,int param
     }
     temp_v0 = param_1 + param_5 * 0x8c;
     temp_v1 = *(unsigned char *)(temp_v0 + 0x3284);
-    FUN_002e342c(&temp_v3,temp_v0 + 0x328c);
+    libc_strcpy(&temp_v3,temp_v0 + 0x328c);
   }
   if (param_7 != 0) {
-    FUN_002e342c(param_7,&temp_v3);
+    libc_strcpy(param_7,&temp_v3);
   }
   FUN_004f5750(param_1,temp_v1,param_2,param_3,param_4,(int)temp_v2,&temp_v3,
                (int)((unsigned long long)temp_v2 >> 0x20),param_9);

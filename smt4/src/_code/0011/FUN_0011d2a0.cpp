@@ -4,7 +4,7 @@ extern "C" {
 
 u8 FUN_0011d2a0(void)
 {
-    return DAT_0044e380.unk0B;
+    return g_nnAppletState.unk0B;
 }
 
 } /* extern "C" */

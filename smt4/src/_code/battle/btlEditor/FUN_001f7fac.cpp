@@ -26,7 +26,7 @@ extern int FUN_0020edd8(...); /* 0x20edd8 */
 extern int FUN_002c9edc(...); /* 0x2c9edc */
 extern int g_btlMain; /* 0x4342c8 */
 extern unsigned int *DAT_00435ce8; /* 0x435ce8 */
-extern int DAT_00439ca8; /* 0x439ca8 */
+extern int g_btlUiBlock; /* 0x439ca8 */
 
 /* Supplied declaration required: FUN_00256898. */
 /* Supplied declaration required: FUN_002568c4. */
@@ -64,8 +64,8 @@ void FUN_001f7fac(unsigned int *param_1)
     FUN_00256898(1,0);
   }
   param_1[0x112a] = param_1[0x112a] | 0x80000;
-  if (DAT_00439ca8 != 0) {
-    FUN_0025c2d0(DAT_00439ca8,1);
+  if (g_btlUiBlock != 0) {
+    FUN_0025c2d0(g_btlUiBlock,1);
     return;
   }
   return;

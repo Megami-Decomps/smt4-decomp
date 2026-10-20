@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_002542bc(int);
-int FUN_002542d4(...);
+int scrWorkGetValue(int);
+int scrWorkSetValue(...);
 int FUN_00254e2c(int, int, unsigned int, int, int);
 int FUN_0028ed3c(unsigned int, int, int);
 int FUN_002900d0(void);
@@ -18,17 +18,17 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } void_stack;
 
-/* Supplied declaration required: FUN_002542bc. */
-/* Supplied declaration required: FUN_002542d4. */
+/* Supplied declaration required: scrWorkGetValue. */
+/* Supplied declaration required: scrWorkSetValue. */
 /* Supplied declaration required: FUN_00254e2c. */
-extern int FUN_002893d8(void);
+extern int scrGetCommandFrame(void);
 /* Supplied declaration required: FUN_0028ed3c. */
 /* Supplied declaration required: FUN_002900d0. */
 /* Supplied declaration required: FUN_0029016c. */
 extern int FUN_0029022c(void);
 /* Supplied declaration required: FUN_00290248. */
 extern unsigned int FUN_002903f0(void);
-extern int FUN_002b47f4(unsigned int);
+extern int fileSlotGetBuffer(unsigned int);
 /* Supplied declaration required: FUN_002bff50. */
 
 
@@ -41,27 +41,27 @@ unsigned int scrComm_Message_ConfirmAndApplySimple(void)
   unsigned int temp_v2;
   unsigned int temp_v3;
   
-  temp_v0 = FUN_002893d8();
+  temp_v0 = scrGetCommandFrame();
   if (temp_v0 == 0) {
     temp_v0 = FUN_0029022c();
     if (temp_v0 == 0) {
       return 1;
     }
-    FUN_002542d4(0,0);
-    FUN_002542d4(1,0);
+    scrWorkSetValue(0,0);
+    scrWorkSetValue(1,0);
   }
-  temp_v1 = FUN_002b47f4(0x1e);
-  temp_v0 = FUN_002542bc(0);
+  temp_v1 = fileSlotGetBuffer(0x1e);
+  temp_v0 = scrWorkGetValue(0);
   if (temp_v0 == 0) {
     temp_v2 = FUN_002903f0();
     FUN_0028ed3c(temp_v2,0,1);
     FUN_002bff50();
-    temp_v3 = FUN_002542bc(1);
+    temp_v3 = scrWorkGetValue(1);
     temp_v1 = FUN_00254e2c(temp_v1,2,temp_v3,6,0);
-    temp_v0 = FUN_002542bc(1);
-    FUN_002542d4(1,temp_v0 + 1);
+    temp_v0 = scrWorkGetValue(1);
+    scrWorkSetValue(1,temp_v0 + 1);
     if (temp_v1 == 1) {
-      FUN_002542d4(1,0);
+      scrWorkSetValue(1,0);
       FUN_0029016c(temp_v2,0);
       FUN_00290248(temp_v2);
       FUN_002900d0();

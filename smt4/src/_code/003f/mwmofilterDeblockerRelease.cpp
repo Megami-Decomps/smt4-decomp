@@ -10,20 +10,20 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern unsigned char DAT_0044e948; /* 0x44e948 */
+extern unsigned char g_mwmofilterDeblocker; /* 0x44e948 */
 
 
 void mwmofilterDeblockerRelease(int param_1)
 
 {
 /* irregular: 2 native warning(s); review required */
-  if ((*(romwright_code * *)((unsigned char *)&DAT_0044e948 + 0x4)) != (romwright_code *)0x0 && param_1 != 0) {
+  if ((*(romwright_code * *)((unsigned char *)&g_mwmofilterDeblocker + 0x4)) != (romwright_code *)0x0 && param_1 != 0) {
     if (*(int *)(param_1 + 4) != 0) {
-      (*(*(romwright_code * *)((unsigned char *)&DAT_0044e948 + 0x4)))();
+      (*(*(romwright_code * *)((unsigned char *)&g_mwmofilterDeblocker + 0x4)))();
     }
                     /* WARNING: Could not recover jumptable at 0x003f6030. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-    (*(*(romwright_code * *)((unsigned char *)&DAT_0044e948 + 0x4)))(param_1);
+    (*(*(romwright_code * *)((unsigned char *)&g_mwmofilterDeblocker + 0x4)))(param_1);
     return;
   }
   return;

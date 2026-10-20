@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e7614(unsigned char [16], unsigned int);
-int FUN_002ea446(int, int);
+int onlineJobSetStateTimed(int, int);
 int FUN_002ec75c(int *);
 int FUN_002ec774(int, unsigned int, int, int *);
 int FUN_002ec864(int, int *);
@@ -26,7 +26,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_002e7614. */
-/* Supplied declaration required: FUN_002ea446. */
+/* Supplied declaration required: onlineJobSetStateTimed. */
 /* Supplied declaration required: FUN_002ec75c. */
 /* Supplied declaration required: FUN_002ec774. */
 /* Supplied declaration required: FUN_002ec864. */
@@ -88,7 +88,7 @@ void FUN_00105910(int param_1)
     destroyObj0055ae64(&temp_v5);
   }
   else {
-    FUN_002ea446(param_1,0);
+    onlineJobSetStateTimed(param_1,0);
   }
   strDestroy(temp_v2);
   return;

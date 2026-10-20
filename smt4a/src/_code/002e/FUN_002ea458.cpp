@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0017fd20(void);
 int FUN_002e3140(void);
-int FUN_002ea3f4(int *);
+int onlineHandleClose(int *);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -16,7 +16,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0017fd20. */
 extern int FUN_001d3ed4(int);
 /* Supplied declaration required: FUN_002e3140. */
-/* Supplied declaration required: FUN_002ea3f4. */
+/* Supplied declaration required: onlineHandleClose. */
 
 
 void FUN_002ea458(int param_1,unsigned int param_2,unsigned int param_3,int param_4)
@@ -32,7 +32,7 @@ void FUN_002ea458(int param_1,unsigned int param_2,unsigned int param_3,int para
   piVar3 = (int *)(param_1 + 0x118);
   if (*(char *)(param_1 + 0x11c) != '\0') {
     temp_v1 = param_4;
-    FUN_002ea3f4(piVar3);
+    onlineHandleClose(piVar3);
   }
   temp_v1 = 0;
   if (*piVar3 != 0) {

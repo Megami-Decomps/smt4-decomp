@@ -4,24 +4,24 @@
 
 extern "C" {
 
-int FUN_0014384c(...);
-int FUN_0014af84(void);
+int asdTMTexTableLoadSprites(...);
+int gameDataBlocksGetSaveData(void);
 int FUN_0014e188(...);
 int FUN_0014e220(...);
 int FUN_001505ac(...);
 int asdMemoryAlloc(...);
 int sysPlaySe(...);
-int FUN_0018719c(...);
+int gameFlagIsSet(...);
 int FUN_0019de98(...);
-int FUN_001a9110(unsigned int, unsigned int);
+int wordPairCopy(unsigned int, unsigned int);
 int FUN_001acf98(...);
 int FUN_00203b40(...);
 int FUN_002804b0(...);
 int FUN_002a48e0(...);
 int sysMemClear(...);
-int FUN_0031d1d8(...);
+int flaggedEntrySetValueA(...);
 int FUN_003f86f0(void);
-int FUN_003f881c(...);
+int loadSlotRequestAsync(...);
 int FUN_0041f020(...);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(void);
 int rt_memcpy_w(...);
@@ -40,7 +40,7 @@ typedef struct {
 extern unsigned char DAT_00533d50; /* 0x533d50 */
 extern unsigned char DAT_00533dc8; /* 0x533dc8 */
 extern unsigned char DAT_00533de0; /* 0x533de0 */
-extern unsigned char DAT_00588e14; /* 0x588e14 */
+extern unsigned char g_saveLoadUIBase; /* 0x588e14 */
 extern unsigned char DAT_00588e15; /* 0x588e15 */
 extern unsigned char DAT_00588e16; /* 0x588e16 */
 extern unsigned char DAT_00588e17; /* 0x588e17 */
@@ -48,27 +48,27 @@ extern unsigned char DAT_00588e18; /* 0x588e18 */
 extern unsigned char DAT_00588e19; /* 0x588e19 */
 extern int DAT_00588e28; /* 0x588e28 */
 
-/* Supplied declaration required: FUN_0014384c. */
-/* Supplied declaration required: FUN_0014af84. */
+/* Supplied declaration required: asdTMTexTableLoadSprites. */
+/* Supplied declaration required: gameDataBlocksGetSaveData. */
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: FUN_0014e220. */
 /* Supplied declaration required: FUN_001505ac. */
 /* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_0018719c. */
+/* Supplied declaration required: gameFlagIsSet. */
 /* Supplied declaration required: FUN_0019de98. */
-/* Supplied declaration required: FUN_001a9110. */
+/* Supplied declaration required: wordPairCopy. */
 /* Supplied declaration required: FUN_001acf98. */
 /* Supplied declaration required: FUN_00203b40. */
-extern unsigned int FUN_00228af0(void);
-extern unsigned int FUN_00261458(void);
+extern unsigned int configGetSettings(void);
+extern unsigned int gameDataBlocksGetTable(void);
 /* Supplied declaration required: FUN_002804b0. */
 /* Supplied declaration required: FUN_002a48e0. */
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_0031d1d8. */
+/* Supplied declaration required: flaggedEntrySetValueA. */
 extern unsigned char FUN_00371288(void);
 /* Supplied declaration required: FUN_003f86f0. */
-/* Supplied declaration required: FUN_003f881c. */
+/* Supplied declaration required: loadSlotRequestAsync. */
 /* Supplied declaration required: FUN_0041f020. */
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
 /* Supplied declaration required: rt_memcpy_w. */
@@ -95,20 +95,20 @@ void FUN_0041fe58(int param_1,int param_2,unsigned char param_3)
   temp_v1 = 0x10000;
   asdMemoryAlloc(0x10000,0x100,0,0x2a71c,1);
   *(unsigned int *)(param_1 + 0x24) = temp_v1;
-  temp_v1 = FUN_00261458();
+  temp_v1 = gameDataBlocksGetTable();
   rt_memcpy_w(*(unsigned int *)(param_1 + 0x1c),temp_v1,0x80);
-  temp_v1 = FUN_00228af0();
-  FUN_001a9110(*(unsigned int *)(param_1 + 0x20),temp_v1);
-  temp_v1 = FUN_0014af84();
+  temp_v1 = configGetSettings();
+  wordPairCopy(*(unsigned int *)(param_1 + 0x20),temp_v1);
+  temp_v1 = gameDataBlocksGetSaveData();
   rt_memcpy_w(*(unsigned int *)(param_1 + 0x24),temp_v1,0x2a71c);
-  temp_v2 = FUN_0014af84();
+  temp_v2 = gameDataBlocksGetSaveData();
   rt_memcpy_w(param_1 + 0x28,temp_v2 + 8,0xe);
   FUN_002804b0("saveLoadUI/saveloadUI.bf",param_1 + 0x38,0);
   FUN_002804b0("saveLoadUI/saveloadUI.mbm",param_1 + 0x3c,0);
   if (param_2 != 0) {
     *(unsigned int *)(param_1 + 0x48) = 0x470;
     *(unsigned int *)(param_1 + 0x4c) = 8;
-    temp_v0 = FUN_0018719c();
+    temp_v0 = gameFlagIsSet();
     *(unsigned char *)(param_1 + 0x50) = temp_v0;
   }
   else {
@@ -116,13 +116,13 @@ void FUN_0041fe58(int param_1,int param_2,unsigned char param_3)
     *(unsigned int *)(param_1 + 0x48) = 0x471;
     *(unsigned char *)(param_1 + 0x50) = 1;
   }
-  DAT_00588e16 = FUN_0018719c(0x470);
-  DAT_00588e17 = FUN_0018719c(0x471);
-  DAT_00588e18 = FUN_0018719c(0x558);
-  DAT_00588e19 = FUN_0018719c(0x559);
-  FUN_0014384c(0x2b);
+  DAT_00588e16 = gameFlagIsSet(0x470);
+  DAT_00588e17 = gameFlagIsSet(0x471);
+  DAT_00588e18 = gameFlagIsSet(0x558);
+  DAT_00588e19 = gameFlagIsSet(0x559);
+  asdTMTexTableLoadSprites(0x2b);
   FUN_001acf98(0x2b,0);
-  FUN_003f881c(0x3d,0);
+  loadSlotRequestAsync(0x3d,0);
   FUN_003f86f0();
   temp_v2 = 0;
   do {
@@ -167,7 +167,7 @@ void FUN_0041fe58(int param_1,int param_2,unsigned char param_3)
   *(int *)(param_1 + 0x304) = temp_v3;
   *(int *)(param_1 + 0x308) = temp_v4;
   FUN_00203b40(param_1 + 0x3d8,5,2,1,1,1);
-  FUN_0031d1d8(param_1 + 0x3d8,temp_v4);
+  flaggedEntrySetValueA(param_1 + 0x3d8,temp_v4);
   FUN_002a48e0(param_1 + 0x3d8,temp_v3);
   FUN_0019de98(0,0xf4f4f4ff);
   temp_v0 = *(unsigned char *)(param_1 + 7);
@@ -175,7 +175,7 @@ void FUN_0041fe58(int param_1,int param_2,unsigned char param_3)
   *(unsigned char *)(param_1 + 7) = 1;
   *(unsigned char *)(param_1 + 0xd) = temp_v0;
   *(unsigned char *)(param_1 + 0xc) = 0;
-  DAT_00588e14 = 0;
+  g_saveLoadUIBase = 0;
   DAT_00588e15 = 0;
   return;
 }

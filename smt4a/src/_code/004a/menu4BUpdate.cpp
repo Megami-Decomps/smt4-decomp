@@ -16,8 +16,8 @@ typedef struct Menu4B {
 } Menu4B;
 
 extern void FUN_004cf8dc(u8 *block, s32 page);
-extern u32 FUN_001654d8(u8 *entry);
-extern u32 FUN_001654e4(u8 *entry);
+extern u32 vec2GetXInt(u8 *entry);
+extern u32 vec2GetYInt(u8 *entry);
 extern void FUN_004935b0(u8 *block, u32 a, u32 b);
 extern s32 FUN_002f036c(void);
 extern u8 FUN_002c7ca0(void);
@@ -40,7 +40,7 @@ void menu4BUpdate(Menu4B *obj)
 
     FUN_004cf8dc(obj->block0DC, obj->page);
     entry = (u8 *)obj + obj->page * 0x8C + 0xFC;
-    FUN_004935b0(obj->blockC8, FUN_001654d8(entry), FUN_001654e4(entry));
+    FUN_004935b0(obj->blockC8, vec2GetXInt(entry), vec2GetYInt(entry));
     if (FUN_002f036c() != 0 && FUN_002c7ca0() == 0) {
         obj->state = 5;
         obj->unk18 = 0;

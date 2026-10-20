@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0010788a(int);
 int FUN_00107b28(int);
 int FUN_002efa58(int *, int, int);
-int FUN_002efb6c(int *, int);
+int bitFieldSet(int *, int);
 
 /* stack frame of param_4: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -27,8 +27,8 @@ extern unsigned long long FUN_002efa1c(void);
 extern int FUN_002efa34(int, unsigned int, unsigned int, unsigned int);
 extern int *arrayElementAddress_002efa50(int, unsigned int);
 /* Supplied declaration required: FUN_002efa58. */
-extern int FUN_002efa80(int *);
-/* Supplied declaration required: FUN_002efb6c. */
+extern int bitFieldTest(int *);
+/* Supplied declaration required: bitFieldSet. */
 
 
 unsigned long long FUN_002eab2a(int param_1,unsigned int param_2,int param_3,unsigned int param_4)
@@ -59,12 +59,12 @@ unsigned long long FUN_002eab2a(int param_1,unsigned int param_2,int param_3,uns
         FUN_002efa58(&temp_v4,param_1 + 0x164,0);
         temp_v2 = temp_v4;
         temp_v3 = temp_v5;
-        temp_v0 = FUN_002efa80(&temp_v2);
+        temp_v0 = bitFieldTest(&temp_v2);
         if (temp_v0 != 0) {
           FUN_002efa58(&temp_v4,param_1 + 0x164,0);
           temp_v3 = temp_v5;
           temp_v2 = temp_v4;
-          FUN_002efb6c(&temp_v2,0);
+          bitFieldSet(&temp_v2,0);
           FUN_00107b28(param_1);
           return romwright_piece_4_4(temp_v3,temp_v2);
         }

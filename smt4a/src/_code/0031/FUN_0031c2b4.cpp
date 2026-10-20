@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0014bdb4(unsigned int, unsigned int *);
+int jobSetParent(unsigned int, unsigned int *);
 int scrGetArg(int);
 int scrSetResult(unsigned int *);
 int FUN_0036c580(unsigned int *, unsigned int *, int, unsigned int, int, int, int);
@@ -18,7 +18,7 @@ typedef struct {
 extern unsigned int *g_bustupCutAnim; /* 0x57f4c4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0014bdb4. */
+/* Supplied declaration required: jobSetParent. */
 extern int jobIsValid(void);
 /* Supplied declaration required: scrGetArg. */
 /* Supplied declaration required: scrSetResult. */
@@ -42,7 +42,7 @@ unsigned int FUN_0031c2b4(void)
   FUN_0036c580(puVar2,g_bustupCutAnim + 0x1d0,0x40400000,in_r3,0x3f000000,0x3f800000,0x40400000);
   temp_v1 = jobIsValid();
   if (temp_v1 != 0) {
-    FUN_0014bdb4(*g_bustupCutAnim,puVar2);
+    jobSetParent(*g_bustupCutAnim,puVar2);
   }
   scrSetResult(puVar2);
   return 1;

@@ -16,7 +16,7 @@ int FUN_002efcc4(int, unsigned int, int);
 int FUN_002efcf2(...);
 int FUN_002efcfc(int *, unsigned int);
 int FUN_002efd12(...);
-int FUN_002efd60(...);
+int mapIteratorNext2(...);
 int FUN_002efdb4(...);
 
 /* stack frame of param_4: 6 slot(s), 24 byte(s) */
@@ -43,10 +43,10 @@ extern int FUN_002ef01c(unsigned int);
 /* Supplied declaration required: FUN_002efcf2. */
 /* Supplied declaration required: FUN_002efcfc. */
 /* Supplied declaration required: FUN_002efd12. */
-extern unsigned int FUN_002efd2c(unsigned int, unsigned int);
-extern int FUN_002efd36(unsigned char *, unsigned char *);
+extern unsigned int seq16Diff(unsigned int, unsigned int);
+extern int seq16IsGreater(unsigned char *, unsigned char *);
 extern int FUN_002efd4a(unsigned char *, unsigned char *);
-/* Supplied declaration required: FUN_002efd60. */
+/* Supplied declaration required: mapIteratorNext2. */
 /* Supplied declaration required: FUN_002efdb4. */
 
 
@@ -102,13 +102,13 @@ void FUN_002f07c2(int param_1,unsigned int param_2,unsigned int param_3,unsigned
     temp_v3 = *piVar4;
     FUN_002efd12(temp_v3,&temp_v11);
     temp_v1 = constructObj00559344(temp_v8,2);
-    temp_v1 = FUN_002efd2c(param_3,temp_v1);
+    temp_v1 = seq16Diff(param_3,temp_v1);
     constructObj00559344(temp_v10,temp_v1);
     temp_v4 = 0;
     do {
       if (temp_v3 == 0) break;
       FUN_002eb164(temp_v13,temp_v3);
-      temp_v5 = FUN_002efd36(temp_v13,temp_v10);
+      temp_v5 = seq16IsGreater(temp_v13,temp_v10);
       if (temp_v5 != 0) break;
       if (temp_v3 != 0) {
         FUN_002efcf2(temp_v14,temp_v3);
@@ -119,7 +119,7 @@ void FUN_002f07c2(int param_1,unsigned int param_2,unsigned int param_3,unsigned
           temp_v4 = temp_v4 + 1;
         }
       }
-      FUN_002efd60(&temp_v6);
+      mapIteratorNext2(&temp_v6);
       temp_v12 = temp_v6;
       piVar4 = (int *)arrayElementAddress_002eee88(temp_v2,temp_v16);
       temp_v3 = *piVar4;

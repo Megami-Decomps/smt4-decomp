@@ -20,8 +20,8 @@ extern unsigned int DAT_0057f0a8; /* 0x57f0a8 */
 
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_00163aa4. */
-extern unsigned int FUN_001654d8(int);
-extern unsigned int FUN_001654e4(int);
+extern unsigned int vec2GetXInt(int);
+extern unsigned int vec2GetYInt(int);
 /* Supplied declaration required: FUN_0019de98. */
 extern int FUN_002bf444(void);
 /* Supplied declaration required: FUN_0032d0c8. */
@@ -44,8 +44,8 @@ void FUN_004a4d70(int param_1)
   temp_v2 = param_1 + 0x55c;
   *(unsigned short *)(param_1 + 0xa872) = 8;
   FUN_00163aa4(temp_v2);
-  temp_v0 = FUN_001654e4(temp_v2);
-  temp_v1 = FUN_001654d8(temp_v2);
+  temp_v0 = vec2GetYInt(temp_v2);
+  temp_v1 = vec2GetXInt(temp_v2);
   FUN_004935b0(param_1 + 200,temp_v1,temp_v0);
   if ((*(char *)(param_1 + 0x5e6) != '\0') && (temp_v2 = FUN_002bf444(), temp_v2 != 0)) {
     FUN_003343f0(0);

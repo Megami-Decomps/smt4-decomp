@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0037b5e0(int, int);
 
-extern unsigned char DAT_0057f110; /* 0x57f110 */
+extern unsigned char g_campCec; /* 0x57f110 */
 
 /* Supplied declaration required: FUN_0037b5e0. */
 
@@ -15,10 +15,10 @@ void FUN_002e264c(int param_1,unsigned int param_2,int param_3)
 
 {
 /* irregular: 1 native warning(s); review required */
-  if ((*(int *)((unsigned char *)&DAT_0057f110 + 0x4)) != 0) {
-    param_3 = *(int *)((*(int *)((unsigned char *)&DAT_0057f110 + 0x4)) + 0x174);
+  if ((*(int *)((unsigned char *)&g_campCec + 0x4)) != 0) {
+    param_3 = *(int *)((*(int *)((unsigned char *)&g_campCec + 0x4)) + 0x174);
   }
-  if (((*(int *)((unsigned char *)&DAT_0057f110 + 0x4)) != 0 && param_3 != 0) && (param_1 != 0)) {
+  if (((*(int *)((unsigned char *)&g_campCec + 0x4)) != 0 && param_3 != 0) && (param_1 != 0)) {
     FUN_0037b5e0(param_3,param_1);
     return;
   }

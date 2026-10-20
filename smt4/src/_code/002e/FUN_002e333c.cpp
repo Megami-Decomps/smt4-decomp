@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_00152bec(void);
+int asdMdlManagerMarkDestroy(void);
 int asdMdlManagerDestroy(int handle);
 
 typedef struct Obj {
@@ -10,14 +10,14 @@ typedef struct Obj {
     /* 0x95CC */ int model;
 } Obj;
 
-extern Obj *DAT_0043dd68;
+extern Obj *g_unite;
 
 void FUN_002e333c(void)
 {
-    int *model = &DAT_0043dd68->model;
+    int *model = &g_unite->model;
 
     if (*model != 0) {
-        FUN_00152bec();
+        asdMdlManagerMarkDestroy();
         asdMdlManagerDestroy(*model);
         *model = 0;
     }

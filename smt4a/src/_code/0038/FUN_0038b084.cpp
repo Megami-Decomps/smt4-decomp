@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00100388(unsigned char *, unsigned char *, unsigned char [132]);
 int FUN_001654f8(unsigned char [128], unsigned char [132], int);
-int FUN_002e342c(unsigned char [128], int);
+int libc_strcpy(unsigned char [128], int);
 int FUN_0038892c(unsigned char [256], unsigned int);
 int FUN_003c1060(void);
 
@@ -15,7 +15,7 @@ extern int g_npcRoom; /* 0x588124 */
 
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_001654f8. */
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_0038892c. */
 /* Supplied declaration required: FUN_003c1060. */
 
@@ -42,7 +42,7 @@ void FUN_0038b084(void)
     do {
       temp_v1 = *(int *)(temp_v0 + *(short *)(temp_v0 + temp_v2 * 0x10 + 100) * 4 + 0x28);
       if (temp_v1 != 0) {
-        FUN_002e342c(temp_v4,temp_v1 + 0x26);
+        libc_strcpy(temp_v4,temp_v1 + 0x26);
         FUN_001654f8(temp_v4,temp_v5,0);
         puVar3 = temp_v3 + (int)puVar5;
         FUN_00100388(puVar3,&LAB_0038b124,temp_v5);

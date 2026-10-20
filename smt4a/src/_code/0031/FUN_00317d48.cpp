@@ -9,7 +9,7 @@ int FUN_00158844(unsigned char [496], unsigned int, unsigned int, int);
 int FUN_001883b0(unsigned char *, unsigned char [496], int);
 int vcallSlot12IfValid(unsigned int);
 int FUN_001886bc(void);
-int FUN_00195fc8(void);
+int sysFatalBreak(void);
 int FUN_002e0e04(int, unsigned char [496], int);
 int FUN_0032ca54(unsigned char *);
 
@@ -18,7 +18,7 @@ int FUN_0032ca54(unsigned char *);
 /* Supplied declaration required: FUN_001883b0. */
 /* Supplied declaration required: vcallSlot12IfValid. */
 /* Supplied declaration required: FUN_001886bc. */
-/* Supplied declaration required: FUN_00195fc8. */
+/* Supplied declaration required: sysFatalBreak. */
 /* Supplied declaration required: FUN_002e0e04. */
 /* Supplied declaration required: FUN_0032ca54. */
 
@@ -55,7 +55,7 @@ unsigned char * FUN_00317d48(int param_1,int param_2,unsigned int param_3)
     FUN_0032ca54(puVar1);
     if ((*(unsigned int *)(param_1 + 8) & 0xfffffffe) != 0) {
       if ((*(unsigned int *)(param_1 + 8) & 1) != 0) {
-        FUN_00195fc8();
+        sysFatalBreak();
       }
       vcallSlot12IfValid(*(unsigned int *)(param_1 + 8) & 0xfffffffe);
       *(unsigned int *)(param_1 + 8) = 0;

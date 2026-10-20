@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b46f8(unsigned char [32], unsigned int, unsigned int, int, unsigned char *);
+int libc_bsearch(unsigned char [32], unsigned int, unsigned int, int, unsigned char *);
 
 /* stack frame of param_1: 2 slot(s), 6 byte(s) */
 typedef struct {
@@ -14,7 +14,7 @@ typedef struct {
 
 extern unsigned char LAB_00145c78; /* 0x145c78 */
 
-/* Supplied declaration required: FUN_002b46f8. */
+/* Supplied declaration required: libc_bsearch. */
 extern unsigned int dataTableGetCount(int);
 extern unsigned int dataTableGetEntries(void);
 extern int dataTableGet(unsigned int, unsigned int);
@@ -35,7 +35,7 @@ void FUN_00241f2c(unsigned short param_1)
     temp_v1 = dataTableGetEntries();
     temp_v2 = dataTableGetCount(temp_v0);
     temp_v4 = param_1;
-    FUN_002b46f8(temp_v3,temp_v1,temp_v2,0x40,&LAB_00145c78);
+    libc_bsearch(temp_v3,temp_v1,temp_v2,0x40,&LAB_00145c78);
   }
   return;
 }

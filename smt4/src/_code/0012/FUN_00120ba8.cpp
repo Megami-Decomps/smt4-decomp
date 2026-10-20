@@ -14,7 +14,7 @@ int FUN_00131204(unsigned int, int, unsigned int);
 int FUN_0013127c(unsigned int, unsigned int);
 int FUN_00131288(void);
 int FUN_002bb020(void);
-int FUN_002bd440(void);
+int nw_snd_internal_driver_SoundThread_GetInstance(void);
 int nw_snd_internal_TaskManager_Initialize(void);
 int nw_snd_internal_driver_ChannelManager_Initialize(unsigned int, int, unsigned int);
 int nw_snd_internal_driver_SoundThread_SetProfileBuffer(...);
@@ -49,7 +49,7 @@ extern unsigned int FUN_002baed8(void);
 extern unsigned int FUN_002baf30(void);
 extern unsigned int FUN_002bafb0(void);
 /* Supplied declaration required: FUN_002bb020. */
-/* Supplied declaration required: FUN_002bd440. */
+/* Supplied declaration required: nw_snd_internal_driver_SoundThread_GetInstance. */
 /* Supplied declaration required: nw_snd_internal_TaskManager_Initialize. */
 /* Supplied declaration required: nw_snd_internal_driver_ChannelManager_Initialize. */
 /* Supplied declaration required: nw_snd_internal_driver_SoundThread_SetProfileBuffer. */
@@ -92,7 +92,7 @@ void FUN_00120ba8(unsigned int *param_1,int param_2)
         temp_v4 = temp_v5;
       }
     }
-    FUN_002bd440();
+    nw_snd_internal_driver_SoundThread_GetInstance();
     FUN_00130eec();
     temp_v5 = param_1[5];
     FUN_002bb020();
@@ -116,7 +116,7 @@ void FUN_00120ba8(unsigned int *param_1,int param_2)
     temp_v1 = FUN_00130498();
     FUN_00130514(temp_v1,param_1[4],&DAT_0044e910);
     if (*(char *)(param_1 + 7) != '\0') {
-      temp_v1 = FUN_002bd440();
+      temp_v1 = nw_snd_internal_driver_SoundThread_GetInstance();
       FUN_00130f48(temp_v1,temp_v6,param_1[2],*param_1,temp_v4,param_1[2],*param_1,param_1[1],
                    (int)*(char *)((int)param_1 + 0x1d));
     }
@@ -126,7 +126,7 @@ void FUN_00120ba8(unsigned int *param_1,int param_2)
       temp_v4 = param_1[8];
     }
     if (temp_v7 && 0 < temp_v4) {
-      temp_v1 = FUN_002bd440();
+      temp_v1 = nw_snd_internal_driver_SoundThread_GetInstance();
       nw_snd_internal_driver_SoundThread_SetProfileBuffer(temp_v1,temp_v0 + temp_v2,param_1[8]);
     }
     DAT_0044e908 = *(unsigned char *)(param_1 + 7);

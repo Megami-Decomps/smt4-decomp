@@ -12,6 +12,6 @@ typedef struct Sys465690 {
     /* 0x08 */ u32 unk08;
 } Sys465690;
 
-extern Sys465690 DAT_00465690;
+extern Sys465690 g_nnAppletParameter;
 
 #endif

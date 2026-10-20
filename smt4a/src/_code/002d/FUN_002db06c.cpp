@@ -79,7 +79,7 @@ extern signed char DAT_005f1c7e; /* 0x5f1c7e */
 #endif
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Supplied declaration required: FUN_00145868. */
-extern int FUN_00162e8c(void);
+extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
 /* Supplied declaration required: FUN_001f3f34. */
@@ -146,7 +146,7 @@ void FUN_002db06c(void)
   int iStack_68;
   int temp_v31;
   
-  temp_v0 = FUN_00162e8c();
+  temp_v0 = gameFlagsGetBlock();
   FUN_00145868();
   piVar2 = g_lmapScene;
   if (((*g_lmapScene == 0xd || *g_lmapScene == 0x15) && (g_lmapScene[0x60] != 0)) &&

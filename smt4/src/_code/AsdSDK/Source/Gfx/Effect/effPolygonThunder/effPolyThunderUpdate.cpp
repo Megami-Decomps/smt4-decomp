@@ -2,7 +2,7 @@
 
 extern "C" {
 
-s32 FUN_00269a58(void);
+s32 effGetFrameCounter(void);
 
 extern PolyThunderKind g_polyThunderKinds[];
 
@@ -10,7 +10,7 @@ extern PolyThunderKind g_polyThunderKinds[];
 void effPolyThunderUpdate(PolyThunderObject *obj)
 {
     g_polyThunderKinds[obj->kind].update(obj);
-    obj->frame += FUN_00269a58();
+    obj->frame += effGetFrameCounter();
 }
 
 } /* extern "C" */

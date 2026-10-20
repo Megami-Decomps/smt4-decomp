@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_001af148(...);
+int nn_os_LightEvent_Wait(...);
 int FUN_001b6668(int, int *);
-int FUN_001b9f8c(int, int *);
+int slistPushFront(int, int *);
 
 typedef int romwright_code(...);
-/* Supplied declaration required: FUN_001af148. */
+/* Supplied declaration required: nn_os_LightEvent_Wait. */
 /* Supplied declaration required: FUN_001b6668. */
-/* Supplied declaration required: FUN_001b9f8c. */
+/* Supplied declaration required: slistPushFront. */
 
 
 void FUN_004637fc(int param_1)
@@ -22,17 +22,17 @@ void FUN_004637fc(int param_1)
   int *piVar2;
   int *piVar3;
   
-  FUN_001af148(param_1 + 0x70);
+  nn_os_LightEvent_Wait(param_1 + 0x70);
   piVar1 = *(int **)(param_1 + 0x88);
   if (*(int **)(param_1 + 0x88) != (int *)(param_1 + 0x88)) {
     do {
       piVar3 = piVar1 + -0x14;
       piVar2 = (int *)*piVar1;
-      FUN_001af148(piVar1 + -0x11);
+      nn_os_LightEvent_Wait(piVar1 + -0x11);
       FUN_001b6668(param_1 + 0x84,piVar1);
       if (piVar3 != (int *)0x0) {
         (**(romwright_code **)*piVar3)(piVar3);
-        FUN_001b9f8c(param_1 + 0x90,piVar3);
+        slistPushFront(param_1 + 0x90,piVar3);
       }
       piVar1 = piVar2;
     } while (piVar2 != (int *)(param_1 + 0x88));

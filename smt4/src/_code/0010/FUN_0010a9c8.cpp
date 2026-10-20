@@ -11,13 +11,13 @@ int FUN_001189a4(int);
 int FUN_00124d24(int);
 int FUN_00126194(int);
 int FUN_002bdf94(...);
-int FUN_002be304(...);
+int drawSetColorFromRGBA8(...);
 int FUN_002be370(...);
 int FUN_002be5a4(...);
 int FUN_002be624(...);
 int FUN_002be650(...);
 int FUN_002bed3c(void);
-int FUN_002beda4(...);
+int vec2GetXInt(...);
 int FUN_002bedb0(...);
 int FUN_002bee04(...);
 int FUN_002bf288(int, int, int, int, int, int);
@@ -47,14 +47,14 @@ extern unsigned int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_00126194. */
 /* Supplied declaration required: FUN_002bdce0. */
 /* Supplied declaration required: FUN_002bdf94. */
-/* Supplied declaration required: FUN_002be304. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_002be370. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002be650. */
 /* Supplied declaration required: FUN_002bed3c. */
-extern int FUN_002bed98(int);
-/* Supplied declaration required: FUN_002beda4. */
+extern int vec2GetYInt(int);
+/* Supplied declaration required: vec2GetXInt. */
 /* Supplied declaration required: FUN_002bedb0. */
 /* Supplied declaration required: FUN_002bee04. */
 /* Supplied declaration required: FUN_002bf288. */
@@ -114,8 +114,8 @@ unsigned int FUN_0010a9c8(void)
     FUN_00124d24(0);
   }
   if (*(char *)(DAT_0043e190 + 0x7e) != '\0') {
-    temp_v1 = FUN_002beda4(DAT_0043e190 + 0x754);
-    temp_v2 = FUN_002bed98(DAT_0043e190 + 0x754);
+    temp_v1 = vec2GetXInt(DAT_0043e190 + 0x754);
+    temp_v2 = vec2GetYInt(DAT_0043e190 + 0x754);
     temp_v3 = FUN_002c5d80(1,0);
     FUN_002bee04(g_titleScene,3,temp_v3);
     FUN_002bf538();
@@ -135,7 +135,7 @@ unsigned int FUN_0010a9c8(void)
     FUN_002be370((int)(short)*(unsigned int *)(DAT_0043e190 + 0x68),
                  (int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v1,
                  (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,0x10,0);
-    FUN_002be304(0xff);
+    drawSetColorFromRGBA8(0xff);
     temp_v5 = FUN_002bf4f8(0xe,0xc6);
     FUN_002bdf94(0,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v1,
                  (int)*(short *)(temp_v5 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v2,1,4,0x10,
@@ -150,8 +150,8 @@ unsigned int FUN_0010a9c8(void)
   temp_v1 = DAT_0043e190;
   if (*(int *)(DAT_0043e190 + 0x8c) != 0) {
     temp_v2 = DAT_0043e190 + 0x984;
-    temp_v4 = FUN_002beda4();
-    temp_v2 = FUN_002bed98(temp_v2);
+    temp_v4 = vec2GetXInt();
+    temp_v2 = vec2GetYInt(temp_v2);
     temp_v3 = FUN_002c5d80(1,0);
     FUN_002bee04(g_titleScene,3,temp_v3);
     FUN_002bf538();
@@ -181,7 +181,7 @@ unsigned int FUN_0010a9c8(void)
     else {
       temp_v1 = FUN_002bf4f8(0xe,0x5d);
     }
-    FUN_002be304(0xff);
+    drawSetColorFromRGBA8(0xff);
     FUN_002bdf94(0,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v1 + 8) + temp_v4,
                  (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,0,0xf,0x10,
                  &LAB_0010adbc);

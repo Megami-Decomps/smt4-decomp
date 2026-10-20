@@ -8,7 +8,7 @@ int FUN_003fd76c(int, int);
 int FUN_003fdb18(int);
 int FUN_003fe86c(int, int, int);
 
-extern int DAT_00581284; /* 0x581284 */
+extern int g_mapObj; /* 0x581284 */
 extern unsigned char g_gameState; /* 0x5f15fc */
 
 /* Supplied declaration required: FUN_003fd76c. */
@@ -31,7 +31,7 @@ void FUN_0023534c(void)
   temp_v2 = 0;
   temp_v5 = 0x3f80000000000000;
   do {
-    temp_v3 = DAT_00581284 + temp_v2 * 0x48;
+    temp_v3 = g_mapObj + temp_v2 * 0x48;
     if (*(char *)(temp_v3 + 0x14) != '\0') {
       temp_v4 = *(int *)(*(int *)(temp_v3 + 0x3c) + 4);
       if (temp_v4 != 0) {

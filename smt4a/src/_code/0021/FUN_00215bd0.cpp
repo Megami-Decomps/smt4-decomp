@@ -4,22 +4,22 @@
 
 extern "C" {
 
-int FUN_001846d0(int, int);
-int FUN_00184758(int, int, int);
-int FUN_00184c00(int, int, int);
-int FUN_0020b6d4(int);
+int uiSpriteSelectAnim(int, int);
+int uiSpriteSetKeyframe(int, int, int);
+int uiSpriteSetImageKeyframe(int, int, int);
+int gameStateChange(int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-extern unsigned char DAT_00588fd0; /* 0x588fd0 */
+extern unsigned char g_gameGlobals; /* 0x588fd0 */
 
-/* Supplied declaration required: FUN_001846d0. */
-/* Supplied declaration required: FUN_00184758. */
-/* Supplied declaration required: FUN_00184c00. */
-/* Supplied declaration required: FUN_0020b6d4. */
+/* Supplied declaration required: uiSpriteSelectAnim. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
+/* Supplied declaration required: gameStateChange. */
 
 
 void FUN_00215bd0(void)
@@ -31,21 +31,21 @@ void FUN_00215bd0(void)
   int temp_v2;
   int temp_v3;
   
-  temp_v0 = (*(int *)((unsigned char *)&DAT_00588fd0 + 0x4));
-  FUN_001846d0((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x4a4,0);
-  FUN_001846d0(temp_v0 + 0x530,1);
-  FUN_001846d0(temp_v0 + 0x5bc,2);
+  temp_v0 = (*(int *)((unsigned char *)&g_gameGlobals + 0x4));
+  uiSpriteSelectAnim((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x4a4,0);
+  uiSpriteSelectAnim(temp_v0 + 0x530,1);
+  uiSpriteSelectAnim(temp_v0 + 0x5bc,2);
   temp_v1 = 0;
   do {
     temp_v2 = temp_v0 + temp_v1 * 0x8c;
     temp_v3 = temp_v2 + 0x7ec;
-    FUN_00184758(temp_v3,0x10,0);
-    FUN_00184c00(temp_v3,0xd,0);
-    FUN_00184758(temp_v2 + 0xd64,1,0);
-    temp_v2 = (*(int *)((unsigned char *)&DAT_00588fd0 + 0x4));
+    uiSpriteSetKeyframe(temp_v3,0x10,0);
+    uiSpriteSetImageKeyframe(temp_v3,0xd,0);
+    uiSpriteSetKeyframe(temp_v2 + 0xd64,1,0);
+    temp_v2 = (*(int *)((unsigned char *)&g_gameGlobals + 0x4));
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 10);
-  *(unsigned char *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x2011) = 0;
+  *(unsigned char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x2011) = 0;
   if ((*(char *)(temp_v2 + 0x2018) != '\n') &&
      (temp_v1 = *(int *)(temp_v2 + 0x1368), (temp_v1 == 5 || temp_v1 == 6) || temp_v1 == 7)) {
     *(unsigned int *)(temp_v2 + 0x136c) = 0;
@@ -54,7 +54,7 @@ void FUN_00215bd0(void)
   *(unsigned char *)(temp_v0 + 0x1380) = 0;
   *(unsigned int *)(temp_v0 + 0x1c) = 0;
   *(unsigned char *)(temp_v0 + 0x20) = 0;
-  FUN_0020b6d4(2);
+  gameStateChange(2);
   return;
 }
 

@@ -8,11 +8,11 @@ int timerStart(void *timer, int a, int b);
 
 void FUN_0028a368(int reset)
 {
-    Scene43dcf0 *scene = DAT_0043dcf0;
+    Scene43dcf0 *scene = g_partyPanel;
     int i;
 
-    if (DAT_0043dcf0 != NULL) {
-        DAT_0043dcf0->unk34 = 0;
+    if (g_partyPanel != NULL) {
+        g_partyPanel->unk34 = 0;
         scene->unk35 = 0;
         if (reset != 0) {
             i = 0;

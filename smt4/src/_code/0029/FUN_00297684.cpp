@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_00152bec(void);
+int asdMdlManagerMarkDestroy(void);
 int FUN_0023f2e4(...);
 int FUN_0023f3bc(unsigned int, int, unsigned char [20]);
 int FUN_00254a2c(unsigned int, int);
-int FUN_0028c640(unsigned int, int, unsigned char [12]);
+int nodeSetTranslation(unsigned int, int, unsigned char [12]);
 int FUN_0029a014(unsigned int, int);
 int FUN_002a0428(int, unsigned int);
 int FUN_002a5710(unsigned int, int);
@@ -23,12 +23,12 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_00152bec. */
+/* Supplied declaration required: asdMdlManagerMarkDestroy. */
 extern unsigned int FUN_0019df10(void);
 /* Supplied declaration required: FUN_0023f2e4. */
 /* Supplied declaration required: FUN_0023f3bc. */
 /* Supplied declaration required: FUN_00254a2c. */
-/* Supplied declaration required: FUN_0028c640. */
+/* Supplied declaration required: nodeSetTranslation. */
 /* Supplied declaration required: FUN_0029a014. */
 /* Supplied declaration required: FUN_002a0428. */
 /* Supplied declaration required: FUN_002a5710. */
@@ -124,7 +124,7 @@ void FUN_00297684(int param_1)
         if (*(int *)(*(int *)(*(int *)(temp_v3 + 0x18) + 8) + 0xc) < 0) {
           FUN_002a0428(*(int *)(temp_v3 + 0x18),*(unsigned int *)(param_1 + 0xc));
         }
-        FUN_0028c640(*(unsigned int *)(*(int *)(temp_v3 + 0x18) + 8),0,temp_v9);
+        nodeSetTranslation(*(unsigned int *)(*(int *)(temp_v3 + 0x18) + 8),0,temp_v9);
         FUN_0023f3bc(*(unsigned int *)(*(int *)(temp_v3 + 0x18) + 8),0,temp_v10);
         if ((**(unsigned int **)(param_1 + 8) & 2) != 0) {
           puVar6 = *(unsigned int **)(temp_v3 + 0x18);
@@ -144,7 +144,7 @@ void FUN_00297684(int param_1)
         *puVar6 = *puVar6 | 2;
         *(unsigned char *)(*(int *)(puVar6[2] + 0x2c) + 0x1f6) = 0;
         if (-1 < *(int *)(*(int *)(*(int *)(temp_v3 + 0x18) + 8) + 0xc)) {
-          FUN_00152bec();
+          asdMdlManagerMarkDestroy();
         }
       }
       break;

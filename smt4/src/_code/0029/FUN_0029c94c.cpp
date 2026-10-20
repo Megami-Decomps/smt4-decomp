@@ -27,7 +27,7 @@ extern int DAT_0043da2c; /* 0x43da2c */
 /* Supplied declaration required: FUN_00295660. */
 /* Supplied declaration required: FUN_00296ae8. */
 /* Supplied declaration required: FUN_002ae164. */
-extern int FUN_002ae1d8(int);
+extern int idIsAbove400(int);
 extern unsigned int FUN_002b47ec(void);
 /* Supplied declaration required: FUN_002be624. */
 
@@ -51,7 +51,7 @@ void FUN_0029c94c(int param_1)
     *(unsigned char *)(DAT_0043da2c + 0x55c) = 1;
     *(unsigned char *)(temp_v0 + 0x4cb) = 1;
     temp_v1 = FUN_002b47ec();
-    temp_v2 = FUN_002ae1d8(param_1);
+    temp_v2 = idIsAbove400(param_1);
     if (temp_v2 != 0) {
       temp_v2 = param_1;
       FUN_00283e48();

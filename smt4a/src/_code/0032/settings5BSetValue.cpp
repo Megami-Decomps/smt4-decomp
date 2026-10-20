@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern Settings5B DAT_005b3bf4;
+extern Settings5B g_gfxSettings;
 
 void settings5BSetValue(s8 value)
 {
-    DAT_005b3bf4.value = value;
+    g_gfxSettings.value = value;
 }
 
 } /* extern "C" */

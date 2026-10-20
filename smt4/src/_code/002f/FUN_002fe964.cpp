@@ -8,7 +8,7 @@ int FUN_0025a0e0(void);
 int FUN_002757a8(void);
 int FUN_00275bc8(void);
 int FUN_00289880(void);
-int FUN_002b8838(int);
+int buttonHelpSetPreset(int);
 
 extern unsigned char g_gameState; /* 0x49f91c */
 
@@ -17,7 +17,7 @@ extern unsigned char g_gameState; /* 0x49f91c */
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: FUN_00289880. */
 extern int scrGetArg(void);
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 
 
 unsigned int FUN_002fe964(void)
@@ -32,7 +32,7 @@ unsigned int FUN_002fe964(void)
       (*(signed char *)((unsigned char *)&g_gameState + 0x251)) = '\x01';
       FUN_00275bc8();
       FUN_00289880();
-      FUN_002b8838(0x90);
+      buttonHelpSetPreset(0x90);
     }
   }
   else if ((*(signed char *)((unsigned char *)&g_gameState + 0x251)) != '\0') {

@@ -10,7 +10,7 @@ int FUN_002852f0(int);
 int byteTableASetValue(int);
 int byteTableASetValue3(int);
 int FUN_003d54f8(int, int);
-int FUN_003fd63c(int, int);
+int gameFlagSetValue(int, int);
 
 extern int FUN_0013def0(unsigned int);
 extern int FUN_00162ea4(void);
@@ -24,7 +24,7 @@ extern int getByteTableAValue(void);
 extern int byteTableAGetValue3(void);
 /* Supplied declaration required: byteTableASetValue3. */
 /* Supplied declaration required: FUN_003d54f8. */
-/* Supplied declaration required: FUN_003fd63c. */
+/* Supplied declaration required: gameFlagSetValue. */
 
 
 unsigned int FUN_002dfa1c(int *param_1)
@@ -63,7 +63,7 @@ unsigned int FUN_002dfa1c(int *param_1)
     temp_v0 = FUN_00224880(*(unsigned int *)(temp_v1 + 0xa34));
     if (temp_v0 == 2) {
       if (*(int *)(temp_v1 + 0xa38) != 0) {
-        FUN_003fd63c(*(int *)(temp_v1 + 0xa38),1);
+        gameFlagSetValue(*(int *)(temp_v1 + 0xa38),1);
       }
       FUN_002852f0(0);
       scrScriptProcessDestroy(*(unsigned int *)(temp_v1 + 0xa34));

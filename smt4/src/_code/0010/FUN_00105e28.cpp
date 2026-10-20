@@ -4,7 +4,7 @@ extern "C" {
 
 void FUN_00105e28(u8 value)
 {
-    DAT_00464af0.unk03 = value;
+    g_gfxSettings.unk03 = value;
 }
 
 } /* extern "C" */

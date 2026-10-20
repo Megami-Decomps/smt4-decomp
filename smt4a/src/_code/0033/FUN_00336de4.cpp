@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0014afd0(int, unsigned int);
 int FUN_00184310(void);
 int FUN_00191e00(unsigned int, int, unsigned int, int);
-int FUN_0019cac4(void);
+int dataTable00FindById(void);
 int FUN_001a6568(unsigned int, int, unsigned int, int);
 int FUN_001acf98(int, unsigned int);
 int FUN_0021ba5c(int);
@@ -19,7 +19,7 @@ extern int g_btlTalkBustUp; /* 0x5710dc */
 /* Supplied declaration required: FUN_0014afd0. */
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: FUN_00191e00. */
-/* Supplied declaration required: FUN_0019cac4. */
+/* Supplied declaration required: dataTable00FindById. */
 extern int FUN_001a6508(unsigned int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001a6568. */
 /* Supplied declaration required: FUN_001acf98. */
@@ -38,7 +38,7 @@ void FUN_00336de4(int param_1,int param_2)
   temp_v0 = g_btlTalkBustUp;
   if (g_btlTalkBustUp != 0) {
     temp_v1 = param_1;
-    FUN_0019cac4();
+    dataTable00FindById();
     *(unsigned int *)(temp_v0 + 0x2f0) = (unsigned int)(*(unsigned char *)(temp_v1 + 0xa5) >> 2);
     temp_v1 = param_1;
     FUN_00184310();

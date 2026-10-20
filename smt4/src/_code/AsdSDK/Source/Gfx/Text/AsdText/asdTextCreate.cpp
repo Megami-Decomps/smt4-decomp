@@ -5,7 +5,7 @@ extern "C" {
 
 AsdText *FUN_00124bd8(s32 size, u32 arg);
 
-extern u32 DAT_00464d48[];
+extern u32 g_asdTextDefaults[];
 
 /* Creates a text object with its defaults. */
 AsdText *asdTextCreate(u32 arg)
@@ -18,7 +18,7 @@ AsdText *asdTextCreate(u32 arg)
     text->unk50 = -1;
     text->unkB0 = 0;
     text->unk9c = -1;
-    text->color = DAT_00464d48[2] & 0xffffff00;
+    text->color = g_asdTextDefaults[2] & 0xffffff00;
     return text;
 }
 

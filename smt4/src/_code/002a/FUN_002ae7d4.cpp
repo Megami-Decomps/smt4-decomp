@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern void FUN_002ae898(void);
+extern void asdTMTexTableReleaseNode(void);
 extern void asdTMTexTableFreeEntry(int index);
 void FUN_002ae7d4(void)
 {
-    FUN_002ae898();
+    asdTMTexTableReleaseNode();
     asdTMTexTableFreeEntry(36);
 }
 

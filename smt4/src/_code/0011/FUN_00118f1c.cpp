@@ -15,8 +15,8 @@ extern unsigned char FUN_00126704(unsigned int);
 extern unsigned char FUN_00126714(unsigned int);
 /* Supplied declaration required: FUN_002b7184. */
 /* Supplied declaration required: FUN_002b71d0. */
-extern int FUN_002b721c(unsigned int);
-extern int FUN_002b722c(unsigned int);
+extern int jobWorkGetFirstWordB(unsigned int);
+extern int jobGetStatus(unsigned int);
 extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_002bff38. */
 
@@ -43,8 +43,8 @@ unsigned int FUN_00118f1c(int param_1)
       do {
         temp_v5 = temp_v0 + temp_v4 * 4;
         temp_v3 = jobIsValid(*(unsigned int *)(temp_v5 + 4));
-        if ((temp_v3 != 0) && (temp_v3 = FUN_002b722c(*(unsigned int *)(temp_v5 + 4)), temp_v3 != 4)) {
-          temp_v3 = FUN_002b721c(*(unsigned int *)(temp_v5 + 4));
+        if ((temp_v3 != 0) && (temp_v3 = jobGetStatus(*(unsigned int *)(temp_v5 + 4)), temp_v3 != 4)) {
+          temp_v3 = jobWorkGetFirstWordB(*(unsigned int *)(temp_v5 + 4));
           if (temp_v3 == param_1) {
             FUN_002b71d0(*(unsigned int *)(temp_v5 + 4),1);
             temp_v1 = FUN_00126704(*(unsigned int *)(temp_v5 + 4));

@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_001846d0(int, int);
-int FUN_00184b80(...);
+int uiSpriteSelectAnim(int, int);
+int pairSetFirstResetSecond(...);
 
-/* Supplied declaration required: FUN_001846d0. */
-/* Supplied declaration required: FUN_00184b80. */
+/* Supplied declaration required: uiSpriteSelectAnim. */
+/* Supplied declaration required: pairSetFirstResetSecond. */
 extern int FUN_00291e14(void);
 
 
@@ -29,18 +29,18 @@ void FUN_00321378(int param_1,short param_2,short param_3)
     if (0 < param_2) {
       do {
         temp_v3 = param_1 + temp_v2 * 0x8c;
-        FUN_001846d0(temp_v3 + 0xb10,6);
-        FUN_001846d0(temp_v3 + 0x1088,4);
-        FUN_001846d0(temp_v3 + 0x598,0);
-        FUN_001846d0(temp_v3 + 0x20,2);
+        uiSpriteSelectAnim(temp_v3 + 0xb10,6);
+        uiSpriteSelectAnim(temp_v3 + 0x1088,4);
+        uiSpriteSelectAnim(temp_v3 + 0x598,0);
+        uiSpriteSelectAnim(temp_v3 + 0x20,2);
         if (temp_v2 < 4) {
           if (temp_v2 == 0) {
-            FUN_001846d0(param_1 + 0x217c,0xc);
+            uiSpriteSelectAnim(param_1 + 0x217c,0xc);
           }
-          FUN_001846d0(temp_v3 + 0x2208,0xc);
+          uiSpriteSelectAnim(temp_v3 + 0x2208,0xc);
         }
         if (*(int *)(param_1 + 0x2440) != 0) {
-          FUN_00184b80(temp_v3 + 0x20,1);
+          pairSetFirstResetSecond(temp_v3 + 0x20,1);
         }
         else {
           temp_v0 = FUN_00291e14();
@@ -50,7 +50,7 @@ void FUN_00321378(int param_1,short param_2,short param_3)
           else {
             temp_v1 = 0xfb0;
           }
-          FUN_00184b80(temp_v3 + 0x20,temp_v1);
+          pairSetFirstResetSecond(temp_v3 + 0x20,temp_v1);
         }
         temp_v2 = temp_v2 + 1;
       } while (temp_v2 < *(short *)(param_1 + 0x2448));
@@ -59,10 +59,10 @@ void FUN_00321378(int param_1,short param_2,short param_3)
       temp_v2 = 0;
       do {
         temp_v3 = param_1 + ((*(short *)(param_1 + 0x2448) - temp_v2) - 1) * 0x8c;
-        FUN_00184b80(temp_v3 + 0x598,6);
-        FUN_001846d0(temp_v3 + 0x598,1);
-        FUN_001846d0(temp_v3 + 0xb10,6);
-        FUN_001846d0(temp_v3 + 0x1088,4);
+        pairSetFirstResetSecond(temp_v3 + 0x598,6);
+        uiSpriteSelectAnim(temp_v3 + 0x598,1);
+        uiSpriteSelectAnim(temp_v3 + 0xb10,6);
+        uiSpriteSelectAnim(temp_v3 + 0x1088,4);
         temp_v2 = temp_v2 + 1;
       } while (temp_v2 < *(short *)(param_1 + 0x244a));
     }

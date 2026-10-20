@@ -30,7 +30,7 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c560. */
 extern int FUN_001834a4(unsigned int, int);
 /* Supplied declaration required: FUN_002a2210. */
-extern int FUN_00330a80(int);
+extern int gameDataGetMarkEntry(int);
 /* Supplied declaration required: FUN_00359c78. */
 /* Supplied declaration required: FUN_0036c8a0. */
 /* Supplied declaration required: FUN_0036c91c. */
@@ -71,7 +71,7 @@ unsigned int FUN_002e241c(void)
   FUN_0036ca3c(temp_v1 + 0xa0,0,0,temp_v3,0);
   temp_v8 = 0;
   do {
-    temp_v2 = FUN_00330a80(*(int *)(temp_v1 + 0x118) + temp_v8);
+    temp_v2 = gameDataGetMarkEntry(*(int *)(temp_v1 + 0x118) + temp_v8);
     temp_v0 = *(short *)(temp_v2 + 0x60);
     temp_v7 = *(int *)(temp_v1 + 0x114);
     temp_v5 = *(int *)(temp_v1 + 0x118);

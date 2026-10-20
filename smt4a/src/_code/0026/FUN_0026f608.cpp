@@ -7,13 +7,13 @@ extern "C" {
 int qsort(...);
 int FUN_00184310(...);
 int sysMemClear(...);
-int FUN_002e6dd4(...);
+int rt_memclr(...);
 int FUN_0032fea0(...);
 int FUN_003c3f1c(...);
 int FUN_004daf18(...);
 
 extern int FUN_002b2ca8(...); /* 0x2b2ca8 */
-extern int *DAT_0057f290; /* 0x57f290 */
+extern int *g_unite; /* 0x57f290 */
 
 /* Supplied declaration required: qsort. */
 /* Supplied declaration required: FUN_00184310. */
@@ -22,7 +22,7 @@ extern int FUN_0026140c(void);
 extern unsigned long long FUN_0026264c(unsigned short);
 extern unsigned long long FUN_002a4b28(unsigned short);
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_002e6dd4. */
+/* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: FUN_0032fea0. */
 /* Supplied declaration required: FUN_003c3f1c. */
 extern int FUN_004da77c(int, unsigned short);
@@ -45,11 +45,11 @@ void FUN_0026f608(void)
   int temp_v6;
   unsigned long long temp_v7;
   
-  piVar1 = DAT_0057f290;
+  piVar1 = g_unite;
   temp_v0 = FUN_0026140c();
   sysMemClear(piVar1 + 0x175,0x962);
   temp_v1 = (int)piVar1 + 0xf36;
-  FUN_002e6dd4(temp_v1,0x82);
+  rt_memclr(temp_v1,0x82);
   sysMemClear(piVar1 + 0x3ee,0x3ea);
   temp_v6 = 0;
   temp_v5 = 0;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e9318(unsigned char [8]);
+int onlineStringDestroy(unsigned char [8]);
 
 typedef struct fn_001142fc_arg0 fn_001142fc_arg0;
 struct fn_001142fc_arg0 {
@@ -26,8 +26,8 @@ struct fn_001142fc_arg0 {
 extern unsigned char LAB_00114364; /* 0x114364 */
 extern unsigned char DAT_0055963c; /* 0x55963c */
 
-extern unsigned int FUN_002e9300(unsigned char *, unsigned char *);
-/* Supplied declaration required: FUN_002e9318. */
+extern unsigned int onlineStringConstruct(unsigned char *, unsigned char *);
+/* Supplied declaration required: onlineStringDestroy. */
 extern unsigned int *FUN_002fd1e8(fn_001142fc_arg0 *, unsigned int);
 extern int FUN_002ff664(unsigned int *);
 extern int FUN_002ff6ca(unsigned int *, unsigned char *, unsigned int, unsigned char *);
@@ -44,9 +44,9 @@ void FUN_001142fc(fn_001142fc_arg0 *param_1)
   unsigned char temp_v3 [4];
   unsigned char temp_v4 [4];
   
-  temp_v0 = FUN_002e9300(temp_v2,&LAB_00114364);
+  temp_v0 = onlineStringConstruct(temp_v2,&LAB_00114364);
   puVar2 = (unsigned int *)FUN_002fd1e8(param_1,temp_v0);
-  FUN_002e9318(temp_v2);
+  onlineStringDestroy(temp_v2);
   puVar2[8] = 0;
   puVar2[0xc] = 0;
   puVar2[0xd] = 0;

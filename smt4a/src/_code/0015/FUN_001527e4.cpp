@@ -11,10 +11,10 @@ int FUN_00167f24(int);
 extern int g_eventTex; /* 0x57f3b0 */
 
 extern int jobIsValid(unsigned int);
-extern int FUN_00165058(unsigned int);
+extern int jobGetStatus(unsigned int);
 /* Supplied declaration required: FUN_001656e0. */
 /* Supplied declaration required: FUN_0016572c. */
-extern int FUN_00167888(unsigned int);
+extern int eventTexJobGetId(unsigned int);
 extern int FUN_00167898(unsigned int);
 /* Supplied declaration required: FUN_00167f24. */
 extern unsigned char FUN_00169580(unsigned int);
@@ -43,8 +43,8 @@ unsigned int FUN_001527e4(int param_1)
       do {
         temp_v5 = temp_v0 + temp_v4 * 4;
         temp_v3 = jobIsValid(*(unsigned int *)(temp_v5 + 4));
-        if ((temp_v3 != 0) && (temp_v3 = FUN_00165058(*(unsigned int *)(temp_v5 + 4)), temp_v3 != 4)) {
-          temp_v3 = FUN_00167888(*(unsigned int *)(temp_v5 + 4));
+        if ((temp_v3 != 0) && (temp_v3 = jobGetStatus(*(unsigned int *)(temp_v5 + 4)), temp_v3 != 4)) {
+          temp_v3 = eventTexJobGetId(*(unsigned int *)(temp_v5 + 4));
           if (temp_v3 == param_1) {
             FUN_001656e0(*(unsigned int *)(temp_v5 + 4),1);
             temp_v1 = FUN_00169580(*(unsigned int *)(temp_v5 + 4));

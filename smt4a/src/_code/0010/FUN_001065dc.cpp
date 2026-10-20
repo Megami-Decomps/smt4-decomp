@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002e76a0(int);
-int FUN_002e76b6(...);
+int strHolderAssignBuffer(int);
+int onlineBufferGetData(...);
 int FUN_002ed2b0(unsigned char [16], int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
-int FUN_002ed838(int);
+int streamReset(int);
 int FUN_002ed84a(int, char [4]);
-int FUN_002ed882(...);
+int streamWriterWriteU32(...);
 
 /* stack frame of param_5: 7 slot(s), 25 byte(s) */
 typedef struct {
@@ -22,14 +22,14 @@ typedef struct {
     unsigned int sp50; /* 0x50: local_50 */
 } param_5_stack;
 
-extern int FUN_002e7674(int, unsigned char *, unsigned int);
-/* Supplied declaration required: FUN_002e76a0. */
-/* Supplied declaration required: FUN_002e76b6. */
+extern int strHolderAssignBytes(int, unsigned char *, unsigned int);
+/* Supplied declaration required: strHolderAssignBuffer. */
+/* Supplied declaration required: onlineBufferGetData. */
 /* Supplied declaration required: FUN_002ed2b0. */
-/* Supplied declaration required: FUN_002ed838. */
+/* Supplied declaration required: streamReset. */
 /* Supplied declaration required: FUN_002ed84a. */
 extern int FUN_002ed864(int, int);
-/* Supplied declaration required: FUN_002ed882. */
+/* Supplied declaration required: streamWriterWriteU32. */
 
 
 void FUN_001065dc(unsigned int param_1,int param_2,int param_3,unsigned int param_4,unsigned int param_5)
@@ -55,7 +55,7 @@ void FUN_001065dc(unsigned int param_1,int param_2,int param_3,unsigned int para
   iStack_20 = param_2;
   iStack_1c = param_3;
   temp_v10 = param_4;
-  FUN_002ed838(param_3);
+  streamReset(param_3);
   temp_v6[0] = -0xb;
   temp_v1 = param_3;
   FUN_002ed84a(param_3,temp_v6);
@@ -71,11 +71,11 @@ void FUN_001065dc(unsigned int param_1,int param_2,int param_3,unsigned int para
       if (temp_v1 == 0) {
         return;
       }
-      temp_v1 = FUN_002ed882(param_3,param_2 + 0xa4);
+      temp_v1 = streamWriterWriteU32(param_3,param_2 + 0xa4);
       if (temp_v1 == 0) {
         return;
       }
-      temp_v1 = FUN_002ed882(param_3,param_2 + 0xa8);
+      temp_v1 = streamWriterWriteU32(param_3,param_2 + 0xa8);
       if (temp_v1 == 0) {
         return;
       }
@@ -88,38 +88,38 @@ void FUN_001065dc(unsigned int param_1,int param_2,int param_3,unsigned int para
         return;
       }
       temp_v9[0] = *(unsigned int *)(param_2 + 0xb0) ^ 0xdb319579;
-      temp_v1 = FUN_002ed882(param_3,temp_v9);
+      temp_v1 = streamWriterWriteU32(param_3,temp_v9);
       if (temp_v1 == 0) {
         return;
       }
       temp_v9[0] = *(unsigned int *)(param_2 + 0xb4) ^ 0xbee17d2f;
-      temp_v1 = FUN_002ed882(param_3,temp_v9);
+      temp_v1 = streamWriterWriteU32(param_3,temp_v9);
       if (temp_v1 == 0) {
         return;
       }
-      temp_v1 = FUN_002ed882(param_3,param_2 + 0xb8);
+      temp_v1 = streamWriterWriteU32(param_3,param_2 + 0xb8);
       if (temp_v1 == 0) {
         return;
       }
       temp_v8 = 0;
       if (*(int *)(param_2 + 0xd8) != 0) {
         temp_v4 = *(unsigned int *)(*(int *)(param_2 + 0xd8) + 0x10);
-        temp_v2 = FUN_002e76b6();
-        temp_v3 = FUN_002e76b6(*(unsigned int *)(param_3 + 8));
+        temp_v2 = onlineBufferGetData();
+        temp_v3 = onlineBufferGetData(*(unsigned int *)(param_3 + 8));
         temp_v0 = *(unsigned short *)(param_2 + 0xa2);
       }
       else {
-        temp_v3 = FUN_002e76b6(*(unsigned int *)(param_3 + 8));
+        temp_v3 = onlineBufferGetData(*(unsigned int *)(param_3 + 8));
         temp_v0 = *(unsigned short *)(param_2 + 0xa2);
         temp_v2 = 0;
         temp_v4 = 0;
       }
       FUN_002ed2b0(temp_v7,temp_v0 & 0xf,temp_v10,param_5,temp_v3,temp_v2,temp_v4);
-      temp_v1 = FUN_002e7674(param_3,temp_v7,temp_v8);
+      temp_v1 = strHolderAssignBytes(param_3,temp_v7,temp_v8);
       temp_v5 = 1;
     } while (temp_v1 == 0);
     if (*(int *)(param_2 + 0xd8) != 0) {
-      FUN_002e76a0(param_3);
+      strHolderAssignBuffer(param_3);
     }
   }
   return;

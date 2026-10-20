@@ -24,7 +24,7 @@ typedef struct {
     unsigned int sp178; /* 0x178: local_178 */
 } param_3_stack;
 
-extern int DAT_0057f290; /* 0x57f290 */
+extern int g_unite; /* 0x57f290 */
 
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: FUN_00203b40. */
@@ -56,7 +56,7 @@ void FUN_0028a538(unsigned short *param_1,int param_2,int param_3)
   int iStack_2c;
   int iStack_28;
   
-  temp_v0 = DAT_0057f290;
+  temp_v0 = g_unite;
   temp_v5 = 0;
   temp_v7 = 0;
   temp_v12 = param_1;

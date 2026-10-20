@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_004853fc(int, int);
+int stateSetterEnterState(int, int);
 int sendEvent100020D(void);
 int sendEvent100020E(void);
 
-extern int FUN_0031d18c(int);
-/* Supplied declaration required: FUN_004853fc. */
+extern int flaggedEntryGetValueB(int);
+/* Supplied declaration required: stateSetterEnterState. */
 /* Supplied declaration required: sendEvent100020D. */
 /* Supplied declaration required: sendEvent100020E. */
 
@@ -25,11 +25,11 @@ unsigned int FUN_0048408c(int param_1)
   if (*(char *)(param_1 + 0x260) == '\0') {
     return 0;
   }
-  temp_v1 = FUN_0031d18c(param_1 + 0x1fc);
+  temp_v1 = flaggedEntryGetValueB(param_1 + 0x1fc);
   if (temp_v1 != 1) {
-    temp_v1 = FUN_0031d18c(param_1 + 0x1fc);
+    temp_v1 = flaggedEntryGetValueB(param_1 + 0x1fc);
     if (temp_v1 != 2) {
-      temp_v1 = FUN_0031d18c(param_1 + 0x1fc);
+      temp_v1 = flaggedEntryGetValueB(param_1 + 0x1fc);
       if (temp_v1 != 3) {
         return 0;
       }
@@ -65,7 +65,7 @@ unsigned int FUN_0048408c(int param_1)
         *(unsigned char *)(temp_v2 + 0xb1) = 0;
       } while (0 < temp_v1);
       *(unsigned char *)(param_1 + 8) = 1;
-      FUN_004853fc(param_1,4);
+      stateSetterEnterState(param_1,4);
       sendEvent100020E();
       return 1;
     }

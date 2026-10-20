@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002b63c0(void);
+int dataTable1bOr1cGetRecord(void);
 
-extern int FUN_002adc88(char);
-/* Supplied declaration required: FUN_002b63c0. */
-extern unsigned int FUN_002c30c4(int);
+extern int gameGetFlagBlock(char);
+/* Supplied declaration required: dataTable1bOr1cGetRecord. */
+extern unsigned int libc_strlen(int);
 
 
 unsigned int FUN_00290248(int param_1)
@@ -19,8 +19,8 @@ unsigned int FUN_00290248(int param_1)
   int temp_v1;
   
   temp_v1 = param_1;
-  FUN_002b63c0();
-  temp_v0 = FUN_002c30c4(temp_v1 + 0x138);
+  dataTable1bOr1cGetRecord();
+  temp_v0 = libc_strlen(temp_v1 + 0x138);
   if ((temp_v0 < 2) && (*(char *)(temp_v1 + 0x138) == '0')) {
     temp_v0 = 0;
   }
@@ -28,7 +28,7 @@ unsigned int FUN_00290248(int param_1)
     temp_v0 = 1;
   }
   else {
-    temp_v1 = FUN_002adc88(*(char *)(temp_v1 + 0x147));
+    temp_v1 = gameGetFlagBlock(*(char *)(temp_v1 + 0x147));
     temp_v0 = (*(unsigned char *)(temp_v1 + param_1 * 4 + 0x202) & 4) >> 2;
   }
   return temp_v0;

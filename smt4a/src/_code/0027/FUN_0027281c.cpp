@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0019cac4(void);
-int FUN_001aba54(void);
+int dataTable00FindById(void);
+int dataTable04FindById(void);
 
 typedef struct fn_0027281c_arg0 fn_0027281c_arg0;
 struct fn_0027281c_arg0 {
@@ -18,8 +18,8 @@ struct fn_0027281c_arg0 {
     int field_0x404; /* +0x404 */
 };
 
-/* Supplied declaration required: FUN_0019cac4. */
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: dataTable00FindById. */
+/* Supplied declaration required: dataTable04FindById. */
 
 
 unsigned int FUN_0027281c(fn_0027281c_arg0 *param_1)
@@ -34,7 +34,7 @@ unsigned int FUN_0027281c(fn_0027281c_arg0 *param_1)
     temp_v2 = 0;
     do {
       temp_v0 = (unsigned int)*(unsigned short *)(param_1->field_0x3f8 + temp_v2 * 2 + 0x34);
-      FUN_001aba54();
+      dataTable04FindById();
       if ((temp_v0 != 0) && (*(char *)(temp_v0 + 0x23) == '\x03')) {
         return 1;
       }
@@ -45,7 +45,7 @@ unsigned int FUN_0027281c(fn_0027281c_arg0 *param_1)
     temp_v2 = 0;
     do {
       temp_v0 = (unsigned int)*(unsigned short *)(param_1->field_0x3fc + temp_v2 * 2 + 0x34);
-      FUN_001aba54();
+      dataTable04FindById();
       if ((temp_v0 != 0) && (*(char *)(temp_v0 + 0x23) == '\x03')) {
         return 1;
       }
@@ -54,11 +54,11 @@ unsigned int FUN_0027281c(fn_0027281c_arg0 *param_1)
   }
   if (param_1->field_0x404 != 0) {
     temp_v0 = (unsigned int)*(unsigned short *)&param_1->field_0x166;
-    FUN_0019cac4();
+    dataTable00FindById();
     temp_v2 = 0;
     do {
       temp_v1 = (unsigned int)*(unsigned short *)(temp_v0 + temp_v2 * 2 + 0x50);
-      FUN_001aba54();
+      dataTable04FindById();
       if ((temp_v1 != 0) && (*(char *)(temp_v1 + 0x23) == '\x03')) {
         return 1;
       }

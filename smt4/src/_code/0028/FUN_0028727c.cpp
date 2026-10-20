@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdTMTexTableFreeEntry(int);
-int FUN_002ae898(int, int);
+int asdTMTexTableReleaseNode(int, int);
 int asdMemFree(unsigned int);
 int FUN_002d661c(void);
 
@@ -14,7 +14,7 @@ extern unsigned int DAT_0043da30; /* 0x43da30 */
 extern unsigned int DAT_0043da34; /* 0x43da34 */
 
 /* Supplied declaration required: asdTMTexTableFreeEntry. */
-/* Supplied declaration required: FUN_002ae898. */
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002d661c. */
 
@@ -28,7 +28,7 @@ void FUN_0028727c(void)
     FUN_002d661c();
     asdMemFree(DAT_0043da30);
     asdMemFree(DAT_0043da34);
-    FUN_002ae898(0x12,0);
+    asdTMTexTableReleaseNode(0x12,0);
     asdTMTexTableFreeEntry(0x12);
     DAT_0043da29 = '\0';
   }

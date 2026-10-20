@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_002d85f8(u32 handle, s32 arg);
+void eventTexHandleSetFlag(u32 handle, s32 arg);
 s32 jobIsValid(u32 handle);
 
 extern EventTex *g_eventTex;
@@ -16,14 +16,14 @@ void eventTexSetFlag(s32 flag)
         if (flag != 0) {
             for (i = 0; i < EVENT_TEX_HANDLES; i++) {
                 if (jobIsValid(g_eventTex->handles[i]) != 0) {
-                    FUN_002d85f8(g_eventTex->handles[i], 1);
+                    eventTexHandleSetFlag(g_eventTex->handles[i], 1);
                 }
             }
             return;
         }
         for (i = 0; i < EVENT_TEX_HANDLES; i++) {
             if (jobIsValid(g_eventTex->handles[i]) != 0) {
-                FUN_002d85f8(g_eventTex->handles[i], 0);
+                eventTexHandleSetFlag(g_eventTex->handles[i], 0);
             }
         }
     }

@@ -16,7 +16,7 @@ typedef struct TablePair {
 
 extern u8 DAT_00557d60;
 extern void itemTableClear(ItemTable *table);
-extern void FUN_002e3328(TablePair *obj);
+extern void asdOperatorDelete(TablePair *obj);
 
 /* Destroys the object: restores its vtable, clears both item tables twice (base and member destruction) and frees it. */
 void tablePairDestroy(TablePair *obj)
@@ -26,7 +26,7 @@ void tablePairDestroy(TablePair *obj)
     itemTableClear(&obj->tableB);
     itemTableClear(&obj->tableB);
     itemTableClear(&obj->tableA);
-    FUN_002e3328(obj);
+    asdOperatorDelete(obj);
 }
 
 } /* extern "C" */

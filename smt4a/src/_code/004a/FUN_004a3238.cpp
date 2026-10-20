@@ -5,7 +5,7 @@
 extern "C" {
 
 int efctSetSpeed(void);
-int FUN_00184e64(...);
+int drawSetColorFromRGBA8(...);
 int FUN_002a4b28(unsigned int);
 int FUN_002e7284(...);
 int FUN_00493408(...);
@@ -28,7 +28,7 @@ extern unsigned char LAB_004a3494; /* 0x4a3494 */
 extern unsigned int DAT_005e1e88; /* 0x5e1e88 */
 
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_00184e64. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_002a4b28. */
 /* Supplied declaration required: FUN_002e7284. */
 /* Supplied declaration required: FUN_00493408. */
@@ -77,11 +77,11 @@ void FUN_004a3238(int param_1,int param_2,unsigned int param_3,int param_4,unsig
   case 5:
     if (param_2 != 0) {
       if (*(int *)(param_2 * 4 + 0x5e1e84) != (&DAT_005e1e88)[param_2]) {
-        FUN_00184e64();
+        drawSetColorFromRGBA8();
       }
     }
     else {
-      FUN_00184e64(DAT_005e1e88);
+      drawSetColorFromRGBA8(DAT_005e1e88);
     }
     efctSetSpeed();
     temp_v1 = FUN_002a4b28(param_5 & 0xffff);

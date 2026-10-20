@@ -3,8 +3,8 @@
 extern "C" {
 
 extern const u8 DAT_0055c19c[];  /* vtable */
-void FUN_001a089c(u32 *member, s32 flag);
-void FUN_001a08d8(u32 *member);
+void nn_os_LightEvent_Initialize(u32 *member, s32 flag);
+void nn_os_LightEvent_Signal(u32 *member);
 
 typedef struct Object55c19c {
     /* 0x00 */ const void *vtbl;
@@ -25,10 +25,10 @@ Object55c19c *FUN_001b95dc(Object55c19c *self)
     self->unk08 = 0;
     self->unk0C = 0;
     self->unk10 = 0;
-    FUN_001a089c(&self->unk0C, 1);
+    nn_os_LightEvent_Initialize(&self->unk0C, 1);
     self->unk14 = 0;
     self->unk18 = 0;
-    FUN_001a08d8(&self->unk0C);
+    nn_os_LightEvent_Signal(&self->unk0C);
     return self;
 }
 

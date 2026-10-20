@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0024571c(...);
 int FUN_0029c6b0(...);
-int FUN_002b9024(...);
+int devilGetRecord(...);
 int FUN_003c219c(...);
 int SBORROW4(...);
 
@@ -55,9 +55,9 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_0024571c. */
 extern int FUN_00245768(unsigned short);
-extern int padIsButtonDown(unsigned int);
+extern int flagBitIsSet(unsigned int);
 /* Supplied declaration required: FUN_0029c6b0. */
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: FUN_003c219c. */
 
 
@@ -80,7 +80,7 @@ void FUN_003c2318(fn_003c2318_arg0 *param_1,int param_2)
   unsigned int temp_v9;
   
   temp_v0 = (unsigned int)param_1->field_0x46;
-  FUN_002b9024();
+  devilGetRecord();
   temp_v9 = (unsigned int)*(unsigned short *)(temp_v0 + 0x16);
   temp_v7 = *(unsigned int *)(temp_v0 + 0x24);
   uStack_30 = *(unsigned int *)(temp_v0 + 0x16);
@@ -122,7 +122,7 @@ void FUN_003c2318(fn_003c2318_arg0 *param_1,int param_2)
       }
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 5);
-    temp_v3 = padIsButtonDown(7);
+    temp_v3 = flagBitIsSet(7);
     temp_v6 = temp_v3 != 0;
     temp_v3 = 0;
     temp_v1 = 0;
@@ -134,7 +134,7 @@ void FUN_003c2318(fn_003c2318_arg0 *param_1,int param_2)
       *(short *)&param_1->field_0x4 = (short)temp_v1 + 1;
       *(short *)&param_1->field_0x20 = *(short *)&param_1->field_0x20 + 1;
     }
-    temp_v3 = padIsButtonDown(8);
+    temp_v3 = flagBitIsSet(8);
     temp_v6 = temp_v3 != 0;
     temp_v3 = 0;
     temp_v1 = 0;
@@ -146,7 +146,7 @@ void FUN_003c2318(fn_003c2318_arg0 *param_1,int param_2)
       *(short *)&param_1->field_0xa = (short)temp_v1 + 1;
       *(short *)&param_1->field_0x26 = *(short *)&param_1->field_0x26 + 1;
     }
-    temp_v3 = padIsButtonDown(9);
+    temp_v3 = flagBitIsSet(9);
     temp_v6 = temp_v3 != 0;
     temp_v3 = 0;
     temp_v1 = 0;
@@ -158,7 +158,7 @@ void FUN_003c2318(fn_003c2318_arg0 *param_1,int param_2)
       *(short *)&param_1->field_0xc = (short)temp_v1 + 1;
       *(short *)&param_1->field_0x28 = *(short *)&param_1->field_0x28 + 1;
     }
-    temp_v3 = padIsButtonDown(10);
+    temp_v3 = flagBitIsSet(10);
     temp_v6 = temp_v3 != 0;
     temp_v3 = 0;
     temp_v1 = 0;
@@ -170,7 +170,7 @@ void FUN_003c2318(fn_003c2318_arg0 *param_1,int param_2)
       *(short *)&param_1->field_0x8 = (short)temp_v1 + 1;
       *(short *)&param_1->field_0x24 = *(short *)&param_1->field_0x24 + 1;
     }
-    temp_v3 = padIsButtonDown(0xb);
+    temp_v3 = flagBitIsSet(0xb);
     temp_v6 = temp_v3 != 0;
     temp_v3 = 0;
     temp_v1 = 0;

@@ -6,7 +6,7 @@ extern "C" {
 
 int asdLoadFileAsync(unsigned char [68], int, unsigned int, unsigned char *, int *, int);
 int libc_strcat(...);
-int FUN_002bf694(unsigned char [68], int);
+int libc_strcpy(unsigned char [68], int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -20,8 +20,8 @@ extern unsigned char LAB_002a6258; /* 0x2a6258 */
 /* Supplied declaration required: asdLoadFileAsync. */
 /* Supplied declaration required: libc_strcat. */
 extern int *asdTMTexTableCallFileB(void);
-/* Supplied declaration required: FUN_002bf694. */
-extern int FUN_002c30c4(unsigned int);
+/* Supplied declaration required: libc_strcpy. */
+extern int libc_strlen(unsigned int);
 
 
 /* WARNING: Removing unreachable block (ram,0x002a61e8) */
@@ -41,7 +41,7 @@ int * FUN_0023e3ec(void)
   
   piVar1 = (int *)asdTMTexTableCallFileB();
   temp_v2 = piVar1[1];
-  FUN_002bf694(temp_v3,*piVar1 + 0xc);
+  libc_strcpy(temp_v3,*piVar1 + 0xc);
   pcVar3 = *(char **)(temp_v2 + 8);
   if (*pcVar3 != '-') {
     libc_strcat(temp_v3);
@@ -55,7 +55,7 @@ int * FUN_0023e3ec(void)
   else {
     libc_strcat(temp_v3,&LAB_002a6258);
   }
-  temp_v2 = FUN_002c30c4(*(unsigned int *)(temp_v2 + 8));
+  temp_v2 = libc_strlen(*(unsigned int *)(temp_v2 + 8));
   if (temp_v2 == 0) {
     piVar1[2] = 0;
     return piVar1;

@@ -3,7 +3,7 @@
 extern "C" {
 
 int FUN_002a4288(void *object);
-extern u8 DAT_00420e94;
+extern u8 g_nnFndExpHeapBaseVtable;
 extern void nn_fnd_ExpHeapBase_Finalize(void *heap);
 
 typedef struct Obj {
@@ -13,7 +13,7 @@ typedef struct Obj {
 /* Destructor: restores the base vtable, finalizes the heap, frees the object. */
 void expHeapDestroyB(Obj *obj)
 {
-    obj->vtbl = &DAT_00420e94;
+    obj->vtbl = &g_nnFndExpHeapBaseVtable;
     nn_fnd_ExpHeapBase_Finalize(obj);
     FUN_002a4288(obj);
 }

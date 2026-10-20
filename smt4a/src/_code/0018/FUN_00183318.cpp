@@ -4,17 +4,17 @@
 
 extern "C" {
 
-int FUN_001846d0(int, int);
-int FUN_00184758(int, int, int);
-int FUN_00184c00(int, int, int);
+int uiSpriteSelectAnim(int, int);
+int uiSpriteSetKeyframe(int, int, int);
+int uiSpriteSetImageKeyframe(int, int, int);
 int FUN_0019d36c(void);
 int FUN_0019e330(int, int, int);
 
-extern unsigned char DAT_0057f0c4; /* 0x57f0c4 */
+extern unsigned char g_buttonHelp; /* 0x57f0c4 */
 
-/* Supplied declaration required: FUN_001846d0. */
-/* Supplied declaration required: FUN_00184758. */
-/* Supplied declaration required: FUN_00184c00. */
+/* Supplied declaration required: uiSpriteSelectAnim. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_0019d36c. */
 /* Supplied declaration required: FUN_0019e330. */
 
@@ -29,11 +29,11 @@ void FUN_00183318(int param_1)
   int *piVar4;
   unsigned char temp_v3;
   
-  temp_v0 = (*(int *)((unsigned char *)&DAT_0057f0c4 + 0x4));
+  temp_v0 = (*(int *)((unsigned char *)&g_buttonHelp + 0x4));
   temp_v2 = 0;
-  piVar4 = (int *)((*(int *)((unsigned char *)&DAT_0057f0c4 + 0x4)) + 0x5d0);
+  piVar4 = (int *)((*(int *)((unsigned char *)&g_buttonHelp + 0x4)) + 0x5d0);
   do {
-    FUN_001846d0(temp_v0 + temp_v2 * 0x8c + 0x34,1);
+    uiSpriteSelectAnim(temp_v0 + temp_v2 * 0x8c + 0x34,1);
     temp_v1 = temp_v0 + temp_v2 * 4;
     if (*(char *)(temp_v1 + 0x5ac) != '\0') {
       if (param_1 != 0) {
@@ -61,17 +61,17 @@ void FUN_00183318(int param_1)
       }
       else {
         temp_v1 = temp_v0 + temp_v2 * 0x8c;
-        FUN_00184c00(temp_v1 + 0x37c,1,0);
+        uiSpriteSetImageKeyframe(temp_v1 + 0x37c,1,0);
       }
       FUN_0019e330(temp_v1 + 0x37c,temp_v3,!temp_v3);
     }
     else {
-      FUN_00184758(temp_v0 + temp_v2 * 0x8c + 0x37c,3,0);
+      uiSpriteSetKeyframe(temp_v0 + temp_v2 * 0x8c + 0x37c,3,0);
     }
-    temp_v1 = (*(int *)((unsigned char *)&DAT_0057f0c4 + 0x4));
+    temp_v1 = (*(int *)((unsigned char *)&g_buttonHelp + 0x4));
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 4);
-  *(unsigned int *)((*(int *)((unsigned char *)&DAT_0057f0c4 + 0x4)) + 0xc) = 0;
+  *(unsigned int *)((*(int *)((unsigned char *)&g_buttonHelp + 0x4)) + 0xc) = 0;
   *(unsigned int *)(temp_v1 + 0x10) = 3;
   return;
 }

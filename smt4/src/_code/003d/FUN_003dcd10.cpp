@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_00249e54(...);
-int FUN_002aa568(...);
+int libc_strcmp(...);
 int FUN_002be624(...);
-int FUN_002bf694(...);
-int FUN_002c30c4(...);
+int libc_strcpy(...);
+int libc_strlen(...);
 int memClear(...);
 
 extern unsigned char DAT_00400914; /* 0x400914 */
@@ -28,11 +28,11 @@ extern union romwright_storage_s__B_B_B_B_B_B_00435d00_25_1 s__B_B_B_B_B_B_00435
 
 /* Supplied declaration required: FUN_00249e54. */
 extern unsigned int FUN_0024a6b0(int);
-/* Supplied declaration required: FUN_002aa568. */
-extern int FUN_002b4414(int, unsigned int, unsigned int);
+/* Supplied declaration required: libc_strcmp. */
+extern int libc_strncmp(int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002be624. */
-/* Supplied declaration required: FUN_002bf694. */
-/* Supplied declaration required: FUN_002c30c4. */
+/* Supplied declaration required: libc_strcpy. */
+/* Supplied declaration required: libc_strlen. */
 /* Supplied declaration required: memClear. */
 
 
@@ -54,33 +54,33 @@ void FUN_003dcd10(int param_1)
     temp_v3 = 0;
     do {
       temp_v4 = *(int *)(param_1 + 0x1cfc) + temp_v3 * 0x16 + 0x108;
-      temp_v1 = FUN_002c30c4(temp_v4);
-      if ((temp_v1 != 0) && (temp_v1 = temp_v4, FUN_002aa568(temp_v4,&DAT_00400914), temp_v1 != 0)) {
+      temp_v1 = libc_strlen(temp_v4);
+      if ((temp_v1 != 0) && (temp_v1 = temp_v4, libc_strcmp(temp_v4,&DAT_00400914), temp_v1 != 0)) {
         pcVar3 = "NOT_EFT";
-        FUN_002aa568("NOT_EFT",temp_v4);
+        libc_strcmp("NOT_EFT",temp_v4);
         if (pcVar3 != (char *)0x0) {
           if (temp_v4 != 0) {
-            temp_v2 = FUN_002c30c4((*(unsigned int *)&s__B_B_B_B_B_B_00435d00.u1[0]));
-            temp_v1 = FUN_002b4414(temp_v4,(*(unsigned int *)&s__B_B_B_B_B_B_00435d00.u1[0]),temp_v2);
+            temp_v2 = libc_strlen((*(unsigned int *)&s__B_B_B_B_B_B_00435d00.u1[0]));
+            temp_v1 = libc_strncmp(temp_v4,(*(unsigned int *)&s__B_B_B_B_B_B_00435d00.u1[0]),temp_v2);
             if (temp_v1 == 0) goto LAB_003dcefc;
           }
           if (((temp_v4 == 0) ||
-              ((temp_v1 = temp_v4, FUN_002aa568(temp_v4,(*(unsigned int *)&s__B_B_B_B_B_B_00435d00.u1[4])), temp_v1 != 0 &&
-               (temp_v1 = temp_v4, FUN_002aa568(temp_v4,(*(unsigned int *)&s__B_B_B_B_B_B_00435d00.u1[8])), temp_v1 != 0)))) &&
+              ((temp_v1 = temp_v4, libc_strcmp(temp_v4,(*(unsigned int *)&s__B_B_B_B_B_B_00435d00.u1[4])), temp_v1 != 0 &&
+               (temp_v1 = temp_v4, libc_strcmp(temp_v4,(*(unsigned int *)&s__B_B_B_B_B_B_00435d00.u1[8])), temp_v1 != 0)))) &&
              ((temp_v4 == 0 ||
-              (temp_v1 = temp_v4, FUN_002aa568(temp_v4,(*(unsigned int *)&s__B_B_B_B_B_B_00435d00.u1[16])), temp_v1 != 0)))) {
+              (temp_v1 = temp_v4, libc_strcmp(temp_v4,(*(unsigned int *)&s__B_B_B_B_B_B_00435d00.u1[16])), temp_v1 != 0)))) {
             if (temp_v4 != 0) {
-              temp_v2 = FUN_002c30c4((*(unsigned int *)&s__B_B_B_B_B_B_00435d00.u1[12]));
-              temp_v1 = FUN_002b4414(temp_v4,(*(unsigned int *)&s__B_B_B_B_B_B_00435d00.u1[12]),temp_v2);
+              temp_v2 = libc_strlen((*(unsigned int *)&s__B_B_B_B_B_B_00435d00.u1[12]));
+              temp_v1 = libc_strncmp(temp_v4,(*(unsigned int *)&s__B_B_B_B_B_B_00435d00.u1[12]),temp_v2);
               if (temp_v1 == 0) goto LAB_003dcefc;
             }
             if ((temp_v4 == 0) ||
-               (temp_v1 = temp_v4, FUN_002aa568(temp_v4,(*(unsigned int *)&s__B_B_B_B_B_B_00435d00.u1[20])), temp_v1 != 0)) {
+               (temp_v1 = temp_v4, libc_strcmp(temp_v4,(*(unsigned int *)&s__B_B_B_B_B_B_00435d00.u1[20])), temp_v1 != 0)) {
               memClear(temp_v6,0x80);
               memClear(temp_v7,0x80);
               FUN_002be624(temp_v7,"battle/effect/%s.eft",temp_v4);
-              FUN_002bf694(temp_v6,temp_v7);
-              temp_v1 = FUN_002c30c4(temp_v6);
+              libc_strcpy(temp_v6,temp_v7);
+              temp_v1 = libc_strlen(temp_v6);
               if (temp_v1 != 0) {
                 temp_v1 = param_1 + temp_v3 * 0x8c;
                 pcVar3 = *(char **)(temp_v1 + 0x2394);

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00157558(int);
 int FUN_00162790(...);
 int FUN_00164168(...);
-int FUN_0016c410(...);
+int renderCtxResetColorScale(...);
 int FUN_0016c560(...);
 int FUN_001835b4(int, int, int, unsigned int, unsigned int, int);
 int FUN_0020bd54(void);
@@ -22,17 +22,17 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } void_stack;
 
-extern unsigned char DAT_0057f0c4; /* 0x57f0c4 */
+extern unsigned char g_buttonHelp; /* 0x57f0c4 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00157558. */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164168. */
-extern unsigned int FUN_001654d8(int);
-extern unsigned int FUN_001654e4(int);
+extern unsigned int vec2GetXInt(int);
+extern unsigned int vec2GetYInt(int);
 extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0016c410. */
+/* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: FUN_0016c560. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
@@ -58,8 +58,8 @@ unsigned char FUN_002e169c(void)
   unsigned char temp_v9;
   unsigned int in_fpscr;
   
-  temp_v1 = (*(int *)((unsigned char *)&DAT_0057f0c4 + 0x4));
-  if (*(char *)((*(int *)((unsigned char *)&DAT_0057f0c4 + 0x4)) + 0x5e0) != '\0') {
+  temp_v1 = (*(int *)((unsigned char *)&g_buttonHelp + 0x4));
+  if (*(char *)((*(int *)((unsigned char *)&g_buttonHelp + 0x4)) + 0x5e0) != '\0') {
     FUN_00157558(g_renderCtx);
     temp_v4 = g_renderCtx;
     temp_v2 = FUN_001692ac(1,0);
@@ -82,8 +82,8 @@ unsigned char FUN_002e169c(void)
         FUN_0025c848(temp_v1 + 0x408);
       }
       else {
-        temp_v5 = FUN_001654d8(temp_v1 + 0x37c);
-        temp_v6 = FUN_001654e4(temp_v1 + 0x37c);
+        temp_v5 = vec2GetXInt(temp_v1 + 0x37c);
+        temp_v6 = vec2GetYInt(temp_v1 + 0x37c);
         FUN_001835b4(2,10,0,temp_v5,temp_v6,0x10);
         FUN_001835b4(2,10,1,temp_v5,temp_v6,0x10);
         FUN_001835b4(2,10,0xa3,temp_v5,temp_v6,0x10);
@@ -133,7 +133,7 @@ unsigned char FUN_002e169c(void)
       *(unsigned char *)(temp_v1 + 0x1270) = 0;
     }
     FUN_0016c560(g_renderCtx);
-    FUN_0016c410(g_renderCtx);
+    renderCtxResetColorScale(g_renderCtx);
   }
   return 0;
 }

@@ -16,7 +16,7 @@ int FUN_0040ace8(unsigned int, unsigned int);
 extern unsigned char LAB_00234250; /* 0x234250 */
 extern unsigned char LAB_00234268; /* 0x234268 */
 extern unsigned char LAB_00234284; /* 0x234284 */
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern int g_mapIf; /* 0x58103c */
 extern int g_gameState; /* 0x5f15fc */
 
@@ -72,7 +72,7 @@ void FUN_00234118(void)
   FUN_0040aa6c();
   FUN_0040aad4(*(unsigned int *)(temp_v0 + 0xcbf8),0);
   temp_v2 = *(unsigned int *)(*(int *)(temp_v0 + 0xcbf8) + 4);
-  FUN_0040ace8(DAT_0056fcc0,temp_v2);
+  FUN_0040ace8(g_handleRegistry,temp_v2);
   FUN_003fd76c(temp_v2,temp_v0 + 0xcbe8);
   FUN_003fdb18(temp_v2);
   FUN_003fe86c(temp_v2,0,2);

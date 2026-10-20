@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_00188b60(unsigned int *);
+int nn_os_CriticalSection_Initialize(unsigned int *);
 
-/* Supplied declaration required: FUN_00188b60. */
+/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
 
 
 unsigned int * nn_snd_CTR_VoiceImpl_VoiceImpl_sub_object(unsigned int *param_1,unsigned int param_2)
@@ -29,7 +29,7 @@ unsigned int * nn_snd_CTR_VoiceImpl_VoiceImpl_sub_object(unsigned int *param_1,u
   param_1[0x1c] = 0;
   param_1[0x1d] = 0;
   param_1[0x1e] = 0xffffffff;
-  FUN_00188b60(param_1 + 0x1c);
+  nn_os_CriticalSection_Initialize(param_1 + 0x1c);
   *(unsigned short *)(param_1 + 1) = 1;
   *(unsigned short *)(param_1 + 0x1b) = *(unsigned short *)(param_1 + 0x1b) | 0x8000;
   return param_1;

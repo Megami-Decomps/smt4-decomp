@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 int FUN_0035e458(void);
 int FUN_004cd0c8(int, int, unsigned short [16]);
 int FUN_004cd4b8(int, int);
@@ -16,8 +16,8 @@ typedef struct {
 } param_2_stack;
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-extern int FUN_001ab888(void);
-/* Supplied declaration required: FUN_001aba54. */
+extern int gameGetSlotTable(void);
+/* Supplied declaration required: dataTable04FindById. */
 extern int FUN_0035d89c(unsigned int);
 /* Supplied declaration required: FUN_0035e458. */
 /* Supplied declaration required: FUN_004cd0c8. */
@@ -46,7 +46,7 @@ unsigned int FUN_003e4a54(unsigned int param_1,unsigned int param_2)
       temp_v7 = 0;
     }
     else {
-      temp_v7 = FUN_001ab888();
+      temp_v7 = gameGetSlotTable();
       temp_v7 = temp_v7 + (temp_v4 & 0xffff) * 0x134 + 0x1ddc;
     }
     if (*(unsigned short *)(temp_v7 + 300) == param_1) break;
@@ -64,7 +64,7 @@ unsigned int FUN_003e4a54(unsigned int param_1,unsigned int param_2)
       temp_v0 = 0;
     }
     else {
-      temp_v0 = FUN_001ab888();
+      temp_v0 = gameGetSlotTable();
       temp_v0 = temp_v0 + (temp_v4 & 0xffff) * 0x134 + 0x1ddc;
     }
     if (*(unsigned short *)(temp_v0 + 300) == param_2) break;
@@ -87,7 +87,7 @@ unsigned int FUN_003e4a54(unsigned int param_1,unsigned int param_2)
       temp_v0 = 0;
     }
     else {
-      temp_v0 = FUN_001ab888();
+      temp_v0 = gameGetSlotTable();
       temp_v0 = temp_v0 + (temp_v5 & 0xffff) * 0x134 + 0x1ddc;
     }
     temp_v1 = (unsigned int)*(unsigned short *)(temp_v0 + 300);
@@ -133,7 +133,7 @@ unsigned int FUN_003e4a54(unsigned int param_1,unsigned int param_2)
     if ((temp_v0 != 0) && (temp_v6 < 8)) {
       *(unsigned short *)(temp_v0 + temp_v6 * 2 + 0x34) = temp_v10[temp_v7];
       temp_v5 = temp_v4;
-      FUN_001aba54();
+      dataTable04FindById();
       temp_v8 = 0;
       if ((temp_v5 != 0) && (*(unsigned short *)(temp_v5 + 0x26) < 0x12)) {
         temp_v8 = (int)*(char *)((unsigned int)*(unsigned short *)(temp_v5 + 0x26) + temp_v0 + 0x4c);

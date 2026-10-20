@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned char DAT_005b3d54; /* 0x5b3d54 */
+extern unsigned char g_asdTextDefaults; /* 0x5b3d54 */
 
 
 void FUN_001513ec(int param_1,unsigned int param_2,unsigned int param_3)
@@ -14,7 +14,7 @@ void FUN_001513ec(int param_1,unsigned int param_2,unsigned int param_3)
   unsigned int in_s0;
   
   *(unsigned int *)(param_1 + 0x50) = param_2;
-  (*(unsigned int *)((unsigned char *)&DAT_005b3d54 + 0xc)) = param_3 & 0xffffff00;
+  (*(unsigned int *)((unsigned char *)&g_asdTextDefaults + 0xc)) = param_3 & 0xffffff00;
   *(unsigned int *)(param_1 + 0x58) = in_s0;
   return;
 }

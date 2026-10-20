@@ -9,7 +9,7 @@ int scrSetResult(int);
 int btlGetMainState(void);
 int scrGetArg(int);
 int FUN_002ae164(void);
-int FUN_002b9024(void);
+int devilGetRecord(void);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -18,14 +18,14 @@ typedef struct {
 } void_stack;
 
 extern int FUN_001d2ac8(void);
-extern int FUN_002499b4(void);
+extern int btlMainFindActiveEntry(void);
 /* Supplied declaration required: FUN_002499fc. */
 extern unsigned int FUN_00249a54(void);
 /* Supplied declaration required: scrSetResult. */
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: scrGetArg. */
 /* Supplied declaration required: FUN_002ae164. */
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: devilGetRecord. */
 
 
 unsigned int FUN_002ff77c(void)
@@ -85,7 +85,7 @@ unsigned int FUN_002ff77c(void)
           }
           if (puVar6[0xa1] != 0) {
             temp_v3 = (unsigned int)*(unsigned short *)((int)puVar6 + 0xce);
-            FUN_002b9024();
+            devilGetRecord();
             temp_v2 = 0;
             do {
               temp_v4 = (unsigned int)*(unsigned short *)(temp_v3 + temp_v2 * 2 + 0x3c);
@@ -105,7 +105,7 @@ unsigned int FUN_002ff77c(void)
   temp_v5 = btlGetMainState();
   if (*(char *)(temp_v5 + 0x49c5) != '\0') {
     btlGetMainState();
-    temp_v5 = FUN_002499b4();
+    temp_v5 = btlMainFindActiveEntry();
     if (((temp_v5 != 0) && (*(unsigned short *)(temp_v5 + 0xce) == temp_v0)) &&
        (temp_v5 = FUN_001d2ac8(), temp_v5 != 0)) {
       scrSetResult(1);

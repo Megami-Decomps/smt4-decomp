@@ -4,15 +4,15 @@
 
 extern "C" {
 
-int FUN_002beda4(...);
+int vec2GetXInt(...);
 int FUN_003b49a0(int, unsigned int, unsigned int);
 int FUN_003b5f30(int, int);
 int FUN_003b6a5c(int, unsigned int, unsigned int);
 int FUN_003b7084(int, unsigned int, unsigned int);
 
 extern int FUN_00296a18(int);
-extern unsigned int FUN_002bed98(int);
-/* Supplied declaration required: FUN_002beda4. */
+extern unsigned int vec2GetYInt(int);
+/* Supplied declaration required: vec2GetXInt. */
 /* Supplied declaration required: FUN_003b49a0. */
 /* Supplied declaration required: FUN_003b5f30. */
 /* Supplied declaration required: FUN_003b6a5c. */
@@ -37,20 +37,20 @@ unsigned int FUN_001c8978(int *param_1)
     if (temp_v0 != 10) {
       if (temp_v0 != 0x11) {
         if (temp_v0 == 0x12) {
-          temp_v1 = FUN_002beda4();
-          temp_v2 = FUN_002bed98(temp_v3 + 0x598);
+          temp_v1 = vec2GetXInt();
+          temp_v2 = vec2GetYInt(temp_v3 + 0x598);
           FUN_003b6a5c(temp_v3,temp_v1,temp_v2);
         }
       }
       else {
-        temp_v1 = FUN_002beda4(temp_v3 + 0xac);
-        temp_v2 = FUN_002bed98(temp_v3 + 0xac);
+        temp_v1 = vec2GetXInt(temp_v3 + 0xac);
+        temp_v2 = vec2GetYInt(temp_v3 + 0xac);
         FUN_003b49a0(temp_v3,temp_v1,temp_v2);
       }
     }
     else {
-      temp_v1 = FUN_002beda4();
-      temp_v2 = FUN_002bed98(temp_v3 + 0x50c);
+      temp_v1 = vec2GetXInt();
+      temp_v2 = vec2GetYInt(temp_v3 + 0x50c);
       FUN_003b7084(temp_v3,temp_v1,temp_v2);
     }
   }

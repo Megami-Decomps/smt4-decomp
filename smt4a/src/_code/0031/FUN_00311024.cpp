@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002e6e14(unsigned int);
+int asdOperatorDeleteArray(unsigned int);
 int ringAdvance(int);
 
-/* Supplied declaration required: FUN_002e6e14. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
 extern int FUN_002f5966(int);
 extern unsigned int *FUN_002fea6a(int);
 /* Supplied declaration required: ringAdvance. */
@@ -23,7 +23,7 @@ int FUN_00311024(int param_1)
   
   while (*(int *)(param_1 + 0x3c) != 0) {
     puVar1 = (unsigned int *)FUN_002fea6a(param_1 + 0x24);
-    FUN_002e6e14(*puVar1);
+    asdOperatorDeleteArray(*puVar1);
     ringAdvance(param_1 + 0x24);
   }
   temp_v0 = FUN_002f5966(param_1 + 0x4c);

@@ -23,7 +23,7 @@ extern unsigned char g_asdCec; /* 0x464fa8 */
 
 /* Supplied declaration required: asdCecMessageBoxClose. */
 /* Supplied declaration required: asdCecMessageBoxOpen. */
-extern int FUN_002b5a48(unsigned int);
+extern int wstrlenU16(unsigned int);
 /* Supplied declaration required: FUN_003580a4. */
 
 
@@ -48,7 +48,7 @@ FUN_003103e4(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsi
       }
       return 2;
     }
-    temp_v0 = FUN_002b5a48(param_6);
+    temp_v0 = wstrlenU16(param_6);
     temp_v1 = (*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4))[6];
     FUN_003580a4(temp_v1,param_1,param_2,param_3,param_4,param_5,param_6,temp_v0 << 1,0x80000,0x80000,
                  param_7,param_8,0x19000);

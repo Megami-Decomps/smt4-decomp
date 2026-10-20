@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0022c0a4(...);
+int poolNodeUnlink(...);
 int FUN_0022c100(...);
 
 typedef struct fn_003fb694_arg0 fn_003fb694_arg0;
@@ -27,7 +27,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_0022c0a4. */
+/* Supplied declaration required: poolNodeUnlink. */
 /* Supplied declaration required: FUN_0022c100. */
 
 
@@ -102,7 +102,7 @@ unsigned int FUN_003fb694(fn_003fb694_arg0 *param_1,unsigned int *param_2)
       pfVar1 = param_1;
       FUN_0022c100(param_1,temp_v0,&temp_v3);
     }
-    FUN_0022c0a4(&temp_v3);
+    poolNodeUnlink(&temp_v3);
     if (pfVar1 != (fn_003fb694_arg0 *)0x1) {
       return 0;
     }
@@ -114,7 +114,7 @@ unsigned int FUN_003fb694(fn_003fb694_arg0 *param_1,unsigned int *param_2)
   param_1->field_0x14 = temp_v2 + 1;
   puVar5 = (unsigned int *)((int)param_1->field_0x4 + temp_v2 * 0x10);
   if (puVar5 != param_2) {
-    FUN_0022c0a4(puVar5);
+    poolNodeUnlink(puVar5);
     puVar5[1] = param_2[1];
     temp_v2 = param_2[3];
     puVar5[3] = temp_v2;

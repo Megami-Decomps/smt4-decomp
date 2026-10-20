@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00193038(int *, int *);
 int FUN_002e59f8(int, unsigned int *, int);
-int FUN_002e6dd0(unsigned int *, int);
+int rt_aeabi_memclr(unsigned int *, int);
 int FUN_0030fc80(int *);
 
 /* stack frame of param_6: 2 slot(s), 8 byte(s) */
@@ -17,7 +17,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00193038. */
 /* Supplied declaration required: FUN_002e59f8. */
-/* Supplied declaration required: FUN_002e6dd0. */
+/* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: FUN_0030fc80. */
 
 
@@ -33,7 +33,7 @@ void FUN_00280bd0(unsigned int *param_1,unsigned int param_2,unsigned int param_
   unsigned int uStack_2c;
   unsigned int uStack_28;
   
-  FUN_002e6dd0(param_1,0x80);
+  rt_aeabi_memclr(param_1,0x80);
   *param_1 = param_2;
   param_1[1] = param_3;
   param_1[2] = param_4;

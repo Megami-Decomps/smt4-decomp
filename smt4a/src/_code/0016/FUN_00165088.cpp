@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_001517b4(...);
-int FUN_001846d0(...);
-int FUN_00184c00(...);
+int uiSpriteSelectAnim(...);
+int uiSpriteSetImageKeyframe(...);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -15,8 +15,8 @@ typedef struct {
 
 /* Supplied declaration required: FUN_001517b4. */
 extern int FUN_00163fd4(unsigned int);
-/* Supplied declaration required: FUN_001846d0. */
-/* Supplied declaration required: FUN_00184c00. */
+/* Supplied declaration required: uiSpriteSelectAnim. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 
 
 void FUN_00165088(int param_1,unsigned int param_2)
@@ -34,7 +34,7 @@ void FUN_00165088(int param_1,unsigned int param_2)
     if (temp_v0 == 0) {
       temp_v0 = FUN_00163fd4(6);
       if (temp_v0 == 0) {
-        FUN_00184c00(param_1 + 0x1b4,2,0);
+        uiSpriteSetImageKeyframe(param_1 + 0x1b4,2,0);
         return;
       }
     }
@@ -54,8 +54,8 @@ void FUN_00165088(int param_1,unsigned int param_2)
       param_1 = param_1 + 0x240;
     }
     else {
-      FUN_00184c00(param_1 + 0x1b4,2,0);
-      FUN_00184c00(param_1 + 0x2cc,2,0);
+      uiSpriteSetImageKeyframe(param_1 + 0x1b4,2,0);
+      uiSpriteSetImageKeyframe(param_1 + 0x2cc,2,0);
       param_1 = param_1 + 0x240;
     }
     *(unsigned char *)(param_1 + 0x85) = 0;
@@ -67,7 +67,7 @@ void FUN_00165088(int param_1,unsigned int param_2)
       if (*(int *)(param_1 + 0x1d4) != 0x3f800000) {
         return;
       }
-      FUN_00184c00(param_1 + 0x1b4,2,0);
+      uiSpriteSetImageKeyframe(param_1 + 0x1b4,2,0);
       return;
     }
     break;
@@ -78,8 +78,8 @@ void FUN_00165088(int param_1,unsigned int param_2)
     if (temp_v0 == 0) {
       temp_v0 = FUN_00163fd4(6);
       if (temp_v0 == 0) {
-        FUN_00184c00(param_1 + 0x1b4,2,0);
-        FUN_00184c00(param_1 + 0x4fc,2,0);
+        uiSpriteSetImageKeyframe(param_1 + 0x1b4,2,0);
+        uiSpriteSetImageKeyframe(param_1 + 0x4fc,2,0);
         return;
       }
     }
@@ -93,8 +93,8 @@ void FUN_00165088(int param_1,unsigned int param_2)
     if (temp_v0 == 0) {
       temp_v0 = FUN_00163fd4(6);
       if (temp_v0 == 0) {
-        FUN_00184c00(param_1 + 0x1b4,2,0);
-        FUN_00184c00(param_1 + 0x4fc,2,0);
+        uiSpriteSetImageKeyframe(param_1 + 0x1b4,2,0);
+        uiSpriteSetImageKeyframe(param_1 + 0x4fc,2,0);
         return;
       }
     }
@@ -108,22 +108,22 @@ void FUN_00165088(int param_1,unsigned int param_2)
     if (temp_v0 == 0) {
       temp_v0 = FUN_00163fd4(6);
       if (temp_v0 == 0) {
-        FUN_00184c00(param_1 + 0x1b4,2,0);
+        uiSpriteSetImageKeyframe(param_1 + 0x1b4,2,0);
         return;
       }
     }
     break;
   case 0xb:
-    FUN_001846d0(param_1 + 0x1b4,7);
-    FUN_001846d0(param_1 + 0x358,7);
+    uiSpriteSelectAnim(param_1 + 0x1b4,7);
+    uiSpriteSelectAnim(param_1 + 0x358,7);
     *(unsigned char *)(param_1 + 0x4f5) = 0;
-    FUN_001846d0(param_1 + 0x18ac,7);
+    uiSpriteSelectAnim(param_1 + 0x18ac,7);
     return;
   case 0xc:
     temp_v0 = 0;
     do {
       if (*(char *)(param_1 + temp_v0 + 0x37) != '\0') {
-        FUN_00184c00(param_1 + temp_v0 * 0x8c + 0x588,5,0);
+        uiSpriteSetImageKeyframe(param_1 + temp_v0 * 0x8c + 0x588,5,0);
       }
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < 5);
@@ -131,7 +131,7 @@ void FUN_00165088(int param_1,unsigned int param_2)
     return;
   case 0xd:
     if (*(char *)(param_1 + 0x5c) != '\0') {
-      FUN_00184c00(param_1 + *(short *)(param_1 + 0x56) * 0x8c + 0x844,5,0);
+      uiSpriteSetImageKeyframe(param_1 + *(short *)(param_1 + 0x56) * 0x8c + 0x844,5,0);
     }
     *(unsigned int *)(param_1 + 0x28) = 0;
     return;

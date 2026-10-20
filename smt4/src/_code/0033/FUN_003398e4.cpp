@@ -4,16 +4,16 @@
 
 extern "C" {
 
-int FUN_002b06c4(void);
-int FUN_002c424c(...);
+int dataTable00FindById(void);
+int __aeabi_memset4(...);
 int memClear(int, int);
 int SBORROW4(int, int);
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 extern int FUN_0026efec(int);
 extern unsigned int FUN_00294090(int, unsigned int);
-/* Supplied declaration required: FUN_002b06c4. */
-/* Supplied declaration required: FUN_002c424c. */
+/* Supplied declaration required: dataTable00FindById. */
+/* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: memClear. */
 
 
@@ -39,8 +39,8 @@ void FUN_003398e4(int param_1)
     temp_v5 = temp_v5 + 1;
     *(unsigned int *)(temp_v0 + 0x1fe8) = 0xffffffff;
   } while (temp_v3 != 0);
-  FUN_002c424c(aiStack_c0,0xa8,0xffffffff);
-  FUN_002c424c(param_1 + 0x43a8,0xa8,0xffffffff);
+  __aeabi_memset4(aiStack_c0,0xa8,0xffffffff);
+  __aeabi_memset4(param_1 + 0x43a8,0xa8,0xffffffff);
   memClear(param_1 + 0x357c,0xe10);
   if (((*(unsigned int *)(param_1 + 0x44a8) & 0x40) == 0) && (*(int *)(param_1 + 0x2f34) - 1U >= 4)) {
     temp_v5 = 0;
@@ -50,7 +50,7 @@ void FUN_003398e4(int param_1)
       temp_v1 = (unsigned int)*(unsigned short *)(temp_v0 + 0x48);
       if (temp_v1 != 0) {
         *(unsigned int *)(param_1 + temp_v5 * 4 + 0x43a8) = temp_v1;
-        FUN_002b06c4();
+        dataTable00FindById();
         aiStack_c0[temp_v5] = (int)*(short *)(temp_v1 + 0x88);
         temp_v5 = temp_v5 + 1;
       }
@@ -77,7 +77,7 @@ void FUN_003398e4(int param_1)
         *(unsigned int *)(param_1 + 0x43a8) = 0x225;
         while( 1 ) {
           temp_v1 = *(unsigned int *)(param_1 + temp_v5 * 4 + 0x43a8) & 0xffff;
-          FUN_002b06c4();
+          dataTable00FindById();
           aiStack_c0[temp_v5] = (int)*(short *)(temp_v1 + 0x88);
           temp_v5 = temp_v5 + 1;
           if (temp_v3 <= temp_v5) goto LAB_00339a3c;

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00157558(int);
-int FUN_0016c410(int);
+int renderCtxResetColorScale(int);
 int FUN_0016c560(int);
 int FUN_0028cb88(int);
 
@@ -14,9 +14,9 @@ extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: FUN_00157558. */
 extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0016c410. */
+/* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: FUN_0016c560. */
-extern int FUN_0018206c(unsigned int, int);
+extern int asdTMTexTableNodeIsLoaded(unsigned int, int);
 extern int FUN_00284e94(void);
 /* Supplied declaration required: FUN_0028cb88. */
 
@@ -37,7 +37,7 @@ unsigned int FUN_00298678(int param_1)
     temp_v2 = 0;
     temp_v3 = temp_v2;
     do {
-      temp_v0 = FUN_0018206c(0xc,temp_v2);
+      temp_v0 = asdTMTexTableNodeIsLoaded(0xc,temp_v2);
       if (temp_v0 != 0) {
         temp_v3 = temp_v3 + 1;
       }
@@ -45,7 +45,7 @@ unsigned int FUN_00298678(int param_1)
     } while (temp_v2 < 6);
     temp_v2 = 0;
     do {
-      temp_v0 = FUN_0018206c(0xd,temp_v2);
+      temp_v0 = asdTMTexTableNodeIsLoaded(0xd,temp_v2);
       if (temp_v0 != 0) {
         temp_v3 = temp_v3 + 1;
       }
@@ -78,7 +78,7 @@ unsigned int FUN_00298678(int param_1)
         *(unsigned char *)(temp_v4 + 0x1270) = 0;
       }
       FUN_0016c560(g_renderCtx);
-      FUN_0016c410(g_renderCtx);
+      renderCtxResetColorScale(g_renderCtx);
       return 0;
     }
   }

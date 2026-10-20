@@ -7,13 +7,13 @@ extern "C" {
 int FUN_0015f858(...);
 int FUN_001676b0(...);
 int FUN_001689e8(...);
-int FUN_0016c410(...);
+int renderCtxResetColorScale(...);
 int FUN_0016c560(...);
 int FUN_003481c4(...);
 int FUN_003482a4(...);
 int FUN_0047fc38(void);
 
-int FUN_0014af84(void);
+int gameDataBlocksGetSaveData(void);
 int FUN_00164168(...);
 int FUN_00180310(...);
 int FUN_00183788(...);
@@ -40,7 +40,7 @@ int FUN_001835b4(...);
 int FUN_00183bb0(void);
 int FUN_0018408c(...);
 int FUN_00184310(void);
-int FUN_00184e64(...);
+int drawSetColorFromRGBA8(...);
 int FUN_00230a50(...);
 int FUN_002a6c3c(...);
 int FUN_00334044(void);
@@ -108,7 +108,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00100388. */
-/* Supplied declaration required: FUN_0014af84. */
+/* Supplied declaration required: gameDataBlocksGetSaveData. */
 extern unsigned int FUN_0014bd84(unsigned int);
 extern unsigned int FUN_0014bf3c(short, unsigned int);
 extern unsigned int FUN_0015687c(void);
@@ -122,7 +122,7 @@ extern unsigned int FUN_0015687c(void);
 /* Supplied declaration required: FUN_001689e8. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0016c410. */
+/* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: FUN_0016c560. */
 extern unsigned int FUN_00180114(short);
 /* Supplied declaration required: FUN_00180310. */
@@ -133,9 +133,9 @@ extern unsigned int FUN_00180114(short);
 /* Supplied declaration required: FUN_0018408c. */
 extern int FUN_0018416c(short);
 /* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: FUN_00184e64. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_00185e84. */
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_001879d0. */
 /* Supplied declaration required: FUN_0019acdc. */
 /* Supplied declaration required: FUN_0019d880. */
@@ -398,12 +398,12 @@ LAB_0022b750:
 LAB_0022b9b8:
           if (*(short *)(temp_v28 + 0x138c) != 0) {
             if ((*(char *)(temp_v28 + 0x137d) != '\0') && (-1 >= *(short *)(temp_v28 + 0x1390))) {
-              FUN_00184e64(temp_v10);
+              drawSetColorFromRGBA8(temp_v10);
               temp_v24 = 1.8357e-43f;
               FUN_001835b4(2,0x12,2000,temp_v27[5],temp_v27[6]);
             }
             else {
-              FUN_00184e64(temp_v10);
+              drawSetColorFromRGBA8(temp_v10);
               FUN_002a6c3c((int)*(short *)(temp_v4 + 0x138c),temp_v27[5] + 2,temp_v27[6],0x83,1);
             }
             FUN_00183bb0();
@@ -499,7 +499,7 @@ LAB_0022b9b8:
       temp_v24 = 3.0268e-43f;
       FUN_001835b4(2,0x12,0x8a,temp_v27[5],temp_v27[6]);
       if (*(char *)(temp_v2 + 0x2018) != '\n') {
-        temp_v4 = FUN_0018719c(0x410);
+        temp_v4 = gameFlagIsSet(0x410);
         if (temp_v4 != 0) {
           temp_v24 = 3.0268e-43f;
           FUN_001835b4(2,0x12,0x8e,temp_v27[5],temp_v27[6]);
@@ -559,7 +559,7 @@ LAB_0022b9b8:
         VectorSignedToFloat(temp_v27[5] + *(short *)(temp_v3 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
         FUN_00162790(3,temp_v6,temp_v29);
         if (*(char *)(temp_v2 + 0x2017) != '\0') {
-          if ((*(char *)(temp_v2 + 0x2017) == '\x04') && (temp_v3 = FUN_0018719c(0x1a3), temp_v3 != 0)) {
+          if ((*(char *)(temp_v2 + 0x2017) == '\x04') && (temp_v3 = gameFlagIsSet(0x1a3), temp_v3 != 0)) {
             FUN_00100388(temp_v29,&LAB_0022c42c);
           }
           else {
@@ -609,7 +609,7 @@ LAB_0022b9b8:
       FUN_00230a50(temp_v27 + 5,temp_v27 + 6,0xf);
       efctSetSpeed();
       puVar22 = (unsigned char *)(unsigned int)*(unsigned short *)(temp_v4 + 0x1392);
-      FUN_00184e64(0xffffffff);
+      drawSetColorFromRGBA8(0xffffffff);
       if (*(char *)(temp_v2 + 0x2013) != '\0') {
         puVar22 = (unsigned char *)(unsigned int)*(unsigned short *)(temp_v28 + 0x19d2);
         puVar7 = (unsigned char *)(unsigned int)*(unsigned short *)(temp_v4 + 0x1392);
@@ -621,10 +621,10 @@ LAB_0022b9b8:
           puVar8 = (unsigned char *)0x72e027ff;
         }
         if (puVar22 != puVar7) {
-          FUN_00184e64(puVar8);
+          drawSetColorFromRGBA8(puVar8);
         }
         else {
-          FUN_00184e64(0xffffffff);
+          drawSetColorFromRGBA8(0xffffffff);
         }
       }
       if (*(unsigned short *)(temp_v4 + 0x1392) >= 100) {
@@ -650,7 +650,7 @@ LAB_0022b9b8:
       temp_v0 = *(char *)(temp_v2 + 0x2017);
       if ((temp_v0 != '\x0e' && temp_v0 != '\a') && temp_v0 != '\x10') {
         puVar22 = *(unsigned char **)(temp_v28 + 0x1394);
-        FUN_00184e64(0xdcdcdcff);
+        drawSetColorFromRGBA8(0xdcdcdcff);
         if (*(char *)(temp_v2 + 0x2013) != '\0') {
           puVar25 = (unsigned int *)(temp_v28 + 0x19d4);
           puVar22 = (unsigned char *)*puVar25;
@@ -658,7 +658,7 @@ LAB_0022b9b8:
                                );
           if ((temp_v7 == 0) &&
              (temp_v3 = compareWithFeedbackColor(*(unsigned int *)(temp_v3 + 0x1394),*puVar25,0), temp_v3 == 0)) {
-            FUN_00184e64(0xdcdcdcff);
+            drawSetColorFromRGBA8(0xdcdcdcff);
           }
         }
         if (*(unsigned short *)(temp_v4 + 0x1392) >= 100) {
@@ -675,7 +675,7 @@ LAB_0022b9b8:
           FUN_00183bb0();
         }
       }
-      FUN_0014af84();
+      gameDataBlocksGetSaveData();
       FUN_00230a50(temp_v27 + 5,temp_v27 + 6,0x10);
       temp_v22 = (unsigned long long)temp_v10 << 0x20;
       efctSetSpeed();
@@ -716,10 +716,10 @@ LAB_0022b9b8:
           puVar7 = (unsigned char *)0xffffffff;
         }
         if ((int)puVar9 < (int)puVar8) {
-          FUN_00184e64(0x72e027ff);
+          drawSetColorFromRGBA8(0x72e027ff);
         }
         else {
-          FUN_00184e64(puVar7);
+          drawSetColorFromRGBA8(puVar7);
         }
         temp_v0 = *(char *)(temp_v2 + 0x2017);
         if ((temp_v0 == '\t' || temp_v0 == '\n') ||
@@ -728,11 +728,11 @@ LAB_0022b9b8:
         }
       }
       else if (temp_v10 != 0) {
-        FUN_00184e64(0x6ef0ffff);
+        drawSetColorFromRGBA8(0x6ef0ffff);
       }
       temp_v7 = valueAtMostFifthOfTotal(puVar22,puVar8);
       if (temp_v7 != 0) {
-        FUN_00184e64(0xdc0f14ff);
+        drawSetColorFromRGBA8(0xdc0f14ff);
       }
       temp_v7 = FUN_001834a4(0x12,0x37);
       if (*(char *)(temp_v2 + 0x20f0) != '\0') {
@@ -800,11 +800,11 @@ LAB_0022b9b8:
         if ((int)puVar9 < (int)puVar8) {
           puVar7 = (unsigned char *)0x72e027ff;
         }
-        FUN_00184e64(puVar7);
+        drawSetColorFromRGBA8(puVar7);
       }
       else if (temp_v10 != 0) {
         puVar7 = (unsigned char *)0x6ef0ffff;
-        FUN_00184e64(puVar7);
+        drawSetColorFromRGBA8(puVar7);
       }
       temp_v7 = FUN_001834a4(0x12,0x32);
       if (*(char *)(temp_v2 + 0x20f0) != '\0') {
@@ -890,7 +890,7 @@ LAB_0022b9b8:
           temp_v7 = FUN_001834a4(0x12,0xd1);
         }
         if ((int)puVar22 < 0) {
-          FUN_00184e64(0xfa282dff);
+          drawSetColorFromRGBA8(0xfa282dff);
           temp_v24 = 3.09687e-43f;
           temp_v25 = &LAB_0022d028;
           temp_v26 = &LAB_0022d024;
@@ -899,7 +899,7 @@ LAB_0022b9b8:
                        0,3);
         }
         else {
-          FUN_00184e64(0x72e027ff);
+          drawSetColorFromRGBA8(0x72e027ff);
           temp_v24 = 3.09687e-43f;
           temp_v25 = &LAB_0022d028;
           temp_v26 = &LAB_0022d030;
@@ -931,10 +931,10 @@ LAB_0022b9b8:
             puVar10 = (unsigned int *)0xffffffff;
           }
           if ((int)puVar7 < (int)puVar8) {
-            FUN_00184e64(0x72e027ff);
+            drawSetColorFromRGBA8(0x72e027ff);
           }
           else {
-            FUN_00184e64(puVar10);
+            drawSetColorFromRGBA8(puVar10);
           }
           temp_v0 = *(char *)(temp_v2 + 0x2017);
           if ((temp_v0 == '\t' || temp_v0 == '\n') ||
@@ -1077,7 +1077,7 @@ LAB_0022b9b8:
             temp_v7 = FUN_001834a4(0x12,0xd7);
           }
           if ((int)puVar22 < 0) {
-            FUN_00184e64(0xfa282dff);
+            drawSetColorFromRGBA8(0xfa282dff);
             temp_v24 = 3.09687e-43f;
             temp_v25 = &LAB_0022d028;
             temp_v26 = &LAB_0022d024;
@@ -1086,7 +1086,7 @@ LAB_0022b9b8:
                          temp_v27[6] + *(short *)(temp_v7 + 10),0,3);
           }
           else {
-            FUN_00184e64(0x72e027ff);
+            drawSetColorFromRGBA8(0x72e027ff);
             temp_v24 = 3.09687e-43f;
             temp_v25 = &LAB_0022d028;
             temp_v26 = &LAB_0022d030;
@@ -1173,7 +1173,7 @@ LAB_0022b9b8:
       temp_v22 = (unsigned long long)temp_v10 << 0x20;
       FUN_00230a50(temp_v27 + 5,temp_v27 + 6,0x17);
       efctSetSpeed();
-      FUN_00184e64(0xffffffff);
+      drawSetColorFromRGBA8(0xffffffff);
       if ((*(char *)(temp_v2 + 0x2011) != '\0') && (*(char *)(temp_v2 + 0x2017) == '\0')) {
         puVar22 = (unsigned char *)(int)*(short *)(temp_v4 + 0x13a8);
         if (*(char *)(temp_v2 + 0x2013) != '\0') {
@@ -1197,7 +1197,7 @@ LAB_0022b9b8:
               temp_v8 = FUN_001834a4(0x12,0xd9);
             }
             if ((int)puVar8 < 0) {
-              FUN_00184e64(0xfa282dff);
+              drawSetColorFromRGBA8(0xfa282dff);
               temp_v25 = &LAB_0022da04;
               temp_v24 = 3.09687e-43f;
               temp_v26 = &LAB_0022da00;
@@ -1206,7 +1206,7 @@ LAB_0022b9b8:
                            temp_v27[6] + *(short *)(temp_v8 + 10),0,3);
             }
             else {
-              FUN_00184e64(0x72e027ff);
+              drawSetColorFromRGBA8(0x72e027ff);
               temp_v25 = &LAB_0022da04;
               temp_v26 = &LAB_0022da10;
               temp_v24 = 3.09687e-43f;
@@ -1225,10 +1225,10 @@ LAB_0022b9b8:
             temp_v8 = -1;
           }
           if (temp_v12 < temp_v5) {
-            FUN_00184e64(0x72e027ff);
+            drawSetColorFromRGBA8(0x72e027ff);
           }
           else {
-            FUN_00184e64(temp_v8);
+            drawSetColorFromRGBA8(temp_v8);
           }
           puVar22 = (unsigned char *)(int)*(short *)(temp_v7 + 0x19e8);
         }
@@ -1239,7 +1239,7 @@ LAB_0022b9b8:
         FUN_00180310(0,temp_v27[5] + *(short *)(temp_v7 + 8),temp_v27[6] + *(short *)(temp_v7 + 10),1,
                      3);
         if (*(char *)(temp_v2 + 0x2018) != '\n') {
-          temp_v7 = FUN_0018719c(0x410);
+          temp_v7 = gameFlagIsSet(0x410);
           if (temp_v7 != 0) {
             puVar22 = (unsigned char *)(int)*(short *)(temp_v4 + 0x13aa);
             if (*(char *)(temp_v2 + 0x2013) != '\0') {
@@ -1264,7 +1264,7 @@ LAB_0022b9b8:
                   temp_v5 = FUN_001834a4(0x12,0xdf);
                 }
                 if ((int)puVar8 < 0) {
-                  FUN_00184e64(0xfa282dff);
+                  drawSetColorFromRGBA8(0xfa282dff);
                   temp_v25 = &LAB_0022da04;
                   temp_v24 = 3.09687e-43f;
                   temp_v26 = &LAB_0022da00;
@@ -1273,7 +1273,7 @@ LAB_0022b9b8:
                                temp_v27[6] + *(short *)(temp_v5 + 10),0,3);
                 }
                 else {
-                  FUN_00184e64(0x72e027ff);
+                  drawSetColorFromRGBA8(0x72e027ff);
                   temp_v25 = &LAB_0022da04;
                   temp_v24 = 3.09687e-43f;
                   temp_v26 = &LAB_0022da10;
@@ -1289,11 +1289,11 @@ LAB_0022b9b8:
                 else {
                   temp_v6 = 0xffffffff;
                 }
-                FUN_00184e64(temp_v6);
+                drawSetColorFromRGBA8(temp_v6);
                 puVar22 = (unsigned char *)(int)*(short *)(temp_v8 + 0xea);
               }
               else {
-                FUN_00184e64(0x72e027ff);
+                drawSetColorFromRGBA8(0x72e027ff);
                 puVar22 = (unsigned char *)(int)*(short *)(temp_v8 + 0xea);
               }
             }
@@ -1329,7 +1329,7 @@ LAB_0022b9b8:
                 temp_v5 = FUN_001834a4(0x12,0xdf);
               }
               if ((int)puVar8 < 0) {
-                FUN_00184e64(0xfa282dff);
+                drawSetColorFromRGBA8(0xfa282dff);
                 temp_v25 = &LAB_0022da04;
                 temp_v24 = 3.09687e-43f;
                 temp_v26 = &LAB_0022da00;
@@ -1338,7 +1338,7 @@ LAB_0022b9b8:
                              temp_v27[6] + *(short *)(temp_v5 + 10),0,3);
               }
               else {
-                FUN_00184e64(0x72e027ff);
+                drawSetColorFromRGBA8(0x72e027ff);
                 temp_v25 = &LAB_0022da04;
                 temp_v24 = 3.09687e-43f;
                 temp_v26 = &LAB_0022da10;
@@ -1348,15 +1348,15 @@ LAB_0022b9b8:
               }
             }
             if (*(short *)(temp_v4 + 0x13aa) < *(short *)(temp_v7 + 0x19ea)) {
-              FUN_00184e64(0x72e027ff);
+              drawSetColorFromRGBA8(0x72e027ff);
             }
             else if (*(short *)(temp_v4 + 0x13aa) > *(short *)(temp_v7 + 0x19ea)) {
               temp_v6 = 0xdc0f14ff;
-              FUN_00184e64(temp_v6);
+              drawSetColorFromRGBA8(temp_v6);
             }
             else {
               temp_v6 = 0xffffffff;
-              FUN_00184e64(temp_v6);
+              drawSetColorFromRGBA8(temp_v6);
             }
             puVar22 = (unsigned char *)(int)*(short *)(temp_v8 + 0xea);
           }
@@ -1589,7 +1589,7 @@ LAB_0022e46c:
     *(unsigned char *)(temp_v2 + 0x12d0) = 0;
   }
   FUN_0016c560(g_renderCtx);
-  FUN_0016c410(g_renderCtx);
+  renderCtxResetColorScale(g_renderCtx);
   return 0;
 LAB_0022dbfc:
   if (((unsigned int)*(unsigned short *)(temp_v4 + 0x13ac) & (1 << (temp_v10 & 0xff))) != 0) {
@@ -1712,7 +1712,7 @@ LAB_0022de2c:
             }
             goto LAB_0022de2c;
           }
-          temp_v7 = FUN_0018719c(0x410);
+          temp_v7 = gameFlagIsSet(0x410);
           if (temp_v7 != 0) {
             temp_v17 = 0x30d;
             temp_v10 = (unsigned int)*(unsigned short *)(temp_v4 + 0x13d6);
@@ -1720,7 +1720,7 @@ LAB_0022de2c:
           }
           temp_v3 = 3;
         }
-        temp_v7 = FUN_0018719c(0x410);
+        temp_v7 = gameFlagIsSet(0x410);
         if (temp_v7 != 0) break;
         temp_v3 = 2;
       }

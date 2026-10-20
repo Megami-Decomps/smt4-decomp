@@ -15,10 +15,10 @@ extern unsigned char LAB_00383550; /* 0x383550 */
 
 extern int dataTable27Sub0GetRecord(int, unsigned int);
 extern int FUN_0023ea64(int);
-extern unsigned int FUN_00296d6c(unsigned int, unsigned int);
+extern unsigned int randBetween(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002b7bca. */
 /* Supplied declaration required: FUN_002be624. */
-extern int FUN_002c09d0(void);
+extern int gameFlagIsSet(void);
 /* Supplied declaration required: FUN_0031e2bc. */
 extern int FUN_00385afc(int);
 /* Supplied declaration required: dataTable27Sub0GetCount. */
@@ -51,8 +51,8 @@ void FUN_003832fc(int param_1)
       do {
         temp_v1 = temp_v0 + temp_v5 * 0x88;
         if ((((unsigned int)*(unsigned short *)(temp_v1 + 0x60) == (int)*(char *)(param_1 + 0x10)) &&
-            ((*(short *)(temp_v1 + 0x66) == 0 || (temp_v2 = FUN_002c09d0(), temp_v2 != 0)))) &&
-           ((*(short *)(temp_v1 + 0x68) == 0 || (temp_v2 = FUN_002c09d0(), temp_v2 == 0)))) {
+            ((*(short *)(temp_v1 + 0x66) == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 != 0)))) &&
+           ((*(short *)(temp_v1 + 0x68) == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 == 0)))) {
           temp_v4 = *(int *)(param_1 + 0xd8c);
           temp_v2 = 0;
           if (temp_v2 < temp_v4) {
@@ -94,7 +94,7 @@ LAB_00383410:
             temp_v0 = temp_v0 + 1;
           } while (temp_v0 < *(int *)(param_1 + 0xd8c));
         }
-        temp_v6 = FUN_00296d6c(1,2);
+        temp_v6 = randBetween(1,2);
 LAB_003834c0:
         FUN_002be624(temp_v7,&LAB_00383538,temp_v3 + 1,temp_v6);
         temp_v0 = param_1 + temp_v3 * 4;

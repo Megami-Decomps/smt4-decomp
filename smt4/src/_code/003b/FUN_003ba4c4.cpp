@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00249b18(int, int);
-int FUN_002769b4(...);
+int mapDepartSetTarget(...);
 int FUN_002a03d8(int, int);
 int FUN_002bd808(int, int);
 int asdSequenceRequest(unsigned int, int);
@@ -15,7 +15,7 @@ int FUN_003b8b0c(int);
 extern int DAT_0049fd14; /* 0x49fd14 */
 
 /* Supplied declaration required: FUN_00249b18. */
-/* Supplied declaration required: FUN_002769b4. */
+/* Supplied declaration required: mapDepartSetTarget. */
 extern int FUN_00282b28(void);
 /* Supplied declaration required: FUN_002a03d8. */
 /* Supplied declaration required: FUN_002bd808. */
@@ -62,12 +62,12 @@ void FUN_003ba4c4(int param_1)
           temp_v1 = (int)*(short *)(param_1 + 0x42);
           if (temp_v1 >= 100) {
             if (temp_v1 != 100) {
-              FUN_002769b4(temp_v1,1,0xffffffff);
+              mapDepartSetTarget(temp_v1,1,0xffffffff);
             }
             *(unsigned char *)(param_1 + 0x48) = 1;
           }
           else {
-            FUN_002769b4(temp_v1,(int)*(short *)(param_1 + 0x44),(int)*(short *)(param_1 + 0x46));
+            mapDepartSetTarget(temp_v1,(int)*(short *)(param_1 + 0x44),(int)*(short *)(param_1 + 0x46));
             *(unsigned char *)(param_1 + 0x49) = 1;
           }
         }

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0018719c(...);
+int gameFlagIsSet(...);
 int FUN_001ad9b4(void);
 
 typedef struct fn_003de75c_arg0 fn_003de75c_arg0;
@@ -18,7 +18,7 @@ struct fn_003de75c_arg0 {
 
 extern int g_gameState; /* 0x5f15fc */
 
-/* Supplied declaration required: FUN_0018719c. */
+/* Supplied declaration required: gameFlagIsSet. */
 extern int FUN_0019f1a4(fn_003de75c_arg0 *, unsigned int);
 /* Supplied declaration required: FUN_001ad9b4. */
 extern int FUN_003df390(void);
@@ -47,9 +47,9 @@ unsigned int FUN_003de75c(fn_003de75c_arg0 *param_1)
         (((((fn_003de75c_arg0 *)0x15d < param_1 &&
            (FUN_001ad9b4(), param_1 != (fn_003de75c_arg0 *)0x0)) && (param_1->field_0x6 == 9)) &&
          (g_gameState == 0x18)))) ||
-       ((((pfVar3->field_0x130 != 0 && (temp_v1 = FUN_0018719c(), temp_v1 != 0)) &&
-         ((pfVar3->field_0x132 == 0 || (temp_v1 = FUN_0018719c(), temp_v1 == 0)))) ||
-        (temp_v1 = FUN_0018719c(0x560), temp_v1 != 0)))) {
+       ((((pfVar3->field_0x130 != 0 && (temp_v1 = gameFlagIsSet(), temp_v1 != 0)) &&
+         ((pfVar3->field_0x132 == 0 || (temp_v1 = gameFlagIsSet(), temp_v1 == 0)))) ||
+        (temp_v1 = gameFlagIsSet(0x560), temp_v1 != 0)))) {
       temp_v2 = 0;
     }
     else {

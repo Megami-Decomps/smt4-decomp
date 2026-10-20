@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002bd430(void);
+int sndVoiceFree(void);
 int asdMemFree(...);
 int coproc_moveto_Data_Memory_Barrier(int);
 
@@ -15,8 +15,8 @@ extern unsigned int DAT_004e3164; /* 0x4e3164 */
 extern signed char DAT_004e3169; /* 0x4e3169 */
 
 /* Unsupported intrinsic, declaration required: coproc_moveto_Data_Memory_Barrier (CALLOTHER). */
-/* Supplied declaration required: FUN_002bd430. */
-extern int FUN_002bd440(void);
+/* Supplied declaration required: sndVoiceFree. */
+extern int nw_snd_internal_driver_SoundThread_GetInstance(void);
 /* Supplied declaration required: asdMemFree. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
@@ -32,7 +32,7 @@ void FUN_0010bf78(void)
   unsigned int temp_v3;
   
   if (DAT_004e3169 != '\0') {
-    temp_v0 = FUN_002bd440();
+    temp_v0 = nw_snd_internal_driver_SoundThread_GetInstance();
     *(unsigned int *)(temp_v0 + 0x1e8) = 0;
     coproc_moveto_Data_Memory_Barrier(0);
     *(unsigned int *)(temp_v0 + 0x1ec) = 0;
@@ -90,7 +90,7 @@ LAB_0010c068:
               asdMemFree();
             }
             if (*(int *)(temp_v0 + 0x38) != 0) {
-              FUN_002bd430();
+              sndVoiceFree();
             }
             asdMemFree(temp_v0);
             nn_os_CriticalSection_Leave((unsigned int)&DAT_004e315c);

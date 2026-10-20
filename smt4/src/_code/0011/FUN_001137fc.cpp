@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001241a8(...);
-int FUN_002b90f8(int, unsigned char [108]);
+int cameraSetViewMatrix(int, unsigned char [108]);
 int FUN_002b99b8(void);
 int FUN_002ba1e0(...);
 int mtx44Copy(unsigned char [108], unsigned int *);
@@ -23,7 +23,7 @@ typedef struct {
     unsigned int spA0; /* 0xa0: local_a0 */
 } param_1_stack;
 
-extern int DAT_0043e278; /* 0x43e278 */
+extern int g_frameTex; /* 0x43e278 */
 extern int DAT_0043e27c; /* 0x43e27c */
 extern int DAT_0043e280; /* 0x43e280 */
 extern unsigned int DAT_0043e284; /* 0x43e284 */
@@ -51,7 +51,7 @@ extern unsigned int DAT_004efdd8; /* 0x4efdd8 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_001241a8. */
-/* Supplied declaration required: FUN_002b90f8. */
+/* Supplied declaration required: cameraSetViewMatrix. */
 /* Supplied declaration required: FUN_002b99b8. */
 /* Supplied declaration required: FUN_002ba1e0. */
 /* Supplied declaration required: mtx44Copy. */
@@ -80,13 +80,13 @@ void FUN_001137fc(int param_1)
   unsigned int temp_v7;
   unsigned char temp_v8 [108];
   
-  temp_v3 = DAT_0043e278;
-  if (DAT_0043e278 == 0) {
+  temp_v3 = g_frameTex;
+  if (g_frameTex == 0) {
     return;
   }
   temp_v6 = 0.0f;
-  if (0 < *(int *)(DAT_0043e278 + 0x14)) {
-    temp_v4 = *(int *)(DAT_0043e278 + 0x14) * -0x12 + 0xff;
+  if (0 < *(int *)(g_frameTex + 0x14)) {
+    temp_v4 = *(int *)(g_frameTex + 0x14) * -0x12 + 0xff;
     if ((int)temp_v4 < 0) {
       temp_v4 = 0;
     }
@@ -118,7 +118,7 @@ void FUN_001137fc(int param_1)
     }
   }
   else {
-    temp_v0 = *(int *)(DAT_0043e278 + 0x10);
+    temp_v0 = *(int *)(g_frameTex + 0x10);
     if (temp_v0 < 10) {
       DAT_0043e27c = 0;
     }
@@ -203,7 +203,7 @@ void FUN_001137fc(int param_1)
     *(unsigned char *)(temp_v3 + 0x12c4) = 0;
   }
   FUN_002c39a4(g_titleScene);
-  temp_v3 = DAT_0043e278;
+  temp_v3 = g_frameTex;
   temp_v7 = 0x3f800000;
   FUN_002b99b8();
   if ((param_1 == 0) && (*(char *)(temp_v3 + 0xf64) != '\0')) {
@@ -251,7 +251,7 @@ void FUN_001137fc(int param_1)
     DAT_004efdd8 = temp_v7;
   }
   mtx44Copy(temp_v8,&DAT_004efd9c);
-  FUN_002b90f8(g_titleScene,temp_v8);
+  cameraSetViewMatrix(g_titleScene,temp_v8);
   temp_v3 = FUN_002c1c0c(5,3);
   *(unsigned int *)(temp_v3 + 0x38) = 2;
   FUN_002c1b64(g_titleScene,temp_v3);

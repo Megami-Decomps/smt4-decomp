@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_001d2384(void);
+int voiceClearCallback(void);
 
 typedef int romwright_code(...);
-/* Supplied declaration required: FUN_001d2384. */
+/* Supplied declaration required: voiceClearCallback. */
 
 
 void FUN_00461f64(int param_1,int param_2,int param_3)
@@ -22,7 +22,7 @@ void FUN_00461f64(int param_1,int param_2,int param_3)
   unsigned char temp_v4;
   
   if (param_2 == 0 || param_2 == 2) {
-    FUN_001d2384();
+    voiceClearCallback();
     param_2 = temp_v1;
   }
   piVar1 = *(int **)(param_3 + 300);

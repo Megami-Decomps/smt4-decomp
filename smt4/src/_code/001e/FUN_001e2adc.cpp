@@ -6,7 +6,7 @@ extern "C" {
 
 int asdMdlManagerDestroy(void);
 
-extern int DAT_00447a48; /* 0x447a48 */
+extern int g_mapGimic; /* 0x447a48 */
 
 /* Supplied declaration required: asdMdlManagerDestroy. */
 
@@ -22,11 +22,11 @@ void FUN_001e2adc(void)
   
   temp_v3 = 0x17;
   do {
-    if (*(int *)(DAT_00447a48 + temp_v3 * 0x28 + 0x34) != 0) {
+    if (*(int *)(g_mapGimic + temp_v3 * 0x28 + 0x34) != 0) {
       asdMdlManagerDestroy();
-      *(unsigned int *)(DAT_00447a48 + temp_v3 * 0x28 + 0x34) = 0;
+      *(unsigned int *)(g_mapGimic + temp_v3 * 0x28 + 0x34) = 0;
     }
-    temp_v0 = DAT_00447a48;
+    temp_v0 = g_mapGimic;
     temp_v3 = temp_v3 - 1;
   } while (-1 < temp_v3);
   temp_v1 = 0;

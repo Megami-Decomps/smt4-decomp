@@ -5,7 +5,7 @@
 extern "C" {
 
 int taskCreateDraw(...);
-int FUN_00184758(...);
+int uiSpriteSetKeyframe(...);
 int FUN_0020ad6c(...);
 int FUN_002c52d8(...);
 int FUN_002ed428(...);
@@ -24,10 +24,10 @@ typedef struct {
 extern int FUN_001631b8(...); /* 0x1631b8 */
 extern unsigned char LAB_0029865c; /* 0x29865c */
 extern unsigned char LAB_002b548c; /* 0x2b548c */
-extern int DAT_0057a9c8; /* 0x57a9c8 */
+extern int g_btlUiBlock; /* 0x57a9c8 */
 
 /* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: FUN_00184758. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: FUN_0020ad6c. */
 /* Supplied declaration required: FUN_002c52d8. */
 /* Supplied declaration required: FUN_002ed428. */
@@ -69,12 +69,12 @@ void FUN_002b53e0(unsigned int *param_1)
     } while (temp_v0 < (int)param_1[0x10b]);
   }
   param_1[0x10b] = 0;
-  FUN_004ab854(DAT_0057a9c8);
-  temp_v0 = DAT_0057a9c8;
-  *(unsigned int *)(DAT_0057a9c8 + 0x74a0) = 0x14;
+  FUN_004ab854(g_btlUiBlock);
+  temp_v0 = g_btlUiBlock;
+  *(unsigned int *)(g_btlUiBlock + 0x74a0) = 0x14;
   if (*(int *)(temp_v0 + 0x6140) != 0) {
     FUN_0020ad6c(temp_v0 + 0x28c4,0x27,1);
-    FUN_00184758(temp_v0 + 0x3b7c,0xf,0);
+    uiSpriteSetKeyframe(temp_v0 + 0x3b7c,0xf,0);
     if (*(int *)(temp_v0 + 0x3bd4) != 0) {
       *(unsigned short *)(temp_v0 + 0x3bd8) = 0x30;
       *(unsigned short *)(temp_v0 + 0x3bda) = 0;

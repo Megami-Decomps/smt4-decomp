@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00148d68(int, int, int);
 
 /* Supplied declaration required: FUN_00148d68. */
-extern int FUN_0014af84(void);
+extern int gameDataBlocksGetSaveData(void);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
@@ -28,7 +28,7 @@ void FUN_004bb880(void)
   temp_v0 = dataTableGet(2,3);
   temp_v1 = dataTableGetEntries();
   temp_v2 = dataTableGetCount(temp_v0);
-  temp_v3 = FUN_0014af84();
+  temp_v3 = gameDataBlocksGetSaveData();
   temp_v5 = 0;
   if (temp_v5 < temp_v2) {
     do {

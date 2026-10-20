@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002e6dd0(unsigned int *, int);
+int rt_aeabi_memclr(unsigned int *, int);
 int FUN_0041a270(unsigned int *);
 
 extern unsigned char DAT_00557d60; /* 0x557d60 */
 
-/* Supplied declaration required: FUN_002e6dd0. */
+/* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: FUN_0041a270. */
 
 
@@ -26,8 +26,8 @@ unsigned int * FUN_0041a3ac(unsigned int *param_1,int param_2,unsigned int param
   param_1[6] = 0;
   param_1[7] = 0;
   param_1[8] = 0;
-  FUN_002e6dd0(param_1 + 5,8);
-  FUN_002e6dd0(param_1 + 7,8);
+  rt_aeabi_memclr(param_1 + 5,8);
+  rt_aeabi_memclr(param_1 + 7,8);
   FUN_0041a270(param_1);
   return param_1;
 }

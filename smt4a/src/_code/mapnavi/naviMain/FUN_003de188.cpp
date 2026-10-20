@@ -7,8 +7,8 @@ extern "C" {
 int asdProcessCreateSimple(...);
 int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
-int FUN_0031a400(...);
-int FUN_00342010(...);
+int campCommonBgAcquire(...);
+int campButtonHelpAcquire(...);
 int FUN_003b61ec(...);
 int FUN_003c5848(...);
 int FUN_00485e74(...);
@@ -33,16 +33,16 @@ extern int FUN_002ba754(...); /* 0x2ba754 */
 extern unsigned char LAB_003de3f4; /* 0x3de3f4 */
 extern unsigned char LAB_003de404; /* 0x3de404 */
 extern unsigned char LAB_003de414; /* 0x3de414 */
-extern unsigned int *DAT_00587f28; /* 0x587f28 */
+extern unsigned int *g_naviMain; /* 0x587f28 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: taskCreateDraw. */
-extern int FUN_00162e8c(void);
+extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: asdMemoryAllocTracked. */
-extern int FUN_0018719c(unsigned int);
-/* Supplied declaration required: FUN_0031a400. */
-/* Supplied declaration required: FUN_00342010. */
+extern int gameFlagIsSet(unsigned int);
+/* Supplied declaration required: campCommonBgAcquire. */
+/* Supplied declaration required: campButtonHelpAcquire. */
 /* Supplied declaration required: FUN_003b61ec. */
 /* Supplied declaration required: FUN_003c5848. */
 /* Supplied declaration required: FUN_00485e74. */
@@ -65,8 +65,8 @@ void FUN_003de188(unsigned int param_1,unsigned int param_2)
   
   puVar1 = (unsigned int *)0x100;
   asdMemoryAllocTracked(0x100,0x100,0,0x206cc,1);
-  DAT_00587f28 = puVar1;
-  temp_v0 = FUN_00162e8c();
+  g_naviMain = puVar1;
+  temp_v0 = gameFlagsGetBlock();
   *(unsigned char *)((int)puVar1 + 10) = 0;
   *(unsigned char *)((int)puVar1 + 9) = 0;
   puVar1[3] = 0;
@@ -80,19 +80,19 @@ void FUN_003de188(unsigned int param_1,unsigned int param_2)
   puVar1[0x19] = 0;
   *(unsigned char *)(puVar1 + 2) = 0;
   FUN_00485e74(puVar1 + 0x1a);
-  FUN_0031a400();
-  temp_v1 = FUN_0018719c(0x49a);
+  campCommonBgAcquire();
+  temp_v1 = gameFlagIsSet(0x49a);
   if (temp_v1 != 0) {
     FUN_003c5848();
   }
   else {
     FUN_003b61ec();
   }
-  temp_v1 = FUN_0018719c(0xc);
-  if ((temp_v1 != 0) && (temp_v1 = FUN_0018719c(0x10), temp_v1 == 0)) {
+  temp_v1 = gameFlagIsSet(0xc);
+  if ((temp_v1 != 0) && (temp_v1 = gameFlagIsSet(0x10), temp_v1 == 0)) {
     FUN_003b61ec();
   }
-  FUN_00342010();
+  campButtonHelpAcquire();
   FUN_004930e4(param_2);
   puVar4 = &LAB_003de3f4;
   asdProcessCreateSimple(&LAB_003de3f4,4,0,0,FUN_00235ce0,&LAB_00235cc4,puVar1);
@@ -104,8 +104,8 @@ void FUN_003de188(unsigned int param_1,unsigned int param_2)
   taskCreateDraw(&LAB_003de414,0xea,0,0,&LAB_002ba728,0,0,*puVar1);
   puVar1[0x81ae] = (unsigned int)puVar4;
   NaviMain_ResetFlags(puVar1 + 0x81af,1);
-  if (DAT_00587f28 != (unsigned int *)0x0) {
-    FUN_004cfac8(DAT_00587f28 + 0x81af,0,0);
+  if (g_naviMain != (unsigned int *)0x0) {
+    FUN_004cfac8(g_naviMain + 0x81af,0,0);
   }
   if (*(int *)(temp_v0 + 0x1688) == 1) {
     VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x1698),(unsigned char)(in_fpscr >> 0x16) & 3);

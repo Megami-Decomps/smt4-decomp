@@ -10,11 +10,11 @@ typedef struct Target {
 extern struct {
     u8 unk00[4];
     Target *unk04;
-} DAT_0044ea58;
+} g_asdCamera;
 
 u32 FUN_00145e10(void)
 {
-    return DAT_0044ea58.unk04->unk84;
+    return g_asdCamera.unk04->unk84;
 }
 
 } /* extern "C" */

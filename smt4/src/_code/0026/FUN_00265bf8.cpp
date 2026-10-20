@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0025beb8(unsigned int, int);
 int FUN_0028c618(unsigned int, int);
-int FUN_0028c640(unsigned int, int, int);
+int nodeSetTranslation(unsigned int, int, int);
 int FUN_0029bb14(unsigned int);
 int FUN_002a5710(...);
 int FUN_002d582c(unsigned int);
@@ -21,10 +21,10 @@ extern unsigned char g_gameState; /* 0x49f91c */
 
 /* Supplied declaration required: FUN_0025beb8. */
 /* Supplied declaration required: FUN_0028c618. */
-/* Supplied declaration required: FUN_0028c640. */
+/* Supplied declaration required: nodeSetTranslation. */
 /* Supplied declaration required: FUN_0029bb14. */
 /* Supplied declaration required: FUN_002a5710. */
-extern int FUN_002c09d0(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_002d582c. */
 
 
@@ -107,18 +107,18 @@ void FUN_00265bf8(int param_1)
       FUN_002d582c(temp_v0);
     }
   }
-  FUN_0028c640(*(unsigned int *)(*(int *)(param_1 + 0xbc) + 8),0,g_lmapScene + 0x1c);
+  nodeSetTranslation(*(unsigned int *)(*(int *)(param_1 + 0xbc) + 8),0,g_lmapScene + 0x1c);
   FUN_0025beb8(*(unsigned int *)(*(int *)(param_1 + 0xbc) + 8),0);
   FUN_0029bb14(*(unsigned int *)(*(int *)(param_1 + 0xbc) + 8));
-  temp_v1 = FUN_002c09d0(0x16b);
+  temp_v1 = gameFlagIsSet(0x16b);
   temp_v2 = (unsigned int)(temp_v1 != 0);
-  if ((temp_v1 == 0) && (temp_v1 = FUN_002c09d0(0x176), temp_v1 != 0)) {
+  if ((temp_v1 == 0) && (temp_v1 = gameFlagIsSet(0x176), temp_v1 != 0)) {
     temp_v2 = 2;
   }
   if (*(unsigned int *)(*(int *)(*(int *)(param_1 + 0xbc) + 8) + 0x38) != temp_v2) {
     FUN_002a5710(*(unsigned int *)(*(int *)(param_1 + 0xbc) + 8),temp_v2);
   }
-  FUN_0028c640(*(unsigned int *)(*(int *)(param_1 + 0xd8) + 8),0,g_lmapScene + 0x1c);
+  nodeSetTranslation(*(unsigned int *)(*(int *)(param_1 + 0xd8) + 8),0,g_lmapScene + 0x1c);
   FUN_0028c618(*(unsigned int *)(*(int *)(param_1 + 0xd8) + 8),0);
   FUN_0025beb8(*(unsigned int *)(*(int *)(param_1 + 0xd8) + 8),0);
   if (*(char *)(param_1 + 0xe0) != '\0') {

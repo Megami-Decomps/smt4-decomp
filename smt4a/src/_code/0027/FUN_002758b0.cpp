@@ -9,7 +9,7 @@ typedef struct {
     u8 slider[1];       /* 0x206bc */
 } Hud;
 
-extern Hud *DAT_00587f28;
+extern Hud *g_naviMain;
 
 int stateSetterSetState1(u8 *panel);
 int FUN_0048a378(u8 *panel);
@@ -18,7 +18,7 @@ int FUN_004cf978(u8 *slider, int value);
 /* Updates the HUD slider with the low byte of `value` (sign-extended) and refreshes the panel, running the extra panel update when `extra` is set. */
 void FUN_002758b0(int extra, int value)
 {
-    Hud *hud = DAT_00587f28;
+    Hud *hud = g_naviMain;
 
     if (hud != NULL) {
         FUN_004cf978(hud->slider, (s8)value);

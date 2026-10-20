@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_00229f30(unsigned short);
+extern int questRecordFindById(unsigned short);
 extern int gameGetOptions(void);
 extern unsigned int FUN_002b6b38(void);
 
@@ -20,7 +20,7 @@ unsigned int FUN_0023dcbc(void)
   temp_v0 = FUN_002b6b38();
   if ((temp_v0 >= 2) && (temp_v0 == 2)) {
     temp_v1 = gameGetOptions();
-    temp_v1 = FUN_00229f30(*(unsigned short *)(temp_v1 + 0x46));
+    temp_v1 = questRecordFindById(*(unsigned short *)(temp_v1 + 0x46));
     if ((*(unsigned short *)(temp_v1 + 4) & 1) != 0) {
       temp_v2 = 1;
     }

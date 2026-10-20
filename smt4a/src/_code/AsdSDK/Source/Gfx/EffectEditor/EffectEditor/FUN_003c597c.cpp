@@ -7,8 +7,8 @@ extern "C" {
 int FUN_00243c24(void);
 int FUN_002b30e4(void);
 int FUN_002b41e4(unsigned int, unsigned int, unsigned int, int);
-int FUN_002e342c(unsigned int *, unsigned int);
-int FUN_002e71ac(unsigned int *, int);
+int libc_strcpy(unsigned int *, unsigned int);
+int rt_memcpy_w144(unsigned int *, int);
 int FUN_00350a8c(void);
 int FUN_00351590(unsigned int, unsigned int);
 int FUN_00399768(int, int);
@@ -39,8 +39,8 @@ extern unsigned char DAT_00634d20; /* 0x634d20 */
 /* Supplied declaration required: FUN_002b30e4. */
 extern unsigned int FUN_002b41c4(unsigned int);
 /* Supplied declaration required: FUN_002b41e4. */
-/* Supplied declaration required: FUN_002e342c. */
-/* Supplied declaration required: FUN_002e71ac. */
+/* Supplied declaration required: libc_strcpy. */
+/* Supplied declaration required: rt_memcpy_w144. */
 extern int FUN_00300778(unsigned int, int);
 extern unsigned int nodeChainCount(unsigned int);
 /* Supplied declaration required: FUN_00350a8c. */
@@ -68,7 +68,7 @@ unsigned int FUN_003c597c(void)
   temp_v0 = FUN_00300778(DAT_0059dbf4,DAT_0059dbec + DAT_0059e9b4);
   puVar2 = (unsigned int *)FUN_00376628(DAT_0059dbf4,*(unsigned int *)(temp_v0 + 0x90));
   DAT_0059dc04 = puVar2;
-  FUN_002e71ac(puVar2,temp_v0);
+  rt_memcpy_w144(puVar2,temp_v0);
   if ((*(unsigned int *)(temp_v0 + 0x98) & 2) != 0) {
     FUN_00351590(DAT_0059dbf4,*(unsigned int *)(temp_v0 + 0x94));
   }
@@ -78,7 +78,7 @@ unsigned int FUN_003c597c(void)
   DAT_0059dbfc = puVar2[0x24];
   puVar3 = puVar2;
   FUN_002b30e4();
-  FUN_002e342c(puVar2 + 0x27,*puVar3);
+  libc_strcpy(puVar2 + 0x27,*puVar3);
   if (*(short *)(puVar3 + 1) != 0x1b) {
     temp_v1 = FUN_002b41c4(DAT_0059dbfc);
     rt_memcpy(puVar3[3],temp_v1,puVar3[4]);

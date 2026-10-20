@@ -19,7 +19,7 @@ typedef struct {
 /* Supplied declaration required: FUN_002fd210. */
 extern int FUN_0030161c(int);
 extern int wordRefsDiffer_00301744(unsigned int **, unsigned int *);
-extern int FUN_003017f0(int);
+extern int mapIsEmpty5(int);
 
 
 void FUN_00115baa(int param_1,unsigned int param_2,unsigned int *param_3,unsigned int param_4)
@@ -34,7 +34,7 @@ void FUN_00115baa(int param_1,unsigned int param_2,unsigned int *param_3,unsigne
   temp_v2 = param_4;
   if (*(short *)(param_1 + 0x14) == 0x10) {
     temp_v0 = FUN_0030161c(param_1);
-    if ((temp_v0 == 0x40) || (temp_v0 = FUN_003017f0(param_1 + 0x20), temp_v0 != 0)) {
+    if ((temp_v0 == 0x40) || (temp_v0 = mapIsEmpty5(param_1 + 0x20), temp_v0 != 0)) {
       FUN_002f9f28(param_1,0x40,0);
     }
     else {
@@ -52,7 +52,7 @@ void FUN_00115baa(int param_1,unsigned int param_2,unsigned int *param_3,unsigne
   }
   if (*(short *)(param_1 + 0x14) == 2) {
     temp_v0 = FUN_0030161c(param_1);
-    if ((temp_v0 != 4) && (temp_v0 = FUN_003017f0(param_1 + 0x20), temp_v0 == 0)) {
+    if ((temp_v0 != 4) && (temp_v0 = mapIsEmpty5(param_1 + 0x20), temp_v0 == 0)) {
       temp_v1 = *(unsigned int **)(param_1 + 0x30);
       while( 1 ) {
         temp_v1 = (unsigned int *)*temp_v1;

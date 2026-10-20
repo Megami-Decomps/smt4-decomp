@@ -15,7 +15,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00296ee0. */
 /* Supplied declaration required: FUN_002b8ee0. */
-extern unsigned int FUN_002beda4(int);
+extern unsigned int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bf818. */
 
 
@@ -27,7 +27,7 @@ void FUN_00398964(int param_1)
   
   FUN_002b8ee0(param_1 + 0x708,0);
   FUN_002bf818();
-  temp_v0 = FUN_002beda4(param_1 + 0x708);
+  temp_v0 = vec2GetXInt(param_1 + 0x708);
   *(unsigned int *)(param_1 + 0xa4) = temp_v0;
   *(unsigned int *)(param_1 + 0xac) = temp_v0;
   if ((*(char *)(param_1 + 0x792) != '\0') && (*(char *)(param_1 + 0x81e) != '\0')) {

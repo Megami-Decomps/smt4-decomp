@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp24; /* 0x24: local_24 */
 } param_5_stack;
 
-extern int FUN_002f44ec(int, unsigned int *, int);
+extern int lessU32(int, unsigned int *, int);
 extern char *FUN_002fed8c(int);
 /* Supplied declaration required: rbTreeRotateRight_00309194. */
 /* Supplied declaration required: rbTreeRotateLeft_003091c6. */
@@ -36,7 +36,7 @@ void FUN_0030906a(unsigned int *param_1,int param_2,int param_3,int param_4,unsi
   }
   *(int *)(param_2 + 0x14) = *(int *)(param_2 + 0x14) + 1;
   if (((*(int *)(param_2 + 0x10) == param_4) || (param_3 != 0)) ||
-     (temp_v0 = FUN_002f44ec(param_2 + 0x19,param_5,param_4 + 0x10), temp_v0 != 0)) {
+     (temp_v0 = lessU32(param_2 + 0x19,param_5,param_4 + 0x10), temp_v0 != 0)) {
     *(char **)(param_4 + 8) = pcVar1;
     temp_v0 = *(int *)(param_2 + 0x10);
     if (temp_v0 == param_4) {

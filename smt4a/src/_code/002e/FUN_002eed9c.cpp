@@ -10,7 +10,7 @@ extern int DAT_005806a4; /* 0x5806a4 */
 extern int g_lmapScene; /* 0x581288 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_00162e8c(void);
+extern int gameFlagsGetBlock(void);
 extern int FUN_00376f94(void);
 
 
@@ -28,7 +28,7 @@ void FUN_002eed9c(void)
   unsigned int temp_v5;
   unsigned int temp_v6;
   
-  temp_v1 = FUN_00162e8c();
+  temp_v1 = gameFlagsGetBlock();
   temp_v5 = 0;
   temp_v6 = temp_v5;
   temp_v2 = FUN_00376f94();

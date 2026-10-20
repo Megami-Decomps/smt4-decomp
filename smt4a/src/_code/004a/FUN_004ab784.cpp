@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned char DAT_0057a9b8; /* 0x57a9b8 */
+extern unsigned char g_btlUi; /* 0x57a9b8 */
 
 
 unsigned int FUN_004ab784(void)
@@ -13,10 +13,10 @@ unsigned int FUN_004ab784(void)
   int temp_v0;
   int temp_v1;
   
-  if ((*(int *)((unsigned char *)&DAT_0057a9b8 + 0x10)) != 0) {
+  if ((*(int *)((unsigned char *)&g_btlUi + 0x10)) != 0) {
     temp_v0 = 0;
     do {
-      temp_v1 = (*(int *)((unsigned char *)&DAT_0057a9b8 + 0x10)) + temp_v0 * 0x14c;
+      temp_v1 = (*(int *)((unsigned char *)&g_btlUi + 0x10)) + temp_v0 * 0x14c;
       if ((*(unsigned short *)(temp_v1 + 0x11a2c) - 1 < 4) || (*(unsigned short *)(temp_v1 + 0x11b78) - 1 < 4)) {
         return 0;
       }

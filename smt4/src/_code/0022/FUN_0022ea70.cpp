@@ -11,7 +11,7 @@ int FUN_00230d84(int, int, int, int, int);
 int FUN_00230ecc(...);
 int FUN_00231258(...);
 int FUN_00231bcc(...);
-int FUN_002b63ac(...);
+int gameGetPlayerData(...);
 int FUN_002be56c(...);
 int FUN_002be624(...);
 int FUN_002bf4f0(...);
@@ -50,11 +50,11 @@ extern unsigned int FUN_00230e04(unsigned short *);
 /* Supplied declaration required: FUN_00231258. */
 /* Supplied declaration required: FUN_00231bcc. */
 extern unsigned int FUN_0028fb3c(unsigned int);
-/* Supplied declaration required: FUN_002b63ac. */
+/* Supplied declaration required: gameGetPlayerData. */
 /* Supplied declaration required: FUN_002be56c. */
 /* Supplied declaration required: FUN_002be624. */
-extern int FUN_002bed98(int);
-extern int FUN_002beda4(void);
+extern int vec2GetYInt(int);
+extern int vec2GetXInt(void);
 /* Supplied declaration required: FUN_002bf4f0. */
 /* Supplied declaration required: FUN_002bf538. */
 
@@ -125,9 +125,9 @@ void FUN_0022ea70(int param_1,int param_2,int param_3,unsigned short *param_4)
                  (int)**(short **)(temp_v5 + 0xc),(int)(*(short **)(temp_v5 + 0xc))[1]);
     temp_v5 = FUN_002bf4f0(param_1 + 0x380,0x4d);
     temp_v6 = param_1 + 0x56c;
-    temp_v7 = FUN_002beda4();
+    temp_v7 = vec2GetXInt();
     temp_v5 = (temp_v7 + temp_v13) - (*(unsigned short *)(temp_v5 + 4) & 0xffff7fff);
-    temp_v6 = FUN_002bed98(temp_v6);
+    temp_v6 = vec2GetYInt(temp_v6);
     FUN_00231bcc(param_1 + 0x380,0x4d,temp_v5,temp_v6 + temp_v4,temp_v12,1);
     temp_v5 = g_titleScene;
     piVar16 = (int *)(g_titleScene + 0x130c);
@@ -215,31 +215,31 @@ void FUN_0022ea70(int param_1,int param_2,int param_3,unsigned short *param_4)
   temp_v3 = 0;
   switch(*(unsigned int *)(param_1 + 0x860)) {
   case 0:
-    puVar12 = (unsigned short *)FUN_002b63ac(0);
+    puVar12 = (unsigned short *)gameGetPlayerData(0);
     temp_v3 = *puVar12;
     break;
   case 1:
-    temp_v6 = FUN_002b63ac(0);
+    temp_v6 = gameGetPlayerData(0);
     temp_v3 = *(unsigned short *)(temp_v6 + 2);
     break;
   case 2:
-    temp_v6 = FUN_002b63ac(0);
+    temp_v6 = gameGetPlayerData(0);
     temp_v3 = *(unsigned short *)(temp_v6 + 4);
     break;
   case 3:
-    temp_v6 = FUN_002b63ac(0);
+    temp_v6 = gameGetPlayerData(0);
     temp_v3 = *(unsigned short *)(temp_v6 + 6);
     break;
   case 4:
-    temp_v6 = FUN_002b63ac(0);
+    temp_v6 = gameGetPlayerData(0);
     temp_v3 = *(unsigned short *)(temp_v6 + 8);
     break;
   case 5:
-    temp_v6 = FUN_002b63ac(0);
+    temp_v6 = gameGetPlayerData(0);
     temp_v3 = *(unsigned short *)(temp_v6 + 10);
     break;
   case 6:
-    temp_v6 = FUN_002b63ac(0);
+    temp_v6 = gameGetPlayerData(0);
     temp_v3 = *(unsigned short *)(temp_v6 + 0xc);
   }
   temp_v6 = FUN_00230ecc(temp_v3);

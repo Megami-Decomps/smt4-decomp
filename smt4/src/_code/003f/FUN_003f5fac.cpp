@@ -4,14 +4,14 @@
 
 extern "C" {
 
-extern unsigned int DAT_0044e948; /* 0x44e948 */
+extern unsigned int g_mwmofilterDeblocker; /* 0x44e948 */
 extern unsigned int DAT_0044e94c; /* 0x44e94c */
 
 
 void FUN_003f5fac(void)
 
 {
-  DAT_0044e948 = 0;
+  g_mwmofilterDeblocker = 0;
   DAT_0044e94c = 0;
   return;
 }

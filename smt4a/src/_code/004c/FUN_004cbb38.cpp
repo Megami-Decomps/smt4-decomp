@@ -14,9 +14,9 @@ int FUN_002613f0(...);
 int FUN_00275bc8(...);
 int FUN_002a7324(...);
 int FUN_002c85b0(...);
-int FUN_002cd8fc(...);
+int btlTalkBustUpCreate(...);
 int FUN_00334214(...);
-int FUN_003d2d34(...);
+int soundChannelRequestIfEnabled(...);
 
 typedef struct fn_004cbb38_arg0 fn_004cbb38_arg0;
 typedef struct fn_004cbb38_arg0_p2c fn_004cbb38_arg0_p2c;
@@ -53,18 +53,18 @@ struct fn_004cbb38_arg0_p2c {
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: FUN_0019de98. */
-extern int FUN_001ab854(int);
+extern int gameGetSlotRecord(int);
 /* Supplied declaration required: FUN_0020214c. */
 /* Supplied declaration required: FUN_0022e774. */
 /* Supplied declaration required: FUN_002613f0. */
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: FUN_002a7324. */
 /* Supplied declaration required: FUN_002c85b0. */
-/* Supplied declaration required: FUN_002cd8fc. */
+/* Supplied declaration required: btlTalkBustUpCreate. */
 extern int FUN_003316b4(int);
 /* Supplied declaration required: FUN_00334214. */
-/* Supplied declaration required: FUN_003d2d34. */
-extern int FUN_003f86c8(unsigned int);
+/* Supplied declaration required: soundChannelRequestIfEnabled. */
+extern int loadSlotIsLoaded(unsigned int);
 extern unsigned int FUN_004bca68(int, short);
 
 
@@ -88,7 +88,7 @@ void FUN_004cbb38(fn_004cbb38_arg0 *param_1)
     psVar2 = (short *)FUN_002613f0();
     temp_v5 = 0;
     do {
-      temp_v1 = FUN_001ab854(temp_v5);
+      temp_v1 = gameGetSlotRecord(temp_v5);
       if ((temp_v1 != 0) && (*(short *)(temp_v1 + 0x62) == *psVar2)) {
         if (-1 < temp_v5) {
           temp_v2 = FUN_004bca68(temp_v1,psVar2[1]);
@@ -117,15 +117,15 @@ LAB_004cbbbc:
       if (*(int *)&param_1->field_0x1c == 0) {
         return;
       }
-      temp_v5 = FUN_003f86c8(0x14);
+      temp_v5 = loadSlotIsLoaded(0x14);
       if (temp_v5 == 0) {
         return;
       }
-      temp_v5 = FUN_003f86c8(0x25);
+      temp_v5 = loadSlotIsLoaded(0x25);
       if (temp_v5 == 0) {
         return;
       }
-      temp_v5 = FUN_003f86c8(0x3e);
+      temp_v5 = loadSlotIsLoaded(0x3e);
       if (temp_v5 == 0) {
         return;
       }
@@ -136,7 +136,7 @@ LAB_004cbbbc:
         *(unsigned int *)(temp_v5 + 0x108) = 0;
       }
       temp_v5 = FUN_002613f0(param_1->field_0x2c);
-      temp_v1 = FUN_001ab854(param_1->field_0x30);
+      temp_v1 = gameGetSlotRecord(param_1->field_0x30);
       temp_v2 = (unsigned int)*(unsigned short *)(temp_v1 + 0x62);
       FUN_00184310();
       temp_v3 = FUN_003316b4((int)*(char *)(temp_v2 + 0x38));
@@ -146,11 +146,11 @@ LAB_004cbbbc:
       temp_v4 = *(unsigned int *)&param_1->field_0x1c;
       FUN_00275bc8(temp_v4,puVar6);
       *(unsigned int *)&param_1->field_0x20 = temp_v4;
-      FUN_002cd8fc();
+      btlTalkBustUpCreate();
       FUN_002c85b0(6);
       FUN_00334214(temp_v1,0,0);
       FUN_002a7324(1);
-      FUN_003d2d34(0x100002d,0,0x3c);
+      soundChannelRequestIfEnabled(0x100002d,0,0x3c);
       FUN_0022e774();
       FUN_0019de98(0,0xf4f4f4ff);
       temp_v6 = *(short *)(temp_v5 + 2) != 0;

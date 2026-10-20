@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019cac4(void);
+int dataTable00FindById(void);
 int VectorSignedToFloat(unsigned int, int);
 int VectorUnsignedToFloat(unsigned int, int);
 
@@ -16,7 +16,7 @@ extern int DAT_00588fd4; /* 0x588fd4 */
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0019cac4. */
+/* Supplied declaration required: dataTable00FindById. */
 extern unsigned int FUN_00261424(void);
 
 
@@ -44,7 +44,7 @@ void FUN_0034dae0(int param_1,unsigned int param_2)
     temp_v4 = 9.0f;
   }
   param_2 = param_2 & 0xffff;
-  FUN_0019cac4();
+  dataTable00FindById();
   temp_v8 = (float)VectorUnsignedToFloat
                            (*(unsigned short *)(param_2 + 2) & 0xffff7fff,(unsigned char)(temp_v3 >> 0x16) & 3);
   temp_v7 = (unsigned int)(temp_v8 * (temp_v4 * 0.55f + 1.0f) + temp_v4 * temp_v4 * 5.0f);

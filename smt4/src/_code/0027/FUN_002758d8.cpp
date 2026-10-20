@@ -11,7 +11,7 @@ extern unsigned int DAT_0049f920; /* 0x49f920 */
 extern unsigned int DAT_0049f924; /* 0x49f924 */
 extern unsigned int DAT_0049f930; /* 0x49f930 */
 
-extern unsigned char *FUN_002c2950(void);
+extern unsigned char *gameGetMapBlock(void);
 
 
 void FUN_002758d8(void)
@@ -22,7 +22,7 @@ void FUN_002758d8(void)
   unsigned char *puVar3;
   unsigned char temp_v2;
   
-  puVar3 = (unsigned char *)FUN_002c2950();
+  puVar3 = (unsigned char *)gameGetMapBlock();
   temp_v2 = DAT_0049f930;
   *puVar3 = (char)DAT_0049f930;
   temp_v0 = (unsigned char)g_gameState;

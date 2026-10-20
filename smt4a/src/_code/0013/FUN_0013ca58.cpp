@@ -12,7 +12,7 @@ extern int DAT_005b4030; /* 0x5b4030 */
 extern int DAT_005b4040; /* 0x5b4040 */
 
 /* Supplied declaration required: FUN_0014e444. */
-extern int FUN_001656a0(unsigned int);
+extern int padButtonIsPressed(unsigned int);
 
 
 unsigned int FUN_0013ca58(void)
@@ -22,7 +22,7 @@ unsigned int FUN_0013ca58(void)
   int temp_v0;
   unsigned int temp_v1;
   
-  if ((DAT_005b4040 != 0) && (temp_v0 = FUN_001656a0(9), temp_v0 != 0)) {
+  if ((DAT_005b4040 != 0) && (temp_v0 = padButtonIsPressed(9), temp_v0 != 0)) {
     if (*(int *)(DAT_005b4030 + 0x24) == 0x8800000) {
       temp_v1 = 0x14000000;
     }

@@ -5,9 +5,9 @@
 extern "C" {
 
 int FUN_002e9b30(int, int, int *, int);
-int FUN_002e9ec8(int, unsigned int);
-int FUN_002ea43c(int);
-int FUN_002ea446(int, int);
+int onlineInstanceTableFind(int, unsigned int);
+int onlineJobSetStateDone(int);
+int onlineJobSetStateTimed(int, int);
 
 /* stack frame of param_1: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -19,11 +19,11 @@ typedef struct {
 
 extern int FUN_0012448e(unsigned int);
 extern unsigned int *FUN_002e7908(unsigned char *, unsigned int *);
-extern int FUN_002e9af4(void);
+extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: FUN_002e9b30. */
-/* Supplied declaration required: FUN_002e9ec8. */
-/* Supplied declaration required: FUN_002ea43c. */
-/* Supplied declaration required: FUN_002ea446. */
+/* Supplied declaration required: onlineInstanceTableFind. */
+/* Supplied declaration required: onlineJobSetStateDone. */
+/* Supplied declaration required: onlineJobSetStateTimed. */
 
 
 void FUN_00105bf4(int param_1)
@@ -40,11 +40,11 @@ void FUN_00105bf4(int param_1)
   
   temp_v0 = FUN_0012448e(*(unsigned int *)(param_1 + 0x68));
   if (temp_v0 != 0) {
-    FUN_002ea446(param_1,100);
+    onlineJobSetStateTimed(param_1,100);
   }
   else {
-    temp_v0 = FUN_002e9af4();
-    FUN_002e9ec8(temp_v0,*(unsigned int *)(param_1 + 0x6c));
+    temp_v0 = onlineInstanceTableGetCurrent();
+    onlineInstanceTableFind(temp_v0,*(unsigned int *)(param_1 + 0x6c));
     if (temp_v0 != 0) {
       temp_v5[0] = 0x10001;
       puVar2 = (unsigned int *)FUN_002e7908(temp_v4,temp_v5);
@@ -53,7 +53,7 @@ void FUN_00105bf4(int param_1)
       temp_v3 = puVar2[2];
       FUN_002e9b30(temp_v0,2,&temp_v1,1);
     }
-    FUN_002ea43c(param_1);
+    onlineJobSetStateDone(param_1);
   }
   return;
 }

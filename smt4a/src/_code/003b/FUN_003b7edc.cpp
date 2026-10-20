@@ -6,7 +6,7 @@ extern "C" {
 
 int scrGetArg(...);
 
-extern int DAT_00573c50; /* 0x573c50 */
+extern int g_btlPartnerAttack; /* 0x573c50 */
 
 /* Supplied declaration required: scrGetArg. */
 
@@ -21,8 +21,8 @@ unsigned int FUN_003b7edc(void)
   
   temp_v1 = scrGetArg();
   temp_v2 = scrGetArg(1);
-  temp_v0 = DAT_00573c50;
-  *(unsigned int *)(DAT_00573c50 + 0x1c) = temp_v1;
+  temp_v0 = g_btlPartnerAttack;
+  *(unsigned int *)(g_btlPartnerAttack + 0x1c) = temp_v1;
   *(unsigned int *)(temp_v0 + 0x20) = temp_v2;
   return 1;
 }

@@ -6,7 +6,7 @@ extern "C" {
 
 int dataTableGetCount(unsigned int);
 int dataTableGetEntries(void);
-int FUN_003fd63c(int, int);
+int gameFlagSetValue(int, int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -16,11 +16,11 @@ typedef struct {
 extern unsigned int *g_popupState; /* 0x58104c */
 
 extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern int FUN_0018719c(void);
+extern int gameFlagIsSet(void);
 /* Supplied declaration required: dataTableGetCount. */
 /* Supplied declaration required: dataTableGetEntries. */
 extern int FUN_00365bc4(int);
-/* Supplied declaration required: FUN_003fd63c. */
+/* Supplied declaration required: gameFlagSetValue. */
 
 
 void FUN_0023466c(int param_1,int param_2)
@@ -55,8 +55,8 @@ void FUN_0023466c(int param_1,int param_2)
         temp_v2 = *piVar7;
       }
       if ((((temp_v5 && temp_v2 == param_1) &&
-           (((short)piVar7[2] == 0 || (temp_v2 = FUN_0018719c(), temp_v2 != 0)))) &&
-          ((*(short *)((int)piVar7 + 10) == 0 || (temp_v2 = FUN_0018719c(), temp_v2 == 0)))) &&
+           (((short)piVar7[2] == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 != 0)))) &&
+          ((*(short *)((int)piVar7 + 10) == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 == 0)))) &&
          ((short)piVar7[3] == param_2)) {
         temp_v1 = FUN_00365bc4((int)(short)piVar7[4]);
         puVar1 = g_popupState;
@@ -66,7 +66,7 @@ void FUN_0023466c(int param_1,int param_2)
         puVar1[5] = temp_v1 + 0x24;
         puVar1[6] = temp_v2;
         puVar1[7] = temp_v1 + 4;
-        FUN_003fd63c((int)*(short *)((int)piVar7 + 10),1);
+        gameFlagSetValue((int)*(short *)((int)piVar7 + 10),1);
         return;
       }
       temp_v4 = temp_v4 + 1;

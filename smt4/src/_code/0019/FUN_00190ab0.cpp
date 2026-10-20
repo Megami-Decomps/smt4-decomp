@@ -6,17 +6,17 @@ extern "C" {
 
 int btlGetMainState(void);
 int FUN_00297ca4(int, int);
-int FUN_00298140(...);
+int playSceneSetState(...);
 int FUN_0029ee6c(...);
-int FUN_002af5c0(...);
+int uiSpriteSetImageKeyframe(...);
 
 extern int FUN_00293988(void);
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_00297ca4. */
-/* Supplied declaration required: FUN_00298140. */
+/* Supplied declaration required: playSceneSetState. */
 extern int FUN_0029ee54(void);
 /* Supplied declaration required: FUN_0029ee6c. */
-/* Supplied declaration required: FUN_002af5c0. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 
 
 unsigned int FUN_00190ab0(int param_1)
@@ -53,22 +53,22 @@ unsigned int FUN_00190ab0(int param_1)
               if (temp_v0 != 4) {
                 temp_v0 = FUN_00297ca4(param_1,1);
                 if (temp_v0 != 9) {
-                  FUN_00298140(param_1,0,1);
+                  playSceneSetState(param_1,0,1);
                 }
                 else {
-                  FUN_00298140(param_1,0x19,1);
+                  playSceneSetState(param_1,0x19,1);
                 }
               }
               else {
-                FUN_00298140(param_1,0x1b,1);
+                playSceneSetState(param_1,0x1b,1);
               }
             }
             else {
-              FUN_00298140(param_1,0x1a,1);
+              playSceneSetState(param_1,0x1a,1);
             }
           }
           else {
-            FUN_00298140(param_1,0x17,1);
+            playSceneSetState(param_1,0x17,1);
           }
         }
         else {
@@ -77,10 +77,10 @@ unsigned int FUN_00190ab0(int param_1)
             return 0;
           }
           *piVar2 = param_1 + 0x3344;
-          FUN_00298140(param_1,0xd,1);
+          playSceneSetState(param_1,0xd,1);
           temp_v0 = 0;
           do {
-            FUN_002af5c0(param_1 + temp_v0 * 0x8c + 0xe58,0);
+            uiSpriteSetImageKeyframe(param_1 + temp_v0 * 0x8c + 0xe58,0);
             temp_v0 = temp_v0 + 1;
           } while (temp_v0 < 6);
         }
@@ -91,10 +91,10 @@ unsigned int FUN_00190ab0(int param_1)
           return 0;
         }
         *piVar2 = param_1 + 0x32e0;
-        FUN_00298140(param_1,0xb,1);
+        playSceneSetState(param_1,0xb,1);
         temp_v0 = 0;
         do {
-          FUN_002af5c0(param_1 + temp_v0 * 0x8c + 0xe58,0);
+          uiSpriteSetImageKeyframe(param_1 + temp_v0 * 0x8c + 0xe58,0);
           temp_v0 = temp_v0 + 1;
         } while (temp_v0 < 6);
       }
@@ -109,20 +109,20 @@ unsigned int FUN_00190ab0(int param_1)
         }
       }
       *piVar2 = param_1 + 0x327c;
-      FUN_00298140(param_1,9,1);
+      playSceneSetState(param_1,9,1);
       temp_v0 = 0;
       do {
-        FUN_002af5c0(param_1 + temp_v0 * 0x8c + 0xe58,0);
+        uiSpriteSetImageKeyframe(param_1 + temp_v0 * 0x8c + 0xe58,0);
         temp_v0 = temp_v0 + 1;
       } while (temp_v0 < 6);
     }
   }
   else {
     *piVar2 = param_1 + 0x3218;
-    FUN_00298140(param_1,9,1);
+    playSceneSetState(param_1,9,1);
     temp_v0 = 0;
     do {
-      FUN_002af5c0(param_1 + temp_v0 * 0x8c + 0xe58,0);
+      uiSpriteSetImageKeyframe(param_1 + temp_v0 * 0x8c + 0xe58,0);
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < 6);
   }

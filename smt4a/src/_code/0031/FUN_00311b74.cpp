@@ -7,7 +7,7 @@ extern "C" {
 int CONCAT44(double, double);
 int FUN_00233e10(int, unsigned int);
 int FUN_002b4cf4(void);
-int FUN_002e342c(unsigned int *, int);
+int libc_strcpy(unsigned int *, int);
 int FUN_00352bc4(void);
 int FUN_0050d8e4(void);
 
@@ -81,7 +81,7 @@ static float romwright_sqrt_4(float value)
 #endif
 /* Supplied declaration required: FUN_00233e10. */
 /* Supplied declaration required: FUN_002b4cf4. */
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_00352bc4. */
 /* Supplied declaration required: FUN_0050d8e4. */
 
@@ -289,7 +289,7 @@ void FUN_00311b74(void)
                         }
                         else {
                           DAT_005f165c = 0xffffffff;
-                          FUN_002e342c(&DAT_005f1660,temp_v3 + 0x5f33d8);
+                          libc_strcpy(&DAT_005f1660,temp_v3 + 0x5f33d8);
                         }
                         temp_v23 = FUN_00233e10(1,DAT_005f16ac);
                         in_s3 = temp_v10;
@@ -417,7 +417,7 @@ void FUN_00311b74(void)
               }
               else {
                 DAT_005f165c = 0xffffffff;
-                FUN_002e342c(&DAT_005f1660,temp_v3 + 0x5f33d8);
+                libc_strcpy(&DAT_005f1660,temp_v3 + 0x5f33d8);
               }
             }
           }
@@ -469,7 +469,7 @@ void FUN_00311b74(void)
             }
             else {
               DAT_005f165c = 0xffffffff;
-              FUN_002e342c(&DAT_005f1660,temp_v3 + 0x5f33d8);
+              libc_strcpy(&DAT_005f1660,temp_v3 + 0x5f33d8);
             }
           }
         }

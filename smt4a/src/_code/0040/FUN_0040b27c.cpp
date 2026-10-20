@@ -28,7 +28,7 @@ extern unsigned char LAB_0040b690; /* 0x40b690 */
 extern unsigned char LAB_0040b6c8; /* 0x40b6c8 */
 
 /* Supplied declaration required: FUN_00100388. */
-extern int FUN_001801a4(void);
+extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00192608. */
 /* Supplied declaration required: FUN_003e573c. */
 /* Supplied declaration required: FUN_0040b11c. */
@@ -81,7 +81,7 @@ void FUN_0040b27c(unsigned int param_1,int param_2,fn_0040b27c_arg2 *param_3,uns
   FUN_003e573c(param_1,param_2,temp_v3,param_4);
   if (param_2 != 0) {
     if (param_2 == 1) {
-      temp_v1 = FUN_001801a4();
+      temp_v1 = gameGetPlayerData();
       temp_v2 = (unsigned int)*(unsigned short *)(temp_v1 + 6);
       FUN_00192608();
       temp_v0 = FUN_0040b11c(param_1,0,*(unsigned short *)(temp_v2 + 0x40),*(unsigned short *)(temp_v2 + 0x42),
@@ -100,7 +100,7 @@ void FUN_0040b27c(unsigned int param_1,int param_2,fn_0040b27c_arg2 *param_3,uns
     }
   }
   else {
-    temp_v1 = FUN_001801a4();
+    temp_v1 = gameGetPlayerData();
     temp_v2 = (unsigned int)*(unsigned short *)(temp_v1 + 8);
     FUN_00192608();
     temp_v0 = FUN_0040b11c(param_1,1,*(unsigned short *)(temp_v2 + 0x40),*(unsigned short *)(temp_v2 + 0x42),

@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_0022ac3c(int, unsigned int);
-int FUN_002b06c4(void);
+int dataTable00FindById(void);
 
 extern int g_aocSystem; /* 0x433158 */
 
 /* Supplied declaration required: FUN_0022ac3c. */
-/* Supplied declaration required: FUN_002b06c4. */
+/* Supplied declaration required: dataTable00FindById. */
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
 extern unsigned int dataTableGet(unsigned int);
@@ -36,7 +36,7 @@ unsigned int FUN_003bc198(unsigned int param_1)
     temp_v1 = 0;
     do {
       temp_v2 = (unsigned int)*(unsigned short *)(temp_v3 + temp_v1 * 2 + 0xc);
-      if (((temp_v2 != 0) && (FUN_002b06c4(), temp_v2 != 0)) && ((*(unsigned char *)(temp_v2 + 3) & 1) != 0)) {
+      if (((temp_v2 != 0) && (dataTable00FindById(), temp_v2 != 0)) && ((*(unsigned char *)(temp_v2 + 3) & 1) != 0)) {
         return 1;
       }
       temp_v1 = temp_v1 + 1;

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00129214(unsigned char *, int);
 int FUN_00146e40(unsigned char *);
-int FUN_002c4040(unsigned char *);
+int nn_os_LightEvent_Signal(unsigned char *);
 int coproc_moveto_Data_Synchronization(int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -19,14 +19,14 @@ extern unsigned char DAT_0044e7c1; /* 0x44e7c1 */
 extern unsigned char DAT_0044e7c2; /* 0x44e7c2 */
 extern unsigned char DAT_0044e7c4; /* 0x44e7c4 */
 extern unsigned char DAT_0044e7c8; /* 0x44e7c8 */
-extern unsigned char DAT_004e6f14; /* 0x4e6f14 */
+extern unsigned char g_nnSndMasterManager; /* 0x4e6f14 */
 extern unsigned char g_dspsndState; /* 0x4e6f64 */
 extern unsigned char uRam1ff810c0; /* 0x1ff810c0 */
 
 /* Unsupported intrinsic, declaration required: coproc_moveto_Data_Synchronization (CALLOTHER). */
 /* Supplied declaration required: FUN_00129214. */
 /* Supplied declaration required: FUN_00146e40. */
-/* Supplied declaration required: FUN_002c4040. */
+/* Supplied declaration required: nn_os_LightEvent_Signal. */
 
 
 void FUN_00129478(void)
@@ -36,11 +36,11 @@ void FUN_00129478(void)
   if ((DAT_0044e7c0 & DAT_0044e7c1) != 0) {
     FUN_00129214(&g_dspsndState,1);
     DAT_0044e7c4 = uRam1ff810c0;
-    FUN_00146e40(&DAT_004e6f14);
+    FUN_00146e40(&g_nnSndMasterManager);
     DAT_0044e7c1 = 0;
     DAT_0044e7c2 = 0;
     coproc_moveto_Data_Synchronization(0);
-    FUN_002c4040(&DAT_0044e7c8);
+    nn_os_LightEvent_Signal(&DAT_0044e7c8);
     return;
   }
   return;

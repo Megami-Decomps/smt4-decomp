@@ -15,7 +15,7 @@ typedef struct {
 extern int DAT_005f1ab4; /* 0x5f1ab4 */
 extern int DAT_005f1ab8; /* 0x5f1ab8 */
 
-extern int FUN_0014bef4(unsigned int);
+extern int randRange(unsigned int);
 
 
 unsigned int FUN_002b5540(void)
@@ -55,7 +55,7 @@ LAB_002b55b0:
       }
     }
   }
-  temp_v1 = FUN_0014bef4((temp_v0 - 1) & 0xffff);
+  temp_v1 = randRange((temp_v0 - 1) & 0xffff);
   if ((DAT_005f1ab4 != -1) || (DAT_005f1ab8 != -1)) {
     DAT_005f1ab8 = DAT_005f1ab4;
     DAT_005f1ab4 = temp_v2[temp_v1];

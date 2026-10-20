@@ -16,9 +16,9 @@ typedef struct Global588fd0 {
     /* 0x02 */ u8 unk02[2];
     /* 0x04 */ Game *game;
 } Global588fd0;
-extern Global588fd0 DAT_00588fd0;
+extern Global588fd0 g_gameGlobals;
 
-void FUN_0014384c(s32 table);
+void asdTMTexTableLoadSprites(s32 table);
 void FUN_0014afd0(s32 table, s32 index);
 
 /* Counts one more user of table 0x12: the first user (depth 0 or less) prepares it and runs FUN_0014afd0 on its three entries. */
@@ -26,15 +26,15 @@ void FUN_0023b410(void)
 {
     s32 i;
 
-    if (DAT_00588fd0.depth <= 0) {
-        FUN_0014384c(0x12);
+    if (g_gameGlobals.depth <= 0) {
+        asdTMTexTableLoadSprites(0x12);
         i = 0;
         do {
             FUN_0014afd0(0x12, i);
             i = i + 1;
         } while (i < 3);
     }
-    DAT_00588fd0.depth = DAT_00588fd0.depth + 1;
+    g_gameGlobals.depth = g_gameGlobals.depth + 1;
 }
 
 } /* extern "C" */

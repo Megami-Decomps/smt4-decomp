@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00184310(void);
-int FUN_001ab888(...);
+int gameGetSlotTable(...);
 int FUN_002cc228(char *, int);
 
 extern unsigned int DAT_00573bb0; /* 0x573bb0 */
@@ -13,14 +13,14 @@ extern unsigned int DAT_00573bb4; /* 0x573bb4 */
 
 extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_00184310. */
-extern int FUN_0018719c(void);
-extern int FUN_001ab854(int);
-/* Supplied declaration required: FUN_001ab888. */
+extern int gameFlagIsSet(void);
+extern int gameGetSlotRecord(int);
+/* Supplied declaration required: gameGetSlotTable. */
 extern int FUN_00291e14(void);
 extern int FUN_002a4878(int);
 extern int FUN_002b24fc(void);
 /* Supplied declaration required: FUN_002cc228. */
-extern int FUN_003e46f4(void);
+extern int gameDataFlagTestBit(void);
 extern int FUN_004bd748(int);
 
 
@@ -42,7 +42,7 @@ unsigned int FUN_002cc9e0(int param_1,int param_2)
   if ((param_2 != 0) && (temp_v1 = *(int *)(param_1 + 0x387c), temp_v1 == 6)) {
     return 0xb;
   }
-  temp_v1 = FUN_001ab888(temp_v1);
+  temp_v1 = gameGetSlotTable(temp_v1);
   temp_v6 = 0;
   temp_v4 = 0;
   piVar7 = (int *)(param_1 + 0x3890);
@@ -51,12 +51,12 @@ unsigned int FUN_002cc9e0(int param_1,int param_2)
     FUN_002cc228(pcVar3,*piVar7 == 0);
     temp_v5 = 0;
     if ((*piVar7 != 0) && (-1 < *(char *)(*piVar7 + temp_v1 + 0x1c9f))) {
-      temp_v5 = FUN_001ab888();
-      temp_v5 = FUN_001ab854((int)*(char *)(*piVar7 + temp_v5 + 0x1c9f));
+      temp_v5 = gameGetSlotTable();
+      temp_v5 = gameGetSlotRecord((int)*(char *)(*piVar7 + temp_v5 + 0x1c9f));
     }
     if (((((pcVar3 != (char *)0x0) && (pcVar3[1] == '\x01')) &&
-         ((*(short *)(pcVar3 + 0x5c) == 0 || (temp_v2 = FUN_0018719c(), temp_v2 != 0)))) &&
-        ((*(short *)(pcVar3 + 0x5e) == 0 || (temp_v2 = FUN_003e46f4(), temp_v2 != 0)))) &&
+         ((*(short *)(pcVar3 + 0x5c) == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 != 0)))) &&
+        ((*(short *)(pcVar3 + 0x5e) == 0 || (temp_v2 = gameDataFlagTestBit(), temp_v2 != 0)))) &&
        ((pcVar3[0x5b] == '\0' ||
         (temp_v2 = btlGetMainState(),
         (DAT_00573bb0 & *(unsigned int *)(temp_v2 + 0x45a0)) == 0 &&

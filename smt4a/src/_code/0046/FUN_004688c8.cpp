@@ -10,7 +10,7 @@ int FUN_0019de98(int, unsigned int);
 int FUN_0019ea64(int);
 int FUN_001ad9b4(void);
 int FUN_001ba514(int);
-int FUN_002c52e0(int);
+int resultCreate(int);
 int FUN_002f0c18(void);
 int FUN_003315c4(void);
 int FUN_00331714(int *);
@@ -18,11 +18,11 @@ int FUN_0034aae4(void);
 int stateHolder4Request(int);
 int FUN_003dec50(void);
 int FUN_003df168(int *, int);
-int FUN_003fd63c(...);
+int gameFlagSetValue(...);
 int FUN_00417a60(int);
 int FUN_00417e08(int);
 int pickObjStart(unsigned int *, unsigned char *);
-int FUN_00480fc0(int, unsigned int);
+int flagValueSub(int, unsigned int);
 int FUN_004d0d70(void);
 
 /* stack frame of param_1: 15 slot(s), 60 byte(s) */
@@ -54,7 +54,7 @@ extern int FUN_00162880(void);
 /* Supplied declaration required: FUN_001695a0. */
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_0019ea64. */
-extern int FUN_0019f18c(unsigned int);
+extern int idIsAtLeast350(unsigned int);
 extern int FUN_0019f1a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001ad9b4. */
 extern int FUN_001ada74(unsigned int);
@@ -63,7 +63,7 @@ extern int FUN_001bd118(unsigned short);
 extern int FUN_00224880(unsigned int);
 extern int FUN_002802c8(void);
 extern int FUN_002a746c(void);
-/* Supplied declaration required: FUN_002c52e0. */
+/* Supplied declaration required: resultCreate. */
 extern int FUN_002e19f8(void);
 /* Supplied declaration required: FUN_002f0c18. */
 extern unsigned int FUN_0031f8cc(void);
@@ -74,11 +74,11 @@ extern int stateHolder4IsD(void);
 /* Supplied declaration required: stateHolder4Request. */
 /* Supplied declaration required: FUN_003dec50. */
 /* Supplied declaration required: FUN_003df168. */
-/* Supplied declaration required: FUN_003fd63c. */
+/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_00417a60. */
 /* Supplied declaration required: FUN_00417e08. */
 /* Supplied declaration required: pickObjStart. */
-/* Supplied declaration required: FUN_00480fc0. */
+/* Supplied declaration required: flagValueSub. */
 /* Supplied declaration required: FUN_004d0d70. */
 
 
@@ -118,7 +118,7 @@ void FUN_004688c8(unsigned int *param_1)
       if (((temp_v1 != 0) && (*(char *)(temp_v1 + 6) == '\0')) &&
          (temp_v2 = FUN_0019f1a4(temp_v4,1), temp_v2 != 0)) {
         temp_v0 = *(short *)(temp_v1 + 0x124);
-        temp_v2 = FUN_0019f18c(temp_v4);
+        temp_v2 = idIsAtLeast350(temp_v4);
         if ((temp_v2 == 0) && (temp_v0 != 0)) {
           switch(temp_v0) {
           case 1:
@@ -242,7 +242,7 @@ LAB_004689f8:
           }
         }
         else {
-          FUN_00480fc0(*(unsigned short *)(temp_v3 + 0x102),*(unsigned int *)(temp_v3 + 0x104));
+          flagValueSub(*(unsigned short *)(temp_v3 + 0x102),*(unsigned int *)(temp_v3 + 0x104));
         }
         temp_v2 = temp_v2 + 1;
       } while (temp_v2 < 4);
@@ -251,15 +251,15 @@ LAB_004689f8:
         temp_v3 = temp_v4 + temp_v2 * 2;
         temp_v0 = *(short *)(temp_v3 + 0xe0);
         if (temp_v0 != 0) {
-          FUN_003fd63c(temp_v0,1);
+          gameFlagSetValue(temp_v0,1);
         }
         temp_v0 = *(short *)(temp_v3 + 0xe6);
         if (temp_v0 != 0) {
-          FUN_003fd63c(temp_v0,0,1);
+          gameFlagSetValue(temp_v0,0,1);
         }
         temp_v2 = temp_v2 + 1;
       } while (temp_v2 < 3);
-      FUN_002c52e0(1);
+      resultCreate(1);
       temp_v17 = 0;
       temp_v18 = 0;
       temp_v5 = 0;

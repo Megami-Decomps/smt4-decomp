@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_001156bc(unsigned int, int);
-int FUN_002e7232(void);
+int sharedRefRelease(void);
 
 /* Supplied declaration required: FUN_001156bc. */
-/* Supplied declaration required: FUN_002e7232. */
+/* Supplied declaration required: sharedRefRelease. */
 
 
 void FUN_002f30e0(int param_1,int param_2)
@@ -17,7 +17,7 @@ void FUN_002f30e0(int param_1,int param_2)
 /* irregular: 2 native warning(s); review required */
   if (param_2 != 0) {
     if (*(int *)(param_2 + 0x38) != 0) {
-      FUN_002e7232();
+      sharedRefRelease();
     }
     FUN_001156bc(*(unsigned int *)(param_1 + 0x4c),param_2);
   }

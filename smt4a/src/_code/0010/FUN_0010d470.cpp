@@ -6,10 +6,10 @@ extern "C" {
 
 int FUN_0010564c(int);
 int FUN_00129288(int);
-int FUN_002e6e14(...);
+int asdOperatorDeleteArray(...);
 int FUN_002e6e34(unsigned char [12], unsigned char *);
 int FUN_002e6e5c(unsigned char [12]);
-int FUN_002ea0b8(int);
+int sharedRefInitEmpty(int);
 int FUN_002eda80(unsigned char [8], int *, int *, int *);
 int FUN_002f76ec(int *, unsigned int, int);
 
@@ -28,11 +28,11 @@ extern int FUN_001220aa(unsigned int *);
 extern int FUN_00122248(int);
 extern int FUN_001224c8(int);
 /* Supplied declaration required: FUN_00129288. */
-/* Supplied declaration required: FUN_002e6e14. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-extern int FUN_002e9318(int);
-/* Supplied declaration required: FUN_002ea0b8. */
+extern int onlineStringDestroy(int);
+/* Supplied declaration required: sharedRefInitEmpty. */
 /* Supplied declaration required: FUN_002eda80. */
 /* Supplied declaration required: FUN_002f76ec. */
 extern int FUN_002f7708(int);
@@ -69,16 +69,16 @@ void FUN_0010d470(unsigned int *param_1)
     FUN_002f76ec(piVar4,*(unsigned int *)(temp_v1 - 0xc),0);
     while (piVar3 = (int *)*piVar4, piVar3 != (int *)0x0) {
       *piVar4 = *piVar3;
-      FUN_002e6e14(piVar3[2]);
-      FUN_002e6e14(piVar3);
+      asdOperatorDeleteArray(piVar3[2]);
+      asdOperatorDeleteArray(piVar3);
     }
   }
   temp_v1 = temp_v1 - 0x78;
   FUN_00129288(temp_v1);
   temp_v0 = FUN_002f7708(temp_v1 - 0x5c);
   temp_v0 = FUN_002f7708(temp_v0 - 0x5c);
-  temp_v0 = FUN_002e9318(temp_v0 - 8);
-  FUN_002ea0b8(temp_v0 - 0xc);
+  temp_v0 = onlineStringDestroy(temp_v0 - 8);
+  sharedRefInitEmpty(temp_v0 - 0xc);
   return;
 }
 

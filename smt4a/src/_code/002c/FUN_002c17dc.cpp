@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_001f5180(...);
+int rangeInit(...);
 int FUN_00237da0(...);
 int FUN_00238e20(unsigned int, unsigned char [288], unsigned char [496], unsigned int *, unsigned int *, int, int, int);
 int FUN_00238f08(unsigned int, unsigned char [288], unsigned char [496], unsigned int *, unsigned int *, int, int, int);
-int FUN_0028322c(...);
-int FUN_002833d0(...);
-int FUN_00283428(...);
-int FUN_00285834(...);
+int nodeTreeReleaseItemClearOwner(...);
+int nodeGroupRelease(...);
+int nodeGroupReleaseAlt(...);
+int nodeTreeReleaseItem(...);
 int FUN_002a39a4(...);
 int FUN_002e5154(...);
 int FUN_0035bc4c(...);
@@ -26,16 +26,16 @@ typedef struct {
     unsigned int sp390; /* 0x390: local_390 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_001f5180. */
-extern unsigned int FUN_00203a5c(void);
+/* Supplied declaration required: rangeInit. */
+extern unsigned int eventCommandGetPendingCleanup(void);
 /* Supplied declaration required: FUN_00237da0. */
 /* Supplied declaration required: FUN_00238e20. */
 /* Supplied declaration required: FUN_00238f08. */
 extern int FUN_00239278(void);
-/* Supplied declaration required: FUN_0028322c. */
-/* Supplied declaration required: FUN_002833d0. */
-/* Supplied declaration required: FUN_00283428. */
-/* Supplied declaration required: FUN_00285834. */
+/* Supplied declaration required: nodeTreeReleaseItemClearOwner. */
+/* Supplied declaration required: nodeGroupRelease. */
+/* Supplied declaration required: nodeGroupReleaseAlt. */
+/* Supplied declaration required: nodeTreeReleaseItem. */
 /* Supplied declaration required: FUN_002a39a4. */
 /* Supplied declaration required: FUN_002e5154. */
 extern int FUN_00330ad4(unsigned char, unsigned int);
@@ -153,8 +153,8 @@ void FUN_002c17dc(unsigned int *param_1)
     }
     temp_v2 = FUN_00330ad4(*(unsigned char *)(param_1 + 0xc),param_1[1]);
     if ((temp_v2 != 0) && ((*(unsigned int *)(temp_v2 + 8) & 0xfc0) != 0)) {
-      temp_v7 = FUN_00203a5c();
-      FUN_001f5180(temp_v7,*(unsigned char *)(temp_v2 + 0x14),0);
+      temp_v7 = eventCommandGetPendingCleanup();
+      rangeInit(temp_v7,*(unsigned char *)(temp_v2 + 0x14),0);
     }
     param_1[1] = param_1[1] + 1;
     return;
@@ -163,7 +163,7 @@ void FUN_002c17dc(unsigned int *param_1)
   if (param_1 != (unsigned int *)0x0) {
     if (0 < (int)param_1[3]) {
       do {
-        FUN_0028322c(param_1[temp_v2 + 0x14]);
+        nodeTreeReleaseItemClearOwner(param_1[temp_v2 + 0x14]);
         temp_v2 = temp_v2 + 1;
       } while (temp_v2 < (int)param_1[3]);
     }
@@ -177,14 +177,14 @@ void FUN_002c17dc(unsigned int *param_1)
     temp_v2 = 0;
     if (temp_v2 < (int)param_1[6]) {
       do {
-        FUN_00283428(param_1[temp_v2 + 0x44]);
+        nodeGroupReleaseAlt(param_1[temp_v2 + 0x44]);
         temp_v2 = temp_v2 + 1;
       } while (temp_v2 < (int)param_1[6]);
     }
     temp_v2 = 0;
     if (temp_v2 < (int)param_1[5]) {
       do {
-        FUN_002833d0(param_1[temp_v2 + 0x34]);
+        nodeGroupRelease(param_1[temp_v2 + 0x34]);
         temp_v2 = temp_v2 + 1;
       } while (temp_v2 < (int)param_1[5]);
     }
@@ -204,7 +204,7 @@ void FUN_002c17dc(unsigned int *param_1)
   param_1[5] = 0;
   param_1[6] = 0;
   param_1[7] = 0;
-  FUN_00285834(param_1);
+  nodeTreeReleaseItem(param_1);
   return;
 }
 

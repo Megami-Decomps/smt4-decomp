@@ -2,8 +2,8 @@
 
 extern "C" {
 
-void FUN_0023d02c(void *object);
-void FUN_002b2368(Filter4Poly *filter);
+void bufferHandleRelease(void *object);
+void asdMemFreeNonNull(Filter4Poly *filter);
 void asdMemFree(void *block);
 
 extern const u8 g_filter4PolyBaseVtable[];
@@ -19,7 +19,7 @@ void filter4PolyDestroy(Filter4Poly *filter)
     }
     filter->vtable = g_filter4PolyBaseVtable;
     if (filter->object != NULL) {
-        FUN_0023d02c(filter->object);
+        bufferHandleRelease(filter->object);
         filter->object = NULL;
     }
     if (filter->dataA != NULL) {
@@ -30,7 +30,7 @@ void filter4PolyDestroy(Filter4Poly *filter)
         filter->child->vtable[1](filter->child);
         filter->child = NULL;
     }
-    FUN_002b2368(filter);
+    asdMemFreeNonNull(filter);
 }
 
 } /* extern "C" */

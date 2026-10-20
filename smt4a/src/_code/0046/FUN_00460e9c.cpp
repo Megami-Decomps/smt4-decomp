@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00188b60(void);
+int nn_os_CriticalSection_Initialize(void);
 
 typedef struct fn_00460e9c_arg0 fn_00460e9c_arg0;
 struct fn_00460e9c_arg0 {
@@ -28,7 +28,7 @@ struct fn_00460e9c_arg0 {
 
 extern unsigned char DAT_0055c0fc; /* 0x55c0fc */
 
-/* Supplied declaration required: FUN_00188b60. */
+/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
 extern unsigned int *FUN_0045bcec(void);
 extern int words38Clear(unsigned int *);
 
@@ -67,7 +67,7 @@ int FUN_00460e9c(fn_00460e9c_arg0 *param_1,unsigned char param_2)
   *(unsigned int *)(temp_v0 + 0x4c) = 0;
   *(unsigned char *)(temp_v0 + 0x54) = 0;
   *(unsigned char *)(temp_v0 + 0x55) = param_2;
-  FUN_00188b60();
+  nn_os_CriticalSection_Initialize();
   return temp_v0 - 0x13c;
 }
 

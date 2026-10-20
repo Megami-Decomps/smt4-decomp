@@ -8,7 +8,7 @@ int scrSetResult(unsigned int);
 
 extern unsigned char DAT_00588c40; /* 0x588c40 */
 
-extern int FUN_001ab854(int);
+extern int gameGetSlotRecord(int);
 extern int scrGetArg(unsigned int);
 /* Supplied declaration required: scrSetResult. */
 extern int flagAt4IsClearOrMissing(void);
@@ -30,7 +30,7 @@ unsigned int FUN_003c4e64(void)
       scrSetResult(*(unsigned int *)((*(int *)((unsigned char *)&DAT_00588c40 + 0x4)) + 0x75cc));
       return 1;
     }
-    temp_v0 = FUN_001ab854((int)*(char *)((*(int *)((unsigned char *)&DAT_00588c40 + 0x4)) + *(int *)((*(int *)((unsigned char *)&DAT_00588c40 + 0x4)) + 0x74c0) * 0x150 +
+    temp_v0 = gameGetSlotRecord((int)*(char *)((*(int *)((unsigned char *)&DAT_00588c40 + 0x4)) + *(int *)((*(int *)((unsigned char *)&DAT_00588c40 + 0x4)) + 0x74c0) * 0x150 +
                                        0x442c));
     temp_v1 = (unsigned int)*(unsigned short *)(temp_v0 + *(int *)((*(int *)((unsigned char *)&DAT_00588c40 + 0x4)) + 0x75c8) * 2 + 0x34);
   }

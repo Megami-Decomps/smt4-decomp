@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e7232(...);
+int sharedRefRelease(...);
 int FUN_002ec8a8(...);
 
 typedef struct fn_00122bd4_arg1 fn_00122bd4_arg1;
@@ -18,8 +18,8 @@ struct fn_00122bd4_arg1 {
 };
 
 typedef int romwright_code(...);
-/* Supplied declaration required: FUN_002e7232. */
-extern int FUN_002e760a(unsigned int);
+/* Supplied declaration required: sharedRefRelease. */
+extern int operatorNew(unsigned int);
 extern int *FUN_002e7614(int, unsigned int);
 extern int FUN_002eb7d0(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002ec8a8. */
@@ -42,7 +42,7 @@ unsigned int FUN_00122bd4(int param_1,fn_00122bd4_arg1 *param_2)
       temp_v0 = FUN_002eff84();
       if (temp_v0 != 0) {
         FUN_002ec8a8(piVar2,param_2);
-        FUN_002e7232(*(unsigned int *)(param_1 + 0xd8));
+        sharedRefRelease(*(unsigned int *)(param_1 + 0xd8));
         *(int **)(param_1 + 0xd8) = piVar2;
         return 1;
       }
@@ -50,7 +50,7 @@ unsigned int FUN_00122bd4(int param_1,fn_00122bd4_arg1 *param_2)
     }
     return 0;
   }
-  temp_v0 = FUN_002e760a(0x20);
+  temp_v0 = operatorNew(0x20);
   if (temp_v0 != 0) {
     piVar2 = (int *)FUN_002e7614(temp_v0,*(unsigned int *)&param_2->field_0x14);
   }
@@ -58,7 +58,7 @@ unsigned int FUN_00122bd4(int param_1,fn_00122bd4_arg1 *param_2)
     piVar2 = (int *)0x0;
   }
   FUN_002ec8a8(piVar2,param_2);
-  FUN_002e7232(*(unsigned int *)(param_1 + 0xd8));
+  sharedRefRelease(*(unsigned int *)(param_1 + 0xd8));
   *(int **)(param_1 + 0xd8) = piVar2;
   return 1;
 }

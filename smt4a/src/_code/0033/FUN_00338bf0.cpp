@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_001aea28(unsigned int);
+int ptrListRemoveClearOwner(unsigned int);
 int FUN_00227a70(void);
 int FUN_00234b30(void);
 int FUN_002737a8(void);
 int FUN_00297c3c(void);
 int FUN_002a2e98(unsigned int, unsigned int);
 int FUN_002df914(void);
-int FUN_00324bc8(...);
+int mapPlaceSet(...);
 int FUN_00328794(void);
 int FUN_003699e4(void);
 int FUN_0036a434(int);
@@ -33,21 +33,21 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_2_stack;
 
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern int g_lmapMainState; /* 0x580238 */
 extern int g_lmapScene; /* 0x581288 */
 extern unsigned int DAT_005f1600; /* 0x5f1600 */
 extern unsigned char DAT_005f161f; /* 0x5f161f */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_001aea28. */
+/* Supplied declaration required: ptrListRemoveClearOwner. */
 /* Supplied declaration required: FUN_00227a70. */
 /* Supplied declaration required: FUN_00234b30. */
 /* Supplied declaration required: FUN_002737a8. */
 /* Supplied declaration required: FUN_00297c3c. */
 /* Supplied declaration required: FUN_002a2e98. */
 /* Supplied declaration required: FUN_002df914. */
-/* Supplied declaration required: FUN_00324bc8. */
+/* Supplied declaration required: mapPlaceSet. */
 /* Supplied declaration required: FUN_00328794. */
 /* Supplied declaration required: FUN_003699e4. */
 /* Supplied declaration required: FUN_0036a434. */
@@ -84,7 +84,7 @@ void FUN_00338bf0(unsigned int param_1,unsigned int param_2)
   temp_v1 = g_lmapMainState;
   FUN_003b5714(*(unsigned int *)(g_lmapMainState + 0x40),param_1,param_2);
   pcVar1 = (char *)FUN_003798f0();
-  FUN_00324bc8((int)*pcVar1,(int)pcVar1[1],pcVar1[2]);
+  mapPlaceSet((int)*pcVar1,(int)pcVar1[1],pcVar1[2]);
   *(unsigned int *)(temp_v1 + 0x48) = param_1;
   temp_v3 = g_lmapScene;
   puVar5 = (unsigned int *)(g_lmapScene + 0x1c);
@@ -125,7 +125,7 @@ void FUN_00338bf0(unsigned int param_1,unsigned int param_2)
       temp_v3 = *(int *)(temp_v0 + 4);
     }
     if (temp_v0 != 0 && temp_v3 != 0) {
-      FUN_001aea28(DAT_0056fcc0);
+      ptrListRemoveClearOwner(g_handleRegistry);
       temp_v3 = temp_v4;
     }
     temp_v5 = temp_v5 + 1;
@@ -150,7 +150,7 @@ void FUN_00338bf0(unsigned int param_1,unsigned int param_2)
   FUN_00297c3c();
   FUN_00234b30();
   FUN_002737a8();
-  FUN_00324bc8(0xffffffff,0xffffffff);
+  mapPlaceSet(0xffffffff,0xffffffff);
   return;
 }
 

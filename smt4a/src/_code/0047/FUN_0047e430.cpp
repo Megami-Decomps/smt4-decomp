@@ -16,7 +16,7 @@ typedef struct Object {
 
 extern void asdMemFree(void *buffer);
 extern void scrScriptProcessDestroy(void *buffer);
-extern void FUN_00342010(u8 flag);
+extern void campButtonHelpAcquire(u8 flag);
 extern void FUN_003d54f8(s32 slot, s32 mode);
 extern s32 FUN_0013def0(s32 slot);
 
@@ -38,7 +38,7 @@ void FUN_0047e430(Object *obj, u8 flag)
         obj->bufferC = NULL;
     }
     if (obj->flag != 0) {
-        FUN_00342010(obj->flag);
+        campButtonHelpAcquire(obj->flag);
     }
     obj->state = 13;
     if (FUN_0013def0(0) == 3) {

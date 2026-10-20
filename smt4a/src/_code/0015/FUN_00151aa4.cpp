@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001654d8(...);
+int vec2GetXInt(...);
 int efctSetSpeed(void);
 int FUN_001835b4(...);
 
@@ -17,10 +17,10 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_6_stack;
 
-extern unsigned char DAT_0057f588; /* 0x57f588 */
+extern unsigned char g_messageMain; /* 0x57f588 */
 
-/* Supplied declaration required: FUN_001654d8. */
-extern unsigned int FUN_001654e4(int);
+/* Supplied declaration required: vec2GetXInt. */
+extern unsigned int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001835b4. */
 
@@ -36,22 +36,22 @@ void FUN_00151aa4(unsigned int param_1,unsigned int param_2,unsigned int param_3
   unsigned int temp_v3;
   int temp_v4;
   
-  temp_v4 = (*(int *)((unsigned char *)&DAT_0057f588 + 0x8));
-  if (*(char *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0x19fa) != '\0') {
-    temp_v0 = (*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0x15f0;
-    temp_v1 = FUN_001654d8();
-    temp_v2 = FUN_001654e4(temp_v0);
-    temp_v0 = FUN_001654d8();
-    temp_v3 = FUN_001654e4(temp_v4 + 0x167c);
+  temp_v4 = (*(int *)((unsigned char *)&g_messageMain + 0x8));
+  if (*(char *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x19fa) != '\0') {
+    temp_v0 = (*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x15f0;
+    temp_v1 = vec2GetXInt();
+    temp_v2 = vec2GetYInt(temp_v0);
+    temp_v0 = vec2GetXInt();
+    temp_v3 = vec2GetYInt(temp_v4 + 0x167c);
     FUN_001835b4(2,4,param_3,temp_v1,temp_v2,0xf1);
     temp_v4 = temp_v0;
   }
   else {
-    temp_v4 = (*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0x1708;
-    temp_v1 = FUN_001654d8(temp_v4);
+    temp_v4 = (*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x1708;
+    temp_v1 = vec2GetXInt(temp_v4);
     temp_v1 = -temp_v1;
     temp_v2 = 0;
-    temp_v4 = FUN_001654d8(temp_v4);
+    temp_v4 = vec2GetXInt(temp_v4);
     FUN_001835b4(2,4,param_1,temp_v1 + 0x140,0,0xf1);
     temp_v0 = temp_v4 - 0x140;
     temp_v3 = 0;

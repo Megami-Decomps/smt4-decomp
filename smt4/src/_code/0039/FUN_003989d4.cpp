@@ -13,8 +13,8 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_002327e0. */
-extern unsigned int *FUN_0024bb38(void);
-extern unsigned int *FUN_00288f60(void);
+extern unsigned int *gameDataGetSecondName(void);
+extern unsigned int *gameDataGetPlayerName(void);
 /* Supplied declaration required: FUN_00296ee0. */
 extern unsigned int *FUN_002bd1fc(void);
 extern int FUN_002bf818(int);
@@ -39,7 +39,7 @@ void FUN_003989d4(int param_1)
       FUN_002327e0(param_1,puVar2);
     }
     if (*(char *)(param_1 + 0x649) == '\x01') {
-      puVar2 = (unsigned int *)FUN_00288f60();
+      puVar2 = (unsigned int *)gameDataGetPlayerName();
       *puVar2 = 0;
       puVar2[1] = 0;
       puVar2[2] = 0;
@@ -48,7 +48,7 @@ void FUN_003989d4(int param_1)
       FUN_002327e0(param_1,puVar2);
     }
     if (*(char *)(param_1 + 0x649) == '\x02') {
-      puVar2 = (unsigned int *)FUN_0024bb38();
+      puVar2 = (unsigned int *)gameDataGetSecondName();
       *puVar2 = 0;
       puVar2[1] = 0;
       puVar2[2] = 0;

@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern int DAT_0043dcf0;
+extern int g_partyPanel;
 
 u8 FUN_00201ab0(void)
 {
-    return DAT_0043dcf0 != 0;
+    return g_partyPanel != 0;
 }
 
 } /* extern "C" */

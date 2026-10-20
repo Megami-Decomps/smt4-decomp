@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002e6e14(void);
+int asdOperatorDeleteArray(void);
 
-/* Supplied declaration required: FUN_002e6e14. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
 
 
 int * FUN_001221a2(int *param_1)
@@ -17,7 +17,7 @@ int * FUN_001221a2(int *param_1)
   
   for (temp_v0 = *param_1; temp_v0 != param_1[1]; temp_v0 = temp_v0 + 2) {
   }
-  FUN_002e6e14();
+  asdOperatorDeleteArray();
   return param_1;
 }
 

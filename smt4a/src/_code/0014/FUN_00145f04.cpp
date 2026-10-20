@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_001519ac(void);
+extern int gameDataBlocksGetStats(void);
 
 
 int FUN_00145f04(int param_1,int param_2,int param_3)
@@ -12,7 +12,7 @@ int FUN_00145f04(int param_1,int param_2,int param_3)
 {
   int temp_v0;
   
-  temp_v0 = FUN_001519ac();
+  temp_v0 = gameDataBlocksGetStats();
   if (param_1 == 0) {
     return temp_v0 + ((param_2 - 1) * 7 + param_3) * 4 + 0x1c;
   }

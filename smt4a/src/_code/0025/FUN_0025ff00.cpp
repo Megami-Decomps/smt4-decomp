@@ -5,16 +5,16 @@ extern "C" {
 void FUN_00208a34(s32 a, u32 b);
 s32 scrGetArg(s32 index);
 s32 FUN_0023a5d8(void);
-s32 FUN_002deb84(void);
+s32 scrGetCommandFrame(void);
 
-/* Script command: when FUN_002deb84 reports 0, forwards script arguments 0 (as a short) and 1 to FUN_00208a34; returns whether FUN_0023a5d8 holds. */
+/* Script command: when scrGetCommandFrame reports 0, forwards script arguments 0 (as a short) and 1 to FUN_00208a34; returns whether FUN_0023a5d8 holds. */
 u8 FUN_0025ff00(void)
 {
     s16 first;
     s32 result;
     u32 second;
 
-    result = FUN_002deb84();
+    result = scrGetCommandFrame();
     if (result == 0) {
         first = scrGetArg(0);
         second = scrGetArg(1);

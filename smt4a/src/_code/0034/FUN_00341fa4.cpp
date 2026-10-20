@@ -15,7 +15,7 @@ int asdMemFree(...);
 int scrScriptProcessDestroy(...);
 int FUN_00275bc8(...);
 int sysMemClear(...);
-int FUN_00324bc8(...);
+int mapPlaceSet(...);
 int FUN_00387240(...);
 int FUN_003872b8(...);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
@@ -34,7 +34,7 @@ extern unsigned char DAT_0052b740; /* 0x52b740 */
 extern unsigned char DAT_0052b770; /* 0x52b770 */
 extern unsigned char DAT_0052b788; /* 0x52b788 */
 extern unsigned char DAT_0052b7a0; /* 0x52b7a0 */
-extern signed char DAT_0057f0c4; /* 0x57f0c4 */
+extern signed char g_buttonHelp; /* 0x57f0c4 */
 extern unsigned int *DAT_0057f0c8; /* 0x57f0c8 */
 extern unsigned int DAT_0057f0cc; /* 0x57f0cc */
 extern unsigned int DAT_0057f0d0; /* 0x57f0d0 */
@@ -51,7 +51,7 @@ extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_00324bc8. */
+/* Supplied declaration required: mapPlaceSet. */
 /* Supplied declaration required: FUN_00387240. */
 /* Supplied declaration required: FUN_003872b8. */
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
@@ -84,8 +84,8 @@ void FUN_00341fa4(unsigned int *param_1,unsigned char param_2)
     scrScriptProcessDestroy();
     param_1[5] = 0;
   }
-  FUN_00324bc8(0xffffffff,0xffffffff);
-  if (DAT_0057f0c4 < '\x01') {
+  mapPlaceSet(0xffffffff,0xffffffff);
+  if (g_buttonHelp < '\x01') {
     if (DAT_0057f0c8 == (unsigned int *)0x0) {
       puVar3 = (unsigned int *)0x100;
       asdMemoryAllocTracked(0x100,0x100,0,0x684,1);
@@ -139,7 +139,7 @@ void FUN_00341fa4(unsigned int *param_1,unsigned char param_2)
     FUN_00275bc8(DAT_0057f0d0,DAT_0057f0cc);
     puVar3[0x1a0] = temp_v0;
   }
-  DAT_0057f0c4 = DAT_0057f0c4 + '\x01';
+  g_buttonHelp = g_buttonHelp + '\x01';
   return;
 }
 

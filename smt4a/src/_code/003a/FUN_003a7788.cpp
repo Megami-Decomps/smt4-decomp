@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern StateHolder1C *DAT_0057f268;
+extern StateHolder1C *g_partyPanel;
 
 void FUN_003a7788(void)
 {
-    if (DAT_0057f268 != NULL) {
-        DAT_0057f268->unkA04 = 0;
+    if (g_partyPanel != NULL) {
+        g_partyPanel->unkA04 = 0;
     }
 }
 

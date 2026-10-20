@@ -4,8 +4,8 @@
 
 extern "C" {
 
-extern int FUN_002c09d0(unsigned int);
-extern int FUN_002c2950(void);
+extern int gameFlagIsSet(unsigned int);
+extern int gameGetMapBlock(void);
 
 
 unsigned int FUN_00288f78(int param_1)
@@ -15,12 +15,12 @@ unsigned int FUN_00288f78(int param_1)
   int temp_v1;
   int temp_v2;
   
-  temp_v1 = FUN_002c2950();
-  if ((((param_1 - 0x19U < 6) || (param_1 == 0x66)) && (temp_v2 = FUN_002c09d0(0x144), temp_v2 == 0)) ||
-     (((param_1 - 0x1fU < 5 || (param_1 == 0x67)) && (temp_v2 = FUN_002c09d0(0x15a), temp_v2 == 0)))) {
+  temp_v1 = gameGetMapBlock();
+  if ((((param_1 - 0x19U < 6) || (param_1 == 0x66)) && (temp_v2 = gameFlagIsSet(0x144), temp_v2 == 0)) ||
+     (((param_1 - 0x1fU < 5 || (param_1 == 0x67)) && (temp_v2 = gameFlagIsSet(0x15a), temp_v2 == 0)))) {
     return 3;
   }
-  temp_v2 = FUN_002c2950();
+  temp_v2 = gameGetMapBlock();
   if (*(char *)(temp_v2 + 3) != '\x01') {
     if (param_1 == 0x18) {
       return 2;

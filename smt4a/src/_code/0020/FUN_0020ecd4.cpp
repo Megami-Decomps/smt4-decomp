@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00100388(int, unsigned char [72], unsigned char *);
 int FUN_00152f44(void);
-int FUN_0018719c(...);
+int gameFlagIsSet(...);
 int dataTableGetCount(unsigned int);
 int dataTableGetEntries(void);
 int rt_memcpy(unsigned char [72], int, int);
@@ -17,11 +17,11 @@ extern int *g_popupState; /* 0x58104c */
 extern unsigned char g_gameState; /* 0x5f15fc */
 
 /* Supplied declaration required: FUN_00100388. */
-extern int FUN_0014bef4(unsigned int);
+extern int randRange(unsigned int);
 /* Supplied declaration required: FUN_00152f44. */
 extern int saveSlotFindSelected(void);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0018719c. */
+/* Supplied declaration required: gameFlagIsSet. */
 /* Supplied declaration required: dataTableGetCount. */
 /* Supplied declaration required: dataTableGetEntries. */
 extern int FUN_002d8b58(unsigned int, unsigned short);
@@ -54,8 +54,8 @@ unsigned int FUN_0020ecd4(void)
     if (temp_v0 == 0) {
       return 0;
     }
-    temp_v1 = FUN_0018719c(0x1a2);
-    if ((((temp_v1 == 0) || (temp_v1 = FUN_0014bef4(99), temp_v1 + 1 >= 0x33)) &&
+    temp_v1 = gameFlagIsSet(0x1a2);
+    if ((((temp_v1 == 0) || (temp_v1 = randRange(99), temp_v1 + 1 >= 0x33)) &&
         ((temp_v1 = playerHasFlagBit(5), temp_v1 != 0 || (temp_v1 = playerHasFlagBit(9), temp_v1 != 0)))) &&
        ((*(int *)((unsigned char *)&g_gameState + 0x390)) == 0)) {
       (*(int *)((unsigned char *)&g_gameState + 0x390)) = 1;
@@ -75,9 +75,9 @@ unsigned int FUN_0020ecd4(void)
             puVar8 = (unsigned int *)(temp_v3 + temp_v5 * 0x20);
           }
           if ((((puVar8[1] == 4) && (*puVar8 == (unsigned int)*(unsigned short *)(temp_v0 + 300))) &&
-              (((short)puVar8[2] == 0 || (temp_v3 = FUN_0018719c(), temp_v3 != 0)))) &&
-             (((*(short *)((int)puVar8 + 10) == 0 || (temp_v3 = FUN_0018719c(), temp_v3 == 0)) &&
-              (temp_v3 = FUN_0014bef4(99), piVar1 = g_popupState, temp_v3 + 1 <= (int)(short)puVar8[3]))
+              (((short)puVar8[2] == 0 || (temp_v3 = gameFlagIsSet(), temp_v3 != 0)))) &&
+             (((*(short *)((int)puVar8 + 10) == 0 || (temp_v3 = gameFlagIsSet(), temp_v3 == 0)) &&
+              (temp_v3 = randRange(99), piVar1 = g_popupState, temp_v3 + 1 <= (int)(short)puVar8[3]))
              )) {
             *g_popupState = 6;
             piVar1[1] = 0;

@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_00240d74(...);
-int FUN_002992bc(...);
-int FUN_0029d620(int, int);
-int FUN_0029e11c(int);
+int flaggedEntryGetValueB(...);
+int flaggedEntrySetValueB(...);
+int flaggedEntrySetValueA(int, int);
+int flaggedEntryGetValueA(int);
 int FUN_0029eb5c(...);
 int FUN_002bc01c(int);
 
@@ -17,10 +17,10 @@ typedef struct {
 } param_1_stack;
 
 extern short FUN_001c36a0(void);
-/* Supplied declaration required: FUN_00240d74. */
-/* Supplied declaration required: FUN_002992bc. */
-/* Supplied declaration required: FUN_0029d620. */
-/* Supplied declaration required: FUN_0029e11c. */
+/* Supplied declaration required: flaggedEntryGetValueB. */
+/* Supplied declaration required: flaggedEntrySetValueB. */
+/* Supplied declaration required: flaggedEntrySetValueA. */
+/* Supplied declaration required: flaggedEntryGetValueA. */
 /* Supplied declaration required: FUN_0029eb5c. */
 extern int FUN_0029ee54(int);
 extern int FUN_0029efa8(int);
@@ -65,12 +65,12 @@ void FUN_00398fa8(int param_1)
           temp_v3 = (int)(((long long)(int)temp_v6 * -0x6db6db6d + ((unsigned long long)temp_v6 << 0x20)) >> 0x20);
           temp_v7 = *(int *)(param_1 + 0x10);
           temp_v8 = *(int *)(param_1 + 0x14);
-          FUN_002992bc(temp_v5,temp_v6 + ((temp_v3 >> 3) - (temp_v3 >> 0x1f)) * -0xe);
+          flaggedEntrySetValueB(temp_v5,temp_v6 + ((temp_v3 >> 3) - (temp_v3 >> 0x1f)) * -0xe);
           temp_v3 = (int)(((long long)(int)temp_v6 * -0x6db6db6d + ((unsigned long long)temp_v6 << 0x20)) >> 0x20);
-          FUN_0029d620(temp_v5,(temp_v3 >> 3) - (temp_v3 >> 0x1f));
-          temp_v4 = FUN_00240d74(temp_v5);
+          flaggedEntrySetValueA(temp_v5,(temp_v3 >> 3) - (temp_v3 >> 0x1f));
+          temp_v4 = flaggedEntryGetValueB(temp_v5);
           *(unsigned int *)(param_1 + 0x10) = temp_v4;
-          temp_v3 = FUN_0029e11c(temp_v5);
+          temp_v3 = flaggedEntryGetValueA(temp_v5);
           *(int *)(param_1 + 0x14) = temp_v3;
           if (*(int *)(param_1 + 0x10) == temp_v7 && temp_v3 == temp_v8) break;
         }
@@ -79,12 +79,12 @@ void FUN_00398fa8(int param_1)
           temp_v7 = *(int *)(param_1 + 0x10);
           temp_v8 = *(int *)(param_1 + 0x14);
           *(unsigned char *)(param_1 + 0x648) = 0;
-          FUN_002992bc(param_1 + 0x580,((temp_v3 >> 3) - (temp_v3 >> 0x1f)) * -0xf + temp_v6);
+          flaggedEntrySetValueB(param_1 + 0x580,((temp_v3 >> 3) - (temp_v3 >> 0x1f)) * -0xf + temp_v6);
           temp_v3 = (int)(((long long)(int)temp_v6 * -0x77777777 + ((unsigned long long)temp_v6 << 0x20)) >> 0x20);
-          FUN_0029d620(param_1 + 0x580,(temp_v3 >> 3) - (temp_v3 >> 0x1f));
-          temp_v4 = FUN_00240d74(param_1 + 0x580);
+          flaggedEntrySetValueA(param_1 + 0x580,(temp_v3 >> 3) - (temp_v3 >> 0x1f));
+          temp_v4 = flaggedEntryGetValueB(param_1 + 0x580);
           *(unsigned int *)(param_1 + 0x10) = temp_v4;
-          temp_v3 = FUN_0029e11c(param_1 + 0x580);
+          temp_v3 = flaggedEntryGetValueA(param_1 + 0x580);
           *(int *)(param_1 + 0x14) = temp_v3;
           if (*(int *)(param_1 + 0x10) == temp_v7 && temp_v3 == temp_v8) break;
         }
@@ -97,24 +97,24 @@ void FUN_00398fa8(int param_1)
     do {
       if (*(short *)(param_1 + temp_v3 * 2 + 0x820) == temp_v2) {
         temp_v7 = param_1 + 0x5e4;
-        temp_v8 = FUN_00240d74();
-        FUN_0029e11c(temp_v7);
-        temp_v0 = FUN_0029e11c(param_1 + 0x580);
+        temp_v8 = flaggedEntryGetValueB();
+        flaggedEntryGetValueA(temp_v7);
+        temp_v0 = flaggedEntryGetValueA(param_1 + 0x580);
         if (*(char *)(param_1 + 0x29) == '\0') {
           *(unsigned char *)(param_1 + 0x648) = 1;
-          FUN_0029d620(param_1 + 0x580,6);
-          FUN_002992bc(temp_v7,temp_v3 - 0x8b);
-          temp_v4 = FUN_00240d74(param_1 + 0x580);
+          flaggedEntrySetValueA(param_1 + 0x580,6);
+          flaggedEntrySetValueB(temp_v7,temp_v3 - 0x8b);
+          temp_v4 = flaggedEntryGetValueB(param_1 + 0x580);
           *(unsigned int *)(param_1 + 0x10) = temp_v4;
-          temp_v4 = FUN_0029e11c(param_1 + 0x580);
+          temp_v4 = flaggedEntryGetValueA(param_1 + 0x580);
           *(unsigned int *)(param_1 + 0x14) = temp_v4;
         }
         if (temp_v1 != 2) {
           if ((temp_v1 == 6) || (temp_v1 = FUN_002af600(temp_v2), temp_v1 == 0)) break;
         }
         else {
-          temp_v1 = FUN_00240d74(temp_v7);
-          if ((temp_v1 == temp_v8) && (temp_v1 = FUN_0029e11c(param_1 + 0x580), temp_v1 == temp_v0)) break;
+          temp_v1 = flaggedEntryGetValueB(temp_v7);
+          if ((temp_v1 == temp_v8) && (temp_v1 = flaggedEntryGetValueA(param_1 + 0x580), temp_v1 == temp_v0)) break;
         }
         FUN_002bc01c(0x100016c);
         break;

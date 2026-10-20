@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_00166f80(unsigned int);
+int msgBoxFlagsClearBit7(unsigned int);
 
-extern unsigned char DAT_0057f588; /* 0x57f588 */
+extern unsigned char g_messageMain; /* 0x57f588 */
 
-/* Supplied declaration required: FUN_00166f80. */
+/* Supplied declaration required: msgBoxFlagsClearBit7. */
 
 
 void FUN_002e6134(void)
@@ -18,12 +18,12 @@ void FUN_002e6134(void)
   unsigned int *puVar1;
   int temp_v0;
   
-  temp_v0 = (*(int *)((unsigned char *)&DAT_0057f588 + 0x4));
-  if (((*(int *)((unsigned char *)&DAT_0057f588 + 0x4)) != 0) && (*(char *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x4)) + 0x95) == '\x02')) {
-    puVar1 = (unsigned int *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x4)) + 0xc);
-    *(unsigned char *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x4)) + 0x95) = 0;
+  temp_v0 = (*(int *)((unsigned char *)&g_messageMain + 0x4));
+  if (((*(int *)((unsigned char *)&g_messageMain + 0x4)) != 0) && (*(char *)((*(int *)((unsigned char *)&g_messageMain + 0x4)) + 0x95) == '\x02')) {
+    puVar1 = (unsigned int *)((*(int *)((unsigned char *)&g_messageMain + 0x4)) + 0xc);
+    *(unsigned char *)((*(int *)((unsigned char *)&g_messageMain + 0x4)) + 0x95) = 0;
     if ((*puVar1 & 0x20) == 0) {
-      FUN_00166f80(*(unsigned int *)(temp_v0 + 4));
+      msgBoxFlagsClearBit7(*(unsigned int *)(temp_v0 + 4));
       return;
     }
   }

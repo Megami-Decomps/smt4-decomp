@@ -18,7 +18,7 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned int DAT_00573808; /* 0x573808 */
-extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
+extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
 /* Supplied declaration required: FUN_00411bb4. */
 /* Supplied declaration required: FUN_004aaa94. */
@@ -30,7 +30,7 @@ void FUN_004118d0(unsigned int param_1)
 
 {
 /* irregular: 4 native warning(s); review required */
-  FUN_004aaa94(DAT_0057a9c8);
+  FUN_004aaa94(g_btlUiBlock);
   FUN_00411bb4(param_1);
   FUN_004f5238(DAT_00573808,0,0,9,1,6,0,1,0);
   FUN_004f5238(DAT_00573808,0,0,9,1,6,0,1,0);

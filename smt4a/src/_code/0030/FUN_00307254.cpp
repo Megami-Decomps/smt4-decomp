@@ -4,16 +4,16 @@
 
 extern "C" {
 
-int FUN_002ee9c0(unsigned int, int *);
-int FUN_002fbb68(unsigned int, int);
+int strHolderAssignU32(unsigned int, int *);
+int strHolderAssignU32Alias(unsigned int, int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_4_stack;
 
-/* Supplied declaration required: FUN_002ee9c0. */
-/* Supplied declaration required: FUN_002fbb68. */
+/* Supplied declaration required: strHolderAssignU32. */
+/* Supplied declaration required: strHolderAssignU32Alias. */
 extern unsigned int vectorCount4_002ff8c6(int *);
 
 
@@ -27,10 +27,10 @@ void FUN_00307254(unsigned int param_1,int *param_2,unsigned int param_3,unsigne
   
   temp_v2 = param_4;
   temp_v2 = vectorCount4_002ff8c6(param_2);
-  FUN_002ee9c0(param_1,&temp_v2);
+  strHolderAssignU32(param_1,&temp_v2);
   temp_v1 = param_2[1];
   for (temp_v0 = *param_2; temp_v0 != temp_v1; temp_v0 = temp_v0 + 4) {
-    FUN_002fbb68(param_1,temp_v0);
+    strHolderAssignU32Alias(param_1,temp_v0);
   }
   return;
 }

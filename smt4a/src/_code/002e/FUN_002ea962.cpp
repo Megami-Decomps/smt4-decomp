@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_002ede60(void);
+extern int onlineSockAddrConstruct2(void);
 
 
 void FUN_002ea962(unsigned int param_1,int param_2)
@@ -12,7 +12,7 @@ void FUN_002ea962(unsigned int param_1,int param_2)
 {
   int temp_v0;
   
-  temp_v0 = FUN_002ede60();
+  temp_v0 = onlineSockAddrConstruct2();
   *(unsigned char *)(temp_v0 + 0x20) = *(unsigned char *)(param_2 + 0x20);
   return;
 }

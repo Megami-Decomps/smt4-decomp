@@ -19,7 +19,7 @@ static float romwright_fabs_4(float value)
     return value < (float)0 ? -value : value;
 }
 #endif
-extern unsigned int FUN_00147a7c(int);
+extern unsigned int nnosConvertVirtToPhys(int);
 /* Supplied declaration required: FUN_002aa6ac. */
 
 
@@ -271,7 +271,7 @@ LAB_00143e90:
       temp_v3 = (param_1[0x10] & 0x7ffU) << 0x10;
       *(unsigned int *)(temp_v1 + 0x7d8) = (temp_v0 & 0xf800ffff) | temp_v3;
       *(unsigned int *)(temp_v1 + 0x7d8) = (param_1[0x11] & 0x7ffU) | (temp_v0 & 0xf800f800) | temp_v3;
-      temp_v0 = FUN_00147a7c(*piVar10);
+      temp_v0 = nnosConvertVirtToPhys(*piVar10);
       temp_v6 = temp_v1 + 0x7d4;
       *(unsigned int *)(temp_v1 + 0x7e4) = (*(unsigned int *)(temp_v1 + 0x7e4) & 0xc0000000) | (temp_v0 >> 3);
       *puVar9 = *puVar9 | 4;
@@ -458,7 +458,7 @@ LAB_00143a18:
       temp_v3 = (param_1[0x10] & 0x7ffU) << 0x10;
       *(unsigned int *)(temp_v1 + 0x7b8) = (temp_v0 & 0xf800ffff) | temp_v3;
       *(unsigned int *)(temp_v1 + 0x7b8) = (param_1[0x11] & 0x7ffU) | (temp_v0 & 0xf800f800) | temp_v3;
-      temp_v0 = FUN_00147a7c(*piVar10);
+      temp_v0 = nnosConvertVirtToPhys(*piVar10);
       temp_v6 = temp_v1 + 0x7b4;
       *(unsigned int *)(temp_v1 + 0x7c4) = (*(unsigned int *)(temp_v1 + 0x7c4) & 0xc0000000) | (temp_v0 >> 3);
       *puVar9 = *puVar9 | 2;
@@ -665,7 +665,7 @@ LAB_00143a18:
   }
   *(unsigned int *)(temp_v1 + 0x77c) = temp_v0;
 LAB_001438b8:
-  temp_v0 = FUN_00147a7c(*piVar10);
+  temp_v0 = nnosConvertVirtToPhys(*piVar10);
   *(unsigned int *)(temp_v1 + 0x784) = (*(unsigned int *)(temp_v1 + 0x784) & 0xc0000000) | (temp_v0 >> 3);
   *puVar9 = *puVar9 | 1;
   FUN_002aa6ac(0x81,10,temp_v1 + 0x774);

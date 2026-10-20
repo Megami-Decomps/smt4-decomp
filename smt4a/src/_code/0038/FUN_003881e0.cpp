@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern u8 DAT_0057f110;
+extern u8 g_campCec;
 
 void FUN_003881e0(u8 value)
 {
-    DAT_0057f110 = value;
+    g_campCec = value;
 }
 
 } /* extern "C" */

@@ -10,14 +10,14 @@ int FUN_00105dd0(int *, int **);
 int FUN_00108ea8(...);
 int FUN_00114b86(...);
 int FUN_002eab08(...);
-int FUN_002eb16e(int *, int);
+int fixedBufferCopy(int *, int);
 int constructObj00559344(unsigned char [12], int);
 int FUN_002eb60c(...);
 int destroyObj0055ae64(int **);
 int FUN_002ec934(int **, unsigned char [8], unsigned int);
 int FUN_002ef268(int *, unsigned int);
 int FUN_002efa58(int **, int *, int);
-int FUN_002efb6c(int **, int);
+int bitFieldSet(int **, int);
 int FUN_002f07b8(...);
 int halt_baddata(void);
 
@@ -60,7 +60,7 @@ extern unsigned char g_flagBlock; /* 0x594958 */
 /* Supplied declaration required: FUN_002eab08. */
 extern int FUN_002eac34(unsigned char);
 extern int FUN_002eafbe(int);
-/* Supplied declaration required: FUN_002eb16e. */
+/* Supplied declaration required: fixedBufferCopy. */
 /* Supplied declaration required: constructObj00559344. */
 /* Supplied declaration required: FUN_002eb60c. */
 extern int FUN_002eb6ae(int, unsigned int);
@@ -72,7 +72,7 @@ extern int FUN_002ef01c(int);
 extern int FUN_002efa1c(int *);
 extern unsigned int *arrayElementAddress_002efa50(int *, unsigned char);
 /* Supplied declaration required: FUN_002efa58. */
-/* Supplied declaration required: FUN_002efb6c. */
+/* Supplied declaration required: bitFieldSet. */
 extern int FUN_002f035c(unsigned char *, unsigned char *);
 extern int FUN_002f03f4(unsigned int, unsigned int);
 extern int FUN_002f0400(unsigned int, unsigned int);
@@ -184,7 +184,7 @@ void FUN_00107d94(int *param_1,int param_2)
       if (temp_v5 != 0) {
         piVar8 = temp_v22;
       }
-      FUN_002eb16e(piVar8,param_2 + 0x50);
+      fixedBufferCopy(piVar8,param_2 + 0x50);
     }
     if (temp_v24 != 0) {
       if ((char)param_1[0x52] != '\0') {
@@ -251,7 +251,7 @@ void FUN_00107d94(int *param_1,int param_2)
       FUN_002efa58(&temp_v9,param_1 + 0x59,*(unsigned char *)(temp_v16 + 4));
       temp_v8 = temp_v10;
       temp_v7 = temp_v9;
-      FUN_002efb6c(&temp_v7,1);
+      bitFieldSet(&temp_v7,1);
     }
     else {
       FUN_00108ea8(param_1,param_2);

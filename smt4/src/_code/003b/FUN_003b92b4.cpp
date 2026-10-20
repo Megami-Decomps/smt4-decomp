@@ -6,13 +6,13 @@ extern "C" {
 
 int FUN_0022b684(int);
 int FUN_0026f960(int);
-int FUN_0026f9b4(void);
+int bgmReleaseStopped(void);
 int FUN_00276218(void);
 int FUN_00296e90(void);
-int FUN_0029c3b0(int);
+int soundChannelStopAll(int);
 int FUN_002a03d8(int, int);
-int FUN_002b63c0(void);
-int FUN_002bf694(...);
+int dataTable1bOr1cGetRecord(void);
+int libc_strcpy(...);
 int asdSequenceRequest(...);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
@@ -35,15 +35,15 @@ extern int DAT_0049fd14; /* 0x49fd14 */
 /* Supplied declaration required: FUN_0022b684. */
 extern unsigned int FUN_0022b8c0(int);
 /* Supplied declaration required: FUN_0026f960. */
-/* Supplied declaration required: FUN_0026f9b4. */
+/* Supplied declaration required: bgmReleaseStopped. */
 /* Supplied declaration required: FUN_00276218. */
 extern int FUN_00287894(void);
 extern int FUN_002903f0(void);
 /* Supplied declaration required: FUN_00296e90. */
-/* Supplied declaration required: FUN_0029c3b0. */
+/* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: FUN_002a03d8. */
-/* Supplied declaration required: FUN_002b63c0. */
-/* Supplied declaration required: FUN_002bf694. */
+/* Supplied declaration required: dataTable1bOr1cGetRecord. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: asdSequenceRequest. */
 extern int FUN_003bb36c(int);
 
@@ -98,7 +98,7 @@ void FUN_003b92b4(int param_1)
       FUN_00276218();
       temp_v5[0] = *(unsigned int *)(*(int *)(param_1 + 0xd60) + 0x40);
       temp_v5[1] = 0xffffffff;
-      FUN_002bf694(temp_v5 + 2,*(int *)(param_1 + 0xd60) + 0x44);
+      libc_strcpy(temp_v5 + 2,*(int *)(param_1 + 0xd60) + 0x44);
       temp_v4 = 0x20;
       temp_v2 = 4;
       puVar5 = temp_v5;
@@ -107,7 +107,7 @@ void FUN_003b92b4(int param_1)
       FUN_00276218();
       temp_v5[0] = DAT_0049f970;
       temp_v5[1] = 0xffffffff;
-      FUN_002bf694(temp_v5 + 2,&DAT_0049f978);
+      libc_strcpy(temp_v5 + 2,&DAT_0049f978);
       temp_v4 = 0x20;
       temp_v2 = 4;
       puVar5 = temp_v5;
@@ -148,7 +148,7 @@ void FUN_003b92b4(int param_1)
           temp_v2 = FUN_0022b8c0(param_1 + 0x9c);
           *(unsigned int *)(param_1 + 0xd60) = temp_v2;
           FUN_0022b684(param_1);
-          FUN_002b63c0();
+          dataTable1bOr1cGetRecord();
           FUN_0026f960(*(unsigned short *)(temp_v0 + 0x148));
         }
       }
@@ -163,8 +163,8 @@ void FUN_003b92b4(int param_1)
     }
     else {
       if (*(char *)(param_1 + 0x4b) == '\0') goto LAB_003b9564;
-      FUN_0026f9b4();
-      FUN_0029c3b0(0xf);
+      bgmReleaseStopped();
+      soundChannelStopAll(0xf);
       DAT_0049f950 = 1;
       temp_v5[0] = 1;
       temp_v5[1] = 0xffffffff;

@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0018b600(void);
-int FUN_0018b610(void);
+int globalCriticalSectionEnterForward(void);
+int globalCriticalSectionLeaveForward(void);
 int FUN_001963e0(void);
 
 typedef int romwright_code(...);
@@ -19,8 +19,8 @@ extern unsigned char DAT_0061a482; /* 0x61a482 */
 extern unsigned char DAT_0061a488; /* 0x61a488 */
 extern int DAT_0061a510; /* 0x61a510 */
 
-/* Supplied declaration required: FUN_0018b600. */
-/* Supplied declaration required: FUN_0018b610. */
+/* Supplied declaration required: globalCriticalSectionEnterForward. */
+/* Supplied declaration required: globalCriticalSectionLeaveForward. */
 /* Supplied declaration required: FUN_001963e0. */
 
 
@@ -37,7 +37,7 @@ void FUN_0017e4d8(void)
   temp_v0 = DAT_0061a510;
   UNRECOVERED_JUMPTABLE = (romwright_code *)0x0;
   temp_v2 = *(int *)(DAT_0061a510 + 0x18) + *(int *)(DAT_0061a510 + 0x28) * 0x1c;
-  FUN_0018b600();
+  globalCriticalSectionEnterForward();
   temp_v1 = *(int *)(temp_v0 + 0x28) + 1;
   *(int *)(temp_v0 + 0x28) = temp_v1;
   if ((*(romwright_code **)(temp_v0 + 0x38) != (romwright_code *)0x0) &&
@@ -57,7 +57,7 @@ void FUN_0017e4d8(void)
   else {
     FUN_001963e0();
   }
-  FUN_0018b610();
+  globalCriticalSectionLeaveForward();
   if (UNRECOVERED_JUMPTABLE != (romwright_code *)0x0) {
                     /* WARNING: Could not recover jumptable at 0x0017e57c. Too many branches */
                     /* WARNING: Treating indirect jump as call */

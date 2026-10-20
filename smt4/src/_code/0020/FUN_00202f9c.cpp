@@ -27,7 +27,7 @@ typedef struct SceneGlobals {
     /* 0x04 */ SceneState *state;
 } SceneGlobals;
 
-extern SceneGlobals DAT_0044de28;
+extern SceneGlobals g_saveLoadUIFlags;
 
 int FUN_002108c0(int arg0, u32 arg1);
 int FUN_0028971c(void);
@@ -35,34 +35,34 @@ int FUN_00292c0c(void);
 int FUN_00297050(int arg);
 int FUN_0029a128(int arg);
 int FUN_0029ee6c(int arg0, int color);
-int FUN_002a46d8(int arg);
+int fileSlotFree(int arg);
 int scrScriptProcessDestroy(void);
 int asdMdlManagerDestroy(u32 handle);
-int FUN_002b8cc8(void);
+int ifTouchRegionRemove(void);
 int asdMemFree(void *block);
 int jobStop(void *context, int arg);
 
 /* Tears down the scene state: releases its buffers and handles, then frees the context. */
 void FUN_00202f9c(void)
 {
-    SceneState *state = DAT_0044de28.state;
+    SceneState *state = g_saveLoadUIFlags.state;
     SceneState *state2;
     u32 i;
 
     asdMdlManagerDestroy(state->handle360);
     state->handle360 = 0;
     if (state->hasExtraTarget != 0) {
-        FUN_002b8cc8();
-        FUN_002b8cc8();
+        ifTouchRegionRemove();
+        ifTouchRegionRemove();
     }
     FUN_0029ee6c(0, 0x323232ff);
-    state2 = DAT_0044de28.state;
+    state2 = g_saveLoadUIFlags.state;
     i = 0;
     do {
         FUN_002108c0(0x36, i);
         i++;
     } while (i < 10);
-    FUN_002a46d8(0x3d);
+    fileSlotFree(0x3d);
     FUN_0028971c();
     if (state2->buffer248 != NULL) {
         scrScriptProcessDestroy();

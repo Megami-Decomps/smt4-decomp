@@ -4,16 +4,16 @@
 
 extern "C" {
 
-int FUN_002e7232(int *);
-int FUN_002e760a(int);
-int FUN_002e7658(unsigned char [8]);
-int FUN_002e76a0(unsigned char [8], int);
+int sharedRefRelease(int *);
+int operatorNew(int);
+int sharedRefHolderDestroy(unsigned char [8]);
+int strHolderAssignBuffer(unsigned char [8], int);
 int FUN_002eb108(int *, int, unsigned int, int, unsigned int, int);
 int FUN_002eb7d0(int, int);
 int FUN_002eb7e0(int *, int, unsigned int, int, unsigned int, int);
 int FUN_002ed258(unsigned char [8], int *);
-int FUN_002ee9c0(unsigned char [8], unsigned int *);
-int FUN_002eea5c(unsigned char [8], unsigned short [4]);
+int strHolderAssignU32(unsigned char [8], unsigned int *);
+int strHolderAssignOneWide(unsigned char [8], unsigned short [4]);
 
 typedef int romwright_code(...);
 /* stack frame of param_3: 5 slot(s), 18 byte(s) */
@@ -25,18 +25,18 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_002e7232. */
-/* Supplied declaration required: FUN_002e760a. */
+/* Supplied declaration required: sharedRefRelease. */
+/* Supplied declaration required: operatorNew. */
 extern int *strInit(void);
-/* Supplied declaration required: FUN_002e7658. */
-/* Supplied declaration required: FUN_002e76a0. */
+/* Supplied declaration required: sharedRefHolderDestroy. */
+/* Supplied declaration required: strHolderAssignBuffer. */
 /* Supplied declaration required: FUN_002eb108. */
 /* Supplied declaration required: FUN_002eb7d0. */
 /* Supplied declaration required: FUN_002eb7e0. */
 extern int FUN_002eb83c(void);
 /* Supplied declaration required: FUN_002ed258. */
-/* Supplied declaration required: FUN_002ee9c0. */
-/* Supplied declaration required: FUN_002eea5c. */
+/* Supplied declaration required: strHolderAssignU32. */
+/* Supplied declaration required: strHolderAssignOneWide. */
 extern int *FUN_002eff58(int, int);
 extern int FUN_002eff84(void);
 
@@ -69,7 +69,7 @@ int * FUN_002f3624(int param_1,unsigned int param_2,int param_3)
     }
   }
   else {
-    temp_v0 = FUN_002e760a(0x20);
+    temp_v0 = operatorNew(0x20);
     if (temp_v0 != 0) {
       piVar2 = (int *)strInit();
     }
@@ -78,14 +78,14 @@ int * FUN_002f3624(int param_1,unsigned int param_2,int param_3)
     }
   }
   FUN_002ed258(temp_v2,piVar2);
-  FUN_002e7232(piVar2);
+  sharedRefRelease(piVar2);
   temp_v1 = *(unsigned int *)(param_3 + 8);
   temp_v4 = (temp_v1 << 0x18) | (((temp_v1 >> 8) & 0xff) << 0x10) | (((temp_v1 >> 0x10) & 0xff) << 8) |
              (temp_v1 >> 0x18);
-  FUN_002ee9c0(temp_v2,&temp_v4);
+  strHolderAssignU32(temp_v2,&temp_v4);
   temp_v5[0] = (*(unsigned short *)(param_3 + 6) << 8) | (*(unsigned short *)(param_3 + 6) >> 8);
-  FUN_002eea5c(temp_v2,temp_v5);
-  FUN_002e76a0(temp_v2,param_1);
+  strHolderAssignOneWide(temp_v2,temp_v5);
+  strHolderAssignBuffer(temp_v2,param_1);
   if ((param_1 != 0) && ((int)((unsigned int)*(unsigned char *)(param_1 + 0x1c) << 0x1d) < 0)) {
     piVar2 = (int *)FUN_002eb7d0(0x150,0);
     if ((piVar2 != (int *)0x0) &&
@@ -93,15 +93,15 @@ int * FUN_002f3624(int param_1,unsigned int param_2,int param_3)
       temp_v0 = FUN_002eb83c();
       if (temp_v0 != 0) {
         *(unsigned char *)(piVar2 + 9) = 0;
-        FUN_002e7658(temp_v2);
+        sharedRefHolderDestroy(temp_v2);
         return piVar2;
       }
       (**(romwright_code **)(*piVar2 + 4))(piVar2);
     }
-    FUN_002e7658(temp_v2);
+    sharedRefHolderDestroy(temp_v2);
     return (int *)0x0;
   }
-  piVar2 = (int *)FUN_002e760a(0x150);
+  piVar2 = (int *)operatorNew(0x150);
   if (piVar2 != (int *)0x0) {
     FUN_002eb108(piVar2,0,param_2,0,temp_v3,0);
   }
@@ -109,7 +109,7 @@ int * FUN_002f3624(int param_1,unsigned int param_2,int param_3)
     piVar2 = (int *)0x0;
   }
   *(unsigned char *)(piVar2 + 9) = 0;
-  FUN_002e7658(temp_v2);
+  sharedRefHolderDestroy(temp_v2);
   return piVar2;
 }
 

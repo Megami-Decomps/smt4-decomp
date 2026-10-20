@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_001a08d8(int);
-int FUN_001bcd48(int, int);
+int nn_os_LightEvent_Signal(int);
+int svcSleepThread(int, int);
 
-/* Supplied declaration required: FUN_001a08d8. */
-/* Supplied declaration required: FUN_001bcd48. */
+/* Supplied declaration required: nn_os_LightEvent_Signal. */
+/* Supplied declaration required: svcSleepThread. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
 
@@ -29,7 +29,7 @@ unsigned int FUN_004241e0(int param_1)
     nn_os_CriticalSection_Enter(param_1);
     *(unsigned int *)(param_1 + 0xc) = 5;
     nn_os_CriticalSection_Leave(param_1);
-    FUN_001a08d8(param_1 + 0x20);
+    nn_os_LightEvent_Signal(param_1 + 0x20);
     while( 1 ) {
       if (*(int *)(param_1 + 0xc) == 3) {
         return 1;
@@ -40,7 +40,7 @@ unsigned int FUN_004241e0(int param_1)
         temp_v0 = *(int *)(param_1 + 0xc);
       }
       if (temp_v1 || temp_v0 == 1) break;
-      FUN_001bcd48(500000,0);
+      svcSleepThread(500000,0);
     }
   }
   return 0;

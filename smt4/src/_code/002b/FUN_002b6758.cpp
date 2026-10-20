@@ -7,9 +7,9 @@ extern "C" {
 int FUN_001413d0(unsigned int, int, unsigned int, unsigned int, unsigned int);
 int FUN_002b04e8(...);
 int FUN_002b05d0(int);
-int FUN_002b06c4(void);
-int FUN_002b9024(void);
-int FUN_002be304(void);
+int dataTable00FindById(void);
+int devilGetRecord(void);
+int drawSetColorFromRGBA8(void);
 int FUN_002bed3c(void);
 int FUN_002bf288(int, int, int, unsigned int, unsigned int, unsigned int);
 
@@ -32,9 +32,9 @@ extern int FUN_0014143c(unsigned int, unsigned short);
 /* Supplied declaration required: FUN_002b04e8. */
 /* Supplied declaration required: FUN_002b05d0. */
 extern int FUN_002b066c(unsigned int);
-/* Supplied declaration required: FUN_002b06c4. */
-/* Supplied declaration required: FUN_002b9024. */
-/* Supplied declaration required: FUN_002be304. */
+/* Supplied declaration required: dataTable00FindById. */
+/* Supplied declaration required: devilGetRecord. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: FUN_002bf288. */
 
@@ -56,9 +56,9 @@ void FUN_002b6758(unsigned int param_1,unsigned int param_2,unsigned int param_3
   }
   else {
     temp_v0 = param_1 & 0xffff;
-    FUN_002b9024();
+    devilGetRecord();
     temp_v1 = param_1;
-    FUN_002b06c4();
+    dataTable00FindById();
     if ((*(unsigned char *)(temp_v1 + 3) & 1) != 0) {
       FUN_002bf288(2,0x25,2000,param_2,param_3,param_4);
       return;
@@ -66,7 +66,7 @@ void FUN_002b6758(unsigned int param_1,unsigned int param_2,unsigned int param_3
     if (((param_5 != 0) && (temp_v2 = FUN_002b066c(param_1 & 0xffff), temp_v2 != 0)) &&
        ((*(unsigned short *)(temp_v2 + 0x44) & 2) != 0)) {
       FUN_002b05d0(1);
-      FUN_002be304();
+      drawSetColorFromRGBA8();
     }
     temp_v2 = FUN_0014143c(g_aocSystem,*(unsigned short *)(temp_v0 + 0x90));
     if (temp_v2 != 0) {

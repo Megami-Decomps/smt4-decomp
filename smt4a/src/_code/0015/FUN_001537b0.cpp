@@ -18,7 +18,7 @@ typedef struct {
     unsigned int sp50; /* 0x50: local_50 */
 } void_stack;
 
-extern int DAT_0057f65c; /* 0x57f65c */
+extern int g_frameTex; /* 0x57f65c */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -49,7 +49,7 @@ void FUN_001537b0(void)
   float temp_v10;
   float temp_v11;
   
-  temp_v0 = DAT_0057f65c;
+  temp_v0 = g_frameTex;
   temp_v7 = 400.0f;
   temp_v8 = temp_v7;
   temp_v1 = FUN_001546e8(0);

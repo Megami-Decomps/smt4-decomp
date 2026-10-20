@@ -6,9 +6,9 @@ extern "C" {
 
 int FUN_0018b67c(...);
 int FUN_0018b68c(int);
-int FUN_0018b868(void);
+int nn_applet_CTR_detail_OpenSession(void);
 int FUN_0018b920(void);
-int FUN_0018b964(void);
+int nn_applet_CTR_detail_CloseSession(void);
 int software_interrupt(int);
 
 /* stack frame of param_7: 3 slot(s), 12 byte(s) */
@@ -24,9 +24,9 @@ extern unsigned char DAT_005891b0; /* 0x5891b0 */
 /* Supplied declaration required: FUN_0018b67c. */
 /* Supplied declaration required: FUN_0018b68c. */
 extern unsigned int FUN_0018b70c(void);
-/* Supplied declaration required: FUN_0018b868. */
+/* Supplied declaration required: nn_applet_CTR_detail_OpenSession. */
 /* Supplied declaration required: FUN_0018b920. */
-/* Supplied declaration required: FUN_0018b964. */
+/* Supplied declaration required: nn_applet_CTR_detail_CloseSession. */
 extern int FUN_0018b9d4(void);
 extern unsigned int FUN_0018bbac(unsigned int *, unsigned int, unsigned int *, unsigned char *, int, unsigned int *, int *);
 extern int FUN_001a2e68(void);
@@ -92,10 +92,10 @@ FUN_0018b71c(unsigned int *param_1,unsigned int *param_2,unsigned char *param_3,
       param_6 = &temp_v2;
     }
     temp_v2 = 0;
-    FUN_0018b868();
+    nn_applet_CTR_detail_OpenSession();
     temp_v1 = FUN_0018b70c();
     temp_v1 = FUN_0018bbac(param_1,temp_v1,param_2,param_3,param_4,param_5,param_6);
-    FUN_0018b964();
+    nn_applet_CTR_detail_CloseSession();
     if (temp_v2 != 0) {
       software_interrupt(0x23);
     }

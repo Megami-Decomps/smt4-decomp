@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002adba8(int *, int, int);
 int FUN_002af390(int, int);
 int FUN_002b5cf0(int, int);
-int FUN_002b7014(void);
+int asdModelCommandBlockRelease(void);
 int FUN_002b703c(void);
 int FUN_002b7148(void);
 
@@ -22,7 +22,7 @@ extern int DAT_004729e4; /* 0x4729e4 */
 /* Supplied declaration required: FUN_002adba8. */
 /* Supplied declaration required: FUN_002af390. */
 /* Supplied declaration required: FUN_002b5cf0. */
-/* Supplied declaration required: FUN_002b7014. */
+/* Supplied declaration required: asdModelCommandBlockRelease. */
 /* Supplied declaration required: FUN_002b703c. */
 /* Supplied declaration required: FUN_002b7148. */
 
@@ -50,7 +50,7 @@ void FUN_00126d14(int param_1)
   *(unsigned int *)(temp_v0 + DAT_004729e4 * 4) = 0;
   *(unsigned int *)(temp_v0 + DAT_004729e4 * 4 + 4) = 0xf02bc;
   DAT_004729e4 = DAT_004729e4 + 2;
-  FUN_002b7014();
+  asdModelCommandBlockRelease();
   temp_v1 = 0xa0000002;
   uStack_1c = 0xb02b9;
   uStack_18 = 2;
@@ -67,7 +67,7 @@ void FUN_00126d14(int param_1)
   *(unsigned int *)(temp_v0 + DAT_004729e4 * 4) = 0;
   *(unsigned int *)(temp_v0 + DAT_004729e4 * 4 + 4) = 0x100e0;
   DAT_004729e4 = DAT_004729e4 + 2;
-  FUN_002b7014();
+  asdModelCommandBlockRelease();
   return;
 }
 

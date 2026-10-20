@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_00192730(void);
-int FUN_00192780(void);
+int dataTable18Sub0GetCount(void);
+int dataTable18Sub0GetEntries(void);
 
-extern int FUN_001519ac(void);
-/* Supplied declaration required: FUN_00192730. */
-/* Supplied declaration required: FUN_00192780. */
+extern int gameDataBlocksGetStats(void);
+/* Supplied declaration required: dataTable18Sub0GetCount. */
+/* Supplied declaration required: dataTable18Sub0GetEntries. */
 
 
 void FUN_0040a640(int param_1)
@@ -24,9 +24,9 @@ void FUN_0040a640(int param_1)
   unsigned int temp_v4;
   unsigned int temp_v5;
   
-  FUN_00192780();
+  dataTable18Sub0GetEntries();
   temp_v1 = param_1;
-  FUN_00192730();
+  dataTable18Sub0GetCount();
   temp_v3 = 0;
   if (temp_v3 < temp_v1) {
     do {
@@ -45,7 +45,7 @@ void FUN_0040a640(int param_1)
       else if (temp_v5 == 7) {
         temp_v5 = 6;
       }
-      temp_v2 = FUN_001519ac();
+      temp_v2 = gameDataBlocksGetStats();
       if (temp_v0 != '\0') {
         puVar3 = (unsigned short *)0x0;
         if (temp_v0 == '\x01') {

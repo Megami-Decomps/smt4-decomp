@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00164b5c(int, int, int, unsigned int, unsigned int, unsigned int);
 int FUN_0017ffa8(int, int, unsigned int, unsigned int, unsigned int, unsigned int);
 int FUN_00184310(void);
-int FUN_0019cac4(void);
+int dataTable00FindById(void);
 int FUN_003a7a88(unsigned int, int);
 int FUN_0046fa94(unsigned int, unsigned int, int, int, unsigned int, unsigned int, unsigned int, unsigned int);
 int FUN_00471244(unsigned int, unsigned int, int, unsigned int, int, unsigned int, unsigned int, unsigned int);
@@ -23,8 +23,8 @@ extern unsigned int g_aocSystem; /* 0x570280 */
 /* Supplied declaration required: FUN_00164b5c. */
 /* Supplied declaration required: FUN_0017ffa8. */
 /* Supplied declaration required: FUN_00184310. */
-extern int FUN_0018719c(unsigned int);
-/* Supplied declaration required: FUN_0019cac4. */
+extern int gameFlagIsSet(unsigned int);
+/* Supplied declaration required: dataTable00FindById. */
 extern int FUN_001a6508(unsigned int, int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_003a7a88. */
 /* Supplied declaration required: FUN_0046fa94. */
@@ -46,7 +46,7 @@ void FUN_002a6c3c(unsigned int param_1,unsigned int param_2,unsigned int param_3
   temp_v2 = param_1;
   if (param_5 != 0) {
     if ((int)param_1 < 0) {
-      temp_v0 = FUN_0018719c(0x11);
+      temp_v0 = gameFlagIsSet(0x11);
       if (temp_v0 == 0) {
         temp_v2 = 0x25e;
       }
@@ -58,7 +58,7 @@ void FUN_002a6c3c(unsigned int param_1,unsigned int param_2,unsigned int param_3
       temp_v2 = param_1 & 0xffff;
       FUN_00184310();
       temp_v1 = param_1 & 0xffff;
-      FUN_0019cac4();
+      dataTable00FindById();
       if (temp_v2 == 0) {
         return;
       }

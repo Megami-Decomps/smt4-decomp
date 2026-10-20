@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0012dac2(int *, int *, int *, int *);
 int FUN_0012fdbc(int *, int *, int *, int *);
-int FUN_002e6e14(...);
+int asdOperatorDeleteArray(...);
 int FUN_002eb9ea(unsigned int *);
 
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
@@ -23,7 +23,7 @@ extern unsigned char DAT_00558c7c; /* 0x558c7c */
 #endif
 /* Supplied declaration required: FUN_0012dac2. */
 /* Supplied declaration required: FUN_0012fdbc. */
-/* Supplied declaration required: FUN_002e6e14. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
 extern int FUN_002eb624(unsigned int *);
 /* Supplied declaration required: FUN_002eb9ea. */
 
@@ -57,8 +57,8 @@ unsigned long long FUN_0010aa58(unsigned int *param_1,unsigned int param_2,int p
     *(int *)(temp_v0 - 0x24) = temp_v1;
     while (piVar3 = (int *)*piVar4, piVar3 != (int *)0x0) {
       *piVar4 = *piVar3;
-      FUN_002e6e14(piVar3[2]);
-      FUN_002e6e14(piVar3);
+      asdOperatorDeleteArray(piVar3[2]);
+      asdOperatorDeleteArray(piVar3);
     }
   }
   piVar4 = (int *)(temp_v0 - 0x44);
@@ -71,8 +71,8 @@ unsigned long long FUN_0010aa58(unsigned int *param_1,unsigned int param_2,int p
     *(int *)(temp_v0 - 0x40) = temp_v1;
     while (piVar3 = (int *)*piVar4, piVar3 != (int *)0x0) {
       *piVar4 = *piVar3;
-      FUN_002e6e14(piVar3[2]);
-      FUN_002e6e14(piVar3);
+      asdOperatorDeleteArray(piVar3[2]);
+      asdOperatorDeleteArray(piVar3);
     }
   }
   return romwright_piece_4_4(temp_v2,temp_v0 - 0x4c);

@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern BtlHelpA *DAT_005738e8;
+extern BtlHelpA *g_btlHelp;
 
 u32 FUN_004c8ecc(void)
 {
-    return DAT_005738e8->unk00;
+    return g_btlHelp->unk00;
 }
 
 } /* extern "C" */

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002ba12c(unsigned int);
 int FUN_002bdce0(...);
 int FUN_002bed3c(void);
-int FUN_002beda4(...);
+int vec2GetXInt(...);
 int FUN_002bedb0(...);
 int FUN_002bee04(unsigned int, int, unsigned int);
 int FUN_002bf380(...);
@@ -26,14 +26,14 @@ extern unsigned int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002ba12c. */
 /* Supplied declaration required: FUN_002bdce0. */
 /* Supplied declaration required: FUN_002bed3c. */
-extern int FUN_002bed98(int);
-/* Supplied declaration required: FUN_002beda4. */
+extern int vec2GetYInt(int);
+/* Supplied declaration required: vec2GetXInt. */
 /* Supplied declaration required: FUN_002bedb0. */
 /* Supplied declaration required: FUN_002bee04. */
 /* Supplied declaration required: FUN_002bf380. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bf538. */
-extern int FUN_002c09d0(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 extern unsigned int FUN_002c5d80(unsigned int, unsigned int);
 
 
@@ -49,14 +49,14 @@ void FUN_00124d24(int param_1)
   float temp_v4;
   float temp_v5;
   
-  temp_v0 = FUN_002c09d0(0x402);
+  temp_v0 = gameFlagIsSet(0x402);
   if (temp_v0 != 0) {
-    temp_v0 = FUN_002beda4(DAT_0043e190 + 0x754);
-    temp_v1 = FUN_002bed98(DAT_0043e190 + 0x754);
+    temp_v0 = vec2GetXInt(DAT_0043e190 + 0x754);
+    temp_v1 = vec2GetYInt(DAT_0043e190 + 0x754);
     if ('\0' < *(char *)(DAT_0043e190 + 0x82)) {
-      temp_v2 = FUN_002beda4(DAT_0043e190 + 0x7e0);
+      temp_v2 = vec2GetXInt(DAT_0043e190 + 0x7e0);
       temp_v0 = temp_v0 + temp_v2;
-      temp_v2 = FUN_002bed98(DAT_0043e190 + 0x7e0);
+      temp_v2 = vec2GetYInt(DAT_0043e190 + 0x7e0);
       temp_v1 = temp_v1 + temp_v2;
     }
     temp_v3 = FUN_002c5d80(1,0);
@@ -91,8 +91,8 @@ void FUN_00124d24(int param_1)
     temp_v0 = DAT_0043e190;
     if (*(char *)(DAT_0043e190 + 0xa1) != '\0') {
       temp_v1 = DAT_0043e190 + 0x754;
-      temp_v3 = FUN_002beda4();
-      temp_v1 = FUN_002bed98(temp_v1);
+      temp_v3 = vec2GetXInt();
+      temp_v1 = vec2GetYInt(temp_v1);
       FUN_002ba12c(g_titleScene);
       temp_v4 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v2 = FUN_002bf4f8(0xe,0x100);

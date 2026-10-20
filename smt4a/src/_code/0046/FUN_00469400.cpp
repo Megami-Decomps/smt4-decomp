@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00100388(int *, unsigned char *, int, unsigned int);
 int qsort(int, unsigned int, int, unsigned char *);
-int FUN_0018719c(...);
+int gameFlagIsSet(...);
 int FUN_003fe388(...);
 int dataTable27Count(void);
 int rt_memcpy(int *, int);
@@ -45,12 +45,12 @@ extern unsigned char LAB_00469d00; /* 0x469d00 */
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: qsort. */
 extern unsigned int FUN_00184964(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0018719c. */
+/* Supplied declaration required: gameFlagIsSet. */
 extern int FUN_003f86c0(int);
 /* Supplied declaration required: FUN_003fe388. */
 extern int dataTable27GetEntry(int, unsigned int);
 /* Supplied declaration required: dataTable27Count. */
-extern int FUN_0046bc34(int);
+extern int dataTable28IsLoaded(int);
 /* Supplied declaration required: rt_memcpy. */
 
 
@@ -82,7 +82,7 @@ void FUN_00469400(int param_1)
   if (temp_v5 == 0) {
     return;
   }
-  temp_v5 = FUN_0046bc34(param_1 + 0x19);
+  temp_v5 = dataTable28IsLoaded(param_1 + 0x19);
   if (temp_v5 == 0) {
     return;
   }
@@ -96,8 +96,8 @@ void FUN_00469400(int param_1)
       temp_v6 = temp_v5 + temp_v11 * 0x88;
       if ((((unsigned int)*(unsigned short *)(temp_v6 + 0x60) == (int)*(char *)(param_1 + 0x10)) &&
           ((rt_memcpy(&temp_v14,temp_v6), *(short *)(temp_v6 + 0x66) == 0 ||
-           (temp_v7 = FUN_0018719c(), temp_v7 != 0)))) &&
-         ((*(short *)(temp_v6 + 0x68) == 0 || (temp_v7 = FUN_0018719c(), temp_v7 == 0)))) {
+           (temp_v7 = gameFlagIsSet(), temp_v7 != 0)))) &&
+         ((*(short *)(temp_v6 + 0x68) == 0 || (temp_v7 = gameFlagIsSet(), temp_v7 == 0)))) {
         temp_v8 = *(int *)(param_1 + 0xab8);
         temp_v7 = 0;
         if (temp_v7 < temp_v8) {
@@ -122,7 +122,7 @@ LAB_00469530:
   }
   qsort(param_1 + 0xa70,*(unsigned int *)(param_1 + 0xab8),8,&LAB_00467de8);
   if (*(char *)(param_1 + 0x18) != '\x01') {
-    if ((*(char *)(param_1 + 0x18) == '\0') && (temp_v5 = FUN_0018719c(0x4d6), temp_v5 != 0)) {
+    if ((*(char *)(param_1 + 0x18) == '\0') && (temp_v5 = gameFlagIsSet(0x4d6), temp_v5 != 0)) {
       temp_v14 = 0;
       temp_v15 = 0;
       temp_v16 = 0;
@@ -188,7 +188,7 @@ LAB_00469530:
             temp_v6 = temp_v6 + 1;
           } while (temp_v6 < *(int *)(param_1 + 0xab8));
         }
-        temp_v6 = FUN_0018719c(0x4d6);
+        temp_v6 = gameFlagIsSet(0x4d6);
         if ((temp_v6 != 0) && (!(*(char *)(param_1 + 0x10) == '\x0e' && temp_v5 == 6))) {
           temp_v11 = param_1 + temp_v5 * 4;
           temp_v6 = *(int *)(*(int *)(temp_v11 + 0xa10) + 4);
@@ -277,7 +277,7 @@ LAB_004697f0:
       if (*(char *)(param_1 + 0x10) != '\x0e') goto LAB_004697f0;
       temp_v2 = 1;
 LAB_00469818:
-      temp_v5 = FUN_0018719c(0x491);
+      temp_v5 = gameFlagIsSet(0x491);
       if (temp_v5 != 0) {
         temp_v12 = *(unsigned int *)(*(int *)(param_1 + 0xa28) + 4);
         FUN_003fe388(temp_v12,&LAB_00469984,0);

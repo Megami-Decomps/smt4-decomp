@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_001801a4(void);
+extern int gameGetPlayerData(void);
 
 
 void FUN_003e0064(int param_1)
@@ -13,7 +13,7 @@ void FUN_003e0064(int param_1)
   int temp_v0;
   short temp_v1;
   
-  temp_v0 = FUN_001801a4();
+  temp_v0 = gameGetPlayerData();
   temp_v1 = *(short *)(temp_v0 + 0x1c);
   if (param_1 <= temp_v1) {
     if (param_1 < 1) {

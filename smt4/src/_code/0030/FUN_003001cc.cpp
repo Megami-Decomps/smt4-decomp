@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_00282924(unsigned int, unsigned int);
+int btlMainFindEntryByListedId(unsigned int, unsigned int);
 int scrSetResult(void);
 int scrGetArg(int);
 
-/* Supplied declaration required: FUN_00282924. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: scrSetResult. */
 extern unsigned int btlGetMainState(void);
 /* Supplied declaration required: scrGetArg. */
@@ -24,7 +24,7 @@ unsigned int FUN_003001cc(void)
   temp_v0 = scrGetArg(0);
   scrGetArg(1);
   temp_v1 = btlGetMainState();
-  FUN_00282924(temp_v1,temp_v0);
+  btlMainFindEntryByListedId(temp_v1,temp_v0);
   scrSetResult();
   return 1;
 }

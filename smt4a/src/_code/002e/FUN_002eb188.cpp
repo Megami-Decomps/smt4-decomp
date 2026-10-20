@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_002ea852(int *, int, unsigned char [4]);
-int FUN_002eb16e(int, unsigned char [16]);
-int FUN_002eb462(...);
+int fixedBufferCopy(int, unsigned char [16]);
+int packNibbles(...);
 
 typedef int romwright_code(...);
 /* stack frame of param_5: 8 slot(s), 29 byte(s) */
@@ -25,8 +25,8 @@ extern unsigned char DAT_00594978; /* 0x594978 */
 
 extern int FUN_00107d3e(int *, int, unsigned char, unsigned char);
 /* Supplied declaration required: FUN_002ea852. */
-/* Supplied declaration required: FUN_002eb16e. */
-/* Supplied declaration required: FUN_002eb462. */
+/* Supplied declaration required: fixedBufferCopy. */
+/* Supplied declaration required: packNibbles. */
 
 
 void FUN_002eb188(int *param_1,unsigned int param_2,unsigned int param_3,int param_4,int param_5)
@@ -49,9 +49,9 @@ void FUN_002eb188(int *param_1,unsigned int param_2,unsigned int param_3,int par
   temp_v4 = param_2;
   temp_v5 = param_3;
   iStack_18 = param_4;
-  puVar1 = (unsigned char *)FUN_002eb462(temp_v1,(char)param_1[1],(char)param_1[4]);
+  puVar1 = (unsigned char *)packNibbles(temp_v1,(char)param_1[1],(char)param_1[4]);
   *(unsigned char *)(param_4 + 0x25) = *puVar1;
-  puVar1 = (unsigned char *)FUN_002eb462(temp_v1,(char)param_1[1],temp_v5);
+  puVar1 = (unsigned char *)packNibbles(temp_v1,(char)param_1[1],temp_v5);
   *(unsigned char *)(param_4 + 0x26) = *puVar1;
   (**(romwright_code **)(*param_1 + 0x54))(param_1);
   temp_v1[0] = (unsigned char)temp_v5;
@@ -78,7 +78,7 @@ void FUN_002eb188(int *param_1,unsigned int param_2,unsigned int param_3,int par
     if (temp_v0 == 0) {
       return;
     }
-    FUN_002eb16e(param_4 + 0x28,temp_v2);
+    fixedBufferCopy(param_4 + 0x28,temp_v2);
   }
   (**(romwright_code **)(*(int *)param_1[3] + 0x20))
             ((int *)param_1[3],temp_v4,(char)param_1[1],(char)param_1[4],temp_v5,param_4,

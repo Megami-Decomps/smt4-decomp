@@ -30,17 +30,17 @@ typedef struct Starter {
     /* 0x3D */ u8 started;
 } Starter;
 
-extern Resource *FUN_001861c4(void *owner, u32 key);
-extern s32 FUN_00341930(void);
+extern Resource *asdTMTexTableGetNode(void *owner, u32 key);
+extern s32 resourceIsReady(void);
 extern void FUN_003fc294(Starter *starter, u32 arg);
 extern s32 FUN_003fcbe0(Starter *starter);
 extern void FUN_003fcc94(Starter *starter);
 
 s32 FUN_003fce08(Starter *starter, u32 arg)
 {
-    Resource *resource = FUN_001861c4(starter->owner, starter->key);
+    Resource *resource = asdTMTexTableGetNode(starter->owner, starter->key);
 
-    if (FUN_00341930() == 0) {
+    if (resourceIsReady() == 0) {
         return 0;
     }
     if (starter->started == 0) {

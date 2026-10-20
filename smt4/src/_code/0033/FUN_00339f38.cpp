@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00288728(void);
+int mdlPartsRelease(void);
 int FUN_002947c0(void);
 int asdOperatorNew(void);
 
@@ -16,7 +16,7 @@ typedef struct {
 
 extern unsigned char DAT_004207d8; /* 0x4207d8 */
 
-/* Supplied declaration required: FUN_00288728. */
+/* Supplied declaration required: mdlPartsRelease. */
 /* Supplied declaration required: FUN_002947c0. */
 extern unsigned int *FUN_002947f4(void);
 /* Supplied declaration required: asdOperatorNew. */
@@ -30,7 +30,7 @@ void FUN_00339f38(int param_1)
   unsigned int *puVar2;
   
   if (*(int *)(param_1 + 0x4394) != 0) {
-    FUN_00288728();
+    mdlPartsRelease();
     if (*(int **)(param_1 + 0x4394) != (int *)0x0) {
       (**(romwright_code **)(**(int **)(param_1 + 0x4394) + 4))();
     }

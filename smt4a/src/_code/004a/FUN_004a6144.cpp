@@ -9,7 +9,7 @@ int FUN_00162758(...);
 int efctSetSpeed(void);
 int FUN_00180118(void);
 int FUN_0018349c(...);
-int FUN_0019cac4(void);
+int dataTable00FindById(void);
 int FUN_004932ec(...);
 int FUN_00493408(...);
 int FUN_004934ac(int, int, int, int, int);
@@ -36,12 +36,12 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_00100388. */
 extern unsigned int FUN_0014bf3c(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00162758. */
-extern int FUN_001654d8(void);
-extern int FUN_001654e4(int);
+extern int vec2GetXInt(void);
+extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00180118. */
 /* Supplied declaration required: FUN_0018349c. */
-/* Supplied declaration required: FUN_0019cac4. */
+/* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: FUN_004932ec. */
 /* Supplied declaration required: FUN_00493408. */
 /* Supplied declaration required: FUN_004934ac. */
@@ -99,9 +99,9 @@ void FUN_004a6144(int param_1,int param_2,int param_3,unsigned int param_4)
                  (int)**(short **)(temp_v3 + 0xc),(int)(*(short **)(temp_v3 + 0xc))[1]);
     temp_v3 = FUN_0018349c(param_1 + 200,0x1040);
     temp_v4 = param_1 + 0x2a0;
-    temp_v5 = FUN_001654d8();
+    temp_v5 = vec2GetXInt();
     temp_v12 = *(unsigned short *)(temp_v3 + 4);
-    temp_v3 = FUN_001654e4(temp_v4);
+    temp_v3 = vec2GetYInt(temp_v4);
     FUN_0049368c(param_1 + 200,0x1040,(temp_v5 + temp_v10) - (temp_v12 & 0xffff7fff),temp_v3 + temp_v2,temp_v9,
                  1);
     temp_v3 = g_renderCtx;
@@ -159,7 +159,7 @@ void FUN_004a6144(int param_1,int param_2,int param_3,unsigned int param_4)
     FUN_00162758(param_1 + 200,temp_v13,temp_v8,temp_v7,temp_v7,temp_v3);
     temp_v7 = param_4;
     temp_v12 = 0;
-    FUN_0019cac4();
+    dataTable00FindById();
     if (temp_v7 != 0) {
       temp_v12 = *(unsigned short *)(temp_v7 + 2) & 0x7fff;
     }
@@ -176,7 +176,7 @@ void FUN_004a6144(int param_1,int param_2,int param_3,unsigned int param_4)
     FUN_00493408(param_1 + 200,0,temp_v0 + temp_v10,temp_v15,0,7,0xffffffff,temp_v9,temp_v14);
     param_4 = param_4 & 0xffff;
     temp_v6 = 0;
-    FUN_0019cac4();
+    dataTable00FindById();
     if (param_4 != 0) {
       temp_v6 = *(unsigned int *)(param_4 + 0x7c);
     }

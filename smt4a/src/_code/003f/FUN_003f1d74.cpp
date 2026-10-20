@@ -6,10 +6,10 @@ extern "C" {
 
 int saveSlotFindSelected(void);
 int FUN_00187168(void);
-int FUN_001b4a90(unsigned int *, int, unsigned int);
+int __aeabi_memset4(unsigned int *, int, unsigned int);
 int FUN_00284fdc(void);
-int FUN_002e342c(unsigned char [20], unsigned int);
-int FUN_002e6dd4(unsigned int, int);
+int libc_strcpy(unsigned char [20], unsigned int);
+int rt_memclr(unsigned int, int);
 int FUN_003df7c4(int);
 int FUN_003dff6c(int, unsigned char [20], unsigned short *);
 int FUN_003e0174(void);
@@ -17,7 +17,7 @@ int FUN_003e49e8(void);
 int FUN_003e4e4c(void);
 int FUN_003e4f04(void);
 int FUN_003e5354(int);
-int FUN_00480e30(int);
+int flagValueAdd(int);
 int dispatchIfFound(int, int, int);
 
 typedef struct fn_003f1d74_arg0 fn_003f1d74_arg0;
@@ -52,18 +52,18 @@ extern unsigned int DAT_00573a54; /* 0x573a54 */
 
 extern unsigned int FUN_0015687c(void);
 /* Supplied declaration required: saveSlotFindSelected. */
-extern int FUN_001801a4(void);
+extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00187168. */
 extern int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
-extern unsigned int FUN_001a6f60(int, unsigned int);
-extern int FUN_001ab854(int);
-extern unsigned int *FUN_001ab888(void);
-/* Supplied declaration required: FUN_001b4a90. */
+extern unsigned int dataTableFileGetTable(int, unsigned int);
+extern int gameGetSlotRecord(int);
+extern unsigned int *gameGetSlotTable(void);
+/* Supplied declaration required: __aeabi_memset4. */
 extern unsigned int FUN_001bce18(void);
 /* Supplied declaration required: FUN_00284fdc. */
-/* Supplied declaration required: FUN_002e342c. */
-/* Supplied declaration required: FUN_002e6dd4. */
+/* Supplied declaration required: libc_strcpy. */
+/* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: FUN_003df7c4. */
 /* Supplied declaration required: FUN_003dff6c. */
 /* Supplied declaration required: FUN_003e0174. */
@@ -71,7 +71,7 @@ extern unsigned int FUN_001bce18(void);
 /* Supplied declaration required: FUN_003e4e4c. */
 /* Supplied declaration required: FUN_003e4f04. */
 /* Supplied declaration required: FUN_003e5354. */
-/* Supplied declaration required: FUN_00480e30. */
+/* Supplied declaration required: flagValueAdd. */
 extern unsigned char FUN_004bca20(void);
 /* Supplied declaration required: dispatchIfFound. */
 
@@ -108,16 +108,16 @@ void FUN_003f1d74(fn_003f1d74_arg0 *param_1,unsigned int param_2)
       (*(unsigned int *)&param_1->field_0x45a4 & DAT_00573a54) != 0) && param_2 != 0) {
     temp_v2 = 0;
     if (*(int *)&param_1->field_0x2274 != 0) {
-      temp_v2 = FUN_001a6f60(*(int *)&param_1->field_0x2274,0);
+      temp_v2 = dataTableFileGetTable(*(int *)&param_1->field_0x2274,0);
     }
     temp_v3 = dataTableGetEntries();
     temp_v4 = dataTableGetCount(temp_v2);
     if (param_2 <= temp_v4 - 1U) {
       puVar10 = (unsigned short *)(temp_v3 + param_2 * 0x84);
-      puVar6 = (unsigned int *)FUN_001ab888();
+      puVar6 = (unsigned int *)gameGetSlotTable();
       temp_v4 = 0;
       temp_v2 = FUN_0015687c();
-      FUN_002e342c(temp_v19,temp_v2);
+      libc_strcpy(temp_v19,temp_v2);
       temp_v12 = puVar10[4];
       temp_v13 = puVar10[5];
       temp_v14 = puVar10[6];
@@ -126,7 +126,7 @@ void FUN_003f1d74(fn_003f1d74_arg0 *param_1,unsigned int param_2)
       temp_v17 = puVar10[9];
       temp_v18 = puVar10[10];
       FUN_003dff6c(puVar10[0x1a],temp_v19,&temp_v12);
-      temp_v3 = FUN_001801a4();
+      temp_v3 = gameGetPlayerData();
       *(unsigned short *)(temp_v3 + 0x12) = puVar10[0xd];
       *(unsigned short *)(temp_v3 + 0x14) = puVar10[0xe];
       *(unsigned short *)(temp_v3 + 0x16) = puVar10[0xf];
@@ -149,7 +149,7 @@ void FUN_003f1d74(fn_003f1d74_arg0 *param_1,unsigned int param_2)
         }
         temp_v4 = temp_v4 + 1;
       } while (temp_v4 < 8);
-      FUN_001b4a90(puVar6 + 0x722,0x18,0xffffffff);
+      __aeabi_memset4(puVar6 + 0x722,0x18,0xffffffff);
       *(unsigned short *)(puVar6 + 0x728) = 0xffff;
       pbVar11 = (unsigned char *)((int)puVar6 + 0x1ca3);
       *(unsigned char *)((int)puVar6 + 0x1ca2) = 0xff;
@@ -166,7 +166,7 @@ void FUN_003f1d74(fn_003f1d74_arg0 *param_1,unsigned int param_2)
       do {
         if ((puVar10[temp_v3 + 0x1c] != 0) && (temp_v11 = 0, *pbVar11 != 0)) {
           do {
-            temp_v5 = FUN_001ab854(temp_v11);
+            temp_v5 = gameGetSlotRecord(temp_v11);
             if (*(unsigned short *)(temp_v5 + 0x62) == puVar10[temp_v3 + 0x1c]) {
               temp_v1 = FUN_004bca20();
               temp_v11 = temp_v4 + 0x1ca0;
@@ -180,7 +180,7 @@ void FUN_003f1d74(fn_003f1d74_arg0 *param_1,unsigned int param_2)
         temp_v3 = temp_v3 + 1;
       } while (temp_v3 < 3);
       temp_v2 = FUN_001bce18();
-      FUN_002e6dd4(temp_v2,0x10b8);
+      rt_memclr(temp_v2,0x10b8);
       temp_v3 = 0;
       temp_v7 = temp_v6;
       do {
@@ -189,7 +189,7 @@ void FUN_003f1d74(fn_003f1d74_arg0 *param_1,unsigned int param_2)
           temp_v7 = (unsigned int)puVar10[temp_v3 * 2 + 0x29];
         }
         if (temp_v0 != 0 && temp_v7 != 0) {
-          FUN_00480e30(temp_v0);
+          flagValueAdd(temp_v0);
           temp_v7 = temp_v8;
         }
         temp_v3 = temp_v3 + 1;

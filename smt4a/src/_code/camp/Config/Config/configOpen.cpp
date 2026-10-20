@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0014384c(int);
+int asdTMTexTableLoadSprites(int);
 int asdMemoryAllocTracked(int, int, int, int, int);
 int sysPlaySe(int);
 int FUN_0019de98(int, unsigned int);
@@ -12,7 +12,7 @@ int FUN_001acf98(int, int);
 int FUN_002804b0(unsigned char *, int, int);
 int sysMemClear(void);
 int FUN_003d05a4(int, unsigned int);
-int FUN_003f86f8(int);
+int loadSlotEnsureLoaded(int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -23,17 +23,17 @@ extern unsigned char LAB_00202e80; /* 0x202e80 */
 extern unsigned char LAB_00202e90; /* 0x202e90 */
 extern int g_config; /* 0x57f230 */
 
-/* Supplied declaration required: FUN_0014384c. */
+/* Supplied declaration required: asdTMTexTableLoadSprites. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: sysPlaySe. */
-extern int FUN_0018206c(unsigned int, unsigned int);
+extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_001acf98. */
 /* Supplied declaration required: FUN_002804b0. */
 /* Supplied declaration required: sysMemClear. */
 extern int FUN_00341940(unsigned int);
 /* Supplied declaration required: FUN_003d05a4. */
-/* Supplied declaration required: FUN_003f86f8. */
+/* Supplied declaration required: loadSlotEnsureLoaded. */
 
 
 void configOpen(unsigned int param_1,unsigned char param_2)
@@ -56,16 +56,16 @@ void configOpen(unsigned int param_1,unsigned char param_2)
   temp_v1 = FUN_00341940(0x24);
   if (temp_v1 == 0) {
     *(unsigned char *)(temp_v0 + 0x4c0) = 1;
-    FUN_0014384c(0x24);
+    asdTMTexTableLoadSprites(0x24);
   }
-  temp_v1 = FUN_0018206c(0x24,0);
+  temp_v1 = asdTMTexTableNodeIsLoaded(0x24,0);
   if (temp_v1 == 0) {
     *(unsigned char *)(temp_v0 + 0x4c1) = 1;
     FUN_001acf98(0x24,0);
   }
   FUN_002804b0(&LAB_00202e80,temp_v0 + 0x7c,0);
   FUN_002804b0(&LAB_00202e90,temp_v0 + 0x80,0);
-  FUN_003f86f8(0x36);
+  loadSlotEnsureLoaded(0x36);
   sysPlaySe(5);
   FUN_0019de98(0,0xf4f4f4ff);
   FUN_003d05a4(temp_v0,param_1);

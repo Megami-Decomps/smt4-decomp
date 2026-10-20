@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00152f44(void);
-int FUN_0018719c(...);
+int gameFlagIsSet(...);
 int dataTableGetCount(unsigned int);
 int dataTableGetEntries(void);
 int FUN_002d8b58(int, int);
@@ -15,17 +15,17 @@ extern int *g_popupState; /* 0x58104c */
 extern int g_gameState; /* 0x5f15fc */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_0014bef4(unsigned int);
+extern int randRange(unsigned int);
 /* Supplied declaration required: FUN_00152f44. */
 extern int saveSlotFindSelected(void);
 extern int FUN_0017760c(void);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0018719c. */
+/* Supplied declaration required: gameFlagIsSet. */
 /* Supplied declaration required: dataTableGetCount. */
 /* Supplied declaration required: dataTableGetEntries. */
-extern int FUN_001ab854(void);
-extern int FUN_001ab888(void);
-extern int FUN_001b347c(void);
+extern int gameGetSlotRecord(void);
+extern int gameGetSlotTable(void);
+extern int gameSlotTableFindFree(void);
 /* Supplied declaration required: FUN_002d8b58. */
 extern int FUN_003e0024(void);
 extern int FUN_003e0154(void);
@@ -57,21 +57,21 @@ void FUN_00234880(void)
   FUN_00152f44();
   if ((*g_popupState == 0) && (temp_v2 = saveSlotFindSelected(), temp_v2 != 0)) {
     temp_v1 = 0;
-    temp_v3 = FUN_0018719c(0x1a2);
-    if (((temp_v3 != 0) && (temp_v3 = FUN_0014bef4(99), temp_v3 + 1 < 0x33)) &&
+    temp_v3 = gameFlagIsSet(0x1a2);
+    if (((temp_v3 != 0) && (temp_v3 = randRange(99), temp_v3 + 1 < 0x33)) &&
        ((g_gameState == 0x1c || g_gameState == 0x1d ||
         ((g_gameState == 0x1e || g_gameState == 0x1f) || g_gameState == 0x20)))) {
       temp_v1 = 1;
     }
     temp_v3 = FUN_003e0024();
     temp_v4 = FUN_003e0154();
-    temp_v5 = FUN_001b347c();
-    temp_v6 = FUN_001ab888();
+    temp_v5 = gameSlotTableFindFree();
+    temp_v6 = gameGetSlotTable();
     temp_v10 = 0;
     if (temp_v10 < temp_v5) {
       do {
         if (-1 < *(char *)(temp_v6 + 0x1c88 + temp_v10)) {
-          temp_v7 = FUN_001ab854();
+          temp_v7 = gameGetSlotRecord();
           temp_v3 = temp_v3 + *(short *)(temp_v7 + 0x2a);
           temp_v7 = FUN_0017760c();
           temp_v4 = temp_v4 + temp_v7;
@@ -96,8 +96,8 @@ void FUN_00234880(void)
           puVar13 = (unsigned int *)(temp_v4 + temp_v11 * 0x20);
         }
         if ((((puVar13[1] == 8 || puVar13[1] == 9) && (*puVar13 == (unsigned int)*(unsigned short *)(temp_v2 + 300)))
-            && (((short)puVar13[2] == 0 || (temp_v4 = FUN_0018719c(), temp_v4 != 0)))) &&
-           ((*(short *)((int)puVar13 + 10) == 0 || (temp_v4 = FUN_0018719c(), temp_v4 == 0)))) {
+            && (((short)puVar13[2] == 0 || (temp_v4 = gameFlagIsSet(), temp_v4 != 0)))) &&
+           ((*(short *)((int)puVar13 + 10) == 0 || (temp_v4 = gameFlagIsSet(), temp_v4 == 0)))) {
           piVar3 = g_popupState;
           temp_v12 = (float)VectorSignedToFloat((int)(short)puVar13[3],(unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v13 = (float)temp_v14;

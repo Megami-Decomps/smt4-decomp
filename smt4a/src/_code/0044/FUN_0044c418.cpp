@@ -5,7 +5,7 @@
 extern "C" {
 
 typedef int romwright_code(...);
-extern unsigned char DAT_0055b920; /* 0x55b920 */
+extern unsigned char g_nwGfxAimTargetViewUpdaterVtable; /* 0x55b920 */
 
 
 unsigned int * FUN_0044c418(unsigned int *param_1)
@@ -13,7 +13,7 @@ unsigned int * FUN_0044c418(unsigned int *param_1)
 {
   int temp_v0;
   
-  *param_1 = (unsigned int)&DAT_0055b920;
+  *param_1 = (unsigned int)&g_nwGfxAimTargetViewUpdaterVtable;
   temp_v0 = 0;
   if (*(char *)(param_1 + 2) != '\0') {
     temp_v0 = param_1[3];

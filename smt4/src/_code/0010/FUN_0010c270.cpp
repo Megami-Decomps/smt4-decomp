@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002bd430(void);
+int sndVoiceFree(void);
 int asdMemFree(...);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -16,7 +16,7 @@ extern int g_asdSoundStatus; /* 0x4e3154 */
 extern int DAT_004e3158; /* 0x4e3158 */
 extern unsigned char DAT_004e315c; /* 0x4e315c */
 
-/* Supplied declaration required: FUN_002bd430. */
+/* Supplied declaration required: sndVoiceFree. */
 /* Supplied declaration required: asdMemFree. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
@@ -44,7 +44,7 @@ void FUN_0010c270(int param_1)
     asdMemFree();
   }
   if (*(int *)(param_1 + 0x38) != 0) {
-    FUN_002bd430();
+    sndVoiceFree();
   }
   asdMemFree(param_1);
   nn_os_CriticalSection_Leave((unsigned int)&DAT_004e315c);
@@ -77,7 +77,7 @@ LAB_0010c2ac:
     asdMemFree();
   }
   if (*(int *)(param_1 + 0x38) != 0) {
-    FUN_002bd430();
+    sndVoiceFree();
   }
   asdMemFree(param_1);
   nn_os_CriticalSection_Leave((unsigned int)&DAT_004e315c);

@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0030ea58(int, unsigned int);
+int libc_strcmp(int, unsigned int);
 
-/* Supplied declaration required: FUN_0030ea58. */
+/* Supplied declaration required: libc_strcmp. */
 
 
 void nw_ut_ResDicPatricia_Get(int *param_1,int param_2,unsigned int param_3)
@@ -37,7 +37,7 @@ void nw_ut_ResDicPatricia_Get(int *param_1,int param_2,unsigned int param_3)
     } while (*puVar4 < temp_v2);
   }
   if (puVar4[2] != 0) {
-    FUN_0030ea58(param_2,(int)puVar4 + puVar4[2] + 8);
+    libc_strcmp(param_2,(int)puVar4 + puVar4[2] + 8);
   }
   return;
 }

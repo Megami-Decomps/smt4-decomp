@@ -7,7 +7,7 @@ typedef struct CountAt5A {
     /* 0x5a */ s16 count;
 } CountAt5A;
 
-extern void FUN_001641c4(void);
+extern void ifTouchRegionRemove(void);
 
 /* Releases `count` entries (halfword at +0x5a) and clears the count. */
 void releaseEntriesB(CountAt5A *obj)
@@ -15,7 +15,7 @@ void releaseEntriesB(CountAt5A *obj)
     s32 i;
 
     for (i = 0; i < obj->count; i++) {
-        FUN_001641c4();
+        ifTouchRegionRemove();
     }
     obj->count = 0;
 }

@@ -9,7 +9,7 @@ typedef struct TextSystem {
     u32 colorKey; /* 0x08 */
 } TextSystem;
 
-extern TextSystem DAT_005b3d54;
+extern TextSystem g_asdTextDefaults;
 
 typedef struct SpriteHandle {
     u8 unk00[0x34];
@@ -27,7 +27,7 @@ typedef struct SpriteHandle {
 } SpriteHandle;
 
 extern SpriteHandle *FUN_00163318(u32 size, u32 type);
-extern void FUN_002e6dd0(void *block, u32 size);
+extern void rt_aeabi_memclr(void *block, u32 size);
 
 /* Creates a sprite handle of the given type with its default state. */
 SpriteHandle *spriteHandleCreate(u32 type)
@@ -41,8 +41,8 @@ SpriteHandle *spriteHandleCreate(u32 type)
     sprite->unk50 = -1;
     sprite->unkb0 = 0;
     sprite->unk9c = -1;
-    sprite->colorKey = DAT_005b3d54.colorKey & ~0xffu;
-    FUN_002e6dd0(sprite->unkb4, 8);
+    sprite->colorKey = g_asdTextDefaults.colorKey & ~0xffu;
+    rt_aeabi_memclr(sprite->unkb4, 8);
     return sprite;
 }
 

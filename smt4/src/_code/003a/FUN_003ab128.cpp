@@ -10,7 +10,7 @@ int FUN_0023360c(int);
 int FUN_0023553c(int);
 int FUN_0028ca60(unsigned int);
 int FUN_0029c43c(int, int);
-int FUN_002b8838(int);
+int buttonHelpSetPreset(int);
 int FUN_002b8ee0(int, int);
 int FUN_002bf818(int);
 int FUN_00311430(int, int);
@@ -22,12 +22,12 @@ extern int FUN_00231184(void);
 /* Supplied declaration required: FUN_0023553c. */
 /* Supplied declaration required: FUN_0028ca60. */
 extern unsigned int FUN_0028cab8(void);
-extern int FUN_0028cad4(void);
+extern int statusScreenIsClosed(void);
 /* Supplied declaration required: FUN_0029c43c. */
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: FUN_002b8ee0. */
-extern unsigned int FUN_002bed98(int);
-extern unsigned int FUN_002beda4(int);
+extern unsigned int vec2GetYInt(int);
+extern unsigned int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bf818. */
 /* Supplied declaration required: FUN_00311430. */
 
@@ -55,15 +55,15 @@ void FUN_003ab128(int param_1)
   case 2:
     temp_v1 = param_1 + 0x188;
     FUN_002bf818(temp_v1);
-    temp_v3 = FUN_002bed98(temp_v1);
-    temp_v4 = FUN_002beda4(temp_v1);
+    temp_v3 = vec2GetYInt(temp_v1);
+    temp_v4 = vec2GetXInt(temp_v1);
     FUN_00231240(param_1 + 200,temp_v4,temp_v3);
     if (*(char *)(param_1 + 0x212) == '\0') {
       return;
     }
     break;
   case 3:
-    temp_v1 = FUN_0028cad4();
+    temp_v1 = statusScreenIsClosed();
     if (temp_v1 == 0) {
       return;
     }
@@ -75,13 +75,13 @@ void FUN_003ab128(int param_1)
       FUN_0023553c(1);
     }
     FUN_00233240(param_1 + 0xdc,0);
-    FUN_002b8838(0x3e);
+    buttonHelpSetPreset(0x3e);
     break;
   case 4:
     temp_v1 = param_1 + 0xfc;
     FUN_002b8ee0(temp_v1,0);
-    temp_v3 = FUN_002bed98(temp_v1);
-    temp_v4 = FUN_002beda4(temp_v1);
+    temp_v3 = vec2GetYInt(temp_v1);
+    temp_v4 = vec2GetXInt(temp_v1);
     FUN_00231240(param_1 + 200,temp_v4,temp_v3);
     if (*(char *)(param_1 + 0x186) == '\0') {
       return;

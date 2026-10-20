@@ -7,10 +7,10 @@ int timerStart(void *timer, int a, int b);
 
 void FUN_00293268(void)
 {
-    Scene43dcf0 *scene = DAT_0043dcf0;
+    Scene43dcf0 *scene = g_partyPanel;
     int i;
 
-    DAT_0043dcf0->unk2C = DAT_0043dcf0->unk2C ^ 1;
+    g_partyPanel->unk2C = g_partyPanel->unk2C ^ 1;
     timerStart(scene->timerC, 4, 0);
     i = 0;
     do {

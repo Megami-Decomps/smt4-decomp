@@ -9,7 +9,7 @@ int dataTableGetCount(void);
 int dataTableGetEntries(unsigned int);
 
 /* Supplied declaration required: FUN_00299370. */
-extern int FUN_002b63ac(void);
+extern int gameGetPlayerData(void);
 /* Supplied declaration required: dataTableGetCount. */
 /* Supplied declaration required: dataTableGetEntries. */
 extern unsigned int dataTableGet(unsigned int, unsigned int);
@@ -29,7 +29,7 @@ void FUN_003c1ef4(void)
   unsigned short temp_v6;
   unsigned int temp_v7;
   
-  temp_v2 = FUN_002b63ac();
+  temp_v2 = gameGetPlayerData();
   *(unsigned char *)(temp_v2 + 0x76) = 1;
   *(unsigned int *)(temp_v2 + 0x30) = 0;
   *(unsigned short *)(temp_v2 + 0x72) = 0;

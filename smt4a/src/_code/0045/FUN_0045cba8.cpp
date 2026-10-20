@@ -12,7 +12,7 @@ int FUN_0015fe40(int, int *);
 int FUN_001742e4(...);
 int FUN_001756d0(...);
 int FUN_0018c87c(...);
-int FUN_00194fb0(int, int *);
+int nw_snd_SoundArchive_GetSoundType(int, int *);
 int FUN_002f5020(...);
 int FUN_0045db6c(...);
 int FUN_0045f410(...);
@@ -72,7 +72,7 @@ extern unsigned char DAT_00548f40; /* 0x548f40 */
 /* Unsupported intrinsic, declaration required: UnsignedSaturate (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: UnsignedDoesSaturate (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_0015fe30(void);
+extern int nw_snd_SoundArchive_IsAvailable(void);
 /* Supplied declaration required: FUN_0015fe40. */
 /* Supplied declaration required: FUN_001742e4. */
 /* Supplied declaration required: FUN_001756d0. */
@@ -80,7 +80,7 @@ extern unsigned long long FUN_00178400(unsigned int, int *, unsigned char *);
 /* Supplied declaration required: FUN_0018c87c. */
 extern int FUN_0019472c(unsigned int, int *, unsigned int **);
 extern int FUN_00194784(unsigned int, int *, unsigned int **);
-/* Supplied declaration required: FUN_00194fb0. */
+/* Supplied declaration required: nw_snd_SoundArchive_GetSoundType. */
 /* Supplied declaration required: FUN_002f5020. */
 extern int FUN_0045b844(unsigned int, int *);
 extern unsigned long long FUN_0045b904(unsigned int, unsigned int);
@@ -186,7 +186,7 @@ unsigned int FUN_0045cba8(unsigned int param_1,int *param_2,int *param_3,int *pa
   
   if ((*(int *)(param_1 + 4) == 0) ||
      (uStack_34 = param_1, temp_v63 = param_2, temp_v64 = param_3, piStack_28 = param_4,
-     temp_v2 = FUN_0015fe30(), temp_v2 == 0)) {
+     temp_v2 = nw_snd_SoundArchive_IsAvailable(), temp_v2 == 0)) {
     return 0xb;
   }
   if (*temp_v63 != 0) {
@@ -253,7 +253,7 @@ unsigned int FUN_0045cba8(unsigned int param_1,int *param_2,int *param_3,int *pa
       *(unsigned char *)(*(int *)(*(int *)(param_1 + 4) + 8) + 4) = 0;
       *(unsigned char *)(*(int *)(param_1 + 0x114) + 4) = 0;
       temp_v2 = *(int *)(param_1 + 4);
-      FUN_00194fb0(temp_v2,temp_v64);
+      nw_snd_SoundArchive_GetSoundType(temp_v2,temp_v64);
       temp_v59 = temp_v2;
     }
   }
@@ -262,7 +262,7 @@ unsigned int FUN_0045cba8(unsigned int param_1,int *param_2,int *param_3,int *pa
       return 2;
     }
     temp_v2 = *(int *)(param_1 + 4);
-    FUN_00194fb0(temp_v2,temp_v64);
+    nw_snd_SoundArchive_GetSoundType(temp_v2,temp_v64);
     temp_v59 = temp_v2;
   }
   temp_v33 = FUN_00178400(*(unsigned int *)(param_1 + 4),temp_v64,temp_v36);

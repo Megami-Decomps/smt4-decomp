@@ -7,8 +7,8 @@ extern "C" {
 int jobStop(unsigned int, int);
 int asdMemFree(...);
 int scrScriptProcessDestroy(void);
-int FUN_001add24(int);
-int FUN_00321744(void);
+int dataTableFree(int);
+int btlTalkBustUpDestroy(void);
 int runWinDestroy(void);
 int FUN_0036c8e8(unsigned int);
 
@@ -17,8 +17,8 @@ extern unsigned int *g_campCecRecv; /* 0x57f128 */
 /* Supplied declaration required: jobStop. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: FUN_001add24. */
-/* Supplied declaration required: FUN_00321744. */
+/* Supplied declaration required: dataTableFree. */
+/* Supplied declaration required: btlTalkBustUpDestroy. */
 /* Supplied declaration required: runWinDestroy. */
 /* Supplied declaration required: FUN_0036c8e8. */
 
@@ -42,8 +42,8 @@ void FUN_0037bd00(void)
     }
   }
   else {
-    FUN_001add24(0x25);
-    FUN_00321744();
+    dataTableFree(0x25);
+    btlTalkBustUpDestroy();
     if (puVar1[0xd2] != 0) {
       asdMemFree();
     }

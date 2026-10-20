@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern void FUN_00184758(u8 *block, s32 a, s32 b);
+extern void uiSpriteSetKeyframe(u8 *block, s32 a, s32 b);
 extern void FUN_0020ad6c(Menu32 *menu, s32 value, s32 flag);
 
 void menu32InitBlock96C(Menu32 *menu)
 {
-    FUN_00184758(menu->block96C, 0xD, 0);
+    uiSpriteSetKeyframe(menu->block96C, 0xD, 0);
     FUN_0020ad6c(menu, 0xE, 1);
 }
 

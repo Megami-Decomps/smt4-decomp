@@ -6,11 +6,11 @@ extern "C" {
 
 int FUN_002ae164(void);
 
-extern int FUN_002a8740(int);
-extern int FUN_002a8764(void);
+extern int gameGetUnitRecord(int);
+extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_002ae164. */
-extern int FUN_002ae1d8(unsigned int);
-extern int FUN_002b63ac(void);
+extern int idIsAbove400(unsigned int);
+extern int gameGetPlayerData(void);
 
 
 void FUN_001b03ec(int param_1)
@@ -44,12 +44,12 @@ void FUN_001b03ec(int param_1)
   *(unsigned int *)(param_1 + 0x3454) = 0;
   *(unsigned int *)(param_1 + 0x3458) = 0;
   do {
-    temp_v1 = FUN_002b63ac();
+    temp_v1 = gameGetPlayerData();
     temp_v0 = *(unsigned short *)(temp_v1 + temp_v4 * 2 + 0x34);
     temp_v2 = (unsigned int)temp_v0;
     FUN_002ae164();
     if (((temp_v2 != 0) && (*(char *)(temp_v2 + 0x55) == '\0')) &&
-       (temp_v1 = FUN_002ae1d8((unsigned int)temp_v0), temp_v1 == 0)) {
+       (temp_v1 = idIsAbove400((unsigned int)temp_v0), temp_v1 == 0)) {
       temp_v1 = temp_v5 * 2;
       temp_v5 = temp_v5 + 1;
       *(unsigned short *)(param_1 + temp_v1 + 0x341c) = temp_v0;
@@ -58,10 +58,10 @@ void FUN_001b03ec(int param_1)
   } while (temp_v4 < 8);
   temp_v4 = 0;
   do {
-    temp_v5 = FUN_002a8764();
+    temp_v5 = gameGetSlotTable();
     if (-1 < *(char *)(temp_v5 + temp_v4 + 0x9108)) {
-      temp_v5 = FUN_002a8764();
-      temp_v5 = FUN_002a8740((int)*(char *)(temp_v5 + temp_v4 + 0x9108));
+      temp_v5 = gameGetSlotTable();
+      temp_v5 = gameGetUnitRecord((int)*(char *)(temp_v5 + temp_v4 + 0x9108));
       if (temp_v5 != 0) {
         temp_v6 = 0;
         temp_v1 = 0;
@@ -70,7 +70,7 @@ void FUN_001b03ec(int param_1)
           temp_v2 = (unsigned int)temp_v0;
           FUN_002ae164();
           if (((temp_v2 != 0) && (*(char *)(temp_v2 + 0x55) == '\0')) &&
-             (temp_v3 = FUN_002ae1d8((unsigned int)temp_v0), temp_v3 == 0)) {
+             (temp_v3 = idIsAbove400((unsigned int)temp_v0), temp_v3 == 0)) {
             temp_v3 = temp_v6 * 2;
             temp_v6 = temp_v6 + 1;
             *(unsigned short *)(param_1 + temp_v4 * 0x10 + temp_v3 + 0x342c) = temp_v0;

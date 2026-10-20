@@ -5,12 +5,12 @@
 extern "C" {
 
 int dataTableGetEntry49(int);
-int FUN_0018719c(...);
+int gameFlagIsSet(...);
 int FUN_00314c38(int, int, int, int, int, int);
 int FUN_003ae61c(int, int, int, int);
 int FUN_003bf87c(void);
-int FUN_003cb930(void);
-int FUN_003fd63c(unsigned int, int);
+int dataTable49Type1Count(void);
+int gameFlagSetValue(unsigned int, int);
 int VectorSignedToFloat(int, int);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
@@ -22,15 +22,15 @@ typedef struct {
 extern unsigned char g_gameState; /* 0x5f15fc */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_00162e8c(void);
+extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: dataTableGetEntry49. */
-/* Supplied declaration required: FUN_0018719c. */
+/* Supplied declaration required: gameFlagIsSet. */
 /* Supplied declaration required: FUN_00314c38. */
 /* Supplied declaration required: FUN_003ae61c. */
 extern int dataTable49GetEntry(int);
 /* Supplied declaration required: FUN_003bf87c. */
-/* Supplied declaration required: FUN_003cb930. */
-/* Supplied declaration required: FUN_003fd63c. */
+/* Supplied declaration required: dataTable49Type1Count. */
+/* Supplied declaration required: gameFlagSetValue. */
 
 
 void FUN_003a249c(int param_1)
@@ -50,21 +50,21 @@ void FUN_003a249c(int param_1)
   
   FUN_003bf87c();
   temp_v6 = 0;
-  temp_v0 = FUN_00162e8c();
+  temp_v0 = gameFlagsGetBlock();
   temp_v3 = temp_v0;
-  FUN_003cb930();
+  dataTable49Type1Count();
   temp_v5 = 0;
   if (temp_v5 < temp_v3) {
     do {
       temp_v1 = dataTable49GetEntry(temp_v5);
-      temp_v2 = FUN_0018719c(*(unsigned int *)(temp_v1 + 8));
-      if ((temp_v2 != 0) && (temp_v2 = FUN_0018719c(*(unsigned int *)(temp_v1 + 0xc)), temp_v2 == 0)) {
-        FUN_003fd63c(*(unsigned int *)(temp_v1 + 0xc),1);
+      temp_v2 = gameFlagIsSet(*(unsigned int *)(temp_v1 + 8));
+      if ((temp_v2 != 0) && (temp_v2 = gameFlagIsSet(*(unsigned int *)(temp_v1 + 0xc)), temp_v2 == 0)) {
+        gameFlagSetValue(*(unsigned int *)(temp_v1 + 0xc),1);
       }
       temp_v5 = temp_v5 + 1;
     } while (temp_v5 < temp_v3);
   }
-  temp_v3 = FUN_00162e8c();
+  temp_v3 = gameFlagsGetBlock();
   temp_v1 = 0;
   temp_v5 = 0;
   temp_v2 = 0;
@@ -80,12 +80,12 @@ void FUN_003a249c(int param_1)
   if (0 < param_1) {
     do {
       psVar5 = (short *)dataTableGetEntry49(temp_v5);
-      if (((*psVar5 != 0) && ((psVar5[1] == 0 || (temp_v3 = FUN_0018719c(), temp_v3 != 0)))) &&
-         ((psVar5[2] == 0 || (temp_v3 = FUN_0018719c(), temp_v3 == 0)))) {
+      if (((*psVar5 != 0) && ((psVar5[1] == 0 || (temp_v3 = gameFlagIsSet(), temp_v3 != 0)))) &&
+         ((psVar5[2] == 0 || (temp_v3 = gameFlagIsSet(), temp_v3 == 0)))) {
         if (temp_v6 == 0) {
           temp_v6 = (int)*psVar5;
         }
-        temp_v3 = FUN_00162e8c();
+        temp_v3 = gameFlagsGetBlock();
         if (temp_v3 != 0) {
           piVar7 = (int *)(temp_v3 + 0x15b0);
           if (*piVar7 < 8) {
@@ -106,7 +106,7 @@ void FUN_003a249c(int param_1)
       temp_v5 = temp_v5 + 1;
     } while (temp_v5 < param_1);
   }
-  temp_v3 = FUN_00162e8c();
+  temp_v3 = gameFlagsGetBlock();
   if (temp_v3 != 0) {
     temp_v2 = *(int *)(temp_v3 + 0x158c);
   }
@@ -115,7 +115,7 @@ void FUN_003a249c(int param_1)
     (*(unsigned char *)((unsigned char *)&g_gameState + 0x464)) = 1;
     *(unsigned int *)(temp_v0 + 0x15bc) = 1;
   }
-  if ((temp_v6 != 0) && (temp_v3 = FUN_00162e8c(), temp_v3 != 0)) {
+  if ((temp_v6 != 0) && (temp_v3 = gameFlagsGetBlock(), temp_v3 != 0)) {
     *(int *)(temp_v3 + 0x158c) = temp_v6;
   }
   return;

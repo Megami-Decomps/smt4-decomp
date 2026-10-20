@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_1_stack;
 
-extern unsigned char DAT_00446fe8; /* 0x446fe8 */
+extern unsigned char g_mapCollision; /* 0x446fe8 */
 extern int DAT_00446ffc; /* 0x446ffc */
 extern unsigned char DAT_0049f94c; /* 0x49f94c */
 extern unsigned char DAT_0049f94e; /* 0x49f94e */
@@ -59,7 +59,7 @@ unsigned int FUN_002804ec(float *param_1)
   temp_v6 = 0;
   temp_v4 = 0x493c5c;
   temp_v5 = 0;
-  DAT_00446fe8 = 0;
+  g_mapCollision = 0;
   temp_v8 = 45.0f;
   temp_v9 = *param_1;
   temp_v10 = *(unsigned long long *)(param_1 + 1);
@@ -161,7 +161,7 @@ unsigned int FUN_002804ec(float *param_1)
               *(unsigned int *)(unaff_r11 + 0x344) = *(unsigned int *)(temp_v4 + 0x80);
               *(unsigned int *)(unaff_r11 + 0x348) = temp_v2;
               *(unsigned int *)(unaff_r11 + 0x34c) = temp_v3;
-              DAT_00446fe8 = 1;
+              g_mapCollision = 1;
             }
           }
           else if ((((temp_v6 & 4) == 0) && (temp_v7 < temp_v8)) &&

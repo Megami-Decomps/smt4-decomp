@@ -24,14 +24,14 @@ typedef struct {
     unsigned short sp7A; /* 0x7a: local_7a */
 } param_4_stack;
 
-extern int FUN_0014bef4(unsigned int);
+extern int randRange(unsigned int);
 /* Supplied declaration required: FUN_00184310. */
 extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern int FUN_0018719c(void);
+extern int gameFlagIsSet(void);
 extern unsigned short *dataTableGetCount(unsigned int);
 /* Supplied declaration required: dataTableGetEntries. */
-extern int FUN_001ab854(int);
-extern int FUN_001ab888(void);
+extern int gameGetSlotRecord(int);
+extern int gameGetSlotTable(void);
 extern int FUN_00239234(unsigned short, unsigned char *);
 
 
@@ -101,7 +101,7 @@ unsigned int FUN_0023e32c(unsigned short *param_1,unsigned short *param_2,unsign
         puVar6 = (unsigned short *)(unsigned int)*puVar5;
         FUN_00184310();
         if (((*(unsigned int *)(puVar6 + 0x1a) & 0x1c00000) == 0) &&
-           ((puVar6[0x1f] == 0 || (temp_v2 = FUN_0018719c(), temp_v2 != 0)))) {
+           ((puVar6[0x1f] == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 != 0)))) {
           temp_v0 = puVar6[0x1e];
           if ((temp_v0 & 1) != 0) {
             if ((temp_v0 & 0xfffe) != 0) {
@@ -113,12 +113,12 @@ unsigned int FUN_0023e32c(unsigned short *param_1,unsigned short *param_2,unsign
             if ((temp_v2 == 0) || ((temp_v7 & 0xfc) == 0)) goto LAB_0023e4d0;
           }
           if ((puVar6[5] & 1) != 0) {
-            temp_v2 = FUN_001ab888();
+            temp_v2 = gameGetSlotTable();
             temp_v4 = 0;
             do {
               if (*(unsigned char *)(temp_v2 + temp_v4 + 0x1c88) < 0x18) {
-                temp_v3 = FUN_001ab888();
-                temp_v3 = FUN_001ab854((int)*(char *)(temp_v3 + temp_v4 + 0x1c88));
+                temp_v3 = gameGetSlotTable();
+                temp_v3 = gameGetSlotRecord((int)*(char *)(temp_v3 + temp_v4 + 0x1c88));
                 if (*(unsigned short *)(temp_v3 + 0x62) == *puVar5) break;
               }
               temp_v4 = temp_v4 + 1;
@@ -142,7 +142,7 @@ LAB_0023e4d0:
         if (temp_v5 < 2) {
           return 0;
         }
-        temp_v2 = FUN_0014bef4((temp_v5 - 1) & 0xffff);
+        temp_v2 = randRange((temp_v5 - 1) & 0xffff);
         temp_v8 = (unsigned int)*(unsigned short *)((int)&temp_v8 + temp_v2 * 2);
       }
       return temp_v8;

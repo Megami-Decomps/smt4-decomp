@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001a9604(int, unsigned int, unsigned int, int);
 int FUN_001e39ec(...);
 int FUN_0025b754(void);
-int FUN_002ae898(int, int);
+int asdTMTexTableReleaseNode(int, int);
 int FUN_002c58c8(int, int);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(unsigned int, int);
@@ -57,7 +57,7 @@ extern unsigned int DAT_0049fce4; /* 0x49fce4 */
 /* Supplied declaration required: FUN_001a9604. */
 /* Supplied declaration required: FUN_001e39ec. */
 /* Supplied declaration required: FUN_0025b754. */
-/* Supplied declaration required: FUN_002ae898. */
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
 extern int FUN_002c1c0c(unsigned int, int);
 /* Supplied declaration required: FUN_002c58c8. */
 
@@ -106,7 +106,7 @@ void FUN_001e4284(int param_1,int param_2)
   DAT_00448c70 = temp_v1;
   *(int *)(DAT_00448c5c + temp_v1 * 0x124) = (int)psVar2[3];
   if (DAT_00448c88 != 0) {
-    FUN_002ae898(0x38,DAT_00448c8c);
+    asdTMTexTableReleaseNode(0x38,DAT_00448c8c);
     DAT_00448c88 = 0;
   }
   DAT_00448c8c = temp_v1;

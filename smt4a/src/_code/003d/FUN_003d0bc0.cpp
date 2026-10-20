@@ -5,7 +5,7 @@
 extern "C" {
 
 int qsort(...);
-int FUN_00312830(...);
+int arraySortQsort(...);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -46,7 +46,7 @@ extern int FUN_0036018c(...); /* 0x36018c */
 extern int FUN_00360200(...); /* 0x360200 */
 extern int FUN_0036024c(...); /* 0x36024c */
 extern int FUN_0036027c(...); /* 0x36027c */
-extern int FUN_003602d0(...); /* 0x3602d0 */
+extern int idCompareByKeyThenRank(...); /* 0x3602d0 */
 extern int FUN_0036031c(...); /* 0x36031c */
 extern int FUN_00375874(...); /* 0x375874 */
 extern int FUN_003758d8(...); /* 0x3758d8 */
@@ -62,12 +62,12 @@ extern int FUN_003aa0b4(...); /* 0x3aa0b4 */
 extern int FUN_003aa108(...); /* 0x3aa108 */
 extern int FUN_003aa154(...); /* 0x3aa154 */
 extern int FUN_003aa180(...); /* 0x3aa180 */
-extern int DAT_0057f108; /* 0x57f108 */
+extern int g_camp; /* 0x57f108 */
 
 /* Supplied declaration required: qsort. */
 extern int FUN_0026140c(void);
 extern unsigned int FUN_002c2c68(int);
-/* Supplied declaration required: FUN_00312830. */
+/* Supplied declaration required: arraySortQsort. */
 
 
 void FUN_003d0bc0(int param_1)
@@ -82,7 +82,7 @@ void FUN_003d0bc0(int param_1)
   int temp_v4;
   int temp_v5;
   
-  temp_v3 = DAT_0057f108;
+  temp_v3 = g_camp;
   temp_v1 = FUN_0026140c();
   pbVar5 = (unsigned char *)0x0;
   temp_v4 = 0;
@@ -149,11 +149,11 @@ void FUN_003d0bc0(int param_1)
         }
         if ((char)*pbVar5 < '\0') {
           temp_v2 = FUN_002c2c68(temp_v3);
-          FUN_00312830(temp_v1,temp_v2,8,FUN_003758d8);
+          arraySortQsort(temp_v1,temp_v2,8,FUN_003758d8);
           return;
         }
         temp_v2 = FUN_002c2c68(temp_v3);
-        FUN_00312830(temp_v1,temp_v2,8,FUN_002fd824);
+        arraySortQsort(temp_v1,temp_v2,8,FUN_002fd824);
         return;
       default:
         return;
@@ -174,7 +174,7 @@ void FUN_003d0bc0(int param_1)
         if ((*pbVar5 & 0x7f) == 0x10) {
           if ((char)*pbVar5 < '\0') {
             temp_v2 = FUN_002c2c68(temp_v3);
-            qsort(temp_v1,temp_v2,2,FUN_003602d0);
+            qsort(temp_v1,temp_v2,2,idCompareByKeyThenRank);
           }
           else {
             temp_v2 = FUN_002c2c68(temp_v3);
@@ -186,11 +186,11 @@ void FUN_003d0bc0(int param_1)
         }
         if ((char)*pbVar5 < '\0') {
           temp_v2 = FUN_002c2c68(temp_v3);
-          FUN_00312830(temp_v1,temp_v2,2,FUN_0036031c);
+          arraySortQsort(temp_v1,temp_v2,2,FUN_0036031c);
           return;
         }
         temp_v2 = FUN_002c2c68(temp_v3);
-        FUN_00312830(temp_v1,temp_v2,2,FUN_002ce520);
+        arraySortQsort(temp_v1,temp_v2,2,FUN_002ce520);
         return;
       case 0xe:
         pbVar5 = (unsigned char *)(temp_v1 + 4);
@@ -221,11 +221,11 @@ void FUN_003d0bc0(int param_1)
         }
         if ((char)*pbVar5 < '\0') {
           temp_v2 = FUN_002c2c68(temp_v3);
-          FUN_00312830(temp_v1,temp_v2,2,FUN_003aa180);
+          arraySortQsort(temp_v1,temp_v2,2,FUN_003aa180);
           return;
         }
         temp_v2 = FUN_002c2c68(temp_v3);
-        FUN_00312830(temp_v1,temp_v2,2,FUN_0036027c);
+        arraySortQsort(temp_v1,temp_v2,2,FUN_0036027c);
         return;
       case 0x13:
       case 0x14:
@@ -275,11 +275,11 @@ LAB_003d1140:
         }
         if ((char)*pbVar5 < '\0') {
           temp_v2 = FUN_002c2c68(temp_v4);
-          FUN_00312830(temp_v5,temp_v2,2,FUN_00375aa8);
+          arraySortQsort(temp_v5,temp_v2,2,FUN_00375aa8);
           return;
         }
         temp_v2 = FUN_002c2c68(temp_v4);
-        FUN_00312830(temp_v5,temp_v2,2,FUN_002fdd2c);
+        arraySortQsort(temp_v5,temp_v2,2,FUN_002fdd2c);
         return;
       case 0x15:
 LAB_003d0c64:
@@ -322,11 +322,11 @@ LAB_003d0c64:
         }
         if ((char)temp_v0 < '\0') {
           temp_v2 = FUN_002c2c68(temp_v3);
-          FUN_00312830(temp_v4,temp_v2,2,FUN_00375aa8);
+          arraySortQsort(temp_v4,temp_v2,2,FUN_00375aa8);
           return;
         }
         temp_v2 = FUN_002c2c68(temp_v3);
-        FUN_00312830(temp_v4,temp_v2,2,FUN_002fdd2c);
+        arraySortQsort(temp_v4,temp_v2,2,FUN_002fdd2c);
         return;
       case 0x16:
       case 0x17:
@@ -367,11 +367,11 @@ LAB_003d0c64:
       }
       if ((char)temp_v0 < '\0') {
         temp_v2 = FUN_002c2c68(temp_v3);
-        FUN_00312830(temp_v4,temp_v2,2,FUN_00375aa8);
+        arraySortQsort(temp_v4,temp_v2,2,FUN_00375aa8);
         return;
       }
       temp_v2 = FUN_002c2c68(temp_v3);
-      FUN_00312830(temp_v4,temp_v2,2,FUN_002fdd2c);
+      arraySortQsort(temp_v4,temp_v2,2,FUN_002fdd2c);
       return;
     }
 LAB_003d1414:
@@ -473,11 +473,11 @@ LAB_003d141c:
   }
   if ((char)*pbVar5 < '\0') {
     temp_v2 = FUN_002c2c68(temp_v4);
-    FUN_00312830(temp_v5,temp_v2,2,0x39ecf0);
+    arraySortQsort(temp_v5,temp_v2,2,0x39ecf0);
     return;
   }
   temp_v2 = FUN_002c2c68(temp_v4);
-  FUN_00312830(temp_v5,temp_v2,2,0x34f588);
+  arraySortQsort(temp_v5,temp_v2,2,0x34f588);
   return;
 }
 

@@ -29,7 +29,7 @@ struct fn_0030239c_arg0 {
     undefined4 field_0x148; /* +0x148 */
 };
 
-extern unsigned int FUN_002e75fa(void);
+extern unsigned int sharedRefAddRef(void);
 /* Supplied declaration required: FUN_002ece58. */
 
 
@@ -50,7 +50,7 @@ void FUN_0030239c(fn_0030239c_arg0 *param_1,unsigned int param_2,unsigned short 
   param_1->field_0x11c = param_2;
   param_1->field_0x148 = param_6;
   if (param_5 != 0) {
-    temp_v0 = FUN_002e75fa();
+    temp_v0 = sharedRefAddRef();
     FUN_002ece58(param_1,temp_v0);
   }
   param_1->field_0x118 = param_7;

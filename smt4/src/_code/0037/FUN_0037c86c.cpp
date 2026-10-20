@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b4f40(int, int);
+int listAppendNode(int, int);
 int FUN_002b4f64(int, int);
 int FUN_002bad74(int, int);
 int FUN_0037ca00(int, int, int, unsigned int, unsigned int);
@@ -16,7 +16,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_002b4f40. */
+/* Supplied declaration required: listAppendNode. */
 /* Supplied declaration required: FUN_002b4f64. */
 /* Supplied declaration required: FUN_002bad74. */
 extern int FUN_002bae7c(void);
@@ -64,7 +64,7 @@ void FUN_0037c86c(int param_1)
   }
   *(unsigned char *)(temp_v2 + 0x14) = temp_v0;
   *(unsigned int *)(temp_v2 + 0x10) = *(unsigned int *)(temp_v4 + 0x10);
-  FUN_002b4f40(temp_v1,temp_v2);
+  listAppendNode(temp_v1,temp_v2);
   FUN_002bad74(temp_v1,1);
   return;
 }

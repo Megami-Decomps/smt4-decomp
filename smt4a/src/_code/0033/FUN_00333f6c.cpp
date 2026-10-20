@@ -6,7 +6,7 @@ extern "C" {
 
 int jobStop(unsigned int, int);
 int asdMemFree(...);
-int FUN_00237210(unsigned int);
+int asdMemFreeSlot(unsigned int);
 int FUN_0037de7c(void);
 int FUN_0038b3f8(int, int);
 int FUN_0040a244(void);
@@ -16,12 +16,12 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-extern signed char DAT_00588fd0; /* 0x588fd0 */
+extern signed char g_gameGlobals; /* 0x588fd0 */
 extern unsigned int *DAT_00588fd4; /* 0x588fd4 */
 
 /* Supplied declaration required: jobStop. */
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_00237210. */
+/* Supplied declaration required: asdMemFreeSlot. */
 /* Supplied declaration required: FUN_0037de7c. */
 /* Supplied declaration required: FUN_0038b3f8. */
 /* Supplied declaration required: FUN_0040a244. */
@@ -34,8 +34,8 @@ void FUN_00333f6c(void)
   unsigned int *puVar1;
   
   puVar1 = DAT_00588fd4;
-  DAT_00588fd0 = DAT_00588fd0 - '\x01';
-  if ('\0' < DAT_00588fd0) {
+  g_gameGlobals = g_gameGlobals - '\x01';
+  if ('\0' < g_gameGlobals) {
     return;
   }
   if (DAT_00588fd4[0x82e] != 0) {
@@ -46,7 +46,7 @@ void FUN_00333f6c(void)
     asdMemFree();
     puVar1[0x82f] = 0;
   }
-  FUN_00237210(puVar1[0x82d]);
+  asdMemFreeSlot(puVar1[0x82d]);
   if (puVar1[0x833] != 0) {
     asdMemFree();
     puVar1[0x833] = 0;
@@ -61,7 +61,7 @@ void FUN_00333f6c(void)
   jobStop(*puVar1,0);
   asdMemFree(puVar1);
   DAT_00588fd4 = (unsigned int *)0x0;
-  DAT_00588fd0 = 0;
+  g_gameGlobals = 0;
   FUN_0037de7c();
   return;
 }

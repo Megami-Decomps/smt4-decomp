@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b9024(void);
+int devilGetRecord(void);
 int dataTableGetEntries(void);
 
 /* stack frame of param_4: 13 slot(s), 50 byte(s) */
@@ -25,10 +25,10 @@ typedef struct {
 } param_4_stack;
 
 extern int FUN_00288154(unsigned short, unsigned char *);
-extern int FUN_002a8740(int);
-extern int FUN_002a8764(void);
-/* Supplied declaration required: FUN_002b9024. */
-extern int FUN_002c09d0(void);
+extern int gameGetUnitRecord(int);
+extern int gameGetSlotTable(void);
+/* Supplied declaration required: devilGetRecord. */
+extern int gameFlagIsSet(void);
 extern int randNextInRange(unsigned int);
 extern unsigned short *dataTableGetCount(unsigned int);
 /* Supplied declaration required: dataTableGetEntries. */
@@ -91,7 +91,7 @@ unsigned int FUN_00229c94(unsigned short *param_1,unsigned short *param_2,unsign
   }
   do {
     puVar5 = puVar10;
-    FUN_002b9024();
+    devilGetRecord();
     if ((*(unsigned char *)((int)puVar5 + 3) == param_4) && (puVar10 != param_3)) {
       puVar2 = temp_v18;
       if (puVar10 != temp_v18) {
@@ -99,9 +99,9 @@ unsigned int FUN_00229c94(unsigned short *param_1,unsigned short *param_2,unsign
       }
       if (puVar10 != temp_v18 && puVar10 != puVar2) {
         puVar6 = (unsigned short *)(unsigned int)*puVar5;
-        FUN_002b9024();
+        devilGetRecord();
         if (((*(unsigned int *)(puVar6 + 0x16) & 0x1c00000) == 0) &&
-           ((puVar6[0x1b] == 0 || (temp_v2 = FUN_002c09d0(), temp_v2 != 0)))) {
+           ((puVar6[0x1b] == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 != 0)))) {
           temp_v0 = puVar6[0x1a];
           if ((temp_v0 & 1) != 0) {
             if ((temp_v0 & 0xfffe) != 0) {
@@ -113,12 +113,12 @@ unsigned int FUN_00229c94(unsigned short *param_1,unsigned short *param_2,unsign
             if ((temp_v2 == 0) || ((temp_v7 & 0xfc) == 0)) goto LAB_00229e38;
           }
           if ((puVar6[3] & 1) != 0) {
-            temp_v2 = FUN_002a8764();
+            temp_v2 = gameGetSlotTable();
             temp_v4 = 0;
             do {
               if (*(unsigned char *)(temp_v2 + temp_v4 + 0x90f0) < 0x18) {
-                temp_v3 = FUN_002a8764();
-                temp_v3 = FUN_002a8740((int)*(char *)(temp_v3 + temp_v4 + 0x90f0));
+                temp_v3 = gameGetSlotTable();
+                temp_v3 = gameGetUnitRecord((int)*(char *)(temp_v3 + temp_v4 + 0x90f0));
                 if (*(unsigned short *)(temp_v3 + 0x46) == *puVar5) break;
               }
               temp_v4 = temp_v4 + 1;

@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_0023592c(void *track);
+int nw_snd_internal_driver_SequenceTrack_UpdateChannelParam(void *track);
 int nw_snd_internal_driver_Channel_FreeChannel(int channel);
 int nw_snd_internal_driver_Channel_Release(int channel);
 extern u8 DAT_00421d54;
@@ -21,7 +21,7 @@ Track *FUN_0037dfe4(Track *track)
     int channel;
 
     track->vtbl = &DAT_00421d54;
-    FUN_0023592c(track);
+    nw_snd_internal_driver_SequenceTrack_UpdateChannelParam(track);
     for (channel = track->channels; channel != 0; channel = *(int *)(channel + 0x138)) {
         if (*(char *)(channel + 0xc6) != 0) {
             nw_snd_internal_driver_Channel_Release(channel);

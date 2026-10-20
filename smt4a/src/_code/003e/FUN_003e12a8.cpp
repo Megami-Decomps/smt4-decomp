@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_001b4a90(unsigned int [43], int, unsigned int);
+int __aeabi_memset4(unsigned int [43], int, unsigned int);
 int FUN_0039ba24(unsigned int [43], int, unsigned int);
 int FUN_003e2038(unsigned int *, int);
 int FUN_003e8b78(int);
 int FUN_003ed1f8(int, int);
 int FUN_003efb68(int, unsigned int);
 
-/* Supplied declaration required: FUN_001b4a90. */
+/* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: FUN_0039ba24. */
 /* Supplied declaration required: FUN_003e2038. */
 /* Supplied declaration required: FUN_003e8b78. */
@@ -35,7 +35,7 @@ void FUN_003e12a8(unsigned int *param_1,int param_2)
   puVar1 = temp_v4;
   FUN_003e8b78(param_2);
   temp_v1 = *(unsigned int *)(param_2 + 0x1ec4);
-  FUN_001b4a90(temp_v4,0xa8,0xffffffff);
+  __aeabi_memset4(temp_v4,0xa8,0xffffffff);
   FUN_0039ba24(temp_v4,0x2a,temp_v1);
   temp_v3 = 0;
   temp_v2 = 0;

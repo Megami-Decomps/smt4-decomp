@@ -26,7 +26,7 @@ static float romwright_fabs_4(float value)
 }
 #endif
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-extern unsigned int FUN_00147a7c(unsigned int);
+extern unsigned int nnosConvertVirtToPhys(unsigned int);
 
 
 void FUN_001330a0(void)
@@ -167,7 +167,7 @@ LAB_00133154:
       g_commandBufferCursor = g_commandBufferCursor + 2;
     }
     if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
-      temp_v4 = FUN_00147a7c(puVar1[0x204]);
+      temp_v4 = nnosConvertVirtToPhys(puVar1[0x204]);
       *g_commandBufferCursor = temp_v4 >> 3;
       g_commandBufferCursor[1] = 0xf011d;
       g_commandBufferCursor = g_commandBufferCursor + 2;
@@ -237,7 +237,7 @@ LAB_00133154:
       g_commandBufferCursor = g_commandBufferCursor + 2;
     }
     if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
-      temp_v4 = FUN_00147a7c(puVar1[0x203]);
+      temp_v4 = nnosConvertVirtToPhys(puVar1[0x203]);
       *g_commandBufferCursor = temp_v4 >> 3;
       g_commandBufferCursor[1] = 0xf011c;
       g_commandBufferCursor = g_commandBufferCursor + 2;

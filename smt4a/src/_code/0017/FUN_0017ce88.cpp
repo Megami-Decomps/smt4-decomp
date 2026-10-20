@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_11_stack;
 
-extern unsigned char DAT_0061a470; /* 0x61a470 */
+extern unsigned char g_asdGfxContext; /* 0x61a470 */
 
 /* Supplied declaration required: FUN_0017e22c. */
 
@@ -23,7 +23,7 @@ void FUN_0017ce88(unsigned int param_1,unsigned int param_2,unsigned int param_3
 
 {
 /* irregular: 1 native warning(s); review required */
-  FUN_0017e22c((*(unsigned int *)((unsigned char *)&DAT_0061a470 + 0x9c)),param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9,
+  FUN_0017e22c((*(unsigned int *)((unsigned char *)&g_asdGfxContext + 0x9c)),param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9,
                param_10,param_11);
   return;
 }

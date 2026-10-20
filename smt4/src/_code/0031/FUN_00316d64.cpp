@@ -2,13 +2,13 @@
 
 extern "C" {
 
-int FUN_002c09d0(...);
+int gameFlagIsSet(...);
 
 /* 1 when flag `a` is unset or set, and flag `b` is unset or clear... (each flag checked only when nonzero). */
 u32 FUN_00316d64(int a, int b)
 {
-    if (((a == 0) || (FUN_002c09d0() != 0)) &&
-        ((b == 0) || (FUN_002c09d0(b) == 0))) {
+    if (((a == 0) || (gameFlagIsSet() != 0)) &&
+        ((b == 0) || (gameFlagIsSet(b) == 0))) {
         return 1;
     }
     return 0;

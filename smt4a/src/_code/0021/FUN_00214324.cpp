@@ -6,7 +6,7 @@ extern "C" {
 
 int npcRoomDestroy(void);
 int FUN_003423cc(...);
-int FUN_003fd63c(...);
+int gameFlagSetValue(...);
 
 int FUN_00100388(...);
 int asdSequenceRequest(...);
@@ -14,23 +14,23 @@ int jobStop(unsigned int, int);
 int FUN_001656e0(...);
 int sysPlaySe(...);
 int FUN_00168980(...);
-int FUN_0018719c(...);
+int gameFlagIsSet(...);
 int asdMemFree(...);
-int FUN_0019a7f4(int, int);
+int asdTMTexTableReleaseNode(int, int);
 int scrScriptProcessDestroy(...);
-int FUN_001add24(int);
+int dataTableFree(int);
 int FUN_001f4908(...);
 int FUN_0020214c(void);
-int FUN_0021c354(int);
+int bgmFadeOut(int);
 int FUN_00224880(...);
 int FUN_00275bc8(void);
-int FUN_00275f44(...);
+int scrScriptProcessStartEntry(...);
 int obj04Finish(void);
-int FUN_0035b304(void);
-int FUN_0037b450(void);
+int campCommonBgRelease(void);
+int campButtonHelpRelease(void);
 int FUN_003c3e14(void);
 int eventTexAddHandle(...);
-int FUN_003d2d6c(int);
+int soundChannelStopAll(int);
 int FUN_003d54f8(...);
 
 /* stack frame of void: 6 slot(s), 22 byte(s) */
@@ -62,37 +62,37 @@ extern unsigned int DAT_005f1b78; /* 0x5f1b78 */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00168980. */
 extern int FUN_001801b8(unsigned short, unsigned char);
-extern int FUN_0018206c(unsigned int, unsigned short);
+extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned short);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0018719c. */
+/* Supplied declaration required: gameFlagIsSet. */
 extern unsigned int dataTableGetCount(unsigned int);
 extern short *dataTableGetEntries(void);
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_0019a7f4. */
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: FUN_001add24. */
+/* Supplied declaration required: dataTableFree. */
 /* Supplied declaration required: FUN_001f4908. */
 /* Supplied declaration required: FUN_0020214c. */
 extern int FUN_002121c4(unsigned int);
-/* Supplied declaration required: FUN_0021c354. */
+/* Supplied declaration required: bgmFadeOut. */
 /* Supplied declaration required: FUN_00224880. */
 /* Supplied declaration required: npcRoomDestroy. */
 /* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002a4b60(void);
 extern int FUN_002a4b74(void);
 extern int FUN_0031d62c(void);
 extern int panelIsMissingOrFlagClear(void);
 /* Supplied declaration required: FUN_003423cc. */
 /* Supplied declaration required: obj04Finish. */
-extern unsigned int FUN_00357bc8(unsigned int, int);
-/* Supplied declaration required: FUN_0035b304. */
-/* Supplied declaration required: FUN_0037b450. */
+extern unsigned int tableGroupFindEntryIndex(unsigned int, int);
+/* Supplied declaration required: campCommonBgRelease. */
+/* Supplied declaration required: campButtonHelpRelease. */
 /* Supplied declaration required: FUN_003c3e14. */
 /* Supplied declaration required: eventTexAddHandle. */
-/* Supplied declaration required: FUN_003d2d6c. */
+/* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: FUN_003d54f8. */
-/* Supplied declaration required: FUN_003fd63c. */
+/* Supplied declaration required: gameFlagSetValue. */
 
 
 unsigned int FUN_00214324(void)
@@ -125,16 +125,16 @@ unsigned int FUN_00214324(void)
   puVar5 = &temp_v8;
   switch(g_npcRoom[0x3c]) {
   case 0:
-    temp_v7 = FUN_0018206c(0,*(unsigned short *)((int)g_npcRoom + 0x102));
+    temp_v7 = asdTMTexTableNodeIsLoaded(0,*(unsigned short *)((int)g_npcRoom + 0x102));
     if (temp_v7 != 0) {
       FUN_003d54f8(0,1);
       FUN_003d54f8(1);
       temp_v7 = 0;
       do {
         if (((*(short *)(puVar2[9] + temp_v7 * 0x18 + 0x24) != 0) &&
-            (temp_v5 = FUN_0018719c(), temp_v5 != 0)) &&
+            (temp_v5 = gameFlagIsSet(), temp_v5 != 0)) &&
            ((*(short *)(puVar2[9] + temp_v7 * 0x18 + 0x26) == 0 ||
-            (temp_v5 = FUN_0018719c(), temp_v5 == 0)))) {
+            (temp_v5 = gameFlagIsSet(), temp_v5 == 0)))) {
           temp_v8 = (unsigned int)*(unsigned short *)(puVar2[9] + temp_v7 * 0x18 + 0x28);
           uStack_64 = 0xffffffff;
           puVar2 = (unsigned int *)(temp_v7 * 0x18 + 0x2a + puVar2[9]);
@@ -148,10 +148,10 @@ unsigned int FUN_00214324(void)
           if (g_npcRoom != (unsigned int *)0x0) {
             FUN_003c3e14();
             if (*(short *)(puVar2 + 0x40) == 0x22) {
-              FUN_003d2d6c(0xf);
-              FUN_0021c354(0x3c);
+              soundChannelStopAll(0xf);
+              bgmFadeOut(0x3c);
             }
-            FUN_0019a7f4(0,*(unsigned short *)((int)puVar2 + 0x102));
+            asdTMTexTableReleaseNode(0,*(unsigned short *)((int)puVar2 + 0x102));
             temp_v7 = 0;
             do {
               if (puVar2[temp_v7 + 10] != 0) {
@@ -166,9 +166,9 @@ unsigned int FUN_00214324(void)
             jobStop(*puVar2,0);
             asdMemFree(puVar2);
             g_npcRoom = (unsigned int *)0x0;
-            FUN_001add24(0x1a);
-            FUN_0037b450();
-            FUN_0035b304();
+            dataTableFree(0x1a);
+            campButtonHelpRelease();
+            campCommonBgRelease();
           }
           return 0xffffffff;
         }
@@ -209,7 +209,7 @@ unsigned int FUN_00214324(void)
     if (temp_v7 != 0) break;
     temp_v7 = puVar2[0x3d];
     if (temp_v7 < 1) {
-      temp_v7 = FUN_00275f44(puVar2[0x14],2);
+      temp_v7 = scrScriptProcessStartEntry(puVar2[0x14],2);
       if (temp_v7 != 0) {
         sysPlaySe(0xa4);
         puVar4 = g_npcRoom;
@@ -235,9 +235,9 @@ unsigned int FUN_00214324(void)
 joined_r0x002146ac:
         if (temp_v7 == 1) goto LAB_002146c0;
       }
-      temp_v7 = FUN_00275f44(puVar2[0x14],0);
+      temp_v7 = scrScriptProcessStartEntry(puVar2[0x14],0);
       if (temp_v7 != 0) {
-        FUN_00275f44(puVar2[0x15],1);
+        scrScriptProcessStartEntry(puVar2[0x15],1);
         puVar4 = g_npcRoom;
         g_npcRoom[0x3b] = 0;
         puVar4[0x3c] = 2;
@@ -324,8 +324,8 @@ LAB_002146c0:
     puVar2[0x17] = (unsigned int)puVar5;
     FUN_00275bc8();
     puVar2[0x18] = (unsigned int)puVar5;
-    temp_v2 = FUN_00357bc8(puVar2[0x17],puVar2[puVar2[0x3e] + 10] + 0x16);
-    FUN_00275f44(puVar2[0x18],temp_v2);
+    temp_v2 = tableGroupFindEntryIndex(puVar2[0x17],puVar2[puVar2[0x3e] + 10] + 0x16);
+    scrScriptProcessStartEntry(puVar2[0x18],temp_v2);
     puVar4 = g_npcRoom;
     g_npcRoom[0x3b] = 0;
     puVar4[0x3c] = 4;
@@ -368,10 +368,10 @@ LAB_002146c0:
     puVar4[0x3d] = 0;
     if (temp_v3 != 0) {
       do {
-        if ((((*psVar7 == temp_v0) && ((psVar7[7] == 0 || (temp_v7 = FUN_0018719c(), temp_v7 != 0)))) &&
-            ((psVar7[8] == 0 || (temp_v7 = FUN_0018719c(), temp_v7 != 0)))) &&
-           (((psVar7[9] == 0 || (temp_v7 = FUN_0018719c(), temp_v7 == 0)) &&
-            ((psVar7[10] == 0 || (temp_v7 = FUN_0018719c(), temp_v7 == 0)))))) {
+        if ((((*psVar7 == temp_v0) && ((psVar7[7] == 0 || (temp_v7 = gameFlagIsSet(), temp_v7 != 0)))) &&
+            ((psVar7[8] == 0 || (temp_v7 = gameFlagIsSet(), temp_v7 != 0)))) &&
+           (((psVar7[9] == 0 || (temp_v7 = gameFlagIsSet(), temp_v7 == 0)) &&
+            ((psVar7[10] == 0 || (temp_v7 = gameFlagIsSet(), temp_v7 == 0)))))) {
           puVar4[puVar4[0x3d] + 10] = (unsigned int)psVar7;
           temp_v7 = puVar4[0x3d];
           puVar4[0x3d] = temp_v7 + 1;
@@ -436,13 +436,13 @@ LAB_00214b50:
       FUN_003d54f8(0,1);
       FUN_003d54f8(1);
     }
-    temp_v7 = FUN_0018719c(0x295);
-    if ((temp_v7 != 0) && (temp_v7 = FUN_0018719c(0x296), temp_v7 == 0)) {
-      FUN_003fd63c(0x296,1);
+    temp_v7 = gameFlagIsSet(0x295);
+    if ((temp_v7 != 0) && (temp_v7 = gameFlagIsSet(0x296), temp_v7 == 0)) {
+      gameFlagSetValue(0x296,1);
     }
-    temp_v7 = FUN_0018719c(0x297);
-    if ((temp_v7 != 0) && (temp_v7 = FUN_0018719c(0x298), temp_v7 == 0)) {
-      FUN_003fd63c(0x298,1);
+    temp_v7 = gameFlagIsSet(0x297);
+    if ((temp_v7 != 0) && (temp_v7 = gameFlagIsSet(0x298), temp_v7 == 0)) {
+      gameFlagSetValue(0x298,1);
     }
     npcRoomDestroy();
     return 0xffffffff;

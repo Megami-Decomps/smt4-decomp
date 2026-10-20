@@ -9,12 +9,12 @@ int FUN_002a2dc8(unsigned int);
 int sceneTraverserVisit(unsigned int, unsigned int);
 
 extern unsigned int DAT_00464b7c; /* 0x464b7c */
-extern unsigned int DAT_00464b84; /* 0x464b84 */
+extern unsigned int g_asdModelTransformBuilder; /* 0x464b84 */
 extern int DAT_00464b8c; /* 0x464b8c */
 extern int DAT_00464b90; /* 0x464b90 */
 extern int DAT_00464b94; /* 0x464b94 */
 extern int DAT_00464b98; /* 0x464b98 */
-extern unsigned int DAT_004dad80; /* 0x4dad80 */
+extern unsigned int g_asdLightCount; /* 0x4dad80 */
 
 /* Supplied declaration required: FUN_0019df1c. */
 /* Supplied declaration required: FUN_002a2dc8. */
@@ -51,8 +51,8 @@ void FUN_001db998(int param_1,int param_2)
   if (temp_v1 != 0) {
     FUN_0019df1c(param_1);
     temp_v2 = (unsigned int)(param_2 >= 3);
-    sceneTraverserVisit((&DAT_00464b7c)[temp_v2],(&DAT_00464b84)[temp_v2]);
-    (&DAT_004dad80)[temp_v2 * 6] = (&DAT_004dad80)[temp_v2 * 6] + 1;
+    sceneTraverserVisit((&DAT_00464b7c)[temp_v2],(&g_asdModelTransformBuilder)[temp_v2]);
+    (&g_asdLightCount)[temp_v2 * 6] = (&g_asdLightCount)[temp_v2 * 6] + 1;
     *(int *)(param_1 + 0xc) = param_2;
     *(int *)(param_1 + 0x10) = param_2;
     *(unsigned int *)(param_1 + 0x14) = 0;

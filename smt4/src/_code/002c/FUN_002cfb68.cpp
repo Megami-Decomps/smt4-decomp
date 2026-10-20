@@ -17,7 +17,7 @@ extern u32 g_aocSystem;
 
 extern Context *jobGetWork(void);
 extern void FUN_002a60cc(u32 table, u32 owner, u32 handle);
-extern void FUN_002ae898(u32 owner, u32 handle);
+extern void asdTMTexTableReleaseNode(u32 owner, u32 handle);
 extern void asdMemFree(Context *ctx);
 
 void FUN_002cfb68(void)
@@ -25,12 +25,12 @@ void FUN_002cfb68(void)
     Context *ctx = jobGetWork();
 
     if (ctx->hasPrimary != 0) {
-        FUN_002ae898(ctx->owner, ctx->primary);
+        asdTMTexTableReleaseNode(ctx->owner, ctx->primary);
         FUN_002a60cc(g_aocSystem, ctx->owner, ctx->primary);
         ctx->hasPrimary = 0;
     }
     if (ctx->secondary != -1) {
-        FUN_002ae898(ctx->owner, ctx->secondary);
+        asdTMTexTableReleaseNode(ctx->owner, ctx->secondary);
         FUN_002a60cc(g_aocSystem, ctx->owner, ctx->secondary);
         ctx->secondary = -1;
         ctx->unk80 = 0;

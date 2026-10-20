@@ -19,8 +19,8 @@ int itemTableClear(int);
 int FUN_0045adc0(int, int, unsigned int);
 int FUN_004ff920(unsigned int);
 
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
-extern int DAT_0057f290; /* 0x57f290 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
+extern int g_unite; /* 0x57f290 */
 
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
 #define ROMWRIGHT_PIECE_4_4_DEFINED
@@ -68,11 +68,11 @@ void FUN_0035deb0(void)
   unsigned int in_s0;
   unsigned long long temp_v8;
   
-  temp_v3 = DAT_0057f290;
-  if (DAT_0057f290 == 0) {
+  temp_v3 = g_unite;
+  if (g_unite == 0) {
     return;
   }
-  FUN_004ff920(*(unsigned int *)(*(int *)(DAT_0057f290 + 0x9208) + 4));
+  FUN_004ff920(*(unsigned int *)(*(int *)(g_unite + 0x9208) + 4));
   if (*(int *)(temp_v3 + 0x920c) != 0) {
     return;
   }
@@ -93,7 +93,7 @@ void FUN_0035deb0(void)
   FUN_0040a918(*(unsigned int *)(temp_v3 + 0x920c),temp_v5);
   FUN_0040aad4(*(unsigned int *)(temp_v3 + 0x920c),0);
   temp_v1 = *(int *)(*(int *)(temp_v3 + 0x920c) + 4);
-  FUN_0040ace8(DAT_0056fcc0,temp_v1);
+  FUN_0040ace8(g_handleRegistry,temp_v1);
   FUN_003fe86c(temp_v1,0,2);
   *(unsigned int *)(temp_v1 + 4) = *(unsigned int *)(temp_v1 + 4) & 0xfffffffc;
   temp_v8 = romwright_piece_4_4(unaff_r5,unaff_r4);

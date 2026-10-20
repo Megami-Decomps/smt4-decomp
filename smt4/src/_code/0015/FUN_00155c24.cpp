@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b0174(int);
+int asdFileRequestRelease(int);
 int asdMemFree(int *);
 
 typedef int romwright_code(...);
@@ -13,8 +13,8 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern int FUN_0014e724(int);
-/* Supplied declaration required: FUN_002b0174. */
+extern int asdFileRequestHasFailed(int);
+/* Supplied declaration required: asdFileRequestRelease. */
 /* Supplied declaration required: asdMemFree. */
 
 
@@ -27,7 +27,7 @@ void FUN_00155c24(int *param_1)
   int temp_v1;
   
   temp_v1 = *param_1;
-  temp_v0 = FUN_0014e724(temp_v1);
+  temp_v0 = asdFileRequestHasFailed(temp_v1);
   puVar2 = (unsigned int *)param_1[5];
   if (temp_v0 != 0) {
     if (puVar2 != (unsigned int *)0x0) {
@@ -46,7 +46,7 @@ void FUN_00155c24(int *param_1)
     }
     *(unsigned int *)(temp_v1 + 0xc) = 0;
   }
-  FUN_002b0174(*param_1);
+  asdFileRequestRelease(*param_1);
   asdMemFree(param_1);
   return;
 }

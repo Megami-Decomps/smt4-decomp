@@ -11,11 +11,11 @@ typedef struct Obj {
     /* 0x95D8 */ s32 unk95D8;
 } Obj;
 
-extern Obj *DAT_0043dd68;
+extern Obj *g_unite;
 
 u32 FUN_00269d4c(void)
 {
-    Obj *obj = DAT_0043dd68;
+    Obj *obj = g_unite;
 
     if (obj == NULL) {
         return (u32)obj;

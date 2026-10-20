@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002579bc(int);
 int FUN_00257a50(unsigned char [70], int, int);
 int FUN_0029da34(int, int, int, unsigned char [70]);
-int FUN_002b8838(int);
+int buttonHelpSetPreset(int);
 
 /* stack frame of param_1: 2 slot(s), 6 byte(s) */
 typedef struct {
@@ -19,7 +19,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00257a50. */
 extern int FUN_00262f14(void);
 /* Supplied declaration required: FUN_0029da34. */
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 
 
 void FUN_00241b44(int *param_1)
@@ -36,33 +36,33 @@ void FUN_00241b44(int *param_1)
   temp_v1 = *param_1;
   if (*(char *)(temp_v1 + 0xab) != '\0') {
     if (*(char *)(temp_v1 + 0xad) != '\x03') {
-      FUN_002b8838(0x50);
+      buttonHelpSetPreset(0x50);
       FUN_00257a50(temp_v2,(int)*(char *)(temp_v1 + 0xad),(int)*(char *)(temp_v1 + 0xac));
       if (puVar1 != (unsigned char *)0x0) {
         FUN_0029da34(0,1,temp_v3,temp_v2);
       }
       return;
     }
-    FUN_002b8838(0x4f);
+    buttonHelpSetPreset(0x4f);
     return;
   }
   temp_v0 = FUN_00262f14();
   if (temp_v0 == 0) {
     if (*(char *)(temp_v1 + 0x98) != '\x01') {
-      FUN_002b8838(3);
+      buttonHelpSetPreset(3);
       FUN_002579bc(0);
       return;
     }
-    FUN_002b8838(1);
+    buttonHelpSetPreset(1);
     FUN_002579bc(1);
     return;
   }
   if (*(char *)(temp_v1 + 0x98) != '\x01') {
-    FUN_002b8838(4);
+    buttonHelpSetPreset(4);
     FUN_002579bc(0);
     return;
   }
-  FUN_002b8838(2);
+  buttonHelpSetPreset(2);
   FUN_002579bc(1);
   return;
 }

@@ -8,8 +8,8 @@ int FUN_00100388(...);
 int btlGetMainState(void);
 int asdMemFree(void);
 int scrScriptProcessDestroy(void);
-int FUN_0019cac4(unsigned int);
-int FUN_002e342c(int *, unsigned char [132]);
+int dataTable00FindById(unsigned int);
+int libc_strcpy(int *, unsigned char [132]);
 int sysMemClear(unsigned char [132], int);
 
 extern int g_aocSystem; /* 0x570280 */
@@ -19,9 +19,9 @@ extern int *g_btlAiScript; /* 0x571130 */
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: FUN_0019cac4. */
+/* Supplied declaration required: dataTable00FindById. */
 extern int FUN_00240c34(unsigned char *);
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: sysMemClear. */
 extern int FUN_0046c474(int, unsigned short);
 
@@ -49,14 +49,14 @@ void FUN_00222488(int param_1)
     *(unsigned int *)(g_aocSystem + 0x460) = 0xffffffff;
     btlGetMainState();
     temp_v0 = (unsigned int)*(unsigned short *)(*(int *)(param_1 + 0x28) + 2);
-    FUN_0019cac4(temp_v0);
+    dataTable00FindById(temp_v0);
     sysMemClear(temp_v2,0x80);
     FUN_00100388(temp_v2,"battle/AI/%s.bf",temp_v0 + 0x8e);
     temp_v1 = FUN_00240c34(temp_v2);
     if (temp_v1 == 0) {
       FUN_00100388(temp_v2,"battle/AI/tmp.bf");
     }
-    FUN_002e342c(piVar1 + 4,temp_v2);
+    libc_strcpy(piVar1 + 4,temp_v2);
     temp_v1 = FUN_0046c474(g_aocSystem,*(unsigned short *)(*(int *)(param_1 + 0x28) + 2));
     if (temp_v1 != 0) {
       *(unsigned int *)(g_aocSystem + 0x460) = (unsigned int)*(unsigned short *)(*(int *)(param_1 + 0x28) + 2);

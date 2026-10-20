@@ -24,10 +24,10 @@ extern void FUN_0033449c(s32 value);
 extern void FUN_00333f6c(void);
 extern void FUN_002bf4f4(u8 value);
 extern void sysPlaySe(u32 id);
-extern void FUN_0037b450(void);
+extern void campButtonHelpRelease(void);
 extern void scrScriptProcessDestroy(u32 process);
 extern void asdMemFree(u32 ptr);
-extern u32 FUN_001add24(u32 id);
+extern u32 dataTableFree(u32 id);
 
 /* Tears down the scene: resets global state, plays the closing sound and frees the owned buffers and script processes. */
 void sceneObjDestroy(SceneObj *scene)
@@ -42,7 +42,7 @@ void sceneObjDestroy(SceneObj *scene)
     FUN_00333f6c();
     FUN_002bf4f4(0);
     sysPlaySe(scene->unk42);
-    FUN_0037b450();
+    campButtonHelpRelease();
     if (scene->proc1C != 0) {
         scrScriptProcessDestroy(scene->proc1C);
         scene->proc1C = 0;
@@ -67,7 +67,7 @@ void sceneObjDestroy(SceneObj *scene)
         asdMemFree(scene->buf2C);
         scene->buf2C = 0;
     }
-    FUN_001add24(0x25);
+    dataTableFree(0x25);
 }
 
 } /* extern "C" */

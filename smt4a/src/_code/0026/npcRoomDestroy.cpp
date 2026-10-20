@@ -4,14 +4,14 @@ extern "C" {
 
 void jobStop(u32 job, s32 arg);
 void asdMemFree(void *block);
-void FUN_0019a7f4(s32 arg, u32 value);
+void asdTMTexTableReleaseNode(s32 arg, u32 value);
 void scrScriptProcessDestroy(void *process);
-void FUN_001add24(s32 arg);
-void FUN_0021c354(s32 arg);
-void FUN_0035b304(void);
-void FUN_0037b450(void);
+void dataTableFree(s32 arg);
+void bgmFadeOut(s32 arg);
+void campCommonBgRelease(void);
+void campButtonHelpRelease(void);
 void FUN_003c3e14(void);
-void FUN_003d2d6c(s32 arg);
+void soundChannelStopAll(s32 arg);
 
 extern NpcRoom *g_npcRoom;
 
@@ -24,10 +24,10 @@ void npcRoomDestroy(void)
     if (g_npcRoom != NULL) {
         FUN_003c3e14();
         if (room->mode == NPC_ROOM_MODE_SPECIAL) {
-            FUN_003d2d6c(0xF);
-            FUN_0021c354(0x3C);
+            soundChannelStopAll(0xF);
+            bgmFadeOut(0x3C);
         }
-        FUN_0019a7f4(0, room->unk102);
+        asdTMTexTableReleaseNode(0, room->unk102);
         for (i = 0; i < NPC_ROOM_JOBS; i++) {
             if (room->jobUsed[i] != 0) {
                 jobStop(room->jobs[i], 0);
@@ -40,9 +40,9 @@ void npcRoomDestroy(void)
         jobStop(room->job, 0);
         asdMemFree(room);
         g_npcRoom = NULL;
-        FUN_001add24(0x1A);
-        FUN_0037b450();
-        FUN_0035b304();
+        dataTableFree(0x1A);
+        campButtonHelpRelease();
+        campCommonBgRelease();
     }
 }
 

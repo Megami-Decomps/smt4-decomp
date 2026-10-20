@@ -6,10 +6,10 @@ extern "C" {
 
 int FUN_001469a8(int);
 int asdMemFree(unsigned int);
-int FUN_001a08d8(int);
+int nn_os_LightEvent_Signal(int);
 int FUN_001a0d08(int);
 int FUN_002e3140(void);
-int FUN_002e3328(int);
+int asdOperatorDelete(int);
 int deblockerHandleRelease(int);
 int FUN_00424b54(int);
 int software_interrupt(int);
@@ -21,10 +21,10 @@ extern int DAT_00588104; /* 0x588104 */
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_001469a8. */
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_001a08d8. */
+/* Supplied declaration required: nn_os_LightEvent_Signal. */
 /* Supplied declaration required: FUN_001a0d08. */
 /* Supplied declaration required: FUN_002e3140. */
-/* Supplied declaration required: FUN_002e3328. */
+/* Supplied declaration required: asdOperatorDelete. */
 /* Supplied declaration required: deblockerHandleRelease. */
 /* Supplied declaration required: FUN_00424b54. */
 
@@ -38,7 +38,7 @@ void FUN_00425cd8(int param_1)
   
   if (*(int *)(param_1 + 0x14) != 0) {
     *(unsigned char *)(param_1 + 0x10) = 1;
-    FUN_001a08d8(param_1 + 0x20);
+    nn_os_LightEvent_Signal(param_1 + 0x20);
     software_interrupt(0x24);
     if (*(int *)(param_1 + 0x28) < 0) {
       FUN_002e3140();
@@ -53,7 +53,7 @@ void FUN_00425cd8(int param_1)
     temp_v0 = DAT_00588104;
     if (DAT_00588104 != 0) {
       FUN_001469a8(DAT_00588104);
-      FUN_002e3328(temp_v0);
+      asdOperatorDelete(temp_v0);
     }
     DAT_00588104 = 0;
     asdMemFree(DAT_00588100);

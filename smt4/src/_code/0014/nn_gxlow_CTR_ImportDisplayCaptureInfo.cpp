@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned int FUN_002ad264(void);
+extern unsigned int nn_gxlow_CTR_GetGpu(void);
 extern unsigned int nn_gxlow_CTR_Gpu_ImportDisplayCaptureInfo(unsigned int, unsigned int);
 
 
@@ -17,7 +17,7 @@ void nn_gxlow_CTR_ImportDisplayCaptureInfo(int *param_1)
   int in_r2;
   unsigned char temp_v2;
   
-  temp_v0 = FUN_002ad264();
+  temp_v0 = nn_gxlow_CTR_GetGpu();
   nn_gxlow_CTR_Gpu_ImportDisplayCaptureInfo(temp_v0,(unsigned int)param_1);
   temp_v1 = param_1[2];
   if ((temp_v1 & 0x70) == 0) {

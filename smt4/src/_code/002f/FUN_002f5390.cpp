@@ -6,10 +6,10 @@ extern "C" {
 
 int FUN_001ff9f4(void);
 int FUN_002102ec(unsigned char **, int, unsigned int, unsigned int);
-int FUN_0024aab4(...);
-int FUN_0024aaec(...);
-int FUN_0024ab24(unsigned char **);
-int FUN_0024ab5c(void);
+int fileOwnerCloseA(...);
+int fileOwnerCloseB(...);
+int fileOwnerCloseC(unsigned char **);
+int fileOwnerCloseD(void);
 int FUN_002bb688(unsigned char **, int);
 
 /* stack frame of param_4: 7 slot(s), 28 byte(s) */
@@ -30,10 +30,10 @@ extern unsigned char *FUN_001ff93c(unsigned char **);
 extern unsigned char *FUN_001ffaf0(void);
 extern unsigned char **FUN_001ffb70(void);
 /* Supplied declaration required: FUN_002102ec. */
-/* Supplied declaration required: FUN_0024aab4. */
-/* Supplied declaration required: FUN_0024aaec. */
-/* Supplied declaration required: FUN_0024ab24. */
-/* Supplied declaration required: FUN_0024ab5c. */
+/* Supplied declaration required: fileOwnerCloseA. */
+/* Supplied declaration required: fileOwnerCloseB. */
+/* Supplied declaration required: fileOwnerCloseC. */
+/* Supplied declaration required: fileOwnerCloseD. */
 extern unsigned char *FUN_0024ab94(unsigned char **, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bb688. */
 extern unsigned char *FUN_002cbfe8(unsigned char **);
@@ -105,19 +105,19 @@ unsigned int FUN_002f5390(int param_1,unsigned int param_2,unsigned int param_3,
         if (param_1 != 1) {
           if (param_1 != 2) {
             if (param_1 == 3) {
-              FUN_0024ab5c();
+              fileOwnerCloseD();
             }
           }
           else {
-            FUN_0024aab4();
+            fileOwnerCloseA();
           }
         }
         else {
-          FUN_0024aaec();
+          fileOwnerCloseB();
         }
       }
       else {
-        FUN_0024ab24(&temp_v0);
+        fileOwnerCloseC(&temp_v0);
       }
     }
     else {
@@ -125,19 +125,19 @@ unsigned int FUN_002f5390(int param_1,unsigned int param_2,unsigned int param_3,
         if (param_1 != 1) {
           if (param_1 != 2) {
             if (param_1 == 3) {
-              puVar4 = (unsigned char *)FUN_0024ab5c();
+              puVar4 = (unsigned char *)fileOwnerCloseD();
             }
           }
           else {
-            puVar4 = (unsigned char *)FUN_0024aab4(&temp_v0);
+            puVar4 = (unsigned char *)fileOwnerCloseA(&temp_v0);
           }
         }
         else {
-          puVar4 = (unsigned char *)FUN_0024aaec(&temp_v0);
+          puVar4 = (unsigned char *)fileOwnerCloseB(&temp_v0);
         }
       }
       else {
-        puVar4 = (unsigned char *)FUN_0024ab24(&temp_v0);
+        puVar4 = (unsigned char *)fileOwnerCloseC(&temp_v0);
       }
       if (-1 < (int)puVar4) {
         FUN_002bb688(&temp_v0,0);

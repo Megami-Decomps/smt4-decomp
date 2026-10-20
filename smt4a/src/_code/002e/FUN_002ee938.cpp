@@ -4,18 +4,18 @@
 
 extern "C" {
 
-int FUN_002e9300(unsigned int, unsigned short [130]);
-int FUN_002e93da(int);
-int FUN_002e97b4(int, unsigned short [130], int);
+int onlineStringConstruct(unsigned int, unsigned short [130]);
+int onlineUrlEnsureParsed(int);
+int onlineSockAddrFormatIpv4(int, unsigned short [130], int);
 
 /* stack frame of param_2: 1 slot(s), 2 byte(s) */
 typedef struct {
     unsigned short sp110; /* 0x110: local_110 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_002e9300. */
-/* Supplied declaration required: FUN_002e93da. */
-/* Supplied declaration required: FUN_002e97b4. */
+/* Supplied declaration required: onlineStringConstruct. */
+/* Supplied declaration required: onlineUrlEnsureParsed. */
+/* Supplied declaration required: onlineSockAddrFormatIpv4. */
 
 
 void FUN_002ee938(unsigned int param_1,int param_2)
@@ -26,13 +26,13 @@ void FUN_002ee938(unsigned int param_1,int param_2)
   unsigned short temp_v1 [130];
   
   temp_v1[0] = 0;
-  FUN_002e93da(param_2);
+  onlineUrlEnsureParsed(param_2);
   temp_v0 = *(unsigned int *)(*(int *)(param_2 + 4) + 8);
   if ((((temp_v0 & 0xff) != 0 || ((temp_v0 >> 8) & 0xff) != 0) || ((temp_v0 >> 0x10) & 0xff) != 0) ||
       temp_v0 >> 0x18 != 0) {
-    FUN_002e97b4(*(int *)(param_2 + 4),temp_v1,0x80);
+    onlineSockAddrFormatIpv4(*(int *)(param_2 + 4),temp_v1,0x80);
   }
-  FUN_002e9300(param_1,temp_v1);
+  onlineStringConstruct(param_1,temp_v1);
   return;
 }
 

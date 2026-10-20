@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002eb330(unsigned int *);
-int FUN_002eb588(unsigned int *);
+int onlineTimeGetNow(unsigned int *);
 int SBORROW4(...);
 
 typedef struct fn_002ef790_arg0 fn_002ef790_arg0;
@@ -35,7 +35,7 @@ typedef struct {
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Supplied declaration required: FUN_002eb330. */
-/* Supplied declaration required: FUN_002eb588. */
+/* Supplied declaration required: onlineTimeGetNow. */
 extern int FUN_002eba9c(unsigned int *, unsigned int *);
 
 
@@ -62,7 +62,7 @@ unsigned long long FUN_002ef790(fn_002ef790_arg0 *param_1)
   if (temp_v0 != 0) {
     temp_v3 = param_1->field_0x14;
     temp_v2 = param_1->field_0x10;
-    FUN_002eb588(&temp_v4);
+    onlineTimeGetNow(&temp_v4);
     temp_v0 = temp_v2 - temp_v4;
     if ((int)((temp_v3 - temp_v5) - (unsigned int)(temp_v2 < temp_v4)) < 0 ==
         (SBORROW4(temp_v3,temp_v5) != SBORROW4(temp_v3 - temp_v5,(unsigned int)(temp_v2 < temp_v4))))
@@ -74,7 +74,7 @@ LAB_002ef7c2:
     temp_v0 = param_1->field_0x20;
     if (*(char *)(temp_v0 + 0x30) != '\0') {
       FUN_002eb330(&temp_v6);
-      FUN_002eb588(&temp_v8);
+      onlineTimeGetNow(&temp_v8);
       temp_v0 = temp_v6 - temp_v8;
       if ((int)((temp_v7 - temp_v9) - (unsigned int)(temp_v6 < temp_v8)) < 0 !=
           (SBORROW4(temp_v7,temp_v9) != SBORROW4(temp_v7 - temp_v9,(unsigned int)(temp_v6 < temp_v8)))

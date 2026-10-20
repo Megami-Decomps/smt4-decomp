@@ -16,7 +16,7 @@ extern unsigned int *DAT_0049f938; /* 0x49f938 */
 extern int FUN_002762e0(void);
 /* Supplied declaration required: FUN_0027eee0. */
 /* Supplied declaration required: FUN_00287b0c. */
-extern int FUN_002bfde4(unsigned int);
+extern int padIsButtonPressed(unsigned int);
 extern int FUN_002c15fc(unsigned int);
 
 
@@ -76,8 +76,8 @@ void FUN_0026413c(void)
       if ((*(short *)(DAT_004474f4 + 0xb2) == 0) &&
          ((temp_v2 = FUN_002762e0(), temp_v2 != 0 ||
           (((temp_v2 = FUN_002c15fc(8), temp_v2 != 0 && (temp_v2 = FUN_002c15fc(7), temp_v2 != 0)) &&
-           ((temp_v2 = FUN_002bfde4(8), temp_v2 == 0 &&
-            ((temp_v2 = FUN_002bfde4(7), temp_v2 == 0 && (*(char *)(DAT_004474f4 + 0xb1) == '\0'))))))))
+           ((temp_v2 = padIsButtonPressed(8), temp_v2 == 0 &&
+            ((temp_v2 = padIsButtonPressed(7), temp_v2 == 0 && (*(char *)(DAT_004474f4 + 0xb1) == '\0'))))))))
          )) {
         temp_v3 = 0;
         temp_v4 = 0;

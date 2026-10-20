@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00248738(...);
 int FUN_00297060(...);
-int FUN_00297410(...);
+int fileSlotLoad(...);
 int timerStart(...);
 int FUN_002bd954(...);
 int FUN_002bee58(...);
@@ -42,11 +42,11 @@ extern unsigned int *g_gauntletAppMenu; /* 0x43dc88 */
 
 /* Supplied declaration required: FUN_00248738. */
 /* Supplied declaration required: FUN_00297060. */
-/* Supplied declaration required: FUN_00297410. */
+/* Supplied declaration required: fileSlotLoad. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002bee58. */
-extern int FUN_002c09d0(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern unsigned int dataTableGetEntries(void);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
@@ -83,24 +83,24 @@ unsigned int FUN_002e24c8(void)
   puVar3 = &LAB_002e276c;
   taskCreateDraw(&LAB_002e276c,0xe6,0,0,gauntletAppMenuExit,0,0,puVar2);
   puVar1[1] = (unsigned int)puVar3;
-  temp_v0 = FUN_002c09d0(0x520);
+  temp_v0 = gameFlagIsSet(0x520);
   if (temp_v0 != 0) {
     *(unsigned char *)(puVar1 + 0xad) = 1;
   }
-  temp_v0 = FUN_002c09d0(0x521);
+  temp_v0 = gameFlagIsSet(0x521);
   if (temp_v0 != 0) {
     *(unsigned char *)((int)puVar1 + 0x2b5) = 1;
   }
-  temp_v0 = FUN_002c09d0(0x526);
+  temp_v0 = gameFlagIsSet(0x526);
   if (temp_v0 != 0) {
     *(unsigned char *)((int)puVar1 + 0x2b6) = 1;
   }
-  temp_v0 = FUN_002c09d0(0x527);
+  temp_v0 = gameFlagIsSet(0x527);
   if (temp_v0 != 0) {
     *(unsigned char *)((int)puVar1 + 0x2b7) = 1;
   }
   FUN_00248738(puVar1,0);
-  FUN_00297410(0xd);
+  fileSlotLoad(0xd);
   temp_v1 = dataTableGet(0xd,0);
   temp_v2 = dataTableGetEntries();
   puVar1[0xab] = temp_v2;

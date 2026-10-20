@@ -18,7 +18,7 @@ extern unsigned char DAT_005f0cac; /* 0x5f0cac */
 extern unsigned int DAT_005f0cec; /* 0x5f0cec */
 extern unsigned int DAT_005f0d28; /* 0x5f0d28 */
 
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
 /* Supplied declaration required: FUN_00352bc4. */
@@ -37,7 +37,7 @@ void FUN_002d02cc(void)
   float temp_v2;
   float temp_v3;
   
-  temp_v0 = FUN_0018719c(0x4d0);
+  temp_v0 = gameFlagIsSet(0x4d0);
   if (temp_v0 != 0) {
     temp_v2 = (in_s3 + 30.0f) * 0.017453292f;
     temp_v1 = temp_v2;

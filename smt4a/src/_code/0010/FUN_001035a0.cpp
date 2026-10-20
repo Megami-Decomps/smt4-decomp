@@ -2,12 +2,12 @@
 
 extern "C" {
 
-void FUN_002e6e74(void);
+void onlineJobWaitComplete(void);
 
-/* Forwards to FUN_002e6e74. */
+/* Forwards to onlineJobWaitComplete. */
 void FUN_001035a0(void)
 {
-    FUN_002e6e74();
+    onlineJobWaitComplete();
 }
 
 } /* extern "C" */

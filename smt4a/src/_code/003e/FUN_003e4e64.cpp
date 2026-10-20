@@ -8,7 +8,7 @@ int VectorSignedToFloat(int, int);
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int FUN_0018416c(unsigned short);
-extern int FUN_001ab888(void);
+extern int gameGetSlotTable(void);
 
 
 void FUN_003e4e64(void)
@@ -27,7 +27,7 @@ void FUN_003e4e64(void)
   temp_v5 = 0x3fa00000;
   do {
     if ((temp_v2 & 0xffff) < 0xc) {
-      temp_v0 = FUN_001ab888();
+      temp_v0 = gameGetSlotTable();
       temp_v0 = temp_v0 + (temp_v2 & 0xffff) * 0x134;
       if ((temp_v0 != -0x1ddc) && ((*(unsigned int *)(temp_v0 + 0x1f0c) & 1) != 0)) {
         *(unsigned short *)(temp_v0 + 0x1e3c) = 0;

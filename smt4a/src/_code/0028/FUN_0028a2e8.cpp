@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_001641c4(void);
+int ifTouchRegionRemove(void);
 int FUN_001643b4(int, int);
-int FUN_001b4a90(int, int, unsigned int);
+int __aeabi_memset4(int, int, unsigned int);
 int FUN_00203b40(int, int, int, int, int, int);
 int FUN_002a4964(int, int);
 
@@ -20,14 +20,14 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_1_stack;
 
-extern int DAT_0057f290; /* 0x57f290 */
+extern int g_unite; /* 0x57f290 */
 
-/* Supplied declaration required: FUN_001641c4. */
+/* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: FUN_001643b4. */
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
-/* Supplied declaration required: FUN_001b4a90. */
+/* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: FUN_00203b40. */
 extern int FUN_0026140c(void);
 extern int FUN_002a4860(void);
@@ -54,14 +54,14 @@ void FUN_0028a2e8(int param_1)
   int temp_v10;
   int temp_v11;
   
-  temp_v0 = DAT_0057f290;
+  temp_v0 = g_unite;
   temp_v2 = FUN_0026140c();
   temp_v3 = temp_v0 + 0x4fc;
   temp_v4 = FUN_002a4860();
   temp_v5 = FUN_002a4894(temp_v3);
   temp_v10 = 0;
   temp_v11 = 0;
-  FUN_001b4a90(temp_v0 + 0x927c,0x40,0xffffffff);
+  __aeabi_memset4(temp_v0 + 0x927c,0x40,0xffffffff);
   temp_v9 = 0;
   do {
     temp_v6 = dataTableGet(0x24,0);
@@ -92,15 +92,15 @@ void FUN_0028a2e8(int param_1)
     temp_v2 = 0;
     do {
       *(unsigned short *)(temp_v0 + temp_v2 * 2 + 0x438) = 0xffff;
-      FUN_001641c4();
+      ifTouchRegionRemove();
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < 8);
     *(unsigned short *)(temp_v0 + 0x476) = 0xffff;
     *(unsigned short *)(temp_v0 + 0x472) = 0xffff;
     *(unsigned short *)(temp_v0 + 0x474) = 0xffff;
-    FUN_001641c4();
-    FUN_001641c4();
-    FUN_001641c4();
+    ifTouchRegionRemove();
+    ifTouchRegionRemove();
+    ifTouchRegionRemove();
     temp_v2 = 0;
     do {
       temp_v4 = FUN_002c2c68(temp_v3);

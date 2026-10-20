@@ -17,7 +17,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_2_stack;
 
-extern int DAT_0044e190; /* 0x44e190 */
+extern int g_statusDown; /* 0x44e190 */
 
 /* Supplied declaration required: FUN_0029f848. */
 /* Supplied declaration required: rt_memcpy. */
@@ -41,12 +41,12 @@ void FUN_002e2fb8(unsigned int param_1,unsigned int param_2)
   unsigned int temp_v9;
   unsigned int temp_v10;
   
-  temp_v2 = DAT_0044e190;
-  temp_v7 = *(unsigned int *)(DAT_0044e190 + 0x482);
-  temp_v8 = *(unsigned int *)(DAT_0044e190 + 0x486);
-  temp_v9 = *(unsigned int *)(DAT_0044e190 + 0x48a);
-  temp_v10 = *(unsigned int *)(DAT_0044e190 + 0x48e);
-  *(unsigned int *)(DAT_0044e190 + 0x4c2) = 0;
+  temp_v2 = g_statusDown;
+  temp_v7 = *(unsigned int *)(g_statusDown + 0x482);
+  temp_v8 = *(unsigned int *)(g_statusDown + 0x486);
+  temp_v9 = *(unsigned int *)(g_statusDown + 0x48a);
+  temp_v10 = *(unsigned int *)(g_statusDown + 0x48e);
+  *(unsigned int *)(g_statusDown + 0x4c2) = 0;
   *(unsigned int *)(temp_v2 + 0x4c6) = 0;
   *(unsigned int *)(temp_v2 + 0x4ca) = 0;
   *(unsigned int *)(temp_v2 + 0x4ce) = 0;

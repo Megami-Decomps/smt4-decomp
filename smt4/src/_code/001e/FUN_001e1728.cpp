@@ -4,15 +4,15 @@
 
 extern "C" {
 
-int FUN_002b9024(void);
+int devilGetRecord(void);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_2_stack;
 
-extern int FUN_002a8740(int);
-/* Supplied declaration required: FUN_002b9024. */
+extern int gameGetUnitRecord(int);
+/* Supplied declaration required: devilGetRecord. */
 
 
 int FUN_001e1728(int *param_1,int *param_2)
@@ -35,8 +35,8 @@ int FUN_001e1728(int *param_1,int *param_2)
     temp_v0 = -1;
   }
   else {
-    temp_v0 = FUN_002a8740(*param_1);
-    temp_v1 = FUN_002a8740(*param_2);
+    temp_v0 = gameGetUnitRecord(*param_1);
+    temp_v1 = gameGetUnitRecord(*param_2);
     temp_v0 = (int)*(short *)(temp_v0 + 0x10) - (int)*(short *)(temp_v1 + 0x10);
     if (temp_v0 == 0) {
       temp_v0 = 0;
@@ -49,14 +49,14 @@ int FUN_001e1728(int *param_1,int *param_2)
         temp_v0 = -1;
       }
       else {
-        temp_v1 = FUN_002a8740(*param_1);
-        temp_v2 = FUN_002a8740(*param_2);
+        temp_v1 = gameGetUnitRecord(*param_1);
+        temp_v2 = gameGetUnitRecord(*param_2);
         temp_v0 = (unsigned int)*(unsigned char *)(temp_v1 + 0x48) - (unsigned int)*(unsigned char *)(temp_v2 + 0x48);
         if (temp_v0 == 0) {
           temp_v3 = (unsigned int)*(unsigned short *)(temp_v1 + 0x46);
-          FUN_002b9024();
+          devilGetRecord();
           temp_v4 = (unsigned int)*(unsigned short *)(temp_v2 + 0x46);
-          FUN_002b9024();
+          devilGetRecord();
           temp_v0 = (unsigned int)*(unsigned char *)(temp_v4 + 2) - (unsigned int)*(unsigned char *)(temp_v3 + 2);
           if (temp_v0 == 0) {
             return (unsigned int)*(unsigned short *)(temp_v2 + 0x46) - (unsigned int)*(unsigned short *)(temp_v1 + 0x46);

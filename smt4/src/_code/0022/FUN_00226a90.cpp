@@ -5,13 +5,13 @@
 extern "C" {
 
 int FUN_00227228(unsigned int);
-int FUN_002544ac(unsigned int, int, int);
+int rangeInit(unsigned int, int, int);
 int VectorSignedToFloat(int, int);
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00227228. */
-extern int FUN_0022725c(void);
-/* Supplied declaration required: FUN_002544ac. */
+extern int rangeIsValid(void);
+/* Supplied declaration required: rangeInit. */
 
 
 void FUN_00226a90(int param_1,int param_2,int param_3)
@@ -39,24 +39,24 @@ void FUN_00226a90(int param_1,int param_2,int param_3)
   do {
     if (((*(int *)(param_1 + 0x3058) != 0) &&
         (psVar5 = (short *)(temp_v3 + temp_v2 * 0x10), psVar5[1] != 0)) && (*psVar5 == param_2)) {
-      temp_v0 = FUN_0022725c();
+      temp_v0 = rangeIsValid();
       if (temp_v0 == 0) {
         FUN_00227228(*(unsigned int *)(param_1 + 0x3058));
       }
       VectorSignedToFloat((int)psVar5[3],(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat((int)psVar5[2],(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_002544ac(*(unsigned int *)(param_1 + 0x3058),(int)psVar5[1],0);
+      rangeInit(*(unsigned int *)(param_1 + 0x3058),(int)psVar5[1],0);
     }
     if (((*(int *)(param_1 + 0x305c) != 0) &&
         (temp_v0 = temp_v3 + temp_v2 * 0x10, *(short *)(temp_v0 + 10) != 0)) &&
        (*(short *)(temp_v0 + 8) == param_2)) {
-      temp_v1 = FUN_0022725c();
+      temp_v1 = rangeIsValid();
       if (temp_v1 == 0) {
         FUN_00227228(*(unsigned int *)(param_1 + 0x305c));
       }
       VectorSignedToFloat((int)*(short *)(temp_v0 + 0xe),(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat((int)*(short *)(temp_v0 + 0xc),(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_002544ac(*(unsigned int *)(param_1 + 0x305c),(int)*(short *)(temp_v0 + 10),0);
+      rangeInit(*(unsigned int *)(param_1 + 0x305c),(int)*(short *)(temp_v0 + 10),0);
     }
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 2);

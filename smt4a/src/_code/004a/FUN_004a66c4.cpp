@@ -17,7 +17,7 @@ typedef struct {
 
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00184310. */
-extern int FUN_0023b258(void);
+extern int useCounterIsFinished(void);
 extern int FUN_002c7c54(void);
 /* Supplied declaration required: FUN_003343f0. */
 /* Supplied declaration required: FUN_0035d8a4. */
@@ -33,7 +33,7 @@ void FUN_004a66c4(int param_1)
   unsigned int temp_v1;
   unsigned int temp_v2;
   
-  temp_v0 = FUN_0023b258();
+  temp_v0 = useCounterIsFinished();
   if (temp_v0 != 0) {
     FUN_0035d8a4();
     if ((*(char *)(param_1 + 0x860) == '\x01') || (*(char *)(param_1 + 0x860) != '\0')) {

@@ -7,8 +7,8 @@ u8 FUN_00284140(s32 id)
 {
     u8 mode;
 
-    if (DAT_0057f248.record->unk64E == id) {
-        mode = DAT_0057f248.record->unk008;
+    if (g_ifTouch.record->unk64E == id) {
+        mode = g_ifTouch.record->unk008;
     } else {
         mode = 0;
     }

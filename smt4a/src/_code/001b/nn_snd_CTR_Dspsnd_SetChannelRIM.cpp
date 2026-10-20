@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_001c6e20(void);
+extern int nn_snd_CTR_Dspsnd_IsInitialized(void);
 
 
 unsigned int nn_snd_CTR_Dspsnd_SetChannelRIM(int param_1,int param_2,int param_3,unsigned char param_4)
@@ -14,7 +14,7 @@ unsigned int nn_snd_CTR_Dspsnd_SetChannelRIM(int param_1,int param_2,int param_3
   unsigned int *puVar2;
   unsigned int temp_v1;
   
-  temp_v0 = FUN_001c6e20();
+  temp_v0 = nn_snd_CTR_Dspsnd_IsInitialized();
   temp_v1 = 0;
   if (temp_v0 != 0) {
     puVar2 = *(unsigned int **)(param_1 + (*(unsigned short *)(param_1 + 0x131a) & 1) * 0x60 + param_2 * 4 + 0x10b0)

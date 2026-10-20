@@ -23,7 +23,7 @@ extern unsigned int DAT_00573a54; /* 0x573a54 */
 extern unsigned int DAT_00573aa0; /* 0x573aa0 */
 extern unsigned int DAT_00573aa4; /* 0x573aa4 */
 
-extern int FUN_0019f18c(void);
+extern int idIsAtLeast350(void);
 extern int FUN_004186a4(void);
 /* Supplied declaration required: FUN_004186e0. */
 extern unsigned int FUN_004bb80c(void);
@@ -91,7 +91,7 @@ void FUN_003e9fe4(int param_1,unsigned int *param_2,int param_3,unsigned int par
   temp_v0 = FUN_004186a4();
   if (temp_v0 != 0) {
     FUN_004186e0();
-    temp_v0 = FUN_0019f18c();
+    temp_v0 = idIsAtLeast350();
     if (temp_v0 != 0) {
       temp_v2 = DAT_00573aa4 | *(unsigned int *)(param_1 + 0x45a4);
       *puVar6 = DAT_00573aa0 | *puVar6;

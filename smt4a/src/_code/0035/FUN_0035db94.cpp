@@ -12,12 +12,12 @@ typedef struct StateHolder {
     /* 0x04 */ StateBlock *block;
 } StateHolder;
 
-extern StateHolder DAT_00588fd0;
+extern StateHolder g_gameGlobals;
 
 /* Returns the low byte, sign-extended, of the word at offset 0x1378 of the global state block. */
 int FUN_0035db94(void)
 {
-    return (s8)DAT_00588fd0.block->value;
+    return (s8)g_gameGlobals.block->value;
 }
 
 } /* extern "C" */

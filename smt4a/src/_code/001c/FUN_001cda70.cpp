@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_001cd24c(int);
+int wordTripleClear(int);
 
-/* Supplied declaration required: FUN_001cd24c. */
+/* Supplied declaration required: wordTripleClear. */
 
 
 void FUN_001cda70(int param_1)
@@ -41,7 +41,7 @@ void FUN_001cda70(int param_1)
   *(unsigned char *)(param_1 + 0xf) = 0;
   *(unsigned short *)(param_1 + 0x6c) = *(unsigned short *)(param_1 + 0x6c) | 4;
   *(unsigned int *)(param_1 + 0x10) = 0;
-  FUN_001cd24c(param_1 + 0x14);
+  wordTripleClear(param_1 + 0x14);
   *(unsigned int *)(param_1 + 0x2c) = 0;
   *(unsigned int *)(param_1 + 0x30) = 0;
   *(unsigned short *)(param_1 + 0x34) = 0;

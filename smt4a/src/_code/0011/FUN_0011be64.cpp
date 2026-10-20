@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0011bbb6(unsigned int *);
-int FUN_002e6e14(void);
+int asdOperatorDeleteArray(void);
 int FUN_002f5966(...);
 
 typedef int romwright_code(...);
@@ -13,7 +13,7 @@ extern unsigned char DAT_0055a7b0; /* 0x55a7b0 */
 
 /* Supplied declaration required: FUN_0011bbb6. */
 extern int destroyObj0055b2f0(int);
-/* Supplied declaration required: FUN_002e6e14. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
 /* Supplied declaration required: FUN_002f5966. */
 extern int FUN_002f9ef8(int);
 
@@ -47,7 +47,7 @@ int FUN_0011be64(unsigned int *param_1)
   q = (int *)(FUN_002f9ef8(temp_v1 - 0xc) - 0x24);
   for (temp_v0 = *q; temp_v0 != q[1]; temp_v0 = temp_v0 + 0xc) {
   }
-  FUN_002e6e14();
+  asdOperatorDeleteArray();
   temp_v1 = FUN_002f5966((int)q - 0x38);
   return temp_v1 - 8;
 }

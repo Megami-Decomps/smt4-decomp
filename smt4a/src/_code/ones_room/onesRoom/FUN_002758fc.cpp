@@ -10,9 +10,9 @@ int sysPlaySe(...);
 int FUN_0020214c(...);
 int FUN_0022677c(...);
 int FUN_00275bc8(...);
-int FUN_00275f44(...);
-int FUN_0031a400(...);
-int FUN_00342010(...);
+int scrScriptProcessStartEntry(...);
+int campCommonBgAcquire(...);
+int campButtonHelpAcquire(...);
 int FUN_003b61ec(...);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -33,9 +33,9 @@ extern unsigned int *g_onesRoom; /* 0x588134 */
 /* Supplied declaration required: FUN_0020214c. */
 /* Supplied declaration required: FUN_0022677c. */
 /* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: FUN_00275f44. */
-/* Supplied declaration required: FUN_0031a400. */
-/* Supplied declaration required: FUN_00342010. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
+/* Supplied declaration required: campCommonBgAcquire. */
+/* Supplied declaration required: campButtonHelpAcquire. */
 /* Supplied declaration required: FUN_003b61ec. */
 
 
@@ -58,8 +58,8 @@ void FUN_002758fc(int param_1)
   if (param_1 == 0) {
     *(unsigned char *)(puVar1 + 4) = 1;
   }
-  FUN_0031a400();
-  FUN_00342010();
+  campCommonBgAcquire();
+  campButtonHelpAcquire();
   FUN_003b61ec();
   sysPlaySe(0xa4);
   puVar2 = &LAB_00275a40;
@@ -72,7 +72,7 @@ void FUN_002758fc(int param_1)
   FUN_00275bc8(temp_v0,puVar2);
   puVar1[2] = temp_v0;
   *(unsigned int *)(temp_v0 + 0x108) = 2;
-  FUN_00275f44(puVar1[2],0);
+  scrScriptProcessStartEntry(puVar1[2],0);
   *(unsigned char *)((int)puVar1 + 0x11) = 0;
   if (*(char *)(puVar1 + 4) != '\0') {
     FUN_0022677c(0,0xff);

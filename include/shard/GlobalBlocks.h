@@ -21,7 +21,7 @@ typedef struct Block5b3d54 {
     /* 0x30 */ u8 unk30[0x4];
     /* 0x34 */ u32 unk34;
 } Block5b3d54;
-extern Block5b3d54 DAT_005b3d54;
+extern Block5b3d54 g_asdTextDefaults;
 
 /* Global at 0x5B4000. */
 typedef struct Block5b4000 {
@@ -72,7 +72,7 @@ typedef struct Block5891d8 {
     /* 0x14 */ u32 unk14;
     /* 0x18 */ u32 unk18;
 } Block5891d8;
-extern Block5891d8 DAT_005891d8;
+extern Block5891d8 g_nnAppletState;
 
 /* Global at 0x5B4474. */
 typedef struct Block5b4474 {
@@ -82,7 +82,7 @@ typedef struct Block5b4474 {
     /* 0x04 */ u32 unk04;
     /* 0x08 */ u32 unk08;
 } Block5b4474;
-extern Block5b4474 DAT_005b4474;
+extern Block5b4474 g_nnAppletParameter;
 
 /* Global at 0x5C0AA0. */
 typedef struct Block5c0aa0 {
@@ -92,7 +92,7 @@ typedef struct Block5c0aa0 {
     /* 0x03 */ u8 unk03[0x19];
     /* 0x1C */ u32 unk1C;
 } Block5c0aa0;
-extern Block5c0aa0 DAT_005c0aa0;
+extern Block5c0aa0 g_nngxState;
 
 /* Global at 0x5B3BF4. */
 typedef struct Block5b3bf4 {
@@ -103,7 +103,7 @@ typedef struct Block5b3bf4 {
     /* 0x48 */ u8 unk48[0x34];
     /* 0x7C */ u32 unk7C;
 } Block5b3bf4;
-extern Block5b3bf4 DAT_005b3bf4;
+extern Block5b3bf4 g_gfxSettings;
 
 /* Global at 0x5B4464. */
 typedef struct Block5b4464 {
@@ -118,6 +118,6 @@ typedef struct Block5c0ac8 {
     /* 0x04 */ u32 unk04;
     /* 0x08 */ u32 unk08;
 } Block5c0ac8;
-extern Block5c0ac8 DAT_005c0ac8;
+extern Block5c0ac8 g_nnosHeapState;
 
 #endif

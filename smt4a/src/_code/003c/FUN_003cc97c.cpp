@@ -5,13 +5,13 @@
 extern "C" {
 
 int FUN_0019a364(unsigned int *, unsigned int, int);
-int FUN_001bcd48(int, int);
+int svcSleepThread(int, int);
 int FUN_002e3140(void);
 int software_interrupt(int);
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_0019a364. */
-/* Supplied declaration required: FUN_001bcd48. */
+/* Supplied declaration required: svcSleepThread. */
 /* Supplied declaration required: FUN_002e3140. */
 
 
@@ -43,7 +43,7 @@ void FUN_003cc97c(int param_1,unsigned int param_2,unsigned int param_3,unsigned
       temp_v0 = (unsigned int)*(unsigned char *)(param_1 + 0x5c);
     }
     if (temp_v1 && temp_v0 == 0) break;
-    FUN_001bcd48(100000,0);
+    svcSleepThread(100000,0);
   }
   return;
 }

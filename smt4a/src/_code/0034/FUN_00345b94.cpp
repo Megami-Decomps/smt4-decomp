@@ -15,7 +15,7 @@ typedef struct {
 } void_stack;
 
 extern int g_renderCtx; /* 0x59dbb4 */
-extern unsigned char DAT_0059dbe0; /* 0x59dbe0 */
+extern unsigned char g_effectEditor; /* 0x59dbe0 */
 
 extern int FUN_001692ac(unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
@@ -64,7 +64,7 @@ void FUN_00345b94(void)
     (**(romwright_code **)(temp_v1 + 0x1274))();
     *(unsigned char *)(temp_v1 + 0x1270) = 0;
   }
-  if ((*(int *)((unsigned char *)&DAT_0059dbe0 + 0x78)) != 0) {
+  if ((*(int *)((unsigned char *)&g_effectEditor + 0x78)) != 0) {
     FUN_00280840(0x1e,0x606060ff,0x909090ff);
     return;
   }

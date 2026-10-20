@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0016431c(unsigned int);
+int msgBoxFlagsSetBit7(unsigned int);
 int FUN_0021bdac(unsigned int, unsigned int, unsigned int, int, int, int);
-int FUN_002deb84(void);
+int scrGetCommandFrame(void);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -14,11 +14,11 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_0016431c. */
+/* Supplied declaration required: msgBoxFlagsSetBit7. */
 /* Supplied declaration required: FUN_0021bdac. */
 extern unsigned int scrGetArg(unsigned int);
 extern unsigned int FUN_002ba85c(void);
-/* Supplied declaration required: FUN_002deb84. */
+/* Supplied declaration required: scrGetCommandFrame. */
 
 
 unsigned int FUN_0036de9c(int param_1)
@@ -34,11 +34,11 @@ unsigned int FUN_0036de9c(int param_1)
   temp_v4 = *(int *)(param_1 + 4);
   temp_v0 = FUN_002ba85c();
   temp_v1 = scrGetArg(0);
-  temp_v2 = FUN_002deb84();
+  temp_v2 = scrGetCommandFrame();
   FUN_0021bdac(temp_v0,temp_v1,temp_v2,5,0,0);
-  temp_v3 = FUN_002deb84();
+  temp_v3 = scrGetCommandFrame();
   if (temp_v3 == 0) {
-    FUN_0016431c(*(unsigned int *)(temp_v4 + 4));
+    msgBoxFlagsSetBit7(*(unsigned int *)(temp_v4 + 4));
     *(unsigned char *)(temp_v4 + 0x19c4) = 0;
     *(unsigned int *)(temp_v4 + 0xc) = *(unsigned int *)(temp_v4 + 0xc) | 0x20;
   }

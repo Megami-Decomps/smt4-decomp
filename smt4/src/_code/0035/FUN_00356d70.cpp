@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002628fc(unsigned int);
-int FUN_002b2368(int);
+int asdMemFreeNonNull(int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -13,7 +13,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_002628fc. */
-/* Supplied declaration required: FUN_002b2368. */
+/* Supplied declaration required: asdMemFreeNonNull. */
 
 
 void FUN_00356d70(int param_1)
@@ -22,7 +22,7 @@ void FUN_00356d70(int param_1)
 /* irregular: 2 native warning(s); review required */
   FUN_002628fc(*(unsigned int *)(param_1 + 4));
   *(unsigned int *)(param_1 + 4) = 0;
-  FUN_002b2368(param_1);
+  asdMemFreeNonNull(param_1);
   return;
 }
 

@@ -8,9 +8,9 @@ int FUN_00170474(int);
 int FUN_00170f68(int, int, int);
 int FUN_00171624(void);
 int FUN_00189a38(int, int);
-int FUN_0018b868(void);
-int FUN_0018b964(void);
-int FUN_001bcd48(int, int);
+int nn_applet_CTR_detail_OpenSession(void);
+int nn_applet_CTR_detail_CloseSession(void);
+int svcSleepThread(int, int);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -27,10 +27,10 @@ extern int FUN_001703e8(void);
 /* Supplied declaration required: FUN_00171624. */
 /* Supplied declaration required: FUN_00189a38. */
 extern int FUN_0018b65c(void);
-/* Supplied declaration required: FUN_0018b868. */
-/* Supplied declaration required: FUN_0018b964. */
+/* Supplied declaration required: nn_applet_CTR_detail_OpenSession. */
+/* Supplied declaration required: nn_applet_CTR_detail_CloseSession. */
 extern int FUN_0018ba70(unsigned int, unsigned int *);
-/* Supplied declaration required: FUN_001bcd48. */
+/* Supplied declaration required: svcSleepThread. */
 
 
 int FUN_0017145c(int param_1,unsigned char *param_2)
@@ -48,36 +48,36 @@ int FUN_0017145c(int param_1,unsigned char *param_2)
   }
   temp_v1 = FUN_001703e8();
   if (temp_v1 != 0) {
-    FUN_0018b868();
+    nn_applet_CTR_detail_OpenSession();
     temp_v1 = FUN_0018ba70(0x400,temp_v2);
     if (temp_v1 < 0) {
       FUN_00189a38(temp_v1,0x1714a0);
     }
-    FUN_0018b964();
+    nn_applet_CTR_detail_CloseSession();
     if ((temp_v2[0] & 0xff) == 0) {
       return 0;
     }
   }
   temp_v1 = FUN_0018b65c();
   if (temp_v1 != 0) {
-    FUN_0018b868();
+    nn_applet_CTR_detail_OpenSession();
     temp_v1 = FUN_0018ba70(0x200,temp_v2);
     if (temp_v1 < 0) {
       FUN_00189a38(temp_v1,0x1714e4);
     }
-    FUN_0018b964();
+    nn_applet_CTR_detail_CloseSession();
     if ((char)temp_v2[0] == '\0') {
       return 0;
     }
   }
   FUN_00170474(3);
   while( 1 ) {
-    FUN_0018b868();
+    nn_applet_CTR_detail_OpenSession();
     temp_v1 = param_1;
     FUN_00171624();
-    FUN_0018b964();
+    nn_applet_CTR_detail_CloseSession();
     if ((temp_v1 != -0x375f3010 && temp_v1 != -0x1f5f33f8) && temp_v1 != -0x375f33fe) break;
-    FUN_001bcd48(10000000,0);
+    svcSleepThread(10000000,0);
   }
   if (temp_v1 == 0) {
     temp_v3 = DAT_005891c8;

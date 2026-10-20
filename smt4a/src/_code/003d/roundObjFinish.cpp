@@ -15,7 +15,7 @@ typedef struct RoundObj {
 
 extern void scrScriptProcessDestroy(u32 process);
 extern void asdMemFree(void *ptr);
-extern void FUN_00321744(void);
+extern void btlTalkBustUpDestroy(void);
 extern void FUN_0020b490(RoundObj *obj, u32 state);
 extern void FUN_002c8538(u8 value);
 extern void FUN_00215bd0(void);
@@ -27,7 +27,7 @@ u32 roundObjFinish(RoundObj *obj)
 
     scrScriptProcessDestroy(obj->scriptProcess);
     asdMemFree(obj->buffer);
-    FUN_00321744();
+    btlTalkBustUpDestroy();
     obj->unk7F2C = 0;
     round = obj->round + 1;
     obj->round = round;

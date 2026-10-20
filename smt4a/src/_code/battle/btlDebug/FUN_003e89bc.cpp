@@ -20,7 +20,7 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned char LAB_00221b34; /* 0x221b34 */
-extern int DAT_00571508; /* 0x571508 */
+extern int g_btlCamera; /* 0x571508 */
 extern unsigned int DAT_00573808; /* 0x573808 */
 extern unsigned int DAT_0057a634; /* 0x57a634 */
 extern unsigned int DAT_0057a638; /* 0x57a638 */
@@ -59,7 +59,7 @@ void FUN_003e89bc(int param_1)
   int temp_v12;
   int temp_v13;
   
-  *(unsigned int *)(DAT_00571508 + 0x64c) = *(unsigned int *)(DAT_00571508 + 0x64c) | 0x4000;
+  *(unsigned int *)(g_btlCamera + 0x64c) = *(unsigned int *)(g_btlCamera + 0x64c) | 0x4000;
   temp_v13 = param_1;
   FUN_004f9450(DAT_00573808);
   temp_v9 = 0;
@@ -113,7 +113,7 @@ void FUN_003e89bc(int param_1)
       temp_v6 = temp_v6 + 1;
     } while (temp_v6 < temp_v9);
   }
-  FUN_004f1c5c(DAT_00571508,0x78);
+  FUN_004f1c5c(g_btlCamera,0x78);
   return;
 }
 

@@ -3,7 +3,7 @@
 
 extern "C" {
 
-s32 FUN_00100854(u8 *buffer, u32 arg1, u32 arg2, s32 size, u8 *format);
+s32 libc_bsearch(u8 *buffer, u32 arg1, u32 arg2, s32 size, u8 *format);
 u32 dataTableGet(u32 category, u32 variant);
 u32 dataTableGetCount(u32 id);
 u32 dataTableGetEntries(void);
@@ -23,7 +23,7 @@ void FUN_002cc228(u8 character, s32 alternate)
     arg1 = dataTableGetEntries();
     arg2 = dataTableGetCount(id);
     buffer[0] = character;
-    FUN_00100854(buffer, arg1, arg2, 100, (u8 *)0x003d4e88); /* format string in rodata */
+    libc_bsearch(buffer, arg1, arg2, 100, (u8 *)0x003d4e88); /* format string in rodata */
 }
 
 } /* extern "C" */

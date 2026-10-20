@@ -8,28 +8,28 @@ int asdMemFree(int);
 int scrScriptProcessDestroy(int);
 int FUN_0019e2dc(void);
 int FUN_001ad6d8(void);
-int FUN_001aea28(unsigned int, unsigned int);
+int ptrListRemoveClearOwner(unsigned int, unsigned int);
 int FUN_001aeafc(unsigned int);
 int FUN_00249c9c(void);
 int FUN_002c2358(void);
-int FUN_0035b304(void);
-int FUN_0037b450(void);
-int FUN_003ae864(int);
+int campCommonBgRelease(void);
+int campButtonHelpRelease(void);
+int gfxObjectDestroy(int);
 
 typedef int romwright_code(...);
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_0019e2dc. */
 /* Supplied declaration required: FUN_001ad6d8. */
-/* Supplied declaration required: FUN_001aea28. */
+/* Supplied declaration required: ptrListRemoveClearOwner. */
 /* Supplied declaration required: FUN_001aeafc. */
 /* Supplied declaration required: FUN_00249c9c. */
 /* Supplied declaration required: FUN_002c2358. */
-/* Supplied declaration required: FUN_0035b304. */
-/* Supplied declaration required: FUN_0037b450. */
-/* Supplied declaration required: FUN_003ae864. */
+/* Supplied declaration required: campCommonBgRelease. */
+/* Supplied declaration required: campButtonHelpRelease. */
+/* Supplied declaration required: gfxObjectDestroy. */
 
 
 void FUN_004cdca0(int param_1)
@@ -42,12 +42,12 @@ void FUN_004cdca0(int param_1)
   FUN_002c2358();
   FUN_001ad6d8();
   FUN_00249c9c();
-  FUN_001aea28(DAT_0056fcc0,*(unsigned int *)(*(int *)(param_1 + 0x20) + 4));
+  ptrListRemoveClearOwner(g_handleRegistry,*(unsigned int *)(*(int *)(param_1 + 0x20) + 4));
   if (*(int **)(param_1 + 0x20) != (int *)0x0) {
     (**(romwright_code **)(**(int **)(param_1 + 0x20) + 4))(*(int **)(param_1 + 0x20));
     *(unsigned int *)(param_1 + 0x20) = 0;
   }
-  FUN_001aea28(DAT_0056fcc0,*(unsigned int *)(*(int *)(param_1 + 0x24) + 4));
+  ptrListRemoveClearOwner(g_handleRegistry,*(unsigned int *)(*(int *)(param_1 + 0x24) + 4));
   if (*(int **)(param_1 + 0x24) != (int *)0x0) {
     (**(romwright_code **)(**(int **)(param_1 + 0x24) + 4))(*(int **)(param_1 + 0x24));
     *(unsigned int *)(param_1 + 0x24) = 0;
@@ -55,20 +55,20 @@ void FUN_004cdca0(int param_1)
   temp_v0 = 0;
   do {
     temp_v1 = param_1 + temp_v0 * 4;
-    FUN_001aea28(DAT_0056fcc0,*(unsigned int *)(*(int *)(temp_v1 + 0x28) + 4));
+    ptrListRemoveClearOwner(g_handleRegistry,*(unsigned int *)(*(int *)(temp_v1 + 0x28) + 4));
     if (*(int **)(temp_v1 + 0x28) != (int *)0x0) {
       (**(romwright_code **)(**(int **)(temp_v1 + 0x28) + 4))(*(int **)(temp_v1 + 0x28));
       *(unsigned int *)(temp_v1 + 0x28) = 0;
     }
     temp_v0 = temp_v0 + 1;
   } while (temp_v0 < 3);
-  FUN_001aeafc(DAT_0056fcc0);
+  FUN_001aeafc(g_handleRegistry);
   if (*(int *)(param_1 + 0x544) != 0) {
-    FUN_003ae864(*(int *)(param_1 + 0x544));
+    gfxObjectDestroy(*(int *)(param_1 + 0x544));
     *(unsigned int *)(param_1 + 0x544) = 0;
   }
-  FUN_0035b304();
-  FUN_0037b450();
+  campCommonBgRelease();
+  campButtonHelpRelease();
   FUN_0019e2dc();
   if (*(int *)(param_1 + 0x18) != 0) {
     scrScriptProcessDestroy(*(int *)(param_1 + 0x18));

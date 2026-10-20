@@ -10,7 +10,7 @@ extern unsigned char LAB_0019d4a4; /* 0x19d4a4 */
 
 /* Supplied declaration required: qsort. */
 extern unsigned int FUN_0019acdc(unsigned short, unsigned int);
-extern int FUN_001ab888(void);
+extern int gameGetSlotTable(void);
 
 
 int FUN_00187068(unsigned int param_1)
@@ -27,7 +27,7 @@ int FUN_00187068(unsigned int param_1)
     temp_v2 = 0;
     do {
       if ((temp_v2 & 0xffff) < 0xc) {
-        temp_v0 = FUN_001ab888();
+        temp_v0 = gameGetSlotTable();
         temp_v0 = temp_v0 + (temp_v2 & 0xffff) * 0x134;
         if ((temp_v0 != -0x1ddc) && (*(short *)(temp_v0 + 0x1f08) != 0)) {
           temp_v3[temp_v2 * 3] = temp_v2;
@@ -51,7 +51,7 @@ int FUN_00187068(unsigned int param_1)
     qsort(temp_v3,0xc,0xc,&LAB_0019d4a4);
     temp_v2 = temp_v3[param_1 * 3];
     if ((temp_v2 & 0xffff) < 0xc) {
-      temp_v0 = FUN_001ab888();
+      temp_v0 = gameGetSlotTable();
       return temp_v0 + (temp_v2 & 0xffff) * 0x134 + 0x1ddc;
     }
   }

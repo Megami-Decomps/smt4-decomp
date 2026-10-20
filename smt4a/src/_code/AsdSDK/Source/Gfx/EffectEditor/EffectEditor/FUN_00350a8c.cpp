@@ -6,9 +6,9 @@ extern "C" {
 
 int FUN_001ad5ec(unsigned char *, unsigned int *, int *);
 int FUN_001bc3e4(void);
-int FUN_00290e6c(unsigned int, unsigned int);
-int FUN_002914bc(unsigned int);
-int FUN_002b4288(unsigned int, float *);
+int handlerTableCallWithValue(unsigned int, unsigned int);
+int handlerTableCall(unsigned int);
+int handlerTableCallWithValueB(unsigned int, float *);
 int FUN_002f8794(void);
 int FUN_003008c4(unsigned int, unsigned int *);
 int FUN_00300908(unsigned int, float *);
@@ -56,9 +56,9 @@ extern unsigned int DAT_006472f8; /* 0x6472f8 */
 
 /* Supplied declaration required: FUN_001ad5ec. */
 /* Supplied declaration required: FUN_001bc3e4. */
-/* Supplied declaration required: FUN_00290e6c. */
-/* Supplied declaration required: FUN_002914bc. */
-/* Supplied declaration required: FUN_002b4288. */
+/* Supplied declaration required: handlerTableCallWithValue. */
+/* Supplied declaration required: handlerTableCall. */
+/* Supplied declaration required: handlerTableCallWithValueB. */
 /* Supplied declaration required: FUN_002f8794. */
 /* Supplied declaration required: FUN_003008c4. */
 /* Supplied declaration required: FUN_00300908. */
@@ -136,8 +136,8 @@ void FUN_00350a8c(unsigned int param_1)
   fStack_34 = DAT_006472e0;
   fStack_30 = DAT_006472e4;
   temp_v7 = DAT_006472e8;
-  FUN_002b4288(param_1,&temp_v6);
-  FUN_002914bc(param_1);
+  handlerTableCallWithValueB(param_1,&temp_v6);
+  handlerTableCall(param_1);
   if ((DAT_00634d88 & 0x100) != 0) {
     temp_v9 = DAT_00634d80 * (float)DAT_0059dbf4[0x1d];
     temp_v8 = DAT_00634d40 * temp_v9;
@@ -150,7 +150,7 @@ void FUN_00350a8c(unsigned int param_1)
     DAT_006472e8 = temp_v9;
     FUN_00300908(param_1,&temp_v8);
   }
-  FUN_00290e6c(param_1,DAT_00634d84);
+  handlerTableCallWithValue(param_1,DAT_00634d84);
   return;
 }
 

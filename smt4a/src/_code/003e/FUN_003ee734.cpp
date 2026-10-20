@@ -31,9 +31,9 @@ typedef struct {
 #endif
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern unsigned int FUN_0017760c(int);
-extern int FUN_001801a4(void);
-extern int FUN_001ab854(void);
-extern int FUN_001ab888(void);
+extern int gameGetPlayerData(void);
+extern int gameGetSlotRecord(void);
+extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_0034a290. */
 /* Supplied declaration required: playerGetWords. */
 extern short FUN_003e0024(void);
@@ -129,7 +129,7 @@ void FUN_003ee734(int param_1)
       temp_v6 = (int)(short)((short)(int)(temp_v9 * temp_v11 * (float)temp_v18) + temp_v1);
       FUN_003e0064(temp_v6);
       if (temp_v6 == 0) {
-        temp_v6 = FUN_001801a4();
+        temp_v6 = gameGetPlayerData();
         *(unsigned short *)(temp_v6 + 0x2a) = 0;
       }
       temp_v1 = FUN_003e0034();
@@ -138,18 +138,18 @@ void FUN_003ee734(int param_1)
       temp_v6 = (int)(short)((short)(int)(temp_v9 * temp_v10 * (float)temp_v18) + temp_v1);
       FUN_003e0090(temp_v6);
       if (temp_v6 == 0) {
-        temp_v6 = FUN_001801a4();
+        temp_v6 = gameGetPlayerData();
         *(unsigned short *)(temp_v6 + 0x2c) = 0;
       }
     }
-    temp_v6 = FUN_001ab888();
+    temp_v6 = gameGetSlotTable();
     temp_v0 = *(unsigned char *)(temp_v6 + 0x1ca3);
-    temp_v6 = FUN_001ab888();
+    temp_v6 = gameGetSlotTable();
     temp_v8 = 0;
     if (temp_v0 != 0) {
       do {
         if ((-1 < *(char *)(temp_v6 + temp_v8 + 0x1c88)) &&
-           (temp_v9 = temp_v12, temp_v10 = temp_v12, temp_v4 = FUN_001ab854(), temp_v4 != 0)) {
+           (temp_v9 = temp_v12, temp_v10 = temp_v12, temp_v4 = gameGetSlotRecord(), temp_v4 != 0)) {
           temp_v19[0] = 0;
           temp_v19[1] = 0;
           temp_v19[2] = 0;

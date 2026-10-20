@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002505c0(...);
 int FUN_00250720(void);
 int FUN_002551ac(int, unsigned int, int, int, unsigned int, unsigned int, unsigned int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int);
-int FUN_00282924(int, unsigned int);
+int btlMainFindEntryByListedId(int, unsigned int);
 int btlGetMainState(void);
 
 /* stack frame of void: 17 slot(s), 68 byte(s) */
@@ -37,7 +37,7 @@ extern unsigned int g_btlScriptUnit; /* 0x43427c */
 /* Supplied declaration required: FUN_00250720. */
 /* Supplied declaration required: FUN_002551ac. */
 extern unsigned int btlUnitGet(unsigned int);
-/* Supplied declaration required: FUN_00282924. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: btlGetMainState. */
 extern unsigned int scrGetArg(unsigned int);
 
@@ -56,7 +56,7 @@ unsigned int FUN_00300050(void)
   temp_v1 = scrGetArg(1);
   temp_v2 = btlUnitGet(g_btlScriptUnit);
   temp_v3 = btlGetMainState();
-  FUN_00282924(temp_v3,temp_v0);
+  btlMainFindEntryByListedId(temp_v3,temp_v0);
   btlGetMainState();
   FUN_00250720();
   temp_v4 = btlGetMainState();

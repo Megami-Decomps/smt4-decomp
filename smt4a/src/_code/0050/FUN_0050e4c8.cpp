@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00188b60(unsigned int *);
+int nn_os_CriticalSection_Initialize(unsigned int *);
 int emptyStub_002f4370(unsigned int *, unsigned char *, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -16,7 +16,7 @@ extern unsigned char LAB_0042ce3c; /* 0x42ce3c */
 extern unsigned int DAT_0058936c; /* 0x58936c */
 extern unsigned int DAT_0062d280; /* 0x62d280 */
 
-/* Supplied declaration required: FUN_00188b60. */
+/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
 /* Supplied declaration required: emptyStub_002f4370. */
 
 
@@ -26,7 +26,7 @@ void FUN_0050e4c8(int param_1)
 /* irregular: 2 native warning(s); review required */
   DAT_0058936c = *(unsigned int *)(param_1 + 4);
   DAT_0062d280 = 0;
-  FUN_00188b60(&DAT_0062d280);
+  nn_os_CriticalSection_Initialize(&DAT_0062d280);
   emptyStub_002f4370(&DAT_0062d280,&LAB_0042ce3c,0x100000);
   return;
 }

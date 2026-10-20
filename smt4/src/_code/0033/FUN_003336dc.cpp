@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b63c0(void);
+int dataTable1bOr1cGetRecord(void);
 
 typedef struct fn_003336dc_arg0 fn_003336dc_arg0;
 struct fn_003336dc_arg0 {
@@ -26,7 +26,7 @@ struct fn_003336dc_arg0 {
 };
 
 extern int FUN_00240cd4(void);
-/* Supplied declaration required: FUN_002b63c0. */
+/* Supplied declaration required: dataTable1bOr1cGetRecord. */
 
 
 /* WARNING: Type propagation algorithm not settling */
@@ -44,7 +44,7 @@ unsigned int FUN_003336dc(fn_003336dc_arg0 *param_1,unsigned char param_2)
   unsigned int temp_v5;
   
   temp_v3 = FUN_00240cd4();
-  FUN_002b63c0();
+  dataTable1bOr1cGetRecord();
   if (param_1 != (fn_003336dc_arg0 *)0x0) {
     if (((*(unsigned char *)(temp_v3 + 2) & param_2) == 0) && ((param_1->field_0x7 & 0x20) != 0)) {
       return 0x11;

@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0014bf2c(unsigned int, int);
-int FUN_00164cd0(unsigned int, int);
+int objFlagsSetBits(unsigned int, int);
+int msgBoxFlagsClear(unsigned int, int);
 int FUN_00165088(int, int);
 int sysPlaySe(int);
 int FUN_00169548(void);
@@ -27,10 +27,10 @@ extern int DAT_0057f58c; /* 0x57f58c */
 extern int DAT_0057f590; /* 0x57f590 */
 extern int DAT_0057f594; /* 0x57f594 */
 
-/* Supplied declaration required: FUN_0014bf2c. */
+/* Supplied declaration required: objFlagsSetBits. */
 extern int FUN_00162880(void);
 extern int FUN_00162ea4(void);
-/* Supplied declaration required: FUN_00164cd0. */
+/* Supplied declaration required: msgBoxFlagsClear. */
 /* Supplied declaration required: FUN_00165088. */
 extern unsigned short FUN_00167f08(void);
 /* Supplied declaration required: sysPlaySe. */
@@ -176,8 +176,8 @@ FUN_0021bdac(unsigned int param_1,int param_2,int param_3,int param_4,int param_
         FUN_0028b350(temp_v5,*(unsigned char *)(temp_v5 + 9));
       }
       if (param_5 != 0) {
-        FUN_0014bf2c(*(unsigned int *)(temp_v5 + 4),0x20);
-        FUN_00164cd0(*(unsigned int *)(temp_v5 + 4),0x40);
+        objFlagsSetBits(*(unsigned int *)(temp_v5 + 4),0x20);
+        msgBoxFlagsClear(*(unsigned int *)(temp_v5 + 4),0x40);
       }
       temp_v3 = 0;
       *(unsigned short *)(temp_v5 + 0x19c6) = 0;

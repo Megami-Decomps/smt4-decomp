@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_0043da90; /* 0x43da90 */
+extern int g_camp; /* 0x43da90 */
 
 
 unsigned int FUN_0017fb54(void)
@@ -13,8 +13,8 @@ unsigned int FUN_0017fb54(void)
   unsigned int temp_v0;
   
   temp_v0 = 0;
-  if (DAT_0043da90 != 0) {
-    if (*(int *)(DAT_0043da90 + 0x18) == 0x30) {
+  if (g_camp != 0) {
+    if (*(int *)(g_camp + 0x18) == 0x30) {
       temp_v0 = 1;
     }
     else {

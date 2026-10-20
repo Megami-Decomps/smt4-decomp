@@ -4,11 +4,11 @@ extern "C" {
 
 void menu32InitBlock96C(BtlUiObjCA *obj);
 
-extern BtlUiGlobalsA DAT_0057a9b8;
+extern BtlUiGlobalsA g_btlUi;
 
 void FUN_004aa1d0(void)
 {
-    menu32InitBlock96C(&DAT_0057a9b8.ui->objC);
+    menu32InitBlock96C(&g_btlUi.ui->objC);
 }
 
 } /* extern "C" */

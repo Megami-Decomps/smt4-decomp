@@ -17,7 +17,7 @@ typedef struct {
 
 void FUN_00229fd0(s32 id, s32 param);
 u32 dataTableGet(u32 group, u32 index);
-s32 FUN_0018719c(u16 flag);
+s32 gameFlagIsSet(u16 flag);
 u32 dataTableGetCount(u32 group);
 TableEntry *dataTableGetEntries(void);
 
@@ -30,7 +30,7 @@ void tableFireMatchingEntries(u32 matchId)
 
     for (i = 0; i < count; i++, entry++) {
         if (entry->matchA == matchId || entry->matchB == matchId) {
-            if (FUN_0018719c(entry->flagA) == 0 || FUN_0018719c(entry->flagB) == 0) {
+            if (gameFlagIsSet(entry->flagA) == 0 || gameFlagIsSet(entry->flagB) == 0) {
                 FUN_00229fd0(entry->id, entry->param);
             }
         }

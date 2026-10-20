@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0018b868(void);
-int FUN_0018b964(void);
-int FUN_001bcd48(int, int);
+int nn_applet_CTR_detail_OpenSession(void);
+int nn_applet_CTR_detail_CloseSession(void);
+int svcSleepThread(int, int);
 int FUN_0043cd90(int, unsigned int, unsigned int, unsigned int, unsigned int);
 
 /* stack frame of param_5: 1 slot(s), 4 byte(s) */
@@ -14,9 +14,9 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_5_stack;
 
-/* Supplied declaration required: FUN_0018b868. */
-/* Supplied declaration required: FUN_0018b964. */
-/* Supplied declaration required: FUN_001bcd48. */
+/* Supplied declaration required: nn_applet_CTR_detail_OpenSession. */
+/* Supplied declaration required: nn_applet_CTR_detail_CloseSession. */
+/* Supplied declaration required: svcSleepThread. */
 /* Supplied declaration required: FUN_0043cd90. */
 
 
@@ -29,12 +29,12 @@ void FUN_0043cc90(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   unsigned int temp_v1;
   
   while( 1 ) {
-    FUN_0018b868();
+    nn_applet_CTR_detail_OpenSession();
     temp_v0 = param_1;
     FUN_0043cd90(param_1,temp_v1,param_3,param_4,param_5);
-    FUN_0018b964();
+    nn_applet_CTR_detail_CloseSession();
     if ((temp_v0 != -0x375f3010 && temp_v0 != -0x1f5f33f8) && temp_v0 != -0x375f33fe) break;
-    FUN_001bcd48(10000000,0);
+    svcSleepThread(10000000,0);
   }
   return;
 }

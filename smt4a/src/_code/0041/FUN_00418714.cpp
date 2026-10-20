@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001ad9b4(void);
 
-extern int FUN_001ab940(char);
+extern int gameFlagBlockGet(char);
 /* Supplied declaration required: FUN_001ad9b4. */
 extern unsigned int wstrlen(int);
 
@@ -33,7 +33,7 @@ unsigned int FUN_00418714(int param_1)
     temp_v0 = 1;
   }
   else {
-    temp_v1 = FUN_001ab940(*(char *)(temp_v1 + 0xd3));
+    temp_v1 = gameFlagBlockGet(*(char *)(temp_v1 + 0xd3));
     temp_v0 = (*(unsigned char *)(temp_v1 + param_1 * 4 + 0x2a2) & 4) >> 2;
   }
   return temp_v0;

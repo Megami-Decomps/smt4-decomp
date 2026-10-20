@@ -3,7 +3,7 @@
 extern "C" {
 
 int scrSetResult(int value);
-u32 FUN_002451ac(u32 obj, u32 arg);
+u32 btlMainGetDataTable(u32 obj, u32 arg);
 u32 btlGetMainState(void);
 int scrGetArg(int index);
 u16 *dataTableGetEntries(void);
@@ -13,7 +13,7 @@ int dataTableGetCount(u32 arg);
 u32 FUN_00323424(void)
 {
     int index = scrGetArg(0);
-    u32 field = FUN_002451ac(btlGetMainState(), 0xf);
+    u32 field = btlMainGetDataTable(btlGetMainState(), 0xf);
     u16 *table = dataTableGetEntries();
 
     dataTableGetCount(field);

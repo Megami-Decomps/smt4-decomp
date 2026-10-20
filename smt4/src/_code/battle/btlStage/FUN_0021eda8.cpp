@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0024ef48(int);
+int mdlHandleArrayDestroy(int);
 int FUN_002759bc(void);
-int FUN_002b2368(int);
+int asdMemFreeNonNull(int);
 int FUN_002c3f5c(void);
 int FUN_002c40f8(unsigned char *, int *, int, int, unsigned int, unsigned int);
 int asdMemFree(...);
@@ -23,9 +23,9 @@ typedef struct {
 extern unsigned char DAT_004398d0; /* 0x4398d0 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_0024ef48. */
+/* Supplied declaration required: mdlHandleArrayDestroy. */
 /* Supplied declaration required: FUN_002759bc. */
-/* Supplied declaration required: FUN_002b2368. */
+/* Supplied declaration required: asdMemFreeNonNull. */
 extern int jobIsValid(unsigned int);
 extern int jobGetWork(void);
 /* Supplied declaration required: FUN_002c3f5c. */
@@ -67,7 +67,7 @@ void FUN_0021eda8(void)
       temp_v1 = *(int *)(temp_v2 + 0xb0);
       if (temp_v1 != 0) {
         FUN_002c3f5c();
-        FUN_002b2368(temp_v1);
+        asdMemFreeNonNull(temp_v1);
       }
       *(unsigned int *)(temp_v2 + 0xb0) = 0;
     }
@@ -80,7 +80,7 @@ void FUN_0021eda8(void)
       *(unsigned int *)(temp_v2 + 0xa0) = 0;
     }
     FUN_002759bc();
-    FUN_0024ef48(temp_v2);
+    mdlHandleArrayDestroy(temp_v2);
     *(unsigned int *)(temp_v2 + 0x80) = 0;
     asdMemFree((*(int *)((unsigned char *)&DAT_004398d0 + 0x4)));
     (*(int *)((unsigned char *)&DAT_004398d0 + 0x4)) = 0;

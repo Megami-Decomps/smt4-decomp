@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00109950(int, int, int, unsigned int);
-int FUN_002ede60(unsigned char [32], int);
+int onlineSockAddrConstruct2(unsigned char [32], int);
 int FUN_002f9cf2(unsigned int, int, unsigned char [32]);
 
 /* stack frame of param_4: 6 slot(s), 21 byte(s) */
@@ -21,7 +21,7 @@ typedef struct {
 extern unsigned char DAT_005949d8; /* 0x5949d8 */
 
 /* Supplied declaration required: FUN_00109950. */
-/* Supplied declaration required: FUN_002ede60. */
+/* Supplied declaration required: onlineSockAddrConstruct2. */
 /* Supplied declaration required: FUN_002f9cf2. */
 
 
@@ -49,7 +49,7 @@ unsigned int FUN_002f9394(unsigned int param_1,int param_2,int param_3,int param
     temp_v4 = param_4;
     FUN_00109950(param_2,param_3,param_4,param_1 + 0x1d4);
     if ((param_2 == 0) && (*(int *)(temp_v3 + 0x10) != 0)) {
-      FUN_002ede60(temp_v1,temp_v4);
+      onlineSockAddrConstruct2(temp_v1,temp_v4);
       FUN_002f9cf2(param_1,temp_v3,temp_v1);
       temp_v0 = param_1 ^ 1;
     }

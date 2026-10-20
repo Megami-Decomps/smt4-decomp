@@ -12,7 +12,7 @@ int FUN_00106e60(...);
 int FUN_00106f70(...);
 int FUN_002c0d08(...);
 int FUN_002c55b4(...);
-int FUN_002c55c4(...);
+int appletIsExitRequested(...);
 int FUN_002c55d4(...);
 int FUN_002c560c(...);
 int FUN_002c5620(...);
@@ -370,7 +370,7 @@ extern int FUN_00107538(unsigned int);
 /* Supplied declaration required: FUN_002c0d08. */
 extern unsigned long long FUN_002c5434(unsigned int);
 /* Supplied declaration required: FUN_002c55b4. */
-/* Supplied declaration required: FUN_002c55c4. */
+/* Supplied declaration required: appletIsExitRequested. */
 /* Supplied declaration required: FUN_002c55d4. */
 /* Supplied declaration required: FUN_002c560c. */
 /* Supplied declaration required: FUN_002c5620. */
@@ -876,7 +876,7 @@ LAB_00101b80:
             }
             FUN_00123934();
             FUN_00106e60();
-            temp_v24 = FUN_002c55c4();
+            temp_v24 = appletIsExitRequested();
             temp_v3 = (unsigned int)((unsigned long long)temp_v24 >> 0x20);
             if ((int)temp_v24 == 0) {
               temp_v24 = FUN_002c55b4();
@@ -926,7 +926,7 @@ LAB_00101b80:
   FUN_00123934();
   FUN_00106f70();
   FUN_00103f90();
-  temp_v2 = FUN_002c55c4();
+  temp_v2 = appletIsExitRequested();
   if (temp_v2 == 0) {
     temp_v2 = FUN_002c55b4();
     if (temp_v2 != 0) {

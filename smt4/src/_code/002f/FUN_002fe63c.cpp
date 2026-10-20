@@ -6,7 +6,7 @@ extern "C" {
 
 int CONCAT44(double, double);
 int FUN_00293a04(int, int);
-int FUN_00296d6c(int, int);
+int randBetween(int, int);
 int FUN_003deeac(void);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(unsigned int, int);
@@ -25,7 +25,7 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Supplied declaration required: FUN_00293a04. */
-/* Supplied declaration required: FUN_00296d6c. */
+/* Supplied declaration required: randBetween. */
 /* Supplied declaration required: FUN_003deeac. */
 /* Supplied declaration required: __aeabi_idivmod. */
 
@@ -124,12 +124,12 @@ int FUN_002fe63c(unsigned int *param_1,int param_2,int param_3,int param_4,int p
                 }
                 else if (temp_v8 != 1) {
                   if (temp_v8 == 2) {
-                    temp_v1 = FUN_00296d6c(0,(int)temp_v10);
+                    temp_v1 = randBetween(0,(int)temp_v10);
                     *(short *)(param_1 + 1) = temp_v1;
                   }
                 }
                 else {
-                  temp_v1 = FUN_00296d6c(0,4);
+                  temp_v1 = randBetween(0,4);
                   temp_v1 = temp_v1 << 2;
                   *(short *)(param_1 + 1) = temp_v1;
                 }

@@ -5,8 +5,8 @@
 extern "C" {
 
 int dataTable06Sub1GetRecord(void);
-int FUN_002b46f8(int, int, unsigned int, int, unsigned char *);
-int FUN_002b9024(void);
+int libc_bsearch(int, int, unsigned int, int, unsigned char *);
+int devilGetRecord(void);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -16,8 +16,8 @@ typedef struct {
 extern unsigned char LAB_002c6f08; /* 0x2c6f08 */
 
 /* Supplied declaration required: dataTable06Sub1GetRecord. */
-/* Supplied declaration required: FUN_002b46f8. */
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: libc_bsearch. */
+/* Supplied declaration required: devilGetRecord. */
 
 
 unsigned int FUN_003c9754(int param_1,unsigned int param_2,unsigned int param_3,int param_4)
@@ -36,10 +36,10 @@ unsigned int FUN_003c9754(int param_1,unsigned int param_2,unsigned int param_3,
   unsigned char temp_v9;
   unsigned char temp_v10;
   
-  FUN_002b9024();
+  devilGetRecord();
   if (*(char *)(param_1 + 0x120) != '\0') {
     temp_v2 = param_1 + 0x122;
-    FUN_002b46f8(temp_v2,param_1 + 0x146,*(unsigned int *)(param_1 + 0x178),2,&LAB_002c6f08);
+    libc_bsearch(temp_v2,param_1 + 0x146,*(unsigned int *)(param_1 + 0x178),2,&LAB_002c6f08);
     temp_v6 = temp_v5;
     if (temp_v2 == 0) {
       return 0;

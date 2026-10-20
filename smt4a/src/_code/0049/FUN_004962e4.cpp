@@ -7,8 +7,8 @@ extern "C" {
 int aocHandleButtons(unsigned int, int);
 
 extern int jobIsValid(unsigned int);
-extern int FUN_0018206c(unsigned int, unsigned int);
-extern int FUN_0031bc88(unsigned int);
+extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
+extern int eventTexJobSlotsDone(unsigned int);
 /* Supplied declaration required: aocHandleButtons. */
 extern int FUN_003fce08(unsigned int, unsigned int);
 extern int nkdwLoaderParse(unsigned int);
@@ -56,15 +56,15 @@ unsigned int FUN_004962e4(unsigned int *param_1)
     temp_v0 = param_1[0x62];
   }
   if (param_1[0x61] != 0 && temp_v0 != 0) {
-    temp_v1 = FUN_0018206c(0x20,0);
+    temp_v1 = asdTMTexTableNodeIsLoaded(0x20,0);
     temp_v0 = 0;
     if (temp_v1 != 0) {
       temp_v1 = jobIsValid(param_1[0x5808]);
-      if ((temp_v1 != 0) && (temp_v1 = FUN_0031bc88(param_1[0x5808]), temp_v1 == 0)) {
+      if ((temp_v1 != 0) && (temp_v1 = eventTexJobSlotsDone(param_1[0x5808]), temp_v1 == 0)) {
         return 0;
       }
       temp_v1 = jobIsValid(param_1[0x5809]);
-      if ((temp_v1 != 0) && (temp_v1 = FUN_0031bc88(param_1[0x5809]), temp_v1 == 0)) {
+      if ((temp_v1 != 0) && (temp_v1 = eventTexJobSlotsDone(param_1[0x5809]), temp_v1 == 0)) {
         return 0;
       }
       temp_v0 = 1;

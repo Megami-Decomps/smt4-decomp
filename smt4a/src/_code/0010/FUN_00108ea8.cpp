@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_002e7232(...);
-int FUN_002e760a(...);
+int sharedRefRelease(...);
+int operatorNew(...);
 int FUN_002eb108(...);
 int FUN_002eb164(...);
 int FUN_002eb7e0(int *, int, int, int, int, int);
@@ -26,8 +26,8 @@ typedef struct {
     unsigned int sp60; /* 0x60: local_60 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_002e7232. */
-/* Supplied declaration required: FUN_002e760a. */
+/* Supplied declaration required: sharedRefRelease. */
+/* Supplied declaration required: operatorNew. */
 /* Supplied declaration required: FUN_002eb108. */
 /* Supplied declaration required: FUN_002eb164. */
 extern int *FUN_002eb7d0(unsigned int, unsigned int);
@@ -81,7 +81,7 @@ void FUN_00108ea8(int param_1,int param_2)
       }
     }
     else {
-      piVar3 = (int *)FUN_002e760a(0x150);
+      piVar3 = (int *)operatorNew(0x150);
       if (piVar3 != (int *)0x0) {
         FUN_002eb108(piVar3,temp_v11,*(unsigned short *)(param_2 + 0x3c) & 0xf,0x10,0,0);
       }
@@ -92,7 +92,7 @@ void FUN_00108ea8(int param_1,int param_2)
     *(unsigned char *)(piVar3 + 9) = *(unsigned char *)(param_1 + 0x14c);
   }
   else {
-    piVar3 = (int *)FUN_002e760a(0x150);
+    piVar3 = (int *)operatorNew(0x150);
     if (piVar3 != (int *)0x0) {
       FUN_002eb108(piVar3,temp_v11,*(unsigned short *)(param_2 + 0x3c) & 0xf,0x10,
                    *(unsigned int *)(param_2 + 0xd8),0);
@@ -118,7 +118,7 @@ void FUN_00108ea8(int param_1,int param_2)
   if ((*(unsigned short *)(piVar3 + 0xf) & 0xf) == 3) {
     temp_v9 = 0;
     do {
-      temp_v2 = FUN_002e760a(0x150);
+      temp_v2 = operatorNew(0x150);
       if (temp_v2 != 0) {
         FUN_002eb108(temp_v2,temp_v11,3,0x10,0,0);
       }
@@ -127,11 +127,11 @@ void FUN_00108ea8(int param_1,int param_2)
       *(unsigned char *)(temp_v2 + 100) = *(unsigned char *)(temp_v7 + 4);
       *(unsigned char *)(temp_v2 + 0x24) = *(unsigned char *)(param_1 + 0x14c);
       FUN_002ef34c(temp_v10,temp_v11,temp_v2);
-      FUN_002e7232(temp_v2);
+      sharedRefRelease(temp_v2);
       temp_v9 = temp_v9 + 1;
     } while (temp_v9 < 2);
   }
-  FUN_002e7232(piVar3);
+  sharedRefRelease(piVar3);
   return;
 }
 

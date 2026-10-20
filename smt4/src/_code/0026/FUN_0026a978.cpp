@@ -33,7 +33,7 @@ struct fn_0026a978_arg0 {
     byte field_0x6d; /* +0x6d */
 };
 
-extern int DAT_0044e190; /* 0x44e190 */
+extern int g_statusDown; /* 0x44e190 */
 
 /* Supplied declaration required: rt_memcpy. */
 
@@ -44,9 +44,9 @@ void FUN_0026a978(fn_0026a978_arg0 *param_1,int param_2)
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = DAT_0044e190;
+  temp_v0 = g_statusDown;
   if (param_2 < 9) {
-    *(unsigned int *)(DAT_0044e190 + 0x4a2) = 0;
+    *(unsigned int *)(g_statusDown + 0x4a2) = 0;
     *(unsigned int *)(temp_v0 + 0x4a6) = 0;
     *(unsigned int *)(temp_v0 + 0x4aa) = 0;
     *(unsigned int *)(temp_v0 + 0x4ae) = 0;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002bd430(void);
+int sndVoiceFree(void);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -17,7 +17,7 @@ extern int DAT_0044d100; /* 0x44d100 */
 extern unsigned int DAT_0044d10c; /* 0x44d10c */
 extern unsigned int DAT_004c40f8; /* 0x4c40f8 */
 
-/* Supplied declaration required: FUN_002bd430. */
+/* Supplied declaration required: sndVoiceFree. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
 
@@ -32,7 +32,7 @@ void FUN_0034eb94(unsigned int param_1)
     nn_os_CriticalSection_Enter((unsigned int)&DAT_004c40f8);
     piVar1 = (int *)(DAT_0044d100 + param_1 * 0x70);
     if (*piVar1 != 0) {
-      FUN_002bd430();
+      sndVoiceFree();
       *piVar1 = 0;
     }
     if (piVar1[1] != 0) {

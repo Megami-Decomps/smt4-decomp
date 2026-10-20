@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00120f34(...);
 int FUN_002e9e60(...);
-int FUN_002eb588(...);
+int onlineTimeGetNow(...);
 int FUN_002f8b88(...);
 
 /* stack frame of param_4: 5 slot(s), 20 byte(s) */
@@ -21,7 +21,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00120f34. */
 extern unsigned long long FUN_001238bc(int);
 /* Supplied declaration required: FUN_002e9e60. */
-/* Supplied declaration required: FUN_002eb588. */
+/* Supplied declaration required: onlineTimeGetNow. */
 /* Supplied declaration required: FUN_002f8b88. */
 
 
@@ -44,7 +44,7 @@ unsigned int FUN_0012391c(int param_1,unsigned int param_2,unsigned int *param_3
   uStack_20 = param_2;
   temp_v6 = param_3;
   iStack_18 = param_4;
-  FUN_002eb588(&temp_v2);
+  onlineTimeGetNow(&temp_v2);
   do {
     temp_v1 = FUN_001238bc(param_1);
     temp_v0 = (int)((unsigned long long)temp_v1 >> 0x20);
@@ -55,7 +55,7 @@ unsigned int FUN_0012391c(int param_1,unsigned int param_2,unsigned int *param_3
       return 1;
     }
     if (param_2 != 0xffffffff) {
-      FUN_002eb588(&temp_v4);
+      onlineTimeGetNow(&temp_v4);
       temp_v0 = (temp_v4 - temp_v2) - param_2;
       if ((int)(unsigned int)(temp_v4 - temp_v2 < param_2) <=
           (int)((temp_v5 - temp_v3) - (unsigned int)(temp_v4 < temp_v2))) {

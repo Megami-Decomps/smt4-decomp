@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0011d2d0(unsigned char *);
 int software_interrupt(int);
 
-extern unsigned char DAT_0044e458; /* 0x44e458 */
+extern unsigned char g_callbackState; /* 0x44e458 */
 extern unsigned int DAT_0044e46c; /* 0x44e46c */
 extern unsigned char DAT_004c64c4; /* 0x4c64c4 */
 
@@ -19,10 +19,10 @@ void FUN_0010fc90(void)
 
 {
 /* irregular: 2 native warning(s); review required */
-  if ((*(int *)((unsigned char *)&DAT_0044e458 + 0x8)) != 0) {
+  if ((*(int *)((unsigned char *)&g_callbackState + 0x8)) != 0) {
     FUN_0011d2d0(&DAT_004c64c4);
     software_interrupt(0x23);
-    (*(int *)((unsigned char *)&DAT_0044e458 + 0x8)) = 0;
+    (*(int *)((unsigned char *)&g_callbackState + 0x8)) = 0;
     DAT_0044e46c = 0;
   }
   return;

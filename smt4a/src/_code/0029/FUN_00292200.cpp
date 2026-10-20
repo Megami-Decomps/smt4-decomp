@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 
 
 void FUN_00292200(void)
@@ -12,7 +12,7 @@ void FUN_00292200(void)
 {
   int temp_v0;
   
-  temp_v0 = FUN_0018719c(0x4d0);
+  temp_v0 = gameFlagIsSet(0x4d0);
   if (temp_v0 != 0) {
     return;
   }

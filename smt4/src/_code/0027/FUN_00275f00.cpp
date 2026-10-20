@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b8838(int);
+int buttonHelpSetPreset(int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -13,8 +13,8 @@ typedef struct {
 
 extern int g_gameState; /* 0x49f91c */
 
-/* Supplied declaration required: FUN_002b8838. */
-extern int FUN_002c09d0(unsigned int);
+/* Supplied declaration required: buttonHelpSetPreset. */
+extern int gameFlagIsSet(unsigned int);
 extern int FUN_002d1cc8(void);
 
 
@@ -27,26 +27,26 @@ void FUN_00275f00(void)
   if (g_gameState != 0x65) {
     if (g_gameState < 100) {
       if (g_gameState == 0x24) {
-        FUN_002b8838(0xd1);
+        buttonHelpSetPreset(0xd1);
         return;
       }
-      temp_v0 = FUN_002c09d0(0x16);
+      temp_v0 = gameFlagIsSet(0x16);
       if (temp_v0 != 0) {
-        FUN_002b8838(0x3f);
+        buttonHelpSetPreset(0x3f);
         return;
       }
-      FUN_002b8838(0xd9);
+      buttonHelpSetPreset(0xd9);
       return;
     }
   }
   else {
     temp_v0 = FUN_002d1cc8();
     if (temp_v0 != 0) {
-      FUN_002b8838(0xde);
+      buttonHelpSetPreset(0xde);
       return;
     }
   }
-  FUN_002b8838(0xd0);
+  buttonHelpSetPreset(0xd0);
   return;
 }
 

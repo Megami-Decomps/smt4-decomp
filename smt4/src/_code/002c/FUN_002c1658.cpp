@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_002b8cec(...);
-int FUN_002bfde4(...);
+int padIsButtonRepeat(...);
+int padIsButtonPressed(...);
 int FUN_002c15fc(...);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -17,8 +17,8 @@ extern int DAT_0043da2c; /* 0x43da2c */
 
 extern int FUN_00125084(char);
 extern int FUN_00125cec(char);
-/* Supplied declaration required: FUN_002b8cec. */
-/* Supplied declaration required: FUN_002bfde4. */
+/* Supplied declaration required: padIsButtonRepeat. */
+/* Supplied declaration required: padIsButtonPressed. */
 /* Supplied declaration required: FUN_002c15fc. */
 
 
@@ -63,14 +63,14 @@ int FUN_002c1658(int param_1,int param_2)
       }
     }
     else {
-      temp_v1 = FUN_002bfde4(param_1);
+      temp_v1 = padIsButtonPressed(param_1);
       if (temp_v1 != 0) {
         return temp_v1;
       }
     }
   }
   else {
-    temp_v1 = FUN_002b8cec(param_1);
+    temp_v1 = padIsButtonRepeat(param_1);
     if (temp_v1 != 0) {
       return temp_v1;
     }
@@ -97,18 +97,18 @@ joined_r0x002c1758:
           temp_v1 = FUN_002c15fc(temp_v2);
         }
         else {
-          temp_v1 = FUN_002bfde4(temp_v2);
+          temp_v1 = padIsButtonPressed(temp_v2);
         }
       }
       else {
-        temp_v1 = FUN_002b8cec(temp_v2);
+        temp_v1 = padIsButtonRepeat(temp_v2);
       }
     }
   }
   else {
     temp_v2 = 0xe;
     if (param_2 != 0) goto joined_r0x002c1758;
-    temp_v1 = FUN_002b8cec(temp_v2);
+    temp_v1 = padIsButtonRepeat(temp_v2);
   }
   if (temp_v1 != 0) {
     return temp_v1;

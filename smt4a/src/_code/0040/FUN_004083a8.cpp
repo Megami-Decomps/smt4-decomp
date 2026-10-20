@@ -7,7 +7,7 @@ extern "C" {
 extern int g_gameState; /* 0x5f15fc */
 extern unsigned int *DAT_005f1600; /* 0x5f1600 */
 
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 extern int FUN_002c2710(void);
 
 
@@ -84,7 +84,7 @@ unsigned char FUN_004083a8(int param_1,unsigned int param_2)
     }
   }
   else {
-    temp_v0 = FUN_0018719c(0x9d);
+    temp_v0 = gameFlagIsSet(0x9d);
     if (temp_v0 != 0) {
       return 0;
     }

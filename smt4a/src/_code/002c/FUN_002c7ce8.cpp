@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_001641c4(void);
+int ifTouchRegionRemove(void);
 int FUN_0019de98(int, unsigned int);
-int FUN_001b4a90(int, int, unsigned int);
+int __aeabi_memset4(int, int, unsigned int);
 int FUN_00230b9c(unsigned int, unsigned int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -14,11 +14,11 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-extern int DAT_00588fe8; /* 0x588fe8 */
+extern int g_statusDown; /* 0x588fe8 */
 
-/* Supplied declaration required: FUN_001641c4. */
+/* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: FUN_0019de98. */
-/* Supplied declaration required: FUN_001b4a90. */
+/* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: FUN_00230b9c. */
 extern int FUN_0035db94(void);
 
@@ -34,12 +34,12 @@ void FUN_002c7ce8(unsigned int param_1)
   unsigned int *puVar5;
   int temp_v3;
   
-  temp_v0 = DAT_00588fe8;
-  puVar2 = (unsigned char *)(DAT_00588fe8 + 0x514);
-  if (*(unsigned char *)(DAT_00588fe8 + 0x514) == param_1) {
+  temp_v0 = g_statusDown;
+  puVar2 = (unsigned char *)(g_statusDown + 0x514);
+  if (*(unsigned char *)(g_statusDown + 0x514) == param_1) {
     return;
   }
-  *(unsigned char *)(DAT_00588fe8 + 0x515) = *(unsigned char *)(DAT_00588fe8 + 0x514);
+  *(unsigned char *)(g_statusDown + 0x515) = *(unsigned char *)(g_statusDown + 0x514);
   *puVar2 = (char)param_1;
   temp_v1 = FUN_0035db94();
   if (temp_v1 < 0) {
@@ -53,18 +53,18 @@ void FUN_002c7ce8(unsigned int param_1)
       FUN_00230b9c(temp_v2,0xffffffff,0);
     }
   }
-  temp_v1 = DAT_00588fe8;
+  temp_v1 = g_statusDown;
   temp_v3 = 0;
-  if (*(char *)(DAT_00588fe8 + 0x59a) != '\0') {
+  if (*(char *)(g_statusDown + 0x59a) != '\0') {
     do {
-      FUN_001641c4();
+      ifTouchRegionRemove();
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < (int)(unsigned int)*(unsigned char *)(temp_v1 + 0x59a));
   }
   *(unsigned char *)(temp_v1 + 0x59a) = 0;
-  FUN_001b4a90(temp_v1 + 0x544,0x54,0xffffffff);
-  temp_v1 = DAT_00588fe8;
-  *(unsigned int *)(DAT_00588fe8 + 0x524) = 0;
+  __aeabi_memset4(temp_v1 + 0x544,0x54,0xffffffff);
+  temp_v1 = g_statusDown;
+  *(unsigned int *)(g_statusDown + 0x524) = 0;
   puVar5 = (unsigned int *)(temp_v1 + 0x518);
   temp_v2 = *puVar5;
   *puVar5 = 2;

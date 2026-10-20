@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0028322c(...);
-int FUN_00285834(...);
+int nodeTreeReleaseItemClearOwner(...);
+int nodeTreeReleaseItem(...);
 
 typedef struct fn_002e5154_arg0 fn_002e5154_arg0;
 struct fn_002e5154_arg0 {
@@ -29,8 +29,8 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_0028322c. */
-/* Supplied declaration required: FUN_00285834. */
+/* Supplied declaration required: nodeTreeReleaseItemClearOwner. */
+/* Supplied declaration required: nodeTreeReleaseItem. */
 
 
 void FUN_002e5154(fn_002e5154_arg0 *param_1)
@@ -50,7 +50,7 @@ void FUN_002e5154(fn_002e5154_arg0 *param_1)
   }
   param_1->field_0x24 = unaff_r6;
   do {
-    FUN_0028322c((&param_1[0xb].field_0x28)[temp_v0]);
+    nodeTreeReleaseItemClearOwner((&param_1[0xb].field_0x28)[temp_v0]);
     temp_v0 = temp_v0 + 1;
   } while (temp_v0 < 0x32);
   puVar1 = *(unsigned int **)&param_1[0xb].field_0x18;
@@ -64,7 +64,7 @@ void FUN_002e5154(fn_002e5154_arg0 *param_1)
   if (puVar1 != (unsigned int *)0x0) {
     *puVar1 = (unsigned int)unaff_r6;
   }
-  FUN_00285834(param_1);
+  nodeTreeReleaseItem(param_1);
   return;
 }
 

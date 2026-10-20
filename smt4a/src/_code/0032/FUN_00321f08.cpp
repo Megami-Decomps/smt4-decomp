@@ -18,7 +18,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: FUN_00145e24. */
 /* Supplied declaration required: FUN_00157558. */
-extern int FUN_001acf08(void);
+extern int effGetFrameStep(void);
 /* Supplied declaration required: FUN_00409718. */
 
 
@@ -31,7 +31,7 @@ void FUN_00321f08(int param_1)
   unsigned int temp_v2;
   
   (**(romwright_code **)(*(int *)(param_1 + 0x18) * 0x18 + 0x5c1080))(param_1);
-  temp_v1 = FUN_001acf08();
+  temp_v1 = effGetFrameStep();
   *(int *)(param_1 + 0x1c) = temp_v1 + *(int *)(param_1 + 0x1c);
   temp_v0 = *(char *)(g_renderCtx + 0x5f8);
   if (temp_v0 == '\x01') {

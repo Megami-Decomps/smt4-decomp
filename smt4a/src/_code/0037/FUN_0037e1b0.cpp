@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern ObjBRef DAT_00588fd0;
+extern ObjBRef g_gameGlobals;
 
 /* Stores the value; a negative value also clears the companion byte at +0x1384, else sets it to `flag`. */
 void FUN_0037e1b0(s32 value, u8 flag)
 {
-    ObjB *obj = DAT_00588fd0.instance;
+    ObjB *obj = g_gameGlobals.instance;
 
     obj->unk137F = value;
     if (value < 0) {

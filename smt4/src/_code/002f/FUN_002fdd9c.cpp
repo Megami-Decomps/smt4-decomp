@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp274; /* 0x274: local_274 */
 } param_1_stack;
 
-extern int DAT_00433278; /* 0x433278 */
+extern int g_keyedRecordCount; /* 0x433278 */
 
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -36,7 +36,7 @@ unsigned int FUN_002fdd9c(int param_1)
   unsigned char temp_v10 [836];
   char temp_v11;
   
-  if (-1 < (DAT_00433278 - param_1) - 1) {
+  if (-1 < (g_keyedRecordCount - param_1) - 1) {
     temp_v5 = 2;
     param_1 = param_1 * 0x148;
     temp_v8 = *(int *)(param_1 + 0x478024);

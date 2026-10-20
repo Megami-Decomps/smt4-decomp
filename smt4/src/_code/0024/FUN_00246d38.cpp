@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0022699c(int, int, int, unsigned int);
 int FUN_0027da30(int, int);
 
-extern int DAT_00434290; /* 0x434290 */
+extern int g_btlActionReflect; /* 0x434290 */
 
 /* Supplied declaration required: FUN_0022699c. */
 /* Supplied declaration required: FUN_0027da30. */
@@ -32,8 +32,8 @@ unsigned int FUN_00246d38(short param_1,unsigned int param_2,int param_3,unsigne
     }
   }
   if (param_4 != 0) {
-    temp_v1 = DAT_00434290;
-    FUN_0022699c(DAT_00434290,(int)param_1,0,param_2);
+    temp_v1 = g_btlActionReflect;
+    FUN_0022699c(g_btlActionReflect,(int)param_1,0,param_2);
     *(unsigned char *)(temp_v1 + 4) = 0x1d;
     *(int *)(temp_v1 + 0x14) = param_3;
     temp_v2 = temp_v2 & ~param_4;
@@ -41,12 +41,12 @@ unsigned int FUN_00246d38(short param_1,unsigned int param_2,int param_3,unsigne
     *(unsigned int *)(temp_v1 + 0x4c) = param_4;
   }
   if ((temp_v0) && ((temp_v2 & 0x586) == 0)) {
-    temp_v1 = DAT_00434290;
-    FUN_0022699c(DAT_00434290,(int)(short)(param_1 + 1),0,param_2);
+    temp_v1 = g_btlActionReflect;
+    FUN_0022699c(g_btlActionReflect,(int)(short)(param_1 + 1),0,param_2);
     *(unsigned char *)(temp_v1 + 4) = 0x14;
     *(int *)(temp_v1 + 0x14) = param_3;
-    temp_v1 = DAT_00434290;
-    FUN_0022699c(DAT_00434290,(int)(short)(param_1 + 1),0,param_2);
+    temp_v1 = g_btlActionReflect;
+    FUN_0022699c(g_btlActionReflect,(int)(short)(param_1 + 1),0,param_2);
     *(unsigned char *)(temp_v1 + 4) = 10;
     *(int *)(temp_v1 + 0x14) = param_3;
     *(unsigned int *)(temp_v1 + 0x28) = param_4;

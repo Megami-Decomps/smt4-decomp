@@ -7,21 +7,21 @@ typedef struct Entry {
     /* 0x04 */ u32 value;
     /* 0x08 */ u8 unk08[8];
 } Entry;                        /* 0x10 */
-extern Entry DAT_005e2214[];
+extern Entry g_dataTableSlots[];
 
-u32 FUN_001a6f60(u32 value, u32 arg);
+u32 dataTableFileGetTable(u32 value, u32 arg);
 
-/* Looks up the value of entry `index` of the 0x50-entry table at 0x5E2214 (0 when out of range) and passes it, with `arg`, to FUN_001a6f60. */
+/* Looks up the value of entry `index` of the 0x50-entry table at 0x5E2214 (0 when out of range) and passes it, with `arg`, to dataTableFileGetTable. */
 u32 dataTableGet(u32 index, u32 arg)
 {
     u32 value;
 
     if (index < 0x50) {
-        value = DAT_005e2214[index].value;
+        value = g_dataTableSlots[index].value;
     } else {
         value = 0;
     }
-    return FUN_001a6f60(value, arg);
+    return dataTableFileGetTable(value, arg);
 }
 
 } /* extern "C" */

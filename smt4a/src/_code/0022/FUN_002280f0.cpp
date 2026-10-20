@@ -6,7 +6,7 @@ void FUN_001656e0(u32 job, s32 flag);
 void FUN_0016572c(u32 job, s32 flag);
 void FUN_00167f24(s32 mode);
 s32 jobIsValid(u32 job);
-s32 FUN_00165058(u32 job);
+s32 jobGetStatus(u32 job);
 
 typedef struct JobSet {
     /* 0x00 */ u8 unk00[4];
@@ -29,7 +29,7 @@ u32 FUN_002280f0(JobSet **set)
         if (i < jobs->jobCount) {
             do {
                 valid = jobIsValid(jobs->jobs[i]);
-                if ((valid != 0) && (valid = FUN_00165058(jobs->jobs[i]), valid != 4)) {
+                if ((valid != 0) && (valid = jobGetStatus(jobs->jobs[i]), valid != 4)) {
                     FUN_001656e0(jobs->jobs[i], 1);
                 }
                 i = i + 1;

@@ -6,13 +6,13 @@ extern "C" {
 
 int FUN_0010af50(void);
 int FUN_00114bf4(void);
-int FUN_002e6e14(...);
-int FUN_002e7232(...);
+int asdOperatorDeleteArray(...);
+int sharedRefRelease(...);
 int FUN_002efbd8(unsigned int *);
 int FUN_002efcb8(unsigned int *);
 int FUN_002efcfc(int *, int);
 int FUN_002efd12(int, unsigned int *);
-int FUN_002efd60(int *);
+int mapIteratorNext2(int *);
 int FUN_002efdb4(int);
 int FUN_002efe80(unsigned int);
 int FUN_002f27de(int);
@@ -34,14 +34,14 @@ extern int FUN_0010600c(unsigned int *);
 /* Supplied declaration required: FUN_0010af50. */
 extern int FUN_0010f1d0(int);
 /* Supplied declaration required: FUN_00114bf4. */
-/* Supplied declaration required: FUN_002e6e14. */
-/* Supplied declaration required: FUN_002e7232. */
-extern int FUN_002eda5a(int);
+/* Supplied declaration required: asdOperatorDeleteArray. */
+/* Supplied declaration required: sharedRefRelease. */
+extern int vectorDestroyBytes(int);
 /* Supplied declaration required: FUN_002efbd8. */
 /* Supplied declaration required: FUN_002efcb8. */
 /* Supplied declaration required: FUN_002efcfc. */
 /* Supplied declaration required: FUN_002efd12. */
-/* Supplied declaration required: FUN_002efd60. */
+/* Supplied declaration required: mapIteratorNext2. */
 /* Supplied declaration required: FUN_002efdb4. */
 /* Supplied declaration required: FUN_002efe80. */
 /* Supplied declaration required: FUN_002f27de. */
@@ -71,7 +71,7 @@ void FUN_001095ec(unsigned int *param_1,unsigned int param_2,unsigned int param_
   FUN_002efbd8(param_1);
   if (param_1[0x2b] != 0) {
     FUN_002efe80(param_1[1] + 0x14);
-    FUN_002e7232(param_1[0x2b]);
+    sharedRefRelease(param_1[0x2b]);
     param_1[0x2b] = 0;
   }
   for (piVar4 = (int *)param_1[0x27]; (int *)param_1[0x28] != piVar4; piVar4 = piVar4 + 1) {
@@ -83,7 +83,7 @@ void FUN_001095ec(unsigned int *param_1,unsigned int param_2,unsigned int param_
       FUN_002efd12(temp_v0,puVar3);
       if (temp_v0 == 0) break;
       FUN_002efcb8(param_1);
-      FUN_002efd60(&temp_v2);
+      mapIteratorNext2(&temp_v2);
       puVar3 = (unsigned int *)&temp_v4;
       temp_v4 = temp_v2;
     }
@@ -91,19 +91,19 @@ void FUN_001095ec(unsigned int *param_1,unsigned int param_2,unsigned int param_
     FUN_002f27de(*piVar4);
     if (*piVar4 != 0) {
       FUN_0010af50();
-      FUN_002e6e14();
+      asdOperatorDeleteArray();
     }
   }
   for (piVar4 = (int *)param_1[0x24]; (int *)param_1[0x25] != piVar4; piVar4 = piVar4 + 1) {
     FUN_002f2834(*piVar4);
     if (*piVar4 != 0) {
       FUN_00114bf4();
-      FUN_002e6e14();
+      asdOperatorDeleteArray();
     }
   }
   for (piVar4 = (int *)param_1[0x4c]; (int *)param_1[0x4d] != piVar4; piVar4 = piVar4 + 1) {
     if (*piVar4 != 0) {
-      FUN_002e7232();
+      sharedRefRelease();
     }
   }
   param_1 = param_1 + 0xd0;
@@ -112,15 +112,15 @@ void FUN_001095ec(unsigned int *param_1,unsigned int param_2,unsigned int param_
   temp_v0 = FUN_0010f1d0(temp_v0 - 0x18);
   temp_v0 = temp_v0 - 0x70;
   FUN_002f28bc();
-  FUN_002e6e14(*(unsigned int *)(temp_v0 - 0x14));
-  temp_v0 = FUN_002eda5a(temp_v0 - 0x3c);
+  asdOperatorDeleteArray(*(unsigned int *)(temp_v0 - 0x14));
+  temp_v0 = vectorDestroyBytes(temp_v0 - 0x3c);
   temp_v0 = FUN_002f2910(temp_v0 - 0xc);
   for (temp_v1 = *(int *)(temp_v0 - 0x94); temp_v1 != *(int *)(temp_v0 - 0x90); temp_v1 = temp_v1 + 4) {
   }
-  FUN_002e6e14();
+  asdOperatorDeleteArray();
   for (temp_v1 = *(int *)(temp_v0 - 0xa0); temp_v1 != *(int *)(temp_v0 - 0x9c); temp_v1 = temp_v1 + 4) {
   }
-  FUN_002e6e14();
+  asdOperatorDeleteArray();
   FUN_002f292c(temp_v0 - 0x130);
   return;
 }

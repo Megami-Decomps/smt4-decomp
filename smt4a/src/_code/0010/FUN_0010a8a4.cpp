@@ -7,12 +7,12 @@ extern "C" {
 int FUN_001322b6(int, unsigned char [4]);
 int FUN_002e6e34(unsigned char [12], int);
 int FUN_002e6e5c(unsigned char [12]);
-int FUN_002eb588(unsigned char [8]);
+int onlineTimeGetNow(unsigned char [8]);
 int wordMoveOut_002f3724(unsigned char [4], int *, int);
-int FUN_002f3734(int *);
+int mapIteratorNext3(int *);
 int wordMoveOut_002f3764(int *, int *, int);
 int FUN_002f3774(unsigned char [4], int, int *);
-int FUN_002f39fa(int *);
+int mapIteratorNext4(int *);
 int SBORROW4(...);
 
 /* stack frame of param_1: 6 slot(s), 24 byte(s) */
@@ -32,14 +32,14 @@ extern unsigned char DAT_00594a58; /* 0x594a58 */
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
 extern unsigned long long FUN_002eab1c(unsigned char *, int);
-/* Supplied declaration required: FUN_002eb588. */
+/* Supplied declaration required: onlineTimeGetNow. */
 extern int wordRefsDiffer_002f3594(int *, unsigned int *);
 extern int wordRefsDiffer_002f35fc(int *, unsigned int *);
 /* Supplied declaration required: wordMoveOut_002f3724. */
-/* Supplied declaration required: FUN_002f3734. */
+/* Supplied declaration required: mapIteratorNext3. */
 /* Supplied declaration required: wordMoveOut_002f3764. */
 /* Supplied declaration required: FUN_002f3774. */
-/* Supplied declaration required: FUN_002f39fa. */
+/* Supplied declaration required: mapIteratorNext4. */
 
 
 void FUN_0010a8a4(int param_1)
@@ -62,7 +62,7 @@ void FUN_0010a8a4(int param_1)
   unsigned char temp_v13 [4];
   
   FUN_002e6e34(temp_v9,param_1 + 0x4c);
-  FUN_002eb588(temp_v8);
+  onlineTimeGetNow(temp_v8);
   temp_v5 = *(int *)(*(int *)(param_1 + 0x18) + 8);
   while( 1 ) {
     temp_v7 = *(unsigned int *)(param_1 + 0x18);
@@ -77,7 +77,7 @@ void FUN_0010a8a4(int param_1)
       FUN_001322b6(param_1 + 8,temp_v4);
     }
     else {
-      FUN_002f3734(&temp_v5);
+      mapIteratorNext3(&temp_v5);
     }
   }
   temp_v6 = *(int *)(*(int *)(param_1 + 0x34) + 8);
@@ -95,7 +95,7 @@ void FUN_0010a8a4(int param_1)
       FUN_002f3774(temp_v13,param_1 + 0x24,&temp_v12);
     }
     else {
-      FUN_002f39fa(&temp_v6);
+      mapIteratorNext4(&temp_v6);
     }
   }
   FUN_002e6e5c(temp_v9);

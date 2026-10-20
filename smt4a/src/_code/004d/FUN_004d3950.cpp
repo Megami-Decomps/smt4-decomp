@@ -8,7 +8,7 @@ int jobStop(unsigned int, int);
 int FUN_00280328(unsigned int, int, int);
 int FUN_002ea508(unsigned int, unsigned char *);
 int asdListBoxSetIntItem(...);
-int FUN_00317508(unsigned int, int);
+int asdListBoxSetByteValue(unsigned int, int);
 int asdListBoxAddItems(void);
 int FUN_00340edc(...);
 int FUN_003592dc(unsigned int);
@@ -20,7 +20,7 @@ typedef struct {
 } param_2_stack;
 
 extern unsigned char LAB_004d3c70; /* 0x4d3c70 */
-extern int DAT_0056fcc0; /* 0x56fcc0 */
+extern int g_handleRegistry; /* 0x56fcc0 */
 extern int g_btlStageModel; /* 0x57a4f8 */
 
 /* Supplied declaration required: jobStop. */
@@ -28,7 +28,7 @@ extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_00280328. */
 /* Supplied declaration required: FUN_002ea508. */
 /* Supplied declaration required: asdListBoxSetIntItem. */
-/* Supplied declaration required: FUN_00317508. */
+/* Supplied declaration required: asdListBoxSetByteValue. */
 /* Supplied declaration required: asdListBoxAddItems. */
 /* Supplied declaration required: FUN_00340edc. */
 /* Supplied declaration required: FUN_003592dc. */
@@ -51,7 +51,7 @@ void FUN_004d3950(int param_1,int param_2)
   FUN_00280328(temp_v1,0x75,0);
   *(unsigned int *)(param_1 + 0x10) = temp_v1;
   asdListBoxAddItems();
-  FUN_00317508(*(unsigned int *)(param_1 + 0x10),1);
+  asdListBoxSetByteValue(*(unsigned int *)(param_1 + 0x10),1);
   FUN_002ea508(*(unsigned int *)(param_1 + 0x10),&LAB_004d3c70);
   FUN_00340edc(*(unsigned int *)(param_1 + 0x10),0,0xfffffc19,999);
   FUN_00340edc(*(unsigned int *)(param_1 + 0x10),1,0xfffffc19,999);
@@ -64,7 +64,7 @@ void FUN_004d3950(int param_1,int param_2)
   asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),8,*(unsigned int *)(g_btlStageModel + 0x6c),0,10000,0);
   FUN_00340edc(*(unsigned int *)(param_1 + 0x10),9,0,10);
   asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),10,
-               (*(unsigned int *)(*(int *)(DAT_0056fcc0 + 4) + 0xcc) & 0x80000000) != 0,0,1,0);
+               (*(unsigned int *)(*(int *)(g_handleRegistry + 4) + 0xcc) & 0x80000000) != 0,0,1,0);
   FUN_00340edc(*(unsigned int *)(param_1 + 0x10),0xb,0xffff3cb0,50000);
   FUN_00340edc(*(unsigned int *)(param_1 + 0x10),0xc,0xffff3cb0,50000);
   asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0xd,*(unsigned int *)(g_btlStageModel + 0x7c),0,0xff,0);

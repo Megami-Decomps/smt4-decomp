@@ -4,9 +4,9 @@ extern "C" {
 
 void FUN_002733a0(u32 value)
 {
-    JobBlock43e278 *block = DAT_0043e278;
+    JobBlock43e278 *block = g_frameTex;
 
-    DAT_0043e278->unkF9A = 1;
+    g_frameTex->unkF9A = 1;
     block->unkF9C = 0;
     block->unkF9D = 0;
     block->unkF9E = 0;

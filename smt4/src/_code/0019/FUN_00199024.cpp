@@ -10,21 +10,21 @@ int FUN_0028eeb8(int);
 int FUN_0028ffb8(int);
 int FUN_00290404(void);
 int FUN_002b6b38(void);
-int FUN_002b8838(int);
+int buttonHelpSetPreset(int);
 int FUN_002bee58(int, int);
 
-extern int DAT_0043dd50; /* 0x43dd50 */
+extern int g_uiQuest; /* 0x43dd50 */
 
 /* Supplied declaration required: FUN_0028ed3c. */
 /* Supplied declaration required: FUN_0028ee90. */
 /* Supplied declaration required: FUN_0028eeb8. */
 /* Supplied declaration required: FUN_0028ffb8. */
 /* Supplied declaration required: FUN_00290404. */
-extern int FUN_00296f4c(unsigned int, unsigned int);
+extern int scrScriptProcessStartEntry(unsigned int, unsigned int);
 extern int FUN_0029efa8(int);
 extern int FUN_0029efc0(int);
 /* Supplied declaration required: FUN_002b6b38. */
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: FUN_002bee58. */
 
 
@@ -37,8 +37,8 @@ void FUN_00199024(void)
   int temp_v2;
   int temp_v3;
   
-  temp_v3 = DAT_0043dd50;
-  *(unsigned char *)(DAT_0043dd50 + 0x5f3) = 1;
+  temp_v3 = g_uiQuest;
+  *(unsigned char *)(g_uiQuest + 0x5f3) = 1;
   temp_v1 = FUN_0029efc0(temp_v3 + 0x660);
   temp_v2 = FUN_0029efa8(temp_v3 + 0x660);
   temp_v0 = *(unsigned short *)(temp_v3 + (temp_v2 + temp_v1) * 2 + 0x78a);
@@ -48,12 +48,12 @@ void FUN_00199024(void)
   FUN_0028ffb8(temp_v0);
   FUN_002bee58(temp_v3 + 0x264,2);
   FUN_0028ed3c(temp_v0,0,1);
-  temp_v3 = FUN_00296f4c(*(unsigned int *)(temp_v3 + 0x5b4),3);
+  temp_v3 = scrScriptProcessStartEntry(*(unsigned int *)(temp_v3 + 0x5b4),3);
   if (temp_v3 != 0) {
-    FUN_002b8838(0x9e);
+    buttonHelpSetPreset(0x9e);
     FUN_00290404();
-    temp_v3 = DAT_0043dd50;
-    *(unsigned int *)(DAT_0043dd50 + 8) = *(unsigned int *)(DAT_0043dd50 + 4);
+    temp_v3 = g_uiQuest;
+    *(unsigned int *)(g_uiQuest + 8) = *(unsigned int *)(g_uiQuest + 4);
     *(unsigned int *)(temp_v3 + 4) = 0xc;
     *(unsigned int *)(temp_v3 + 0x10) = 0;
   }

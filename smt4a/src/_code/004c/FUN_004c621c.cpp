@@ -4,8 +4,8 @@
 
 extern "C" {
 
-extern int FUN_001ab854(void);
-extern int FUN_001ab888(void);
+extern int gameGetSlotRecord(void);
+extern int gameGetSlotTable(void);
 extern int bitsAt60Test(int, unsigned int);
 
 
@@ -17,12 +17,12 @@ void FUN_004c621c(void)
   int temp_v2;
   int temp_v3;
   
-  temp_v0 = FUN_001ab888();
+  temp_v0 = gameGetSlotTable();
   temp_v3 = 0;
   if (*(unsigned char *)(temp_v0 + 0x1ca3) != 0) {
     do {
       if (-1 < *(char *)(temp_v0 + temp_v3 + 0x1c88)) {
-        temp_v1 = FUN_001ab854();
+        temp_v1 = gameGetSlotRecord();
         temp_v2 = bitsAt60Test(temp_v1,10);
         if (temp_v2 == 0) {
           *(unsigned char *)(temp_v1 + 0x12a) = 0;

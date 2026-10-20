@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e3494(void);
+int asdOperatorDeleteB(void);
 
 typedef struct fn_00191f68_arg0 fn_00191f68_arg0;
 struct fn_00191f68_arg0 {
@@ -69,7 +69,7 @@ struct fn_00191f68_arg0 {
     int field_0x440; /* +0x440 */
 };
 
-/* Supplied declaration required: FUN_002e3494. */
+/* Supplied declaration required: asdOperatorDeleteB. */
 
 
 void FUN_00191f68(fn_00191f68_arg0 *param_1)
@@ -103,127 +103,127 @@ void FUN_00191f68(fn_00191f68_arg0 *param_1)
   param_1->field_0x434 = 0;
   param_1->field_0x43c = 0;
   if (param_1->field_0x360 != 0) {
-    FUN_002e3494();
+    asdOperatorDeleteB();
     param_1->field_0x360 = 0;
   }
   if (param_1->field_0x368 != 0) {
-    FUN_002e3494();
+    asdOperatorDeleteB();
     param_1->field_0x368 = 0;
   }
   if (param_1->field_0x370 != 0) {
-    FUN_002e3494();
+    asdOperatorDeleteB();
     param_1->field_0x370 = 0;
   }
   if (param_1->field_0x378 != 0) {
-    FUN_002e3494();
+    asdOperatorDeleteB();
     param_1->field_0x378 = 0;
   }
   if (param_1->field_0x380 != 0) {
-    FUN_002e3494();
+    asdOperatorDeleteB();
     param_1->field_0x380 = 0;
   }
   if (param_1->field_0x388 != 0) {
-    FUN_002e3494();
+    asdOperatorDeleteB();
     param_1->field_0x388 = 0;
   }
   if (param_1->field_0x390 != 0) {
-    FUN_002e3494();
+    asdOperatorDeleteB();
     param_1->field_0x390 = 0;
   }
   if (param_1->field_0x398 != 0) {
-    FUN_002e3494();
+    asdOperatorDeleteB();
     param_1->field_0x398 = 0;
   }
   if (param_1->field_0x3a0 != 0) {
-    FUN_002e3494();
+    asdOperatorDeleteB();
     param_1->field_0x3a0 = 0;
   }
   if (param_1->field_0x3a4 != 0) {
-    FUN_002e3494();
+    asdOperatorDeleteB();
     param_1->field_0x3a4 = 0;
   }
   if (param_1->field_0x3ac != 0) {
-    FUN_002e3494();
+    asdOperatorDeleteB();
     param_1->field_0x3ac = 0;
   }
   if (param_1->field_0x3b0 != 0) {
-    FUN_002e3494();
+    asdOperatorDeleteB();
     param_1->field_0x3b0 = 0;
   }
   if (param_1->field_0x3b8 != 0) {
-    FUN_002e3494();
+    asdOperatorDeleteB();
     param_1->field_0x3b8 = 0;
   }
   if (param_1->field_0x3bc != 0) {
-    FUN_002e3494();
+    asdOperatorDeleteB();
     param_1->field_0x3bc = 0;
   }
   if (param_1->field_0x3c4 != 0) {
-    FUN_002e3494();
+    asdOperatorDeleteB();
     param_1->field_0x3c4 = 0;
   }
   if (param_1->field_0x3c8 != 0) {
-    FUN_002e3494();
+    asdOperatorDeleteB();
     param_1->field_0x3c8 = 0;
   }
   if (param_1->field_0x3d0 != 0) {
-    FUN_002e3494();
+    asdOperatorDeleteB();
     param_1->field_0x3d0 = 0;
   }
   if (param_1->field_0x3d4 != 0) {
-    FUN_002e3494();
+    asdOperatorDeleteB();
     param_1->field_0x3d4 = 0;
   }
   if (param_1->field_0x3dc != 0) {
-    FUN_002e3494();
+    asdOperatorDeleteB();
     param_1->field_0x3dc = 0;
   }
   if (param_1->field_0x3e0 != 0) {
-    FUN_002e3494();
+    asdOperatorDeleteB();
     param_1->field_0x3e0 = 0;
   }
   if (param_1->field_0x3e8 != 0) {
-    FUN_002e3494();
+    asdOperatorDeleteB();
     param_1->field_0x3e8 = 0;
   }
   if (param_1->field_0x3f0 != 0) {
-    FUN_002e3494();
+    asdOperatorDeleteB();
     param_1->field_0x3f0 = 0;
   }
   if (param_1->field_0x3f8 != 0) {
-    FUN_002e3494();
+    asdOperatorDeleteB();
     param_1->field_0x3f8 = 0;
   }
   if (param_1->field_0x400 != 0) {
-    FUN_002e3494();
+    asdOperatorDeleteB();
     param_1->field_0x400 = 0;
   }
   if (param_1->field_0x408 != 0) {
-    FUN_002e3494();
+    asdOperatorDeleteB();
     param_1->field_0x408 = 0;
   }
   if (param_1->field_0x410 != 0) {
-    FUN_002e3494();
+    asdOperatorDeleteB();
     param_1->field_0x410 = 0;
   }
   if (param_1->field_0x418 != 0) {
-    FUN_002e3494();
+    asdOperatorDeleteB();
     param_1->field_0x418 = 0;
   }
   if (param_1->field_0x428 != 0) {
-    FUN_002e3494();
+    asdOperatorDeleteB();
     param_1->field_0x428 = 0;
   }
   if (param_1->field_0x430 != 0) {
-    FUN_002e3494();
+    asdOperatorDeleteB();
     param_1->field_0x430 = 0;
   }
   if (param_1->field_0x438 != 0) {
-    FUN_002e3494();
+    asdOperatorDeleteB();
     param_1->field_0x438 = 0;
   }
   if (param_1->field_0x440 != 0) {
-    FUN_002e3494();
+    asdOperatorDeleteB();
     param_1->field_0x440 = 0;
   }
   return;

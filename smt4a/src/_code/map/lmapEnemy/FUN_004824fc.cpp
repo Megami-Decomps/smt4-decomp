@@ -20,7 +20,7 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned char LAB_004825d0; /* 0x4825d0 */
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_003fd76c. */
@@ -51,7 +51,7 @@ void FUN_004824fc(int param_1)
   *(unsigned int *)(param_1 + 0x78) = temp_v1;
   moriModelContentCopyBody();
   temp_v0 = *(int *)(*(int *)(param_1 + 0x78) + 4);
-  FUN_0040ace8(DAT_0056fcc0,temp_v0);
+  FUN_0040ace8(g_handleRegistry,temp_v0);
   *(unsigned int *)(temp_v0 + 4) = *(unsigned int *)(temp_v0 + 4) | 3;
   *(unsigned char *)(param_1 + 0xc) = *(unsigned char *)(param_1 + 0xc) | 2;
   temp_v2 = 0;

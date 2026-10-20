@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0030ea58(void);
+int libc_strcmp(void);
 
 typedef struct fn_0044cd4c_arg1 fn_0044cd4c_arg1;
 struct fn_0044cd4c_arg1 {
@@ -40,7 +40,7 @@ typedef struct {
     unsigned int sp70; /* 0x70: local_70 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_0030ea58. */
+/* Supplied declaration required: libc_strcmp. */
 
 
 void FUN_0044cd4c(int param_1,fn_0044cd4c_arg1 *param_2)
@@ -115,7 +115,7 @@ void FUN_0044cd4c(int param_1,fn_0044cd4c_arg1 *param_2)
           temp_v10 = piVar3 == (int *)0x0;
         }
         if (((!temp_v10) && (*(int *)(temp_v3 + 4) != 0 && temp_v3 + 4 + *(int *)(temp_v3 + 4) != 0)) &&
-           (FUN_0030ea58(), piVar3 == (int *)0x0)) break;
+           (libc_strcmp(), piVar3 == (int *)0x0)) break;
       }
       if (piVar17 != param_2->field_0x50) {
         puVar15 = (unsigned int *)0x0;
@@ -277,7 +277,7 @@ LAB_0044cfa4:;
                 temp_v10 = piVar8 == (int *)0x0;
               }
               if (((!temp_v10) && (piVar3[1] != 0 && (int)piVar3 + piVar3[1] + 4 != 0)) &&
-                 (FUN_0030ea58(), piVar8 == (int *)0x0)) break;
+                 (libc_strcmp(), piVar8 == (int *)0x0)) break;
             }
             if (piVar18 != param_2->field_0xb0) {
               *(int *)(temp_v0 + 0xc) = *piVar18;
@@ -297,7 +297,7 @@ LAB_0044cfa4:;
                 temp_v10 = temp_v9 == 0;
               }
               if (((!temp_v10) && (piVar3[1] != 0 && (int)piVar3 + piVar3[1] + 4 != 0)) &&
-                 (FUN_0030ea58(), temp_v9 == 0)) break;
+                 (libc_strcmp(), temp_v9 == 0)) break;
             }
             if (piVar18 != param_2->field_0xa0) {
               *(int *)(temp_v0 + 0x10) = *piVar18;
@@ -316,7 +316,7 @@ LAB_0044cfa4:;
                 temp_v10 = piVar8 == (int *)0x0;
               }
               if (((!temp_v10) && (piVar3[1] != 0 && (int)piVar3 + piVar3[1] + 4 != 0)) &&
-                 (FUN_0030ea58(), piVar8 == (int *)0x0)) break;
+                 (libc_strcmp(), piVar8 == (int *)0x0)) break;
             }
             if (piVar18 != param_2->field_0x90) {
               temp_v9 = *piVar18;
@@ -377,7 +377,7 @@ LAB_0044d55c:
                 temp_v10 = piVar8 == (int *)0x0;
               }
               if (((!temp_v10) && (piVar3[1] != 0 && (int)piVar3 + piVar3[1] + 4 != 0)) &&
-                 (FUN_0030ea58(), piVar8 == (int *)0x0)) break;
+                 (libc_strcmp(), piVar8 == (int *)0x0)) break;
             }
             if (piVar18 != param_2->field_0x80) {
               temp_v9 = *piVar18;
@@ -460,7 +460,7 @@ LAB_0044d6e4:;
           temp_v10 = piVar7 == (int *)0x0;
         }
         if (((!temp_v10) && (*(int *)(temp_v0 + 4) != 0 && temp_v0 + 4 + *(int *)(temp_v0 + 4) != 0)) &&
-           (FUN_0030ea58(), piVar7 == (int *)0x0)) break;
+           (libc_strcmp(), piVar7 == (int *)0x0)) break;
       }
       if (piVar19 != param_2->field_0x60) {
         puVar15 = (unsigned int *)0x0;

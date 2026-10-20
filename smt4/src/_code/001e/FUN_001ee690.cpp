@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0029f848(int, int, int, int, int, int);
 int FUN_002b7bca(...);
-int FUN_002b9024(void);
+int devilGetRecord(void);
 int memClear(int, int);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
@@ -21,12 +21,12 @@ extern int FUN_00206d4c(...); /* 0x206d4c */
 extern int FUN_002dc9d4(...); /* 0x2dc9d4 */
 extern int recordCompareByKey(...); /* 0x2dca6c */
 extern int FUN_002e45a8(...); /* 0x2e45a8 */
-extern int DAT_0044e190; /* 0x44e190 */
+extern int g_statusDown; /* 0x44e190 */
 
 /* Supplied declaration required: FUN_0029f848. */
 extern int FUN_002a0d0c(void);
 /* Supplied declaration required: FUN_002b7bca. */
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: memClear. */
 
 
@@ -43,14 +43,14 @@ void FUN_001ee690(int param_1)
   unsigned short *puVar7;
   unsigned char temp_v5;
   
-  temp_v2 = DAT_0044e190;
-  *(unsigned short *)(DAT_0044e190 + 0xdc8) = 0;
+  temp_v2 = g_statusDown;
+  *(unsigned short *)(g_statusDown + 0xdc8) = 0;
   *(unsigned short *)(temp_v2 + 0xdca) = 0;
   memClear(temp_v2 + 0x5c8,0x800);
   puVar7 = (unsigned short *)0x0;
   do {
     puVar5 = puVar7;
-    FUN_002b9024();
+    devilGetRecord();
     if (puVar5 != (unsigned short *)0x0) {
       temp_v1 = puVar5[3];
       temp_v5 = (temp_v1 & 1) != 0;
@@ -69,7 +69,7 @@ void FUN_001ee690(int param_1)
     puVar7 = (unsigned short *)(((int)puVar7 + 1U) & 0xffff);
   } while (puVar7 < (unsigned short *)0x500);
   FUN_0029f848(temp_v2 + 0xdcc,(int)*(short *)(temp_v2 + 0xdc8),0xb,1,0,1);
-  temp_v3 = DAT_0044e190;
+  temp_v3 = g_statusDown;
   temp_v4 = FUN_002a0d0c();
   if ((*(unsigned char *)(temp_v4 + 0x15) & 0x7f) == 1) {
     if ((char)*(unsigned char *)(temp_v4 + 0x15) < '\0') {

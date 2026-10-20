@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b0174(int);
+int asdFileRequestRelease(int);
 int FUN_002b26d4(unsigned char *, int);
 int resourceListDestroy(unsigned int);
 int asdMemFree(...);
@@ -23,7 +23,7 @@ extern unsigned char DAT_004dae3c; /* 0x4dae3c */
 extern unsigned char DAT_004dae48; /* 0x4dae48 */
 
 extern int FUN_00153228(unsigned char *, unsigned int *);
-/* Supplied declaration required: FUN_002b0174. */
+/* Supplied declaration required: asdFileRequestRelease. */
 /* Supplied declaration required: FUN_002b26d4. */
 /* Supplied declaration required: resourceListDestroy. */
 /* Supplied declaration required: asdMemFree. */
@@ -154,7 +154,7 @@ void FUN_00152894(unsigned int *param_1,int param_2,unsigned int param_3,int par
     asdMemFree(puVar1);
     DAT_00464b28 = DAT_00464b28 - 1;
     if (param_2 != 0) {
-      FUN_002b0174(param_2);
+      asdFileRequestRelease(param_2);
     }
   }
   asdMemFree(param_1[9]);

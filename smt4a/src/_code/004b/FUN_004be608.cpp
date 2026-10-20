@@ -9,10 +9,10 @@ int FUN_00163aa4(int);
 int FUN_001641b4(int);
 int sysPlaySe(...);
 int scrScriptProcessDestroy(void);
-int FUN_00203d04(int);
+int dialogClose(int);
 int FUN_00228b04(int, int);
 int FUN_0022e774(void);
-int FUN_00275f44(unsigned int);
+int scrScriptProcessStartEntry(unsigned int);
 int FUN_002c8538(int);
 int FUN_003343f0(int);
 int FUN_0034913c(void);
@@ -29,17 +29,17 @@ extern signed char DAT_0057f25c; /* 0x57f25c */
 /* Supplied declaration required: FUN_001641b4. */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: FUN_00203d04. */
+/* Supplied declaration required: dialogClose. */
 extern int FUN_00224880(unsigned int);
 /* Supplied declaration required: FUN_00228b04. */
 /* Supplied declaration required: FUN_0022e774. */
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 extern unsigned int FUN_002a4894(int);
 extern int FUN_002a4b60(void);
 /* Supplied declaration required: FUN_002c8538. */
 /* Supplied declaration required: FUN_003343f0. */
 /* Supplied declaration required: FUN_0034913c. */
-extern int FUN_00357bc8(unsigned int, char *);
+extern int tableGroupFindEntryIndex(unsigned int, char *);
 /* Supplied declaration required: FUN_0035d03c. */
 extern int FUN_003e4d68(unsigned int);
 /* Supplied declaration required: FUN_003e4e4c. */
@@ -157,13 +157,13 @@ unsigned int FUN_004be608(int param_1)
     temp_v0 = 0;
     FUN_001517b4(0,1);
     if (temp_v0 != 0) {
-      FUN_00203d04(1);
+      dialogClose(1);
       FUN_001641b4(0x100020e);
       *(unsigned int *)(param_1 + 8) = 10;
       *(unsigned int *)(param_1 + 0xc) = 6;
-      temp_v0 = FUN_00357bc8(*(unsigned int *)(param_1 + 0x31c),"SetMainPartner2");
+      temp_v0 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x31c),"SetMainPartner2");
       if (-1 < temp_v0) {
-        FUN_00275f44(*(unsigned int *)(param_1 + 800));
+        scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 800));
       }
     }
     break;

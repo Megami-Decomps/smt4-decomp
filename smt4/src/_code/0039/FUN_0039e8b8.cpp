@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00231bb8(int, float *);
 int FUN_0024692c(unsigned int);
 int FUN_002b0750(int, unsigned int, int, int, int, unsigned int, unsigned int, int);
-int FUN_002be304(unsigned int);
+int drawSetColorFromRGBA8(unsigned int);
 int FUN_002bed3c(void);
 int FUN_002bedb0(unsigned int, int);
 int FUN_002bee04(unsigned int, int, unsigned int);
@@ -28,7 +28,7 @@ extern unsigned int DAT_0049fcfc; /* 0x49fcfc */
 /* Supplied declaration required: FUN_00231bb8. */
 /* Supplied declaration required: FUN_0024692c. */
 /* Supplied declaration required: FUN_002b0750. */
-/* Supplied declaration required: FUN_002be304. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: FUN_002bedb0. */
 /* Supplied declaration required: FUN_002bee04. */
@@ -63,7 +63,7 @@ void FUN_0039e8b8(int param_1)
         temp_v0 = DAT_0049fcfc;
       }
       if (temp_v3 != 0 || temp_v0 != 0) {
-        FUN_002be304(*(unsigned int *)(temp_v2 + 0xed0));
+        drawSetColorFromRGBA8(*(unsigned int *)(temp_v2 + 0xed0));
         FUN_0024692c(*(unsigned int *)(temp_v2 + 0xed0) & 0xff);
         temp_v5 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v2 + 0xec4),
                                            (unsigned char)(in_fpscr >> 0x16) & 3);

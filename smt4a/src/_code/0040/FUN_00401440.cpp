@@ -12,7 +12,7 @@ int FUN_0040a918(unsigned int, int);
 int FUN_0040aad4(unsigned int, int);
 int FUN_0040ace8(unsigned int, unsigned int);
 
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 
 /* Supplied declaration required: FUN_003fd784. */
 /* Supplied declaration required: FUN_003fd7b4. */
@@ -48,7 +48,7 @@ unsigned int FUN_00401440(int param_1)
           temp_v2 = *(unsigned int *)(*(int *)(temp_v0 + 0x1c) + 4);
           FUN_003fe86c(temp_v2,0,2);
           FUN_003fd784(temp_v2);
-          FUN_0040ace8(DAT_0056fcc0,temp_v2);
+          FUN_0040ace8(g_handleRegistry,temp_v2);
         }
         temp_v1 = temp_v1 + 1;
       } while (temp_v1 < 3);

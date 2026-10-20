@@ -26,8 +26,8 @@ typedef struct {
     unsigned short sp28; /* 0x28: local_28 */
 } param_3_stack;
 
-extern int FUN_001801a4(void);
-extern int FUN_001ab854(int);
+extern int gameGetPlayerData(void);
+extern int gameGetSlotRecord(int);
 extern int FUN_00228ab0(void);
 extern int btlMainGetUnk14(void);
 extern int FUN_00291e14(void);
@@ -76,7 +76,7 @@ unsigned int FUN_00400564(int param_1,int param_2,fn_00400564_arg2 *param_3)
       temp_v2 = FUN_00228ab0();
     }
     else {
-      temp_v2 = FUN_001ab854(param_1);
+      temp_v2 = gameGetSlotRecord(param_1);
     }
     if (temp_v2 == 0) {
       return 3;
@@ -115,7 +115,7 @@ unsigned int FUN_00400564(int param_1,int param_2,fn_00400564_arg2 *param_3)
     }
   }
   else {
-    temp_v2 = FUN_001801a4();
+    temp_v2 = gameGetPlayerData();
     if ((((temp_v6 & 1) != 0) && ((*(unsigned short *)(temp_v2 + 0x5e) & 2) == 0)) &&
        (temp_v3 = temp_v2, FUN_002b4e7c(), temp_v3 != *(short *)(temp_v2 + 0x2a))) {
       temp_v4 = 1;

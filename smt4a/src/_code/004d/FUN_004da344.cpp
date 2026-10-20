@@ -14,8 +14,8 @@ typedef struct {
 } param_5_stack;
 
 /* Supplied declaration required: FUN_00184310. */
-extern int FUN_001ab854(void);
-extern int FUN_001ab888(void);
+extern int gameGetSlotRecord(void);
+extern int gameGetSlotTable(void);
 extern unsigned int computeCountLimit(void);
 extern int FUN_004da980(int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_004daf18. */
@@ -39,7 +39,7 @@ FUN_004da344(int param_1,unsigned int param_2,unsigned int param_3,int param_4,u
   unsigned int temp_v8;
   
   temp_v6 = 1;
-  temp_v0 = FUN_001ab888();
+  temp_v0 = gameGetSlotTable();
   if (param_5 != (unsigned char *)0x0) {
     *(unsigned int *)(param_5 + 4) = 0;
     *(unsigned short *)(param_5 + 8) = 0;
@@ -82,7 +82,7 @@ joined_r0x004da498:
   }
   temp_v1 = 0;
   while ((*(char *)(temp_v0 + temp_v1 + 0x1c88) < '\0' ||
-         (temp_v4 = FUN_001ab854(), (unsigned int)*(unsigned short *)(temp_v4 + 0x62) != (temp_v8 & 0x1ffff) >> 2))) {
+         (temp_v4 = gameGetSlotRecord(), (unsigned int)*(unsigned short *)(temp_v4 + 0x62) != (temp_v8 & 0x1ffff) >> 2))) {
     temp_v1 = temp_v1 + 1;
     if (temp_v1 >= 0x18) {
       if (param_5 != (unsigned char *)0x0) {

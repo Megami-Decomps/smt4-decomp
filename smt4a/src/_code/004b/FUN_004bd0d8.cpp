@@ -18,7 +18,7 @@ struct fn_004bd0d8_arg0 {
     char field_0x1e36; /* +0x1e36 */
 };
 
-extern int FUN_001ab888(void);
+extern int gameGetSlotTable(void);
 
 
 unsigned int FUN_004bd0d8(fn_004bd0d8_arg0 *param_1)
@@ -29,12 +29,12 @@ unsigned int FUN_004bd0d8(fn_004bd0d8_arg0 *param_1)
   int temp_v1;
   
   if (param_1 != (fn_004bd0d8_arg0 *)0x0) {
-    temp_v0 = FUN_001ab888();
+    temp_v0 = gameGetSlotTable();
     pfVar2 = (fn_004bd0d8_arg0 *)(temp_v0 + 0x68);
     temp_v0 = 0;
     do {
       if ((pfVar2 == param_1) || (pfVar2->field_0x66 == param_1->field_0x66)) {
-        temp_v1 = FUN_001ab888();
+        temp_v1 = gameGetSlotTable();
         if ((((*(char *)(temp_v1 + 0x1ca0) < 0) || (*(char *)(temp_v1 + 0x1ca0) != temp_v0)) &&
             ((*(char *)(temp_v1 + 0x1ca1) < 0 || (*(char *)(temp_v1 + 0x1ca1) != temp_v0)))) &&
            ((*(char *)(temp_v1 + 0x1ca2) < 0 || (*(char *)(temp_v1 + 0x1ca2) != temp_v0)))) {
@@ -47,7 +47,7 @@ unsigned int FUN_004bd0d8(fn_004bd0d8_arg0 *param_1)
     } while (temp_v0 < 0x18);
   }
   temp_v0 = -1;
-  temp_v1 = FUN_001ab888();
+  temp_v1 = gameGetSlotTable();
   if ((((*(char *)(temp_v1 + 0x1ca0) < 0) || (*(char *)(temp_v1 + 0x1ca0) != temp_v0)) &&
       ((*(char *)(temp_v1 + 0x1ca1) < 0 || (*(char *)(temp_v1 + 0x1ca1) != temp_v0)))) &&
      ((*(char *)(temp_v1 + 0x1ca2) < 0 || (*(char *)(temp_v1 + 0x1ca2) != temp_v0)))) {

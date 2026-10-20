@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_002e7232(...);
-int FUN_002e995c(unsigned char [4]);
+int sharedRefRelease(...);
+int onlineSockAddrConstruct(unsigned char [4]);
 int FUN_002f2a22(int, int *);
 int FUN_002f2ed4(int *, int *[2], unsigned char [4]);
 int FUN_002f2f82(int *, int *);
@@ -31,10 +31,10 @@ typedef struct {
 extern unsigned char DAT_005949d8; /* 0x5949d8 */
 
 extern int *FUN_0010979e(int *);
-/* Supplied declaration required: FUN_002e7232. */
-extern int FUN_002e760a(unsigned int);
-/* Supplied declaration required: FUN_002e995c. */
-extern unsigned int FUN_002ea4bc(void);
+/* Supplied declaration required: sharedRefRelease. */
+extern int operatorNew(unsigned int);
+/* Supplied declaration required: onlineSockAddrConstruct. */
+extern unsigned int onlineInstantiationContextGetCurrent(void);
 extern unsigned int FUN_002ece14(int, int *);
 /* Supplied declaration required: FUN_002f2a22. */
 /* Supplied declaration required: FUN_002f2ed4. */
@@ -74,7 +74,7 @@ void FUN_002f91dc(int param_1)
     temp_v3[0] = piVar4 + 0x10;
     if (*(char *)((int)piVar4 + 0x41) == '\0') {
       if (*(char *)(temp_v9 + 0xe) == '\0') {
-        temp_v0 = FUN_002ea4bc();
+        temp_v0 = onlineInstantiationContextGetCurrent();
         FUN_002f7218(temp_v0,1);
       }
       *(unsigned char *)(temp_v9 + 0xe) = 1;
@@ -85,14 +85,14 @@ void FUN_002f91dc(int param_1)
         if (temp_v3[0] != (int *)0x0) {
           if (*(char *)(temp_v7 + 4) != '\0') {
             if (*(int *)(temp_v8 + 0x10) != 0) {
-              temp_v1 = FUN_002e760a(0x20);
+              temp_v1 = operatorNew(0x20);
               temp_v0 = 0;
               if (temp_v1 != 0) {
                 temp_v0 = FUN_002ece14(temp_v1,temp_v3[0]);
               }
               temp_v6 = temp_v0;
               FUN_002f2faa(piVar4 + 0x32,temp_v0,piVar4 + 0x15);
-              FUN_002e7232(temp_v6);
+              sharedRefRelease(temp_v6);
             }
             else {
               FUN_002f2faa(piVar4 + 0x32,temp_v3[0],piVar4 + 0x15);
@@ -105,14 +105,14 @@ void FUN_002f91dc(int param_1)
             FUN_002f2a22(*(int *)(temp_v8 + 0x10),temp_v3[0]);
           }
           else {
-            FUN_002e7232(temp_v3[0]);
+            sharedRefRelease(temp_v3[0]);
           }
         }
         *(int *)(temp_v8 + 0x18) = *(int *)(temp_v8 + 0x18) + 1;
         (**(romwright_code **)(*piVar4 + 0xc))(piVar4,*(unsigned int *)(param_1 + 100));
       }
       if (*(char *)(temp_v7 + 4) != '\0') {
-        FUN_002e995c(temp_v5);
+        onlineSockAddrConstruct(temp_v5);
         temp_v4 = piVar4 + 0x32;
         while( 1 ) {
           piVar3 = temp_v4;

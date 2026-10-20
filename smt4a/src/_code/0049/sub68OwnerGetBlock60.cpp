@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern Sub68Owner *DAT_00587f28;
+extern Sub68Owner *g_naviMain;
 
 u8 *sub68OwnerGetBlock60(void)
 {
-    return DAT_00587f28->block60;
+    return g_naviMain->block60;
 }
 
 } /* extern "C" */

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00266f30(int);
 int FUN_00266fac(...);
 int FUN_00287aec(void);
-int FUN_002bf694(int, int);
+int libc_strcpy(int, int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -19,7 +19,7 @@ extern int DAT_00447e58; /* 0x447e58 */
 /* Supplied declaration required: FUN_00266f30. */
 /* Supplied declaration required: FUN_00266fac. */
 /* Supplied declaration required: FUN_00287aec. */
-/* Supplied declaration required: FUN_002bf694. */
+/* Supplied declaration required: libc_strcpy. */
 
 
 void FUN_001fa800(void)
@@ -45,7 +45,7 @@ void FUN_001fa800(void)
         *(unsigned char *)(DAT_00447e58 + 0xe0c) = 1;
         *(int *)(temp_v2 + 0xe10) = temp_v1;
         *(int *)(temp_v2 + 0xe14) = (int)*(short *)(temp_v2 + temp_v1 * 0x38 + 0x12);
-        FUN_002bf694(temp_v2 + 0xe1c,temp_v0 + 8);
+        libc_strcpy(temp_v2 + 0xe1c,temp_v0 + 8);
         FUN_00266fac(1,temp_v1);
         return;
       }

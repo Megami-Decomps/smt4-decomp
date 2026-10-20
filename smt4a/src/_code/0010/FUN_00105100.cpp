@@ -9,13 +9,13 @@ int FUN_0010cf68(int);
 int FUN_00120d42(void);
 int FUN_0012df0c(unsigned char [8], int *, int *, int *);
 int FUN_00132b14(void);
-int FUN_002e6e14(...);
+int asdOperatorDeleteArray(...);
 int FUN_002e6e34(unsigned char [12], unsigned int);
 int FUN_002e6e5c(unsigned char [12]);
-int FUN_002ea4bc(void);
+int onlineInstantiationContextGetCurrent(void);
 int FUN_002ea734(int *);
-int FUN_002eaa50(void);
-int FUN_002eabe8(unsigned int *);
+int onlineMutexLockIfNeeded(void);
+int onlineMutexUnlockIfNeeded(unsigned int *);
 int FUN_002eb46c(unsigned int *, int);
 int FUN_002eb638(int);
 int constructObj0055a284(int);
@@ -37,16 +37,16 @@ extern int FUN_0011c900(int);
 /* Supplied declaration required: FUN_00120d42. */
 /* Supplied declaration required: FUN_0012df0c. */
 /* Supplied declaration required: FUN_00132b14. */
-/* Supplied declaration required: FUN_002e6e14. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-extern int FUN_002e9f64(int);
-/* Supplied declaration required: FUN_002ea4bc. */
-extern unsigned int FUN_002ea714(void);
+extern int vectorDestroyWords(int);
+/* Supplied declaration required: onlineInstantiationContextGetCurrent. */
+extern unsigned int onlineGetActiveLock(void);
 /* Supplied declaration required: FUN_002ea734. */
 extern int wordRefsDiffer_002ea764(int *, unsigned int *);
-/* Supplied declaration required: FUN_002eaa50. */
-/* Supplied declaration required: FUN_002eabe8. */
+/* Supplied declaration required: onlineMutexLockIfNeeded. */
+/* Supplied declaration required: onlineMutexUnlockIfNeeded. */
 /* Supplied declaration required: FUN_002eb46c. */
 extern int FUN_002eb624(unsigned int *);
 /* Supplied declaration required: FUN_002eb638. */
@@ -70,15 +70,15 @@ void FUN_00105100(unsigned int *param_1)
   unsigned char temp_v8 [8];
   
   *param_1 = (unsigned int)&DAT_00558658;
-  FUN_002ea4bc();
+  onlineInstantiationContextGetCurrent();
   FUN_00120d42();
   if (*(char *)(param_1 + 4) != '\0') {
     FUN_001047fc(param_1);
   }
   *(unsigned char *)(param_1 + 0x24) = 1;
-  temp_v0 = FUN_002ea714();
+  temp_v0 = onlineGetActiveLock();
   FUN_002e6e34(temp_v4,temp_v0);
-  FUN_002eaa50();
+  onlineMutexLockIfNeeded();
   temp_v5 = *(int *)(param_1[0x19] + 8);
   while( 1 ) {
     temp_v3 = param_1[0x19];
@@ -89,11 +89,11 @@ void FUN_00105100(unsigned int *param_1)
     }
     FUN_002ea734(&temp_v5);
   }
-  FUN_002eabe8(param_1 + 0x3e);
+  onlineMutexUnlockIfNeeded(param_1 + 0x3e);
   FUN_002eb46c(param_1,1);
   FUN_002e6e5c(temp_v4);
   temp_v1 = FUN_002eb624(param_1 + 0x3e);
-  temp_v1 = FUN_002e9f64(temp_v1 - 0x14);
+  temp_v1 = vectorDestroyWords(temp_v1 - 0x14);
   temp_v1 = temp_v1 - 0x1c;
   FUN_002eb638(temp_v1);
   temp_v1 = temp_v1 - 0x1c;
@@ -112,8 +112,8 @@ void FUN_00105100(unsigned int *param_1)
     *(int *)(temp_v2 - 0x18) = temp_v1;
     while (piVar4 = (int *)*piVar5, piVar4 != (int *)0x0) {
       *piVar5 = *piVar4;
-      FUN_002e6e14(piVar4[2]);
-      FUN_002e6e14(piVar4);
+      asdOperatorDeleteArray(piVar4[2]);
+      asdOperatorDeleteArray(piVar4);
     }
   }
   temp_v2 = temp_v2 - 0x5c;

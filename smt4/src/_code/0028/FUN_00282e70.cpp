@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_0043dcf0; /* 0x43dcf0 */
+extern int g_partyPanel; /* 0x43dcf0 */
 
 extern int FUN_0029e908(int);
 extern int FUN_0029efa8(void);
@@ -19,9 +19,9 @@ unsigned int FUN_00282e70(unsigned int param_1,unsigned int param_2,int param_3)
   int temp_v0;
   int temp_v1;
   
-  temp_v1 = *(int *)(DAT_0043dcf0 + 0x20);
+  temp_v1 = *(int *)(g_partyPanel + 0x20);
   if (temp_v1 != 6) {
-    param_3 = *(int *)(DAT_0043dcf0 + 0x1c);
+    param_3 = *(int *)(g_partyPanel + 0x1c);
   }
   if (temp_v1 == 6 || param_3 == 6) {
     return 0;
@@ -31,13 +31,13 @@ unsigned int FUN_00282e70(unsigned int param_1,unsigned int param_2,int param_3)
       if (temp_v1 != 10 && param_3 != 10) {
         return 0;
       }
-      if (*(short *)(DAT_0043dcf0 + 0x38) < 0) {
+      if (*(short *)(g_partyPanel + 0x38) < 0) {
         return 1;
       }
       return 0;
     }
-    if (*(char *)(DAT_0043dcf0 + 0x42) != '\0') {
-      temp_v1 = DAT_0043dcf0 + 0xa6c;
+    if (*(char *)(g_partyPanel + 0x42) != '\0') {
+      temp_v1 = g_partyPanel + 0xa6c;
       temp_v0 = FUN_0029efa8();
       if (temp_v0 != 0) {
         return 0;
@@ -45,7 +45,7 @@ unsigned int FUN_00282e70(unsigned int param_1,unsigned int param_2,int param_3)
       temp_v1 = FUN_0029e908(temp_v1);
     }
     else {
-      temp_v1 = DAT_0043dcf0 + 0xa08;
+      temp_v1 = g_partyPanel + 0xa08;
       temp_v0 = FUN_0029efa8();
       if (temp_v0 != 0) {
         return 0;
@@ -54,7 +54,7 @@ unsigned int FUN_00282e70(unsigned int param_1,unsigned int param_2,int param_3)
     }
   }
   else {
-    temp_v1 = DAT_0043dcf0 + 0x8dc;
+    temp_v1 = g_partyPanel + 0x8dc;
     temp_v0 = FUN_0029efa8();
     if (temp_v0 != 0) {
       return 0;

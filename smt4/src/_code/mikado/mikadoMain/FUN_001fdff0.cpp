@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00254dfc(...);
 int FUN_002a7838(void);
-int FUN_002b2368(int);
+int asdMemFreeNonNull(int);
 int asdOperatorNew(void);
 int FUN_003b8158(void);
 int FUN_003ba734(unsigned int, unsigned short [2]);
@@ -27,7 +27,7 @@ extern unsigned int DAT_0044cfdc; /* 0x44cfdc */
 extern int FUN_00263c34(int);
 extern int FUN_00287314(int);
 /* Supplied declaration required: FUN_002a7838. */
-/* Supplied declaration required: FUN_002b2368. */
+/* Supplied declaration required: asdMemFreeNonNull. */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_003b8158. */
 /* Supplied declaration required: FUN_003ba734. */
@@ -61,7 +61,7 @@ unsigned int FUN_001fdff0(void)
           FUN_002a7838();
           if (*(int *)(temp_v1 + 8) != 0) {
             temp_v2 = FUN_00263c34(*(int *)(temp_v1 + 8) + 0x110);
-            FUN_002b2368(temp_v2 - 0x110);
+            asdMemFreeNonNull(temp_v2 - 0x110);
           }
           *(unsigned int *)(temp_v1 + 8) = 0;
         }

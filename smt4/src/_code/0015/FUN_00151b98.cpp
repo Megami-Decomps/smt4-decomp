@@ -8,7 +8,7 @@ int FUN_002a2e08(unsigned int);
 int FUN_002a2f08(unsigned int, unsigned char [4]);
 int FUN_002a301c(unsigned char [4]);
 int FUN_002ba81c(...);
-int FUN_002c30c4(...);
+int libc_strlen(...);
 
 /* stack frame of param_8: 14 slot(s), 56 byte(s) */
 typedef struct {
@@ -32,7 +32,7 @@ typedef struct {
 /* Supplied declaration required: FUN_002a2f08. */
 /* Supplied declaration required: FUN_002a301c. */
 /* Supplied declaration required: FUN_002ba81c. */
-/* Supplied declaration required: FUN_002c30c4. */
+/* Supplied declaration required: libc_strlen. */
 
 
 void FUN_00151b98(unsigned int param_1,unsigned int param_2,int param_3,unsigned int *param_4,
@@ -61,8 +61,8 @@ void FUN_00151b98(unsigned int param_1,unsigned int param_2,int param_3,unsigned
   unsigned int temp_v18;
   
   if (param_3 != 0) {
-    FUN_002c30c4(param_2);
-    FUN_002c30c4(param_3);
+    libc_strlen(param_2);
+    libc_strlen(param_3);
     FUN_002a301c(temp_v9);
     FUN_002ba81c(temp_v16,param_2,0x40);
     FUN_002ba81c(temp_v17,param_3,0x40);
@@ -80,7 +80,7 @@ void FUN_00151b98(unsigned int param_1,unsigned int param_2,int param_3,unsigned
     FUN_002a2e08(param_1);
     return;
   }
-  FUN_002c30c4(param_2);
+  libc_strlen(param_2);
   FUN_002a301c(temp_v0);
   FUN_002ba81c(temp_v7,param_2,0x40);
   temp_v5 = (unsigned int)param_5;

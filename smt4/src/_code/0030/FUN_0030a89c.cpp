@@ -2,11 +2,11 @@
 
 extern "C" {
 
-int FUN_002b8830(void);
+int buttonHelpSetPresetDefault(void);
 
 u32 FUN_0030a89c(void)
 {
-    FUN_002b8830();
+    buttonHelpSetPresetDefault();
     return 1;
 }
 

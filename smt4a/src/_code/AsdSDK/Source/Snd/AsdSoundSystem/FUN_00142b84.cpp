@@ -10,7 +10,7 @@ int FUN_0015de34(int *, unsigned int, unsigned int);
 int asdMemoryAlloc(int, int, int, unsigned int, int);
 int FUN_0016f368(void);
 int FUN_00171424(int);
-int FUN_00195fc8(void);
+int sysFatalBreak(void);
 
 /* stack frame of param_1: 9 slot(s), 27 byte(s) */
 typedef struct {
@@ -76,7 +76,7 @@ extern unsigned int FUN_0015e0c8(unsigned int *);
 /* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: FUN_0016f368. */
 /* Supplied declaration required: FUN_00171424. */
-/* Supplied declaration required: FUN_00195fc8. */
+/* Supplied declaration required: sysFatalBreak. */
 
 
 void FUN_00142b84(int param_1)
@@ -101,15 +101,15 @@ void FUN_00142b84(int param_1)
   temp_v0 = FUN_00158f64();
   temp_v0 = -(temp_v0 >> 0x1f);
   if (temp_v0 != 0) {
-    FUN_00195fc8();
+    sysFatalBreak();
   }
   FUN_00159030();
   if (temp_v0 < 0) {
-    FUN_00195fc8();
+    sysFatalBreak();
   }
   temp_v0 = FUN_00159d60();
   if (temp_v0 < 0) {
-    FUN_00195fc8();
+    sysFatalBreak();
   }
   FUN_0016f368();
   if (0 < param_1) {

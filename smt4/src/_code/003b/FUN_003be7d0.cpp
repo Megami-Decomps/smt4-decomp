@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002b06c4(void);
+int dataTable00FindById(void);
 
 extern int randRange(unsigned int);
 extern int btlGetMainState(void);
-/* Supplied declaration required: FUN_002b06c4. */
+/* Supplied declaration required: dataTable00FindById. */
 
 
 void FUN_003be7d0(unsigned int *param_1)
@@ -28,7 +28,7 @@ void FUN_003be7d0(unsigned int *param_1)
   temp_v0 = btlGetMainState();
   temp_v5 = temp_v0 + 0x174;
   temp_v1 = (unsigned int)*(unsigned short *)((int)param_1 + 0xce);
-  FUN_002b06c4();
+  dataTable00FindById();
   if (temp_v1 != 0) {
     temp_v7 = 0;
     *(int *)(temp_v0 + 0x1a8) = *(int *)(temp_v0 + 0x1a8) + *(int *)(temp_v1 + 0x6c);

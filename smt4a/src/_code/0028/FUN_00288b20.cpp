@@ -12,7 +12,7 @@ int FUN_00180310(...);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
 int FUN_00185e84(...);
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 int unitRecordBuild(...);
 int FUN_0035ad50(...);
 int FUN_00389d9c(...);
@@ -37,7 +37,7 @@ extern unsigned char LAB_00288efc; /* 0x288efc */
 extern unsigned char LAB_00288f34; /* 0x288f34 */
 extern unsigned char LAB_00289298; /* 0x289298 */
 extern unsigned char LAB_0028929c; /* 0x28929c */
-extern int DAT_00588fe8; /* 0x588fe8 */
+extern int g_statusDown; /* 0x588fe8 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00100388. */
@@ -50,7 +50,7 @@ extern unsigned int FUN_0014bd84(int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00185e84. */
 extern int slotRecordFindById(void);
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: dataTable04FindById. */
 extern int FUN_002a4894(void);
 extern unsigned int FUN_002a6a24(int);
 extern int FUN_002c2c68(int);
@@ -92,7 +92,7 @@ void FUN_00288b20(int param_1,int param_2,int param_3,int param_4,unsigned int p
   int iStack_2c;
   int temp_v16;
   
-  temp_v0 = DAT_00588fe8;
+  temp_v0 = g_statusDown;
   iStack_34 = param_1;
   iStack_30 = param_2;
   iStack_2c = param_3;
@@ -252,7 +252,7 @@ LAB_00288c34:
           temp_v10 = FUN_004bcbb4(temp_v11,param_3);
         }
         else {
-          FUN_001aba54();
+          dataTable04FindById();
           if (param_3 != 0) {
             temp_v10 = (unsigned int)*(unsigned char *)(param_3 + 0x22);
           }

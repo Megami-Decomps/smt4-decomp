@@ -2,11 +2,11 @@
 
 extern "C" {
 
-int FUN_00291050(void *obj);
+int cecMessageIdClear(void *obj);
 
 void *asdCecMessageIdInit(void *obj)
 {
-    FUN_00291050(obj);
+    cecMessageIdClear(obj);
     return obj;
 }
 

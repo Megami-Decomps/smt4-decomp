@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_001a8040(...);
+int bgmRestart(...);
 int runWinOpen(void);
 int FUN_002579bc(...);
 int FUN_00259294(...);
-int FUN_0026b584(...);
+int gameDataBlocksAddFlags(...);
 int FUN_00297468(...);
-int FUN_002a03a0(...);
-int FUN_002b8838(...);
+int soundChannelRequestIfEnabled(...);
+int buttonHelpSetPreset(...);
 int FUN_002bcc60(...);
 int FUN_002bcd44(void);
 int asdOperatorNew(...);
@@ -62,16 +62,16 @@ extern int FUN_003105f4(...); /* 0x3105f4 */
 extern unsigned char LAB_003f6eb4; /* 0x3f6eb4 */
 extern unsigned char LAB_003f6f74; /* 0x3f6f74 */
 extern unsigned char LAB_003f6ff0; /* 0x3f6ff0 */
-extern unsigned int *DAT_0043daa8; /* 0x43daa8 */
+extern unsigned int *g_campCec; /* 0x43daa8 */
 
-/* Supplied declaration required: FUN_001a8040. */
+/* Supplied declaration required: bgmRestart. */
 /* Supplied declaration required: runWinOpen. */
 /* Supplied declaration required: FUN_002579bc. */
 /* Supplied declaration required: FUN_00259294. */
-/* Supplied declaration required: FUN_0026b584. */
+/* Supplied declaration required: gameDataBlocksAddFlags. */
 /* Supplied declaration required: FUN_00297468. */
-/* Supplied declaration required: FUN_002a03a0. */
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: soundChannelRequestIfEnabled. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: FUN_002bcc60. */
 /* Supplied declaration required: FUN_002bcd44. */
 /* Supplied declaration required: asdOperatorNew. */
@@ -101,12 +101,12 @@ void FUN_001ffc5c(void)
   unsigned char *temp_v4;
   unsigned int *temp_v5 [2];
   
-  if (DAT_0043daa8 == (unsigned int *)0x0) {
+  if (g_campCec == (unsigned int *)0x0) {
     puVar1 = (unsigned int *)0x100;
     asdMemAlloc(0x100,0x100,0,0xd7c,1);
-    DAT_0043daa8 = puVar1;
+    g_campCec = puVar1;
   }
-  puVar1 = DAT_0043daa8;
+  puVar1 = g_campCec;
   memClear();
   puVar2 = &LAB_001fffcc;
   asdProcessCreateSimple(&LAB_001fffcc,1,0,0,&LAB_0018b20c,0,0);
@@ -152,18 +152,18 @@ void FUN_001ffc5c(void)
     puVar1[0x34a] = 0xd;
   }
   else {
-    FUN_002b8838(3);
+    buttonHelpSetPreset(3);
     *(unsigned char *)((int)puVar1 + 0xd61) = 0;
     *(unsigned char *)((int)puVar1 + 0xd62) = 1;
     *(unsigned char *)((int)puVar1 + 0xd63) = 0;
-    FUN_002b8838(0xb9);
+    buttonHelpSetPreset(0xb9);
     FUN_002579bc(0);
-    FUN_002d7330(DAT_0043daa8 + 0x28);
-    FUN_001a8040(0);
-    FUN_002a03a0(0x1000062,0,0x3c);
+    FUN_002d7330(g_campCec + 0x28);
+    bgmRestart(0);
+    soundChannelRequestIfEnabled(0x1000062,0,0x3c);
     runWinOpen();
     runWinOpenState();
-    FUN_0026b584(2);
+    gameDataBlocksAddFlags(2);
     FUN_00259294(2);
     *(unsigned char *)((int)puVar1 + 0xd65) = 0;
     puVar1[0x35a] = 0;

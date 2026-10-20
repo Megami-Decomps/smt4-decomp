@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00195fc8(void);
+int sysFatalBreak(void);
 int FUN_0019a46c(unsigned int, unsigned int, int);
 int FUN_001b57a8(...);
 int FUN_00427a10(unsigned int, unsigned char *);
@@ -27,9 +27,9 @@ extern unsigned char DAT_0061b080; /* 0x61b080 */
 extern signed char DAT_0061b2f8; /* 0x61b2f8 */
 
 extern int FUN_0015a410(void);
-extern int FUN_0015a75c(void);
+extern int appletIsExitRequested(void);
 extern unsigned int FUN_0016ccfc(void);
-/* Supplied declaration required: FUN_00195fc8. */
+/* Supplied declaration required: sysFatalBreak. */
 /* Supplied declaration required: FUN_0019a46c. */
 /* Supplied declaration required: FUN_001b57a8. */
 /* Supplied declaration required: FUN_00427a10. */
@@ -101,7 +101,7 @@ void FUN_00429580(unsigned int param_1,int *param_2,unsigned int *param_3,int pa
             temp_v1 = 2;
           }
           else {
-            FUN_00195fc8();
+            sysFatalBreak();
             temp_v1 = 0;
           }
         }
@@ -120,7 +120,7 @@ void FUN_00429580(unsigned int param_1,int *param_2,unsigned int *param_3,int pa
       DAT_0061b2f8 = *(char *)(temp_v6 + 0x98);
       temp_v1 = FUN_00427e28(temp_v7,&DAT_0061b000,0);
       if (-1 < temp_v1) {
-        temp_v1 = FUN_0015a75c();
+        temp_v1 = appletIsExitRequested();
         if ((temp_v1 == 0) && (temp_v1 = FUN_0015a410(), temp_v1 == 0)) {
           if ((*(char *)(temp_v6 + 0x98) == '\0') && (DAT_0061b2f8 != '\0')) {
             *(unsigned char *)(temp_v6 + 0x98) = 1;

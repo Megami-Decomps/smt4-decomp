@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_00152bec(void);
+int asdMdlManagerMarkDestroy(void);
 int asdMdlManagerDestroy(unsigned int);
-int FUN_002b2368(unsigned int *);
+int asdMemFreeNonNull(unsigned int *);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -16,9 +16,9 @@ typedef struct {
 
 extern unsigned char DAT_0042231c; /* 0x42231c */
 
-/* Supplied declaration required: FUN_00152bec. */
+/* Supplied declaration required: asdMdlManagerMarkDestroy. */
 /* Supplied declaration required: asdMdlManagerDestroy. */
-/* Supplied declaration required: FUN_002b2368. */
+/* Supplied declaration required: asdMemFreeNonNull. */
 
 
 void FUN_00395fd0(unsigned int *param_1)
@@ -34,11 +34,11 @@ void FUN_00395fd0(unsigned int *param_1)
     param_1[0x1a] = 0;
   }
   if (param_1[0x1b] != 0) {
-    FUN_00152bec();
+    asdMdlManagerMarkDestroy();
     asdMdlManagerDestroy(param_1[0x1b]);
     param_1[0x1b] = 0;
   }
-  FUN_002b2368(param_1);
+  asdMemFreeNonNull(param_1);
   return;
 }
 

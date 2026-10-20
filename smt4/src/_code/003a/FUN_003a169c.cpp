@@ -8,7 +8,7 @@ int FUN_00247bf4(void);
 int FUN_00285e44(int, int);
 int FUN_00289880(void);
 int FUN_002898e4(void);
-int FUN_0028d6d0(void);
+int buttonHelpCreate(void);
 int FUN_0028d9b0(void);
 int FUN_00297468(...);
 int asdTMTexTableLoadSprites(int);
@@ -24,7 +24,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00285e44. */
 /* Supplied declaration required: FUN_00289880. */
 /* Supplied declaration required: FUN_002898e4. */
-/* Supplied declaration required: FUN_0028d6d0. */
+/* Supplied declaration required: buttonHelpCreate. */
 /* Supplied declaration required: FUN_0028d9b0. */
 /* Supplied declaration required: FUN_00297468. */
 /* Supplied declaration required: asdTMTexTableLoadSprites. */
@@ -44,7 +44,7 @@ void FUN_003a169c(int param_1)
   FUN_002898e4();
   FUN_00289880();
   FUN_0028d9b0();
-  FUN_0028d6d0();
+  buttonHelpCreate();
   FUN_00297468("shop/shop.bf",param_1 + 0x160,0);
   asdTMTexTableLoadSprites(0x2b);
   FUN_002c58c8(0x2b,0);

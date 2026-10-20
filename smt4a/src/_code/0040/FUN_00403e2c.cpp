@@ -7,12 +7,12 @@ extern "C" {
 int FUN_001517b4(...);
 int FUN_00163aa4(int);
 int FUN_001641b4(...);
-int FUN_00184758(int, int, int);
-int FUN_00184c00(...);
+int uiSpriteSetKeyframe(int, int, int);
+int uiSpriteSetImageKeyframe(...);
 int FUN_0019de98(...);
 int FUN_00212724(void);
 int FUN_00228b04(int, int);
-int FUN_0023b27c(void);
+int useCounterStart(void);
 int FUN_0031f208(...);
 int FUN_0031f27c(int, int);
 int FUN_003450d4(int, unsigned int, int, int, int, int, unsigned char [16], int, int);
@@ -34,12 +34,12 @@ typedef struct {
 /* Supplied declaration required: FUN_001641b4. */
 extern int FUN_001643a0(void);
 extern unsigned int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00184758. */
-/* Supplied declaration required: FUN_00184c00. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_00212724. */
 /* Supplied declaration required: FUN_00228b04. */
-/* Supplied declaration required: FUN_0023b27c. */
+/* Supplied declaration required: useCounterStart. */
 extern unsigned int FUN_002a4860(int);
 extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_0031f208. */
@@ -83,8 +83,8 @@ void FUN_00403e2c(int param_1)
     if ((temp_v3 != 0) || (temp_v1 == 6)) {
       FUN_001641b4(0x100020e);
       FUN_00404974(param_1);
-      FUN_00184758(param_1 + 0x1d8,1,0);
-      FUN_00184c00(param_1 + 0x1d8,0);
+      uiSpriteSetKeyframe(param_1 + 0x1d8,1,0);
+      uiSpriteSetImageKeyframe(param_1 + 0x1d8,0);
       FUN_004029f4(param_1,5,7);
       return;
     }
@@ -92,8 +92,8 @@ void FUN_00403e2c(int param_1)
     FUN_001517b4();
     if (temp_v1 != 0) {
       FUN_001641b4(0x100020f);
-      FUN_00184758(param_1 + 0x14c,2,0);
-      FUN_00184c00(param_1 + 0x14c,1,0);
+      uiSpriteSetKeyframe(param_1 + 0x14c,2,0);
+      uiSpriteSetImageKeyframe(param_1 + 0x14c,1,0);
       FUN_00212724();
       FUN_004029f4(param_1,2,0);
     }
@@ -104,7 +104,7 @@ void FUN_00403e2c(int param_1)
         FUN_0031f27c(0x1e,0);
         FUN_0031f208(0x34);
         FUN_0031f208(0x1b);
-        FUN_0023b27c();
+        useCounterStart();
         FUN_0019de98(0,0xf4f4f4ff);
         FUN_001641b4(0x100020e);
         FUN_004029f4(param_1,8,0);

@@ -12,7 +12,7 @@ int FUN_001689e8(...);
 int FUN_00180310(...);
 int FUN_001834a4(...);
 int FUN_00183bb0(void);
-int FUN_00184e64(...);
+int drawSetColorFromRGBA8(...);
 int FUN_00192608(void);
 int FUN_0047fc38(void);
 int FUN_0048026c(...);
@@ -57,11 +57,11 @@ extern unsigned char LAB_002acdbc; /* 0x2acdbc */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_001676b0. */
 /* Supplied declaration required: FUN_001689e8. */
-extern unsigned short *FUN_001801a4(void);
+extern unsigned short *gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_00184e64. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_00192608. */
 extern unsigned int FUN_001ba3d4(int);
 extern int unitMatchesAlignment(int);
@@ -106,7 +106,7 @@ void FUN_002ac470(int param_1,int param_2,int param_3,int param_4,int param_5,un
   iStack_30 = param_2;
   temp_v21 = param_3;
   iStack_28 = param_4;
-  puVar3 = (unsigned short *)FUN_001801a4();
+  puVar3 = (unsigned short *)gameGetPlayerData();
   if (temp_v21 == 0) {
     return;
   }
@@ -150,7 +150,7 @@ void FUN_002ac470(int param_1,int param_2,int param_3,int param_4,int param_5,un
   temp_v11 = FUN_001834a4(0x14,0x520);
   temp_v9 = FUN_001ba3d4(temp_v21);
   FUN_00100388(temp_v10,&LAB_002ac904,temp_v9);
-  FUN_00184e64(param_6);
+  drawSetColorFromRGBA8(param_6);
   FUN_00180310(0,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v11 + 8) + param_4,
                (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v11 + 10) + param_5,1,2,0x6f,
                temp_v10);
@@ -189,7 +189,7 @@ LAB_002aca54:
         FUN_00192608();
         temp_v8 = *(unsigned int *)(temp_v8 + 0x24) & 0x3ff;
       }
-      FUN_00184e64(param_6);
+      drawSetColorFromRGBA8(param_6);
       temp_v7 = *(unsigned int *)(temp_v6 + 0x24) & 0x3ff;
       temp_v5 = temp_v7;
       if (temp_v7 < temp_v8) {
@@ -199,7 +199,7 @@ LAB_002aca54:
         temp_v5 = 0xa700ff;
       }
       if (temp_v7 != temp_v8) {
-        FUN_00184e64(temp_v5);
+        drawSetColorFromRGBA8(temp_v5);
       }
       temp_v4 = FUN_001834a4(0x14,0x535);
       FUN_00100388(temp_v10,&LAB_002ac904,*(unsigned int *)(temp_v6 + 0x24) & 0x3ff);
@@ -229,7 +229,7 @@ LAB_002aca54:
       else {
         FUN_00100388(temp_v10,&LAB_002acdac,temp_v0 & 0xf,temp_v0 >> 4);
       }
-      FUN_00184e64(param_6);
+      drawSetColorFromRGBA8(param_6);
       temp_v6 = FUN_001834a4(0x14,0x539);
       FUN_00180310(0,(int)*(short *)(temp_v6 + 8) + (int)*(short *)(temp_v2 + 8) + param_4,
                    (int)*(short *)(temp_v6 + 10) + (int)*(short *)(temp_v2 + 10) + param_5,1,3,0x6f,
@@ -267,9 +267,9 @@ LAB_002acc48:
         FUN_00192608();
         temp_v3 = (int)*(short *)(temp_v8 + 0x38) + (int)(*(short *)((unsigned char *)&temp_v17 + 2));
       }
-      FUN_00184e64(param_6);
+      drawSetColorFromRGBA8(param_6);
       if (temp_v4 != temp_v6) {
-        FUN_00184e64();
+        drawSetColorFromRGBA8();
       }
       temp_v6 = FUN_001834a4(0x14,0x54f);
       FUN_00100388(temp_v10,&LAB_002acdbc,temp_v4);
@@ -277,7 +277,7 @@ LAB_002acc48:
                    (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v6 + 10) + param_5,1,5,0x6f,
                    temp_v10);
       FUN_00183bb0();
-      FUN_00184e64(param_6);
+      drawSetColorFromRGBA8(param_6);
       temp_v6 = temp_v16;
       if (temp_v16 < temp_v3) {
         temp_v6 = -0x23f0eb01;
@@ -286,7 +286,7 @@ LAB_002acc48:
         temp_v6 = 0xa700ff;
       }
       if (temp_v16 != temp_v3) {
-        FUN_00184e64(temp_v6);
+        drawSetColorFromRGBA8(temp_v6);
       }
       temp_v6 = FUN_001834a4(0x14,0x554);
       FUN_00100388(temp_v10,&LAB_002acdbc,temp_v16);
@@ -311,7 +311,7 @@ LAB_002ac704:
     FUN_00192608();
     temp_v8 = *(unsigned int *)(temp_v8 + 0x24) & 0x3ff;
   }
-  FUN_00184e64(param_6);
+  drawSetColorFromRGBA8(param_6);
   temp_v7 = *(unsigned int *)(temp_v6 + 0x24) & 0x3ff;
   temp_v5 = temp_v7;
   if (temp_v7 < temp_v8) {
@@ -321,7 +321,7 @@ LAB_002ac704:
     temp_v5 = 0xa700ff;
   }
   if (temp_v7 != temp_v8) {
-    FUN_00184e64(temp_v5);
+    drawSetColorFromRGBA8(temp_v5);
   }
   temp_v4 = FUN_001834a4(0x14,0x518);
   FUN_00100388(temp_v10,&LAB_002ac904,*(unsigned int *)(temp_v6 + 0x24) & 0x3ff);

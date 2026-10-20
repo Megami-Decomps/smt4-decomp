@@ -28,7 +28,7 @@ typedef struct {
 
 extern unsigned int g_btlScriptUnit; /* 0x43427c */
 extern int g_btlMainState; /* 0x435d90 */
-extern unsigned int DAT_00439ca8; /* 0x439ca8 */
+extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 
 /* Supplied declaration required: FUN_00245a7c. */
 extern int FUN_00245c78(void);
@@ -195,7 +195,7 @@ LAB_00308fb8:
                      (((*puVar9 & 0x80) == 0 && ((*puVar9 & 0x1000) == 0)))) {
                     temp_v2 = 0;
                   }
-                  FUN_003af0c4(DAT_00439ca8,temp_v2 ^ 1);
+                  FUN_003af0c4(g_btlUiBlock,temp_v2 ^ 1);
                 }
                 temp_v4 = FUN_00245c78();
                 if ((((temp_v4 != 0) &&
@@ -228,7 +228,7 @@ LAB_00308fb8:
           }
 LAB_003092e8:
           *puVar8 = *puVar8 & 0xfeffdf7f;
-          FUN_003ae3cc(DAT_00439ca8);
+          FUN_003ae3cc(g_btlUiBlock);
           pcVar7 = (char *)(param_1 + 0x44b5);
           if ((*puVar8 & 4) != 0) {
             pcVar5 = (char *)(param_1 + 0x44b4);
@@ -274,7 +274,7 @@ LAB_003092e8:
        ((*puVar8 & 0x80) == 0 && (*puVar8 & 0x1000000) == 0)) {
       FUN_00254ec8(param_1);
     }
-    FUN_00254e4c(DAT_00439ca8);
+    FUN_00254e4c(g_btlUiBlock);
     *puVar8 = *puVar8 & 0xfeffff7f;
     temp_v3 = 0xc;
 joined_r0x003092c8:

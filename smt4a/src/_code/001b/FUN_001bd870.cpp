@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_001a08d8(int *);
-int FUN_001af148(void);
+int nn_os_LightEvent_Signal(int *);
+int nn_os_LightEvent_Wait(void);
 int FUN_001c7598(void);
 int FUN_001c76b8(void);
 int FUN_001cd5ac(void);
@@ -21,7 +21,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } void_stack;
 
-extern unsigned char DAT_00643380; /* 0x643380 */
+extern unsigned char g_nnSndMasterManager; /* 0x643380 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: coproc_moveto_Data_Synchronization (CALLOTHER). */
@@ -29,8 +29,8 @@ extern unsigned char DAT_00643380; /* 0x643380 */
 #define ROMWRIGHT_CARRY_4_DEFINED
 #define romwright_carry_4(left, right) ((unsigned char)((unsigned long long)(unsigned int)(left) + (unsigned long long)(unsigned int)(right) > 0xffffffffULL))
 #endif
-/* Supplied declaration required: FUN_001a08d8. */
-/* Supplied declaration required: FUN_001af148. */
+/* Supplied declaration required: nn_os_LightEvent_Signal. */
+/* Supplied declaration required: nn_os_LightEvent_Wait. */
 extern int *FUN_001afa44(void);
 /* Supplied declaration required: FUN_001c7598. */
 /* Supplied declaration required: FUN_001c76b8. */
@@ -80,8 +80,8 @@ void FUN_001bd870(void)
     temp_v0 = *(char *)((int)piVar2 + 0xe);
     temp_v2 = 0;
     if ((int)temp_v0 != 0) {
-      nn_snd_CTR_MasterManager_GetAuxCallback(&DAT_00643380,0,&temp_v6,temp_v8);
-      nn_snd_CTR_MasterManager_GetAuxCallback(&DAT_00643380,1,&iStack_34,temp_v9);
+      nn_snd_CTR_MasterManager_GetAuxCallback(&g_nnSndMasterManager,0,&temp_v6,temp_v8);
+      nn_snd_CTR_MasterManager_GetAuxCallback(&g_nnSndMasterManager,1,&iStack_34,temp_v9);
       temp_v2 = 0;
       if (temp_v6 != 0 || iStack_34 != 0) {
         temp_v2 = 1;
@@ -90,7 +90,7 @@ void FUN_001bd870(void)
     temp_v2 = (int)temp_v0 & (temp_v2 | temp_v1 != 0);
     if (temp_v2 != 0) {
       coproc_moveto_Data_Synchronization(0);
-      FUN_001a08d8(piVar2 + 0x10);
+      nn_os_LightEvent_Signal(piVar2 + 0x10);
     }
     if (((char)piVar2[0xc] == '\0') && ((romwright_code *)piVar2[10] != (romwright_code *)0x0)) {
       (*(romwright_code *)piVar2[10])(piVar2[0xb]);
@@ -101,7 +101,7 @@ void FUN_001bd870(void)
       nn_os_CriticalSection_Leave((unsigned int)(piVar2 + 0xd));
     }
     if (temp_v2 != 0) {
-      FUN_001af148();
+      nn_os_LightEvent_Wait();
     }
     nn_os_CriticalSection_Enter((unsigned int)(piVar2 + 0xd));
     FUN_001c76b8();

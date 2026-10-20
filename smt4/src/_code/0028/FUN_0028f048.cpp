@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_002ae9ec(int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
-int FUN_002b06c4(void);
-int FUN_002b9024(...);
+int dataTable00FindById(void);
+int devilGetRecord(...);
 int FUN_00388eb4(unsigned int, unsigned int, int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 
 /* stack frame of param_5: 2 slot(s), 8 byte(s) */
@@ -18,10 +18,10 @@ typedef struct {
 extern unsigned int g_aocSystem; /* 0x433158 */
 
 extern int FUN_00248674(unsigned int, unsigned int, unsigned int);
-extern int FUN_002a60b4(unsigned int);
+extern int asdTMTexTableNodeIsLoaded(unsigned int);
 /* Supplied declaration required: FUN_002ae9ec. */
-/* Supplied declaration required: FUN_002b06c4. */
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: dataTable00FindById. */
+/* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: FUN_00388eb4. */
 
 
@@ -50,12 +50,12 @@ void FUN_0028f048(unsigned int param_1,unsigned int param_2,unsigned int param_3
     }
     else {
       temp_v3 = param_1 & 0xffff;
-      FUN_002b9024();
+      devilGetRecord();
       if (temp_v3 == 0) {
         return;
       }
       temp_v0 = param_1;
-      FUN_002b06c4();
+      dataTable00FindById();
       if ((*(unsigned char *)(temp_v0 + 3) & 1) != 0) {
         temp_v3 = (unsigned int)*(short *)(temp_v0 + 0x88);
         temp_v5 = 0x23;
@@ -74,12 +74,12 @@ void FUN_0028f048(unsigned int param_1,unsigned int param_2,unsigned int param_3
   temp_v4 = 0x17;
   if ((param_5 != 0) && (-1 < (int)param_1)) {
     temp_v0 = param_1;
-    FUN_002b9024(temp_v0,param_1);
+    devilGetRecord(temp_v0,param_1);
     if (temp_v0 == 0) {
       return;
     }
     temp_v1 = param_1;
-    FUN_002b06c4();
+    dataTable00FindById();
     if ((*(unsigned char *)(temp_v1 + 3) & 1) != 0) {
       temp_v4 = 0x23;
       if (*(short *)(temp_v1 + 0x88) >= 0x81) {
@@ -90,7 +90,7 @@ void FUN_0028f048(unsigned int param_1,unsigned int param_2,unsigned int param_3
       return;
     }
   }
-  temp_v2 = FUN_002a60b4(temp_v4);
+  temp_v2 = asdTMTexTableNodeIsLoaded(temp_v4);
   if (temp_v2 != 0) {
     temp_v2 = FUN_00248674(g_aocSystem,temp_v5,temp_v3);
     if (temp_v2 == 0) {

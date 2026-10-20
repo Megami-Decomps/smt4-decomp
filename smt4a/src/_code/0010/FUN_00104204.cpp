@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002e9ec8(int, unsigned int);
+int onlineInstanceTableFind(int, unsigned int);
 int FUN_002ea214(int, unsigned char [12]);
 int FUN_002ea3d0(int, unsigned int);
 int FUN_002ea41e(unsigned char [12], int);
-int FUN_002ea43c(int);
-int FUN_002ea446(int, int);
+int onlineJobSetStateDone(int);
+int onlineJobSetStateTimed(int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -20,16 +20,16 @@ extern unsigned char LAB_00104288; /* 0x104288 */
 extern unsigned char LAB_0010428d; /* 0x10428d */
 
 extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
-extern int FUN_002e9af4(void);
-/* Supplied declaration required: FUN_002e9ec8. */
+extern int onlineInstanceTableGetCurrent(void);
+/* Supplied declaration required: onlineInstanceTableFind. */
 /* Supplied declaration required: FUN_002ea214. */
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned char *, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
-extern int FUN_002ea408(void);
+extern int onlineCallContextIsDone(void);
 /* Supplied declaration required: FUN_002ea41e. */
 extern int wordRefsEqual_002ea42c(unsigned char *, unsigned int);
-/* Supplied declaration required: FUN_002ea43c. */
-/* Supplied declaration required: FUN_002ea446. */
+/* Supplied declaration required: onlineJobSetStateDone. */
+/* Supplied declaration required: onlineJobSetStateTimed. */
 
 
 void FUN_00104204(int param_1)
@@ -43,10 +43,10 @@ void FUN_00104204(int param_1)
   unsigned char temp_v4 [12];
   unsigned int temp_v5 [2];
   
-  temp_v0 = FUN_002e9af4();
-  FUN_002e9ec8(temp_v0,*(unsigned int *)(param_1 + 0xe0));
+  temp_v0 = onlineInstanceTableGetCurrent();
+  onlineInstanceTableFind(temp_v0,*(unsigned int *)(param_1 + 0xe0));
   if (temp_v0 != 0) {
-    temp_v0 = FUN_002ea408();
+    temp_v0 = onlineCallContextIsDone();
     if (temp_v0 != 0) {
       FUN_002ea41e(temp_v2,param_1 + 0x68);
       temp_v5[0] = 0x80680006;
@@ -61,11 +61,11 @@ void FUN_00104204(int param_1)
       }
     }
     else {
-      FUN_002ea446(param_1,0xfa);
+      onlineJobSetStateTimed(param_1,0xfa);
     }
   }
   else {
-    FUN_002ea43c(param_1);
+    onlineJobSetStateDone(param_1);
   }
   return;
 }

@@ -12,7 +12,7 @@ int FUN_0029ee6c(...);
 int FUN_002a87e8(void);
 int FUN_002ae5e0(void);
 int FUN_002b8454(...);
-int FUN_002b8838(...);
+int buttonHelpSetPreset(...);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -30,7 +30,7 @@ extern int FUN_002335f8(int, unsigned int);
 /* Supplied declaration required: FUN_002a87e8. */
 /* Supplied declaration required: FUN_002ae5e0. */
 /* Supplied declaration required: FUN_002b8454. */
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 extern int FUN_0039411c(int);
 
 
@@ -46,7 +46,7 @@ void FUN_0023392c(unsigned int *param_1,unsigned int param_2,int param_3)
   switch(param_2) {
   case 0:
     *param_1 = *param_1 | 0x100000;
-    FUN_002b8838(0xc9);
+    buttonHelpSetPreset(0xc9);
     temp_v2 = 0;
     do {
       FUN_002a87e8();
@@ -57,7 +57,7 @@ void FUN_0023392c(unsigned int *param_1,unsigned int param_2,int param_3)
   case 1:
     *param_1 = *param_1 | 0x100000;
     if (param_3 != 0) {
-      FUN_002b8838(0xca);
+      buttonHelpSetPreset(0xca);
       temp_v2 = 0;
       do {
         FUN_002a87e8();
@@ -77,7 +77,7 @@ void FUN_0023392c(unsigned int *param_1,unsigned int param_2,int param_3)
     temp_v2 = g_aocMain;
     FUN_0023360c(param_1 + 0x90);
     if (param_3 != 0) {
-      FUN_002b8838(0xcb);
+      buttonHelpSetPreset(0xcb);
       temp_v1 = 0;
       do {
         FUN_002a87e8();
@@ -138,7 +138,7 @@ void FUN_0023392c(unsigned int *param_1,unsigned int param_2,int param_3)
   case 3:
     *param_1 = *param_1 | 0x100000;
     if (param_3 != 0) {
-      FUN_002b8838(0xca);
+      buttonHelpSetPreset(0xca);
       temp_v2 = 0;
       do {
         FUN_002a87e8();
@@ -158,7 +158,7 @@ void FUN_0023392c(unsigned int *param_1,unsigned int param_2,int param_3)
   case 4:
     *param_1 = *param_1 | 0x100000;
     if (param_3 != 0) {
-      FUN_002b8838(0xce);
+      buttonHelpSetPreset(0xce);
       return;
     }
     break;

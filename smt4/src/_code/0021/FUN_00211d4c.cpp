@@ -14,7 +14,7 @@ typedef struct Handle {
     /* 0x64 */ u8 waiting;
 } Handle;
 
-extern s32 FUN_002893d8(void);
+extern s32 scrGetCommandFrame(void);
 extern s32 jobIsValid(void);
 extern Handle *jobGetWork(u32 id);
 extern void jobStop(u32 id, s32 arg);
@@ -32,7 +32,7 @@ u32 FUN_00211d4c(void)
             return 1;
         }
         if (handle->waiting != 0) {
-            if (FUN_002893d8() == 0) {
+            if (scrGetCommandFrame() == 0) {
                 handle->nudged = 1;
                 handle->nudge = -0.1f;
             }

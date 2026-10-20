@@ -1,4 +1,4 @@
-/* NON_MATCHING: temporaries after the FUN_002e6dd4 call land in r0/r1 where retail uses r1/r2. */
+/* NON_MATCHING: temporaries after the rt_memclr call land in r0/r1 where retail uses r1/r2. */
 #include "common.h"
 
 extern "C" {
@@ -19,8 +19,8 @@ typedef struct {
     u8 sub[1];          /* 0xf76 */
 } Record;
 
-int FUN_001cd24c(u8 *sub);
-int FUN_002e6dd4(u8 *buffer, int size);
+int wordTripleClear(u8 *sub);
+int rt_memclr(u8 *buffer, int size);
 int sysMemClear(u8 *buffer, int size);
 
 /* Resets the record to its initial state: tables cleared, index = -1. */
@@ -34,10 +34,10 @@ void FUN_0018c740(Record *record)
     record->enabled = 1;
     record->unkEE5 = 0;
     record->unkEE6 = 0;
-    FUN_002e6dd4(record->buffer, 0x89);
+    rt_memclr(record->buffer, 0x89);
     record->index = -1;
     record->unkF74 = 0;
-    FUN_001cd24c(record->sub);
+    wordTripleClear(record->sub);
 }
 
 } /* extern "C" */

@@ -7,13 +7,13 @@ typedef struct DisplayState {
     /* 0x1C8 */ s32 mode;
 } DisplayState;
 
-extern DisplayState DAT_0063fd88;
+extern DisplayState g_asdGxPresets;
 extern s32 nngxIsStereoVisionAllowed(void);
 
 /* True when the display mode is 1 and stereoscopic 3D is allowed. */
 u32 displayIsStereoActive(void)
 {
-    if (DAT_0063fd88.mode == 1 && nngxIsStereoVisionAllowed() != 0) {
+    if (g_asdGxPresets.mode == 1 && nngxIsStereoVisionAllowed() != 0) {
         return 1;
     }
     return 0;

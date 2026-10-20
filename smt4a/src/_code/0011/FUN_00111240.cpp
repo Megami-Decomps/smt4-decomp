@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6dd4(int, int);
+int rt_memclr(int, int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -14,9 +14,9 @@ typedef struct {
 extern unsigned char DAT_00558de4; /* 0x558de4 */
 extern unsigned char DAT_00559454; /* 0x559454 */
 
-/* Supplied declaration required: FUN_002e6dd4. */
+/* Supplied declaration required: rt_memclr. */
 extern int FUN_002e7908(int, unsigned int *);
-extern int FUN_002ed912(int);
+extern int vectorInitEmpty2(int);
 extern int FUN_002f5928(int, unsigned int);
 extern int FUN_002fd020(int);
 extern int FUN_0043b028(unsigned int *);
@@ -36,7 +36,7 @@ void FUN_00111240(unsigned int *param_1,unsigned int param_2,unsigned int param_
   *(unsigned char *)((int)param_1 + 0xd) = 1;
   *(unsigned char *)((int)param_1 + 0xe) = 1;
   temp_v1 = param_4;
-  FUN_002e6dd4((int)param_1 + 0xf,0x29);
+  rt_memclr((int)param_1 + 0xf,0x29);
   *param_1 = (unsigned int)&DAT_00559454;
   temp_v0 = FUN_0043b028(param_1 + 0xe);
   temp_v0 = FUN_002fd020(temp_v0 + 0x10);
@@ -51,7 +51,7 @@ void FUN_00111240(unsigned int *param_1,unsigned int param_2,unsigned int param_
   *(unsigned int *)(temp_v0 + 0x38) = 0;
   *(unsigned int *)(temp_v0 + 0x40) = 0;
   *(unsigned int *)(temp_v0 + 0x3c) = 0x4000;
-  temp_v0 = FUN_002ed912(temp_v0 + 0x44);
+  temp_v0 = vectorInitEmpty2(temp_v0 + 0x44);
   *(unsigned int *)(temp_v0 + 0xc) = 0;
   *(unsigned int *)(temp_v0 + 0x10) = 0;
   *(unsigned char *)(temp_v0 + 0x14) = 0;

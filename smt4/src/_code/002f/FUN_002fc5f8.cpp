@@ -21,7 +21,7 @@ extern int FUN_0024ecc0(int, unsigned int);
 /* Supplied declaration required: FUN_002a880c. */
 /* Supplied declaration required: FUN_002bf6fc. */
 /* Supplied declaration required: jobGetWork. */
-extern int FUN_002c09d0(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 
 
 void FUN_002fc5f8(int param_1,unsigned int param_2,int param_3,unsigned int param_4,unsigned int param_5,
@@ -34,7 +34,7 @@ void FUN_002fc5f8(int param_1,unsigned int param_2,int param_3,unsigned int para
   unsigned int temp_v1;
   
   temp_v1 = param_4;
-  temp_v0 = FUN_002c09d0(0x522);
+  temp_v0 = gameFlagIsSet(0x522);
   if ((temp_v0 != 0) && (param_1 == 0)) {
     return;
   }

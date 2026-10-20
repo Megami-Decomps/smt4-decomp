@@ -21,9 +21,9 @@ typedef struct Globals {
     /* 0x08 */ Banner *banner;
 } Globals;
 
-extern Globals DAT_0043e188;
+extern Globals g_messageMain;
 
-int FUN_002b8da0(void *window, int arg);
+int pairSetFirstResetSecond(void *window, int arg);
 int FUN_002bd954(void *window, int arg1, u32 arg2, void *text, float scale, int arg5);
 int FUN_002bee58(void *window, int arg);
 u32 FUN_0028fb40(void);
@@ -31,7 +31,7 @@ u32 FUN_0028fb40(void);
 /* Script command: shows the banner with `id`: stamps the time, sets up its window with the text and starts it. */
 u32 bannerShow(u32 id)
 {
-    Banner *banner = DAT_0043e188.banner;
+    Banner *banner = g_messageMain.banner;
     u32 now;
 
     banner->visible = 1;
@@ -41,7 +41,7 @@ u32 bannerShow(u32 id)
     banner->timeStart = now;
     banner->timeCurrent = now;
     FUN_002bd954(banner->window, 14, 0xffffffff, banner->text, 1.0f, 11);
-    FUN_002b8da0(banner->window, 10);
+    pairSetFirstResetSecond(banner->window, 10);
     FUN_002bee58(banner->window, 6);
     return 1;
 }

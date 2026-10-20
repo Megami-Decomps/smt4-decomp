@@ -33,7 +33,7 @@ extern unsigned char DAT_0057f438; /* 0x57f438 */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
-extern int FUN_0018206c(unsigned int, unsigned int);
+extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001acf98. */
 extern int FUN_00341940(unsigned int);
 
@@ -75,7 +75,7 @@ void FUN_0036fad8(unsigned char param_1)
     asdTMTexTableLoadTmx(0x35,0);
     DAT_0057f3c4 = 0;
   }
-  temp_v0 = FUN_0018206c(DAT_0057f430,DAT_0057f434);
+  temp_v0 = asdTMTexTableNodeIsLoaded(DAT_0057f430,DAT_0057f434);
   if (temp_v0 == 0) {
     FUN_001acf98(DAT_0057f430,DAT_0057f434);
     DAT_0057f438 = 1;

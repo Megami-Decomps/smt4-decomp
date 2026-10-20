@@ -26,7 +26,7 @@ typedef struct {
 
 extern unsigned char LAB_003ae494; /* 0x3ae494 */
 
-extern int FUN_00162e8c(void);
+extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_003534b0. */
 extern int FUN_00376f94(void);
 
@@ -38,7 +38,7 @@ void FUN_003ae3c4(void)
   int temp_v0;
   int temp_v1;
   
-  temp_v0 = FUN_00162e8c();
+  temp_v0 = gameFlagsGetBlock();
   temp_v1 = FUN_00376f94();
   if ((*(char *)(temp_v0 + 0x1664) != '\0') && (temp_v1 >= 100)) {
     FUN_003534b0(0,0,&LAB_003ae494,0x58,0,0xffffffff,0,0,0,0,0,0,0,0,0,0,0,0,0);

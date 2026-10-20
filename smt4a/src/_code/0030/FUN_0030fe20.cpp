@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002f4cac(int);
-int FUN_0030fe6c(int *, unsigned int *, unsigned int);
+int iterAddOffset(int *, unsigned int *, unsigned int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -14,7 +14,7 @@ typedef struct {
 
 extern unsigned int rt_malloc(unsigned int);
 /* Supplied declaration required: FUN_002f4cac. */
-/* Supplied declaration required: FUN_0030fe6c. */
+/* Supplied declaration required: iterAddOffset. */
 
 
 void FUN_0030fe20(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -33,7 +33,7 @@ void FUN_0030fe20(int param_1,unsigned int param_2,unsigned int param_3,unsigned
     }
     temp_v0 = rt_malloc(param_2);
     *puVar2 = temp_v0;
-    FUN_0030fe6c(&temp_v1,puVar2,param_2);
+    iterAddOffset(&temp_v1,puVar2,param_2);
     temp_v0 = temp_v1;
   }
   else {

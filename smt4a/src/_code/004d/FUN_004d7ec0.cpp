@@ -5,7 +5,7 @@
 extern "C" {
 
 int sysPlaySe(int);
-int FUN_00275f44(unsigned int);
+int scrScriptProcessStartEntry(unsigned int);
 int FUN_004d7ca8(unsigned int *, int);
 int FUN_004f741c(int);
 int FUN_004f89e8(int);
@@ -21,7 +21,7 @@ extern unsigned int DAT_005738b8; /* 0x5738b8 */
 extern unsigned int DAT_005738bc; /* 0x5738bc */
 
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_004d7ca8. */
 /* Supplied declaration required: FUN_004f741c. */
 /* Supplied declaration required: FUN_004f89e8. */
@@ -74,7 +74,7 @@ LAB_004d7eec:
   if ((int)param_1[8] < 0) {
     return;
   }
-  FUN_00275f44(param_1[5]);
+  scrScriptProcessStartEntry(param_1[5]);
   *param_1 = 10;
   puVar4 = (unsigned int *)(param_2 + 0x45a0);
   param_1[10] = 0;

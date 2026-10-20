@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002ea9dc(unsigned int *);
+int onlineUrlDestroy(unsigned int *);
 int FUN_002eac60(unsigned int *, int);
 int FUN_002eac8e(unsigned int *, int);
 
@@ -12,7 +12,7 @@ typedef int romwright_code(...);
 extern unsigned char DAT_0055b134; /* 0x55b134 */
 extern unsigned char DAT_005949d8; /* 0x5949d8 */
 
-/* Supplied declaration required: FUN_002ea9dc. */
+/* Supplied declaration required: onlineUrlDestroy. */
 /* Supplied declaration required: FUN_002eac60. */
 /* Supplied declaration required: FUN_002eac8e. */
 
@@ -26,7 +26,7 @@ unsigned int * FUN_002f292c(unsigned int *param_1)
   FUN_002eac8e(param_1,0);
   param_1 = param_1 + 2;
   (**(romwright_code **)(*(*(int * *)((unsigned char *)&DAT_005949d8 + 0x2c)) + 0x10))();
-  FUN_002ea9dc(param_1);
+  onlineUrlDestroy(param_1);
   return param_1 + -2;
 }
 

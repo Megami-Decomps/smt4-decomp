@@ -5,7 +5,7 @@
 extern "C" {
 
 typedef int romwright_code(...);
-extern unsigned char DAT_0060fc08; /* 0x60fc08 */
+extern unsigned char g_mapRndMaze; /* 0x60fc08 */
 extern int *DAT_006105d4; /* 0x6105d4 */
 extern int *DAT_006105d8; /* 0x6105d8 */
 extern int *DAT_006105dc; /* 0x6105dc */
@@ -25,10 +25,10 @@ void FUN_002eebc4(void)
     temp_v1 = 1;
     do {
       temp_v0 = temp_v1 * 4 + temp_v2 * 0x100;
-      piVar2 = *(int **)(&DAT_0060fc08 + temp_v0 + 0x3cc);
+      piVar2 = *(int **)(&g_mapRndMaze + temp_v0 + 0x3cc);
       if (piVar2 != (int *)0x0) {
         (**(romwright_code **)(*piVar2 + 4))();
-        *(unsigned int *)(&DAT_0060fc08 + temp_v0 + 0x3cc) = 0;
+        *(unsigned int *)(&g_mapRndMaze + temp_v0 + 0x3cc) = 0;
       }
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < 0x40);

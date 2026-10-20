@@ -5,7 +5,7 @@
 extern "C" {
 
 int qsort(int [4], unsigned int, int, unsigned char *);
-int FUN_0019cac4(void);
+int dataTable00FindById(void);
 int FUN_00239404(int, int);
 int FUN_0038a7dc(int, int, unsigned int, int);
 int FUN_003e3188(unsigned int *, int);
@@ -43,7 +43,7 @@ extern unsigned int DAT_0057384c; /* 0x57384c */
 extern unsigned int DAT_0057aa1c; /* 0x57aa1c */
 
 /* Supplied declaration required: qsort. */
-/* Supplied declaration required: FUN_0019cac4. */
+/* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: FUN_00239404. */
 /* Supplied declaration required: FUN_0038a7dc. */
 /* Supplied declaration required: FUN_003e3188. */
@@ -110,7 +110,7 @@ void FUN_003e0510(unsigned int *param_1,int param_2)
   piVar12 = (int *)(temp_v33 + 0x1ffc);
   temp_v4 = (unsigned int)*(unsigned short *)(*piVar12 + temp_v9 * 0x408 + 0x166);
   temp_v18[3] = temp_v9;
-  FUN_0019cac4();
+  dataTable00FindById();
   temp_v0 = *(unsigned char *)(temp_v4 + 0xa2);
   temp_v17 = 0.0f;
   if (temp_v0 == 0) {

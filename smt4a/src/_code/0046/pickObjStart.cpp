@@ -14,23 +14,23 @@ typedef struct PickObj {
     /* 0x2B4 */ u32 *current;
 } PickObj;
 
-extern s32 FUN_00357bc8(u32 key, u32 arg);
-extern void FUN_00275f44(u32 job, s32 index);
+extern s32 tableGroupFindEntryIndex(u32 key, u32 arg);
+extern void scrScriptProcessStartEntry(u32 job, s32 index);
 
-/* Picks the entry through FUN_00357bc8 (the +0x290 key first, else the +0x284 key with `arg`) and starts it. */
+/* Picks the entry through tableGroupFindEntryIndex (the +0x290 key first, else the +0x284 key with `arg`) and starts it. */
 s32 pickObjStart(PickObj *obj, u32 arg)
 {
-    s32 index = FUN_00357bc8(obj->key290, arg);
+    s32 index = tableGroupFindEntryIndex(obj->key290, arg);
     u32 *job;
 
     if (index != -1) {
         job = &obj->job298;
     } else {
-        index = FUN_00357bc8(obj->key284, arg);
+        index = tableGroupFindEntryIndex(obj->key284, arg);
         job = &obj->job28C;
     }
     obj->current = job;
-    FUN_00275f44(*job, index);
+    scrScriptProcessStartEntry(*job, index);
     return index;
 }
 

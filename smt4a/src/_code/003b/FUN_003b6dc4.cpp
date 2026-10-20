@@ -5,8 +5,8 @@
 extern "C" {
 
 int asdMemFree(void);
-int FUN_001add24(int);
-int FUN_002e3494(void);
+int dataTableFree(int);
+int asdOperatorDeleteB(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -16,8 +16,8 @@ typedef struct {
 extern int g_aocSystem; /* 0x570280 */
 
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_001add24. */
-/* Supplied declaration required: FUN_002e3494. */
+/* Supplied declaration required: dataTableFree. */
+/* Supplied declaration required: asdOperatorDeleteB. */
 
 
 void FUN_003b6dc4(void)
@@ -30,7 +30,7 @@ void FUN_003b6dc4(void)
   int *piVar4;
   int temp_v3;
   
-  FUN_001add24(0x45);
+  dataTableFree(0x45);
   temp_v1 = g_aocSystem;
   temp_v2 = 0;
   piVar4 = (int *)(g_aocSystem + 0x44c);
@@ -53,7 +53,7 @@ void FUN_003b6dc4(void)
     } while (temp_v2 < *(int *)(temp_v1 + 0x444));
   }
   if (*(int *)(temp_v1 + 0x44c) != 0) {
-    FUN_002e3494();
+    asdOperatorDeleteB();
     *piVar4 = 0;
   }
   *(unsigned int *)(temp_v1 + 0x444) = 0;

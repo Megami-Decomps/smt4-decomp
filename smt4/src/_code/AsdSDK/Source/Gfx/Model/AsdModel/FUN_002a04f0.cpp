@@ -34,7 +34,7 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_1_stack;
 
-extern unsigned int DAT_00464b84; /* 0x464b84 */
+extern unsigned int g_asdModelTransformBuilder; /* 0x464b84 */
 extern unsigned char DAT_004dace0; /* 0x4dace0 */
 
 extern unsigned int asdModelGetSlotArray3(fn_002a04f0_arg0 *);
@@ -206,7 +206,7 @@ LAB_002a0868:
 LAB_002a094c:
     temp_v8 = (int)(short)((short)temp_v8 + 1);
     if (temp_v8 >= 4) {
-      FUN_002c2968(temp_v3,(&DAT_00464b84)[(int)param_1]);
+      FUN_002c2968(temp_v3,(&g_asdModelTransformBuilder)[(int)param_1]);
       asdModelSlotSetActive(param_1);
       FUN_003946b4(temp_v0,temp_v1,&DAT_004dace0 + (int)param_1 * 0x40,temp_v2);
       return;

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001517b4(...);
 int FUN_001641b4(...);
 int FUN_001643b4(...);
-int FUN_001f4e20(...);
+int dialogOpen(...);
 int FUN_00203b40(...);
 int FUN_0020b490(...);
 int FUN_00228b04(...);
@@ -21,8 +21,8 @@ int btlTalkBustUpSetUnk2F4(...);
 int screenStartOrClear(...);
 int whisperEffectStart(...);
 int roundObjFinish(...);
-int FUN_003d2d34(...);
-int FUN_003d2d6c(...);
+int soundChannelRequestIfEnabled(...);
+int soundChannelStopAll(...);
 int FUN_003df4ec(...);
 int countUnlockedSlots(void);
 int FUN_003e0174(...);
@@ -33,17 +33,17 @@ int qsort(...);
 int FUN_00163aa4(...);
 int sysPlaySe(...);
 int FUN_00183e58(void);
-int FUN_001846d0(...);
-int FUN_00184758(...);
+int uiSpriteSelectAnim(...);
+int uiSpriteSetKeyframe(...);
 int FUN_0019de98(int, unsigned int);
 int FUN_0019ea64(int);
 int FUN_00224880(...);
 int FUN_0022e774(void);
 int FUN_00267d74(int, int, int, int);
-int FUN_00275f44(...);
+int scrScriptProcessStartEntry(...);
 int FUN_002a4894(...);
 int FUN_002a7288(void);
-int FUN_0031d1d8(...);
+int flaggedEntrySetValueA(...);
 int FUN_0032fea0(...);
 int whisperEffectFinish(void);
 int FUN_003df4a4(...);
@@ -85,26 +85,26 @@ extern int FUN_001632fc(void);
 /* Supplied declaration required: FUN_001643b4. */
 extern int FUN_00167f08(void);
 /* Supplied declaration required: sysPlaySe. */
-extern int FUN_001801a4(void);
+extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00183e58. */
-/* Supplied declaration required: FUN_001846d0. */
-/* Supplied declaration required: FUN_00184758. */
-extern int FUN_0018719c(unsigned int);
+/* Supplied declaration required: uiSpriteSelectAnim. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_0019ea64. */
-extern int FUN_001ab854(int);
-/* Supplied declaration required: FUN_001f4e20. */
+extern int gameGetSlotRecord(int);
+/* Supplied declaration required: dialogOpen. */
 /* Supplied declaration required: FUN_00203b40. */
 /* Supplied declaration required: FUN_0020b490. */
 /* Supplied declaration required: FUN_00224880. */
 /* Supplied declaration required: FUN_00228b04. */
 /* Supplied declaration required: FUN_0022e774. */
-extern int FUN_002619e0(void);
+extern int dialogIsActive(void);
 extern int FUN_0026272c(void);
 /* Supplied declaration required: FUN_00267d74. */
 /* Supplied declaration required: FUN_002685cc. */
 extern int FUN_0026c3a0(void);
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_00284140(int);
 /* Supplied declaration required: FUN_002a4894. */
 /* Supplied declaration required: FUN_002a49e4. */
@@ -113,8 +113,8 @@ extern int FUN_002a4b74(void);
 extern int FUN_002c2c68(unsigned int);
 extern int FUN_002effbc(void);
 extern int whisperEffectIsIdle(void);
-extern int FUN_0031d1a0(void);
-/* Supplied declaration required: FUN_0031d1d8. */
+extern int flaggedEntryGetValueA(void);
+/* Supplied declaration required: flaggedEntrySetValueA. */
 extern int FUN_0032169c(void);
 /* Supplied declaration required: FUN_0032fea0. */
 /* Supplied declaration required: FUN_00336de4. */
@@ -128,8 +128,8 @@ extern int FUN_0035fd00(unsigned short);
 /* Supplied declaration required: screenStartOrClear. */
 /* Supplied declaration required: whisperEffectStart. */
 /* Supplied declaration required: roundObjFinish. */
-/* Supplied declaration required: FUN_003d2d34. */
-/* Supplied declaration required: FUN_003d2d6c. */
+/* Supplied declaration required: soundChannelRequestIfEnabled. */
+/* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: FUN_003df4a4. */
 /* Supplied declaration required: FUN_003df4ec. */
 /* Supplied declaration required: countUnlockedSlots. */
@@ -191,8 +191,8 @@ void FUN_0026cbb8(int param_1)
   unsigned int uStack_34;
   
   pcVar7 = (char *)(param_1 + *(int *)(param_1 + 0x74c0) * 0x150 + 0x442c);
-  temp_v5 = FUN_001ab854((int)*pcVar7);
-  temp_v6 = FUN_001801a4();
+  temp_v5 = gameGetSlotRecord((int)*pcVar7);
+  temp_v6 = gameGetPlayerData();
   FUN_00163aa4(param_1 + 0x73c);
   temp_v31[0] = '\0';
   temp_v9 = *(int *)(param_1 + 0x436c);
@@ -308,7 +308,7 @@ void FUN_0026cbb8(int param_1)
       temp_v14 = 0;
       do {
         if (*(unsigned short *)(temp_v5 + temp_v14 * 2 + 0x34) == temp_v30) {
-          FUN_0031d1d8(temp_v26);
+          flaggedEntrySetValueA(temp_v26);
           break;
         }
         temp_v14 = temp_v14 + 1;
@@ -358,7 +358,7 @@ void FUN_0026cbb8(int param_1)
         return;
       }
       FUN_0019ea64(0);
-      FUN_00275f44(*(unsigned int *)(param_1 + 0x43ac),0xf);
+      scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x43ac),0xf);
       *(unsigned int *)(param_1 + 0x436c) = 100;
       return;
     }
@@ -557,17 +557,17 @@ LAB_0026e1e4:
         temp_v5 = temp_v5 + 1;
       } while (temp_v5 < 8);
       temp_v5 = FUN_001632fc();
-      if ((temp_v5 == 0) && (temp_v5 = FUN_002619e0(), temp_v5 == 0)) {
+      if ((temp_v5 == 0) && (temp_v5 = dialogIsActive(), temp_v5 == 0)) {
         if (!temp_v22) {
           return;
         }
         temp_v5 = 0;
         do {
-          FUN_001846d0(param_1 + temp_v5 * 0x8c + 0x8e0,0);
+          uiSpriteSelectAnim(param_1 + temp_v5 * 0x8c + 0x8e0,0);
           temp_v5 = temp_v5 + 1;
         } while (temp_v5 < 0x10);
         *(unsigned int *)(param_1 + 0x436c) = 3;
-        FUN_00275f44(*(unsigned int *)(param_1 + 0x43ac),0xe);
+        scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x43ac),0xe);
         return;
       }
       goto LAB_0026e038;
@@ -579,7 +579,7 @@ LAB_0026e1e4:
       }
       temp_v5 = FUN_002a4b74();
       if (temp_v5 != 0) {
-        FUN_00275f44(*(unsigned int *)(param_1 + 0x43ac),0xe);
+        scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x43ac),0xe);
         if ((int)(*puVar27 - *piVar22) < 1) {
           temp_v8 = 0xe3;
         }
@@ -591,7 +591,7 @@ LAB_0026e1e4:
       }
       else {
         FUN_0019de98(0,0xf4f4f4ff);
-        FUN_00184758(param_1 + 0xac,1,0);
+        uiSpriteSetKeyframe(param_1 + 0xac,1,0);
         *(unsigned int *)(param_1 + 0x436c) = 0x65;
         if (*(int *)(param_1 + 0x4370) == 4) {
           *(unsigned short *)(param_1 + *puVar27 * 2 + 0x76c4) = 0;
@@ -630,9 +630,9 @@ LAB_0026e1e4:
       FUN_0022e774();
     }
     FUN_002a7288();
-    temp_v9 = FUN_0018719c(0x406);
+    temp_v9 = gameFlagIsSet(0x406);
     if (temp_v9 == 0) {
-      FUN_00275f44(*(unsigned int *)(param_1 + 0x43a0),3);
+      scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x43a0),3);
       *(unsigned int *)(param_1 + 0x436c) = 0x14;
       temp_v8 = 0xa0;
       sysPlaySe(temp_v8);
@@ -640,7 +640,7 @@ LAB_0026e1e4:
     }
   case 1:
     *(unsigned char *)(temp_v5 + 0x67) = 1;
-    FUN_00184758(param_1 + 0xac,4,0);
+    uiSpriteSetKeyframe(param_1 + 0xac,4,0);
     temp_v8 = *(unsigned int *)(temp_v6 + 0x38);
     temp_v16 = *(unsigned int *)(temp_v6 + 0x3c);
     temp_v19 = *(unsigned int *)(temp_v6 + 0x40);
@@ -737,7 +737,7 @@ LAB_0026e1e4:
     *(short *)(param_1 + 0x43b4) = *(short *)(param_1 + 0x43b4) + 1;
     if ((int)*puVar27 < 1) {
       *(unsigned int *)(param_1 + 0x436c) = 3;
-      FUN_00275f44(*(unsigned int *)(param_1 + 0x43ac),0xe);
+      scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x43ac),0xe);
       return;
     }
     temp_v9 = 0;
@@ -747,7 +747,7 @@ LAB_0026e1e4:
       do {
         temp_v11 = param_1 + temp_v20 * 2;
         if (*(short *)(temp_v11 + 0x76a4) == *(short *)(temp_v14 + 0x76c4)) {
-          FUN_001846d0(param_1 + temp_v20 * 0x8c + 0x8e0,6);
+          uiSpriteSelectAnim(param_1 + temp_v20 * 0x8c + 0x8e0,6);
           *(short *)(temp_v11 + 0x76b4) = *(short *)(temp_v11 + 0x76b4) + 1;
         }
         temp_v20 = temp_v20 + 1;
@@ -755,7 +755,7 @@ LAB_0026e1e4:
       temp_v20 = 0;
       do {
         if (*(short *)(temp_v5 + temp_v20 * 2 + 0x34) == *(short *)(temp_v14 + 0x76c4)) {
-          FUN_001846d0(param_1 + temp_v20 * 0x8c + 0xd40,6);
+          uiSpriteSelectAnim(param_1 + temp_v20 * 0x8c + 0xd40,6);
         }
         temp_v20 = temp_v20 + 1;
       } while (temp_v20 < 8);
@@ -763,7 +763,7 @@ LAB_0026e1e4:
     } while (temp_v9 < (int)*puVar27);
     *(unsigned int *)(param_1 + 0x436c) = 10;
     FUN_002a49e4(*(unsigned int *)(param_1 + 0x43a4),0xca);
-    FUN_001f4e20(1);
+    dialogOpen(1);
   default:
 LAB_0026e038:
     if (temp_v23 != 0) {
@@ -882,8 +882,8 @@ LAB_0026e66c:
         roundObjFinish(param_1);
       }
       if (*(int *)(param_1 + 0x4364) != 0x17) {
-        FUN_003d2d6c(0);
-        FUN_003d2d34(0x1000078,0,0x3c);
+        soundChannelStopAll(0);
+        soundChannelRequestIfEnabled(0x1000078,0,0x3c);
         return;
       }
     }
@@ -916,7 +916,7 @@ LAB_0026e66c:
       temp_v6 = FUN_00284140((int)*(short *)(param_1 + *(short *)(temp_v32 + 0x68) * 2 + 0x43b6));
       if (temp_v6 != 0) {
         temp_v6 = FUN_00348ed0(temp_v26);
-        FUN_0031d1d8(temp_v26,temp_v6 - 1);
+        flaggedEntrySetValueA(temp_v26,temp_v6 - 1);
       }
       temp_v6 = FUN_002a4894(temp_v26);
       temp_v9 = FUN_002c2c68(temp_v26);
@@ -1022,7 +1022,7 @@ LAB_0026d5fc:
       if (temp_v14 >= 1) {
         do {
           if (*(short *)(param_1 + temp_v20 * 2 + 0x76a4) == 0) {
-            FUN_0031d1d8(param_1 + 0x75dc,temp_v20);
+            flaggedEntrySetValueA(param_1 + 0x75dc,temp_v20);
             FUN_00359b6c(0);
             goto LAB_0026d4c4;
           }
@@ -1033,25 +1033,25 @@ LAB_0026d5fc:
           temp_v20 = temp_v20 + 1;
         } while (temp_v20 < temp_v14);
         if (temp_v6 < 0) {
-          FUN_0031d1d8(param_1 + 0x75dc,0);
+          flaggedEntrySetValueA(param_1 + 0x75dc,0);
         }
         else {
-          FUN_0031d1d8(param_1 + 0x75dc,temp_v6);
+          flaggedEntrySetValueA(param_1 + 0x75dc,temp_v6);
         }
       }
       else {
-        FUN_0031d1d8(param_1 + 0x75dc,0);
+        flaggedEntrySetValueA(param_1 + 0x75dc,0);
       }
 LAB_0026d4c4:
       temp_v5 = temp_v27;
       FUN_0032fea0(temp_v27,8,*(unsigned short *)(temp_v9 + 0x34));
       if (temp_v5 != 0) {
-        FUN_001846d0(param_1 + temp_v28 * 0x8c + 0xd40,6);
+        uiSpriteSelectAnim(param_1 + temp_v28 * 0x8c + 0xd40,6);
         temp_v5 = 0;
         do {
           temp_v6 = param_1 + temp_v5 * 2;
           if (*(short *)(temp_v6 + 0x76a4) == *(short *)(temp_v9 + 0x34)) {
-            FUN_001846d0(param_1 + temp_v5 * 0x8c + 0x8e0,6);
+            uiSpriteSelectAnim(param_1 + temp_v5 * 0x8c + 0x8e0,6);
             *(unsigned short *)(temp_v6 + 0x76b4) = 1;
           }
           temp_v5 = temp_v5 + 1;
@@ -1105,7 +1105,7 @@ LAB_0026d4c4:
         *(unsigned int *)(param_1 + 0x437c) = 0;
         temp_v13 = temp_v26;
         temp_v29 = param_1;
-        temp_v6 = FUN_0031d1a0();
+        temp_v6 = flaggedEntryGetValueA();
         temp_v9 = temp_v6 + 1;
         temp_v14 = FUN_002c2c68(temp_v7);
         if (temp_v14 - 2 <= temp_v6) {
@@ -1125,7 +1125,7 @@ LAB_0026d4c4:
               temp_v7 = (unsigned int)*(unsigned short *)(temp_v17 + 0x34);
               FUN_002685cc();
               if (temp_v7 != 0) {
-                FUN_0031d1d8(temp_v13,temp_v20);
+                flaggedEntrySetValueA(temp_v13,temp_v20);
                 temp_v6 = temp_v20;
                 break;
               }
@@ -1152,7 +1152,7 @@ LAB_0026d4c4:
             temp_v14 = temp_v6;
           } while (temp_v20 < temp_v9);
         }
-        FUN_0031d1d8(temp_v13,temp_v14);
+        flaggedEntrySetValueA(temp_v13,temp_v14);
         temp_v8 = 0x100020e;
         FUN_001641b4(temp_v8);
       }
@@ -1260,8 +1260,8 @@ LAB_0026da60:
         }
       }
 LAB_0026db30:
-      FUN_001846d0(temp_v23,7);
-      FUN_001846d0(param_1 + temp_v28 * 0x8c + 0x8e0,6);
+      uiSpriteSelectAnim(temp_v23,7);
+      uiSpriteSelectAnim(param_1 + temp_v28 * 0x8c + 0x8e0,6);
     }
     if (*(int *)(param_1 + 0x437c) >= 2) {
       if (*(int *)(param_1 + 0x437c) >= 6) {
@@ -1269,7 +1269,7 @@ LAB_0026db30:
       }
       temp_v6 = FUN_00163aa4(temp_v23);
       if ((temp_v6 != 0) && (temp_v6 = param_1 + temp_v28 * 0x8c, *(char *)(temp_v6 + 0x96a) != '\0')) {
-        FUN_001846d0(temp_v6 + 0x8e0,0);
+        uiSpriteSelectAnim(temp_v6 + 0x8e0,0);
         *(unsigned int *)(param_1 + 0x436c) = 3;
         temp_v6 = FUN_002a4894(temp_v26);
         FUN_00359b6c(*(unsigned short *)(temp_v5 + temp_v6 * 2 + 0x34));

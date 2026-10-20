@@ -7,9 +7,9 @@ extern "C" {
 int FUN_002e6e34(unsigned char [12], int);
 int FUN_002e6e5c(unsigned char [12]);
 int FUN_002e7908(unsigned char [12], int *);
-int FUN_002e9ec8(int, unsigned int);
+int onlineInstanceTableFind(int, unsigned int);
 int FUN_002ea3d0(int, unsigned int);
-int FUN_002ea446(int, int);
+int onlineJobSetStateTimed(int, int);
 int FUN_002f5898(int, int);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
@@ -23,12 +23,12 @@ extern unsigned char LAB_0010bb0c; /* 0x10bb0c */
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
 /* Supplied declaration required: FUN_002e7908. */
-extern int FUN_002e9af4(void);
-/* Supplied declaration required: FUN_002e9ec8. */
+extern int onlineInstanceTableGetCurrent(void);
+/* Supplied declaration required: onlineInstanceTableFind. */
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned int, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
 extern int wordRefsEqual_002ea42c(int, unsigned int);
-/* Supplied declaration required: FUN_002ea446. */
+/* Supplied declaration required: onlineJobSetStateTimed. */
 /* Supplied declaration required: FUN_002f5898. */
 
 
@@ -47,15 +47,15 @@ void FUN_0010ba70(int param_1)
   unsigned char temp_v8 [20];
   
   FUN_002e6e34(temp_v3,param_1 + 0x7c);
-  temp_v0 = FUN_002e9af4();
-  FUN_002e9ec8(temp_v0,*(unsigned int *)(param_1 + 0x68));
+  temp_v0 = onlineInstanceTableGetCurrent();
+  onlineInstanceTableFind(temp_v0,*(unsigned int *)(param_1 + 0x68));
   temp_v2 = param_1 + 0x6c;
   if (temp_v0 != 0) {
     temp_v7 = 0x80010001;
     temp_v1 = FUN_002e7908(temp_v6,&temp_v7);
     temp_v0 = wordRefsEqual_002ea42c(temp_v2,temp_v1);
     if (temp_v0 != 0) {
-      FUN_002ea446(param_1,10);
+      onlineJobSetStateTimed(param_1,10);
       FUN_002e6e5c(temp_v3);
       return;
     }

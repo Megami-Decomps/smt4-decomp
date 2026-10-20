@@ -22,7 +22,7 @@ extern unsigned int DAT_005f1604; /* 0x5f1604 */
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-extern int FUN_00162e8c(void);
+extern int gameFlagsGetBlock(void);
 extern int dataTableHasMatchingEntry35(unsigned int);
 extern int FUN_002e707c(void);
 extern int FUN_004083a8(unsigned char, unsigned char);
@@ -52,7 +52,7 @@ void FUN_004900e0(int param_1)
   unsigned long long temp_v13;
   unsigned long long temp_v14;
   
-  temp_v1 = FUN_00162e8c();
+  temp_v1 = gameFlagsGetBlock();
   puVar3 = (unsigned long long *)sub68OwnerGetBlock60(param_1 + 0x4cc);
   temp_v12 = *puVar3;
   temp_v14 = 0x4320000042f00000;

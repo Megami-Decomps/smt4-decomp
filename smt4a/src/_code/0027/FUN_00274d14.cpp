@@ -5,7 +5,7 @@ extern "C" {
 
 void FUN_00152f44(void);
 void FUN_00353b00(s32 arg);
-s32 FUN_0018719c(u32 id);
+s32 gameFlagIsSet(u32 id);
 
 extern LmapEventA *g_popupState;
 extern GameStateA g_gameState;
@@ -18,8 +18,8 @@ void FUN_00274d14(s32 a, s32 b)
     event = g_popupState;
     g_popupState->unk08 = a;
     event->unk0C = b;
-    if (g_gameState.unk18 == 0 && FUN_0018719c(0x49A) != 0 &&
-        (FUN_0018719c(0xC) == 0 || FUN_0018719c(0x10) != 0) && g_popupState->state == 0) {
+    if (g_gameState.unk18 == 0 && gameFlagIsSet(0x49A) != 0 &&
+        (gameFlagIsSet(0xC) == 0 || gameFlagIsSet(0x10) != 0) && g_popupState->state == 0) {
         FUN_00353b00(0);
         return;
     }

@@ -8,12 +8,12 @@ typedef struct BattleMainState {
 } BattleMainState;
 
 BattleMainState *btlGetMainState(void);
-void FUN_002118a0(u32 unit);
+void scrCommMessageShowPlainBody(u32 unit);
 
-/* Passes the battle state's unk2234 on to FUN_002118a0, the script command body that follows it. */
+/* Passes the battle state's unk2234 on to scrCommMessageShowPlainBody, the script command body that follows it. */
 void scrComm_Message_ShowPlainFromBattle(void)
 {
-    FUN_002118a0(btlGetMainState()->unk2234);
+    scrCommMessageShowPlainBody(btlGetMainState()->unk2234);
 }
 
 } /* extern "C" */

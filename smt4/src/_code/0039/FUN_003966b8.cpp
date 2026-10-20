@@ -10,7 +10,7 @@ int FUN_00232994(...);
 int FUN_002329a8(...);
 int FUN_00267144(void);
 int FUN_00273f5c(void);
-int FUN_002c09d0(...);
+int gameFlagIsSet(...);
 int FUN_00396034(...);
 int FUN_00396044(...);
 int FUN_0039607c(...);
@@ -52,8 +52,8 @@ extern int FUN_00232a6c(int, unsigned int, unsigned int);
 extern int FUN_002671bc(void);
 /* Supplied declaration required: FUN_00273f5c. */
 extern int FUN_0027d968(void);
-/* Supplied declaration required: FUN_002c09d0. */
-extern int FUN_002c2950(void);
+/* Supplied declaration required: gameFlagIsSet. */
+extern int gameGetMapBlock(void);
 /* Supplied declaration required: FUN_00396034. */
 /* Supplied declaration required: FUN_00396044. */
 /* Supplied declaration required: FUN_0039607c. */
@@ -86,7 +86,7 @@ void FUN_003966b8(int param_1)
   
   temp_v0 = FUN_002671bc();
   temp_v2 = 0;
-  temp_v10 = FUN_002c2950();
+  temp_v10 = gameGetMapBlock();
   pcVar4 = (char *)0x0;
   if (0 < temp_v0) {
     temp_v6 = 0x42480000;
@@ -104,9 +104,9 @@ void FUN_003966b8(int param_1)
             }
             if (((((int)*pcVar2 == *(int *)(param_1 + 4)) &&
                  ((int)pcVar2[1] == *(int *)(param_1 + 8))) &&
-                ((temp_v1 = FUN_002c09d0(temp_v2 + 0x310), temp_v1 == 0 &&
-                 ((*(short *)(pcVar2 + 0x14) == 0 || (temp_v1 = FUN_002c09d0(), temp_v1 != 0)))))) &&
-               (((*(short *)(pcVar2 + 0x16) == 0 || (temp_v1 = FUN_002c09d0(), temp_v1 == 0)) &&
+                ((temp_v1 = gameFlagIsSet(temp_v2 + 0x310), temp_v1 == 0 &&
+                 ((*(short *)(pcVar2 + 0x14) == 0 || (temp_v1 = gameFlagIsSet(), temp_v1 != 0)))))) &&
+               (((*(short *)(pcVar2 + 0x16) == 0 || (temp_v1 = gameFlagIsSet(), temp_v1 == 0)) &&
                 (temp_v1 = FUN_00232a6c(param_1,1,2), temp_v1 != 0)))) {
               temp_v7 = (float)VectorSignedToFloat((int)*(short *)(pcVar2 + 2),
                                                     (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -142,8 +142,8 @@ void FUN_003966b8(int param_1)
           }
         }
         else if ((((temp_v1 == *(int *)(param_1 + 4)) && ((int)pcVar2[1] == *(int *)(param_1 + 8))) &&
-                 ((*(short *)(pcVar2 + 0x14) == 0 || (temp_v1 = FUN_002c09d0(), temp_v1 != 0)))) &&
-                (((*(short *)(pcVar2 + 0x16) == 0 || (temp_v1 = FUN_002c09d0(), temp_v1 == 0)) &&
+                 ((*(short *)(pcVar2 + 0x14) == 0 || (temp_v1 = gameFlagIsSet(), temp_v1 != 0)))) &&
+                (((*(short *)(pcVar2 + 0x16) == 0 || (temp_v1 = gameFlagIsSet(), temp_v1 == 0)) &&
                  (temp_v1 = FUN_00232a6c(param_1,1,2), temp_v1 != 0)))) {
           temp_v7 = (float)VectorSignedToFloat((int)*(short *)(pcVar2 + 2),
                                                 (unsigned char)(in_fpscr >> 0x16) & 3);

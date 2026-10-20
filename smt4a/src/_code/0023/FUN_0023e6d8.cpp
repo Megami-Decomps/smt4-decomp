@@ -36,9 +36,9 @@ typedef struct {
 } param_3_stack;
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-extern int FUN_001801a4(void);
+extern int gameGetPlayerData(void);
 extern unsigned int FUN_0019f240(unsigned short);
-extern int FUN_001ab854(void);
+extern int gameGetSlotRecord(void);
 /* Supplied declaration required: FUN_002efc44. */
 /* Supplied declaration required: FUN_0034a290. */
 /* Supplied declaration required: playerGetWords. */
@@ -87,7 +87,7 @@ int FUN_0023e6d8(fn_0023e6d8_arg0 *param_1,int param_2,int param_3)
     temp_v12 = param_2;
     iStack_28 = param_3;
     if (param_3 < 0) {
-      temp_v2 = FUN_001801a4();
+      temp_v2 = gameGetPlayerData();
       temp_v1 = *(short *)(temp_v2 + 0x24);
       playerGetWords(&temp_v7,1);
       temp_v3 = FUN_0019f240(param_1->field_0x20);
@@ -95,7 +95,7 @@ int FUN_0023e6d8(fn_0023e6d8_arg0 *param_1,int param_2,int param_3)
       FUN_002efc44(param_1,temp_v3,2);
     }
     else {
-      temp_v2 = FUN_001ab854();
+      temp_v2 = gameGetSlotRecord();
       if (temp_v2 == 0) {
         return 0;
       }

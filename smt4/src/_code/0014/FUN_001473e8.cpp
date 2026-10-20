@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0013afbc(unsigned int, float *, float *);
-int FUN_002c52f8(void);
+int asdFatalError(void);
 int nn_math_ARMv6_MTX34LookAtC_FAST(unsigned int, float *, float *, float *);
 int nn_math_ARMv6_MTX44FrustumC_FAST(unsigned int);
 int nn_math_ARMv6_MTX44PivotC_FAST(unsigned int, int);
@@ -37,7 +37,7 @@ extern float fRam1ff81080; /* 0x1ff81080 */
 extern signed char cRam1ff81084; /* 0x1ff81084 */
 
 /* Supplied declaration required: FUN_0013afbc. */
-/* Supplied declaration required: FUN_002c52f8. */
+/* Supplied declaration required: asdFatalError. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34LookAtC_FAST. */
 /* Supplied declaration required: nn_math_ARMv6_MTX44FrustumC_FAST. */
 /* Supplied declaration required: nn_math_ARMv6_MTX44PivotC_FAST. */
@@ -83,7 +83,7 @@ void FUN_001473e8(float *param_1,unsigned int param_2,unsigned int param_3,unsig
   
   temp_v11 = 0.0f;
   if ((in_s1 < 0.0f) || ((int)in_s1 >= 0x3f800001)) {
-    FUN_002c52f8();
+    asdFatalError();
   }
   temp_v4 = param_6[10];
   temp_v3 = param_6[0xb];

@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern s32 FUN_005135d0(CounterPair *obj);
+extern s32 mwmofilterDeblockerCreate(CounterPair *obj);
 
-/* Resets the counters when FUN_005135d0 accepts the object. */
+/* Resets the counters when mwmofilterDeblockerCreate accepts the object. */
 u8 counterPairReset(CounterPair *obj)
 {
-    s32 result = FUN_005135d0(obj);
+    s32 result = mwmofilterDeblockerCreate(obj);
 
     if (result != 0) {
         obj->unk58 = 0;

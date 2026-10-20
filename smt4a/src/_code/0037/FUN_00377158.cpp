@@ -9,11 +9,11 @@ typedef struct FlagSet {
     /* 0xCCC */ u32 bits[1];
 } FlagSet;
 
-extern FlagSet *FUN_00162e8c(void);
+extern FlagSet *gameFlagsGetBlock(void);
 
 void FUN_00377158(s32 id, s32 set)
 {
-    FlagSet *flags = FUN_00162e8c();
+    FlagSet *flags = gameFlagsGetBlock();
 
     if (id == 0x17 || id == 0x18) {
         id = 0xE;

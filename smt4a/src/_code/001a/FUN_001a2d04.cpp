@@ -5,16 +5,16 @@
 extern "C" {
 
 int FUN_0016e800(int, int);
-int FUN_00170198(void);
+int nn_gxlow_CTR_SaveVramSysArea(void);
 int FUN_00170390(int);
 int FUN_001703b0(int);
 int FUN_001703e8(...);
 int FUN_00170e58(void);
 int FUN_00170ebc(int);
-int FUN_0018b868(void);
-int FUN_0018b964(void);
+int nn_applet_CTR_detail_OpenSession(void);
+int nn_applet_CTR_detail_CloseSession(void);
 int FUN_001b02a8(unsigned int);
-int FUN_001bcd48(int, int);
+int svcSleepThread(int, int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -24,7 +24,7 @@ typedef struct {
 extern unsigned char DAT_005891b0; /* 0x5891b0 */
 
 /* Supplied declaration required: FUN_0016e800. */
-/* Supplied declaration required: FUN_00170198. */
+/* Supplied declaration required: nn_gxlow_CTR_SaveVramSysArea. */
 /* Supplied declaration required: FUN_00170390. */
 /* Supplied declaration required: FUN_001703b0. */
 /* Supplied declaration required: FUN_001703e8. */
@@ -32,11 +32,11 @@ extern unsigned char DAT_005891b0; /* 0x5891b0 */
 /* Supplied declaration required: FUN_00170ebc. */
 extern int FUN_0018b63c(void);
 extern int FUN_0018b65c(void);
-/* Supplied declaration required: FUN_0018b868. */
-/* Supplied declaration required: FUN_0018b964. */
+/* Supplied declaration required: nn_applet_CTR_detail_OpenSession. */
+/* Supplied declaration required: nn_applet_CTR_detail_CloseSession. */
 /* Supplied declaration required: FUN_001b02a8. */
 extern int FUN_001b0480(unsigned int, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001bcd48. */
+/* Supplied declaration required: svcSleepThread. */
 
 
 int FUN_001a2d04(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -54,7 +54,7 @@ int FUN_001a2d04(unsigned int param_1,unsigned int param_2,unsigned int param_3,
     temp_v0 = FUN_001703e8(temp_v0);
     if (temp_v0 != 0) {
       (*(unsigned char *)((unsigned char *)&DAT_005891b0 + 0x1)) = 1;
-      FUN_00170198();
+      nn_gxlow_CTR_SaveVramSysArea();
     }
     FUN_001b02a8(param_1);
     FUN_00170ebc(0);
@@ -63,11 +63,11 @@ int FUN_001a2d04(unsigned int param_1,unsigned int param_2,unsigned int param_3,
       FUN_001703b0(1);
     }
     while( 1 ) {
-      FUN_0018b868();
+      nn_applet_CTR_detail_OpenSession();
       temp_v1 = FUN_001b0480(param_1,param_2,param_3,param_4);
-      FUN_0018b964();
+      nn_applet_CTR_detail_CloseSession();
       if ((temp_v1 != -0x375f3010 && temp_v1 != -0x1f5f33f8) && temp_v1 != -0x375f33fe) break;
-      FUN_001bcd48(10000000,0);
+      svcSleepThread(10000000,0);
     }
     if (temp_v0 != 0) {
       temp_v0 = FUN_0018b63c();

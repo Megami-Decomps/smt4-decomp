@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0023cef0(unsigned int, int, int, int, int);
 int FUN_0023f2e4(unsigned int, int, unsigned char [64], unsigned int);
-int FUN_002b45e8(void);
+int dataTable08Sub2GetRecord(void);
 int FUN_002be624(...);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
@@ -20,7 +20,7 @@ extern unsigned char LAB_00343e30; /* 0x343e30 */
 
 /* Supplied declaration required: FUN_0023cef0. */
 /* Supplied declaration required: FUN_0023f2e4. */
-/* Supplied declaration required: FUN_002b45e8. */
+/* Supplied declaration required: dataTable08Sub2GetRecord. */
 /* Supplied declaration required: FUN_002be624. */
 
 
@@ -33,19 +33,19 @@ void FUN_00343cec(unsigned int param_1,int param_2,unsigned int param_3)
   unsigned char temp_v2 [64];
   
   temp_v0 = (unsigned int)*(unsigned short *)(param_2 + 6);
-  FUN_002b45e8();
+  dataTable08Sub2GetRecord();
   temp_v1 = FUN_0023cef0(param_1,0,*(unsigned short *)(temp_v0 + 0x70),*(unsigned short *)(temp_v0 + 0x72),0);
   FUN_002be624(temp_v2,&LAB_00343df8,*(unsigned short *)(temp_v0 + 0x70),*(unsigned short *)(temp_v0 + 0x72),
                temp_v1);
   FUN_0023f2e4(param_1,0,temp_v2,param_3);
   temp_v0 = (unsigned int)*(unsigned short *)(param_2 + 8);
-  FUN_002b45e8();
+  dataTable08Sub2GetRecord();
   FUN_0023cef0(param_1,0,*(unsigned short *)(temp_v0 + 0x70),*(unsigned short *)(temp_v0 + 0x72),0);
   FUN_002be624(temp_v2,&LAB_00343e14,*(unsigned short *)(temp_v0 + 0x70),*(unsigned short *)(temp_v0 + 0x72))
   ;
   FUN_0023f2e4(param_1,1,temp_v2,param_3);
   temp_v0 = (unsigned int)*(unsigned short *)(param_2 + 10);
-  FUN_002b45e8();
+  dataTable08Sub2GetRecord();
   temp_v1 = FUN_0023cef0(param_1,2,*(unsigned short *)(temp_v0 + 0x70),*(unsigned short *)(temp_v0 + 0x72),0);
   FUN_002be624(temp_v2,&LAB_00343e30,*(unsigned short *)(temp_v0 + 0x70),*(unsigned short *)(temp_v0 + 0x72),
                temp_v1);

@@ -6,8 +6,8 @@ extern "C" {
 
 int qsort(...);
 int asdOperatorNewD(...);
-int FUN_002e6490(...);
-int FUN_002e6dd4(...);
+int asdOperatorDeleteC(...);
+int rt_memclr(...);
 int FUN_003ff160(...);
 int rt_memcpy(...);
 
@@ -19,10 +19,10 @@ typedef struct {
 extern int FUN_002b26b0(...); /* 0x2b26b0 */
 
 /* Supplied declaration required: qsort. */
-extern int FUN_0018719c(void);
+extern int gameFlagIsSet(void);
 /* Supplied declaration required: asdOperatorNewD. */
-/* Supplied declaration required: FUN_002e6490. */
-/* Supplied declaration required: FUN_002e6dd4. */
+/* Supplied declaration required: asdOperatorDeleteC. */
+/* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: FUN_003ff160. */
 extern int flagsBGetBit0(unsigned short);
 extern unsigned long long flagsBGetBit1(unsigned short);
@@ -48,13 +48,13 @@ void FUN_003f5bd8(int param_1,int param_2)
   *(unsigned char *)(param_1 + 0x40) = 0;
   temp_v1 = param_2 * 0x34;
   asdOperatorNewD();
-  FUN_002e6dd4();
+  rt_memclr();
   rt_memcpy(temp_v1,*(unsigned int *)(param_1 + 0x20),param_2 * 0x34);
   temp_v4 = 0x34;
   qsort(temp_v1,param_2,0x34,FUN_002b26b0);
   temp_v6 = 0;
   if (param_2 < 1) {
-    FUN_002e6490(temp_v1);
+    asdOperatorDeleteC(temp_v1);
     return;
   }
   do {
@@ -63,7 +63,7 @@ void FUN_003f5bd8(int param_1,int param_2)
     if (temp_v0 != 0) {
       temp_v2 = flagsBGetBit0(temp_v0);
       if (temp_v2 == 0) {
-        if ((puVar8[0x19] != 0) && (temp_v2 = FUN_0018719c(), temp_v2 == 0)) goto LAB_003f5d78;
+        if ((puVar8[0x19] != 0) && (temp_v2 = gameFlagIsSet(), temp_v2 == 0)) goto LAB_003f5d78;
         FUN_003ff160(temp_v0);
       }
       temp_v8 = flagsBGetBit1(temp_v0);
@@ -111,7 +111,7 @@ LAB_003f5d78:
     do {
       temp_v6 = temp_v6 + 1;
       if (param_2 <= temp_v6) {
-        FUN_002e6490(temp_v1);
+        asdOperatorDeleteC(temp_v1);
         return;
       }
     } while (temp_v6 >= 100);

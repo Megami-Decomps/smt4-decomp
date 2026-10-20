@@ -34,7 +34,7 @@ extern int FUN_0022e630(void);
 /* Supplied declaration required: FUN_0027f3dc. */
 extern int FUN_0029e130(void);
 /* Supplied declaration required: FUN_0029e17c. */
-extern int FUN_0029e1c8(void);
+extern int useCounterIsFinished(void);
 /* Supplied declaration required: FUN_002a0cc8. */
 
 
@@ -47,7 +47,7 @@ void FUN_003a3f28(int param_1)
   int temp_v2;
   int temp_v3;
   
-  temp_v0 = FUN_0029e1c8();
+  temp_v0 = useCounterIsFinished();
   if (temp_v0 != 0) {
     FUN_0029e17c();
     FUN_002a0cc8(0);

@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0023d02c(...);
-int FUN_002b2368(unsigned int *);
+int bufferHandleRelease(...);
+int asdMemFreeNonNull(unsigned int *);
 int asdMemFree(...);
 
 typedef int romwright_code(...);
@@ -17,8 +17,8 @@ typedef struct {
 extern unsigned char g_filter4PolyBaseVtable; /* 0x420798 */
 extern unsigned char DAT_00420994; /* 0x420994 */
 
-/* Supplied declaration required: FUN_0023d02c. */
-/* Supplied declaration required: FUN_002b2368. */
+/* Supplied declaration required: bufferHandleRelease. */
+/* Supplied declaration required: asdMemFreeNonNull. */
 /* Supplied declaration required: asdMemFree. */
 
 
@@ -38,7 +38,7 @@ void FUN_0034c6b0(unsigned int *param_1)
   if (param_1[6] != 0) {
     do {
       temp_v0 = unaff_r8 + unaff_r4 * 0x44;
-      FUN_0023d02c(*(unsigned int *)(param_1[6] + temp_v0));
+      bufferHandleRelease(*(unsigned int *)(param_1[6] + temp_v0));
       unaff_r4 = unaff_r4 + 1;
       *(unsigned int *)(param_1[6] + temp_v0) = 0;
     } while (unaff_r4 < 2);
@@ -47,7 +47,7 @@ void FUN_0034c6b0(unsigned int *param_1)
   }
   *param_1 = (unsigned int)&g_filter4PolyBaseVtable;
   if (param_1[2] != 0) {
-    FUN_0023d02c();
+    bufferHandleRelease();
     param_1[2] = 0;
   }
   if (param_1[1] != 0) {
@@ -58,7 +58,7 @@ void FUN_0034c6b0(unsigned int *param_1)
     (**(romwright_code **)(*(int *)param_1[5] + 4))();
     param_1[5] = 0;
   }
-  FUN_002b2368(param_1);
+  asdMemFreeNonNull(param_1);
   return;
 }
 

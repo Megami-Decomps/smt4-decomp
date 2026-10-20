@@ -11,9 +11,9 @@ int sysPlaySe(...);
 int FUN_00182054(...);
 int FUN_002804b0(...);
 int sysMemClear(...);
-int FUN_002e6dd0(...);
+int rt_aeabi_memclr(...);
 int FUN_00319aec(...);
-int FUN_00330a80(...);
+int gameDataGetMarkEntry(...);
 int FUN_0036d4b0(...);
 int FUN_0037b5e0(...);
 int campCecDrawSetCreate(...);
@@ -50,10 +50,10 @@ extern unsigned int *g_campCecView; /* 0x57f130 */
 /* Supplied declaration required: FUN_00182054. */
 /* Supplied declaration required: FUN_002804b0. */
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_002e6dd0. */
+/* Supplied declaration required: rt_aeabi_memclr. */
 extern unsigned int overlayGetStatusScene(void);
 /* Supplied declaration required: FUN_00319aec. */
-/* Supplied declaration required: FUN_00330a80. */
+/* Supplied declaration required: gameDataGetMarkEntry. */
 extern int playerSummaryIsIncomplete(void);
 /* Supplied declaration required: FUN_0036d4b0. */
 /* Supplied declaration required: FUN_0037b5e0. */
@@ -103,7 +103,7 @@ void FUN_003447a0(void)
   puVar3[0x52] = 0;
   temp_v4 = 0x1f;
   do {
-    FUN_00330a80(temp_v4);
+    gameDataGetMarkEntry(temp_v4);
     temp_v1 = playerSummaryIsIncomplete();
     if (temp_v1 != 0) {
       FUN_0036d4b0(temp_v4);
@@ -112,7 +112,7 @@ void FUN_003447a0(void)
   } while (-1 < temp_v4);
   temp_v4 = 0;
   do {
-    temp_v1 = FUN_00330a80(temp_v4);
+    temp_v1 = gameDataGetMarkEntry(temp_v4);
     if (*(short *)(temp_v1 + 0x60) != 0) {
       puVar3[0x48] = puVar3[0x48] + 1;
     }
@@ -121,7 +121,7 @@ void FUN_003447a0(void)
   FUN_002804b0(&LAB_00344ba8,puVar3 + 0x4e,0);
   temp_v2 = overlayGetStatusScene();
   puVar3[2] = temp_v2;
-  temp_v1 = FUN_00330a80(puVar3[0x45]);
+  temp_v1 = gameDataGetMarkEntry(puVar3[0x45]);
   puVar3[3] = temp_v1;
   *(unsigned short *)(temp_v1 + 0x34) = *(unsigned short *)(temp_v1 + 0x60);
   temp_v4 = 0;
@@ -136,18 +136,18 @@ void FUN_003447a0(void)
   puVar2 = g_campCecView;
   temp_v4 = 0;
   do {
-    temp_v1 = FUN_00330a80(puVar2[0x46] + temp_v4);
+    temp_v1 = gameDataGetMarkEntry(puVar2[0x46] + temp_v4);
     if (*(short *)(temp_v1 + 0x60) != 0) {
       FUN_0037b5e0(puVar2[temp_v4 + 0x41],temp_v1);
     }
     temp_v4 = temp_v4 + 1;
   } while (temp_v4 < 3);
-  temp_v4 = FUN_00330a80(puVar2[0x45]);
+  temp_v4 = gameDataGetMarkEntry(puVar2[0x45]);
   puVar2[3] = temp_v4;
   *(unsigned short *)(temp_v4 + 0x34) = *(unsigned short *)(temp_v4 + 0x60);
   puVar3[0x51] = 1;
   FUN_003a4980(puVar3[0x44],puVar3[3],0);
-  temp_v4 = FUN_00330a80(0);
+  temp_v4 = gameDataGetMarkEntry(0);
   temp_v0 = *(unsigned char *)(temp_v4 + 0x22);
   temp_v3 = (unsigned int)temp_v0;
   FUN_00182054();
@@ -156,12 +156,12 @@ void FUN_003447a0(void)
   }
   temp_v4 = 0;
   do {
-    FUN_002e6dd0(puVar3 + temp_v4 * 5 + 0x1e,0x14);
+    rt_aeabi_memclr(puVar3 + temp_v4 * 5 + 0x1e,0x14);
     temp_v4 = temp_v4 + 1;
   } while (temp_v4 < 2);
   temp_v4 = 0;
   do {
-    FUN_002e6dd0(puVar3 + temp_v4 * 5 + 0x28,0x14);
+    rt_aeabi_memclr(puVar3 + temp_v4 * 5 + 0x28,0x14);
     temp_v1 = temp_v4 + 1;
     puVar3[temp_v4 * 5 + 0x29] = 0x14a;
     temp_v4 = temp_v1;

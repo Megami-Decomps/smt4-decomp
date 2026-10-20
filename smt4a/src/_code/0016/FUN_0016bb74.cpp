@@ -28,7 +28,7 @@ typedef struct {
     unsigned int sp98; /* 0x98: local_98 */
 } param_2_stack;
 
-extern int DAT_0056fcc0; /* 0x56fcc0 */
+extern int g_handleRegistry; /* 0x56fcc0 */
 
 #ifndef ROMWRIGHT_PIECE_1_1_DEFINED
 #define ROMWRIGHT_PIECE_1_1_DEFINED
@@ -69,8 +69,8 @@ void FUN_0016bb74(int param_1,int param_2)
   int iStack_2c;
   int temp_v18;
   
-  piVar10 = *(int **)(DAT_0056fcc0 + 0x18);
-  piVar1 = *(int **)(DAT_0056fcc0 + 0x1c);
+  piVar10 = *(int **)(g_handleRegistry + 0x18);
+  piVar1 = *(int **)(g_handleRegistry + 0x1c);
   if (piVar10 != piVar1) {
     temp_v16 = param_1 + 0x18;
     iStack_2c = param_1;

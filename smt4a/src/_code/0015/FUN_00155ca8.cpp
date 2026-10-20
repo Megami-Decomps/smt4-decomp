@@ -20,14 +20,14 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } void_stack;
 
-extern int DAT_0057f574; /* 0x57f574 */
+extern int g_infoWin; /* 0x57f574 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: FUN_00157558. */
 /* Supplied declaration required: FUN_00164168. */
 extern int btlMainIsRunning(void);
-extern int FUN_001654d8(int);
-extern int FUN_001654e4(int);
+extern int vec2GetXInt(int);
+extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00168770. */
 /* Supplied declaration required: FUN_00168e00. */
@@ -56,11 +56,11 @@ char FUN_00155ca8(void)
   float temp_v11;
   float temp_v12;
   
-  temp_v1 = DAT_0057f574;
-  temp_v10 = *(int *)(DAT_0057f574 + 8) == 0;
+  temp_v1 = g_infoWin;
+  temp_v10 = *(int *)(g_infoWin + 8) == 0;
   temp_v0 = '\0';
   if (!temp_v10) {
-    temp_v0 = *(char *)(DAT_0057f574 + 0x30);
+    temp_v0 = *(char *)(g_infoWin + 0x30);
   }
   if (temp_v10 || temp_v0 == '\0') {
     return temp_v0;
@@ -77,18 +77,18 @@ char FUN_00155ca8(void)
     (**(romwright_code **)(temp_v3 + 0x1274))();
     *(unsigned char *)(temp_v3 + 0x1270) = 0;
   }
-  temp_v2 = FUN_001654d8(temp_v1 + 0x54);
+  temp_v2 = vec2GetXInt(temp_v1 + 0x54);
   temp_v12 = 0.25f;
   temp_v11 = temp_v12;
   FUN_001879d0(g_renderCtx);
   temp_v2 = temp_v2 + (int)temp_v12;
-  temp_v3 = FUN_001654e4(temp_v1 + 0x54);
-  temp_v6 = FUN_001654d8(temp_v1 + 0xe0);
+  temp_v3 = vec2GetYInt(temp_v1 + 0x54);
+  temp_v6 = vec2GetXInt(temp_v1 + 0xe0);
   FUN_001879d0(g_renderCtx);
   temp_v6 = temp_v6 + (int)temp_v11;
   if (*(char *)(temp_v1 + 0x32d) != '\0') {
-    temp_v2 = FUN_001654d8(temp_v1 + 0x54);
-    temp_v6 = FUN_001654d8(temp_v1 + 0xe0);
+    temp_v2 = vec2GetXInt(temp_v1 + 0x54);
+    temp_v6 = vec2GetXInt(temp_v1 + 0xe0);
   }
   if (*(int *)(temp_v1 + 0x20) == 2) {
     temp_v7 = *(int *)(temp_v1 + 0x2c);

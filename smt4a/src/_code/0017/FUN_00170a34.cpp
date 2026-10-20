@@ -11,15 +11,15 @@ int FUN_00189a38(...);
 int FUN_0018b68c(unsigned int);
 int FUN_0018b69c(void);
 int FUN_0018b6d4(void);
-int FUN_0018b868(void);
+int nn_applet_CTR_detail_OpenSession(void);
 int FUN_0018b900(int);
 int FUN_0018b910(int);
-int FUN_0018b964(void);
+int nn_applet_CTR_detail_CloseSession(void);
 int FUN_0018b9f0(unsigned int);
-int FUN_00195fc8(void);
-int FUN_001a08d8(unsigned int *);
-int FUN_001af214(void);
-int FUN_001bcd48(int, int);
+int sysFatalBreak(void);
+int nn_os_LightEvent_Signal(unsigned int *);
+int nn_os_LightEvent_TryWait(void);
+int svcSleepThread(int, int);
 int FUN_002e3140(void);
 int FUN_002f5020(int *, unsigned char *, int, int);
 int software_interrupt(int);
@@ -52,18 +52,18 @@ extern unsigned int DAT_006416b0; /* 0x6416b0 */
 /* Supplied declaration required: FUN_0018b69c. */
 /* Supplied declaration required: FUN_0018b6d4. */
 extern unsigned int FUN_0018b70c(void);
-/* Supplied declaration required: FUN_0018b868. */
+/* Supplied declaration required: nn_applet_CTR_detail_OpenSession. */
 /* Supplied declaration required: FUN_0018b900. */
 /* Supplied declaration required: FUN_0018b910. */
-/* Supplied declaration required: FUN_0018b964. */
+/* Supplied declaration required: nn_applet_CTR_detail_CloseSession. */
 extern int FUN_0018b9e0(void);
 /* Supplied declaration required: FUN_0018b9f0. */
 extern int FUN_0018ba38(unsigned int, unsigned int);
 extern int FUN_0018bc38(unsigned int, unsigned int *);
-/* Supplied declaration required: FUN_00195fc8. */
-/* Supplied declaration required: FUN_001a08d8. */
-/* Supplied declaration required: FUN_001af214. */
-/* Supplied declaration required: FUN_001bcd48. */
+/* Supplied declaration required: sysFatalBreak. */
+/* Supplied declaration required: nn_os_LightEvent_Signal. */
+/* Supplied declaration required: nn_os_LightEvent_TryWait. */
+/* Supplied declaration required: svcSleepThread. */
 /* Supplied declaration required: FUN_002e3140. */
 /* Supplied declaration required: FUN_002f5020. */
 
@@ -106,7 +106,7 @@ void FUN_00170a34(void)
       return;
     }
     puVar2 = &DAT_005b445c;
-    FUN_001af214();
+    nn_os_LightEvent_TryWait();
     if (puVar2 == (unsigned int *)0x0) {
       software_interrupt(0x19);
       if ((int)(&DAT_006416a8)[temp_v5] < 0) {
@@ -119,20 +119,20 @@ void FUN_00170a34(void)
         if (temp_v5 == 1) {
           if ((DAT_005b444c == (romwright_code *)0x0) || (temp_v1 = (*DAT_005b444c)(DAT_005b4450), temp_v1 != 0))
           {
-            FUN_001a08d8(&DAT_005b445c);
+            nn_os_LightEvent_Signal(&DAT_005b445c);
           }
           continue;
         }
         if (temp_v5 != 0) continue;
-        FUN_0018b868();
+        nn_applet_CTR_detail_OpenSession();
         temp_v0 = FUN_0018b70c();
         temp_v1 = FUN_0018bc38(temp_v0,&temp_v4);
-        FUN_0018b964();
+        nn_applet_CTR_detail_CloseSession();
         if (temp_v1 < 0) continue;
         temp_v2 = temp_v4;
         switch(temp_v2) {
         default:
-          FUN_00195fc8();
+          sysFatalBreak();
           continue;
         case 1:
         case 2:
@@ -188,12 +188,12 @@ joined_r0x00170cec:
           FUN_001713d8(0);
           continue;
         case 10:
-          FUN_0018b868();
+          nn_applet_CTR_detail_OpenSession();
           temp_v1 = FUN_0018ba38(0,0x40);
           if (temp_v1 < 0) {
             FUN_00189a38(temp_v1,0x170d2c);
           }
-          FUN_0018b964();
+          nn_applet_CTR_detail_CloseSession();
           continue;
         case 0xb:
           FUN_001713e8(1);
@@ -201,10 +201,10 @@ joined_r0x00170cec:
         }
       }
       FUN_0018b68c(temp_v0);
-      FUN_001a08d8(&DAT_005b445c);
+      nn_os_LightEvent_Signal(&DAT_005b445c);
       continue;
     }
-    FUN_001bcd48(10000000,0);
+    svcSleepThread(10000000,0);
     software_interrupt(0x18);
     if ((int)(&DAT_006416a8)[temp_v5] < 0) {
       FUN_002e3140();

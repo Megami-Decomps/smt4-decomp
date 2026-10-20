@@ -2,8 +2,8 @@
 
 extern "C" {
 
-int FUN_00297410(int id);
-int FUN_002a5ed0(int table, int index);
+int fileSlotLoad(int id);
+int asdTMTexTableLoadEntryAsync(int table, int index);
 int asdTMTexTableLoadSprites(int table);
 
 void FUN_00201ac8(void)
@@ -13,10 +13,10 @@ void FUN_00201ac8(void)
     asdTMTexTableLoadSprites(0x19);
     i = 0;
     do {
-        FUN_002a5ed0(0x19, i);
+        asdTMTexTableLoadEntryAsync(0x19, i);
         i++;
     } while (i < 3);
-    FUN_00297410(0x39);
+    fileSlotLoad(0x39);
 }
 
 } /* extern "C" */

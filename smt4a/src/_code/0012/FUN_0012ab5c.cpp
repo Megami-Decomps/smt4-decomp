@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002e9ec8(int, unsigned int);
+int onlineInstanceTableFind(int, unsigned int);
 int FUN_002f6be2(int, int *);
-int FUN_002f6bf0(int);
+int operatorDeleteArrayNullable(int);
 int FUN_0030ca30(int, unsigned int);
 
 typedef int romwright_code(...);
@@ -19,11 +19,11 @@ typedef struct {
 } param_2_stack;
 
 extern unsigned int FUN_002e7908(unsigned int *, unsigned int *);
-extern int FUN_002e9af4(void);
-/* Supplied declaration required: FUN_002e9ec8. */
+extern int onlineInstanceTableGetCurrent(void);
+/* Supplied declaration required: onlineInstanceTableFind. */
 /* Supplied declaration required: FUN_002f6be2. */
-/* Supplied declaration required: FUN_002f6bf0. */
-extern int FUN_002fc046(void);
+/* Supplied declaration required: operatorDeleteArrayNullable. */
+extern int rangeIsEmpty(void);
 /* Supplied declaration required: FUN_0030ca30. */
 
 
@@ -39,8 +39,8 @@ void FUN_0012ab5c(int param_1,int *param_2)
   unsigned int temp_v5 [2];
   int temp_v6;
   
-  temp_v0 = FUN_002e9af4();
-  FUN_002e9ec8(temp_v0,*(unsigned int *)(param_1 + 0x6c));
+  temp_v0 = onlineInstanceTableGetCurrent();
+  onlineInstanceTableFind(temp_v0,*(unsigned int *)(param_1 + 0x6c));
   if (temp_v0 != 0) {
     param_2[2] = *(int *)(param_1 + 0x80);
     (**(romwright_code **)(*param_2 + 0x54))(param_2,*(unsigned int *)(param_1 + 0x7c));
@@ -52,10 +52,10 @@ void FUN_0012ab5c(int param_1,int *param_2)
       FUN_002f6be2(temp_v0 + 8,&temp_v2);
       FUN_002f6be2(temp_v0 + 0x10,&temp_v3);
       (**(romwright_code **)(*param_2 + 0xc))(temp_v4,param_2,temp_v2,temp_v3);
-      FUN_002f6bf0(temp_v2);
-      FUN_002f6bf0(temp_v3);
+      operatorDeleteArrayNullable(temp_v2);
+      operatorDeleteArrayNullable(temp_v3);
     }
-    temp_v0 = FUN_002fc046();
+    temp_v0 = rangeIsEmpty();
     if (temp_v0 == 0) {
       (**(romwright_code **)(*param_2 + 0x50))
                 (param_2,*(int *)(param_1 + 0x170),

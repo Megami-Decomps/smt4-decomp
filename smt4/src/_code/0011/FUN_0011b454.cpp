@@ -4,16 +4,16 @@
 
 extern "C" {
 
-int FUN_002b63c0(void);
+int dataTable1bOr1cGetRecord(void);
 
-/* Supplied declaration required: FUN_002b63c0. */
+/* Supplied declaration required: dataTable1bOr1cGetRecord. */
 
 
 void FUN_0011b454(void)
 
 {
 /* irregular: 1 native warning(s); review required */
-  FUN_002b63c0();
+  dataTable1bOr1cGetRecord();
   return;
 }
 

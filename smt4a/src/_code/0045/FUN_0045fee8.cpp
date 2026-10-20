@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0017572c(int, int);
+int listAppendNode(int, int);
 int FUN_0019102c(int, int);
 int rt_memcpy_w(int, int, int);
 
@@ -14,7 +14,7 @@ typedef struct {
 } param_2_stack;
 
 extern int FUN_00175678(void);
-/* Supplied declaration required: FUN_0017572c. */
+/* Supplied declaration required: listAppendNode. */
 /* Supplied declaration required: FUN_0019102c. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -34,7 +34,7 @@ void FUN_0045fee8(int param_1,int param_2)
   *(unsigned char *)(temp_v1 + 4) = 0x27;
   *(int *)(temp_v1 + 0x10) = param_1 + 0x118;
   rt_memcpy_w(temp_v1 + 0x14,param_2,0x50);
-  FUN_0017572c(temp_v0,temp_v1);
+  listAppendNode(temp_v0,temp_v1);
   return;
 }
 

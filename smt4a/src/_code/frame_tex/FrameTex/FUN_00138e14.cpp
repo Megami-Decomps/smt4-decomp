@@ -70,7 +70,7 @@ extern unsigned char DAT_00530cfc; /* 0x530cfc */
 extern unsigned char DAT_00530d14; /* 0x530d14 */
 extern unsigned char DAT_00530d38; /* 0x530d38 */
 extern unsigned char DAT_00530d44; /* 0x530d44 */
-extern unsigned int *DAT_0057f65c; /* 0x57f65c */
+extern unsigned int *g_frameTex; /* 0x57f65c */
 
 /* Supplied declaration required: asdGxIndexBufferCreate. */
 /* Supplied declaration required: asdProcessCreateSimple. */
@@ -92,7 +92,7 @@ void FUN_00138e14(void)
   
   puVar2 = (unsigned int *)0x100;
   asdMemoryAllocTracked(0x100,0x100,0,0x14a0,1);
-  DAT_0057f65c = puVar2;
+  g_frameTex = puVar2;
   sysMemClear();
   temp_v0 = 0;
   asdGxIndexBufferCreate();
@@ -118,8 +118,8 @@ void FUN_00138e14(void)
   puVar2[0xb] = 0x3e800000;
   puVar2[10] = 0x3e800000;
   puVar2[0xc] = 0x41a00000;
-  puVar1 = DAT_0057f65c;
-  *(unsigned char *)(DAT_0057f65c + 0x3e9) = 0;
+  puVar1 = g_frameTex;
+  *(unsigned char *)(g_frameTex + 0x3e9) = 0;
   *(unsigned char *)(puVar1 + 0x3fd) = 0;
   *(unsigned char *)(puVar2 + 0x410) = 0;
   *(unsigned char *)((int)puVar2 + 0x1043) = 0;
@@ -130,27 +130,27 @@ void FUN_00138e14(void)
   puVar4 = &LAB_00139228;
   asdProcessCreateSimple(&LAB_00139228,0x6c,0,0,FUN_0013cb90,FUN_0013c1a0,puVar1);
   *puVar2 = (unsigned int)puVar4;
-  taskCreateDraw(&LAB_00139234,0xce,0,0,FUN_0013cd7c,0,DAT_0057f65c,puVar4);
-  taskCreateDraw(&LAB_00139240,0x6d,0,0,FUN_0013c660,0,DAT_0057f65c,*puVar2);
-  taskCreateDraw(&LAB_0013924c,0xcf,0,0,FUN_0013c6d4,0,DAT_0057f65c,*puVar2);
-  taskCreateDraw(&LAB_00139258,0x6f,0,0,FUN_0013cf80,0,DAT_0057f65c,*puVar2);
-  taskCreateDraw(&LAB_00139264,0xd1,0,0,FUN_0013d030,0,DAT_0057f65c,*puVar2);
-  taskCreateDraw(&LAB_00139270,0x6e,0,0,FUN_0013c764,0,DAT_0057f65c,*puVar2);
-  taskCreateDraw(&LAB_0013927c,0xd0,0,0,FUN_0013c7dc,0,DAT_0057f65c,*puVar2);
-  taskCreateDraw(&LAB_00139288,0x7b,0,0,FUN_0013db18,0,DAT_0057f65c,*puVar2);
-  taskCreateDraw(&LAB_00139294,0xd7,0,0,jobRenderOnce,0,DAT_0057f65c,*puVar2);
-  taskCreateDraw(&LAB_001392a0,0x65,0,0,FUN_0013d0f0,0,DAT_0057f65c,*puVar2);
-  taskCreateDraw(&LAB_001392ac,0xcc,0,0,FUN_0013d2dc,0,DAT_0057f65c,*puVar2);
-  taskCreateDraw(&LAB_001392b8,0x7a,0,0,FUN_0013ee80,0,DAT_0057f65c,*puVar2);
-  taskCreateDraw(&LAB_001392c8,0xd6,0,0,FUN_0013ef3c,0,DAT_0057f65c,*puVar2);
-  taskCreateDraw(&LAB_001392d8,0x87,0,0,FUN_0013e8f8,0,DAT_0057f65c,*puVar2);
-  taskCreateDraw(&LAB_001392e8,0xe3,0,0,FUN_0013e9e4,0,DAT_0057f65c,*puVar2);
-  taskCreateDraw(&LAB_001392b8,0x82,0,0,FUN_0014055c,0,DAT_0057f65c,*puVar2);
-  taskCreateDraw(&LAB_001392c8,0xde,0,0,FUN_00140618,0,DAT_0057f65c,*puVar2);
-  taskCreateDraw(&LAB_001393f8,0x7a,0,0,FUN_0013e7c4,0,DAT_0057f65c,*puVar2);
-  taskCreateDraw(&LAB_00139404,0xd6,0,0,FUN_0013e848,0,DAT_0057f65c,*puVar2);
-  taskCreateDraw(&LAB_00139410,0x7c,0,0,FUN_0013dc70,0,DAT_0057f65c,*puVar2);
-  taskCreateDraw(&LAB_0013941c,0xd8,0,0,FUN_0013dd18,0,DAT_0057f65c,*puVar2);
+  taskCreateDraw(&LAB_00139234,0xce,0,0,FUN_0013cd7c,0,g_frameTex,puVar4);
+  taskCreateDraw(&LAB_00139240,0x6d,0,0,FUN_0013c660,0,g_frameTex,*puVar2);
+  taskCreateDraw(&LAB_0013924c,0xcf,0,0,FUN_0013c6d4,0,g_frameTex,*puVar2);
+  taskCreateDraw(&LAB_00139258,0x6f,0,0,FUN_0013cf80,0,g_frameTex,*puVar2);
+  taskCreateDraw(&LAB_00139264,0xd1,0,0,FUN_0013d030,0,g_frameTex,*puVar2);
+  taskCreateDraw(&LAB_00139270,0x6e,0,0,FUN_0013c764,0,g_frameTex,*puVar2);
+  taskCreateDraw(&LAB_0013927c,0xd0,0,0,FUN_0013c7dc,0,g_frameTex,*puVar2);
+  taskCreateDraw(&LAB_00139288,0x7b,0,0,FUN_0013db18,0,g_frameTex,*puVar2);
+  taskCreateDraw(&LAB_00139294,0xd7,0,0,jobRenderOnce,0,g_frameTex,*puVar2);
+  taskCreateDraw(&LAB_001392a0,0x65,0,0,FUN_0013d0f0,0,g_frameTex,*puVar2);
+  taskCreateDraw(&LAB_001392ac,0xcc,0,0,FUN_0013d2dc,0,g_frameTex,*puVar2);
+  taskCreateDraw(&LAB_001392b8,0x7a,0,0,FUN_0013ee80,0,g_frameTex,*puVar2);
+  taskCreateDraw(&LAB_001392c8,0xd6,0,0,FUN_0013ef3c,0,g_frameTex,*puVar2);
+  taskCreateDraw(&LAB_001392d8,0x87,0,0,FUN_0013e8f8,0,g_frameTex,*puVar2);
+  taskCreateDraw(&LAB_001392e8,0xe3,0,0,FUN_0013e9e4,0,g_frameTex,*puVar2);
+  taskCreateDraw(&LAB_001392b8,0x82,0,0,FUN_0014055c,0,g_frameTex,*puVar2);
+  taskCreateDraw(&LAB_001392c8,0xde,0,0,FUN_00140618,0,g_frameTex,*puVar2);
+  taskCreateDraw(&LAB_001393f8,0x7a,0,0,FUN_0013e7c4,0,g_frameTex,*puVar2);
+  taskCreateDraw(&LAB_00139404,0xd6,0,0,FUN_0013e848,0,g_frameTex,*puVar2);
+  taskCreateDraw(&LAB_00139410,0x7c,0,0,FUN_0013dc70,0,g_frameTex,*puVar2);
+  taskCreateDraw(&LAB_0013941c,0xd8,0,0,FUN_0013dd18,0,g_frameTex,*puVar2);
   return;
 }
 

@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_2_stack;
 
-extern unsigned int *DAT_00439ca8; /* 0x439ca8 */
+extern unsigned int *g_btlUiBlock; /* 0x439ca8 */
 
 /* Supplied declaration required: FUN_002630e0. */
 extern int FUN_00293230(unsigned int);
@@ -36,15 +36,15 @@ unsigned int FUN_003ae418(unsigned int param_1,unsigned int *param_2)
   unsigned int uStack_34;
   unsigned int uStack_30;
   
-  puVar1 = DAT_00439ca8;
+  puVar1 = g_btlUiBlock;
   temp_v2 = 0;
   do {
-    if (*(short *)(DAT_00439ca8 + temp_v2 * 0x53 + 0x3871) == 0) {
+    if (*(short *)(g_btlUiBlock + temp_v2 * 0x53 + 0x3871) == 0) {
       if (temp_v2 >= 0xc) {
         return 0xffffffff;
       }
       temp_v3 = 0;
-      *(unsigned short *)(DAT_00439ca8 + temp_v2 * 0x53 + 0x3871) = 2;
+      *(unsigned short *)(g_btlUiBlock + temp_v2 * 0x53 + 0x3871) = 2;
       *(unsigned short *)((int)puVar1 + temp_v2 * 0x14c + 0xe1c6) = 0;
       puVar1[temp_v2 * 0x53 + 0x3872] = 0;
       *(unsigned char *)(puVar1 + temp_v2 * 0x53 + 0x3873) = 0;

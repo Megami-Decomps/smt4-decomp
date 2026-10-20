@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_0016c410(...);
+int renderCtxResetColorScale(...);
 int FUN_0016c560(...);
 int FUN_002a6a84(...);
 int FUN_00344cd0(...);
 
 int FUN_00100388(...);
-int FUN_00100854(...);
+int libc_bsearch(...);
 int FUN_00157558(int);
 int FUN_00162790(...);
 int FUN_00164b5c(...);
@@ -19,7 +19,7 @@ int FUN_001834a4(...);
 int FUN_001835b4(...);
 int FUN_0018408c(...);
 int FUN_00261468(...);
-int FUN_00261828(void);
+int gameDataGetPlayerName(void);
 int tmnlGetEntryText(...);
 int VectorSignedToFloat(...);
 
@@ -51,15 +51,15 @@ extern unsigned int DAT_005f1b00; /* 0x5f1b00 */
 #define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
 #endif
 /* Supplied declaration required: FUN_00100388. */
-/* Supplied declaration required: FUN_00100854. */
+/* Supplied declaration required: libc_bsearch. */
 /* Supplied declaration required: FUN_00157558. */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164b5c. */
-extern unsigned int FUN_001654d8(int);
-extern unsigned int FUN_001654e4(int);
+extern unsigned int vec2GetXInt(int);
+extern unsigned int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0016c410. */
+/* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: FUN_0016c560. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
@@ -68,7 +68,7 @@ extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern unsigned int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_00261468. */
-/* Supplied declaration required: FUN_00261828. */
+/* Supplied declaration required: gameDataGetPlayerName. */
 extern int FUN_00284140(int);
 extern int FUN_002a4860(int);
 extern int FUN_002a4894(int);
@@ -238,7 +238,7 @@ unsigned int FUN_0022a5d8(void)
                           temp_v10 = dataTableGetCount(temp_v10);
                           puVar9 = (unsigned int *)&temp_v12;
                           temp_v12 = romwright_piece_2_2((*(unsigned short *)((unsigned char *)&temp_v12 + 2)),(unsigned short)temp_v0);
-                          FUN_00100854(puVar9,temp_v5,temp_v10,0x68,&LAB_002b2b24);
+                          libc_bsearch(puVar9,temp_v5,temp_v10,0x68,&LAB_002b2b24);
                           pcVar7 = (char *)((int)puVar9 + 2);
                         }
                       }
@@ -267,7 +267,7 @@ unsigned int FUN_0022a5d8(void)
             }
           }
           else {
-            pcVar7 = (char *)FUN_00261828();
+            pcVar7 = (char *)gameDataGetPlayerName();
           }
           FUN_00100388(temp_v18,&LAB_0022a9d8,pcVar7);
           if ((g_lmapMain != '\0') &&
@@ -383,7 +383,7 @@ unsigned int FUN_0022a5d8(void)
         }
       }
       else {
-        temp_v10 = FUN_00261828();
+        temp_v10 = gameDataGetPlayerName();
         FUN_00100388(temp_v17,&LAB_0022b2cc,temp_v10);
         if (*(int *)(temp_v1 + 0x744) == 3) {
           temp_v8 = temp_v3;
@@ -426,8 +426,8 @@ unsigned int FUN_0022a5d8(void)
     temp_v2 = FUN_00348ed0(temp_v19);
     if (temp_v2 < temp_v8) {
       efctSetSpeed();
-      temp_v10 = FUN_001654e4(temp_v1 + 0x6b8);
-      temp_v5 = FUN_001654d8(temp_v1 + 0x6b8);
+      temp_v10 = vec2GetYInt(temp_v1 + 0x6b8);
+      temp_v5 = vec2GetXInt(temp_v1 + 0x6b8);
       temp_v16 = (int)*(short *)(temp_v1 + 0x76c);
       iStack_184 = (int)*(short *)(temp_v1 + 0x76e);
       uStack_180 = 0xfb;
@@ -451,7 +451,7 @@ unsigned int FUN_0022a5d8(void)
       *(unsigned char *)(temp_v1 + 0x1270) = 0;
     }
     FUN_0016c560(g_renderCtx);
-    FUN_0016c410(g_renderCtx);
+    renderCtxResetColorScale(g_renderCtx);
   }
   return 0;
 }

@@ -7,14 +7,14 @@ extern "C" {
 int FUN_001006ec(int, int, int);
 int FUN_00157110(void);
 int vcallSlot12IfValid(unsigned int);
-int FUN_00195fc8(void);
+int sysFatalBreak(void);
 int asdMemFree(void);
 
 typedef int romwright_code(...);
 /* Supplied declaration required: FUN_001006ec. */
 /* Supplied declaration required: FUN_00157110. */
 /* Supplied declaration required: vcallSlot12IfValid. */
-/* Supplied declaration required: FUN_00195fc8. */
+/* Supplied declaration required: sysFatalBreak. */
 /* Supplied declaration required: asdMemFree. */
 
 
@@ -37,7 +37,7 @@ int * FUN_00157194(int *param_1)
   if (temp_v1 != 0) {
     if ((*(unsigned int *)(temp_v1 + 4) & 0xfffffffe) != 0) {
       if ((*(unsigned int *)(temp_v1 + 4) & 1) != 0) {
-        FUN_00195fc8();
+        sysFatalBreak();
       }
       vcallSlot12IfValid(*(unsigned int *)(temp_v1 + 4) & 0xfffffffe);
       *(unsigned int *)(temp_v1 + 4) = 0;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0026f9b4(void);
+int bgmReleaseStopped(void);
 int FUN_00287328(unsigned int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -17,9 +17,9 @@ extern unsigned int DAT_0049f944; /* 0x49f944 */
 extern signed char DAT_0049fa39; /* 0x49fa39 */
 extern signed char DAT_0049fa61; /* 0x49fa61 */
 
-/* Supplied declaration required: FUN_0026f9b4. */
+/* Supplied declaration required: bgmReleaseStopped. */
 /* Supplied declaration required: FUN_00287328. */
-extern int FUN_00287468(unsigned int);
+extern int bgmGetStateById(unsigned int);
 extern int FUN_00287894(void);
 extern int FUN_002903f0(void);
 
@@ -54,19 +54,19 @@ void FUN_00266a2c(void)
         DAT_0049f944 = 0x1000038;
       }
     }
-    temp_v0 = FUN_00287468(DAT_0049f944);
+    temp_v0 = bgmGetStateById(DAT_0049f944);
     if (temp_v0 != 0) {
       if (temp_v0 == 1 || temp_v0 == 2) {
         return;
       }
     }
     else {
-      FUN_0026f9b4();
+      bgmReleaseStopped();
     }
     FUN_00287328(DAT_0049f944);
     return;
   }
-  FUN_0026f9b4();
+  bgmReleaseStopped();
   DAT_0049fa39 = 1;
   return;
 }

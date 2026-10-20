@@ -1,4 +1,4 @@
-/* Releases the object's resource: runs FUN_00152bec for valid (non-negative) resources, frees it and clears the slot. */
+/* Releases the object's resource: runs asdMdlManagerMarkDestroy for valid (non-negative) resources, frees it and clears the slot. */
 #include "common.h"
 
 extern "C" {
@@ -18,14 +18,14 @@ typedef struct Object {
     /* 0x4398 */ Resource *resource;
 } Object;
 
-extern void FUN_00152bec(Resource *resource);
+extern void asdMdlManagerMarkDestroy(Resource *resource);
 extern void asdMdlManagerDestroy(Resource *resource);
 
 void FUN_00339828(Object *obj)
 {
     if (obj->resource != NULL) {
         if (obj->resource->info->index >= 0) {
-            FUN_00152bec(obj->resource);
+            asdMdlManagerMarkDestroy(obj->resource);
         }
         asdMdlManagerDestroy(obj->resource);
         obj->resource = NULL;

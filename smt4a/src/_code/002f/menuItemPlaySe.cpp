@@ -3,7 +3,7 @@
 extern "C" {
 
 void sysPlaySe(s32 id);
-s32 FUN_0018719c(u32 flag);
+s32 gameFlagIsSet(u32 flag);
 
 /* Plays the sound effect that belongs to menu item `item` (0x13..0x19 and 0x48..0x4E); items 0x13 and 0x16 pick one of two effects by flag 0x410. */
 void menuItemPlaySe(s32 item)
@@ -12,7 +12,7 @@ void menuItemPlaySe(s32 item)
     u32 effect;
 
     if (item == 0x13 || item == 0x48) {
-        flag = FUN_0018719c(0x410);
+        flag = gameFlagIsSet(0x410);
         if (flag == 0) {
             effect = 0x15;
         } else {
@@ -29,7 +29,7 @@ void menuItemPlaySe(s32 item)
         return;
     }
     if (item == 0x16 || item == 0x4B) {
-        flag = FUN_0018719c(0x410);
+        flag = gameFlagIsSet(0x410);
         if (flag == 0) {
             effect = 0x16;
         } else {

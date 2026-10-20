@@ -7,7 +7,7 @@ extern "C" {
 int jobStop(...);
 int FUN_00280328(...);
 int FUN_002ea508(...);
-int FUN_00317508(...);
+int asdListBoxSetByteValue(...);
 int asdListBoxAddItems(...);
 int asdListBoxSetToggleItem(...);
 int FUN_00340edc(...);
@@ -36,13 +36,13 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_2_stack;
 
-extern int DAT_00571508; /* 0x571508 */
+extern int g_btlCamera; /* 0x571508 */
 
 /* Supplied declaration required: jobStop. */
 extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_00280328. */
 /* Supplied declaration required: FUN_002ea508. */
-/* Supplied declaration required: FUN_00317508. */
+/* Supplied declaration required: asdListBoxSetByteValue. */
 /* Supplied declaration required: asdListBoxAddItems. */
 /* Supplied declaration required: asdListBoxSetToggleItem. */
 /* Supplied declaration required: FUN_00340edc. */
@@ -65,11 +65,11 @@ void FUN_004d5a70(fn_004d5a70_arg0 *param_1,int param_2)
   FUN_00280328(temp_v1,0x75,0);
   *(unsigned int *)&param_1->field_0x10 = temp_v1;
   asdListBoxAddItems();
-  FUN_00317508(*(unsigned int *)&param_1->field_0x10,1);
+  asdListBoxSetByteValue(*(unsigned int *)&param_1->field_0x10,1);
   FUN_002ea508(*(unsigned int *)&param_1->field_0x10,"Camera UpDown Menu");
-  asdListBoxSetToggleItem(*(unsigned int *)&param_1->field_0x10,0,(*(unsigned int *)(DAT_00571508 + 0x64c) & 0x20) >> 5);
-  asdListBoxSetToggleItem(*(unsigned int *)&param_1->field_0x10,1,(*(unsigned int *)(DAT_00571508 + 0x64c) & 0x40) >> 6);
-  asdListBoxSetToggleItem(*(unsigned int *)&param_1->field_0x10,2,(*(unsigned int *)(DAT_00571508 + 0x64c) & 0x80) >> 7);
+  asdListBoxSetToggleItem(*(unsigned int *)&param_1->field_0x10,0,(*(unsigned int *)(g_btlCamera + 0x64c) & 0x20) >> 5);
+  asdListBoxSetToggleItem(*(unsigned int *)&param_1->field_0x10,1,(*(unsigned int *)(g_btlCamera + 0x64c) & 0x40) >> 6);
+  asdListBoxSetToggleItem(*(unsigned int *)&param_1->field_0x10,2,(*(unsigned int *)(g_btlCamera + 0x64c) & 0x80) >> 7);
   FUN_00340edc(*(unsigned int *)&param_1->field_0x10,3,0xfffffff6,10);
   FUN_00340edc(*(unsigned int *)&param_1->field_0x10,4,0,10);
   FUN_00340edc(*(unsigned int *)&param_1->field_0x10,5,0xfffffc19,999);

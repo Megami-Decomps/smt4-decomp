@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_002c0c5c(void);
-int FUN_002c0cac(void);
+int dataTable24Sub0Get(void);
+int dataTable24Sub0GetEntries(void);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -17,12 +17,12 @@ typedef struct {
 extern int FUN_0010f498(void);
 extern int FUN_0010f4d4(char);
 extern unsigned short *FUN_00111a5c(char, char, short);
-extern int FUN_002c09d0(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 extern unsigned int randNextInRange(unsigned int);
 extern unsigned short *FUN_002c0a2c(char, char, short);
 extern int FUN_002c0a84(void);
-/* Supplied declaration required: FUN_002c0c5c. */
-/* Supplied declaration required: FUN_002c0cac. */
+/* Supplied declaration required: dataTable24Sub0Get. */
+/* Supplied declaration required: dataTable24Sub0GetEntries. */
 
 
 void FUN_00107264(int param_1)
@@ -47,9 +47,9 @@ void FUN_00107264(int param_1)
   unsigned int temp_v12;
   unsigned short temp_v13;
   
-  FUN_002c0cac();
+  dataTable24Sub0GetEntries();
   temp_v5 = param_1;
-  FUN_002c0c5c();
+  dataTable24Sub0Get();
   temp_v10 = 0;
   if (temp_v10 < temp_v5) {
     do {
@@ -116,8 +116,8 @@ void FUN_00107264(int param_1)
             }
           }
         }
-        temp_v6 = FUN_002c09d0(0x668);
-        if ((temp_v6 != 0) && (temp_v6 = FUN_002c09d0(0x1d7), temp_v6 == 0)) {
+        temp_v6 = gameFlagIsSet(0x668);
+        if ((temp_v6 != 0) && (temp_v6 = gameFlagIsSet(0x1d7), temp_v6 == 0)) {
           if (temp_v2 != '\0') {
             if ((temp_v2 != '\x01') || (temp_v1 != '\t')) goto LAB_0010749c;
           }

@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002b63c0(void);
+int dataTable1bOr1cGetRecord(void);
 
-extern int FUN_002adc88(void);
-/* Supplied declaration required: FUN_002b63c0. */
+extern int gameGetFlagBlock(void);
+/* Supplied declaration required: dataTable1bOr1cGetRecord. */
 
 
 int QcUtility_CountFlaggedSubQuests(void)
@@ -23,9 +23,9 @@ int QcUtility_CountFlaggedSubQuests(void)
   temp_v2 = 100;
   do {
     temp_v0 = temp_v2;
-    FUN_002b63c0();
+    dataTable1bOr1cGetRecord();
     if ((temp_v0 != 0) &&
-       (temp_v1 = FUN_002adc88(), (*(unsigned char *)(temp_v1 + (temp_v2 & 0xffff) * 4 + 0x200) & 8) != 0)) {
+       (temp_v1 = gameGetFlagBlock(), (*(unsigned char *)(temp_v1 + (temp_v2 & 0xffff) * 4 + 0x200) & 8) != 0)) {
       temp_v3 = temp_v3 + 1;
     }
     temp_v2 = temp_v2 + 1;

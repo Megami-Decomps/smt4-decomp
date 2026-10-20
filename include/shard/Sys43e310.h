@@ -11,6 +11,6 @@ typedef struct Sys43e310 {
     /* 0x03 */ s8 unk03;
 } Sys43e310;
 
-extern Sys43e310 DAT_0043e310;
+extern Sys43e310 g_saveLoadThread;
 
 #endif

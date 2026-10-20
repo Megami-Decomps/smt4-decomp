@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00180310(unsigned int, int, int, unsigned int, unsigned int, unsigned int, unsigned char *, unsigned int);
 int FUN_00183bb0(void);
-int FUN_00184e64(unsigned int);
+int drawSetColorFromRGBA8(unsigned int);
 int VectorSignedToFloat(unsigned int, int);
 
 /* stack frame of param_9: 4 slot(s), 16 byte(s) */
@@ -22,7 +22,7 @@ extern unsigned char LAB_004934a8; /* 0x4934a8 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_00184e64. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 
 
 void FUN_00493408(float *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
@@ -35,7 +35,7 @@ void FUN_00493408(float *param_1,unsigned int param_2,unsigned int param_3,unsig
   float temp_v0;
   float temp_v1;
   
-  FUN_00184e64(param_7);
+  drawSetColorFromRGBA8(param_7);
   temp_v0 = (float)VectorSignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v1 = (float)VectorSignedToFloat(param_4,(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_00180310(param_2,(int)(*param_1 + param_1[2] + temp_v0),(int)(param_1[1] + param_1[3] + temp_v1),

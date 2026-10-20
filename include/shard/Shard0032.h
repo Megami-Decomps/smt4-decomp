@@ -52,7 +52,7 @@ typedef struct Menu32 {
     /* 0x4B28 */ u32 unk4B28;
 } Menu32;
 
-/* Global settings block (DAT_005b3bf4). */
+/* Global settings block (g_gfxSettings). */
 typedef struct Settings5B {
     /* 0x00 */ u8 unk00[0x2];
     /* 0x02 */ s8 value;
@@ -123,8 +123,8 @@ typedef struct UnitRecord {
     /* 0x66 */ u8 unk66[0xC6];
 } UnitRecord;
 
-/* Party manager data (FUN_001ab888). */
-/* Party manager data (FUN_001ab888). */
+/* Party manager data (gameGetSlotTable). */
+/* Party manager data (gameGetSlotTable). */
 typedef struct SummarySource {
     /* 0x00 */ u8 unk00[0x4];
     /* 0x04 */ u16 stats[7];

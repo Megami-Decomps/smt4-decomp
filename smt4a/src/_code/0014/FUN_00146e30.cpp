@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0015a450(unsigned char *);
-int FUN_00195fc8(void);
+int sysFatalBreak(void);
 int software_interrupt(int);
 
 extern int DAT_0058928c; /* 0x58928c */
@@ -15,7 +15,7 @@ extern unsigned char DAT_0061a6a4; /* 0x61a6a4 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_0015a450. */
-/* Supplied declaration required: FUN_00195fc8. */
+/* Supplied declaration required: sysFatalBreak. */
 
 
 void FUN_00146e30(void)
@@ -26,12 +26,12 @@ void FUN_00146e30(void)
   
   if (DAT_0058928c != 0) {
     if (DAT_00589290 != 0) {
-      FUN_00195fc8();
+      sysFatalBreak();
     }
     temp_v0 = 0;
     do {
       if (*(int *)(temp_v0 * 4 + 0x61a644) != 0) {
-        FUN_00195fc8();
+        sysFatalBreak();
       }
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < 8);

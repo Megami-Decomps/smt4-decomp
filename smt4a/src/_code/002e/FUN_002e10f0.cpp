@@ -11,8 +11,8 @@ extern unsigned int DAT_00640390; /* 0x640390 */
 extern unsigned int DAT_00640394; /* 0x640394 */
 
 /* Supplied declaration required: asdSequenceRequest. */
-extern int FUN_00164af0(unsigned int);
-extern int FUN_001656a0(unsigned int);
+extern int padButtonRepeat(unsigned int);
+extern int padButtonIsPressed(unsigned int);
 
 
 unsigned int FUN_002e10f0(void)
@@ -24,16 +24,16 @@ unsigned int FUN_002e10f0(void)
   
   for (temp_v0 = DAT_00640390; temp_v0 != 0; temp_v0 = temp_v0 - 1) {
   }
-  temp_v1 = FUN_001656a0(0);
+  temp_v1 = padButtonIsPressed(0);
   if (temp_v1 != 0) {
     asdSequenceRequest(*(unsigned int *)(DAT_0064038c + DAT_00640394 * 8 + 4),0);
     return 0xffffffff;
   }
-  temp_v1 = FUN_00164af0(5);
+  temp_v1 = padButtonRepeat(5);
   if (temp_v1 != 0) {
     DAT_00640394 = DAT_00640394 - 1;
   }
-  temp_v1 = FUN_00164af0(6);
+  temp_v1 = padButtonRepeat(6);
   if (temp_v1 != 0) {
     DAT_00640394 = DAT_00640394 + 1;
   }
@@ -43,11 +43,11 @@ unsigned int FUN_002e10f0(void)
   if (DAT_00640390 <= DAT_00640394) {
     DAT_00640394 = 0;
   }
-  temp_v1 = FUN_001656a0(4);
+  temp_v1 = padButtonIsPressed(4);
   if (temp_v1 != 0) {
     DAT_00640394 = DAT_00640394 - 0x19;
   }
-  temp_v1 = FUN_001656a0(3);
+  temp_v1 = padButtonIsPressed(3);
   if (temp_v1 != 0) {
     DAT_00640394 = DAT_00640394 + 0x19;
   }

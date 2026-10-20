@@ -30,7 +30,7 @@ extern unsigned char LAB_001df8b4; /* 0x1df8b4 */
 extern int mobiclipHeapAllocC(...); /* 0x1ffc10 */
 extern int mobiclipHeapAllocD(...); /* 0x203cc8 */
 extern unsigned char LAB_00240000; /* 0x240000 */
-extern unsigned char DAT_0044d020; /* 0x44d020 */
+extern unsigned char g_mobiclipCtrl; /* 0x44d020 */
 extern unsigned int DAT_004c3828; /* 0x4c3828 */
 extern unsigned int DAT_004c3880; /* 0x4c3880 */
 extern unsigned int DAT_004c38d8; /* 0x4c38d8 */
@@ -75,7 +75,7 @@ void FUN_0017fc6c(void)
   temp_v0 = 0x10000;
   asdMemoryAlloc(0x10000,0x100,0,0x90000,1);
   FUN_002c3918(&DAT_004c3988,temp_v0,0x90000,0);
-  DAT_0044d020 = 0;
+  g_mobiclipCtrl = 0;
   FUN_003f5fc4(mobiclipHeapAllocB,&LAB_001a0f60);
   FUN_003f6520(mobiclipHeapAllocD,&LAB_001df8b4);
   FUN_003f60ec(mobiclipHeapAllocC,&LAB_001dbc3c);

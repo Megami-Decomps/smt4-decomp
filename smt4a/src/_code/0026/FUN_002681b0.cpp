@@ -5,14 +5,14 @@
 extern "C" {
 
 int jobStop(unsigned int, int);
-int FUN_002e3328(void);
+int asdOperatorDelete(void);
 int FUN_004188ec(unsigned int *);
 
 typedef int romwright_code(...);
 extern unsigned int *DAT_00588e2c; /* 0x588e2c */
 
 /* Supplied declaration required: jobStop. */
-/* Supplied declaration required: FUN_002e3328. */
+/* Supplied declaration required: asdOperatorDelete. */
 /* Supplied declaration required: FUN_004188ec. */
 
 
@@ -41,7 +41,7 @@ unsigned int FUN_002681b0(void)
       *(unsigned char *)(puVar2 + 1) = 1;
       jobStop(*puVar2,0);
       if (DAT_00588e2c != (unsigned int *)0x0) {
-        FUN_002e3328();
+        asdOperatorDelete();
         DAT_00588e2c = (unsigned int *)0x0;
       }
     }

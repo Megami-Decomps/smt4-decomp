@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 extern int FUN_004d0524(void);
 
 
@@ -14,10 +14,10 @@ unsigned int FUN_00328210(void)
   int temp_v0;
   unsigned int temp_v1;
   
-  temp_v0 = FUN_0018719c(0x49a);
+  temp_v0 = gameFlagIsSet(0x49a);
   temp_v1 = 0;
-  if ((((temp_v0 != 0) && (temp_v0 = FUN_0018719c(0x404), temp_v1 = 0, temp_v0 != 0)) &&
-      ((temp_v0 = FUN_0018719c(0xc), temp_v0 == 0 || (temp_v0 = FUN_0018719c(0x10), temp_v1 = 0, temp_v0 != 0)
+  if ((((temp_v0 != 0) && (temp_v0 = gameFlagIsSet(0x404), temp_v1 = 0, temp_v0 != 0)) &&
+      ((temp_v0 = gameFlagIsSet(0xc), temp_v0 == 0 || (temp_v0 = gameFlagIsSet(0x10), temp_v1 = 0, temp_v0 != 0)
        ))) && (temp_v0 = FUN_004d0524(), temp_v1 = 0, temp_v0 != 0)) {
     temp_v1 = 1;
   }

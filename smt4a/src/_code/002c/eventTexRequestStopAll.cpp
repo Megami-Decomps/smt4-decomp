@@ -4,7 +4,7 @@ extern "C" {
 
 void FUN_0016572c(u32 handle, s32 arg);
 void FUN_001656e0(u32 handle, s32 arg);
-s32 FUN_00165058(u32 handle);
+s32 jobGetStatus(u32 handle);
 s32 jobIsValid(u32 handle);
 
 extern EventTexA *g_eventTex;
@@ -16,7 +16,7 @@ void eventTexRequestStopAll(void)
 
     if (g_eventTex != NULL) {
         for (i = 0; i < tex->count; i++) {
-            if (jobIsValid(tex->slots[i]) != 0 && FUN_00165058(tex->slots[i]) != 4) {
+            if (jobIsValid(tex->slots[i]) != 0 && jobGetStatus(tex->slots[i]) != 4) {
                 FUN_001656e0(tex->slots[i], 1);
             }
         }

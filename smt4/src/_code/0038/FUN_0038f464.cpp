@@ -9,7 +9,7 @@ int FUN_002353b4(void);
 int FUN_0028971c(void);
 int FUN_00297060(void *, unsigned int);
 int scrScriptProcessDestroy(int);
-int FUN_002b8cc8(void);
+int ifTouchRegionRemove(void);
 int FUN_002ba968(int, int *);
 int FUN_002baa40(unsigned int *, int);
 
@@ -50,7 +50,7 @@ extern int g_aocMain; /* 0x432fc8 */
 /* Supplied declaration required: FUN_0028971c. */
 /* Supplied declaration required: FUN_00297060. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: FUN_002b8cc8. */
+/* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: FUN_002ba968. */
 /* Supplied declaration required: FUN_002baa40. */
 
@@ -90,8 +90,8 @@ void FUN_0038f464(fn_0038f464_arg0 *param_1)
     *(unsigned int *)((int)pvVar1 + 0x108) = 2;
     FUN_0028971c();
     FUN_002353b4();
-    FUN_002b8cc8();
-    FUN_002b8cc8();
+    ifTouchRegionRemove();
+    ifTouchRegionRemove();
     piVar2 = (int *)param_1->field_0x208;
     param_1->field_0x4 = 3;
     param_1->field_0x8 = 0;

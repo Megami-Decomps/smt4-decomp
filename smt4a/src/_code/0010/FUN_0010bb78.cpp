@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002ed280(int, int);
+int streamSkip(int, int);
 int FUN_002eea8a(...);
 
 /* stack frame of param_4: 4 slot(s), 9 byte(s) */
@@ -15,10 +15,10 @@ typedef struct {
     unsigned short sp38; /* 0x38: local_38 */
 } param_4_stack;
 
-/* Supplied declaration required: FUN_002ed280. */
+/* Supplied declaration required: streamSkip. */
 /* Supplied declaration required: FUN_002eea8a. */
 extern int FUN_002ef9e0(unsigned char *, unsigned short);
-extern int FUN_002f12f4(int, int);
+extern int streamReadByte(int, int);
 
 
 unsigned int FUN_0010bb78(unsigned int param_1,int param_2,int param_3,int *param_4)
@@ -42,11 +42,11 @@ unsigned int FUN_0010bb78(unsigned int param_1,int param_2,int param_3,int *para
     iStack_20 = param_2;
     iStack_1c = param_3;
     temp_v6 = param_4;
-    temp_v0 = FUN_002f12f4(param_2,param_3 + 0x25);
+    temp_v0 = streamReadByte(param_2,param_3 + 0x25);
     if (temp_v0 == 0) {
       return 0;
     }
-    temp_v0 = FUN_002f12f4(param_2,param_3 + 0x26);
+    temp_v0 = streamReadByte(param_2,param_3 + 0x26);
     if (temp_v0 == 0) {
       return 0;
     }
@@ -54,11 +54,11 @@ unsigned int FUN_0010bb78(unsigned int param_1,int param_2,int param_3,int *para
     if (temp_v0 == 0) {
       return 0;
     }
-    temp_v0 = FUN_002ed280(param_2,1);
+    temp_v0 = streamSkip(param_2,1);
     if (temp_v0 == 0) {
       return 0;
     }
-    temp_v0 = FUN_002ed280(param_2,4);
+    temp_v0 = streamSkip(param_2,4);
     if (temp_v0 == 0) {
       return 0;
     }
@@ -70,10 +70,10 @@ unsigned int FUN_0010bb78(unsigned int param_1,int param_2,int param_3,int *para
     temp_v0 = FUN_002ef9e0(temp_v4,temp_v3[0]);
     *(unsigned short *)(param_3 + 0x44) = *(unsigned short *)(temp_v0 + 4);
     if ((((*(unsigned short *)(param_3 + 0x3c) & 0xf) == 0) || ((*(unsigned short *)(param_3 + 0x3c) & 0xf) == 1))
-       && (temp_v0 = FUN_002ed280(param_2,4), temp_v0 == 0)) {
+       && (temp_v0 = streamSkip(param_2,4), temp_v0 == 0)) {
       return 0;
     }
-    if (((*(unsigned short *)(param_3 + 0x3c) & 0xf) == 2) && (temp_v0 = FUN_002ed280(param_2,1), temp_v0 == 0))
+    if (((*(unsigned short *)(param_3 + 0x3c) & 0xf) == 2) && (temp_v0 = streamSkip(param_2,1), temp_v0 == 0))
     {
       return 0;
     }
@@ -91,7 +91,7 @@ unsigned int FUN_0010bb78(unsigned int param_1,int param_2,int param_3,int *para
     }
     temp_v5 = *(unsigned char *)(param_3 + 0x25);
     if (temp_v5 >> 4 < 0xc) {
-      temp_v0 = FUN_002ed280(param_2,temp_v2[0] + 1);
+      temp_v0 = streamSkip(param_2,temp_v2[0] + 1);
       if (temp_v0 == 0) {
         return 0;
       }

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e9afe(unsigned int, unsigned int);
+int vectorCopyHeader(unsigned int, unsigned int);
 int FUN_002ea3d0(int, unsigned int);
 int FUN_002ea41e(...);
 int FUN_0030202c(int, int, unsigned char *);
@@ -19,7 +19,7 @@ extern unsigned char LAB_001163c4; /* 0x1163c4 */
 extern unsigned char LAB_001163cd; /* 0x1163cd */
 
 extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
-/* Supplied declaration required: FUN_002e9afe. */
+/* Supplied declaration required: vectorCopyHeader. */
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned char *, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
 /* Supplied declaration required: FUN_002ea41e. */
@@ -51,7 +51,7 @@ void FUN_00116344(int param_1)
     if (temp_v0 != 0) {
       temp_v6[0] = 0x8001000b;
       temp_v1 = FUN_002e7908(temp_v5,temp_v6);
-      FUN_002e9afe(*(unsigned int *)(param_1 + 0x1a8),temp_v1);
+      vectorCopyHeader(*(unsigned int *)(param_1 + 0x1a8),temp_v1);
       temp_v1 = FUN_002ea3c0(temp_v4,&LAB_001163cd,0,&LAB_001163c4);
       FUN_002ea3d0(param_1,temp_v1);
       return;

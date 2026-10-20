@@ -6,11 +6,11 @@ extern "C" {
 
 int FUN_0023cd08(unsigned int, unsigned int, int);
 int FUN_0024d434(unsigned int, unsigned int, int);
-int FUN_00282924(unsigned int, unsigned int);
+int btlMainFindEntryByListedId(unsigned int, unsigned int);
 
 /* Supplied declaration required: FUN_0023cd08. */
 /* Supplied declaration required: FUN_0024d434. */
-/* Supplied declaration required: FUN_00282924. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 extern unsigned int btlGetMainState(void);
 
 
@@ -31,7 +31,7 @@ void FUN_003dd680(unsigned int param_1,unsigned int param_2,unsigned int param_3
     break;
   case 2:
     temp_v0 = btlGetMainState();
-    FUN_00282924(temp_v0,param_3);
+    btlMainFindEntryByListedId(temp_v0,param_3);
     break;
   case 3:
     temp_v0 = btlGetMainState();
@@ -43,7 +43,7 @@ void FUN_003dd680(unsigned int param_1,unsigned int param_2,unsigned int param_3
     break;
   case 5:
     temp_v0 = btlGetMainState();
-    FUN_00282924(temp_v0,param_4);
+    btlMainFindEntryByListedId(temp_v0,param_4);
     break;
   case 6:
     break;

@@ -33,7 +33,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_2_stack;
 
-extern int *DAT_00439ca8; /* 0x439ca8 */
+extern int *g_btlUiBlock; /* 0x439ca8 */
 
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -48,7 +48,7 @@ void FUN_003ae34c(unsigned int param_1,fn_003ae34c_arg1 *param_2)
   
   temp_v0 = 0;
   while( 1 ) {
-    temp_v1 = *(int *)(*DAT_00439ca8 + 0x1fc0) + temp_v0 * 0x288;
+    temp_v1 = *(int *)(*g_btlUiBlock + 0x1fc0) + temp_v0 * 0x288;
     temp_v2 = 0;
     if (temp_v1 != 0) {
       temp_v2 = *(int *)(temp_v1 + 0x27c);
@@ -60,7 +60,7 @@ void FUN_003ae34c(unsigned int param_1,fn_003ae34c_arg1 *param_2)
       return;
     }
   }
-  rt_memcpy_w(DAT_00439ca8 + temp_v0 * 0x181 + 0x1758,param_2,0x604);
+  rt_memcpy_w(g_btlUiBlock + temp_v0 * 0x181 + 0x1758,param_2,0x604);
   return;
 }
 

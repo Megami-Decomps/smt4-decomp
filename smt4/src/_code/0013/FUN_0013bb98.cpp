@@ -9,7 +9,7 @@ int FUN_002a818c(void);
 int FUN_002a8198(void);
 int FUN_002ad1d0(int);
 int FUN_002bb150(int, int);
-int FUN_002bb308(void);
+int nn_applet_CTR_detail_CloseSession(void);
 int FUN_002bb378(void);
 int SBORROW4(...);
 int software_interrupt(int);
@@ -50,7 +50,7 @@ extern unsigned int *FUN_0013b9f4(unsigned int *, unsigned int, unsigned int *, 
 /* Supplied declaration required: FUN_002ad1d0. */
 extern unsigned int FUN_002bb100(void);
 /* Supplied declaration required: FUN_002bb150. */
-/* Supplied declaration required: FUN_002bb308. */
+/* Supplied declaration required: nn_applet_CTR_detail_CloseSession. */
 /* Supplied declaration required: FUN_002bb378. */
 
 
@@ -159,7 +159,7 @@ FUN_0013bb98(unsigned int *param_1,unsigned int *param_2,unsigned char *param_3,
         FUN_002bb378();
         temp_v2 = FUN_002bb100();
         puVar9 = (unsigned int *)FUN_0013b9f4(puVar9,temp_v2,puVar4,puVar5,temp_v5,puVar10,piVar11);
-        FUN_002bb308();
+        nn_applet_CTR_detail_CloseSession();
         if (temp_v9 != 0) {
           software_interrupt(0x23);
         }

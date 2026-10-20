@@ -19,7 +19,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00267144. */
 extern int FUN_002671bc(void);
 extern int FUN_0027d968(void);
-extern int FUN_002c2950(void);
+extern int gameGetMapBlock(void);
 extern int FUN_00326e44(void);
 
 
@@ -42,9 +42,9 @@ void FUN_00273d34(void)
   int temp_v7;
   unsigned char temp_v8;
   
-  temp_v1 = FUN_002c2950();
+  temp_v1 = gameGetMapBlock();
   temp_v7 = 0;
-  temp_v2 = FUN_002c2950();
+  temp_v2 = gameGetMapBlock();
   temp_v3 = 0;
   temp_v5 = 0x10;
   do {

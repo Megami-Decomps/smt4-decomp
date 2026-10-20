@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0013cab8(int, int, int);
 int dataTableGetEntries(void);
-int FUN_001a6f60(...);
+int dataTableFileGetTable(...);
 int FUN_002e5924(int);
 int FUN_003e0cd4(unsigned int *, int);
 int FUN_003ed6e8(int);
@@ -31,8 +31,8 @@ typedef struct {
 
 extern unsigned char LAB_003e2014; /* 0x3e2014 */
 extern unsigned char LAB_003e2028; /* 0x3e2028 */
-extern unsigned int DAT_005712f0; /* 0x5712f0 */
-extern int DAT_00571508; /* 0x571508 */
+extern unsigned int g_btlActionReflect; /* 0x5712f0 */
+extern int g_btlCamera; /* 0x571508 */
 extern int DAT_00573808; /* 0x573808 */
 extern unsigned int DAT_00573858; /* 0x573858 */
 extern unsigned int DAT_0057385c; /* 0x57385c */
@@ -42,13 +42,13 @@ extern unsigned int DAT_00573888; /* 0x573888 */
 extern unsigned int DAT_0057388c; /* 0x57388c */
 extern unsigned int DAT_00573890; /* 0x573890 */
 extern unsigned int DAT_00573894; /* 0x573894 */
-extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
+extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
 /* Supplied declaration required: FUN_0013cab8. */
 extern int FUN_0013def0(unsigned int);
 extern int dataTableGetCount(unsigned int);
 /* Supplied declaration required: dataTableGetEntries. */
-/* Supplied declaration required: FUN_001a6f60. */
+/* Supplied declaration required: dataTableFileGetTable. */
 /* Supplied declaration required: FUN_002e5924. */
 /* Supplied declaration required: FUN_003e0cd4. */
 /* Supplied declaration required: FUN_003ed6e8. */
@@ -87,7 +87,7 @@ void FUN_003e1b80(unsigned int *param_1,int param_2,int param_3)
     if (temp_v0 != 1) {
       puVar10 = (unsigned int *)(param_2 + 0x45a0);
       if (temp_v0 != 2) {
-        temp_v0 = chainCountIdUnflagged(DAT_005712f0,param_1);
+        temp_v0 = chainCountIdUnflagged(g_btlActionReflect,param_1);
         if (0 < temp_v0) {
           return;
         }
@@ -97,7 +97,7 @@ void FUN_003e1b80(unsigned int *param_1,int param_2,int param_3)
           temp_v5 = DAT_0057387c | *(unsigned int *)(param_2 + 0x45a4) | DAT_00573894;
           *puVar10 = *puVar10 | DAT_00573878 | DAT_00573890;
           *(unsigned int *)(param_2 + 0x45a4) = temp_v5;
-          FUN_004aa2e0(DAT_0057a9c8,0);
+          FUN_004aa2e0(g_btlUiBlock,0);
         }
         param_1[4] = 0;
         *param_1 = 0x19;
@@ -111,7 +111,7 @@ void FUN_003e1b80(unsigned int *param_1,int param_2,int param_3)
         if (temp_v0 == 0) {
           return;
         }
-        if ((*(unsigned int *)(DAT_00571508 + 0x64c) & 0x200) != 0) {
+        if ((*(unsigned int *)(g_btlCamera + 0x64c) & 0x200) != 0) {
           return;
         }
         temp_v0 = FUN_0013def0(0);
@@ -128,7 +128,7 @@ void FUN_003e1b80(unsigned int *param_1,int param_2,int param_3)
         }
         else {
           temp_v6 = param_2;
-          temp_v2 = FUN_001a6f60(temp_v0,1);
+          temp_v2 = dataTableFileGetTable(temp_v0,1);
           temp_v3 = dataTableGetEntries();
           temp_v4 = dataTableGetCount(temp_v2);
           temp_v1 = temp_v4;
@@ -143,7 +143,7 @@ void FUN_003e1b80(unsigned int *param_1,int param_2,int param_3)
               temp_v6 = temp_v6 + 1;
             } while (temp_v6 < temp_v4);
           }
-          FUN_001a6f60(temp_v0,0);
+          dataTableFileGetTable(temp_v0,0);
           piVar3 = (int *)dataTableGetEntries();
         }
 LAB_003e1f28:
@@ -161,7 +161,7 @@ LAB_003e1f28:
           *(unsigned int *)(param_2 + 0x45a4) = DAT_0057388c | *(unsigned int *)(param_2 + 0x45a4);
           *puVar10 = temp_v5;
         }
-        FUN_004f41b0(DAT_00571508,0,(int)(short)piVar3[2]);
+        FUN_004f41b0(g_btlCamera,0,(int)(short)piVar3[2]);
         FUN_004fdcd8((int)*(short *)((int)piVar3 + 10),param_1,0,0,7,0,6,0);
         FUN_004fb670((int)(short)piVar3[4],param_1,(int)*(short *)((int)piVar3 + 0x12));
       }
@@ -172,7 +172,7 @@ LAB_003e1f28:
       }
       temp_v0 = *(int *)(param_2 + 0x2290);
       if (temp_v0 != 0) {
-        temp_v2 = FUN_001a6f60(temp_v0,1);
+        temp_v2 = dataTableFileGetTable(temp_v0,1);
         temp_v7 = dataTableGetEntries();
         temp_v1 = dataTableGetCount(temp_v2);
         if (0 < temp_v1) {
@@ -182,17 +182,17 @@ LAB_003e1f28:
         if (temp_v6 < temp_v1) {
           do {
             if (param_3 == *(int *)(temp_v7 + temp_v6 * 0x14)) {
-              FUN_004f3ee0(DAT_00571508,1,0);
+              FUN_004f3ee0(g_btlCamera,1,0);
               param_1[4] = param_1[4] + 1;
               return;
             }
             temp_v6 = temp_v6 + 1;
           } while (temp_v6 < temp_v1);
         }
-        FUN_001a6f60(temp_v0,0);
+        dataTableFileGetTable(temp_v0,0);
         dataTableGetEntries();
       }
-      FUN_004f3ee0(DAT_00571508,1,0);
+      FUN_004f3ee0(g_btlCamera,1,0);
     }
   }
   else {
@@ -211,7 +211,7 @@ LAB_003e1f28:
       else {
         FUN_004f7b84(DAT_00573808,&LAB_003e2028);
       }
-      *(unsigned int *)(DAT_00571508 + 0x64c) = *(unsigned int *)(DAT_00571508 + 0x64c) | 0x4000;
+      *(unsigned int *)(g_btlCamera + 0x64c) = *(unsigned int *)(g_btlCamera + 0x64c) | 0x4000;
       param_1[3] = param_1[3] | 2;
       FUN_003f1994(param_2);
       param_1[3] = param_1[3] | 0x10;

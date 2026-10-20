@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern int FUN_002bb274(void);
+extern int nn_snd_CTR_Dspsnd_IsInitialized(void);
 
 u8 nn_snd_CTR_Dspsnd_ResetChannelNextBuffer(DspsndState *state, u8 channel)
 {
-    int ok = FUN_002bb274();
+    int ok = nn_snd_CTR_Dspsnd_IsInitialized();
 
     if (ok != 0) {
         DspChannelCommand *params = state->channels[state->bank & 1][channel];

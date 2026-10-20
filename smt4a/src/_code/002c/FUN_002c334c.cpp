@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern void *DAT_0057f268;
+extern void *g_partyPanel;
 
 /* Returns whether there is an object at 0x57F268. */
 u8 FUN_002c334c(void)
 {
-    return DAT_0057f268 != NULL;
+    return g_partyPanel != NULL;
 }
 
 } /* extern "C" */

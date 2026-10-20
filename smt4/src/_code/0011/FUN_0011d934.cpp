@@ -12,7 +12,7 @@ extern int DAT_004656b0; /* 0x4656b0 */
 
 /* Supplied declaration required: FUN_002c131c. */
 extern int asdModelForwardChecked(unsigned int *, int, unsigned int, unsigned int);
-extern unsigned int FUN_002c30c4(void);
+extern unsigned int libc_strlen(void);
 
 
 int FUN_0011d934(void)
@@ -30,7 +30,7 @@ int FUN_0011d934(void)
     temp_v0 = -0x1f5f3007;
   }
   else {
-    temp_v1 = FUN_002c30c4();
+    temp_v1 = libc_strlen();
     temp_v0 = asdModelForwardChecked((unsigned int *)&DAT_004656b0,temp_v0,temp_v1,0);
   }
   if (temp_v0 < 0) {

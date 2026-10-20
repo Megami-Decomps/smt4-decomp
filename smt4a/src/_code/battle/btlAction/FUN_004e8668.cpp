@@ -5,7 +5,7 @@
 extern "C" {
 
 int qsort(...);
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 int source4CCopyHalves(unsigned int, unsigned short [10]);
 int FUN_004e6fb0(...);
 int FUN_004e9bd0(...);
@@ -32,7 +32,7 @@ extern unsigned int DAT_00571190; /* 0x571190 */
 extern unsigned int DAT_00571194; /* 0x571194 */
 
 /* Supplied declaration required: qsort. */
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: dataTable04FindById. */
 extern int FUN_0026264c(unsigned short);
 extern int FUN_002626e0(void);
 extern int FUN_003df57c(unsigned short, unsigned int);
@@ -98,7 +98,7 @@ void FUN_004e8668(int *param_1,int param_2)
     do {
       puVar7 = temp_v5 + temp_v2;
       temp_v1 = (unsigned int)*puVar7;
-      if ((temp_v1 != 0) && (FUN_001aba54(), temp_v1 != 0)) {
+      if ((temp_v1 != 0) && (dataTable04FindById(), temp_v1 != 0)) {
         puVar2 = *(unsigned int **)(param_2 + 0x20);
         if (!((puVar2[1] & DAT_00571154) == 0 && (*puVar2 & DAT_00571150) == 0)) {
           temp_v4 = FUN_003df57c(*puVar7,1);
@@ -125,7 +125,7 @@ LAB_004e8820:
       do {
         puVar7 = temp_v5 + temp_v2;
         temp_v1 = (unsigned int)*puVar7;
-        if ((temp_v1 != 0) && (FUN_001aba54(), temp_v1 != 0)) {
+        if ((temp_v1 != 0) && (dataTable04FindById(), temp_v1 != 0)) {
           puVar2 = *(unsigned int **)(param_2 + 0x20);
           if (!((*puVar2 & DAT_00571150) == 0 && (puVar2[1] & DAT_00571154) == 0)) {
             temp_v4 = FUN_003df57c(*puVar7,1);
@@ -149,7 +149,7 @@ LAB_004e8904:
       do {
         puVar7 = temp_v5 + temp_v2;
         temp_v1 = (unsigned int)*puVar7;
-        if ((temp_v1 != 0) && (FUN_001aba54(), temp_v1 != 0)) {
+        if ((temp_v1 != 0) && (dataTable04FindById(), temp_v1 != 0)) {
           puVar2 = *(unsigned int **)(param_2 + 0x20);
           if (!((*puVar2 & DAT_00571150) == 0 && (DAT_00571154 & puVar2[1]) == 0)) {
             temp_v4 = FUN_003df57c(*puVar7,1);

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001886bc(void);
 int FUN_002e0e04(int, short [248], unsigned int);
 int FUN_002e59f8(short [248], unsigned char [528], int);
-int FUN_002e6dd0(unsigned char [528], unsigned int);
+int rt_aeabi_memclr(unsigned char [528], unsigned int);
 int FUN_0042b2c0(void);
 
 extern unsigned char *DAT_005b40c4; /* 0x5b40c4 */
@@ -15,7 +15,7 @@ extern unsigned char *DAT_005b40c4; /* 0x5b40c4 */
 /* Supplied declaration required: FUN_001886bc. */
 /* Supplied declaration required: FUN_002e0e04. */
 /* Supplied declaration required: FUN_002e59f8. */
-/* Supplied declaration required: FUN_002e6dd0. */
+/* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: FUN_0042b2c0. */
 
 
@@ -50,7 +50,7 @@ void FUN_00399c90(unsigned int param_1,int param_2)
   if (temp_v0 < temp_v2) {
     do {
       if ((asStack_420[temp_v0] == 0x2f) && (temp_v1 = temp_v1 + 1, temp_v1 != 1)) {
-        FUN_002e6dd0(temp_v3,unaff_r10);
+        rt_aeabi_memclr(temp_v3,unaff_r10);
         FUN_002e59f8(asStack_420,temp_v3,temp_v0 * 2 + 2);
         FUN_001886bc();
         puVar2 = temp_v3;

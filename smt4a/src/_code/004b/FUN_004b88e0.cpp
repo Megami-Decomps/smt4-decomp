@@ -10,7 +10,7 @@ int asdMemFree(...);
 int scrScriptProcessDestroy(int);
 int FUN_0020214c(void);
 int FUN_00275bc8(int, unsigned char *);
-int FUN_00275f44(int, unsigned int);
+int scrScriptProcessStartEntry(int, unsigned int);
 int FUN_004b75d0(void);
 
 typedef struct fn_004b88e0_arg0 fn_004b88e0_arg0;
@@ -37,8 +37,8 @@ extern unsigned char DAT_005f1798; /* 0x5f1798 */
 /* Supplied declaration required: FUN_0020214c. */
 extern int FUN_00224880(int);
 /* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: FUN_00275f44. */
-extern unsigned int FUN_00357bc8(unsigned int, unsigned char *);
+/* Supplied declaration required: scrScriptProcessStartEntry. */
+extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_004b75d0. */
 
 
@@ -80,8 +80,8 @@ void FUN_004b88e0(fn_004b88e0_arg0 *param_1)
   FUN_00275bc8(temp_v0,puVar3);
   param_1->field_0x1178 = temp_v0;
   *(unsigned int *)(temp_v0 + 0x108) = 2;
-  temp_v1 = FUN_00357bc8(param_1->field_0x1170,&DAT_005f1798);
-  FUN_00275f44(param_1->field_0x1178,temp_v1);
+  temp_v1 = tableGroupFindEntryIndex(param_1->field_0x1170,&DAT_005f1798);
+  scrScriptProcessStartEntry(param_1->field_0x1178,temp_v1);
   param_1->field_0x2c = param_1->field_0x2c + 1;
   return;
 }

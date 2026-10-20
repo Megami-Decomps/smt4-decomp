@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002ae164(void);
 int FUN_002ae584(void);
 
-extern int padIsButtonDown(unsigned int);
+extern int flagBitIsSet(unsigned int);
 /* Supplied declaration required: FUN_002ae164. */
 /* Supplied declaration required: FUN_002ae584. */
 
@@ -20,19 +20,19 @@ void FUN_0029a924(int param_1)
   
   FUN_002ae164();
   if (param_1 != 0) {
-    temp_v0 = padIsButtonDown(0xc);
+    temp_v0 = flagBitIsSet(0xc);
     if (temp_v0 != 0) {
       FUN_002ae584();
     }
-    temp_v0 = padIsButtonDown(0xd);
+    temp_v0 = flagBitIsSet(0xd);
     if (temp_v0 != 0) {
       FUN_002ae584();
     }
-    temp_v0 = padIsButtonDown(0xe);
+    temp_v0 = flagBitIsSet(0xe);
     if (temp_v0 != 0) {
       FUN_002ae584();
     }
-    temp_v0 = padIsButtonDown(0xf);
+    temp_v0 = flagBitIsSet(0xf);
     if (temp_v0 != 0) {
       FUN_002ae584();
     }

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_001ab888(void);
+extern int gameGetSlotTable(void);
 
 
 unsigned char FUN_004d0eec(void)
@@ -15,8 +15,8 @@ unsigned char FUN_004d0eec(void)
   int temp_v2;
   int temp_v3;
   
-  temp_v0 = FUN_001ab888();
-  temp_v1 = FUN_001ab888();
+  temp_v0 = gameGetSlotTable();
+  temp_v1 = gameGetSlotTable();
   temp_v3 = 0;
   temp_v2 = 0;
   do {

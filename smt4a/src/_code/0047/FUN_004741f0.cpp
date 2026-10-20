@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00100388(unsigned char [132], unsigned char *, int, unsigned int);
-int FUN_001a6f60(int, int);
+int dataTableFileGetTable(int, int);
 int sysMemClear(unsigned char [132], int);
 int FUN_00471fec(unsigned int, unsigned char [132], int, int, int, int);
 
@@ -20,7 +20,7 @@ extern unsigned int g_aocDisplay; /* 0x57027c */
 /* Supplied declaration required: FUN_00100388. */
 extern unsigned int dataTableGetCount(void);
 extern int dataTableGetEntries(void);
-/* Supplied declaration required: FUN_001a6f60. */
+/* Supplied declaration required: dataTableFileGetTable. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_00471fec. */
 
@@ -43,7 +43,7 @@ void FUN_004741f0(int param_1,int param_2)
   if (temp_v0 != 0 && param_2 != 0) {
     temp_v3 = 0;
     if (*(char *)(param_1 + 0x45) != '\0') {
-      FUN_001a6f60(temp_v0,0);
+      dataTableFileGetTable(temp_v0,0);
       temp_v3 = dataTableGetEntries();
     }
     temp_v4 = *(char *)(param_1 + 0x45) != '\0';
@@ -52,7 +52,7 @@ void FUN_004741f0(int param_1,int param_2)
       temp_v0 = *(int *)(param_1 + 0x48);
     }
     if (temp_v4 && temp_v0 != 0) {
-      FUN_001a6f60(temp_v0,0);
+      dataTableFileGetTable(temp_v0,0);
       temp_v1 = dataTableGetCount();
       temp_v2 = 0;
       if (temp_v2 < temp_v1) {

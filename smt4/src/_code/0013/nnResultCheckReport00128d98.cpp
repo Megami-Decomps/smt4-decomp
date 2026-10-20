@@ -3,13 +3,13 @@
 extern "C" {
 
 s32 FUN_00128d98(void);
-int FUN_002c52f8(void);
+int asdFatalError(void);
 
-/* Calls FUN_00128d98 and reports through FUN_002c52f8 when it returns a failure result. */
+/* Calls FUN_00128d98 and reports through asdFatalError when it returns a failure result. */
 void nnResultCheckReport00128d98(void)
 {
     if (nnResultIsFailure(FUN_00128d98())) {
-        FUN_002c52f8();
+        asdFatalError();
     }
 }
 

@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_0017e5a4(int, unsigned char *);
-int FUN_0018b600(void);
-int FUN_0018b610(void);
+int globalCriticalSectionEnterForward(void);
+int globalCriticalSectionLeaveForward(void);
 int FUN_001963e0(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -14,16 +14,16 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-extern unsigned int *DAT_005b40e0; /* 0x5b40e0 */
-extern unsigned int DAT_005b40e4; /* 0x5b40e4 */
+extern unsigned int *g_commandBufferCursor; /* 0x5b40e0 */
+extern unsigned int g_commandBufferEnd; /* 0x5b40e4 */
 extern signed char DAT_0061a481; /* 0x61a481 */
 extern signed char DAT_0061a482; /* 0x61a482 */
 extern int DAT_0061a50c; /* 0x61a50c */
 extern int DAT_0061a510; /* 0x61a510 */
 
 /* Supplied declaration required: FUN_0017e5a4. */
-/* Supplied declaration required: FUN_0018b600. */
-/* Supplied declaration required: FUN_0018b610. */
+/* Supplied declaration required: globalCriticalSectionEnterForward. */
+/* Supplied declaration required: globalCriticalSectionLeaveForward. */
 /* Supplied declaration required: FUN_001963e0. */
 
 
@@ -37,8 +37,8 @@ void FUN_0017d294(void)
   unsigned char *puVar4;
   
   temp_v0 = DAT_0061a50c;
-  puVar1 = DAT_005b40e0;
-  temp_v1 = (int)DAT_005b40e0 - *(int *)(DAT_0061a50c + 4);
+  puVar1 = g_commandBufferCursor;
+  temp_v1 = (int)g_commandBufferCursor - *(int *)(DAT_0061a50c + 4);
   *(unsigned int *)(DAT_0061a50c + 0xc) = temp_v1;
   if (*(unsigned int *)(temp_v0 + 0x14) == temp_v1) {
     return;
@@ -48,26 +48,26 @@ void FUN_0017d294(void)
   }
   else {
     *(unsigned int *)(temp_v0 + 0xc) = temp_v1 + 0x20;
-    if ((unsigned int)puVar1 < DAT_005b40e4) {
-      DAT_005b40e0 = puVar1 + 2;
+    if ((unsigned int)puVar1 < g_commandBufferEnd) {
+      g_commandBufferCursor = puVar1 + 2;
       puVar1[1] = 0x8025e;
       *puVar1 = 0;
     }
   }
-  if ((unsigned int)DAT_005b40e0 < DAT_005b40e4) {
-    *DAT_005b40e0 = 1;
-    DAT_005b40e0[1] = 0xf0111;
-    DAT_005b40e0 = DAT_005b40e0 + 2;
+  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+    *g_commandBufferCursor = 1;
+    g_commandBufferCursor[1] = 0xf0111;
+    g_commandBufferCursor = g_commandBufferCursor + 2;
   }
-  if ((unsigned int)DAT_005b40e0 < DAT_005b40e4) {
-    *DAT_005b40e0 = 1;
-    DAT_005b40e0[1] = 0xf0110;
-    DAT_005b40e0 = DAT_005b40e0 + 2;
+  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+    *g_commandBufferCursor = 1;
+    g_commandBufferCursor[1] = 0xf0110;
+    g_commandBufferCursor = g_commandBufferCursor + 2;
   }
-  if ((unsigned int)DAT_005b40e0 < DAT_005b40e4) {
-    *DAT_005b40e0 = 0x12345678;
-    DAT_005b40e0[1] = 0xf0010;
-    DAT_005b40e0 = DAT_005b40e0 + 2;
+  if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+    *g_commandBufferCursor = 0x12345678;
+    g_commandBufferCursor[1] = 0xf0010;
+    g_commandBufferCursor = g_commandBufferCursor + 2;
   }
   puVar4 = (unsigned char *)(*(int *)(temp_v0 + 0x18) + *(int *)(temp_v0 + 0x20) * 0x1c);
   *puVar4 = 1;
@@ -82,13 +82,13 @@ void FUN_0017d294(void)
     *(unsigned int *)(puVar4 + 0xc) = (temp_v1 & 0xfffffffd) | 1;
   }
   *(unsigned int *)(temp_v0 + 0x14) = *(unsigned int *)(temp_v0 + 0xc);
-  FUN_0018b600();
+  globalCriticalSectionEnterForward();
   *(int *)(temp_v0 + 0x20) = *(int *)(temp_v0 + 0x20) + 1;
   if (((DAT_0061a510 == temp_v0) && (DAT_0061a482 != '\0')) && (DAT_0061a481 == '\0')) {
     DAT_0061a481 = '\x01';
     FUN_001963e0();
   }
-  FUN_0018b610();
+  globalCriticalSectionLeaveForward();
   return;
 }
 

@@ -19,9 +19,9 @@ typedef struct {
 } param_3_stack;
 
 extern unsigned int FUN_002e7908(unsigned int *, int *);
-extern unsigned int FUN_002ee9ce(unsigned int);
+extern unsigned int streamWriterFinish(unsigned int);
 /* Supplied declaration required: FUN_002f3dde. */
-extern int FUN_002f4e86(unsigned int *);
+extern int refIsNonNegative(unsigned int *);
 /* Supplied declaration required: FUN_002f4e90. */
 /* Supplied declaration required: FUN_002f4ecc. */
 /* Supplied declaration required: FUN_002f4f00. */
@@ -48,14 +48,14 @@ unsigned int FUN_0010b744(int param_1,int param_2,unsigned int param_3)
   temp_v0 = (**(romwright_code **)(**(int **)(param_1 + 0x28) + 0x2c))
                     (*(int **)(param_1 + 0x28),*(unsigned short *)(param_1 + 0x20));
   if (temp_v0 != 0) {
-    temp_v1 = FUN_002ee9ce(param_3);
+    temp_v1 = streamWriterFinish(param_3);
     FUN_002f4e90(temp_v3,temp_v1);
     FUN_002f4ecc(temp_v3,temp_v5,temp_v6);
     temp_v2[1] = 0;
     temp_v2[0] = temp_v0;
     (**(romwright_code **)(**(int **)(temp_v0 + 0x28) + 0x30))
               (&temp_v4,*(int **)(temp_v0 + 0x28),temp_v3,param_1);
-    temp_v0 = FUN_002f4e86((unsigned int *)&temp_v4);
+    temp_v0 = refIsNonNegative((unsigned int *)&temp_v4);
     if (temp_v0 != 0) {
       FUN_002f4f00(temp_v3);
       return 1;

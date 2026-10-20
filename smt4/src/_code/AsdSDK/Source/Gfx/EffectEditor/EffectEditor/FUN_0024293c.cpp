@@ -5,14 +5,14 @@
 extern "C" {
 
 int FUN_0024dd00(...);
-int FUN_0024dd48(unsigned char *);
+int effEditorNodeChainApply(unsigned char *);
 int FUN_0024dd80(...);
 int FUN_0024dd90(unsigned char *);
 int effMenuListAppend(void);
 int FUN_002826d4(int, int, int, int, unsigned int, unsigned int);
 int FUN_00282780(int, int, int, int);
-int FUN_002b8cec(...);
-int FUN_002bfde4(...);
+int padIsButtonRepeat(...);
+int padIsButtonPressed(...);
 int memAlloc(...);
 int VectorSignedToFloat(int, int);
 
@@ -50,14 +50,14 @@ extern float DAT_004d92c0; /* 0x4d92c0 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Supplied declaration required: FUN_0024dd00. */
-/* Supplied declaration required: FUN_0024dd48. */
+/* Supplied declaration required: effEditorNodeChainApply. */
 /* Supplied declaration required: FUN_0024dd80. */
 /* Supplied declaration required: FUN_0024dd90. */
 /* Supplied declaration required: effMenuListAppend. */
 /* Supplied declaration required: FUN_002826d4. */
 /* Supplied declaration required: FUN_00282780. */
-/* Supplied declaration required: FUN_002b8cec. */
-/* Supplied declaration required: FUN_002bfde4. */
+/* Supplied declaration required: padIsButtonRepeat. */
+/* Supplied declaration required: padIsButtonPressed. */
 /* Supplied declaration required: memAlloc. */
 
 
@@ -103,7 +103,7 @@ unsigned char * FUN_0024293c(unsigned int *param_1,int param_2)
   if (DAT_0044ea89 == '\0') {
     FUN_0024dd90(&DAT_0044fe30);
   }
-  temp_v2 = FUN_002b8cec(0x20);
+  temp_v2 = padIsButtonRepeat(0x20);
   puVar8 = &DAT_00400003;
   temp_v12 = 10.0f;
   if (temp_v2 != 0) {
@@ -120,7 +120,7 @@ unsigned char * FUN_0024293c(unsigned int *param_1,int param_2)
     }
   }
   else {
-    temp_v2 = FUN_002b8cec(0x20);
+    temp_v2 = padIsButtonRepeat(0x20);
     if (temp_v2 != 0) {
       temp_v7 = DAT_0044ead4 == 1;
       temp_v9 = DAT_004d92bc;
@@ -135,24 +135,24 @@ unsigned char * FUN_0024293c(unsigned int *param_1,int param_2)
       }
     }
     else {
-      temp_v2 = FUN_002b8cec(3);
+      temp_v2 = padIsButtonRepeat(3);
       if (temp_v2 == 0) {
         FUN_0024dd80(3);
-        temp_v2 = FUN_002b8cec();
+        temp_v2 = padIsButtonRepeat();
         if (temp_v2 != 0) goto LAB_00242a4c;
-        temp_v2 = FUN_002b8cec(4);
+        temp_v2 = padIsButtonRepeat(4);
         if (temp_v2 == 0) {
           FUN_0024dd80(4);
-          temp_v2 = FUN_002b8cec();
+          temp_v2 = padIsButtonRepeat();
           if (temp_v2 == 0) {
-            temp_v2 = FUN_002b8cec(5);
+            temp_v2 = padIsButtonRepeat(5);
             puVar8 = &DAT_00400001;
             if (temp_v2 == 0) {
               FUN_0024dd80(5);
-              temp_v2 = FUN_002b8cec();
-              if ((temp_v2 == 0) && (temp_v2 = FUN_002b8cec(6), temp_v2 == 0)) {
+              temp_v2 = padIsButtonRepeat();
+              if ((temp_v2 == 0) && (temp_v2 = padIsButtonRepeat(6), temp_v2 == 0)) {
                 FUN_0024dd80(6);
-                temp_v2 = FUN_002b8cec();
+                temp_v2 = padIsButtonRepeat();
                 temp_v8 = DAT_004d92bc;
                 if (temp_v2 == 0) goto LAB_00242b34;
               }
@@ -226,7 +226,7 @@ LAB_00242b34:
   *(float *)&param_1[2] = temp_v8;
   *(float *)&param_1[3] = temp_v12;
   FUN_00282780(0xa0,0x6c,0xdc,0x4c);
-  FUN_0024dd48(&DAT_0044fe30);
+  effEditorNodeChainApply(&DAT_0044fe30);
   temp_v14[0] = 0;
   temp_v15[0] = (float)((unsigned long long)temp_v13 >> 0x20);
   temp_v14[1] = 0xff;
@@ -298,10 +298,10 @@ LAB_00242b34:
   *(unsigned int *)(temp_v2 + 0x18) = 0xffffffff;
   effMenuListAppend();
   FUN_0024dd00(0xa4,0x8c,8,&LAB_00242f8c,temp_v16);
-  temp_v2 = FUN_002bfde4(1);
+  temp_v2 = padIsButtonPressed(1);
   if (temp_v2 == 0) {
     FUN_0024dd80(1);
-    temp_v2 = FUN_002bfde4();
+    temp_v2 = padIsButtonPressed();
     if (temp_v2 == 0) {
       return puVar8;
     }

@@ -7,7 +7,7 @@ extern "C" {
 int jobStop(unsigned int, int);
 int asdMemFree(void);
 int scrScriptProcessDestroy(void);
-int FUN_00237210(unsigned int);
+int asdMemFreeSlot(unsigned int);
 int FUN_0023a55c(void);
 int FUN_0028520c(void);
 int FUN_002ef750(void);
@@ -22,7 +22,7 @@ typedef struct {
 /* Supplied declaration required: jobStop. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: FUN_00237210. */
+/* Supplied declaration required: asdMemFreeSlot. */
 /* Supplied declaration required: FUN_0023a55c. */
 /* Supplied declaration required: FUN_0028520c. */
 /* Supplied declaration required: FUN_002ef750. */
@@ -38,7 +38,7 @@ void FUN_002e1614(unsigned int *param_1)
   int temp_v1;
   
   param_1 = (unsigned int *)*param_1;
-  FUN_00237210(param_1[0x28]);
+  asdMemFreeSlot(param_1[0x28]);
   FUN_0035bea0();
   bustupCutAnimStopJob();
   temp_v1 = 0;

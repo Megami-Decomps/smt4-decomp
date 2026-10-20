@@ -19,7 +19,7 @@ typedef struct Node {
     /* 0x0C */ u32 value;
 } Node;
 
-extern u8 DAT_0055b8d8;
+extern u8 g_nwGfxViewUpdaterVtable;
 
 /* Allocates a Node from `allocator` and initializes it with its owner and value; returns it (NULL if allocation failed). */
 Node *FUN_001ca5d0(Allocator *allocator, u32 value)
@@ -29,7 +29,7 @@ Node *FUN_001ca5d0(Allocator *allocator, u32 value)
     if (node != NULL) {
         node->allocator = allocator;
         node->flag = 0;
-        node->vtbl = &DAT_0055b8d8;
+        node->vtbl = &g_nwGfxViewUpdaterVtable;
         node->value = value;
     }
     return node;

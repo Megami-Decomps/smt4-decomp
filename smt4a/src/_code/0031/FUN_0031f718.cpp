@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019cac4(void);
+int dataTable00FindById(void);
 int FUN_0026fd50(int, unsigned char [52], int, unsigned int);
 int FUN_002cb55c(int, unsigned int, unsigned int);
 int unitRecordBuild(unsigned int, unsigned char [52]);
@@ -20,10 +20,10 @@ typedef struct {
     unsigned int sp124; /* 0x124: local_124 */
 } param_3_stack;
 
-extern unsigned char DAT_00588fd0; /* 0x588fd0 */
+extern unsigned char g_gameGlobals; /* 0x588fd0 */
 
-extern unsigned int FUN_001801a4(void);
-/* Supplied declaration required: FUN_0019cac4. */
+extern unsigned int gameGetPlayerData(void);
+/* Supplied declaration required: dataTable00FindById. */
 extern int FUN_002626e0(void);
 /* Supplied declaration required: FUN_0026fd50. */
 extern int FUN_002b4dcc(unsigned char *);
@@ -49,11 +49,11 @@ void FUN_0031f718(unsigned int param_1,int param_2,unsigned int param_3)
   unsigned int temp_v9;
   int temp_v10;
   
-  temp_v0 = (*(int *)((unsigned char *)&DAT_00588fd0 + 0x4));
+  temp_v0 = (*(int *)((unsigned char *)&g_gameGlobals + 0x4));
   temp_v4 = 1;
-  *(unsigned char *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x2010) = 1;
+  *(unsigned char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x2010) = 1;
   if ((int)param_1 < 0) {
-    temp_v1 = FUN_001801a4();
+    temp_v1 = gameGetPlayerData();
     FUN_002cb55c(temp_v0 + 0x1390,temp_v1,param_3);
     *(unsigned char *)(temp_v0 + 0x2017) = 0;
   }
@@ -63,7 +63,7 @@ void FUN_0031f718(unsigned int param_1,int param_2,unsigned int param_3)
     temp_v10 = temp_v0 + 0x1390;
     FUN_0026fd50(temp_v10,temp_v5,0,param_3);
     temp_v2 = param_1;
-    FUN_0019cac4();
+    dataTable00FindById();
     if (temp_v2 != 0) {
       *(unsigned int *)(temp_v0 + 0x1398) = *(unsigned int *)(temp_v2 + 4);
       *(unsigned int *)(temp_v0 + 0x139c) = *(unsigned int *)(temp_v2 + 8);
@@ -92,13 +92,13 @@ void FUN_0031f718(unsigned int param_1,int param_2,unsigned int param_3)
   *(unsigned char *)(temp_v0 + 0x20b0) = 1;
   if (-1 < (int)param_1) {
     param_1 = param_1 & 0xffff;
-    FUN_0019cac4();
+    dataTable00FindById();
     if (param_1 == 0) {
       temp_v4 = 0;
     }
     else {
       temp_v4 = (*(unsigned short *)(param_1 + 0x16) & 0x400) == 0;
-      if (((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) != 0) && (*(char *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x2017) == '\x11')) {
+      if (((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) != 0) && (*(char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x2017) == '\x11')) {
         temp_v4 = 0;
       }
     }

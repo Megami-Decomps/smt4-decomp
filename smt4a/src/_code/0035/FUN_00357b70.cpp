@@ -16,7 +16,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_7_stack;
 
-extern int DAT_00587f28; /* 0x587f28 */
+extern int g_naviMain; /* 0x587f28 */
 
 /* Supplied declaration required: FUN_004883c8. */
 
@@ -26,10 +26,10 @@ void FUN_00357b70(unsigned int param_1,unsigned int param_2,unsigned int param_3
 
 {
 /* irregular: 2 native warning(s); review required */
-  if (DAT_00587f28 == 0) {
+  if (g_naviMain == 0) {
     return;
   }
-  FUN_004883c8(DAT_00587f28 + 0x68,param_1,1,param_2,param_3,param_4,param_5,param_6,param_7);
+  FUN_004883c8(g_naviMain + 0x68,param_1,1,param_2,param_3,param_4,param_5,param_6,param_7);
                     /* WARNING: Treating indirect jump as return */
   return;
 }

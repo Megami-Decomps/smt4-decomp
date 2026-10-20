@@ -7,7 +7,7 @@ extern "C" {
 int jobStop(unsigned int, int);
 int asdMemFree(unsigned int *);
 
-extern signed char DAT_0057f27c; /* 0x57f27c */
+extern signed char g_useCounter; /* 0x57f27c */
 extern unsigned int *DAT_0057f280; /* 0x57f280 */
 
 /* Supplied declaration required: jobStop. */
@@ -21,12 +21,12 @@ void FUN_0035d8a4(void)
   unsigned int *puVar1;
   
   puVar1 = DAT_0057f280;
-  DAT_0057f27c = DAT_0057f27c - '\x01';
-  if (DAT_0057f27c < '\x01') {
+  g_useCounter = g_useCounter - '\x01';
+  if (g_useCounter < '\x01') {
     jobStop(*DAT_0057f280,0);
     asdMemFree(puVar1);
     DAT_0057f280 = (unsigned int *)0x0;
-    DAT_0057f27c = '\0';
+    g_useCounter = '\0';
   }
   return;
 }

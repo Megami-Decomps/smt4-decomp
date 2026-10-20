@@ -5,7 +5,7 @@
 extern "C" {
 
 int btlGetMainState(void);
-int FUN_00184c00(...);
+int uiSpriteSetImageKeyframe(...);
 int FUN_0019de98(...);
 int FUN_0020ad6c(...);
 int FUN_002cc9e0(int, int);
@@ -14,7 +14,7 @@ extern unsigned int DAT_00573bc8; /* 0x573bc8 */
 extern unsigned int DAT_00573bcc; /* 0x573bcc */
 
 /* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: FUN_00184c00. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_0020ad6c. */
 extern int FUN_002c2c68(void);
@@ -70,7 +70,7 @@ unsigned int FUN_0020a320(int param_1)
                     FUN_0020ad6c(param_1,9,1);
                     temp_v0 = 0;
                     do {
-                      FUN_00184c00(param_1 + temp_v0 * 0x8c + 0xe58,0);
+                      uiSpriteSetImageKeyframe(param_1 + temp_v0 * 0x8c + 0xe58,0);
                       temp_v0 = temp_v0 + 1;
                     } while (temp_v0 < 6);
                   }
@@ -100,7 +100,7 @@ unsigned int FUN_0020a320(int param_1)
           FUN_0020ad6c(param_1,0xd,1);
           temp_v0 = 0;
           do {
-            FUN_00184c00(param_1 + temp_v0 * 0x8c + 0xe58,0);
+            uiSpriteSetImageKeyframe(param_1 + temp_v0 * 0x8c + 0xe58,0);
             temp_v0 = temp_v0 + 1;
           } while (temp_v0 < 6);
         }
@@ -114,7 +114,7 @@ unsigned int FUN_0020a320(int param_1)
         FUN_0020ad6c(param_1,0xb,1);
         temp_v0 = 0;
         do {
-          FUN_00184c00(param_1 + temp_v0 * 0x8c + 0xe58,0);
+          uiSpriteSetImageKeyframe(param_1 + temp_v0 * 0x8c + 0xe58,0);
           temp_v0 = temp_v0 + 1;
         } while (temp_v0 < 6);
       }
@@ -133,7 +133,7 @@ unsigned int FUN_0020a320(int param_1)
       FUN_0020ad6c(param_1,9,1);
       temp_v0 = 0;
       do {
-        FUN_00184c00(param_1 + temp_v0 * 0x8c + 0xe58,0);
+        uiSpriteSetImageKeyframe(param_1 + temp_v0 * 0x8c + 0xe58,0);
         temp_v0 = temp_v0 + 1;
       } while (temp_v0 < 6);
     }
@@ -143,7 +143,7 @@ unsigned int FUN_0020a320(int param_1)
     FUN_0020ad6c(param_1,9,1);
     temp_v0 = 0;
     do {
-      FUN_00184c00(param_1 + temp_v0 * 0x8c + 0xe58,0);
+      uiSpriteSetImageKeyframe(param_1 + temp_v0 * 0x8c + 0xe58,0);
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < 6);
   }

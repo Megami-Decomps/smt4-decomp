@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001290cc(unsigned int, unsigned int, int, int, int);
 int FUN_00147370(unsigned int);
-int FUN_002bd430(unsigned int);
+int sndVoiceFree(unsigned int);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -20,7 +20,7 @@ extern unsigned char g_asdSoundStatus; /* 0x4e3154 */
 /* Supplied declaration required: FUN_001290cc. */
 /* Supplied declaration required: FUN_00147370. */
 extern unsigned int FUN_002bd29c(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002bd430. */
+/* Supplied declaration required: sndVoiceFree. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
 extern void nn_snd_CTR_InitializeWaveBuffer(unsigned int);
@@ -61,7 +61,7 @@ void FUN_001190b0(int param_1,unsigned int param_2)
     return;
   }
   nn_os_CriticalSection_Enter((unsigned int)&(*(unsigned char *)((unsigned char *)&g_asdSoundStatus + 0x8)));
-  FUN_002bd430(*(unsigned int *)(param_1 + 0x38));
+  sndVoiceFree(*(unsigned int *)(param_1 + 0x38));
   temp_v0 = FUN_002bd29c(0x7fff,0);
   *(unsigned int *)(param_1 + 0x38) = temp_v0;
   nn_snd_CTR_Voice_SetMixParam(temp_v0,param_1 + 0x3c);

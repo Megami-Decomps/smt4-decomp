@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0030fb34(unsigned int, int, int);
-int FUN_00311248(unsigned int, int *, int, int);
+int streamWriterWriteArray(unsigned int, int *, int, int);
 
 typedef struct fn_00302fec_arg1 fn_00302fec_arg1;
 struct fn_00302fec_arg1 {
@@ -22,7 +22,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_0030fb34. */
-/* Supplied declaration required: FUN_00311248. */
+/* Supplied declaration required: streamWriterWriteArray. */
 
 
 unsigned int FUN_00302fec(unsigned int param_1,fn_00302fec_arg1 *param_2)
@@ -32,7 +32,7 @@ unsigned int FUN_00302fec(unsigned int param_1,fn_00302fec_arg1 *param_2)
   int temp_v0;
   
   temp_v0 = param_2->field_0x10;
-  FUN_00311248(param_1,&temp_v0,4,1);
+  streamWriterWriteArray(param_1,&temp_v0,4,1);
   if (param_2->field_0x10 != 0) {
     FUN_0030fb34(param_1,param_2->field_0xc + param_2->field_0x18,param_2->field_0x10 << 3);
   }

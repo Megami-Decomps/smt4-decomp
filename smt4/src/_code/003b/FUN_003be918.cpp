@@ -10,7 +10,7 @@ int FUN_0022ab08(...);
 int FUN_0023ea94(...);
 int FUN_00247478(...);
 int FUN_0027da30(...);
-int FUN_00282924(...);
+int btlMainFindEntryByListedId(...);
 int FUN_00283ebc(...);
 int btlGetMainState(...);
 int FUN_002ae164(...);
@@ -51,7 +51,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0023ea94. */
 /* Supplied declaration required: FUN_00247478. */
 /* Supplied declaration required: FUN_0027da30. */
-/* Supplied declaration required: FUN_00282924. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_00283ebc. */
 /* Supplied declaration required: btlGetMainState. */
 extern unsigned int FUN_002ae108(fn_003be918_arg0 *);
@@ -123,7 +123,7 @@ int FUN_003be918(fn_003be918_arg0 *param_1,unsigned int param_2,unsigned int par
   FUN_003be670(param_2,param_3);
   temp_v6 = CONCAT44(temp_v2 * temp_v4 * temp_v3,temp_v5);
   pbVar4 = pbVar1;
-  FUN_00282924(pbVar1,param_2);
+  btlMainFindEntryByListedId(pbVar1,param_2);
   FUN_00247478(temp_v12,pbVar1,pbVar4);
   uStack_84 = uStack_60;
   uStack_80 = uStack_5c;
@@ -134,7 +134,7 @@ int FUN_003be918(fn_003be918_arg0 *param_1,unsigned int param_2,unsigned int par
   temp_v14[0] = 0;
   FUN_0022ab08(uStack_6a,temp_v14);
   puVar5 = (unsigned int *)btlGetMainState();
-  FUN_00282924(puVar5,param_2);
+  btlMainFindEntryByListedId(puVar5,param_2);
   pfVar10 = (fn_003be918_arg0 *)0x0;
   if (((*puVar5 & 2) != 0) && (pfVar6 = param_1, FUN_002ae164(), pfVar6 != (fn_003be918_arg0 *)0x0))
   {

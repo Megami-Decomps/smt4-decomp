@@ -9,10 +9,10 @@ int refIsNullOrZero(...);
 int FUN_0013c174(...);
 int FUN_001883b0(...);
 int vcallSlot12IfValid(...);
-int FUN_00195fc8(...);
+int sysFatalBreak(...);
 int asdMemFree(...);
 int asdTextureCreate(...);
-int FUN_0019a840(...);
+int asdTextureSetImage(...);
 int FUN_001f4a98(...);
 int FUN_002e3c44(...);
 int FUN_003fc294(...);
@@ -55,10 +55,10 @@ extern int FUN_0014afd0(void *, unsigned int);
 /* Supplied declaration required: FUN_001883b0. */
 /* Supplied declaration required: vcallSlot12IfValid. */
 extern int FUN_00191e00(unsigned int, void *, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00195fc8. */
+/* Supplied declaration required: sysFatalBreak. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: asdTextureCreate. */
-/* Supplied declaration required: FUN_0019a840. */
+/* Supplied declaration required: asdTextureSetImage. */
 extern int FUN_001a6508(unsigned int, void *, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001f4a98. */
 /* Supplied declaration required: FUN_002e3c44. */
@@ -175,7 +175,7 @@ void FUN_003fb5d4(fn_003fb5d4_arg0 *param_1,unsigned int param_2,int param_3)
         FUN_001883b0(puVar4,temp_v4,1);
         if ((temp_v6[0] & 0xfffffffe) != 0) {
           if ((temp_v6[0] & 1) != 0) {
-            FUN_00195fc8();
+            sysFatalBreak();
           }
           vcallSlot12IfValid(temp_v6[0] & 0xfffffffe);
           temp_v6[0] = 0;
@@ -202,7 +202,7 @@ void FUN_003fb5d4(fn_003fb5d4_arg0 *param_1,unsigned int param_2,int param_3)
             *(unsigned int *)(temp_v0 + 8) = temp_v1;
             *(unsigned int *)(temp_v0 + 0xc) = temp_v2;
           }
-          FUN_0019a840(temp_v0);
+          asdTextureSetImage(temp_v0);
           asdMemFree(puVar9);
           param_1->field_0x3d = 1;
           if (temp_v3 < (int)(unsigned int)*(unsigned short *)((int)param_1->field_0x10 + 4)) {
@@ -216,7 +216,7 @@ void FUN_003fb5d4(fn_003fb5d4_arg0 *param_1,unsigned int param_2,int param_3)
     }
     if ((temp_v6[0] & 0xfffffffe) != 0) {
       if ((temp_v6[0] & 1) != 0) {
-        FUN_00195fc8();
+        sysFatalBreak();
       }
       vcallSlot12IfValid(temp_v6[0] & 0xfffffffe);
       temp_v6[0] = 0;

@@ -5,7 +5,7 @@
 extern "C" {
 
 extern int FUN_002efb80(void);
-extern int FUN_002efd36(unsigned int, unsigned int);
+extern int seq16IsGreater(unsigned int, unsigned int);
 
 
 unsigned int FUN_002f1334(unsigned int param_1,unsigned int param_2)
@@ -15,7 +15,7 @@ unsigned int FUN_002f1334(unsigned int param_1,unsigned int param_2)
   unsigned int temp_v1;
   
   temp_v0 = FUN_002efb80();
-  if ((temp_v0 != 0) || (temp_v0 = FUN_002efd36(param_1,param_2), temp_v1 = 0, temp_v0 != 0)) {
+  if ((temp_v0 != 0) || (temp_v0 = seq16IsGreater(param_1,param_2), temp_v1 = 0, temp_v0 != 0)) {
     temp_v1 = 1;
   }
   return temp_v1;

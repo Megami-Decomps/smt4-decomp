@@ -9,7 +9,7 @@ u8 FUN_002a21e8(void)
 {
     s32 state;
 
-    state = FUN_00224880(DAT_0057f0c4.record->unk680);
+    state = FUN_00224880(g_buttonHelp.record->unk680);
     return state == 2;
 }
 

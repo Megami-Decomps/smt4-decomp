@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern Sub68Owner *DAT_00587f28;
+extern Sub68Owner *g_naviMain;
 extern void FUN_00168980(void);
 extern void FUN_00493154(void);
-extern void FUN_0035b304(void);
-extern void FUN_0037b450(void);
+extern void campCommonBgRelease(void);
+extern void campButtonHelpRelease(void);
 extern u32 jobStop(u32 job, u16 arg);
 extern void texOwner1480Free(u8 *sub);
 extern void asdMemFree(void *ptr);
@@ -16,13 +16,13 @@ void sub68OwnerDestroyAll(void)
 {
     FUN_00168980();
     FUN_00493154();
-    FUN_0035b304();
-    FUN_0037b450();
-    if (DAT_00587f28 != NULL) {
-        jobStop(DAT_00587f28->job, 0);
-        texOwner1480Free(DAT_00587f28->sub);
-        asdMemFree(DAT_00587f28);
-        DAT_00587f28 = NULL;
+    campCommonBgRelease();
+    campButtonHelpRelease();
+    if (g_naviMain != NULL) {
+        jobStop(g_naviMain->job, 0);
+        texOwner1480Free(g_naviMain->sub);
+        asdMemFree(g_naviMain);
+        g_naviMain = NULL;
     }
 }
 

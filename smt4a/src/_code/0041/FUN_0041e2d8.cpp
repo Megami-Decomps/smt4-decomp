@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern unsigned int FUN_001801a4(void);
+extern unsigned int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_0023b45c. */
 /* Supplied declaration required: FUN_002c8538. */
 /* Supplied declaration required: FUN_002f0384. */
@@ -38,7 +38,7 @@ void FUN_0041e2d8(int param_1)
       *(unsigned char *)(param_1 + 0x5c) = 1;
       FUN_002f0384(0);
       *(unsigned char *)(param_1 + 0x68) = 0;
-      temp_v1 = FUN_001801a4();
+      temp_v1 = gameGetPlayerData();
       rt_memcpy_w(temp_v1,*(unsigned int *)(param_1 + 0x54),0xe);
       FUN_0038b5fc(1,*(unsigned short *)(*(int *)(param_1 + 0x54) + 8));
       FUN_0038b5fc(2,*(unsigned short *)(*(int *)(param_1 + 0x54) + 10));

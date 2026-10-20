@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001383a8(...);
 int FUN_00144f90(...);
 int FUN_002bb150(...);
-int FUN_002c3424(...);
+int nn_os_LightEvent_Wait(...);
 int software_interrupt(...);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
@@ -24,7 +24,7 @@ extern unsigned int DAT_004d4280; /* 0x4d4280 */
 /* Supplied declaration required: FUN_001383a8. */
 /* Supplied declaration required: FUN_00144f90. */
 /* Supplied declaration required: FUN_002bb150. */
-/* Supplied declaration required: FUN_002c3424. */
+/* Supplied declaration required: nn_os_LightEvent_Wait. */
 extern unsigned int nn_err_CTR_FatalErr_Throw(unsigned int, unsigned int);
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
@@ -64,7 +64,7 @@ void FUN_002ad4f8(unsigned char *param_1)
         temp_v1[0] = 0;
         temp_v1[1] = 0;
         nn_os_LightEvent_Initialize((unsigned int)temp_v1,1);
-        FUN_002c3424(temp_v1);
+        nn_os_LightEvent_Wait(temp_v1);
       }
       return;
     }
@@ -78,7 +78,7 @@ void FUN_002ad4f8(unsigned char *param_1)
         temp_v1[0] = 0;
         temp_v1[1] = 0;
         nn_os_LightEvent_Initialize((unsigned int)temp_v1,1);
-        FUN_002c3424(temp_v1);
+        nn_os_LightEvent_Wait(temp_v1);
       }
       return;
     }

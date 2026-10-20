@@ -14,7 +14,7 @@ extern unsigned int DAT_005f19f8; /* 0x5f19f8 */
 extern unsigned int DAT_005f19fc; /* 0x5f19fc */
 
 /* Supplied declaration required: jyoucyuGetTableEntry. */
-extern int FUN_002deb84(void);
+extern int scrGetCommandFrame(void);
 /* Supplied declaration required: setBit0. */
 extern int QuestCenterMode_IsBusy(void);
 /* Supplied declaration required: QuestCenter_GetActiveEntry. */
@@ -26,7 +26,7 @@ unsigned char FUN_003b6fe0(void)
 /* irregular: 3 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_002deb84();
+  temp_v0 = scrGetCommandFrame();
   if (temp_v0 == 0) {
     jyoucyuGetTableEntry(0);
     QuestCenter_GetActiveEntry();

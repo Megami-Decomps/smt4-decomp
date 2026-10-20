@@ -13,7 +13,7 @@ typedef struct {
 
 extern int FUN_00287894(int);
 /* Supplied declaration required: FUN_0028eeb8. */
-extern int FUN_002adc88(void);
+extern int gameGetFlagBlock(void);
 
 
 void FUN_003489c8(int param_1)
@@ -22,7 +22,7 @@ void FUN_003489c8(int param_1)
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_002adc88();
+  temp_v0 = gameGetFlagBlock();
   temp_v0 = temp_v0 + param_1 * 4;
   *(unsigned char *)(temp_v0 + 0x201) = 0;
   *(unsigned char *)(temp_v0 + 0x202) = *(unsigned char *)(temp_v0 + 0x202) & 0xfe;

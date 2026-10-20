@@ -7,7 +7,7 @@ extern "C" {
 int FUN_004a9a50(int, int, int);
 int FUN_004aaa80(int, int, int);
 
-extern int DAT_0057a9c8; /* 0x57a9c8 */
+extern int g_btlUiBlock; /* 0x57a9c8 */
 
 /* Supplied declaration required: FUN_004a9a50. */
 /* Supplied declaration required: FUN_004aaa80. */
@@ -27,15 +27,15 @@ void FUN_003ebc08(int param_1,int param_2)
   if (0 < temp_v2) {
     temp_v3 = temp_v3 + temp_v2;
   }
-  temp_v0 = (char)temp_v3 - (char)*(unsigned short *)(DAT_0057a9c8 + 0x2450);
-  temp_v1 = (char)temp_v2 - (char)*(unsigned short *)(DAT_0057a9c8 + 0x2452);
+  temp_v0 = (char)temp_v3 - (char)*(unsigned short *)(g_btlUiBlock + 0x2450);
+  temp_v1 = (char)temp_v2 - (char)*(unsigned short *)(g_btlUiBlock + 0x2452);
   if (param_2 != 0) {
     if (param_2 == 1) {
-      FUN_004aaa80(DAT_0057a9c8,(int)temp_v0,(int)temp_v1);
+      FUN_004aaa80(g_btlUiBlock,(int)temp_v0,(int)temp_v1);
     }
   }
   else {
-    FUN_004a9a50(DAT_0057a9c8,(int)temp_v0,(int)temp_v1);
+    FUN_004a9a50(g_btlUiBlock,(int)temp_v0,(int)temp_v1);
   }
   *(unsigned short *)(param_1 + 0x4c74) = *(unsigned short *)(param_1 + 0x4c70);
   *(unsigned short *)(param_1 + 0x4c76) = *(unsigned short *)(param_1 + 0x4c72);

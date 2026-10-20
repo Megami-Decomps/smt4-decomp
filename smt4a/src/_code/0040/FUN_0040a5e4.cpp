@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_001519ac(void);
+extern int gameDataBlocksGetStats(void);
 
 
 void FUN_0040a5e4(int param_1)
@@ -12,7 +12,7 @@ void FUN_0040a5e4(int param_1)
 {
   int temp_v0;
   
-  temp_v0 = FUN_001519ac();
+  temp_v0 = gameDataBlocksGetStats();
   param_1 = (unsigned int)*(unsigned short *)(temp_v0 + 0x18) + param_1;
   if (param_1 >= 0x10000) {
     param_1 = 0xffff;

@@ -12,7 +12,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_00184310. */
-extern int FUN_0018719c(void);
+extern int gameFlagIsSet(void);
 extern int FUN_00239234(unsigned short, unsigned char *);
 
 
@@ -27,7 +27,7 @@ unsigned int FUN_004daf18(unsigned int param_1,unsigned short *param_2)
   
   FUN_00184310();
   if (((param_2 != (unsigned short *)0x0) && ((*(unsigned int *)(param_2 + 0x1a) & 0x200000) == 0)) &&
-     ((param_2[0x1f] == 0 || (temp_v1 = FUN_0018719c(), temp_v1 != 0)))) {
+     ((param_2[0x1f] == 0 || (temp_v1 = gameFlagIsSet(), temp_v1 != 0)))) {
     temp_v0 = param_2[0x1e];
     if ((temp_v0 & 1) != 0) {
       if ((temp_v0 & 0xfffe) != 0) {

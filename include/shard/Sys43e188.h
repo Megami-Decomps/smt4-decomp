@@ -51,6 +51,6 @@ typedef struct Sys43e188 {
     /* 0x08 */ Target43e188 *target;
 } Sys43e188;
 
-extern Sys43e188 DAT_0043e188;
+extern Sys43e188 g_messageMain;
 
 #endif

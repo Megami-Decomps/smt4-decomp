@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002c3944(unsigned int, unsigned int);
+int rt_memclr(unsigned int, unsigned int);
 
-/* Supplied declaration required: FUN_002c3944. */
+/* Supplied declaration required: rt_memclr. */
 
 
 unsigned int nw_snd_FxDelay_Initialize(int param_1)
@@ -41,7 +41,7 @@ unsigned int nw_snd_FxDelay_Initialize(int param_1)
       } while (temp_v6 != 0);
     }
     *(unsigned int *)(param_1 + 0x48) = 0;
-    FUN_002c3944(*(unsigned int *)(param_1 + 0x1c),*(unsigned int *)(param_1 + 0x20));
+    rt_memclr(*(unsigned int *)(param_1 + 0x1c),*(unsigned int *)(param_1 + 0x20));
     temp_v6 = (unsigned int)*(unsigned char *)(param_1 + 0x5d);
     if (temp_v6 != 0) {
       temp_v3 = 0;

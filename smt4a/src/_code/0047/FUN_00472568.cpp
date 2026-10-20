@@ -6,9 +6,9 @@ extern "C" {
 
 int FUN_0014e188(unsigned int *, int, unsigned int, unsigned int *, int);
 int FUN_00163aa4(...);
-int FUN_00184518(...);
-int FUN_001846d0(...);
-int FUN_00184b80(...);
+int pairSetSecondResetFirst(...);
+int uiSpriteSelectAnim(...);
+int pairSetFirstResetSecond(...);
 int FUN_00387240(...);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -19,9 +19,9 @@ typedef struct {
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: FUN_00163aa4. */
 extern unsigned int *jobGetWork(void);
-/* Supplied declaration required: FUN_00184518. */
-/* Supplied declaration required: FUN_001846d0. */
-/* Supplied declaration required: FUN_00184b80. */
+/* Supplied declaration required: pairSetSecondResetFirst. */
+/* Supplied declaration required: uiSpriteSelectAnim. */
+/* Supplied declaration required: pairSetFirstResetSecond. */
 /* Supplied declaration required: FUN_00387240. */
 
 
@@ -49,25 +49,25 @@ unsigned int FUN_00472568(void)
     puVar4 = puVar2 + 0x156;
     FUN_0014e188(puVar4,8,0xffffffff,puVar2 + 0x108,0xb);
     if ((int)puVar2[4] < 5) {
-      FUN_00184518(puVar2 + 0x110,6);
-      FUN_001846d0(puVar2 + 0x110,3);
+      pairSetSecondResetFirst(puVar2 + 0x110,6);
+      uiSpriteSelectAnim(puVar2 + 0x110,3);
       FUN_00387240(puVar2 + 0x110,8,0x36);
-      FUN_00184518(puVar4,7);
-      FUN_001846d0(puVar4,3);
+      pairSetSecondResetFirst(puVar4,7);
+      uiSpriteSelectAnim(puVar4,3);
       FUN_00387240(puVar4,8,0x36);
     }
     else {
-      FUN_00184518(puVar2 + 0x110,4);
-      FUN_001846d0(puVar2 + 0x110,3);
+      pairSetSecondResetFirst(puVar2 + 0x110,4);
+      uiSpriteSelectAnim(puVar2 + 0x110,3);
       FUN_00387240(puVar2 + 0x110,8,0x22);
-      FUN_00184518(puVar4,5);
-      FUN_001846d0(puVar4,3);
+      pairSetSecondResetFirst(puVar4,5);
+      uiSpriteSelectAnim(puVar4,3);
       FUN_00387240(puVar4,8,0x22);
     }
     *(unsigned char *)(puVar2 + 0x11f) = 1;
     *(unsigned char *)(puVar2 + 0x165) = 1;
-    FUN_00184b80(puVar3,7);
-    FUN_001846d0(puVar3,4);
+    pairSetFirstResetSecond(puVar3,7);
+    uiSpriteSelectAnim(puVar3,4);
     FUN_00387240(puVar3,8,0x47);
     puVar2 = puVar2 + 0x110;
     break;

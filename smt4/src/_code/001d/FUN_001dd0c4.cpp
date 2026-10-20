@@ -3,7 +3,7 @@
 extern "C" {
 
 int scrGetArg(int index);
-int FUN_002a03a0(u32 value, int a, int b);
+int soundChannelRequestIfEnabled(u32 value, int a, int b);
 
 /* Script command: arguments 1 and 2 are clamped to be non-negative. */
 u32 FUN_001dd0c4(void)
@@ -18,7 +18,7 @@ u32 FUN_001dd0c4(void)
     if (b < 0) {
         b = 0;
     }
-    FUN_002a03a0(value, a, b);
+    soundChannelRequestIfEnabled(value, a, b);
     return 1;
 }
 

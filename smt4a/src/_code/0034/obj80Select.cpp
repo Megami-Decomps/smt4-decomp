@@ -2,14 +2,14 @@
 
 extern "C" {
 
-extern Obj80Ref DAT_0059dbc0;
+extern Obj80Ref g_asdCamera;
 
 u32 obj80Select(s32 which)
 {
     if (which == 0) {
-        return DAT_0059dbc0.instance->unk80;
+        return g_asdCamera.instance->unk80;
     }
-    return DAT_0059dbc0.instance->unk84;
+    return g_asdCamera.instance->unk84;
 }
 
 } /* extern "C" */

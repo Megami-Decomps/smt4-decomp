@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0018b600(void);
-int FUN_0018b610(void);
+int globalCriticalSectionEnterForward(void);
+int globalCriticalSectionLeaveForward(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -17,8 +17,8 @@ extern signed char DAT_0061a482; /* 0x61a482 */
 extern unsigned char DAT_0061a488; /* 0x61a488 */
 extern int DAT_0061a510; /* 0x61a510 */
 
-/* Supplied declaration required: FUN_0018b600. */
-/* Supplied declaration required: FUN_0018b610. */
+/* Supplied declaration required: globalCriticalSectionEnterForward. */
+/* Supplied declaration required: globalCriticalSectionLeaveForward. */
 
 
 void FUN_0016163c(void)
@@ -31,7 +31,7 @@ void FUN_0016163c(void)
   if (DAT_0061a510 == 0) {
     return;
   }
-  FUN_0018b600();
+  globalCriticalSectionEnterForward();
   if (DAT_0061a481 == '\0') {
     DAT_0061a482 = DAT_0061a481;
   }
@@ -39,7 +39,7 @@ void FUN_0016163c(void)
     *(unsigned char *)(*(int *)(temp_v0 + 0x18) + (*(int *)(temp_v0 + 0x24) * 0x1c - 0x1a)) = 1;
     DAT_0061a488 = 1;
   }
-  FUN_0018b610();
+  globalCriticalSectionLeaveForward();
   return;
 }
 

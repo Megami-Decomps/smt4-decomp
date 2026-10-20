@@ -7,7 +7,7 @@ extern "C" {
 extern const char DAT_00410578[]; /* ././effMisc.h: __FILE__ */
 
 void *memAlloc(int, int, int, int size, int align, int);
-void FUN_002c3944(void *block, s32 size);
+void rt_memclr(void *block, s32 size);
 
 /* Allocates a zeroed effect object of `size` bytes from the main heap, 16-byte aligned. */
 static __inline void *effAllocCleared(s32 size)
@@ -16,7 +16,7 @@ static __inline void *effAllocCleared(s32 size)
 
     asdDebugTrace(DAT_00410578, 450);
     block = memAlloc(0x10000, 0x100, 0, size, 0x10, 1);
-    FUN_002c3944(block, size);
+    rt_memclr(block, size);
     return block;
 }
 

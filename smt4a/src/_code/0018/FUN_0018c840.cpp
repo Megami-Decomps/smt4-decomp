@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_00195fc8(void);
+int sysFatalBreak(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-/* Supplied declaration required: FUN_00195fc8. */
+/* Supplied declaration required: sysFatalBreak. */
 extern int FUN_001a3010(unsigned int);
 
 
@@ -30,7 +30,7 @@ void FUN_0018c840(void)
   if (temp_v0 >= 0 || temp_v0 == temp_v1) {
     return;
   }
-  FUN_00195fc8();
+  sysFatalBreak();
   return;
 }
 

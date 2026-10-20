@@ -3,8 +3,8 @@
 extern "C" {
 
 int bitsetSetBit(void *bits, int bit);
-int FUN_002b06c4(int id);
-int FUN_002b9024(int id);
+int dataTable00FindById(int id);
+int devilGetRecord(int id);
 int memClear(void *ptr, int size);
 int rt_memcpy_w(void *dst, void *src, int size);
 
@@ -68,7 +68,7 @@ typedef __packed struct Record {
 /* Builds a record for `id` from its two source tables. */
 void FUN_0026a858(int id, Record *record)
 {
-    SourceA *a = (SourceA *)FUN_002b06c4(id);
+    SourceA *a = (SourceA *)dataTable00FindById(id);
 
     memClear(record, 0x604);
     record->id = (s16)id;
@@ -93,7 +93,7 @@ void FUN_0026a858(int id, Record *record)
     record->unk3E = a->unk52;
     record->unk40 = a->unk54;
     record->unk42 = a->unk56;
-    bitsetSetBit(record, ((SourceB *)FUN_002b9024(id))->unk38);
+    bitsetSetBit(record, ((SourceB *)devilGetRecord(id))->unk38);
     record->unk2A = *(u16 *)&record->unk0E;
     record->unk2C = ((u16 *)record)[8];
 }

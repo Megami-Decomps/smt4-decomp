@@ -3,7 +3,7 @@
 extern "C" {
 
 int scrSetResult(int result);
-int FUN_002b06c4(u32 id);
+int dataTable00FindById(u32 id);
 extern u32 scrGetArg(void);
 
 typedef struct Record {
@@ -14,7 +14,7 @@ typedef struct Record {
 /* Script command: result is a bit field of the record's flags halfword (masked to 0x3f, shifted right by 5). */
 u32 FUN_003185b8(void)
 {
-    Record *record = (Record *)FUN_002b06c4((u16)scrGetArg());
+    Record *record = (Record *)dataTable00FindById((u16)scrGetArg());
 
     scrSetResult((record->flags & 0x3f) >> 5);
     return 1;

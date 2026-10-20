@@ -37,14 +37,14 @@ extern unsigned char LAB_002e0380; /* 0x2e0380 */
 extern unsigned char LAB_0032afe0; /* 0x32afe0 */
 extern int FUN_00358550(...); /* 0x358550 */
 extern int FUN_00358734(...); /* 0x358734 */
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern unsigned int *g_mapMain; /* 0x581274 */
 extern unsigned char DAT_005f161d; /* 0x5f161d */
 extern unsigned char DAT_005f185b; /* 0x5f185b */
 
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: taskCreateDraw. */
-extern int FUN_00162e8c(void);
+extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: mapDepartResetWork. */
 /* Supplied declaration required: FUN_0020ec4c. */
@@ -69,7 +69,7 @@ void FUN_00246720(void)
   puVar1 = (unsigned int *)0x100;
   asdMemoryAllocTracked(0x100,0x100,0,0xd4,1);
   g_mapMain = puVar1;
-  temp_v0 = FUN_00162e8c();
+  temp_v0 = gameFlagsGetBlock();
   FUN_002c23cc(1);
   *(unsigned char *)((int)puVar1 + 0xd) = 0;
   *(unsigned char *)((int)puVar1 + 0xe) = 0;
@@ -125,7 +125,7 @@ void FUN_00246720(void)
   DAT_005f161d = 0;
   *(unsigned char *)(temp_v0 + 0x7c4) = 0;
   puVar1[0x33] = 0;
-  puVar1[0x34] = DAT_0056fcc0;
+  puVar1[0x34] = g_handleRegistry;
   *(unsigned char *)(puVar1 + 3) = 0;
   puVar3 = &LAB_0024697c;
   asdProcessCreateSimple(&LAB_0024697c,4,0,0,FUN_0024f4ac,&LAB_002e0380,0);

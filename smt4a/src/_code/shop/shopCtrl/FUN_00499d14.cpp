@@ -29,7 +29,7 @@ struct fn_00499d14_arg0 {
 extern unsigned char LAB_00499dbc; /* 0x499dbc */
 
 /* Supplied declaration required: FUN_00178b04. */
-extern unsigned int FUN_001801a4(void);
+extern unsigned int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00284f90. */
 /* Supplied declaration required: FUN_002c7ce8. */
 /* Supplied declaration required: FUN_002c7e6c. */
@@ -59,7 +59,7 @@ void FUN_00499d14(fn_00499d14_arg0 *param_1)
   }
   FUN_002c85b0(temp_v0);
   FUN_002c7ce8(0);
-  temp_v0 = FUN_001801a4();
+  temp_v0 = gameGetPlayerData();
   FUN_0033449c(1);
   FUN_003720a0(temp_v0,0);
   FUN_00372100(temp_v0,0);

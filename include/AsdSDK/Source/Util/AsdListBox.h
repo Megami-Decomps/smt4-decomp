@@ -65,7 +65,7 @@ typedef struct AsdListBoxModel {
 /* The list box object (0x18c bytes). */
 typedef struct AsdListBox {
     /* 0x000 */ u8 unk000[0xc];
-    /* 0x00c */ u8 widget[0x28];             /* row widget, set up by FUN_00296c80/FUN_00296c60 */
+    /* 0x00c */ u8 widget[0x28];             /* row widget, set up by FUN_00296c80/colorSetRgba */
     /* 0x034 */ s32 unk34;
     /* 0x038 */ u32 flags;
     /* 0x03c */ u8 unk3c;

@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002bd420(int, int, int);
-int FUN_002c3940(int, int);
+int memCopy(int, int, int);
+int rt_aeabi_memclr(int, int);
 
-/* Supplied declaration required: FUN_002bd420. */
-/* Supplied declaration required: FUN_002c3940. */
+/* Supplied declaration required: memCopy. */
+/* Supplied declaration required: rt_aeabi_memclr. */
 
 
 void FUN_0030a84c(int param_1,int param_2)
@@ -18,9 +18,9 @@ void FUN_0030a84c(int param_1,int param_2)
   if (param_1 == 0 || param_2 == 0) {
     return;
   }
-  FUN_002c3940(param_2,0x8c);
-  FUN_002bd420(param_1,param_2,0xe);
-  FUN_002bd420(param_1 + 0xe,param_2 + 0x4c,0x12);
+  rt_aeabi_memclr(param_2,0x8c);
+  memCopy(param_1,param_2,0xe);
+  memCopy(param_1 + 0xe,param_2 + 0x4c,0x12);
   *(unsigned char *)(param_2 + 0x76) = *(unsigned char *)(param_1 + 0x36);
   return;
 }

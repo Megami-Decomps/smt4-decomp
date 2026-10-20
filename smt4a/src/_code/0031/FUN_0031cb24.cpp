@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned char DAT_0057f3b4; /* 0x57f3b4 */
+extern unsigned char g_eventEffect; /* 0x57f3b4 */
 
 
 void FUN_0031cb24(void)
@@ -12,9 +12,9 @@ void FUN_0031cb24(void)
 {
   int temp_v0;
   
-  temp_v0 = (*(int *)((unsigned char *)&DAT_0057f3b4 + 0x8));
-  if ((*(int *)((unsigned char *)&DAT_0057f3b4 + 0x8)) != 0) {
-    *(unsigned int *)((*(int *)((unsigned char *)&DAT_0057f3b4 + 0x8)) + 0xc) = 0;
+  temp_v0 = (*(int *)((unsigned char *)&g_eventEffect + 0x8));
+  if ((*(int *)((unsigned char *)&g_eventEffect + 0x8)) != 0) {
+    *(unsigned int *)((*(int *)((unsigned char *)&g_eventEffect + 0x8)) + 0xc) = 0;
     *(unsigned int *)(temp_v0 + 8) = 4;
     *(unsigned int *)(temp_v0 + 0x10) = 0x3f000000;
     *(unsigned char *)(temp_v0 + 0x14) = 0;

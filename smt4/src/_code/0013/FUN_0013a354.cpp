@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } void_stack;
 
-extern signed char DAT_0044e458; /* 0x44e458 */
+extern signed char g_callbackState; /* 0x44e458 */
 extern signed char DAT_0044e459; /* 0x44e459 */
 extern signed char DAT_0044e45a; /* 0x44e45a */
 extern unsigned short DAT_0044e45c; /* 0x44e45c */
@@ -34,7 +34,7 @@ void FUN_0013a354(void)
   unsigned int temp_v0;
   int temp_v1;
   
-  if ((DAT_0044e458 != '\0') && (DAT_0044e458 = '\0', DAT_0044e45a != '\0')) {
+  if ((g_callbackState != '\0') && (g_callbackState = '\0', DAT_0044e45a != '\0')) {
     if ((DAT_0044e460 == 0) || (DAT_0044e459 != '\0')) {
       temp_v0 = 0xc8a0a7fc;
     }

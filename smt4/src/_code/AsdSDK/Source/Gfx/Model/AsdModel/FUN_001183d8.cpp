@@ -20,7 +20,7 @@ typedef struct {
 } void_stack;
 
 extern unsigned int g_titleScene; /* 0x44ea00 */
-extern signed char DAT_00464af0; /* 0x464af0 */
+extern signed char g_gfxSettings; /* 0x464af0 */
 extern unsigned int DAT_00464b08; /* 0x464b08 */
 extern unsigned int DAT_00464b1c; /* 0x464b1c */
 extern unsigned int DAT_00464b78; /* 0x464b78 */
@@ -57,7 +57,7 @@ void FUN_001183d8(void)
   int temp_v1;
   unsigned int temp_v2;
   
-  if ((DAT_00464af0 != '\0') && ((0 < DAT_004dad98 || ((DAT_00464b78 & 1) != 0)))) {
+  if ((g_gfxSettings != '\0') && ((0 < DAT_004dad98 || ((DAT_00464b78 & 1) != 0)))) {
     temp_v2 = *(unsigned int *)(DAT_00464bb8 + 4);
     FUN_001325c4(DAT_00464bb8,DAT_00464b80,DAT_00464b1c,1);
     temp_v0 = DAT_00464b88;

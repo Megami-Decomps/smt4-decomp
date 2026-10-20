@@ -5,15 +5,15 @@
 extern "C" {
 
 int cecProcessStart(void);
-int FUN_001aa030(void);
+int cecProcessDestroy(void);
 int FUN_00254600(int);
 int FUN_0025461c(void);
 int FUN_00262f68(unsigned int, int);
 int FUN_0026b9bc(void);
-int FUN_00296f4c(...);
+int scrScriptProcessStartEntry(...);
 int FUN_00297060(void);
-int FUN_002a8740(...);
-int FUN_002b8838(int);
+int gameGetUnitRecord(...);
+int buttonHelpSetPreset(int);
 
 typedef struct fn_002ece60_arg0 fn_002ece60_arg0;
 struct fn_002ece60_arg0 {
@@ -32,17 +32,17 @@ struct fn_002ece60_arg0 {
 
 extern int FUN_0019e0c0(int);
 /* Supplied declaration required: cecProcessStart. */
-/* Supplied declaration required: FUN_001aa030. */
+/* Supplied declaration required: cecProcessDestroy. */
 /* Supplied declaration required: FUN_00254600. */
 /* Supplied declaration required: FUN_0025461c. */
 /* Supplied declaration required: FUN_00262f68. */
 /* Supplied declaration required: FUN_0026b9bc. */
-/* Supplied declaration required: FUN_00296f4c. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297060. */
 extern int flagWordTestBit(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002a8740. */
-extern int FUN_002a8764(void);
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: gameGetUnitRecord. */
+extern int gameGetSlotTable(void);
+/* Supplied declaration required: buttonHelpSetPreset. */
 
 
 unsigned int FUN_002ece60(fn_002ece60_arg0 *param_1)
@@ -68,14 +68,14 @@ unsigned int FUN_002ece60(fn_002ece60_arg0 *param_1)
     else {
       temp_v0 = FUN_0019e0c0(param_1->field_0xd04);
       if (temp_v0 == 2) {
-        temp_v0 = FUN_002a8764();
+        temp_v0 = gameGetSlotTable();
         temp_v3 = 0;
         do {
           if (-1 < *(char *)(temp_v0 + temp_v3 + 0x90f0)) {
-            temp_v1 = FUN_002a8740();
+            temp_v1 = gameGetUnitRecord();
             temp_v2 = flagWordTestBit(temp_v1,2);
             if (temp_v2 != 0) {
-              temp_v1 = FUN_002a8740((int)*(char *)(temp_v0 + temp_v3 + 0x90f0));
+              temp_v1 = gameGetUnitRecord((int)*(char *)(temp_v0 + temp_v3 + 0x90f0));
               FUN_00262f68(temp_v1,4);
             }
           }
@@ -83,7 +83,7 @@ unsigned int FUN_002ece60(fn_002ece60_arg0 *param_1)
         } while (temp_v3 < 0x18);
         FUN_00254600(0);
         FUN_0026b9bc();
-        FUN_00296f4c(param_1->field_0xd04,0x1e);
+        scrScriptProcessStartEntry(param_1->field_0xd04,0x1e);
         param_1->field_0xd38 = param_1->field_0xd38 + 1;
       }
     }
@@ -93,11 +93,11 @@ unsigned int FUN_002ece60(fn_002ece60_arg0 *param_1)
     if ((temp_v0 != 0) && (param_1->field_0xcf8 != 0)) {
       FUN_00297060();
       param_1->field_0xd04 = temp_v0;
-      FUN_00296f4c();
-      FUN_002b8838(0x3c);
+      scrScriptProcessStartEntry();
+      buttonHelpSetPreset(0x3c);
       cecProcessStart();
       FUN_0025461c();
-      FUN_001aa030();
+      cecProcessDestroy();
       FUN_00254600(0);
       param_1->field_0xd38 = param_1->field_0xd38 + 1;
     }

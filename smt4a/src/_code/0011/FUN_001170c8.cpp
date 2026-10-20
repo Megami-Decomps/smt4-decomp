@@ -10,9 +10,9 @@ int destroyObj0055ae64(...);
 int FUN_002ec934(unsigned char [24], int, unsigned int);
 int strDestroy(...);
 int FUN_002ee524(...);
-int FUN_002ee54c(...);
+int sharedRefHolderDestroy2(...);
 int FUN_002fde5c(...);
-int FUN_00302f28(unsigned char [8]);
+int clearWords2Alt(unsigned char [8]);
 int FUN_00303018(...);
 int FUN_00303028(...);
 int FUN_00303038(...);
@@ -46,15 +46,15 @@ typedef struct {
 extern int *FUN_001214c4(int, unsigned char *, unsigned int);
 extern int FUN_001242f8(int *);
 extern unsigned long long FUN_00124458(unsigned char *, unsigned char *);
-extern int FUN_002e760a(unsigned int);
+extern int operatorNew(unsigned int);
 /* Supplied declaration required: strInit. */
 /* Supplied declaration required: destroyObj0055ae64. */
 /* Supplied declaration required: FUN_002ec934. */
 /* Supplied declaration required: strDestroy. */
 /* Supplied declaration required: FUN_002ee524. */
-/* Supplied declaration required: FUN_002ee54c. */
+/* Supplied declaration required: sharedRefHolderDestroy2. */
 /* Supplied declaration required: FUN_002fde5c. */
-/* Supplied declaration required: FUN_00302f28. */
+/* Supplied declaration required: clearWords2Alt. */
 /* Supplied declaration required: FUN_00303018. */
 /* Supplied declaration required: FUN_00303028. */
 /* Supplied declaration required: FUN_00303038. */
@@ -122,7 +122,7 @@ FUN_001170c8(int param_1,unsigned int param_2,int param_3,unsigned int *param_4,
     FUN_00303028(temp_v24,puVar3);
   }
   else {
-    temp_v0 = FUN_002e760a(0x58);
+    temp_v0 = operatorNew(0x58);
     if (temp_v0 != 0) {
       piVar2 = (int *)FUN_001214c4(temp_v0,temp_v18,*(unsigned int *)(param_3 + 0x1c));
     }
@@ -130,7 +130,7 @@ FUN_001170c8(int param_1,unsigned int param_2,int param_3,unsigned int *param_4,
       piVar2 = (int *)0x0;
     }
     FUN_0012143c(piVar2,*(unsigned int *)(param_3 + 0x14),temp_v19);
-    FUN_00302f28(temp_v23);
+    clearWords2Alt(temp_v23);
     FUN_00303088(temp_v23);
     FUN_00303146(temp_v25,piVar2 + 0x14);
     temp_v2 = FUN_00124458(temp_v23,temp_v25);
@@ -171,14 +171,14 @@ FUN_001170c8(int param_1,unsigned int param_2,int param_3,unsigned int *param_4,
             FUN_00303018(temp_v22,&temp_v15);
             FUN_0030314e(temp_v26,temp_v22);
             *param_5 = (unsigned int)piVar2;
-            FUN_002ee54c(temp_v22);
-            FUN_002ee54c(temp_v9);
+            sharedRefHolderDestroy2(temp_v22);
+            sharedRefHolderDestroy2(temp_v9);
             strDestroy(temp_v21);
             strDestroy(temp_v20);
             strDestroy(temp_v18);
             destroyObj0055ae64(temp_v19);
             strDestroy(temp_v3);
-            FUN_002ee54c(temp_v7);
+            sharedRefHolderDestroy2(temp_v7);
             strDestroy(temp_v17);
             return 1;
           }
@@ -190,14 +190,14 @@ FUN_001170c8(int param_1,unsigned int param_2,int param_3,unsigned int *param_4,
           FUN_00303018(temp_v24,temp_v12);
         }
         FUN_0030314e(temp_v26,temp_v24);
-        FUN_002ee54c(temp_v24);
-        FUN_002ee54c(temp_v9);
+        sharedRefHolderDestroy2(temp_v24);
+        sharedRefHolderDestroy2(temp_v9);
         strDestroy(temp_v21);
         strDestroy(temp_v20);
         strDestroy(temp_v18);
         destroyObj0055ae64(temp_v19);
         strDestroy(temp_v3);
-        FUN_002ee54c(temp_v7);
+        sharedRefHolderDestroy2(temp_v7);
         strDestroy(temp_v17);
         return 0;
       }
@@ -211,11 +211,11 @@ FUN_001170c8(int param_1,unsigned int param_2,int param_3,unsigned int *param_4,
     }
   }
   FUN_0030314e(temp_v26,temp_v24);
-  FUN_002ee54c(temp_v24);
+  sharedRefHolderDestroy2(temp_v24);
   strDestroy(temp_v18);
   destroyObj0055ae64(temp_v19);
   strDestroy(temp_v3);
-  FUN_002ee54c(temp_v7);
+  sharedRefHolderDestroy2(temp_v7);
   strDestroy(temp_v17);
   return 0;
 }

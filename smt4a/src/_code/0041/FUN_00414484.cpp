@@ -5,9 +5,9 @@
 extern "C" {
 
 int FUN_002e32a4(...);
-int FUN_002e9318(...);
+int onlineStringDestroy(...);
 int FUN_002e9590(...);
-int FUN_002e9afe(...);
+int vectorCopyHeader(...);
 int FUN_002ea100(...);
 int FUN_004130c0(...);
 
@@ -21,11 +21,11 @@ typedef struct {
 extern unsigned char LAB_00414604; /* 0x414604 */
 
 /* Supplied declaration required: FUN_002e32a4. */
-/* Supplied declaration required: FUN_002e9318. */
+/* Supplied declaration required: onlineStringDestroy. */
 /* Supplied declaration required: FUN_002e9590. */
-/* Supplied declaration required: FUN_002e9afe. */
+/* Supplied declaration required: vectorCopyHeader. */
 /* Supplied declaration required: FUN_002ea100. */
-extern int FUN_002f4e86(int);
+extern int refIsNonNegative(int);
 /* Supplied declaration required: FUN_004130c0. */
 
 
@@ -38,8 +38,8 @@ void FUN_00414484(int param_1)
   unsigned int temp_v2;
   unsigned char temp_v3 [12];
   
-  FUN_002e9afe(param_1 + 0x7c);
-  temp_v1 = FUN_002f4e86(param_1 + 0x7c);
+  vectorCopyHeader(param_1 + 0x7c);
+  temp_v1 = refIsNonNegative(param_1 + 0x7c);
   if (temp_v1 == 0) {
     *(unsigned char *)(param_1 + 0xfc) = 1;
   }
@@ -51,7 +51,7 @@ void FUN_00414484(int param_1)
       if (temp_v0 <= temp_v2) {
         FUN_002e32a4(9,&LAB_00414604,&LAB_00414604,temp_v2,temp_v0);
       }
-      temp_v1 = FUN_002f4e86(*(int *)(param_1 + 0xc4) + temp_v2 * 0xc);
+      temp_v1 = refIsNonNegative(*(int *)(param_1 + 0xc4) + temp_v2 * 0xc);
       if ((temp_v1 == 0) &&
          (temp_v0 = (*(int *)(param_1 + 200) - *(int *)(param_1 + 0xc4)) / 0xc, temp_v0 <= temp_v2)) {
         FUN_002e32a4(9,&LAB_00414604,&LAB_00414604,temp_v2,temp_v0);
@@ -67,7 +67,7 @@ void FUN_00414484(int param_1)
           if ((*(int *)(temp_v1 + 0xa4) - *(int *)(temp_v1 + 0xa0)) >> 3 != 0) {
             FUN_002e9590(temp_v3);
           }
-          FUN_002e9318(temp_v3);
+          onlineStringDestroy(temp_v3);
         }
         temp_v1 = temp_v1 + 0xb8;
       } while (*(int *)(param_1 + 0xbc) != temp_v1);

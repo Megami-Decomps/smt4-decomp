@@ -9,8 +9,8 @@ int FUN_001568f8(...);
 int FUN_0017760c(void);
 int FUN_00192550(void);
 int FUN_00192608(void);
-int FUN_001ab854(...);
-int FUN_001aba54(void);
+int gameGetSlotRecord(...);
+int dataTable04FindById(void);
 int FUN_003e8bb0(...);
 int FUN_003f0e20(...);
 int FUN_004bd098(...);
@@ -60,8 +60,8 @@ extern int lcgRandomRange(unsigned int);
 /* Supplied declaration required: FUN_0017760c. */
 /* Supplied declaration required: FUN_00192550. */
 /* Supplied declaration required: FUN_00192608. */
-/* Supplied declaration required: FUN_001ab854. */
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: gameGetSlotRecord. */
+/* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: FUN_003e8bb0. */
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: FUN_004bd098. */
@@ -119,7 +119,7 @@ unsigned int FUN_004c2ca8(int param_1,unsigned int param_2,int param_3,int param
   iStack_28 = param_4;
   puVar4 = (unsigned int *)btlGetMainState();
   temp_v6 = temp_v26;
-  FUN_001aba54();
+  dataTable04FindById();
   FUN_00192550();
   puVar5 = puVar4;
   FUN_003f0e20(puVar4,param_5);
@@ -199,7 +199,7 @@ unsigned int FUN_004c2ca8(int param_1,unsigned int param_2,int param_3,int param
       temp_v1 = *(unsigned short *)(temp_v6 + 0x3a);
       if ((temp_v1 & 0xfff) == 4000) {
         if (puVar6 == (unsigned int *)0x0) {
-          FUN_001ab854(param_6 - 0x6d);
+          gameGetSlotRecord(param_6 - 0x6d);
           temp_v8 = FUN_0017760c();
 LAB_004c3310:
           temp_v9 = 0;
@@ -217,7 +217,7 @@ LAB_004c329c:
             temp_v8 = (int)(puVar6[0x97] * (unsigned int)*(unsigned char *)(temp_v6 + 0x4b)) / 100;
             goto LAB_004c3238;
           }
-          FUN_001ab854(param_6 - 0x6d);
+          gameGetSlotRecord(param_6 - 0x6d);
           temp_v2 = FUN_0017760c();
           temp_v8 = ((int)temp_v2 * (int)(short)(unsigned short)*(unsigned char *)(temp_v6 + 0x4b)) / 100;
           goto LAB_004c3310;
@@ -226,7 +226,7 @@ LAB_004c329c:
         temp_v8 = FUN_004c2aec(temp_v26,param_5,param_6);
         if (puVar6 != (unsigned int *)0x0) goto LAB_004c329c;
 LAB_004c3314:
-        temp_v5 = FUN_001ab854(param_6 - 0x6d);
+        temp_v5 = gameGetSlotRecord(param_6 - 0x6d);
         temp_v4 = bitsAt60Test(temp_v5,3);
         temp_v10 = temp_v4 != 0;
         temp_v4 = 0;
@@ -279,7 +279,7 @@ LAB_004c3334:
         temp_v11 = temp_v11 * temp_v12;
       }
       else {
-        FUN_001ab854(param_6 - 0x6d);
+        gameGetSlotRecord(param_6 - 0x6d);
         temp_v2 = FUN_0017760c();
         temp_v11 = (float)VectorSignedToFloat((int)temp_v2 *
                                             (int)(short)(unsigned short)*(unsigned char *)(param_4 + 0x38),
@@ -295,7 +295,7 @@ LAB_004c3334:
       }
     }
     else {
-      temp_v5 = FUN_001ab854(param_6 - 0x6d);
+      temp_v5 = gameGetSlotRecord(param_6 - 0x6d);
       temp_v4 = bitsAt60Test(temp_v5,3);
       temp_v10 = temp_v4 != 0;
       temp_v4 = 0;
@@ -313,7 +313,7 @@ LAB_004c3334:
       temp_v8 = puVar5[0x3e];
     }
     else {
-      FUN_001ab854(param_6 - 0x6d);
+      gameGetSlotRecord(param_6 - 0x6d);
       temp_v8 = FUN_0017760c();
     }
     temp_v9 = 0;

@@ -23,7 +23,7 @@ extern unsigned int *DAT_00464a74; /* 0x464a74 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002aea44. */
 /* Supplied declaration required: FUN_002aea50. */
-extern int FUN_002c30c4(int);
+extern int libc_strlen(int);
 
 
 void FUN_0028f4b4(int param_1,unsigned int *param_2)
@@ -54,7 +54,7 @@ void FUN_0028f4b4(int param_1,unsigned int *param_2)
     piVar6 = *(int **)(temp_v0 + 8);
     FUN_002aea50(&temp_v4,piVar6,0x30);
     temp_v4 = param_1;
-    temp_v0 = FUN_002c30c4(param_1);
+    temp_v0 = libc_strlen(param_1);
     pcVar5 = temp_v5;
     if ((temp_v6 & 1) != 0) {
       pcVar5 = *(romwright_code **)((unsigned char *)temp_v5 + *(int *)((int)&temp_v4 + ((int)temp_v6 >> 1)));

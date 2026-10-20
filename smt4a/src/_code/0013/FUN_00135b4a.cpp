@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002e9598(int, unsigned int);
+int onlineStringAssign(int, unsigned int);
 
-/* Supplied declaration required: FUN_002e9598. */
+/* Supplied declaration required: onlineStringAssign. */
 
 
 void FUN_00135b4a(int param_1,int param_2,unsigned int param_3)
@@ -14,7 +14,7 @@ void FUN_00135b4a(int param_1,int param_2,unsigned int param_3)
 {
 /* irregular: 1 native warning(s); review required */
   for (; param_1 != param_2; param_1 = param_1 + 8) {
-    FUN_002e9598(param_1,param_3);
+    onlineStringAssign(param_1,param_3);
   }
   return;
 }

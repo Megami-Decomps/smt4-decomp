@@ -6,7 +6,7 @@ extern "C" {
 
 extern unsigned char DAT_0055b0fc; /* 0x55b0fc */
 
-extern unsigned int FUN_002ea4bc(void);
+extern unsigned int onlineInstantiationContextGetCurrent(void);
 
 
 unsigned int * FUN_00302374(unsigned int *param_1)
@@ -22,7 +22,7 @@ unsigned int * FUN_00302374(unsigned int *param_1)
   param_1[7] = 0;
   param_1[1] = 0;
   *param_1 = (unsigned int)&DAT_0055b0fc;
-  temp_v0 = FUN_002ea4bc();
+  temp_v0 = onlineInstantiationContextGetCurrent();
   param_1[8] = temp_v0;
   return param_1;
 }

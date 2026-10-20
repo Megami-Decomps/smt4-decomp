@@ -15,7 +15,7 @@ int FUN_002e6e34(char **, int);
 int FUN_002e6e5c(char **);
 int FUN_002ea2e8(unsigned char [4]);
 int FUN_002ea3a8(...);
-int FUN_002f32f8(...);
+int wideBufferAppend(...);
 int FUN_002f4db0(unsigned char [468], int, int, int);
 int FUN_002f4e90(unsigned char [4], int);
 int FUN_002f4ecc(unsigned char [4], char [4], unsigned short [2]);
@@ -59,8 +59,8 @@ extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_002ea2e8. */
 /* Supplied declaration required: FUN_002ea3a8. */
 extern unsigned int FUN_002ee818(unsigned int, unsigned short);
-extern int FUN_002ee9ce(unsigned char *);
-/* Supplied declaration required: FUN_002f32f8. */
+extern int streamWriterFinish(unsigned char *);
+/* Supplied declaration required: wideBufferAppend. */
 /* Supplied declaration required: FUN_002f4db0. */
 /* Supplied declaration required: FUN_002f4e90. */
 /* Supplied declaration required: FUN_002f4ecc. */
@@ -126,7 +126,7 @@ void FUN_0011c290(int *param_1,int param_2,int param_3,int param_4)
     (**(romwright_code **)(*param_1 + 0xc))(param_1,temp_v8[0],temp_v9,temp_v15);
     FUN_001165c0(param_3);
     if ((*(char *)(param_2 + 0x14) == '\0') && (temp_v11[0] != '\0')) {
-      temp_v0 = FUN_002ee9ce(temp_v15);
+      temp_v0 = streamWriterFinish(temp_v15);
       temp_v5 = (char *)0x0;
       temp_v6 = 0;
       temp_v7 = 0;
@@ -144,27 +144,27 @@ void FUN_0011c290(int *param_1,int param_2,int param_3,int param_4)
     temp_v1 = *(int *)(temp_v17 + 0x14);
     temp_v0 = *(int *)(temp_v17 + 0x18);
     temp_v3 = *(unsigned int *)(temp_v17 + 0x10);
-    temp_v4 = FUN_002f32f8(temp_v14,
+    temp_v4 = wideBufferAppend(temp_v14,
                          "ClientProtocolRequestBroker: Error processing message. pBuffer=");
     FUN_00106f6c(temp_v4,temp_v17);
-    temp_v4 = FUN_002f32f8();
+    temp_v4 = wideBufferAppend();
     temp_v4 = FUN_002ee818(temp_v4,temp_v8[0]);
-    temp_v4 = FUN_002f32f8(temp_v4,&LAB_0011c440);
+    temp_v4 = wideBufferAppend(temp_v4,&LAB_0011c440);
     temp_v4 = FUN_003112ee(temp_v4,temp_v3);
-    temp_v4 = FUN_002f32f8(temp_v4,&LAB_0011c454);
+    temp_v4 = wideBufferAppend(temp_v4,&LAB_0011c454);
     FUN_003112ee(temp_v4,temp_v1 - temp_v0);
     if (param_3 != 0) {
       temp_v2 = *(unsigned int *)(param_3 + 0x7c);
       temp_v3 = *(unsigned int *)(param_3 + 0x78);
-      temp_v4 = FUN_002f32f8(temp_v14,&LAB_0011c464);
+      temp_v4 = wideBufferAppend(temp_v14,&LAB_0011c464);
       temp_v4 = FUN_003112ee(temp_v4,temp_v3);
-      temp_v4 = FUN_002f32f8(temp_v4,&LAB_0011c488);
+      temp_v4 = wideBufferAppend(temp_v4,&LAB_0011c488);
       temp_v4 = FUN_003112ee(temp_v4,temp_v2);
-      temp_v4 = FUN_002f32f8(temp_v4,&LAB_0011c494);
+      temp_v4 = wideBufferAppend(temp_v4,&LAB_0011c494);
       FUN_00123306(temp_v4,param_3 + 8);
     }
     else {
-      FUN_002f32f8(temp_v14,&LAB_0011c4a0);
+      wideBufferAppend(temp_v14,&LAB_0011c4a0);
     }
     FUN_002ea3a8(temp_v14);
   }

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00140e78(void);
 int FUN_002bad74(...);
 int FUN_002c5d5c(...);
-int FUN_002c66cc(...);
+int rt_vec_dtor(...);
 int UnsignedDoesSaturate(...);
 int UnsignedSaturate(...);
 int nw_snd_SoundPlayer_Update(unsigned int);
@@ -32,7 +32,7 @@ extern unsigned char LAB_00123ce8; /* 0x123ce8 */
 /* Supplied declaration required: FUN_002bad74. */
 extern unsigned int FUN_002baed8(void);
 /* Supplied declaration required: FUN_002c5d5c. */
-/* Supplied declaration required: FUN_002c66cc. */
+/* Supplied declaration required: rt_vec_dtor. */
 /* Supplied declaration required: nw_snd_SoundPlayer_Update. */
 /* Supplied declaration required: nw_ut_internal_LinkListImpl_erase_2BAE30. */
 /* Supplied declaration required: nw_ut_internal_LinkListImpl_insert. */
@@ -83,7 +83,7 @@ void FUN_00110a04(int param_1)
       }
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < 0x80);
-    FUN_002c66cc(&iStack_620,&LAB_0011d9bc,0xc,0x80);
+    rt_vec_dtor(&iStack_620,&LAB_0011d9bc,0xc,0x80);
   }
   if (*(unsigned int *)(param_1 + 0x50) >= 2) {
     FUN_002c5d5c(&iStack_620,&LAB_00123ce8,0xc,0x80);
@@ -109,7 +109,7 @@ void FUN_00110a04(int param_1)
       }
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < 0x80);
-    FUN_002c66cc(&iStack_620,&LAB_0011d9c0,0xc,0x80);
+    rt_vec_dtor(&iStack_620,&LAB_0011d9c0,0xc,0x80);
   }
   if (*(unsigned int *)(param_1 + 0x70) >= 2) {
     FUN_002c5d5c(&iStack_620,&LAB_00123cb8,0xc,0x80);
@@ -135,7 +135,7 @@ void FUN_00110a04(int param_1)
       }
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < 0x80);
-    FUN_002c66cc(&iStack_620,&LAB_0011d9b8,0xc,0x80);
+    rt_vec_dtor(&iStack_620,&LAB_0011d9b8,0xc,0x80);
   }
   temp_v3 = FUN_002baed8();
   FUN_00140e78();

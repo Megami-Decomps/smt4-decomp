@@ -19,7 +19,7 @@ typedef struct {
 /* Supplied declaration required: FUN_001201d8. */
 /* Supplied declaration required: FUN_00133db6. */
 /* Supplied declaration required: FUN_00133e90. */
-extern int FUN_002ed28c(int, unsigned int *);
+extern int streamReadU32(int, unsigned int *);
 /* Supplied declaration required: FUN_0030d09c. */
 /* Supplied declaration required: FUN_0030d0ac. */
 /* Supplied declaration required: FUN_0030d0bc. */
@@ -35,7 +35,7 @@ void FUN_00304f04(int param_1,int param_2)
   unsigned char temp_v3 [28];
   
   FUN_0030d0bc(param_2);
-  temp_v0 = FUN_002ed28c(param_1,&temp_v2);
+  temp_v0 = streamReadU32(param_1,&temp_v2);
   if (temp_v0 != 0) {
     FUN_00133e90(param_2,temp_v2);
     temp_v1 = 0;

@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_001641c4(void);
+int ifTouchRegionRemove(void);
 int FUN_001834a4(int, int);
 int FUN_00284168(int, int, int, int);
 int fillTwoWordsWithByte(int, unsigned int);
 
-/* Supplied declaration required: FUN_001641c4. */
+/* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_00284168. */
 extern int FUN_002a4894(int);
@@ -29,7 +29,7 @@ void FUN_0024b0ec(int *param_1)
   temp_v3 = *param_1;
   if (0 < *(short *)(temp_v3 + 0x24)) {
     do {
-      FUN_001641c4();
+      ifTouchRegionRemove();
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < *(short *)(temp_v3 + 0x24));
   }

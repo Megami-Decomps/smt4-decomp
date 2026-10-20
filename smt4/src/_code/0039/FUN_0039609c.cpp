@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0025beb8(unsigned int, int);
 int FUN_0028c618(unsigned int, int);
-int FUN_0028c640(unsigned int, int, float *);
+int nodeSetTranslation(unsigned int, int, float *);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -28,7 +28,7 @@ static float romwright_sqrt_4(float value)
 #endif
 /* Supplied declaration required: FUN_0025beb8. */
 /* Supplied declaration required: FUN_0028c618. */
-/* Supplied declaration required: FUN_0028c640. */
+/* Supplied declaration required: nodeSetTranslation. */
 
 
 void FUN_0039609c(int param_1)
@@ -61,7 +61,7 @@ void FUN_0039609c(int param_1)
     temp_v4 = *(float *)(param_1 + 0x28) + *(float *)(param_1 + 0x90);
     temp_v5 = *(float *)(param_1 + 0x2c) + *(float *)(param_1 + 0x94);
     temp_v6 = *(float *)(param_1 + 0x30) + *(float *)(param_1 + 0x98);
-    FUN_0028c640(*(unsigned int *)(*(int *)(param_1 + 0x6c) + 8),0,&temp_v4);
+    nodeSetTranslation(*(unsigned int *)(*(int *)(param_1 + 0x6c) + 8),0,&temp_v4);
     FUN_0028c618(*(unsigned int *)(*(int *)(param_1 + 0x6c) + 8),0);
     FUN_0025beb8(*(unsigned int *)(*(int *)(param_1 + 0x6c) + 8),0);
     if ((*(unsigned int *)(param_1 + 0x70) & 4) != 0) {

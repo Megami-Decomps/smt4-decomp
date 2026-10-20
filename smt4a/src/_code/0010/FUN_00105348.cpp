@@ -16,7 +16,7 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: sysMemClear. */
-extern int *FUN_002e760a(unsigned int);
+extern int *operatorNew(unsigned int);
 /* Supplied declaration required: FUN_002eb108. */
 extern int *FUN_002eb7d0(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002eb7e0. */
@@ -48,7 +48,7 @@ int * FUN_00105348(int param_1,unsigned short param_2,unsigned int param_3,unsig
     }
     return (int *)0x0;
   }
-  piVar1 = (int *)FUN_002e760a(0x150);
+  piVar1 = (int *)operatorNew(0x150);
   if (piVar1 != (int *)0x0) {
     FUN_002eb108(piVar1,0,0xf,0,param_1,0);
   }

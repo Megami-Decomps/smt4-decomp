@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_00312830(...);
+int arraySortQsort(...);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -16,7 +16,7 @@ extern int FUN_00404f00(...); /* 0x404f00 */
 
 extern int FUN_0026140c(void);
 extern unsigned int FUN_002c2c68(int);
-/* Supplied declaration required: FUN_00312830. */
+/* Supplied declaration required: arraySortQsort. */
 
 
 void sortOwnerRun(int param_1)
@@ -34,21 +34,21 @@ void sortOwnerRun(int param_1)
   if ((temp_v0 & 0x7f) == 0x34) {
     if ((temp_v0 & 0x80) != 0) {
       temp_v2 = FUN_002c2c68(temp_v1);
-      FUN_00312830(param_1,temp_v2,2,FUN_00404f00);
+      arraySortQsort(param_1,temp_v2,2,FUN_00404f00);
       return;
     }
     temp_v2 = FUN_002c2c68(temp_v1);
-    FUN_00312830(param_1,temp_v2,2,FUN_0040456c);
+    arraySortQsort(param_1,temp_v2,2,FUN_0040456c);
     return;
   }
   if ((temp_v0 & 0x7f) == 0x1b) {
     if ((temp_v0 & 0x80) != 0) {
       temp_v2 = FUN_002c2c68(temp_v1);
-      FUN_00312830(param_1,temp_v2,2,FUN_00404d50);
+      arraySortQsort(param_1,temp_v2,2,FUN_00404d50);
       return;
     }
     temp_v2 = FUN_002c2c68(temp_v1);
-    FUN_00312830(param_1,temp_v2,2,FUN_004039b4);
+    arraySortQsort(param_1,temp_v2,2,FUN_004039b4);
     return;
   }
   return;

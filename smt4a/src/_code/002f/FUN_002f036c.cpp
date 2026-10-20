@@ -12,11 +12,11 @@ typedef struct Globals {
     State *state; /* 0x04 */
 } Globals;
 
-extern Globals DAT_00588fd0;
+extern Globals g_gameGlobals;
 
 s32 FUN_002f036c(void)
 {
-    return DAT_00588fd0.state->mode;
+    return g_gameGlobals.state->mode;
 }
 
 } /* extern "C" */

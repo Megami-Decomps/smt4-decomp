@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001386b4(void);
-int FUN_00275f44(unsigned int, int);
+int scrScriptProcessStartEntry(unsigned int, int);
 int FUN_00280ad4(int, int, int, int);
 int FUN_003cc97c(...);
 int SBORROW4(...);
@@ -24,7 +24,7 @@ extern unsigned int DAT_005e2110; /* 0x5e2110 */
 /* Supplied declaration required: FUN_001386b4. */
 extern int FUN_00138cb4(void);
 extern unsigned int FUN_0025cb5c(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00280ad4. */
 /* Supplied declaration required: FUN_003cc97c. */
 /* Supplied declaration required: nn_fs_DeleteExtSaveData. */
@@ -109,7 +109,7 @@ void FUN_00349e60(char *param_1,unsigned int param_2,unsigned int param_3,unsign
       }
     }
     param_1[0x54] = '\x01';
-    FUN_00275f44(DAT_005e2110,0x10);
+    scrScriptProcessStartEntry(DAT_005e2110,0x10);
     FUN_00280ad4(0x19a2,0,0x100,2);
     if ((int)temp_v6 < 0) {
       temp_v3 = (temp_v6 & 0x3fc00) >> 10;

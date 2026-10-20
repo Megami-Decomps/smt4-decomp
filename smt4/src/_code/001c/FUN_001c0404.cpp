@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00192884(void);
-int FUN_00193be8(void);
+int configSettingsResetDefaults(void);
 int FUN_001a8748(void);
 int FUN_001ad98c(void);
 int FUN_001dc720(void);
@@ -31,11 +31,11 @@ int FUN_0033c618(void);
 int FUN_0033f784(void);
 int spriteTables14And15Load(unsigned int);
 
-extern unsigned int DAT_00439ca8; /* 0x439ca8 */
+extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 extern unsigned char DAT_00446db4; /* 0x446db4 */
 
 /* Supplied declaration required: FUN_00192884. */
-/* Supplied declaration required: FUN_00193be8. */
+/* Supplied declaration required: configSettingsResetDefaults. */
 /* Supplied declaration required: FUN_001a8748. */
 /* Supplied declaration required: FUN_001ad98c. */
 /* Supplied declaration required: FUN_001dc720. */
@@ -79,7 +79,7 @@ unsigned int FUN_001c0404(int *param_1)
   }
   if (temp_v0 >= 8) {
     if (temp_v0 == 0xb) {
-      FUN_00193be8();
+      configSettingsResetDefaults();
       FUN_0026f824(0);
       FUN_002c5620();
       FUN_001a8748();
@@ -94,7 +94,7 @@ unsigned int FUN_001c0404(int *param_1)
         FUN_001ad98c();
         FUN_00223b84();
         FUN_001ddb40();
-        spriteTables14And15Load(DAT_00439ca8);
+        spriteTables14And15Load(g_btlUiBlock);
         FUN_00317e78();
         *(int *)(temp_v1 + 8) = *(int *)(temp_v1 + 8) + 1;
         return 0;

@@ -2,18 +2,18 @@
 
 extern "C" {
 
-int FUN_0025011c(void);
+int asdMemoryFreeLocked(void);
 
 extern struct {
     u8 unk00[0x48];
     int unk48;
-} DAT_0044ea80;
+} g_effectEditor;
 
 void FUN_002f5ee4(void)
 {
-    if (DAT_0044ea80.unk48 != 0) {
-        FUN_0025011c();
-        DAT_0044ea80.unk48 = 0;
+    if (g_effectEditor.unk48 != 0) {
+        asdMemoryFreeLocked();
+        g_effectEditor.unk48 = 0;
     }
 }
 

@@ -1,4 +1,4 @@
-/* Returns 1 if the global state's flag at +0x1F4DC is set or FUN_002c09d0(0x528) reports true, else 0. */
+/* Returns 1 if the global state's flag at +0x1F4DC is set or gameFlagIsSet(0x528) reports true, else 0. */
 #include "common.h"
 
 extern "C" {
@@ -15,7 +15,7 @@ typedef struct StateHolder {
 
 extern StateHolder g_gameDataBlocks;
 
-extern s32 FUN_002c09d0(u32 id);
+extern s32 gameFlagIsSet(u32 id);
 
 s32 FUN_0027d8c8(void)
 {
@@ -24,7 +24,7 @@ s32 FUN_0027d8c8(void)
     if (g_gameDataBlocks.state->flag != 0) {
         return 1;
     }
-    result = FUN_002c09d0(0x528);
+    result = gameFlagIsSet(0x528);
     if (result != 0) {
         return 1;
     }

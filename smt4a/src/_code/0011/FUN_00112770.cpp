@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_002e92e4(unsigned int, unsigned int);
+int wstrcmpU16(unsigned int, unsigned int);
 
 extern unsigned int DAT_00594eb8; /* 0x594eb8 */
 extern unsigned int DAT_00594ebc; /* 0x594ebc */
 extern unsigned int DAT_00594ec0; /* 0x594ec0 */
 
-/* Supplied declaration required: FUN_002e92e4. */
+/* Supplied declaration required: wstrcmpU16. */
 
 
 unsigned int FUN_00112770(int param_1)
@@ -19,19 +19,19 @@ unsigned int FUN_00112770(int param_1)
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_002e92e4(*(unsigned int *)(param_1 + 0x2d4),DAT_00594eb8);
+  temp_v0 = wstrcmpU16(*(unsigned int *)(param_1 + 0x2d4),DAT_00594eb8);
   if ((temp_v0 != 0) &&
-     (temp_v0 = FUN_002e92e4(*(unsigned int *)(param_1 + 0x2d4),DAT_00594ebc), temp_v0 != 0)) {
-    FUN_002e92e4(*(unsigned int *)(param_1 + 0x2d4),DAT_00594ec0);
+     (temp_v0 = wstrcmpU16(*(unsigned int *)(param_1 + 0x2d4),DAT_00594ebc), temp_v0 != 0)) {
+    wstrcmpU16(*(unsigned int *)(param_1 + 0x2d4),DAT_00594ec0);
   }
-  temp_v0 = FUN_002e92e4(*(unsigned int *)(param_1 + 0x2d8),DAT_00594eb8);
+  temp_v0 = wstrcmpU16(*(unsigned int *)(param_1 + 0x2d8),DAT_00594eb8);
   if ((temp_v0 != 0) &&
-     (temp_v0 = FUN_002e92e4(*(unsigned int *)(param_1 + 0x2d8),DAT_00594ebc), temp_v0 != 0)) {
-    FUN_002e92e4(*(unsigned int *)(param_1 + 0x2d8),DAT_00594ec0);
+     (temp_v0 = wstrcmpU16(*(unsigned int *)(param_1 + 0x2d8),DAT_00594ebc), temp_v0 != 0)) {
+    wstrcmpU16(*(unsigned int *)(param_1 + 0x2d8),DAT_00594ec0);
   }
-  temp_v0 = FUN_002e92e4(*(unsigned int *)(param_1 + 0x2d4),DAT_00594ebc);
+  temp_v0 = wstrcmpU16(*(unsigned int *)(param_1 + 0x2d4),DAT_00594ebc);
   if (temp_v0 != 0) {
-    FUN_002e92e4(*(unsigned int *)(param_1 + 0x2d4),DAT_00594ec0);
+    wstrcmpU16(*(unsigned int *)(param_1 + 0x2d4),DAT_00594ec0);
   }
   return 1;
 }

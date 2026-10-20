@@ -2,9 +2,9 @@
 
 extern "C" {
 
-void FUN_00222104(void *ref);
-void FUN_00222434(void *shared);
-void FUN_002ce8d8(u32 handle);
+void handleBlockRefDrop(void *ref);
+void handleBlockUnref(void *shared);
+void geometryDestroy(u32 handle);
 void asdMemFree(void *memory);
 
 typedef struct Holder {
@@ -18,12 +18,12 @@ typedef struct Holder {
 void FUN_00300e28(Holder *object)
 {
     if (object->shared != NULL) {
-        FUN_00222434(object->shared);
+        handleBlockUnref(object->shared);
     }
     if (object->ref != NULL) {
-        FUN_00222104(object->ref);
+        handleBlockRefDrop(object->ref);
     }
-    FUN_002ce8d8(object->handle);
+    geometryDestroy(object->handle);
     asdMemFree(object);
 }
 

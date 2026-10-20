@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_001a9110(unsigned char [8], unsigned int);
+int wordPairCopy(unsigned char [8], unsigned int);
 int releaseOrCopyHandle(unsigned char [8], int);
 int asdCecMessageIdInit(unsigned char [8]);
 
-/* Supplied declaration required: FUN_001a9110. */
+/* Supplied declaration required: wordPairCopy. */
 /* Supplied declaration required: releaseOrCopyHandle. */
 /* Supplied declaration required: asdCecMessageIdInit. */
 extern unsigned char nn_cec_CTR_MessageId_IsEmpty(unsigned int);
@@ -36,7 +36,7 @@ unsigned int FUN_00430bbc(int param_1,unsigned int param_2,unsigned int param_3)
     if (((param_3 + 0x70 < 0x19001) && (param_3 != 0)) && (param_3 < 0x18001)) {
       asdCecMessageIdInit(temp_v6);
       temp_v2 = releaseOrCopyHandle(temp_v8,param_1 + 0x20);
-      FUN_001a9110(temp_v6,temp_v2);
+      wordPairCopy(temp_v6,temp_v2);
       releaseOrCopyHandle(temp_v7,param_1 + 0x20);
       if ((*(char *)(param_1 + 0x131) != '\0') ||
          (temp_v1 = nn_cec_CTR_MessageId_IsEmpty((unsigned int)temp_v6), !temp_v1)) {

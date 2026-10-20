@@ -31,7 +31,7 @@ extern unsigned int FUN_002b5c44(void);
 /* Supplied declaration required: FUN_002ba81c. */
 /* Supplied declaration required: FUN_002baa40. */
 extern int FUN_002c55b4(void);
-extern int FUN_002c55c4(void);
+extern int appletIsExitRequested(void);
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -87,7 +87,7 @@ void FUN_00354450(unsigned int param_1,int *param_2,unsigned int *param_3,int pa
       DAT_004c72f8 = *(char *)(temp_v5 + 0x98);
       temp_v1 = FUN_00239f84(temp_v6,&DAT_004c7000,0);
       if (-1 < temp_v1) {
-        temp_v1 = FUN_002c55c4();
+        temp_v1 = appletIsExitRequested();
         if ((temp_v1 == 0) && (temp_v1 = FUN_002c55b4(), temp_v1 == 0)) {
           if ((*(char *)(temp_v5 + 0x98) == '\0') && (DAT_004c72f8 != '\0')) {
             *(unsigned char *)(temp_v5 + 0x98) = 1;

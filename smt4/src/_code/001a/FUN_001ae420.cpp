@@ -5,14 +5,14 @@
 extern "C" {
 
 int callGlobalHook(...);
-int FUN_002c3944(int *, int);
+int rt_memclr(int *, int);
 
 extern unsigned char DAT_0040bc5c; /* 0x40bc5c */
 extern unsigned char DAT_0040dd5c; /* 0x40dd5c */
 extern unsigned char DAT_0040fe5c; /* 0x40fe5c */
 
 /* Supplied declaration required: callGlobalHook. */
-/* Supplied declaration required: FUN_002c3944. */
+/* Supplied declaration required: rt_memclr. */
 
 
 unsigned int FUN_001ae420(int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,int param_5,int param_6)
@@ -31,7 +31,7 @@ unsigned int FUN_001ae420(int *param_1,unsigned int param_2,unsigned int param_3
       temp_v4 = param_5 == 0;
     }
     if (temp_v4) {
-      FUN_002c3944(param_1,0x20);
+      rt_memclr(param_1,0x20);
       temp_v0 = callGlobalHook(0x670);
       *param_1 = temp_v0;
       temp_v2 = 0;

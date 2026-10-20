@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_2_stack;
 
-extern int DAT_00580ca0; /* 0x580ca0 */
+extern int g_mapGimic; /* 0x580ca0 */
 
 /* Supplied declaration required: FUN_003fd924. */
 
@@ -25,7 +25,7 @@ void FUN_00312870(int param_1,unsigned int param_2)
   
   temp_v0 = 0;
   while( 1 ) {
-    temp_v1 = DAT_00580ca0 + temp_v0 * 0x3c;
+    temp_v1 = g_mapGimic + temp_v0 * 0x3c;
     if ((*(char *)(temp_v1 + 0x90) != '\0') && (*(short *)(temp_v1 + 0xa6) == param_1)) break;
     temp_v0 = temp_v0 + 1;
     if (temp_v0 >= 0x23) {

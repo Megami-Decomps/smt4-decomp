@@ -6,7 +6,7 @@ extern "C" {
 
 int asdSequenceRequest(unsigned int, int);
 int FUN_001d1438(int, int);
-int FUN_00324bc8(...);
+int mapPlaceSet(...);
 int FUN_003d54f8(int, int);
 int FUN_004a0bac(int, int);
 int FUN_004b7128(int);
@@ -17,7 +17,7 @@ extern int DAT_005f1c98; /* 0x5f1c98 */
 /* Supplied declaration required: asdSequenceRequest. */
 /* Supplied declaration required: FUN_001d1438. */
 extern int FUN_002802c8(void);
-/* Supplied declaration required: FUN_00324bc8. */
+/* Supplied declaration required: mapPlaceSet. */
 /* Supplied declaration required: FUN_003d54f8. */
 /* Supplied declaration required: FUN_004a0bac. */
 /* Supplied declaration required: FUN_004b7128. */
@@ -62,12 +62,12 @@ void FUN_004b9410(int param_1)
           temp_v1 = (int)*(short *)(param_1 + 0x42);
           if (temp_v1 >= 100) {
             if (temp_v1 != 100) {
-              FUN_00324bc8(temp_v1,1,0xffffffff);
+              mapPlaceSet(temp_v1,1,0xffffffff);
             }
             *(unsigned char *)(param_1 + 0x48) = 1;
           }
           else {
-            FUN_00324bc8(temp_v1,(int)*(short *)(param_1 + 0x44),(int)*(short *)(param_1 + 0x46));
+            mapPlaceSet(temp_v1,(int)*(short *)(param_1 + 0x44),(int)*(short *)(param_1 + 0x46));
             *(unsigned char *)(param_1 + 0x49) = 1;
           }
         }

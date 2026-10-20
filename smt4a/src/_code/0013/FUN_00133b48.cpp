@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002e6e14(int);
+int asdOperatorDeleteArray(int);
 int FUN_00307a98(int, int, int, int *);
 int FUN_00307aba(...);
 int vectorCapacity40(...);
 int FUN_0030d108(...);
-int FUN_0030fd28(int *, int, int);
+int destroyRangeElem40(int *, int, int);
 int vectorCountx28_0030fd70(int *);
 
 /* stack frame of param_3: 2 slot(s), 8 byte(s) */
@@ -18,13 +18,13 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_002e6e14. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
 /* Supplied declaration required: FUN_00307a98. */
 /* Supplied declaration required: FUN_00307aba. */
 /* Supplied declaration required: vectorCapacity40. */
 /* Supplied declaration required: FUN_0030d108. */
-/* Supplied declaration required: FUN_0030fd28. */
-extern int FUN_0030fd62(int *, int, int);
+/* Supplied declaration required: destroyRangeElem40. */
+extern int vectorAllocx28(int *, int, int);
 /* Supplied declaration required: vectorCountx28_0030fd70. */
 extern int vectorGrowCapacity_0030fd7e(unsigned int, int *);
 extern int __aeabi_idivmod(int, unsigned int);
@@ -59,17 +59,17 @@ void FUN_00133b48(int *param_1,int param_2,unsigned int param_3)
   else {
     temp_v2 = vectorCountx28_0030fd70(param_1);
     temp_v4 = vectorGrowCapacity_0030fd7e(temp_v2,param_1);
-    temp_v5 = FUN_0030fd62(param_1,temp_v4,*param_1);
+    temp_v5 = vectorAllocx28(param_1,temp_v4,*param_1);
     FUN_00307a98(*param_1,param_2,temp_v5,param_1);
     temp_v3 = __aeabi_idivmod(param_2 - *param_1,0x28);
     FUN_0030d108(param_1,temp_v3 * 0x28 + temp_v5,param_3);
     temp_v3 = __aeabi_idivmod(param_2 - *param_1,0x28);
     FUN_00307a98(param_2,param_1[1],temp_v3 * 0x28 + temp_v5 + 0x28,param_1);
     temp_v3 = vectorCountx28_0030fd70(param_1);
-    FUN_0030fd28(param_1,*param_1,param_1[1]);
+    destroyRangeElem40(param_1,*param_1,param_1[1]);
     temp_v6 = *param_1;
     vectorCapacity40(param_1);
-    FUN_002e6e14(temp_v6);
+    asdOperatorDeleteArray(temp_v6);
     *param_1 = temp_v5;
     param_1[2] = temp_v4 * 0x28 + temp_v5;
     param_1[1] = temp_v3 * 0x28 + temp_v5 + 0x28;

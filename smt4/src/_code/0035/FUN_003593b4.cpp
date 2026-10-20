@@ -12,7 +12,7 @@ typedef struct {
     unsigned char sp10; /* 0x10: local_10 */
 } param_5_stack;
 
-extern unsigned int DAT_00473848; /* 0x473848 */
+extern unsigned int g_nnCecdHandle; /* 0x473848 */
 
 /* Unsupported intrinsic, declaration required: coproc_movefrom_User_R_Thread_and_Process_ID (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
@@ -35,8 +35,8 @@ unsigned int FUN_003593b4(unsigned int param_1,unsigned int param_2,unsigned cha
   *(unsigned int *)(temp_v1 + 0x94) = (param_5 << 4) | 10;
   *(unsigned int *)(temp_v1 + 0x98) = param_4;
   software_interrupt(0x32);
-  temp_v0 = DAT_00473848;
-  if ((DAT_00473848 & 0x80000000) == 0) {
+  temp_v0 = g_nnCecdHandle;
+  if ((g_nnCecdHandle & 0x80000000) == 0) {
     temp_v0 = *(unsigned int *)(temp_v1 + 0x84);
   }
   return temp_v0;

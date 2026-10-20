@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-extern int DAT_0057f290; /* 0x57f290 */
+extern int g_unite; /* 0x57f290 */
 
 /* Supplied declaration required: FUN_004a8750. */
 
@@ -25,10 +25,10 @@ int FUN_0026c4f0(int param_1)
   int temp_v2;
   int temp_v3;
   
-  temp_v0 = DAT_0057f290;
+  temp_v0 = g_unite;
   temp_v3 = 0;
   temp_v2 = 0;
-  if (*(short *)(DAT_0057f290 + 0x8f7a) != 0) {
+  if (*(short *)(g_unite + 0x8f7a) != 0) {
     do {
       if (*(char *)(param_1 + temp_v2 + 0x1a) == '\x03') {
         temp_v1 = (unsigned int)*(unsigned short *)(param_1 + temp_v2 * 2 + 2);

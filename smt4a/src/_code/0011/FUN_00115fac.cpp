@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00133f1c(void);
-int FUN_002e9ec8(int, unsigned int);
+int onlineInstanceTableFind(int, unsigned int);
 int FUN_002ea41e(unsigned char [4], int);
 int FUN_00301a60(...);
 int FUN_00301bd4(...);
@@ -41,10 +41,10 @@ typedef struct {
 #endif
 /* Supplied declaration required: FUN_00133f1c. */
 extern unsigned char *FUN_002e7908(unsigned char *, int *);
-extern int FUN_002e9af4(void);
-/* Supplied declaration required: FUN_002e9ec8. */
+extern int onlineInstanceTableGetCurrent(void);
+/* Supplied declaration required: onlineInstanceTableFind. */
 /* Supplied declaration required: FUN_002ea41e. */
-extern int FUN_002f4e86(unsigned int);
+extern int refIsNonNegative(unsigned int);
 /* Supplied declaration required: FUN_00301a60. */
 extern int vectorSize12A(void);
 /* Supplied declaration required: FUN_00301bd4. */
@@ -90,8 +90,8 @@ void FUN_00115fac(int param_1,unsigned int param_2,int *param_3)
   
   puVar3 = temp_v7;
   puVar2 = temp_v7;
-  temp_v0 = FUN_002e9af4();
-  FUN_002e9ec8(temp_v0,*(unsigned int *)(param_1 + 0x68));
+  temp_v0 = onlineInstanceTableGetCurrent();
+  onlineInstanceTableFind(temp_v0,*(unsigned int *)(param_1 + 0x68));
   if (temp_v0 != 0) {
     if (*(char *)(param_1 + 0xb8) != '\x02') {
       FUN_002ea41e(temp_v7,param_1 + 0xa8);
@@ -107,7 +107,7 @@ void FUN_00115fac(int param_1,unsigned int param_2,int *param_3)
         FUN_00301a60(param_1,puVar2);
         return;
       }
-      temp_v0 = FUN_002f4e86(*(unsigned int *)(param_1 + 0x94));
+      temp_v0 = refIsNonNegative(*(unsigned int *)(param_1 + 0x94));
       if (temp_v0 == 0) {
         puVar2 = *(unsigned char **)(param_1 + 0x94);
         FUN_00301a60(param_1,puVar2);

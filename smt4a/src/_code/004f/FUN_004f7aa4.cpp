@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_0030ea58(int, unsigned int);
+int libc_strcmp(int, unsigned int);
 
 extern unsigned int DAT_005737f4; /* 0x5737f4 */
 extern unsigned int DAT_005737f8; /* 0x5737f8 */
 
-/* Supplied declaration required: FUN_0030ea58. */
+/* Supplied declaration required: libc_strcmp. */
 
 
 int FUN_004f7aa4(int param_1,int param_2)
@@ -27,7 +27,7 @@ int FUN_004f7aa4(int param_1,int param_2)
     if (0 < param_2) {
       do {
         temp_v0 = *piVar4 + temp_v2 * 0x16 + 0x108;
-        FUN_0030ea58(temp_v0,DAT_005737f8);
+        libc_strcmp(temp_v0,DAT_005737f8);
         if (temp_v0 == 0) {
           return *piVar4 + temp_v2 * 0x16 + 0x108;
         }
@@ -38,8 +38,8 @@ int FUN_004f7aa4(int param_1,int param_2)
     do {
       temp_v0 = *piVar4 + temp_v2 * 0x16 + 0x108;
       if ((temp_v0 != 0) &&
-         ((temp_v1 = temp_v0, FUN_0030ea58(temp_v0,DAT_005737f4), temp_v1 == 0 ||
-          (FUN_0030ea58(temp_v0,DAT_005737f8), temp_v0 == 0)))) {
+         ((temp_v1 = temp_v0, libc_strcmp(temp_v0,DAT_005737f4), temp_v1 == 0 ||
+          (libc_strcmp(temp_v0,DAT_005737f8), temp_v0 == 0)))) {
         return *piVar4 + temp_v2 * 0x16 + 0x108;
       }
       temp_v2 = temp_v2 + 1;

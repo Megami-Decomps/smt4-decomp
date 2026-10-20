@@ -22,13 +22,13 @@ struct fn_00280d40_arg0 {
 
 extern unsigned int g_effAsdLightHandle; /* 0x5b3c80 */
 extern unsigned int DAT_005b3c84; /* 0x5b3c84 */
-extern unsigned int DAT_005b3c88; /* 0x5b3c88 */
+extern unsigned int g_asdModelTransformBuilder; /* 0x5b3c88 */
 extern unsigned int DAT_005b3c8c; /* 0x5b3c8c */
 extern unsigned int DAT_005b3c90; /* 0x5b3c90 */
 extern int DAT_005b3c94; /* 0x5b3c94 */
 extern int DAT_005b3c98; /* 0x5b3c98 */
 extern int DAT_005b3c9c; /* 0x5b3c9c */
-extern int DAT_00636e00; /* 0x636e00 */
+extern int g_asdLightCount; /* 0x636e00 */
 extern unsigned char DAT_00636e04; /* 0x636e04 */
 extern unsigned char DAT_00636e05; /* 0x636e05 */
 extern int DAT_00636e18; /* 0x636e18 */
@@ -154,13 +154,13 @@ void FUN_00280d40(fn_00280d40_arg0 *param_1)
   if ((-1 < temp_v3) && (*(int *)(temp_v5 + 0x18) == *(int *)(temp_v5 + 0x1c))) {
     (&DAT_00636e04)[temp_v3 * 0x18] = 0;
     (&DAT_00636e05)[temp_v3 * 0x18] = 0;
-    FUN_0018e9d8((&DAT_005b3c88)[temp_v3],(&DAT_005b3c98)[temp_v3]);
-    sceneTraverserVisit((&g_effAsdLightHandle)[temp_v3],(&DAT_005b3c88)[temp_v3]);
+    FUN_0018e9d8((&g_asdModelTransformBuilder)[temp_v3],(&DAT_005b3c98)[temp_v3]);
+    sceneTraverserVisit((&g_effAsdLightHandle)[temp_v3],(&g_asdModelTransformBuilder)[temp_v3]);
   }
   if (param_1->field_0x14 != (void *)0x0) {
     if (*(int *)((int)param_1->field_0x14 + 8) == 0) {
-      sceneTraverserVisit(g_effAsdLightHandle,DAT_005b3c88);
-      DAT_00636e00 = DAT_00636e00 - 1;
+      sceneTraverserVisit(g_effAsdLightHandle,g_asdModelTransformBuilder);
+      g_asdLightCount = g_asdLightCount - 1;
     }
     else {
       sceneTraverserVisit(DAT_005b3c84,DAT_005b3c8c);
@@ -168,8 +168,8 @@ void FUN_00280d40(fn_00280d40_arg0 *param_1)
     }
   }
   else if (param_1->field_0xc < 3) {
-    sceneTraverserVisit(g_effAsdLightHandle,DAT_005b3c88);
-    DAT_00636e00 = DAT_00636e00 - 1;
+    sceneTraverserVisit(g_effAsdLightHandle,g_asdModelTransformBuilder);
+    g_asdLightCount = g_asdLightCount - 1;
   }
   else {
     sceneTraverserVisit(DAT_005b3c84,DAT_005b3c8c);

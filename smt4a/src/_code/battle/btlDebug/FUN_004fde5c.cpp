@@ -39,8 +39,8 @@ typedef struct {
     unsigned int sp58; /* 0x58: local_58 */
 } param_6_stack;
 
-extern int DAT_005712f0; /* 0x5712f0 */
-extern int DAT_00571508; /* 0x571508 */
+extern int g_btlActionReflect; /* 0x5712f0 */
+extern int g_btlCamera; /* 0x571508 */
 extern int DAT_00573808; /* 0x573808 */
 extern unsigned int g_btlEvent; /* 0x573898 */
 extern unsigned int DAT_00573c18; /* 0x573c18 */
@@ -101,9 +101,9 @@ FUN_004fde5c(int param_1,unsigned int param_2,fn_004fde5c_arg2 *param_3,int para
   }
   temp_v9 = param_3->field_0x50;
   temp_v0 = (short)param_1;
-  temp_v2 = DAT_005712f0;
+  temp_v2 = g_btlActionReflect;
   if ((temp_v9 & 0x800) != 0 && (temp_v9 & 0x200) != 0) {
-    DAT_005712f0 = temp_v2;
+    g_btlActionReflect = temp_v2;
     if ((param_5 != 0) && (temp_v1 == 0)) {
       FUN_004102d8(temp_v2,(int)temp_v0,0,param_2);
       *(unsigned char *)(temp_v2 + 4) = 0x3e;
@@ -128,13 +128,13 @@ FUN_004fde5c(int param_1,unsigned int param_2,fn_004fde5c_arg2 *param_3,int para
       param_4 = 0xf;
       *(fn_004fde5c_arg2 **)(DAT_00573808 + 0x33bc) = param_3;
       *(unsigned int *)(temp_v7 + 0x339c) = *(unsigned int *)(temp_v7 + 0x339c) | 0x8000;
-      temp_v7 = DAT_005712f0;
-      FUN_004102d8(DAT_005712f0,(int)(short)((short)param_3->field_0x64 + temp_v0 + 2),0,param_2);
+      temp_v7 = g_btlActionReflect;
+      FUN_004102d8(g_btlActionReflect,(int)(short)((short)param_3->field_0x64 + temp_v0 + 2),0,param_2);
       *(unsigned char *)(temp_v7 + 4) = 0xf;
       *(unsigned int *)(temp_v7 + 0x28) = 2;
       *(unsigned int *)(temp_v7 + 0x4c) = 0xc0;
       *(unsigned short *)(temp_v7 + 0x26) = 1;
-      *(unsigned int *)(DAT_00571508 + 0x64c) = *(unsigned int *)(DAT_00571508 + 0x64c) | 0x2000000;
+      *(unsigned int *)(g_btlCamera + 0x64c) = *(unsigned int *)(g_btlCamera + 0x64c) | 0x2000000;
       FUN_004d7a60(g_btlEvent,param_3,0);
     }
   }
@@ -151,14 +151,14 @@ FUN_004fde5c(int param_1,unsigned int param_2,fn_004fde5c_arg2 *param_3,int para
   case 0:
   case 1:
     temp_v7 = 0;
-    temp_v2 = DAT_005712f0;
-    FUN_004102d8(DAT_005712f0,(int)(short)((short)param_3->field_0x64 + temp_v0),0,param_2);
+    temp_v2 = g_btlActionReflect;
+    FUN_004102d8(g_btlActionReflect,(int)(short)((short)param_3->field_0x64 + temp_v0),0,param_2);
     *(unsigned char *)(temp_v2 + 4) = 0x1b;
     *(fn_004fde5c_arg2 **)(temp_v2 + 0x14) = param_3;
     *(unsigned int *)(temp_v2 + 0x4c) = 0;
     FUN_004fd3f0(param_3->field_0x64 + param_1,param_2,param_3);
-    temp_v2 = DAT_005712f0;
-    FUN_004102d8(DAT_005712f0,(int)(short)((short)param_3->field_0x64 + temp_v0 + 5),0,param_2);
+    temp_v2 = g_btlActionReflect;
+    FUN_004102d8(g_btlActionReflect,(int)(short)((short)param_3->field_0x64 + temp_v0 + 5),0,param_2);
     *(unsigned char *)(temp_v2 + 4) = 0x24;
     temp_v2 = btlGetMainState();
     if (temp_v8 != 0) {
@@ -173,15 +173,15 @@ FUN_004fde5c(int param_1,unsigned int param_2,fn_004fde5c_arg2 *param_3,int para
         if (((((temp_v8 & 1) != 0 && (temp_v8 & 2) != 0) && (temp_v8 & 0x10) != 0) &&
             (*(short *)(temp_v2 + 0x6a) != param_3->field_0x6a)) &&
            ((*(unsigned int *)(temp_v2 + 0x10c) & 2) == 0)) {
-          temp_v10 = DAT_005712f0;
-          FUN_004102d8(DAT_005712f0,(int)(short)((short)*(unsigned int *)(temp_v2 + 100) + temp_v0),0,
+          temp_v10 = g_btlActionReflect;
+          FUN_004102d8(g_btlActionReflect,(int)(short)((short)*(unsigned int *)(temp_v2 + 100) + temp_v0),0,
                        param_2);
           *(unsigned char *)(temp_v10 + 4) = 0x1b;
           *(int *)(temp_v10 + 0x14) = temp_v2;
           *(unsigned int *)(temp_v10 + 0x4c) = 0;
           FUN_004fd3f0(*(int *)(temp_v2 + 100) + param_1,param_2,temp_v2);
-          temp_v10 = DAT_005712f0;
-          FUN_004102d8(DAT_005712f0,(int)(short)((short)*(unsigned int *)(temp_v2 + 100) + temp_v0 + 5),0,
+          temp_v10 = g_btlActionReflect;
+          FUN_004102d8(g_btlActionReflect,(int)(short)((short)*(unsigned int *)(temp_v2 + 100) + temp_v0 + 5),0,
                        param_2);
           *(unsigned char *)(temp_v10 + 4) = 0x24;
           temp_v10 = btlGetMainState();
@@ -205,8 +205,8 @@ FUN_004fde5c(int param_1,unsigned int param_2,fn_004fde5c_arg2 *param_3,int para
   case 0xc:
   case 0xd:
   case 0xe:
-    temp_v7 = DAT_005712f0;
-    FUN_004102d8(DAT_005712f0,(int)(short)((short)param_3->field_0x64 + temp_v0),0,param_2);
+    temp_v7 = g_btlActionReflect;
+    FUN_004102d8(g_btlActionReflect,(int)(short)((short)param_3->field_0x64 + temp_v0),0,param_2);
     *(unsigned char *)(temp_v7 + 4) = 0x1b;
     *(fn_004fde5c_arg2 **)(temp_v7 + 0x14) = param_3;
     *(unsigned int *)(temp_v7 + 0x4c) = 0;
@@ -219,8 +219,8 @@ FUN_004fde5c(int param_1,unsigned int param_2,fn_004fde5c_arg2 *param_3,int para
     temp_v7 = btlGetMainState();
     *(char *)(temp_v7 + 0x3004) = *(char *)(temp_v7 + 0x3004) + '\x01';
     *(unsigned int *)&param_3[2].field_0x34 = *(unsigned int *)&param_3[2].field_0x34 | 2;
-    temp_v7 = DAT_005712f0;
-    FUN_004102d8(DAT_005712f0,
+    temp_v7 = g_btlActionReflect;
+    FUN_004102d8(g_btlActionReflect,
                  (int)(short)((short)param_3->field_0x64 + *(short *)(temp_v2 + 0x57a57e) + temp_v0),0,
                  param_2);
     temp_v11 = temp_v8 != 0;
@@ -240,19 +240,19 @@ FUN_004fde5c(int param_1,unsigned int param_2,fn_004fde5c_arg2 *param_3,int para
         if (((((temp_v8 & 1) != 0 && (temp_v8 & 2) != 0) && (temp_v8 & 0x10) != 0) &&
             (*(short *)(temp_v7 + 0x6a) != param_3->field_0x6a)) &&
            ((*(unsigned int *)(temp_v7 + 0x10c) & 2) == 0)) {
-          temp_v6 = DAT_005712f0;
-          FUN_004102d8(DAT_005712f0,(int)(short)((short)*(unsigned int *)(temp_v7 + 100) + temp_v0),0,
+          temp_v6 = g_btlActionReflect;
+          FUN_004102d8(g_btlActionReflect,(int)(short)((short)*(unsigned int *)(temp_v7 + 100) + temp_v0),0,
                        param_2);
           *(unsigned char *)(temp_v6 + 4) = 0x1b;
           *(int *)(temp_v6 + 0x14) = temp_v7;
           *(unsigned int *)(temp_v6 + 0x4c) = 0;
           if (param_4 != 9) {
             if ((*(unsigned int *)(temp_v7 + 0x50) & 1) != 0) {
-              temp_v6 = *(int *)(DAT_005712f0 + 8);
+              temp_v6 = *(int *)(g_btlActionReflect + 8);
               do {
                 if (temp_v6 == 0) {
-                  temp_v6 = DAT_005712f0;
-                  FUN_004102d8(DAT_005712f0,(int)(short)((short)*(int *)(temp_v7 + 100) + temp_v0),0);
+                  temp_v6 = g_btlActionReflect;
+                  FUN_004102d8(g_btlActionReflect,(int)(short)((short)*(int *)(temp_v7 + 100) + temp_v0),0);
                   temp_v3 = btlGetMainState();
                   FUN_001568f8(temp_v3,(int)*(short *)(temp_v7 + 0x6a));
                   temp_v4 = btlGetMainState();
@@ -282,8 +282,8 @@ FUN_004fde5c(int param_1,unsigned int param_2,fn_004fde5c_arg2 *param_3,int para
           else {
             FUN_004feb50(*(int *)(temp_v7 + 100) + param_1,param_2,temp_v7,9);
           }
-          temp_v6 = DAT_005712f0;
-          FUN_004102d8(DAT_005712f0,
+          temp_v6 = g_btlActionReflect;
+          FUN_004102d8(g_btlActionReflect,
                        (int)(short)((short)*(unsigned int *)(temp_v7 + 100) +
                                     *(short *)(temp_v2 + 0x57a57e) + temp_v0),0,param_2);
           *(unsigned char *)(temp_v6 + 4) = 0x20;
@@ -298,8 +298,8 @@ FUN_004fde5c(int param_1,unsigned int param_2,fn_004fde5c_arg2 *param_3,int para
     break;
   case 0xf:
     if ((DAT_00573c30 & *puVar4) == 0 && (DAT_00573c34 & puVar4[1]) == 0) {
-      temp_v2 = DAT_005712f0;
-      FUN_004102d8(DAT_005712f0,(int)temp_v0,0,param_2);
+      temp_v2 = g_btlActionReflect;
+      FUN_004102d8(g_btlActionReflect,(int)temp_v0,0,param_2);
       temp_v7 = btlGetMainState();
       *(unsigned int *)(temp_v7 + 0xa8) = 8;
       *(unsigned char *)(temp_v2 + 4) = 0x32;
@@ -309,8 +309,8 @@ FUN_004fde5c(int param_1,unsigned int param_2,fn_004fde5c_arg2 *param_3,int para
       puVar4[1] = temp_v8;
     }
   }
-  temp_v2 = DAT_005712f0;
-  DAT_005712f0 = temp_v2;
+  temp_v2 = g_btlActionReflect;
+  g_btlActionReflect = temp_v2;
   if ((param_5 != 0) && (temp_v1 == 0)) {
     FUN_004102d8(temp_v2,(int)temp_v0,0,param_2);
     *(unsigned char *)(temp_v2 + 4) = 0x3e;

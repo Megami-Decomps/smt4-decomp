@@ -13,7 +13,7 @@ typedef struct {
 } param_4_stack;
 
 extern int rt_malloc(unsigned int);
-extern int FUN_002e995c(int);
+extern int onlineSockAddrConstruct(int);
 extern int FUN_002f5928(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002feac0. */
 /* Supplied declaration required: FUN_002fec68. */
@@ -45,7 +45,7 @@ int FUN_003110a4(unsigned char *param_1,unsigned int param_2,int param_3,int par
     temp_v1 = rt_malloc(0x30);
     temp_v2 = 0;
     if (temp_v1 != 0) {
-      temp_v1 = FUN_002e995c(temp_v1 + 4);
+      temp_v1 = onlineSockAddrConstruct(temp_v1 + 4);
       temp_v2 = temp_v1 - 4;
       *(unsigned int *)(temp_v1 + 0x24) = 0;
       *(unsigned int *)(temp_v1 + 0x28) = 0;

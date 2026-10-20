@@ -4,20 +4,20 @@
 
 extern "C" {
 
-int FUN_0022a11c(...);
+int aocQueueType1f(...);
 int FUN_0022a304(...);
 int FUN_00242914(...);
 int FUN_00256898(...);
 int FUN_002568c4(...);
 int FUN_00292dd0(...);
-int FUN_00296f4c(...);
+int scrScriptProcessStartEntry(...);
 int FUN_00297060(...);
 int FUN_00297468(...);
-int FUN_002b8838(...);
+int buttonHelpSetPreset(...);
 int FUN_002be624(...);
 int asdMemFree(void);
 int memClear(...);
-int FUN_00385c58(unsigned int, unsigned int, unsigned int *, unsigned char [128]);
+int aocQueueType20(unsigned int, unsigned int, unsigned int *, unsigned char [128]);
 int FUN_00387a7c(unsigned int, unsigned int, unsigned int *, unsigned char [132]);
 int FUN_003dadd8(...);
 int FUN_003dbe68(...);
@@ -33,11 +33,11 @@ extern unsigned int g_aocSystem; /* 0x433158 */
 extern int g_btlMain; /* 0x4342c8 */
 extern int DAT_00435d18; /* 0x435d18 */
 extern unsigned int *g_btlEvent; /* 0x435d48 */
-extern unsigned int DAT_00439ca8; /* 0x439ca8 */
+extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 
 extern int FUN_0019e0c0(unsigned int);
 extern unsigned int FUN_0022a07c(unsigned int *, int);
-/* Supplied declaration required: FUN_0022a11c. */
+/* Supplied declaration required: aocQueueType1f. */
 extern unsigned int FUN_0022a190(unsigned int *, int);
 extern int FUN_0022a2c4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0022a304. */
@@ -46,18 +46,18 @@ extern int FUN_0022a2c4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002568c4. */
 extern int FUN_00256940(int, int, unsigned int);
 /* Supplied declaration required: FUN_00292dd0. */
-/* Supplied declaration required: FUN_00296f4c. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297060. */
 /* Supplied declaration required: FUN_00297468. */
-extern unsigned int FUN_002ac068(int, unsigned int);
-/* Supplied declaration required: FUN_002b8838. */
+extern unsigned int dataTableFileGetTable(int, unsigned int);
+/* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: FUN_002be624. */
 extern int jobGetWork(void);
 extern unsigned int dataTableGetCount(unsigned int);
 extern unsigned int dataTableGetEntries(void);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: memClear. */
-/* Supplied declaration required: FUN_00385c58. */
+/* Supplied declaration required: aocQueueType20. */
 /* Supplied declaration required: FUN_00387a7c. */
 /* Supplied declaration required: FUN_003dadd8. */
 /* Supplied declaration required: FUN_003dbe68. */
@@ -102,7 +102,7 @@ unsigned int FUN_001d3dd4(void)
     if (puVar2[2] == 0) {
       return 0;
     }
-    temp_v3 = FUN_002ac068(puVar2[2],0);
+    temp_v3 = dataTableFileGetTable(puVar2[2],0);
     temp_v2 = dataTableGetEntries();
     puVar2[6] = temp_v2;
     temp_v3 = dataTableGetCount(temp_v3);
@@ -114,7 +114,7 @@ unsigned int FUN_001d3dd4(void)
     if (g_btlEvent[2] == 0) {
       return 0;
     }
-    temp_v3 = FUN_002ac068(g_btlEvent[2],0);
+    temp_v3 = dataTableFileGetTable(g_btlEvent[2],0);
     temp_v2 = dataTableGetEntries();
     puVar2[6] = temp_v2;
     temp_v3 = dataTableGetCount(temp_v3);
@@ -127,7 +127,7 @@ code_r0x0022a190:
     FUN_002be624(temp_v6,"battle/event/%s/%s.mbm",temp_v1 + 0x100);
     temp_v5 = FUN_0022a2c4(g_aocSystem,*(unsigned int *)(temp_v1 + 0xc4));
     if (temp_v5 != 0) {
-      FUN_00385c58(g_aocSystem,*(unsigned int *)(temp_v1 + 0xc4),puVar2 + 3,temp_v6);
+      aocQueueType20(g_aocSystem,*(unsigned int *)(temp_v1 + 0xc4),puVar2 + 3,temp_v6);
     }
     else {
       FUN_00297468(temp_v6,puVar2 + 3,0);
@@ -140,7 +140,7 @@ code_r0x0022a190:
       FUN_002be624(temp_v7,"battle/event/%s/%s.bf",temp_v1 + 0x100);
       temp_v5 = FUN_0022a2c4(g_aocSystem,*(unsigned int *)(temp_v1 + 0xc4));
       if (temp_v5 != 0) {
-        FUN_0022a11c(g_aocSystem,*(unsigned int *)(temp_v1 + 0xc4),puVar2 + 4,temp_v7);
+        aocQueueType1f(g_aocSystem,*(unsigned int *)(temp_v1 + 0xc4),puVar2 + 4,temp_v7);
       }
       else {
         FUN_00297468(temp_v7,puVar2 + 4,0);
@@ -164,7 +164,7 @@ code_r0x0022a190:
     FUN_002be624(temp_v7,"battle/event/%s/%s.bf",temp_v1 + 0x100);
     temp_v5 = FUN_0022a2c4(g_aocSystem,*(unsigned int *)(temp_v1 + 0xc4));
     if (temp_v5 != 0) {
-      FUN_0022a11c(g_aocSystem,*(unsigned int *)(temp_v1 + 0xc4),puVar2 + 4,temp_v7);
+      aocQueueType1f(g_aocSystem,*(unsigned int *)(temp_v1 + 0xc4),puVar2 + 4,temp_v7);
     }
     else {
       FUN_00297468(temp_v7,puVar2 + 4,0);
@@ -177,7 +177,7 @@ code_r0x0022a190:
     FUN_002be624(temp_v7,"battle/event/%s/%s.bf",temp_v1 + 0x100);
     temp_v5 = FUN_0022a2c4(g_aocSystem,*(unsigned int *)(temp_v1 + 0xc4));
     if (temp_v5 != 0) {
-      FUN_0022a11c(g_aocSystem,*(unsigned int *)(temp_v1 + 0xc4),puVar2 + 4,temp_v7);
+      aocQueueType1f(g_aocSystem,*(unsigned int *)(temp_v1 + 0xc4),puVar2 + 4,temp_v7);
     }
     else {
       FUN_00297468(temp_v7,puVar2 + 4,0);
@@ -250,7 +250,7 @@ code_r0x003c7c28:
     if ((int)puVar2[8] < 0) {
       return 0;
     }
-    FUN_00296f4c(puVar2[5]);
+    scrScriptProcessStartEntry(puVar2[5]);
     *puVar2 = 10;
     puVar2[10] = 0;
     temp_v4 = *(unsigned int *)(temp_v1 + 0x44a0);
@@ -259,13 +259,13 @@ code_r0x003c7c28:
     if ((int)g_btlEvent[8] < 0) {
       return 0;
     }
-    FUN_00296f4c(g_btlEvent[5]);
+    scrScriptProcessStartEntry(g_btlEvent[5]);
     *puVar2 = 10;
     puVar2[10] = 0;
     temp_v4 = *(unsigned int *)(temp_v1 + 0x44a0);
 joined_r0x003c7b80:
     if ((temp_v4 & 0x100000) != 0) {
-      FUN_002b8838(0xdd);
+      buttonHelpSetPreset(0xdd);
     }
 FUN_003c7760:
     puVar8 = (unsigned int *)(temp_v1 + 0x44a0);
@@ -280,7 +280,7 @@ FUN_003c7760:
     temp_v1 = FUN_0019e0c0(puVar2[5]);
     if (temp_v1 == 2) {
       if (((*puVar8 & 0x100000) != 0) && (FUN_00292dd0(0), (*puVar8 & 0x20000000) != 0)) {
-        FUN_00242914(DAT_00439ca8,0);
+        FUN_00242914(g_btlUiBlock,0);
         *puVar8 = *puVar8 & 0xdfffffff;
       }
       *puVar2 = 0;

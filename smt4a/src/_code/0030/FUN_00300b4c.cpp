@@ -16,7 +16,7 @@ extern unsigned char DAT_006306ac; /* 0x6306ac */
 extern unsigned int FUN_00132f3c(unsigned int *, unsigned int);
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-extern unsigned int *FUN_002e760a(unsigned int);
+extern unsigned int *operatorNew(unsigned int);
 
 
 void FUN_00300b4c(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -34,7 +34,7 @@ void FUN_00300b4c(unsigned int param_1,unsigned int param_2,unsigned int param_3
   uStack_10 = param_4;
   FUN_002e6e34(&uStack_18,&DAT_006306ac);
   if (DAT_00599374 == 0) {
-    puVar1 = (unsigned int *)FUN_002e760a(0x18);
+    puVar1 = (unsigned int *)operatorNew(0x18);
     if (puVar1 != (unsigned int *)0x0) {
       *puVar1 = 0;
       puVar1[1] = 0;

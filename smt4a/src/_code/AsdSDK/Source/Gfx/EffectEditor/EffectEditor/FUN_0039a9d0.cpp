@@ -5,20 +5,20 @@
 extern "C" {
 
 int FUN_00100388(int, unsigned char *, unsigned int);
-int FUN_001656a0(...);
+int padButtonIsPressed(...);
 int memAlloc(int, int, int, unsigned int, int, int);
 int asdMemFree(...);
 int FUN_001b4ddc(...);
 int FUN_00200bcc(unsigned int *);
 int FUN_00202178(int);
-int FUN_0020e9dc(unsigned int *);
+int effEditorNodeChainApply(unsigned int *);
 int FUN_0020ea14(void);
 int FUN_00222260(...);
 int FUN_00243c24(void);
 int FUN_00272204(unsigned int, unsigned int [2], int);
 int taskRunWithObject(unsigned int, int, int);
 int FUN_002b41e4(void);
-int FUN_002e342c(int, unsigned int);
+int libc_strcpy(int, unsigned int);
 int FUN_00350a8c(void);
 int FUN_00399768(...);
 int FUN_003ba614(...);
@@ -69,13 +69,13 @@ extern unsigned int uRam00634d68; /* 0x634d68 */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: FUN_00100388. */
-/* Supplied declaration required: FUN_001656a0. */
+/* Supplied declaration required: padButtonIsPressed. */
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_001b4ddc. */
 /* Supplied declaration required: FUN_00200bcc. */
 /* Supplied declaration required: FUN_00202178. */
-/* Supplied declaration required: FUN_0020e9dc. */
+/* Supplied declaration required: effEditorNodeChainApply. */
 /* Supplied declaration required: FUN_0020ea14. */
 /* Supplied declaration required: FUN_00222260. */
 /* Supplied declaration required: FUN_00243c24. */
@@ -83,7 +83,7 @@ extern unsigned int uRam00634d68; /* 0x634d68 */
 /* Supplied declaration required: taskRunWithObject. */
 extern unsigned int FUN_002b41c4(void);
 /* Supplied declaration required: FUN_002b41e4. */
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 extern int FUN_00323c54(unsigned int, unsigned int);
 extern unsigned int nodeChainCount(unsigned int);
 /* Supplied declaration required: FUN_00350a8c. */
@@ -153,17 +153,17 @@ unsigned int FUN_0039a9d0(unsigned int param_1,int param_2,unsigned int param_3)
   if (DAT_0059dbe9 == '\0') {
     FUN_00200bcc(&DAT_0059ea18);
   }
-  FUN_0020e9dc(&DAT_0059ea18);
-  temp_v6 = FUN_001656a0(0);
+  effEditorNodeChainApply(&DAT_0059ea18);
+  temp_v6 = padButtonIsPressed(0);
   if (temp_v6 == 0) {
     FUN_00202178(0);
-    temp_v6 = FUN_001656a0();
+    temp_v6 = padButtonIsPressed();
     if (temp_v6 != 0) goto LAB_0039ab4c;
 LAB_0039ad94:
-    temp_v6 = FUN_001656a0(1);
+    temp_v6 = padButtonIsPressed(1);
     if (temp_v6 == 0) {
       FUN_00202178(1);
-      temp_v6 = FUN_001656a0();
+      temp_v6 = padButtonIsPressed();
       if (temp_v6 == 0) {
         temp_v1 = 0x200001;
       }
@@ -210,7 +210,7 @@ LAB_0039ab4c:
     DAT_0059dc48 = 0;
     temp_v6 = FUN_00323c54(DAT_0059dbf4,temp_v1);
     DAT_0059dc04 = temp_v6;
-    FUN_002e342c(temp_v6 + 0x9c,*(unsigned int *)*piVar3);
+    libc_strcpy(temp_v6 + 0x9c,*(unsigned int *)*piVar3);
     *(int *)(temp_v6 + 0x40) = piVar3[3];
     *(int *)(temp_v6 + 0x44) = piVar3[4];
     *(int *)(temp_v6 + 0x48) = piVar3[5];

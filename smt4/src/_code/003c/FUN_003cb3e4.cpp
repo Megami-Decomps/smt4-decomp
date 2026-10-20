@@ -16,7 +16,7 @@ int FUN_00250720(int);
 int FUN_00255158(...);
 int FUN_00255180(...);
 int FUN_0027e5e4(void);
-int FUN_00282924(...);
+int btlMainFindEntryByListedId(...);
 int FUN_003c05e8(...);
 int FUN_003cefe0(int *, unsigned int *, unsigned int);
 int FUN_003cfe14(...);
@@ -33,7 +33,7 @@ typedef struct {
 } param_2_stack;
 
 extern unsigned char g_btlAction; /* 0x434278 */
-extern unsigned int DAT_00434290; /* 0x434290 */
+extern unsigned int g_btlActionReflect; /* 0x434290 */
 
 /* Supplied declaration required: FUN_00229754. */
 extern int FUN_002298a0(void);
@@ -46,13 +46,13 @@ extern unsigned int FUN_00245cc0(unsigned int);
 /* Supplied declaration required: FUN_00246454. */
 /* Supplied declaration required: FUN_00246d38. */
 /* Supplied declaration required: FUN_00246e24. */
-extern unsigned int FUN_002499b4(int);
+extern unsigned int btlMainFindActiveEntry(int);
 /* Supplied declaration required: FUN_00250720. */
 /* Supplied declaration required: FUN_00255158. */
 /* Supplied declaration required: FUN_00255180. */
 /* Supplied declaration required: FUN_0027e5e4. */
-extern int FUN_0027e6bc(unsigned int);
-/* Supplied declaration required: FUN_00282924. */
+extern int nodeListCountActiveById(unsigned int);
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_003c05e8. */
 extern int questGetCurrentRecordValue6(void);
 extern int questGetCurrentRecordValue8(void);
@@ -88,7 +88,7 @@ unsigned int FUN_003cb3e4(int *param_1,unsigned int *param_2)
   int temp_v13;
   unsigned int *temp_v14;
   
-  temp_v2 = FUN_0027e6bc(DAT_00434290);
+  temp_v2 = nodeListCountActiveById(g_btlActionReflect);
   if (0 < temp_v2) {
     return 0;
   }
@@ -98,7 +98,7 @@ unsigned int FUN_003cb3e4(int *param_1,unsigned int *param_2)
       if (((*(unsigned int *)(*(int *)(*param_1 + 0x1e98) + temp_v2 * 0x114 + 0x50) & 1) != 0) &&
          (temp_v3 = FUN_00229914(param_1,param_2,temp_v2), temp_v3 == 0)) {
         temp_v3 = *param_1;
-        FUN_00282924(temp_v3,temp_v2);
+        btlMainFindEntryByListedId(temp_v3,temp_v2);
         if ((*(short *)(temp_v3 + 0x1c8) != 0) && (*(short *)(temp_v3 + 0x1c6) == 0)) {
           if ((*(int *)(*param_1 + 0x48b8) != 0) && (temp_v2 = FUN_002298a0(), temp_v2 != 0)) {
             return 0;
@@ -162,7 +162,7 @@ LAB_003cb60c:
       if (((*(unsigned int *)(*(int *)(*param_1 + 0x1e98) + temp_v2 * 0x114 + 0x50) & 1) != 0) &&
          (temp_v3 = FUN_00229914(param_1,param_2,temp_v2), temp_v3 == 0)) {
         puVar5 = (unsigned int *)*param_1;
-        FUN_00282924(puVar5,temp_v2);
+        btlMainFindEntryByListedId(puVar5,temp_v2);
         temp_v14 = puVar5;
         if (*(short *)((int)puVar5 + 0x1ca) != 0) {
           FUN_00246d38(0,param_2,*(int *)(*param_1 + 0x1e98) + temp_v2 * 0x114,0x10);
@@ -277,7 +277,7 @@ LAB_003cb60c:
     }
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 0x6d);
-  temp_v7 = FUN_002499b4(*param_1);
+  temp_v7 = btlMainFindActiveEntry(*param_1);
   if (temp_v7 != 0) {
     temp_v0 = *(short *)(temp_v7 + 8);
     temp_v3 = *(int *)(*param_1 + 0x1e98);

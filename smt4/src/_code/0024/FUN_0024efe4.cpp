@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_0043e278; /* 0x43e278 */
+extern int g_frameTex; /* 0x43e278 */
 
 
 int FUN_0024efe4(void)
@@ -13,8 +13,8 @@ int FUN_0024efe4(void)
   int temp_v0;
   
   temp_v0 = 0;
-  if (DAT_0043e278 != 0) {
-    temp_v0 = (int)*(char *)(DAT_0043e278 + 0xc);
+  if (g_frameTex != 0) {
+    temp_v0 = (int)*(char *)(g_frameTex + 0xc);
   }
   return temp_v0;
 }

@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern u16 *DAT_0043dcf0;
+extern u16 *g_partyPanel;
 
 void FUN_0024aa74(void)
 {
-    u16 *p = DAT_0043dcf0;
+    u16 *p = g_partyPanel;
 
     if (p != NULL) {
         p[0x1e] = 0;

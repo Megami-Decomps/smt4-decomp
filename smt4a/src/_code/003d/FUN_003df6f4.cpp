@@ -4,8 +4,8 @@
 
 extern "C" {
 
-extern int FUN_001801a4(void);
-extern int FUN_003e46f4(unsigned int);
+extern int gameGetPlayerData(void);
+extern int gameDataFlagTestBit(unsigned int);
 
 
 unsigned int FUN_003df6f4(void)
@@ -19,21 +19,21 @@ unsigned int FUN_003df6f4(void)
   unsigned int temp_v4;
   unsigned char temp_v5;
   
-  temp_v0 = FUN_001801a4();
+  temp_v0 = gameGetPlayerData();
   temp_v4 = 4;
-  temp_v1 = FUN_003e46f4(0x77);
+  temp_v1 = gameDataFlagTestBit(0x77);
   if (temp_v1 != 0) {
     temp_v4 = 5;
   }
-  temp_v1 = FUN_003e46f4(0x78);
+  temp_v1 = gameDataFlagTestBit(0x78);
   if (temp_v1 != 0) {
     temp_v4 = temp_v4 + 1;
   }
-  temp_v1 = FUN_003e46f4(0x79);
+  temp_v1 = gameDataFlagTestBit(0x79);
   if (temp_v1 != 0) {
     temp_v4 = temp_v4 + 1;
   }
-  temp_v1 = FUN_003e46f4(0x7a);
+  temp_v1 = gameDataFlagTestBit(0x7a);
   if (temp_v1 != 0) {
     temp_v4 = temp_v4 + 1;
   }

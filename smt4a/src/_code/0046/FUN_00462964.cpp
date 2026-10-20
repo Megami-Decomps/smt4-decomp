@@ -4,16 +4,16 @@
 
 extern "C" {
 
-int FUN_001af214(void);
+int nn_os_LightEvent_TryWait(void);
 
-/* Supplied declaration required: FUN_001af214. */
+/* Supplied declaration required: nn_os_LightEvent_TryWait. */
 
 
 void FUN_00462964(void)
 
 {
 /* irregular: 1 native warning(s); review required */
-  FUN_001af214();
+  nn_os_LightEvent_TryWait();
   return;
 }
 

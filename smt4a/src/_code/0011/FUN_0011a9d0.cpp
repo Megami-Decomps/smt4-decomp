@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_0010b348(unsigned int);
-int FUN_002e6e14(...);
+int asdOperatorDeleteArray(...);
 int FUN_002e6e34(unsigned char [12], int);
 int FUN_002e6e5c(unsigned char [12]);
-int FUN_002e7232(void);
-int FUN_002ea9dc(void);
+int sharedRefRelease(void);
+int onlineUrlDestroy(void);
 int FUN_002eb7c0(int);
 int FUN_00306eac(unsigned char [4], int *, int *, unsigned int **);
 
@@ -23,13 +23,13 @@ typedef struct {
 extern unsigned char DAT_0055a38c; /* 0x55a38c */
 
 /* Supplied declaration required: FUN_0010b348. */
-/* Supplied declaration required: FUN_002e6e14. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
 extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-/* Supplied declaration required: FUN_002e7232. */
+/* Supplied declaration required: sharedRefRelease. */
 extern int FUN_002ea00c(unsigned int *);
-/* Supplied declaration required: FUN_002ea9dc. */
+/* Supplied declaration required: onlineUrlDestroy. */
 /* Supplied declaration required: FUN_002eb7c0. */
 extern int FUN_002fb028(int);
 /* Supplied declaration required: FUN_00306eac. */
@@ -52,7 +52,7 @@ void FUN_0011a9d0(unsigned int *param_1)
   temp_v0 = FUN_002e6e26();
   FUN_002e6e34(temp_v1,temp_v0 + 0x58);
   if (param_1[0xae] != 0) {
-    FUN_002e7232();
+    sharedRefRelease();
     param_1[0xae] = 0;
   }
   if (param_1[0x2e] != 0) {
@@ -70,9 +70,9 @@ void FUN_0011a9d0(unsigned int *param_1)
   }
   FUN_002e6e5c(temp_v1);
   param_1 = param_1 + 0x8d;
-  FUN_002ea9dc();
+  onlineUrlDestroy();
   param_1 = param_1 + -0x1d;
-  FUN_002ea9dc();
+  onlineUrlDestroy();
   piVar2 = (int *)(param_1 + -6);
   puVar3 = (unsigned int *)param_1[-2];
   if (puVar3 != (unsigned int *)0x0) {
@@ -84,8 +84,8 @@ void FUN_0011a9d0(unsigned int *param_1)
     param_1[-5] = (unsigned int)puVar3;
     while (piVar4 = (int *)*piVar2, piVar4 != (int *)0x0) {
       *piVar2 = *piVar4;
-      FUN_002e6e14(piVar4[2]);
-      FUN_002e6e14(piVar4);
+      asdOperatorDeleteArray(piVar4[2]);
+      asdOperatorDeleteArray(piVar4);
     }
     param_1[-5] = 0;
     param_1[-4] = 0;

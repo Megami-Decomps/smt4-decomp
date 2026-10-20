@@ -15,7 +15,7 @@ int FUN_0040ace8(unsigned int, int);
 
 extern unsigned char LAB_002d7dd0; /* 0x2d7dd0 */
 extern unsigned char LAB_002d7de4; /* 0x2d7de4 */
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern int DAT_005806d4; /* 0x5806d4 */
 extern signed char DAT_005f18be; /* 0x5f18be */
 
@@ -78,7 +78,7 @@ unsigned int FUN_002d7c88(int param_1)
       FUN_0040aad4(*piVar6,0);
       temp_v3 = *(int *)(*piVar6 + 4);
       FUN_003fe86c(temp_v3,0,2);
-      FUN_0040ace8(DAT_0056fcc0,temp_v3);
+      FUN_0040ace8(g_handleRegistry,temp_v3);
       *(unsigned int *)(temp_v3 + 4) = *(unsigned int *)(temp_v3 + 4) | 3;
       *(unsigned char *)(temp_v5 + 0x3d90) = 1;
       temp_v1 = 1;

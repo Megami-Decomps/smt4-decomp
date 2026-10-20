@@ -8,7 +8,7 @@ int FUN_002f17e4(int *, unsigned int);
 
 extern unsigned char DAT_0055ae64; /* 0x55ae64 */
 
-extern unsigned int *FUN_002e9f80(void);
+extern unsigned int *sharedRefInit(void);
 /* Supplied declaration required: FUN_002f17e4. */
 
 
@@ -20,7 +20,7 @@ void FUN_002ec934(unsigned int param_1,int param_2,unsigned int param_3)
   int *piVar2;
   unsigned int temp_v0;
   
-  puVar1 = (unsigned int *)FUN_002e9f80();
+  puVar1 = (unsigned int *)sharedRefInit();
   *puVar1 = (unsigned int)&DAT_0055ae64;
   piVar2 = (int *)(puVar1 + 3);
   FUN_002f17e4(piVar2,param_3);

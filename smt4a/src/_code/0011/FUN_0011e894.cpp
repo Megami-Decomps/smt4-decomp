@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e9318(int *);
+int onlineStringDestroy(int *);
 
 extern unsigned char LAB_00117569; /* 0x117569 */
 extern unsigned char LAB_00117579; /* 0x117579 */
@@ -16,8 +16,8 @@ extern signed char g_systemTable; /* 0x59935c */
 
 extern int FUN_00110594(int);
 extern int FUN_0011400c(unsigned int *, unsigned int);
-extern unsigned int FUN_002e9300(unsigned int *, unsigned char *);
-/* Supplied declaration required: FUN_002e9318. */
+extern unsigned int onlineStringConstruct(unsigned int *, unsigned char *);
+/* Supplied declaration required: onlineStringDestroy. */
 
 
 int FUN_0011e894(unsigned int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -32,9 +32,9 @@ int FUN_0011e894(unsigned int *param_1,unsigned int param_2,unsigned int param_3
   *param_1 = (unsigned int)&DAT_0055ab98;
   uStack_10 = param_3;
   uStack_c = param_4;
-  temp_v0 = FUN_002e9300((unsigned int *)&uStack_10,&LAB_0011e8dc);
+  temp_v0 = onlineStringConstruct((unsigned int *)&uStack_10,&LAB_0011e8dc);
   temp_v1 = FUN_0011400c(param_1 + 1,temp_v0);
-  FUN_002e9318(&uStack_10);
+  onlineStringDestroy(&uStack_10);
   temp_v1 = FUN_00110594(temp_v1 + 0x28);
   if (g_systemTable == '\0') {
     DAT_005949ac = &LAB_00117569;

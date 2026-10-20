@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001654e4(int);
+int vec2GetYInt(int);
 int efctSetSpeed(void);
 int FUN_001834a4(int, int);
 int FUN_00183bb0(void);
@@ -24,15 +24,15 @@ typedef struct {
 extern int g_renderCtx; /* 0x59dbb4 */
 
 extern int saveSlotFindSelected(void);
-extern unsigned int FUN_001654d8(int);
-/* Supplied declaration required: FUN_001654e4. */
+extern unsigned int vec2GetXInt(int);
+/* Supplied declaration required: vec2GetYInt. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_00183bb0. */
 extern int FUN_00187068(int);
 extern int FUN_00187168(void);
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 extern int flagSelectVariant(void);
 /* Supplied declaration required: FUN_002ca878. */
 /* Supplied declaration required: FUN_003721b0. */
@@ -82,11 +82,11 @@ void FUN_00335060(int param_1)
     temp_v8 = FUN_00187168();
     if (temp_v8 != 0) {
       temp_v8 = param_1 + temp_v3 * 0x8c + 0xf18;
-      temp_v5 = FUN_001654d8(temp_v8);
-      temp_v6 = FUN_001654e4(temp_v8);
+      temp_v5 = vec2GetXInt(temp_v8);
+      temp_v6 = vec2GetYInt(temp_v8);
       if (*(unsigned short *)(temp_v7 + 300) == temp_v9) {
-        temp_v5 = FUN_001654d8(param_1 + 0xf18);
-        temp_v6 = FUN_001654e4(param_1 + 0xf18);
+        temp_v5 = vec2GetXInt(param_1 + 0xf18);
+        temp_v6 = vec2GetYInt(param_1 + 0xf18);
         FUN_003721b0(param_1,temp_v7,0,temp_v5,temp_v6);
       }
       else {
@@ -96,23 +96,23 @@ void FUN_00335060(int param_1)
     }
     temp_v4 = temp_v4 + 1;
   } while (temp_v4 < 0xc);
-  temp_v4 = FUN_0018719c(0x4d0);
+  temp_v4 = gameFlagIsSet(0x4d0);
   if ((temp_v4 != 0) ||
-     ((temp_v4 = flagSelectVariant(), temp_v4 == 2 && (temp_v4 = FUN_0018719c(0x4db), temp_v4 != 0)))) {
+     ((temp_v4 = flagSelectVariant(), temp_v4 == 2 && (temp_v4 = gameFlagIsSet(0x4db), temp_v4 != 0)))) {
     temp_v4 = FUN_001834a4(0x14,temp_v3 + 0xbba);
     temp_v7 = FUN_001834a4(0x14,0xc17);
     temp_v0 = *(short *)(temp_v4 + 10);
     temp_v1 = *(short *)(*(int *)(temp_v7 + 0xc) + 2);
     temp_v2 = *(short *)(*(int *)(temp_v4 + 0xc) + 2);
     temp_v4 = param_1 + temp_v3 * 0x8c + 0xf18;
-    temp_v5 = FUN_001654d8(temp_v4);
-    temp_v4 = FUN_001654e4(temp_v4);
+    temp_v5 = vec2GetXInt(temp_v4);
+    temp_v4 = vec2GetYInt(temp_v4);
     FUN_002ca878(param_1,temp_v5,temp_v4 + (int)temp_v1 + (int)temp_v0 + temp_v2 + 1);
     temp_v3 = temp_v3 + 1;
   }
   temp_v4 = param_1 + temp_v3 * 0x8c + 0xf18;
-  temp_v5 = FUN_001654d8(temp_v4);
-  temp_v6 = FUN_001654e4(temp_v4);
+  temp_v5 = vec2GetXInt(temp_v4);
+  temp_v6 = vec2GetYInt(temp_v4);
   FUN_0037eb64(param_1,temp_v5,temp_v6);
   FUN_00183bb0();
   efctSetSpeed();

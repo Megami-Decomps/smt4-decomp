@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002769b4(int, int, int);
+int mapDepartSetTarget(int, int, int);
 int FUN_0027d5ac(int);
 int FUN_0028527c(int);
 
@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-/* Supplied declaration required: FUN_002769b4. */
+/* Supplied declaration required: mapDepartSetTarget. */
 /* Supplied declaration required: FUN_0027d5ac. */
 /* Supplied declaration required: FUN_0028527c. */
 extern int FUN_00285574(void);
@@ -27,7 +27,7 @@ void FUN_002236a4(void)
   
   temp_v0 = FUN_00285574();
   temp_v0 = temp_v0 * 0x44;
-  FUN_002769b4((int)*(char *)(temp_v0 + 0x447f55),(int)*(char *)(temp_v0 + 0x447f56),
+  mapDepartSetTarget((int)*(char *)(temp_v0 + 0x447f55),(int)*(char *)(temp_v0 + 0x447f56),
                (int)*(char *)(temp_v0 + 0x447f57));
   FUN_0027d5ac(0);
   FUN_0028527c(0);

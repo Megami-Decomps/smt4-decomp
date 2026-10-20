@@ -14,7 +14,7 @@ struct fn_001b5660_arg0 {
     ushort field_0x9ec; /* +0x9ec */
 };
 
-extern int FUN_001ab940(void);
+extern int gameFlagBlockGet(void);
 extern int FUN_001bd100(fn_001b5660_arg0 *);
 extern int FUN_001bd118(fn_001b5660_arg0 *);
 
@@ -26,7 +26,7 @@ int FUN_001b5660(fn_001b5660_arg0 *param_1)
   int temp_v1;
   int temp_v2;
   
-  temp_v0 = FUN_001ab940();
+  temp_v0 = gameFlagBlockGet();
   temp_v1 = FUN_001bd100(param_1);
   if (temp_v1 != 0) {
     if ((fn_001b5660_arg0 *)(unsigned int)*(unsigned short *)(temp_v0 + 0x8e4) == param_1) {

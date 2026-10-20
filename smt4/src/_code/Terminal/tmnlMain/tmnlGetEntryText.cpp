@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001d04a4(TmnlWork *work, int id);
-extern int FUN_00288f60(void);
+extern int gameDataGetPlayerName(void);
 
 extern TmnlWork *g_tmnl;
 
@@ -17,7 +17,7 @@ int tmnlGetEntryText(int id)
         return 0;
     }
     if (id == 0x3d) {
-        return FUN_00288f60();
+        return gameDataGetPlayerName();
     }
     index = FUN_001d04a4(g_tmnl, id);
     return g_tmnl->items[index] + 6;

@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern u32 DAT_00433278;
+extern u32 g_keyedRecordCount;
 
 u32 FUN_001ab9cc(void)
 {
-    return DAT_00433278;
+    return g_keyedRecordCount;
 }
 
 } /* extern "C" */

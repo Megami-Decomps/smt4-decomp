@@ -12,13 +12,13 @@ typedef struct Obj {
 extern struct {
     u8 unk00[0x20];
     Obj *obj;
-} DAT_0044de98;
+} g_scrContext;
 
 void scrSetResult(u32 result)
 {
-    Obj *obj = DAT_0044de98.obj;
+    Obj *obj = g_scrContext.obj;
 
-    DAT_0044de98.obj->unk3B = 0;
+    g_scrContext.obj->unk3B = 0;
     obj->result = result;
 }
 

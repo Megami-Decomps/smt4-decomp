@@ -31,7 +31,7 @@ extern unsigned int DAT_00571168; /* 0x571168 */
 extern unsigned int DAT_0057116c; /* 0x57116c */
 extern unsigned int DAT_00571170; /* 0x571170 */
 extern unsigned int DAT_00571174; /* 0x571174 */
-extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
+extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
 extern int lcgRandomRange(unsigned int);
 /* Supplied declaration required: FUN_003e8bb0. */
@@ -144,7 +144,7 @@ LAB_004e5e18:
       ((DAT_00571168 | DAT_00571170) & *(unsigned int *)param_2[8]) != 0) {
     return;
   }
-  FUN_004a9308(DAT_0057a9c8,(short)param_2[0xb],0);
+  FUN_004a9308(g_btlUiBlock,(short)param_2[0xb],0);
   return;
 }
 

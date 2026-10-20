@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern StateAtF4 *DAT_0057f118;
+extern StateAtF4 *g_campCecEdit;
 
 s32 FUN_0035a028(void)
 {
-    if (DAT_0057f118 != NULL) {
-        return DAT_0057f118->unk14C;
+    if (g_campCecEdit != NULL) {
+        return g_campCecEdit->unk14C;
     }
     return -1;
 }

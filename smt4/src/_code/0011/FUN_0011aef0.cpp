@@ -18,15 +18,15 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } void_stack;
 
-extern int DAT_0043e128; /* 0x43e128 */
+extern int g_infoWin; /* 0x43e128 */
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_002b64b8. */
 /* Supplied declaration required: FUN_002b659c. */
 /* Supplied declaration required: FUN_002b75ec. */
 /* Supplied declaration required: FUN_002ba12c. */
-extern int FUN_002bed98(int);
-extern int FUN_002beda4(int);
+extern int vec2GetYInt(int);
+extern int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bf288. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002c39a4. */
@@ -47,11 +47,11 @@ char FUN_0011aef0(void)
   unsigned char temp_v6;
   float temp_v7;
   
-  temp_v0 = DAT_0043e128;
-  temp_v6 = *(int *)(DAT_0043e128 + 8) != 0;
+  temp_v0 = g_infoWin;
+  temp_v6 = *(int *)(g_infoWin + 8) != 0;
   temp_v1 = '\0';
   if (temp_v6) {
-    temp_v1 = *(char *)(DAT_0043e128 + 0x20);
+    temp_v1 = *(char *)(g_infoWin + 0x20);
   }
   if (temp_v6 && temp_v1 != '\0') {
     FUN_002c39a4(g_titleScene);
@@ -66,11 +66,11 @@ char FUN_0011aef0(void)
       (**(romwright_code **)(temp_v3 + 0x1268))();
       *(unsigned char *)(temp_v3 + 0x1264) = 0;
     }
-    temp_v3 = FUN_002beda4(temp_v0 + 0x44);
+    temp_v3 = vec2GetXInt(temp_v0 + 0x44);
     temp_v7 = 0.27f;
     FUN_002ba12c(g_titleScene);
     temp_v3 = temp_v3 + (int)temp_v7;
-    temp_v2 = FUN_002bed98(temp_v0 + 0x44);
+    temp_v2 = vec2GetYInt(temp_v0 + 0x44);
     FUN_002bf288(2,0xe,0x87,temp_v3,temp_v2,0x15);
     FUN_002bf288(2,0xe,0x88,temp_v3,temp_v2,0x15);
     if (*(char *)(temp_v0 + 0x21) != '\0') {

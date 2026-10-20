@@ -14,24 +14,24 @@ typedef struct {
     s8 slots[1];        /* 0x1c88 */
 } SlotBlock;
 
-Record *FUN_001ab854(int index);
-SlotBlock *FUN_001ab888(void);
-int FUN_001b347c(void);
+Record *gameGetSlotRecord(int index);
+SlotBlock *gameGetSlotTable(void);
+int gameSlotTableFindFree(void);
 
 /* Finds the record with `id` among the block's slots; NULL when none matches. */
 Record *slotRecordFindById(u32 id)
 {
     int i = 0;
 
-    if (i < FUN_001b347c()) {
+    if (i < gameSlotTableFindFree()) {
         do {
-            Record *record = FUN_001ab854(FUN_001ab888()->slots[i]);
+            Record *record = gameGetSlotRecord(gameGetSlotTable()->slots[i]);
 
             if (record->id == id) {
                 return record;
             }
             i++;
-        } while (i < FUN_001b347c());
+        } while (i < gameSlotTableFindFree());
     }
     return NULL;
 }

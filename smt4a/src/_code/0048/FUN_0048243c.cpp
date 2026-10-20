@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0014bef4(int);
+int randRange(int);
 
 typedef struct fn_0048243c_arg0 fn_0048243c_arg0;
 typedef struct fn_0048243c_arg1 fn_0048243c_arg1;
@@ -35,8 +35,8 @@ struct fn_0048243c_arg1 {
     byte field_0xf; /* +0xf */
 };
 
-/* Supplied declaration required: FUN_0014bef4. */
-extern int FUN_0018719c(int);
+/* Supplied declaration required: randRange. */
+extern int gameFlagIsSet(int);
 extern unsigned short *dataTable29GetEntry(fn_0048243c_arg1 *);
 
 
@@ -53,9 +53,9 @@ unsigned char FUN_0048243c(fn_0048243c_arg0 *param_1,fn_0048243c_arg1 *param_2)
   
   temp_v4 = 0;
   puVar4 = (unsigned short *)dataTable29GetEntry(param_2);
-  temp_v2 = FUN_0014bef4(puVar4[2]);
+  temp_v2 = randRange(puVar4[2]);
   param_1->field_0x84 = temp_v2 + puVar4[1];
-  temp_v3 = FUN_0014bef4(puVar4[4]);
+  temp_v3 = randRange(puVar4[4]);
   temp_v0 = puVar4[3];
   param_1->field_0x86 = (short)(temp_v3 + (unsigned int)temp_v0);
   param_1->field_0x5c = temp_v3 + (unsigned int)temp_v0;
@@ -68,13 +68,13 @@ unsigned char FUN_0048243c(fn_0048243c_arg0 *param_1,fn_0048243c_arg1 *param_2)
   param_1->field_0x8e = (char)puVar4[7];
   param_1->field_0x90 = 0;
   if ((char)temp_v1 == '\x03') {
-    temp_v3 = FUN_0018719c((int)(short)temp_v0);
+    temp_v3 = gameFlagIsSet((int)(short)temp_v0);
     temp_v4 = temp_v3 != 0;
     if (temp_v4) {
       param_1->field_0x90 = 0;
     }
     else {
-      temp_v3 = FUN_0014bef4(99);
+      temp_v3 = randRange(99);
       if (temp_v3 <= param_1->field_0x8e) {
         temp_v4 = 1;
         param_1->field_0x90 = 1;

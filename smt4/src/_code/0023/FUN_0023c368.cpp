@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0022699c(int, int, int, unsigned int);
 
-extern int DAT_00434290; /* 0x434290 */
+extern int g_btlActionReflect; /* 0x434290 */
 
 /* Supplied declaration required: FUN_0022699c. */
 
@@ -19,8 +19,8 @@ FUN_0023c368(short param_1,unsigned int param_2,unsigned int param_3,unsigned in
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = DAT_00434290;
-  FUN_0022699c(DAT_00434290,(int)param_1,0,param_2);
+  temp_v0 = g_btlActionReflect;
+  FUN_0022699c(g_btlActionReflect,(int)param_1,0,param_2);
   if (param_8 == 0) {
     *(unsigned char *)(temp_v0 + 5) = *(unsigned char *)(temp_v0 + 5) | 4;
   }
@@ -28,8 +28,8 @@ FUN_0023c368(short param_1,unsigned int param_2,unsigned int param_3,unsigned in
   *(unsigned int *)(temp_v0 + 0x14) = param_3;
   *(unsigned int *)(temp_v0 + 0x28) = param_6;
   *(unsigned int *)(temp_v0 + 0x4c) = param_4;
-  temp_v0 = DAT_00434290;
-  FUN_0022699c(DAT_00434290,(int)(short)(param_1 + param_5),0,param_2);
+  temp_v0 = g_btlActionReflect;
+  FUN_0022699c(g_btlActionReflect,(int)(short)(param_1 + param_5),0,param_2);
   if (param_8 == 0) {
     *(unsigned char *)(temp_v0 + 5) = *(unsigned char *)(temp_v0 + 5) | 4;
   }

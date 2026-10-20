@@ -75,7 +75,7 @@ extern float DAT_00647308; /* 0x647308 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: FUN_001a1ee0. */
-extern unsigned int FUN_001acf08(void);
+extern unsigned int effGetFrameStep(void);
 /* Supplied declaration required: FUN_001b63b0. */
 /* Supplied declaration required: FUN_00221d78. */
 /* Supplied declaration required: FUN_00514500. */
@@ -137,7 +137,7 @@ void FUN_003b257c(fn_003b257c_arg0 *param_1)
   float *temp_v40;
   int temp_v41;
   
-  temp_v8 = FUN_001acf08();
+  temp_v8 = effGetFrameStep();
   pvVar15 = param_1->field_0x40;
   temp_v15 = (float)VectorSignedToFloat(temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
   if ((param_1->field_0x34 <= *(int *)((int)pvVar15 + 0x34)) || (*(int *)((int)pvVar15 + 0x34) == 0)

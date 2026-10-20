@@ -53,8 +53,8 @@ extern int FUN_00295cec(void);
 extern int FUN_00295d08(unsigned int);
 /* Supplied declaration required: FUN_00295f28. */
 extern int flagWordTestBit(int, unsigned int);
-extern int FUN_002a8740(void);
-extern int FUN_002b63ac(void);
+extern int gameGetUnitRecord(void);
+extern int gameGetPlayerData(void);
 extern unsigned int randNextInRange(unsigned int);
 /* Supplied declaration required: FUN_00334018. */
 
@@ -75,10 +75,10 @@ unsigned int FUN_002e33f4(fn_002e33f4_arg0 *param_1,fn_002e33f4_arg1 *param_2,in
   temp_v4 = 0;
   temp_v3 = 0;
   if ((int)param_1 < 0) {
-    temp_v4 = FUN_002b63ac();
+    temp_v4 = gameGetPlayerData();
   }
   else {
-    temp_v3 = FUN_002a8740();
+    temp_v3 = gameGetUnitRecord();
     if (temp_v3 == 0) {
       return 1;
     }

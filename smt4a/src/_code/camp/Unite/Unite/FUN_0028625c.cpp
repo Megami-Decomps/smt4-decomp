@@ -10,11 +10,11 @@ int asdMemFree(...);
 int FUN_00203b40(...);
 int FUN_002a7324(...);
 int FUN_0031f718(...);
-int FUN_003fd63c(...);
+int gameFlagSetValue(...);
 
 int asdMemoryAlloc(...);
 int slotRecordFindById(...);
-int FUN_001bcd48(...);
+int svcSleepThread(...);
 int FUN_00239234(int, unsigned short [14]);
 int sysMemClear(int *, int);
 int recSet148(int, int);
@@ -68,7 +68,7 @@ extern int FUN_0034f6fc(...); /* 0x34f6fc */
 extern unsigned char LAB_0034f784; /* 0x34f784 */
 extern int FUN_003603a0(...); /* 0x3603a0 */
 extern int FUN_00375b80(...); /* 0x375b80 */
-extern int *DAT_0057f290; /* 0x57f290 */
+extern int *g_unite; /* 0x57f290 */
 
 #ifndef ROMWRIGHT_PIECE_2_2_DEFINED
 #define ROMWRIGHT_PIECE_2_2_DEFINED
@@ -76,16 +76,16 @@ extern int *DAT_0057f290; /* 0x57f290 */
 #endif
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: qsort. */
-extern int FUN_0014af84(void);
+extern int gameDataBlocksGetSaveData(void);
 /* Supplied declaration required: asdMemoryAlloc. */
-extern int FUN_001801a4(void);
+extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: slotRecordFindById. */
-extern int FUN_001ab854(int);
-extern int FUN_001ab888(void);
-extern int FUN_001b347c(void);
-/* Supplied declaration required: FUN_001bcd48. */
+extern int gameGetSlotRecord(int);
+extern int gameGetSlotTable(void);
+extern int gameSlotTableFindFree(void);
+/* Supplied declaration required: svcSleepThread. */
 /* Supplied declaration required: FUN_00203b40. */
 /* Supplied declaration required: FUN_00239234. */
 extern int FUN_0026140c(void);
@@ -94,7 +94,7 @@ extern int FUN_002a4b28(unsigned short);
 extern int computeCountLimit(void);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_0031f718. */
-/* Supplied declaration required: FUN_003fd63c. */
+/* Supplied declaration required: gameFlagSetValue. */
 extern int bitsAt60Test(int, unsigned int);
 /* Supplied declaration required: recSet148. */
 /* Supplied declaration required: recSet150. */
@@ -270,7 +270,7 @@ void FUN_0028625c(int *param_1)
             temp_v3 = 1;
             temp_v2 = 0xb;
           }
-          temp_v4 = FUN_001ab854((int)*temp_v25);
+          temp_v4 = gameGetSlotRecord((int)*temp_v25);
           temp_v5 = bitsAt60Test(temp_v4,10);
           temp_v1 = 0;
           if (temp_v5 == 0) {
@@ -315,7 +315,7 @@ LAB_00286938:
           }
           temp_v2 = param_1[0x174];
           while (temp_v2 < 0x1e) {
-            FUN_001bcd48(10000000,0);
+            svcSleepThread(10000000,0);
             temp_v2 = param_1[0x174];
           }
         }
@@ -326,7 +326,7 @@ LAB_00286938:
           if ('\0' < *(char *)((int)temp_v25 + 0x17)) {
             param_1[0x171] = 2000;
           }
-          piVar9 = DAT_0057f290;
+          piVar9 = g_unite;
           temp_v2 = FUN_0026140c();
           temp_v16 = 1;
           temp_v12 = 0x100;
@@ -370,7 +370,7 @@ LAB_00286938:
                      ) break;
                   wordAt1B0Clear(*piVar9);
                   if ((temp_v4 == 0) || (temp_v6 = bitsAt60Test(temp_v4,10), temp_v6 != 0)) {
-                    temp_v6 = FUN_0014af84();
+                    temp_v6 = gameDataBlocksGetSaveData();
                     temp_v6 = temp_v6 + temp_v38 * 0x10;
                     if (*(char *)(temp_v2 + 0x37) < '\x01') {
 LAB_00286b78:
@@ -397,7 +397,7 @@ LAB_00286b9c:
                     temp_v12 = (unsigned int)*(unsigned short *)(temp_v16 + temp_v5 * 2);
                     temp_v22 = slotRecordFindById(temp_v12);
                     if ((temp_v22 == 0) || (temp_v6 = bitsAt60Test(temp_v22,10), temp_v6 != 0)) {
-                      temp_v6 = FUN_0014af84();
+                      temp_v6 = gameDataBlocksGetSaveData();
                       temp_v6 = temp_v6 + temp_v12 * 0x50;
                       if ('\0' < *(char *)(temp_v2 + 0x37)) {
                         temp_v13 = (unsigned int)*(unsigned short *)(temp_v6 + 0x5e84);
@@ -437,26 +437,26 @@ LAB_00286c80:
           asdMemFree(temp_v16);
           temp_v2 = param_1[0x174];
           while (temp_v2 < 0x1e) {
-            FUN_001bcd48(10000000,0);
+            svcSleepThread(10000000,0);
             temp_v2 = param_1[0x174];
           }
         }
       }
       else {
         temp_v3 = 0;
-        temp_v2 = FUN_001b347c();
+        temp_v2 = gameSlotTableFindFree();
         if (0 < temp_v2) {
           do {
             if ((unsigned int)param_1[0x171] <= (unsigned int)param_1[0x172]) break;
             temp_v4 = temp_v3 + 1;
-            temp_v2 = FUN_001b347c();
+            temp_v2 = gameSlotTableFindFree();
             if (temp_v4 < temp_v2) {
               do {
                 if ((unsigned int)param_1[0x171] <= (unsigned int)param_1[0x172]) break;
-                temp_v2 = FUN_001ab888();
-                temp_v2 = FUN_001ab854((int)*(char *)(temp_v2 + temp_v3 + 0x1c88));
-                temp_v5 = FUN_001ab888();
-                temp_v5 = FUN_001ab854((int)*(char *)(temp_v5 + temp_v4 + 0x1c88));
+                temp_v2 = gameGetSlotTable();
+                temp_v2 = gameGetSlotRecord((int)*(char *)(temp_v2 + temp_v3 + 0x1c88));
+                temp_v5 = gameGetSlotTable();
+                temp_v5 = gameGetSlotRecord((int)*(char *)(temp_v5 + temp_v4 + 0x1c88));
                 if (temp_v2 == 0 || temp_v5 == 0) break;
                 temp_v6 = bitsAt60Test(temp_v2,10);
                 if ((temp_v6 == 0) && (temp_v6 = bitsAt60Test(temp_v5,10), temp_v6 == 0)) {
@@ -478,11 +478,11 @@ LAB_00286c80:
                   }
                 }
                 temp_v4 = temp_v4 + 1;
-                temp_v2 = FUN_001b347c();
+                temp_v2 = gameSlotTableFindFree();
               } while (temp_v4 < temp_v2);
             }
             temp_v3 = temp_v3 + 1;
-            temp_v2 = FUN_001b347c();
+            temp_v2 = gameSlotTableFindFree();
           } while (temp_v3 < temp_v2);
         }
       }
@@ -500,7 +500,7 @@ LAB_00286c80:
             do {
               temp_v12 = (param_1[(int)piVar18 * 2 + 0x4ef] & 0x1ffffU) >> 2;
               FUN_00184310();
-              temp_v4 = FUN_001801a4();
+              temp_v4 = gameGetPlayerData();
               if ((int)(*(unsigned short *)(temp_v4 + 0x62) - 10) < (int)(unsigned int)*(unsigned short *)(temp_v12 + 6)) {
                 temp_v4 = temp_v3 * 2;
                 temp_v2 = param_1[(int)piVar18 * 2 + 0x4ef];
@@ -545,7 +545,7 @@ LAB_00286c80:
                 do {
                   temp_v12 = (param_1[(int)piVar18 * 2 + 0x4ef] & 0x1ffffU) >> 2;
                   FUN_00184310();
-                  temp_v2 = FUN_001801a4();
+                  temp_v2 = gameGetPlayerData();
                   temp_v2 = *(unsigned short *)(temp_v2 + 0x62) - 10;
                   if (temp_v2 < (int)(unsigned int)*(unsigned short *)(temp_v12 + 6)) {
                     temp_v4 = temp_v3 * 2;
@@ -583,7 +583,7 @@ LAB_00286c80:
             }
           }
           else {
-            FUN_003fd63c(0x461,0);
+            gameFlagSetValue(0x461,0);
             qsort(temp_v18,param_1[0x172],8,&LAB_0034f784);
             temp_v12 = 0;
             temp_v13 = 0;
@@ -622,7 +622,7 @@ LAB_00286c80:
                   }
 LAB_00287134:
                   if ((int)temp_v12 <= (int)temp_v10) {
-                    FUN_003fd63c(0x461,1);
+                    gameFlagSetValue(0x461,1);
                     temp_v2 = param_1[temp_v13 * 2 + 0x4ef];
                     temp_v8 = temp_v12 + 1;
                     param_1[temp_v12 * 2 + 0x241e] = param_1[temp_v13 * 2 + 0x4ee];
@@ -691,8 +691,8 @@ LAB_0028727c:
             FUN_0031f718((int)(short)temp_v34[0x28],0);
             FUN_002a7324(1);
           }
-          piVar9 = DAT_0057f290;
-          if ((char)DAT_0057f290[0x108] != '\x02') {
+          piVar9 = g_unite;
+          if ((char)g_unite[0x108] != '\x02') {
             temp_v2 = FUN_0026140c();
             pbVar19 = (unsigned char *)(temp_v2 + 0x11);
           }
@@ -745,7 +745,7 @@ LAB_0028727c:
         *(unsigned char *)(temp_v31 + 0x24) = 0;
       }
     }
-    FUN_001bcd48(10000000,0);
+    svcSleepThread(10000000,0);
   } while( 1 );
 }
 

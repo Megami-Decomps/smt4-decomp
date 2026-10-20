@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_002e3328(void);
+void asdOperatorDelete(void);
 s32 jobStop(u32 job, s32 flag);
 extern u32 *DAT_0057f678;
 
@@ -11,7 +11,7 @@ void FUN_002e5b68(void)
 {
     jobStop(*DAT_0057f678, 0);
     if (DAT_0057f678 != NULL) {
-        FUN_002e3328();
+        asdOperatorDelete();
         DAT_0057f678 = NULL;
     }
 }

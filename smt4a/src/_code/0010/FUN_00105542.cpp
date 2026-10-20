@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_2_stack;
 
-extern int FUN_002e92e4(unsigned int, unsigned int);
+extern int wstrcmpU16(unsigned int, unsigned int);
 extern int wordRefsDiffer_002eba2c(unsigned int **, unsigned int *);
 
 
@@ -32,7 +32,7 @@ unsigned int FUN_00105542(int param_1,unsigned int param_2)
       return 0;
     }
     temp_v0 = (**(romwright_code **)(*(int *)temp_v2[2] + 0x20))();
-    temp_v1 = FUN_002e92e4(temp_v0,param_2);
+    temp_v1 = wstrcmpU16(temp_v0,param_2);
   } while (temp_v1 != 0);
   return temp_v2[2];
 }

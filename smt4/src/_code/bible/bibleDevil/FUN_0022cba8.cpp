@@ -15,7 +15,7 @@ int FUN_00230cc0(int, int, int);
 int FUN_00231bb8(int, float *);
 int FUN_00231bcc(int, int, int);
 int FUN_00240d5c(...);
-int FUN_002be304(...);
+int drawSetColorFromRGBA8(...);
 int FUN_002bed3c(void);
 int FUN_0039fc20(int, float [3]);
 
@@ -43,7 +43,7 @@ extern int FUN_0023360c(int);
 extern unsigned long long FUN_00233718(int);
 /* Supplied declaration required: FUN_00240d5c. */
 extern int FUN_0029e924(int);
-/* Supplied declaration required: FUN_002be304. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: FUN_0039fc20. */
 
@@ -148,11 +148,11 @@ LAB_0022cd30:
               case 5:
                 if (temp_v11 != 0) {
                   if (*(int *)(temp_v11 * 4 + 0x493758) != (&DAT_0049375c)[temp_v11]) {
-                    FUN_002be304();
+                    drawSetColorFromRGBA8();
                   }
                 }
                 else {
-                  FUN_002be304(DAT_0049375c);
+                  drawSetColorFromRGBA8(DAT_0049375c);
                 }
                 temp_v16 = (float)(temp_v11 * 0x20 + 0x49361c);
                 FUN_00212490(param_1 + 200,*(unsigned int *)(temp_v11 * 4 + 0x4935cc),
@@ -173,12 +173,12 @@ LAB_0022cd30:
                 if (temp_v0 != 0) {
                   temp_v2 = *(int *)(temp_v0 * 4 + 0x493758);
                   if (temp_v2 != (&DAT_0049375c)[temp_v0]) {
-                    FUN_002be304();
+                    drawSetColorFromRGBA8();
                     temp_v2 = temp_v8;
                   }
                 }
                 else {
-                  FUN_002be304(DAT_0049375c);
+                  drawSetColorFromRGBA8(DAT_0049375c);
                   temp_v2 = temp_v9;
                 }
               }
@@ -186,11 +186,11 @@ LAB_0022cd30:
                 temp_v13 = *(unsigned int *)(param_1 + 0x594);
                 if (temp_v0 != 0) {
                   if (*(int *)(temp_v0 * 4 + 0x493758) != (&DAT_0049375c)[temp_v0]) {
-                    FUN_002be304();
+                    drawSetColorFromRGBA8();
                   }
                 }
                 else {
-                  FUN_002be304(DAT_0049375c);
+                  drawSetColorFromRGBA8(DAT_0049375c);
                 }
                 temp_v16 = (float)(temp_v0 * 0x20 + 0x49361c);
                 FUN_00212490(param_1 + 200,*(unsigned int *)(temp_v0 * 4 + 0x4935cc),
@@ -219,7 +219,7 @@ LAB_0022cd30:
             temp_v17 = *(float *)(temp_v2 * 4 + 0x4935a4);
             temp_v16 = temp_v12;
             FUN_0022d9c8(param_1,*(unsigned int *)(temp_v2 * 4 + 0x49357c),temp_v2,1);
-            FUN_002be304((&DAT_0049375c)[temp_v2]);
+            drawSetColorFromRGBA8((&DAT_0049375c)[temp_v2]);
             temp_v16 = (float)(temp_v2 * 0x20 + 0x49361c);
             FUN_00212490(param_1 + 200,*(unsigned int *)(temp_v2 * 4 + 0x4935cc),
                          *(unsigned int *)(temp_v2 * 4 + 0x4935f4),temp_v12);

@@ -7,7 +7,7 @@ extern "C" {
 extern unsigned short uRam004e8282; /* 0x4e8282 */
 extern unsigned short uRam004ead42; /* 0x4ead42 */
 
-extern int FUN_002bb274(void);
+extern int nn_snd_CTR_Dspsnd_IsInitialized(void);
 
 
 void FUN_0011cd14(int param_1)
@@ -23,7 +23,7 @@ void FUN_0011cd14(int param_1)
     param_1 = 3;
   }
   uRam004ead42 = (short)param_1;
-  temp_v0 = FUN_002bb274();
+  temp_v0 = nn_snd_CTR_Dspsnd_IsInitialized();
   if (temp_v0 != 0) {
     puVar2 = *(unsigned int **)((unsigned int)uRam004e8282 * 4 + 0x4e8004);
     *(short *)(puVar2 + 4) = (short)param_1;

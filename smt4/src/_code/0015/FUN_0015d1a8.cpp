@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002a2ab0(unsigned char *, int, int);
 
-extern unsigned char DAT_004ead10; /* 0x4ead10 */
+extern unsigned char g_nnSndMasterManagerImpl; /* 0x4ead10 */
 
 /* Supplied declaration required: FUN_002a2ab0. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
@@ -32,12 +32,12 @@ unsigned int FUN_0015d1a8(int param_1,int param_2,unsigned int param_3)
   }
   *(unsigned int *)(temp_v0 + 0x34) = 0;
   *(unsigned int *)(temp_v0 + 0x38) = 0;
-  FUN_002a2ab0(&DAT_004ead10,param_2,0);
+  FUN_002a2ab0(&g_nnSndMasterManagerImpl,param_2,0);
   nn_os_CriticalSection_Leave(param_1 + 0x44);
   nn_os_CriticalSection_Enter(param_1 + 0x44);
   *(unsigned int *)(temp_v0 + 0x38) = param_3;
   nn_snd_CTR_FxReverb_Initialize(param_3);
-  FUN_002a2ab0(&DAT_004ead10,param_2,1);
+  FUN_002a2ab0(&g_nnSndMasterManagerImpl,param_2,1);
   nn_os_CriticalSection_Leave(param_1 + 0x44);
   return 1;
 }

@@ -13,15 +13,15 @@ typedef struct Holder {
     /* 0x5EC */ Cursor cursor;
 } Holder;
 
-extern Holder *DAT_00588fe8;
+extern Holder *g_statusDown;
 
 extern s32 FUN_002a4894(Cursor *cursor);
 extern s32 FUN_002c2c68(Cursor *cursor);
 
 u32 FUN_0037df64(void)
 {
-    if (DAT_00588fe8 != NULL) {
-        Cursor *cursor = &DAT_00588fe8->cursor;
+    if (g_statusDown != NULL) {
+        Cursor *cursor = &g_statusDown->cursor;
         s32 position = FUN_002a4894(cursor);
         s32 count = FUN_002c2c68(cursor);
 

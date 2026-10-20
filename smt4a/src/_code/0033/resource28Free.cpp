@@ -4,7 +4,7 @@ extern "C" {
 
 extern void asdMemFree(void *ptr);
 extern void FUN_002b40ec(void *p);
-extern void FUN_002b2f08(void *p);
+extern void objectBufferFree(void *p);
 extern void block6Free(u32 handle);
 
 /* Releases the resources owned by the object, then the object. */
@@ -22,7 +22,7 @@ void resource28Free(Resource28 *res)
         asdMemFree(handles);
     }
     if (res->unk30 != NULL) {
-        FUN_002b2f08(res->unk30);
+        objectBufferFree(res->unk30);
     }
     asdMemFree(res);
 }

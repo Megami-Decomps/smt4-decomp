@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e5700(int *, unsigned char *, int, int);
+int rt_vec_dtor(int *, unsigned char *, int, int);
 int FUN_002f5020(int *, unsigned char *, int, int);
 int FUN_00304d92(...);
 int FUN_00305298(...);
@@ -13,7 +13,7 @@ extern unsigned char LAB_00122095; /* 0x122095 */
 extern unsigned char LAB_0012cfad; /* 0x12cfad */
 extern unsigned char LAB_0012d05b; /* 0x12d05b */
 
-/* Supplied declaration required: FUN_002e5700. */
+/* Supplied declaration required: rt_vec_dtor. */
 /* Supplied declaration required: FUN_002f5020. */
 extern int FUN_00304d10(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00304d92. */
@@ -45,10 +45,10 @@ void FUN_00118e60(int param_1,unsigned int param_2,unsigned int param_3,unsigned
     FUN_00305298(param_1,&uStack_20);
     if (*(char *)(param_1 + 4) != '\0') {
       puVar2 = &LAB_00122095;
-      FUN_002e5700(&uStack_20,puVar2,0xc,1);
+      rt_vec_dtor(&uStack_20,puVar2,0xc,1);
       return;
     }
-    FUN_002e5700(&uStack_20,&LAB_00122095,0xc,1);
+    rt_vec_dtor(&uStack_20,&LAB_00122095,0xc,1);
   }
   temp_v0 = FUN_00304d10(param_2,1);
   if (temp_v0 != 0) {
@@ -58,7 +58,7 @@ void FUN_00118e60(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   FUN_002f5020(&uStack_20,&LAB_0012d05b,0xc,1);
   FUN_00304d92(param_1,&uStack_20);
   puVar2 = (unsigned char *)0x122173;
-  FUN_002e5700(&uStack_20,puVar2,0xc,1);
+  rt_vec_dtor(&uStack_20,puVar2,0xc,1);
   return;
 }
 

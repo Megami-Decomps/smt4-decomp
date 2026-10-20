@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001568f8(...);
-int FUN_0019cac4(...);
+int dataTable00FindById(...);
 int FUN_003eebf4(...);
 int FUN_004cb9d0(...);
 int FUN_004ff364(...);
@@ -39,9 +39,9 @@ struct fn_004c9b64_arg1 {
 extern int DAT_0057aa0c; /* 0x57aa0c */
 extern unsigned int DAT_0057aa1c; /* 0x57aa1c */
 
-extern unsigned short FUN_0014bef4(unsigned int);
+extern unsigned short randRange(unsigned int);
 /* Supplied declaration required: FUN_001568f8. */
-/* Supplied declaration required: FUN_0019cac4. */
+/* Supplied declaration required: dataTable00FindById. */
 extern unsigned int FUN_003ec620(int, unsigned int);
 /* Supplied declaration required: FUN_003eebf4. */
 extern int FUN_003ef9e0(int, fn_004c9b64_arg1 *);
@@ -90,7 +90,7 @@ LAB_004c9c20:
             temp_v3 = param_1;
             FUN_003eebf4(param_1,1);
             temp_v2 = (unsigned int)*(unsigned short *)(*(int *)(param_1 + 0x1ffc) + temp_v3 * 0x408 + 0x166);
-            FUN_0019cac4();
+            dataTable00FindById();
             if (*(char *)(temp_v2 + 0xa2) == '\x01' || *(char *)(temp_v2 + 0xa2) == '\x03')
             goto LAB_004c9c20;
           }
@@ -123,7 +123,7 @@ LAB_004c9c20:
     FUN_001568f8(param_1,(int)param_2->field_0x6a);
     temp_v5 = FUN_003ec620(param_1,*(unsigned int *)(temp_v4 + temp_v3 * 4 + 0xc));
     FUN_004ff364(temp_v5,0);
-    temp_v1 = FUN_0014bef4(((int)in_s0 - 1U) & 0xffff);
+    temp_v1 = randRange(((int)in_s0 - 1U) & 0xffff);
     param_2->field_0x62 = temp_v1;
   }
   param_2->field_0x88 = 0xff;

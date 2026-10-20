@@ -9,7 +9,7 @@ int efctSetSpeed(void);
 int FUN_0016c69c(...);
 int FUN_0016c6f0(int, int, unsigned int);
 int FUN_00183bb0(void);
-int FUN_00184518(byte *, int);
+int pairSetSecondResetFirst(byte *, int);
 int FUN_001879d0(int);
 int VectorSignedToFloat(...);
 
@@ -32,7 +32,7 @@ extern unsigned int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c69c. */
 /* Supplied declaration required: FUN_0016c6f0. */
 /* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_00184518. */
+/* Supplied declaration required: pairSetSecondResetFirst. */
 /* Supplied declaration required: FUN_001879d0. */
 
 
@@ -84,19 +84,19 @@ void FUN_001678a8(fn_001678a8_arg0 *param_1)
     }
     temp_v1 = *(unsigned short *)((int)param_1->field_0x4 + 0x48);
     if (temp_v1 < 3) {
-      FUN_00184518(&param_1[0x3b].field_0x8,0x1f);
+      pairSetSecondResetFirst(&param_1[0x3b].field_0x8,0x1f);
     }
     else if (temp_v1 < 5) {
-      FUN_00184518(&param_1[0x3b].field_0x8,0x1b);
+      pairSetSecondResetFirst(&param_1[0x3b].field_0x8,0x1b);
     }
     else if (temp_v1 < 7) {
-      FUN_00184518(&param_1[0x3b].field_0x8,0x1c);
+      pairSetSecondResetFirst(&param_1[0x3b].field_0x8,0x1c);
     }
     else if (temp_v1 < 9) {
-      FUN_00184518(&param_1[0x3b].field_0x8,0x1e);
+      pairSetSecondResetFirst(&param_1[0x3b].field_0x8,0x1e);
     }
     else {
-      FUN_00184518(&param_1[0x3b].field_0x8,0x1d);
+      pairSetSecondResetFirst(&param_1[0x3b].field_0x8,0x1d);
     }
     VectorSignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_001634b4(&param_1[0x24].field_0x4);

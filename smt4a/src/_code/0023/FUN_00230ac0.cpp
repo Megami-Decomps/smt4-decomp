@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_00184758(int, int, unsigned int);
-int FUN_00184c00(int, int, unsigned int);
+int uiSpriteSetKeyframe(int, int, unsigned int);
+int uiSpriteSetImageKeyframe(int, int, unsigned int);
 
 typedef struct fn_00230ac0_arg0 fn_00230ac0_arg0;
 struct fn_00230ac0_arg0 {
@@ -28,10 +28,10 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_4_stack;
 
-extern int DAT_0057f268; /* 0x57f268 */
+extern int g_partyPanel; /* 0x57f268 */
 
-/* Supplied declaration required: FUN_00184758. */
-/* Supplied declaration required: FUN_00184c00. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 
 
 void FUN_00230ac0(fn_00230ac0_arg0 *param_1,short param_2,unsigned int param_3,int param_4)
@@ -42,7 +42,7 @@ void FUN_00230ac0(fn_00230ac0_arg0 *param_1,short param_2,unsigned int param_3,i
   int temp_v1;
   short temp_v2;
   
-  temp_v0 = DAT_0057f268;
+  temp_v0 = g_partyPanel;
   temp_v2 = (short)(int)param_1;
   if (param_1 == (fn_00230ac0_arg0 *)0x4) {
     temp_v2 = 10;
@@ -67,17 +67,17 @@ void FUN_00230ac0(fn_00230ac0_arg0 *param_1,short param_2,unsigned int param_3,i
       param_2 = 0xc;
     }
   }
-  FUN_00184c00(DAT_0057f268 + 0x928,(int)param_2,param_3);
+  uiSpriteSetImageKeyframe(g_partyPanel + 0x928,(int)param_2,param_3);
   temp_v1 = 0;
   do {
-    FUN_00184758(temp_v0 + temp_v1 * 0x8c + 0x298,(int)temp_v2,param_3);
+    uiSpriteSetKeyframe(temp_v0 + temp_v1 * 0x8c + 0x298,(int)temp_v2,param_3);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 4);
   if (param_4 != 0) {
-    FUN_00184758(temp_v0 + 0x4c8,0xc,param_3);
+    uiSpriteSetKeyframe(temp_v0 + 0x4c8,0xc,param_3);
     return;
   }
-  FUN_00184758(temp_v0 + 0x4c8,(int)temp_v2,param_3);
+  uiSpriteSetKeyframe(temp_v0 + 0x4c8,(int)temp_v2,param_3);
   return;
 }
 

@@ -10,9 +10,9 @@ int FUN_0029ee54(...);
 int FUN_0029ee6c(...);
 int FUN_0029efd8(...);
 int FUN_0029f5d8(int, unsigned int, int, int, int, int, char [4], int, int);
-int FUN_002b46f8(...);
+int libc_bsearch(...);
 int FUN_002b8584(int, int);
-int FUN_002b8cc8(void);
+int ifTouchRegionRemove(void);
 int FUN_002bc01c(...);
 int FUN_002bf818(...);
 int FUN_002c1658(...);
@@ -41,9 +41,9 @@ extern int FUN_0029efc0(int);
 /* Supplied declaration required: FUN_0029efd8. */
 /* Supplied declaration required: FUN_0029f5d8. */
 extern int FUN_002a0d0c(void);
-/* Supplied declaration required: FUN_002b46f8. */
+/* Supplied declaration required: libc_bsearch. */
 /* Supplied declaration required: FUN_002b8584. */
-/* Supplied declaration required: FUN_002b8cc8. */
+/* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: FUN_002bc01c. */
 extern unsigned int FUN_002bf4f8(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bf818. */
@@ -142,7 +142,7 @@ LAB_001a2150:
               temp_v7 = dataTableGetCount(temp_v7);
               puVar13 = temp_v12;
               temp_v12[0] = (unsigned short)temp_v1;
-              FUN_002b46f8(puVar13,temp_v8,temp_v7,0x72,&LAB_001f62dc);
+              libc_bsearch(puVar13,temp_v8,temp_v7,0x72,&LAB_001f62dc);
               puVar13 = puVar13 + 0xc;
             }
           }
@@ -194,7 +194,7 @@ LAB_001a2150:
           temp_v7 = dataTableGetCount(temp_v7);
           puVar13 = temp_v12;
           temp_v12[0] = (unsigned short)temp_v1;
-          FUN_002b46f8(puVar13,temp_v8,temp_v7,0x72,&LAB_001f62dc);
+          libc_bsearch(puVar13,temp_v8,temp_v7,0x72,&LAB_001f62dc);
           puVar13 = puVar13 + 0xc;
         }
         FUN_0029ee6c(puVar13,0x323232ff);
@@ -212,7 +212,7 @@ LAB_001a2150:
         temp_v7 = dataTableGetCount(temp_v7);
         puVar13 = temp_v12;
         temp_v12[0] = (unsigned short)temp_v1;
-        FUN_002b46f8(puVar13,temp_v8,temp_v7,0x72,&LAB_001f62dc);
+        libc_bsearch(puVar13,temp_v8,temp_v7,0x72,&LAB_001f62dc);
         puVar13 = puVar13 + 0xc;
       }
     }
@@ -250,7 +250,7 @@ LAB_001a2150:
           if (0 < *(short *)(temp_v9 + 0x786)) {
             do {
               *(unsigned short *)(temp_v9 + temp_v10 * 2 + 0x76c) = 0xffff;
-              FUN_002b8cc8();
+              ifTouchRegionRemove();
               temp_v10 = temp_v10 + 1;
             } while (temp_v10 < *(short *)(temp_v9 + 0x786));
           }
@@ -284,7 +284,7 @@ LAB_001a2150:
           temp_v7 = dataTableGetCount(temp_v7);
           puVar13 = temp_v12;
           temp_v12[0] = (unsigned short)temp_v1;
-          FUN_002b46f8(puVar13,temp_v8,temp_v7,0x72,&LAB_001f62dc);
+          libc_bsearch(puVar13,temp_v8,temp_v7,0x72,&LAB_001f62dc);
           puVar13 = puVar13 + 0xc;
         }
         FUN_0029ee6c(puVar13,0x323232ff);
@@ -303,7 +303,7 @@ LAB_001a2150:
       temp_v7 = dataTableGetCount(temp_v7);
       puVar13 = temp_v12;
       temp_v12[0] = (unsigned short)temp_v1;
-      FUN_002b46f8(puVar13,temp_v8,temp_v7,0x72,&LAB_001f62dc);
+      libc_bsearch(puVar13,temp_v8,temp_v7,0x72,&LAB_001f62dc);
       puVar13 = puVar13 + 0xc;
     }
     FUN_0029ee6c(puVar13,0x323232ff);

@@ -32,6 +32,6 @@ typedef struct Block61a470 {
     /* 0x124 */ s32 state;
 } Block61a470;
 
-extern Block61a470 DAT_0061a470;
+extern Block61a470 g_asdGfxContext;
 
 #endif

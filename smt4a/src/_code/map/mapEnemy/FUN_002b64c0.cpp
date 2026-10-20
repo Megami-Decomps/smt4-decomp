@@ -17,7 +17,7 @@ typedef struct {
     unsigned int sp2C; /* 0x2c: local_2c */
 } param_3_stack;
 
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern int DAT_005806d4; /* 0x5806d4 */
 
 /* Supplied declaration required: FUN_00100388. */
@@ -98,7 +98,7 @@ unsigned int FUN_002b64c0(int param_1,int param_2,int param_3)
         FUN_0040aad4(*piVar6,0);
         temp_v2 = *(int *)(*piVar6 + 4);
         FUN_003fe86c(temp_v2,0,2);
-        FUN_0040ace8(DAT_0056fcc0,temp_v2);
+        FUN_0040ace8(g_handleRegistry,temp_v2);
         *(unsigned int *)(temp_v2 + 4) = *(unsigned int *)(temp_v2 + 4) | 3;
         *(unsigned char *)(temp_v0 + 0x3d90) = 1;
         *(unsigned char *)(temp_v0 + 0x3d91) = 0;
@@ -138,7 +138,7 @@ unsigned int FUN_002b64c0(int param_1,int param_2,int param_3)
             FUN_0040aad4(*piVar7,0);
             temp_v3 = *(int *)(*piVar7 + 4);
             FUN_003fe86c(temp_v3,0,2);
-            FUN_0040ace8(DAT_0056fcc0,temp_v3);
+            FUN_0040ace8(g_handleRegistry,temp_v3);
             *(unsigned int *)(temp_v3 + 4) = *(unsigned int *)(temp_v3 + 4) | 3;
             *(unsigned char *)(temp_v2 + 0x3d90) = 1;
             *(unsigned char *)(temp_v2 + 0x3d91) = 0;

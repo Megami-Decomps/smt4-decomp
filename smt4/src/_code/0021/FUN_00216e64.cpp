@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_0029541c(...);
 int FUN_00296774(...);
-int FUN_002b8838(...);
-int FUN_002b8e84(...);
+int buttonHelpSetPreset(...);
+int eventQueueAddUnique(...);
 int FUN_002bee58(...);
 
 int FUN_001ce0fc(int);
@@ -19,7 +19,7 @@ int FUN_002954bc(...);
 int btlTalkBustUpSetUnk2F4(...);
 int FUN_002954f4(...);
 int FUN_00295660(int, unsigned char [32]);
-int FUN_00296f4c(...);
+int scrScriptProcessStartEntry(...);
 int FUN_00297060(...);
 int FUN_0029bd4c(void);
 int FUN_0029bed8(...);
@@ -28,12 +28,12 @@ int FUN_0029c6b0(...);
 int FUN_0029ca58(void);
 int FUN_0029d8f4(int, int);
 int scrScriptProcessDestroy(unsigned int);
-int FUN_002b63ac(void);
+int gameGetPlayerData(void);
 int FUN_002b7bca(int, int, int, unsigned char *);
-int FUN_002b9024(...);
+int devilGetRecord(...);
 int FUN_002bd06c(unsigned int);
 int FUN_002be624(...);
-int FUN_002bf694(unsigned char [32], unsigned int);
+int libc_strcpy(unsigned char [32], unsigned int);
 int FUN_002bf818(int);
 int asdMemFree(unsigned int);
 int FUN_0033bb94(int, unsigned int);
@@ -70,7 +70,7 @@ extern int FUN_002955fc(void);
 extern int FUN_00295618(void);
 /* Supplied declaration required: FUN_00295660. */
 /* Supplied declaration required: FUN_00296774. */
-/* Supplied declaration required: FUN_00296f4c. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297060. */
 extern int FUN_002973d8(void);
 /* Supplied declaration required: FUN_0029bd4c. */
@@ -83,17 +83,17 @@ extern int FUN_0029c8f4(int);
 extern int FUN_0029ea68(void);
 extern int sys43e188GetState(void);
 /* Supplied declaration required: scrScriptProcessDestroy. */
-extern int FUN_002a8740(int);
-/* Supplied declaration required: FUN_002b63ac. */
+extern int gameGetUnitRecord(int);
+/* Supplied declaration required: gameGetPlayerData. */
 /* Supplied declaration required: FUN_002b7bca. */
-/* Supplied declaration required: FUN_002b8838. */
-/* Supplied declaration required: FUN_002b8e84. */
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: buttonHelpSetPreset. */
+/* Supplied declaration required: eventQueueAddUnique. */
+/* Supplied declaration required: devilGetRecord. */
 extern unsigned int FUN_002bce30(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002bd06c. */
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002bee58. */
-/* Supplied declaration required: FUN_002bf694. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_002bf818. */
 extern unsigned int dataTableGetCount(unsigned int);
 extern unsigned int dataTableGetEntries(void);
@@ -137,7 +137,7 @@ void FUN_00216e64(int param_1)
   
   temp_v11 = param_1 + *(int *)(param_1 + 0xcf78) * 0x620;
   pcVar15 = (char *)(temp_v11 + 0x3654);
-  temp_v2 = FUN_002a8740((int)*pcVar15);
+  temp_v2 = gameGetUnitRecord((int)*pcVar15);
   piVar13 = (int *)(param_1 + 0x3534);
   temp_v3 = *piVar13;
   temp_v14 = param_1 + 0x73c;
@@ -244,15 +244,15 @@ void FUN_00216e64(int param_1)
       FUN_001ddbbc();
       temp_v6 = (unsigned int)*(unsigned short *)(temp_v2 + 0x46);
       FUN_002bd06c(temp_v6);
-      FUN_002bf694(temp_v16,temp_v6);
+      libc_strcpy(temp_v16,temp_v6);
       FUN_00295660(8,temp_v16);
       temp_v4 = FUN_002bce30(*(unsigned short *)(temp_v2 + 0x46),1);
-      FUN_002bf694(temp_v16,temp_v4);
+      libc_strcpy(temp_v16,temp_v4);
       FUN_00295660(0x10,temp_v16);
       scrScriptProcessDestroy(*puVar16);
       asdMemFree(*(unsigned int *)(param_1 + 0x3578));
       temp_v6 = (unsigned int)*(unsigned short *)(temp_v2 + 0x46);
-      FUN_002b9024();
+      devilGetRecord();
       temp_v1 = *(char *)(temp_v6 + 0x30);
       temp_v4 = dataTableGet(0x25,0);
       pcVar15 = (char *)dataTableGetEntries();
@@ -279,7 +279,7 @@ LAB_002174ac:
     if (*(char *)(temp_v14 + 0x8a) == '\0') {
       return;
     }
-    FUN_00296f4c(*puVar16,4);
+    scrScriptProcessStartEntry(*puVar16,4);
     if (*(char *)(param_1 + 0xd044) == '\0') {
       if (*(char *)(param_1 + 0xd640) != '\0') {
         FUN_0029bed8(*(unsigned short *)(temp_v2 + 0x46));
@@ -303,9 +303,9 @@ LAB_002174ac:
         return;
       }
       temp_v6 = (unsigned int)*(unsigned short *)(temp_v2 + 0x46);
-      FUN_002b9024();
-      FUN_002b9024(*(unsigned short *)(temp_v6 + 0x2a));
-      FUN_002b63ac();
+      devilGetRecord();
+      devilGetRecord(*(unsigned short *)(temp_v6 + 0x2a));
+      gameGetPlayerData();
       if (((int)(*(unsigned char *)(temp_v6 + 0x29) - 2) <= (int)(unsigned int)*(unsigned char *)(temp_v2 + 0x48)) &&
          ((unsigned int)*(unsigned char *)(temp_v2 + 0x48) < (unsigned int)*(unsigned char *)(temp_v6 + 0x29))) {
         FUN_0029ca58();
@@ -325,8 +325,8 @@ LAB_002174ac:
         }
         temp_v2 = *(int *)(temp_v11 + 0x3c6c);
         if (temp_v2 == 0) {
-          FUN_00296f4c(*puVar16,0);
-          FUN_002b8838(0x65);
+          scrScriptProcessStartEntry(*puVar16,0);
+          buttonHelpSetPreset(0x65);
           *piVar13 = *piVar13 + 1;
           *piVar17 = 0;
           return;
@@ -335,14 +335,14 @@ LAB_002174ac:
           if (temp_v2 != 3) {
             return;
           }
-          FUN_00296f4c(*puVar16,1);
-          FUN_002b8838(0x65);
+          scrScriptProcessStartEntry(*puVar16,1);
+          buttonHelpSetPreset(0x65);
           temp_v2 = 0xb;
         }
         else {
           FUN_0029c424(1);
-          FUN_00296f4c(*puVar16,1);
-          FUN_002b8838(0x65);
+          scrScriptProcessStartEntry(*puVar16,1);
+          buttonHelpSetPreset(0x65);
           temp_v2 = 0x14;
         }
         *piVar13 = temp_v2;
@@ -370,7 +370,7 @@ LAB_002174ac:
       }
       temp_v4 = *puVar16;
       temp_v8 = 2;
-      FUN_00296f4c(temp_v4,temp_v8);
+      scrScriptProcessStartEntry(temp_v4,temp_v8);
       *piVar13 = *piVar13 + 1;
       return;
     case 4:
@@ -380,7 +380,7 @@ LAB_002174ac:
         *piVar13 = *piVar13 + 1;
         FUN_002bee58(temp_v14,7);
         FUN_0029bd4c();
-        FUN_002b8e84(0x1000115);
+        eventQueueAddUnique(0x1000115);
         return;
       }
     }
@@ -406,7 +406,7 @@ LAB_002174ac:
         FUN_0029c424(1);
         temp_v4 = *puVar16;
         temp_v8 = 3;
-        FUN_00296f4c(temp_v4,temp_v8);
+        scrScriptProcessStartEntry(temp_v4,temp_v8);
         *piVar13 = *piVar13 + 1;
         return;
       }

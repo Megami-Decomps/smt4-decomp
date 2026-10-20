@@ -1,4 +1,4 @@
-/* The block held in DAT_0044e190. */
+/* The block held in g_statusDown. */
 #ifndef SHARD_SYS44E190_H
 #define SHARD_SYS44E190_H
 
@@ -20,6 +20,6 @@ typedef struct Sys44e190 {
     /* 0x2391 */ u8 unk2391;
 } Sys44e190;
 
-extern Sys44e190 *DAT_0044e190;
+extern Sys44e190 *g_statusDown;
 
 #endif

@@ -8,9 +8,9 @@ void FUN_002bc7f4(u32 param, u32 *out);
 void FUN_002bdb48(void);
 void FUN_001376d8(u32 *a, u32 *b, u32 *c, u32 *d);
 void asdGxCommandListRefreshCopy(AsdGxCommandList *list);
-void FUN_002bef70(u32 cmdList);
+void nngxBindCmdlist(u32 cmdList);
 void FUN_0013764c(void);
-void FUN_002bf0dc(void);
+void nngxGetError(void);
 
 /* Begins a command list: the list that was running is suspended (its state saved), then this one is
  * bound and pushed on the stack. */
@@ -29,12 +29,12 @@ void asdGxCommandListBegin(AsdGxCommandList *list)
         outer->entryCount++;
     }
     list->entryCount = 0;
-    FUN_002bef70(list->id);
+    nngxBindCmdlist(list->id);
     FUN_0013764c();
     list->state = ASD_GX_CMDLIST_ACTIVE;
     g_asdGxCommandListStack[g_asdGxState.depth] = list;
     g_asdGxState.depth++;
-    FUN_002bf0dc();
+    nngxGetError();
 }
 
 } /* extern "C" */

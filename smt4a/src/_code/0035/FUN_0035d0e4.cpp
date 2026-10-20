@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern int DAT_0057f268; /* 0x57f268 */
+extern int g_partyPanel; /* 0x57f268 */
 
 /* Supplied declaration required: FUN_0023f900. */
 /* Supplied declaration required: FUN_0031d890. */
@@ -27,9 +27,9 @@ void FUN_0035d0e4(int param_1)
   int temp_v0;
   unsigned int temp_v1;
   
-  temp_v0 = DAT_0057f268;
-  if ((DAT_0057f268 != 0) && (*(int *)(DAT_0057f268 + 0x1218) != param_1)) {
-    *(int *)(DAT_0057f268 + 0x1218) = param_1;
+  temp_v0 = g_partyPanel;
+  if ((g_partyPanel != 0) && (*(int *)(g_partyPanel + 0x1218) != param_1)) {
+    *(int *)(g_partyPanel + 0x1218) = param_1;
     if (param_1 == 0) {
       temp_v1 = 0xffffffff;
     }

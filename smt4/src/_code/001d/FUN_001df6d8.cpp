@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00210194(unsigned int);
 
 typedef int romwright_code(...);
-extern int DAT_0043dd68; /* 0x43dd68 */
+extern int g_unite; /* 0x43dd68 */
 
 /* Supplied declaration required: FUN_00210194. */
 
@@ -20,9 +20,9 @@ void FUN_001df6d8(void)
   int temp_v1;
   unsigned int temp_v2;
   
-  temp_v0 = DAT_0043dd68;
-  if (DAT_0043dd68 != 0) {
-    FUN_00210194(*(unsigned int *)(DAT_0043dd68 + 0x95c8));
+  temp_v0 = g_unite;
+  if (g_unite != 0) {
+    FUN_00210194(*(unsigned int *)(g_unite + 0x95c8));
     FUN_00210194(*(unsigned int *)(temp_v0 + 0x95cc));
     temp_v1 = *(int *)(*(int *)(temp_v0 + 0x95d0) + 4);
     temp_v2 = *(unsigned int *)(temp_v1 + 0x44);

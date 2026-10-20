@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002c3944(int, int);
+int rt_memclr(int, int);
 
-/* Supplied declaration required: FUN_002c3944. */
+/* Supplied declaration required: rt_memclr. */
 
 
 unsigned int FUN_0035a454(int param_1,int param_2,int param_3,int param_4)
@@ -16,11 +16,11 @@ unsigned int FUN_0035a454(int param_1,int param_2,int param_3,int param_4)
   int temp_v0;
   
   if (param_4 != 0) {
-    FUN_002c3944(param_1,param_2 - 1);
+    rt_memclr(param_1,param_2 - 1);
     temp_v0 = param_1 + param_2;
     if (param_3 == 1) {
       *(unsigned char *)(temp_v0 - 1) = 0xd;
-      FUN_002c3944(temp_v0,param_2 - 1);
+      rt_memclr(temp_v0,param_2 - 1);
       *(unsigned char *)((param_1 + param_2 * 2) - 1) = 10;
       return 2;
     }

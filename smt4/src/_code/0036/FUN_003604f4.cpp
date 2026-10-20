@@ -3,7 +3,7 @@
 extern "C" {
 
 s32 FUN_003608a8(void);
-int FUN_002c52f8(void);
+int asdFatalError(void);
 
 /* Returns the result of FUN_003608a8 when it is the 0xc9405001 code; any other result is reported if it is a failure and mapped to 0. */
 s32 FUN_003604f4(void)
@@ -12,7 +12,7 @@ s32 FUN_003604f4(void)
 
     if (result != (s32)0xc9405001) {
         if (nnResultIsFailure(result)) {
-            FUN_002c52f8();
+            asdFatalError();
         }
         result = 0;
     }

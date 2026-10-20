@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_001aea28(u32 owner, u32 handle);
+void ptrListRemoveClearOwner(u32 owner, u32 handle);
 
 typedef struct Object {
     /* 0x00 */ u8 unk00[4];
@@ -30,8 +30,8 @@ typedef struct ObjectRows {
     /* 0x20 */ Object *objects[2][8];
 } ObjectRows;
 
-extern u32 DAT_0056fcc0;
-extern Table *DAT_00581038;
+extern u32 g_handleRegistry;
+extern Table *g_mapHakai;
 
 /* Releases the handle of every record object that is active, enabled and present, and of every object in the two rows of seven slots. */
 void FUN_002b7c2c(void)
@@ -44,7 +44,7 @@ void FUN_002b7c2c(void)
 
     i = 0;
     do {
-        record = &DAT_00581038->records[i];
+        record = &g_mapHakai->records[i];
         handle = 0;
         if (record->active != 0) {
             handle = (u32)record->enabled;
@@ -57,7 +57,7 @@ void FUN_002b7c2c(void)
             if (handle != 0 && object != NULL) {
                 handle = object->handle;
                 if (handle != 0) {
-                    FUN_001aea28(DAT_0056fcc0, handle);
+                    ptrListRemoveClearOwner(g_handleRegistry, handle);
                 }
             }
         }
@@ -67,12 +67,12 @@ void FUN_002b7c2c(void)
     do {
         j = 0;
         do {
-            object = ((ObjectRows *)DAT_00581038)->objects[i][j];
+            object = ((ObjectRows *)g_mapHakai)->objects[i][j];
             if (object != NULL) {
                 handle = object->handle;
             }
             if (object != NULL && handle != 0) {
-                FUN_001aea28(DAT_0056fcc0, handle);
+                ptrListRemoveClearOwner(g_handleRegistry, handle);
             }
             j = j + 1;
         } while (j < 7);

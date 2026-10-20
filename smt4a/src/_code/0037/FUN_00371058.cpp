@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern MapRndMazeA DAT_0060fc08;
+extern MapRndMazeA g_mapRndMaze;
 
 u32 FUN_00371058(void)
 {
-    return DAT_0060fc08.unk380;
+    return g_mapRndMaze.unk380;
 }
 
 } /* extern "C" */

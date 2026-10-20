@@ -7,8 +7,8 @@ extern "C" {
 int FUN_0010fc60(void);
 int FUN_0010fc90(void);
 int FUN_0010ff4c(void);
-int FUN_002b2368(int);
-int FUN_002bd430(void);
+int asdMemFreeNonNull(int);
+int sndVoiceFree(void);
 int FUN_002c3f5c(int);
 int FUN_002c40f8(unsigned char *, int *, int, int, unsigned int, unsigned int);
 int asdMemFree(unsigned int);
@@ -37,8 +37,8 @@ extern unsigned int DAT_004c4100; /* 0x4c4100 */
 /* Supplied declaration required: FUN_0010fc60. */
 /* Supplied declaration required: FUN_0010fc90. */
 /* Supplied declaration required: FUN_0010ff4c. */
-/* Supplied declaration required: FUN_002b2368. */
-/* Supplied declaration required: FUN_002bd430. */
+/* Supplied declaration required: asdMemFreeNonNull. */
+/* Supplied declaration required: sndVoiceFree. */
 /* Supplied declaration required: FUN_002c3f5c. */
 /* Supplied declaration required: FUN_002c40f8. */
 /* Supplied declaration required: asdMemFree. */
@@ -92,7 +92,7 @@ void FUN_0034e9b8(void)
   temp_v0 = DAT_0044d108;
   if (DAT_0044d108 != 0) {
     FUN_002c3f5c(DAT_0044d108);
-    FUN_002b2368(temp_v0);
+    asdMemFreeNonNull(temp_v0);
   }
   DAT_0044d108 = 0;
   asdMemFree(DAT_0044d104);
@@ -113,7 +113,7 @@ LAB_0034eb38:
       nn_os_CriticalSection_Enter((unsigned int)&DAT_004c40f8);
       piVar4 = (int *)(DAT_0044d100 + temp_v1 * 0x70);
       if (*piVar4 != 0) {
-        FUN_002bd430();
+        sndVoiceFree();
         *piVar4 = 0;
       }
       if (piVar4[1] != 0) {

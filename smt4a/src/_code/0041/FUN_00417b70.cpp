@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00417e08(int);
 int FUN_004bb6d8(unsigned int, int);
 
-extern int FUN_001ab940(void);
+extern int gameFlagBlockGet(void);
 extern int FUN_001bd118(int);
 extern int FUN_003de444(int);
 extern unsigned int FUN_003de734(int);
@@ -22,7 +22,7 @@ void FUN_00417b70(int param_1)
   int temp_v0;
   unsigned int temp_v1;
   
-  temp_v0 = FUN_001ab940();
+  temp_v0 = gameFlagBlockGet();
   temp_v0 = temp_v0 + param_1 * 4;
   *(unsigned char *)(temp_v0 + 0x2a1) = 0;
   *(unsigned char *)(temp_v0 + 0x2a0) = (*(unsigned char *)(temp_v0 + 0x2a0) & 0x3f) | 0x21;
@@ -34,7 +34,7 @@ void FUN_00417b70(int param_1)
   }
   temp_v1 = FUN_003de734(param_1);
   if (temp_v1 != 0) {
-    temp_v0 = FUN_001ab940();
+    temp_v0 = gameFlagBlockGet();
     FUN_004bb6d8(temp_v1,1);
     *(unsigned char *)(temp_v0 + (temp_v1 >> 3)) = *(unsigned char *)(temp_v0 + (temp_v1 >> 3)) | (unsigned char)(1 << (temp_v1 & 7));
   }

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00128650(unsigned char *, int, int);
+int nn_hid_CTR_AnalogStickClamper_SetClampParam(unsigned char *, int, int);
 int memClear(unsigned char *, int);
 int nn_hid_CTR_PadReader_PadReader_sub_object(unsigned char *, unsigned int);
 
@@ -21,7 +21,7 @@ extern unsigned short DAT_004e3c56; /* 0x4e3c56 */
 extern unsigned char DAT_004e3c58; /* 0x4e3c58 */
 
 extern unsigned int FUN_0011c6c0(void);
-/* Supplied declaration required: FUN_00128650. */
+/* Supplied declaration required: nn_hid_CTR_AnalogStickClamper_SetClampParam. */
 extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: nn_hid_CTR_PadReader_PadReader_sub_object. */
@@ -40,7 +40,7 @@ void FUN_0010a23c(void)
   }
   DAT_004650a0 = &DAT_004e3be8;
   DAT_004e3c00 = 0;
-  FUN_00128650(&DAT_004e3be8,0x28,0x91);
+  nn_hid_CTR_AnalogStickClamper_SetClampParam(&DAT_004e3be8,0x28,0x91);
   memClear(&DAT_004e3c58,0x7c);
   DAT_004e3c48 = 0;
   DAT_004e3c4c = 0;

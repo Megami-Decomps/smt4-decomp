@@ -11,8 +11,8 @@ int FUN_004935b0(...);
 int FUN_004d05c4(int, int, int, int);
 
 typedef int romwright_code(...);
-extern unsigned int FUN_001654d8(int);
-extern unsigned int FUN_001654e4(int);
+extern unsigned int vec2GetXInt(int);
+extern unsigned int vec2GetYInt(int);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_0032cfe0. */
 /* Supplied declaration required: FUN_003343f0. */
@@ -33,8 +33,8 @@ void FUN_004a15a0(int param_1)
   
   temp_v0 = FUN_004cf8dc(param_1 + 0xdc,(int)*(short *)(param_1 + 0xa874));
   temp_v3 = param_1 + *(short *)(param_1 + 0xa874) * 0x8c + 0xfc;
-  temp_v1 = FUN_001654e4(temp_v3);
-  temp_v2 = FUN_001654d8(temp_v3);
+  temp_v1 = vec2GetYInt(temp_v3);
+  temp_v2 = vec2GetXInt(temp_v3);
   FUN_004935b0(param_1 + 200,temp_v2,temp_v1);
   if (temp_v0 != 0) {
     if (*(char *)(param_1 + 0x860) != '\0') {

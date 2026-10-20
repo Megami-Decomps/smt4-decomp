@@ -16,12 +16,12 @@ typedef struct Global588fd0 {
     /* 0x02 */ u8 unk02[2];
     /* 0x04 */ Game *game;
 } Global588fd0;
-extern Global588fd0 DAT_00588fd0;
+extern Global588fd0 g_gameGlobals;
 
 /* Returns the word at 0x1374 of the game record. */
 u32 FUN_0023b3b8(void)
 {
-    return DAT_00588fd0.game->unk1374;
+    return g_gameGlobals.game->unk1374;
 }
 
 } /* extern "C" */

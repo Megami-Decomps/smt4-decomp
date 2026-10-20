@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern PanelRef DAT_0057f588;
+extern PanelRef g_messageMain;
 
 u32 panelSetMode3(u32 value, u8 flag)
 {
-    Panel85 *panel = DAT_0057f588.panel;
+    Panel85 *panel = g_messageMain.panel;
 
     panel->state = 3;
     panel->unk80 = value;

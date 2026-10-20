@@ -8,12 +8,12 @@ typedef struct State {
     u8 flag; /* 0x42 */
 } State;
 
-extern State *DAT_0043dcf0;
+extern State *g_partyPanel;
 
 /* True when the state exists and its flag is set. */
 bool FUN_00262f14(void)
 {
-    return DAT_0043dcf0 != NULL && DAT_0043dcf0->flag != 0;
+    return g_partyPanel != NULL && g_partyPanel->flag != 0;
 }
 
 } /* extern "C" */

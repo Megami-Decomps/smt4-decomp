@@ -11,7 +11,7 @@ int FUN_0045fab0(int, int);
 int word8HolderSetFromTable(int, int);
 int FUN_00460a7c(unsigned char [16], unsigned int, int);
 int FUN_00466478(int, int, unsigned char *, int);
-int FUN_00466780(int, unsigned char [4], unsigned int, unsigned int);
+int sndChannelStart(int, unsigned char [4], unsigned int, unsigned int);
 int nw_snd_internal_CurveAdshr_SetHold(int, int);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
@@ -30,7 +30,7 @@ extern unsigned char LAB_00462da8; /* 0x462da8 */
 /* Supplied declaration required: word8HolderSetFromTable. */
 /* Supplied declaration required: FUN_00460a7c. */
 /* Supplied declaration required: FUN_00466478. */
-/* Supplied declaration required: FUN_00466780. */
+/* Supplied declaration required: sndChannelStart. */
 extern int FUN_005081b8(unsigned char *, unsigned char *, unsigned int);
 extern int FUN_00508c34(unsigned char *, int, unsigned int);
 extern unsigned int ll_sdiv(unsigned int, unsigned int, unsigned int, unsigned int);
@@ -85,7 +85,7 @@ unsigned int FUN_00462a18(int param_1)
       FUN_0045f9fc(temp_v2 + 0x98,*(unsigned char *)(param_1 + 0x90));
       *(unsigned char *)(temp_v2 + 0x13c) = *(unsigned char *)(param_1 + 0x5d);
       FUN_001cbd00(*(unsigned int *)(temp_v2 + 0x1a8),(int)*(char *)(param_1 + 0x2e));
-      FUN_00466780(temp_v2,temp_v5,0xffffffff,temp_v4);
+      sndChannelStart(temp_v2,temp_v5,0xffffffff,temp_v4);
       *(int *)(param_1 + 0x9c) = temp_v2;
       *(unsigned char *)(param_1 + 0x5c) = 1;
       return 1;

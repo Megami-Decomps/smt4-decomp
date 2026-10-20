@@ -7,8 +7,8 @@ extern "C" {
 int FUN_00115350(int, unsigned char [40]);
 int FUN_002e6e34(unsigned char [20], unsigned int);
 int FUN_002e6e5c(unsigned char [20]);
-int FUN_002e75fa(unsigned int);
-int FUN_002e995c(unsigned char [40]);
+int sharedRefAddRef(unsigned int);
+int onlineSockAddrConstruct(unsigned char [40]);
 int FUN_002f9086(int);
 int FUN_002f9156(int, unsigned int, unsigned char [40], unsigned int);
 
@@ -26,8 +26,8 @@ extern unsigned int FUN_00115380(void);
 extern int FUN_001153a0(void);
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-/* Supplied declaration required: FUN_002e75fa. */
-/* Supplied declaration required: FUN_002e995c. */
+/* Supplied declaration required: sharedRefAddRef. */
+/* Supplied declaration required: onlineSockAddrConstruct. */
 extern int FUN_002f905e(int, unsigned char *);
 extern int FUN_002f9072(int, unsigned char *);
 /* Supplied declaration required: FUN_002f9086. */
@@ -58,14 +58,14 @@ unsigned int FUN_0010e83a(int param_1,unsigned int param_2,unsigned int param_3)
   temp_v0 = FUN_00115380();
   FUN_002e6e34(temp_v7,temp_v0);
   temp_v5 = FUN_001153a0();
-  FUN_002e995c(temp_v4);
+  onlineSockAddrConstruct(temp_v4);
   temp_v8 = param_1 + 0x284;
   for (temp_v2 = 0; temp_v2 < temp_v5; temp_v2 = temp_v2 + 1) {
     FUN_00115350(temp_v2,temp_v4);
     temp_v6 = FUN_002f9072(temp_v8,temp_v4);
     temp_v1 = FUN_002f905e(param_1 + 0x294,temp_v4);
     if (!(temp_v6 == 0 && temp_v1 == 0)) {
-      FUN_002e75fa(temp_v9);
+      sharedRefAddRef(temp_v9);
       if (temp_v1 != 0) {
         FUN_002f9086(param_1 + 0x294);
       }

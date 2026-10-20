@@ -9,7 +9,7 @@ int FUN_0013a618(...);
 int asdProcessCreateSimple(...);
 int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
-int FUN_002e342c(...);
+int libc_strcpy(...);
 int sysMemClear(...);
 
 typedef int romwright_code(...);
@@ -35,7 +35,7 @@ extern unsigned int DAT_0058804c; /* 0x58804c */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 extern int asdLoadFileGetUseRawPaths(void);
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: sysMemClear. */
 
 
@@ -103,7 +103,7 @@ unsigned int FUN_00370b8c(int param_1,unsigned char param_2)
       FUN_00100388(&temp_v1,"moflex/%s.moflex",DAT_0058804c);
     }
     puVar1[4] = 2;
-    FUN_002e342c((int)puVar1 + 0x1b,&temp_v1);
+    libc_strcpy((int)puVar1 + 0x1b,&temp_v1);
     *(unsigned char *)((int)puVar1 + 0x5b) = 0;
     *(unsigned char *)(puVar1 + 6) = 0;
     puVar1[0x1b] = 0;

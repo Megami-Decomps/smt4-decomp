@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002c09d0(...);
+int gameFlagIsSet(...);
 
 extern int FUN_00298e20(short);
-/* Supplied declaration required: FUN_002c09d0. */
+/* Supplied declaration required: gameFlagIsSet. */
 
 
 unsigned int FUN_003a0284(int param_1)
@@ -18,13 +18,13 @@ unsigned int FUN_003a0284(int param_1)
   int temp_v1;
   
   if (*(short *)(param_1 + 2) != 0) {
-    temp_v1 = FUN_002c09d0();
+    temp_v1 = gameFlagIsSet();
     if (temp_v1 == 0) {
       return 0;
     }
     temp_v0 = *(short *)(param_1 + 4);
     if (temp_v0 != 0) {
-      temp_v1 = FUN_002c09d0(temp_v0);
+      temp_v1 = gameFlagIsSet(temp_v0);
       if (temp_v1 != 0) {
         return 0;
       }
@@ -43,7 +43,7 @@ unsigned int FUN_003a0284(int param_1)
       }
       return 0;
     }
-    temp_v1 = FUN_002c09d0(temp_v0);
+    temp_v1 = gameFlagIsSet(temp_v0);
     if (temp_v1 != 0) {
       return 0;
     }

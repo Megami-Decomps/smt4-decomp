@@ -6,9 +6,9 @@ extern "C" {
 
 int FUN_001f4908(...);
 int FUN_00290ba4(...);
-int FUN_002ce874(...);
-int FUN_002fe2ac(...);
-int FUN_00321744(...);
+int objectJobStop(...);
+int holderStopJob2(...);
+int btlTalkBustUpDestroy(...);
 int FUN_003d9164(...);
 int FUN_003f14a0(...);
 int FUN_004ab854(...);
@@ -35,7 +35,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_1_stack;
 
-extern int DAT_00571508; /* 0x571508 */
+extern int g_btlCamera; /* 0x571508 */
 extern int DAT_00573808; /* 0x573808 */
 extern int DAT_0057a684; /* 0x57a684 */
 extern int DAT_0057a688; /* 0x57a688 */
@@ -46,15 +46,15 @@ extern int DAT_0057a698; /* 0x57a698 */
 extern unsigned int DAT_0057a69c; /* 0x57a69c */
 extern unsigned int DAT_0057a6a0; /* 0x57a6a0 */
 extern int DAT_0057a6a4; /* 0x57a6a4 */
-extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
+extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
 extern int FUN_0013def0(unsigned int);
 extern unsigned int btlGetMainState(void);
 /* Supplied declaration required: FUN_001f4908. */
 /* Supplied declaration required: FUN_00290ba4. */
-/* Supplied declaration required: FUN_002ce874. */
-/* Supplied declaration required: FUN_002fe2ac. */
-/* Supplied declaration required: FUN_00321744. */
+/* Supplied declaration required: objectJobStop. */
+/* Supplied declaration required: holderStopJob2. */
+/* Supplied declaration required: btlTalkBustUpDestroy. */
 /* Supplied declaration required: FUN_003d9164. */
 /* Supplied declaration required: FUN_003f14a0. */
 /* Supplied declaration required: FUN_004ab854. */
@@ -100,7 +100,7 @@ unsigned int FUN_004cf370(fn_004cf370_arg0 *param_1)
   }
   if (param_1->field_0x14 == DAT_0057a684) {
     FUN_004fdcd8(0,0,0,0,7,0,0xb,0);
-    FUN_004ab854(DAT_0057a9c8);
+    FUN_004ab854(g_btlUiBlock);
   }
   if (param_1->field_0x14 == DAT_0057a698) {
     FUN_004fddf4(0,0,DAT_0057a69c,0x10,0,DAT_0057a6a0,0,2,0xffffffff);
@@ -116,11 +116,11 @@ unsigned int FUN_004cf370(fn_004cf370_arg0 *param_1)
   if (DAT_0057a6a4 < param_1->field_0x14) {
     temp_v1 = btlGetMainState();
     FUN_003f14a0();
-    FUN_00321744();
-    FUN_002fe2ac(temp_v1);
-    FUN_002ce874(temp_v1);
+    btlTalkBustUpDestroy();
+    holderStopJob2(temp_v1);
+    objectJobStop(temp_v1);
     FUN_00290ba4(temp_v1);
-    if (DAT_00571508 != 0) {
+    if (g_btlCamera != 0) {
       FUN_003d9164();
     }
     if (param_1->field_0x8 == 2) {

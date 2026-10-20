@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0018719c(...);
+int gameFlagIsSet(...);
 int dataTableGetCount(unsigned int);
 int dataTableGetEntries(void);
 
@@ -16,11 +16,11 @@ typedef struct {
 extern int *g_popupState; /* 0x58104c */
 extern unsigned char g_gameState; /* 0x5f15fc */
 
-extern int FUN_0014bef4(unsigned int);
+extern int randRange(unsigned int);
 extern int saveSlotFindSelected(void);
-extern int FUN_001801a4(void);
+extern int gameGetPlayerData(void);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0018719c. */
+/* Supplied declaration required: gameFlagIsSet. */
 /* Supplied declaration required: dataTableGetCount. */
 /* Supplied declaration required: dataTableGetEntries. */
 extern int FUN_002d8b58(unsigned int);
@@ -44,7 +44,7 @@ void FUN_00246128(void)
   if (*g_popupState != 0) {
     return;
   }
-  temp_v1 = FUN_001801a4();
+  temp_v1 = gameGetPlayerData();
   temp_v0 = *(unsigned short *)(temp_v1 + 0x62);
   temp_v1 = FUN_00480c28();
   if (temp_v0 < 0x15) {
@@ -68,9 +68,9 @@ void FUN_00246128(void)
   }
   temp_v1 = saveSlotFindSelected();
   if (((temp_v1 != 0) &&
-      (((temp_v2 = FUN_0018719c(0x8d), temp_v2 == 0 || (temp_v2 = FUN_0018719c(0xc2), temp_v2 != 0)) ||
+      (((temp_v2 = gameFlagIsSet(0x8d), temp_v2 == 0 || (temp_v2 = gameFlagIsSet(0xc2), temp_v2 != 0)) ||
        (*(short *)(temp_v1 + 300) != 0xb1)))) &&
-     ((temp_v2 = FUN_0018719c(0x1a2), temp_v2 == 0 || (temp_v2 = FUN_0014bef4(99), temp_v2 + 1 >= 0x33)))) {
+     ((temp_v2 = gameFlagIsSet(0x1a2), temp_v2 == 0 || (temp_v2 = randRange(99), temp_v2 + 1 >= 0x33)))) {
     temp_v3 = dataTableGet(0x43,0);
     dataTableGetEntries();
     temp_v2 = dataTableGetCount(temp_v3);
@@ -87,8 +87,8 @@ void FUN_00246128(void)
           puVar9 = (unsigned int *)(temp_v4 + temp_v6 * 0x20);
         }
         if ((((puVar9[1] == 0x12) && (*puVar9 == (unsigned int)*(unsigned short *)(temp_v1 + 300))) &&
-            (((short)puVar9[2] == 0 || (temp_v4 = FUN_0018719c(), temp_v4 != 0)))) &&
-           (((*(short *)((int)puVar9 + 10) == 0 || (temp_v4 = FUN_0018719c(), temp_v4 == 0)) &&
+            (((short)puVar9[2] == 0 || (temp_v4 = gameFlagIsSet(), temp_v4 != 0)))) &&
+           (((*(short *)((int)puVar9 + 10) == 0 || (temp_v4 = gameFlagIsSet(), temp_v4 == 0)) &&
             ((*(int *)((unsigned char *)&g_gameState + 0x394)) == 0)))) break;
         temp_v6 = temp_v6 + 1;
         if (temp_v2 <= (int)temp_v6) {

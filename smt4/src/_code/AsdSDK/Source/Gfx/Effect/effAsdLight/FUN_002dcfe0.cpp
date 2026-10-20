@@ -17,7 +17,7 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned int DAT_00464b7c; /* 0x464b7c */
-extern unsigned int DAT_00464b84; /* 0x464b84 */
+extern unsigned int g_asdModelTransformBuilder; /* 0x464b84 */
 
 extern unsigned int FUN_0024c3f8(int);
 /* Supplied declaration required: sceneTraverserVisit. */
@@ -64,7 +64,7 @@ unsigned int * FUN_002dcfe0(int param_1)
       FUN_002e113c();
       puVar1[0x43] = (unsigned int)puVar3;
     }
-    sceneTraverserVisit(DAT_00464b7c,DAT_00464b84);
+    sceneTraverserVisit(DAT_00464b7c,g_asdModelTransformBuilder);
   }
   return puVar1;
 }

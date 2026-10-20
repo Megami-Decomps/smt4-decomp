@@ -8,11 +8,11 @@ int FUN_0023f604(...);
 int FUN_003250ec(...);
 int FUN_003a7c00(...);
 int FUN_003c5fc4(...);
-int FUN_00480fc0(...);
+int flagValueSub(...);
 
 int FUN_001517b4(...);
 int FUN_001641b4(...);
-int FUN_00184c00(...);
+int uiSpriteSetImageKeyframe(...);
 int FUN_0019de98(...);
 int FUN_0020b660(...);
 int FUN_0021b274(...);
@@ -37,13 +37,13 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_1_stack;
 
-extern int DAT_0057f108; /* 0x57f108 */
+extern int g_camp; /* 0x57f108 */
 
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: FUN_001641b4. */
 extern unsigned short FUN_00167f08(void);
 extern unsigned int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00184c00. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_0020b660. */
 /* Supplied declaration required: FUN_0021b274. */
@@ -67,8 +67,8 @@ extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_003a7c00. */
 /* Supplied declaration required: FUN_003c5fc4. */
 /* Supplied declaration required: FUN_003da8f4. */
-/* Supplied declaration required: FUN_00480fc0. */
-extern int FUN_00481104(unsigned int);
+/* Supplied declaration required: flagValueSub. */
+extern int flagValueIsPositive(unsigned int);
 extern int FUN_00481404(void);
 /* Supplied declaration required: FUN_0048144c. */
 
@@ -87,18 +87,18 @@ void FUN_003daf0c(int param_1)
   int temp_v7;
   char temp_v8 [8];
   
-  temp_v5 = DAT_0057f108;
+  temp_v5 = g_camp;
   temp_v7 = 0;
   if (param_1 == 0xb) {
-    temp_v7 = DAT_0057f108 + 0xc0;
+    temp_v7 = g_camp + 0xc0;
   }
   else if (param_1 == 0xd) {
-    temp_v7 = DAT_0057f108 + 0x124;
+    temp_v7 = g_camp + 0x124;
   }
   else if (param_1 == 0xe) {
-    temp_v7 = DAT_0057f108 + 0x188;
+    temp_v7 = g_camp + 0x188;
   }
-  switch(*(unsigned int *)(DAT_0057f108 + 0x20)) {
+  switch(*(unsigned int *)(g_camp + 0x20)) {
   case 0:
     FUN_002cb278(temp_v7,1);
     temp_v7 = *(int *)(temp_v5 + 0x20) + 1;
@@ -200,7 +200,7 @@ void FUN_003daf0c(int param_1)
         FUN_0020b660(5);
         FUN_002adce8(temp_v7,1);
         FUN_00388758(1);
-        FUN_00184c00(DAT_0057f108 + 0x1634,7,0);
+        uiSpriteSetImageKeyframe(g_camp + 0x1634,7,0);
         FUN_001641b4(0x100020e);
         if (*(short *)(temp_v6 + 0x21b0) == 0x7a5 || *(short *)(temp_v6 + 0x21b0) == 0x7a6) {
           FUN_003a7c00(0);
@@ -220,8 +220,8 @@ void FUN_003daf0c(int param_1)
     }
     temp_v7 = FUN_002a4b74();
     if (temp_v7 == 0) {
-      FUN_00480fc0(0x79f,1);
-      temp_v5 = FUN_00481104(0x79f);
+      flagValueSub(0x79f,1);
+      temp_v5 = flagValueIsPositive(0x79f);
       if (temp_v5 == 0) {
         FUN_0023f604(0xb);
       }
@@ -242,8 +242,8 @@ void FUN_003daf0c(int param_1)
   case 4:
     temp_v7 = FUN_002a21e8();
     if ((temp_v7 != 0) && (temp_v7 = FUN_0026272c(), temp_v7 != 0)) {
-      FUN_00480fc0(0x7af,1);
-      temp_v7 = FUN_00481104(0x7af);
+      flagValueSub(0x7af,1);
+      temp_v7 = flagValueIsPositive(0x7af);
       if (temp_v7 == 0) {
         FUN_0023f604(0xb);
       }
@@ -257,7 +257,7 @@ void FUN_003daf0c(int param_1)
     if (temp_v6 != 0) {
       FUN_002adce8(temp_v7,1);
       FUN_00388758(1);
-      FUN_00184c00(DAT_0057f108 + 0x1634,7,0);
+      uiSpriteSetImageKeyframe(g_camp + 0x1634,7,0);
       FUN_0021b274(3,0xffffffff,0);
       *(unsigned int *)(temp_v5 + 0x24) = 0xc;
       FUN_0020b660(5);
@@ -269,7 +269,7 @@ void FUN_003daf0c(int param_1)
     if (temp_v6 != 0) {
       FUN_002adce8(temp_v7,1);
       FUN_00388758(1);
-      FUN_00184c00(DAT_0057f108 + 0x1634,7,0);
+      uiSpriteSetImageKeyframe(g_camp + 0x1634,7,0);
       FUN_0021b274(3,0xffffffff,0);
       *(unsigned int *)(temp_v5 + 0x24) = 0xd;
       FUN_0020b660(5);
@@ -281,7 +281,7 @@ void FUN_003daf0c(int param_1)
     if (temp_v6 != 0) {
       FUN_002adce8(temp_v7,1);
       FUN_00388758(1);
-      FUN_00184c00(DAT_0057f108 + 0x1634,7,0);
+      uiSpriteSetImageKeyframe(g_camp + 0x1634,7,0);
       FUN_0021b274(3,0xffffffff,0);
       *(unsigned int *)(temp_v5 + 0x24) = 0xe;
       FUN_0020b660(5);

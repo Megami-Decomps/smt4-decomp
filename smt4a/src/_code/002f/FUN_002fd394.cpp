@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e9538(unsigned int);
+int onlineSockAddrCopy(unsigned int);
 int FUN_0030f06c(...);
 
 /* stack frame of param_3: 6 slot(s), 24 byte(s) */
@@ -17,7 +17,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_002e9538. */
+/* Supplied declaration required: onlineSockAddrCopy. */
 extern int wordRefsEqual_0030f05c(int *, unsigned int *);
 /* Supplied declaration required: FUN_0030f06c. */
 
@@ -61,7 +61,7 @@ unsigned int FUN_002fd394(int param_1,unsigned int param_2,unsigned int param_3)
   }
   if (temp_v0 != *(int *)(param_1 + 0x14)) {
     *(unsigned int *)(temp_v0 + 0x50) = *(unsigned int *)(param_1 + 0x20);
-    FUN_002e9538(temp_v6);
+    onlineSockAddrCopy(temp_v6);
     temp_v4 = 1;
   }
   return temp_v4;

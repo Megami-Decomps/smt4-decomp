@@ -6,9 +6,9 @@ extern "C" {
 
 int FUN_00158314(void);
 int FUN_0015842c(unsigned char *);
-int FUN_0015a244(void);
+int gxLcdClearForceBlack(void);
 int FUN_0016182c(int, int);
-int FUN_0017cdb4(void);
+int nngxGetError(void);
 int registerBlockRequestGroups(int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -21,9 +21,9 @@ extern int DAT_00618100; /* 0x618100 */
 
 /* Supplied declaration required: FUN_00158314. */
 /* Supplied declaration required: FUN_0015842c. */
-/* Supplied declaration required: FUN_0015a244. */
+/* Supplied declaration required: gxLcdClearForceBlack. */
 /* Supplied declaration required: FUN_0016182c. */
-/* Supplied declaration required: FUN_0017cdb4. */
+/* Supplied declaration required: nngxGetError. */
 /* Supplied declaration required: registerBlockRequestGroups. */
 
 
@@ -34,10 +34,10 @@ void FUN_0013f4c4(int param_1)
   if (param_1 != 2) {
     registerBlockRequestGroups(0x3fff);
     FUN_0016182c(0x3fff,1);
-    FUN_0017cdb4();
+    nngxGetError();
   }
   else {
-    FUN_0015a244();
+    gxLcdClearForceBlack();
   }
   FUN_0015842c(&DAT_00617f40);
   if (DAT_00618100 != 0) {

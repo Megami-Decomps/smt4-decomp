@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00157558(int);
 int FUN_00164b5c(int, int, int, int, int, int);
-int FUN_0016c410(int);
+int renderCtxResetColorScale(int);
 int FUN_0016c560(int);
 int FUN_0018291c(int *, int *, int *, int *, int, int);
 int FUN_001835b4(int, int, int, int, int, int);
@@ -39,7 +39,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_00157558. */
 /* Supplied declaration required: FUN_00164b5c. */
 extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0016c410. */
+/* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: FUN_0016c560. */
 /* Supplied declaration required: FUN_0018291c. */
 /* Supplied declaration required: FUN_001835b4. */
@@ -123,7 +123,7 @@ int FUN_002a3604(int param_1)
       *(unsigned char *)(temp_v0 + 0x1270) = 0;
     }
     FUN_0016c560(g_renderCtx);
-    FUN_0016c410(g_renderCtx);
+    renderCtxResetColorScale(g_renderCtx);
     temp_v0 = 0;
   }
   return temp_v0;

@@ -5,23 +5,23 @@
 extern "C" {
 
 int jobStop(unsigned int, int);
-int FUN_001641c4(void);
+int ifTouchRegionRemove(void);
 int asdMemFree(void);
-int FUN_0019a7f4(int, int);
-int FUN_00237210(unsigned int);
+int asdTMTexTableReleaseNode(int, int);
+int asdMemFreeSlot(unsigned int);
 int asdTMTexTableFreeEntry(int);
-int FUN_002e3328(void);
+int asdOperatorDelete(void);
 
 extern unsigned char DAT_0057f23c; /* 0x57f23c */
 
 /* Supplied declaration required: jobStop. */
-/* Supplied declaration required: FUN_001641c4. */
-extern int FUN_0018206c(unsigned int, int);
+/* Supplied declaration required: ifTouchRegionRemove. */
+extern int asdTMTexTableNodeIsLoaded(unsigned int, int);
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_0019a7f4. */
-/* Supplied declaration required: FUN_00237210. */
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
+/* Supplied declaration required: asdMemFreeSlot. */
 /* Supplied declaration required: asdTMTexTableFreeEntry. */
-/* Supplied declaration required: FUN_002e3328. */
+/* Supplied declaration required: asdOperatorDelete. */
 
 
 void FUN_0031d088(void)
@@ -36,13 +36,13 @@ void FUN_0031d088(void)
   temp_v0 = 0;
   if (*(short *)((*(unsigned int * *)((unsigned char *)&DAT_0057f23c + 0x4)) + 0x86) != 0) {
     do {
-      FUN_001641c4();
+      ifTouchRegionRemove();
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < (int)(unsigned int)*(unsigned short *)(puVar1 + 0x86));
   }
   temp_v0 = 0;
   do {
-    FUN_00237210(puVar1[temp_v0 + 0x22]);
+    asdMemFreeSlot(puVar1[temp_v0 + 0x22]);
     temp_v1 = temp_v0 + 1;
     puVar1[temp_v0 + 0x22] = 0;
     temp_v0 = temp_v1;
@@ -57,16 +57,16 @@ void FUN_0031d088(void)
   }
   temp_v0 = 0;
   do {
-    temp_v1 = FUN_0018206c(0x33,temp_v0);
+    temp_v1 = asdTMTexTableNodeIsLoaded(0x33,temp_v0);
     if (temp_v1 != 0) {
-      FUN_0019a7f4(0x33,temp_v0);
+      asdTMTexTableReleaseNode(0x33,temp_v0);
     }
     temp_v0 = temp_v0 + 1;
   } while (temp_v0 < 0x13);
   asdTMTexTableFreeEntry(0x33);
   jobStop(*puVar1,0);
   if ((*(unsigned int * *)((unsigned char *)&DAT_0057f23c + 0x4)) != (unsigned int *)0x0) {
-    FUN_002e3328();
+    asdOperatorDelete();
     (*(unsigned int * *)((unsigned char *)&DAT_0057f23c + 0x4)) = (unsigned int *)0x0;
   }
   return;

@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_00184758(int, int, int);
+int uiSpriteSetKeyframe(int, int, int);
 
-/* Supplied declaration required: FUN_00184758. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
 
 
 void FUN_00336da0(int param_1)
@@ -16,7 +16,7 @@ void FUN_00336da0(int param_1)
   if (*(int *)(param_1 + 0x243c) == 1) {
     *(int *)(param_1 + 0x243c) = 6;
     *(unsigned int *)(param_1 + 0x2438) = 0;
-    FUN_00184758(param_1 + 0x20f0,0,1);
+    uiSpriteSetKeyframe(param_1 + 0x20f0,0,1);
     return;
   }
   return;

@@ -9,7 +9,7 @@ int FUN_002a6d1c(...);
 int FUN_002a8ac4(...);
 int FUN_002b1fc4(...);
 int FUN_002b2144(...);
-int FUN_002b90f8(...);
+int cameraSetViewMatrix(...);
 int FUN_002bf538(void);
 int mtx44Copy(...);
 int FUN_002c18e4(...);
@@ -83,7 +83,7 @@ extern int FUN_002a6d50(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002a8ac4. */
 /* Supplied declaration required: FUN_002b1fc4. */
 /* Supplied declaration required: FUN_002b2144. */
-/* Supplied declaration required: FUN_002b90f8. */
+/* Supplied declaration required: cameraSetViewMatrix. */
 extern unsigned int asdTMTexTableCallFileB(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bf538. */
 /* Supplied declaration required: mtx44Copy. */
@@ -340,7 +340,7 @@ void FUN_003881b8(unsigned int param_1,unsigned int param_2,unsigned int param_3
           nn_math_ARMv6_MTX44MultAsm(temp_v12,temp_v12,temp_v11);
         }
       }
-      FUN_002b90f8(g_titleScene,temp_v12);
+      cameraSetViewMatrix(g_titleScene,temp_v12);
       if ((int)param_4[2] < 0) {
         temp_v0 = FUN_002a6d50(param_1,0x15,param_3);
         if (temp_v0 != 0) {

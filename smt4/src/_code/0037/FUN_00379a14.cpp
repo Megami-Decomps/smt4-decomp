@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b4f40(int, int);
+int listAppendNode(int, int);
 int FUN_002b4f64(int, int);
 int nw_snd_SoundHandle_DetachSound(void);
 int nw_snd_SoundPlayer_detail_FreePlayerHeap(int, int *);
@@ -12,7 +12,7 @@ int nw_snd_SoundPlayer_detail_RemoveSound(int, int *);
 int nw_snd_internal_ExternalSoundPlayer_RemoveSound(int, int *);
 
 typedef int romwright_code(...);
-/* Supplied declaration required: FUN_002b4f40. */
+/* Supplied declaration required: listAppendNode. */
 /* Supplied declaration required: FUN_002b4f64. */
 extern int FUN_002baed8(void);
 /* Supplied declaration required: nw_snd_SoundHandle_DetachSound. */
@@ -40,7 +40,7 @@ void FUN_00379a14(int *param_1)
       temp_v1 = (**(romwright_code **)(*param_1 + 0x20))(param_1);
       *(unsigned int *)(temp_v2 + 0x10) = temp_v1;
       *(char *)(temp_v2 + 0x14) = (char)param_1[0x22];
-      FUN_002b4f40(temp_v0,temp_v2);
+      listAppendNode(temp_v0,temp_v2);
     }
     *(unsigned char *)((int)param_1 + 0x89) = 0;
     *(unsigned char *)((int)param_1 + 0x8a) = 2;
@@ -78,7 +78,7 @@ void FUN_00379a14(int *param_1)
     *(unsigned char *)(temp_v2 + 4) = 4;
     temp_v1 = (**(romwright_code **)(*param_1 + 0x20))(param_1);
     *(unsigned int *)(temp_v2 + 0x10) = temp_v1;
-    FUN_002b4f40(temp_v0,temp_v2);
+    listAppendNode(temp_v0,temp_v2);
     *(unsigned char *)(param_1 + 0x21) = 0;
   }
   return;

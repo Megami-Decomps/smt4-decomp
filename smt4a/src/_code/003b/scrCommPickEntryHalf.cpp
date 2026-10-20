@@ -3,7 +3,7 @@
 extern "C" {
 
 extern s32 FUN_003e4a00(void);
-extern s32 FUN_0014bef4(u32 value);
+extern s32 randRange(u32 value);
 extern Rec12C *FUN_003e4d68(u32 index);
 extern s32 FUN_00187168(Rec12C *entry);
 extern void scrSetResult(u32 value);
@@ -18,7 +18,7 @@ u32 scrCommPickEntryHalf(void)
     Rec12C *entry;
 
     if (0 < count) {
-        skip = FUN_0014bef4((count + 1U) & 0xFFFF);
+        skip = randRange((count + 1U) & 0xFFFF);
         i = 0;
         do {
             entry = FUN_003e4d68(i & 0xFFFF);

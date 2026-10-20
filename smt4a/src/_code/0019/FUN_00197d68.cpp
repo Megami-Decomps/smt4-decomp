@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00188b60(unsigned int *);
+int nn_os_CriticalSection_Initialize(unsigned int *);
 int hasExclusiveAccess(unsigned int *);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
@@ -13,7 +13,7 @@ typedef struct {
 } param_3_stack;
 
 /* Unsupported intrinsic, declaration required: hasExclusiveAccess (CALLOTHER). */
-/* Supplied declaration required: FUN_00188b60. */
+/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
 
 
 void FUN_00197d68(unsigned int *param_1,unsigned int param_2,unsigned int param_3)
@@ -52,7 +52,7 @@ void FUN_00197d68(unsigned int *param_1,unsigned int param_2,unsigned int param_
   } while (!temp_v0);
   *(unsigned short *)(param_1 + 4) = 0;
   *(unsigned short *)((int)param_1 + 0x12) = 0x7fff;
-  FUN_00188b60(param_1 + 5);
+  nn_os_CriticalSection_Initialize(param_1 + 5);
   return;
 }
 

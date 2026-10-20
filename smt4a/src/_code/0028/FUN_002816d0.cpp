@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_00281720(u32 handle, s32 flag);
+void linkHolderApplyFlag(u32 handle, s32 flag);
 void FUN_002844e4(void);
 
 typedef struct Screen {
@@ -20,18 +20,18 @@ typedef struct Screen {
     /* 0x115 */ u8 unk115[0x37];
     /* 0x14C */ u32 unk14C;
 } Screen;
-extern Screen *DAT_0057f118;
+extern Screen *g_campCecEdit;
 
-/* Resets the screen at 0x57F118 (if there is one): runs FUN_002844e4 and FUN_00281720 and restores its fields to their initial values. */
+/* Resets the screen at 0x57F118 (if there is one): runs FUN_002844e4 and linkHolderApplyFlag and restores its fields to their initial values. */
 void FUN_002816d0(void)
 {
     Screen *screen;
 
-    screen = DAT_0057f118;
-    if (DAT_0057f118 != NULL) {
+    screen = g_campCecEdit;
+    if (g_campCecEdit != NULL) {
         FUN_002844e4();
         screen->unk114 = 0;
-        FUN_00281720(screen->handle, 0);
+        linkHolderApplyFlag(screen->handle, 0);
         screen->unk10F = 1;
         screen->unk0E8 = 0xFFFFFFFF;
         screen->unk0F8 = 1;

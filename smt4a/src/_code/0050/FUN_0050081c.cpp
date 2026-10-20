@@ -21,7 +21,7 @@ typedef struct {
 
 extern unsigned char LAB_005008ec; /* 0x5008ec */
 
-extern int FUN_0019a37c(unsigned int, unsigned char *, unsigned int);
+extern int libc_strncmp(unsigned int, unsigned char *, unsigned int);
 
 
 void FUN_0050081c(unsigned int *param_1,int *param_2)
@@ -59,7 +59,7 @@ void FUN_0050081c(unsigned int *param_1,int *param_2)
     temp_v4 = *(unsigned int *)(temp_v2 + 0x1c);
     if (temp_v4 != 0) {
       do {
-        temp_v0 = FUN_0019a37c(*(unsigned int *)(*(int *)(temp_v2 + 0x18) + temp_v3 * 8),&LAB_005008ec,0x40)
+        temp_v0 = libc_strncmp(*(unsigned int *)(*(int *)(temp_v2 + 0x18) + temp_v3 * 8),&LAB_005008ec,0x40)
         ;
         if (temp_v0 == 0) {
           temp_v1 = *(unsigned int *)(*(int *)(temp_v2 + 0x18) + temp_v3 * 8 + 4);

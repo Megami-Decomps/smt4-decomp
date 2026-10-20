@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0013ebd8(...);
 int vcallSlot12IfValid(unsigned int);
-int FUN_00195fc8(void);
+int sysFatalBreak(void);
 
 typedef int romwright_code(...);
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -16,7 +16,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_0013ebd8. */
 /* Supplied declaration required: vcallSlot12IfValid. */
-/* Supplied declaration required: FUN_00195fc8. */
+/* Supplied declaration required: sysFatalBreak. */
 
 
 int FUN_002e0a6c(int *param_1,unsigned int param_2,unsigned int param_3,int param_4)
@@ -47,7 +47,7 @@ int FUN_002e0a6c(int *param_1,unsigned int param_2,unsigned int param_3,int para
   }
   if ((temp_v1 & 0xfffffffe) != 0) {
     if ((temp_v1 & 1) != 0) {
-      FUN_00195fc8();
+      sysFatalBreak();
     }
     vcallSlot12IfValid(param_1[2] & 0xfffffffe);
     param_1[2] = 0;

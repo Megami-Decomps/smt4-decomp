@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00157558(int);
-int FUN_0016c410(...);
+int renderCtxResetColorScale(...);
 int FUN_0016c560(...);
 int FUN_0021775c(unsigned int, unsigned int);
 int FUN_00217f14(void);
@@ -19,14 +19,14 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } void_stack;
 
-extern int DAT_0057f108; /* 0x57f108 */
+extern int g_camp; /* 0x57f108 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: FUN_00157558. */
-extern unsigned int FUN_001654d8(void);
-extern unsigned int FUN_001654e4(int);
+extern unsigned int vec2GetXInt(void);
+extern unsigned int vec2GetYInt(int);
 extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0016c410. */
+/* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: FUN_0016c560. */
 /* Supplied declaration required: FUN_0021775c. */
 /* Supplied declaration required: FUN_00217f14. */
@@ -51,7 +51,7 @@ unsigned int FUN_00227418(void)
   int temp_v7;
   int *piVar9;
   
-  temp_v1 = DAT_0057f108;
+  temp_v1 = g_camp;
   FUN_00157558(g_renderCtx);
   temp_v3 = g_renderCtx;
   temp_v2 = FUN_001692ac(1,0);
@@ -132,8 +132,8 @@ LAB_002276bc:
           temp_v0 = *(char *)(temp_v1 + 0x6e2);
           goto joined_r0x00227700;
         }
-        temp_v4 = FUN_001654d8();
-        temp_v5 = FUN_001654e4(temp_v1 + 0x888);
+        temp_v4 = vec2GetXInt();
+        temp_v5 = vec2GetYInt(temp_v1 + 0x888);
         FUN_002aa56c(temp_v4,temp_v5,(int)*(char *)(temp_v1 + 0xb9),(int)*(char *)(temp_v1 + 0xb8),
                      (int)*(short *)(temp_v1 + *(char *)(temp_v1 + 0xb9) * 2 + 0x1b54));
         FUN_00217f14();
@@ -143,8 +143,8 @@ LAB_002276bc:
         temp_v0 = *(char *)(temp_v1 + 0x6e2);
 joined_r0x00227700:
         if (temp_v0 != '\0') break;
-        temp_v4 = FUN_001654d8();
-        temp_v5 = FUN_001654e4(temp_v1 + 0x888);
+        temp_v4 = vec2GetXInt();
+        temp_v5 = vec2GetYInt(temp_v1 + 0x888);
         FUN_002aa56c(temp_v4,temp_v5,(int)*(char *)(temp_v1 + 0xb9),(int)*(char *)(temp_v1 + 0xb8),
                      (int)*(short *)(temp_v1 + *(char *)(temp_v1 + 0xb9) * 2 + 0x1b54));
         FUN_00217f14();
@@ -164,8 +164,8 @@ LAB_00227588:
       FUN_00288538(0);
     }
     if (*(char *)(temp_v1 + 0xb7) != '\0') {
-      temp_v4 = FUN_001654d8();
-      temp_v5 = FUN_001654e4(temp_v1 + 0x888);
+      temp_v4 = vec2GetXInt();
+      temp_v5 = vec2GetYInt(temp_v1 + 0x888);
       FUN_002aa56c(temp_v4,temp_v5,(int)*(char *)(temp_v1 + 0xb9),(int)*(char *)(temp_v1 + 0xb8),
                    (int)*(short *)(temp_v1 + *(char *)(temp_v1 + 0xb9) * 2 + 0x1b54));
     }
@@ -182,7 +182,7 @@ LAB_00227770:
     *(unsigned char *)(temp_v1 + 0x1270) = 0;
   }
   FUN_0016c560(g_renderCtx);
-  FUN_0016c410(g_renderCtx);
+  renderCtxResetColorScale(g_renderCtx);
   return 0;
 }
 

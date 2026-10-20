@@ -5,7 +5,7 @@
 extern "C" {
 
 int jobStop(int, int);
-int FUN_001add24(int);
+int dataTableFree(int);
 int FUN_00493154(void);
 int FUN_004a6d5c(int);
 
@@ -15,10 +15,10 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-extern int DAT_0056fcc0; /* 0x56fcc0 */
+extern int g_handleRegistry; /* 0x56fcc0 */
 
 /* Supplied declaration required: jobStop. */
-/* Supplied declaration required: FUN_001add24. */
+/* Supplied declaration required: dataTableFree. */
 /* Supplied declaration required: FUN_00493154. */
 /* Supplied declaration required: FUN_004a6d5c. */
 
@@ -32,12 +32,12 @@ void FUN_004a4a10(int *param_1)
     param_1[0x213] = 0;
   }
   FUN_004a6d5c((int)param_1 + 0x96);
-  *(unsigned int *)(DAT_0056fcc0 + 0x34) = *(unsigned int *)(DAT_0056fcc0 + 0x34) & 0xfffffffc;
+  *(unsigned int *)(g_handleRegistry + 0x34) = *(unsigned int *)(g_handleRegistry + 0x34) & 0xfffffffc;
   if ((char)param_1[0x218] == '\x01') {
     FUN_00493154();
   }
   (**(romwright_code **)(*param_1 + 0x28))(param_1);
-  FUN_001add24(0x22);
+  dataTableFree(0x22);
   jobStop(param_1[1],0);
   return;
 }

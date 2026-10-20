@@ -2,9 +2,9 @@
 
 extern "C" {
 
-extern Player1C *FUN_001801a4(void);
-extern SlotTable *FUN_001ab888(void);
-extern Lookup62 *FUN_001ab854(s8 slot);
+extern Player1C *gameGetPlayerData(void);
+extern SlotTable *gameGetSlotTable(void);
+extern Lookup62 *gameGetSlotRecord(s8 slot);
 extern s32 FUN_0017760c(Lookup62 *entry);
 extern Lookup62 *FUN_003e4d68(u32 index);
 extern u32 FUN_00187168(Lookup62 *entry);
@@ -18,13 +18,13 @@ u32 heldAmountLessThan(s32 amount, u32 id)
     u32 j;
 
     if ((s32)id < 0) {
-        if (FUN_001801a4()->value < amount) {
+        if (gameGetPlayerData()->value < amount) {
             return 1;
         }
     } else {
-        table = FUN_001ab888();
+        table = gameGetSlotTable();
         for (i = 0; i < 0x18; i++) {
-            if (table->slots[i] >= 0 && (entry = FUN_001ab854(table->slots[i])) != NULL && entry->id == id) {
+            if (table->slots[i] >= 0 && (entry = gameGetSlotRecord(table->slots[i])) != NULL && entry->id == id) {
                 if (FUN_0017760c(entry) < amount) {
                     return 1;
                 }

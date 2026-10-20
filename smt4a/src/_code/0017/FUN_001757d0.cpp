@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_001afdc4(u32 handle);
+void nn_snd_CTR_FreeVoice(u32 handle);
 
 typedef struct Handles {
     /* 0x00 */ u32 handle[2];
@@ -16,7 +16,7 @@ Handles *FUN_001757d0(Handles *object)
     i = 0;
     do {
         if (object->handle[i] != 0) {
-            FUN_001afdc4(object->handle[i]);
+            nn_snd_CTR_FreeVoice(object->handle[i]);
         }
         i = i + 1;
     } while (i < 2);

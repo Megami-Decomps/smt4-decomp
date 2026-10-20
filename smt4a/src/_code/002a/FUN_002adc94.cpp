@@ -2,8 +2,8 @@
 
 extern "C" {
 
-void FUN_0019a840(void *object);
-void FUN_002267b0(void *object, u32 a, u32 b, s32 c);
+void asdTextureSetImage(void *object);
+void asdTexTgaLoadNw4c(void *object, u32 a, u32 b, s32 c);
 
 typedef struct Object {
     /* 0x00 */ u8 unk00[0x0C];
@@ -21,15 +21,15 @@ typedef struct Holder {
     /* 0x48 */ u8 ready;
 } Holder;
 
-/* Sets the held object up with FUN_002267b0(object, arg, `value`, 0x10000), fixes its fields and marks the holder ready. */
+/* Sets the held object up with asdTexTgaLoadNw4c(object, arg, `value`, 0x10000), fixes its fields and marks the holder ready. */
 void FUN_002adc94(u32 unused, Holder *holder, u32 value)
 {
-    FUN_002267b0(holder->object, holder->arg, value, 0x10000);
+    asdTexTgaLoadNw4c(holder->object, holder->arg, value, 0x10000);
     holder->object->unk0C = 0x2000000;
     holder->object->unk3C = 1;
     holder->object->unk40 = 1;
     holder->object->unk38 = 0;
-    FUN_0019a840(holder->object);
+    asdTextureSetImage(holder->object);
     holder->ready = 1;
 }
 

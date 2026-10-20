@@ -2,9 +2,9 @@
 
 extern "C" {
 
-extern void *FUN_002a8740(void);
-extern u8 *FUN_002a8764(void);
-extern void *FUN_002b63ac(void);
+extern void *gameGetUnitRecord(void);
+extern u8 *gameGetSlotTable(void);
+extern void *gameGetPlayerData(void);
 
 typedef struct Pad {
     /* 0x00 */ u8 unk00[0x1C];
@@ -31,15 +31,15 @@ int FUN_00288ddc(int limit, u32 id)
     int i;
 
     if ((int)id < 0) {
-        pad = (Pad *)FUN_002b63ac();
+        pad = (Pad *)gameGetPlayerData();
         if (pad->unk1C < limit) {
             return 1;
         }
     } else {
-        party = (Party *)FUN_002a8764();
+        party = (Party *)gameGetSlotTable();
         i = 0;
         do {
-            if ((((party->slots[i] >= 0) && (unit = (Unit *)FUN_002a8740(), unit != NULL)) &&
+            if ((((party->slots[i] >= 0) && (unit = (Unit *)gameGetUnitRecord(), unit != NULL)) &&
                  (unit->id == id)) && (unit->unk0E < limit)) {
                 return 1;
             }

@@ -6,9 +6,9 @@ extern "C" {
 
 int FUN_00186f58(void);
 
-extern int FUN_001801a4(void);
+extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00186f58. */
-extern int FUN_0018719c(void);
+extern int gameFlagIsSet(void);
 extern unsigned int FUN_002e5c2c(void);
 extern int gameDataBlockGetArea2D68(void);
 
@@ -27,10 +27,10 @@ unsigned char FUN_003e4230(int param_1)
   temp_v1 = param_1;
   FUN_00186f58();
   if ((temp_v1 != 0) &&
-     (temp_v2 = FUN_001801a4(), *(unsigned short *)(temp_v1 + 0x2a) >> 6 <= *(unsigned short *)(temp_v2 + 0x62))) {
+     (temp_v2 = gameGetPlayerData(), *(unsigned short *)(temp_v1 + 0x2a) >> 6 <= *(unsigned short *)(temp_v2 + 0x62))) {
     temp_v2 = 0;
     do {
-      if ((*(short *)(temp_v1 + temp_v2 * 2 + 0x2c) != 0) && (temp_v3 = FUN_0018719c(), temp_v3 == 0)) {
+      if ((*(short *)(temp_v1 + temp_v2 * 2 + 0x2c) != 0) && (temp_v3 = gameFlagIsSet(), temp_v3 == 0)) {
         return (unsigned char)2;
       }
       temp_v2 = temp_v2 + 1;

@@ -6,19 +6,19 @@ extern "C" {
 
 int FUN_002ea2a8(int *, int);
 int FUN_002ea2b4(unsigned char *, int *);
-int FUN_002ea2d2(int *);
+int ptrHolderDestroy(int *);
 int FUN_002ecac4(int);
 
 extern unsigned char DAT_0055b1ec; /* 0x55b1ec */
 extern unsigned char DAT_00594ec4; /* 0x594ec4 */
 
-extern int FUN_002e9318(unsigned int *);
+extern int onlineStringDestroy(unsigned int *);
 /* Supplied declaration required: FUN_002ea2a8. */
 /* Supplied declaration required: FUN_002ea2b4. */
-/* Supplied declaration required: FUN_002ea2d2. */
+/* Supplied declaration required: ptrHolderDestroy. */
 /* Supplied declaration required: FUN_002ecac4. */
 extern int FUN_002fb028(int);
-extern int FUN_0030fc0c(int);
+extern int ptrHolderDestroyAlias(int);
 
 
 void FUN_002ea614(unsigned int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -34,9 +34,9 @@ void FUN_002ea614(unsigned int *param_1,unsigned int param_2,unsigned int param_
   uStack_c = param_4;
   FUN_002ea2a8(&uStack_10,0);
   FUN_002ea2b4(&DAT_00594ec4,&uStack_10);
-  FUN_002ea2d2(&uStack_10);
-  temp_v0 = FUN_002e9318(param_1 + 0x44);
-  temp_v0 = FUN_0030fc0c(temp_v0 - 8);
+  ptrHolderDestroy(&uStack_10);
+  temp_v0 = onlineStringDestroy(param_1 + 0x44);
+  temp_v0 = ptrHolderDestroyAlias(temp_v0 - 8);
   temp_v0 = FUN_002fb028(temp_v0 - 0xa0);
   FUN_002ecac4(temp_v0 - 0x68);
   return;

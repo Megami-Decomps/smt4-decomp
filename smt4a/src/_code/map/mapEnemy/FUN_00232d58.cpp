@@ -19,7 +19,7 @@ extern unsigned char LAB_0027d754; /* 0x27d754 */
 extern unsigned char LAB_00315d0c; /* 0x315d0c */
 extern unsigned int *DAT_005806d4; /* 0x5806d4 */
 
-extern int FUN_0014bef4(unsigned int);
+extern int randRange(unsigned int);
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 
@@ -87,7 +87,7 @@ void FUN_00232d58(unsigned int param_1)
     *(unsigned char *)((int)puVar1 + temp_v1 * 0x188 + 0xb2) = 0;
     puVar1[temp_v1 * 0x62 + 0x2e] = 0;
     puVar1[temp_v1 * 0x62 + 0x2f] = 0;
-    temp_v0 = FUN_0014bef4(200);
+    temp_v0 = randRange(200);
     puVar1[temp_v1 * 0x62 + 0x30] = temp_v0 + 0x3c;
     puVar1[temp_v1 * 0x62 + 0x31] = 0;
     puVar1[temp_v1 * 0x62 + 0x69] = 0;

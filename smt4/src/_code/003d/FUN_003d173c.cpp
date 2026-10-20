@@ -8,7 +8,7 @@ int FUN_00229ad4(...);
 int FUN_00244fb0(...);
 int FUN_0026c820(...);
 int FUN_002a0cb0(void);
-int FUN_002b8838(void);
+int buttonHelpSetPreset(void);
 int FUN_00339828(...);
 
 int FUN_00227750(...);
@@ -49,7 +49,7 @@ typedef struct {
 extern unsigned int g_btlMain; /* 0x4342c8 */
 extern unsigned int DAT_00435d18; /* 0x435d18 */
 extern unsigned int DAT_004398d4; /* 0x4398d4 */
-extern unsigned int DAT_00439ca8; /* 0x439ca8 */
+extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 
 /* Supplied declaration required: FUN_00227750. */
 /* Supplied declaration required: FUN_00229ad4. */
@@ -66,7 +66,7 @@ extern int FUN_00245278(int, unsigned int);
 extern int FUN_00293ed0(int);
 /* Supplied declaration required: FUN_00295d28. */
 /* Supplied declaration required: FUN_002a0cb0. */
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: FUN_002c1658. */
 /* Supplied declaration required: FUN_00338358. */
 /* Supplied declaration required: FUN_00338404. */
@@ -168,7 +168,7 @@ unsigned int FUN_003d173c(int *param_1,int param_2)
           FUN_0033a264(*param_1);
           FUN_003d6408(g_btlMain);
           FUN_003d5ef4(g_btlMain);
-          FUN_00267d3c(DAT_00439ca8);
+          FUN_00267d3c(g_btlUiBlock);
           FUN_00245228(*param_1,0,10);
           FUN_002505c0(0,param_2,0x100010a,0,0,0,1);
         }
@@ -204,9 +204,9 @@ unsigned int FUN_003d173c(int *param_1,int param_2)
           FUN_00338fb0(*param_1);
           FUN_00338754(*param_1);
           FUN_00339828(*param_1);
-          FUN_0026c820(DAT_00439ca8);
+          FUN_0026c820(g_btlUiBlock);
           FUN_002a0cb0();
-          FUN_002b8838();
+          buttonHelpSetPreset();
           FUN_00229ad4(param_1);
           temp_v4 = 1;
         }

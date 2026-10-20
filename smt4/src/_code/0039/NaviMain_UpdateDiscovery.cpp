@@ -50,10 +50,10 @@ extern signed char DAT_0049f941; /* 0x49f941 */
 /* Supplied declaration required: FUN_00231dec. */
 extern unsigned int lmapSceneGetObj(void);
 extern int FUN_00288f78(int);
-extern int padIsButtonDown(unsigned int);
+extern int flagBitIsSet(unsigned int);
 extern int FUN_002b8694(void);
 /* Supplied declaration required: FUN_002bed3c. */
-extern int FUN_002c09d0(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_002c18e4. */
 /* Supplied declaration required: FUN_002c198c. */
 /* Supplied declaration required: FUN_002c39a4. */
@@ -296,9 +296,9 @@ LAB_0039f450:
       temp_v6 = temp_v6 + 1;
     } while (temp_v6 < 9);
   }
-  temp_v4 = FUN_002c09d0(0x400);
+  temp_v4 = gameFlagIsSet(0x400);
   if (temp_v4 != 0) {
-    temp_v6 = padIsButtonDown(0x76);
+    temp_v6 = flagBitIsSet(0x76);
     temp_v4 = 0;
     if (temp_v6 != 0) {
       temp_v4 = *(int *)(param_1 + 4);

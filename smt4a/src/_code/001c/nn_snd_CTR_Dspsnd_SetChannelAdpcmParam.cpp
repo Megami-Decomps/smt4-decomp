@@ -15,12 +15,12 @@ typedef struct Dspsnd {
     /* 0x131E */ u16 paramSlot;
 } Dspsnd;
 
-extern s32 FUN_001c6e20(void);
+extern s32 nn_snd_CTR_Dspsnd_IsInitialized(void);
 extern s32 rt_memcpy(void *dest, const void *src, s32 size);
 
 u8 nn_snd_CTR_Dspsnd_SetChannelAdpcmParam(Dspsnd *dspsnd, u8 channel, const void *param)
 {
-    s32 ready = FUN_001c6e20();
+    s32 ready = nn_snd_CTR_Dspsnd_IsInitialized();
 
     if (ready != 0) {
         u32 *flags = dspsnd->channelFlags[dspsnd->flagSlot & 1][channel];

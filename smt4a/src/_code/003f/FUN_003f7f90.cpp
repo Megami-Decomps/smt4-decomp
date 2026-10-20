@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00157558(int);
 int efctSetSpeed(void);
-int FUN_0016c410(int);
+int renderCtxResetColorScale(int);
 int FUN_0016c560(int);
 int FUN_001835b4(int, int, int, unsigned int, unsigned int, int);
 int FUN_003f66dc(int, unsigned int, unsigned int);
@@ -21,12 +21,12 @@ typedef struct {
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: FUN_00157558. */
-extern unsigned int FUN_001654d8(int);
-extern unsigned int FUN_001654e4(int);
+extern unsigned int vec2GetXInt(int);
+extern unsigned int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0016c410. */
+/* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: FUN_0016c560. */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_003f66dc. */
@@ -57,8 +57,8 @@ unsigned int FUN_003f7f90(int param_1)
       (**(romwright_code **)(temp_v0 + 0x1274))();
       *(unsigned char *)(temp_v0 + 0x1270) = 0;
     }
-    temp_v2 = FUN_001654d8(param_1 + 0x16c);
-    temp_v3 = FUN_001654e4(param_1 + 0x16c);
+    temp_v2 = vec2GetXInt(param_1 + 0x16c);
+    temp_v3 = vec2GetYInt(param_1 + 0x16c);
     FUN_003f66dc(param_1,temp_v2,temp_v3);
     switch(*(unsigned int *)(param_1 + 0x14)) {
     case 0:
@@ -95,7 +95,7 @@ unsigned int FUN_003f7f90(int param_1)
       *(unsigned char *)(temp_v0 + 0x12d0) = 0;
     }
     FUN_0016c560(g_renderCtx);
-    FUN_0016c410(g_renderCtx);
+    renderCtxResetColorScale(g_renderCtx);
   }
   return 0;
 }

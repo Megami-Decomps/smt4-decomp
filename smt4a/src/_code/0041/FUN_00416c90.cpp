@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_00237210(void);
+int asdMemFreeSlot(void);
 
-/* Supplied declaration required: FUN_00237210. */
+/* Supplied declaration required: asdMemFreeSlot. */
 
 
 int FUN_00416c90(int param_1)
@@ -31,7 +31,7 @@ int FUN_00416c90(int param_1)
     puVar1[3] = temp_v1;
     puVar1[2] = temp_v1;
     if (puVar1[0x2a] != 0) {
-      FUN_00237210();
+      asdMemFreeSlot();
       puVar1[0x2a] = 0;
     }
     temp_v0 = temp_v0 + 1;

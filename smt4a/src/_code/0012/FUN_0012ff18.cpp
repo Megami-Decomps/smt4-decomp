@@ -14,7 +14,7 @@ typedef struct {
     Node *head;         /* 0x00 */
 } NodeList;
 
-int FUN_002e6e14(void *block);
+int asdOperatorDeleteArray(void *block);
 
 /* Frees every node of the list and its payload. */
 void FUN_0012ff18(NodeList *list)
@@ -23,8 +23,8 @@ void FUN_0012ff18(NodeList *list)
 
     while ((node = list->head) != NULL) {
         list->head = node->next;
-        FUN_002e6e14(node->payload);
-        FUN_002e6e14(node);
+        asdOperatorDeleteArray(node->payload);
+        asdOperatorDeleteArray(node);
     }
 }
 

@@ -74,7 +74,7 @@ extern int FUN_0025a140(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002879dc. */
 /* Supplied declaration required: FUN_00287aec. */
 /* Supplied declaration required: FUN_00291e40. */
-extern int FUN_00296d6c(unsigned int, unsigned int);
+extern int randBetween(unsigned int, unsigned int);
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -376,7 +376,7 @@ joined_r0x002c99a8:
               if (*(int *)(g_lmapScene + 8) == 2) {
                 FUN_0028250c();
                 FUN_00282390();
-                temp_v2 = FUN_00296d6c(0,2);
+                temp_v2 = randBetween(0,2);
                 FUN_00291e40(temp_v2 + 0x1000235);
               }
               if (*(int *)(g_lmapScene + 8) == 3) {
@@ -397,7 +397,7 @@ joined_r0x002c99a8:
             if (*(int *)(g_lmapScene + 8) == 2) {
               FUN_0028250c();
               FUN_00282390();
-              temp_v2 = FUN_00296d6c(0,2);
+              temp_v2 = randBetween(0,2);
               FUN_00291e40(temp_v2 + 0x1000232);
             }
             if (*(int *)(g_lmapScene + 8) == 3) {
@@ -418,7 +418,7 @@ joined_r0x002c99a8:
             FUN_00291e40(0x10001f1);
             FUN_0028250c();
             FUN_00282390();
-            temp_v2 = FUN_00296d6c(0,2);
+            temp_v2 = randBetween(0,2);
             FUN_00291e40(temp_v2 + 0x100022f);
             FUN_0027fca0(0xffffffff);
           }
@@ -434,7 +434,7 @@ joined_r0x002c99a8:
           FUN_00291e40(0x10001f0);
           FUN_0028250c();
           FUN_00282390();
-          temp_v2 = FUN_00296d6c(0,2);
+          temp_v2 = randBetween(0,2);
           FUN_00291e40(temp_v2 + 0x100022c);
           FUN_0027fca0(0xffffffff);
         }

@@ -12,13 +12,13 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-extern int DAT_0043dcf0; /* 0x43dcf0 */
+extern int g_partyPanel; /* 0x43dcf0 */
 
 /* Supplied declaration required: FUN_002621b4. */
 /* Supplied declaration required: FUN_00298d28. */
 extern int FUN_0029a924(unsigned short);
 extern int FUN_0029a9d4(unsigned short, unsigned int);
-extern int FUN_002a8764(void);
+extern int gameGetSlotTable(void);
 
 
 void FUN_0026b7c0(void)
@@ -32,9 +32,9 @@ void FUN_0026b7c0(void)
   int temp_v3;
   int temp_v4;
   
-  temp_v0 = DAT_0043dcf0;
+  temp_v0 = g_partyPanel;
   temp_v4 = in_r3;
-  temp_v1 = FUN_002a8764();
+  temp_v1 = gameGetSlotTable();
   temp_v4 = 0;
   if (*(short *)(temp_v0 + 0x38) >= 0) {
     temp_v3 = 0;

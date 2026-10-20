@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0028c618(...);
-int FUN_0028c640(...);
+int nodeSetTranslation(...);
 int FUN_0029bb14(...);
 int FUN_002a0428(...);
 int FUN_002a5710(...);
@@ -20,7 +20,7 @@ extern int *DAT_00447e10; /* 0x447e10 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int asdMdlManagerClone(int, unsigned int);
 /* Supplied declaration required: FUN_0028c618. */
-/* Supplied declaration required: FUN_0028c640. */
+/* Supplied declaration required: nodeSetTranslation. */
 extern int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_0029bb14. */
 /* Supplied declaration required: FUN_002a0428. */
@@ -73,7 +73,7 @@ unsigned int FUN_002f400c(void)
           *(unsigned char *)(piVar3 + temp_v2 * 0xb + 0x44e) = 1;
           piVar3[temp_v2 * 0xb + 0x44f] = -1;
           FUN_002a0428(piVar3[temp_v2 * 0xb + 0x44d],1);
-          FUN_0028c640(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x44d] + 8),0,
+          nodeSetTranslation(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x44d] + 8),0,
                        piVar3 + temp_v2 * 0xb + 0x446);
           FUN_0028c618(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x44d] + 8),0);
           FUN_002a5710(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x44d] + 8),piVar3[temp_v2 * 0xb + 0x44a])
@@ -119,7 +119,7 @@ unsigned int FUN_002f400c(void)
           *(unsigned char *)(piVar3 + temp_v1 * 0xb + 0x44e) = 1;
           piVar3[temp_v1 * 0xb + 0x44f] = -1;
           FUN_002a0428(temp_v3,1);
-          FUN_0028c640(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x44d] + 8),0,
+          nodeSetTranslation(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x44d] + 8),0,
                        piVar3 + temp_v1 * 0xb + 0x446);
           FUN_0028c618(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x44d] + 8),0);
           FUN_002a5710(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x44d] + 8),piVar3[temp_v1 * 0xb + 0x44a])
@@ -172,7 +172,7 @@ unsigned int FUN_002f400c(void)
         piVar3[temp_v1 * 0xb + 0x4ad] = 2;
         *(unsigned char *)(piVar3 + temp_v1 * 0xb + 0x4b1) = 1;
         FUN_002a0428(temp_v3,1);
-        FUN_0028c640(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x4b0] + 8),0,piVar3 + temp_v1 * 0xb + 0x4a9
+        nodeSetTranslation(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x4b0] + 8),0,piVar3 + temp_v1 * 0xb + 0x4a9
                     );
         FUN_0028c618(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x4b0] + 8),0);
         FUN_002a5710(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x4b0] + 8),piVar3[temp_v1 * 0xb + 0x4ad]);
@@ -255,7 +255,7 @@ LAB_002f45c4:
       piVar3[temp_v2 * 0xb + 0x4ad] = 2;
       *(unsigned char *)(piVar3 + temp_v2 * 0xb + 0x4b1) = 1;
       FUN_002a0428(piVar3[temp_v2 * 0xb + 0x4b0],1);
-      FUN_0028c640(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x4b0] + 8),0,piVar3 + temp_v2 * 0xb + 0x4a9);
+      nodeSetTranslation(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x4b0] + 8),0,piVar3 + temp_v2 * 0xb + 0x4a9);
       FUN_0028c618(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x4b0] + 8),0);
       FUN_002a5710(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x4b0] + 8),piVar3[temp_v2 * 0xb + 0x4ad]);
       FUN_0029bb14(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x4b0] + 8));

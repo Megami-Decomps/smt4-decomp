@@ -8,9 +8,9 @@ int FUN_0024eaac(...);
 int FUN_0026f188(...);
 int FUN_0026f204(...);
 int FUN_0026f784(...);
-int FUN_0026f800(...);
+int linkHolderApplyFlag(...);
 int FUN_00297060(...);
-int FUN_002b8838(...);
+int buttonHelpSetPreset(...);
 
 typedef struct fn_002e1744_arg0 fn_002e1744_arg0;
 struct fn_002e1744_arg0 {
@@ -39,10 +39,10 @@ struct fn_002e1744_arg0 {
 extern unsigned int FUN_0026f1f0(void);
 /* Supplied declaration required: FUN_0026f204. */
 /* Supplied declaration required: FUN_0026f784. */
-/* Supplied declaration required: FUN_0026f800. */
+/* Supplied declaration required: linkHolderApplyFlag. */
 extern int FUN_0028d594(void);
 /* Supplied declaration required: FUN_00297060. */
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 
 
 unsigned int FUN_002e1744(fn_002e1744_arg0 *param_1,unsigned int param_2,int param_3)
@@ -75,7 +75,7 @@ unsigned int FUN_002e1744(fn_002e1744_arg0 *param_1,unsigned int param_2,int par
           param_1->field_0xa0 = (int)pvVar2;
           *(unsigned int *)((int)pvVar2 + 0x108) = 2;
           param_1->field_0x124 = 1;
-          FUN_0026f800(param_1->field_0x4,1);
+          linkHolderApplyFlag(param_1->field_0x4,1);
           FUN_0026f204(param_1->field_0x10,*(unsigned int *)&param_1->field_0x8,param_1->field_0xac);
           temp_v0 = FUN_0028d594();
           if (temp_v0 == 0) {
@@ -86,7 +86,7 @@ unsigned int FUN_002e1744(fn_002e1744_arg0 *param_1,unsigned int param_2,int par
             param_1->field_0x110 = 1;
           }
           else {
-            FUN_002b8838(0xe2);
+            buttonHelpSetPreset(0xe2);
             param_1->field_0x110 = 2;
           }
           temp_v2 = 2;

@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002769b4(unsigned int, unsigned int);
+int mapDepartSetTarget(unsigned int, unsigned int);
 int FUN_0027db90(void);
-int FUN_00289508(void);
+int gameJumpRequestClear(void);
 int FUN_002a03d8(int, int);
 int asdSequenceRequest(unsigned int, unsigned int *, unsigned int);
 
@@ -26,12 +26,12 @@ extern unsigned int DAT_0049fc30; /* 0x49fc30 */
 extern unsigned int DAT_0049fc34; /* 0x49fc34 */
 
 extern int FUN_002080e8(void);
-/* Supplied declaration required: FUN_002769b4. */
+/* Supplied declaration required: mapDepartSetTarget. */
 /* Supplied declaration required: FUN_0027db90. */
 extern int gameStateIsFlagSetAndLarge(void);
 extern int FUN_00287304(void);
-/* Supplied declaration required: FUN_00289508. */
-extern char *FUN_00289594(void);
+/* Supplied declaration required: gameJumpRequestClear. */
+extern char *gameJumpRequestGet(void);
 /* Supplied declaration required: FUN_002a03d8. */
 /* Supplied declaration required: asdSequenceRequest. */
 
@@ -50,7 +50,7 @@ void FUN_00394508(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   
   puVar5 = &temp_v4;
   temp_v4 = param_4;
-  pcVar2 = (char *)FUN_00289594();
+  pcVar2 = (char *)gameJumpRequestGet();
   temp_v0 = *pcVar2;
   if (temp_v0 != '\x01') {
     if (temp_v0 != '\x02') {
@@ -73,8 +73,8 @@ void FUN_00394508(int param_1,unsigned int param_2,unsigned int param_3,unsigned
             }
             FUN_002a03d8(0,10);
             FUN_002a03d8(1,10);
-            FUN_002769b4(0xffffffff,0xffffffff);
-            FUN_00289508();
+            mapDepartSetTarget(0xffffffff,0xffffffff);
+            gameJumpRequestClear();
             *(unsigned char *)(param_1 + 0x19) = 1;
             FUN_0027db90();
             return;
@@ -125,8 +125,8 @@ void FUN_00394508(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   asdSequenceRequest(temp_v2,puVar5,temp_v3);
   FUN_002a03d8(0,10);
   FUN_002a03d8(1,10);
-  FUN_002769b4(0xffffffff,0xffffffff);
-  FUN_00289508();
+  mapDepartSetTarget(0xffffffff,0xffffffff);
+  gameJumpRequestClear();
   *(unsigned char *)(param_1 + 0x19) = 1;
   FUN_0027db90();
   return;

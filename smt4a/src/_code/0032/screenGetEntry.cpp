@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern ScreenRef DAT_0057f0c4;
+extern ScreenRef g_buttonHelp;
 
 /* Entry `index` of the screen object's entry table. */
 ScreenEntry *screenGetEntry(s32 index)
 {
-    ScreenObj *screen = DAT_0057f0c4.instance;
+    ScreenObj *screen = g_buttonHelp.instance;
 
     return screen->entries + index;
 }

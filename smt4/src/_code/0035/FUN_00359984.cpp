@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00359410(unsigned int);
 int FUN_00359888(void);
 
-extern int DAT_00473848; /* 0x473848 */
+extern int g_nnCecdHandle; /* 0x473848 */
 extern int DAT_0047384c; /* 0x47384c */
 
 /* Supplied declaration required: FUN_00359410. */
@@ -22,7 +22,7 @@ void FUN_00359984(unsigned int param_1)
     FUN_00359888();
     return;
   }
-  if (DAT_00473848 != 0) {
+  if (g_nnCecdHandle != 0) {
     FUN_00359410(param_1);
     return;
   }

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00106098(int, int);
 int FUN_0011c4f2(int *, int, unsigned int, unsigned char [64]);
 int FUN_0012240e(unsigned int, unsigned int, unsigned int, unsigned char [64]);
-int FUN_002e9afe(int, unsigned int);
+int vectorCopyHeader(int, unsigned int);
 int FUN_002f4f00(unsigned char [64]);
 int FUN_00303cd8(unsigned char [64]);
 int listHolderOwnerBack(int *);
@@ -29,7 +29,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0011c4f2. */
 /* Supplied declaration required: FUN_0012240e. */
 extern unsigned int FUN_002e7908(unsigned char *, char **);
-/* Supplied declaration required: FUN_002e9afe. */
+/* Supplied declaration required: vectorCopyHeader. */
 extern int FUN_002ecf28(void);
 /* Supplied declaration required: FUN_002f4f00. */
 /* Supplied declaration required: FUN_00303cd8. */
@@ -78,7 +78,7 @@ void FUN_0011c1e4(int *param_1,int param_2,unsigned int param_3,unsigned int par
       temp_v0 = listHolderOwnerBack(temp_v7);
       temp_v2 = (char *)0x80010002;
       temp_v1 = FUN_002e7908(temp_v6,&temp_v2);
-      FUN_002e9afe(temp_v0 + 0x20,temp_v1);
+      vectorCopyHeader(temp_v0 + 0x20,temp_v1);
     }
     if (*param_5 != '\0') {
       FUN_003113ee(temp_v9,0,param_2);

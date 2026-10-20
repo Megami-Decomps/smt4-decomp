@@ -7,7 +7,7 @@ extern "C" {
 int nn_applet_CTR_ReplySleepQuery(int);
 
 extern signed char DAT_00465198; /* 0x465198 */
-extern unsigned int DAT_004e4138; /* 0x4e4138 */
+extern unsigned int g_nnAppletCriticalSection; /* 0x4e4138 */
 
 extern int FUN_00110138(void);
 /* Supplied declaration required: nn_applet_CTR_ReplySleepQuery. */
@@ -26,7 +26,7 @@ unsigned int FUN_00103e70(void)
   temp_v1 = FUN_00110138();
   if (temp_v1 != 0) {
     if (DAT_00465198 != '\0') {
-      temp_v0 = nn_os_CriticalSection_TryEnter((unsigned int)&DAT_004e4138);
+      temp_v0 = nn_os_CriticalSection_TryEnter((unsigned int)&g_nnAppletCriticalSection);
       if (temp_v0) {
         temp_v2 = 2;
       }

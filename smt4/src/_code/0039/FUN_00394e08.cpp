@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002b45e8(void);
+int dataTable08Sub2GetRecord(void);
 
-extern int FUN_002471d8(void);
-/* Supplied declaration required: FUN_002b45e8. */
-extern unsigned short *FUN_002b63ac(void);
+extern int padGetStickHorizontalDirection(void);
+/* Supplied declaration required: dataTable08Sub2GetRecord. */
+extern unsigned short *gameGetPlayerData(void);
 
 
 void FUN_00394e08(int param_1)
@@ -21,15 +21,15 @@ void FUN_00394e08(int param_1)
   int temp_v3;
   unsigned short *puVar5;
   
-  temp_v2 = FUN_002471d8();
+  temp_v2 = padGetStickHorizontalDirection();
   temp_v3 = param_1;
-  FUN_002b45e8();
+  dataTable08Sub2GetRecord();
   if ((temp_v3 != 0) &&
      ((((temp_v0 = *(unsigned char *)(temp_v3 + 0x60), (temp_v0 & 1) != 0 && (temp_v2 == 4)) ||
        (((temp_v0 & 4) != 0 && (temp_v2 == 5)))) || (((temp_v0 & 2) != 0 && (temp_v2 == 1)))))) {
-    puVar5 = (unsigned short *)FUN_002b63ac();
+    puVar5 = (unsigned short *)gameGetPlayerData();
     temp_v3 = param_1;
-    FUN_002b45e8();
+    dataTable08Sub2GetRecord();
     temp_v1 = (unsigned short)param_1;
     switch(*(unsigned char *)(temp_v3 + 0x52)) {
     case 2:

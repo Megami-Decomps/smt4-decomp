@@ -33,15 +33,15 @@ typedef struct {
 } param_2_stack;
 
 extern unsigned char LAB_003d3efc; /* 0x3d3efc */
-extern int DAT_00588fe8; /* 0x588fe8 */
+extern int g_statusDown; /* 0x588fe8 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164b5c. */
-extern int FUN_001654d8(int);
-extern int FUN_001654e4(int);
+extern int vec2GetXInt(int);
+extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_0018152c. */
 /* Supplied declaration required: FUN_001834a4. */
@@ -83,8 +83,8 @@ void FUN_003d3a4c(int param_1,int param_2)
   unsigned int in_fpscr;
   unsigned char temp_v15 [84];
   
-  temp_v2 = DAT_00588fe8;
-  temp_v3 = DAT_00588fe8 + 0xee4;
+  temp_v2 = g_statusDown;
+  temp_v3 = g_statusDown + 0xee4;
   temp_v4 = FUN_002a4860();
   temp_v5 = FUN_002a4894(temp_v3);
   temp_v1 = 0;
@@ -194,9 +194,9 @@ void FUN_003d3a4c(int param_1,int param_2)
     FUN_0035ae58((int)*(short *)(temp_v6 + 8) + (int)*(short *)(temp_v7 + 8) + param_1,
                  (int)*(short *)(temp_v6 + 10) + (int)*(short *)(temp_v7 + 10) + param_2,
                  (int)**(short **)(temp_v7 + 0xc),(int)(*(short **)(temp_v7 + 0xc))[1],1);
-    temp_v5 = FUN_001654e4(temp_v2 + 0x1cc);
+    temp_v5 = vec2GetYInt(temp_v2 + 0x1cc);
     temp_v0 = *(short *)(temp_v6 + 10);
-    temp_v7 = FUN_001654d8(temp_v2 + 0x1cc);
+    temp_v7 = vec2GetXInt(temp_v2 + 0x1cc);
     FUN_001835b4(2,0x12,0x422,temp_v7 + param_1 + (int)*(short *)(temp_v6 + 8),
                  temp_v5 + param_2 + (int)temp_v0,0xc9);
     temp_v5 = g_renderCtx;

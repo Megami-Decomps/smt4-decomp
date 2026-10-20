@@ -15,7 +15,7 @@ void LAB_001175e4(void);
 extern void *g_asdMdlWorker;
 extern u32 g_asdMdlList;
 extern u32 g_asdMdlList2;
-extern const char DAT_004093e0[]; /* __FILE__ of AsdMdlManager.cpp */
+extern const char g_asdMdlManagerSourcePath[]; /* __FILE__ of AsdMdlManager.cpp */
 
 /* Starts the model manager's worker: initializes the two model lists and creates the worker
  * with a 4-byte state block, freeing the block again if the worker could not be created. */
@@ -23,7 +23,7 @@ void asdMdlManagerStart(u32 arg)
 {
     u32 *state;
 
-    asdDebugTrace(DAT_004093e0, 877);
+    asdDebugTrace(g_asdMdlManagerSourcePath, 877);
     state = (u32 *)asdMemAlloc(0x100, 0x100, 0, 4, 1);
 
     if (state != NULL) {

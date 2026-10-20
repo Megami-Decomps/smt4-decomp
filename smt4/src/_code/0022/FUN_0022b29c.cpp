@@ -7,8 +7,8 @@ extern "C" {
 int FUN_0022b6c4(...);
 int FUN_0022b778(...);
 int FUN_0022b83c(...);
-int FUN_0022b8d8(int, int);
-int FUN_00296f4c(unsigned int, unsigned int);
+int listScrollToId(int, int);
+int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int FUN_002be624(unsigned char [36], unsigned char *, int);
 int memClear(char [256], int);
 int FUN_00387f88(int, int);
@@ -31,12 +31,12 @@ extern int FUN_0019e0c0(unsigned int);
 /* Supplied declaration required: FUN_0022b778. */
 /* Supplied declaration required: FUN_0022b83c. */
 extern int FUN_0022b8c0(int);
-/* Supplied declaration required: FUN_0022b8d8. */
+/* Supplied declaration required: listScrollToId. */
 extern int gameStateIsFlagSetAndLarge(void);
-extern unsigned int FUN_00290d74(unsigned int, unsigned char *);
-/* Supplied declaration required: FUN_00296f4c. */
+extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_002be624. */
-extern int FUN_002c09d0(void);
+extern int gameFlagIsSet(void);
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: FUN_00387f88. */
 /* Supplied declaration required: FUN_00389444. */
@@ -102,15 +102,15 @@ void FUN_0022b29c(int param_1,int param_2,int param_3)
         if (*(char *)(temp_v3 + 0x2c) != '0') {
           DAT_0044cfb8 = 0;
           FUN_002be624(temp_v9,&DAT_00404e04,temp_v3 + 0x2c);
-          temp_v4 = FUN_00290d74(temp_v4,temp_v9);
-          FUN_00296f4c(temp_v5,temp_v4);
+          temp_v4 = tableGroupFindEntryIndex(temp_v4,temp_v9);
+          scrScriptProcessStartEntry(temp_v5,temp_v4);
           do {
             temp_v2 = FUN_0019e0c0(temp_v5);
           } while (temp_v2 != 2);
           if (DAT_0044cfb8 != 0) goto LAB_0022b450;
         }
-        if (((*(short *)(temp_v3 + 0x3c) == 0) || (temp_v2 = FUN_002c09d0(), temp_v2 != 0)) &&
-           ((*(short *)(temp_v3 + 0x3e) == 0 || (temp_v2 = FUN_002c09d0(), temp_v2 == 0)))) {
+        if (((*(short *)(temp_v3 + 0x3c) == 0) || (temp_v2 = gameFlagIsSet(), temp_v2 != 0)) &&
+           ((*(short *)(temp_v3 + 0x3e) == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 == 0)))) {
           acStack_150[*(unsigned char *)(temp_v3 + 0x20)] = '\x01';
           entryListAppend(param_1 + 0x9c,temp_v3);
         }
@@ -132,15 +132,15 @@ LAB_0022b450:
         if (*(char *)(temp_v3 + 0x2c) != '0') {
           DAT_0044cfb8 = 0;
           FUN_002be624(temp_v9,&DAT_00404e04,temp_v3 + 0x2c);
-          temp_v5 = FUN_00290d74(temp_v5,temp_v9);
-          FUN_00296f4c(temp_v4,temp_v5);
+          temp_v5 = tableGroupFindEntryIndex(temp_v5,temp_v9);
+          scrScriptProcessStartEntry(temp_v4,temp_v5);
           do {
             temp_v2 = FUN_0019e0c0(temp_v4);
           } while (temp_v2 != 2);
           if (DAT_0044cfb8 != 0) goto LAB_0022b560;
         }
-        if (((*(short *)(temp_v3 + 0x3c) == 0) || (temp_v2 = FUN_002c09d0(), temp_v2 != 0)) &&
-           ((*(short *)(temp_v3 + 0x3e) == 0 || (temp_v2 = FUN_002c09d0(), temp_v2 == 0)))) {
+        if (((*(short *)(temp_v3 + 0x3c) == 0) || (temp_v2 = gameFlagIsSet(), temp_v2 != 0)) &&
+           ((*(short *)(temp_v3 + 0x3e) == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 == 0)))) {
           acStack_150[*(unsigned char *)(temp_v3 + 0x20)] = '\x01';
           entryListAppend(param_1 + 0x9c,temp_v3);
         }
@@ -159,7 +159,7 @@ LAB_0022b560:
     temp_v0 = (int)*(short *)(param_1 + 0x40);
   }
   if (temp_v0 != -1) {
-    FUN_0022b8d8(param_1 + 0x9c,temp_v0);
+    listScrollToId(param_1 + 0x9c,temp_v0);
   }
   temp_v0 = FUN_0022b8c0(param_1 + 0x9c);
   temp_v1 = (int)*(short *)(temp_v0 + 0x24);

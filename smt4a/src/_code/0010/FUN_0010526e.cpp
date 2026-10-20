@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002eb6b8(int [2]);
+int listIteratorNext(int [2]);
 
 typedef int romwright_code(...);
 /* stack frame of param_2: 3 slot(s), 12 byte(s) */
@@ -16,7 +16,7 @@ typedef struct {
 
 extern int wordRefsDiffer_002eb690(int *, int *);
 extern int FUN_002eb6ae(int, unsigned int);
-/* Supplied declaration required: FUN_002eb6b8. */
+/* Supplied declaration required: listIteratorNext. */
 
 
 unsigned int FUN_0010526e(int *param_1,int *param_2)
@@ -47,7 +47,7 @@ unsigned int FUN_0010526e(int *param_1,int *param_2)
         param_1[7] = param_1[7] + 1;
       }
     }
-    FUN_002eb6b8(temp_v4);
+    listIteratorNext(temp_v4);
   }
   return temp_v2;
 }

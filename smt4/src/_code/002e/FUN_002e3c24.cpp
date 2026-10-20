@@ -5,11 +5,11 @@
 extern "C" {
 
 int scrSetResult(int);
-int FUN_002b9024(void);
+int devilGetRecord(void);
 
 /* Supplied declaration required: scrSetResult. */
 extern int btlGetMainState(void);
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: devilGetRecord. */
 
 
 unsigned int FUN_002e3c24(void)
@@ -28,7 +28,7 @@ unsigned int FUN_002e3c24(void)
     temp_v1 = *puVar2;
     if (((temp_v1 & 0x10) != 0 && (temp_v1 & 1) != 0) && ((temp_v1 & 0x40) == 0)) {
       temp_v1 = (unsigned int)*(unsigned short *)((int)puVar2 + 0xce);
-      FUN_002b9024();
+      devilGetRecord();
       if (*(char *)(temp_v1 + 5) == '\x04') {
         scrSetResult(1);
         return 1;

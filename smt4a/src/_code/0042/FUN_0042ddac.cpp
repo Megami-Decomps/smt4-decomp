@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00193038(int *, int **);
-int FUN_001a9110(...);
+int wordPairCopy(...);
 int FUN_0030fc80(int **);
 int FUN_0042f79c(void);
 int FUN_00430e58(int *);
@@ -39,7 +39,7 @@ typedef struct {
 extern unsigned int DAT_006426c0; /* 0x6426c0 */
 
 /* Supplied declaration required: FUN_00193038. */
-/* Supplied declaration required: FUN_001a9110. */
+/* Supplied declaration required: wordPairCopy. */
 /* Supplied declaration required: FUN_0030fc80. */
 /* Supplied declaration required: FUN_0042f79c. */
 /* Supplied declaration required: FUN_00430e58. */
@@ -332,8 +332,8 @@ int * FUN_0042ddac(int *param_1,int param_2,int param_3,unsigned int param_4,int
   temp_v0 = nn_cec_CTR_MessageId_IsEmpty((unsigned int)temp_v12);
   if (temp_v0) {
     temp_v4 = releaseOrCopyHandle2((unsigned int *)&temp_v9,(unsigned int *)&temp_v13);
-    FUN_001a9110(temp_v12,temp_v4);
-    FUN_001a9110(temp_v25,temp_v12);
+    wordPairCopy(temp_v12,temp_v4);
+    wordPairCopy(temp_v25,temp_v12);
   }
   if (param_3 == 1 && !temp_v8) {
     temp_v9 = 2;

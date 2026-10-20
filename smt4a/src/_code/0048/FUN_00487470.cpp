@@ -5,7 +5,7 @@
 extern "C" {
 
 int CONCAT44(double, double);
-int FUN_00162e8c(void);
+int gameFlagsGetBlock(void);
 int FUN_001835b4(...);
 int FUN_001849bc(...);
 int FUN_002bf1a4(...);
@@ -53,10 +53,10 @@ extern int DAT_005f1c5c; /* 0x5f1c5c */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 extern unsigned long long FUN_00162858(void);
-/* Supplied declaration required: FUN_00162e8c. */
+/* Supplied declaration required: gameFlagsGetBlock. */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_001849bc. */
-extern unsigned long long FUN_0018719c(unsigned int);
+extern unsigned long long gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_002bf1a4. */
 extern int gameFlagsClassify(int);
 extern int FUN_00384cf4(void);
@@ -136,7 +136,7 @@ void FUN_00487470(int param_1)
   int temp_v42;
   
   temp_v42 = param_1;
-  FUN_00162e8c();
+  gameFlagsGetBlock();
   temp_v37 = temp_v42 + 0x4cc;
   temp_v31 = FUN_00492bc0();
   FUN_00492c34(temp_v37);
@@ -344,7 +344,7 @@ LAB_00487744:
             }
             temp_v3 = (int)(temp_v14 + ((unsigned int)(temp_v14 >> 0x1f) >> 0x1a)) >> 6;
             temp_v7 = temp_v5;
-            temp_v4 = FUN_00162e8c();
+            temp_v4 = gameFlagsGetBlock();
             if (((temp_v3 >= 0) && (9 >= temp_v3)) && ((temp_v7 >= 0 && (0xd >= temp_v7)))) {
               temp_v3 = temp_v3 + temp_v5 * 10;
               temp_v13 = 1;
@@ -367,10 +367,10 @@ LAB_00487744:
         } while (temp_v14 < 0x200);
         temp_v2 = temp_v2 + 0x40;
       } while (temp_v2 < 0x280);
-      temp_v30 = FUN_0018719c(0x171);
+      temp_v30 = gameFlagIsSet(0x171);
       temp_v2 = (int)((unsigned long long)temp_v30 >> 0x20);
       if ((int)temp_v30 != 0) {
-        temp_v30 = FUN_0018719c(0x187);
+        temp_v30 = gameFlagIsSet(0x187);
         temp_v2 = (int)((unsigned long long)temp_v30 >> 0x20);
         if ((int)temp_v30 != 0) {
           temp_v18 = (float)VectorSignedToFloat(unaff_r8,(unsigned char)(in_fpscr >> 0x16) & 3);

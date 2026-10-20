@@ -8,7 +8,7 @@ int FUN_002671f4(int);
 int FUN_00282390(void);
 int FUN_0028250c(void);
 
-extern int DAT_00447e70; /* 0x447e70 */
+extern int g_mapObj; /* 0x447e70 */
 extern int g_gameState; /* 0x49f91c */
 extern int DAT_0049f920; /* 0x49f920 */
 
@@ -26,7 +26,7 @@ void FUN_0027ae90(void)
   
   temp_v1 = 0;
   do {
-    temp_v0 = DAT_00447e70 + temp_v1 * 0x48;
+    temp_v0 = g_mapObj + temp_v1 * 0x48;
     if (*(char *)(temp_v0 + 0x14) != '\0') {
       if ((g_gameState != 4) || (DAT_0049f920 != 1)) {
         if (*(int *)(temp_v0 + 0x38) == 2) {

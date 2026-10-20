@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0028c618(unsigned int, int);
-int FUN_0028c640(unsigned int, int, float *);
+int nodeSetTranslation(unsigned int, int, float *);
 int FUN_002e29c0(void);
 int FUN_002f35d8(void);
 int VectorSignedToFloat(int, int);
@@ -33,8 +33,8 @@ extern int iRam004bd614; /* 0x4bd614 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0028c618. */
-/* Supplied declaration required: FUN_0028c640. */
-extern int FUN_002c2950(void);
+/* Supplied declaration required: nodeSetTranslation. */
+extern int gameGetMapBlock(void);
 /* Supplied declaration required: FUN_002e29c0. */
 /* Supplied declaration required: FUN_002f35d8. */
 
@@ -66,7 +66,7 @@ void FUN_00202254(void)
   int temp_v18;
   int temp_v19 [19];
   
-  temp_v18 = FUN_002c2950();
+  temp_v18 = gameGetMapBlock();
   temp_v6 = 0;
   if (DAT_0049f93e != '\0') {
     temp_v6 = 0;
@@ -227,7 +227,7 @@ void FUN_00202254(void)
                   temp_v19[3] = temp_v19[3] + 1;
 LAB_0020267c:
                   if (puVar3 != (unsigned int *)0x0) {
-                    FUN_0028c640(puVar3[2],0,&temp_v15);
+                    nodeSetTranslation(puVar3[2],0,&temp_v15);
                     FUN_0028c618(puVar3[2],0);
                     if ((*puVar3 & 2) != 0) {
                       *puVar3 = *puVar3 & 0xfffffffd;
@@ -251,7 +251,7 @@ LAB_002026d0:
                   else if (temp_v1 == '\x04') {
                     temp_v11 = temp_v11 & 0xffffffff00000000;
                   }
-                  FUN_0028c640(*(unsigned int *)(DAT_004bd610 + 8),0,&temp_v15);
+                  nodeSetTranslation(*(unsigned int *)(DAT_004bd610 + 8),0,&temp_v15);
                   FUN_0028c618(*(unsigned int *)(temp_v5 + 8),0);
                 }
                 temp_v5 = iRam004bd614;
@@ -269,7 +269,7 @@ LAB_002026d0:
                   else if (temp_v1 == '\x04') {
                     temp_v11 = temp_v11 & 0xffffffff00000000;
                   }
-                  FUN_0028c640(*(unsigned int *)(iRam004bd614 + 8),0,&temp_v15);
+                  nodeSetTranslation(*(unsigned int *)(iRam004bd614 + 8),0,&temp_v15);
                   FUN_0028c618(*(unsigned int *)(temp_v5 + 8),0);
                 }
                 temp_v12 = (unsigned int)(temp_v11 >> 0x20);
@@ -290,7 +290,7 @@ LAB_002026d0:
                       else if (temp_v1 == '\x04') {
                         temp_v11 = temp_v11 & 0xffffffff00000000;
                       }
-                      FUN_0028c640(*(unsigned int *)(temp_v5 + 8),0,&temp_v15);
+                      nodeSetTranslation(*(unsigned int *)(temp_v5 + 8),0,&temp_v15);
                       FUN_0028c618(*(unsigned int *)(temp_v5 + 8),0);
                     }
                     temp_v6 = temp_v6 + 1;
@@ -300,7 +300,7 @@ LAB_002026d0:
                   temp_v4 = *(int *)(temp_v6 * 4 + 0x4bd618);
                   if (temp_v4 != 0) {
                     temp_v11 = (unsigned long long)temp_v12 << 0x20;
-                    FUN_0028c640(*(unsigned int *)(temp_v4 + 8),0,&temp_v15);
+                    nodeSetTranslation(*(unsigned int *)(temp_v4 + 8),0,&temp_v15);
                     FUN_0028c618(*(unsigned int *)(temp_v4 + 8),0);
                   }
                   temp_v6 = temp_v6 + 1;

@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern ObjectE0 *DAT_0057f65c;
+extern ObjectE0 *g_frameTex;
 
 void objectE0ResetFlags1040(void)
 {
-    ObjectE0 *obj = DAT_0057f65c;
+    ObjectE0 *obj = g_frameTex;
 
     obj->unk1040 = 1;
     obj->unk1043 = 0;

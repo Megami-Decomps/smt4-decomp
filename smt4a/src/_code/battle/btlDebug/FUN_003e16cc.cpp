@@ -28,7 +28,7 @@ typedef struct {
 } param_2_stack;
 
 extern unsigned char LAB_00221a94; /* 0x221a94 */
-extern int DAT_00571508; /* 0x571508 */
+extern int g_btlCamera; /* 0x571508 */
 extern int DAT_00573808; /* 0x573808 */
 extern unsigned int DAT_00573858; /* 0x573858 */
 extern unsigned int DAT_0057385c; /* 0x57385c */
@@ -43,7 +43,7 @@ extern unsigned int DAT_0057a640; /* 0x57a640 */
 extern unsigned int DAT_0057a644; /* 0x57a644 */
 extern unsigned int DAT_0057a648; /* 0x57a648 */
 extern unsigned int DAT_0057a64c; /* 0x57a64c */
-extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
+extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
 /* Supplied declaration required: qsort. */
 /* Supplied declaration required: FUN_001568f8. */
@@ -82,7 +82,7 @@ void FUN_003e16cc(unsigned int *param_1,int param_2)
   int temp_v12;
   
   if ((param_1[3] == 0) && ((*(unsigned int *)(DAT_00573808 + 0x339c) & 0x400) != 0)) {
-    *(unsigned int *)(DAT_00571508 + 0x64c) = *(unsigned int *)(DAT_00571508 + 0x64c) | 0x4000;
+    *(unsigned int *)(g_btlCamera + 0x64c) = *(unsigned int *)(g_btlCamera + 0x64c) | 0x4000;
     FUN_004f9450();
     param_1[3] = param_1[3] | 2;
   }
@@ -144,11 +144,11 @@ void FUN_003e16cc(unsigned int *param_1,int param_2)
         temp_v3 = temp_v3 + 1;
       } while (temp_v3 < temp_v8);
     }
-    if (*(int *)(DAT_00571508 + 0x34) != 0) {
+    if (*(int *)(g_btlCamera + 0x34) != 0) {
       FUN_004f1c5c();
     }
     else {
-      FUN_004f1c5c(DAT_00571508,0x78);
+      FUN_004f1c5c(g_btlCamera,0x78);
     }
     puVar9 = (unsigned int *)(param_2 + 0x45a0);
     if ((DAT_00573858 & *puVar9) == 0 && (*(unsigned int *)(param_2 + 0x45a4) & DAT_0057385c) == 0) {
@@ -157,7 +157,7 @@ void FUN_003e16cc(unsigned int *param_1,int param_2)
       temp_v6 = DAT_0057387c | *(unsigned int *)(param_2 + 0x45a4) | DAT_00573894;
       *puVar9 = DAT_00573878 | *puVar9 | DAT_00573890;
       *(unsigned int *)(param_2 + 0x45a4) = temp_v6;
-      FUN_004aa2e0(DAT_0057a9c8,0);
+      FUN_004aa2e0(g_btlUiBlock,0);
     }
     param_1[4] = 0;
     *param_1 = 0x19;

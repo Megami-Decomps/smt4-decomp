@@ -13,7 +13,7 @@ struct VoiceManager {
     /* 0x10 */ u8 voices[1];
 };
 
-void FUN_002c38fc(void *voices);
+void nn_os_CriticalSection_Initialize(void *voices);
 
 void nn_snd_CTR_VoiceManager_Initialize(VoiceManager *manager)
 {
@@ -22,7 +22,7 @@ void nn_snd_CTR_VoiceManager_Initialize(VoiceManager *manager)
     manager->unk00 = 0;
     manager->unk0c = 0;
     manager->unk0e = 0;
-    FUN_002c38fc(manager->voices);
+    nn_os_CriticalSection_Initialize(manager->voices);
 }
 
 }

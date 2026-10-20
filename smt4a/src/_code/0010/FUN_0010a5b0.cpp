@@ -9,20 +9,20 @@ int FUN_0012409c(unsigned int, int, unsigned char [32]);
 int FUN_0012fe3c(...);
 int FUN_002e6e34(...);
 int FUN_002e6e5c(...);
-int FUN_002e7232(...);
+int sharedRefRelease(...);
 int strAssign(int *, int, int, unsigned int);
-int FUN_002e75c2(unsigned char [6], unsigned char ***);
+int streamReaderReadU32(unsigned char [6], unsigned char ***);
 int strInit(int [4]);
-int FUN_002e7658(unsigned char [6]);
-int FUN_002e9538(...);
-int FUN_002e995c(...);
+int sharedRefHolderDestroy(unsigned char [6]);
+int onlineSockAddrCopy(...);
+int onlineSockAddrConstruct(...);
 int FUN_002eb17c(...);
-int FUN_002eb588(...);
+int onlineTimeGetNow(...);
 int FUN_002eb87c(...);
 int FUN_002eb914(...);
 int strDestroy(...);
 int FUN_002ed258(unsigned char [6], int);
-int FUN_002ede60(...);
+int onlineSockAddrConstruct2(...);
 int FUN_002eea8a(unsigned char [6], unsigned short [2]);
 int FUN_002f3524(...);
 int FUN_002f3532(...);
@@ -70,22 +70,22 @@ extern unsigned int FUN_0010a53c(int, unsigned int);
 /* Supplied declaration required: FUN_0012fe3c. */
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-/* Supplied declaration required: FUN_002e7232. */
+/* Supplied declaration required: sharedRefRelease. */
 /* Supplied declaration required: strAssign. */
-/* Supplied declaration required: FUN_002e75c2. */
+/* Supplied declaration required: streamReaderReadU32. */
 /* Supplied declaration required: strInit. */
-/* Supplied declaration required: FUN_002e7658. */
-extern int FUN_002e76b6(unsigned int);
-/* Supplied declaration required: FUN_002e9538. */
-/* Supplied declaration required: FUN_002e995c. */
+/* Supplied declaration required: sharedRefHolderDestroy. */
+extern int onlineBufferGetData(unsigned int);
+/* Supplied declaration required: onlineSockAddrCopy. */
+/* Supplied declaration required: onlineSockAddrConstruct. */
 /* Supplied declaration required: FUN_002eb17c. */
-/* Supplied declaration required: FUN_002eb588. */
+/* Supplied declaration required: onlineTimeGetNow. */
 extern int FUN_002eb83c(void);
 /* Supplied declaration required: FUN_002eb87c. */
 /* Supplied declaration required: FUN_002eb914. */
 /* Supplied declaration required: strDestroy. */
 /* Supplied declaration required: FUN_002ed258. */
-/* Supplied declaration required: FUN_002ede60. */
+/* Supplied declaration required: onlineSockAddrConstruct2. */
 /* Supplied declaration required: FUN_002eea8a. */
 extern unsigned int FUN_002f34c8(int);
 /* Supplied declaration required: FUN_002f3524. */
@@ -169,11 +169,11 @@ unsigned int FUN_0010a5b0(int param_1,unsigned int param_2,unsigned int param_3,
   if (*(unsigned int *)(temp_v9 + 0x10) < 0xd) {
     return 0;
   }
-  FUN_002e995c(temp_v20);
+  onlineSockAddrConstruct(temp_v20);
   strInit(aiStack_1bc);
   temp_v19 = aiStack_1bc;
   FUN_002ed258(temp_v14,temp_v9);
-  FUN_002e75c2(temp_v14,&temp_v23);
+  streamReaderReadU32(temp_v14,&temp_v23);
   FUN_002eea8a(temp_v14,temp_v18);
   temp_v22 = ((int)temp_v23 << 0x18) | ((((unsigned int)temp_v23 >> 8) & 0xff) << 0x10) |
               ((((unsigned int)temp_v23 >> 0x10) & 0xff) << 8) | ((unsigned int)temp_v23 >> 0x18);
@@ -181,15 +181,15 @@ unsigned int FUN_0010a5b0(int param_1,unsigned int param_2,unsigned int param_3,
   temp_v12 = 0;
   temp_v13 = 0;
   temp_v10 = *(int *)(temp_v16 + 0x10) - temp_v17;
-  temp_v9 = FUN_002e76b6(temp_v16);
+  temp_v9 = onlineBufferGetData(temp_v16);
   strAssign(temp_v19,temp_v9 + temp_v17,temp_v10,0xffffffff);
-  FUN_002e7658(temp_v14);
+  sharedRefHolderDestroy(temp_v14);
   temp_v7 = *(unsigned short *)(temp_v44 + 0x3c) & 0xf;
   temp_v24 = temp_v44 + 0xdc;
   if (temp_v7 != 2) {
     if (temp_v7 == 6) {
-      FUN_002e995c(temp_v38);
-      FUN_002e995c(temp_v14);
+      onlineSockAddrConstruct(temp_v38);
+      onlineSockAddrConstruct(temp_v14);
       temp_v6 = temp_v22 >> 8;
       temp_v0 = temp_v22 >> 0x10;
       temp_v1 = temp_v22 >> 0x18;
@@ -207,8 +207,8 @@ unsigned int FUN_0010a5b0(int param_1,unsigned int param_2,unsigned int param_3,
         FUN_002f3524(temp_v14,temp_v8,0,0x2000);
       }
       else {
-        FUN_002e9538(temp_v38,temp_v20);
-        FUN_002e9538(temp_v14,temp_v24);
+        onlineSockAddrCopy(temp_v38,temp_v20);
+        onlineSockAddrCopy(temp_v14,temp_v24);
       }
       temp_v27 = 1;
       if (DAT_00594a68 != 0) {
@@ -221,7 +221,7 @@ unsigned int FUN_0010a5b0(int param_1,unsigned int param_2,unsigned int param_3,
           temp_v4 = wordRefsDiffer_002f3594(temp_v42,(unsigned int *)&temp_v35);
           if (temp_v4 == 0) {
             FUN_002e6e34(temp_v39,param_1 + 0x4c);
-            FUN_002eb588(&temp_v24);
+            onlineTimeGetNow(&temp_v24);
             FUN_002f35a4(temp_v36,temp_v20,temp_v14);
             temp_v29 = temp_v36;
             temp_v30 = param_1 + 0x21;
@@ -285,7 +285,7 @@ unsigned int FUN_0010a5b0(int param_1,unsigned int param_2,unsigned int param_3,
             FUN_002eb17c(piVar9,temp_v38);
             (**(romwright_code **)(**(int **)(temp_v3 + 0x30) + 0x20))
                       (*(int **)(temp_v3 + 0x30),temp_v43,*(unsigned char *)(param_1 + 4),1,1,piVar9,0);
-            FUN_002e7232(piVar9);
+            sharedRefRelease(piVar9);
           }
           else {
             (**(romwright_code **)(*piVar9 + 4))(piVar9);
@@ -293,14 +293,14 @@ unsigned int FUN_0010a5b0(int param_1,unsigned int param_2,unsigned int param_3,
         }
         temp_v11 = 1;
         strDestroy(aiStack_1bc);
-        FUN_002e7232(temp_v44);
+        sharedRefRelease(temp_v44);
         return temp_v11;
       }
     }
     strDestroy(aiStack_1bc);
   }
   else {
-    FUN_002ede60(temp_v14,temp_v20);
+    onlineSockAddrConstruct2(temp_v14,temp_v20);
     FUN_002eb87c(temp_v3,temp_v14,temp_v24,1);
     temp_v4 = (**(romwright_code **)(**(int **)(temp_v3 + 0x30) + 0x24))
                       (*(int **)(temp_v3 + 0x30),temp_v43,aiStack_1bc,temp_v14);
@@ -311,7 +311,7 @@ unsigned int FUN_0010a5b0(int param_1,unsigned int param_2,unsigned int param_3,
     }
     temp_v11 = 1;
     strDestroy(aiStack_1bc);
-    FUN_002e7232(temp_v44);
+    sharedRefRelease(temp_v44);
   }
   return temp_v11;
 }

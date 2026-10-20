@@ -9,7 +9,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-extern unsigned int *FUN_002580b4(void);
+extern unsigned int *eventCommandGetPendingCleanup(void);
 
 
 void FUN_00227218(void)
@@ -17,7 +17,7 @@ void FUN_00227218(void)
 {
   unsigned int *puVar1;
   
-  puVar1 = (unsigned int *)FUN_002580b4();
+  puVar1 = (unsigned int *)eventCommandGetPendingCleanup();
   if (puVar1 != (unsigned int *)0x0) {
     *puVar1 = 0;
     puVar1[1] = 0;

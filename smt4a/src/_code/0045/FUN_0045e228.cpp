@@ -71,7 +71,7 @@ extern int FUN_001946d4(unsigned int, int, unsigned int *);
 /* Supplied declaration required: FUN_004658c0. */
 extern unsigned int FUN_00466b9c(int, unsigned int, unsigned int *);
 extern int vcallSlot5(unsigned int, unsigned int);
-extern int FUN_00508854(int **, int, unsigned int *);
+extern int nameTableFindValueFromWrapper(int **, int, unsigned int *);
 
 
 unsigned int
@@ -149,7 +149,7 @@ FUN_0045e228(int param_1,int param_2,unsigned int *param_3,unsigned int *param_4
     }
     FUN_001cb8e4(&temp_v8,temp_v7);
     if (param_7[1] != 0) {
-      temp_v1 = FUN_00508854(&temp_v8,param_7[1],(unsigned int *)&temp_v26);
+      temp_v1 = nameTableFindValueFromWrapper(&temp_v8,param_7[1],(unsigned int *)&temp_v26);
       if (temp_v1 == 0) {
         return 0xf;
       }

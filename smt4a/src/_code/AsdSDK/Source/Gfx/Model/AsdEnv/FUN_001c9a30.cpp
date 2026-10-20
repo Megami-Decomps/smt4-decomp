@@ -34,7 +34,7 @@ typedef struct {
     unsigned int spA0; /* 0xa0: local_a0 */
 } param_3_stack;
 
-extern unsigned int *DAT_005b40e0; /* 0x5b40e0 */
+extern unsigned int *g_commandBufferCursor; /* 0x5b40e0 */
 extern unsigned int DAT_005c0edc; /* 0x5c0edc */
 extern unsigned int DAT_005c0ee0; /* 0x5c0ee0 */
 extern unsigned int DAT_005c0ee4; /* 0x5c0ee4 */
@@ -250,11 +250,11 @@ void FUN_001c9a30(int param_1,unsigned int param_2,int param_3)
         FUN_001cefe0(piVar4,(param_2 + 0xf) & 0xff);
         temp_v4 = *(unsigned int *)(temp_v8 + 0x128);
         temp_v10 = *(unsigned int *)(temp_v8 + 300);
-        DAT_005b40e0[1] = temp_v9;
-        *DAT_005b40e0 = temp_v10;
-        DAT_005b40e0[2] = temp_v4;
-        DAT_005b40e0[3] = 0;
-        DAT_005b40e0 = DAT_005b40e0 + 4;
+        g_commandBufferCursor[1] = temp_v9;
+        *g_commandBufferCursor = temp_v10;
+        g_commandBufferCursor[2] = temp_v4;
+        g_commandBufferCursor[3] = 0;
+        g_commandBufferCursor = g_commandBufferCursor + 4;
       }
       else {
         DAT_005c0f08 = DAT_005c0f08 | temp_v0;
@@ -357,7 +357,7 @@ void FUN_001c9a30(int param_1,unsigned int param_2,int param_3)
       temp_v16 = temp_v14;
     }
     temp_v27 = (int)(temp_v16 - 4096.0f) & 0x1fff;
-    nw_gfx_internal_FastWordCopyAsm_6(DAT_005b40e0,&temp_v23);
+    nw_gfx_internal_FastWordCopyAsm_6(g_commandBufferCursor,&temp_v23);
     if (temp_v32 != temp_v15) {
       DAT_005c0efc = DAT_005c0efc & ~temp_v0;
       return;
@@ -397,11 +397,11 @@ void FUN_001c9a30(int param_1,unsigned int param_2,int param_3)
         }
         FUN_001cefe0(piVar4,(param_2 + 0xf) & 0xff);
         temp_v4 = *(unsigned int *)(temp_v8 + 300);
-        DAT_005b40e0[2] = *(unsigned int *)(temp_v8 + 0x128);
-        DAT_005b40e0[3] = 0;
-        *DAT_005b40e0 = temp_v4;
-        DAT_005b40e0[1] = temp_v9;
-        DAT_005b40e0 = DAT_005b40e0 + 4;
+        g_commandBufferCursor[2] = *(unsigned int *)(temp_v8 + 0x128);
+        g_commandBufferCursor[3] = 0;
+        *g_commandBufferCursor = temp_v4;
+        g_commandBufferCursor[1] = temp_v9;
+        g_commandBufferCursor = g_commandBufferCursor + 4;
       }
       else {
         DAT_005c0f08 = temp_v0 | DAT_005c0f08;

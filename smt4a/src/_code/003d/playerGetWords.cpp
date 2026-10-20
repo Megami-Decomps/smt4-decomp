@@ -15,13 +15,13 @@ typedef struct UnitHalf3A {
     /* 0x3A */ u16 unk3A;
 } UnitHalf3A;
 
-extern PlayerData *FUN_001801a4(void);
+extern PlayerData *gameGetPlayerData(void);
 extern UnitHalf3A *FUN_00192608(u32 id);
 
 /* Copies the player's four words at +0x34 into `out`; with `withUnit` also the unit's halfword at +0x3A. */
 void playerGetWords(PlayerWords *out, s32 withUnit)
 {
-    PlayerData *player = FUN_001801a4();
+    PlayerData *player = gameGetPlayerData();
     UnitHalf3A *unit;
 
     out->a = player->unk34;

@@ -16,11 +16,11 @@ extern int DAT_0044de38; /* 0x44de38 */
 extern unsigned int DAT_0044de3c; /* 0x44de3c */
 extern unsigned int DAT_0044de40; /* 0x44de40 */
 
-extern unsigned int FUN_0026b5c8(void);
-extern unsigned int FUN_0026b5dc(void);
+extern unsigned int configGetSettings(void);
+extern unsigned int gameDataBlocksGetTable(void);
 /* Supplied declaration required: FUN_0026e324. */
 /* Supplied declaration required: FUN_002ad8b4. */
-extern unsigned int FUN_002c09bc(void);
+extern unsigned int gameDataBlocksGetSaveData(void);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002c587c. */
 /* Supplied declaration required: FUN_002e0bc4. */
@@ -34,11 +34,11 @@ void FUN_0026ff54(void)
   unsigned int temp_v0;
   
   if (DAT_0044de38 != 0) {
-    temp_v0 = FUN_0026b5dc();
+    temp_v0 = gameDataBlocksGetTable();
     rt_memcpy_w(temp_v0,DAT_0044de38,0x80);
-    temp_v0 = FUN_0026b5c8();
+    temp_v0 = configGetSettings();
     FUN_002ad8b4(temp_v0,DAT_0044de3c);
-    temp_v0 = FUN_002c09bc();
+    temp_v0 = gameDataBlocksGetSaveData();
     rt_memcpy_w(temp_v0,DAT_0044de40,0x24d28);
     FUN_002e0bc4();
     FUN_002c587c();

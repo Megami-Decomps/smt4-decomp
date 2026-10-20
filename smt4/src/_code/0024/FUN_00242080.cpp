@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002427f8(...);
-int FUN_00247200(unsigned int *);
+int nodeListOwnerFree(unsigned int *);
 int FUN_00247240(unsigned int *);
 int FUN_0025c650(unsigned int, int, int);
 int effBlockSetBlobB(unsigned int, int *, int);
@@ -32,7 +32,7 @@ extern unsigned int *DAT_0044eac0; /* 0x44eac0 */
 
 /* Supplied declaration required: FUN_002427f8. */
 extern int FUN_002468e0(unsigned int, int);
-/* Supplied declaration required: FUN_00247200. */
+/* Supplied declaration required: nodeListOwnerFree. */
 /* Supplied declaration required: FUN_00247240. */
 /* Supplied declaration required: FUN_0025c650. */
 /* Supplied declaration required: effBlockSetBlobB. */
@@ -69,7 +69,7 @@ unsigned char * FUN_00242080(unsigned int param_1)
     if (temp_v5 == 1) {
       FUN_00247240(DAT_0044eac0);
       DAT_0044eac0 = (unsigned int *)0x0;
-      FUN_00247200(DAT_0044eabc);
+      nodeListOwnerFree(DAT_0044eabc);
       DAT_0044eabc = (unsigned int *)0x0;
     }
   }

@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002c3940(unsigned int, int);
+int rt_aeabi_memclr(unsigned int, int);
 
 extern int DAT_0043e2ac; /* 0x43e2ac */
 
-/* Supplied declaration required: FUN_002c3940. */
+/* Supplied declaration required: rt_aeabi_memclr. */
 
 
 void FUN_002e1b3c(unsigned int param_1)
@@ -16,7 +16,7 @@ void FUN_002e1b3c(unsigned int param_1)
 {
 /* irregular: 1 native warning(s); review required */
   if (param_1 < 0xc) {
-    FUN_002c3940(DAT_0043e2ac + param_1 * 0x4c + 0x24814,0x4c);
+    rt_aeabi_memclr(DAT_0043e2ac + param_1 * 0x4c + 0x24814,0x4c);
     return;
   }
   return;

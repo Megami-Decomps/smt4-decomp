@@ -63,7 +63,7 @@ extern int asdModelGetSlotArray1(fn_0021f6e4_arg1 *);
 /* Supplied declaration required: FUN_002af294. */
 /* Supplied declaration required: asdMemoryGetDefaultAllocator. */
 extern unsigned int asdMemoryGetAllocatorA(void);
-extern short FUN_002c30c4(int);
+extern short libc_strlen(int);
 /* Supplied declaration required: nw_gfx_SceneBuilder_CreateObject. */
 /* Supplied declaration required: nw_gfx_SceneHelper_ResolveReferenceImpl. */
 /* Supplied declaration required: nw_gfx_SceneNode_IsCircularReference. */
@@ -223,7 +223,7 @@ LAB_0021f8dc:
         if (temp_v6 != 0) {
           temp_v6 = temp_v6 + temp_v8 + 0xc;
         }
-        temp_v1 = FUN_002c30c4(temp_v6);
+        temp_v1 = libc_strlen(temp_v6);
         temp_v2 = *psVar22;
         if (*(int *)(temp_v7 + 0xc) != 0) {
           temp_v8 = temp_v7 + 0xc + *(int *)(temp_v7 + 0xc);
@@ -261,7 +261,7 @@ LAB_0021f9a8:
         if (temp_v6 != 0) {
           temp_v6 = temp_v6 + temp_v8 + 0xc;
         }
-        temp_v2 = FUN_002c30c4(temp_v6);
+        temp_v2 = libc_strlen(temp_v6);
         if (*(int *)(temp_v7 + 0xc) != 0) {
           temp_v8 = temp_v7 + 0xc + *(int *)(temp_v7 + 0xc);
         }
@@ -299,7 +299,7 @@ LAB_0021fa84:
         if (temp_v6 != 0) {
           temp_v6 = temp_v6 + temp_v8 + 0xc;
         }
-        temp_v2 = FUN_002c30c4(temp_v6);
+        temp_v2 = libc_strlen(temp_v6);
         if (*(int *)(temp_v7 + 0xc) != 0) {
           temp_v8 = temp_v7 + 0xc + *(int *)(temp_v7 + 0xc);
         }
@@ -338,7 +338,7 @@ LAB_0021fb58:
         if (temp_v6 != 0) {
           temp_v6 = temp_v6 + temp_v8 + 0xc;
         }
-        temp_v2 = FUN_002c30c4(temp_v6);
+        temp_v2 = libc_strlen(temp_v6);
         if (*(int *)(temp_v7 + 0xc) != 0) {
           temp_v8 = temp_v7 + 0xc + *(int *)(temp_v7 + 0xc);
         }

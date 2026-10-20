@@ -9,7 +9,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_1_stack;
 
-extern int DAT_00580ca0; /* 0x580ca0 */
+extern int g_mapGimic; /* 0x580ca0 */
 
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
 #define ROMWRIGHT_PIECE_4_4_DEFINED
@@ -36,7 +36,7 @@ void FUN_002947b8(unsigned int *param_1)
   temp_v2 = romwright_piece_4_4(in_s1,in_s0);
   temp_v3 = (unsigned long long)in_s2;
   do {
-    temp_v0 = DAT_00580ca0 + temp_v1 * 0x3c;
+    temp_v0 = g_mapGimic + temp_v1 * 0x3c;
     if (((*(char *)(temp_v0 + 0x90) != '\0') && (*(short *)(temp_v0 + 0xa6) == 0xd)) &&
        (temp_v0 = FUN_0036d578(&temp_v4), temp_v0 != 0)) {
       temp_v3 = (unsigned long long)uStack_28;

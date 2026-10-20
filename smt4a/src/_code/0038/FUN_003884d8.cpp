@@ -4,15 +4,15 @@
 
 extern "C" {
 
-int FUN_0016431c(unsigned int);
+int msgBoxFlagsSetBit7(unsigned int);
 int FUN_0021bdac(unsigned int, unsigned int, unsigned int, int, int, int);
 int scrGetArg(int);
 int FUN_0023723c(unsigned int, int, unsigned int, int, int, unsigned char *, unsigned char *);
-int FUN_0023b27c(void);
+int useCounterStart(void);
 int FUN_002686b8(...);
 int eventTexRequestStopAll(void);
 int FUN_002c76c0(int);
-int FUN_002deb84(void);
+int scrGetCommandFrame(void);
 int bustupCutAnimRequestStopSlots(void);
 int FUN_0031f208(int);
 int FUN_0031f27c(unsigned int, int);
@@ -32,19 +32,19 @@ extern unsigned char LAB_0038870c; /* 0x38870c */
 extern unsigned char LAB_00388748; /* 0x388748 */
 extern int DAT_0057f58c; /* 0x57f58c */
 
-/* Supplied declaration required: FUN_0016431c. */
-extern int FUN_0018719c(unsigned int);
+/* Supplied declaration required: msgBoxFlagsSetBit7. */
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0021bdac. */
 /* Supplied declaration required: scrGetArg. */
 /* Supplied declaration required: FUN_0023723c. */
-extern int FUN_0023b258(void);
-/* Supplied declaration required: FUN_0023b27c. */
+extern int useCounterIsFinished(void);
+/* Supplied declaration required: useCounterStart. */
 /* Supplied declaration required: FUN_002686b8. */
 extern unsigned int FUN_002ba85c(void);
 /* Supplied declaration required: eventTexRequestStopAll. */
 /* Supplied declaration required: FUN_002c76c0. */
 extern int FUN_002c7c54(void);
-/* Supplied declaration required: FUN_002deb84. */
+/* Supplied declaration required: scrGetCommandFrame. */
 /* Supplied declaration required: bustupCutAnimRequestStopSlots. */
 /* Supplied declaration required: FUN_0031f208. */
 /* Supplied declaration required: FUN_0031f27c. */
@@ -80,13 +80,13 @@ unsigned int FUN_003884d8(void)
   temp_v9[2] = 'W';
   temp_v9[3] = 'X';
   uStack_24 = 0x5a;
-  temp_v0 = FUN_002deb84();
+  temp_v0 = scrGetCommandFrame();
   temp_v1 = scrGetArg(0);
   FUN_002c76c0(0);
   temp_v7 = 0;
   temp_v6 = 0;
   do {
-    if ((temp_v1 != temp_v6) && (temp_v2 = FUN_0018719c(temp_v8[temp_v6]), temp_v2 != 0)) {
+    if ((temp_v1 != temp_v6) && (temp_v2 = gameFlagIsSet(temp_v8[temp_v6]), temp_v2 != 0)) {
       temp_v7 = temp_v7 + 1;
     }
     temp_v2 = DAT_0057f58c;
@@ -104,24 +104,24 @@ unsigned int FUN_003884d8(void)
     }
     temp_v5 = FUN_002ba85c();
     temp_v3 = scrGetArg(0);
-    temp_v4 = FUN_002deb84();
+    temp_v4 = scrGetCommandFrame();
     FUN_0021bdac(temp_v5,temp_v3,temp_v4,6,0,0);
     FUN_0023723c(*(unsigned int *)(temp_v2 + 4),4,0xffffffff,0,3,&LAB_00388748,&LAB_0038870c);
-    FUN_0016431c(*(unsigned int *)(temp_v2 + 4));
+    msgBoxFlagsSetBit7(*(unsigned int *)(temp_v2 + 4));
     *(unsigned char *)(temp_v2 + 0x19c4) = 0;
     *(unsigned int *)(temp_v2 + 0xc) = *(unsigned int *)(temp_v2 + 0xc) | 0x20;
     FUN_0031f27c(0xffffffff,3);
     temp_v0 = 0;
     do {
-      if ((temp_v1 != temp_v0) && (temp_v6 = FUN_0018719c(temp_v8[temp_v0]), temp_v6 != 0)) {
+      if ((temp_v1 != temp_v0) && (temp_v6 = gameFlagIsSet(temp_v8[temp_v0]), temp_v6 != 0)) {
         FUN_0031f208(temp_v9[temp_v0]);
       }
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < 5);
-    FUN_0023b27c();
+    useCounterStart();
   }
   temp_v1 = FUN_002c7c54();
-  temp_v0 = FUN_0023b258();
+  temp_v0 = useCounterIsFinished();
   if (temp_v0 != 0) {
     scrSetResult(0);
     FUN_002686b8();

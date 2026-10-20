@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_00184310(int);
-int FUN_0019cac4(void);
+int dataTable00FindById(void);
 int sysMemClear(unsigned int *, int);
 int rt_memcpy_w(...);
 
 /* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: FUN_0019cac4. */
+/* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -22,7 +22,7 @@ void FUN_0036d318(int param_1,unsigned int *param_2)
   int temp_v0;
   
   temp_v0 = param_1;
-  FUN_0019cac4();
+  dataTable00FindById();
   sysMemClear(param_2,300);
   *(short *)((int)param_2 + 0x62) = (short)param_1;
   *(unsigned short *)(param_2 + 0x19) = *(unsigned short *)(temp_v0 + 2) & 0x7fff;

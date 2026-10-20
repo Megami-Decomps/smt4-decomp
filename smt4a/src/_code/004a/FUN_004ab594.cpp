@@ -4,9 +4,9 @@
 
 extern "C" {
 
-extern int DAT_0057a9c8; /* 0x57a9c8 */
+extern int g_btlUiBlock; /* 0x57a9c8 */
 
-extern int FUN_001ab888(unsigned int);
+extern int gameGetSlotTable(unsigned int);
 extern int FUN_002cc9e0(int, unsigned int);
 extern unsigned long long FUN_002e5ac0(unsigned int, unsigned int, int);
 
@@ -27,13 +27,13 @@ unsigned int FUN_004ab594(void)
   int temp_v10;
   unsigned long long temp_v11;
   
-  temp_v7 = DAT_0057a9c8;
-  temp_v1 = FUN_002cc9e0(DAT_0057a9c8 + 0x28c4,1);
+  temp_v7 = g_btlUiBlock;
+  temp_v1 = FUN_002cc9e0(g_btlUiBlock + 0x28c4,1);
   if (temp_v1 != 10) {
     temp_v2 = 0xffffffff;
   }
   else {
-    temp_v3 = FUN_001ab888(10);
+    temp_v3 = gameGetSlotTable(10);
     temp_v10 = -1;
     temp_v1 = -1;
     if ((*(unsigned int *)(temp_v7 + 0x7490) & 1) != 0) {

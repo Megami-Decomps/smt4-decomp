@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern unsigned char DAT_0057f0c4;
+extern unsigned char g_buttonHelp;
 
 
 typedef struct { unsigned char pad[0xae]; unsigned short v; unsigned char pad2[2]; } E;
@@ -16,7 +16,7 @@ unsigned short FUN_003aeaf0(unsigned int param_1)
     temp_v0 = 0;
   }
   else {
-    S *s = (S *)*(int *)((unsigned char *)&DAT_0057f0c4 + 0x4);
+    S *s = (S *)*(int *)((unsigned char *)&g_buttonHelp + 0x4);
     temp_v0 = *(unsigned short *)((unsigned char *)(&s->e[0]) + param_1 * 4 + 0xae);
   }
   return temp_v0;

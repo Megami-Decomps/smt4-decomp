@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_00184310(...);
-int FUN_001b4a90(...);
-int FUN_002e3328(...);
+int __aeabi_memset4(...);
+int asdOperatorDelete(...);
 int sysMemClear(...);
 int FUN_003e8704(...);
 int FUN_003e8794(...);
@@ -48,7 +48,7 @@ typedef struct {
     unsigned int sp68; /* 0x68: local_68 */
 } param_4_stack;
 
-extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
+extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 extern unsigned int DAT_0057aa30; /* 0x57aa30 */
 extern unsigned int DAT_0057aa34; /* 0x57aa34 */
 extern unsigned int DAT_0057aa38; /* 0x57aa38 */
@@ -68,9 +68,9 @@ extern unsigned int DAT_0057aa7c; /* 0x57aa7c */
 
 extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_00184310. */
-extern int FUN_001ab888(void);
-/* Supplied declaration required: FUN_001b4a90. */
-/* Supplied declaration required: FUN_002e3328. */
+extern int gameGetSlotTable(void);
+/* Supplied declaration required: __aeabi_memset4. */
+/* Supplied declaration required: asdOperatorDelete. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003e8704. */
 /* Supplied declaration required: FUN_003e8794. */
@@ -145,7 +145,7 @@ void FUN_004c9d04(fn_004c9d04_arg0 *param_1,unsigned int param_2,unsigned int pa
           temp_v10 = *(int *)(temp_v5 + 0x1ed4) + temp_v12 * 0x1d0;
           if (((*(unsigned int *)(temp_v10 + 0x50) & 0x200000) != 0) && (*(int *)(temp_v10 + 0x1bc) != 0)) {
             objectRefRelease();
-            FUN_002e3328();
+            asdOperatorDelete();
             *(unsigned int *)(temp_v10 + 0x1bc) = 0;
           }
           *(unsigned int *)(temp_v10 + 0x50) = 0;
@@ -251,7 +251,7 @@ void FUN_004c9d04(fn_004c9d04_arg0 *param_1,unsigned int param_2,unsigned int pa
             }
           }
           else {
-            temp_v12 = FUN_001ab888();
+            temp_v12 = gameGetSlotTable();
             puVar8 = (unsigned char *)((int)&param_1[-1].field_0x4558 + 3);
             if ((int)puVar8 >= 0) {
               temp_v1 = puVar8[temp_v12 + 0x1ca0];
@@ -264,7 +264,7 @@ void FUN_004c9d04(fn_004c9d04_arg0 *param_1,unsigned int param_2,unsigned int pa
                   }
                 }
                 else {
-                  FUN_004a9c24(DAT_0057a9c8,param_1,0xffffffff,1);
+                  FUN_004a9c24(g_btlUiBlock,param_1,0xffffffff,1);
                   FUN_004fb43c(0,0,0x1000213,0,0,0,0);
                 }
               }
@@ -347,7 +347,7 @@ void FUN_004c9d04(fn_004c9d04_arg0 *param_1,unsigned int param_2,unsigned int pa
       puVar13[1] = temp_v6;
     }
     if (((temp_v13 == 0 && temp_v9 == 0) && (!temp_v2 && !temp_v3)) && !temp_v15) {
-      FUN_001b4a90(puVar13 + 2,100,0xffffffff);
+      __aeabi_memset4(puVar13 + 2,100,0xffffffff);
       *(unsigned short *)(puVar13 + 2) = 0;
       sysMemClear(puVar13 + 0x59,0x230);
     }

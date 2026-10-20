@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_001ab888(void);
+extern int gameGetSlotTable(void);
 
 
 int FUN_002f8ba4(char *param_1,char *param_2)
@@ -28,7 +28,7 @@ int FUN_002f8ba4(char *param_1,char *param_2)
     if (temp_v5 != 0x7f) {
       temp_v3 = -1;
       temp_v4 = -1;
-      temp_v0 = FUN_001ab888();
+      temp_v0 = gameGetSlotTable();
       if (*(char *)(temp_v0 + 0x1ca0) == temp_v6) {
         temp_v3 = 0;
       }

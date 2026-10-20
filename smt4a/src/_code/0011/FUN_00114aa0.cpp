@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00114a30(int, int);
-int FUN_002e6e14(void);
+int asdOperatorDeleteArray(void);
 int FUN_002e6e34(int *, unsigned char *);
 int FUN_002e6e5c(int *);
 int FUN_003002c8(void);
@@ -21,7 +21,7 @@ extern unsigned char DAT_0062e6a0; /* 0x62e6a0 */
 
 extern int FUN_00114a08(void);
 /* Supplied declaration required: FUN_00114a30. */
-/* Supplied declaration required: FUN_002e6e14. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
 extern int *FUN_002ea704(void);
@@ -56,12 +56,12 @@ void FUN_00114aa0(unsigned int param_1,unsigned int param_2,unsigned int param_3
     if (*(char *)(DAT_00594b2c + 0xc) != '\0') {
       FUN_003002c8();
       if (DAT_00594b2c != 0) {
-        FUN_002e6e14();
+        asdOperatorDeleteArray();
         DAT_00594b2c = 0;
       }
     }
     else {
-      FUN_002e6e14();
+      asdOperatorDeleteArray();
       DAT_00594b2c = 0;
     }
   }
@@ -69,17 +69,17 @@ void FUN_00114aa0(unsigned int param_1,unsigned int param_2,unsigned int param_3
     if (*(char *)(DAT_00594b28 + 0xc) != '\0') {
       FUN_003002c8();
       if (DAT_00594b28 != 0) {
-        FUN_002e6e14();
+        asdOperatorDeleteArray();
         DAT_00594b28 = 0;
       }
     }
     else {
-      FUN_002e6e14();
+      asdOperatorDeleteArray();
       DAT_00594b28 = 0;
     }
   }
   if (DAT_005949c8 != 0) {
-    FUN_002e6e14();
+    asdOperatorDeleteArray();
   }
   DAT_005949c8 = 0;
   DAT_005949c0 = 0;

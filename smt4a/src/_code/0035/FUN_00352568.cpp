@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00162e8c(void);
+int gameFlagsGetBlock(void);
 int FUN_0030250c(void);
 int FUN_0033abb4(void);
 int SBORROW4(int, int);
@@ -28,9 +28,9 @@ extern signed char DAT_005f1c70; /* 0x5f1c70 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-/* Supplied declaration required: FUN_00162e8c. */
+/* Supplied declaration required: gameFlagsGetBlock. */
 extern int FUN_00163fd4(unsigned int);
-extern int FUN_001656a0(unsigned int);
+extern int padButtonIsPressed(unsigned int);
 extern unsigned int FUN_0029202c(void);
 /* Supplied declaration required: FUN_0030250c. */
 extern int sub68OwnerCall1(void);
@@ -59,7 +59,7 @@ void FUN_00352568(void)
   
   temp_v5 = 0;
   temp_v4 = 0;
-  FUN_00162e8c();
+  gameFlagsGetBlock();
   temp_v0 = DAT_005806a4;
   temp_v10 = 1.0f;
   temp_v12 = 0.0f;
@@ -105,8 +105,8 @@ void FUN_00352568(void)
         if ((temp_v6 && temp_v0 == 0) &&
            ((temp_v1 = FUN_004d0554(), temp_v1 != 0 ||
             (((temp_v1 = FUN_00163fd4(8), temp_v1 != 0 && (temp_v1 = FUN_00163fd4(7), temp_v1 != 0)) &&
-             ((temp_v1 = FUN_001656a0(8), temp_v1 == 0 &&
-              ((temp_v1 = FUN_001656a0(7), temp_v1 == 0 && (*(char *)(DAT_005806a4 + 0xb5) == '\0'))))))
+             ((temp_v1 = padButtonIsPressed(8), temp_v1 == 0 &&
+              ((temp_v1 = padButtonIsPressed(7), temp_v1 == 0 && (*(char *)(DAT_005806a4 + 0xb5) == '\0'))))))
             )))) {
           temp_v5 = 0;
           temp_v4 = 0;

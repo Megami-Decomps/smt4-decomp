@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002e6490(unsigned int);
+int asdOperatorDeleteC(unsigned int);
 
 typedef int romwright_code(...);
-/* Supplied declaration required: FUN_002e6490. */
+/* Supplied declaration required: asdOperatorDeleteC. */
 
 
 void FUN_0010725a(romwright_code *param_1,unsigned int param_2)
@@ -18,7 +18,7 @@ void FUN_0010725a(romwright_code *param_1,unsigned int param_2)
     (*param_1)();
     return;
   }
-  FUN_002e6490(param_2);
+  asdOperatorDeleteC(param_2);
   return;
 }
 

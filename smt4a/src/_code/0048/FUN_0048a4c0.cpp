@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_00184528(int, int);
-int FUN_00184758(int, int, int);
-int FUN_00184c00(int, int, int);
+int uiSpriteSetKeyframe(int, int, int);
+int uiSpriteSetImageKeyframe(int, int, int);
 int FUN_0048bdec(int);
 int sub68OwnerGetBlock60(int);
 int lmapSceneGetObj(void);
@@ -19,8 +19,8 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_00184528. */
-/* Supplied declaration required: FUN_00184758. */
-/* Supplied declaration required: FUN_00184c00. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_0048bdec. */
 /* Supplied declaration required: sub68OwnerGetBlock60. */
 /* Supplied declaration required: lmapSceneGetObj. */
@@ -61,8 +61,8 @@ void FUN_0048a4c0(int param_1)
     FUN_00492c18(param_1 + 0x4cc,&temp_v2);
     FUN_00184528(param_1 + 0x4e4,0);
     FUN_00184528(param_1 + 0x4e4,1);
-    FUN_00184c00(param_1 + 0xf88,1,0);
-    FUN_00184758(param_1 + 0x1014,1,0);
+    uiSpriteSetImageKeyframe(param_1 + 0xf88,1,0);
+    uiSpriteSetKeyframe(param_1 + 0x1014,1,0);
     temp_v0 = 1;
   }
   *(unsigned int *)(param_1 + 8) = temp_v0;

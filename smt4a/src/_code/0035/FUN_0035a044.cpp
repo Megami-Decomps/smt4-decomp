@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_0057f118; /* 0x57f118 */
+extern int g_campCecEdit; /* 0x57f118 */
 
 
 unsigned int FUN_0035a044(void)
@@ -15,11 +15,11 @@ unsigned int FUN_0035a044(void)
   unsigned char temp_v2;
   
   temp_v1 = 0;
-  if (DAT_0057f118 != 0) {
-    temp_v2 = *(int *)(DAT_0057f118 + 0xe8) != 0x10;
-    temp_v0 = DAT_0057f118;
+  if (g_campCecEdit != 0) {
+    temp_v2 = *(int *)(g_campCecEdit + 0xe8) != 0x10;
+    temp_v0 = g_campCecEdit;
     if (temp_v2) {
-      temp_v0 = *(int *)(DAT_0057f118 + 0xec);
+      temp_v0 = *(int *)(g_campCecEdit + 0xec);
     }
     if (temp_v2 && temp_v0 != 0x10) {
       temp_v1 = 0;

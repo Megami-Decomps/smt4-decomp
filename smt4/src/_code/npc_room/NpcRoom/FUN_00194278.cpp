@@ -9,22 +9,22 @@ int FUN_00290d5c(...);
 
 int FUN_0019e0c0(...);
 int FUN_00290ed8(int);
-int FUN_00290f48(int);
-int FUN_002917b8(void);
-int FUN_00291944(void);
+int bgmFadeOut(int);
+int buttonHelpRelease(void);
+int uiFadeRelease(void);
 int FUN_00296e90(void);
-int FUN_00296f4c(...);
+int scrScriptProcessStartEntry(...);
 int FUN_00297060(...);
-int FUN_0029c3b0(int);
+int soundChannelStopAll(int);
 int FUN_0029c3c0(...);
-int FUN_002a03a0(int, int, int);
+int soundChannelRequestIfEnabled(int, int, int);
 int FUN_002a03d8(...);
-int FUN_002a46d8(int);
+int fileSlotFree(int);
 int scrScriptProcessDestroy(...);
-int FUN_002ae898(int, int);
+int asdTMTexTableReleaseNode(int, int);
 int FUN_002b71d0(unsigned int, int);
 int FUN_002b827c(...);
-int FUN_002b8838(...);
+int buttonHelpSetPreset(...);
 int FUN_002be624(...);
 int asdMemFree(...);
 int jobStop(unsigned int, int);
@@ -58,31 +58,31 @@ extern int FUN_00192654(unsigned int);
 /* Supplied declaration required: FUN_0019e0c0. */
 /* Supplied declaration required: npcRoomDestroy. */
 /* Supplied declaration required: FUN_00290d5c. */
-extern unsigned int FUN_00290d74(unsigned int, int);
+extern unsigned int tableGroupFindEntryIndex(unsigned int, int);
 extern int FUN_00290e78(void);
 extern int FUN_00290e9c(void);
 extern int FUN_00290eb0(void);
 /* Supplied declaration required: FUN_00290ed8. */
-/* Supplied declaration required: FUN_00290f48. */
-/* Supplied declaration required: FUN_002917b8. */
-/* Supplied declaration required: FUN_00291944. */
+/* Supplied declaration required: bgmFadeOut. */
+/* Supplied declaration required: buttonHelpRelease. */
+/* Supplied declaration required: uiFadeRelease. */
 /* Supplied declaration required: FUN_00296e90. */
-/* Supplied declaration required: FUN_00296f4c. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297060. */
 extern int FUN_002973d8(void);
-/* Supplied declaration required: FUN_0029c3b0. */
+/* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: FUN_0029c3c0. */
-/* Supplied declaration required: FUN_002a03a0. */
+/* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: FUN_002a03d8. */
-/* Supplied declaration required: FUN_002a46d8. */
-extern int FUN_002a60b4(unsigned int, unsigned short);
+/* Supplied declaration required: fileSlotFree. */
+extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned short);
 /* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: FUN_002ae898. */
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
 /* Supplied declaration required: FUN_002b71d0. */
 /* Supplied declaration required: FUN_002b827c. */
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: FUN_002be624. */
-extern int FUN_002c09d0(void);
+extern int gameFlagIsSet(void);
 extern unsigned int dataTableGetCount(unsigned int);
 extern short *dataTableGetEntries(void);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
@@ -122,16 +122,16 @@ unsigned int FUN_00194278(void)
   switch(g_npcRoom[0x3c]) {
   case 0:
     psVar7 = (short *)(g_npcRoom + 0x40);
-    temp_v5 = FUN_002a60b4(2,*(unsigned short *)((int)g_npcRoom + 0x102));
+    temp_v5 = asdTMTexTableNodeIsLoaded(2,*(unsigned short *)((int)g_npcRoom + 0x102));
     if (temp_v5 != 0) {
       FUN_002a03d8(0,1);
       FUN_002a03d8(1);
       temp_v5 = 0;
       do {
         if (((*(short *)(puVar3[9] + temp_v5 * 0x18 + 0x24) != 0) &&
-            (temp_v2 = FUN_002c09d0(), temp_v2 != 0)) &&
+            (temp_v2 = gameFlagIsSet(), temp_v2 != 0)) &&
            ((*(short *)(puVar3[9] + temp_v5 * 0x18 + 0x26) == 0 ||
-            (temp_v2 = FUN_002c09d0(), temp_v2 == 0)))) {
+            (temp_v2 = gameFlagIsSet(), temp_v2 == 0)))) {
           temp_v9 = (unsigned int)*(unsigned short *)(puVar3[9] + temp_v5 * 0x18 + 0x28);
           uStack_64 = 0xffffffff;
           puVar3 = (unsigned int *)(temp_v5 * 0x18 + 0x2a + puVar3[9]);
@@ -145,10 +145,10 @@ unsigned int FUN_00194278(void)
           if (g_npcRoom != (unsigned int *)0x0) {
             FUN_00323f40();
             if (*(short *)(puVar3 + 0x40) == 0x22) {
-              FUN_0029c3b0(0xf);
-              FUN_00290f48(0x3c);
+              soundChannelStopAll(0xf);
+              bgmFadeOut(0x3c);
             }
-            FUN_002ae898(2,*(unsigned short *)((int)puVar3 + 0x102));
+            asdTMTexTableReleaseNode(2,*(unsigned short *)((int)puVar3 + 0x102));
             temp_v5 = 0;
             do {
               if (puVar3[temp_v5 + 10] != 0) {
@@ -163,10 +163,10 @@ unsigned int FUN_00194278(void)
             jobStop(*puVar3,0);
             asdMemFree(puVar3);
             g_npcRoom = (unsigned int *)0x0;
-            FUN_002a46d8(0x35);
-            FUN_002a46d8(0x1a);
-            FUN_002917b8();
-            FUN_00291944();
+            fileSlotFree(0x35);
+            fileSlotFree(0x1a);
+            buttonHelpRelease();
+            uiFadeRelease();
           }
           return 0xffffffff;
         }
@@ -174,7 +174,7 @@ unsigned int FUN_00194278(void)
       } while (temp_v5 < 3);
       if (*psVar7 == 0x22) {
         FUN_00290ed8(0x1e);
-        FUN_002a03a0(0x100005e,0,0x3c);
+        soundChannelRequestIfEnabled(0x100005e,0,0x3c);
       }
       puVar3[0x41] = 0;
       temp_v5 = 0;
@@ -201,9 +201,9 @@ unsigned int FUN_00194278(void)
     if (temp_v5 != 0) break;
     temp_v5 = puVar3[0x3d];
     if (temp_v5 < 1) {
-      temp_v5 = FUN_00296f4c(puVar3[0x14],2);
+      temp_v5 = scrScriptProcessStartEntry(puVar3[0x14],2);
       if (temp_v5 != 0) {
-        FUN_002b8838(0xa2);
+        buttonHelpSetPreset(0xa2);
         puVar2 = g_npcRoom;
         g_npcRoom[0x3b] = 0;
         puVar2[0x3c] = 5;
@@ -215,9 +215,9 @@ unsigned int FUN_00194278(void)
         if (temp_v5 < 2) break;
       }
       else if (puVar3[0x39] == 1) goto LAB_001945e8;
-      temp_v5 = FUN_00296f4c(puVar3[0x14],0);
+      temp_v5 = scrScriptProcessStartEntry(puVar3[0x14],0);
       if (temp_v5 != 0) {
-        FUN_00296f4c(puVar3[0x15],1);
+        scrScriptProcessStartEntry(puVar3[0x15],1);
         puVar2 = g_npcRoom;
         g_npcRoom[0x3b] = 0;
         puVar2[0x3c] = 2;
@@ -288,13 +288,13 @@ LAB_001945e8:
     puVar3[0x17] = temp_v3;
     FUN_00297060(temp_v3,puVar3[0x16]);
     puVar3[0x18] = temp_v3;
-    temp_v3 = FUN_00290d74(puVar3[0x17],puVar3[puVar3[0x3e] + 10] + 0x16);
-    FUN_00296f4c(puVar3[0x18],temp_v3);
+    temp_v3 = tableGroupFindEntryIndex(puVar3[0x17],puVar3[puVar3[0x3e] + 10] + 0x16);
+    scrScriptProcessStartEntry(puVar3[0x18],temp_v3);
     puVar2 = g_npcRoom;
     g_npcRoom[0x3b] = 0;
     puVar2[0x3c] = 4;
     FUN_002b827c(0xa2);
-    FUN_002b8838(0xa2);
+    buttonHelpSetPreset(0xa2);
     break;
   case 4:
     temp_v5 = FUN_0019e0c0(g_npcRoom[0x18]);
@@ -332,10 +332,10 @@ LAB_001945e8:
     puVar2[0x3d] = 0;
     if (temp_v4 != 0) {
       do {
-        if ((((*psVar7 == temp_v0) && ((psVar7[7] == 0 || (temp_v5 = FUN_002c09d0(), temp_v5 != 0)))) &&
-            ((psVar7[8] == 0 || (temp_v5 = FUN_002c09d0(), temp_v5 != 0)))) &&
-           (((psVar7[9] == 0 || (temp_v5 = FUN_002c09d0(), temp_v5 == 0)) &&
-            ((psVar7[10] == 0 || (temp_v5 = FUN_002c09d0(), temp_v5 == 0)))))) {
+        if ((((*psVar7 == temp_v0) && ((psVar7[7] == 0 || (temp_v5 = gameFlagIsSet(), temp_v5 != 0)))) &&
+            ((psVar7[8] == 0 || (temp_v5 = gameFlagIsSet(), temp_v5 != 0)))) &&
+           (((psVar7[9] == 0 || (temp_v5 = gameFlagIsSet(), temp_v5 == 0)) &&
+            ((psVar7[10] == 0 || (temp_v5 = gameFlagIsSet(), temp_v5 == 0)))))) {
           puVar2[puVar2[0x3d] + 10] = (unsigned int)psVar7;
           temp_v5 = puVar2[0x3d];
           puVar2[0x3d] = temp_v5 + 1;

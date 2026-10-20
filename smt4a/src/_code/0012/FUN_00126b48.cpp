@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6dd4(int, int);
+int rt_memclr(int, int);
 
 typedef struct fn_00126b48_arg0 fn_00126b48_arg0;
 struct fn_00126b48_arg0 {
@@ -33,7 +33,7 @@ struct fn_00126b48_arg0 {
     uint field_0x90; /* +0x90 */
 };
 
-/* Supplied declaration required: FUN_002e6dd4. */
+/* Supplied declaration required: rt_memclr. */
 
 
 void FUN_00126b48(fn_00126b48_arg0 *param_1)
@@ -44,7 +44,7 @@ void FUN_00126b48(fn_00126b48_arg0 *param_1)
   
   param_1->field_0x3c = param_1->field_0x2c << 1;
   *(unsigned short *)(param_1->field_0x44 + (param_1->field_0x4c * 2 - 2)) = 0;
-  FUN_002e6dd4(param_1->field_0x44,param_1->field_0x4c * 2 - 2);
+  rt_memclr(param_1->field_0x44,param_1->field_0x4c * 2 - 2);
   temp_v0 = *(int *)&param_1->field_0x84 * 0xc;
   param_1->field_0x80 = (unsigned int)*(unsigned short *)(temp_v0 + 0x543fba);
   param_1->field_0x8c = (unsigned int)*(unsigned short *)(temp_v0 + 0x543fb8);

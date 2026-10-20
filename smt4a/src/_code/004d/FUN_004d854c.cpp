@@ -17,7 +17,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 
 /* Supplied declaration required: FUN_003fd784. */
 /* Supplied declaration required: FUN_003fd7b4. */
@@ -51,7 +51,7 @@ void FUN_004d854c(int *param_1)
   if (*param_1 != 0) {
     FUN_003fdb18(*(unsigned int *)(*param_1 + 4));
   }
-  FUN_0040ace8(DAT_0056fcc0,temp_v0);
+  FUN_0040ace8(g_handleRegistry,temp_v0);
   return;
 }
 

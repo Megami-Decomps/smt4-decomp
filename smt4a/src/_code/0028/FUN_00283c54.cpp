@@ -9,7 +9,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_4_stack;
 
-extern int DAT_0057f65c; /* 0x57f65c */
+extern int g_frameTex; /* 0x57f65c */
 
 
 void FUN_00283c54(unsigned int param_1,unsigned int param_2,unsigned char param_3,unsigned int param_4)
@@ -20,14 +20,14 @@ void FUN_00283c54(unsigned int param_1,unsigned int param_2,unsigned char param_
   float in_s0;
   float in_s1;
   
-  temp_v0 = DAT_0057f65c;
+  temp_v0 = g_frameTex;
   if ((int)in_s0 < 0x3f800000) {
     in_s0 = 1.0f;
   }
   if ((int)in_s1 < 0x3f800000) {
     in_s1 = 1.0f;
   }
-  *(float *)(DAT_0057f65c + 0xfb0) = -in_s0;
+  *(float *)(g_frameTex + 0xfb0) = -in_s0;
   *(float *)(temp_v0 + 0xfb4) = in_s0 + 400.0f;
   *(float *)(temp_v0 + 0xfb8) = -in_s0;
   *(float *)(temp_v0 + 0xfbc) = in_s0 + 400.0f;

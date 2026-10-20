@@ -6,7 +6,7 @@ extern "C" {
 void *FUN_0014e3bc(s32 size, u32 flags);
 void *FUN_0013c174(char *path, u8 *size, u32 flags);
 char *FUN_00100238(char *str, u32 ch);
-void FUN_002e342c(char *dst, const char *src);
+void libc_strcpy(char *dst, const char *src);
 void FUN_00100388(char *dst, const char *format, ...);
 
 extern char LAB_0013f424[];
@@ -30,14 +30,14 @@ TexFile *asdTMTexTableLoadTmx(s32 idx, u32 flags)
         u8 mode;
         TmxHeader *tmx;
 
-        FUN_002e342c(dir, header->dirPrefix);
+        libc_strcpy(dir, header->dirPrefix);
         for (p = dir; *p != '\0'; p++) {
             char *slash = FUN_00100238(p, 0x5c);
             if (slash != NULL) {
                 *slash = '/';
             }
         }
-        FUN_002e342c(header->dirPrefix, dir);
+        libc_strcpy(header->dirPrefix, dir);
         FUN_00100388(path, LAB_0013f428, header->dirPrefix, entry->name, LAB_0013f424);
         mode = (flags & 1) != 0;
         if (flags & 2) {
@@ -87,14 +87,14 @@ TexFile *asdTMTexTableLoadTmx(s32 idx, u32 flags)
             }
             texFile->image = (u8 *)tmx;
             texFile->image2 = (u8 *)tmx;
-            FUN_002e342c(dir, header->dirPrefix2);
+            libc_strcpy(dir, header->dirPrefix2);
             for (p = dir; *p != '\0'; p++) {
                 char *slash = FUN_00100238(p, 0x5c);
                 if (slash != NULL) {
                     *slash = '/';
                 }
             }
-            FUN_002e342c(header->dirPrefix2, dir);
+            libc_strcpy(header->dirPrefix2, dir);
             FUN_00100388(texFile->path, LAB_0013f43c, header->dirPrefix2, (u8 *)tmx + 4);
             entry->file = texFile;
         }

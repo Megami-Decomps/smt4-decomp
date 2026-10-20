@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00257dec(int, int);
 int FUN_00269bd0(int, int);
-int FUN_002b06c4(void);
+int dataTable00FindById(void);
 int libc_strcat(...);
 int FUN_002be624(...);
 
@@ -35,10 +35,10 @@ extern unsigned char LAB_001f49b0; /* 0x1f49b0 */
 extern int FUN_00257e0c(void);
 extern int FUN_00257e40(unsigned char);
 /* Supplied declaration required: FUN_00269bd0. */
-/* Supplied declaration required: FUN_002b06c4. */
+/* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: libc_strcat. */
 /* Supplied declaration required: FUN_002be624. */
-extern unsigned int FUN_002c30c4(fn_001f4568_arg3 *);
+extern unsigned int libc_strlen(fn_001f4568_arg3 *);
 
 
 void FUN_001f4568(int param_1,int param_2,unsigned int param_3,fn_001f4568_arg3 *param_4)
@@ -136,7 +136,7 @@ void FUN_001f4568(int param_1,int param_2,unsigned int param_3,fn_001f4568_arg3 
   }
   else {
     param_3 = param_3 & 0xffff;
-    FUN_002b06c4();
+    dataTable00FindById();
     temp_v4 = 0;
     unaff_r4 = temp_v10;
     do {
@@ -275,7 +275,7 @@ LAB_001f48d0:
   if ((temp_v5 == 0 && temp_v7 == 0) && temp_v6 == 0) {
     libc_strcat(param_4,&LAB_001f49b0);
   }
-  temp_v4 = FUN_002c30c4(param_4);
+  temp_v4 = libc_strlen(param_4);
   if (temp_v4 >= 0x5d) {
     param_4->field_0x5d = 0;
     param_4->field_0x5e = 0;

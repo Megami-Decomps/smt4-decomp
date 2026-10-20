@@ -28,7 +28,7 @@ extern unsigned char LAB_002f4b30; /* 0x2f4b30 */
 extern unsigned int *g_mapDepart; /* 0x4475b8 */
 extern int g_gameState; /* 0x49f91c */
 
-extern int FUN_002c2950(void);
+extern int gameGetMapBlock(void);
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdProcessCreateSimple. */
@@ -47,7 +47,7 @@ void MapDepart_Init(int *param_1)
   puVar1 = (unsigned int *)0x100;
   asdMemAlloc(0x100,0x100,0,0x80,1);
   g_mapDepart = puVar1;
-  temp_v0 = FUN_002c2950();
+  temp_v0 = gameGetMapBlock();
   if (param_1 != (int *)0x0) {
     temp_v1 = *param_1;
     if (temp_v1 != 0) {

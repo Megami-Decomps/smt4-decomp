@@ -6,9 +6,9 @@ extern "C" {
 
 int FUN_002e6e34(unsigned char [12], int);
 int FUN_002e6e5c(unsigned char [12]);
-int FUN_002e7232(int *);
-int FUN_002e9a92(int);
-int FUN_002e9afe(...);
+int sharedRefRelease(int *);
+int onlineCallStateIsDone(int);
+int vectorCopyHeader(...);
 int _ZN9Obj55859c12freeResourceEv(int *);
 
 typedef int romwright_code(...);
@@ -25,10 +25,10 @@ typedef struct {
 extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-/* Supplied declaration required: FUN_002e7232. */
+/* Supplied declaration required: sharedRefRelease. */
 extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
-/* Supplied declaration required: FUN_002e9a92. */
-/* Supplied declaration required: FUN_002e9afe. */
+/* Supplied declaration required: onlineCallStateIsDone. */
+/* Supplied declaration required: vectorCopyHeader. */
 /* Supplied declaration required: _ZN9Obj55859c12freeResourceEv. */
 extern int wordRefsDiffer_002e9b20(int **, int *);
 
@@ -58,13 +58,13 @@ void FUN_002e9b30(int *param_1,int param_2,unsigned int *param_3,int param_4)
   temp_v0 = FUN_002e6e26();
   FUN_002e6e34(temp_v6,temp_v0 + 0x58);
   if (param_4 != 0) {
-    FUN_002e9a92(param_2);
+    onlineCallStateIsDone(param_2);
   }
   temp_v2 = param_1 + 0xe;
   if ((param_2 != 1) && (param_2 == 0)) {
     temp_v8 = 0x80010001;
     temp_v1 = FUN_002e7908(temp_v7,(unsigned int *)&temp_v8);
-    FUN_002e9afe(temp_v2,temp_v1);
+    vectorCopyHeader(temp_v2,temp_v1);
   }
   if (((char)param_1[4] == '\x01') && (param_1[0x11] != 0)) {
     _ZN9Obj55859c12freeResourceEv(param_1);
@@ -75,10 +75,10 @@ void FUN_002e9b30(int *param_1,int param_2,unsigned int *param_3,int param_4)
   (**(romwright_code **)(*param_1 + 0xc))(param_1,param_2,&temp_v3,param_4);
   *(char *)(param_1 + 4) = (char)param_2;
   if (param_4 != 0) {
-    FUN_002e9afe(temp_v2,temp_v9);
+    vectorCopyHeader(temp_v2,temp_v9);
   }
   FUN_002e6e5c(temp_v6);
-  temp_v0 = FUN_002e9a92(param_2);
+  temp_v0 = onlineCallStateIsDone(param_2);
   if (temp_v0 != 0) {
     temp_v2 = *(int **)param_1[9];
     while( 1 ) {
@@ -92,7 +92,7 @@ void FUN_002e9b30(int *param_1,int param_2,unsigned int *param_3,int param_4)
     }
     (**(romwright_code **)(*param_1 + 0x10))(param_1);
     if (-1 < ~param_1[3] << 0x1e) {
-      FUN_002e7232(param_1);
+      sharedRefRelease(param_1);
     }
   }
   return;

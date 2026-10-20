@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00135778(unsigned int, unsigned int);
 int FUN_002eb310(unsigned int, int *);
 int FUN_002ff380(unsigned int);
-int FUN_00300934(int, int *);
+int streamReadWord(int, int *);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -16,9 +16,9 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00135778. */
 /* Supplied declaration required: FUN_002eb310. */
-extern int FUN_002ed28c(int, unsigned int *);
+extern int streamReadU32(int, unsigned int *);
 /* Supplied declaration required: FUN_002ff380. */
-/* Supplied declaration required: FUN_00300934. */
+/* Supplied declaration required: streamReadWord. */
 
 
 void FUN_00128f5c(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -33,14 +33,14 @@ void FUN_00128f5c(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   temp_v2 = param_3;
   uStack_14 = param_4;
   FUN_002ff380(param_2);
-  temp_v0 = FUN_002ed28c(param_1,&temp_v2);
+  temp_v0 = streamReadU32(param_1,&temp_v2);
   if (temp_v0 != 0) {
     FUN_00135778(param_2,temp_v2);
     for (temp_v1 = 0; temp_v1 < temp_v2; temp_v1 = temp_v1 + 1) {
       if (*(char *)(param_1 + 4) != '\0') {
         return;
       }
-      FUN_00300934(param_1,&uStack_14);
+      streamReadWord(param_1,&uStack_14);
       if (*(char *)(param_1 + 4) != '\0') {
         FUN_002ff380(param_2);
         return;

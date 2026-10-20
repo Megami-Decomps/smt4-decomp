@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern u8 *FUN_002840c4(s32 index);
+extern u8 *flagsAtGetPtr(s32 index);
 
 u32 flagsAtGetBit1(s32 index)
 {
-    u8 *flags = FUN_002840c4(index);
+    u8 *flags = flagsAtGetPtr(index);
 
     return (*flags & 2) >> 1;
 }

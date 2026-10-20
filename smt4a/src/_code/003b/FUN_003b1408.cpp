@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_00192550(void);
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 int scrSetResult(unsigned int);
 
 extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_00192550. */
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: dataTable04FindById. */
 extern unsigned short FUN_001ba3d4(unsigned int);
 extern int scrGetArg(unsigned int);
 /* Supplied declaration required: scrSetResult. */
@@ -54,7 +54,7 @@ unsigned int FUN_003b1408(void)
     }
     FUN_00192550();
     temp_v6 = (unsigned int)*(unsigned short *)(temp_v6 + 0x32);
-    FUN_001aba54();
+    dataTable04FindById();
     if (temp_v6 != 0) {
       temp_v7 = (*(unsigned int *)(temp_v6 + 0x28) & 0xffff) >> 0xb;
     }

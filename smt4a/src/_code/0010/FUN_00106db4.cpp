@@ -20,7 +20,7 @@ extern unsigned char DAT_00558960; /* 0x558960 */
 
 /* Supplied declaration required: FUN_00114e54. */
 extern unsigned int FUN_001174ec(void);
-extern int FUN_002e760a(unsigned int);
+extern int operatorNew(unsigned int);
 extern unsigned int *FUN_002eb4a4(fn_00106db4_arg0 *, unsigned int, unsigned int);
 
 
@@ -34,12 +34,12 @@ unsigned int * FUN_00106db4(fn_00106db4_arg0 *param_1)
   
   puVar1 = (unsigned int *)FUN_002eb4a4(param_1,10,0);
   *puVar1 = (unsigned int)&DAT_00558960;
-  temp_v0 = FUN_002e760a(0x28);
+  temp_v0 = operatorNew(0x28);
   if (temp_v0 != 0) {
     FUN_00114e54();
   }
   puVar1[6] = temp_v0;
-  temp_v0 = FUN_002e760a(0x54);
+  temp_v0 = operatorNew(0x54);
   temp_v1 = 0;
   if (temp_v0 != 0) {
     temp_v1 = FUN_001174ec();

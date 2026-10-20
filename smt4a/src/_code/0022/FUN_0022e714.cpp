@@ -12,11 +12,11 @@ typedef struct Global22e714 {
     Obj22e714 *obj;                /* 0x04 */
 } Global22e714;
 
-extern Global22e714 DAT_00588fd0;
+extern Global22e714 g_gameGlobals;
 
 s8 FUN_0022e714(void)
 {
-    return DAT_00588fd0.obj->value;
+    return g_gameGlobals.obj->value;
 }
 
 } /* extern "C" */

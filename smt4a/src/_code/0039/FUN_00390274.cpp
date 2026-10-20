@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned int DAT_00647194; /* 0x647194 */
+extern unsigned int g_effMenuHandles; /* 0x647194 */
 extern unsigned int DAT_00647198; /* 0x647198 */
 extern unsigned int DAT_0064719c; /* 0x64719c */
 extern unsigned int DAT_006471a0; /* 0x6471a0 */
@@ -19,7 +19,7 @@ extern unsigned int DAT_006471b8; /* 0x6471b8 */
 void FUN_00390274(void)
 
 {
-  DAT_00647194 = 0;
+  g_effMenuHandles = 0;
   DAT_006471a8 = 0;
   DAT_00647198 = 0;
   DAT_006471ac = 0;

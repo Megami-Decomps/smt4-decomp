@@ -2,13 +2,13 @@
 
 extern "C" {
 
-extern s32 FUN_001b347c(void);
+extern s32 gameSlotTableFindFree(void);
 extern void scrSetResult(s32 value);
 
-/* Script command: result is FUN_001b347c(). */
+/* Script command: result is gameSlotTableFindFree(). */
 u32 FUN_003a746c(void)
 {
-    scrSetResult(FUN_001b347c());
+    scrSetResult(gameSlotTableFindFree());
     return 1;
 }
 

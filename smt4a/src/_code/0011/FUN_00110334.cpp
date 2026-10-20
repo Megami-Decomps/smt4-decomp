@@ -9,7 +9,7 @@ int FUN_002fb0b4(...);
 int FUN_002fb0d4(...);
 int FUN_002fb1c4(...);
 int FUN_002fb1d4(...);
-int FUN_002fb1ea(...);
+int onlineThreadSetPriority(...);
 int FUN_0042d250(...);
 
 typedef struct fn_00110334_arg0 fn_00110334_arg0;
@@ -45,7 +45,7 @@ extern int FUN_002e784e(int, unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002fb0d4. */
 /* Supplied declaration required: FUN_002fb1c4. */
 /* Supplied declaration required: FUN_002fb1d4. */
-/* Supplied declaration required: FUN_002fb1ea. */
+/* Supplied declaration required: onlineThreadSetPriority. */
 /* Supplied declaration required: FUN_0042d250. */
 
 
@@ -110,7 +110,7 @@ unsigned char FUN_00110334(fn_00110334_arg0 *param_1)
   else {
     FUN_002fb1d4();
     *(unsigned int *)&param_1->field_0x10 = temp_v1;
-    FUN_002fb1ea(*param_1->field_0xc,param_1->field_0x14);
+    onlineThreadSetPriority(*param_1->field_0xc,param_1->field_0x14);
   }
   return -1 < (int)pfVar4;
 }

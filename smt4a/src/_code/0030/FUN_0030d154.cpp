@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00307aba(int, int);
-int FUN_0030fd28(int *, int, int);
+int destroyRangeElem40(int *, int, int);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -14,7 +14,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_00307aba. */
-/* Supplied declaration required: FUN_0030fd28. */
+/* Supplied declaration required: destroyRangeElem40. */
 extern int __aeabi_idivmod(int, unsigned int);
 
 
@@ -36,7 +36,7 @@ void FUN_0030d154(int *param_1)
       FUN_00307aba(temp_v3,temp_v0);
       temp_v3 = temp_v3 + 0x28;
     }
-    FUN_0030fd28(param_1,temp_v3,param_1[1]);
+    destroyRangeElem40(param_1,temp_v3,param_1[1]);
     temp_v0 = __aeabi_idivmod(temp_v2 - temp_v1,0x28);
     param_1[1] = param_1[1] + temp_v0 * -0x28;
   }

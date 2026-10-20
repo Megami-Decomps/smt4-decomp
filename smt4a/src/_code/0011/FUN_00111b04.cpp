@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002ea43c(int);
+int onlineJobSetStateDone(int);
 int FUN_002fd49c(int, int);
 int FUN_002fd51c(int, int, unsigned int);
 
@@ -18,7 +18,7 @@ typedef struct {
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 extern unsigned int FUN_002e7908(int *, unsigned int *);
-/* Supplied declaration required: FUN_002ea43c. */
+/* Supplied declaration required: onlineJobSetStateDone. */
 /* Supplied declaration required: FUN_002fd49c. */
 /* Supplied declaration required: FUN_002fd51c. */
 
@@ -46,7 +46,7 @@ unsigned long long FUN_00111b04(int param_1,unsigned int param_2,unsigned int pa
   }
   temp_v0 = FUN_002e7908(&iStack_18,(unsigned int *)&temp_v1);
   FUN_002fd51c(param_1,3,temp_v0);
-  FUN_002ea43c(param_1);
+  onlineJobSetStateDone(param_1);
   return romwright_piece_4_4(uStack_14,iStack_18);
 }
 

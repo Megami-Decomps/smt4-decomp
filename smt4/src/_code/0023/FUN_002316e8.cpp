@@ -19,7 +19,7 @@ typedef struct {
 extern char *dataTable2bSub1GetRecord(unsigned char *, int);
 /* Supplied declaration required: dataTable2bSub1GetCount. */
 /* Supplied declaration required: uiGetEntrySize. */
-extern int FUN_002c09d0(void);
+extern int gameFlagIsSet(void);
 
 
 void FUN_002316e8(int param_1,int param_2)
@@ -80,8 +80,8 @@ void FUN_002316e8(int param_1,int param_2)
       pcVar3 = (char *)dataTable2bSub1GetRecord(temp_v15,temp_v3);
       temp_v4 = temp_v2;
       if (((*pcVar3 == param_2) &&
-          ((*(short *)(pcVar3 + 4) == 0 || (temp_v1 = FUN_002c09d0(), temp_v1 != 0)))) &&
-         ((*(short *)(pcVar3 + 6) == 0 || (temp_v1 = FUN_002c09d0(), temp_v1 == 0)))) {
+          ((*(short *)(pcVar3 + 4) == 0 || (temp_v1 = gameFlagIsSet(), temp_v1 != 0)))) &&
+         ((*(short *)(pcVar3 + 6) == 0 || (temp_v1 = gameFlagIsSet(), temp_v1 == 0)))) {
         if (*(short *)(pcVar3 + 8) == 5) {
           temp_v5 = 0x1bc3;
         }

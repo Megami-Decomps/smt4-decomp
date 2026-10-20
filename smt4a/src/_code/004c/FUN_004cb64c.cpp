@@ -26,7 +26,7 @@ struct fn_004cb64c_arg1 {
 };
 
 extern unsigned int DAT_00573808; /* 0x573808 */
-extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
+extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
 /* Supplied declaration required: FUN_001568f8. */
 extern unsigned int FUN_003ec620(int, unsigned int);
@@ -115,14 +115,14 @@ void FUN_004cb64c(int param_1,fn_004cb64c_arg1 *param_2)
         FUN_003fce8c(temp_v1,1);
         param_2->field_0x5c = param_2->field_0x5c;
         param_2->field_0x58 = (void *)((unsigned int)param_2->field_0x58 | 0x200);
-        FUN_004ac0d4(DAT_0057a9c8,*(unsigned short *)(temp_v3 + 2));
+        FUN_004ac0d4(g_btlUiBlock,*(unsigned short *)(temp_v3 + 2));
         FUN_004f7fe8(DAT_00573808,param_2,*(unsigned int *)(temp_v0 + 0xc));
         FUN_004f7924(DAT_00573808,param_2);
         FUN_004c9b64(param_1,param_2);
       }
     }
     else {
-      FUN_004ac0d4(DAT_0057a9c8,*(unsigned short *)(temp_v3 + 2));
+      FUN_004ac0d4(g_btlUiBlock,*(unsigned short *)(temp_v3 + 2));
       FUN_004f7fe8(DAT_00573808,param_2,*(unsigned int *)(temp_v0 + 0xc));
       FUN_004f7924(DAT_00573808,param_2);
       FUN_004c9b64(param_1,param_2);

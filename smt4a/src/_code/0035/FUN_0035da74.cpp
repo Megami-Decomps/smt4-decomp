@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002f01e0(unsigned int, unsigned int);
 
-extern int DAT_00588fe8; /* 0x588fe8 */
+extern int g_statusDown; /* 0x588fe8 */
 
 /* Supplied declaration required: FUN_002f01e0. */
 
@@ -25,14 +25,14 @@ void FUN_0035da74(unsigned int param_1,unsigned int param_2)
   unsigned int uStack_20;
   unsigned int uStack_1c;
   
-  temp_v2 = DAT_00588fe8;
+  temp_v2 = g_statusDown;
   if (param_2 >= 0x11) {
     return;
   }
-  uStack_28 = *(unsigned int *)(DAT_00588fe8 + 0x59c);
-  uStack_24 = *(unsigned int *)(DAT_00588fe8 + 0x5a0);
-  uStack_20 = *(unsigned int *)(DAT_00588fe8 + 0x5a4);
-  uStack_1c = *(unsigned int *)(DAT_00588fe8 + 0x5a8);
+  uStack_28 = *(unsigned int *)(g_statusDown + 0x59c);
+  uStack_24 = *(unsigned int *)(g_statusDown + 0x5a0);
+  uStack_20 = *(unsigned int *)(g_statusDown + 0x5a4);
+  uStack_1c = *(unsigned int *)(g_statusDown + 0x5a8);
   FUN_002f01e0(param_1,param_2);
   temp_v4 = 0;
   if (temp_v4 < (int)param_2) {

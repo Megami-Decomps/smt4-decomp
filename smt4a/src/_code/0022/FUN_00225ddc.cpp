@@ -20,24 +20,24 @@ int FUN_00183318(int);
 int asdMemFree(void);
 int scrScriptProcessDestroy(void);
 int FUN_0020214c(void);
-int FUN_0024b0c0(unsigned int, unsigned int);
+int scrScriptProcessGetEntry(unsigned int, unsigned int);
 int FUN_00275bc8(int, unsigned int);
-int FUN_00275f44(unsigned int, int);
+int scrScriptProcessStartEntry(unsigned int, int);
 int FUN_002844e4(void);
-int FUN_002e6dd0(...);
-int FUN_0031a400(void);
-int FUN_00342010(void);
-int FUN_0035b304(void);
+int rt_aeabi_memclr(...);
+int campCommonBgAcquire(void);
+int campButtonHelpAcquire(void);
+int campCommonBgRelease(void);
 int FUN_0035bea0(void);
 int byteTableASetValue(...);
 int bustupCutAnimStopJob(void);
-int FUN_0037b450(void);
+int campButtonHelpRelease(void);
 int byteTableASetValue3(int);
 int FUN_003b61ec(void);
 int eventCommandStop(void);
 int FUN_003bb45c(void);
 int FUN_003d54f8(...);
-int FUN_003fd63c(...);
+int gameFlagSetValue(...);
 int aocDrawText8(int, unsigned int, int);
 int aocDrawText7(int, unsigned int, int);
 int FUN_0047e430(int, int);
@@ -51,7 +51,7 @@ extern unsigned char LAB_00226234; /* 0x226234 */
 extern unsigned char LAB_0022624c; /* 0x22624c */
 extern int g_aocMain; /* 0x570260 */
 extern int g_aocSystem; /* 0x570280 */
-extern unsigned int *DAT_0057f568; /* 0x57f568 */
+extern unsigned int *g_aocJob; /* 0x57f568 */
 extern unsigned int DAT_005e1f70; /* 0x5e1f70 */
 extern unsigned int DAT_005e1f74; /* 0x5e1f74 */
 extern unsigned char DAT_005e1f78; /* 0x5e1f78 */
@@ -79,32 +79,32 @@ extern int FUN_00162ea4(void);
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_0020214c. */
 extern int FUN_00224880(unsigned int);
-/* Supplied declaration required: FUN_0024b0c0. */
+/* Supplied declaration required: scrScriptProcessGetEntry. */
 /* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_002844e4. */
 /* Supplied declaration required: FUN_002852f0. */
 extern int FUN_002a4b60(void);
 extern int FUN_002e07f4(void);
-/* Supplied declaration required: FUN_002e6dd0. */
-/* Supplied declaration required: FUN_0031a400. */
+/* Supplied declaration required: rt_aeabi_memclr. */
+/* Supplied declaration required: campCommonBgAcquire. */
 extern int getByteTableAValue(void);
 /* Supplied declaration required: FUN_00324c48. */
-/* Supplied declaration required: FUN_00342010. */
-extern int FUN_00357bc8(unsigned int, unsigned char *);
-/* Supplied declaration required: FUN_0035b304. */
+/* Supplied declaration required: campButtonHelpAcquire. */
+extern int tableGroupFindEntryIndex(unsigned int, unsigned char *);
+/* Supplied declaration required: campCommonBgRelease. */
 /* Supplied declaration required: FUN_0035bea0. */
 /* Supplied declaration required: byteTableASetValue. */
 extern int byteTableAGetValue3(void);
 /* Supplied declaration required: bustupCutAnimStopJob. */
-/* Supplied declaration required: FUN_0037b450. */
+/* Supplied declaration required: campButtonHelpRelease. */
 /* Supplied declaration required: byteTableASetValue3. */
-extern int FUN_00399e04(void);
+extern int campButtonHelpIsActive(void);
 /* Supplied declaration required: FUN_003b61ec. */
 /* Supplied declaration required: eventCommandStop. */
 /* Supplied declaration required: FUN_003bb45c. */
 /* Supplied declaration required: FUN_003d54f8. */
-/* Supplied declaration required: FUN_003fd63c. */
+/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: aocDrawText8. */
 /* Supplied declaration required: aocDrawText7. */
 extern int FUN_0046e08c(int, unsigned int, unsigned int);
@@ -112,7 +112,7 @@ extern char *gameBlockGetArea27E98(void);
 /* Supplied declaration required: FUN_004731d8. */
 extern int gameBlockByte27E98Is1To3(void);
 /* Supplied declaration required: FUN_0047db34. */
-extern int FUN_0047dfec(int);
+extern int scriptHolderUpdateForward(int);
 /* Supplied declaration required: scriptHolderFree2. */
 /* Supplied declaration required: FUN_0047e430. */
 
@@ -134,11 +134,11 @@ unsigned int FUN_00225ddc(void)
   unsigned char temp_v6 [128];
   unsigned char temp_v7 [132];
   
-  puVar2 = DAT_0057f568;
+  puVar2 = g_aocJob;
   if ((*(unsigned int *)(g_aocMain + 0x754) & 4) != 0 || (*(unsigned int *)(g_aocMain + 0x754) & 8) != 0) {
     return 0;
   }
-  temp_v3 = DAT_0057f568[2];
+  temp_v3 = g_aocJob[2];
   if (temp_v3 == 0x5f) {
     temp_v1 = FUN_002e07f4();
     temp_v3 = g_aocMain;
@@ -156,7 +156,7 @@ unsigned int FUN_00225ddc(void)
   }
   if (temp_v3 < 0x5f) {
     if (temp_v3 == 0) {
-      *(unsigned char *)((int)DAT_0057f568 + 0x22) = 0;
+      *(unsigned char *)((int)g_aocJob + 0x22) = 0;
       temp_v2 = DAT_005e1f70;
       puVar2[5] = DAT_005e1f70;
       puVar2[6] = DAT_005e1f74;
@@ -180,7 +180,7 @@ unsigned int FUN_00225ddc(void)
           if (temp_v3 == 3) {
             FUN_003d54f8(1,5);
           }
-          temp_v3 = FUN_00399e04();
+          temp_v3 = campButtonHelpIsActive();
           if (temp_v3 == 0) {
             return 0;
           }
@@ -196,8 +196,8 @@ unsigned int FUN_00225ddc(void)
         FUN_0020214c();
         puVar2[0xd] = (unsigned int)puVar4;
       }
-      FUN_0031a400();
-      FUN_00342010();
+      campCommonBgAcquire();
+      campButtonHelpAcquire();
       FUN_003b61ec();
       sysPlaySe(0x92);
       temp_v3 = puVar2[0xb];
@@ -206,12 +206,12 @@ unsigned int FUN_00225ddc(void)
       *(unsigned int *)(temp_v3 + 0x108) = 2;
       temp_v3 = puVar2[6];
       if (temp_v3 == -1) {
-        temp_v3 = FUN_00357bc8(puVar2[0xb],&DAT_005e1f78);
+        temp_v3 = tableGroupFindEntryIndex(puVar2[0xb],&DAT_005e1f78);
         puVar2[6] = temp_v3;
       }
-      FUN_00275f44(puVar2[0xc],temp_v3);
+      scrScriptProcessStartEntry(puVar2[0xc],temp_v3);
       puVar2[7] = 0;
-      FUN_0024b0c0(puVar2[0xc],puVar2[6]);
+      scrScriptProcessGetEntry(puVar2[0xc],puVar2[6]);
       puVar2[2] = puVar2[2] + 1;
       puVar2[7] = 0;
       return 0;
@@ -245,15 +245,15 @@ unsigned int FUN_00225ddc(void)
         temp_v3 = FUN_00224880(puVar2[0xc]);
         if (temp_v3 == 2) {
           if (puVar2[7] != 0) {
-            FUN_003fd63c(puVar2[7],1);
+            gameFlagSetValue(puVar2[7],1);
           }
-          puVar3 = DAT_0057f568;
-          if (DAT_0057f568 != (unsigned int *)0x0) {
-            *(unsigned char *)(DAT_0057f568 + 0x1f) = 0;
-            FUN_002e6dd0(puVar3 + 0xf,0x40);
+          puVar3 = g_aocJob;
+          if (g_aocJob != (unsigned int *)0x0) {
+            *(unsigned char *)(g_aocJob + 0x1f) = 0;
+            rt_aeabi_memclr(puVar3 + 0xf,0x40);
           }
-          FUN_0035b304();
-          FUN_0037b450();
+          campCommonBgRelease();
+          campButtonHelpRelease();
           FUN_001695a0();
           FUN_002844e4();
           bustupCutAnimStopJob();
@@ -304,7 +304,7 @@ unsigned int FUN_00225ddc(void)
     return 0;
   }
   if (temp_v3 == 0x60) {
-    temp_v3 = FUN_0047dfec(g_aocMain + 0xa8);
+    temp_v3 = scriptHolderUpdateForward(g_aocMain + 0xa8);
     if (temp_v3 == 0) {
       return 0;
     }
@@ -333,7 +333,7 @@ unsigned int FUN_00225ddc(void)
       if (temp_v3 != 99) {
         return 0;
       }
-      jobStop(*DAT_0057f568,0);
+      jobStop(*g_aocJob,0);
       temp_v3 = g_aocMain;
       *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xffffff8f;
       if (*(char *)(temp_v3 + 0xc0) != '\0') {
@@ -386,7 +386,7 @@ unsigned int FUN_00225ddc(void)
     DAT_005f1658 = 0;
     FUN_004731d8();
   }
-  jobStop(*DAT_0057f568,0);
+  jobStop(*g_aocJob,0);
   *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xffffff8f;
   puVar2[2] = 100;
   return 0;

@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_0018719c(...);
-int FUN_002009a8(...);
+int gameFlagIsSet(...);
+int bgmGetStateById(...);
 int FUN_00249ac4(unsigned int, unsigned int);
-int FUN_00270b00(void);
+int bgmReleaseStopped(void);
 int FUN_002b9520(void);
 int FUN_00376f94(void);
 int FUN_00398328(int, unsigned int);
@@ -26,10 +26,10 @@ extern signed char DAT_005f1749; /* 0x5f1749 */
 extern signed char DAT_005f1776; /* 0x5f1776 */
 extern signed char DAT_005f1a00; /* 0x5f1a00 */
 
-/* Supplied declaration required: FUN_0018719c. */
-/* Supplied declaration required: FUN_002009a8. */
+/* Supplied declaration required: gameFlagIsSet. */
+/* Supplied declaration required: bgmGetStateById. */
 /* Supplied declaration required: FUN_00249ac4. */
-/* Supplied declaration required: FUN_00270b00. */
+/* Supplied declaration required: bgmReleaseStopped. */
 extern int FUN_002b950c(void);
 /* Supplied declaration required: FUN_002b9520. */
 extern int FUN_00324c78(void);
@@ -58,7 +58,7 @@ void FUN_002bcafc(void)
     DAT_005f162c = (short)DAT_005f162e;
   }
   if (((DAT_005f1776 != '\0') || (DAT_005f1749 == '\0')) || (*(char *)(temp_v2 + 0x49) != '\0')) {
-    FUN_00270b00();
+    bgmReleaseStopped();
     DAT_005f1749 = 1;
     return;
   }
@@ -79,7 +79,7 @@ void FUN_002bcafc(void)
       temp_v0 = *(int *)(temp_v0 * 0x5c + 0x582378);
       if (temp_v0 != 0) {
         DAT_005f1628 = temp_v0;
-        temp_v2 = FUN_002009a8();
+        temp_v2 = bgmGetStateById();
         if (temp_v2 != 0 && temp_v2 != 3) {
           return;
         }
@@ -102,19 +102,19 @@ void FUN_002bcafc(void)
   temp_v0 = temp_v0 * 0x5c;
   DAT_005f1628 = *(int *)(temp_v0 + 0x58236c);
   if (((*(int *)(temp_v0 + 0x582374) != 0) &&
-      ((*(short *)(temp_v0 + 0x582370) == 0 || (temp_v1 = FUN_0018719c(), temp_v1 != 0)))) &&
-     ((*(short *)(temp_v0 + 0x582372) == 0 || (temp_v1 = FUN_0018719c(), temp_v1 == 0)))) {
+      ((*(short *)(temp_v0 + 0x582370) == 0 || (temp_v1 = gameFlagIsSet(), temp_v1 != 0)))) &&
+     ((*(short *)(temp_v0 + 0x582372) == 0 || (temp_v1 = gameFlagIsSet(), temp_v1 == 0)))) {
     DAT_005f1628 = *(int *)(temp_v0 + 0x582374);
   }
   if (*(int *)(temp_v2 + 0x30) == 1) {
     temp_v0 = *(int *)(temp_v2 + 0x34);
     if ((temp_v0 == 0xb || temp_v0 == 0xc) || temp_v0 == 0xd) {
-      temp_v0 = FUN_0018719c(0xd1);
-      if ((temp_v0 != 0) && (temp_v0 = FUN_0018719c(0xd4), temp_v0 == 0)) {
+      temp_v0 = gameFlagIsSet(0xd1);
+      if ((temp_v0 != 0) && (temp_v0 = gameFlagIsSet(0xd4), temp_v0 == 0)) {
         DAT_005f1628 = 0x1000013;
       }
       else {
-        temp_v0 = FUN_0018719c(0xd4);
+        temp_v0 = gameFlagIsSet(0xd4);
         if (temp_v0 != 0) {
           if (*(int *)(temp_v2 + 0x34) == 0xd) {
             DAT_005f1628 = 0x100008c;
@@ -125,33 +125,33 @@ void FUN_002bcafc(void)
         }
       }
     }
-    if (((*(int *)(temp_v2 + 0x34) == 1) && (temp_v0 = FUN_0018719c(0x72), temp_v0 != 0)) &&
-       (temp_v0 = FUN_0018719c(0xb1), temp_v0 == 0)) {
+    if (((*(int *)(temp_v2 + 0x34) == 1) && (temp_v0 = gameFlagIsSet(0x72), temp_v0 != 0)) &&
+       (temp_v0 = gameFlagIsSet(0xb1), temp_v0 == 0)) {
       DAT_005f1628 = 0x1000093;
     }
   }
   if (*(int *)(temp_v2 + 0x30) == 0x25) {
     temp_v0 = *(int *)(temp_v2 + 0x34);
     if ((temp_v0 == 3 || temp_v0 == 4) || (temp_v0 == 5 || temp_v0 == 6)) {
-      temp_v0 = FUN_0018719c(0xd4);
-      if ((temp_v0 != 0) && (temp_v0 = FUN_0018719c(0xd8), temp_v0 == 0)) {
+      temp_v0 = gameFlagIsSet(0xd4);
+      if ((temp_v0 != 0) && (temp_v0 = gameFlagIsSet(0xd8), temp_v0 == 0)) {
         DAT_005f1628 = 0x1000028;
       }
       else {
-        temp_v0 = FUN_0018719c(0xd8);
+        temp_v0 = gameFlagIsSet(0xd8);
         if ((temp_v0 != 0) && (DAT_005f1628 = 0x100005d, *(int *)(temp_v2 + 0x34) == 6)) {
           DAT_005f1628 = 0x100008b;
         }
       }
     }
     if (((*(int *)(temp_v2 + 0x34) == 1 || *(int *)(temp_v2 + 0x34) == 2) &&
-        (temp_v0 = FUN_0018719c(0x1e), temp_v0 != 0)) && (temp_v0 = FUN_0018719c(0x47), temp_v0 == 0)) {
+        (temp_v0 = gameFlagIsSet(0x1e), temp_v0 != 0)) && (temp_v0 = gameFlagIsSet(0x47), temp_v0 == 0)) {
       DAT_005f1628 = 0x1000093;
     }
   }
   if (*(int *)(temp_v2 + 0x30) == 0x26) {
     if (*(int *)(temp_v2 + 0x34) == 5) {
-      temp_v0 = FUN_0018719c(0x26);
+      temp_v0 = gameFlagIsSet(0x26);
       if (temp_v0 == 0) {
         DAT_005f1628 = 0x1000084;
       }
@@ -163,14 +163,14 @@ void FUN_002bcafc(void)
   else if ((*(int *)(temp_v2 + 0x30) == 0x18) && (temp_v2 = FUN_00376f94(), temp_v2 >= 100)) {
     DAT_005f1628 = 0x1000067;
   }
-  temp_v2 = FUN_002009a8(DAT_005f1628);
+  temp_v2 = bgmGetStateById(DAT_005f1628);
   if (temp_v2 != 0) {
     if (temp_v2 != 3) {
       return;
     }
   }
   else {
-    FUN_00270b00();
+    bgmReleaseStopped();
   }
   FUN_003d4c68(DAT_005f1628);
   return;

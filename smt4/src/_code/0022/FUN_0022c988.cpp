@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0029e17c(void);
 int FUN_002a0cc8(int);
 int FUN_002b7bca(int, int, int, unsigned int);
-int FUN_002b8838(unsigned int);
+int buttonHelpSetPreset(unsigned int);
 int SBORROW4(int, int);
 int rt_memcpy_w(unsigned int [35], unsigned char *, int);
 
@@ -21,11 +21,11 @@ extern unsigned char DAT_00402284; /* 0x402284 */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 extern int FUN_0029e130(void);
 /* Supplied declaration required: FUN_0029e17c. */
-extern int FUN_0029e1c8(void);
+extern int useCounterIsFinished(void);
 /* Supplied declaration required: FUN_002a0cc8. */
 extern int FUN_002a0d0c(void);
 /* Supplied declaration required: FUN_002b7bca. */
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -42,7 +42,7 @@ void FUN_0022c988(int param_1)
   unsigned char temp_v4;
   unsigned int temp_v5 [35];
   
-  temp_v1 = FUN_0029e1c8();
+  temp_v1 = useCounterIsFinished();
   if (temp_v1 != 0) {
     FUN_0029e17c();
     if (*(char *)(param_1 + 0x5a4) == '\x01') {
@@ -51,7 +51,7 @@ void FUN_0022c988(int param_1)
     else {
       temp_v2 = 0x2e;
     }
-    FUN_002b8838(temp_v2);
+    buttonHelpSetPreset(temp_v2);
     FUN_002a0cc8(0);
     *(unsigned int *)(param_1 + 0x14) = 2;
     *(unsigned int *)(param_1 + 0x18) = 0;

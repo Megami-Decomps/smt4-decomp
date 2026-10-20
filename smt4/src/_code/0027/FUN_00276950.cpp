@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0039cbe8(int, unsigned int);
 
-extern int DAT_0044cdf0; /* 0x44cdf0 */
+extern int g_naviMain; /* 0x44cdf0 */
 
 /* Supplied declaration required: FUN_0039cbe8. */
 
@@ -15,7 +15,7 @@ void FUN_00276950(unsigned int param_1)
 
 {
 /* irregular: 1 native warning(s); review required */
-  FUN_0039cbe8(DAT_0044cdf0 + 0x40,param_1);
+  FUN_0039cbe8(g_naviMain + 0x40,param_1);
   return;
 }
 

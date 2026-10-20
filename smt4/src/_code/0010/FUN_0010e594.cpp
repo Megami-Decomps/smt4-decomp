@@ -4,7 +4,7 @@ extern "C" {
 
 void FUN_0010e594(u32 value)
 {
-    DAT_00464d48.unk10 = value;
+    g_asdTextDefaults.unk10 = value;
 }
 
 } /* extern "C" */

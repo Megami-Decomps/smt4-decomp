@@ -47,9 +47,9 @@ typedef struct {
 extern short FUN_0028d310(void);
 extern int FUN_00295d08(unsigned int);
 extern int flagWordTestBit(int, unsigned int);
-extern int FUN_002a8740(void);
-extern int FUN_002a8764(void);
-extern int FUN_002b63ac(void);
+extern int gameGetUnitRecord(void);
+extern int gameGetSlotTable(void);
+extern int gameGetPlayerData(void);
 extern short FUN_00333fb0(void);
 /* Supplied declaration required: FUN_00333fc0. */
 /* Supplied declaration required: FUN_00333fec. */
@@ -137,7 +137,7 @@ void FUN_00338790(fn_00338790_arg0 *param_1)
       temp_v6 = (int)(short)((short)(int)(temp_v9 * temp_v11 * (float)temp_v18) + temp_v1);
       FUN_00333fc0(temp_v6);
       if (temp_v6 == 0) {
-        temp_v6 = FUN_002b63ac();
+        temp_v6 = gameGetPlayerData();
         *(unsigned short *)(temp_v6 + 0x2a) = 0;
       }
       temp_v1 = FUN_00333fb0();
@@ -146,18 +146,18 @@ void FUN_00338790(fn_00338790_arg0 *param_1)
       temp_v6 = (int)(short)((short)(int)(temp_v9 * temp_v10 * (float)temp_v18) + temp_v1);
       FUN_00333fec(temp_v6);
       if (temp_v6 == 0) {
-        temp_v6 = FUN_002b63ac();
+        temp_v6 = gameGetPlayerData();
         *(unsigned short *)(temp_v6 + 0x2c) = 0;
       }
     }
-    temp_v6 = FUN_002a8764();
+    temp_v6 = gameGetSlotTable();
     temp_v0 = *(unsigned char *)(temp_v6 + 0x910b);
-    temp_v6 = FUN_002a8764();
+    temp_v6 = gameGetSlotTable();
     temp_v8 = 0;
     if (temp_v0 != 0) {
       do {
         if ((-1 < *(char *)(temp_v6 + temp_v8 + 0x90f0)) &&
-           (temp_v9 = temp_v12, temp_v10 = temp_v12, temp_v4 = FUN_002a8740(), temp_v4 != 0)) {
+           (temp_v9 = temp_v12, temp_v10 = temp_v12, temp_v4 = gameGetUnitRecord(), temp_v4 != 0)) {
           temp_v19[0] = 0;
           temp_v19[1] = 0;
           temp_v19[2] = 0;

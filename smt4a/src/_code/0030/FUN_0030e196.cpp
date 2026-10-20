@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6dd4(unsigned int, unsigned int);
+int rt_memclr(unsigned int, unsigned int);
 int rt_memcpy(int, unsigned int, unsigned int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -13,7 +13,7 @@ typedef struct {
 } param_1_stack;
 
 extern int FUN_001289f6(int, int, int);
-/* Supplied declaration required: FUN_002e6dd4. */
+/* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: rt_memcpy. */
 
 
@@ -88,7 +88,7 @@ void FUN_0030e196(int *param_1)
           if (temp_v1 - temp_v2 >= 0x103) {
             temp_v4 = 0x102;
           }
-          FUN_002e6dd4(param_1[0xe] + temp_v2,temp_v4);
+          rt_memclr(param_1[0xe] + temp_v2,temp_v4);
           temp_v2 = temp_v2 + temp_v4;
         }
         else {
@@ -99,7 +99,7 @@ void FUN_0030e196(int *param_1)
           if (temp_v1 - temp_v4 < temp_v2) {
             temp_v2 = temp_v1 - temp_v4;
           }
-          FUN_002e6dd4(param_1[0xe] + temp_v4,temp_v2);
+          rt_memclr(param_1[0xe] + temp_v4,temp_v2);
           temp_v2 = *puVar8 + temp_v2;
         }
         *puVar8 = temp_v2;

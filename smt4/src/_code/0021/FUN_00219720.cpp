@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002b9024(void);
+int devilGetRecord(void);
 
 extern unsigned int FUN_0029ea68(unsigned short);
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: devilGetRecord. */
 
 
 int FUN_00219720(unsigned short *param_1,unsigned short *param_2)
@@ -30,9 +30,9 @@ int FUN_00219720(unsigned short *param_1,unsigned short *param_2)
   }
   else {
     puVar4 = (unsigned short *)(unsigned int)*param_1;
-    FUN_002b9024();
+    devilGetRecord();
     puVar5 = (unsigned short *)(unsigned int)*param_2;
-    FUN_002b9024();
+    devilGetRecord();
     temp_v2 = (unsigned int)(unsigned char)puVar4[1] - (unsigned int)(unsigned char)puVar5[1];
     if ((temp_v2 == 0) &&
        (temp_v2 = (unsigned int)*(unsigned char *)((int)puVar5 + 3) - (unsigned int)*(unsigned char *)((int)puVar4 + 3), temp_v2 == 0)) {

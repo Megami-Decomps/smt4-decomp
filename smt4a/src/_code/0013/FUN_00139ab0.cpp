@@ -7,7 +7,7 @@ extern "C" {
 int asdFileWakeWorker(void);
 int FUN_0014a7e4(unsigned int);
 int FUN_0014a878(int);
-int FUN_0015a244(void);
+int gxLcdClearForceBlack(void);
 
 extern int DAT_0063ff44; /* 0x63ff44 */
 extern int DAT_0063ff48; /* 0x63ff48 */
@@ -18,7 +18,7 @@ extern signed char DAT_0063ff58; /* 0x63ff58 */
 /* Supplied declaration required: asdFileWakeWorker. */
 /* Supplied declaration required: FUN_0014a7e4. */
 /* Supplied declaration required: FUN_0014a878. */
-/* Supplied declaration required: FUN_0015a244. */
+/* Supplied declaration required: gxLcdClearForceBlack. */
 
 
 void FUN_00139ab0(void)
@@ -52,7 +52,7 @@ void FUN_00139ab0(void)
     else {
       if (temp_v0 != 1) {
         if (DAT_0063ff58 == '\0') {
-          FUN_0015a244();
+          gxLcdClearForceBlack();
           DAT_0063ff58 = '\x01';
         }
         return;
@@ -62,7 +62,7 @@ void FUN_00139ab0(void)
     FUN_0014a7e4(temp_v1);
   }
   if (DAT_0063ff58 == '\0') {
-    FUN_0015a244();
+    gxLcdClearForceBlack();
     DAT_0063ff58 = '\x01';
   }
   return;

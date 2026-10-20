@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0013b608(void);
-int FUN_0013b618(void);
+int nngxLockEnter(void);
+int nngxLockLeave(void);
 int FUN_002ba2b8(void);
 int FUN_002bdb48(void);
 int rt_memcpy_w(int, unsigned int, unsigned int);
@@ -21,8 +21,8 @@ extern signed char DAT_004c62a2; /* 0x4c62a2 */
 extern int DAT_004c632c; /* 0x4c632c */
 extern int DAT_004c6330; /* 0x4c6330 */
 
-/* Supplied declaration required: FUN_0013b608. */
-/* Supplied declaration required: FUN_0013b618. */
+/* Supplied declaration required: nngxLockEnter. */
+/* Supplied declaration required: nngxLockLeave. */
 /* Supplied declaration required: FUN_002ba2b8. */
 /* Supplied declaration required: FUN_002bdb48. */
 /* Supplied declaration required: rt_memcpy_w. */
@@ -55,13 +55,13 @@ void FUN_002adba8(unsigned int param_1,unsigned int param_2,int param_3)
       *(unsigned int *)(puVar4 + 8) = param_2;
       *(unsigned int *)(puVar4 + 4) = param_1;
       *(unsigned int *)(puVar4 + 0xc) = *(unsigned int *)(puVar4 + 0xc) | 2;
-      FUN_0013b608();
+      nngxLockEnter();
       *(int *)(temp_v1 + 0x20) = *(int *)(temp_v1 + 0x20) + 1;
       if (((DAT_004c6330 == temp_v1) && (DAT_004c62a2 != '\0')) && (DAT_004c62a1 == '\0')) {
         DAT_004c62a1 = '\x01';
         FUN_002ba2b8();
       }
-      FUN_0013b618();
+      nngxLockLeave();
       return;
     }
   }

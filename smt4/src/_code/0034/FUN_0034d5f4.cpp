@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdMdlManagerDestroy(void);
-int FUN_002b2368(unsigned int *);
+int asdMemFreeNonNull(unsigned int *);
 int asdMemFree(void);
 
 typedef int romwright_code(...);
@@ -17,7 +17,7 @@ typedef struct {
 extern unsigned char DAT_004209d0; /* 0x4209d0 */
 
 /* Supplied declaration required: asdMdlManagerDestroy. */
-/* Supplied declaration required: FUN_002b2368. */
+/* Supplied declaration required: asdMemFreeNonNull. */
 /* Supplied declaration required: asdMemFree. */
 
 
@@ -57,7 +57,7 @@ void FUN_0034d5f4(unsigned int *param_1)
     asdMemFree();
     param_1[9] = 0;
   }
-  FUN_002b2368(param_1);
+  asdMemFreeNonNull(param_1);
   return;
 }
 

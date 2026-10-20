@@ -32,7 +32,7 @@ extern unsigned int g_aocSystem; /* 0x570280 */
 /* Supplied declaration required: FUN_001760cc. */
 extern int FUN_001af210(int);
 /* Supplied declaration required: FUN_001d0fcc. */
-extern int FUN_001d10ac(unsigned int *);
+extern int byteIsAtLeast100(unsigned int *);
 extern int FUN_002e19f8(void);
 /* Supplied declaration required: aocClearDisplayFlag. */
 /* Supplied declaration required: FUN_0046e2d0. */
@@ -156,7 +156,7 @@ void FUN_004782ec(unsigned int *param_1)
         param_1[2] = 3;
       }
       else {
-        temp_v1 = FUN_001d10ac((unsigned int *)&temp_v3);
+        temp_v1 = byteIsAtLeast100((unsigned int *)&temp_v3);
         if (temp_v1 != 0) {
           param_1[2] = 9999;
           temp_v1 = FUN_001af210(g_aocMain + 0x98);

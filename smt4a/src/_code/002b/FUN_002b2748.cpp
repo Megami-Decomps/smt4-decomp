@@ -3,7 +3,7 @@
 extern "C" {
 
 void FUN_00321a98(u32 *a, u32 *b);
-u32 FUN_001ab854(void);
+u32 gameGetSlotRecord(void);
 s32 FUN_003df57c(u32 id, u32 flag);
 s32 FUN_004bcbb4(u32 owner, u32 id);
 
@@ -23,13 +23,13 @@ void FUN_002b2748(Ref *a, Ref *b)
     if (a->kind < 0) {
         first = FUN_003df57c(a->id, 1);
     } else {
-        owner = FUN_001ab854();
+        owner = gameGetSlotRecord();
         first = FUN_004bcbb4(owner, a->id);
     }
     if (b->kind < 0) {
         second = FUN_003df57c(b->id, 1);
     } else {
-        owner = FUN_001ab854();
+        owner = gameGetSlotRecord();
         second = FUN_004bcbb4(owner, b->id);
     }
     diff = second - first;

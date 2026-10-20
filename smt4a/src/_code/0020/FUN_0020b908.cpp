@@ -17,7 +17,7 @@ int FUN_003343f0(...);
 int FUN_00359b6c(int);
 int FUN_0035ad50(unsigned int, unsigned char [304]);
 
-extern int DAT_0057f290; /* 0x57f290 */
+extern int g_unite; /* 0x57f290 */
 
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00183f58. */
@@ -53,7 +53,7 @@ void FUN_0020b908(unsigned int param_1,int param_2)
   unsigned char temp_v5;
   unsigned char temp_v6 [304];
   
-  temp_v0 = DAT_0057f290;
+  temp_v0 = g_unite;
   temp_v4 = 0;
   switch(param_1) {
   case 3:
@@ -99,7 +99,7 @@ void FUN_0020b908(unsigned int param_1,int param_2)
     }
     break;
   case 0xf:
-    temp_v4 = *(int *)(DAT_0057f290 + 0x400);
+    temp_v4 = *(int *)(g_unite + 0x400);
     if ((temp_v4 != 0x10 && temp_v4 != 0x11) && temp_v4 != 0x12) {
       sysPlaySe(0x57);
       temp_v4 = FUN_002a4860();
@@ -127,11 +127,11 @@ void FUN_0020b908(unsigned int param_1,int param_2)
     }
     break;
   case 0x1b:
-    if (DAT_0057f290 != 0) {
-      temp_v5 = *(int *)(DAT_0057f290 + 0x434) != 0x18;
-      temp_v1 = DAT_0057f290;
+    if (g_unite != 0) {
+      temp_v5 = *(int *)(g_unite + 0x434) != 0x18;
+      temp_v1 = g_unite;
       if (temp_v5) {
-        temp_v1 = *(int *)(DAT_0057f290 + 0x488);
+        temp_v1 = *(int *)(g_unite + 0x488);
       }
       if (temp_v5 && temp_v1 != 0x18) {
         temp_v2 = 0x5b;
@@ -158,7 +158,7 @@ void FUN_0020b908(unsigned int param_1,int param_2)
     *(unsigned char *)(temp_v0 + 0x9070) = 1;
     break;
   case 0x24:
-    *(unsigned int *)(DAT_0057f290 + 0x408) = *(unsigned int *)(DAT_0057f290 + 0x400);
+    *(unsigned int *)(g_unite + 0x408) = *(unsigned int *)(g_unite + 0x400);
     FUN_00184b90(temp_v0,3);
     FUN_003343f0(1);
     break;

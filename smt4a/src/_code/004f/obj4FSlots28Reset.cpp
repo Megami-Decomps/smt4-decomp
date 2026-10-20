@@ -21,8 +21,8 @@ typedef struct Obj4FSlots28 {
     /* 0x00 */ u8 unk00[4];
 } Obj4FSlots28;
 
-extern u32 DAT_0056fcc0;
-extern void FUN_001aea28(u32 a, u32 b);
+extern u32 g_handleRegistry;
+extern void ptrListRemoveClearOwner(u32 a, u32 b);
 
 void obj4FSlots28Reset(Obj4FSlots28 *obj)
 {
@@ -40,7 +40,7 @@ void obj4FSlots28Reset(Obj4FSlots28 *obj)
             slot->second = NULL;
         }
         if (slot->first != NULL) {
-            FUN_001aea28(DAT_0056fcc0, ((DataObj *)slot->first)->data);
+            ptrListRemoveClearOwner(g_handleRegistry, ((DataObj *)slot->first)->data);
             if (slot->first != NULL) {
                 slot->first->vtbl->release(slot->first);
                 slot->first = NULL;

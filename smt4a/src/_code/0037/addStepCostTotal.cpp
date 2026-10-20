@@ -3,14 +3,14 @@
 extern "C" {
 
 extern Obj7870Ref DAT_00588c40;
-extern PlayerData *FUN_001801a4(void);
+extern PlayerData *gameGetPlayerData(void);
 extern s32 FUN_004ccbf0(s32 index);
 
 /* Adds the cost of `count` steps (minus the player's credit) to the counter at +0x7870. */
 void addStepCostTotal(s32 count)
 {
     Obj7870 *obj = DAT_00588c40.instance;
-    PlayerData *player = FUN_001801a4();
+    PlayerData *player = gameGetPlayerData();
     s32 total = 0;
     s32 i;
 

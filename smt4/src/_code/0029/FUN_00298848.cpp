@@ -10,7 +10,7 @@ int FUN_002ae164(void);
 
 /* Supplied declaration required: FUN_0026c464. */
 /* Supplied declaration required: FUN_0026c654. */
-extern int FUN_002a8764(void);
+extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_002ae164. */
 
 
@@ -45,7 +45,7 @@ unsigned int FUN_00298848(int param_1,int param_2)
         temp_v2 = 8;
       }
       if (temp_v8 && temp_v2 != (temp_v4 & 0x1ff) >> 5) {
-        temp_v0 = FUN_002a8764();
+        temp_v0 = gameGetSlotTable();
         temp_v5 = -1;
         do {
           temp_v1 = param_2;

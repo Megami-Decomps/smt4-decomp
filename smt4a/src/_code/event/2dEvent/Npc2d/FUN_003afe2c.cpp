@@ -6,7 +6,7 @@ extern "C" {
 
 int asdProcessCreateSimple(...);
 int asdMemoryAllocTracked(...);
-int FUN_0019cac4(...);
+int dataTable00FindById(...);
 int sysMemClear(...);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -20,7 +20,7 @@ extern int FUN_0034da3c(...); /* 0x34da3c */
 /* Supplied declaration required: asdProcessCreateSimple. */
 extern int FUN_00162ea4(void);
 /* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: FUN_0019cac4. */
+/* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: sysMemClear. */
 extern unsigned int FUN_00409fe8(unsigned int, unsigned int);
 
@@ -54,7 +54,7 @@ void FUN_003afe2c(unsigned int param_1,unsigned int param_2,unsigned int param_3
   puVar1[0x20] = 0;
   puVar1[0x21] = 0;
   temp_v0 = param_1 & 0xffff;
-  FUN_0019cac4();
+  dataTable00FindById();
   puVar1[0x14] = (int)*(short *)(temp_v0 + 0x8c);
   temp_v1 = FUN_00162ea4();
   if (temp_v1 != 0) {

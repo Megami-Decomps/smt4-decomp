@@ -6,12 +6,12 @@ extern "C" {
 
 int FUN_00287528(unsigned char **);
 int FUN_00287704(int);
-int FUN_0028975c(int, int);
+int gameFlagSetValue(int, int);
 int FUN_00296b3c(...);
 int libc_strcat(...);
 int FUN_002bcf4c(void);
 int FUN_002bcfc0(...);
-int FUN_002c09d0(int);
+int gameFlagIsSet(int);
 int FUN_00381490(unsigned int, int, int, int, unsigned int);
 int FUN_00381958(unsigned int, int, unsigned int, int);
 int FUN_00381ac0(void);
@@ -30,13 +30,13 @@ extern int dataTable26GroupGetRecord(int, unsigned char, unsigned int);
 /* Supplied declaration required: FUN_00287528. */
 extern int FUN_002876f0(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00287704. */
-/* Supplied declaration required: FUN_0028975c. */
+/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_00296b3c. */
 /* Supplied declaration required: libc_strcat. */
 /* Supplied declaration required: FUN_002bcf4c. */
 /* Supplied declaration required: FUN_002bcfc0. */
 extern unsigned int FUN_002bd1fc(void);
-/* Supplied declaration required: FUN_002c09d0. */
+/* Supplied declaration required: gameFlagIsSet. */
 /* Supplied declaration required: FUN_00381490. */
 /* Supplied declaration required: FUN_00381958. */
 extern int FUN_003819b8(void);
@@ -78,7 +78,7 @@ void FUN_00382878(int param_1)
       if (*(char *)(param_1 + 0x18) == '\0') {
         temp_v7 = 0;
         do {
-          temp_v1 = FUN_002c09d0(*(unsigned short *)(temp_v7 * 4 + 0x44db62));
+          temp_v1 = gameFlagIsSet(*(unsigned short *)(temp_v7 * 4 + 0x44db62));
           if (temp_v1 != 0) {
             temp_v8 = *(unsigned short *)(temp_v7 * 4 + 0x44db64);
           }
@@ -88,7 +88,7 @@ void FUN_00382878(int param_1)
       else if (*(char *)(param_1 + 0x18) == '\x01') {
         temp_v7 = 0;
         do {
-          temp_v1 = FUN_002c09d0(*(unsigned short *)(temp_v7 * 4 + 0x44db72));
+          temp_v1 = gameFlagIsSet(*(unsigned short *)(temp_v7 * 4 + 0x44db72));
           if (temp_v1 != 0) {
             temp_v8 = *(unsigned short *)(temp_v7 * 4 + 0x44db74);
           }
@@ -98,7 +98,7 @@ void FUN_00382878(int param_1)
       temp_v2 = FUN_00287704(*(unsigned char *)(param_1 + 0x18));
       FUN_00381958(temp_v2,param_1 + 0x20,*(unsigned int *)(param_1 + 0x1c),temp_v8);
       if (*(int *)(param_1 + 0x1c) == 0) {
-        FUN_0028975c(0x424,1);
+        gameFlagSetValue(0x424,1);
       }
     }
   }
@@ -110,9 +110,9 @@ void FUN_00382878(int param_1)
       if (*(char *)(param_1 + 0x18) != '\0') {
         if (*(char *)(param_1 + 0x18) == '\x01') {
           temp_v2 = 0x14;
-          temp_v3 = FUN_002c09d0(0x6c);
+          temp_v3 = gameFlagIsSet(0x6c);
           if (temp_v3 != 0) {
-            temp_v3 = FUN_002c09d0(0x7c);
+            temp_v3 = gameFlagIsSet(0x7c);
             temp_v2 = 5;
             if (temp_v3 != 0) {
               temp_v2 = 0;
@@ -122,9 +122,9 @@ void FUN_00382878(int param_1)
       }
       else {
         temp_v2 = 0x14;
-        temp_v3 = FUN_002c09d0(0x25);
+        temp_v3 = gameFlagIsSet(0x25);
         if (temp_v3 != 0) {
-          temp_v3 = FUN_002c09d0(0x55);
+          temp_v3 = gameFlagIsSet(0x55);
           temp_v2 = 5;
           if (temp_v3 != 0) {
             temp_v2 = 0;
@@ -133,7 +133,7 @@ void FUN_00382878(int param_1)
       }
       temp_v3 = FUN_00287704(*(unsigned char *)(param_1 + 0x18));
       *(unsigned short *)(temp_v3 + 0xc) = 0;
-      if ((*(char *)(param_1 + 0x18) == '\0') && (temp_v3 = FUN_002c09d0(0x55), temp_v3 == 0)) {
+      if ((*(char *)(param_1 + 0x18) == '\0') && (temp_v3 = gameFlagIsSet(0x55), temp_v3 == 0)) {
         temp_v3 = FUN_00287704(*(unsigned char *)(param_1 + 0x18));
         *(unsigned short *)(temp_v3 + 0xc) = 8;
       }
@@ -141,7 +141,7 @@ void FUN_00382878(int param_1)
       if (*(char *)(param_1 + 0x18) == '\0') {
         temp_v7 = 0;
         do {
-          temp_v3 = FUN_002c09d0(*(unsigned short *)(temp_v7 * 4 + 0x44db62));
+          temp_v3 = gameFlagIsSet(*(unsigned short *)(temp_v7 * 4 + 0x44db62));
           if (temp_v3 != 0) {
             temp_v8 = *(unsigned short *)(temp_v7 * 4 + 0x44db64);
           }
@@ -151,7 +151,7 @@ void FUN_00382878(int param_1)
       else if (*(char *)(param_1 + 0x18) == '\x01') {
         temp_v7 = 0;
         do {
-          temp_v3 = FUN_002c09d0(*(unsigned short *)(temp_v7 * 4 + 0x44db72));
+          temp_v3 = gameFlagIsSet(*(unsigned short *)(temp_v7 * 4 + 0x44db72));
           if (temp_v3 != 0) {
             temp_v8 = *(unsigned short *)(temp_v7 * 4 + 0x44db74);
           }

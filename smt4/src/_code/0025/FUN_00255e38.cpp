@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_002550d8(int, int, unsigned int *, int);
-int FUN_002b06c4(void);
-int FUN_002c3944(int, int);
+int dataTable00FindById(void);
+int rt_memclr(int, int);
 int FUN_003be758(unsigned int *);
 int rt_memcpy_w(unsigned int *, int, int);
 
@@ -17,11 +17,11 @@ typedef struct {
 
 /* Supplied declaration required: FUN_002550d8. */
 extern unsigned int *FUN_002561d8(int, int, unsigned int);
-extern unsigned int FUN_002a8740(int);
-extern int FUN_002a8764(void);
-/* Supplied declaration required: FUN_002b06c4. */
-extern unsigned int FUN_002b63ac(void);
-/* Supplied declaration required: FUN_002c3944. */
+extern unsigned int gameGetUnitRecord(int);
+extern int gameGetSlotTable(void);
+/* Supplied declaration required: dataTable00FindById. */
+extern unsigned int gameGetPlayerData(void);
+/* Supplied declaration required: rt_memclr. */
 extern unsigned int *FUN_0033a5a0(void);
 /* Supplied declaration required: FUN_003be758. */
 /* Supplied declaration required: rt_memcpy_w. */
@@ -59,7 +59,7 @@ void FUN_00255e38(int param_1,int param_2,int param_3,int param_4,int param_5)
         rt_memcpy_w(puVar4 + 0x33,param_2,0x18c);
         *puVar4 = 0x21;
         puVar4[1] = 0;
-        temp_v1 = FUN_002a8764();
+        temp_v1 = gameGetSlotTable();
         puVar4[0xa0] = temp_v1 + 0x910c;
         if ((*(unsigned short *)(temp_v1 + 0x9150) & 2) != 0) {
           *(unsigned char *)(param_1 + 0x49c4) = 0;
@@ -75,7 +75,7 @@ void FUN_00255e38(int param_1,int param_2,int param_3,int param_4,int param_5)
       *puVar4 = 0x11;
       puVar4[1] = 0;
       temp_v0 = (unsigned int)*(unsigned short *)((int)puVar4 + 0xce);
-      FUN_002b06c4();
+      dataTable00FindById();
       puVar4[0xa1] = temp_v0;
       if ((char)puVar4[0x68] == '\x01') {
         *puVar4 = *puVar4 | 0x100;
@@ -89,19 +89,19 @@ void FUN_00255e38(int param_1,int param_2,int param_3,int param_4,int param_5)
     if ((puVar4[0x33] & 1) != 0) {
       *puVar4 = 7;
       puVar4[1] = 0;
-      temp_v0 = FUN_002b63ac();
+      temp_v0 = gameGetPlayerData();
       puVar4[0x9e] = temp_v0;
     }
     else {
       *puVar4 = 9;
       puVar4[1] = 0;
-      temp_v0 = FUN_002a8740((int)(short)puVar4[0x35]);
+      temp_v0 = gameGetUnitRecord((int)(short)puVar4[0x35]);
       puVar4[0x9f] = temp_v0;
     }
     *(short *)(param_1 + 0x1fc4) = *(short *)(param_1 + 0x1fc4) + 1;
   }
   *(short *)(puVar4 + 2) = (short)param_4;
-  FUN_002c3944((int)puVar4 + 0x72,0x3c);
+  rt_memclr((int)puVar4 + 0x72,0x3c);
   *(unsigned int *)((int)puVar4 + 0xae) = 0;
   *(unsigned int *)((int)puVar4 + 0xb2) = 0;
   *(unsigned int *)((int)puVar4 + 0xb6) = 0;

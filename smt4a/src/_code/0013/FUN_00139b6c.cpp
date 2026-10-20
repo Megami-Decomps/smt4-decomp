@@ -6,7 +6,7 @@ extern "C" {
 
 extern unsigned char g_gameState; /* 0x5f15fc */
 
-extern int FUN_00162e8c(void);
+extern int gameFlagsGetBlock(void);
 
 
 void FUN_00139b6c(void)
@@ -21,7 +21,7 @@ void FUN_00139b6c(void)
   int temp_v5;
   int *piVar8;
   
-  temp_v2 = FUN_00162e8c();
+  temp_v2 = gameFlagsGetBlock();
   (*(int *)((unsigned char *)&g_gameState + 0x254)) = (*(int *)((unsigned char *)&g_gameState + 0x254)) + 1;
   if ((*(int *)((unsigned char *)&g_gameState + 0x254)) >= 0x709) {
     (*(int *)((unsigned char *)&g_gameState + 0x254)) = 0;

@@ -12,7 +12,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_00184310. */
-extern int FUN_001ab854(int);
+extern int gameGetSlotRecord(int);
 
 
 int FUN_0020e8d0(int *param_1,int *param_2)
@@ -35,8 +35,8 @@ int FUN_0020e8d0(int *param_1,int *param_2)
     temp_v3 = -1;
   }
   else {
-    temp_v3 = FUN_001ab854(*param_1);
-    temp_v4 = FUN_001ab854(*param_2);
+    temp_v3 = gameGetSlotRecord(*param_1);
+    temp_v4 = gameGetSlotRecord(*param_2);
     temp_v3 = (int)*(short *)(temp_v4 + 0x10) - (int)*(short *)(temp_v3 + 0x10);
     if (temp_v3 == 0) {
       temp_v3 = 0;
@@ -49,8 +49,8 @@ int FUN_0020e8d0(int *param_1,int *param_2)
         temp_v3 = -1;
       }
       else {
-        temp_v4 = FUN_001ab854(*param_1);
-        temp_v0 = FUN_001ab854(*param_2);
+        temp_v4 = gameGetSlotRecord(*param_1);
+        temp_v0 = gameGetSlotRecord(*param_2);
         temp_v3 = (unsigned int)*(unsigned short *)(temp_v0 + 100) - (unsigned int)*(unsigned short *)(temp_v4 + 100);
         if (temp_v3 == 0) {
           temp_v1 = (unsigned int)*(unsigned short *)(temp_v4 + 0x62);

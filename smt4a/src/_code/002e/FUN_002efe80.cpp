@@ -6,12 +6,12 @@ extern "C" {
 
 int FUN_002e6e34(unsigned char [12], unsigned int);
 int FUN_002e6e5c(unsigned char [12]);
-int FUN_002e7232(int);
+int sharedRefRelease(int);
 int FUN_002f6c54(unsigned char [20], unsigned int);
 int FUN_002f6c5c(...);
 int FUN_002f6c70(int, int *);
 int FUN_002f6c82(int, int *);
-int FUN_002f6d1c(int *);
+int mapIteratorNext5(int *);
 
 /* stack frame of param_2: 8 slot(s), 32 byte(s) */
 typedef struct {
@@ -27,13 +27,13 @@ typedef struct {
 
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-/* Supplied declaration required: FUN_002e7232. */
-extern unsigned int FUN_002ea714(void);
+/* Supplied declaration required: sharedRefRelease. */
+extern unsigned int onlineGetActiveLock(void);
 /* Supplied declaration required: FUN_002f6c54. */
 /* Supplied declaration required: FUN_002f6c5c. */
 /* Supplied declaration required: FUN_002f6c70. */
 /* Supplied declaration required: FUN_002f6c82. */
-/* Supplied declaration required: FUN_002f6d1c. */
+/* Supplied declaration required: mapIteratorNext5. */
 extern int wordRefsDiffer_002f6d4c(int *, unsigned char *);
 
 
@@ -61,7 +61,7 @@ unsigned int FUN_002efe80(int param_1,int param_2)
   
   temp_v14 = param_1;
   temp_v15 = param_2;
-  temp_v0 = FUN_002ea714();
+  temp_v0 = onlineGetActiveLock();
   FUN_002e6e34(temp_v11,temp_v0);
   temp_v3 = temp_v14;
   piVar5 = &temp_v9;
@@ -104,12 +104,12 @@ unsigned int FUN_002efe80(int param_1,int param_2)
       return 0;
     }
     if (*(int *)(temp_v5 + 0x18) == temp_v15) break;
-    FUN_002f6d1c(&temp_v5);
+    mapIteratorNext5(&temp_v5);
   }
   temp_v6 = temp_v5;
   FUN_002f6c70(temp_v7,&temp_v6);
   FUN_002f6c82(temp_v14 + 4,&temp_v15);
-  FUN_002e7232(temp_v15);
+  sharedRefRelease(temp_v15);
   FUN_002e6e5c(temp_v11);
   return 1;
 }

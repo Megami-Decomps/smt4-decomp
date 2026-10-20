@@ -8,7 +8,7 @@ int FUN_002408ac(...);
 int FUN_00240990(...);
 int FUN_0027e6f4(...);
 int FUN_00297468(...);
-int FUN_002b06c4(...);
+int dataTable00FindById(...);
 int FUN_002be624(...);
 int memClear(...);
 
@@ -21,7 +21,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00240990. */
 /* Supplied declaration required: FUN_0027e6f4. */
 /* Supplied declaration required: FUN_00297468. */
-/* Supplied declaration required: FUN_002b06c4. */
+/* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: memClear. */
 
@@ -39,7 +39,7 @@ void FUN_00334140(unsigned int *param_1,int param_2)
   if (-1 < temp_v0) {
     *(unsigned int *)(param_2 + 0x44a0) = *(unsigned int *)(param_2 + 0x44a0) | 0x4000000;
     temp_v1 = (unsigned int)*(unsigned short *)(*(int *)(param_2 + 0x1fc0) + temp_v0 * 0x288 + 0xce);
-    FUN_002b06c4();
+    dataTable00FindById();
     memClear(temp_v2,0x80);
     FUN_002be624(temp_v2,"battle/arngmt/%02d_%02d.earg",*(unsigned char *)(temp_v1 + 0x9e),
                  *(unsigned char *)(temp_v1 + 0x9f));

@@ -12,13 +12,13 @@ typedef struct ChildOwner10 {
     /* 0x10 */ Child24 *child;
 } ChildOwner10;
 
-extern void FUN_001800b8(Child24 *child);
+extern void asdTextureRelease(Child24 *child);
 
 /* Clears the child's back reference, releases the child and drops it. */
 void childOwner10Release(ChildOwner10 *owner)
 {
     owner->child->unk24 = 0;
-    FUN_001800b8(owner->child);
+    asdTextureRelease(owner->child);
     owner->child = NULL;
 }
 

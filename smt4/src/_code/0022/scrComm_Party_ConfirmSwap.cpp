@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_002542bc(int);
-int FUN_002542d4(...);
+int scrWorkGetValue(int);
+int scrWorkSetValue(...);
 int FUN_00254e2c(int, int, unsigned int, int, int);
 int FUN_0028ed3c(int, int, int);
 int FUN_0028ee90(void);
 int FUN_0028eeb8(int);
-int FUN_002b63c0(void);
+int dataTable1bOr1cGetRecord(void);
 int FUN_002bff50(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -18,18 +18,18 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } void_stack;
 
-/* Supplied declaration required: FUN_002542bc. */
-/* Supplied declaration required: FUN_002542d4. */
+/* Supplied declaration required: scrWorkGetValue. */
+/* Supplied declaration required: scrWorkSetValue. */
 /* Supplied declaration required: FUN_00254e2c. */
-extern int FUN_002893d8(void);
+extern int scrGetCommandFrame(void);
 /* Supplied declaration required: FUN_0028ed3c. */
 /* Supplied declaration required: FUN_0028ee90. */
 /* Supplied declaration required: FUN_0028eeb8. */
 extern int FUN_0029022c(void);
 extern int FUN_002903f0(void);
 extern unsigned int scrGetArg(unsigned int);
-extern int FUN_002b47f4(unsigned int);
-/* Supplied declaration required: FUN_002b63c0. */
+extern int fileSlotGetBuffer(unsigned int);
+/* Supplied declaration required: dataTable1bOr1cGetRecord. */
 /* Supplied declaration required: FUN_002bff50. */
 
 
@@ -44,28 +44,28 @@ unsigned int scrComm_Party_ConfirmSwap(void)
   unsigned int temp_v4;
   
   temp_v1 = scrGetArg(0);
-  temp_v2 = FUN_002893d8();
+  temp_v2 = scrGetCommandFrame();
   if (temp_v2 == 0) {
     FUN_0028eeb8(temp_v1);
-    FUN_002542d4(0);
-    FUN_002542d4(1,0);
+    scrWorkSetValue(0);
+    scrWorkSetValue(1,0);
   }
-  temp_v3 = FUN_002b47f4(0x1e);
-  temp_v2 = FUN_002542bc(0);
+  temp_v3 = fileSlotGetBuffer(0x1e);
+  temp_v2 = scrWorkGetValue(0);
   if (temp_v2 == 0) {
     FUN_0028ed3c(temp_v1,0,1);
     FUN_002bff50();
-    temp_v4 = FUN_002542bc(1);
+    temp_v4 = scrWorkGetValue(1);
     FUN_00254e2c(temp_v3,0,temp_v4,6,0);
-    temp_v2 = FUN_002542bc(1);
-    FUN_002542d4(1,temp_v2 + 1);
+    temp_v2 = scrWorkGetValue(1);
+    scrWorkSetValue(1,temp_v2 + 1);
     if (temp_v3 == 1) {
-      FUN_002542d4(1,0);
+      scrWorkSetValue(1,0);
       temp_v2 = FUN_0029022c();
       if (temp_v2 != 0) {
         temp_v2 = FUN_002903f0();
-        FUN_002b63c0();
-        FUN_002b63c0();
+        dataTable1bOr1cGetRecord();
+        dataTable1bOr1cGetRecord();
         if ((temp_v2 != 0 && temp_v1 != 0) &&
            ((temp_v0 = *(char *)(temp_v2 + 6), (temp_v0 != '\x05' && temp_v0 != '\x04') && temp_v0 != '\x01'
             || (*(char *)(temp_v1 + 6) != '\0')))) {

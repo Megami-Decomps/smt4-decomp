@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00151340(void);
 int FUN_0015e2bc(unsigned char *, int, int, int);
 int FUN_0015e874(...);
-int FUN_00194fb0(unsigned char *, int);
+int nw_snd_SoundArchive_GetSoundType(unsigned char *, int);
 int VectorUnsignedToFloat(int, int);
 
 extern unsigned char DAT_0063e1e8; /* 0x63e1e8 */
@@ -22,8 +22,8 @@ extern int DAT_0063f500; /* 0x63f500 */
 /* Supplied declaration required: FUN_00151340. */
 /* Supplied declaration required: FUN_0015e2bc. */
 /* Supplied declaration required: FUN_0015e874. */
-extern int FUN_0015fe30(unsigned char *);
-/* Supplied declaration required: FUN_00194fb0. */
+extern int nw_snd_SoundArchive_IsAvailable(unsigned char *);
+/* Supplied declaration required: nw_snd_SoundArchive_GetSoundType. */
 
 
 int FUN_00143b58(int param_1,int param_2,unsigned int param_3)
@@ -51,9 +51,9 @@ int FUN_00143b58(int param_1,int param_2,unsigned int param_3)
           return -1;
         }
         puVar4 = &DAT_0063e1e8;
-        temp_v0 = FUN_0015fe30(&DAT_0063e1e8);
+        temp_v0 = nw_snd_SoundArchive_IsAvailable(&DAT_0063e1e8);
         if (temp_v0 != 0) {
-          FUN_00194fb0(&DAT_0063e1e8,param_1);
+          nw_snd_SoundArchive_GetSoundType(&DAT_0063e1e8,param_1);
           if (puVar4 == (unsigned char *)0x0) {
             return temp_v2;
           }

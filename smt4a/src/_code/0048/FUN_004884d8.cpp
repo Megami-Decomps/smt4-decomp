@@ -36,7 +36,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-extern int FUN_00162e8c(void);
+extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00185dd4. */
@@ -88,7 +88,7 @@ void FUN_004884d8(int param_1)
   int temp_v29;
   int temp_v30;
   
-  temp_v2 = FUN_00162e8c();
+  temp_v2 = gameFlagsGetBlock();
   temp_v25 = 0xb;
   temp_v29 = param_1 + 0x4cc;
   puVar4 = (unsigned long long *)sub68OwnerGetBlock60();

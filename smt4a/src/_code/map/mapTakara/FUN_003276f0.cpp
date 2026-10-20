@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00162e8c(void);
+int gameFlagsGetBlock(void);
 int FUN_00178b04(int, unsigned char *, int);
 int FUN_0040aa6c(void);
 int FUN_0040aad4(unsigned int, int);
@@ -16,7 +16,7 @@ typedef struct {
 } param_2_stack;
 
 extern unsigned char LAB_00327864; /* 0x327864 */
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 #ifndef ROMWRIGHT_STORAGE_s__a_a_00587f08_9_1_DEFINED
 #define ROMWRIGHT_STORAGE_s__a_a_00587f08_9_1_DEFINED
 /* Storage views; not a recovered source structure. */
@@ -31,7 +31,7 @@ typedef char romwright_storage_s__a_a_00587f08_9_1_s1_width_check[(sizeof(((unio
 #endif
 extern union romwright_storage_s__a_a_00587f08_9_1 s__a_a_00587f08; /* 0x587f08 */
 
-/* Supplied declaration required: FUN_00162e8c. */
+/* Supplied declaration required: gameFlagsGetBlock. */
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_0040aa6c. */
 /* Supplied declaration required: FUN_0040aad4. */
@@ -50,7 +50,7 @@ void FUN_003276f0(int param_1,int param_2)
   unsigned long long in_d0;
   unsigned long long in_d1;
   
-  FUN_00162e8c();
+  gameFlagsGetBlock();
   temp_v2 = (*(unsigned int *)&s__a_a_00587f08.u1[0]);
   *(unsigned short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 8) = 0;
   *(unsigned short *)(temp_v2 + 4) = 0x18;
@@ -106,7 +106,7 @@ LAB_003277b0:
   temp_v2 = (*(unsigned int *)&s__a_a_00587f08.u1[0]);
   temp_v0 = *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10);
   *(int *)(temp_v1 + 0xdc) = (int)temp_v0;
-  FUN_0040ace8(DAT_0056fcc0,*(unsigned int *)(*(int *)(temp_v2 + temp_v0 * 8 + 0x20) + 4));
+  FUN_0040ace8(g_handleRegistry,*(unsigned int *)(*(int *)(temp_v2 + temp_v0 * 8 + 0x20) + 4));
   return;
 }
 

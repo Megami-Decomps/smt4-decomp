@@ -11,15 +11,15 @@ typedef struct Registry {
     /* 0x1B6D */ u8 ready;
 } Registry;
 
-extern Registry *DAT_0057f108;
+extern Registry *g_camp;
 
-int FUN_001641c4(void);
+int ifTouchRegionRemove(void);
 int FUN_002a49b4(void);
 
 /* If the registry is loaded, releases every used slot id (setting it to -1), clears its flags and runs FUN_002a49b4. */
 void FUN_002309dc(void)
 {
-    Registry *registry = DAT_0057f108;
+    Registry *registry = g_camp;
     int i;
 
     if (registry->loaded == 0) {
@@ -28,7 +28,7 @@ void FUN_002309dc(void)
     i = 0;
     do {
         if (registry->ids[i] >= 0) {
-            FUN_001641c4();
+            ifTouchRegionRemove();
             registry->ids[i] = -1;
         }
         i++;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_002c2950(void);
+extern int gameGetMapBlock(void);
 
 
 void FUN_002486a8(int param_1,int param_2)
@@ -14,7 +14,7 @@ void FUN_002486a8(int param_1,int param_2)
   int temp_v1;
   int temp_v2;
   
-  temp_v0 = FUN_002c2950();
+  temp_v0 = gameGetMapBlock();
   temp_v1 = temp_v0 + param_2 * 0x78;
   temp_v2 = temp_v1 + param_1 * 8;
   if (*(char *)(temp_v2 + 0x3c) == '\x02') {

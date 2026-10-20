@@ -6,11 +6,11 @@ extern "C" {
 
 int FUN_001879d0(unsigned int);
 
-extern unsigned char DAT_00588fd0; /* 0x588fd0 */
+extern unsigned char g_gameGlobals; /* 0x588fd0 */
 extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
-extern int FUN_001654d8(int);
-extern unsigned int FUN_001654e4(int);
+extern int vec2GetXInt(int);
+extern unsigned int vec2GetYInt(int);
 /* Supplied declaration required: FUN_001879d0. */
 
 
@@ -23,11 +23,11 @@ void FUN_00230a50(int *param_1,unsigned int *param_2,int param_3)
   int temp_v2;
   float in_s0;
   
-  temp_v2 = (*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + param_3 * 0x8c;
-  temp_v0 = FUN_001654d8(temp_v2 + 0x44);
+  temp_v2 = (*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + param_3 * 0x8c;
+  temp_v0 = vec2GetXInt(temp_v2 + 0x44);
   FUN_001879d0(g_renderCtx);
   *param_1 = (int)in_s0 + temp_v0;
-  temp_v1 = FUN_001654e4(temp_v2 + 0x44);
+  temp_v1 = vec2GetYInt(temp_v2 + 0x44);
   *param_2 = temp_v1;
   return;
 }

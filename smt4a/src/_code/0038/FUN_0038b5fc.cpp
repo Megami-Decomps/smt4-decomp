@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0020b6d4(int);
+int gameStateChange(int);
 int FUN_0040b27c(...);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -12,9 +12,9 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_2_stack;
 
-extern unsigned char DAT_00588fd0; /* 0x588fd0 */
+extern unsigned char g_gameGlobals; /* 0x588fd0 */
 
-/* Supplied declaration required: FUN_0020b6d4. */
+/* Supplied declaration required: gameStateChange. */
 /* Supplied declaration required: FUN_0040b27c. */
 
 
@@ -28,20 +28,20 @@ void FUN_0038b5fc(int param_1,unsigned int param_2)
   if (param_1 != 0) {
     if (param_1 != 1) {
       if (param_1 == 2) {
-        FUN_0040b27c(*(unsigned int *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x2034),2,param_2,7);
+        FUN_0040b27c(*(unsigned int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x2034),2,param_2,7);
       }
-      FUN_0020b6d4(7);
+      gameStateChange(7);
       return;
     }
-    temp_v0 = *(unsigned int *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x2034);
+    temp_v0 = *(unsigned int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x2034);
     temp_v1 = 1;
   }
   else {
-    temp_v0 = *(unsigned int *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x2034);
+    temp_v0 = *(unsigned int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x2034);
     temp_v1 = 0;
   }
   FUN_0040b27c(temp_v0,temp_v1,param_2,7);
-  FUN_0020b6d4(7);
+  gameStateChange(7);
   return;
 }
 

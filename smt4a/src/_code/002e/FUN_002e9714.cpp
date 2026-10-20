@@ -19,8 +19,8 @@ extern unsigned char LAB_002e9764; /* 0x2e9764 */
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Supplied declaration required: FUN_00103924. */
-extern int FUN_002e783c(unsigned short *);
-extern unsigned short *FUN_002e92dc(unsigned short *, unsigned char *);
+extern int wstrlenU16(unsigned short *);
+extern unsigned short *wstrstrU16(unsigned short *, unsigned char *);
 
 
 long long FUN_002e9714(unsigned int param_1,unsigned short *param_2,unsigned int param_3)
@@ -34,10 +34,10 @@ long long FUN_002e9714(unsigned int param_1,unsigned short *param_2,unsigned int
   
   temp_v0 = 0;
   do {
-    puVar2 = (unsigned short *)FUN_002e92dc(param_2,&LAB_002e9764);
+    puVar2 = (unsigned short *)wstrstrU16(param_2,&LAB_002e9764);
     if (puVar2 == (unsigned short *)0x0) {
       temp_v0 = 1;
-      temp_v1 = FUN_002e783c(param_2);
+      temp_v1 = wstrlenU16(param_2);
       puVar2 = param_2 + temp_v1;
       if (param_2 == puVar2) break;
     }

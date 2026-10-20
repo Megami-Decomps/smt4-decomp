@@ -5,12 +5,12 @@
 extern "C" {
 
 int asdEffectTextureCreate(void);
-int FUN_002c0894(void);
+int asdTextureRelease(void);
 
 extern unsigned int FUN_0028c814(void);
 /* Supplied declaration required: asdEffectTextureCreate. */
 extern int FUN_0028c904(unsigned int);
-/* Supplied declaration required: FUN_002c0894. */
+/* Supplied declaration required: asdTextureRelease. */
 
 
 void FUN_002472f0(int param_1,unsigned int param_2)
@@ -20,7 +20,7 @@ void FUN_002472f0(int param_1,unsigned int param_2)
   int temp_v0;
   
   if (*(int *)(param_1 + 4) != 0) {
-    FUN_002c0894();
+    asdTextureRelease();
   }
   temp_v0 = FUN_0028c904(param_2);
   if (temp_v0 != 0) {

@@ -4,15 +4,15 @@
 
 extern "C" {
 
-int FUN_00184518(...);
-int FUN_001846d0(...);
-int FUN_00184758(...);
-int FUN_00184b80(...);
+int pairSetSecondResetFirst(...);
+int uiSpriteSelectAnim(...);
+int uiSpriteSetKeyframe(...);
+int pairSetFirstResetSecond(...);
 
-/* Supplied declaration required: FUN_00184518. */
-/* Supplied declaration required: FUN_001846d0. */
-/* Supplied declaration required: FUN_00184758. */
-/* Supplied declaration required: FUN_00184b80. */
+/* Supplied declaration required: pairSetSecondResetFirst. */
+/* Supplied declaration required: uiSpriteSelectAnim. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
+/* Supplied declaration required: pairSetFirstResetSecond. */
 extern int FUN_00291e14(void);
 
 
@@ -29,43 +29,43 @@ void FUN_00290274(int param_1,int param_2,unsigned char param_3,unsigned char pa
   *(char *)(param_1 + 0x403) = (char)param_5;
   if (param_2 != 0) {
     if (param_2 == 1) {
-      FUN_00184b80(param_1 + 0x20,0x2a);
-      FUN_001846d0(param_1 + 0x20,0);
-      FUN_00184518(param_1 + 0x1c4,8);
-      FUN_001846d0(param_1 + 0x1c4,0);
-      FUN_00184518(param_1 + 0x138,3);
-      FUN_001846d0(param_1 + 0x138,2);
-      FUN_00184518(param_1 + 0xac,1);
-      FUN_001846d0(param_1 + 0xac,1);
-      FUN_00184b80(param_1 + 0x2dc,10);
-      FUN_00184758(param_1 + 0x2dc,2,0);
+      pairSetFirstResetSecond(param_1 + 0x20,0x2a);
+      uiSpriteSelectAnim(param_1 + 0x20,0);
+      pairSetSecondResetFirst(param_1 + 0x1c4,8);
+      uiSpriteSelectAnim(param_1 + 0x1c4,0);
+      pairSetSecondResetFirst(param_1 + 0x138,3);
+      uiSpriteSelectAnim(param_1 + 0x138,2);
+      pairSetSecondResetFirst(param_1 + 0xac,1);
+      uiSpriteSelectAnim(param_1 + 0xac,1);
+      pairSetFirstResetSecond(param_1 + 0x2dc,10);
+      uiSpriteSetKeyframe(param_1 + 0x2dc,2,0);
     }
   }
   else {
     temp_v0 = FUN_00291e14();
     if (temp_v0 != 0) {
-      FUN_00184b80(param_1 + 0x20,0x29);
-      FUN_001846d0(param_1 + 0x20,0);
-      FUN_00184518(param_1 + 0x1c4,9);
-      FUN_001846d0(param_1 + 0x1c4,0);
-      FUN_00184518(param_1 + 0x138,6);
-      FUN_001846d0(param_1 + 0x138,2);
-      FUN_00184518(param_1 + 0xac,5);
-      FUN_001846d0(param_1 + 0xac,1);
-      FUN_00184b80(param_1 + 0x2dc,0xa6);
-      FUN_00184758(param_1 + 0x2dc,2,0);
+      pairSetFirstResetSecond(param_1 + 0x20,0x29);
+      uiSpriteSelectAnim(param_1 + 0x20,0);
+      pairSetSecondResetFirst(param_1 + 0x1c4,9);
+      uiSpriteSelectAnim(param_1 + 0x1c4,0);
+      pairSetSecondResetFirst(param_1 + 0x138,6);
+      uiSpriteSelectAnim(param_1 + 0x138,2);
+      pairSetSecondResetFirst(param_1 + 0xac,5);
+      uiSpriteSelectAnim(param_1 + 0xac,1);
+      pairSetFirstResetSecond(param_1 + 0x2dc,0xa6);
+      uiSpriteSetKeyframe(param_1 + 0x2dc,2,0);
     }
     else {
-      FUN_00184b80(param_1 + 0x20,0x29);
-      FUN_001846d0(param_1 + 0x20,0);
-      FUN_00184518(param_1 + 0x1c4,7);
-      FUN_001846d0(param_1 + 0x1c4,0);
-      FUN_00184518(param_1 + 0x138,2);
-      FUN_001846d0(param_1 + 0x138,2);
-      FUN_00184518(param_1 + 0xac,0);
-      FUN_001846d0(param_1 + 0xac,1);
-      FUN_00184b80(param_1 + 0x2dc,9);
-      FUN_00184758(param_1 + 0x2dc,2,0);
+      pairSetFirstResetSecond(param_1 + 0x20,0x29);
+      uiSpriteSelectAnim(param_1 + 0x20,0);
+      pairSetSecondResetFirst(param_1 + 0x1c4,7);
+      uiSpriteSelectAnim(param_1 + 0x1c4,0);
+      pairSetSecondResetFirst(param_1 + 0x138,2);
+      uiSpriteSelectAnim(param_1 + 0x138,2);
+      pairSetSecondResetFirst(param_1 + 0xac,0);
+      uiSpriteSelectAnim(param_1 + 0xac,1);
+      pairSetFirstResetSecond(param_1 + 0x2dc,9);
+      uiSpriteSetKeyframe(param_1 + 0x2dc,2,0);
     }
   }
   if (param_5 == 0) {
@@ -73,7 +73,7 @@ void FUN_00290274(int param_1,int param_2,unsigned char param_3,unsigned char pa
     *(unsigned int *)(param_1 + 0x3f8) = 2;
     return;
   }
-  FUN_001846d0(param_1 + 0x368,4);
+  uiSpriteSelectAnim(param_1 + 0x368,4);
   *(unsigned int *)(param_1 + 0x404) = 10;
   *(unsigned int *)(param_1 + 0x3f4) = 0;
   *(unsigned int *)(param_1 + 0x3f8) = 4;

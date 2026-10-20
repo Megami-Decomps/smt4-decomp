@@ -5,10 +5,10 @@
 extern "C" {
 
 int dataTable05Sub0GetEntries(void);
-int FUN_002b9024(void);
+int devilGetRecord(void);
 
 /* Supplied declaration required: dataTable05Sub0GetEntries. */
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: devilGetRecord. */
 extern int randNextInRange(unsigned int);
 
 
@@ -25,9 +25,9 @@ unsigned char FUN_003c88f0(int param_1,int param_2,int param_3)
   dataTable05Sub0GetEntries();
   temp_v0 = *(unsigned char *)(param_1 + 1);
   temp_v1 = (unsigned int)*(unsigned short *)(param_2 + 0x46);
-  FUN_002b9024();
+  devilGetRecord();
   temp_v3 = (unsigned int)*(unsigned short *)(param_3 + 0x46);
-  FUN_002b9024();
+  devilGetRecord();
   temp_v4 = *(char *)(temp_v1 + 2) != '#';
   if (temp_v4) {
     temp_v3 = (unsigned int)*(unsigned char *)(temp_v3 + 2);

@@ -5,11 +5,11 @@
 extern "C" {
 
 int CONCAT44(double, double);
-int FUN_001656a0(...);
+int padButtonIsPressed(...);
 int memAlloc(int, int, int, int, int, int);
 int FUN_00200bcc(unsigned char *);
 int FUN_00202178(int);
-int FUN_0020e9dc(unsigned char *);
+int effEditorNodeChainApply(unsigned char *);
 int FUN_002b3ed8(...);
 int FUN_002f8794(void);
 int FUN_002ffe14(float *, unsigned int, int);
@@ -66,11 +66,11 @@ static float romwright_sqrt_4(float value)
     return (float)sqrt((double)value);
 }
 #endif
-/* Supplied declaration required: FUN_001656a0. */
+/* Supplied declaration required: padButtonIsPressed. */
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_00200bcc. */
 /* Supplied declaration required: FUN_00202178. */
-/* Supplied declaration required: FUN_0020e9dc. */
+/* Supplied declaration required: effEditorNodeChainApply. */
 /* Supplied declaration required: FUN_002b3ed8. */
 /* Supplied declaration required: FUN_002f8794. */
 /* Supplied declaration required: FUN_002ffe14. */
@@ -115,10 +115,10 @@ unsigned int FUN_003c378c(int param_1,int param_2)
   
   temp_v6 = 1;
   if ((DAT_0059ea60 & 2) == 0) {
-    temp_v5 = FUN_001656a0(1);
+    temp_v5 = padButtonIsPressed(1);
     if (temp_v5 == 0) {
       FUN_00202178(1);
-      temp_v5 = FUN_001656a0();
+      temp_v5 = padButtonIsPressed();
       if (temp_v5 != 0) {
         temp_v6 = 0;
       }
@@ -134,7 +134,7 @@ unsigned int FUN_003c378c(int param_1,int param_2)
   if (DAT_0059dbe9 == '\0') {
     FUN_00200bcc(&DAT_0059ea50);
   }
-  FUN_0020e9dc(&DAT_0059ea50);
+  effEditorNodeChainApply(&DAT_0059ea50);
   temp_v1 = DAT_006352fc;
   temp_v0 = DAT_006352f8;
   temp_v11 = DAT_006352f4;

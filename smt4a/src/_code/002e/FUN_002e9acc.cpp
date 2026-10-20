@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_002eb338(unsigned int *, int *, int);
-int FUN_002eb588(int *);
+int onlineTimeGetNow(int *);
 
 /* Supplied declaration required: FUN_002eb338. */
-/* Supplied declaration required: FUN_002eb588. */
+/* Supplied declaration required: onlineTimeGetNow. */
 
 
 void FUN_002e9acc(unsigned int *param_1,int param_2,unsigned int param_3,unsigned int param_4)
@@ -21,7 +21,7 @@ void FUN_002e9acc(unsigned int *param_1,int param_2,unsigned int param_3,unsigne
   if (param_2 != -1) {
     uStack_18 = param_3;
     uStack_14 = param_4;
-    FUN_002eb588(&uStack_18);
+    onlineTimeGetNow(&uStack_18);
     FUN_002eb338(param_1,&uStack_18,param_2);
     return;
   }

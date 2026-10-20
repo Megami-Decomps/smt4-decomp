@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002e93ec(int, unsigned int);
-int FUN_002e9672(void);
+int onlineSockAddrSetHost(int, unsigned int);
+int onlineSockAddrInit(void);
 
-/* Supplied declaration required: FUN_002e93ec. */
-/* Supplied declaration required: FUN_002e9672. */
+/* Supplied declaration required: onlineSockAddrSetHost. */
+/* Supplied declaration required: onlineSockAddrInit. */
 
 
 void FUN_0010a0d8(int param_1,unsigned int param_2)
@@ -16,9 +16,9 @@ void FUN_0010a0d8(int param_1,unsigned int param_2)
 {
 /* irregular: 2 native warning(s); review required */
   param_1 = param_1 + 0x120;
-  FUN_002e9672();
+  onlineSockAddrInit();
   *(unsigned short *)(param_1 + 6) = 0xed30;
-  FUN_002e93ec(param_1,param_2);
+  onlineSockAddrSetHost(param_1,param_2);
   return;
 }
 

@@ -15,21 +15,21 @@ int scrScriptProcessDestroy(void);
 int FUN_0019e2dc(void);
 int FUN_0019ea64(...);
 int FUN_001ad6d8(void);
-int FUN_001aea28(...);
+int ptrListRemoveClearOwner(...);
 int FUN_001aeafc(...);
 int FUN_001f3eec(...);
 int FUN_00214da4(void);
 int FUN_0022677c(...);
 int gameStateClearFlag(void);
 int FUN_00314c38(...);
-int FUN_00324bc8(...);
+int mapPlaceSet(...);
 int FUN_00324c48(...);
-int FUN_0035b304(void);
-int FUN_0037b450(void);
+int campCommonBgRelease(void);
+int campButtonHelpRelease(void);
 int FUN_00387ac4(...);
 int FUN_003d2150(...);
 int FUN_003d2158(...);
-int FUN_003d2d6c(...);
+int soundChannelStopAll(...);
 int FUN_003e5858(void);
 int linkHolderClearFlag(...);
 int FUN_003e5c00(void);
@@ -40,19 +40,19 @@ int FUN_0013cab8(...);
 int FUN_001517b4(...);
 int FUN_001642e4(...);
 int sysPlaySe(...);
-int FUN_0019c8c0(...);
+int resOwnerRunNodeHandlers(...);
 int FUN_001abbc4(void);
 int FUN_001b4eb8(void);
 int FUN_001f4908(...);
 int FUN_0020214c(void);
 int FUN_0020401c(...);
 int FUN_00275bc8(...);
-int FUN_00275f44(...);
-int FUN_0031a400(void);
+int scrScriptProcessStartEntry(...);
+int campCommonBgAcquire(void);
 int FUN_0031e198(void);
-int FUN_00342010(void);
+int campButtonHelpAcquire(void);
 int FUN_0036b824(...);
-int FUN_003d2d34(...);
+int soundChannelRequestIfEnabled(...);
 int FUN_003d54f8(...);
 int FUN_003e542c(...);
 int FUN_003e5478(...);
@@ -109,7 +109,7 @@ extern unsigned char LAB_003290c4; /* 0x3290c4 */
 extern unsigned char LAB_003290e4; /* 0x3290e4 */
 extern unsigned char DAT_00526180; /* 0x526180 */
 extern unsigned char DAT_00557c60; /* 0x557c60 */
-extern int DAT_0056fcc0; /* 0x56fcc0 */
+extern int g_handleRegistry; /* 0x56fcc0 */
 extern int g_localTmnl; /* 0x56fccc */
 extern unsigned char DAT_005f1727; /* 0x5f1727 */
 extern unsigned char DAT_005f1728; /* 0x5f1728 */
@@ -141,42 +141,42 @@ extern int FUN_0013def0(unsigned int);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_0019c0e0. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: FUN_0019c8c0. */
+/* Supplied declaration required: resOwnerRunNodeHandlers. */
 /* Supplied declaration required: FUN_0019e2dc. */
 /* Supplied declaration required: FUN_0019ea64. */
 /* Supplied declaration required: FUN_001abbc4. */
 /* Supplied declaration required: FUN_001ad6d8. */
-/* Supplied declaration required: FUN_001aea28. */
+/* Supplied declaration required: ptrListRemoveClearOwner. */
 /* Supplied declaration required: FUN_001aeafc. */
 /* Supplied declaration required: FUN_001b4eb8. */
 /* Supplied declaration required: FUN_001f3eec. */
 /* Supplied declaration required: FUN_001f4908. */
-extern int FUN_002009a8(unsigned int);
+extern int bgmGetStateById(unsigned int);
 /* Supplied declaration required: FUN_0020214c. */
 /* Supplied declaration required: FUN_0020401c. */
 /* Supplied declaration required: FUN_00214da4. */
 extern int FUN_00224880(unsigned int);
 /* Supplied declaration required: FUN_0022677c. */
 /* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002802c8(void);
 extern int FUN_002a4b74(void);
 /* Supplied declaration required: gameStateClearFlag. */
 /* Supplied declaration required: FUN_00314c38. */
-/* Supplied declaration required: FUN_0031a400. */
+/* Supplied declaration required: campCommonBgAcquire. */
 /* Supplied declaration required: FUN_0031e198. */
 extern int FUN_00323bc4(unsigned int);
-/* Supplied declaration required: FUN_00324bc8. */
+/* Supplied declaration required: mapPlaceSet. */
 /* Supplied declaration required: FUN_00324c48. */
-/* Supplied declaration required: FUN_00342010. */
-/* Supplied declaration required: FUN_0035b304. */
+/* Supplied declaration required: campButtonHelpAcquire. */
+/* Supplied declaration required: campCommonBgRelease. */
 /* Supplied declaration required: FUN_0036b824. */
-/* Supplied declaration required: FUN_0037b450. */
+/* Supplied declaration required: campButtonHelpRelease. */
 /* Supplied declaration required: FUN_00387ac4. */
 /* Supplied declaration required: FUN_003d2150. */
 /* Supplied declaration required: FUN_003d2158. */
-/* Supplied declaration required: FUN_003d2d34. */
-/* Supplied declaration required: FUN_003d2d6c. */
+/* Supplied declaration required: soundChannelRequestIfEnabled. */
+/* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: FUN_003d54f8. */
 /* Supplied declaration required: FUN_003e4740. */
 extern int linkHolderCallFirst(unsigned int);
@@ -319,7 +319,7 @@ unsigned int FUN_00328838(void)
     FUN_0040ab7c(*(unsigned int *)(temp_v4 + 0x2c),0);
     FUN_0045b538(*(int *)(*(int *)(temp_v4 + 0x2c) + 0xc) + 0xc);
     temp_v3 = *(unsigned int *)(*(int *)(temp_v4 + 0x2c) + 4);
-    FUN_0040ace8(DAT_0056fcc0,temp_v3);
+    FUN_0040ace8(g_handleRegistry,temp_v3);
     FUN_003fe86c(temp_v3,0,1);
     FUN_003fd784(temp_v3);
     FUN_003fd7b4(temp_v3);
@@ -348,8 +348,8 @@ unsigned int FUN_00328838(void)
     *(int *)(temp_v4 + 0x38) = temp_v6;
     FUN_003f9c0c();
     *(unsigned int *)(temp_v4 + 0x54c) = 0xffffffff;
-    temp_v6 = DAT_0056fcc0;
-    FUN_0040b0f8(DAT_0056fcc0,&LAB_00328ccc);
+    temp_v6 = g_handleRegistry;
+    FUN_0040b0f8(g_handleRegistry,&LAB_00328ccc);
     temp_v2 = FUN_0040af60(temp_v6);
     if (temp_v2 != 0) {
       FUN_0040ae70(temp_v6,1);
@@ -374,10 +374,10 @@ unsigned int FUN_00328838(void)
     FUN_0014f0dc(temp_v4 + 0x40,&temp_v9,temp_v10,temp_v11);
     FUN_001523b8(temp_v4 + 0x40,1);
     FUN_0036b824(temp_v4 + 0x40);
-    *(int *)(DAT_0056fcc0 + 0xc) = temp_v4 + 0x40;
+    *(int *)(g_handleRegistry + 0xc) = temp_v4 + 0x40;
     FUN_0031e198();
-    FUN_0031a400();
-    FUN_00342010();
+    campCommonBgAcquire();
+    campButtonHelpAcquire();
     puVar5 = &LAB_0032904c;
     FUN_001642e4(&LAB_0032904c,temp_v15,1,0x80);
     *(unsigned char **)(temp_v4 + 0x564) = puVar5;
@@ -416,9 +416,9 @@ unsigned int FUN_00328838(void)
       temp_v6 = temp_v6 + 1;
       *(unsigned char *)(temp_v2 + 0x56c) = 0;
     } while (temp_v6 < 4);
-    temp_v4 = FUN_002009a8(0x1000040);
+    temp_v4 = bgmGetStateById(0x1000040);
     if (temp_v4 != 1) {
-      FUN_003d2d34(0x1000040,0,0x3c);
+      soundChannelRequestIfEnabled(0x1000040,0,0x3c);
     }
     *(unsigned int *)(temp_v0 + 8) = 2;
     *(unsigned int *)(temp_v0 + 0xc) = 0;
@@ -463,7 +463,7 @@ unsigned int FUN_00328838(void)
     FUN_0020401c(&temp_v9);
     sysPlaySe(0x92);
     *(unsigned int *)(temp_v0 + 0xc) = 0;
-    FUN_00275f44(*(unsigned int *)(temp_v0 + 0x20),
+    scrScriptProcessStartEntry(*(unsigned int *)(temp_v0 + 0x20),
                  *(unsigned int *)(*(int *)(temp_v0 + 0x560) * 0x10 + 0x56fcdc));
     temp_v3 = 4;
     *(unsigned int *)(temp_v0 + 8) = temp_v3;
@@ -534,7 +534,7 @@ unsigned int FUN_00328838(void)
               *(unsigned char *)(temp_v0 + 0x56c) = 1;
               temp_v3 = *(unsigned int *)(temp_v0 + 0x568);
             }
-            FUN_0019c8c0(temp_v3);
+            resOwnerRunNodeHandlers(temp_v3);
           }
           else {
             *(unsigned int *)(temp_v0 + 8) = 6;
@@ -573,7 +573,7 @@ unsigned int FUN_00328838(void)
     *(unsigned int *)(temp_v0 + 0xc) = 0;
     *(unsigned int *)(temp_v0 + 0x560) = *(unsigned int *)(*(int *)(temp_v0 + 0x560) * 0x10 + 0x56fcd4);
     if (*(char *)(temp_v0 + 0x558) == '\0') break;
-    FUN_003d2d6c(0xf);
+    soundChannelStopAll(0xf);
     FUN_003d2158(0x10000b2,0);
     FUN_003d2150(0x10000b3);
     temp_v3 = 0xf;
@@ -681,7 +681,7 @@ unsigned int FUN_00328838(void)
         *(unsigned int *)(temp_v0 + 0x24) = 0;
       }
       FUN_001695a0();
-      FUN_001aeafc(DAT_0056fcc0);
+      FUN_001aeafc(g_handleRegistry);
       temp_v4 = g_localTmnl;
       FUN_001ad6d8();
       if (*(int *)(temp_v4 + 0x28) != 0) {
@@ -692,7 +692,7 @@ unsigned int FUN_00328838(void)
         *(unsigned int *)(temp_v4 + 0x28) = 0;
       }
       if (*(int *)(temp_v4 + 0x2c) != 0) {
-        FUN_001aea28(DAT_0056fcc0,*(unsigned int *)(*(int *)(temp_v4 + 0x2c) + 4));
+        ptrListRemoveClearOwner(g_handleRegistry,*(unsigned int *)(*(int *)(temp_v4 + 0x2c) + 4));
         if (*(int **)(temp_v4 + 0x2c) != (int *)0x0) {
           (**(romwright_code **)(**(int **)(temp_v4 + 0x2c) + 4))();
           *(unsigned int *)(temp_v4 + 0x2c) = 0;
@@ -709,8 +709,8 @@ unsigned int FUN_00328838(void)
         temp_v6 = temp_v6 + 1;
       } while (temp_v6 < 3);
       FUN_0019e2dc();
-      FUN_0035b304();
-      FUN_0037b450();
+      campCommonBgRelease();
+      campButtonHelpRelease();
       temp_v6 = 0;
       do {
         temp_v2 = temp_v4 + temp_v6 * 0xc;
@@ -732,7 +732,7 @@ unsigned int FUN_00328838(void)
         FUN_00324c48(DAT_005f1b74,DAT_005f1b78,DAT_005f1b7c);
       }
       else {
-        FUN_00324bc8((int)*(short *)(temp_v0 + 0x56fcd0),(int)*(char *)(temp_v0 + 0x56fcd2),
+        mapPlaceSet((int)*(short *)(temp_v0 + 0x56fcd0),(int)*(char *)(temp_v0 + 0x56fcd2),
                      (int)*(char *)(temp_v0 + 0x56fcd3));
         uStack_fc = (unsigned int)DAT_005f172a;
         temp_v9 = (unsigned int)DAT_005f1729;
@@ -762,17 +762,17 @@ unsigned int FUN_00328838(void)
       temp_v7 = 0.1f;
       FUN_001f3eec(temp_v4);
       temp_v4 = VectorFloatToUnsigned(temp_v7 * temp_v8,3);
-      FUN_00406768(*(unsigned int *)(DAT_0056fcc0 + 4),0,temp_v4 * 0x1010100 + 0xff);
+      FUN_00406768(*(unsigned int *)(g_handleRegistry + 4),0,temp_v4 * 0x1010100 + 0xff);
     }
     if (*(int *)(temp_v0 + 0x554) == 0x28) {
       FUN_003d2150(0x10000c6);
       *(unsigned char *)(temp_v0 + 0x584) = 1;
-      FUN_0019c8c0(*(unsigned int *)(temp_v0 + 0x580));
+      resOwnerRunNodeHandlers(*(unsigned int *)(temp_v0 + 0x580));
     }
     if (*(int *)(temp_v0 + 0x554) == 0x49) {
       FUN_003d2150(0x10000b3);
       *(unsigned char *)(temp_v0 + 0x590) = 1;
-      FUN_0019c8c0(*(unsigned int *)(temp_v0 + 0x58c));
+      resOwnerRunNodeHandlers(*(unsigned int *)(temp_v0 + 0x58c));
     }
     if (*(int *)(temp_v0 + 0x554) == 0x55) {
       linkHolderClearFlag(*(unsigned int *)(temp_v0 + 0x28));

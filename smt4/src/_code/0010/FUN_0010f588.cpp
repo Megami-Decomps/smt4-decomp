@@ -8,7 +8,7 @@ extern int DAT_00472a58; /* 0x472a58 */
 
 extern int asdModelForwardChecked(unsigned int *, char *, unsigned int, unsigned int);
 extern int FUN_002c1398(void);
-extern unsigned int FUN_002c30c4(char *);
+extern unsigned int libc_strlen(char *);
 
 
 int FUN_0010f588(void)
@@ -22,7 +22,7 @@ int FUN_0010f588(void)
     if (temp_v0 < 0) {
       return temp_v0;
     }
-    temp_v1 = FUN_002c30c4("am:app");
+    temp_v1 = libc_strlen("am:app");
     temp_v0 = asdModelForwardChecked((unsigned int *)&DAT_00472a58,"am:app",temp_v1,0);
     if (temp_v0 < 0) {
       return temp_v0;

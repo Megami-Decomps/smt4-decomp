@@ -5,7 +5,7 @@ extern "C" {
 /* Returns the halfword at 0x64E of the record at 0x57F248. */
 s32 FUN_00165070(void)
 {
-    return DAT_0057f248.record->unk64E;
+    return g_ifTouch.record->unk64E;
 }
 
 } /* extern "C" */

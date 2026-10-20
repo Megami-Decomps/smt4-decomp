@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001ad9b4(void);
 
-extern int FUN_001801a4(void);
+extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_001ad9b4. */
 extern int FUN_001ada74(int);
 extern int FUN_003df390(int);
@@ -24,7 +24,7 @@ unsigned int FUN_003ded68(int param_1)
   if (((temp_v0 == 0) &&
       (((temp_v0 = partyEntryFlagsBit1(param_1), temp_v0 == 0 || (temp_v0 = FUN_001ada74(param_1), temp_v0 == 0))
        && (temp_v0 = FUN_003df390(param_1), temp_v0 != 0)))) && (FUN_001ad9b4(), param_1 != 0)) {
-    temp_v0 = FUN_001801a4();
+    temp_v0 = gameGetPlayerData();
     if ((*(short *)(param_1 + 0x120) != 0) &&
        ((int)*(short *)(param_1 + 0x120) <= (int)(unsigned int)*(unsigned short *)(temp_v0 + 0x62))) {
       return 1;

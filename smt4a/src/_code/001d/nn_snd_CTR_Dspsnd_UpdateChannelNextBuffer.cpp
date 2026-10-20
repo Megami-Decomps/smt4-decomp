@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_001c6e20(void);
+extern int nn_snd_CTR_Dspsnd_IsInitialized(void);
 
 
 unsigned char nn_snd_CTR_Dspsnd_UpdateChannelNextBuffer(int param_1,unsigned char param_2,int param_3)
@@ -14,7 +14,7 @@ unsigned char nn_snd_CTR_Dspsnd_UpdateChannelNextBuffer(int param_1,unsigned cha
   int temp_v1;
   unsigned int *puVar3;
   
-  temp_v1 = FUN_001c6e20();
+  temp_v1 = nn_snd_CTR_Dspsnd_IsInitialized();
   temp_v0 = 0;
   if (temp_v1 != 0) {
     puVar3 = *(unsigned int **)(param_1 + (*(unsigned short *)(param_1 + 0x131a) & 1) * 0x60 + (unsigned int)param_2 * 4 +

@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002b7430(unsigned int, int);
+int linkListEraseManagerNode(unsigned int, int);
 int nw_snd_internal_driver_SequenceTrack_Close(void);
 
 typedef int romwright_code(...);
-/* Supplied declaration required: FUN_002b7430. */
-extern unsigned int FUN_002bd440(void);
+/* Supplied declaration required: linkListEraseManagerNode. */
+extern unsigned int nw_snd_internal_driver_SoundThread_GetInstance(void);
 /* Supplied declaration required: nw_snd_internal_driver_SequenceTrack_Close. */
 
 
@@ -22,8 +22,8 @@ void nw_snd_internal_driver_SequenceSoundPlayer_FinishPlayer(int param_1)
   int temp_v2;
   
   if (*(char *)(param_1 + 0xd) != '\0') {
-    temp_v0 = FUN_002bd440();
-    FUN_002b7430(temp_v0,param_1 + 0x50);
+    temp_v0 = nw_snd_internal_driver_SoundThread_GetInstance();
+    linkListEraseManagerNode(temp_v0,param_1 + 0x50);
     *(unsigned char *)(param_1 + 0xd) = 0;
   }
   temp_v1 = 0;

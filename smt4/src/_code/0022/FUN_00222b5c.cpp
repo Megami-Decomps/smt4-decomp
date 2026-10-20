@@ -5,22 +5,22 @@
 extern "C" {
 
 int FUN_0024db9c(...);
-int FUN_002a8740(...);
+int gameGetUnitRecord(...);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp2C; /* 0x2c: local_2c */
 } param_3_stack;
 
-extern int DAT_0043dcf0; /* 0x43dcf0 */
+extern int g_partyPanel; /* 0x43dcf0 */
 
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Supplied declaration required: FUN_0024db9c. */
-/* Supplied declaration required: FUN_002a8740. */
-extern int FUN_002a8764(void);
+/* Supplied declaration required: gameGetUnitRecord. */
+extern int gameGetSlotTable(void);
 
 
 int FUN_00222b5c(unsigned int *param_1,unsigned int *param_2,int param_3)
@@ -47,11 +47,11 @@ int FUN_00222b5c(unsigned int *param_1,unsigned int *param_2,int param_3)
   long long temp_v15;
   unsigned int *puVar19;
   
-  temp_v1 = DAT_0043dcf0;
-  if (DAT_0043dcf0 == 0) {
+  temp_v1 = g_partyPanel;
+  if (g_partyPanel == 0) {
     return 0;
   }
-  if (*(char *)(DAT_0043dcf0 + 0x34) == '\0') {
+  if (*(char *)(g_partyPanel + 0x34) == '\0') {
     return (int)*(char *)(temp_v1 + 0x34);
   }
   *param_1 = 0;
@@ -59,7 +59,7 @@ int FUN_00222b5c(unsigned int *param_1,unsigned int *param_2,int param_3)
   *param_2 = 0;
   param_2[1] = 0;
   puVar19 = param_1;
-  temp_v2 = FUN_002a8764();
+  temp_v2 = gameGetSlotTable();
   if (*(char *)(temp_v1 + 0x35) != '\0') {
     *param_1 = 0;
     param_1[1] = 0;
@@ -78,7 +78,7 @@ int FUN_00222b5c(unsigned int *param_1,unsigned int *param_2,int param_3)
             temp_v5 = 0;
             do {
               if ((-1 < *(char *)(temp_v2 + temp_v5 + 0x9108)) &&
-                 (temp_v3 = FUN_002a8740(), temp_v10 = temp_v5,
+                 (temp_v3 = gameGetUnitRecord(), temp_v10 = temp_v5,
                  (unsigned int)*(unsigned short *)(temp_v3 + 0x46) == *(unsigned int *)(temp_v1 + temp_v8 * 4 + 0xb34))) break;
               temp_v5 = temp_v5 + 1;
               temp_v10 = temp_v9;
@@ -90,7 +90,7 @@ int FUN_00222b5c(unsigned int *param_1,unsigned int *param_2,int param_3)
               temp_v5 = 0;
               do {
                 if ((-1 < *(char *)(temp_v2 + temp_v5 + 0x90f0)) &&
-                   (temp_v3 = FUN_002a8740(), temp_v10 = temp_v5,
+                   (temp_v3 = gameGetUnitRecord(), temp_v10 = temp_v5,
                    (unsigned int)*(unsigned short *)(temp_v3 + 0x46) == *(unsigned int *)(temp_v1 + temp_v8 * 4 + 0xb34))) break;
                 temp_v5 = temp_v5 + 1;
                 temp_v10 = temp_v9;
@@ -202,10 +202,10 @@ int FUN_00222b5c(unsigned int *param_1,unsigned int *param_2,int param_3)
         }
         temp_v2 = 0;
         do {
-          temp_v8 = FUN_002a8764();
+          temp_v8 = gameGetSlotTable();
           if (-1 < *(char *)(temp_v8 + temp_v2 + 0x90f0)) {
-            temp_v8 = FUN_002a8764();
-            temp_v8 = FUN_002a8740((int)*(char *)(temp_v8 + temp_v2 + 0x90f0));
+            temp_v8 = gameGetSlotTable();
+            temp_v8 = gameGetUnitRecord((int)*(char *)(temp_v8 + temp_v2 + 0x90f0));
             if (*(short *)(temp_v8 + 0x46) == *(short *)(temp_v1 + 0xb96)) {
               temp_v13 = FUN_0024db9c(1,0,temp_v2 + 1);
               *(unsigned long long *)param_2 = temp_v13;
@@ -222,7 +222,7 @@ int FUN_00222b5c(unsigned int *param_1,unsigned int *param_2,int param_3)
       *param_1 = temp_v6;
       param_1[1] = (int)temp_v6 >> 0x1f;
       do {
-        temp_v8 = FUN_002a8764();
+        temp_v8 = gameGetSlotTable();
         if ((int)*(char *)(temp_v8 + temp_v2 + 0x90f0) ==
             *(int *)(temp_v1 + *(int *)(temp_v1 + 0x674) * 8 + 0x738)) {
           temp_v13 = FUN_0024db9c(1,0,temp_v2 + 1);

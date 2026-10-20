@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_0022699c(int, int, int, unsigned int);
-int FUN_00282924(int, int);
+int btlMainFindEntryByListedId(int, int);
 
-extern int DAT_00434290; /* 0x434290 */
+extern int g_btlActionReflect; /* 0x434290 */
 
 /* Supplied declaration required: FUN_0022699c. */
-/* Supplied declaration required: FUN_00282924. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 extern int btlGetMainState(void);
 
 
@@ -22,28 +22,28 @@ unsigned int FUN_00246e24(short param_1,unsigned int param_2,int param_3,unsigne
   int temp_v1;
   
   temp_v1 = (int)(short)(param_1 + 1);
-  temp_v0 = DAT_00434290;
-  FUN_0022699c(DAT_00434290,temp_v1,0,param_2);
+  temp_v0 = g_btlActionReflect;
+  FUN_0022699c(g_btlActionReflect,temp_v1,0,param_2);
   *(unsigned char *)(temp_v0 + 4) = 0x13;
   *(int *)(temp_v0 + 0x14) = param_3;
   *(unsigned int *)(temp_v0 + 0x4c) = param_4;
-  temp_v0 = DAT_00434290;
-  FUN_0022699c(DAT_00434290,temp_v1,0,param_2);
+  temp_v0 = g_btlActionReflect;
+  FUN_0022699c(g_btlActionReflect,temp_v1,0,param_2);
   *(unsigned char *)(temp_v0 + 4) = 8;
   *(int *)(temp_v0 + 0x14) = param_3;
   *(unsigned int *)(temp_v0 + 0x28) = param_4;
-  temp_v0 = DAT_00434290;
-  FUN_0022699c(DAT_00434290,(int)param_1,0,param_2);
+  temp_v0 = g_btlActionReflect;
+  FUN_0022699c(g_btlActionReflect,(int)param_1,0,param_2);
   *(unsigned char *)(temp_v0 + 4) = 0x1d;
   *(int *)(temp_v0 + 0x14) = param_3;
   *(unsigned int *)(temp_v0 + 0x28) = 1;
   *(unsigned int *)(temp_v0 + 0x4c) = param_4;
   if (param_5 != 0) {
     temp_v0 = btlGetMainState();
-    FUN_00282924(temp_v0,(int)*(short *)(param_3 + 0x62));
+    btlMainFindEntryByListedId(temp_v0,(int)*(short *)(param_3 + 0x62));
     if ((*(unsigned short *)(temp_v0 + 0x1c6) & 0x10) != 0) {
-      temp_v0 = DAT_00434290;
-      FUN_0022699c(DAT_00434290,temp_v1,0,param_2);
+      temp_v0 = g_btlActionReflect;
+      FUN_0022699c(g_btlActionReflect,temp_v1,0,param_2);
       *(unsigned char *)(temp_v0 + 4) = 0x1d;
       *(int *)(temp_v0 + 0x14) = param_3;
       *(unsigned int *)(temp_v0 + 0x28) = 0;

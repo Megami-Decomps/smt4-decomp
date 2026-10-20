@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_0016cdd8(int);
 int FUN_0016e800(...);
-int FUN_001a089c(int, int);
-int FUN_001a0990(int);
+int nn_os_LightEvent_Initialize(int, int);
+int nn_os_LightEvent_ClearSignal(int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -21,8 +21,8 @@ extern int DAT_0062d2e8; /* 0x62d2e8 */
 /* Supplied declaration required: FUN_0016e800. */
 extern int FUN_0016f9bc(unsigned int *, unsigned int);
 extern int FUN_0018a8ec(unsigned int);
-/* Supplied declaration required: FUN_001a089c. */
-/* Supplied declaration required: FUN_001a0990. */
+/* Supplied declaration required: nn_os_LightEvent_Initialize. */
+/* Supplied declaration required: nn_os_LightEvent_ClearSignal. */
 
 
 void FUN_0016ce28(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -33,10 +33,10 @@ void FUN_0016ce28(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   unsigned int unaff_r4;
   unsigned int in_lr;
   
-  FUN_001a089c(param_1,0);
-  FUN_001a089c(param_1 + 8,0);
-  FUN_001a0990(param_1);
-  FUN_001a0990(param_1 + 8);
+  nn_os_LightEvent_Initialize(param_1,0);
+  nn_os_LightEvent_Initialize(param_1 + 8,0);
+  nn_os_LightEvent_ClearSignal(param_1);
+  nn_os_LightEvent_ClearSignal(param_1 + 8);
   FUN_0016cdd8(param_1);
   DAT_0062d2e8 = param_1 + 8;
   temp_v0 = FUN_0016f9bc(&DAT_0062d2d8,0x207);

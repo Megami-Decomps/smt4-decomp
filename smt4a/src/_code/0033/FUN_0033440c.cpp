@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern ObjBRef DAT_00588fd0;
+extern ObjBRef g_gameGlobals;
 
 void FUN_0033440c(u32 value)
 {
-    ObjB *obj = DAT_00588fd0.instance;
+    ObjB *obj = g_gameGlobals.instance;
 
     if (obj != NULL) {
         obj->unk20A8 = value;

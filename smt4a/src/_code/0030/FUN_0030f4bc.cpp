@@ -7,9 +7,9 @@ extern "C" {
 int FUN_001208a0(int);
 int FUN_002e6e34(...);
 int FUN_002e6e5c(unsigned char [12]);
-int FUN_002e7228(int);
-int FUN_002e75fa(int);
-int FUN_0030f89a(int *);
+int onlineJobSetStateReady(int);
+int sharedRefAddRef(int);
+int listIteratorNext4(int *);
 int FUN_0030f8a2(int, int, unsigned int);
 
 /* stack frame of param_2: 3 slot(s), 12 byte(s) */
@@ -25,10 +25,10 @@ extern unsigned char DAT_0062e6a0; /* 0x62e6a0 */
 /* Supplied declaration required: FUN_001208a0. */
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-/* Supplied declaration required: FUN_002e7228. */
-/* Supplied declaration required: FUN_002e75fa. */
+/* Supplied declaration required: onlineJobSetStateReady. */
+/* Supplied declaration required: sharedRefAddRef. */
 extern int wordRefsDiffer_0030f88a(int *, int);
-/* Supplied declaration required: FUN_0030f89a. */
+/* Supplied declaration required: listIteratorNext4. */
 /* Supplied declaration required: FUN_0030f8a2. */
 
 
@@ -55,8 +55,8 @@ void FUN_0030f4bc(int param_1,unsigned int param_2)
   iStack_1c = param_1;
   temp_v7 = param_2;
   while (temp_v1 = wordRefsDiffer_0030f88a(&temp_v2,temp_v6), temp_v0 = temp_v2, temp_v1 != 0) {
-    FUN_002e75fa(temp_v2);
-    FUN_002e7228(temp_v0);
+    sharedRefAddRef(temp_v2);
+    onlineJobSetStateReady(temp_v0);
     if (*(char *)(temp_v0 + 0x39) != '\0') {
       puVar4 = &DAT_0062e6a0;
     }
@@ -71,7 +71,7 @@ void FUN_0030f4bc(int param_1,unsigned int param_2)
     FUN_002e6e5c(temp_v4);
     FUN_002e6e5c(temp_v3);
     FUN_001208a0(temp_v0);
-    FUN_0030f89a(&temp_v2);
+    listIteratorNext4(&temp_v2);
   }
   return;
 }

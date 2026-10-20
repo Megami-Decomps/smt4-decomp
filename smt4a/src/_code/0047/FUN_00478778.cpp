@@ -5,11 +5,11 @@
 extern "C" {
 
 int jobStop(unsigned int, int);
-int FUN_001641c4(void);
+int ifTouchRegionRemove(void);
 int asdMemFree(void);
-int FUN_0019a7f4(int, int);
+int asdTMTexTableReleaseNode(int, int);
 int scrScriptProcessDestroy(void);
-int FUN_00237210(unsigned int);
+int asdMemFreeSlot(unsigned int);
 int asdTMTexTableFreeEntry(int);
 int FUN_0047314c(unsigned int *);
 int jobFlagsWorkStop(unsigned int *);
@@ -22,11 +22,11 @@ extern int g_aocDisplay; /* 0x57027c */
 
 /* Supplied declaration required: jobStop. */
 extern int jobIsValid(unsigned int);
-/* Supplied declaration required: FUN_001641c4. */
+/* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_0019a7f4. */
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: FUN_00237210. */
+/* Supplied declaration required: asdMemFreeSlot. */
 /* Supplied declaration required: asdTMTexTableFreeEntry. */
 /* Supplied declaration required: FUN_0047314c. */
 /* Supplied declaration required: jobFlagsWorkStop. */
@@ -54,12 +54,12 @@ void FUN_00478778(unsigned int *param_1)
   if (temp_v0 != 0) {
     if (param_1[0x5eb] != 0xffffffff) {
       param_1[0x5eb] = 0xffffffff;
-      FUN_001641c4();
+      ifTouchRegionRemove();
     }
     *param_1 = *param_1 & 0xffffcfff;
     jobStop(param_1[0x5e8],0);
   }
-  FUN_00237210(param_1[0x7bb]);
+  asdMemFreeSlot(param_1[0x7bb]);
   param_1[0x7bb] = 0;
   if (param_1[0xd6] != 0) {
     scrScriptProcessDestroy();
@@ -71,7 +71,7 @@ void FUN_00478778(unsigned int *param_1)
   }
   temp_v0 = 0;
   do {
-    FUN_0019a7f4(0x2f,temp_v0);
+    asdTMTexTableReleaseNode(0x2f,temp_v0);
     temp_v0 = temp_v0 + 1;
   } while (temp_v0 < 3);
   asdTMTexTableFreeEntry(0x2f);

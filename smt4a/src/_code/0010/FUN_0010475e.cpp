@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002ea668(unsigned char [88]);
 int FUN_002ea680(unsigned int, unsigned int, unsigned int, unsigned int, unsigned char [88]);
-int FUN_002ea6ae(unsigned int, unsigned char [24], int);
+int fixedBufferAssign(unsigned int, unsigned char [24], int);
 
 /* stack frame of param_5: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -15,7 +15,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_002ea668. */
 /* Supplied declaration required: FUN_002ea680. */
-/* Supplied declaration required: FUN_002ea6ae. */
+/* Supplied declaration required: fixedBufferAssign. */
 
 
 unsigned int
@@ -29,7 +29,7 @@ FUN_0010475e(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsi
   
   FUN_002ea668(temp_v0);
   FUN_002ea680(param_1,param_2,param_3,param_4,temp_v0);
-  FUN_002ea6ae(param_5,temp_v1,0x10);
+  fixedBufferAssign(param_5,temp_v1,0x10);
   return 1;
 }
 

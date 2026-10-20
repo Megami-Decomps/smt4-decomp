@@ -24,7 +24,7 @@ typedef struct {
 /* Supplied declaration required: FUN_002e6e26. */
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-extern int FUN_002e760a(unsigned int);
+extern int operatorNew(unsigned int);
 extern int FUN_002e789a(int);
 /* Supplied declaration required: FUN_002e78d0. */
 /* Supplied declaration required: FUN_002f451c. */
@@ -56,7 +56,7 @@ FUN_0010b270(int param_1,int param_2,unsigned int param_3,unsigned int param_4,u
     FUN_002f451c(&temp_v2,*(unsigned int *)(param_1 + 0x20));
     *(unsigned int *)(param_2 + 0x5c) = temp_v3;
     *(unsigned int *)(param_2 + 0x58) = temp_v2;
-    temp_v0 = FUN_002e760a(0x128);
+    temp_v0 = operatorNew(0x128);
     if (temp_v0 != 0) {
       FUN_0011dda0(temp_v0,*(unsigned int *)(param_2 + 0x44),param_1,temp_v5,param_4,param_5);
     }

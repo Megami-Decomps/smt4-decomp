@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002b722c(...);
+int jobGetStatus(...);
 
 extern int g_eventTex; /* 0x43ded0 */
 
-/* Supplied declaration required: FUN_002b722c. */
+/* Supplied declaration required: jobGetStatus. */
 extern int jobIsValid(unsigned int);
 
 
@@ -83,8 +83,8 @@ LAB_00289304:
       temp_v2 = temp_v1 + temp_v5 * 4;
       if (*(int *)(temp_v2 + 4) != 0) {
         if (*(int *)(temp_v2 + 8) != 0) {
-          temp_v6 = FUN_002b722c();
-          temp_v3 = FUN_002b722c(*(unsigned int *)(temp_v2 + 8));
+          temp_v6 = jobGetStatus();
+          temp_v3 = jobGetStatus(*(unsigned int *)(temp_v2 + 8));
           if (temp_v3 < temp_v6) {
             temp_v4 = *(unsigned int *)(temp_v2 + 4);
             temp_v0 = 1;

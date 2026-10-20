@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_00163aa4(int);
 int FUN_00167458(int, int);
-int FUN_00184c00(int, int, int);
-int FUN_00203d04(int);
+int uiSpriteSetImageKeyframe(int, int, int);
+int dialogClose(int);
 int FUN_002d22c0(int);
 int FUN_0048821c(int, unsigned int);
 int FUN_0048a378(int);
@@ -20,11 +20,11 @@ extern unsigned char DAT_005f1a5c; /* 0x5f1a5c */
 extern signed char DAT_005f1a5e; /* 0x5f1a5e */
 
 /* Supplied declaration required: FUN_00163aa4. */
-extern unsigned int FUN_001654d8(int);
-extern unsigned int FUN_001654e4(int);
+extern unsigned int vec2GetXInt(int);
+extern unsigned int vec2GetYInt(int);
 /* Supplied declaration required: FUN_00167458. */
-/* Supplied declaration required: FUN_00184c00. */
-/* Supplied declaration required: FUN_00203d04. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
+/* Supplied declaration required: dialogClose. */
 /* Supplied declaration required: FUN_002d22c0. */
 /* Supplied declaration required: FUN_0048821c. */
 /* Supplied declaration required: FUN_0048a378. */
@@ -58,7 +58,7 @@ void FUN_0048bdec(int param_1)
         FUN_00492aa0(temp_v1,*(unsigned int *)(param_1 + 0x60));
         FUN_00492ac8(temp_v1,0);
         FUN_0048821c(param_1,*(unsigned int *)(param_1 + 0x60));
-        FUN_00184c00(temp_v4,2,0);
+        uiSpriteSetImageKeyframe(temp_v4,2,0);
         if (DAT_005f1a5e != '\0') {
           DAT_005f1a5e = 0;
           *(char *)(param_1 + 100) = (char)*(unsigned int *)(param_1 + 0x20510);
@@ -76,7 +76,7 @@ void FUN_0048bdec(int param_1)
           *puVar5 = 1;
           *puVar6 = 1;
           FUN_002d22c0(0);
-          FUN_00203d04(1);
+          dialogClose(1);
           *(unsigned char *)(param_1 + 0x20644) = 0;
           FUN_0048a378(param_1);
           DAT_005f1a5c = 0;
@@ -97,8 +97,8 @@ void FUN_0048bdec(int param_1)
           *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) & 0xffffeff7;
         }
         else {
-          temp_v2 = FUN_001654e4(temp_v4);
-          temp_v3 = FUN_001654d8(temp_v4);
+          temp_v2 = vec2GetYInt(temp_v4);
+          temp_v3 = vec2GetXInt(temp_v4);
           FUN_004935b0(param_1 + 0x4d0,temp_v3,temp_v2);
         }
         *puVar5 = 1;
@@ -122,8 +122,8 @@ void FUN_0048bdec(int param_1)
       if (temp_v4 != 0) {
         *(unsigned char *)(param_1 + 0x5e) = 1;
       }
-      temp_v2 = FUN_001654e4(temp_v1);
-      temp_v3 = FUN_001654d8(temp_v1);
+      temp_v2 = vec2GetYInt(temp_v1);
+      temp_v3 = vec2GetXInt(temp_v1);
       FUN_004935b0(param_1 + 0x4d0,temp_v3,temp_v2);
       *puVar5 = 1;
       *puVar6 = 1;

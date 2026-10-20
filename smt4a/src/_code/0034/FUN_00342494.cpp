@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001527d8(...);
 int FUN_00164b5c(int, int, int, int, int, int);
 int FUN_00183bb0(void);
-int FUN_00184e64(unsigned int);
+int drawSetColorFromRGBA8(unsigned int);
 int FUN_0025cc78(...);
 int FUN_002e1b64(unsigned int, int, int, int);
 
@@ -48,7 +48,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00164b5c. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_00184e64. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_0025cc78. */
 /* Supplied declaration required: FUN_002e1b64. */
 
@@ -75,7 +75,7 @@ void FUN_00342494(fn_00342494_arg0 *param_1,int param_2,int param_3,int param_4,
   else {
     FUN_00164b5c(2,0x2e,0x25,*(int *)(param_3 + 4) + param_4,*(int *)(param_3 + 8) + param_5,0x65);
   }
-  FUN_00184e64(0x82fff500);
+  drawSetColorFromRGBA8(0x82fff500);
   temp_v1 = FUN_001834a4(0x2e,0x53);
   FUN_002e1b64(*(unsigned int *)(param_2 + 0x30),
                *(int *)(param_3 + 4) + (int)*(short *)(temp_v1 + 8) + param_4,

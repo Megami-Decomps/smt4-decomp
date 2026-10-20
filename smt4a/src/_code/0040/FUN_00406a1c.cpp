@@ -5,13 +5,13 @@
 extern "C" {
 
 int asdMemFree(void);
-int FUN_002e3328(void);
-int FUN_002e3494(int);
+int asdOperatorDelete(void);
+int asdOperatorDeleteB(int);
 
 typedef int romwright_code(...);
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_002e3328. */
-/* Supplied declaration required: FUN_002e3494. */
+/* Supplied declaration required: asdOperatorDelete. */
+/* Supplied declaration required: asdOperatorDeleteB. */
 
 
 void FUN_00406a1c(int param_1)
@@ -31,7 +31,7 @@ void FUN_00406a1c(int param_1)
     piVar5 = *(int **)(temp_v0 + 0x118);
     for (piVar4 = *(int **)(temp_v0 + 0x114); piVar4 != piVar5; piVar4 = piVar4 + 1) {
       if (*piVar4 != 0) {
-        FUN_002e3328();
+        asdOperatorDelete();
       }
     }
     temp_v1 = *(int *)(temp_v0 + 0x114);
@@ -42,7 +42,7 @@ void FUN_00406a1c(int param_1)
     temp_v3 = temp_v3 + 1;
   } while (temp_v3 < 8);
   if (*(int *)(param_1 + 0xfc) != 0) {
-    FUN_002e3494(*(int *)(param_1 + 0xfc) - 8);
+    asdOperatorDeleteB(*(int *)(param_1 + 0xfc) - 8);
   }
   if (((*(unsigned int *)(param_1 + 4) & 1) == 0) && (*(int **)(param_1 + 8) != (int *)0x0)) {
     (**(romwright_code **)(**(int **)(param_1 + 8) + 4))();

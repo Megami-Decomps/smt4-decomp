@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_00275f44(unsigned int, int);
+int scrScriptProcessStartEntry(unsigned int, int);
 
 extern int FUN_00224880(unsigned int);
-/* Supplied declaration required: FUN_00275f44. */
-extern int FUN_00357bc8(unsigned int, char *);
+/* Supplied declaration required: scrScriptProcessStartEntry. */
+extern int tableGroupFindEntryIndex(unsigned int, char *);
 
 
 void FUN_003e647c(int param_1)
@@ -30,9 +30,9 @@ void FUN_003e647c(int param_1)
         *(unsigned int *)(param_1 + 0x48) = 0;
         *(unsigned int *)(param_1 + 8) = 1;
       }
-      temp_v0 = FUN_00357bc8(*(unsigned int *)(param_1 + 0x14),"npcShop_ItemDes_start");
+      temp_v0 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x14),"npcShop_ItemDes_start");
       if (-1 < temp_v0) {
-        FUN_00275f44(*(unsigned int *)(param_1 + 0x18),temp_v0);
+        scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x18),temp_v0);
       }
       *(unsigned int *)(param_1 + 8) = 3;
       return;
@@ -59,7 +59,7 @@ void FUN_003e647c(int param_1)
   }
   for (temp_v0 = *(int *)(param_1 + 0x48); temp_v0 < 3; temp_v0 = temp_v0 + 1) {
     if (*(short *)(param_1 + temp_v0 * 0xc + 0x2c) != 0) {
-      FUN_00275f44(*(unsigned int *)(param_1 + 0x18),*(unsigned short *)(param_1 + temp_v0 * 0xc + 0x2c));
+      scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x18),*(unsigned short *)(param_1 + temp_v0 * 0xc + 0x2c));
       *(unsigned int *)(param_1 + 8) = 3;
       *(int *)(param_1 + 0x48) = *(int *)(param_1 + 0x48) + 1;
       return;

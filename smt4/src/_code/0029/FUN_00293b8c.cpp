@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_0044e190; /* 0x44e190 */
+extern int g_statusDown; /* 0x44e190 */
 
 
 int FUN_00293b8c(void)
@@ -13,8 +13,8 @@ int FUN_00293b8c(void)
   int temp_v0;
   
   temp_v0 = 0;
-  if (DAT_0044e190 != 0) {
-    temp_v0 = (int)*(char *)(DAT_0044e190 + 0x481);
+  if (g_statusDown != 0) {
+    temp_v0 = (int)*(char *)(g_statusDown + 0x481);
   }
   return temp_v0;
 }

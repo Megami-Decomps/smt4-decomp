@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_00571508; /* 0x571508 */
+extern int g_btlCamera; /* 0x571508 */
 
 extern int scrGetArg(void);
 
@@ -15,7 +15,7 @@ unsigned int FUN_003c68b8(void)
   int temp_v0;
   
   temp_v0 = scrGetArg();
-  *(unsigned char *)(DAT_00571508 + 0x6a8) = temp_v0 != 0;
+  *(unsigned char *)(g_btlCamera + 0x6a8) = temp_v0 != 0;
   return 1;
 }
 

@@ -4,11 +4,11 @@ extern "C" {
 
 s32 menu32ModeIsNot2(BtlUiObjAA *obj);
 
-extern BtlUiGlobalsA DAT_0057a9b8;
+extern BtlUiGlobalsA g_btlUi;
 
 s32 FUN_004aaa4c(void)
 {
-    BtlUiA *ui = DAT_0057a9b8.ui;
+    BtlUiA *ui = g_btlUi.ui;
     s32 result = menu32ModeIsNot2(&ui->objA);
 
     if (result != 0) {

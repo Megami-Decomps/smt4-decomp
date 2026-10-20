@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002e75fa(unsigned int);
-int FUN_002e9538(int, unsigned int *);
+int sharedRefAddRef(unsigned int);
+int onlineSockAddrCopy(int, unsigned int *);
 
-/* Supplied declaration required: FUN_002e75fa. */
-/* Supplied declaration required: FUN_002e9538. */
-extern int FUN_002e995c(int);
+/* Supplied declaration required: sharedRefAddRef. */
+/* Supplied declaration required: onlineSockAddrCopy. */
+extern int onlineSockAddrConstruct(int);
 
 
 unsigned int * FUN_0030d48e(int param_1,unsigned int *param_2)
@@ -19,11 +19,11 @@ unsigned int * FUN_0030d48e(int param_1,unsigned int *param_2)
   int temp_v0;
   unsigned int temp_v1;
   
-  temp_v0 = FUN_002e995c(param_1 + 4);
+  temp_v0 = onlineSockAddrConstruct(param_1 + 4);
   temp_v1 = *param_2;
   *(unsigned int *)(temp_v0 - 4) = temp_v1;
-  FUN_002e75fa(temp_v1);
-  FUN_002e9538(temp_v0,param_2 + 1);
+  sharedRefAddRef(temp_v1);
+  onlineSockAddrCopy(temp_v0,param_2 + 1);
   return (unsigned int *)(temp_v0 - 4);
 }
 

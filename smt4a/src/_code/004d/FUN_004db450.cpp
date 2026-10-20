@@ -23,10 +23,10 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_00184310. */
-extern int FUN_0018719c(void);
-extern int FUN_001ab854(void);
-extern int FUN_001ab888(void);
-extern int FUN_001b347c(void);
+extern int gameFlagIsSet(void);
+extern int gameGetSlotRecord(void);
+extern int gameGetSlotTable(void);
+extern int gameSlotTableFindFree(void);
 extern int FUN_00239234(unsigned short, unsigned char *);
 extern int FUN_002a4b28(unsigned short);
 /* Supplied declaration required: FUN_0032fea0. */
@@ -65,7 +65,7 @@ unsigned int FUN_004db450(unsigned int param_1,int param_2)
   temp_v17 = 0;
   uStack_2c = param_1;
   temp_v18 = param_2;
-  temp_v2 = FUN_001ab888();
+  temp_v2 = gameGetSlotTable();
   temp_v8 = 0;
   temp_v3 = temp_v2;
   dataTable5Count();
@@ -76,7 +76,7 @@ unsigned int FUN_004db450(unsigned int param_1,int param_2)
       if (temp_v5 != 0) {
         puVar4 = (unsigned short *)(unsigned int)*(unsigned short *)(temp_v5 + 0x1a);
         FUN_00184310();
-        if ((puVar4[0x1f] == 0) || (temp_v3 = FUN_0018719c(), temp_v3 != 0)) {
+        if ((puVar4[0x1f] == 0) || (temp_v3 = gameFlagIsSet(), temp_v3 != 0)) {
           temp_v0 = puVar4[0x1e];
           if ((temp_v0 & 1) != 0) {
             if ((temp_v0 & 0xfffe) != 0) {
@@ -100,17 +100,17 @@ unsigned int FUN_004db450(unsigned int param_1,int param_2)
               temp_v7 = temp_v5 + temp_v3 * 2;
               if (*(short *)(temp_v7 + 2) != 0) {
                 temp_v6 = 0;
-                temp_v4 = FUN_001b347c();
+                temp_v4 = gameSlotTableFindFree();
                 if (0 < temp_v4) {
                   do {
                     if ((-1 < *(char *)(temp_v2 + temp_v6 + 0x1c88)) &&
-                       (temp_v4 = FUN_001ab854(), *(short *)(temp_v4 + 0x62) == *(short *)(temp_v7 + 2)))
+                       (temp_v4 = gameGetSlotRecord(), *(short *)(temp_v4 + 0x62) == *(short *)(temp_v7 + 2)))
                     {
                       *(unsigned short *)((int)&temp_v9 + temp_v3 * 2) = 1;
                       goto LAB_004db5dc;
                     }
                     temp_v6 = temp_v6 + 1;
-                    temp_v4 = FUN_001b347c();
+                    temp_v4 = gameSlotTableFindFree();
                   } while (temp_v6 < temp_v4);
                 }
                 psVar10 = (short *)((int)&temp_v9 + temp_v3 * 2);

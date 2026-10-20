@@ -2,13 +2,13 @@
 
 extern "C" {
 
-extern void *FUN_002e760a(u32 size);
+extern void *operatorNew(u32 size);
 extern s32 FUN_00301490(void *object);
 
 /* Allocates a 0x40-byte object and initializes it. */
 void objectNew40(void)
 {
-    void *object = FUN_002e760a(0x40);
+    void *object = operatorNew(0x40);
 
     if (object != NULL) {
         FUN_00301490(object);

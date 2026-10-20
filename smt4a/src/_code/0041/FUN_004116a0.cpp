@@ -28,9 +28,9 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_1_stack;
 
-extern int DAT_00571508; /* 0x571508 */
+extern int g_btlCamera; /* 0x571508 */
 extern unsigned int DAT_00573808; /* 0x573808 */
-extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
+extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
 #ifndef ROMWRIGHT_PIECE_2_2_DEFINED
 #define ROMWRIGHT_PIECE_2_2_DEFINED
@@ -85,7 +85,7 @@ void FUN_004116a0(int param_1)
   FUN_004f85c8(DAT_00573808,1);
   temp_v7 = 1;
   temp_v6 = (unsigned int *)0x0;
-  FUN_004abe2c(DAT_0057a9c8,1,0);
+  FUN_004abe2c(g_btlUiBlock,1,0);
   temp_v5 = 0;
   temp_v6 = (unsigned int *)0x0;
   temp_v4 = 0;
@@ -138,7 +138,7 @@ void FUN_004116a0(int param_1)
     }
     temp_v0 = temp_v0 + 1;
   } while (temp_v0 < 0x36);
-  *(unsigned int *)(DAT_00571508 + 0x64c) = *(unsigned int *)(DAT_00571508 + 0x64c) | 0x4000;
+  *(unsigned int *)(g_btlCamera + 0x64c) = *(unsigned int *)(g_btlCamera + 0x64c) | 0x4000;
   return;
 }
 

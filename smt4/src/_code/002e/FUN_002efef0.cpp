@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0026ae68(void);
 
-extern int DAT_0044e190; /* 0x44e190 */
+extern int g_statusDown; /* 0x44e190 */
 
 /* Supplied declaration required: FUN_0026ae68. */
 
@@ -19,8 +19,8 @@ void FUN_002efef0(void)
   unsigned int *puVar2;
   unsigned int temp_v1;
   
-  temp_v0 = DAT_0044e190;
-  *(unsigned int *)(DAT_0044e190 + 0x40c) = 0;
+  temp_v0 = g_statusDown;
+  *(unsigned int *)(g_statusDown + 0x40c) = 0;
   puVar2 = (unsigned int *)(temp_v0 + 0x400);
   temp_v1 = *puVar2;
   *puVar2 = 4;

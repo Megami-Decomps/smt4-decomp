@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_00303d52(unsigned int *);
+int onlineScopedLockRelease(unsigned int *);
 
 extern unsigned char DAT_0055b294; /* 0x55b294 */
 
-/* Supplied declaration required: FUN_00303d52. */
+/* Supplied declaration required: onlineScopedLockRelease. */
 
 
 unsigned int * FUN_002e6e5c(unsigned int *param_1)
@@ -16,7 +16,7 @@ unsigned int * FUN_002e6e5c(unsigned int *param_1)
 {
 /* irregular: 1 native warning(s); review required */
   *param_1 = (unsigned int)&DAT_0055b294;
-  FUN_00303d52(param_1);
+  onlineScopedLockRelease(param_1);
   return param_1;
 }
 

@@ -11,11 +11,11 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-extern unsigned int DAT_00473848; /* 0x473848 */
+extern unsigned int g_nnCecdHandle; /* 0x473848 */
 
 /* Supplied declaration required: asdModelForwardChecked. */
 extern int FUN_002c1398(void);
-extern unsigned int FUN_002c30c4(char *);
+extern unsigned int libc_strlen(char *);
 
 
 void nn_cec_CTR_detail_InitializeCecControl(void)
@@ -27,8 +27,8 @@ void nn_cec_CTR_detail_InitializeCecControl(void)
   
   temp_v0 = FUN_002c1398();
   if (-1 < temp_v0) {
-    temp_v1 = FUN_002c30c4("cecd:u");
-    asdModelForwardChecked(&DAT_00473848,"cecd:u",temp_v1,0);
+    temp_v1 = libc_strlen("cecd:u");
+    asdModelForwardChecked(&g_nnCecdHandle,"cecd:u",temp_v1,0);
     return;
   }
   return;

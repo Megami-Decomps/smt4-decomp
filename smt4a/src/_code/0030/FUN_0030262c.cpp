@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_001055f4(int);
-int FUN_002e6e14(int *);
-int FUN_002f9f12(void);
+int asdOperatorDeleteArray(int *);
+int operatorDeleteArray2(void);
 int FUN_002fb1c4(int);
 int FUN_002fb1d4(void);
 int FUN_002fb244(int);
@@ -16,9 +16,9 @@ extern unsigned char DAT_0055937c; /* 0x55937c */
 extern unsigned char DAT_00594a58; /* 0x594a58 */
 
 /* Supplied declaration required: FUN_001055f4. */
-/* Supplied declaration required: FUN_002e6e14. */
-extern int FUN_002e9318(unsigned int *);
-/* Supplied declaration required: FUN_002f9f12. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
+extern int onlineStringDestroy(unsigned int *);
+/* Supplied declaration required: operatorDeleteArray2. */
 /* Supplied declaration required: FUN_002fb1c4. */
 /* Supplied declaration required: FUN_002fb1d4. */
 /* Supplied declaration required: FUN_002fb244. */
@@ -49,13 +49,13 @@ int FUN_0030262c(unsigned int *param_1,unsigned int param_2,unsigned int param_3
       *piVar2 = 0;
     }
     if (piVar2[1] != 0) {
-      FUN_002f9f12();
+      operatorDeleteArray2();
       piVar2[1] = 0;
     }
-    FUN_002e6e14(piVar2);
+    asdOperatorDeleteArray(piVar2);
   }
   param_1[3] = 0;
-  temp_v0 = FUN_002e9318(param_1 + 1);
+  temp_v0 = onlineStringDestroy(param_1 + 1);
   return temp_v0 - 4;
 }
 

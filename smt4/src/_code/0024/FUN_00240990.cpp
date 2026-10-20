@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_002c424c(u32 *dst, int size, u32 value);
+int __aeabi_memset4(u32 *dst, int size, u32 value);
 int FUN_0030a728(u32 *dst, int max, u32 seed);
 int FUN_00334838(void *result, void *obj);
 int FUN_00336da8(void *obj);
@@ -41,7 +41,7 @@ void FUN_00240990(Result *result, Obj *obj)
 
     FUN_00336da8(obj);
     seed = obj->seed;
-    FUN_002c424c(ids, 0xa8, 0xffffffff);
+    __aeabi_memset4(ids, 0xa8, 0xffffffff);
     count = FUN_0030a728(ids, 0x2a, seed);
     added = 0;
     i = 0;

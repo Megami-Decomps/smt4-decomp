@@ -4,15 +4,15 @@
 
 extern "C" {
 
-int FUN_00297410(...);
+int fileSlotLoad(...);
 int FUN_00297468(...);
-int FUN_002a5ed0(...);
+int asdTMTexTableLoadEntryAsync(...);
 int FUN_002ad8b4(...);
-int FUN_002b8838(...);
+int buttonHelpSetPreset(...);
 int timerStart(...);
 int FUN_002bd954(...);
 int FUN_002beed0(...);
-int FUN_002c09bc(void);
+int gameDataBlocksGetSaveData(void);
 int FUN_002c312c(...);
 int memClear(...);
 int asdMemAlloc(int, int, int, int, int);
@@ -47,24 +47,24 @@ extern unsigned char LAB_00214a5c; /* 0x214a5c */
 extern int FUN_00214a60(...); /* 0x214a60 */
 extern unsigned char DAT_00405e2c; /* 0x405e2c */
 extern unsigned char DAT_00405e68; /* 0x405e68 */
-extern unsigned char DAT_0044de28; /* 0x44de28 */
+extern unsigned char g_saveLoadUIFlags; /* 0x44de28 */
 extern unsigned char DAT_0044de29; /* 0x44de29 */
 extern unsigned int *g_saveLoadUI; /* 0x44de2c */
 extern unsigned int DAT_0044de30; /* 0x44de30 */
 extern unsigned int DAT_0044de34; /* 0x44de34 */
 
-extern unsigned int FUN_0026b5c8(void);
-extern unsigned int FUN_0026b5dc(void);
-/* Supplied declaration required: FUN_00297410. */
+extern unsigned int configGetSettings(void);
+extern unsigned int gameDataBlocksGetTable(void);
+/* Supplied declaration required: fileSlotLoad. */
 /* Supplied declaration required: FUN_00297468. */
 extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
-/* Supplied declaration required: FUN_002a5ed0. */
+/* Supplied declaration required: asdTMTexTableLoadEntryAsync. */
 /* Supplied declaration required: FUN_002ad8b4. */
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002beed0. */
-/* Supplied declaration required: FUN_002c09bc. */
+/* Supplied declaration required: gameDataBlocksGetSaveData. */
 /* Supplied declaration required: FUN_002c312c. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: asdMemAlloc. */
@@ -85,7 +85,7 @@ void FUN_00202ab4(void)
   unsigned int temp_v0;
   int temp_v1;
   
-  DAT_0044de28 = 0;
+  g_saveLoadUIFlags = 0;
   DAT_0044de29 = 0;
   puVar1 = (unsigned int *)0x10000;
   asdMemAlloc(0x10000,0x100,0,0x388,1);
@@ -109,13 +109,13 @@ void FUN_00202ab4(void)
   temp_v0 = 0x100;
   asdMemoryAlloc(0x100,0x100,0,0x24d28,1);
   puVar1[0xe1] = temp_v0;
-  temp_v0 = FUN_0026b5dc();
+  temp_v0 = gameDataBlocksGetTable();
   rt_memcpy_w(puVar1[0xdf],temp_v0,0x80);
-  temp_v0 = FUN_0026b5c8();
+  temp_v0 = configGetSettings();
   FUN_002ad8b4(puVar1[0xe0],temp_v0);
-  temp_v0 = FUN_002c09bc();
+  temp_v0 = gameDataBlocksGetSaveData();
   rt_memcpy_w(puVar1[0xe1],temp_v0,0x24d28);
-  temp_v1 = FUN_002c09bc();
+  temp_v1 = gameDataBlocksGetSaveData();
   rt_memcpy_w(puVar1 + 0xd9,temp_v1 + 8,0xe);
   puVar1[0x90] = 0;
   puVar1[0x91] = 0;
@@ -123,8 +123,8 @@ void FUN_00202ab4(void)
   FUN_00297468(&LAB_00202f18,puVar1 + 0x90,0);
   FUN_00297468(&LAB_00202f34,puVar1 + 0x91,0);
   asdTMTexTableLoadSprites(0x36);
-  FUN_002a5ed0(0x36,0);
-  FUN_00297410(0x3d);
+  asdTMTexTableLoadEntryAsync(0x36,0);
+  fileSlotLoad(0x3d);
   temp_v0 = asdMdlManagerCreateSecondList(&LAB_00202f50,7);
   puVar1[0xd8] = temp_v0;
   puVar1[0xdd] = 0x3f000000;
@@ -163,7 +163,7 @@ void FUN_00202ab4(void)
   timerStart(puVar1 + 0x27,1,0);
   timerStart(puVar1 + 0x4a,3,0);
   timerStart(puVar1 + 0x6d,4,0);
-  FUN_002b8838(0xa8);
+  buttonHelpSetPreset(0xa8);
   memClear(puVar1 + 0x93,0x80);
   memClear(puVar1 + 0xb3,0x80);
   *(unsigned char *)(puVar1 + 0xd3) = 0;

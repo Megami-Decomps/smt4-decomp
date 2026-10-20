@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002c38fc(int);
+int nn_os_CriticalSection_Initialize(int);
 
 extern unsigned char DAT_00421f5c; /* 0x421f5c */
 
-/* Supplied declaration required: FUN_002c38fc. */
+/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
 extern int nw_snd_internal_FrameHeap_FrameHeap_sub_object_380298(unsigned int *);
 
 
@@ -23,7 +23,7 @@ int FUN_0038093c(unsigned int *param_1)
   param_1[2] = 0;
   param_1[3] = 0xffffffff;
   temp_v0 = nw_snd_internal_FrameHeap_FrameHeap_sub_object_380298(param_1 + 4);
-  FUN_002c38fc(temp_v0 - 0xc);
+  nn_os_CriticalSection_Initialize(temp_v0 - 0xc);
   return temp_v0 - 0x10;
 }
 

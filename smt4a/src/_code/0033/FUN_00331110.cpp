@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_00162e8c(void);
+int gameFlagsGetBlock(void);
 int FUN_003fd7c0(unsigned int, int, int);
 
 extern int g_lmapScene; /* 0x581288 */
 
-/* Supplied declaration required: FUN_00162e8c. */
+/* Supplied declaration required: gameFlagsGetBlock. */
 /* Supplied declaration required: FUN_003fd7c0. */
 
 
@@ -19,7 +19,7 @@ unsigned int FUN_00331110(void)
 /* irregular: 2 native warning(s); review required */
   int temp_v0;
   
-  FUN_00162e8c();
+  gameFlagsGetBlock();
   temp_v0 = g_lmapScene;
   *(unsigned int *)(g_lmapScene + 0x1d0) = 0xc;
   *(unsigned char *)(temp_v0 + 0x23d) = 1;

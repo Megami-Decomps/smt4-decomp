@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002e7232(...);
-int FUN_002eb6b8(int [2]);
-int FUN_002f2de4(int [2]);
+int sharedRefRelease(...);
+int listIteratorNext(int [2]);
+int listIteratorNext2(int [2]);
 int FUN_002f87e8(int *, int, int *);
 int FUN_002f9cc8(void);
 int FUN_002f9d6a(int *, int, int *);
@@ -21,10 +21,10 @@ typedef struct {
     unsigned int sp2C; /* 0x2c: local_2c */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_002e7232. */
+/* Supplied declaration required: sharedRefRelease. */
 extern int wordRefsDiffer_002eb690(int *, int *);
-/* Supplied declaration required: FUN_002eb6b8. */
-/* Supplied declaration required: FUN_002f2de4. */
+/* Supplied declaration required: listIteratorNext. */
+/* Supplied declaration required: listIteratorNext2. */
 extern int wordRefsDiffer_002f2dec(int *, int);
 /* Supplied declaration required: FUN_002f87e8. */
 /* Supplied declaration required: FUN_002f9cc8. */
@@ -54,20 +54,20 @@ void FUN_0010e8c4(int param_1)
       temp_v2[0] = temp_v4;
     }
     else {
-      FUN_002eb6b8(temp_v2);
+      listIteratorNext(temp_v2);
     }
   }
   temp_v2[0] = *(int *)(param_1 + 0x1fc);
   while (temp_v0 = wordRefsDiffer_002f2dec(temp_v2,param_1 + 0x204), temp_v0 != 0) {
     if ((*(int *)(temp_v2[0] + 0xd8) != 0) &&
        (-1 >= (int)((unsigned int)*(unsigned char *)(*(int *)(temp_v2[0] + 0xd8) + 0x1c) << 0x1d))) {
-      FUN_002e7232(temp_v2[0]);
+      sharedRefRelease(temp_v2[0]);
       temp_v1 = temp_v2[0];
       FUN_002f9d6a(&temp_v3,param_1 + 0x1f8,&temp_v1);
       temp_v2[0] = temp_v3;
     }
     else {
-      FUN_002f2de4(temp_v2);
+      listIteratorNext2(temp_v2);
     }
   }
   temp_v2[0] = *(int *)(param_1 + 0x1dc);
@@ -77,13 +77,13 @@ void FUN_0010e8c4(int param_1)
     if (temp_v0 == 0) break;
     if ((*(int *)(temp_v2[0] + 0xd8) != 0) &&
        (-1 >= (int)((unsigned int)*(unsigned char *)(*(int *)(temp_v2[0] + 0xd8) + 0x1c) << 0x1d))) {
-      FUN_002e7232();
+      sharedRefRelease();
       temp_v1 = temp_v2[0];
       FUN_002f87e8(&temp_v4,param_1 + 0x1d4,&temp_v1);
       temp_v2[0] = temp_v4;
     }
     else {
-      FUN_002eb6b8(temp_v2);
+      listIteratorNext(temp_v2);
     }
   }
   for (temp_v0 = *(int *)(param_1 + 0x164); *(int *)(param_1 + 0x168) != temp_v0; temp_v0 = temp_v0 + 8) {

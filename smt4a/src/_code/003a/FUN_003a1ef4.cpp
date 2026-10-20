@@ -5,7 +5,7 @@
 extern "C" {
 
 int memAlloc(int, int, int, int, int, int);
-int FUN_002e6dd4(void);
+int rt_memclr(void);
 
 typedef struct fn_003a1ef4_arg0 fn_003a1ef4_arg0;
 struct fn_003a1ef4_arg0 {
@@ -22,7 +22,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: memAlloc. */
-/* Supplied declaration required: FUN_002e6dd4. */
+/* Supplied declaration required: rt_memclr. */
 
 
 unsigned int * FUN_003a1ef4(fn_003a1ef4_arg0 *param_1)
@@ -43,7 +43,7 @@ unsigned int * FUN_003a1ef4(fn_003a1ef4_arg0 *param_1)
   }
   puVar1 = (unsigned int *)0x10000;
   memAlloc(0x10000,0x100,0,0x38,0x10,1);
-  FUN_002e6dd4();
+  rt_memclr();
   puVar1[1] = 0xffffffff;
   *puVar1 = temp_v1;
   puVar1[2] = 0x3f800000;

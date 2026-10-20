@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_002e7378(int, int);
-int FUN_002e9afe(int, unsigned int);
+int streamReaderSeek(int, int);
+int vectorCopyHeader(int, unsigned int);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -16,9 +16,9 @@ typedef struct {
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: FUN_002e7378. */
+/* Supplied declaration required: streamReaderSeek. */
 extern unsigned int FUN_002e7908(int *, unsigned int *, unsigned int, int);
-/* Supplied declaration required: FUN_002e9afe. */
+/* Supplied declaration required: vectorCopyHeader. */
 
 
 unsigned long long FUN_0030fea4(int param_1,unsigned int param_2,unsigned int param_3)
@@ -36,8 +36,8 @@ unsigned long long FUN_0030fea4(int param_1,unsigned int param_2,unsigned int pa
   uStack_14 = param_2;
   uStack_10 = param_3;
   temp_v0 = FUN_002e7908(&iStack_18,(unsigned int *)&temp_v1,param_3,param_1);
-  FUN_002e9afe(param_1 + 0x10,temp_v0);
-  FUN_002e7378(param_1,4);
+  vectorCopyHeader(param_1 + 0x10,temp_v0);
+  streamReaderSeek(param_1,4);
   return romwright_piece_4_4(uStack_14,iStack_18);
 }
 

@@ -27,9 +27,9 @@ typedef struct {
 
 extern unsigned char LAB_002b7f08; /* 0x2b7f08 */
 extern unsigned char LAB_002b7f0c; /* 0x2b7f0c */
-extern int DAT_00581038; /* 0x581038 */
+extern int g_mapHakai; /* 0x581038 */
 
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
 /* Supplied declaration required: FUN_00244c70. */
@@ -49,10 +49,10 @@ void FUN_002b7ce0(void)
   
   temp_v3 = 0;
   do {
-    temp_v4 = DAT_00581038 + temp_v3 * 0x54;
+    temp_v4 = g_mapHakai + temp_v3 * 0x54;
     if (((*(char *)(temp_v4 + 0x5c) != '\0') && (*(short *)(temp_v4 + 0xac) == 3)) &&
        (temp_v0 = FUN_00352ca0((int)(short)*(unsigned int *)(temp_v4 + 0x80)), temp_v0 == 0)) {
-      temp_v0 = FUN_0018719c(0x492);
+      temp_v0 = gameFlagIsSet(0x492);
       if (temp_v0 != 0) {
         FUN_001bc124();
         FUN_001bbf0c();

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0022c0a4(...);
+int poolNodeUnlink(...);
 int FUN_0022c100(...);
 
 typedef int romwright_code(...);
@@ -20,7 +20,7 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_0022c0a4. */
+/* Supplied declaration required: poolNodeUnlink. */
 /* Supplied declaration required: FUN_0022c100. */
 
 
@@ -112,7 +112,7 @@ unsigned int FUN_003b0a10(int param_1)
           else {
             FUN_0022c100();
           }
-          FUN_0022c0a4(&temp_v7);
+          poolNodeUnlink(&temp_v7);
           if (temp_v0 == 1) goto LAB_003b0bc8;
           temp_v6 = 0;
         }
@@ -129,7 +129,7 @@ LAB_003b0bc8:
           *(int *)(temp_v4 + 0x44) = temp_v0 + 1;
           puVar5 = (unsigned int *)(*(int *)(temp_v4 + 0x34) + temp_v0 * 0x10);
           if (puVar5 != puVar2) {
-            FUN_0022c0a4(puVar5);
+            poolNodeUnlink(puVar5);
             puVar5[1] = *(unsigned int *)(temp_v4 + 0x50);
             temp_v0 = *(int *)(temp_v4 + 0x58);
             puVar5[3] = temp_v0;

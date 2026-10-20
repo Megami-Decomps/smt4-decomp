@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_00184758(int, int, int);
-int FUN_001f4e20(...);
-int FUN_00203d04(int);
+int uiSpriteSetKeyframe(int, int, int);
+int dialogOpen(...);
+int dialogClose(int);
 int FUN_002392b8(...);
 int FUN_002c2d5c(...);
 int FUN_002d22c0(int);
@@ -36,11 +36,11 @@ extern signed char DAT_005f161d; /* 0x5f161d */
 extern signed char DAT_005f1a5c; /* 0x5f1a5c */
 extern signed char DAT_005f1a5e; /* 0x5f1a5e */
 
-extern int FUN_00162e8c(void);
-/* Supplied declaration required: FUN_00184758. */
-extern int FUN_0018719c(unsigned int);
-/* Supplied declaration required: FUN_001f4e20. */
-/* Supplied declaration required: FUN_00203d04. */
+extern int gameFlagsGetBlock(void);
+/* Supplied declaration required: uiSpriteSetKeyframe. */
+extern int gameFlagIsSet(unsigned int);
+/* Supplied declaration required: dialogOpen. */
+/* Supplied declaration required: dialogClose. */
 /* Supplied declaration required: FUN_002392b8. */
 /* Supplied declaration required: FUN_002c2d5c. */
 /* Supplied declaration required: FUN_002d22c0. */
@@ -76,18 +76,18 @@ unsigned int FUN_00489480(int param_1)
   int temp_v7;
   int temp_v8;
   
-  temp_v8 = FUN_00162e8c();
+  temp_v8 = gameFlagsGetBlock();
   temp_v0 = *(unsigned int *)(param_1 + 0x10);
   temp_v3 = 0;
   if (((temp_v0 & 0x2000000) != 0) && ((setFullScreenRect(), temp_v0 == 0 || (DAT_005f1614 != '\0')))) {
     *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) & 0xfdffffff;
   }
-  temp_v1 = FUN_0018719c(0x49a);
+  temp_v1 = gameFlagIsSet(0x49a);
   if (temp_v1 == 0) {
     return 0;
   }
-  temp_v1 = FUN_0018719c(0xc);
-  if ((temp_v1 != 0) && (temp_v1 = FUN_0018719c(0x10), temp_v1 == 0)) {
+  temp_v1 = gameFlagIsSet(0xc);
+  if ((temp_v1 != 0) && (temp_v1 = gameFlagIsSet(0x10), temp_v1 == 0)) {
     return 0;
   }
   temp_v7 = param_1 + 0x4cc;
@@ -113,7 +113,7 @@ unsigned int FUN_00489480(int param_1)
           FUN_00357a48();
           temp_v1 = 0;
           do {
-            FUN_00184758(param_1 + temp_v1 * 0x8c + 0xc40,7,0);
+            uiSpriteSetKeyframe(param_1 + temp_v1 * 0x8c + 0xc40,7,0);
             temp_v1 = temp_v1 + 1;
           } while (temp_v1 < 6);
           *(unsigned char *)(param_1 + 0x20644) = 1;
@@ -133,10 +133,10 @@ unsigned int FUN_00489480(int param_1)
       *(unsigned char *)(param_1 + 0x7b90) = 1;
       *(unsigned char *)(param_1 + 0x7b91) = 1;
       do {
-        FUN_00184758(param_1 + temp_v1 * 0x8c + 0xc40,7,0);
+        uiSpriteSetKeyframe(param_1 + temp_v1 * 0x8c + 0xc40,7,0);
         temp_v1 = temp_v1 + 1;
       } while (temp_v1 < 6);
-      FUN_00203d04(1);
+      dialogClose(1);
       temp_v1 = FUN_00492bc0(temp_v7);
       temp_v2 = NaviMain_GetCurrentMap(temp_v7);
       if (temp_v1 == temp_v2) {
@@ -156,7 +156,7 @@ unsigned int FUN_00489480(int param_1)
         if ((((DAT_005f1a5c == '\0') && (DAT_005f161d != '\0')) &&
             (temp_v1 = FUN_0033ded8(), temp_v1 == 0)) && (*(char *)(param_1 + 0x65) != '\0')) {
           FUN_002392b8(&DAT_00532760);
-          FUN_001f4e20(1);
+          dialogOpen(1);
           FUN_002c2d5c(0xffffffff);
           *(unsigned char *)(param_1 + 0x65) = 0;
         }
@@ -169,7 +169,7 @@ unsigned int FUN_00489480(int param_1)
       FUN_002d22c0(1);
       temp_v1 = 0;
       do {
-        FUN_00184758(param_1 + temp_v1 * 0x8c + 0xc40,4,0);
+        uiSpriteSetKeyframe(param_1 + temp_v1 * 0x8c + 0xc40,4,0);
         temp_v1 = temp_v1 + 1;
       } while (temp_v1 < 6);
       *(unsigned char *)(param_1 + 0x65) = 1;
@@ -183,7 +183,7 @@ LAB_00489788:
   if ((((DAT_005f1a5c == '\0') && (DAT_005f161d != '\0')) && (temp_v1 = FUN_0033ded8(), temp_v1 == 0))
      && (*(char *)(param_1 + 0x65) != '\0')) {
     FUN_002392b8(&DAT_00532760);
-    FUN_001f4e20(1);
+    dialogOpen(1);
     FUN_002c2d5c(0xffffffff);
     *(unsigned char *)(param_1 + 0x65) = 0;
   }

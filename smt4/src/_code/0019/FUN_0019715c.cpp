@@ -36,7 +36,7 @@ typedef struct {
 
 extern unsigned char LAB_001976e8; /* 0x1976e8 */
 extern unsigned char LAB_001976f0; /* 0x1976f0 */
-extern int DAT_0043da90; /* 0x43da90 */
+extern int g_camp; /* 0x43da90 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0018b49c. */
@@ -56,8 +56,8 @@ extern int FUN_0029efc0(int);
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002be650. */
-extern int FUN_002bed98(int);
-extern int FUN_002beda4(void);
+extern int vec2GetYInt(int);
+extern int vec2GetXInt(void);
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf4f8. */
@@ -85,10 +85,10 @@ void FUN_0019715c(int param_1,int param_2)
   int temp_v14;
   int temp_v15;
   
-  temp_v1 = DAT_0043da90 + 0x6d4;
-  temp_v2 = FUN_002beda4();
-  temp_v3 = FUN_002bed98(temp_v1);
-  temp_v8 = DAT_0043da90;
+  temp_v1 = g_camp + 0x6d4;
+  temp_v2 = vec2GetXInt();
+  temp_v3 = vec2GetYInt(temp_v1);
+  temp_v8 = g_camp;
   temp_v1 = temp_v2;
   if (temp_v2 < 0) {
     temp_v1 = -temp_v2;
@@ -115,21 +115,21 @@ void FUN_0019715c(int param_1,int param_2)
             if (param_1 != 0xd) {
               return;
             }
-            temp_v12 = DAT_0043da90 + 0x178;
-            temp_v1 = DAT_0043da90 + 0x1cc4;
+            temp_v12 = g_camp + 0x178;
+            temp_v1 = g_camp + 0x1cc4;
             FUN_002bf380(2,0x1d,0,temp_v2,temp_v3,0x65);
             FUN_002bf288(2,0x1d,0x46b,temp_v2,temp_v3,0x6a);
           }
           else {
-            temp_v12 = DAT_0043da90 + 0x114;
-            temp_v1 = DAT_0043da90 + 0x14f4;
+            temp_v12 = g_camp + 0x114;
+            temp_v1 = g_camp + 0x14f4;
             FUN_002bf380(2,0x1d,0,temp_v2,temp_v3,0x65);
             FUN_002bf288(2,0x1d,0x46a,temp_v2,temp_v3,0x6a);
           }
         }
         else {
-          temp_v12 = DAT_0043da90 + 0xb0;
-          temp_v1 = DAT_0043da90 + 0x147c;
+          temp_v12 = g_camp + 0xb0;
+          temp_v1 = g_camp + 0x147c;
           FUN_002bf380(2,0x1d,0,temp_v2,temp_v3,0x65);
           FUN_002bf288(2,0x1d,0x469,temp_v2,temp_v3,0x6a);
         }

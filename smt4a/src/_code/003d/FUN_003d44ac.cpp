@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_0014e188(int, int, unsigned int, int, int);
-int FUN_001846d0(...);
-int FUN_00184b80(...);
+int uiSpriteSelectAnim(...);
+int pairSetFirstResetSecond(...);
 int FUN_00387240(int, int, int);
 int FUN_003872b8(...);
 
@@ -17,8 +17,8 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: FUN_001846d0. */
-/* Supplied declaration required: FUN_00184b80. */
+/* Supplied declaration required: uiSpriteSelectAnim. */
+/* Supplied declaration required: pairSetFirstResetSecond. */
 /* Supplied declaration required: FUN_00387240. */
 /* Supplied declaration required: FUN_003872b8. */
 
@@ -39,42 +39,42 @@ void FUN_003d44ac(int param_1)
     FUN_0014e188(param_1 + temp_v0 * 0x8c + 0x20,0x10,0xffffffff,param_1,0x97);
     temp_v0 = temp_v0 + 1;
   } while (temp_v0 < 5);
-  FUN_00184b80(param_1 + 0x20,*(int *)(param_1 + 0x2f8) * 1000);
-  FUN_001846d0(param_1 + 0x20,0);
+  pairSetFirstResetSecond(param_1 + 0x20,*(int *)(param_1 + 0x2f8) * 1000);
+  uiSpriteSelectAnim(param_1 + 0x20,0);
   switch(*(unsigned int *)(param_1 + 0x2f0)) {
   default:
     return;
   case 2:
   case 0x11:
-    FUN_00184b80(param_1 + 0xac,*(int *)(param_1 + 0x2f8) * 1000 + 1);
-    FUN_001846d0(param_1 + 0xac,0);
+    pairSetFirstResetSecond(param_1 + 0xac,*(int *)(param_1 + 0x2f8) * 1000 + 1);
+    uiSpriteSelectAnim(param_1 + 0xac,0);
     FUN_00387240(param_1 + 0xac,0x10,*(int *)(param_1 + 0x2f8) * 1000 + 2);
     return;
   case 3:
     FUN_00387240(param_1 + 0x20,0x10,*(int *)(param_1 + 0x2f8) * 1000);
     *(unsigned char *)(param_1 + 0x5c) = 1;
-    FUN_00184b80(param_1 + 0xac,*(int *)(param_1 + 0x2f8) * 1000);
-    FUN_001846d0(param_1 + 0xac,0);
+    pairSetFirstResetSecond(param_1 + 0xac,*(int *)(param_1 + 0x2f8) * 1000);
+    uiSpriteSelectAnim(param_1 + 0xac,0);
     FUN_00387240(param_1 + 0xac,0x10,*(int *)(param_1 + 0x2f8) * 1000);
     *(unsigned char *)(param_1 + 0xe8) = 1;
     return;
   case 8:
-    FUN_00184b80(param_1 + 0x20,0x13881);
+    pairSetFirstResetSecond(param_1 + 0x20,0x13881);
     FUN_003872b8(param_1 + 0x20,0x10,80000,0x13881);
     return;
   case 0xc:
   case 0x10:
-    FUN_00184b80(param_1 + 0xac,*(int *)(param_1 + 0x2f8) * 1000 + 1);
-    FUN_00184b80(param_1 + 0x138,*(int *)(param_1 + 0x2f8) * 1000 + 2);
-    FUN_001846d0(param_1 + 0xac,0);
-    FUN_001846d0(param_1 + 0x138,0);
+    pairSetFirstResetSecond(param_1 + 0xac,*(int *)(param_1 + 0x2f8) * 1000 + 1);
+    pairSetFirstResetSecond(param_1 + 0x138,*(int *)(param_1 + 0x2f8) * 1000 + 2);
+    uiSpriteSelectAnim(param_1 + 0xac,0);
+    uiSpriteSelectAnim(param_1 + 0x138,0);
     return;
   case 0xd:
     break;
   case 0x13:
-    FUN_00184b80(param_1 + 0x20,*(int *)(param_1 + 0x2f8) * 1000);
+    pairSetFirstResetSecond(param_1 + 0x20,*(int *)(param_1 + 0x2f8) * 1000);
   }
-  FUN_00184b80(param_1 + 0xac,*(int *)(param_1 + 0x2f8) * 1000 + 1);
+  pairSetFirstResetSecond(param_1 + 0xac,*(int *)(param_1 + 0x2f8) * 1000 + 1);
   return;
 }
 

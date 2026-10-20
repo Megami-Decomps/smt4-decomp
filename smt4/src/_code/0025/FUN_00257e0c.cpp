@@ -3,11 +3,11 @@
 extern "C" {
 
 int FUN_00253d60(u16 *dst, u32 src);
-extern u32 FUN_002b63ac(void);
+extern u32 gameGetPlayerData(void);
 
 u16 FUN_00257e0c(int index)
 {
-    u32 source = FUN_002b63ac();
+    u32 source = gameGetPlayerData();
     u16 values[20];
 
     FUN_00253d60(values, source);

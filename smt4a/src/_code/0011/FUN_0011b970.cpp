@@ -7,10 +7,10 @@ extern "C" {
 int FUN_001339e0(int, int, unsigned short [2]);
 int FUN_002e6e34(unsigned char [12], int);
 int FUN_002e6e5c(unsigned char [12]);
-int FUN_002e9300(unsigned char [8], unsigned char *);
-int FUN_002e9318(unsigned char [8]);
-int FUN_002eaa50(...);
-int FUN_002eabe8(...);
+int onlineStringConstruct(unsigned char [8], unsigned char *);
+int onlineStringDestroy(unsigned char [8]);
+int onlineMutexLockIfNeeded(...);
+int onlineMutexUnlockIfNeeded(...);
 int FUN_0031160c(int, int, unsigned short [2]);
 int keyValueCopyConstruct(int, int);
 int word3CopyConstruct(int, int);
@@ -37,11 +37,11 @@ extern int DAT_00594a5c; /* 0x594a5c */
 /* Supplied declaration required: FUN_001339e0. */
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-extern int FUN_002e760a(unsigned int);
-/* Supplied declaration required: FUN_002e9300. */
-/* Supplied declaration required: FUN_002e9318. */
-/* Supplied declaration required: FUN_002eaa50. */
-/* Supplied declaration required: FUN_002eabe8. */
+extern int operatorNew(unsigned int);
+/* Supplied declaration required: onlineStringConstruct. */
+/* Supplied declaration required: onlineStringDestroy. */
+/* Supplied declaration required: onlineMutexLockIfNeeded. */
+/* Supplied declaration required: onlineMutexUnlockIfNeeded. */
 /* Supplied declaration required: FUN_0031160c. */
 /* Supplied declaration required: keyValueCopyConstruct. */
 /* Supplied declaration required: word3CopyConstruct. */
@@ -89,17 +89,17 @@ unsigned int FUN_0011b970(int param_1,unsigned int param_2,unsigned int param_3)
     temp_v12 = temp_v1;
     if (*(int *)(temp_v1 + 0xa0) == 0) {
       temp_v5 = 0;
-      temp_v2 = FUN_002e760a(0x34);
+      temp_v2 = operatorNew(0x34);
       temp_v3 = 0;
       if (temp_v2 != 0) {
         temp_v14 = DAT_00594a4c;
-        FUN_002e9300(temp_v13,&LAB_0011bab0);
+        onlineStringConstruct(temp_v13,&LAB_0011bab0);
         temp_v5 = 1;
         temp_v3 = FUN_00311700(temp_v2,temp_v13,temp_v14);
       }
       *(unsigned int *)(temp_v1 + 0xa0) = temp_v3;
       if (temp_v5 != 0) {
-        FUN_002e9318(temp_v13);
+        onlineStringDestroy(temp_v13);
       }
       if (DAT_00594a5c != -0x80000000) {
         *(int *)(*(int *)(temp_v1 + 0xa0) + 0x20) = DAT_00594a5c;
@@ -120,12 +120,12 @@ unsigned int FUN_0011b970(int param_1,unsigned int param_2,unsigned int param_3)
     }
     *(unsigned char *)(param_1 + temp_v4 + 0x38) = 1;
     *(unsigned char *)(param_1 + 5) = 1;
-    FUN_002eaa50(*(unsigned int *)(temp_v12 + 0x4c));
+    onlineMutexLockIfNeeded(*(unsigned int *)(temp_v12 + 0x4c));
     temp_v4 = temp_v4 * 8 + param_1;
     *(unsigned short *)(temp_v4 + 0x54) = temp_v0;
     *(unsigned int *)(temp_v4 + 0x58) = param_3;
-    FUN_002eabe8(*(unsigned int *)(temp_v12 + 0x4c));
-    FUN_002eaa50();
+    onlineMutexUnlockIfNeeded(*(unsigned int *)(temp_v12 + 0x4c));
+    onlineMutexLockIfNeeded();
     temp_v6[0] = temp_v0;
     temp_v4 = *(int *)(param_1 + 0x68);
     temp_v7 = param_3;
@@ -136,7 +136,7 @@ unsigned int FUN_0011b970(int param_1,unsigned int param_2,unsigned int param_3)
     else {
       FUN_0031160c(param_1 + 100,temp_v4,temp_v6);
     }
-    FUN_002eabe8(param_1 + 0x70);
+    onlineMutexUnlockIfNeeded(param_1 + 0x70);
     *(unsigned char *)(param_1 + 5) = 0;
     FUN_002e6e5c(temp_v11);
     temp_v3 = 1;

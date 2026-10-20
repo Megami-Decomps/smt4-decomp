@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00184310(void);
-int FUN_002e6dd4(unsigned char *, int);
+int rt_memclr(unsigned char *, int);
 int FUN_004bd274(unsigned int, unsigned int);
 int FUN_004bd294(unsigned int, unsigned int);
 int FUN_004da024(void);
@@ -30,7 +30,7 @@ typedef struct {
 extern int FUN_00168518(int, unsigned short);
 extern int FUN_00177654(void);
 /* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: FUN_002e6dd4. */
+/* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: FUN_004bd274. */
 /* Supplied declaration required: FUN_004bd294. */
 /* Supplied declaration required: FUN_004da024. */
@@ -160,7 +160,7 @@ void FUN_003eb760(fn_003eb760_arg0 *param_1,unsigned char *param_2,unsigned int 
   clearTwoWords(param_2 + 0x1be);
   clearTwoWords(param_2 + 0x1c6);
   clearTwoWords(param_2 + 0x1ce);
-  FUN_002e6dd4(param_2 + 0x1d6,0x50);
+  rt_memclr(param_2 + 0x1d6,0x50);
   return;
 }
 

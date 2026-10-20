@@ -14,13 +14,13 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-extern unsigned char DAT_0043e188; /* 0x43e188 */
+extern unsigned char g_messageMain; /* 0x43e188 */
 
 /* Supplied declaration required: eventTexRequestStopAll. */
 /* Supplied declaration required: bustupCutAnimRequestStopSlots. */
 extern unsigned int FUN_002865f8(void);
 /* Supplied declaration required: FUN_002866b4. */
-extern unsigned int FUN_002893d8(void);
+extern unsigned int scrGetCommandFrame(void);
 extern unsigned int scrGetArg(unsigned int);
 
 
@@ -34,12 +34,12 @@ void scrComm_Message_ShowConfirm(void)
   
   bustupCutAnimRequestStopSlots();
   eventTexRequestStopAll();
-  if ((*(int *)((unsigned char *)&DAT_0043e188 + 0x4)) != 0) {
-    *(unsigned char *)((*(int *)((unsigned char *)&DAT_0043e188 + 0x4)) + 0xa11) = 0x14;
+  if ((*(int *)((unsigned char *)&g_messageMain + 0x4)) != 0) {
+    *(unsigned char *)((*(int *)((unsigned char *)&g_messageMain + 0x4)) + 0xa11) = 0x14;
   }
   temp_v0 = FUN_002865f8();
   temp_v1 = scrGetArg(0);
-  temp_v2 = FUN_002893d8();
+  temp_v2 = scrGetCommandFrame();
   FUN_002866b4(temp_v0,temp_v1,temp_v2,6,0,0);
   return;
 }

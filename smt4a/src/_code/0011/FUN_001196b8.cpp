@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e7232(void);
+int sharedRefRelease(void);
 int FUN_002ea3d0(int, unsigned int);
 int FUN_002ea41e(int *, int);
 int FUN_002f674e(void);
@@ -17,7 +17,7 @@ extern unsigned char LAB_00119734; /* 0x119734 */
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: FUN_002e7232. */
+/* Supplied declaration required: sharedRefRelease. */
 extern unsigned int FUN_002ea3c0(int *, unsigned int, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
 /* Supplied declaration required: FUN_002ea41e. */
@@ -42,7 +42,7 @@ unsigned long long FUN_001196b8(int param_1,unsigned int param_2,unsigned int pa
   uStack_18 = param_3;
   uStack_14 = param_4;
   if (*(int *)(param_1 + 0x30c) != 0) {
-    FUN_002e7232();
+    sharedRefRelease();
     *(unsigned int *)(param_1 + 0x30c) = 0;
   }
   if (*(char *)(param_1 + 0x98) != '\x02') {

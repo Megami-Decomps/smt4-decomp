@@ -12,7 +12,7 @@ int FUN_0025cc8c(void);
 int FUN_0026c77c(int);
 int FUN_0026c7a0(void);
 int FUN_0026c7b8(unsigned char [68]);
-int FUN_002b9024(void);
+int devilGetRecord(void);
 int FUN_002be624(...);
 int FUN_002be650(unsigned int, int);
 int FUN_002cd750(int);
@@ -29,7 +29,7 @@ extern unsigned char LAB_00227618; /* 0x227618 */
 extern unsigned char LAB_0022761c; /* 0x22761c */
 extern unsigned char LAB_00227624; /* 0x227624 */
 extern unsigned char LAB_0022762c; /* 0x22762c */
-extern unsigned char DAT_00439c88; /* 0x439c88 */
+extern unsigned char g_btlUi; /* 0x439c88 */
 
 /* Supplied declaration required: FUN_002009c4. */
 /* Supplied declaration required: FUN_00211868. */
@@ -43,7 +43,7 @@ extern int FUN_0029efa8(int);
 extern int FUN_0029efc0(int);
 extern int FUN_002b6a54(int, unsigned short);
 extern int gameGetOptions(void);
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: devilGetRecord. */
 extern unsigned int FUN_002bce00(unsigned short);
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002be650. */
@@ -65,9 +65,9 @@ void FUN_00227334(unsigned int param_1,unsigned int param_2,int param_3,int para
   short temp_v5;
   unsigned char temp_v6 [68];
   
-  temp_v2 = (*(int *)((unsigned char *)&DAT_00439c88 + 0x20));
-  puVar2 = (unsigned int *)((*(int *)((unsigned char *)&DAT_00439c88 + 0x20)) + 0xc9e4);
-  *(unsigned char *)((*(int *)((unsigned char *)&DAT_00439c88 + 0x20)) + 0xc9d8) = 1;
+  temp_v2 = (*(int *)((unsigned char *)&g_btlUi + 0x20));
+  puVar2 = (unsigned int *)((*(int *)((unsigned char *)&g_btlUi + 0x20)) + 0xc9e4);
+  *(unsigned char *)((*(int *)((unsigned char *)&g_btlUi + 0x20)) + 0xc9d8) = 1;
   *puVar2 = param_2;
   *(short *)(temp_v2 + 0xc9e8) = (short)param_3;
   *(unsigned int *)(temp_v2 + 0xc9dc) = 0x28;
@@ -109,7 +109,7 @@ void FUN_00227334(unsigned int param_1,unsigned int param_2,int param_3,int para
     }
     else {
       temp_v2 = param_5;
-      FUN_002b9024();
+      devilGetRecord();
       if (*(char *)(temp_v2 + 10) != '\x01') {
         FUN_002be624(temp_v6,&LAB_00227608);
       }

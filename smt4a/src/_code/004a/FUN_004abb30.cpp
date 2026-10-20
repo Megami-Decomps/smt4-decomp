@@ -4,11 +4,11 @@ extern "C" {
 
 s32 FUN_0038e6bc(BtlUiObjAA *obj);
 
-extern BtlUiGlobalsA DAT_0057a9b8;
+extern BtlUiGlobalsA g_btlUi;
 
 bool FUN_004abb30(void)
 {
-    return FUN_0038e6bc(&DAT_0057a9b8.ui->objA) != 0;
+    return FUN_0038e6bc(&g_btlUi.ui->objA) != 0;
 }
 
 } /* extern "C" */

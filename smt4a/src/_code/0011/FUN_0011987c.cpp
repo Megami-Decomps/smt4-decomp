@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e9c0c(void);
-int FUN_002f7cb0(int);
+int onlineJobSetStateWaiting(int);
 int FUN_002f7cba(int, int, unsigned int);
 int FUN_003054f0(int, unsigned int);
 int FUN_003056f2(unsigned int, unsigned int);
@@ -19,11 +19,11 @@ typedef struct {
 
 extern unsigned char LAB_0011991c; /* 0x11991c */
 
-extern int FUN_002e760a(unsigned int);
+extern int operatorNew(unsigned int);
 extern unsigned int FUN_002e7908(int *, unsigned int *);
 /* Supplied declaration required: FUN_002e9c0c. */
 extern unsigned int FUN_002ea3c0(int, unsigned int, unsigned int, unsigned char *);
-/* Supplied declaration required: FUN_002f7cb0. */
+/* Supplied declaration required: onlineJobSetStateWaiting. */
 /* Supplied declaration required: FUN_002f7cba. */
 extern unsigned int FUN_003054ce(void);
 /* Supplied declaration required: FUN_003054f0. */
@@ -58,8 +58,8 @@ void FUN_0011987c(int param_1)
   temp_v0 = *(int *)(temp_v0 + 0x18);
   FUN_003056fc(temp_v0,param_1 + 0x88,temp_v2);
   if (temp_v0 != 0) {
-    FUN_002f7cb0(param_1);
-    temp_v0 = FUN_002e760a(0x10);
+    onlineJobSetStateWaiting(param_1);
+    temp_v0 = operatorNew(0x10);
     temp_v1 = 0;
     if (temp_v0 != 0) {
       temp_v1 = FUN_002ea3c0(temp_v0,0x119699,0,&LAB_0011991c);

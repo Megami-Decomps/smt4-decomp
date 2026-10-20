@@ -7,12 +7,12 @@ typedef struct Table {
     /* 0x21589 */ u8 flag;
 } Table;
 
-Table *FUN_0014af84(void);
+Table *gameDataBlocksGetSaveData(void);
 
-/* Returns the byte at 0x21589 of the table FUN_0014af84 returns. */
+/* Returns the byte at 0x21589 of the table gameDataBlocksGetSaveData returns. */
 u8 FUN_0015fb68(void)
 {
-    Table *table = FUN_0014af84();
+    Table *table = gameDataBlocksGetSaveData();
     return table->flag;
 }
 

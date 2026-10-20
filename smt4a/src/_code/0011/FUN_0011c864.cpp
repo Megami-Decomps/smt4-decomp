@@ -5,14 +5,14 @@
 extern "C" {
 
 int strInit(...);
-int FUN_002eb588(int *);
+int onlineTimeGetNow(int *);
 int destroyObj0055ae64(unsigned char [28]);
 int FUN_002ec934(unsigned char [28], int, unsigned int);
 int strDestroy(...);
 int FUN_002ee524(unsigned char [24], unsigned char [40]);
-int FUN_002ee54c(unsigned char [24]);
+int sharedRefHolderDestroy2(unsigned char [24]);
 int FUN_002f7ac4(unsigned int, unsigned char [28]);
-int FUN_00311248(unsigned char [24], int *, int, int);
+int streamWriterWriteArray(unsigned char [24], int *, int, int);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 7 slot(s), 28 byte(s) */
@@ -26,17 +26,17 @@ typedef struct {
     unsigned int sp94; /* 0x94: local_94 */
 } param_1_stack;
 
-extern int FUN_002e760a(unsigned int);
+extern int operatorNew(unsigned int);
 /* Supplied declaration required: strInit. */
-/* Supplied declaration required: FUN_002eb588. */
+/* Supplied declaration required: onlineTimeGetNow. */
 /* Supplied declaration required: destroyObj0055ae64. */
 /* Supplied declaration required: FUN_002ec934. */
 /* Supplied declaration required: strDestroy. */
 /* Supplied declaration required: FUN_002ee524. */
-/* Supplied declaration required: FUN_002ee54c. */
+/* Supplied declaration required: sharedRefHolderDestroy2. */
 extern unsigned int FUN_002f7a28(void);
 /* Supplied declaration required: FUN_002f7ac4. */
-/* Supplied declaration required: FUN_00311248. */
+/* Supplied declaration required: streamWriterWriteArray. */
 
 
 int FUN_0011c864(int param_1)
@@ -59,7 +59,7 @@ int FUN_0011c864(int param_1)
   unsigned char temp_v12 [28];
   
   *(unsigned int *)(param_1 + 4) = 0;
-  temp_v0 = FUN_002e760a(0xb0);
+  temp_v0 = operatorNew(0xb0);
   temp_v1 = 0;
   if (temp_v0 != 0) {
     temp_v1 = FUN_002f7a28();
@@ -71,17 +71,17 @@ int FUN_0011c864(int param_1)
   *(unsigned int *)(param_1 + 4) = temp_v1;
   strInit(temp_v6);
   FUN_002ee524(temp_v11,temp_v6);
-  FUN_002eb588(&temp_v9);
+  onlineTimeGetNow(&temp_v9);
   temp_v8 = temp_v10;
   temp_v7 = temp_v9;
-  FUN_00311248(temp_v11,&temp_v7,8,1);
+  streamWriterWriteArray(temp_v11,&temp_v7,8,1);
   strInit(temp_v2);
   (**(romwright_code **)(**(int **)(param_1 + 4) + 8))(*(int **)(param_1 + 4),temp_v6,temp_v2);
   FUN_002ec934(temp_v12,temp_v3 + temp_v5,temp_v4);
   FUN_002f7ac4(*(unsigned int *)(param_1 + 4),temp_v12);
   destroyObj0055ae64(temp_v12);
   strDestroy(temp_v2);
-  FUN_002ee54c(temp_v11);
+  sharedRefHolderDestroy2(temp_v11);
   strDestroy(temp_v6);
   return param_1;
 }

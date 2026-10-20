@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0030ea58(int, int);
+int libc_strcmp(int, int);
 
-/* Supplied declaration required: FUN_0030ea58. */
+/* Supplied declaration required: libc_strcmp. */
 
 
 void nw_gfx_res_ResMaterial_CacheUserUniformIndex(int *param_1,int param_2,int param_3)
@@ -57,7 +57,7 @@ void nw_gfx_res_ResMaterial_CacheUserUniformIndex(int *param_1,int param_2,int p
               temp_v2 = temp_v2 + (int)piVar2;
             }
             temp_v0 = unaff_r10;
-            FUN_0030ea58(unaff_r10,temp_v2);
+            libc_strcmp(unaff_r10,temp_v2);
             if (temp_v0 == 0) {
               piVar7[1] = temp_v1;
               break;

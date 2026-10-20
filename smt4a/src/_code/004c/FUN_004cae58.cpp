@@ -47,10 +47,10 @@ typedef struct {
 } param_2_stack;
 
 extern unsigned int g_btlScriptUnit; /* 0x57113c */
-extern int DAT_00571508; /* 0x571508 */
+extern int g_btlCamera; /* 0x571508 */
 
 extern int FUN_0016345c(void);
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_003ec668. */
 extern unsigned long long FUN_003eca48(fn_004cae58_arg0 *, unsigned short);
 /* Supplied declaration required: FUN_003f0e20. */
@@ -93,7 +93,7 @@ void FUN_004cae58(fn_004cae58_arg0 *param_1,int param_2)
   FUN_003f0e20(param_1,(int)*(short *)(param_2 + 0x6a));
   temp_v4 = (unsigned int)*(unsigned short *)&pfVar3->field_0x166;
   if (temp_v4 == 0x35b) {
-    temp_v2 = FUN_0018719c(0x592);
+    temp_v2 = gameFlagIsSet(0x592);
     if (temp_v2 != 0) {
       temp_v2 = FUN_0016345c();
       if (temp_v2 != 0) {
@@ -156,15 +156,15 @@ void FUN_004cae58(fn_004cae58_arg0 *param_1,int param_2)
   }
   temp_v2 = FUN_003ec668(param_1);
   if (temp_v2 != 0) {
-    if ((((*(unsigned char *)(temp_v2 + 0x39) & 1) != 0) && (*(int *)(DAT_00571508 + 0x38) != 3)) &&
+    if ((((*(unsigned char *)(temp_v2 + 0x39) & 1) != 0) && (*(int *)(g_btlCamera + 0x38) != 3)) &&
        ((*(unsigned int *)(param_2 + 0x50) & 0x400000) == 0)) {
-      obj4FStartSwitch(DAT_00571508,(int)*(short *)(temp_v2 + 0x3a));
+      obj4FStartSwitch(g_btlCamera,(int)*(short *)(temp_v2 + 0x3a));
       *(unsigned int *)(param_2 + 0x50) = *(unsigned int *)(param_2 + 0x50) | 0x400000;
       if ((*(unsigned char *)(temp_v2 + 0x39) & 2) == 0) {
-        *(unsigned char *)(DAT_00571508 + 0x6a8) = 0;
+        *(unsigned char *)(g_btlCamera + 0x6a8) = 0;
       }
       else {
-        *(unsigned char *)(DAT_00571508 + 0x6a8) = 1;
+        *(unsigned char *)(g_btlCamera + 0x6a8) = 1;
         param_1[0x25].field_0x34 = 1;
       }
       temp_v6 = btlUnitGet(g_btlScriptUnit);

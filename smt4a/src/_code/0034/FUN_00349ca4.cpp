@@ -8,8 +8,8 @@ int FUN_00100388(...);
 int FUN_00280bd0(unsigned char [132], int, int, int, unsigned int, int, int);
 int FUN_002c7388(...);
 int asdSaveWriteBlock(int, unsigned char [128], unsigned char [132], unsigned int, unsigned int);
-int FUN_002e342c(unsigned char [128], unsigned char *);
-int FUN_002e6dd0(unsigned char *, int);
+int libc_strcpy(unsigned char [128], unsigned char *);
+int rt_aeabi_memclr(unsigned char *, int);
 int colorForMode(...);
 int FUN_00399c90(int, unsigned char *);
 
@@ -29,8 +29,8 @@ extern unsigned char DAT_005e2114; /* 0x5e2114 */
 /* Supplied declaration required: FUN_00280bd0. */
 /* Supplied declaration required: FUN_002c7388. */
 /* Supplied declaration required: asdSaveWriteBlock. */
-/* Supplied declaration required: FUN_002e342c. */
-/* Supplied declaration required: FUN_002e6dd0. */
+/* Supplied declaration required: libc_strcpy. */
+/* Supplied declaration required: rt_aeabi_memclr. */
 extern int FUN_002ef7f0(unsigned int, unsigned char *);
 extern int FUN_0032c8c8(void);
 /* Supplied declaration required: colorForMode. */
@@ -52,7 +52,7 @@ void FUN_00349ca4(unsigned int param_1)
   DAT_0057f6c9 = 1;
   if (temp_v1 != 1) {
     temp_v3 = *(unsigned int *)(DAT_0057f6d0 + 8);
-    FUN_002e6dd0(&DAT_005e2114,0x80);
+    rt_aeabi_memclr(&DAT_005e2114,0x80);
     FUN_00100388(&DAT_005e2114,"sdds4game%d.sav",temp_v3);
   }
   else {
@@ -63,10 +63,10 @@ void FUN_00349ca4(unsigned int param_1)
       return;
     }
     temp_v3 = *(unsigned int *)(DAT_0057f6d0 + 8);
-    FUN_002e6dd0(&DAT_005e2114,0x80);
+    rt_aeabi_memclr(&DAT_005e2114,0x80);
     FUN_00100388(&DAT_005e2114,"%ssdds4game%d.sav","sdds4/",temp_v3);
   }
-  FUN_002e342c(temp_v4,&DAT_005e2114);
+  libc_strcpy(temp_v4,&DAT_005e2114);
   FUN_00280bd0(temp_v5,0x34534444,0x454d4147,0,*(unsigned int *)(DAT_0057f6d0 + 0x18),0,0);
   temp_v2 = temp_v1;
   asdSaveWriteBlock(temp_v1,temp_v4,temp_v5,*(unsigned int *)(DAT_0057f6d0 + 0x14),

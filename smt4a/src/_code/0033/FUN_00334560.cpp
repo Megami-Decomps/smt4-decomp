@@ -4,19 +4,19 @@
 
 extern "C" {
 
-int FUN_00184758(int, int);
-int FUN_00184c00(int, int, int);
+int uiSpriteSetKeyframe(int, int);
+int uiSpriteSetImageKeyframe(int, int, int);
 int FUN_00202400(void);
 int FUN_002ae320(void);
 int FUN_003d498c(unsigned int, int);
 int FUN_003dc530(void);
 int FUN_003defe0(void);
 
-extern int DAT_0057f28c; /* 0x57f28c */
+extern int g_uiQuest; /* 0x57f28c */
 
 extern int FUN_00162858(void);
-/* Supplied declaration required: FUN_00184758. */
-/* Supplied declaration required: FUN_00184c00. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_00202400. */
 extern int FUN_002a4860(void);
 extern int FUN_002a4894(int);
@@ -40,8 +40,8 @@ void FUN_00334560(void)
   int temp_v5;
   unsigned int temp_v6;
   
-  temp_v5 = DAT_0057f28c;
-  *(unsigned char *)(DAT_0057f28c + 0x90c) = 1;
+  temp_v5 = g_uiQuest;
+  *(unsigned char *)(g_uiQuest + 0x90c) = 1;
   FUN_003dc530();
   temp_v1 = FUN_002a4860();
   temp_v2 = FUN_002a4894(temp_v5 + 0x948);
@@ -49,7 +49,7 @@ void FUN_00334560(void)
   temp_v6 = (unsigned int)temp_v0;
   FUN_003d498c(temp_v6,1);
   *(unsigned short *)(temp_v5 + 0xcce) = temp_v0;
-  temp_v1 = DAT_0057f28c;
+  temp_v1 = g_uiQuest;
   temp_v2 = partyEntryBitsBit4(temp_v6);
   if ((temp_v2 == 0) && (temp_v3 = temp_v6, FUN_003defe0(), temp_v3 != 0)) {
     temp_v2 = 0;
@@ -69,14 +69,14 @@ void FUN_00334560(void)
   if (*(short *)(temp_v5 + 0xcd0) >= 3) {
     FUN_002ae320();
   }
-  FUN_00184758(temp_v5 + 0x34,0);
-  FUN_00184c00(temp_v5 + 0x34,8,0);
+  uiSpriteSetKeyframe(temp_v5 + 0x34,0);
+  uiSpriteSetImageKeyframe(temp_v5 + 0x34,8,0);
   temp_v5 = FUN_00162858();
   if (temp_v5 != 0) {
     FUN_00202400();
   }
-  temp_v5 = DAT_0057f28c;
-  *(unsigned int *)(DAT_0057f28c + 8) = *(unsigned int *)(DAT_0057f28c + 4);
+  temp_v5 = g_uiQuest;
+  *(unsigned int *)(g_uiQuest + 8) = *(unsigned int *)(g_uiQuest + 4);
   *(unsigned int *)(temp_v5 + 4) = 1;
   *(unsigned int *)(temp_v5 + 0x10) = 0;
   return;

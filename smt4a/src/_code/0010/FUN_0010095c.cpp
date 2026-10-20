@@ -5,9 +5,9 @@
 extern "C" {
 
 int FUN_00100d88(unsigned char *, unsigned char *, int *);
-int FUN_002e3328(void);
+int asdOperatorDelete(void);
 int FUN_002e3338(unsigned int, unsigned int, int, unsigned int);
-int FUN_002e3494(unsigned int);
+int asdOperatorDeleteB(unsigned int);
 int FUN_002e3ef4(...);
 int FUN_002e3f68(...);
 int FUN_002e3f74(int);
@@ -45,9 +45,9 @@ extern unsigned char DAT_0064bfb0; /* 0x64bfb0 */
 extern unsigned char *FUN_00100d60(char *, unsigned int);
 /* Supplied declaration required: FUN_00100d88. */
 extern unsigned int FUN_00100dc8(int *);
-/* Supplied declaration required: FUN_002e3328. */
+/* Supplied declaration required: asdOperatorDelete. */
 /* Supplied declaration required: FUN_002e3338. */
-/* Supplied declaration required: FUN_002e3494. */
+/* Supplied declaration required: asdOperatorDeleteB. */
 /* Supplied declaration required: FUN_002e3ef4. */
 extern int FUN_002e3f2c(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002e3f68. */
@@ -108,10 +108,10 @@ unsigned int FUN_0010095c(unsigned int param_1,unsigned int param_2,int param_3,
     DAT_005c4bd8 = (**(romwright_code **)(DAT_0064bfa0 + 0xc))(&DAT_0064bfa0,temp_v2,temp_v4);
     if ((temp_v5 != 0) &&
        (temp_v3 = *(int *)(temp_v5 + 0x1c) - 1, *(int *)(temp_v5 + 0x1c) = temp_v3, temp_v3 == 0)) {
-      FUN_002e3494(*(unsigned int *)(temp_v5 + 0x18));
-      FUN_002e3494(*(unsigned int *)(temp_v5 + 8));
+      asdOperatorDeleteB(*(unsigned int *)(temp_v5 + 0x18));
+      asdOperatorDeleteB(*(unsigned int *)(temp_v5 + 8));
       FUN_002e3f74(temp_v5);
-      FUN_002e3328();
+      asdOperatorDelete();
     }
     FUN_002e3f68(&temp_v6);
     DAT_005c4bd0 = s_rwstderr_1_005c4bdc;

@@ -14,9 +14,9 @@ struct fn_003f3f08_arg0 {
     void *field_0x34; /* +0x34 */
 };
 
-extern int FUN_001801a4(void);
+extern int gameGetPlayerData(void);
 extern unsigned int FUN_0019e130(int);
-extern int FUN_001ab854(void);
+extern int gameGetSlotRecord(void);
 extern int btlMainGetUnk14(void);
 
 
@@ -37,7 +37,7 @@ unsigned int FUN_003f3f08(fn_003f3f08_arg0 *param_1)
   if (pvVar1 != (void *)0xffffffff) {
     if (pvVar1 != (void *)0xfffffffe) {
       if (-1 < (int)pvVar1) {
-        temp_v0 = FUN_001ab854();
+        temp_v0 = gameGetSlotRecord();
         temp_v3 = (unsigned int)*(unsigned short *)(temp_v0 + 0x60);
       }
     }
@@ -49,7 +49,7 @@ unsigned int FUN_003f3f08(fn_003f3f08_arg0 *param_1)
     }
   }
   else {
-    temp_v0 = FUN_001801a4();
+    temp_v0 = gameGetPlayerData();
     temp_v3 = (unsigned int)*(unsigned short *)(temp_v0 + 0x5e);
   }
   temp_v1 = 1;

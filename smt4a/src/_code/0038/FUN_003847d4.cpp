@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern Flags0C0C *FUN_00162e8c(void);
+extern Flags0C0C *gameFlagsGetBlock(void);
 
 void FUN_003847d4(u32 value)
 {
-    FUN_00162e8c()->unk18 = value;
+    gameFlagsGetBlock()->unk18 = value;
 }
 
 } /* extern "C" */

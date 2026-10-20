@@ -3,7 +3,7 @@
 extern "C" {
 
 int FUN_002358b4(u8 *state, u32 value);
-int FUN_0023592c(void *track);
+int nw_snd_internal_driver_SequenceTrack_UpdateChannelParam(void *track);
 int nw_snd_internal_driver_Channel_Release(SndChannel *channel);
 
 typedef struct SequenceTrack {
@@ -17,7 +17,7 @@ void nw_snd_internal_driver_SequenceTrack_ReleaseAllChannel(SequenceTrack *track
 {
     SndChannel *channel;
 
-    FUN_0023592c(track);
+    nw_snd_internal_driver_SequenceTrack_UpdateChannelParam(track);
     for (channel = track->channels; channel != NULL; channel = channel->next) {
         if (channel->unk0C6 != 0) {
             if ((int)release >= 0) {

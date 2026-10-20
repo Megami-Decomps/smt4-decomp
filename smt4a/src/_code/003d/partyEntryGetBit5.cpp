@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern u8 *FUN_001abac8(s32 index);
+extern u8 *gameFlagBlockGetEntry(s32 index);
 
 /* Bit 5 of the first byte of party entry `index`. */
 u32 partyEntryGetBit5(s32 index)
 {
-    u8 *entry = FUN_001abac8(index);
+    u8 *entry = gameFlagBlockGetEntry(index);
 
     return (*entry & 0x20) >> 5;
 }

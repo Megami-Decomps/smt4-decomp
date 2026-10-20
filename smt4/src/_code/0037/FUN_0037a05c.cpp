@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b4f40(int);
+int listAppendNode(int);
 int FUN_002b4f64(int, int);
 
 /* stack frame of param_7: 1 slot(s), 4 byte(s) */
@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_7_stack;
 
-/* Supplied declaration required: FUN_002b4f40. */
+/* Supplied declaration required: listAppendNode. */
 /* Supplied declaration required: FUN_002b4f64. */
 extern int FUN_002baed8(void);
 
@@ -39,7 +39,7 @@ void FUN_0037a05c(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   *(unsigned char *)(temp_v1 + 0x1f) = param_6;
   *(int *)(temp_v1 + 0x20) = (int)param_7;
   *(int *)(temp_v1 + 0x24) = (int)((unsigned long long)param_7 >> 0x20);
-  FUN_002b4f40(temp_v0);
+  listAppendNode(temp_v0);
   return;
 }
 

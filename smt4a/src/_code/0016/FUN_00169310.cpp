@@ -9,7 +9,7 @@ int FUN_001642e4(unsigned char [64], int *, unsigned int, int);
 int asdMemFree(unsigned char *);
 int asdTextureCreate(void);
 int asdTMSprDecompress(unsigned char *, unsigned int, int);
-int FUN_002e342c(unsigned char [64], int);
+int libc_strcpy(unsigned char [64], int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -26,7 +26,7 @@ extern unsigned char LAB_00169540; /* 0x169540 */
 /* Supplied declaration required: asdTextureCreate. */
 /* Supplied declaration required: asdTMSprDecompress. */
 extern int wstrlen(unsigned int);
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 extern int rt_memcmp(unsigned char *, unsigned char *, unsigned int);
 
 
@@ -44,7 +44,7 @@ unsigned int FUN_00169310(int *param_1)
   
   puVar1 = temp_v3;
   temp_v1 = param_1[1];
-  FUN_002e342c(temp_v3,*param_1 + 0xc);
+  libc_strcpy(temp_v3,*param_1 + 0xc);
   pcVar2 = *(char **)(temp_v1 + 8);
   if (*pcVar2 != '-') {
     libc_strcat(temp_v3);

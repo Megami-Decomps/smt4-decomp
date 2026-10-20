@@ -25,7 +25,7 @@ extern unsigned int DAT_00571260; /* 0x571260 */
 extern unsigned int DAT_00571264; /* 0x571264 */
 extern unsigned int DAT_00571288; /* 0x571288 */
 extern unsigned int DAT_0057128c; /* 0x57128c */
-extern int DAT_00571508; /* 0x571508 */
+extern int g_btlCamera; /* 0x571508 */
 extern int DAT_00573808; /* 0x573808 */
 extern int g_btlEvent; /* 0x573898 */
 
@@ -68,8 +68,8 @@ void FUN_004dce1c(int *param_1,unsigned int *param_2,unsigned int param_3,unsign
     }
   }
   else if ((*param_2 & 0x2000) == 0) {
-    if ((-1 < *(int *)(DAT_00571508 + 0x7cc)) &&
-       (temp_v5 = FUN_004f2708(DAT_00571508,temp_v5,1,temp_v7,param_4), temp_v5 != 0)) {
+    if ((-1 < *(int *)(g_btlCamera + 0x7cc)) &&
+       (temp_v5 = FUN_004f2708(g_btlCamera,temp_v5,1,temp_v7,param_4), temp_v5 != 0)) {
       FUN_004fb670(0,0);
     }
     FUN_004feecc(1,0);

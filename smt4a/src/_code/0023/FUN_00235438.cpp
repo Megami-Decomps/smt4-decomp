@@ -10,7 +10,7 @@ int FUN_002466a8(void);
 int FUN_00295024(void);
 int FUN_00295108(...);
 int FUN_002c7b8c(...);
-int FUN_002e6dd0(unsigned short [300], int);
+int rt_aeabi_memclr(unsigned short [300], int);
 int FUN_00365898(...);
 int FUN_00365920(...);
 int FUN_003deea4(...);
@@ -18,7 +18,7 @@ int FUN_003df43c(...);
 int FUN_00417b70(...);
 int partyEntryFlagsBit3(...);
 int FUN_004185c4(...);
-int FUN_00480e30(int, int);
+int flagValueAdd(int, int);
 
 /* stack frame of void: 11 slot(s), 42 byte(s) */
 typedef struct {
@@ -40,8 +40,8 @@ extern int DAT_005f16dc; /* 0x5f16dc */
 extern int DAT_005f1998; /* 0x5f1998 */
 extern signed char DAT_005f1aca; /* 0x5f1aca */
 
-extern int FUN_00162e8c(void);
-extern int FUN_001801a4(void);
+extern int gameFlagsGetBlock(void);
+extern int gameGetPlayerData(void);
 extern int FUN_0019f1a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001ad9b4. */
 /* Supplied declaration required: FUN_001ada74. */
@@ -52,7 +52,7 @@ extern int FUN_001bd118(unsigned int);
 /* Supplied declaration required: FUN_00295108. */
 extern int FUN_002c2758(unsigned short);
 /* Supplied declaration required: FUN_002c7b8c. */
-/* Supplied declaration required: FUN_002e6dd0. */
+/* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: FUN_00365898. */
 /* Supplied declaration required: FUN_00365920. */
 extern int dataTable2FType1GetEntry(int);
@@ -69,7 +69,7 @@ extern int partyEntryBitsBit5(unsigned int);
 /* Supplied declaration required: FUN_004185c4. */
 extern int partyEntryFlagsBit1(unsigned int);
 extern int partyEntryBitsBit1(unsigned int);
-/* Supplied declaration required: FUN_00480e30. */
+/* Supplied declaration required: flagValueAdd. */
 
 
 int FUN_00235438(void)
@@ -104,14 +104,14 @@ int FUN_00235438(void)
   unsigned int temp_v24;
   
   temp_v17 = 0;
-  temp_v2 = FUN_00162e8c();
+  temp_v2 = gameFlagsGetBlock();
   temp_v21 = 0;
-  FUN_002e6dd0(temp_v15,600);
+  rt_aeabi_memclr(temp_v15,600);
   temp_v16 = 0;
   if (DAT_005f16d8 != '\0') {
     temp_v2 = dataTable2FType1GetEntry((int)*(short *)(temp_v2 + 0x2a));
     DAT_005f16dc = (int)*(short *)(temp_v2 + 0x12);
-    FUN_00480e30(DAT_005f16dc,1);
+    flagValueAdd(DAT_005f16dc,1);
     DAT_005f16d8 = 0;
     return 4;
   }
@@ -314,7 +314,7 @@ LAB_002358f0:
           if (temp_v2 != 0) {
             FUN_003df43c(temp_v10);
           }
-          temp_v2 = FUN_001801a4();
+          temp_v2 = gameGetPlayerData();
           temp_v1 = *(unsigned short *)(temp_v2 + 0x62);
           temp_v2 = FUN_0019f1a4(temp_v10,0);
           if ((temp_v2 == 0) && (temp_v7 = temp_v10, FUN_001ad9b4(), temp_v7 != 0)) {

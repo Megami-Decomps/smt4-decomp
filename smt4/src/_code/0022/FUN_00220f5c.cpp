@@ -4,7 +4,7 @@ extern "C" {
 
 int statusCameraDestroy(void);
 int lmapSceneSetUnk134(int value);
-int FUN_002a72c0(int arg);
+int asdModelSlotRelease(int arg);
 extern int lmapSceneGetScript(void);
 
 struct Script;
@@ -31,7 +31,7 @@ void FUN_00220f5c(Obj *obj)
         lmapSceneSetUnk134(1);
     }
     if (obj->unk2C != 0) {
-        FUN_002a72c0(0);
+        asdModelSlotRelease(0);
     }
     if (obj->script == NULL) {
         return;

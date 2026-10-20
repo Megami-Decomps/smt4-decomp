@@ -6,10 +6,10 @@ extern "C" {
 
 int FUN_00112910(void);
 int FUN_00132584(int);
-int FUN_002e93ec(int, unsigned char *);
-int FUN_002e9ec8(int, unsigned int);
+int onlineSockAddrSetHost(int, unsigned char *);
+int onlineInstanceTableFind(int, unsigned int);
 int FUN_002ea3d0(int, unsigned int);
-int FUN_002ea43c(int);
+int onlineJobSetStateDone(int);
 int FUN_002ea704(void);
 int FUN_002ec738(int);
 int _ZN9Obj558be04stopEv(int);
@@ -42,12 +42,12 @@ extern union romwright_storage_s__V_V_V_V_00594eb4_17_1 s__V_V_V_V_00594eb4; /* 
 extern int FUN_00112770(int);
 /* Supplied declaration required: FUN_00112910. */
 /* Supplied declaration required: FUN_00132584. */
-/* Supplied declaration required: FUN_002e93ec. */
-extern int FUN_002e9af4(void);
-/* Supplied declaration required: FUN_002e9ec8. */
+/* Supplied declaration required: onlineSockAddrSetHost. */
+extern int onlineInstanceTableGetCurrent(void);
+/* Supplied declaration required: onlineInstanceTableFind. */
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned int, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
-/* Supplied declaration required: FUN_002ea43c. */
+/* Supplied declaration required: onlineJobSetStateDone. */
 /* Supplied declaration required: FUN_002ea704. */
 /* Supplied declaration required: FUN_002ec738. */
 /* Supplied declaration required: _ZN9Obj558be04stopEv. */
@@ -69,10 +69,10 @@ void FUN_00112a0c(int param_1)
   unsigned short temp_v5;
   unsigned short temp_v6;
   
-  temp_v1 = FUN_002e9af4();
-  FUN_002e9ec8(temp_v1,*(unsigned int *)(param_1 + 0x1f0));
+  temp_v1 = onlineInstanceTableGetCurrent();
+  onlineInstanceTableFind(temp_v1,*(unsigned int *)(param_1 + 0x1f0));
   if (temp_v1 == 0) {
-    FUN_002ea43c(param_1);
+    onlineJobSetStateDone(param_1);
     return;
   }
   temp_v2 = FUN_002ea704();
@@ -83,7 +83,7 @@ void FUN_00112a0c(int param_1)
       if (temp_v0 != '\x02') {
         if (temp_v0 != '\x03') {
           FUN_002fa18c(temp_v1);
-          FUN_002ea43c(param_1);
+          onlineJobSetStateDone(param_1);
           return;
         }
         if (*(char *)(param_1 + 0x3ac) == '\0') {
@@ -99,7 +99,7 @@ void FUN_00112a0c(int param_1)
       else {
         if (*(char *)(param_1 + 0x321) != '\0') {
           FUN_00132584(param_1 + 0x120);
-          FUN_002e93ec(param_1 + 0x138,&LAB_00112b2c);
+          onlineSockAddrSetHost(param_1 + 0x138,&LAB_00112b2c);
           *(unsigned short *)(param_1 + 0x13e) = 0;
           *(unsigned int *)(param_1 + 0x2c8) = 0;
           *(unsigned int *)(param_1 + 0x2cc) = 0;
@@ -119,7 +119,7 @@ void FUN_00112a0c(int param_1)
         temp_v2 = FUN_00112770(param_1);
         if (temp_v2 == 0) {
           FUN_002fa18c(temp_v1);
-          FUN_002ea43c(param_1);
+          onlineJobSetStateDone(param_1);
           return;
         }
       }
@@ -129,7 +129,7 @@ void FUN_00112a0c(int param_1)
       FUN_00112910();
       if (temp_v2 == 0) {
         FUN_002fa18c(temp_v1);
-        FUN_002ea43c(param_1);
+        onlineJobSetStateDone(param_1);
         return;
       }
     }
@@ -138,7 +138,7 @@ void FUN_00112a0c(int param_1)
   else {
     FUN_002fa18c(temp_v1);
   }
-  FUN_002ea43c(param_1);
+  onlineJobSetStateDone(param_1);
   return;
 }
 

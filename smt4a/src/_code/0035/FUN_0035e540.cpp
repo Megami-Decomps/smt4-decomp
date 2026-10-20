@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_001b4a90(int, int, int);
+int __aeabi_memset4(int, int, int);
 
-extern int DAT_0057f268; /* 0x57f268 */
+extern int g_partyPanel; /* 0x57f268 */
 
 extern int slotRecordFindById(unsigned int);
-extern int FUN_001ab854(void);
-extern int FUN_001ab888(void);
-/* Supplied declaration required: FUN_001b4a90. */
+extern int gameGetSlotRecord(void);
+extern int gameGetSlotTable(void);
+/* Supplied declaration required: __aeabi_memset4. */
 
 
 void FUN_0035e540(void)
@@ -27,8 +27,8 @@ void FUN_0035e540(void)
   int temp_v6;
   int temp_v7;
   
-  temp_v0 = DAT_0057f268;
-  temp_v1 = FUN_001ab888();
+  temp_v0 = g_partyPanel;
+  temp_v1 = gameGetSlotTable();
   temp_v7 = 0;
   do {
     *(unsigned char *)(temp_v0 + temp_v7 + 0x9c0) = 0;
@@ -41,7 +41,7 @@ void FUN_0035e540(void)
     *(unsigned char *)(*(int *)(temp_v0 + temp_v7 * 4 + 0xa20) + 0x28) = 0;
     temp_v7 = temp_v7 + 1;
   } while (temp_v7 < 0x18);
-  FUN_001b4a90(temp_v0 + 0x9c0,4,1);
+  __aeabi_memset4(temp_v0 + 0x9c0,4,1);
   temp_v7 = 0;
   temp_v5 = 0x18;
   *(unsigned char *)(temp_v0 + 0x9c0) = 0;
@@ -61,7 +61,7 @@ void FUN_0035e540(void)
         temp_v6 = 0;
         do {
           if ((-1 < *(char *)(temp_v1 + temp_v6 + 0x1ca0)) &&
-             (temp_v3 = FUN_001ab854(), *(short *)(temp_v3 + 0x62) == *(short *)(temp_v5 + 0x62))) {
+             (temp_v3 = gameGetSlotRecord(), *(short *)(temp_v3 + 0x62) == *(short *)(temp_v5 + 0x62))) {
             *(unsigned char *)(temp_v0 + temp_v6 + 0x9c1) = 1;
             *(unsigned char *)(*(int *)(temp_v0 + temp_v6 * 4 + 0xa14) + 0x28) = 1;
           }
@@ -71,7 +71,7 @@ void FUN_0035e540(void)
         do {
           temp_v3 = temp_v0 + temp_v6 * 8;
           if ((-1 < *(int *)(temp_v3 + 0xa80)) &&
-             (temp_v4 = FUN_001ab854(), *(short *)(temp_v4 + 0x62) == *(short *)(temp_v5 + 0x62))) {
+             (temp_v4 = gameGetSlotRecord(), *(short *)(temp_v4 + 0x62) == *(short *)(temp_v5 + 0x62))) {
             *(unsigned short *)(temp_v3 + 0xa84) = 1;
             *(unsigned char *)(*(int *)(temp_v0 + temp_v6 * 4 + 0xa20) + 0x28) = 1;
           }

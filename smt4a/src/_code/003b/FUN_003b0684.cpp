@@ -16,7 +16,7 @@ typedef struct {
 /* Supplied declaration required: jyoucyuGetTableEntry. */
 /* Supplied declaration required: FUN_00235dc4. */
 extern unsigned int scrGetArg(unsigned int);
-extern int FUN_002deb84(void);
+extern int scrGetCommandFrame(void);
 extern int stateAt4IsAbove2(void);
 extern int QuestCenter_GetActiveEntry(void);
 
@@ -32,7 +32,7 @@ unsigned int FUN_003b0684(void)
   unsigned int uStack_14;
   unsigned int temp_v4;
   
-  temp_v0 = FUN_002deb84();
+  temp_v0 = scrGetCommandFrame();
   if (temp_v0 == 0) {
     temp_v1 = scrGetArg(0);
     temp_v2 = scrGetArg(1);

@@ -5,14 +5,14 @@
 extern "C" {
 
 int asdMemoryAllocTracked(int, int, int, int, int);
-int FUN_002e342c(unsigned short *, unsigned int);
+int libc_strcpy(unsigned short *, unsigned int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_2_stack;
 
-extern int *DAT_005738e8; /* 0x5738e8 */
+extern int *g_btlHelp; /* 0x5738e8 */
 extern unsigned int DAT_00573908; /* 0x573908 */
 extern unsigned int DAT_0057390c; /* 0x57390c */
 extern unsigned int DAT_00573910; /* 0x573910 */
@@ -20,7 +20,7 @@ extern unsigned int DAT_00573914; /* 0x573914 */
 
 extern int btlGetMainState(void);
 /* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 
 
 unsigned short * FUN_004c8894(unsigned int param_1,unsigned char param_2)
@@ -50,12 +50,12 @@ unsigned short * FUN_004c8894(unsigned int param_1,unsigned char param_2)
     *(unsigned int *)(puVar3 + 0x436) = 0;
     puVar3[0x438] = 0;
     puVar3[0x439] = 1;
-    FUN_002e342c(puVar3 + 0x416,param_1);
+    libc_strcpy(puVar3 + 0x416,param_1);
     *(unsigned int *)(puVar3 + 0x43a) = 0;
     *(unsigned int *)(puVar3 + 0x43c) = 0;
-    piVar1 = DAT_005738e8;
-    if (*DAT_005738e8 == 0) {
-      *DAT_005738e8 = (int)puVar3;
+    piVar1 = g_btlHelp;
+    if (*g_btlHelp == 0) {
+      *g_btlHelp = (int)puVar3;
     }
     if (piVar1[1] == 0) {
       piVar1[1] = (int)puVar3;

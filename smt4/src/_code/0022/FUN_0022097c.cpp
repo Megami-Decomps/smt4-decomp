@@ -2,11 +2,11 @@
 
 extern "C" {
 
-int FUN_00297410(int id);
+int fileSlotLoad(int id);
 
 void FUN_0022097c(void)
 {
-    FUN_00297410(0xe);
+    fileSlotLoad(0xe);
 }
 
 } /* extern "C" */

@@ -4,18 +4,18 @@
 
 extern "C" {
 
-int FUN_00184758(int, int, int);
-int FUN_00184c00(int, int, int);
-int FUN_00203d04(int);
+int uiSpriteSetKeyframe(int, int, int);
+int uiSpriteSetImageKeyframe(int, int, int);
+int dialogClose(int);
 
-extern int DAT_0057f574; /* 0x57f574 */
+extern int g_infoWin; /* 0x57f574 */
 extern int g_mapIf; /* 0x58103c */
 extern int *g_popupState; /* 0x58104c */
 extern signed char DAT_005f185e; /* 0x5f185e */
 
-/* Supplied declaration required: FUN_00184758. */
-/* Supplied declaration required: FUN_00184c00. */
-/* Supplied declaration required: FUN_00203d04. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
+/* Supplied declaration required: dialogClose. */
 
 
 /* WARNING: Removing unreachable block (ram,0x0018478c) */
@@ -36,19 +36,19 @@ void FUN_0020ef68(void)
   temp_v0 = g_mapIf;
   if (DAT_005f185e != '\0') {
     DAT_005f185e = '\0';
-    FUN_00203d04(1);
+    dialogClose(1);
   }
   if (*(char *)(temp_v0 + 0x1d) == '\0') {
     return;
   }
   *(unsigned char *)(temp_v0 + 0x1d) = 0;
   *(unsigned int *)(temp_v0 + 0x20) = 0;
-  temp_v0 = DAT_0057f574;
-  if (*(int *)(DAT_0057f574 + 8) != 0) {
-    *(unsigned int *)(DAT_0057f574 + 8) = 5;
+  temp_v0 = g_infoWin;
+  if (*(int *)(g_infoWin + 8) != 0) {
+    *(unsigned int *)(g_infoWin + 8) = 5;
     *(unsigned int *)(temp_v0 + 0x10) = 0x1e;
-    FUN_00184758(temp_v0 + 0x54,1,0);
-    FUN_00184c00(temp_v0 + 0x54,1,0);
+    uiSpriteSetKeyframe(temp_v0 + 0x54,1,0);
+    uiSpriteSetImageKeyframe(temp_v0 + 0x54,1,0);
     if (*(int *)(temp_v0 + 0x20) == 2) {
       temp_v1 = *(int *)(temp_v0 + 300);
       if (temp_v1 == 0) {

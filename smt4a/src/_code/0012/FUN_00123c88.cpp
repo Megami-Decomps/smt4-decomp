@@ -13,7 +13,7 @@ int FUN_002e6e5c(int *);
 #endif
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-extern int FUN_002fc046(int);
+extern int rangeIsEmpty(int);
 
 
 unsigned long long FUN_00123c88(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -31,7 +31,7 @@ unsigned long long FUN_00123c88(int param_1,unsigned int param_2,unsigned int pa
   uStack_10 = param_4;
   FUN_002e6e34(&uStack_18,param_1 + 0x105c);
   if (((*(int *)(*(int *)(param_1 + 0x109c) + 0x18) == 0) &&
-      (temp_v0 = FUN_002fc046(param_1 + 0x10a0), temp_v0 != 0)) && (*(char *)(param_1 + 0x108c) != '\0')
+      (temp_v0 = rangeIsEmpty(param_1 + 0x10a0), temp_v0 != 0)) && (*(char *)(param_1 + 0x108c) != '\0')
      ) {
     temp_v1 = 1;
   }

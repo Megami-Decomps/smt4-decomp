@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00116608(int, int *, unsigned int, unsigned int);
-int FUN_002e9ec8(int, unsigned int);
+int onlineInstanceTableFind(int, unsigned int);
 int FUN_002ea3d0(int, unsigned int);
 int FUN_002ea41e(unsigned char [12], int);
 int FUN_00310ec8(int, unsigned char *);
@@ -23,8 +23,8 @@ extern unsigned char LAB_0011daf0; /* 0x11daf0 */
 
 /* Supplied declaration required: FUN_00116608. */
 extern unsigned char *FUN_002e7908(unsigned char *, int *);
-extern int FUN_002e9af4(void);
-/* Supplied declaration required: FUN_002e9ec8. */
+extern int onlineInstanceTableGetCurrent(void);
+/* Supplied declaration required: onlineInstanceTableFind. */
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned char *, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
 /* Supplied declaration required: FUN_002ea41e. */
@@ -47,8 +47,8 @@ void FUN_0011da40(int param_1)
   unsigned char temp_v5 [16];
   
   piVar4 = temp_v2;
-  temp_v0 = FUN_002e9af4();
-  FUN_002e9ec8(temp_v0,*(unsigned int *)(param_1 + 0x6c));
+  temp_v0 = onlineInstanceTableGetCurrent();
+  onlineInstanceTableFind(temp_v0,*(unsigned int *)(param_1 + 0x6c));
   if (temp_v0 != 0) {
     if (*(char *)(param_1 + 0xa0) != '\x02') {
       FUN_002ea41e(temp_v4,param_1 + 0x90);

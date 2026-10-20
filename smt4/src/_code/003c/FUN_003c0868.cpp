@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_002ac068(int value, int flag);
+int dataTableFileGetTable(int value, int flag);
 
 typedef struct Obj {
     /* 0x0 */ u8 unk0[8];
@@ -12,7 +12,7 @@ typedef struct Obj {
 void FUN_003c0868(Obj *obj)
 {
     if (obj->value != 0) {
-        FUN_002ac068(obj->value, 0);
+        dataTableFileGetTable(obj->value, 0);
         return;
     }
 }

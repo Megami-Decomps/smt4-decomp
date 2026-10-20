@@ -7,10 +7,10 @@ extern "C" {
 int FUN_00100388(...);
 int FUN_001642e4(unsigned char *, int, int, int);
 int memAlloc(...);
-int FUN_001800b8(void);
+int asdTextureRelease(void);
 int asdMemFree(unsigned char *);
 int FUN_00221f20(void);
-int FUN_00222104(void);
+int handleBlockRefDrop(void);
 int FUN_002b3fd8(...);
 int FUN_002cf28c(...);
 int FUN_0037a7f4(...);
@@ -31,13 +31,13 @@ extern unsigned int *DAT_006471b4; /* 0x6471b4 */
 #endif
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_001642e4. */
-extern int FUN_00164af0(unsigned int);
-extern int FUN_001656a0(unsigned int);
+extern int padButtonRepeat(unsigned int);
+extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: memAlloc. */
-/* Supplied declaration required: FUN_001800b8. */
+/* Supplied declaration required: asdTextureRelease. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_00221f20. */
-/* Supplied declaration required: FUN_00222104. */
+/* Supplied declaration required: handleBlockRefDrop. */
 /* Supplied declaration required: FUN_002b3fd8. */
 /* Supplied declaration required: FUN_002cf28c. */
 /* Supplied declaration required: FUN_0037a7f4. */
@@ -66,8 +66,8 @@ unsigned long long FUN_00381874(unsigned int *param_1)
   }
   else if (param_1[0xb] != 0) {
     if (param_1[2] == 0) {
-      temp_v4 = FUN_00164af0(5);
-      if ((temp_v4 != 0) || (temp_v4 = FUN_00164af0(0x10), temp_v4 != 0)) {
+      temp_v4 = padButtonRepeat(5);
+      if ((temp_v4 != 0) || (temp_v4 = padButtonRepeat(0x10), temp_v4 != 0)) {
         temp_v4 = *(int *)(param_1[0xc] + 0x3c);
         if (temp_v4 != 0) {
           temp_v1 = param_1[6];
@@ -87,8 +87,8 @@ unsigned long long FUN_00381874(unsigned int *param_1)
         }
       }
       else {
-        temp_v4 = FUN_00164af0(6);
-        if ((temp_v4 != 0) || (temp_v4 = FUN_00164af0(0x1d), temp_v4 != 0)) {
+        temp_v4 = padButtonRepeat(6);
+        if ((temp_v4 != 0) || (temp_v4 = padButtonRepeat(0x1d), temp_v4 != 0)) {
           if (*(int *)(param_1[0xc] + 0x40) != 0) {
             temp_v4 = param_1[6];
             param_1[0xc] = *(int *)(param_1[0xc] + 0x40);
@@ -101,8 +101,8 @@ unsigned long long FUN_00381874(unsigned int *param_1)
           }
         }
         else {
-          temp_v4 = FUN_00164af0(8);
-          if ((temp_v4 != 0) || (temp_v4 = FUN_00164af0(0x1c), temp_v4 != 0)) {
+          temp_v4 = padButtonRepeat(8);
+          if ((temp_v4 != 0) || (temp_v4 = padButtonRepeat(0x1c), temp_v4 != 0)) {
             temp_v4 = 0;
             do {
               temp_v1 = *(int *)(param_1[0xc] + 0x3c);
@@ -127,8 +127,8 @@ unsigned long long FUN_00381874(unsigned int *param_1)
             } while (temp_v4 < 0x12);
           }
           else {
-            temp_v4 = FUN_00164af0(7);
-            if ((temp_v4 != 0) || (temp_v4 = FUN_00164af0(0x18), temp_v4 != 0)) {
+            temp_v4 = padButtonRepeat(7);
+            if ((temp_v4 != 0) || (temp_v4 = padButtonRepeat(0x18), temp_v4 != 0)) {
               temp_v4 = 0;
               do {
                 if (*(int *)(param_1[0xc] + 0x40) != 0) {
@@ -145,23 +145,23 @@ unsigned long long FUN_00381874(unsigned int *param_1)
               } while (temp_v4 < 0x12);
             }
             else {
-              temp_v4 = FUN_001656a0(1);
-              if ((temp_v4 != 0) || (temp_v4 = FUN_001656a0(0x16), temp_v4 != 0)) {
+              temp_v4 = padButtonIsPressed(1);
+              if ((temp_v4 != 0) || (temp_v4 = padButtonIsPressed(0x16), temp_v4 != 0)) {
                 param_1[2] = 2;
               }
               else {
-                temp_v4 = FUN_001656a0(0);
-                if ((temp_v4 != 0) || (temp_v4 = FUN_001656a0(0x14), temp_v4 != 0)) {
+                temp_v4 = padButtonIsPressed(0);
+                if ((temp_v4 != 0) || (temp_v4 = padButtonIsPressed(0x14), temp_v4 != 0)) {
                   param_1[2] = 1;
                 }
                 else {
                   if (param_1[0xd] != param_1[0xc]) {
                     if (param_1[0xe] != 0) {
-                      FUN_001800b8();
+                      asdTextureRelease();
                       param_1[0xe] = 0;
                     }
                     if (param_1[0x10] != 0) {
-                      FUN_00222104();
+                      handleBlockRefDrop();
                       param_1[0x10] = 0;
                     }
                     piVar2 = (int *)param_1[0xc];
@@ -196,12 +196,12 @@ unsigned long long FUN_00381874(unsigned int *param_1)
                           }
                           puVar4 = temp_v6;
                           if (param_1[0x10] != 0) {
-                            FUN_00222104();
+                            handleBlockRefDrop();
                             param_1[0x10] = 0;
                           }
                           FUN_001642e4(puVar4,0,1,0x80);
                           if (param_1[0x10] != 0) {
-                            FUN_00222104();
+                            handleBlockRefDrop();
                             param_1[0x10] = 0;
                           }
                           puVar5 = puVar4;
@@ -217,7 +217,7 @@ unsigned long long FUN_00381874(unsigned int *param_1)
                       temp_v4 = piVar2[2];
                       if (temp_v4 != 0) {
                         if ((param_1[0xe] != 0) && (*(short *)(param_1 + 0x11) == 1)) {
-                          FUN_001800b8();
+                          asdTextureRelease();
                           param_1[0xe] = 0;
                         }
                         temp_v0 = FUN_0037a7f4(temp_v4);
@@ -234,12 +234,12 @@ unsigned long long FUN_00381874(unsigned int *param_1)
                         }
                         puVar4 = temp_v6;
                         if ((param_1[0xe] != 0) && (*(short *)(param_1 + 0x11) == 1)) {
-                          FUN_001800b8();
+                          asdTextureRelease();
                           param_1[0xe] = 0;
                         }
                         FUN_001642e4(puVar4,0,1,0x80);
                         if ((param_1[0xe] != 0) && (*(short *)(param_1 + 0x11) == 1)) {
-                          FUN_001800b8();
+                          asdTextureRelease();
                           param_1[0xe] = 0;
                         }
                         temp_v0 = FUN_0037a7f4(puVar4);
@@ -274,8 +274,8 @@ unsigned long long FUN_00381874(unsigned int *param_1)
     }
   }
   else {
-    temp_v4 = FUN_001656a0(1);
-    if ((temp_v4 != 0) || (temp_v4 = FUN_001656a0(0x16), temp_v4 != 0)) {
+    temp_v4 = padButtonIsPressed(1);
+    if ((temp_v4 != 0) || (temp_v4 = padButtonIsPressed(0x16), temp_v4 != 0)) {
       param_1[2] = 2;
     }
   }

@@ -45,9 +45,9 @@ extern int lmapSceneGetUnk0(void);
 /* Supplied declaration required: FUN_00282390. */
 /* Supplied declaration required: FUN_0028250c. */
 /* Supplied declaration required: FUN_00287b0c. */
-extern int FUN_002bfde4(unsigned int);
+extern int padIsButtonPressed(unsigned int);
 extern int FUN_002c15fc(unsigned int);
-extern int FUN_002c2950(void);
+extern int gameGetMapBlock(void);
 
 
 void FUN_002d1e4c(void)
@@ -90,7 +90,7 @@ void FUN_002d1e4c(void)
   temp_v9 = 0;
   temp_v11 = 0;
   temp_v0 = 0;
-  temp_v1 = FUN_002c2950();
+  temp_v1 = gameGetMapBlock();
   temp_v2 = DAT_004474f4;
   temp_v20 = 0.0f;
   temp_v18 = 1.0f;
@@ -126,9 +126,9 @@ void FUN_002d1e4c(void)
           temp_v7 = temp_v4 != 0;
           temp_v4 = FUN_002c15fc(7);
           temp_v8 = temp_v4 != 0;
-          temp_v4 = FUN_002bfde4(4);
+          temp_v4 = padIsButtonPressed(4);
           temp_v9 = temp_v4 != 0;
-          temp_v4 = FUN_002bfde4(3);
+          temp_v4 = padIsButtonPressed(3);
           if (temp_v4 != 0) {
             temp_v0 = 1;
           }
@@ -141,8 +141,8 @@ void FUN_002d1e4c(void)
         if (((temp_v10 && temp_v2 == 0) && (temp_v4 = lmapSceneGetUnk0(), temp_v4 == 1)) &&
            ((temp_v4 = FUN_002762e0(), temp_v4 != 0 ||
             (((temp_v4 = FUN_002c15fc(8), temp_v4 != 0 && (temp_v4 = FUN_002c15fc(7), temp_v4 != 0)) &&
-             ((temp_v4 = FUN_002bfde4(8), temp_v4 == 0 &&
-              ((temp_v4 = FUN_002bfde4(7), temp_v4 == 0 && (*(char *)(DAT_004474f4 + 0xb1) == '\0'))))))
+             ((temp_v4 = padIsButtonPressed(8), temp_v4 == 0 &&
+              ((temp_v4 = padIsButtonPressed(7), temp_v4 == 0 && (*(char *)(DAT_004474f4 + 0xb1) == '\0'))))))
             )))) {
           temp_v7 = 0;
           temp_v8 = 0;

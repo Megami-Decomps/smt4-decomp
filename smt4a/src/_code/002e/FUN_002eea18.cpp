@@ -5,14 +5,14 @@
 extern "C" {
 
 int FUN_001107fc(unsigned int, int, int);
-int FUN_002f9f12(void);
+int operatorDeleteArray2(void);
 
 extern unsigned char LAB_002eea58; /* 0x2eea58 */
 
 extern int FUN_001107e4(unsigned int);
 /* Supplied declaration required: FUN_001107fc. */
 extern int FUN_002e784e(int, unsigned char *, unsigned int);
-/* Supplied declaration required: FUN_002f9f12. */
+/* Supplied declaration required: operatorDeleteArray2. */
 
 
 void FUN_002eea18(int *param_1,unsigned int param_2,int param_3)
@@ -22,7 +22,7 @@ void FUN_002eea18(int *param_1,unsigned int param_2,int param_3)
   int temp_v0;
   
   if (*param_1 != 0) {
-    FUN_002f9f12();
+    operatorDeleteArray2();
   }
   temp_v0 = FUN_001107e4(param_2);
   param_1[1] = temp_v0;

@@ -9,12 +9,12 @@ int FUN_002bb150(...);
 int FUN_002bb5a4(...);
 int asdMemoryAllocAligned(...);
 int asdOperatorNew(...);
-int FUN_002c3424(...);
+int nn_os_LightEvent_Wait(...);
 int FUN_002c40f8(...);
 int asdMemFree(...);
 int FUN_002c5254(...);
 int FUN_002c526c(...);
-int FUN_002c52f8(...);
+int asdFatalError(...);
 int FUN_002c618c(...);
 int builtin_strncpy(...);
 
@@ -42,12 +42,12 @@ extern int FUN_002b90c8(int *, unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_002bb5a4. */
 /* Supplied declaration required: asdMemoryAllocAligned. */
 /* Supplied declaration required: asdOperatorNew. */
-/* Supplied declaration required: FUN_002c3424. */
+/* Supplied declaration required: nn_os_LightEvent_Wait. */
 /* Supplied declaration required: FUN_002c40f8. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002c5254. */
 /* Supplied declaration required: FUN_002c526c. */
-/* Supplied declaration required: FUN_002c52f8. */
+/* Supplied declaration required: asdFatalError. */
 /* Supplied declaration required: FUN_002c618c. */
 extern void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(unsigned int);
 extern void nn_os_CriticalSection_Enter(unsigned int);
@@ -78,7 +78,7 @@ void asdFileThreadMain(void)
   unsigned int temp_v7;
   
   do {
-    FUN_002c3424(&g_asdFileEvent);
+    nn_os_LightEvent_Wait(&g_asdFileEvent);
     if (g_asdFile != '\0') {
       return;
     }
@@ -233,7 +233,7 @@ void asdFileThreadMain(void)
           temp_v1 = piVar8[0x4b];
           if ((*(unsigned int *)(temp_v1 + 4) & 0xfffffffe) != 0) {
             if ((*(unsigned int *)(temp_v1 + 4) & 1) != 0) {
-              FUN_002c52f8();
+              asdFatalError();
             }
             nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(*(unsigned int *)(temp_v1 + 4) & 0xfffffffe);
             *(unsigned int *)(temp_v1 + 4) = 0;

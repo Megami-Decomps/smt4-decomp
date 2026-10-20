@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_0011e36a(int, int);
-int FUN_002fbb60(int, unsigned int);
-int FUN_002fbb68(int, int *);
+int bufferAssignByteAlias(int, unsigned int);
+int strHolderAssignU32Alias(int, int *);
 int FUN_002fbb70(int, int);
 int stringSetValue1(int, int);
 
@@ -20,8 +20,8 @@ typedef struct {
 
 /* Supplied declaration required: FUN_0011e36a. */
 extern unsigned int byteRefMin(unsigned char *, unsigned char *);
-/* Supplied declaration required: FUN_002fbb60. */
-/* Supplied declaration required: FUN_002fbb68. */
+/* Supplied declaration required: bufferAssignByteAlias. */
+/* Supplied declaration required: strHolderAssignU32Alias. */
 /* Supplied declaration required: FUN_002fbb70. */
 /* Supplied declaration required: stringSetValue1. */
 
@@ -45,10 +45,10 @@ void FUN_001207c8(int param_1,int param_2)
     temp_v7[0] = 0;
     temp_v6[0] = *(unsigned char *)(param_2 + 4);
     temp_v1 = byteRefMin(temp_v6,temp_v7);
-    FUN_002fbb60(param_1,temp_v1);
+    bufferAssignByteAlias(param_1,temp_v1);
     temp_v3 = *(int *)(*(int *)(param_1 + 8) + 0x10);
     temp_v4 = 0;
-    FUN_002fbb68(param_1,&temp_v4);
+    strHolderAssignU32Alias(param_1,&temp_v4);
   }
   stringSetValue1(param_1,param_2 + 5);
   FUN_0011e36a(param_1,param_2 + 8);
@@ -56,7 +56,7 @@ void FUN_001207c8(int param_1,int param_2)
     temp_v2 = *(int *)(*(int *)(param_1 + 8) + 0x10);
     FUN_002fbb70(param_1,temp_v3);
     temp_v5 = (temp_v2 - temp_v3) - 4;
-    FUN_002fbb68(param_1,&temp_v5);
+    strHolderAssignU32Alias(param_1,&temp_v5);
     FUN_002fbb70(param_1,temp_v2);
   }
   return;

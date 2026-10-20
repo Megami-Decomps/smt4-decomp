@@ -6,7 +6,7 @@ extern "C" {
 
 int bitsetSetBit(unsigned short *, int);
 int FUN_0029c6b0(unsigned short *);
-int FUN_002b9024(void);
+int devilGetRecord(void);
 int memClear(unsigned short *, int);
 
 typedef struct fn_0029dc74_arg0 fn_0029dc74_arg0;
@@ -37,7 +37,7 @@ struct fn_0029dc74_arg0 {
 
 /* Supplied declaration required: bitsetSetBit. */
 /* Supplied declaration required: FUN_0029c6b0. */
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: memClear. */
 
 
@@ -48,7 +48,7 @@ void FUN_0029dc74(fn_0029dc74_arg0 *param_1,unsigned short *param_2)
   fn_0029dc74_arg0 *pfVar1;
   
   pfVar1 = param_1;
-  FUN_002b9024();
+  devilGetRecord();
   memClear(param_2,0x604);
   param_2[0x23] = (short)(int)param_1;
   *(unsigned char *)(param_2 + 0x24) = pfVar1->field_0x3;

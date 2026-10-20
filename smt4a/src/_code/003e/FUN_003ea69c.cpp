@@ -5,7 +5,7 @@
 extern "C" {
 
 int sysMemClear(unsigned char *, int);
-int FUN_002e6dd4(unsigned char *, int);
+int rt_memclr(unsigned char *, int);
 int clearTwoWords(unsigned char *);
 
 typedef struct fn_003ea69c_arg2 fn_003ea69c_arg2;
@@ -32,7 +32,7 @@ struct fn_003ea69c_arg2 {
 };
 
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_002e6dd4. */
+/* Supplied declaration required: rt_memclr. */
 extern unsigned short playerPackedEntryLow10(unsigned int);
 extern int playerAlignmentClass(void);
 extern short playerPackedEntryHigh(unsigned int);
@@ -92,7 +92,7 @@ void FUN_003ea69c(unsigned int param_1,unsigned char *param_2,fn_003ea69c_arg2 *
   clearTwoWords(param_2 + 0x1be);
   clearTwoWords(param_2 + 0x1c6);
   clearTwoWords(param_2 + 0x1ce);
-  FUN_002e6dd4(param_2 + 0x1d6,0x50);
+  rt_memclr(param_2 + 0x1d6,0x50);
   temp_v9 = 0;
   do {
     temp_v3 = playerPackedEntryLow10(temp_v9 & 0xff);

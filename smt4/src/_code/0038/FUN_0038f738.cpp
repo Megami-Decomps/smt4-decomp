@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0023346c(...);
 int FUN_00295eb0(int, int, int);
-int FUN_002af5c0(int, int);
+int uiSpriteSetImageKeyframe(int, int);
 int FUN_002ba78c(int);
 int FUN_002bd81c(...);
 int FUN_002bd82c(...);
@@ -31,7 +31,7 @@ extern int g_aocMain; /* 0x432fc8 */
 
 /* Supplied declaration required: FUN_0023346c. */
 /* Supplied declaration required: FUN_00295eb0. */
-/* Supplied declaration required: FUN_002af5c0. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_002ba78c. */
 /* Supplied declaration required: FUN_002bd81c. */
 /* Supplied declaration required: FUN_002bd82c. */
@@ -53,7 +53,7 @@ void FUN_0038f738(int param_1)
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(param_1 + 0x35c);
   FUN_002c312c(param_1 + 0x35c,0,0,&DAT_003ff12c,0xc,0,0,0,0,0,0);
   FUN_002bd954(param_1 + 0x109c,0x1d,2000,param_1 + 0x35c,0xb);
-  FUN_002af5c0(param_1 + 0x109c,0);
+  uiSpriteSetImageKeyframe(param_1 + 0x109c,0);
   temp_v3[0x14] = '\0';
   temp_v3[0x15] = '\x01';
   temp_v3[0x16] = '\x01';
@@ -82,7 +82,7 @@ void FUN_0038f738(int param_1)
   do {
     temp_v2 = param_1 + temp_v1 * 0x8c;
     FUN_002bd954(temp_v2 + 0x37c,0x1d,temp_v3[temp_v1] + 0x7d1,param_1 + 0x35c,0xb);
-    FUN_002af5c0(temp_v2 + 0x37c,0);
+    uiSpriteSetImageKeyframe(temp_v2 + 0x37c,0);
     FUN_00295eb0(temp_v2 + 0x37c,0x1d,temp_v1 + 0x7d5);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 0x18);

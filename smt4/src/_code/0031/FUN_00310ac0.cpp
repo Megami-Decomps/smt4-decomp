@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002c0894(void);
+int asdTextureRelease(void);
 
-/* Supplied declaration required: FUN_002c0894. */
+/* Supplied declaration required: asdTextureRelease. */
 
 
 void FUN_00310ac0(void)
@@ -27,7 +27,7 @@ void FUN_00310ac0(void)
       temp_v0 = *piVar3;
     }
     if (temp_v2 && temp_v0 != 0) {
-      FUN_002c0894();
+      asdTextureRelease();
       *piVar3 = 0;
     }
     temp_v1 = temp_v1 + 1;

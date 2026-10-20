@@ -4,7 +4,7 @@ extern "C" {
 
 int scrSetResult(int result);
 int btlGetMainState(void);
-extern u8 *FUN_002499b4(void);
+extern u8 *btlMainFindActiveEntry(void);
 extern int scrGetArg(void);
 
 u32 FUN_0030b240(void)
@@ -13,7 +13,7 @@ u32 FUN_0030b240(void)
     u8 *unit;
 
     btlGetMainState();
-    unit = FUN_002499b4();
+    unit = btlMainFindActiveEntry();
     if (unit != NULL) {
         int limit = *(u16 *)(unit + 0x1cc);
 

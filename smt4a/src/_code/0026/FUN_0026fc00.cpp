@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_00184758(int, int, unsigned int);
-int FUN_00184c00(int, int, unsigned int);
+int uiSpriteSetKeyframe(int, int, unsigned int);
+int uiSpriteSetImageKeyframe(int, int, unsigned int);
 
-extern int DAT_0057f108; /* 0x57f108 */
+extern int g_camp; /* 0x57f108 */
 
-/* Supplied declaration required: FUN_00184758. */
-/* Supplied declaration required: FUN_00184c00. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 
 
 void FUN_0026fc00(int param_1,int param_2,short param_3,unsigned int param_4)
@@ -22,7 +22,7 @@ void FUN_0026fc00(int param_1,int param_2,short param_3,unsigned int param_4)
   short temp_v2;
   int temp_v3;
   
-  temp_v0 = DAT_0057f108;
+  temp_v0 = g_camp;
   temp_v2 = (short)param_2;
   if (param_2 == 1) {
     temp_v2 = 9;
@@ -47,26 +47,26 @@ void FUN_0026fc00(int param_1,int param_2,short param_3,unsigned int param_4)
       param_3 = 0x13;
     }
   }
-  temp_v1 = DAT_0057f108 + 0x658;
+  temp_v1 = g_camp + 0x658;
   if (param_1 != 2) {
     if (param_1 == 1) {
-      FUN_00184758(temp_v1,(int)temp_v2,param_4);
+      uiSpriteSetKeyframe(temp_v1,(int)temp_v2,param_4);
       temp_v3 = temp_v1;
-      FUN_00184c00(temp_v3,(int)param_3,param_4);
+      uiSpriteSetImageKeyframe(temp_v3,(int)param_3,param_4);
     }
   }
   else {
-    FUN_00184758(temp_v1,(int)temp_v2,param_4);
+    uiSpriteSetKeyframe(temp_v1,(int)temp_v2,param_4);
     temp_v3 = temp_v0 + 0x888;
-    FUN_00184758(temp_v3,(int)temp_v2,param_4);
-    FUN_00184c00(temp_v1,(int)param_3,param_4);
-    FUN_00184c00(temp_v3,(int)param_3,param_4);
+    uiSpriteSetKeyframe(temp_v3,(int)temp_v2,param_4);
+    uiSpriteSetImageKeyframe(temp_v1,(int)param_3,param_4);
+    uiSpriteSetImageKeyframe(temp_v3,(int)param_3,param_4);
   }
   temp_v1 = 0;
   do {
     temp_v3 = temp_v0 + temp_v1 * 0x8c + 0x914;
-    FUN_00184758(temp_v3,(int)temp_v2,param_4);
-    FUN_00184c00(temp_v3,(int)param_3,param_4);
+    uiSpriteSetKeyframe(temp_v3,(int)temp_v2,param_4);
+    uiSpriteSetImageKeyframe(temp_v3,(int)param_3,param_4);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 8);
   return;

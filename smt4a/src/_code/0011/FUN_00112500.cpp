@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_002e9538(int, unsigned char [6]);
-int FUN_002e995c(unsigned char [6]);
+int onlineSockAddrCopy(int, unsigned char [6]);
+int onlineSockAddrConstruct(unsigned char [6]);
 int FUN_002ea20c(unsigned char [8], int);
 int FUN_002ea3d0(int, unsigned int);
 int FUN_002eb60c(void);
@@ -22,14 +22,14 @@ extern unsigned char LAB_00112680; /* 0x112680 */
 extern unsigned char LAB_00112a0d; /* 0x112a0d */
 extern unsigned int DAT_00594eb8; /* 0x594eb8 */
 
-/* Supplied declaration required: FUN_002e9538. */
-/* Supplied declaration required: FUN_002e995c. */
+/* Supplied declaration required: onlineSockAddrCopy. */
+/* Supplied declaration required: onlineSockAddrConstruct. */
 /* Supplied declaration required: FUN_002ea20c. */
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned char *, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
 extern unsigned int FUN_002eab1c(unsigned char *, int);
 /* Supplied declaration required: FUN_002eb60c. */
-extern int FUN_002f34ac(int, int);
+extern int onlineSockAddrEquals(int, int);
 
 
 unsigned char * FUN_00112500(int param_1,int *param_2)
@@ -54,7 +54,7 @@ unsigned char * FUN_00112500(int param_1,int *param_2)
   
   puVar3 = (unsigned char *)*param_2;
   if ((unsigned char *)*param_2 == *(unsigned char **)(param_1 + 0x2d0)) {
-    FUN_002e995c(temp_v5);
+    onlineSockAddrConstruct(temp_v5);
     temp_v2 = param_2[2];
     temp_v7 = (temp_v2 << 0x18) | (((temp_v2 >> 8) & 0xff) << 0x10) | (((temp_v2 >> 0x10) & 0xff) << 8) |
                (temp_v2 >> 0x18);
@@ -65,7 +65,7 @@ unsigned char * FUN_00112500(int param_1,int *param_2)
     FUN_002ea20c(temp_v11,0x11254e);
     temp_v0 = FUN_002eab1c(temp_v11,temp_v4 + 0x2e8);
     *(unsigned int *)(param_1 + 0x2cc) = temp_v0;
-    FUN_002e9538(temp_v9,temp_v5);
+    onlineSockAddrCopy(temp_v9,temp_v5);
     temp_v10 = temp_v4 + 0x138;
     if ((unsigned short)((*(unsigned short *)(temp_v9 + 6) << 8) | (*(unsigned short *)(temp_v9 + 6) >> 8)) ==
         (unsigned short)((*(unsigned short *)(temp_v4 + 0x13e) << 8) | (*(unsigned short *)(temp_v4 + 0x13e) >> 8))) {
@@ -77,7 +77,7 @@ unsigned char * FUN_00112500(int param_1,int *param_2)
     else {
       *(unsigned short *)(param_1 + 0x326) = (temp_v6 << 8) | (temp_v6 >> 8);
     }
-    temp_v1 = FUN_002f34ac(temp_v9,temp_v10);
+    temp_v1 = onlineSockAddrEquals(temp_v9,temp_v10);
     temp_v0 = DAT_00594eb8;
     if (temp_v1 != 0) {
       *(unsigned int *)(param_1 + 0x2d4) = DAT_00594eb8;

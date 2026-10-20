@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern OverlayRef DAT_0057f110;
+extern OverlayRef g_campCec;
 
 StatusScene *overlayGetStatusScene(void)
 {
-    return &DAT_0057f110.instance->scene;
+    return &g_campCec.instance->scene;
 }
 
 } /* extern "C" */

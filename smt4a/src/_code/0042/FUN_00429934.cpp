@@ -29,7 +29,7 @@ typedef struct {
 
 extern unsigned char LAB_00429a08; /* 0x429a08 */
 
-extern int FUN_0019a37c(unsigned int, unsigned char *, unsigned int);
+extern int libc_strncmp(unsigned int, unsigned char *, unsigned int);
 /* Supplied declaration required: rt_memcpy. */
 
 
@@ -79,7 +79,7 @@ void FUN_00429934(unsigned int param_1,int param_2)
   temp_v2 = piVar2[1];
   if (temp_v2 != 0) {
     do {
-      temp_v0 = FUN_0019a37c(*(unsigned int *)(*piVar2 + temp_v1 * 8),&LAB_00429a08,0x40);
+      temp_v0 = libc_strncmp(*(unsigned int *)(*piVar2 + temp_v1 * 8),&LAB_00429a08,0x40);
       if (temp_v0 == 0) {
         temp_v0 = *(int *)(*piVar2 + temp_v1 * 8 + 4);
         if (temp_v0 != 0) {

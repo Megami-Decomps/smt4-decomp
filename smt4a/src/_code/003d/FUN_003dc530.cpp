@@ -14,7 +14,7 @@ typedef struct {
 } void_stack;
 
 extern unsigned char LAB_003dc600; /* 0x3dc600 */
-extern int DAT_0057f28c; /* 0x57f28c */
+extern int g_uiQuest; /* 0x57f28c */
 
 extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: FUN_00151408. */
@@ -30,7 +30,7 @@ void FUN_003dc530(void)
   unsigned char *puVar2;
   unsigned int temp_v1;
   
-  temp_v0 = DAT_0057f28c;
+  temp_v0 = g_uiQuest;
   puVar2 = &LAB_003dc600;
   FUN_0020214c();
   *(unsigned char **)(temp_v0 + 0x930) = puVar2;

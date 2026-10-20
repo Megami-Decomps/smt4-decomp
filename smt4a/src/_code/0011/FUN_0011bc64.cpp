@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_00133ab8(int, int);
 int rt_malloc(...);
-int FUN_002e9300(unsigned char [12], unsigned char *);
-int FUN_002e9318(unsigned char [12]);
+int onlineStringConstruct(unsigned char [12], unsigned char *);
+int onlineStringDestroy(unsigned char [12]);
 int FUN_002f5020(int, unsigned char *, int, int);
 int FUN_002f5928(...);
 int FUN_002f9e68(int, int);
@@ -35,9 +35,9 @@ extern int FUN_0012272c(int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00133ab8. */
 extern int *wordRefMax(int *, unsigned int *);
 /* Supplied declaration required: rt_malloc. */
-extern int FUN_002e760a(unsigned int);
-/* Supplied declaration required: FUN_002e9300. */
-/* Supplied declaration required: FUN_002e9318. */
+extern int operatorNew(unsigned int);
+/* Supplied declaration required: onlineStringConstruct. */
+/* Supplied declaration required: onlineStringDestroy. */
 /* Supplied declaration required: FUN_002f5020. */
 /* Supplied declaration required: FUN_002f5928. */
 /* Supplied declaration required: FUN_002f9e68. */
@@ -124,7 +124,7 @@ int FUN_0011bc64(unsigned int *param_1)
   do {
     temp_v5 = temp_v2 * 4 + temp_v0;
     *(unsigned int *)(temp_v5 + 0xa0) = 0;
-    temp_v4 = FUN_002e760a(0x30);
+    temp_v4 = operatorNew(0x30);
     if (temp_v4 != 0) {
       temp_v3 = FUN_002f5928(temp_v4,0x10000);
     }
@@ -139,13 +139,13 @@ int FUN_0011bc64(unsigned int *param_1)
     *(unsigned short *)(temp_v4 + 0x54) = 0;
     *(unsigned int *)(temp_v4 + 0x58) = 0;
   } while (temp_v2 < 2);
-  temp_v2 = FUN_002e760a(0x34);
+  temp_v2 = operatorNew(0x34);
   temp_v3 = DAT_00594a50;
   if (temp_v2 != 0) {
-    FUN_002e9300(temp_v9,&LAB_0011be18);
+    onlineStringConstruct(temp_v9,&LAB_0011be18);
     temp_v3 = FUN_00311700(temp_v2,temp_v9,temp_v3);
     *(unsigned int *)(temp_v1 + 0x30) = temp_v3;
-    FUN_002e9318(temp_v9);
+    onlineStringDestroy(temp_v9);
   }
   else {
     *(unsigned int *)(temp_v1 + 0x30) = 0;

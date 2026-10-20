@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001505ac(int, unsigned char *, int, unsigned char *, int, unsigned char *, int, int, int, unsigned char *, int);
-int FUN_00237210(void);
+int asdMemFreeSlot(void);
 int FUN_002f5020(int, unsigned char *, int, int);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(int);
 
@@ -27,7 +27,7 @@ extern unsigned char DAT_00529a6c; /* 0x529a6c */
 extern unsigned char DAT_00529ac0; /* 0x529ac0 */
 
 /* Supplied declaration required: FUN_001505ac. */
-/* Supplied declaration required: FUN_00237210. */
+/* Supplied declaration required: asdMemFreeSlot. */
 /* Supplied declaration required: FUN_002f5020. */
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
 
@@ -66,7 +66,7 @@ int FUN_00416b70(int param_1)
     puVar4[3] = temp_v3;
     puVar4[2] = temp_v3;
     if (puVar4[0x2a] != 0) {
-      FUN_00237210();
+      asdMemFreeSlot();
       puVar4[0x2a] = 0;
     }
     temp_v0 = temp_v0 + 1;

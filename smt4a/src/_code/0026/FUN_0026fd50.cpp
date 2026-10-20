@@ -7,8 +7,8 @@ extern "C" {
 int qsort(unsigned short *, int, int, unsigned char *);
 int FUN_00180118(unsigned int);
 int FUN_00184310(void);
-int FUN_001a9110(unsigned short *, unsigned short *);
-int FUN_002e342c(unsigned short *, unsigned int);
+int wordPairCopy(unsigned short *, unsigned short *);
+int libc_strcpy(unsigned short *, unsigned int);
 int sysMemClear(unsigned short *, int, int, unsigned int *, unsigned int *);
 int FUN_004bd294(int, unsigned int);
 int rt_memcpy_w(unsigned short *, int, int);
@@ -19,14 +19,14 @@ typedef struct {
 } param_4_stack;
 
 extern unsigned char LAB_003b8e98; /* 0x3b8e98 */
-extern unsigned char DAT_00588fd0; /* 0x588fd0 */
+extern unsigned char g_gameGlobals; /* 0x588fd0 */
 
 /* Supplied declaration required: qsort. */
 /* Supplied declaration required: FUN_00180118. */
 /* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: FUN_001a9110. */
+/* Supplied declaration required: wordPairCopy. */
 extern unsigned int FUN_002b4dcc(int);
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: sysMemClear. */
 extern unsigned int FUN_003a6f84(int);
 extern int getUnlockedSlotCount(int);
@@ -57,7 +57,7 @@ void FUN_0026fd50(unsigned short *param_1,int param_2,int param_3,unsigned int *
   unsigned int temp_v14;
   unsigned short *puVar16;
   
-  temp_v1 = (*(int *)((unsigned char *)&DAT_00588fd0 + 0x4));
+  temp_v1 = (*(int *)((unsigned char *)&g_gameGlobals + 0x4));
   sysMemClear(param_1,0x640,param_3,param_4,param_4);
   *param_1 = *(unsigned short *)(param_2 + 0x62);
   param_1[1] = *(unsigned short *)(param_2 + 100);
@@ -101,7 +101,7 @@ void FUN_0026fd50(unsigned short *param_1,int param_2,int param_3,unsigned int *
   }
   temp_v4 = (unsigned int)*(unsigned short *)(param_2 + 0x62);
   FUN_00180118(temp_v4);
-  FUN_002e342c(param_1 + 0x2d2,temp_v4);
+  libc_strcpy(param_1 + 0x2d2,temp_v4);
   if ((short)param_1[0x11] >= 1000) {
     param_1[0x11] = 999;
   }
@@ -225,7 +225,7 @@ void FUN_0026fd50(unsigned short *param_1,int param_2,int param_3,unsigned int *
     *(unsigned char *)(param_1 + 0x317) = *(unsigned char *)(param_4 + 5);
   }
   else {
-    FUN_001a9110(param_1 + 0x30d,param_1 + 0x1d);
+    wordPairCopy(param_1 + 0x30d,param_1 + 0x1d);
   }
   temp_v4 = (unsigned int)*(unsigned short *)(param_2 + 0x62);
   FUN_00184310();

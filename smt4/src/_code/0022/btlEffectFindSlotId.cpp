@@ -2,12 +2,12 @@
 
 extern "C" {
 
-s32 FUN_002b4414(BtlEffectSlot *slot, u32 a, u32 b);
-u32 FUN_002c30c4(u32 value);
+s32 libc_strncmp(BtlEffectSlot *slot, u32 a, u32 b);
+u32 libc_strlen(u32 value);
 
 extern BtlEffectGlobals g_btlEffect;
 
-/* The id of the first slot FUN_002b4414 accepts, or -1. */
+/* The id of the first slot libc_strncmp accepts, or -1. */
 u32 btlEffectFindSlotId(BtlEffectOwner *owner)
 {
     BtlEffectSlot *slot;
@@ -20,8 +20,8 @@ u32 btlEffectFindSlotId(BtlEffectOwner *owner)
             offset = i * BTL_EFFECT_SLOT_SIZE + BTL_EFFECT_SLOT_TABLE;
             slot = (BtlEffectSlot *)(owner->slots + offset);
             if (slot != NULL) {
-                value = FUN_002c30c4(g_btlEffect.unk0C);
-                if (FUN_002b4414(slot, g_btlEffect.unk0C, value) == 0) {
+                value = libc_strlen(g_btlEffect.unk0C);
+                if (libc_strncmp(slot, g_btlEffect.unk0C, value) == 0) {
                     return slot->id;
                 }
             }

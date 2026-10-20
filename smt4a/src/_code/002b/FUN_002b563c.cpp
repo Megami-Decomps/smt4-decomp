@@ -14,7 +14,7 @@ typedef struct {
 extern int DAT_005f0c84; /* 0x5f0c84 */
 extern signed char DAT_005f0cf9; /* 0x5f0cf9 */
 
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0036d578. */
 
 
@@ -27,7 +27,7 @@ unsigned int FUN_002b563c(unsigned int *param_1)
   unsigned int uStack_24;
   unsigned int uStack_20;
   
-  temp_v0 = FUN_0018719c(0x4d0);
+  temp_v0 = gameFlagIsSet(0x4d0);
   if (((temp_v0 != 0) && (DAT_005f0c84 == 1)) && (DAT_005f0cf9 == '\0')) {
     FUN_0036d578(&temp_v1);
     *param_1 = temp_v1;

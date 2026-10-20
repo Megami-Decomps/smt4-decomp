@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_00288728(void);
+int mdlPartsRelease(void);
 
 struct Script;
 typedef struct ScriptVtbl {
@@ -22,7 +22,7 @@ typedef struct Obj {
 void FUN_00338754(Obj *obj)
 {
     if (obj->script != NULL) {
-        FUN_00288728();
+        mdlPartsRelease();
         if (obj->script != NULL) {
             obj->script->vtbl->destroy(obj->script);
         }

@@ -16,7 +16,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-extern unsigned int FUN_002ea714(void);
+extern unsigned int onlineGetActiveLock(void);
 /* Supplied declaration required: FUN_002f3df8. */
 extern int wordRefsDiffer_002f3e5a(int *, unsigned int *);
 
@@ -31,7 +31,7 @@ unsigned int FUN_0010ae04(int param_1)
   int temp_v3;
   unsigned int temp_v4 [2];
   
-  temp_v0 = FUN_002ea714();
+  temp_v0 = onlineGetActiveLock();
   FUN_002e6e34(temp_v2,temp_v0);
   temp_v0 = 0;
   if ((int)(short)(*(short *)(param_1 + 0x30) - *(short *)(param_1 + 0x38)) <

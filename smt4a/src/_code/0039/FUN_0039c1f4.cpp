@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_0057f268; /* 0x57f268 */
+extern int g_partyPanel; /* 0x57f268 */
 
 
 unsigned int FUN_0039c1f4(void)
@@ -13,8 +13,8 @@ unsigned int FUN_0039c1f4(void)
   unsigned int temp_v0;
   
   temp_v0 = 0;
-  if (DAT_0057f268 != 0) {
-    if (*(int *)(DAT_0057f268 + 0x1c) == 3) {
+  if (g_partyPanel != 0) {
+    if (*(int *)(g_partyPanel + 0x1c) == 3) {
       temp_v0 = 1;
     }
     else {

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned int FUN_002c30c4(char *);
+extern unsigned int libc_strlen(char *);
 
 
 void nw_snd_SoundArchive_SetExternalFileRoot(int param_1,char *param_2)
@@ -18,7 +18,7 @@ void nw_snd_SoundArchive_SetExternalFileRoot(int param_1,char *param_2)
   unsigned int temp_v2;
   unsigned int temp_v3;
   
-  temp_v0 = FUN_002c30c4(param_2);
+  temp_v0 = libc_strlen(param_2);
   pcVar4 = (char *)(param_1 + 8);
   temp_v2 = 0;
   if ((temp_v0 >= 0xff) || (temp_v0 != 0)) {

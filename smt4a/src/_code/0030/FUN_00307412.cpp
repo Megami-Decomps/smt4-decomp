@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002eeae2(unsigned int, unsigned long long *);
+int strHolderAssignU64(unsigned int, unsigned long long *);
 
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -13,7 +13,7 @@ typedef struct {
 } param_4_stack;
 
 extern unsigned long long FUN_0012444e(unsigned int);
-/* Supplied declaration required: FUN_002eeae2. */
+/* Supplied declaration required: strHolderAssignU64. */
 
 
 void FUN_00307412(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -25,7 +25,7 @@ void FUN_00307412(unsigned int param_1,unsigned int param_2,unsigned int param_3
   (*(unsigned int *)((unsigned char *)&temp_v0 + 0)) = param_3;
   (*(unsigned int *)((unsigned char *)&temp_v0 + 4)) = param_4;
   temp_v0 = FUN_0012444e(param_2);
-  FUN_002eeae2(param_1,&temp_v0);
+  strHolderAssignU64(param_1,&temp_v0);
   return;
 }
 

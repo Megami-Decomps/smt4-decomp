@@ -4,16 +4,16 @@
 
 extern "C" {
 
-int FUN_002b8838(int);
+int buttonHelpSetPreset(int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-extern int padIsButtonDown(unsigned int);
-/* Supplied declaration required: FUN_002b8838. */
-extern int FUN_002c09d0(unsigned int);
+extern int flagBitIsSet(unsigned int);
+/* Supplied declaration required: buttonHelpSetPreset. */
+extern int gameFlagIsSet(unsigned int);
 
 
 void FUN_0022b064(int param_1)
@@ -23,24 +23,24 @@ void FUN_0022b064(int param_1)
   short temp_v0;
   int temp_v1;
   
-  temp_v1 = FUN_002c09d0(0x11);
+  temp_v1 = gameFlagIsSet(0x11);
   if (temp_v1 != 0) {
-    temp_v1 = FUN_002c09d0(0x16);
+    temp_v1 = gameFlagIsSet(0x16);
     if (temp_v1 != 0) {
-      temp_v1 = FUN_002c09d0(0x40c);
+      temp_v1 = gameFlagIsSet(0x40c);
       if (temp_v1 != 0) {
-        temp_v1 = padIsButtonDown(0x76);
+        temp_v1 = flagBitIsSet(0x76);
         temp_v0 = *(short *)(param_1 + 0x3c);
         if (temp_v1 != 0) {
           if (temp_v0 == 4) {
-            FUN_002b8838(0xe8);
+            buttonHelpSetPreset(0xe8);
             return;
           }
           if (temp_v0 != 3) {
-            FUN_002b8838(0x43);
+            buttonHelpSetPreset(0x43);
             return;
           }
-          FUN_002b8838(0xe9);
+          buttonHelpSetPreset(0xe9);
           return;
         }
       }
@@ -49,23 +49,23 @@ void FUN_0022b064(int param_1)
       }
       if (temp_v0 != 4) {
         if (temp_v0 != 3) {
-          FUN_002b8838(0x41);
+          buttonHelpSetPreset(0x41);
           return;
         }
-        FUN_002b8838(0xe9);
+        buttonHelpSetPreset(0xe9);
         return;
       }
     }
     else if (*(short *)(param_1 + 0x3c) != 4) {
-      FUN_002b8838(0xd3);
+      buttonHelpSetPreset(0xd3);
       return;
     }
   }
   else if (*(short *)(param_1 + 0x3c) != 4) {
-    FUN_002b8838(0x40);
+    buttonHelpSetPreset(0x40);
     return;
   }
-  FUN_002b8838(0xe8);
+  buttonHelpSetPreset(0xe8);
   return;
 }
 

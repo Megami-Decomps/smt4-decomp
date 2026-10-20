@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_00282924(int, unsigned int);
+int btlMainFindEntryByListedId(int, unsigned int);
 int scrGetArg(int);
 
-/* Supplied declaration required: FUN_00282924. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 extern int btlGetMainState(void);
 /* Supplied declaration required: scrGetArg. */
 
@@ -25,7 +25,7 @@ unsigned int FUN_003002b4(void)
   temp_v2 = scrGetArg(1);
   temp_v0 = scrGetArg(2);
   temp_v3 = btlGetMainState();
-  FUN_00282924(temp_v3,temp_v1);
+  btlMainFindEntryByListedId(temp_v3,temp_v1);
   if (((temp_v3 != 0) && (-1 < temp_v2)) && (temp_v2 < 9)) {
     temp_v3 = temp_v3 + temp_v2 * 2;
     *(short *)(temp_v3 + 0xae) = *(short *)(temp_v3 + 0xae) + temp_v0;

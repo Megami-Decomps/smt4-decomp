@@ -19,15 +19,15 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } void_stack;
 
-extern int DAT_0057f578; /* 0x57f578 */
+extern int g_placeWin; /* 0x57f578 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00157558. */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164b5c. */
-extern int FUN_001654d8(int);
-extern int FUN_001654e4(int);
+extern int vec2GetXInt(int);
+extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001692ac(unsigned int, unsigned int);
 extern int FUN_001834a4(unsigned int, unsigned int);
@@ -50,11 +50,11 @@ char FUN_003d0110(void)
   unsigned int in_fpscr;
   float temp_v7;
   
-  temp_v0 = DAT_0057f578;
-  temp_v6 = *(int *)(DAT_0057f578 + 8) != 0;
+  temp_v0 = g_placeWin;
+  temp_v6 = *(int *)(g_placeWin + 8) != 0;
   temp_v1 = '\0';
   if (temp_v6) {
-    temp_v1 = *(char *)(DAT_0057f578 + 0x10);
+    temp_v1 = *(char *)(g_placeWin + 0x10);
   }
   if (temp_v6 && temp_v1 != '\0') {
     FUN_00157558(g_renderCtx);
@@ -69,10 +69,10 @@ char FUN_003d0110(void)
       (**(romwright_code **)(temp_v3 + 0x1274))();
       *(unsigned char *)(temp_v3 + 0x1270) = 0;
     }
-    temp_v3 = FUN_001654d8(temp_v0 + 0x34);
+    temp_v3 = vec2GetXInt(temp_v0 + 0x34);
     temp_v7 = 0.25f;
     FUN_001879d0(g_renderCtx);
-    temp_v2 = FUN_001654e4(temp_v0 + 0x34);
+    temp_v2 = vec2GetYInt(temp_v0 + 0x34);
     FUN_00164b5c(2,8,0xe,temp_v3 + (int)temp_v7,temp_v2,0x65);
     temp_v4 = FUN_001834a4(8,0x10b);
     VectorSignedToFloat(*(short *)(temp_v4 + 10) + temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);

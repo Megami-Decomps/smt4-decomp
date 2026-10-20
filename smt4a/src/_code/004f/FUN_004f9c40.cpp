@@ -7,14 +7,14 @@ extern "C" {
 int FUN_00100388(...);
 int asdMemFree(...);
 int FUN_002804b0(...);
-int FUN_002e342c(...);
+int libc_strcpy(...);
 int sysMemClear(...);
 
 /* Supplied declaration required: FUN_00100388. */
 extern int FUN_00100d60(unsigned char *, unsigned int);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002804b0. */
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: sysMemClear. */
 extern int findRecordByKey(int);
 
@@ -42,9 +42,9 @@ unsigned int FUN_004f9c40(int param_1)
     sysMemClear(temp_v3,0x80);
     sysMemClear(temp_v4,0x80);
     FUN_00100388(temp_v4,"battle/effect/%s.eft","ef_Assist_04" + temp_v2 * 0x20);
-    FUN_002e342c(temp_v3,temp_v4);
+    libc_strcpy(temp_v3,temp_v4);
     temp_v0 = FUN_00100d60(temp_v3,0x2f);
-    FUN_002e342c(temp_v1 + 0x328c,temp_v0 + 1);
+    libc_strcpy(temp_v1 + 0x328c,temp_v0 + 1);
     temp_v0 = findRecordByKey(temp_v1 + 0x328c);
     if (temp_v0 == 0xff) {
       FUN_002804b0(temp_v3,temp_v1 + 0x3288,1);

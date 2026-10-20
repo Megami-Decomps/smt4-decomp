@@ -5,7 +5,7 @@ extern "C" {
 int FUN_001dcf78(u32 item);
 int FUN_001dcfd0(u32 item);
 int FUN_00211c90(u32 item);
-int FUN_00291414(u32 item);
+int nodeTreeReleaseItemClearOwner(u32 item);
 
 typedef struct Collection {
     /* 0x00 */ u32 *unk00;
@@ -31,7 +31,7 @@ void FUN_00221c70(Collection *collection)
     if (collection != NULL) {
         if (0 < collection->countA) {
             do {
-                FUN_00291414(collection->itemsA[i]);
+                nodeTreeReleaseItemClearOwner(collection->itemsA[i]);
                 i++;
             } while (i < collection->countA);
         }

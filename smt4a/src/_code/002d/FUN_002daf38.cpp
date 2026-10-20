@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001aea28(unsigned int);
+int ptrListRemoveClearOwner(unsigned int);
 int FUN_0030354c(void);
 int FUN_003d2158(void);
 int FUN_003e55f4(unsigned int);
@@ -14,10 +14,10 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } void_stack;
 
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern int g_lmapScene; /* 0x581288 */
 
-/* Supplied declaration required: FUN_001aea28. */
+/* Supplied declaration required: ptrListRemoveClearOwner. */
 /* Supplied declaration required: FUN_0030354c. */
 /* Supplied declaration required: FUN_003d2158. */
 /* Supplied declaration required: FUN_003e55f4. */
@@ -52,7 +52,7 @@ void FUN_002daf38(void)
     temp_v4 = *(int *)(temp_v0 + 4);
   }
   if (temp_v0 != 0 && temp_v4 != 0) {
-    FUN_001aea28(DAT_0056fcc0);
+    ptrListRemoveClearOwner(g_handleRegistry);
     temp_v4 = temp_v5;
   }
   temp_v0 = *(int *)(g_lmapScene + 0x178);
@@ -60,7 +60,7 @@ void FUN_002daf38(void)
     temp_v4 = *(int *)(temp_v0 + 4);
   }
   if (temp_v0 != 0 && temp_v4 != 0) {
-    FUN_001aea28(DAT_0056fcc0);
+    ptrListRemoveClearOwner(g_handleRegistry);
     temp_v4 = temp_v6;
   }
   temp_v0 = *(int *)(g_lmapScene + 0x188);
@@ -68,7 +68,7 @@ void FUN_002daf38(void)
     temp_v4 = *(int *)(temp_v0 + 4);
   }
   if (temp_v0 != 0 && temp_v4 != 0) {
-    FUN_001aea28(DAT_0056fcc0);
+    ptrListRemoveClearOwner(g_handleRegistry);
     temp_v4 = temp_v7;
   }
   temp_v0 = *(int *)(g_lmapScene + 0x17c);
@@ -76,7 +76,7 @@ void FUN_002daf38(void)
     temp_v4 = *(int *)(temp_v0 + 4);
   }
   if (temp_v0 != 0 && temp_v4 != 0) {
-    FUN_001aea28(DAT_0056fcc0);
+    ptrListRemoveClearOwner(g_handleRegistry);
     temp_v4 = temp_v8;
   }
   temp_v0 = *(int *)(g_lmapScene + 0x170);
@@ -84,7 +84,7 @@ void FUN_002daf38(void)
     temp_v4 = *(int *)(temp_v0 + 4);
   }
   if (temp_v0 != 0 && temp_v4 != 0) {
-    FUN_001aea28(DAT_0056fcc0);
+    ptrListRemoveClearOwner(g_handleRegistry);
     temp_v4 = temp_v9;
   }
   temp_v0 = *(int *)(g_lmapScene + 0x180);
@@ -92,7 +92,7 @@ void FUN_002daf38(void)
     temp_v4 = *(int *)(temp_v0 + 4);
   }
   if (temp_v0 != 0 && temp_v4 != 0) {
-    FUN_001aea28(DAT_0056fcc0);
+    ptrListRemoveClearOwner(g_handleRegistry);
     temp_v4 = temp_v10;
   }
   temp_v0 = *(int *)(g_lmapScene + 0x184);
@@ -100,7 +100,7 @@ void FUN_002daf38(void)
     temp_v4 = *(int *)(temp_v0 + 4);
   }
   if (temp_v0 != 0 && temp_v4 != 0) {
-    FUN_001aea28(DAT_0056fcc0);
+    ptrListRemoveClearOwner(g_handleRegistry);
     temp_v4 = temp_v11;
   }
   temp_v0 = *(int *)(g_lmapScene + 0x18c);
@@ -110,7 +110,7 @@ void FUN_002daf38(void)
   if (temp_v0 == 0 || temp_v4 == 0) {
     return;
   }
-  FUN_001aea28(DAT_0056fcc0);
+  ptrListRemoveClearOwner(g_handleRegistry);
   return;
 }
 

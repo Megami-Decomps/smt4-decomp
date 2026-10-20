@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002367c0(...);
-int FUN_002c30c4(...);
+int libc_strlen(...);
 int nw_gfx_SkeletalModel_SetupAnimGroup(...);
 int nw_ut_ResDicPatricia_Get(...);
 
@@ -56,7 +56,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_002367c0. */
 extern unsigned int *FUN_002375a0(int, int, fn_003653dc_arg0 *, int *);
-/* Supplied declaration required: FUN_002c30c4. */
+/* Supplied declaration required: libc_strlen. */
 /* Supplied declaration required: nw_gfx_SkeletalModel_SetupAnimGroup. */
 /* Supplied declaration required: nw_ut_ResDicPatricia_Get. */
 
@@ -195,7 +195,7 @@ int nw_gfx_SkeletalModel_CreateSkeletalAnimGroup(fn_003653dc_arg0 *param_1,int *
       }
       temp_v9 = &temp_v8;
       if (!(temp_v8 == 0 || ppiVar14 == (int **)0x0)) {
-        temp_v1 = FUN_002c30c4(ppiVar14);
+        temp_v1 = libc_strlen(ppiVar14);
         temp_v5 = nw_ut_ResDicPatricia_Get(temp_v9,ppiVar14,temp_v1);
         if (temp_v5 != 0) {
           temp_v6 = *(int *)(temp_v5 + 0xc);
@@ -268,7 +268,7 @@ int nw_gfx_SkeletalModel_CreateSkeletalAnimGroup(fn_003653dc_arg0 *param_1,int *
           temp_v9 = (int *)0x0;
         }
         if (!(temp_v9 == (int *)0x0 || piVar2 == (int *)0x0)) {
-          temp_v1 = FUN_002c30c4(piVar2);
+          temp_v1 = libc_strlen(piVar2);
           temp_v4 = nw_ut_ResDicPatricia_Get(ppiVar14,piVar2,temp_v1);
           if (temp_v4 != 0) {
             temp_v5 = *(int *)(temp_v4 + 0xc);

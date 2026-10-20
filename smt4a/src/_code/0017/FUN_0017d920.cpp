@@ -12,14 +12,14 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_2_stack;
 
-extern int *DAT_005b40e0; /* 0x5b40e0 */
+extern int *g_commandBufferCursor; /* 0x5b40e0 */
 extern signed char DAT_0061a481; /* 0x61a481 */
 extern int *DAT_0061a50c; /* 0x61a50c */
 extern int *DAT_0061a510; /* 0x61a510 */
 
 /* Unsupported intrinsic, declaration required: coproc_movefrom_User_R_Thread_and_Process_ID (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-extern unsigned int *FUN_001a2a5c(void);
+extern unsigned int *nn_gxlow_CTR_GetGpu(void);
 
 
 int * FUN_0017d920(unsigned int param_1,int *param_2)
@@ -48,7 +48,7 @@ int * FUN_0017d920(unsigned int param_1,int *param_2)
     }
     break;
   case 0x202:
-    temp_v0 = (int)DAT_005b40e0 - DAT_0061a50c[1];
+    temp_v0 = (int)g_commandBufferCursor - DAT_0061a50c[1];
     DAT_0061a50c[3] = temp_v0;
     *param_2 = temp_v0;
     return piVar2;
@@ -71,7 +71,7 @@ int * FUN_0017d920(unsigned int param_1,int *param_2)
     }
     break;
   case 0x208:
-    piVar2 = DAT_005b40e0;
+    piVar2 = g_commandBufferCursor;
     break;
   case 0x209:
     piVar2 = (int *)DAT_0061a50c[4];
@@ -120,7 +120,7 @@ int * FUN_0017d920(unsigned int param_1,int *param_2)
     param_2[1] = (int)piVar2;
     return piVar2;
   case 0x20e:
-    puVar1 = (unsigned int *)FUN_001a2a5c();
+    puVar1 = (unsigned int *)nn_gxlow_CTR_GetGpu();
     temp_v1 = coproc_movefrom_User_R_Thread_and_Process_ID();
     *(unsigned int *)(temp_v1 + 0x80) = 0x40080;
     *(unsigned int *)(temp_v1 + 0x84) = 0x400058;

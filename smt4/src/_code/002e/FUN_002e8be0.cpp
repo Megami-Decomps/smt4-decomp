@@ -18,7 +18,7 @@ int FUN_002804ec(int);
 int FUN_00280988(void);
 int FUN_00282390(void);
 int FUN_0028250c(void);
-int FUN_002b8838(int);
+int buttonHelpSetPreset(int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -52,8 +52,8 @@ extern int FUN_0027ee9c(void);
 /* Supplied declaration required: FUN_00280988. */
 /* Supplied declaration required: FUN_00282390. */
 /* Supplied declaration required: FUN_0028250c. */
-/* Supplied declaration required: FUN_002b8838. */
-extern int FUN_002bfde4(unsigned int);
+/* Supplied declaration required: buttonHelpSetPreset. */
+extern int padIsButtonPressed(unsigned int);
 
 
 void FUN_002e8be0(void)
@@ -93,7 +93,7 @@ void FUN_002e8be0(void)
           *(unsigned int *)(temp_v1 + 8) = 0;
         }
         else {
-          temp_v1 = FUN_002bfde4(5);
+          temp_v1 = padIsButtonPressed(5);
           if ((temp_v1 != 0) || (temp_v1 = FUN_002762e0(), temp_v1 != 0)) {
             temp_v1 = DAT_004474f4;
             *(unsigned int *)(DAT_004474f4 + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
@@ -151,7 +151,7 @@ void FUN_002e8be0(void)
         *(unsigned int *)(temp_v1 + 0x50) = DAT_0049f9ac;
         FUN_0027fc14(0xb);
         *(unsigned int *)(DAT_004474f4 + 0xac) = 0xfffffffe;
-        FUN_002b8838(0xdb);
+        buttonHelpSetPreset(0xdb);
         FUN_0024f034(1,DAT_0049f99c);
         FUN_0028250c();
         FUN_00282390();

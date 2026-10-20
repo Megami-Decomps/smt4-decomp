@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00297468(...);
-int FUN_002a5ed0(...);
+int asdTMTexTableLoadEntryAsync(...);
 int asdMemAlloc(...);
 int taskCreateDraw(...);
 int asdProcessCreateSimple(...);
@@ -31,8 +31,8 @@ extern unsigned int DAT_0043df44; /* 0x43df44 */
 
 extern int FUN_0024bb10(unsigned int);
 /* Supplied declaration required: FUN_00297468. */
-/* Supplied declaration required: FUN_002a5ed0. */
-extern int FUN_002a60b4(unsigned int, unsigned int);
+/* Supplied declaration required: asdTMTexTableLoadEntryAsync. */
+extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdProcessCreateSimple. */
@@ -83,9 +83,9 @@ void FUN_002cf150(unsigned int param_1,unsigned int param_2)
       asdTMTexTableLoadTmx((&DAT_0043df40)[temp_v1 * 3],0);
       *(unsigned char *)(temp_v1 * 0xc + 0x43df49) = 1;
     }
-    temp_v0 = FUN_002a60b4((&DAT_0043df40)[temp_v1 * 3],(&DAT_0043df44)[temp_v1 * 3]);
+    temp_v0 = asdTMTexTableNodeIsLoaded((&DAT_0043df40)[temp_v1 * 3],(&DAT_0043df44)[temp_v1 * 3]);
     if (temp_v0 == 0) {
-      FUN_002a5ed0((&DAT_0043df40)[temp_v1 * 3],(&DAT_0043df44)[temp_v1 * 3]);
+      asdTMTexTableLoadEntryAsync((&DAT_0043df40)[temp_v1 * 3],(&DAT_0043df44)[temp_v1 * 3]);
       *(unsigned char *)(temp_v1 * 0xc + 0x43df48) = 1;
     }
     temp_v1 = temp_v1 + 1;

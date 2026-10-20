@@ -6,7 +6,7 @@ extern "C" {
 
 int scrGetArg(int);
 
-extern int FUN_00162e8c(void);
+extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: scrGetArg. */
 
 
@@ -18,7 +18,7 @@ unsigned int FUN_003b6e3c(void)
   int temp_v1;
   int temp_v2;
   
-  temp_v1 = FUN_00162e8c();
+  temp_v1 = gameFlagsGetBlock();
   temp_v0 = scrGetArg(1);
   temp_v2 = scrGetArg(0);
   *(unsigned short *)(temp_v1 + temp_v2 * 2 + 0xd90) = temp_v0;

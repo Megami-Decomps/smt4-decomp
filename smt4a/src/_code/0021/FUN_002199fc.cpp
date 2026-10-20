@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00100388(...);
 int FUN_00162790(...);
 int FUN_00164b5c(...);
-int FUN_001654d8(...);
+int vec2GetXInt(...);
 int efctSetSpeed(...);
 int FUN_00180310(...);
 int FUN_001834a4(...);
@@ -42,8 +42,8 @@ extern int g_renderCtx; /* 0x59dbb4 */
 extern unsigned int FUN_0014bf3c(short, unsigned int);
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164b5c. */
-/* Supplied declaration required: FUN_001654d8. */
-extern int FUN_001654e4(int);
+/* Supplied declaration required: vec2GetXInt. */
+extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_00180114(short);
@@ -90,8 +90,8 @@ void FUN_002199fc(int param_1,int param_2,int param_3)
   iStack_30 = param_1;
   temp_v16 = param_2;
   temp_v17 = param_3;
-  temp_v1 = FUN_001654d8(temp_v8 + 0x3ec);
-  temp_v8 = FUN_001654e4(temp_v8 + 0x3ec);
+  temp_v1 = vec2GetXInt(temp_v8 + 0x3ec);
+  temp_v8 = vec2GetYInt(temp_v8 + 0x3ec);
   temp_v11 = 0xffffffff;
   temp_v10 = 0.0f;
   temp_v0 = *(short *)(DAT_0057f2c4 + 0x1e);
@@ -283,9 +283,9 @@ void FUN_002199fc(int param_1,int param_2,int param_3)
     else {
       if (temp_v17 != 0) {
         temp_v3 = temp_v14 + 0x6a8;
-        temp_v7 = FUN_001654d8();
+        temp_v7 = vec2GetXInt();
         temp_v7 = temp_v7 + *(short *)(temp_v2 + 8);
-        temp_v6 = FUN_001654e4(temp_v3);
+        temp_v6 = vec2GetYInt(temp_v3);
         temp_v6 = temp_v6 + *(short *)(temp_v2 + 10);
         if (temp_v10 < *(float *)(temp_v3 + 0x20)) {
           efctSetSpeed();

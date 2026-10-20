@@ -17,6 +17,6 @@ typedef struct Sys464af0 {
     /* 0x7C */ u32 unk7C;
 } Sys464af0;
 
-extern Sys464af0 DAT_00464af0;
+extern Sys464af0 g_gfxSettings;
 
 #endif

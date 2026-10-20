@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_002ea3d0(int, unsigned int);
-int FUN_002ea446(int, int);
-int FUN_002eb588(unsigned char [8]);
+int onlineJobSetStateTimed(int, int);
+int onlineTimeGetNow(unsigned char [8]);
 int FUN_002ee64c(int, int);
 int FUN_002fd412(int);
 
@@ -15,8 +15,8 @@ extern unsigned char LAB_00111ea0; /* 0x111ea0 */
 
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned char *, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
-/* Supplied declaration required: FUN_002ea446. */
-/* Supplied declaration required: FUN_002eb588. */
+/* Supplied declaration required: onlineJobSetStateTimed. */
+/* Supplied declaration required: onlineTimeGetNow. */
 extern int FUN_002eb5f4(void);
 extern int FUN_002ee5c4(int, int);
 /* Supplied declaration required: FUN_002ee64c. */
@@ -50,11 +50,11 @@ void FUN_00111df0(int param_1)
       puVar3 = temp_v3;
     }
     else {
-      FUN_002eb588(temp_v3);
+      onlineTimeGetNow(temp_v3);
       temp_v0 = FUN_002efd4a(param_1 + 0x188,temp_v3);
       if ((temp_v0 == 0) &&
          ((*(char *)(param_1 + 0x1b0) != '\0' || (FUN_002ee64c(temp_v2,*piVar5 + 8), temp_v2 == 0)))) {
-        FUN_002ea446(param_1,100);
+        onlineJobSetStateTimed(param_1,100);
         return;
       }
       FUN_002fd412(param_1);

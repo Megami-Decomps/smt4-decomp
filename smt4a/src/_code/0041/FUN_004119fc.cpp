@@ -8,7 +8,7 @@ int FUN_00100388(...);
 int asdMemFree(...);
 int scrScriptProcessDestroy(...);
 int FUN_00275bc8(...);
-int FUN_00275f44(...);
+int scrScriptProcessStartEntry(...);
 int FUN_002804b0(...);
 int FUN_00416610(...);
 
@@ -45,7 +45,7 @@ typedef struct {
 /* Supplied declaration required: scrScriptProcessDestroy. */
 extern int FUN_00224880(void);
 /* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_002804b0. */
 /* Supplied declaration required: FUN_00416610. */
 
@@ -93,7 +93,7 @@ void FUN_004119fc(fn_004119fc_arg0 *param_1)
         FUN_00275bc8(temp_v0,0);
         param_1->field_0x28 = temp_v0;
         *(unsigned int *)(temp_v0 + 0x108) = 1;
-        FUN_00275f44(param_1->field_0x28,0);
+        scrScriptProcessStartEntry(param_1->field_0x28,0);
         param_1->field_0x10 = param_1->field_0x10 + 1;
         return;
       }

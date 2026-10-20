@@ -24,11 +24,11 @@ typedef struct {
 #endif
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
-extern int FUN_0018719c(void);
+extern int gameFlagIsSet(void);
 /* Supplied declaration required: FUN_002e1208. */
-extern unsigned int *FUN_00379890(int);
+extern unsigned int *dataTable23Sub0GetEntry(int);
 extern unsigned short FUN_003ae4d0(unsigned int);
-extern int FUN_003b56bc(void);
+extern int dataTable23Type0CountWithAoc(void);
 extern char *dataTable2BType1GetEntry(unsigned char *, int);
 /* Supplied declaration required: dataTable2BType1Count. */
 
@@ -100,8 +100,8 @@ void FUN_0049105c(int param_1,unsigned int param_2)
     do {
       unaff_r4 = (char *)dataTable2BType1GetEntry(temp_v21,temp_v19);
       if ((((int)*unaff_r4 == param_2) &&
-          ((*(short *)(unaff_r4 + 4) == 0 || (temp_v2 = FUN_0018719c(), temp_v2 != 0)))) &&
-         ((*(short *)(unaff_r4 + 6) == 0 || (temp_v2 = FUN_0018719c(), temp_v2 == 0)))) {
+          ((*(short *)(unaff_r4 + 4) == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 != 0)))) &&
+         ((*(short *)(unaff_r4 + 6) == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 == 0)))) {
         temp_v5 = 0xb;
         switch(*(unsigned short *)(unaff_r4 + 8)) {
         case 5:
@@ -200,11 +200,11 @@ void FUN_0049105c(int param_1,unsigned int param_2)
   temp_v3 = 0;
   temp_v8 = (float)VectorSignedToFloat(temp_v18,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v16 = CONCAT44(temp_v15,temp_v8 * temp_v14);
-  temp_v2 = FUN_003b56bc();
+  temp_v2 = dataTable23Type0CountWithAoc();
   if (0 < temp_v2) {
     temp_v19 = (int)temp_v23;
     do {
-      puVar6 = (unsigned int *)FUN_00379890(temp_v3);
+      puVar6 = (unsigned int *)dataTable23Sub0GetEntry(temp_v3);
       temp_v4 = (unsigned int)*(char *)(puVar6 + 2);
       temp_v7 = temp_v4 == param_2;
       if (temp_v7) {
@@ -252,7 +252,7 @@ void FUN_0049105c(int param_1,unsigned int param_2)
         *(unsigned char *)(temp_v2 + 0x17dc) = 0;
       }
       temp_v3 = temp_v3 + 1;
-      temp_v2 = FUN_003b56bc();
+      temp_v2 = dataTable23Type0CountWithAoc();
     } while (temp_v3 < temp_v2);
   }
   *(int *)(param_1 + 0x7b8c) = temp_v6;

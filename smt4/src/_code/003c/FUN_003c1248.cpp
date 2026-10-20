@@ -8,7 +8,7 @@ int FUN_0023ebc8(int, unsigned char [448]);
 int FUN_002505c0(int, int, int, int, int, int, int);
 int FUN_00255e38(int, unsigned char [448], int, int, int);
 int FUN_00262f68(int, int);
-int FUN_002b06c4(void);
+int dataTable00FindById(void);
 int FUN_00336ed0(int, unsigned char [448], int, int);
 int FUN_003ae2d0(unsigned int, int, int, int);
 
@@ -21,7 +21,7 @@ typedef struct {
     unsigned int sp2D0; /* 0x2d0: local_2d0 */
 } param_4_stack;
 
-extern unsigned int DAT_00439ca8; /* 0x439ca8 */
+extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 
 /* Supplied declaration required: FUN_0023ebc8. */
 /* Supplied declaration required: FUN_002505c0. */
@@ -30,9 +30,9 @@ extern int FUN_002561d8(int, int, unsigned int);
 /* Supplied declaration required: FUN_00262f68. */
 extern int btlGetMainState(void);
 extern int flagWordTestBit(int, unsigned int);
-extern int FUN_002a8740(int);
-extern int FUN_002a8764(void);
-/* Supplied declaration required: FUN_002b06c4. */
+extern int gameGetUnitRecord(int);
+extern int gameGetSlotTable(void);
+/* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: FUN_00336ed0. */
 /* Supplied declaration required: FUN_003ae2d0. */
 
@@ -61,16 +61,16 @@ void FUN_003c1248(int param_1,int param_2,int param_3,int param_4)
   temp_v1 = btlGetMainState();
   if (param_1 != 0) {
     temp_v2 = *(unsigned int *)(temp_v1 + param_2 * 8 + 0x1fd0) & 0xffff;
-    FUN_002b06c4();
+    dataTable00FindById();
     if (temp_v2 == 0) {
       return;
     }
     FUN_0023ebc8(temp_v1,temp_v7);
   }
   else {
-    temp_v3 = FUN_002a8764();
+    temp_v3 = gameGetSlotTable();
     temp_v4 = temp_v3 + param_2;
-    temp_v5 = FUN_002a8740((int)*(char *)(temp_v4 + 0x90f0));
+    temp_v5 = gameGetUnitRecord((int)*(char *)(temp_v4 + 0x90f0));
     temp_v6 = flagWordTestBit(temp_v5,1);
     if (temp_v6 != 0) {
       *(unsigned short *)(temp_v5 + 0x2a) = *(unsigned short *)(temp_v5 + 0xe);
@@ -84,7 +84,7 @@ void FUN_003c1248(int param_1,int param_2,int param_3,int param_4)
       if (!temp_v0) {
         FUN_002505c0(0,0,0x10001cf,0,0,0,0);
       }
-      FUN_003ae2d0(DAT_00439ca8,(int)*(short *)(temp_v5 + 0x6e),(int)*(char *)(temp_v4 + 0x90f0),temp_v0);
+      FUN_003ae2d0(g_btlUiBlock,(int)*(short *)(temp_v5 + 0x6e),(int)*(char *)(temp_v4 + 0x90f0),temp_v0);
     }
   }
   FUN_00255e38(temp_v1,temp_v7,param_1,temp_v8,1);

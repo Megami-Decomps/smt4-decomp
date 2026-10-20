@@ -5,7 +5,7 @@
 extern "C" {
 
 int CONCAT44(double, unsigned int);
-int FUN_00167bc8(int, float *, int);
+int memCopyWords(int, float *, int);
 int FUN_001a1ee0(void);
 int FUN_001b63b0(void);
 int FUN_002a1850(...);
@@ -41,7 +41,7 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 extern unsigned int FUN_00152f54(void);
-/* Supplied declaration required: FUN_00167bc8. */
+/* Supplied declaration required: memCopyWords. */
 /* Supplied declaration required: FUN_001a1ee0. */
 /* Supplied declaration required: FUN_001b63b0. */
 /* Supplied declaration required: FUN_002a1850. */
@@ -97,7 +97,7 @@ void FUN_0032c5ec(float *param_1,unsigned int param_2,int param_3)
   if (param_3 == 0) {
     param_3 = block5B8OwnerGetBlock(g_renderCtx);
   }
-  FUN_00167bc8(param_3,&temp_v10,0x40);
+  memCopyWords(param_3,&temp_v10,0x40);
   temp_v13 = *param_1;
   temp_v17 = param_1[1];
   temp_v21 = param_1[2];

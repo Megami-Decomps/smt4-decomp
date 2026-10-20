@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002c424c(int, int, int);
+int __aeabi_memset4(int, int, int);
 
-extern int DAT_0043dcf0; /* 0x43dcf0 */
+extern int g_partyPanel; /* 0x43dcf0 */
 
-extern int FUN_002a8740(void);
-extern int FUN_002a8764(void);
+extern int gameGetUnitRecord(void);
+extern int gameGetSlotTable(void);
 extern int FUN_002b066c(unsigned int);
-/* Supplied declaration required: FUN_002c424c. */
+/* Supplied declaration required: __aeabi_memset4. */
 
 
 void FUN_0026c9c0(void)
@@ -27,9 +27,9 @@ void FUN_0026c9c0(void)
   int temp_v6;
   int temp_v7;
   
-  temp_v0 = DAT_0043dcf0;
-  temp_v1 = FUN_002a8764();
-  FUN_002c424c(temp_v0 + 0x678,4,1);
+  temp_v0 = g_partyPanel;
+  temp_v1 = gameGetSlotTable();
+  __aeabi_memset4(temp_v0 + 0x678,4,1);
   temp_v6 = 0;
   do {
     *(unsigned char *)(*(int *)(temp_v0 + temp_v6 * 4 + 0x6cc) + 0x27) = 0;
@@ -55,7 +55,7 @@ void FUN_0026c9c0(void)
   do {
     temp_v7 = temp_v0 + temp_v6 * 8;
     if ((*(int *)(temp_v7 + 0x738) < 0) ||
-       (temp_v2 = FUN_002a8740(), (*(unsigned short *)(temp_v2 + 0x44) & 0x404) != 0)) {
+       (temp_v2 = gameGetUnitRecord(), (*(unsigned short *)(temp_v2 + 0x44) & 0x404) != 0)) {
       *(unsigned short *)(temp_v7 + 0x73c) = 0;
     }
     temp_v6 = temp_v6 + 1;
@@ -68,7 +68,7 @@ void FUN_0026c9c0(void)
         temp_v2 = 0;
         do {
           if ((-1 < *(char *)(temp_v1 + temp_v2 + 0x9108)) &&
-             (temp_v4 = FUN_002a8740(), *(short *)(temp_v4 + 0x46) == *(short *)(temp_v7 + 0x46))) {
+             (temp_v4 = gameGetUnitRecord(), *(short *)(temp_v4 + 0x46) == *(short *)(temp_v7 + 0x46))) {
             temp_v4 = temp_v0 + temp_v2 * 4;
             *(unsigned char *)(temp_v0 + temp_v2 + 0x679) = 0;
             *(unsigned char *)(*(int *)(temp_v4 + 0x6cc) + 0x28) = 0;
@@ -80,7 +80,7 @@ void FUN_0026c9c0(void)
         do {
           temp_v4 = temp_v0 + temp_v2 * 8;
           if ((-1 < *(int *)(temp_v4 + 0x738)) &&
-             (temp_v5 = FUN_002a8740(), *(short *)(temp_v5 + 0x46) == *(short *)(temp_v7 + 0x46))) {
+             (temp_v5 = gameGetUnitRecord(), *(short *)(temp_v5 + 0x46) == *(short *)(temp_v7 + 0x46))) {
             *(unsigned short *)(temp_v4 + 0x73c) = 0;
             temp_v4 = temp_v0 + temp_v2 * 4;
             *(unsigned char *)(*(int *)(temp_v4 + 0x6d8) + 0x28) = 0;

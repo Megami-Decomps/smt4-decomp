@@ -15,7 +15,7 @@ typedef struct {
 
 extern int *wordRefMax(unsigned int *, unsigned int *);
 /* Supplied declaration required: FUN_0030fd40. */
-extern int FUN_0030fd62(int *, int, unsigned int);
+extern int vectorAllocx28(int *, int, unsigned int);
 /* Supplied declaration required: vectorCountx28_0030fd70. */
 extern unsigned int vectorGrowCapacity_0030fd7e(unsigned int, int *);
 
@@ -39,7 +39,7 @@ int * FUN_003038a0(int *param_1,unsigned int *param_2,unsigned int param_3,unsig
   temp_v2 = vectorCountx28_0030fd70(param_2);
   piVar1 = (int *)wordRefMax((unsigned int *)&temp_v2,(unsigned int *)&temp_v3);
   temp_v1 = *piVar1;
-  temp_v0 = FUN_0030fd62(param_1,temp_v1,0);
+  temp_v0 = vectorAllocx28(param_1,temp_v1,0);
   *param_1 = temp_v0;
   FUN_0030fd40(*param_2,param_2[1],temp_v0,param_1);
   temp_v0 = vectorCountx28_0030fd70(param_2);

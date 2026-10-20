@@ -9,8 +9,8 @@ int FUN_00233218(void);
 int FUN_0023360c(...);
 int FUN_00240d5c(...);
 int FUN_0029ee6c(...);
-int FUN_002bed98(int);
-int FUN_002beda4(int);
+int vec2GetYInt(int);
+int vec2GetXInt(int);
 int FUN_002bf288(int, int, int, unsigned int, unsigned int, int);
 int FUN_002bf380(int, int, unsigned int, int, int, int);
 int FUN_002bf538(void);
@@ -29,8 +29,8 @@ extern int FUN_00233718(int);
 /* Supplied declaration required: FUN_00240d5c. */
 extern int FUN_0029e924(int);
 /* Supplied declaration required: FUN_0029ee6c. */
-/* Supplied declaration required: FUN_002bed98. */
-/* Supplied declaration required: FUN_002beda4. */
+/* Supplied declaration required: vec2GetYInt. */
+/* Supplied declaration required: vec2GetXInt. */
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
@@ -54,16 +54,16 @@ void FUN_003bb77c(int param_1)
   if ((*(int *)(param_1 + 8) != 0) && (*(char *)(param_1 + 0x630) == '\0')) {
     FUN_00233218();
     temp_v8 = param_1 + 200;
-    temp_v2 = FUN_002beda4(temp_v8);
-    temp_v3 = FUN_002bed98(temp_v8);
+    temp_v2 = vec2GetXInt(temp_v8);
+    temp_v3 = vec2GetYInt(temp_v8);
     FUN_002bf288(2,0x2a,0x1f,temp_v2,temp_v3,0x1f);
     FUN_002bf288(2,0x2a,0x20,temp_v2,temp_v3,0x1f);
     temp_v4 = FUN_002bf4f8(0x2a,0x21);
     temp_v0 = *(short *)(temp_v4 + 8);
     temp_v1 = *(short *)(temp_v4 + 10);
-    temp_v4 = FUN_002beda4(temp_v8);
+    temp_v4 = vec2GetXInt(temp_v8);
     temp_v4 = temp_v4 + temp_v0;
-    temp_v8 = FUN_002bed98(temp_v8);
+    temp_v8 = vec2GetYInt(temp_v8);
     temp_v8 = temp_v8 + temp_v1;
     FUN_002bf538();
     FUN_002bf380(2,0x2a,*(unsigned int *)(param_1 + 0xc60),temp_v4,temp_v8,0x1f);

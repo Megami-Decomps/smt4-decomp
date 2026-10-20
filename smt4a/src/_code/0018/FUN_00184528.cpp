@@ -4,18 +4,18 @@
 
 extern "C" {
 
-int FUN_001846d0(int, int);
-int FUN_00184758(...);
-int FUN_00184c00(int, int, int);
+int uiSpriteSelectAnim(int, int);
+int uiSpriteSetKeyframe(...);
+int uiSpriteSetImageKeyframe(int, int, int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_001846d0. */
-/* Supplied declaration required: FUN_00184758. */
-/* Supplied declaration required: FUN_00184c00. */
+/* Supplied declaration required: uiSpriteSelectAnim. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 
 
 void FUN_00184528(int param_1,unsigned int param_2)
@@ -39,44 +39,44 @@ void FUN_00184528(int param_1,unsigned int param_2)
   
   switch(param_2) {
   case 0:
-    FUN_00184758(param_1 + 0x20,0);
+    uiSpriteSetKeyframe(param_1 + 0x20,0);
     return;
   case 1:
-    FUN_00184758(param_1 + 0xac,1,0);
+    uiSpriteSetKeyframe(param_1 + 0xac,1,0);
     return;
   case 2:
-    FUN_001846d0(param_1 + 0x138,0);
+    uiSpriteSelectAnim(param_1 + 0x138,0);
     return;
   case 3:
-    FUN_00184758(param_1 + 0x1c4,2,0);
+    uiSpriteSetKeyframe(param_1 + 0x1c4,2,0);
     return;
   case 4:
-    FUN_00184758(param_1 + 0x250,3,0);
+    uiSpriteSetKeyframe(param_1 + 0x250,3,0);
     return;
   case 5:
-    FUN_00184758(param_1 + 0x2dc,4,0);
+    uiSpriteSetKeyframe(param_1 + 0x2dc,4,0);
     return;
   case 6:
-    FUN_00184758(param_1 + 0x368,5,0);
+    uiSpriteSetKeyframe(param_1 + 0x368,5,0);
     return;
   case 7:
-    FUN_00184758(param_1 + 0x3f4,6,0);
+    uiSpriteSetKeyframe(param_1 + 0x3f4,6,0);
     return;
   case 8:
-    FUN_00184758(param_1 + 0x480,7,0);
-    FUN_00184c00(param_1 + 0x480,2,0);
+    uiSpriteSetKeyframe(param_1 + 0x480,7,0);
+    uiSpriteSetImageKeyframe(param_1 + 0x480,2,0);
     return;
   case 9:
-    FUN_00184758(param_1 + 0x50c,8,0);
-    FUN_00184c00(param_1 + 0x50c,3,0);
+    uiSpriteSetKeyframe(param_1 + 0x50c,8,0);
+    uiSpriteSetImageKeyframe(param_1 + 0x50c,3,0);
     return;
   case 10:
-    FUN_00184758(param_1 + 0x598,9,0);
-    FUN_00184c00(param_1 + 0x598,2,0);
+    uiSpriteSetKeyframe(param_1 + 0x598,9,0);
+    uiSpriteSetImageKeyframe(param_1 + 0x598,2,0);
     return;
   case 0xb:
-    FUN_00184758(param_1 + 0x624,10,0);
-    FUN_00184c00(param_1 + 0x624,3,0);
+    uiSpriteSetKeyframe(param_1 + 0x624,10,0);
+    uiSpriteSetImageKeyframe(param_1 + 0x624,3,0);
     return;
   case 0xc:
     break;
@@ -112,7 +112,7 @@ LAB_0018473c:
   *(unsigned short *)(param_1 + 0x732) = 0;
   *(unsigned char *)(param_1 + 0x734) = 1;
   if (-1 < *piVar8) {
-    FUN_00184758(param_1 + 0x6b0,(int)(short)*piVar8,(int)(char)piVar8[1]);
+    uiSpriteSetKeyframe(param_1 + 0x6b0,(int)(short)*piVar8,(int)(char)piVar8[1]);
   }
   temp_v7 = *(int *)(*(int *)(param_1 + 0x728) + 0xc);
   if (-1 < temp_v7) {

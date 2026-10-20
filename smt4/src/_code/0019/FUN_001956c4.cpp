@@ -15,7 +15,7 @@ int FUN_002903f0(void);
 int FUN_0029e17c(void);
 int FUN_0029efa8(...);
 int FUN_0029efc0(...);
-int FUN_002b63c0(void);
+int dataTable1bOr1cGetRecord(void);
 int FUN_002bc01c(...);
 int FUN_002bee58(...);
 int FUN_002bf810(...);
@@ -29,12 +29,12 @@ int VectorUnsignedToFloat(...);
 int FUN_001afc0c(void);
 int FUN_00290404(void);
 int FUN_002905d0(void);
-int FUN_00296f4c(...);
+int scrScriptProcessStartEntry(...);
 int FUN_00297060(unsigned int, unsigned int);
 int FUN_002a0cb0(void);
-int FUN_002a780c(unsigned int);
+int asdMemFreeSlot(unsigned int);
 int FUN_002b8584(int, int);
-int FUN_002b8838(...);
+int buttonHelpSetPreset(...);
 int FUN_002b8ee0(...);
 int timerStart(...);
 int FUN_002bf818(...);
@@ -43,7 +43,7 @@ int asdMemFree(...);
 extern unsigned char LAB_00195cc8; /* 0x195cc8 */
 extern unsigned char LAB_00195cdc; /* 0x195cdc */
 extern int g_aocMain; /* 0x432fc8 */
-extern int DAT_0043dd50; /* 0x43dd50 */
+extern int g_uiQuest; /* 0x43dd50 */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
@@ -58,24 +58,24 @@ extern int FUN_0019e0c0(unsigned int);
 extern int FUN_0029022c(void);
 extern unsigned char FUN_00290248(unsigned short);
 /* Supplied declaration required: FUN_002902a0. */
-extern int FUN_002903c8(void);
+extern int gameJumpRequestIsPending(void);
 /* Supplied declaration required: FUN_002903f0. */
 /* Supplied declaration required: FUN_00290404. */
 /* Supplied declaration required: FUN_002905d0. */
-/* Supplied declaration required: FUN_00296f4c. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297060. */
 extern int FUN_002973d8(void);
 extern int FUN_0029e130(void);
 /* Supplied declaration required: FUN_0029e17c. */
-extern int FUN_0029e1c8(void);
+extern int useCounterIsFinished(void);
 extern int FUN_0029ee54(int);
 /* Supplied declaration required: FUN_0029efa8. */
 /* Supplied declaration required: FUN_0029efc0. */
 /* Supplied declaration required: FUN_002a0cb0. */
-/* Supplied declaration required: FUN_002a780c. */
-/* Supplied declaration required: FUN_002b63c0. */
+/* Supplied declaration required: asdMemFreeSlot. */
+/* Supplied declaration required: dataTable1bOr1cGetRecord. */
 /* Supplied declaration required: FUN_002b8584. */
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: FUN_002b8ee0. */
 /* Supplied declaration required: FUN_002bc01c. */
 /* Supplied declaration required: timerStart. */
@@ -83,7 +83,7 @@ extern int FUN_0029ee54(int);
 extern int FUN_002bf4f8(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bf810. */
 /* Supplied declaration required: FUN_002bf818. */
-extern int FUN_002c09d0(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 extern int randNextInRange(unsigned int);
 /* Supplied declaration required: FUN_002c1658. */
 /* Supplied declaration required: asdMemFree. */
@@ -114,14 +114,14 @@ unsigned int FUN_001956c4(void)
   float temp_v13;
   unsigned long long temp_v14;
   
-  temp_v1 = DAT_0043dd50;
-  if (*(char *)(DAT_0043dd50 + 0x5c4) != '\0') {
-    temp_v11 = DAT_0043dd50 + 0x5fc;
+  temp_v1 = g_uiQuest;
+  if (*(char *)(g_uiQuest + 0x5c4) != '\0') {
+    temp_v11 = g_uiQuest + 0x5fc;
   }
   else {
-    temp_v11 = DAT_0043dd50 + 0x660;
+    temp_v11 = g_uiQuest + 0x660;
   }
-  FUN_002bf818(DAT_0043dd50 + 0xc0);
+  FUN_002bf818(g_uiQuest + 0xc0);
   FUN_002bf818(temp_v1 + 0x14c);
   switch(*(unsigned int *)(temp_v1 + 4)) {
   default:
@@ -129,7 +129,7 @@ unsigned int FUN_001956c4(void)
     return 0;
   case 1:
     temp_v6 = FUN_002b8ee0(temp_v1 + 0x34,0);
-    temp_v5 = DAT_0043dd50;
+    temp_v5 = g_uiQuest;
     if (temp_v6 == 0) {
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
@@ -155,7 +155,7 @@ unsigned int FUN_001956c4(void)
       *(short *)(temp_v1 + 0x9f8) = *(short *)(temp_v1 + 0x9f8) + 3;
       FUN_002905d0();
       FUN_00290404();
-      temp_v11 = FUN_002c09d0(0x215);
+      temp_v11 = gameFlagIsSet(0x215);
       if (temp_v11 == 0) {
         temp_v7 = 2;
         break;
@@ -166,7 +166,7 @@ unsigned int FUN_001956c4(void)
       *(unsigned int *)(temp_v1 + 0x5bc) = temp_v7;
       FUN_00297060(temp_v7,*(unsigned int *)(temp_v1 + 0x5b8));
       *(unsigned int *)(temp_v1 + 0x5c0) = temp_v7;
-      temp_v11 = FUN_00296f4c();
+      temp_v11 = scrScriptProcessStartEntry();
       if (temp_v11 == 0) {
         *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
         return 0;
@@ -177,73 +177,73 @@ unsigned int FUN_001956c4(void)
     if (temp_v6 != 0x1d) {
       if (temp_v6 != 0x1c) {
         temp_v7 = 0x1a;
-        FUN_002b8838(temp_v7);
+        buttonHelpSetPreset(temp_v7);
       }
       else {
-        temp_v11 = *(int *)(DAT_0043dd50 + 0x5d0);
+        temp_v11 = *(int *)(g_uiQuest + 0x5d0);
         if (temp_v11 == 1) {
           temp_v7 = 0xea;
-          FUN_002b8838(temp_v7);
+          buttonHelpSetPreset(temp_v7);
           temp_v7 = *(unsigned int *)(temp_v1 + 0xc);
           break;
         }
         if (temp_v11 != 2) {
           if (temp_v11 == 3) {
-            if (*(int *)(DAT_0043dd50 + 0x5c8) == 0) {
-              FUN_002b8838(0xd6);
+            if (*(int *)(g_uiQuest + 0x5c8) == 0) {
+              buttonHelpSetPreset(0xd6);
             }
             if (*(int *)(temp_v5 + 0x5c8) == 1) {
-              FUN_002b8838(0xd7);
+              buttonHelpSetPreset(0xd7);
             }
             temp_v11 = *(int *)(temp_v5 + 0x5c8);
             if (temp_v11 == 2) {
               temp_v7 = 0xd8;
-              FUN_002b8838(temp_v7);
+              buttonHelpSetPreset(temp_v7);
             }
           }
         }
         else {
-          if (*(int *)(DAT_0043dd50 + 0x5c8) == 0) {
-            FUN_002b8838(0xeb);
+          if (*(int *)(g_uiQuest + 0x5c8) == 0) {
+            buttonHelpSetPreset(0xeb);
           }
           if (*(int *)(temp_v5 + 0x5c8) == 1) {
             temp_v7 = 0xec;
-            FUN_002b8838(temp_v7);
+            buttonHelpSetPreset(temp_v7);
           }
         }
       }
     }
-    else if (*(char *)(DAT_0043dd50 + 0x5c4) != '\0') {
-      if (*(int *)(DAT_0043dd50 + 0x5d0) == 2) {
-        if (*(int *)(DAT_0043dd50 + 0x5c8) == 0) {
-          FUN_002b8838(0xd5);
+    else if (*(char *)(g_uiQuest + 0x5c4) != '\0') {
+      if (*(int *)(g_uiQuest + 0x5d0) == 2) {
+        if (*(int *)(g_uiQuest + 0x5c8) == 0) {
+          buttonHelpSetPreset(0xd5);
         }
         if (*(int *)(temp_v5 + 0x5c8) == 1) {
           temp_v7 = 0xd4;
-          FUN_002b8838(temp_v7);
+          buttonHelpSetPreset(temp_v7);
         }
       }
     }
     else {
-      if (*(int *)(DAT_0043dd50 + 0x5d0) == 2) {
-        if (*(int *)(DAT_0043dd50 + 0x5c8) == 0) {
-          FUN_002b8838(0xd5);
+      if (*(int *)(g_uiQuest + 0x5d0) == 2) {
+        if (*(int *)(g_uiQuest + 0x5c8) == 0) {
+          buttonHelpSetPreset(0xd5);
         }
         if (*(int *)(temp_v5 + 0x5c8) == 1) {
-          FUN_002b8838(0xd4);
+          buttonHelpSetPreset(0xd4);
         }
       }
       if (*(int *)(temp_v5 + 0x5d0) == 3) {
         if (*(int *)(temp_v5 + 0x5c8) == 0) {
-          FUN_002b8838(0xd6);
+          buttonHelpSetPreset(0xd6);
         }
         if (*(int *)(temp_v5 + 0x5c8) == 1) {
-          FUN_002b8838(0xd7);
+          buttonHelpSetPreset(0xd7);
         }
         temp_v11 = *(int *)(temp_v5 + 0x5c8);
         if (temp_v11 == 2) {
           temp_v7 = 0xd8;
-          FUN_002b8838(temp_v7);
+          buttonHelpSetPreset(temp_v7);
         }
       }
     }
@@ -255,30 +255,30 @@ unsigned int FUN_001956c4(void)
     return 0;
   case 3:
     temp_v5 = FUN_002bf818(temp_v1 + 0x34);
-    temp_v11 = DAT_0043dd50;
+    temp_v11 = g_uiQuest;
     if (temp_v5 != 0) {
-      if (*(int *)(DAT_0043dd50 + 0x5e0) != 0) {
-        if (*(char *)(DAT_0043dd50 + 0x5f7) == '\0') {
+      if (*(int *)(g_uiQuest + 0x5e0) != 0) {
+        if (*(char *)(g_uiQuest + 0x5f7) == '\0') {
           asdMemFree();
         }
         *(unsigned int *)(temp_v11 + 0x5e0) = 0;
       }
       asdMemFree(*(unsigned int *)(temp_v11 + 0x5e4));
       *(unsigned int *)(temp_v11 + 0x5e4) = 0;
-      FUN_002a780c(*(unsigned int *)(temp_v11 + 0x5d4));
+      asdMemFreeSlot(*(unsigned int *)(temp_v11 + 0x5d4));
       *(unsigned int *)(temp_v11 + 0x5d4) = 0;
-      FUN_002a780c(*(unsigned int *)(temp_v11 + 0x5d8));
+      asdMemFreeSlot(*(unsigned int *)(temp_v11 + 0x5d8));
       *(unsigned int *)(temp_v11 + 0x5d8) = 0;
-      FUN_002a780c(*(unsigned int *)(temp_v11 + 0x5dc));
+      asdMemFreeSlot(*(unsigned int *)(temp_v11 + 0x5dc));
       *(unsigned int *)(temp_v11 + 0x5dc) = 0;
-      temp_v11 = DAT_0043dd50;
-      temp_v7 = *(unsigned int *)(DAT_0043dd50 + 4);
-      *(unsigned int *)(DAT_0043dd50 + 4) = 0;
+      temp_v11 = g_uiQuest;
+      temp_v7 = *(unsigned int *)(g_uiQuest + 4);
+      *(unsigned int *)(g_uiQuest + 4) = 0;
       *(unsigned int *)(temp_v11 + 8) = temp_v7;
       *(unsigned int *)(temp_v11 + 0x10) = 0;
       if (*(char *)(temp_v1 + 0x5f2) != '\0') {
         FUN_002a0cb0();
-        FUN_002b8838();
+        buttonHelpSetPreset();
       }
     }
     *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
@@ -309,69 +309,69 @@ unsigned int FUN_001956c4(void)
       timerStart(temp_v1 + 0x1d8,0,0);
     }
     *(unsigned int *)(temp_v1 + 0x5c8) = *(unsigned int *)(temp_v1 + 0x5cc);
-    temp_v11 = DAT_0043dd50;
+    temp_v11 = g_uiQuest;
     if (*(int *)(temp_v1 + 8) != 2) {
       if (*(int *)(temp_v1 + 8) != 0x1d) {
         if (*(int *)(temp_v1 + 0xc) == 0x1c) {
-          temp_v5 = *(int *)(DAT_0043dd50 + 0x5d0);
+          temp_v5 = *(int *)(g_uiQuest + 0x5d0);
           if (temp_v5 == 1) {
             temp_v7 = 0xea;
-            FUN_002b8838(temp_v7);
+            buttonHelpSetPreset(temp_v7);
           }
           else if (temp_v5 != 2) {
             if (temp_v5 == 3) {
-              if (*(int *)(DAT_0043dd50 + 0x5c8) == 0) {
-                FUN_002b8838(0xd6);
+              if (*(int *)(g_uiQuest + 0x5c8) == 0) {
+                buttonHelpSetPreset(0xd6);
               }
               if (*(int *)(temp_v11 + 0x5c8) == 1) {
-                FUN_002b8838(0xd7);
+                buttonHelpSetPreset(0xd7);
               }
               if (*(int *)(temp_v11 + 0x5c8) == 2) {
                 temp_v7 = 0xd8;
-                FUN_002b8838(temp_v7);
+                buttonHelpSetPreset(temp_v7);
               }
             }
           }
           else {
-            if (*(int *)(DAT_0043dd50 + 0x5c8) == 0) {
-              FUN_002b8838(0xeb);
+            if (*(int *)(g_uiQuest + 0x5c8) == 0) {
+              buttonHelpSetPreset(0xeb);
             }
             if (*(int *)(temp_v11 + 0x5c8) == 1) {
               temp_v7 = 0xec;
-              FUN_002b8838(temp_v7);
+              buttonHelpSetPreset(temp_v7);
             }
           }
         }
       }
-      else if (*(char *)(DAT_0043dd50 + 0x5c4) != '\0') {
-        if (*(int *)(DAT_0043dd50 + 0x5d0) == 2) {
-          if (*(int *)(DAT_0043dd50 + 0x5c8) == 0) {
-            FUN_002b8838(0xd5);
+      else if (*(char *)(g_uiQuest + 0x5c4) != '\0') {
+        if (*(int *)(g_uiQuest + 0x5d0) == 2) {
+          if (*(int *)(g_uiQuest + 0x5c8) == 0) {
+            buttonHelpSetPreset(0xd5);
           }
           if (*(int *)(temp_v11 + 0x5c8) == 1) {
             temp_v7 = 0xd4;
-            FUN_002b8838(temp_v7);
+            buttonHelpSetPreset(temp_v7);
           }
         }
       }
       else {
-        if (*(int *)(DAT_0043dd50 + 0x5d0) == 2) {
-          if (*(int *)(DAT_0043dd50 + 0x5c8) == 0) {
-            FUN_002b8838(0xd5);
+        if (*(int *)(g_uiQuest + 0x5d0) == 2) {
+          if (*(int *)(g_uiQuest + 0x5c8) == 0) {
+            buttonHelpSetPreset(0xd5);
           }
           if (*(int *)(temp_v11 + 0x5c8) == 1) {
-            FUN_002b8838(0xd4);
+            buttonHelpSetPreset(0xd4);
           }
         }
         if (*(int *)(temp_v11 + 0x5d0) == 3) {
           if (*(int *)(temp_v11 + 0x5c8) == 0) {
-            FUN_002b8838(0xd6);
+            buttonHelpSetPreset(0xd6);
           }
           if (*(int *)(temp_v11 + 0x5c8) == 1) {
-            FUN_002b8838(0xd7);
+            buttonHelpSetPreset(0xd7);
           }
           if (*(int *)(temp_v11 + 0x5c8) == 2) {
-            FUN_002b8838(0xd8);
+            buttonHelpSetPreset(0xd8);
           }
         }
       }
@@ -380,7 +380,7 @@ unsigned int FUN_001956c4(void)
       FUN_002905d0();
     }
     temp_v7 = 4;
-    temp_v11 = DAT_0043dd50;
+    temp_v11 = g_uiQuest;
     *(unsigned int *)(temp_v11 + 4) = temp_v7;
     *(unsigned int *)(temp_v11 + 0x10) = 0;
     *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
@@ -402,7 +402,7 @@ unsigned int FUN_001956c4(void)
       break;
     }
     FUN_002bf810(0x100025c);
-    FUN_002b63c0();
+    dataTable1bOr1cGetRecord();
     if (*(char *)(temp_v4 + 6) != '\x06') {
       if (*(char *)(temp_v4 + 6) != '\t') {
         FUN_00199024();
@@ -413,7 +413,7 @@ unsigned int FUN_001956c4(void)
       if (*(short *)(temp_v4 + 0x14c) != 0) {
         temp_v7 = 0xe;
       }
-      temp_v11 = FUN_00296f4c(*(unsigned int *)(temp_v1 + 0x5b4),temp_v7);
+      temp_v11 = scrScriptProcessStartEntry(*(unsigned int *)(temp_v1 + 0x5b4),temp_v7);
       if (temp_v11 == 0) {
         *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
         return 0;
@@ -421,7 +421,7 @@ unsigned int FUN_001956c4(void)
       temp_v7 = 0xf;
     }
     else {
-      temp_v11 = FUN_00296f4c(*(unsigned int *)(temp_v1 + 0x5b4),7);
+      temp_v11 = scrScriptProcessStartEntry(*(unsigned int *)(temp_v1 + 0x5b4),7);
       if (temp_v11 == 0) {
         *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
         return 0;
@@ -445,8 +445,8 @@ unsigned int FUN_001956c4(void)
       break;
     }
     temp_v11 = FUN_002903f0();
-    FUN_002b63c0();
-    if ((*(char *)(temp_v11 + 6) != '\t') || (temp_v11 = FUN_002903c8(), temp_v11 == 0)) {
+    dataTable1bOr1cGetRecord();
+    if ((*(char *)(temp_v11 + 6) != '\t') || (temp_v11 = gameJumpRequestIsPending(), temp_v11 == 0)) {
       temp_v3 = FUN_002903f0();
       *(unsigned short *)(temp_v1 + 0x980) = temp_v3;
       temp_v7 = FUN_002903f0();
@@ -457,7 +457,7 @@ unsigned int FUN_001956c4(void)
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
     }
-    temp_v11 = FUN_00296f4c(*(unsigned int *)(temp_v1 + 0x5b4),10);
+    temp_v11 = scrScriptProcessStartEntry(*(unsigned int *)(temp_v1 + 0x5b4),10);
     if (temp_v11 == 0) {
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
@@ -480,8 +480,8 @@ unsigned int FUN_001956c4(void)
       break;
     }
     temp_v11 = FUN_002903f0();
-    FUN_002b63c0();
-    if ((*(char *)(temp_v11 + 6) != '\t') || (temp_v11 = FUN_002903c8(), temp_v11 == 0)) {
+    dataTable1bOr1cGetRecord();
+    if ((*(char *)(temp_v11 + 6) != '\t') || (temp_v11 = gameJumpRequestIsPending(), temp_v11 == 0)) {
       temp_v3 = FUN_002903f0();
       *(unsigned short *)(temp_v1 + 0x980) = temp_v3;
       temp_v7 = FUN_002903f0();
@@ -493,7 +493,7 @@ unsigned int FUN_001956c4(void)
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
     }
-    temp_v11 = FUN_00296f4c(*(unsigned int *)(temp_v1 + 0x5b4),10);
+    temp_v11 = scrScriptProcessStartEntry(*(unsigned int *)(temp_v1 + 0x5b4),10);
     if (temp_v11 == 0) {
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
@@ -547,10 +547,10 @@ unsigned int FUN_001956c4(void)
       temp_v7 = 2;
       break;
     }
-    FUN_002b8838(0xe2);
+    buttonHelpSetPreset(0xe2);
     temp_v11 = FUN_0029022c();
     if (temp_v11 != 0) {
-      temp_v11 = FUN_00296f4c(*(unsigned int *)(temp_v1 + 0x5b4),2);
+      temp_v11 = scrScriptProcessStartEntry(*(unsigned int *)(temp_v1 + 0x5b4),2);
       if (temp_v11 == 0) {
         *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
         return 0;
@@ -558,7 +558,7 @@ unsigned int FUN_001956c4(void)
       temp_v7 = 8;
     }
     else {
-      temp_v11 = FUN_00296f4c(*(unsigned int *)(temp_v1 + 0x5b4),0);
+      temp_v11 = scrScriptProcessStartEntry(*(unsigned int *)(temp_v1 + 0x5b4),0);
       if (temp_v11 == 0) {
         *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
         return 0;
@@ -573,14 +573,14 @@ unsigned int FUN_001956c4(void)
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
     }
-    temp_v11 = FUN_002c09d0(0x216);
+    temp_v11 = gameFlagIsSet(0x216);
     if (temp_v11 == 0) {
       FUN_00290404();
       FUN_002905d0();
       temp_v11 = FUN_0029efc0(temp_v1 + 0x660);
       temp_v5 = FUN_0029efa8(temp_v1 + 0x660);
       temp_v4 = (unsigned int)*(unsigned short *)(temp_v1 + (temp_v5 + temp_v11) * 2 + 0x78a);
-      FUN_002b63c0();
+      dataTable1bOr1cGetRecord();
       if (*(char *)(temp_v4 + 6) == '\x06') {
         *(unsigned char *)(temp_v1 + 0x5c5) = 1;
       }
@@ -598,7 +598,7 @@ unsigned int FUN_001956c4(void)
       temp_v7 = 3;
       break;
     }
-    temp_v11 = FUN_00296f4c(*(unsigned int *)(temp_v1 + 0x5c0),3);
+    temp_v11 = scrScriptProcessStartEntry(*(unsigned int *)(temp_v1 + 0x5c0),3);
     if (temp_v11 == 0) {
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
@@ -762,7 +762,7 @@ joined_r0x0019627c:
       return 0;
     }
     FUN_002a0cb0();
-    FUN_002b8838();
+    buttonHelpSetPreset();
     temp_v7 = 0;
     break;
   case 0x14:
@@ -808,8 +808,8 @@ joined_r0x0019627c:
           temp_v3 = *(unsigned short *)(temp_v1 + 0x97e);
         }
         FUN_0028ffb8(temp_v3);
-        temp_v11 = DAT_0043dd50;
-        *(unsigned int *)(DAT_0043dd50 + 8) = *(unsigned int *)(DAT_0043dd50 + 4);
+        temp_v11 = g_uiQuest;
+        *(unsigned int *)(g_uiQuest + 8) = *(unsigned int *)(g_uiQuest + 4);
         *(unsigned int *)(temp_v11 + 4) = 0x15;
         *(unsigned int *)(temp_v11 + 0x10) = 0;
       }
@@ -855,7 +855,7 @@ joined_r0x0019627c:
         temp_v11 = FUN_0029efc0(temp_v1 + 0x660);
         temp_v5 = FUN_0029efa8(temp_v1 + 0x660);
         temp_v4 = (unsigned int)*(unsigned short *)(temp_v1 + (temp_v5 + temp_v11) * 2 + 0x78a);
-        FUN_002b63c0();
+        dataTable1bOr1cGetRecord();
         if (*(char *)(temp_v4 + 6) != '\x06') {
           if (*(char *)(temp_v4 + 6) != '\t') {
             FUN_002bf810(0x100025c);
@@ -866,22 +866,22 @@ joined_r0x0019627c:
             if (*(short *)(temp_v4 + 0x14c) != 0) {
               temp_v7 = 0xe;
             }
-            temp_v11 = FUN_00296f4c(*(unsigned int *)(temp_v1 + 0x5b4),temp_v7);
+            temp_v11 = scrScriptProcessStartEntry(*(unsigned int *)(temp_v1 + 0x5b4),temp_v7);
             if (temp_v11 != 0) {
               temp_v7 = 0xf;
-              temp_v11 = DAT_0043dd50;
-              *(unsigned int *)(DAT_0043dd50 + 8) = *(unsigned int *)(DAT_0043dd50 + 4);
+              temp_v11 = g_uiQuest;
+              *(unsigned int *)(g_uiQuest + 8) = *(unsigned int *)(g_uiQuest + 4);
               *(unsigned int *)(temp_v11 + 4) = temp_v7;
               *(unsigned int *)(temp_v11 + 0x10) = 0;
             }
           }
         }
         else {
-          temp_v11 = FUN_00296f4c(*(unsigned int *)(temp_v1 + 0x5b4),7);
+          temp_v11 = scrScriptProcessStartEntry(*(unsigned int *)(temp_v1 + 0x5b4),7);
           if (temp_v11 != 0) {
             temp_v7 = 0xe;
-            temp_v11 = DAT_0043dd50;
-            *(unsigned int *)(DAT_0043dd50 + 8) = *(unsigned int *)(DAT_0043dd50 + 4);
+            temp_v11 = g_uiQuest;
+            *(unsigned int *)(g_uiQuest + 8) = *(unsigned int *)(g_uiQuest + 4);
             *(unsigned int *)(temp_v11 + 4) = temp_v7;
             *(unsigned int *)(temp_v11 + 0x10) = 0;
           }
@@ -1003,7 +1003,7 @@ joined_r0x0019627c:
       return 0;
     }
     FUN_002a0cb0();
-    FUN_002b8838();
+    buttonHelpSetPreset();
     temp_v7 = 0;
     break;
   case 0x1a:
@@ -1043,8 +1043,8 @@ joined_r0x0019627c:
         return 0;
       }
       timerStart(temp_v1 + 0x1d8,3,0);
-      temp_v11 = DAT_0043dd50;
-      *(unsigned int *)(DAT_0043dd50 + 8) = *(unsigned int *)(DAT_0043dd50 + 4);
+      temp_v11 = g_uiQuest;
+      *(unsigned int *)(g_uiQuest + 8) = *(unsigned int *)(g_uiQuest + 4);
       *(unsigned int *)(temp_v11 + 4) = 5;
       *(unsigned int *)(temp_v11 + 0x10) = 0;
       temp_v7 = 0x100016f;
@@ -1067,8 +1067,8 @@ joined_r0x0019627c:
           return 0;
         }
         timerStart(temp_v1 + 0x1d8,2,0);
-        temp_v11 = DAT_0043dd50;
-        *(unsigned int *)(DAT_0043dd50 + 8) = *(unsigned int *)(DAT_0043dd50 + 4);
+        temp_v11 = g_uiQuest;
+        *(unsigned int *)(g_uiQuest + 8) = *(unsigned int *)(g_uiQuest + 4);
         *(unsigned int *)(temp_v11 + 4) = 5;
         *(unsigned int *)(temp_v11 + 0x10) = 0;
         temp_v7 = 0x100016f;
@@ -1085,8 +1085,8 @@ joined_r0x0019627c:
           }
         }
         timerStart(temp_v1 + 0x34,2,0);
-        temp_v11 = DAT_0043dd50;
-        *(unsigned int *)(DAT_0043dd50 + 8) = *(unsigned int *)(DAT_0043dd50 + 4);
+        temp_v11 = g_uiQuest;
+        *(unsigned int *)(g_uiQuest + 8) = *(unsigned int *)(g_uiQuest + 4);
         *(unsigned int *)(temp_v11 + 4) = 3;
         *(unsigned int *)(temp_v11 + 0x10) = 0;
         temp_v7 = 0x100016d;
@@ -1096,7 +1096,7 @@ joined_r0x0019627c:
     *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
     return 0;
   case 0x1e:
-    temp_v5 = FUN_0029e1c8();
+    temp_v5 = useCounterIsFinished();
     if (temp_v5 == 0) {
       temp_v5 = FUN_0029e130();
       if (temp_v5 != 0x4b) {
@@ -1126,8 +1126,8 @@ joined_r0x0019627c:
     FUN_00290404();
     temp_v7 = 2;
   }
-  temp_v11 = DAT_0043dd50;
-  *(unsigned int *)(DAT_0043dd50 + 8) = *(unsigned int *)(DAT_0043dd50 + 4);
+  temp_v11 = g_uiQuest;
+  *(unsigned int *)(g_uiQuest + 8) = *(unsigned int *)(g_uiQuest + 4);
   *(unsigned int *)(temp_v11 + 4) = temp_v7;
   *(unsigned int *)(temp_v11 + 0x10) = 0;
   *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;

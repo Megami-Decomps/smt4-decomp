@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_002e7908(int *, unsigned int *);
-int FUN_002e9afe(int *, unsigned char [12]);
-int FUN_002e9ec8(int, unsigned int);
+int vectorCopyHeader(int *, unsigned char [12]);
+int onlineInstanceTableFind(int, unsigned int);
 int FUN_002f6be2(int, int *);
-int FUN_002f6bf0(int);
+int operatorDeleteArrayNullable(int);
 
 typedef int romwright_code(...);
 /* stack frame of param_2: 6 slot(s), 24 byte(s) */
@@ -23,11 +23,11 @@ typedef struct {
 
 extern unsigned int FUN_0010b7f8(void);
 /* Supplied declaration required: FUN_002e7908. */
-extern int FUN_002e9af4(void);
-/* Supplied declaration required: FUN_002e9afe. */
-/* Supplied declaration required: FUN_002e9ec8. */
+extern int onlineInstanceTableGetCurrent(void);
+/* Supplied declaration required: vectorCopyHeader. */
+/* Supplied declaration required: onlineInstanceTableFind. */
 /* Supplied declaration required: FUN_002f6be2. */
-/* Supplied declaration required: FUN_002f6bf0. */
+/* Supplied declaration required: operatorDeleteArrayNullable. */
 
 
 void FUN_001215cc(int *param_1,int param_2)
@@ -50,15 +50,15 @@ void FUN_001215cc(int *param_1,int param_2)
   FUN_002f6be2(param_2 + 0x70,&temp_v2);
   (**(romwright_code **)(**(int **)(param_2 + 0x6c) + 8))
             (&temp_v4,*(int **)(param_2 + 0x6c),temp_v2,*(unsigned char *)(param_2 + 0x78));
-  FUN_002f6bf0(temp_v2);
+  operatorDeleteArrayNullable(temp_v2);
   if (temp_v4 >= 0) {
     (**(romwright_code **)(**(int **)(param_2 + 0x8c) + 8))
               (*(int **)(param_2 + 0x8c),*(unsigned int *)(param_2 + 0x6c));
-    temp_v1 = FUN_002e9af4();
-    FUN_002e9ec8(temp_v1,*(unsigned int *)(param_2 + 0x68));
+    temp_v1 = onlineInstanceTableGetCurrent();
+    onlineInstanceTableFind(temp_v1,*(unsigned int *)(param_2 + 0x68));
     if (temp_v1 != 0) {
       (**(romwright_code **)(**(int **)(param_2 + 0x6c) + 0x24))(temp_v7);
-      FUN_002e9afe(&temp_v4,temp_v7);
+      vectorCopyHeader(&temp_v4,temp_v7);
       if (temp_v4 < 0) {
         *param_1 = temp_v4;
         param_1[1] = temp_v5;

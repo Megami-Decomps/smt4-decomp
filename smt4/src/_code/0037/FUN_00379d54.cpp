@@ -5,14 +5,14 @@
 extern "C" {
 
 int FUN_002bad74(unsigned int, int);
-int FUN_002c3424(int);
+int nn_os_LightEvent_Wait(int);
 int FUN_00379450(int *);
 int FUN_0037c294(int *);
 
 typedef int romwright_code(...);
 /* Supplied declaration required: FUN_002bad74. */
 extern unsigned int FUN_002baed8(void);
-/* Supplied declaration required: FUN_002c3424. */
+/* Supplied declaration required: nn_os_LightEvent_Wait. */
 /* Supplied declaration required: FUN_00379450. */
 /* Supplied declaration required: FUN_0037c294. */
 extern unsigned char nn_os_LightEvent_TryWait(unsigned int);
@@ -32,7 +32,7 @@ void FUN_00379d54(int *param_1)
   temp_v0 = nn_os_LightEvent_TryWait(temp_v1 + 4);
   if (!temp_v0) {
     FUN_002bad74(temp_v2,1);
-    FUN_002c3424(temp_v1 + 4);
+    nn_os_LightEvent_Wait(temp_v1 + 4);
   }
   FUN_00379450(param_1);
   FUN_0037c294(param_1 + 0x754);

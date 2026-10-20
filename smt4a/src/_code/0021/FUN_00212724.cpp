@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_00184c00(int, int, int);
+int uiSpriteSetImageKeyframe(int, int, int);
 
-extern int DAT_0057f108; /* 0x57f108 */
+extern int g_camp; /* 0x57f108 */
 
-/* Supplied declaration required: FUN_00184c00. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 
 
 void FUN_00212724(void)
@@ -18,13 +18,13 @@ void FUN_00212724(void)
   char temp_v0;
   char *pcVar2;
   
-  if (DAT_0057f108 == 0) {
+  if (g_camp == 0) {
     return;
   }
-  pcVar2 = (char *)(DAT_0057f108 + 0x1b20);
+  pcVar2 = (char *)(g_camp + 0x1b20);
   temp_v0 = *pcVar2;
   if (temp_v0 != '\x04' && temp_v0 != '\x03') {
-    FUN_00184c00(DAT_0057f108 + 0x1a08,0x18,0);
+    uiSpriteSetImageKeyframe(g_camp + 0x1a08,0x18,0);
     *pcVar2 = '\x03';
   }
   return;

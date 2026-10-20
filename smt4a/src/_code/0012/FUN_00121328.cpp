@@ -12,7 +12,7 @@ extern unsigned char DAT_0055afbc; /* 0x55afbc */
 /* Supplied declaration required: FUN_0010a9a0. */
 extern unsigned int FUN_00117358(int);
 /* Supplied declaration required: sysMemClear. */
-extern int FUN_002e760a(unsigned int);
+extern int operatorNew(unsigned int);
 
 
 unsigned int * FUN_00121328(unsigned int *param_1)
@@ -25,14 +25,14 @@ unsigned int * FUN_00121328(unsigned int *param_1)
   *param_1 = (unsigned int)&DAT_0055afbc;
   *(unsigned char *)(param_1 + 1) = 0;
   *(unsigned char *)((int)param_1 + 5) = 0;
-  temp_v0 = FUN_002e760a(0x3c);
+  temp_v0 = operatorNew(0x3c);
   temp_v1 = 0;
   if (temp_v0 != 0) {
     sysMemClear(temp_v0,0x3c);
     temp_v1 = FUN_00117358(temp_v0);
   }
   param_1[2] = temp_v1;
-  temp_v0 = FUN_002e760a(0xc0);
+  temp_v0 = operatorNew(0xc0);
   if (temp_v0 != 0) {
     FUN_0010a9a0();
   }

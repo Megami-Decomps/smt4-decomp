@@ -19,7 +19,7 @@ typedef struct {
 extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: efctSetSpeed. */
-extern int FUN_0018206c(unsigned int);
+extern int asdTMTexTableNodeIsLoaded(unsigned int);
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_001879d0. */
@@ -42,8 +42,8 @@ void FUN_0049ef38(int param_1,int param_2,int param_3,int param_4,int param_5)
   temp_v5 = *(int *)(param_1 + 0x84);
   temp_v6 = (unsigned int)*(unsigned short *)(temp_v5 + *(int *)(param_2 + 0x10) * 10 + 0x36);
   temp_v0 = *(unsigned short *)(temp_v5 + *(int *)(param_2 + 0x10) * 10 + 0x38);
-  if ((((*(short *)(temp_v5 + 0x36) == 0) || (temp_v5 = FUN_0018206c(0x33), temp_v5 != 0)) &&
-      ((*(short *)(*(int *)(param_1 + 0x84) + 0x40) == 0 || (temp_v5 = FUN_0018206c(0x33), temp_v5 != 0)
+  if ((((*(short *)(temp_v5 + 0x36) == 0) || (temp_v5 = asdTMTexTableNodeIsLoaded(0x33), temp_v5 != 0)) &&
+      ((*(short *)(*(int *)(param_1 + 0x84) + 0x40) == 0 || (temp_v5 = asdTMTexTableNodeIsLoaded(0x33), temp_v5 != 0)
        ))) && (temp_v6 != 0)) {
     temp_v7 = (unsigned int)temp_v0 + temp_v6 * 1000;
     temp_v5 = FUN_001834a4(0x33,temp_v7);

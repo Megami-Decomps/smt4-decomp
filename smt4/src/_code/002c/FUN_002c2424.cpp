@@ -9,7 +9,7 @@ int software_interrupt(int);
 
 /* Unsupported intrinsic, declaration required: coproc_movefrom_User_R_Thread_and_Process_ID (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-extern unsigned int *FUN_002ad264(void);
+extern unsigned int *nn_gxlow_CTR_GetGpu(void);
 
 
 unsigned int FUN_002c2424(unsigned int param_1,unsigned int param_2)
@@ -20,7 +20,7 @@ unsigned int FUN_002c2424(unsigned int param_1,unsigned int param_2)
   unsigned int temp_v0;
   int temp_v1;
   
-  puVar1 = (unsigned int *)FUN_002ad264();
+  puVar1 = (unsigned int *)nn_gxlow_CTR_GetGpu();
   temp_v1 = coproc_movefrom_User_R_Thread_and_Process_ID();
   *(unsigned int *)(temp_v1 + 0x80) = 0x80082;
   *(unsigned int *)(temp_v1 + 0x90) = 0xffff8001;

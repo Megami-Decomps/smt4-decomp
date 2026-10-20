@@ -8,9 +8,9 @@ int FUN_00100388(...);
 int sysPlaySe(int);
 int FUN_001ad9b4(void);
 int FUN_00275bc8(int, unsigned int);
-int FUN_00275f44(unsigned int, unsigned int);
+int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int FUN_0046eca4(unsigned int, unsigned int, unsigned int *, int);
-int FUN_0046ed18(unsigned int, unsigned int, unsigned int *, int);
+int aocQueueType07(unsigned int, unsigned int, unsigned int *, int);
 
 extern unsigned char LAB_0047e2ec; /* 0x47e2ec */
 extern unsigned char LAB_0047e304; /* 0x47e304 */
@@ -22,12 +22,12 @@ extern unsigned int g_aocSystem; /* 0x570280 */
 /* Supplied declaration required: FUN_001ad9b4. */
 extern int FUN_00224880(unsigned int);
 /* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: FUN_00275f44. */
-extern unsigned int FUN_00357bc8(unsigned int, unsigned char *);
+/* Supplied declaration required: scrScriptProcessStartEntry. */
+extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 extern int FUN_004186e0(void);
 extern int FUN_0046e08c(unsigned int, unsigned short, unsigned int);
 /* Supplied declaration required: FUN_0046eca4. */
-/* Supplied declaration required: FUN_0046ed18. */
+/* Supplied declaration required: aocQueueType07. */
 
 
 unsigned int FUN_0047e150(unsigned int *param_1)
@@ -56,7 +56,7 @@ unsigned int FUN_0047e150(unsigned int *param_1)
     FUN_00100388(temp_v4,&LAB_0047e304,unaff_r6);
     temp_v2 = FUN_0046e08c(g_aocSystem,*(unsigned short *)(temp_v2 + 0xd4),1);
     if (temp_v2 != 0) {
-      FUN_0046ed18(g_aocSystem,unaff_r6,param_1 + 3,0);
+      aocQueueType07(g_aocSystem,unaff_r6,param_1 + 3,0);
       FUN_0046eca4(g_aocSystem,unaff_r6,param_1 + 4,0);
       *param_1 = 1;
       return 0;
@@ -83,8 +83,8 @@ unsigned int FUN_0047e150(unsigned int *param_1)
     *(unsigned int *)(temp_v0 + 0x108) = 2;
     FUN_00100388(temp_v3,&LAB_0047e320,*(unsigned short *)(temp_v2 + 0xd4),
                  *(unsigned short *)(temp_v2 + 0xd6));
-    temp_v1 = FUN_00357bc8(param_1[3],temp_v3);
-    FUN_00275f44(param_1[5],temp_v1);
+    temp_v1 = tableGroupFindEntryIndex(param_1[3],temp_v3);
+    scrScriptProcessStartEntry(param_1[5],temp_v1);
     temp_v1 = 2;
     break;
   case 2:

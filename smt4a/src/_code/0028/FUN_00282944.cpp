@@ -15,7 +15,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0021bdac. */
 extern unsigned int scrGetArg(unsigned int);
 extern unsigned int FUN_002ba85c(void);
-extern unsigned int FUN_002deb84(void);
+extern unsigned int scrGetCommandFrame(void);
 
 
 void FUN_00282944(int param_1)
@@ -31,7 +31,7 @@ void FUN_00282944(int param_1)
   }
   temp_v0 = FUN_002ba85c();
   temp_v1 = scrGetArg(0);
-  temp_v2 = FUN_002deb84();
+  temp_v2 = scrGetCommandFrame();
   FUN_0021bdac(temp_v0,temp_v1,temp_v2,9,0,0);
   return;
 }

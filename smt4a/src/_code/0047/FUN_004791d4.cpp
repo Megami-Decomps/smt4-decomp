@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0013c174(...);
-int FUN_0014384c(...);
+int asdTMTexTableLoadSprites(...);
 int FUN_0014afd0(...);
 int FUN_0016ccb4(...);
 int FUN_001b57a8(...);
@@ -27,7 +27,7 @@ extern int g_aocMain; /* 0x570260 */
 extern unsigned int g_aocSystem; /* 0x570280 */
 
 /* Supplied declaration required: FUN_0013c174. */
-/* Supplied declaration required: FUN_0014384c. */
+/* Supplied declaration required: asdTMTexTableLoadSprites. */
 /* Supplied declaration required: FUN_0014afd0. */
 extern unsigned int dataTableValueOrZero(unsigned int);
 /* Supplied declaration required: FUN_0016ccb4. */
@@ -83,7 +83,7 @@ void FUN_004791d4(int param_1)
   *(unsigned int *)(param_1 + 0x21c) = temp_v3;
   *(unsigned int *)(param_1 + 0x220) = temp_v4;
   FUN_004788dc(param_1);
-  FUN_0014384c(0x2f);
+  asdTMTexTableLoadSprites(0x2f);
   temp_v0 = 0;
   do {
     FUN_0014afd0(0x2f,temp_v0);

@@ -9,7 +9,7 @@ int FUN_002c1b64(unsigned int, int);
 
 extern unsigned int g_titleScene; /* 0x44ea00 */
 
-extern int FUN_002bfde4(unsigned int);
+extern int padIsButtonPressed(unsigned int);
 /* Supplied declaration required: FUN_002c0944. */
 /* Supplied declaration required: FUN_002c1b64. */
 
@@ -21,7 +21,7 @@ unsigned int FUN_003d8e24(int param_1)
   int temp_v0;
   unsigned int temp_v1;
   
-  temp_v0 = FUN_002bfde4(9);
+  temp_v0 = padIsButtonPressed(9);
   if ((temp_v0 != 0) && (temp_v1 = *(int *)(param_1 + 8) + 1, *(unsigned int *)(param_1 + 8) = temp_v1, temp_v1 >= 3)
      ) {
     *(unsigned int *)(param_1 + 8) = 0;

@@ -5,19 +5,19 @@
 extern "C" {
 
 int asdMemFree(...);
-int FUN_001a0990(...);
-int FUN_001bcd48(...);
+int nn_os_LightEvent_ClearSignal(...);
+int svcSleepThread(...);
 
-int FUN_0010032e(int *);
+int syncWaitHandleForever(int *);
 int refIsNullOrZero(int *);
 int FUN_00178b04(int, unsigned char *, int);
 int FUN_001858ec(...);
-int FUN_00187788(int, int *);
+int asdFileHashPackReadRequest(int, int *);
 int FUN_001883b0(char *, int *, unsigned int);
 int vcallSlot12IfValid(...);
-int FUN_00195fc8(void);
+int sysFatalBreak(void);
 int FUN_0019a364(...);
-int FUN_001af148(unsigned int *);
+int nn_os_LightEvent_Wait(unsigned int *);
 int FUN_002e3140(void);
 int FUN_002e3c44(int *, int *, int, int *);
 int software_interrupt(...);
@@ -40,22 +40,22 @@ extern int g_asdFileMutex; /* 0x5b3fc0 */
 extern unsigned int g_asdFileEvent; /* 0x5b3fd4 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_0010032e. */
+/* Supplied declaration required: syncWaitHandleForever. */
 /* Supplied declaration required: refIsNullOrZero. */
 extern int FUN_00100836(int *, unsigned int, unsigned int *);
-extern int FUN_00167f74(int *);
+extern int asdFileHashPackTryReadRequest(int *);
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_001858ec. */
 extern int asdFileHashPackIsOpen(void);
-/* Supplied declaration required: FUN_00187788. */
+/* Supplied declaration required: asdFileHashPackReadRequest. */
 /* Supplied declaration required: FUN_001883b0. */
 /* Supplied declaration required: vcallSlot12IfValid. */
-/* Supplied declaration required: FUN_00195fc8. */
+/* Supplied declaration required: sysFatalBreak. */
 /* Supplied declaration required: FUN_0019a364. */
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_001a0990. */
-/* Supplied declaration required: FUN_001af148. */
-/* Supplied declaration required: FUN_001bcd48. */
+/* Supplied declaration required: nn_os_LightEvent_ClearSignal. */
+/* Supplied declaration required: nn_os_LightEvent_Wait. */
+/* Supplied declaration required: svcSleepThread. */
 /* Supplied declaration required: FUN_002e3140. */
 /* Supplied declaration required: FUN_002e3c44. */
 
@@ -82,11 +82,11 @@ void FUN_0014b66c(void)
   unsigned int temp_v8;
   
   do {
-    FUN_001af148(&g_asdFileEvent);
+    nn_os_LightEvent_Wait(&g_asdFileEvent);
     if (g_asdFile != '\0') {
       return;
     }
-    FUN_0010032e(&g_asdFileMutex);
+    syncWaitHandleForever(&g_asdFileMutex);
     piVar8 = DAT_005b3fbc;
     piVar4 = &temp_v3;
     FUN_0019a364(&temp_v3,g_asdFileMutex,1);
@@ -113,8 +113,8 @@ void FUN_0014b66c(void)
           }
         }
         temp_v0 = piVar8[0x4f];
-        if (((temp_v0 == 0) || (FUN_00187788(temp_v0,piVar8), temp_v0 == 0)) &&
-           ((temp_v0 = asdFileHashPackIsOpen(), temp_v0 == 0 || (temp_v0 = FUN_00167f74(piVar8), temp_v0 == 0)))) {
+        if (((temp_v0 == 0) || (asdFileHashPackReadRequest(temp_v0,piVar8), temp_v0 == 0)) &&
+           ((temp_v0 = asdFileHashPackIsOpen(), temp_v0 == 0 || (temp_v0 = asdFileHashPackTryReadRequest(piVar8), temp_v0 == 0)))) {
           switch(*piVar8) {
           case 0:
             pcVar2 = (char *)0x18;
@@ -237,7 +237,7 @@ void FUN_0014b66c(void)
               temp_v0 = piVar8[0x4b];
               if ((*(unsigned int *)(temp_v0 + 4) & 0xfffffffe) != 0) {
                 if ((*(unsigned int *)(temp_v0 + 4) & 1) != 0) {
-                  FUN_00195fc8();
+                  sysFatalBreak();
                 }
                 vcallSlot12IfValid(*(unsigned int *)(temp_v0 + 4) & 0xfffffffe);
                 *(unsigned int *)(temp_v0 + 4) = 0;
@@ -345,8 +345,8 @@ void FUN_0014b66c(void)
     if (g_asdFile != '\0') {
       return;
     }
-    FUN_001a0990(&g_asdFileEvent);
-    FUN_001bcd48(&LAB_002dc6c0,0);
+    nn_os_LightEvent_ClearSignal(&g_asdFileEvent);
+    svcSleepThread(&LAB_002dc6c0,0);
   } while( 1 );
 }
 

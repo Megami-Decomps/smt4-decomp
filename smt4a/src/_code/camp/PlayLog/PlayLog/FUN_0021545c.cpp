@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001517b4(...);
 int FUN_00163aa4(int);
 int FUN_001641b4(int);
-int FUN_001846d0(int, int);
+int uiSpriteSelectAnim(int, int);
 int FUN_002007f4(int);
 int FUN_00228b04(int, int);
 int FUN_003450d4(int, unsigned int, int, int, int, int, unsigned char [16], int, int);
@@ -27,7 +27,7 @@ extern int g_playLog; /* 0x57f278 */
 /* Supplied declaration required: FUN_001641b4. */
 extern unsigned short FUN_001643b4(unsigned int, unsigned int);
 extern unsigned int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001846d0. */
+/* Supplied declaration required: uiSpriteSelectAnim. */
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
@@ -121,7 +121,7 @@ void FUN_0021545c(void)
           FUN_001641b4(0x100020f);
           temp_v7 = 0;
           do {
-            FUN_001846d0(temp_v0 + temp_v7 * 0x8c + 0x20,1);
+            uiSpriteSelectAnim(temp_v0 + temp_v7 * 0x8c + 0x20,1);
             temp_v7 = temp_v7 + 1;
           } while (temp_v7 < 5);
           *(unsigned int *)(temp_v0 + 0x344) = 2;
@@ -133,7 +133,7 @@ void FUN_0021545c(void)
           if (temp_v7 != 0) {
             temp_v7 = 0;
             do {
-              FUN_001846d0(temp_v0 + temp_v7 * 0x8c + 0x20,3);
+              uiSpriteSelectAnim(temp_v0 + temp_v7 * 0x8c + 0x20,3);
               temp_v7 = temp_v7 + 1;
             } while (temp_v7 < 5);
             *(unsigned char *)(temp_v0 + 0x6f0) = 1;
@@ -146,7 +146,7 @@ void FUN_0021545c(void)
             if (temp_v7 != 0) {
               temp_v7 = 0;
               do {
-                FUN_001846d0(temp_v0 + temp_v7 * 0x8c + 0x20,1);
+                uiSpriteSelectAnim(temp_v0 + temp_v7 * 0x8c + 0x20,1);
                 temp_v7 = temp_v7 + 1;
               } while (temp_v7 < 5);
               *(unsigned char *)(temp_v0 + 0x6f0) = 0;

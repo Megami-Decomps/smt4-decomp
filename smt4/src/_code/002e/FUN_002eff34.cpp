@@ -7,11 +7,11 @@ typedef struct Obj {
     /* 0x980 */ u16 unk980;
 } Obj;
 
-extern Obj *DAT_0043dd50;
+extern Obj *g_uiQuest;
 
 u16 FUN_002eff34(void)
 {
-    return DAT_0043dd50->unk980;
+    return g_uiQuest->unk980;
 }
 
 } /* extern "C" */

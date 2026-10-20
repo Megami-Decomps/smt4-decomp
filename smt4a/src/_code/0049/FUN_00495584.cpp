@@ -17,8 +17,8 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_00163aa4. */
-extern unsigned int FUN_001654d8(unsigned int *);
-extern unsigned int FUN_001654e4(unsigned int *);
+extern unsigned int vec2GetXInt(unsigned int *);
+extern unsigned int vec2GetYInt(unsigned int *);
 /* Supplied declaration required: FUN_00184528. */
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: lmapSceneGetScript. */
@@ -57,8 +57,8 @@ void FUN_00495584(unsigned int *param_1)
   else {
     puVar5 = param_1 + 0x11e;
     FUN_00163aa4(puVar5);
-    temp_v2 = FUN_001654e4(puVar5);
-    temp_v3 = FUN_001654d8(puVar5);
+    temp_v2 = vec2GetYInt(puVar5);
+    temp_v3 = vec2GetXInt(puVar5);
     FUN_004935b0(param_1 + 0xe9,temp_v3,temp_v2);
     if (*(char *)((int)param_1 + 0x502) == '\0') {
       return;

@@ -14,7 +14,7 @@ typedef struct {
 } void_stack;
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_00162e8c(void);
+extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_002c0b98. */
 /* Supplied declaration required: FUN_002c0dbc. */
 
@@ -31,7 +31,7 @@ void FUN_00331efc(void)
   int temp_v5;
   unsigned int in_fpscr;
   
-  temp_v2 = FUN_00162e8c();
+  temp_v2 = gameFlagsGetBlock();
   VectorSignedToFloat((int)*(char *)(temp_v2 + 0xe04),(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat((int)*(char *)(temp_v2 + 0xe05),(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_002c0dbc(0,0);

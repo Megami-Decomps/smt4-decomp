@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002e9598(...);
-int FUN_002e9ec8(...);
+int onlineStringAssign(...);
+int onlineInstanceTableFind(...);
 int FUN_002e9f00(...);
-int FUN_002ea43c(...);
+int onlineJobSetStateDone(...);
 int FUN_002f3dc4(...);
 int FUN_002f3dde(...);
 int FUN_002f76ca(...);
@@ -17,14 +17,14 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_4_stack;
 
-/* Supplied declaration required: FUN_002e9598. */
-extern int FUN_002e9af4(void);
-/* Supplied declaration required: FUN_002e9ec8. */
+/* Supplied declaration required: onlineStringAssign. */
+extern int onlineInstanceTableGetCurrent(void);
+/* Supplied declaration required: onlineInstanceTableFind. */
 /* Supplied declaration required: FUN_002e9f00. */
-/* Supplied declaration required: FUN_002ea43c. */
+/* Supplied declaration required: onlineJobSetStateDone. */
 /* Supplied declaration required: FUN_002f3dc4. */
 /* Supplied declaration required: FUN_002f3dde. */
-extern int FUN_002f4e86(unsigned int *);
+extern int refIsNonNegative(unsigned int *);
 /* Supplied declaration required: FUN_002f76ca. */
 
 
@@ -44,10 +44,10 @@ void FUN_00310ec8(int param_1,unsigned int *param_2,unsigned int param_3,unsigne
   temp_v3 = param_2;
   uStack_1c = param_3;
   uStack_18 = param_4;
-  temp_v0 = FUN_002e9af4();
-  FUN_002e9ec8(temp_v0,*(unsigned int *)(param_1 + 0x6c));
+  temp_v0 = onlineInstanceTableGetCurrent();
+  onlineInstanceTableFind(temp_v0,*(unsigned int *)(param_1 + 0x6c));
   if (temp_v0 != 0) {
-    temp_v1 = FUN_002f4e86(param_2);
+    temp_v1 = refIsNonNegative(param_2);
     if (temp_v1 != 0) {
       if (*(char *)(param_1 + 0x168) != '\0') {
         FUN_002f76ca(*(unsigned int *)(param_1 + 0x78),"invalidurl");
@@ -57,7 +57,7 @@ void FUN_00310ec8(int param_1,unsigned int *param_2,unsigned int param_3,unsigne
         **(unsigned int **)(param_1 + 0x118) = 0;
       }
       else {
-        FUN_002e9598(*(unsigned int *)(param_1 + 0x78),param_1 + 0x7c);
+        onlineStringAssign(*(unsigned int *)(param_1 + 0x78),param_1 + 0x7c);
         puVar4 = *(unsigned int **)(param_1 + 0x108);
         temp_v2 = *(unsigned int *)(param_1 + 0x114);
         *puVar4 = *(unsigned int *)(param_1 + 0x110);
@@ -79,7 +79,7 @@ void FUN_00310ec8(int param_1,unsigned int *param_2,unsigned int param_3,unsigne
   else {
     FUN_002e9f00(param_1 + 0x90,4);
   }
-  FUN_002ea43c(param_1);
+  onlineJobSetStateDone(param_1);
   return;
 }
 

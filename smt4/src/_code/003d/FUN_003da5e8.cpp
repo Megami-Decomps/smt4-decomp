@@ -6,10 +6,10 @@ extern "C" {
 
 int FUN_002276f8(int);
 int FUN_00297468(unsigned char [128], int, int);
-int FUN_002aa568(...);
+int libc_strcmp(...);
 int FUN_002be624(...);
-int FUN_002bf694(...);
-int FUN_002c30c4(...);
+int libc_strcpy(...);
+int libc_strlen(...);
 int memClear(...);
 
 extern unsigned char LAB_003da838; /* 0x3da838 */
@@ -34,11 +34,11 @@ extern unsigned int FUN_00246644(unsigned int, unsigned int, unsigned int);
 extern int FUN_0024a808(int);
 extern int FUN_002522e0(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_00297468. */
-/* Supplied declaration required: FUN_002aa568. */
-extern int FUN_002b4414(int, unsigned int, unsigned int);
+/* Supplied declaration required: libc_strcmp. */
+extern int libc_strncmp(int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002be624. */
-/* Supplied declaration required: FUN_002bf694. */
-/* Supplied declaration required: FUN_002c30c4. */
+/* Supplied declaration required: libc_strcpy. */
+/* Supplied declaration required: libc_strlen. */
 /* Supplied declaration required: memClear. */
 
 
@@ -61,26 +61,26 @@ unsigned int FUN_003da5e8(int param_1)
     temp_v3 = 0;
     do {
       temp_v4 = *(int *)(param_1 + 0x1cfc) + temp_v3 * 0x16 + 0x58;
-      temp_v0 = FUN_002c30c4(temp_v4);
-      if ((temp_v0 != 0) && (temp_v0 = temp_v4, FUN_002aa568(temp_v4,&LAB_003da838), temp_v0 != 0)) {
+      temp_v0 = libc_strlen(temp_v4);
+      if ((temp_v0 != 0) && (temp_v0 = temp_v4, libc_strcmp(temp_v4,&LAB_003da838), temp_v0 != 0)) {
         pcVar2 = "NOT_EFT";
-        FUN_002aa568("NOT_EFT",temp_v4);
+        libc_strcmp("NOT_EFT",temp_v4);
         if ((pcVar2 != (char *)0x0) &&
-           ((temp_v4 == 0 || (temp_v0 = temp_v4, FUN_002aa568(temp_v4,DAT_00435d10), temp_v0 != 0)))) {
+           ((temp_v4 == 0 || (temp_v0 = temp_v4, libc_strcmp(temp_v4,DAT_00435d10), temp_v0 != 0)))) {
           if (temp_v4 != 0) {
-            temp_v1 = FUN_002c30c4(DAT_00435d0c);
-            temp_v0 = FUN_002b4414(temp_v4,DAT_00435d0c,temp_v1);
+            temp_v1 = libc_strlen(DAT_00435d0c);
+            temp_v0 = libc_strncmp(temp_v4,DAT_00435d0c,temp_v1);
             if (temp_v0 == 0) goto LAB_003da81c;
           }
           if (temp_v4 != 0) {
-            temp_v1 = FUN_002c30c4((*(unsigned int *)&s__B_B_B_B_B_B_00435d00.u1[0]));
-            temp_v0 = FUN_002b4414(temp_v4,(*(unsigned int *)&s__B_B_B_B_B_B_00435d00.u1[0]),temp_v1);
+            temp_v1 = libc_strlen((*(unsigned int *)&s__B_B_B_B_B_B_00435d00.u1[0]));
+            temp_v0 = libc_strncmp(temp_v4,(*(unsigned int *)&s__B_B_B_B_B_B_00435d00.u1[0]),temp_v1);
             if (temp_v0 == 0) {
               temp_v2 = 0;
               do {
                 FUN_002be624(temp_v6,"%s%02d",(*(unsigned int *)&s__B_B_B_B_B_B_00435d00.u1[0]),temp_v2);
                 puVar4 = temp_v6;
-                FUN_002aa568(puVar4,temp_v4);
+                libc_strcmp(puVar4,temp_v4);
                 if (puVar4 == (unsigned char *)0x0) {
                   FUN_002276f8(param_1);
                   temp_v1 = FUN_00246644(temp_v2 & 0xff,7,0);
@@ -93,16 +93,16 @@ unsigned int FUN_003da5e8(int param_1)
             }
           }
           if ((temp_v4 == 0) ||
-             (temp_v0 = temp_v4, FUN_002aa568(temp_v4,(*(unsigned int *)&s__B_B_B_B_B_B_00435d00.u1[20])), temp_v0 != 0)) {
+             (temp_v0 = temp_v4, libc_strcmp(temp_v4,(*(unsigned int *)&s__B_B_B_B_B_B_00435d00.u1[20])), temp_v0 != 0)) {
             memClear(temp_v5,0x80);
             memClear(temp_v6,0x80);
             FUN_002be624(temp_v6,"battle/effect/%s.eft",temp_v4);
-            FUN_002bf694(temp_v5,temp_v6);
-            temp_v0 = FUN_002c30c4(temp_v5);
+            libc_strcpy(temp_v5,temp_v6);
+            temp_v0 = libc_strlen(temp_v5);
             if (temp_v0 != 0) {
               temp_v0 = param_1 + temp_v3 * 0x8c;
               temp_v4 = FUN_002522e0(temp_v5,0x2f);
-              FUN_002bf694(temp_v0 + 0x1f38,temp_v4 + 1);
+              libc_strcpy(temp_v0 + 0x1f38,temp_v4 + 1);
               temp_v4 = FUN_0024a808(temp_v0 + 0x1f38);
               if (temp_v4 == 0xff) {
                 FUN_00297468(temp_v5,temp_v0 + 0x1f34,0);

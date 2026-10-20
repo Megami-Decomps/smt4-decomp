@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e342c(unsigned char *, int);
+int libc_strcpy(unsigned char *, int);
 int FUN_002e9acc(int, unsigned int);
 int FUN_002ea3d0(int, unsigned int);
 int FUN_002eca44(int);
@@ -23,11 +23,11 @@ extern unsigned char DAT_0055a1e4; /* 0x55a1e4 */
 
 extern int initVtable005593b0(int);
 extern int wstrlen(int);
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 extern int strInit(int);
 extern unsigned int FUN_002e784e(int, unsigned char *, unsigned int);
-extern int FUN_002e9300(int, unsigned int);
-extern int FUN_002e9520(unsigned int *, unsigned int);
+extern int onlineStringConstruct(int, unsigned int);
+extern int onlineStringCopyConstruct(unsigned int *, unsigned int);
 /* Supplied declaration required: FUN_002e9acc. */
 extern int FUN_002e9ff4(int);
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned int, unsigned int, unsigned char *);
@@ -55,8 +55,8 @@ int FUN_0011997c(fn_0011997c_arg0 *param_1,unsigned int param_2,unsigned int par
   puVar1 = (unsigned int *)FUN_002eca10(param_1,2,temp_v4);
   puVar1[0x1a] = param_2;
   *puVar1 = (unsigned int)&DAT_0055a1e4;
-  temp_v0 = FUN_002e9520(puVar1 + 0x1b,param_5);
-  temp_v0 = FUN_002e9300(temp_v0 + 0xc,param_7);
+  temp_v0 = onlineStringCopyConstruct(puVar1 + 0x1b,param_5);
+  temp_v0 = onlineStringConstruct(temp_v0 + 0xc,param_7);
   *(unsigned short *)(temp_v0 + 8) = param_8;
   *(unsigned int *)(temp_v0 + 0xc) = param_9;
   temp_v0 = temp_v0 + 0x10;
@@ -86,7 +86,7 @@ int FUN_0011997c(fn_0011997c_arg0 *param_1,unsigned int param_2,unsigned int par
     *(unsigned int *)(temp_v0 - 0x194) = temp_v2;
     temp_v1 = wstrlen(param_6);
     if (temp_v1 != 0) {
-      FUN_002e342c(*(unsigned char **)(temp_v0 - 0x194),param_6);
+      libc_strcpy(*(unsigned char **)(temp_v0 - 0x194),param_6);
     }
     else {
       **(unsigned char **)(temp_v0 - 0x194) = 0;

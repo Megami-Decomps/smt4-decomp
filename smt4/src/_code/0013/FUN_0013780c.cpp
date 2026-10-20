@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0013b608(void);
-int FUN_0013b618(void);
+int nngxLockEnter(void);
+int nngxLockLeave(void);
 int FUN_002ba2b8(void);
 
 /* stack frame of param_12: 2 slot(s), 8 byte(s) */
@@ -18,8 +18,8 @@ extern signed char DAT_004c62a1; /* 0x4c62a1 */
 extern signed char DAT_004c62a2; /* 0x4c62a2 */
 extern int DAT_004c6330; /* 0x4c6330 */
 
-/* Supplied declaration required: FUN_0013b608. */
-/* Supplied declaration required: FUN_0013b618. */
+/* Supplied declaration required: nngxLockEnter. */
+/* Supplied declaration required: nngxLockLeave. */
 /* Supplied declaration required: FUN_002ba2b8. */
 
 
@@ -162,13 +162,13 @@ void FUN_0013780c(int param_1,unsigned int param_2,int param_3,int param_4,int p
       temp_v2 = (temp_v0 & 0xfffffc7f) | (temp_v9 << 7);
     }
     *(unsigned int *)(puVar4 + 0x14) = temp_v2 & 0xfffff3ff;
-    FUN_0013b608();
+    nngxLockEnter();
     *(int *)(param_1 + 0x20) = *(int *)(param_1 + 0x20) + 1;
     if (((DAT_004c6330 == param_1) && (DAT_004c62a2 != '\0')) && (DAT_004c62a1 == '\0')) {
       DAT_004c62a1 = '\x01';
       FUN_002ba2b8();
     }
-    FUN_0013b618();
+    nngxLockLeave();
     return;
   }
   return;

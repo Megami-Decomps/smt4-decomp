@@ -15,7 +15,7 @@ typedef struct {
 extern int FUN_00184964(unsigned int, int);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_00480838. */
-extern int FUN_00481104(unsigned int);
+extern int flagValueIsPositive(unsigned int);
 
 
 unsigned short FUN_00303bd4(int param_1)
@@ -32,7 +32,7 @@ unsigned short FUN_00303bd4(int param_1)
   sysMemClear(temp_v3,200);
   temp_v1 = 0x3b7;
   do {
-    temp_v0 = FUN_00481104(temp_v1);
+    temp_v0 = flagValueIsPositive(temp_v1);
     if (temp_v0 != 0) {
       puVar2 = temp_v3 + temp_v2;
       temp_v2 = temp_v2 + 1;

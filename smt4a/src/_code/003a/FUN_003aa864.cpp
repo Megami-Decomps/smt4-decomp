@@ -99,7 +99,7 @@ extern float DAT_00647308; /* 0x647308 */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SUB41 (SUBPIECE). */
 /* Supplied declaration required: FUN_001a1ee0. */
-extern int FUN_001acf08(void);
+extern int effGetFrameStep(void);
 /* Supplied declaration required: FUN_001b63b0. */
 extern unsigned int FUN_00221cb0(void);
 /* Supplied declaration required: FUN_00221d78. */
@@ -362,7 +362,7 @@ void FUN_003aa864(fn_003aa864_arg0 *param_1)
                   *(unsigned char *)((int)puVar22 + 0x12) = 0;
                   *(char *)((int)puVar22 + 0x13) = SUB41(temp_v28,0);
                 }
-                temp_v16 = FUN_001acf08();
+                temp_v16 = effGetFrameStep();
                 *piVar23 = temp_v16 + temp_v19;
               }
             }

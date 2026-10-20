@@ -5,13 +5,13 @@
 extern "C" {
 
 int FUN_0022b29c(int, int, unsigned int);
-int FUN_0026f9b4(void);
-int FUN_002769b4(unsigned int, unsigned int);
+int bgmReleaseStopped(void);
+int mapDepartSetTarget(unsigned int, unsigned int);
 int FUN_0027d98c(void);
 int FUN_0027db24(int);
 int FUN_00285ca4(int);
 int FUN_00297060(int, unsigned int);
-int FUN_002a03a0(int, int, int);
+int soundChannelRequestIfEnabled(int, int, int);
 int FUN_002a03d8(int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -26,8 +26,8 @@ extern unsigned char DAT_0049f950; /* 0x49f950 */
 extern signed char DAT_0049fc14; /* 0x49fc14 */
 
 /* Supplied declaration required: FUN_0022b29c. */
-/* Supplied declaration required: FUN_0026f9b4. */
-/* Supplied declaration required: FUN_002769b4. */
+/* Supplied declaration required: bgmReleaseStopped. */
+/* Supplied declaration required: mapDepartSetTarget. */
 extern int FUN_0027d8c8(void);
 /* Supplied declaration required: FUN_0027d98c. */
 /* Supplied declaration required: FUN_0027db24. */
@@ -35,9 +35,9 @@ extern int FUN_0027d8c8(void);
 extern int FUN_00287894(void);
 extern int FUN_002903f0(void);
 /* Supplied declaration required: FUN_00297060. */
-/* Supplied declaration required: FUN_002a03a0. */
+/* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: FUN_002a03d8. */
-extern int FUN_002c09d0(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 extern int FUN_002c2a04(unsigned int);
 
 
@@ -73,20 +73,20 @@ void FUN_003ba754(int param_1)
     FUN_002a03d8(1,10);
   }
   *(unsigned int *)(param_1 + 0xdb0) = 0;
-  FUN_0026f9b4();
+  bgmReleaseStopped();
   if (temp_v4 == 3 || temp_v4 == 4) {
     temp_v1 = 0x1000063;
   }
   else {
     temp_v1 = 0x1000052;
   }
-  temp_v2 = FUN_002c09d0(0x18c);
+  temp_v2 = gameFlagIsSet(0x18c);
   if (temp_v2 != 0) {
     temp_v1 = 0x1000057;
   }
   if (*(int *)(param_1 + 0x34) != temp_v1) {
     *(int *)(param_1 + 0x34) = temp_v1;
-    FUN_002a03a0(temp_v1,0,0x3c);
+    soundChannelRequestIfEnabled(temp_v1,0,0x3c);
   }
   if (DAT_0049fc14 != '\0') {
     if (temp_v0) {
@@ -132,7 +132,7 @@ void FUN_003ba754(int param_1)
   DAT_0049f950 = 0;
   DAT_0049f930 = 3;
   DAT_0049fc14 = 0;
-  FUN_002769b4(0xffffffff,0xffffffff);
+  mapDepartSetTarget(0xffffffff,0xffffffff);
   return;
 }
 

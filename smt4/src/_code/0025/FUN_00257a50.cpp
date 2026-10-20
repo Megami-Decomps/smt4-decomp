@@ -16,7 +16,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_4_stack;
 
-extern unsigned int *DAT_0043dd68; /* 0x43dd68 */
+extern unsigned int *g_unite; /* 0x43dd68 */
 
 /* Supplied declaration required: FUN_001e0450. */
 /* Supplied declaration required: FUN_0029c528. */
@@ -38,8 +38,8 @@ unsigned int FUN_00257a50(int param_1,int param_2,int param_3,unsigned int param
   int temp_v2;
   unsigned int *puVar5;
   
-  puVar1 = DAT_0043dd68;
-  puVar5 = DAT_0043dd68 + param_2 * 2 + 0x250e;
+  puVar1 = g_unite;
+  puVar5 = g_unite + param_2 * 2 + 0x250e;
   if (param_3 != 0) {
     if (param_3 != 1) {
       if (param_3 != 2) {
@@ -56,10 +56,10 @@ unsigned int FUN_00257a50(int param_1,int param_2,int param_3,unsigned int param
     rt_memcpy_w(param_1,temp_v2,0x604);
   }
   else {
-    if ((DAT_0043dd68[param_2 * 2 + 0x250f] & 0x1fffc) == 0) {
+    if ((g_unite[param_2 * 2 + 0x250f] & 0x1fffc) == 0) {
       return 0;
     }
-    FUN_0029dc74((DAT_0043dd68[param_2 * 2 + 0x250f] & 0x1ffff) >> 2,param_1,0x1fffc,param_4,param_4
+    FUN_0029dc74((g_unite[param_2 * 2 + 0x250f] & 0x1ffff) >> 2,param_1,0x1fffc,param_4,param_4
                 );
     temp_v2 = FUN_002b066c(*puVar5 & 0x7fff);
     temp_v0 = FUN_002b066c((*puVar5 & 0x3fffffff) >> 0xf);

@@ -4,12 +4,12 @@ extern "C" {
 
 struct ScriptState;
 
-u32 FUN_0019e0c4(ScriptState *state);
+u32 scrRunOpcodes(ScriptState *state);
 
-/* Forwards to FUN_0019e0c4, the function that follows it. */
+/* Forwards to scrRunOpcodes, the function that follows it. */
 u32 FUN_0019e0c0(ScriptState *state)
 {
-    return FUN_0019e0c4(state);
+    return scrRunOpcodes(state);
 }
 
 } /* extern "C" */

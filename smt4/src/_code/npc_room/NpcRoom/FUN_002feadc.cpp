@@ -8,7 +8,7 @@ int FUN_0025921c(unsigned char [256], unsigned int);
 int FUN_00259258(void);
 int FUN_002bcfc0(unsigned char [128], unsigned char [132]);
 int FUN_002be624(unsigned char *, unsigned char *, unsigned char [132]);
-int FUN_002bf694(unsigned char [128], int);
+int libc_strcpy(unsigned char [128], int);
 
 extern unsigned char LAB_002feb78; /* 0x2feb78 */
 extern int g_npcRoom; /* 0x44d198 */
@@ -17,7 +17,7 @@ extern int g_npcRoom; /* 0x44d198 */
 /* Supplied declaration required: FUN_00259258. */
 /* Supplied declaration required: FUN_002bcfc0. */
 /* Supplied declaration required: FUN_002be624. */
-/* Supplied declaration required: FUN_002bf694. */
+/* Supplied declaration required: libc_strcpy. */
 
 
 /* WARNING: Type propagation algorithm not settling */
@@ -42,7 +42,7 @@ void FUN_002feadc(void)
     do {
       temp_v1 = *(int *)(temp_v0 + *(short *)(temp_v0 + temp_v2 * 0x10 + 100) * 4 + 0x28);
       if (temp_v1 != 0) {
-        FUN_002bf694(temp_v4,temp_v1 + 0x54);
+        libc_strcpy(temp_v4,temp_v1 + 0x54);
         FUN_002bcfc0(temp_v4,temp_v5);
         puVar3 = temp_v3 + (int)puVar5;
         FUN_002be624(puVar3,&LAB_002feb78,temp_v5);

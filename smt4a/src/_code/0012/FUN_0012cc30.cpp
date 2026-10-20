@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002e9af4(void);
-int FUN_002e9ec8(int, unsigned int);
+int onlineInstanceTableGetCurrent(void);
+int onlineInstanceTableFind(int, unsigned int);
 int FUN_002f7c94(unsigned int, unsigned int, unsigned int);
-int FUN_002f7cb0(int);
+int onlineJobSetStateWaiting(int);
 int FUN_002f7cba(int, int, unsigned int);
 int FUN_0030c720(int, unsigned int);
 int FUN_0030c78c(unsigned char [8]);
@@ -24,13 +24,13 @@ typedef struct {
 extern unsigned char LAB_0012cce0; /* 0x12cce0 */
 extern unsigned char LAB_0012cced; /* 0x12cced */
 
-extern int FUN_002e760a(unsigned int);
+extern int operatorNew(unsigned int);
 extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
-/* Supplied declaration required: FUN_002e9af4. */
-/* Supplied declaration required: FUN_002e9ec8. */
+/* Supplied declaration required: onlineInstanceTableGetCurrent. */
+/* Supplied declaration required: onlineInstanceTableFind. */
 extern unsigned int FUN_002ea3c0(int, unsigned char *, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002f7c94. */
-/* Supplied declaration required: FUN_002f7cb0. */
+/* Supplied declaration required: onlineJobSetStateWaiting. */
 /* Supplied declaration required: FUN_002f7cba. */
 /* Supplied declaration required: FUN_0030c720. */
 extern unsigned short vectorCount4_0030c774(int);
@@ -51,8 +51,8 @@ void FUN_0012cc30(int param_1)
   unsigned short temp_v7;
   unsigned char temp_v8 [16];
   
-  temp_v0 = FUN_002e9af4();
-  FUN_002e9ec8(temp_v0,*(unsigned int *)(param_1 + 0x68));
+  temp_v0 = onlineInstanceTableGetCurrent();
+  onlineInstanceTableFind(temp_v0,*(unsigned int *)(param_1 + 0x68));
   if (temp_v0 != 0) {
     FUN_0030c78c(temp_v4);
     temp_v5 = *(unsigned int *)(param_1 + 0x130);
@@ -63,10 +63,10 @@ void FUN_0012cc30(int param_1)
                       (*(int **)(param_1 + 0x70),param_1 + 0x80,temp_v4,param_1 + 0x110);
     if (temp_v0 != 0) {
       temp_v2 = *(unsigned int *)(param_1 + 0xc4);
-      temp_v1 = FUN_002e9af4();
+      temp_v1 = onlineInstanceTableGetCurrent();
       FUN_002f7c94(temp_v1,*(unsigned int *)(param_1 + 0x68),temp_v2);
-      FUN_002f7cb0(param_1);
-      temp_v0 = FUN_002e760a(0x10);
+      onlineJobSetStateWaiting(param_1);
+      temp_v0 = operatorNew(0x10);
       temp_v1 = 0;
       if (temp_v0 != 0) {
         temp_v1 = FUN_002ea3c0(temp_v0,&LAB_0012cced,0,&LAB_0012cce0);

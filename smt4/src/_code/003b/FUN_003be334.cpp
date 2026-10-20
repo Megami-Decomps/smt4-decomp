@@ -6,10 +6,10 @@ extern "C" {
 
 int FUN_00247478(unsigned char [29], int, int);
 int FUN_0027da30(int, int);
-int FUN_00282924(...);
-int FUN_002a8740(int);
+int btlMainFindEntryByListedId(...);
+int gameGetUnitRecord(int);
 int FUN_002ae164(void);
-int FUN_002b4670(void);
+int dataTable08Sub1GetRecord(void);
 int FUN_003be918(unsigned int, unsigned int, int, int, int);
 int SBORROW4(unsigned int, int);
 int VectorSignedToFloat(int, int);
@@ -33,12 +33,12 @@ typedef struct {
 extern int randRange(unsigned int);
 /* Supplied declaration required: FUN_00247478. */
 /* Supplied declaration required: FUN_0027da30. */
-/* Supplied declaration required: FUN_00282924. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 extern int btlGetMainState(void);
 extern int flagWordTestBit(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002a8740. */
+/* Supplied declaration required: gameGetUnitRecord. */
 /* Supplied declaration required: FUN_002ae164. */
-/* Supplied declaration required: FUN_002b4670. */
+/* Supplied declaration required: dataTable08Sub1GetRecord. */
 /* Supplied declaration required: FUN_003be918. */
 
 
@@ -74,11 +74,11 @@ unsigned int FUN_003be334(int param_1,unsigned int param_2,unsigned int param_3,
   temp_v0 = btlGetMainState();
   temp_v1 = temp_v15;
   FUN_002ae164();
-  FUN_002b4670();
+  dataTable08Sub1GetRecord();
   temp_v3 = temp_v0;
-  FUN_00282924(temp_v0,param_5);
+  btlMainFindEntryByListedId(temp_v0,param_5);
   temp_v2 = temp_v0;
-  FUN_00282924(temp_v0,param_6);
+  btlMainFindEntryByListedId(temp_v0,param_6);
   FUN_00247478(temp_v9,temp_v0,temp_v3);
   temp_v5 = 0xffffffff;
   temp_v6 = 1;
@@ -139,7 +139,7 @@ unsigned int FUN_003be334(int param_1,unsigned int param_2,unsigned int param_3,
           temp_v5 = (unsigned int)(temp_v7 * temp_v8);
         }
         else {
-          temp_v3 = FUN_002a8740(param_6 - 0x6d);
+          temp_v3 = gameGetUnitRecord(param_6 - 0x6d);
           temp_v7 = (float)VectorSignedToFloat((int)*(short *)(temp_v3 + 0x10) *
                                              (int)(short)(unsigned short)*(unsigned char *)(param_4 + 0x69),
                                              (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -155,7 +155,7 @@ unsigned int FUN_003be334(int param_1,unsigned int param_2,unsigned int param_3,
         }
       }
       else {
-        temp_v4 = FUN_002a8740(param_6 - 0x6d);
+        temp_v4 = gameGetUnitRecord(param_6 - 0x6d);
         temp_v3 = flagWordTestBit(temp_v4,3);
         temp_v6 = temp_v3 != 0;
         temp_v3 = 0;

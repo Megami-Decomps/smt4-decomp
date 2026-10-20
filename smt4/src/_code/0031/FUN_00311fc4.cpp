@@ -6,7 +6,7 @@ extern "C" {
 
 int scrSetResult(unsigned int);
 int FUN_002ae164(void);
-int FUN_002b9024(void);
+int devilGetRecord(void);
 
 extern unsigned int g_btlScriptUnit; /* 0x43427c */
 
@@ -14,7 +14,7 @@ extern int btlUnitGet(unsigned int);
 /* Supplied declaration required: scrSetResult. */
 extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_002ae164. */
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: devilGetRecord. */
 
 
 unsigned int FUN_00311fc4(void)
@@ -59,7 +59,7 @@ unsigned int FUN_00311fc4(void)
   }
   if (*(int *)(temp_v1 + 0x284) != 0) {
     temp_v2 = (unsigned int)*(unsigned short *)(temp_v1 + 0xce);
-    FUN_002b9024();
+    devilGetRecord();
     temp_v1 = 0;
     do {
       temp_v3 = (unsigned int)*(unsigned short *)(temp_v2 + temp_v1 * 2 + 0x3c);

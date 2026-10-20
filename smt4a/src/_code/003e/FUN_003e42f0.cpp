@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00186f58(void);
 
 /* Supplied declaration required: FUN_00186f58. */
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 extern int gameDataBlockGetArea28350(void);
 extern int gameDataBlockGetArea2D68(void);
 extern int FUN_003e4230(unsigned int);
@@ -24,7 +24,7 @@ unsigned int FUN_003e42f0(void)
   unsigned char *pbVar5;
   unsigned int temp_v4;
   
-  temp_v2 = FUN_0018719c(0x408);
+  temp_v2 = gameFlagIsSet(0x408);
   if (temp_v2 == 0) {
     return 0;
   }

@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002b9024(void);
+int devilGetRecord(void);
 
 extern int g_btlTalkBustUp; /* 0x434210 */
 
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: devilGetRecord. */
 
 
 unsigned int FUN_002e44a8(int param_1)
@@ -20,7 +20,7 @@ unsigned int FUN_002e44a8(int param_1)
   
   temp_v0 = g_btlTalkBustUp;
   if ((g_btlTalkBustUp == 0) ||
-     (FUN_002b9024(), (unsigned int)*(unsigned short *)(param_1 + 0x90) != *(unsigned int *)(temp_v0 + 0x2f8))) {
+     (devilGetRecord(), (unsigned int)*(unsigned short *)(param_1 + 0x90) != *(unsigned int *)(temp_v0 + 0x2f8))) {
     temp_v1 = 0;
   }
   else {

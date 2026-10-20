@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00152bec(void);
+int asdMdlManagerMarkDestroy(void);
 int FUN_002878fc(int);
 int FUN_002879dc(int, int, int);
 int FUN_00287a78(void);
@@ -26,7 +26,7 @@ extern signed char DAT_0049fa98; /* 0x49fa98 */
 extern int DAT_0049fa9c; /* 0x49fa9c */
 extern short DAT_0049faae; /* 0x49faae */
 
-/* Supplied declaration required: FUN_00152bec. */
+/* Supplied declaration required: asdMdlManagerMarkDestroy. */
 /* Supplied declaration required: FUN_002878fc. */
 /* Supplied declaration required: FUN_002879dc. */
 /* Supplied declaration required: FUN_00287a78. */
@@ -94,7 +94,7 @@ unsigned int FUN_001a8cf8(void)
         if (*(int *)(temp_v4 + 0x2c) >= 0x3c) {
           if (*(char *)(temp_v4 + 0x4c) != '\0') {
             if (*(int *)(temp_v4 + 0x50) == 0) break;
-            FUN_00152bec();
+            asdMdlManagerMarkDestroy();
             temp_v3 = 4;
             *(unsigned char *)(temp_v4 + 0x54) = 0;
           }

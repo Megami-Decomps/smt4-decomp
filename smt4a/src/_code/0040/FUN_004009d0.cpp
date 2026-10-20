@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 int FUN_003ff998(...);
 int FUN_00400564(int, int, int);
 int SCARRY4(unsigned int, int);
@@ -26,8 +26,8 @@ extern unsigned int DAT_00573cbc; /* 0x573cbc */
 
 /* Unsupported intrinsic, declaration required: SCARRY4 (INT_SCARRY). */
 extern int btlGetMainState(int);
-extern int FUN_001ab888(void);
-/* Supplied declaration required: FUN_001aba54. */
+extern int gameGetSlotTable(void);
+/* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: FUN_003ff998. */
 /* Supplied declaration required: FUN_00400564. */
 extern int btlUnitGet(unsigned int);
@@ -48,7 +48,7 @@ unsigned int FUN_004009d0(int param_1,int param_2)
   unsigned int *puVar9;
   unsigned char temp_v8;
   
-  if ((param_1 == 0) || (FUN_001aba54(), param_1 == 0)) {
+  if ((param_1 == 0) || (dataTable04FindById(), param_1 == 0)) {
     return 1;
   }
   temp_v3 = *(unsigned int *)(param_1 + 0x28);
@@ -166,7 +166,7 @@ unsigned int FUN_004009d0(int param_1,int param_2)
     }
   }
   if (temp_v2) {
-    temp_v6 = FUN_001ab888();
+    temp_v6 = gameGetSlotTable();
     temp_v4 = -1;
     temp_v7 = (unsigned int)*(unsigned char *)(temp_v6 + 0x1ca3);
     if (temp_v7 != 0xffffffff && !SCARRY4(temp_v7,1)) {

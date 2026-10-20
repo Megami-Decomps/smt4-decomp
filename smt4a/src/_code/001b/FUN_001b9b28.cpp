@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_001a089c(unsigned int *, int);
-int FUN_001a08d8(unsigned int *);
+int nn_os_LightEvent_Initialize(unsigned int *, int);
+int nn_os_LightEvent_Signal(unsigned int *);
 
 extern unsigned char DAT_0055c24c; /* 0x55c24c */
 
-/* Supplied declaration required: FUN_001a089c. */
-/* Supplied declaration required: FUN_001a08d8. */
+/* Supplied declaration required: nn_os_LightEvent_Initialize. */
+/* Supplied declaration required: nn_os_LightEvent_Signal. */
 
 
 unsigned int * FUN_001b9b28(unsigned int *param_1)
@@ -20,7 +20,7 @@ unsigned int * FUN_001b9b28(unsigned int *param_1)
   *param_1 = (unsigned int)&DAT_0055c24c;
   param_1[1] = 0;
   param_1[2] = 0;
-  FUN_001a089c(param_1 + 1,1);
+  nn_os_LightEvent_Initialize(param_1 + 1,1);
   *(unsigned char *)(param_1 + 3) = 0;
   *(unsigned char *)((int)param_1 + 0xd) = 0;
   *(unsigned char *)((int)param_1 + 0xe) = 0;
@@ -39,7 +39,7 @@ unsigned int * FUN_001b9b28(unsigned int *param_1)
   *(unsigned char *)((int)param_1 + 0x35) = 0;
   param_1[0xe] = 0;
   param_1[0xf] = 0;
-  FUN_001a08d8(param_1 + 1);
+  nn_os_LightEvent_Signal(param_1 + 1);
   return param_1;
 }
 

@@ -18,7 +18,7 @@ typedef struct BtlTalk {
 
 extern JobState *jobGetWork(void);
 extern BtlTalk *g_btlTalk;
-extern u32 DAT_0057a9c8;
+extern u32 g_btlUiBlock;
 
 extern void FUN_004ab734(u32 arg);
 extern void asdMemFree(void *block);
@@ -32,7 +32,7 @@ void FUN_002df5c8(void)
     BtlTalk *talk = g_btlTalk;
 
     if (talk != NULL) {
-        FUN_004ab734(DAT_0057a9c8);
+        FUN_004ab734(g_btlUiBlock);
         if (talk->buffer0 != NULL) {
             asdMemFree(talk->buffer0);
             talk->buffer0 = NULL;

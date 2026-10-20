@@ -16,7 +16,7 @@ extern short DAT_005e2058; /* 0x5e2058 */
 
 extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_0021bdac. */
-extern unsigned int FUN_002deb84(void);
+extern unsigned int scrGetCommandFrame(void);
 
 
 int FUN_003305b0(void)
@@ -29,7 +29,7 @@ int FUN_003305b0(void)
   int temp_v3;
   int temp_v4;
   
-  temp_v0 = FUN_002deb84();
+  temp_v0 = scrGetCommandFrame();
   temp_v1 = btlGetMainState();
   temp_v4 = 1;
   temp_v3 = 0;

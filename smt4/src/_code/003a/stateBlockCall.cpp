@@ -8,13 +8,13 @@ struct Global003adc3c {
     /* 0x20 */ u8 *object;
 };
 
-extern Global003adc3c DAT_00439c88;
+extern Global003adc3c g_btlUi;
 
 u32 FUN_0028c600(u8 *state);
 
 u32 stateBlockCall(void)
 {
-    u8 *object = DAT_00439c88.object;
+    u8 *object = g_btlUi.object;
 
     if (object == NULL) {
         return 1;

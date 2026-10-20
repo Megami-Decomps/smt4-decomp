@@ -4,29 +4,29 @@
 
 extern "C" {
 
-int FUN_001641c4(void);
+int ifTouchRegionRemove(void);
 int FUN_001f4908(int, int, int);
 int FUN_00284168(int, int, int, int);
 int FUN_0037ed38(void);
 int ref208SetPair1C(int);
 int FUN_003cbb0c(void);
-int FUN_003d2d34(int, int, int);
-int FUN_003d2d6c(int);
+int soundChannelRequestIfEnabled(int, int, int);
+int soundChannelStopAll(int);
 int FUN_003d54f8(int, int);
 
 extern int FUN_0013def0(unsigned int);
-/* Supplied declaration required: FUN_001641c4. */
+/* Supplied declaration required: ifTouchRegionRemove. */
 extern int FUN_001643a0(void);
-extern int FUN_001656a0(unsigned int);
+extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: FUN_001f4908. */
-extern int FUN_002009a8(unsigned int);
+extern int bgmGetStateById(unsigned int);
 /* Supplied declaration required: FUN_00284168. */
 /* Supplied declaration required: FUN_0037ed38. */
 /* Supplied declaration required: ref208SetPair1C. */
 extern int ref208HasObj(void);
 /* Supplied declaration required: FUN_003cbb0c. */
-/* Supplied declaration required: FUN_003d2d34. */
-/* Supplied declaration required: FUN_003d2d6c. */
+/* Supplied declaration required: soundChannelRequestIfEnabled. */
+/* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: FUN_003d54f8. */
 
 
@@ -52,15 +52,15 @@ unsigned int FUN_004cf140(int param_1)
       *(unsigned char *)(param_1 + 0x24) = 1;
     }
     ref208SetPair1C(1);
-    temp_v1 = FUN_002009a8(0x100003c);
+    temp_v1 = bgmGetStateById(0x100003c);
     if (temp_v1 != 1) {
-      FUN_003d2d34(0x100003c,0,0x3c);
+      soundChannelRequestIfEnabled(0x100003c,0,0x3c);
     }
     *(int *)(param_1 + 0x28) = *(int *)(param_1 + 0x28) + 1;
   }
   temp_v1 = FUN_0013def0(0);
   if ((temp_v1 == 0) &&
-     ((temp_v1 = FUN_001643a0(), temp_v1 == 6 || (temp_v1 = FUN_001656a0(0), temp_v1 != 0)))) {
+     ((temp_v1 = FUN_001643a0(), temp_v1 == 6 || (temp_v1 = padButtonIsPressed(0), temp_v1 != 0)))) {
     *(unsigned int *)(param_1 + 0x28) = 2;
     *(unsigned int *)(param_1 + 0x34) = 0;
   }
@@ -99,8 +99,8 @@ unsigned int FUN_004cf140(int param_1)
       if (*(char *)(param_1 + 0x24) != '\0') {
         FUN_003cbb0c();
       }
-      FUN_001641c4();
-      FUN_003d2d6c(0xf);
+      ifTouchRegionRemove();
+      soundChannelStopAll(0xf);
       return 0;
     }
   }

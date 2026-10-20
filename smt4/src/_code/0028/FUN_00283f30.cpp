@@ -2,8 +2,8 @@
 
 extern "C" {
 
-unsigned int FUN_002b45e8(u32 id);
-extern PadState *FUN_002b63ac(void);
+unsigned int dataTable08Sub2GetRecord(u32 id);
+extern PadState *gameGetPlayerData(void);
 
 typedef struct Source {
     /* 0x00 */ u8 unk00[0x6A];
@@ -20,7 +20,7 @@ typedef struct Dest {
 
 void FUN_00283f30(Dest *dest, int withSource)
 {
-    PadState *pad = FUN_002b63ac();
+    PadState *pad = gameGetPlayerData();
     Source *source;
 
     dest->unk00 = pad->unk34;
@@ -28,7 +28,7 @@ void FUN_00283f30(Dest *dest, int withSource)
     dest->unk08 = pad->unk3C;
     dest->unk0C = pad->unk40;
     if (withSource != 0) {
-        source = (Source *)FUN_002b45e8(pad->unk0C);
+        source = (Source *)dataTable08Sub2GetRecord(pad->unk0C);
         if (source != NULL) {
             dest->unk10 = source->unk6A;
         }

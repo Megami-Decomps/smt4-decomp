@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00170484(int);
 int FUN_00170d8c(int, int, int, int);
 int FUN_001b03dc(int, int, int, char [16], char [4], int);
-int FUN_001bcd48(int, int);
+int svcSleepThread(int, int);
 int FUN_0043bff8(void);
 int nn_applet_CTR_detail_ReplySleepQueryToManager(int);
 
@@ -21,7 +21,7 @@ extern signed char DAT_005891f4; /* 0x5891f4 */
 /* Supplied declaration required: FUN_00170484. */
 /* Supplied declaration required: FUN_00170d8c. */
 /* Supplied declaration required: FUN_001b03dc. */
-/* Supplied declaration required: FUN_001bcd48. */
+/* Supplied declaration required: svcSleepThread. */
 /* Supplied declaration required: FUN_0043bff8. */
 extern int FUN_0043c2b4(void);
 /* Supplied declaration required: nn_applet_CTR_detail_ReplySleepQueryToManager. */
@@ -50,7 +50,7 @@ void FUN_00473d54(void)
   }
   while (temp_v1 = 0x407, FUN_001b03dc(0x407,0,0,acStack_24,acStack_28,0),
         (temp_v1 & (int)acStack_24[0] & (int)acStack_28[0]) == 0) {
-    FUN_001bcd48(10000000,0);
+    svcSleepThread(10000000,0);
   }
   if (temp_v0 == '\0') {
     return;

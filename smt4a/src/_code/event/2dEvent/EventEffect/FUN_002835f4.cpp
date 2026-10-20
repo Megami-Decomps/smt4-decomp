@@ -9,7 +9,7 @@ int FUN_001640cc(...);
 int efctSetSpeed(void);
 int FUN_0016c4b8(...);
 int FUN_00183bb0(void);
-int FUN_00184e64(...);
+int drawSetColorFromRGBA8(...);
 int FUN_001879d0(...);
 int FUN_0025cba0(...);
 int FUN_002f5020(int *, unsigned char *, int, int);
@@ -52,7 +52,7 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
 extern int FUN_001834a4(unsigned int, int);
 /* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_00184e64. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_001879d0. */
 /* Supplied declaration required: FUN_0025cba0. */
 /* Supplied declaration required: FUN_002f5020. */
@@ -234,7 +234,7 @@ unsigned int FUN_002835f4(void)
     else if (temp_v0 == 2) {
       temp_v4 = 0xffff00ff;
     }
-    FUN_00184e64(temp_v4);
+    drawSetColorFromRGBA8(temp_v4);
     efctSetSpeed();
     FUN_0025cba0(0,0,400,0xf0,0x2e);
   }

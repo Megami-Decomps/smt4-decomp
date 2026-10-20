@@ -5,20 +5,20 @@
 extern "C" {
 
 int FUN_0014e188(int, int, unsigned int, int, int);
-int FUN_001846d0(int, int);
-int FUN_00184b80(int, int);
+int uiSpriteSelectAnim(int, int);
+int pairSetFirstResetSecond(int, int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } void_stack;
 
-extern unsigned char DAT_0057f588; /* 0x57f588 */
+extern unsigned char g_messageMain; /* 0x57f588 */
 
 /* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: FUN_001846d0. */
-/* Supplied declaration required: FUN_00184b80. */
-extern unsigned int *FUN_001ab888(void);
+/* Supplied declaration required: uiSpriteSelectAnim. */
+/* Supplied declaration required: pairSetFirstResetSecond. */
+extern unsigned int *gameGetSlotTable(void);
 extern unsigned int scrGetArg(unsigned int);
 
 
@@ -32,10 +32,10 @@ unsigned int FUN_003a69c0(void)
   unsigned int temp_v2;
   
   temp_v1 = scrGetArg(0);
-  temp_v0 = (*(int *)((unsigned char *)&DAT_0057f588 + 0x8));
-  *(unsigned char *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0x8e) = 1;
+  temp_v0 = (*(int *)((unsigned char *)&g_messageMain + 0x8));
+  *(unsigned char *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x8e) = 1;
   *(unsigned char *)(temp_v0 + 0x8d) = 1;
-  puVar3 = (unsigned int *)FUN_001ab888();
+  puVar3 = (unsigned int *)gameGetSlotTable();
   temp_v2 = *puVar3;
   *(unsigned int *)(temp_v0 + 0x7c) = temp_v2;
   *(unsigned int *)(temp_v0 + 0x88) = temp_v2;
@@ -44,10 +44,10 @@ unsigned int FUN_003a69c0(void)
   *(unsigned char *)(temp_v0 + 0x17d) = 0;
   *(unsigned char *)(temp_v0 + 0x16d) = 0;
   FUN_0014e188(temp_v0 + 0xb00,8,0xffffffff,temp_v0 + 0x194,0xb);
-  FUN_00184b80(temp_v0 + 0xb00,0);
-  FUN_001846d0(temp_v0 + 0xb00,6);
-  temp_v0 = (*(int *)((unsigned char *)&DAT_0057f588 + 0x8));
-  *(unsigned char *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0x93) = 0;
+  pairSetFirstResetSecond(temp_v0 + 0xb00,0);
+  uiSpriteSelectAnim(temp_v0 + 0xb00,6);
+  temp_v0 = (*(int *)((unsigned char *)&g_messageMain + 0x8));
+  *(unsigned char *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x93) = 0;
   *(unsigned int *)(temp_v0 + 0x80) = temp_v1;
   *(unsigned int *)(temp_v0 + 0x84) = temp_v1;
   *(unsigned char *)(temp_v0 + 0x92) = 1;

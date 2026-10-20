@@ -9,7 +9,7 @@ typedef struct Task {
     /* 0x20 */ u8 queue[4];
 } Task;
 
-int FUN_001af148(void *queue);
+int nn_os_LightEvent_Wait(void *queue);
 int FUN_004257e4(Task *task);
 
 /* Pumps the task's queue until it reports finished. */
@@ -19,7 +19,7 @@ void FUN_004241a8(Task *task)
         if (task->state == 1) {
             break;
         }
-        FUN_001af148(task->queue);
+        nn_os_LightEvent_Wait(task->queue);
         FUN_004257e4(task);
     }
 }

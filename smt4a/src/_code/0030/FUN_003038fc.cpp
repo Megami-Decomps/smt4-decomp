@@ -19,7 +19,7 @@ struct fn_003038fc_arg0 {
 
 extern unsigned char DAT_0055b10c; /* 0x55b10c */
 
-extern unsigned int *FUN_002e9f80(fn_003038fc_arg0 *);
+extern unsigned int *sharedRefInit(fn_003038fc_arg0 *);
 /* Supplied declaration required: FUN_0030fe20. */
 
 
@@ -29,7 +29,7 @@ unsigned int * FUN_003038fc(fn_003038fc_arg0 *param_1,unsigned int param_2,unsig
 /* irregular: 1 native warning(s); review required */
   unsigned int *puVar1;
   
-  puVar1 = (unsigned int *)FUN_002e9f80(param_1);
+  puVar1 = (unsigned int *)sharedRefInit(param_1);
   puVar1[3] = 0;
   puVar1[4] = 0;
   puVar1[5] = 0;

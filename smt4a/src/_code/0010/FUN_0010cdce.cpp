@@ -8,9 +8,9 @@ int FUN_00107630(unsigned int, int);
 int FUN_0012430a(void);
 int FUN_002e6e34(unsigned char [12], unsigned int);
 int FUN_002e6e5c(unsigned char [12]);
-int FUN_002e7232(int);
+int sharedRefRelease(int);
 int FUN_002ef790(void);
-int FUN_002f143e(int **);
+int vectorInitEmpty4(int **);
 int FUN_002f1448(int **, int *);
 int FUN_002f1486(int **);
 int FUN_002f6c70(int, unsigned char [8]);
@@ -30,10 +30,10 @@ typedef struct {
 /* Supplied declaration required: FUN_0012430a. */
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-/* Supplied declaration required: FUN_002e7232. */
-extern unsigned int FUN_002ea714(void);
+/* Supplied declaration required: sharedRefRelease. */
+extern unsigned int onlineGetActiveLock(void);
 /* Supplied declaration required: FUN_002ef790. */
-/* Supplied declaration required: FUN_002f143e. */
+/* Supplied declaration required: vectorInitEmpty4. */
 /* Supplied declaration required: FUN_002f1448. */
 /* Supplied declaration required: FUN_002f1486. */
 /* Supplied declaration required: FUN_002f6c70. */
@@ -56,9 +56,9 @@ void FUN_0010cdce(int param_1)
   int temp_v7;
   unsigned char temp_v8 [8];
   
-  temp_v0 = FUN_002ea714();
+  temp_v0 = onlineGetActiveLock();
   FUN_002e6e34(temp_v6,temp_v0);
-  FUN_002f143e(&temp_v4);
+  vectorInitEmpty4(&temp_v4);
   temp_v2 = *(int *)(*(int *)(param_1 + 0x30) + 8);
   while( 1 ) {
     temp_v7 = *(unsigned int *)(param_1 + 0x30);
@@ -80,7 +80,7 @@ void FUN_0010cdce(int param_1)
   for (; temp_v5 != temp_v4; temp_v4 = temp_v4 + 1) {
     temp_v1 = *temp_v4;
     FUN_00107630(*(unsigned int *)(temp_v1 + 0x11c),temp_v1);
-    FUN_002e7232(temp_v1);
+    sharedRefRelease(temp_v1);
   }
   FUN_002f1486(&temp_v4);
   FUN_002e6e5c(temp_v6);

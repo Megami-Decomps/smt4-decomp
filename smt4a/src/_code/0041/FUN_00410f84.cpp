@@ -27,8 +27,8 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned char DAT_00529834; /* 0x529834 */
-extern int DAT_005712f0; /* 0x5712f0 */
-extern unsigned int *DAT_00571508; /* 0x571508 */
+extern int g_btlActionReflect; /* 0x5712f0 */
+extern unsigned int *g_btlCamera; /* 0x571508 */
 extern unsigned int g_btlStageModel; /* 0x57a4f8 */
 
 extern int btlGetMainState(void);
@@ -87,15 +87,15 @@ void FUN_00410f84(unsigned int *param_1)
       param_1[0x61] = 0;
     }
     FUN_002804b0(&DAT_00529834,param_1 + 0x61,0);
-    FUN_004f1530(DAT_00571508);
-    puVar1 = DAT_00571508;
-    DAT_00571508[3] = 0;
+    FUN_004f1530(g_btlCamera);
+    puVar1 = g_btlCamera;
+    g_btlCamera[3] = 0;
     puVar1[4] = 0;
     temp_v0 = FUN_00411bb4(param_1);
-    puVar1 = DAT_00571508;
+    puVar1 = g_btlCamera;
     if (-1 < temp_v0) {
       temp_v0 = temp_v0 * 0x1c;
-      *DAT_00571508 = *(unsigned int *)(temp_v0 + 0x529780);
+      *g_btlCamera = *(unsigned int *)(temp_v0 + 0x529780);
       puVar1[1] = *(unsigned int *)(temp_v0 + 0x529784);
       puVar1[2] = *(unsigned int *)(temp_v0 + 0x529788);
       return;
@@ -172,8 +172,8 @@ void FUN_00410f84(unsigned int *param_1)
     FUN_004fea10(0,0,1);
     FUN_004fe7e4(0,0,1);
     FUN_003f14a0(temp_v1);
-    temp_v0 = DAT_005712f0;
-    FUN_004102d8(DAT_005712f0,0,0,0,unaff_r4,in_lr);
+    temp_v0 = g_btlActionReflect;
+    FUN_004102d8(g_btlActionReflect,0,0,0,unaff_r4,in_lr);
     *(unsigned char *)(temp_v0 + 4) = 0xd;
     return;
   case 8:

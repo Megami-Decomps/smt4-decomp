@@ -9,7 +9,7 @@ int FUN_002bf09c(void);
 
 /* Supplied declaration required: FUN_0021c118. */
 extern int scrGetArg(unsigned int);
-extern int FUN_002360dc(void);
+extern int scrGetArgString(void);
 /* Supplied declaration required: FUN_002bf09c. */
 
 
@@ -20,7 +20,7 @@ unsigned int FUN_0031c410(void)
   int temp_v0;
   int temp_v1;
   
-  temp_v0 = FUN_002360dc();
+  temp_v0 = scrGetArgString();
   FUN_002bf09c();
   if (-1 < temp_v0) {
     temp_v1 = scrGetArg(1);

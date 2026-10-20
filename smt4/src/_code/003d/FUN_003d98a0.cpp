@@ -16,8 +16,8 @@ typedef char romwright_storage_s__B_B_B_B_B_B_00435d00_25_1_s1_width_check[(size
 #endif
 extern union romwright_storage_s__B_B_B_B_B_B_00435d00_25_1 s__B_B_B_B_B_B_00435d00; /* 0x435d00 */
 
-extern int FUN_002b4414(int, unsigned int, unsigned int);
-extern unsigned int FUN_002c30c4(unsigned int);
+extern int libc_strncmp(int, unsigned int, unsigned int);
+extern unsigned int libc_strlen(unsigned int);
 
 
 unsigned int FUN_003d98a0(unsigned int param_1,int param_2)
@@ -27,8 +27,8 @@ unsigned int FUN_003d98a0(unsigned int param_1,int param_2)
   int temp_v1;
   
   if (param_2 != 0) {
-    temp_v0 = FUN_002c30c4((*(unsigned int *)&s__B_B_B_B_B_B_00435d00.u1[0]));
-    temp_v1 = FUN_002b4414(param_2,(*(unsigned int *)&s__B_B_B_B_B_B_00435d00.u1[0]),temp_v0);
+    temp_v0 = libc_strlen((*(unsigned int *)&s__B_B_B_B_B_B_00435d00.u1[0]));
+    temp_v1 = libc_strncmp(param_2,(*(unsigned int *)&s__B_B_B_B_B_B_00435d00.u1[0]),temp_v0);
     if (temp_v1 == 0) {
       return 1;
     }

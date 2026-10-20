@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e7516(unsigned int, unsigned char [4]);
-int FUN_002e7526(int, unsigned char [4]);
+int writeU16Le(int, unsigned char [4]);
 int constructObj00559344(unsigned char [8], int);
 int FUN_002f07b8(...);
 int FUN_002f5d1e(void);
@@ -23,7 +23,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_002e7516. */
-/* Supplied declaration required: FUN_002e7526. */
+/* Supplied declaration required: writeU16Le. */
 /* Supplied declaration required: constructObj00559344. */
 extern int FUN_002f035c(unsigned char *, unsigned char *);
 /* Supplied declaration required: FUN_002f07b8. */
@@ -132,7 +132,7 @@ void FUN_0010c2be(unsigned int param_1,int param_2)
       }
       FUN_002f07b8(temp_v3,param_2);
       temp_v12 = temp_v4;
-      FUN_002e7526(temp_v4,temp_v11);
+      writeU16Le(temp_v4,temp_v11);
       temp_v1 = FUN_002f5fb0(temp_v8,temp_v11,2,0xffffffff);
       if (temp_v1 != 1) {
         return;

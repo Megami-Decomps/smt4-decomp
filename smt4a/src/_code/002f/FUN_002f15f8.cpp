@@ -5,8 +5,8 @@
 extern "C" {
 
 int sysPlaySe(int);
-int FUN_00184758(int, int);
-int FUN_00184c00(int, int, int);
+int uiSpriteSetKeyframe(int, int);
+int uiSpriteSetImageKeyframe(int, int, int);
 int FUN_002a4964(int, int);
 int uiFadeRequestClear(void);
 int FUN_003d2150(int);
@@ -16,11 +16,11 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_2_stack;
 
-extern int DAT_0057f28c; /* 0x57f28c */
+extern int g_uiQuest; /* 0x57f28c */
 
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_00184758. */
-/* Supplied declaration required: FUN_00184c00. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 extern unsigned char FUN_001bd100(unsigned int);
 /* Supplied declaration required: FUN_002a4964. */
 /* Supplied declaration required: uiFadeRequestClear. */
@@ -40,13 +40,13 @@ void FUN_002f15f8(unsigned int param_1,int param_2)
   int temp_v5;
   int temp_v6;
   
-  temp_v0 = DAT_0057f28c;
-  *(short *)(DAT_0057f28c + 0xcca) = (short)param_1;
+  temp_v0 = g_uiQuest;
+  *(short *)(g_uiQuest + 0xcca) = (short)param_1;
   temp_v1 = FUN_001bd100(param_1);
   *(unsigned char *)(temp_v0 + 0x90c) = temp_v1;
   *(unsigned int *)(temp_v0 + 0x938) = 0x3e55cfab;
-  FUN_00184758(temp_v0 + 0x408,0);
-  FUN_00184c00(temp_v0 + 0x408,8,0);
+  uiSpriteSetKeyframe(temp_v0 + 0x408,0);
+  uiSpriteSetImageKeyframe(temp_v0 + 0x408,8,0);
   if (param_2 == 0) {
     *(unsigned char *)(temp_v0 + 0x93c) = 0;
   }
@@ -72,13 +72,13 @@ void FUN_002f15f8(unsigned int param_1,int param_2)
         temp_v2 = FUN_002c2c68(temp_v6);
       } while (temp_v4 < temp_v2);
     }
-    FUN_00184758(temp_v0 + 0x34,0);
-    FUN_00184c00(temp_v0 + 0x34,8,0);
+    uiSpriteSetKeyframe(temp_v0 + 0x34,0);
+    uiSpriteSetImageKeyframe(temp_v0 + 0x34,8,0);
   }
   uiFadeRequestClear();
-  temp_v0 = DAT_0057f28c;
-  temp_v3 = *(unsigned int *)(DAT_0057f28c + 4);
-  *(unsigned int *)(DAT_0057f28c + 4) = 0x14;
+  temp_v0 = g_uiQuest;
+  temp_v3 = *(unsigned int *)(g_uiQuest + 4);
+  *(unsigned int *)(g_uiQuest + 4) = 0x14;
   *(unsigned int *)(temp_v0 + 8) = temp_v3;
   *(unsigned int *)(temp_v0 + 0x10) = 0;
   sysPlaySe(0x1a);

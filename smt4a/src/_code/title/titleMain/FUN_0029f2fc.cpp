@@ -24,22 +24,22 @@ int FUN_0046e238(...);
 
 int FUN_00100388(...);
 int jobStop(...);
-int FUN_001641c4(void);
+int ifTouchRegionRemove(void);
 int sysPlaySe(...);
 int FUN_00168980(...);
-int FUN_00169ddc(...);
+int eventQueueAddUnique(...);
 int dataTableGet(...);
 int FUN_002c2160(...);
 int FUN_002e4b9c(void);
 int objectE0ResetFlags1040(void);
-int FUN_0035b304(void);
+int campCommonBgRelease(void);
 int FUN_0037a2e4(void);
 int FUN_0039c244(void);
 int mobiclipProcessSetFlag77(...);
 int FUN_003c4f28(...);
 int FUN_003c5848(void);
 int FUN_003ca7d8(void);
-int FUN_003d2d34(...);
+int soundChannelRequestIfEnabled(...);
 
 int asdTMTexTableLoadTmx(int, int);
 int FUN_001517b4(...);
@@ -48,15 +48,15 @@ int FUN_001acf98(int, int);
 int FUN_001f4908(...);
 int FUN_0022258c(...);
 int FUN_0022677c(...);
-int FUN_0031a400(void);
-int FUN_00342010(void);
+int campCommonBgAcquire(void);
+int campButtonHelpAcquire(void);
 int FUN_00370b8c(...);
 int FUN_0037a2c8(void);
 int mobiclipProcessSetFlag78(...);
-int FUN_003d2d6c(...);
+int soundChannelStopAll(...);
 int FUN_003d54f8(...);
-int FUN_003f86f8(int);
-int FUN_003fd63c(...);
+int loadSlotEnsureLoaded(int);
+int gameFlagSetValue(...);
 int VectorSignedToFloat(...);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -79,26 +79,26 @@ extern int DAT_005f1c98; /* 0x5f1c98 */
 /* Supplied declaration required: asdSequenceRequest. */
 extern int FUN_0013def0(unsigned int);
 /* Supplied declaration required: asdTMTexTableLoadTmx. */
-extern int FUN_0014af84(void);
+extern int gameDataBlocksGetSaveData(void);
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: jobStop. */
 extern int jobIsValid(unsigned int);
-/* Supplied declaration required: FUN_001641c4. */
+/* Supplied declaration required: ifTouchRegionRemove. */
 extern unsigned short FUN_001643b4(unsigned int, unsigned int);
-extern int FUN_00164af0(unsigned int);
-extern int FUN_001656a0(unsigned int);
+extern int padButtonRepeat(unsigned int);
+extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00168980. */
-/* Supplied declaration required: FUN_00169ddc. */
-extern int FUN_0018206c(unsigned int, unsigned int);
+/* Supplied declaration required: eventQueueAddUnique. */
+extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: dataTableGet. */
-extern unsigned int FUN_0018719c(unsigned int);
+extern unsigned int gameFlagIsSet(unsigned int);
 extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_001acf98. */
 /* Supplied declaration required: FUN_001f4908. */
-extern int FUN_002009a8(unsigned int);
+extern int bgmGetStateById(unsigned int);
 /* Supplied declaration required: configOpen. */
 /* Supplied declaration required: FUN_00202ea4. */
 /* Supplied declaration required: FUN_0020e79c. */
@@ -122,13 +122,13 @@ extern int FUN_002e1a18(unsigned int);
 extern int configGetValueBC(void);
 extern int FUN_002ef9f0(void);
 /* Supplied declaration required: FUN_002f4374. */
-/* Supplied declaration required: FUN_0031a400. */
+/* Supplied declaration required: campCommonBgAcquire. */
 /* Supplied declaration required: FUN_00324c94. */
 /* Supplied declaration required: objectE0ResetFlags1040. */
 extern int FUN_003309e0(void);
 extern int FUN_00341940(unsigned int);
-/* Supplied declaration required: FUN_00342010. */
-/* Supplied declaration required: FUN_0035b304. */
+/* Supplied declaration required: campButtonHelpAcquire. */
+/* Supplied declaration required: campCommonBgRelease. */
 extern int FUN_0035e6d4(unsigned int *);
 /* Supplied declaration required: FUN_00363c58. */
 /* Supplied declaration required: FUN_00370b8c. */
@@ -145,13 +145,13 @@ extern int FUN_0038b358(void);
 /* Supplied declaration required: FUN_003c5848. */
 /* Supplied declaration required: FUN_003c91e8. */
 /* Supplied declaration required: FUN_003ca7d8. */
-/* Supplied declaration required: FUN_003d2d34. */
-/* Supplied declaration required: FUN_003d2d6c. */
+/* Supplied declaration required: soundChannelRequestIfEnabled. */
+/* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: FUN_003d54f8. */
-/* Supplied declaration required: FUN_003f86f8. */
-/* Supplied declaration required: FUN_003fd63c. */
+/* Supplied declaration required: loadSlotEnsureLoaded. */
+/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_0046bd44. */
-extern int FUN_0046c458(unsigned int, unsigned int);
+extern int aocHasType36(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0046e238. */
 
 
@@ -185,7 +185,7 @@ unsigned int FUN_0029f2fc(void)
   switch(DAT_00589170[0x1e]) {
   case 0:
   case 1:
-    FUN_003f86f8(0x3a);
+    loadSlotEnsureLoaded(0x3a);
     asdTMTexTableLoadTmx(0x2a,0);
     FUN_001acf98(0x2a,0);
     FUN_001acf98(0x2a,1);
@@ -213,7 +213,7 @@ unsigned int FUN_0029f2fc(void)
     if (temp_v5 == 0) {
       FUN_001f4908(0,0xf,0xff);
       FUN_001f4908(1,0xf,0xff);
-      FUN_003d2d6c(0xf);
+      soundChannelStopAll(0xf);
       puVar4[0x1f] = 1;
       break;
     }
@@ -312,8 +312,8 @@ joined_r0x0029f8b8:
         temp_v8 = VectorSignedToFloat((int)*(short *)(temp_v5 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
         puVar4[0xd] = temp_v6;
         puVar4[0xe] = temp_v8;
-        FUN_00342010();
-        FUN_0031a400();
+        campButtonHelpAcquire();
+        campCommonBgAcquire();
         *(unsigned char *)((int)puVar4 + 0x61) = 1;
       }
       else {
@@ -419,8 +419,8 @@ LAB_0029f848:
         temp_v8 = VectorSignedToFloat((int)*(short *)(temp_v5 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
         puVar4[0xd] = temp_v6;
         puVar4[0xe] = temp_v8;
-        FUN_00342010();
-        FUN_0031a400();
+        campButtonHelpAcquire();
+        campCommonBgAcquire();
         *(unsigned char *)((int)puVar4 + 0x61) = 1;
         break;
       case 3:
@@ -487,8 +487,8 @@ LAB_0029fb00:
     else {
       FUN_0019de98(0,0xf4f4f4ff);
       puVar4[0x23] = 0x1d;
-      FUN_003fd63c(0x81d,1);
-      temp_v6 = FUN_0018719c(0x81d);
+      gameFlagSetValue(0x81d,1);
+      temp_v6 = gameFlagIsSet(0x81d);
       temp_v8 = 0x1d;
       FUN_00370b8c(0x1d,temp_v6);
       puVar4[0x22] = temp_v8;
@@ -567,9 +567,9 @@ LAB_0029fb00:
       puVar4[0x96] = 0;
       puVar5 = DAT_00589170;
       *(unsigned char *)(DAT_00589170 + 4) = 0;
-      temp_v5 = FUN_002009a8(0x1000001);
+      temp_v5 = bgmGetStateById(0x1000001);
       if (temp_v5 != 1) {
-        FUN_003d2d34(0x1000001,0,0x3c);
+        soundChannelRequestIfEnabled(0x1000001,0,0x3c);
       }
       if (*(char *)(puVar5 + 0xf) != '\0') {
         puVar5[2] = 1;
@@ -594,7 +594,7 @@ LAB_0029fb00:
       temp_v5 = 0;
       do {
         if (*(short *)((int)puVar5 + temp_v5 * 2 + 0x50) != 0) {
-          FUN_001641c4();
+          ifTouchRegionRemove();
         }
         temp_v5 = temp_v5 + 1;
       } while (temp_v5 < 5);
@@ -615,7 +615,7 @@ LAB_0029fb00:
     break;
   case 9:
     temp_v5 = FUN_00341940(0x2a);
-    if ((temp_v5 != 0) && (temp_v5 = FUN_0018206c(0x2a,0), temp_v5 != 0)) {
+    if ((temp_v5 != 0) && (temp_v5 = asdTMTexTableNodeIsLoaded(0x2a,0), temp_v5 != 0)) {
       *(unsigned char *)(puVar4 + 0x18) = 1;
       puVar4[0x1f] = 0;
       puVar4[0x1e] = 10;
@@ -642,12 +642,12 @@ LAB_0029fb00:
     puVar5 = DAT_00589170;
     temp_v12 = 1.0f;
     DAT_00589170[0x10] = (float)DAT_00589170[0x10] + 1.0f;
-    temp_v5 = FUN_00164af0(5);
-    if ((temp_v5 != 0) || (temp_v5 = FUN_00164af0(0xe), temp_v5 != 0)) {
+    temp_v5 = padButtonRepeat(5);
+    if ((temp_v5 != 0) || (temp_v5 = padButtonRepeat(0xe), temp_v5 != 0)) {
       puVar5[2] = puVar5[2] - 1;
     }
-    temp_v5 = FUN_00164af0(6);
-    if ((temp_v5 == 0) && (temp_v5 = FUN_00164af0(0xf), temp_v5 == 0)) {
+    temp_v5 = padButtonRepeat(6);
+    if ((temp_v5 == 0) && (temp_v5 = padButtonRepeat(0xf), temp_v5 == 0)) {
       temp_v5 = puVar5[2];
     }
     else {
@@ -657,7 +657,7 @@ LAB_0029fb00:
     temp_v5 = (temp_v5 + 5) % 5;
     puVar5[2] = temp_v5;
     if (temp_v5 != puVar5[3]) {
-      FUN_00169ddc(0x100020d);
+      eventQueueAddUnique(0x100020d);
       puVar5[3] = puVar5[2];
       *(unsigned char *)((int)puVar5 + 0x91) = 1;
     }
@@ -707,7 +707,7 @@ LAB_0029fb00:
     FUN_00100388(&temp_v13,temp_v5 + temp_v7 * 100 + 0x14,&LAB_0029ff54);
     FUN_0019de98(&temp_v13,0xf4f4f4ff);
     if (((*(char *)((int)puVar4 + 0x3f) != '\0') || (temp_v5 = FUN_002e1a18(1), temp_v5 != 0)) ||
-       (temp_v5 = FUN_001656a0(0), temp_v5 != 0)) {
+       (temp_v5 = padButtonIsPressed(0), temp_v5 != 0)) {
       puVar5 = DAT_00589170;
       temp_v4 = DAT_00589170[2];
       temp_v10 = temp_v4 == 1;
@@ -718,13 +718,13 @@ LAB_0029fb00:
         *(unsigned char *)((int)DAT_00589170 + 0x3f) = 0;
       }
       else {
-        FUN_00169ddc(0x100020e);
+        eventQueueAddUnique(0x100020e);
         temp_v5 = puVar5[2];
         if (temp_v5 == 1) {
           temp_v5 = 0;
           *(unsigned char *)((int)puVar5 + 0x3d) = 1;
           do {
-            FUN_001641c4();
+            ifTouchRegionRemove();
             temp_v5 = temp_v5 + 1;
           } while (temp_v5 < 5);
           *(unsigned char *)((int)puVar5 + 0x3f) = 0;
@@ -740,7 +740,7 @@ LAB_0029fb00:
           temp_v5 = 0;
           *(unsigned char *)((int)puVar5 + 0x3d) = 1;
           do {
-            FUN_001641c4();
+            ifTouchRegionRemove();
             temp_v5 = temp_v5 + 1;
           } while (temp_v5 < 5);
           *(unsigned char *)((int)puVar5 + 0x3f) = 0;
@@ -748,19 +748,19 @@ LAB_0029fb00:
           puVar5[0x17] = 2;
           objectE0ResetFlags1040();
           FUN_002c2160(1);
-          temp_v5 = FUN_0046c458(g_aocSystem,0x558);
+          temp_v5 = aocHasType36(g_aocSystem,0x558);
           if (temp_v5 != 0) {
-            FUN_003fd63c(0x558,1,1);
+            gameFlagSetValue(0x558,1,1);
           }
           else {
-            FUN_003fd63c(0x558,0,1);
+            gameFlagSetValue(0x558,0,1);
           }
-          temp_v5 = FUN_0046c458(g_aocSystem,0x559);
+          temp_v5 = aocHasType36(g_aocSystem,0x559);
           if (temp_v5 != 0) {
-            FUN_003fd63c(0x559,1,1);
+            gameFlagSetValue(0x559,1,1);
           }
           else {
-            FUN_003fd63c(0x559,0,1);
+            gameFlagSetValue(0x559,0,1);
           }
           puVar5[0x1f] = 0;
           puVar5[0x1e] = 0x14;
@@ -770,7 +770,7 @@ LAB_0029fb00:
           temp_v5 = 0;
           *(unsigned char *)((int)puVar5 + 0x3d) = 1;
           do {
-            FUN_001641c4();
+            ifTouchRegionRemove();
             temp_v5 = temp_v5 + 1;
           } while (temp_v5 < 5);
           *(unsigned char *)((int)puVar5 + 0x3f) = 0;
@@ -786,7 +786,7 @@ LAB_0029fb00:
           temp_v5 = 0;
           *(unsigned char *)((int)puVar5 + 0x3f) = 0;
           do {
-            FUN_001641c4();
+            ifTouchRegionRemove();
             temp_v5 = temp_v5 + 1;
           } while (temp_v5 < 5);
           puVar5[0x1f] = 0;
@@ -799,7 +799,7 @@ LAB_0029fb00:
           temp_v5 = 0;
           *(unsigned char *)((int)puVar5 + 0x3f) = 0;
           do {
-            FUN_001641c4();
+            ifTouchRegionRemove();
             temp_v5 = temp_v5 + 1;
           } while (temp_v5 < 5);
           puVar5[0x1f] = 0;
@@ -844,7 +844,7 @@ LAB_0029fb00:
     temp_v5 = FUN_0038b358();
     if (temp_v5 != 0) {
       *(unsigned char *)((int)puVar4 + 0x3e) = 1;
-      FUN_003d2d6c(0xf);
+      soundChannelStopAll(0xf);
       puVar4[0x1e] = 0x12;
       puVar4[0x1f] = 0;
       puVar4[0x20] = 0;
@@ -875,7 +875,7 @@ LAB_0029fb00:
   case 0x12:
     temp_v5 = FUN_002e07f4();
     if (temp_v5 != 0) {
-      FUN_0035b304();
+      campCommonBgRelease();
       jobStop(*DAT_00589170,0);
       FUN_00168980(3);
       temp_v5 = puVar4[2];
@@ -905,7 +905,7 @@ LAB_0029fb00:
       else {
         FUN_003c91e8();
         FUN_00363c58(1);
-        temp_v5 = FUN_0014af84();
+        temp_v5 = gameDataBlocksGetSaveData();
         if (*(unsigned char *)(temp_v5 + 2) >= 2) {
           if (*(unsigned char *)(temp_v5 + 2) != 2) break;
           DAT_005f1bd4 = 0;
@@ -975,7 +975,7 @@ LAB_0029fb00:
         puVar5[0x25] = temp_v5;
         FUN_001f4908(0,0xc,0xff);
         FUN_001f4908(1,0xc,0xff);
-        FUN_003d2d6c(0xf);
+        soundChannelStopAll(0xf);
         puVar5[0x1f] = 0;
         puVar5[0x1e] = 0xc;
         puVar5[0x20] = 0;

@@ -45,7 +45,7 @@ extern unsigned int *DAT_004dae64; /* 0x4dae64 */
 /* Supplied declaration required: FUN_0010bb84. */
 extern unsigned int asdMemoryGetDefaultAllocator(void);
 extern unsigned int asdMemoryGetAllocatorA(void);
-extern unsigned int FUN_002c30c4(unsigned char *);
+extern unsigned int libc_strlen(unsigned char *);
 extern int FUN_002c3124(unsigned char *, unsigned int, unsigned int);
 /* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: nw_gfx_SceneBuilder_CreateObject. */
@@ -92,7 +92,7 @@ void FUN_001049ac(void)
     temp_v4 = 0;
   }
   if (temp_v4 != 0) {
-    temp_v0 = FUN_002c30c4(&LAB_00104d6c);
+    temp_v0 = libc_strlen(&LAB_00104d6c);
     temp_v1 = nw_ut_ResDicPatricia_Get(&temp_v4,&LAB_00104d6c,temp_v0);
     if (temp_v1 != 0) {
       temp_v15[0] = *(int *)(temp_v1 + 0xc);

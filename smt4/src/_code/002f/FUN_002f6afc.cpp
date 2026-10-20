@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_002470a8(unsigned int, int, unsigned int);
-int FUN_002aa568(int, unsigned char *);
-int FUN_002b4670(void);
+int libc_strcmp(int, unsigned char *);
+int dataTable08Sub1GetRecord(void);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -16,8 +16,8 @@ typedef struct {
 extern unsigned char LAB_002f6b44; /* 0x2f6b44 */
 
 /* Supplied declaration required: FUN_002470a8. */
-/* Supplied declaration required: FUN_002aa568. */
-/* Supplied declaration required: FUN_002b4670. */
+/* Supplied declaration required: libc_strcmp. */
+/* Supplied declaration required: dataTable08Sub1GetRecord. */
 
 
 void FUN_002f6afc(unsigned int param_1,int param_2,unsigned int param_3)
@@ -26,10 +26,10 @@ void FUN_002f6afc(unsigned int param_1,int param_2,unsigned int param_3)
 /* irregular: 3 native warning(s); review required */
   int temp_v0;
   
-  FUN_002b4670();
+  dataTable08Sub1GetRecord();
   if (param_2 != 0) {
     temp_v0 = param_2 + 0x50;
-    FUN_002aa568(temp_v0,&LAB_002f6b44);
+    libc_strcmp(temp_v0,&LAB_002f6b44);
     if (temp_v0 != 0) {
       FUN_002470a8(param_1,param_2 + 0x50,param_3);
       return;

@@ -5,7 +5,7 @@
 extern "C" {
 
 int jobStop(unsigned int, int);
-int FUN_00237210(void);
+int asdMemFreeSlot(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -14,7 +14,7 @@ typedef struct {
 
 /* Supplied declaration required: jobStop. */
 extern int jobIsValid(unsigned int);
-/* Supplied declaration required: FUN_00237210. */
+/* Supplied declaration required: asdMemFreeSlot. */
 
 
 void FUN_0047314c(unsigned int *param_1)
@@ -26,7 +26,7 @@ void FUN_0047314c(unsigned int *param_1)
   temp_v0 = jobIsValid(param_1[1]);
   if (temp_v0 != 0) {
     if (param_1[0x107] != 0) {
-      FUN_00237210();
+      asdMemFreeSlot();
       param_1[0x107] = 0;
     }
     *param_1 = *param_1 & 0xffffffcf;

@@ -5,15 +5,15 @@
 extern "C" {
 
 int FUN_001386e8(int);
-int FUN_0014af84(void);
+int gameDataBlocksGetSaveData(void);
 int sysPlaySe(...);
-int FUN_001a9110(unsigned int, unsigned int);
+int wordPairCopy(unsigned int, unsigned int);
 int FUN_002299b0(void);
 int FUN_0023b45c(...);
-int FUN_00275f44(unsigned int, int);
+int scrScriptProcessStartEntry(unsigned int, int);
 int FUN_002c8538(...);
 int FUN_002c9104(void);
-int FUN_002e342c(...);
+int libc_strcpy(...);
 int FUN_002e6134(void);
 int FUN_002f0384(...);
 int FUN_0033440c(...);
@@ -23,7 +23,7 @@ int FUN_003720a0(...);
 int FUN_0038b5fc(...);
 int FUN_003a76a8(...);
 int FUN_003c1490(int, int);
-int FUN_003fd63c(int, int);
+int gameFlagSetValue(int, int);
 int FUN_00408184(int, int);
 int rt_memcpy_w(...);
 
@@ -38,21 +38,21 @@ extern signed char DAT_00588e17; /* 0x588e17 */
 extern unsigned int DAT_00588e28; /* 0x588e28 */
 
 /* Supplied declaration required: FUN_001386e8. */
-/* Supplied declaration required: FUN_0014af84. */
+/* Supplied declaration required: gameDataBlocksGetSaveData. */
 /* Supplied declaration required: sysPlaySe. */
-extern int FUN_0018719c(unsigned int);
-/* Supplied declaration required: FUN_001a9110. */
+extern int gameFlagIsSet(unsigned int);
+/* Supplied declaration required: wordPairCopy. */
 extern int FUN_00224880(unsigned int);
-extern unsigned int FUN_00228af0(void);
+extern unsigned int configGetSettings(void);
 /* Supplied declaration required: FUN_002299b0. */
 /* Supplied declaration required: FUN_0023b45c. */
-extern unsigned int FUN_00261458(void);
-/* Supplied declaration required: FUN_00275f44. */
+extern unsigned int gameDataBlocksGetTable(void);
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002a4b74(void);
 extern int FUN_002a6464(void);
 /* Supplied declaration required: FUN_002c8538. */
 /* Supplied declaration required: FUN_002c9104. */
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_002e6134. */
 /* Supplied declaration required: FUN_002f0384. */
 extern int objBStateAllowsAction(void);
@@ -66,7 +66,7 @@ extern int byteTripleGetV1(void);
 /* Supplied declaration required: FUN_003a76a8. */
 extern int byteArr5Get4(void);
 /* Supplied declaration required: FUN_003c1490. */
-/* Supplied declaration required: FUN_003fd63c. */
+/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_00408184. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -102,28 +102,28 @@ void FUN_0041de6c(int param_1)
     FUN_002e6134();
     FUN_003a76a8(0);
     *(unsigned char *)(param_1 + 0xe) = 1;
-    temp_v1 = FUN_00261458();
+    temp_v1 = gameDataBlocksGetTable();
     rt_memcpy_w(temp_v1,*(unsigned int *)(param_1 + 0x1c),0x80);
-    temp_v1 = FUN_00228af0();
-    FUN_001a9110(temp_v1,*(unsigned int *)(param_1 + 0x20));
-    temp_v1 = FUN_0014af84();
+    temp_v1 = configGetSettings();
+    wordPairCopy(temp_v1,*(unsigned int *)(param_1 + 0x20));
+    temp_v1 = gameDataBlocksGetSaveData();
     rt_memcpy_w(temp_v1,*(unsigned int *)(param_1 + 0x24),0x2a71c);
-    if ((DAT_00588e16 != '\0') && (temp_v0 = FUN_0018719c(0x470), temp_v0 == 0)) {
-      FUN_003fd63c(0x470,1);
+    if ((DAT_00588e16 != '\0') && (temp_v0 = gameFlagIsSet(0x470), temp_v0 == 0)) {
+      gameFlagSetValue(0x470,1);
     }
-    if ((DAT_00588e17 != '\0') && (temp_v0 = FUN_0018719c(0x471), temp_v0 == 0)) {
-      FUN_003fd63c(0x471,1);
+    if ((DAT_00588e17 != '\0') && (temp_v0 = gameFlagIsSet(0x471), temp_v0 == 0)) {
+      gameFlagSetValue(0x471,1);
     }
-    FUN_00275f44(*(unsigned int *)(param_1 + 0x40),1);
-    puVar2 = (unsigned short *)FUN_0014af84();
+    scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x40),1);
+    puVar2 = (unsigned short *)gameDataBlocksGetSaveData();
     *puVar2 = 4;
-    temp_v0 = FUN_0014af84();
+    temp_v0 = gameDataBlocksGetSaveData();
     *(unsigned char *)(temp_v0 + 2) = *(unsigned char *)(param_1 + 6);
-    FUN_0014af84();
+    gameDataBlocksGetSaveData();
     FUN_002299b0();
     FUN_002c9104();
     FUN_00408184(0x20,1);
-    temp_v0 = FUN_0014af84();
+    temp_v0 = gameDataBlocksGetSaveData();
     FUN_003c1490(*(int *)(param_1 + 0x2f8) + 1,*(unsigned char *)(temp_v0 + 2));
     return;
   }
@@ -131,8 +131,8 @@ void FUN_0041de6c(int param_1)
   if ((temp_v0 != 0) && (*(char *)(param_1 + 0xf) == '\0')) {
     temp_v0 = byteArr5Get4();
     if (temp_v0 != 0) {
-      FUN_00275f44(*(unsigned int *)(param_1 + 0x40),2);
-      temp_v1 = FUN_00261458();
+      scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x40),2);
+      temp_v1 = gameDataBlocksGetTable();
       rt_memcpy_w(param_1 + *(int *)(param_1 + 0x2f8) * 0x80 + 0x6c,temp_v1,0x80);
       *(unsigned char *)(*(int *)(param_1 + 0x2f8) + param_1 + 0x2ec) = 1;
       puVar5 = *(unsigned int **)(param_1 + 0x54);
@@ -149,10 +149,10 @@ void FUN_0041de6c(int param_1)
       *(unsigned short *)((int)puVar5 + 0x2a) = *(unsigned short *)(temp_v0 + 0x90);
       *(unsigned short *)(puVar5 + 0xb) = *(unsigned short *)(temp_v0 + 0x92);
       puVar5[0xc] = *(unsigned int *)(temp_v0 + 0x8c);
-      FUN_002e342c(puVar5 + 0x13,temp_v0 + 0x6c);
+      libc_strcpy(puVar5 + 0x13,temp_v0 + 0x6c);
       *(unsigned short *)((int)puVar5 + 0x62) = *(unsigned short *)(temp_v0 + 0xd0);
-      temp_v2 = FUN_0014af84();
-      FUN_002e342c(temp_v2 + 0x54,temp_v0 + 0x6c);
+      temp_v2 = gameDataBlocksGetSaveData();
+      libc_strcpy(temp_v2 + 0x54,temp_v0 + 0x6c);
       FUN_003720a0(*(unsigned int *)(param_1 + 0x54),0);
       FUN_0033440c(*(unsigned char *)(param_1 + *(int *)(param_1 + 0x2f8) * 0x80 + 0xd6));
       temp_v0 = param_1 + *(int *)(param_1 + 0x2f8) * 0x80;

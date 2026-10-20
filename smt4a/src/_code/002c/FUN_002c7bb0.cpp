@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 int FUN_0028809c(unsigned int, unsigned int, int, int, unsigned int *);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_4_stack;
 
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: FUN_0028809c. */
 
 
@@ -21,7 +21,7 @@ void FUN_002c7bb0(unsigned int param_1,unsigned int param_2,int param_3,unsigned
 {
 /* irregular: 2 native warning(s); review required */
   *param_4 = 0;
-  FUN_001aba54();
+  dataTable04FindById();
   if (param_3 != 0) {
     FUN_0028809c(param_1,param_2,param_3,1,param_4);
   }

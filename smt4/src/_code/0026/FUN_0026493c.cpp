@@ -10,13 +10,13 @@ int FUN_0021dfbc(void);
 int FUN_002648e8(int);
 int FUN_00274798(void);
 int mapIfClose(void);
-int FUN_002769b4(unsigned int, unsigned int);
+int mapDepartSetTarget(unsigned int, unsigned int);
 int FUN_00277b5c(unsigned int, unsigned int);
 int FUN_0027d9a8(void);
 int FUN_0027efb8(int, int, int);
 int FUN_0027f164(int, int);
 int FUN_00291e40(int);
-int FUN_00296f4c(unsigned int, unsigned int);
+int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int FUN_002bf810(int);
 int FUN_002bff50(void);
 int FUN_002dfea4(void);
@@ -60,14 +60,14 @@ extern int FUN_0019e0c0(unsigned int);
 /* Supplied declaration required: FUN_002648e8. */
 /* Supplied declaration required: FUN_00274798. */
 /* Supplied declaration required: mapIfClose. */
-/* Supplied declaration required: FUN_002769b4. */
+/* Supplied declaration required: mapDepartSetTarget. */
 /* Supplied declaration required: FUN_00277b5c. */
 /* Supplied declaration required: FUN_0027d9a8. */
 /* Supplied declaration required: FUN_0027efb8. */
 /* Supplied declaration required: FUN_0027f164. */
-extern unsigned int FUN_00290d74(unsigned int, unsigned int *);
+extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_00291e40. */
-/* Supplied declaration required: FUN_00296f4c. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_002bf810. */
 /* Supplied declaration required: FUN_002bff50. */
 extern int FUN_002c8684(unsigned int);
@@ -329,14 +329,14 @@ LAB_00264b84:
       *(unsigned int *)(temp_v7 + 0x2c) = *puVar11;
       *(unsigned int *)(temp_v7 + 0x30) = temp_v4;
       FUN_002bff50();
-      FUN_002769b4(0xffffffff,0xffffffff);
+      mapDepartSetTarget(0xffffffff,0xffffffff);
       DAT_0049f970 = 0;
       DAT_0049f980 = 0x747331;
       DAT_0049f978 = 0x5f726373;
       DAT_0049f97c = 0x70616d6c;
-      temp_v4 = FUN_00290d74(*(unsigned int *)(param_1 + 0x9a4),&DAT_0049f978);
+      temp_v4 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x9a4),&DAT_0049f978);
       *(unsigned int *)(param_1 + 0x99c) = temp_v4;
-      FUN_00296f4c(*(unsigned int *)(param_1 + 0x9ac),temp_v4);
+      scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x9ac),temp_v4);
       *(int *)(param_1 + 0xd0) = *(int *)(param_1 + 0xd0) + 1;
       *(unsigned int *)(param_1 + 0xd4) = 0;
       return;

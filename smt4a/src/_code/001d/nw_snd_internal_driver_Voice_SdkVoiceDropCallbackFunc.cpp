@@ -3,7 +3,7 @@
 extern "C" {
 
 void nw_snd_internal_driver_VoiceManager_FreeVoice(u32 manager, DriverVoice *voice);
-u32 FUN_001c2484(void);
+u32 nw_snd_internal_driver_VoiceManager_GetInstance(void);
 
 /* Called when the SDK drops the voice: clears its channels and flags, returns it to the voice manager and notifies the voice's callback (reason 3). */
 void nw_snd_internal_driver_Voice_SdkVoiceDropCallbackFunc(u32 unused, DriverVoice *voice)
@@ -14,7 +14,7 @@ void nw_snd_internal_driver_Voice_SdkVoiceDropCallbackFunc(u32 unused, DriverVoi
     voice->paused = 0;
     voice->started = 0;
     voice->channelCount = 0;
-    manager = FUN_001c2484();
+    manager = nw_snd_internal_driver_VoiceManager_GetInstance();
     nw_snd_internal_driver_VoiceManager_FreeVoice(manager, voice);
     voice->allocated = 0;
     if (voice->callback != NULL) {

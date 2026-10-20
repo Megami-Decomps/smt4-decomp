@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001654d8(...);
+int vec2GetXInt(...);
 int efctSetSpeed(void);
 int FUN_001835b4(int, int, int, int, int, int);
 int FUN_002cc228(char *, int);
@@ -30,14 +30,14 @@ extern unsigned int DAT_00573be8; /* 0x573be8 */
 extern unsigned int DAT_00573bec; /* 0x573bec */
 
 extern int btlGetMainState(void);
-/* Supplied declaration required: FUN_001654d8. */
-extern int FUN_001654e4(int);
+/* Supplied declaration required: vec2GetXInt. */
+extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001834a4(unsigned int, int);
 /* Supplied declaration required: FUN_001835b4. */
-extern int FUN_0018719c(void);
-extern int FUN_001ab854(void);
-extern int FUN_001ab888(void);
+extern int gameFlagIsSet(void);
+extern int gameGetSlotRecord(void);
+extern int gameGetSlotTable(void);
 extern int FUN_00291e14(void);
 extern int FUN_002a4878(int);
 extern int FUN_002b24fc(void);
@@ -46,7 +46,7 @@ extern unsigned int FUN_002c2c4c(int);
 /* Supplied declaration required: FUN_002fa1b0. */
 extern int FUN_003bcf2c(int);
 /* Supplied declaration required: FUN_003da6ac. */
-extern int FUN_003e46f4(void);
+extern int gameDataFlagTestBit(void);
 extern int FUN_004bd748(int);
 
 
@@ -79,11 +79,11 @@ void FUN_0028f740(int param_1)
   if ((temp_v3 == 0x10 || temp_v3 == 0x11) || (temp_v3 == 0x29 || temp_v3 == 0x2d)) {
     temp_v2 = 0;
   }
-  temp_v3 = FUN_001654d8(param_1 + 0x20);
+  temp_v3 = vec2GetXInt(param_1 + 0x20);
   temp_v4 = param_1 + 0x12b8;
-  temp_v5 = FUN_001654d8();
-  temp_v6 = FUN_001654e4(param_1 + 0x20);
-  temp_v7 = FUN_001654e4(temp_v4);
+  temp_v5 = vec2GetXInt();
+  temp_v6 = vec2GetYInt(param_1 + 0x20);
+  temp_v7 = vec2GetYInt(temp_v4);
   efctSetSpeed();
   FUN_001835b4(2,0xd,0xdb,temp_v3 + temp_v5,temp_v6 + temp_v7,0x29);
   FUN_001835b4(2,0xd,0xdc,temp_v3 + temp_v5,temp_v6 + temp_v7,0x29);
@@ -95,10 +95,10 @@ void FUN_0028f740(int param_1)
     do {
       if ((!temp_v2) || (temp_v5 != temp_v3)) {
         temp_v12 = param_1 + temp_v5 * 0x8c;
-        temp_v6 = FUN_001654d8(temp_v12 + 0x138);
-        temp_v7 = FUN_001654d8(temp_v4);
-        temp_v12 = FUN_001654e4(temp_v12 + 0x138);
-        temp_v9 = FUN_001654e4(temp_v4);
+        temp_v6 = vec2GetXInt(temp_v12 + 0x138);
+        temp_v7 = vec2GetXInt(temp_v4);
+        temp_v12 = vec2GetYInt(temp_v12 + 0x138);
+        temp_v9 = vec2GetYInt(temp_v4);
         if ((temp_v8 & 1) != 0) {
           temp_v16 = FUN_001834a4(0xd,temp_v5 + (int)(7 - temp_v8) / 2 + 0xff);
         }
@@ -107,7 +107,7 @@ void FUN_0028f740(int param_1)
         }
         temp_v1 = '\0';
         temp_v15 = 0;
-        temp_v10 = FUN_001ab888();
+        temp_v10 = gameGetSlotTable();
         temp_v13 = 0;
         piVar16 = (int *)(param_1 + 0x3890);
         do {
@@ -116,11 +116,11 @@ void FUN_0028f740(int param_1)
           temp_v11 = *piVar16;
           temp_v14 = 0;
           if ((temp_v11 != 4 && temp_v11 != 0) && (-1 < *(char *)(temp_v11 + temp_v10 + 0x1c9f))) {
-            temp_v14 = FUN_001ab854();
+            temp_v14 = gameGetSlotRecord();
           }
           if ((((pcVar12 != (char *)0x0) && (pcVar12[1] == '\x01')) &&
-              ((*(short *)(pcVar12 + 0x5c) == 0 || (temp_v11 = FUN_0018719c(), temp_v11 != 0)))) &&
-             (((*(short *)(pcVar12 + 0x5e) == 0 || (temp_v11 = FUN_003e46f4(), temp_v11 != 0)) &&
+              ((*(short *)(pcVar12 + 0x5c) == 0 || (temp_v11 = gameFlagIsSet(), temp_v11 != 0)))) &&
+             (((*(short *)(pcVar12 + 0x5e) == 0 || (temp_v11 = gameDataFlagTestBit(), temp_v11 != 0)) &&
               ((pcVar12[0x5b] == '\0' ||
                (temp_v11 = btlGetMainState(),
                (*(unsigned int *)(temp_v11 + 0x45a0) & DAT_00573be8) == 0 &&
@@ -166,10 +166,10 @@ LAB_0028fb5c:
   }
   if (temp_v2) {
     temp_v7 = param_1 + temp_v3 * 0x8c;
-    temp_v5 = FUN_001654d8(temp_v7 + 0x138);
-    temp_v6 = FUN_001654d8(temp_v4);
-    temp_v7 = FUN_001654e4(temp_v7 + 0x138);
-    temp_v4 = FUN_001654e4(temp_v4);
+    temp_v5 = vec2GetXInt(temp_v7 + 0x138);
+    temp_v6 = vec2GetXInt(temp_v4);
+    temp_v7 = vec2GetYInt(temp_v7 + 0x138);
+    temp_v4 = vec2GetYInt(temp_v4);
     if ((temp_v8 & 1) != 0) {
       temp_v12 = FUN_001834a4(0xd,temp_v3 + (int)(7 - temp_v8) / 2 + 0x182);
     }

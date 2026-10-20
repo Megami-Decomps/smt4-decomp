@@ -31,7 +31,7 @@ extern signed char DAT_005f1c48; /* 0x5f1c48 */
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
-extern int FUN_00162e8c(void);
+extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
 extern unsigned int FUN_0029202c(void);
@@ -68,7 +68,7 @@ void FUN_0033feb8(int param_1)
   unsigned int temp_v16;
   float temp_v17 [9];
   
-  temp_v1 = FUN_00162e8c();
+  temp_v1 = gameFlagsGetBlock();
   temp_v4 = g_lmapScene;
   temp_v12 = 1.0f;
   temp_v13 = 60.0f;

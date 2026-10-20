@@ -5,7 +5,7 @@ extern "C" {
 extern const u8 DAT_0055afbc[];  /* vtable */
 void handleWatcherPoll(void *self);
 void *FUN_001173ac(void *buffer);
-void FUN_002e6e14(void *memory);
+void asdOperatorDeleteArray(void *memory);
 
 typedef struct Object Object;
 typedef struct ObjectVtbl {
@@ -29,7 +29,7 @@ Object55afbc *destroyObj0055afbc(Object55afbc *self)
     self->vtbl = DAT_0055afbc;
     handleWatcherPoll(self);
     if (self->buffer != NULL) {
-        FUN_002e6e14(FUN_001173ac(self->buffer));
+        asdOperatorDeleteArray(FUN_001173ac(self->buffer));
     }
     if (self->child != NULL) {
         self->child->vtbl->destroy(self->child);

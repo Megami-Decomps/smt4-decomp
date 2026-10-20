@@ -9,7 +9,7 @@ int panelSetMode3(unsigned int, int);
 int FUN_003343f0(int);
 int objBInitBlocks274300(void);
 int FUN_003c5fc4(int);
-int FUN_00480fc0(int, int);
+int flagValueSub(int, int);
 int FUN_004a8750(unsigned int, int, int);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
@@ -27,7 +27,7 @@ extern int FUN_002a4b74(void);
 /* Supplied declaration required: objBInitBlocks274300. */
 extern int FUN_00370794(void);
 /* Supplied declaration required: FUN_003c5fc4. */
-/* Supplied declaration required: FUN_00480fc0. */
+/* Supplied declaration required: flagValueSub. */
 /* Supplied declaration required: FUN_004a8750. */
 extern int FUN_004cfe4c(int);
 
@@ -76,7 +76,7 @@ void FUN_004a39bc(int param_1)
         *(unsigned int *)(param_1 + 0x18) = 0;
       }
       else {
-        FUN_00480fc0(0x7c3,1);
+        flagValueSub(0x7c3,1);
         FUN_003343f0(0);
         *(unsigned int *)(param_1 + 0x14) = 5;
         *(unsigned int *)(param_1 + 0x18) = 0;

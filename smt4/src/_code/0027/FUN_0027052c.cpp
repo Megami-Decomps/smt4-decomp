@@ -4,19 +4,19 @@
 
 extern "C" {
 
-int FUN_00152bec(void);
+int asdMdlManagerMarkDestroy(void);
 int FUN_001fc0a8(void);
 int FUN_0027ee24(void);
 int FUN_0027eee0(void);
 int FUN_00282390(void);
 int FUN_0028250c(void);
 int FUN_00287a78(void);
-int FUN_0028975c(int, int);
+int gameFlagSetValue(int, int);
 int FUN_00295a18(int, int);
 int FUN_0029be5c(int, int);
 int asdMdlManagerDestroy(void);
-int FUN_002b8e84(int);
-int FUN_002bf694(unsigned char *, int);
+int eventQueueAddUnique(int);
+int libc_strcpy(unsigned char *, int);
 int FUN_002bf810(int);
 int FUN_002e8550(int, int);
 int FUN_002e8a78(void);
@@ -55,7 +55,7 @@ extern unsigned short DAT_0049fab0; /* 0x49fab0 */
 extern unsigned int DAT_0049fc1c; /* 0x49fc1c */
 extern int DAT_0049fc84; /* 0x49fc84 */
 
-/* Supplied declaration required: FUN_00152bec. */
+/* Supplied declaration required: asdMdlManagerMarkDestroy. */
 /* Supplied declaration required: FUN_001fc0a8. */
 extern int FUN_0021e7f4(int, unsigned int);
 extern int mapDepartIsRunning(void);
@@ -67,14 +67,14 @@ extern int FUN_0027ef00(void);
 /* Supplied declaration required: FUN_00282390. */
 /* Supplied declaration required: FUN_0028250c. */
 /* Supplied declaration required: FUN_00287a78. */
-/* Supplied declaration required: FUN_0028975c. */
+/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_00295a18. */
 /* Supplied declaration required: FUN_0029be5c. */
 /* Supplied declaration required: asdMdlManagerDestroy. */
-/* Supplied declaration required: FUN_002b8e84. */
-/* Supplied declaration required: FUN_002bf694. */
+/* Supplied declaration required: eventQueueAddUnique. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_002bf810. */
-extern int FUN_002c2950(void);
+extern int gameGetMapBlock(void);
 /* Supplied declaration required: FUN_002e8550. */
 /* Supplied declaration required: FUN_002e8a78. */
 /* Supplied declaration required: FUN_002f3b14. */
@@ -113,7 +113,7 @@ unsigned int FUN_0027052c(void)
   unsigned int *temp_v23;
   
   temp_v8 = 0;
-  temp_v1 = FUN_002c2950();
+  temp_v1 = gameGetMapBlock();
   FUN_001fc0a8();
   temp_v9 = 0;
   temp_v12 = 0x3c8efa3500000000;
@@ -181,7 +181,7 @@ joined_r0x002706c8:
                 else {
                   FUN_0027ee24();
                   if (*(short *)(temp_v3 + 0x10) != 0) {
-                    FUN_0028975c((int)*(short *)(temp_v3 + 0x10),1);
+                    gameFlagSetValue((int)*(short *)(temp_v3 + 0x10),1);
                   }
                   temp_v16 = (int)*(short *)(temp_v3 + 0x12);
                   if (temp_v16 != 0) {
@@ -199,7 +199,7 @@ joined_r0x002706c8:
                   if (*(short *)(temp_v3 + 0x16) != 0) {
                     DAT_0049fa3a = 1;
                     DAT_0049fa3c = (int)*(short *)(temp_v3 + 0x16);
-                    FUN_002bf694(&DAT_0049fa40,temp_v3 + 0x18);
+                    libc_strcpy(&DAT_0049fa40,temp_v3 + 0x18);
                   }
                 }
                 if (temp_v16 != 0) {
@@ -277,7 +277,7 @@ LAB_002709b8:
                 DAT_0049f9a4 = *(unsigned int *)(temp_v6 + 0x68);
                 DAT_0049f9a8 = *(unsigned int *)(temp_v6 + 0x6c);
                 *(unsigned int *)(temp_v6 + 0x60) = 0;
-                FUN_002b8e84(0x100016d);
+                eventQueueAddUnique(0x100016d);
                 temp_v4 = 2;
                 temp_v8 = 1;
                 *(unsigned int *)(temp_v6 + 0x5c) = temp_v4;
@@ -319,7 +319,7 @@ LAB_002709b8:
                   DAT_0049fa60 = 0;
                   break;
                 }
-                FUN_00152bec();
+                asdMdlManagerMarkDestroy();
                 temp_v4 = 4;
                 *(unsigned char *)(temp_v6 + 0x8c) = 0;
               }

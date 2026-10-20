@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002ac068(unsigned int);
+int dataTableFileGetTable(unsigned int);
 
-/* Supplied declaration required: FUN_002ac068. */
+/* Supplied declaration required: dataTableFileGetTable. */
 
 
 void dataTableGet(unsigned int param_1)
@@ -21,7 +21,7 @@ void dataTableGet(unsigned int param_1)
   else {
     temp_v0 = 0;
   }
-  FUN_002ac068(temp_v0);
+  dataTableFileGetTable(temp_v0);
   return;
 }
 

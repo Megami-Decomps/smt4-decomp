@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_00189a38(int, int);
-int FUN_0018b868(void);
-int FUN_0018b964(void);
+int nn_applet_CTR_detail_OpenSession(void);
+int nn_applet_CTR_detail_CloseSession(void);
 
 /* stack frame of param_6: 5 slot(s), 20 byte(s) */
 typedef struct {
@@ -18,8 +18,8 @@ typedef struct {
 } param_6_stack;
 
 /* Supplied declaration required: FUN_00189a38. */
-/* Supplied declaration required: FUN_0018b868. */
-/* Supplied declaration required: FUN_0018b964. */
+/* Supplied declaration required: nn_applet_CTR_detail_OpenSession. */
+/* Supplied declaration required: nn_applet_CTR_detail_CloseSession. */
 extern int FUN_0018baec(unsigned int, unsigned int *);
 
 
@@ -35,7 +35,7 @@ int FUN_00170d8c(unsigned int param_1,unsigned int *param_2,int param_3,int para
   
   temp_v1 = 0;
   temp_v2 = 0;
-  FUN_0018b868();
+  nn_applet_CTR_detail_OpenSession();
   if ((param_2 == (unsigned int *)0x0) || (param_3 == 0)) {
     param_2 = (unsigned int *)&temp_v1;
   }
@@ -49,7 +49,7 @@ int FUN_00170d8c(unsigned int param_1,unsigned int *param_2,int param_3,int para
   if (param_6 != (unsigned int *)0x0) {
     *param_6 = temp_v3;
   }
-  FUN_0018b964();
+  nn_applet_CTR_detail_CloseSession();
   return temp_v0;
 }
 

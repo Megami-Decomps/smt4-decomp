@@ -5,7 +5,7 @@
 extern "C" {
 
 int memAlloc(int, int, int, int, int, int);
-int FUN_002e342c(unsigned int *, unsigned int);
+int libc_strcpy(unsigned int *, unsigned int);
 
 /* stack frame of param_5: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -13,7 +13,7 @@ typedef struct {
 } param_5_stack;
 
 /* Supplied declaration required: memAlloc. */
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 
 
 void FUN_00350ee0(int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
@@ -30,7 +30,7 @@ void FUN_00350ee0(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
   *puVar2 = param_3;
   puVar2[1] = param_4;
   puVar2[2] = param_5;
-  FUN_002e342c(puVar2 + 3,param_2);
+  libc_strcpy(puVar2 + 3,param_2);
   temp_v1 = param_1[2];
   if (temp_v1 != 0) {
     for (temp_v0 = *(int *)(temp_v1 + 0x40); temp_v0 != 0; temp_v0 = *(int *)(temp_v0 + 0x40)) {

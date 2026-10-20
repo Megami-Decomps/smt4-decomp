@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_002b9024(void);
-int FUN_002c3944(int, int);
+int devilGetRecord(void);
+int rt_memclr(int, int);
 int FUN_002c4924(void);
 int memClear(int, int);
 int FUN_002cf3b4(void);
@@ -21,8 +21,8 @@ typedef struct {
 extern int DAT_0043e2ac; /* 0x43e2ac */
 extern unsigned int *DAT_0043e2b4; /* 0x43e2b4 */
 
-/* Supplied declaration required: FUN_002b9024. */
-/* Supplied declaration required: FUN_002c3944. */
+/* Supplied declaration required: devilGetRecord. */
+/* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: FUN_002c4924. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: FUN_002cf3b4. */
@@ -64,7 +64,7 @@ void FUN_001a1110(void)
   *(unsigned char *)(temp_v0 + 0x9196) = 0xff;
   *(unsigned int *)(temp_v0 + 0x986c) = 0;
   *(unsigned int *)(temp_v0 + 0x9870) = 0;
-  FUN_002c3944(temp_v0 + 0x981e,0x4c);
+  rt_memclr(temp_v0 + 0x981e,0x4c);
   puVar2 = DAT_0043e2b4;
   temp_v0 = DAT_0043e2ac;
   temp_v1 = 0;
@@ -73,7 +73,7 @@ void FUN_001a1110(void)
   *(unsigned short *)((int)puVar2 + 10) = 0;
   do {
     puVar4 = (unsigned short *)((temp_v1 + 1U) & 0xffff);
-    FUN_002b9024();
+    devilGetRecord();
     puVar2 = DAT_0043e2b4;
     if (puVar4 != (unsigned short *)0x0) {
       if ((puVar4[3] & 1) != 0) {
@@ -212,7 +212,7 @@ void FUN_001a1110(void)
   FUN_002c4924();
   FUN_003bbf54();
   FUN_003c25f0();
-  FUN_002c3944(DAT_0043e2ac + 0x1ec18,0x80);
+  rt_memclr(DAT_0043e2ac + 0x1ec18,0x80);
   FUN_002cf3b4();
   return;
 }

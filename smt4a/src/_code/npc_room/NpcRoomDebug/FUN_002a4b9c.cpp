@@ -12,8 +12,8 @@ int FUN_003d54f8(...);
 extern unsigned int *g_npcRoomDebug; /* 0x588128 */
 
 /* Supplied declaration required: jobStop. */
-extern int FUN_00164af0(unsigned int);
-extern int FUN_001656a0(unsigned int);
+extern int padButtonRepeat(unsigned int);
+extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: asdMemFree. */
 extern int npcRoomIsDone(void);
 /* Supplied declaration required: FUN_002e64a0. */
@@ -48,11 +48,11 @@ unsigned int FUN_002a4b9c(void)
     }
   }
   else {
-    temp_v1 = FUN_00164af0(3);
+    temp_v1 = padButtonRepeat(3);
     if ((temp_v1 != 0) && (*(unsigned short *)(puVar2 + 2) < 999)) {
       *(unsigned short *)(puVar2 + 2) = *(unsigned short *)(puVar2 + 2) + 1;
     }
-    temp_v1 = FUN_00164af0(4);
+    temp_v1 = padButtonRepeat(4);
     temp_v0 = 0;
     if (temp_v1 != 0) {
       temp_v0 = *(short *)(puVar2 + 2);
@@ -60,7 +60,7 @@ unsigned int FUN_002a4b9c(void)
     if (temp_v1 != 0 && temp_v0 != 0) {
       *(short *)(puVar2 + 2) = temp_v0 - 1;
     }
-    temp_v1 = FUN_001656a0(0);
+    temp_v1 = padButtonIsPressed(0);
     if (temp_v1 != 0) {
       FUN_002e64a0(*(unsigned short *)(puVar2 + 2));
       puVar2[1] = puVar2[1] + 1;

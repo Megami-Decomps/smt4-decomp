@@ -10,7 +10,7 @@ extern int g_eventTex; /* 0x43ded0 */
 
 extern float *FUN_0018f654(int);
 /* Supplied declaration required: FUN_00257e74. */
-extern int FUN_002580b4(void);
+extern int eventCommandGetPendingCleanup(void);
 
 
 unsigned int FUN_001f4264(void)
@@ -21,7 +21,7 @@ unsigned int FUN_001f4264(void)
   float *pfVar2;
   unsigned char temp_v1;
   
-  temp_v0 = FUN_002580b4();
+  temp_v0 = eventCommandGetPendingCleanup();
   if (temp_v0 != 0) {
     FUN_00257e74();
     pfVar2 = (float *)FUN_0018f654(temp_v0);

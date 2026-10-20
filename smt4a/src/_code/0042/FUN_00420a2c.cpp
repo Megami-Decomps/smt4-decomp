@@ -7,8 +7,8 @@ extern "C" {
 int FUN_00163aa4(...);
 
 /* Supplied declaration required: FUN_00163aa4. */
-extern unsigned int FUN_001654d8(int);
-extern unsigned int FUN_001654e4(int);
+extern unsigned int vec2GetXInt(int);
+extern unsigned int vec2GetYInt(int);
 
 
 void FUN_00420a2c(int param_1)
@@ -33,8 +33,8 @@ void FUN_00420a2c(int param_1)
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < *(int *)(param_1 + 0x18));
   }
-  temp_v0 = FUN_001654d8(param_1 + 0x474);
-  temp_v1 = FUN_001654e4(param_1 + 0x474);
+  temp_v0 = vec2GetXInt(param_1 + 0x474);
+  temp_v1 = vec2GetYInt(param_1 + 0x474);
   *(unsigned int *)(param_1 + 0x624) = temp_v0;
   *(unsigned int *)(param_1 + 0x628) = temp_v1;
   *(unsigned int *)(param_1 + 0x62c) = *(unsigned int *)(param_1 + 0x494);
@@ -42,8 +42,8 @@ void FUN_00420a2c(int param_1)
   if (0 < *(int *)(param_1 + 0x18)) {
     do {
       temp_v3 = param_1 + temp_v2 * 0x8c;
-      temp_v0 = FUN_001654d8(temp_v3 + 0x500);
-      temp_v1 = FUN_001654e4(temp_v3 + 0x500);
+      temp_v0 = vec2GetXInt(temp_v3 + 0x500);
+      temp_v1 = vec2GetYInt(temp_v3 + 0x500);
       temp_v4 = *(unsigned int *)(temp_v3 + 0x520);
       temp_v3 = temp_v2 + 1;
       temp_v2 = param_1 + temp_v2 * 0x44;
@@ -53,8 +53,8 @@ void FUN_00420a2c(int param_1)
       temp_v2 = temp_v3;
     } while (temp_v3 < *(int *)(param_1 + 0x18));
   }
-  temp_v0 = FUN_001654d8(param_1 + 0x500);
-  temp_v1 = FUN_001654e4(param_1 + 0x500);
+  temp_v0 = vec2GetXInt(param_1 + 0x500);
+  temp_v1 = vec2GetYInt(param_1 + 0x500);
   *(unsigned int *)(param_1 + 0x710) = temp_v0;
   *(unsigned int *)(param_1 + 0x714) = temp_v1;
   *(unsigned int *)(param_1 + 0x718) = *(unsigned int *)(param_1 + 0x520);

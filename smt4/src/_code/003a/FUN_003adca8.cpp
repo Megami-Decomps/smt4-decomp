@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002630e0(float *, int, unsigned int);
 int FUN_00295eb0(...);
 int FUN_002963ec(...);
-int FUN_002b8da0(...);
+int pairSetFirstResetSecond(...);
 int FUN_002bee58(int, int);
 
 /* stack frame of param_7: 4 slot(s), 16 byte(s) */
@@ -18,12 +18,12 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_7_stack;
 
-extern unsigned char DAT_00439c88; /* 0x439c88 */
+extern unsigned char g_btlUi; /* 0x439c88 */
 
 /* Supplied declaration required: FUN_002630e0. */
 /* Supplied declaration required: FUN_00295eb0. */
 /* Supplied declaration required: FUN_002963ec. */
-/* Supplied declaration required: FUN_002b8da0. */
+/* Supplied declaration required: pairSetFirstResetSecond. */
 /* Supplied declaration required: FUN_002bee58. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
 extern unsigned int FUN_002c501c(void);
@@ -49,7 +49,7 @@ void FUN_003adca8(unsigned int param_1,int param_2,int param_3,unsigned int para
   unsigned int temp_v8;
   int temp_v9;
   
-  temp_v4 = (*(int *)((unsigned char *)&DAT_00439c88 + 0x20));
+  temp_v4 = (*(int *)((unsigned char *)&g_btlUi + 0x20));
   temp_v6 = in_s0;
   temp_v7 = in_s1;
   temp_v8 = in_s2;
@@ -92,7 +92,7 @@ void FUN_003adca8(unsigned int param_1,int param_2,int param_3,unsigned int para
       temp_v1 = __aeabi_idivmod(param_3,temp_v3);
       temp_v1 = temp_v1 + 0x7ee;
     }
-    FUN_002b8da0(temp_v5,temp_v1);
+    pairSetFirstResetSecond(temp_v5,temp_v1);
     temp_v5 = __aeabi_idivmod(param_3,temp_v3);
     temp_v2 = temp_v2 - 1;
     param_3 = param_3 - temp_v5 * temp_v3;
@@ -105,24 +105,24 @@ void FUN_003adca8(unsigned int param_1,int param_2,int param_3,unsigned int para
   if (param_5 == 0) {
     if (param_6 != 0) {
       if (param_6 == 1) {
-        FUN_002b8da0(temp_v2,0x420);
-        FUN_002b8da0(temp_v4,0x3eb);
+        pairSetFirstResetSecond(temp_v2,0x420);
+        pairSetFirstResetSecond(temp_v4,0x3eb);
       }
     }
     else {
-      FUN_002b8da0(temp_v2,1000);
-      FUN_002b8da0(temp_v4,0x3ea);
+      pairSetFirstResetSecond(temp_v2,1000);
+      pairSetFirstResetSecond(temp_v4,0x3ea);
     }
   }
   else if (param_6 != 0) {
     if (param_6 == 1) {
-      FUN_002b8da0(temp_v2,0x421);
-      FUN_002b8da0(temp_v4,0x3ed);
+      pairSetFirstResetSecond(temp_v2,0x421);
+      pairSetFirstResetSecond(temp_v4,0x3ed);
     }
   }
   else {
-    FUN_002b8da0(temp_v2,0x3e9);
-    FUN_002b8da0(temp_v4,0x3ec);
+    pairSetFirstResetSecond(temp_v2,0x3e9);
+    pairSetFirstResetSecond(temp_v4,0x3ec);
   }
   FUN_00295eb0(temp_v2,0x15,0x419);
   FUN_00295eb0(temp_v4,0x15,0x418);

@@ -17,7 +17,7 @@ int FUN_002aff70(...);
 int FUN_002b011c(...);
 int FUN_002b7064(...);
 int FUN_002b70cc(...);
-int FUN_002b90f8(...);
+int cameraSetViewMatrix(...);
 int FUN_002c1b64(...);
 int VectorFloatToUnsigned(double, int);
 int VectorUnsignedToFloat(...);
@@ -124,7 +124,7 @@ extern float DAT_004ea998; /* 0x4ea998 */
 /* Supplied declaration required: FUN_002b011c. */
 /* Supplied declaration required: FUN_002b7064. */
 /* Supplied declaration required: FUN_002b70cc. */
-/* Supplied declaration required: FUN_002b90f8. */
+/* Supplied declaration required: cameraSetViewMatrix. */
 /* Supplied declaration required: FUN_002c1b64. */
 /* Supplied declaration required: nn_math_ARMv6_MTX44TransposeAsm. */
 
@@ -226,7 +226,7 @@ void FUN_002c7d18(fn_002c7d18_arg0 *param_1)
   fStack_88 = temp_v22;
   FUN_002a3504(temp_v30,temp_v30,&temp_v42);
   FUN_002a34e8(temp_v30,&temp_v45);
-  FUN_002b90f8(g_titleScene,temp_v30);
+  cameraSetViewMatrix(g_titleScene,temp_v30);
   temp_v3 = pfVar4->field_0x8;
   if (param_1->field_0xc == 7) {
     temp_v17 = 255.0f;

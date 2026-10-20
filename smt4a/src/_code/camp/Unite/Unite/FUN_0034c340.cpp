@@ -8,9 +8,9 @@ int qsort(unsigned short *, unsigned int, int, unsigned char *);
 int asdMemoryAlloc(int, int, int, unsigned int, int);
 int FUN_00184310(void);
 int asdMemFree(unsigned short *);
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 int sysMemClear(unsigned char [88], int);
-int FUN_002e6dd0(...);
+int rt_aeabi_memclr(...);
 int FUN_0034a290(void);
 int FUN_003c3f1c(void);
 int FUN_003cd9e8(...);
@@ -43,9 +43,9 @@ extern unsigned char LAB_0038e764; /* 0x38e764 */
 /* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_002e6dd0. */
+/* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: FUN_0034a290. */
 /* Supplied declaration required: FUN_003c3f1c. */
 /* Supplied declaration required: FUN_003cd9e8. */
@@ -96,8 +96,8 @@ void FUN_0034c340(unsigned short *param_1,unsigned int param_2,int param_3,unsig
   FUN_00184310();
   puVar7 = (unsigned short *)0x100;
   asdMemoryAlloc(0x100,0x100,0,param_2 * 6,1);
-  FUN_002e6dd0();
-  FUN_002e6dd0(&uStack_e0,0xb0);
+  rt_aeabi_memclr();
+  rt_aeabi_memclr(&uStack_e0,0xb0);
   temp_v11 = 0;
   if (temp_v11 < (int)param_2) {
     do {
@@ -135,7 +135,7 @@ void FUN_0034c340(unsigned short *param_1,unsigned int param_2,int param_3,unsig
         puVar16[1] = (short)temp_v15 + puVar16[1];
         temp_v10 = (unsigned int)*(unsigned char *)(temp_v6 + 2);
         temp_v6 = (unsigned int)*puVar17;
-        FUN_001aba54();
+        dataTable04FindById();
         temp_v12 = 0;
         if (temp_v6 != 0) {
           temp_v12 = (unsigned int)*(unsigned short *)(temp_v6 + 0x26);

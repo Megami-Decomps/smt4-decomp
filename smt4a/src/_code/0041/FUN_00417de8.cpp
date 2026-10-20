@@ -13,11 +13,11 @@ typedef struct Table {
     /* 0x2A0 */ Entry entries[1];
 } Table;
 
-extern Table *FUN_001ab940(void);
+extern Table *gameFlagBlockGet(void);
 
 void FUN_00417de8(s32 index)
 {
-    FUN_001ab940()->entries[index].flags &= ~0x60;
+    gameFlagBlockGet()->entries[index].flags &= ~0x60;
 }
 
 }

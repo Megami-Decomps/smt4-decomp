@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100854(unsigned short *, unsigned int, unsigned int, int, unsigned char *);
+int libc_bsearch(unsigned short *, unsigned int, unsigned int, int, unsigned char *);
 
 /* stack frame of param_1: 3 slot(s), 10 byte(s) */
 typedef struct {
@@ -15,11 +15,11 @@ typedef struct {
 
 extern unsigned char LAB_002b2b24; /* 0x2b2b24 */
 
-/* Supplied declaration required: FUN_00100854. */
+/* Supplied declaration required: libc_bsearch. */
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern unsigned int dataTableGetEntries(void);
-extern char *FUN_00261828(void);
+extern char *gameDataGetPlayerName(void);
 
 
 char * FUN_002a6a84(unsigned int param_1)
@@ -37,7 +37,7 @@ char * FUN_002a6a84(unsigned int param_1)
   }
   else {
     if (param_1 == 0x3e) {
-      pcVar1 = (char *)FUN_00261828();
+      pcVar1 = (char *)gameDataGetPlayerName();
       return pcVar1;
     }
     if (param_1 == 0x55 || param_1 == 0x56) {
@@ -86,7 +86,7 @@ char * FUN_002a6a84(unsigned int param_1)
                     temp_v0 = dataTableGetCount(temp_v0);
                     puVar4 = temp_v2;
                     temp_v2[0] = (unsigned short)param_1;
-                    FUN_00100854(puVar4,temp_v1,temp_v0,0x68,&LAB_002b2b24);
+                    libc_bsearch(puVar4,temp_v1,temp_v0,0x68,&LAB_002b2b24);
                     return (char *)(puVar4 + 1);
                   }
                   return "4/6         ";

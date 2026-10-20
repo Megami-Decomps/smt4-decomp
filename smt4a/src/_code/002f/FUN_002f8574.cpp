@@ -11,7 +11,7 @@ extern unsigned char LAB_002f85f8; /* 0x2f85f8 */
 extern unsigned char DAT_00558be8; /* 0x558be8 */
 
 /* Supplied declaration required: FUN_001213c0. */
-extern int FUN_002e995c(unsigned int *);
+extern int onlineSockAddrConstruct(unsigned int *);
 extern int FUN_002eb5f4(void);
 /* Supplied declaration required: FUN_002f2fe8. */
 extern int FUN_002f3024(int, unsigned char *);
@@ -32,7 +32,7 @@ int FUN_002f8574(unsigned int *param_1,unsigned int param_2,unsigned int param_3
   param_1[0x13] = param_2;
   *(unsigned char *)(param_1 + 0x14) = 0;
   *(unsigned char *)((int)param_1 + 0x51) = 0;
-  temp_v0 = FUN_002e995c(param_1 + 0x15);
+  temp_v0 = onlineSockAddrConstruct(param_1 + 0x15);
   *(unsigned int *)(temp_v0 + 0x20) = 1;
   temp_v0 = temp_v0 + 0x24;
   FUN_002f2fe8(temp_v0,param_4 + 0x6c);

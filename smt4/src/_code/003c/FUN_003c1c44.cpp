@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002b9024(void);
+int devilGetRecord(void);
 int dataTableGet(int, int);
 
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: devilGetRecord. */
 extern int dataTableGetEntries(void);
 /* Supplied declaration required: dataTableGet. */
 
@@ -22,7 +22,7 @@ int FUN_003c1c44(int param_1,int param_2,unsigned int *param_3)
   int temp_v3;
   unsigned int temp_v4;
   
-  FUN_002b9024();
+  devilGetRecord();
   temp_v3 = (param_2 - (unsigned int)*(unsigned char *)(param_1 + 3)) + 1;
   temp_v2 = param_2;
   if (temp_v3 < 1) {

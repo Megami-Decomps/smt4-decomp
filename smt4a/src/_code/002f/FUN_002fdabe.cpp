@@ -19,7 +19,7 @@ struct fn_002fdabe_arg0 {
 };
 
 extern unsigned int *FUN_001328c2(fn_002fdabe_arg0 *, unsigned int, unsigned int, unsigned int, unsigned int);
-extern int FUN_002ede60(unsigned int *, int);
+extern int onlineSockAddrConstruct2(unsigned int *, int);
 
 
 void FUN_002fdabe(fn_002fdabe_arg0 *param_1,int param_2,unsigned int param_3,unsigned int param_4)
@@ -34,7 +34,7 @@ void FUN_002fdabe(fn_002fdabe_arg0 *param_1,int param_2,unsigned int param_3,uns
   
   pvVar6 = param_1->field_0x10;
   puVar1 = (unsigned int *)FUN_001328c2(param_1,0,param_3,param_4,param_4);
-  temp_v0 = FUN_002ede60(puVar1 + 2,param_2);
+  temp_v0 = onlineSockAddrConstruct2(puVar1 + 2,param_2);
   temp_v3 = *(unsigned int *)(param_2 + 0x24);
   temp_v2 = *(unsigned int *)(param_2 + 0x20);
   temp_v1 = *(unsigned int *)(param_2 + 0x28);

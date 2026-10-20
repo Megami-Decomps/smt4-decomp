@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0019552c(...);
 int FUN_00286198(...);
-int FUN_0028648c(...);
+int mtxMakeTranslation(...);
 int FUN_002b2144(...);
 int FUN_002ba1e0(...);
 int mtx44Copy(float *, unsigned int);
@@ -103,7 +103,7 @@ extern float DAT_004efd98; /* 0x4efd98 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0019552c. */
 /* Supplied declaration required: FUN_00286198. */
-/* Supplied declaration required: FUN_0028648c. */
+/* Supplied declaration required: mtxMakeTranslation. */
 extern unsigned int FUN_002a7bc0(void);
 extern int FUN_002a81a8(unsigned char *, int);
 /* Supplied declaration required: FUN_002b2144. */
@@ -303,7 +303,7 @@ void FUN_001aad64(int param_1)
     temp_v21 = -9.0f;
     temp_v19 = temp_v16;
     temp_v20 = temp_v16;
-    FUN_0028648c(temp_v67,&temp_v19);
+    mtxMakeTranslation(temp_v67,&temp_v19);
     nn_math_ARMv6_MTX44MultAsm(&temp_v25,&temp_v25,temp_v67);
   }
   pfVar4 = *(float **)(*(int *)(param_1 + 0x354) + 4);
@@ -311,19 +311,19 @@ void FUN_001aad64(int param_1)
     temp_v18 = *pfVar4 * 0.03125f;
     temp_v19 = pfVar4[1] * -0.03125f;
     temp_v20 = temp_v16;
-    FUN_0028648c(&temp_v59,&temp_v18);
+    mtxMakeTranslation(&temp_v59,&temp_v18);
     nn_math_ARMv6_MTX44MultAsm(&temp_v25,&temp_v25,&temp_v59);
   }
   temp_v24 = *(unsigned int *)(param_1 + 0x120);
   uStack_1e8 = *(unsigned int *)(param_1 + 0x124);
   uStack_1e4 = *(unsigned int *)(param_1 + 0x128);
-  FUN_0028648c(temp_v65,&temp_v24);
+  mtxMakeTranslation(temp_v65,&temp_v24);
   nn_math_ARMv6_MTX44MultAsm(&temp_v25,&temp_v25,temp_v65);
   if (*(char *)(param_1 + 0x380) == '\x01') {
     temp_v18 = *(float *)(param_1 + 0x358);
     temp_v19 = *(float *)(param_1 + 0x35c);
     temp_v20 = *(float *)(param_1 + 0x360);
-    FUN_0028648c(&temp_v59,&temp_v18);
+    mtxMakeTranslation(&temp_v59,&temp_v18);
     nn_math_ARMv6_MTX44MultAsm(&temp_v25,&temp_v25,&temp_v59);
   }
   if (*(char *)(param_1 + 0x380) == '\x03') {
@@ -421,7 +421,7 @@ void FUN_001aad64(int param_1)
       temp_v18 = temp_v18 * temp_v17;
       temp_v19 = temp_v19 * temp_v17;
       temp_v20 = temp_v16;
-      FUN_0028648c(&temp_v59,&temp_v18);
+      mtxMakeTranslation(&temp_v59,&temp_v18);
       nn_math_ARMv6_MTX44MultAsm(&temp_v25,&temp_v25,&temp_v59);
       temp_v11 = temp_v9;
     }
@@ -438,7 +438,7 @@ void FUN_001aad64(int param_1)
     temp_v18 = temp_v19 * temp_v12 * -0.1f;
     temp_v19 = temp_v19 * temp_v14 * -0.1f;
     temp_v20 = temp_v16;
-    FUN_0028648c(&temp_v59,&temp_v18);
+    mtxMakeTranslation(&temp_v59,&temp_v18);
     nn_math_ARMv6_MTX44MultAsm(&temp_v25,&temp_v25,&temp_v59);
   }
   temp_v49[0] = *(float *)(param_1 + 500) * *(float *)(param_1 + 0x1f8);
@@ -470,7 +470,7 @@ void FUN_001aad64(int param_1)
     temp_v18 = temp_v18 * temp_v17;
     temp_v19 = temp_v19 * temp_v17;
     temp_v20 = temp_v16;
-    FUN_0028648c(&temp_v59,&temp_v18);
+    mtxMakeTranslation(&temp_v59,&temp_v18);
     nn_math_ARMv6_MTX44MultAsm(&temp_v25,&temp_v25,&temp_v59);
   }
   temp_v38 = *(float *)(param_1 + 0x388);

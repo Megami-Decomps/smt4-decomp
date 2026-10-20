@@ -7,7 +7,7 @@ void *memAlloc(int, int, int, int size, int align, int);
 PolyGeom *FUN_00247334(u32 count, int w, int h, u8 *table, int tableSize);
 void FUN_002472f0(PolyGeom *geom, void *texture);
 u32 FUN_0024c3c8(int id);
-void FUN_002694f8(u32 texture);
+void refCountIncrement(u32 texture);
 extern u8 DAT_004737c2;
 
 /* Builds a polygon effect's textured geometry block (the given texture, or a default one) and gives each segment alternating texture coordinates. The effect's unk70 is clamped to at least 1. */
@@ -25,7 +25,7 @@ PolyGeomBlock *effPolyFlashGeomTexCreate2(PolyParams *params, void *texture)
         FUN_002472f0(geom, texture);
     } else {
         geom->unk04 = FUN_0024c3c8(18);
-        FUN_002694f8(geom->unk04);
+        refCountIncrement(geom->unk04);
     }
     if (params->segments != 0) {
         PolyQuadUV *uv = block->geom->buf->uv;

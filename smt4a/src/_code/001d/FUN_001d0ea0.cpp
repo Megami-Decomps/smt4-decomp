@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001d23e0(unsigned int, int, int, unsigned int, unsigned int, int);
 int FUN_001d25a0(unsigned int, int);
-int FUN_0030ea58(unsigned int *, int);
+int libc_strcmp(unsigned int *, int);
 
 /* stack frame of param_3: 6 slot(s), 24 byte(s) */
 typedef struct {
@@ -21,7 +21,7 @@ typedef struct {
 /* Supplied declaration required: FUN_001d23e0. */
 /* Supplied declaration required: FUN_001d25a0. */
 extern int wstrlen(int);
-/* Supplied declaration required: FUN_0030ea58. */
+/* Supplied declaration required: libc_strcmp. */
 
 
 void FUN_001d0ea0(unsigned int param_1,int param_2,int param_3)
@@ -76,7 +76,7 @@ void FUN_001d0ea0(unsigned int param_1,int param_2,int param_3)
           do {
             temp_v2 = *(int *)(param_2 + 0x318) + temp_v1 * 0x50;
             puVar5 = &temp_v6;
-            FUN_0030ea58(puVar5,temp_v2 + 0x24);
+            libc_strcmp(puVar5,temp_v2 + 0x24);
             if (puVar5 == (unsigned int *)0x0) {
               FUN_001d23e0(param_1,param_2,temp_v2 + 0x24,*(unsigned int *)(temp_v2 + 0x20),
                            *(unsigned int *)(temp_v2 + 0x34),*(unsigned short *)(temp_v2 + 8));

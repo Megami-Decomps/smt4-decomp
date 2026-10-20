@@ -2,9 +2,9 @@
 
 extern "C" {
 
-int FUN_00162e8c(void);
+int gameFlagsGetBlock(void);
 
-/* Supplied declaration required: FUN_00162e8c. */
+/* Supplied declaration required: gameFlagsGetBlock. */
 extern int dataTableGetEntry49(unsigned char);
 
 
@@ -15,9 +15,9 @@ unsigned char FUN_00325064(void)
   int temp_v0;
   unsigned char *puVar2;
   
-  temp_v0 = FUN_00162e8c();
+  temp_v0 = gameFlagsGetBlock();
   if (temp_v0 != 0) {
-    puVar2 = (unsigned char *)FUN_00162e8c();
+    puVar2 = (unsigned char *)gameFlagsGetBlock();
     if (puVar2 != (unsigned char *)0x0) {
       puVar2 = puVar2 + 0x1590;
     }

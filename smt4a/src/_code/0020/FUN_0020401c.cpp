@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_001846d0(u8 *member, s32 flag);
+void uiSpriteSelectAnim(u8 *member, s32 flag);
 void sysMemClear(u8 *block, s32 size);
 void rt_memcpy(u8 *dest, const u8 *source, s32 size);
 
@@ -15,7 +15,7 @@ typedef struct Object {
     /* 0x34 */ u8 member34[0x8C];
     /* 0xC0 */ u8 name[0x80];
 } Object;
-extern Object *DAT_0057f578;
+extern Object *g_placeWin;
 
 /* Resets the object and stores a copy of the 16-bit-character string `name` (up to 0x80 bytes, ending at its first zero character) in it. */
 void FUN_0020401c(const u8 *name)
@@ -23,10 +23,10 @@ void FUN_0020401c(const u8 *name)
     Object *object;
     s32 length;
 
-    object = DAT_0057f578;
-    DAT_0057f578->state = 1;
+    object = g_placeWin;
+    g_placeWin->state = 1;
     object->flag = 1;
-    FUN_001846d0(object->member34, 0);
+    uiSpriteSelectAnim(object->member34, 0);
     sysMemClear(object->name, 0x80);
     length = 0;
     do {

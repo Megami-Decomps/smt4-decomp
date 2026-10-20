@@ -5,14 +5,14 @@
 extern "C" {
 
 int FUN_00195fc4(void);
-int FUN_002e3494(int);
+int asdOperatorDeleteB(int);
 int FUN_0030f20a(...);
 
 extern unsigned char LAB_001235f4; /* 0x1235f4 */
 extern unsigned char DAT_0064bf20; /* 0x64bf20 */
 
 /* Supplied declaration required: FUN_00195fc4. */
-/* Supplied declaration required: FUN_002e3494. */
+/* Supplied declaration required: asdOperatorDeleteB. */
 /* Supplied declaration required: FUN_0030f20a. */
 
 
@@ -24,7 +24,7 @@ void FUN_001235b8(int param_1,int param_2)
   
   if (param_2 != 0) {
     FUN_0030f20a(&DAT_0064bf20,&LAB_001235f4,param_2);
-    FUN_002e3494(param_2);
+    asdOperatorDeleteB(param_2);
     do {
       FUN_00195fc4();
 LAB_001235e8:

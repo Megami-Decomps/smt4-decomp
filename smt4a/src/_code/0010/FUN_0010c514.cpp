@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_002e7682(...);
-int FUN_002e76a0(...);
+int bufferAssignBytes(...);
+int strHolderAssignBuffer(...);
 int FUN_002ed84a(...);
 int FUN_002f5c18(int *, unsigned int, int *);
 
@@ -20,11 +20,11 @@ typedef struct {
     unsigned int sp44; /* 0x44: local_44 */
 } param_3_stack;
 
-extern int FUN_002e760a(unsigned int);
+extern int operatorNew(unsigned int);
 extern int *FUN_002e7614(int, int);
-extern int FUN_002e7674(int, int);
-/* Supplied declaration required: FUN_002e7682. */
-/* Supplied declaration required: FUN_002e76a0. */
+extern int strHolderAssignBytes(int, int);
+/* Supplied declaration required: bufferAssignBytes. */
+/* Supplied declaration required: strHolderAssignBuffer. */
 extern int FUN_002eac34(unsigned int);
 /* Supplied declaration required: FUN_002ed84a. */
 /* Supplied declaration required: FUN_002f5c18. */
@@ -65,7 +65,7 @@ void FUN_0010c514(unsigned int param_1,int param_2,int param_3)
         temp_v1 = FUN_002eac34(temp_v6);
         temp_v3 = *(int **)(temp_v1 + 0x10);
         if (temp_v3 != (int *)0x0) {
-          temp_v1 = FUN_002e760a(0x20);
+          temp_v1 = operatorNew(0x20);
           piVar3 = (int *)0x0;
           if (temp_v1 != 0) {
             piVar3 = (int *)FUN_002e7614(temp_v1,*(int *)(*(int *)(param_2 + 0xd8) + 0x10) + 0x40);
@@ -77,7 +77,7 @@ void FUN_0010c514(unsigned int param_1,int param_2,int param_3)
         temp_v5 = *(int **)(temp_v1 + 0x14);
         piVar5 = piVar3;
         if (temp_v5 != (int *)0x0) {
-          temp_v1 = FUN_002e760a(0x20);
+          temp_v1 = operatorNew(0x20);
           piVar5 = (int *)0x0;
           if (temp_v1 != 0) {
             piVar5 = (int *)FUN_002e7614(temp_v1,piVar3[4]);
@@ -104,10 +104,10 @@ void FUN_0010c514(unsigned int param_1,int param_2,int param_3)
           temp_v6 = param_2 + 0x90;
           *(char *)(param_2 + 0x69) = (char)*(unsigned int *)(param_2 + 0x9c);
           *(short *)(param_2 + 0x6a) = (short)(int)temp_v3;
-          temp_v1 = FUN_002e7682(temp_v8,(unsigned char *)(param_2 + 0x68),0xc);
+          temp_v1 = bufferAssignBytes(temp_v8,(unsigned char *)(param_2 + 0x68),0xc);
           if (temp_v1 != 0) {
             if (*(int *)(param_2 + 0x38) != 0) {
-              temp_v1 = FUN_002e7674(temp_v8,param_2 + 0x28);
+              temp_v1 = strHolderAssignBytes(temp_v8,param_2 + 0x28);
               if (temp_v1 == 0) {
                 return;
               }
@@ -125,9 +125,9 @@ void FUN_0010c514(unsigned int param_1,int param_2,int param_3)
               } while (temp_v2 < 0x10);
             }
             if ((*(int *)(temp_v6 + 0xc) == 0) ||
-               (temp_v1 = FUN_002e7682(temp_v8,temp_v6 + 0x10), temp_v1 != 0)) {
+               (temp_v1 = bufferAssignBytes(temp_v8,temp_v6 + 0x10), temp_v1 != 0)) {
               if (*(int *)(param_2 + 0xd8) != 0) {
-                FUN_002e76a0(temp_v8,piVar5);
+                strHolderAssignBuffer(temp_v8,piVar5);
               }
               *(unsigned int *)(temp_v4 + 0x34) = *(unsigned int *)(*(int *)(temp_v8 + 8) + 0x10);
               if ((temp_v0) && (piVar5 != (int *)0x0)) {
@@ -140,7 +140,7 @@ void FUN_0010c514(unsigned int param_1,int param_2,int param_3)
     }
   }
   else {
-    FUN_002e76a0(param_3,*(unsigned int *)(param_2 + 0xd8));
+    strHolderAssignBuffer(param_3,*(unsigned int *)(param_2 + 0xd8));
     *(unsigned int *)(temp_v4 + 0x34) = *(unsigned int *)(*(int *)(temp_v8 + 8) + 0x10);
   }
   return;

@@ -27,7 +27,7 @@ typedef struct {
 } void_stack;
 
 extern unsigned char LAB_001add58; /* 0x1add58 */
-extern int DAT_0043dd50; /* 0x43dd50 */
+extern int g_uiQuest; /* 0x43dd50 */
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -40,8 +40,8 @@ extern int g_titleScene; /* 0x44ea00 */
 extern unsigned int FUN_002bcddc(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: FUN_002be624. */
-extern int FUN_002bed98(int);
-extern int FUN_002beda4(void);
+extern int vec2GetYInt(int);
+extern int vec2GetXInt(void);
 /* Supplied declaration required: FUN_002bf288. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002c18e4. */
@@ -68,7 +68,7 @@ unsigned int FUN_001ad9f0(void)
   unsigned char temp_v8 [64];
   int temp_v9;
   
-  temp_v2 = DAT_0043dd50;
+  temp_v2 = g_uiQuest;
   FUN_002c39a4(g_titleScene);
   temp_v4 = g_titleScene;
   temp_v1 = FUN_002c5d80(1,0);
@@ -119,12 +119,12 @@ unsigned int FUN_001ad9f0(void)
     if (*(char *)(temp_v2 + 0x5f0) == '\0') {
       FUN_00197e34();
     }
-    temp_v2 = DAT_0043dd50;
+    temp_v2 = g_uiQuest;
     temp_v7 = 0.3f;
     FUN_002ba12c(g_titleScene);
     temp_v9 = temp_v2 + 0x408;
-    temp_v4 = FUN_002beda4();
-    temp_v1 = FUN_002bed98(temp_v2 + 0x408);
+    temp_v4 = vec2GetXInt();
+    temp_v1 = vec2GetYInt(temp_v2 + 0x408);
     temp_v0 = *(unsigned short *)(temp_v2 + 0x97e);
     if (*(char *)(temp_v2 + 0x5f0) == '\0') {
       uiFadeDraw(0x92);

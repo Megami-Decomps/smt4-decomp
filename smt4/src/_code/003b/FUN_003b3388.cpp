@@ -9,16 +9,16 @@ int FUN_002b2650(...);
 int FUN_002b93c8(...);
 int FUN_002be370(...);
 int FUN_002be650(...);
-int FUN_002beda4(...);
+int vec2GetXInt(...);
 int FUN_002bf538(...);
 
 int FUN_00288790(...);
 int FUN_00288844(...);
-int FUN_002a8740(...);
+int gameGetUnitRecord(...);
 int FUN_002b6dd8(...);
 int FUN_002ba12c(...);
 int FUN_002bdf94(...);
-int FUN_002be304(...);
+int drawSetColorFromRGBA8(...);
 int FUN_002be5a4(...);
 int FUN_002be624(...);
 int FUN_002bed3c(void);
@@ -66,25 +66,25 @@ extern int FUN_0025b6e8(int);
 /* Supplied declaration required: FUN_00288844. */
 extern int FUN_00295c60(unsigned short, int);
 extern int FUN_00295f28(int);
-/* Supplied declaration required: FUN_002a8740. */
-extern int FUN_002a8764(void);
+/* Supplied declaration required: gameGetUnitRecord. */
+extern int gameGetSlotTable(void);
 extern int FUN_002b05d0(int);
 /* Supplied declaration required: FUN_002b0750. */
 /* Supplied declaration required: FUN_002b2650. */
-extern int FUN_002b63ac(void);
+extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_002b6dd8. */
 /* Supplied declaration required: FUN_002b93c8. */
 /* Supplied declaration required: FUN_002ba12c. */
 extern unsigned int FUN_002bd068(unsigned short);
 extern unsigned int FUN_002bd1fc(void);
 /* Supplied declaration required: FUN_002bdf94. */
-/* Supplied declaration required: FUN_002be304. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_002be370. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002be650. */
 /* Supplied declaration required: FUN_002bed3c. */
-/* Supplied declaration required: FUN_002beda4. */
+/* Supplied declaration required: vec2GetXInt. */
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf4f8. */
@@ -151,7 +151,7 @@ void FUN_003b3388(int param_1,int param_2,int param_3)
   temp_v21 = 0;
   temp_v15 = 0x3f800000;
   temp_v14 = (int)temp_v19 + temp_v30;
-  temp_v4 = FUN_002a8764();
+  temp_v4 = gameGetSlotTable();
   FUN_002bf380(2,0x28,0,temp_v14,param_3,0x65);
   pcVar12 = (char *)(param_1 + 0x3560);
   if (*pcVar12 == '\0') {
@@ -208,7 +208,7 @@ LAB_003b35ac:
       FUN_002bf288(2,0x28,7,temp_v3 + temp_v6,temp_v2 + param_3,0x6a);
     }
     else if (-1 < *(char *)(temp_v4 + temp_v5 + 0x9107)) {
-      temp_v6 = FUN_002a8740();
+      temp_v6 = gameGetUnitRecord();
       temp_v13 = (unsigned int)*(unsigned short *)(temp_v6 + 0x46);
       temp_v12 = (unsigned int)*(char *)(temp_v4 + temp_v5 + 0x9107);
       goto LAB_003b35ac;
@@ -246,11 +246,11 @@ LAB_003b35ac:
       temp_v5 = -1;
       temp_v8 = *(int *)(param_1 + temp_v21 * 4 + 0xd570);
       if ((int)temp_v25[temp_v21] < 0) {
-        temp_v7 = FUN_002b63ac();
+        temp_v7 = gameGetPlayerData();
         temp_v1 = *(unsigned short *)(temp_v7 + 0x72);
       }
       else {
-        temp_v7 = FUN_002a8740();
+        temp_v7 = gameGetUnitRecord();
         temp_v1 = *(unsigned short *)(temp_v7 + 0x44);
       }
       temp_v7 = 0;
@@ -267,7 +267,7 @@ LAB_003b35ac:
       } while ((int)temp_v13 < 0xb);
       if (temp_v24 != temp_v5) {
         temp_v24 = temp_v5;
-        FUN_002be304(temp_v5);
+        drawSetColorFromRGBA8(temp_v5);
       }
       FUN_0031eba0((int)(short)(int)temp_v22,aiStack_108[temp_v21] + (int)*(short *)(temp_v14 + 8) + temp_v6,
                    aiStack_f8[temp_v21] + (int)*(short *)(temp_v14 + 10) + param_3,0x6d,1,
@@ -292,11 +292,11 @@ LAB_003b35ac:
       temp_v5 = (int)temp_v19 + temp_v30 + aiStack_108[temp_v14];
       do {
         if ((int)temp_v11 < 0) {
-          temp_v8 = FUN_002b63ac();
+          temp_v8 = gameGetPlayerData();
           temp_v1 = *(unsigned short *)(temp_v8 + 0x72);
         }
         else {
-          temp_v8 = FUN_002a8740(temp_v11);
+          temp_v8 = gameGetUnitRecord(temp_v11);
           temp_v1 = *(unsigned short *)(temp_v8 + 0x44);
         }
         if (((unsigned int)temp_v1 & (1 << (temp_v13 & 0xff))) != 0) {
@@ -342,7 +342,7 @@ LAB_003b35ac:
   do {
     if (acStack_e8[temp_v21] != '\0') {
       if (temp_v21 != 0) {
-        temp_v5 = FUN_002a8740((int)*(char *)(temp_v4 + temp_v21 + 0x9107));
+        temp_v5 = gameGetUnitRecord((int)*(char *)(temp_v4 + temp_v21 + 0x9107));
         temp_v15 = FUN_002bd068(*(unsigned short *)(temp_v5 + 0x46));
         FUN_002be624(temp_v23,&LAB_003b3c9c,temp_v15);
       }
@@ -367,13 +367,13 @@ LAB_003b35ac:
   do {
     if (acStack_e8[temp_v14] != '\0') {
       if (temp_v14 != 0) {
-        temp_v21 = FUN_002a8740((int)*(char *)(temp_v4 + temp_v14 + 0x9107));
+        temp_v21 = gameGetUnitRecord((int)*(char *)(temp_v4 + temp_v14 + 0x9107));
         temp_v0 = *(unsigned char *)(temp_v21 + 0x48);
         temp_v5 = *(char *)(temp_v4 + temp_v14 + 0x9107) + 1;
       }
       else {
         temp_v5 = 0;
-        temp_v21 = FUN_002b63ac();
+        temp_v21 = gameGetPlayerData();
         temp_v0 = *(unsigned char *)(temp_v21 + 0x76);
       }
       temp_v13 = (unsigned int)temp_v0;
@@ -394,18 +394,18 @@ LAB_003b35ac:
     temp_v14 = temp_v14 + 1;
   } while (temp_v14 < 4);
   temp_v14 = FUN_002bf4f8(0x28,0x27);
-  FUN_002be304(0xff);
+  drawSetColorFromRGBA8(0xff);
   temp_v21 = 0;
   do {
     if (acStack_e8[temp_v21] != '\0') {
       if (temp_v21 != 0) {
-        temp_v5 = FUN_002a8740((int)*(char *)(temp_v4 + temp_v21 + 0x9107));
+        temp_v5 = gameGetUnitRecord((int)*(char *)(temp_v4 + temp_v21 + 0x9107));
         temp_v0 = *(unsigned char *)(temp_v5 + 0x48);
         temp_v8 = *(char *)(temp_v4 + temp_v21 + 0x9107) + 1;
       }
       else {
         temp_v8 = 0;
-        temp_v5 = FUN_002b63ac();
+        temp_v5 = gameGetPlayerData();
         temp_v0 = *(unsigned char *)(temp_v5 + 0x76);
       }
       param_3 = aiStack_d0[temp_v21];
@@ -417,12 +417,12 @@ LAB_003b35ac:
   } while (temp_v21 < 4);
   FUN_002bed3c();
   temp_v14 = FUN_002bf4f8(0x28,0x25);
-  FUN_002be304(0x72e027ff);
+  drawSetColorFromRGBA8(0x72e027ff);
   temp_v21 = 0;
   do {
     if (acStack_e8[temp_v21] != '\0') {
       if (temp_v21 != 0) {
-        temp_v5 = FUN_002a8740((int)*(char *)(temp_v4 + temp_v21 + 0x9107));
+        temp_v5 = gameGetUnitRecord((int)*(char *)(temp_v4 + temp_v21 + 0x9107));
         temp_v8 = *(char *)(temp_v4 + temp_v21 + 0x9107) + 1;
         if (*(char *)(param_1 + temp_v8 + 0xd4fe) != '\0') {
           temp_v5 = 0;
@@ -437,7 +437,7 @@ LAB_003b35ac:
         }
       }
       else {
-        temp_v5 = FUN_002b63ac();
+        temp_v5 = gameGetPlayerData();
         if (*(char *)(param_1 + 0xd4fe) != '\0') {
           temp_v5 = 0;
         }
@@ -562,13 +562,13 @@ LAB_003b35ac:
       temp_v21 = FUN_002bf4f8(0x28,temp_v14 + 0x30);
       if (temp_v14 != 0) {
         if (*(char *)(temp_v4 + temp_v14 + 0x9107) < '\0') goto LAB_003b4444;
-        temp_v5 = FUN_002a8740();
+        temp_v5 = gameGetUnitRecord();
         temp_v0 = *(unsigned char *)(temp_v5 + 0x48);
         temp_v8 = *(char *)(temp_v4 + temp_v14 + 0x9107) + 1;
       }
       else {
         temp_v8 = 0;
-        temp_v5 = FUN_002b63ac();
+        temp_v5 = gameGetPlayerData();
         temp_v0 = *(unsigned char *)(temp_v5 + 0x76);
       }
       temp_v5 = param_1 + temp_v8 * 2;
@@ -615,7 +615,7 @@ LAB_003b4444:
       piVar13 = (int *)(temp_v28 + 0x3618);
       if (*piVar13 != 0) {
         temp_v29 = param_1 + temp_v14 * 0x8c;
-        temp_v5 = FUN_002beda4(temp_v29 + 0x2d84);
+        temp_v5 = vec2GetXInt(temp_v29 + 0x2d84);
         FUN_002bf538();
         temp_v8 = FUN_002bf4f8(0x28,temp_v14 + 0x47);
         temp_v5 = temp_v5 + temp_v4;
@@ -679,7 +679,7 @@ LAB_003b4444:
       if (((temp_v5 != 3) || (temp_v21 < *temp_v22)) && (*(int *)(param_1 + temp_v21 * 4 + 0x3618) != 0))
       {
         temp_v6 = param_1 + temp_v21 * 0x8c;
-        temp_v3 = FUN_002beda4(temp_v6 + 0x2d84);
+        temp_v3 = vec2GetXInt(temp_v6 + 0x2d84);
         temp_v5 = temp_v6 + 0x3158;
         temp_v8 = FUN_002bf4f8(0x28,temp_v21 + 0x47);
         temp_v19 = (float)VectorSignedToFloat((int)*(short *)(*(int *)(temp_v14 + 0xc) + 2),

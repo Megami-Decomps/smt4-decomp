@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0019cac4(void);
-int FUN_001aea28(unsigned int);
+int dataTable00FindById(void);
+int ptrListRemoveClearOwner(unsigned int);
 
 typedef struct fn_00377acc_arg0 fn_00377acc_arg0;
 struct fn_00377acc_arg0 {
@@ -34,11 +34,11 @@ struct fn_00377acc_arg0 {
 };
 
 typedef int romwright_code(...);
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern int DAT_005806d4; /* 0x5806d4 */
 
-/* Supplied declaration required: FUN_0019cac4. */
-/* Supplied declaration required: FUN_001aea28. */
+/* Supplied declaration required: dataTable00FindById. */
+/* Supplied declaration required: ptrListRemoveClearOwner. */
 extern int FUN_004bb870(int);
 
 
@@ -79,7 +79,7 @@ void FUN_00377acc(fn_00377acc_arg0 *param_1,int param_2,unsigned int param_3)
       if (puVar3 != (unsigned int *)0x0 && param_3 != 0) {
         if (param_1->field_0x185 != 0) {
           if (puVar3[1] != 0) {
-            FUN_001aea28(DAT_0056fcc0);
+            ptrListRemoveClearOwner(g_handleRegistry);
           }
           param_1->field_0x184 = 0;
         }
@@ -110,7 +110,7 @@ void FUN_00377acc(fn_00377acc_arg0 *param_1,int param_2,unsigned int param_3)
       temp_v0 = unaff_r4[2];
       param_1->field_0x74 = temp_v0;
       temp_v0 = temp_v0 & 0xffff;
-      FUN_0019cac4();
+      dataTable00FindById();
       param_1->field_0x174 = *(unsigned short *)(temp_v0 + 2) & 0x7fff;
       temp_v1 = FUN_004bb870(param_1->field_0x70);
       if (temp_v1 != 0) {

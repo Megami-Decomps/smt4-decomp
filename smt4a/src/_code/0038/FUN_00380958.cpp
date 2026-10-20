@@ -18,7 +18,7 @@ extern int btlGetMainState(void);
 extern unsigned int scrGetArg(unsigned int);
 extern unsigned int FUN_0027099c(void);
 extern int FUN_002ba85c(void);
-extern unsigned int FUN_002deb84(void);
+extern unsigned int scrGetCommandFrame(void);
 
 
 void FUN_00380958(void)
@@ -37,7 +37,7 @@ void FUN_00380958(void)
   }
   *(unsigned int *)(DAT_0057f594 + 0x24) = temp_v2;
   temp_v2 = scrGetArg(0);
-  temp_v0 = FUN_002deb84();
+  temp_v0 = scrGetCommandFrame();
   FUN_0021bdac(temp_v1,temp_v2,temp_v0,0xc,0,0);
   return;
 }

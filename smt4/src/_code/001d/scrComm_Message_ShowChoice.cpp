@@ -15,7 +15,7 @@ typedef struct {
 
 extern unsigned int FUN_002865f8(void);
 /* Supplied declaration required: FUN_002866b4. */
-extern unsigned int FUN_002893d8(void);
+extern unsigned int scrGetCommandFrame(void);
 /* Supplied declaration required: FUN_0028dc98. */
 extern unsigned int scrGetArg(unsigned int);
 
@@ -31,7 +31,7 @@ void scrComm_Message_ShowChoice(void)
   FUN_0028dc98(0);
   temp_v0 = FUN_002865f8();
   temp_v1 = scrGetArg(0);
-  temp_v2 = FUN_002893d8();
+  temp_v2 = scrGetCommandFrame();
   FUN_002866b4(temp_v0,temp_v1,temp_v2,0xb,0,0);
   return;
 }

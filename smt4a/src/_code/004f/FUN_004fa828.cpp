@@ -8,7 +8,7 @@ int FUN_00100388(...);
 int btlGetMainState(...);
 int FUN_002804b0(...);
 int FUN_002c1c88(...);
-int FUN_002e342c(...);
+int libc_strcpy(...);
 int sysMemClear(...);
 int FUN_003e7840(...);
 int FUN_003fd7b4(...);
@@ -31,8 +31,8 @@ typedef struct {
     unsigned int sp138; /* 0x138: local_138 */
 } param_4_stack;
 
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
-extern int DAT_00571508; /* 0x571508 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
+extern int g_btlCamera; /* 0x571508 */
 extern unsigned int DAT_00573808; /* 0x573808 */
 
 /* Supplied declaration required: FUN_00100388. */
@@ -40,7 +40,7 @@ extern int FUN_00100d60(unsigned char *, unsigned int);
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_002804b0. */
 /* Supplied declaration required: FUN_002c1c88. */
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: sysMemClear. */
 extern int FUN_00347664(void);
 extern int findRecordByKey(int);
@@ -89,9 +89,9 @@ unsigned int FUN_004fa828(int param_1,unsigned int param_2,unsigned int param_3,
     temp_v1 = *(unsigned int *)(param_1 + 0x33a8);
   }
   if (temp_v8 && temp_v1 != 0) {
-    if ((DAT_00571508 != 0) &&
+    if ((g_btlCamera != 0) &&
        (temp_v0 = *(char *)(param_1 + 0x33ac), (temp_v0 == '\x02' || temp_v0 == '\b') || temp_v0 == '\t')) {
-      *(unsigned int *)(DAT_00571508 + 0x64c) = *(unsigned int *)(DAT_00571508 + 0x64c) | 0x4000000;
+      *(unsigned int *)(g_btlCamera + 0x64c) = *(unsigned int *)(g_btlCamera + 0x64c) | 0x4000000;
     }
     (**(romwright_code **)(**(int **)(param_1 + 0x33a8) + 8))();
     temp_v4 = (**(romwright_code **)(**(int **)(param_1 + 0x33a8) + 0x14))();
@@ -178,7 +178,7 @@ unsigned int FUN_004fa828(int param_1,unsigned int param_2,unsigned int param_3,
         FUN_003fd7b4(temp_v3);
         *(int *)(temp_v3 + 0x1fc) = (int)temp_v9;
         FUN_003fe86c(temp_v3,0,2);
-        FUN_0040ace8(DAT_0056fcc0,temp_v3);
+        FUN_0040ace8(g_handleRegistry,temp_v3);
         *(unsigned int *)(temp_v3 + 4) = *(unsigned int *)(temp_v3 + 4) | 1;
         if (-1 < *(int *)(temp_v2 + 0x1ac)) {
           temp_v3 = param_1 + *(int *)(temp_v2 + 0x1ac) * 8;
@@ -231,10 +231,10 @@ LAB_004fab24:
       sysMemClear(temp_v12,0x80);
       sysMemClear(temp_v10,0x80);
       FUN_00100388(temp_v10,"battle/effect/%s.eft","ef_e_ref" + temp_v4 * 0x20);
-      FUN_002e342c(temp_v12,temp_v10);
+      libc_strcpy(temp_v12,temp_v10);
       temp_v2 = param_1 + temp_v4 * 0x8c;
       temp_v3 = FUN_00100d60(temp_v12,0x2f);
-      FUN_002e342c(temp_v2 + 0x2824,temp_v3 + 1);
+      libc_strcpy(temp_v2 + 0x2824,temp_v3 + 1);
       temp_v3 = findRecordByKey(temp_v2 + 0x2824);
       if (temp_v3 == 0xff) {
         FUN_002804b0(temp_v12,temp_v2 + 0x2820,1);

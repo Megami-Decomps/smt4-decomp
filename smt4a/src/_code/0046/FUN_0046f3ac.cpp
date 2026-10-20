@@ -9,7 +9,7 @@ int FUN_00191f68(...);
 int FUN_001b57a8(...);
 int FUN_001ba1c0(...);
 int FUN_001d1038(...);
-int FUN_001d10ac(...);
+int byteIsAtLeast100(...);
 int FUN_001d25ec(...);
 int FUN_002e3140(...);
 int deletingDtor_002e56ec(...);
@@ -45,13 +45,13 @@ extern int g_aocMain; /* 0x570260 */
 
 /* Supplied declaration required: jyoucyuGetTableEntry. */
 /* Supplied declaration required: FUN_00191f68. */
-extern int FUN_001a7470(int);
+extern int objGetFlagBit0(int);
 extern int FUN_001af210(int);
 /* Supplied declaration required: FUN_001b57a8. */
 extern int *FUN_001b5acc(unsigned char *);
 /* Supplied declaration required: FUN_001ba1c0. */
 /* Supplied declaration required: FUN_001d1038. */
-/* Supplied declaration required: FUN_001d10ac. */
+/* Supplied declaration required: byteIsAtLeast100. */
 /* Supplied declaration required: FUN_001d25ec. */
 /* Supplied declaration required: FUN_002e3140. */
 /* Supplied declaration required: deletingDtor_002e56ec. */
@@ -137,7 +137,7 @@ void FUN_0046f3ac(unsigned char *param_1,int param_2)
         *(unsigned int *)(param_2 + 0x318) = 0;
       }
       FUN_0046e334(&temp_v8,param_2);
-      temp_v3 = FUN_001d10ac(&temp_v8);
+      temp_v3 = byteIsAtLeast100(&temp_v8);
       if (temp_v3 != 0) {
         temp_v12 = temp_v9;
         temp_v13 = (unsigned char *)temp_v10;
@@ -160,7 +160,7 @@ void FUN_0046f3ac(unsigned char *param_1,int param_2)
       temp_v10 = temp_v16;
       iStack_64 = iStack_30;
       iStack_60 = iStack_2c;
-      temp_v0 = FUN_001d10ac(&temp_v8);
+      temp_v0 = byteIsAtLeast100(&temp_v8);
       puVar4 = temp_v8;
       temp_v3 = temp_v9;
       temp_v6 = temp_v10;
@@ -205,12 +205,12 @@ void FUN_0046f3ac(unsigned char *param_1,int param_2)
       if (temp_v3 == 0) {
         return;
       }
-      temp_v3 = FUN_001d10ac(param_2 + 0x31c);
+      temp_v3 = byteIsAtLeast100(param_2 + 0x31c);
       if (temp_v3 == 0) {
         temp_v3 = 0;
         if (temp_v3 < *(int *)(param_2 + 0x310)) {
           do {
-            temp_v6 = FUN_001a7470(*(int *)(param_2 + 0x318) + temp_v3 * 0x50 + 8);
+            temp_v6 = objGetFlagBit0(*(int *)(param_2 + 0x318) + temp_v3 * 0x50 + 8);
             if (temp_v6 != 0) {
               FUN_00474164(*(int *)(param_2 + 0x318) + temp_v3 * 0x50);
             }
@@ -237,7 +237,7 @@ void FUN_0046f3ac(unsigned char *param_1,int param_2)
       temp_v6 = 0;
       if (0 < temp_v3) {
         do {
-          temp_v3 = FUN_001a7470(*(int *)(param_2 + 0x318) + temp_v6 * 0x50 + 8);
+          temp_v3 = objGetFlagBit0(*(int *)(param_2 + 0x318) + temp_v6 * 0x50 + 8);
           if ((temp_v3 != 0) &&
              (temp_v3 = FUN_00474144(*(int *)(param_2 + 0x318) + temp_v6 * 0x50), temp_v3 == 0)) {
             return;
@@ -249,7 +249,7 @@ void FUN_0046f3ac(unsigned char *param_1,int param_2)
       temp_v6 = 0;
       if (0 < temp_v3) {
         do {
-          temp_v3 = FUN_001a7470(*(int *)(param_2 + 0x318) + temp_v6 * 0x50 + 8);
+          temp_v3 = objGetFlagBit0(*(int *)(param_2 + 0x318) + temp_v6 * 0x50 + 8);
           if ((temp_v3 != 0) &&
              (temp_v3 = FUN_00474144(*(int *)(param_2 + 0x318) + temp_v6 * 0x50), temp_v3 != 0)) {
             FUN_004740b4(*(int *)(param_2 + 0x318) + temp_v6 * 0x50);
@@ -273,7 +273,7 @@ void FUN_0046f3ac(unsigned char *param_1,int param_2)
         }
         else if (*(int *)(param_2 + 0x354) < *(int *)(param_2 + 0x310)) {
           do {
-            temp_v3 = FUN_001a7470(*(int *)(param_2 + 0x318) + *(int *)(param_2 + 0x354) * 0x50 + 8);
+            temp_v3 = objGetFlagBit0(*(int *)(param_2 + 0x318) + *(int *)(param_2 + 0x354) * 0x50 + 8);
             if ((temp_v3 != 0) &&
                (temp_v3 = FUN_00474144(*(int *)(param_2 + 0x318) + *(int *)(param_2 + 0x354) * 0x50),
                temp_v3 != 0)) {

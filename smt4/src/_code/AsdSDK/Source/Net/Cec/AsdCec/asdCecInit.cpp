@@ -4,7 +4,7 @@
 extern "C" {
 extern AsdCecGlobals g_asdCec;
 
-void FUN_002b2368(void *work);
+void asdMemFreeNonNull(void *work);
 void asdMemFree(void *block);
 void *asdMemAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
 void *asdOperatorNew(u32 size);
@@ -19,7 +19,7 @@ s32 asdCecInit(void)
     AsdCecMessageBox *box;
 
     if (g_asdCec.cec != NULL) {
-        FUN_002b2368(g_asdCec.cec->work);
+        asdMemFreeNonNull(g_asdCec.cec->work);
         if (g_asdCec.cec->box != NULL) {
             ((void (*)(AsdCecMessageBox *))g_asdCec.cec->box->vtable[1])(g_asdCec.cec->box);
         }

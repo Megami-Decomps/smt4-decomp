@@ -6,11 +6,11 @@ void FUN_002b24dc(BtlUiObjBA *obj);
 void FUN_002fb4b8(BtlUiObjAA *obj);
 void FUN_0034ee5c(BtlUiObjCA *obj, u32 value, s32 flag);
 
-extern BtlUiGlobalsA DAT_0057a9b8;
+extern BtlUiGlobalsA g_btlUi;
 
 void FUN_004abba8(u32 unused, u32 value)
 {
-    BtlUiA *ui = DAT_0057a9b8.ui;
+    BtlUiA *ui = g_btlUi.ui;
 
     FUN_002fb4b8(&ui->objA);
     FUN_002b24dc(&ui->objB);

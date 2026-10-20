@@ -58,9 +58,9 @@ extern int FUN_0025a140(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00287aec. */
 /* Supplied declaration required: FUN_00291e40. */
 /* Supplied declaration required: FUN_0029be5c. */
-extern int FUN_002b8cec(unsigned int);
-extern int FUN_002bfde4(unsigned int);
-extern int FUN_002c2950(void);
+extern int padIsButtonRepeat(unsigned int);
+extern int padIsButtonPressed(unsigned int);
+extern int gameGetMapBlock(void);
 /* Supplied declaration required: FUN_002d4fa0. */
 /* Supplied declaration required: FUN_003a66c4. */
 /* Supplied declaration required: FUN_003a6988. */
@@ -90,7 +90,7 @@ void FUN_002fb988(int param_1)
   float temp_v15;
   unsigned int temp_v16 [12];
   
-  temp_v0 = FUN_002c2950();
+  temp_v0 = gameGetMapBlock();
   temp_v11 = 35.0f;
   temp_v5 = 0;
   if ((DAT_0049fc64 != '\0') || (DAT_0049f934 != '\0')) {
@@ -129,22 +129,22 @@ void FUN_002fb988(int param_1)
     FUN_0026413c();
     if (DAT_0049fc84 == 1) {
       if (DAT_0049fce8 != '\0') {
-        temp_v2 = FUN_002bfde4(1);
+        temp_v2 = padIsButtonPressed(1);
         if (temp_v2 != 0) {
           DAT_0049fce8 = '\0';
         }
-        temp_v2 = FUN_002b8cec(5);
+        temp_v2 = padIsButtonRepeat(5);
         temp_v12 = 50.0f;
         if (temp_v2 != 0) {
           *(float *)(g_lmapScene + 0x2c) = *(float *)(g_lmapScene + 0x2c) + 50.0f;
         }
-        temp_v2 = FUN_002b8cec(6);
+        temp_v2 = padIsButtonRepeat(6);
         if (temp_v2 != 0) {
           *(float *)(g_lmapScene + 0x2c) = *(float *)(g_lmapScene + 0x2c) - temp_v12;
         }
       }
       else {
-        temp_v2 = FUN_002bfde4(1);
+        temp_v2 = padIsButtonPressed(1);
         if (temp_v2 != 0) {
           DAT_0049fce8 = '\x01';
         }

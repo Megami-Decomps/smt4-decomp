@@ -18,7 +18,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0017760c. */
 /* Supplied declaration required: FUN_00180118. */
 /* Supplied declaration required: FUN_00184310. */
-extern int FUN_001ab888(void);
+extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_0035ad50. */
 
 
@@ -52,7 +52,7 @@ void FUN_004a8584(unsigned short *param_1,unsigned short *param_2,int param_3)
     temp_v0 = FUN_0017760c(temp_v5);
     param_1[8] = temp_v0;
     param_1[10] = temp_v6;
-    temp_v2 = FUN_001ab888();
+    temp_v2 = gameGetSlotTable();
     temp_v1 = 0;
     if (temp_v1 < *(unsigned char *)(temp_v2 + 0x1ca3)) {
       do {

@@ -4,16 +4,16 @@
 
 extern "C" {
 
-int FUN_002e93da(void);
+int onlineUrlEnsureParsed(void);
 
-/* Supplied declaration required: FUN_002e93da. */
+/* Supplied declaration required: onlineUrlEnsureParsed. */
 
 
 void FUN_002e93c2(int param_1,unsigned int param_2)
 
 {
 /* irregular: 1 native warning(s); review required */
-  FUN_002e93da();
+  onlineUrlEnsureParsed();
   *(unsigned short *)(*(int *)(param_1 + 4) + 6) =
        (unsigned short)((param_2 & 0xff) << 8) | ((unsigned short)(param_2 >> 8) & 0xff);
   *(unsigned char *)(param_1 + 0x65) = 0;

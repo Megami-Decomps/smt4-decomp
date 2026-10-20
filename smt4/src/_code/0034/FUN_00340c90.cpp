@@ -11,7 +11,7 @@ int FUN_002c18e4(...);
 int FUN_002c198c(...);
 int FUN_002c1b64(...);
 int FUN_002f5288(void *, int *);
-int FUN_00310550(...);
+int packNibbleFields(...);
 int FUN_00343324(int, float *, int);
 int VectorSignedToFloat(...);
 
@@ -67,7 +67,7 @@ extern int FUN_002865c0(unsigned int);
 extern int FUN_002c5d80(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002f5288. */
-/* Supplied declaration required: FUN_00310550. */
+/* Supplied declaration required: packNibbleFields. */
 /* Supplied declaration required: FUN_00343324. */
 extern unsigned int FUN_003deab0(void *, unsigned int);
 
@@ -214,7 +214,7 @@ void FUN_00340c90(fn_00340c90_arg0 *param_1)
   }
   temp_v0 = g_titleScene;
   temp_v1 = 6;
-  FUN_00310550(6,3,1,1,0,0);
+  packNibbleFields(6,3,1,1,0,0);
   piVar5 = (int *)(temp_v0 + 0x12ac);
   temp_v2 = *piVar5;
   temp_v3 = piVar5[temp_v2 + 2];
@@ -256,7 +256,7 @@ void FUN_00340c90(fn_00340c90_arg0 *param_1)
   }
   temp_v0 = g_titleScene;
   temp_v1 = 6;
-  FUN_00310550(6,3,0,1,0,3);
+  packNibbleFields(6,3,0,1,0,3);
   piVar5 = (int *)(temp_v0 + 0x12ac);
   temp_v2 = *piVar5;
   temp_v3 = piVar5[temp_v2 + 2];

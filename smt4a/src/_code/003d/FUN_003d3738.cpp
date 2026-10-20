@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001517b4(int, int);
-int FUN_00184c00(int, int, int);
+int uiSpriteSetImageKeyframe(int, int, int);
 int FUN_0019e330(int, int, int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -13,11 +13,11 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-extern int DAT_0057f57c; /* 0x57f57c */
+extern int g_sWin; /* 0x57f57c */
 
 /* Supplied declaration required: FUN_001517b4. */
 extern int FUN_00163fd4(unsigned int);
-/* Supplied declaration required: FUN_00184c00. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_0019e330. */
 
 
@@ -28,16 +28,16 @@ void FUN_003d3738(void)
   int temp_v0;
   int temp_v1;
   
-  temp_v0 = DAT_0057f57c;
-  if (*(int *)(DAT_0057f57c + 8) == 0) {
+  temp_v0 = g_sWin;
+  if (*(int *)(g_sWin + 8) == 0) {
     return;
   }
-  *(unsigned int *)(DAT_0057f57c + 8) = 3;
+  *(unsigned int *)(g_sWin + 8) = 3;
   *(unsigned int *)(temp_v0 + 0xc) = 0;
   temp_v1 = 9;
   FUN_001517b4(9,2);
   if ((temp_v1 == 0) && (temp_v1 = FUN_00163fd4(6), temp_v1 == 0)) {
-    FUN_00184c00(temp_v0 + 0x48,1,0);
+    uiSpriteSetImageKeyframe(temp_v0 + 0x48,1,0);
     FUN_0019e330(temp_v0 + 0x48,1,0);
     return;
   }

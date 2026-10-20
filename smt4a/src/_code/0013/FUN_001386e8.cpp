@@ -9,19 +9,19 @@ typedef struct GameDataBlocksView {
 } GameDataBlocksView;
 extern GameDataBlocksView g_gameDataBlocks;
 
-void FUN_001406f0(void);
+void appletSetHomeButtonHeld(void);
 
-/* Clears the given bits of `holds`, marks the table idle once none are left, then runs FUN_001406f0. */
+/* Clears the given bits of `holds`, marks the table idle once none are left, then runs appletSetHomeButtonHeld. */
 void FUN_001386e8(u32 bits)
 {
     g_gameDataBlocks.holds = g_gameDataBlocks.holds & ~bits;
     if (g_gameDataBlocks.holds != 0) {
         g_gameDataBlocks.idle = 0;
-        FUN_001406f0();
+        appletSetHomeButtonHeld();
         return;
     }
     g_gameDataBlocks.idle = 1;
-    FUN_001406f0();
+    appletSetHomeButtonHeld();
 }
 
 } /* extern "C" */

@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_002a5ed0(int table, int index);
+int asdTMTexTableLoadEntryAsync(int table, int index);
 int asdTMTexTableLoadTmx(int table, int flag);
 
 extern s8 DAT_0043dcc8;
@@ -16,7 +16,7 @@ void FUN_001ed7bc(void)
         asdTMTexTableLoadTmx(0xd, 0);
         i = 0;
         do {
-            FUN_002a5ed0(0xd, i);
+            asdTMTexTableLoadEntryAsync(0xd, i);
             i++;
         } while (i < 5);
     }

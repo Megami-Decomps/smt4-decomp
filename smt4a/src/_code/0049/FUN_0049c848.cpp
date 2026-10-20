@@ -7,7 +7,7 @@ extern "C" {
 int FUN_004084f8(int, unsigned int, int);
 int FUN_00480838(void);
 
-extern int FUN_0014bef4(unsigned int);
+extern int randRange(unsigned int);
 extern int FUN_0019271c(void);
 /* Supplied declaration required: FUN_004084f8. */
 /* Supplied declaration required: FUN_00480838. */
@@ -51,7 +51,7 @@ unsigned int FUN_0049c848(unsigned int param_1,int param_2,unsigned int param_3)
     if (temp_v1 == 0) {
       return 0;
     }
-    temp_v0 = FUN_0014bef4((temp_v1 - 1) & 0xffff);
+    temp_v0 = randRange((temp_v1 - 1) & 0xffff);
     temp_v2 = 0;
     temp_v4 = 0;
     do {

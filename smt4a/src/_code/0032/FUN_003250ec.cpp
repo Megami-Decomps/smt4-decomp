@@ -14,7 +14,7 @@ struct fn_003250ec_arg0 {
     undefined4 field_0x150c; /* +0x150c */
 };
 
-extern int FUN_00162e8c(void);
+extern int gameFlagsGetBlock(void);
 
 
 void FUN_003250ec(fn_003250ec_arg0 *param_1)
@@ -22,7 +22,7 @@ void FUN_003250ec(fn_003250ec_arg0 *param_1)
 {
   int temp_v0;
   
-  temp_v0 = FUN_00162e8c();
+  temp_v0 = gameFlagsGetBlock();
   *(unsigned int *)(temp_v0 + 0x14e8) = 1;
   *(unsigned int *)(temp_v0 + 0x14ec) = 0;
   *(unsigned int *)(temp_v0 + 0x14f0) = 0;

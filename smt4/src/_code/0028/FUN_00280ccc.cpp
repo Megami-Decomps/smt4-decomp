@@ -9,7 +9,7 @@ int FUN_001f7c78(void);
 int FUN_0024f034(int, unsigned int);
 int FUN_00281e34(void);
 int FUN_00287be4(void);
-int FUN_002bf694(unsigned int *, int);
+int libc_strcpy(unsigned int *, int);
 int VectorSignedToFloat(unsigned int, int);
 
 /* stack frame of void: 5 slot(s), 20 byte(s) */
@@ -86,8 +86,8 @@ static float romwright_sqrt_4(float value)
 extern int FUN_0027d968(void);
 /* Supplied declaration required: FUN_00281e34. */
 /* Supplied declaration required: FUN_00287be4. */
-/* Supplied declaration required: FUN_002bf694. */
-extern int FUN_002c09d0(unsigned int);
+/* Supplied declaration required: libc_strcpy. */
+extern int gameFlagIsSet(unsigned int);
 
 
 void FUN_00280ccc(void)
@@ -265,22 +265,22 @@ void FUN_00280ccc(void)
                     DAT_0049f9d4 = *(char *)(temp_v0 + 0x4a13d2);
                   }
                   else if ((((((((DAT_0049f958 == -0x6fefebee) &&
-                                (temp_v3 = FUN_002c09d0(0x62), temp_v3 == 0)) ||
+                                (temp_v3 = gameFlagIsSet(0x62), temp_v3 == 0)) ||
                                ((DAT_0049f958 == -0x6fefebfe &&
-                                (temp_v3 = FUN_002c09d0(0xa8), temp_v3 == 0)))) ||
+                                (temp_v3 = gameFlagIsSet(0xa8), temp_v3 == 0)))) ||
                               ((DAT_0049f958 == 0x10105021 &&
-                               (temp_v3 = FUN_002c09d0(0x697), temp_v3 == 0)))) ||
+                               (temp_v3 = gameFlagIsSet(0x697), temp_v3 == 0)))) ||
                              ((DAT_0049f958 == 0x10105020 &&
-                              (temp_v3 = FUN_002c09d0(0x697), temp_v3 == 0)))) ||
+                              (temp_v3 = gameFlagIsSet(0x697), temp_v3 == 0)))) ||
                             ((((DAT_0049f958 == 0x10105013 &&
-                               (temp_v3 = FUN_002c09d0(0x697), temp_v3 == 0)) ||
+                               (temp_v3 = gameFlagIsSet(0x697), temp_v3 == 0)) ||
                               ((DAT_0049f958 == -0x6fdfebf9 &&
-                               (temp_v3 = FUN_002c09d0(0x151), temp_v3 == 0)))) ||
+                               (temp_v3 = gameFlagIsSet(0x151), temp_v3 == 0)))) ||
                              ((DAT_0049f958 == -0x6fcfebfb &&
-                              (temp_v3 = FUN_002c09d0(0x160), temp_v3 == 0)))))) ||
+                              (temp_v3 = gameFlagIsSet(0x160), temp_v3 == 0)))))) ||
                            ((DAT_0049f958 == -0x6fcfebfb &&
-                            ((temp_v3 = FUN_002c09d0(0x15e), temp_v3 != 0 &&
-                             (temp_v3 = FUN_002c09d0(0x15f), temp_v3 == 0)))))) &&
+                            ((temp_v3 = gameFlagIsSet(0x15e), temp_v3 != 0 &&
+                             (temp_v3 = gameFlagIsSet(0x15f), temp_v3 == 0)))))) &&
                           (temp_v3 = FUN_0027d968(), temp_v3 != -1)) {
                     DAT_0049f9d4 = '\x01';
                     DAT_0049f9d5 = 3;
@@ -294,7 +294,7 @@ void FUN_00280ccc(void)
                   }
                   else {
                     DAT_0049f974 = 0xffffffff;
-                    FUN_002bf694(&DAT_0049f978,temp_v0 + 0x4a139c);
+                    libc_strcpy(&DAT_0049f978,temp_v0 + 0x4a139c);
                   }
                   temp_v23 = FUN_0024f034(1,DAT_0049f99c);
                 }
@@ -405,7 +405,7 @@ void FUN_00280ccc(void)
               }
               else {
                 DAT_0049f974 = 0xffffffff;
-                FUN_002bf694(&DAT_0049f978,temp_v0 + 0x4a139c);
+                libc_strcpy(&DAT_0049f978,temp_v0 + 0x4a139c);
               }
             }
           }
@@ -463,7 +463,7 @@ void FUN_00280ccc(void)
             }
             else {
               DAT_0049f974 = 0xffffffff;
-              FUN_002bf694(&DAT_0049f978,temp_v0 + 0x4a139c);
+              libc_strcpy(&DAT_0049f978,temp_v0 + 0x4a139c);
             }
           }
         }

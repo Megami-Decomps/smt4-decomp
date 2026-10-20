@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0024dcfc(void);
+int asdMemoryFreeLockedAlt(void);
 
 typedef struct fn_0022708c_arg0 fn_0022708c_arg0;
 struct fn_0022708c_arg0 {
@@ -32,7 +32,7 @@ struct fn_0022708c_arg0 {
 };
 
 typedef int romwright_code(...);
-/* Supplied declaration required: FUN_0024dcfc. */
+/* Supplied declaration required: asdMemoryFreeLockedAlt. */
 
 
 void FUN_0022708c(fn_0022708c_arg0 *param_1)
@@ -59,11 +59,11 @@ void FUN_0022708c(fn_0022708c_arg0 *param_1)
     param_1->field_0x304c = (void *)0x0;
   }
   if (param_1->field_0x3058 != 0) {
-    FUN_0024dcfc();
+    asdMemoryFreeLockedAlt();
     param_1->field_0x3058 = 0;
   }
   if (param_1->field_0x305c != 0) {
-    FUN_0024dcfc();
+    asdMemoryFreeLockedAlt();
     param_1->field_0x305c = 0;
   }
   return;

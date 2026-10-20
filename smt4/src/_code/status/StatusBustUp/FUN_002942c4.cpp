@@ -4,22 +4,22 @@
 
 extern "C" {
 
-int FUN_002a5ed0(...);
+int asdTMTexTableLoadEntryAsync(...);
 int FUN_002a5ee4(unsigned int, int, unsigned int, int);
-int FUN_002a60b4(...);
-int FUN_002b06c4(void);
-int FUN_002b9024(void);
+int asdTMTexTableNodeIsLoaded(...);
+int dataTable00FindById(void);
+int devilGetRecord(void);
 
 extern unsigned int g_aocSystem; /* 0x433158 */
 extern int DAT_0044e15c; /* 0x44e15c */
 extern int DAT_0044e160; /* 0x44e160 */
 
-/* Supplied declaration required: FUN_002a5ed0. */
+/* Supplied declaration required: asdTMTexTableLoadEntryAsync. */
 /* Supplied declaration required: FUN_002a5ee4. */
-/* Supplied declaration required: FUN_002a60b4. */
+/* Supplied declaration required: asdTMTexTableNodeIsLoaded. */
 extern int FUN_002ae98c(unsigned int, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002b06c4. */
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: dataTable00FindById. */
+/* Supplied declaration required: devilGetRecord. */
 
 
 void FUN_002942c4(unsigned int param_1,int param_2)
@@ -33,16 +33,16 @@ void FUN_002942c4(unsigned int param_1,int param_2)
   if (param_2 != 0) {
     if (-1 < (int)param_1) {
       temp_v0 = param_1;
-      FUN_002b9024();
+      devilGetRecord();
       if (temp_v0 != 0) {
         param_1 = param_1 & 0xffff;
-        FUN_002b06c4();
+        dataTable00FindById();
         if ((*(unsigned char *)(param_1 + 3) & 1) != 0) {
           temp_v2 = (int)*(short *)(param_1 + 0x88);
           if (temp_v2 < 0x81) {
             if ((*(char *)(DAT_0044e160 + temp_v2) < '\x01') &&
-               (temp_v1 = FUN_002a60b4(0x23,temp_v2), temp_v1 == 0)) {
-              FUN_002a5ed0(0x23,temp_v2);
+               (temp_v1 = asdTMTexTableNodeIsLoaded(0x23,temp_v2), temp_v1 == 0)) {
+              asdTMTexTableLoadEntryAsync(0x23,temp_v2);
             }
             *(char *)(DAT_0044e160 + temp_v2) = *(char *)(DAT_0044e160 + temp_v2) + '\x01';
           }
@@ -58,13 +58,13 @@ void FUN_002942c4(unsigned int param_1,int param_2)
   }
 LAB_00294358:
   if ((*(char *)(DAT_0044e15c + param_1) < '\x01') &&
-     (temp_v2 = FUN_002a60b4(0x17,param_1), temp_v2 == 0)) {
+     (temp_v2 = asdTMTexTableNodeIsLoaded(0x17,param_1), temp_v2 == 0)) {
     temp_v2 = FUN_002ae98c(g_aocSystem,0x17,param_1,1);
     if (temp_v2 != 0) {
       FUN_002a5ee4(g_aocSystem,0x17,param_1,0x10000);
     }
     else {
-      FUN_002a5ed0(0x17,param_1);
+      asdTMTexTableLoadEntryAsync(0x17,param_1);
     }
   }
   *(char *)(DAT_0044e15c + param_1) = *(char *)(DAT_0044e15c + param_1) + '\x01';

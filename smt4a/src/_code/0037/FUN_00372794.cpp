@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 
-extern int FUN_001ab854(void);
-/* Supplied declaration required: FUN_001aba54. */
+extern int gameGetSlotRecord(void);
+/* Supplied declaration required: dataTable04FindById. */
 extern int btlMainGetUnk14(void);
 extern int playerHasFlagBit(unsigned int);
 extern int FUN_004bd098(int, int);
@@ -28,7 +28,7 @@ unsigned int FUN_00372794(int param_1,int param_2,int param_3)
       return 0;
     }
     if (temp_v0 != -2) {
-      param_3 = FUN_001ab854();
+      param_3 = gameGetSlotRecord();
     }
     else {
       param_3 = btlMainGetUnk14();
@@ -41,7 +41,7 @@ unsigned int FUN_00372794(int param_1,int param_2,int param_3)
   temp_v2 = 0;
   if (temp_v1 != 0) {
     temp_v1 = param_2;
-    FUN_001aba54();
+    dataTable04FindById();
     temp_v0 = 0;
     if (temp_v1 != 0) {
       temp_v0 = *(short *)(temp_v1 + 0x86);

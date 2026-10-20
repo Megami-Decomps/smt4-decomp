@@ -10,7 +10,7 @@ int FUN_0019de98(int, unsigned int);
 int FUN_00215bd0(void);
 int FUN_0022e774(void);
 int FUN_0023b45c(int);
-int FUN_00275f44(unsigned int);
+int scrScriptProcessStartEntry(unsigned int);
 int FUN_00285774(void);
 int FUN_002a7288(void);
 int FUN_002c8538(int);
@@ -20,7 +20,7 @@ int FUN_003343f0(int);
 int FUN_003e3a20(int, int);
 
 /* Supplied declaration required: FUN_001641b4. */
-extern int FUN_001656a0(unsigned int);
+extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_00215bd0. */
@@ -29,7 +29,7 @@ extern int FUN_00224880(unsigned int);
 extern int FUN_0023b3d0(void);
 /* Supplied declaration required: FUN_0023b45c. */
 extern int FUN_0026c3a0(void);
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00285774. */
 extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_002a7288. */
@@ -37,7 +37,7 @@ extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_002c85b0. */
 /* Supplied declaration required: FUN_00333dc8. */
 /* Supplied declaration required: FUN_003343f0. */
-extern int FUN_00357bc8(unsigned int, char *);
+extern int tableGroupFindEntryIndex(unsigned int, char *);
 /* Supplied declaration required: FUN_003e3a20. */
 
 
@@ -62,7 +62,7 @@ void FUN_003e37f8(int param_1)
             }
           }
           else {
-            temp_v0 = FUN_001656a0(0);
+            temp_v0 = padButtonIsPressed(0);
             if (temp_v0 != 0) {
               FUN_001641b4(0x100020e);
               FUN_003343f0(1);
@@ -71,9 +71,9 @@ void FUN_003e37f8(int param_1)
                 *(unsigned int *)(param_1 + 8) = 3;
                 return;
               }
-              temp_v0 = FUN_00357bc8(*(unsigned int *)(param_1 + 0x14),"npcShop_Few_HaveSkill");
+              temp_v0 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x14),"npcShop_Few_HaveSkill");
               if (-1 < temp_v0) {
-                FUN_00275f44(*(unsigned int *)(param_1 + 0x18));
+                scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x18));
               }
               sysPlaySe(0xa4);
               temp_v1 = 4;

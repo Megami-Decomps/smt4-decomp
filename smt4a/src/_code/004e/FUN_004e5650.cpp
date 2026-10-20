@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00192550(void);
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 int FUN_003e8bb0(...);
 int FUN_004f7724(unsigned int, unsigned int, int, int);
 int FUN_004f7ea8(unsigned int, unsigned int, int, int);
@@ -39,7 +39,7 @@ extern unsigned int DAT_00571174; /* 0x571174 */
 extern unsigned int DAT_00573808; /* 0x573808 */
 
 /* Supplied declaration required: FUN_00192550. */
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: FUN_003e8bb0. */
 /* Supplied declaration required: FUN_004f7724. */
 /* Supplied declaration required: FUN_004f7ea8. */
@@ -91,7 +91,7 @@ void FUN_004e5650(unsigned int *param_1,fn_004e5650_arg1 *param_2)
     }
   }
   temp_v5 = temp_v1;
-  FUN_001aba54();
+  dataTable04FindById();
   temp_v5 = (*(unsigned int *)(temp_v5 + 0x28) & 0x1ff) >> 5;
   temp_v3 = *(unsigned int *)param_2->field_0x20;
   temp_v2 = *(unsigned int *)((int)param_2->field_0x20 + 4);

@@ -40,7 +40,7 @@ extern int DAT_00573808; /* 0x573808 */
 extern unsigned int DAT_0057a638; /* 0x57a638 */
 extern unsigned int DAT_0057a63c; /* 0x57a63c */
 extern unsigned int DAT_0057a64c; /* 0x57a64c */
-extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
+extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
 extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_003e7ef0. */
@@ -128,7 +128,7 @@ LAB_0040c6fc:
   }
   if (param_2->field_0x20 == 2) {
 LAB_0040c82c:
-    temp_v4 = FUN_004aa750(DAT_0057a9c8);
+    temp_v4 = FUN_004aa750(g_btlUiBlock);
     if (temp_v4 != 0) {
       param_2->field_0x20 = 3;
       FUN_003f24e0(temp_v3,(int)param_2->field_0x48);

@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002ea9dc(unsigned char [104]);
+int onlineUrlDestroy(unsigned char [104]);
 int FUN_002ee5b8(int, unsigned int);
 
 extern unsigned char LAB_00106e98; /* 0x106e98 */
 
-/* Supplied declaration required: FUN_002ea9dc. */
+/* Supplied declaration required: onlineUrlDestroy. */
 extern unsigned int FUN_002ee568(unsigned char *, unsigned char *);
 /* Supplied declaration required: FUN_002ee5b8. */
 
@@ -23,7 +23,7 @@ void FUN_00106e6c(int param_1)
   
   temp_v0 = FUN_002ee568(temp_v1,&LAB_00106e98);
   FUN_002ee5b8(param_1 + 0x24,temp_v0);
-  FUN_002ea9dc(temp_v1);
+  onlineUrlDestroy(temp_v1);
   *(unsigned int *)(param_1 + 0x8c) = 0xffffffff;
   return;
 }

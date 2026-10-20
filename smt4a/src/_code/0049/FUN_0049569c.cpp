@@ -29,7 +29,7 @@ struct fn_0049569c_arg0 {
     int field_0x190; /* +0x190 */
 };
 
-extern int FUN_0018719c(unsigned short);
+extern int gameFlagIsSet(unsigned short);
 /* Supplied declaration required: FUN_0020401c. */
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: FUN_003d54f8. */
@@ -89,7 +89,7 @@ void FUN_0049569c(fn_0049569c_arg0 *param_1)
       } while (temp_v4 < (int)puVar5);
     }
     temp_v2 = dataTable17Type1GetEntry(temp_v8,temp_v1);
-    temp_v1 = FUN_0018719c(*(unsigned short *)(temp_v2 + 0x6a));
+    temp_v1 = gameFlagIsSet(*(unsigned short *)(temp_v2 + 0x6a));
     if (temp_v1 != 0) {
       temp_v2 = temp_v2 + 0x6c;
     }

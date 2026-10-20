@@ -10,11 +10,11 @@ typedef struct Obj {
 extern struct {
     u8 unk0[4];
     Obj *obj;
-} DAT_0043da28;
+} g_buttonHelp;
 
 u16 FUN_002d6624(u32 index)
 {
-    Obj *obj = DAT_0043da28.obj;
+    Obj *obj = g_buttonHelp.obj;
 
     if ((obj != NULL) && (index < 6)) {
         return obj->entries[index].value;

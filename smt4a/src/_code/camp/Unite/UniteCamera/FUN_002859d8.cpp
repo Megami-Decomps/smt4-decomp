@@ -24,7 +24,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-extern int DAT_0056fcc0; /* 0x56fcc0 */
+extern int g_handleRegistry; /* 0x56fcc0 */
 extern int g_uniteCamera; /* 0x57f294 */
 
 /* Supplied declaration required: FUN_0013c884. */
@@ -79,7 +79,7 @@ void FUN_002859d8(unsigned int param_1)
   FUN_0036b824(temp_v0);
   FUN_00140e38(temp_v0);
   FUN_001418fc(temp_v0);
-  *(int *)(DAT_0056fcc0 + 0xc) = temp_v0;
+  *(int *)(g_handleRegistry + 0xc) = temp_v0;
   return;
 }
 

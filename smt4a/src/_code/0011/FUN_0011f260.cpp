@@ -11,7 +11,7 @@ int FUN_002fbb92(unsigned char [64], unsigned int);
 int FUN_00303cd8(unsigned char [64]);
 int FUN_00303d10(unsigned char [64], int, int);
 int FUN_00303d3a(unsigned char [64], int);
-int FUN_00303d52(unsigned char [12]);
+int onlineScopedLockRelease(unsigned char [12]);
 int FUN_00303d74(int, unsigned int, unsigned char [64]);
 
 /* stack frame of param_5: 1 slot(s), 4 byte(s) */
@@ -32,7 +32,7 @@ extern int FUN_002e6e26(void);
 extern int FUN_00303d1e(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_00303d3a. */
 extern int FUN_00303d44(int, unsigned int);
-/* Supplied declaration required: FUN_00303d52. */
+/* Supplied declaration required: onlineScopedLockRelease. */
 /* Supplied declaration required: FUN_00303d74. */
 
 
@@ -65,7 +65,7 @@ int FUN_0011f260(int param_1,unsigned int param_2,unsigned int param_3,unsigned 
     FUN_002fbb92(temp_v1,param_5);
     (*(unsigned char * *)((unsigned char *)&DAT_00630374 + 0x5c)) = &LAB_0011f50f;
     if ((*(char *)(param_1 + 0x34) != '\0') && (temp_v0 = FUN_00303d44(param_1,0x10), temp_v0 != 0)) {
-      FUN_00303d52(temp_v2);
+      onlineScopedLockRelease(temp_v2);
     }
     FUN_00303d74(param_1,temp_v3,temp_v1);
     FUN_002f4f00(temp_v1);

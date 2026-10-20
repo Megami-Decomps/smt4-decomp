@@ -23,7 +23,7 @@ struct fn_003de464_arg0 {
     ushort field_0x118; /* +0x118 */
 };
 
-extern int FUN_001abac8(void);
+extern int gameFlagBlockGetEntry(void);
 /* Supplied declaration required: FUN_001ad9b4. */
 
 
@@ -38,7 +38,7 @@ unsigned int FUN_003de464(fn_003de464_arg0 *param_1,unsigned char param_2)
   int temp_v2;
   char temp_v3;
   
-  temp_v2 = FUN_001abac8();
+  temp_v2 = gameFlagBlockGetEntry();
   FUN_001ad9b4();
   if (param_1 != (fn_003de464_arg0 *)0x0) {
     if (((*(unsigned char *)(temp_v2 + 2) & param_2) == 0) && ((param_1->field_0x7 & 0x10) != 0)) {

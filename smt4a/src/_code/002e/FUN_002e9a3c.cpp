@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002e9318(int);
+int onlineStringDestroy(int);
 
-/* Supplied declaration required: FUN_002e9318. */
+/* Supplied declaration required: onlineStringDestroy. */
 
 
 void FUN_002e9a3c(int param_1,int param_2,int param_3)
@@ -15,7 +15,7 @@ void FUN_002e9a3c(int param_1,int param_2,int param_3)
 /* irregular: 1 native warning(s); review required */
   *(unsigned int *)(param_2 + 0xc) = *(unsigned int *)(param_1 + 4);
   if (param_3 != 0) {
-    FUN_002e9318(param_2 + 0x10);
+    onlineStringDestroy(param_2 + 0x10);
   }
   *(int *)(param_1 + 4) = param_2;
   return;

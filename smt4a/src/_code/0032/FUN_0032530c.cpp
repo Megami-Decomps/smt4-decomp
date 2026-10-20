@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_00581038; /* 0x581038 */
+extern int g_mapHakai; /* 0x581038 */
 
 
 int FUN_0032530c(void)
@@ -17,7 +17,7 @@ int FUN_0032530c(void)
   
   temp_v2 = 0x10;
   temp_v1 = 0;
-  pcVar3 = (char *)(DAT_00581038 + 0x5c);
+  pcVar3 = (char *)(g_mapHakai + 0x5c);
   do {
     temp_v0 = *pcVar3;
     pcVar3 = pcVar3 + 0x54;

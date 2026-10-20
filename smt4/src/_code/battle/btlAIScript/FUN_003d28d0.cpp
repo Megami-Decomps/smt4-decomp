@@ -30,10 +30,10 @@ typedef struct {
 
 extern unsigned int g_btlAiScript; /* 0x434260 */
 extern int g_btlScriptUnit; /* 0x43427c */
-extern unsigned int DAT_00434290; /* 0x434290 */
+extern unsigned int g_btlActionReflect; /* 0x434290 */
 extern int DAT_00435d18; /* 0x435d18 */
 extern unsigned int g_btlEvent; /* 0x435d48 */
-extern unsigned int DAT_00439ca8; /* 0x439ca8 */
+extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 
 /* Supplied declaration required: FUN_00229754. */
 extern int FUN_002298a0(void);
@@ -42,11 +42,11 @@ extern int FUN_002298a0(void);
 /* Supplied declaration required: btlUnitSetParam. */
 extern int FUN_0027e350(unsigned int);
 extern int FUN_0027e3b8(unsigned int);
-extern int FUN_0027e6bc(unsigned int, unsigned int *);
+extern int nodeListCountActiveById(unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_002ae164. */
 extern int jobIsValid(unsigned int);
 /* Supplied declaration required: memClear. */
-extern int FUN_003356ac(unsigned int);
+extern int btlAiScriptIsFinished(unsigned int);
 /* Supplied declaration required: FUN_003ae7bc. */
 extern int FUN_003aeaf4(unsigned int);
 extern int *FUN_003c9f58(int *, unsigned int *);
@@ -91,7 +91,7 @@ int * FUN_003d28d0(int *param_1,unsigned int param_2)
     piVar2 = (int *)FUN_003c9f58(param_1,puVar6);
     return piVar2;
   case 2:
-    temp_v3 = FUN_003356ac(g_btlAiScript);
+    temp_v3 = btlAiScriptIsFinished(g_btlAiScript);
     if (temp_v3 == 0) {
       return (int *)0x0;
     }
@@ -134,11 +134,11 @@ int * FUN_003d28d0(int *param_1,unsigned int param_2)
     temp_v1 = 9;
     break;
   case 9:
-    temp_v3 = FUN_0027e6bc(DAT_00434290,puVar6);
+    temp_v3 = nodeListCountActiveById(g_btlActionReflect,puVar6);
     if (0 < temp_v3) {
       return (int *)0x0;
     }
-    FUN_003ae7bc(DAT_00439ca8);
+    FUN_003ae7bc(g_btlUiBlock);
     *(unsigned short *)(*(int *)(temp_v2 + 0x2c) + 0x14c) = 10;
     FUN_00229ad4(param_1);
     return (int *)0x1;
@@ -168,7 +168,7 @@ int * FUN_003d28d0(int *param_1,unsigned int param_2)
     if (temp_v2 != 0) {
       return (int *)0x0;
     }
-    temp_v2 = FUN_0027e350(DAT_00439ca8);
+    temp_v2 = FUN_0027e350(g_btlUiBlock);
     if (temp_v2 == 0) {
       return (int *)0x0;
     }
@@ -177,7 +177,7 @@ int * FUN_003d28d0(int *param_1,unsigned int param_2)
     *(unsigned char *)(temp_v2 + 9) = temp_v1;
     return (int *)0x1;
   case 0x10:
-    temp_v2 = FUN_003aeaf4(DAT_00439ca8);
+    temp_v2 = FUN_003aeaf4(g_btlUiBlock);
     if (temp_v2 == 0) {
       return (int *)0x0;
     }
@@ -253,7 +253,7 @@ int * FUN_003d28d0(int *param_1,unsigned int param_2)
     *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x20;
     return (int *)0x1;
   case 0x20:
-    temp_v2 = FUN_0027e6bc(DAT_00434290,puVar6);
+    temp_v2 = nodeListCountActiveById(g_btlActionReflect,puVar6);
     if (0 < temp_v2) {
       return (int *)0x0;
     }

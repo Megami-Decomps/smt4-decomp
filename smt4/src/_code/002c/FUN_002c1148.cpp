@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0012a778(void);
 int FUN_002bb140(int);
 int FUN_002bb150(int, int);
-int FUN_002bb308(void);
+int nn_applet_CTR_detail_CloseSession(void);
 int FUN_002bb378(void);
 int FUN_002c0d50(int, int, int);
 int FUN_002c131c(int, int);
@@ -27,7 +27,7 @@ extern int FUN_002bb0e0(void);
 /* Supplied declaration required: FUN_002bb150. */
 extern int FUN_002bb284(unsigned int, unsigned int *);
 extern int FUN_002bb2c8(void);
-/* Supplied declaration required: FUN_002bb308. */
+/* Supplied declaration required: nn_applet_CTR_detail_CloseSession. */
 /* Supplied declaration required: FUN_002bb378. */
 /* Supplied declaration required: FUN_002c0d50. */
 /* Supplied declaration required: FUN_002c131c. */
@@ -53,7 +53,7 @@ int FUN_002c1148(int param_1,unsigned char *param_2)
     if (temp_v1 < 0) {
       FUN_002c131c(temp_v1,0x2c118c);
     }
-    FUN_002bb308();
+    nn_applet_CTR_detail_CloseSession();
     if ((temp_v2[0] & 0xff) == 0) {
       return 0;
     }
@@ -65,7 +65,7 @@ int FUN_002c1148(int param_1,unsigned char *param_2)
     if (temp_v1 < 0) {
       FUN_002c131c(temp_v1,0x2c11d0);
     }
-    FUN_002bb308();
+    nn_applet_CTR_detail_CloseSession();
     if ((char)temp_v2[0] == '\0') {
       return 0;
     }
@@ -75,7 +75,7 @@ int FUN_002c1148(int param_1,unsigned char *param_2)
     FUN_002bb378();
     temp_v1 = param_1;
     FUN_0012a778();
-    FUN_002bb308();
+    nn_applet_CTR_detail_CloseSession();
     if ((temp_v1 != -0x375f3010 && temp_v1 != -0x1f5f33f8) && temp_v1 != -0x375f33fe) break;
     FUN_002bb150(10000000,0);
   }

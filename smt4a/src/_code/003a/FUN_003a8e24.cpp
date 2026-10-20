@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 int scrSetResult(int);
 
 extern unsigned int g_btlScriptUnit; /* 0x57113c */
 
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: dataTable04FindById. */
 extern int scrGetArg(void);
 /* Supplied declaration required: scrSetResult. */
 extern int btlUnitGet(unsigned int);
@@ -26,7 +26,7 @@ unsigned int FUN_003a8e24(void)
   temp_v0 = scrGetArg();
   temp_v1 = btlUnitGet(g_btlScriptUnit);
   temp_v2 = (unsigned int)*(unsigned short *)(*(int *)(temp_v1 + 0x28) + temp_v0 * 2 + 0x118);
-  FUN_001aba54();
+  dataTable04FindById();
   if (temp_v2 != 0) {
     scrSetResult(*(unsigned char *)(temp_v2 + 0x23));
     return 1;

@@ -8,7 +8,7 @@ int CONCAT44(...);
 int FUN_0027d9a8(void);
 int FUN_0027da30(...);
 int FUN_00281e34(void);
-int FUN_00282924(unsigned char *, int);
+int btlMainFindEntryByListedId(unsigned char *, int);
 int btlGetMainState(void);
 int FUN_00293a04(unsigned int, int);
 int FUN_002b70cc(void);
@@ -40,10 +40,10 @@ extern unsigned int FUN_0027d9e8(unsigned char *, unsigned int);
 extern int FUN_0027dab0(unsigned char *, int);
 extern int FUN_0027db08(unsigned int);
 /* Supplied declaration required: FUN_00281e34. */
-/* Supplied declaration required: FUN_00282924. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_00293a04. */
-extern int FUN_00296d6c(unsigned int, unsigned int);
+extern int randBetween(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002b70cc. */
 extern unsigned char *jobGetWork(void);
 /* Supplied declaration required: FUN_003c14e8. */
@@ -122,8 +122,8 @@ unsigned int FUN_001b7a0c(void)
         temp_v2 = *(int *)(temp_v10 + 0x98) + 1;
         *(unsigned int *)(temp_v10 + 0x98) = temp_v2;
         if (((*pbVar4 & 3) != 0) && (*(unsigned int *)(temp_v10 + 0x9c) <= temp_v2)) {
-          FUN_00282924(pbVar1,(int)*(short *)(temp_v10 + 0x62));
-          temp_v3 = FUN_00296d6c(2,6);
+          btlMainFindEntryByListedId(pbVar1,(int)*(short *)(temp_v10 + 0x62));
+          temp_v3 = randBetween(2,6);
           *(int *)(temp_v10 + 0x9c) = temp_v3 * 0x1e;
           *(unsigned int *)(temp_v10 + 0x98) = 0;
         }

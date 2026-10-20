@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002c424c(int, int, int);
+int __aeabi_memset4(int, int, int);
 int memClear(int, int);
 
 extern int DAT_004655c0; /* 0x4655c0 */
 
-/* Supplied declaration required: FUN_002c424c. */
+/* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: memClear. */
 
 
@@ -272,7 +272,7 @@ unsigned int FUN_00122a6c(int param_1)
   *(unsigned char *)(temp_v0 + 0x81c) = 0;
   *(unsigned int *)(temp_v0 + 0x820) = 0;
   *(unsigned int *)(temp_v0 + 0x824) = 0;
-  FUN_002c424c(temp_v0 + 0x828,0x40,0xff);
+  __aeabi_memset4(temp_v0 + 0x828,0x40,0xff);
   return 0;
 }
 

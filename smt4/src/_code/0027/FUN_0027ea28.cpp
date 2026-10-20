@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0023478c(unsigned int, unsigned int);
 int FUN_00296ae8(unsigned int, int, unsigned int, int, int, unsigned int, unsigned int);
-int FUN_002a780c(void);
+int asdMemFreeSlot(void);
 int FUN_002bd81c(unsigned int, int, int);
 int FUN_002bd82c(unsigned int, int);
 int FUN_0038abbc(unsigned int *, unsigned int, unsigned int, unsigned int);
@@ -22,7 +22,7 @@ extern unsigned int g_aocMain; /* 0x432fc8 */
 
 /* Supplied declaration required: FUN_0023478c. */
 /* Supplied declaration required: FUN_00296ae8. */
-/* Supplied declaration required: FUN_002a780c. */
+/* Supplied declaration required: asdMemFreeSlot. */
 /* Supplied declaration required: FUN_002bd81c. */
 /* Supplied declaration required: FUN_002bd82c. */
 extern unsigned int asdTextCreate(unsigned int);
@@ -40,7 +40,7 @@ void FUN_0027ea28(unsigned int *param_1,unsigned int param_2,unsigned int param_
   *param_1 = *param_1 | 0x40;
   puVar3 = param_1 + 0x107;
   if (param_1[0x107] != 0) {
-    FUN_002a780c();
+    asdMemFreeSlot();
     *puVar3 = 0;
   }
   temp_v0 = asdTextCreate(0);

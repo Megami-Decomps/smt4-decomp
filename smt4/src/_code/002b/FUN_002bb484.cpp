@@ -9,7 +9,7 @@ typedef struct FileObject {
     /* 0x04 */ u32 handle;      /* bit 0: needs flush before close */
 } FileObject;
 
-extern void FUN_002c52f8(void);
+extern void asdFatalError(void);
 extern void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(u32 handle);
 
 FileObject *FUN_002bb484(FileObject *obj)
@@ -18,7 +18,7 @@ FileObject *FUN_002bb484(FileObject *obj)
 
     if ((*slot & ~1) != 0) {
         if ((*slot & 1) != 0) {
-            FUN_002c52f8();
+            asdFatalError();
         }
         nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(*slot & ~1);
         *slot = 0;

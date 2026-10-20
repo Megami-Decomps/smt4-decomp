@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern u32 FUN_001add24(u32 id);
+extern u32 dataTableFree(u32 id);
 
 void FUN_00341f4c(void)
 {
-    FUN_001add24(0xE);
+    dataTableFree(0xE);
 }
 
 } /* extern "C" */

@@ -8,11 +8,11 @@ typedef struct FloatPair {
     /* 0x08 */ f32 b;
 } FloatPair;
 
-extern FloatPair DAT_005c10c0;
+extern FloatPair g_effMenuState;
 
 s32 getFloatPairValue(void)
 {
-    return DAT_005c10c0.value;
+    return g_effMenuState.value;
 }
 
 } /* extern "C" */

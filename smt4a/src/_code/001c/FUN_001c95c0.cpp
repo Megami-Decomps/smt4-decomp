@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern unsigned int *DAT_005b40e0; /* 0x5b40e0 */
+extern unsigned int *g_commandBufferCursor; /* 0x5b40e0 */
 
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: FUN_001cefe0. */
@@ -68,11 +68,11 @@ void FUN_001c95c0(int param_1)
     if ((*(unsigned int *)(temp_v1 + 0x18) & 2) != 0) {
       temp_v2 = 0x10000;
     }
-    DAT_005b40e0[3] = 0xf00e1;
-    *DAT_005b40e0 = temp_v2;
-    DAT_005b40e0[1] = 0x400e0;
-    DAT_005b40e0[2] = ((temp_v8 & 0xff) << 8) | (temp_v6 & 0xff) | ((temp_v9 & 0xff) << 0x10);
-    DAT_005b40e0 = DAT_005b40e0 + 4;
+    g_commandBufferCursor[3] = 0xf00e1;
+    *g_commandBufferCursor = temp_v2;
+    g_commandBufferCursor[1] = 0x400e0;
+    g_commandBufferCursor[2] = ((temp_v8 & 0xff) << 8) | (temp_v6 & 0xff) | ((temp_v9 & 0xff) << 0x10);
+    g_commandBufferCursor = g_commandBufferCursor + 4;
     FUN_001cefe0(temp_v0,0x17);
     return;
   }

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002684ac(int);
+int gameDataBlocksAddFlags(int);
 int FUN_002c76d8(int);
 
 typedef int romwright_code(...);
@@ -13,9 +13,9 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern unsigned char DAT_0057f588; /* 0x57f588 */
+extern unsigned char g_messageMain; /* 0x57f588 */
 
-/* Supplied declaration required: FUN_002684ac. */
+/* Supplied declaration required: gameDataBlocksAddFlags. */
 /* Supplied declaration required: FUN_002c76d8. */
 
 
@@ -33,8 +33,8 @@ void FUN_003a7644(unsigned int *param_1)
   param_1[3] = 0;
   param_1[0x8e] = 0x32;
   FUN_002c76d8(4);
-  FUN_002684ac(4);
-  DAT_0057f588 = 0;
+  gameDataBlocksAddFlags(4);
+  g_messageMain = 0;
   return;
 }
 

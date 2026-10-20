@@ -16,7 +16,7 @@ int FUN_0015ea28(unsigned char *, unsigned char *);
 int FUN_0015fea8(unsigned char *, unsigned char *, int);
 int asdMemoryAlloc(...);
 int asdMemoryAllocAligned(...);
-int FUN_002e342c(unsigned char *, unsigned int);
+int libc_strcpy(unsigned char *, unsigned int);
 int nw_snd_Sound3DManager_GetRequiredMemSize(...);
 int nw_snd_SoundArchivePlayer_GetRequiredStreamBufferSize(unsigned char *, unsigned char *);
 int nw_ut_internal_LinkListImpl_insert(...);
@@ -75,11 +75,11 @@ extern unsigned int DAT_0064c01c; /* 0x64c01c */
 /* Supplied declaration required: FUN_0015e420. */
 /* Supplied declaration required: FUN_0015e8d0. */
 /* Supplied declaration required: FUN_0015ea28. */
-extern int FUN_0015fe30(unsigned char *);
+extern int nw_snd_SoundArchive_IsAvailable(unsigned char *);
 /* Supplied declaration required: FUN_0015fea8. */
 /* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: asdMemoryAllocAligned. */
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 extern int __cxa_guard_acquire(unsigned int *);
 extern int rt_memcmp(unsigned char *, unsigned char *, unsigned int);
 /* Supplied declaration required: nw_snd_Sound3DManager_GetRequiredMemSize. */
@@ -104,12 +104,12 @@ unsigned int FUN_0013df74(unsigned int param_1,int param_2,unsigned char *param_
   unsigned char *temp_v7;
   unsigned int uStack_34;
   
-  FUN_002e342c(&DAT_0063e6cc,param_1);
+  libc_strcpy(&DAT_0063e6cc,param_1);
   temp_v0 = rt_memcmp(&DAT_0063e6cc,&LAB_0013e318,4);
   if (temp_v0 != 0) {
     DAT_0063f52c = 1;
   }
-  temp_v0 = FUN_0015fe30(&DAT_0063e1e8);
+  temp_v0 = nw_snd_SoundArchive_IsAvailable(&DAT_0063e1e8);
   if (temp_v0 != 0) {
     FUN_00150784();
   }

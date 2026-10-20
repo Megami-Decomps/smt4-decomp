@@ -10,7 +10,7 @@ int FUN_002937e0(void);
 int FUN_002c1658(int, int);
 int __aeabi_idivmod(unsigned int, unsigned int);
 
-extern int DAT_0043dcf0; /* 0x43dcf0 */
+extern int g_partyPanel; /* 0x43dcf0 */
 
 /* Supplied declaration required: FUN_00293268. */
 /* Supplied declaration required: FUN_002932d8. */
@@ -35,7 +35,7 @@ unsigned int FUN_0026ce14(int param_1,int param_2)
   int temp_v5;
   int temp_v6;
   
-  temp_v3 = DAT_0043dcf0;
+  temp_v3 = g_partyPanel;
   if (param_1 == 0) {
     return 0;
   }

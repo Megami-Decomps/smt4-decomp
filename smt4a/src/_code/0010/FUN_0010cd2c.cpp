@@ -10,7 +10,7 @@ int strInit(unsigned char [32]);
 int initVtable00558630(unsigned char [12]);
 int strDestroy(...);
 int FUN_002f6be2(...);
-int FUN_002f6bf0(...);
+int operatorDeleteArrayNullable(...);
 int FUN_002f6bfc(unsigned char [12], unsigned char [32], unsigned char [12]);
 int FUN_002f6c32(int, int, unsigned int);
 
@@ -41,7 +41,7 @@ typedef struct {
 extern unsigned int FUN_002eea7c(unsigned int);
 extern int FUN_002f6bcc(void);
 /* Supplied declaration required: FUN_002f6be2. */
-/* Supplied declaration required: FUN_002f6bf0. */
+/* Supplied declaration required: operatorDeleteArrayNullable. */
 /* Supplied declaration required: FUN_002f6bfc. */
 /* Supplied declaration required: FUN_002f6c32. */
 
@@ -73,7 +73,7 @@ void FUN_0010cd2c(fn_0010cd2c_arg0 *param_1,unsigned int param_2)
       temp_v0 = temp_v2 + temp_v0;
       temp_v3 = temp_v2 + temp_v3;
     }
-    FUN_002f6bf0(temp_v10[0]);
+    operatorDeleteArrayNullable(temp_v10[0]);
     param_1->field_0x8 = (char)temp_v3;
     param_1->field_0xc = temp_v0;
     if (param_1->field_0xa4 != 0) {
@@ -83,7 +83,7 @@ void FUN_0010cd2c(fn_0010cd2c_arg0 *param_1,unsigned int param_2)
       FUN_002f6be2(param_2,temp_v8);
       temp_v1 = FUN_002eea7c(param_2);
       strAssign(temp_v9,temp_v8[0],temp_v1,0xffffffff);
-      FUN_002f6bf0(temp_v8[0]);
+      operatorDeleteArrayNullable(temp_v8[0]);
       FUN_002f6bfc(temp_v11,temp_v9,temp_v4);
       FUN_002f6c32(param_1->field_0xa4,temp_v5 + temp_v7,temp_v6);
       strDestroy(temp_v4);

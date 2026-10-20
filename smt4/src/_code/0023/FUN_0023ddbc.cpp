@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0028975c(unsigned int, unsigned int, int);
+int gameFlagSetValue(unsigned int, unsigned int, int);
 int FUN_002c0a9c(int, int, int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -12,10 +12,10 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_0028975c. */
+/* Supplied declaration required: gameFlagSetValue. */
 extern int FUN_002ba698(unsigned char, unsigned char);
 extern int FUN_002ba764(unsigned char, unsigned char);
-extern int FUN_002c09d0(void);
+extern int gameFlagIsSet(void);
 /* Supplied declaration required: FUN_002c0a9c. */
 extern int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
@@ -40,13 +40,13 @@ void FUN_0023ddbc(unsigned int param_1,unsigned int param_2)
   unsigned char temp_v10;
   
   if (param_2 != 0) {
-    temp_v2 = FUN_002c09d0();
+    temp_v2 = gameFlagIsSet();
     if (temp_v2 != 0) {
       return;
     }
   }
   else {
-    temp_v2 = FUN_002c09d0();
+    temp_v2 = gameFlagIsSet();
     if (temp_v2 == 0) {
       return;
     }
@@ -68,14 +68,14 @@ void FUN_0023ddbc(unsigned int param_1,unsigned int param_2)
         temp_v1 = puVar6[1];
         temp_v5 = FUN_002ba764(temp_v0,temp_v1);
         temp_v6 = FUN_002ba698(temp_v0,temp_v1);
-        FUN_0028975c(param_1,param_2,0);
+        gameFlagSetValue(param_1,param_2,0);
         temp_v7 = FUN_002ba698(temp_v0,temp_v1);
         if (temp_v6 != temp_v7) {
           *(unsigned char *)(temp_v5 + 2) = 0;
           *(unsigned char *)(temp_v5 + 3) = *(unsigned char *)(temp_v5 + 3) & 0xe0;
           FUN_002c0a9c(temp_v0,temp_v1,0);
         }
-        FUN_0028975c(param_1,param_2 ^ 1,0);
+        gameFlagSetValue(param_1,param_2 ^ 1,0);
       }
       temp_v9 = temp_v9 + 1;
     } while (temp_v9 < temp_v4);

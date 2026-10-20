@@ -7,10 +7,10 @@ extern "C" {
 int VectorUnsignedToFloat(unsigned int, int);
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-extern int FUN_001801a4(void);
-extern int FUN_001ab854(void);
-extern unsigned int FUN_001ab888(void);
-extern int FUN_001b347c(unsigned int);
+extern int gameGetPlayerData(void);
+extern int gameGetSlotRecord(void);
+extern unsigned int gameGetSlotTable(void);
+extern int gameSlotTableFindFree(unsigned int);
 
 
 unsigned int FUN_004a00f4(unsigned int param_1)
@@ -26,7 +26,7 @@ unsigned int FUN_004a00f4(unsigned int param_1)
   
   temp_v1 = param_1;
   if ((param_1 == 0 || param_1 == 2) || param_1 == 3) {
-    temp_v0 = FUN_001801a4();
+    temp_v0 = gameGetPlayerData();
     temp_v1 = (unsigned int)*(unsigned short *)(temp_v0 + 0x62);
     VectorUnsignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
   }
@@ -35,12 +35,12 @@ unsigned int FUN_004a00f4(unsigned int param_1)
       return temp_v1;
     }
     temp_v0 = 3;
-    temp_v1 = FUN_001ab888();
+    temp_v1 = gameGetSlotTable();
     temp_v4 = temp_v1 + 0x1ca0;
   }
   else {
-    temp_v0 = FUN_001b347c(temp_v1);
-    temp_v1 = FUN_001ab888();
+    temp_v0 = gameSlotTableFindFree(temp_v1);
+    temp_v1 = gameGetSlotTable();
     temp_v4 = temp_v1 + 0x1c88;
   }
   temp_v3 = 0;
@@ -48,7 +48,7 @@ unsigned int FUN_004a00f4(unsigned int param_1)
     do {
       temp_v1 = (unsigned int)*(char *)(temp_v4 + temp_v3);
       if (-1 < (int)temp_v1) {
-        temp_v2 = FUN_001ab854();
+        temp_v2 = gameGetSlotRecord();
         temp_v1 = (unsigned int)*(unsigned short *)(temp_v2 + 100);
         VectorUnsignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
       }

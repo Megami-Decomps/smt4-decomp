@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0016f42c(int, int, int *, int *, int);
-int FUN_001afdc4(int);
+int nn_snd_CTR_FreeVoice(int);
 int FUN_001b6390(int);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
@@ -19,7 +19,7 @@ extern unsigned char DAT_0063f4f0; /* 0x63f4f0 */
 /* Supplied declaration required: FUN_00152d64. */
 /* Supplied declaration required: FUN_0016f42c. */
 extern int FUN_001af874(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001afdc4. */
+/* Supplied declaration required: nn_snd_CTR_FreeVoice. */
 /* Supplied declaration required: FUN_001b6390. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
@@ -69,7 +69,7 @@ void FUN_00152d64(int *param_1,int param_2)
       temp_v3 = 0;
       if (temp_v3 < param_1[0x3b]) {
         do {
-          FUN_001afdc4(param_1[temp_v3 + 0x1a]);
+          nn_snd_CTR_FreeVoice(param_1[temp_v3 + 0x1a]);
           temp_v0 = FUN_001af874(0x7fff,0);
           param_1[temp_v3 + 0x1a] = temp_v0;
           nn_snd_CTR_Voice_SetMixParam(temp_v0,(unsigned int)(param_1 + temp_v3 * 0xc + 0x1c));

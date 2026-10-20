@@ -11,11 +11,11 @@ typedef struct {
     } slots[1];        /* 0x2a2 */
 } SlotTable;
 
-SlotTable *FUN_001ab940(s32 index);
+SlotTable *gameFlagBlockGet(s32 index);
 
 void FUN_004185c4(s32 index, s8 enabled)
 {
-    u8 *flags = &FUN_001ab940(index)->slots[index].flags;
+    u8 *flags = &gameFlagBlockGet(index)->slots[index].flags;
 
     *flags = (*flags & ~2) | (enabled << 1);
 }

@@ -23,7 +23,7 @@ int FUN_004f56cc(...);
 int FUN_004fbd5c(...);
 
 int sysPlaySe(...);
-int FUN_00275f44(...);
+int scrScriptProcessStartEntry(...);
 int FUN_00341f88(...);
 int FUN_003e77cc(...);
 int FUN_003e7ef0(...);
@@ -123,7 +123,7 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned int g_btlScriptUnit; /* 0x57113c */
-extern unsigned int DAT_005712f0; /* 0x5712f0 */
+extern unsigned int g_btlActionReflect; /* 0x5712f0 */
 extern unsigned int DAT_005712f8; /* 0x5712f8 */
 extern unsigned int DAT_005712fc; /* 0x5712fc */
 extern unsigned int DAT_00571300; /* 0x571300 */
@@ -162,19 +162,19 @@ extern unsigned int uRam005713a0; /* 0x5713a0 */
 extern unsigned int uRam005713a4; /* 0x5713a4 */
 extern unsigned int uRam005713a8; /* 0x5713a8 */
 extern unsigned int uRam005713ac; /* 0x5713ac */
-extern int DAT_00571508; /* 0x571508 */
+extern int g_btlCamera; /* 0x571508 */
 extern int DAT_00573808; /* 0x573808 */
-extern int DAT_00573c50; /* 0x573c50 */
-extern int DAT_0057a9c8; /* 0x57a9c8 */
+extern int g_btlPartnerAttack; /* 0x573c50 */
+extern int g_btlUiBlock; /* 0x57a9c8 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: btlGetMainState. */
 extern int FUN_001632f8(void);
 /* Supplied declaration required: sysPlaySe. */
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: asdMemFree. */
 extern int FUN_00224880(unsigned int);
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: wstrlen. */
 /* Supplied declaration required: panelSetMode3. */
 /* Supplied declaration required: FUN_00341f88. */
@@ -321,7 +321,7 @@ unsigned int FUN_0040de54(int *param_1)
   psVar14 = (short *)param_1[2];
 joined_r0x0040de68:
   psVar2 = psVar14;
-  temp_v3 = DAT_0057a9c8;
+  temp_v3 = g_btlUiBlock;
   if (psVar2 == (short *)0x0) {
     return 0;
   }
@@ -364,12 +364,12 @@ LAB_0040deb4:
     if (*(int *)(psVar2 + 0x16) != 0) {
       temp_v3 = *(int *)(psVar2 + 0x20);
       if ((temp_v3 == 0) || (*(int *)(temp_v3 + 4) >= *(int *)(temp_v3 + 8))) {
-        *(unsigned int *)(DAT_00571508 + 0x64c) = *(unsigned int *)(DAT_00571508 + 0x64c) & 0xf7ffffff;
+        *(unsigned int *)(g_btlCamera + 0x64c) = *(unsigned int *)(g_btlCamera + 0x64c) & 0xf7ffffff;
         temp_v4 = 0;
       }
       else {
         if ((char)psVar2[0x10] != '\0') {
-          *(unsigned int *)(DAT_00571508 + 0x64c) = *(unsigned int *)(DAT_00571508 + 0x64c) | 0x8000000;
+          *(unsigned int *)(g_btlCamera + 0x64c) = *(unsigned int *)(g_btlCamera + 0x64c) | 0x8000000;
         }
         temp_v4 = 1;
       }
@@ -413,12 +413,12 @@ LAB_0040deb4:
               if (temp_v3 != 3) break;
               temp_v8 = 1;
             }
-            FUN_004a96fc(DAT_0057a9c8,temp_v6,*(unsigned int *)(psVar2 + 0x26),temp_v8,1);
+            FUN_004a96fc(g_btlUiBlock,temp_v6,*(unsigned int *)(psVar2 + 0x26),temp_v8,1);
             break;
           }
           temp_v8 = 1;
         }
-        FUN_004a96fc(DAT_0057a9c8,temp_v6,*(unsigned int *)(psVar2 + 0x26),temp_v8,0);
+        FUN_004a96fc(g_btlUiBlock,temp_v6,*(unsigned int *)(psVar2 + 0x26),temp_v8,0);
       }
     }
     break;
@@ -461,7 +461,7 @@ LAB_0040deb4:
       if ((*puVar6 & DAT_00571320) != 0 || (puVar6[1] & DAT_00571324) != 0) {
         temp_v3 = 4;
       }
-      FUN_004ab6f4(DAT_0057a9c8,temp_v3);
+      FUN_004ab6f4(g_btlUiBlock,temp_v3);
     }
     break;
   case '\b':
@@ -485,7 +485,7 @@ LAB_0040deb4:
             ((((temp_v2 & 0x100) != 0 || ((temp_v2 & 0x200) != 0)) ||
              (((temp_v2 & 8) != 0 || (((temp_v2 & 0x800) != 0 || ((temp_v2 & 0x1000) != 0)))))))) ||
            ((temp_v2 & 0x2000) != 0)) {
-          FUN_004ab6f4(DAT_0057a9c8,temp_v3);
+          FUN_004ab6f4(g_btlUiBlock,temp_v3);
         }
       }
     }
@@ -673,8 +673,8 @@ LAB_0040e864:
     psVar2[1] = temp_v4;
     break;
   case '\x11':
-    if (DAT_0057a9c8 != -0x28c4) {
-      *(unsigned int *)(DAT_0057a9c8 + 0x6a64) = 0;
+    if (g_btlUiBlock != -0x28c4) {
+      *(unsigned int *)(g_btlUiBlock + 0x6a64) = 0;
       *(unsigned int *)(temp_v3 + 0x6a68) = 0;
       *(unsigned int *)(temp_v3 + 0x6a6c) = *(unsigned int *)(psVar2 + 0x18);
       *(unsigned int *)(temp_v3 + 0x6a70) = *(unsigned int *)(psVar2 + 0x14);
@@ -865,9 +865,9 @@ joined_r0x0040ec14:
         if ((*puVar6 & DAT_00571320) != 0 || (puVar6[1] & DAT_00571324) != 0) {
           temp_v3 = 4;
         }
-        FUN_004a9a38(DAT_0057a9c8,temp_v3);
+        FUN_004a9a38(g_btlUiBlock,temp_v3);
         if (psVar2[0x12] != 0) {
-          flags64CSetTarget(DAT_00571508);
+          flags64CSetTarget(g_btlCamera);
         }
       }
     }
@@ -910,11 +910,11 @@ joined_r0x0040ec14:
     if (psVar2[0x13] != 0) {
       temp_v6 = 1;
     }
-    if (((-1 < *(int *)(DAT_00571508 + 0x7cc)) &&
-        (temp_v9 = FUN_004f2708(DAT_00571508,temp_v3,0), temp_v9 != 0)) &&
+    if (((-1 < *(int *)(g_btlCamera + 0x7cc)) &&
+        (temp_v9 = FUN_004f2708(g_btlCamera,temp_v3,0), temp_v9 != 0)) &&
        (((*(unsigned int *)(temp_v3 + 0x45a0) & DAT_00571370) == 0 &&
          (*(unsigned int *)(temp_v3 + 0x45a4) & DAT_00571374) == 0 ||
-        (temp_v9 = FUN_004f283c(DAT_00571508), temp_v9 == 0)))) {
+        (temp_v9 = FUN_004f283c(g_btlCamera), temp_v9 == 0)))) {
       FUN_004fb670(0,*(unsigned int *)(psVar2 + 4));
     }
     temp_v5 = uRam00571360;
@@ -942,19 +942,19 @@ joined_r0x0040ec14:
     }
     break;
   case ' ':
-    FUN_004f1ad0(DAT_00571508,*(unsigned int *)(psVar2 + 0x14));
+    FUN_004f1ad0(g_btlCamera,*(unsigned int *)(psVar2 + 0x14));
     break;
   case '!':
     temp_v8 = btlGetMainState();
     if (-1 < psVar2[0x12]) {
-      FUN_004f1cdc(DAT_00571508,temp_v8);
+      FUN_004f1cdc(g_btlCamera,temp_v8);
     }
     if (psVar2[0x13] != 0) {
-      FUN_004f41b0(DAT_00571508,0);
+      FUN_004f41b0(g_btlCamera,0);
     }
     break;
   case '\"':
-    FUN_004f26cc(DAT_00571508);
+    FUN_004f26cc(g_btlCamera);
     break;
   case '#':
     temp_v3 = param_1[2];
@@ -996,7 +996,7 @@ joined_r0x0040ec14:
     FUN_003f0e20(puVar6,(int)*(short *)(*(int *)(psVar2 + 10) + 0x6a));
     if (!((*(unsigned int *)(*param_1 + 0x45ac) & uRam005713ac) != 0 ||
          (*(unsigned int *)(*param_1 + 0x45a8) & uRam005713a8) != 0)) {
-      temp_v3 = FUN_0018719c(0x591);
+      temp_v3 = gameFlagIsSet(0x591);
       if (temp_v3 != 0) {
         if (puVar6 != (unsigned int *)0x0) {
           if (((puVar6[1] & DAT_0057131c) == 0 && (DAT_00571318 & *puVar6) == 0) &&
@@ -1035,7 +1035,7 @@ LAB_0040f258:
           if (temp_v3 == 0) {
             FUN_004fb43c(0,*(unsigned int *)(psVar2 + 4),0x1000275,0,1,0,0);
           }
-          FUN_004aa008(DAT_0057a9c8,(int)*(short *)((int)puVar6 + 0x6e));
+          FUN_004aa008(g_btlUiBlock,(int)*(short *)((int)puVar6 + 0x6e));
         }
         else if ((temp_v5 & DAT_00571318) != 0 || (temp_v7 & DAT_0057131c) != 0) {
           temp_v3 = FUN_003e8430(temp_v8);
@@ -1043,7 +1043,7 @@ LAB_0040f258:
             FUN_004fb43c(0,*(unsigned int *)(psVar2 + 4),0x1000275,0,1,0,0);
           }
           FUN_003e7fa4(*param_1,(int)*(short *)(*(int *)(psVar2 + 10) + 0x6a));
-          FUN_004a9d68(DAT_0057a9c8,puVar6);
+          FUN_004a9d68(g_btlUiBlock,puVar6);
         }
       }
       else {
@@ -1213,7 +1213,7 @@ LAB_0040f684:
           if ((!temp_v10) && (*(int *)(psVar2 + 0x14) == 2)) {
             temp_v10 = 2;
           }
-          FUN_00275f44(*(unsigned int *)(temp_v3 + 0x228c),temp_v10);
+          scrScriptProcessStartEntry(*(unsigned int *)(temp_v3 + 0x228c),temp_v10);
           sysPlaySe(0x92);
           *(int *)(psVar2 + 0x26) = *(int *)(psVar2 + 0x26) + 1;
           temp_v4 = 1;
@@ -1260,7 +1260,7 @@ LAB_0040f684:
       }
     }
     else {
-      unaff_r8 = &DAT_005712f0;
+      unaff_r8 = &g_btlActionReflect;
       temp_v6 = 0;
       do {
         puVar6 = (unsigned int *)(*(int *)(temp_v3 + 0x1ffc) + temp_v6 * 0x408);
@@ -1421,8 +1421,8 @@ LAB_0040fb78:
     }
     break;
   case 'B':
-    temp_v8 = *(unsigned int *)(DAT_00573c50 + 0x30);
-    FUN_004112b0(DAT_00573c50,*(unsigned int *)(psVar2 + 0x14));
+    temp_v8 = *(unsigned int *)(g_btlPartnerAttack + 0x30);
+    FUN_004112b0(g_btlPartnerAttack,*(unsigned int *)(psVar2 + 0x14));
     FUN_00416960(temp_v8,*(unsigned int *)(psVar2 + 0x14));
     break;
   case 'C':
@@ -1518,7 +1518,7 @@ LAB_0040fb78:
     }
     break;
   case 'H':
-    if ((DAT_00571508 != 0) && (*(int *)(DAT_00571508 + 0x38) == 3)) {
+    if ((g_btlCamera != 0) && (*(int *)(g_btlCamera + 0x38) == 3)) {
       temp_v4 = 1;
       psVar2[1] = temp_v4;
     }

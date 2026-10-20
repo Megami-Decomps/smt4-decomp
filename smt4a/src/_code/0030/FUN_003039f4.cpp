@@ -14,7 +14,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_002f4cac. */
 /* Supplied declaration required: FUN_002f4cd6. */
-extern unsigned int FUN_0030fe5c(int, unsigned int *);
+extern unsigned int wordRefCompare(int, unsigned int *);
 
 
 int FUN_003039f4(int param_1,int param_2,unsigned int param_3,unsigned int param_4)
@@ -28,7 +28,7 @@ int FUN_003039f4(int param_1,int param_2,unsigned int param_3,unsigned int param
     temp_v1 = param_4;
     FUN_002f4cac();
     temp_v1 = *(unsigned int *)(param_2 + 0x10);
-    temp_v0 = FUN_0030fe5c(param_2 + 0x14,(unsigned int *)&temp_v1);
+    temp_v0 = wordRefCompare(param_2 + 0x14,(unsigned int *)&temp_v1);
     FUN_002f4cd6(param_1,*(unsigned int *)(param_2 + 0x10),temp_v0);
   }
   return param_1;

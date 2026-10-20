@@ -7,7 +7,7 @@ extern "C" {
 int VectorUnsignedToFloat(unsigned int, int);
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-extern char FUN_00296d6c(unsigned int, unsigned int);
+extern char randBetween(unsigned int, unsigned int);
 
 
 void FUN_002911e0(unsigned int param_1,unsigned int param_2,unsigned int param_3)
@@ -17,7 +17,7 @@ void FUN_002911e0(unsigned int param_1,unsigned int param_2,unsigned int param_3
   char temp_v0;
   unsigned int in_fpscr;
   
-  temp_v0 = FUN_00296d6c(0,1);
+  temp_v0 = randBetween(0,1);
   if (temp_v0 != '\0') {
     VectorUnsignedToFloat(param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorUnsignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);

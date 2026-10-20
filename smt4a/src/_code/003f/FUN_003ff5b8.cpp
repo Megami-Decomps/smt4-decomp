@@ -10,9 +10,9 @@ extern unsigned int DAT_00573c9c; /* 0x573c9c */
 extern unsigned int DAT_00573ca0; /* 0x573ca0 */
 extern unsigned int DAT_00573ca4; /* 0x573ca4 */
 
-extern int FUN_0018719c(unsigned int);
-extern int FUN_001ab854(void);
-extern int FUN_001ab888(void);
+extern int gameFlagIsSet(unsigned int);
+extern int gameGetSlotRecord(void);
+extern int gameGetSlotTable(void);
 extern int btlUnitGet(unsigned int);
 
 
@@ -26,7 +26,7 @@ unsigned int FUN_003ff5b8(unsigned int *param_1)
   unsigned int temp_v3;
   int temp_v4;
   
-  temp_v1 = FUN_0018719c(0x401);
+  temp_v1 = gameFlagIsSet(0x401);
   if (temp_v1 == 0) {
     return 0;
   }
@@ -36,11 +36,11 @@ unsigned int FUN_003ff5b8(unsigned int *param_1)
       puVar3 = *(unsigned int **)(temp_v1 + 0x20);
       if ((puVar3 != (unsigned int *)0x0) &&
          ((puVar3[1] & DAT_00573c9c) != 0 || (*puVar3 & DAT_00573c98) != 0)) {
-        temp_v1 = FUN_001ab888();
+        temp_v1 = gameGetSlotTable();
         temp_v4 = 0;
         if (*(unsigned char *)(temp_v1 + 0x1ca3) != 0) {
           do {
-            if (((-1 < *(char *)(temp_v1 + temp_v4 + 0x1c88)) && (temp_v2 = FUN_001ab854(), temp_v2 != 0))
+            if (((-1 < *(char *)(temp_v1 + temp_v4 + 0x1c88)) && (temp_v2 = gameGetSlotRecord(), temp_v2 != 0))
                && (-1 < *(char *)(temp_v1 + temp_v4 + 0x1c88))) {
               return 1;
             }
@@ -51,12 +51,12 @@ unsigned int FUN_003ff5b8(unsigned int *param_1)
     }
     else if (((*param_1 & DAT_00573ca0) != 0 || (param_1[1] & DAT_00573ca4) != 0) &&
             (temp_v0 = *(short *)((int)param_1 + 0x166), (int)temp_v0 != 0)) {
-      temp_v1 = FUN_001ab888();
+      temp_v1 = gameGetSlotTable();
       temp_v4 = 0;
       if (*(unsigned char *)(temp_v1 + 0x1ca3) != 0) {
         do {
           if (-1 < *(char *)(temp_v1 + temp_v4 + 0x1c88)) {
-            temp_v2 = FUN_001ab854();
+            temp_v2 = gameGetSlotRecord();
             temp_v3 = 0;
             if (temp_v2 != 0) {
               temp_v3 = (unsigned int)*(unsigned short *)(temp_v2 + 0x62);

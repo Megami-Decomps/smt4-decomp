@@ -8,7 +8,7 @@ int FUN_00100388(...);
 int FUN_00180118(...);
 int FUN_00184310(...);
 int FUN_002804b0(...);
-int FUN_002e342c(...);
+int libc_strcpy(...);
 int FUN_003180c4(...);
 
 /* Supplied declaration required: FUN_00100388. */
@@ -20,7 +20,7 @@ extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern char *dataTableGetEntries(void);
 /* Supplied declaration required: FUN_002804b0. */
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_003180c4. */
 
 
@@ -43,10 +43,10 @@ void FUN_00416d30(int param_1)
      (temp_v1 = saveSlotFindById(*(unsigned int *)(param_1 + 0x34) & 0xffff), temp_v1 != 0)) {
     temp_v2 = (unsigned int)*(unsigned short *)(temp_v1 + 0x62);
     FUN_00180118(temp_v2);
-    FUN_002e342c(temp_v5,temp_v2);
+    libc_strcpy(temp_v5,temp_v2);
     FUN_003180c4(8,temp_v5);
     temp_v3 = FUN_0014bf3c(*(unsigned short *)(temp_v1 + 0x62),0);
-    FUN_002e342c(temp_v5,temp_v3);
+    libc_strcpy(temp_v5,temp_v3);
     FUN_003180c4(0x10,temp_v5);
     FUN_002804b0("battle/DevilLvUp.bf",param_1 + 0x24,0);
     temp_v2 = (unsigned int)*(unsigned short *)(temp_v1 + 0x62);

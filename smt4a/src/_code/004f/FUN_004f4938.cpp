@@ -10,7 +10,7 @@ int FUN_0016c4b8(unsigned int, int);
 extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: FUN_0014e314. */
-extern int FUN_001656a0(unsigned int);
+extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
 
 
@@ -21,7 +21,7 @@ unsigned int FUN_004f4938(int param_1)
   int temp_v0;
   unsigned int temp_v1;
   
-  temp_v0 = FUN_001656a0(9);
+  temp_v0 = padButtonIsPressed(9);
   if ((temp_v0 != 0) && (temp_v1 = *(int *)(param_1 + 8) + 1, *(unsigned int *)(param_1 + 8) = temp_v1, temp_v1 >= 3)
      ) {
     *(unsigned int *)(param_1 + 8) = 0;

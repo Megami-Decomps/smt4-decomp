@@ -6,11 +6,11 @@ void FUN_001a9104(BtlUiObjCA *obj, u16 *ids);
 void fillTwoWordsWithByte(u16 *ids, s32 value);
 u16 FUN_003ea1cc(u32 owner, s32 index);
 
-extern BtlUiGlobalsA DAT_0057a9b8;
+extern BtlUiGlobalsA g_btlUi;
 
 void FUN_004abbe8(void)
 {
-    BtlUiA *ui = DAT_0057a9b8.ui;
+    BtlUiA *ui = g_btlUi.ui;
 
     fillTwoWordsWithByte(ui->ids, -1);
     ui->ids[0] = FUN_003ea1cc(ui->owner, 0);

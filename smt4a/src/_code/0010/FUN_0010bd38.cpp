@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_001211e8(unsigned int, int);
 int FUN_002e7614(...);
-int FUN_002e7682(...);
-int FUN_002e76a0(...);
+int bufferAssignBytes(...);
+int strHolderAssignBuffer(...);
 int FUN_002eac34(...);
 int strDestroy(unsigned char [32]);
 int FUN_002ed84a(...);
@@ -32,9 +32,9 @@ typedef struct {
 #endif
 /* Supplied declaration required: FUN_001211e8. */
 /* Supplied declaration required: FUN_002e7614. */
-/* Supplied declaration required: FUN_002e7682. */
-extern int FUN_002e7690(int, int, unsigned int);
-/* Supplied declaration required: FUN_002e76a0. */
+/* Supplied declaration required: bufferAssignBytes. */
+extern int strHolderAssignWide(int, int, unsigned int);
+/* Supplied declaration required: strHolderAssignBuffer. */
 /* Supplied declaration required: FUN_002eac34. */
 /* Supplied declaration required: strDestroy. */
 /* Supplied declaration required: FUN_002ed84a. */
@@ -76,16 +76,16 @@ void FUN_0010bd38(unsigned int param_1,int param_2,int param_3)
     if (temp_v0 == 0) {
       return;
     }
-    temp_v0 = FUN_002e7690(param_3,param_2 + 0x3c,1);
+    temp_v0 = strHolderAssignWide(param_3,param_2 + 0x3c,1);
     if (temp_v0 == 0) {
       return;
     }
-    temp_v0 = FUN_002e7682(param_3,param_2 + 0x65,1);
+    temp_v0 = bufferAssignBytes(param_3,param_2 + 0x65,1);
     if (temp_v0 == 0) {
       return;
     }
     if (*(int *)(param_2 + 0x38) != 0) {
-      temp_v0 = FUN_002e7682(param_3,param_2 + 0x28);
+      temp_v0 = bufferAssignBytes(param_3,param_2 + 0x28);
       if (temp_v0 == 0) {
         return;
       }
@@ -108,7 +108,7 @@ void FUN_0010bd38(unsigned int param_1,int param_2,int param_3)
     }
     if (((*(unsigned short *)(param_2 + 0x3c) & 0xf) == 0) || ((*(unsigned short *)(param_2 + 0x3c) & 0xf) == 1)) {
       if (*(int *)(param_2 + 0x60) != 0) {
-        temp_v0 = FUN_002e7682(param_3,param_2 + 0x50);
+        temp_v0 = bufferAssignBytes(param_3,param_2 + 0x50);
         if (temp_v0 == 0) {
           return;
         }
@@ -159,7 +159,7 @@ void FUN_0010bd38(unsigned int param_1,int param_2,int param_3)
           return;
         }
       }
-      FUN_002e76a0(param_3,puVar2);
+      strHolderAssignBuffer(param_3,puVar2);
       strDestroy(temp_v4);
       strDestroy(temp_v3);
     }
@@ -174,7 +174,7 @@ void FUN_0010bd38(unsigned int param_1,int param_2,int param_3)
     FUN_001211e8(temp_v6,*(unsigned char *)(temp_v0 + 8));
   }
   else {
-    FUN_002e76a0(param_3,*(unsigned int *)(param_2 + 0xd8));
+    strHolderAssignBuffer(param_3,*(unsigned int *)(param_2 + 0xd8));
   }
   *(unsigned int *)(temp_v5 + 0x34) = *(unsigned int *)(*(int *)(param_3 + 8) + 0x10);
   return;

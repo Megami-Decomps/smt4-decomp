@@ -3,11 +3,11 @@
 
 extern "C" {
 
-void FUN_002734f0(void);
+void questSysLoadStep(void);
 
 void FUN_002734ec(void)
 {
-    FUN_002734f0();
+    questSysLoadStep();
 }
 
 }

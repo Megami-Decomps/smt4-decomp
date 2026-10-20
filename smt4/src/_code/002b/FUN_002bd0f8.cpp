@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002bd420(int, int, int);
+int memCopy(int, int, int);
 
-/* Supplied declaration required: FUN_002bd420. */
+/* Supplied declaration required: memCopy. */
 
 
 int FUN_002bd0f8(int param_1,int *param_2,int param_3,int param_4)
@@ -22,7 +22,7 @@ int FUN_002bd0f8(int param_1,int *param_2,int param_3,int param_4)
     for (temp_v0 = 0; *(short *)(param_3 + temp_v0 * 2) != 0; temp_v0 = temp_v0 + 1) {
     }
     if (param_4 == 0) {
-      FUN_002bd420(param_3,param_1 + *param_2 * 2,temp_v0 << 1);
+      memCopy(param_3,param_1 + *param_2 * 2,temp_v0 << 1);
     }
     *param_2 = *param_2 + temp_v0;
   }

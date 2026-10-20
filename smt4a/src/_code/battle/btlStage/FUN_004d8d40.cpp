@@ -15,7 +15,7 @@ int FUN_004013f0(int);
 int FUN_004d896c(int, unsigned int, unsigned int);
 int FUN_004d8bf8(int);
 
-extern int DAT_0056fcc0; /* 0x56fcc0 */
+extern int g_handleRegistry; /* 0x56fcc0 */
 extern unsigned int g_btlStage; /* 0x57a4f4 */
 extern int g_btlStageModel; /* 0x57a4f8 */
 
@@ -60,7 +60,7 @@ unsigned int FUN_004d8d40(int param_1,int param_2)
     if (temp_v1 == 0) break;
     FUN_00401390(param_1);
     FUN_004013f0(param_1);
-    temp_v0 = FUN_00406798(*(unsigned int *)(DAT_0056fcc0 + 4),"Light_EFT");
+    temp_v0 = FUN_00406798(*(unsigned int *)(g_handleRegistry + 4),"Light_EFT");
     *(unsigned short *)(param_1 + 0xac) = temp_v0;
     FUN_004d8bf8(param_1);
     FUN_004d896c(param_1,*(unsigned int *)(param_1 + 8),*(unsigned int *)(param_1 + 0xc));

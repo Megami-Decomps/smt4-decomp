@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_00263720(u32 value);
+int effTimelineIsDone(u32 value);
 
 typedef struct Obj {
     /* 0x000 */ u8 unk000[0x2B4];
@@ -16,7 +16,7 @@ extern struct {
 
 void FUN_003079a0(void)
 {
-    FUN_00263720(DAT_004474f0.obj->unk2B4);
+    effTimelineIsDone(DAT_004474f0.obj->unk2B4);
 }
 
 } /* extern "C" */

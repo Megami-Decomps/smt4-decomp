@@ -7,11 +7,11 @@ extern "C" {
 int VectorSignedToFloat(int, int);
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_001801a4(void);
+extern int gameGetPlayerData(void);
 extern int FUN_0018416c(unsigned short);
-extern int FUN_001ab854(void);
-extern int FUN_001ab888(void);
-extern int FUN_001b347c(void);
+extern int gameGetSlotRecord(void);
+extern int gameGetSlotTable(void);
+extern int gameSlotTableFindFree(void);
 
 
 void FUN_004a01c8(unsigned int param_1,unsigned int param_2,int param_3)
@@ -38,12 +38,12 @@ void FUN_004a01c8(unsigned int param_1,unsigned int param_2,int param_3)
   }
   temp_v0 = 1 << (param_2 & 0xff);
   if (((((param_1 == 0 || param_1 == 2) || param_1 == 3) &&
-       (temp_v3 = FUN_001801a4(), (*(unsigned short *)(temp_v3 + 0x5e) & 2) == 0)) &&
-      (temp_v3 = FUN_001801a4(), (*(unsigned short *)(temp_v3 + 0x5e) & 0x400) == 0)) &&
-     (temp_v3 = FUN_001801a4(), (*(unsigned short *)(temp_v3 + 0x5e) & temp_v0) != 0)) {
-    temp_v3 = FUN_001801a4();
+       (temp_v3 = gameGetPlayerData(), (*(unsigned short *)(temp_v3 + 0x5e) & 2) == 0)) &&
+      (temp_v3 = gameGetPlayerData(), (*(unsigned short *)(temp_v3 + 0x5e) & 0x400) == 0)) &&
+     (temp_v3 = gameGetPlayerData(), (*(unsigned short *)(temp_v3 + 0x5e) & temp_v0) != 0)) {
+    temp_v3 = gameGetPlayerData();
     temp_v2 = *(short *)(temp_v3 + 0x1c);
-    temp_v4 = FUN_001801a4();
+    temp_v4 = gameGetPlayerData();
     temp_v3 = (temp_v2 * param_3) / 100;
     if (temp_v3 < 1) {
       temp_v3 = 1;
@@ -53,7 +53,7 @@ void FUN_004a01c8(unsigned int param_1,unsigned int param_2,int param_3)
       temp_v3 = 1;
     }
     temp_v2 = (short)temp_v3;
-    temp_v3 = FUN_001801a4();
+    temp_v3 = gameGetPlayerData();
     temp_v8 = *(short *)(temp_v3 + 0x1c);
     if ((temp_v2 <= *(short *)(temp_v3 + 0x1c)) && (temp_v8 = temp_v2, temp_v2 < 1)) {
       temp_v8 = 1;
@@ -65,12 +65,12 @@ void FUN_004a01c8(unsigned int param_1,unsigned int param_2,int param_3)
       return;
     }
     temp_v4 = 3;
-    temp_v3 = FUN_001ab888();
+    temp_v3 = gameGetSlotTable();
     temp_v3 = temp_v3 + 0x1ca0;
   }
   else {
-    temp_v4 = FUN_001b347c();
-    temp_v3 = FUN_001ab888();
+    temp_v4 = gameSlotTableFindFree();
+    temp_v3 = gameGetSlotTable();
     temp_v3 = temp_v3 + 0x1c88;
   }
   if (0 < temp_v4) {
@@ -80,7 +80,7 @@ void FUN_004a01c8(unsigned int param_1,unsigned int param_2,int param_3)
   if (temp_v9 < temp_v4) {
     do {
       if (-1 < *(char *)(temp_v3 + temp_v9)) {
-        temp_v5 = FUN_001ab854();
+        temp_v5 = gameGetSlotRecord();
         temp_v1 = *(unsigned short *)(temp_v5 + 0x60);
         if (((temp_v1 & 2) == 0 && (temp_v1 & 0x400) == 0) && ((temp_v1 & temp_v0) != 0)) {
           if (temp_v5 == 0) {

@@ -2,8 +2,8 @@
 
 extern "C" {
 
-int FUN_00291414(u32 item);
-int FUN_002916ac(void *obj);
+int nodeTreeReleaseItemClearOwner(u32 item);
+int nodeTreeReleaseItem(void *obj);
 
 typedef struct Group {
     /* 0x000 */ u8 unk000[0x24];
@@ -23,7 +23,7 @@ void FUN_001dcf78(Group *group)
 
     if (group != NULL) {
         do {
-            FUN_00291414(group->items[i]);
+            nodeTreeReleaseItemClearOwner(group->items[i]);
             i++;
         } while (i < 0x32);
         group->unk024 = 0;
@@ -33,7 +33,7 @@ void FUN_001dcf78(Group *group)
         if (group->unk228 != NULL) {
             *group->unk228 = 0;
         }
-        FUN_002916ac(group);
+        nodeTreeReleaseItem(group);
     }
 }
 

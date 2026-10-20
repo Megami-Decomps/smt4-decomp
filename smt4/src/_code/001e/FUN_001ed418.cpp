@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00259324(unsigned int, unsigned int, unsigned int);
 
 /* Supplied declaration required: FUN_00259324. */
-extern int FUN_002893d8(void);
+extern int scrGetCommandFrame(void);
 extern int FUN_002c1d5c(void);
 
 
@@ -23,11 +23,11 @@ unsigned int FUN_001ed418(void)
   if (temp_v0 != 0) {
     return 1;
   }
-  temp_v0 = FUN_002893d8();
+  temp_v0 = scrGetCommandFrame();
   if (temp_v0 != 0) {
-    temp_v0 = FUN_002893d8();
+    temp_v0 = scrGetCommandFrame();
     if (temp_v0 != 9) {
-      temp_v0 = FUN_002893d8();
+      temp_v0 = scrGetCommandFrame();
       if (temp_v0 != 0x15) {
         return 0;
       }

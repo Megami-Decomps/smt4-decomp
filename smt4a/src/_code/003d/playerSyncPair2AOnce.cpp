@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern PlayerData *FUN_001801a4(void);
+extern PlayerData *gameGetPlayerData(void);
 
 void playerSyncPair2AOnce(void)
 {
-    PlayerData *player = FUN_001801a4();
+    PlayerData *player = gameGetPlayerData();
 
     player->unk2A = player->unk1C;
     player->unk2C = player->unk1E;

@@ -10,7 +10,7 @@ int FUN_00275bc8(void);
 int FUN_002cc92c(void);
 int FUN_003cdb28(void);
 int FUN_003ce360(void);
-int FUN_003f86f8(int);
+int loadSlotEnsureLoaded(int);
 int FUN_00470e64(unsigned int);
 int FUN_0047ec9c(void);
 int callJyoucyuGetTableEntry1B(void);
@@ -38,7 +38,7 @@ extern char *DAT_0057396c; /* 0x57396c */
 /* Supplied declaration required: FUN_002cc92c. */
 /* Supplied declaration required: FUN_003cdb28. */
 /* Supplied declaration required: FUN_003ce360. */
-/* Supplied declaration required: FUN_003f86f8. */
+/* Supplied declaration required: loadSlotEnsureLoaded. */
 /* Supplied declaration required: FUN_00470e64. */
 /* Supplied declaration required: FUN_0047ec9c. */
 /* Supplied declaration required: callJyoucyuGetTableEntry1B. */
@@ -62,12 +62,12 @@ void FUN_003f0794(int param_1)
     switch(temp_v1) {
     case 0:
       callJyoucyuGetTableEntry1B();
-      FUN_003f86f8(7);
-      FUN_003f86f8(0x3e);
-      FUN_003f86f8(0x3b);
-      FUN_003f86f8(0x16);
-      FUN_003f86f8(0x13);
-      FUN_003f86f8(0x48);
+      loadSlotEnsureLoaded(7);
+      loadSlotEnsureLoaded(0x3e);
+      loadSlotEnsureLoaded(0x3b);
+      loadSlotEnsureLoaded(0x16);
+      loadSlotEnsureLoaded(0x13);
+      loadSlotEnsureLoaded(0x48);
       FUN_00470e64(g_aocSystem);
       pcVar3 = "battle/Legion/LegionMsg.mbm";
       FUN_0020214c();

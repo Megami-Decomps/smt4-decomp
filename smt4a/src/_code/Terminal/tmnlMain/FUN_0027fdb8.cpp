@@ -9,7 +9,7 @@ int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
 int FUN_0019ea64(...);
 int FUN_0022677c(...);
-int FUN_003fd63c(...);
+int gameFlagSetValue(...);
 int FUN_00408184(...);
 int FUN_0040a470(...);
 
@@ -34,10 +34,10 @@ extern unsigned int *g_tmnl; /* 0x56fd30 */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0019ea64. */
 /* Supplied declaration required: FUN_0022677c. */
-/* Supplied declaration required: FUN_003fd63c. */
+/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_00408184. */
 /* Supplied declaration required: FUN_0040a470. */
 
@@ -53,7 +53,7 @@ void FUN_0027fdb8(unsigned int *param_1)
   puVar1 = (unsigned int *)0x100;
   asdMemoryAllocTracked(0x100,0x100,0,0x604,1);
   g_tmnl = puVar1;
-  FUN_003fd63c(0x465,0,1);
+  gameFlagSetValue(0x465,0,1);
   *(unsigned char *)((int)puVar1 + 5) = 1;
   puVar1[4] = 0;
   puVar1[5] = 0;
@@ -86,7 +86,7 @@ void FUN_0027fdb8(unsigned int *param_1)
   if (param_1 != (unsigned int *)0x0) {
     *(char *)((int)puVar1 + 9) = (char)*param_1;
     *(unsigned char *)((int)puVar1 + 5) = 0;
-    temp_v0 = FUN_0018719c(0x304);
+    temp_v0 = gameFlagIsSet(0x304);
     if (temp_v0 == 0) {
       FUN_0040a470(*(unsigned char *)((int)puVar1 + 9),1);
       FUN_00408184(0x1c,1);

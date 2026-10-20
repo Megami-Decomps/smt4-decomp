@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_00303608(unsigned int, unsigned int *);
+int streamReadU64(unsigned int, unsigned int *);
 
-/* Supplied declaration required: FUN_00303608. */
+/* Supplied declaration required: streamReadU64. */
 extern unsigned int *FUN_00304d10(unsigned int, unsigned int);
 
 
@@ -26,7 +26,7 @@ void FUN_001189d0(unsigned int param_1,unsigned int param_2,unsigned int param_3
   if (puVar1 != (unsigned int *)0x0) {
     puVar2 = puVar1;
   }
-  FUN_00303608(param_1,puVar2);
+  streamReadU64(param_1,puVar2);
   return;
 }
 

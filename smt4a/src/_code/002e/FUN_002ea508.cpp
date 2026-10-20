@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6dd4(unsigned int *, int, int, int, unsigned int, unsigned int);
+int rt_memclr(unsigned int *, int, int, int, unsigned int, unsigned int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -12,7 +12,7 @@ typedef struct {
 } param_2_stack;
 
 extern int jobGetWork(void);
-/* Supplied declaration required: FUN_002e6dd4. */
+/* Supplied declaration required: rt_memclr. */
 
 
 unsigned int * FUN_002ea508(unsigned int param_1,unsigned int *param_2)
@@ -54,7 +54,7 @@ unsigned int * FUN_002ea508(unsigned int param_1,unsigned int *param_2)
     param_2 = (unsigned int *)((int)param_2 + 1);
     temp_v1 = temp_v0;
   } while ((char)temp_v2 != '\0');
-  FUN_002e6dd4(puVar4,temp_v0,temp_v0,0,unaff_r4,in_lr);
+  rt_memclr(puVar4,temp_v0,temp_v0,0,unaff_r4,in_lr);
   return puVar2;
 }
 

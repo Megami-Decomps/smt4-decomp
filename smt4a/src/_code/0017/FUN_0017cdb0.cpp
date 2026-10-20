@@ -3,11 +3,11 @@
 
 extern "C" {
 
-void FUN_0017cdb4(void);
+void nngxGetError(void);
 
 void FUN_0017cdb0(void)
 {
-    FUN_0017cdb4();
+    nngxGetError();
 }
 
 }

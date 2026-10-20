@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_0010d300(void);
 int FUN_00120d60(void);
-int FUN_002e75fa(void);
-int FUN_002ea4bc(void);
+int sharedRefAddRef(void);
+int onlineInstantiationContextGetCurrent(void);
 int lockedLeave(unsigned char *);
 int lockedEnter(unsigned char *);
 
@@ -15,9 +15,9 @@ extern unsigned char DAT_0062e6a0; /* 0x62e6a0 */
 
 /* Supplied declaration required: FUN_0010d300. */
 /* Supplied declaration required: FUN_00120d60. */
-/* Supplied declaration required: FUN_002e75fa. */
-extern int FUN_002e760a(unsigned int);
-/* Supplied declaration required: FUN_002ea4bc. */
+/* Supplied declaration required: sharedRefAddRef. */
+extern int operatorNew(unsigned int);
+/* Supplied declaration required: onlineInstantiationContextGetCurrent. */
 /* Supplied declaration required: lockedLeave. */
 /* Supplied declaration required: lockedEnter. */
 
@@ -30,13 +30,13 @@ void FUN_002ecef0(void)
   
   lockedEnter(&DAT_0062e6a0);
   FUN_0010d300();
-  temp_v0 = FUN_002ea4bc();
+  temp_v0 = onlineInstantiationContextGetCurrent();
   if (temp_v0 != 0) {
-    FUN_002ea4bc();
-    FUN_002e75fa();
+    onlineInstantiationContextGetCurrent();
+    sharedRefAddRef();
   }
   else {
-    temp_v0 = FUN_002e760a(0x80);
+    temp_v0 = operatorNew(0x80);
     if (temp_v0 != 0) {
       FUN_00120d60();
     }

@@ -37,13 +37,13 @@ extern unsigned char LAB_0046a77c; /* 0x46a77c */
 extern unsigned char LAB_0046a7a0; /* 0x46a7a0 */
 extern unsigned char LAB_0046a818; /* 0x46a818 */
 extern unsigned char LAB_0046a840; /* 0x46a840 */
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 
 /* Supplied declaration required: FUN_00100388. */
 extern int FUN_0015a21c(int);
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_00178b04. */
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0022677c. */
 /* Supplied declaration required: FUN_002804b0. */
 /* Supplied declaration required: sysMemClear. */
@@ -143,7 +143,7 @@ LAB_0046a3b0:
       temp_v1 = *(int *)(*piVar6 + 4);
       FUN_003fe86c(temp_v1,0);
       *(int *)(temp_v1 + 0x1fc) = (int)temp_v5;
-      FUN_0040ace8(DAT_0056fcc0,temp_v1);
+      FUN_0040ace8(g_handleRegistry,temp_v1);
       FUN_00100388(temp_v8,&LAB_0046a74c,
                    *(unsigned int *)(temp_v7 + (unsigned int)*(unsigned char *)(param_1 + 0x18) * 4),temp_v4 + 1);
       temp_v1 = 0x20;
@@ -156,7 +156,7 @@ LAB_0046a3b0:
       FUN_0040aa6c();
       FUN_0040aad4(*(int *)(temp_v0 + 0xa34),0);
       temp_v1 = *(int *)(*(int *)(temp_v0 + 0xa34) + 4);
-      FUN_0040ace8(DAT_0056fcc0,temp_v1);
+      FUN_0040ace8(g_handleRegistry,temp_v1);
       FUN_003fe86c(temp_v1,0,1);
       temp_v4 = temp_v4 + 1;
       *(unsigned int *)(temp_v1 + 4) = *(unsigned int *)(temp_v1 + 4) | 1;
@@ -178,12 +178,12 @@ LAB_0046a3b0:
     FUN_0040aad4(*piVar6,0);
     FUN_0045b538(*(int *)(*piVar6 + 0xc) + 0xc);
     temp_v2 = *(unsigned int *)(*piVar6 + 4);
-    FUN_0040ace8(DAT_0056fcc0,temp_v2);
+    FUN_0040ace8(g_handleRegistry,temp_v2);
     FUN_003fe86c(temp_v2,0,1);
     FUN_00100388(temp_v8,&LAB_0046a774,
                  *(unsigned int *)(temp_v7 + (unsigned int)*(unsigned char *)(param_1 + 0x18) * 4));
-    temp_v2 = DAT_0056fcc0;
-    FUN_0040b0f8(DAT_0056fcc0,temp_v8);
+    temp_v2 = g_handleRegistry;
+    FUN_0040b0f8(g_handleRegistry,temp_v8);
     temp_v4 = FUN_0040af60(temp_v2);
     if (temp_v4 != 0) {
       FUN_0040ae70(temp_v2,1);
@@ -208,7 +208,7 @@ LAB_0046a3b0:
   }
   else {
     FUN_00100388(temp_v7 + 0x10,&LAB_0046a77c);
-    temp_v4 = FUN_0018719c(0x103);
+    temp_v4 = gameFlagIsSet(0x103);
     if (temp_v4 != 0) {
       FUN_00100388(temp_v6,&LAB_0046a818,(int)*(char *)(param_1 + 0x10));
     }

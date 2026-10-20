@@ -8,7 +8,7 @@ int FUN_002b6b8c(...);
 int FUN_002b6c34(...);
 int FUN_002b6db0(...);
 int FUN_002b6dd8(...);
-int FUN_002b90f8(int, unsigned char [84]);
+int cameraSetViewMatrix(int, unsigned char [84]);
 int FUN_002ba12c(int);
 int FUN_002be370(...);
 int FUN_002be5a4(...);
@@ -43,7 +43,7 @@ typedef struct {
     unsigned int spB8; /* 0xb8: local_b8 */
 } void_stack;
 
-extern int DAT_0043e0f8; /* 0x43e0f8 */
+extern int g_comWin; /* 0x43e0f8 */
 extern int g_titleScene; /* 0x44ea00 */
 extern unsigned int DAT_00476638; /* 0x476638 */
 extern unsigned int DAT_004efd9c; /* 0x4efd9c */
@@ -68,7 +68,7 @@ extern unsigned int DAT_004efdd8; /* 0x4efdd8 */
 /* Supplied declaration required: FUN_002b6c34. */
 /* Supplied declaration required: FUN_002b6db0. */
 /* Supplied declaration required: FUN_002b6dd8. */
-/* Supplied declaration required: FUN_002b90f8. */
+/* Supplied declaration required: cameraSetViewMatrix. */
 /* Supplied declaration required: FUN_002ba12c. */
 /* Supplied declaration required: FUN_002be370. */
 /* Supplied declaration required: FUN_002be5a4. */
@@ -119,8 +119,8 @@ unsigned int FUN_0011a434(void)
   unsigned int uStack_74;
   unsigned char temp_v24 [84];
   
-  temp_v0 = DAT_0043e0f8;
-  if (*(int *)(DAT_0043e0f8 + 8) != 0) {
+  temp_v0 = g_comWin;
+  if (*(int *)(g_comWin + 8) != 0) {
     FUN_002c39a4(g_titleScene);
     temp_v2 = g_titleScene;
     temp_v1 = FUN_002c5d80(1,0);
@@ -241,7 +241,7 @@ unsigned int FUN_0011a434(void)
     temp_v22 = 0;
     temp_v20 = temp_v6;
     nn_math_ARMv6_MTX44MultAsm(temp_v24,temp_v24,&temp_v9);
-    FUN_002b90f8(g_titleScene,temp_v24);
+    cameraSetViewMatrix(g_titleScene,temp_v24);
     if (*(int *)(temp_v0 + 8) == 2) {
       FUN_002bf538();
     }

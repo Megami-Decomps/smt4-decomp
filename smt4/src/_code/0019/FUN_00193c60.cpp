@@ -4,7 +4,7 @@ extern "C" {
 
 s32 FUN_00193c60(void)
 {
-    return DAT_0043e310.unk02;
+    return g_saveLoadThread.unk02;
 }
 
 } /* extern "C" */

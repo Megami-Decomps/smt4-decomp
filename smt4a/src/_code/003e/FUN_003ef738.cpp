@@ -5,14 +5,14 @@
 extern "C" {
 
 int FUN_00184310(void);
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 
 extern unsigned int g_btlScriptUnit; /* 0x57113c */
-extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
+extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
 /* Supplied declaration required: FUN_00184310. */
 extern int FUN_0019acdc(unsigned short, unsigned int);
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: dataTable04FindById. */
 extern int FUN_004aba3c(unsigned int);
 extern int btlUnitGet(unsigned int);
 
@@ -70,9 +70,9 @@ void FUN_003ef738(void)
       }
     }
   }
-  temp_v1 = FUN_004aba3c(DAT_0057a9c8);
+  temp_v1 = FUN_004aba3c(g_btlUiBlock);
   if (temp_v1 != -1) {
-    temp_v1 = FUN_004aba3c(DAT_0057a9c8);
+    temp_v1 = FUN_004aba3c(g_btlUiBlock);
   }
   else {
     temp_v1 = btlUnitGet(g_btlScriptUnit);
@@ -81,7 +81,7 @@ void FUN_003ef738(void)
     }
     temp_v1 = (int)*(short *)(*(int *)(temp_v1 + 0x28) + 0x1c0);
   }
-  FUN_001aba54();
+  dataTable04FindById();
   if (temp_v1 != 0) {
     temp_v2 = btlUnitGet(g_btlScriptUnit);
     temp_v3 = temp_v2 != 0;

@@ -9,15 +9,15 @@ typedef struct Record {
     /* 0xFAF */ u8 unkFAF[0x4DD];
     /* 0x148C */ u8 flag;
 } Record;
-extern Record *DAT_0057f65c;
+extern Record *g_frameTex;
 
 /* Sets the flag at 0x148C and clears the bytes at 0xFAE and 0xFAD of the record at 0x57F65C. */
 void FUN_002c2610(void)
 {
     Record *record;
 
-    record = DAT_0057f65c;
-    DAT_0057f65c->flag = 1;
+    record = g_frameTex;
+    g_frameTex->flag = 1;
     record->unkFAE = 0;
     record->unkFAD = 0;
 }

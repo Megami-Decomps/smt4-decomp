@@ -6,12 +6,12 @@ typedef struct Record {
     /* 0x00 */ u8 unk00[0x25];
     /* 0x25 */ u8 value;
 } Record;
-extern Record *DAT_0057f65c;
+extern Record *g_frameTex;
 
 /* Stores `value` in the byte at 0x25 of the record at 0x57F65C. */
 void FUN_002c2344(u8 value)
 {
-    DAT_0057f65c->value = value;
+    g_frameTex->value = value;
 }
 
 } /* extern "C" */

@@ -9,13 +9,13 @@ typedef struct Global {
     /* 0x90A4 */ u32 value;
 } Global;
 
-extern Global *DAT_0057f290;
+extern Global *g_unite;
 
 extern u32 FUN_004dad8c(u32 key);
 
 void FUN_0031fad8(void)
 {
-    Global *global = DAT_0057f290;
+    Global *global = g_unite;
 
     if (global != NULL) {
         global->value = FUN_004dad8c(global->key);

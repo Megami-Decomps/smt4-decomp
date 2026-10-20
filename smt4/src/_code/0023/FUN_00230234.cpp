@@ -34,7 +34,7 @@ extern int asdMdlManagerCreateSecondList(char *, unsigned int);
 /* Supplied declaration required: FUN_0029a0e8. */
 /* Supplied declaration required: FUN_0029a128. */
 /* Supplied declaration required: FUN_0029c4c8. */
-extern unsigned int FUN_002b63ac(void);
+extern unsigned int gameGetPlayerData(void);
 
 
 void FUN_00230234(fn_00230234_arg0 *param_1)
@@ -53,7 +53,7 @@ void FUN_00230234(fn_00230234_arg0 *param_1)
   }
   FUN_0029a128(temp_v0);
   FUN_00292ca0(0);
-  temp_v0 = FUN_002b63ac();
+  temp_v0 = gameGetPlayerData();
   FUN_0029c4c8(1);
   FUN_0029a0e8(temp_v0);
   FUN_0029a0cc(temp_v0);

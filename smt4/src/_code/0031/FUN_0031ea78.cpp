@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0025011c(void);
+int asdMemoryFreeLocked(void);
 int effMenuNodeCreate(void);
-int FUN_002bf694(unsigned char *);
+int libc_strcpy(unsigned char *);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -20,10 +20,10 @@ extern unsigned int *DAT_0044eac4; /* 0x44eac4 */
 extern int DAT_0044f864; /* 0x44f864 */
 
 extern int FUN_002468e0(unsigned int, int);
-/* Supplied declaration required: FUN_0025011c. */
+/* Supplied declaration required: asdMemoryFreeLocked. */
 /* Supplied declaration required: effMenuNodeCreate. */
-/* Supplied declaration required: FUN_002bf694. */
-extern unsigned int FUN_002c30c4(int);
+/* Supplied declaration required: libc_strcpy. */
+extern unsigned int libc_strlen(int);
 
 
 void FUN_0031ea78(void)
@@ -35,7 +35,7 @@ void FUN_0031ea78(void)
   int temp_v1;
   
   if (DAT_0044eac4 != (unsigned int *)0x0) {
-    FUN_0025011c();
+    asdMemoryFreeLocked();
   }
   puVar2 = (unsigned int *)&LAB_0031eadc;
   effMenuNodeCreate();
@@ -45,8 +45,8 @@ void FUN_0031ea78(void)
   DAT_0044eac4[5] = 9;
   temp_v1 = FUN_002468e0(DAT_0044ea94,DAT_0044ea8c + DAT_0044f864);
   puVar2 = DAT_0044eac4;
-  FUN_002bf694((unsigned char *)((int)DAT_0044eac4 + 0x21));
-  temp_v0 = FUN_002c30c4(temp_v1 + 0x9c);
+  libc_strcpy((unsigned char *)((int)DAT_0044eac4 + 0x21));
+  temp_v0 = libc_strlen(temp_v1 + 0x9c);
   puVar2[4] = temp_v0;
   return;
 }

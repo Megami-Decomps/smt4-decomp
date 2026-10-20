@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00263588(unsigned int);
+int gfxObjectDestroy(unsigned int);
 int FUN_00276a3c(void);
 int FUN_0029c2cc(unsigned int, int);
 int FUN_002adf00(int *, unsigned int);
@@ -20,7 +20,7 @@ typedef struct {
 
 extern unsigned char DAT_004474f0; /* 0x4474f0 */
 
-/* Supplied declaration required: FUN_00263588. */
+/* Supplied declaration required: gfxObjectDestroy. */
 /* Supplied declaration required: FUN_00276a3c. */
 /* Supplied declaration required: FUN_0029c2cc. */
 /* Supplied declaration required: FUN_002adf00. */
@@ -55,7 +55,7 @@ void FUN_002df4f8(void)
   *(unsigned int *)(temp_v0 + 0x5c) = temp_v5;
   *(unsigned int *)(temp_v0 + 0x60) = uStack_3c;
   FUN_0029c2cc(*(unsigned int *)(temp_v0 + 0x2b4),0);
-  FUN_00263588(*(unsigned int *)((*(int *)((unsigned char *)&DAT_004474f0 + 0x4)) + 0x2b4));
+  gfxObjectDestroy(*(unsigned int *)((*(int *)((unsigned char *)&DAT_004474f0 + 0x4)) + 0x2b4));
   temp_v0 = (*(int *)((unsigned char *)&DAT_004474f0 + 0x4));
   *(unsigned int *)((*(int *)((unsigned char *)&DAT_004474f0 + 0x4)) + 0x2b4) = 0;
   *(unsigned char *)(temp_v0 + 0x2b0) = 0;

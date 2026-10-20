@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00203d04(int);
+int dialogClose(int);
 int FUN_004c8894(unsigned int, int);
 int FUN_004c8b10(void);
 
@@ -12,9 +12,9 @@ extern unsigned int DAT_00570de8; /* 0x570de8 */
 extern unsigned int DAT_00570dec; /* 0x570dec */
 
 extern int btlGetMainState(void);
-/* Supplied declaration required: FUN_00203d04. */
-extern unsigned int FUN_002360dc(unsigned int);
-extern int FUN_002619e0(void);
+/* Supplied declaration required: dialogClose. */
+extern unsigned int scrGetArgString(unsigned int);
+extern int dialogIsActive(void);
 /* Supplied declaration required: FUN_004c8894. */
 /* Supplied declaration required: FUN_004c8b10. */
 
@@ -32,11 +32,11 @@ unsigned int FUN_00335840(void)
   *(unsigned int *)(temp_v0 + 0x45a0) = DAT_00570de8 | *(unsigned int *)(temp_v0 + 0x45a0);
   *(unsigned int *)(temp_v0 + 0x45a4) = temp_v2;
   FUN_004c8b10();
-  temp_v0 = FUN_002619e0();
+  temp_v0 = dialogIsActive();
   if (temp_v0 != 0) {
-    FUN_00203d04(1);
+    dialogClose(1);
   }
-  temp_v1 = FUN_002360dc(0);
+  temp_v1 = scrGetArgString(0);
   FUN_004c8894(temp_v1,1);
   return 1;
 }

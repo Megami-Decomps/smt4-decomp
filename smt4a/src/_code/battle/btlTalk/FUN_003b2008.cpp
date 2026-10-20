@@ -4,16 +4,16 @@
 
 extern "C" {
 
-int FUN_001b4a90(...);
+int __aeabi_memset4(...);
 int scrSetResult(void);
 
 extern int g_btlTalk; /* 0x57a7b8 */
 
-extern int FUN_0014bef4(unsigned int);
-extern int FUN_0018719c(void);
+extern int randRange(unsigned int);
+extern int gameFlagIsSet(void);
 extern int dataTableGetCount(void);
 extern int dataTableGetEntries(unsigned int);
-/* Supplied declaration required: FUN_001b4a90. */
+/* Supplied declaration required: __aeabi_memset4. */
 extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: scrSetResult. */
 extern unsigned int ptrAt8Reset(int);
@@ -42,7 +42,7 @@ unsigned int FUN_003b2008(void)
   temp_v1 = ptrAt8Reset(g_btlTalk);
   temp_v2 = dataTableGetCount();
   temp_v3 = dataTableGetEntries(temp_v1);
-  FUN_001b4a90(aiStack_428,0x200,0xffffffff);
+  __aeabi_memset4(aiStack_428,0x200,0xffffffff);
   temp_v7 = 0;
   temp_v5 = 0;
   if (temp_v7 < temp_v2) {
@@ -56,7 +56,7 @@ unsigned int FUN_003b2008(void)
           temp_v4 = 0;
         }
         if ((temp_v0 == temp_v4) &&
-           ((*(short *)(temp_v6 + 0xee) == 0 || (temp_v6 = FUN_0018719c(), temp_v6 != 0)))) {
+           ((*(short *)(temp_v6 + 0xee) == 0 || (temp_v6 = gameFlagIsSet(), temp_v6 != 0)))) {
           aiStack_428[temp_v5] = temp_v7;
           temp_v8 = temp_v5 + 1;
           if (temp_v9) {
@@ -70,7 +70,7 @@ unsigned int FUN_003b2008(void)
     } while (temp_v7 < temp_v2);
   }
   temp_v2 = 0;
-  FUN_001b4a90(aiStack_228,0x200,0xffffffff);
+  __aeabi_memset4(aiStack_228,0x200,0xffffffff);
   temp_v5 = 0x80;
   do {
     temp_v3 = *piVar10;
@@ -84,7 +84,7 @@ unsigned int FUN_003b2008(void)
   if (temp_v2 == 0) {
     temp_v2 = 1;
   }
-  temp_v5 = FUN_0014bef4((temp_v2 - 1U) & 0xffff);
+  temp_v5 = randRange((temp_v2 - 1U) & 0xffff);
   *(unsigned int *)(g_btlTalk + aiStack_228[temp_v5] * 4 + 0x34) = 0xffffffff;
   scrSetResult();
   return 1;

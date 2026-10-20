@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_00360110(int sdkVoice, u32 priority);
+int nn_snd_CTR_Voice_SetPriority(int sdkVoice, u32 priority);
 
 typedef struct Voice {
     /* 0x00 */ int sdkVoices[2];
@@ -27,7 +27,7 @@ void nw_snd_internal_driver_Voice_UpdateVoicesPriority(Voice *voice)
         do {
             sdkVoice = voice->sdkVoices[i];
             if (sdkVoice != 0) {
-                FUN_00360110(sdkVoice, voice->priority);
+                nn_snd_CTR_Voice_SetPriority(sdkVoice, voice->priority);
             }
             i = i + 1;
         } while (i < voice->count);

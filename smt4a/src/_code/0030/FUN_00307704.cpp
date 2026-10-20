@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00307ea0(int *, unsigned int, unsigned int);
+int bitIteratorDistance(int *, unsigned int, unsigned int);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_00307ea0. */
+/* Supplied declaration required: bitIteratorDistance. */
 
 
 void FUN_00307704(unsigned int *param_1)
@@ -24,7 +24,7 @@ void FUN_00307704(unsigned int *param_1)
   
   temp_v1 = param_1[3];
   temp_v0 = param_1[2];
-  FUN_00307ea0(&temp_v0,*param_1,param_1[1]);
+  bitIteratorDistance(&temp_v0,*param_1,param_1[1]);
   return;
 }
 

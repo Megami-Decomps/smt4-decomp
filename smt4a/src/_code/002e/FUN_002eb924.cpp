@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002eb588(int *);
+int onlineTimeGetNow(int *);
 int wordMoveOut_002edb7c(int *, int *, int);
 int FUN_002edb8c(unsigned char [8], int, int *);
-int FUN_002ede22(int *);
+int mapIteratorNext(int *);
 
 /* stack frame of param_1: 6 slot(s), 24 byte(s) */
 typedef struct {
@@ -20,11 +20,11 @@ typedef struct {
 } param_1_stack;
 
 extern int FUN_001239b2(int, unsigned int);
-/* Supplied declaration required: FUN_002eb588. */
+/* Supplied declaration required: onlineTimeGetNow. */
 /* Supplied declaration required: wordMoveOut_002edb7c. */
 /* Supplied declaration required: FUN_002edb8c. */
 extern int wordRefsDiffer_002ede12(int *, unsigned int *);
-/* Supplied declaration required: FUN_002ede22. */
+/* Supplied declaration required: mapIteratorNext. */
 
 
 void FUN_002eb924(int param_1)
@@ -41,7 +41,7 @@ void FUN_002eb924(int param_1)
   int temp_v7;
   unsigned char temp_v8 [8];
   
-  FUN_002eb588(&temp_v4);
+  onlineTimeGetNow(&temp_v4);
   temp_v1 = temp_v4 - *(int *)(param_1 + 0x28);
   if (temp_v1 >= 1000) {
     *(unsigned int *)(param_1 + 0x2c) = temp_v5;
@@ -58,7 +58,7 @@ void FUN_002eb924(int param_1)
         FUN_002edb8c(temp_v8,param_1 + 4,&temp_v7);
       }
       else {
-        FUN_002ede22(&temp_v2);
+        mapIteratorNext(&temp_v2);
       }
     }
   }

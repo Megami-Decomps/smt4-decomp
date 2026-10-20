@@ -7,10 +7,10 @@ extern "C" {
 int FUN_00282bfc(...);
 int FUN_00289880(...);
 int FUN_002898e4(...);
-int FUN_0028d6d0(...);
-int FUN_00296f4c(...);
+int buttonHelpCreate(...);
+int scrScriptProcessStartEntry(...);
 int FUN_00297060(...);
-int FUN_002b8838(...);
+int buttonHelpSetPreset(...);
 int asdMemoryAlloc(...);
 int asdProcessCreateSimple(...);
 
@@ -29,10 +29,10 @@ extern unsigned int *g_onesRoom; /* 0x44d1c8 */
 /* Supplied declaration required: FUN_00282bfc. */
 /* Supplied declaration required: FUN_00289880. */
 /* Supplied declaration required: FUN_002898e4. */
-/* Supplied declaration required: FUN_0028d6d0. */
-/* Supplied declaration required: FUN_00296f4c. */
+/* Supplied declaration required: buttonHelpCreate. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297060. */
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: asdProcessCreateSimple. */
 extern unsigned int FUN_002c5c04(unsigned char *);
@@ -59,9 +59,9 @@ void FUN_001d39f8(int param_1)
     *(unsigned char *)(puVar1 + 4) = 1;
   }
   FUN_002898e4();
-  FUN_0028d6d0();
+  buttonHelpCreate();
   FUN_00289880();
-  FUN_002b8838(0xa2);
+  buttonHelpSetPreset(0xa2);
   temp_v0 = FUN_002c5c04(&LAB_001d3b3c);
   puVar1[1] = temp_v0;
   temp_v0 = FUN_002c5c04(&LAB_001d3b54);
@@ -70,7 +70,7 @@ void FUN_001d39f8(int param_1)
   FUN_00297060(temp_v1,temp_v0);
   puVar1[2] = temp_v1;
   *(unsigned int *)(temp_v1 + 0x108) = 2;
-  FUN_00296f4c(puVar1[2],0);
+  scrScriptProcessStartEntry(puVar1[2],0);
   *(unsigned char *)((int)puVar1 + 0x11) = 0;
   if (*(char *)(puVar1 + 4) != '\0') {
     FUN_00282bfc(0,0xff);

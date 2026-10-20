@@ -16,7 +16,7 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_00139750. */
-extern unsigned int FUN_002ad264(void);
+extern unsigned int nn_gxlow_CTR_GetGpu(void);
 /* Supplied declaration required: FUN_002c40f8. */
 /* Supplied declaration required: FUN_002c526c. */
 extern void nn_gxlow_CTR_CmdReqQueueTx_Finalize(unsigned int);
@@ -53,7 +53,7 @@ void nn_gxlow_CTR_InterruptReceiver_Finalize(int param_1)
     *(unsigned int *)(param_1 + 0x6c) = 0;
   }
   nn_os_CriticalSection_Enter(param_1);
-  temp_v0 = FUN_002ad264();
+  temp_v0 = nn_gxlow_CTR_GetGpu();
   nn_gxlow_CTR_Gpu_UnregisterInterruptRelayQueue(temp_v0);
   nn_gxlow_CTR_CmdReqQueueTx_Finalize(param_1 + 0x58);
   *(unsigned int *)(param_1 + 0x30) = 0;

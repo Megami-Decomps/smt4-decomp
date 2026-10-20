@@ -4,11 +4,11 @@
 
 extern "C" {
 
-extern int FUN_0018719c(void);
+extern int gameFlagIsSet(void);
 extern int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
-extern unsigned int FUN_001a6f60(unsigned int, unsigned int);
-extern int FUN_00261458(void);
+extern unsigned int dataTableFileGetTable(unsigned int, unsigned int);
+extern int gameDataBlocksGetTable(void);
 
 
 char * FUN_002f72dc(int param_1)
@@ -22,21 +22,21 @@ char * FUN_002f72dc(int param_1)
   int temp_v5;
   unsigned int temp_v6;
   
-  temp_v0 = FUN_001a6f60(*(unsigned int *)(param_1 + 0x20cc),0);
+  temp_v0 = dataTableFileGetTable(*(unsigned int *)(param_1 + 0x20cc),0);
   temp_v1 = dataTableGetEntries();
   temp_v2 = dataTableGetCount(temp_v0);
   temp_v3 = *(int *)(param_1 + 0x20a8);
   if (-1 < temp_v3) {
     return (char *)(temp_v1 + temp_v3 * 0x18);
   }
-  temp_v4 = FUN_00261458();
+  temp_v4 = gameDataBlocksGetTable();
   temp_v3 = 0;
   temp_v6 = *(unsigned short *)(temp_v4 + 0x66) + 1;
   if (0 < temp_v2) {
     do {
       temp_v4 = temp_v1 + temp_v3 * 0x18;
-      if ((((*(short *)(temp_v4 + 0x10) == 0) || (temp_v5 = FUN_0018719c(), temp_v5 != 0)) &&
-          ((*(short *)(temp_v4 + 0x12) == 0 || (temp_v5 = FUN_0018719c(), temp_v5 == 0)))) &&
+      if ((((*(short *)(temp_v4 + 0x10) == 0) || (temp_v5 = gameFlagIsSet(), temp_v5 != 0)) &&
+          ((*(short *)(temp_v4 + 0x12) == 0 || (temp_v5 = gameFlagIsSet(), temp_v5 == 0)))) &&
          ((*(unsigned short *)(temp_v4 + 0x14) == 0 || *(unsigned short *)(temp_v4 + 0x14) <= temp_v6 &&
           (*(unsigned short *)(temp_v4 + 0x16) == 0 || temp_v6 <= *(unsigned short *)(temp_v4 + 0x16))))) {
         *(int *)(param_1 + 0x20a8) = temp_v3;

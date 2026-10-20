@@ -87,7 +87,7 @@ extern int jobGetWork(void);
 /* Supplied declaration required: FUN_00168e00. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c560. */
-extern int FUN_0018206c(unsigned int, unsigned int);
+extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001834e4. */
 /* Supplied declaration required: FUN_001835b4. */
@@ -152,7 +152,7 @@ void FUN_002609d8(fn_002609d8_arg0 *param_1,int param_2,int param_3)
   
   temp_v2 = jobGetWork();
   if (((*(int *)(temp_v2 + 0x40) != 1) ||
-      (temp_v3 = FUN_0018206c(1,*(unsigned int *)(temp_v2 + 0x44)), temp_v3 != 0)) &&
+      (temp_v3 = asdTMTexTableNodeIsLoaded(1,*(unsigned int *)(temp_v2 + 0x44)), temp_v3 != 0)) &&
      (*(int *)(temp_v2 + 0xc) == 0)) {
     temp_v15 = 0.0f;
     temp_v6 = (in_fpscr & 0xfffffff) | ((unsigned int)(*(float *)(temp_v2 + 0x24) == 0.0f) << 0x1e);

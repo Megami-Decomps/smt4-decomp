@@ -8,7 +8,7 @@ int FUN_002e6e34(unsigned char [12], int);
 int FUN_002e6e5c(unsigned char [12], int *);
 int FUN_002e7908(int *, unsigned int *);
 int FUN_002fc056(unsigned int, unsigned int);
-int FUN_002fc088(unsigned int, int);
+int ringBufferConsume(unsigned int, int);
 
 /* stack frame of param_4: 5 slot(s), 20 byte(s) */
 typedef struct {
@@ -24,7 +24,7 @@ typedef struct {
 /* Supplied declaration required: FUN_002e7908. */
 extern int *wordRefMin(unsigned int *, unsigned char *);
 /* Supplied declaration required: FUN_002fc056. */
-/* Supplied declaration required: FUN_002fc088. */
+/* Supplied declaration required: ringBufferConsume. */
 
 
 void FUN_00111168(int *param_1,int param_2,unsigned int param_3,int *param_4)
@@ -68,7 +68,7 @@ void FUN_00111168(int *param_1,int param_2,unsigned int param_3,int *param_4)
     *param_4 = temp_v1;
     if (temp_v1 != 0) {
       FUN_002fc056(*(unsigned int *)(param_2 + 0x109c),temp_v8);
-      FUN_002fc088(*(unsigned int *)(param_2 + 0x109c),*param_4);
+      ringBufferConsume(*(unsigned int *)(param_2 + 0x109c),*param_4);
       puVar2 = temp_v6;
       temp_v6[0] = 0x10001;
     }

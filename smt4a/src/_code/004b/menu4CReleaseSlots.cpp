@@ -2,17 +2,17 @@
 
 extern "C" {
 
-extern u8 FUN_0018206c(u32 group, s32 index);
-extern void FUN_0019a7f4(s32 a, s32 b);
+extern u8 asdTMTexTableNodeIsLoaded(u32 group, s32 index);
+extern void asdTMTexTableReleaseNode(s32 a, s32 b);
 
-/* Releases flagged slots whose FUN_0018206c entry is set; returns 1 when no slot pair has any flag left. */
+/* Releases flagged slots whose asdTMTexTableNodeIsLoaded entry is set; returns 1 when no slot pair has any flag left. */
 u32 menu4CReleaseSlots(Menu4C *obj)
 {
     s32 i;
 
     for (i = 0; i < 0x40; i++) {
-        if (obj->flags1034[i] != 0 && FUN_0018206c(0x1F, i) != 0) {
-            FUN_0019a7f4(0x1F, i);
+        if (obj->flags1034[i] != 0 && asdTMTexTableNodeIsLoaded(0x1F, i) != 0) {
+            asdTMTexTableReleaseNode(0x1F, i);
             obj->flags1034[i] = 0;
         }
     }

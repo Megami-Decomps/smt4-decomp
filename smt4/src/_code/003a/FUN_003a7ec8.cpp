@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0029ce60(unsigned int, int, int, int, int);
-int FUN_002b9024(int);
+int devilGetRecord(int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -17,7 +17,7 @@ extern int FUN_0023360c(int);
 extern int FUN_0024ea50(unsigned int);
 extern int FUN_0029c1fc(void);
 /* Supplied declaration required: FUN_0029ce60. */
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: devilGetRecord. */
 
 
 unsigned int FUN_003a7ec8(int param_1,unsigned int param_2)
@@ -33,7 +33,7 @@ unsigned int FUN_003a7ec8(int param_1,unsigned int param_2)
   FUN_0029ce60(param_2,*(unsigned char *)(param_1 + 0x5a5),0,'c' < *(char *)(param_1 + 0x94),0);
   temp_v2 = FUN_0023360c(param_1 + 0x20);
   if (*(char *)(param_1 + 0x5a5) == '\0') {
-    FUN_002b9024(*(unsigned short *)(param_1 + temp_v2 * 0x20 + 0x5ac));
+    devilGetRecord(*(unsigned short *)(param_1 + temp_v2 * 0x20 + 0x5ac));
   }
   temp_v3 = FUN_0022ea28();
   if (temp_v3 < temp_v1) {

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002a215c(unsigned int, int);
+int linkListEraseObject(unsigned int, int);
 int FUN_002c4038(int);
 int FUN_0037e3d0(int);
 int nw_snd_internal_driver_Channel_FreeChannel(unsigned int);
@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_002a215c. */
+/* Supplied declaration required: linkListEraseObject. */
 extern unsigned int FUN_002a2174(void);
 /* Supplied declaration required: FUN_002c4038. */
 /* Supplied declaration required: FUN_0037e3d0. */
@@ -31,7 +31,7 @@ void FUN_0037e644(int param_1)
   
   if (*(char *)(param_1 + 0xc) != '\0') {
     temp_v0 = FUN_002a2174();
-    FUN_002a215c(temp_v0,param_1 + 0x44);
+    linkListEraseObject(temp_v0,param_1 + 0x44);
     *(unsigned char *)(param_1 + 0xc) = 0;
   }
   if (*(int *)(param_1 + 0x98) != 0) {

@@ -17,7 +17,7 @@ int FUN_00233854(unsigned int);
 int FUN_00296e90(void);
 int FUN_0029e620(int);
 int FUN_0029ee6c(int, int);
-int FUN_002b8cc8(void);
+int ifTouchRegionRemove(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -44,7 +44,7 @@ extern int FUN_0027ee9c(void);
 /* Supplied declaration required: FUN_00296e90. */
 /* Supplied declaration required: FUN_0029e620. */
 /* Supplied declaration required: FUN_0029ee6c. */
-/* Supplied declaration required: FUN_002b8cc8. */
+/* Supplied declaration required: ifTouchRegionRemove. */
 
 
 void FUN_003a3a9c(int param_1)
@@ -109,7 +109,7 @@ void FUN_003a3a9c(int param_1)
     temp_v0 = 0;
     if (temp_v0 < *(short *)(param_1 + 0x15d50)) {
       do {
-        FUN_002b8cc8();
+        ifTouchRegionRemove();
         temp_v0 = temp_v0 + 1;
       } while (temp_v0 < *(short *)(param_1 + 0x15d50));
     }

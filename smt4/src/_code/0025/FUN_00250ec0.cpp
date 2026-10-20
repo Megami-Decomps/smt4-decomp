@@ -8,9 +8,9 @@ int FUN_0022169c(void);
 int FUN_0027d98c(void);
 int FUN_00287800(void);
 int FUN_0028fb40(int);
-int FUN_002a8740(void);
-int FUN_002a8764(void);
-int FUN_002b63c0(void);
+int gameGetUnitRecord(void);
+int gameGetSlotTable(void);
+int dataTable1bOr1cGetRecord(void);
 
 /* Supplied declaration required: FUN_0022169c. */
 extern int FUN_0025b6e8(unsigned short);
@@ -18,11 +18,11 @@ extern int FUN_0025b6e8(unsigned short);
 /* Supplied declaration required: FUN_00287800. */
 /* Supplied declaration required: FUN_0028fb40. */
 extern int FUN_0029bcf0(unsigned short);
-/* Supplied declaration required: FUN_002a8740. */
-/* Supplied declaration required: FUN_002a8764. */
-extern int FUN_002a8778(void);
+/* Supplied declaration required: gameGetUnitRecord. */
+/* Supplied declaration required: gameGetSlotTable. */
+extern int gameCountUnits(void);
 extern int FUN_002ae3c4(unsigned short);
-/* Supplied declaration required: FUN_002b63c0. */
+/* Supplied declaration required: dataTable1bOr1cGetRecord. */
 extern int FUN_002b6b38(void);
 extern int FUN_00348b7c(int);
 extern int bitsetTestBit(unsigned int, unsigned short);
@@ -46,7 +46,7 @@ void FUN_00250ec0(int param_1)
   int temp_v10;
   
   temp_v3 = param_1;
-  FUN_002b63c0();
+  dataTable1bOr1cGetRecord();
   if (temp_v3 != 0) {
     temp_v0 = *(char *)(temp_v3 + 6);
     if (temp_v0 == '\x04' || temp_v0 == '\x05') {
@@ -62,13 +62,13 @@ void FUN_00250ec0(int param_1)
       temp_v2 = FUN_002b6b38();
       if ((temp_v2 != 2) || (temp_v2 = FUN_00287800(), temp_v2 == 0)) {
         if (*(short *)(temp_v3 + 0x16c) == 5) {
-          temp_v2 = FUN_002a8778();
-          temp_v10 = FUN_002a8764();
+          temp_v2 = gameCountUnits();
+          temp_v10 = gameGetSlotTable();
           temp_v9 = 0;
           if (temp_v9 < temp_v2) {
             do {
               if (-1 < *(char *)(temp_v10 + 0x90f0 + temp_v9)) {
-                temp_v4 = FUN_002a8740();
+                temp_v4 = gameGetUnitRecord();
                 temp_v8 = 0;
                 while( 1 ) {
                   temp_v5 = temp_v3 + temp_v8 * 8;
@@ -112,21 +112,21 @@ void FUN_00250ec0(int param_1)
               }
               break;
             case 3:
-              puVar7 = (unsigned int *)FUN_002a8764();
+              puVar7 = (unsigned int *)gameGetSlotTable();
               if (*puVar7 < *(unsigned int *)(temp_v10 + 0x170)) {
                 return;
               }
               break;
             case 6:
-              temp_v9 = FUN_002a8778();
-              temp_v8 = FUN_002a8764();
+              temp_v9 = gameCountUnits();
+              temp_v8 = gameGetSlotTable();
               temp_v5 = 0;
               if (temp_v9 < 1) {
                 return;
               }
               do {
                 if (-1 < *(char *)(temp_v8 + 0x90f0 + temp_v5)) {
-                  temp_v6 = FUN_002a8740();
+                  temp_v6 = gameGetUnitRecord();
                   temp_v7 = temp_v6 + 0x4c;
                   FUN_0022169c();
                   if (*(unsigned int *)(temp_v10 + 0x170) <= temp_v7) break;

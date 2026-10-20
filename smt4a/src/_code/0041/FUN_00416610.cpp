@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_00184c00(int, int, int);
+int uiSpriteSetImageKeyframe(int, int, int);
 
-/* Supplied declaration required: FUN_00184c00. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 
 
 void FUN_00416610(int param_1)
@@ -22,7 +22,7 @@ void FUN_00416610(int param_1)
     if (*(char *)(temp_v0 + 0xa0) != '\0') {
       *(unsigned int *)(temp_v0 + 4) = 0;
       *(unsigned int *)(temp_v0 + 0xa4) = 3;
-      FUN_00184c00(temp_v0 + 0x14,5,0);
+      uiSpriteSetImageKeyframe(temp_v0 + 0x14,5,0);
     }
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 0xc);

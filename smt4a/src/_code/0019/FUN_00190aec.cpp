@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001a5e50(...);
+int slotTableReplace(...);
 int FUN_001a5e84(...);
 int FUN_001b1e88(...);
 int builtin_strncpy(...);
@@ -19,7 +19,7 @@ typedef struct {
 } param_3_stack;
 
 /* Unsupported intrinsic, declaration required: builtin_strncpy (CALLOTHER). */
-/* Supplied declaration required: FUN_001a5e50. */
+/* Supplied declaration required: slotTableReplace. */
 /* Supplied declaration required: FUN_001a5e84. */
 extern int FUN_001a8930(int, unsigned int, unsigned int *);
 extern unsigned int FUN_001a8d40(unsigned char *, unsigned int);
@@ -67,7 +67,7 @@ void FUN_00190aec(int *param_1,unsigned int param_2,int *param_3)
         if (temp_v4 < temp_v6) {
           do {
             temp_v2 = FUN_001a8d40(temp_v8,temp_v4);
-            FUN_001a5e50(temp_v9,temp_v4,temp_v2);
+            slotTableReplace(temp_v9,temp_v4,temp_v2);
             temp_v4 = temp_v4 + 1;
           } while (temp_v4 < temp_v6);
         }

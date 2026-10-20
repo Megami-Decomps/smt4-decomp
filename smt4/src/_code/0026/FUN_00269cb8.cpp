@@ -7,12 +7,12 @@ typedef struct Scene {
     /* 0xD34 */ u32 unkD34;
 } Scene;
 
-extern Scene *DAT_0043daa8;
+extern Scene *g_campCec;
 
 void FUN_00269cb8(u32 value)
 {
-    if (DAT_0043daa8 != NULL) {
-        DAT_0043daa8->unkD34 = value;
+    if (g_campCec != NULL) {
+        g_campCec->unkD34 = value;
     }
 }
 

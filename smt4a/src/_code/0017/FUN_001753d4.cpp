@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00174ebc(...);
 int FUN_00190c24(...);
-int FUN_00194fb0(...);
+int nw_snd_SoundArchive_GetSoundType(...);
 int nw_snd_internal_SoundArchiveLoader_LoadImpl(...);
 int nw_snd_internal_SoundArchiveLoader_LoadSequenceSound(...);
 int nw_snd_internal_SoundArchiveLoader_LoadSoundGroup(...);
@@ -27,10 +27,10 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_5_stack;
 
-extern int FUN_0015fe30(void);
+extern int nw_snd_SoundArchive_IsAvailable(void);
 /* Supplied declaration required: FUN_00174ebc. */
 /* Supplied declaration required: FUN_00190c24. */
-/* Supplied declaration required: FUN_00194fb0. */
+/* Supplied declaration required: nw_snd_SoundArchive_GetSoundType. */
 extern unsigned int FUN_00195024(int, unsigned int);
 extern unsigned int FUN_001a8e14(int, unsigned int);
 /* Supplied declaration required: nw_snd_internal_SoundArchiveLoader_LoadImpl. */
@@ -50,7 +50,7 @@ int FUN_001753d4(fn_001753d4_arg0 *param_1,unsigned int param_2,int param_3,unsi
   fn_001753d4_arg0 *pfVar5;
   
   if ((param_1->field_0x4 == 0) ||
-     (temp_v0 = FUN_0015fe30(), (temp_v0 == 0 || param_2 == 0xffffffff) || param_3 == 0)) {
+     (temp_v0 = nw_snd_SoundArchive_IsAvailable(), (temp_v0 == 0 || param_2 == 0xffffffff) || param_3 == 0)) {
     return 0;
   }
   pfVar5 = (fn_001753d4_arg0 *)0x0;
@@ -59,7 +59,7 @@ int FUN_001753d4(fn_001753d4_arg0 *param_1,unsigned int param_2,int param_3,unsi
   switch(param_2 >> 0x18) {
   case 1:
     temp_v0 = param_1->field_0x4;
-    FUN_00194fb0(temp_v0,param_2);
+    nw_snd_SoundArchive_GetSoundType(temp_v0,param_2);
     if (temp_v0 == 1) {
       pfVar5 = param_1;
       nw_snd_internal_SoundArchiveLoader_LoadSequenceSound(param_1,param_2,param_3,param_4,param_5);

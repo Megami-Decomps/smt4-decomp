@@ -16,7 +16,7 @@ typedef struct {
 
 extern char s_sys_ECardStatus_0044e4c8[16]; /* 0x44e4c8 */
 
-extern unsigned char FUN_00100b44(void);
+extern unsigned char libc_toupper(void);
 /* Supplied declaration required: FUN_0023a1c0. */
 extern int FUN_0023a1f8(int);
 extern int FUN_002a12d8(unsigned int *);
@@ -42,7 +42,7 @@ void FUN_00354a20(unsigned int *param_1,int param_2,int param_3)
     temp_v2 = 0;
     do {
       if (*(char *)(param_3 + temp_v2) == '\0') break;
-      temp_v0 = FUN_00100b44();
+      temp_v0 = libc_toupper();
       temp_v4[temp_v2] = temp_v0;
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < 0x1f);

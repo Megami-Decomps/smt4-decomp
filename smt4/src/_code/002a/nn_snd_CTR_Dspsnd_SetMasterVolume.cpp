@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_002bb274(void);
+extern int nn_snd_CTR_Dspsnd_IsInitialized(void);
 
 
 void nn_snd_CTR_Dspsnd_SetMasterVolume(int param_1,float param_2)
@@ -15,7 +15,7 @@ void nn_snd_CTR_Dspsnd_SetMasterVolume(int param_1,float param_2)
   unsigned int *puVar2;
   unsigned int in_s0;
   
-  temp_v0 = FUN_002bb274();
+  temp_v0 = nn_snd_CTR_Dspsnd_IsInitialized();
   if (temp_v0 != 0) {
     puVar2 = *(unsigned int **)(param_1 + (unsigned int)*(unsigned short *)(param_1 + 0x131e) * 4 + 0x10a0);
     puVar2[1] = in_s0;

@@ -5,7 +5,7 @@
 
 extern "C" {
 
-extern const char DAT_004103c4[];
+extern const char g_effParticleSourcePath[];
 
 void resourceListDestroy(void *handle);
 void resourceDestroy(void *handle);
@@ -13,10 +13,10 @@ void asdMemFree(void *ptr);
 void *memAlloc(int heap, int alignClass, int unk08, u32 size, int align, int fromFront);
 void *FUN_00248f70(void *handle);
 void *effBlockClone(void *handle);
-void *FUN_00256fdc(void *object);
-void *FUN_00256fec(void *object);
-void FUN_00257108(void *object);
-void FUN_0025715c(void *object);
+void *handleRefIncrement(void *object);
+void *handleBlockRefCreate(void *object);
+void handleBlockUnref(void *object);
+void handleBlockRefDrop(void *object);
 
 void effParticleParamCopy(EffParticleParam *dst, EffParticleParam *src)
 {
@@ -33,9 +33,9 @@ void effParticleParamCopy(EffParticleParam *dst, EffParticleParam *src)
         break;
     case 2:
         if (dst->object44) {
-            FUN_0025715c(dst->object44);
+            handleBlockRefDrop(dst->object44);
         }
-        dst->object44 = FUN_00256fec(src->object44);
+        dst->object44 = handleBlockRefCreate(src->object44);
         break;
     case 5:
         count = src->source->count;
@@ -54,7 +54,7 @@ void effParticleParamCopy(EffParticleParam *dst, EffParticleParam *src)
         if (size == 0) {
             return;
         }
-        asdDebugTrace(DAT_004103c4, 316);
+        asdDebugTrace(g_effParticleSourcePath, 316);
         dst->buffer38 = memAlloc(0x10000, 0x100, 0, size, 0x10, 1);
         dst->handles34 = (void **)dst->buffer38;
         for (i = 0; i < count; i++) {
@@ -78,7 +78,7 @@ void effParticleParamCopy(EffParticleParam *dst, EffParticleParam *src)
         if (size == 0) {
             return;
         }
-        asdDebugTrace(DAT_004103c4, 348);
+        asdDebugTrace(g_effParticleSourcePath, 348);
         dst->buffer40 = memAlloc(0x10000, 0x100, 0, size, 0x10, 1);
         dst->handles3c = (void **)dst->buffer40;
         for (i = 0; i < count; i++) {
@@ -87,9 +87,9 @@ void effParticleParamCopy(EffParticleParam *dst, EffParticleParam *src)
         break;
     case 7:
         if (dst->object48) {
-            FUN_00257108(dst->object48);
+            handleBlockUnref(dst->object48);
         }
-        dst->object48 = FUN_00256fdc(src->object48);
+        dst->object48 = handleRefIncrement(src->object48);
         break;
     }
     dst->type = src->type;

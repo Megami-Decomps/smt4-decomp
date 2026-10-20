@@ -15,7 +15,7 @@ int FUN_001835b4(...);
 int FUN_00183bb0(void);
 int FUN_0018408c(...);
 int FUN_00184310(void);
-int FUN_00184e64(...);
+int drawSetColorFromRGBA8(...);
 int FUN_0020caec(...);
 int VectorSignedToFloat(...);
 
@@ -42,8 +42,8 @@ extern int g_renderCtx; /* 0x59dbb4 */
 extern unsigned int FUN_0014bf3c(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164b5c. */
-extern int FUN_001654d8(int);
-extern int FUN_001654e4(int);
+extern int vec2GetXInt(int);
+extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_00180114(unsigned short);
@@ -54,7 +54,7 @@ extern unsigned int FUN_00180114(unsigned short);
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: FUN_0018408c. */
 /* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: FUN_00184e64. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_0020caec. */
 extern int FUN_0022e9b8(void);
 extern int FUN_00284140(unsigned int);
@@ -206,7 +206,7 @@ void FUN_002aa56c(int param_1,int param_2,unsigned int param_3,int param_4,unsig
                             (int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v2 + 8),
                             (unsigned char)(in_fpscr >> 0x16) & 3);
         FUN_00162790(2,0x9fe7ffff,temp_v9,(int)*(short *)(temp_v4 + 10));
-        FUN_00184e64(0xffffffff);
+        drawSetColorFromRGBA8(0xffffffff);
         if ((unsigned short)puVar6[3] >= 100) {
           temp_v4 = FUN_001834a4(0x1a,0x256);
           FUN_00180310(0,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v2 + 8) + param_1,
@@ -283,16 +283,16 @@ void FUN_002aa56c(int param_1,int param_2,unsigned int param_3,int param_4,unsig
   FUN_001835b4(2,0x1a,0x7e,*(short *)(temp_v4 + 8) + param_1,*(short *)(temp_v4 + 10) + param_2,0xc9);
   efctSetSpeed();
   if (!((temp_v5 == 1 || temp_v5 == 2) || temp_v5 == 6)) {
-    temp_v7 = FUN_001654e4(temp_v1 + 0xb0);
+    temp_v7 = vec2GetYInt(temp_v1 + 0xb0);
     temp_v0 = *(short *)(temp_v4 + 10);
-    temp_v1 = FUN_001654d8(temp_v1 + 0xb0);
+    temp_v1 = vec2GetXInt(temp_v1 + 0xb0);
     FUN_001835b4(2,0x1a,0x7c,temp_v1 + param_1 + (int)*(short *)(temp_v4 + 8),
                  temp_v7 + param_2 + (int)temp_v0,0xce);
   }
   else {
-    temp_v7 = FUN_001654e4(temp_v1 + 0xb0);
+    temp_v7 = vec2GetYInt(temp_v1 + 0xb0);
     temp_v0 = *(short *)(temp_v4 + 10);
-    temp_v1 = FUN_001654d8(temp_v1 + 0xb0);
+    temp_v1 = vec2GetXInt(temp_v1 + 0xb0);
     FUN_001835b4(2,0x1a,0x282,temp_v1 + param_1 + (int)*(short *)(temp_v4 + 8),
                  temp_v7 + param_2 + (int)temp_v0,0xce);
   }
@@ -342,7 +342,7 @@ void FUN_002aa56c(int param_1,int param_2,unsigned int param_3,int param_4,unsig
                       (int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v1 + 8),
                       (unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_00162790(3,0x9fe7ffff,temp_v9,(int)*(short *)(temp_v4 + 8));
-  FUN_00184e64(0xffffffff);
+  drawSetColorFromRGBA8(0xffffffff);
   if ((unsigned short)puVar6[3] >= 100) {
     temp_v1 = FUN_001834a4(0x1a,0x259);
     FUN_00180310(0,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v1 + 8) + param_1,

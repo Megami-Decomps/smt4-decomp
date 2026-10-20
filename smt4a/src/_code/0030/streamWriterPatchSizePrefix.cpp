@@ -12,7 +12,7 @@ typedef struct Writer {
     /* 0x08 */ Stream *stream;
 } Writer;
 
-int FUN_002ed882(Writer *writer, s32 *value);
+int streamWriterWriteU32(Writer *writer, s32 *value);
 int FUN_002fbb70(Writer *writer, s32 pos);
 
 /* Back-patches the leading size word: seeks to the start (0), writes (current position - 4) there, then seeks back to the end. */
@@ -23,7 +23,7 @@ void streamWriterPatchSizePrefix(Writer *writer)
 
     FUN_002fbb70(writer, 0);
     size = end - 4;
-    FUN_002ed882(writer, &size);
+    streamWriterWriteU32(writer, &size);
     FUN_002fbb70(writer, end);
 }
 

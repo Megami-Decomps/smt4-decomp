@@ -18,8 +18,8 @@ typedef struct {
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_0029a17c. */
-extern int FUN_002bed98(int);
-extern int FUN_002beda4(void);
+extern int vec2GetYInt(int);
+extern int vec2GetXInt(void);
 /* Supplied declaration required: FUN_002bf288. */
 extern int FUN_002bf4f8(unsigned int, int);
 /* Supplied declaration required: FUN_002bf538. */
@@ -44,8 +44,8 @@ void FUN_002dc120(int param_1,int param_2)
       param_2 = 0x28;
     }
     if (*(int *)(param_1 + 0x305c) < 4) {
-      temp_v1 = FUN_002beda4();
-      temp_v2 = FUN_002bed98(param_1 + 0x12b8);
+      temp_v1 = vec2GetXInt();
+      temp_v2 = vec2GetYInt(param_1 + 0x12b8);
       temp_v1 = temp_v1 + *(int *)(param_1 + 0x3884);
       temp_v2 = temp_v2 + *(int *)(param_1 + 0x3888);
       FUN_002bf538();

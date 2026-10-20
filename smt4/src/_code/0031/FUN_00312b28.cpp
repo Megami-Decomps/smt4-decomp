@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_00295228(unsigned int, int);
-int FUN_002b9024(void);
+int devilGetRecord(void);
 
 extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_00295228. */
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: devilGetRecord. */
 
 
 unsigned int FUN_00312b28(void)
@@ -23,7 +23,7 @@ unsigned int FUN_00312b28(void)
   temp_v0 = btlGetMainState();
   if ((((*(unsigned int *)(temp_v0 + 0x44a0) & 2) == 0) &&
       (temp_v2 = (unsigned int)*(unsigned short *)(temp_v0 + 0xf2), temp_v2 != 0)) &&
-     (temp_v1 = temp_v2, FUN_002b9024(), temp_v1 != 0)) {
+     (temp_v1 = temp_v2, devilGetRecord(), temp_v1 != 0)) {
     FUN_00295228(temp_v2,3);
   }
   return 1;

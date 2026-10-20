@@ -19,7 +19,7 @@ extern int g_mapEnemy; /* 0x447600 */
 
 /* Supplied declaration required: FUN_00267074. */
 /* Supplied declaration required: FUN_002670cc. */
-extern int FUN_002c2950(void);
+extern int gameGetMapBlock(void);
 /* Supplied declaration required: FUN_002eb1a4. */
 
 
@@ -40,7 +40,7 @@ void FUN_002f3c28(void)
   unsigned char temp_v10;
   
   temp_v1 = g_mapEnemy;
-  temp_v2 = FUN_002c2950();
+  temp_v2 = gameGetMapBlock();
   temp_v7 = 0;
   do {
     temp_v8 = temp_v2 + temp_v7 * 0x14;

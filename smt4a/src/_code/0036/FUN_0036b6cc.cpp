@@ -12,10 +12,10 @@ int FUN_002c7ce8(...);
 int FUN_002c7e6c(...);
 int FUN_002c8538(...);
 int FUN_002c85b0(...);
-int FUN_00342010(...);
+int campButtonHelpAcquire(...);
 int objBMarkAndInit20D4(...);
 int stateHolderMarkAndInit2588(...);
-int FUN_003f881c(...);
+int loadSlotRequestAsync(...);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -36,10 +36,10 @@ extern unsigned short FUN_00167f08(void);
 /* Supplied declaration required: FUN_002c7e6c. */
 /* Supplied declaration required: FUN_002c8538. */
 /* Supplied declaration required: FUN_002c85b0. */
-/* Supplied declaration required: FUN_00342010. */
+/* Supplied declaration required: campButtonHelpAcquire. */
 /* Supplied declaration required: objBMarkAndInit20D4. */
 /* Supplied declaration required: stateHolderMarkAndInit2588. */
-/* Supplied declaration required: FUN_003f881c. */
+/* Supplied declaration required: loadSlotRequestAsync. */
 
 
 /* WARNING: Removing unreachable block (ram,0x0036b774) */
@@ -74,7 +74,7 @@ void FUN_0036b6cc(unsigned short param_1)
   *(unsigned short *)(puVar2 + 0xe) = param_1;
   *(unsigned short *)((int)puVar2 + 0x3a) = 0;
   *(unsigned char *)(puVar2 + 0x10) = 1;
-  FUN_003f881c(0x25,0);
+  loadSlotRequestAsync(0x25,0);
   temp_v0 = FUN_00167f08();
   *(unsigned short *)((int)puVar2 + 0x42) = temp_v0;
   FUN_002c7e6c();
@@ -83,7 +83,7 @@ void FUN_0036b6cc(unsigned short param_1)
   FUN_002c8538(0);
   objBMarkAndInit20D4();
   stateHolderMarkAndInit2588();
-  FUN_00342010();
+  campButtonHelpAcquire();
   sysPlaySe(0xf4);
   FUN_0019de98(0,0xf4f4f4ff);
   puVar2[4] = 0;

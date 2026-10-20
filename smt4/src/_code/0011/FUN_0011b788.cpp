@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002bb150(int, int);
-int FUN_002c4040(int);
+int nn_os_LightEvent_Signal(int);
 int software_interrupt(int);
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
@@ -18,7 +18,7 @@ int software_interrupt(int);
 #define romwright_carry_4(left, right) ((unsigned char)((unsigned long long)(unsigned int)(left) + (unsigned long long)(unsigned int)(right) > 0xffffffffULL))
 #endif
 /* Supplied declaration required: FUN_002bb150. */
-/* Supplied declaration required: FUN_002c4040. */
+/* Supplied declaration required: nn_os_LightEvent_Signal. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
 
@@ -45,7 +45,7 @@ unsigned int FUN_0011b788(int param_1)
     nn_os_CriticalSection_Enter(param_1);
     *(unsigned int *)(param_1 + 0xc) = 5;
     nn_os_CriticalSection_Leave(param_1);
-    FUN_002c4040(param_1 + 0x20);
+    nn_os_LightEvent_Signal(param_1 + 0x20);
     temp_v4 = temp_v6;
     while( 1 ) {
       if (*(int *)(param_1 + 0xc) == 3) {

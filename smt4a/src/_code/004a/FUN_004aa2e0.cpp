@@ -5,10 +5,10 @@
 extern "C" {
 
 int btlGetMainState(void);
-int FUN_001641c4(void);
+int ifTouchRegionRemove(void);
 int sysPlaySe(void);
 int FUN_001a9104(unsigned int *, unsigned int *);
-int FUN_001b4a90(int, int, unsigned int);
+int __aeabi_memset4(int, int, unsigned int);
 int FUN_00203b40(unsigned int *, int, int, int, int, int);
 int FUN_00270104(void);
 int FUN_002cb438(unsigned int *, unsigned int, unsigned int);
@@ -47,14 +47,14 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_2_stack;
 
-extern unsigned char DAT_0057a9b8; /* 0x57a9b8 */
+extern unsigned char g_btlUi; /* 0x57a9b8 */
 
 /* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: FUN_001641c4. */
+/* Supplied declaration required: ifTouchRegionRemove. */
 extern int FUN_00167f08(void);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_001a9104. */
-/* Supplied declaration required: FUN_001b4a90. */
+/* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: FUN_00203b40. */
 /* Supplied declaration required: FUN_00270104. */
 extern int FUN_002a21c8(void);
@@ -158,8 +158,8 @@ void FUN_004aa2e0(fn_004aa2e0_arg0 *param_1,int param_2)
   unsigned int *puVar5;
   int *piVar6;
   
-  puVar1 = (*(unsigned int * *)((unsigned char *)&DAT_0057a9b8 + 0x10));
-  puVar5 = (*(unsigned int * *)((unsigned char *)&DAT_0057a9b8 + 0x10)) + 0x1d3f;
+  puVar1 = (*(unsigned int * *)((unsigned char *)&g_btlUi + 0x10));
+  puVar5 = (*(unsigned int * *)((unsigned char *)&g_btlUi + 0x10)) + 0x1d3f;
   fillTwoWordsWithByte(puVar5,0xffffffff);
   temp_v0 = FUN_003ea1cc(*puVar1,0);
   *(unsigned short *)(puVar1 + 0x1d3f) = temp_v0;
@@ -231,12 +231,12 @@ void FUN_004aa2e0(fn_004aa2e0_arg0 *param_1,int param_2)
   puVar1[0x184f] = 0;
   if (0 < *(short *)(puVar1 + 0x1c34)) {
     do {
-      FUN_001641c4();
+      ifTouchRegionRemove();
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < *(short *)(puVar1 + 0x1c34));
   }
   *(unsigned short *)(puVar1 + 0x1c34) = 0;
-  FUN_001b4a90((int)puVar1 + 0x70d2,0x40,0xffffffff);
+  __aeabi_memset4((int)puVar1 + 0x70d2,0x40,0xffffffff);
   return;
 }
 

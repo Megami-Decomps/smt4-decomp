@@ -14,7 +14,7 @@ extern int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_001e071c. */
 extern int FUN_0028a318(void);
-extern int FUN_002a60b4(unsigned int, int);
+extern int asdTMTexTableNodeIsLoaded(unsigned int, int);
 /* Supplied declaration required: FUN_002c18e4. */
 /* Supplied declaration required: FUN_002c198c. */
 /* Supplied declaration required: FUN_002c39a4. */
@@ -37,7 +37,7 @@ unsigned int FUN_001e4bf4(int param_1)
     temp_v2 = 0;
     temp_v3 = temp_v2;
     do {
-      temp_v0 = FUN_002a60b4(0x14,temp_v2);
+      temp_v0 = asdTMTexTableNodeIsLoaded(0x14,temp_v2);
       if (temp_v0 != 0) {
         temp_v3 = temp_v3 + 1;
       }
@@ -45,7 +45,7 @@ unsigned int FUN_001e4bf4(int param_1)
     } while (temp_v2 < 5);
     temp_v2 = 0;
     do {
-      temp_v0 = FUN_002a60b4(0x15,temp_v2);
+      temp_v0 = asdTMTexTableNodeIsLoaded(0x15,temp_v2);
       if (temp_v0 != 0) {
         temp_v3 = temp_v3 + 1;
       }

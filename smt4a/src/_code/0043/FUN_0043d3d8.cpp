@@ -26,7 +26,7 @@ extern unsigned char DAT_0062d6b6; /* 0x62d6b6 */
 
 /* Supplied declaration required: FUN_00159110. */
 /* Supplied declaration required: FUN_0016f864. */
-extern unsigned int *FUN_00188b60(unsigned char *);
+extern unsigned int *nn_os_CriticalSection_Initialize(unsigned char *);
 /* Supplied declaration required: FUN_001a1244. */
 /* Supplied declaration required: FUN_0043f384. */
 /* Supplied declaration required: FUN_0043f440. */
@@ -55,7 +55,7 @@ unsigned int * FUN_0043d3d8(unsigned int *param_1,int param_2,int param_3,unsign
   else {
     FUN_0016f864(0);
     FUN_00159110(&DAT_0062d648,(int)param_1 + param_3,param_2 - param_3,0);
-    puVar2 = (unsigned int *)FUN_00188b60(&DAT_0062d6a0);
+    puVar2 = (unsigned int *)nn_os_CriticalSection_Initialize(&DAT_0062d6a0);
     DAT_0062d6b0 = &DAT_0062d648;
     DAT_0062d6b4 = 0;
     DAT_0062d6b6 = 0;

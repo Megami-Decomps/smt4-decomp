@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002e9300(...);
-int FUN_002e9318(...);
+int onlineStringConstruct(...);
+int onlineStringDestroy(...);
 int FUN_002e934e(unsigned int, int, int);
-int FUN_002e93da(void);
+int onlineUrlEnsureParsed(void);
 int FUN_002e9498(int *, int, unsigned int, unsigned int);
 int FUN_0030f0cc(int *, int, unsigned int);
 int FUN_0030f12c(int, int, int);
@@ -24,10 +24,10 @@ typedef struct {
 } param_3_stack;
 
 extern int wordRefsDiffer_00132132(int *, int *);
-/* Supplied declaration required: FUN_002e9300. */
-/* Supplied declaration required: FUN_002e9318. */
+/* Supplied declaration required: onlineStringConstruct. */
+/* Supplied declaration required: onlineStringDestroy. */
 /* Supplied declaration required: FUN_002e934e. */
-/* Supplied declaration required: FUN_002e93da. */
+/* Supplied declaration required: onlineUrlEnsureParsed. */
 /* Supplied declaration required: FUN_002e9498. */
 extern int wordRefsEqual_002e97f2(int *, unsigned int *);
 /* Supplied declaration required: FUN_0030f0cc. */
@@ -55,8 +55,8 @@ unsigned int FUN_0030f138(int param_1,unsigned int param_2,unsigned int param_3)
   iStack_20 = param_1;
   temp_v10 = param_2;
   uStack_18 = param_3;
-  FUN_002e93da();
-  temp_v3 = FUN_002e9300(temp_v6,temp_v10);
+  onlineUrlEnsureParsed();
+  temp_v3 = onlineStringConstruct(temp_v6,temp_v10);
   temp_v4 = param_1 + 0x25;
   temp_v0 = *(int *)(*(int *)(param_1 + 0x1c) + 4);
   temp_v5[0] = *(int *)(param_1 + 0x1c);
@@ -77,14 +77,14 @@ unsigned int FUN_0030f138(int param_1,unsigned int param_2,unsigned int param_3)
      (temp_v1 = FUN_0030f12c(temp_v4,temp_v3,temp_v8 + 0x10), temp_v0 = temp_v8, temp_v1 != 0)) {
     temp_v0 = *(int *)(param_1 + 0x1c);
   }
-  FUN_002e9318(temp_v6);
+  onlineStringDestroy(temp_v6);
   if (temp_v0 != *(int *)(param_1 + 0x1c)) {
     param_3 = *(unsigned int *)(temp_v0 + 0x18);
   }
   else {
-    temp_v2 = FUN_002e9300(temp_v5,temp_v10);
+    temp_v2 = onlineStringConstruct(temp_v5,temp_v10);
     FUN_0030f0cc(&temp_v7,param_1 + 0x28,temp_v2);
-    FUN_002e9318(temp_v5);
+    onlineStringDestroy(temp_v5);
     temp_v8 = *(int *)(param_1 + 0x38);
     temp_v0 = wordRefsDiffer_00132132(&temp_v7,&temp_v8);
     if (temp_v0 != 0) {

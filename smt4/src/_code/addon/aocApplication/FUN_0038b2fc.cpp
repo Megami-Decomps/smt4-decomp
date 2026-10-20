@@ -14,18 +14,18 @@ struct AocApplication {
 };
 
 void *FUN_0023a1b8(void *decoder);
-void FUN_002b2368(void *decoder);
+void asdMemFreeNonNull(void *decoder);
 void asdMemFree(void *ptr);
 void *asdMemoryAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
-void FUN_002c3944(void *buffer, u32 size);
+void rt_memclr(void *buffer, u32 size);
 void *asdOperatorNew(u32 size);
 void *FUN_00352740(void *mem, u32 source, void *buffer, u32 size);
-void FUN_002c52f8(void);
+void asdFatalError(void);
 
 void FUN_0038b2fc(AocApplication *app)
 {
     if (app->decoder != NULL) {
-        FUN_002b2368(FUN_0023a1b8(app->decoder));
+        asdMemFreeNonNull(FUN_0023a1b8(app->decoder));
         app->decoder = NULL;
     }
     if (app->buffer != NULL) {
@@ -34,7 +34,7 @@ void FUN_0038b2fc(AocApplication *app)
     }
     asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\addon\\aocApplication.cpp", 391);
     app->buffer = asdMemoryAlloc(0x10000, 0x100, 0, 0x20000, 1);
-    FUN_002c3944(app->buffer, 0x20000);
+    rt_memclr(app->buffer, 0x20000);
     if (app->buffer != NULL) {
         void *mem = asdOperatorNew(16);
 
@@ -43,7 +43,7 @@ void FUN_0038b2fc(AocApplication *app)
         }
         app->decoder = mem;
     } else {
-        FUN_002c52f8();
+        asdFatalError();
     }
 }
 

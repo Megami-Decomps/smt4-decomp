@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_001ab854(void);
+extern int gameGetSlotRecord(void);
 extern int FUN_0026140c(void);
 
 
@@ -60,7 +60,7 @@ unsigned int FUN_0031fd08(unsigned int param_1)
     temp_v0 = *(short *)(temp_v1 + 0x22);
   }
   if (-1 < temp_v0) {
-    temp_v1 = FUN_001ab854();
+    temp_v1 = gameGetSlotRecord();
     return (unsigned int)*(unsigned short *)(temp_v1 + 0x62);
   }
   return 0xffffffff;

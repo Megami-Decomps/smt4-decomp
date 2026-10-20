@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_1_stack;
 
-extern unsigned int DAT_0063fd88; /* 0x63fd88 */
+extern unsigned int g_asdGxPresets; /* 0x63fd88 */
 extern unsigned int DAT_0063fdb4; /* 0x63fdb4 */
 extern unsigned int DAT_0063fde0; /* 0x63fde0 */
 extern unsigned char DAT_0063fe10; /* 0x63fe10 */
@@ -45,7 +45,7 @@ void FUN_00145084(int param_1)
   if (DAT_0063ff7c != 1) {
     if (param_1 == 0x400) {
       puVar2 = (unsigned int *)&DAT_0063fe10;
-      puVar3 = &DAT_0063fd88;
+      puVar3 = &g_asdGxPresets;
     }
     else if (param_1 != 0x401) {
       if (param_1 == 0x410) {

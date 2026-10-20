@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00255e38(int, unsigned char [2], int, int, int);
 int FUN_00257dec(int, unsigned int);
 int FUN_00269bd0(int, unsigned int);
-int FUN_002b9024(void);
+int devilGetRecord(void);
 int FUN_0033774c(int, unsigned char [2], unsigned int);
 int FUN_0033adf8(void);
 
@@ -63,9 +63,9 @@ extern int FUN_002542ec(unsigned int);
 /* Supplied declaration required: FUN_00255e38. */
 /* Supplied declaration required: FUN_00257dec. */
 /* Supplied declaration required: FUN_00269bd0. */
-extern int FUN_002a8764(void);
-extern unsigned int FUN_002b63ac(void);
-/* Supplied declaration required: FUN_002b9024. */
+extern int gameGetSlotTable(void);
+extern unsigned int gameGetPlayerData(void);
+/* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: FUN_0033774c. */
 /* Supplied declaration required: FUN_0033adf8. */
 
@@ -128,8 +128,8 @@ void FUN_003370ac(int param_1)
   if (*(short *)(param_1 + 0xf0) != 0) {
     FUN_0033adf8();
   }
-  temp_v2 = FUN_002a8764();
-  temp_v3 = FUN_002b63ac();
+  temp_v2 = gameGetSlotTable();
+  temp_v3 = gameGetPlayerData();
   FUN_0033774c(temp_v48,temp_v9,temp_v3);
   FUN_00255e38(temp_v48,temp_v9,0,0,0);
   temp_v8 = 0;
@@ -189,7 +189,7 @@ void FUN_003370ac(int param_1)
         temp_v6 = temp_v7;
       } while ((int)temp_v7 < 0x12);
       temp_v6 = (unsigned int)temp_v10;
-      FUN_002b9024();
+      devilGetRecord();
       temp_v31 = *(unsigned char *)(temp_v6 + 0x33);
       temp_v0 = *(char *)(temp_v6 + 5);
       temp_v1 = 1;

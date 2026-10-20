@@ -15,7 +15,7 @@ int FUN_003d5af0(...);
 int FUN_00227280(...);
 int FUN_0023aa28(...);
 int FUN_00257e74(...);
-int FUN_002580b4(void);
+int eventCommandGetPendingCleanup(void);
 int FUN_002929d8(...);
 int FUN_002b70cc(void);
 int FUN_003d5698(float *, double);
@@ -112,13 +112,13 @@ extern float *FUN_0018f654(void);
 /* Supplied declaration required: FUN_00211c40. */
 /* Supplied declaration required: FUN_00211c68. */
 /* Supplied declaration required: FUN_00221b58. */
-extern int FUN_0022725c(float *);
+extern int rangeIsValid(float *);
 /* Supplied declaration required: FUN_00227280. */
 /* Supplied declaration required: FUN_0023aa28. */
 /* Supplied declaration required: FUN_00257e74. */
-/* Supplied declaration required: FUN_002580b4. */
+/* Supplied declaration required: eventCommandGetPendingCleanup. */
 /* Supplied declaration required: FUN_002929d8. */
-extern unsigned int FUN_00296d6c(unsigned int, unsigned int);
+extern unsigned int randBetween(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002ad314. */
 /* Supplied declaration required: FUN_002b70cc. */
 /* Supplied declaration required: FUN_002c159c. */
@@ -223,14 +223,14 @@ unsigned int FUN_003d7404(float *param_1)
         temp_v2 = temp_v0;
       }
     }
-    temp_v1 = FUN_00296d6c(0xffffff9c,100);
+    temp_v1 = randBetween(0xffffff9c,100);
     in_s0 = 0.01f;
     temp_v4 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v5 = temp_v2 * temp_v4 * 0.01f;
-    temp_v1 = FUN_00296d6c(0xffffff9c,100);
+    temp_v1 = randBetween(0xffffff9c,100);
     temp_v4 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v4 = temp_v2 * temp_v4 * in_s0;
-    temp_v1 = FUN_00296d6c(0xffffff9c,100);
+    temp_v1 = randBetween(0xffffff9c,100);
     param_1[400] = temp_v5;
     param_1[0x191] = temp_v4;
     temp_v4 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -498,9 +498,9 @@ LAB_003d7d90:
   temp_v27 = temp_v8;
   temp_v28 = temp_v8;
   if (((unsigned int)param_1[0x18d] & 0x4000) != 0) {
-    FUN_002580b4();
+    eventCommandGetPendingCleanup();
     FUN_00257e74();
-    FUN_002580b4();
+    eventCommandGetPendingCleanup();
     pfVar4 = (float *)FUN_0018f654();
     temp_v27 = *pfVar4;
     temp_v28 = pfVar4[1];
@@ -508,7 +508,7 @@ LAB_003d7d90:
   if (((unsigned int)param_1[0x18d] & 0x40000) != 0) {
     FUN_00257e74(param_1 + 0xc);
     FUN_0023aa28(param_1 + 0xc,&temp_v27,&temp_v28);
-    temp_v3 = FUN_0022725c(param_1 + 0xc);
+    temp_v3 = rangeIsValid(param_1 + 0xc);
     if (temp_v3 != 0) {
       param_1[0xc] = 0.0f;
       param_1[0xd] = 0.0f;
@@ -523,7 +523,7 @@ LAB_003d7d90:
   if (((unsigned int)param_1[0x18d] & 0x400000) != 0) {
     FUN_00257e74(param_1 + 0x11);
     FUN_0023aa28(param_1 + 0x11,&temp_v34,&temp_v35);
-    temp_v3 = FUN_0022725c(param_1 + 0x11);
+    temp_v3 = rangeIsValid(param_1 + 0x11);
     if (temp_v3 != 0) {
       param_1[0x11] = 0.0f;
       param_1[0x12] = 0.0f;

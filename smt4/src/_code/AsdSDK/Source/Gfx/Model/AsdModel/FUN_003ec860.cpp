@@ -18,7 +18,7 @@ extern unsigned int DAT_00464b6c; /* 0x464b6c */
 extern unsigned int DAT_00464b70; /* 0x464b70 */
 extern unsigned int DAT_00464bd0; /* 0x464bd0 */
 extern unsigned int DAT_00464bd4; /* 0x464bd4 */
-extern unsigned int DAT_004dad80; /* 0x4dad80 */
+extern unsigned int g_asdLightCount; /* 0x4dad80 */
 extern unsigned int DAT_004dadb0; /* 0x4dadb0 */
 extern unsigned int DAT_004dae60; /* 0x4dae60 */
 extern unsigned char *DAT_004dae64; /* 0x4dae64 */
@@ -39,7 +39,7 @@ void FUN_003ec860(unsigned int param_1,unsigned int param_2,int param_3)
   *(unsigned int *)(param_3 + 0xdc) = param_2;
   DAT_00464bd0 = 0;
   DAT_00464bd4 = 0;
-  FUN_002c5d5c(&DAT_004dad80,&LAB_0034066c,0x18,2);
+  FUN_002c5d5c(&g_asdLightCount,&LAB_0034066c,0x18,2);
   puVar1 = &DAT_004dadb0;
   FUN_002c5d5c(&DAT_004dadb0,&LAB_001071c8,0x3c,2);
   puVar1[0x20] = 0;

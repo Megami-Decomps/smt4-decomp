@@ -8,9 +8,9 @@ int asdTMTexTableLoadTmx(int, int);
 int FUN_00151408(unsigned int, int, int);
 int FUN_001527d8(unsigned int, unsigned int);
 int FUN_001acf98(int, int);
-int FUN_001b4a90(int, int, unsigned int);
+int __aeabi_memset4(int, int, unsigned int);
 int FUN_002804b0(...);
-int FUN_002e6dd4(int, int);
+int rt_memclr(int, int);
 int FUN_003f5268(int, int, int);
 int FUN_003f84e8(int);
 
@@ -24,9 +24,9 @@ extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: FUN_00151408. */
 /* Supplied declaration required: FUN_001527d8. */
 /* Supplied declaration required: FUN_001acf98. */
-/* Supplied declaration required: FUN_001b4a90. */
+/* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: FUN_002804b0. */
-/* Supplied declaration required: FUN_002e6dd4. */
+/* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: FUN_003f5268. */
 /* Supplied declaration required: FUN_003f84e8. */
 
@@ -40,7 +40,7 @@ void FUN_003f5598(int param_1)
   
   temp_v1 = 0;
   *(unsigned int *)(param_1 + 0x6b0) = 0;
-  FUN_002e6dd4(param_1 + 0x5e6,200);
+  rt_memclr(param_1 + 0x5e6,200);
   *(unsigned int *)(param_1 + 0x44) = 0;
   *(unsigned int *)(param_1 + 0x48) = 0;
   *(unsigned int *)(param_1 + 0x50) = 0;
@@ -51,8 +51,8 @@ void FUN_003f5598(int param_1)
   FUN_002804b0("event/PartnerTopic/PartnerTopic.mbm",param_1 + 0x28,0);
   FUN_002804b0("event/PartnerTopic/PartnerTopicCommon.mbm",param_1 + 0x2c,0);
   FUN_002804b0("event/PartnerTopic/PartnerTopicCommon.bf",param_1 + 0x30,0);
-  FUN_001b4a90(param_1 + 0x6b4,0x14,0xffffffff);
-  FUN_001b4a90(param_1 + 0x6c8,0x10,0xffffffff);
+  __aeabi_memset4(param_1 + 0x6b4,0x14,0xffffffff);
+  __aeabi_memset4(param_1 + 0x6c8,0x10,0xffffffff);
   asdTMTexTableLoadTmx(0x31,0);
   do {
     FUN_001acf98(0x31,temp_v1);

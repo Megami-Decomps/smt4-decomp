@@ -9,7 +9,7 @@ typedef struct Row4 {
 
 extern s32 scrGetArg(s32 index);
 extern void *btlGetMainState(void);
-extern void *FUN_003ef960(void *state, s32 index);
+extern void *btlGetTable(void *state, s32 index);
 extern Row4 *dataTableGetEntries(void *table);
 extern void scrSetResult(u32 value);
 
@@ -18,7 +18,7 @@ u32 scrCommGetBattleTable4V1(s32 argIndex)
 {
     s32 row = scrGetArg(argIndex);
     void *state = btlGetMainState();
-    Row4 *rows = dataTableGetEntries(FUN_003ef960(state, 4));
+    Row4 *rows = dataTableGetEntries(btlGetTable(state, 4));
 
     scrSetResult(rows[row].v1);
     return 1;

@@ -19,8 +19,8 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_00163aa4. */
-extern unsigned int FUN_001654d8(int);
-extern unsigned int FUN_001654e4(int);
+extern unsigned int vec2GetXInt(int);
+extern unsigned int vec2GetYInt(int);
 /* Supplied declaration required: FUN_00184528. */
 /* Supplied declaration required: FUN_0048821c. */
 /* Supplied declaration required: FUN_0048a378. */
@@ -59,8 +59,8 @@ void FUN_0048b8a4(int param_1)
       if (temp_v0 != 0) {
         *(unsigned int *)(param_1 + 8) = 2;
       }
-      temp_v2 = FUN_001654e4(temp_v4);
-      temp_v3 = FUN_001654d8(temp_v4);
+      temp_v2 = vec2GetYInt(temp_v4);
+      temp_v3 = vec2GetXInt(temp_v4);
       FUN_004935b0(param_1 + 0x4d0,temp_v3,temp_v2);
       if (*(char *)(param_1 + 0x112a) == '\0') {
         FUN_00163aa4(param_1 + 0x10a0);

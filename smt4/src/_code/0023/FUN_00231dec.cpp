@@ -16,7 +16,7 @@ int FUN_002bedb0(...);
 int FUN_002bee04(...);
 int FUN_002bf380(int, int, int, int, int, int);
 int FUN_002bf538(void);
-int FUN_002bf694(...);
+int libc_strcpy(...);
 int FUN_0039f63c(...);
 int FUN_0039fb38(...);
 int NaviMain_GetCurrentMap(...);
@@ -48,16 +48,16 @@ extern unsigned int FUN_0023342c(int, unsigned int);
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002bed3c. */
-extern unsigned int FUN_002bed98(int);
-extern unsigned int FUN_002beda4(int);
+extern unsigned int vec2GetYInt(int);
+extern unsigned int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bedb0. */
 /* Supplied declaration required: FUN_002bee04. */
 /* Supplied declaration required: FUN_002bf380. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bf538. */
-/* Supplied declaration required: FUN_002bf694. */
-extern int FUN_002c09d0(unsigned int);
-extern int FUN_002c2950(void);
+/* Supplied declaration required: libc_strcpy. */
+extern int gameFlagIsSet(unsigned int);
+extern int gameGetMapBlock(void);
 extern unsigned int FUN_002c5d80(unsigned int, unsigned int);
 extern unsigned int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_002e039c(int);
@@ -93,7 +93,7 @@ void FUN_00231dec(int param_1)
   float temp_v17;
   int temp_v18;
   
-  temp_v2 = FUN_002c2950();
+  temp_v2 = gameGetMapBlock();
   temp_v3 = FUN_002c5d80(5,1);
   FUN_002bee04(g_titleScene,3,temp_v3);
   temp_v18 = param_1 + 0x162;
@@ -115,17 +115,17 @@ void FUN_00231dec(int param_1)
       temp_v3 = NaviMain_GetCurrentMap(temp_v18);
       temp_v4 = NaviMain_GetPosY(temp_v18);
       FUN_0025090c(temp_v3,temp_v4,1,temp_v15);
-      FUN_002bf694(temp_v9,temp_v15);
+      libc_strcpy(temp_v9,temp_v15);
     }
     else {
-      temp_v5 = FUN_002c09d0(0x529);
+      temp_v5 = gameFlagIsSet(0x529);
       if ((temp_v5 != 0) && (temp_v5 = FUN_00288f78(temp_v3), temp_v5 != 3)) {
         temp_v3 = FUN_002e039c((int)temp_v1);
-        FUN_002bf694(temp_v9,temp_v3);
+        libc_strcpy(temp_v9,temp_v3);
       }
       else {
         FUN_002be624(temp_v15,&LAB_00232470);
-        FUN_002bf694(temp_v9,temp_v15);
+        libc_strcpy(temp_v9,temp_v15);
       }
     }
   }
@@ -190,10 +190,10 @@ LAB_00232208:
             *(char *)(temp_v5 + 0x56) = temp_v0 - '\x01';
           }
           temp_v11 = param_1 + temp_v9 * 0x8c + 0x618;
-          temp_v3 = FUN_002beda4(temp_v11);
+          temp_v3 = vec2GetXInt(temp_v11);
           temp_v12 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v12 = temp_v12 + temp_v16;
-          temp_v3 = FUN_002bed98(temp_v11);
+          temp_v3 = vec2GetYInt(temp_v11);
           temp_v6 = *(unsigned int *)(param_1 + 0x10);
           temp_v13 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
           if ((temp_v6 & 0x20) == 0) {
@@ -255,7 +255,7 @@ LAB_002323cc:
       }
     }
     else {
-      temp_v2 = FUN_002c09d0(0x529);
+      temp_v2 = gameFlagIsSet(0x529);
       if (temp_v2 != 0) {
         NaviMain_GetCurrentMap(temp_v18);
         temp_v2 = FUN_00288f78();
@@ -265,10 +265,10 @@ LAB_002323cc:
             temp_v3 = 0xfbc;
             *(char *)(param_1 + 0x58) = *(char *)(param_1 + 0x58) - '\x01';
           }
-          temp_v4 = FUN_002beda4(param_1 + 0x730);
+          temp_v4 = vec2GetXInt(param_1 + 0x730);
           temp_v12 = (float)VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v12 = temp_v12 + temp_v16;
-          temp_v4 = FUN_002bed98(param_1 + 0x730);
+          temp_v4 = vec2GetYInt(param_1 + 0x730);
           temp_v13 = (float)VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
           FUN_0039fb38(temp_v3,(int)temp_v12,(int)(temp_v13 + temp_v17),DAT_0044cdd8,1);
         }

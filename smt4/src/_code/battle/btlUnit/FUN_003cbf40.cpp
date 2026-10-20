@@ -14,7 +14,7 @@ int FUN_00229a24(...);
 int FUN_00229b10(...);
 int FUN_00246cf0(...);
 int FUN_00247478(unsigned char [28], int, unsigned int);
-int FUN_00282924(int, int);
+int btlMainFindEntryByListedId(int, int);
 int FUN_0029be5c(...);
 int FUN_002ae164(void);
 int FUN_002bf80c(...);
@@ -37,7 +37,7 @@ typedef struct {
 } param_2_stack;
 
 extern int g_btlScriptUnit; /* 0x43427c */
-extern unsigned int DAT_00439ca8; /* 0x439ca8 */
+extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 extern unsigned int DAT_00439cf8; /* 0x439cf8 */
 
 /* Supplied declaration required: FUN_00229098. */
@@ -50,13 +50,13 @@ extern unsigned int DAT_00439cf8; /* 0x439cf8 */
 /* Supplied declaration required: FUN_00247478. */
 /* Supplied declaration required: FUN_0027da30. */
 extern int FUN_0027e314(unsigned int);
-/* Supplied declaration required: FUN_00282924. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 extern int FUN_0028d1f4(int);
 /* Supplied declaration required: FUN_0029be5c. */
 extern int FUN_0029e02c(void);
 /* Supplied declaration required: FUN_002ae164. */
 /* Supplied declaration required: FUN_002bf80c. */
-extern int FUN_002bfde4(unsigned int);
+extern int padIsButtonPressed(unsigned int);
 /* Supplied declaration required: memClear. */
 extern int FUN_003ae608(unsigned int, unsigned int);
 extern unsigned int FUN_003af054(unsigned int);
@@ -100,14 +100,14 @@ int FUN_003cbf40(int *param_1,unsigned int *param_2)
     if ((*param_2 & 0x80) == 0) {
       *param_2 = *param_2 | 0x880;
       *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 1;
-      FUN_002296dc(DAT_00439ca8);
+      FUN_002296dc(g_btlUiBlock);
       return 1;
     }
   }
   else if (((temp_v0 & 0x100) != 0) && ((*param_2 & 0x1000) == 0)) {
     *param_2 = *param_2 | 0x1800;
     *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 1;
-    FUN_002296dc(DAT_00439ca8);
+    FUN_002296dc(g_btlUiBlock);
     return 1;
   }
   if ((temp_v0 & 0x800) != 0) {
@@ -162,7 +162,7 @@ int FUN_003cbf40(int *param_1,unsigned int *param_2)
       temp_v2 = temp_v2 - 1;
       temp_v1 = temp_v1 + 1;
     } while (temp_v2 != 0);
-    if ((temp_v18 == 0) && (temp_v0 = FUN_003af054(DAT_00439ca8), -1 < (int)temp_v0)) {
+    if ((temp_v18 == 0) && (temp_v0 = FUN_003af054(g_btlUiBlock), -1 < (int)temp_v0)) {
       temp_v2 = 0x6d;
       temp_v1 = 0;
       do {
@@ -211,7 +211,7 @@ int FUN_003cbf40(int *param_1,unsigned int *param_2)
         temp_v2 = *(int *)(temp_v4 + 0x1e98) + temp_v1 * 0x114;
         puVar8 = *(unsigned int **)(temp_v2 + 0x50);
         if ((((unsigned int)puVar8 & 8) != 0) &&
-           (FUN_00282924(temp_v4,(int)*(short *)(temp_v2 + 0x62)), puVar8 = temp_v5, temp_v4 != 0)) {
+           (btlMainFindEntryByListedId(temp_v4,(int)*(short *)(temp_v2 + 0x62)), puVar8 = temp_v5, temp_v4 != 0)) {
           temp_v2 = 0x85;
           puVar10 = param_2 + 0x51;
           pbVar1 = (unsigned char *)&temp_v11;
@@ -238,7 +238,7 @@ int FUN_003cbf40(int *param_1,unsigned int *param_2)
         }
         temp_v1 = temp_v1 + 1;
       } while (temp_v1 < 0x6d);
-      FUN_003af06c(DAT_00439ca8,puVar8,temp_v0,temp_v3);
+      FUN_003af06c(g_btlUiBlock,puVar8,temp_v0,temp_v3);
     }
   }
   temp_v10 = 0;
@@ -272,7 +272,7 @@ int FUN_003cbf40(int *param_1,unsigned int *param_2)
     FUN_00229b10(param_1,param_2);
     temp_v10 = 1;
     temp_v9 = 1;
-    FUN_00229a24(DAT_00439ca8);
+    FUN_00229a24(g_btlUiBlock);
     FUN_00229118(param_1,0,0xffffffff);
   }
   else if ((*param_2 & 0x1000) != 0) {
@@ -300,12 +300,12 @@ int FUN_003cbf40(int *param_1,unsigned int *param_2)
     FUN_00229b10(param_1,param_2);
     temp_v10 = 1;
     temp_v9 = 1;
-    FUN_00229a24(DAT_00439ca8);
+    FUN_00229a24(g_btlUiBlock);
     FUN_00229118(param_1,0,0xffffffff);
   }
   else {
-    temp_v1 = FUN_002bfde4(0);
-    if ((temp_v1 != 0) || (temp_v1 = FUN_003ae608(DAT_00439ca8,0), temp_v1 != 0)) {
+    temp_v1 = padIsButtonPressed(0);
+    if ((temp_v1 != 0) || (temp_v1 = FUN_003ae608(g_btlUiBlock,0), temp_v1 != 0)) {
       if (temp_v15 != 0xe) {
         FUN_002bf80c(0x100016d);
         temp_v1 = 0;
@@ -340,14 +340,14 @@ int FUN_003cbf40(int *param_1,unsigned int *param_2)
         }
         temp_v10 = 1;
         temp_v9 = 1;
-        FUN_00229a24(DAT_00439ca8);
+        FUN_00229a24(g_btlUiBlock);
         FUN_00229118(param_1,0,0xffffffff);
       }
     }
     else {
-      temp_v1 = FUN_002bfde4(1);
-      if (((temp_v1 != 0) || (temp_v1 = FUN_003ae608(DAT_00439ca8,1), temp_v1 != 0)) &&
-         ((temp_v1 = FUN_0029e02c(), temp_v1 == 0 && (temp_v1 = FUN_0027e314(DAT_00439ca8), temp_v1 != 0))))
+      temp_v1 = padIsButtonPressed(1);
+      if (((temp_v1 != 0) || (temp_v1 = FUN_003ae608(g_btlUiBlock,1), temp_v1 != 0)) &&
+         ((temp_v1 = FUN_0029e02c(), temp_v1 == 0 && (temp_v1 = FUN_0027e314(g_btlUiBlock), temp_v1 != 0))))
       {
         FUN_002bf80c(0x100016e);
         temp_v10 = 1;
@@ -389,7 +389,7 @@ int FUN_003cbf40(int *param_1,unsigned int *param_2)
             temp_v1 = temp_v1 + 1;
             if (temp_v1 >= 0x6d) {
               if (temp_v10) {
-                FUN_002296dc(DAT_00439ca8);
+                FUN_002296dc(g_btlUiBlock);
               }
               return temp_v9;
             }
@@ -403,7 +403,7 @@ int FUN_003cbf40(int *param_1,unsigned int *param_2)
     temp_v1 = temp_v1 + 1;
     if (temp_v1 >= 0x6d) {
       if (temp_v10) {
-        FUN_002296dc(DAT_00439ca8);
+        FUN_002296dc(g_btlUiBlock);
       }
       return temp_v9;
     }

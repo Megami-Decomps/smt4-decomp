@@ -10,7 +10,7 @@ typedef struct {
 } param_3_stack;
 
 extern unsigned char DAT_0061a664; /* 0x61a664 */
-extern unsigned char DAT_0061a684; /* 0x61a684 */
+extern unsigned char g_callbackFuncs; /* 0x61a684 */
 
 
 unsigned int FUN_0016e700(unsigned int param_1,unsigned int param_2,unsigned int param_3)
@@ -23,7 +23,7 @@ unsigned int FUN_0016e700(unsigned int param_1,unsigned int param_2,unsigned int
     if (*(int *)(temp_v0 * 4 + 0x61a644) == 0) {
       *(unsigned int *)(temp_v0 * 4 + 0x61a644) = param_1;
       *(unsigned int *)(&DAT_0061a664 + temp_v0 * 4) = param_2;
-      *(unsigned int *)(&DAT_0061a684 + temp_v0 * 4) = param_3;
+      *(unsigned int *)(&g_callbackFuncs + temp_v0 * 4) = param_3;
       return 1;
     }
     temp_v0 = temp_v0 + 1;

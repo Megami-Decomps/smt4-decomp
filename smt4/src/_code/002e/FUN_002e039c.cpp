@@ -19,7 +19,7 @@ extern unsigned char DAT_004be698; /* 0x4be698 */
 extern int DAT_004bf898; /* 0x4bf898 */
 
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-extern int FUN_002c2950(void);
+extern int gameGetMapBlock(void);
 
 
 unsigned int FUN_002e039c(int param_1)
@@ -34,7 +34,7 @@ unsigned int FUN_002e039c(int param_1)
   float in_s0;
   float in_s1;
   
-  temp_v1 = FUN_002c2950();
+  temp_v1 = gameGetMapBlock();
   temp_v2 = 0;
   if (temp_v2 < DAT_004bf898) {
     do {

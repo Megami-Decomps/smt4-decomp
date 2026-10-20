@@ -9,7 +9,7 @@ typedef struct Resources {
     /* 0x20 */ int sound;
 } Resources;
 
-extern Resources DAT_0044ea80;
+extern Resources g_effectEditor;
 
 int FUN_002629a8(int handle, int arg);
 int FUN_002629f0(int handle, int arg);
@@ -17,13 +17,13 @@ int FUN_002629f0(int handle, int arg);
 /* Frees the global effect and sound handles (clearing them), then frees `handle`. */
 void FUN_002d142c(int handle)
 {
-    if (DAT_0044ea80.effect != 0) {
-        FUN_002629f0(DAT_0044ea80.effect, 3);
-        DAT_0044ea80.effect = 0;
+    if (g_effectEditor.effect != 0) {
+        FUN_002629f0(g_effectEditor.effect, 3);
+        g_effectEditor.effect = 0;
     }
-    if (DAT_0044ea80.sound != 0) {
-        FUN_002629a8(DAT_0044ea80.sound, 3);
-        DAT_0044ea80.sound = 0;
+    if (g_effectEditor.sound != 0) {
+        FUN_002629a8(g_effectEditor.sound, 3);
+        g_effectEditor.sound = 0;
     }
     FUN_002629a8(handle, 3);
 }

@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern BtlUiGlobalsA DAT_0057a9b8;
+extern BtlUiGlobalsA g_btlUi;
 
 void FUN_004aa780(u32 unused, u8 value)
 {
-    DAT_0057a9b8.ui->unk6174 = value;
+    g_btlUi.ui->unk6174 = value;
 }
 
 } /* extern "C" */

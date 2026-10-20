@@ -29,7 +29,7 @@ extern int FUN_00162880(void);
 extern int FUN_00162ea4(void);
 extern int jobGetWork(void);
 /* Supplied declaration required: FUN_0016c4b8. */
-extern int FUN_0018206c(unsigned int, unsigned int);
+extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0019e3d0. */
 
 
@@ -57,7 +57,7 @@ void FUN_00281428(void)
     else {
       temp_v4 = *(float *)(temp_v0 + 0x2c) * 0.5f;
     }
-    temp_v1 = FUN_0018206c(*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 0x14));
+    temp_v1 = asdTMTexTableNodeIsLoaded(*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 0x14));
     temp_v6 = 255.0f;
     if (temp_v1 != 0) {
       temp_v1 = *(int *)(*(int *)(temp_v0 + 0xc) + 8);
@@ -69,12 +69,12 @@ void FUN_00281428(void)
       FUN_0016c4b8(g_renderCtx,*(unsigned int *)(*(int *)(temp_v0 + 0xc) + 8));
       FUN_0019e3d0(temp_v3 + temp_v1 * 0x1010100);
     }
-    temp_v1 = FUN_0018206c(*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 0x84));
+    temp_v1 = asdTMTexTableNodeIsLoaded(*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 0x84));
     if (temp_v1 != 0) {
       temp_v5 = *(float *)(temp_v0 + 0x88);
       if (*(char *)(temp_v0 + 0x8d) == '\0') {
         temp_v5 = *(float *)(temp_v0 + 0x28);
-        temp_v1 = FUN_0018206c(*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 0x14));
+        temp_v1 = asdTMTexTableNodeIsLoaded(*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 0x14));
         if (temp_v1 != 0) {
           return;
         }

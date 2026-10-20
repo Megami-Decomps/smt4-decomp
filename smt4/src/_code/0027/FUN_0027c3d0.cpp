@@ -37,8 +37,8 @@ extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
 extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002a0428. */
 extern int FUN_002adee0(unsigned int);
-extern int FUN_002c09d0(void);
-extern int FUN_002c2950(void);
+extern int gameFlagIsSet(void);
+extern int gameGetMapBlock(void);
 
 
 unsigned int FUN_0027c3d0(void)
@@ -61,7 +61,7 @@ unsigned int FUN_0027c3d0(void)
   unsigned int in_fpscr;
   int temp_v10;
   
-  temp_v0 = FUN_002c2950();
+  temp_v0 = gameGetMapBlock();
   temp_v5 = *(short *)(DAT_0044cd88 + 8);
   if (temp_v5 != 0) {
     if (temp_v5 != 1) {
@@ -110,8 +110,8 @@ unsigned int FUN_0027c3d0(void)
               }
               if (((((temp_v1 != 1) || (temp_v7 = FUN_00253154((int)(short)(int)pcVar11), temp_v7 == 0)) &&
                    (!temp_v9)) &&
-                  ((*(short *)(pcVar2 + 0xc) == 0 || (temp_v7 = FUN_002c09d0(), temp_v7 != 0)))) &&
-                 ((*(short *)(pcVar2 + 0xe) == 0 || (temp_v7 = FUN_002c09d0(), temp_v7 == 0)))) {
+                  ((*(short *)(pcVar2 + 0xc) == 0 || (temp_v7 = gameFlagIsSet(), temp_v7 != 0)))) &&
+                 ((*(short *)(pcVar2 + 0xe) == 0 || (temp_v7 = gameFlagIsSet(), temp_v7 == 0)))) {
                 temp_v4 = temp_v4 + 1;
                 temp_v10 = temp_v10 + 1;
               }
@@ -256,8 +256,8 @@ LAB_0027c7c0:
           }
           if ((((temp_v2 != 1) || (temp_v2 = FUN_00253154((int)(short)(int)pcVar11), temp_v2 == 0)) &&
               (!temp_v9)) &&
-             (((*(short *)(pcVar2 + 0xc) == 0 || (temp_v2 = FUN_002c09d0(), temp_v2 != 0)) &&
-              ((*(short *)(pcVar2 + 0xe) == 0 || (temp_v2 = FUN_002c09d0(), temp_v2 == 0)))))) {
+             (((*(short *)(pcVar2 + 0xc) == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 != 0)) &&
+              ((*(short *)(pcVar2 + 0xe) == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 == 0)))))) {
             temp_v2 = DAT_0044cd88;
             temp_v4 = 0;
             do {

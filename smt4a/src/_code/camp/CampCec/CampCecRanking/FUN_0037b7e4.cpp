@@ -16,9 +16,9 @@ int FUN_001acf98(...);
 int FUN_0023723c(...);
 int FUN_002804b0(...);
 int sysMemClear(...);
-int FUN_002e6dd0(...);
+int rt_aeabi_memclr(...);
 int FUN_00319aec(...);
-int FUN_003fd63c(...);
+int gameFlagSetValue(...);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
 
 /* stack frame of void: 8 slot(s), 32 byte(s) */
@@ -50,7 +50,7 @@ extern unsigned char DAT_0052c284; /* 0x52c284 */
 extern unsigned int *g_campCecRanking; /* 0x57f11c */
 
 /* Supplied declaration required: FUN_00100388. */
-extern int FUN_0014af84(void);
+extern int gameDataBlocksGetSaveData(void);
 extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: asdProcessCreateSimple. */
@@ -64,10 +64,10 @@ extern int FUN_0019e52c(unsigned short);
 /* Supplied declaration required: FUN_0023723c. */
 /* Supplied declaration required: FUN_002804b0. */
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_002e6dd0. */
+/* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: FUN_00319aec. */
 extern unsigned short FUN_0036fcd0(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_003fd63c. */
+/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
 
 
@@ -140,9 +140,9 @@ void FUN_0037b7e4(void)
   FUN_002804b0(&LAB_0037bc6c,puVar2 + 0x2f,0);
   puVar2 = g_campCecRanking;
   if (g_campCecRanking != (unsigned int *)0x0) {
-    temp_v4 = FUN_0014af84();
-    FUN_002e6dd0(puVar2 + 0x31,0xf0);
-    FUN_002e6dd0(puVar2 + 0x6d,0x54);
+    temp_v4 = gameDataBlocksGetSaveData();
+    rt_aeabi_memclr(puVar2 + 0x31,0xf0);
+    rt_aeabi_memclr(puVar2 + 0x6d,0x54);
     temp_v3 = 0x14;
     puVar5 = (unsigned short *)(temp_v4 + 0x28310);
     temp_v5 = 0;
@@ -170,7 +170,7 @@ void FUN_0037b7e4(void)
   }
   puVar2 = g_campCecRanking;
   if (g_campCecRanking != (unsigned int *)0x0) {
-    FUN_002e6dd0(&temp_v7,0x80);
+    rt_aeabi_memclr(&temp_v7,0x80);
     temp_v5 = 0;
     do {
       temp_v2 = (unsigned int)*(unsigned short *)(puVar2 + temp_v5 * 3 + 0x31);
@@ -179,7 +179,7 @@ void FUN_0037b7e4(void)
         FUN_00100388(&temp_v7,&LAB_0037bc84,temp_v2);
       }
       else {
-        FUN_002e6dd0(&temp_v7,0x80);
+        rt_aeabi_memclr(&temp_v7,0x80);
       }
       temp_v1 = 2;
       if (temp_v5 == 0) {
@@ -203,11 +203,11 @@ void FUN_0037b7e4(void)
           FUN_00100388(&temp_v7,&LAB_0037bc84,temp_v4);
         }
         else {
-          FUN_002e6dd0(&temp_v7,0x80);
+          rt_aeabi_memclr(&temp_v7,0x80);
         }
       }
       else {
-        FUN_002e6dd0(&temp_v7,0x80);
+        rt_aeabi_memclr(&temp_v7,0x80);
       }
       temp_v1 = 2;
       if (temp_v5 == 0) {
@@ -223,7 +223,7 @@ void FUN_0037b7e4(void)
     } while (temp_v5 < 7);
   }
   FUN_00319aec(0);
-  FUN_003fd63c(0x4c7,0,1);
+  gameFlagSetValue(0x4c7,0,1);
   return;
 }
 

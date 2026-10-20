@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_00184758(int, int, int);
-int FUN_00184c00(int, int);
+int uiSpriteSetKeyframe(int, int, int);
+int uiSpriteSetImageKeyframe(int, int);
 int FUN_00420a2c(int);
 
-extern unsigned char DAT_00588e14; /* 0x588e14 */
+extern unsigned char g_saveLoadUIBase; /* 0x588e14 */
 
-/* Supplied declaration required: FUN_00184758. */
-/* Supplied declaration required: FUN_00184c00. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_00420a2c. */
 
 
@@ -23,14 +23,14 @@ void FUN_0041f5bc(int param_1)
   int temp_v1;
   int temp_v2;
   
-  FUN_00184758(param_1 + 0x474,5,0);
-  FUN_00184c00(param_1 + 0x474,0);
+  uiSpriteSetKeyframe(param_1 + 0x474,5,0);
+  uiSpriteSetImageKeyframe(param_1 + 0x474,0);
   temp_v1 = 0;
   if (temp_v1 < *(int *)(param_1 + 0x18)) {
     do {
       temp_v2 = param_1 + temp_v1 * 0x8c;
-      FUN_00184758(temp_v2 + 0x500,5,0);
-      FUN_00184c00(temp_v2 + 0x500,0);
+      uiSpriteSetKeyframe(temp_v2 + 0x500,5,0);
+      uiSpriteSetImageKeyframe(temp_v2 + 0x500,0);
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < *(int *)(param_1 + 0x18));
   }
@@ -49,7 +49,7 @@ void FUN_0041f5bc(int param_1)
     *(unsigned int *)(param_1 + 8) = 0;
     *(unsigned char *)(param_1 + 0xc) = 0;
     if (temp_v0 == '\x16') {
-      (*(unsigned int *)((unsigned char *)&DAT_00588e14 + 0x14)) = *(unsigned int *)(param_1 + 0x2f8);
+      (*(unsigned int *)((unsigned char *)&g_saveLoadUIBase + 0x14)) = *(unsigned int *)(param_1 + 0x2f8);
       *(unsigned char *)(param_1 + 4) = 1;
     }
   }

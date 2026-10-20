@@ -15,8 +15,8 @@ typedef struct Owner1D {
 } Owner1D;
 
 extern u8 DAT_0055c824;
-extern u32 DAT_0056fcc0;
-extern void FUN_001aea28(u32 a, u8 *data);
+extern u32 g_handleRegistry;
+extern void ptrListRemoveClearOwner(u32 a, u8 *data);
 
 /* Destroy hook: restores the vtable and releases the two owned objects. */
 Owner1D *owner1DDestroy(Owner1D *obj)
@@ -31,7 +31,7 @@ Owner1D *owner1DDestroy(Owner1D *obj)
     }
     second = obj->second;
     if (second != NULL && (data = ((OwnedData *)second)->data) != NULL) {
-        FUN_001aea28(DAT_0056fcc0, data);
+        ptrListRemoveClearOwner(g_handleRegistry, data);
         if (obj->second != NULL) {
             obj->second->vtbl->release(obj->second);
             obj->second = NULL;

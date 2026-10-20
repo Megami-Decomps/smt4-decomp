@@ -7,14 +7,14 @@ extern "C" {
 int FUN_002903f0(void);
 int FUN_0029ee6c(int, int);
 int FUN_0029efc0(...);
-int FUN_002b63c0(void);
+int dataTable1bOr1cGetRecord(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-extern int DAT_0043dd50; /* 0x43dd50 */
+extern int g_uiQuest; /* 0x43dd50 */
 
 extern int FUN_0028f304(void);
 /* Supplied declaration required: FUN_002903f0. */
@@ -24,7 +24,7 @@ extern int FUN_00298e20(unsigned int);
 /* Supplied declaration required: FUN_0029ee6c. */
 extern int FUN_0029efa8(int);
 /* Supplied declaration required: FUN_0029efc0. */
-/* Supplied declaration required: FUN_002b63c0. */
+/* Supplied declaration required: dataTable1bOr1cGetRecord. */
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
@@ -42,15 +42,15 @@ void FUN_00290404(void)
   unsigned int temp_v5;
   unsigned int temp_v6;
   
-  temp_v3 = DAT_0043dd50;
-  if (*(char *)(DAT_0043dd50 + 0x5c4) != '\0') {
-    temp_v1 = DAT_0043dd50 + 0x5fc;
+  temp_v3 = g_uiQuest;
+  if (*(char *)(g_uiQuest + 0x5c4) != '\0') {
+    temp_v1 = g_uiQuest + 0x5fc;
     temp_v2 = FUN_0029efc0();
     temp_v1 = FUN_0029efa8(temp_v1);
     temp_v0 = *(unsigned short *)(temp_v3 + (temp_v1 + temp_v2) * 2 + 0x6c4);
   }
   else {
-    temp_v1 = FUN_0029efc0(DAT_0043dd50 + 0x660);
+    temp_v1 = FUN_0029efc0(g_uiQuest + 0x660);
     temp_v2 = FUN_0029efa8(temp_v3 + 0x660);
     temp_v0 = *(unsigned short *)(temp_v3 + (temp_v2 + temp_v1) * 2 + 0x78a);
   }
@@ -79,7 +79,7 @@ void FUN_00290404(void)
   }
   else {
     temp_v5 = temp_v6;
-    FUN_002b63c0();
+    dataTable1bOr1cGetRecord();
     if (*(char *)(temp_v5 + 6) != '\0') {
       temp_v3 = FUN_0028f304();
       if (temp_v3 != 0) {

@@ -6,14 +6,14 @@ extern "C" {
 
 int FUN_0022e354(unsigned short [11], int, int);
 int FUN_00253d60(unsigned short [11], unsigned int);
-int FUN_002b63ac(void);
+int gameGetPlayerData(void);
 
 /* Supplied declaration required: FUN_0022e354. */
 /* Supplied declaration required: FUN_00253d60. */
-extern int FUN_002a8740(void);
-extern int FUN_002a8764(void);
-extern int FUN_002a8778(void);
-/* Supplied declaration required: FUN_002b63ac. */
+extern int gameGetUnitRecord(void);
+extern int gameGetSlotTable(void);
+extern int gameCountUnits(void);
+/* Supplied declaration required: gameGetPlayerData. */
 extern int randNextInRange(unsigned int);
 
 
@@ -37,20 +37,20 @@ void FUN_0027efb8(unsigned int param_1,unsigned int param_2,int param_3)
   }
   temp_v0 = 1 << (param_2 & 0xff);
   if (((((param_1 == 0 || param_1 == 2) || param_1 == 3) &&
-       (temp_v2 = FUN_002b63ac(), (*(unsigned short *)(temp_v2 + 0x72) & 2) == 0)) &&
-      (temp_v2 = FUN_002b63ac(), (*(unsigned short *)(temp_v2 + 0x72) & 0x400) == 0)) &&
-     ((temp_v2 = FUN_002b63ac(), (*(unsigned short *)(temp_v2 + 0x72) & temp_v0) == 0 &&
+       (temp_v2 = gameGetPlayerData(), (*(unsigned short *)(temp_v2 + 0x72) & 2) == 0)) &&
+      (temp_v2 = gameGetPlayerData(), (*(unsigned short *)(temp_v2 + 0x72) & 0x400) == 0)) &&
+     ((temp_v2 = gameGetPlayerData(), (*(unsigned short *)(temp_v2 + 0x72) & temp_v0) == 0 &&
       (temp_v2 = randNextInRange(99), temp_v2 < param_3)))) {
     if (param_2 != 5) {
-      temp_v2 = FUN_002b63ac();
+      temp_v2 = gameGetPlayerData();
       *(unsigned short *)(temp_v2 + 0x72) = *(unsigned short *)(temp_v2 + 0x72) | (unsigned short)temp_v0;
     }
     else {
-      temp_v4 = FUN_002b63ac();
+      temp_v4 = gameGetPlayerData();
       FUN_00253d60(temp_v8,temp_v4);
       uStack_32 = uStack_32 >> 10;
       if (!((uStack_32 == 1 || uStack_32 == 3) || uStack_32 == 4)) {
-        temp_v2 = FUN_002b63ac();
+        temp_v2 = gameGetPlayerData();
         *(unsigned short *)(temp_v2 + 0x72) = *(unsigned short *)(temp_v2 + 0x72) | (unsigned short)temp_v0;
       }
     }
@@ -60,19 +60,19 @@ void FUN_0027efb8(unsigned int param_1,unsigned int param_2,int param_3)
       return;
     }
     temp_v7 = 3;
-    temp_v2 = FUN_002a8764();
+    temp_v2 = gameGetSlotTable();
     temp_v2 = temp_v2 + 0x9108;
   }
   else {
-    temp_v7 = FUN_002a8778();
-    temp_v2 = FUN_002a8764();
+    temp_v7 = gameCountUnits();
+    temp_v2 = gameGetSlotTable();
     temp_v2 = temp_v2 + 0x90f0;
   }
   temp_v6 = 0;
   if (temp_v6 < temp_v7) {
     do {
       if (-1 < *(char *)(temp_v2 + temp_v6)) {
-        temp_v3 = FUN_002a8740();
+        temp_v3 = gameGetUnitRecord();
         temp_v1 = *(unsigned short *)(temp_v3 + 0x44);
         if ((((temp_v1 & 2) == 0 && (temp_v1 & 0x400) == 0) &&
             ((temp_v1 & 4) == 0 && (temp_v1 & temp_v0) == 0)) &&

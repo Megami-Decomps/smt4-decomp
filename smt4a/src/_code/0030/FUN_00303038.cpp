@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002fa010(int);
-int FUN_0030ff74(int, int *, int, int);
+int streamReaderReadArray(int, int *, int, int);
 int FUN_00310dc6(int, int, int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -15,7 +15,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_002fa010. */
 extern int FUN_0030fba6(int, int);
-/* Supplied declaration required: FUN_0030ff74. */
+/* Supplied declaration required: streamReaderReadArray. */
 /* Supplied declaration required: FUN_00310dc6. */
 
 
@@ -27,7 +27,7 @@ int FUN_00303038(int param_1,int param_2,unsigned int param_3,int param_4)
   int temp_v1;
   
   temp_v1 = param_4;
-  FUN_0030ff74(param_1,&temp_v1,4,1);
+  streamReaderReadArray(param_1,&temp_v1,4,1);
   temp_v0 = FUN_0030fba6(param_1,temp_v1 << 3);
   if (temp_v0 != 0) {
     if (*(char *)(param_1 + 4) == '\0') {

@@ -5,11 +5,11 @@
 extern "C" {
 
 extern unsigned short uRam004e8282; /* 0x4e8282 */
-extern unsigned char DAT_004ead10; /* 0x4ead10 */
+extern unsigned char g_nnSndMasterManagerImpl; /* 0x4ead10 */
 extern float fRam004ead14; /* 0x4ead14 */
 extern float fRam004ead18; /* 0x4ead18 */
 
-extern int FUN_002bb274(void);
+extern int nn_snd_CTR_Dspsnd_IsInitialized(void);
 
 
 void FUN_0035ff18(char *param_1)
@@ -25,10 +25,10 @@ void FUN_0035ff18(char *param_1)
     return;
   }
   *(float *)(param_1 + 8) = in_s0;
-  if (DAT_004ead10 != '\0') {
+  if (g_nnSndMasterManagerImpl != '\0') {
     temp_v1 = fRam004ead14 * in_s0;
     fRam004ead18 = in_s0;
-    temp_v0 = FUN_002bb274();
+    temp_v0 = nn_snd_CTR_Dspsnd_IsInitialized();
     if (temp_v0 != 0) {
       puVar2 = *(unsigned int **)((unsigned int)uRam004e8282 * 4 + 0x4e8004);
       puVar2[1] = (unsigned int)temp_v1;

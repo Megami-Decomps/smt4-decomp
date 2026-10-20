@@ -5,8 +5,8 @@
 extern "C" {
 
 int sysPlaySe(int);
-int FUN_00184758(...);
-int FUN_00184c00(int, int, int);
+int uiSpriteSetKeyframe(...);
+int uiSpriteSetImageKeyframe(int, int, int);
 int FUN_002a4964(int, int);
 int FUN_003d2150(int);
 int FUN_003d498c(unsigned int, int);
@@ -17,11 +17,11 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-extern int DAT_0057f28c; /* 0x57f28c */
+extern int g_uiQuest; /* 0x57f28c */
 
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_00184758. */
-/* Supplied declaration required: FUN_00184c00. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 extern int FUN_001bd100(unsigned int);
 /* Supplied declaration required: FUN_002a4964. */
 extern int FUN_002c2c68(int);
@@ -40,8 +40,8 @@ void FUN_003a7c3c(unsigned int param_1)
   int temp_v3;
   int temp_v4;
   
-  temp_v0 = DAT_0057f28c;
-  *(short *)(DAT_0057f28c + 0xcca) = (short)param_1;
+  temp_v0 = g_uiQuest;
+  *(short *)(g_uiQuest + 0xcca) = (short)param_1;
   temp_v1 = FUN_001bd100(param_1);
   if (temp_v1 != 0) {
     temp_v4 = temp_v0 + 0x948;
@@ -72,12 +72,12 @@ void FUN_003a7c3c(unsigned int param_1)
   }
   FUN_003dc530();
   FUN_003d498c(param_1,0);
-  FUN_00184758(temp_v0 + 0x34,0);
-  FUN_00184758(temp_v0 + 0x494,2,0);
-  FUN_00184c00(temp_v0 + 0x34,8,0);
-  FUN_00184c00(temp_v0 + 0x494,9,0);
-  temp_v0 = DAT_0057f28c;
-  *(unsigned int *)(DAT_0057f28c + 8) = *(unsigned int *)(DAT_0057f28c + 4);
+  uiSpriteSetKeyframe(temp_v0 + 0x34,0);
+  uiSpriteSetKeyframe(temp_v0 + 0x494,2,0);
+  uiSpriteSetImageKeyframe(temp_v0 + 0x34,8,0);
+  uiSpriteSetImageKeyframe(temp_v0 + 0x494,9,0);
+  temp_v0 = g_uiQuest;
+  *(unsigned int *)(g_uiQuest + 8) = *(unsigned int *)(g_uiQuest + 4);
   *(unsigned int *)(temp_v0 + 4) = 0x17;
   *(unsigned int *)(temp_v0 + 0x10) = 0;
   sysPlaySe(0x1a);

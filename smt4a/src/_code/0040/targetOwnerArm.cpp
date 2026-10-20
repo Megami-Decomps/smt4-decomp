@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern s32 FUN_00341930(Target *target);
+extern s32 resourceIsReady(Target *target);
 
-/* True when FUN_00341930 accepts the target; also arms the target's inner object. */
+/* True when resourceIsReady accepts the target; also arms the target's inner object. */
 u8 targetOwnerArm(TargetOwner *owner)
 {
-    s32 result = FUN_00341930(owner->target);
+    s32 result = resourceIsReady(owner->target);
 
     if (result != 0) {
         owner->target->inner->unk3C = 1;

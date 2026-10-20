@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_002a215c(u32 a, void *b);
+int linkListEraseObject(u32 a, void *b);
 extern u32 FUN_002a2174(void);
 
 typedef struct Obj {
@@ -14,7 +14,7 @@ Obj *FUN_00155634(Obj *obj)
 {
     u32 a = FUN_002a2174();
 
-    FUN_002a215c(a, obj->unk80);
+    linkListEraseObject(a, obj->unk80);
     return obj;
 }
 

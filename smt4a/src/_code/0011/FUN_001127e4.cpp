@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002e93c2(int, int);
 int FUN_002ea3d0(int, unsigned int);
-int FUN_002ea9c0(int, unsigned char [32]);
+int onlineUrlSetAddress(int, unsigned char [32]);
 int FUN_002eb858(unsigned char [32], unsigned int, unsigned int);
 int FUN_002f3490(unsigned char [28]);
 int FUN_002f8728(unsigned char [24]);
@@ -27,7 +27,7 @@ extern unsigned char LAB_00112a0d; /* 0x112a0d */
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned char *, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
 extern unsigned int FUN_002ea704(void);
-/* Supplied declaration required: FUN_002ea9c0. */
+/* Supplied declaration required: onlineUrlSetAddress. */
 /* Supplied declaration required: FUN_002eb858. */
 /* Supplied declaration required: FUN_002f3490. */
 /* Supplied declaration required: FUN_002f8728. */
@@ -53,7 +53,7 @@ unsigned char * FUN_001127e4(int param_1)
   
   FUN_002eb858(temp_v7,*(unsigned int *)(param_1 + 0x378),*(unsigned int *)(param_1 + 0x374) & 0xffff);
   temp_v0 = param_1 + 0x260;
-  FUN_002ea9c0(temp_v0,temp_v7);
+  onlineUrlSetAddress(temp_v0,temp_v7);
   temp_v1 = FUN_002ea704();
   FUN_002fa434(temp_v4,temp_v1);
   FUN_002f3490(temp_v4);

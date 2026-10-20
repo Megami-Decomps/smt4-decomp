@@ -22,16 +22,16 @@ int FUN_003d2150(...);
 int sysPlaySe(...);
 int FUN_00180118(unsigned int);
 int FUN_00215bd0(void);
-int FUN_00275f44(...);
+int scrScriptProcessStartEntry(...);
 int FUN_002a469c(void);
 int FUN_002a5e7c(...);
 int FUN_002c7ce8(...);
 int FUN_002c8538(...);
 int FUN_002c85b0(...);
-int FUN_002e342c(unsigned char [36], unsigned int);
+int libc_strcpy(unsigned char [36], unsigned int);
 int FUN_003180c4(int, unsigned char [36]);
 int FUN_0031cf00(void);
-int FUN_003216ec(void);
+int btlTalkBustUpReleaseAllSlots(void);
 int FUN_00336de4(...);
 int FUN_00359974(...);
 int FUN_0035fc4c(void);
@@ -41,7 +41,7 @@ int FUN_003a7a88(...);
 int FUN_004bcd90(...);
 int rt_memcpy_w(int, int, int);
 
-extern int FUN_001656a0(unsigned int);
+extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00180118. */
 /* Supplied declaration required: FUN_00215bd0. */
@@ -52,7 +52,7 @@ extern int FUN_0023b3b8(void);
 extern int FUN_0023b3d0(void);
 /* Supplied declaration required: FUN_0023b45c. */
 extern int FUN_0026c3a0(void);
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002857b8(void);
 /* Supplied declaration required: FUN_00285800. */
 /* Supplied declaration required: FUN_002a469c. */
@@ -64,14 +64,14 @@ extern int FUN_002c7ca0(void);
 /* Supplied declaration required: FUN_002c85b0. */
 extern int FUN_002e1a18(unsigned int);
 /* Supplied declaration required: FUN_002e2680. */
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 extern int FUN_002f036c(void);
 /* Supplied declaration required: FUN_003180c4. */
 /* Supplied declaration required: FUN_00319aec. */
 /* Supplied declaration required: FUN_0031cf00. */
 extern int FUN_0031f63c(void);
 extern int FUN_0032169c(void);
-/* Supplied declaration required: FUN_003216ec. */
+/* Supplied declaration required: btlTalkBustUpReleaseAllSlots. */
 extern int FUN_00334044(void);
 /* Supplied declaration required: FUN_00334214. */
 /* Supplied declaration required: FUN_003343c0. */
@@ -118,9 +118,9 @@ unsigned int FUN_003193a8(int param_1)
   case 0:
     temp_v2 = (unsigned int)*(unsigned short *)(temp_v6 + 0x62);
     FUN_00180118(temp_v2);
-    FUN_002e342c(temp_v10,temp_v2);
+    libc_strcpy(temp_v10,temp_v2);
     FUN_003180c4(0,temp_v10);
-    FUN_00275f44(*(unsigned int *)(param_1 + 0x360),0x14);
+    scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x360),0x14);
     temp_v3 = FUN_0032169c();
     if (temp_v3 == 0) {
       FUN_00336de4(*(unsigned short *)(temp_v6 + 0x62),1);
@@ -141,7 +141,7 @@ unsigned int FUN_003193a8(int param_1)
     if (temp_v6 == 0) {
       return 0;
     }
-    FUN_00275f44(*(unsigned int *)(param_1 + 0x364),2);
+    scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x364),2);
     *(int *)(param_1 + 0x3bc) = *(int *)(param_1 + 0x3bc) + 1;
     break;
   case 3:
@@ -154,7 +154,7 @@ unsigned int FUN_003193a8(int param_1)
   case 4:
     temp_v2 = (unsigned int)*(unsigned short *)(temp_v6 + 0x62);
     FUN_00180118(temp_v2);
-    FUN_002e342c(temp_v10,temp_v2);
+    libc_strcpy(temp_v10,temp_v2);
     FUN_003180c4(0,temp_v10);
     temp_v3 = (int)*(short *)(param_1 + 0xe0);
     if (temp_v3 >= 1) {
@@ -249,7 +249,7 @@ unsigned int FUN_003193a8(int param_1)
               FUN_00371c3c(temp_v8,1);
               FUN_004bcd90(temp_v6);
               *(unsigned int *)(param_1 + 0x3bc) = 6;
-              FUN_003216ec();
+              btlTalkBustUpReleaseAllSlots();
               if (*(char *)(param_1 + 0x7d4) == '\0') {
                 return 0;
               }
@@ -279,7 +279,7 @@ unsigned int FUN_003193a8(int param_1)
       }
     }
     FUN_00359974(1,temp_v3,0xffffffff,0);
-    FUN_00275f44(*(unsigned int *)(param_1 + 0x360),temp_v7);
+    scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x360),temp_v7);
     temp_v6 = *(int *)(param_1 + 0x3bc) + 1;
     *(int *)(param_1 + 0x3bc) = temp_v6;
     break;
@@ -362,7 +362,7 @@ unsigned int FUN_003193a8(int param_1)
         temp_v6 = FUN_0031f63c();
         if ((((temp_v6 == 0) && (temp_v6 = FUN_002857b8(), temp_v6 == 0)) &&
             (temp_v6 = FUN_002c7ca0(), temp_v6 == 0)) &&
-           ((temp_v6 = FUN_001656a0(0), temp_v6 != 0 || (temp_v6 = FUN_002e1a18(1), temp_v6 != 0)))) {
+           ((temp_v6 = padButtonIsPressed(0), temp_v6 != 0 || (temp_v6 = FUN_002e1a18(1), temp_v6 != 0)))) {
           FUN_003343f0(1);
           FUN_003d2150(0x100020e);
           *(int *)(param_1 + 0x3bc) = *(int *)(param_1 + 0x3bc) + 1;

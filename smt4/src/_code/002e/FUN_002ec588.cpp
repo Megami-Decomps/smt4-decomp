@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_0026a348(void);
-int FUN_00296d6c(int, int);
+int randBetween(int, int);
 int FUN_00297060(void);
 int FUN_00297468(...);
 int FUN_0029cc44(void);
-int FUN_002b8838(...);
+int buttonHelpSetPreset(...);
 int FUN_002be624(...);
 
 int FUN_001db56c(void);
@@ -21,15 +21,15 @@ int FUN_0025981c(void);
 int FUN_00262f68(unsigned int, int);
 int FUN_00262f78(void);
 int FUN_00262f94(void);
-int FUN_0026b584(int);
+int gameDataBlocksAddFlags(int);
 int FUN_0026b9bc(void);
 int FUN_00295660(int, unsigned int [60]);
-int FUN_00296f4c(unsigned int, unsigned int);
-int FUN_002a8740(...);
-int FUN_002b9024(void);
-int FUN_002bd420(void);
-int FUN_002bf694(unsigned int [60], int);
-int FUN_002c424c(unsigned int [60], int, unsigned int);
+int scrScriptProcessStartEntry(unsigned int, unsigned int);
+int gameGetUnitRecord(...);
+int devilGetRecord(void);
+int memCopy(void);
+int libc_strcpy(unsigned int [60], int);
+int __aeabi_memset4(unsigned int [60], int, unsigned int);
 int FUN_002c5728(int);
 int FUN_002c5758(int);
 int FUN_002cd680(void);
@@ -51,13 +51,13 @@ typedef struct {
 extern unsigned char LAB_002ece28; /* 0x2ece28 */
 extern unsigned char LAB_002ece48; /* 0x2ece48 */
 extern unsigned char DAT_00402854; /* 0x402854 */
-extern int DAT_0043daa8; /* 0x43daa8 */
+extern int g_campCec; /* 0x43daa8 */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_001db56c. */
 /* Supplied declaration required: FUN_00220ffc. */
 /* Supplied declaration required: runWinClose. */
-extern int FUN_00248a9c(void);
+extern int asdCecInboxGetMessageCount(void);
 extern int FUN_0024ea50(unsigned short);
 /* Supplied declaration required: FUN_00254600. */
 /* Supplied declaration required: FUN_00259294. */
@@ -68,26 +68,26 @@ extern int FUN_002597e0(void);
 /* Supplied declaration required: FUN_00262f78. */
 /* Supplied declaration required: FUN_00262f94. */
 /* Supplied declaration required: FUN_0026a348. */
-/* Supplied declaration required: FUN_0026b584. */
+/* Supplied declaration required: gameDataBlocksAddFlags. */
 /* Supplied declaration required: FUN_0026b9bc. */
 extern int FUN_0028fb40(unsigned short);
 /* Supplied declaration required: FUN_00295660. */
-/* Supplied declaration required: FUN_00296d6c. */
-/* Supplied declaration required: FUN_00296f4c. */
+/* Supplied declaration required: randBetween. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297060. */
 /* Supplied declaration required: FUN_00297468. */
 /* Supplied declaration required: FUN_0029cc44. */
 extern int flagWordTestBit(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002a8740. */
-extern int FUN_002a8764(void);
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: gameGetUnitRecord. */
+extern int gameGetSlotTable(void);
+/* Supplied declaration required: buttonHelpSetPreset. */
 extern int FUN_002b8dc0(unsigned short);
-/* Supplied declaration required: FUN_002b9024. */
-/* Supplied declaration required: FUN_002bd420. */
+/* Supplied declaration required: devilGetRecord. */
+/* Supplied declaration required: memCopy. */
 /* Supplied declaration required: FUN_002be624. */
-/* Supplied declaration required: FUN_002bf694. */
-extern int FUN_002c09d0(unsigned int);
-/* Supplied declaration required: FUN_002c424c. */
+/* Supplied declaration required: libc_strcpy. */
+extern int gameFlagIsSet(unsigned int);
+/* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: FUN_002c5728. */
 /* Supplied declaration required: FUN_002c5758. */
 extern int FUN_002cd648(int);
@@ -134,14 +134,14 @@ unsigned int FUN_002ec588(int param_1)
   case 0:
     if ((*(char *)(param_1 + 0xd60) == '\0') || (temp_v8 = gameDataBlockTestFlag(0x20), temp_v8 == 0)) {
       temp_v11 = 0;
-      temp_v8 = FUN_002a8764();
+      temp_v8 = gameGetSlotTable();
       temp_v2 = 0;
       do {
         if (-1 < *(char *)(temp_v8 + temp_v2 + 0x90f0)) {
-          temp_v9 = FUN_002a8740();
+          temp_v9 = gameGetUnitRecord();
           temp_v3 = flagWordTestBit(temp_v9,2);
           if (temp_v3 != 0) {
-            temp_v9 = FUN_002a8740((int)*(char *)(temp_v8 + temp_v2 + 0x90f0));
+            temp_v9 = gameGetUnitRecord((int)*(char *)(temp_v8 + temp_v2 + 0x90f0));
             FUN_00262f68(temp_v9,4);
             temp_v11 = 1;
           }
@@ -162,10 +162,10 @@ unsigned int FUN_002ec588(int param_1)
     FUN_002e1b20();
     break;
   case 1:
-    FUN_0026b584(2);
+    gameDataBlocksAddFlags(2);
     FUN_00259294(2);
     FUN_001db56c();
-    temp_v8 = FUN_00248a9c();
+    temp_v8 = asdCecInboxGetMessageCount();
     *(int *)(temp_v13 + 0x4c) = temp_v8;
     if (temp_v8 < 1) {
       FUN_002ecfe4();
@@ -208,13 +208,13 @@ unsigned int FUN_002ec588(int param_1)
         temp_v8 = temp_v10;
       } while (temp_v2 < 0 != temp_v11);
     }
-    temp_v8 = FUN_002c09d0(0x551);
+    temp_v8 = gameFlagIsSet(0x551);
     if (temp_v8 == 0) {
       temp_v8 = 0;
       do {
         temp_v2 = FUN_002cd648(temp_v8);
         if ((*(unsigned char *)(temp_v2 + 0x20) & 0xc) != 0) {
-          FUN_002bf694(temp_v12,temp_v2 + 0xe);
+          libc_strcpy(temp_v12,temp_v2 + 0xe);
           FUN_00295660(0,temp_v12);
           if ((*(unsigned char *)(temp_v2 + 0x20) & 4) == 0) {
             temp_v9 = 0x14;
@@ -222,7 +222,7 @@ unsigned int FUN_002ec588(int param_1)
           else {
             temp_v9 = 0x13;
           }
-          FUN_00296f4c(*(unsigned int *)(param_1 + 0xd04),temp_v9);
+          scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0xd04),temp_v9);
           *temp_v15 = *(unsigned int *)(param_1 + 0xd58) | 8;
           break;
         }
@@ -247,23 +247,23 @@ unsigned int FUN_002ec588(int param_1)
       temp_v8 = FUN_002597e0();
       if (temp_v8 == 1) {
         FUN_00262f94();
-        FUN_002bd420();
-        temp_v2 = FUN_002a8764();
+        memCopy();
+        temp_v2 = gameGetSlotTable();
         temp_v8 = temp_v2;
         FUN_00262f94();
         if (temp_v8 != 0) {
           temp_v8 = 0;
           *(unsigned int *)(param_1 + 0xce8) = 0;
-          FUN_002c424c(temp_v12,0xf0,0xffffffff);
+          __aeabi_memset4(temp_v12,0xf0,0xffffffff);
           temp_v7 = 0;
-          puVar14 = (unsigned short *)(*(int *)(DAT_0043daa8 + 0xcf0) + temp_v7 * 0xc);
+          puVar14 = (unsigned short *)(*(int *)(g_campCec + 0xcf0) + temp_v7 * 0xc);
           while( 1 ) {
             temp_v4 = FUN_0025981c();
             if ((((unsigned int)(int)(short)puVar14[1] <= temp_v4) &&
                 ((int)(short)*puVar14 != (unsigned int)*(unsigned short *)(param_1 + 0x126))) &&
                (temp_v3 = FUN_0024ea50(*puVar14), temp_v3 == 0)) {
               temp_v4 = (unsigned int)*puVar14;
-              FUN_002b9024();
+              devilGetRecord();
               if ((unsigned int)*(unsigned char *)(temp_v4 + 3) <= *(unsigned char *)(temp_v2 + 0x7a) + 5) {
                 temp_v12[temp_v8] = temp_v7;
                 temp_v8 = temp_v8 + 1;
@@ -273,7 +273,7 @@ unsigned int FUN_002ec588(int param_1)
             if ((int)temp_v7 >= 0x3c) break;
             puVar14 = (unsigned short *)0x0;
             if (temp_v7 < 0x3c) {
-              puVar14 = (unsigned short *)(*(int *)(DAT_0043daa8 + 0xcf0) + temp_v7 * 0xc);
+              puVar14 = (unsigned short *)(*(int *)(g_campCec + 0xcf0) + temp_v7 * 0xc);
             }
           }
           temp_v2 = 0;
@@ -281,13 +281,13 @@ unsigned int FUN_002ec588(int param_1)
             do {
               do {
                 if (temp_v8 >= 2) {
-                  temp_v2 = FUN_00296d6c(0,temp_v8 - 1);
+                  temp_v2 = randBetween(0,temp_v8 - 1);
                 }
                 temp_v7 = temp_v12[temp_v2];
               } while (temp_v7 == 0xffffffff);
               puVar13 = (unsigned short *)0x0;
               if (temp_v7 < 0x3c) {
-                puVar13 = (unsigned short *)(*(int *)(DAT_0043daa8 + 0xcf0) + temp_v7 * 0xc);
+                puVar13 = (unsigned short *)(*(int *)(g_campCec + 0xcf0) + temp_v7 * 0xc);
               }
               temp_v3 = FUN_0024ea50(*puVar13);
             } while (temp_v3 != 0);
@@ -300,7 +300,7 @@ unsigned int FUN_002ec588(int param_1)
       temp_v2 = *(int *)(param_1 + 0xd54);
       if (temp_v2 < temp_v8) {
         do {
-          temp_v9 = FUN_00296d6c(0,4);
+          temp_v9 = randBetween(0,4);
           switch(temp_v9) {
           case 0:
             *(short *)(param_1 + 0xd4) = *(short *)(param_1 + 0xd4) + 1;
@@ -354,7 +354,7 @@ unsigned int FUN_002ec588(int param_1)
               temp_v4 = 0xc;
             }
           }
-          temp_v2 = *(int *)(DAT_0043daa8 + 0xcec);
+          temp_v2 = *(int *)(g_campCec + 0xcec);
           if ((temp_v2 != 0) && (temp_v4 < 0xd)) {
             temp_v10 = 0;
             temp_v3 = 0;
@@ -370,11 +370,11 @@ unsigned int FUN_002ec588(int param_1)
               temp_v3 = temp_v3 + 1;
             } while (temp_v3 < 5);
             if (temp_v10 != 0) {
-              temp_v3 = FUN_00296d6c(0,temp_v10 - 1);
-              temp_v2 = DAT_0043daa8;
+              temp_v3 = randBetween(0,temp_v10 - 1);
+              temp_v2 = g_campCec;
               temp_v1 = *(short *)((int)temp_v12 + temp_v3 * 2);
               if (temp_v1 != 0) {
-                *(short *)(DAT_0043daa8 + *(int *)(DAT_0043daa8 + 0xd3c) * 2 + 0xd0c) = temp_v1;
+                *(short *)(g_campCec + *(int *)(g_campCec + 0xd3c) * 2 + 0xd0c) = temp_v1;
                 *(int *)(temp_v2 + 0xd3c) = *(int *)(temp_v2 + 0xd3c) + 1;
               }
             }
@@ -402,14 +402,14 @@ unsigned int FUN_002ec588(int param_1)
         if (temp_v11 && puVar14 != (unsigned short *)0x0) {
           temp_v7 = (unsigned int)*puVar14;
         }
-        FUN_002b9024();
+        devilGetRecord();
         temp_v8 = FUN_002cdecc((int)*(char *)(temp_v7 + 0x30));
         FUN_002be624(temp_v12,&LAB_002ece48,temp_v8 + 1);
         FUN_00297468(temp_v12,param_1 + 0xd00,0);
         *(unsigned char *)(param_1 + 0xd63) = 1;
         FUN_0029cc44();
         FUN_0026a348();
-        FUN_002b8838(0x3c);
+        buttonHelpSetPreset(0x3c);
         *(int *)(temp_v13 + 0x50) = *(int *)(temp_v13 + 0x50) + 1;
       }
       else {

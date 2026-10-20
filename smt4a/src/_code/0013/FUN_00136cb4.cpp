@@ -7,8 +7,8 @@ extern "C" {
 int FUN_00147550(int, unsigned int, int);
 int FUN_00147a9c(int);
 int FUN_0016f9bc(unsigned char *, int);
-int FUN_0018b868(void);
-int FUN_0018b964(void);
+int nn_applet_CTR_detail_OpenSession(void);
+int nn_applet_CTR_detail_CloseSession(void);
 
 extern unsigned char DAT_005891b0; /* 0x5891b0 */
 extern unsigned char DAT_0061a5fc; /* 0x61a5fc */
@@ -17,8 +17,8 @@ extern int FUN_00147374(void);
 /* Supplied declaration required: FUN_00147550. */
 /* Supplied declaration required: FUN_00147a9c. */
 /* Supplied declaration required: FUN_0016f9bc. */
-/* Supplied declaration required: FUN_0018b868. */
-/* Supplied declaration required: FUN_0018b964. */
+/* Supplied declaration required: nn_applet_CTR_detail_OpenSession. */
+/* Supplied declaration required: nn_applet_CTR_detail_CloseSession. */
 
 
 void FUN_00136cb4(unsigned int param_1)
@@ -34,9 +34,9 @@ void FUN_00136cb4(unsigned int param_1)
     temp_v0 = 0;
     FUN_00147550(0x300,param_1 & 0xfffffff8,0xf);
     if (-1 < temp_v0) {
-      FUN_0018b868();
+      nn_applet_CTR_detail_OpenSession();
       FUN_00147a9c(0);
-      FUN_0018b964();
+      nn_applet_CTR_detail_CloseSession();
     }
   }
   return;

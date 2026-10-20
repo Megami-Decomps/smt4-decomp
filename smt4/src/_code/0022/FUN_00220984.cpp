@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned char DAT_0043da28; /* 0x43da28 */
+extern unsigned char g_buttonHelp; /* 0x43da28 */
 
 extern int FUN_002b8d54(void);
 extern int FUN_002b8d68(void);
@@ -20,7 +20,7 @@ void FUN_00220984(void)
   int temp_v3;
   int temp_v4;
   
-  temp_v1 = (*(int *)((unsigned char *)&DAT_0043da28 + 0x4));
+  temp_v1 = (*(int *)((unsigned char *)&g_buttonHelp + 0x4));
   temp_v2 = FUN_002b8d54();
   if (*(char *)(temp_v1 + 0x4c7) == '\0') {
     if ((temp_v2 == 1) || (temp_v2 == 2)) {

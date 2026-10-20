@@ -17,17 +17,17 @@ typedef struct Record {
 
 extern u32 g_btlScriptUnit;
 
-int FUN_001aba54(u32 id);
+int dataTable04FindById(u32 id);
 int scrSetResult(int value);
 int scrGetArg(void);
 Record *btlUnitGet(u32 id);
 
-/* Script command: looks up entry (script argument 0) of the current record's value table, resolves it through FUN_001aba54 and passes bits 11..15 of its packed word (or 0 if none) to scrSetResult. */
+/* Script command: looks up entry (script argument 0) of the current record's value table, resolves it through dataTable04FindById and passes bits 11..15 of its packed word (or 0 if none) to scrSetResult. */
 u32 FUN_003a8dc0(void)
 {
     int index = scrGetArg();
     u8 *table = btlUnitGet(g_btlScriptUnit)->table;
-    Skill *skill = (Skill *)FUN_001aba54(*(u16 *)(table + index * 2 + TABLE_VALUES_OFFSET));
+    Skill *skill = (Skill *)dataTable04FindById(*(u16 *)(table + index * 2 + TABLE_VALUES_OFFSET));
 
     if (skill != NULL) {
         scrSetResult((skill->packed & 0xffff) >> 11);

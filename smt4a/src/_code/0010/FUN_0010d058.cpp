@@ -12,7 +12,7 @@ extern unsigned int initVtable0055a580(int, int);
 extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-extern int FUN_002e760a(unsigned int);
+extern int operatorNew(unsigned int);
 /* Supplied declaration required: FUN_002f7038. */
 
 
@@ -33,7 +33,7 @@ void FUN_0010d058(int param_1,unsigned int param_2,unsigned int param_3,unsigned
     temp_v0 = FUN_002e6e26();
     FUN_002e6e34(&uStack_20,temp_v0 + 0x58);
     if (*(int *)(param_1 + 0xa8) == 0) {
-      temp_v0 = FUN_002e760a(0x14);
+      temp_v0 = operatorNew(0x14);
       temp_v1 = 0;
       if (temp_v0 != 0) {
         temp_v1 = initVtable0055a580(temp_v0,param_1);

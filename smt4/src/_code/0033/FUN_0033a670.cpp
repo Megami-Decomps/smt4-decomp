@@ -9,9 +9,9 @@ int SCARRY4(unsigned int, int);
 
 /* Unsupported intrinsic, declaration required: SCARRY4 (INT_SCARRY). */
 /* Supplied declaration required: FUN_0023e4d8. */
-extern int FUN_002a8740(int);
-extern int FUN_002a8764(void);
-extern int FUN_002b63ac(void);
+extern int gameGetUnitRecord(int);
+extern int gameGetSlotTable(void);
+extern int gameGetPlayerData(void);
 
 
 void FUN_0033a670(int param_1)
@@ -52,13 +52,13 @@ void FUN_0033a670(int param_1)
     }
     temp_v3 = temp_v3 + 1;
     if (temp_v3 >= 0x6d) {
-      temp_v3 = FUN_002a8764();
+      temp_v3 = gameGetSlotTable();
       temp_v4 = -1;
       if (*(unsigned char *)(temp_v3 + 0x910b) == 0xffffffff || SCARRY4((unsigned int)*(unsigned char *)(temp_v3 + 0x910b),1)) {
         return;
       }
 LAB_0033a748:
-      temp_v2 = FUN_002b63ac();
+      temp_v2 = gameGetPlayerData();
       temp_v2 = temp_v2 + 0x72;
       do {
         FUN_0023e4d8(temp_v2);
@@ -68,7 +68,7 @@ LAB_0033a748:
             return;
           }
           if (temp_v4 < 0) goto LAB_0033a748;
-          temp_v2 = FUN_002a8740(temp_v4);
+          temp_v2 = gameGetUnitRecord(temp_v4);
         } while (temp_v2 == 0);
         temp_v2 = temp_v2 + 0x44;
       } while( 1 );

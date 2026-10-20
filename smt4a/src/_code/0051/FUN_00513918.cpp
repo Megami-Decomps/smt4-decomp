@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_4_stack;
 
-extern romwright_code *DAT_00589528; /* 0x589528 */
+extern romwright_code *g_mobiclipAllocator; /* 0x589528 */
 extern romwright_code *DAT_0058952c; /* 0x58952c */
 
 /* Supplied declaration required: FUN_0023c168. */
@@ -28,15 +28,15 @@ unsigned int FUN_00513918(romwright_code *param_1,unsigned int param_2,unsigned 
   int temp_v1;
   
   pcVar1 = param_1;
-  if (DAT_00589528 != (romwright_code *)0x0) {
+  if (g_mobiclipAllocator != (romwright_code *)0x0) {
     pcVar1 = DAT_0058952c;
   }
-  if (((DAT_00589528 != (romwright_code *)0x0 && pcVar1 != (romwright_code *)0x0) && (param_4 >= 6)) &&
-     (temp_v0 = (*DAT_00589528)(0x3c), temp_v0 != 0)) {
-    temp_v1 = (*DAT_00589528)(param_4 << 2);
+  if (((g_mobiclipAllocator != (romwright_code *)0x0 && pcVar1 != (romwright_code *)0x0) && (param_4 >= 6)) &&
+     (temp_v0 = (*g_mobiclipAllocator)(0x3c), temp_v0 != 0)) {
+    temp_v1 = (*g_mobiclipAllocator)(param_4 << 2);
     *(int *)(temp_v0 + 0x28) = temp_v1;
     if (temp_v1 != 0) {
-      temp_v1 = (*DAT_00589528)(param_4 << 2);
+      temp_v1 = (*g_mobiclipAllocator)(param_4 << 2);
       *(int *)(temp_v0 + 0x2c) = temp_v1;
       if (temp_v1 != 0) {
         temp_v1 = temp_v0;

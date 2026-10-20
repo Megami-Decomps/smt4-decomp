@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_002b45e8(void);
-int FUN_002b4670(void);
+int dataTable08Sub2GetRecord(void);
+int dataTable08Sub1GetRecord(void);
 
 extern int FUN_002973ec(void);
 extern unsigned int FUN_002ae3c4(unsigned int);
-/* Supplied declaration required: FUN_002b45e8. */
-/* Supplied declaration required: FUN_002b4670. */
+/* Supplied declaration required: dataTable08Sub2GetRecord. */
+/* Supplied declaration required: dataTable08Sub1GetRecord. */
 
 
 int FUN_00230e04(unsigned short *param_1)
@@ -27,7 +27,7 @@ int FUN_00230e04(unsigned short *param_1)
   temp_v2 = 0;
   switch(temp_v0) {
   case 1:
-    FUN_002b4670();
+    dataTable08Sub1GetRecord();
     temp_v2 = 99999999;
     if (temp_v3 != 0) {
       temp_v2 = *(int *)(temp_v3 + 0x78);
@@ -40,7 +40,7 @@ int FUN_00230e04(unsigned short *param_1)
   case 6:
   case 7:
   case 8:
-    FUN_002b45e8();
+    dataTable08Sub2GetRecord();
     temp_v2 = 99999999;
     if (temp_v3 != 0) {
       temp_v2 = *(int *)(temp_v3 + 0x9c);

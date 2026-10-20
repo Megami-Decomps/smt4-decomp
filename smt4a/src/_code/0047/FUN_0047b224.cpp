@@ -6,13 +6,13 @@ extern "C" {
 
 int FUN_001517b4(void);
 int FUN_001641b4(int);
-int FUN_001641c4(void);
+int ifTouchRegionRemove(void);
 int FUN_00169548(int);
 int FUN_0016ccb4(int);
 int FUN_001b57a8(unsigned int *, int);
 int FUN_001d0fcc(unsigned char [4], unsigned int);
 int FUN_0021c118(int, int);
-int FUN_00275f44(unsigned int, unsigned int);
+int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int FUN_002844e4(void);
 int FUN_0034913c(void);
 int FUN_0038afe8(void);
@@ -33,7 +33,7 @@ extern unsigned int g_aocSystem; /* 0x570280 */
 
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: FUN_001641b4. */
-/* Supplied declaration required: FUN_001641c4. */
+/* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: FUN_00169548. */
 /* Supplied declaration required: FUN_0016ccb4. */
 /* Supplied declaration required: FUN_001b57a8. */
@@ -41,12 +41,12 @@ extern unsigned int *FUN_001b5acc(unsigned char *);
 /* Supplied declaration required: FUN_001d0fcc. */
 /* Supplied declaration required: FUN_0021c118. */
 extern int FUN_00224880(unsigned int);
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_002844e4. */
 extern int FUN_002a4b74(void);
 extern int FUN_002e19f8(void);
 /* Supplied declaration required: FUN_0034913c. */
-extern unsigned int FUN_00357bc8(unsigned int, unsigned char *);
+extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 extern int obj04StateIs4(void);
 /* Supplied declaration required: FUN_0038afe8. */
 /* Supplied declaration required: FUN_00477d10. */
@@ -81,8 +81,8 @@ void FUN_0047b224(unsigned int *param_1)
     releaseEntriesB(param_1 + 0xba);
     releaseEntriesA(param_1 + 0xad);
     *(unsigned char *)(g_aocMain + 0xd50) = 2;
-    temp_v2 = FUN_00357bc8(param_1[0xd4],&LAB_0047b49c);
-    FUN_00275f44(param_1[0xd6],temp_v2);
+    temp_v2 = tableGroupFindEntryIndex(param_1[0xd4],&LAB_0047b49c);
+    scrScriptProcessStartEntry(param_1[0xd6],temp_v2);
     FUN_00477d10(param_1,0,1);
     param_1[2] = 1;
     return;
@@ -153,8 +153,8 @@ void FUN_0047b224(unsigned int *param_1)
     FUN_002844e4();
     FUN_0034913c();
     FUN_0038afe8();
-    FUN_001641c4();
-    FUN_001641c4();
+    ifTouchRegionRemove();
+    ifTouchRegionRemove();
     piVar3 = (int *)param_1[0x82];
     param_1[1] = 0xf;
     param_1[2] = 0;

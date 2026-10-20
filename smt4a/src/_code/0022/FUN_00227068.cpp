@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00157558(int);
 int FUN_00164b5c(int, int, int, int, int, int);
 int efctSetSpeed(void);
-int FUN_0016c410(int);
+int renderCtxResetColorScale(int);
 int FUN_0016c560(int);
 int FUN_001835b4(int, int, int, int, int, int);
 int FUN_00183bb0(void);
@@ -37,9 +37,9 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_00164b5c. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0016c410. */
+/* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: FUN_0016c560. */
-extern int FUN_0018206c(unsigned int, unsigned int);
+extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: FUN_001879d0. */
@@ -107,7 +107,7 @@ void FUN_00227068(int param_1)
   FUN_001879d0(g_renderCtx);
   FUN_00164b5c(2,0x2e,aiStack_68[(unsigned int)*(unsigned char *)(param_1 + 0x22) * 2],(int)temp_v6,0,0xb);
   temp_v1 = FUN_002adba8(*(unsigned char *)(param_1 + 0x22));
-  temp_v2 = FUN_0018206c(0x2e,temp_v1);
+  temp_v2 = asdTMTexTableNodeIsLoaded(0x2e,temp_v1);
   if (temp_v2 != 0) {
     FUN_001879d0(g_renderCtx);
     FUN_001835b4(2,0x2e,aiStack_68[(unsigned int)*(unsigned char *)(param_1 + 0x22) * 2 + 1],(int)temp_v5,0,0xc);
@@ -122,7 +122,7 @@ void FUN_00227068(int param_1)
     *(unsigned char *)(temp_v2 + 0x1270) = 0;
   }
   FUN_0016c560(g_renderCtx);
-  FUN_0016c410(g_renderCtx);
+  renderCtxResetColorScale(g_renderCtx);
   return;
 }
 

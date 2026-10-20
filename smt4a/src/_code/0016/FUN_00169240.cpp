@@ -12,7 +12,7 @@ typedef struct Entry {
     /* 0x08 */ u8 member08[1];
 } Entry;
 
-Table *FUN_00162e8c(void);
+Table *gameFlagsGetBlock(void);
 Entry *dataTableGetEntry49(u8 id);
 
 /* Returns the address of the member at 8 of the entry for slot `index` (0..7) of the table, or NULL when the table or the entry is missing. */
@@ -22,9 +22,9 @@ u8 *FUN_00169240(s32 index)
     u8 *id;
     Entry *entry;
 
-    table = FUN_00162e8c();
+    table = gameFlagsGetBlock();
     if (table != NULL) {
-        table = FUN_00162e8c();
+        table = gameFlagsGetBlock();
         if (table != NULL && index < 8) {
             id = (u8 *)&table->ids[index];
         } else {

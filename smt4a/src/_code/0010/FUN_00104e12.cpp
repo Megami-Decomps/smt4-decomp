@@ -16,7 +16,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-extern unsigned int FUN_002ea714(void);
+extern unsigned int onlineGetActiveLock(void);
 /* Supplied declaration required: FUN_002eb300. */
 
 
@@ -30,7 +30,7 @@ void FUN_00104e12(int param_1,unsigned int param_2,unsigned int param_3)
   unsigned int temp_v3;
   unsigned char temp_v4 [4];
   
-  temp_v0 = FUN_002ea714();
+  temp_v0 = onlineGetActiveLock();
   FUN_002e6e34(temp_v1,temp_v0);
   temp_v2 = param_2;
   temp_v3 = param_3;

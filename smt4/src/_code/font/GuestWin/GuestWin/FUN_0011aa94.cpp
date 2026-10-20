@@ -47,8 +47,8 @@ extern unsigned int FUN_002bd068(unsigned short);
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002be90c. */
 /* Supplied declaration required: FUN_002bed3c. */
-extern int FUN_002bed98(int);
-extern int FUN_002beda4(int);
+extern int vec2GetYInt(int);
+extern int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bf288. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bf538. */
@@ -90,10 +90,10 @@ unsigned int FUN_0011aa94(void)
       (**(romwright_code **)(temp_v3 + 0x1268))();
       *(unsigned char *)(temp_v3 + 0x1264) = 0;
     }
-    temp_v3 = FUN_002beda4(temp_v4 + 0x30);
+    temp_v3 = vec2GetXInt(temp_v4 + 0x30);
     temp_v9 = 0.27f;
     FUN_002ba12c(g_titleScene);
-    temp_v4 = FUN_002bed98(temp_v4 + 0x30);
+    temp_v4 = vec2GetYInt(temp_v4 + 0x30);
     FUN_002bf538();
     temp_v2 = FUN_002bf4f8(0xe,0xda);
     temp_v7 = FUN_002b6b04();

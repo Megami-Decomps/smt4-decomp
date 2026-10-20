@@ -8,7 +8,7 @@ int FUN_002942c4(int, int);
 int FUN_00336a84(void);
 int FUN_003ae620(unsigned int);
 
-extern unsigned int DAT_00439ca8; /* 0x439ca8 */
+extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 
 extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_002942c4. */
@@ -34,7 +34,7 @@ unsigned int scrComm_BattleUI_RefreshLabel(void)
   temp_v2 = FUN_002b6a54((int)*(short *)(temp_v2 + 0x604),temp_v0);
   FUN_002942c4((int)(short)(*(short *)(temp_v2 + 0x5a) + 1),0);
   *(unsigned int *)(temp_v1 + 0x44a0) = *(unsigned int *)(temp_v1 + 0x44a0) | 0x2000000;
-  FUN_003ae620(DAT_00439ca8);
+  FUN_003ae620(g_btlUiBlock);
   return 1;
 }
 

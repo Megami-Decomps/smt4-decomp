@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-extern unsigned char DAT_0062d630; /* 0x62d630 */
+extern unsigned char g_nnosAddressSpaceManagerApplication; /* 0x62d630 */
 
 /* Supplied declaration required: FUN_0016236c. */
 /* Supplied declaration required: FUN_0017e1c0. */
@@ -37,7 +37,7 @@ unsigned int FUN_001469a8(int param_1)
   else {
     temp_v0 = *(unsigned int *)(param_1 + 0x14);
     temp_v1 = *(unsigned int *)(param_1 + 0xc);
-    FUN_0017e1c0(&DAT_0062d630,param_1);
+    FUN_0017e1c0(&g_nnosAddressSpaceManagerApplication,param_1);
     puVar2 = temp_v3;
     FUN_0016236c(puVar2,temp_v2,temp_v0,temp_v1,5,3);
     if ((int)puVar2 < 0) {

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_002b8cec(unsigned int);
+extern int padIsButtonRepeat(unsigned int);
 
 
 unsigned int FUN_0017f724(int *param_1,int param_2,int param_3,int param_4,int param_5,int param_6)
@@ -23,9 +23,9 @@ unsigned int FUN_0017f724(int *param_1,int param_2,int param_3,int param_4,int p
         if (param_5 != 3) {
           return 0;
         }
-        temp_v0 = FUN_002b8cec(4);
+        temp_v0 = padIsButtonRepeat(4);
         if (temp_v0 == 0) {
-          temp_v0 = FUN_002b8cec(3);
+          temp_v0 = padIsButtonRepeat(3);
 joined_r0x0017f7b8:
           if (temp_v0 == 0) {
             return 0;
@@ -34,9 +34,9 @@ joined_r0x0017f7b8:
         }
       }
       else {
-        temp_v0 = FUN_002b8cec(5);
+        temp_v0 = padIsButtonRepeat(5);
         if (temp_v0 == 0) {
-          temp_v0 = FUN_002b8cec(6);
+          temp_v0 = padIsButtonRepeat(6);
           goto joined_r0x0017f7b8;
         }
       }
@@ -44,16 +44,16 @@ LAB_0017f808:
       temp_v0 = 1;
       goto LAB_0017f80c;
     }
-    temp_v0 = FUN_002b8cec(4);
+    temp_v0 = padIsButtonRepeat(4);
     if (temp_v0 == 0) {
-      temp_v0 = FUN_002b8cec(3);
+      temp_v0 = padIsButtonRepeat(3);
       goto joined_r0x0017f78c;
     }
   }
   else {
-    temp_v0 = FUN_002b8cec(5);
+    temp_v0 = padIsButtonRepeat(5);
     if (temp_v0 == 0) {
-      temp_v0 = FUN_002b8cec(6);
+      temp_v0 = padIsButtonRepeat(6);
 joined_r0x0017f78c:
       if (temp_v0 == 0) {
         return 0;

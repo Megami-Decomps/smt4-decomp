@@ -6,11 +6,11 @@ extern "C" {
 
 int FUN_001221a2(...);
 int FUN_001358f2(unsigned short **, unsigned short *, int *);
-int FUN_002e7232(int *);
-int FUN_002e9a56(int *, unsigned char [4]);
-int FUN_002eea5c(...);
+int sharedRefRelease(int *);
+int bufferAssignByte(int *, unsigned char [4]);
+int strHolderAssignOneWide(...);
 int FUN_002efa58(int *, int, int);
-int FUN_002efb6c(int *, int);
+int bitFieldSet(int *, int);
 int FUN_002effdc(int *);
 int vectorCount2_002f00e8(unsigned short **);
 int FUN_002f012e(...);
@@ -41,16 +41,16 @@ typedef struct {
 #endif
 /* Supplied declaration required: FUN_001221a2. */
 /* Supplied declaration required: FUN_001358f2. */
-/* Supplied declaration required: FUN_002e7232. */
-extern int FUN_002e760a(unsigned int);
-/* Supplied declaration required: FUN_002e9a56. */
+/* Supplied declaration required: sharedRefRelease. */
+extern int operatorNew(unsigned int);
+/* Supplied declaration required: bufferAssignByte. */
 extern int FUN_002eb7d0(unsigned int, unsigned int);
 extern int *FUN_002ed258(int, int *);
-/* Supplied declaration required: FUN_002eea5c. */
+/* Supplied declaration required: strHolderAssignOneWide. */
 extern int *arrayElementAddress_002efa50(int, int);
 /* Supplied declaration required: FUN_002efa58. */
-extern int FUN_002efa80(unsigned int *);
-/* Supplied declaration required: FUN_002efb6c. */
+extern int bitFieldTest(unsigned int *);
+/* Supplied declaration required: bitFieldSet. */
 extern int *FUN_002eff58(int, unsigned int);
 extern int FUN_002eff84(void);
 extern int *FUN_002eff90(int, unsigned int);
@@ -107,18 +107,18 @@ void FUN_0010788a(int param_1)
       (**(romwright_code **)(*piVar3 + 4))(piVar3);
       return;
     }
-    temp_v1 = FUN_002e760a(0x10);
+    temp_v1 = operatorNew(0x10);
     if (temp_v1 != 0) {
       piVar4 = (int *)FUN_002ed258(temp_v1,piVar3);
     }
     else {
       piVar4 = (int *)0x0;
     }
-    FUN_002e7232(piVar3);
+    sharedRefRelease(piVar3);
   }
   else {
     temp_v16 = 0;
-    temp_v1 = FUN_002e760a(0x10);
+    temp_v1 = operatorNew(0x10);
     if (temp_v1 != 0) {
       piVar4 = (int *)FUN_002eff90(temp_v1,0x80);
     }
@@ -140,13 +140,13 @@ void FUN_0010788a(int param_1)
       FUN_002efa58(&temp_v5,temp_v12,temp_v1);
       temp_v14 = temp_v5;
       temp_v15 = temp_v6;
-      temp_v2 = FUN_002efa80((unsigned int *)&temp_v14);
+      temp_v2 = bitFieldTest((unsigned int *)&temp_v14);
       temp_v4 = 1;
     } while (temp_v2 == 0);
     FUN_002efa58(&temp_v5,temp_v12,temp_v1);
     temp_v15 = temp_v6;
     temp_v14 = temp_v5;
-    FUN_002efb6c(&temp_v14,0);
+    bitFieldSet(&temp_v14,0);
     piVar3 = (int *)arrayElementAddress_002efa50(temp_v11,temp_v1);
     temp_v2 = *piVar3;
     temp_v6 = temp_v2 + 4;
@@ -211,15 +211,15 @@ void FUN_0010788a(int param_1)
           FUN_001221a2(&temp_v8);
           return;
         }
-        temp_v2 = FUN_002e760a(0x10);
+        temp_v2 = operatorNew(0x10);
         piVar3 = (int *)0x0;
         if (temp_v2 != 0) {
           piVar3 = (int *)FUN_002ed258(temp_v2,piVar4);
         }
-        FUN_002e7232(piVar4);
+        sharedRefRelease(piVar4);
       }
       else {
-        temp_v2 = FUN_002e760a(0x10);
+        temp_v2 = operatorNew(0x10);
         piVar3 = (int *)0x0;
         if (temp_v2 != 0) {
           piVar3 = (int *)FUN_002eff90(temp_v2,0x80);
@@ -227,12 +227,12 @@ void FUN_0010788a(int param_1)
       }
     }
     temp_v7[0] = (unsigned char)temp_v1;
-    FUN_002e9a56(piVar3,temp_v7);
+    bufferAssignByte(piVar3,temp_v7);
     temp_v7[0] = vectorCount2_002f00e8(&temp_v8);
-    FUN_002e9a56(piVar3,temp_v7);
-    FUN_002eea5c(piVar3,temp_v13);
+    bufferAssignByte(piVar3,temp_v7);
+    strHolderAssignOneWide(piVar3,temp_v13);
     for (puVar6 = temp_v8; piVar4 = piVar3, temp_v9 != puVar6; puVar6 = puVar6 + 1) {
-      FUN_002eea5c(piVar3,puVar6);
+      strHolderAssignOneWide(piVar3,puVar6);
     }
 LAB_00107af4:;
   }

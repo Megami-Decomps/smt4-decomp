@@ -5,13 +5,13 @@
 extern "C" {
 
 int FUN_00163aa4(...);
-int FUN_00184758(int, int, int);
-int FUN_00184c00(int, int, int);
+int uiSpriteSetKeyframe(int, int, int);
+int uiSpriteSetImageKeyframe(int, int, int);
 int fillTwoWordsWithByte(int, unsigned int);
 
 /* Supplied declaration required: FUN_00163aa4. */
-/* Supplied declaration required: FUN_00184758. */
-/* Supplied declaration required: FUN_00184c00. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: fillTwoWordsWithByte. */
 
 
@@ -45,10 +45,10 @@ void FUN_002f7cd4(int param_1)
       *(unsigned short *)(temp_v3 + *(int *)(param_1 + 0x24f8) * 8) = temp_v0;
       *(unsigned int *)(temp_v3 + *(int *)(param_1 + 0x24f8) * 8 + 4) = temp_v2 & 0xffff;
       *(unsigned char *)(param_1 + 0x24f0) = 0;
-      FUN_00184758(param_1 + 0x3fc,0xd,0);
-      FUN_00184c00(param_1 + 0x3fc,10,0);
-      FUN_00184758(param_1 + 0x488,0xc,0);
-      FUN_00184c00(param_1 + 0x488,10,0);
+      uiSpriteSetKeyframe(param_1 + 0x3fc,0xd,0);
+      uiSpriteSetImageKeyframe(param_1 + 0x3fc,10,0);
+      uiSpriteSetKeyframe(param_1 + 0x488,0xc,0);
+      uiSpriteSetImageKeyframe(param_1 + 0x488,10,0);
       *(int *)(param_1 + 0x2568) = *(int *)(param_1 + 0x2568) + 1;
     }
     if (*(char *)(param_1 + 0x486) != '\0') {

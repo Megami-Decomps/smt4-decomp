@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00100388(unsigned char [68], unsigned char *);
 int FUN_00180310(...);
 int FUN_00183bb0(void);
-int FUN_00184e64(unsigned int);
+int drawSetColorFromRGBA8(unsigned int);
 int FUN_0035e458(void);
 
 extern unsigned char LAB_00389ef0; /* 0x389ef0 */
@@ -18,7 +18,7 @@ extern unsigned char LAB_00389f00; /* 0x389f00 */
 /* Supplied declaration required: FUN_00180310. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_00184e64. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 extern int FUN_0035d89c(int);
 /* Supplied declaration required: FUN_0035e458. */
 extern int FUN_004bd098(void);
@@ -66,7 +66,7 @@ void FUN_00389d9c(int param_1,int param_2,int param_3,int param_4,int param_5,in
       FUN_00100388(temp_v5,&LAB_00389f00);
       temp_v2 = 0x72e027ff;
     }
-    FUN_00184e64(temp_v2);
+    drawSetColorFromRGBA8(temp_v2);
     temp_v3 = FUN_001834a4(0xb,0x402);
     FUN_00180310(2,*(short *)(temp_v3 + 8) + param_3,*(short *)(temp_v3 + 10) + param_4,0,1,param_5 + 1,
                  temp_v5);

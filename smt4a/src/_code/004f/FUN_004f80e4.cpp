@@ -5,13 +5,13 @@
 extern "C" {
 
 int btlGetMainState(void);
-int FUN_0030ea58(int, unsigned char *);
+int libc_strcmp(int, unsigned char *);
 
 extern unsigned char LAB_004f8260; /* 0x4f8260 */
 
 /* Supplied declaration required: btlGetMainState. */
 extern int wstrlen(int);
-/* Supplied declaration required: FUN_0030ea58. */
+/* Supplied declaration required: libc_strcmp. */
 extern int FUN_003e8430(void);
 
 
@@ -32,7 +32,7 @@ int FUN_004f80e4(int param_1)
       temp_v1 = wstrlen(*piVar3);
       if (temp_v1 != 0) {
         temp_v1 = *piVar3;
-        FUN_0030ea58(temp_v1,&LAB_004f8260);
+        libc_strcmp(temp_v1,&LAB_004f8260);
         if (((temp_v1 != 0) && (temp_v1 = (int)*(short *)(*piVar3 + 0x10), -1 < temp_v1)) && (0 < temp_v1))
         {
           temp_v0 = temp_v1;
@@ -41,7 +41,7 @@ int FUN_004f80e4(int param_1)
       temp_v1 = wstrlen(*piVar3 + 0x16);
       if (temp_v1 != 0) {
         temp_v1 = *piVar3 + 0x16;
-        FUN_0030ea58(temp_v1,&LAB_004f8260);
+        libc_strcmp(temp_v1,&LAB_004f8260);
         if (temp_v1 != 0) {
           temp_v1 = (int)*(short *)(*piVar3 + 0x26);
           temp_v2 = temp_v1 == 0;
@@ -56,7 +56,7 @@ int FUN_004f80e4(int param_1)
       temp_v1 = wstrlen(*piVar3 + 0x2c);
       if (temp_v1 != 0) {
         temp_v1 = *piVar3 + 0x2c;
-        FUN_0030ea58(temp_v1,&LAB_004f8260);
+        libc_strcmp(temp_v1,&LAB_004f8260);
         if (temp_v1 != 0) {
           temp_v1 = (int)*(short *)(*piVar3 + 0x3c);
           temp_v2 = temp_v1 == 0;
@@ -71,7 +71,7 @@ int FUN_004f80e4(int param_1)
       temp_v1 = wstrlen(*piVar3 + 0x42);
       if (temp_v1 != 0) {
         temp_v1 = *piVar3 + 0x42;
-        FUN_0030ea58(temp_v1,&LAB_004f8260);
+        libc_strcmp(temp_v1,&LAB_004f8260);
         if (temp_v1 != 0) {
           temp_v1 = (int)*(short *)(*piVar3 + 0x52);
           temp_v2 = temp_v1 == 0;

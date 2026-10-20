@@ -10,10 +10,10 @@ int FUN_0026ef04(unsigned int);
 int FUN_0026efec(...);
 int FUN_0026f204(unsigned int, unsigned int, unsigned int);
 int FUN_0026f784(void);
-int FUN_0026f800(...);
+int linkHolderApplyFlag(...);
 int FUN_00297468(unsigned char *, unsigned int *, int);
-int FUN_002b8838(...);
-int FUN_002c3940(...);
+int buttonHelpSetPreset(...);
+int rt_aeabi_memclr(...);
 int memClear(void);
 int asdMemAlloc(int, int, int, int);
 int taskCreateDraw(unsigned char *, int, int);
@@ -52,10 +52,10 @@ extern unsigned int FUN_0024aaa0(void);
 /* Supplied declaration required: FUN_0026efec. */
 /* Supplied declaration required: FUN_0026f204. */
 /* Supplied declaration required: FUN_0026f784. */
-/* Supplied declaration required: FUN_0026f800. */
+/* Supplied declaration required: linkHolderApplyFlag. */
 /* Supplied declaration required: FUN_00297468. */
-/* Supplied declaration required: FUN_002b8838. */
-/* Supplied declaration required: FUN_002c3940. */
+/* Supplied declaration required: buttonHelpSetPreset. */
+/* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: taskCreateDraw. */
@@ -172,22 +172,22 @@ void FUN_002d747c(void)
   if (temp_v4 != 0) {
     FUN_0026ee14(puVar1[2],&temp_v5);
     FUN_0026eda8(puVar1[2]);
-    FUN_0026f800(puVar1[2],0);
+    linkHolderApplyFlag(puVar1[2],0);
     puVar1[0x53] = puVar1[0x4f];
   }
   temp_v4 = 0;
   do {
-    FUN_002c3940(puVar2 + temp_v4 * 5 + 0x28,0x14);
+    rt_aeabi_memclr(puVar2 + temp_v4 * 5 + 0x28,0x14);
     temp_v4 = temp_v4 + 1;
   } while (temp_v4 < 2);
   temp_v4 = 0;
   do {
-    FUN_002c3940(puVar2 + temp_v4 * 5 + 0x32,0x14);
+    rt_aeabi_memclr(puVar2 + temp_v4 * 5 + 0x32,0x14);
     temp_v0 = temp_v4 + 1;
     puVar2[temp_v4 * 5 + 0x33] = 0x14a;
     temp_v4 = temp_v0;
   } while (temp_v0 < 5);
-  FUN_002b8838(0xb2);
+  buttonHelpSetPreset(0xb2);
   return;
 }
 

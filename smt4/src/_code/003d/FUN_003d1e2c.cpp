@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002b8e84(int);
+int eventQueueAddUnique(int);
 int memClear(int, int);
 
 extern int FUN_0029ae44(void);
-extern int FUN_002b8cec(unsigned int);
-/* Supplied declaration required: FUN_002b8e84. */
+extern int padIsButtonRepeat(unsigned int);
+/* Supplied declaration required: eventQueueAddUnique. */
 /* Supplied declaration required: memClear. */
 
 
@@ -35,13 +35,13 @@ unsigned int FUN_003d1e2c(int *param_1,int param_2)
     temp_v2 = 0xffffffff;
   } while ((int)temp_v0 < 0x6d);
   memClear(param_2 + 0x38,0x6d);
-  temp_v1 = FUN_002b8cec(3);
+  temp_v1 = padIsButtonRepeat(3);
   temp_v6 = param_2 + 0x38;
-  if (((temp_v1 != 0) || (temp_v1 = FUN_002b8cec(0xc), temp_v1 != 0)) ||
+  if (((temp_v1 != 0) || (temp_v1 = padIsButtonRepeat(0xc), temp_v1 != 0)) ||
      (temp_v1 = FUN_0029ae44(), temp_v1 >= 1)) {
-    temp_v1 = FUN_002b8cec(3);
-    if ((temp_v1 != 0) || (temp_v1 = FUN_002b8cec(0xc), temp_v1 != 0)) {
-      FUN_002b8e84(0x100016c);
+    temp_v1 = padIsButtonRepeat(3);
+    if ((temp_v1 != 0) || (temp_v1 = padIsButtonRepeat(0xc), temp_v1 != 0)) {
+      eventQueueAddUnique(0x100016c);
     }
     temp_v3 = 1;
     temp_v1 = 1;
@@ -78,15 +78,15 @@ unsigned int FUN_003d1e2c(int *param_1,int param_2)
     *(unsigned int *)(param_2 + 0x5a4) = (unsigned int)*(unsigned char *)(temp_v2 + param_2 + 0xbd);
   }
   else {
-    temp_v1 = FUN_002b8cec(4);
-    if (((temp_v1 == 0) && (temp_v1 = FUN_002b8cec(0xd), temp_v1 == 0)) &&
+    temp_v1 = padIsButtonRepeat(4);
+    if (((temp_v1 == 0) && (temp_v1 = padIsButtonRepeat(0xd), temp_v1 == 0)) &&
        (temp_v1 = FUN_0029ae44(), -1 < temp_v1)) {
       *(unsigned char *)(*(int *)(param_2 + 0x5a4) + temp_v6) = 1;
     }
     else {
-      temp_v1 = FUN_002b8cec(4);
-      if ((temp_v1 != 0) || (temp_v1 = FUN_002b8cec(0xd), temp_v1 != 0)) {
-        FUN_002b8e84(0x100016c);
+      temp_v1 = padIsButtonRepeat(4);
+      if ((temp_v1 != 0) || (temp_v1 = padIsButtonRepeat(0xd), temp_v1 != 0)) {
+        eventQueueAddUnique(0x100016c);
       }
       temp_v3 = 1;
       temp_v1 = 1;

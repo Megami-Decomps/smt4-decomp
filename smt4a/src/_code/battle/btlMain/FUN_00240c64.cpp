@@ -44,7 +44,7 @@ extern unsigned int DAT_00573b24; /* 0x573b24 */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
-extern unsigned int FUN_001ab888(void);
+extern unsigned int gameGetSlotTable(void);
 extern unsigned int FUN_001bce18(void);
 /* Supplied declaration required: FUN_0024d9c4. */
 /* Supplied declaration required: rt_memcpy. */
@@ -74,7 +74,7 @@ void FUN_00240c64(unsigned int *param_1,int param_2)
   g_btlMain = puVar2;
   asdMemoryAllocTracked(0x100,0x100,0,0x2d30,1);
   DAT_00573924 = temp_v1;
-  temp_v1 = FUN_001ab888();
+  temp_v1 = gameGetSlotTable();
   rt_memcpy_w(DAT_00573924,temp_v1,0x2d30);
   temp_v1 = 0x100;
   asdMemoryAllocTracked(0x100,0x100,0,0x10b8,1);

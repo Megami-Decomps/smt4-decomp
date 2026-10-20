@@ -8,7 +8,7 @@ int FUN_0025c650(unsigned int *, int, int);
 int FUN_0025c870(void);
 int effBlockCloneDeep(void);
 int FUN_002a3d58(...);
-int FUN_002bf694(int, int);
+int libc_strcpy(int, int);
 int memAlloc(int, int, int, int, int, int);
 int asdMemFree(unsigned int *);
 int memClear(...);
@@ -39,7 +39,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0025c870. */
 /* Supplied declaration required: effBlockCloneDeep. */
 /* Supplied declaration required: FUN_002a3d58. */
-/* Supplied declaration required: FUN_002bf694. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: memClear. */
@@ -153,7 +153,7 @@ LAB_001e1c50:
         FUN_0025c650(puVar3,temp_v0,temp_v7);
       }
       rt_memcpy_w(temp_v0,temp_v5);
-      FUN_002bf694(temp_v0 + 0x9c,temp_v5 + 0x9c);
+      libc_strcpy(temp_v0 + 0x9c,temp_v5 + 0x9c);
       puVar1 = (unsigned int *)(temp_v5 + 0x98);
       temp_v6 = temp_v6 + 1;
       temp_v5 = temp_v5 + 0xc0;

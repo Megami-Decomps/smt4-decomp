@@ -10,13 +10,13 @@ typedef struct {
 } Object;
 
 int FUN_0012a080(Object *self);
-int FUN_0030ccc0(u8 *registry, Object *object);
+int onlineObjectListRemove(u8 *registry, Object *object);
 
 /* Constructor: installs the vtable, registers the object with the global registry, finishes setup and returns it. */
 Object *FUN_0012a0e4(Object *self)
 {
     self->vtbl = &DAT_00559ad0;
-    FUN_0030ccc0(&DAT_00594b24, self);
+    onlineObjectListRemove(&DAT_00594b24, self);
     FUN_0012a080(self);
     return self;
 }

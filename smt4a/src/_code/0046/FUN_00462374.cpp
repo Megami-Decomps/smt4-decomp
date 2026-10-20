@@ -4,12 +4,12 @@ extern "C" {
 
 int FUN_00175c68(int);
 int FUN_001d1f5c(void);
-int FUN_001d2384(int);
+int voiceClearCallback(int);
 int FUN_001d239c(int);
 
 /* Supplied declaration required: FUN_00175c68. */
 /* Supplied declaration required: FUN_001d1f5c. */
-/* Supplied declaration required: FUN_001d2384. */
+/* Supplied declaration required: voiceClearCallback. */
 /* Supplied declaration required: FUN_001d239c. */
 
 
@@ -31,7 +31,7 @@ void FUN_00462374(int param_1,int param_2)
         return;
       }
       for (temp_v0 = *(int *)(param_1 + 0x130); temp_v0 != 0; temp_v0 = *(int *)(temp_v0 + 0x1ac)) {
-        FUN_001d2384(temp_v0);
+        voiceClearCallback(temp_v0);
         FUN_00175c68(temp_v0);
       }
     }
@@ -43,7 +43,7 @@ void FUN_00462374(int param_1,int param_2)
         }
       }
       for (temp_v0 = *(int *)(param_1 + 0x130); temp_v0 != 0; temp_v0 = *(int *)(temp_v0 + 0x1ac)) {
-        FUN_001d2384(temp_v0);
+        voiceClearCallback(temp_v0);
       }
     }
     *(unsigned int *)(param_1 + 0x130) = 0;

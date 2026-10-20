@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00292dd0(int);
-int FUN_00298140(int, int, int);
+int playSceneSetState(int, int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -14,7 +14,7 @@ typedef struct {
 
 extern int FUN_001eb82c(void);
 /* Supplied declaration required: FUN_00292dd0. */
-/* Supplied declaration required: FUN_00298140. */
+/* Supplied declaration required: playSceneSetState. */
 extern int FUN_0029e908(int);
 
 
@@ -43,7 +43,7 @@ void FUN_002e439c(int param_1)
     temp_v0 = FUN_0029e908(param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088);
     FUN_00292dd0(temp_v0 == 0);
   }
-  FUN_00298140(param_1,0xe,1);
+  playSceneSetState(param_1,0xe,1);
   return;
 }
 

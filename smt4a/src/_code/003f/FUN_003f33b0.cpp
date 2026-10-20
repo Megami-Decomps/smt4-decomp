@@ -21,8 +21,8 @@ typedef struct {
 extern int FUN_002c2bf4(...); /* 0x2c2bf4 */
 
 /* Supplied declaration required: qsort. */
-extern int FUN_001ab854(unsigned char);
-extern int FUN_001ab888(void);
+extern int gameGetSlotRecord(unsigned char);
+extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_002a6894. */
 extern int FUN_004bca68(int);
 /* Supplied declaration required: FUN_004bcd90. */
@@ -53,7 +53,7 @@ unsigned int FUN_003f33b0(int param_1,unsigned int param_2,int param_3)
   unsigned char temp_v9 [200];
   
   rt_memcpy_w(temp_v7,param_1,300);
-  temp_v1 = FUN_001ab888();
+  temp_v1 = gameGetSlotTable();
   temp_v2 = (unsigned int)temp_v8;
   temp_v6 = -1;
   if ((int)*(char *)(temp_v1 + 0x1ca0) == temp_v2) {
@@ -67,7 +67,7 @@ unsigned int FUN_003f33b0(int param_1,unsigned int param_2,int param_3)
   }
   FUN_004d0d70(*(unsigned char *)(param_1 + 0x66));
   dispatchIfFound(temp_v8,param_2,0);
-  temp_v3 = FUN_001ab854(temp_v8);
+  temp_v3 = gameGetSlotRecord(temp_v8);
   if (-1 < temp_v6) {
     *(unsigned char *)(temp_v1 + temp_v6 + 0x1ca0) = *(unsigned char *)(temp_v3 + 0x66);
   }

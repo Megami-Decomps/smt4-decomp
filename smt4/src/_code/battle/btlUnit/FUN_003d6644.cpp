@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002b9024(void);
+int devilGetRecord(void);
 
 extern int g_btlMain; /* 0x4342c8 */
 extern unsigned int DAT_00493554; /* 0x493554 */
 extern unsigned int DAT_00493558; /* 0x493558 */
 extern unsigned int DAT_0049355c; /* 0x49355c */
 
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: devilGetRecord. */
 
 
 void FUN_003d6644(int param_1,int param_2,int param_3)
@@ -100,7 +100,7 @@ void FUN_003d6644(int param_1,int param_2,int param_3)
   temp_v1 = *puVar4;
   if (((temp_v1 & 2) == 0) && ((temp_v1 & 8) != 0)) {
     temp_v1 = (unsigned int)*(unsigned short *)((int)puVar4 + 0xce);
-    FUN_002b9024();
+    devilGetRecord();
     temp_v1 = (*(unsigned int *)(temp_v1 + 0x2c) & 0x1fffffff) >> 0x19;
     if (temp_v1 == 0) {
       *(unsigned int *)(param_1 + 0x73c) = temp_v3;

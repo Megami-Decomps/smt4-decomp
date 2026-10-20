@@ -32,12 +32,12 @@ extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0029a17c. */
-extern int FUN_002a8740(void);
-extern int FUN_002a8764(void);
+extern int gameGetUnitRecord(void);
+extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_002b93c8. */
 /* Supplied declaration required: FUN_002bed3c. */
-extern int FUN_002bed98(int);
-extern int FUN_002beda4(int);
+extern int vec2GetYInt(int);
+extern int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf4f8. */
 /* Supplied declaration required: FUN_002bf538. */
@@ -74,7 +74,7 @@ void FUN_003b5f30(int param_1,int param_2,int param_3)
   iStack_30 = param_1;
   temp_v13 = param_2;
   temp_v14 = param_3;
-  temp_v1 = FUN_002a8764();
+  temp_v1 = gameGetSlotTable();
   temp_v5 = 0x18;
   pcVar5 = acStack_60;
   pcVar7 = (char *)(temp_v1 + 0x90f0);
@@ -144,9 +144,9 @@ void FUN_003b5f30(int param_1,int param_2,int param_3)
         temp_v2 = temp_v11 + temp_v1;
         temp_v8 = *(char *)(temp_v2 + 0x90f0) + 1;
         temp_v9 = param_1 + ((int)(temp_v7 + ((unsigned int)(temp_v7 >> 0x1f) >> 0x1e)) >> 2) * 0x8c;
-        temp_v3 = FUN_002beda4(temp_v9 + 0xac);
+        temp_v3 = vec2GetXInt(temp_v9 + 0xac);
         temp_v5 = temp_v5 + temp_v3;
-        temp_v3 = FUN_002bed98(temp_v9 + 0xac);
+        temp_v3 = vec2GetYInt(temp_v9 + 0xac);
         temp_v6 = temp_v6 + temp_v3;
         temp_v3 = param_1 + temp_v8 * 2;
         temp_v8 = param_1 + temp_v8;
@@ -195,11 +195,11 @@ void FUN_003b5f30(int param_1,int param_2,int param_3)
       do {
         if (acStack_60[temp_v6] != '\0') {
           temp_v8 = *(char *)(temp_v11 + temp_v6 + 0x90f0) + 1;
-          temp_v2 = FUN_002a8740();
+          temp_v2 = gameGetUnitRecord();
           temp_v9 = param_1 + ((int)(temp_v7 + ((unsigned int)(temp_v7 >> 0x1f) >> 0x1e)) >> 2) * 0x8c;
-          temp_v3 = FUN_002beda4(temp_v9 + 0xac);
+          temp_v3 = vec2GetXInt(temp_v9 + 0xac);
           temp_v5 = temp_v5 + temp_v3;
-          temp_v3 = FUN_002bed98(temp_v9 + 0xac);
+          temp_v3 = vec2GetYInt(temp_v9 + 0xac);
           temp_v1 = temp_v1 + temp_v3;
           if (*(char *)(param_1 + temp_v8 + 0xd4fe) != '\0') {
             temp_v3 = FUN_002bf4f8(0x28,temp_v7 + 0x68);

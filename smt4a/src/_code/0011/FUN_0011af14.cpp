@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002e9318(unsigned char [8]);
-int FUN_002e9598(unsigned int, unsigned char [8]);
-int FUN_002e9ec8(int, unsigned int);
+int onlineStringDestroy(unsigned char [8]);
+int onlineStringAssign(unsigned int, unsigned char [8]);
+int onlineInstanceTableFind(int, unsigned int);
 int destroyObj0055ae64(unsigned char [24]);
 int FUN_002f6be2(int, int *);
-int FUN_002f6bf0(int);
+int operatorDeleteArrayNullable(int);
 int FUN_002fa794(unsigned char [8], unsigned char [24]);
 int FUN_00302058(unsigned char [24], unsigned int, int);
 int FUN_00307020(int, unsigned int);
@@ -24,13 +24,13 @@ typedef struct {
 extern unsigned char DAT_00589540; /* 0x589540 */
 
 extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
-/* Supplied declaration required: FUN_002e9318. */
-/* Supplied declaration required: FUN_002e9598. */
-extern int FUN_002e9af4(void);
-/* Supplied declaration required: FUN_002e9ec8. */
+/* Supplied declaration required: onlineStringDestroy. */
+/* Supplied declaration required: onlineStringAssign. */
+extern int onlineInstanceTableGetCurrent(void);
+/* Supplied declaration required: onlineInstanceTableFind. */
 /* Supplied declaration required: destroyObj0055ae64. */
 /* Supplied declaration required: FUN_002f6be2. */
-/* Supplied declaration required: FUN_002f6bf0. */
+/* Supplied declaration required: operatorDeleteArrayNullable. */
 /* Supplied declaration required: FUN_002fa794. */
 /* Supplied declaration required: FUN_00302058. */
 /* Supplied declaration required: FUN_00307020. */
@@ -52,17 +52,17 @@ void FUN_0011af14(int param_1)
   unsigned int temp_v8 [2];
   unsigned char *puVar3;
   
-  temp_v0 = FUN_002e9af4();
-  FUN_002e9ec8(temp_v0,*(unsigned int *)(param_1 + 0x68));
+  temp_v0 = onlineInstanceTableGetCurrent();
+  onlineInstanceTableFind(temp_v0,*(unsigned int *)(param_1 + 0x68));
   if (temp_v0 != 0) {
     temp_v2 = 0;
     FUN_002f6be2(param_1 + 0x70,&temp_v2);
     FUN_00302058(temp_v3,*(unsigned int *)(param_1 + 0x6c),temp_v2);
     FUN_002fa794(temp_v4,temp_v3);
-    FUN_002e9598(*(unsigned int *)(param_1 + 0x78),temp_v4);
-    FUN_002e9318(temp_v4);
+    onlineStringAssign(*(unsigned int *)(param_1 + 0x78),temp_v4);
+    onlineStringDestroy(temp_v4);
     destroyObj0055ae64(temp_v3);
-    FUN_002f6bf0(temp_v2);
+    operatorDeleteArrayNullable(temp_v2);
     (*(unsigned int *)((unsigned char *)&DAT_00589540 + 0x18)) = *(unsigned int *)(param_1 + 0x6c);
     puVar4 = (unsigned int *)&temp_v6;
     temp_v6 = 0x10001;

@@ -6,12 +6,12 @@ extern "C" {
 
 int sysPlaySe(int);
 int FUN_00183e58(void);
-int FUN_00184c00(int, int, int);
-int FUN_00275f44(unsigned int, int);
+int uiSpriteSetImageKeyframe(int, int, int);
+int scrScriptProcessStartEntry(unsigned int, int);
 int FUN_003180c4(int, int *);
 int logFormatBuffer(int *, int, int);
 int FUN_00484264(int, int *);
-int FUN_004853fc(int, int);
+int stateSetterEnterState(int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -20,16 +20,16 @@ typedef struct {
 
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00183e58. */
-/* Supplied declaration required: FUN_00184c00. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 extern int FUN_00224880(unsigned int);
 extern int FUN_0026272c(void);
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_003180c4. */
 /* Supplied declaration required: logFormatBuffer. */
 extern int convertToBufferAndStore(unsigned int *, int);
 /* Supplied declaration required: FUN_00484264. */
-/* Supplied declaration required: FUN_004853fc. */
+/* Supplied declaration required: stateSetterEnterState. */
 
 
 void FUN_00484378(int param_1)
@@ -49,14 +49,14 @@ void FUN_00484378(int param_1)
     if (temp_v1 == 2) {
       temp_v1 = FUN_002a4b74();
       if (temp_v1 != 0) {
-        FUN_004853fc(param_1,2);
+        stateSetterEnterState(param_1,2);
         sysPlaySe(0x97);
         return;
       }
-      FUN_00184c00(param_1 + 0x3ac,0,1);
+      uiSpriteSetImageKeyframe(param_1 + 0x3ac,0,1);
       if (*(unsigned char *)(param_1 + 0x261) >= 2 && *(unsigned char *)(param_1 + 0x261) != 4) {
         FUN_00183e58();
-        FUN_004853fc(param_1,7);
+        stateSetterEnterState(param_1,7);
         return;
       }
       FUN_00484264(param_1,&uStack_30);
@@ -94,11 +94,11 @@ LAB_00484524:
           temp_v1 = convertToBufferAndStore((unsigned int *)&uStack_30,param_1 + 0x56e);
           if ((*piVar3 == 0) && (temp_v1 < 6)) {
             FUN_00183e58();
-            FUN_004853fc(param_1,7);
+            stateSetterEnterState(param_1,7);
             return;
           }
-          FUN_004853fc(param_1,6);
-          FUN_00275f44(*(unsigned int *)(param_1 + 0x26c),4);
+          stateSetterEnterState(param_1,6);
+          scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x26c),4);
           return;
         }
       } while( 1 );
@@ -109,7 +109,7 @@ LAB_00484524:
     if (temp_v1 != 0) {
       FUN_00484264(param_1,&uStack_30);
       FUN_003180c4(0x32,&uStack_30);
-      FUN_00275f44(*(unsigned int *)(param_1 + 0x26c),1);
+      scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x26c),1);
       *(unsigned char *)(param_1 + 0x270) = 1;
       sysPlaySe(0x9c);
     }

@@ -8,7 +8,7 @@ int jobStop(unsigned int, int);
 int FUN_00280328(unsigned int, int, int);
 int FUN_002ea508(unsigned int, unsigned char *);
 int asdListBoxSetIntItem(...);
-int FUN_00317508(unsigned int, int);
+int asdListBoxSetByteValue(unsigned int, int);
 int asdListBoxAddItems(void);
 int asdListBoxSetToggleItem(...);
 int FUN_003592dc(unsigned int);
@@ -74,11 +74,11 @@ extern unsigned int DAT_0057a6e8; /* 0x57a6e8 */
 
 /* Supplied declaration required: jobStop. */
 extern int jobIsValid(unsigned int);
-extern unsigned int *FUN_001ab888(void);
+extern unsigned int *gameGetSlotTable(void);
 /* Supplied declaration required: FUN_00280328. */
 /* Supplied declaration required: FUN_002ea508. */
 /* Supplied declaration required: asdListBoxSetIntItem. */
-/* Supplied declaration required: FUN_00317508. */
+/* Supplied declaration required: asdListBoxSetByteValue. */
 /* Supplied declaration required: asdListBoxAddItems. */
 /* Supplied declaration required: asdListBoxSetToggleItem. */
 /* Supplied declaration required: FUN_003592dc. */
@@ -103,7 +103,7 @@ void FUN_004d1af8(int param_1,int param_2)
   FUN_00280328(temp_v1,0x75,0);
   *(unsigned int *)(param_1 + 0x10) = temp_v1;
   asdListBoxAddItems();
-  FUN_00317508(*(unsigned int *)(param_1 + 0x10),1);
+  asdListBoxSetByteValue(*(unsigned int *)(param_1 + 0x10),1);
   FUN_002ea508(*(unsigned int *)(param_1 + 0x10),&LAB_004d1efc);
   puVar4 = (unsigned int *)(param_2 + 0x45a8);
   asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),0,
@@ -130,7 +130,7 @@ void FUN_004d1af8(int param_1,int param_2)
   asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),0xb,
                (*puVar4 & DAT_00571688) != 0 || (*(unsigned int *)(param_2 + 0x45ac) & DAT_0057168c) != 0);
   asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0xc,*(unsigned int *)(param_2 + 0x4cd4),0,400,0);
-  puVar3 = (unsigned int *)FUN_001ab888();
+  puVar3 = (unsigned int *)gameGetSlotTable();
   asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0xd,*puVar3,0,999999999,0);
   asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),0xe,
                (DAT_005716b8 & *puVar4) != 0 || (*(unsigned int *)(param_2 + 0x45ac) & DAT_005716bc) != 0);

@@ -10,7 +10,7 @@ int FUN_003180c4(...);
 
 int FUN_001641b4(...);
 int FUN_00169548(...);
-int FUN_00275f44(...);
+int scrScriptProcessStartEntry(...);
 int FUN_002a1f60(...);
 int FUN_0036bea0(...);
 int FUN_003d4c68(int);
@@ -50,9 +50,9 @@ extern unsigned int *g_aocMain; /* 0x570260 */
 /* Supplied declaration required: FUN_00169548. */
 extern int FUN_001802d4(int);
 extern int FUN_001d25ec(unsigned int *);
-extern int FUN_002009a8(unsigned int);
+extern int bgmGetStateById(unsigned int);
 extern int FUN_00224880(unsigned int);
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_00284140(int);
 /* Supplied declaration required: FUN_002a1f60. */
 extern int FUN_002a4b74(void);
@@ -60,7 +60,7 @@ extern int FUN_002e1a18(unsigned int);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003180c4. */
 extern int FUN_0031d174(unsigned int *);
-extern unsigned int FUN_00357bc8(unsigned int, unsigned char *);
+extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_0036bea0. */
 /* Supplied declaration required: FUN_003d4c68. */
 /* Supplied declaration required: FUN_00426fe4. */
@@ -140,7 +140,7 @@ void FUN_00479358(unsigned int *param_1)
         }
       }
       *(unsigned char *)(param_1 + 0xd3) = 1;
-      temp_v2 = FUN_002009a8(0x1000041);
+      temp_v2 = bgmGetStateById(0x1000041);
       if (temp_v2 != 1) {
         FUN_003d4c68(0x1000041);
         return;
@@ -240,8 +240,8 @@ void FUN_00479358(unsigned int *param_1)
           if (*(char *)(puVar1[0x19e] + temp_v2 * 0x9c8 + 0x9b3) != '\0') {
 LAB_0047996c:
             param_1[2] = 6;
-            temp_v1 = FUN_00357bc8(param_1[0xd4],&LAB_00479af8);
-            FUN_00275f44(param_1[0xd6],temp_v1);
+            temp_v1 = tableGroupFindEntryIndex(param_1[0xd4],&LAB_00479af8);
+            scrScriptProcessStartEntry(param_1[0xd6],temp_v1);
             FUN_001641b4(0x100020e);
             *(unsigned char *)(param_1 + 0xd3) = 0;
             return;
@@ -259,8 +259,8 @@ LAB_0047996c:
       if (temp_v2 != 0) {
 LAB_004797d0:
         param_1[2] = 2;
-        temp_v1 = FUN_00357bc8(param_1[0xd4],&LAB_00479ab8);
-        FUN_00275f44(param_1[0xd6],temp_v1);
+        temp_v1 = tableGroupFindEntryIndex(param_1[0xd4],&LAB_00479ab8);
+        scrScriptProcessStartEntry(param_1[0xd6],temp_v1);
         FUN_001641b4(0x100020e);
         *(unsigned char *)(param_1 + 0xd3) = 0;
         return;
@@ -269,8 +269,8 @@ LAB_004797d0:
       if (temp_v2 != 0) {
 LAB_00479820:
         param_1[2] = 3;
-        temp_v1 = FUN_00357bc8(param_1[0xd4],&LAB_00479ac8);
-        FUN_00275f44(param_1[0xd6],temp_v1);
+        temp_v1 = tableGroupFindEntryIndex(param_1[0xd4],&LAB_00479ac8);
+        scrScriptProcessStartEntry(param_1[0xd6],temp_v1);
         FUN_001641b4(0x100020e);
         *(unsigned char *)(param_1 + 0xd3) = 0;
         return;
@@ -279,8 +279,8 @@ LAB_00479820:
       if (temp_v2 != 0) {
 LAB_00479870:
         param_1[2] = 4;
-        temp_v1 = FUN_00357bc8(param_1[0xd4],&LAB_00479adc);
-        FUN_00275f44(param_1[0xd6],temp_v1);
+        temp_v1 = tableGroupFindEntryIndex(param_1[0xd4],&LAB_00479adc);
+        scrScriptProcessStartEntry(param_1[0xd6],temp_v1);
         FUN_001641b4(0x100020e);
         *(unsigned char *)(param_1 + 0xd3) = 0;
         return;
@@ -288,8 +288,8 @@ LAB_00479870:
       temp_v2 = FUN_002e1a18(0xb);
       if (temp_v2 != 0) {
         param_1[2] = 5;
-        temp_v1 = FUN_00357bc8(param_1[0xd4],&LAB_00479aec);
-        FUN_00275f44(param_1[0xd6],temp_v1);
+        temp_v1 = tableGroupFindEntryIndex(param_1[0xd4],&LAB_00479aec);
+        scrScriptProcessStartEntry(param_1[0xd6],temp_v1);
         FUN_001641b4(0x100020e);
         *(unsigned char *)(param_1 + 0xd3) = 0;
         return;

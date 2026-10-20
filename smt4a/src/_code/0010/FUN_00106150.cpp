@@ -16,8 +16,8 @@ extern unsigned char DAT_0055ab2c; /* 0x55ab2c */
 /* Supplied declaration required: FUN_001060e6. */
 extern unsigned int destroyObj005593a0(void);
 /* Supplied declaration required: sysMemClear. */
-extern int FUN_002e760a(unsigned int);
-extern unsigned int *FUN_002e9f80(void);
+extern int operatorNew(unsigned int);
+extern unsigned int *sharedRefInit(void);
 /* Supplied declaration required: FUN_002ecef0. */
 extern int FUN_002ed074(unsigned int *, unsigned int);
 extern int FUN_002ed094(int);
@@ -38,7 +38,7 @@ int FUN_00106150(void)
   unsigned char temp_v3;
   int temp_v4;
   
-  puVar1 = (unsigned int *)FUN_002e9f80();
+  puVar1 = (unsigned int *)sharedRefInit();
   *puVar1 = (unsigned int)&DAT_00558914;
   temp_v0 = FUN_002ed074(puVar1 + 4,0xc);
   temp_v0 = FUN_002ed094(temp_v0 + 0x18);
@@ -49,13 +49,13 @@ int FUN_00106150(void)
   *(unsigned int *)(temp_v0 + 0x34) = 0;
   FUN_002ed0c0(temp_v0 - 0x18,temp_v4);
   FUN_002ecef0();
-  temp_v1 = FUN_002e760a(0x3c);
+  temp_v1 = operatorNew(0x3c);
   temp_v2 = 0;
   if (temp_v1 != 0) {
     temp_v2 = destroyObj005593a0();
   }
   *(unsigned int *)(temp_v0 - 0x1c) = temp_v2;
-  temp_v1 = FUN_002e760a(0x9c);
+  temp_v1 = operatorNew(0x9c);
   puVar1 = (unsigned int *)0x0;
   if (temp_v1 != 0) {
     sysMemClear(temp_v1,0x9c);

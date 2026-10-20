@@ -6,10 +6,10 @@ extern "C" {
 
 int jobStop(unsigned int, int);
 int sysPlaySe(int);
-int FUN_0021c354(int);
-int FUN_00270b00(void);
-int FUN_0035b304(void);
-int FUN_0037b450(void);
+int bgmFadeOut(int);
+int bgmReleaseStopped(void);
+int campCommonBgRelease(void);
+int campButtonHelpRelease(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -22,11 +22,11 @@ extern unsigned char DAT_00588c40; /* 0x588c40 */
 extern int jobIsValid(unsigned int);
 extern int lmapMainIsRunning(void);
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_0021c354. */
+/* Supplied declaration required: bgmFadeOut. */
 extern int FUN_0023b880(void);
-/* Supplied declaration required: FUN_00270b00. */
-/* Supplied declaration required: FUN_0035b304. */
-/* Supplied declaration required: FUN_0037b450. */
+/* Supplied declaration required: bgmReleaseStopped. */
+/* Supplied declaration required: campCommonBgRelease. */
+/* Supplied declaration required: campButtonHelpRelease. */
 extern int mapMainIsBusy(void);
 
 
@@ -50,16 +50,16 @@ void FUN_003315c4(void)
       if (temp_v1 == 0) {
         temp_v1 = mapMainIsBusy();
         if ((temp_v1 != 0) || (temp_v1 = lmapMainIsRunning(), temp_v1 != 0)) {
-          FUN_00270b00();
+          bgmReleaseStopped();
         }
         else {
-          FUN_0021c354(0x3c);
+          bgmFadeOut(0x3c);
         }
       }
     }
     jobStop(*(unsigned int *)((*(int *)((unsigned char *)&DAT_00588c40 + 0x4)) + 0x7f30),0);
-    FUN_0035b304();
-    FUN_0037b450();
+    campCommonBgRelease();
+    campButtonHelpRelease();
     return;
   }
   return;

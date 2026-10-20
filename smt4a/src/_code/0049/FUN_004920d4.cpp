@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00157558(...);
-int FUN_0016c410(...);
+int renderCtxResetColorScale(...);
 int FUN_0016c560(...);
 int FUN_00183bb0(void);
 int FUN_00486444(void);
@@ -48,7 +48,7 @@ extern signed char DAT_005f1a5e; /* 0x5f1a5e */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_00157558. */
 extern int FUN_00162858(void);
-/* Supplied declaration required: FUN_0016c410. */
+/* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: FUN_0016c560. */
 /* Supplied declaration required: FUN_00183bb0. */
 extern int dataTableGetEntry49(unsigned char);
@@ -318,7 +318,7 @@ LAB_004925c8:
       FUN_0048b260(temp_v33);
     }
     FUN_0016c560(g_renderCtx);
-    FUN_0016c410(g_renderCtx);
+    renderCtxResetColorScale(g_renderCtx);
     if ((*(char *)(temp_v33 + 0x12d0) != '\0') && (*(char *)(temp_v33 + 0x12d2) == '\0')) {
       FUN_0048b514(temp_v33);
     }

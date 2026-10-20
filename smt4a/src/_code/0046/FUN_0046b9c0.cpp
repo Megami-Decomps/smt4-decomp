@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdSequenceRequest(int, unsigned int [2], int);
-int FUN_002e342c(unsigned char [32], unsigned int);
+int libc_strcpy(unsigned char [32], unsigned int);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -14,7 +14,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: asdSequenceRequest. */
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 
 
 unsigned int FUN_0046b9c0(unsigned int *param_1)
@@ -27,7 +27,7 @@ unsigned int FUN_0046b9c0(unsigned int *param_1)
   if ((*param_1 & 0x20000) != 0) {
     temp_v0[0] = (unsigned int)*(unsigned short *)(param_1[5] + 0x10);
     temp_v0[1] = 0xffffffff;
-    FUN_002e342c(temp_v1,param_1[5]);
+    libc_strcpy(temp_v1,param_1[5]);
     asdSequenceRequest(4,temp_v0,0x20);
                     /* WARNING: Treating indirect jump as return */
     return 1;

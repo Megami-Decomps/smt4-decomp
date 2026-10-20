@@ -1,4 +1,4 @@
-/* The block held in DAT_0043e278: per-job flag bytes. */
+/* The block held in g_frameTex: per-job flag bytes. */
 #ifndef SHARD_JOBBLOCK43E278_H
 #define SHARD_JOBBLOCK43E278_H
 
@@ -33,6 +33,6 @@ typedef struct JobBlock43e278 {
     /* 0x0FD8 */ u8 unkFD8;
 } JobBlock43e278;
 
-extern JobBlock43e278 *DAT_0043e278;
+extern JobBlock43e278 *g_frameTex;
 
 #endif

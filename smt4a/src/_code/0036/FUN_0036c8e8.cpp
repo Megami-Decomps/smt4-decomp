@@ -8,12 +8,12 @@ int asdMemoryFreeRegion(...);
 int FUN_0017fe8c(...);
 int FUN_0018003c(...);
 int FUN_0019a300(...);
-int FUN_001a089c(...);
+int nn_os_LightEvent_Initialize(...);
 int FUN_001a1204(...);
 int FUN_001ab838(...);
-int FUN_001af148(...);
-int FUN_001bcd48(...);
-int FUN_00237210(...);
+int nn_os_LightEvent_Wait(...);
+int svcSleepThread(...);
+int asdMemFreeSlot(...);
 int software_interrupt(...);
 
 typedef int romwright_code(...);
@@ -39,12 +39,12 @@ extern unsigned char bRam1ff80014; /* 0x1ff80014 */
 /* Supplied declaration required: FUN_0017fe8c. */
 /* Supplied declaration required: FUN_0018003c. */
 /* Supplied declaration required: FUN_0019a300. */
-/* Supplied declaration required: FUN_001a089c. */
+/* Supplied declaration required: nn_os_LightEvent_Initialize. */
 /* Supplied declaration required: FUN_001a1204. */
 /* Supplied declaration required: FUN_001ab838. */
-/* Supplied declaration required: FUN_001af148. */
-/* Supplied declaration required: FUN_001bcd48. */
-/* Supplied declaration required: FUN_00237210. */
+/* Supplied declaration required: nn_os_LightEvent_Wait. */
+/* Supplied declaration required: svcSleepThread. */
+/* Supplied declaration required: asdMemFreeSlot. */
 extern unsigned int nn_err_CTR_FatalErr_Throw(unsigned int, unsigned int);
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
@@ -69,7 +69,7 @@ unsigned char * FUN_0036c8e8(unsigned int param_1)
   }
   temp_v1 = 0;
   do {
-    FUN_00237210(*(unsigned int *)(param_1 + temp_v1 * 4));
+    asdMemFreeSlot(*(unsigned int *)(param_1 + temp_v1 * 4));
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 10);
   FUN_0018003c();
@@ -139,8 +139,8 @@ LAB_00189b20:
       if (puVar4 != (unsigned char *)0x2 && puVar4 != (unsigned char *)0x5) {
         aiStack_20[0] = 0;
         aiStack_20[1] = 0;
-        FUN_001a089c(aiStack_20,1);
-        FUN_001af148(aiStack_20);
+        nn_os_LightEvent_Initialize(aiStack_20,1);
+        nn_os_LightEvent_Wait(aiStack_20);
         puVar4 = (unsigned char *)piVar3;
       }
       return puVar4;
@@ -150,7 +150,7 @@ LAB_00189b20:
       puVar2 = (unsigned int *)(unsigned int)DAT_0062d200;
     }
     if (!temp_v2 || puVar2 != (unsigned int *)0x2) goto LAB_00189b20;
-    FUN_001bcd48(&LAB_004c4b40,0);
+    svcSleepThread(&LAB_004c4b40,0);
     nn_os_CriticalSection_Leave((unsigned int)&DAT_0062d280);
   } while( 1 );
 }

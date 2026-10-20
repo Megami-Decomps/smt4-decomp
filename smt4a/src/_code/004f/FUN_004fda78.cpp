@@ -7,7 +7,7 @@ extern "C" {
 int btlGetMainState(void);
 int FUN_004102d8(int, int, int, unsigned int);
 
-extern int DAT_005712f0; /* 0x5712f0 */
+extern int g_btlActionReflect; /* 0x5712f0 */
 
 /* Supplied declaration required: btlGetMainState. */
 extern int FUN_003e8430(void);
@@ -24,8 +24,8 @@ int FUN_004fda78(short param_1,short param_2,unsigned int param_3,int param_4,in
   int temp_v1;
   int temp_v2;
   
-  temp_v1 = DAT_005712f0;
-  FUN_004102d8(DAT_005712f0,(int)param_1,(int)param_2,param_3);
+  temp_v1 = g_btlActionReflect;
+  FUN_004102d8(g_btlActionReflect,(int)param_1,(int)param_2,param_3);
   *(unsigned char *)(temp_v1 + 4) = 8;
   *(int *)(temp_v1 + 0x28) = param_5;
   *(int *)(temp_v1 + 0x14) = param_4;

@@ -14,13 +14,13 @@ typedef struct Obj {
     /* 0xC0 */ u8 text[0x80];
 } Obj;
 
-extern Obj *DAT_0043e140;
+extern Obj *g_placeWin;
 
 void FUN_002636b0(void)
 {
-    Obj *obj = DAT_0043e140;
+    Obj *obj = g_placeWin;
 
-    DAT_0043e140->unk08 = 3;
+    g_placeWin->unk08 = 3;
     FUN_002bee58(obj->block, 1);
 }
 

@@ -17,17 +17,17 @@ typedef struct Context {
     /* 0x1F454 */ int active;
 } Context;
 
-extern Globals DAT_0043e188;
+extern Globals g_messageMain;
 
-Context *FUN_002c09bc(void);
+Context *gameDataBlocksGetSaveData(void);
 int FUN_002bee58(void *target, int arg);
 
 /* Script command: if the context is active, runs FUN_002bee58 on the effect of the global block. */
 u32 FUN_0026a348(void)
 {
-    Block *block = DAT_0043e188.block;
+    Block *block = g_messageMain.block;
 
-    if (FUN_002c09bc()->active == 0) {
+    if (gameDataBlocksGetSaveData()->active == 0) {
         return 1;
     }
     FUN_002bee58(block->effect, 7);

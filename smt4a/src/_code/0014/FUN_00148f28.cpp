@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_0015fe30(void);
+extern int nw_snd_SoundArchive_IsAvailable(void);
 
 
 unsigned int FUN_00148f28(int param_1)
@@ -14,7 +14,7 @@ unsigned int FUN_00148f28(int param_1)
   unsigned int temp_v1;
   
   temp_v1 = 0;
-  if ((*(int *)(param_1 + 4) != 0) && (temp_v0 = FUN_0015fe30(), temp_v1 = 0, temp_v0 != 0)) {
+  if ((*(int *)(param_1 + 4) != 0) && (temp_v0 = nw_snd_SoundArchive_IsAvailable(), temp_v1 = 0, temp_v0 != 0)) {
     temp_v1 = 1;
   }
   return temp_v1;

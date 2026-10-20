@@ -49,8 +49,8 @@ extern unsigned int FUN_00230c80(short, unsigned int);
 extern unsigned int FUN_00246570(unsigned int *);
 /* Supplied declaration required: FUN_002be56c. */
 /* Supplied declaration required: FUN_002be624. */
-extern int FUN_002bed98(int);
-extern int FUN_002beda4(void);
+extern int vec2GetYInt(int);
+extern int vec2GetXInt(void);
 /* Supplied declaration required: FUN_002bf4f0. */
 /* Supplied declaration required: FUN_002bf538. */
 
@@ -113,9 +113,9 @@ void FUN_003a21b8(int param_1,int param_2,int param_3,int param_4)
                    (int)**(short **)(temp_v4 + 0xc),(int)(*(short **)(temp_v4 + 0xc))[1]);
       temp_v4 = FUN_002bf4f0(param_1 + 0x380,0x4d);
       temp_v5 = param_1 + 0x56c;
-      temp_v6 = FUN_002beda4();
+      temp_v6 = vec2GetXInt();
       temp_v4 = (temp_v6 + temp_v9) - (*(unsigned short *)(temp_v4 + 4) & 0xffff7fff);
-      temp_v5 = FUN_002bed98(temp_v5);
+      temp_v5 = vec2GetYInt(temp_v5);
       FUN_00231bcc(param_1 + 0x380,0x4d,temp_v4,temp_v5 + temp_v3,temp_v2,1);
       temp_v4 = g_titleScene;
       piVar12 = (int *)(g_titleScene + 0x130c);

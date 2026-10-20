@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-extern int DAT_0057f28c; /* 0x57f28c */
+extern int g_uiQuest; /* 0x57f28c */
 
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
@@ -48,15 +48,15 @@ void FUN_003d474c(void)
   unsigned int temp_v7;
   unsigned int temp_v8;
   
-  temp_v4 = DAT_0057f28c;
-  if (*(char *)(DAT_0057f28c + 0x90c) != '\0') {
-    temp_v2 = DAT_0057f28c + 0x948;
+  temp_v4 = g_uiQuest;
+  if (*(char *)(g_uiQuest + 0x90c) != '\0') {
+    temp_v2 = g_uiQuest + 0x948;
     temp_v3 = FUN_002a4860();
     temp_v2 = FUN_002a4894(temp_v2);
     temp_v1 = *(unsigned short *)(temp_v4 + (temp_v2 + temp_v3) * 2 + 0xa10);
   }
   else {
-    temp_v2 = DAT_0057f28c + 0x9ac;
+    temp_v2 = g_uiQuest + 0x9ac;
     temp_v3 = FUN_002a4860();
     temp_v2 = FUN_002a4894(temp_v2);
     temp_v1 = *(unsigned short *)(temp_v4 + (temp_v2 + temp_v3) * 2 + 0xad6);

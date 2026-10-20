@@ -5,13 +5,13 @@
 extern "C" {
 
 int FUN_00267144(void);
-int FUN_002c09d0(...);
+int gameFlagIsSet(...);
 
 /* Supplied declaration required: FUN_00267144. */
 extern int FUN_002671bc(void);
 extern int FUN_0027d968(void);
-/* Supplied declaration required: FUN_002c09d0. */
-extern int FUN_002c2950(void);
+/* Supplied declaration required: gameFlagIsSet. */
+extern int gameGetMapBlock(void);
 
 
 void FUN_00273c54(void)
@@ -28,7 +28,7 @@ void FUN_00273c54(void)
   int temp_v5;
   unsigned char temp_v6;
   
-  temp_v1 = FUN_002c2950();
+  temp_v1 = gameGetMapBlock();
   temp_v5 = 0;
   pcVar7 = (char *)0x0;
   temp_v2 = FUN_002671bc();
@@ -44,13 +44,13 @@ void FUN_00273c54(void)
       if ((temp_v6 && temp_v3 != 0) && (temp_v2 = FUN_0027d968(), temp_v2 == *(short *)(pcVar4 + 0x12))) {
         temp_v2 = temp_v1 + temp_v5 * 0x14;
         if ((*(unsigned char *)(temp_v2 + 0xf20) & 1) != 0) {
-          temp_v4 = FUN_002c09d0(temp_v5 + 0x310);
+          temp_v4 = gameFlagIsSet(temp_v5 + 0x310);
           if (temp_v4 != 0) {
             temp_v0 = *(unsigned char *)(temp_v2 + 0xf20) & 0xfb;
             *(unsigned char *)(temp_v2 + 0xf20) = temp_v0;
           }
-          else if (((*(short *)(pcVar4 + 0x14) == 0) || (temp_v4 = FUN_002c09d0(), temp_v4 != 0)) &&
-                  ((*(short *)(pcVar4 + 0x16) == 0 || (temp_v4 = FUN_002c09d0(), temp_v4 == 0)))) {
+          else if (((*(short *)(pcVar4 + 0x14) == 0) || (temp_v4 = gameFlagIsSet(), temp_v4 != 0)) &&
+                  ((*(short *)(pcVar4 + 0x16) == 0 || (temp_v4 = gameFlagIsSet(), temp_v4 == 0)))) {
             temp_v0 = *(unsigned char *)(temp_v2 + 0xf20) | 4;
             *(unsigned char *)(temp_v2 + 0xf20) = temp_v0;
           }

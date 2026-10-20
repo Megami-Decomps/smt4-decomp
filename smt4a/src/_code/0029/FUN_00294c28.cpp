@@ -22,10 +22,10 @@ typedef struct GameState {
 extern GameState g_gameState;
 
 void FUN_00152f44(void);
-void FUN_00162e8c(void);
-s32 FUN_0014bef4(u32 id);
+void gameFlagsGetBlock(void);
+s32 randRange(u32 id);
 Candidate *saveSlotFindSelected(void);
-s32 FUN_0018719c(u32 flag);
+s32 gameFlagIsSet(u32 flag);
 s32 FUN_002d8b58(u32 kind, u16 id);
 
 /* Starts the mode-2 popup when nothing is busy, flag 0x49A is set, a candidate exists and flag 0x1A2 is clear or the level is above 0x32; with level above 0x3C and flag 0x10 set it uses id 0xAD instead of the candidate's. */
@@ -36,13 +36,13 @@ void FUN_00294c28(void)
     s32 value;
     u16 id;
 
-    FUN_00162e8c();
+    gameFlagsGetBlock();
     FUN_00152f44();
-    if (((((g_gameState.busy == 0) && (g_popupState->mode == 0)) && (value = FUN_0018719c(0x49A), value != 0)) &&
+    if (((((g_gameState.busy == 0) && (g_popupState->mode == 0)) && (value = gameFlagIsSet(0x49A), value != 0)) &&
          ((candidate = saveSlotFindSelected(), candidate != NULL) &&
-          ((value = FUN_0018719c(0x1A2), value == 0 || (value = FUN_0014bef4(99), value + 1 > 0x32)))))) {
-        value = FUN_0014bef4(99);
-        if ((value + 1 > 0x3C) && (value = FUN_0018719c(0x10), value != 0)) {
+          ((value = gameFlagIsSet(0x1A2), value == 0 || (value = randRange(99), value + 1 > 0x32)))))) {
+        value = randRange(99);
+        if ((value + 1 > 0x3C) && (value = gameFlagIsSet(0x10), value != 0)) {
             id = 0xAD;
         } else {
             id = candidate->id;

@@ -13,13 +13,13 @@ int FUN_002ad1d0(unsigned int);
 int FUN_002bb120(int);
 int FUN_002bb130(int);
 int FUN_002bb150(int, int);
-int FUN_002bb308(void);
+int nn_applet_CTR_detail_CloseSession(void);
 int FUN_002bb378(void);
 int FUN_002c131c(...);
-int FUN_002c4040(unsigned int *);
+int nn_os_LightEvent_Signal(unsigned int *);
 int FUN_002c40f8(unsigned int *, int *, int, int);
 int FUN_002c526c(void);
-int FUN_002c52f8(void);
+int asdFatalError(void);
 int FUN_002c5d5c(int *, unsigned char *, int, int);
 int software_interrupt(int);
 
@@ -56,13 +56,13 @@ extern unsigned int FUN_002bb100(void);
 /* Supplied declaration required: FUN_002bb120. */
 /* Supplied declaration required: FUN_002bb130. */
 /* Supplied declaration required: FUN_002bb150. */
-/* Supplied declaration required: FUN_002bb308. */
+/* Supplied declaration required: nn_applet_CTR_detail_CloseSession. */
 /* Supplied declaration required: FUN_002bb378. */
 /* Supplied declaration required: FUN_002c131c. */
-/* Supplied declaration required: FUN_002c4040. */
+/* Supplied declaration required: nn_os_LightEvent_Signal. */
 /* Supplied declaration required: FUN_002c40f8. */
 /* Supplied declaration required: FUN_002c526c. */
-/* Supplied declaration required: FUN_002c52f8. */
+/* Supplied declaration required: asdFatalError. */
 /* Supplied declaration required: FUN_002c5d5c. */
 extern unsigned char nn_os_LightEvent_TryWait(unsigned int);
 
@@ -116,7 +116,7 @@ void FUN_0012a37c(void)
         if (temp_v5 == 1) {
           if ((DAT_00465634 == (romwright_code *)0x0) || (temp_v2 = (*DAT_00465634)(DAT_00465638), temp_v2 != 0))
           {
-            FUN_002c4040(&DAT_00465644);
+            nn_os_LightEvent_Signal(&DAT_00465644);
           }
           continue;
         }
@@ -124,12 +124,12 @@ void FUN_0012a37c(void)
         FUN_002bb378();
         temp_v1 = FUN_002bb100();
         temp_v2 = FUN_0013ba80(temp_v1,&temp_v4);
-        FUN_002bb308();
+        nn_applet_CTR_detail_CloseSession();
         if (temp_v2 < 0) continue;
         temp_v3 = temp_v4;
         switch(temp_v3) {
         default:
-          FUN_002c52f8();
+          asdFatalError();
           continue;
         case 1:
         case 2:
@@ -190,7 +190,7 @@ joined_r0x0012a634:
           if (temp_v2 < 0) {
             FUN_002c131c(temp_v2,0x12a674);
           }
-          FUN_002bb308();
+          nn_applet_CTR_detail_CloseSession();
           continue;
         case 0xb:
           FUN_002bb120(1);
@@ -198,7 +198,7 @@ joined_r0x0012a634:
         }
       }
       FUN_002ad1d0(temp_v1);
-      FUN_002c4040(&DAT_00465644);
+      nn_os_LightEvent_Signal(&DAT_00465644);
       continue;
     }
     FUN_002bb150(10000000,0);

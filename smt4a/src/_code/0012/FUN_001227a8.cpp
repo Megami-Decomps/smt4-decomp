@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0010d29c(int);
 int FUN_002e6e26(void);
 int FUN_002e6e5c(unsigned char **);
-int FUN_002e7232(void);
+int sharedRefRelease(void);
 int FUN_002e78d0(unsigned int, unsigned int, int);
 int FUN_002f4f20(int, int);
 
@@ -28,13 +28,13 @@ extern int FUN_00105c54(int, unsigned int, int);
 /* Supplied declaration required: FUN_0010d29c. */
 /* Supplied declaration required: FUN_002e6e26. */
 /* Supplied declaration required: FUN_002e6e5c. */
-/* Supplied declaration required: FUN_002e7232. */
-extern int FUN_002e760a(unsigned int);
+/* Supplied declaration required: sharedRefRelease. */
+extern int operatorNew(unsigned int);
 extern int FUN_002e789a(unsigned char *);
 /* Supplied declaration required: FUN_002e78d0. */
 /* Supplied declaration required: FUN_002f4f20. */
-extern int FUN_002f73b8(void);
-extern int FUN_0030fb0c(int);
+extern int onlineMutexNeedsLock(void);
+extern int onlineOwnerHasPendingJob2(int);
 
 
 void FUN_001227a8(int param_1,unsigned char *param_2,unsigned int param_3,unsigned int param_4)
@@ -55,17 +55,17 @@ void FUN_001227a8(int param_1,unsigned char *param_2,unsigned int param_3,unsign
   temp_v3 = &DAT_0055b294;
   temp_v4 = romwright_piece_3_1((((unsigned int)(temp_v4) >> 8) & 0xffffffU),1);
   temp_v5 = temp_v0 + 0x58;
-  temp_v1 = FUN_002f73b8();
+  temp_v1 = onlineMutexNeedsLock();
   if (temp_v1 != 0) {
     FUN_0010d29c(temp_v0 + 0x58);
   }
   temp_v0 = FUN_002e789a(param_2);
-  if ((temp_v0 != 0) && (temp_v0 = FUN_0030fb0c(param_1), temp_v0 == 0)) {
+  if ((temp_v0 != 0) && (temp_v0 = onlineOwnerHasPendingJob2(param_1), temp_v0 == 0)) {
     if (*(int *)(param_1 + 0x120) != 0) {
-      FUN_002e7232();
+      sharedRefRelease();
       *(unsigned int *)(param_1 + 0x120) = 0;
     }
-    temp_v1 = FUN_002e760a(0xd0);
+    temp_v1 = operatorNew(0xd0);
     temp_v0 = 0;
     if (temp_v1 != 0) {
       temp_v0 = FUN_00105c54(temp_v1,*(unsigned int *)(param_2 + 0x44),param_1);

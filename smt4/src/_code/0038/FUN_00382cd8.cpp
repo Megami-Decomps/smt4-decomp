@@ -10,7 +10,7 @@ int FUN_00273c54(void);
 int FUN_00273d34(void);
 int FUN_00273f5c(void);
 int FUN_0027d908(void);
-int FUN_0028975c(...);
+int gameFlagSetValue(...);
 int FUN_00289c98(int);
 int FUN_00296934(void);
 int FUN_0029e620(unsigned int, int);
@@ -51,13 +51,13 @@ extern int FUN_00241990(void);
 /* Supplied declaration required: FUN_00273d34. */
 /* Supplied declaration required: FUN_00273f5c. */
 /* Supplied declaration required: FUN_0027d908. */
-/* Supplied declaration required: FUN_0028975c. */
+/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_00289c98. */
 /* Supplied declaration required: FUN_00296934. */
 /* Supplied declaration required: FUN_0029e620. */
 /* Supplied declaration required: FUN_0029e648. */
 /* Supplied declaration required: FUN_0029ee6c. */
-extern int FUN_002c2950(void);
+extern int gameGetMapBlock(void);
 extern int FUN_002cf738(void);
 extern unsigned char FUN_002cf750(void);
 extern unsigned short FUN_002eff34(void);
@@ -91,28 +91,28 @@ void FUN_00382cd8(fn_00382cd8_arg0 *param_1)
   if (temp_v3 != 0) {
     if (param_1->field_0xd50 != 0xca) {
       if (param_1->field_0xd50 == 0xc3) {
-        FUN_0028975c(0x24c,0,1);
-        FUN_0028975c(0x24e,0,1);
-        FUN_0028975c(0x24d,0);
-        FUN_0028975c(0x24f,0,1);
-        FUN_0028975c(0x250,0,1);
-        FUN_0028975c(0x252,0,1);
-        FUN_0028975c(0x251,0);
+        gameFlagSetValue(0x24c,0,1);
+        gameFlagSetValue(0x24e,0,1);
+        gameFlagSetValue(0x24d,0);
+        gameFlagSetValue(0x24f,0,1);
+        gameFlagSetValue(0x250,0,1);
+        gameFlagSetValue(0x252,0,1);
+        gameFlagSetValue(0x251,0);
         temp_v4 = 0x253;
-        FUN_0028975c(temp_v4,0,1);
+        gameFlagSetValue(temp_v4,0,1);
       }
     }
     else {
-      FUN_0028975c(0x246,0,1);
-      FUN_0028975c(0x274,0,1);
-      FUN_0028975c(0x26b,0,1);
-      FUN_0028975c(0x248,0,1);
+      gameFlagSetValue(0x246,0,1);
+      gameFlagSetValue(0x274,0,1);
+      gameFlagSetValue(0x26b,0,1);
+      gameFlagSetValue(0x248,0,1);
       temp_v4 = 0x247;
-      FUN_0028975c(temp_v4,0,1);
+      gameFlagSetValue(temp_v4,0,1);
     }
   }
   if (param_1->field_0xd4c != 0) {
-    temp_v3 = FUN_002c2950();
+    temp_v3 = gameGetMapBlock();
     *(unsigned short *)(temp_v3 + 0x22) = 0;
     FUN_00273f5c();
     FUN_0027d908();

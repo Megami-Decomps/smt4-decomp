@@ -5,10 +5,10 @@ extern "C" {
 int FUN_00199424(void);
 int FUN_0028cf30(void *scene, u32 a, u32 b);
 int btlGetMainState(void);
-int FUN_00298140(void *scene, int a, int b);
+int playSceneSetState(void *scene, int a, int b);
 int FUN_0029ee6c(int a, int color);
-int FUN_002af5c0(void *block, int a, int b);
-int FUN_002b8838(int a);
+int uiSpriteSetImageKeyframe(void *block, int a, int b);
+int buttonHelpSetPreset(int a);
 int FUN_002bee58(void *block, int a);
 extern int FUN_00293230(void);
 extern int FUN_002b898c(void);
@@ -49,7 +49,7 @@ void FUN_002cfed0(Scene *scene, u32 a, u8 b, u32 c)
     if (scene->unk3080 == 0) {
         i = 0;
         do {
-            FUN_002af5c0(scene->blocksC[i], 0, 0);
+            uiSpriteSetImageKeyframe(scene->blocksC[i], 0, 0);
             i = i + 1;
         } while (i < 6);
         if (scene->unk3080 == 0) {
@@ -67,24 +67,24 @@ void FUN_002cfed0(Scene *scene, u32 a, u8 b, u32 c)
                     i = i + 1;
                 } while (i < 8);
                 scene->unk3054 = 0x11;
-                FUN_00298140(scene, 0x10, 1);
+                playSceneSetState(scene, 0x10, 1);
                 return;
             }
             FUN_0029ee6c(0, 0x323232ff);
-            FUN_00298140(scene, 0x28, 1);
+            playSceneSetState(scene, 0x28, 1);
             result = FUN_002b898c();
             if (result != 0x3d) {
                 btlGetMainState();
                 result = FUN_00293230();
                 if (result != 0) {
-                    FUN_002b8838(0x3d);
+                    buttonHelpSetPreset(0x3d);
                     return;
                 }
             }
             return;
         }
     }
-    FUN_00298140(scene, 0x2a, 1);
+    playSceneSetState(scene, 0x2a, 1);
 }
 
 } /* extern "C" */

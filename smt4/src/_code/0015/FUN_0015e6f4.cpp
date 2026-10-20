@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0015e8c4(int, int, unsigned int, int);
 int FUN_002a1130(...);
-int FUN_002aa568(int, unsigned int *);
+int libc_strcmp(int, unsigned int *);
 int FUN_002baa40(...);
 int FUN_002bad5c(int *);
 int jyoucyuGetTableEntry(int);
@@ -33,7 +33,7 @@ extern int g_aocMain; /* 0x432fc8 */
 /* Supplied declaration required: FUN_0015e8c4. */
 /* Supplied declaration required: FUN_002a1130. */
 extern int FUN_002a12d8(unsigned int *);
-/* Supplied declaration required: FUN_002aa568. */
+/* Supplied declaration required: libc_strcmp. */
 extern int FUN_002ad1e0(int);
 /* Supplied declaration required: FUN_002baa40. */
 /* Supplied declaration required: FUN_002bad5c. */
@@ -68,7 +68,7 @@ void FUN_0015e6f4(unsigned int *param_1,int param_2,unsigned int *param_3,unsign
   temp_v0 = param_2 + 0x331;
   puVar3 = (unsigned int *)&temp_v2;
   temp_v1 = temp_v0;
-  FUN_002aa568(temp_v0,param_3);
+  libc_strcmp(temp_v0,param_3);
   if (temp_v1 != 0) {
     if (*(char *)(param_2 + 0x330) != '\0') {
       temp_v1 = FUN_002c3dfc(temp_v0);

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002be624(...);
-int FUN_002bf694(...);
+int libc_strcpy(...);
 int memClear(...);
 int asdMemAlloc(...);
 int taskCreateDraw(...);
@@ -28,7 +28,7 @@ extern char s__B_B_B_B_B_B_B_B_B_B_0044d060[105]; /* 0x44d060 */
 
 extern int asdLoadFileGetUseRawPaths(void);
 /* Supplied declaration required: FUN_002be624. */
-/* Supplied declaration required: FUN_002bf694. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: taskCreateDraw. */
@@ -81,7 +81,7 @@ unsigned int FUN_002ef6b8(int param_1,unsigned char param_2)
     FUN_002be624(&temp_v1,"%s/%s.moflex","rom:/moflex",
                  *(unsigned int *)(s__B_B_B_B_B_B_B_B_B_B_0044d060 + param_1 * 4));
     puVar1[4] = 2;
-    FUN_002bf694((int)puVar1 + 0x1b,&temp_v1);
+    libc_strcpy((int)puVar1 + 0x1b,&temp_v1);
     *(unsigned char *)((int)puVar1 + 0x5b) = 0;
     *(unsigned char *)(puVar1 + 6) = 0;
     puVar1[0x1b] = 0;

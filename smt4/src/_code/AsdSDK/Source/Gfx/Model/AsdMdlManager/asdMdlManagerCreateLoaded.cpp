@@ -4,12 +4,12 @@ extern "C" {
 
 AsdMdlObject *asdMdlObjectNew(void);
 void *asdFileQueueRequest(void *source, s32 arg);
-void FUN_002b0184(void *data, s32 arg);
+void asdFileRequestSetHeapKind(void *data, s32 arg);
 void asdFileWait(void *data);
-u32 FUN_0013840c(void *data, u32 *out);
+u32 asdFileRequestGetResult(void *data, u32 *out);
 void *FUN_002b2988(u32 data, u32 arg);
-void FUN_002a91f4(AsdMdlNode *node, u32 param);
-void FUN_002b2770(AsdMdlObject *obj);
+void asdMdlNodeInit(AsdMdlNode *node, u32 param);
+void asdMdlObjectBuildBounds(AsdMdlObject *obj);
 void asdListAdd(u32 *list, AsdMdlObject *obj, s32 arg);
 
 extern u32 g_asdMdlList;
@@ -25,12 +25,12 @@ AsdMdlObject *asdMdlManagerCreateLoaded(void *source, u32 param)
 
     obj->node->param = param;
     obj->request = asdFileQueueRequest(source, 0);
-    FUN_002b0184(obj->request, 1);
+    asdFileRequestSetHeapKind(obj->request, 1);
     asdFileWait(obj->request);
-    data = FUN_0013840c(obj->request, &flags);
+    data = asdFileRequestGetResult(obj->request, &flags);
     obj->node->data = FUN_002b2988(data, flags);
-    FUN_002a91f4(obj->node, param);
-    FUN_002b2770(obj);
+    asdMdlNodeInit(obj->node, param);
+    asdMdlObjectBuildBounds(obj);
     asdListAdd(&g_asdMdlList, obj, 0);
     return obj;
 }

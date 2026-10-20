@@ -8,7 +8,7 @@ int FUN_00227ab4(int *, unsigned int *);
 int FUN_00246454(int, unsigned int *);
 int FUN_002569ac(int *, unsigned int);
 int FUN_0026beb4(int, unsigned int *, unsigned int, unsigned int);
-int FUN_00282924(int, int);
+int btlMainFindEntryByListedId(int, int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -19,7 +19,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00246454. */
 /* Supplied declaration required: FUN_002569ac. */
 /* Supplied declaration required: FUN_0026beb4. */
-/* Supplied declaration required: FUN_00282924. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 
 
 void FUN_003cf94c(int *param_1,unsigned int *param_2)
@@ -34,7 +34,7 @@ void FUN_003cf94c(int *param_1,unsigned int *param_2)
   unsigned int temp_v4;
   
   temp_v1 = *param_1;
-  FUN_00282924(temp_v1,(int)*(short *)(temp_v1 + 0x225a));
+  btlMainFindEntryByListedId(temp_v1,(int)*(short *)(temp_v1 + 0x225a));
   if ((temp_v1 != 0) && (temp_v2 = *param_1, (*(unsigned int *)(temp_v2 + 0x44a0) & 0x200) == 0)) {
     temp_v3 = *(unsigned int *)(temp_v2 + 0x226c);
     if ((int)*(unsigned int *)(temp_v2 + 0x226c) <= (int)(unsigned int)*(unsigned short *)(temp_v1 + 0x1cc)) {
@@ -82,7 +82,7 @@ void FUN_003cf94c(int *param_1,unsigned int *param_2)
     }
     temp_v1 = *param_1;
     if ((*(int *)(temp_v1 + 0x2264) == 2) &&
-       (FUN_00282924(temp_v1,(int)*(short *)(temp_v1 + 0x225a)), temp_v1 != 0)) {
+       (btlMainFindEntryByListedId(temp_v1,(int)*(short *)(temp_v1 + 0x225a)), temp_v1 != 0)) {
       FUN_00246454(0,param_2);
     }
     if (temp_v0) {

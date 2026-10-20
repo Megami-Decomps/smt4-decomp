@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002ffd8c(void);
 
-extern int FUN_002e995c(int);
+extern int onlineSockAddrConstruct(int);
 /* Supplied declaration required: FUN_002ffd8c. */
 
 
@@ -16,7 +16,7 @@ int FUN_00301490(int param_1)
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_002e995c(param_1 + 0x10);
+  temp_v0 = onlineSockAddrConstruct(param_1 + 0x10);
   *(unsigned int *)(temp_v0 + 0x28) = 0;
   FUN_002ffd8c();
   return temp_v0 - 0x10;

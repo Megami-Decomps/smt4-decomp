@@ -25,11 +25,11 @@ typedef struct {
 } void_stack;
 
 extern unsigned char LAB_002ef21c; /* 0x2ef21c */
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
-extern unsigned char DAT_0060fc08; /* 0x60fc08 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
+extern unsigned char g_mapRndMaze; /* 0x60fc08 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_00162e8c(void);
+extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
@@ -61,7 +61,7 @@ void FUN_002ef048(void)
   float temp_v9;
   float temp_v10;
   
-  temp_v2 = FUN_00162e8c();
+  temp_v2 = gameFlagsGetBlock();
   if (*(char *)(temp_v2 + 0xe09) != '\0') {
     temp_v0 = *(char *)(temp_v2 + 0xe0a);
     temp_v1 = *(char *)(temp_v2 + 0xe0b);
@@ -99,11 +99,11 @@ void FUN_002ef048(void)
     if (temp_v3 != 0) {
       temp_v2 = FUN_0040ac08();
     }
-    (*(int *)((unsigned char *)&DAT_0060fc08 + 0x9d4)) = temp_v2;
+    (*(int *)((unsigned char *)&g_mapRndMaze + 0x9d4)) = temp_v2;
     FUN_0040aa6c();
-    FUN_0040aad4((*(int *)((unsigned char *)&DAT_0060fc08 + 0x9d4)),0);
-    temp_v4 = *(unsigned int *)((*(int *)((unsigned char *)&DAT_0060fc08 + 0x9d4)) + 4);
-    FUN_0040ace8(DAT_0056fcc0,temp_v4);
+    FUN_0040aad4((*(int *)((unsigned char *)&g_mapRndMaze + 0x9d4)),0);
+    temp_v4 = *(unsigned int *)((*(int *)((unsigned char *)&g_mapRndMaze + 0x9d4)) + 4);
+    FUN_0040ace8(g_handleRegistry,temp_v4);
     FUN_003fd76c(temp_v4,&temp_v8);
     FUN_003fdb18(temp_v4);
   }

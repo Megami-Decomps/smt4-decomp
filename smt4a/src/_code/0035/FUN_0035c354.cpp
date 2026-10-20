@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_00201f30(int, int, int);
+int bgmPlay(int, int, int);
 int FUN_002bf09c(void);
 
-/* Supplied declaration required: FUN_00201f30. */
+/* Supplied declaration required: bgmPlay. */
 extern int scrGetArg(unsigned int);
-extern int FUN_002360dc(unsigned int);
+extern int scrGetArgString(unsigned int);
 /* Supplied declaration required: FUN_002bf09c. */
 
 
@@ -21,7 +21,7 @@ unsigned int FUN_0035c354(void)
   int temp_v1;
   int temp_v2;
   
-  temp_v0 = FUN_002360dc(0);
+  temp_v0 = scrGetArgString(0);
   FUN_002bf09c();
   if (-1 < temp_v0) {
     temp_v1 = scrGetArg(1);
@@ -32,7 +32,7 @@ unsigned int FUN_0035c354(void)
     if (temp_v2 < 0) {
       temp_v2 = 0;
     }
-    FUN_00201f30(temp_v0,temp_v1,temp_v2);
+    bgmPlay(temp_v0,temp_v1,temp_v2);
   }
   return 1;
 }

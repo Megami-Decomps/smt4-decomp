@@ -12,22 +12,22 @@ typedef struct JobWork {
 } JobWork;
 
 JobWork *jobGetWork(void);
-int FUN_002c0894(u32 resource);
+int asdTextureRelease(u32 resource);
 int asdMemFree(void *ptr);
 
-extern u32 DAT_0043e278;
+extern u32 g_frameTex;
 
 /* Releases the four resources held by the job's work area, then the work area itself. */
 void FUN_001078ec(void)
 {
     JobWork *work = jobGetWork();
 
-    FUN_002c0894(work->unk0004);
-    FUN_002c0894(work->unk0008);
-    FUN_002c0894(work->unk0F20);
-    FUN_002c0894(work->unk0F24);
+    asdTextureRelease(work->unk0004);
+    asdTextureRelease(work->unk0008);
+    asdTextureRelease(work->unk0F20);
+    asdTextureRelease(work->unk0F24);
     asdMemFree(work);
-    DAT_0043e278 = 0;
+    g_frameTex = 0;
 }
 
 } /* extern "C" */

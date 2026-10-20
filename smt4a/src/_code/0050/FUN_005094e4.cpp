@@ -9,7 +9,7 @@ int FUN_0045fab0(int, int);
 int word8HolderSetFromTable(int, int);
 int FUN_00460a7c(unsigned char [20], unsigned int, int);
 int FUN_00466478(int, unsigned int, unsigned int, unsigned int);
-int FUN_00466780(int, unsigned char [4], unsigned int, int);
+int sndChannelStart(int, unsigned char [4], unsigned int, int);
 int VectorSignedToFloat(unsigned int, int);
 int VectorUnsignedToFloat(unsigned int, int);
 int nw_snd_internal_CurveAdshr_SetHold(int, int);
@@ -41,7 +41,7 @@ extern unsigned int FUN_001a8d40(unsigned int, unsigned int);
 /* Supplied declaration required: word8HolderSetFromTable. */
 /* Supplied declaration required: FUN_00460a7c. */
 /* Supplied declaration required: FUN_00466478. */
-/* Supplied declaration required: FUN_00466780. */
+/* Supplied declaration required: sndChannelStart. */
 extern int FUN_0050802c(unsigned int, unsigned char *, unsigned int, unsigned int, unsigned int);
 extern int FUN_005081b8(unsigned char *, unsigned char *, unsigned int);
 /* Supplied declaration required: nw_snd_internal_CurveAdshr_SetHold. */
@@ -108,7 +108,7 @@ void FUN_005094e4(unsigned int param_1,unsigned int param_2,unsigned int param_3
         *(unsigned char *)(temp_v0 + 0x196) = temp_v17;
         *(unsigned char *)(temp_v0 + 0x13d) = temp_v16;
         *(unsigned char *)(temp_v0 + 0x197) = temp_v18;
-        FUN_00466780(temp_v0,temp_v3,param_4[3],0);
+        sndChannelStart(temp_v0,temp_v3,param_4[3],0);
       }
     }
   }

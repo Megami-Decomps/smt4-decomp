@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0015f858(unsigned int, int);
-int FUN_00275f44(unsigned int, int);
+int scrScriptProcessStartEntry(unsigned int, int);
 int FUN_003180c4(int, unsigned int);
 int FUN_003c1060(void);
 int FUN_003c3e14(void);
@@ -17,11 +17,11 @@ typedef struct {
 
 /* Supplied declaration required: FUN_0015f858. */
 extern int FUN_00224880(unsigned int);
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_003180c4. */
 extern int panelIsMissingOrFlagClear(void);
-extern int FUN_00357bc8(unsigned int, char *);
+extern int tableGroupFindEntryIndex(unsigned int, char *);
 /* Supplied declaration required: FUN_003c1060. */
 /* Supplied declaration required: FUN_003c3e14. */
 
@@ -49,7 +49,7 @@ void FUN_003e65a4(int param_1)
         temp_v0 = FUN_002a4b74();
         if (!(temp_v0 == -1 || temp_v0 == 3)) {
           *(int *)(param_1 + 0x4c) = temp_v0;
-          FUN_00275f44(*(unsigned int *)(param_1 + 0x18),*(unsigned short *)(param_1 + temp_v0 * 0xc + 0x2c)
+          scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x18),*(unsigned short *)(param_1 + temp_v0 * 0xc + 0x2c)
                       );
           *(unsigned int *)(param_1 + 8) = 3;
         }
@@ -92,9 +92,9 @@ void FUN_003e65a4(int param_1)
     }
   }
   FUN_003c1060();
-  temp_v0 = FUN_00357bc8(*(unsigned int *)(param_1 + 0x14),"npcShop_ItemDes_select");
+  temp_v0 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x14),"npcShop_ItemDes_select");
   if (-1 < temp_v0) {
-    FUN_00275f44(*(unsigned int *)(param_1 + 0x18),temp_v0);
+    scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x18),temp_v0);
   }
   temp_v1 = 2;
   *(unsigned int *)(param_1 + 8) = temp_v1;

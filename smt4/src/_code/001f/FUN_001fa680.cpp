@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_00152bec(void);
+int asdMdlManagerMarkDestroy(void);
 
-extern int DAT_00447a48; /* 0x447a48 */
+extern int g_mapGimic; /* 0x447a48 */
 
-/* Supplied declaration required: FUN_00152bec. */
+/* Supplied declaration required: asdMdlManagerMarkDestroy. */
 
 
 void FUN_001fa680(void)
@@ -19,8 +19,8 @@ void FUN_001fa680(void)
   
   temp_v0 = 0x17;
   do {
-    if (*(int *)(DAT_00447a48 + temp_v0 * 0x28 + 0x34) != 0) {
-      FUN_00152bec();
+    if (*(int *)(g_mapGimic + temp_v0 * 0x28 + 0x34) != 0) {
+      asdMdlManagerMarkDestroy();
     }
     temp_v0 = temp_v0 - 1;
   } while (-1 < temp_v0);

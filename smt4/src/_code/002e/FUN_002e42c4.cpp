@@ -14,7 +14,7 @@ typedef struct {
 extern int DAT_0043e18c; /* 0x43e18c */
 
 /* Supplied declaration required: FUN_002866b4. */
-extern unsigned int FUN_002893d8(void);
+extern unsigned int scrGetCommandFrame(void);
 extern int btlGetMainState(void);
 extern unsigned int scrGetArg(unsigned int);
 
@@ -32,7 +32,7 @@ void FUN_002e42c4(void)
   temp_v2 = btlGetMainState();
   temp_v3 = *(unsigned int *)(temp_v2 + 0x2234);
   temp_v0 = scrGetArg(0);
-  temp_v1 = FUN_002893d8();
+  temp_v1 = scrGetCommandFrame();
   if (DAT_0043e18c != 0) {
     *(unsigned char *)(DAT_0043e18c + 0xa11) = 0x14;
   }

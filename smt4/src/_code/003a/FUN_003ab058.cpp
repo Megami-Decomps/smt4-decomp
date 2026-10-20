@@ -5,7 +5,7 @@
 extern "C" {
 
 int jobStop(int, int);
-int FUN_003aceb4(void);
+int countdownTimerUpdate(void);
 int FUN_003ad390(void);
 
 typedef int romwright_code(...);
@@ -15,7 +15,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: jobStop. */
-/* Supplied declaration required: FUN_003aceb4. */
+/* Supplied declaration required: countdownTimerUpdate. */
 /* Supplied declaration required: FUN_003ad390. */
 
 
@@ -27,7 +27,7 @@ void FUN_003ab058(int *param_1)
     (**(romwright_code **)(*(int *)param_1[0x164] + 4))();
     param_1[0x164] = 0;
   }
-  FUN_003aceb4();
+  countdownTimerUpdate();
   FUN_003ad390();
   (**(romwright_code **)(*param_1 + 0x28))(param_1);
   jobStop(param_1[1],0);

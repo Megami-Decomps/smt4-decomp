@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern PlayerData *FUN_001801a4(void);
+extern PlayerData *gameGetPlayerData(void);
 
 s32 FUN_003e0164(void)
 {
-    return FUN_001801a4()->unk1E;
+    return gameGetPlayerData()->unk1E;
 }
 
 } /* extern "C" */

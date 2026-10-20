@@ -8,10 +8,10 @@ int FUN_001099b8(int, unsigned int, int, int);
 int FUN_00109ee2(void);
 int FUN_0010e83a(int, int, unsigned int);
 int FUN_00114c8e(int, int *);
-int FUN_002e7232(int);
+int sharedRefRelease(int);
 int FUN_002eb338(int *, unsigned int *, int);
-int FUN_002eb588(unsigned int *);
-int FUN_002ede60(int *, int);
+int onlineTimeGetNow(unsigned int *);
+int onlineSockAddrConstruct2(int *, int);
 int FUN_002f2cb2(unsigned int, int, int);
 int FUN_002f9056(...);
 int FUN_002f9086(int, int, int *, unsigned int);
@@ -59,13 +59,13 @@ extern int FUN_00109f28(void);
 /* Supplied declaration required: FUN_0010e83a. */
 extern int FUN_001109c4(unsigned int *);
 /* Supplied declaration required: FUN_00114c8e. */
-/* Supplied declaration required: FUN_002e7232. */
+/* Supplied declaration required: sharedRefRelease. */
 /* Supplied declaration required: FUN_002eb338. */
-/* Supplied declaration required: FUN_002eb588. */
-/* Supplied declaration required: FUN_002ede60. */
+/* Supplied declaration required: onlineTimeGetNow. */
+/* Supplied declaration required: onlineSockAddrConstruct2. */
 /* Supplied declaration required: FUN_002f2cb2. */
 extern int FUN_002f86cc(int, unsigned int);
-extern int FUN_002f9048(unsigned int);
+extern int mapIsEmpty2(unsigned int);
 /* Supplied declaration required: FUN_002f9056. */
 extern int FUN_002f905e(int, unsigned int *);
 extern int FUN_002f9072(int, unsigned int *);
@@ -98,10 +98,10 @@ void FUN_002f8820(int param_1)
   int temp_v18;
   int temp_v19;
   
-  FUN_002eb588(&temp_v14);
+  onlineTimeGetNow(&temp_v14);
   temp_v13 = param_1 + 0x2c0;
   if ((((s______00594975.whole[0] != '\0') &&
-       (temp_v1 = FUN_002f9048(*(unsigned int *)(param_1 + 500)), temp_v1 != 0)) &&
+       (temp_v1 = mapIsEmpty2(*(unsigned int *)(param_1 + 500)), temp_v1 != 0)) &&
       (*(int *)(param_1 + 0x208) != 0)) &&
      (*(unsigned int *)(temp_v13 + 0xc) < temp_v15 ||
       temp_v15 - *(unsigned int *)(temp_v13 + 0xc) < (unsigned int)(*(unsigned int *)(temp_v13 + 8) <= temp_v14))) {
@@ -145,7 +145,7 @@ void FUN_002f8820(int param_1)
       if ((*(char *)(temp_v18 + 4) != '\0') || (*(char *)(temp_v8 + 0x50) == '\0')) break;
       temp_v0 = 1;
     }
-    FUN_002ede60(&temp_v4,temp_v17 + 0xdc);
+    onlineSockAddrConstruct2(&temp_v4,temp_v17 + 0xdc);
     temp_v11 = (unsigned int)*(unsigned char *)(temp_v17 + 0x66);
     if (((*(signed char *)((unsigned char *)&g_flagBlock + 0x12)) == '\0') && (temp_v11 != 0)) {
       FUN_002f9056(temp_v8);
@@ -171,7 +171,7 @@ void FUN_002f8820(int param_1)
         temp_v1 = param_1;
         FUN_0010e83a(param_1,temp_v7,temp_v12);
         if (temp_v1 != 0) {
-          FUN_002e7232(temp_v7);
+          sharedRefRelease(temp_v7);
         }
         else {
 LAB_002f8962:
@@ -198,7 +198,7 @@ LAB_002f8962:
           if (temp_v1 == 0) {
             temp_v1 = *(int *)(temp_v19 + 0x10);
             if ((temp_v1 != 0) && (FUN_00114c8e(temp_v1,&temp_v4), temp_v1 != 0)) {
-              FUN_002e7232(temp_v7);
+              sharedRefRelease(temp_v7);
               goto LAB_002f895e;
             }
             goto LAB_002f8962;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c38fc(unsigned int *);
+int nn_os_CriticalSection_Initialize(unsigned int *);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -15,7 +15,7 @@ extern unsigned int DAT_0044e448; /* 0x44e448 */
 extern unsigned int DAT_0044e44c; /* 0x44e44c */
 extern unsigned int DAT_004c644c; /* 0x4c644c */
 
-/* Supplied declaration required: FUN_002c38fc. */
+/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
 
 
 unsigned long long FUN_003f2034(unsigned int param_1,unsigned int param_2,int param_3)
@@ -27,7 +27,7 @@ unsigned long long FUN_003f2034(unsigned int param_1,unsigned int param_2,int pa
   DAT_0044e448 = 0;
   DAT_0044e44c = 0;
   DAT_004c644c = 0;
-  FUN_002c38fc(&DAT_004c644c);
+  nn_os_CriticalSection_Initialize(&DAT_004c644c);
   return 0x3574a8004c644c;
 }
 

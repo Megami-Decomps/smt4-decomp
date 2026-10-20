@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_002e9300(int *, unsigned int);
-int FUN_002e9318(int *);
+int onlineStringConstruct(int *, unsigned int);
+int onlineStringDestroy(int *);
 int FUN_002fbb92(unsigned int, int *);
 
-/* Supplied declaration required: FUN_002e9300. */
-/* Supplied declaration required: FUN_002e9318. */
-extern unsigned int FUN_002fbb86(unsigned int);
+/* Supplied declaration required: onlineStringConstruct. */
+/* Supplied declaration required: onlineStringDestroy. */
+extern unsigned int onlineUrlGetText(unsigned int);
 /* Supplied declaration required: FUN_002fbb92. */
 
 
@@ -24,10 +24,10 @@ void FUN_00110b36(unsigned int param_1,unsigned int param_2,unsigned int param_3
   
   uStack_10 = param_3;
   uStack_c = param_4;
-  temp_v0 = FUN_002fbb86(param_2);
-  FUN_002e9300(&uStack_10,temp_v0);
+  temp_v0 = onlineUrlGetText(param_2);
+  onlineStringConstruct(&uStack_10,temp_v0);
   FUN_002fbb92(param_1,&uStack_10);
-  FUN_002e9318(&uStack_10);
+  onlineStringDestroy(&uStack_10);
   return;
 }
 

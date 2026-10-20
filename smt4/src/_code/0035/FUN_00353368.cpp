@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_00100c44(...);
+int libc_strtok(...);
 int FUN_0023a154(...);
-int FUN_002c30c4(...);
+int libc_strlen(...);
 int nn_boss_TaskOption_TaskOption(...);
 int strncpy(...);
 
@@ -20,11 +20,11 @@ typedef struct {
 
 extern unsigned char DAT_00407e94; /* 0x407e94 */
 
-/* Supplied declaration required: FUN_00100c44. */
+/* Supplied declaration required: libc_strtok. */
 extern int FUN_0023a0d8(unsigned int, int *, unsigned int);
 /* Supplied declaration required: FUN_0023a154. */
 extern unsigned int FUN_002b5c44(void);
-/* Supplied declaration required: FUN_002c30c4. */
+/* Supplied declaration required: libc_strlen. */
 /* Supplied declaration required: nn_boss_TaskOption_TaskOption. */
 
 
@@ -52,12 +52,12 @@ int FUN_00353368(unsigned int *param_1,int param_2,unsigned int param_3)
   if (-1 < temp_v3) {
     strncpy(temp_v10,param_3,0x20);
     temp_v11 = 0;
-    temp_v3 = FUN_00100c44(temp_v10,&DAT_00407e94,&temp_v8);
-    temp_v4 = FUN_00100c44(0,&DAT_00407e94,&temp_v8);
+    temp_v3 = libc_strtok(temp_v10,&DAT_00407e94,&temp_v8);
+    temp_v4 = libc_strtok(0,&DAT_00407e94,&temp_v8);
     *(unsigned char *)(param_2 + 0x20) = 0;
     if ((*(unsigned char *)(temp_v12 + 0x94) - 1 < 4) &&
        (temp_v0 = " ,,.  "[*(unsigned char *)(temp_v12 + 0x94)], temp_v0 != 0 && temp_v3 != 0)) {
-      temp_v5 = FUN_002c30c4(temp_v3);
+      temp_v5 = libc_strlen(temp_v3);
       if (temp_v5 != 0) {
         unaff_r11 = 0xaaaaaaab;
       }
@@ -84,7 +84,7 @@ int FUN_00353368(unsigned int *param_1,int param_2,unsigned int param_3)
     }
     if ((*(unsigned char *)(temp_v12 + 0x94) - 2 < 6) &&
        (temp_v1 = "  .,.,.,"[*(unsigned char *)(temp_v12 + 0x94)], temp_v1 != 0)) {
-      temp_v5 = FUN_002c30c4(param_2 + 0x20);
+      temp_v5 = libc_strlen(param_2 + 0x20);
       if (temp_v5 >= 0x41) {
         temp_v5 = 0x40;
       }
@@ -93,7 +93,7 @@ int FUN_00353368(unsigned int *param_1,int param_2,unsigned int param_3)
         temp_v4 = 0x407ea0;
       }
       else {
-        temp_v3 = FUN_002c30c4(temp_v4);
+        temp_v3 = libc_strlen(temp_v4);
         if (temp_v3 == 1) {
           temp_v9 = 0x407e98;
         }

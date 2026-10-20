@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e32a4(int, unsigned char *, unsigned char *);
-int FUN_002e6e14(void);
+int asdOperatorDeleteArray(void);
 int FUN_00307724(int, int, int, int *);
 int vectorCount8_00307746(int *);
 
@@ -24,7 +24,7 @@ extern unsigned char LAB_002f9eec; /* 0x2f9eec */
 /* Supplied declaration required: FUN_002e32a4. */
 extern int *wordRefMax(unsigned int *, unsigned int *);
 extern int rt_malloc(void);
-/* Supplied declaration required: FUN_002e6e14. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
 /* Supplied declaration required: FUN_00307724. */
 /* Supplied declaration required: vectorCount8_00307746. */
 extern unsigned int bufGrowCapacity4(unsigned int, int *);
@@ -59,7 +59,7 @@ unsigned long long FUN_002f9e68(int *param_1,unsigned int param_2)
     FUN_00307724(*param_1,param_1[1],temp_v2,param_1);
     for (temp_v3 = *param_1; temp_v3 != param_1[1]; temp_v3 = temp_v3 + 8) {
     }
-    FUN_002e6e14();
+    asdOperatorDeleteArray();
     temp_v3 = vectorCount8_00307746(param_1);
     *param_1 = temp_v2;
     param_1[2] = temp_v2 + temp_v1 * 8;

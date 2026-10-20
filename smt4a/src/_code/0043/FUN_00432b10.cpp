@@ -6,9 +6,9 @@ extern "C" {
 
 int FUN_00110b28(int, unsigned char **);
 int FUN_00135804(int, int *);
-int FUN_002e6e14(...);
+int asdOperatorDeleteArray(...);
 int FUN_002f6ed2(int, unsigned int);
-int FUN_00302f28(...);
+int clearWords2Alt(...);
 int FUN_00522bf4(int, unsigned int **);
 
 typedef int romwright_code(...);
@@ -34,9 +34,9 @@ extern unsigned int DAT_0058955c; /* 0x58955c */
 /* Supplied declaration required: FUN_00110b28. */
 /* Supplied declaration required: FUN_00135804. */
 extern int rt_malloc(unsigned int);
-/* Supplied declaration required: FUN_002e6e14. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
 /* Supplied declaration required: FUN_002f6ed2. */
-/* Supplied declaration required: FUN_00302f28. */
+/* Supplied declaration required: clearWords2Alt. */
 extern int FUN_0030395c(int, unsigned int);
 /* Supplied declaration required: FUN_00522bf4. */
 
@@ -75,10 +75,10 @@ unsigned int * FUN_00432b10(unsigned int *param_1)
   param_1[6] = temp_v0;
   param_1[7] = temp_v0;
   param_1[8] = temp_v0 + 0x80;
-  temp_v0 = FUN_00302f28(param_1 + 10);
-  temp_v0 = FUN_00302f28(temp_v0 + 8);
-  temp_v0 = FUN_00302f28(temp_v0 + 8);
-  temp_v0 = FUN_00302f28(temp_v0 + 8);
+  temp_v0 = clearWords2Alt(param_1 + 10);
+  temp_v0 = clearWords2Alt(temp_v0 + 8);
+  temp_v0 = clearWords2Alt(temp_v0 + 8);
+  temp_v0 = clearWords2Alt(temp_v0 + 8);
   temp_v0 = FUN_0030395c(temp_v0 + 0xc,0);
   *(unsigned char *)(temp_v0 + 0x14) = 0;
   *(unsigned char **)(temp_v0 + 0x10) = &DAT_00558760;
@@ -90,13 +90,13 @@ unsigned int * FUN_00432b10(unsigned int *param_1)
   temp_v2 = 0;
   temp_v3 = 0;
   FUN_00135804(temp_v0 - 0x44,&temp_v1);
-  FUN_002e6e14(temp_v1);
+  asdOperatorDeleteArray(temp_v1);
   *(unsigned char *)(temp_v0 - 0x38) = 0;
   temp_v1 = 0;
   temp_v2 = 0;
   temp_v3 = 0;
   FUN_00135804(temp_v0 - 0x34,&temp_v1);
-  FUN_002e6e14(temp_v1);
+  asdOperatorDeleteArray(temp_v1);
   *(unsigned short *)(temp_v0 - 0x28) = 0xffff;
   FUN_002f6ed2(temp_v0 - 0x24,DAT_0058955c);
   FUN_002f6ed2(temp_v0 - 0x1c,DAT_0058955c);
@@ -119,7 +119,7 @@ unsigned int * FUN_00432b10(unsigned int *param_1)
   for (puVar3 = temp_v4; puVar3 != puVar1; puVar3 = puVar3 + 2) {
     (**(romwright_code **)*puVar3)(puVar3);
   }
-  FUN_002e6e14(temp_v4);
+  asdOperatorDeleteArray(temp_v4);
   *(unsigned int *)(temp_v0 + 0x24) = 0;
   *(unsigned char *)(temp_v0 + 0x28) = 0;
   return (unsigned int *)(temp_v0 - 0x4c);

@@ -42,9 +42,9 @@ extern unsigned short DAT_005f19e8; /* 0x5f19e8 */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_00162e8c(void);
-extern int FUN_001801a4(void);
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagsGetBlock(void);
+extern int gameGetPlayerData(void);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
 extern unsigned int FUN_00261424(void);
@@ -62,7 +62,7 @@ extern int FUN_0036d984(int, unsigned int *, unsigned int);
 /* Supplied declaration required: FUN_00385798. */
 extern int FUN_003d21dc(void);
 /* Supplied declaration required: FUN_003d4ed8. */
-extern int FUN_003e46f4(unsigned int);
+extern int gameDataFlagTestBit(unsigned int);
 /* Supplied declaration required: countersAddSaturating. */
 
 
@@ -90,10 +90,10 @@ unsigned int FUN_0033b100(int param_1)
   float temp_v13;
   float temp_v14;
   
-  temp_v3 = FUN_00162e8c();
-  temp_v4 = FUN_001801a4();
-  temp_v5 = FUN_0018719c(0x300);
-  if ((((temp_v5 != 0) || (temp_v5 = FUN_0018719c(0x301), temp_v5 != 0)) &&
+  temp_v3 = gameFlagsGetBlock();
+  temp_v4 = gameGetPlayerData();
+  temp_v5 = gameFlagIsSet(0x300);
+  if ((((temp_v5 != 0) || (temp_v5 = gameFlagIsSet(0x301), temp_v5 != 0)) &&
       (g_gameState != 0x29 && g_gameState != 0x2a)) &&
      ((g_gameState != 0x2b && g_gameState != 0x2c &&
       ((g_gameState != 0x2d && g_gameState != 0x2e) && g_gameState != 0x2f)))) {
@@ -275,7 +275,7 @@ unsigned int FUN_0033b100(int param_1)
   *(unsigned int *)(param_1 + 0x2c) = temp_v11;
   if (*(char *)(param_1 + 0x50) == '\0') {
     temp_v8 = 0;
-    temp_v5 = FUN_003e46f4(0x8b);
+    temp_v5 = gameDataFlagTestBit(0x8b);
     temp_v1 = *(short *)(param_1 + 0x174);
     if (temp_v5 != 0) {
       temp_v8 = 9;

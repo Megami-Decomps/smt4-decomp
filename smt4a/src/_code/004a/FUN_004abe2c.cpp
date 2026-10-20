@@ -5,10 +5,10 @@
 extern "C" {
 
 int btlGetMainState(void);
-int FUN_001641c4(void);
+int ifTouchRegionRemove(void);
 int sysPlaySe(void);
 int FUN_001a9104(unsigned int *, unsigned int *);
-int FUN_001b4a90(...);
+int __aeabi_memset4(...);
 int FUN_00203b40(...);
 int FUN_00227af0(unsigned char *);
 int FUN_00270104(void);
@@ -53,14 +53,14 @@ typedef struct {
 } param_6_stack;
 
 extern unsigned char LAB_004abf9c; /* 0x4abf9c */
-extern unsigned char DAT_0057a9b8; /* 0x57a9b8 */
+extern unsigned char g_btlUi; /* 0x57a9b8 */
 
 /* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: FUN_001641c4. */
+/* Supplied declaration required: ifTouchRegionRemove. */
 extern int FUN_00167f08(void);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_001a9104. */
-/* Supplied declaration required: FUN_001b4a90. */
+/* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: FUN_00203b40. */
 /* Supplied declaration required: FUN_00227af0. */
 /* Supplied declaration required: FUN_00270104. */
@@ -180,8 +180,8 @@ void FUN_004abe2c(fn_004abe2c_arg0 *param_1,int param_2,unsigned char param_3,un
   unsigned int in_lr;
   unsigned int temp_v2;
   
-  puVar1 = (*(unsigned int * *)((unsigned char *)&DAT_0057a9b8 + 0x10));
-  (*(unsigned int * *)((unsigned char *)&DAT_0057a9b8 + 0x10))[0x1d28] = 3;
+  puVar1 = (*(unsigned int * *)((unsigned char *)&g_btlUi + 0x10));
+  (*(unsigned int * *)((unsigned char *)&g_btlUi + 0x10))[0x1d28] = 3;
   puVar1[0x1d2b] = 0;
   puVar1[0x1d29] = param_2;
   *(unsigned char *)((int)puVar1 + 0x7505) = param_3;
@@ -202,11 +202,11 @@ void FUN_004abe2c(fn_004abe2c_arg0 *param_1,int param_2,unsigned char param_3,un
     FUN_002a3258();
     menuStateStartSelect(0);
   }
-  puVar5 = (*(unsigned int * *)((unsigned char *)&DAT_0057a9b8 + 0x10));
+  puVar5 = (*(unsigned int * *)((unsigned char *)&g_btlUi + 0x10));
   if (param_6 == 0 && param_2 == 0) {
     return;
   }
-  puVar4 = (*(unsigned int * *)((unsigned char *)&DAT_0057a9b8 + 0x10)) + 0x1d3f;
+  puVar4 = (*(unsigned int * *)((unsigned char *)&g_btlUi + 0x10)) + 0x1d3f;
   fillTwoWordsWithByte(puVar4,0xffffffff);
   temp_v0 = FUN_003ea1cc(*puVar5,0);
   *(unsigned short *)(puVar5 + 0x1d3f) = temp_v0;
@@ -279,12 +279,12 @@ void FUN_004abe2c(fn_004abe2c_arg0 *param_1,int param_2,unsigned char param_3,un
   puVar1[0x184f] = 0;
   if (0 < *(short *)(puVar1 + 0x1c34)) {
     do {
-      FUN_001641c4();
+      ifTouchRegionRemove();
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < *(short *)(puVar1 + 0x1c34));
   }
   *(unsigned short *)(puVar1 + 0x1c34) = 0;
-  FUN_001b4a90((int)puVar1 + 0x70d2,0x40,0xffffffff);
+  __aeabi_memset4((int)puVar1 + 0x70d2,0x40,0xffffffff);
   return;
 }
 

@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_002e32a4(int, unsigned char *, unsigned char *);
-int FUN_002e6e14(int);
+int asdOperatorDeleteArray(int);
 int FUN_00307b08(int, int, int, int *);
 int vectorCount32_00307b3c(int *);
-int FUN_0030fd90(int *, int, int);
+int vectorDestroyRangeStride32(int *, int, int);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -25,11 +25,11 @@ extern unsigned char LAB_001339dc; /* 0x1339dc */
 /* Supplied declaration required: FUN_002e32a4. */
 extern int *wordRefMax(unsigned int *, unsigned int *);
 extern int rt_malloc(void);
-/* Supplied declaration required: FUN_002e6e14. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
 /* Supplied declaration required: FUN_00307b08. */
 extern unsigned int vectorGrowCapacity_00307b2a(unsigned int, int *);
 /* Supplied declaration required: vectorCount32_00307b3c. */
-/* Supplied declaration required: FUN_0030fd90. */
+/* Supplied declaration required: vectorDestroyRangeStride32. */
 
 
 unsigned long long FUN_0013395c(int *param_1,unsigned int param_2)
@@ -59,8 +59,8 @@ unsigned long long FUN_0013395c(int *param_1,unsigned int param_2)
     temp_v1 = *piVar2;
     temp_v2 = rt_malloc();
     FUN_00307b08(*param_1,param_1[1],temp_v2,param_1);
-    FUN_0030fd90(param_1,*param_1,param_1[1]);
-    FUN_002e6e14(*param_1);
+    vectorDestroyRangeStride32(param_1,*param_1,param_1[1]);
+    asdOperatorDeleteArray(*param_1);
     temp_v3 = vectorCount32_00307b3c(param_1);
     *param_1 = temp_v2;
     param_1[2] = temp_v2 + temp_v1 * 0x20;

@@ -23,8 +23,8 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00162790. */
-extern int FUN_001654d8(int);
-extern int FUN_001654e4(int);
+extern int vec2GetXInt(int);
+extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
@@ -156,13 +156,13 @@ void FUN_002aa038(int param_1,int param_2)
   }
   efctSetSpeed();
   if (!((temp_v1 == 1 || temp_v1 == 2) || temp_v1 == 6)) {
-    temp_v5 = FUN_001654e4(temp_v0 + 0xb0);
-    temp_v7 = FUN_001654d8(temp_v0 + 0xb0);
+    temp_v5 = vec2GetYInt(temp_v0 + 0xb0);
+    temp_v7 = vec2GetXInt(temp_v0 + 0xb0);
     FUN_001835b4(2,0x1a,0xc4,temp_v7 + temp_v11,temp_v5 + param_2,0xbf);
   }
   else {
-    temp_v5 = FUN_001654e4(temp_v0 + 0xb0);
-    temp_v7 = FUN_001654d8(temp_v0 + 0xb0);
+    temp_v5 = vec2GetYInt(temp_v0 + 0xb0);
+    temp_v7 = vec2GetXInt(temp_v0 + 0xb0);
     FUN_001835b4(2,0x1a,0x286,temp_v7 + temp_v11,temp_v5 + param_2,0xbf);
   }
   efctSetSpeed();

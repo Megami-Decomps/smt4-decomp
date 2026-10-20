@@ -9,7 +9,7 @@ int asdMemFree(int);
 int asdTextureCreate(void);
 int FUN_001b2ebc(int, unsigned char [128], unsigned char [128], int *, unsigned int, int, unsigned int);
 int FUN_001ba204(int, unsigned int, int);
-int FUN_002e342c(...);
+int libc_strcpy(...);
 
 /* stack frame of param_3: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -28,7 +28,7 @@ extern int g_aocDisplay; /* 0x57027c */
 /* Supplied declaration required: FUN_001b2ebc. */
 /* Supplied declaration required: FUN_001ba204. */
 extern int wstrlen(unsigned int);
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 extern int rt_memcmp(int, unsigned char *, unsigned int);
 
 
@@ -46,7 +46,7 @@ unsigned int FUN_001a6d00(unsigned int param_1,int *param_2,unsigned int param_3
   unsigned char temp_v6 [128];
   
   temp_v2 = param_2[1];
-  FUN_002e342c(temp_v5,*param_2 + 0xc);
+  libc_strcpy(temp_v5,*param_2 + 0xc);
   pcVar3 = *(char **)(temp_v2 + 8);
   if (*pcVar3 != '-') {
     libc_strcat(temp_v5);
@@ -65,7 +65,7 @@ unsigned int FUN_001a6d00(unsigned int param_1,int *param_2,unsigned int param_3
     param_2[2] = 0;
   }
   else {
-    FUN_002e342c(temp_v6,param_1);
+    libc_strcpy(temp_v6,param_1);
     if ((param_2[4] & 0xfffeffffU) == 0) {
       temp_v3 = 1;
       if ((param_2[4] & 0x10000U) != 0) {

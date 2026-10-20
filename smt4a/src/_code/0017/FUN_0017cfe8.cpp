@@ -8,8 +8,8 @@ int sysMemClear(unsigned int *, int);
 
 typedef int romwright_code(...);
 extern romwright_code *DAT_0058918c; /* 0x58918c */
-extern int DAT_005b40e0; /* 0x5b40e0 */
-extern int DAT_005b40e4; /* 0x5b40e4 */
+extern int g_commandBufferCursor; /* 0x5b40e0 */
+extern int g_commandBufferEnd; /* 0x5b40e4 */
 extern unsigned int *DAT_0061a50c; /* 0x61a50c */
 
 /* Supplied declaration required: sysMemClear. */
@@ -69,7 +69,7 @@ void FUN_0017cfe8(int param_1,int param_2,unsigned int param_3)
   }
 LAB_0017d0e4:
   if (DAT_0061a50c != (unsigned int *)0x0) {
-    param_3 = DAT_005b40e0 - *(int *)((int)DAT_0061a50c + 4);
+    param_3 = g_commandBufferCursor - *(int *)((int)DAT_0061a50c + 4);
     *(unsigned int *)((int)DAT_0061a50c + 0xc) = param_3;
   }
   DAT_0061a50c = puVar5;
@@ -77,12 +77,12 @@ LAB_0017d0e4:
     param_3 = puVar5[1];
   }
   if (puVar5 != (unsigned int *)0x0 && param_3 != 0) {
-    DAT_005b40e0 = puVar5[3] + param_3;
-    DAT_005b40e4 = puVar5[2] + param_3;
+    g_commandBufferCursor = puVar5[3] + param_3;
+    g_commandBufferEnd = puVar5[2] + param_3;
     return;
   }
-  DAT_005b40e4 = 0;
-  DAT_005b40e0 = 0;
+  g_commandBufferEnd = 0;
+  g_commandBufferCursor = 0;
   return;
 }
 

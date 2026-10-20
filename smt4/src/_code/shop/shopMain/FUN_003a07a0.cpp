@@ -20,7 +20,7 @@ extern int DAT_0044e018; /* 0x44e018 */
 extern int DAT_0044e01c; /* 0x44e01c */
 
 /* Supplied declaration required: FUN_00231bcc. */
-extern int FUN_002c09d0(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 
 
 void FUN_003a07a0(int param_1,int param_2)
@@ -38,7 +38,7 @@ void FUN_003a07a0(int param_1,int param_2)
   if ((((*(int *)(param_1 + 0x10) != 0) && (*(int *)(param_1 + 0x10) != 1)) || (param_2 != 7)) &&
      ((*(int *)(param_1 + 0x860) != 0 ||
       ((((*(char *)(param_1 + 0x14) == '\0' && (*(int *)(param_1 + 0x18) != 8)) &&
-        (temp_v0 = FUN_002c09d0(0x410), temp_v0 != 0)) || (*(int *)(param_1 + 0x10) == 1)))))) {
+        (temp_v0 = gameFlagIsSet(0x410), temp_v0 != 0)) || (*(int *)(param_1 + 0x10) == 1)))))) {
     temp_v5 = *(unsigned int *)(param_1 + 0x37c);
     FUN_00231bcc(param_1 + 0x380,0x65,0,0,temp_v5,1);
     FUN_00231bcc(param_1 + 0x380,0x66,0,0,temp_v5,1);
@@ -54,10 +54,10 @@ void FUN_003a07a0(int param_1,int param_2)
       if (((*(int *)(param_1 + 0x860) != 0) ||
           (((temp_v2 = DAT_0044e014, temp_v4 = DAT_0044e010, *(char *)(param_1 + 0x14) == '\0' &&
             (*(int *)(param_1 + 0x18) != 8)) &&
-           (temp_v1 = FUN_002c09d0(0x410), temp_v2 = DAT_0044e014, temp_v4 = DAT_0044e010, temp_v1 != 0))))
+           (temp_v1 = gameFlagIsSet(0x410), temp_v2 = DAT_0044e014, temp_v4 = DAT_0044e010, temp_v1 != 0))))
          && ((temp_v2 = temp_v3, temp_v4 = temp_v0, *(int *)(param_1 + 0x860) == 3 &&
              (((*(char *)(param_1 + 0x14) != '\0' || (*(int *)(param_1 + 0x18) == 8)) ||
-              (temp_v0 = FUN_002c09d0(0x410), temp_v0 == 0)))))) {
+              (temp_v0 = gameFlagIsSet(0x410), temp_v0 == 0)))))) {
         temp_v2 = DAT_0044e01c;
         temp_v4 = DAT_0044e018;
       }

@@ -8,7 +8,7 @@ int coproc_movefrom_User_R_Thread_and_Process_ID(void);
 int software_interrupt(int);
 
 typedef int romwright_code(...);
-extern int FUN_00280000(...); /* 0x280000 */
+extern int jobStopIfValidRef(...); /* 0x280000 */
 extern int DAT_005c0b4c; /* 0x5c0b4c */
 
 /* Unsupported intrinsic, declaration required: coproc_movefrom_User_R_Thread_and_Process_ID (CALLOTHER). */
@@ -23,7 +23,7 @@ int FUN_0043ab80(unsigned char *param_1)
   int temp_v1;
   
   temp_v1 = coproc_movefrom_User_R_Thread_and_Process_ID();
-  *(romwright_code **)(temp_v1 + 0x80) = FUN_00280000;
+  *(romwright_code **)(temp_v1 + 0x80) = jobStopIfValidRef;
   software_interrupt(0x32);
   temp_v0 = DAT_005c0b4c;
   if (-1 < DAT_005c0b4c) {

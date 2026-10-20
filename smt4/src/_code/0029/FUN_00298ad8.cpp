@@ -7,7 +7,7 @@ extern "C" {
 int dataTable15Sub0GetCount(void);
 int FUN_0029e8b8(int, int);
 int FUN_0029f848(int, int, int, int, int, int);
-int FUN_002c09d0(void);
+int gameFlagIsSet(void);
 
 /* stack frame of void: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -16,14 +16,14 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } void_stack;
 
-extern int DAT_0043da90; /* 0x43da90 */
+extern int g_camp; /* 0x43da90 */
 
 /* Supplied declaration required: dataTable15Sub0GetCount. */
 extern int FUN_00292844(unsigned int);
-extern int padIsButtonDown(void);
+extern int flagBitIsSet(void);
 /* Supplied declaration required: FUN_0029e8b8. */
 /* Supplied declaration required: FUN_0029f848. */
-/* Supplied declaration required: FUN_002c09d0. */
+/* Supplied declaration required: gameFlagIsSet. */
 extern int dataTable15Sub0GetEntries(unsigned int);
 
 
@@ -40,18 +40,18 @@ void FUN_00298ad8(void)
   int temp_v6;
   unsigned int temp_v7;
   
-  temp_v2 = DAT_0043da90;
+  temp_v2 = g_camp;
   temp_v1 = 0;
   temp_v7 = 0;
   do {
     temp_v3 = FUN_00292844(temp_v7 & 0xff);
     temp_v4 = 0;
     if ((temp_v3 != 0) &&
-       (((((*(short *)(temp_v3 + 0x5a) != 0 && (temp_v4 = FUN_002c09d0(), temp_v4 != 0)) ||
-          ((*(short *)(temp_v3 + 0x5c) != 0 && (temp_v4 = FUN_002c09d0(), temp_v4 != 0)))) ||
-         (((*(short *)(temp_v3 + 0x5e) != 0 && (temp_v4 = FUN_002c09d0(), temp_v4 != 0)) ||
-          ((*(short *)(temp_v3 + 0x60) != 0 && (temp_v4 = FUN_002c09d0(), temp_v4 != 0)))))) ||
-        ((temp_v4 = 0, *(short *)(temp_v3 + 0x62) != 0 && (temp_v4 = FUN_002c09d0(), temp_v4 != 0)))))) {
+       (((((*(short *)(temp_v3 + 0x5a) != 0 && (temp_v4 = gameFlagIsSet(), temp_v4 != 0)) ||
+          ((*(short *)(temp_v3 + 0x5c) != 0 && (temp_v4 = gameFlagIsSet(), temp_v4 != 0)))) ||
+         (((*(short *)(temp_v3 + 0x5e) != 0 && (temp_v4 = gameFlagIsSet(), temp_v4 != 0)) ||
+          ((*(short *)(temp_v3 + 0x60) != 0 && (temp_v4 = gameFlagIsSet(), temp_v4 != 0)))))) ||
+        ((temp_v4 = 0, *(short *)(temp_v3 + 0x62) != 0 && (temp_v4 = gameFlagIsSet(), temp_v4 != 0)))))) {
       temp_v1 = 1;
     }
     temp_v7 = temp_v7 + 1;
@@ -64,14 +64,14 @@ void FUN_00298ad8(void)
     do {
       temp_v5 = dataTable15Sub0GetEntries(temp_v7);
       if ((((temp_v5 != 0) && ((unsigned int)*(unsigned char *)(temp_v5 + 1) == (int)*(char *)(temp_v2 + 0x98))) &&
-          ((*(short *)(temp_v5 + 0x56) == 0 || (temp_v6 = FUN_002c09d0(), temp_v6 != 0)))) &&
-         (((((*(short *)(temp_v5 + 0x58) == 0 || (temp_v6 = padIsButtonDown(), temp_v6 != 0)) &&
+          ((*(short *)(temp_v5 + 0x56) == 0 || (temp_v6 = gameFlagIsSet(), temp_v6 != 0)))) &&
+         (((((*(short *)(temp_v5 + 0x58) == 0 || (temp_v6 = flagBitIsSet(), temp_v6 != 0)) &&
             (temp_v3 = temp_v3 + 1, (unsigned char)(temp_v1 & ~temp_v0))) &&
-           ((*(short *)(temp_v5 + 0x5a) == 0 || (temp_v6 = FUN_002c09d0(), temp_v6 == 0)))) &&
-          (((*(short *)(temp_v5 + 0x5c) == 0 || (temp_v6 = FUN_002c09d0(), temp_v6 == 0)) &&
-           (((*(short *)(temp_v5 + 0x5e) == 0 || (temp_v6 = FUN_002c09d0(), temp_v6 == 0)) &&
-            (((*(short *)(temp_v5 + 0x60) == 0 || (temp_v6 = FUN_002c09d0(), temp_v6 == 0)) &&
-             ((*(short *)(temp_v5 + 0x62) == 0 || (temp_v5 = FUN_002c09d0(), temp_v5 == 0)))))))))))) {
+           ((*(short *)(temp_v5 + 0x5a) == 0 || (temp_v6 = gameFlagIsSet(), temp_v6 == 0)))) &&
+          (((*(short *)(temp_v5 + 0x5c) == 0 || (temp_v6 = gameFlagIsSet(), temp_v6 == 0)) &&
+           (((*(short *)(temp_v5 + 0x5e) == 0 || (temp_v6 = gameFlagIsSet(), temp_v6 == 0)) &&
+            (((*(short *)(temp_v5 + 0x60) == 0 || (temp_v6 = gameFlagIsSet(), temp_v6 == 0)) &&
+             ((*(short *)(temp_v5 + 0x62) == 0 || (temp_v5 = gameFlagIsSet(), temp_v5 == 0)))))))))))) {
         temp_v0 = 1;
         *(char *)((int)*(char *)(temp_v2 + 0x98) + temp_v2 + 0x9b) = (char)temp_v3 - '\x01';
       }

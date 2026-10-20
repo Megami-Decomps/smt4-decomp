@@ -7,15 +7,15 @@ extern "C" {
 int FUN_00292c0c(void);
 int FUN_00292ca0(int);
 int FUN_00295214(int);
-int FUN_00296f4c(unsigned int, int);
+int scrScriptProcessStartEntry(unsigned int, int);
 int FUN_0029a128(int);
 int FUN_0029c4c8(int);
 int FUN_0029dfc0(int);
 int FUN_0029e874(int);
 int FUN_0029ee6c(int, int);
 int FUN_002b827c(int);
-int FUN_002b8838(...);
-int FUN_002b8cc8(void);
+int buttonHelpSetPreset(...);
+int ifTouchRegionRemove(void);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -26,16 +26,16 @@ extern unsigned int FUN_00292bf0(void);
 /* Supplied declaration required: FUN_00292c0c. */
 /* Supplied declaration required: FUN_00292ca0. */
 /* Supplied declaration required: FUN_00295214. */
-/* Supplied declaration required: FUN_00296f4c. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_0029a128. */
 /* Supplied declaration required: FUN_0029c4c8. */
 /* Supplied declaration required: FUN_0029dfc0. */
 /* Supplied declaration required: FUN_0029e874. */
 /* Supplied declaration required: FUN_0029ee6c. */
-extern unsigned int *FUN_002a8764(void);
+extern unsigned int *gameGetSlotTable(void);
 /* Supplied declaration required: FUN_002b827c. */
-/* Supplied declaration required: FUN_002b8838. */
-/* Supplied declaration required: FUN_002b8cc8. */
+/* Supplied declaration required: buttonHelpSetPreset. */
+/* Supplied declaration required: ifTouchRegionRemove. */
 
 
 void FUN_00296774(int param_1,int param_2)
@@ -57,7 +57,7 @@ void FUN_00296774(int param_1,int param_2)
   temp_v1 = 0;
   if (temp_v1 < *(short *)(param_1 + 0x357c)) {
     do {
-      FUN_002b8cc8();
+      ifTouchRegionRemove();
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < *(short *)(param_1 + 0x357c));
   }
@@ -95,7 +95,7 @@ void FUN_00296774(int param_1,int param_2)
     temp_v2 = 100;
   }
   FUN_0029ee6c(0,0x323232ff);
-  FUN_002b8838(temp_v2);
+  buttonHelpSetPreset(temp_v2);
 LAB_00296874:
   if (*piVar5 != 0x14) {
     return;
@@ -107,10 +107,10 @@ LAB_00296874:
   FUN_0029c4c8(0);
   FUN_00292c0c();
   temp_v0 = FUN_00292bf0();
-  if ((temp_v0 != 0) && (puVar2 = (unsigned int *)FUN_002a8764(), temp_v0 <= *puVar2)) {
+  if ((temp_v0 != 0) && (puVar2 = (unsigned int *)gameGetSlotTable(), temp_v0 <= *puVar2)) {
     *piVar5 = 0x13;
-    FUN_002b8838(0x90);
-    FUN_00296f4c(*(unsigned int *)(param_1 + 0x3568),5);
+    buttonHelpSetPreset(0x90);
+    scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x3568),5);
     return;
   }
   FUN_00295214(0);

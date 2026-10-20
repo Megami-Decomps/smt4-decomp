@@ -7,12 +7,12 @@ extern "C" {
 int FUN_00100388(...);
 int FUN_00162790(...);
 int efctSetSpeed(void);
-int FUN_001801a4(void);
+int gameGetPlayerData(void);
 int FUN_001835b4(...);
 int FUN_00183bb0(void);
-int FUN_00184e64(int);
+int drawSetColorFromRGBA8(int);
 int sysMemClear(unsigned char [128], int);
-int FUN_0030ea58(...);
+int libc_strcmp(...);
 int FUN_0039b984(void);
 int efctPlayVariantSet(...);
 int VectorSignedToFloat(...);
@@ -31,13 +31,13 @@ extern unsigned char LAB_00405258; /* 0x405258 */
 extern int FUN_0015687c(void);
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_001801a4. */
+/* Supplied declaration required: gameGetPlayerData. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_00184e64. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_0030ea58. */
+/* Supplied declaration required: libc_strcmp. */
 /* Supplied declaration required: FUN_0039b984. */
 extern unsigned int FUN_004038e0(unsigned int, unsigned short);
 /* Supplied declaration required: efctPlayVariantSet. */
@@ -80,7 +80,7 @@ void FUN_00404f40(unsigned int param_1,unsigned int param_2,int param_3,int para
     case 0xe:
     case 0x10:
     case 0x12:
-      FUN_00184e64(0x57d8ffff);
+      drawSetColorFromRGBA8(0x57d8ffff);
       temp_v2 = FUN_001834a4(0x32,0x97);
       FUN_001835b4(2,0x32,1000,*(short *)(temp_v2 + 8) + param_3,*(short *)(temp_v2 + 10) + param_4,0x6a
                   );
@@ -96,9 +96,9 @@ void FUN_00404f40(unsigned int param_1,unsigned int param_2,int param_3,int para
     temp_v1 = *(short *)(temp_v2 + 10);
     temp_v3 = param_2 + 0x10;
     temp_v2 = temp_v3;
-    FUN_0030ea58(temp_v3,"<pc 0>");
+    libc_strcmp(temp_v3,"<pc 0>");
     if (temp_v2 == 0) {
-      FUN_001801a4();
+      gameGetPlayerData();
       temp_v3 = FUN_0015687c();
     }
     FUN_00100388(temp_v4,&LAB_00405258,temp_v3);

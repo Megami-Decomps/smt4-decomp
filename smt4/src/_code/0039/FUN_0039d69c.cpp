@@ -8,7 +8,7 @@ int CONCAT44(unsigned int, double);
 int dataTable2bSub1GetRecord(...);
 int dataTable2bSub1GetCount(void);
 int uiGetEntrySize(...);
-int FUN_002c09d0(...);
+int gameFlagIsSet(...);
 int dataTable2bSub3GetCount(void);
 int MapNaviTable_GetCategoryCount(void);
 int VectorSignedToFloat(...);
@@ -45,11 +45,11 @@ extern unsigned char LAB_00103001; /* 0x103001 */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: dataTable2bSub1GetRecord. */
 /* Supplied declaration required: dataTable2bSub1GetCount. */
-extern unsigned int *FUN_00248248(int);
-extern int FUN_002482a8(void);
+extern unsigned int *dataTable23Sub0GetEntry(int);
+extern int dataTable23Type0CountWithAoc(void);
 /* Supplied declaration required: uiGetEntrySize. */
 extern unsigned short FUN_00276348(unsigned int);
-/* Supplied declaration required: FUN_002c09d0. */
+/* Supplied declaration required: gameFlagIsSet. */
 extern unsigned short FUN_003218e0(unsigned int);
 extern short *dataTable2bSub3GetRecord(unsigned char *, int);
 /* Supplied declaration required: dataTable2bSub3GetCount. */
@@ -135,8 +135,8 @@ void FUN_0039d69c(int param_1,unsigned int param_2)
                 if (temp_v13 != 3) {
                   if ((temp_v13 == 4) && (*(short *)(pcVar17 + 8) == 3)) {
 LAB_0039d774:
-                    if (((*(short *)(pcVar17 + 4) == 0) || (temp_v12 = FUN_002c09d0(), temp_v12 != 0))
-                       && ((*(short *)(pcVar17 + 6) == 0 || (temp_v12 = FUN_002c09d0(), temp_v12 == 0)))
+                    if (((*(short *)(pcVar17 + 4) == 0) || (temp_v12 = gameFlagIsSet(), temp_v12 != 0))
+                       && ((*(short *)(pcVar17 + 6) == 0 || (temp_v12 = gameFlagIsSet(), temp_v12 == 0)))
                        ) {
                       temp_v4 = *(short *)(pcVar17 + 10);
                       temp_v0 = *(short *)(pcVar17 + 0xc);
@@ -214,12 +214,12 @@ LAB_0039d774:
   uiGetEntrySize(0x13,0x1b67,&temp_v36,&temp_v37);
   uiGetEntrySize(0x13,0x1b8f,&temp_v40,&temp_v41);
   temp_v11 = 0;
-  temp_v13 = FUN_002482a8();
+  temp_v13 = dataTable23Type0CountWithAoc();
   temp_v20 = (unsigned int)temp_v32;
   temp_v31 = romwright_piece_4_4(temp_v30,0x3f000000);
   if (0 < temp_v13) {
     do {
-      puVar9 = (unsigned int *)FUN_00248248(temp_v11);
+      puVar9 = (unsigned int *)dataTable23Sub0GetEntry(temp_v11);
       if (((int)*(char *)(puVar9 + 2) == temp_v44) &&
          (temp_v1 = *(char *)((int)puVar9 + 10),
          (temp_v1 == '\x18' || temp_v1 == '\x19') || temp_v1 == '\x1a')) {
@@ -307,7 +307,7 @@ LAB_0039d774:
         *(unsigned int *)(temp_v12 + 0xed0) = 0xffffffff;
       }
       temp_v11 = temp_v11 + 1;
-      temp_v13 = FUN_002482a8();
+      temp_v13 = dataTable23Type0CountWithAoc();
       temp_v20 = (unsigned int)temp_v32;
     } while (temp_v11 < temp_v13);
   }
@@ -315,17 +315,17 @@ LAB_0039d774:
   uiGetEntrySize(0x13,0x1b67,&temp_v36,&temp_v37);
   uiGetEntrySize(0x13,0x1b8f,&temp_v40,&temp_v41);
   temp_v11 = 0;
-  temp_v13 = FUN_002482a8();
+  temp_v13 = dataTable23Type0CountWithAoc();
   if (0 < temp_v13) {
     do {
-      puVar9 = (unsigned int *)FUN_00248248(temp_v11);
+      puVar9 = (unsigned int *)dataTable23Sub0GetEntry(temp_v11);
       temp_v8 = (unsigned int)*(char *)(puVar9 + 2);
       temp_v15 = temp_v8 == temp_v44;
       if (temp_v15) {
         temp_v8 = (unsigned int)*(unsigned char *)((int)puVar9 + 10);
       }
       if ((temp_v15 && temp_v8 == 0x2b) &&
-         (((unsigned char *)*puVar9 != &LAB_00103001 || (temp_v13 = FUN_002c09d0(0xef), temp_v13 == 0)))) {
+         (((unsigned char *)*puVar9 != &LAB_00103001 || (temp_v13 = gameFlagIsSet(0xef), temp_v13 == 0)))) {
         temp_v13 = 0;
         puVar8 = temp_v34;
         temp_v35 = 1;
@@ -410,7 +410,7 @@ LAB_0039d774:
         *(unsigned int *)(temp_v12 + 0xed0) = 0xffffffff;
       }
       temp_v11 = temp_v11 + 1;
-      temp_v13 = FUN_002482a8();
+      temp_v13 = dataTable23Type0CountWithAoc();
     } while (temp_v11 < temp_v13);
   }
   temp_v43 = param_1 + 0x6000;

@@ -16,13 +16,13 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_3_stack;
 
-extern int DAT_0043da90; /* 0x43da90 */
+extern int g_camp; /* 0x43da90 */
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_0029a17c. */
 extern int FUN_0029d65c(unsigned int);
-extern int FUN_002bed98(int);
-extern int FUN_002beda4(int);
+extern int vec2GetYInt(int);
+extern int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
@@ -40,7 +40,7 @@ void FUN_0028f694(int param_1,int param_2,unsigned int param_3)
   int temp_v4;
   int *piVar6;
   
-  temp_v0 = DAT_0043da90;
+  temp_v0 = g_camp;
   FUN_002bf538();
   FUN_002bf380(2,0x1d,6,param_1,param_2,0x79);
   FUN_002bf538();
@@ -53,8 +53,8 @@ void FUN_0028f694(int param_1,int param_2,unsigned int param_3)
     FUN_002bf288(2,0x1d,0x42b,param_1,param_2,0x83);
   }
   temp_v1 = FUN_002bf4f8(0x1d,0x42a);
-  temp_v2 = FUN_002beda4(temp_v0 + 0x760);
-  temp_v3 = FUN_002bed98(temp_v0 + 0x760);
+  temp_v2 = vec2GetXInt(temp_v0 + 0x760);
+  temp_v3 = vec2GetYInt(temp_v0 + 0x760);
   temp_v0 = g_titleScene;
   piVar6 = (int *)(g_titleScene + 0x130c);
   temp_v4 = piVar6[*piVar6 + 2];

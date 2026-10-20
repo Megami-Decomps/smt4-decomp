@@ -11,8 +11,8 @@ extern unsigned char LAB_00376294; /* 0x376294 */
 extern unsigned char DAT_005c10c1; /* 0x5c10c1 */
 
 /* Supplied declaration required: FUN_00100388. */
-extern int FUN_00164af0(unsigned int);
-extern int FUN_001656a0(unsigned int);
+extern int padButtonRepeat(unsigned int);
+extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: FUN_002b3fd8. */
 
 
@@ -33,8 +33,8 @@ int FUN_00375ec8(int *param_1)
   temp_v2 = *param_1;
   temp_v4 = param_1[1];
   if (param_1[2] != 1) {
-    temp_v0 = FUN_00164af0(5);
-    if ((temp_v0 != 0) || (temp_v0 = FUN_00164af0(0x10), temp_v0 != 0)) {
+    temp_v0 = padButtonRepeat(5);
+    if ((temp_v0 != 0) || (temp_v0 = padButtonRepeat(0x10), temp_v0 != 0)) {
       temp_v0 = param_1[3];
       if (temp_v0 == 0x27) {
         temp_v0 = 0x25;
@@ -51,8 +51,8 @@ LAB_00375f44:
       }
     }
     else {
-      temp_v0 = FUN_00164af0(6);
-      if ((temp_v0 != 0) || (temp_v0 = FUN_00164af0(0x1d), temp_v0 != 0)) {
+      temp_v0 = padButtonRepeat(6);
+      if ((temp_v0 != 0) || (temp_v0 = padButtonRepeat(0x1d), temp_v0 != 0)) {
         temp_v0 = param_1[3];
         if (temp_v0 == 0x27) {
           param_1[3] = 0x28;
@@ -68,8 +68,8 @@ LAB_00375f44:
         }
       }
       else {
-        temp_v0 = FUN_00164af0(4);
-        if ((temp_v0 != 0) || (temp_v0 = FUN_00164af0(0x11), temp_v0 != 0)) {
+        temp_v0 = padButtonRepeat(4);
+        if ((temp_v0 != 0) || (temp_v0 = padButtonRepeat(0x11), temp_v0 != 0)) {
           temp_v0 = param_1[3];
           if (temp_v0 != 0x27 && temp_v0 != 0x28) {
             temp_v6 = temp_v0 % 0xd == 0;
@@ -84,8 +84,8 @@ LAB_00375f44:
           }
         }
         else {
-          temp_v0 = FUN_00164af0(3);
-          if ((temp_v0 != 0) || (temp_v0 = FUN_00164af0(0x1e), temp_v0 != 0)) {
+          temp_v0 = padButtonRepeat(3);
+          if ((temp_v0 != 0) || (temp_v0 = padButtonRepeat(0x1e), temp_v0 != 0)) {
             temp_v0 = param_1[3];
             if (temp_v0 != 0x27 && temp_v0 != 0x28) {
               if (temp_v0 % 0xd == 0xc) {
@@ -99,8 +99,8 @@ LAB_00375f44:
             }
           }
           else {
-            temp_v0 = FUN_001656a0(0);
-            if ((temp_v0 != 0) || (temp_v0 = FUN_001656a0(0x14), temp_v0 != 0)) {
+            temp_v0 = padButtonIsPressed(0);
+            if ((temp_v0 != 0) || (temp_v0 = padButtonIsPressed(0x14), temp_v0 != 0)) {
               temp_v5 = param_1[3];
               if (temp_v5 != 0x28) {
                 temp_v1 = temp_v5;
@@ -116,8 +116,8 @@ LAB_00376118:
               }
             }
             else {
-              temp_v0 = FUN_001656a0(1);
-              if ((temp_v0 != 0) || (temp_v0 = FUN_001656a0(0x16), temp_v0 != 0)) {
+              temp_v0 = padButtonIsPressed(1);
+              if ((temp_v0 != 0) || (temp_v0 = padButtonIsPressed(0x16), temp_v0 != 0)) {
                 param_1[2] = 2;
               }
 LAB_00376100:

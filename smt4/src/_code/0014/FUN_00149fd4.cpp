@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c3944(...);
+int rt_memclr(...);
 int nnnstdMemCpy(unsigned int *, int, int);
 int nw_gfx_ParticleCollection_Clear(...);
 int nw_gfx_ParticleShape_AddVertexParam(...);
@@ -34,7 +34,7 @@ typedef struct {
 
 extern unsigned char DAT_004214e0; /* 0x4214e0 */
 
-/* Supplied declaration required: FUN_002c3944. */
+/* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: nnnstdMemCpy. */
 /* Supplied declaration required: nw_gfx_ParticleCollection_Clear. */
 /* Supplied declaration required: nw_gfx_ParticleShape_AddVertexParam. */
@@ -242,7 +242,7 @@ unsigned int * FUN_00149fd4(int param_1,int *param_2,int *param_3,int *param_4,i
       temp_v9[0xd] = 1;
       temp_v3 = ((((int)puVar3 + 0x1c3U) & 0xfffffffc) + 7) & 0xfffffff8;
       temp_v7 = (unsigned int *)(temp_v3 + temp_v0);
-      FUN_002c3944(temp_v3);
+      rt_memclr(temp_v3);
       puVar3[0x2c] = 0xe;
       *(unsigned char *)(puVar3 + 0x2d) = 1;
       puVar3[0x2e] = temp_v3;
@@ -253,7 +253,7 @@ unsigned int * FUN_00149fd4(int param_1,int *param_2,int *param_3,int *param_4,i
       temp_v9[0xe] = 1;
       piVar6 = (int *)(((int)temp_v7 + 7U) & 0xfffffff8);
       temp_v7 = (unsigned int *)((int)piVar6 + temp_v8);
-      FUN_002c3944(piVar6);
+      rt_memclr(piVar6);
       puVar3[0x2f] = 0xf;
       *(unsigned char *)(puVar3 + 0x30) = 1;
       puVar3[0x31] = (unsigned int)piVar6;
@@ -318,7 +318,7 @@ unsigned int * FUN_00149fd4(int param_1,int *param_2,int *param_3,int *param_4,i
               temp_v3 = ((int)temp_v7 + 7U) & 0xfffffff8;
               temp_v7 = (unsigned int *)(temp_v3 + temp_v8);
               puVar10 = puVar5;
-              FUN_002c3944(temp_v3);
+              rt_memclr(temp_v3);
               puVar5[2] = temp_v0;
               puVar5[4] = temp_v3;
               *(unsigned char *)(puVar5 + 3) = 1;
@@ -330,7 +330,7 @@ unsigned int * FUN_00149fd4(int param_1,int *param_2,int *param_3,int *param_4,i
               temp_v3 = ((int)temp_v7 + 7U) & 0xfffffff8;
               temp_v7 = (unsigned int *)(temp_v3 + temp_v4 * 0xc + 0x68);
               puVar10 = puVar3 + 0x24;
-              FUN_002c3944(temp_v3);
+              rt_memclr(temp_v3);
               puVar3[0x26] = temp_v0;
               puVar3[0x28] = temp_v3;
               *(unsigned char *)(puVar3 + 0x27) = 1;

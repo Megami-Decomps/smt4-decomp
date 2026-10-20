@@ -4,19 +4,19 @@
 
 extern "C" {
 
-int FUN_0015f834(int);
+int svcCloseHandle(int);
 
-extern int DAT_00473848; /* 0x473848 */
+extern int g_nnCecdHandle; /* 0x473848 */
 
-/* Supplied declaration required: FUN_0015f834. */
+/* Supplied declaration required: svcCloseHandle. */
 
 
 void FUN_00358f74(void)
 
 {
 /* irregular: 1 native warning(s); review required */
-  if (DAT_00473848 != 0) {
-    FUN_0015f834(DAT_00473848);
+  if (g_nnCecdHandle != 0) {
+    svcCloseHandle(g_nnCecdHandle);
     return;
   }
   return;

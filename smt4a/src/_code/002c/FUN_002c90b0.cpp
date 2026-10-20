@@ -8,17 +8,17 @@ typedef struct Record {
     /* 0x0431 */ u8 unk0431[0x8E2B];
     /* 0x925C */ s32 pending;
 } Record;
-extern Record *DAT_0057f290;
+extern Record *g_unite;
 
 s32 FUN_0026272c(void);
 
 /* Returns 1 when the record has a pending item and is either idle or FUN_0026272c reports 0; 0 when there is no record. */
 u32 FUN_002c90b0(void)
 {
-    if (DAT_0057f290 == NULL) {
+    if (g_unite == NULL) {
         return 0;
     }
-    if (DAT_0057f290->pending != 0 && (DAT_0057f290->busy == 0 || FUN_0026272c() == 0)) {
+    if (g_unite->pending != 0 && (g_unite->busy == 0 || FUN_0026272c() == 0)) {
         return 1;
     }
     return 0;

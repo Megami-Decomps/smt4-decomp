@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_003f86f8(int);
+int loadSlotEnsureLoaded(int);
 
 extern unsigned char DAT_00588f9c; /* 0x588f9c */
 
-/* Supplied declaration required: FUN_003f86f8. */
+/* Supplied declaration required: loadSlotEnsureLoaded. */
 
 
 void FUN_0049cf9c(void)
@@ -16,7 +16,7 @@ void FUN_0049cf9c(void)
 {
 /* irregular: 1 native warning(s); review required */
   if ((*(int *)((unsigned char *)&DAT_00588f9c + 0x4)) < 1) {
-    FUN_003f86f8(0x17);
+    loadSlotEnsureLoaded(0x17);
   }
   (*(int *)((unsigned char *)&DAT_00588f9c + 0x4)) = (*(int *)((unsigned char *)&DAT_00588f9c + 0x4)) + 1;
   return;

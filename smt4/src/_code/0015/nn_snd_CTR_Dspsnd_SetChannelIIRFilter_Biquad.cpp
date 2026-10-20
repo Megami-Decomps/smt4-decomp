@@ -21,11 +21,11 @@ typedef struct Dspsnd {
     /* 0x131A */ u16 flagSlot;              /* bit 0 selects the channelParam slot */
 } Dspsnd;
 
-extern s32 FUN_002bb274(void);
+extern s32 nn_snd_CTR_Dspsnd_IsInitialized(void);
 
 u8 nn_snd_CTR_Dspsnd_SetChannelIIRFilter_Biquad(Dspsnd *dspsnd, u8 channel, s16 b0, s16 b1, s16 b2, s16 a1, s16 a2)
 {
-    s32 ready = FUN_002bb274();
+    s32 ready = nn_snd_CTR_Dspsnd_IsInitialized();
 
     if (ready != 0) {
         ChannelParam *param = dspsnd->channelParam[dspsnd->flagSlot & 1][channel];

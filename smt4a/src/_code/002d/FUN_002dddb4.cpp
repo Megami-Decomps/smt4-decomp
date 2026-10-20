@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_001aea28(unsigned int);
+int ptrListRemoveClearOwner(unsigned int);
 
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 #ifndef ROMWRIGHT_STORAGE_s__a_a_00587f08_9_1_DEFINED
 #define ROMWRIGHT_STORAGE_s__a_a_00587f08_9_1_DEFINED
 /* Storage views; not a recovered source structure. */
@@ -21,7 +21,7 @@ typedef char romwright_storage_s__a_a_00587f08_9_1_s1_width_check[(sizeof(((unio
 #endif
 extern union romwright_storage_s__a_a_00587f08_9_1 s__a_a_00587f08; /* 0x587f08 */
 
-/* Supplied declaration required: FUN_001aea28. */
+/* Supplied declaration required: ptrListRemoveClearOwner. */
 
 
 void FUN_002dddb4(void)
@@ -50,7 +50,7 @@ void FUN_002dddb4(void)
         temp_v1 = *(unsigned int *)(temp_v0 + 4);
       }
       if (temp_v0 != 0 && temp_v1 != 0) {
-        FUN_001aea28(DAT_0056fcc0);
+        ptrListRemoveClearOwner(g_handleRegistry);
       }
     }
     temp_v4 = temp_v4 + 1;
@@ -69,7 +69,7 @@ void FUN_002dddb4(void)
         pcVar2 = *(char **)(temp_v0 + 0xd4);
       }
       if ((temp_v1 != 0 && pcVar2 != (char *)0x0) && (temp_v1 = 0, *(int *)(pcVar2 + 4) != 0)) {
-        FUN_001aea28(DAT_0056fcc0);
+        ptrListRemoveClearOwner(g_handleRegistry);
         temp_v1 = temp_v2;
       }
     }
@@ -82,7 +82,7 @@ void FUN_002dddb4(void)
       temp_v1 = *(unsigned int *)(temp_v0 + 4);
     }
     if (temp_v0 != 0 && temp_v1 != 0) {
-      FUN_001aea28(DAT_0056fcc0);
+      ptrListRemoveClearOwner(g_handleRegistry);
       temp_v1 = temp_v3;
     }
     temp_v4 = temp_v4 + 1;

@@ -10,10 +10,10 @@ typedef struct {
     void *sub;          /* 0x48 */
 } Owner;
 
-int FUN_002ac068(void *sub, int arg);
+int dataTableFileGetTable(void *sub, int arg);
 int dataTableGetCount(void);
 
-/* Runs the sub-object's FUN_002ac068 and returns dataTableGetCount's result; 0 when there is nothing to run. */
+/* Runs the sub-object's dataTableFileGetTable and returns dataTableGetCount's result; 0 when there is nothing to run. */
 int FUN_002ac0c4(Owner *owner)
 {
     if (owner->enabled == 0) {
@@ -22,7 +22,7 @@ int FUN_002ac0c4(Owner *owner)
     if (owner->sub == NULL) {
         return 0;
     }
-    FUN_002ac068(owner->sub, 0);
+    dataTableFileGetTable(owner->sub, 0);
     return dataTableGetCount();
 }
 

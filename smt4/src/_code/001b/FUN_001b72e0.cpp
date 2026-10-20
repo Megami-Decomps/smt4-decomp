@@ -41,19 +41,19 @@ extern unsigned char LAB_001b79c8; /* 0x1b79c8 */
 extern unsigned char LAB_001b79dc; /* 0x1b79dc */
 extern unsigned char LAB_001b79f4; /* 0x1b79f4 */
 extern unsigned char LAB_001b7a08; /* 0x1b7a08 */
-extern signed char DAT_00439c88; /* 0x439c88 */
+extern signed char g_btlUi; /* 0x439c88 */
 extern int DAT_00439c8c; /* 0x439c8c */
 extern int DAT_00439c90; /* 0x439c90 */
 extern float DAT_00439c94; /* 0x439c94 */
 extern float DAT_00439c98; /* 0x439c98 */
-extern int DAT_00439ca8; /* 0x439ca8 */
+extern int g_btlUiBlock; /* 0x439ca8 */
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SUB84 (SUBPIECE). */
 /* Supplied declaration required: FUN_00218c50. */
 /* Supplied declaration required: FUN_00224f68. */
-extern int FUN_002a60b4(unsigned int, int);
+extern int asdTMTexTableNodeIsLoaded(unsigned int, int);
 /* Supplied declaration required: FUN_002b2650. */
 /* Supplied declaration required: FUN_002b7638. */
 /* Supplied declaration required: FUN_002b93c8. */
@@ -94,12 +94,12 @@ unsigned int FUN_001b72e0(void)
   unsigned int temp_v12;
   unsigned int temp_v13;
   
-  temp_v1 = DAT_00439ca8;
-  if (DAT_00439ca8 != 0) {
+  temp_v1 = g_btlUiBlock;
+  if (g_btlUiBlock != 0) {
     temp_v4 = 0;
     temp_v5 = temp_v4;
     do {
-      temp_v0 = FUN_002a60b4(0x14,temp_v4);
+      temp_v0 = asdTMTexTableNodeIsLoaded(0x14,temp_v4);
       if (temp_v0 != 0) {
         temp_v5 = temp_v5 + 1;
       }
@@ -107,7 +107,7 @@ unsigned int FUN_001b72e0(void)
     } while (temp_v4 < 5);
     temp_v4 = 0;
     do {
-      temp_v0 = FUN_002a60b4(0x15,temp_v4);
+      temp_v0 = asdTMTexTableNodeIsLoaded(0x15,temp_v4);
       if (temp_v0 != 0) {
         temp_v5 = temp_v5 + 1;
       }
@@ -179,7 +179,7 @@ unsigned int FUN_001b72e0(void)
         FUN_002bf538();
       }
       temp_v7 = 0;
-      if (DAT_00439c88 != '\0') {
+      if (g_btlUi != '\0') {
         FUN_002be5a4(3,0xffffffff,&LAB_001b77ac);
         FUN_002be5a4(3,0xffffffff,&LAB_001b77d8);
       }

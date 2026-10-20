@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001807a0(int);
 int FUN_00181948(int);
 int FUN_00182348(int);
-int FUN_00184758(int, int, int);
+int uiSpriteSetKeyframe(int, int, int);
 int VectorFloatToUnsigned(double, int);
 int VectorUnsignedToFloat(unsigned int, int);
 
@@ -16,7 +16,7 @@ int VectorUnsignedToFloat(unsigned int, int);
 /* Supplied declaration required: FUN_001807a0. */
 /* Supplied declaration required: FUN_00181948. */
 /* Supplied declaration required: FUN_00182348. */
-/* Supplied declaration required: FUN_00184758. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
 extern int __aeabi_idivmod(int, unsigned int);
 
 
@@ -85,11 +85,11 @@ int FUN_00163aa4(int param_1)
           temp_v2 = *piVar4;
           if (temp_v2 != -1 && temp_v2 != -3) {
             if (temp_v2 != -2) {
-              FUN_00184758(param_1,(int)(short)temp_v2,(int)(char)piVar4[1]);
+              uiSpriteSetKeyframe(param_1,(int)(short)temp_v2,(int)(char)piVar4[1]);
             }
             else {
               *(unsigned short *)(param_1 + 0x7c) = 0;
-              FUN_00184758(param_1,(int)(short)**(unsigned int **)(param_1 + 0x78),
+              uiSpriteSetKeyframe(param_1,(int)(short)**(unsigned int **)(param_1 + 0x78),
                            (int)*(char *)(*(unsigned int **)(param_1 + 0x78) + 1));
             }
           }

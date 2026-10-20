@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_00195fc8(void);
+int sysFatalBreak(void);
 int FUN_001a1f5c(void);
-int FUN_002e6dd4(int, unsigned int);
+int rt_memclr(int, unsigned int);
 int FUN_002e98ea(unsigned char [131], unsigned int, int);
 int FUN_00431594(int, int *, unsigned char *, int *);
 int FUN_0043c808(unsigned char *, unsigned int [2], unsigned char *, unsigned int *);
@@ -37,9 +37,9 @@ typedef struct {
 extern unsigned char DAT_005c5000; /* 0x5c5000 */
 extern unsigned char DAT_005c5fff; /* 0x5c5fff */
 
-/* Supplied declaration required: FUN_00195fc8. */
+/* Supplied declaration required: sysFatalBreak. */
 /* Supplied declaration required: FUN_001a1f5c. */
-/* Supplied declaration required: FUN_002e6dd4. */
+/* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: FUN_002e98ea. */
 /* Supplied declaration required: FUN_00431594. */
 /* Supplied declaration required: FUN_0043c808. */
@@ -108,12 +108,12 @@ FUN_00473e98(unsigned int param_1,int param_2,unsigned int param_3,unsigned int 
     temp_v0 = 0;
     FUN_00431594(0,&temp_v2,&DAT_005c5000 + temp_v17 * 2,&temp_v1);
     if (temp_v0 < 0) {
-      FUN_00195fc8();
+      sysFatalBreak();
     }
-    FUN_002e6dd4(param_2,param_4);
+    rt_memclr(param_2,param_4);
     FUN_00431594(param_2,&temp_v2,&DAT_005c5000 + temp_v17 * 2,&temp_v1);
     if (param_2 < 0) {
-      FUN_00195fc8();
+      sysFatalBreak();
     }
     return 1;
   }

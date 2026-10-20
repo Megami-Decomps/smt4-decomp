@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b4f40(int, int);
+int listAppendNode(int, int);
 int FUN_002b4f64(int, int);
 int VectorSignedToFloat(int, int);
 
@@ -15,7 +15,7 @@ typedef struct {
 } param_1_stack;
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_002b4f40. */
+/* Supplied declaration required: listAppendNode. */
 /* Supplied declaration required: FUN_002b4f64. */
 extern int FUN_002baed8(void);
 
@@ -95,7 +95,7 @@ void FUN_00379618(int *param_1)
   *(float *)(temp_v0 + 0x30) = temp_v9;
   *(float *)(temp_v0 + 0x34) = temp_v6;
   *(float *)(temp_v0 + 0x38) = temp_v5;
-  FUN_002b4f40(temp_v1,temp_v0);
+  listAppendNode(temp_v1,temp_v0);
   return;
 }
 

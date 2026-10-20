@@ -6,7 +6,7 @@ extern "C" {
 
 int jobStop(unsigned int, int);
 int FUN_00163aa4(unsigned int *);
-int FUN_001641c4(void);
+int ifTouchRegionRemove(void);
 int FUN_0016ccb4(int);
 int FUN_001760cc(unsigned int);
 int FUN_001b57a8(unsigned int [5], int);
@@ -27,7 +27,7 @@ extern unsigned int g_aocSystem; /* 0x570280 */
 /* Supplied declaration required: jobStop. */
 /* Supplied declaration required: FUN_00163aa4. */
 extern int jobIsValid(unsigned int);
-/* Supplied declaration required: FUN_001641c4. */
+/* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: FUN_0016ccb4. */
 /* Supplied declaration required: FUN_001760cc. */
 extern int FUN_001af210(int);
@@ -83,7 +83,7 @@ void FUN_0047c36c(unsigned int *param_1)
   if (temp_v0 != 0) {
     if (param_1[0x5eb] != 0xffffffff) {
       param_1[0x5eb] = 0xffffffff;
-      FUN_001641c4();
+      ifTouchRegionRemove();
     }
     *param_1 = *param_1 & 0xffffcfff;
     jobStop(param_1[0x5e8],0);

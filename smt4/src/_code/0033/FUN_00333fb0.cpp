@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern PadState *FUN_002b63ac(void);
+extern PadState *gameGetPlayerData(void);
 
 int FUN_00333fb0(void)
 {
-    PadState *pad = FUN_002b63ac();
+    PadState *pad = gameGetPlayerData();
 
     return pad->unk2C;
 }

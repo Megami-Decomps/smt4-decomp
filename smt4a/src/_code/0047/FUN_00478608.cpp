@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001641c4(void);
+int ifTouchRegionRemove(void);
 int scrScriptProcessDestroy(int);
 int FUN_001b57a8(unsigned int *, int);
 int FUN_001ba1c0(int, int *);
@@ -45,7 +45,7 @@ extern int g_aocMain; /* 0x570260 */
 #define ROMWRIGHT_PIECE_3_1_DEFINED
 #define romwright_piece_3_1(upper, lower) ((unsigned int)(((unsigned int)(unsigned int)(upper) << 8) | (unsigned char)(lower)))
 #endif
-/* Supplied declaration required: FUN_001641c4. */
+/* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_001b57a8. */
 /* Supplied declaration required: FUN_001ba1c0. */
@@ -90,8 +90,8 @@ void FUN_00478608(fn_00478608_arg0 *param_1)
     *(unsigned int *)((int)pvVar1 + 0x108) = 2;
     FUN_002844e4();
     FUN_0034913c();
-    FUN_001641c4();
-    FUN_001641c4();
+    ifTouchRegionRemove();
+    ifTouchRegionRemove();
     piVar2 = (int *)param_1->field_0x208;
     param_1->field_0x4 = 3;
     param_1->field_0x8 = 0;

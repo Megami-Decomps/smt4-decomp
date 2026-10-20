@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_0030fe6c(int *, int);
+int iterAddOffset(int *, int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_4_stack;
 
-/* Supplied declaration required: FUN_0030fe6c. */
+/* Supplied declaration required: iterAddOffset. */
 
 
 void FUN_002f4cac(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -22,7 +22,7 @@ void FUN_002f4cac(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   
   if (*(int *)(param_1 + 0x1c) != 0) {
     temp_v0 = param_4;
-    FUN_0030fe6c(&temp_v0,param_1 + 0xc);
+    iterAddOffset(&temp_v0,param_1 + 0xc);
     *(unsigned int *)(param_1 + 0x14) = temp_v0;
     *(unsigned int *)(param_1 + 0x10) = temp_v0;
     return;

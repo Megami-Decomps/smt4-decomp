@@ -13,10 +13,10 @@ typedef struct Record {
     /* 0x20 */ u8 field20[12];
 } Record;
 
-int FUN_002ee9da(Reader *reader);
+int streamSeek(Reader *reader);
 int FUN_002fbc1a(Reader *reader, void *out);
-int FUN_00300900(Reader *reader, void *out);
-int FUN_00300934(Reader *reader, void *out);
+int streamExtractU8(Reader *reader, void *out);
+int streamReadWord(Reader *reader, void *out);
 int FUN_003072ae(Reader *reader, void *out);
 int FUN_00307316(Reader *reader, void *out);
 
@@ -31,11 +31,11 @@ void FUN_003050b6(Reader *reader, Record *record)
     headerless = reader->headerless;
     size = 0;
     if (headerless == 0) {
-        FUN_00300900(reader, &record->flag);
+        streamExtractU8(reader, &record->flag);
         if (reader->error != 0) {
             return;
         }
-        FUN_00300934(reader, &size);
+        streamReadWord(reader, &size);
         if (reader->error != 0) {
             return;
         }
@@ -52,7 +52,7 @@ void FUN_003050b6(Reader *reader, Record *record)
     if (reader->error != 0) {
         return;
     }
-    FUN_00300934(reader, &record->field1C);
+    streamReadWord(reader, &record->field1C);
     if (reader->error != 0) {
         return;
     }
@@ -63,7 +63,7 @@ void FUN_003050b6(Reader *reader, Record *record)
     if (headerless != 0) {
         return;
     }
-    if (reader->pos > start + size || FUN_002ee9da(reader) == 0) {
+    if (reader->pos > start + size || streamSeek(reader) == 0) {
         reader->error = 1;
     }
 }

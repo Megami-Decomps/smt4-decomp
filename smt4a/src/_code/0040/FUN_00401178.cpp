@@ -6,7 +6,7 @@ extern "C" {
 
 int VectorSignedToFloat(unsigned int, int);
 
-extern int DAT_0056fcc0; /* 0x56fcc0 */
+extern int g_handleRegistry; /* 0x56fcc0 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 
@@ -41,7 +41,7 @@ void FUN_00401178(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   *(unsigned int *)(param_1 + 100) = param_5;
   *(unsigned int *)(param_1 + 0x68) = param_6;
   *(unsigned int *)(param_1 + 0x6c) = param_7;
-  temp_v0 = *(int *)(DAT_0056fcc0 + 4);
+  temp_v0 = *(int *)(g_handleRegistry + 4);
   if (temp_v0 == 0) {
     return;
   }

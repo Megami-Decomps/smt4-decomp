@@ -6,15 +6,15 @@ extern "C" {
 
 int FUN_00203640(int);
 int FUN_00269dc8(void);
-int FUN_0026f9b4(void);
+int bgmReleaseStopped(void);
 int FUN_0027581c(void);
 int FUN_00283e48(void);
 int FUN_00290ed8(int);
 int FUN_00296774(int, int);
 int FUN_0029be5c(int, int);
-int FUN_0029c3b0(int);
-int FUN_002a03a0(int, int);
-int FUN_002b63ac(void);
+int soundChannelStopAll(int);
+int soundChannelRequestIfEnabled(int, int);
+int gameGetPlayerData(void);
 int VectorSignedToFloat(int, int);
 int VectorUnsignedToFloat(unsigned int, int);
 
@@ -24,13 +24,13 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } param_1_stack;
 
-extern int DAT_0044dc20; /* 0x44dc20 */
+extern int g_result; /* 0x44dc20 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00203640. */
 /* Supplied declaration required: FUN_00269dc8. */
-/* Supplied declaration required: FUN_0026f9b4. */
+/* Supplied declaration required: bgmReleaseStopped. */
 /* Supplied declaration required: FUN_0027581c. */
 /* Supplied declaration required: FUN_00283e48. */
 /* Supplied declaration required: FUN_00290ed8. */
@@ -38,12 +38,12 @@ extern int FUN_00295d08(unsigned int);
 /* Supplied declaration required: FUN_00296774. */
 extern int FUN_00298f88(unsigned short);
 /* Supplied declaration required: FUN_0029be5c. */
-/* Supplied declaration required: FUN_0029c3b0. */
+/* Supplied declaration required: soundChannelStopAll. */
 extern int flagWordTestBit(int, unsigned int);
-/* Supplied declaration required: FUN_002a03a0. */
-extern int FUN_002a8740(void);
-extern int FUN_002a8764(void);
-/* Supplied declaration required: FUN_002b63ac. */
+/* Supplied declaration required: soundChannelRequestIfEnabled. */
+extern int gameGetUnitRecord(void);
+extern int gameGetSlotTable(void);
+/* Supplied declaration required: gameGetPlayerData. */
 extern int lmapMainIsRunning(void);
 extern int FUN_0033361c(void);
 extern int mapMainIsBusy(void);
@@ -80,16 +80,16 @@ void FUN_002cdf2c(int param_1)
   unsigned long long temp_v18;
   unsigned long long temp_v19;
   
-  temp_v2 = DAT_0044dc20;
-  temp_v3 = FUN_002a8764();
-  FUN_002b63ac();
+  temp_v2 = g_result;
+  temp_v3 = gameGetSlotTable();
+  gameGetPlayerData();
   FUN_00296774(temp_v2,0);
   FUN_00269dc8();
   FUN_00203640(*(unsigned short *)(param_1 + 0x38));
   temp_v4 = mapMainIsBusy();
   if ((temp_v4 != 0) || (temp_v4 = lmapMainIsRunning(), temp_v4 != 0)) {
-    FUN_0026f9b4();
-    FUN_0029c3b0(0xf);
+    bgmReleaseStopped();
+    soundChannelStopAll(0xf);
     FUN_0027581c();
   }
   else {
@@ -98,7 +98,7 @@ void FUN_002cdf2c(int param_1)
       FUN_00290ed8(0x1e);
     }
   }
-  FUN_002a03a0(0x100003c,0);
+  soundChannelRequestIfEnabled(0x100003c,0);
   temp_v4 = *(int *)(param_1 + 0x30);
   temp_v11 = 0;
   temp_v14 = 0;
@@ -147,7 +147,7 @@ void FUN_002cdf2c(int param_1)
       temp_v4 = 0;
       do {
         if (-1 < *(char *)(temp_v3 + temp_v4 + 0x90f0)) {
-          temp_v14 = FUN_002a8740();
+          temp_v14 = gameGetUnitRecord();
           temp_v8 = flagWordTestBit(temp_v14,1);
           if (((temp_v8 == 0) && (temp_v8 = flagWordTestBit(temp_v14,10), temp_v8 == 0)) &&
              (temp_v8 = flagWordTestBit(temp_v14,2), temp_v8 == 0)) {

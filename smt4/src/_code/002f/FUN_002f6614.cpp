@@ -8,7 +8,7 @@ typedef struct Cursor {
     /* 0x4D4 */ u8 list[4];
 } Cursor;
 
-extern Cursor *DAT_0044e190;
+extern Cursor *g_statusDown;
 
 int FUN_0029ee54(void *list);
 int FUN_0029efa8(void);
@@ -16,8 +16,8 @@ int FUN_0029efa8(void);
 /* Returns whether FUN_0029efa8() is the last index of the cursor's list (list size - 1); false if there is no cursor. */
 u32 FUN_002f6614(void)
 {
-    if (DAT_0044e190 != NULL) {
-        void *list = DAT_0044e190->list;
+    if (g_statusDown != NULL) {
+        void *list = g_statusDown->list;
         int current = FUN_0029efa8();
 
         if (current == FUN_0029ee54(list) - 1) {

@@ -21,8 +21,8 @@ extern int btlGetMainState(void);
 extern int FUN_00295d7c(int);
 extern unsigned int scrGetArg(unsigned int);
 extern int flagWordTestBit(int, unsigned int);
-extern int FUN_002a8740(int);
-extern int FUN_002a8764(void);
+extern int gameGetUnitRecord(int);
+extern int gameGetSlotTable(void);
 extern char randNextInRange(unsigned int);
 
 
@@ -71,13 +71,13 @@ unsigned int FUN_003188e8(void)
   temp_v9[0x15] = '\0';
   temp_v9[0x16] = '\0';
   temp_v9[0x17] = '\0';
-  temp_v3 = FUN_002a8764();
+  temp_v3 = gameGetSlotTable();
   if (*(char *)(temp_v3 + 0x910b) != '\0') {
     do {
-      temp_v3 = FUN_002a8764();
+      temp_v3 = gameGetSlotTable();
       temp_v0 = *(char *)(temp_v3 + temp_v5 + 0x90f0);
       if (-1 < temp_v0) {
-        temp_v3 = FUN_002a8740((int)temp_v0);
+        temp_v3 = gameGetUnitRecord((int)temp_v0);
         temp_v4 = flagWordTestBit(temp_v3,1);
         if ((((temp_v4 == 0) && (temp_v4 = flagWordTestBit(temp_v3,10), temp_v4 == 0)) &&
             (temp_v4 = flagWordTestBit(temp_v3,2), temp_v4 == 0)) && (*(unsigned short *)(temp_v3 + 0x46) != temp_v2)) {
@@ -92,7 +92,7 @@ unsigned int FUN_003188e8(void)
         }
       }
       temp_v5 = temp_v5 + 1;
-      temp_v3 = FUN_002a8764();
+      temp_v3 = gameGetSlotTable();
     } while (temp_v5 < (int)(unsigned int)*(unsigned char *)(temp_v3 + 0x910b));
     if (temp_v6 >= 1) {
       temp_v0 = randNextInRange((temp_v6 - 1U) & 0xffff);

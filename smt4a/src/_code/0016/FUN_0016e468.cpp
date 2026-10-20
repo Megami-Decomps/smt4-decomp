@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_00195fc8(void);
+int sysFatalBreak(void);
 
 extern unsigned char DAT_005b4790; /* 0x5b4790 */
 extern int DAT_005b479c; /* 0x5b479c */
 
 extern int FUN_0016f864(void);
 extern unsigned int FUN_0016f988(unsigned int *, char *, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00195fc8. */
+/* Supplied declaration required: sysFatalBreak. */
 extern unsigned int FUN_001a0e10(void);
 extern unsigned int wstrlen(char *);
 extern void nn_os_CriticalSection_Enter(unsigned int);
@@ -32,7 +32,7 @@ unsigned int FUN_0016e468(void)
   if ((*(int *)((unsigned char *)&DAT_005b4790 + 0x8)) == 0) {
     temp_v1 = FUN_0016f864();
     if (temp_v1 < 0) {
-      FUN_00195fc8();
+      sysFatalBreak();
     }
     if (DAT_005b479c != 0) {
       temp_v3 = 0xd8a103f9;

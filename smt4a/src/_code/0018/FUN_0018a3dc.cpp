@@ -3,12 +3,12 @@
 extern "C" {
 
 void FUN_001a165c(u8 *object);
-extern u8 DAT_00643380[];
+extern u8 g_nnSndMasterManager[];
 
 /* Calls FUN_001a165c on the master manager at 0x643380. */
 void FUN_0018a3dc(void)
 {
-    FUN_001a165c(DAT_00643380);
+    FUN_001a165c(g_nnSndMasterManager);
 }
 
 } /* extern "C" */

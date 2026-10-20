@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned char *FUN_001abac8(void);
+extern unsigned char *gameFlagBlockGetEntry(void);
 extern unsigned int FUN_001ada74(unsigned int);
 
 
@@ -15,7 +15,7 @@ unsigned int FUN_0019f1a4(unsigned int param_1,unsigned int param_2)
   unsigned int temp_v0;
   
   temp_v0 = 0;
-  pbVar1 = (unsigned char *)FUN_001abac8();
+  pbVar1 = (unsigned char *)gameFlagBlockGetEntry();
   switch(param_2) {
   case 0:
     temp_v0 = *pbVar1 & 1;

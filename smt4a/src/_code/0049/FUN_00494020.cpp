@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0018719c(...);
+int gameFlagIsSet(...);
 
-/* Supplied declaration required: FUN_0018719c. */
+/* Supplied declaration required: gameFlagIsSet. */
 extern int partyEntryFlagsBit3(short);
 
 
@@ -18,13 +18,13 @@ unsigned int FUN_00494020(int param_1)
   int temp_v1;
   
   if (*(short *)(param_1 + 2) != 0) {
-    temp_v1 = FUN_0018719c();
+    temp_v1 = gameFlagIsSet();
     if (temp_v1 == 0) {
       return 0;
     }
     temp_v0 = *(short *)(param_1 + 4);
     if (temp_v0 != 0) {
-      temp_v1 = FUN_0018719c(temp_v0);
+      temp_v1 = gameFlagIsSet(temp_v0);
       if (temp_v1 != 0) {
         return 0;
       }
@@ -43,7 +43,7 @@ unsigned int FUN_00494020(int param_1)
       }
       return 0;
     }
-    temp_v1 = FUN_0018719c(temp_v0);
+    temp_v1 = gameFlagIsSet(temp_v0);
     if (temp_v1 != 0) {
       return 0;
     }

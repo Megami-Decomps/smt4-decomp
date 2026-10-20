@@ -4,7 +4,7 @@ extern "C" {
 
 void FUN_002e2948(u8 value)
 {
-    DAT_0043e188.state->unkA34 = value;
+    g_messageMain.state->unkA34 = value;
 }
 
 } /* extern "C" */

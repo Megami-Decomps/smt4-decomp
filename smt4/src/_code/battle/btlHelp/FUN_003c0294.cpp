@@ -10,7 +10,7 @@ int asdMemFree(void);
 extern int *DAT_00435d78; /* 0x435d78 */
 
 /* Supplied declaration required: FUN_00295ba4. */
-extern int FUN_00295bd0(void);
+extern int dialogIsActive(void);
 /* Supplied declaration required: asdMemFree. */
 
 
@@ -27,7 +27,7 @@ void FUN_003c0294(void)
   while (temp_v0 != 0) {
     temp_v2 = *(int *)(temp_v0 + 0x2a4);
     if (((-1 < *(short *)(temp_v0 + 0x2a2)) && (*(short *)(temp_v0 + 2) == 1)) &&
-       (temp_v1 = FUN_00295bd0(), temp_v1 != 0)) {
+       (temp_v1 = dialogIsActive(), temp_v1 != 0)) {
       FUN_00295ba4(1);
     }
     piVar2 = DAT_00435d78;

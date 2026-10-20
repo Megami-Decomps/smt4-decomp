@@ -7,8 +7,8 @@ extern "C" {
 int FUN_00100388(unsigned char [64], unsigned char *, unsigned int);
 int FUN_00162790(int, unsigned int, unsigned char [64]);
 int FUN_001634b4(...);
-int FUN_001654d8(...);
-int FUN_001654e4(...);
+int vec2GetXInt(...);
+int vec2GetYInt(...);
 int efctSetSpeed(void);
 int FUN_001835b4(int, int, int, int, int, int);
 int FUN_0018408c(unsigned char *, int);
@@ -37,8 +37,8 @@ extern int g_renderCtx; /* 0x59dbb4 */
 extern unsigned int FUN_00156850(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_001634b4. */
-/* Supplied declaration required: FUN_001654d8. */
-/* Supplied declaration required: FUN_001654e4. */
+/* Supplied declaration required: vec2GetXInt. */
+/* Supplied declaration required: vec2GetYInt. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001834a4(unsigned int, unsigned int);
@@ -114,17 +114,17 @@ void FUN_002f6048(int param_1)
   FUN_001879d0(g_renderCtx);
   temp_v10 = (int)temp_v9;
   temp_v14 = param_1 + 0x638;
-  temp_v6 = FUN_001654d8();
+  temp_v6 = vec2GetXInt();
   temp_v15 = *(short *)(temp_v2 + 8) + temp_v3 + temp_v6 + temp_v10;
-  temp_v6 = FUN_001654e4(temp_v14);
+  temp_v6 = vec2GetYInt(temp_v14);
   temp_v6 = temp_v6 + *(short *)(temp_v2 + 10);
   efctSetSpeed();
   FUN_001835b4(2,0x1e,0x51,temp_v15,temp_v6,0xa6);
   FUN_0037ce80(temp_v13,temp_v15 + 1,temp_v6 + 1,0xa6);
-  temp_v6 = FUN_001654d8(temp_v14);
+  temp_v6 = vec2GetXInt(temp_v14);
   temp_v1 = *(short *)(temp_v2 + 8);
   temp_v7 = temp_v10 + temp_v8;
-  temp_v5 = FUN_001654e4(temp_v14,temp_v6,temp_v7);
+  temp_v5 = vec2GetYInt(temp_v14,temp_v6,temp_v7);
   VectorSignedToFloat(temp_v5 + *(short *)(temp_v2 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(temp_v6 + temp_v1 + temp_v3 + temp_v7 + (int)temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_00162790(3,0xffffffff,temp_v12);

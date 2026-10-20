@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_0026f204(...);
-int FUN_002b8838(...);
-int FUN_002b8cec(...);
+int buttonHelpSetPreset(...);
+int padIsButtonRepeat(...);
 int FUN_002bf4f8(...);
 int FUN_002bf810(...);
-int FUN_002bfde4(...);
+int padIsButtonPressed(...);
 int FUN_002bff6c(...);
 int FUN_002bffe0(...);
 int SBORROW4(...);
@@ -27,11 +27,11 @@ typedef struct {
 extern int FUN_0026ee68(unsigned int);
 extern int FUN_0026f024(int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0026f204. */
-/* Supplied declaration required: FUN_002b8838. */
-/* Supplied declaration required: FUN_002b8cec. */
+/* Supplied declaration required: buttonHelpSetPreset. */
+/* Supplied declaration required: padIsButtonRepeat. */
 /* Supplied declaration required: FUN_002bf4f8. */
 /* Supplied declaration required: FUN_002bf810. */
-/* Supplied declaration required: FUN_002bfde4. */
+/* Supplied declaration required: padIsButtonPressed. */
 /* Supplied declaration required: FUN_002bff6c. */
 /* Supplied declaration required: FUN_002bffe0. */
 
@@ -272,10 +272,10 @@ unsigned int FUN_003172e0(int param_1)
     temp_v6 = *(int *)(param_1 + 0x134);
   }
   if (temp_v10 && temp_v6 == 0) {
-    temp_v15 = FUN_002bfde4(5);
+    temp_v15 = padIsButtonPressed(5);
     temp_v6 = (int)((unsigned long long)temp_v15 >> 0x20);
     if ((int)temp_v15 == 0) {
-      temp_v15 = FUN_002bfde4(0xe);
+      temp_v15 = padIsButtonPressed(0xe);
       temp_v6 = (int)((unsigned long long)temp_v15 >> 0x20);
       if ((int)temp_v15 == 0) goto LAB_00317750;
     }
@@ -296,10 +296,10 @@ unsigned int FUN_003172e0(int param_1)
   else {
 LAB_00317750:
     if ((*(int *)(param_1 + 0x134) + *(int *)(param_1 + 0x13c)) - *(int *)(param_1 + 0x138) == -1) {
-      temp_v15 = FUN_002bfde4(6);
+      temp_v15 = padIsButtonPressed(6);
       temp_v6 = (int)((unsigned long long)temp_v15 >> 0x20);
       if ((int)temp_v15 == 0) {
-        temp_v15 = FUN_002bfde4(0xf);
+        temp_v15 = padIsButtonPressed(0xf);
         temp_v6 = (int)((unsigned long long)temp_v15 >> 0x20);
         if ((int)temp_v15 == 0) goto LAB_003177a4;
       }
@@ -309,14 +309,14 @@ LAB_00317750:
     }
     else {
 LAB_003177a4:
-      temp_v15 = FUN_002b8cec(5);
+      temp_v15 = padIsButtonRepeat(5);
       temp_v6 = (int)((unsigned long long)temp_v15 >> 0x20);
       if ((int)temp_v15 == 0) {
-        temp_v15 = FUN_002b8cec(0xe);
+        temp_v15 = padIsButtonRepeat(0xe);
         temp_v6 = (int)((unsigned long long)temp_v15 >> 0x20);
         if ((int)temp_v15 != 0) goto LAB_003177cc;
-        temp_v6 = FUN_002b8cec(6);
-        if ((temp_v6 != 0) || (temp_v6 = FUN_002b8cec(0xf), temp_v6 != 0)) {
+        temp_v6 = padIsButtonRepeat(6);
+        if ((temp_v6 != 0) || (temp_v6 = padIsButtonRepeat(0xf), temp_v6 != 0)) {
           temp_v6 = *(int *)(param_1 + 0x138);
           if (*(int *)(param_1 + 300) < temp_v6) {
             *(int *)(param_1 + 300) = *(int *)(param_1 + 300) + 1;
@@ -340,8 +340,8 @@ LAB_00317884:
           }
         }
         else {
-          temp_v6 = FUN_002b8cec(3);
-          if ((temp_v6 != 0) || (temp_v6 = FUN_002b8cec(0xc), temp_v6 != 0)) {
+          temp_v6 = padIsButtonRepeat(3);
+          if ((temp_v6 != 0) || (temp_v6 = padIsButtonRepeat(0xc), temp_v6 != 0)) {
             temp_v6 = *(int *)(param_1 + 0x134);
             temp_v1 = *(int *)(param_1 + 0x138);
             if (temp_v1 <= temp_v6 + 0xb) {
@@ -376,9 +376,9 @@ LAB_00317884:
             }
           }
           else {
-            temp_v6 = FUN_002b8cec(4);
+            temp_v6 = padIsButtonRepeat(4);
             if (temp_v6 == 0) {
-              temp_v15 = FUN_002b8cec(0xd);
+              temp_v15 = padIsButtonRepeat(0xd);
               temp_v6 = (int)((unsigned long long)temp_v15 >> 0x20);
               if ((int)temp_v15 == 0) goto LAB_003179a8;
             }
@@ -437,13 +437,13 @@ LAB_003179a8:
                  *(unsigned int *)(param_1 + 0xac));
     FUN_002bf810(0x100016c);
   }
-  temp_v6 = FUN_002bfde4(0);
+  temp_v6 = padIsButtonPressed(0);
   if ((temp_v6 != 0) || (temp_v6 = FUN_0026ee68(1), temp_v6 != 0 || temp_v0)) {
     *(unsigned int *)(param_1 + 0x104) = 8;
     temp_v7 = 2;
     *(unsigned int *)(param_1 + 0x110) = 2;
     *(unsigned int *)(param_1 + 0x114) = 5;
-    FUN_002b8838(0xe2);
+    buttonHelpSetPreset(0xe2);
     FUN_002bf810(0x100016d);
   }
   return temp_v7;

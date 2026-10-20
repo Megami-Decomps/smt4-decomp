@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_0057f118; /* 0x57f118 */
+extern int g_campCecEdit; /* 0x57f118 */
 
 
 char FUN_002e2030(void)
@@ -13,10 +13,10 @@ char FUN_002e2030(void)
   char temp_v0;
   
   temp_v0 = '\0';
-  if (DAT_0057f118 != 0) {
-    temp_v0 = *(char *)(DAT_0057f118 + 0x10e);
+  if (g_campCecEdit != 0) {
+    temp_v0 = *(char *)(g_campCecEdit + 0x10e);
   }
-  if (DAT_0057f118 != 0 && temp_v0 != '\0') {
+  if (g_campCecEdit != 0 && temp_v0 != '\0') {
     temp_v0 = '\x01';
   }
   return temp_v0;

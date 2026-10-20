@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002e6e26(void);
 int FUN_002e6e34(unsigned char [12], int);
 int FUN_002e6e5c(unsigned char [12]);
-int FUN_002e75fa(int);
+int sharedRefAddRef(int);
 int FUN_002e78d0(unsigned int, int, int);
 int FUN_002ea3d0(int, unsigned int);
 
@@ -16,7 +16,7 @@ extern unsigned char LAB_0010acb0; /* 0x10acb0 */
 /* Supplied declaration required: FUN_002e6e26. */
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-/* Supplied declaration required: FUN_002e75fa. */
+/* Supplied declaration required: sharedRefAddRef. */
 extern int FUN_002e789a(int);
 /* Supplied declaration required: FUN_002e78d0. */
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned int, unsigned int, unsigned char *);
@@ -40,7 +40,7 @@ unsigned int FUN_0010ac48(int param_1,int param_2,int param_3)
     temp_v1 = FUN_002ea3c0(temp_v3,0x10abad,0,&LAB_0010acb0);
     FUN_002ea3d0(param_1,temp_v1);
     if (param_3 == 0) {
-      FUN_002e75fa(param_1);
+      sharedRefAddRef(param_1);
     }
     temp_v1 = FUN_002e6e26();
     FUN_002e78d0(temp_v1,param_1,0);

@@ -4,13 +4,13 @@
 
 extern "C" {
 
-extern int DAT_0043e0f8; /* 0x43e0f8 */
+extern int g_comWin; /* 0x43e0f8 */
 
 
 void FUN_0026c7a0(void)
 
 {
-  *(unsigned int *)(DAT_0043e0f8 + 0x14) = 0;
+  *(unsigned int *)(g_comWin + 0x14) = 0;
   return;
 }
 

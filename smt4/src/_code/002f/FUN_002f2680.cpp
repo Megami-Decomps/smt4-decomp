@@ -15,9 +15,9 @@ typedef struct {
 
 /* Supplied declaration required: FUN_002497f8. */
 /* Supplied declaration required: FUN_00283e48. */
-extern int FUN_002a8740(void);
+extern int gameGetUnitRecord(void);
 /* Supplied declaration required: FUN_002ae164. */
-extern int FUN_002ae1d8(int);
+extern int idIsAbove400(int);
 
 
 void FUN_002f2680(int *param_1,int *param_2)
@@ -29,7 +29,7 @@ void FUN_002f2680(int *param_1,int *param_2)
   int temp_v2;
   short temp_v3;
   
-  temp_v1 = FUN_002ae1d8(*param_1);
+  temp_v1 = idIsAbove400(*param_1);
   temp_v2 = *param_1;
   if (temp_v1 != 0) {
     FUN_00283e48();
@@ -39,7 +39,7 @@ void FUN_002f2680(int *param_1,int *param_2)
     FUN_002ae164();
     temp_v3 = *(short *)(temp_v2 + 0x24);
   }
-  temp_v1 = FUN_002ae1d8(*param_2);
+  temp_v1 = idIsAbove400(*param_2);
   temp_v2 = *param_2;
   if (temp_v1 != 0) {
     FUN_00283e48();
@@ -54,14 +54,14 @@ void FUN_002f2680(int *param_1,int *param_2)
       temp_v3 = 0;
     }
     else {
-      temp_v1 = FUN_002a8740();
+      temp_v1 = gameGetUnitRecord();
       temp_v3 = *(short *)(temp_v1 + 0x46);
     }
     if (param_2[1] < 0) {
       temp_v0 = 0;
     }
     else {
-      temp_v1 = FUN_002a8740();
+      temp_v1 = gameGetUnitRecord();
       temp_v0 = *(short *)(temp_v1 + 0x46);
     }
     if (temp_v0 == temp_v3) {

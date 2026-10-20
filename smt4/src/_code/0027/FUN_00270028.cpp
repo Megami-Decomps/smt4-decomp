@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_0043e278; /* 0x43e278 */
+extern int g_frameTex; /* 0x43e278 */
 
 
 void FUN_00270028(int param_1)
@@ -12,9 +12,9 @@ void FUN_00270028(int param_1)
 {
   int temp_v0;
   
-  temp_v0 = DAT_0043e278;
+  temp_v0 = g_frameTex;
   if (param_1 == 0) {
-    *(unsigned char *)(DAT_0043e278 + 0xc) = 0;
+    *(unsigned char *)(g_frameTex + 0xc) = 0;
     *(unsigned int *)(temp_v0 + 0x10) = 0;
     *(unsigned int *)(temp_v0 + 0x14) = 0;
     *(unsigned int *)(temp_v0 + 0x18) = 0;
@@ -26,33 +26,33 @@ void FUN_00270028(int param_1)
     return;
   }
   if (param_1 == 1) {
-    *(unsigned char *)(DAT_0043e278 + 0xc) = 1;
+    *(unsigned char *)(g_frameTex + 0xc) = 1;
     *(unsigned char *)(temp_v0 + 0xf98) = 0;
     *(unsigned int *)(temp_v0 + 0x10) = 1;
     return;
   }
   if (param_1 != 2) {
     if (param_1 == 3) {
-      *(unsigned char *)(DAT_0043e278 + 0xc) = 1;
+      *(unsigned char *)(g_frameTex + 0xc) = 1;
       *(unsigned int *)(temp_v0 + 0x10) = 0;
       *(unsigned int *)(temp_v0 + 0x14) = 0;
       *(unsigned int *)(temp_v0 + 0x18) = 0;
       return;
     }
     if (param_1 == 4) {
-      *(unsigned char *)(DAT_0043e278 + 0xc) = 1;
+      *(unsigned char *)(g_frameTex + 0xc) = 1;
       *(unsigned int *)(temp_v0 + 0x10) = 1;
       *(unsigned char *)(temp_v0 + 0xf98) = 1;
     }
   }
   else {
-    if (*(char *)(DAT_0043e278 + 0xc) == '\0') {
+    if (*(char *)(g_frameTex + 0xc) == '\0') {
       *(unsigned int *)(temp_v0 + 0x10) = 0;
       *(unsigned int *)(temp_v0 + 0x14) = 0;
       *(unsigned int *)(temp_v0 + 0x18) = 0;
       return;
     }
-    *(unsigned int *)(DAT_0043e278 + 0x14) = 1;
+    *(unsigned int *)(g_frameTex + 0x14) = 1;
   }
   return;
 }

@@ -20,7 +20,7 @@ typedef struct {
 
 extern unsigned char LAB_0011a0cc; /* 0x11a0cc */
 
-extern unsigned int FUN_00103f9a(void);
+extern unsigned int pendingValueTake(void);
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned int, unsigned int, unsigned char *);
@@ -78,7 +78,7 @@ void FUN_0011a01c(int param_1)
   }
 LAB_0011a09a:
   if (*(int *)(*(int *)(param_1 + 0x70) + 0x24) != 0) {
-    temp_v2 = FUN_00103f9a();
+    temp_v2 = pendingValueTake();
     *(unsigned int *)(param_1 + 0x74) = temp_v2;
     temp_v2 = 0x11a0d1;
   }

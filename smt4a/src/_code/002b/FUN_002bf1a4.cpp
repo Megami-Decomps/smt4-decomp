@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_00162e8c(void);
+extern int gameFlagsGetBlock(void);
 
 
 void FUN_002bf1a4(int param_1,int param_2,int param_3)
@@ -18,7 +18,7 @@ void FUN_002bf1a4(int param_1,int param_2,int param_3)
   unsigned int temp_v4;
   unsigned char temp_v5;
   
-  temp_v1 = FUN_00162e8c();
+  temp_v1 = gameFlagsGetBlock();
   if (param_1 != 0x65) {
     temp_v2 = param_3 * 5 + param_2;
     temp_v3 = (int)(temp_v2 + ((unsigned int)(temp_v2 >> 0x1f) >> 0x1d)) >> 3;

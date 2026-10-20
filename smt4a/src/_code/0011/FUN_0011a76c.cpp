@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_002e9318(unsigned char [8]);
-int FUN_002e9afe(int, unsigned int);
-int FUN_002ea43c(int);
+int onlineStringDestroy(unsigned char [8]);
+int vectorCopyHeader(int, unsigned int);
+int onlineJobSetStateDone(int);
 int FUN_002ea928(int);
 int FUN_002ea974(...);
-int FUN_002ea9c0(unsigned char [104], unsigned int);
-int FUN_002ea9dc(unsigned char [104]);
+int onlineUrlSetAddress(unsigned char [104], unsigned int);
+int onlineUrlDestroy(unsigned char [104]);
 int FUN_002eb2ec(unsigned char [104], unsigned int);
 int FUN_002ee5b8(unsigned char *, unsigned char [104]);
 int FUN_002ee938(unsigned char [8], int);
@@ -32,14 +32,14 @@ extern unsigned char DAT_00559748; /* 0x559748 */
 
 extern unsigned int FUN_001237f8(int);
 extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
-/* Supplied declaration required: FUN_002e9318. */
-/* Supplied declaration required: FUN_002e9afe. */
-/* Supplied declaration required: FUN_002ea43c. */
+/* Supplied declaration required: onlineStringDestroy. */
+/* Supplied declaration required: vectorCopyHeader. */
+/* Supplied declaration required: onlineJobSetStateDone. */
 /* Supplied declaration required: FUN_002ea928. */
-extern unsigned int FUN_002ea93c(int);
+extern unsigned int onlineUrlGetAddress(int);
 /* Supplied declaration required: FUN_002ea974. */
-/* Supplied declaration required: FUN_002ea9c0. */
-/* Supplied declaration required: FUN_002ea9dc. */
+/* Supplied declaration required: onlineUrlSetAddress. */
+/* Supplied declaration required: onlineUrlDestroy. */
 /* Supplied declaration required: FUN_002eb2ec. */
 /* Supplied declaration required: FUN_002ee5b8. */
 /* Supplied declaration required: FUN_002ee938. */
@@ -86,11 +86,11 @@ void FUN_0011a76c(int param_1)
   else {
     temp_v0 = 1;
   }
-  FUN_002e9318(temp_v14);
+  onlineStringDestroy(temp_v14);
   if (temp_v0) {
     FUN_002ea974(temp_v13);
-    temp_v2 = FUN_002ea93c(temp_v1);
-    FUN_002ea9c0(temp_v13,temp_v2);
+    temp_v2 = onlineUrlGetAddress(temp_v1);
+    onlineUrlSetAddress(temp_v13,temp_v2);
     temp_v2 = FUN_002ea928(temp_v1);
     FUN_002eb2ec(temp_v13,temp_v2);
     temp_v10 = temp_v7;
@@ -116,14 +116,14 @@ void FUN_0011a76c(int param_1)
     *(int **)(temp_v3 + 4) = piVar5;
     *(int *)(temp_v9 + 0x14) = *(int *)(temp_v9 + 0x14) + 1;
     FUN_002f4ffc(&temp_v5);
-    FUN_002ea9dc(temp_v13);
+    onlineUrlDestroy(temp_v13);
   }
   if ((*(int *)(param_1 + 0x2b0) == 0) && (*(int *)(param_1 + 0x2b4) == 0)) {
     temp_v6 = 0x80050003;
     temp_v2 = FUN_002e7908(temp_v4,&temp_v6);
-    FUN_002e9afe(param_1 + 0x228,temp_v2);
+    vectorCopyHeader(param_1 + 0x228,temp_v2);
     *(unsigned char *)(param_1 + 0x3b) = 5;
-    FUN_002ea43c(param_1);
+    onlineJobSetStateDone(param_1);
   }
   return;
 }

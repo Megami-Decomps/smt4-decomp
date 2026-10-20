@@ -11,7 +11,7 @@ int FUN_00134a06(int, unsigned int *, int *);
 int FUN_00134abc(int, int);
 int FUN_00134b44(int *, unsigned int, unsigned int, int *);
 int FUN_001351b8(int, int, int);
-int FUN_002edb54(int, int, int);
+int vectorResizeBytes(int, int, int);
 int vectorCount4_002f1370(int *);
 int FUN_002f13c2(int, unsigned int, unsigned int);
 
@@ -32,8 +32,8 @@ typedef struct {
 /* Supplied declaration required: FUN_00134abc. */
 /* Supplied declaration required: FUN_00134b44. */
 /* Supplied declaration required: FUN_001351b8. */
-extern int FUN_002e760a(unsigned int);
-/* Supplied declaration required: FUN_002edb54. */
+extern int operatorNew(unsigned int);
+/* Supplied declaration required: vectorResizeBytes. */
 extern int FUN_002ef01c(unsigned int);
 /* Supplied declaration required: vectorCount4_002f1370. */
 extern unsigned int FUN_002f1378(void);
@@ -90,10 +90,10 @@ void FUN_002f091c(int param_1,int param_2)
       }
     }
   }
-  FUN_002edb54(param_1 + 0x13c,param_2 + 1,1);
+  vectorResizeBytes(param_1 + 0x13c,param_2 + 1,1);
   FUN_00105e0c(param_1 + 0x200,(param_2 + 1U) & 0xffff);
   for (temp_v2 = 0; temp_v2 < (int)(param_2 + 1U); temp_v2 = temp_v2 + 1) {
-    temp_v3 = FUN_002e760a(0x28);
+    temp_v3 = operatorNew(0x28);
     temp_v1 = 0;
     if (temp_v3 != 0) {
       temp_v1 = FUN_002f1378();
@@ -109,7 +109,7 @@ void FUN_002f091c(int param_1,int param_2)
     else {
       FUN_00134a06(param_1 + 0x90,puVar8,&temp_v6);
     }
-    temp_v3 = FUN_002e760a(0x74);
+    temp_v3 = operatorNew(0x74);
     if (temp_v3 != 0) {
       temp_v4 = FUN_002ef01c(*(unsigned int *)(param_1 + 4));
       temp_v1 = *(unsigned int *)(temp_v4 + 0x7c);

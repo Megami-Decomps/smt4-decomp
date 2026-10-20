@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdMemoryFreeRegion(int *);
-int FUN_002694f8(void);
+int refCountIncrement(void);
 int asdEffectTextureCreate(void);
 int FUN_002a8554(unsigned int, int *, int, int, int, int, unsigned int, unsigned int);
 int asdMemFree(void);
@@ -26,7 +26,7 @@ extern unsigned int DAT_00471b58; /* 0x471b58 */
 /* Unsupported intrinsic, declaration required: hasExclusiveAccess (CALLOTHER). */
 /* Supplied declaration required: asdMemoryFreeRegion. */
 extern int *FUN_001246cc(int *);
-/* Supplied declaration required: FUN_002694f8. */
+/* Supplied declaration required: refCountIncrement. */
 extern int *FUN_0028c814(void);
 /* Supplied declaration required: asdEffectTextureCreate. */
 extern int FUN_0028c904(int *);
@@ -54,7 +54,7 @@ void FUN_002c084c(int param_1,int *param_2)
     param_2 = (int *)FUN_0028c814();
   }
   *(int **)(param_1 + 0x14) = param_2;
-  FUN_002694f8();
+  refCountIncrement();
   temp_v1 = *param_2;
   *param_2 = temp_v1 - 1;
   if (temp_v1 - 1 != 0) {

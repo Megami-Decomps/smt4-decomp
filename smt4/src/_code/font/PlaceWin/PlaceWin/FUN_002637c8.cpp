@@ -33,7 +33,7 @@ extern unsigned char LAB_0032a9fc; /* 0x32a9fc */
 extern unsigned char DAT_00403a28; /* 0x403a28 */
 extern unsigned char DAT_00403a40; /* 0x403a40 */
 extern unsigned char DAT_00403a58; /* 0x403a58 */
-extern unsigned int *DAT_0043e140; /* 0x43e140 */
+extern unsigned int *g_placeWin; /* 0x43e140 */
 
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002bee58. */
@@ -52,20 +52,20 @@ void FUN_002637c8(void)
   unsigned int *puVar1;
   unsigned char *puVar2;
   
-  if (DAT_0043e140 == (unsigned int *)0x0) {
+  if (g_placeWin == (unsigned int *)0x0) {
     puVar1 = (unsigned int *)0x100;
     asdMemAlloc(0x100,0x100,0,0x140,1);
-    DAT_0043e140 = puVar1;
+    g_placeWin = puVar1;
   }
-  puVar1 = DAT_0043e140;
+  puVar1 = g_placeWin;
   memClear();
   puVar2 = &LAB_00263940;
   asdProcessCreateSimple(&LAB_00263940,1,0,0,&LAB_0032a9fc,0,0);
   *puVar1 = (unsigned int)puVar2;
   taskCreateDraw(&LAB_00263954,0x81,0,0,FUN_0032a850,0,0,puVar2);
   taskCreateDraw(&LAB_00263968,0xdf,0,0,FUN_0032a850,0,0,*puVar1);
-  puVar1 = DAT_0043e140;
-  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(DAT_0043e140 + 5);
+  puVar1 = g_placeWin;
+  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(g_placeWin + 5);
   FUN_002c312c(puVar1 + 5,&DAT_00403a28,0x18,&DAT_00403a40,0x18,0,0,0,0,&DAT_00403a58,0x70);
   FUN_002bd954(puVar1 + 0xd,0xe,0x87,puVar1 + 5,1);
   FUN_002bee58(puVar1 + 0xd,0);

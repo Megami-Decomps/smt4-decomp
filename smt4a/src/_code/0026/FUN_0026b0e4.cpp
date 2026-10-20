@@ -45,7 +45,7 @@ typedef struct {
 extern unsigned char LAB_0026be98; /* 0x26be98 */
 extern unsigned char LAB_0026be9c; /* 0x26be9c */
 extern unsigned char DAT_00536b70; /* 0x536b70 */
-extern int DAT_00588fe8; /* 0x588fe8 */
+extern int g_statusDown; /* 0x588fe8 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -54,8 +54,8 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164168. */
 /* Supplied declaration required: FUN_00164b5c. */
-extern int FUN_001654d8(int);
-extern int FUN_001654e4(int);
+extern int vec2GetXInt(int);
+extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001689e8. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
@@ -65,7 +65,7 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_0018408c. */
 /* Supplied declaration required: FUN_00184310. */
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_001fc720. */
 /* Supplied declaration required: FUN_0022fb78. */
 extern int FUN_0026264c(unsigned short);
@@ -120,10 +120,10 @@ unsigned int FUN_0026b0e4(void)
   int temp_v23;
   int temp_v24;
   
-  temp_v11 = DAT_00588fe8;
-  temp_v0 = FUN_001654d8(DAT_00588fe8 + 0x28);
-  temp_v1 = FUN_001654e4(temp_v11 + 0x28);
-  temp_v4 = DAT_00588fe8;
+  temp_v11 = g_statusDown;
+  temp_v0 = vec2GetXInt(g_statusDown + 0x28);
+  temp_v1 = vec2GetYInt(temp_v11 + 0x28);
+  temp_v4 = g_statusDown;
   temp_v2 = *(int *)(temp_v11 + 0x518);
   in_fpscr = in_fpscr & 0xfffffff;
   if (temp_v2 == 1) {
@@ -154,7 +154,7 @@ unsigned int FUN_0026b0e4(void)
     break;
   case 0x13:
     puVar16 = (unsigned char *)0x0;
-    temp_v19 = FUN_002a4894(DAT_00588fe8 + 0x67c);
+    temp_v19 = FUN_002a4894(g_statusDown + 0x67c);
     temp_v18 = 0;
     temp_v17 = (unsigned char *)0x0;
     efctSetSpeed();
@@ -197,7 +197,7 @@ LAB_0026b298:
           else {
             puVar16 = (unsigned char *)0x30d;
             temp_v9 = (unsigned int)*(unsigned short *)(temp_v20 + 0x70);
-            temp_v2 = FUN_0018719c(0x410);
+            temp_v2 = gameFlagIsSet(0x410);
             if (temp_v2 == 0) {
               temp_v11 = 3;
               goto LAB_0026b298;
@@ -207,7 +207,7 @@ LAB_0026b298:
         else {
           puVar16 = (unsigned char *)0xb5;
           temp_v9 = (unsigned int)*(unsigned short *)(temp_v20 + 0x6e);
-          temp_v2 = FUN_0018719c(0x410);
+          temp_v2 = gameFlagIsSet(0x410);
           if (temp_v2 == 0) {
             temp_v11 = 2;
             goto LAB_0026b298;
@@ -252,7 +252,7 @@ LAB_0026b298:
     if (*(int *)(temp_v4 + 0x518) != 0x13) {
       return 0;
     }
-    temp_v11 = FUN_0018719c(0x410);
+    temp_v11 = gameFlagIsSet(0x410);
     if ((temp_v11 == 0) && (temp_v19 == 1 || temp_v19 == 2)) {
       return 0;
     }
@@ -331,7 +331,7 @@ LAB_0026b644:
     break;
   case 0x16:
   case 0x17:
-    temp_v11 = DAT_00588fe8 + 0x2354;
+    temp_v11 = g_statusDown + 0x2354;
     temp_v23 = temp_v11;
     temp_v2 = FUN_002a4860();
     temp_v10 = FUN_002a4894(temp_v11);

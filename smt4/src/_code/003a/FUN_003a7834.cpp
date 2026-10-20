@@ -26,8 +26,8 @@ int FUN_00231240(void *layout, u32 a, u32 b);
 int FUN_0029d960(Menu *menu);
 int FUN_002a0cc8(int arg);
 int FUN_002b8ee0(Cursor *cursor, int arg);
-u32 FUN_002bed98(Cursor *cursor);
-u32 FUN_002beda4(Cursor *cursor);
+u32 vec2GetYInt(Cursor *cursor);
+u32 vec2GetXInt(Cursor *cursor);
 
 /* Refreshes the menu layout from its cursor; if the cursor is enabled and FUN_00231184 allows it, switches the menu to state (2, 0) and refreshes again. */
 void FUN_003a7834(Menu *menu)
@@ -37,8 +37,8 @@ void FUN_003a7834(Menu *menu)
     u32 height;
 
     FUN_002b8ee0(cursor, 0);
-    width = FUN_002bed98(cursor);
-    height = FUN_002beda4(cursor);
+    width = vec2GetYInt(cursor);
+    height = vec2GetXInt(cursor);
     FUN_00231240(menu->layout, height, width);
     if (cursor->enabled != 0 && FUN_00231184() != 0) {
         FUN_002a0cc8(0);

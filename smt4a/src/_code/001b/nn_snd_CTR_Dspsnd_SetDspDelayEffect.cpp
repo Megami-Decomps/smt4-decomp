@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_001c6e20(void);
+extern int nn_snd_CTR_Dspsnd_IsInitialized(void);
 
 
 unsigned int nn_snd_CTR_Dspsnd_SetDspDelayEffect(int param_1,int param_2,unsigned short *param_3)
@@ -14,7 +14,7 @@ unsigned int nn_snd_CTR_Dspsnd_SetDspDelayEffect(int param_1,int param_2,unsigne
   unsigned int *puVar2;
   unsigned int temp_v1;
   
-  temp_v0 = FUN_001c6e20();
+  temp_v0 = nn_snd_CTR_Dspsnd_IsInitialized();
   if (temp_v0 == 0) {
     return 0;
   }

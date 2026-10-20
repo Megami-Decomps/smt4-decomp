@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001f62ec(unsigned short *, unsigned short *);
-int FUN_002b63c0(void);
+int dataTable1bOr1cGetRecord(void);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -13,7 +13,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_001f62ec. */
-/* Supplied declaration required: FUN_002b63c0. */
+/* Supplied declaration required: dataTable1bOr1cGetRecord. */
 
 
 void FUN_00219488(unsigned short *param_1,unsigned short *param_2)
@@ -24,9 +24,9 @@ void FUN_00219488(unsigned short *param_1,unsigned short *param_2)
   unsigned int temp_v1;
   
   temp_v0 = (unsigned int)*param_1;
-  FUN_002b63c0();
+  dataTable1bOr1cGetRecord();
   temp_v1 = (unsigned int)*param_2;
-  FUN_002b63c0();
+  dataTable1bOr1cGetRecord();
   if (temp_v0 == 0) {
     temp_v1 = 0;
   }

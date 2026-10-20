@@ -7,8 +7,8 @@ extern "C" {
 int FUN_0022c9f4(int, int);
 int FUN_0022e17c(unsigned char [8], int, int);
 int FUN_00233730(int, int, int, int, int);
-int FUN_002b06c4(void);
-int FUN_002b9024(void);
+int dataTable00FindById(void);
+int devilGetRecord(void);
 int FUN_003ad608(int, unsigned char [8]);
 
 /* stack frame of param_1: 10 slot(s), 37 byte(s) */
@@ -32,8 +32,8 @@ extern unsigned char g_gameState; /* 0x49f91c */
 /* Supplied declaration required: FUN_00233730. */
 extern int FUN_0023eb18(void);
 extern int FUN_0029e9cc(unsigned short);
-/* Supplied declaration required: FUN_002b06c4. */
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: dataTable00FindById. */
+/* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: FUN_003ad608. */
 extern int FUN_003bc0ac(unsigned int, int, int);
 extern int FUN_003bc874(void);
@@ -91,17 +91,17 @@ LAB_003a9d60:
               do {
                 puVar9 = (unsigned short *)(unsigned int)*(unsigned short *)(temp_v2 + temp_v5 * 2 + 0xc);
                 if ((puVar9 != (unsigned short *)0x0) &&
-                   (puVar4 = puVar9, FUN_002b06c4(), puVar4 != (unsigned short *)0x0)) {
+                   (puVar4 = puVar9, dataTable00FindById(), puVar4 != (unsigned short *)0x0)) {
                   puVar4 = puVar9;
-                  FUN_002b9024();
-                  FUN_002b06c4();
+                  devilGetRecord();
+                  dataTable00FindById();
                   if ((puVar4 != (unsigned short *)0x0 && puVar9 != (unsigned short *)0x0) &&
                      (((*(int *)((unsigned char *)&g_gameState + 0x3e0)) != 0 ||
                       (((puVar9[0xb] & 1) != 0 && (temp_v3 = FUN_0029e9cc(*puVar4), temp_v3 != 0)))))) {
                     FUN_0022e17c(temp_v11,*puVar4,0);
                     temp_v4 = (unsigned int)*puVar4;
                     temp_v7 = 0;
-                    FUN_002b06c4();
+                    dataTable00FindById();
                     if (temp_v4 != 0) {
                       temp_v7 = *(unsigned int *)(temp_v4 + 0x78);
                     }

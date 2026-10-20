@@ -8,7 +8,7 @@ int FUN_002954bc(...);
 int FUN_0029c6b0(...);
 int dataTable06Sub1GetRecord(...);
 int FUN_002b7bca(...);
-int FUN_002b9024(...);
+int devilGetRecord(...);
 int asdMemFree(...);
 int asdMemoryAlloc(...);
 
@@ -43,7 +43,7 @@ extern unsigned char LAB_0032b33c; /* 0x32b33c */
 /* Supplied declaration required: FUN_0029c6b0. */
 /* Supplied declaration required: dataTable06Sub1GetRecord. */
 /* Supplied declaration required: FUN_002b7bca. */
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: devilGetRecord. */
 extern int randNextInRange(unsigned int);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: asdMemoryAlloc. */
@@ -77,7 +77,7 @@ unsigned short FUN_0033b960(fn_0033b960_arg0 *param_1)
   asdMemoryAlloc(0x100,0x100,0,0x3ea,1);
   temp_v1 = (unsigned int)param_1->field_0x46;
   temp_v6 = 0;
-  FUN_002b9024();
+  devilGetRecord();
   temp_v5 = 0;
   do {
     temp_v2 = (unsigned int)*(unsigned short *)(temp_v1 + temp_v5 * 2 + 0x3c);

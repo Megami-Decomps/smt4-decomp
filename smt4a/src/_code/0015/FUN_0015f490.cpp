@@ -8,7 +8,7 @@ int FUN_001628c0(char *, unsigned int, int, unsigned int);
 int lcgRandomRange(int);
 int FUN_00184310(void);
 int dataTableGet(int, int);
-int FUN_002e6dd0(char *, int);
+int rt_aeabi_memclr(char *, int);
 int VectorFloatToUnsigned(double, int);
 int VectorUnsignedToFloat(unsigned int, int);
 int rt_memcpy(unsigned char [4], int, int);
@@ -22,7 +22,7 @@ extern unsigned int FUN_0014af98(void);
 /* Supplied declaration required: dataTableGet. */
 extern int dataTableGetCount(void);
 extern int dataTableGetEntries(void);
-/* Supplied declaration required: FUN_002e6dd0. */
+/* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: rt_memcpy. */
 
 
@@ -145,7 +145,7 @@ void FUN_0015f490(unsigned int param_1,int param_2,unsigned int param_3,unsigned
     temp_v1 = 7;
   }
 LAB_0015f650:
-  FUN_002e6dd0(acStack_ac + 0x78,10);
+  rt_aeabi_memclr(acStack_ac + 0x78,10);
   temp_v2 = 0;
   do {
     temp_v0 = acStack_ac[temp_v2 + temp_v1 * 10];

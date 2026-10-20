@@ -6,7 +6,7 @@ extern "C" {
 
 int scrSetResult(int);
 
-extern int FUN_00162e8c(void);
+extern int gameFlagsGetBlock(void);
 extern int scrGetArg(void);
 /* Supplied declaration required: scrSetResult. */
 
@@ -20,7 +20,7 @@ unsigned int FUN_0038ad6c(void)
   int temp_v2;
   
   temp_v1 = scrGetArg();
-  temp_v2 = FUN_00162e8c();
+  temp_v2 = gameFlagsGetBlock();
   if (temp_v1 == 0) {
     temp_v0 = *(short *)(temp_v2 + 0x1668);
   }

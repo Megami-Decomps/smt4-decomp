@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00192550(void);
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 int scrGetArg(int);
 int sysMemClear(int [21], int);
 
@@ -18,7 +18,7 @@ extern unsigned int DAT_005702b4; /* 0x5702b4 */
 
 extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_00192550. */
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: scrGetArg. */
 /* Supplied declaration required: sysMemClear. */
 
@@ -83,7 +83,7 @@ unsigned int FUN_003bc83c(void)
           temp_v2 = (unsigned int)*puVar14;
           FUN_00192550();
           temp_v2 = (unsigned int)*(unsigned short *)(temp_v2 + 0x32);
-          FUN_001aba54();
+          dataTable04FindById();
           if ((temp_v2 != 0) &&
              (*(int *)((int)aiStack_70 + ((*(unsigned int *)(temp_v2 + 0x28) & 0xf800) >> 9)) >= 1)) {
             puVar14 = puVar14 + 1;

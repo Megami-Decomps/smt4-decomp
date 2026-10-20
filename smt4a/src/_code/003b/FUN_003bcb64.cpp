@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0014bef4(int);
+int randRange(int);
 int sysMemClear(int [109], int);
 int scrSetResult(...);
 int FUN_003f0e20(int, int);
@@ -23,7 +23,7 @@ extern unsigned int DAT_00571108; /* 0x571108 */
 extern unsigned int DAT_0057110c; /* 0x57110c */
 
 extern int btlGetMainState(void);
-/* Supplied declaration required: FUN_0014bef4. */
+/* Supplied declaration required: randRange. */
 extern int FUN_002a4b28(void);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: scrSetResult. */
@@ -57,7 +57,7 @@ unsigned int FUN_003bcb64(void)
   do {
     sysMemClear(aiStack_1e0,0x1b4);
     temp_v7 = 0;
-    if ((temp_v1) && (temp_v3 = FUN_0014bef4(99), temp_v3 < 0x5a)) {
+    if ((temp_v1) && (temp_v3 = randRange(99), temp_v3 < 0x5a)) {
       temp_v2 = -1;
       scrSetResult(temp_v2);
       return 1;
@@ -97,7 +97,7 @@ unsigned int FUN_003bcb64(void)
       temp_v6 = temp_v6 + 1;
     } while (temp_v6 < 0x6d);
     if (temp_v7 != 0) {
-      temp_v2 = FUN_0014bef4((temp_v7 - 1) & 0xffff);
+      temp_v2 = randRange((temp_v7 - 1) & 0xffff);
       temp_v2 = (int)*(short *)(aiStack_1e0[temp_v2] + 8);
       scrSetResult(temp_v2);
       return 1;

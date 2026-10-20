@@ -7,13 +7,13 @@ typedef struct Obj {
     /* 0x352C */ s32 unk352C;
 } Obj;
 
-extern Obj *DAT_0044dc20;
+extern Obj *g_result;
 
 u32 FUN_002b8660(void)
 {
     u32 result;
 
-    if ((DAT_0044dc20 == NULL) || (DAT_0044dc20->unk352C == 0x14)) {
+    if ((g_result == NULL) || (g_result->unk352C == 0x14)) {
         result = 1;
     } else {
         result = 0;

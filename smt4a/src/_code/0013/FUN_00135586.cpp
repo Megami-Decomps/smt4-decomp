@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6e14(int);
+int asdOperatorDeleteArray(int);
 int vectorCount4_002ff8c6(int *);
 int FUN_0030759c(...);
 int FUN_003075b6(unsigned int *, unsigned int *, unsigned int *);
@@ -16,13 +16,13 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_002e6e14. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
 extern int vectorGrowCapacity_002ff8b4(unsigned int, int *);
 /* Supplied declaration required: vectorCount4_002ff8c6. */
 /* Supplied declaration required: FUN_0030759c. */
 /* Supplied declaration required: FUN_003075b6. */
 /* Supplied declaration required: vectorCount4_003075ca. */
-extern int FUN_0030771a(int *, int, int);
+extern int allocArrayWords(int *, int, int);
 
 
 void FUN_00135586(int *param_1,unsigned int *param_2,unsigned int *param_3)
@@ -53,7 +53,7 @@ void FUN_00135586(int *param_1,unsigned int *param_2,unsigned int *param_3)
   else {
     temp_v2 = vectorCount4_002ff8c6(param_1);
     temp_v3 = vectorGrowCapacity_002ff8b4(temp_v2,param_1);
-    temp_v4 = FUN_0030771a(param_1,temp_v3,*param_1);
+    temp_v4 = allocArrayWords(param_1,temp_v3,*param_1);
     FUN_0030759c(*param_1,param_2,temp_v4,param_1);
     puVar8 = (unsigned int *)((((int)param_2 - *param_1) & 0xfffffffcU) + temp_v4);
     if (puVar8 != (unsigned int *)0x0) {
@@ -65,7 +65,7 @@ void FUN_00135586(int *param_1,unsigned int *param_2,unsigned int *param_3)
     for (temp_v6 = temp_v7; temp_v6 != param_1[1]; temp_v6 = temp_v6 + 4) {
     }
     vectorCount4_003075ca(param_1);
-    FUN_002e6e14(temp_v7);
+    asdOperatorDeleteArray(temp_v7);
     *param_1 = temp_v4;
     param_1[2] = temp_v3 * 4 + temp_v4;
     param_1[1] = temp_v5 * 4 + temp_v4 + 4;

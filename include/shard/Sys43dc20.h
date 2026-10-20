@@ -16,6 +16,6 @@ typedef struct Sys43dc20 {
     /* 0x08 */ Obj43dc20 *obj;
 } Sys43dc20;
 
-extern Sys43dc20 DAT_0043dc20;
+extern Sys43dc20 g_commonBg;
 
 #endif

@@ -12,7 +12,7 @@ typedef struct Entry {
     /* 0x04 */ s32 index;      /* negative = none */
 } Entry;
 
-int FUN_001ab854(void);
+int gameGetSlotRecord(void);
 int FUN_00321a98(Entry *a, Entry *b);
 
 static __inline u16 entryGroup(Entry *entry)
@@ -20,7 +20,7 @@ static __inline u16 entryGroup(Entry *entry)
     if (entry->index < 0) {
         return 0;
     }
-    return ((Table *)FUN_001ab854())->group;
+    return ((Table *)gameGetSlotRecord())->group;
 }
 
 /* Runs FUN_00321a98 on two entries when they belong to the same group. */

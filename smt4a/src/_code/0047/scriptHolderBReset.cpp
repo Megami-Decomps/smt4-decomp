@@ -14,7 +14,7 @@ typedef struct ScriptHolderB {
 
 extern void asdMemFree(u32 ptr);
 extern void scrScriptProcessDestroy(u32 process);
-extern void FUN_00342010(void);
+extern void campButtonHelpAcquire(void);
 
 /* Resets the holder to state 0xC with the given flag, freeing its buffers and script process. */
 void scriptHolderBReset(ScriptHolderB *holder, u8 flag)
@@ -35,7 +35,7 @@ void scriptHolderBReset(ScriptHolderB *holder, u8 flag)
         holder->proc14 = 0;
     }
     if (holder->flag != 0) {
-        FUN_00342010();
+        campButtonHelpAcquire();
     }
 }
 

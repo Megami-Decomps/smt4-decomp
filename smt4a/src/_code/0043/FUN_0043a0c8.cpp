@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00195fc8(...);
+int sysFatalBreak(...);
 int FUN_0043a040(...);
 int software_interrupt(...);
 
@@ -15,7 +15,7 @@ extern int DAT_006462b8; /* 0x6462b8 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 extern int FUN_0016f864(void);
-/* Supplied declaration required: FUN_00195fc8. */
+/* Supplied declaration required: sysFatalBreak. */
 /* Supplied declaration required: FUN_0043a040. */
 extern unsigned int *FUN_0043a1d8(unsigned int *);
 extern void nn_os_CriticalSection_Enter(unsigned int);
@@ -38,7 +38,7 @@ unsigned int * FUN_0043a0c8(void)
   }
   temp_v0 = FUN_0016f864();
   if (temp_v0 < 0) {
-    FUN_00195fc8();
+    sysFatalBreak();
   }
   puVar2 = (unsigned int *)&DAT_006462b4;
   FUN_0043a040(&DAT_006462b4,"ssl:C");

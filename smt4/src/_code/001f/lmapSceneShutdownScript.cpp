@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_00288728(LmapScript *script);
+void mdlPartsRelease(LmapScript *script);
 void asdMdlManagerDestroy(u32 handle);
 
 extern LmapScene *g_lmapScene;
@@ -10,7 +10,7 @@ extern LmapScene *g_lmapScene;
 /* Shuts the scene's script down and releases its handles. */
 void lmapSceneShutdownScript(void)
 {
-    FUN_00288728(g_lmapScene->script);
+    mdlPartsRelease(g_lmapScene->script);
     if (g_lmapScene->script != NULL) {
         g_lmapScene->script->vtable[1](g_lmapScene->script);
     }

@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_002a60cc(unsigned int, int, unsigned int);
-int FUN_002ae898(int);
-int FUN_002c0894(void);
+int asdTMTexTableReleaseNode(int);
+int asdTextureRelease(void);
 int asdMemFree(...);
 int FUN_00389f54(void);
 int FUN_0038a134(unsigned int, undefined4);
@@ -37,8 +37,8 @@ typedef int romwright_code(...);
 extern unsigned int g_aocSystem; /* 0x433158 */
 
 /* Supplied declaration required: FUN_002a60cc. */
-/* Supplied declaration required: FUN_002ae898. */
-/* Supplied declaration required: FUN_002c0894. */
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
+/* Supplied declaration required: asdTextureRelease. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_00389f54. */
 /* Supplied declaration required: FUN_0038a134. */
@@ -56,11 +56,11 @@ void FUN_0023ded4(fn_0023ded4_arg0 *param_1)
       temp_v1 = param_1->field_0x14 + temp_v0 * 0x20;
       if (*(int *)(temp_v1 + 0x18) != 0) {
         if (*(int *)(temp_v1 + 0x1c) >= 0) {
-          FUN_002ae898(param_1->field_0x8);
+          asdTMTexTableReleaseNode(param_1->field_0x8);
           FUN_002a60cc(g_aocSystem,param_1->field_0x8,*(unsigned int *)(temp_v1 + 0x1c));
         }
         else {
-          FUN_002c0894();
+          asdTextureRelease();
         }
         *(unsigned int *)(temp_v1 + 0x18) = 0;
         *(unsigned int *)(temp_v1 + 0x1c) = 0xffffffff;

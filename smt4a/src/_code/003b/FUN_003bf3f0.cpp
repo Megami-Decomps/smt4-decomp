@@ -18,7 +18,7 @@ typedef struct {
 extern unsigned char g_gameState; /* 0x5f15fc */
 
 /* Supplied declaration required: sysPlaySe. */
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: sub68OwnerCall6. */
 /* Supplied declaration required: sub68OwnerCall8. */
 /* Supplied declaration required: FUN_003b61ec. */
@@ -39,15 +39,15 @@ void FUN_003bf3f0(int param_1)
     return;
   }
   (*(unsigned char *)((unsigned char *)&g_gameState + 0x295)) = 0;
-  temp_v0 = FUN_0018719c(0x49a);
+  temp_v0 = gameFlagIsSet(0x49a);
   if (temp_v0 != 0) {
     FUN_003c5848();
   }
   else {
     FUN_003b61ec();
   }
-  temp_v0 = FUN_0018719c(0xc);
-  if ((temp_v0 != 0) && (temp_v0 = FUN_0018719c(0x10), temp_v0 == 0)) {
+  temp_v0 = gameFlagIsSet(0xc);
+  if ((temp_v0 != 0) && (temp_v0 = gameFlagIsSet(0x10), temp_v0 == 0)) {
     FUN_003b61ec();
   }
   sub68OwnerCall6();

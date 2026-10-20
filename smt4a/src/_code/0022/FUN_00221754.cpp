@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_00184310(void);
 int FUN_00192608(void);
-int FUN_0019cac4(void);
-int FUN_001aba54(void);
+int dataTable00FindById(void);
+int dataTable04FindById(void);
 
 typedef struct fn_00221754_arg0 fn_00221754_arg0;
 struct fn_00221754_arg0 {
@@ -22,8 +22,8 @@ struct fn_00221754_arg0 {
 
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: FUN_00192608. */
-/* Supplied declaration required: FUN_0019cac4. */
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: dataTable00FindById. */
+/* Supplied declaration required: dataTable04FindById. */
 
 
 unsigned int FUN_00221754(fn_00221754_arg0 *param_1,unsigned int param_2,int param_3)
@@ -62,7 +62,7 @@ unsigned int FUN_00221754(fn_00221754_arg0 *param_1,unsigned int param_2,int par
       temp_v3 = 0;
       do {
         temp_v1 = (unsigned int)*(unsigned short *)((int)param_1->field_0x3f8 + temp_v3 * 2 + 0x34);
-        FUN_001aba54();
+        dataTable04FindById();
         if (temp_v1 != 0) {
           if (param_3 != 0) {
             if (*(char *)(temp_v1 + 0x23) == '\x02') {
@@ -104,7 +104,7 @@ unsigned int FUN_00221754(fn_00221754_arg0 *param_1,unsigned int param_2,int par
       temp_v3 = 0;
       do {
         temp_v1 = (unsigned int)*(unsigned short *)(param_1->field_0x3fc + temp_v3 * 2 + 0x34);
-        FUN_001aba54();
+        dataTable04FindById();
         if (temp_v1 != 0) {
           if (param_3 != 0) {
             if (*(char *)(temp_v1 + 0x23) == '\x02') {
@@ -136,11 +136,11 @@ unsigned int FUN_00221754(fn_00221754_arg0 *param_1,unsigned int param_2,int par
     }
     if (param_1->field_0x404 != 0) {
       temp_v1 = (unsigned int)param_1->field_0x166;
-      FUN_0019cac4();
+      dataTable00FindById();
       temp_v3 = 0;
       do {
         temp_v2 = (unsigned int)*(unsigned short *)(temp_v1 + temp_v3 * 2 + 0x50);
-        FUN_001aba54();
+        dataTable04FindById();
         if (temp_v2 != 0) {
           if (param_3 != 0) {
             if (*(char *)(temp_v2 + 0x23) == '\x02') {

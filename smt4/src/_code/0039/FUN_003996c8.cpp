@@ -42,7 +42,7 @@ extern float *lmapSceneGetObj(void);
 extern int FUN_00288f78(unsigned int);
 /* Supplied declaration required: FUN_002bedb0. */
 /* Supplied declaration required: FUN_002bee04. */
-extern int FUN_002c2950(void);
+extern int gameGetMapBlock(void);
 extern unsigned int FUN_002c5d80(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0039af94. */
 /* Supplied declaration required: FUN_0039cddc. */
@@ -77,7 +77,7 @@ void FUN_003996c8(int param_1)
   float temp_v11;
   float temp_v12;
   
-  temp_v2 = FUN_002c2950();
+  temp_v2 = gameGetMapBlock();
   temp_v3 = param_1 + 0x162;
   temp_v1 = 0;
   pfVar5 = (float *)lmapSceneGetObj();

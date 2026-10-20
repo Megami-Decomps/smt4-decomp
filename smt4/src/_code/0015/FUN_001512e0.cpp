@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002c4040(unsigned int *);
+int nn_os_LightEvent_Signal(unsigned int *);
 
 extern unsigned char DAT_00421ddc; /* 0x421ddc */
 
-/* Supplied declaration required: FUN_002c4040. */
+/* Supplied declaration required: nn_os_LightEvent_Signal. */
 extern void nn_os_LightEvent_Initialize(unsigned int, unsigned char);
 
 
@@ -38,7 +38,7 @@ unsigned int * FUN_001512e0(unsigned int *param_1)
   *(unsigned char *)((int)param_1 + 0x35) = 0;
   param_1[0xe] = 0;
   param_1[0xf] = 0;
-  FUN_002c4040(param_1 + 1);
+  nn_os_LightEvent_Signal(param_1 + 1);
   return param_1;
 }
 

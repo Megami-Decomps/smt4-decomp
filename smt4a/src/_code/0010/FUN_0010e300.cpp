@@ -44,7 +44,7 @@ extern unsigned char DAT_005949d8; /* 0x5949d8 */
 /* Supplied declaration required: FUN_002e6e5c. */
 /* Supplied declaration required: FUN_002e93c2. */
 /* Supplied declaration required: FUN_002ea704. */
-extern unsigned int FUN_002ea714(void);
+extern unsigned int onlineGetActiveLock(void);
 extern unsigned int FUN_002eb5f4(void);
 /* Supplied declaration required: FUN_002f7270. */
 extern int FUN_002f86cc(fn_0010e300_arg0 *, unsigned int);
@@ -52,7 +52,7 @@ extern int FUN_002f86cc(fn_0010e300_arg0 *, unsigned int);
 extern unsigned int FUN_002f8744(unsigned char *);
 /* Supplied declaration required: FUN_002f874c. */
 /* Supplied declaration required: FUN_002f8760. */
-extern int FUN_002f8782(void);
+extern int rangeIsEmpty3(void);
 /* Supplied declaration required: FUN_002f8aa8. */
 
 
@@ -79,12 +79,12 @@ FUN_0010e300(fn_0010e300_arg0 *param_1,unsigned int param_2,unsigned short *para
   uStack_20 = param_2;
   puStack_1c = param_3;
   temp_v8 = param_4;
-  temp_v1 = FUN_002ea714();
+  temp_v1 = onlineGetActiveLock();
   FUN_002e6e34(temp_v7,temp_v1);
   temp_v0 = 0;
   temp_v4[0] = 0;
   if (param_2 == 0) {
-    temp_v2 = FUN_002f8782();
+    temp_v2 = rangeIsEmpty3();
     if ((temp_v2 == 0) &&
        (*(int *)(*(int *)(*(unsigned short **)&param_1[1].field_0xa0 + 2) + 0x30) == param_5)) {
       param_2 = (unsigned int)**(unsigned short **)&param_1[1].field_0xa0;

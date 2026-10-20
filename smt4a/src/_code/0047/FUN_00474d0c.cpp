@@ -9,11 +9,11 @@ int FUN_00102bbc(...);
 int jyoucyuGetTableEntry(...);
 int FUN_0019a46c(...);
 int FUN_001a1564(int, int, int);
-int FUN_002e342c(...);
-int FUN_002e3494(...);
+int libc_strcpy(...);
+int asdOperatorDeleteB(...);
 int deletingDtor_002e56ec(int, unsigned char *);
 int sysMemClear(...);
-int FUN_002e783c(...);
+int wstrlenU16(...);
 int FUN_002f5020(unsigned int *, unsigned char *, int, int);
 int asdOperatorNewE(...);
 int FUN_0037a728(...);
@@ -79,14 +79,14 @@ extern int g_aocMain; /* 0x570260 */
 /* Supplied declaration required: jyoucyuGetTableEntry. */
 /* Supplied declaration required: FUN_0019a46c. */
 /* Supplied declaration required: FUN_001a1564. */
-extern unsigned char FUN_001a7470(int);
-extern unsigned char FUN_001a747c(int);
+extern unsigned char objGetFlagBit0(int);
+extern unsigned char objGetFlagBit1(int);
 extern int FUN_001d25ec(int);
-/* Supplied declaration required: FUN_002e342c. */
-/* Supplied declaration required: FUN_002e3494. */
+/* Supplied declaration required: libc_strcpy. */
+/* Supplied declaration required: asdOperatorDeleteB. */
 /* Supplied declaration required: deletingDtor_002e56ec. */
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_002e783c. */
+/* Supplied declaration required: wstrlenU16. */
 /* Supplied declaration required: FUN_002f5020. */
 /* Supplied declaration required: asdOperatorNewE. */
 /* Supplied declaration required: FUN_0037a728. */
@@ -383,7 +383,7 @@ int FUN_00474d0c(int param_1)
         temp_v21 = 0xf80484ae;
         temp_v20 = 0x251b003c;
         temp_v23 = 0x817c84be;
-        temp_v9 = FUN_002e783c(temp_v49);
+        temp_v9 = wstrlenU16(temp_v49);
         if (0 < temp_v9) {
           puVar17 = temp_v49;
           do {
@@ -403,8 +403,8 @@ int FUN_00474d0c(int param_1)
         }
         FUN_00102bbc(temp_v4 + 0x180,temp_v49,0x800);
         FUN_0037a728(temp_v4 + 0x180,temp_v49,0x7fe);
-        FUN_002e342c(temp_v4 + 0x180,temp_v49);
-        temp_v9 = FUN_002e783c(temp_v4 + 0x180);
+        libc_strcpy(temp_v4 + 0x180,temp_v49);
+        temp_v9 = wstrlenU16(temp_v4 + 0x180);
         temp_v5 = 0;
         if (temp_v5 < temp_v9) {
           do {
@@ -508,7 +508,7 @@ int FUN_00474d0c(int param_1)
           *(unsigned char *)(temp_v4 + 0x9b0) = 0;
           temp_v9 = FUN_004fff5c(temp_v17,temp_v42);
           if (temp_v9 != 0) {
-            FUN_002e342c(temp_v4 + 0x980);
+            libc_strcpy(temp_v4 + 0x980);
           }
         }
         temp_v9 = 0;
@@ -560,7 +560,7 @@ int FUN_00474d0c(int param_1)
         *(unsigned int *)(temp_v51 + 0x10) = temp_v21;
         temp_v5 = FUN_001d25ec(temp_v51 + 0xc);
         if (temp_v5 < 0) {
-          FUN_002e3494(temp_v9);
+          asdOperatorDeleteB(temp_v9);
           temp_v8 = FUN_001d25ec(temp_v51 + 0xc);
           return temp_v8;
         }
@@ -570,9 +570,9 @@ int FUN_00474d0c(int param_1)
         if (temp_v5 < temp_v37) {
           do {
             temp_v10 = temp_v9 + temp_v5 * 0x18;
-            temp_v2 = FUN_001a747c(temp_v10);
+            temp_v2 = objGetFlagBit1(temp_v10);
             temp_v2 = temp_v11 & temp_v2;
-            temp_v3 = FUN_001a7470(temp_v10);
+            temp_v3 = objGetFlagBit0(temp_v10);
             temp_v3 = temp_v12 & temp_v3;
             temp_v5 = temp_v5 + 1;
             temp_v11 = temp_v2;
@@ -581,7 +581,7 @@ int FUN_00474d0c(int param_1)
         }
         *(unsigned char *)(temp_v4 + 0x9ac) = temp_v2;
         *(unsigned char *)(temp_v4 + 0x9ad) = temp_v3;
-        FUN_002e3494(temp_v9);
+        asdOperatorDeleteB(temp_v9);
         if (((*(char *)(temp_v45 + 0xac) == '\0') &&
             (temp_v9 = FUN_004fff5c(temp_v17,temp_v38), temp_v9 != 0)) &&
            (FUN_001029f4(temp_v9,0,10), temp_v9 == 1)) {

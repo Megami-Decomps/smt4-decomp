@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0022abe0(void);
-int FUN_00282924(unsigned int, unsigned int);
+int btlMainFindEntryByListedId(unsigned int, unsigned int);
 int FUN_00283e48(void);
 
 /* stack frame of param_2: 5 slot(s), 20 byte(s) */
@@ -18,7 +18,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_0022abe0. */
-/* Supplied declaration required: FUN_00282924. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_00283e48. */
 extern unsigned int btlGetMainState(void);
 
@@ -35,7 +35,7 @@ unsigned int FUN_0022a918(unsigned int param_1,unsigned int param_2)
   
   temp_v3 = 0;
   temp_v0 = btlGetMainState();
-  FUN_00282924(temp_v0,param_1);
+  btlMainFindEntryByListedId(temp_v0,param_1);
   temp_v4[0] = 0;
   temp_v4[1] = 0;
   temp_v4[2] = 0;

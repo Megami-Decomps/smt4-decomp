@@ -8,12 +8,12 @@ int FUN_00163aa4(int);
 int FUN_001641b4(int);
 int FUN_00224880(unsigned int);
 int FUN_00228b04(int, int);
-int FUN_0031d18c(int);
-int FUN_0031d1a0(int);
-int FUN_0031d1b4(int, int);
+int flaggedEntryGetValueB(int);
+int flaggedEntryGetValueA(int);
+int flaggedEntrySetValueB(int, int);
 int FUN_00484be0(int);
 int FUN_00485060(...);
-int FUN_004853fc(int, int);
+int stateSetterEnterState(int, int);
 int sendEvent100020F(void);
 int sendEvent100020E(void);
 
@@ -26,13 +26,13 @@ typedef struct {
 /* Supplied declaration required: FUN_001641b4. */
 /* Supplied declaration required: FUN_00224880. */
 /* Supplied declaration required: FUN_00228b04. */
-/* Supplied declaration required: FUN_0031d18c. */
-/* Supplied declaration required: FUN_0031d1a0. */
-/* Supplied declaration required: FUN_0031d1b4. */
+/* Supplied declaration required: flaggedEntryGetValueB. */
+/* Supplied declaration required: flaggedEntryGetValueA. */
+/* Supplied declaration required: flaggedEntrySetValueB. */
 extern int FUN_0048408c(int, int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00484be0. */
 /* Supplied declaration required: FUN_00485060. */
-/* Supplied declaration required: FUN_004853fc. */
+/* Supplied declaration required: stateSetterEnterState. */
 extern int FUN_00485b14(int);
 /* Supplied declaration required: sendEvent100020F. */
 /* Supplied declaration required: sendEvent100020E. */
@@ -71,7 +71,7 @@ void FUN_00483d34(int param_1)
     }
     temp_v6 = FUN_0048408c(param_1,(int)temp_v4,*(unsigned int *)(param_1 + 0x10),
                          *(unsigned int *)(param_1 + 0x14));
-    if ((*(char *)(param_1 + 0x260) == '\0') || (temp_v7 = FUN_0031d18c(param_1 + 0x1fc), temp_v7 != 0))
+    if ((*(char *)(param_1 + 0x260) == '\0') || (temp_v7 = flaggedEntryGetValueB(param_1 + 0x1fc), temp_v7 != 0))
     {
       temp_v3 = 0;
     }
@@ -115,7 +115,7 @@ void FUN_00483d34(int param_1)
            (unsigned short)((unsigned short)*(unsigned char *)(temp_v6 + 0xb0) * 0x100 + (unsigned short)temp_v2) == 0))) {
       temp_v5 = temp_v5 + 1;
       if (temp_v5 >= 8) {
-        FUN_004853fc(param_1,5);
+        stateSetterEnterState(param_1,5);
         return;
       }
     }
@@ -151,41 +151,41 @@ void FUN_00483d34(int param_1)
   }
   if (*(char *)(param_1 + 0x260) == '\0') {
     FUN_00228b04(param_1 + 0x198,1);
-    temp_v9 = FUN_0031d18c(param_1 + 0x198);
+    temp_v9 = flaggedEntryGetValueB(param_1 + 0x198);
     *(unsigned int *)(param_1 + 0x10) = temp_v9;
-    temp_v5 = FUN_0031d1a0(param_1 + 0x198);
+    temp_v5 = flaggedEntryGetValueA(param_1 + 0x198);
     *(int *)(param_1 + 0x14) = temp_v5;
     if (temp_v5 != 6) {
       return;
     }
     *(unsigned char *)(param_1 + 0x260) = 1;
-    FUN_0031d1b4(param_1 + 0x1fc,*(int *)(param_1 + 0x10) / 5);
+    flaggedEntrySetValueB(param_1 + 0x1fc,*(int *)(param_1 + 0x10) / 5);
     return;
   }
   temp_v5 = param_1 + 0x1fc;
   FUN_00228b04(temp_v5,0);
   FUN_00228b04(param_1 + 0x198,0);
-  temp_v6 = FUN_0031d1a0(param_1 + 0x198);
+  temp_v6 = flaggedEntryGetValueA(param_1 + 0x198);
   if (temp_v6 != 6) {
     *(unsigned char *)(param_1 + 0x260) = 0;
-    temp_v5 = FUN_0031d18c(param_1 + 0x1fc);
+    temp_v5 = flaggedEntryGetValueB(param_1 + 0x1fc);
     temp_v5 = temp_v5 * 5;
     if (temp_v5 >= 0xf) {
       temp_v5 = 0xe;
     }
-    FUN_0031d1b4(param_1 + 0x198,temp_v5);
+    flaggedEntrySetValueB(param_1 + 0x198,temp_v5);
   }
   else if (temp_v5 == 0) {
-    temp_v9 = FUN_0031d18c(param_1 + 0x198);
+    temp_v9 = flaggedEntryGetValueB(param_1 + 0x198);
     *(unsigned int *)(param_1 + 0x10) = temp_v9;
-    temp_v9 = FUN_0031d1a0(param_1 + 0x198);
+    temp_v9 = flaggedEntryGetValueA(param_1 + 0x198);
     *(unsigned int *)(param_1 + 0x14) = temp_v9;
     return;
   }
   FUN_001641b4(0x100020d);
-  temp_v9 = FUN_0031d18c(param_1 + 0x198);
+  temp_v9 = flaggedEntryGetValueB(param_1 + 0x198);
   *(unsigned int *)(param_1 + 0x10) = temp_v9;
-  temp_v9 = FUN_0031d1a0(param_1 + 0x198);
+  temp_v9 = flaggedEntryGetValueA(param_1 + 0x198);
   *(unsigned int *)(param_1 + 0x14) = temp_v9;
   return;
 }

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00188b60(...);
+int nn_os_CriticalSection_Initialize(...);
 int FUN_002f5020(...);
 
 extern int FUN_0042d1cc(...); /* 0x42d1cc */
@@ -22,7 +22,7 @@ extern unsigned char DAT_006464a0; /* 0x6464a0 */
 extern unsigned int DAT_006464a4; /* 0x6464a4 */
 extern unsigned char DAT_006464a8; /* 0x6464a8 */
 
-/* Supplied declaration required: FUN_00188b60. */
+/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
 /* Supplied declaration required: FUN_002f5020. */
 
 
@@ -35,7 +35,7 @@ void FUN_0050e68c(unsigned int param_1,unsigned int param_2,unsigned int *param_
   param_3[-6] = 0;
   DAT_005c0b2c = 0;
   DAT_006463c4 = 0;
-  FUN_00188b60(&DAT_006463c4,FUN_0042d1cc,0x100000);
+  nn_os_CriticalSection_Initialize(&DAT_006463c4,FUN_0042d1cc,0x100000);
   FUN_002f5020(&DAT_006463d0,&LAB_0043a2e8,0xc,0x10);
   DAT_00646490 = 0;
   DAT_00646494 = 0;

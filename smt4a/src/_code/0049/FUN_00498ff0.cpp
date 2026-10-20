@@ -14,7 +14,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: sysPlaySe. */
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 
 
 void FUN_00498ff0(int param_1)
@@ -48,14 +48,14 @@ void FUN_00498ff0(int param_1)
     uStack_14 = 0x83;
     if (*(int *)(param_1 + 0x14) != 1) {
       temp_v1 = *(unsigned short *)((int)&temp_v2 + temp_v0 * 2);
-      if (((*(char *)(param_1 + 0x18) != '\0') || (temp_v0 = FUN_0018719c(0x410), temp_v0 == 0)) &&
+      if (((*(char *)(param_1 + 0x18) != '\0') || (temp_v0 = gameFlagIsSet(0x410), temp_v0 == 0)) &&
          (*(int *)(param_1 + 0xb40) == 0)) {
         temp_v1 = 0x7a;
       }
     }
     else {
       temp_v1 = *(unsigned short *)((int)&temp_v3 + temp_v0 * 2);
-      if ((*(char *)(param_1 + 0x18) != '\0') || (temp_v0 = FUN_0018719c(0x410), temp_v0 == 0)) {
+      if ((*(char *)(param_1 + 0x18) != '\0') || (temp_v0 = gameFlagIsSet(0x410), temp_v0 == 0)) {
         if (*(int *)(param_1 + 0xb40) == 0) {
           temp_v1 = 0x88;
         }

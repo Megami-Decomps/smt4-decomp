@@ -7,16 +7,16 @@ typedef struct Obj {
     /* 0x400 */ s32 unk400;
 } Obj;
 
-extern Obj *DAT_0043dd68;
+extern Obj *g_unite;
 
 u8 FUN_0028f670(void)
 {
     int value = 0;
 
-    if (DAT_0043dd68 != NULL) {
-        value = DAT_0043dd68->unk400;
+    if (g_unite != NULL) {
+        value = g_unite->unk400;
     }
-    return DAT_0043dd68 == NULL || value == 0x24;
+    return g_unite == NULL || value == 0x24;
 }
 
 } /* extern "C" */

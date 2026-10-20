@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } void_stack;
 
-extern int DAT_0057f268; /* 0x57f268 */
+extern int g_partyPanel; /* 0x57f268 */
 
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
@@ -33,11 +33,11 @@ void FUN_0020d934(void)
   unsigned int temp_v1;
   unsigned int temp_v2;
   
-  if (DAT_0057f268 == 0) {
+  if (g_partyPanel == 0) {
     return;
   }
   temp_v0 = 0;
-  switch(*(unsigned char *)(DAT_0057f268 + 0x9b4)) {
+  switch(*(unsigned char *)(g_partyPanel + 0x9b4)) {
   default:
     if (temp_v0 == 0) {
       return;
@@ -60,15 +60,15 @@ void FUN_0020d934(void)
   case 5:
   case 6:
   case 7:
-    FUN_00359b6c(*(unsigned short *)(DAT_0057f268 + 0x36));
+    FUN_00359b6c(*(unsigned short *)(g_partyPanel + 0x36));
     return;
   case 8:
   case 9:
-    screenShowMessage(*(unsigned short *)(DAT_0057f268 + 0x36));
+    screenShowMessage(*(unsigned short *)(g_partyPanel + 0x36));
     return;
   case 10:
   case 0x12:
-    if (*(int *)(DAT_0057f268 + 0xe84) == 0) {
+    if (*(int *)(g_partyPanel + 0xe84) == 0) {
       temp_v2 = dataTableGet(0x39,0);
       temp_v0 = dataTableGetEntries();
       temp_v1 = dataTableGetCount(temp_v2);
@@ -82,10 +82,10 @@ void FUN_0020d934(void)
       FUN_0019de98(temp_v0,0xf4f4f4ff);
       return;
     }
-    if (*(int *)(DAT_0057f268 + 0xe84) != 1) {
+    if (*(int *)(g_partyPanel + 0xe84) != 1) {
       return;
     }
-    temp_v1 = *(unsigned int *)(DAT_0057f268 + 0x1074);
+    temp_v1 = *(unsigned int *)(g_partyPanel + 0x1074);
     if ((temp_v1 & 8) != 0) {
       temp_v2 = dataTableGet(0x39,0);
       temp_v0 = dataTableGetEntries();

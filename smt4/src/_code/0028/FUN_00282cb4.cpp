@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern void *DAT_0043daa8;
+extern void *g_campCec;
 
 u8 FUN_00282cb4(void)
 {
-    return DAT_0043daa8 != NULL;
+    return g_campCec != NULL;
 }
 
 } /* extern "C" */

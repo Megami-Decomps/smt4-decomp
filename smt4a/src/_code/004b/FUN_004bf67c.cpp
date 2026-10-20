@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 
-extern unsigned int *FUN_001ab888(void);
-/* Supplied declaration required: FUN_001aba54. */
+extern unsigned int *gameGetSlotTable(void);
+/* Supplied declaration required: dataTable04FindById. */
 extern unsigned int ll_sdiv(unsigned int, int, unsigned int, unsigned int);
 
 
@@ -21,9 +21,9 @@ unsigned int FUN_004bf67c(int param_1)
   unsigned int temp_v2;
   
   temp_v2 = 0;
-  FUN_001aba54();
+  dataTable04FindById();
   if ((param_1 != 0) && ((*(unsigned int *)(param_1 + 0x3c) & 0x7f000) != 0)) {
-    puVar1 = (unsigned int *)FUN_001ab888();
+    puVar1 = (unsigned int *)gameGetSlotTable();
     temp_v0 = *puVar1;
     temp_v1 = 100 - ((*(unsigned int *)(param_1 + 0x3c) & 0x7ffff) >> 0xc);
     temp_v2 = ll_sdiv((int)((unsigned long long)temp_v0 * (unsigned long long)temp_v1),

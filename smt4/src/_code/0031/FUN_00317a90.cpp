@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_002522f8(unsigned char [132], int, unsigned char *, unsigned char *, char *);
-int FUN_00257c2c(int, unsigned int, int, int);
-int FUN_002bd540(int);
+int asdTexTgaLoadNw4c(int, unsigned int, int, int);
+int asdTextureSetImage(int);
 int asdTextureCreate(void);
 int asdMemFree(unsigned int);
 
@@ -21,8 +21,8 @@ extern unsigned char LAB_00317b88; /* 0x317b88 */
 extern char s_flar02_02_004332a4[10]; /* 0x4332a4 */
 
 /* Supplied declaration required: FUN_002522f8. */
-/* Supplied declaration required: FUN_00257c2c. */
-/* Supplied declaration required: FUN_002bd540. */
+/* Supplied declaration required: asdTexTgaLoadNw4c. */
+/* Supplied declaration required: asdTextureSetImage. */
 /* Supplied declaration required: asdTextureCreate. */
 extern unsigned int FUN_002c3124(unsigned char *, unsigned int *, unsigned int);
 /* Supplied declaration required: asdMemFree. */
@@ -51,12 +51,12 @@ void FUN_00317a90(void)
       FUN_002522f8(temp_v5,0x80,&LAB_00317b88,&LAB_00317b74,s_flar02_02_004332a4 + temp_v0);
       temp_v2 = FUN_002c3124(temp_v5,(unsigned int *)&temp_v4,0);
       *(unsigned int *)(temp_v0 + 0x4332e4) = temp_v2;
-      FUN_00257c2c(*piVar4,temp_v2,temp_v4,0x20000);
+      asdTexTgaLoadNw4c(*piVar4,temp_v2,temp_v4,0x20000);
       *(unsigned int *)(*piVar4 + 0xc) = 0x2000000;
       *(unsigned int *)(*piVar4 + 0x3c) = 1;
       *(unsigned int *)(*piVar4 + 0x40) = 1;
       *(unsigned int *)(*piVar4 + 0x38) = 0;
-      FUN_002bd540(*piVar4);
+      asdTextureSetImage(*piVar4);
       *(unsigned char *)(temp_v0 + 0x4332e8) = 1;
       asdMemFree(*(unsigned int *)(temp_v0 + 0x4332e4));
       *(unsigned int *)(temp_v0 + 0x4332e4) = 0;

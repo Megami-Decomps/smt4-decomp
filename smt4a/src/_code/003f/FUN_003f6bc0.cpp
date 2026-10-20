@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0016780c(unsigned int, unsigned int, int);
+int fileSectionGetData(unsigned int, unsigned int, int);
 int FUN_001688c4(unsigned int);
 int FUN_00203b40(int, int, int, int, int, int);
 int FUN_002a1f60(unsigned int, int, unsigned int, int, int, unsigned int, unsigned int);
@@ -16,11 +16,11 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_0016780c. */
+/* Supplied declaration required: fileSectionGetData. */
 /* Supplied declaration required: FUN_001688c4. */
 extern int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
-extern unsigned int FUN_001a6f60(unsigned int, unsigned int);
+extern unsigned int dataTableFileGetTable(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00203b40. */
 /* Supplied declaration required: FUN_002a1f60. */
 /* Supplied declaration required: FUN_002e08b0. */
@@ -39,7 +39,7 @@ void FUN_003f6bc0(int param_1)
   *(unsigned char *)(param_1 + 0x120) = 0;
   *(unsigned int *)(param_1 + 0x128) = 0;
   temp_v3 = *(int *)(param_1 + 4);
-  temp_v0 = FUN_001a6f60(*(unsigned int *)(param_1 + 0x10),0);
+  temp_v0 = dataTableFileGetTable(*(unsigned int *)(param_1 + 0x10),0);
   temp_v1 = dataTableGetEntries();
   temp_v2 = dataTableGetCount(temp_v0);
   if ((temp_v3 < temp_v2) && (puVar4 = (unsigned short *)(temp_v1 + temp_v3 * 4), puVar4 != (unsigned short *)0x0)) {
@@ -51,7 +51,7 @@ void FUN_003f6bc0(int param_1)
     *(unsigned char *)(param_1 + 0xc) = 0;
   }
   temp_v0 = *(unsigned int *)(param_1 + 8);
-  FUN_0016780c(*(unsigned int *)(param_1 + 0x28),temp_v0,0);
+  fileSectionGetData(*(unsigned int *)(param_1 + 0x28),temp_v0,0);
   FUN_002a1f60(*(unsigned int *)(param_1 + 0x5d8),3,0xffffffff,0,3,*(unsigned int *)(param_1 + 0x28),
                temp_v0);
   temp_v0 = FUN_001688c4(*(unsigned int *)(param_1 + 0x5d8));

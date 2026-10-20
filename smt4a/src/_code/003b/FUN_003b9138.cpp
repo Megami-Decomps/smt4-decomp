@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00212500(void);
+int refCountIncrement(void);
 int VectorSignedToFloat(unsigned int, int);
 
 typedef struct fn_003b9138_arg0 fn_003b9138_arg0;
@@ -22,7 +22,7 @@ typedef struct {
 } param_2_stack;
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00212500. */
+/* Supplied declaration required: refCountIncrement. */
 extern int FUN_0037a834(unsigned short);
 
 
@@ -41,7 +41,7 @@ void FUN_003b9138(fn_003b9138_arg0 *param_1,unsigned short param_2)
   param_1->field_0x54 = temp_v1 * 0.5f * 0.0625f;
   param_1->field_0x58 = temp_v2 * 0.5f * 0.0625f;
   *(int *)(*(int *)((int)param_1->field_0x50 + 0xc) + 0xb4) = temp_v0;
-  FUN_00212500();
+  refCountIncrement();
   return;
 }
 

@@ -25,9 +25,9 @@ typedef struct Entry {
 extern Globals DAT_005949d8;
 
 int FUN_002eb6ae(Entry *entry, u32 flags);
-u32 FUN_002f34ac(void *a, void *b);
+u32 onlineSockAddrEquals(void *a, void *b);
 
-/* Compares two entries: they must share kind and id; in strict mode both must pass FUN_002eb6ae(flags 0x200), else FUN_002f34ac decides on their data. */
+/* Compares two entries: they must share kind and id; in strict mode both must pass FUN_002eb6ae(flags 0x200), else onlineSockAddrEquals decides on their data. */
 u32 FUN_002f2c38(Entry *a, Entry *b)
 {
     if (a->kind != b->kind || a->id != b->id) {
@@ -38,7 +38,7 @@ u32 FUN_002f2c38(Entry *a, Entry *b)
             return 1;
         }
     }
-    return FUN_002f34ac(a->data, b->data);
+    return onlineSockAddrEquals(a->data, b->data);
 }
 
 } /* extern "C" */

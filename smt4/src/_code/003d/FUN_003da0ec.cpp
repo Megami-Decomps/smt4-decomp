@@ -70,7 +70,7 @@ extern unsigned int DAT_004efd98; /* 0x4efd98 */
 /* Supplied declaration required: FUN_00226c20. */
 /* Supplied declaration required: FUN_00226de8. */
 /* Supplied declaration required: FUN_00226fc0. */
-extern int FUN_0022725c(void);
+extern int rangeIsValid(void);
 /* Supplied declaration required: FUN_0023aa28. */
 /* Supplied declaration required: FUN_0023aaf0. */
 extern int FUN_00246708(void);
@@ -85,7 +85,7 @@ extern unsigned int FUN_0024a6b0(int);
 extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: asdOperatorNew. */
 extern int *asdMemoryGetDefaultAllocator(void);
-extern unsigned int FUN_002c30c4(int *);
+extern unsigned int libc_strlen(int *);
 extern int asdMdlManagerCreateFromSourceB(int, unsigned int, unsigned short);
 /* Supplied declaration required: FUN_0034c7a8. */
 /* Supplied declaration required: FUN_0034c86c. */
@@ -158,7 +158,7 @@ void FUN_003da0ec(int param_1)
   temp_v16 = 0;
   uStack_20 = in_d8;
   if (*(int *)(param_1 + 0x3058) != 0) {
-    temp_v6 = FUN_0022725c();
+    temp_v6 = rangeIsValid();
     if (temp_v6 != 0) {
       *(unsigned int *)(param_1 + 0x3064) = temp_v16;
       *(unsigned int *)(param_1 + 0x3060) = temp_v16;
@@ -177,7 +177,7 @@ void FUN_003da0ec(int param_1)
     }
   }
   if (*(int *)(param_1 + 0x305c) != 0) {
-    temp_v6 = FUN_0022725c();
+    temp_v6 = rangeIsValid();
     if (temp_v6 != 0) {
       *(unsigned int *)(param_1 + 0x306c) = temp_v16;
       *(unsigned int *)(param_1 + 0x3068) = temp_v16;
@@ -368,7 +368,7 @@ code_r0x0034ca74:
         piStack_64 = piVar4;
         piStack_4c = unaff_r4;
         if (!(piVar4 == (int *)0x0 || unaff_r4 == (int *)0x0)) {
-          temp_v16 = FUN_002c30c4(unaff_r4);
+          temp_v16 = libc_strlen(unaff_r4);
           piVar4 = (int *)nw_ut_ResDicPatricia_Get(&piStack_64,unaff_r4,temp_v16);
           if (piVar4 != (int *)0x0) {
             piVar4 = piVar4 + 3;
@@ -645,7 +645,7 @@ code_r0x0034ca74:
           aiStack_60[0] = aiStack_60[0] + (int)piVar4;
         }
         if (!(aiStack_60[0] == 0 || piStack_4c == (int *)0x0)) {
-          temp_v16 = FUN_002c30c4(piStack_4c);
+          temp_v16 = libc_strlen(piStack_4c);
           temp_v8 = nw_ut_ResDicPatricia_Get(aiStack_60,unaff_r4,temp_v16);
           if (temp_v8 != 0) {
             temp_v4 = *(int *)(temp_v8 + 0xc);

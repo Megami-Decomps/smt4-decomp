@@ -9,7 +9,7 @@ typedef struct {
     unsigned int sp4; /* 0x4: local_4 */
 } void_stack;
 
-extern unsigned char DAT_00439c88; /* 0x439c88 */
+extern unsigned char g_btlUi; /* 0x439c88 */
 
 
 void FUN_003ae7bc(void)
@@ -17,8 +17,8 @@ void FUN_003ae7bc(void)
 {
   int temp_v0;
   
-  temp_v0 = (*(int *)((unsigned char *)&DAT_00439c88 + 0x20));
-  *(unsigned short *)((*(int *)((unsigned char *)&DAT_00439c88 + 0x20)) + 0x5da6) = 0;
+  temp_v0 = (*(int *)((unsigned char *)&g_btlUi + 0x20));
+  *(unsigned short *)((*(int *)((unsigned char *)&g_btlUi + 0x20)) + 0x5da6) = 0;
   *(unsigned short *)(temp_v0 + 0x63aa) = 0;
   *(unsigned short *)(temp_v0 + 0x69ae) = 0;
   *(unsigned short *)(temp_v0 + 0x6fb2) = 0;

@@ -4,17 +4,17 @@
 
 extern "C" {
 
-int FUN_0014384c(int);
+int asdTMTexTableLoadSprites(int);
 int FUN_0014e188(int, int, int, int, int);
 int FUN_001505ac(int, unsigned char *, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
 int asdMemoryAllocTracked(int, int, int, int, int);
-int FUN_00184758(int, int, int);
-int FUN_00184c00(...);
+int uiSpriteSetKeyframe(int, int, int);
+int uiSpriteSetImageKeyframe(...);
 int FUN_001acf98(int, int);
 int FUN_00203b40(...);
 int FUN_0022feb0(...);
 int sysMemClear(void);
-int FUN_003f86f8(int);
+int loadSlotEnsureLoaded(int);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(int);
 int rt_memcpy_w(...);
 
@@ -33,18 +33,18 @@ extern unsigned char DAT_0052dde0; /* 0x52dde0 */
 extern unsigned char DAT_0052ddf8; /* 0x52ddf8 */
 extern int g_playLog; /* 0x57f278 */
 
-/* Supplied declaration required: FUN_0014384c. */
+/* Supplied declaration required: asdTMTexTableLoadSprites. */
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: FUN_001505ac. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: FUN_00184758. */
-/* Supplied declaration required: FUN_00184c00. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_001acf98. */
 /* Supplied declaration required: FUN_00203b40. */
 /* Supplied declaration required: FUN_0022feb0. */
-extern int FUN_00261458(void);
+extern int gameDataBlocksGetTable(void);
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_003f86f8. */
+/* Supplied declaration required: loadSlotEnsureLoaded. */
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -66,17 +66,17 @@ void FUN_00215254(void)
   sysMemClear();
   *(unsigned int *)(temp_v0 + 0x344) = 0;
   *(unsigned int *)(temp_v0 + 0x6ec) = 0;
-  FUN_0014384c(0x25);
+  asdTMTexTableLoadSprites(0x25);
   FUN_001acf98(0x25,0);
-  FUN_003f86f8(0x37);
+  loadSlotEnsureLoaded(0x37);
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(temp_v0);
   FUN_001505ac(temp_v0,&DAT_0052dd98,0x48,&DAT_0052dde0,0x18,0,0,0,0,&DAT_0052ddf8,0xe0);
   temp_v1 = 0;
   do {
     temp_v2 = temp_v0 + temp_v1 * 0x8c;
     FUN_0014e188(temp_v2 + 0x20,0x25,0,temp_v0,1);
-    FUN_00184758(temp_v2 + 0x20,2,0);
-    FUN_00184c00(temp_v2 + 0x20,0);
+    uiSpriteSetKeyframe(temp_v2 + 0x20,2,0);
+    uiSpriteSetImageKeyframe(temp_v2 + 0x20,0);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 5);
   FUN_0022feb0(temp_v0);
@@ -86,7 +86,7 @@ void FUN_00215254(void)
   FUN_00203b40(temp_v0 + 0x2dc,*(unsigned int *)(temp_v0 + (unsigned int)*(unsigned char *)(temp_v0 + 0x489) * 0x130 + 0x48c)
                ,5,1,0,1);
   *(unsigned char *)(temp_v0 + 0x488) = 0;
-  temp_v1 = FUN_00261458();
+  temp_v1 = gameDataBlocksGetTable();
   if (*(short *)(temp_v1 + 0x66) != 0) {
     *(unsigned char *)(temp_v0 + 0x488) = 1;
   }

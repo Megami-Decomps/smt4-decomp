@@ -21,7 +21,7 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 extern int dataTable26GroupGetRecord(int, unsigned char, unsigned int);
-extern int FUN_002c09d0(void);
+extern int gameFlagIsSet(void);
 extern int randNextInRange(unsigned int);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: asdMemoryAlloc. */
@@ -81,7 +81,7 @@ QcUtility_BuildTabList
       temp_v9 = temp_v4 + temp_v8 * 0x20;
       temp_v10 = temp_v9 + param_5;
       if ((*(char *)(temp_v10 + 0x1a) != '\0') &&
-         ((*(short *)(temp_v9 + 0x18) == 0 || (temp_v5 = FUN_002c09d0(), temp_v5 == 0)))) {
+         ((*(short *)(temp_v9 + 0x18) == 0 || (temp_v5 = gameFlagIsSet(), temp_v5 == 0)))) {
         puVar7 = (unsigned short *)(temp_v6 + temp_v7 * 8);
         temp_v0 = *(unsigned char *)(temp_v10 + 0x1a);
         *puVar7 = (short)temp_v8;

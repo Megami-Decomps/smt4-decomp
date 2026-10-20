@@ -7,9 +7,9 @@ u32 FUN_001822ec(s32 id)
 {
     s32 counter;
 
-    if (((DAT_0057f248.record->unk64E == id) &&
-         (DAT_0057f248.record->unk008 == 1 || DAT_0057f248.record->unk008 == 2)) &&
-        ((counter = DAT_0057f248.record->unk650, counter < 1) ||
+    if (((g_ifTouch.record->unk64E == id) &&
+         (g_ifTouch.record->unk008 == 1 || g_ifTouch.record->unk008 == 2)) &&
+        ((counter = g_ifTouch.record->unk650, counter < 1) ||
          ((counter >= 0xF && (((counter - 0xFU) & 3) == 0))))) {
         return 1;
     }

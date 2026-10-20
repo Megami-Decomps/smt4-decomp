@@ -22,9 +22,9 @@ extern unsigned char LAB_00121988; /* 0x121988 */
 extern unsigned char DAT_0055b09c; /* 0x55b09c */
 extern signed char DAT_00594967; /* 0x594967 */
 
-extern int FUN_002e9300(unsigned int *, unsigned char *);
+extern int onlineStringConstruct(unsigned int *, unsigned char *);
 extern unsigned int *FUN_002eca10(fn_0012193c_arg0 *, unsigned int, unsigned int *);
-extern int FUN_002ed912(int);
+extern int vectorInitEmpty2(int);
 
 
 void FUN_0012193c(fn_0012193c_arg0 *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4
@@ -41,9 +41,9 @@ void FUN_0012193c(fn_0012193c_arg0 *param_1,unsigned int param_2,unsigned int pa
   puVar1[0x1a] = 0;
   puVar1[0x1b] = 0;
   *puVar1 = (unsigned int)&DAT_0055b09c;
-  temp_v0 = FUN_002e9300(puVar1 + 0x1c,&LAB_00121988);
+  temp_v0 = onlineStringConstruct(puVar1 + 0x1c,&LAB_00121988);
   *(unsigned char *)(temp_v0 + 8) = 0;
-  temp_v0 = FUN_002ed912(temp_v0 + 0xc);
+  temp_v0 = vectorInitEmpty2(temp_v0 + 0xc);
   *(unsigned char *)(temp_v0 + 0xc) = 0;
   *(unsigned int *)(temp_v0 + 0x10) = 0;
   *(unsigned int *)(temp_v0 + 0x14) = 0;

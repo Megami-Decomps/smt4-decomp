@@ -13,10 +13,10 @@ typedef struct {
 } param_1_stack;
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_001801a4(void);
+extern int gameGetPlayerData(void);
 extern int FUN_001834a4(unsigned int, unsigned int);
-extern int FUN_001ab854(int);
-extern int FUN_001ab888(void);
+extern int gameGetSlotRecord(int);
+extern int gameGetSlotTable(void);
 extern float FUN_001b4874(unsigned int, unsigned int);
 extern int FUN_003e4940(void);
 extern int FUN_003e4cb4(unsigned int);
@@ -43,9 +43,9 @@ void FUN_00240674(int param_1)
   unsigned int in_fpscr;
   float temp_v11;
   
-  temp_v1 = FUN_001ab888();
+  temp_v1 = gameGetSlotTable();
   temp_v2 = FUN_001834a4(0x1d,0x14);
-  temp_v3 = FUN_001801a4();
+  temp_v3 = gameGetPlayerData();
   temp_v4 = FUN_004ccbf0((unsigned int)*(unsigned short *)(temp_v3 + 0x62) + (int)*(short *)(param_1 + 0x788a));
   if (*(char *)(param_1 + 0x788e) != '\0') {
     temp_v0 = **(unsigned short **)(temp_v2 + 0xc);
@@ -63,7 +63,7 @@ void FUN_00240674(int param_1)
   temp_v3 = 0;
   do {
     temp_v10 = (int)*(char *)(temp_v1 + temp_v3 + 0x1ca0);
-    if ((-1 < temp_v10) && (temp_v7 = FUN_001ab854(temp_v10), temp_v7 != 0)) {
+    if ((-1 < temp_v10) && (temp_v7 = gameGetSlotRecord(temp_v10), temp_v7 != 0)) {
       temp_v10 = param_1 + temp_v10 * 0x28;
       temp_v4 = FUN_004ccdb8(*(unsigned short *)(temp_v7 + 0x62),
                            (unsigned int)*(unsigned short *)(temp_v7 + 100) + (int)*(short *)(temp_v10 + 0x78b2),
@@ -94,7 +94,7 @@ void FUN_00240674(int param_1)
         (((*(char *)(temp_v1 + 0x1ca2) < '\0' ||
           (*(char *)(temp_v1 + 0x1ca2) != *(char *)(temp_v1 + temp_v3 + 0x1c88))) &&
          (temp_v10 = (int)*(char *)(temp_v1 + temp_v3 + 0x1c88), -1 < temp_v10)))) &&
-       (temp_v7 = FUN_001ab854(temp_v10), temp_v7 != 0)) {
+       (temp_v7 = gameGetSlotRecord(temp_v10), temp_v7 != 0)) {
       temp_v10 = param_1 + temp_v10 * 0x28;
       temp_v4 = FUN_004ccdb8(*(unsigned short *)(temp_v7 + 0x62),
                            (unsigned int)*(unsigned short *)(temp_v7 + 100) + (int)*(short *)(temp_v10 + 0x78b2),

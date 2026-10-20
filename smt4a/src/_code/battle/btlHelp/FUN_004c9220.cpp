@@ -17,7 +17,7 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_4_stack;
 
-extern int *DAT_005738e8; /* 0x5738e8 */
+extern int *g_btlHelp; /* 0x5738e8 */
 extern unsigned int DAT_00573908; /* 0x573908 */
 extern unsigned int DAT_0057390c; /* 0x57390c */
 extern unsigned int DAT_00573910; /* 0x573910 */
@@ -90,9 +90,9 @@ unsigned short * FUN_004c9220(unsigned short *param_1,int param_2,int param_3,un
   *(unsigned int *)(puVar3 + 0x434) = 0;
   *(unsigned int *)(puVar3 + 0x43a) = 0;
   *(unsigned int *)(puVar3 + 0x43c) = 0;
-  piVar1 = DAT_005738e8;
-  if (*DAT_005738e8 == 0) {
-    *DAT_005738e8 = (int)puVar3;
+  piVar1 = g_btlHelp;
+  if (*g_btlHelp == 0) {
+    *g_btlHelp = (int)puVar3;
   }
   if (piVar1[1] == 0) {
     piVar1[1] = (int)puVar3;

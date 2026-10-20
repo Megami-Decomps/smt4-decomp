@@ -8,7 +8,7 @@ int FUN_00192268(void);
 int FUN_0019db18(...);
 int taskRunWithObject(unsigned int, int, int);
 int effPartsSetData(void);
-int FUN_0024dd48(unsigned int *);
+int effEditorNodeChainApply(unsigned int *);
 int FUN_0024dd80(int);
 int FUN_0024dd90(unsigned int *);
 int effBlockCreateFromBlock(void);
@@ -18,8 +18,8 @@ int FUN_002629a8(...);
 int FUN_002629f0(...);
 int FUN_002a3d58(...);
 int FUN_002be624(int, unsigned char *, unsigned int);
-int FUN_002bf694(int, unsigned int);
-int FUN_002bfde4(...);
+int libc_strcpy(int, unsigned int);
+int padIsButtonPressed(...);
 int memAlloc(int, int, int, unsigned int, int, int);
 int asdMemFree(...);
 int VectorFloatToUnsigned(...);
@@ -72,10 +72,10 @@ extern unsigned int uRam004d8ce8; /* 0x4d8ce8 */
 /* Supplied declaration required: FUN_00192268. */
 /* Supplied declaration required: FUN_0019db18. */
 /* Supplied declaration required: taskRunWithObject. */
-extern unsigned int FUN_00246908(unsigned int);
+extern unsigned int effEditorNodeListCount(unsigned int);
 /* Supplied declaration required: effPartsSetData. */
 extern unsigned int FUN_0024c3f8(void);
-/* Supplied declaration required: FUN_0024dd48. */
+/* Supplied declaration required: effEditorNodeChainApply. */
 /* Supplied declaration required: FUN_0024dd80. */
 /* Supplied declaration required: FUN_0024dd90. */
 /* Supplied declaration required: effBlockCreateFromBlock. */
@@ -85,8 +85,8 @@ extern unsigned int FUN_0024c3f8(void);
 /* Supplied declaration required: FUN_002629f0. */
 /* Supplied declaration required: FUN_002a3d58. */
 /* Supplied declaration required: FUN_002be624. */
-/* Supplied declaration required: FUN_002bf694. */
-/* Supplied declaration required: FUN_002bfde4. */
+/* Supplied declaration required: libc_strcpy. */
+/* Supplied declaration required: padIsButtonPressed. */
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: asdMemFree. */
 extern int FUN_002c7a54(unsigned int, unsigned int);
@@ -155,17 +155,17 @@ unsigned char * FUN_0024233c(unsigned int param_1,int param_2,unsigned int param
   if (DAT_0044ea89 == '\0') {
     FUN_0024dd90(&DAT_0044f8c8);
   }
-  FUN_0024dd48(&DAT_0044f8c8);
-  temp_v6 = FUN_002bfde4(0);
+  effEditorNodeChainApply(&DAT_0044f8c8);
+  temp_v6 = padIsButtonPressed(0);
   if (temp_v6 == 0) {
     FUN_0024dd80(0);
-    temp_v6 = FUN_002bfde4();
+    temp_v6 = padIsButtonPressed();
     if (temp_v6 != 0) goto LAB_002424b8;
 LAB_002426c4:
-    temp_v6 = FUN_002bfde4(1);
+    temp_v6 = padIsButtonPressed(1);
     if (temp_v6 == 0) {
       FUN_0024dd80(1);
-      temp_v6 = FUN_002bfde4();
+      temp_v6 = padIsButtonPressed();
       if (temp_v6 == 0) {
         puVar9 = &LAB_00200001;
       }
@@ -212,7 +212,7 @@ LAB_002424b8:
     DAT_0044eae8 = 0;
     temp_v6 = FUN_002c7a54(DAT_0044ea94,temp_v1);
     DAT_0044eaa4 = temp_v6;
-    FUN_002bf694(temp_v6 + 0x9c,*(unsigned int *)*piVar3);
+    libc_strcpy(temp_v6 + 0x9c,*(unsigned int *)*piVar3);
     *(int *)(temp_v6 + 0x40) = piVar3[3];
     *(int *)(temp_v6 + 0x44) = piVar3[4];
     *(int *)(temp_v6 + 0x48) = piVar3[5];
@@ -229,7 +229,7 @@ LAB_002424b8:
     FUN_00250200();
     DAT_0044eab8 = piVar3[1];
     DAT_0044ea98 = temp_v2;
-    temp_v1 = FUN_00246908(DAT_0044ea94);
+    temp_v1 = effEditorNodeListCount(DAT_0044ea94);
     if (temp_v1 >= 0x16) {
       DAT_0044ea8c = temp_v1 - 0x15;
       DAT_0044f864 = 0x14;

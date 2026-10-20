@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00408184(int, int);
 int countersRaiseA(int);
 
-extern int *FUN_001ab888(void);
+extern int *gameGetSlotTable(void);
 /* Supplied declaration required: FUN_00408184. */
 /* Supplied declaration required: countersRaiseA. */
 
@@ -19,7 +19,7 @@ int FUN_004a0ef8(int param_1)
   int *piVar1;
   int temp_v0;
   
-  piVar1 = (int *)FUN_001ab888();
+  piVar1 = (int *)gameGetSlotTable();
   temp_v0 = *piVar1 + param_1;
   *piVar1 = temp_v0;
   if (0 < param_1) {

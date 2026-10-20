@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern Sub68Owner *DAT_00587f28;
+extern Sub68Owner *g_naviMain;
 extern void FUN_00493154(void);
 extern u32 jobStop(u32 job, u16 arg);
 extern void texOwner1480Free(u8 *sub);
@@ -12,11 +12,11 @@ extern void asdMemFree(void *ptr);
 void sub68OwnerDestroy(void)
 {
     FUN_00493154();
-    if (DAT_00587f28 != NULL) {
-        jobStop(DAT_00587f28->job, 0);
-        texOwner1480Free(DAT_00587f28->sub);
-        asdMemFree(DAT_00587f28);
-        DAT_00587f28 = NULL;
+    if (g_naviMain != NULL) {
+        jobStop(g_naviMain->job, 0);
+        texOwner1480Free(g_naviMain->sub);
+        asdMemFree(g_naviMain);
+        g_naviMain = NULL;
     }
 }
 

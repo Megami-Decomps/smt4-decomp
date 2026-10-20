@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_00106074(void);
-int FUN_002e6f1c(unsigned char [96], unsigned int);
-int FUN_002e7232(void);
+int onlineCallContextWait(unsigned char [96], unsigned int);
+int sharedRefRelease(void);
 int FUN_002ea00c(...);
-int FUN_002ea9dc(unsigned int *);
+int onlineUrlDestroy(unsigned int *);
 int FUN_002eca44(unsigned char [96]);
 int FUN_002ecf40(void);
 int FUN_002f4364(void);
@@ -18,10 +18,10 @@ typedef int romwright_code(...);
 extern unsigned char DAT_005590bc; /* 0x5590bc */
 
 /* Supplied declaration required: FUN_00106074. */
-/* Supplied declaration required: FUN_002e6f1c. */
-/* Supplied declaration required: FUN_002e7232. */
+/* Supplied declaration required: onlineCallContextWait. */
+/* Supplied declaration required: sharedRefRelease. */
 /* Supplied declaration required: FUN_002ea00c. */
-/* Supplied declaration required: FUN_002ea9dc. */
+/* Supplied declaration required: onlineUrlDestroy. */
 /* Supplied declaration required: FUN_002eca44. */
 /* Supplied declaration required: FUN_002ecf40. */
 /* Supplied declaration required: FUN_002f4364. */
@@ -39,17 +39,17 @@ void FUN_0010d1e8(unsigned int *param_1)
   if (param_1[0x1e] != 0) {
     FUN_002eca44(temp_v1);
     FUN_002f7290(param_1,temp_v1);
-    FUN_002e6f1c(temp_v1,0xffffffff);
+    onlineCallContextWait(temp_v1,0xffffffff);
     FUN_002ea00c(temp_v1);
   }
   if (param_1[0x27] != 0) {
-    FUN_002e7232();
+    sharedRefRelease();
   }
   if (param_1[0x25] != 0) {
-    FUN_002e7232();
+    sharedRefRelease();
   }
   if (param_1[0x26] != 0) {
-    FUN_002e7232();
+    sharedRefRelease();
     param_1[0x26] = 0;
   }
   if ((int *)param_1[0x21] != (int *)0x0) {
@@ -73,7 +73,7 @@ void FUN_0010d1e8(unsigned int *param_1)
   FUN_002f4364();
   FUN_002ecf40();
   param_1 = param_1 + 0x2c;
-  FUN_002ea9dc(param_1);
+  onlineUrlDestroy(param_1);
   temp_v0 = FUN_002ea00c(param_1 + -0x28);
   *(unsigned char *)(temp_v0 - 4) = 0;
   return;

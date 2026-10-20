@@ -8,8 +8,8 @@ int FUN_0010095c(int, int, unsigned int, unsigned int, int, unsigned int, unsign
 int FUN_002e3338(int, int, unsigned int, unsigned int);
 int wstrlen(...);
 int asdOperatorNewC(int);
-int FUN_002e342c(void);
-int FUN_002e3494(...);
+int libc_strcpy(void);
+int asdOperatorDeleteB(...);
 
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
 #define ROMWRIGHT_PIECE_4_4_DEFINED
@@ -20,8 +20,8 @@ extern int libc_strcat(void);
 /* Supplied declaration required: FUN_002e3338. */
 /* Supplied declaration required: wstrlen. */
 /* Supplied declaration required: asdOperatorNewC. */
-/* Supplied declaration required: FUN_002e342c. */
-/* Supplied declaration required: FUN_002e3494. */
+/* Supplied declaration required: libc_strcpy. */
+/* Supplied declaration required: asdOperatorDeleteB. */
 
 
 unsigned long long FUN_001006f4(int param_1,unsigned int param_2,unsigned int param_3)
@@ -51,10 +51,10 @@ unsigned long long FUN_001006f4(int param_1,unsigned int param_2,unsigned int pa
     temp_v1 = wstrlen();
     temp_v2 = wstrlen(temp_v0);
     asdOperatorNewC(temp_v1 + temp_v2 + 1);
-    FUN_002e342c();
+    libc_strcpy();
     temp_v1 = libc_strcat();
-    FUN_002e3494(*(unsigned int *)(param_1 + 4));
-    FUN_002e3494(temp_v0);
+    asdOperatorDeleteB(*(unsigned int *)(param_1 + 4));
+    asdOperatorDeleteB(temp_v0);
   }
   *(int *)(param_1 + 4) = temp_v1;
   return romwright_piece_4_4(temp_v3,param_1);

@@ -5,7 +5,7 @@
 extern "C" {
 
 extern int FUN_0026ee68(unsigned int);
-extern int FUN_002b8cec(unsigned int);
+extern int padIsButtonRepeat(unsigned int);
 
 
 unsigned char FUN_0022fb34(void)
@@ -15,7 +15,7 @@ unsigned char FUN_0022fb34(void)
   int temp_v1;
   
   temp_v0 = FUN_0026ee68(5);
-  temp_v1 = FUN_002b8cec(8);
+  temp_v1 = padIsButtonRepeat(8);
   return temp_v1 != 0 || temp_v0 != 0;
 }
 

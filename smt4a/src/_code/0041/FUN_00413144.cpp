@@ -6,14 +6,14 @@ extern "C" {
 
 int FUN_00100388(...);
 int FUN_00103f54(...);
-int FUN_00103f74(...);
+int holderSetFlagBits(...);
 int FUN_0011b272(int, unsigned int);
 int FUN_0011b634(...);
 int FUN_00120648(...);
-int FUN_002e6e14(...);
-int FUN_002e760a(...);
-int FUN_002e9318(...);
-int FUN_002e9598(int, unsigned int);
+int asdOperatorDeleteArray(...);
+int operatorNew(...);
+int onlineStringDestroy(...);
+int onlineStringAssign(int, unsigned int);
 int FUN_002f4cac(...);
 int FUN_002f4cd6(...);
 int FUN_00303928(...);
@@ -67,17 +67,17 @@ extern unsigned char DAT_0055cacc; /* 0x55cacc */
 
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_00103f54. */
-/* Supplied declaration required: FUN_00103f74. */
+/* Supplied declaration required: holderSetFlagBits. */
 /* Supplied declaration required: FUN_0011b272. */
 /* Supplied declaration required: FUN_0011b634. */
 /* Supplied declaration required: FUN_00120648. */
 extern int FUN_00237608(void);
 extern unsigned int FUN_002bf520(void);
-/* Supplied declaration required: FUN_002e6e14. */
-/* Supplied declaration required: FUN_002e760a. */
-extern unsigned int FUN_002e9300(unsigned char *, unsigned char *);
-/* Supplied declaration required: FUN_002e9318. */
-/* Supplied declaration required: FUN_002e9598. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
+/* Supplied declaration required: operatorNew. */
+extern unsigned int onlineStringConstruct(unsigned char *, unsigned char *);
+/* Supplied declaration required: onlineStringDestroy. */
+/* Supplied declaration required: onlineStringAssign. */
 extern int constructObj0055affc(unsigned char *);
 extern unsigned int FUN_002ea100(unsigned char *, unsigned int *);
 /* Supplied declaration required: FUN_002f4cac. */
@@ -146,12 +146,12 @@ void FUN_00413144(int param_1)
   temp_v12 = 0;
   temp_v13 = 0;
   temp_v0 = FUN_00303928(temp_v0 + 8,3,&temp_v11);
-  FUN_002e6e14(temp_v11);
+  asdOperatorDeleteArray(temp_v11);
   temp_v24 = 0;
   temp_v25 = 0;
   temp_v26 = 0;
   temp_v0 = FUN_00303928(temp_v0 + 0x14,3,&temp_v24);
-  FUN_002e6e14(temp_v24);
+  asdOperatorDeleteArray(temp_v24);
   temp_v0 = FUN_003038fc(temp_v0 + 0x18,0);
   temp_v0 = FUN_0030395c(temp_v0 + 0x20,0);
   temp_v0 = temp_v0 + 0x20;
@@ -160,25 +160,25 @@ void FUN_00413144(int param_1)
   *(unsigned int *)(temp_v0 - 0x80) = 0;
   *(unsigned int *)(temp_v0 - 0x7c) = 0;
   *(unsigned int *)(temp_v0 - 0x78) = 0;
-  temp_v1 = FUN_002e9300(temp_v34,&LAB_004134dc);
-  FUN_002e9598(temp_v0 - 0x74,temp_v1);
-  FUN_002e9318(temp_v34);
+  temp_v1 = onlineStringConstruct(temp_v34,&LAB_004134dc);
+  onlineStringAssign(temp_v0 - 0x74,temp_v1);
+  onlineStringDestroy(temp_v34);
   temp_v27 = 0;
   temp_v28 = 0;
   temp_v29 = 0;
   temp_v1 = FUN_00303928(&temp_v10,3,&temp_v27);
   FUN_0011b272(temp_v0 - 0x6c,temp_v1);
   temp_v10 = &DAT_0055a4c0;
-  FUN_002e6e14(temp_v12);
-  FUN_002e6e14(temp_v27);
+  asdOperatorDeleteArray(temp_v12);
+  asdOperatorDeleteArray(temp_v27);
   temp_v27 = 0;
   temp_v28 = 0;
   temp_v29 = 0;
   temp_v1 = FUN_00303928(&temp_v10,3,&temp_v27);
   FUN_0011b272(temp_v0 - 0x58,temp_v1);
   temp_v10 = &DAT_0055a4c0;
-  FUN_002e6e14(temp_v12);
-  FUN_002e6e14(temp_v27);
+  asdOperatorDeleteArray(temp_v12);
+  asdOperatorDeleteArray(temp_v27);
   *(unsigned short *)(temp_v0 - 0x44) = 0x5a;
   temp_v31 = (unsigned int *)0x0;
   temp_v32 = (unsigned int *)0x0;
@@ -188,7 +188,7 @@ void FUN_00413144(int param_1)
   for (puVar4 = temp_v31; puVar4 != puVar1; puVar4 = puVar4 + 2) {
     (**(romwright_code **)*puVar4)(puVar4);
   }
-  FUN_002e6e14(temp_v31);
+  asdOperatorDeleteArray(temp_v31);
   FUN_002f4cac(temp_v0 - 0x40);
   *(unsigned int *)(temp_v0 - 0x10) = 0;
   *(unsigned int *)(temp_v0 - 0xc) = 0;
@@ -225,24 +225,24 @@ void FUN_00413144(int param_1)
   FUN_00100388(&temp_v17,&LAB_004134e8,temp_v1,temp_v2);
   temp_v1 = FUN_002ea100(temp_v30,(unsigned int *)&temp_v17);
   FUN_00522a48(&temp_v14,temp_v1);
-  FUN_002e9318(temp_v30);
+  onlineStringDestroy(temp_v30);
   FUN_00522bf4(temp_v9,&temp_v14);
   temp_v6 = 0x70;
-  temp_v0 = FUN_002e760a(0x78);
+  temp_v0 = operatorNew(0x78);
   if (temp_v0 == 0) {
     temp_v1 = 0;
   }
   else {
     temp_v1 = FUN_002fafd8(temp_v0,0);
   }
-  puVar4 = (unsigned int *)FUN_002e760a(0x14);
+  puVar4 = (unsigned int *)operatorNew(0x14);
   if (puVar4 != (unsigned int *)0x0) {
     puVar4[2] = (unsigned int)FUN_0041442c;
     puVar4[3] = 0;
     puVar4[4] = temp_v1;
     *puVar4 = (unsigned int)&DAT_0055cacc;
     puVar4[1] = param_1;
-    FUN_00103f74(temp_v1,2);
+    holderSetFlagBits(temp_v1,2);
     FUN_00103f54(temp_v1,puVar4,0,1);
   }
   FUN_0011b634(param_1 + 4,temp_v1,&temp_v3);
@@ -250,7 +250,7 @@ void FUN_00413144(int param_1)
   for (puVar4 = temp_v14; puVar4 != puVar1; puVar4 = puVar4 + 2) {
     (**(romwright_code **)*puVar4)(puVar4);
   }
-  FUN_002e6e14(temp_v14);
+  asdOperatorDeleteArray(temp_v14);
   FUN_004336b4(&temp_v3);
   return;
 }

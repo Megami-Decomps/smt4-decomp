@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002c2950(void);
+int gameGetMapBlock(void);
 
-extern int FUN_002c09d0(unsigned int);
-/* Supplied declaration required: FUN_002c2950. */
+extern int gameFlagIsSet(unsigned int);
+/* Supplied declaration required: gameGetMapBlock. */
 
 
 unsigned int FUN_002c8684(int param_1)
@@ -17,11 +17,11 @@ unsigned int FUN_002c8684(int param_1)
   int temp_v0;
   unsigned int temp_v1;
   
-  FUN_002c2950();
+  gameGetMapBlock();
   if ((((param_1 - 0x19U >= 6) && (param_1 != 0x66)) ||
-      (temp_v0 = FUN_002c09d0(0x144), temp_v1 = 0, temp_v0 != 0)) &&
+      (temp_v0 = gameFlagIsSet(0x144), temp_v1 = 0, temp_v0 != 0)) &&
      (((param_1 - 0x1fU >= 5 && (param_1 != 0x67)) ||
-      (temp_v0 = FUN_002c09d0(0x15a), temp_v1 = 0, temp_v0 != 0)))) {
+      (temp_v0 = gameFlagIsSet(0x15a), temp_v1 = 0, temp_v0 != 0)))) {
     temp_v1 = 1;
   }
   return temp_v1;

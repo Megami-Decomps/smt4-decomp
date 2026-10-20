@@ -17,7 +17,7 @@ int FUN_0029da34(...);
 int FUN_0029dc74(...);
 int FUN_0029ede8(int, int, unsigned int, int);
 int FUN_0029ee6c(...);
-int FUN_002b45e8(void);
+int dataTable08Sub2GetRecord(void);
 int FUN_002be624(...);
 int dataTableGetCount(...);
 int SBORROW4(...);
@@ -38,7 +38,7 @@ extern unsigned char LAB_003172c8; /* 0x3172c8 */
 extern unsigned char LAB_003172d4; /* 0x3172d4 */
 extern int DAT_0043da2c; /* 0x43da2c */
 extern unsigned int DAT_0043da30; /* 0x43da30 */
-extern int DAT_0043dcf0; /* 0x43dcf0 */
+extern int g_partyPanel; /* 0x43dcf0 */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_001f4568. */
@@ -56,8 +56,8 @@ extern int FUN_00282e70(void);
 /* Supplied declaration required: FUN_0029ede8. */
 /* Supplied declaration required: FUN_0029ee6c. */
 extern unsigned char *FUN_002b066c(unsigned int);
-/* Supplied declaration required: FUN_002b45e8. */
-extern unsigned short *FUN_002b63ac(void);
+/* Supplied declaration required: dataTable08Sub2GetRecord. */
+extern unsigned short *gameGetPlayerData(void);
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: dataTableGetCount. */
 extern int dataTableGetEntries(void);
@@ -87,12 +87,12 @@ void FUN_0026c868(void)
   unsigned int temp_v11 [2];
   unsigned char temp_v12 [136];
   
-  temp_v2 = DAT_0043dcf0;
-  if (DAT_0043dcf0 == 0) {
+  temp_v2 = g_partyPanel;
+  if (g_partyPanel == 0) {
     return;
   }
   temp_v6 = 0;
-  switch(*(unsigned char *)(DAT_0043dcf0 + 0x66c)) {
+  switch(*(unsigned char *)(g_partyPanel + 0x66c)) {
   default:
     if (temp_v6 == 0) {
       return;
@@ -111,9 +111,9 @@ void FUN_0026c868(void)
     temp_v4 = FUN_00282ccc();
     temp_v6 = DAT_0043da2c;
     if (temp_v3 != 0) {
-      puVar10 = (unsigned short *)FUN_002b63ac();
+      puVar10 = (unsigned short *)gameGetPlayerData();
       temp_v4 = (unsigned int)*puVar10;
-      FUN_002b45e8();
+      dataTable08Sub2GetRecord();
       if (temp_v4 == 0) {
         *(unsigned char *)(temp_v6 + 0x4cb) = 0;
       }
@@ -315,14 +315,14 @@ void FUN_0026c868(void)
   case 5:
   case 6:
   case 7:
-    FUN_0029c94c(*(unsigned short *)(DAT_0043dcf0 + 0x36));
+    FUN_0029c94c(*(unsigned short *)(g_partyPanel + 0x36));
     return;
   case 8:
   case 9:
-    FUN_0029212c(*(unsigned short *)(DAT_0043dcf0 + 0x36));
+    FUN_0029212c(*(unsigned short *)(g_partyPanel + 0x36));
     return;
   case 10:
-    if (*(int *)(DAT_0043dcf0 + 0xb3c) == 0) {
+    if (*(int *)(g_partyPanel + 0xb3c) == 0) {
       temp_v5 = dataTableGet(0x39,0);
       temp_v6 = dataTableGetEntries();
       temp_v4 = dataTableGetCount(temp_v5);
@@ -336,7 +336,7 @@ void FUN_0026c868(void)
       FUN_0029ee6c(temp_v6,0x323232ff);
       return;
     }
-    if (*(int *)(DAT_0043dcf0 + 0xb3c) != 1) {
+    if (*(int *)(g_partyPanel + 0xb3c) != 1) {
       return;
     }
     temp_v5 = dataTableGet(0x39,0);

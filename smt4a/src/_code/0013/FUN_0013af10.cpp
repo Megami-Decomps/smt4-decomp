@@ -11,7 +11,7 @@ int FUN_0014375c(void);
 int FUN_001517b4(int, int);
 int FUN_00152bf8(unsigned int);
 int asdMemFree(void);
-int FUN_002e6dd0(char *, int);
+int rt_aeabi_memclr(char *, int);
 
 extern unsigned char DAT_0061978c; /* 0x61978c */
 extern signed char DAT_00619972; /* 0x619972 */
@@ -27,7 +27,7 @@ extern int FUN_00163fd4(unsigned int);
 extern int FUN_001681a4(unsigned int);
 extern int jyoucyuGetTableEntry(unsigned int);
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_002e6dd0. */
+/* Supplied declaration required: rt_aeabi_memclr. */
 
 
 void FUN_0013af10(void)
@@ -146,7 +146,7 @@ LAB_0013b178:
       pcVar8[0x46] = '\0';
       pcVar8[0x47] = '\0';
       FUN_00152bf8(*(unsigned int *)(pcVar8 + 0x48));
-      FUN_002e6dd0(pcVar8,0x78);
+      rt_aeabi_memclr(pcVar8,0x78);
       if (temp_v3 != '\0') {
         pcVar8[0x76] = '\x01';
       }
@@ -178,7 +178,7 @@ LAB_0013afc4:
   pcVar8[0x45] = '\0';
   pcVar8[0x46] = '\0';
   pcVar8[0x47] = '\0';
-  FUN_002e6dd0(pcVar8,0x78);
+  rt_aeabi_memclr(pcVar8,0x78);
   pcVar8[0x68] = '\0';
   pcVar8[0x69] = '\0';
   pcVar8[0x6a] = '\0';

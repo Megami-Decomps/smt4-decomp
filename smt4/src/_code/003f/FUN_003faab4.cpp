@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0022c038(unsigned char *);
+int poolNodeUnlinkAndDestroy(unsigned char *);
 
-/* Supplied declaration required: FUN_0022c038. */
+/* Supplied declaration required: poolNodeUnlinkAndDestroy. */
 
 
 void FUN_003faab4(int *param_1,int param_2,int *param_3)
@@ -427,7 +427,7 @@ LAB_003faf94:
     } while( 1 );
   }
   *(unsigned int *)(pbVar11 + 0xc) = *(unsigned int *)(param_2 + 8);
-  FUN_0022c038(pbVar11 + 0x14);
+  poolNodeUnlinkAndDestroy(pbVar11 + 0x14);
   *(unsigned char **)(param_2 + 8) = pbVar11;
   *(int *)(param_2 + 0x18) = *(int *)(param_2 + 0x18) - 1;
   *param_1 = temp_v4;

@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_002ae164(void);
-int FUN_002b45e8(void);
-int FUN_002b4670(void);
+int dataTable08Sub2GetRecord(void);
+int dataTable08Sub1GetRecord(void);
 
 /* Supplied declaration required: FUN_002ae164. */
-/* Supplied declaration required: FUN_002b45e8. */
-/* Supplied declaration required: FUN_002b4670. */
+/* Supplied declaration required: dataTable08Sub2GetRecord. */
+/* Supplied declaration required: dataTable08Sub1GetRecord. */
 
 
 unsigned int FUN_00245854(unsigned int *param_1,unsigned int param_2)
@@ -35,7 +35,7 @@ unsigned int FUN_00245854(unsigned int *param_1,unsigned int param_2)
       }
       if ((short)param_1[temp_v3 * 2 + 0x8a] == 8) {
         temp_v2 = (int)*(short *)((int)param_1 + temp_v3 * 8 + 0x22a);
-        FUN_002b4670();
+        dataTable08Sub1GetRecord();
         if ((((temp_v2 != 0) && (temp_v1 = (unsigned int)*(unsigned short *)(temp_v2 + 0x62), temp_v1 != 0)) &&
             (FUN_002ae164(), temp_v1 != 0)) && (param_2 == (*(unsigned int *)(temp_v1 + 0x28) & 0x1ffff) >> 0xc)
            ) {
@@ -49,7 +49,7 @@ unsigned int FUN_00245854(unsigned int *param_1,unsigned int param_2)
       }
       if ((temp_v4 && temp_v0 == 2) && (param_1[0x9e] != 0)) {
         temp_v1 = (unsigned int)*(unsigned short *)(param_1[0x9e] + 4);
-        FUN_002b45e8();
+        dataTable08Sub2GetRecord();
         if ((temp_v1 != 0) && (param_2 == *(unsigned int *)(temp_v1 + 0x54) >> 0x14)) {
           return 1;
         }
@@ -67,7 +67,7 @@ unsigned int FUN_00245854(unsigned int *param_1,unsigned int param_2)
     }
     if ((short)param_1[0x88] == 8) {
       temp_v3 = (int)*(short *)((int)param_1 + 0x222);
-      FUN_002b4670();
+      dataTable08Sub1GetRecord();
       if ((((temp_v3 != 0) && (temp_v1 = (unsigned int)*(unsigned short *)(temp_v3 + 0x62), temp_v1 != 0)) &&
           (FUN_002ae164(), temp_v1 != 0)) && (param_2 == (*(unsigned int *)(temp_v1 + 0x28) & 0x1ffff) >> 0xc))
       {

@@ -6,7 +6,7 @@ extern "C" {
 
 int asdSequenceRequest(int, int, int);
 int scrGetArg(int);
-int FUN_00324bc8(...);
+int mapPlaceSet(...);
 int FUN_00376fb8(unsigned int);
 
 extern unsigned char DAT_005f1624; /* 0x5f1624 */
@@ -14,7 +14,7 @@ extern unsigned char DAT_005f1b70; /* 0x5f1b70 */
 
 /* Supplied declaration required: asdSequenceRequest. */
 /* Supplied declaration required: scrGetArg. */
-/* Supplied declaration required: FUN_00324bc8. */
+/* Supplied declaration required: mapPlaceSet. */
 /* Supplied declaration required: FUN_00376fb8. */
 
 
@@ -30,10 +30,10 @@ unsigned int FUN_002e5fdc(void)
   temp_v1 = scrGetArg(1);
   temp_v2 = scrGetArg(2);
   if (temp_v0 != 0x18) {
-    FUN_00324bc8(temp_v0,temp_v1,temp_v2);
+    mapPlaceSet(temp_v0,temp_v1,temp_v2);
   }
   else {
-    FUN_00324bc8(0x18,1,temp_v2);
+    mapPlaceSet(0x18,1,temp_v2);
     FUN_00376fb8(temp_v1);
     DAT_005f1624 = 1;
   }

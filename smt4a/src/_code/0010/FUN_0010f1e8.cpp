@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_002e9ec8(int, unsigned int);
-int FUN_002ea43c(int);
+int onlineInstanceTableFind(int, unsigned int);
+int onlineJobSetStateDone(int);
 int FUN_002fa18c(void);
 
-extern int FUN_002e9af4(void);
-/* Supplied declaration required: FUN_002e9ec8. */
-/* Supplied declaration required: FUN_002ea43c. */
+extern int onlineInstanceTableGetCurrent(void);
+/* Supplied declaration required: onlineInstanceTableFind. */
+/* Supplied declaration required: onlineJobSetStateDone. */
 /* Supplied declaration required: FUN_002fa18c. */
 
 
@@ -20,12 +20,12 @@ void FUN_0010f1e8(int param_1)
 /* irregular: 3 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_002e9af4();
-  FUN_002e9ec8(temp_v0,*(unsigned int *)(param_1 + 0x68));
+  temp_v0 = onlineInstanceTableGetCurrent();
+  onlineInstanceTableFind(temp_v0,*(unsigned int *)(param_1 + 0x68));
   if (temp_v0 != 0) {
     FUN_002fa18c();
   }
-  FUN_002ea43c(param_1);
+  onlineJobSetStateDone(param_1);
   return;
 }
 

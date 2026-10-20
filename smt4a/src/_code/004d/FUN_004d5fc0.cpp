@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_3_stack;
 
-extern unsigned int *DAT_00571508; /* 0x571508 */
+extern unsigned int *g_btlCamera; /* 0x571508 */
 extern unsigned int DAT_0057150c; /* 0x57150c */
 extern unsigned int DAT_00571510; /* 0x571510 */
 
@@ -33,31 +33,31 @@ void FUN_004d5fc0(int param_1,unsigned int param_2,unsigned int param_3)
   case 0:
     temp_v0 = FUN_0032c430(*(unsigned int *)(param_1 + 0x10));
     if (temp_v0 != 0) {
-      if ((DAT_00571508[0x193] & 0x20) != 0) {
+      if ((g_btlCamera[0x193] & 0x20) != 0) {
         return;
       }
       FUN_004f43b4();
       return;
     }
     FUN_004f43b4();
-    temp_v2 = DAT_00571508[0x193] & 0xffffffdf;
+    temp_v2 = g_btlCamera[0x193] & 0xffffffdf;
     break;
   case 1:
     temp_v0 = FUN_0032c430(*(unsigned int *)(param_1 + 0x10));
     if (temp_v0 != 0) {
-      temp_v2 = DAT_00571508[0x193] | 0x40;
+      temp_v2 = g_btlCamera[0x193] | 0x40;
     }
     else {
-      temp_v2 = DAT_00571508[0x193] & 0xffffffbf;
+      temp_v2 = g_btlCamera[0x193] & 0xffffffbf;
     }
     break;
   case 2:
     temp_v0 = FUN_0032c430(*(unsigned int *)(param_1 + 0x10));
     if (temp_v0 == 0) {
-      DAT_00571508[0x193] = DAT_00571508[0x193] & 0xffffff7f;
+      g_btlCamera[0x193] = g_btlCamera[0x193] & 0xffffff7f;
       return;
     }
-    temp_v2 = DAT_00571508[0x193] | 0x80;
+    temp_v2 = g_btlCamera[0x193] | 0x80;
     break;
   case 3:
     puVar3 = (unsigned int *)asdListBoxGetFloatValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
@@ -73,20 +73,20 @@ void FUN_004d5fc0(int param_1,unsigned int param_2,unsigned int param_3)
     return;
   case 5:
     puVar3 = (unsigned int *)asdListBoxGetFloatValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
-    *DAT_00571508 = *puVar3;
+    *g_btlCamera = *puVar3;
     return;
   case 6:
     puVar3 = (unsigned int *)asdListBoxGetFloatValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
-    DAT_00571508[1] = *puVar3;
+    g_btlCamera[1] = *puVar3;
     return;
   case 7:
     puVar3 = (unsigned int *)asdListBoxGetFloatValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
-    DAT_00571508[2] = *puVar3;
+    g_btlCamera[2] = *puVar3;
     return;
   default:
     return;
   }
-  DAT_00571508[0x193] = temp_v2;
+  g_btlCamera[0x193] = temp_v2;
   return;
 }
 

@@ -7,11 +7,11 @@ extern "C" {
 int FUN_001bbf0c(void);
 int VectorSignedToFloat(...);
 
-extern unsigned char DAT_0057f3b4; /* 0x57f3b4 */
+extern unsigned char g_eventEffect; /* 0x57f3b4 */
 extern unsigned char DAT_0057f3e8; /* 0x57f3e8 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_0018206c(unsigned int, unsigned int);
+extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001bbf0c. */
 extern int FUN_00203d74(void);
 
@@ -28,19 +28,19 @@ unsigned int FUN_002a41a0(void)
   float temp_v4;
   float temp_v5;
   
-  temp_v0 = (*(int *)((unsigned char *)&DAT_0057f3b4 + 0x4));
+  temp_v0 = (*(int *)((unsigned char *)&g_eventEffect + 0x4));
   temp_v5 = 1.0f;
-  switch(*(unsigned int *)((*(int *)((unsigned char *)&DAT_0057f3b4 + 0x4)) + 8)) {
+  switch(*(unsigned int *)((*(int *)((unsigned char *)&g_eventEffect + 0x4)) + 8)) {
   case 0:
-    temp_v1 = *(unsigned int *)((*(int *)((unsigned char *)&DAT_0057f3b4 + 0x4)) + 0x18);
+    temp_v1 = *(unsigned int *)((*(int *)((unsigned char *)&g_eventEffect + 0x4)) + 0x18);
     if ((temp_v1 < 6) &&
-       (temp_v2 = FUN_0018206c(*(unsigned int *)(&DAT_0057f3e8 + temp_v1 * 0xc),
+       (temp_v2 = asdTMTexTableNodeIsLoaded(*(unsigned int *)(&DAT_0057f3e8 + temp_v1 * 0xc),
                              *(unsigned int *)(temp_v1 * 0xc + 0x57f3ec)), temp_v2 != 0)) {
       *(unsigned int *)(temp_v0 + 8) = 1;
     }
     break;
   case 2:
-    if ((0 < *(int *)((*(int *)((unsigned char *)&DAT_0057f3b4 + 0x4)) + 0x1c)) && (temp_v2 = FUN_00203d74(), temp_v2 == 0)) {
+    if ((0 < *(int *)((*(int *)((unsigned char *)&g_eventEffect + 0x4)) + 0x1c)) && (temp_v2 = FUN_00203d74(), temp_v2 == 0)) {
       temp_v3 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0xc),(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v4 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x1c),(unsigned char)(in_fpscr >> 0x16) & 3)
       ;
@@ -52,11 +52,11 @@ unsigned int FUN_002a41a0(void)
     *(float *)(temp_v0 + 0x14) = temp_v5;
     break;
   case 3:
-    if (*(int *)((*(int *)((unsigned char *)&DAT_0057f3b4 + 0x4)) + 0x18) == 3) {
-      *(unsigned int *)((*(int *)((unsigned char *)&DAT_0057f3b4 + 0x4)) + 0x10) = 0x3f800000;
+    if (*(int *)((*(int *)((unsigned char *)&g_eventEffect + 0x4)) + 0x18) == 3) {
+      *(unsigned int *)((*(int *)((unsigned char *)&g_eventEffect + 0x4)) + 0x10) = 0x3f800000;
     }
     else {
-      temp_v3 = (float)VectorSignedToFloat(*(unsigned int *)((*(int *)((unsigned char *)&DAT_0057f3b4 + 0x4)) + 0xc),
+      temp_v3 = (float)VectorSignedToFloat(*(unsigned int *)((*(int *)((unsigned char *)&g_eventEffect + 0x4)) + 0xc),
                                          (unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v3 = temp_v3 * 0.07f;
       FUN_001bbf0c();
@@ -65,7 +65,7 @@ unsigned int FUN_002a41a0(void)
     break;
   case 4:
     temp_v5 = 0.0f;
-    if ((0 < *(int *)((*(int *)((unsigned char *)&DAT_0057f3b4 + 0x4)) + 0x1c)) && (temp_v2 = FUN_00203d74(), temp_v2 == 0)) {
+    if ((0 < *(int *)((*(int *)((unsigned char *)&g_eventEffect + 0x4)) + 0x1c)) && (temp_v2 = FUN_00203d74(), temp_v2 == 0)) {
       temp_v4 = (float)VectorSignedToFloat(*(int *)(temp_v0 + 0x1c),(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v3 = (float)VectorSignedToFloat(*(int *)(temp_v0 + 0x1c) - *(int *)(temp_v0 + 0xc),
                                          (unsigned char)(in_fpscr >> 0x16) & 3);

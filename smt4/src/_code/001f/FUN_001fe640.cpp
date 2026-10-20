@@ -11,7 +11,7 @@ int FUN_0027f958(float *, float *, int);
 int FUN_002aed34(...);
 int FUN_002b76d0(...);
 int FUN_002be624(...);
-int FUN_002bfde4(...);
+int padIsButtonPressed(...);
 int jobGetWork(...);
 int FUN_002c1b64(...);
 int SBORROW4(unsigned int, int);
@@ -63,13 +63,13 @@ extern unsigned int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_0027f958. */
 /* Supplied declaration required: FUN_002aed34. */
 /* Supplied declaration required: FUN_002b76d0. */
-extern int FUN_002b8cec(unsigned int);
+extern int padIsButtonRepeat(unsigned int);
 /* Supplied declaration required: FUN_002be624. */
-/* Supplied declaration required: FUN_002bfde4. */
+/* Supplied declaration required: padIsButtonPressed. */
 /* Supplied declaration required: jobGetWork. */
 extern int FUN_002c15fc(unsigned int);
 /* Supplied declaration required: FUN_002c1b64. */
-extern int FUN_002c30c4(void);
+extern int libc_strlen(void);
 
 
 unsigned int FUN_001fe640(unsigned int param_1)
@@ -313,7 +313,7 @@ joined_r0x001feb24:
             default:
               break;
             case 1:
-              temp_v4 = FUN_002c30c4();
+              temp_v4 = libc_strlen();
               temp_v12 = (float)VectorUnsignedToFloat
                                         ((temp_v4 + 1) * piVar2[0x16],(unsigned char)(in_fpscr >> 0x16) & 3);
               temp_v19 = temp_v19 - temp_v12;
@@ -378,7 +378,7 @@ joined_r0x001feb24:
             temp_v3 = piVar2[0xb];
           }
           else {
-            temp_v1 = FUN_002b8cec(3);
+            temp_v1 = padIsButtonRepeat(3);
             temp_v5 = 10000;
             temp_v6 = 100000;
             temp_v12 = 0.01f;
@@ -428,7 +428,7 @@ joined_r0x001feb24:
                   temp_v3 = temp_v5 + *(int *)(temp_v1 + 0x208);
                   *(unsigned int *)(temp_v1 + 0x208) = temp_v3;
                   if ((int)temp_v3 <= *(int *)(temp_v1 + 0x214)) goto LAB_001ff420;
-                  temp_v4 = FUN_002bfde4(3);
+                  temp_v4 = padIsButtonPressed(3);
                   if (temp_v4 == 0) {
                     temp_v3 = *(unsigned int *)(temp_v1 + 0x214);
                     break;
@@ -459,7 +459,7 @@ joined_r0x001feb24:
                   temp_v0 = (unsigned char)(temp_v3 >> 0x18);
                   temp_v3 = temp_v5;
                   if (!((unsigned char)((temp_v0 >> 6) & 1) || temp_v0 >> 7 != ((unsigned char)(temp_v6 >> 0x1c) & 1))) {
-                    temp_v3 = FUN_002bfde4(3);
+                    temp_v3 = padIsButtonPressed(3);
                     if (temp_v3 == 0) {
 LAB_001ff2bc:
                       temp_v7 = VectorSignedToFloat(*(unsigned int *)(temp_v1 + 0x214),
@@ -479,7 +479,7 @@ LAB_001ff2d8:
               }
             }
             else {
-              temp_v1 = FUN_002b8cec(4);
+              temp_v1 = padIsButtonRepeat(4);
               if (temp_v1 != 0) {
                 temp_v1 = jobGetWork(param_1);
                 temp_v4 = *(int *)(temp_v1 + 0x60);
@@ -526,7 +526,7 @@ LAB_001ff2d8:
                     temp_v3 = *(int *)(temp_v1 + 0x208) - temp_v5;
                     *(unsigned int *)(temp_v1 + 0x208) = temp_v3;
                     if (*(int *)(temp_v1 + 0x210) <= (int)temp_v3) goto LAB_001ff420;
-                    temp_v4 = FUN_002bfde4(4);
+                    temp_v4 = padIsButtonPressed(4);
                     if (temp_v4 == 0) {
                       temp_v3 = *(unsigned int *)(temp_v1 + 0x210);
                       break;
@@ -554,7 +554,7 @@ LAB_001ff2d8:
                     temp_v6 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v10 <= temp_v12) << 0x1d);
                     temp_v3 = temp_v5;
                     if (romwright_subpiece_4_1_0(temp_v6 >> 0x1d,0)) goto LAB_001ff420;
-                    temp_v3 = FUN_002bfde4(4);
+                    temp_v3 = padIsButtonPressed(4);
                     if (temp_v3 == 0) goto LAB_001ff2d8;
                     goto LAB_001ff2bc;
                   }
@@ -562,7 +562,7 @@ LAB_001ff2d8:
                 }
               }
               else {
-                temp_v1 = FUN_002bfde4(0);
+                temp_v1 = padIsButtonPressed(0);
                 temp_v3 = 0;
                 if (temp_v1 != 0) {
                   temp_v1 = jobGetWork(param_1);

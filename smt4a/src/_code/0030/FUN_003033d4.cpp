@@ -6,7 +6,7 @@ extern "C" {
 
 extern unsigned char DAT_005806a0; /* 0x5806a0 */
 
-extern int FUN_00162e8c(void);
+extern int gameFlagsGetBlock(void);
 
 
 int FUN_003033d4(void)
@@ -15,7 +15,7 @@ int FUN_003033d4(void)
   int temp_v0;
   int temp_v1;
   
-  temp_v0 = FUN_00162e8c();
+  temp_v0 = gameFlagsGetBlock();
   temp_v1 = *(int *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x20c);
   if (temp_v1 == -1) {
     temp_v1 = *(int *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 200);

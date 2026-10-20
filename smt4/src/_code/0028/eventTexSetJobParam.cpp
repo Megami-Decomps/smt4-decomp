@@ -2,13 +2,13 @@
 
 extern "C" {
 
-void FUN_002c425c(u32 job, u32 value);
+void jobSetParent(u32 job, u32 value);
 
 extern EventTex *g_eventTex;
 
 void eventTexSetJobParam(u32 value)
 {
-    FUN_002c425c(g_eventTex->job, value);
+    jobSetParent(g_eventTex->job, value);
 }
 
 } /* extern "C" */

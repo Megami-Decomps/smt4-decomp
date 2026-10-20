@@ -13,8 +13,8 @@ int FUN_00170390(int);
 int FUN_00170474(int);
 int FUN_00170f68(unsigned int *, unsigned int, int, unsigned int [2], int);
 int FUN_00189a38(int, int);
-int FUN_0018b868(void);
-int FUN_0018b964(void);
+int nn_applet_CTR_detail_OpenSession(void);
+int nn_applet_CTR_detail_CloseSession(void);
 
 /* stack frame of param_1: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -39,8 +39,8 @@ extern int FUN_001703e8(void);
 /* Supplied declaration required: FUN_00170474. */
 /* Supplied declaration required: FUN_00170f68. */
 /* Supplied declaration required: FUN_00189a38. */
-/* Supplied declaration required: FUN_0018b868. */
-/* Supplied declaration required: FUN_0018b964. */
+/* Supplied declaration required: nn_applet_CTR_detail_OpenSession. */
+/* Supplied declaration required: nn_applet_CTR_detail_CloseSession. */
 
 
 void FUN_00147ad8(int param_1)
@@ -59,13 +59,13 @@ void FUN_00147ad8(int param_1)
   if (param_1 != 0) {
     FUN_00170390(0);
   }
-  FUN_0018b868();
+  nn_applet_CTR_detail_OpenSession();
   FUN_0015a2d8();
   temp_v0 = FUN_0015ac58();
   if (temp_v0 < 0) {
     FUN_00189a38(temp_v0,0x147b00);
   }
-  FUN_0018b964();
+  nn_applet_CTR_detail_CloseSession();
   temp_v0 = FUN_001703e8();
   if ((temp_v0 != 0) && (temp_v1 = FUN_0015a2d8(), (temp_v1 & 0x20) == 0)) {
     FUN_00170474(0x62);

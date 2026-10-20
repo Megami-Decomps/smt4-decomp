@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0026b9bc(void);
 int FUN_0028a368(int);
 int FUN_0028a924(int, int, unsigned int);
-int FUN_002b8838(int);
+int buttonHelpSetPreset(int);
 int campCecSettingOpen(void);
 int campCecSettingDestroy(void);
 
@@ -25,7 +25,7 @@ extern unsigned char FUN_002595bc(void);
 /* Supplied declaration required: FUN_0026b9bc. */
 /* Supplied declaration required: FUN_0028a368. */
 /* Supplied declaration required: FUN_0028a924. */
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 extern int campCecSettingExists(void);
 extern int campCecSettingIsDone(void);
 /* Supplied declaration required: campCecSettingOpen. */
@@ -46,7 +46,7 @@ unsigned int FUN_002114fc(fn_002114fc_arg0 *param_1)
     temp_v1 = campCecSettingIsDone();
     if (temp_v1 != 0) {
       campCecSettingDestroy();
-      FUN_002b8838(3);
+      buttonHelpSetPreset(3);
       param_1->field_0xd34 = 0;
       param_1->field_0xd2c = 6;
       FUN_0026b9bc();

@@ -4,18 +4,18 @@
 
 extern "C" {
 
-int FUN_00282924(int, int);
+int btlMainFindEntryByListedId(int, int);
 int scrSetResult(int);
 int btlGetMainState(void);
 int FUN_002953b8(void);
 int FUN_0033b960(void);
 
-/* Supplied declaration required: FUN_00282924. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: scrSetResult. */
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_002953b8. */
 extern int scrGetArg(void);
-extern int FUN_002a8740(int);
+extern int gameGetUnitRecord(int);
 /* Supplied declaration required: FUN_0033b960. */
 
 
@@ -30,11 +30,11 @@ unsigned int FUN_003004fc(void)
   if (temp_v0 < 0x6d) {
     btlGetMainState();
     temp_v1 = btlGetMainState();
-    FUN_00282924(temp_v1,temp_v0);
+    btlMainFindEntryByListedId(temp_v1,temp_v0);
     temp_v0 = *(int *)(temp_v1 + 0x27c);
   }
   else {
-    temp_v0 = FUN_002a8740(temp_v0 - 0x6d);
+    temp_v0 = gameGetUnitRecord(temp_v0 - 0x6d);
   }
   FUN_0033b960();
   if (0 < temp_v0) {

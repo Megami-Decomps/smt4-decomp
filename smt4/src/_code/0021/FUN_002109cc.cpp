@@ -22,7 +22,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } void_stack;
 
-extern unsigned char DAT_0043da28; /* 0x43da28 */
+extern unsigned char g_buttonHelp; /* 0x43da28 */
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -31,8 +31,8 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_0029a268. */
 /* Supplied declaration required: FUN_002b75ec. */
 /* Supplied declaration required: FUN_002be5a4. */
-extern unsigned int FUN_002bed98(int);
-extern unsigned int FUN_002beda4(int);
+extern unsigned int vec2GetYInt(int);
+extern unsigned int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bf288. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002c18e4. */
@@ -58,8 +58,8 @@ unsigned char FUN_002109cc(void)
   unsigned char temp_v9;
   unsigned int in_fpscr;
   
-  temp_v1 = (*(int *)((unsigned char *)&DAT_0043da28 + 0x4));
-  if (*(char *)((*(int *)((unsigned char *)&DAT_0043da28 + 0x4)) + 0x4c4) != '\0') {
+  temp_v1 = (*(int *)((unsigned char *)&g_buttonHelp + 0x4));
+  if (*(char *)((*(int *)((unsigned char *)&g_buttonHelp + 0x4)) + 0x4c4) != '\0') {
     FUN_002c39a4(g_titleScene);
     temp_v4 = g_titleScene;
     temp_v2 = FUN_002c5d80(1,0);
@@ -80,8 +80,8 @@ unsigned char FUN_002109cc(void)
         FUN_0029a268(temp_v1 + 0x408);
       }
       else {
-        temp_v5 = FUN_002beda4(temp_v1 + 0x37c);
-        temp_v6 = FUN_002bed98(temp_v1 + 0x37c);
+        temp_v5 = vec2GetXInt(temp_v1 + 0x37c);
+        temp_v6 = vec2GetYInt(temp_v1 + 0x37c);
         FUN_002bf288(2,0x12,0,temp_v5,temp_v6,0x10);
         FUN_002bf288(2,0x12,1,temp_v5,temp_v6,0x10);
       }

@@ -7,9 +7,9 @@ extern "C" {
 
 int jobStop(u32 task, int flags);     /* kill a task */
 int asdMemFree(void *ptr);               /* heap free */
-int FUN_0019a7f4(int type, int index);
+int asdTMTexTableReleaseNode(int type, int index);
 int scrScriptProcessDestroy(u32 handle);
-int FUN_00237210(u32 text);
+int asdMemFreeSlot(u32 text);
 
 extern CampCecRanking *g_campCecRanking;
 
@@ -18,12 +18,12 @@ void campCecRankingDestroy(void)
     CampCecRanking *ranking = g_campCecRanking;
     int i;
 
-    FUN_0019a7f4(0x2e, 1);
+    asdTMTexTableReleaseNode(0x2e, 1);
     for (i = 0; i < RANK_PLAYERS; i++) {
-        FUN_00237210(ranking->playerText[i]);
+        asdMemFreeSlot(ranking->playerText[i]);
     }
     for (i = 0; i < RANK_CATEGORIES; i++) {
-        FUN_00237210(ranking->categoryText[i]);
+        asdMemFreeSlot(ranking->categoryText[i]);
     }
     if (ranking->heapA != NULL) {
         asdMemFree(ranking->heapA);

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001a08d8(int *);
+int nn_os_LightEvent_Signal(int *);
 int nw_snd_internal_TaskManager_GetNextTask(...);
 
 typedef int romwright_code(...);
@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_001a08d8. */
+/* Supplied declaration required: nn_os_LightEvent_Signal. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
 /* Supplied declaration required: nw_snd_internal_TaskManager_GetNextTask. */
@@ -39,7 +39,7 @@ void FUN_001a5ae0(int param_1)
   *(int **)(param_1 + 0x24) = piVar1;
   (**(romwright_code **)(*piVar1 + 8))(piVar1);
   *(unsigned char *)(piVar1 + 5) = 3;
-  FUN_001a08d8(piVar1 + 3);
+  nn_os_LightEvent_Signal(piVar1 + 3);
   *(unsigned int *)(param_1 + 0x24) = 0;
   return;
 }

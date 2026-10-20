@@ -2,7 +2,7 @@
 
 extern "C" {
 
-s32 FUN_001c6e20(void);
+s32 nn_snd_CTR_Dspsnd_IsInitialized(void);
 
 /* Sets the sync mode on the active command block and flags the change, if the DSP is available. */
 void nn_snd_CTR_Dspsnd_SetSyncMode(DspsndState *state, u16 value)
@@ -10,7 +10,7 @@ void nn_snd_CTR_Dspsnd_SetSyncMode(DspsndState *state, u16 value)
     s32 result;
     DspCommand *command;
 
-    result = FUN_001c6e20();
+    result = nn_snd_CTR_Dspsnd_IsInitialized();
     if (result != 0) {
         command = state->commands[state->current];
         command->syncMode = value;

@@ -21,7 +21,7 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_2_stack;
 
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_001568f8. */
@@ -56,7 +56,7 @@ void FUN_004f5fb8(int param_1,int param_2)
     temp_v4 = *(unsigned int *)(*(int *)(temp_v6 + 0x960) + 4);
     FUN_003fd7b4(temp_v4);
     FUN_003fe86c(temp_v4,0,2);
-    FUN_0040ace8(DAT_0056fcc0,temp_v4);
+    FUN_0040ace8(g_handleRegistry,temp_v4);
     temp_v0 = btlGetMainState();
     temp_v3 = *(int *)(temp_v0 + 0x1ed4) + param_2 * 0x1d0;
     temp_v4 = btlGetMainState();

@@ -36,7 +36,7 @@ extern int FUN_0029efc0(int);
 /* Supplied declaration required: FUN_002b6dd8. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: FUN_002be624. */
-extern int FUN_002beda4(int);
+extern int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf4f8. */
 extern unsigned int dataTableGetCount(unsigned int);
@@ -69,7 +69,7 @@ void FUN_00194b14(void)
   temp_v1 = FUN_0029d644(g_playLog + 0x2dc);
   if (0 < temp_v1) {
     do {
-      temp_v1 = FUN_002beda4(temp_v0 + temp_v8 * 0x8c + 0x20);
+      temp_v1 = vec2GetXInt(temp_v0 + temp_v8 * 0x8c + 0x20);
       if (temp_v8 == 0) {
         FUN_002bf380(2,0x30,0,temp_v1,0,0xb);
       }

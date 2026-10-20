@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern StateHolder518 *DAT_00588fe8;
+extern StateHolder518 *g_statusDown;
 
 /* True when there is no object or its state is 0. */
 u8 stateHolderIsMissingOrState0(void)
 {
-    return DAT_00588fe8 == NULL || DAT_00588fe8->state == 0;
+    return g_statusDown == NULL || g_statusDown->state == 0;
 }
 
 } /* extern "C" */

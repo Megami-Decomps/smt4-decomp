@@ -19,10 +19,10 @@ int asdProcessCreateSimple(...);
 int FUN_001505ac(...);
 int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
-int FUN_001846d0(...);
-int FUN_00184758(...);
-int FUN_001ab888(...);
-int FUN_001b4a90(...);
+int uiSpriteSelectAnim(...);
+int uiSpriteSetKeyframe(...);
+int gameGetSlotTable(...);
+int __aeabi_memset4(...);
 int FUN_0020d700(...);
 int FUN_0023f604(...);
 int FUN_0026f148(...);
@@ -34,8 +34,8 @@ int FUN_002c8538(...);
 int FUN_002e5c48(...);
 int sysMemClear(...);
 int FUN_002f78a0(...);
-int FUN_0031a400(...);
-int FUN_00342010(...);
+int campCommonBgAcquire(...);
+int campButtonHelpAcquire(...);
 int FUN_003423e8(...);
 int FUN_003493dc(...);
 int FUN_0038b1c4(...);
@@ -69,8 +69,8 @@ extern unsigned char DAT_0052b8bc; /* 0x52b8bc */
 extern unsigned char DAT_0052b970; /* 0x52b970 */
 extern unsigned char DAT_0052bac0; /* 0x52bac0 */
 extern unsigned char DAT_0052baf0; /* 0x52baf0 */
-extern unsigned int *DAT_0057f108; /* 0x57f108 */
-extern int DAT_0057f268; /* 0x57f268 */
+extern unsigned int *g_camp; /* 0x57f108 */
+extern int g_partyPanel; /* 0x57f268 */
 extern unsigned char g_campState; /* 0x5e1eb0 */
 extern unsigned char DAT_005e1eba; /* 0x5e1eba */
 extern unsigned char DAT_005f1634; /* 0x5f1634 */
@@ -80,10 +80,10 @@ extern unsigned char DAT_005f1634; /* 0x5f1634 */
 /* Supplied declaration required: FUN_001505ac. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: FUN_001846d0. */
-/* Supplied declaration required: FUN_00184758. */
-/* Supplied declaration required: FUN_001ab888. */
-/* Supplied declaration required: FUN_001b4a90. */
+/* Supplied declaration required: uiSpriteSelectAnim. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
+/* Supplied declaration required: gameGetSlotTable. */
+/* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: FUN_0020d700. */
 /* Supplied declaration required: FUN_0020d934. */
 /* Supplied declaration required: FUN_002304d0. */
@@ -102,10 +102,10 @@ extern int FUN_002e27b8(void);
 /* Supplied declaration required: sysMemClear. */
 extern int FUN_002ef9f0(void);
 /* Supplied declaration required: FUN_002f78a0. */
-/* Supplied declaration required: FUN_0031a400. */
+/* Supplied declaration required: campCommonBgAcquire. */
 /* Supplied declaration required: FUN_003343f0. */
 /* Supplied declaration required: FUN_003344b4. */
-/* Supplied declaration required: FUN_00342010. */
+/* Supplied declaration required: campButtonHelpAcquire. */
 /* Supplied declaration required: FUN_003423e8. */
 /* Supplied declaration required: FUN_003493dc. */
 extern unsigned char FUN_0036d134(void);
@@ -142,15 +142,15 @@ void FUN_002c3398(void)
   int temp_v6;
   unsigned int *puVar11;
   
-  if (DAT_0057f108 == (unsigned int *)0x0) {
+  if (g_camp == (unsigned int *)0x0) {
     puVar2 = (unsigned int *)0x100;
     asdMemoryAllocTracked(0x100,0x100,0,0x33c0,1);
-    DAT_0057f108 = puVar2;
+    g_camp = puVar2;
   }
-  puVar2 = DAT_0057f108;
+  puVar2 = g_camp;
   sysMemClear();
   clearThreeWords(&g_campState);
-  FUN_0031a400();
+  campCommonBgAcquire();
   puVar3 = &LAB_002c3794;
   asdProcessCreateSimple(&LAB_002c3794,4,0,0,FUN_003d56dc,0,0);
   *puVar2 = (unsigned int)puVar3;
@@ -160,8 +160,8 @@ void FUN_002c3398(void)
   taskCreateDraw(&LAB_002c37cc,0xeb,0,0,FUN_00227418,0,0,*puVar2);
   puVar2[2] = (unsigned int)puVar3;
   taskCreateDraw(&LAB_002c37dc,0xe9,0,0,FUN_0025ec04,0,0,*puVar2);
-  puVar2 = DAT_0057f108;
-  *(unsigned char *)(DAT_0057f108 + 0x2e) = 0;
+  puVar2 = g_camp;
+  *(unsigned char *)(g_camp + 0x2e) = 0;
   *(unsigned char *)((int)puVar2 + 0xb9) = 3;
   puVar2[0xcee] = 0;
   DAT_005e1eba = 0;
@@ -170,7 +170,7 @@ void FUN_002c3398(void)
   FUN_0038b1c4();
   FUN_003a7040();
   FUN_002e5c48();
-  FUN_00342010();
+  campButtonHelpAcquire();
   FUN_003423e8(0);
   puVar4 = puVar2 + 0x18e;
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object();
@@ -178,11 +178,11 @@ void FUN_002c3398(void)
                0x4d0);
   FUN_0014e188(puVar2 + 0x196,0x14,0,puVar4,0xc9);
   FUN_0014e188(puVar2 + 0x1b9,0x14,0,puVar4,0xc9);
-  FUN_00184758(puVar2 + 0x1b9,1,0);
+  uiSpriteSetKeyframe(puVar2 + 0x1b9,1,0);
   FUN_0014e188(puVar2 + 0x1dc,0x14,0,puVar4,0xc9);
-  FUN_001846d0(puVar2 + 0x1dc,10);
+  uiSpriteSelectAnim(puVar2 + 0x1dc,10);
   FUN_0014e188(puVar2 + 0x1ff,0x14,0,puVar4,0xc9);
-  FUN_001846d0(puVar2 + 0x1ff,2);
+  uiSpriteSelectAnim(puVar2 + 0x1ff,2);
   FUN_0014e188(puVar2 + 0x222,0x14,0,puVar4,0xc9);
   temp_v6 = 0;
   do {
@@ -190,17 +190,17 @@ void FUN_002c3398(void)
     temp_v6 = temp_v6 + 1;
   } while (temp_v6 < 8);
   FUN_0014e188(puVar2 + 0x35d,0x14,0,puVar4,0xc9);
-  FUN_001846d0(puVar2 + 0x35d,1);
+  uiSpriteSelectAnim(puVar2 + 0x35d,1);
   FUN_0014e188(puVar2 + 0x380,0x14,0,puVar4,0xc9);
-  FUN_001846d0(puVar2 + 0x380,9);
+  uiSpriteSelectAnim(puVar2 + 0x380,9);
   FUN_0026fc00(2,1,0xffffffff,0);
   FUN_002f78a0(puVar2);
   FUN_0014e188(puVar2 + 0x682,0x14,0,puVar4,2);
   *(unsigned char *)(puVar2 + 0x6c8) = 0;
   FUN_0014e188(puVar2 + 0x6a5,0x14,0,puVar4,0xc9);
-  FUN_001846d0(puVar2 + 0x6a5,0xb);
-  puVar4 = DAT_0057f108;
-  puVar11 = DAT_0057f108 + 0xcac;
+  uiSpriteSelectAnim(puVar2 + 0x6a5,0xb);
+  puVar4 = g_camp;
+  puVar11 = g_camp + 0xcac;
   *(unsigned char *)puVar11 = 0;
   *(unsigned char *)((int)puVar4 + 0x32b1) = 0;
   *(unsigned char *)((int)puVar4 + 0x32b2) = 0;
@@ -217,27 +217,27 @@ void FUN_002c3398(void)
   if ((temp_v6 != 0) || (temp_v6 = FUN_00418768(0), temp_v6 == 0)) {
     *(unsigned char *)((int)puVar4 + 0x32b1) = 1;
   }
-  puVar4 = DAT_0057f108;
+  puVar4 = g_camp;
   temp_v0 = FUN_003c0dcc();
   *(unsigned char *)((int)puVar4 + 0x32b2) = temp_v0;
   temp_v0 = FUN_003b6f00();
   *(unsigned char *)((int)puVar4 + 0x32b3) = temp_v0;
-  puVar4 = DAT_0057f108;
-  *(unsigned char *)(DAT_0057f108 + 0xcad) = 0;
+  puVar4 = g_camp;
+  *(unsigned char *)(g_camp + 0xcad) = 0;
   temp_v6 = FUN_002e27b8();
   if (0 < temp_v6) {
     *(unsigned char *)(puVar4 + 0xcad) = 1;
   }
-  puVar4 = DAT_0057f108;
+  puVar4 = g_camp;
   temp_v0 = FUN_003e42f0();
   *(unsigned char *)((int)puVar4 + 0x32b5) = temp_v0;
-  puVar4 = DAT_0057f108;
+  puVar4 = g_camp;
   temp_v0 = FUN_0036d134();
   *(unsigned char *)((int)puVar4 + 0x32b6) = temp_v0;
   *(unsigned char *)(puVar2 + 0x29) = 1;
   FUN_0020d700();
-  FUN_001b4a90((int)puVar2 + 0x1b22,0x4a,0xffffffff);
-  FUN_001ab888();
+  __aeabi_memset4((int)puVar2 + 0x1b22,0x4a,0xffffffff);
+  gameGetSlotTable();
   FUN_0023f604(0xb);
   FUN_0023f604(0xd);
   FUN_0023f604(0xe);
@@ -250,10 +250,10 @@ void FUN_002c3398(void)
   FUN_0026f148(0x18);
   FUN_0026f148(0x19);
   FUN_003493dc(1);
-  temp_v6 = DAT_0057f268;
-  FUN_001ab888(&DAT_0057f268,0,0xffffffff);
+  temp_v6 = g_partyPanel;
+  gameGetSlotTable(&g_partyPanel,0,0xffffffff);
   *(unsigned char *)(temp_v6 + 0x9b4) = 1;
-  FUN_001b4a90(temp_v6 + 0x9c0,4,1);
+  __aeabi_memset4(temp_v6 + 0x9c0,4,1);
   temp_v1 = 0;
   temp_v5 = 0;
   do {
@@ -306,7 +306,7 @@ void FUN_002c3398(void)
           do {
             temp_v2 = ((int)(temp_v1 + ((unsigned int)(temp_v1 >> 0x1f) >> 0x1e)) >> 2) + 1;
             if (temp_v2 != 0) {
-              if (*(short *)(DAT_0057f268 + ((temp_v2 * 4 - 4) + temp_v1 % 4) * 8 + 0xa84) != 0) {
+              if (*(short *)(g_partyPanel + ((temp_v2 * 4 - 4) + temp_v1 % 4) * 8 + 0xa84) != 0) {
 LAB_002c4664:
                 FUN_002a4914(temp_v5,temp_v1 % 4);
                 FUN_002a4964(temp_v5,((int)(temp_v1 + ((unsigned int)(temp_v1 >> 0x1f) >> 0x1e)) >> 2) + 1);
@@ -314,12 +314,12 @@ LAB_002c4664:
                 break;
               }
             }
-            else if (*(char *)(DAT_0057f268 + temp_v1 % 4 + 0x9c0) != '\0') goto LAB_002c4664;
+            else if (*(char *)(g_partyPanel + temp_v1 % 4 + 0x9c0) != '\0') goto LAB_002c4664;
             temp_v1 = temp_v1 + 1;
           } while (temp_v1 < 0x18);
           temp_v1 = 0;
           do {
-            if (*(char *)(DAT_0057f268 + temp_v1 + 0x9c0) != '\0') {
+            if (*(char *)(g_partyPanel + temp_v1 + 0x9c0) != '\0') {
               FUN_002a4914(temp_v5);
               temp_v1 = 0;
               FUN_002a4964(temp_v5,temp_v1);
@@ -330,7 +330,7 @@ LAB_002c4664:
         }
         else {
           do {
-            if (*(char *)(DAT_0057f268 + temp_v1 + 0x9c0) != '\0') {
+            if (*(char *)(g_partyPanel + temp_v1 + 0x9c0) != '\0') {
               FUN_002a4914(temp_v5,temp_v1);
               FUN_002a4964(temp_v5,0);
               if (temp_v1 < 4) goto LAB_002c4a2c;
@@ -342,14 +342,14 @@ LAB_002c4664:
           do {
             temp_v2 = ((int)(temp_v1 + ((unsigned int)(temp_v1 >> 0x1f) >> 0x1e)) >> 2) + 1;
             if (temp_v2 != 0) {
-              if (*(short *)(DAT_0057f268 + ((temp_v2 * 4 - 4) + temp_v1 % 4) * 8 + 0xa84) != 0) {
+              if (*(short *)(g_partyPanel + ((temp_v2 * 4 - 4) + temp_v1 % 4) * 8 + 0xa84) != 0) {
                 FUN_002a4914(temp_v5,temp_v1 % 4);
                 temp_v1 = ((int)(temp_v1 + ((unsigned int)(temp_v1 >> 0x1f) >> 0x1e)) >> 2) + 1;
                 FUN_002a4964(temp_v5,temp_v1);
                 break;
               }
             }
-            else if (*(char *)(DAT_0057f268 + temp_v1 % 4 + 0x9c0) != '\0') {
+            else if (*(char *)(g_partyPanel + temp_v1 % 4 + 0x9c0) != '\0') {
               FUN_002a4914(temp_v5,temp_v1 % 4);
               temp_v1 = ((int)(temp_v1 + ((unsigned int)(temp_v1 >> 0x1f) >> 0x1e)) >> 2) + 1;
               FUN_002a4964(temp_v5,temp_v1);
@@ -372,7 +372,7 @@ LAB_002c4664:
             temp_v5 = ((int)(temp_v1 + ((unsigned int)(temp_v1 >> 0x1f) >> 0x1e)) >> 2) + 1;
             temp_v2 = temp_v1 % 4 + *(int *)(temp_v6 + 0x2c) * 0xc;
             if (temp_v5 != 0) {
-              if (*(short *)(DAT_0057f268 + ((temp_v5 * 4 - 4) + temp_v2) * 8 + 0xa84) != 0) {
+              if (*(short *)(g_partyPanel + ((temp_v5 * 4 - 4) + temp_v2) * 8 + 0xa84) != 0) {
 LAB_002c4858:
                 temp_v5 = temp_v1 + *(int *)(temp_v6 + 0x2c) * 0xc;
                 if (temp_v5 < 0xc) {
@@ -392,12 +392,12 @@ LAB_002c4858:
                 break;
               }
             }
-            else if (*(char *)(DAT_0057f268 + temp_v2 + 0x9c0) != '\0') goto LAB_002c4858;
+            else if (*(char *)(g_partyPanel + temp_v2 + 0x9c0) != '\0') goto LAB_002c4858;
             temp_v1 = temp_v1 + 1;
           } while (temp_v1 < 0x18);
           temp_v1 = 0;
           do {
-            if (*(char *)(DAT_0057f268 + temp_v1 + 0x9c0) != '\0') {
+            if (*(char *)(g_partyPanel + temp_v1 + 0x9c0) != '\0') {
               FUN_002a4914(temp_v6 + 0xd50);
               temp_v1 = 0;
               temp_v5 = temp_v6 + 0xd50;
@@ -409,7 +409,7 @@ LAB_002c4858:
         }
         else {
           do {
-            if (*(char *)(DAT_0057f268 + temp_v1 + 0x9c0) != '\0') {
+            if (*(char *)(g_partyPanel + temp_v1 + 0x9c0) != '\0') {
               FUN_002a4914(temp_v6 + 0xd50,temp_v1);
               FUN_002a4964(temp_v6 + 0xd50,0);
               if (temp_v1 < 4) goto LAB_002c4a2c;
@@ -417,12 +417,12 @@ LAB_002c4858:
             }
             temp_v1 = temp_v1 + 1;
           } while (temp_v1 < 4);
-          temp_v1 = DAT_0057f268;
+          temp_v1 = g_partyPanel;
           temp_v5 = 0;
           do {
             temp_v2 = ((int)(temp_v5 + ((unsigned int)(temp_v5 >> 0x1f) >> 0x1e)) >> 2) + 1;
             if (temp_v2 != 0) {
-              if (*(short *)(DAT_0057f268 + (temp_v5 % 4 + (temp_v2 * 4 - 4)) * 8 + 0xa84) == 0)
+              if (*(short *)(g_partyPanel + (temp_v5 % 4 + (temp_v2 * 4 - 4)) * 8 + 0xa84) == 0)
               goto LAB_002c4a1c;
 LAB_002c49c4:
               if (temp_v5 < 0xc) {
@@ -430,8 +430,8 @@ LAB_002c49c4:
                   *(unsigned int *)(temp_v6 + 0x2c) = 0;
                 }
                 else {
-                  *(unsigned int *)(DAT_0057f268 + 0x2c) = *(unsigned int *)(DAT_0057f268 + 0x2c) ^ 1;
-                  FUN_00184758(temp_v1 + 0x180,5,0);
+                  *(unsigned int *)(g_partyPanel + 0x2c) = *(unsigned int *)(g_partyPanel + 0x2c) ^ 1;
+                  uiSpriteSetKeyframe(temp_v1 + 0x180,5,0);
                   temp_v2 = 0;
                   do {
                     FUN_003f5220(*(unsigned int *)(temp_v1 + temp_v2 * 4 + 0xa10),
@@ -454,8 +454,8 @@ LAB_002c49c4:
                 *(unsigned int *)(temp_v6 + 0x2c) = 1;
               }
               else {
-                *(unsigned int *)(DAT_0057f268 + 0x2c) = *(unsigned int *)(DAT_0057f268 + 0x2c) ^ 1;
-                FUN_00184758(temp_v1 + 0x180,4,0);
+                *(unsigned int *)(g_partyPanel + 0x2c) = *(unsigned int *)(g_partyPanel + 0x2c) ^ 1;
+                uiSpriteSetKeyframe(temp_v1 + 0x180,4,0);
                 temp_v2 = 0;
                 do {
                   FUN_003f5220(*(unsigned int *)(temp_v1 + temp_v2 * 4 + 0xa10),
@@ -476,7 +476,7 @@ LAB_002c49c4:
               FUN_002a4964(temp_v5,temp_v1);
               break;
             }
-            if (*(char *)(DAT_0057f268 + temp_v5 % 4 + 0x9c0) != '\0') goto LAB_002c49c4;
+            if (*(char *)(g_partyPanel + temp_v5 % 4 + 0x9c0) != '\0') goto LAB_002c49c4;
 LAB_002c4a1c:
             temp_v5 = temp_v5 + 1;
           } while (temp_v5 < 0x18);
@@ -486,12 +486,12 @@ LAB_002c4a1c:
   }
 LAB_002c4a2c:
   FUN_0020d934();
-  temp_v1 = DAT_0057f268;
+  temp_v1 = g_partyPanel;
   if (*(int *)(temp_v6 + 0x1c) != 0x1b) {
     return;
   }
   temp_v6 = *(int *)(temp_v6 + 0x20);
-  *(unsigned int *)(DAT_0057f268 + 0x24) = *(unsigned int *)(DAT_0057f268 + 0x1c);
+  *(unsigned int *)(g_partyPanel + 0x24) = *(unsigned int *)(g_partyPanel + 0x1c);
   *(int *)(temp_v1 + 0x1c) = temp_v6;
   *(unsigned int *)(temp_v1 + 0x18) = 0;
   if (temp_v6 == 0x1b) {

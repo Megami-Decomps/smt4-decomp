@@ -13,7 +13,7 @@ int FUN_00180310(...);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
 int FUN_00183bb0(void);
-int FUN_00184e64(...);
+int drawSetColorFromRGBA8(...);
 int FUN_00192608(void);
 int FUN_0026ec00(int, int, unsigned int);
 int FUN_0047fc38(void);
@@ -51,7 +51,7 @@ extern unsigned char LAB_0034d828; /* 0x34d828 */
 extern unsigned char LAB_0034d838; /* 0x34d838 */
 extern unsigned char LAB_0034d840; /* 0x34d840 */
 extern unsigned char LAB_0034d850; /* 0x34d850 */
-extern int DAT_0057f108; /* 0x57f108 */
+extern int g_camp; /* 0x57f108 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00100388. */
@@ -59,12 +59,12 @@ extern int DAT_0057f108; /* 0x57f108 */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_001676b0. */
 /* Supplied declaration required: FUN_001689e8. */
-extern unsigned short *FUN_001801a4(void);
+extern unsigned short *gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_00184e64. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_00192608. */
 extern unsigned int FUN_001ba3d4(int);
 /* Supplied declaration required: FUN_0026ec00. */
@@ -108,12 +108,12 @@ void FUN_0034cfc0(int param_1,int param_2,int param_3,int param_4,int param_5)
   int temp_v22;
   int iStack_28;
   
-  temp_v2 = DAT_0057f108;
+  temp_v2 = g_camp;
   iStack_34 = param_1;
   iStack_30 = param_2;
   temp_v22 = param_3;
   iStack_28 = param_4;
-  puVar3 = (unsigned short *)FUN_001801a4();
+  puVar3 = (unsigned short *)gameGetPlayerData();
   if (temp_v22 == 0) {
     return;
   }
@@ -164,7 +164,7 @@ void FUN_0034cfc0(int param_1,int param_2,int param_3,int param_4,int param_5)
   temp_v21 = FUN_001834a4(0x14,0x52f);
   temp_v10 = FUN_001ba3d4(temp_v22);
   FUN_00100388(temp_v12,&LAB_0034d46c,temp_v10);
-  FUN_00184e64(0xffffffff);
+  drawSetColorFromRGBA8(0xffffffff);
   FUN_00180310(0,(int)*(short *)(temp_v21 + 8) + (int)*(short *)(temp_v3 + 8) + param_4,
                (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v21 + 10) + param_5,1,2,0x83,
                temp_v12);
@@ -204,7 +204,7 @@ LAB_0034d600:
         FUN_00192608();
         temp_v8 = *(unsigned int *)(temp_v8 + 0x24) & 0x3ff;
       }
-      FUN_00184e64(0xffffffff);
+      drawSetColorFromRGBA8(0xffffffff);
       temp_v6 = *(unsigned int *)(temp_v9 + 0x24) & 0x3ff;
       temp_v5 = temp_v6;
       if (temp_v6 < temp_v8) {
@@ -214,7 +214,7 @@ LAB_0034d600:
         temp_v5 = 0x72e027ff;
       }
       if (temp_v6 != temp_v8) {
-        FUN_00184e64(temp_v5);
+        drawSetColorFromRGBA8(temp_v5);
       }
       temp_v2 = FUN_001834a4(0x14,0x542);
       FUN_00100388(temp_v12,&LAB_0034d46c,*(unsigned int *)(temp_v9 + 0x24) & 0x3ff);
@@ -244,7 +244,7 @@ LAB_0034d600:
       else {
         FUN_00100388(temp_v12,&LAB_0034d850,temp_v0 & 0xf,temp_v0 >> 4);
       }
-      FUN_00184e64(0xffffffff);
+      drawSetColorFromRGBA8(0xffffffff);
       temp_v2 = FUN_001834a4(0x14,0x546);
       FUN_00180310(0,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v3 + 8) + param_4,
                    (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v2 + 10) + param_5,1,3,0x83,
@@ -282,9 +282,9 @@ LAB_0034d85c:
         FUN_00192608();
         temp_v7 = (int)*(short *)(temp_v8 + 0x38) + (int)(*(short *)((unsigned char *)&temp_v17 + 2));
       }
-      FUN_00184e64(0xffffffff);
+      drawSetColorFromRGBA8(0xffffffff);
       if (temp_v9 != temp_v4) {
-        FUN_00184e64();
+        drawSetColorFromRGBA8();
       }
       temp_v4 = FUN_001834a4(0x14,0x55e);
       FUN_00100388(temp_v12,&LAB_0034d46c,temp_v9);
@@ -292,7 +292,7 @@ LAB_0034d85c:
                    (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v3 + 10) + param_5,1,5,0x83,
                    temp_v12);
       FUN_00183bb0();
-      FUN_00184e64(0xffffffff);
+      drawSetColorFromRGBA8(0xffffffff);
       temp_v9 = temp_v2;
       if (temp_v2 < temp_v7) {
         temp_v9 = -0xdad601;
@@ -301,7 +301,7 @@ LAB_0034d85c:
         temp_v9 = 0x72e027ff;
       }
       if (temp_v2 != temp_v7) {
-        FUN_00184e64(temp_v9);
+        drawSetColorFromRGBA8(temp_v9);
       }
       temp_v9 = FUN_001834a4(0x14,0x563);
       FUN_00100388(temp_v12,&LAB_0034d46c,temp_v2);
@@ -326,7 +326,7 @@ LAB_0034d2c4:
     FUN_00192608();
     temp_v8 = *(unsigned int *)(temp_v8 + 0x24) & 0x3ff;
   }
-  FUN_00184e64(0xffffffff);
+  drawSetColorFromRGBA8(0xffffffff);
   temp_v6 = *(unsigned int *)(temp_v9 + 0x24) & 0x3ff;
   temp_v5 = temp_v6;
   if (temp_v6 < temp_v8) {
@@ -336,7 +336,7 @@ LAB_0034d2c4:
     temp_v5 = 0x72e027ff;
   }
   if (temp_v6 != temp_v8) {
-    FUN_00184e64(temp_v5);
+    drawSetColorFromRGBA8(temp_v5);
   }
   temp_v2 = FUN_001834a4(0x14,0x527);
   FUN_00100388(temp_v12,&LAB_0034d46c,*(unsigned int *)(temp_v9 + 0x24) & 0x3ff);

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002314e8(int, unsigned int);
 
-extern int DAT_0044cdf0; /* 0x44cdf0 */
+extern int g_naviMain; /* 0x44cdf0 */
 
 /* Supplied declaration required: FUN_002314e8. */
 
@@ -17,8 +17,8 @@ void NaviMain_SetCurrentMap(unsigned int param_1)
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = DAT_0044cdf0;
-  *(unsigned int *)(DAT_0044cdf0 + 0x28) = param_1;
+  temp_v0 = g_naviMain;
+  *(unsigned int *)(g_naviMain + 0x28) = param_1;
   *(unsigned int *)(temp_v0 + 0x2c) = 0;
   FUN_002314e8(temp_v0 + 0x40,param_1);
   return;

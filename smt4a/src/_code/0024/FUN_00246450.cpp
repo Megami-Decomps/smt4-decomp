@@ -18,7 +18,7 @@ extern unsigned int *g_popupState; /* 0x58104c */
 /* Supplied declaration required: FUN_0015f858. */
 /* Supplied declaration required: FUN_00180118. */
 extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern int FUN_0018719c(void);
+extern int gameFlagIsSet(void);
 /* Supplied declaration required: dataTableGetCount. */
 /* Supplied declaration required: dataTableGetEntries. */
 /* Supplied declaration required: FUN_002d2350. */
@@ -53,8 +53,8 @@ void FUN_00246450(int param_1,unsigned int param_2,unsigned int param_3)
         temp_v5 = temp_v2 + temp_v4 * 0x20;
       }
       if ((((*(int *)(temp_v5 + 4) == 1) &&
-           ((*(short *)(temp_v5 + 8) == 0 || (temp_v2 = FUN_0018719c(), temp_v2 != 0)))) &&
-          ((*(short *)(temp_v5 + 10) == 0 || (temp_v2 = FUN_0018719c(), temp_v2 == 0)))) &&
+           ((*(short *)(temp_v5 + 8) == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 != 0)))) &&
+          ((*(short *)(temp_v5 + 10) == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 == 0)))) &&
          (*(short *)(temp_v5 + 0xc) == param_1)) break;
       temp_v4 = temp_v4 + 1;
       if (temp_v1 <= (int)temp_v4) {

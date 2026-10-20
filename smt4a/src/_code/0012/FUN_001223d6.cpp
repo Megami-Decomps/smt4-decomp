@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_001037d6(unsigned int, int *);
-int FUN_002e9a56(unsigned int);
+int memCopyWord(unsigned int, int *);
+int bufferAssignByte(unsigned int);
 
 /* stack frame of param_4: 2 slot(s), 5 byte(s) */
 typedef struct {
@@ -13,9 +13,9 @@ typedef struct {
     unsigned char sp18; /* 0x18: local_18 */
 } param_4_stack;
 
-/* Supplied declaration required: FUN_001037d6. */
-/* Supplied declaration required: FUN_002e9a56. */
-extern int FUN_002f4e86(unsigned int *);
+/* Supplied declaration required: memCopyWord. */
+/* Supplied declaration required: bufferAssignByte. */
+extern int refIsNonNegative(unsigned int *);
 
 
 void FUN_001223d6(unsigned int param_1,unsigned int *param_2,unsigned int param_3,unsigned int param_4)
@@ -26,14 +26,14 @@ void FUN_001223d6(unsigned int param_1,unsigned int *param_2,unsigned int param_
   int temp_v1;
   
   temp_v1 = param_4;
-  temp_v0 = FUN_002f4e86(param_2);
+  temp_v0 = refIsNonNegative(param_2);
   if (temp_v0 != 0) {
-    FUN_002e9a56(param_1);
+    bufferAssignByte(param_1);
     return;
   }
-  FUN_002e9a56(param_1);
+  bufferAssignByte(param_1);
   temp_v1 = *param_2;
-  FUN_001037d6(param_1,&temp_v1);
+  memCopyWord(param_1,&temp_v1);
   return;
 }
 

@@ -7,7 +7,7 @@ extern "C" {
 int shopGetResult(void);
 int FUN_0021bdac(int, int, unsigned int, int, int, unsigned int);
 int FUN_002c76c0(int);
-int FUN_002deb84(void);
+int scrGetCommandFrame(void);
 int FUN_003c1060(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -18,7 +18,7 @@ typedef struct {
 /* Supplied declaration required: shopGetResult. */
 /* Supplied declaration required: FUN_0021bdac. */
 /* Supplied declaration required: FUN_002c76c0. */
-/* Supplied declaration required: FUN_002deb84. */
+/* Supplied declaration required: scrGetCommandFrame. */
 /* Supplied declaration required: FUN_003c1060. */
 extern unsigned int selector16038Pick(void);
 
@@ -33,14 +33,14 @@ void FUN_003888f8(void)
   unsigned int temp_v3;
   
   temp_v0 = shopGetResult();
-  temp_v1 = FUN_002deb84();
+  temp_v1 = scrGetCommandFrame();
   if (temp_v1 == 0) {
     FUN_003c1060();
   }
   shopGetResult();
   temp_v2 = selector16038Pick();
   FUN_002c76c0(0);
-  temp_v3 = FUN_002deb84();
+  temp_v3 = scrGetCommandFrame();
   FUN_0021bdac(temp_v0 + 0x194,0,temp_v3,0x10,0,temp_v2);
   return;
 }

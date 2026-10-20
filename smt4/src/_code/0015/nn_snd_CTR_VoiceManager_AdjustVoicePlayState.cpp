@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0015ee48(unsigned int);
-int FUN_0015f000(void);
+int nn_snd_CTR_Channel_FlushSyncCount(unsigned int);
+int nn_snd_CTR_Channel_PlayStart(void);
 
 typedef int romwright_code(...);
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -13,8 +13,8 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_0015ee48. */
-/* Supplied declaration required: FUN_0015f000. */
+/* Supplied declaration required: nn_snd_CTR_Channel_FlushSyncCount. */
+/* Supplied declaration required: nn_snd_CTR_Channel_PlayStart. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
 extern void nn_snd_CTR_Voice_SetState(unsigned int, int);
@@ -39,9 +39,9 @@ void nn_snd_CTR_VoiceManager_AdjustVoicePlayState(unsigned int *param_1,int para
     if ((*(char *)(temp_v0 + 0xd) == '\0') && (*(int *)(temp_v0 + 0x30) != 0)) {
       temp_v1 = *(int *)(temp_v0 + 0x2c);
       if ((param_2 >= temp_v1) || (puVar4[8] == 0x7fff)) {
-        FUN_0015ee48(puVar4[0x1a]);
+        nn_snd_CTR_Channel_FlushSyncCount(puVar4[0x1a]);
         if (*(char *)(puVar4[0x1a] + 0xc) == '\0') {
-          FUN_0015f000();
+          nn_snd_CTR_Channel_PlayStart();
         }
         param_2 = param_2 - temp_v1;
       }

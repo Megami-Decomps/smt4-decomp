@@ -13,7 +13,7 @@ int randRange(int);
 int FUN_00246134(...);
 int FUN_002463e8(...);
 int FUN_00247478(unsigned char [2], unsigned int, unsigned int *);
-int FUN_00282924(unsigned int *, unsigned int);
+int btlMainFindEntryByListedId(unsigned int *, unsigned int);
 int btlGetMainState(void);
 int FUN_002ae164(void);
 int memClear(...);
@@ -46,7 +46,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00246134. */
 /* Supplied declaration required: FUN_002463e8. */
 /* Supplied declaration required: FUN_00247478. */
-/* Supplied declaration required: FUN_00282924. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_002ae164. */
 /* Supplied declaration required: memClear. */
@@ -146,9 +146,9 @@ void FUN_00228220(int param_1,unsigned int param_2,int param_3,unsigned int para
         return;
       }
       puVar6 = (unsigned int *)btlGetMainState();
-      FUN_00282924(puVar6,temp_v20);
+      btlMainFindEntryByListedId(puVar6,temp_v20);
       puVar7 = (unsigned int *)btlGetMainState();
-      FUN_00282924(puVar7,param_5);
+      btlMainFindEntryByListedId(puVar7,param_5);
       temp_v5 = btlGetMainState();
       FUN_00247478(temp_v14,temp_v5,puVar6);
       temp_v1 = temp_v15;

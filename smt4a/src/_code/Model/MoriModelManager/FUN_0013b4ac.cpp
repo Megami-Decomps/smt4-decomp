@@ -13,7 +13,7 @@ typedef struct {
 } void_stack;
 
 extern unsigned char LAB_0013b4ec; /* 0x13b4ec */
-extern int DAT_0056fcc0; /* 0x56fcc0 */
+extern int g_handleRegistry; /* 0x56fcc0 */
 
 /* Supplied declaration required: FUN_001463b4. */
 extern unsigned int FUN_001464b4(void);
@@ -27,14 +27,14 @@ void FUN_0013b4ac(void)
   int temp_v0;
   unsigned int temp_v1;
   
-  if (DAT_0056fcc0 == 0) {
+  if (g_handleRegistry == 0) {
     temp_v0 = 0x4c;
     FUN_00178b04(0x4c,&LAB_0013b4ec,0x28);
     temp_v1 = 0;
     if (temp_v0 != 0) {
       temp_v1 = FUN_001464b4();
     }
-    DAT_0056fcc0 = temp_v1;
+    g_handleRegistry = temp_v1;
     FUN_001463b4();
     return;
   }

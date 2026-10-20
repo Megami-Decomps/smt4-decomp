@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00234cd8(unsigned int, int, int);
-int FUN_0028c640(unsigned int, int, unsigned char [16]);
+int nodeSetTranslation(unsigned int, int, unsigned char [16]);
 int FUN_002adde8(unsigned int, unsigned char [32], unsigned char [16]);
 int FUN_002be624(unsigned char [32], unsigned char *, unsigned int);
 int FUN_00341a3c(unsigned int);
@@ -14,7 +14,7 @@ typedef int romwright_code(...);
 extern unsigned char LAB_003849c4; /* 0x3849c4 */
 
 /* Supplied declaration required: FUN_00234cd8. */
-/* Supplied declaration required: FUN_0028c640. */
+/* Supplied declaration required: nodeSetTranslation. */
 /* Supplied declaration required: FUN_002adde8. */
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_00341a3c. */
@@ -62,8 +62,8 @@ void FUN_003848b8(int param_1)
       FUN_002adde8(*(unsigned int *)(*(int *)(*(int *)(param_1 + 0xfac) + 0x1c) + 8),temp_v4,
                    temp_v5);
       temp_v1 = param_1 + temp_v2 * 4;
-      FUN_0028c640(*(unsigned int *)(*(int *)(temp_v1 + 0xd10) + 8),0,temp_v5);
-      FUN_0028c640(*(unsigned int *)(*(int *)(temp_v1 + 0xd28) + 8),0,temp_v5);
+      nodeSetTranslation(*(unsigned int *)(*(int *)(temp_v1 + 0xd10) + 8),0,temp_v5);
+      nodeSetTranslation(*(unsigned int *)(*(int *)(temp_v1 + 0xd28) + 8),0,temp_v5);
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < 6);
   }

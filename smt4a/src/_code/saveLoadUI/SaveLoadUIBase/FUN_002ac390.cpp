@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdMemoryAlloc(...);
-int FUN_001a9110(unsigned int, unsigned int);
+int wordPairCopy(unsigned int, unsigned int);
 int rt_memcpy_w(...);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -17,11 +17,11 @@ extern int DAT_00588e1c; /* 0x588e1c */
 extern unsigned int DAT_00588e20; /* 0x588e20 */
 extern unsigned int DAT_00588e24; /* 0x588e24 */
 
-extern unsigned int FUN_0014af84(void);
+extern unsigned int gameDataBlocksGetSaveData(void);
 /* Supplied declaration required: asdMemoryAlloc. */
-/* Supplied declaration required: FUN_001a9110. */
-extern unsigned int FUN_00228af0(void);
-extern unsigned int FUN_00261458(void);
+/* Supplied declaration required: wordPairCopy. */
+extern unsigned int configGetSettings(void);
+extern unsigned int gameDataBlocksGetTable(void);
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -44,11 +44,11 @@ void FUN_002ac390(void)
     DAT_00588e20 = temp_v1;
     asdMemoryAlloc(0x100,0x100,0,0x2a71c);
     DAT_00588e24 = temp_v0;
-    temp_v0 = FUN_00261458();
+    temp_v0 = gameDataBlocksGetTable();
     rt_memcpy_w(DAT_00588e1c,temp_v0,0x80);
-    temp_v0 = FUN_00228af0();
-    FUN_001a9110(DAT_00588e20,temp_v0);
-    temp_v0 = FUN_0014af84();
+    temp_v0 = configGetSettings();
+    wordPairCopy(DAT_00588e20,temp_v0);
+    temp_v0 = gameDataBlocksGetSaveData();
     rt_memcpy_w(DAT_00588e24,temp_v0,0x2a71c,temp_v2);
     return;
   }

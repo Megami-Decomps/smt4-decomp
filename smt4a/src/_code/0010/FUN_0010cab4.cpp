@@ -26,7 +26,7 @@ typedef struct {
 extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-extern int FUN_002ea93c(void);
+extern int onlineUrlGetAddress(void);
 /* Supplied declaration required: FUN_002f4dc2. */
 extern int FUN_002f4dea(unsigned char *);
 /* Supplied declaration required: FUN_002f6758. */
@@ -60,7 +60,7 @@ void FUN_0010cab4(int *param_1,unsigned char *param_2,unsigned char *param_3,uns
   temp_v8 = param_4;
   if (param_7 != (unsigned char *)0x0) {
     if (param_7 != (unsigned char *)0xfffffff8) {
-      temp_v0 = FUN_002ea93c();
+      temp_v0 = onlineUrlGetAddress();
       temp_v1 = *(unsigned int *)(temp_v0 + 8);
       temp_v1 = (temp_v1 << 0x18) | (((temp_v1 >> 8) & 0xff) << 0x10) | (((temp_v1 >> 0x10) & 0xff) << 8) |
               (temp_v1 >> 0x18);

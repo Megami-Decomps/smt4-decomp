@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00152bec(void);
+int asdMdlManagerMarkDestroy(void);
 int FUN_0022708c(void);
 int FUN_002276f8(int);
 int FUN_00241d58(int);
@@ -19,7 +19,7 @@ int FUN_003da890(int);
 typedef int romwright_code(...);
 extern int g_btlMain; /* 0x4342c8 */
 
-/* Supplied declaration required: FUN_00152bec. */
+/* Supplied declaration required: asdMdlManagerMarkDestroy. */
 /* Supplied declaration required: FUN_0022708c. */
 /* Supplied declaration required: FUN_002276f8. */
 /* Supplied declaration required: FUN_00241d58. */
@@ -82,7 +82,7 @@ void FUN_003d9be4(int param_1)
     }
     if (*piVar1 != 0) {
       if (-1 < *(int *)(*(int *)(*piVar1 + 8) + 0xc)) {
-        FUN_00152bec();
+        asdMdlManagerMarkDestroy();
       }
       asdMdlManagerDestroy(*piVar1);
       *piVar1 = 0;

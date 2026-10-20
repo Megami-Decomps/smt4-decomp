@@ -21,7 +21,7 @@ extern unsigned int DAT_00573ae8; /* 0x573ae8 */
 extern unsigned int DAT_00573aec; /* 0x573aec */
 
 extern int FUN_00213b5c(void);
-extern int FUN_003e46f4(unsigned int);
+extern int gameDataFlagTestBit(unsigned int);
 
 
 unsigned char FUN_003ec814(fn_003ec814_arg0 *param_1)
@@ -65,7 +65,7 @@ unsigned char FUN_003ec814(fn_003ec814_arg0 *param_1)
     temp_v5 = 0;
   }
   temp_v2 = FUN_00213b5c();
-  if ((temp_v2 == 4) || (temp_v2 = FUN_003e46f4(0x80), temp_v2 != 0)) {
+  if ((temp_v2 == 4) || (temp_v2 = gameDataFlagTestBit(0x80), temp_v2 != 0)) {
     puVar6 = (unsigned int *)param_1->field_0x1ffc;
     temp_v3 = *puVar6;
     temp_v4 = puVar6[1];

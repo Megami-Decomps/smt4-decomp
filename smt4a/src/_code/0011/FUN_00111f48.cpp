@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002e75fa(int);
+int sharedRefAddRef(int);
 int FUN_002ea3d0(int, unsigned int);
 int FUN_002f6740(int [3], unsigned int, unsigned char *, int *, unsigned int);
-int FUN_002f7cb0(int);
+int onlineJobSetStateWaiting(int);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 4 slot(s), 13 byte(s) */
@@ -22,12 +22,12 @@ extern unsigned char LAB_001036ed; /* 0x1036ed */
 extern unsigned char LAB_00111fc0; /* 0x111fc0 */
 extern unsigned int DAT_00594a18; /* 0x594a18 */
 
-/* Supplied declaration required: FUN_002e75fa. */
+/* Supplied declaration required: sharedRefAddRef. */
 extern unsigned int FUN_002ea3c0(int *, unsigned int, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
 extern int FUN_002ea6fc(int, unsigned char *);
 /* Supplied declaration required: FUN_002f6740. */
-/* Supplied declaration required: FUN_002f7cb0. */
+/* Supplied declaration required: onlineJobSetStateWaiting. */
 
 
 void FUN_00111f48(int param_1)
@@ -54,8 +54,8 @@ void FUN_00111f48(int param_1)
       temp_v3 = param_1;
       FUN_002f6740(temp_v4,*(unsigned int *)(param_1 + 0x78),&LAB_001036ed,&temp_v3,DAT_00594a18);
       if (-1 < temp_v4[0]) {
-        FUN_002e75fa(param_1);
-        FUN_002f7cb0(param_1);
+        sharedRefAddRef(param_1);
+        onlineJobSetStateWaiting(param_1);
       }
     }
     temp_v1 = 0x111fcd;

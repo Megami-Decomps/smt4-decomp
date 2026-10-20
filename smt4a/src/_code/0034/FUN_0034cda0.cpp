@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-extern int DAT_0057f268; /* 0x57f268 */
+extern int g_partyPanel; /* 0x57f268 */
 
 extern int FUN_00167f08(void);
 /* Supplied declaration required: FUN_0023f900. */
@@ -37,7 +37,7 @@ void FUN_0034cda0(void)
   unsigned char temp_v6;
   
   temp_v2 = FUN_002a7410();
-  temp_v1 = DAT_0057f268;
+  temp_v1 = g_partyPanel;
   if (temp_v2 == 0) {
     temp_v6 = 0;
     FUN_002c7e24();

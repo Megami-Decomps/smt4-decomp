@@ -16,7 +16,7 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_3_stack;
 
-extern int DAT_0057f108; /* 0x57f108 */
+extern int g_camp; /* 0x57f108 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: efctSetSpeed. */
@@ -36,8 +36,8 @@ void FUN_00227294(int param_1,int param_2,unsigned int param_3)
   unsigned int in_fpscr;
   unsigned char temp_v2 [24];
   
-  if ((DAT_0057f108 != 0) &&
-     (*(char *)(DAT_0057f108 + 0x1b20) != '\0' && *(char *)(DAT_0057f108 + 0x1b20) != '\x04')) {
+  if ((g_camp != 0) &&
+     (*(char *)(g_camp + 0x1b20) != '\0' && *(char *)(g_camp + 0x1b20) != '\x04')) {
     FUN_0019d880();
     VectorSignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
     efctSetSpeed();

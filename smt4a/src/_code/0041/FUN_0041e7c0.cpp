@@ -8,7 +8,7 @@ int FUN_00228b04(int, int);
 int FUN_002a4860(int);
 int FUN_002a48e0(int, int);
 int FUN_002f0384(int);
-int FUN_0031d1d8(int, int);
+int flaggedEntrySetValueA(int, int);
 int SBORROW4(int, int);
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
@@ -18,8 +18,8 @@ int SBORROW4(int, int);
 extern int FUN_002bedac(unsigned int);
 extern int FUN_002c2c68(int);
 /* Supplied declaration required: FUN_002f0384. */
-extern int FUN_0031d1a0(int);
-/* Supplied declaration required: FUN_0031d1d8. */
+extern int flaggedEntryGetValueA(int);
+/* Supplied declaration required: flaggedEntrySetValueA. */
 
 
 void FUN_0041e7c0(int param_1)
@@ -45,14 +45,14 @@ void FUN_0041e7c0(int param_1)
   FUN_00228b04(temp_v0,1);
   if (temp_v0 != 0) {
     temp_v0 = FUN_002a4860(param_1 + 0x3d8);
-    temp_v1 = FUN_0031d1a0(param_1 + 0x3d8);
+    temp_v1 = flaggedEntryGetValueA(param_1 + 0x3d8);
     temp_v2 = FUN_002c2c68(param_1 + 0x3d8);
     temp_v5 = *(int *)(param_1 + 0x300);
     temp_v3 = temp_v0 + temp_v1 + temp_v5;
     *(int *)(param_1 + 0x2f8) = temp_v3;
     if (((temp_v1 < 1) && (temp_v5 + 1 <= temp_v3)) && (*(int *)(param_1 + 0x2fc) < temp_v3)) {
       FUN_002a48e0(param_1 + 0x3d8,temp_v0 - 1);
-      FUN_0031d1d8(param_1 + 0x3d8,1);
+      flaggedEntrySetValueA(param_1 + 0x3d8,1);
     }
     else if (0 < temp_v1) {
       temp_v5 = temp_v5 + (temp_v2 - 1);
@@ -63,12 +63,12 @@ void FUN_0041e7c0(int param_1)
       }
       if (temp_v5 != temp_v3 && temp_v1 < 0 == SBORROW4(temp_v5,temp_v3)) {
         FUN_002a48e0(param_1 + 0x3d8,temp_v0 + 1);
-        FUN_0031d1d8(param_1 + 0x3d8,0);
+        flaggedEntrySetValueA(param_1 + 0x3d8,0);
       }
     }
     temp_v4 = FUN_002a4860(param_1 + 0x3d8);
     *(unsigned int *)(param_1 + 0x304) = temp_v4;
-    temp_v0 = FUN_0031d1a0(param_1 + 0x3d8);
+    temp_v0 = flaggedEntryGetValueA(param_1 + 0x3d8);
     *(int *)(param_1 + 0x308) = temp_v0;
     *(unsigned int *)(param_1 + 0x2fc) = *(unsigned int *)(param_1 + 0x2f8);
     *(int *)(param_1 + 0x2f8) = temp_v0 + *(int *)(param_1 + 0x304) + *(int *)(param_1 + 0x300);

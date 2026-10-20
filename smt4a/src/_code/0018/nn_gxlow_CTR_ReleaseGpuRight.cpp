@@ -10,7 +10,7 @@ extern int nngxCheckVramBank(void);
 extern int FUN_001a2480(void);
 /* Supplied declaration required: FUN_001a28a8. */
 extern int FUN_001a2a4c(void);
-extern unsigned int FUN_001a2a5c(void);
+extern unsigned int nn_gxlow_CTR_GetGpu(void);
 extern unsigned int nn_gxlow_CTR_Gpu_ReleaseRight(unsigned int);
 
 
@@ -27,7 +27,7 @@ unsigned int nn_gxlow_CTR_ReleaseGpuRight(void)
     temp_v1 = 0x202bf8;
   }
   else {
-    temp_v2 = FUN_001a2a5c();
+    temp_v2 = nn_gxlow_CTR_GetGpu();
     temp_v1 = nn_gxlow_CTR_Gpu_ReleaseRight(temp_v2);
     if ((-1 < (int)temp_v1) && (temp_v0 = nngxCheckVramBank(), temp_v0 != 0)) {
       temp_v0 = FUN_001a2a4c();

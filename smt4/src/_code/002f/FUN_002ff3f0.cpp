@@ -6,7 +6,7 @@ int FUN_002499fc(u32 a, int *first, int *count);
 int scrSetResult(int result);
 extern u8 *btlGetMainState(void);
 int scrGetArg(int index);
-extern u8 *FUN_002499b4(void);
+extern u8 *btlMainFindActiveEntry(void);
 extern u32 FUN_00249a54(void);
 
 typedef struct BtlUnit {
@@ -46,7 +46,7 @@ u32 FUN_002ff3f0(void)
     btl = btlGetMainState() + 0x4900;
     if (*(s8 *)(btl + 0xc5) != 0) {
         btlGetMainState();
-        extra = (BtlUnit *)FUN_002499b4();
+        extra = (BtlUnit *)btlMainFindActiveEntry();
         if ((extra != NULL) && (extra->slots[slot] >> 10 == 3)) {
             scrSetResult(1);
             return 1;

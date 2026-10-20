@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_00296f4c(undefined4, int);
-int FUN_002b8838(int);
+int scrScriptProcessStartEntry(undefined4, int);
+int buttonHelpSetPreset(int);
 
 typedef struct fn_003105f4_arg0 fn_003105f4_arg0;
 struct fn_003105f4_arg0 {
@@ -18,8 +18,8 @@ struct fn_003105f4_arg0 {
 };
 
 extern int FUN_0019e0c0(unsigned int);
-/* Supplied declaration required: FUN_00296f4c. */
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 
 
 unsigned int FUN_003105f4(fn_003105f4_arg0 *param_1)
@@ -38,8 +38,8 @@ unsigned int FUN_003105f4(fn_003105f4_arg0 *param_1)
     }
   }
   else {
-    FUN_00296f4c(param_1->field_0xd04,0x1b);
-    FUN_002b8838(0x3c);
+    scrScriptProcessStartEntry(param_1->field_0xd04,0x1b);
+    buttonHelpSetPreset(0x3c);
     param_1->field_0xd38 = param_1->field_0xd38 + 1;
   }
   return temp_v1;

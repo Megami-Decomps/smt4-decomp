@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-extern int FUN_0014bef4(unsigned int);
+extern int randRange(unsigned int);
 /* Supplied declaration required: FUN_003c3f1c. */
 
 
@@ -50,7 +50,7 @@ int FUN_003f391c(int param_1)
     temp_v1 = (int)temp_v3[0];
   }
   else {
-    temp_v1 = FUN_0014bef4((temp_v2 - 1) & 0xffff);
+    temp_v1 = randRange((temp_v2 - 1) & 0xffff);
     temp_v1 = (int)temp_v3[temp_v1];
   }
   return temp_v1;

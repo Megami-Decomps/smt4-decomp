@@ -11,7 +11,7 @@ extern unsigned char LAB_00249d8c; /* 0x249d8c */
 extern unsigned char LAB_00249da4; /* 0x249da4 */
 extern unsigned char LAB_00249dbc; /* 0x249dbc */
 extern unsigned char LAB_00249dd4; /* 0x249dd4 */
-extern unsigned char *DAT_005821c4; /* 0x5821c4 */
+extern unsigned char *g_mapTable; /* 0x5821c4 */
 extern unsigned int DAT_005821cc; /* 0x5821cc */
 
 /* Supplied declaration required: FUN_00100388. */
@@ -32,24 +32,24 @@ void FUN_00249ce4(int param_1)
   if (param_1 == 300) {
     puVar1 = &LAB_00249da4;
     FUN_0020214c();
-    DAT_005821c4 = puVar1;
+    g_mapTable = puVar1;
     return;
   }
   if (param_1 != 200) {
     if (param_1 >= 100) {
       FUN_00100388(temp_v0,&LAB_00249d8c,param_1 - 100);
       FUN_0020214c();
-      DAT_005821c4 = puVar1;
+      g_mapTable = puVar1;
       return;
     }
     FUN_00100388(temp_v0,&LAB_00249dd4,param_1);
     FUN_0020214c();
-    DAT_005821c4 = puVar2;
+    g_mapTable = puVar2;
     return;
   }
   puVar1 = &LAB_00249dbc;
   FUN_0020214c();
-  DAT_005821c4 = puVar1;
+  g_mapTable = puVar1;
   return;
 }
 

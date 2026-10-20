@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned int DAT_0044e978; /* 0x44e978 */
+extern unsigned int g_mobiclipAllocator; /* 0x44e978 */
 extern unsigned int DAT_0044e97c; /* 0x44e97c */
 extern unsigned int DAT_004d467c; /* 0x4d467c */
 
@@ -12,7 +12,7 @@ extern unsigned int DAT_004d467c; /* 0x4d467c */
 void FUN_003f63bc(void)
 
 {
-  DAT_0044e978 = 0;
+  g_mobiclipAllocator = 0;
   DAT_0044e97c = 0;
   DAT_004d467c = 0xffffffff;
   return;

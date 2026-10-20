@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_002c6a10(void);
+int asdOperatorDelete(void);
 
 struct Object;
 typedef struct ObjectVtbl {
@@ -47,13 +47,13 @@ void FUN_00349ee0(Pool *pool)
     }
     pool->count = 0;
     if (pool->listA != NULL) {
-        FUN_002c6a10();
+        asdOperatorDelete();
     }
     if (pool->listB != NULL) {
-        FUN_002c6a10();
+        asdOperatorDelete();
     }
     if (pool->listC != NULL) {
-        FUN_002c6a10();
+        asdOperatorDelete();
     }
     pool->listA = NULL;
     pool->listB = NULL;

@@ -9,7 +9,7 @@ int asdTMTexTableCallFileB(unsigned int, unsigned int);
 extern unsigned int g_aocSystem; /* 0x433158 */
 
 extern int FUN_0023e330(void);
-extern int FUN_0023e378(void);
+extern int resourceIsReady(void);
 extern int FUN_0023e3a4(unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_00248674(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: asdTMTexTableCallFileB. */
@@ -27,7 +27,7 @@ unsigned int FUN_0033f178(int param_1)
   unsigned int temp_v3;
   
   asdTMTexTableCallFileB(*(unsigned int *)(param_1 + 8),*(unsigned int *)(param_1 + 0xc));
-  temp_v0 = FUN_0023e378();
+  temp_v0 = resourceIsReady();
   temp_v3 = 0;
   if (temp_v0 != 0) {
     if (*(int *)(param_1 + 8) != 0xc) {

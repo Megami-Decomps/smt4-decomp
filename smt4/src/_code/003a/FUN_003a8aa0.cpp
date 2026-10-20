@@ -12,8 +12,8 @@ int FUN_00233670(int, int, int, int);
 int FUN_00233730(int, int, int, int, int, int);
 int FUN_00233818(void);
 int FUN_00233854(unsigned int);
-int FUN_002b06c4(void);
-int FUN_002b9024(void);
+int dataTable00FindById(void);
+int devilGetRecord(void);
 int jyoucyuGetTableEntry(int);
 int FUN_003a9bb4(int);
 
@@ -36,8 +36,8 @@ extern unsigned char FUN_0022e0b0(int, unsigned int);
 /* Supplied declaration required: FUN_00233818. */
 /* Supplied declaration required: FUN_00233854. */
 extern int FUN_0029e9cc(unsigned short);
-/* Supplied declaration required: FUN_002b06c4. */
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: dataTable00FindById. */
+/* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: jyoucyuGetTableEntry. */
 /* Supplied declaration required: FUN_003a9bb4. */
 
@@ -64,9 +64,9 @@ void FUN_003a8aa0(int param_1)
     temp_v3 = 1;
     do {
       puVar3 = (unsigned short *)(temp_v3 & 0xffff);
-      FUN_002b9024();
+      devilGetRecord();
       temp_v1 = temp_v3;
-      FUN_002b06c4();
+      dataTable00FindById();
       if ((puVar3 != (unsigned short *)0x0 && temp_v1 != 0) && ((*(unsigned short *)(temp_v1 + 0x16) & 1) != 0)) {
         temp_v4 = temp_v4 + 1;
         temp_v2 = FUN_0029e9cc(*puVar3);

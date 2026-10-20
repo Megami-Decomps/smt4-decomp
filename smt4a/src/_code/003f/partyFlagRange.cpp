@@ -12,8 +12,8 @@ typedef struct PartyBlock2A0 {
     /* 0x2A0 */ PartyEntryFlag entries[400];
 } PartyBlock2A0;
 
-extern PartyBlock2A0 *FUN_001ab940(void);
-extern void FUN_002e6dd4(PartyBlock2A0 *block, u32 size);
+extern PartyBlock2A0 *gameFlagBlockGet(void);
+extern void rt_memclr(PartyBlock2A0 *block, u32 size);
 
 /* Clears the party block and flags entries 0x15E..0x18F with bit 0x20. */
 void partyFlagRange(void)
@@ -21,10 +21,10 @@ void partyFlagRange(void)
     u16 index;
     u8 *entry;
 
-    FUN_002e6dd4(FUN_001ab940(), 0xA04);
+    rt_memclr(gameFlagBlockGet(), 0xA04);
     index = 0x15E;
     do {
-        entry = &FUN_001ab940()->entries[index].flags;
+        entry = &gameFlagBlockGet()->entries[index].flags;
         if (entry != NULL) {
             *entry |= 0x20;
         }

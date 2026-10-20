@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002a46d8(int id);
+int fileSlotFree(int id);
 int scrScriptProcessDestroy(u32 handle);
 int asdMemFree(void *ptr);               /* heap free */
 
@@ -17,7 +17,7 @@ void gauntletAppMenuDestroy(void)
     scrScriptProcessDestroy(menu->handle);
     asdMemFree(menu->heapB);
     asdMemFree(menu->heapA);
-    FUN_002a46d8(0xd);
+    fileSlotFree(0xd);
     asdMemFree(g_gauntletAppMenu);
     g_gauntletAppMenu = NULL;
 }

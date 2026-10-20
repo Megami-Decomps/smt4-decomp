@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0026e6a0(...);
-int FUN_00282924(unsigned int *, int, int, unsigned int, unsigned int);
+int btlMainFindEntryByListedId(unsigned int *, int, int, unsigned int, unsigned int);
 int VectorFloatToUnsigned(double, int);
 int VectorUnsignedToFloat(unsigned int, int);
 
@@ -36,7 +36,7 @@ extern union romwright_storage_s______00439cf4_13_1 s______00439cf4; /* 0x439cf4
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: FUN_0026e6a0. */
-/* Supplied declaration required: FUN_00282924. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 extern int __aeabi_idivmod(int, int);
 
 
@@ -58,7 +58,7 @@ unsigned int FUN_0034d6c8(int param_1,int param_2,unsigned int param_3,unsigned 
   
   puVar1 = *(unsigned int **)(param_1 + 4);
   temp_v2 = puVar1[0x7a6] + param_2 * 0x114;
-  FUN_00282924(puVar1,(int)*(short *)(temp_v2 + 0x62),param_2 * 0x45,param_4,param_4);
+  btlMainFindEntryByListedId(puVar1,(int)*(short *)(temp_v2 + 0x62),param_2 * 0x45,param_4,param_4);
   if ((*(unsigned int *)(temp_v2 + 0x50) & 8) != 0) {
     temp_v2 = __aeabi_idivmod((short)puVar1[0x6d] * 100,(int)*(short *)((int)puVar1 + 0x1b6));
     temp_v1 = *(unsigned int *)(*(int *)(param_1 + 4) + 0x1ea0);

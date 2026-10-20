@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00184310(void);
-int FUN_0019cac4(void);
+int dataTable00FindById(void);
 int FUN_004a6610(int, int);
 int FUN_004a833c(int, unsigned char [8]);
 int FUN_004a8584(unsigned char [8], int, int);
@@ -28,7 +28,7 @@ typedef struct {
 extern unsigned char g_gameState; /* 0x5f15fc */
 
 /* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: FUN_0019cac4. */
+/* Supplied declaration required: dataTable00FindById. */
 extern int FUN_0026264c(unsigned short);
 /* Supplied declaration required: FUN_004a6610. */
 /* Supplied declaration required: FUN_004a833c. */
@@ -91,17 +91,17 @@ LAB_004a5ccc:
               do {
                 puVar9 = (unsigned short *)(unsigned int)*(unsigned short *)(temp_v2 + temp_v5 * 2 + 0x14);
                 if ((puVar9 != (unsigned short *)0x0) &&
-                   (puVar4 = puVar9, FUN_0019cac4(), puVar4 != (unsigned short *)0x0)) {
+                   (puVar4 = puVar9, dataTable00FindById(), puVar4 != (unsigned short *)0x0)) {
                   puVar4 = puVar9;
                   FUN_00184310();
-                  FUN_0019cac4();
+                  dataTable00FindById();
                   if ((puVar4 != (unsigned short *)0x0 && puVar9 != (unsigned short *)0x0) &&
                      (((*(int *)((unsigned char *)&g_gameState + 0x660)) != 0 ||
                       (((puVar9[0xb] & 1) != 0 && (temp_v3 = FUN_0026264c(*puVar4), temp_v3 != 0)))))) {
                     FUN_004a8584(temp_v11,*puVar4,0);
                     temp_v4 = (unsigned int)*puVar4;
                     temp_v7 = 0;
-                    FUN_0019cac4();
+                    dataTable00FindById();
                     if (temp_v4 != 0) {
                       temp_v7 = *(unsigned int *)(temp_v4 + 0x7c);
                     }

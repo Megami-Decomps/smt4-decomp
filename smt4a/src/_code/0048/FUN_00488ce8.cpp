@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00184758(...);
+int uiSpriteSetKeyframe(...);
 
 int sysPlaySe(...);
 int FUN_00183e58(void);
@@ -73,11 +73,11 @@ static float romwright_fabs_4(float value)
     return value < (float)0 ? -value : value;
 }
 #endif
-extern int FUN_00162e8c(void);
+extern int gameFlagsGetBlock(void);
 extern int FUN_00167c0c(unsigned int **, int *);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00183e58. */
-/* Supplied declaration required: FUN_00184758. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: FUN_00317af8. */
 /* Supplied declaration required: FUN_00357a48. */
 /* Supplied declaration required: FUN_003a35a4. */
@@ -135,7 +135,7 @@ unsigned int FUN_00488ce8(int param_1)
   int temp_v16;
   unsigned int temp_v17;
   
-  temp_v0 = FUN_00162e8c();
+  temp_v0 = gameFlagsGetBlock();
   FUN_00489480(param_1);
   temp_v1 = param_1;
   FUN_0048981c();
@@ -364,7 +364,7 @@ unsigned int FUN_00488ce8(int param_1)
                   FUN_00357a48();
                   temp_v1 = 0;
                   do {
-                    FUN_00184758(param_1 + temp_v1 * 0x8c + 0xc40,7,0);
+                    uiSpriteSetKeyframe(param_1 + temp_v1 * 0x8c + 0xc40,7,0);
                     temp_v1 = temp_v1 + 1;
                   } while (temp_v1 < 6);
                   *(unsigned char *)(param_1 + 0x20644) = 1;
@@ -395,7 +395,7 @@ unsigned int FUN_00488ce8(int param_1)
               *(unsigned int *)(param_1 + 4) = 0xe;
               *(unsigned int *)(param_1 + 8) = 0;
               do {
-                FUN_00184758(param_1 + temp_v1 * 0x8c + 0xc40,7,0);
+                uiSpriteSetKeyframe(param_1 + temp_v1 * 0x8c + 0xc40,7,0);
                 temp_v1 = temp_v1 + 1;
               } while (temp_v1 < 6);
             }

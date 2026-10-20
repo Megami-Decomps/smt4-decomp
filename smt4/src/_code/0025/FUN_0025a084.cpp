@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_0043e278; /* 0x43e278 */
+extern int g_frameTex; /* 0x43e278 */
 
 extern int FUN_002bf818(int);
 
@@ -16,14 +16,14 @@ unsigned int FUN_0025a084(void)
   int temp_v1;
   unsigned char temp_v2;
   
-  temp_v2 = *(char *)(DAT_0043e278 + 0xf2b) != '\0';
+  temp_v2 = *(char *)(g_frameTex + 0xf2b) != '\0';
   temp_v0 = '\0';
   if (temp_v2) {
-    temp_v0 = *(char *)(DAT_0043e278 + 0x1c);
+    temp_v0 = *(char *)(g_frameTex + 0x1c);
   }
   if ((temp_v2 && temp_v0 != '\0') &&
-     ((*(char *)(DAT_0043e278 + 0xd6d) != '\0' ||
-      (temp_v1 = FUN_002bf818(DAT_0043e278 + 0xd74), temp_v1 == 0)))) {
+     ((*(char *)(g_frameTex + 0xd6d) != '\0' ||
+      (temp_v1 = FUN_002bf818(g_frameTex + 0xd74), temp_v1 == 0)))) {
     return 0;
   }
   return 1;

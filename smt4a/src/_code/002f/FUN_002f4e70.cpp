@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002e9ec8(unsigned int, unsigned int);
+int onlineInstanceTableFind(unsigned int, unsigned int);
 int FUN_0031144c(void);
 
-/* Supplied declaration required: FUN_002e9ec8. */
-extern int FUN_002ea4bc(void);
+/* Supplied declaration required: onlineInstanceTableFind. */
+extern int onlineInstantiationContextGetCurrent(void);
 /* Supplied declaration required: FUN_0031144c. */
 
 
@@ -19,8 +19,8 @@ void FUN_002f4e70(unsigned int param_1)
   int temp_v0;
   
   FUN_0031144c();
-  temp_v0 = FUN_002ea4bc();
-  FUN_002e9ec8(*(unsigned int *)(temp_v0 + 0x10),param_1);
+  temp_v0 = onlineInstantiationContextGetCurrent();
+  onlineInstanceTableFind(*(unsigned int *)(temp_v0 + 0x10),param_1);
   return;
 }
 

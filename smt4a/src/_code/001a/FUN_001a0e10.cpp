@@ -5,8 +5,8 @@
 extern "C" {
 
 int ClearExclusiveLocal(void);
-int FUN_00188b60(int);
-int FUN_001bcd48(int, int);
+int nn_os_CriticalSection_Initialize(int);
+int svcSleepThread(int, int);
 int hasExclusiveAccess(int);
 
 extern unsigned int DAT_005b4794; /* 0x5b4794 */
@@ -14,8 +14,8 @@ extern unsigned int uRam006426d8; /* 0x6426d8 */
 
 /* Unsupported intrinsic, declaration required: ClearExclusiveLocal (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: hasExclusiveAccess (CALLOTHER). */
-/* Supplied declaration required: FUN_00188b60. */
-/* Supplied declaration required: FUN_001bcd48. */
+/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
+/* Supplied declaration required: svcSleepThread. */
 
 
 unsigned int FUN_001a0e10(void)
@@ -37,7 +37,7 @@ unsigned int FUN_001a0e10(void)
 LAB_001a0e44:
   if (temp_v1 == 0) {
     uRam006426d8 = 0;
-    FUN_00188b60(0x6426d8);
+    nn_os_CriticalSection_Initialize(0x6426d8);
     do {
       temp_v0 = (unsigned char)hasExclusiveAccess(0x5b4794);
     } while (!temp_v0);
@@ -45,7 +45,7 @@ LAB_001a0e44:
   }
   else {
     while (DAT_005b4794 < 2) {
-      FUN_001bcd48(1000000,0);
+      svcSleepThread(1000000,0);
     }
   }
   return DAT_005b4794;

@@ -12,7 +12,7 @@ int FUN_002bcc60(unsigned int *, int *, unsigned char *, unsigned int [2], unsig
 int FUN_002bcd44(void);
 int asdOperatorNew(void);
 int memAlloc(int, int, int, int, int, int);
-int FUN_002c38fc(unsigned int *);
+int nn_os_CriticalSection_Initialize(unsigned int *);
 int memClear(int, int);
 int FUN_002c526c(void);
 int FUN_0035a31c(int, int, int);
@@ -51,7 +51,7 @@ extern unsigned int DAT_004c40f8; /* 0x4c40f8 */
 /* Supplied declaration required: FUN_002bcd44. */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: memAlloc. */
-/* Supplied declaration required: FUN_002c38fc. */
+/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: FUN_002c526c. */
 /* Supplied declaration required: FUN_0035a31c. */
@@ -93,7 +93,7 @@ unsigned int FUN_0034e43c(unsigned int *param_1,int param_2,int param_3,int para
     memClear(DAT_0044d100,DAT_0044d10c * 0x70);
     DAT_0044d110 = 0;
     DAT_0044d114 = 0;
-    FUN_002c38fc(&DAT_004c40f8);
+    nn_os_CriticalSection_Initialize(&DAT_004c40f8);
     temp_v0 = 0x100;
     memAlloc(0x100,0x100,0,0x1000,0x1000,1);
     puVar2 = (unsigned int *)0x18;

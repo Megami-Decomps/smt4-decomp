@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e995c(unsigned char [6]);
+int onlineSockAddrConstruct(unsigned char [6]);
 int FUN_002fd394(int, int, unsigned char [6]);
 
 /* stack frame of param_3: 2 slot(s), 6 byte(s) */
@@ -13,8 +13,8 @@ typedef struct {
     unsigned short sp2A; /* 0x2a: local_2a */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_002e995c. */
-extern int FUN_002ede52(int, unsigned char *);
+/* Supplied declaration required: onlineSockAddrConstruct. */
+extern int onlineSockAddrNotEquals(int, unsigned char *);
 /* Supplied declaration required: FUN_002fd394. */
 
 
@@ -28,7 +28,7 @@ unsigned int FUN_0012105c(int param_1,int param_2,int param_3)
   unsigned short temp_v3;
   unsigned int temp_v4;
   
-  FUN_002e995c(temp_v2);
+  onlineSockAddrConstruct(temp_v2);
   temp_v0 = *(int *)(param_1 + 4) + 0x10;
   FUN_002fd394(temp_v0,param_2,temp_v2);
   if (((temp_v0 != 0) &&
@@ -39,7 +39,7 @@ unsigned int FUN_0012105c(int param_1,int param_2,int param_3)
        | (temp_v4 >> 0x18)) ||
        ((unsigned short)((*(unsigned short *)(param_2 + 6) << 8) | (*(unsigned short *)(param_2 + 6) >> 8)) !=
         (unsigned short)((temp_v3 << 8) | (temp_v3 >> 8)))))) &&
-     ((param_3 == 0 || (temp_v0 = FUN_002ede52(param_3,temp_v2), temp_v0 == 0)))) {
+     ((param_3 == 0 || (temp_v0 = onlineSockAddrNotEquals(param_3,temp_v2), temp_v0 == 0)))) {
     return 1;
   }
   return 0;

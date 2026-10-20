@@ -18,7 +18,7 @@ extern int g_btlEvent; /* 0x435d48 */
 /* Supplied declaration required: FUN_0023c154. */
 extern int FUN_0027e3b8(int);
 /* Supplied declaration required: FUN_0027e3f8. */
-extern int FUN_003366f8(int);
+extern int btlFindFirstActiveUnit(int);
 extern int FUN_00338584(int);
 
 
@@ -55,7 +55,7 @@ void FUN_00229754(int *param_1,unsigned int *param_2)
   }
   temp_v0 = FUN_00338584(*param_1);
   if (temp_v0 != 0) {
-    temp_v0 = FUN_003366f8(*param_1);
+    temp_v0 = btlFindFirstActiveUnit(*param_1);
     FUN_0023c154(*param_1,1,(int)*(short *)(*(int *)(*param_1 + 0x1e98) + 0x60),
                  (int)*(short *)(temp_v0 + 0x6e),param_2);
   }

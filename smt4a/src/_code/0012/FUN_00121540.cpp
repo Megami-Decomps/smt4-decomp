@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002ea0b8(int);
+int sharedRefInitEmpty(int);
 
 extern unsigned char DAT_0055b00c; /* 0x55b00c */
 
-/* Supplied declaration required: FUN_002ea0b8. */
+/* Supplied declaration required: sharedRefInitEmpty. */
 extern int destroyObj0055ae64(unsigned int *);
 extern int strDestroy(int);
 
@@ -22,7 +22,7 @@ void FUN_00121540(unsigned int *param_1)
   *param_1 = (unsigned int)&DAT_0055b00c;
   temp_v0 = destroyObj0055ae64(param_1 + 0xd);
   temp_v0 = strDestroy(temp_v0 - 0x28);
-  FUN_002ea0b8(temp_v0 - 0xc);
+  sharedRefInitEmpty(temp_v0 - 0xc);
   return;
 }
 

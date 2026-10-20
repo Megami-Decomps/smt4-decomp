@@ -20,7 +20,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-extern unsigned int FUN_002ea714(void);
+extern unsigned int onlineGetActiveLock(void);
 /* Supplied declaration required: FUN_002eb390. */
 /* Supplied declaration required: FUN_002eb3f2. */
 /* Supplied declaration required: FUN_002eb422. */
@@ -44,7 +44,7 @@ unsigned int FUN_00104f5a(int param_1,int param_2,int param_3)
   iStack_18 = param_1;
   temp_v6 = param_2;
   iStack_10 = param_3;
-  temp_v0 = FUN_002ea714();
+  temp_v0 = onlineGetActiveLock();
   FUN_002e6e34(temp_v2,temp_v0);
   FUN_002eb390(&temp_v3,param_1 + 0xac,&temp_v6);
   while( 1 ) {

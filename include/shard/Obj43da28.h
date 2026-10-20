@@ -1,4 +1,4 @@
-/* The object held in DAT_0043da28 (state at 0x10, settings near 0x4C5 and 0x550-0x560). */
+/* The object held in g_buttonHelp (state at 0x10, settings near 0x4C5 and 0x550-0x560). */
 #ifndef SHARD_OBJ43DA28_H
 #define SHARD_OBJ43DA28_H
 
@@ -31,6 +31,6 @@ typedef struct Holder43da28 {
     /* 0x4 */ Obj43da28 *obj;
 } Holder43da28;
 
-extern Holder43da28 DAT_0043da28;
+extern Holder43da28 g_buttonHelp;
 
 #endif

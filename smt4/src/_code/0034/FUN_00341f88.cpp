@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b2368(unsigned int *);
+int asdMemFreeNonNull(unsigned int *);
 int asdMemFree(unsigned int);
 int memClear(unsigned int *, int);
 int nn_gr_CTR_Vertex_LoadArray_DisableAll(unsigned int *);
@@ -16,7 +16,7 @@ typedef struct {
 
 extern unsigned char DAT_00420730; /* 0x420730 */
 
-/* Supplied declaration required: FUN_002b2368. */
+/* Supplied declaration required: asdMemFreeNonNull. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: nn_gr_CTR_Vertex_LoadArray_DisableAll. */
@@ -50,7 +50,7 @@ void FUN_00341f88(unsigned int *param_1)
   } while (temp_v1 < 0xc);
   asdMemFree(param_1[2]);
   asdMemFree(param_1[3]);
-  FUN_002b2368(param_1);
+  asdMemFreeNonNull(param_1);
   return;
 }
 

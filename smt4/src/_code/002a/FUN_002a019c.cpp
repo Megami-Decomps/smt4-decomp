@@ -8,12 +8,12 @@ int FUN_0029cde0(...);
 int dataTable06Sub1GetRecord(...);
 int FUN_0029eaa4(...);
 int FUN_002b7bca(...);
-int FUN_002b9024(...);
-int FUN_002c3944(...);
+int devilGetRecord(...);
+int rt_memclr(...);
 int memClear(...);
 
 extern int FUN_001f6524(...); /* 0x1f6524 */
-extern int *DAT_0043dd68; /* 0x43dd68 */
+extern int *g_unite; /* 0x43dd68 */
 
 extern int FUN_001a15f4(int);
 /* Supplied declaration required: FUN_0029cde0. */
@@ -23,8 +23,8 @@ extern unsigned long long FUN_0029ea68(unsigned short);
 /* Supplied declaration required: FUN_0029eaa4. */
 extern int FUN_002a0d0c(void);
 /* Supplied declaration required: FUN_002b7bca. */
-/* Supplied declaration required: FUN_002b9024. */
-/* Supplied declaration required: FUN_002c3944. */
+/* Supplied declaration required: devilGetRecord. */
+/* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: memClear. */
 
 
@@ -44,12 +44,12 @@ void FUN_002a019c(void)
   int temp_v6;
   unsigned long long temp_v7;
   
-  piVar1 = DAT_0043dd68;
+  piVar1 = g_unite;
   temp_v0 = FUN_002a0d0c();
   memClear(piVar1 + 0x170,0x962);
   temp_v1 = (int)piVar1 + 0xf22;
-  FUN_002c3944(temp_v1,0x70);
-  FUN_002c3944((int)piVar1 + 0xf92,0x3ea);
+  rt_memclr(temp_v1,0x70);
+  rt_memclr((int)piVar1 + 0xf92,0x3ea);
   temp_v5 = 0;
   temp_v6 = 0;
   puVar8 = (unsigned short *)0x0;
@@ -58,7 +58,7 @@ void FUN_002a019c(void)
     FUN_0029eaa4(temp_v2,puVar8);
     if (temp_v2 != 0) {
       puVar5 = puVar8;
-      FUN_002b9024();
+      devilGetRecord();
       temp_v7 = FUN_0029ea68(*puVar5);
       temp_v4 = (unsigned int)((unsigned long long)temp_v7 >> 0x20);
       if (((int)temp_v7 != 0) ||

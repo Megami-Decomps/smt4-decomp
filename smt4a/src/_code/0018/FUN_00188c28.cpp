@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_001bd438(unsigned char *, int);
+int nn_os_AddressSpaceManager_Free(unsigned char *, int);
 int FUN_002e3140(void);
 int software_interrupt(int);
 
-extern unsigned char DAT_00647660; /* 0x647660 */
+extern unsigned char g_nnosAddressSpaceManagerHeap; /* 0x647660 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_001bd438. */
+/* Supplied declaration required: nn_os_AddressSpaceManager_Free. */
 /* Supplied declaration required: FUN_002e3140. */
 
 
@@ -30,7 +30,7 @@ void FUN_00188c28(int param_1)
         if (*(int *)(param_1 + 0x14) < 0) {
           FUN_002e3140();
         }
-        FUN_001bd438(&DAT_00647660,param_1);
+        nn_os_AddressSpaceManager_Free(&g_nnosAddressSpaceManagerHeap,param_1);
       }
     }
     if (*(int *)(param_1 + 0x14) != 0) {

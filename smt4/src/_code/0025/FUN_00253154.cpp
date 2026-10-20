@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_002c2950(void);
+extern int gameGetMapBlock(void);
 
 
 unsigned char FUN_00253154(int param_1)
@@ -12,7 +12,7 @@ unsigned char FUN_00253154(int param_1)
 {
   int temp_v0;
   
-  temp_v0 = FUN_002c2950();
+  temp_v0 = gameGetMapBlock();
   return (*(unsigned int *)(temp_v0 + ((int)(param_1 + ((unsigned int)(param_1 >> 0x1f) >> 0x1b)) >> 5) * 4 + 0x750) &
          (1 << ((param_1 % 0x20) & 0xffU))) != 0;
 }

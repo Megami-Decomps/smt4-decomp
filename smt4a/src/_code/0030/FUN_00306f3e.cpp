@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_002e9300(...);
-int FUN_002e9318(int *);
+int onlineStringConstruct(...);
+int onlineStringDestroy(int *);
 int FUN_0030ed7a(int *);
 
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
@@ -14,9 +14,9 @@ typedef struct {
     unsigned int sp1C; /* 0x1c: local_1c */
 } param_4_stack;
 
-/* Supplied declaration required: FUN_002e9300. */
-/* Supplied declaration required: FUN_002e9318. */
-extern int FUN_0030ed4e(short *, unsigned int);
+/* Supplied declaration required: onlineStringConstruct. */
+/* Supplied declaration required: onlineStringDestroy. */
+extern int wstrstrU16Scan(short *, unsigned int);
 /* Supplied declaration required: FUN_0030ed7a. */
 
 
@@ -38,16 +38,16 @@ int FUN_00306f3e(int param_1,short *param_2,unsigned int param_3,unsigned int pa
     temp_v2 = param_2;
     uStack_18 = param_3;
     temp_v3 = param_4;
-    FUN_002e9300(&iStack_20);
+    onlineStringConstruct(&iStack_20);
     FUN_0030ed7a(&iStack_20);
-    FUN_002e9300(&uStack_18,param_2);
+    onlineStringConstruct(&uStack_18,param_2);
     FUN_0030ed7a(&uStack_18);
-    temp_v0 = FUN_0030ed4e(temp_v2,temp_v3);
+    temp_v0 = wstrstrU16Scan(temp_v2,temp_v3);
     if (temp_v0 != 0) {
       temp_v1 = (temp_v0 - (int)temp_v2) >> 1;
     }
-    FUN_002e9318(&uStack_18);
-    FUN_002e9318(&iStack_20);
+    onlineStringDestroy(&uStack_18);
+    onlineStringDestroy(&iStack_20);
   }
   return temp_v1;
 }

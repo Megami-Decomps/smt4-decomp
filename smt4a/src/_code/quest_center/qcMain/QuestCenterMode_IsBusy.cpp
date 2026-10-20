@@ -6,14 +6,14 @@ extern "C" {
 
 int FUN_001919a4(void);
 int asdMemFree(unsigned int *);
-int FUN_002e3328(unsigned int);
+int asdOperatorDelete(unsigned int);
 
 extern unsigned char g_qcMain; /* 0x588c2c */
 
 extern int jobFind(unsigned int);
 /* Supplied declaration required: FUN_001919a4. */
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_002e3328. */
+/* Supplied declaration required: asdOperatorDelete. */
 
 
 unsigned int QuestCenterMode_IsBusy(void)
@@ -35,7 +35,7 @@ unsigned int QuestCenterMode_IsBusy(void)
       *(unsigned char *)((*(unsigned int * *)((unsigned char *)&g_qcMain + 0x4)) + 6) = 1;
       if (puVar2[7] != 0) {
         FUN_001919a4();
-        FUN_002e3328(puVar2[7]);
+        asdOperatorDelete(puVar2[7]);
         puVar2[7] = 0;
       }
       asdMemFree((*(unsigned int * *)((unsigned char *)&g_qcMain + 0x4)));

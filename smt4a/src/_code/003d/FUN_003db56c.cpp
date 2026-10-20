@@ -13,7 +13,7 @@ int FUN_00180310(...);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
 int FUN_00183bb0(void);
-int FUN_00184e64(...);
+int drawSetColorFromRGBA8(...);
 int FUN_0025c848(...);
 int FUN_00344cd0(...);
 int VectorSignedToFloat(...);
@@ -42,8 +42,8 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164b5c. */
-extern int FUN_001654d8(int);
-extern int FUN_001654e4(int);
+extern int vec2GetXInt(int);
+extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00168470. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
@@ -51,7 +51,7 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_00184e64. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 extern unsigned int FUN_00186f54(unsigned int);
 /* Supplied declaration required: FUN_0025c848. */
 extern int FUN_00284140(int);
@@ -62,7 +62,7 @@ extern unsigned int FUN_002e5c2c(void);
 extern int FUN_00348ed0(int);
 extern int FUN_003e4230(unsigned int);
 extern unsigned int FUN_003e45a8(unsigned int);
-extern int FUN_003e46f4(unsigned int);
+extern int gameDataFlagTestBit(unsigned int);
 extern int FUN_003e4718(unsigned int);
 
 
@@ -86,8 +86,8 @@ void FUN_003db56c(int param_1)
   unsigned int temp_v11;
   unsigned char temp_v12 [84];
   
-  temp_v0 = FUN_001654d8(param_1 + 0x2d8);
-  temp_v1 = FUN_001654e4(param_1 + 0x2d8);
+  temp_v0 = vec2GetXInt(param_1 + 0x2d8);
+  temp_v1 = vec2GetYInt(param_1 + 0x2d8);
   temp_v6 = 0;
   temp_v11 = 0;
   efctSetSpeed();
@@ -112,7 +112,7 @@ void FUN_003db56c(int param_1)
         temp_v4 = FUN_001834a4(0x14,0x58f);
         FUN_00168470(temp_v7 & 0xffff,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v0,
                      (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v1,0x6a);
-        temp_v4 = FUN_003e46f4(temp_v7);
+        temp_v4 = gameDataFlagTestBit(temp_v7);
         if (temp_v4 != 0) {
           temp_v6 = 0x57d8ffff;
           temp_v4 = FUN_001834a4(0x14,0x595);
@@ -149,7 +149,7 @@ void FUN_003db56c(int param_1)
             FUN_00100388(temp_v12,&LAB_003dba1c,temp_v3);
           }
           temp_v4 = FUN_001834a4(0x14,0x594);
-          FUN_00184e64(temp_v11);
+          drawSetColorFromRGBA8(temp_v11);
           FUN_00180310(0,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v0,
                        (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v1,1,4,0x6f,
                        temp_v12);
@@ -209,7 +209,7 @@ void FUN_003db56c(int param_1)
     temp_v5 = FUN_001834a4(0x14,0x598);
     FUN_00168470(temp_v7 & 0xffff,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v0,
                  (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v1,0x92);
-    temp_v5 = FUN_003e46f4(temp_v7);
+    temp_v5 = gameDataFlagTestBit(temp_v7);
     if (temp_v5 != 0) {
       temp_v6 = 0x57d8ffff;
       temp_v5 = FUN_001834a4(0x14,0x59e);
@@ -245,7 +245,7 @@ void FUN_003db56c(int param_1)
         FUN_00100388(temp_v12,&LAB_003dba1c,temp_v3);
       }
       temp_v5 = FUN_001834a4(0x14,0x59d);
-      FUN_00184e64(temp_v11);
+      drawSetColorFromRGBA8(temp_v11);
       FUN_00180310(0,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v0,
                    (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v1,1,4,0x97,
                    temp_v12);

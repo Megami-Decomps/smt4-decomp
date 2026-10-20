@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0030c6e4(int, int);
-int FUN_0030fd90(int *, int, int);
+int vectorDestroyRangeStride32(int *, int, int);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -14,7 +14,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_0030c6e4. */
-/* Supplied declaration required: FUN_0030fd90. */
+/* Supplied declaration required: vectorDestroyRangeStride32. */
 
 
 void FUN_0030d1bc(int *param_1)
@@ -35,7 +35,7 @@ void FUN_0030d1bc(int *param_1)
       FUN_0030c6e4(temp_v3,temp_v2);
       temp_v3 = temp_v3 + 0x20;
     }
-    FUN_0030fd90(param_1,temp_v3,param_1[1]);
+    vectorDestroyRangeStride32(param_1,temp_v3,param_1[1]);
     param_1[1] = param_1[1] - ((temp_v1 - temp_v0) & 0xffffffe0U);
   }
   return;

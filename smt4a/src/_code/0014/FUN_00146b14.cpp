@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-extern int DAT_005c0ac8; /* 0x5c0ac8 */
+extern int g_nnosHeapState; /* 0x5c0ac8 */
 extern unsigned int DAT_005c0acc; /* 0x5c0acc */
 
 /* Supplied declaration required: FUN_0016236c. */
@@ -30,7 +30,7 @@ void FUN_00146b14(unsigned int param_1)
     if (DAT_005c0acc < param_1) {
       if ((DAT_005c0acc == 0) || (((DAT_005c0acc | param_1) & 0xfffff) == 0)) {
         if (DAT_005c0acc != 0) {
-          temp_v0 = DAT_005c0ac8 + DAT_005c0acc;
+          temp_v0 = g_nnosHeapState + DAT_005c0acc;
         }
         else {
           temp_v0 = 0;
@@ -42,7 +42,7 @@ void FUN_00146b14(unsigned int param_1)
             DAT_005c0acc = param_1;
             return;
           }
-          DAT_005c0ac8 = temp_v1[0];
+          g_nnosHeapState = temp_v1[0];
           DAT_005c0acc = param_1;
           return;
         }
@@ -50,10 +50,10 @@ void FUN_00146b14(unsigned int param_1)
     }
     else {
       piVar1 = temp_v1;
-      FUN_0016236c(piVar1,DAT_005c0ac8 + param_1,0,DAT_005c0acc - param_1,1,0);
+      FUN_0016236c(piVar1,g_nnosHeapState + param_1,0,DAT_005c0acc - param_1,1,0);
       if (-1 < (int)piVar1) {
         if (param_1 == 0) {
-          DAT_005c0ac8 = 0;
+          g_nnosHeapState = 0;
         }
         DAT_005c0acc = param_1;
         return;

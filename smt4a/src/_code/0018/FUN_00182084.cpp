@@ -4,18 +4,18 @@
 
 extern "C" {
 
-int FUN_001846d0(int, int);
-int FUN_00184758(int, int, int);
-int FUN_00184c00(int, int);
+int uiSpriteSelectAnim(int, int);
+int uiSpriteSetKeyframe(int, int, int);
+int uiSpriteSetImageKeyframe(int, int);
 int FUN_0019d890(int, int);
 int FUN_0019e330(int, int);
 int FUN_001a90e0(int);
 
-extern unsigned char DAT_0057f0c4; /* 0x57f0c4 */
+extern unsigned char g_buttonHelp; /* 0x57f0c4 */
 
-/* Supplied declaration required: FUN_001846d0. */
-/* Supplied declaration required: FUN_00184758. */
-/* Supplied declaration required: FUN_00184c00. */
+/* Supplied declaration required: uiSpriteSelectAnim. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_0019d890. */
 /* Supplied declaration required: FUN_0019e330. */
 /* Supplied declaration required: FUN_001a90e0. */
@@ -32,11 +32,11 @@ void FUN_00182084(void)
   int *piVar5;
   int temp_v4;
   
-  temp_v1 = (*(int *)((unsigned char *)&DAT_0057f0c4 + 0x4));
+  temp_v1 = (*(int *)((unsigned char *)&g_buttonHelp + 0x4));
   temp_v3 = 0;
-  piVar5 = (int *)((*(int *)((unsigned char *)&DAT_0057f0c4 + 0x4)) + 0x5d0);
+  piVar5 = (int *)((*(int *)((unsigned char *)&g_buttonHelp + 0x4)) + 0x5d0);
   do {
-    FUN_001846d0(temp_v1 + temp_v3 * 0x8c + 0x34,0);
+    uiSpriteSelectAnim(temp_v1 + temp_v3 * 0x8c + 0x34,0);
     temp_v0 = *(char *)(temp_v1 + temp_v3 * 4 + 0x5ac);
     if (temp_v0 != '\0') {
       if (!(temp_v0 == '\a' || temp_v0 == '\x13')) {
@@ -105,12 +105,12 @@ void FUN_00182084(void)
       do {
         temp_v4 = temp_v1 + temp_v3 * 0x8c;
         if (*(char *)(temp_v1 + 0x5e4) != '\x01') {
-          FUN_00184c00(temp_v4 + 0x37c,0);
+          uiSpriteSetImageKeyframe(temp_v4 + 0x37c,0);
           FUN_0019e330(temp_v4 + 0x37c,0);
         }
         else {
-          FUN_00184c00(temp_v4 + 0x37c,0);
-          FUN_00184758(temp_v4 + 0x37c,2,0);
+          uiSpriteSetImageKeyframe(temp_v4 + 0x37c,0);
+          uiSpriteSetKeyframe(temp_v4 + 0x37c,2,0);
         }
         temp_v3 = temp_v3 + 1;
       } while (temp_v3 < 4);
@@ -118,8 +118,8 @@ void FUN_00182084(void)
       *(unsigned short *)(temp_v1 + 0x5d8) = 0;
       FUN_001a90e0(temp_v1 + 0x5da);
       *(unsigned char *)(temp_v1 + 0x5e2) = 1;
-      temp_v1 = (*(int *)((unsigned char *)&DAT_0057f0c4 + 0x4));
-      *(unsigned int *)((*(int *)((unsigned char *)&DAT_0057f0c4 + 0x4)) + 0xc) = 0;
+      temp_v1 = (*(int *)((unsigned char *)&g_buttonHelp + 0x4));
+      *(unsigned int *)((*(int *)((unsigned char *)&g_buttonHelp + 0x4)) + 0xc) = 0;
       *(unsigned int *)(temp_v1 + 0x10) = 1;
       return;
     }

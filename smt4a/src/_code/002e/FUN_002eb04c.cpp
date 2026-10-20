@@ -6,13 +6,13 @@ extern "C" {
 
 int FUN_002eb164(unsigned char [8], int);
 int FUN_002ef00c(unsigned char [12], int);
-int FUN_002efd36(...);
+int seq16IsGreater(...);
 
 /* Supplied declaration required: FUN_002eb164. */
 extern int FUN_002eb6ae(int, unsigned int);
 extern int *arrayElementAddress_002eee88(int, unsigned char);
 /* Supplied declaration required: FUN_002ef00c. */
-/* Supplied declaration required: FUN_002efd36. */
+/* Supplied declaration required: seq16IsGreater. */
 
 
 unsigned int FUN_002eb04c(int param_1,int param_2)
@@ -32,7 +32,7 @@ unsigned int FUN_002eb04c(int param_1,int param_2)
         FUN_002eb164(temp_v2,param_2);
         piVar2 = (int *)arrayElementAddress_002eee88(param_1 + 0x9c,*(unsigned char *)(param_2 + 0x84));
         FUN_002ef00c(temp_v3,*piVar2 + 0x34);
-        temp_v1 = FUN_002efd36(temp_v3,temp_v2);
+        temp_v1 = seq16IsGreater(temp_v3,temp_v2);
         if (temp_v1 != 0) {
           return 1;
         }
@@ -52,7 +52,7 @@ unsigned int FUN_002eb04c(int param_1,int param_2)
         FUN_002eb164(temp_v2,param_2);
         temp_v1 = param_1 + 0xf0;
       }
-      temp_v1 = FUN_002efd36(temp_v1,temp_v2);
+      temp_v1 = seq16IsGreater(temp_v1,temp_v2);
       if (temp_v1 != 0) {
         *(int *)(param_1 + 0x2fc) = *(int *)(param_1 + 0x2fc) + 1;
         return 1;

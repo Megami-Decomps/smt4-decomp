@@ -20,14 +20,14 @@ typedef struct {
     unsigned short spA8; /* 0xa8: local_a8 */
 } param_1_stack;
 
-extern int DAT_0043da90; /* 0x43da90 */
+extern int g_camp; /* 0x43da90 */
 
 /* Supplied declaration required: FUN_00299370. */
 /* Supplied declaration required: FUN_0029a0cc. */
 /* Supplied declaration required: FUN_0029c4ac. */
 extern int FUN_0029efa8(int);
 extern int FUN_0029efc0(int);
-extern unsigned int FUN_002b63ac(void);
+extern unsigned int gameGetPlayerData(void);
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -47,8 +47,8 @@ void FUN_0029974c(int param_1)
   unsigned short temp_v9;
   unsigned short temp_v10;
   
-  temp_v1 = DAT_0043da90;
-  temp_v0 = FUN_002b63ac();
+  temp_v1 = g_camp;
+  temp_v0 = gameGetPlayerData();
   temp_v3 = 0;
   temp_v2 = 0;
   if (param_1 == 0x11) {

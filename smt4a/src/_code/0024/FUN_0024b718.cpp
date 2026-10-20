@@ -6,14 +6,14 @@ extern "C" {
 
 int FUN_001517b4(...);
 int FUN_001641b4(int);
-int FUN_00203d04(int);
+int dialogClose(int);
 int FUN_003ea20c(void);
 int FUN_004c89e8(void);
 int FUN_004c8b10(void);
 int FUN_004c8bb8(...);
 
 extern int g_btlScriptUnit; /* 0x57113c */
-extern unsigned int DAT_005712f0; /* 0x5712f0 */
+extern unsigned int g_btlActionReflect; /* 0x5712f0 */
 extern unsigned int DAT_005713b8; /* 0x5713b8 */
 extern unsigned int DAT_005713bc; /* 0x5713bc */
 extern unsigned int DAT_005713c0; /* 0x5713c0 */
@@ -28,15 +28,15 @@ extern unsigned int DAT_005713e0; /* 0x5713e0 */
 extern unsigned int DAT_005713e4; /* 0x5713e4 */
 extern unsigned int DAT_005713e8; /* 0x5713e8 */
 extern unsigned int DAT_005713ec; /* 0x5713ec */
-extern int DAT_00571508; /* 0x571508 */
-extern int DAT_0057a9c8; /* 0x57a9c8 */
+extern int g_btlCamera; /* 0x571508 */
+extern int g_btlUiBlock; /* 0x57a9c8 */
 
 /* Supplied declaration required: FUN_001517b4. */
 extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_001641b4. */
 extern int jobGetWork(void);
-/* Supplied declaration required: FUN_00203d04. */
-extern int FUN_002619e0(void);
+/* Supplied declaration required: dialogClose. */
+extern int dialogIsActive(void);
 /* Supplied declaration required: FUN_003ea20c. */
 extern int FUN_003eb1cc(int);
 extern int FUN_003ece6c(int);
@@ -70,7 +70,7 @@ unsigned int FUN_0024b718(void)
     temp_v6 = ~DAT_005713c0;
     *(unsigned int *)(temp_v3 + 0x45a4) = *(unsigned int *)(temp_v3 + 0x45a4) & ~DAT_005713bc & ~DAT_005713c4;
     *(unsigned int *)(temp_v3 + 0x45a0) = *(unsigned int *)(temp_v3 + 0x45a0) & temp_v4 & temp_v6;
-    temp_v3 = FUN_002619e0();
+    temp_v3 = dialogIsActive();
   }
   else {
     puVar8 = (unsigned int *)(temp_v3 + 0x45a0);
@@ -85,7 +85,7 @@ unsigned int FUN_0024b718(void)
         return 0;
       }
       FUN_004c8b10();
-      temp_v3 = FUN_002619e0();
+      temp_v3 = dialogIsActive();
     }
     else {
       if ((temp_v6 & DAT_005713cc) != 0 || (temp_v4 & DAT_005713c8) != 0) {
@@ -141,11 +141,11 @@ unsigned int FUN_0024b718(void)
             return 0;
           }
         }
-        temp_v5 = FUN_0040ddec(DAT_005712f0,0x34);
+        temp_v5 = FUN_0040ddec(g_btlActionReflect,0x34);
         if (0 < temp_v5) {
           return 0;
         }
-        if (DAT_0057a9c8 == 0) {
+        if (g_btlUiBlock == 0) {
           return 0;
         }
         temp_v5 = FUN_004a9428();
@@ -160,8 +160,8 @@ unsigned int FUN_0024b718(void)
         if (temp_v5 != 0) {
           return 0;
         }
-        if (*(int *)(DAT_00571508 + 0x38) != 3) {
-          if (*(int *)(DAT_00571508 + 0x38) == 4) {
+        if (*(int *)(g_btlCamera + 0x38) != 3) {
+          if (*(int *)(g_btlCamera + 0x38) == 4) {
             temp_v6 = ~DAT_005713b8;
             temp_v4 = ~DAT_005713c0;
             *(unsigned int *)(temp_v3 + 0x45a4) = *(unsigned int *)(temp_v3 + 0x45a4) & ~DAT_005713bc & ~DAT_005713c4;
@@ -173,14 +173,14 @@ unsigned int FUN_0024b718(void)
             if (*(int *)(temp_v3 + 8) != 7 && *(int *)(temp_v3 + 8) != 6) {
               return 0;
             }
-            temp_v3 = FUN_002619e0();
+            temp_v3 = dialogIsActive();
             if (temp_v3 != 0) {
-              FUN_00203d04(1);
+              dialogClose(1);
             }
             return 0;
           }
         }
-        else if (*(char *)(DAT_00571508 + 0x6a8) != '\0') {
+        else if (*(char *)(g_btlCamera + 0x6a8) != '\0') {
           return 0;
         }
         if ((DAT_005713bc & *(unsigned int *)(temp_v3 + 0x45a4)) != 0 || (DAT_005713b8 & *puVar8) != 0) {
@@ -190,7 +190,7 @@ unsigned int FUN_0024b718(void)
             return 0;
           }
           FUN_004c89e8();
-          FUN_00203d04(1);
+          dialogClose(1);
           temp_v4 = ~DAT_005713bc;
           *puVar8 = *puVar8 & ~DAT_005713b8;
           *(unsigned int *)(temp_v3 + 0x45a4) = *(unsigned int *)(temp_v3 + 0x45a4) & temp_v4;
@@ -204,7 +204,7 @@ unsigned int FUN_0024b718(void)
             return 0;
           }
           FUN_004c89e8();
-          FUN_00203d04(1);
+          dialogClose(1);
           temp_v4 = ~DAT_005713c4;
           *puVar8 = *puVar8 & ~DAT_005713c0;
           *(unsigned int *)(temp_v3 + 0x45a4) = *(unsigned int *)(temp_v3 + 0x45a4) & temp_v4;
@@ -244,11 +244,11 @@ unsigned int FUN_0024b718(void)
       temp_v6 = ~DAT_005713c0;
       *(unsigned int *)(temp_v3 + 0x45a4) = *(unsigned int *)(temp_v3 + 0x45a4) & ~DAT_005713bc & ~DAT_005713c4;
       *puVar8 = *puVar8 & temp_v4 & temp_v6;
-      temp_v3 = FUN_002619e0();
+      temp_v3 = dialogIsActive();
     }
   }
   if (temp_v3 != 0) {
-    FUN_00203d04(1);
+    dialogClose(1);
   }
   return 0;
 }

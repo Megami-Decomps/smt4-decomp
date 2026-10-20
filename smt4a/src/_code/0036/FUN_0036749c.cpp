@@ -30,7 +30,7 @@ extern unsigned int DAT_005f16b4; /* 0x5f16b4 */
 extern unsigned int DAT_005f16b8; /* 0x5f16b8 */
 extern unsigned char DAT_005f185a; /* 0x5f185a */
 
-extern int FUN_001656a0(unsigned int);
+extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
@@ -101,7 +101,7 @@ void FUN_0036749c(void)
             *(unsigned int *)(temp_v1 + 8) = 0;
           }
           else {
-            temp_v1 = FUN_001656a0(5);
+            temp_v1 = padButtonIsPressed(5);
             if ((temp_v1 != 0) || (temp_v1 = FUN_004d0554(), temp_v1 != 0)) {
               temp_v1 = DAT_005806a4;
               *(unsigned int *)(DAT_005806a4 + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);

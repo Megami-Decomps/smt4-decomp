@@ -37,7 +37,7 @@ extern unsigned int FUN_00256540(void);
 /* Supplied declaration required: FUN_00281e34. */
 /* Supplied declaration required: FUN_00282390. */
 /* Supplied declaration required: FUN_0028250c. */
-extern int FUN_002c2950(void);
+extern int gameGetMapBlock(void);
 /* Supplied declaration required: FUN_002ed094. */
 
 
@@ -68,7 +68,7 @@ void FUN_002d508c(int param_1)
   unsigned int temp_v16;
   float temp_v17 [9];
   
-  temp_v1 = FUN_002c2950();
+  temp_v1 = gameGetMapBlock();
   temp_v4 = g_lmapScene;
   temp_v14 = 1.0f;
   temp_v9 = 60.0f;

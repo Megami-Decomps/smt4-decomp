@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001641c4(void);
+int ifTouchRegionRemove(void);
 int FUN_0023b45c(...);
 int FUN_00284ee4(...);
 int FUN_002c8550(...);
@@ -20,7 +20,7 @@ int FUN_002a4860(...);
 int FUN_002a48e0(int, int);
 int FUN_002a4964(int, int);
 int FUN_002a7b74(void);
-int FUN_0031d1d8(int, int);
+int flaggedEntrySetValueA(int, int);
 int FUN_0032fea0(...);
 int unitRecordBuild(...);
 int FUN_003450d4(int, unsigned int, int, int);
@@ -44,7 +44,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: FUN_001641b4. */
-/* Supplied declaration required: FUN_001641c4. */
+/* Supplied declaration required: ifTouchRegionRemove. */
 extern unsigned int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_0020b908. */
@@ -60,7 +60,7 @@ extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_002a7b74. */
 extern unsigned int *FUN_002c2c68(int);
 /* Supplied declaration required: FUN_002c8550. */
-/* Supplied declaration required: FUN_0031d1d8. */
+/* Supplied declaration required: flaggedEntrySetValueA. */
 /* Supplied declaration required: FUN_0032fea0. */
 /* Supplied declaration required: unitRecordBuild. */
 /* Supplied declaration required: FUN_003450d4. */
@@ -131,7 +131,7 @@ unsigned int FUN_003c9354(int param_1,unsigned int param_2,unsigned int *param_3
       *puVar12 = 0;
       if (temp_v11 != 0) {
         temp_v5 = FUN_00348ed0(temp_v14);
-        FUN_0031d1d8(temp_v14,temp_v5 - 1);
+        flaggedEntrySetValueA(temp_v14,temp_v5 - 1);
         *puVar12 = 1;
       }
       else if (temp_v6 == 0) {
@@ -144,7 +144,7 @@ unsigned int FUN_003c9354(int param_1,unsigned int param_2,unsigned int *param_3
             }
             else {
               FUN_002a48e0(temp_v14,temp_v5 - 2);
-              FUN_0031d1d8(temp_v14,1);
+              flaggedEntrySetValueA(temp_v14,1);
             }
             if ((temp_v4 >= *piVar11) || (*(char *)(param_1 + 0x8eac) != '\0')) {
               screenStartOrClear(*(unsigned int *)(param_1 + 0x424),0x1a);
@@ -157,7 +157,7 @@ unsigned int FUN_003c9354(int param_1,unsigned int param_2,unsigned int *param_3
         }
         if ((temp_v10 >= 7) && (temp_v4 < (int)temp_v12 - 2)) {
           temp_v5 = FUN_002a4860(temp_v14);
-          FUN_0031d1d8(temp_v14,temp_v10 - 1);
+          flaggedEntrySetValueA(temp_v14,temp_v10 - 1);
           FUN_002a48e0(temp_v14,temp_v5 + 1);
         }
       }
@@ -335,7 +335,7 @@ unsigned int FUN_003c9354(int param_1,unsigned int param_2,unsigned int *param_3
         temp_v5 = param_1 + temp_v4 * 2;
         if (-1 < *(short *)(temp_v5 + 0x438)) {
           *(unsigned short *)(temp_v5 + 0x438) = 0xffff;
-          FUN_001641c4();
+          ifTouchRegionRemove();
         }
         temp_v4 = temp_v4 + 1;
       } while (temp_v4 < 8);
@@ -344,16 +344,16 @@ unsigned int FUN_003c9354(int param_1,unsigned int param_2,unsigned int *param_3
         temp_v5 = param_1 + temp_v4 * 2;
         if (-1 < *(short *)(temp_v5 + 0x478)) {
           *(unsigned short *)(temp_v5 + 0x478) = 0xffff;
-          FUN_001641c4();
+          ifTouchRegionRemove();
         }
         temp_v4 = temp_v4 + 1;
       } while (temp_v4 < 8);
       *(unsigned short *)(param_1 + 0x476) = 0xffff;
       *(unsigned short *)(param_1 + 0x472) = 0xffff;
       *(unsigned short *)(param_1 + 0x474) = 0xffff;
-      FUN_001641c4();
-      FUN_001641c4();
-      FUN_001641c4();
+      ifTouchRegionRemove();
+      ifTouchRegionRemove();
+      ifTouchRegionRemove();
       temp_v4 = *(int *)(param_1 + 0x40c);
       temp_v9 = temp_v4 == 0x1e;
       if (temp_v9) {

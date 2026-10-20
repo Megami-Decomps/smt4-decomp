@@ -7,8 +7,8 @@ void jobStop(u32 job, s32 arg);
 void scrScriptProcessDestroy(void *process);
 OnesRoomWork *jobGetWork(u32 job);
 s32 FUN_0019e0c0(void *process);
-void FUN_00291944(s32 arg);
-void FUN_002917b8(void);
+void uiFadeRelease(s32 arg);
+void buttonHelpRelease(void);
 void FUN_00287728(s32 arg);
 
 extern OnesRoom *g_onesRoom;
@@ -23,8 +23,8 @@ s32 onesRoomTeardown(u32 job)
     if (state != 2) {
         return 0;
     }
-    FUN_00291944(state);
-    FUN_002917b8();
+    uiFadeRelease(state);
+    buttonHelpRelease();
     if (work->process != NULL) {
         scrScriptProcessDestroy(work->process);
         work->process = NULL;

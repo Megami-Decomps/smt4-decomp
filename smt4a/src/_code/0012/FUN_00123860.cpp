@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_00123844(unsigned char [8], unsigned int);
-int FUN_002e7888(unsigned int, unsigned int);
-int FUN_002e9318(unsigned char [8]);
-int FUN_002e97b4(unsigned int, unsigned char [256], int);
+int wstrcpyU16(unsigned int, unsigned int);
+int onlineStringDestroy(unsigned char [8]);
+int onlineSockAddrFormatIpv4(unsigned int, unsigned char [256], int);
 int FUN_002ea2e8(unsigned char [4]);
 int FUN_002ea3a8(unsigned char [4]);
-int FUN_002f32f8(...);
+int wideBufferAppend(...);
 int FUN_002fbd00(unsigned int, unsigned char [8]);
 int FUN_0030f090(unsigned int, unsigned char [32], int);
 
@@ -22,12 +22,12 @@ typedef struct {
 extern unsigned char LAB_001238b8; /* 0x1238b8 */
 
 /* Supplied declaration required: FUN_00123844. */
-/* Supplied declaration required: FUN_002e7888. */
-/* Supplied declaration required: FUN_002e9318. */
-/* Supplied declaration required: FUN_002e97b4. */
+/* Supplied declaration required: wstrcpyU16. */
+/* Supplied declaration required: onlineStringDestroy. */
+/* Supplied declaration required: onlineSockAddrFormatIpv4. */
 /* Supplied declaration required: FUN_002ea2e8. */
 /* Supplied declaration required: FUN_002ea3a8. */
-/* Supplied declaration required: FUN_002f32f8. */
+/* Supplied declaration required: wideBufferAppend. */
 /* Supplied declaration required: FUN_002fbd00. */
 /* Supplied declaration required: FUN_0030f090. */
 
@@ -43,15 +43,15 @@ void FUN_00123860(unsigned int param_1,unsigned int param_2)
   unsigned char temp_v4 [8];
   unsigned char temp_v5 [32];
   
-  FUN_002e97b4(param_1,temp_v3,0x80);
+  onlineSockAddrFormatIpv4(param_1,temp_v3,0x80);
   FUN_0030f090(param_1,temp_v5,0x10);
   FUN_002ea2e8(temp_v1);
   FUN_00123844(temp_v4,param_1);
-  temp_v0 = FUN_002f32f8(temp_v1,temp_v3);
-  temp_v0 = FUN_002f32f8(temp_v0,&LAB_001238b8);
+  temp_v0 = wideBufferAppend(temp_v1,temp_v3);
+  temp_v0 = wideBufferAppend(temp_v0,&LAB_001238b8);
   FUN_002fbd00(temp_v0,temp_v4);
-  FUN_002e9318(temp_v4);
-  FUN_002e7888(param_2,temp_v2);
+  onlineStringDestroy(temp_v4);
+  wstrcpyU16(param_2,temp_v2);
   FUN_002ea3a8(temp_v1);
   return;
 }

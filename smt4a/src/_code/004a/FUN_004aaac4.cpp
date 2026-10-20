@@ -27,8 +27,8 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 extern char *FUN_0014bd84(unsigned int);
 /* Supplied declaration required: FUN_0015f858. */
 /* Supplied declaration required: FUN_00162790. */
-extern int FUN_001654d8(void);
-extern int FUN_001654e4(int);
+extern int vec2GetXInt(void);
+extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001689e8. */
 /* Supplied declaration required: FUN_001834a4. */
@@ -59,8 +59,8 @@ void FUN_004aaac4(int param_1,int param_2,short *param_3,int param_4)
   temp_v5 = 0.26f;
   FUN_001879d0(g_renderCtx);
   temp_v2 = param_1 + param_2 * 0x8c + 0x128ac;
-  temp_v3 = FUN_001654d8();
-  temp_v2 = FUN_001654e4(temp_v2);
+  temp_v3 = vec2GetXInt();
+  temp_v2 = vec2GetYInt(temp_v2);
   temp_v3 = (int)*(short *)(temp_v1 + 8) + temp_v3 + (int)temp_v5;
   temp_v2 = (temp_v0 & 0xffff7fff) * param_2 + (int)*(short *)(temp_v1 + 10) + temp_v2;
   FUN_004abc68(param_1,temp_v3,temp_v2,(int)*param_3);

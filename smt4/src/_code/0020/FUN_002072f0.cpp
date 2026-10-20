@@ -4,16 +4,16 @@
 
 extern "C" {
 
-int FUN_002a8740(...);
-int FUN_002b9024(void);
+int gameGetUnitRecord(...);
+int devilGetRecord(void);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_002a8740. */
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: gameGetUnitRecord. */
+/* Supplied declaration required: devilGetRecord. */
 
 
 int FUN_002072f0(int *param_1,int *param_2)
@@ -35,12 +35,12 @@ int FUN_002072f0(int *param_1,int *param_2)
     if (*param_2 < 0) {
       return -1;
     }
-    temp_v0 = FUN_002a8740(*param_1);
-    temp_v1 = FUN_002a8740(*param_2);
+    temp_v0 = gameGetUnitRecord(*param_1);
+    temp_v1 = gameGetUnitRecord(*param_2);
     temp_v2 = (unsigned int)*(unsigned short *)(temp_v0 + 0x46);
-    FUN_002b9024();
+    devilGetRecord();
     temp_v3 = (unsigned int)*(unsigned short *)(temp_v1 + 0x46);
-    FUN_002b9024();
+    devilGetRecord();
     temp_v0 = (unsigned int)*(unsigned char *)(temp_v3 + 5) - (unsigned int)*(unsigned char *)(temp_v2 + 5);
     if (temp_v0 != 0) {
       return temp_v0;
@@ -49,12 +49,12 @@ int FUN_002072f0(int *param_1,int *param_2)
       if (*param_2 < 0) {
         return -1;
       }
-      temp_v0 = FUN_002a8740();
-      temp_v1 = FUN_002a8740(*param_2);
+      temp_v0 = gameGetUnitRecord();
+      temp_v1 = gameGetUnitRecord(*param_2);
       temp_v2 = (unsigned int)*(unsigned short *)(temp_v0 + 0x46);
-      FUN_002b9024();
+      devilGetRecord();
       temp_v3 = (unsigned int)*(unsigned short *)(temp_v1 + 0x46);
-      FUN_002b9024();
+      devilGetRecord();
       temp_v0 = (unsigned int)*(unsigned char *)(temp_v3 + 2) - (unsigned int)*(unsigned char *)(temp_v2 + 2);
       if (temp_v0 != 0) {
         return temp_v0;
@@ -69,14 +69,14 @@ int FUN_002072f0(int *param_1,int *param_2)
         temp_v0 = -1;
       }
       else {
-        temp_v1 = FUN_002a8740(*param_1);
-        temp_v4 = FUN_002a8740(*param_2);
+        temp_v1 = gameGetUnitRecord(*param_1);
+        temp_v4 = gameGetUnitRecord(*param_2);
         temp_v0 = (unsigned int)*(unsigned char *)(temp_v1 + 0x48) - (unsigned int)*(unsigned char *)(temp_v4 + 0x48);
         if (temp_v0 == 0) {
           temp_v2 = (unsigned int)*(unsigned short *)(temp_v1 + 0x46);
-          FUN_002b9024();
+          devilGetRecord();
           temp_v3 = (unsigned int)*(unsigned short *)(temp_v4 + 0x46);
-          FUN_002b9024();
+          devilGetRecord();
           temp_v0 = (unsigned int)*(unsigned char *)(temp_v3 + 2) - (unsigned int)*(unsigned char *)(temp_v2 + 2);
           if (temp_v0 == 0) {
             return (unsigned int)*(unsigned short *)(temp_v4 + 0x46) - (unsigned int)*(unsigned short *)(temp_v1 + 0x46);

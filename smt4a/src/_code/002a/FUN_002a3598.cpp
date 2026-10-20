@@ -8,16 +8,16 @@ void FUN_002c76c0(...);
 void FUN_002e6134(void);
 void FUN_003457b8(void);
 void FUN_003c5848(void);
-s32 FUN_002deb84(void);
+s32 scrGetCommandFrame(void);
 s32 ref208StateIs7(void);
 
-/* Script step: when FUN_002deb84 reports nonzero and ref208StateIs7 agrees, finishes (FUN_002e6134, FUN_002c76c0(-1), FUN_002852f0(0)) and returns 1; when FUN_002deb84 reports 0, runs the three clean-up calls; returns 0 otherwise. */
+/* Script step: when scrGetCommandFrame reports nonzero and ref208StateIs7 agrees, finishes (FUN_002e6134, FUN_002c76c0(-1), FUN_002852f0(0)) and returns 1; when scrGetCommandFrame reports 0, runs the three clean-up calls; returns 0 otherwise. */
 u32 FUN_002a3598(void)
 {
     s32 result;
 
     FUN_002c76c0();
-    result = FUN_002deb84();
+    result = scrGetCommandFrame();
     if (result != 0) {
         result = ref208StateIs7();
         if (result != 0) {

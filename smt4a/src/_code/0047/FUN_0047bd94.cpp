@@ -19,7 +19,7 @@ typedef struct {
 
 extern int g_aocMain; /* 0x570260 */
 
-extern int FUN_001d10ac(unsigned int *);
+extern int byteIsAtLeast100(unsigned int *);
 /* Supplied declaration required: FUN_00474734. */
 /* Supplied declaration required: FUN_00476e58. */
 /* Supplied declaration required: FUN_0047bc90. */
@@ -114,7 +114,7 @@ void FUN_0047bd94(int param_1)
       *(unsigned int *)(param_1 + 8) = 2;
       return;
     }
-    temp_v2 = FUN_001d10ac(&temp_v3);
+    temp_v2 = byteIsAtLeast100(&temp_v3);
   }
   else {
     (**(romwright_code **)(**(int **)(param_1 + 0x208) + 0xc))(&temp_v4);
@@ -135,7 +135,7 @@ void FUN_0047bd94(int param_1)
       *(unsigned int *)(param_1 + 0x208) = 0;
       return;
     }
-    temp_v2 = FUN_001d10ac(&temp_v3);
+    temp_v2 = byteIsAtLeast100(&temp_v3);
   }
   if (temp_v2 == 0) {
     return;

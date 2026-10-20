@@ -5,24 +5,24 @@
 extern "C" {
 
 int FUN_00275bc8(int, unsigned int);
-int FUN_00275f44(unsigned int, int);
+int scrScriptProcessStartEntry(unsigned int, int);
 int FUN_00290ba4(unsigned int);
-int FUN_002ce874(unsigned int);
-int FUN_002fe2ac(unsigned int);
-int FUN_00321744(void);
+int objectJobStop(unsigned int);
+int holderStopJob2(unsigned int);
+int btlTalkBustUpDestroy(void);
 int FUN_003d9164(void);
 int FUN_003f14a0(void);
 
-extern int DAT_00571508; /* 0x571508 */
+extern int g_btlCamera; /* 0x571508 */
 
 extern int FUN_0013def0(unsigned int);
 extern unsigned int btlGetMainState(void);
 /* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00290ba4. */
-/* Supplied declaration required: FUN_002ce874. */
-/* Supplied declaration required: FUN_002fe2ac. */
-/* Supplied declaration required: FUN_00321744. */
+/* Supplied declaration required: objectJobStop. */
+/* Supplied declaration required: holderStopJob2. */
+/* Supplied declaration required: btlTalkBustUpDestroy. */
 /* Supplied declaration required: FUN_003d9164. */
 /* Supplied declaration required: FUN_003f14a0. */
 
@@ -43,11 +43,11 @@ int FUN_003e6dc8(unsigned int *param_1)
     if ((temp_v0 == 3) && (temp_v0 = FUN_0013def0(1), temp_v0 == 3)) {
       temp_v1 = btlGetMainState();
       FUN_003f14a0();
-      FUN_00321744();
-      FUN_002fe2ac(temp_v1);
-      FUN_002ce874(temp_v1);
+      btlTalkBustUpDestroy();
+      holderStopJob2(temp_v1);
+      objectJobStop(temp_v1);
       FUN_00290ba4(temp_v1);
-      if (DAT_00571508 != 0) {
+      if (g_btlCamera != 0) {
         FUN_003d9164();
       }
       param_1[3] = 0;
@@ -56,8 +56,8 @@ int FUN_003e6dc8(unsigned int *param_1)
       FUN_00275bc8(temp_v0,param_1[6]);
       param_1[5] = temp_v0;
       *(unsigned int *)(temp_v0 + 0x108) = 1;
-      FUN_00275f44(param_1[5],0);
-      FUN_00275f44(param_1[5],4);
+      scrScriptProcessStartEntry(param_1[5],0);
+      scrScriptProcessStartEntry(param_1[5],4);
       param_1[3] = 1;
     }
     temp_v0 = 0;

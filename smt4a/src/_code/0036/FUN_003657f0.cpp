@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_0018719c(void);
+extern int gameFlagIsSet(void);
 extern int *FUN_003796d4(int);
 extern int FUN_003b5620(void);
 
@@ -26,8 +26,8 @@ int FUN_003657f0(int param_1)
         return -1;
       }
       if (*piVar2 == param_1) {
-        if ((((short)piVar2[1] == 0) || (temp_v1 = FUN_0018719c(), temp_v1 != 0)) &&
-           ((*(short *)((int)piVar2 + 6) == 0 || (temp_v1 = FUN_0018719c(), temp_v1 == 0)))) {
+        if ((((short)piVar2[1] == 0) || (temp_v1 = gameFlagIsSet(), temp_v1 != 0)) &&
+           ((*(short *)((int)piVar2 + 6) == 0 || (temp_v1 = gameFlagIsSet(), temp_v1 == 0)))) {
           temp_v0 = (int)*(short *)((int)piVar2 + 10);
           if (*(short *)((int)piVar2 + 10) != -1) {
             temp_v0 = temp_v2;

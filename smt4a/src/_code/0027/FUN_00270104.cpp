@@ -24,11 +24,11 @@ extern unsigned char DAT_00573b88; /* 0x573b88 */
 extern unsigned int DAT_00573bcc; /* 0x573bcc */
 
 /* Supplied declaration required: btlGetMainState. */
-extern unsigned int FUN_001801a4(void);
-extern int FUN_0018719c(unsigned int);
+extern unsigned int gameGetPlayerData(void);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0019de98. */
 extern unsigned int slotRecordFindById(unsigned short);
-extern int FUN_001ab854(void);
+extern int gameGetSlotRecord(void);
 extern int btlMainGetUnk14(void);
 extern int FUN_002a4860(unsigned int);
 extern int FUN_002a4894(unsigned int);
@@ -39,7 +39,7 @@ extern unsigned int FUN_002f8e14(unsigned int);
 /* Supplied declaration required: FUN_00359b6c. */
 /* Supplied declaration required: FUN_00399e20. */
 /* Supplied declaration required: FUN_003aeb18. */
-extern int FUN_003e46f4(unsigned int);
+extern int gameDataFlagTestBit(unsigned int);
 extern unsigned int halfTableGet(unsigned int, unsigned int);
 
 
@@ -81,7 +81,7 @@ void FUN_00270104(int param_1)
         temp_v7[0] = 0x2e;
         temp_v7[1] = 0x32;
         do {
-          temp_v2 = FUN_003e46f4(temp_v7[temp_v1]);
+          temp_v2 = gameDataFlagTestBit(temp_v7[temp_v1]);
           if (temp_v2 != 0) {
             if (temp_v5 == temp_v4) {
               temp_v3 = FUN_002f8e14(temp_v7[temp_v1 + 3] & 0xff);
@@ -131,7 +131,7 @@ void FUN_00270104(int param_1)
           FUN_0032d0c8(*puVar6,2,*(unsigned short *)(temp_v1 + 0x62),temp_v3);
           return;
         }
-        temp_v1 = FUN_001ab854();
+        temp_v1 = gameGetSlotRecord();
         temp_v3 = slotRecordFindById(*(unsigned short *)(temp_v1 + 0x62));
         FUN_0032d0c8(*puVar6,2,*(unsigned short *)(temp_v1 + 0x62),temp_v3);
         return;
@@ -149,8 +149,8 @@ void FUN_00270104(int param_1)
         FUN_003aeb18(*puVar6,0);
         return;
       }
-      if ((temp_v4 == 1) && (temp_v1 = FUN_0018719c(0x410), temp_v1 != 0)) {
-        temp_v5 = FUN_001801a4();
+      if ((temp_v4 == 1) && (temp_v1 = gameFlagIsSet(0x410), temp_v1 != 0)) {
+        temp_v5 = gameGetPlayerData();
         temp_v6 = *(short *)(temp_v5 + 2) != 0;
         if (temp_v6) {
           temp_v5 = (unsigned int)*(unsigned short *)(temp_v5 + 4);
@@ -161,9 +161,9 @@ void FUN_00270104(int param_1)
         }
       }
       temp_v1 = -2;
-      temp_v2 = FUN_0018719c(0x410);
+      temp_v2 = gameFlagIsSet(0x410);
       if (temp_v2 != 0) {
-        temp_v5 = FUN_001801a4();
+        temp_v5 = gameGetPlayerData();
         temp_v6 = *(short *)(temp_v5 + 2) != 0;
         if (temp_v6) {
           temp_v5 = (unsigned int)*(unsigned short *)(temp_v5 + 4);

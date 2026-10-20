@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern ObjectE0 *DAT_0057f65c;
+extern ObjectE0 *g_frameTex;
 
 void FUN_00348c3c(u8 value)
 {
-    DAT_0057f65c->unkFF4 = value;
+    g_frameTex->unkFF4 = value;
 }
 
 } /* extern "C" */

@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_0014384c(int);
+int asdTMTexTableLoadSprites(int);
 int FUN_0014afd0(int, int);
 
 extern signed char DAT_0057f234; /* 0x57f234 */
 
-/* Supplied declaration required: FUN_0014384c. */
+/* Supplied declaration required: asdTMTexTableLoadSprites. */
 /* Supplied declaration required: FUN_0014afd0. */
 
 
@@ -20,7 +20,7 @@ void FUN_002e51c4(void)
   int temp_v0;
   
   if (DAT_0057f234 < '\x01') {
-    FUN_0014384c(0xb);
+    asdTMTexTableLoadSprites(0xb);
     temp_v0 = 0;
     while( 1 ) {
       FUN_0014afd0(0xb,temp_v0);

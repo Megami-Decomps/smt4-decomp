@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_00100388(...);
-int FUN_001a9110(...);
+int wordPairCopy(...);
 int FUN_001ac2d4(...);
 int FUN_00280c5c(...);
-int FUN_0032c5c4(...);
+int nodeSetTranslation(...);
 int faderSetValue(...);
 int FUN_0036bb1c(...);
 int dataTable2CType1Count(void);
@@ -19,13 +19,13 @@ extern int *DAT_00581270; /* 0x581270 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00100388. */
-/* Supplied declaration required: FUN_001a9110. */
+/* Supplied declaration required: wordPairCopy. */
 extern int FUN_001ab8c0(int);
 /* Supplied declaration required: FUN_001ac2d4. */
 extern int asdMdlManagerClone(int, unsigned int);
 extern int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_00280c5c. */
-/* Supplied declaration required: FUN_0032c5c4. */
+/* Supplied declaration required: nodeSetTranslation. */
 /* Supplied declaration required: faderSetValue. */
 /* Supplied declaration required: FUN_0036bb1c. */
 extern char *dataTable2CType1GetEntry(int);
@@ -73,7 +73,7 @@ unsigned int FUN_00378a90(void)
           *(unsigned char *)(piVar3 + temp_v2 * 0xb + 0x44e) = 1;
           piVar3[temp_v2 * 0xb + 0x44f] = -1;
           FUN_00280c5c(piVar3[temp_v2 * 0xb + 0x44d],1);
-          FUN_0032c5c4(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x44d] + 8),0,
+          nodeSetTranslation(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x44d] + 8),0,
                        piVar3 + temp_v2 * 0xb + 0x446);
           FUN_0036bb1c(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x44d] + 8),0);
           FUN_001ac2d4(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x44d] + 8),piVar3[temp_v2 * 0xb + 0x44a])
@@ -119,7 +119,7 @@ unsigned int FUN_00378a90(void)
           *(unsigned char *)(piVar3 + temp_v1 * 0xb + 0x44e) = 1;
           piVar3[temp_v1 * 0xb + 0x44f] = -1;
           FUN_00280c5c(temp_v3,1);
-          FUN_0032c5c4(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x44d] + 8),0,
+          nodeSetTranslation(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x44d] + 8),0,
                        piVar3 + temp_v1 * 0xb + 0x446);
           FUN_0036bb1c(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x44d] + 8),0);
           FUN_001ac2d4(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x44d] + 8),piVar3[temp_v1 * 0xb + 0x44a])
@@ -172,7 +172,7 @@ unsigned int FUN_00378a90(void)
         piVar3[temp_v1 * 0xb + 0x4ad] = 2;
         *(unsigned char *)(piVar3 + temp_v1 * 0xb + 0x4b1) = 1;
         FUN_00280c5c(temp_v3,1);
-        FUN_0032c5c4(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x4b0] + 8),0,piVar3 + temp_v1 * 0xb + 0x4a9
+        nodeSetTranslation(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x4b0] + 8),0,piVar3 + temp_v1 * 0xb + 0x4a9
                     );
         FUN_0036bb1c(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x4b0] + 8),0);
         FUN_001ac2d4(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x4b0] + 8),piVar3[temp_v1 * 0xb + 0x4ad]);
@@ -223,7 +223,7 @@ LAB_00379048:
               ;
               piVar3[temp_v3 * 0x11 + 0xd] = temp_v2;
               piVar3[temp_v3 * 0x11 + 0xe] = 2;
-              FUN_001a9110(piVar3 + temp_v3 * 0x11 + 0x10,pcVar4 + 0xc);
+              wordPairCopy(piVar3 + temp_v3 * 0x11 + 0x10,pcVar4 + 0xc);
               piVar3[temp_v3 * 0x11 + 0x15] = -1;
               piVar3 = DAT_00581270;
               DAT_00581270[1] = DAT_00581270[1] + 1;
@@ -255,7 +255,7 @@ LAB_00379048:
       piVar3[temp_v2 * 0xb + 0x4ad] = 2;
       *(unsigned char *)(piVar3 + temp_v2 * 0xb + 0x4b1) = 1;
       FUN_00280c5c(piVar3[temp_v2 * 0xb + 0x4b0],1);
-      FUN_0032c5c4(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x4b0] + 8),0,piVar3 + temp_v2 * 0xb + 0x4a9);
+      nodeSetTranslation(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x4b0] + 8),0,piVar3 + temp_v2 * 0xb + 0x4a9);
       FUN_0036bb1c(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x4b0] + 8),0);
       FUN_001ac2d4(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x4b0] + 8),piVar3[temp_v2 * 0xb + 0x4ad]);
       faderSetValue(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x4b0] + 8));

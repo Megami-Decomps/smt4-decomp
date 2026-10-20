@@ -11,7 +11,7 @@ extern unsigned int DAT_0057f430; /* 0x57f430 */
 extern unsigned int DAT_0057f434; /* 0x57f434 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_0018206c(unsigned int, unsigned int);
+extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 
 
 unsigned int FUN_002a4488(void)
@@ -30,7 +30,7 @@ unsigned int FUN_002a4488(void)
   temp_v3 = 0;
   switch(*(unsigned int *)(DAT_0057f3bc + 8)) {
   case 0:
-    temp_v1 = FUN_0018206c(DAT_0057f430,DAT_0057f434);
+    temp_v1 = asdTMTexTableNodeIsLoaded(DAT_0057f430,DAT_0057f434);
     if (temp_v1 != 0) {
       *(unsigned int *)(temp_v0 + 0xc) = 0;
       *(unsigned int *)(temp_v0 + 0x10) = temp_v3;

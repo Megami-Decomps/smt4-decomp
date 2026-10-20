@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00100388(...);
 int FUN_00162758(...);
 int efctSetSpeed(void);
-int FUN_001801a4(...);
+int gameGetPlayerData(...);
 int FUN_0018349c(...);
 int FUN_0047fc38(void);
 int FUN_00493344(...);
@@ -40,7 +40,7 @@ extern unsigned char LAB_0049627c; /* 0x49627c */
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_00162758. */
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_001801a4. */
+/* Supplied declaration required: gameGetPlayerData. */
 /* Supplied declaration required: FUN_0018349c. */
 extern unsigned int FUN_001ba3d0(unsigned int);
 /* Supplied declaration required: FUN_0047fc38. */
@@ -229,31 +229,31 @@ LAB_00495f20:
   temp_v5 = 0;
   switch(*(unsigned int *)(param_1 + 0xb40)) {
   case 0:
-    puVar14 = (unsigned short *)FUN_001801a4(0);
+    puVar14 = (unsigned short *)gameGetPlayerData(0);
     temp_v5 = *puVar14;
     break;
   case 1:
-    temp_v15 = FUN_001801a4(0);
+    temp_v15 = gameGetPlayerData(0);
     temp_v5 = *(unsigned short *)(temp_v15 + 2);
     break;
   case 2:
-    temp_v15 = FUN_001801a4(0);
+    temp_v15 = gameGetPlayerData(0);
     temp_v5 = *(unsigned short *)(temp_v15 + 4);
     break;
   case 3:
-    temp_v15 = FUN_001801a4(0);
+    temp_v15 = gameGetPlayerData(0);
     temp_v5 = *(unsigned short *)(temp_v15 + 6);
     break;
   case 4:
-    temp_v15 = FUN_001801a4(0);
+    temp_v15 = gameGetPlayerData(0);
     temp_v5 = *(unsigned short *)(temp_v15 + 8);
     break;
   case 5:
-    temp_v15 = FUN_001801a4(0);
+    temp_v15 = gameGetPlayerData(0);
     temp_v5 = *(unsigned short *)(temp_v15 + 10);
     break;
   case 6:
-    temp_v15 = FUN_001801a4(0);
+    temp_v15 = gameGetPlayerData(0);
     temp_v5 = *(unsigned short *)(temp_v15 + 0xc);
   }
   temp_v15 = FUN_0049c7a0(temp_v5);

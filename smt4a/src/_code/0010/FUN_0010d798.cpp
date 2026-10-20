@@ -5,9 +5,9 @@
 extern "C" {
 
 int strInit(unsigned char [32]);
-int FUN_002e9300(...);
-int FUN_002e9318(...);
-int FUN_002e9520(...);
+int onlineStringConstruct(...);
+int onlineStringDestroy(...);
+int onlineStringCopyConstruct(...);
 int constructObj0055affc(...);
 int FUN_002ea2e8(...);
 int FUN_002ea3a8(...);
@@ -43,9 +43,9 @@ extern unsigned char LAB_0010da24; /* 0x10da24 */
 extern unsigned char LAB_0010da30; /* 0x10da30 */
 
 /* Supplied declaration required: strInit. */
-/* Supplied declaration required: FUN_002e9300. */
-/* Supplied declaration required: FUN_002e9318. */
-/* Supplied declaration required: FUN_002e9520. */
+/* Supplied declaration required: onlineStringConstruct. */
+/* Supplied declaration required: onlineStringDestroy. */
+/* Supplied declaration required: onlineStringCopyConstruct. */
 /* Supplied declaration required: constructObj0055affc. */
 extern unsigned int FUN_002ea100(unsigned char *, unsigned char *);
 /* Supplied declaration required: FUN_002ea2e8. */
@@ -98,31 +98,31 @@ void FUN_0010d798(int param_1)
   FUN_002f79dc();
   strInit(temp_v11);
   FUN_002f7a28(temp_v6);
-  FUN_002e9520(temp_v7,param_1 + 0x134);
+  onlineStringCopyConstruct(temp_v7,param_1 + 0x134);
   while (temp_v1 = FUN_002eea7c(temp_v7), temp_v1 < 0x10) {
-    temp_v2 = FUN_002e9300(temp_v4,&LAB_0010d9ec);
+    temp_v2 = onlineStringConstruct(temp_v4,&LAB_0010d9ec);
     FUN_002f7a3c(temp_v7,temp_v2);
-    FUN_002e9318(temp_v4);
+    onlineStringDestroy(temp_v4);
   }
   temp_v2 = FUN_002f7a5c(temp_v8,temp_v7);
   FUN_002f7ac4(temp_v6,temp_v2);
   destroyObj0055ae64(temp_v8);
   FUN_002f7af2(temp_v6,param_1 + 0x7c,temp_v11);
-  FUN_002e9318(temp_v7);
+  onlineStringDestroy(temp_v7);
   FUN_002ec70c(temp_v6);
   strInit(temp_v12);
   FUN_002f7a28(temp_v6);
-  FUN_002e9520(temp_v9);
+  onlineStringCopyConstruct(temp_v9);
   while (temp_v1 = FUN_002eea7c(temp_v9), temp_v1 < 0x10) {
-    temp_v2 = FUN_002e9300(temp_v10,&LAB_0010d9ec);
+    temp_v2 = onlineStringConstruct(temp_v10,&LAB_0010d9ec);
     FUN_002f7a3c(temp_v9,temp_v2);
-    FUN_002e9318(temp_v10);
+    onlineStringDestroy(temp_v10);
   }
   temp_v2 = FUN_002f7a5c(temp_v7,param_1 + 0x14c);
   FUN_002f7ac4(temp_v6,temp_v2);
   destroyObj0055ae64(temp_v7);
   FUN_002f7af2(temp_v6,param_1 + 0x7c,temp_v12);
-  FUN_002e9318(temp_v9);
+  onlineStringDestroy(temp_v9);
   FUN_002ec70c(temp_v6);
   constructObj0055affc(temp_v17);
   FUN_002f42be(temp_v17,&LAB_0010d9f0,*(unsigned int *)(param_1 + 0x128));
@@ -130,46 +130,46 @@ void FUN_0010d798(int param_1)
   temp_v2 = FUN_002f7b34(temp_v13,temp_v2,temp_v17);
   FUN_002f7b60(temp_v0,temp_v2);
   FUN_002f7b80(temp_v13);
-  FUN_002e9318(temp_v16);
+  onlineStringDestroy(temp_v16);
   temp_v2 = FUN_002ea100(temp_v14,&LAB_0010d9fc);
   temp_v3 = FUN_002ea100(temp_v16,&LAB_0010da08);
   temp_v2 = FUN_002f7b34(temp_v13,temp_v3,temp_v2);
   FUN_002f7b60(temp_v0,temp_v2);
   FUN_002f7b80(temp_v13);
-  FUN_002e9318(temp_v16);
-  FUN_002e9318(temp_v14);
+  onlineStringDestroy(temp_v16);
+  onlineStringDestroy(temp_v14);
   temp_v2 = FUN_002ea100(temp_v14,&LAB_0010da10);
   temp_v2 = FUN_002f7b34(temp_v13,temp_v2,param_1 + 0x144);
   FUN_002f7b60(temp_v0,temp_v2);
   FUN_002f7b80(temp_v13);
-  FUN_002e9318(temp_v14);
+  onlineStringDestroy(temp_v14);
   FUN_002f7b9c(temp_v15,temp_v11);
   temp_v2 = FUN_002ea100(temp_v14,&LAB_0010da18);
   temp_v2 = FUN_002f7b34(temp_v13,temp_v2,temp_v15);
   FUN_002f7b60(temp_v0,temp_v2);
   FUN_002f7b80(temp_v13);
-  FUN_002e9318(temp_v14);
-  FUN_002e9318(temp_v15);
+  onlineStringDestroy(temp_v14);
+  onlineStringDestroy(temp_v15);
   FUN_002f7b9c(temp_v15,temp_v12);
   temp_v2 = FUN_002ea100(temp_v14,&LAB_0010da24);
   temp_v2 = FUN_002f7b34(temp_v13,temp_v2,temp_v15);
   FUN_002f7b60(temp_v0,temp_v2);
   FUN_002f7b80(temp_v13);
-  FUN_002e9318(temp_v14);
-  FUN_002e9318(temp_v15);
+  onlineStringDestroy(temp_v14);
+  onlineStringDestroy(temp_v15);
   if (*(char *)(param_1 + 0x17c) != '\0') {
     FUN_002ea2e8(temp_v4);
     FUN_002ee818(temp_v4,*(unsigned char *)(param_1 + 0x17c));
-    temp_v2 = FUN_002e9300(temp_v20,temp_v5);
+    temp_v2 = onlineStringConstruct(temp_v20,temp_v5);
     temp_v3 = FUN_002ea100(temp_v19,&LAB_0010da30);
     temp_v2 = FUN_002f7b34(temp_v18,temp_v3,temp_v2);
     FUN_002f7b60(temp_v0,temp_v2);
     FUN_002f7b80(temp_v18);
-    FUN_002e9318(temp_v19);
-    FUN_002e9318(temp_v20);
+    onlineStringDestroy(temp_v19);
+    onlineStringDestroy(temp_v20);
     FUN_002ea3a8(temp_v4);
   }
-  FUN_002e9318(temp_v17);
+  onlineStringDestroy(temp_v17);
   strDestroy(temp_v12);
   strDestroy(temp_v11);
   return;

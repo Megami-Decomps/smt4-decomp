@@ -4,14 +4,14 @@
 
 extern "C" {
 
-extern s32 FUN_0018719c(s32 id);
+extern s32 gameFlagIsSet(s32 id);
 extern u8 *FUN_002c2710(void);
 
 void FUN_00408338(s32 group, u32 bit, s32 value)
 {
     u8 *base = FUN_002c2710();
 
-    if (FUN_0018719c(0x4F) == 0 || FUN_0018719c(0x41) != 0) {
+    if (gameFlagIsSet(0x4F) == 0 || gameFlagIsSet(0x41) != 0) {
         u8 *flags;
         u8 mask;
 

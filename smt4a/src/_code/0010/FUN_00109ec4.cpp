@@ -10,7 +10,7 @@ typedef struct StreamVtbl {
 struct Stream {
     /* 0x00 */ const StreamVtbl *vtbl;
 };
-void FUN_002e7232(void *buffer);
+void sharedRefRelease(void *buffer);
 
 /* Runs the stream's `process` method on `buffer`, frees the buffer, and returns the method's result (0 when there is no buffer). */
 u32 FUN_00109ec4(Stream *stream, void *buffer, s32 size)
@@ -19,7 +19,7 @@ u32 FUN_00109ec4(Stream *stream, void *buffer, s32 size)
 
     if (buffer != NULL) {
         result = stream->vtbl->process(stream, buffer, size);
-        FUN_002e7232(buffer);
+        sharedRefRelease(buffer);
         return result;
     }
     return 0;

@@ -2,12 +2,12 @@
 
 extern "C" {
 
-void FUN_002e7594(void);
+void streamReaderReadU16(void);
 
-/* Forwards to FUN_002e7594. */
+/* Forwards to streamReaderReadU16. */
 void FUN_002eea8a(void)
 {
-    FUN_002e7594();
+    streamReaderReadU16();
 }
 
 } /* extern "C" */

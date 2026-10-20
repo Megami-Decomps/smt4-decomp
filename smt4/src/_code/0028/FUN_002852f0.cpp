@@ -13,7 +13,7 @@ extern unsigned int DAT_004bd0d8; /* 0x4bd0d8 */
 extern unsigned char DAT_004bd0dc; /* 0x4bd0dc */
 
 /* Supplied declaration required: randNextInRange. */
-extern int FUN_002c2950(void);
+extern int gameGetMapBlock(void);
 
 
 void FUN_002852f0(int param_1)
@@ -27,7 +27,7 @@ void FUN_002852f0(int param_1)
   unsigned char temp_v4;
   int temp_v5;
   
-  temp_v1 = FUN_002c2950();
+  temp_v1 = gameGetMapBlock();
   if (param_1 == 0) {
     *(unsigned char *)(temp_v1 + 0xdd0) = 0xb;
     *(unsigned char *)(temp_v1 + 0xdd1) = 0xb;

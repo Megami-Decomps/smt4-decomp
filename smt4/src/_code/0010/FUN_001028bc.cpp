@@ -9,7 +9,7 @@ int FUN_0010aff8(...);
 int FUN_0010b3c0(...);
 int FUN_0010e5e0(...);
 int FUN_0010ec70(...);
-int FUN_002c49f8(...);
+int objFlagsSetBits(...);
 int taskCreateDraw(...);
 int FUN_002c4a34(...);
 int asdTMTexTableLoadSprites(...);
@@ -39,7 +39,7 @@ extern romwright_code *pcRam00464d74; /* 0x464d74 */
 /* Supplied declaration required: FUN_0010b3c0. */
 /* Supplied declaration required: FUN_0010e5e0. */
 /* Supplied declaration required: FUN_0010ec70. */
-/* Supplied declaration required: FUN_002c49f8. */
+/* Supplied declaration required: objFlagsSetBits. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: FUN_002c4a34. */
 /* Supplied declaration required: asdTMTexTableLoadSprites. */
@@ -79,9 +79,9 @@ void FUN_001028bc(void)
   *(unsigned char *)(DAT_0043e18c + 0x284) = 1;
   *(unsigned char *)(DAT_0043e190 + 0x284) = 0;
   *(unsigned char *)(DAT_0043e194 + 0x284) = 0;
-  FUN_002c49f8(puVar1[1],0x100);
-  FUN_002c49f8(DAT_0043e190[1],0x200);
-  FUN_002c49f8(DAT_0043e194[1],0x100);
+  objFlagsSetBits(puVar1[1],0x100);
+  objFlagsSetBits(DAT_0043e190[1],0x200);
+  objFlagsSetBits(DAT_0043e194[1],0x100);
   FUN_0010ec70(FUN_0010efd8);
   FUN_0010e5e0(FUN_0010edf8);
   pcRam00464d74 = FUN_0010f084;

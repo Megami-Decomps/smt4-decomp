@@ -6,10 +6,10 @@ extern "C" {
 
 int FUN_00128ee6(...);
 int FUN_002fbc1a(int, int);
-int FUN_00300900(int, int);
-int FUN_00300934(...);
+int streamExtractU8(int, int);
+int streamReadWord(...);
 int FUN_003026bc(...);
-int FUN_00303608(int, int);
+int streamReadU64(int, int);
 int readerReadU16(int, int);
 int FUN_0030363c(int, int);
 int FUN_0030368e(int, int);
@@ -21,12 +21,12 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_00128ee6. */
-extern int FUN_002ee9da(int);
+extern int streamSeek(int);
 /* Supplied declaration required: FUN_002fbc1a. */
-/* Supplied declaration required: FUN_00300900. */
-/* Supplied declaration required: FUN_00300934. */
+/* Supplied declaration required: streamExtractU8. */
+/* Supplied declaration required: streamReadWord. */
 /* Supplied declaration required: FUN_003026bc. */
-/* Supplied declaration required: FUN_00303608. */
+/* Supplied declaration required: streamReadU64. */
 /* Supplied declaration required: readerReadU16. */
 /* Supplied declaration required: FUN_0030363c. */
 /* Supplied declaration required: FUN_0030368e. */
@@ -45,12 +45,12 @@ void FUN_00117906(int param_1,int param_2)
   temp_v0 = *(char *)(param_1 + 0x3b);
   temp_v2 = 0;
   if ((((temp_v0 != '\0') ||
-       ((FUN_00300900(param_1,param_2 + 4), *(char *)(param_1 + 4) == '\0' &&
-        (FUN_00300934(param_1,&temp_v2), *(char *)(param_1 + 4) == '\0')))) &&
+       ((streamExtractU8(param_1,param_2 + 4), *(char *)(param_1 + 4) == '\0' &&
+        (streamReadWord(param_1,&temp_v2), *(char *)(param_1 + 4) == '\0')))) &&
       (temp_v1 = *(int *)(param_1 + 0xc), *(char *)(param_1 + 4) == '\0')) &&
-     (((((FUN_00303608(param_1,param_2 + 8), *(char *)(param_1 + 4) == '\0' &&
-         (FUN_00300934(param_1,param_2 + 0x10), *(char *)(param_1 + 4) == '\0')) &&
-        (FUN_00300934(param_1,param_2 + 0x14), *(char *)(param_1 + 4) == '\0')) &&
+     (((((streamReadU64(param_1,param_2 + 8), *(char *)(param_1 + 4) == '\0' &&
+         (streamReadWord(param_1,param_2 + 0x10), *(char *)(param_1 + 4) == '\0')) &&
+        (streamReadWord(param_1,param_2 + 0x14), *(char *)(param_1 + 4) == '\0')) &&
        ((FUN_002fbc1a(param_1,param_2 + 0x18), *(char *)(param_1 + 4) == '\0' &&
         (readerReadU16(param_1,param_2 + 0x20), *(char *)(param_1 + 4) == '\0')))) &&
       ((((FUN_0030363c(param_1,param_2 + 0x24), *(char *)(param_1 + 4) == '\0' &&
@@ -59,16 +59,16 @@ void FUN_00117906(int param_1,int param_2)
         ((FUN_003026bc(param_1,param_2 + 0x70), *(char *)(param_1 + 4) == '\0' &&
          (((((FUN_003026bc(param_1,param_2 + 0x78), *(char *)(param_1 + 4) == '\0' &&
              (readerReadU16(param_1,param_2 + 0x80), *(char *)(param_1 + 4) == '\0')) &&
-            (FUN_00300900(param_1,param_2 + 0x82), *(char *)(param_1 + 4) == '\0')) &&
-           (((FUN_00300934(param_1,param_2 + 0x84), *(char *)(param_1 + 4) == '\0' &&
-             (FUN_00300934(param_1,param_2 + 0x88), *(char *)(param_1 + 4) == '\0')) &&
-            ((FUN_00300934(param_1,param_2 + 0x8c), *(char *)(param_1 + 4) == '\0' &&
+            (streamExtractU8(param_1,param_2 + 0x82), *(char *)(param_1 + 4) == '\0')) &&
+           (((streamReadWord(param_1,param_2 + 0x84), *(char *)(param_1 + 4) == '\0' &&
+             (streamReadWord(param_1,param_2 + 0x88), *(char *)(param_1 + 4) == '\0')) &&
+            ((streamReadWord(param_1,param_2 + 0x8c), *(char *)(param_1 + 4) == '\0' &&
              ((FUN_003026bc(param_1,param_2 + 0x90), *(char *)(param_1 + 4) == '\0' &&
               (FUN_003026bc(param_1,param_2 + 0x98), *(char *)(param_1 + 4) == '\0')))))))) &&
           (FUN_00128ee6(param_1,param_2 + 0xa0), *(char *)(param_1 + 4) == '\0')))))) &&
        (((FUN_00303698(param_1,param_2 + 0xac), *(char *)(param_1 + 4) == '\0' && (temp_v0 == '\0'))
         && (((unsigned int)(temp_v1 + temp_v2) < *(unsigned int *)(param_1 + 0xc) ||
-            (temp_v1 = FUN_002ee9da(param_1), temp_v1 == 0)))))))))) {
+            (temp_v1 = streamSeek(param_1), temp_v1 == 0)))))))))) {
     *(unsigned char *)(param_1 + 4) = 1;
   }
   return;

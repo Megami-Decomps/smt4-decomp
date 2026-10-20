@@ -5,25 +5,25 @@
 extern "C" {
 
 int sysPlaySe(int);
-int FUN_001ab888(void);
+int gameGetSlotTable(void);
 int FUN_00275bc8(void);
-int FUN_00275f44(...);
+int scrScriptProcessStartEntry(...);
 int FUN_002bf520(void);
 int FUN_002c0b5c(void);
 int FUN_002f4014(void);
 int cecProcessCall2(void);
-int FUN_0031f0a8(int, int);
+int gameDataBlocksSetFlagBits(int, int);
 int playerSummaryFill(void);
 int FUN_0034280c(int);
 int cecProcessCall4(void);
 int stateAtF4Destroy(void);
-int FUN_003fd63c(int, int);
+int gameFlagSetValue(int, int);
 
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_001ab888. */
+/* Supplied declaration required: gameGetSlotTable. */
 extern int FUN_00224880(unsigned int);
 /* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002a2cf0(void);
 extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_002bf520. */
@@ -31,14 +31,14 @@ extern int FUN_002a4b74(void);
 extern int FUN_002e2014(void);
 /* Supplied declaration required: FUN_002f4014. */
 /* Supplied declaration required: cecProcessCall2. */
-/* Supplied declaration required: FUN_0031f0a8. */
+/* Supplied declaration required: gameDataBlocksSetFlagBits. */
 /* Supplied declaration required: playerSummaryFill. */
 /* Supplied declaration required: FUN_0034280c. */
 extern int FUN_00345388(unsigned int);
 extern int FUN_0035b044(void);
 /* Supplied declaration required: cecProcessCall4. */
 /* Supplied declaration required: stateAtF4Destroy. */
-/* Supplied declaration required: FUN_003fd63c. */
+/* Supplied declaration required: gameFlagSetValue. */
 
 
 unsigned int FUN_002c04a0(int *param_1,int param_2)
@@ -76,7 +76,7 @@ unsigned int FUN_002c04a0(int *param_1,int param_2)
               FUN_002c0b5c();
               FUN_002bf520();
               FUN_002f4014();
-              FUN_003fd63c(0x550,1);
+              gameFlagSetValue(0x550,1);
               *(unsigned char *)(temp_v3 + 0x3c) = 0;
               *(unsigned char *)(temp_v3 + 0x40) = 1;
               if ((*(char *)(temp_v3 + 0x3f) != '\0') &&
@@ -107,8 +107,8 @@ unsigned int FUN_002c04a0(int *param_1,int param_2)
                 return 0;
               }
               cecProcessCall4();
-              FUN_00275f44(*(unsigned int *)(temp_v3 + 4),9);
-              FUN_001ab888();
+              scrScriptProcessStartEntry(*(unsigned int *)(temp_v3 + 4),9);
+              gameGetSlotTable();
               *(unsigned char *)(temp_v3 + 0x3f) = 1;
             }
           }
@@ -137,7 +137,7 @@ unsigned int FUN_002c04a0(int *param_1,int param_2)
                       *(unsigned int *)(temp_v3 + 0x38) = 2;
                     }
                     else if (*(int *)(temp_v3 + 0x38) != 2 && *(int *)(temp_v3 + 0x38) != 1) {
-                      FUN_0031f0a8(0x20,1);
+                      gameDataBlocksSetFlagBits(0x20,1);
                       temp_v1 = 6;
                       goto LAB_002c0648;
                     }
@@ -158,7 +158,7 @@ unsigned int FUN_002c04a0(int *param_1,int param_2)
                   temp_v1 = 5;
                 }
                 else {
-                  FUN_0031f0a8(0x20,1);
+                  gameDataBlocksSetFlagBits(0x20,1);
                   temp_v1 = 8;
                 }
               }
@@ -191,14 +191,14 @@ LAB_002c0648:
             else {
               temp_v2 = 0xc;
             }
-            FUN_00275f44(*(unsigned int *)(temp_v3 + 4),temp_v2);
+            scrScriptProcessStartEntry(*(unsigned int *)(temp_v3 + 4),temp_v2);
             *(unsigned char *)(temp_v3 + 0x3f) = 1;
           }
           *(unsigned char *)(temp_v3 + 0x3c) = 0;
         }
       }
       else if ((*(unsigned char *)(temp_v3 + 0x3c) & 2) != 0) {
-        FUN_00275f44(*(unsigned int *)(temp_v3 + 4),
+        scrScriptProcessStartEntry(*(unsigned int *)(temp_v3 + 4),
                      *(unsigned int *)(temp_v3 + *(int *)(temp_v3 + 0x38) * 4 + 0x10));
         temp_v0 = (*(unsigned char *)(temp_v3 + 0x3c) & 0xfd) | 1;
 LAB_002c0810:

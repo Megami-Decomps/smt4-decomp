@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e9afe(int, unsigned int **);
+int vectorCopyHeader(int, unsigned int **);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -12,7 +12,7 @@ typedef struct {
 } param_4_stack;
 
 extern int FUN_00122486(void);
-/* Supplied declaration required: FUN_002e9afe. */
+/* Supplied declaration required: vectorCopyHeader. */
 
 
 void FUN_00310cf2(unsigned int param_1,unsigned int *param_2,unsigned int param_3,unsigned int param_4)
@@ -31,7 +31,7 @@ void FUN_00310cf2(unsigned int param_1,unsigned int *param_2,unsigned int param_
   temp_v1 = (unsigned int *)*param_2;
   uStack_14 = param_2[1];
   uStack_10 = param_2[2];
-  FUN_002e9afe(temp_v0 + 0x20,&temp_v1);
+  vectorCopyHeader(temp_v0 + 0x20,&temp_v1);
   return;
 }
 

@@ -9,7 +9,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_6_stack;
 
-extern int DAT_0057a9c8; /* 0x57a9c8 */
+extern int g_btlUiBlock; /* 0x57a9c8 */
 
 
 unsigned int FUN_004a9588(unsigned int param_1,unsigned int param_2,unsigned char param_3,unsigned char param_4,
@@ -32,9 +32,9 @@ unsigned int FUN_004a9588(unsigned int param_1,unsigned int param_2,unsigned cha
     temp_v0 = 0xffffffff;
     temp_v2 = 0;
     do {
-      temp_v1 = (int)*(char *)(DAT_0057a9c8 + temp_v2 + 0xf064);
+      temp_v1 = (int)*(char *)(g_btlUiBlock + temp_v2 + 0xf064);
       if (temp_v1 - 1U < 0x1f) {
-        temp_v1 = DAT_0057a9c8 + temp_v2 * 0x300 + temp_v1 * 0x18;
+        temp_v1 = g_btlUiBlock + temp_v2 * 0x300 + temp_v1 * 0x18;
         temp_v5 = 0;
         if (*(float *)(temp_v1 + 0xc03c) == in_s0) {
           temp_v5 = *(float *)(temp_v1 + 0xc040) == in_s1;
@@ -54,15 +54,15 @@ unsigned int FUN_004a9588(unsigned int param_1,unsigned int param_2,unsigned cha
     temp_v3 = 0;
     do {
       temp_v2 = temp_v3;
-      if (*(char *)(DAT_0057a9c8 + temp_v2 + 0xf064) < '\x01') break;
+      if (*(char *)(g_btlUiBlock + temp_v2 + 0xf064) < '\x01') break;
       temp_v3 = temp_v2 + 1;
       temp_v2 = temp_v0;
     } while ((int)temp_v3 < 0x10);
 LAB_004a9644:
     if (temp_v2 < 0x10) {
-      temp_v1 = DAT_0057a9c8 + temp_v2;
+      temp_v1 = g_btlUiBlock + temp_v2;
       if (*(char *)(temp_v1 + 0xf064) < 0x20) {
-        temp_v4 = DAT_0057a9c8 + temp_v2 * 0x300 + *(char *)(temp_v1 + 0xf064) * 0x18;
+        temp_v4 = g_btlUiBlock + temp_v2 * 0x300 + *(char *)(temp_v1 + 0xf064) * 0x18;
         *(unsigned char *)(temp_v4 + 0xc060) = 1;
         *(unsigned char *)(temp_v4 + 0xc061) = param_6;
         *(float *)(temp_v4 + 0xc054) = in_s0;

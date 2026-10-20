@@ -12,10 +12,10 @@ int FUN_0020214c(...);
 int FUN_0022677c(...);
 int FUN_00275bc8(...);
 int sysMemClear(...);
-int FUN_0031a400(...);
-int FUN_00342010(...);
+int campCommonBgAcquire(...);
+int campButtonHelpAcquire(...);
 int FUN_003b61ec(...);
-int FUN_003f86f8(...);
+int loadSlotEnsureLoaded(...);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -42,10 +42,10 @@ extern unsigned int *g_clearSave; /* 0x57f394 */
 /* Supplied declaration required: FUN_0022677c. */
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_0031a400. */
-/* Supplied declaration required: FUN_00342010. */
+/* Supplied declaration required: campCommonBgAcquire. */
+/* Supplied declaration required: campButtonHelpAcquire. */
 /* Supplied declaration required: FUN_003b61ec. */
-/* Supplied declaration required: FUN_003f86f8. */
+/* Supplied declaration required: loadSlotEnsureLoaded. */
 
 
 void FUN_00290484(int param_1)
@@ -64,9 +64,9 @@ void FUN_00290484(int param_1)
     *(unsigned char *)(g_clearSave + 2) = 1;
   }
   puVar1 = g_clearSave;
-  FUN_003f86f8(0x3c);
-  FUN_0031a400();
-  FUN_00342010();
+  loadSlotEnsureLoaded(0x3c);
+  campCommonBgAcquire();
+  campButtonHelpAcquire();
   FUN_003b61ec();
   puVar2 = &LAB_0029060c;
   FUN_0020214c();

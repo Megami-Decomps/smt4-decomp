@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00203d04(...);
+int dialogClose(...);
 int FUN_0025cb1c(void);
 
 int CONCAT44(double, double);
@@ -67,10 +67,10 @@ static float romwright_fabs_4(float value)
     return value < (float)0 ? -value : value;
 }
 #endif
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0018a924. */
 /* Supplied declaration required: FUN_001bc124. */
-/* Supplied declaration required: FUN_00203d04. */
+/* Supplied declaration required: dialogClose. */
 /* Supplied declaration required: FUN_0025cb1c. */
 extern int FUN_0029d6f0(void);
 /* Supplied declaration required: FUN_002b5cb4. */
@@ -161,8 +161,8 @@ void FUN_0029aa60(int param_1)
     }
   }
   temp_v33 = param_1;
-  temp_v8 = FUN_0018719c(0xc);
-  if ((temp_v8 != 0) && (temp_v8 = FUN_0018719c(0x10), temp_v8 == 0)) {
+  temp_v8 = gameFlagIsSet(0xc);
+  if ((temp_v8 != 0) && (temp_v8 = gameFlagIsSet(0x10), temp_v8 == 0)) {
     DAT_005f1859 = '\0';
     DAT_005f185a = 0;
     *(unsigned char *)(temp_v5 + 0xcd10) = 1;
@@ -352,94 +352,94 @@ LAB_0029ad50:
                                                   if (temp_v14 != 0x79) {
                                                     if (temp_v14 != 0x7a) {
                                                       if (temp_v14 != 0x7b) break;
-                                                      temp_v14 = FUN_0018719c(0x4e8);
+                                                      temp_v14 = gameFlagIsSet(0x4e8);
                                                     }
                                                     else {
-                                                      temp_v14 = FUN_0018719c(0x4e7);
+                                                      temp_v14 = gameFlagIsSet(0x4e7);
                                                     }
                                                   }
                                                   else {
-                                                    temp_v14 = FUN_0018719c(0x4e6);
+                                                    temp_v14 = gameFlagIsSet(0x4e6);
                                                   }
                                                 }
                                                 else {
-                                                  temp_v14 = FUN_0018719c(0x4e5);
+                                                  temp_v14 = gameFlagIsSet(0x4e5);
                                                 }
                                               }
                                               else {
-                                                temp_v14 = FUN_0018719c(0x4e4);
+                                                temp_v14 = gameFlagIsSet(0x4e4);
                                               }
                                             }
                                             else {
-                                              temp_v14 = FUN_0018719c(0x4e3);
+                                              temp_v14 = gameFlagIsSet(0x4e3);
                                             }
                                           }
                                           else {
-                                            temp_v14 = FUN_0018719c(0x4e2);
+                                            temp_v14 = gameFlagIsSet(0x4e2);
                                           }
                                         }
                                         else {
-                                          temp_v14 = FUN_0018719c(0x4e1);
+                                          temp_v14 = gameFlagIsSet(0x4e1);
                                         }
                                       }
                                       else {
-                                        temp_v14 = FUN_0018719c(0x4e0);
+                                        temp_v14 = gameFlagIsSet(0x4e0);
                                       }
                                     }
                                     else {
-                                      temp_v14 = FUN_0018719c(0x4df);
+                                      temp_v14 = gameFlagIsSet(0x4df);
                                     }
                                   }
                                   else {
-                                    temp_v14 = FUN_0018719c(0x4de);
+                                    temp_v14 = gameFlagIsSet(0x4de);
                                   }
                                 }
                                 else {
-                                  temp_v14 = FUN_0018719c(0x4dd);
+                                  temp_v14 = gameFlagIsSet(0x4dd);
                                 }
                               }
                               else {
-                                temp_v14 = FUN_0018719c(0x4dc);
+                                temp_v14 = gameFlagIsSet(0x4dc);
                               }
                             }
                             else {
-                              temp_v14 = FUN_0018719c(0x4cf);
+                              temp_v14 = gameFlagIsSet(0x4cf);
                             }
                           }
                           else {
-                            temp_v14 = FUN_0018719c(0x4ce);
+                            temp_v14 = gameFlagIsSet(0x4ce);
                           }
                         }
                         else {
-                          temp_v14 = FUN_0018719c(0x4cd);
+                          temp_v14 = gameFlagIsSet(0x4cd);
                         }
                       }
                       else {
-                        temp_v14 = FUN_0018719c(0x499);
+                        temp_v14 = gameFlagIsSet(0x499);
                       }
                     }
                     else {
-                      temp_v14 = FUN_0018719c(0x498);
+                      temp_v14 = gameFlagIsSet(0x498);
                     }
                   }
                   else {
-                    temp_v14 = FUN_0018719c(0x497);
+                    temp_v14 = gameFlagIsSet(0x497);
                   }
                 }
                 else {
-                  temp_v14 = FUN_0018719c(0x496);
+                  temp_v14 = gameFlagIsSet(0x496);
                 }
               }
               else {
-                temp_v14 = FUN_0018719c(0x495);
+                temp_v14 = gameFlagIsSet(0x495);
               }
             }
             else {
-              temp_v14 = FUN_0018719c(0x494);
+              temp_v14 = gameFlagIsSet(0x494);
             }
           }
           else {
-            temp_v14 = FUN_0018719c(0x493);
+            temp_v14 = gameFlagIsSet(0x493);
           }
           if (temp_v14 != 0) {
             FUN_002d23f0(*(unsigned int *)(temp_v9 + 0x200));
@@ -1470,7 +1470,7 @@ joined_r0x0029d070:
   if ((*(char *)(temp_v5 + 0x1d) != '\0') &&
      (temp_v8 = *(int *)(temp_v5 + 0x20) + 1, *(int *)(temp_v5 + 0x20) = temp_v8, temp_v8 >= 0x79)) {
     *(unsigned char *)(temp_v5 + 0x1d) = 0;
-    FUN_00203d04(1);
+    dialogClose(1);
   }
   temp_v5 = g_lmapScene;
   if (temp_v32 == 0) {

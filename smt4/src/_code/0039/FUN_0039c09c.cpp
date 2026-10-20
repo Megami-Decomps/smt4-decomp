@@ -29,10 +29,10 @@ extern unsigned char g_gameState; /* 0x49f91c */
 /* Supplied declaration required: FUN_0025a0e0. */
 /* Supplied declaration required: FUN_00275f00. */
 /* Supplied declaration required: FUN_00289880. */
-extern unsigned int FUN_002bed98(int);
-extern unsigned int FUN_002beda4(int);
+extern unsigned int vec2GetYInt(int);
+extern unsigned int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bf818. */
-extern int FUN_002c09d0(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0039f838. */
 /* Supplied declaration required: FUN_0039f860. */
 extern int NaviMain_GetCurrentMap(void);
@@ -75,8 +75,8 @@ void FUN_0039c09c(int param_1)
       if (temp_v0 != 0) {
         *(unsigned int *)(param_1 + 8) = 2;
       }
-      temp_v2 = FUN_002bed98(temp_v4);
-      temp_v3 = FUN_002beda4(temp_v4);
+      temp_v2 = vec2GetYInt(temp_v4);
+      temp_v3 = vec2GetXInt(temp_v4);
       FUN_00231240(param_1 + 0x164,temp_v3,temp_v2);
       if (*(char *)(param_1 + 0x8d2) == '\0') {
         temp_v0 = 0;
@@ -95,7 +95,7 @@ void FUN_0039c09c(int param_1)
     FUN_00231240(param_1 + 0x164,0xfffffec0);
     if ((*(signed char *)((unsigned char *)&g_gameState + 0x251)) != '\0') {
       (*(signed char *)((unsigned char *)&g_gameState + 0x251)) = '\0';
-      temp_v0 = FUN_002c09d0(0x16);
+      temp_v0 = gameFlagIsSet(0x16);
       if (temp_v0 != 0) {
         FUN_0025a0e0();
       }

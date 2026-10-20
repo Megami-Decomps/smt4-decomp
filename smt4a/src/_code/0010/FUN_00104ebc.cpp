@@ -21,10 +21,10 @@ typedef struct {
 
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-extern unsigned int FUN_002ea714(void);
+extern unsigned int onlineGetActiveLock(void);
 /* Supplied declaration required: FUN_002eb390. */
 /* Supplied declaration required: FUN_002eb3f2. */
-extern int FUN_002eb404(unsigned int *);
+extern int rangeIsEmpty2(unsigned int *);
 /* Supplied declaration required: FUN_002eb414. */
 /* Supplied declaration required: FUN_002eb422. */
 extern int wordRefsDiffer_002eb452(int *, unsigned int *);
@@ -48,7 +48,7 @@ unsigned int FUN_00104ebc(int param_1,int param_2,int param_3)
   iStack_1c = param_1;
   temp_v6 = param_2;
   iStack_14 = param_3;
-  temp_v0 = FUN_002ea714();
+  temp_v0 = onlineGetActiveLock();
   FUN_002e6e34(temp_v3,temp_v0);
   FUN_002eb390(&temp_v4,param_1 + 200,&temp_v6);
   while( 1 ) {
@@ -62,7 +62,7 @@ unsigned int FUN_00104ebc(int param_1,int param_2,int param_3)
       for (piVar3 = *(int **)(param_1 + 0xe4);
           (piVar3 != *(int **)(param_1 + 0xe8) && (*piVar3 != temp_v1)); piVar3 = piVar3 + 1) {
       }
-      temp_v1 = FUN_002eb404((unsigned int *)(param_1 + 0xe4));
+      temp_v1 = rangeIsEmpty2((unsigned int *)(param_1 + 0xe4));
       if (temp_v1 == 0) {
         if (*(int **)(param_1 + 0xe8) != piVar3 + 1) {
           FUN_002eb414(piVar3 + 1,*(int **)(param_1 + 0xe8),piVar3);

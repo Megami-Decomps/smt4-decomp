@@ -6,15 +6,15 @@ extern "C" {
 
 int FUN_0029c3c0(int, int, unsigned int);
 int FUN_0029e054(int, int, int, int);
-int FUN_002b8cc8(void);
-int FUN_002b8e84(int);
+int ifTouchRegionRemove(void);
+int eventQueueAddUnique(int);
 
 extern int FUN_002896bc(void);
 /* Supplied declaration required: FUN_0029c3c0. */
 extern int FUN_0029d65c(int);
 /* Supplied declaration required: FUN_0029e054. */
-/* Supplied declaration required: FUN_002b8cc8. */
-/* Supplied declaration required: FUN_002b8e84. */
+/* Supplied declaration required: ifTouchRegionRemove. */
+/* Supplied declaration required: eventQueueAddUnique. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
 extern int jobGetWork(void);
 
@@ -69,12 +69,12 @@ unsigned int FUN_00221310(void)
       *(unsigned int *)(temp_v0 + 0x18) = 0;
     }
     else if (temp_v2 == 6) {
-      FUN_002b8cc8();
+      ifTouchRegionRemove();
       *(unsigned int *)(temp_v0 + 0x18) = 0;
       *(unsigned int *)(temp_v0 + 0x1c) = 0;
       *(unsigned int *)(temp_v0 + 4) = 2;
       *(unsigned int *)(temp_v0 + 8) = 0;
-      FUN_002b8e84(0x10000cd);
+      eventQueueAddUnique(0x10000cd);
     }
     break;
   case 2:

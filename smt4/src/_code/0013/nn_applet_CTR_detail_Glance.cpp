@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002bb308(void);
+int nn_applet_CTR_detail_CloseSession(void);
 int FUN_002bb378(void);
 int software_interrupt(int);
 
@@ -17,7 +17,7 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 extern unsigned int FUN_001483ac(unsigned char *, unsigned int, unsigned int *, unsigned char *, unsigned int, int *, int *);
 extern unsigned int FUN_002bb100(void);
-/* Supplied declaration required: FUN_002bb308. */
+/* Supplied declaration required: nn_applet_CTR_detail_CloseSession. */
 /* Supplied declaration required: FUN_002bb378. */
 
 
@@ -58,7 +58,7 @@ unsigned int nn_applet_CTR_detail_Glance
   if (temp_v2 != 0) {
     software_interrupt(0x23);
   }
-  FUN_002bb308();
+  nn_applet_CTR_detail_CloseSession();
   return temp_v1;
 }
 

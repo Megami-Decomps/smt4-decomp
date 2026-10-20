@@ -7,7 +7,7 @@ extern "C" {
 int CONCAT44(double, double);
 int FUN_002b1fc4(...);
 int FUN_002b2144(...);
-int FUN_002b90f8(...);
+int cameraSetViewMatrix(...);
 int FUN_002bf288(...);
 int FUN_002bf380(...);
 int FUN_002bf538(void);
@@ -81,7 +81,7 @@ extern float DAT_004efdd8; /* 0x4efdd8 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002b1fc4. */
 /* Supplied declaration required: FUN_002b2144. */
-/* Supplied declaration required: FUN_002b90f8. */
+/* Supplied declaration required: cameraSetViewMatrix. */
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf538. */
@@ -337,7 +337,7 @@ void FUN_002b93d0(unsigned int *param_1)
           nn_math_ARMv6_MTX44MultAsm(temp_v12,temp_v12,temp_v11);
         }
       }
-      FUN_002b90f8(g_titleScene,temp_v12);
+      cameraSetViewMatrix(g_titleScene,temp_v12);
       if ((int)param_1[2] >= 0) {
         FUN_002bf380(temp_v3,*param_1,param_1[2],0);
       }

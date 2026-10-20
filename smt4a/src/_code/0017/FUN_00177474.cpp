@@ -15,8 +15,8 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_2_stack;
 
-extern unsigned int *DAT_005b40e0; /* 0x5b40e0 */
-extern unsigned int DAT_005b40e4; /* 0x5b40e4 */
+extern unsigned int *g_commandBufferCursor; /* 0x5b40e0 */
+extern unsigned int g_commandBufferEnd; /* 0x5b40e4 */
 extern int DAT_0061a50c; /* 0x61a50c */
 extern signed char DAT_00636e04; /* 0x636e04 */
 extern unsigned char DAT_00636e05; /* 0x636e05 */
@@ -60,9 +60,9 @@ void FUN_00177474(unsigned int param_1,unsigned int param_2)
     return;
   }
   temp_v3 = *DAT_00636e10;
-  temp_v2 = (int)DAT_005b40e0 - *(int *)(DAT_0061a50c + 4);
+  temp_v2 = (int)g_commandBufferCursor - *(int *)(DAT_0061a50c + 4);
   temp_v4 = (temp_v2 & 8) != 0;
-  puVar3 = DAT_005b40e0;
+  puVar3 = g_commandBufferCursor;
   if (temp_v4) {
     puVar3 = (unsigned int *)(temp_v2 + 0x18);
   }
@@ -72,8 +72,8 @@ void FUN_00177474(unsigned int param_1,unsigned int param_2)
   }
   else {
     *(unsigned int *)(temp_v0 + 0xc) = temp_v2 + 0x20;
-    if ((unsigned int)puVar3 < DAT_005b40e4) {
-      DAT_005b40e0 = puVar3 + 2;
+    if ((unsigned int)puVar3 < g_commandBufferEnd) {
+      g_commandBufferCursor = puVar3 + 2;
       puVar3[1] = 0x8025e;
       *puVar3 = 0;
     }
@@ -90,9 +90,9 @@ void FUN_00177474(unsigned int param_1,unsigned int param_2)
   }
   temp_v1 = *(int *)(temp_v0 + 0x34);
   if (temp_v1 != 0) {
-    *(unsigned int *)(temp_v1 + 8) = (unsigned int)((int)DAT_005b40e0 - temp_v1) >> 3;
+    *(unsigned int *)(temp_v1 + 8) = (unsigned int)((int)g_commandBufferCursor - temp_v1) >> 3;
   }
-  *(unsigned int **)(temp_v0 + 0x34) = DAT_005b40e0;
+  *(unsigned int **)(temp_v0 + 0x34) = g_commandBufferCursor;
   FUN_001a9380(0x238,5,aiStack_28);
   return;
 }

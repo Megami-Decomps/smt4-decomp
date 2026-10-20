@@ -7,14 +7,14 @@ extern "C" {
 int FUN_00186f58(void);
 int FUN_002f0bd8(void);
 int updateUnlockedEntryCount(void);
-int FUN_003fd63c(...);
+int gameFlagSetValue(...);
 
 /* Supplied declaration required: FUN_00186f58. */
 /* Supplied declaration required: FUN_002f0bd8. */
 extern int gameDataBlockGetArea2D68(void);
 extern int FUN_003e4230(unsigned int);
 /* Supplied declaration required: updateUnlockedEntryCount. */
-/* Supplied declaration required: FUN_003fd63c. */
+/* Supplied declaration required: gameFlagSetValue. */
 
 
 unsigned int FUN_003e45bc(unsigned int param_1,int param_2,int param_3)
@@ -51,7 +51,7 @@ unsigned int FUN_003e45bc(unsigned int param_1,int param_2,int param_3)
           if (param_1 != 0x76) {
             return 1;
           }
-          FUN_003fd63c(0x527,0,1);
+          gameFlagSetValue(0x527,0,1);
           return 1;
         }
         temp_v4 = 0x521;
@@ -59,7 +59,7 @@ unsigned int FUN_003e45bc(unsigned int param_1,int param_2,int param_3)
       else {
         temp_v4 = 0x520;
       }
-      FUN_003fd63c(temp_v4,0,1);
+      gameFlagSetValue(temp_v4,0,1);
     }
     return 1;
   }

@@ -10,7 +10,7 @@ int FUN_00254198(...);
 int FUN_00262210(...);
 int FUN_00295eb0(...);
 int FUN_00297060(...);
-int FUN_00297410(...);
+int fileSlotLoad(...);
 int FUN_002b2650(...);
 int timerStart(...);
 int FUN_002bd954(...);
@@ -49,7 +49,7 @@ extern unsigned char DAT_00402e00; /* 0x402e00 */
 extern unsigned char DAT_00402e3c; /* 0x402e3c */
 extern unsigned char DAT_00402e9c; /* 0x402e9c */
 extern unsigned char DAT_00402ed8; /* 0x402ed8 */
-extern unsigned int *DAT_0043dd50; /* 0x43dd50 */
+extern unsigned int *g_uiQuest; /* 0x43dd50 */
 
 /* Supplied declaration required: FUN_00189c24. */
 /* Supplied declaration required: uiFadeSetVisible. */
@@ -59,7 +59,7 @@ extern int FUN_002886b0(unsigned short);
 extern int FUN_002886c8(unsigned short);
 /* Supplied declaration required: FUN_00295eb0. */
 /* Supplied declaration required: FUN_00297060. */
-/* Supplied declaration required: FUN_00297410. */
+/* Supplied declaration required: fileSlotLoad. */
 extern int FUN_00298f88(unsigned short);
 extern int FUN_00298fa0(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002b2650. */
@@ -89,12 +89,12 @@ void FUN_00269dc8(void)
   int temp_v2;
   unsigned int *puVar6;
   
-  if (DAT_0043dd50 == (unsigned int *)0x0) {
+  if (g_uiQuest == (unsigned int *)0x0) {
     puVar2 = (unsigned int *)0x100;
     asdMemAlloc(0x100,0x100,0,0x9fc,1);
-    DAT_0043dd50 = puVar2;
+    g_uiQuest = puVar2;
   }
-  puVar2 = DAT_0043dd50;
+  puVar2 = g_uiQuest;
   memClear();
   puVar3 = &LAB_0026a200;
   asdProcessCreateSimple(&LAB_0026a200,2,0,0,FUN_001956c4,0,0);
@@ -102,7 +102,7 @@ void FUN_00269dc8(void)
   taskCreateDraw(&LAB_0026a214,0x7d,0,0,FUN_001ad9f0,0,0,puVar3);
   taskCreateDraw(&LAB_0026a228,0xdb,0,0,FUN_001ad9f0,0,0,*puVar2);
   taskCreateDraw(&LAB_0026a240,0xe6,0,0,&LAB_001ddc7c,0,0,*puVar2);
-  puVar2 = DAT_0043dd50;
+  puVar2 = g_uiQuest;
   uiFadeSetVisible(0);
   temp_v1 = FUN_002c5c04(&LAB_0026a250);
   puVar2[0x16b] = temp_v1;
@@ -114,7 +114,7 @@ void FUN_00269dc8(void)
   *(unsigned short *)(puVar2 + 0x261) = 0;
   asdTMTexTableLoadSprites(0x29);
   FUN_002c58c8(0x29,0);
-  FUN_00297410(0x34);
+  fileSlotLoad(0x34);
   FUN_00189c24();
   temp_v0 = 0;
   do {
@@ -162,9 +162,9 @@ void FUN_00269dc8(void)
   timerStart(puVar2 + 0x125,2,0);
   FUN_002bd954(puVar2 + 0x148,0x29,0,puVar2 + 5,0xc9);
   FUN_002bee58(puVar2 + 0x148,5);
-  puVar2 = DAT_0043dd50;
-  temp_v1 = DAT_0043dd50[1];
-  DAT_0043dd50[1] = 0;
+  puVar2 = g_uiQuest;
+  temp_v1 = g_uiQuest[1];
+  g_uiQuest[1] = 0;
   puVar2[2] = temp_v1;
   puVar2[4] = 0;
   return;

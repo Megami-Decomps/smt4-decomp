@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_00184758(int, int, int);
-int FUN_00184c00(int, int, int);
+int uiSpriteSetKeyframe(int, int, int);
+int uiSpriteSetImageKeyframe(int, int, int);
 
 typedef struct fn_00230b9c_arg0 fn_00230b9c_arg0;
 struct fn_00230b9c_arg0 {
@@ -28,10 +28,10 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_2_stack;
 
-extern int DAT_00588fe8; /* 0x588fe8 */
+extern int g_statusDown; /* 0x588fe8 */
 
-/* Supplied declaration required: FUN_00184758. */
-/* Supplied declaration required: FUN_00184c00. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 
 
 void FUN_00230b9c(fn_00230b9c_arg0 *param_1,short param_2)
@@ -41,7 +41,7 @@ void FUN_00230b9c(fn_00230b9c_arg0 *param_1,short param_2)
   int temp_v0;
   short temp_v1;
   
-  temp_v0 = DAT_00588fe8;
+  temp_v0 = g_statusDown;
   temp_v1 = (short)(int)param_1;
   if (param_1 == (fn_00230b9c_arg0 *)0x0) {
     temp_v1 = 6;
@@ -60,14 +60,14 @@ void FUN_00230b9c(fn_00230b9c_arg0 *param_1,short param_2)
       if (param_1 == (fn_00230b9c_arg0 *)0x2 || param_1 == (fn_00230b9c_arg0 *)0x3) {
         param_2 = 9;
       }
-      FUN_00184c00(DAT_00588fe8 + 0x28,(int)param_2,0);
-      FUN_00184758(temp_v0 + 0x28,(int)temp_v1,0);
+      uiSpriteSetImageKeyframe(g_statusDown + 0x28,(int)param_2,0);
+      uiSpriteSetKeyframe(temp_v0 + 0x28,(int)temp_v1,0);
       return;
     }
   }
   param_2 = 8;
-  FUN_00184c00(DAT_00588fe8 + 0x28,(int)param_2,0);
-  FUN_00184758(temp_v0 + 0x28,(int)temp_v1,0);
+  uiSpriteSetImageKeyframe(g_statusDown + 0x28,(int)param_2,0);
+  uiSpriteSetKeyframe(temp_v0 + 0x28,(int)temp_v1,0);
   return;
 }
 

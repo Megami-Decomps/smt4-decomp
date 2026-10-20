@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_0017e5a4(unsigned int *, unsigned int);
-int FUN_0018b600(void);
-int FUN_0018b610(void);
+int globalCriticalSectionEnterForward(void);
+int globalCriticalSectionLeaveForward(void);
 int FUN_001963e0(void);
 int rt_memcpy(unsigned int, int, unsigned int);
 int rt_memcpy_w(unsigned int, int, int);
@@ -16,16 +16,16 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_2_stack;
 
-extern unsigned int *DAT_005b40e0; /* 0x5b40e0 */
-extern unsigned int DAT_005b40e4; /* 0x5b40e4 */
+extern unsigned int *g_commandBufferCursor; /* 0x5b40e0 */
+extern unsigned int g_commandBufferEnd; /* 0x5b40e4 */
 extern signed char DAT_0061a481; /* 0x61a481 */
 extern signed char DAT_0061a482; /* 0x61a482 */
 extern unsigned int *DAT_0061a50c; /* 0x61a50c */
 extern unsigned int *DAT_0061a510; /* 0x61a510 */
 
 /* Supplied declaration required: FUN_0017e5a4. */
-/* Supplied declaration required: FUN_0018b600. */
-/* Supplied declaration required: FUN_0018b610. */
+/* Supplied declaration required: globalCriticalSectionEnterForward. */
+/* Supplied declaration required: globalCriticalSectionLeaveForward. */
 /* Supplied declaration required: FUN_001963e0. */
 /* Supplied declaration required: rt_memcpy. */
 /* Supplied declaration required: rt_memcpy_w. */
@@ -54,7 +54,7 @@ void FUN_0017db14(unsigned int param_1,int param_2)
     } while (temp_v2 != param_1 && puVar6 != (unsigned int *)0x0);
   }
   if (DAT_0061a50c == puVar6) {
-    puVar6[3] = (int)DAT_005b40e0 - puVar6[1];
+    puVar6[3] = (int)g_commandBufferCursor - puVar6[1];
   }
   rt_memcpy_w(puVar6[6] + puVar6[8] * 0x1c,*(int *)(param_2 + 8) + param_2 + 0x10,
               *(int *)(param_2 + 0xc) * 0x1c);
@@ -67,10 +67,10 @@ void FUN_0017db14(unsigned int param_1,int param_2)
           temp_v3 = puVar6[3];
           if ((*(unsigned int *)(pcVar2 + 8) & 8) != (temp_v3 & 8)) {
             if (DAT_0061a50c == puVar6) {
-              if ((unsigned int)DAT_005b40e0 < DAT_005b40e4) {
-                *DAT_005b40e0 = 0;
-                DAT_005b40e0[1] = 0x8025e;
-                DAT_005b40e0 = DAT_005b40e0 + 2;
+              if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
+                *g_commandBufferCursor = 0;
+                g_commandBufferCursor[1] = 0x8025e;
+                g_commandBufferCursor = g_commandBufferCursor + 2;
               }
             }
             else {
@@ -100,15 +100,15 @@ void FUN_0017db14(unsigned int param_1,int param_2)
     FUN_0017e5a4(puVar6,puVar6[6] + puVar6[8] * 0x1c);
   }
   if (DAT_0061a50c == puVar6) {
-    DAT_005b40e0 = (unsigned int *)((*(unsigned int *)(param_2 + 8) & 0xfffffffc) + (int)DAT_005b40e0);
+    g_commandBufferCursor = (unsigned int *)((*(unsigned int *)(param_2 + 8) & 0xfffffffc) + (int)g_commandBufferCursor);
     if (*(int *)(param_2 + 0xc) != 0) {
-      FUN_0018b600();
+      globalCriticalSectionEnterForward();
       puVar6[8] = *(int *)(param_2 + 0xc) + puVar6[8];
       if (((DAT_0061a510 == puVar6) && (DAT_0061a482 != '\0')) && (DAT_0061a481 == '\0')) {
         DAT_0061a481 = '\x01';
         FUN_001963e0();
       }
-      FUN_0018b610();
+      globalCriticalSectionLeaveForward();
       return;
     }
   }

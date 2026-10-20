@@ -8,7 +8,7 @@ int FUN_002bf09c(void);
 int scrSetResult(void);
 int FUN_003d2150(void);
 
-extern int FUN_002360dc(void);
+extern int scrGetArgString(void);
 /* Supplied declaration required: FUN_002bf09c. */
 /* Supplied declaration required: scrSetResult. */
 /* Supplied declaration required: FUN_003d2150. */
@@ -20,7 +20,7 @@ void FUN_002c2108(void)
 /* irregular: 3 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_002360dc();
+  temp_v0 = scrGetArgString();
   FUN_002bf09c();
   if (-1 < temp_v0) {
     FUN_003d2150();

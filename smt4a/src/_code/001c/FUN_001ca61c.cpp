@@ -22,7 +22,7 @@ typedef struct HeapObject {
     /* 0x0C */ u32 value;
 } HeapObject;
 
-extern u8 DAT_0055b920;
+extern u8 g_nwGfxAimTargetViewUpdaterVtable;
 
 HeapObject *FUN_001ca61c(Heap *heap, u32 value)
 {
@@ -31,7 +31,7 @@ HeapObject *FUN_001ca61c(Heap *heap, u32 value)
     if (obj != NULL) {
         obj->heap = heap;
         obj->flag = 0;
-        obj->vtbl = &DAT_0055b920;
+        obj->vtbl = &g_nwGfxAimTargetViewUpdaterVtable;
         obj->value = value;
     }
     return obj;

@@ -4,7 +4,7 @@ extern "C" {
 
 s32 FUN_00215a14(void)
 {
-    return DAT_0044de28.unk00;
+    return g_saveLoadUIFlags.unk00;
 }
 
 } /* extern "C" */

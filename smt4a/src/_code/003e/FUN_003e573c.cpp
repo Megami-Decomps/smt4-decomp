@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_001aea28(unsigned int);
+int ptrListRemoveClearOwner(unsigned int);
 int FUN_001cd3ec(unsigned int, unsigned int);
-int FUN_0030ea58(int, unsigned int);
+int libc_strcmp(int, unsigned int);
 int strncpy(int, unsigned int, int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -14,11 +14,11 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_4_stack;
 
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 
-/* Supplied declaration required: FUN_001aea28. */
+/* Supplied declaration required: ptrListRemoveClearOwner. */
 /* Supplied declaration required: FUN_001cd3ec. */
-/* Supplied declaration required: FUN_0030ea58. */
+/* Supplied declaration required: libc_strcmp. */
 extern int FUN_0040ab8c(unsigned int);
 
 
@@ -34,7 +34,7 @@ void FUN_003e573c(int param_1,int param_2,unsigned int param_3,unsigned short pa
   temp_v0 = FUN_0040ab8c(*(unsigned int *)(temp_v1 + 0x24));
   if (temp_v0 != 0) {
     temp_v0 = temp_v1 + 0x38;
-    FUN_0030ea58(temp_v0,param_3);
+    libc_strcmp(temp_v0,param_3);
     if (temp_v0 == 0) {
       return;
     }
@@ -42,7 +42,7 @@ void FUN_003e573c(int param_1,int param_2,unsigned int param_3,unsigned short pa
     if (temp_v0 != 0) {
       *(unsigned int *)(temp_v1 + 0x1c) = 2;
       *(unsigned int *)(temp_v0 + 4) = *(unsigned int *)(temp_v0 + 4) | 3;
-      FUN_001aea28(DAT_0056fcc0);
+      ptrListRemoveClearOwner(g_handleRegistry);
     }
   }
   else {

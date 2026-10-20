@@ -8,13 +8,13 @@ struct State005c0aa0 {
     /* 0x1c */ u32 handle;
 };
 
-extern State005c0aa0 DAT_005c0aa0;
+extern State005c0aa0 g_nngxState;
 
 void FUN_0018b47c(u32 handle);
 
 void FUN_00170188(void)
 {
-    FUN_0018b47c(DAT_005c0aa0.handle);
+    FUN_0018b47c(g_nngxState.handle);
 }
 
 }

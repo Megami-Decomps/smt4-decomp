@@ -2,17 +2,17 @@
 
 extern "C" {
 
-void FUN_00152bec(AsdMdlObject *model);
-void FUN_00263588(u32 arg);
+void asdMdlManagerMarkDestroy(AsdMdlObject *model);
+void gfxObjectDestroy(u32 arg);
 void FUN_00275be8(s32 arg);
-void FUN_002917b8(void);
+void buttonHelpRelease(void);
 void FUN_0029c2cc(u32 arg, s32 flag);
-void FUN_002a46d8(s32 arg);
-void FUN_002a4d14(void);
-void FUN_002a72c0(s32 arg);
+void fileSlotFree(s32 arg);
+void asdWorkAreaReset(void);
+void asdModelSlotRelease(s32 arg);
 void asdMdlManagerDestroy(AsdMdlObject *model);
 void asdMemFree(void *block);
-void FUN_00310098(void);
+void titleTexTableFreeEntries(void);
 
 extern TitleMain *g_titleMain;
 
@@ -24,23 +24,23 @@ void titleMainDestroy(void)
     TitleMain *title = *slot;
 
     title->freeOnEnd = 1;
-    FUN_002a46d8(0x3A);
-    FUN_00310098();
-    FUN_00152bec(title->modelA);
+    fileSlotFree(0x3A);
+    titleTexTableFreeEntries();
+    asdMdlManagerMarkDestroy(title->modelA);
     asdMdlManagerDestroy(title->modelA);
     title->modelA = NULL;
-    FUN_00152bec(title->modelB);
+    asdMdlManagerMarkDestroy(title->modelB);
     asdMdlManagerDestroy(title->modelB);
     title->modelB = NULL;
     if (title->unk85 != 0) {
-        FUN_002a72c0(0);
+        asdModelSlotRelease(0);
         FUN_0029c2cc(title->unk88, 0);
     }
-    FUN_00263588(title->unk88);
+    gfxObjectDestroy(title->unk88);
     title->unk88 = 0;
-    FUN_002a4d14();
+    asdWorkAreaReset();
     FUN_00275be8(0);
-    FUN_002917b8();
+    buttonHelpRelease();
     if (*slot != NULL) {
         asdMemFree(*slot);
         *slot = NULL;

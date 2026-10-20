@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern void FUN_00169ddc(s32 event);
+extern void eventQueueAddUnique(s32 event);
 
 void sendEvent100020D(void)
 {
-    FUN_00169ddc(0x100020d);
+    eventQueueAddUnique(0x100020d);
 }
 
 } /* extern "C" */

@@ -7,7 +7,7 @@ extern "C" {
 int dataTable06Sub1GetRecord(void);
 int FUN_0029eaa4(int, unsigned int);
 int FUN_002b7bca(int, unsigned int, int, unsigned char *);
-int FUN_002b9024(void);
+int devilGetRecord(void);
 int FUN_00311cbc(...);
 int FUN_003c9754(int, unsigned int, unsigned int, unsigned int);
 
@@ -16,7 +16,7 @@ extern unsigned char LAB_002c6f08; /* 0x2c6f08 */
 /* Supplied declaration required: dataTable06Sub1GetRecord. */
 /* Supplied declaration required: FUN_0029eaa4. */
 /* Supplied declaration required: FUN_002b7bca. */
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: FUN_00311cbc. */
 extern int FUN_003c8db4(int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_003c9754. */
@@ -52,7 +52,7 @@ int FUN_002624c4(int param_1,unsigned int param_2,unsigned int param_3,unsigned 
       param_4[1] = temp_v3;
       param_4[1] = (temp_v3 & 3) | ((*(unsigned int *)(temp_v2 + 4) & 0x7fff) << 2);
       temp_v2 = *(unsigned int *)(temp_v2 + 4) & 0xffff;
-      FUN_002b9024();
+      devilGetRecord();
       temp_v4 = 0;
       do {
         temp_v0 = *(short *)(temp_v2 + 0x3c + temp_v4 * 2);

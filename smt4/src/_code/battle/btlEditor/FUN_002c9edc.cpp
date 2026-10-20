@@ -14,7 +14,7 @@ typedef struct {
 } void_stack;
 
 extern int DAT_00435ce8; /* 0x435ce8 */
-extern int DAT_00439ca8; /* 0x439ca8 */
+extern int g_btlUiBlock; /* 0x439ca8 */
 
 /* Supplied declaration required: FUN_0025c2d0. */
 extern int jobGetWork(void);
@@ -33,8 +33,8 @@ void FUN_002c9edc(void)
   unsigned int temp_v3;
   
   temp_v0 = jobGetWork();
-  if (DAT_00439ca8 != 0) {
-    FUN_0025c2d0(DAT_00439ca8,0);
+  if (g_btlUiBlock != 0) {
+    FUN_0025c2d0(g_btlUiBlock,0);
   }
   if (DAT_00435ce8 != 0) {
     if (temp_v0 != 0) {

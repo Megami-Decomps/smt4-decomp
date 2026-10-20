@@ -4,8 +4,8 @@
 
 extern "C" {
 
-extern int FUN_002a2dec(int);
-extern int FUN_002a2df8(int);
+extern int objGetFlagBit0(int);
+extern int objGetFlagBit1(int);
 
 
 unsigned int FUN_002ac12c(int param_1)
@@ -15,9 +15,9 @@ unsigned int FUN_002ac12c(int param_1)
   unsigned int temp_v1;
   unsigned char temp_v2;
   
-  temp_v0 = FUN_002a2df8(param_1 + 8);
+  temp_v0 = objGetFlagBit1(param_1 + 8);
   temp_v1 = 0;
-  if ((temp_v0 != 0) && (temp_v0 = FUN_002a2dec(param_1 + 8), temp_v1 = 0, temp_v0 != 0)) {
+  if ((temp_v0 != 0) && (temp_v0 = objGetFlagBit0(param_1 + 8), temp_v1 = 0, temp_v0 != 0)) {
     temp_v2 = *(char *)(param_1 + 0x45) != '\0';
     temp_v0 = 0;
     if (temp_v2) {

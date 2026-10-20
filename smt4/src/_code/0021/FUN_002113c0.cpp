@@ -5,9 +5,9 @@
 extern "C" {
 
 int FUN_0026f784(void);
-int FUN_0026f800(int, int);
+int linkHolderApplyFlag(int, int);
 int FUN_00297060(int, unsigned int);
-int FUN_002b2368(int);
+int asdMemFreeNonNull(int);
 int FUN_002c3f5c(...);
 int FUN_002c40f8(unsigned char *, int *, int, int, unsigned int, unsigned int);
 int asdMemFree(unsigned int);
@@ -22,13 +22,13 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_1_stack;
 
-extern int DAT_0043daa8; /* 0x43daa8 */
+extern int g_campCec; /* 0x43daa8 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_0026f784. */
-/* Supplied declaration required: FUN_0026f800. */
+/* Supplied declaration required: linkHolderApplyFlag. */
 /* Supplied declaration required: FUN_00297060. */
-/* Supplied declaration required: FUN_002b2368. */
+/* Supplied declaration required: asdMemFreeNonNull. */
 /* Supplied declaration required: FUN_002c3f5c. */
 /* Supplied declaration required: FUN_002c40f8. */
 /* Supplied declaration required: asdMemFree. */
@@ -51,7 +51,7 @@ unsigned int FUN_002113c0(int param_1)
   
   temp_v1 = 0;
   if (*(int *)(param_1 + 0xd68) == 2) {
-    temp_v0 = DAT_0043daa8 + 0xa0;
+    temp_v0 = g_campCec + 0xa0;
     FUN_0026f784();
     if (temp_v0 != 0) {
       *(unsigned char *)(param_1 + 0xd65) = 1;
@@ -71,15 +71,15 @@ unsigned int FUN_002113c0(int param_1)
       temp_v0 = *(int *)(param_1 + 0xd6c);
       if (temp_v0 != 0) {
         FUN_002c3f5c();
-        FUN_002b2368(temp_v0);
+        asdMemFreeNonNull(temp_v0);
       }
       *(unsigned int *)(param_1 + 0xd6c) = 0;
       asdMemFree(*(unsigned int *)(param_1 + 0xd78));
       *(unsigned int *)(param_1 + 0xd78) = 0;
       FUN_002c5758(2);
       FUN_002c5728(2);
-      FUN_002e181c(DAT_0043daa8 + 0xa0);
-      FUN_0026f800(DAT_0043daa8 + 0xa0,0);
+      FUN_002e181c(g_campCec + 0xa0);
+      linkHolderApplyFlag(g_campCec + 0xa0,0);
       temp_v0 = *(int *)(param_1 + 0xcf4);
       FUN_00297060(temp_v0,*(unsigned int *)(param_1 + 0xcf8));
       *(int *)(param_1 + 0xd04) = temp_v0;

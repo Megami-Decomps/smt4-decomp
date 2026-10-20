@@ -8,7 +8,7 @@ int jobStop(unsigned int, int);
 int FUN_00280328(unsigned int, int, int);
 int FUN_002ea508(unsigned int, unsigned char *);
 int asdListBoxSetIntItem(...);
-int FUN_00317508(unsigned int, int);
+int asdListBoxSetByteValue(unsigned int, int);
 int asdListBoxAddItems(void);
 int asdListBoxSetToggleItem(...);
 int FUN_00340edc(...);
@@ -30,7 +30,7 @@ typedef struct {
 } param_2_stack;
 
 extern unsigned char LAB_004d5988; /* 0x4d5988 */
-extern int DAT_00571508; /* 0x571508 */
+extern int g_btlCamera; /* 0x571508 */
 extern unsigned int DAT_00571514; /* 0x571514 */
 extern unsigned int DAT_00571518; /* 0x571518 */
 extern unsigned int DAT_00571520; /* 0x571520 */
@@ -60,7 +60,7 @@ extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_00280328. */
 /* Supplied declaration required: FUN_002ea508. */
 /* Supplied declaration required: asdListBoxSetIntItem. */
-/* Supplied declaration required: FUN_00317508. */
+/* Supplied declaration required: asdListBoxSetByteValue. */
 /* Supplied declaration required: asdListBoxAddItems. */
 /* Supplied declaration required: asdListBoxSetToggleItem. */
 /* Supplied declaration required: FUN_00340edc. */
@@ -83,9 +83,9 @@ void FUN_004d5578(int param_1,fn_004d5578_arg1 *param_2)
   FUN_00280328(temp_v1,0x75,0);
   *(unsigned int *)(param_1 + 0x10) = temp_v1;
   asdListBoxAddItems();
-  FUN_00317508(*(unsigned int *)(param_1 + 0x10),1);
+  asdListBoxSetByteValue(*(unsigned int *)(param_1 + 0x10),1);
   FUN_002ea508(*(unsigned int *)(param_1 + 0x10),&LAB_004d5988);
-  asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),0,(*(unsigned int *)(DAT_00571508 + 0x64c) & 0x100) >> 8);
+  asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),0,(*(unsigned int *)(g_btlCamera + 0x64c) & 0x100) >> 8);
   FUN_00340edc(*(unsigned int *)(param_1 + 0x10),1,0xfffffff6,10);
   asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),2,
                (param_2->field_0x45ac & DAT_0057171c) != 0 ||

@@ -17,7 +17,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_4_stack;
 
-extern int FUN_0018719c(short);
+extern int gameFlagIsSet(short);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_0039b984. */
 extern unsigned int tableByteGet1(unsigned int);
@@ -50,7 +50,7 @@ void FUN_00403b84(int param_1,int param_2,unsigned int param_3,unsigned int para
     psVar1 = (short *)(temp_v3 & 0xffff);
     FUN_0039b984();
     if ((psVar1 != (short *)0x0) && (temp_v4 = temp_v4 + 1, *psVar1 != 0)) {
-      temp_v0 = FUN_0018719c(psVar1[0x2d]);
+      temp_v0 = gameFlagIsSet(psVar1[0x2d]);
       if (!(psVar1[0x2d] == 0 || temp_v0 == 0)) {
         temp_v0 = tableFlagBit0(temp_v3);
         if (temp_v0 != 0) {
@@ -60,7 +60,7 @@ void FUN_00403b84(int param_1,int param_2,unsigned int param_3,unsigned int para
       else {
         temp_v0 = tableFlagBit0(temp_v3);
         if (temp_v0 == 0) {
-          temp_v0 = FUN_0018719c(psVar1[0x2e]);
+          temp_v0 = gameFlagIsSet(psVar1[0x2e]);
           if ((psVar1[0x2e] != 0) && (temp_v0 == 0)) goto LAB_00403d24;
           FUN_0040a790(temp_v3);
           if (psVar1[0x2c] != 1) {
@@ -80,7 +80,7 @@ void FUN_00403b84(int param_1,int param_2,unsigned int param_3,unsigned int para
           temp_v2 = 0;
           temp_v1 = temp_v2;
           do {
-            temp_v0 = FUN_0018719c(psVar1[temp_v2 + 0x2f]);
+            temp_v0 = gameFlagIsSet(psVar1[temp_v2 + 0x2f]);
             if (temp_v0 != 0) {
               temp_v1 = (temp_v1 + 1) & 0xff;
             }

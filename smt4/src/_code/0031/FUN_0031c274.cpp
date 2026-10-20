@@ -6,8 +6,8 @@ int FUN_0031c274(void)
 {
     int value = 0;
 
-    if (DAT_0043dcf0 != NULL) {
-        value = (int)*(s16 *)((u8 *)DAT_0043dcf0 + 0x3c);
+    if (g_partyPanel != NULL) {
+        value = (int)*(s16 *)((u8 *)g_partyPanel + 0x3c);
     }
     return value;
 }

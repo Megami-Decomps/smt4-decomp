@@ -19,11 +19,11 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_4_stack;
 
-extern unsigned int FUN_0014bef4(unsigned int);
+extern unsigned int randRange(unsigned int);
 /* Supplied declaration required: FUN_00184310. */
 extern int slotRecordFindById(unsigned int);
-extern int FUN_001ab854(int);
-extern int FUN_001ab888(void);
+extern int gameGetSlotRecord(int);
+extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_0023e32c. */
 extern int FUN_002a4b28(unsigned int);
 /* Supplied declaration required: dataTable5GetEntries. */
@@ -65,7 +65,7 @@ unsigned int FUN_004db914(unsigned short *param_1,unsigned short *param_2,unsign
   FUN_00184310();
   temp_v1 = FUN_003a8298();
   temp_v9 = temp_v1 + (unsigned int)puVar5[3];
-  temp_v2 = FUN_0014bef4(99);
+  temp_v2 = randRange(99);
   if (temp_v2 < 5) {
     temp_v1 = slotRecordFindById(0x218);
     if (temp_v1 == 0) {
@@ -110,7 +110,7 @@ unsigned int FUN_004db914(unsigned short *param_1,unsigned short *param_2,unsign
     }
     temp_v3 = temp_v3 + 1;
   } while (temp_v3 < 0x4b1);
-  temp_v4 = FUN_0014bef4(99);
+  temp_v4 = randRange(99);
   temp_v3 = temp_v9;
   if (temp_v4 < temp_v8) {
     temp_v1 = 0x33;
@@ -131,12 +131,12 @@ LAB_004dba94:
         puVar2 = param_3;
       }
       if (((temp_v10 && puVar10 != puVar1) && puVar10 != puVar2) && (puVar9[3] <= temp_v3)) {
-        temp_v5 = FUN_001ab888();
+        temp_v5 = gameGetSlotTable();
         temp_v7 = 0;
         do {
           if (*(unsigned char *)(temp_v5 + temp_v7 + 0x1c88) < 0x18) {
-            temp_v6 = FUN_001ab888();
-            temp_v6 = FUN_001ab854((int)*(char *)(temp_v6 + temp_v7 + 0x1c88));
+            temp_v6 = gameGetSlotTable();
+            temp_v6 = gameGetSlotRecord((int)*(char *)(temp_v6 + temp_v7 + 0x1c88));
             if (*(unsigned short *)(temp_v6 + 0x62) == *puVar9) break;
           }
           temp_v7 = temp_v7 + 1;

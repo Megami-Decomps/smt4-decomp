@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00126d1c(...);
 int FUN_001274fc(...);
-int FUN_002e76b6(...);
+int onlineBufferGetData(...);
 int FUN_002fa010(...);
 int VectorFloatToUnsigned(...);
 int VectorUnsignedToFloat(...);
@@ -26,7 +26,7 @@ struct fn_004327f8_arg2 {
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: FUN_00126d1c. */
 /* Supplied declaration required: FUN_001274fc. */
-/* Supplied declaration required: FUN_002e76b6. */
+/* Supplied declaration required: onlineBufferGetData. */
 /* Supplied declaration required: FUN_002fa010. */
 extern unsigned int rangeObjRemaining(fn_004327f8_arg2 *);
 /* Supplied declaration required: rt_memcpy. */
@@ -53,10 +53,10 @@ unsigned int FUN_004327f8(int param_1,int param_2,fn_004327f8_arg2 *param_3)
   }
   temp_v1 = rangeObjRemaining(param_3);
   *(unsigned int *)(*(int *)(param_1 + 0x120) + 0x48) = temp_v1;
-  temp_v1 = FUN_002e76b6(param_3);
+  temp_v1 = onlineBufferGetData(param_3);
   *(unsigned int *)(*(int *)(param_1 + 0x120) + 0x44) = temp_v1;
   *(unsigned int *)(*(int *)(param_1 + 0x120) + 0x3c) = *(unsigned int *)(param_2 + 0x10);
-  temp_v1 = FUN_002e76b6(param_2);
+  temp_v1 = onlineBufferGetData(param_2);
   *(unsigned int *)(*(int *)(param_1 + 0x120) + 0x38) = temp_v1;
   *(int *)(*(int *)(param_1 + 0x120) + 0x44) = *(int *)(*(int *)(param_1 + 0x120) + 0x44) + 1;
   *(int *)(*(int *)(param_1 + 0x120) + 0x48) = *(int *)(*(int *)(param_1 + 0x120) + 0x48) - 1;
@@ -76,7 +76,7 @@ unsigned int FUN_004327f8(int param_1,int param_2,fn_004327f8_arg2 *param_3)
       temp_v4 = 0xff;
     }
     param_3->field_0x10 = temp_v2 + 1;
-    puVar4 = (unsigned char *)FUN_002e76b6(param_3);
+    puVar4 = (unsigned char *)onlineBufferGetData(param_3);
     *puVar4 = temp_v4;
   }
   else {
@@ -84,7 +84,7 @@ unsigned int FUN_004327f8(int param_1,int param_2,fn_004327f8_arg2 *param_3)
     param_3->field_0x10 = *(int *)(param_2 + 0x10) + 1;
     *puVar4 = 0;
     temp_v1 = *(unsigned int *)(param_2 + 0x10);
-    temp_v3 = FUN_002e76b6(param_2);
+    temp_v3 = onlineBufferGetData(param_2);
     rt_memcpy(puVar4 + 1,temp_v3,temp_v1);
   }
   return 0;

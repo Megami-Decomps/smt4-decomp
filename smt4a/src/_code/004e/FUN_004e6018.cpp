@@ -5,7 +5,7 @@
 extern "C" {
 
 int qsort(unsigned short [10], int, int, unsigned char *);
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 int FUN_004a9308(...);
 int source4CCopyHalves(unsigned int, unsigned short [10]);
 int FUN_004c9160(int, unsigned int, int, int);
@@ -30,11 +30,11 @@ extern unsigned int DAT_00571170; /* 0x571170 */
 extern unsigned int DAT_00571174; /* 0x571174 */
 extern unsigned int DAT_00571260; /* 0x571260 */
 extern unsigned int DAT_00571264; /* 0x571264 */
-extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
+extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
 /* Supplied declaration required: qsort. */
 extern int lcgRandomRange(unsigned int);
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: FUN_004a9308. */
 /* Supplied declaration required: source4CCopyHalves. */
 /* Supplied declaration required: FUN_004c9160. */
@@ -78,7 +78,7 @@ unsigned int FUN_004e6018(int *param_1,unsigned int *param_2)
     do {
       temp_v3 = (unsigned int)temp_v6[temp_v2];
       if (temp_v3 != 0) {
-        FUN_001aba54();
+        dataTable04FindById();
         if (((temp_v3 != 0) && ((*(unsigned int *)(temp_v3 + 0x28) & 0x600) != 0)) &&
            ((*(unsigned int *)(temp_v3 + 0x28) & 0x600) != 0x200)) {
           temp_v4 = temp_v4 + 1;
@@ -98,7 +98,7 @@ unsigned int FUN_004e6018(int *param_1,unsigned int *param_2)
       *(unsigned short *)(param_2[10] + 0x1c0) = temp_v6[temp_v2];
       *param_2 = *param_2 | 0x8000;
       temp_v3 = (unsigned int)temp_v6[temp_v2];
-      FUN_001aba54();
+      dataTable04FindById();
       if ((*(unsigned int *)(temp_v3 + 0x28) & 0x1ff) >> 5 == 4) {
         btlUnitSetParam(param_1,0xf,0,1);
       }
@@ -112,7 +112,7 @@ unsigned int FUN_004e6018(int *param_1,unsigned int *param_2)
   FUN_004c9160(9,param_2[8],0,1);
   if (((DAT_00571170 | DAT_00571168) & *(unsigned int *)param_2[8]) == 0 &&
       ((DAT_0057116c | DAT_00571174) & ((unsigned int *)param_2[8])[1]) == 0) {
-    FUN_004a9308(DAT_0057a9c8,(short)param_2[0xb],0);
+    FUN_004a9308(g_btlUiBlock,(short)param_2[0xb],0);
   }
   *(unsigned short *)(param_2[10] + 0x1be) = 0xf;
   *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x13;

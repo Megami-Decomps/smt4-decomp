@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00202ab4(int);
 int VectorSignedToFloat(int, int);
 
-extern unsigned char DAT_0044de28; /* 0x44de28 */
+extern unsigned char g_saveLoadUIFlags; /* 0x44de28 */
 extern unsigned char DAT_0044de29; /* 0x44de29 */
 extern int g_saveLoadUI; /* 0x44de2c */
 
@@ -28,7 +28,7 @@ void FUN_0030aa50(unsigned char param_1)
   FUN_00202ab4(0);
   temp_v0 = g_saveLoadUI;
   *(unsigned int *)(g_saveLoadUI + 0x14) = 0;
-  DAT_0044de28 = 0;
+  g_saveLoadUIFlags = 0;
   DAT_0044de29 = 0;
   *(unsigned char *)(temp_v0 + 0x49) = 1;
   *(unsigned char *)(temp_v0 + 0x379) = param_1;

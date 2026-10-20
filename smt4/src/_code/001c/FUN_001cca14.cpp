@@ -10,7 +10,7 @@ int FUN_0029a268(...);
 int FUN_0029a284(...);
 int FUN_002b6dd8(...);
 int FUN_002b75ec(...);
-int FUN_002b9024(void);
+int devilGetRecord(void);
 int FUN_002be624(...);
 
 int FUN_00187114(int, int);
@@ -24,7 +24,7 @@ int FUN_002bdf94(...);
 int FUN_002be370(...);
 int FUN_002be5a4(...);
 int FUN_002be650(...);
-int FUN_002beda4(...);
+int vec2GetXInt(...);
 int FUN_002bf288(...);
 int FUN_002bf380(...);
 int FUN_002bf4f8(...);
@@ -52,7 +52,7 @@ extern unsigned char LAB_001cd3d0; /* 0x1cd3d0 */
 extern unsigned char LAB_001cd808; /* 0x1cd808 */
 extern unsigned char LAB_001cd814; /* 0x1cd814 */
 extern unsigned char LAB_001cdebc; /* 0x1cdebc */
-extern int DAT_0044e190; /* 0x44e190 */
+extern int g_statusDown; /* 0x44e190 */
 extern int g_titleScene; /* 0x44ea00 */
 
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
@@ -79,19 +79,19 @@ extern int FUN_0029ee54(int);
 /* Supplied declaration required: FUN_002b6758. */
 /* Supplied declaration required: FUN_002b6dd8. */
 /* Supplied declaration required: FUN_002b75ec. */
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: FUN_002be370. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002be650. */
-extern int FUN_002bed98(int);
-/* Supplied declaration required: FUN_002beda4. */
+extern int vec2GetYInt(int);
+/* Supplied declaration required: vec2GetXInt. */
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf4f8. */
 /* Supplied declaration required: FUN_002bf538. */
-extern int FUN_002c09d0(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0032bc00. */
 
@@ -135,10 +135,10 @@ unsigned int FUN_001cca14(void)
   int temp_v24;
   int temp_v25;
   
-  temp_v12 = DAT_0044e190;
-  temp_v1 = FUN_002beda4(DAT_0044e190 + 0x28);
-  temp_v2 = FUN_002bed98(temp_v12 + 0x28);
-  temp_v10 = DAT_0044e190;
+  temp_v12 = g_statusDown;
+  temp_v1 = vec2GetXInt(g_statusDown + 0x28);
+  temp_v2 = vec2GetYInt(temp_v12 + 0x28);
+  temp_v10 = g_statusDown;
   temp_v13 = *(int *)(temp_v12 + 0x400);
   if (temp_v13 == 1) {
     temp_v13 = *(int *)(temp_v12 + 0x408);
@@ -164,8 +164,8 @@ unsigned int FUN_001cca14(void)
     break;
   case 0x10:
     puVar18 = (unsigned char *)0x0;
-    temp_v19 = DAT_0044e190;
-    temp_v10 = FUN_0029efa8(DAT_0044e190 + 0x564);
+    temp_v19 = g_statusDown;
+    temp_v10 = FUN_0029efa8(g_statusDown + 0x564);
     temp_v18 = 0;
     temp_v17 = (unsigned char *)0x0;
     FUN_002bf380(2,0x1a,0xc,temp_v1,temp_v2,0xb3);
@@ -203,7 +203,7 @@ LAB_001ccb9c:
         else {
           puVar18 = (unsigned char *)0x30d;
           temp_v8 = (unsigned int)*(unsigned short *)(temp_v12 + 0x558);
-          temp_v7 = FUN_002c09d0(0x410);
+          temp_v7 = gameFlagIsSet(0x410);
           if (temp_v7 == 0) {
             temp_v13 = 3;
             goto LAB_001ccb9c;
@@ -213,7 +213,7 @@ LAB_001ccb9c:
       else {
         temp_v8 = (unsigned int)*(unsigned short *)(temp_v12 + 0x556);
         puVar18 = (unsigned char *)0xb5;
-        temp_v7 = FUN_002c09d0(0x410);
+        temp_v7 = gameFlagIsSet(0x410);
         if (temp_v7 == 0) {
           temp_v13 = 2;
           goto LAB_001ccb9c;
@@ -242,7 +242,7 @@ LAB_001ccb9c:
       temp_v13 = temp_v13 + 1;
     } while (temp_v13 < 7);
     if ((*(int *)(temp_v19 + 0x400) == 0x10) &&
-       ((temp_v12 = FUN_002c09d0(0x410), temp_v12 != 0 || (temp_v10 != 1 && temp_v10 != 2)))) {
+       ((temp_v12 = gameFlagIsSet(0x410), temp_v12 != 0 || (temp_v10 != 1 && temp_v10 != 2)))) {
       temp_v10 = FUN_002bf4f8(0x1a,temp_v10 + 0x477);
       FUN_002bf538();
       FUN_002bf288(2,0x1a,0x46d,*(short *)(temp_v10 + 8) + temp_v1,*(short *)(temp_v10 + 10) + temp_v2,0xbf)
@@ -270,9 +270,9 @@ LAB_001ccb9c:
       FUN_0029a17c((int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v13 + 8) + temp_v1,
                    (int)*(short *)(temp_v10 + 10) + (int)*(short *)(temp_v13 + 10) + temp_v2,
                    (int)**(short **)(temp_v13 + 0xc),(int)(*(short **)(temp_v13 + 0xc))[1],1);
-      temp_v12 = FUN_002bed98(temp_v19 + 600);
+      temp_v12 = vec2GetYInt(temp_v19 + 600);
       temp_v0 = *(short *)(temp_v10 + 10);
-      temp_v13 = FUN_002beda4(temp_v19 + 600);
+      temp_v13 = vec2GetXInt(temp_v19 + 600);
       FUN_002bf288(2,0x1a,0x473,temp_v13 + temp_v1 + (int)*(short *)(temp_v10 + 8),
                    temp_v12 + temp_v2 + (int)temp_v0,0xc9);
       temp_v12 = g_titleScene;
@@ -307,7 +307,7 @@ LAB_001ccb9c:
     break;
   case 0x13:
   case 0x14:
-    temp_v12 = DAT_0044e190 + 0x223c;
+    temp_v12 = g_statusDown + 0x223c;
     temp_v24 = temp_v12;
     temp_v13 = FUN_0029efc0();
     temp_v7 = FUN_0029efa8(temp_v12);
@@ -444,7 +444,7 @@ LAB_001ccb9c:
     FUN_002bf380(2,0x1a,0xe,temp_v1,temp_v2,0xb3);
     FUN_0029ab54(temp_v1,temp_v2);
     temp_v8 = (unsigned int)*(unsigned short *)(temp_v10 + 0x47e);
-    FUN_002b9024();
+    devilGetRecord();
     if (temp_v8 != 0) {
       if (*(char *)(temp_v8 + 5) == '\x01') {
         FUN_002bf288(2,0x1a,0x483,temp_v1,temp_v2,0xbf);
@@ -524,7 +524,7 @@ LAB_001ccb9c:
                   temp_v15 = romwright_piece_4_4(0xffffffd8,*(int *)(temp_v10 + 0x40c) * -0x28);
                 }
                 else {
-                  temp_v15 = FUN_002beda4(temp_v10 + 0x2e4);
+                  temp_v15 = vec2GetXInt(temp_v10 + 0x2e4);
                 }
                 temp_v14 = 0x8400ff;
               }
@@ -538,7 +538,7 @@ LAB_001ccb9c:
                 temp_v15 = romwright_piece_4_4(0xffffffd8,*(int *)(temp_v10 + 0x40c) * -0x28);
               }
               else {
-                temp_v15 = FUN_002beda4(temp_v10 + 0x2e4);
+                temp_v15 = vec2GetXInt(temp_v10 + 0x2e4);
                 temp_v14 = 0x8400ff;
               }
             }

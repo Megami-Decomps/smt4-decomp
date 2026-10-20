@@ -44,7 +44,7 @@ extern union romwright_storage_DAT_0061b074_4_4 DAT_0061b074; /* 0x61b074 */
 extern unsigned int DAT_0061b078; /* 0x61b078 */
 
 extern int FUN_0015a410(void);
-extern int FUN_0015a75c(void);
+extern int appletIsExitRequested(void);
 extern unsigned int FUN_0016ccfc(void);
 /* Supplied declaration required: FUN_0019a46c. */
 /* Supplied declaration required: FUN_001b57a8. */
@@ -83,7 +83,7 @@ void FUN_00429048(unsigned int param_1,int *param_2,int param_3)
       }
       temp_v1 = FUN_00427e28(temp_v4,&DAT_0061b000,0);
       if (-1 < temp_v1) {
-        temp_v1 = FUN_0015a75c();
+        temp_v1 = appletIsExitRequested();
         if ((temp_v1 == 0) && (temp_v1 = FUN_0015a410(), temp_v1 == 0)) {
           if ((*(char *)(temp_v3 + 0x98) == '\0') && ((char)DAT_0061b074.whole != '\0')) {
             *(unsigned char *)(temp_v3 + 0x98) = 1;

@@ -18,7 +18,7 @@ extern unsigned char DAT_005f187c; /* 0x5f187c */
 
 /* Supplied declaration required: FUN_00274970. */
 /* Supplied declaration required: FUN_002d23f0. */
-extern int FUN_003a32a8(void);
+extern int dataTable23Type0FindIndexById(void);
 
 
 void FUN_00377468(void)
@@ -27,12 +27,12 @@ void FUN_00377468(void)
 /* irregular: 2 native warning(s); review required */
   int temp_v0;
   
-  if ((DAT_005f163c != 0) && (temp_v0 = FUN_003a32a8(), temp_v0 != -1)) {
+  if ((DAT_005f163c != 0) && (temp_v0 = dataTable23Type0FindIndexById(), temp_v0 != -1)) {
     FUN_002d23f0();
     FUN_00274970(DAT_005f163c);
   }
   if (DAT_005f1640 != 0) {
-    temp_v0 = FUN_003a32a8();
+    temp_v0 = dataTable23Type0FindIndexById();
     if (temp_v0 != -1) {
       FUN_002d23f0();
       FUN_00274970(DAT_005f1640);

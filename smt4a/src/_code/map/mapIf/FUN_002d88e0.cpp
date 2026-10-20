@@ -17,7 +17,7 @@ int FUN_0040ace8(unsigned int, unsigned int);
 
 extern unsigned char LAB_002d89f4; /* 0x2d89f4 */
 extern unsigned char LAB_002d8a10; /* 0x2d8a10 */
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern int g_mapIf; /* 0x58103c */
 
 /* Supplied declaration required: FUN_00100388. */
@@ -65,7 +65,7 @@ void FUN_002d88e0(void)
   FUN_0040aa6c();
   FUN_0040aad4(*(unsigned int *)(temp_v0 + 0xcbf8),0);
   temp_v2 = *(unsigned int *)(*(int *)(temp_v0 + 0xcbf8) + 4);
-  FUN_0040ace8(DAT_0056fcc0,temp_v2);
+  FUN_0040ace8(g_handleRegistry,temp_v2);
   FUN_003fd76c(temp_v2,temp_v0 + 0xcbe8);
   FUN_003fdb18(temp_v2);
   FUN_003fd784(temp_v2);

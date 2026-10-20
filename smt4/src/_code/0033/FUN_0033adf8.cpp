@@ -9,9 +9,9 @@ int FUN_0028ca0c(void);
 int FUN_00295a18(int);
 int FUN_00299370(int);
 int FUN_0029c1c8(int, int, int);
-int FUN_002bf694(unsigned char [20], unsigned int);
-int FUN_002c3944(unsigned int, int);
-int FUN_002c424c(unsigned int *, int, unsigned int);
+int libc_strcpy(unsigned char [20], unsigned int);
+int rt_memclr(unsigned int, int);
+int __aeabi_memset4(unsigned int *, int, unsigned int);
 int FUN_00333ef8(int, unsigned char [20], unsigned short *);
 int FUN_00334058(void);
 
@@ -44,16 +44,16 @@ extern unsigned int FUN_00282be4(void);
 /* Supplied declaration required: FUN_00295a18. */
 /* Supplied declaration required: FUN_00299370. */
 /* Supplied declaration required: FUN_0029c1c8. */
-extern int FUN_002a8740(int);
-extern unsigned int *FUN_002a8764(void);
-extern unsigned int FUN_002ac068(int, unsigned int);
-extern int FUN_002b63ac(void);
+extern int gameGetUnitRecord(int);
+extern unsigned int *gameGetSlotTable(void);
+extern unsigned int dataTableFileGetTable(int, unsigned int);
+extern int gameGetPlayerData(void);
 extern unsigned int FUN_002bd1fc(void);
-/* Supplied declaration required: FUN_002bf694. */
+/* Supplied declaration required: libc_strcpy. */
 extern int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(unsigned int);
-/* Supplied declaration required: FUN_002c3944. */
-/* Supplied declaration required: FUN_002c424c. */
+/* Supplied declaration required: rt_memclr. */
+/* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: FUN_00333ef8. */
 /* Supplied declaration required: FUN_00334058. */
 
@@ -88,16 +88,16 @@ void FUN_0033adf8(fn_0033adf8_arg0 *param_1,unsigned int param_2)
       temp_v9 = 0;
     }
     else {
-      temp_v9 = FUN_002ac068(*(int *)&param_1->field_0x223c,0);
+      temp_v9 = dataTableFileGetTable(*(int *)&param_1->field_0x223c,0);
     }
     temp_v2 = dataTableGetEntries(temp_v9);
     temp_v3 = dataTableGetCount(temp_v9);
     if (param_2 <= temp_v3 - 1U) {
       puVar10 = (unsigned short *)(temp_v2 + param_2 * 0x74);
-      puVar5 = (unsigned int *)FUN_002a8764();
+      puVar5 = (unsigned int *)gameGetSlotTable();
       temp_v3 = 0;
       temp_v9 = FUN_002bd1fc();
-      FUN_002bf694(temp_v17,temp_v9);
+      libc_strcpy(temp_v17,temp_v9);
       temp_v10 = puVar10[4];
       temp_v11 = puVar10[5];
       temp_v12 = puVar10[6];
@@ -106,7 +106,7 @@ void FUN_0033adf8(fn_0033adf8_arg0 *param_1,unsigned int param_2)
       temp_v15 = puVar10[9];
       temp_v16 = puVar10[10];
       FUN_00333ef8((char)puVar10[0x1a],temp_v17,&temp_v10);
-      temp_v2 = FUN_002b63ac();
+      temp_v2 = gameGetPlayerData();
       *(unsigned short *)(temp_v2 + 0x12) = puVar10[0xd];
       *(unsigned short *)(temp_v2 + 0x14) = puVar10[0xe];
       *(unsigned short *)(temp_v2 + 0x16) = puVar10[0xf];
@@ -129,7 +129,7 @@ void FUN_0033adf8(fn_0033adf8_arg0 *param_1,unsigned int param_2)
         }
         temp_v3 = temp_v3 + 1;
       } while (temp_v3 < 8);
-      FUN_002c424c(puVar5 + 0x243c,0x18,0xffffffff);
+      __aeabi_memset4(puVar5 + 0x243c,0x18,0xffffffff);
       *(unsigned short *)(puVar5 + 0x2442) = 0xffff;
       *(unsigned char *)((int)puVar5 + 0x910a) = 0xff;
       temp_v2 = 0;
@@ -145,7 +145,7 @@ void FUN_0033adf8(fn_0033adf8_arg0 *param_1,unsigned int param_2)
       do {
         if ((puVar10[temp_v3 + 0x24] != 0) && (temp_v8 = 0, *(char *)((int)puVar5 + 0x910b) != '\0')) {
           do {
-            temp_v4 = FUN_002a8740(temp_v8);
+            temp_v4 = gameGetUnitRecord(temp_v8);
             if (*(unsigned short *)(temp_v4 + 0x46) == puVar10[temp_v3 + 0x24]) {
               temp_v1 = FUN_0023eb7c();
               *(unsigned char *)((int)puVar5 + temp_v2 + 0x9108) = temp_v1;
@@ -158,7 +158,7 @@ void FUN_0033adf8(fn_0033adf8_arg0 *param_1,unsigned int param_2)
         temp_v3 = temp_v3 + 1;
       } while (temp_v3 < 3);
       temp_v9 = FUN_00282be4();
-      FUN_002c3944(temp_v9,0x104a);
+      rt_memclr(temp_v9,0x104a);
       temp_v2 = 0;
       temp_v6 = temp_v5;
       do {

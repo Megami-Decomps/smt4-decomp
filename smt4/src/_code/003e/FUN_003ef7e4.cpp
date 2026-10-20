@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c38fc(unsigned int *);
+int nn_os_CriticalSection_Initialize(unsigned int *);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -13,7 +13,7 @@ typedef struct {
 
 extern unsigned int DAT_004e629c; /* 0x4e629c */
 
-/* Supplied declaration required: FUN_002c38fc. */
+/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
 
 
 unsigned long long FUN_003ef7e4(void)
@@ -21,7 +21,7 @@ unsigned long long FUN_003ef7e4(void)
 {
 /* irregular: 1 native warning(s); review required */
   DAT_004e629c = 0;
-  FUN_002c38fc(&DAT_004e629c);
+  nn_os_CriticalSection_Initialize(&DAT_004e629c);
   return 0x3574a8004e629c;
 }
 

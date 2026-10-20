@@ -10,11 +10,11 @@ typedef struct Obj {
 extern struct {
     u8 unk00[0x20];
     Obj *obj;
-} DAT_0044de98;
+} g_scrContext;
 
 u32 FUN_002865f8(void)
 {
-    return DAT_0044de98.obj->unkC0;
+    return g_scrContext.obj->unkC0;
 }
 
 } /* extern "C" */

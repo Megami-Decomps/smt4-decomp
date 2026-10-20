@@ -2,7 +2,7 @@
 
 extern "C" {
 
-u32 FUN_003100f6(void);
+u32 bufAllocateStorage(void);
 
 typedef struct Object {
     /* 0x00 */ u8 unk00[0x0C];
@@ -15,7 +15,7 @@ typedef struct Object {
     /* 0x1E */ u8 flagC;
 } Object;
 
-/* Initialises the object with `arg` and `flagA`, clears the other fields and obtains a handle from FUN_003100f6. */
+/* Initialises the object with `arg` and `flagA`, clears the other fields and obtains a handle from bufAllocateStorage. */
 void FUN_002ecad4(Object *object, u32 arg, u8 flagA)
 {
     u32 handle;
@@ -24,7 +24,7 @@ void FUN_002ecad4(Object *object, u32 arg, u8 flagA)
     object->flagA = flagA;
     object->unk10 = 0;
     object->unk18 = 0;
-    handle = FUN_003100f6();
+    handle = bufAllocateStorage();
     object->handle = handle;
     object->flagB = 0;
     object->flagC = 0;

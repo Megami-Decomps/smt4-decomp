@@ -6,16 +6,16 @@ extern "C" {
 
 int FUN_0011a338(int, unsigned char [28]);
 int FUN_0011a6dc(int);
-int FUN_002e75fa(unsigned int);
-int FUN_002e9afe(int, unsigned int);
+int sharedRefAddRef(unsigned int);
+int vectorCopyHeader(int, unsigned int);
 int FUN_002e9c64(unsigned char *, unsigned char *, int *, int);
-int FUN_002ea43c(int);
+int onlineJobSetStateDone(int);
 int FUN_002ec8f8(void);
-int FUN_002f7cb0(int);
+int onlineJobSetStateWaiting(int);
 int FUN_002f8728(unsigned char [28]);
 int FUN_002fd108(int, unsigned char *, unsigned int, unsigned int);
 int FUN_002fd180(unsigned char [28]);
-int FUN_00306e70(int);
+int onlineJobSetStateRunning(int);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 12 slot(s), 48 byte(s) */
@@ -38,19 +38,19 @@ extern unsigned char LAB_0011a717; /* 0x11a717 */
 
 /* Supplied declaration required: FUN_0011a338. */
 /* Supplied declaration required: FUN_0011a6dc. */
-/* Supplied declaration required: FUN_002e75fa. */
-extern int FUN_002e760a(unsigned int);
+/* Supplied declaration required: sharedRefAddRef. */
+extern int operatorNew(unsigned int);
 extern unsigned int FUN_002e7908(unsigned char **, unsigned int *);
-/* Supplied declaration required: FUN_002e9afe. */
+/* Supplied declaration required: vectorCopyHeader. */
 /* Supplied declaration required: FUN_002e9c64. */
-/* Supplied declaration required: FUN_002ea43c. */
+/* Supplied declaration required: onlineJobSetStateDone. */
 /* Supplied declaration required: FUN_002ec8f8. */
-/* Supplied declaration required: FUN_002f7cb0. */
+/* Supplied declaration required: onlineJobSetStateWaiting. */
 /* Supplied declaration required: FUN_002f8728. */
 /* Supplied declaration required: FUN_002fd108. */
 /* Supplied declaration required: FUN_002fd180. */
 extern int FUN_002fde5c(void);
-/* Supplied declaration required: FUN_00306e70. */
+/* Supplied declaration required: onlineJobSetStateRunning. */
 
 
 void FUN_0011a388(int param_1)
@@ -84,7 +84,7 @@ void FUN_0011a388(int param_1)
     if ((int *)*piVar5 != (int *)0x0) {
       (**(romwright_code **)(*(int *)*piVar5 + 4))();
     }
-    temp_v0 = FUN_002e760a(0x18);
+    temp_v0 = operatorNew(0x18);
     temp_v1 = 0;
     if (temp_v0 != 0) {
       temp_v1 = FUN_002fde5c();
@@ -112,25 +112,25 @@ void FUN_0011a388(int param_1)
     temp_v5 = puVar3;
     FUN_002fd108(temp_v12,temp_v9,temp_v14,temp_v8);
     if (temp_v1 != 0) {
-      FUN_002e75fa(*(unsigned int *)(param_1 + 0x2b8));
+      sharedRefAddRef(*(unsigned int *)(param_1 + 0x2b8));
       *(unsigned char *)(param_1 + 0x3b) = 4;
-      FUN_002f7cb0(param_1);
+      onlineJobSetStateWaiting(param_1);
     }
     else {
       temp_v6 = 0x8001000d;
       temp_v2 = FUN_002e7908(&temp_v3,(unsigned int *)&temp_v6);
-      FUN_002e9afe(param_1 + 0x228,temp_v2);
+      vectorCopyHeader(param_1 + 0x228,temp_v2);
       *(unsigned char *)(param_1 + 0x3b) = 4;
-      FUN_00306e70(param_1);
+      onlineJobSetStateRunning(param_1);
     }
     FUN_002fd180(temp_v15);
   }
   else {
     temp_v6 = 0x80050003;
     temp_v2 = FUN_002e7908(&temp_v3,(unsigned int *)&temp_v6);
-    FUN_002e9afe(param_1 + 0x228,temp_v2);
+    vectorCopyHeader(param_1 + 0x228,temp_v2);
     *(unsigned char *)(param_1 + 0x3b) = 5;
-    FUN_002ea43c(param_1);
+    onlineJobSetStateDone(param_1);
   }
   return;
 }

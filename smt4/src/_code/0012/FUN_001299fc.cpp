@@ -32,7 +32,7 @@ extern unsigned int DAT_00431ca4; /* 0x431ca4 */
 extern unsigned int DAT_00431ca8; /* 0x431ca8 */
 extern unsigned int DAT_00431cac; /* 0x431cac */
 extern unsigned char DAT_00431cb0; /* 0x431cb0 */
-extern signed char DAT_00471a70; /* 0x471a70 */
+extern signed char g_nngxState; /* 0x471a70 */
 extern unsigned char DAT_00471a72; /* 0x471a72 */
 #ifndef ROMWRIGHT_STORAGE_s_______00471a73_15_1_DEFINED
 #define ROMWRIGHT_STORAGE_s_______00471a73_15_1_DEFINED
@@ -47,14 +47,14 @@ typedef char romwright_storage_s_______00471a73_15_1_u1_width_check[(sizeof(((un
 typedef char romwright_storage_s_______00471a73_15_1_s1_width_check[(sizeof(((union romwright_storage_s_______00471a73_15_1 *)0)->s1[0]) == 1) ? 1 : -1];
 #endif
 extern union romwright_storage_s_______00471a73_15_1 s_______00471a73; /* 0x471a73 */
-extern unsigned int DAT_00471a84; /* 0x471a84 */
+extern unsigned int g_nngxGpu; /* 0x471a84 */
 extern unsigned int *DAT_00471a8c; /* 0x471a8c */
-extern unsigned int DAT_004e6c5c; /* 0x4e6c5c */
+extern unsigned int g_nngxCriticalSection; /* 0x4e6c5c */
 
 /* Supplied declaration required: FUN_0013b218. */
 /* Supplied declaration required: asdModelForwardChecked. */
 /* Supplied declaration required: FUN_002c1398. */
-extern unsigned int FUN_002c30c4(void);
+extern unsigned int libc_strlen(void);
 extern unsigned int nn_gxlow_CTR_Gpu_AcquireRight(unsigned int, unsigned int, unsigned char);
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
@@ -69,21 +69,21 @@ void FUN_001299fc(void)
   unsigned int temp_v0;
   unsigned int temp_v1;
   
-  nn_os_CriticalSection_Enter((unsigned int)&DAT_004e6c5c);
-  if (DAT_00471a70 != '\0') {
-    nn_os_CriticalSection_Leave((unsigned int)&DAT_004e6c5c);
+  nn_os_CriticalSection_Enter((unsigned int)&g_nngxCriticalSection);
+  if (g_nngxState != '\0') {
+    nn_os_CriticalSection_Leave((unsigned int)&g_nngxCriticalSection);
     return;
   }
-  DAT_00471a70 = 1;
+  g_nngxState = 1;
   if (s_______00471a73.whole[0] == '\0') {
     FUN_002c1398();
     s_______00471a73.whole[0] = '\x01';
   }
   temp_v0 = (*(unsigned int *)&s_______00471a73.u1[1]);
-  temp_v1 = FUN_002c30c4();
+  temp_v1 = libc_strlen();
   asdModelForwardChecked(s_______00471a73.whole + 0xd,temp_v0,temp_v1,0);
-  DAT_00471a84 = (*(unsigned int *)0x00471a80);
-  nn_gxlow_CTR_Gpu_AcquireRight((unsigned int)&DAT_00471a84,0xffff8001,(unsigned char)DAT_00471a72);
+  g_nngxGpu = (*(unsigned int *)0x00471a80);
+  nn_gxlow_CTR_Gpu_AcquireRight((unsigned int)&g_nngxGpu,0xffff8001,(unsigned char)DAT_00471a72);
   DAT_00431c40 = 0;
   DAT_00431c48 = 0xffffffff;
   DAT_00431c44 = 0;
@@ -105,7 +105,7 @@ void FUN_001299fc(void)
   DAT_00431cb0 = 1;
   DAT_00471a8c = &DAT_00431c40;
   FUN_0013b218();
-  nn_os_CriticalSection_Leave((unsigned int)&DAT_004e6c5c);
+  nn_os_CriticalSection_Leave((unsigned int)&g_nngxCriticalSection);
   return;
 }
 

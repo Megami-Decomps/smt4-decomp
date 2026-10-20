@@ -11,7 +11,7 @@ typedef struct Global57f0c4 {
     /* 0x00 */ u8 unk00[4];
     /* 0x04 */ Record *record;
 } Global57f0c4;
-extern Global57f0c4 DAT_0057f0c4;
+extern Global57f0c4 g_buttonHelp;
 
 typedef struct Entry {
     /* 0x00 */ u8 unk00[0x0C];
@@ -28,7 +28,7 @@ void FUN_00168980(u32 id)
     Entry *current;
     Entry *other;
 
-    current = dataTableGetEntry0e(DAT_0057f0c4.record->id);
+    current = dataTableGetEntry0e(g_buttonHelp.record->id);
     other = dataTableGetEntry0e(id);
     if (current == NULL || other == NULL) {
         return;

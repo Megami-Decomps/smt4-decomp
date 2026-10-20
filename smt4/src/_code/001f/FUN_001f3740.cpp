@@ -5,7 +5,7 @@
 extern "C" {
 
 int CONCAT44(unsigned int, double);
-int FUN_00296d6c(int, int);
+int randBetween(int, int);
 int VectorSignedToFloat(...);
 
 #ifndef ROMWRIGHT_FLOAT_BITS_DEFINED
@@ -30,7 +30,7 @@ static float romwright_u2f(unsigned int value)
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
-/* Supplied declaration required: FUN_00296d6c. */
+/* Supplied declaration required: randBetween. */
 extern float *jobGetWork(void);
 
 
@@ -87,15 +87,15 @@ unsigned int FUN_001f3740(void)
   }
   temp_v17 = 0.5f;
   temp_v13 = 100.0f;
-  temp_v2 = FUN_00296d6c((int)(temp_v11 * 0.5f * 100.0f),(int)(temp_v11 * 100.0f));
+  temp_v2 = randBetween((int)(temp_v11 * 0.5f * 100.0f),(int)(temp_v11 * 100.0f));
   temp_v12 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(temp_v10 >> 0x16) & 3);
-  temp_v2 = FUN_00296d6c((int)(temp_v14 * temp_v17 * temp_v13),(int)(temp_v14 * temp_v13));
+  temp_v2 = randBetween((int)(temp_v14 * temp_v17 * temp_v13),(int)(temp_v14 * temp_v13));
   temp_v12 = temp_v12 * 0.01f;
   temp_v11 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(temp_v10 >> 0x16) & 3);
   temp_v16 = CONCAT44(temp_v15,temp_v11 * 0.01f);
-  temp_v3 = FUN_00296d6c(0,1);
+  temp_v3 = randBetween(0,1);
   temp_v5 = temp_v3 * 2 - 1;
-  temp_v3 = FUN_00296d6c(0,1);
+  temp_v3 = randBetween(0,1);
   temp_v11 = pfVar3[5];
   temp_v15 = 0;
   temp_v3 = temp_v3 * 2 - 1;
@@ -129,7 +129,7 @@ unsigned int FUN_001f3740(void)
     temp_v10 = (temp_v0 & 0xfffffff) | ((unsigned int)(temp_v11 == 0.0f) << 0x1e);
     if ((!romwright_subpiece_4_1_0(temp_v10 >> 0x1e,0)) &&
        ((temp_v10 = (temp_v0 & 0xfffffff) | ((unsigned int)(temp_v13 == 0.0f) << 0x1e), romwright_subpiece_4_1_0(temp_v10 >> 0x1e,0) ||
-        (temp_v4 = FUN_00296d6c(0,1), temp_v4 != 0)))) {
+        (temp_v4 = randBetween(0,1), temp_v4 != 0)))) {
       temp_v13 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(temp_v10 >> 0x16) & 3);
       temp_v11 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(temp_v10 >> 0x16) & 3);
       temp_v12 = temp_v12 * temp_v11;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e7658(...);
+int sharedRefHolderDestroy(...);
 int FUN_002eb164(...);
 int FUN_002ed258(...);
 int arrayElementAddress_002eee88(int, int);
@@ -13,7 +13,7 @@ int FUN_002efcfc(int *, unsigned int);
 int FUN_002efd12(int, int *);
 int FUN_002efdb4(unsigned int);
 int FUN_002f07c2(...);
-int FUN_002f12fc(int [3]);
+int vectorInitEmpty3(int [3]);
 int FUN_002f1306(int [3], int);
 int wordMoveOut_002f1324(unsigned char [4], int *, int);
 int vectorTeardown_002f135a(...);
@@ -31,7 +31,7 @@ typedef struct {
     unsigned int sp68; /* 0x68: local_68 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_002e7658. */
+/* Supplied declaration required: sharedRefHolderDestroy. */
 /* Supplied declaration required: FUN_002eb164. */
 /* Supplied declaration required: FUN_002ed258. */
 extern int FUN_002eea8a(unsigned char *, unsigned short *);
@@ -42,7 +42,7 @@ extern unsigned int FUN_002ef9e0(unsigned char *, unsigned short);
 /* Supplied declaration required: FUN_002efd12. */
 /* Supplied declaration required: FUN_002efdb4. */
 /* Supplied declaration required: FUN_002f07c2. */
-/* Supplied declaration required: FUN_002f12fc. */
+/* Supplied declaration required: vectorInitEmpty3. */
 /* Supplied declaration required: FUN_002f1306. */
 /* Supplied declaration required: wordMoveOut_002f1324. */
 extern int FUN_002f1334(unsigned char *, unsigned char *);
@@ -87,7 +87,7 @@ void FUN_0010883c(int param_1,int param_2)
   piVar3 = (int *)arrayElementAddress_002eee88(temp_v12,0);
   temp_v1 = *piVar3;
   FUN_002efd12(temp_v1,&temp_v11);
-  FUN_002f12fc(temp_v9);
+  vectorInitEmpty3(temp_v9);
   do {
     if (temp_v1 != 0) {
       FUN_002eb164(temp_v14,temp_v1);
@@ -126,7 +126,7 @@ void FUN_0010883c(int param_1,int param_2)
     FUN_002efcf2(&temp_v15,param_2);
     FUN_002f07c2(temp_v18,&temp_v15,temp_v3,0);
   }
-  FUN_002e7658(temp_v5);
+  sharedRefHolderDestroy(temp_v5);
   vectorTeardown_002f135a(temp_v9);
   return;
 }

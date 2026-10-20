@@ -2,13 +2,13 @@
 
 extern "C" {
 
-extern Sub68Owner *DAT_00587f28;
+extern Sub68Owner *g_naviMain;
 extern s32 stateSetterFlagsClear(u8 *sub);
 
 void sub68OwnerCall1(void)
 {
-    if (DAT_00587f28 != NULL) {
-        stateSetterFlagsClear(DAT_00587f28->sub);
+    if (g_naviMain != NULL) {
+        stateSetterFlagsClear(g_naviMain->sub);
     }
 }
 

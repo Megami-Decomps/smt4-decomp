@@ -7,14 +7,14 @@ extern "C" {
 int FUN_0015a964(int);
 int FUN_0015ab30(unsigned int, unsigned char [4], unsigned char [4], int *);
 int FUN_0016e758(void);
-int FUN_00170198(void);
+int nn_gxlow_CTR_SaveVramSysArea(void);
 int FUN_00170e58(void);
 int FUN_00170ebc(int);
 int FUN_001716c0(void);
 int FUN_00189a38(...);
-int FUN_0018b868(void);
-int FUN_0018b964(void);
-int FUN_001bcd48(int, int);
+int nn_applet_CTR_detail_OpenSession(void);
+int nn_applet_CTR_detail_CloseSession(void);
+int svcSleepThread(int, int);
 
 /* stack frame of param_3: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -29,17 +29,17 @@ extern unsigned char DAT_005891b4; /* 0x5891b4 */
 extern int FUN_0015aadc(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0015ab30. */
 /* Supplied declaration required: FUN_0016e758. */
-/* Supplied declaration required: FUN_00170198. */
+/* Supplied declaration required: nn_gxlow_CTR_SaveVramSysArea. */
 extern int FUN_001703e8(void);
 /* Supplied declaration required: FUN_00170e58. */
 /* Supplied declaration required: FUN_00170ebc. */
 /* Supplied declaration required: FUN_001716c0. */
 /* Supplied declaration required: FUN_00189a38. */
-/* Supplied declaration required: FUN_0018b868. */
-/* Supplied declaration required: FUN_0018b964. */
+/* Supplied declaration required: nn_applet_CTR_detail_OpenSession. */
+/* Supplied declaration required: nn_applet_CTR_detail_CloseSession. */
 extern int FUN_0018ba70(unsigned int, unsigned char **);
-/* Supplied declaration required: FUN_001bcd48. */
-extern int FUN_001c6e20(void);
+/* Supplied declaration required: svcSleepThread. */
+extern int nn_snd_CTR_Dspsnd_IsInitialized(void);
 
 
 int FUN_00147384(unsigned int param_1,unsigned int param_2,unsigned int param_3)
@@ -53,43 +53,43 @@ int FUN_00147384(unsigned int param_1,unsigned int param_2,unsigned int param_3)
   unsigned char temp_v4 [4];
   unsigned char temp_v5 [4];
   
-  FUN_0018b868();
+  nn_applet_CTR_detail_OpenSession();
   temp_v1 = temp_v5;
   temp_v0 = -1;
   FUN_0015ab30(0xffffffff,temp_v3,temp_v4,&temp_v2);
   if (temp_v0 < 0) {
     FUN_00189a38();
   }
-  FUN_0018b964();
+  nn_applet_CTR_detail_CloseSession();
   temp_v0 = FUN_001703e8();
   if (temp_v0 != 0) {
     while( 1 ) {
-      FUN_0018b868();
+      nn_applet_CTR_detail_OpenSession();
       temp_v0 = FUN_0018ba70(temp_v2,&temp_v1);
       if (temp_v0 < 0) {
         FUN_00189a38(temp_v0,0x1473fc);
       }
-      FUN_0018b964();
+      nn_applet_CTR_detail_CloseSession();
       if (((unsigned int)temp_v1 & 0xff) != 0) break;
-      FUN_001bcd48(10000000,0);
+      svcSleepThread(10000000,0);
     }
     DAT_005891b1 = 1;
-    FUN_00170198();
+    nn_gxlow_CTR_SaveVramSysArea();
     FUN_0015a964(temp_v2);
   }
-  temp_v0 = FUN_001c6e20();
+  temp_v0 = nn_snd_CTR_Dspsnd_IsInitialized();
   if (temp_v0 != 0) {
     FUN_0016e758();
     DAT_005891b4 = 1;
   }
   FUN_00170ebc(0);
   FUN_001716c0();
-  FUN_0018b868();
+  nn_applet_CTR_detail_OpenSession();
   temp_v0 = FUN_0015aadc(param_1,param_2,param_3);
   if (temp_v0 < 0) {
     FUN_00189a38(temp_v0,0x147484);
   }
-  FUN_0018b964();
+  nn_applet_CTR_detail_CloseSession();
   FUN_00170e58();
   return temp_v0;
 }

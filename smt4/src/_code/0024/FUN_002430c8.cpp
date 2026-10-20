@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00247200(int);
+int nodeListOwnerFree(int);
 int FUN_00247240(unsigned int *);
 int FUN_002f82ac(unsigned int *);
 int FUN_0030ed8c(int, unsigned int);
@@ -13,7 +13,7 @@ int FUN_003241c4(unsigned int *, int);
 extern int DAT_0044eabc; /* 0x44eabc */
 extern unsigned int *DAT_0044eac0; /* 0x44eac0 */
 
-/* Supplied declaration required: FUN_00247200. */
+/* Supplied declaration required: nodeListOwnerFree. */
 /* Supplied declaration required: FUN_00247240. */
 /* Supplied declaration required: FUN_002f82ac. */
 /* Supplied declaration required: FUN_0030ed8c. */
@@ -40,7 +40,7 @@ void FUN_002430c8(unsigned int param_1,unsigned int param_2,int param_3)
     if (*(int *)(param_3 + 0x100) == 1) {
       FUN_00247240(DAT_0044eac0);
       DAT_0044eac0 = (unsigned int *)0x0;
-      FUN_00247200(DAT_0044eabc);
+      nodeListOwnerFree(DAT_0044eabc);
       DAT_0044eabc = 0;
     }
     return;

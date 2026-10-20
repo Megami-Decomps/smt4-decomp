@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0014e188(int, int, int, int, int);
-int FUN_00184c00(...);
+int uiSpriteSetImageKeyframe(...);
 int FUN_003b7b4c(int);
 int FUN_003d2150(int);
 
@@ -30,10 +30,10 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-extern int DAT_0057f65c; /* 0x57f65c */
+extern int g_frameTex; /* 0x57f65c */
 
 /* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: FUN_00184c00. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_003b7b4c. */
 /* Supplied declaration required: FUN_003d2150. */
 
@@ -46,7 +46,7 @@ void FUN_002c2160(fn_002c2160_arg0 *param_1)
   unsigned int temp_v1;
   unsigned int temp_v2;
   
-  temp_v0 = DAT_0057f65c;
+  temp_v0 = g_frameTex;
   temp_v1 = 0x3e800000;
   temp_v2 = 0x41a00000;
   if (param_1 != (fn_002c2160_arg0 *)0x0) {
@@ -58,9 +58,9 @@ void FUN_002c2160(fn_002c2160_arg0 *param_1)
       *(unsigned int *)(temp_v0 + 0x28) = temp_v1;
       *(unsigned int *)(temp_v0 + 0x2c) = temp_v1;
       *(unsigned int *)(temp_v0 + 0x30) = temp_v2;
-      *(unsigned char *)(DAT_0057f65c + 0x25) = 1;
+      *(unsigned char *)(g_frameTex + 0x25) = 1;
       FUN_0014e188(temp_v0 + 0xd74,0x14,2000,temp_v0 + 0x34,0xb);
-      FUN_00184c00(temp_v0 + 0xd74,0);
+      uiSpriteSetImageKeyframe(temp_v0 + 0xd74,0);
       *(unsigned int *)(temp_v0 + 0x13d8) = 10;
       *(unsigned int *)(temp_v0 + 0x13dc) = 0x28;
       *(unsigned int *)(temp_v0 + 0x13e0) = 5;
@@ -78,9 +78,9 @@ void FUN_002c2160(fn_002c2160_arg0 *param_1)
       *(unsigned int *)(temp_v0 + 0x1410) = 0x14;
       FUN_003b7b4c(temp_v0);
       FUN_0014e188(temp_v0 + 0xe8c,0x14,2000,temp_v0 + 0x34,0xb);
-      FUN_00184c00(temp_v0 + 0xe8c,2,0);
+      uiSpriteSetImageKeyframe(temp_v0 + 0xe8c,2,0);
       FUN_0014e188(temp_v0 + 0xf18,0x14,2000,temp_v0 + 0x34,0xb);
-      FUN_00184c00(temp_v0 + 0xf18,1,0);
+      uiSpriteSetImageKeyframe(temp_v0 + 0xf18,1,0);
       return;
     }
     if (param_1 == (fn_002c2160_arg0 *)0x2) {
@@ -88,14 +88,14 @@ void FUN_002c2160(fn_002c2160_arg0 *param_1)
       *(unsigned int *)(temp_v0 + 0x20) = 0;
       *(unsigned char *)(temp_v0 + 0x24) = 1;
       *(unsigned int *)(temp_v0 + 0x30) = 0x40e00000;
-      FUN_00184c00(temp_v0 + 0xf18,0,1);
-      FUN_00184c00(temp_v0 + 0xe8c,0,1);
-      FUN_00184c00(temp_v0 + 0xd74,0,1);
+      uiSpriteSetImageKeyframe(temp_v0 + 0xf18,0,1);
+      uiSpriteSetImageKeyframe(temp_v0 + 0xe8c,0,1);
+      uiSpriteSetImageKeyframe(temp_v0 + 0xd74,0,1);
       return;
     }
   }
   else {
-    *(unsigned char *)(DAT_0057f65c + 0x1c) = 0;
+    *(unsigned char *)(g_frameTex + 0x1c) = 0;
     *(unsigned int *)(temp_v0 + 0x20) = 0;
     *(unsigned char *)(temp_v0 + 0x24) = 0;
     *(unsigned int *)(temp_v0 + 0x28) = 0x3e800000;

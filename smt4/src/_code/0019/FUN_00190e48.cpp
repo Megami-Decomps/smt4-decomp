@@ -41,7 +41,7 @@ typedef struct {
 } void_stack;
 
 extern unsigned char LAB_00141adc; /* 0x141adc */
-extern unsigned char DAT_0043da28; /* 0x43da28 */
+extern unsigned char g_buttonHelp; /* 0x43da28 */
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
@@ -52,14 +52,14 @@ extern int g_titleScene; /* 0x44ea00 */
 #endif
 /* Supplied declaration required: FUN_0029a268. */
 /* Supplied declaration required: FUN_002b1fc4. */
-extern int FUN_002bed98(int);
-extern int FUN_002beda4(int);
+extern int vec2GetYInt(int);
+extern int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002c5d5c. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-extern unsigned int FUN_002ebf80(unsigned short);
+extern unsigned int dataTable0eSub1GetId(unsigned short);
 
 
 void FUN_00190e48(void)
@@ -115,7 +115,7 @@ void FUN_00190e48(void)
   float temp_v39;
   float temp_v40;
   
-  temp_v5 = (*(int *)((unsigned char *)&DAT_0043da28 + 0x4));
+  temp_v5 = (*(int *)((unsigned char *)&g_buttonHelp + 0x4));
   temp_v19 = 0;
   temp_v20 = 0;
   FUN_002c5d5c(temp_v21,&LAB_00141adc,0x10,6);
@@ -128,9 +128,9 @@ void FUN_00190e48(void)
     if ((*(char *)(temp_v9 + 0x494) != '\0') &&
        (temp_v8 = temp_v5 + temp_v7 * 0x8c, *(char *)(temp_v8 + 0xb9) != '\0')) {
       acStack_130[temp_v7] = '\x01';
-      temp_v3 = FUN_002beda4(temp_v8 + 0x34);
+      temp_v3 = vec2GetXInt(temp_v8 + 0x34);
       aiStack_c8[temp_v7] = temp_v3 + *(short *)(temp_v8 + 0x4c);
-      temp_v3 = FUN_002bed98(temp_v8 + 0x34);
+      temp_v3 = vec2GetYInt(temp_v8 + 0x34);
       aiStack_b0[temp_v7] = temp_v3 + *(short *)(temp_v8 + 0x4e);
       temp_v11 = VectorFloatToUnsigned(*(float *)(temp_v8 + 0x54) * temp_v16,3);
       temp_v6 = (temp_v11 & 0xff) - 0x100;
@@ -422,7 +422,7 @@ void FUN_00190e48(void)
           }
         }
         if (temp_v0 != '\0') {
-          temp_v4 = FUN_002ebf80(*(unsigned short *)(temp_v5 + temp_v7 * 4 + 0x496) & 0xff);
+          temp_v4 = dataTable0eSub1GetId(*(unsigned short *)(temp_v5 + temp_v7 * 4 + 0x496) & 0xff);
           FUN_002bf288(2,0x12,temp_v4,temp_v9,temp_v10,0xd);
         }
       }

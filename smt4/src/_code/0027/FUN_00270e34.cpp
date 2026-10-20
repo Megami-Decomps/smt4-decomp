@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002897f0(unsigned int, int);
 int FUN_00289d74(int, unsigned int, int);
 int FUN_00289de4(int, unsigned int, int);
-int FUN_00296f4c(unsigned int, unsigned int);
+int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int FUN_00297060(int, int);
 int FUN_002be624(...);
 int FUN_002bff50(void);
@@ -21,8 +21,8 @@ extern int g_mapMain; /* 0x447e28 */
 /* Supplied declaration required: FUN_00289d74. */
 /* Supplied declaration required: FUN_00289de4. */
 extern int FUN_00289e54(int, unsigned int, unsigned int);
-extern unsigned int FUN_00290d74(unsigned int, int);
-/* Supplied declaration required: FUN_00296f4c. */
+extern unsigned int tableGroupFindEntryIndex(unsigned int, int);
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297060. */
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002bff50. */
@@ -78,8 +78,8 @@ LAB_00270f10:
   temp_v3 = *(unsigned int *)(temp_v0 + 100);
   FUN_002897f0(temp_v3,temp_v0 + 0x68);
   *(unsigned int *)(temp_v0 + 0x98) = temp_v3;
-  temp_v3 = FUN_00290d74(*(unsigned int *)(temp_v0 + 0x8c),temp_v0 + 0x68);
-  FUN_00296f4c(*(unsigned int *)(temp_v0 + 0x94),temp_v3);
+  temp_v3 = tableGroupFindEntryIndex(*(unsigned int *)(temp_v0 + 0x8c),temp_v0 + 0x68);
+  scrScriptProcessStartEntry(*(unsigned int *)(temp_v0 + 0x94),temp_v3);
   return 1;
 }
 

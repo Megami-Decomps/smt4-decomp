@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00289c98(int);
 int FUN_00290d5c(int, unsigned int, int, unsigned int, unsigned int, unsigned int, unsigned int);
-int FUN_0029c3b0(int);
+int soundChannelStopAll(int);
 int FUN_0029c3c0(int, int, int);
 int FUN_002a87e8(void);
 
@@ -19,7 +19,7 @@ typedef struct {
 extern int FUN_002896bc(void);
 /* Supplied declaration required: FUN_00289c98. */
 /* Supplied declaration required: FUN_00290d5c. */
-/* Supplied declaration required: FUN_0029c3b0. */
+/* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: FUN_0029c3c0. */
 /* Supplied declaration required: FUN_002a87e8. */
 
@@ -44,7 +44,7 @@ void FUN_00233890(unsigned int *param_1,unsigned int param_2,unsigned int param_
     }
     return;
   }
-  FUN_0029c3b0(0xf);
+  soundChannelStopAll(0xf);
   FUN_0029c3c0(0,10,0xff);
   FUN_0029c3c0(1,10,0xff);
   param_1[2] = 1;

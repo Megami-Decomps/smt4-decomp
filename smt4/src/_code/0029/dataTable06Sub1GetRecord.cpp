@@ -6,7 +6,7 @@ extern "C" {
 extern u32 dataTableGetCount(u32 table);
 extern u32 dataTableGetEntries(void);
 extern u32 dataTableGet(s32 group, s32 id);
-extern void FUN_002b46f8(u16 *request, u32 owner, u32 table, s32 count, void *callback);
+extern void libc_bsearch(u16 *request, u32 owner, u32 table, s32 count, void *callback);
 
 void dataTable06Sub1GetRecord(u16 id)
 {
@@ -16,7 +16,7 @@ void dataTable06Sub1GetRecord(u16 id)
 
     table = dataTableGetCount(table);
     request[0] = id;
-    FUN_002b46f8(request, owner, table, 4, (void *)0x002DCA98);
+    libc_bsearch(request, owner, table, 4, (void *)0x002DCA98);
 }
 
 }

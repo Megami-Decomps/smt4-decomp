@@ -5,21 +5,21 @@
 extern "C" {
 
 int FUN_002b8454(...);
-int FUN_002b8838(int);
+int buttonHelpSetPreset(int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } void_stack;
 
-extern int DAT_0043dd50; /* 0x43dd50 */
+extern int g_uiQuest; /* 0x43dd50 */
 
 extern int FUN_0029022c(void);
 extern unsigned int FUN_002903f0(void);
 extern int FUN_0029efa8(int);
 extern int FUN_0029efc0(int);
 /* Supplied declaration required: FUN_002b8454. */
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 
 
 void FUN_002905d0(void)
@@ -32,42 +32,42 @@ void FUN_002905d0(void)
   unsigned int temp_v3;
   int temp_v4;
   
-  temp_v4 = DAT_0043dd50;
-  if (*(char *)(DAT_0043dd50 + 0x5c4) != '\0') {
-    if (*(int *)(DAT_0043dd50 + 0x5d0) == 1) {
-      FUN_002b8838(0x6c);
+  temp_v4 = g_uiQuest;
+  if (*(char *)(g_uiQuest + 0x5c4) != '\0') {
+    if (*(int *)(g_uiQuest + 0x5d0) == 1) {
+      buttonHelpSetPreset(0x6c);
     }
     if (*(int *)(temp_v4 + 0x5d0) == 2) {
       if (*(int *)(temp_v4 + 0x5c8) == 0) {
-        FUN_002b8838(0x6d);
+        buttonHelpSetPreset(0x6d);
       }
       if (*(int *)(temp_v4 + 0x5c8) == 1) {
-        FUN_002b8838(0x6e);
+        buttonHelpSetPreset(0x6e);
         return;
       }
     }
     return;
   }
-  if (*(int *)(DAT_0043dd50 + 0x5d0) == 1) {
-    FUN_002b8838(0x6f);
+  if (*(int *)(g_uiQuest + 0x5d0) == 1) {
+    buttonHelpSetPreset(0x6f);
   }
   if (*(int *)(temp_v4 + 0x5d0) == 2) {
     if (*(int *)(temp_v4 + 0x5c8) == 0) {
-      FUN_002b8838(0x70);
+      buttonHelpSetPreset(0x70);
     }
     if (*(int *)(temp_v4 + 0x5c8) == 1) {
-      FUN_002b8838(0x71);
+      buttonHelpSetPreset(0x71);
     }
   }
   if (*(int *)(temp_v4 + 0x5d0) == 3) {
     if (*(int *)(temp_v4 + 0x5c8) == 0) {
-      FUN_002b8838(0x72);
+      buttonHelpSetPreset(0x72);
     }
     if (*(int *)(temp_v4 + 0x5c8) == 1) {
-      FUN_002b8838(0x73);
+      buttonHelpSetPreset(0x73);
     }
     if (*(int *)(temp_v4 + 0x5c8) == 2) {
-      FUN_002b8838(0x74);
+      buttonHelpSetPreset(0x74);
     }
   }
   if (*(char *)(temp_v4 + 0x5f1) != '\0') {

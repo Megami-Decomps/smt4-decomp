@@ -10,13 +10,13 @@ int FUN_004f8f08(unsigned int);
 int FUN_004fb670(int, int);
 int FUN_004feecc(int, int);
 
-extern int DAT_00571508; /* 0x571508 */
+extern int g_btlCamera; /* 0x571508 */
 extern unsigned int DAT_00573808; /* 0x573808 */
 extern unsigned int DAT_005738b8; /* 0x5738b8 */
 extern unsigned int DAT_005738bc; /* 0x5738bc */
 extern unsigned int DAT_005738c0; /* 0x5738c0 */
 extern unsigned int DAT_005738c4; /* 0x5738c4 */
-extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
+extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
 extern int FUN_00224880(unsigned int);
 /* Supplied declaration required: FUN_003756c8. */
@@ -38,8 +38,8 @@ unsigned int FUN_004d7ca8(unsigned int *param_1,int param_2)
   puVar3 = (unsigned int *)(param_2 + 0x45a0);
   if (((*puVar3 & DAT_005738b8) != 0 || (*(unsigned int *)(param_2 + 0x45a4) & DAT_005738bc) != 0) &&
      ((param_1[1] & 1) == 0)) {
-    if ((-1 < *(int *)(DAT_00571508 + 0x7cc)) &&
-       (temp_v0 = FUN_004f2708(DAT_00571508,param_2,1), temp_v0 != 0)) {
+    if ((-1 < *(int *)(g_btlCamera + 0x7cc)) &&
+       (temp_v0 = FUN_004f2708(g_btlCamera,param_2,1), temp_v0 != 0)) {
       FUN_004fb670(0,0);
     }
     FUN_004feecc(1,0);
@@ -50,7 +50,7 @@ unsigned int FUN_004d7ca8(unsigned int *param_1,int param_2)
     if (((DAT_005738b8 & *puVar3) != 0 || (*(unsigned int *)(param_2 + 0x45a4) & DAT_005738bc) != 0) &&
        (FUN_003756c8(0),
        (*puVar3 & DAT_005738c0) != 0 || (*(unsigned int *)(param_2 + 0x45a4) & DAT_005738c4) != 0)) {
-      FUN_004aa8b0(DAT_0057a9c8,0);
+      FUN_004aa8b0(g_btlUiBlock,0);
       temp_v1 = ~DAT_005738c4;
       *puVar3 = *puVar3 & ~DAT_005738c0;
       *(unsigned int *)(param_2 + 0x45a4) = *(unsigned int *)(param_2 + 0x45a4) & temp_v1;

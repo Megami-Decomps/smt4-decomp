@@ -6,11 +6,11 @@ extern "C" {
 
 int FUN_001006ec(int, unsigned int, int);
 int resourceListDestroy(void);
-int FUN_002e3328(int);
+int asdOperatorDelete(int);
 
 /* Supplied declaration required: FUN_001006ec. */
 /* Supplied declaration required: resourceListDestroy. */
-/* Supplied declaration required: FUN_002e3328. */
+/* Supplied declaration required: asdOperatorDelete. */
 
 
 unsigned int * FUN_0041c63c(unsigned int *param_1)
@@ -31,7 +31,7 @@ unsigned int * FUN_0041c63c(unsigned int *param_1)
         resourceListDestroy();
         *(unsigned int *)(temp_v1 + 0xc) = 0;
       }
-      FUN_002e3328(temp_v1);
+      asdOperatorDelete(temp_v1);
     }
   }
   temp_v1 = param_1[3];

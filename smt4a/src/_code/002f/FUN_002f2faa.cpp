@@ -5,16 +5,16 @@
 extern "C" {
 
 int FUN_00128e56(int, unsigned int *, unsigned char [12]);
-int FUN_002e75fa(unsigned int);
-int FUN_002e9538(int, unsigned int);
-int FUN_002eb588(unsigned char [12]);
+int sharedRefAddRef(unsigned int);
+int onlineSockAddrCopy(int, unsigned int);
+int onlineTimeGetNow(unsigned char [12]);
 int FUN_002f8264(unsigned char [4]);
 
 /* Supplied declaration required: FUN_00128e56. */
-/* Supplied declaration required: FUN_002e75fa. */
-/* Supplied declaration required: FUN_002e9538. */
-extern int FUN_002e995c(unsigned char *);
-/* Supplied declaration required: FUN_002eb588. */
+/* Supplied declaration required: sharedRefAddRef. */
+/* Supplied declaration required: onlineSockAddrCopy. */
+extern int onlineSockAddrConstruct(unsigned char *);
+/* Supplied declaration required: onlineTimeGetNow. */
 /* Supplied declaration required: FUN_002f8264. */
 
 
@@ -27,11 +27,11 @@ void FUN_002f2faa(int param_1,unsigned int param_2,unsigned int param_3)
   unsigned char temp_v2 [36];
   unsigned char temp_v3 [12];
   
-  FUN_002eb588(temp_v3);
-  temp_v0 = FUN_002e995c(temp_v2);
+  onlineTimeGetNow(temp_v3);
+  temp_v0 = onlineSockAddrConstruct(temp_v2);
   *(unsigned int *)(temp_v0 - 4) = param_2;
-  FUN_002e75fa(param_2);
-  FUN_002e9538(temp_v0,param_3);
+  sharedRefAddRef(param_2);
+  onlineSockAddrCopy(temp_v0,param_3);
   FUN_00128e56(param_1 + 8,(unsigned int *)(temp_v0 - 4),temp_v3);
   FUN_002f8264(temp_v1);
   return;

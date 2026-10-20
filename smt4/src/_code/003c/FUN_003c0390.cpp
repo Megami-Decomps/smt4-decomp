@@ -13,7 +13,7 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: FUN_0022a4ac. */
-extern unsigned int FUN_002499b4(void);
+extern unsigned int btlMainFindActiveEntry(void);
 extern int btlGetMainState(void);
 
 
@@ -31,7 +31,7 @@ void FUN_003c0390(unsigned int param_1,int param_2,unsigned int param_3)
     temp_v3 = param_2 < 0;
     temp_v2 = *(unsigned int *)(temp_v0 + 0x2240);
     if (!temp_v3) {
-      temp_v1 = FUN_002499b4();
+      temp_v1 = btlMainFindActiveEntry();
     }
     else {
       param_2 = -1;

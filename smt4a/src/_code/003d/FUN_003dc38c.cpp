@@ -8,9 +8,9 @@ int FUN_001ad9b4(void);
 int FUN_002ae320(void);
 int FUN_003defe0(void);
 
-extern int DAT_0057f28c; /* 0x57f28c */
+extern int g_uiQuest; /* 0x57f28c */
 
-extern int FUN_0019f18c(int);
+extern int idIsAtLeast350(int);
 /* Supplied declaration required: FUN_001ad9b4. */
 /* Supplied declaration required: FUN_002ae320. */
 extern int FUN_002f7730(int, int);
@@ -29,11 +29,11 @@ void FUN_003dc38c(int param_1)
   int temp_v3;
   int *piVar5;
   
-  temp_v1 = DAT_0057f28c;
+  temp_v1 = g_uiQuest;
   if (param_1 == 0) {
     return;
   }
-  *(unsigned char *)(DAT_0057f28c + 0x944) = 0;
+  *(unsigned char *)(g_uiQuest + 0x944) = 0;
   *(unsigned int *)(temp_v1 + 0x918) = 1;
   piVar5 = (int *)(temp_v1 + 0x918);
   if (*(char *)(temp_v1 + 0x90c) != '\0') {
@@ -49,7 +49,7 @@ void FUN_003dc38c(int param_1)
     if (*(char *)(temp_v1 + 0x90c) != '\0') goto LAB_003dc4c8;
   }
   temp_v0 = 0;
-  temp_v2 = FUN_0019f18c(param_1);
+  temp_v2 = idIsAtLeast350(param_1);
   if ((temp_v2 != 0) && (temp_v2 = param_1, FUN_001ad9b4(), *(char *)(temp_v2 + 6) == '\0')) {
     temp_v0 = 1;
   }

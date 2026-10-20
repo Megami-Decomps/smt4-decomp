@@ -6,14 +6,14 @@ extern "C" {
 
 int FUN_0011c9e4(unsigned char [8]);
 int FUN_002e7908(int *, unsigned int [2]);
-int FUN_002e9af4(void);
-int FUN_002e9afe(unsigned int *, int *);
+int onlineInstanceTableGetCurrent(void);
+int vectorCopyHeader(unsigned int *, int *);
 int FUN_002e9c0c(int);
-int FUN_002e9ec8(int, unsigned int);
+int onlineInstanceTableFind(int, unsigned int);
 int FUN_002ea41e(int *, int);
-int FUN_002f4e86(unsigned int *);
+int refIsNonNegative(unsigned int *);
 int FUN_002f7c94(unsigned int, unsigned int, unsigned int);
-int FUN_002f7cb0(int);
+int onlineJobSetStateWaiting(int);
 int FUN_002f7cba(int, int, unsigned int);
 int FUN_0030c96e(int, unsigned int *);
 
@@ -30,17 +30,17 @@ extern unsigned char LAB_0012b62c; /* 0x12b62c */
 extern unsigned char LAB_0012b635; /* 0x12b635 */
 
 /* Supplied declaration required: FUN_0011c9e4. */
-extern int FUN_002e760a(unsigned int);
+extern int operatorNew(unsigned int);
 /* Supplied declaration required: FUN_002e7908. */
-/* Supplied declaration required: FUN_002e9af4. */
-/* Supplied declaration required: FUN_002e9afe. */
+/* Supplied declaration required: onlineInstanceTableGetCurrent. */
+/* Supplied declaration required: vectorCopyHeader. */
 /* Supplied declaration required: FUN_002e9c0c. */
-/* Supplied declaration required: FUN_002e9ec8. */
+/* Supplied declaration required: onlineInstanceTableFind. */
 extern unsigned int FUN_002ea3c0(int, unsigned char *, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea41e. */
-/* Supplied declaration required: FUN_002f4e86. */
+/* Supplied declaration required: refIsNonNegative. */
 /* Supplied declaration required: FUN_002f7c94. */
-/* Supplied declaration required: FUN_002f7cb0. */
+/* Supplied declaration required: onlineJobSetStateWaiting. */
 /* Supplied declaration required: FUN_002f7cba. */
 /* Supplied declaration required: FUN_0030c96e. */
 
@@ -62,28 +62,28 @@ void FUN_0012b540(int param_1)
   unsigned int uStack_20;
   unsigned int temp_v8 [2];
   
-  temp_v0 = FUN_002e9af4();
-  FUN_002e9ec8(temp_v0,*(unsigned int *)(param_1 + 0x68));
+  temp_v0 = onlineInstanceTableGetCurrent();
+  onlineInstanceTableFind(temp_v0,*(unsigned int *)(param_1 + 0x68));
   if (temp_v0 != 0) {
     puVar4 = (unsigned int *)(param_1 + 0x1d0);
     temp_v0 = param_1 + 0x90;
     if (*(char *)(param_1 + 0xa0) != '\x02') {
       FUN_002ea41e(&temp_v7,temp_v0);
-      FUN_002e9afe(puVar4,&temp_v7);
+      vectorCopyHeader(puVar4,&temp_v7);
     }
     if (-1 < *(int *)(param_1 + 0x168) << 0x19) {
       FUN_002e9c0c(temp_v0);
       FUN_0011c9e4(temp_v4);
       temp_v5 = *(unsigned int *)(param_1 + 0x198);
-      temp_v6 = FUN_002f4e86(puVar4);
+      temp_v6 = refIsNonNegative(puVar4);
       temp_v1 = (**(romwright_code **)(**(int **)(param_1 + 0x6c) + 0x24))
                         (*(int **)(param_1 + 0x6c),temp_v0,temp_v4);
       if (temp_v1 != 0) {
         temp_v3 = *(unsigned int *)(param_1 + 0xd4);
-        temp_v2 = FUN_002e9af4();
+        temp_v2 = onlineInstanceTableGetCurrent();
         FUN_002f7c94(temp_v2,*(unsigned int *)(param_1 + 0x68),temp_v3);
-        FUN_002f7cb0(param_1);
-        temp_v1 = FUN_002e760a(0x10);
+        onlineJobSetStateWaiting(param_1);
+        temp_v1 = operatorNew(0x10);
         temp_v2 = 0;
         if (temp_v1 != 0) {
           temp_v2 = FUN_002ea3c0(temp_v1,&LAB_0012b635,0,&LAB_0012b62c);
@@ -91,7 +91,7 @@ void FUN_0012b540(int param_1)
         FUN_002f7cba(param_1,temp_v0,temp_v2);
         return;
       }
-      temp_v0 = FUN_002f4e86(puVar4);
+      temp_v0 = refIsNonNegative(puVar4);
       if (temp_v0 != 0) {
         temp_v7 = *(unsigned int *)(param_1 + 0x1d0);
         uStack_24 = *(unsigned int *)(param_1 + 0x1d4);

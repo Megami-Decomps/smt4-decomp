@@ -6,9 +6,9 @@ extern "C" {
 
 int FUN_00100388(...);
 int wstrlen(...);
-int FUN_002e342c(...);
+int libc_strcpy(...);
 int sysMemClear(...);
-int FUN_0030ea58(...);
+int libc_strcmp(...);
 int FUN_003478dc(...);
 
 extern unsigned char DAT_00528544; /* 0x528544 */
@@ -20,12 +20,12 @@ extern unsigned int DAT_00573800; /* 0x573800 */
 extern unsigned int DAT_00573804; /* 0x573804 */
 
 /* Supplied declaration required: FUN_00100388. */
-extern int FUN_0019a37c(int, unsigned int, unsigned int);
+extern int libc_strncmp(int, unsigned int, unsigned int);
 /* Supplied declaration required: wstrlen. */
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 extern unsigned int FUN_002e4c2c(int);
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_0030ea58. */
+/* Supplied declaration required: libc_strcmp. */
 /* Supplied declaration required: FUN_003478dc. */
 
 
@@ -48,29 +48,29 @@ void FUN_004f9e0c(int param_1)
     do {
       temp_v4 = *(int *)(param_1 + 0x1f54) + temp_v3 * 0x16 + 0x108;
       temp_v1 = wstrlen(temp_v4);
-      if ((temp_v1 != 0) && (temp_v1 = temp_v4, FUN_0030ea58(temp_v4,&DAT_00528544), temp_v1 != 0)) {
+      if ((temp_v1 != 0) && (temp_v1 = temp_v4, libc_strcmp(temp_v4,&DAT_00528544), temp_v1 != 0)) {
         pcVar3 = "NOT_EFT";
-        FUN_0030ea58("NOT_EFT",temp_v4);
+        libc_strcmp("NOT_EFT",temp_v4);
         if (pcVar3 != (char *)0x0) {
           if (temp_v4 != 0) {
             temp_v2 = wstrlen(g_btlEffect);
-            temp_v1 = FUN_0019a37c(temp_v4,g_btlEffect,temp_v2);
+            temp_v1 = libc_strncmp(temp_v4,g_btlEffect,temp_v2);
             if (temp_v1 == 0) goto LAB_004f9ff8;
           }
           if (((temp_v4 == 0) ||
-              ((temp_v1 = temp_v4, FUN_0030ea58(temp_v4,DAT_005737f4), temp_v1 != 0 &&
-               (temp_v1 = temp_v4, FUN_0030ea58(temp_v4,DAT_005737f8), temp_v1 != 0)))) &&
-             ((temp_v4 == 0 || (temp_v1 = temp_v4, FUN_0030ea58(temp_v4,DAT_00573800), temp_v1 != 0)))) {
+              ((temp_v1 = temp_v4, libc_strcmp(temp_v4,DAT_005737f4), temp_v1 != 0 &&
+               (temp_v1 = temp_v4, libc_strcmp(temp_v4,DAT_005737f8), temp_v1 != 0)))) &&
+             ((temp_v4 == 0 || (temp_v1 = temp_v4, libc_strcmp(temp_v4,DAT_00573800), temp_v1 != 0)))) {
             if (temp_v4 != 0) {
               temp_v2 = wstrlen(DAT_005737fc);
-              temp_v1 = FUN_0019a37c(temp_v4,DAT_005737fc,temp_v2);
+              temp_v1 = libc_strncmp(temp_v4,DAT_005737fc,temp_v2);
               if (temp_v1 == 0) goto LAB_004f9ff8;
             }
-            if ((temp_v4 == 0) || (temp_v1 = temp_v4, FUN_0030ea58(temp_v4,DAT_00573804), temp_v1 != 0)) {
+            if ((temp_v4 == 0) || (temp_v1 = temp_v4, libc_strcmp(temp_v4,DAT_00573804), temp_v1 != 0)) {
               sysMemClear(temp_v6,0x80);
               sysMemClear(temp_v7,0x80);
               FUN_00100388(temp_v7,"battle/effect/%s.eft",temp_v4);
-              FUN_002e342c(temp_v6,temp_v7);
+              libc_strcpy(temp_v6,temp_v7);
               temp_v1 = wstrlen(temp_v6);
               if (temp_v1 != 0) {
                 temp_v1 = param_1 + temp_v3 * 0x8c;

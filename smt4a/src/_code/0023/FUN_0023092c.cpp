@@ -9,7 +9,7 @@ typedef struct {
     unsigned int spC; /* 0xc: local_c */
 } void_stack;
 
-extern int DAT_00588fe8; /* 0x588fe8 */
+extern int g_statusDown; /* 0x588fe8 */
 
 
 void FUN_0023092c(void)
@@ -22,7 +22,7 @@ void FUN_0023092c(void)
   int temp_v4;
   int temp_v5;
   
-  temp_v1 = DAT_00588fe8;
+  temp_v1 = g_statusDown;
   temp_v3 = 8;
   temp_v2 = 0;
   do {

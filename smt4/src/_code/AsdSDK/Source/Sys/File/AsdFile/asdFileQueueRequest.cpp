@@ -10,9 +10,9 @@ s32 FUN_002c5254(s32 *out, u32 handle);
 void FUN_002c526c(void);
 void *asdMemAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
 void memClear(void *buf, u32 size);
-s32 FUN_002c30c4(const char *s);
-s32 FUN_002aa568(const char *a, const char *b);
-char *FUN_002bf694(char *dst, const char *src);
+s32 libc_strlen(const char *s);
+s32 libc_strcmp(const char *a, const char *b);
+char *libc_strcpy(char *dst, const char *src);
 s32 FUN_002be624(char *dst, const char *format, ...);
 
 /* Queues a load request for `path`. A path that names a device ("rom:", "patch:", ...) is used as
@@ -45,7 +45,7 @@ AsdFileRequest *asdFileQueueRequest(const char *path, u8 flag)
         request->prev = last;
     }
 
-    len = FUN_002c30c4(path);
+    len = libc_strlen(path);
     if (len > 8) {
         len = 8;
     }
@@ -57,10 +57,10 @@ AsdFileRequest *asdFileQueueRequest(const char *path, u8 flag)
         }
     }
     if (hasDevice) {
-        FUN_002bf694(request->path, path);
-    } else if (FUN_002aa568(path, "battle/event/BtlEvent064/BtlEvent064.mbm") == 0 ||
-               FUN_002aa568(path, "event/e007/e007.mbm") == 0 ||
-               FUN_002aa568(path, "event/quest/quest122.mbm") == 0) {
+        libc_strcpy(request->path, path);
+    } else if (libc_strcmp(path, "battle/event/BtlEvent064/BtlEvent064.mbm") == 0 ||
+               libc_strcmp(path, "event/e007/e007.mbm") == 0 ||
+               libc_strcmp(path, "event/quest/quest122.mbm") == 0) {
         FUN_002be624(request->path, "patch:/%s", path);
     } else {
         FUN_002be624(request->path, "rom:/%s", path);

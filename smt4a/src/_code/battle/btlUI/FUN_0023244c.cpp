@@ -6,7 +6,7 @@ extern "C" {
 
 int taskCreateDraw(...);
 int asdMemoryAllocTracked(int, int, int, int, int);
-int FUN_0031a400(void);
+int campCommonBgAcquire(void);
 int FUN_004a8ef4(...);
 
 /* stack frame of param_1: 4 slot(s), 16 byte(s) */
@@ -27,11 +27,11 @@ extern int FUN_0024e31c(...); /* 0x24e31c */
 extern unsigned char LAB_00298670; /* 0x298670 */
 extern unsigned char LAB_00298674; /* 0x298674 */
 extern unsigned char LAB_002df668; /* 0x2df668 */
-extern unsigned char DAT_0057a9b8; /* 0x57a9b8 */
+extern unsigned char g_btlUi; /* 0x57a9b8 */
 
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: FUN_0031a400. */
+/* Supplied declaration required: campCommonBgAcquire. */
 /* Supplied declaration required: FUN_004a8ef4. */
 
 
@@ -42,13 +42,13 @@ void FUN_0023244c(unsigned int *param_1)
   int *piVar1;
   unsigned char *puVar2;
   
-  FUN_0031a400();
-  if ((*(int * *)((unsigned char *)&DAT_0057a9b8 + 0x10)) == (int *)0x0) {
+  campCommonBgAcquire();
+  if ((*(int * *)((unsigned char *)&g_btlUi + 0x10)) == (int *)0x0) {
     piVar1 = (int *)0x100;
     asdMemoryAllocTracked(0x100,0x100,0,0x13018,1);
-    (*(int * *)((unsigned char *)&DAT_0057a9b8 + 0x10)) = piVar1;
+    (*(int * *)((unsigned char *)&g_btlUi + 0x10)) = piVar1;
   }
-  piVar1 = (*(int * *)((unsigned char *)&DAT_0057a9b8 + 0x10));
+  piVar1 = (*(int * *)((unsigned char *)&g_btlUi + 0x10));
   puVar2 = &LAB_002325d0;
   taskCreateDraw(&LAB_002325d0,4,0,0,FUN_002248f8,&LAB_00298670,param_1,*param_1);
   param_1[0x1e] = (unsigned int)puVar2;

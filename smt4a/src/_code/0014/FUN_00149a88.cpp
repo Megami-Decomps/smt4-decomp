@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned char DAT_0061a470; /* 0x61a470 */
+extern unsigned char g_asdGfxContext; /* 0x61a470 */
 
 
 void FUN_00149a88(int param_1,unsigned int *param_2)
@@ -13,7 +13,7 @@ void FUN_00149a88(int param_1,unsigned int *param_2)
   unsigned int temp_v0;
   int temp_v1;
   
-  temp_v1 = *(int *)((*(int *)((unsigned char *)&DAT_0061a470 + 0x124)) * 4 + 0x61a598);
+  temp_v1 = *(int *)((*(int *)((unsigned char *)&g_asdGfxContext + 0x124)) * 4 + 0x61a598);
   if (temp_v1 != 0) {
     if (param_1 == 0x600) {
       temp_v0 = *(unsigned int *)(temp_v1 + 4);

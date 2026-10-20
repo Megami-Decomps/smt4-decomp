@@ -7,12 +7,12 @@ extern "C" {
 int FUN_00229754(int *, unsigned int *);
 
 extern int g_btlScriptUnit; /* 0x43427c */
-extern unsigned int DAT_00434290; /* 0x434290 */
-extern unsigned int DAT_00439ca8; /* 0x439ca8 */
+extern unsigned int g_btlActionReflect; /* 0x434290 */
+extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 
 /* Supplied declaration required: FUN_00229754. */
 extern int FUN_002298a0(void);
-extern int FUN_0027e6bc(unsigned int);
+extern int nodeListCountActiveById(unsigned int);
 extern int FUN_003ae838(unsigned int, int);
 extern int FUN_003aef88(unsigned int);
 
@@ -27,19 +27,19 @@ unsigned int FUN_003cbb78(int *param_1,unsigned int *param_2)
   unsigned int temp_v2;
   int temp_v3;
   
-  temp_v0 = FUN_0027e6bc(DAT_00434290);
+  temp_v0 = nodeListCountActiveById(g_btlActionReflect);
   if (0 < temp_v0) {
     return 0;
   }
   temp_v0 = 0;
   do {
-    temp_v1 = FUN_003ae838(DAT_00439ca8,temp_v0);
+    temp_v1 = FUN_003ae838(g_btlUiBlock,temp_v0);
     if (temp_v1 == 0) {
       return 0;
     }
     temp_v0 = temp_v0 + 1;
   } while (temp_v0 < 4);
-  temp_v0 = FUN_003aef88(DAT_00439ca8);
+  temp_v0 = FUN_003aef88(g_btlUiBlock);
   if (temp_v0 != 0) {
     if (((*param_2 & 0x1080) == 0) && (temp_v0 = FUN_002298a0(), temp_v0 != 0)) {
       return 0;

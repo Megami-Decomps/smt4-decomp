@@ -9,7 +9,7 @@ int FUN_00180310(...);
 int FUN_0018152c(...);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
-int FUN_00184e64(...);
+int drawSetColorFromRGBA8(...);
 int FUN_00185dd4(...);
 int FUN_003e503c(void);
 int SBORROW4(...);
@@ -34,7 +34,7 @@ extern int DAT_00588c50; /* 0x588c50 */
 /* Supplied declaration required: FUN_0018152c. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_00184e64. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_00185dd4. */
 /* Supplied declaration required: FUN_003e503c. */
 
@@ -149,7 +149,7 @@ LAB_004b5ef4:
       temp_v2 = 0xff;
     }
     if (DAT_00588c50 != temp_v2) {
-      FUN_00184e64(temp_v2);
+      drawSetColorFromRGBA8(temp_v2);
       DAT_00588c50 = temp_v2;
     }
     FUN_00180310(0,(int)*(short *)(DAT_00588c4c + 8) + (int)*(short *)(temp_v0 + 8) + param_5,

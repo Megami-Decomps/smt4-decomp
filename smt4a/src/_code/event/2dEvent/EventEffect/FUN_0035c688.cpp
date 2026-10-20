@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0018206c(unsigned int, unsigned int);
+int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 
-/* Supplied declaration required: FUN_0018206c. */
+/* Supplied declaration required: asdTMTexTableNodeIsLoaded. */
 
 
 void FUN_0035c688(unsigned int param_1)
@@ -14,7 +14,7 @@ void FUN_0035c688(unsigned int param_1)
 {
 /* irregular: 1 native warning(s); review required */
   if (param_1 < 4) {
-    FUN_0018206c(*(unsigned int *)(param_1 * 0x10 + 0x57f43c),
+    asdTMTexTableNodeIsLoaded(*(unsigned int *)(param_1 * 0x10 + 0x57f43c),
                  *(unsigned int *)(param_1 * 0x10 + 0x57f440));
     return;
   }

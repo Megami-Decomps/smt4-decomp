@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00252394(int);
-int FUN_00269334(void);
+int objectBufferFree(void);
 int asdMemFree(...);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -13,10 +13,10 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-extern int DAT_004dad80; /* 0x4dad80 */
+extern int g_asdLightCount; /* 0x4dad80 */
 
 /* Supplied declaration required: FUN_00252394. */
-/* Supplied declaration required: FUN_00269334. */
+/* Supplied declaration required: objectBufferFree. */
 /* Supplied declaration required: asdMemFree. */
 
 
@@ -35,7 +35,7 @@ void FUN_002e7134(int param_1)
   int *piVar8;
   
   if (*(int *)(param_1 + 0x9c) != 0) {
-    FUN_00269334();
+    objectBufferFree();
   }
   if (*(int *)(param_1 + 0x54) != 0) {
     FUN_00252394(1);
@@ -93,7 +93,7 @@ void FUN_002e7134(int param_1)
           *(unsigned int *)(temp_v1 + 0xc) = 0;
         }
         piVar8 = piVar8 + 7;
-        DAT_004dad80 = DAT_004dad80 - 1;
+        g_asdLightCount = g_asdLightCount - 1;
       } while (temp_v3 < *(unsigned int *)(*(int *)(param_1 + 0x9c) + 8));
     }
   }

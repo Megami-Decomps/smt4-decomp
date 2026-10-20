@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00100388(int *, unsigned char *);
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 int FUN_0020d164(int *, unsigned int);
 int FUN_00230c1c(int *, unsigned int);
 int FUN_002a1f60(...);
@@ -13,7 +13,7 @@ int FUN_002a48e0(int, int);
 int FUN_002a4964(int, int);
 int FUN_002c2c68(...);
 int FUN_003180c4(...);
-int FUN_0031d1d8(int, int);
+int flaggedEntrySetValueA(int, int);
 int FUN_0034a290(void);
 int SBORROW4(int, int);
 
@@ -28,8 +28,8 @@ extern int DAT_0057f0c8; /* 0x57f0c8 */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_00100388. */
 extern unsigned int FUN_0016a0e8(void);
-extern int FUN_0019c6bc(unsigned int);
-/* Supplied declaration required: FUN_001aba54. */
+extern int idIsAbove400(unsigned int);
+/* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: FUN_0020d164. */
 /* Supplied declaration required: FUN_00230c1c. */
 /* Supplied declaration required: FUN_002a1f60. */
@@ -37,7 +37,7 @@ extern int FUN_0019c6bc(unsigned int);
 /* Supplied declaration required: FUN_002a4964. */
 /* Supplied declaration required: FUN_002c2c68. */
 /* Supplied declaration required: FUN_003180c4. */
-/* Supplied declaration required: FUN_0031d1d8. */
+/* Supplied declaration required: flaggedEntrySetValueA. */
 extern int FUN_00348ed0(void);
 /* Supplied declaration required: FUN_0034a290. */
 
@@ -113,7 +113,7 @@ void FUN_00359a08(int param_1)
     temp_v1 = temp_v1 - 1;
   }
   FUN_002a48e0(param_1,temp_v6);
-  FUN_0031d1d8(param_1,temp_v1);
+  flaggedEntrySetValueA(param_1,temp_v1);
   temp_v5 = DAT_0057f0c8;
   if (temp_v7 == 0) {
     *(unsigned char *)(DAT_0057f0c8 + 0x5ea) = 0;
@@ -122,7 +122,7 @@ void FUN_00359a08(int param_1)
     *(unsigned char *)(DAT_0057f0c8 + 0x67c) = 1;
     *(unsigned char *)(temp_v5 + 0x5ea) = 1;
     temp_v2 = FUN_0016a0e8();
-    temp_v3 = FUN_0019c6bc(temp_v7);
+    temp_v3 = idIsAbove400(temp_v7);
     if (temp_v3 != 0) {
       temp_v4 = temp_v7;
       FUN_0034a290();
@@ -133,7 +133,7 @@ void FUN_00359a08(int param_1)
     }
     else {
       temp_v4 = temp_v7;
-      FUN_001aba54();
+      dataTable04FindById();
       FUN_0020d164(&uStack_80,(*(unsigned int *)(temp_v4 + 0x28) & 0xffff) >> 0xb);
       FUN_003180c4(0x24,&uStack_80);
       FUN_00230c1c(&uStack_80,(*(unsigned int *)(temp_v4 + 0x28) & 0x1ff) >> 5);

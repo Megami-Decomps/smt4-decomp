@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0018003c(void);
 int asdMemoryAllocImpl(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 int FUN_002e3140(void);
-int FUN_002e6dd4(unsigned int, int);
+int rt_memclr(unsigned int, int);
 int software_interrupt(int);
 
 /* stack frame of param_6: 1 slot(s), 4 byte(s) */
@@ -22,7 +22,7 @@ extern unsigned char DAT_005b4028; /* 0x5b4028 */
 /* Supplied declaration required: asdMemoryAllocImpl. */
 extern unsigned int FUN_001844ac(void);
 /* Supplied declaration required: FUN_002e3140. */
-/* Supplied declaration required: FUN_002e6dd4. */
+/* Supplied declaration required: rt_memclr. */
 
 
 unsigned int
@@ -39,7 +39,7 @@ asdMemoryAllocAligned(unsigned int param_1,unsigned int param_2,unsigned int par
   }
   asdMemoryAllocImpl(param_1,param_2,param_3,(param_4 + param_5 * 2 + 0x3f) & -param_5,param_6);
   temp_v0 = FUN_001844ac();
-  FUN_002e6dd4(temp_v0,param_4);
+  rt_memclr(temp_v0,param_4);
   software_interrupt(0x14);
   if (*(*(int * *)((unsigned char *)&DAT_005b4028 + 0x4)) < 0) {
     FUN_002e3140();

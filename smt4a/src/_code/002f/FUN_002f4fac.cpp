@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002e7232(void);
+int sharedRefRelease(void);
 int FUN_002f4f20(int, int);
 
-/* Supplied declaration required: FUN_002e7232. */
+/* Supplied declaration required: sharedRefRelease. */
 /* Supplied declaration required: FUN_002f4f20. */
 
 
@@ -16,7 +16,7 @@ void FUN_002f4fac(int param_1,int param_2)
 {
 /* irregular: 2 native warning(s); review required */
   if (*(int *)(param_1 + 0x40) != 0) {
-    FUN_002e7232();
+    sharedRefRelease();
     *(unsigned int *)(param_1 + 0x40) = 0;
   }
   if (param_2 != 0) {

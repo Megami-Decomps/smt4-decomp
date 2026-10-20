@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00296ae8(...);
 int FUN_00296b3c(unsigned int, int, unsigned int, int, int, unsigned char *, int);
-int FUN_002c49f8(unsigned int, int);
+int objFlagsSetBits(unsigned int, int);
 int FUN_002d65d0(void);
 int FUN_002e20b4(void);
 
@@ -47,7 +47,7 @@ extern unsigned char LAB_0028e930; /* 0x28e930 */
 /* Supplied declaration required: FUN_00296ae8. */
 /* Supplied declaration required: FUN_00296b3c. */
 extern int FUN_002b89a4(unsigned int);
-/* Supplied declaration required: FUN_002c49f8. */
+/* Supplied declaration required: objFlagsSetBits. */
 /* Supplied declaration required: FUN_002d65d0. */
 /* Supplied declaration required: FUN_002e20b4. */
 extern int FUN_00309ba0(void);
@@ -70,7 +70,7 @@ void FUN_0028e6d0(fn_0028e6d0_arg0 *param_1,int param_2,unsigned int param_3,int
   temp_v2 = param_1->field_0xa38;
   temp_v0 = param_1->field_0x8;
   temp_v5 = param_1->field_0xc;
-  FUN_002c49f8(temp_v1,8);
+  objFlagsSetBits(temp_v1,8);
   FUN_002d65d0();
   FUN_002e20b4();
   if (param_2 == 0) {

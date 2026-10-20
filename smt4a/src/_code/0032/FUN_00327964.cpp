@@ -44,7 +44,7 @@ extern int DAT_006160dc; /* 0x6160dc */
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-extern int FUN_001656a0(unsigned int);
+extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
@@ -236,7 +236,7 @@ void FUN_00327964(void)
           *(unsigned int *)(temp_v3 + 8) = 0;
         }
         else {
-          temp_v3 = FUN_001656a0(5);
+          temp_v3 = padButtonIsPressed(5);
           if ((temp_v3 != 0) || (temp_v3 = FUN_004d0554(), temp_v3 != 0)) {
             temp_v3 = DAT_005806a4;
             *(unsigned int *)(DAT_005806a4 + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);

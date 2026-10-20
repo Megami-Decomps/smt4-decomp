@@ -7,8 +7,8 @@ extern "C" {
 int FUN_00253d60(unsigned char *, unsigned short *);
 int FUN_00253f94(void);
 int FUN_0026242c(void);
-int FUN_002b45e8(void);
-int FUN_002bf694(unsigned short *, unsigned int);
+int dataTable08Sub2GetRecord(void);
+int libc_strcpy(unsigned short *, unsigned int);
 int memClear(unsigned short *, int);
 int rt_memcpy_w(unsigned short *, unsigned short *, int);
 
@@ -29,9 +29,9 @@ typedef struct {
 /* Supplied declaration required: FUN_0026242c. */
 extern int FUN_00295f28(unsigned char);
 extern int FUN_0029aafc(void);
-/* Supplied declaration required: FUN_002b45e8. */
+/* Supplied declaration required: dataTable08Sub2GetRecord. */
 extern unsigned int FUN_002bd1fc(void);
-/* Supplied declaration required: FUN_002bf694. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -98,7 +98,7 @@ void FUN_0024d94c(unsigned short *param_1,unsigned short *param_2)
   temp_v4 = FUN_0029aafc();
   rt_memcpy_w(param_1 + 0x24,param_2 + 0x1a,temp_v4 << 1);
   temp_v5 = FUN_002bd1fc();
-  FUN_002bf694(param_1 + 0x2ce,temp_v5);
+  libc_strcpy(param_1 + 0x2ce,temp_v5);
   if ((short)param_1[0xd] >= 1000) {
     param_1[0xd] = 999;
   }
@@ -115,19 +115,19 @@ void FUN_0024d94c(unsigned short *param_1,unsigned short *param_2)
     param_1[0x11] = 999;
   }
   temp_v6 = (unsigned int)*param_2;
-  FUN_002b45e8();
+  dataTable08Sub2GetRecord();
   if (temp_v6 != 0) {
     temp_v2 = FUN_00253f94();
     param_1[8] = temp_v2;
   }
   temp_v6 = (unsigned int)param_2[1];
-  FUN_002b45e8();
+  dataTable08Sub2GetRecord();
   if (temp_v6 != 0) {
     temp_v2 = FUN_00253f94();
     param_1[9] = temp_v2;
   }
   temp_v6 = (unsigned int)param_2[2];
-  FUN_002b45e8();
+  dataTable08Sub2GetRecord();
   if (temp_v6 != 0) {
     temp_v3 = FUN_00253f94();
     param_1[9] = temp_v3 + param_1[9];

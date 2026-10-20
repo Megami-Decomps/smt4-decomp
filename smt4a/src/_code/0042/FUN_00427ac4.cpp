@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00195fc8(void);
+int sysFatalBreak(void);
 int FUN_004268ec(char [8], int, unsigned int);
 
 /* stack frame of param_2: 2 slot(s), 2 byte(s) */
@@ -15,7 +15,7 @@ typedef struct {
 
 extern int FUN_00427bec(...); /* 0x427bec */
 
-/* Supplied declaration required: FUN_00195fc8. */
+/* Supplied declaration required: sysFatalBreak. */
 /* Supplied declaration required: FUN_004268ec. */
 extern int FUN_00426a80(char *);
 
@@ -68,7 +68,7 @@ void FUN_00427ac4(int param_1,unsigned int param_2)
             temp_v2 = 2;
           }
           else {
-            FUN_00195fc8();
+            sysFatalBreak();
             temp_v2 = 0;
           }
         }

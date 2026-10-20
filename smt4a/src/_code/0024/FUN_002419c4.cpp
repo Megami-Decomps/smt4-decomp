@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0030ea58(int, unsigned char *);
+int libc_strcmp(int, unsigned char *);
 int FUN_003f0e20(unsigned int *, int);
 int FUN_004fdcd8(int, int, unsigned int, int, int, unsigned int, int, int);
 
@@ -23,7 +23,7 @@ extern unsigned int DAT_00573808; /* 0x573808 */
 
 extern unsigned int *btlGetMainState(void);
 extern int wstrlen(int);
-/* Supplied declaration required: FUN_0030ea58. */
+/* Supplied declaration required: libc_strcmp. */
 /* Supplied declaration required: FUN_003f0e20. */
 extern int FUN_004f5d2c(unsigned int);
 /* Supplied declaration required: FUN_004fdcd8. */
@@ -49,7 +49,7 @@ void FUN_002419c4(int param_1,unsigned int param_2,int param_3,int param_4,unsig
     temp_v2 = param_3 + temp_v3 * 0x16;
     temp_v4 = temp_v2 + 0x58;
     temp_v1 = wstrlen(temp_v4);
-    if ((temp_v1 != 0) && (FUN_0030ea58(temp_v4,&LAB_00241b0c), temp_v4 != 0)) {
+    if ((temp_v1 != 0) && (libc_strcmp(temp_v4,&LAB_00241b0c), temp_v4 != 0)) {
       temp_v0 = *(short *)(temp_v2 + 0x6a);
       temp_v1 = FUN_004f5d2c(DAT_00573808);
       temp_v5 = 1;

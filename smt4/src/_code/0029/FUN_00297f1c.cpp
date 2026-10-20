@@ -10,15 +10,15 @@ int FUN_00292dd0(void);
 int FUN_00292f4c(void);
 int btlGetMainState(void);
 int FUN_00297b94(...);
-int FUN_00298140(...);
-int FUN_002992bc(int, int);
+int playSceneSetState(...);
+int flaggedEntrySetValueB(int, int);
 int FUN_0029f848(int, int, int, int, int, int);
 int FUN_002a0cb0(void);
 int FUN_002b8584(...);
-int FUN_002b8838(void);
-int FUN_002b8cc8(void);
+int buttonHelpSetPreset(void);
+int ifTouchRegionRemove(void);
 int FUN_002bee58(int, int);
-int FUN_002c424c(int, int, unsigned int);
+int __aeabi_memset4(int, int, unsigned int);
 int FUN_002cfed0(...);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -34,19 +34,19 @@ extern int FUN_00293230(void);
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_00297b94. */
 extern unsigned int FUN_00297ca4(int, unsigned int);
-/* Supplied declaration required: FUN_00298140. */
-/* Supplied declaration required: FUN_002992bc. */
+/* Supplied declaration required: playSceneSetState. */
+/* Supplied declaration required: flaggedEntrySetValueB. */
 extern int FUN_0029d644(unsigned int);
 extern unsigned int FUN_0029e958(int);
 extern int FUN_0029ee54(unsigned int);
 /* Supplied declaration required: FUN_0029f848. */
 /* Supplied declaration required: FUN_002a0cb0. */
 /* Supplied declaration required: FUN_002b8584. */
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 extern int FUN_002b898c(void);
-/* Supplied declaration required: FUN_002b8cc8. */
+/* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: FUN_002bee58. */
-/* Supplied declaration required: FUN_002c424c. */
+/* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: FUN_002cfed0. */
 
 
@@ -111,7 +111,7 @@ void FUN_00297f1c(int param_1,unsigned int param_2,int param_3,unsigned int para
   if (*(char *)(param_1 + 0x3083) != '\0') {
     *(unsigned int *)(param_1 + 0x305c) = 0;
     FUN_0028e9ec(param_1);
-    FUN_002992bc(param_1 + 0x33a8,0);
+    flaggedEntrySetValueB(param_1 + 0x33a8,0);
     FUN_002bee58(param_1 + 0x20,0);
     temp_v4 = 0;
     do {
@@ -119,7 +119,7 @@ void FUN_00297f1c(int param_1,unsigned int param_2,int param_3,unsigned int para
       temp_v4 = temp_v4 + 1;
     } while (temp_v4 < 8);
     *(unsigned int *)(param_1 + 0x3054) = 0x2d;
-    FUN_00298140(param_1,0x10,1);
+    playSceneSetState(param_1,0x10,1);
     return;
   }
   btlGetMainState();
@@ -127,13 +127,13 @@ void FUN_00297f1c(int param_1,unsigned int param_2,int param_3,unsigned int para
   if ((temp_v4 == 0) && (temp_v4 = btlGetMainState(), (*(unsigned int *)(temp_v4 + 0x44a0) & 0x200) == 0)) {
     if (param_3 != -1) {
       if (param_3 == 0xb) {
-        FUN_00298140(param_1,*(unsigned int *)(param_1 + 0x304c),1);
+        playSceneSetState(param_1,*(unsigned int *)(param_1 + 0x304c),1);
         return;
       }
       if (param_3 != 1) {
         if (param_3 != 2) {
           if (param_3 == 7) {
-            FUN_00298140(param_1,10,1);
+            playSceneSetState(param_1,10,1);
             return;
           }
           if (param_3 == 3) {
@@ -142,12 +142,12 @@ void FUN_00297f1c(int param_1,unsigned int param_2,int param_3,unsigned int para
             }
             if (*(int *)(param_1 + 0x3048) == 0x13 || *(int *)(param_1 + 0x3048) == 0x16) {
               FUN_002a0cb0();
-              FUN_002b8838();
+              buttonHelpSetPreset();
             }
             temp_v4 = *(int *)(param_1 + 0x3048);
             if ((temp_v4 == 0x22 || temp_v4 == 0x23) || temp_v4 == 0x24) {
               FUN_002a0cb0();
-              FUN_002b8838();
+              buttonHelpSetPreset();
             }
             temp_v4 = FUN_002b898c();
             if (temp_v4 == 0x3d) {
@@ -155,7 +155,7 @@ void FUN_00297f1c(int param_1,unsigned int param_2,int param_3,unsigned int para
               temp_v4 = FUN_00293230();
               if (temp_v4 == 0) {
                 FUN_002a0cb0();
-                FUN_002b8838();
+                buttonHelpSetPreset();
               }
             }
             if (*(int *)(param_1 + 0x3048) == 7) {
@@ -174,12 +174,12 @@ void FUN_00297f1c(int param_1,unsigned int param_2,int param_3,unsigned int para
             temp_v4 = 0;
             if (temp_v4 < *(short *)(param_1 + 0x5714)) {
               do {
-                FUN_002b8cc8();
+                ifTouchRegionRemove();
                 temp_v4 = temp_v4 + 1;
               } while (temp_v4 < *(short *)(param_1 + 0x5714));
             }
             *(unsigned short *)(param_1 + 0x5714) = 0;
-            FUN_002c424c(param_1 + 0x5716,0x40,0xffffffff);
+            __aeabi_memset4(param_1 + 0x5716,0x40,0xffffffff);
             temp_v2 = FUN_0029e958(param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088);
             temp_v4 = 0;
             if (temp_v4 < (int)temp_v2) {
@@ -252,7 +252,7 @@ void FUN_00297f1c(int param_1,unsigned int param_2,int param_3,unsigned int para
             }
             return;
           }
-          FUN_00298140(param_1,1,1);
+          playSceneSetState(param_1,1,1);
           return;
         }
       }
@@ -262,12 +262,12 @@ void FUN_00297f1c(int param_1,unsigned int param_2,int param_3,unsigned int para
         *(unsigned int *)(param_1 + 0x3478) = 0;
         *(unsigned int *)(param_1 + 0x347c) = 0;
       }
-      FUN_00298140(param_1,8,1);
+      playSceneSetState(param_1,8,1);
       return;
     }
     temp_v4 = *(int *)(param_1 + 0x3048);
     if ((temp_v4 == 0x1a) || (temp_v4 == 0x1b)) {
-      FUN_00298140(param_1,1);
+      playSceneSetState(param_1,1);
       temp_v1 = FUN_00297ca4(param_1,1);
       FUN_00297b94(param_1,temp_v1,*(unsigned int *)(param_1 + 0x305c));
       return;

@@ -6,12 +6,12 @@ extern "C" {
 
 int FUN_00162790(...);
 int FUN_00164b5c(int, int, int, int, int, int);
-int FUN_001654d8(...);
+int vec2GetXInt(...);
 int efctSetSpeed(void);
 int FUN_0016c69c(...);
 int FUN_0016c6f0(...);
 int FUN_00183bb0(void);
-int FUN_002e342c(...);
+int libc_strcpy(...);
 int FUN_00328078(...);
 int FUN_003849cc(unsigned int, unsigned int, int, unsigned char [132], unsigned int);
 int FUN_00384cf4(...);
@@ -46,10 +46,10 @@ extern signed char DAT_005f1a5e; /* 0x5f1a5e */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00162790. */
-extern int FUN_00162e8c(void);
+extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_00164b5c. */
-/* Supplied declaration required: FUN_001654d8. */
-extern unsigned int FUN_001654e4(int);
+/* Supplied declaration required: vec2GetXInt. */
+extern unsigned int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 extern unsigned int FUN_00169240(unsigned int);
 extern unsigned int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
@@ -58,7 +58,7 @@ extern unsigned int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c6f0. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 extern int FUN_00325064(void);
 /* Supplied declaration required: FUN_00328078. */
 extern unsigned int FUN_003577dc(int);
@@ -108,7 +108,7 @@ void FUN_0048a5e4(int param_1)
   unsigned char *temp_v20;
   int temp_v21;
   
-  temp_v1 = FUN_00162e8c();
+  temp_v1 = gameFlagsGetBlock();
   temp_v2 = FUN_001692ac(5,1);
   FUN_0016c6f0(g_renderCtx,3,temp_v2);
   temp_v19 = (unsigned char *)(param_1 + 0x4cc);
@@ -141,11 +141,11 @@ void FUN_0048a5e4(int param_1)
       }
       if ((DAT_005f1a5e == '\0') || (temp_v5 = FUN_00384cf4(), temp_v5 != 0)) {
         FUN_003849cc(temp_v2,temp_v3,1,temp_v17,0xffffffff);
-        FUN_002e342c(temp_v9,temp_v17);
+        libc_strcpy(temp_v9,temp_v17);
       }
       else {
         temp_v2 = FUN_00169240(0);
-        FUN_002e342c(temp_v9,temp_v2);
+        libc_strcpy(temp_v9,temp_v2);
       }
     }
     else {
@@ -175,7 +175,7 @@ void FUN_0048a5e4(int param_1)
           temp_v4 = FUN_00169240(0);
         }
       }
-      FUN_002e342c(temp_v9,temp_v4);
+      libc_strcpy(temp_v9,temp_v4);
     }
   }
   if (*(char *)(param_1 + 0x205ac) != '\0') {
@@ -270,10 +270,10 @@ LAB_0048ae60:
           }
         }
         temp_v10 = param_1 + temp_v8 * 0x8c;
-        temp_v2 = FUN_001654d8(temp_v10 + 0xc40);
+        temp_v2 = vec2GetXInt(temp_v10 + 0xc40);
         temp_v11 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v12 = (int)(temp_v11 + temp_v15);
-        temp_v2 = FUN_001654e4(temp_v10 + 0xc40);
+        temp_v2 = vec2GetYInt(temp_v10 + 0xc40);
         temp_v6 = *(unsigned int *)(param_1 + 0x10);
         temp_v11 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v10 = (int)(temp_v11 + temp_v16);
@@ -350,10 +350,10 @@ LAB_0048ae60:
         temp_v9 = temp_v9 + 1;
         *(char *)(param_1 + 0x56) = *(char *)(param_1 + 0x56) - '\x01';
       }
-      temp_v2 = FUN_001654d8(param_1 + 0xc40);
+      temp_v2 = vec2GetXInt(param_1 + 0xc40);
       temp_v11 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v11 = temp_v11 + temp_v15;
-      temp_v2 = FUN_001654e4(param_1 + 0xc40);
+      temp_v2 = vec2GetYInt(param_1 + 0xc40);
       temp_v13 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v13 = temp_v13 + temp_v16;
       if ((DAT_005f1a5e == '\0') || (temp_v5 = FUN_00384cf4(), temp_v5 != 0)) {
@@ -383,10 +383,10 @@ LAB_0048ae60:
       *(char *)(param_1 + 0x57) = *(char *)(param_1 + 0x57) - '\x01';
     }
     temp_v5 = param_1 + 0xccc;
-    temp_v2 = FUN_001654d8();
+    temp_v2 = vec2GetXInt();
     temp_v11 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v11 = temp_v11 + temp_v15;
-    temp_v2 = FUN_001654e4(temp_v5);
+    temp_v2 = vec2GetYInt(temp_v5);
     temp_v13 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v13 = temp_v13 + temp_v16;
     if ((DAT_005f1a5e == '\0') || (temp_v5 = FUN_00384cf4(), temp_v5 != 0)) {
@@ -400,10 +400,10 @@ LAB_0048ae60:
       temp_v2 = 0xfbc;
       *(char *)(param_1 + 0x58) = *(char *)(param_1 + 0x58) - '\x01';
     }
-    temp_v3 = FUN_001654d8();
+    temp_v3 = vec2GetXInt();
     temp_v11 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v11 = temp_v11 + temp_v15;
-    temp_v3 = FUN_001654e4(param_1 + 0xd58);
+    temp_v3 = vec2GetYInt(param_1 + 0xd58);
     temp_v13 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_0049325c(temp_v2,(int)temp_v11,(int)(temp_v13 + temp_v16),DAT_00587f20,1);
     temp_v9 = FUN_00325064();
@@ -417,10 +417,10 @@ LAB_0048ae60:
       temp_v9 = temp_v9 + 1;
       *(char *)(param_1 + 0x5b) = *(char *)(param_1 + 0x5b) - '\x01';
     }
-    temp_v2 = FUN_001654d8();
+    temp_v2 = vec2GetXInt();
     temp_v11 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v11 = temp_v11 + temp_v15;
-    temp_v2 = FUN_001654e4(param_1 + 0xefc);
+    temp_v2 = vec2GetYInt(param_1 + 0xefc);
     temp_v13 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v13 = temp_v13 + temp_v16;
     FUN_0049325c(temp_v9,(int)temp_v11,(int)temp_v13,DAT_00587f20,1);

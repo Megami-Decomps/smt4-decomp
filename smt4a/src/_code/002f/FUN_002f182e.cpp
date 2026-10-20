@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0030771a(unsigned int [2], unsigned int, unsigned int);
+int allocArrayWords(unsigned int [2], unsigned int, unsigned int);
 
-/* Supplied declaration required: FUN_0030771a. */
+/* Supplied declaration required: allocArrayWords. */
 
 
 void FUN_002f182e(unsigned int *param_1,int param_2,unsigned int param_3,unsigned int param_4)
@@ -16,7 +16,7 @@ void FUN_002f182e(unsigned int *param_1,int param_2,unsigned int param_3,unsigne
   unsigned int temp_v0 [2];
   
   temp_v0[0] = param_4;
-  FUN_0030771a(temp_v0,(param_2 + 0x1fU) >> 5,*param_1);
+  allocArrayWords(temp_v0,(param_2 + 0x1fU) >> 5,*param_1);
   return;
 }
 

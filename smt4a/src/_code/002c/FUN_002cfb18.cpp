@@ -73,7 +73,7 @@ static float romwright_fabs_4(float value)
 #endif
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0019e3d0. */
 /* Supplied declaration required: FUN_002b5cb4. */
 /* Supplied declaration required: FUN_002d8ac4. */
@@ -139,7 +139,7 @@ void FUN_002cfb18(void)
   float temp_v45;
   unsigned int temp_v46;
   
-  temp_v1 = FUN_0018719c(0x4d0);
+  temp_v1 = gameFlagIsSet(0x4d0);
   if ((((temp_v1 != 0) && (DAT_005f161c == '\0')) && (DAT_005f161d == '\0')) &&
      ((DAT_005f0ca8 == 8 || (DAT_005f0ca8 == 9)))) {
     temp_v20 = DAT_005f0c98 + 220.0f;

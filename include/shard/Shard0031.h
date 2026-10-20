@@ -169,7 +169,7 @@ typedef struct ListBoxWork {
     /* 0x40 */ u32 unk40;
 } ListBoxWork;
 
-/* A pointer whose bit 0 flags that FUN_00195fc8 must run before the object is released. */
+/* A pointer whose bit 0 flags that sysFatalBreak must run before the object is released. */
 typedef struct TaggedOwner {
     /* 0x00 */ u8 unk00[8];
     /* 0x08 */ u32 tagged;
@@ -186,12 +186,12 @@ typedef struct ScreenEntry {
     /* 0x00 */ u8 data[0x40];
 } ScreenEntry;
 
-/* Object at DAT_0057f0c4+4. */
-/* Object at DAT_0057f0c4+4. */
-/* Object at DAT_0057f0c4+4. */
-/* Object at DAT_0057f0c4+4. */
-/* Object at DAT_0057f0c4+4. */
-/* Object at DAT_0057f0c4+4. */
+/* Object at g_buttonHelp+4. */
+/* Object at g_buttonHelp+4. */
+/* Object at g_buttonHelp+4. */
+/* Object at g_buttonHelp+4. */
+/* Object at g_buttonHelp+4. */
+/* Object at g_buttonHelp+4. */
 typedef struct ScreenObj {
     /* 0x00 */ u8 unk00[0x5AC];
     /* 0x5AC */ ShortSlot slots[6];
@@ -472,7 +472,7 @@ typedef struct HolderOf9100 {
     /* 0x9100 */ Region9100 region;
 } HolderOf9100;
 
-/* The singleton at DAT_0057f110+4 (status screen state). */
+/* The singleton at g_campCec+4 (status screen state). */
 typedef struct OverlayObj {
     /* 0x00 */ u32 job;
     /* 0x04 */ u8 unk04[0x3C];

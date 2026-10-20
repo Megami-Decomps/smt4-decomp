@@ -5,20 +5,20 @@
 extern "C" {
 
 int FUN_0026a794(void);
-int FUN_0027e774(...);
+int dialogOpen(...);
 int FUN_0027e7b4(...);
 int FUN_0029541c(...);
 int FUN_00296774(...);
 int FUN_00296e90(void);
 int FUN_0029aafc(void);
-int FUN_0029c3b0(...);
+int soundChannelStopAll(...);
 int FUN_0029c94c(...);
 int FUN_0029cde0(...);
-int FUN_0029d620(...);
+int flaggedEntrySetValueA(...);
 int FUN_0029efd8(...);
 int FUN_0029f5d8(...);
 int FUN_0029f848(...);
-int FUN_002a03a0(...);
+int soundChannelRequestIfEnabled(...);
 int FUN_002bc01c(...);
 int FUN_002c1658(...);
 int FUN_00333de4(...);
@@ -32,13 +32,13 @@ int FUN_0026b738(...);
 int FUN_0026b780(...);
 int btlTalkBustUpSetUnk2F4(...);
 int FUN_002954f4(...);
-int FUN_00296f4c(...);
+int scrScriptProcessStartEntry(...);
 int FUN_0029bd4c(void);
 int FUN_0029ca58(void);
 int FUN_0029ee6c(...);
 int FUN_002a71fc(...);
 int FUN_002b7bca(...);
-int FUN_002b8838(...);
+int buttonHelpSetPreset(...);
 int timerStart(...);
 int FUN_002bee58(...);
 int FUN_002bf818(...);
@@ -71,48 +71,48 @@ extern int whisperEffectIsIdle(void);
 /* Supplied declaration required: FUN_0026a794. */
 /* Supplied declaration required: FUN_0026b738. */
 /* Supplied declaration required: FUN_0026b780. */
-/* Supplied declaration required: FUN_0027e774. */
+/* Supplied declaration required: dialogOpen. */
 /* Supplied declaration required: FUN_0027e7b4. */
 /* Supplied declaration required: FUN_0029541c. */
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 /* Supplied declaration required: FUN_002954f4. */
 extern int FUN_002955fc(void);
 extern int FUN_00295618(void);
-extern int FUN_00295bd0(void);
+extern int dialogIsActive(void);
 /* Supplied declaration required: FUN_00296774. */
 /* Supplied declaration required: FUN_00296e90. */
-/* Supplied declaration required: FUN_00296f4c. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002973d8(void);
 /* Supplied declaration required: FUN_0029aafc. */
 /* Supplied declaration required: FUN_0029bd4c. */
-/* Supplied declaration required: FUN_0029c3b0. */
+/* Supplied declaration required: soundChannelStopAll. */
 extern int FUN_0029c48c(void);
 /* Supplied declaration required: FUN_0029c94c. */
 /* Supplied declaration required: FUN_0029ca58. */
 /* Supplied declaration required: FUN_0029cde0. */
-/* Supplied declaration required: FUN_0029d620. */
+/* Supplied declaration required: flaggedEntrySetValueA. */
 extern int FUN_0029ee54(int);
 /* Supplied declaration required: FUN_0029ee6c. */
 extern int FUN_0029efa8(int);
 /* Supplied declaration required: FUN_0029efd8. */
 /* Supplied declaration required: FUN_0029f5d8. */
 /* Supplied declaration required: FUN_0029f848. */
-/* Supplied declaration required: FUN_002a03a0. */
+/* Supplied declaration required: soundChannelRequestIfEnabled. */
 extern int sys43e188GetState(void);
 /* Supplied declaration required: FUN_002a71fc. */
-extern int FUN_002a8740(int);
-extern int FUN_002b63ac(void);
+extern int gameGetUnitRecord(int);
+extern int gameGetPlayerData(void);
 extern int FUN_002b6b04(void);
 /* Supplied declaration required: FUN_002b7bca. */
 extern unsigned short FUN_002b8584(unsigned int, int);
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 extern int FUN_002b898c(void);
 extern int FUN_002b8ee0(int, unsigned int);
 /* Supplied declaration required: FUN_002bc01c. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bee58. */
 /* Supplied declaration required: FUN_002bf818. */
-extern int FUN_002c09d0(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_002c1658. */
 /* Supplied declaration required: whisperEffectFinish. */
 /* Supplied declaration required: whisperEffectStart. */
@@ -160,8 +160,8 @@ void FUN_001cea8c(int param_1)
   int temp_v27;
   
   temp_v4 = param_1 + *(int *)(param_1 + 0xcf78) * 0x620;
-  temp_v5 = FUN_002a8740((int)*(char *)(temp_v4 + 0x3654));
-  temp_v6 = FUN_002b63ac();
+  temp_v5 = gameGetUnitRecord((int)*(char *)(temp_v4 + 0x3654));
+  temp_v6 = gameGetPlayerData();
   FUN_002bf818(param_1 + 0x624);
   piVar9 = (int *)(param_1 + 0x3534);
   temp_v25[0] = '\0';
@@ -316,7 +316,7 @@ void FUN_001cea8c(int param_1)
         return;
       }
       FUN_002a71fc(0);
-      FUN_00296f4c(*puVar28,0xf);
+      scrScriptProcessStartEntry(*puVar28,0xf);
       *piVar9 = *piVar9 + 1;
       return;
     }
@@ -331,7 +331,7 @@ void FUN_001cea8c(int param_1)
         }
         *piVar9 = 1;
         temp_v11 = 0xe1;
-        FUN_002b8838(temp_v11);
+        buttonHelpSetPreset(temp_v11);
         return;
       }
       temp_v24 = 1;
@@ -349,7 +349,7 @@ void FUN_001cea8c(int param_1)
         temp_v5 = temp_v5 + 1;
       } while (temp_v5 < 8);
       temp_v5 = FUN_002b6b04();
-      if ((temp_v5 == 0) && (temp_v5 = FUN_00295bd0(), temp_v5 == 0)) {
+      if ((temp_v5 == 0) && (temp_v5 = dialogIsActive(), temp_v5 == 0)) {
         if (!temp_v24) {
           return;
         }
@@ -359,7 +359,7 @@ void FUN_001cea8c(int param_1)
           temp_v4 = temp_v4 + 1;
         } while (temp_v4 < 0x10);
         *piVar9 = 2;
-        FUN_00296f4c(*puVar28,0xe);
+        scrScriptProcessStartEntry(*puVar28,0xe);
         return;
       }
       temp_v5 = temp_v26;
@@ -372,14 +372,14 @@ void FUN_001cea8c(int param_1)
         }
         temp_v4 = FUN_002973d8();
         if (temp_v4 != 0) {
-          FUN_00296f4c(*puVar28,0xe);
+          scrScriptProcessStartEntry(*puVar28,0xe);
           if (*(int *)(param_1 + 0xd2c4) - *(int *)(param_1 + 0xd2c8) < 1) {
             temp_v11 = 0xe1;
           }
           else {
             temp_v11 = 0x6b;
           }
-          FUN_002b8838(temp_v11);
+          buttonHelpSetPreset(temp_v11);
           *piVar9 = *piVar25;
         }
         else {
@@ -458,12 +458,12 @@ void FUN_001cea8c(int param_1)
       FUN_002954f4(*(unsigned short *)(temp_v5 + 0x46),1);
       btlTalkBustUpSetUnk2F4(1);
     }
-    temp_v15 = FUN_002c09d0(0x406);
+    temp_v15 = gameFlagIsSet(0x406);
     if (temp_v15 == 0) {
-      FUN_00296f4c(*(unsigned int *)(param_1 + 0x3568),3);
+      scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x3568),3);
       *piVar9 = 0x14;
       temp_v11 = 0x9e;
-      FUN_002b8838(temp_v11);
+      buttonHelpSetPreset(temp_v11);
       return;
     }
     temp_v18 = 0;
@@ -515,7 +515,7 @@ void FUN_001cea8c(int param_1)
     }
     if (*(int *)(param_1 + 0xd2c4) < 1) {
       *piVar9 = *piVar9 + 1;
-      FUN_00296f4c(*puVar28,0xe);
+      scrScriptProcessStartEntry(*puVar28,0xe);
       return;
     }
     temp_v15 = 0;
@@ -541,7 +541,7 @@ void FUN_001cea8c(int param_1)
     } while (temp_v15 < *(int *)(param_1 + 0xd2c4));
     *piVar9 = 10;
     FUN_0027e7b4(*(unsigned int *)(param_1 + 0x356c),0xca);
-    FUN_0027e774(1);
+    dialogOpen(1);
   default:
     temp_v5 = temp_v26;
 joined_r0x001cec14:
@@ -660,8 +660,8 @@ LAB_001cfdfc:
         FUN_0029541c(param_1);
       }
       if (*(int *)(param_1 + 0x352c) != 0x14) {
-        FUN_0029c3b0(0);
-        FUN_002a03a0(0x100003c,0);
+        soundChannelStopAll(0);
+        soundChannelRequestIfEnabled(0x100003c,0);
         return;
       }
     }
@@ -672,14 +672,14 @@ LAB_001cfdfc:
       temp_v4 = FUN_002b898c();
       if (temp_v4 == 0xe1) {
         temp_v11 = 0x6b;
-        FUN_002b8838(temp_v11);
+        buttonHelpSetPreset(temp_v11);
       }
     }
     else {
       temp_v4 = FUN_002b898c();
       if (temp_v4 == 0x6b) {
         temp_v11 = 0xe1;
-        FUN_002b8838(temp_v11);
+        buttonHelpSetPreset(temp_v11);
       }
     }
     temp_v6 = FUN_0029efa8(temp_v10);
@@ -738,7 +738,7 @@ LAB_001cfdfc:
         if (temp_v5 < temp_v4) {
           do {
             if (*(short *)(param_1 + temp_v5 * 2 + 0xd114) == 0) {
-              FUN_0029d620(temp_v9);
+              flaggedEntrySetValueA(temp_v9);
               FUN_0029c94c(0);
               break;
             }
@@ -754,7 +754,7 @@ LAB_001cfdfc:
 LAB_001cf28c:
           FUN_002bc01c(0x100016e);
           FUN_00296e90();
-          FUN_002b8838(0x9a);
+          buttonHelpSetPreset(0x9a);
           *piVar25 = *piVar9;
           *piVar9 = 99;
           return;
@@ -792,14 +792,14 @@ LAB_001cf28c:
       temp_v4 = FUN_002b898c();
       if (temp_v4 == 0xe1) {
         temp_v11 = 0x6b;
-        FUN_002b8838(temp_v11);
+        buttonHelpSetPreset(temp_v11);
       }
     }
     else {
       temp_v4 = FUN_002b898c();
       if (temp_v4 == 0x6b) {
         temp_v11 = 0xe1;
-        FUN_002b8838(temp_v11);
+        buttonHelpSetPreset(temp_v11);
       }
     }
     temp_v6 = FUN_0029efa8(temp_v9);

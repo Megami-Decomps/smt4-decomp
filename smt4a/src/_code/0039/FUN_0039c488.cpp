@@ -15,9 +15,9 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } void_stack;
 
-extern int DAT_00588fe8; /* 0x588fe8 */
+extern int g_statusDown; /* 0x588fe8 */
 
-extern int FUN_001801a4(void);
+extern int gameGetPlayerData(void);
 extern int slotRecordFindById(unsigned short);
 /* Supplied declaration required: FUN_00203b40. */
 extern int FUN_002857b8(void);
@@ -40,8 +40,8 @@ void FUN_0039c488(void)
   char *pcVar6;
   unsigned int *puVar7;
   
-  temp_v0 = DAT_00588fe8;
-  puVar7 = (unsigned int *)(DAT_00588fe8 + 0x24ac);
+  temp_v0 = g_statusDown;
+  puVar7 = (unsigned int *)(g_statusDown + 0x24ac);
   *puVar7 = 0;
   *(unsigned int *)(temp_v0 + 0x2564) = 1;
   *(unsigned int *)(temp_v0 + 0x24b0) = 0;
@@ -64,7 +64,7 @@ void FUN_0039c488(void)
   *(unsigned int *)(temp_v0 + 0x24fc) = 0;
   FUN_002c7e3c();
   if (*(short *)(temp_v0 + 0x598) < 1) {
-    temp_v1 = FUN_001801a4();
+    temp_v1 = gameGetPlayerData();
     temp_v2 = countUnlockedSlots();
     *(int *)(temp_v0 + 0x24ec) = temp_v2;
     if (0 < temp_v2) {

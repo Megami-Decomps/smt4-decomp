@@ -6,31 +6,31 @@ extern "C" {
 
 int FUN_00124324(...);
 int FUN_00126058(void);
-int FUN_002b8234(...);
+int msgBoxFlagsSetBit7(...);
 
 int FUN_001269fc(void);
 int FUN_002b8244(...);
 int FUN_002b827c(...);
 int FUN_002b8454(...);
-int FUN_002b8838(...);
+int buttonHelpSetPreset(...);
 int FUN_002b898c(void);
 int FUN_002b89e4(...);
-int FUN_002b8d80(...);
+int msgBoxFlagsClearBit7(...);
 int FUN_002bc02c(void);
 int FUN_002c53f4(...);
 
-int FUN_00124594(int);
+int gameDataCounterSpend(int);
 int FUN_002b8b4c(...);
-int FUN_002b8cc8(void);
-int FUN_002b8da0(...);
-int FUN_002b8db0(...);
+int ifTouchRegionRemove(void);
+int pairSetFirstResetSecond(...);
+int msgBoxFlagsClear(...);
 int FUN_002b8dc0(unsigned int);
-int FUN_002b8e84(int);
+int eventQueueAddUnique(int);
 int FUN_002b8ee0(...);
 int FUN_002bc01c(...);
 int FUN_002bf818(...);
 int FUN_002c1658(...);
-int FUN_002c49f8(unsigned int, int);
+int objFlagsSetBits(unsigned int, int);
 int VectorFloatToUnsigned(double, int);
 int VectorUnsignedToFloat(int, int);
 
@@ -40,7 +40,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } void_stack;
 
-extern signed char DAT_0043e188; /* 0x43e188 */
+extern signed char g_messageMain; /* 0x43e188 */
 extern int DAT_0043e18c; /* 0x43e18c */
 extern int DAT_0043e190; /* 0x43e190 */
 extern int DAT_0049381c; /* 0x49381c */
@@ -53,11 +53,11 @@ extern signed char DAT_0049382a; /* 0x49382a */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: FUN_00124324. */
-/* Supplied declaration required: FUN_00124594. */
+/* Supplied declaration required: gameDataCounterSpend. */
 /* Supplied declaration required: FUN_00126058. */
-extern int FUN_0012650c(unsigned int);
+extern int msgBoxIsState2(unsigned int);
 /* Supplied declaration required: FUN_001269fc. */
-/* Supplied declaration required: FUN_002b8234. */
+/* Supplied declaration required: msgBoxFlagsSetBit7. */
 /* Supplied declaration required: FUN_002b8244. */
 /* Supplied declaration required: FUN_002b827c. */
 /* Supplied declaration required: FUN_002b8454. */
@@ -66,21 +66,21 @@ extern int FUN_002b8660(void);
 extern int FUN_002b8694(void);
 extern int lmapMainIsRunning(void);
 extern int FUN_002b8804(void);
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: FUN_002b898c. */
 extern int FUN_002b89a4(unsigned int);
 /* Supplied declaration required: FUN_002b89e4. */
 /* Supplied declaration required: FUN_002b8b4c. */
-/* Supplied declaration required: FUN_002b8cc8. */
-extern int FUN_002b8cec(unsigned int);
+/* Supplied declaration required: ifTouchRegionRemove. */
+extern int padIsButtonRepeat(unsigned int);
 extern int FUN_002b8d54(void);
 extern int FUN_002b8d68(void);
-/* Supplied declaration required: FUN_002b8d80. */
-extern int FUN_002b8d90(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002b8da0. */
-/* Supplied declaration required: FUN_002b8db0. */
+/* Supplied declaration required: msgBoxFlagsClearBit7. */
+extern int msgBoxFlagsTestAny(unsigned int, unsigned int);
+/* Supplied declaration required: pairSetFirstResetSecond. */
+/* Supplied declaration required: msgBoxFlagsClear. */
 /* Supplied declaration required: FUN_002b8dc0. */
-/* Supplied declaration required: FUN_002b8e84. */
+/* Supplied declaration required: eventQueueAddUnique. */
 /* Supplied declaration required: FUN_002b8ee0. */
 /* Supplied declaration required: FUN_002bc01c. */
 /* Supplied declaration required: FUN_002bc02c. */
@@ -89,7 +89,7 @@ extern int FUN_002bc088(void);
 extern int jobGetWork(void);
 extern int FUN_002c15fc(unsigned int);
 /* Supplied declaration required: FUN_002c1658. */
-/* Supplied declaration required: FUN_002c49f8. */
+/* Supplied declaration required: objFlagsSetBits. */
 /* Supplied declaration required: FUN_002c53f4. */
 extern int mapMainIsBusy(void);
 extern int QuestCenterMode_IsBusy(void);
@@ -164,7 +164,7 @@ unsigned int FUN_00114474(void)
                 temp_v5 = (unsigned int)*(unsigned char *)(temp_v3 + 0x81);
               }
               if (temp_v6 == 0 && temp_v5 == 0) {
-                FUN_002b8e84(0x1000170);
+                eventQueueAddUnique(0x1000170);
               }
               temp_v6 = *(int *)(temp_v3 + 0x6c);
               if (temp_v6 < 1) {
@@ -250,7 +250,7 @@ unsigned int FUN_00114474(void)
     case 3:
       if (*(int *)(DAT_0043e190 + 0x84) >= 1) {
         if (*(int *)(DAT_0043e190 + 0x84) == 10) {
-          FUN_002b8e84(0x1000170);
+          eventQueueAddUnique(0x1000170);
         }
         *(int *)(temp_v6 + 0x84) = *(int *)(temp_v6 + 0x84) - 1;
         temp_v13 = (float)VectorUnsignedToFloat
@@ -265,7 +265,7 @@ unsigned int FUN_00114474(void)
         temp_v0 = *(short *)(DAT_0043e190 + 0x98);
         *(unsigned char *)(DAT_0043e190 + 0x88) = 0;
         *(short *)(temp_v6 + 0x90) = *psVar1 - temp_v0;
-        FUN_00124594(temp_v0);
+        gameDataCounterSpend(temp_v0);
       }
       break;
     case 4:
@@ -281,7 +281,7 @@ unsigned int FUN_00114474(void)
   temp_v16 = 0x3f80000000000000;
   switch(temp_v5) {
   case 1:
-    FUN_002b8db0(*(unsigned int *)(temp_v3 + 4),8);
+    msgBoxFlagsClear(*(unsigned int *)(temp_v3 + 4),8);
     if (*(char *)(temp_v3 + 9) == '\f') {
       temp_v6 = 0;
       if (temp_v6 < *(int *)(temp_v3 + 0x24)) {
@@ -293,7 +293,7 @@ unsigned int FUN_00114474(void)
             if ('\x05' < temp_v7) {
               *(unsigned char *)(temp_v4 + 0x41) = 0;
             }
-            FUN_002b8da0(temp_v3 + temp_v6 * 0x8c + 0x498,(int)*(char *)(temp_v4 + 0x41) / 2 + 0x8b);
+            pairSetFirstResetSecond(temp_v3 + temp_v6 * 0x8c + 0x498,(int)*(char *)(temp_v4 + 0x41) / 2 + 0x8b);
           }
           temp_v6 = temp_v6 + 1;
         } while (temp_v6 < *(int *)(temp_v3 + 0x24));
@@ -334,7 +334,7 @@ LAB_001149c8:
       break;
     }
     if (*(char *)(temp_v3 + 0x36) != '\0') {
-      FUN_002c49f8(*(unsigned int *)(temp_v3 + 4),0x20);
+      objFlagsSetBits(*(unsigned int *)(temp_v3 + 4),0x20);
     }
     temp_v7 = *(char *)(temp_v3 + 9);
     if (((((temp_v7 != '\x01' && temp_v7 != '\x02') && (temp_v7 != '\x03' && temp_v7 != '\x04')) &&
@@ -367,14 +367,14 @@ LAB_001149c8:
                  temp_v8 != temp_v6)))) {
           FUN_002bc01c(0x100016c);
         }
-        temp_v4 = FUN_002b8cec(5);
+        temp_v4 = padIsButtonRepeat(5);
         if (temp_v4 == 0) {
-          temp_v4 = FUN_002b8cec(6);
+          temp_v4 = padIsButtonRepeat(6);
           if (temp_v4 == 0) {
-            temp_v4 = FUN_002b8cec(0xe);
+            temp_v4 = padIsButtonRepeat(0xe);
             if (((temp_v4 == 0) || (temp_v4 = FUN_002c15fc(5), temp_v4 != 0)) ||
                (temp_v4 = FUN_002c15fc(6), temp_v4 != 0)) {
-              temp_v4 = FUN_002b8cec(0xf);
+              temp_v4 = padIsButtonRepeat(0xf);
               if (((temp_v4 == 0) || (temp_v4 = FUN_002c15fc(6), temp_v4 != 0)) ||
                  (temp_v4 = FUN_002c15fc(5), temp_v4 != 0)) {
                 if (*(char *)(temp_v3 + 0x83) == '\0') {
@@ -387,7 +387,7 @@ LAB_001149c8:
                   temp_v4 = 0;
                   if (temp_v4 < temp_v9) {
                     do {
-                      FUN_002b8cc8();
+                      ifTouchRegionRemove();
                       temp_v4 = temp_v4 + 1;
                     } while (temp_v4 < temp_v9);
                   }
@@ -423,7 +423,7 @@ LAB_00114d48:
                       temp_v4 = 0;
                       if (temp_v4 < temp_v9) {
                         do {
-                          FUN_002b8cc8();
+                          ifTouchRegionRemove();
                           temp_v4 = temp_v4 + 1;
                         } while (temp_v4 < temp_v9);
                       }
@@ -501,7 +501,7 @@ LAB_00114ea4:
         temp_v6 = 0;
         if (temp_v6 < temp_v9) {
           do {
-            FUN_002b8cc8();
+            ifTouchRegionRemove();
             temp_v6 = temp_v6 + 1;
           } while (temp_v6 < temp_v9);
         }
@@ -548,20 +548,20 @@ LAB_00114ee0:
       break;
     }
     FUN_002bf818(temp_v3 + 0x2f4);
-    temp_v6 = FUN_002b8d90(*(unsigned int *)(temp_v3 + 4),0x20);
-    if ((temp_v6 != 0) && (temp_v6 = FUN_002b8d90(*(unsigned int *)(temp_v3 + 4),0x40), temp_v6 != 0)) {
+    temp_v6 = msgBoxFlagsTestAny(*(unsigned int *)(temp_v3 + 4),0x20);
+    if ((temp_v6 != 0) && (temp_v6 = msgBoxFlagsTestAny(*(unsigned int *)(temp_v3 + 4),0x40), temp_v6 != 0)) {
       temp_v1 = 4;
       goto LAB_00114fc0;
     }
     if ((*(char *)(temp_v3 + 0x2c) == '\0') &&
-       (temp_v6 = FUN_002b8d90(*(unsigned int *)(temp_v3 + 4),0x10), temp_v6 == 0)) break;
+       (temp_v6 = msgBoxFlagsTestAny(*(unsigned int *)(temp_v3 + 4),0x10), temp_v6 == 0)) break;
     *(unsigned int *)(temp_v3 + 0x1c) = 0;
     if ((*(unsigned int *)(temp_v3 + 0xc) & 8) == 0) {
       *(unsigned char *)(temp_v3 + 0x35) = 1;
       *(unsigned char *)(temp_v3 + 8) = 0;
-      FUN_002b8db0(*(unsigned int *)(temp_v3 + 4),0x20);
-      FUN_002b8db0(*(unsigned int *)(temp_v3 + 4),0x40);
-      FUN_002b8d80(*(unsigned int *)(temp_v3 + 4));
+      msgBoxFlagsClear(*(unsigned int *)(temp_v3 + 4),0x20);
+      msgBoxFlagsClear(*(unsigned int *)(temp_v3 + 4),0x40);
+      msgBoxFlagsClearBit7(*(unsigned int *)(temp_v3 + 4));
       break;
     }
     if (temp_v3 == 0) break;
@@ -636,7 +636,7 @@ LAB_001151e4:
             if (temp_v7 != -0x70) {
               if (temp_v7 == -0x60) {
                 temp_v14 = 0xa1;
-                FUN_002b8838(temp_v14);
+                buttonHelpSetPreset(temp_v14);
               }
               else if (temp_v7 != -0x57) {
                 if (!((temp_v7 == -0x37 || temp_v7 == -0x36) || temp_v7 == -0x35)) {
@@ -669,7 +669,7 @@ LAB_001151e4:
                       temp_v14 = 0xd2;
                     }
                   }
-                  FUN_002b8838(temp_v14);
+                  buttonHelpSetPreset(temp_v14);
                 }
               }
               else {
@@ -679,7 +679,7 @@ LAB_001151e4:
                 else {
                   temp_v14 = 0xaa;
                 }
-                FUN_002b8838(temp_v14);
+                buttonHelpSetPreset(temp_v14);
               }
             }
             else {
@@ -692,7 +692,7 @@ LAB_001151e4:
               else {
                 temp_v14 = 0x91;
               }
-              FUN_002b8838(temp_v14);
+              buttonHelpSetPreset(temp_v14);
             }
           }
           else if (*(char *)(temp_v3 + 0x30) != '\0') {
@@ -702,10 +702,10 @@ LAB_001151e4:
             else {
               temp_v14 = 0x9d;
             }
-            FUN_002b8838(temp_v14);
+            buttonHelpSetPreset(temp_v14);
           }
           else {
-            FUN_002b8838(0x9b);
+            buttonHelpSetPreset(0x9b);
           }
         }
       }
@@ -778,7 +778,7 @@ LAB_001151e4:
             if ('\x05' < temp_v7) {
               *(unsigned char *)(temp_v4 + 0x41) = 0;
             }
-            FUN_002b8da0(temp_v8 + 0x498,(int)*(char *)(temp_v4 + 0x41) / 2 + 0x8b);
+            pairSetFirstResetSecond(temp_v8 + 0x498,(int)*(char *)(temp_v4 + 0x41) / 2 + 0x8b);
           }
           else {
             temp_v10 = 0;
@@ -804,7 +804,7 @@ LAB_00115134:
             if (((temp_v7 == '\a' || temp_v7 == '\b') || temp_v7 == '\t') &&
                (FUN_002bf818(temp_v3 + 0x40c), *(char *)(temp_v3 + 0xa12) != '\0')) {
               if (*(char *)(temp_v3 + 0xa26) != '\0') {
-                FUN_002b8838();
+                buttonHelpSetPreset();
                 temp_v5 = 0;
                 do {
                   FUN_002b8454(temp_v5 & 0xff,*(unsigned char *)(temp_v3 + temp_v5 + 0xa13),
@@ -818,9 +818,9 @@ LAB_00115134:
             temp_v6 = FUN_002bf818(temp_v3 + 0xc4);
             if (temp_v6 != 0) {
               *(unsigned char *)(temp_v3 + 8) = 0;
-              FUN_002b8d80(*(unsigned int *)(temp_v3 + 4));
-              FUN_002b8db0(*(unsigned int *)(temp_v3 + 4),0x20);
-              FUN_002b8db0(*(unsigned int *)(temp_v3 + 4),0x40);
+              msgBoxFlagsClearBit7(*(unsigned int *)(temp_v3 + 4));
+              msgBoxFlagsClear(*(unsigned int *)(temp_v3 + 4),0x20);
+              msgBoxFlagsClear(*(unsigned int *)(temp_v3 + 4),0x40);
             }
           }
           else {
@@ -828,9 +828,9 @@ LAB_00115134:
             FUN_002bf818(temp_v3 + 0x1dc);
             if ((*(char *)(temp_v3 + 0x14e) != '\0') && (*(char *)(temp_v3 + 0x266) != '\0')) {
               *(unsigned char *)(temp_v3 + 8) = 0;
-              FUN_002b8d80(*(unsigned int *)(temp_v3 + 4));
-              FUN_002b8db0(*(unsigned int *)(temp_v3 + 4),0x20);
-              FUN_002b8db0(*(unsigned int *)(temp_v3 + 4),0x40);
+              msgBoxFlagsClearBit7(*(unsigned int *)(temp_v3 + 4));
+              msgBoxFlagsClear(*(unsigned int *)(temp_v3 + 4),0x20);
+              msgBoxFlagsClear(*(unsigned int *)(temp_v3 + 4),0x40);
             }
           }
         }
@@ -838,7 +838,7 @@ LAB_00115134:
           FUN_002bf818(temp_v3 + 0xc4);
           if (*(char *)(temp_v3 + 0x14e) != '\0') {
             *(unsigned char *)(temp_v3 + 8) = 0;
-            FUN_002b8d80(*(unsigned int *)(temp_v3 + 4));
+            msgBoxFlagsClearBit7(*(unsigned int *)(temp_v3 + 4));
             *(unsigned char *)(temp_v3 + 0xa12) = 0;
             FUN_002b8244(0);
           }
@@ -849,11 +849,11 @@ LAB_00115134:
         FUN_002bf818(temp_v3 + 0x268);
         if ((*(char *)(temp_v3 + 0x14e) != '\0') && (*(char *)(temp_v3 + 0x2f2) != '\0')) {
           *(unsigned char *)(temp_v3 + 8) = 0;
-          FUN_002b8d80(*(unsigned int *)(temp_v3 + 4));
+          msgBoxFlagsClearBit7(*(unsigned int *)(temp_v3 + 4));
           if (*(char *)(temp_v3 + 0xa12) != '\0') {
             if (*(char *)(temp_v3 + 0xa26) != '\0') {
               if (*(unsigned char *)(temp_v3 + 0xa12) != 0xa0) {
-                FUN_002b8838();
+                buttonHelpSetPreset();
                 temp_v5 = 0;
                 do {
                   FUN_002b8454(temp_v5 & 0xff,*(unsigned char *)(temp_v3 + temp_v5 + 0xa13),
@@ -888,7 +888,7 @@ LAB_00115134:
         if (!temp_v10) break;
       }
       *(unsigned char *)(temp_v3 + 8) = 0;
-      FUN_002b8d80(*(unsigned int *)(temp_v3 + 4));
+      msgBoxFlagsClearBit7(*(unsigned int *)(temp_v3 + 4));
     }
     break;
   case 4:
@@ -928,9 +928,9 @@ LAB_00115134:
       if ((*(unsigned int *)(temp_v3 + 0xc) & 8) == 0) {
         *(unsigned char *)(temp_v3 + 0x35) = 1;
         *(unsigned char *)(temp_v3 + 8) = 0;
-        FUN_002b8d80(*(unsigned int *)(temp_v3 + 4));
-        FUN_002b8db0(*(unsigned int *)(temp_v3 + 4),0x20);
-        FUN_002b8db0(*(unsigned int *)(temp_v3 + 4),0x40);
+        msgBoxFlagsClearBit7(*(unsigned int *)(temp_v3 + 4));
+        msgBoxFlagsClear(*(unsigned int *)(temp_v3 + 4),0x20);
+        msgBoxFlagsClear(*(unsigned int *)(temp_v3 + 4),0x40);
         break;
       }
       if (temp_v3 == 0) break;
@@ -980,23 +980,23 @@ LAB_001159f0:
       if (temp_v6 == 0) {
         *(unsigned char *)(temp_v3 + 0x83) = 0;
         if ((*(unsigned int *)(temp_v3 + 0xc) & 0x20) != 0) goto LAB_00115ad8;
-        FUN_002b8d80(*(unsigned int *)(temp_v3 + 4));
+        msgBoxFlagsClearBit7(*(unsigned int *)(temp_v3 + 4));
       }
     }
     else {
       temp_v6 = FUN_002b898c();
-      if ((temp_v6 != 0x51) && (DAT_0043e188 != '\0')) {
+      if ((temp_v6 != 0x51) && (g_messageMain != '\0')) {
         temp_v6 = 7;
         FUN_002c1658(7,2);
         if (temp_v6 != 0) {
-          temp_v6 = FUN_0012650c(*(unsigned int *)(temp_v3 + 4));
+          temp_v6 = msgBoxIsState2(*(unsigned int *)(temp_v3 + 4));
           if (temp_v6 != 0) {
             *(unsigned char *)(temp_v3 + 0x83) = 2;
-            FUN_002b8234(*(unsigned int *)(temp_v3 + 4));
+            msgBoxFlagsSetBit7(*(unsigned int *)(temp_v3 + 4));
           }
           else {
             *(unsigned char *)(temp_v3 + 0x83) = 1;
-            FUN_002b8234(*(unsigned int *)(temp_v3 + 4));
+            msgBoxFlagsSetBit7(*(unsigned int *)(temp_v3 + 4));
           }
         }
       }
@@ -1004,8 +1004,8 @@ LAB_001159f0:
   }
 LAB_00115ab4:
   if ((*(char *)(temp_v3 + 0x83) != '\0') &&
-     (temp_v6 = FUN_002b8d90(*(unsigned int *)(temp_v3 + 4),0x80), temp_v6 == 0)) {
-    FUN_002b8234(*(unsigned int *)(temp_v3 + 4));
+     (temp_v6 = msgBoxFlagsTestAny(*(unsigned int *)(temp_v3 + 4),0x80), temp_v6 == 0)) {
+    msgBoxFlagsSetBit7(*(unsigned int *)(temp_v3 + 4));
   }
 LAB_00115ad8:
   if (temp_v3 == 0) {

@@ -37,15 +37,15 @@ typedef struct {
 
 extern unsigned char LAB_00217bac; /* 0x217bac */
 extern unsigned char LAB_00217ea4; /* 0x217ea4 */
-extern int DAT_0057f108; /* 0x57f108 */
+extern int g_camp; /* 0x57f108 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_0015f858. */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164b5c. */
-extern int FUN_001654d8(void);
-extern int FUN_001654e4(int);
+extern int vec2GetXInt(void);
+extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001689e8. */
 /* Supplied declaration required: FUN_00180310. */
@@ -88,9 +88,9 @@ void FUN_0021775c(int param_1,int param_2)
   int temp_v15;
   int temp_v16;
   
-  temp_v1 = DAT_0057f108 + 0x6e4;
-  temp_v2 = FUN_001654d8();
-  temp_v3 = FUN_001654e4(temp_v1);
+  temp_v1 = g_camp + 0x6e4;
+  temp_v2 = vec2GetXInt();
+  temp_v3 = vec2GetYInt(temp_v1);
   temp_v1 = temp_v2;
   if (temp_v2 < 0) {
     temp_v1 = -temp_v2;
@@ -99,7 +99,7 @@ void FUN_0021775c(int param_1,int param_2)
     return;
   }
   efctSetSpeed();
-  temp_v1 = DAT_0057f108;
+  temp_v1 = g_camp;
   if (param_1 != 0x18) {
     if (param_1 < 0x19) {
       if (param_1 != 0xe) {
@@ -137,21 +137,21 @@ void FUN_0021775c(int param_1,int param_2)
             efctSetSpeed();
             return;
           }
-          temp_v12 = DAT_0057f108 + 0x188;
-          temp_v8 = DAT_0057f108 + 0x2a78;
+          temp_v12 = g_camp + 0x188;
+          temp_v8 = g_camp + 0x2a78;
           FUN_00164b5c(2,0x14,0,temp_v2,temp_v3,0x65);
           FUN_001835b4(2,0x14,0x46b,temp_v2,temp_v3,0x6a);
         }
         else {
-          temp_v12 = DAT_0057f108 + 0x124;
-          temp_v8 = DAT_0057f108 + 0x22a8;
+          temp_v12 = g_camp + 0x124;
+          temp_v8 = g_camp + 0x22a8;
           FUN_00164b5c(2,0x14,0,temp_v2,temp_v3,0x65);
           FUN_001835b4(2,0x14,0x46a,temp_v2,temp_v3,0x6a);
         }
       }
       else {
-        temp_v12 = DAT_0057f108 + 0xc0;
-        temp_v8 = DAT_0057f108 + 0x21b0;
+        temp_v12 = g_camp + 0xc0;
+        temp_v8 = g_camp + 0x21b0;
         FUN_00164b5c(2,0x14,0,temp_v2,temp_v3,0x65);
         FUN_001835b4(2,0x14,0x469,temp_v2,temp_v3,0x6a);
       }

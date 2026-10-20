@@ -7,9 +7,9 @@ extern "C" {
 int FUN_0032fea0(unsigned int *, int, int);
 int FUN_0035dd74(void);
 
-extern int FUN_001ab854(void);
-extern int FUN_001ab888(void);
-extern int FUN_001b347c(void);
+extern int gameGetSlotRecord(void);
+extern int gameGetSlotTable(void);
+extern int gameSlotTableFindFree(void);
 extern int FUN_002a4b28(unsigned short);
 /* Supplied declaration required: FUN_0032fea0. */
 /* Supplied declaration required: FUN_0035dd74. */
@@ -30,7 +30,7 @@ void FUN_004db07c(unsigned int param_1,int param_2,unsigned int *param_3)
   int temp_v6;
   
   temp_v6 = 0;
-  temp_v0 = FUN_001ab888();
+  temp_v0 = gameGetSlotTable();
   FUN_0035dd74();
   if (param_2 != 0) {
     *param_3 = 0;
@@ -44,11 +44,11 @@ void FUN_004db07c(unsigned int param_1,int param_2,unsigned int *param_3)
       temp_v5 = param_2 + temp_v4 * 2;
       if (*(short *)(temp_v5 + 2) != 0) {
         temp_v3 = 0;
-        temp_v1 = FUN_001b347c();
+        temp_v1 = gameSlotTableFindFree();
         if (0 < temp_v1) {
           do {
             if (-1 < *(char *)(temp_v0 + temp_v3 + 0x1c88)) {
-              temp_v1 = FUN_001ab854();
+              temp_v1 = gameGetSlotRecord();
               temp_v2 = bitsAt60Test(temp_v1,10);
               if ((temp_v2 == 0) && (*(short *)(temp_v1 + 0x62) == *(short *)(temp_v5 + 2))) {
                 *(unsigned short *)((int)param_3 + temp_v4 * 2) = 1;
@@ -56,7 +56,7 @@ void FUN_004db07c(unsigned int param_1,int param_2,unsigned int *param_3)
               }
             }
             temp_v3 = temp_v3 + 1;
-            temp_v1 = FUN_001b347c();
+            temp_v1 = gameSlotTableFindFree();
           } while (temp_v3 < temp_v1);
         }
         psVar5 = (short *)((int)param_3 + temp_v4 * 2);

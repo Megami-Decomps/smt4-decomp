@@ -30,11 +30,11 @@ typedef struct {
 } param_4_stack;
 
 extern int g_effAsdLightHandle; /* 0x5b3c80 */
-extern int *DAT_005b3c88; /* 0x5b3c88 */
+extern int *g_asdModelTransformBuilder; /* 0x5b3c88 */
 extern unsigned int DAT_005b3c90; /* 0x5b3c90 */
 extern unsigned int DAT_005b3c98; /* 0x5b3c98 */
-extern unsigned int *DAT_005b40e0; /* 0x5b40e0 */
-extern unsigned int DAT_005b40e4; /* 0x5b40e4 */
+extern unsigned int *g_commandBufferCursor; /* 0x5b40e0 */
+extern unsigned int g_commandBufferEnd; /* 0x5b40e4 */
 extern int DAT_0061a50c; /* 0x61a50c */
 extern signed char DAT_00636e04; /* 0x636e04 */
 extern signed char DAT_00636e05; /* 0x636e05 */
@@ -89,8 +89,8 @@ void FUN_0017721c(int param_1,unsigned int param_2,unsigned int param_3,int para
   uStack_2c = param_3;
   temp_v8 = param_4;
   if ((DAT_00636e04 != '\0') && (DAT_00636e05 == '\0')) {
-    FUN_00197eb0(DAT_005b3c88 + 4,DAT_005b3c90);
-    piVar3 = DAT_005b3c88;
+    FUN_00197eb0(g_asdModelTransformBuilder + 4,DAT_005b3c90);
+    piVar3 = g_asdModelTransformBuilder;
     temp_v1 = g_effAsdLightHandle;
     nw_gfx_SceneTraverser_Begin(*(unsigned int *)(g_effAsdLightHandle + 8),*(unsigned int *)(g_effAsdLightHandle + 4))
     ;
@@ -101,9 +101,9 @@ void FUN_0017721c(int param_1,unsigned int param_2,unsigned int param_3,int para
                  *(unsigned int *)(*(int *)(param_1 + 0x14) + 0x10),temp_v4,
                  *(unsigned int *)(param_1 + 0x18));
     asdGxCommandListEnd(DAT_00636e08,0);
-    FUN_0018e9d8(DAT_005b3c88,DAT_005b3c90);
-    FUN_00197eb0(DAT_005b3c88 + 4,DAT_005b3c98);
-    piVar3 = DAT_005b3c88;
+    FUN_0018e9d8(g_asdModelTransformBuilder,DAT_005b3c90);
+    FUN_00197eb0(g_asdModelTransformBuilder + 4,DAT_005b3c98);
+    piVar3 = g_asdModelTransformBuilder;
     temp_v1 = g_effAsdLightHandle;
     nw_gfx_SceneTraverser_Begin(*(unsigned int *)(g_effAsdLightHandle + 8),*(unsigned int *)(g_effAsdLightHandle + 4))
     ;
@@ -115,14 +115,14 @@ void FUN_0017721c(int param_1,unsigned int param_2,unsigned int param_3,int para
   if (temp_v1 == 0) {
     asdGxCommandListStartRecord(DAT_00636e10);
   }
-  puVar7 = DAT_005b40e0;
+  puVar7 = g_commandBufferCursor;
   if (temp_v8 != 0) {
     FUN_00199d58(temp_v6,*(unsigned int *)(*(int *)(param_1 + 0x14) + 0xc),
                  *(unsigned int *)(*(int *)(param_1 + 0x14) + 0x10),temp_v4,
                  *(unsigned int *)(param_1 + 0x18));
     puVar1 = (unsigned int *)0x0;
     if (puVar7 != (unsigned int *)0x0) {
-      puVar1 = DAT_005b40e0;
+      puVar1 = g_commandBufferCursor;
     }
     if ((puVar7 != (unsigned int *)0x0 && puVar1 != (unsigned int *)0x0) && puVar1 != puVar7) {
       puVar9 = (unsigned char *)0x0;
@@ -164,9 +164,9 @@ void FUN_0017721c(int param_1,unsigned int param_2,unsigned int param_3,int para
     return;
   }
   temp_v4 = *DAT_00636e10;
-  temp_v3 = (int)DAT_005b40e0 - *(int *)(DAT_0061a50c + 4);
+  temp_v3 = (int)g_commandBufferCursor - *(int *)(DAT_0061a50c + 4);
   temp_v5 = (temp_v3 & 8) != 0;
-  puVar7 = DAT_005b40e0;
+  puVar7 = g_commandBufferCursor;
   if (temp_v5) {
     puVar7 = (unsigned int *)(temp_v3 + 0x18);
   }
@@ -176,8 +176,8 @@ void FUN_0017721c(int param_1,unsigned int param_2,unsigned int param_3,int para
   }
   else {
     *(unsigned int *)(temp_v1 + 0xc) = temp_v3 + 0x20;
-    if ((unsigned int)puVar7 < DAT_005b40e4) {
-      DAT_005b40e0 = puVar7 + 2;
+    if ((unsigned int)puVar7 < g_commandBufferEnd) {
+      g_commandBufferCursor = puVar7 + 2;
       puVar7[1] = 0x8025e;
       *puVar7 = 0;
     }
@@ -190,9 +190,9 @@ void FUN_0017721c(int param_1,unsigned int param_2,unsigned int param_3,int para
   }
   temp_v2 = *(int *)(temp_v1 + 0x34);
   if (temp_v2 != 0) {
-    *(unsigned int *)(temp_v2 + 8) = (unsigned int)((int)DAT_005b40e0 - temp_v2) >> 3;
+    *(unsigned int *)(temp_v2 + 8) = (unsigned int)((int)g_commandBufferCursor - temp_v2) >> 3;
   }
-  *(unsigned int **)(temp_v1 + 0x34) = DAT_005b40e0;
+  *(unsigned int **)(temp_v1 + 0x34) = g_commandBufferCursor;
   FUN_001a9380(0x238,5,&temp_v8);
   return;
 }

@@ -64,12 +64,12 @@ extern signed char DAT_0057f0ac; /* 0x57f0ac */
 /* Supplied declaration required: dataTableGet. */
 /* Supplied declaration required: dataTableGetEntries. */
 /* Supplied declaration required: FUN_001a9698. */
-extern int FUN_001ab888(void);
+extern int gameGetSlotTable(void);
 extern int FUN_00213b5c(void);
 /* Supplied declaration required: unitRecordBuild. */
 /* Supplied declaration required: FUN_0035ad50. */
 /* Supplied declaration required: FUN_003c3f1c. */
-extern int FUN_003e46f4(unsigned int);
+extern int gameDataFlagTestBit(unsigned int);
 /* Supplied declaration required: FUN_004bcd90. */
 /* Supplied declaration required: FUN_004bd294. */
 /* Supplied declaration required: rt_memcpy_w. */
@@ -169,7 +169,7 @@ unsigned int FUN_004a8750(unsigned int param_1,int param_2,int param_3,unsigned 
     if (temp_v6 != 1) {
       puVar12 = (unsigned char *)0x0;
       if (temp_v6 == 2) {
-        temp_v6 = FUN_001ab888();
+        temp_v6 = gameGetSlotTable();
         temp_v2 = 0;
         if (temp_v2 < *(unsigned char *)(temp_v6 + 0x1ca3)) {
           do {
@@ -382,25 +382,25 @@ LAB_004a8864:
         jyoucyuGetTableEntry(0);
         jyoucyuGetTableEntry(0);
       }
-      temp_v6 = FUN_003e46f4(0x2d);
+      temp_v6 = gameDataFlagTestBit(0x2d);
       if (temp_v6 != 0) {
         temp_v8 = (float)VectorUnsignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v7 = VectorFloatToUnsigned(temp_v8 * 0.5f,3);
       }
       else {
-        temp_v6 = FUN_003e46f4(0x2c);
+        temp_v6 = gameDataFlagTestBit(0x2c);
         if (temp_v6 != 0) {
           temp_v8 = (float)VectorUnsignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v7 = VectorFloatToUnsigned(temp_v8 * 0.8f,3);
         }
         else {
-          temp_v6 = FUN_003e46f4(0x2b);
+          temp_v6 = gameDataFlagTestBit(0x2b);
           if (temp_v6 != 0) {
             temp_v8 = (float)VectorUnsignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
             temp_v7 = VectorFloatToUnsigned(temp_v8 * 0.9f,3);
           }
           else {
-            temp_v6 = FUN_003e46f4(0x2a);
+            temp_v6 = gameDataFlagTestBit(0x2a);
             if (temp_v6 != 0) {
               temp_v8 = (float)VectorUnsignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
               temp_v7 = VectorFloatToUnsigned(temp_v8 * 0.95f,3);

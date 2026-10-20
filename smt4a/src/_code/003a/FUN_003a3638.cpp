@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_00587f28; /* 0x587f28 */
+extern int g_naviMain; /* 0x587f28 */
 
 
 void FUN_003a3638(void)
@@ -16,10 +16,10 @@ void FUN_003a3638(void)
   float in_s0;
   float in_s1;
   
-  if (DAT_00587f28 != 0) {
-    piVar2 = (int *)(DAT_00587f28 + 0x206b0);
-    piVar1 = (int *)(DAT_00587f28 + 0x206b4);
-    *(unsigned char *)(DAT_00587f28 + 0x2069c) = 1;
+  if (g_naviMain != 0) {
+    piVar2 = (int *)(g_naviMain + 0x206b0);
+    piVar1 = (int *)(g_naviMain + 0x206b4);
+    *(unsigned char *)(g_naviMain + 0x2069c) = 1;
     *piVar2 = (int)in_s0;
     *piVar1 = (int)in_s1;
     return;

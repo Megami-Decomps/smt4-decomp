@@ -4,20 +4,20 @@
 
 extern "C" {
 
-int FUN_0027eb88(int, unsigned int);
+int memFill8(int, unsigned int);
 int FUN_0029e054(int, int, int, int);
-int FUN_002b8cc8(void);
-int FUN_002c09d0(int);
+int ifTouchRegionRemove(void);
+int gameFlagIsSet(int);
 int dataTableGetCount(unsigned int);
 int dataTableGetEntries(void);
 
 extern int g_config; /* 0x43dc58 */
 
-/* Supplied declaration required: FUN_0027eb88. */
+/* Supplied declaration required: memFill8. */
 /* Supplied declaration required: FUN_0029e054. */
-/* Supplied declaration required: FUN_002b8cc8. */
+/* Supplied declaration required: ifTouchRegionRemove. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002c09d0. */
+/* Supplied declaration required: gameFlagIsSet. */
 /* Supplied declaration required: dataTableGetCount. */
 /* Supplied declaration required: dataTableGetEntries. */
 extern unsigned int dataTableGet(unsigned int, unsigned int);
@@ -38,16 +38,16 @@ void FUN_001d15fc(void)
   temp_v5 = 0;
   if (0 < *(short *)(g_config + 0x7e)) {
     do {
-      FUN_002b8cc8();
+      ifTouchRegionRemove();
       temp_v5 = temp_v5 + 1;
     } while (temp_v5 < *(short *)(temp_v0 + 0x7e));
   }
-  FUN_0027eb88(temp_v0 + 0x76,0xffffffff);
+  memFill8(temp_v0 + 0x76,0xffffffff);
   *(unsigned short *)(temp_v0 + 0x7e) = 0;
-  temp_v5 = FUN_002c09d0(0x555);
-  if (((temp_v5 == 0) || (temp_v5 = FUN_002c09d0(0x557), temp_v5 == 0)) &&
-     (temp_v5 = FUN_002c09d0(0x557), temp_v5 == 0)) {
-    FUN_002c09d0(0x555);
+  temp_v5 = gameFlagIsSet(0x555);
+  if (((temp_v5 == 0) || (temp_v5 = gameFlagIsSet(0x557), temp_v5 == 0)) &&
+     (temp_v5 = gameFlagIsSet(0x557), temp_v5 == 0)) {
+    gameFlagIsSet(0x555);
   }
   temp_v2 = dataTableGet(0x36,0);
   dataTableGetEntries();

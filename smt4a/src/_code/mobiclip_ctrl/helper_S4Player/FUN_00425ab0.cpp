@@ -7,9 +7,9 @@ extern "C" {
 int asdOperatorNew(...);
 int memAlloc(...);
 int FUN_0016dfc4(...);
-int FUN_00188b60(...);
-int FUN_001a089c(...);
-int FUN_001a08d8(...);
+int nn_os_CriticalSection_Initialize(...);
+int nn_os_LightEvent_Initialize(...);
+int nn_os_LightEvent_Signal(...);
 int FUN_002e3140(...);
 int FUN_002fb0d4(...);
 int counterPairReset(...);
@@ -35,9 +35,9 @@ extern unsigned int *DAT_00588104; /* 0x588104 */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_0016dfc4. */
-/* Supplied declaration required: FUN_00188b60. */
-/* Supplied declaration required: FUN_001a089c. */
-/* Supplied declaration required: FUN_001a08d8. */
+/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
+/* Supplied declaration required: nn_os_LightEvent_Initialize. */
+/* Supplied declaration required: nn_os_LightEvent_Signal. */
 /* Supplied declaration required: FUN_002e3140. */
 /* Supplied declaration required: FUN_002fb0d4. */
 /* Supplied declaration required: counterPairReset. */
@@ -88,9 +88,9 @@ FUN_00425ab0(int param_1,int param_2,int param_3,int param_4,int param_5,unsigne
     *(unsigned int *)(param_1 + 0x148) = 0;
     *(unsigned int *)(param_1 + 0x14c) = 0;
     counterPairReset(param_1 + 0x158);
-    FUN_001a089c(param_1 + 0x20,1);
-    FUN_00188b60(param_1);
-    FUN_001a08d8(param_1 + 0x20);
+    nn_os_LightEvent_Initialize(param_1 + 0x20,1);
+    nn_os_CriticalSection_Initialize(param_1);
+    nn_os_LightEvent_Signal(param_1 + 0x20);
     *(unsigned char *)(param_1 + 0x10) = 0;
     *(unsigned char *)(param_1 + 0x11) = 0;
     temp_v0 = 0x100;

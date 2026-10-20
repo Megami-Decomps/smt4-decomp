@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0013b608(void);
-int FUN_0013b618(void);
+int nngxLockEnter(void);
+int nngxLockLeave(void);
 int FUN_002aa624(unsigned int *, unsigned int);
 int FUN_002ba2b8(void);
 int rt_memcpy(unsigned int, int, unsigned int);
@@ -23,8 +23,8 @@ extern signed char DAT_004c62a2; /* 0x4c62a2 */
 extern unsigned int *DAT_004c632c; /* 0x4c632c */
 extern unsigned int *DAT_004c6330; /* 0x4c6330 */
 
-/* Supplied declaration required: FUN_0013b608. */
-/* Supplied declaration required: FUN_0013b618. */
+/* Supplied declaration required: nngxLockEnter. */
+/* Supplied declaration required: nngxLockLeave. */
 /* Supplied declaration required: FUN_002aa624. */
 /* Supplied declaration required: FUN_002ba2b8. */
 /* Supplied declaration required: rt_memcpy. */
@@ -102,13 +102,13 @@ void FUN_001373f0(unsigned int param_1,int param_2)
   if (DAT_004c632c == puVar6) {
     g_commandBufferCursor = (unsigned int *)((*(unsigned int *)(param_2 + 8) & 0xfffffffc) + (int)g_commandBufferCursor);
     if (*(int *)(param_2 + 0xc) != 0) {
-      FUN_0013b608();
+      nngxLockEnter();
       puVar6[8] = *(int *)(param_2 + 0xc) + puVar6[8];
       if (((DAT_004c6330 == puVar6) && (DAT_004c62a2 != '\0')) && (DAT_004c62a1 == '\0')) {
         DAT_004c62a1 = '\x01';
         FUN_002ba2b8();
       }
-      FUN_0013b618();
+      nngxLockLeave();
       return;
     }
   }

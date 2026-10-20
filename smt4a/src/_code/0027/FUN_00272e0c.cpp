@@ -7,7 +7,7 @@ extern "C" {
 extern unsigned int DAT_005f0ca8; /* 0x5f0ca8 */
 extern unsigned int DAT_005f0ce4; /* 0x5f0ce4 */
 
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 
 
 void FUN_00272e0c(unsigned int param_1)
@@ -15,7 +15,7 @@ void FUN_00272e0c(unsigned int param_1)
 {
   int temp_v0;
   
-  temp_v0 = FUN_0018719c(0x4d0);
+  temp_v0 = gameFlagIsSet(0x4d0);
   if (temp_v0 != 0) {
     DAT_005f0ce4 = 0;
     DAT_005f0ca8 = param_1;

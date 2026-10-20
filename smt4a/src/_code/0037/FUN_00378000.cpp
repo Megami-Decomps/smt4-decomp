@@ -13,9 +13,9 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-extern int DAT_00580ca0; /* 0x580ca0 */
+extern int g_mapGimic; /* 0x580ca0 */
 
-extern int FUN_00162e8c(void);
+extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
 /* Supplied declaration required: FUN_00281b94. */
@@ -32,12 +32,12 @@ void FUN_00378000(void)
   unsigned long long temp_v4;
   unsigned long long temp_v5;
   
-  temp_v0 = FUN_00162e8c();
+  temp_v0 = gameFlagsGetBlock();
   temp_v5 = 0x42f00000;
   temp_v4 = 0x3c8efa3500000000;
   temp_v2 = 0;
   do {
-    temp_v1 = DAT_00580ca0 + temp_v2 * 0x3c;
+    temp_v1 = g_mapGimic + temp_v2 * 0x3c;
     if (*(char *)(temp_v1 + 0x90) != '\0') {
       if (*(short *)(temp_v1 + 0xa6) == 0x10) {
         FUN_00281b94((int)(short)*(unsigned int *)(temp_v1 + 0xac));
@@ -180,7 +180,7 @@ void FUN_00378000(void)
 LAB_003788d0:
     temp_v2 = temp_v2 + 1;
     if (temp_v2 >= 0x23) {
-      if (*(char *)(DAT_00580ca0 + 0x9b4) != '\0') {
+      if (*(char *)(g_mapGimic + 0x9b4) != '\0') {
         FUN_00281b94(0x201e);
         return;
       }

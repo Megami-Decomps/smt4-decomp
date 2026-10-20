@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_001dba54(void);
-int FUN_002bd540(int);
+int asdTextureSetImage(int);
 int asdTextureCreate(void);
 int asdMemoryAllocAligned(int, int, int, int, int, int);
-int FUN_002c3944(void);
+int rt_memclr(void);
 int nnnstdMemCpy(unsigned int, unsigned int, int);
 
 typedef struct fn_0038bee4_arg0 fn_0038bee4_arg0;
@@ -36,10 +36,10 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_001dba54. */
-/* Supplied declaration required: FUN_002bd540. */
+/* Supplied declaration required: asdTextureSetImage. */
 /* Supplied declaration required: asdTextureCreate. */
 /* Supplied declaration required: asdMemoryAllocAligned. */
-/* Supplied declaration required: FUN_002c3944. */
+/* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: nnnstdMemCpy. */
 
 
@@ -54,7 +54,7 @@ void FUN_0038bee4(fn_0038bee4_arg0 *param_1,int param_2)
   temp_v0 = 0x10000;
   asdMemoryAllocAligned(0x10000,0x100,0,0x2000,0x80,1);
   *(unsigned int *)&param_1->field_0x4 = temp_v0;
-  FUN_002c3944();
+  rt_memclr();
   temp_v2 = 0;
   do {
     nnnstdMemCpy(*(int *)&param_1->field_0x4 + temp_v2 * 0x400 + 0x800,param_2 + temp_v2 * 0x300,0x300);
@@ -74,7 +74,7 @@ void FUN_0038bee4(fn_0038bee4_arg0 *param_1,int param_2)
   *(unsigned int *)(param_1->field_0x8 + 0x20) = 0x8363;
   *(unsigned int *)(param_1->field_0x8 + 0x24) = *(unsigned int *)&param_1->field_0x4;
   *(unsigned int *)(param_1->field_0x8 + 0x28) = 0x2000;
-  FUN_002bd540(param_1->field_0x8);
+  asdTextureSetImage(param_1->field_0x8);
   return;
 }
 

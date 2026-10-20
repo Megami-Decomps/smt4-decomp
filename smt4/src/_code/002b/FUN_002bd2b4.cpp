@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_0026e5ec(...);
-int FUN_002b9024(void);
-int FUN_002bd420(int, int, int);
+int devilGetRecord(void);
+int memCopy(int, int, int);
 int HintPreloadData(unsigned int *);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -18,11 +18,11 @@ typedef struct {
 extern unsigned char FUN_002228d4(void);
 extern int FUN_0025981c(void);
 /* Supplied declaration required: FUN_0026e5ec. */
-extern int FUN_002a8740(int);
-extern int FUN_002a8764(void);
-/* Supplied declaration required: FUN_002b9024. */
-/* Supplied declaration required: FUN_002bd420. */
-extern int FUN_002c09bc(void);
+extern int gameGetUnitRecord(int);
+extern int gameGetSlotTable(void);
+/* Supplied declaration required: devilGetRecord. */
+/* Supplied declaration required: memCopy. */
+extern int gameDataBlocksGetSaveData(void);
 extern int cecProcessGetObject(void);
 
 
@@ -56,11 +56,11 @@ unsigned int * FUN_002bd2b4(int param_1,int param_2,unsigned char param_3,unsign
   unsigned char temp_v18;
   unsigned char temp_v19;
   
-  temp_v1 = FUN_002a8764();
-  FUN_002bd420(temp_v1 + 4,param_1,0xe);
-  FUN_002bd420(temp_v1 + 0x50,param_1 + 0xe,0x12);
+  temp_v1 = gameGetSlotTable();
+  memCopy(temp_v1 + 4,param_1,0xe);
+  memCopy(temp_v1 + 0x50,param_1 + 0xe,0x12);
   *(unsigned char *)(param_1 + 0x36) = *(unsigned char *)(temp_v1 + 0x7a);
-  temp_v2 = FUN_002c09bc();
+  temp_v2 = gameDataBlocksGetSaveData();
   temp_v3 = *(unsigned int *)(temp_v2 + 0x1f458);
   *(unsigned int *)(param_1 + 0x24) = param_4;
   *(unsigned int *)(param_1 + 0x28) = temp_v3;
@@ -89,7 +89,7 @@ unsigned int * FUN_002bd2b4(int param_1,int param_2,unsigned char param_3,unsign
     temp_v1 = 0x218;
     *(unsigned short *)(param_1 + 0x34) = 0;
     *(unsigned short *)(param_1 + 0x48) = 0x218;
-    FUN_002b9024();
+    devilGetRecord();
     temp_v5 = 0x10;
     puVar5 = (unsigned int *)(temp_v1 + 0x3c);
     *(unsigned char *)(param_1 + 0x4a) = *(unsigned char *)(temp_v1 + 3);
@@ -270,12 +270,12 @@ unsigned int * FUN_002bd2b4(int param_1,int param_2,unsigned char param_3,unsign
   do {
     temp_v4 = (int)*(char *)(temp_v1 + temp_v9 + 0x90f0);
     if ((-1 < temp_v4) &&
-       (temp_v2 = FUN_002a8740(temp_v4), *(short *)(temp_v2 + 0x46) == *(short *)(param_1 + 0x34))) break;
+       (temp_v2 = gameGetUnitRecord(temp_v4), *(short *)(temp_v2 + 0x46) == *(short *)(param_1 + 0x34))) break;
     temp_v9 = temp_v9 + 1;
   } while (temp_v9 < 0x18);
   *(short *)(param_1 + 0x48) = (short)param_2;
   *(unsigned char *)(param_1 + 0x4a) = *(unsigned char *)(temp_v2 + 0x48);
-  puVar5 = (unsigned int *)FUN_002bd420(temp_v2 + 0x34,param_1 + 0x38,0x10);
+  puVar5 = (unsigned int *)memCopy(temp_v2 + 0x34,param_1 + 0x38,0x10);
   return puVar5;
 }
 

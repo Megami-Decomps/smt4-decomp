@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00275bc8(int, unsigned int);
-int FUN_00275f44(int, unsigned int);
+int scrScriptProcessStartEntry(int, unsigned int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -17,8 +17,8 @@ extern unsigned int DAT_005e210c; /* 0x5e210c */
 extern int DAT_005e2110; /* 0x5e2110 */
 
 /* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: FUN_00275f44. */
-extern unsigned int FUN_00357bc8(int, unsigned int);
+/* Supplied declaration required: scrScriptProcessStartEntry. */
+extern unsigned int tableGroupFindEntryIndex(int, unsigned int);
 
 
 void FUN_0035d76c(unsigned int param_1)
@@ -34,8 +34,8 @@ void FUN_0035d76c(unsigned int param_1)
     DAT_005e2110 = temp_v0;
     *(unsigned int *)(temp_v0 + 0x108) = 2;
   }
-  temp_v1 = FUN_00357bc8(DAT_005e2108,param_1);
-  FUN_00275f44(DAT_005e2110,temp_v1);
+  temp_v1 = tableGroupFindEntryIndex(DAT_005e2108,param_1);
+  scrScriptProcessStartEntry(DAT_005e2110,temp_v1);
   return;
 }
 

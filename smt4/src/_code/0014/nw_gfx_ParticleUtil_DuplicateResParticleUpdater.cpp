@@ -23,7 +23,7 @@ typedef struct {
     unsigned int sp74; /* 0x74: local_74 */
 } param_2_stack;
 
-extern int FUN_002c30c4(int);
+extern int libc_strlen(int);
 /* Supplied declaration required: nnnstdMemCpy. */
 
 
@@ -110,7 +110,7 @@ LAB_00148964:
       else {
         temp_v1 = 0;
       }
-      temp_v13 = FUN_002c30c4(temp_v1);
+      temp_v13 = libc_strlen(temp_v1);
       temp_v13 = temp_v13 + 1;
       temp_v0 = puVar12[5];
       puVar2 = puVar12 + 5;

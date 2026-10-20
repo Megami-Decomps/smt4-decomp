@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00308566(...);
+int lessU16(...);
 
 /* stack frame of param_3: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -15,7 +15,7 @@ typedef struct {
 } param_3_stack;
 
 extern int wordRefsEqual_00308556(int *, unsigned int *);
-/* Supplied declaration required: FUN_00308566. */
+/* Supplied declaration required: lessU16. */
 
 
 void FUN_00131844(int *param_1,int param_2,unsigned int param_3)
@@ -39,7 +39,7 @@ void FUN_00131844(int *param_1,int param_2,unsigned int param_3)
   iStack_1c = param_2;
   temp_v6 = param_3;
   while (temp_v1 = temp_v0, temp_v1 != 0) {
-    temp_v0 = FUN_00308566(temp_v4,temp_v1 + 0x10,temp_v6);
+    temp_v0 = lessU16(temp_v4,temp_v1 + 0x10,temp_v6);
     if (temp_v0 != 0) {
       temp_v0 = *(int *)(temp_v1 + 0xc);
     }
@@ -51,7 +51,7 @@ void FUN_00131844(int *param_1,int param_2,unsigned int param_3)
   temp_v5[0] = *(unsigned int *)(param_2 + 0x10);
   temp_v3 = temp_v2;
   temp_v0 = wordRefsEqual_00308556(&temp_v3,temp_v5);
-  if ((temp_v0 != 0) || (temp_v0 = FUN_00308566(temp_v4,temp_v6,temp_v3 + 0x10), temp_v0 != 0)) {
+  if ((temp_v0 != 0) || (temp_v0 = lessU16(temp_v4,temp_v6,temp_v3 + 0x10), temp_v0 != 0)) {
     temp_v3 = *(int *)(param_2 + 0x10);
   }
   *param_1 = temp_v3;

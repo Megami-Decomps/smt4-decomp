@@ -7,13 +7,13 @@ extern "C" {
 int FUN_00138c14(void);
 int FUN_00138d0c(unsigned int, unsigned int *, int, unsigned int);
 int FUN_0014ed58(unsigned int *, unsigned int);
-int FUN_002a91f4(int, unsigned int);
+int asdMdlNodeInit(int, unsigned int);
 int asdListAdd(int *, int, int);
 int FUN_002b26d4(int *, int);
-int FUN_002b2770(int);
+int asdMdlObjectBuildBounds(int);
 int FUN_002b2988(unsigned int, int);
 int FUN_002b2ae8(unsigned int, int, int *);
-int FUN_002b2b08(unsigned int);
+int resOwnerRunNodeHandlers(unsigned int);
 
 typedef int romwright_code(...);
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -25,18 +25,18 @@ extern int g_asdMdlList; /* 0x4dad60 */
 extern int g_asdMdlList2; /* 0x4dad6c */
 extern int DAT_004dae28; /* 0x4dae28 */
 
-extern unsigned int FUN_0013840c(unsigned int, int *);
-extern int FUN_00138594(void);
+extern unsigned int asdFileRequestGetResult(unsigned int, int *);
+extern int asdFileRequestIsFinished(void);
 /* Supplied declaration required: FUN_00138c14. */
 /* Supplied declaration required: FUN_00138d0c. */
 /* Supplied declaration required: FUN_0014ed58. */
-/* Supplied declaration required: FUN_002a91f4. */
+/* Supplied declaration required: asdMdlNodeInit. */
 /* Supplied declaration required: asdListAdd. */
 /* Supplied declaration required: FUN_002b26d4. */
-/* Supplied declaration required: FUN_002b2770. */
+/* Supplied declaration required: asdMdlObjectBuildBounds. */
 /* Supplied declaration required: FUN_002b2988. */
 /* Supplied declaration required: FUN_002b2ae8. */
-/* Supplied declaration required: FUN_002b2b08. */
+/* Supplied declaration required: resOwnerRunNodeHandlers. */
 extern unsigned int FUN_002b2b64(unsigned int *);
 
 
@@ -145,7 +145,7 @@ void FUN_001247f0(void)
             do {
               puVar3 = (unsigned int *)(puVar9[0x29] + temp_v4 * 0xc);
               if ((*puVar3 & 2) != 0) {
-                FUN_002b2b08(puVar3[2]);
+                resOwnerRunNodeHandlers(puVar3[2]);
               }
               temp_v0 = puVar9[0x28];
               temp_v4 = temp_v4 + 1;
@@ -205,12 +205,12 @@ void FUN_001247f0(void)
       }
       temp_v5 = *(int *)(temp_v6 + 8);
       temp_v7 = *(int *)(temp_v6 + 0x18);
-    } while ((*(int *)(temp_v5 + 4) == 0) || (temp_v1 = FUN_00138594(), temp_v1 == 0));
-    temp_v2 = FUN_0013840c(*(unsigned int *)(temp_v5 + 4),&temp_v13);
+    } while ((*(int *)(temp_v5 + 4) == 0) || (temp_v1 = asdFileRequestIsFinished(), temp_v1 == 0));
+    temp_v2 = asdFileRequestGetResult(*(unsigned int *)(temp_v5 + 4),&temp_v13);
     FUN_002b2988(temp_v2,temp_v13);
     *(unsigned int *)(*(int *)(temp_v5 + 8) + 4) = temp_v2;
-    FUN_002a91f4(*(int *)(temp_v5 + 8),*(unsigned int *)(*(int *)(temp_v5 + 8) + 8) & 0xffff);
-    FUN_002b2770(temp_v5);
+    asdMdlNodeInit(*(int *)(temp_v5 + 8),*(unsigned int *)(*(int *)(temp_v5 + 8) + 8) & 0xffff);
+    asdMdlObjectBuildBounds(temp_v5);
     FUN_002b26d4(&g_asdMdlList2,temp_v6);
     asdListAdd(&g_asdMdlList,temp_v5,0);
     temp_v4 = temp_v4 + 1;

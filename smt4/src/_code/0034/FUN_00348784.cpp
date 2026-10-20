@@ -8,11 +8,11 @@ typedef struct Container {
     /* 0x04 */ u8 items[0x544];
 } Container;
 
-extern void FUN_002c66cc(void *items, void *callback, s32 size, s32 count);
+extern void rt_vec_dtor(void *items, void *callback, s32 size, s32 count);
 
 Container *FUN_00348784(Container *container)
 {
-    FUN_002c66cc(container->items, (void *)0x0033B5BC, 0x544, 2);
+    rt_vec_dtor(container->items, (void *)0x0033B5BC, 0x544, 2);
     return container;
 }
 

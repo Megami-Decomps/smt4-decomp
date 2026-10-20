@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_002e7674(unsigned int, int, int);
-int FUN_002eea5c(unsigned int);
+int strHolderAssignBytes(unsigned int, int, int);
+int strHolderAssignOneWide(unsigned int);
 int FUN_002f4c9c(...);
 
 /* stack frame of param_2: 1 slot(s), 2 byte(s) */
@@ -13,8 +13,8 @@ typedef struct {
     unsigned short sp18; /* 0x18: local_18 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_002e7674. */
-/* Supplied declaration required: FUN_002eea5c. */
+/* Supplied declaration required: strHolderAssignBytes. */
+/* Supplied declaration required: strHolderAssignOneWide. */
 /* Supplied declaration required: FUN_002f4c9c. */
 
 
@@ -26,11 +26,11 @@ void FUN_00310d5e(unsigned int param_1,int param_2)
   
   FUN_002f4c9c(param_2);
   FUN_002f4c9c();
-  FUN_002eea5c(param_1);
+  strHolderAssignOneWide(param_1);
   temp_v0 = *(int *)(param_2 + 0x10);
   if (*(int *)(param_2 + 0x14) != temp_v0) {
     FUN_002f4c9c(param_2);
-    FUN_002e7674(param_1,temp_v0,param_2);
+    strHolderAssignBytes(param_1,temp_v0,param_2);
   }
   return;
 }

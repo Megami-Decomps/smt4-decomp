@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002bb150(int, int);
 
-extern int DAT_00473848; /* 0x473848 */
+extern int g_nnCecdHandle; /* 0x473848 */
 
 /* Supplied declaration required: FUN_002bb150. */
 
@@ -15,7 +15,7 @@ unsigned int FUN_00358f98(void)
 
 {
 /* irregular: 1 native warning(s); review required */
-  while (DAT_00473848 == 0) {
+  while (g_nnCecdHandle == 0) {
     FUN_002bb150(10000000,0);
   }
   return 0;

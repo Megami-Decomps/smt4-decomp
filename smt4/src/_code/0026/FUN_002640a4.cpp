@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_2_stack;
 
-extern int DAT_004dad80; /* 0x4dad80 */
+extern int g_asdLightCount; /* 0x4dad80 */
 
 /* Supplied declaration required: FUN_002b74cc. */
 
@@ -41,7 +41,7 @@ void FUN_002640a4(int *param_1,int param_2)
       *(unsigned int *)(temp_v0 + 0xc) = 0;
     }
   }
-  DAT_004dad80 = DAT_004dad80 - 1;
+  g_asdLightCount = g_asdLightCount - 1;
   return;
 }
 

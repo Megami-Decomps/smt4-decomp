@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00188b60(...);
+int nn_os_CriticalSection_Initialize(...);
 int emptyStub_002f4370(unsigned int *, unsigned char *, int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -16,7 +16,7 @@ extern unsigned char LAB_0042ce3c; /* 0x42ce3c */
 extern unsigned int DAT_006426c0; /* 0x6426c0 */
 extern unsigned int DAT_006426cc; /* 0x6426cc */
 
-/* Supplied declaration required: FUN_00188b60. */
+/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
 /* Supplied declaration required: emptyStub_002f4370. */
 
 
@@ -25,9 +25,9 @@ void FUN_00511778(void)
 {
 /* irregular: 2 native warning(s); review required */
   DAT_006426c0 = 0;
-  FUN_00188b60(&DAT_006426c0);
+  nn_os_CriticalSection_Initialize(&DAT_006426c0);
   DAT_006426cc = 0;
-  FUN_00188b60(&DAT_006426cc,&LAB_0042ce3c,0x100000);
+  nn_os_CriticalSection_Initialize(&DAT_006426cc,&LAB_0042ce3c,0x100000);
   emptyStub_002f4370(&DAT_006426cc,&LAB_0042ce3c,0x100000);
   return;
 }

@@ -13,15 +13,15 @@ typedef struct Counters {
 extern struct {
     u8 unk0[4];
     Counters *counters;
-} DAT_0043dcb0;
+} g_ifTouch;
 
 u32 FUN_002aedcc(int id)
 {
     int value;
 
-    if (((DAT_0043dcb0.counters->unk64E == id) &&
-         (DAT_0043dcb0.counters->unk008 == 1 || DAT_0043dcb0.counters->unk008 == 2)) &&
-        ((value = DAT_0043dcb0.counters->unk650, value < 1 ||
+    if (((g_ifTouch.counters->unk64E == id) &&
+         (g_ifTouch.counters->unk008 == 1 || g_ifTouch.counters->unk008 == 2)) &&
+        ((value = g_ifTouch.counters->unk650, value < 1 ||
           ((value >= 0xf && (((value - 0xfU) & 3) == 0)))))) {
         return 1;
     }

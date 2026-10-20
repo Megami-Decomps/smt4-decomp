@@ -4,12 +4,12 @@ extern "C" {
 
 extern int FUN_00287894(void *id);
 extern int FUN_00298f88(void *id);
-extern u8 *FUN_002adc88(void);
+extern u8 *gameGetFlagBlock(void);
 
 /* Finds the address of the slot (0xE bytes each from +0x842, four slots, then +0x87A) in the table whose id matches. */
 int FUN_00348b7c(void *id)
 {
-    u8 *table = FUN_002adc88();
+    u8 *table = gameGetFlagBlock();
 
     if (FUN_00298f88(id) != 0) {
         if ((void *)(u32)*(u16 *)(table + 0x842) == id) {

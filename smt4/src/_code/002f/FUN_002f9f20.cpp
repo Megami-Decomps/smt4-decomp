@@ -2,10 +2,10 @@
 
 extern "C" {
 
-u32 FUN_00256fec(u32 resource);
-int FUN_00257108(void);
-int FUN_0025715c(void);
-extern u32 FUN_00256fdc(u32 resource);
+u32 handleBlockRefCreate(u32 resource);
+int handleBlockUnref(void);
+int handleBlockRefDrop(void);
+extern u32 handleRefIncrement(u32 resource);
 
 typedef struct Obj {
     /* 0x00 */ u8 unk00[0xCC];
@@ -20,15 +20,15 @@ void FUN_002f9f20(Obj *dst, Obj *src)
 
     if (src->resourceB != 0) {
         if (dst->resourceB != 0) {
-            FUN_0025715c();
+            handleBlockRefDrop();
         }
-        resource = FUN_00256fec(src->resourceB);
+        resource = handleBlockRefCreate(src->resourceB);
         dst->resourceB = resource;
     } else if (src->resourceA != 0) {
         if (dst->resourceA != 0) {
-            FUN_00257108();
+            handleBlockUnref();
         }
-        resource = FUN_00256fdc(src->resourceA);
+        resource = handleRefIncrement(src->resourceA);
         dst->resourceA = resource;
         return;
     }

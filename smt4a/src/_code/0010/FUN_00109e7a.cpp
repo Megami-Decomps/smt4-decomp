@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_2_stack;
 
-extern int FUN_002e760a(unsigned int);
+extern int operatorNew(unsigned int);
 extern int FUN_002e7614(int, unsigned int);
 /* Supplied declaration required: FUN_002f2e3c. */
 
@@ -25,7 +25,7 @@ void FUN_00109e7a(int param_1,unsigned int param_2)
   int temp_v1;
   
   if (*(char *)(param_1 + 0x51) == '\0') {
-    temp_v0 = FUN_002e760a(0x20);
+    temp_v0 = operatorNew(0x20);
     temp_v1 = 0;
     if (temp_v0 != 0) {
       temp_v1 = FUN_002e7614(temp_v0,param_2);

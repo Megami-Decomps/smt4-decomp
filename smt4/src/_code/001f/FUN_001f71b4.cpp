@@ -2,10 +2,10 @@
 
 extern "C" {
 
-int FUN_002570a8(void);
-int FUN_00257108(void);
-int FUN_0025715c(void);
-int FUN_00269334(u32 value);
+int geometryDestroy(void);
+int handleBlockUnref(void);
+int handleBlockRefDrop(void);
+int objectBufferFree(u32 value);
 int resourceListDestroy(u32 value);
 int resourceDestroy(u32 value);
 int asdMemFree(u32 ptr);
@@ -59,16 +59,16 @@ void FUN_001f71b4(Resources *res)
         asdMemFree(res->bufferB);
     }
     if (res->unk44 != 0) {
-        FUN_0025715c();
+        handleBlockRefDrop();
     }
     if (res->unk48 != 0) {
-        FUN_00257108();
+        handleBlockUnref();
     }
     if ((res->flags & 1) != 0) {
-        FUN_00269334((u32)res->parent);
+        objectBufferFree((u32)res->parent);
     }
     if (res->unk50 != 0) {
-        FUN_002570a8();
+        geometryDestroy();
     }
     asdMemFree((u32)res);
 }

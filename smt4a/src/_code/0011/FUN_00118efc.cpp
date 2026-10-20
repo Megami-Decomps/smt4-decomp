@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e5700(unsigned int *, unsigned char *, int, int);
+int rt_vec_dtor(unsigned int *, unsigned char *, int, int);
 int FUN_002f5020(unsigned int *, unsigned char *, int, int);
 int FUN_00304d10(unsigned int, int);
 int FUN_00305314(...);
@@ -13,7 +13,7 @@ int FUN_0030538c(int, unsigned int *);
 extern unsigned char LAB_001220c5; /* 0x1220c5 */
 extern unsigned char LAB_0012cfc1; /* 0x12cfc1 */
 
-/* Supplied declaration required: FUN_002e5700. */
+/* Supplied declaration required: rt_vec_dtor. */
 /* Supplied declaration required: FUN_002f5020. */
 /* Supplied declaration required: FUN_00304d10. */
 /* Supplied declaration required: FUN_00305314. */
@@ -46,10 +46,10 @@ void FUN_00118efc(int param_1,unsigned int param_2,unsigned int param_3,unsigned
     FUN_002f5020(puVar3,&LAB_0012cfc1,0xc,1);
     FUN_00305314(param_1,puVar3);
     if (*(char *)(param_1 + 4) != '\0') {
-      FUN_002e5700(puVar3,&LAB_001220c5,0xc,1);
+      rt_vec_dtor(puVar3,&LAB_001220c5,0xc,1);
       return;
     }
-    FUN_002e5700(puVar3,&LAB_001220c5,0xc,1);
+    rt_vec_dtor(puVar3,&LAB_001220c5,0xc,1);
   }
   puVar2 = (unsigned int *)FUN_00304d10(param_2,1);
   if (puVar2 != (unsigned int *)0x0) {

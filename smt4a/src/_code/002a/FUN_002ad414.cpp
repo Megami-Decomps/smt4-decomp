@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00100388(...);
 int libc_strcat(...);
-int FUN_0019cac4(void);
+int dataTable00FindById(void);
 int FUN_004bd274(int, int);
 int FUN_004bd294(int, int);
 
@@ -28,7 +28,7 @@ extern unsigned char LAB_002ada1c; /* 0x2ada1c */
 
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: libc_strcat. */
-/* Supplied declaration required: FUN_0019cac4. */
+/* Supplied declaration required: dataTable00FindById. */
 extern unsigned int wstrlen(char *);
 extern int playerPackedEntryLow10(void);
 extern int playerPackedEntryHigh(unsigned char);
@@ -129,7 +129,7 @@ void FUN_002ad414(int param_1,int param_2,unsigned int param_3,char *param_4)
   }
   else {
     param_3 = param_3 & 0xffff;
-    FUN_0019cac4();
+    dataTable00FindById();
     temp_v4 = 0;
     do {
       temp_v0 = temp_v8[temp_v4];

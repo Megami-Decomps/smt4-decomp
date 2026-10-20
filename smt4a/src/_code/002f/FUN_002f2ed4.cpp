@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002e9538(int, unsigned char [36]);
-int FUN_002e995c(unsigned char [40]);
-int FUN_002eb588(...);
+int onlineSockAddrCopy(int, unsigned char [36]);
+int onlineSockAddrConstruct(unsigned char [40]);
+int onlineTimeGetNow(...);
 int FUN_002f8264(int *);
 int _ZN9Obj55927c7vfunc10EP12Obj55927cArg(...);
 int FUN_002f84b0(int);
@@ -17,9 +17,9 @@ typedef struct {
     unsigned int sp80; /* 0x80: local_80 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_002e9538. */
-/* Supplied declaration required: FUN_002e995c. */
-/* Supplied declaration required: FUN_002eb588. */
+/* Supplied declaration required: onlineSockAddrCopy. */
+/* Supplied declaration required: onlineSockAddrConstruct. */
+/* Supplied declaration required: onlineTimeGetNow. */
 /* Supplied declaration required: FUN_002f8264. */
 /* Supplied declaration required: _ZN9Obj55927c7vfunc10EP12Obj55927cArg. */
 /* Supplied declaration required: FUN_002f84b0. */
@@ -42,34 +42,34 @@ unsigned int FUN_002f2ed4(int param_1,unsigned int *param_2,int param_3)
   unsigned char temp_v8 [40];
   unsigned char temp_v9 [12];
   
-  FUN_002e995c(temp_v8);
+  onlineSockAddrConstruct(temp_v8);
   temp_v3 = param_1 + 0x30;
   temp_v2 = param_1 + 8;
   while( 1 ) {
-    FUN_002eb588(temp_v6);
+    onlineTimeGetNow(temp_v6);
     temp_v0 = FUN_002f84c4(temp_v2,temp_v6);
     if (temp_v0 == 0) break;
-    FUN_002eb588(temp_v7);
-    FUN_002eb588(temp_v9);
+    onlineTimeGetNow(temp_v7);
+    onlineTimeGetNow(temp_v9);
     _ZN9Obj55927c7vfunc10EP12Obj55927cArg(&temp_v4,temp_v2,temp_v9);
     FUN_00514cb0(temp_v3,&temp_v4,temp_v7);
     FUN_002f8264(&temp_v4);
-    FUN_002eb588(temp_v7);
+    onlineTimeGetNow(temp_v7);
     _ZN9Obj55927c7vfunc10EP12Obj55927cArg(&temp_v4,temp_v2,temp_v7);
     FUN_002f84b0(param_1 + 0xc);
     FUN_002f8264(&temp_v4);
   }
-  FUN_002eb588(temp_v6);
+  onlineTimeGetNow(temp_v6);
   temp_v2 = FUN_002f84c4(temp_v3,temp_v6);
   temp_v1 = 0;
   if (temp_v2 != 0) {
-    FUN_002eb588(temp_v7);
+    onlineTimeGetNow(temp_v7);
     _ZN9Obj55927c7vfunc10EP12Obj55927cArg(&temp_v4,temp_v3,temp_v7);
     if (param_2 != (unsigned int *)0x0) {
       *param_2 = temp_v4;
     }
     if (param_3 != 0) {
-      FUN_002e9538(param_3,temp_v5);
+      onlineSockAddrCopy(param_3,temp_v5);
     }
     FUN_002f8264(&temp_v4);
     temp_v1 = 1;

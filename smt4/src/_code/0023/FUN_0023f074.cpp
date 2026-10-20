@@ -6,24 +6,24 @@ extern "C" {
 
 int FUN_00289880(void);
 int FUN_002898e4(void);
-int FUN_0028d6d0(void);
-int FUN_002917b8(void);
-int FUN_00291944(void);
-int FUN_00296f4c(unsigned int, int);
+int buttonHelpCreate(void);
+int buttonHelpRelease(void);
+int uiFadeRelease(void);
+int scrScriptProcessStartEntry(unsigned int, int);
 int FUN_00297060(int, unsigned int);
-int FUN_002b8838(int);
+int buttonHelpSetPreset(int);
 
 extern int FUN_0019e0c0(unsigned int);
 extern unsigned int FUN_0023ed64(unsigned int *);
 /* Supplied declaration required: FUN_00289880. */
 /* Supplied declaration required: FUN_002898e4. */
-/* Supplied declaration required: FUN_0028d6d0. */
-/* Supplied declaration required: FUN_002917b8. */
-/* Supplied declaration required: FUN_00291944. */
+/* Supplied declaration required: buttonHelpCreate. */
+/* Supplied declaration required: buttonHelpRelease. */
+/* Supplied declaration required: uiFadeRelease. */
 extern int btlGetMainState(void);
-/* Supplied declaration required: FUN_00296f4c. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297060. */
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 extern int FUN_002c2a04(unsigned int);
 
 
@@ -37,22 +37,22 @@ unsigned int FUN_0023f074(unsigned int *param_1)
   temp_v0 = FUN_002c2a04(0);
   if ((temp_v0 == 3) && (temp_v0 = FUN_002c2a04(1), temp_v0 == 3)) {
     FUN_002898e4();
-    FUN_0028d6d0();
+    buttonHelpCreate();
     FUN_00289880();
-    FUN_002b8838(0xa9);
+    buttonHelpSetPreset(0xa9);
     temp_v0 = param_1[3];
     FUN_00297060(temp_v0,param_1[5]);
     param_1[4] = temp_v0;
     *(unsigned int *)(temp_v0 + 0x108) = 1;
-    FUN_00296f4c(param_1[4],0);
+    scrScriptProcessStartEntry(param_1[4],0);
     *param_1 = 7;
     temp_v0 = FUN_0019e0c0(param_1[4]);
     if (temp_v0 != 2) {
       temp_v1 = 0;
     }
     else {
-      FUN_00291944();
-      FUN_002917b8();
+      uiFadeRelease();
+      buttonHelpRelease();
       temp_v0 = btlGetMainState();
       if (((param_1[1] & 1) == 0) && (*(int *)(temp_v0 + 0x4978) != 1)) {
         *param_1 = 8;

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00100388(...);
 int asdMemFree(...);
 int FUN_002804b0(...);
-int FUN_002e342c(...);
+int libc_strcpy(...);
 int sysMemClear(...);
 int FUN_003478dc(...);
 int FUN_003afd30(...);
@@ -25,7 +25,7 @@ extern int DAT_00573808; /* 0x573808 */
 extern int FUN_00100d60(unsigned char *, unsigned int);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002804b0. */
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 extern unsigned int FUN_002e4c2c(int);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003478dc. */
@@ -82,9 +82,9 @@ unsigned int FUN_004f5a78(int param_1)
       sysMemClear(temp_v8,0x80);
       sysMemClear(temp_v10,0x80);
       FUN_00100388(temp_v10,"battle/effect/%s.eft","Move_out_c" + temp_v1 * 0x20);
-      FUN_002e342c(temp_v8,temp_v10);
+      libc_strcpy(temp_v8,temp_v10);
       temp_v2 = FUN_00100d60(temp_v8,0x2f);
-      FUN_002e342c(temp_v3 + 0x2e28,temp_v2 + 1);
+      libc_strcpy(temp_v3 + 0x2e28,temp_v2 + 1);
       temp_v2 = findRecordByKey(temp_v3 + 0x2e28);
       if (temp_v2 == 0xff) {
         FUN_002804b0(temp_v8,temp_v3 + 0x2e24,1);

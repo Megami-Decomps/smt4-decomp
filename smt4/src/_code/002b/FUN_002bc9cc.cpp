@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001296c0(char *, char *, char *, char *, char *, int);
-int FUN_002b77b0(char *, char *, int);
+int memCopyWords(char *, char *, int);
 int FUN_002b77f4(char *, char *);
 int nn_math_ARMv6_MTX44TransposeAsm(char *, char *);
 
@@ -16,7 +16,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_001296c0. */
-/* Supplied declaration required: FUN_002b77b0. */
+/* Supplied declaration required: memCopyWords. */
 /* Supplied declaration required: FUN_002b77f4. */
 /* Supplied declaration required: nn_math_ARMv6_MTX44TransposeAsm. */
 
@@ -34,7 +34,7 @@ void FUN_002bc9cc(char *param_1)
     nn_math_ARMv6_MTX44TransposeAsm(param_1 + 0x3a8,param_1 + 0x248);
     FUN_002b77f4(param_1 + 1000,param_1 + 0x288);
     nn_math_ARMv6_MTX44TransposeAsm(param_1 + 0x458,param_1 + 0x2f8);
-    FUN_002b77b0(param_1 + 0x1d8,param_1 + 0x208,0x30);
+    memCopyWords(param_1 + 0x1d8,param_1 + 0x208,0x30);
     temp_v0 = 0;
     temp_v1 = 0x3f800000;
     param_1[0x238] = '\0';
@@ -76,7 +76,7 @@ void FUN_002bc9cc(char *param_1)
     param_1[0x3a6] = -0x80;
     param_1[0x3a7] = '?';
     nn_math_ARMv6_MTX44TransposeAsm(param_1 + 0x368,param_1 + 0x368);
-    FUN_002b77b0(param_1 + 0x288,param_1 + 0x2b8,0x30);
+    memCopyWords(param_1 + 0x288,param_1 + 0x2b8,0x30);
     *(unsigned int *)(param_1 + 0x2e8) = temp_v0;
     *(unsigned int *)(param_1 + 0x2ec) = temp_v0;
     *(unsigned int *)(param_1 + 0x2f0) = temp_v0;

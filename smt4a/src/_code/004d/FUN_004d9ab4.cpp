@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6e14(void);
+int asdOperatorDeleteArray(void);
 int FUN_002ecac4(unsigned int *);
 int software_interrupt(int);
 
@@ -14,7 +14,7 @@ typedef struct {
 } param_2_stack;
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_002e6e14. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
 /* Supplied declaration required: FUN_002ecac4. */
 
 
@@ -28,7 +28,7 @@ void FUN_004d9ab4(unsigned int *param_1,unsigned int param_2)
     param_1[0x1b] = 0;
   }
   FUN_002ecac4(param_1);
-  FUN_002e6e14();
+  asdOperatorDeleteArray();
   return;
 }
 

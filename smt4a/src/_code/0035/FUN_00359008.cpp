@@ -9,7 +9,7 @@ int asdCecMessageBoxClose(unsigned int);
 
 extern unsigned char g_asdCec; /* 0x5b3f94 */
 
-extern int FUN_002e783c(unsigned int);
+extern int wstrlenU16(unsigned int);
 /* Supplied declaration required: asdCecMessageBoxOpen. */
 /* Supplied declaration required: asdCecMessageBoxClose. */
 extern unsigned int nn_cec_CTR_MessageBox_SetMessageBoxData(unsigned int, unsigned int, unsigned int, unsigned int);
@@ -28,7 +28,7 @@ FUN_00359008(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsi
   temp_v0 = *(int *)((*(int *)((unsigned char *)&g_asdCec + 0x4)) + 0x18);
   asdCecMessageBoxOpen(temp_v0,param_1,param_2);
   if (-1 < temp_v0) {
-    temp_v0 = FUN_002e783c(param_3);
+    temp_v0 = wstrlenU16(param_3);
     nn_cec_CTR_MessageBox_SetMessageBoxData
               (*(unsigned int *)((*(int *)((unsigned char *)&g_asdCec + 0x4)) + 0x18),0x6e,param_3,temp_v0 << 1);
     nn_cec_CTR_MessageBox_SetMessageBoxData

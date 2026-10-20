@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00188b60(void);
+int nn_os_CriticalSection_Initialize(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -16,7 +16,7 @@ extern unsigned int *DAT_005c0afc; /* 0x5c0afc */
 extern unsigned char DAT_0062d648; /* 0x62d648 */
 extern unsigned char DAT_0062d6a0; /* 0x62d6a0 */
 
-/* Supplied declaration required: FUN_00188b60. */
+/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
 extern unsigned int nn_fnd_ExpHeapBase_Allocate(unsigned int, unsigned int, int, unsigned char, int, unsigned char);
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
@@ -43,7 +43,7 @@ void FUN_0043f384(void)
   if ((-1 < temp_v0) && (puVar1 = puVar2, puVar2 != (unsigned int *)0x0)) {
     *puVar2 = (unsigned int)&DAT_0055b418;
     puVar2[0xde2] = 0;
-    FUN_00188b60();
+    nn_os_CriticalSection_Initialize();
     puVar2[0x6c1] = 0;
   }
   DAT_005c0afc = puVar1;

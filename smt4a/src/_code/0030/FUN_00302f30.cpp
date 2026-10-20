@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002e9ec8(int, int);
+int onlineInstanceTableFind(int, int);
 int FUN_002e9f00(int, int);
-int FUN_002ea43c(int *);
+int onlineJobSetStateDone(int *);
 int FUN_002f3dc4(void);
 int FUN_002f3dde(int, int **, int, unsigned char *);
 
@@ -16,10 +16,10 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_4_stack;
 
-extern int FUN_002e9af4(void);
-/* Supplied declaration required: FUN_002e9ec8. */
+extern int onlineInstanceTableGetCurrent(void);
+/* Supplied declaration required: onlineInstanceTableFind. */
 /* Supplied declaration required: FUN_002e9f00. */
-/* Supplied declaration required: FUN_002ea43c. */
+/* Supplied declaration required: onlineJobSetStateDone. */
 /* Supplied declaration required: FUN_002f3dc4. */
 /* Supplied declaration required: FUN_002f3dde. */
 
@@ -38,8 +38,8 @@ void FUN_00302f30(int *param_1,int *param_2,int param_3,int param_4)
   temp_v1 = param_2;
   iStack_1c = param_3;
   iStack_18 = param_4;
-  temp_v0 = FUN_002e9af4();
-  FUN_002e9ec8(temp_v0,param_1[0x1a]);
+  temp_v0 = onlineInstanceTableGetCurrent();
+  onlineInstanceTableFind(temp_v0,param_1[0x1a]);
   if (temp_v0 != 0) {
     temp_v1 = (int *)*param_2;
     iStack_18 = param_2[2];
@@ -58,7 +58,7 @@ void FUN_00302f30(int *param_1,int *param_2,int param_3,int param_4)
     FUN_002e9f00(param_1[0x1c],4);
     (**(romwright_code **)(*param_1 + 0x44))(param_1);
   }
-  FUN_002ea43c(param_1);
+  onlineJobSetStateDone(param_1);
   return;
 }
 

@@ -20,12 +20,12 @@ extern unsigned int DAT_00573bd0; /* 0x573bd0 */
 extern unsigned int DAT_00573bd4; /* 0x573bd4 */
 
 extern int btlGetMainState(void);
-extern unsigned int FUN_001801a4(void);
-extern int FUN_0018719c(unsigned int);
+extern unsigned int gameGetPlayerData(void);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_002a4860. */
 /* Supplied declaration required: FUN_002a4894. */
 extern unsigned int FUN_002cc9e0(int, unsigned int);
-extern int FUN_003e46f4(unsigned int);
+extern int gameDataFlagTestBit(unsigned int);
 
 
 void FUN_002ccde8(int param_1,unsigned short *param_2,short *param_3)
@@ -79,8 +79,8 @@ void FUN_002ccde8(int param_1,unsigned short *param_2,short *param_3)
         temp_v2 = (short)*(unsigned int *)(param_1 + 0x389c);
         break;
       }
-      if ((temp_v8 == 1) && (temp_v3 = FUN_0018719c(0x410), temp_v3 != 0)) {
-        temp_v5 = FUN_001801a4();
+      if ((temp_v8 == 1) && (temp_v3 = gameFlagIsSet(0x410), temp_v3 != 0)) {
+        temp_v5 = gameGetPlayerData();
         temp_v9 = *(short *)(temp_v5 + 2) != 0;
         if (temp_v9) {
           temp_v5 = (unsigned int)*(unsigned short *)(temp_v5 + 4);
@@ -114,7 +114,7 @@ void FUN_002ccde8(int param_1,unsigned short *param_2,short *param_3)
       temp_v10[0] = 0x2e;
       temp_v10[1] = 0x32;
       do {
-        temp_v6 = FUN_003e46f4(temp_v10[temp_v3]);
+        temp_v6 = gameDataFlagTestBit(temp_v10[temp_v3]);
         if (temp_v6 != 0) {
           temp_v6 = FUN_002a4860(param_1 + 0x3b78);
           temp_v7 = FUN_002a4894(param_1 + 0x3b78);

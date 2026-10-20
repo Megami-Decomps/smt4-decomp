@@ -32,7 +32,7 @@ extern unsigned char LAB_004aa724; /* 0x4aa724 */
 extern unsigned char LAB_004aa734; /* 0x4aa734 */
 extern unsigned char LAB_004aa744; /* 0x4aa744 */
 extern unsigned int g_btlScriptUnit; /* 0x57113c */
-extern unsigned int *DAT_0057a9c8; /* 0x57a9c8 */
+extern unsigned int *g_btlUiBlock; /* 0x57a9c8 */
 
 /* Supplied declaration required: FUN_00100388. */
 extern unsigned int FUN_0014bd84(unsigned short);
@@ -76,8 +76,8 @@ void FUN_004aa3d4(unsigned int param_1,unsigned int param_2,int param_3,int para
   unsigned char temp_v6;
   unsigned char temp_v7 [64];
   
-  puVar2 = DAT_0057a9c8;
-  *(unsigned char *)(DAT_0057a9c8 + 0x3010) = 1;
+  puVar2 = g_btlUiBlock;
+  *(unsigned char *)(g_btlUiBlock + 0x3010) = 1;
   puVar2[0x3013] = param_2;
   *(short *)(puVar2 + 0x3014) = (short)param_3;
   puVar2[0x3012] = 0;

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00163aa4(int);
-int FUN_00203d04(int);
+int dialogClose(int);
 int FUN_002d22c0(int);
 int FUN_00398450(void);
 int FUN_003adc58(void);
@@ -22,7 +22,7 @@ extern signed char DAT_005f161d; /* 0x5f161d */
 extern signed char DAT_005f1a5c; /* 0x5f1a5c */
 
 /* Supplied declaration required: FUN_00163aa4. */
-/* Supplied declaration required: FUN_00203d04. */
+/* Supplied declaration required: dialogClose. */
 /* Supplied declaration required: FUN_002d22c0. */
 /* Supplied declaration required: FUN_00398450. */
 /* Supplied declaration required: FUN_003adc58. */
@@ -66,7 +66,7 @@ void FUN_00490898(int param_1)
           return;
         }
         FUN_002d22c0(0);
-        FUN_00203d04(1);
+        dialogClose(1);
       }
       *(unsigned int *)(param_1 + 4) = 2;
       *(unsigned int *)(param_1 + 8) = 0;

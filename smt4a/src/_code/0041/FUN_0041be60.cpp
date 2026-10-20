@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e3328(unsigned int *);
+int asdOperatorDelete(unsigned int *);
 int FUN_003fd76c(unsigned int, unsigned int *);
 int FUN_003fdb18(unsigned int);
 int FUN_003fe9b4(unsigned int, unsigned int *);
@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_002e3328. */
+/* Supplied declaration required: asdOperatorDelete. */
 /* Supplied declaration required: FUN_003fd76c. */
 /* Supplied declaration required: FUN_003fdb18. */
 /* Supplied declaration required: FUN_003fe9b4. */
@@ -31,7 +31,7 @@ void FUN_0041be60(unsigned int *param_1,unsigned int param_2)
   FUN_003fd76c(temp_v0,param_1 + 0x24);
   FUN_003fdb18(temp_v0);
   FUN_003fe9b4(temp_v0,param_1 + 0x2a);
-  FUN_002e3328(param_1);
+  asdOperatorDelete(param_1);
   return;
 }
 

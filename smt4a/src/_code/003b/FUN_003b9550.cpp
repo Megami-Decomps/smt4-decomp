@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_0057f568; /* 0x57f568 */
+extern int g_aocJob; /* 0x57f568 */
 
 
 void FUN_003b9550(unsigned int param_1,unsigned int param_2)
@@ -13,9 +13,9 @@ void FUN_003b9550(unsigned int param_1,unsigned int param_2)
   int temp_v0;
   int temp_v1;
   
-  temp_v1 = DAT_0057f568;
-  if (DAT_0057f568 != 0) {
-    *(unsigned char *)(DAT_0057f568 + 0x7c) = 1;
+  temp_v1 = g_aocJob;
+  if (g_aocJob != 0) {
+    *(unsigned char *)(g_aocJob + 0x7c) = 1;
     temp_v0 = 0;
     do {
       if (*(int *)(temp_v1 + temp_v0 * 8 + 0x3c) == 0) {

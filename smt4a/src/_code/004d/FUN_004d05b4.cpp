@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern u8 *FUN_001ab888(void);
+extern u8 *gameGetSlotTable(void);
 
 u32 FUN_004d05b4(void)
 {
-    return *(u32 *)FUN_001ab888();
+    return *(u32 *)gameGetSlotTable();
 }
 
 } /* extern "C" */

@@ -5,10 +5,10 @@
 extern "C" {
 
 int dataTableGetCount(unsigned int);
-int FUN_001a9110(unsigned short *, int);
+int wordPairCopy(unsigned short *, int);
 int scrGetArg(int);
 int scrSetResult(unsigned int);
-int FUN_003ef960(unsigned int, int);
+int btlGetTable(unsigned int, int);
 int SBORROW4(int, int);
 
 /* stack frame of void: 4 slot(s), 8 byte(s) */
@@ -21,13 +21,13 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 extern unsigned int btlGetMainState(void);
-extern int FUN_0014bef4(unsigned int);
+extern int randRange(unsigned int);
 /* Supplied declaration required: dataTableGetCount. */
 extern int dataTableGetEntries(void);
-/* Supplied declaration required: FUN_001a9110. */
+/* Supplied declaration required: wordPairCopy. */
 /* Supplied declaration required: scrGetArg. */
 /* Supplied declaration required: scrSetResult. */
-/* Supplied declaration required: FUN_003ef960. */
+/* Supplied declaration required: btlGetTable. */
 extern int __aeabi_idivmod(int, unsigned int);
 
 
@@ -57,13 +57,13 @@ unsigned int FUN_003a9d48(void)
   temp_v1 = scrGetArg(0);
   scrGetArg(1);
   temp_v2 = btlGetMainState();
-  temp_v2 = FUN_003ef960(temp_v2,6);
+  temp_v2 = btlGetTable(temp_v2,6);
   temp_v3 = dataTableGetEntries();
   dataTableGetCount(temp_v2);
   temp_v2 = btlGetMainState();
-  FUN_003ef960(temp_v2,7);
+  btlGetTable(temp_v2,7);
   temp_v4 = dataTableGetEntries();
-  FUN_001a9110(&temp_v13,temp_v4 + temp_v1 * 8);
+  wordPairCopy(&temp_v13,temp_v4 + temp_v1 * 8);
   psVar6 = (short *)(temp_v3 + temp_v1 * 8);
   temp_v7 = 0;
   if (*psVar6 == 0) {
@@ -121,7 +121,7 @@ unsigned int FUN_003a9d48(void)
   temp_v9 = temp_v3 + temp_v1;
   temp_v10 = temp_v4 + temp_v9;
   temp_v11 = temp_v8 + temp_v10;
-  temp_v5 = FUN_0014bef4((temp_v11 - 1U) & 0xffff);
+  temp_v5 = randRange((temp_v11 - 1U) & 0xffff);
   temp_v12 = temp_v1 == 0;
   temp_v0 = temp_v1;
   if (0 < temp_v1) {

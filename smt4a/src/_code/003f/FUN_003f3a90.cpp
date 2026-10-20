@@ -37,9 +37,9 @@ typedef struct {
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: FUN_001676b0. */
-extern int FUN_001801a4(void);
+extern int gameGetPlayerData(void);
 extern int FUN_001834a4(unsigned int, unsigned int);
-extern int FUN_001ab854(void);
+extern int gameGetSlotRecord(void);
 extern int btlMainGetUnk14(void);
 /* Supplied declaration required: FUN_0035ae58. */
 /* Supplied declaration required: __aeabi_idivmod. */
@@ -79,7 +79,7 @@ void FUN_003f3a90(fn_003f3a90_arg0 *param_1,int param_2,int param_3)
   if (pvVar3 != (void *)0xffffffff) {
     if (pvVar3 != (void *)0xfffffffe) {
       if (-1 < (int)pvVar3) {
-        temp_v2 = FUN_001ab854();
+        temp_v2 = gameGetSlotRecord();
         temp_v7 = (unsigned int)*(unsigned short *)(temp_v2 + 0x60);
       }
     }
@@ -91,7 +91,7 @@ void FUN_003f3a90(fn_003f3a90_arg0 *param_1,int param_2,int param_3)
     }
   }
   else {
-    temp_v2 = FUN_001801a4();
+    temp_v2 = gameGetPlayerData();
     temp_v7 = (unsigned int)*(unsigned short *)(temp_v2 + 0x5e);
   }
   temp_v3 = 1;

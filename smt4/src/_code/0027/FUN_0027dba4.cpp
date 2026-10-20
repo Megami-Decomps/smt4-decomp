@@ -4,9 +4,9 @@ extern "C" {
 
 void FUN_0027dba4(void)
 {
-    JobBlock43e278 *block = DAT_0043e278;
+    JobBlock43e278 *block = g_frameTex;
 
-    DAT_0043e278->unkFD8 = 1;
+    g_frameTex->unkFD8 = 1;
     block->unkE96 = 0;
     block->unkE95 = 0;
 }

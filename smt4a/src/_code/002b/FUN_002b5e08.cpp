@@ -7,7 +7,7 @@ extern "C" {
 int jyoucyuGetTableEntry(int);
 int FUN_00470ce0(int, unsigned int);
 int FUN_00480838(void);
-int FUN_00480e30(...);
+int flagValueAdd(...);
 
 /* stack frame of param_4: 7 slot(s), 28 byte(s) */
 typedef struct {
@@ -23,14 +23,14 @@ typedef struct {
 extern int g_aocSystem; /* 0x570280 */
 extern unsigned char *g_mapDepart; /* 0x5806c4 */
 
-extern int FUN_0014bef4(unsigned int);
+extern int randRange(unsigned int);
 /* Supplied declaration required: jyoucyuGetTableEntry. */
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_00470ce0. */
 /* Supplied declaration required: FUN_00480838. */
-/* Supplied declaration required: FUN_00480e30. */
+/* Supplied declaration required: flagValueAdd. */
 extern int FUN_004813bc(int);
 extern unsigned int __aeabi_idivmod(int, unsigned int);
 
@@ -99,7 +99,7 @@ unsigned int FUN_002b5e08(unsigned int param_1,int param_2,int param_3,unsigned 
       temp_v14 = 0x32;
     }
     else {
-      temp_v2 = FUN_0014bef4((temp_v13 - temp_v8) & 0xffff);
+      temp_v2 = randRange((temp_v13 - temp_v8) & 0xffff);
       temp_v14 = __aeabi_idivmod(temp_v2 * 100,temp_v13 - temp_v8);
       temp_v13 = temp_v8 + temp_v2;
     }
@@ -118,10 +118,10 @@ unsigned int FUN_002b5e08(unsigned int param_1,int param_2,int param_3,unsigned 
         }
         if ((temp_v8 != 0 && puVar4 != (unsigned char *)0x0) &&
            (puVar4 = (unsigned char *)(unsigned int)*(unsigned char *)(temp_v10 + 10), puVar4 == (unsigned char *)0x0)) {
-          temp_v3 = FUN_0014bef4(99);
+          temp_v3 = randRange(99);
           puVar4 = (unsigned char *)((temp_v3 + 1U) & 0xffff);
           if (puVar4 <= (unsigned char *)(unsigned int)*(unsigned char *)(temp_v10 + 0xb)) {
-            puVar4 = (unsigned char *)FUN_00480e30(temp_v8,1);
+            puVar4 = (unsigned char *)flagValueAdd(temp_v8,1);
             if (param_2 != 0) {
               *(unsigned int *)(param_2 + temp_v5 * 4) = temp_v8;
             }
@@ -189,7 +189,7 @@ unsigned int FUN_002b5e08(unsigned int param_1,int param_2,int param_3,unsigned 
       if ((short)temp_v11 != 0) {
         if (temp_v5 < (int)temp_v13) {
           do {
-            temp_v2 = FUN_0014bef4(((int)(short)temp_v11 - 1U) & 0xffff);
+            temp_v2 = randRange(((int)(short)temp_v11 - 1U) & 0xffff);
             temp_v10 = (int)asStack_1e0[temp_v2];
             temp_v2 = FUN_004813bc(temp_v10);
             if (temp_v2 == 0) {
@@ -198,7 +198,7 @@ unsigned int FUN_002b5e08(unsigned int param_1,int param_2,int param_3,unsigned 
             else {
               *(unsigned char *)(param_3 + temp_v5) = 0;
             }
-            FUN_00480e30(temp_v10,1);
+            flagValueAdd(temp_v10,1);
             if (param_2 != 0) {
               *(int *)(param_2 + temp_v5 * 4) = temp_v10;
             }

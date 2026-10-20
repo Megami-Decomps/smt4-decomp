@@ -9,7 +9,7 @@ int FUN_0047dcd4(int, int, unsigned int);
 extern int g_aocMain; /* 0x570260 */
 
 extern short scrGetArg(void);
-extern unsigned int FUN_002360dc(unsigned int);
+extern unsigned int scrGetArgString(unsigned int);
 /* Supplied declaration required: FUN_0047dcd4. */
 
 
@@ -21,7 +21,7 @@ unsigned int FUN_003c33b0(void)
   unsigned int temp_v1;
   
   temp_v0 = scrGetArg();
-  temp_v1 = FUN_002360dc(1);
+  temp_v1 = scrGetArgString(1);
   FUN_0047dcd4(g_aocMain + 0xa8,(int)temp_v0,temp_v1);
   return 1;
 }

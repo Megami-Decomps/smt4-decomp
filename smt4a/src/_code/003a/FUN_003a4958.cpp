@@ -6,7 +6,7 @@ extern "C" {
 
 int libc_strcat(...);
 int FUN_001bcfb4(unsigned char [68], int, unsigned int, int, int *, int);
-int FUN_002e342c(unsigned char [68], int);
+int libc_strcpy(unsigned char [68], int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -14,10 +14,10 @@ typedef struct {
 } void_stack;
 
 /* Supplied declaration required: libc_strcat. */
-extern int *FUN_001861c4(void);
+extern int *asdTMTexTableGetNode(void);
 /* Supplied declaration required: FUN_001bcfb4. */
 extern int wstrlen(unsigned int);
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 
 
 /* WARNING: Removing unreachable block (ram,0x001ad080) */
@@ -35,9 +35,9 @@ int * FUN_003a4958(void)
   int temp_v2;
   unsigned char temp_v3 [68];
   
-  piVar2 = (int *)FUN_001861c4();
+  piVar2 = (int *)asdTMTexTableGetNode();
   temp_v2 = piVar2[1];
-  FUN_002e342c(temp_v3,*piVar2 + 0xc);
+  libc_strcpy(temp_v3,*piVar2 + 0xc);
   pcVar3 = *(char **)(temp_v2 + 8);
   if (*pcVar3 != '-') {
     libc_strcat(temp_v3);

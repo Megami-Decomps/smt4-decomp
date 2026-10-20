@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_001641c4(void);
-int FUN_001b4a90(int, int, unsigned int);
-int FUN_001f4e20(int, int);
+int ifTouchRegionRemove(void);
+int __aeabi_memset4(int, int, unsigned int);
+int dialogOpen(int, int);
 int FUN_00275bc8(int, unsigned int);
 int FUN_002a49b4(void);
 int FUN_002a49e4(unsigned int, int);
@@ -14,11 +14,11 @@ int FUN_002a7324(int);
 int FUN_0037e0d0(unsigned int, int);
 int FUN_003e4d68(unsigned int);
 
-/* Supplied declaration required: FUN_001641c4. */
+/* Supplied declaration required: ifTouchRegionRemove. */
 extern unsigned short FUN_001643b4(unsigned int, int);
 extern int FUN_00187168(void);
-/* Supplied declaration required: FUN_001b4a90. */
-/* Supplied declaration required: FUN_001f4e20. */
+/* Supplied declaration required: __aeabi_memset4. */
+/* Supplied declaration required: dialogOpen. */
 extern int FUN_0023b3d0(void);
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: FUN_002a49b4. */
@@ -53,11 +53,11 @@ void FUN_004be1c8(int param_1)
     *(unsigned int *)(temp_v1 + 0x108) = 2;
     if (*(char *)(param_1 + 4) == '\x01') {
       FUN_002a49e4(*(unsigned int *)(param_1 + 0x318),4);
-      FUN_001f4e20(0,1);
+      dialogOpen(0,1);
       *(unsigned int *)(param_1 + 8) = 9;
       return;
     }
-    FUN_001b4a90(param_1 + 0x2f8,0x18,0xffffffff);
+    __aeabi_memset4(param_1 + 0x2f8,0x18,0xffffffff);
     temp_v1 = *(int *)(param_1 + 0x310);
     if (0 < temp_v1) {
       temp_v3 = 0;
@@ -67,7 +67,7 @@ void FUN_004be1c8(int param_1)
       *(int *)(param_1 + 0x310) = temp_v1 + 1;
       if (0 < temp_v1) {
         do {
-          FUN_001641c4();
+          ifTouchRegionRemove();
           temp_v1 = temp_v3 * 2;
           temp_v3 = temp_v3 + 1;
           *(unsigned short *)(param_1 + temp_v1 + 0x2f8) = unaff_r7;

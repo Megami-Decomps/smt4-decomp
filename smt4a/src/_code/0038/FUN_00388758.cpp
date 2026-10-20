@@ -5,13 +5,13 @@
 extern "C" {
 
 int FUN_00165088(...);
-int FUN_001846d0(...);
+int uiSpriteSelectAnim(...);
 
 extern unsigned int DAT_0057f58c; /* 0x57f58c */
 extern int DAT_0057f590; /* 0x57f590 */
 
 /* Supplied declaration required: FUN_00165088. */
-/* Supplied declaration required: FUN_001846d0. */
+/* Supplied declaration required: uiSpriteSelectAnim. */
 
 
 unsigned int FUN_00388758(int param_1)
@@ -64,11 +64,11 @@ unsigned int FUN_00388758(int param_1)
       *(unsigned char *)(temp_v2 + 0x8d) = 4;
       if (*(char *)(temp_v2 + 0x91) != '\0') {
         temp_v3 = temp_v2 + 0xb00;
-        FUN_001846d0(temp_v3,2);
+        uiSpriteSelectAnim(temp_v3,2);
       }
       else {
         temp_v3 = temp_v2 + 0xb00;
-        FUN_001846d0(temp_v3,7);
+        uiSpriteSelectAnim(temp_v3,7);
       }
       temp_v1 = DAT_0057f58c;
       if (DAT_0057f58c != 0) {
@@ -94,7 +94,7 @@ unsigned int FUN_00388758(int param_1)
   temp_v0 = *(char *)(temp_v2 + 0x8d);
   if ((temp_v0 == '\0' || temp_v0 == '\x02') || temp_v0 == '\x01') {
     *(unsigned char *)(temp_v2 + 0x8d) = 4;
-    FUN_001846d0(temp_v2 + 0xb00,2);
+    uiSpriteSelectAnim(temp_v2 + 0xb00,2);
   }
   return 1;
 }

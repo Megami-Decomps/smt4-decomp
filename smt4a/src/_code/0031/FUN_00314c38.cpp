@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } void_stack;
 
-extern int DAT_00587f28; /* 0x587f28 */
+extern int g_naviMain; /* 0x587f28 */
 
 /* Supplied declaration required: flagsSetIfUnset3. */
 extern int FUN_0048e40c(int);
@@ -25,7 +25,7 @@ void FUN_00314c38(void)
   int temp_v0;
   int temp_v1;
   
-  temp_v0 = DAT_00587f28;
+  temp_v0 = g_naviMain;
   flagsSetIfUnset3();
   if ((temp_v0 != 0) && (temp_v1 = FUN_0048e40c(temp_v0 + 0x68), temp_v1 != 0)) {
     *(unsigned char *)(temp_v0 + 0x7bf8) = 1;

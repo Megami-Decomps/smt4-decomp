@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002aa568(void);
+int libc_strcmp(void);
 
 extern unsigned char DAT_0042a518; /* 0x42a518 */
 extern unsigned char DAT_0042a520; /* 0x42a520 */
 
-/* Supplied declaration required: FUN_002aa568. */
+/* Supplied declaration required: libc_strcmp. */
 
 
 unsigned char * FUN_0014d9f0(unsigned int param_1,char *param_2)
@@ -20,7 +20,7 @@ unsigned char * FUN_0014d9f0(unsigned int param_1,char *param_2)
   
   if ((param_2 != (char *)0x0) && (*param_2 != '\0')) {
     puVar1 = &DAT_0042a518;
-    FUN_002aa568();
+    libc_strcmp();
     if (puVar1 != (unsigned char *)0x0) {
       return (unsigned char *)0x0;
     }

@@ -12,7 +12,7 @@ int FUN_0014685c(int, int, unsigned int, unsigned int);
 int FUN_0014a930(int *, int, int);
 int asdMemoryAlloc(int, int, int, unsigned int);
 int FUN_0019a364(int *, int, int);
-int FUN_001a089c(unsigned int *, int);
+int nn_os_LightEvent_Initialize(unsigned int *, int);
 int FUN_002e3140(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -33,7 +33,7 @@ extern unsigned int g_asdFileEvent; /* 0x5b3fd4 */
 /* Supplied declaration required: FUN_0014a930. */
 /* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: FUN_0019a364. */
-/* Supplied declaration required: FUN_001a089c. */
+/* Supplied declaration required: nn_os_LightEvent_Initialize. */
 /* Supplied declaration required: FUN_002e3140. */
 
 
@@ -79,7 +79,7 @@ void FUN_00136df8(void)
   if ((int)piVar4 < 0) {
     FUN_002e3140();
   }
-  FUN_001a089c(&g_asdFileEvent,0);
+  nn_os_LightEvent_Initialize(&g_asdFileEvent,0);
   FUN_0014287c();
   FUN_00146808();
   return;

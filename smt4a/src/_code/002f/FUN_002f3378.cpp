@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002e9300(...);
+int onlineStringConstruct(...);
 
 extern unsigned char LAB_002f33a8; /* 0x2f33a8 */
 extern unsigned char DAT_00558b2c; /* 0x558b2c */
 
-/* Supplied declaration required: FUN_002e9300. */
+/* Supplied declaration required: onlineStringConstruct. */
 
 
 void FUN_002f3378(unsigned int *param_1)
@@ -19,9 +19,9 @@ void FUN_002f3378(unsigned int *param_1)
   int temp_v0;
   
   *param_1 = (unsigned int)&DAT_00558b2c;
-  temp_v0 = FUN_002e9300(param_1 + 1,&LAB_002f33a8);
+  temp_v0 = onlineStringConstruct(param_1 + 1,&LAB_002f33a8);
   *(unsigned short *)(temp_v0 + 8) = 0;
-  temp_v0 = FUN_002e9300(temp_v0 + 0xc,&LAB_002f33a8);
+  temp_v0 = onlineStringConstruct(temp_v0 + 0xc,&LAB_002f33a8);
   *(unsigned short *)(temp_v0 + 8) = 0;
   *(unsigned char *)(temp_v0 + 10) = 0;
   *(unsigned char *)(temp_v0 + 0xb) = 0;

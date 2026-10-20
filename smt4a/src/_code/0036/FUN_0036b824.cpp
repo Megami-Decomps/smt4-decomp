@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern Obj80Ref DAT_0059dbc0;
+extern Obj80Ref g_asdCamera;
 
 void FUN_0036b824(u32 value)
 {
-    DAT_0059dbc0.instance->unk80 = value;
+    g_asdCamera.instance->unk80 = value;
 }
 
 } /* extern "C" */

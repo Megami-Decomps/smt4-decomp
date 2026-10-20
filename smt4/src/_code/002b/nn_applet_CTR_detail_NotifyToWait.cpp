@@ -11,7 +11,7 @@ int FUN_002bb100(...);
 int FUN_002bb150(...);
 int FUN_002bb378(...);
 int FUN_002c131c(...);
-int FUN_002c3424(...);
+int nn_os_LightEvent_Wait(...);
 int software_interrupt(...);
 
 typedef int romwright_code(...);
@@ -43,7 +43,7 @@ extern int FUN_0013b8fc(void);
 /* Supplied declaration required: FUN_002bb150. */
 /* Supplied declaration required: FUN_002bb378. */
 /* Supplied declaration required: FUN_002c131c. */
-/* Supplied declaration required: FUN_002c3424. */
+/* Supplied declaration required: nn_os_LightEvent_Wait. */
 extern unsigned int nn_err_CTR_FatalErr_Throw(unsigned int, unsigned int);
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
@@ -132,7 +132,7 @@ LAB_002ad598:
         aiStack_20[0] = 0;
         aiStack_20[1] = 0;
         nn_os_LightEvent_Initialize((unsigned int)aiStack_20,1);
-        FUN_002c3424(aiStack_20);
+        nn_os_LightEvent_Wait(aiStack_20);
       }
       return;
     }

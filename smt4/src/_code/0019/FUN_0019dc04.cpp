@@ -11,12 +11,12 @@ typedef struct MapIfTimer {
     /* 0x14 */ s32 unk14;
 } MapIfTimer;
 
-extern MapIfTimer *DAT_00447a98;
+extern MapIfTimer *g_mapIfTimer;
 
 /* Counts frames while the timer is in state 1-3; starts the map interface at frame 8 and resets after 60. */
 void FUN_0019dc04(void)
 {
-    MapIfTimer *timer = DAT_00447a98;
+    MapIfTimer *timer = g_mapIfTimer;
 
     if (timer->state != 0 && ((timer->state == 1 || timer->state == 2) || timer->state == 3)) {
         timer->frames = timer->frames + 1;
@@ -26,7 +26,7 @@ void FUN_0019dc04(void)
             }
             mapIfStart();
         }
-        timer = DAT_00447a98;
+        timer = g_mapIfTimer;
         if (timer->frames > 60) {
             timer->state = 0;
             timer->frames = 0;

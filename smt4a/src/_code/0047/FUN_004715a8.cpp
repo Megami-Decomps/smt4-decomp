@@ -28,8 +28,8 @@ typedef struct {
 
 extern int g_aocMain; /* 0x570260 */
 
-extern int FUN_001d109c(void);
-extern int FUN_002e3494(void);
+extern int objGetFlagBit16(void);
+extern int asdOperatorDeleteB(void);
 /* Supplied declaration required: FUN_002f5020. */
 /* Supplied declaration required: asdOperatorNewE. */
 /* Supplied declaration required: FUN_00429f38. */
@@ -45,13 +45,13 @@ void FUN_004715a8(fn_004715a8_arg0 *param_1)
   
   temp_v0 = 0;
   if (param_1->field_0x44c != 0) {
-    temp_v0 = FUN_002e3494();
+    temp_v0 = asdOperatorDeleteB();
     param_1->field_0x44c = 0;
   }
   *(unsigned int *)&param_1->field_0x444 = 0;
   FUN_00429f38();
   if (temp_v0 != 0) {
-    temp_v0 = FUN_001d109c();
+    temp_v0 = objGetFlagBit16();
     if (temp_v0 != 0) {
       temp_v0 = FUN_0046bc7c(param_1,0x33);
       *(int *)&param_1->field_0x444 = temp_v0;

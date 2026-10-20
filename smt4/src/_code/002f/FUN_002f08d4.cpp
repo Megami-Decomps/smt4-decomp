@@ -18,7 +18,7 @@ typedef struct UnitManager {
 } UnitManager;
 
 extern UnitManager *btlGetMainState(void);
-extern Unit *FUN_002499b4(void);
+extern Unit *btlMainFindActiveEntry(void);
 extern u32 FUN_00249a54(void);
 extern void FUN_002499fc(u32 owner, s32 *first, s32 *count);
 extern void scrSetResult(s32 found);
@@ -60,7 +60,7 @@ u32 FUN_002f08d4(void)
         Unit *unit;
 
         btlGetMainState();
-        unit = FUN_002499b4();
+        unit = btlMainFindActiveEntry();
         if (unit != NULL && unit->stats[slot] == value) {
             scrSetResult(1);
             return 1;

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002f6be2(unsigned int, int *);
-int FUN_002f6bf0(int);
+int operatorDeleteArrayNullable(int);
 
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -14,7 +14,7 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_002f6be2. */
-/* Supplied declaration required: FUN_002f6bf0. */
+/* Supplied declaration required: operatorDeleteArrayNullable. */
 extern unsigned int FUN_00302420(unsigned int, unsigned int *, unsigned int);
 
 
@@ -31,7 +31,7 @@ unsigned int FUN_00307084(unsigned int param_1,unsigned int param_2,unsigned int
   FUN_002f6be2(param_1,&temp_v1);
   temp_v2 = 0;
   temp_v0 = FUN_00302420(temp_v1,(unsigned int *)&temp_v2,10);
-  FUN_002f6bf0(temp_v1);
+  operatorDeleteArrayNullable(temp_v1);
   return temp_v0;
 }
 

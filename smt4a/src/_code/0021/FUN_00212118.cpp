@@ -14,7 +14,7 @@ typedef struct Scene {
     /* 0x00068 */ u8 member68[0x20654];
     /* 0x206BC */ u8 member206BC[1];
 } Scene;
-extern Scene *DAT_00587f28;
+extern Scene *g_naviMain;
 
 /* Begins closing the scene: runs FUN_003de188(1, 0), shuts down the scene's members (if it exists) and sets `closing`. */
 void FUN_00212118(void)
@@ -22,13 +22,13 @@ void FUN_00212118(void)
     Scene *scene;
 
     FUN_003de188(1, 0);
-    scene = DAT_00587f28;
-    if (DAT_00587f28 != NULL) {
-        FUN_004cf978(DAT_00587f28->member206BC, 8);
+    scene = g_naviMain;
+    if (g_naviMain != NULL) {
+        FUN_004cf978(g_naviMain->member206BC, 8);
         stateSetterSetState1(scene->member68);
         FUN_0048a378(scene->member68);
     }
-    scene = DAT_00587f28;
+    scene = g_naviMain;
     scene->closing = 1;
 }
 

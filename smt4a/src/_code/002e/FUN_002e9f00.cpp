@@ -6,11 +6,11 @@ extern "C" {
 
 int FUN_002e6e34(unsigned char [16], int);
 int FUN_002e6e5c(unsigned char [16]);
-int FUN_002e9af4(void);
-int FUN_002e9e80(unsigned int **);
+int onlineInstanceTableGetCurrent(void);
+int vectorInitEmpty(unsigned int **);
 int FUN_002e9e8a(unsigned int, unsigned int, unsigned int **);
-int FUN_002e9ec8(int, unsigned int);
-int FUN_002e9f64(unsigned int **);
+int onlineInstanceTableFind(int, unsigned int);
+int vectorDestroyWords(unsigned int **);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -22,12 +22,12 @@ extern unsigned int FUN_00103e8e(int, unsigned int);
 extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-/* Supplied declaration required: FUN_002e9af4. */
-/* Supplied declaration required: FUN_002e9e80. */
+/* Supplied declaration required: onlineInstanceTableGetCurrent. */
+/* Supplied declaration required: vectorInitEmpty. */
 /* Supplied declaration required: FUN_002e9e8a. */
-/* Supplied declaration required: FUN_002e9ec8. */
+/* Supplied declaration required: onlineInstanceTableFind. */
 /* Supplied declaration required: FUN_002e9f00. */
-/* Supplied declaration required: FUN_002e9f64. */
+/* Supplied declaration required: vectorDestroyWords. */
 
 
 unsigned int FUN_002e9f00(int param_1,unsigned int param_2)
@@ -43,18 +43,18 @@ unsigned int FUN_002e9f00(int param_1,unsigned int param_2)
   
   temp_v0 = FUN_002e6e26();
   FUN_002e6e34(temp_v4,temp_v0 + 0x58);
-  FUN_002e9e80(&temp_v2);
-  temp_v1 = FUN_002e9af4();
+  vectorInitEmpty(&temp_v2);
+  temp_v1 = onlineInstanceTableGetCurrent();
   FUN_002e9e8a(temp_v1,*(unsigned int *)(param_1 + 0x44),&temp_v2);
   temp_v1 = FUN_00103e8e(param_1,param_2);
   for (puVar3 = temp_v2; temp_v3 != puVar3; puVar3 = puVar3 + 1) {
-    temp_v0 = FUN_002e9af4();
-    FUN_002e9ec8(temp_v0,*puVar3);
+    temp_v0 = onlineInstanceTableGetCurrent();
+    onlineInstanceTableFind(temp_v0,*puVar3);
     if (temp_v0 != 0) {
       FUN_002e9f00(/* unrecovered */ 0, /* unrecovered */ 0);
     }
   }
-  FUN_002e9f64(&temp_v2);
+  vectorDestroyWords(&temp_v2);
   FUN_002e6e5c(temp_v4);
   return temp_v1;
 }

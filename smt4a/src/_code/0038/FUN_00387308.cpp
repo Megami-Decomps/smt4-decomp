@@ -5,13 +5,13 @@
 extern "C" {
 
 int jobStop(unsigned int, int);
-int FUN_002e3328(void);
+int asdOperatorDelete(void);
 int sceneObjDestroy(unsigned int *);
 
 extern unsigned char DAT_00588c40; /* 0x588c40 */
 
 /* Supplied declaration required: jobStop. */
-/* Supplied declaration required: FUN_002e3328. */
+/* Supplied declaration required: asdOperatorDelete. */
 /* Supplied declaration required: sceneObjDestroy. */
 
 
@@ -26,7 +26,7 @@ void FUN_00387308(void)
     sceneObjDestroy((*(unsigned int * *)((unsigned char *)&DAT_00588c40 + 0x8)));
     jobStop(*puVar1,0);
     if ((*(unsigned int * *)((unsigned char *)&DAT_00588c40 + 0x8)) != (unsigned int *)0x0) {
-      FUN_002e3328();
+      asdOperatorDelete();
       (*(unsigned int * *)((unsigned char *)&DAT_00588c40 + 0x8)) = (unsigned int *)0x0;
     }
   }

@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_001a08d8(int);
-int FUN_001bcd48(int, int);
+int nn_os_LightEvent_Signal(int);
+int svcSleepThread(int, int);
 int FUN_00425448(int);
 
 typedef int romwright_code(...);
@@ -14,8 +14,8 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_4_stack;
 
-/* Supplied declaration required: FUN_001a08d8. */
-/* Supplied declaration required: FUN_001bcd48. */
+/* Supplied declaration required: nn_os_LightEvent_Signal. */
+/* Supplied declaration required: svcSleepThread. */
 extern int FUN_0042337c(int);
 extern int counterPairRemaining(int);
 /* Supplied declaration required: FUN_00425448. */
@@ -58,7 +58,7 @@ unsigned int FUN_00424018(int param_1,unsigned int param_2,unsigned int param_3,
   else {
     if (*(int *)(param_1 + 0xc) != 1) {
       if (*(int *)(param_1 + 0xc) == 6) {
-        FUN_001a08d8(param_1 + 0x20);
+        nn_os_LightEvent_Signal(param_1 + 0x20);
       }
       nn_os_CriticalSection_Enter(param_1);
       *(unsigned int *)(param_1 + 0xc) = 2;
@@ -75,7 +75,7 @@ unsigned int FUN_00424018(int param_1,unsigned int param_2,unsigned int param_3,
         temp_v0 = *(int *)(param_1 + 0xc);
       }
       if ((!temp_v5 || !temp_v6) || temp_v0 == 7) break;
-      FUN_001bcd48(500000,0);
+      svcSleepThread(500000,0);
     }
     temp_v0 = 0;
     do {

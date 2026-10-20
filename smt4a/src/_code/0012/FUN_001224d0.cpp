@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002ea9dc(unsigned int *);
+int onlineUrlDestroy(unsigned int *);
 
 extern unsigned char DAT_0055b2d0; /* 0x55b2d0 */
 
-/* Supplied declaration required: FUN_002ea9dc. */
+/* Supplied declaration required: onlineUrlDestroy. */
 
 
 unsigned int * FUN_001224d0(unsigned int *param_1)
@@ -17,7 +17,7 @@ unsigned int * FUN_001224d0(unsigned int *param_1)
 /* irregular: 1 native warning(s); review required */
   *param_1 = (unsigned int)&DAT_0055b2d0;
   param_1 = param_1 + 1;
-  FUN_002ea9dc(param_1);
+  onlineUrlDestroy(param_1);
   return param_1 + -1;
 }
 

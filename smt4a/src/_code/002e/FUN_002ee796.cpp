@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00106f24(int);
 
 /* Supplied declaration required: FUN_00106f24. */
-extern int FUN_002ee7e8(void);
+extern int wideBufferLength(void);
 
 
 void FUN_002ee796(int param_1,int param_2)
@@ -17,7 +17,7 @@ void FUN_002ee796(int param_1,int param_2)
   int temp_v0;
   unsigned int temp_v1;
   
-  temp_v0 = FUN_002ee7e8();
+  temp_v0 = wideBufferLength();
   temp_v1 = *(unsigned int *)(param_1 + 8);
   if (temp_v1 < (unsigned int)(temp_v0 + param_2)) {
     for (; temp_v1 < (unsigned int)(((*(int *)(param_1 + 0xc) - *(int *)(param_1 + 4)) >> 1) + param_2);

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00110b36(unsigned int, unsigned int *);
-int FUN_002ee9c0(unsigned int, int *);
+int strHolderAssignU32(unsigned int, int *);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -13,7 +13,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_00110b36. */
-/* Supplied declaration required: FUN_002ee9c0. */
+/* Supplied declaration required: strHolderAssignU32. */
 
 
 void FUN_00310924(unsigned int param_1,int param_2)
@@ -25,7 +25,7 @@ void FUN_00310924(unsigned int param_1,int param_2)
   int temp_v0;
   
   temp_v0 = *(unsigned int *)(param_2 + 0x14);
-  FUN_002ee9c0(param_1,&temp_v0);
+  strHolderAssignU32(param_1,&temp_v0);
   puVar2 = *(unsigned int **)(param_2 + 0x10);
   for (puVar1 = (unsigned int *)*puVar2; puVar1 != puVar2; puVar1 = (unsigned int *)*puVar1) {
     FUN_00110b36(param_1,puVar1 + 2);

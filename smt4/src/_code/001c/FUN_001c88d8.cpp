@@ -2,9 +2,9 @@
 
 extern "C" {
 
-int FUN_002a46d8(int id);
+int fileSlotFree(int id);
 int scrScriptProcessDestroy(u32 process);
-int FUN_002ae898(int table, int index);
+int asdTMTexTableReleaseNode(int table, int index);
 int FUN_002bff50(void);
 int asdMemFree(u32 ptr);
 
@@ -16,28 +16,28 @@ typedef struct ScriptWork {
     /* 0x3570 */ u32 unk3570;
 } ScriptWork;
 
-extern ScriptWork *DAT_0044dc20;
+extern ScriptWork *g_result;
 
 void FUN_001c88d8(void)
 {
-    ScriptWork *work = DAT_0044dc20;
+    ScriptWork *work = g_result;
     s32 i;
 
-    if (DAT_0044dc20 != NULL) {
-        scrScriptProcessDestroy(DAT_0044dc20->process);
+    if (g_result != NULL) {
+        scrScriptProcessDestroy(g_result->process);
         asdMemFree(work->unk3564);
         asdMemFree(work->unk356C);
         FUN_002bff50();
         asdMemFree(work->unk3570);
-        FUN_002a46d8(0x14);
-        FUN_002a46d8(0x25);
+        fileSlotFree(0x14);
+        fileSlotFree(0x25);
         i = 0;
         do {
-            FUN_002ae898(0x28, i);
+            asdTMTexTableReleaseNode(0x28, i);
             i++;
         } while (i < 2);
-        asdMemFree((u32)DAT_0044dc20);
-        DAT_0044dc20 = NULL;
+        asdMemFree((u32)g_result);
+        g_result = NULL;
     }
 }
 

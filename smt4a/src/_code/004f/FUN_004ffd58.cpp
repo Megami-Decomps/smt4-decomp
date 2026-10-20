@@ -25,8 +25,8 @@ extern unsigned char LAB_004ffec4; /* 0x4ffec4 */
 #define ROMWRIGHT_CARRY_4_DEFINED
 #define romwright_carry_4(left, right) ((unsigned char)((unsigned long long)(unsigned int)(left) + (unsigned long long)(unsigned int)(right) > 0xffffffffULL))
 #endif
-extern unsigned long long FUN_00102a64(unsigned int, unsigned int, unsigned int);
-extern int FUN_0019a37c(unsigned int, unsigned char *, unsigned int);
+extern unsigned long long libc_strtoll(unsigned int, unsigned int, unsigned int);
+extern int libc_strncmp(unsigned int, unsigned char *, unsigned int);
 /* Supplied declaration required: nn_fnd_DateTime_DateTime_sub_object. */
 
 
@@ -55,7 +55,7 @@ void FUN_004ffd58(int *param_1,int *param_2)
   temp_v8 = *(unsigned int *)(temp_v6 + 0x1c);
   if (temp_v8 != 0) {
     do {
-      temp_v3 = FUN_0019a37c(*(unsigned int *)(*(int *)(temp_v6 + 0x18) + temp_v7 * 8),&LAB_004ffec4,0x40);
+      temp_v3 = libc_strncmp(*(unsigned int *)(*(int *)(temp_v6 + 0x18) + temp_v7 * 8),&LAB_004ffec4,0x40);
       if (temp_v3 == 0) {
         temp_v4 = *(unsigned int *)(*(int *)(temp_v6 + 0x18) + temp_v7 * 8 + 4);
         goto LAB_004ffdb0;
@@ -65,7 +65,7 @@ void FUN_004ffd58(int *param_1,int *param_2)
   }
   temp_v4 = 0;
 LAB_004ffdb0:
-  temp_v12 = FUN_00102a64(temp_v4,0,10);
+  temp_v12 = libc_strtoll(temp_v4,0,10);
   puVar6 = temp_v13;
   nn_fnd_DateTime_DateTime_sub_object(puVar6,0x7b2,1,1,0,0,0,0);
   temp_v5 = *puVar6;

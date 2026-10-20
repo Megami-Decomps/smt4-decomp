@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_002e9300(unsigned char [12], unsigned int);
-int FUN_002e9318(unsigned char [12]);
+int onlineStringConstruct(unsigned char [12], unsigned int);
+int onlineStringDestroy(unsigned char [12]);
 int FUN_002ea2e8(unsigned char [4]);
 int FUN_002ea3a8(unsigned char [4]);
-int FUN_002f32f8(...);
+int wideBufferAppend(...);
 int FUN_002f6be2(unsigned char [12], int *);
-int FUN_002f6bf0(int);
+int operatorDeleteArrayNullable(int);
 int FUN_002fbd0a(int, unsigned int, int, int);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
@@ -23,13 +23,13 @@ extern unsigned char LAB_00110bc8; /* 0x110bc8 */
 extern unsigned char DAT_00537f3c; /* 0x537f3c */
 
 extern int wstrlen(int);
-/* Supplied declaration required: FUN_002e9300. */
-/* Supplied declaration required: FUN_002e9318. */
+/* Supplied declaration required: onlineStringConstruct. */
+/* Supplied declaration required: onlineStringDestroy. */
 /* Supplied declaration required: FUN_002ea2e8. */
 /* Supplied declaration required: FUN_002ea3a8. */
-/* Supplied declaration required: FUN_002f32f8. */
+/* Supplied declaration required: wideBufferAppend. */
 /* Supplied declaration required: FUN_002f6be2. */
-/* Supplied declaration required: FUN_002f6bf0. */
+/* Supplied declaration required: operatorDeleteArrayNullable. */
 extern unsigned int FUN_002fbd00(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002fbd0a. */
 
@@ -46,17 +46,17 @@ void FUN_00110b58(int param_1,unsigned int param_2)
   unsigned char temp_v5 [12];
   
   FUN_002ea2e8(temp_v3);
-  temp_v0 = FUN_002f32f8(temp_v3,&DAT_00537f3c);
-  temp_v0 = FUN_002f32f8(temp_v0,&LAB_00110bc8);
+  temp_v0 = wideBufferAppend(temp_v3,&DAT_00537f3c);
+  temp_v0 = wideBufferAppend(temp_v0,&LAB_00110bc8);
   temp_v0 = FUN_002fbd00(temp_v0,param_2);
-  temp_v0 = FUN_002f32f8(temp_v0,&LAB_00110bc8);
-  FUN_002f32f8(temp_v0,&DAT_00537f3c);
-  FUN_002e9300(temp_v5,temp_v4);
+  temp_v0 = wideBufferAppend(temp_v0,&LAB_00110bc8);
+  wideBufferAppend(temp_v0,&DAT_00537f3c);
+  onlineStringConstruct(temp_v5,temp_v4);
   FUN_002f6be2(temp_v5,&temp_v2);
   temp_v1 = wstrlen(temp_v2);
   FUN_002fbd0a(param_1,*(unsigned int *)(param_1 + 4),temp_v2,temp_v1 + temp_v2);
-  FUN_002f6bf0(temp_v2);
-  FUN_002e9318(temp_v5);
+  operatorDeleteArrayNullable(temp_v2);
+  onlineStringDestroy(temp_v5);
   FUN_002ea3a8(temp_v3);
   return;
 }

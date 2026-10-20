@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002e6e14(int);
+int asdOperatorDeleteArray(int);
 int vectorCount8_002f1352(int *);
 int FUN_00307cc0(...);
 int FUN_00307ce2(...);
-int FUN_0030fe08(int *, int, int);
+int vectorDestroyRangeStride8(int *, int, int);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -16,11 +16,11 @@ typedef struct {
 } param_3_stack;
 
 extern int rt_malloc(void);
-/* Supplied declaration required: FUN_002e6e14. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
 /* Supplied declaration required: vectorCount8_002f1352. */
 /* Supplied declaration required: FUN_00307cc0. */
 /* Supplied declaration required: FUN_00307ce2. */
-/* Supplied declaration required: FUN_0030fe08. */
+/* Supplied declaration required: vectorDestroyRangeStride8. */
 
 
 void FUN_00133162(int *param_1,int param_2,int param_3)
@@ -64,8 +64,8 @@ void FUN_00133162(int *param_1,int param_2,int param_3)
   FUN_00307ce2(param_1,((param_2 - *param_1) & 0xfffffff8U) + temp_v0,param_3);
   FUN_00307cc0(param_2,param_1[1],((param_2 - *param_1) & 0xfffffff8U) + temp_v0 + 8,param_1);
   temp_v3 = vectorCount8_002f1352(param_1);
-  FUN_0030fe08(param_1,*param_1,param_1[1]);
-  FUN_002e6e14(*param_1);
+  vectorDestroyRangeStride8(param_1,*param_1,param_1[1]);
+  asdOperatorDeleteArray(*param_1);
   *param_1 = temp_v0;
   param_1[2] = temp_v1 * 8 + temp_v0;
   param_1[1] = temp_v3 * 8 + temp_v0 + 8;

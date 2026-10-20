@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002b9024(void);
+int devilGetRecord(void);
 int memClear(unsigned char *, int);
 
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: memClear. */
 
 
@@ -83,7 +83,7 @@ void FUN_0023ebc8(unsigned int param_1,unsigned char *param_2,unsigned short *pa
   } while (temp_v3 != 0);
   param_2[0x14a] = *(unsigned char *)((int)param_3 + 0x6b);
   temp_v2 = (unsigned int)*(unsigned short *)(param_2 + 2);
-  FUN_002b9024();
+  devilGetRecord();
   temp_v0 = *(char *)(temp_v2 + 5);
   if (temp_v0 == '\x01') {
     param_2[0x14b] = 1;

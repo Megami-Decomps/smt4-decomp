@@ -15,7 +15,7 @@ extern int FUN_0010f50c(void);
 /* Supplied declaration required: FUN_0010f548. */
 extern unsigned char *asdModelForwardChecked(unsigned int *, char *, unsigned int, unsigned int);
 extern unsigned char *FUN_002c1398(void);
-extern unsigned int FUN_002c30c4(char *);
+extern unsigned int libc_strlen(char *);
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
 
@@ -41,7 +41,7 @@ unsigned char * FUN_00106c28(void)
   if (temp_v2) {
     puVar2 = (unsigned char *)FUN_002c1398();
     if (-1 < (int)puVar2) {
-      temp_v1 = FUN_002c30c4("ac:u");
+      temp_v1 = libc_strlen("ac:u");
       puVar2 = (unsigned char *)asdModelForwardChecked(&DAT_004655f8,"ac:u",temp_v1,0);
       if (-1 < (int)puVar2) {
         DAT_0044e34c = DAT_0044e34c + 1;

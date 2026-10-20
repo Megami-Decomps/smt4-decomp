@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0025930c(int, unsigned int);
+int sequenceRequestDefer(int, unsigned int);
 int FUN_0027d8b4(unsigned int);
 int FUN_00291e40(int);
 int FUN_002be624(unsigned char *, unsigned char *, unsigned int, unsigned int);
@@ -37,12 +37,12 @@ static float romwright_sqrt_4(float value)
 }
 #endif
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_0025930c. */
+/* Supplied declaration required: sequenceRequestDefer. */
 /* Supplied declaration required: FUN_0027d8b4. */
 /* Supplied declaration required: FUN_00291e40. */
-extern int FUN_002b63ac(void);
+extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_002be624. */
-extern int FUN_002c2950(void);
+extern int gameGetMapBlock(void);
 
 
 unsigned int FUN_00396370(int param_1)
@@ -64,8 +64,8 @@ unsigned int FUN_00396370(int param_1)
   float temp_v11;
   
   temp_v6 = 0xffffffff;
-  temp_v0 = FUN_002c2950();
-  temp_v1 = FUN_002b63ac();
+  temp_v0 = gameGetMapBlock();
+  temp_v1 = gameGetPlayerData();
   temp_v5 = 999999;
   temp_v3 = 0;
   do {
@@ -102,7 +102,7 @@ unsigned int FUN_00396370(int param_1)
                                *(unsigned int *)(temp_v5 + 0x8c));
                 }
                 else {
-                  FUN_0025930c(*(int *)(temp_v5 + 0x88),*(unsigned int *)(temp_v5 + 0x8c));
+                  sequenceRequestDefer(*(int *)(temp_v5 + 0x88),*(unsigned int *)(temp_v5 + 0x8c));
                 }
               }
               FUN_0027d8b4(*(unsigned int *)(temp_v5 + 0x1c));

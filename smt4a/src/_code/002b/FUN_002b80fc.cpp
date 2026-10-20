@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00234044(...);
 int FUN_002b5cb4(void);
-int FUN_002e342c(int, int);
+int libc_strcpy(int, int);
 int FUN_00327678(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -18,7 +18,7 @@ extern int DAT_00581280; /* 0x581280 */
 
 /* Supplied declaration required: FUN_00234044. */
 /* Supplied declaration required: FUN_002b5cb4. */
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_00327678. */
 
 
@@ -45,7 +45,7 @@ void FUN_002b80fc(void)
         *(unsigned char *)(DAT_00581280 + 0xf0c) = 1;
         *(int *)(temp_v2 + 0xf10) = temp_v1;
         *(int *)(temp_v2 + 0xf14) = (int)*(short *)(temp_v2 + temp_v1 * 0x3c + 0x12);
-        FUN_002e342c(temp_v2 + 0xf20,temp_v0 + 0xc);
+        libc_strcpy(temp_v2 + 0xf20,temp_v0 + 0xc);
         *(unsigned int *)(DAT_00581280 + 0xf1c) = *(unsigned int *)(temp_v0 + 8);
         FUN_00234044(1,temp_v1);
         return;

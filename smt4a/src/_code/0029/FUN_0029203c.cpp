@@ -8,7 +8,7 @@ int FUN_00178b04(...);
 int FUN_001bcfb4(...);
 int FUN_001cd3ec(...);
 int FUN_0024400c(...);
-int FUN_003fd63c(...);
+int gameFlagSetValue(...);
 int FUN_0040ac08(...);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -24,13 +24,13 @@ extern unsigned int DAT_005f0d48; /* 0x5f0d48 */
 extern int DAT_005f0d4c; /* 0x5f0d4c */
 extern int g_gameState; /* 0x5f15fc */
 
-extern int FUN_00162e8c(void);
+extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_00178b04. */
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_001bcfb4. */
 /* Supplied declaration required: FUN_001cd3ec. */
 /* Supplied declaration required: FUN_0024400c. */
-/* Supplied declaration required: FUN_003fd63c. */
+/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_0040ac08. */
 
 
@@ -44,20 +44,20 @@ void FUN_0029203c(void)
   unsigned int unaff_r4;
   unsigned int in_lr;
   
-  temp_v2 = FUN_00162e8c();
+  temp_v2 = gameFlagsGetBlock();
   if (g_gameState == 5) {
-    FUN_003fd63c(0x4d0,0,1);
+    gameFlagSetValue(0x4d0,0,1);
   }
   if ((*(int *)(temp_v2 + 0x16a0) != 0) &&
      ((g_gameState == 0x1c || g_gameState == 0x1d ||
       ((g_gameState == 0x1e || g_gameState == 0x1f) || g_gameState == 0x20)))) {
-    FUN_003fd63c(0x4d0,1);
+    gameFlagSetValue(0x4d0,1);
     *(int *)(temp_v2 + 0x16a0) = 0;
   }
-  temp_v2 = FUN_0018719c(0x4d0);
+  temp_v2 = gameFlagIsSet(0x4d0);
   if (temp_v2 != 0) {
     FUN_0024400c();
-    temp_v2 = FUN_0018719c(0x4d0);
+    temp_v2 = gameFlagIsSet(0x4d0);
     if (temp_v2 == 0) {
       return;
     }

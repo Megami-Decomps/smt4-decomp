@@ -19,7 +19,7 @@ typedef struct {
 
 extern int g_mapMain; /* 0x581274 */
 
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0020f12c. */
 /* Supplied declaration required: FUN_00227a70. */
 /* Supplied declaration required: FUN_002a2e98. */
@@ -48,7 +48,7 @@ void FUN_00385444(void)
   FUN_00227a70();
   if (*(int *)(temp_v0 + 0x30) == 0x11) {
     if (*(int *)(temp_v0 + 0x34) == 1) {
-      temp_v1 = FUN_0018719c(0xd9);
+      temp_v1 = gameFlagIsSet(0xd9);
       if (temp_v1 != 0) goto LAB_00385484;
 LAB_003854c8:
       FUN_002a2e98(*(unsigned int *)(temp_v0 + 0x30),*(unsigned int *)(temp_v0 + 0x34),
@@ -70,7 +70,7 @@ LAB_0038550c:
 LAB_00385484:
     if (*(int *)(temp_v0 + 0x30) == 5) {
       if (*(int *)(temp_v0 + 0x34) != 1) goto LAB_0038550c;
-      temp_v1 = FUN_0018719c(0x1ca);
+      temp_v1 = gameFlagIsSet(0x1ca);
       if (temp_v1 == 0) goto LAB_003854c8;
     }
     temp_v1 = *(int *)(temp_v0 + 0x30);
@@ -78,8 +78,8 @@ LAB_00385484:
     if (!temp_v6) {
       temp_v1 = *(int *)(temp_v0 + 0x34);
     }
-    if (((temp_v6 || temp_v1 != 3) || (temp_v1 = FUN_0018719c(0x171), temp_v1 == 0)) ||
-       (temp_v1 = FUN_0018719c(0x177), temp_v1 != 0)) goto LAB_0038550c;
+    if (((temp_v6 || temp_v1 != 3) || (temp_v1 = gameFlagIsSet(0x171), temp_v1 == 0)) ||
+       (temp_v1 = gameFlagIsSet(0x177), temp_v1 != 0)) goto LAB_0038550c;
     temp_v2 = *(unsigned int *)(temp_v0 + 0x30);
     temp_v3 = *(unsigned int *)(temp_v0 + 0x34);
     temp_v5 = 99;

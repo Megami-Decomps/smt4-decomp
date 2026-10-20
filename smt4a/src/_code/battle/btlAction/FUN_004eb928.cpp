@@ -8,7 +8,7 @@ int FUN_003d9164(void);
 int obj4FSlots28Reset(...);
 
 int FUN_00178b04(...);
-int FUN_001f4e20(...);
+int dialogOpen(...);
 int FUN_002a49e4(...);
 int FUN_002c2d5c(...);
 int halfRecClear(...);
@@ -37,7 +37,7 @@ int FUN_0034a290(void);
 int FUN_003ee0c0(...);
 int FUN_003efb18(...);
 int FUN_003f2594(...);
-int FUN_00480fc0(...);
+int flagValueSub(...);
 int FUN_004aa3d4(...);
 int FUN_004e5f2c(...);
 int FUN_004fb528(...);
@@ -67,8 +67,8 @@ int func_0x004fe7b0(...);
 
 int FUN_001568f8(...);
 int sysPlaySe(int);
-int FUN_001ab888(void);
-int FUN_001aba54(void);
+int gameGetSlotTable(void);
+int dataTable04FindById(void);
 int FUN_00222488(unsigned int *);
 int sysMemClear(int, int);
 int FUN_003756c8(int);
@@ -128,7 +128,7 @@ extern unsigned int DAT_005712a8; /* 0x5712a8 */
 extern unsigned int DAT_005712ac; /* 0x5712ac */
 extern unsigned int uRam005712d8; /* 0x5712d8 */
 extern unsigned int uRam005712dc; /* 0x5712dc */
-extern int DAT_00571508; /* 0x571508 */
+extern int g_btlCamera; /* 0x571508 */
 extern int DAT_00571514; /* 0x571514 */
 extern unsigned int DAT_00571518; /* 0x571518 */
 extern int DAT_00571520; /* 0x571520 */
@@ -151,18 +151,18 @@ extern int DAT_005715a8; /* 0x5715a8 */
 extern int DAT_005715ac; /* 0x5715ac */
 extern int DAT_00573808; /* 0x573808 */
 extern int g_btlEvent; /* 0x573898 */
-extern int DAT_0057a9c8; /* 0x57a9c8 */
+extern int g_btlUiBlock; /* 0x57a9c8 */
 
 /* Supplied declaration required: FUN_001568f8. */
 extern int lcgRandomRange(unsigned int);
 extern int FUN_00167f08(void);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00178b04. */
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_00192550. */
-/* Supplied declaration required: FUN_001ab888. */
-/* Supplied declaration required: FUN_001aba54. */
-/* Supplied declaration required: FUN_001f4e20. */
+/* Supplied declaration required: gameGetSlotTable. */
+/* Supplied declaration required: dataTable04FindById. */
+/* Supplied declaration required: dialogOpen. */
 /* Supplied declaration required: FUN_00222488. */
 extern unsigned int FUN_00228ab0(int);
 /* Supplied declaration required: FUN_0023acdc. */
@@ -192,7 +192,7 @@ extern int FUN_003eca48(int, unsigned short);
 /* Supplied declaration required: FUN_003f2aac. */
 /* Supplied declaration required: FUN_0047eccc. */
 /* Supplied declaration required: FUN_0047f138. */
-/* Supplied declaration required: FUN_00480fc0. */
+/* Supplied declaration required: flagValueSub. */
 /* Supplied declaration required: FUN_004a92d0. */
 /* Supplied declaration required: FUN_004a9308. */
 /* Supplied declaration required: FUN_004aa3d4. */
@@ -350,17 +350,17 @@ void FUN_004eb928(int *param_1,unsigned int param_2)
       }
     }
     if ((temp_v17 & 0x800) != 0) {
-      FUN_004a9308(DAT_0057a9c8,*(unsigned short *)(temp_v20 + 0x30),
+      FUN_004a9308(g_btlUiBlock,*(unsigned short *)(temp_v20 + 0x30),
                    (int)*(short *)(*(int *)(temp_v20 + 0x2c) + 0x1be),1);
       *puVar25 = *puVar25 & 0xfffff7ff;
       *(unsigned short *)(*(int *)(temp_v20 + 0x2c) + 0x1be) = 0;
       *(unsigned short *)(*(int *)(temp_v20 + 0x2c) + 0x1c0) = 0;
     }
     else {
-      FUN_004a92d0(DAT_0057a9c8,*(unsigned short *)(temp_v20 + 0x30),1);
+      FUN_004a92d0(g_btlUiBlock,*(unsigned short *)(temp_v20 + 0x30),1);
       temp_v3 = FUN_003e8430(*param_1);
       if ((temp_v3 == 0) && (temp_v3 = FUN_004c87e0(), temp_v3 != 0)) {
-        *(unsigned char *)(DAT_0057a9c8 + 0x617e) = 1;
+        *(unsigned char *)(g_btlUiBlock + 0x617e) = 1;
         return;
       }
     }
@@ -379,7 +379,7 @@ void FUN_004eb928(int *param_1,unsigned int param_2)
     else if ((temp_v3 != 0xb5) && (temp_v3 != 0xb6)) {
       FUN_003756c8(0);
     }
-    *(unsigned short *)(DAT_0057a9c8 + 0x73e2) = 0xffff;
+    *(unsigned short *)(g_btlUiBlock + 0x73e2) = 0xffff;
     return;
   case 3:
   case 0xf:
@@ -393,12 +393,12 @@ void FUN_004eb928(int *param_1,unsigned int param_2)
     FUN_004dd0c4(param_1,puVar25);
     return;
   case 8:
-    FUN_004aa8c8(DAT_0057a9c8);
+    FUN_004aa8c8(g_btlUiBlock);
     sysMemClear(temp_v20 + 0x3c,0x85);
-    FUN_001ab888();
+    gameGetSlotTable();
     return;
   case 9:
-    temp_v3 = FUN_001ab888();
+    temp_v3 = gameGetSlotTable();
     temp_v20 = 0;
     do {
       puVar29 = (unsigned int *)(*(int *)(*param_1 + 0x1ffc) + temp_v20 * 0x408);
@@ -433,7 +433,7 @@ LAB_004ebd00:
     puStack_2c = puVar25;
     if (*(short *)(*(int *)(temp_v20 + 0x2c) + 0x1be) == 2) {
       temp_v5 = (int)*(short *)(*(int *)(temp_v20 + 0x2c) + 0x1c0);
-      FUN_001aba54();
+      dataTable04FindById();
       temp_v17 = temp_v16;
       if (temp_v5 != 0) {
         temp_v17 = (unsigned int)*(unsigned char *)(temp_v5 + 0x4d);
@@ -606,7 +606,7 @@ LAB_004ebd00:
         *puVar25 = *puVar25 | 0x2000;
         FUN_004feecc(1,puVar25);
         FUN_004fb670(0,puVar25);
-        *(unsigned int *)(DAT_00571508 + 0x7cc) = 0xffffffff;
+        *(unsigned int *)(g_btlCamera + 0x7cc) = 0xffffffff;
         break;
       case 0xb:
         temp_v2 = *psVar17;
@@ -616,7 +616,7 @@ LAB_004ebd00:
         FUN_004e0114(piVar16,puVar25,(int)temp_v2,temp_v10 + temp_v5,0x1e,0x1e);
         break;
       case 0xc:
-        FUN_001aba54();
+        dataTable04FindById();
         if (temp_v17 == 0) break;
         switch(*(unsigned char *)(temp_v17 + 0x60)) {
         default:
@@ -714,7 +714,7 @@ LAB_004ebd00:
         temp_v17 = uStack_74;
         temp_v14 = *piStack_30;
         FUN_003f0e20(temp_v14,(int)temp_v2);
-        FUN_001aba54();
+        dataTable04FindById();
         temp_v19 = '\0';
         if ((temp_v17 != 0) && (temp_v0 = *(char *)(temp_v17 + 0x4d), temp_v0 == '\x01' || temp_v0 == '\x02'))
         {
@@ -816,7 +816,7 @@ code_r0x004ef594:
       iStack_48 = iStack_48 + 1;
     } while (iStack_48 < 0x85);
     temp_v17 = uStack_74;
-    FUN_001aba54();
+    dataTable04FindById();
     if ((*puVar25 & 0x200) == 0) {
       if (*(short *)(*(int *)(temp_v20 + 0x2c) + 0x1be) == 1) {
         FUN_004c3c84((int)*(short *)(*(int *)(temp_v20 + 0x28) + 0x6a),0xe,0);
@@ -1049,7 +1049,7 @@ code_r0x004ef7f0:
       temp_v3 = temp_v3 + 1;
     } while (temp_v22 != 0);
     uStack_288 = 0;
-    if ((*(unsigned int *)(DAT_00571508 + 0x64c) & 0x100) == 0) {
+    if ((*(unsigned int *)(g_btlCamera + 0x64c) & 0x100) == 0) {
       temp_v3 = 0;
       do {
         if (*(int *)(DAT_00573808 + 0x1f54) != 0) {
@@ -1077,7 +1077,7 @@ code_r0x004ef7f0:
               else if ((*puVar25 & 0x1080) == 0) {
                 uStack_288 = (unsigned int)*(unsigned char *)(temp_v22 + 0x161) + temp_v5;
                 func_0x004fee24(uStack_288,puVar29,*(unsigned char *)(temp_v22 + 0x162));
-                *(unsigned int *)(DAT_00571508 + 0x64c) = *(unsigned int *)(DAT_00571508 + 0x64c) | 0x1000000;
+                *(unsigned int *)(g_btlCamera + 0x64c) = *(unsigned int *)(g_btlCamera + 0x64c) | 0x1000000;
               }
             }
             else if (((((*(unsigned int *)(*piStack_30 + 0x45a0) & DAT_00571210) == 0 &&
@@ -1096,7 +1096,7 @@ code_r0x004ef7f0:
          ((iStack_68 == 2 && ((uStack_74 == 0x2d || uStack_74 == 0x2a || (uStack_74 == 0x24)))))) {
         uStack_288 = temp_v5 + 0x1e;
         func_0x004fee24(temp_v5 + 0x1e,puVar29,0);
-        *(unsigned int *)(DAT_00571508 + 0x64c) = *(unsigned int *)(DAT_00571508 + 0x64c) | 0x1000000;
+        *(unsigned int *)(g_btlCamera + 0x64c) = *(unsigned int *)(g_btlCamera + 0x64c) | 0x1000000;
       }
     }
     else {
@@ -1187,7 +1187,7 @@ code_r0x004f054c:
             temp_v3 = (int)temp_v2;
             FUN_00192550();
             if ((*(unsigned char *)(temp_v3 + 0x42) & 1) == 0) {
-              FUN_00480fc0((int)temp_v2,1);
+              flagValueSub((int)temp_v2,1);
             }
           }
         }
@@ -1203,7 +1203,7 @@ code_r0x004f054c:
                        0xffffffff,*(unsigned int *)(*(int *)(temp_v20 + 0x2c) + 0xf4),
                        *(unsigned int *)(*(int *)(temp_v20 + 0x2c) + 0xf8),0,0,0,0,0,0,0,0,0,0xffffffff,
                        1,0,1,0,0,1);
-          temp_v5 = FUN_0018719c(0x591);
+          temp_v5 = gameFlagIsSet(0x591);
           if ((temp_v5 != 0) && ((*puVar25 & 0x20000) == 0)) {
             FUN_004fbeac(uStack_288,puVar25,0,0x45,1);
             *puVar25 = *puVar25 | 0x20000;
@@ -1246,7 +1246,7 @@ code_r0x004f054c:
         temp_v3 = *(int *)(*(int *)(temp_v20 + 0x24) + 0x150);
         FUN_0034a290();
         if (temp_v3 != 0) {
-          FUN_004aa3d4(DAT_0057a9c8,2,*(unsigned int *)(*(int *)(temp_v20 + 0x24) + 0x150) & 0xffff,
+          FUN_004aa3d4(g_btlUiBlock,2,*(unsigned int *)(*(int *)(temp_v20 + 0x24) + 0x150) & 0xffff,
                        *(unsigned int *)(*(int *)(temp_v20 + 0x24) + 0x3f8),0,0);
         }
         else {
@@ -1258,34 +1258,34 @@ code_r0x004f054c:
           else {
             temp_v1 = *(unsigned short *)(temp_v3 + 4);
           }
-          FUN_004aa3d4(DAT_0057a9c8,iStack_68,0,*(unsigned int *)(*(int *)(temp_v20 + 0x24) + 0x3f8),
+          FUN_004aa3d4(g_btlUiBlock,iStack_68,0,*(unsigned int *)(*(int *)(temp_v20 + 0x24) + 0x3f8),
                        temp_v1,temp_v23);
         }
         break;
       case 2:
       case 3:
-        FUN_004aa3d4(DAT_0057a9c8,iStack_68,uStack_74 & 0xffff,
+        FUN_004aa3d4(g_btlUiBlock,iStack_68,uStack_74 & 0xffff,
                      *(unsigned int *)(*(int *)(temp_v20 + 0x24) + 0x3f8),
                      *(unsigned short *)(*(int *)(temp_v20 + 0x2c) + 2),0);
         break;
       case 8:
-        FUN_004aa3d4(DAT_0057a9c8,iStack_68,uStack_64 & 0xffff,0,0,0);
+        FUN_004aa3d4(g_btlUiBlock,iStack_68,uStack_64 & 0xffff,0,0,0);
         break;
       case 9:
       case 0xb:
       case 0xc:
         if ((*puVar25 & 0x2000000) == 0) {
-          FUN_004aa3d4(DAT_0057a9c8,iStack_68,1,0,0,0);
+          FUN_004aa3d4(g_btlUiBlock,iStack_68,1,0,0,0);
         }
         else {
-          FUN_004aa3d4(DAT_0057a9c8,iStack_68,0,0,0,0);
+          FUN_004aa3d4(g_btlUiBlock,iStack_68,0,0,0,0);
         }
         break;
       case 10:
         temp_v3 = 0;
         do {
           if (*(char *)((int)puVar25 + temp_v3 + 0x38) != '\0') {
-            FUN_004aa3d4(DAT_0057a9c8,iStack_68,0,0,0,0);
+            FUN_004aa3d4(g_btlUiBlock,iStack_68,0,0,0,0);
             break;
           }
           temp_v3 = temp_v3 + 1;
@@ -1311,7 +1311,7 @@ code_r0x004f054c:
           }
           FUN_002a49e4(*(unsigned int *)(*piStack_30 + 0x2268),temp_v4);
         }
-        FUN_001f4e20(1);
+        dialogOpen(1);
         FUN_002c2d5c(0xffffffff);
       }
       if ((*puVar25 & 0x1080) == 0) {
@@ -1371,7 +1371,7 @@ code_r0x004f054c:
       FUN_003e8bb0(&uStack_58,*param_1,*(unsigned int *)(temp_v20 + 0x24));
       temp_v27 = (unsigned int)*(unsigned short *)(*(int *)(temp_v20 + 0x2c) + 2);
       temp_v28 = 0;
-      FUN_004aa3d4(DAT_0057a9c8,(int)*(short *)(*(int *)(temp_v20 + 0x2c) + 0x1be),temp_v29,
+      FUN_004aa3d4(g_btlUiBlock,(int)*(short *)(*(int *)(temp_v20 + 0x2c) + 0x1be),temp_v29,
                    *(unsigned int *)(*(int *)(temp_v20 + 0x24) + 0x3f8));
       temp_v27 = 0;
       FUN_004fbeac(0xf,puVar25,0,0x31);
@@ -1460,7 +1460,7 @@ code_r0x004f054c:
   case 0x26:
     if ((**(unsigned int **)(temp_v20 + 0x24) & DAT_00571168) == 0 &&
         ((*(unsigned int **)(temp_v20 + 0x24))[1] & DAT_0057116c) == 0) {
-      FUN_004ac0bc(DAT_0057a9c8);
+      FUN_004ac0bc(g_btlUiBlock);
     }
     objRef1F50Release(DAT_00573808);
     FUN_004f612c(DAT_00573808);
@@ -1468,7 +1468,7 @@ code_r0x004f054c:
     FUN_004f8f08();
     FUN_004f8fa0(DAT_00573808);
     obj4FSlots28Reset(DAT_00573808);
-    *(unsigned int *)(DAT_00571508 + 0x64c) = *(unsigned int *)(DAT_00571508 + 0x64c) & 0xffffbfff;
+    *(unsigned int *)(g_btlCamera + 0x64c) = *(unsigned int *)(g_btlCamera + 0x64c) & 0xffffbfff;
     FUN_003d9164();
     return;
   }

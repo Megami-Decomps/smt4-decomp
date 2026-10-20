@@ -4,16 +4,16 @@
 
 extern "C" {
 
-int FUN_002b2368(unsigned int *);
-int FUN_002b8cc8(void);
+int asdMemFreeNonNull(unsigned int *);
+int ifTouchRegionRemove(void);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_002b2368. */
-/* Supplied declaration required: FUN_002b8cc8. */
+/* Supplied declaration required: asdMemFreeNonNull. */
+/* Supplied declaration required: ifTouchRegionRemove. */
 
 
 void FUN_003c2f40(unsigned int *param_1,unsigned int param_2)
@@ -26,12 +26,12 @@ void FUN_003c2f40(unsigned int *param_1,unsigned int param_2)
   temp_v0 = 0;
   if (temp_v0 < *(short *)((int)param_1 + 0x5a)) {
     do {
-      FUN_002b8cc8();
+      ifTouchRegionRemove();
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < *(short *)((int)param_1 + 0x5a));
   }
   *(unsigned short *)((int)param_1 + 0x5a) = 0;
-  FUN_002b2368(param_1);
+  asdMemFreeNonNull(param_1);
   return;
 }
 

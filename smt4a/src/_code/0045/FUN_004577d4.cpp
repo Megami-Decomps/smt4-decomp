@@ -39,7 +39,7 @@ typedef struct {
     unsigned int sp68; /* 0x68: local_68 */
 } param_2_stack;
 
-extern int *DAT_005b40e0; /* 0x5b40e0 */
+extern int *g_commandBufferCursor; /* 0x5b40e0 */
 
 /* Supplied declaration required: nw_gfx_internal_NWCopyVec1Reverse. */
 /* Supplied declaration required: nw_gfx_internal_NWCopyVec2Reverse. */
@@ -121,7 +121,7 @@ void FUN_004577d4(fn_004577d4_arg0 *param_1,int param_2)
   else {
     piVar8 = (int *)0x0;
   }
-  for (; piVar1 = DAT_005b40e0, piVar8 != piVar10; piVar8 = piVar8 + 1) {
+  for (; piVar1 = g_commandBufferCursor, piVar8 != piVar10; piVar8 = piVar8 + 1) {
     if (*piVar8 != 0) {
       temp_v0 = *piVar8 + (int)piVar8;
     }
@@ -157,31 +157,31 @@ void FUN_004577d4(fn_004577d4_arg0 *param_1,int param_2)
               if (temp_v3 != 2) {
                 if (temp_v3 != 3) {
                   if (temp_v3 == 4) {
-                    *DAT_005b40e0 = temp_v1 + 0x80000000;
+                    *g_commandBufferCursor = temp_v1 + 0x80000000;
                     piVar1[1] = -0x7fb0fd70;
                     nw_gfx_internal_NWCopyVec4Reverse(piVar1 + 2,temp_v2 + 0xc);
-                    DAT_005b40e0 = DAT_005b40e0 + 6;
+                    g_commandBufferCursor = g_commandBufferCursor + 6;
                   }
                 }
                 else {
-                  *DAT_005b40e0 = temp_v1 + 0x80000000;
+                  *g_commandBufferCursor = temp_v1 + 0x80000000;
                   piVar1[1] = -0x7fb0fd70;
                   nw_gfx_internal_NWCopyVec3Reverse(piVar1 + 2,temp_v2 + 0xc);
-                  DAT_005b40e0 = DAT_005b40e0 + 6;
+                  g_commandBufferCursor = g_commandBufferCursor + 6;
                 }
               }
               else {
-                *DAT_005b40e0 = temp_v1 + 0x80000000;
+                *g_commandBufferCursor = temp_v1 + 0x80000000;
                 piVar1[1] = -0x7fb0fd70;
                 nw_gfx_internal_NWCopyVec2Reverse(piVar1 + 2,temp_v2 + 0xc);
-                DAT_005b40e0 = DAT_005b40e0 + 6;
+                g_commandBufferCursor = g_commandBufferCursor + 6;
               }
             }
             else {
-              *DAT_005b40e0 = temp_v1 + 0x80000000;
+              *g_commandBufferCursor = temp_v1 + 0x80000000;
               piVar1[1] = -0x7fb0fd70;
               nw_gfx_internal_NWCopyVec1Reverse(piVar1 + 2,temp_v2 + 0xc);
-              DAT_005b40e0 = DAT_005b40e0 + 6;
+              g_commandBufferCursor = g_commandBufferCursor + 6;
             }
           }
           else {
@@ -208,35 +208,35 @@ void FUN_004577d4(fn_004577d4_arg0 *param_1,int param_2)
               if (temp_v3 != 2) {
                 if (temp_v3 != 3) {
                   if (temp_v3 == 4) {
-                    piVar4 = DAT_005b40e0 + 2;
-                    *DAT_005b40e0 = temp_v1 + 0x80000000;
+                    piVar4 = g_commandBufferCursor + 2;
+                    *g_commandBufferCursor = temp_v1 + 0x80000000;
                     piVar1[1] = -0x7fb0fd40;
                     nw_gfx_internal_NWCopyVec4Reverse(piVar4,temp_v2 + 0xc);
-                    DAT_005b40e0 = DAT_005b40e0 + 6;
+                    g_commandBufferCursor = g_commandBufferCursor + 6;
                   }
                 }
                 else {
-                  piVar4 = DAT_005b40e0 + 2;
-                  *DAT_005b40e0 = temp_v1 + 0x80000000;
+                  piVar4 = g_commandBufferCursor + 2;
+                  *g_commandBufferCursor = temp_v1 + 0x80000000;
                   piVar1[1] = -0x7fb0fd40;
                   nw_gfx_internal_NWCopyVec3Reverse(piVar4,temp_v2 + 0xc);
-                  DAT_005b40e0 = DAT_005b40e0 + 6;
+                  g_commandBufferCursor = g_commandBufferCursor + 6;
                 }
               }
               else {
-                piVar4 = DAT_005b40e0 + 2;
-                *DAT_005b40e0 = temp_v1 + 0x80000000;
+                piVar4 = g_commandBufferCursor + 2;
+                *g_commandBufferCursor = temp_v1 + 0x80000000;
                 piVar1[1] = -0x7fb0fd40;
                 nw_gfx_internal_NWCopyVec2Reverse(piVar4,temp_v2 + 0xc);
-                DAT_005b40e0 = DAT_005b40e0 + 6;
+                g_commandBufferCursor = g_commandBufferCursor + 6;
               }
             }
             else {
-              piVar4 = DAT_005b40e0 + 2;
-              *DAT_005b40e0 = temp_v1 + 0x80000000;
+              piVar4 = g_commandBufferCursor + 2;
+              *g_commandBufferCursor = temp_v1 + 0x80000000;
               piVar1[1] = -0x7fb0fd40;
               nw_gfx_internal_NWCopyVec1Reverse(piVar4,temp_v2 + 0xc);
-              DAT_005b40e0 = DAT_005b40e0 + 6;
+              g_commandBufferCursor = g_commandBufferCursor + 6;
             }
           }
           else {
@@ -256,7 +256,7 @@ void FUN_004577d4(fn_004577d4_arg0 *param_1,int param_2)
   }
   if (0 < (int)piVar9) {
     piVar10 = (int *)0x804f02c0;
-    unaff_r5 = (int *)&DAT_005b40e0;
+    unaff_r5 = (int *)&g_commandBufferCursor;
   }
   temp_v0 = 0;
   if (temp_v0 < (int)piVar9) {

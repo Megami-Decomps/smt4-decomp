@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_0023e51c(int, unsigned int *, int, unsigned int);
 int asdOperatorNewD(void);
-int FUN_002e6490(int);
-int FUN_002e6dd4(void);
+int asdOperatorDeleteC(int);
+int rt_memclr(void);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -19,8 +19,8 @@ extern int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_0023e51c. */
 /* Supplied declaration required: asdOperatorNewD. */
-/* Supplied declaration required: FUN_002e6490. */
-/* Supplied declaration required: FUN_002e6dd4. */
+/* Supplied declaration required: asdOperatorDeleteC. */
+/* Supplied declaration required: rt_memclr. */
 
 
 short FUN_004cd238(unsigned int param_1,int param_2,unsigned int param_3,unsigned int param_4)
@@ -63,7 +63,7 @@ short FUN_004cd238(unsigned int param_1,int param_2,unsigned int param_3,unsigne
   temp_v12 = 0;
   temp_v3 = (temp_v8 + 1) * 8;
   asdOperatorNewD();
-  FUN_002e6dd4();
+  rt_memclr();
   FUN_0023e51c(temp_v3,&temp_v12,1,param_1 + param_2);
   temp_v7 = temp_v6;
   if (0 < param_2) {
@@ -95,7 +95,7 @@ short FUN_004cd238(unsigned int param_1,int param_2,unsigned int param_3,unsigne
       temp_v4 = temp_v4 + 1;
     } while (temp_v4 < param_2);
   }
-  FUN_002e6490(temp_v3);
+  asdOperatorDeleteC(temp_v3);
   return temp_v1;
 }
 

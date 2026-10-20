@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002b8838(int);
+int buttonHelpSetPreset(int);
 
 extern int btlGetMainState(void);
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 
 
 unsigned int FUN_002e407c(void)
@@ -18,7 +18,7 @@ unsigned int FUN_002e407c(void)
   
   temp_v0 = btlGetMainState();
   *(unsigned int *)(temp_v0 + 0x44a0) = *(unsigned int *)(temp_v0 + 0x44a0) | 0x100000;
-  FUN_002b8838(0xdd);
+  buttonHelpSetPreset(0xdd);
   return 1;
 }
 

@@ -8,12 +8,12 @@ int FUN_001575cc(unsigned int);
 int FUN_00177474(unsigned int, unsigned int);
 
 extern unsigned int g_renderCtx; /* 0x59dbb4 */
-extern signed char DAT_005b3bf4; /* 0x5b3bf4 */
+extern signed char g_gfxSettings; /* 0x5b3bf4 */
 extern unsigned int DAT_005b3c08; /* 0x5b3c08 */
 extern unsigned int DAT_005b3c1c; /* 0x5b3c1c */
 extern unsigned int g_asdModelSlotFlags; /* 0x5b3c78 */
-extern unsigned int DAT_005b3cb8; /* 0x5b3cb8 */
-extern int DAT_00636e00; /* 0x636e00 */
+extern unsigned int g_asdModelSlotArray3; /* 0x5b3cb8 */
+extern int g_asdLightCount; /* 0x636e00 */
 
 /* Supplied declaration required: FUN_001575cc. */
 /* Supplied declaration required: FUN_00177474. */
@@ -26,8 +26,8 @@ void FUN_00151dac(void)
 
 {
 /* irregular: 4 native warning(s); review required */
-  if ((DAT_005b3bf4 != '\0') && ((0 < DAT_00636e00 || ((g_asdModelSlotFlags & 1) != 0)))) {
-    FUN_00177474(DAT_005b3cb8,DAT_005b3c1c);
+  if ((g_gfxSettings != '\0') && ((0 < g_asdLightCount || ((g_asdModelSlotFlags & 1) != 0)))) {
+    FUN_00177474(g_asdModelSlotArray3,DAT_005b3c1c);
     FUN_001575cc(g_renderCtx);
     DAT_005b3c08 = 0;
   }

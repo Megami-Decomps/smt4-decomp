@@ -8,7 +8,7 @@ int FUN_00240520(int, int);
 int FUN_002408ac(unsigned int *, int);
 int FUN_0027e6f4(int, int);
 int FUN_002881bc(void);
-int FUN_002b06c4(void);
+int dataTable00FindById(void);
 int FUN_002b7bca(int *, int, int, unsigned char *);
 int FUN_002fe394(int, int, unsigned int, int);
 int FUN_00337f98(int, int);
@@ -41,7 +41,7 @@ extern unsigned int DAT_00439cf8; /* 0x439cf8 */
 extern int FUN_0027dab0(int, int);
 /* Supplied declaration required: FUN_0027e6f4. */
 /* Supplied declaration required: FUN_002881bc. */
-/* Supplied declaration required: FUN_002b06c4. */
+/* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: FUN_002b7bca. */
 /* Supplied declaration required: FUN_002fe394. */
 /* Supplied declaration required: FUN_00337f98. */
@@ -97,7 +97,7 @@ void FUN_00334228(unsigned int *param_1,int param_2)
   piVar10 = (int *)(temp_v29 + 0x1fc0);
   temp_v5 = (unsigned int)*(unsigned short *)(*piVar10 + temp_v7 * 0x288 + 0xce);
   temp_v17 = temp_v7;
-  FUN_002b06c4();
+  dataTable00FindById();
   temp_v0 = *(unsigned char *)(temp_v5 + 0x9e);
   temp_v14 = 0.0f;
   if (temp_v0 == 0) {

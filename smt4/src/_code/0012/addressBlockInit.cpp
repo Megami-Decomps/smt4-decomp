@@ -11,8 +11,8 @@ typedef struct AddressBlock {
     /* 0x10 */ u8 mapped;
 } AddressBlock;
 
-extern s8 DAT_00471b54;
-extern u8 DAT_004e6ef0;
+extern s8 g_nnosAddressSpaceInitialized;
+extern u8 g_nnosAddressSpaceManager;
 
 void FUN_002c526c(u32 error);
 u32 nn_os_AddressSpaceManager_Allocate(void *manager, AddressBlock *block, u32 size, u32 align);
@@ -28,8 +28,8 @@ void addressBlockInit(AddressBlock *block, u32 size)
     block->unk08 = 0;
     block->unk0C = 0;
     block->mapped = 0;
-    if (DAT_00471b54 != 0) {
-        if (nn_os_AddressSpaceManager_Allocate(&DAT_004e6ef0, block, (size + 0xfff) & 0xfffff000, 0) == 0) {
+    if (g_nnosAddressSpaceInitialized != 0) {
+        if (nn_os_AddressSpaceManager_Allocate(&g_nnosAddressSpaceManager, block, (size + 0xfff) & 0xfffff000, 0) == 0) {
             FUN_002c526c(0xd8601837);
         }
         block->mapped = 0;

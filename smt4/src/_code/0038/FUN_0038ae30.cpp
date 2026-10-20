@@ -8,7 +8,7 @@ int FUN_00234624(unsigned char [4], unsigned int, unsigned int);
 int asdOperatorNewB(void);
 int FUN_002a12d8(int);
 int jyoucyuGetTableEntry(int);
-int FUN_002c6a10(int);
+int asdOperatorDelete(int);
 int FUN_00354608(int *, int, int);
 int FUN_003df0c4(int *, unsigned char [4], unsigned char [8], unsigned short [12]);
 int FUN_003df4dc(int *, int, int, int);
@@ -28,9 +28,9 @@ extern unsigned int FUN_00234618(unsigned char *);
 /* Supplied declaration required: FUN_00234624. */
 /* Supplied declaration required: asdOperatorNewB. */
 /* Supplied declaration required: FUN_002a12d8. */
-extern int FUN_002a2dec(unsigned short *);
+extern int objGetFlagBit0(unsigned short *);
 /* Supplied declaration required: jyoucyuGetTableEntry. */
-/* Supplied declaration required: FUN_002c6a10. */
+/* Supplied declaration required: asdOperatorDelete. */
 /* Supplied declaration required: FUN_00354608. */
 /* Supplied declaration required: FUN_003df0c4. */
 /* Supplied declaration required: FUN_003df4dc. */
@@ -81,10 +81,10 @@ unsigned char * FUN_0038ae30(int param_1)
         temp_v2 = FUN_002a12d8(param_1 + 0xc);
         if (temp_v2 < 0) {
           FUN_002a12d8(param_1 + 0xc);
-          FUN_002c6a10(temp_v0);
+          asdOperatorDelete(temp_v0);
           return temp_v9;
         }
-        temp_v2 = FUN_002a2dec(temp_v11);
+        temp_v2 = objGetFlagBit0(temp_v11);
         if (temp_v2 != 0) {
           temp_v2 = temp_v5 * 2;
           temp_v5 = temp_v5 + 1;
@@ -99,11 +99,11 @@ unsigned char * FUN_0038ae30(int param_1)
     temp_v3 = FUN_002a12d8(param_1 + 0xc);
     if (temp_v3 < 0) {
       FUN_002a12d8(param_1 + 0xc);
-      FUN_002c6a10(temp_v0);
+      asdOperatorDelete(temp_v0);
       return temp_v9;
     }
     jyoucyuGetTableEntry(0);
-    FUN_002c6a10(temp_v0);
+    asdOperatorDelete(temp_v0);
   }
   return temp_v9;
 }

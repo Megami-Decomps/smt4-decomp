@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdMemFree(void);
-int FUN_0019a7f4(int, unsigned int);
+int asdTMTexTableReleaseNode(int, unsigned int);
 int scrScriptProcessDestroy(void);
 int FUN_0019f548(unsigned int);
 int FUN_00214da4(void);
@@ -19,7 +19,7 @@ typedef struct {
 extern unsigned char g_gameState; /* 0x5f15fc */
 
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_0019a7f4. */
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_0019f548. */
 /* Supplied declaration required: FUN_00214da4. */
@@ -57,7 +57,7 @@ void FUN_004b7a54(int param_1)
     asdMemFree();
     *(unsigned int *)(param_1 + 0x1154) = 0;
   }
-  FUN_0019a7f4(0x18,*(unsigned int *)(param_1 + 0x90));
+  asdTMTexTableReleaseNode(0x18,*(unsigned int *)(param_1 + 0x90));
   campGetState();
   if ((*(char *)(param_1 + 0x1214) != '\0') && ((*(signed char *)((unsigned char *)&g_gameState + 0x38)) == '\0')) {
     *(unsigned char *)(param_1 + 0x1214) = 0;

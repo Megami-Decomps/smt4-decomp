@@ -7,10 +7,10 @@ extern "C" {
 int FUN_00210d08(...);
 int FUN_002598f0(...);
 int FUN_002b6940(...);
-int FUN_002b9024(void);
+int devilGetRecord(void);
 int FUN_002bd82c(...);
 int FUN_002bdf94(...);
-int FUN_002be304(...);
+int drawSetColorFromRGBA8(...);
 int FUN_002be624(...);
 int FUN_002bed3c(void);
 int FUN_002bf288(...);
@@ -24,10 +24,10 @@ extern unsigned char LAB_001ebc8c; /* 0x1ebc8c */
 /* Supplied declaration required: FUN_00210d08. */
 /* Supplied declaration required: FUN_002598f0. */
 /* Supplied declaration required: FUN_002b6940. */
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: FUN_002bd82c. */
 /* Supplied declaration required: FUN_002bdf94. */
-/* Supplied declaration required: FUN_002be304. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: FUN_002bf288. */
@@ -104,12 +104,12 @@ void FUN_001eb874(unsigned int *param_1,int param_2,float *param_3,int param_4,i
   FUN_002bf288(2,0x39,0x5a,param_4,param_5,0x70);
   temp_v1 = (unsigned int)*(unsigned short *)(iStack_54 + 0x10);
   if (temp_v1 != 0) {
-    FUN_002b9024();
+    devilGetRecord();
     temp_v0 = FUN_002bf4f8(0x39,0x78);
     FUN_002b6940(*(unsigned short *)(temp_v1 + 0x90),*(short *)(temp_v0 + 8) + param_4,
                  *(short *)(temp_v0 + 10) + param_5,0x71);
   }
-  FUN_002be304(unaff_r10);
+  drawSetColorFromRGBA8(unaff_r10);
   FUN_002be624(temp_v8,&LAB_001ebc78,*(unsigned char *)(param_2 + 0x36));
   temp_v0 = FUN_002bf4f8(0x39,0x74);
   FUN_002bdf94(0,*(short *)(temp_v0 + 8) + param_4,*(short *)(temp_v0 + 10) + param_5,0,5,0x74,

@@ -7,12 +7,12 @@ extern "C" {
 int FUN_0010a108(unsigned int);
 int FUN_0010d0cc(void);
 int FUN_00122250(unsigned int, unsigned int, char *, int);
-int FUN_002e7232(void);
+int sharedRefRelease(void);
 int FUN_002e78d0(unsigned int, unsigned int, int);
 int FUN_002e7908(...);
-int FUN_002e9300(unsigned char [8], int);
-int FUN_002e9318(unsigned char [8]);
-int FUN_002e9afe(int, unsigned int);
+int onlineStringConstruct(unsigned char [8], int);
+int onlineStringDestroy(unsigned char [8]);
+int vectorCopyHeader(int, unsigned int);
 int FUN_002ea12c(void);
 int FUN_002ea704(void);
 int FUN_002f3378(unsigned char [36]);
@@ -37,23 +37,23 @@ extern unsigned int FUN_00104694(void);
 /* Supplied declaration required: FUN_0010d0cc. */
 /* Supplied declaration required: FUN_00122250. */
 extern unsigned int FUN_002e6e26(void);
-/* Supplied declaration required: FUN_002e7232. */
-extern int FUN_002e760a(unsigned int);
+/* Supplied declaration required: sharedRefRelease. */
+extern int operatorNew(unsigned int);
 extern int FUN_002e789a(int);
 /* Supplied declaration required: FUN_002e78d0. */
 /* Supplied declaration required: FUN_002e7908. */
-/* Supplied declaration required: FUN_002e9300. */
-/* Supplied declaration required: FUN_002e9318. */
-/* Supplied declaration required: FUN_002e9afe. */
+/* Supplied declaration required: onlineStringConstruct. */
+/* Supplied declaration required: onlineStringDestroy. */
+/* Supplied declaration required: vectorCopyHeader. */
 /* Supplied declaration required: FUN_002ea12c. */
 /* Supplied declaration required: FUN_002ea704. */
 /* Supplied declaration required: FUN_002f3378. */
 /* Supplied declaration required: FUN_002f3490. */
 /* Supplied declaration required: FUN_002f4f20. */
-extern int FUN_002f7064(int);
+extern int onlineOwnerHasPendingJob(int);
 extern unsigned int FUN_002f815c(void);
 /* Supplied declaration required: FUN_002fd784. */
-extern int FUN_0030fb0c(int);
+extern int onlineOwnerHasPendingJob2(int);
 extern int childOwnerHasActiveChild(int);
 /* Supplied declaration required: FUN_00442100. */
 extern int FUN_004421dc(unsigned int, char *, char *);
@@ -92,7 +92,7 @@ void FUN_0012284c(unsigned int param_1,int param_2,int param_3,char *param_4,int
   iStack_1c = param_3;
   temp_v9 = param_4;
   temp_v0 = FUN_002e7908(temp_v7,&temp_v5);
-  FUN_002e9afe(param_2 + 0x130,temp_v0);
+  vectorCopyHeader(param_2 + 0x130,temp_v0);
   if (((param_3 != 0) && (param_5 != 0)) && ((param_6 == 0 || (param_7 != 0)))) {
     pcVar4 = temp_v9;
     pcVar6 = DAT_0059494c;
@@ -118,13 +118,13 @@ void FUN_0012284c(unsigned int param_1,int param_2,int param_3,char *param_4,int
                 FUN_002e7908(temp_v8,&temp_v3);
                 return;
               }
-              FUN_002e7232();
+              sharedRefRelease();
               *(unsigned int *)(param_2 + 0x11c) = 0;
             }
             temp_v1 = childOwnerHasActiveChild(param_2);
             if ((((temp_v1 == 0) && (*(int *)(param_2 + 0x78) == 0)) &&
-                (temp_v1 = FUN_0030fb0c(param_2), temp_v1 == 0)) &&
-               (temp_v1 = FUN_002f7064(param_2), temp_v1 == 0)) {
+                (temp_v1 = onlineOwnerHasPendingJob2(param_2), temp_v1 == 0)) &&
+               (temp_v1 = onlineOwnerHasPendingJob(param_2), temp_v1 == 0)) {
               temp_v0 = FUN_002f815c();
               FUN_002ea704();
               FUN_0010a108(temp_v0);
@@ -132,12 +132,12 @@ void FUN_0012284c(unsigned int param_1,int param_2,int param_3,char *param_4,int
               FUN_002f3378(temp_v4);
               temp_v0 = FUN_002ea704();
               FUN_002fd784(temp_v0,temp_v4);
-              FUN_002e9300(temp_v6,param_5);
+              onlineStringConstruct(temp_v6,param_5);
               FUN_0010d0cc();
-              FUN_002e9318(temp_v6);
+              onlineStringDestroy(temp_v6);
               temp_v1 = FUN_002e789a(param_3);
               if (temp_v1 != 0) {
-                temp_v1 = FUN_002e760a(0x2b8);
+                temp_v1 = operatorNew(0x2b8);
                 temp_v0 = 0;
                 if (temp_v1 != 0) {
                   temp_v0 = FUN_00104694();

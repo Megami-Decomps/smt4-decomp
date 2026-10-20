@@ -28,8 +28,8 @@ int FUN_002569ac(...);
 int FUN_0026beb4(...);
 int FUN_0027e3f8(...);
 int FUN_00292dd0(int);
-int FUN_002a8764(void);
-int FUN_002b8838(...);
+int gameGetSlotTable(void);
+int buttonHelpSetPreset(...);
 int memClear(int, int);
 int FUN_0033a780(...);
 int FUN_003ae8ec(int *);
@@ -52,7 +52,7 @@ extern int g_btlScriptUnit; /* 0x43427c */
 extern int g_btlMain; /* 0x4342c8 */
 extern int DAT_00435d18; /* 0x435d18 */
 extern unsigned int *g_btlEvent; /* 0x435d48 */
-extern int *DAT_00439ca8; /* 0x439ca8 */
+extern int *g_btlUiBlock; /* 0x439ca8 */
 extern int DAT_004e316c; /* 0x4e316c */
 
 /* Supplied declaration required: btlAiScriptCall. */
@@ -78,8 +78,8 @@ extern int *FUN_0027e3b8(unsigned int *);
 /* Supplied declaration required: FUN_0027e3f8. */
 /* Supplied declaration required: FUN_00292dd0. */
 extern int *FUN_00293230(int);
-/* Supplied declaration required: FUN_002a8764. */
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: gameGetSlotTable. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 extern int FUN_002b898c(void);
 /* Supplied declaration required: FUN_002c1dd8. */
 /* Supplied declaration required: memClear. */
@@ -136,11 +136,11 @@ int * FUN_003d2140(int *param_1,unsigned int param_2)
       }
     }
     if ((temp_v3 & 0x800) == 0) {
-      piVar2 = DAT_00439ca8;
-      FUN_00229c5c(DAT_00439ca8,*(unsigned short *)(temp_v2 + 0x30),1);
+      piVar2 = g_btlUiBlock;
+      FUN_00229c5c(g_btlUiBlock,*(unsigned short *)(temp_v2 + 0x30),1);
       return piVar2;
     }
-    FUN_00227b14(DAT_00439ca8,*(unsigned short *)(temp_v2 + 0x30),
+    FUN_00227b14(g_btlUiBlock,*(unsigned short *)(temp_v2 + 0x30),
                  (int)*(short *)(*(int *)(temp_v2 + 0x2c) + 0x14c),1);
     piVar2 = (int *)0x0;
     *puVar8 = *puVar8 & 0xfffff7ff;
@@ -156,7 +156,7 @@ int * FUN_003d2140(int *param_1,unsigned int param_2)
     if (piVar2 != (int *)0x0) {
       if (temp_v2 != 0x3d) {
         piVar2 = (int *)0x3d;
-        FUN_002b8838(0x3d);
+        buttonHelpSetPreset(0x3d);
         return piVar2;
       }
     }
@@ -175,12 +175,12 @@ int * FUN_003d2140(int *param_1,unsigned int param_2)
     FUN_003ca6c4(param_1,puVar8);
     return param_1;
   case 7:
-    FUN_003ae8ec(DAT_00439ca8);
+    FUN_003ae8ec(g_btlUiBlock);
     memClear(temp_v2 + 0x3c,0x85);
-    piVar2 = (int *)FUN_002a8764();
+    piVar2 = (int *)gameGetSlotTable();
     return piVar2;
   case 8:
-    temp_v2 = FUN_002a8764();
+    temp_v2 = gameGetSlotTable();
     temp_v4 = 0;
     do {
       puVar9 = (unsigned int *)(*(int *)(*param_1 + 0x1fc0) + temp_v4 * 0x288);
@@ -219,7 +219,7 @@ LAB_003d243c:
     *(unsigned int *)(temp_v2 + 0x10) = 0;
     FUN_00256898(0,0);
     piVar2 = (int *)0xed;
-    FUN_002b8838(0xed);
+    buttonHelpSetPreset(0xed);
     return piVar2;
   case 0xe:
     FUN_003d3ba8(param_1,puVar8);
@@ -356,7 +356,7 @@ code_r0x0027e38c:
   case 0x23:
     temp_v4 = g_btlScriptUnit;
     if ((**(unsigned int **)(temp_v2 + 0x24) & 0x10) == 0) {
-      FUN_003af1c4(DAT_00439ca8);
+      FUN_003af1c4(g_btlUiBlock);
     }
     FUN_003da0bc(DAT_00435d18);
     FUN_002276f8(DAT_00435d18);

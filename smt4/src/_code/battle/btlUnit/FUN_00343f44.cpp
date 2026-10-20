@@ -38,7 +38,7 @@ extern int DAT_00435d18; /* 0x435d18 */
 extern unsigned int DAT_00439a24; /* 0x439a24 */
 extern unsigned int DAT_00439a28; /* 0x439a28 */
 extern unsigned int DAT_00439a38; /* 0x439a38 */
-extern unsigned int DAT_00439ca8; /* 0x439ca8 */
+extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 
 /* Supplied declaration required: FUN_0023ce90. */
 /* Supplied declaration required: FUN_0023f79c. */
@@ -124,7 +124,7 @@ LAB_00343fdc:
   }
   if (param_2->field_0x20 == 2) {
 LAB_003440fc:
-    temp_v4 = FUN_003ae820(DAT_00439ca8);
+    temp_v4 = FUN_003ae820(g_btlUiBlock);
     if (temp_v4 != 0) {
       param_2->field_0x20 = 3;
       FUN_0033b1ac(temp_v3,(int)param_2->field_0x48);

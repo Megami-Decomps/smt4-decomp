@@ -6,7 +6,7 @@ extern "C" {
 
 int scrSetResult(int);
 
-extern int FUN_001ab854(int);
+extern int gameGetSlotRecord(int);
 /* Supplied declaration required: scrSetResult. */
 extern int FUN_003a7b74(void);
 
@@ -21,7 +21,7 @@ unsigned int FUN_003cda7c(unsigned int param_1,int param_2)
   
   temp_v1 = *(int *)(param_2 + 4);
   if (temp_v1 != 0) {
-    temp_v1 = FUN_001ab854((int)*(char *)(temp_v1 + *(int *)(temp_v1 + 0x74c0) * 0x150 + 0x442c));
+    temp_v1 = gameGetSlotRecord((int)*(char *)(temp_v1 + *(int *)(temp_v1 + 0x74c0) * 0x150 + 0x442c));
     temp_v2 = FUN_003a7b74();
     temp_v0 = *(unsigned short *)(temp_v1 + temp_v2 * 2 + 0x34);
   }

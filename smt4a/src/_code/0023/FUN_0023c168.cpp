@@ -5,7 +5,7 @@
 extern "C" {
 
 int callGlobalHook(...);
-int FUN_002e6dd4(int *, int, unsigned int, unsigned int, unsigned int);
+int rt_memclr(int *, int, unsigned int, unsigned int, unsigned int);
 
 /* stack frame of param_6: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -17,7 +17,7 @@ extern unsigned char DAT_00541ba0; /* 0x541ba0 */
 extern unsigned char DAT_00543ca0; /* 0x543ca0 */
 
 /* Supplied declaration required: callGlobalHook. */
-/* Supplied declaration required: FUN_002e6dd4. */
+/* Supplied declaration required: rt_memclr. */
 
 
 unsigned int FUN_0023c168(int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,int param_5,int param_6)
@@ -42,7 +42,7 @@ unsigned int FUN_0023c168(int *param_1,unsigned int param_2,unsigned int param_3
       temp_v9 = param_5 == 0;
     }
     if (temp_v9) {
-      FUN_002e6dd4(param_1,0x20,param_3,param_4,param_4);
+      rt_memclr(param_1,0x20,param_3,param_4,param_4);
       temp_v0 = callGlobalHook(0x670);
       *param_1 = temp_v0;
       if (temp_v0 != 0) {

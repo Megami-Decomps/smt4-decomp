@@ -5,7 +5,7 @@
 extern "C" {
 
 int memAlloc(int, int, int, int, int, int);
-int FUN_002c3944(void);
+int rt_memclr(void);
 int rt_memcpy(unsigned int *, unsigned int, int);
 
 typedef int romwright_code(...);
@@ -17,7 +17,7 @@ typedef struct {
 extern unsigned char g_effMiscKinds; /* 0x472480 */
 
 /* Supplied declaration required: memAlloc. */
-/* Supplied declaration required: FUN_002c3944. */
+/* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: rt_memcpy. */
 
 
@@ -32,7 +32,7 @@ unsigned int * effMiscCreate(int param_1,unsigned int param_2)
   temp_v1 = *(int *)(param_1 * 0x18 + 0x472494);
   puVar1 = (unsigned int *)0x10000;
   memAlloc(0x10000,0x100,0,temp_v1 + 0x30,0x10,1);
-  FUN_002c3944();
+  rt_memclr();
   puVar1[4] = 0xffffffff;
   puVar1[6] = param_1;
   puVar1[5] = 0x3f800000;

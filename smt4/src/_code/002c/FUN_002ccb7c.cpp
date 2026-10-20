@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_0026e630(int);
-int FUN_0028975c(int, int);
-int FUN_002b8e84(int);
+int gameFlagSetValue(int, int);
+int eventQueueAddUnique(int);
 
 typedef struct fn_002ccb7c_arg0 fn_002ccb7c_arg0;
 struct fn_002ccb7c_arg0 {
@@ -22,8 +22,8 @@ struct fn_002ccb7c_arg0 {
 
 extern int FUN_0019e0c0(unsigned int);
 /* Supplied declaration required: FUN_0026e630. */
-/* Supplied declaration required: FUN_0028975c. */
-/* Supplied declaration required: FUN_002b8e84. */
+/* Supplied declaration required: gameFlagSetValue. */
+/* Supplied declaration required: eventQueueAddUnique. */
 
 
 /* WARNING: Removing unreachable block (ram,0x002ccbc8) */
@@ -41,7 +41,7 @@ unsigned int FUN_002ccb7c(fn_002ccb7c_arg0 *param_1)
   if (temp_v0 == 2) {
     param_1->field_0xd38 = 0;
     FUN_0026e630(0x28);
-    FUN_0028975c(0x551,1);
+    gameFlagSetValue(0x551,1);
     temp_v1 = param_1->field_0xd58;
     temp_v2 = 6;
     param_1->field_0xd58 = temp_v1 & 0xfffffff7;
@@ -55,7 +55,7 @@ unsigned int FUN_002ccb7c(fn_002ccb7c_arg0 *param_1)
       temp_v2 = 5;
     }
     param_1->field_0xd2c = temp_v2;
-    FUN_002b8e84(0x100017e);
+    eventQueueAddUnique(0x100017e);
     temp_v2 = 2;
   }
   return temp_v2;

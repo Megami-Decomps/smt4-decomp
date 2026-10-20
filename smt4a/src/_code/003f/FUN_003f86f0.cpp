@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern void FUN_003f86f8(int value);
+extern void loadSlotEnsureLoaded(int value);
 
 /* Forwards to the function that follows it in the binary. */
 void FUN_003f86f0(void)
 {
-    FUN_003f86f8(54);
+    loadSlotEnsureLoaded(54);
 }
 
 } /* extern "C" */

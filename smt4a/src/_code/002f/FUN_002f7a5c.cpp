@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_002edb54(int *, unsigned int, int);
+int vectorResizeBytes(int *, unsigned int, int);
 
 extern unsigned char DAT_0055ae64; /* 0x55ae64 */
 
-extern unsigned int *FUN_002e9f80(void);
-extern int *FUN_002ed912(unsigned int *);
-/* Supplied declaration required: FUN_002edb54. */
+extern unsigned int *sharedRefInit(void);
+extern int *vectorInitEmpty2(unsigned int *);
+/* Supplied declaration required: vectorResizeBytes. */
 extern unsigned int FUN_002eea7c(int);
 
 
@@ -26,11 +26,11 @@ int * FUN_002f7a5c(unsigned int param_1,int param_2)
   unsigned int temp_v3;
   unsigned int temp_v4;
   
-  puVar1 = (unsigned int *)FUN_002e9f80();
+  puVar1 = (unsigned int *)sharedRefInit();
   *puVar1 = (unsigned int)&DAT_0055ae64;
-  piVar2 = (int *)FUN_002ed912(puVar1 + 3);
+  piVar2 = (int *)vectorInitEmpty2(puVar1 + 3);
   temp_v0 = FUN_002eea7c(param_2);
-  FUN_002edb54(piVar2,temp_v0 >> 1,0);
+  vectorResizeBytes(piVar2,temp_v0 >> 1,0);
   for (temp_v1 = 0; temp_v1 < temp_v0 >> 1; temp_v1 = temp_v1 + 1) {
     temp_v2 = (unsigned int)*(unsigned short *)(*(int *)(param_2 + 4) + temp_v1 * 4);
     temp_v4 = (unsigned int)*(unsigned short *)(*(int *)(param_2 + 4) + temp_v1 * 4 + 2);

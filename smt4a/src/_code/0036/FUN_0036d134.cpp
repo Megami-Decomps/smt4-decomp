@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_0014af84(void);
+extern int gameDataBlocksGetSaveData(void);
 
 
 unsigned int FUN_0036d134(void)
@@ -15,7 +15,7 @@ unsigned int FUN_0036d134(void)
   
   temp_v1 = 0;
   do {
-    temp_v0 = FUN_0014af84();
+    temp_v0 = gameDataBlocksGetSaveData();
     if (((unsigned int)*(unsigned char *)(temp_v0 + ((int)(temp_v1 + ((unsigned int)(temp_v1 >> 0x1f) >> 0x1d)) >> 3) + 0x282fc) &
         (1 << ((temp_v1 % 8) & 0xffU))) != 0) {
       return 1;

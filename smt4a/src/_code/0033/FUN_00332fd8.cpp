@@ -30,7 +30,7 @@ typedef struct {
 extern unsigned char LAB_00333264; /* 0x333264 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_00162e8c(void);
+extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
 extern int FUN_002393cc(unsigned int);
@@ -54,7 +54,7 @@ void FUN_00332fd8(void)
   unsigned int in_fpscr;
   unsigned int temp_v7;
   
-  temp_v2 = FUN_00162e8c();
+  temp_v2 = gameFlagsGetBlock();
   if (*(char *)(temp_v2 + 0xe09) != '\0') {
     temp_v0 = *(char *)(temp_v2 + 0xe0a);
     temp_v1 = *(char *)(temp_v2 + 0xe0b);

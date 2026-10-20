@@ -7,8 +7,8 @@ extern "C" {
 int FUN_00100388(...);
 int FUN_002804b0(unsigned char [128], unsigned int *, int);
 int sysMemClear(unsigned char [128], int);
-int FUN_0046c010(unsigned int, unsigned int, unsigned int *, unsigned char [128]);
-int FUN_0046c084(unsigned int, unsigned int, unsigned int *, unsigned char [128]);
+int aocQueueType20(unsigned int, unsigned int, unsigned int *, unsigned char [128]);
+int aocQueueType1f(unsigned int, unsigned int, unsigned int *, unsigned char [128]);
 int FUN_004d7e20(unsigned int *, int);
 
 extern unsigned int g_aocSystem; /* 0x570280 */
@@ -16,8 +16,8 @@ extern unsigned int g_aocSystem; /* 0x570280 */
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_002804b0. */
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_0046c010. */
-/* Supplied declaration required: FUN_0046c084. */
+/* Supplied declaration required: aocQueueType20. */
+/* Supplied declaration required: aocQueueType1f. */
 extern int FUN_0046c4b4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_004d7e20. */
 
@@ -34,7 +34,7 @@ void FUN_004d83b4(unsigned int *param_1,int param_2)
   FUN_00100388(temp_v1,"battle/event/%s/%s.mbm",param_2 + 0x130);
   temp_v0 = FUN_0046c4b4(g_aocSystem,*(unsigned int *)(param_2 + 0xf0));
   if (temp_v0 != 0) {
-    FUN_0046c010(g_aocSystem,*(unsigned int *)(param_2 + 0xf0),param_1 + 3,temp_v1);
+    aocQueueType20(g_aocSystem,*(unsigned int *)(param_2 + 0xf0),param_1 + 3,temp_v1);
   }
   else {
     FUN_002804b0(temp_v1,param_1 + 3,0);
@@ -46,7 +46,7 @@ void FUN_004d83b4(unsigned int *param_1,int param_2)
     FUN_00100388(temp_v2,"battle/event/%s/%s.bf",param_2 + 0x130);
     temp_v0 = FUN_0046c4b4(g_aocSystem,*(unsigned int *)(param_2 + 0xf0));
     if (temp_v0 != 0) {
-      FUN_0046c084(g_aocSystem,*(unsigned int *)(param_2 + 0xf0),param_1 + 4,temp_v2);
+      aocQueueType1f(g_aocSystem,*(unsigned int *)(param_2 + 0xf0),param_1 + 4,temp_v2);
     }
     else {
       FUN_002804b0(temp_v2,param_1 + 4,0);

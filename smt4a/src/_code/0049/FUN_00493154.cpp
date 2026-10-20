@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_0019a7f4(int, int);
+int asdTMTexTableReleaseNode(int, int);
 
 extern int DAT_00587fdc; /* 0x587fdc */
 extern int DAT_00587fe0; /* 0x587fe0 */
 
-/* Supplied declaration required: FUN_0019a7f4. */
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
 
 
 void FUN_00493154(void)
@@ -19,13 +19,13 @@ void FUN_00493154(void)
   DAT_00587fdc = DAT_00587fdc - 1;
   if (DAT_00587fdc == 0) {
     if (DAT_00587fe0 == 0x65) {
-      FUN_0019a7f4(0x13,6);
+      asdTMTexTableReleaseNode(0x13,6);
     }
     if (DAT_00587fe0 == 0x66) {
-      FUN_0019a7f4(0x13,7);
+      asdTMTexTableReleaseNode(0x13,7);
     }
     if (DAT_00587fe0 == 0x67) {
-      FUN_0019a7f4(0x13,8);
+      asdTMTexTableReleaseNode(0x13,8);
     }
     DAT_00587fe0 = 0;
   }

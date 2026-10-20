@@ -8,12 +8,12 @@ int FUN_0017f724(...);
 int FUN_001c36d8(...);
 int FUN_00285c9c(void);
 int FUN_00287728(...);
-int FUN_0028975c(...);
-int FUN_00296f4c(...);
+int gameFlagSetValue(...);
+int scrScriptProcessStartEntry(...);
 int FUN_0029c3c0(...);
 int FUN_0029ee6c(...);
 int FUN_002a03d8(int, int);
-int FUN_002b8838(...);
+int buttonHelpSetPreset(...);
 int jobStop(...);
 int asdSequenceRequest(...);
 int FUN_0030aa50(...);
@@ -31,22 +31,22 @@ extern int FUN_0019e0c0(unsigned int);
 /* Supplied declaration required: FUN_001c36d8. */
 extern int FUN_00215a24(void);
 extern int FUN_00282b28(void);
-extern int FUN_00282b88(void);
+extern int jobWorkerPollAndFree(void);
 /* Supplied declaration required: FUN_00285c9c. */
 /* Supplied declaration required: FUN_00287728. */
 extern int FUN_002896bc(void);
-/* Supplied declaration required: FUN_0028975c. */
+/* Supplied declaration required: gameFlagSetValue. */
 extern unsigned int FUN_00290e9c(void);
-/* Supplied declaration required: FUN_00296f4c. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002973d8(void);
 /* Supplied declaration required: FUN_0029c3c0. */
 /* Supplied declaration required: FUN_0029ee6c. */
 /* Supplied declaration required: FUN_002a03d8. */
-extern int FUN_002a8764(void);
-extern unsigned int FUN_002a8778(void);
-/* Supplied declaration required: FUN_002b8838. */
-extern int FUN_002b8cec(unsigned int);
-extern int FUN_002bfde4(unsigned int);
+extern int gameGetSlotTable(void);
+extern unsigned int gameCountUnits(void);
+/* Supplied declaration required: buttonHelpSetPreset. */
+extern int padIsButtonRepeat(unsigned int);
+extern int padIsButtonPressed(unsigned int);
 extern int jobGetWork(void);
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
@@ -84,17 +84,17 @@ unsigned int FUN_001b10e4(void)
     temp_v5 = FUN_002896bc();
     if (temp_v5 != 0) {
       *(unsigned int *)(temp_v0 + 0xc) = 8;
-      FUN_002b8838(0xa7);
-      FUN_00296f4c(*(unsigned int *)(temp_v0 + 0x8c),1);
+      buttonHelpSetPreset(0xa7);
+      scrScriptProcessStartEntry(*(unsigned int *)(temp_v0 + 0x8c),1);
     }
     break;
   case 3:
     temp_v5 = FUN_0017f724(temp_v0 + 0x1c,0,8,1,0,1);
     if (temp_v5 == 0) {
-      temp_v5 = FUN_002bfde4(0);
+      temp_v5 = padIsButtonPressed(0);
       if (temp_v5 == 0) {
-        temp_v5 = FUN_002b8cec(4);
-        if ((temp_v5 == 0) && (temp_v5 = FUN_002b8cec(3), temp_v5 == 0)) {
+        temp_v5 = padIsButtonRepeat(4);
+        if ((temp_v5 == 0) && (temp_v5 = padIsButtonRepeat(3), temp_v5 == 0)) {
           return 0;
         }
         temp_v2 = *(unsigned int *)(temp_v0 + 0x1c);
@@ -120,9 +120,9 @@ unsigned int FUN_001b10e4(void)
         }
         *(unsigned int *)(temp_v0 + 0x20) = 0xffffffff;
         *(unsigned int *)(temp_v0 + 0xc) = 7;
-        temp_v4 = FUN_002a8778();
+        temp_v4 = gameCountUnits();
         *(unsigned int *)(temp_v0 + 0x84) = temp_v4;
-        temp_v5 = FUN_002a8764();
+        temp_v5 = gameGetSlotTable();
         temp_v1 = 0;
         if (temp_v1 < *(int *)(temp_v0 + 0x84)) {
           do {
@@ -144,7 +144,7 @@ unsigned int FUN_001b10e4(void)
       *(unsigned int *)(temp_v0 + 0xc) = 6;
       temp_v4 = *(unsigned int *)(temp_v0 + 0x8c);
       temp_v6 = 0;
-      FUN_00296f4c(temp_v4,temp_v6);
+      scrScriptProcessStartEntry(temp_v4,temp_v6);
       return 0;
     }
     temp_v2 = *(unsigned int *)(temp_v0 + 0x1c);
@@ -182,12 +182,12 @@ unsigned int FUN_001b10e4(void)
     if (temp_v5 != 0) {
       return 0;
     }
-    temp_v5 = FUN_002bfde4(1);
+    temp_v5 = padIsButtonPressed(1);
     if (temp_v5 != 0) {
       *(unsigned int *)(temp_v0 + 0xc) = 3;
       return 0;
     }
-    temp_v5 = FUN_002bfde4(0);
+    temp_v5 = padIsButtonPressed(0);
     if (temp_v5 == 0) {
       return 0;
     }
@@ -217,8 +217,8 @@ unsigned int FUN_001b10e4(void)
         *(unsigned char *)(temp_v0 + 0x16) = 1;
       }
       FUN_001c36d8(temp_v0 + 0x10);
-      FUN_0028975c(0x556,1);
-      FUN_0028975c(0x555,1);
+      gameFlagSetValue(0x556,1);
+      gameFlagSetValue(0x555,1);
       FUN_0030aa50(2);
       temp_v4 = 9;
       *(unsigned int *)(temp_v0 + 0xc) = temp_v4;
@@ -237,7 +237,7 @@ unsigned int FUN_001b10e4(void)
     FUN_0029ee6c(temp_v0,0x323232ff);
     break;
   case 9:
-    temp_v5 = FUN_00282b88();
+    temp_v5 = jobWorkerPollAndFree();
     if (temp_v5 != 0) {
       return 0;
     }
@@ -245,10 +245,10 @@ unsigned int FUN_001b10e4(void)
     if (temp_v5 == 0) {
       FUN_00285c9c();
       *(unsigned int *)(temp_v0 + 0xc) = 10;
-      FUN_002b8838(0xa7);
+      buttonHelpSetPreset(0xa7);
       temp_v4 = *(unsigned int *)(temp_v0 + 0x8c);
       temp_v6 = 2;
-      FUN_00296f4c(temp_v4,temp_v6);
+      scrScriptProcessStartEntry(temp_v4,temp_v6);
       return 0;
     }
     FUN_0029c3c0(0,0x14,0xff);

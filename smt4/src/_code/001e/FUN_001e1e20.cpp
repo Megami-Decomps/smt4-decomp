@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002012f0(void);
 int FUN_0025c5a0(int);
-int FUN_002bf694(unsigned char *, unsigned int *);
+int libc_strcpy(unsigned char *, unsigned int *);
 int taskCreateDraw(...);
 int asdProcessCreateSimple(...);
 
@@ -35,7 +35,7 @@ extern unsigned char DAT_004937cc; /* 0x4937cc */
 
 /* Supplied declaration required: FUN_002012f0. */
 /* Supplied declaration required: FUN_0025c5a0. */
-/* Supplied declaration required: FUN_002bf694. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: taskCreateDraw. */
 extern int jyoucyuGetTableEntry(unsigned int);
 /* Supplied declaration required: asdProcessCreateSimple. */
@@ -86,7 +86,7 @@ void FUN_001e1e20(unsigned int *param_1,unsigned int *param_2)
     DAT_004937cc = 0;
   }
   else {
-    FUN_002bf694(&DAT_004937cc,param_1 + 2);
+    libc_strcpy(&DAT_004937cc,param_1 + 2);
   }
   puVar1 = &LAB_001e1fb8;
   asdProcessCreateSimple(&LAB_001e1fb8,2,0,0,FUN_0019f3dc,&LAB_002ca064,0);

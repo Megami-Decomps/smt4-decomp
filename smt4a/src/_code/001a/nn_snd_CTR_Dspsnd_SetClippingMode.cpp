@@ -2,7 +2,7 @@
 
 extern "C" {
 
-s32 FUN_001c6e20(void);
+s32 nn_snd_CTR_Dspsnd_IsInitialized(void);
 
 /* Sets the clipping mode on the active command block and flags the change; returns whether the DSP is available. */
 u8 nn_snd_CTR_Dspsnd_SetClippingMode(DspsndState *state, u16 value)
@@ -10,7 +10,7 @@ u8 nn_snd_CTR_Dspsnd_SetClippingMode(DspsndState *state, u16 value)
     s32 result;
     DspCommand *command;
 
-    result = FUN_001c6e20();
+    result = nn_snd_CTR_Dspsnd_IsInitialized();
     if (result != 0) {
         command = state->commands[state->current];
         command->clippingMode = value;

@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002e6e14(unsigned int);
+int asdOperatorDeleteArray(unsigned int);
 int rt_memcpy(int, unsigned int, unsigned int);
 
-/* Supplied declaration required: FUN_002e6e14. */
-extern int FUN_003100f6(int, unsigned int);
+/* Supplied declaration required: asdOperatorDeleteArray. */
+extern int bufAllocateStorage(int, unsigned int);
 extern unsigned int FUN_00310160(unsigned int, int);
 /* Supplied declaration required: rt_memcpy. */
 
@@ -23,12 +23,12 @@ unsigned int FUN_002f00f0(int param_1,int param_2)
   temp_v0 = FUN_00310160(*(unsigned int *)(param_1 + 0x14),
                        *(int *)(param_1 + 0x10) + *(int *)(param_1 + 0x18) + param_2);
   if (*(unsigned int *)(param_1 + 0x14) < temp_v0) {
-    temp_v1 = FUN_003100f6(param_1,temp_v0);
+    temp_v1 = bufAllocateStorage(param_1,temp_v0);
     if (temp_v1 == 0) {
       return 0;
     }
     rt_memcpy(temp_v1,*(unsigned int *)(param_1 + 0xc),*(unsigned int *)(param_1 + 0x14));
-    FUN_002e6e14(*(unsigned int *)(param_1 + 0xc));
+    asdOperatorDeleteArray(*(unsigned int *)(param_1 + 0xc));
     *(int *)(param_1 + 0xc) = temp_v1;
     *(unsigned int *)(param_1 + 0x14) = temp_v0;
   }

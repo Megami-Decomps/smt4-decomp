@@ -14,14 +14,14 @@ int FUN_00162790(...);
 int FUN_001634b4(...);
 int FUN_00164168(...);
 int FUN_00164b5c(...);
-int FUN_001654d8(...);
+int vec2GetXInt(...);
 int efctSetSpeed(void);
 int FUN_001689e8(...);
 int FUN_00180310(...);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
 int FUN_001879d0(...);
-int FUN_001ab940(void);
+int gameFlagBlockGet(void);
 int FUN_001ad9b4(void);
 int FUN_002c0940(...);
 int FUN_0037ce80(...);
@@ -52,7 +52,7 @@ extern unsigned char LAB_00218e58; /* 0x218e58 */
 extern unsigned char LAB_00218e68; /* 0x218e68 */
 extern unsigned char LAB_002196dc; /* 0x2196dc */
 extern unsigned char LAB_002196e4; /* 0x2196e4 */
-extern int DAT_0057f28c; /* 0x57f28c */
+extern int g_uiQuest; /* 0x57f28c */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -65,8 +65,8 @@ extern unsigned int FUN_00156868(unsigned int);
 /* Supplied declaration required: FUN_001634b4. */
 /* Supplied declaration required: FUN_00164168. */
 /* Supplied declaration required: FUN_00164b5c. */
-/* Supplied declaration required: FUN_001654d8. */
-extern int FUN_001654e4(int);
+/* Supplied declaration required: vec2GetXInt. */
+extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001689e8. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
@@ -78,8 +78,8 @@ extern unsigned int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001879d0. */
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
-extern int FUN_0019f18c(unsigned int);
-/* Supplied declaration required: FUN_001ab940. */
+extern int idIsAtLeast350(unsigned int);
+/* Supplied declaration required: gameFlagBlockGet. */
 /* Supplied declaration required: FUN_001ad9b4. */
 extern short *dataTableGetEntry37(unsigned int);
 extern int FUN_002a4860(int);
@@ -141,11 +141,11 @@ void FUN_00218640(void)
   int temp_v34;
   int temp_v35;
   
-  temp_v3 = DAT_0057f28c;
+  temp_v3 = g_uiQuest;
   temp_v19 = 0x3ea66666;
   FUN_001879d0(g_renderCtx);
-  temp_v4 = FUN_001654d8(temp_v3 + 0x34);
-  temp_v5 = FUN_001654e4(temp_v3 + 0x34);
+  temp_v4 = vec2GetXInt(temp_v3 + 0x34);
+  temp_v5 = vec2GetYInt(temp_v3 + 0x34);
   temp_v30 = temp_v3 + 0x900;
   if (*(char *)(temp_v3 + 0x90c) != '\0') {
     temp_v13 = temp_v3 + 0x948;
@@ -176,9 +176,9 @@ void FUN_00218640(void)
   temp_v13 = temp_v5;
   temp_v12 = temp_v4;
   if ((temp_v6 == 0x17 || temp_v6 == 0x18) || temp_v6 == 0x19) {
-    temp_v12 = FUN_001654d8();
+    temp_v12 = vec2GetXInt();
     temp_v12 = temp_v12 + temp_v4;
-    temp_v13 = FUN_001654e4(temp_v3 + 0x494);
+    temp_v13 = vec2GetYInt(temp_v3 + 0x494);
     temp_v13 = temp_v13 + temp_v5;
   }
   FUN_00164b5c(2,0x1e,2,temp_v12 + (int)temp_v18,temp_v13,0x65);
@@ -241,7 +241,7 @@ void FUN_00218640(void)
     VectorSignedToFloat(*(short *)(temp_v13 + 8) + temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v13 + 10) + temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_00162790(2,0xff,temp_v27);
-    FUN_001ab940();
+    gameFlagBlockGet();
     temp_v2 = *(short *)(temp_v19 + 0xf0);
     if (temp_v2 != 1) {
       if (temp_v2 != 3) {
@@ -296,9 +296,9 @@ void FUN_00218640(void)
     temp_v6 = temp_v4 + (int)temp_v17;
     temp_v13 = temp_v5;
     if ((temp_v12 == 0x17 || temp_v12 == 0x18) || temp_v12 == 0x19) {
-      temp_v13 = FUN_001654d8();
+      temp_v13 = vec2GetXInt();
       temp_v6 = temp_v13 + temp_v4 + (int)temp_v17;
-      temp_v13 = FUN_001654e4(temp_v3 + 0x494);
+      temp_v13 = vec2GetYInt(temp_v3 + 0x494);
       temp_v13 = temp_v13 + temp_v5;
       if (*(int *)(temp_v3 + 4) != 0x18) goto LAB_00218d20;
 LAB_00218eb4:
@@ -345,9 +345,9 @@ LAB_00218d20:
   temp_v20 = (unsigned long long)(unsigned int)temp_v18 << 0x20;
   FUN_001879d0(g_renderCtx);
   temp_v12 = (int)temp_v18;
-  temp_v13 = FUN_001654d8(temp_v3 + 0x1d8);
+  temp_v13 = vec2GetXInt(temp_v3 + 0x1d8);
   temp_v6 = temp_v13 + temp_v4 + temp_v12;
-  temp_v13 = FUN_001654e4(temp_v3 + 0x1d8);
+  temp_v13 = vec2GetYInt(temp_v3 + 0x1d8);
   temp_v13 = temp_v13 + temp_v5;
   efctSetSpeed();
   FUN_00164b5c(2,0x1e,3,temp_v6,temp_v13,0x65);
@@ -512,13 +512,13 @@ LAB_00218d20:
       temp_v12 = temp_v12 + 1;
     } while (temp_v12 < 4);
     if (*(char *)(temp_v29 + 6) == '\0') {
-      temp_v12 = FUN_0019f18c(temp_v25);
+      temp_v12 = idIsAtLeast350(temp_v25);
       if ((temp_v12 != 0) && (temp_v12 = FUN_003de830(temp_v25), temp_v12 == 0)) {
         temp_v34 = 0;
       }
       if ((*(char *)(temp_v29 + 6) == '\0') && (temp_v34 != 0)) {
         temp_v12 = FUN_001834a4(0x1e,0x34);
-        temp_v9 = FUN_0019f18c(temp_v25);
+        temp_v9 = idIsAtLeast350(temp_v25);
         if (temp_v9 != 0) {
           temp_v19 = 9;
         }

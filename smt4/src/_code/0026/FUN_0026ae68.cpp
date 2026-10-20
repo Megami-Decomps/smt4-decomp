@@ -6,18 +6,18 @@ extern "C" {
 
 int FUN_0029e054(int, int, int, int);
 int FUN_002b8584(...);
-int FUN_002b8cc8(void);
-int FUN_002c424c(int, int, unsigned int);
+int ifTouchRegionRemove(void);
+int __aeabi_memset4(int, int, unsigned int);
 
-extern int DAT_0044e190; /* 0x44e190 */
+extern int g_statusDown; /* 0x44e190 */
 
 /* Supplied declaration required: FUN_0029e054. */
 extern int FUN_0029ee54(int);
 /* Supplied declaration required: FUN_002b8584. */
-/* Supplied declaration required: FUN_002b8cc8. */
+/* Supplied declaration required: ifTouchRegionRemove. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
-extern int FUN_002c09d0(unsigned int);
-/* Supplied declaration required: FUN_002c424c. */
+extern int gameFlagIsSet(unsigned int);
+/* Supplied declaration required: __aeabi_memset4. */
 
 
 void FUN_0026ae68(void)
@@ -33,16 +33,16 @@ void FUN_0026ae68(void)
   char *unaff_r6;
   char *pcVar7;
   
-  temp_v0 = DAT_0044e190;
+  temp_v0 = g_statusDown;
   temp_v4 = 0;
-  if (*(char *)(DAT_0044e190 + 0x480) != '\0') {
+  if (*(char *)(g_statusDown + 0x480) != '\0') {
     do {
-      FUN_002b8cc8();
+      ifTouchRegionRemove();
       temp_v4 = temp_v4 + 1;
     } while (temp_v4 < (int)(unsigned int)*(unsigned char *)(temp_v0 + 0x480));
   }
   *(unsigned char *)(temp_v0 + 0x480) = 0;
-  FUN_002c424c(temp_v0 + 0x42c,0x29,0xffffffff);
+  __aeabi_memset4(temp_v0 + 0x42c,0x29,0xffffffff);
   switch(*(unsigned int *)(temp_v0 + 0x400)) {
   case 3:
     temp_v2 = 0;
@@ -123,7 +123,7 @@ void FUN_0026ae68(void)
   case 0x10:
     temp_v4 = 0;
     do {
-      temp_v2 = FUN_002c09d0(0x410);
+      temp_v2 = gameFlagIsSet(0x410);
       if ((temp_v2 != 0) || (!(temp_v4 == 1 || temp_v4 == 2))) {
         temp_v1 = FUN_002b8584(0x1a,temp_v4 + 0x466);
         *(unsigned short *)(temp_v0 + temp_v4 * 2 + 0x42c) = temp_v1;

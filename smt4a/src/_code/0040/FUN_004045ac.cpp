@@ -7,12 +7,12 @@ extern "C" {
 int FUN_00100388(...);
 int FUN_00162790(...);
 int efctSetSpeed(void);
-int FUN_001801a4(void);
+int gameGetPlayerData(void);
 int FUN_001835b4(...);
 int FUN_00183bb0(void);
-int FUN_00184e64(int);
+int drawSetColorFromRGBA8(int);
 int FUN_001879d0(...);
-int FUN_0030ea58(...);
+int libc_strcmp(...);
 int VectorSignedToFloat(...);
 
 /* stack frame of param_3: 3 slot(s), 12 byte(s) */
@@ -30,13 +30,13 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 extern int FUN_0015687c(void);
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_001801a4. */
+/* Supplied declaration required: gameGetPlayerData. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_00184e64. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_001879d0. */
-/* Supplied declaration required: FUN_0030ea58. */
+/* Supplied declaration required: libc_strcmp. */
 extern unsigned int FUN_004038e0(int, unsigned short);
 
 
@@ -97,7 +97,7 @@ void FUN_004045ac(int param_1,int param_2,int param_3)
     case 0xe:
     case 0x10:
     case 0x12:
-      FUN_00184e64(0x57d8ffff);
+      drawSetColorFromRGBA8(0x57d8ffff);
       temp_v3 = FUN_001834a4(0x32,0x36);
       temp_v7 = 0.26f;
       temp_v6 = temp_v7;
@@ -115,9 +115,9 @@ void FUN_004045ac(int param_1,int param_2,int param_3)
     temp_v4 = FUN_001834a4(0x32,4);
     temp_v5 = *(int *)(param_1 + 0x664) + 0x10;
     temp_v3 = temp_v5;
-    FUN_0030ea58(temp_v5,"<pc 0>");
+    libc_strcmp(temp_v5,"<pc 0>");
     if (temp_v3 == 0) {
-      FUN_001801a4();
+      gameGetPlayerData();
       temp_v5 = FUN_0015687c();
     }
     FUN_00100388(temp_v8,&LAB_00404968,temp_v5);

@@ -5,7 +5,7 @@ extern "C" {
 int scrSetResult(int);
 int btlGetMainState(void);
 
-extern unsigned long long FUN_002499b4(void);
+extern unsigned long long btlMainFindActiveEntry(void);
 /* Supplied declaration required: scrSetResult. */
 /* Supplied declaration required: btlGetMainState. */
 extern int scrGetArg(void);
@@ -23,7 +23,7 @@ unsigned int FUN_00311f6c(void)
   
   temp_v1 = scrGetArg();
   btlGetMainState();
-  temp_v4 = FUN_002499b4();
+  temp_v4 = btlMainFindActiveEntry();
   temp_v2 = (unsigned int)((unsigned long long)temp_v4 >> 0x20);
   if ((int)temp_v4 != 0) {
     temp_v0 = *(unsigned short *)((int)temp_v4 + temp_v1 * 2 + 0x1f2);

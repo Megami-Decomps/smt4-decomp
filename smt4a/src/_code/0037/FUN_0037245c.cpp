@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned short *FUN_001801a4(void);
+extern unsigned short *gameGetPlayerData(void);
 
 
 void FUN_0037245c(unsigned int param_1,unsigned int *param_2,unsigned int *param_3)
@@ -12,7 +12,7 @@ void FUN_0037245c(unsigned int param_1,unsigned int *param_2,unsigned int *param
 {
   unsigned short *puVar1;
   
-  puVar1 = (unsigned short *)FUN_001801a4();
+  puVar1 = (unsigned short *)gameGetPlayerData();
   if (puVar1 != (unsigned short *)0x0) {
     switch(param_1) {
     case 0:

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0022699c(int, int, int, unsigned int);
 
-extern int DAT_00434290; /* 0x434290 */
+extern int g_btlActionReflect; /* 0x434290 */
 
 /* Supplied declaration required: FUN_0022699c. */
 
@@ -20,8 +20,8 @@ void FUN_003ddb50(short param_1,unsigned int param_2,unsigned int param_3)
   float in_s1;
   float in_s2;
   
-  temp_v0 = DAT_00434290;
-  FUN_0022699c(DAT_00434290,(int)param_1,0,param_2);
+  temp_v0 = g_btlActionReflect;
+  FUN_0022699c(g_btlActionReflect,(int)param_1,0,param_2);
   *(unsigned char *)(temp_v0 + 4) = 4;
   *(char *)(temp_v0 + 0x20) = (char)(int)(in_s0 * 100.0f);
   *(char *)(temp_v0 + 0x21) = (char)(int)(in_s1 * 100.0f);

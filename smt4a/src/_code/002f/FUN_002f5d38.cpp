@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_001b4a90(int, int, int);
+int __aeabi_memset4(int, int, int);
 int FUN_002eb60c(void);
 
-/* Supplied declaration required: FUN_001b4a90. */
+/* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: FUN_002eb60c. */
 
 
@@ -22,7 +22,7 @@ void FUN_002f5d38(unsigned int param_1,unsigned int param_2,int param_3)
   FUN_002eb60c();
   *(unsigned int *)(temp_v0 * 0x2000000) = 0x91062000;
   *(unsigned int *)(param_3 + temp_v0 * 0x1000000) = 0x91062000;
-  FUN_001b4a90(in_stack_00000008,0x10,0xab);
+  __aeabi_memset4(in_stack_00000008,0x10,0xab);
   return;
 }
 

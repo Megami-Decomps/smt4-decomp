@@ -22,7 +22,7 @@ typedef struct {
     unsigned short sp78; /* 0x78: local_78 */
 } param_1_stack;
 
-extern unsigned int FUN_001801a4(void);
+extern unsigned int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00192718. */
 /* Supplied declaration required: FUN_002f0384. */
 extern int objBStateAllowsAction(void);
@@ -103,7 +103,7 @@ void FUN_00498de0(int param_1)
   }
   if (temp_v6 && temp_v3 != temp_v5) {
     *(unsigned int *)(param_1 + 0x16008) = temp_v5;
-    temp_v4 = FUN_001801a4();
+    temp_v4 = gameGetPlayerData();
     rt_memcpy_w(&temp_v7,temp_v4,100);
     if (temp_v5 != 0) {
       temp_v4 = FUN_00192718(temp_v5);

@@ -12,7 +12,7 @@ int FUN_001216cc(unsigned char *, unsigned int, unsigned int);
 int FUN_00121824(unsigned char *, unsigned char *);
 int FUN_0012201c(unsigned char *, unsigned char *);
 int asdMemoryAllocAligned(...);
-int FUN_002bf694(unsigned char *, unsigned int);
+int libc_strcpy(unsigned char *, unsigned int);
 int asdMemoryAlloc(...);
 int nw_snd_Sound3DActor_Initialize(...);
 int nw_snd_Sound3DActor_SetPosition(...);
@@ -75,7 +75,7 @@ extern unsigned int DAT_004efd34; /* 0x4efd34 */
 /* Supplied declaration required: FUN_0012201c. */
 /* Supplied declaration required: asdMemoryAllocAligned. */
 extern int FUN_002bf684(unsigned char *);
-/* Supplied declaration required: FUN_002bf694. */
+/* Supplied declaration required: libc_strcpy. */
 extern int __cxa_guard_acquire(unsigned int *);
 extern int rt_memcmp(unsigned char *, unsigned char *, unsigned int);
 /* Supplied declaration required: asdMemoryAlloc. */
@@ -103,7 +103,7 @@ unsigned int FUN_001096ec(unsigned int param_1,int param_2,unsigned char *param_
   unsigned int temp_v6;
   unsigned char *temp_v7;
   
-  FUN_002bf694(&DAT_004e23e4,param_1);
+  libc_strcpy(&DAT_004e23e4,param_1);
   temp_v0 = rt_memcmp(&DAT_004e23e4,&LAB_00109a88,4);
   if (temp_v0 != 0) {
     DAT_004e3184 = 1;

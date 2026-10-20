@@ -10,10 +10,10 @@ int scrSetResult(unsigned int);
 int FUN_0028dcf4(int, int);
 int FUN_0028e6d0(...);
 int FUN_002b8244(void);
-int FUN_002b8838(int);
+int buttonHelpSetPreset(int);
 int FUN_002b89e4(int, int);
-int FUN_002b8db0(unsigned int, int);
-int FUN_002c49f8(unsigned int, int);
+int msgBoxFlagsClear(unsigned int, int);
+int objFlagsSetBits(unsigned int, int);
 
 /* stack frame of param_6: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -30,18 +30,18 @@ extern int DAT_0043e194; /* 0x43e194 */
 /* Supplied declaration required: FUN_0028dc68. */
 /* Supplied declaration required: FUN_0028dc98. */
 /* Supplied declaration required: scrSetResult. */
-extern int FUN_0028dccc(unsigned int);
+extern int buttonHelpGetEntryValue(unsigned int);
 /* Supplied declaration required: FUN_0028dcf4. */
 /* Supplied declaration required: FUN_0028e6d0. */
 extern unsigned int FUN_002b753c(unsigned int);
 /* Supplied declaration required: FUN_002b8244. */
 extern int FUN_002b8660(void);
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 extern unsigned char FUN_002b898c(void);
 /* Supplied declaration required: FUN_002b89e4. */
-/* Supplied declaration required: FUN_002b8db0. */
+/* Supplied declaration required: msgBoxFlagsClear. */
 extern int FUN_002c1d5c(void);
-/* Supplied declaration required: FUN_002c49f8. */
+/* Supplied declaration required: objFlagsSetBits. */
 extern unsigned short FUN_002d6624(unsigned int);
 extern unsigned char FUN_002f5b74(unsigned int);
 
@@ -168,8 +168,8 @@ FUN_002866b4(unsigned int param_1,unsigned int param_2,int param_3,int param_4,i
         FUN_0028dcf4(temp_v5,*(unsigned char *)(temp_v5 + 9));
       }
       if (param_5 != 0) {
-        FUN_002c49f8(*(unsigned int *)(temp_v5 + 4),0x20);
-        FUN_002b8db0(*(unsigned int *)(temp_v5 + 4),0x40);
+        objFlagsSetBits(*(unsigned int *)(temp_v5 + 4),0x20);
+        msgBoxFlagsClear(*(unsigned int *)(temp_v5 + 4),0x40);
       }
       temp_v3 = 0;
       *(unsigned char *)(temp_v5 + 0xa12) = 0;
@@ -183,11 +183,11 @@ FUN_002866b4(unsigned int param_1,unsigned int param_2,int param_3,int param_4,i
       } while ((int)temp_v3 < 6);
       temp_v6 = *(char *)(temp_v5 + 9);
       if (((temp_v6 == '\a' || temp_v6 == '\b') || temp_v6 == '\t') &&
-         (temp_v2 = FUN_0028dccc(0), temp_v2 == 5)) {
+         (temp_v2 = buttonHelpGetEntryValue(0), temp_v2 == 5)) {
         *(unsigned char *)(temp_v5 + 0xa26) = 1;
         temp_v0 = FUN_002b898c();
         *(unsigned char *)(temp_v5 + 0xa12) = temp_v0;
-        FUN_002b8838(0xdc);
+        buttonHelpSetPreset(0xdc);
       }
       if (param_4 != 0x13) {
         return 0;

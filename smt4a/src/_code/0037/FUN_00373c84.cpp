@@ -22,7 +22,7 @@ extern StateMachine *g_btlStageModel;
 
 ActiveObject *btlGetMainState(void);
 u32 scrGetArg(u32 index);
-s32 FUN_002deb84(void);
+s32 scrGetCommandFrame(void);
 void FUN_004d88fc(StateMachine *machine, ActiveObject *object);
 void state4DStop(StateMachine *machine, ActiveObject *object);
 void state4DStart(StateMachine *machine);
@@ -33,7 +33,7 @@ u8 FUN_00373c84(void)
     u32 first = scrGetArg(0);
     u32 second = scrGetArg(1);
 
-    if (FUN_002deb84() == 0) {
+    if (scrGetCommandFrame() == 0) {
         state4DStop(g_btlStageModel, object);
         object->ids.first = first;
         object->ids.second = second;

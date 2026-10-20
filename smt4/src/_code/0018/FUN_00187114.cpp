@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0029a268(...);
 int FUN_0029a284(...);
-int FUN_002b06c4(void);
+int dataTable00FindById(void);
 int FUN_002b6dd8(...);
 
 int FUN_0029a17c(...);
@@ -54,7 +54,7 @@ extern unsigned char LAB_00188110; /* 0x188110 */
 extern unsigned char LAB_001884e0; /* 0x1884e0 */
 extern unsigned char LAB_001884ec; /* 0x1884ec */
 extern unsigned char LAB_0018851c; /* 0x18851c */
-extern int DAT_0044e190; /* 0x44e190 */
+extern int g_statusDown; /* 0x44e190 */
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -75,15 +75,15 @@ extern int FUN_0029e9cc(unsigned short);
 extern int FUN_0029efa8(void);
 /* Supplied declaration required: FUN_002ae164. */
 extern int FUN_002b066c(unsigned short);
-/* Supplied declaration required: FUN_002b06c4. */
+/* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: FUN_002b6c34. */
 /* Supplied declaration required: FUN_002b6dd8. */
 /* Supplied declaration required: FUN_002bce00. */
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: FUN_002be624. */
-extern int FUN_002bed98(int);
-extern int FUN_002beda4(int);
+extern int vec2GetYInt(int);
+extern int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf4f8. */
@@ -125,8 +125,8 @@ void FUN_00187114(int param_1,int param_2)
   int temp_v21;
   int temp_v22;
   
-  temp_v2 = DAT_0044e190;
-  temp_v18 = DAT_0044e190 + 0x4d4;
+  temp_v2 = g_statusDown;
+  temp_v18 = g_statusDown + 0x4d4;
   temp_v15 = FUN_0029efa8();
   temp_v20 = 0;
   temp_v17 = 0;
@@ -162,7 +162,7 @@ void FUN_00187114(int param_1,int param_2)
         if (*(int *)(temp_v2 + 0x40c) >= 9) {
           temp_v5 = FUN_0029d644(temp_v18);
           if (temp_v5 == temp_v3 + 1) {
-            temp_v9 = FUN_002beda4(temp_v2 + 0x2e4);
+            temp_v9 = vec2GetXInt(temp_v2 + 0x2e4);
           }
           goto LAB_0018730c;
         }
@@ -173,7 +173,7 @@ LAB_0018730c:
           if (*(int *)(temp_v2 + 0x53c) == temp_v3) {
             temp_v9 = *(int *)(temp_v2 + 0x40c);
             if (temp_v9 >= 9) {
-              temp_v9 = FUN_002beda4(temp_v2 + 0x2e4);
+              temp_v9 = vec2GetXInt(temp_v2 + 0x2e4);
               goto LAB_0018733c;
             }
             temp_v9 = temp_v9 * -0x28;
@@ -192,7 +192,7 @@ LAB_0018733c:
               temp_v9 = temp_v9 * -0x28;
             }
             else {
-              temp_v9 = FUN_002beda4(temp_v2 + 0x2e4);
+              temp_v9 = vec2GetXInt(temp_v2 + 0x2e4);
             }
           }
         }
@@ -409,9 +409,9 @@ LAB_001876ec:
                 FUN_0029a17c((int)*(short *)(temp_v9 + 8) + (int)*(short *)(temp_v5 + 8) + param_1,
                              (int)*(short *)(temp_v9 + 10) + (int)*(short *)(temp_v5 + 10) + param_2,
                              (int)**(short **)(temp_v5 + 0xc),(int)(*(short **)(temp_v5 + 0xc))[1],1);
-                temp_v8 = FUN_002bed98(temp_v2 + 0x1cc);
+                temp_v8 = vec2GetYInt(temp_v2 + 0x1cc);
                 temp_v1 = *(short *)(temp_v9 + 10);
-                temp_v5 = FUN_002beda4(temp_v2 + 0x1cc);
+                temp_v5 = vec2GetXInt(temp_v2 + 0x1cc);
                 FUN_002bf288(2,0x1a,0x502,temp_v5 + param_1 + (int)*(short *)(temp_v9 + 8),
                              temp_v8 + param_2 + (int)temp_v1,0xc9);
                 temp_v8 = g_titleScene;
@@ -585,7 +585,7 @@ LAB_00187ce0:
     temp_v8 = FUN_002bf4f8(0x1a,0x544);
     puVar10 = (unsigned short *)FUN_0029acb0();
     temp_v7 = (unsigned int)*puVar10;
-    FUN_002b06c4();
+    dataTable00FindById();
     if ((temp_v7 == 0) || ((*(unsigned short *)(temp_v7 + 0x16) & 1) != 0)) {
       FUN_002be624(temp_v16,&LAB_00188110);
     }

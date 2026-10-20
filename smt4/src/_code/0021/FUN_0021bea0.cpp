@@ -10,8 +10,8 @@ int FUN_0024f520(void);
 int FUN_002533f4(int, int, int);
 int FUN_00287aec(void);
 int FUN_002a0428(unsigned int, int);
-int FUN_002b06c4(void);
-int FUN_002c09d0(...);
+int dataTable00FindById(void);
+int gameFlagIsSet(...);
 int randNextInRange(int);
 int FUN_0030f5e0(void);
 int SBORROW4(...);
@@ -78,11 +78,11 @@ extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
 extern int FUN_00285574(void);
 /* Supplied declaration required: FUN_00287aec. */
 /* Supplied declaration required: FUN_002a0428. */
-/* Supplied declaration required: FUN_002b06c4. */
-extern int FUN_002b63ac(void);
-/* Supplied declaration required: FUN_002c09d0. */
+/* Supplied declaration required: dataTable00FindById. */
+extern int gameGetPlayerData(void);
+/* Supplied declaration required: gameFlagIsSet. */
 /* Supplied declaration required: randNextInRange. */
-extern int FUN_002c2950(void);
+extern int gameGetMapBlock(void);
 extern char *FUN_002ced4c(void);
 extern int FUN_002ef868(void);
 /* Supplied declaration required: FUN_0030f5e0. */
@@ -122,7 +122,7 @@ void FUN_0021bea0(void)
   int temp_v17;
   
   temp_v5 = g_mapEnemy;
-  temp_v0 = FUN_002c2950();
+  temp_v0 = gameGetMapBlock();
   DAT_0049fadc = 0x3c;
   temp_v1 = FUN_00328168(g_gameState,DAT_0049f920);
   DAT_0049fb7c = 0x1e;
@@ -204,8 +204,8 @@ void FUN_0021bea0(void)
       FUN_0030f5e0();
       if ((((*psVar5 != -1) && ((int)*psVar5 == *(int *)(temp_v5 + 0xc))) &&
           ((int)psVar5[1] == *(int *)(temp_v5 + 0x10))) &&
-         (((psVar5[2] == 0 || (temp_v1 = FUN_002c09d0(), temp_v1 != 0)) &&
-          ((psVar5[3] == 0 || (temp_v1 = FUN_002c09d0(), temp_v1 == 0)))))) {
+         (((psVar5[2] == 0 || (temp_v1 = gameFlagIsSet(), temp_v1 != 0)) &&
+          ((psVar5[3] == 0 || (temp_v1 = gameFlagIsSet(), temp_v1 == 0)))))) {
         temp_v17 = 0;
         break;
       }
@@ -255,9 +255,9 @@ LAB_0021c1e4:
           *(int *)(temp_v2 + 0xa4) = temp_v1;
           temp_v1 = FUN_0025c05c();
           *(int *)(temp_v2 + 0xa8) = temp_v1;
-          FUN_002b06c4();
+          dataTable00FindById();
           *(unsigned int *)(temp_v2 + 0x1a4) = (unsigned int)*(unsigned char *)(temp_v1 + 2);
-          if ((*(int *)(temp_v2 + 0xa8) < 0x3e9) && (temp_v1 = FUN_002c09d0(0x52a), temp_v1 != 0)) {
+          if ((*(int *)(temp_v2 + 0xa8) < 0x3e9) && (temp_v1 = gameFlagIsSet(0x52a), temp_v1 != 0)) {
             *(unsigned int *)(temp_v2 + 0x1a8) = (unsigned int)*(unsigned char *)(*(int *)(temp_v2 + 0xa8) + 0x447620);
           }
           else {
@@ -335,7 +335,7 @@ LAB_0021c204:
       pcVar13 = pcVar13 + 1;
     } while ((int)pcVar13 < temp_v17);
   }
-  temp_v0 = FUN_002b63ac();
+  temp_v0 = gameGetPlayerData();
   temp_v3 = 0;
   temp_v7 = 0;
   temp_v1 = 0;
@@ -343,7 +343,7 @@ LAB_0021c204:
     temp_v2 = temp_v5 + temp_v1 * 0x180;
     if (*(char *)(temp_v2 + 0x34) != '\0') {
       temp_v3 = *(unsigned int *)(temp_v2 + 0xa8) & 0xffff;
-      FUN_002b06c4();
+      dataTable00FindById();
       temp_v3 = (unsigned int)*(unsigned char *)(temp_v3 + 2);
       temp_v7 = 1;
     }

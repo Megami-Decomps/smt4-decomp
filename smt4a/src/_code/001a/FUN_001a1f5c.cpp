@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_0017145c(void);
-int FUN_001bcd48(int, int);
+int svcSleepThread(int, int);
 
 /* Supplied declaration required: FUN_0017145c. */
-/* Supplied declaration required: FUN_001bcd48. */
+/* Supplied declaration required: svcSleepThread. */
 
 
 void FUN_001a1f5c(void)
@@ -22,7 +22,7 @@ void FUN_001a1f5c(void)
     FUN_0017145c();
     if (-1 < temp_v0 || temp_v0 == -0x375f3004) break;
     if (temp_v0 == -0x1f5f33f8) {
-      FUN_001bcd48(10000000,0);
+      svcSleepThread(10000000,0);
     }
   }
   return;

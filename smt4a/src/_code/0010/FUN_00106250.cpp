@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e7658(unsigned char [16]);
+int sharedRefHolderDestroy(unsigned char [16]);
 int FUN_002ed258(unsigned char [16]);
 int ringSetLimit(unsigned int, int);
 
@@ -16,11 +16,11 @@ typedef struct {
     unsigned char sp20; /* 0x20: local_20 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_002e7658. */
+/* Supplied declaration required: sharedRefHolderDestroy. */
 /* Supplied declaration required: FUN_002ed258. */
-extern int FUN_002ed278(unsigned char *, unsigned char *);
-extern int FUN_002ed280(unsigned char *, unsigned int);
-extern int FUN_002ed28c(unsigned char *, unsigned int *);
+extern int streamReadU8(unsigned char *, unsigned char *);
+extern int streamSkip(unsigned char *, unsigned int);
+extern int streamReadU32(unsigned char *, unsigned int *);
 /* Supplied declaration required: ringSetLimit. */
 
 
@@ -37,26 +37,26 @@ unsigned int FUN_00106250(unsigned int param_1,int param_2)
   
   if (*(unsigned int *)(*(int *)(param_2 + 0xd8) + 0x10) >= 0xc) {
     FUN_002ed258(temp_v1);
-    temp_v0 = FUN_002ed278(temp_v1,temp_v2);
+    temp_v0 = streamReadU8(temp_v1,temp_v2);
     if (temp_v0 != 0) {
       *(unsigned char *)(param_2 + 0xbc) = temp_v2[0];
-      temp_v0 = FUN_002ed278(temp_v1,temp_v3);
+      temp_v0 = streamReadU8(temp_v1,temp_v3);
       if (temp_v0 != 0) {
         *(unsigned char *)(param_2 + 0xbd) = temp_v3[0];
-        temp_v0 = FUN_002ed280(temp_v1,2);
-        if ((temp_v0 != 0) && (temp_v0 = FUN_002ed28c(temp_v1,(unsigned int *)&temp_v4), temp_v0 != 0)) {
+        temp_v0 = streamSkip(temp_v1,2);
+        if ((temp_v0 != 0) && (temp_v0 = streamReadU32(temp_v1,(unsigned int *)&temp_v4), temp_v0 != 0)) {
           *(unsigned int *)(param_2 + 0xc0) = temp_v4;
-          temp_v0 = FUN_002ed28c(temp_v1,temp_v5);
+          temp_v0 = streamReadU32(temp_v1,temp_v5);
           if (temp_v0 != 0) {
             *(unsigned int *)(param_2 + 0xc4) = temp_v5[0];
             ringSetLimit(*(unsigned int *)(param_2 + 0xd8),0xc);
-            FUN_002e7658(temp_v1);
+            sharedRefHolderDestroy(temp_v1);
             return 1;
           }
         }
       }
     }
-    FUN_002e7658(temp_v1);
+    sharedRefHolderDestroy(temp_v1);
   }
   return 0;
 }

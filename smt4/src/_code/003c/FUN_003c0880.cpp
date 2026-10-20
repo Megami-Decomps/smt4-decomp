@@ -7,25 +7,25 @@ extern "C" {
 int FUN_00242914(unsigned int, int);
 int FUN_00246454(int);
 int FUN_00292dd0(int);
-int FUN_00296f4c(int, int);
+int scrScriptProcessStartEntry(int, int);
 int FUN_00297060(void);
-int FUN_002b8838(int);
+int buttonHelpSetPreset(int);
 int FUN_003c06ac(int *);
 int FUN_003dbe68(int);
 int FUN_003dc13c(void);
 
-extern unsigned int DAT_00434290; /* 0x434290 */
+extern unsigned int g_btlActionReflect; /* 0x434290 */
 extern int DAT_00435d18; /* 0x435d18 */
-extern unsigned int DAT_00439ca8; /* 0x439ca8 */
+extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 
 extern int FUN_0019e0c0(int);
 /* Supplied declaration required: FUN_00242914. */
 /* Supplied declaration required: FUN_00246454. */
-extern int FUN_0027e6bc(unsigned int, unsigned int);
+extern int nodeListCountActiveById(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00292dd0. */
-/* Supplied declaration required: FUN_00296f4c. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297060. */
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: FUN_003c06ac. */
 /* Supplied declaration required: FUN_003dbe68. */
 /* Supplied declaration required: FUN_003dc13c. */
@@ -86,8 +86,8 @@ unsigned int FUN_003c0880(int *param_1,int param_2)
     FUN_00297060();
     param_1[4] = temp_v1;
     *(unsigned int *)(temp_v1 + 0x108) = 1;
-    FUN_00296f4c(param_1[4],0);
-    FUN_002b8838(0x3c);
+    scrScriptProcessStartEntry(param_1[4],0);
+    buttonHelpSetPreset(0x3c);
     temp_v1 = 2;
     break;
   case 2:
@@ -120,12 +120,12 @@ unsigned int FUN_003c0880(int *param_1,int param_2)
     temp_v1 = 2;
     break;
   case 4:
-    temp_v1 = FUN_0027e6bc(DAT_00434290,0);
+    temp_v1 = nodeListCountActiveById(g_btlActionReflect,0);
     if (0 < temp_v1) {
       return 0;
     }
     if ((*(unsigned int *)(*param_1 + 0x44a0) & 0x20000000) != 0) {
-      FUN_00242914(DAT_00439ca8,0);
+      FUN_00242914(g_btlUiBlock,0);
       *(unsigned int *)(*param_1 + 0x44a0) = *(unsigned int *)(*param_1 + 0x44a0) & 0xdfffffff;
     }
     temp_v1 = 5;

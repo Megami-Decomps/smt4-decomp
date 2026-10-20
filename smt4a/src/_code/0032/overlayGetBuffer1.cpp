@@ -3,11 +3,11 @@
 extern "C" {
 
 #include "shard/Shard0031.h"
-extern OverlayRef DAT_0057f110;
+extern OverlayRef g_campCec;
 
 void *overlayGetBuffer1(void)
 {
-    return DAT_0057f110.instance->buffer1;
+    return g_campCec.instance->buffer1;
 }
 
 } /* extern "C" */

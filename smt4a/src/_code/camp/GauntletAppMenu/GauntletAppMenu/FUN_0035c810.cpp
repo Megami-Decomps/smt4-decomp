@@ -9,14 +9,14 @@ int asdProcessCreateSimple(...);
 int FUN_001505ac(...);
 int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
-int FUN_001846d0(...);
-int FUN_00184758(...);
-int FUN_00184c00(...);
+int uiSpriteSelectAnim(...);
+int uiSpriteSetKeyframe(...);
+int uiSpriteSetImageKeyframe(...);
 int FUN_0020214c(...);
 int FUN_00275bc8(...);
 int sysMemClear(...);
 int FUN_003dc0c0(...);
-int FUN_003f86f8(...);
+int loadSlotEnsureLoaded(...);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
 
 /* stack frame of void: 7 slot(s), 28 byte(s) */
@@ -47,18 +47,18 @@ extern unsigned int *g_gauntletAppMenu; /* 0x57f238 */
 /* Supplied declaration required: FUN_001505ac. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: FUN_001846d0. */
-/* Supplied declaration required: FUN_00184758. */
-/* Supplied declaration required: FUN_00184c00. */
+/* Supplied declaration required: uiSpriteSelectAnim. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern unsigned int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_0020214c. */
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003dc0c0. */
-/* Supplied declaration required: FUN_003f86f8. */
+/* Supplied declaration required: loadSlotEnsureLoaded. */
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
 
 
@@ -86,24 +86,24 @@ unsigned int FUN_0035c810(void)
   puVar3 = &LAB_0035cac4;
   taskCreateDraw(&LAB_0035cac4,0xea,0,0,gauntletAppMenuExit,0,0,puVar2);
   puVar1[1] = (unsigned int)puVar3;
-  temp_v0 = FUN_0018719c(0x520);
+  temp_v0 = gameFlagIsSet(0x520);
   if (temp_v0 != 0) {
     *(unsigned char *)(puVar1 + 0xad) = 1;
   }
-  temp_v0 = FUN_0018719c(0x521);
+  temp_v0 = gameFlagIsSet(0x521);
   if (temp_v0 != 0) {
     *(unsigned char *)((int)puVar1 + 0x2b5) = 1;
   }
-  temp_v0 = FUN_0018719c(0x526);
+  temp_v0 = gameFlagIsSet(0x526);
   if (temp_v0 != 0) {
     *(unsigned char *)((int)puVar1 + 0x2b6) = 1;
   }
-  temp_v0 = FUN_0018719c(0x527);
+  temp_v0 = gameFlagIsSet(0x527);
   if (temp_v0 != 0) {
     *(unsigned char *)((int)puVar1 + 0x2b7) = 1;
   }
   FUN_003dc0c0(puVar1,0);
-  FUN_003f86f8(0xd);
+  loadSlotEnsureLoaded(0xd);
   temp_v1 = dataTableGet(0xd,0);
   temp_v2 = dataTableGetEntries();
   puVar1[0xab] = temp_v2;
@@ -112,15 +112,15 @@ unsigned int FUN_0035c810(void)
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(puVar1 + 0xae);
   FUN_001505ac(puVar1 + 0xae,&DAT_0052caec,0x3c,&DAT_0052cb28,0x60,0,0,0,0,&DAT_0052cb88,0x134);
   FUN_0014e188(puVar1 + 0xb6,0x14,0,puVar1 + 0xae,0xc9);
-  FUN_00184758(puVar1 + 0xb6,3,0);
-  FUN_00184c00(puVar1 + 0xb6,6,0);
+  uiSpriteSetKeyframe(puVar1 + 0xb6,3,0);
+  uiSpriteSetImageKeyframe(puVar1 + 0xb6,6,0);
   FUN_0014e188(puVar1 + 0xd9,0x14,0,puVar1 + 0xae,0xc9);
-  FUN_001846d0(puVar1 + 0xd9,0);
+  uiSpriteSelectAnim(puVar1 + 0xd9,0);
   FUN_0014e188(puVar1 + 0xfc,0x14,0,puVar1 + 0xae,0xc9);
-  FUN_001846d0(puVar1 + 0xfc,2);
+  uiSpriteSelectAnim(puVar1 + 0xfc,2);
   FUN_0014e188(puVar1 + 0x11f,0x14,0x59f,puVar1 + 0xae,0xb5);
   *(unsigned short *)((int)puVar1 + 0x4b6) = 2;
-  FUN_001846d0(puVar1 + 0x11f,1);
+  uiSpriteSelectAnim(puVar1 + 0x11f,1);
   puVar2 = &LAB_0035caf0;
   FUN_0020214c();
   puVar1[0x14a] = (unsigned int)puVar2;

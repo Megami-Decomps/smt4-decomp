@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: dataTable04FindById. */
 extern int flagSelectVariant(void);
 
 
@@ -25,7 +25,7 @@ unsigned int FUN_0033896c(void)
     temp_v3 = 2;
   }
   temp_v2 = 1;
-  while ((temp_v1 = temp_v2, FUN_001aba54(), temp_v1 == 0 || ((int)*(char *)(temp_v1 + 0x36) != temp_v3))) {
+  while ((temp_v1 = temp_v2, dataTable04FindById(), temp_v1 == 0 || ((int)*(char *)(temp_v1 + 0x36) != temp_v3))) {
     temp_v2 = temp_v2 + 1;
     if (temp_v2 >= 401) {
       return 0;

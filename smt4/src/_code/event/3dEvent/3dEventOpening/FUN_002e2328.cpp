@@ -6,7 +6,7 @@ extern "C" {
 
 extern unsigned int *g_event3dOpening; /* 0x43df98 */
 
-extern int FUN_002893d8(void);
+extern int scrGetCommandFrame(void);
 extern int jobIsValid(unsigned int);
 
 
@@ -16,7 +16,7 @@ unsigned int FUN_002e2328(void)
   unsigned int *puVar1;
   int temp_v0;
   
-  temp_v0 = FUN_002893d8();
+  temp_v0 = scrGetCommandFrame();
   if (temp_v0 != 0) {
     if (g_event3dOpening == (unsigned int *)0x0) {
       return 1;

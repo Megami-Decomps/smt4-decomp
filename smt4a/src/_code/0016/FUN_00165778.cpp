@@ -47,7 +47,7 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00162790. */
-extern int FUN_001654d8(int);
+extern int vec2GetXInt(int);
 /* Supplied declaration required: FUN_001689e8. */
 /* Supplied declaration required: FUN_0016c560. */
 /* Supplied declaration required: FUN_00180310. */
@@ -120,11 +120,11 @@ void FUN_00165778(int param_1,int param_2)
   FUN_001689e8((int)*(short *)(param_1 + 0x18),temp_v0 - 0xd,8,0x79,0);
   FUN_0016c560(g_renderCtx);
   temp_v0 = FUN_001834a4(8,0x1ab);
-  temp_v1 = FUN_001654d8(param_1 + 0x154);
+  temp_v1 = vec2GetXInt(param_1 + 0x154);
   FUN_001835b4(2,8,0x1a8,*(short *)(temp_v0 + 8) + temp_v1,(int)*(short *)(temp_v0 + 10),0x65);
   temp_v1 = FUN_001834a4(8,0x1aa);
   if (*(int *)(param_1 + 700) != 3) {
-    temp_v2 = FUN_001654d8(param_1 + 0x154);
+    temp_v2 = vec2GetXInt(param_1 + 0x154);
     FUN_00180310(6,(int)*(short *)(temp_v0 + 8) + (int)*(short *)(temp_v1 + 8) + temp_v2,
                  (int)*(short *)(temp_v0 + 10) + (int)*(short *)(temp_v1 + 10),1,2,0x79,&LAB_00165aec,
                  *(unsigned int *)(param_1 + 0x2c8));

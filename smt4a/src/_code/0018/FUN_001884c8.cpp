@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001bcd48(int, int);
+int svcSleepThread(int, int);
 int software_interrupt(int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -17,7 +17,7 @@ extern unsigned char DAT_00589399; /* 0x589399 */
 extern int DAT_005893b0; /* 0x5893b0 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_001bcd48. */
+/* Supplied declaration required: svcSleepThread. */
 extern int __aeabi_uidivmod(unsigned int, char);
 
 
@@ -44,7 +44,7 @@ void FUN_001884c8(int param_1)
     temp_v0 = DAT_005893b0 + temp_v2;
     if (temp_v0 != 0) {
       temp_v1 = (unsigned long long)temp_v0 * 1000000;
-      FUN_001bcd48((int)temp_v1,(int)((unsigned long long)temp_v1 >> 0x20));
+      svcSleepThread((int)temp_v1,(int)((unsigned long long)temp_v1 >> 0x20));
       return;
     }
   }

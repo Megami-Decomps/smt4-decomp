@@ -9,16 +9,16 @@ typedef struct OwnerBuf {
 } OwnerBuf;
 
 extern void asdMemFree(u32 ptr);
-extern void FUN_00237100(void);
-extern void FUN_002e3328(OwnerBuf *obj);
+extern void asdCecShutdown(void);
+extern void asdOperatorDelete(OwnerBuf *obj);
 
 void ownerBufDestroy(OwnerBuf *obj, const void *vtbl)
 {
     obj->vtbl = vtbl;
     asdMemFree(obj->buf1);
     asdMemFree(obj->buf2);
-    FUN_00237100();
-    FUN_002e3328(obj);
+    asdCecShutdown();
+    asdOperatorDelete(obj);
 }
 
 } /* extern "C" */

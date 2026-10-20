@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002e6e34(unsigned char [12], int);
 int FUN_002e6e5c(unsigned char [12]);
 int FUN_002ec728(unsigned int, unsigned int *);
-int FUN_002f44ec(...);
+int lessU32(...);
 
 /* stack frame of param_4: 6 slot(s), 24 byte(s) */
 typedef struct {
@@ -22,7 +22,7 @@ typedef struct {
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
 /* Supplied declaration required: FUN_002ec728. */
-/* Supplied declaration required: FUN_002f44ec. */
+/* Supplied declaration required: lessU32. */
 extern int FUN_002fd078(int, unsigned int);
 extern int wordRefsEqual_0030fbec(unsigned int **, int *);
 extern int wordRefsEqual_0030fbfc(int *, unsigned int *);
@@ -58,7 +58,7 @@ unsigned int FUN_002ec774(int param_1,unsigned int param_2,unsigned int param_3,
   temp_v0 = *(int *)(*(int *)(param_1 + 0x14) + 4);
   temp_v6 = *(int *)(param_1 + 0x14);
   while (temp_v1 = temp_v0, temp_v1 != 0) {
-    temp_v0 = FUN_002f44ec(temp_v4,temp_v1 + 0x10,temp_v3);
+    temp_v0 = lessU32(temp_v4,temp_v1 + 0x10,temp_v3);
     if (temp_v0 != 0) {
       temp_v0 = *(int *)(temp_v1 + 0xc);
     }
@@ -70,7 +70,7 @@ unsigned int FUN_002ec774(int param_1,unsigned int param_2,unsigned int param_3,
   temp_v7 = *(unsigned int *)(param_1 + 0x14);
   temp_v0 = wordRefsEqual_0030fbfc(&temp_v6,(unsigned int *)&temp_v7);
   if ((temp_v0 != 0) ||
-     (temp_v1 = FUN_002f44ec(temp_v4,temp_v3,temp_v6 + 0x10), temp_v0 = temp_v6, temp_v1 != 0)) {
+     (temp_v1 = lessU32(temp_v4,temp_v3,temp_v6 + 0x10), temp_v0 = temp_v6, temp_v1 != 0)) {
     temp_v0 = *(int *)(param_1 + 0x14);
   }
   if ((temp_v0 != *(int *)(param_1 + 0x14)) &&
@@ -79,7 +79,7 @@ unsigned int FUN_002ec774(int param_1,unsigned int param_2,unsigned int param_3,
     puVar4 = (unsigned int *)(*(unsigned int **)(param_1 + 0x30))[1];
     puVar6 = *(unsigned int **)(param_1 + 0x30);
     while (puVar5 = puVar4, puVar5 != (unsigned int *)0x0) {
-      temp_v0 = FUN_002f44ec(temp_v4,puVar5 + 4,&uStack_20);
+      temp_v0 = lessU32(temp_v4,puVar5 + 4,&uStack_20);
       if (temp_v0 != 0) {
         puVar4 = (unsigned int *)puVar5[3];
       }
@@ -92,7 +92,7 @@ unsigned int FUN_002ec774(int param_1,unsigned int param_2,unsigned int param_3,
     temp_v3 = puVar6;
     temp_v0 = wordRefsEqual_0030fbec(&temp_v3,&temp_v6);
     if ((temp_v0 != 0) ||
-       (temp_v0 = FUN_002f44ec(temp_v4,&uStack_20,temp_v3 + 4), puVar4 = temp_v3, temp_v0 != 0)) {
+       (temp_v0 = lessU32(temp_v4,&uStack_20,temp_v3 + 4), puVar4 = temp_v3, temp_v0 != 0)) {
       puVar4 = *(unsigned int **)(param_1 + 0x30);
     }
     FUN_002ec728(temp_v9,puVar4 + 5);

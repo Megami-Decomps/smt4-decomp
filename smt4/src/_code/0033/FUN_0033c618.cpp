@@ -9,7 +9,7 @@ typedef struct {
     unsigned char sp58; /* 0x58: local_58 */
 } void_stack;
 
-extern int FUN_00296d6c(int, unsigned int);
+extern int randBetween(int, unsigned int);
 extern unsigned int FUN_002c3124(unsigned int, int, unsigned int);
 
 
@@ -39,7 +39,7 @@ unsigned int FUN_0033c618(void)
   } while (temp_v4 != 0);
   temp_v4 = 0;
   do {
-    temp_v2 = FUN_00296d6c(temp_v4 + 1,0x42);
+    temp_v2 = randBetween(temp_v4 + 1,0x42);
     temp_v0 = temp_v6[temp_v4];
     temp_v6[temp_v4] = temp_v6[temp_v2];
     temp_v4 = temp_v4 + 1;

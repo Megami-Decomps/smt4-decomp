@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001f4ddc(int, int);
 
-extern unsigned char DAT_00439c88; /* 0x439c88 */
+extern unsigned char g_btlUi; /* 0x439c88 */
 
 /* Supplied declaration required: FUN_001f4ddc. */
 
@@ -15,7 +15,7 @@ void FUN_003ae2d0(unsigned int param_1,short param_2)
 
 {
 /* irregular: 1 native warning(s); review required */
-  FUN_001f4ddc((*(int *)((unsigned char *)&DAT_00439c88 + 0x20)) + 0x2460,(int)param_2);
+  FUN_001f4ddc((*(int *)((unsigned char *)&g_btlUi + 0x20)) + 0x2460,(int)param_2);
   return;
 }
 

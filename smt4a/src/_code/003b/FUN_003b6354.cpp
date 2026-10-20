@@ -17,8 +17,8 @@ typedef struct {
 } param_9_stack;
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_001654d8(int);
-extern int FUN_001654e4(int);
+extern int vec2GetXInt(int);
+extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001835b4. */
 extern int FUN_002a4860(int);
@@ -91,9 +91,9 @@ void FUN_003b6354(int param_1,int param_2,int param_3,int param_4,int param_5,in
       temp_v2 = FUN_002a4860(temp_v0);
       temp_v0 = FUN_002a4894(temp_v0);
       if (*(short *)(temp_v1 + 0x8b60) == *(short *)(param_1 + (temp_v0 + temp_v2) * 2 + 0x8b70)) {
-        temp_v0 = FUN_001654d8(param_1 + 0x2e0);
+        temp_v0 = vec2GetXInt(param_1 + 0x2e0);
         *param_7 = temp_v0 + *param_7;
-        temp_v0 = FUN_001654e4(param_1 + 0x2e0);
+        temp_v0 = vec2GetYInt(param_1 + 0x2e0);
         *param_8 = temp_v0 + *param_8;
         efctSetSpeed();
       }

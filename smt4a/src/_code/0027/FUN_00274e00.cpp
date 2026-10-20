@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_001aea28(u32 owner, s32 handle);
+void ptrListRemoveClearOwner(u32 owner, s32 handle);
 
 typedef struct Object {
     /* 0x00 */ u8 unk00[4];
@@ -18,10 +18,10 @@ typedef struct SlotTable {
     /* 0x00 */ u8 unk00[0x40];
     /* 0x40 */ Slot slots[0x40];
 } SlotTable;
-extern u32 DAT_0056fcc0;
+extern u32 g_handleRegistry;
 extern SlotTable *DAT_00581280;
 
-/* Calls FUN_001aea28 for the handle of each of the 0x40 slot objects that has one, from the last slot to the first. */
+/* Calls ptrListRemoveClearOwner for the handle of each of the 0x40 slot objects that has one, from the last slot to the first. */
 void FUN_00274e00(void)
 {
     Object *object;
@@ -36,7 +36,7 @@ void FUN_00274e00(void)
             handle = object->handle;
         }
         if (object != NULL && handle != 0) {
-            FUN_001aea28(DAT_0056fcc0, handle);
+            ptrListRemoveClearOwner(g_handleRegistry, handle);
         }
         i = i - 1;
     } while (i >= 0);

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002af5c0(...);
+int uiSpriteSetImageKeyframe(...);
 int FUN_002bd954(...);
 int FUN_002c312c(unsigned int *, unsigned char *, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
 int memClear(unsigned int *, int);
@@ -30,7 +30,7 @@ extern unsigned char DAT_00402400; /* 0x402400 */
 extern signed char g_countdown; /* 0x43d9e0 */
 extern unsigned int *DAT_0043d9e4; /* 0x43d9e4 */
 
-/* Supplied declaration required: FUN_002af5c0. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_002bd954. */
 extern short randNextInRange(unsigned int);
 /* Supplied declaration required: FUN_002c312c. */
@@ -94,9 +94,9 @@ void FUN_003ad0e0(void)
     temp_v1 = 0;
     do {
       FUN_002bd954(puVar2 + temp_v1 * 0x23 + 0x10,0x23,0,puVar2 + 8,0x15);
-      FUN_002af5c0(puVar2 + temp_v1 * 0x23 + 0x10,0);
+      uiSpriteSetImageKeyframe(puVar2 + temp_v1 * 0x23 + 0x10,0);
       FUN_002bd954(puVar2 + temp_v1 * 0x23 + 0x56,0x23,0,puVar2 + 8,0x15);
-      FUN_002af5c0(puVar2 + temp_v1 * 0x23 + 0x56,1,0);
+      uiSpriteSetImageKeyframe(puVar2 + temp_v1 * 0x23 + 0x56,1,0);
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < 2);
   }

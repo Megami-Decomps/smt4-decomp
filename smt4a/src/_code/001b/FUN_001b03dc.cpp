@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0018b868(void);
-int FUN_0018b964(void);
+int nn_applet_CTR_detail_OpenSession(void);
+int nn_applet_CTR_detail_CloseSession(void);
 
 /* stack frame of param_6: 6 slot(s), 15 byte(s) */
 typedef struct {
@@ -17,8 +17,8 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_6_stack;
 
-/* Supplied declaration required: FUN_0018b868. */
-/* Supplied declaration required: FUN_0018b964. */
+/* Supplied declaration required: nn_applet_CTR_detail_OpenSession. */
+/* Supplied declaration required: nn_applet_CTR_detail_CloseSession. */
 extern unsigned int FUN_001b65ac(unsigned int, unsigned int *, unsigned char *, unsigned char *, unsigned char *, unsigned int *);
 
 
@@ -37,9 +37,9 @@ FUN_001b03dc(unsigned int param_1,unsigned int *param_2,unsigned char *param_3,u
   unsigned char temp_v5 [4];
   unsigned int temp_v6 [2];
   
-  FUN_0018b868();
+  nn_applet_CTR_detail_OpenSession();
   temp_v0 = FUN_001b65ac(param_1,(unsigned int *)&temp_v2,temp_v3,temp_v4,temp_v5,temp_v6);
-  FUN_0018b964();
+  nn_applet_CTR_detail_CloseSession();
   if ((temp_v0 & 0x80000000) != 0) {
     temp_v1 = 0;
   }

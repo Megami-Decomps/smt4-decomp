@@ -8,7 +8,7 @@ int FUN_001386f8(void);
 int FUN_002ae164(void);
 int FUN_002ae9ec(int, int, unsigned int, int, int, int);
 int FUN_002bdf94(...);
-int FUN_002be304(void);
+int drawSetColorFromRGBA8(void);
 int FUN_002bed3c(void);
 
 /* stack frame of param_6: 3 slot(s), 12 byte(s) */
@@ -24,11 +24,11 @@ extern unsigned char LAB_002b6dac; /* 0x2b6dac */
 /* Supplied declaration required: FUN_001386f8. */
 extern int FUN_002ae108(unsigned int);
 /* Supplied declaration required: FUN_002ae164. */
-extern int FUN_002ae1d8(void);
+extern int idIsAbove400(void);
 extern unsigned int FUN_002ae2c0(unsigned int);
 /* Supplied declaration required: FUN_002ae9ec. */
 /* Supplied declaration required: FUN_002bdf94. */
-/* Supplied declaration required: FUN_002be304. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_002bed3c. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
 
@@ -51,7 +51,7 @@ void FUN_002b6c34(unsigned int param_1,int param_2,int param_3,int param_4,int p
     temp_v0 = 0x3f6;
   }
   else {
-    temp_v1 = FUN_002ae1d8();
+    temp_v1 = idIsAbove400();
     if (temp_v1 != 0) {
       temp_v0 = 0x419;
     }
@@ -75,7 +75,7 @@ void FUN_002b6c34(unsigned int param_1,int param_2,int param_3,int param_4,int p
       temp_v2 = param_1 & 0xff;
     }
     if (temp_v2 >= 2) {
-      FUN_002be304();
+      drawSetColorFromRGBA8();
       temp_v1 = FUN_002bf4f8(0x13,0x402);
       FUN_002bdf94(2,*(short *)(temp_v1 + 8) + param_2,*(short *)(temp_v1 + 10) + param_3,0,1,
                    param_4 + 1,&LAB_002b6da8);

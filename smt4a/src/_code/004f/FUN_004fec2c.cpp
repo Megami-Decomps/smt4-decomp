@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002e342c(int, unsigned int);
+int libc_strcpy(int, unsigned int);
 int FUN_004102d8(int, int, int, unsigned int);
 
-extern int DAT_005712f0; /* 0x5712f0 */
+extern int g_btlActionReflect; /* 0x5712f0 */
 
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_004102d8. */
 
 
@@ -24,16 +24,16 @@ int FUN_004fec2c(short param_1,unsigned int param_2,unsigned int param_3,unsigne
   unsigned char temp_v2;
   unsigned char temp_v3;
   
-  temp_v0 = DAT_005712f0;
-  FUN_004102d8(DAT_005712f0,(int)param_1,0,param_2);
+  temp_v0 = g_btlActionReflect;
+  FUN_004102d8(g_btlActionReflect,(int)param_1,0,param_2);
   if (param_6 != 0) {
-    temp_v1 = *(int *)(DAT_005712f0 + 8);
+    temp_v1 = *(int *)(g_btlActionReflect + 8);
     do {
       if (temp_v1 == 0) {
         *(unsigned int *)(temp_v0 + 0x28) = param_3;
         *(unsigned char *)(temp_v0 + 4) = 0x14;
         *(unsigned int *)(temp_v0 + 0x18) = param_4;
-        FUN_002e342c(temp_v0 + 0x68,param_5);
+        libc_strcpy(temp_v0 + 0x68,param_5);
         return temp_v0;
       }
       piVar1 = (int *)(temp_v1 + 0xc);
@@ -49,7 +49,7 @@ int FUN_004fec2c(short param_1,unsigned int param_2,unsigned int param_3,unsigne
   *(unsigned int *)(temp_v0 + 0x28) = param_3;
   *(unsigned char *)(temp_v0 + 4) = 0x14;
   *(unsigned int *)(temp_v0 + 0x18) = param_4;
-  FUN_002e342c(temp_v0 + 0x68,param_5);
+  libc_strcpy(temp_v0 + 0x68,param_5);
   return temp_v0;
 }
 

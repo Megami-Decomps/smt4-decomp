@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00195fc8(void);
+int sysFatalBreak(void);
 int FUN_002e3140(void);
 int FUN_0042cd0c(int *, int *, int, int, unsigned int, unsigned int);
 int ll_sdiv(int, int, int, int);
@@ -20,7 +20,7 @@ typedef struct {
 #define ROMWRIGHT_CARRY_4_DEFINED
 #define romwright_carry_4(left, right) ((unsigned char)((unsigned long long)(unsigned int)(left) + (unsigned long long)(unsigned int)(right) > 0xffffffffULL))
 #endif
-/* Supplied declaration required: FUN_00195fc8. */
+/* Supplied declaration required: sysFatalBreak. */
 /* Supplied declaration required: FUN_002e3140. */
 /* Supplied declaration required: FUN_0042cd0c. */
 /* Supplied declaration required: ll_sdiv. */
@@ -64,7 +64,7 @@ void FUN_00422534(int *param_1)
       ll_sdiv(param_1[2],param_1[3],0x40000,0);
       temp_v0 = (**(romwright_code **)(*piVar4 + 0x2c))(piVar4,temp_v1 + param_1[8],temp_v2);
       if (temp_v0 != temp_v2) {
-        FUN_00195fc8();
+        sysFatalBreak();
       }
       temp_v2 = param_1[2];
       param_1[2] = temp_v2 + temp_v0;

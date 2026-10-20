@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002bd420(int, int, int);
+int memCopy(int, int, int);
 
 typedef int romwright_code(...);
 /* stack frame of param_3: 3 slot(s), 12 byte(s) */
@@ -17,7 +17,7 @@ typedef struct {
 extern romwright_code *DAT_00464d90; /* 0x464d90 */
 extern romwright_code *DAT_00464d94; /* 0x464d94 */
 
-/* Supplied declaration required: FUN_002bd420. */
+/* Supplied declaration required: memCopy. */
 
 
 void FUN_002d609c(short *param_1,int param_2,int param_3)
@@ -75,7 +75,7 @@ void FUN_002d609c(short *param_1,int param_2,int param_3)
         for (temp_v3 = 0; *(short *)(temp_v2 + temp_v3 * 2) != 0; temp_v3 = temp_v3 + 1) {
         }
         if (param_3 == 0) {
-          FUN_002bd420(temp_v2,param_2 + temp_v6 * 2,temp_v3 << 1);
+          memCopy(temp_v2,param_2 + temp_v6 * 2,temp_v3 << 1);
         }
         temp_v6 = temp_v6 + temp_v3;
       }
@@ -87,7 +87,7 @@ void FUN_002d609c(short *param_1,int param_2,int param_3)
         for (temp_v3 = 0; *(short *)(temp_v2 + temp_v3 * 2) != 0; temp_v3 = temp_v3 + 1) {
         }
         if (param_3 == 0) {
-          FUN_002bd420(temp_v2,param_2 + temp_v6 * 2,temp_v3 << 1);
+          memCopy(temp_v2,param_2 + temp_v6 * 2,temp_v3 << 1);
         }
         temp_v6 = temp_v6 + temp_v3;
       }

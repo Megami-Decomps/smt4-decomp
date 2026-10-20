@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_002fbc1a(...);
-int FUN_00300900(...);
-int FUN_00300934(...);
+int streamExtractU8(...);
+int streamReadWord(...);
 int FUN_00306ce4(...);
 
 typedef struct fn_00119e2c_arg0 fn_00119e2c_arg0;
@@ -24,8 +24,8 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_002fbc1a. */
-/* Supplied declaration required: FUN_00300900. */
-/* Supplied declaration required: FUN_00300934. */
+/* Supplied declaration required: streamExtractU8. */
+/* Supplied declaration required: streamReadWord. */
 /* Supplied declaration required: FUN_00306ce4. */
 
 
@@ -44,13 +44,13 @@ void FUN_00119e2c(fn_00119e2c_arg0 *param_1,int param_2,unsigned int param_3,uns
     *(unsigned char *)(param_2 + 5) = param_1->field_0x4;
     temp_v0 = *(char *)((int)&param_1[3].field_0x8 + 3);
     if (((temp_v0 != '\0') ||
-        ((FUN_00300900(param_1,param_2 + 5), param_1->field_0x4 == 0 &&
-         (FUN_00300934(param_1,&temp_v2), param_1->field_0x4 == 0)))) &&
+        ((streamExtractU8(param_1,param_2 + 5), param_1->field_0x4 == 0 &&
+         (streamReadWord(param_1,&temp_v2), param_1->field_0x4 == 0)))) &&
        ((temp_v1 = param_1->field_0xc, param_1->field_0x4 == 0 &&
         ((((FUN_002fbc1a(param_1,param_2 + 8), param_1->field_0x4 == 0 &&
-           (FUN_00300934(param_1,param_2 + 0x10), param_1->field_0x4 == 0)) &&
-          (FUN_00300900(param_1,param_2 + 0x14), param_1->field_0x4 == 0)) &&
-         ((FUN_00300934(param_1,param_2 + 0x18), param_1->field_0x4 == 0 && (temp_v0 == '\0')))))))) {
+           (streamReadWord(param_1,param_2 + 0x10), param_1->field_0x4 == 0)) &&
+          (streamExtractU8(param_1,param_2 + 0x14), param_1->field_0x4 == 0)) &&
+         ((streamReadWord(param_1,param_2 + 0x18), param_1->field_0x4 == 0 && (temp_v0 == '\0')))))))) {
       temp_v2 = temp_v1 + temp_v2;
       if ((temp_v2 < (unsigned int)param_1->field_0xc) ||
          (*(unsigned int *)((int)param_1->field_0x8 + 0x10) < temp_v2)) {

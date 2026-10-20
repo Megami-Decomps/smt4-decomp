@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned char DAT_0043dcb0; /* 0x43dcb0 */
+extern unsigned char g_ifTouch; /* 0x43dcb0 */
 
 
 int FUN_00259e7c(void)
@@ -13,8 +13,8 @@ int FUN_00259e7c(void)
   int temp_v0;
   
   temp_v0 = 0;
-  if ((*(int *)((unsigned char *)&DAT_0043dcb0 + 0x4)) != 0) {
-    temp_v0 = (int)*(short *)((*(int *)((unsigned char *)&DAT_0043dcb0 + 0x4)) + 0x650);
+  if ((*(int *)((unsigned char *)&g_ifTouch + 0x4)) != 0) {
+    temp_v0 = (int)*(short *)((*(int *)((unsigned char *)&g_ifTouch + 0x4)) + 0x650);
   }
   return temp_v0;
 }

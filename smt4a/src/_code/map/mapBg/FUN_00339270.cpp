@@ -23,7 +23,7 @@ extern int g_mapDepartWork; /* 0x58069c */
 
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_00178b04. */
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_001cd3ec. */
 /* Supplied declaration required: FUN_0040a908. */
 /* Supplied declaration required: FUN_0040a918. */
@@ -105,7 +105,7 @@ unsigned int FUN_00339270(void)
   *(unsigned int *)(g_mapDepartWork + 0xc) = temp_v2;
   temp_v3 = (int)*(short *)(temp_v1 + 0x20);
   FUN_00100388(temp_v4,&LAB_003396c8,temp_v3,temp_v3,(int)*(short *)(temp_v1 + 0x22));
-  temp_v1 = FUN_0018719c(0x9d);
+  temp_v1 = gameFlagIsSet(0x9d);
   if (((((temp_v1 != 0) && (*(short *)(g_mapDepartWork + 0x20) == 0x27)) &&
        ((*(short *)(g_mapDepartWork + 0x22) != 1 ||
         (FUN_00100388(temp_v4,&LAB_003396c8,0x27,0x27,0xf),
@@ -148,7 +148,7 @@ unsigned int FUN_00339270(void)
   *(unsigned int *)(g_mapDepartWork + 0x14) = temp_v2;
   temp_v3 = (int)*(short *)(temp_v1 + 0x20);
   FUN_00100388(temp_v4,&LAB_003396e8,temp_v3,temp_v3,(int)*(short *)(temp_v1 + 0x22));
-  temp_v1 = FUN_0018719c(0x9d);
+  temp_v1 = gameFlagIsSet(0x9d);
   if (((((temp_v1 != 0) && (*(short *)(g_mapDepartWork + 0x20) == 0x27)) &&
        ((*(short *)(g_mapDepartWork + 0x22) != 1 ||
         (FUN_00100388(temp_v4,&LAB_003396e8,0x27,0x27,0xf),

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001a089c(...);
+int nn_os_LightEvent_Initialize(...);
 int FUN_002e3140(...);
 int FUN_002fb0d4(...);
 
@@ -25,7 +25,7 @@ extern unsigned char LAB_00100df3; /* 0x100df3 */
 extern int FUN_001b5cec(...); /* 0x1b5cec */
 extern unsigned char LAB_001bc5f4; /* 0x1bc5f4 */
 
-/* Supplied declaration required: FUN_001a089c. */
+/* Supplied declaration required: nn_os_LightEvent_Initialize. */
 /* Supplied declaration required: FUN_002e3140. */
 /* Supplied declaration required: FUN_002fb0d4. */
 
@@ -47,8 +47,8 @@ unsigned int FUN_001afc38(int param_1,int param_2,int param_3,unsigned int param
       temp_v0 = 0x820abf9;
     }
     else if (*(char *)(param_1 + 0x30) == '\x01') {
-      FUN_001a089c(param_1 + 0x48,0);
-      FUN_001a089c(param_1 + 0x40,0);
+      nn_os_LightEvent_Initialize(param_1 + 0x48,0);
+      nn_os_LightEvent_Initialize(param_1 + 0x40,0);
       temp_v1 = 4;
       temp_v5 = 0;
       temp_v2 = &LAB_001bc5f4;

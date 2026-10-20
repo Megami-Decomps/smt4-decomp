@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_00282924(int, unsigned int);
+int btlMainFindEntryByListedId(int, unsigned int);
 
-/* Supplied declaration required: FUN_00282924. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 extern int btlGetMainState(void);
 extern unsigned int scrGetArg(unsigned int);
 
@@ -23,7 +23,7 @@ unsigned int FUN_0031f36c(void)
   temp_v0 = scrGetArg(0);
   temp_v1 = scrGetArg(1);
   temp_v2 = btlGetMainState();
-  FUN_00282924(temp_v2,temp_v0);
+  btlMainFindEntryByListedId(temp_v2,temp_v0);
   if (temp_v2 != 0) {
     piVar4 = (int *)(temp_v2 + 0x270);
     *(unsigned int *)(temp_v2 + *(int *)(temp_v2 + 0x270) * 4 + 600) = temp_v1;

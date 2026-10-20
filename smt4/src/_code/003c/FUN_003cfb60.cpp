@@ -18,7 +18,7 @@ typedef struct {
 extern unsigned char g_btlAction; /* 0x434278 */
 extern int g_btlMain; /* 0x4342c8 */
 extern unsigned int g_btlEvent; /* 0x435d48 */
-extern unsigned int DAT_00439ca8; /* 0x439ca8 */
+extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 
 /* Supplied declaration required: FUN_002296f4. */
 /* Supplied declaration required: FUN_0026c820. */
@@ -46,7 +46,7 @@ unsigned int FUN_003cfb60(int *param_1,int param_2)
       }
       else {
         *(unsigned int *)(temp_v0 + 0x88) = 0;
-        FUN_0026c820(DAT_00439ca8);
+        FUN_0026c820(g_btlUiBlock);
       }
     }
     if ((*(unsigned int *)(*(int *)(param_2 + 0x24) + 100) & 0xff) != 0) {

@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_00130e3c(int [2], int, int *);
-int FUN_002e9318(unsigned char [8]);
+int onlineStringDestroy(unsigned char [8]);
 int constructObj0055affc(unsigned char [8]);
 int FUN_002f42be(unsigned char [8], unsigned char *, unsigned int, int);
-int FUN_002f44ec(...);
+int lessU32(...);
 
 /* stack frame of param_2: 10 slot(s), 40 byte(s) */
 typedef struct {
@@ -28,11 +28,11 @@ extern unsigned char LAB_003113d8; /* 0x3113d8 */
 
 extern unsigned int FUN_00113fa0(int, unsigned char *);
 /* Supplied declaration required: FUN_00130e3c. */
-extern int FUN_002e760a(unsigned int);
-/* Supplied declaration required: FUN_002e9318. */
+extern int operatorNew(unsigned int);
+/* Supplied declaration required: onlineStringDestroy. */
 /* Supplied declaration required: constructObj0055affc. */
 /* Supplied declaration required: FUN_002f42be. */
-/* Supplied declaration required: FUN_002f44ec. */
+/* Supplied declaration required: lessU32. */
 extern int wordRefsDiffer_002fee88(int *, unsigned int *);
 extern int wordRefsEqual_002ff078(int *, unsigned int *);
 
@@ -61,7 +61,7 @@ unsigned int FUN_00311318(int param_1,unsigned int param_2)
   iStack_1c = param_1;
   temp_v12 = param_2;
   while (temp_v2 = temp_v0, temp_v2 != 0) {
-    temp_v0 = FUN_002f44ec(param_1 + 0x25,temp_v2 + 0x10,&temp_v12);
+    temp_v0 = lessU32(param_1 + 0x25,temp_v2 + 0x10,&temp_v12);
     if (temp_v0 != 0) {
       temp_v0 = *(int *)(temp_v2 + 0xc);
     }
@@ -74,7 +74,7 @@ unsigned int FUN_00311318(int param_1,unsigned int param_2)
   temp_v10 = temp_v3;
   temp_v0 = wordRefsEqual_002ff078(&temp_v10,(unsigned int *)&temp_v11);
   if ((temp_v0 != 0) ||
-     (temp_v0 = FUN_002f44ec(param_1 + 0x25,&temp_v12,temp_v10 + 0x10), temp_v8 = temp_v10,
+     (temp_v0 = lessU32(param_1 + 0x25,&temp_v12,temp_v10 + 0x10), temp_v8 = temp_v10,
      temp_v0 != 0)) {
     temp_v8 = *(int *)(param_1 + 0x1c);
   }
@@ -86,7 +86,7 @@ unsigned int FUN_00311318(int param_1,unsigned int param_2)
   else {
     constructObj0055affc(temp_v7);
     FUN_002f42be(temp_v7,&LAB_003113d8,*(unsigned int *)(param_1 + 8),temp_v12);
-    temp_v0 = FUN_002e760a(0x4c);
+    temp_v0 = operatorNew(0x4c);
     temp_v1 = 0;
     if (temp_v0 != 0) {
       temp_v1 = FUN_00113fa0(temp_v0,temp_v7);
@@ -95,7 +95,7 @@ unsigned int FUN_00311318(int param_1,unsigned int param_2)
     temp_v5 = temp_v12;
     FUN_00130e3c(temp_v4,param_1 + 0xc,&temp_v5);
     *(unsigned int *)(temp_v4[0] + 0x14) = temp_v1;
-    FUN_002e9318(temp_v7);
+    onlineStringDestroy(temp_v7);
   }
   return temp_v1;
 }

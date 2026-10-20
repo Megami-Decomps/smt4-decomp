@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_0010d300(void);
 int FUN_0010d35c(void);
-int FUN_002e3328(void);
-int FUN_002e9afe(unsigned int *, int *);
+int asdOperatorDelete(void);
+int vectorCopyHeader(unsigned int *, int *);
 int FUN_003f2d7c(int, unsigned int *, unsigned int *);
 int FUN_003fa1c8(unsigned int *);
 int FUN_00414a24(void);
@@ -33,9 +33,9 @@ extern unsigned char DAT_00594968; /* 0x594968 */
 extern unsigned int FUN_00111800(unsigned int *);
 extern int FUN_00122220(void);
 extern int FUN_001224a0(void);
-/* Supplied declaration required: FUN_002e3328. */
-/* Supplied declaration required: FUN_002e9afe. */
-extern int FUN_002f4e86(unsigned int *);
+/* Supplied declaration required: asdOperatorDelete. */
+/* Supplied declaration required: vectorCopyHeader. */
+extern int refIsNonNegative(unsigned int *);
 /* Supplied declaration required: FUN_003f2d7c. */
 /* Supplied declaration required: FUN_003fa1c8. */
 extern unsigned int *FUN_003fa580(unsigned int *);
@@ -123,8 +123,8 @@ unsigned int * FUN_003fa83c(unsigned int *param_1)
       temp_v3 = *(unsigned int *)(temp_v1 + 0x40);
       temp_v2 = *(unsigned int *)(temp_v1 + 0x38);
       uStack_14 = *(unsigned int *)(temp_v1 + 0x3c);
-      FUN_002e9afe(param_1 + 7,&temp_v2);
-      temp_v1 = FUN_002f4e86(param_1 + 7);
+      vectorCopyHeader(param_1 + 7,&temp_v2);
+      temp_v1 = refIsNonNegative(param_1 + 7);
       if (temp_v1 != 0) {
         temp_v0 = 9;
         break;
@@ -155,7 +155,7 @@ unsigned int * FUN_003fa83c(unsigned int *param_1)
     }
     if (param_1[0x11] != 0) {
       FUN_00414a24();
-      FUN_002e3328();
+      asdOperatorDelete();
       param_1[0x11] = 0;
     }
     temp_v0 = 10;

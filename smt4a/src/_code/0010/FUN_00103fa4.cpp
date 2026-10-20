@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002ea0c8(int, unsigned char *);
+int onlineStringSetFromRaw(int, unsigned char *);
 
 extern unsigned char LAB_00103fd0; /* 0x103fd0 */
 
-/* Supplied declaration required: FUN_002ea0c8. */
+/* Supplied declaration required: onlineStringSetFromRaw. */
 
 
 void FUN_00103fa4(int param_1)
@@ -22,8 +22,8 @@ void FUN_00103fa4(int param_1)
   *(unsigned int *)(param_1 + 0x10) = 0;
   *(unsigned int *)(param_1 + 0x28) = 0;
   *(unsigned int *)(param_1 + 0x2c) = 0;
-  FUN_002ea0c8(param_1 + 0x14,&LAB_00103fd0);
-  FUN_002ea0c8(param_1 + 0x1c,&LAB_00103fd0);
+  onlineStringSetFromRaw(param_1 + 0x14,&LAB_00103fd0);
+  onlineStringSetFromRaw(param_1 + 0x1c,&LAB_00103fd0);
   return;
 }
 

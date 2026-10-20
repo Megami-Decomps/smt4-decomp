@@ -5,7 +5,7 @@ extern "C" {
 int FUN_00249a54(void);
 int scrSetResult(int result);
 int scrGetArg(...);
-extern int *FUN_002a8764(void);
+extern int *gameGetSlotTable(void);
 
 u32 FUN_002f73e0(void)
 {
@@ -14,7 +14,7 @@ u32 FUN_002f73e0(void)
 
     scrGetArg(1);
     FUN_00249a54();
-    party = FUN_002a8764();
+    party = gameGetSlotTable();
     scrSetResult(*party <= arg);
     return 1;
 }

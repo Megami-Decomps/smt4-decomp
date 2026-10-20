@@ -43,7 +43,7 @@ typedef struct {
 extern unsigned int DAT_00571168; /* 0x571168 */
 extern unsigned int DAT_0057116c; /* 0x57116c */
 
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 extern int FUN_003e8430(int);
 /* Supplied declaration required: FUN_004c579c. */
 /* Supplied declaration required: FUN_004c63f0. */
@@ -82,7 +82,7 @@ unsigned char FUN_004e76cc(int *param_1,unsigned int *param_2,int param_3)
   if (temp_v0 == 0) {
     temp_v5 = 0;
   }
-  temp_v0 = FUN_0018719c(0x591);
+  temp_v0 = gameFlagIsSet(0x591);
   if (((temp_v0 != 0) &&
       ((*(unsigned int *)param_2[8] & DAT_00571168) == 0 && (((unsigned int *)param_2[8])[1] & DAT_0057116c) == 0))
      && (0 < param_3)) {
@@ -91,7 +91,7 @@ unsigned char FUN_004e76cc(int *param_1,unsigned int *param_2,int param_3)
                  *(unsigned int *)(param_2[10] + 0xf8),0,0,0,0,1,0,0x1e,0,temp_v3,temp_v5,temp_v4,0xffffffff
                  ,1,0,1,1);
     FUN_004fb43c(10,param_2,0x1000223,0,0,0,0);
-    temp_v0 = FUN_0018719c(0x591);
+    temp_v0 = gameFlagIsSet(0x591);
     if ((temp_v0 != 0) && ((*param_2 & 0x20000) != 0)) {
       FUN_004fbeac(0x1e,param_2,0,0x45,1);
       *param_2 = *param_2 | 0x20000;

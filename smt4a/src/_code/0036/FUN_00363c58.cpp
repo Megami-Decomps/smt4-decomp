@@ -422,7 +422,7 @@ extern unsigned int DAT_005f1c9c; /* 0x5f1c9c */
 extern unsigned int DAT_005f1ca0; /* 0x5f1ca0 */
 extern unsigned int DAT_005f1ca4; /* 0x5f1ca4 */
 
-extern int FUN_00162e8c(unsigned int *);
+extern int gameFlagsGetBlock(unsigned int *);
 /* Supplied declaration required: FUN_00215904. */
 /* Supplied declaration required: sysMemClear. */
 extern unsigned long long FUN_00324f74(int);
@@ -838,7 +838,7 @@ void FUN_00363c58(int param_1)
   DAT_005f1ae4 = temp_v3;
   DAT_005f1ae8 = temp_v3;
   DAT_005f1aec = temp_v3;
-  temp_v0 = FUN_00162e8c(&g_gameState);
+  temp_v0 = gameFlagsGetBlock(&g_gameState);
   temp_v2 = 0;
   do {
     temp_v5 = FUN_00324f74(temp_v2);

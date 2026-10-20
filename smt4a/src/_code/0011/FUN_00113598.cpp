@@ -8,7 +8,7 @@ int strInit(unsigned char [12]);
 int initVtable00558630(unsigned char [12]);
 int FUN_002ec934(unsigned int, int, unsigned int);
 int strDestroy(unsigned char [12]);
-int FUN_002ee54c(unsigned char [8]);
+int sharedRefHolderDestroy2(unsigned char [8]);
 int FUN_002f6bfc(unsigned char [12], unsigned int, unsigned char [12]);
 int FUN_002fde5c(unsigned char [8]);
 int FUN_002fde8c(unsigned char [8], unsigned int, unsigned int);
@@ -26,7 +26,7 @@ typedef struct {
 /* Supplied declaration required: FUN_002ec934. */
 /* Supplied declaration required: strDestroy. */
 extern unsigned int FUN_002ecaee(unsigned int);
-/* Supplied declaration required: FUN_002ee54c. */
+/* Supplied declaration required: sharedRefHolderDestroy2. */
 /* Supplied declaration required: FUN_002f6bfc. */
 /* Supplied declaration required: FUN_002fde5c. */
 extern unsigned int FUN_002fde84(unsigned int);
@@ -59,7 +59,7 @@ void FUN_00113598(unsigned int param_1,unsigned int param_2,unsigned int param_3
   FUN_002f6bfc(temp_v8,temp_v3,temp_v4);
   FUN_002ec934(param_1,temp_v5 + temp_v7,temp_v6);
   strDestroy(temp_v4);
-  FUN_002ee54c(temp_v2);
+  sharedRefHolderDestroy2(temp_v2);
   return;
 }
 

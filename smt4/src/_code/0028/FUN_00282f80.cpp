@@ -73,7 +73,7 @@ extern int FUN_00313298(...); /* 0x313298 */
 extern int FUN_003132ec(...); /* 0x3132ec */
 extern int FUN_00313338(...); /* 0x313338 */
 extern int FUN_00313364(...); /* 0x313364 */
-extern int DAT_0043da90; /* 0x43da90 */
+extern int g_camp; /* 0x43da90 */
 
 /* Supplied declaration required: FUN_0027f3dc. */
 /* Supplied declaration required: FUN_0029ee54. */
@@ -94,7 +94,7 @@ void FUN_00282f80(int param_1)
   int temp_v5;
   int temp_v6;
   
-  temp_v3 = DAT_0043da90;
+  temp_v3 = g_camp;
   temp_v1 = FUN_002a0d0c();
   pbVar4 = (unsigned char *)0x0;
   temp_v4 = 0;

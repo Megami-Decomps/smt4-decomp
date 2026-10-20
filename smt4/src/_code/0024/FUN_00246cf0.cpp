@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002629a0(int, int);
-int FUN_002a03a0(int, int, int);
+int bgmStopNoForce(int, int);
+int soundChannelRequestIfEnabled(int, int, int);
 
-/* Supplied declaration required: FUN_002629a0. */
-/* Supplied declaration required: FUN_002a03a0. */
+/* Supplied declaration required: bgmStopNoForce. */
+/* Supplied declaration required: soundChannelRequestIfEnabled. */
 
 
 void FUN_00246cf0(int param_1,int param_2)
@@ -21,9 +21,9 @@ void FUN_00246cf0(int param_1,int param_2)
     temp_v0 = *(int *)(param_1 + 0x49d8);
     if (temp_v0 != param_2) {
       if (temp_v0 != -1) {
-        FUN_002629a0(temp_v0,0);
+        bgmStopNoForce(temp_v0,0);
       }
-      FUN_002a03a0(param_2,0,10);
+      soundChannelRequestIfEnabled(param_2,0,10);
       *(int *)(param_1 + 0x49d8) = param_2;
     }
     return;

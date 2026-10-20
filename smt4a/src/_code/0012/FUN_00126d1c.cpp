@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00126ba0(int *);
-int FUN_002e6dd4(int, int);
+int rt_memclr(int, int);
 int FUN_0030dce8(...);
 int FUN_0030dd02(...);
 int FUN_0030dd7e(int *, int, int);
@@ -21,7 +21,7 @@ typedef struct {
 extern int FUN_00126274(int *, int);
 extern int FUN_00126358(int *, int);
 /* Supplied declaration required: FUN_00126ba0. */
-/* Supplied declaration required: FUN_002e6dd4. */
+/* Supplied declaration required: rt_memclr. */
 extern int FUN_0030db5c(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0030dce8. */
 /* Supplied declaration required: FUN_0030dd02. */
@@ -424,7 +424,7 @@ LAB_00127200:
       if (param_2 != 1) {
         if ((param_2 != 5) && (FUN_0030dd7e(piVar13,0,0), param_2 == 3)) {
           *(unsigned short *)(piVar13[0x11] + (piVar13[0x13] * 2 - 2)) = 0;
-          FUN_002e6dd4(piVar13[0x11],piVar13[0x13] * 2 - 2);
+          rt_memclr(piVar13[0x11],piVar13[0x13] * 2 - 2);
           if (piVar13[0x1d] == 0) {
             piVar13[0x1b] = 0;
             piVar13[0x17] = 0;

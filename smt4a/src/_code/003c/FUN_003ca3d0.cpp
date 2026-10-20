@@ -11,12 +11,12 @@ int jobStop(...);
 int asdMemFree(...);
 int scrScriptProcessDestroy(...);
 int FUN_0019de98(...);
-int FUN_001add24(...);
+int dataTableFree(...);
 int FUN_002804b0(...);
-int FUN_002e3328(...);
-int FUN_00342010(...);
-int FUN_0037b450(...);
-int FUN_003f881c(...);
+int asdOperatorDelete(...);
+int campButtonHelpAcquire(...);
+int campButtonHelpRelease(...);
+int loadSlotRequestAsync(...);
 
 /* stack frame of void: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -36,15 +36,15 @@ extern unsigned int *DAT_00588130; /* 0x588130 */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_0019de98. */
-/* Supplied declaration required: FUN_001add24. */
+/* Supplied declaration required: dataTableFree. */
 extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_002804b0. */
-extern int FUN_002deb84(void);
-/* Supplied declaration required: FUN_002e3328. */
-/* Supplied declaration required: FUN_00342010. */
-/* Supplied declaration required: FUN_0037b450. */
-extern int FUN_003f86c8(unsigned int);
-/* Supplied declaration required: FUN_003f881c. */
+extern int scrGetCommandFrame(void);
+/* Supplied declaration required: asdOperatorDelete. */
+/* Supplied declaration required: campButtonHelpAcquire. */
+/* Supplied declaration required: campButtonHelpRelease. */
+extern int loadSlotIsLoaded(unsigned int);
+/* Supplied declaration required: loadSlotRequestAsync. */
 
 
 unsigned int FUN_003ca3d0(void)
@@ -56,7 +56,7 @@ unsigned int FUN_003ca3d0(void)
   unsigned int *puVar3;
   char *pcVar4;
   
-  temp_v0 = FUN_002deb84();
+  temp_v0 = scrGetCommandFrame();
   if (temp_v0 == 0) {
     temp_v1 = scrGetArg(0);
     puVar3 = (unsigned int *)0x50;
@@ -78,12 +78,12 @@ unsigned int FUN_003ca3d0(void)
     FUN_002804b0("npc_shop/SaintGermain/SaintGermain.mbm",puVar3 + 4,0);
     FUN_002804b0("npc_shop/SaintGermain/SaintGermain.bf",puVar3 + 5,0);
     *(unsigned char *)(puVar3 + 7) = 0;
-    temp_v0 = FUN_003f86c8(0x4f);
+    temp_v0 = loadSlotIsLoaded(0x4f);
     if (temp_v0 == 0) {
-      FUN_003f881c(0x4f,0);
+      loadSlotRequestAsync(0x4f,0);
       *(unsigned char *)(puVar3 + 7) = 1;
     }
-    FUN_00342010();
+    campButtonHelpAcquire();
     temp_v0 = 1;
     puVar3[3] = puVar3[1];
     puVar3[1] = 1;
@@ -99,7 +99,7 @@ unsigned int FUN_003ca3d0(void)
   else {
     if (DAT_00588130 != (unsigned int *)0x0) {
       FUN_0019de98(0,0xf4f4f4ff);
-      FUN_0037b450();
+      campButtonHelpRelease();
       if (puVar3[6] != 0) {
         scrScriptProcessDestroy();
         puVar3[6] = 0;
@@ -113,11 +113,11 @@ unsigned int FUN_003ca3d0(void)
         puVar3[5] = 0;
       }
       if (*(char *)(puVar3 + 7) != '\0') {
-        FUN_001add24(0x4f);
+        dataTableFree(0x4f);
       }
       jobStop(*puVar3,0);
       if (DAT_00588130 != (unsigned int *)0x0) {
-        FUN_002e3328();
+        asdOperatorDelete();
         DAT_00588130 = (unsigned int *)0x0;
       }
     }

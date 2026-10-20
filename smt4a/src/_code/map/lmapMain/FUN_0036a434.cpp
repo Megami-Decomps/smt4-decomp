@@ -42,7 +42,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_001418fc. */
 /* Supplied declaration required: FUN_0014f0dc. */
 /* Supplied declaration required: FUN_001523b8. */
-extern int FUN_00162e8c(void);
+extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
 /* Supplied declaration required: FUN_00275ffc. */
@@ -82,7 +82,7 @@ void FUN_0036a434(int param_1)
   float temp_v20;
   
   temp_v11 = (float)((unsigned long long)in_d8 >> 0x20);
-  temp_v1 = FUN_00162e8c();
+  temp_v1 = gameFlagsGetBlock();
   temp_v5 = *(int *)(param_1 + 0xcc) == 7;
   temp_v10 = 0.017453292f;
   puVar5 = g_lmapScene;

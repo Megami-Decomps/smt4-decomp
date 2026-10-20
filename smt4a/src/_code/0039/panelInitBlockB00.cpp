@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern PanelRef DAT_0057f588;
-extern s32 FUN_001654d8(u8 *block);
+extern PanelRef g_messageMain;
+extern s32 vec2GetXInt(u8 *block);
 
 void panelInitBlockB00(void)
 {
-    FUN_001654d8(DAT_0057f588.panel->blockB00);
+    vec2GetXInt(g_messageMain.panel->blockB00);
 }
 
 } /* extern "C" */

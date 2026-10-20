@@ -38,9 +38,9 @@ extern signed char DAT_005f1c70; /* 0x5f1c70 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-extern int FUN_00162e8c(void);
+extern int gameFlagsGetBlock(void);
 extern int FUN_00163fd4(unsigned int);
-extern int FUN_001656a0(unsigned int);
+extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
 extern unsigned int FUN_0029202c(void);
@@ -93,7 +93,7 @@ void FUN_0033982c(void)
   temp_v9 = 0;
   temp_v11 = 0;
   temp_v0 = 0;
-  temp_v1 = FUN_00162e8c();
+  temp_v1 = gameFlagsGetBlock();
   temp_v2 = DAT_005806a4;
   temp_v20 = 0.0f;
   temp_v18 = 1.0f;
@@ -128,9 +128,9 @@ void FUN_0033982c(void)
           temp_v7 = temp_v4 != 0;
           temp_v4 = FUN_00163fd4(7);
           temp_v8 = temp_v4 != 0;
-          temp_v4 = FUN_001656a0(4);
+          temp_v4 = padButtonIsPressed(4);
           temp_v9 = temp_v4 != 0;
-          temp_v4 = FUN_001656a0(3);
+          temp_v4 = padButtonIsPressed(3);
           if (temp_v4 != 0) {
             temp_v0 = 1;
           }
@@ -143,8 +143,8 @@ void FUN_0033982c(void)
         if (((temp_v10 && temp_v2 == 0) && (temp_v4 = lmapSceneGetUnk0(), temp_v4 == 1)) &&
            ((temp_v4 = FUN_004d0554(), temp_v4 != 0 ||
             (((temp_v4 = FUN_00163fd4(8), temp_v4 != 0 && (temp_v4 = FUN_00163fd4(7), temp_v4 != 0)) &&
-             ((temp_v4 = FUN_001656a0(8), temp_v4 == 0 &&
-              ((temp_v4 = FUN_001656a0(7), temp_v4 == 0 && (*(char *)(DAT_005806a4 + 0xb5) == '\0'))))))
+             ((temp_v4 = padButtonIsPressed(8), temp_v4 == 0 &&
+              ((temp_v4 = padButtonIsPressed(7), temp_v4 == 0 && (*(char *)(DAT_005806a4 + 0xb5) == '\0'))))))
             )))) {
           temp_v7 = 0;
           temp_v8 = 0;

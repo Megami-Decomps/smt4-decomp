@@ -28,7 +28,7 @@ extern unsigned int DAT_005739a4; /* 0x5739a4 */
 extern unsigned int DAT_00573ae8; /* 0x573ae8 */
 extern unsigned int DAT_00573aec; /* 0x573aec */
 
-extern unsigned int FUN_001ab888(void);
+extern unsigned int gameGetSlotTable(void);
 extern unsigned int FUN_001bce18(void);
 extern unsigned int FUN_00228ab0(int);
 /* Supplied declaration required: sysMemClear. */
@@ -64,7 +64,7 @@ void FUN_003ee138(int param_1)
   
   temp_v12 = param_1;
   if (DAT_00573938 != 0) {
-    temp_v3 = FUN_001ab888();
+    temp_v3 = gameGetSlotTable();
     rt_memcpy_w(DAT_00573938,temp_v3,0x2d30);
   }
   if (DAT_0057393c != 0) {
@@ -87,7 +87,7 @@ void FUN_003ee138(int param_1)
     rt_memcpy_w(*piVar14 + 13000,*piVar12 + 0x61e0,0x1d0);
   }
   if (DAT_0057392c != 0) {
-    temp_v3 = FUN_001ab888();
+    temp_v3 = gameGetSlotTable();
     rt_memcpy_w(temp_v3,DAT_0057392c,0x2d30);
   }
   if (DAT_00573930 != 0) {

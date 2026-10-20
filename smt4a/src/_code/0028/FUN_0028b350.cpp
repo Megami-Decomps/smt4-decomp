@@ -4,15 +4,15 @@
 
 extern "C" {
 
-int FUN_00184c00(...);
+int uiSpriteSetImageKeyframe(...);
 
-int FUN_0014bef4(...);
+int randRange(...);
 int FUN_0014e188(...);
 int FUN_001517b4(...);
 int FUN_00162ec0(...);
-int FUN_00184518(...);
-int FUN_001846d0(...);
-int FUN_00184b80(...);
+int pairSetSecondResetFirst(...);
+int uiSpriteSelectAnim(...);
+int pairSetFirstResetSecond(...);
 int FUN_0019dc70(void);
 int FUN_0019e330(...);
 int FUN_00202188(...);
@@ -31,19 +31,19 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } param_2_stack;
 
-extern unsigned char DAT_0057f588; /* 0x57f588 */
+extern unsigned char g_messageMain; /* 0x57f588 */
 extern unsigned short DAT_005e2058; /* 0x5e2058 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0014bef4. */
+/* Supplied declaration required: randRange. */
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: FUN_00162ec0. */
 extern int FUN_00163fd4(unsigned int);
-/* Supplied declaration required: FUN_00184518. */
-/* Supplied declaration required: FUN_001846d0. */
-/* Supplied declaration required: FUN_00184b80. */
-/* Supplied declaration required: FUN_00184c00. */
+/* Supplied declaration required: pairSetSecondResetFirst. */
+/* Supplied declaration required: uiSpriteSelectAnim. */
+/* Supplied declaration required: pairSetFirstResetSecond. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 extern int FUN_0019be8c(unsigned int);
 /* Supplied declaration required: FUN_0019dc70. */
 /* Supplied declaration required: FUN_0019e330. */
@@ -90,18 +90,18 @@ void FUN_0028b350(int param_1,int param_2)
   default:
     return;
   case 1:
-    FUN_00184b80(param_1 + 0x1b4,2000);
+    pairSetFirstResetSecond(param_1 + 0x1b4,2000);
     temp_v6 = 9;
     FUN_001517b4(9,2);
     if ((temp_v6 != 0) || (temp_v6 = FUN_00163fd4(6), temp_v6 != 0)) {
       *(unsigned char *)(param_1 + 0x239) = 1;
     }
     else {
-      FUN_001846d0(param_1 + 0x1b4,0);
+      uiSpriteSelectAnim(param_1 + 0x1b4,0);
     }
     FUN_00387240(param_1 + 0x1b4,8,0x7d4);
-    FUN_00184b80(param_1 + 0x3e4,7);
-    FUN_001846d0(param_1 + 0x3e4,4);
+    pairSetFirstResetSecond(param_1 + 0x3e4,7);
+    uiSpriteSelectAnim(param_1 + 0x3e4,4);
     FUN_00387240(param_1 + 0x3e4,8,0x47);
     return;
   case 2:
@@ -116,22 +116,22 @@ void FUN_0028b350(int param_1,int param_2)
     FUN_00202188(*(unsigned int *)(param_1 + 4),0,0,0x10,0xffffffff);
     temp_v0 = *(unsigned short *)(*(int *)(param_1 + 4) + 0x48);
     *(unsigned int *)(*(int *)(param_1 + 4) + 0x10) = temp_v11;
-    FUN_00184b80(param_1 + 0x1b4,2000);
+    pairSetFirstResetSecond(param_1 + 0x1b4,2000);
     FUN_00387240(param_1 + 0x1b4,8,0x7d4);
     if (temp_v0 < 3) {
-      FUN_00184518(param_1 + 0x2cc,0x1f);
+      pairSetSecondResetFirst(param_1 + 0x2cc,0x1f);
     }
     else if (temp_v0 < 5) {
-      FUN_00184518(param_1 + 0x2cc,0x1b);
+      pairSetSecondResetFirst(param_1 + 0x2cc,0x1b);
     }
     else if (temp_v0 < 7) {
-      FUN_00184518(param_1 + 0x2cc,0x1c);
+      pairSetSecondResetFirst(param_1 + 0x2cc,0x1c);
     }
     else if (temp_v0 < 9) {
-      FUN_00184518(param_1 + 0x2cc,0x1e);
+      pairSetSecondResetFirst(param_1 + 0x2cc,0x1e);
     }
     else {
-      FUN_00184518(param_1 + 0x2cc,0x1d);
+      pairSetSecondResetFirst(param_1 + 0x2cc,0x1d);
     }
     temp_v6 = 9;
     FUN_001517b4(9,2);
@@ -140,11 +140,11 @@ void FUN_0028b350(int param_1,int param_2)
       *(unsigned char *)(param_1 + 0x351) = 1;
     }
     else {
-      FUN_001846d0(param_1 + 0x1b4,0);
-      FUN_001846d0(param_1 + 0x2cc,1);
+      uiSpriteSelectAnim(param_1 + 0x1b4,0);
+      uiSpriteSelectAnim(param_1 + 0x2cc,1);
     }
-    FUN_00184b80(param_1 + 0x3e4,7);
-    FUN_001846d0(param_1 + 0x3e4,4);
+    pairSetFirstResetSecond(param_1 + 0x3e4,7);
+    uiSpriteSelectAnim(param_1 + 0x3e4,4);
     FUN_00387240(param_1 + 0x3e4,8,0x47);
     if (param_2 != 3) {
       if (param_2 != 0x11) {
@@ -154,64 +154,64 @@ void FUN_0028b350(int param_1,int param_2)
               if (param_2 != 0x13) {
                 return;
               }
-              FUN_00184b80(param_1 + 0x240,0x7dd);
+              pairSetFirstResetSecond(param_1 + 0x240,0x7dd);
               FUN_0019e330(param_1 + 0x240,1,0);
               FUN_003872b8(param_1 + 0x240,8,0x7e0,0x7dd);
             }
             else {
-              FUN_00184b80(param_1 + 0x240,0x7d2);
+              pairSetFirstResetSecond(param_1 + 0x240,0x7d2);
               FUN_0019e330(param_1 + 0x240,1,0);
               FUN_003872b8(param_1 + 0x240,8,0x7d6,0x7d2);
             }
           }
           else {
-            FUN_00184b80(param_1 + 0x240,0x7de);
+            pairSetFirstResetSecond(param_1 + 0x240,0x7de);
             FUN_0019e330(param_1 + 0x240,1,0);
             FUN_003872b8(param_1 + 0x240,8,0x7e1,0x7de);
           }
         }
         else {
-          FUN_00184b80(param_1 + 0x240,0x7d3);
+          pairSetFirstResetSecond(param_1 + 0x240,0x7d3);
           FUN_0019e330(param_1 + 0x240,1,0);
           FUN_003872b8(param_1 + 0x240,8,0x7d7,0x7d3);
         }
       }
       else {
-        FUN_00184b80(param_1 + 0x240,0x7dc);
+        pairSetFirstResetSecond(param_1 + 0x240,0x7dc);
         FUN_0019e330(param_1 + 0x240,1,0);
         FUN_003872b8(param_1 + 0x240,8,0x7df,0x7dc);
       }
     }
     else {
-      FUN_00184b80(param_1 + 0x240,0x7d1);
+      pairSetFirstResetSecond(param_1 + 0x240,0x7d1);
       FUN_0019e330(param_1 + 0x240,1,0);
       FUN_003872b8(param_1 + 0x240,8,0x7d5,0x7d1);
     }
     *(unsigned short *)(param_1 + 0x27a) = 2;
     return;
   case 6:
-    FUN_00184518(param_1 + 0x1b4,0x10);
+    pairSetSecondResetFirst(param_1 + 0x1b4,0x10);
     temp_v6 = 9;
     FUN_001517b4(9,2);
     if ((temp_v6 != 0) || (temp_v6 = FUN_00163fd4(6), temp_v6 != 0)) {
       *(unsigned char *)(param_1 + 0x239) = 1;
     }
     else {
-      FUN_001846d0(param_1 + 0x1b4,0);
+      uiSpriteSelectAnim(param_1 + 0x1b4,0);
     }
     FUN_00387240(param_1 + 0x1b4,8,0x111);
     *(unsigned char *)(param_1 + 0x1f0) = 1;
     *(unsigned short *)(param_1 + 0x1ee) = 2;
-    FUN_00184b80(param_1 + 0x3e4,7);
-    FUN_001846d0(param_1 + 0x3e4,4);
+    pairSetFirstResetSecond(param_1 + 0x3e4,7);
+    uiSpriteSelectAnim(param_1 + 0x3e4,4);
     FUN_00387240(param_1 + 0x3e4,8,0x47);
     return;
   case 7:
   case 8:
-    FUN_00184518(param_1 + 0x1b4,6);
+    pairSetSecondResetFirst(param_1 + 0x1b4,6);
     FUN_00387240(param_1 + 0x1b4,8,0x36);
     *(unsigned char *)(param_1 + 0x1f0) = 1;
-    FUN_00184518(temp_v6,7);
+    pairSetSecondResetFirst(temp_v6,7);
     FUN_00387240(temp_v6,8,0x36);
     *(unsigned char *)(param_1 + 0x538) = 1;
     temp_v7 = 9;
@@ -220,20 +220,20 @@ void FUN_0028b350(int param_1,int param_2)
       temp_v7 = FUN_00163fd4(6);
 joined_r0x0028baa4:
       if (temp_v7 == 0) {
-        FUN_001846d0(param_1 + 0x1b4,3);
-        FUN_001846d0(temp_v6,3);
-        FUN_00184b80(param_1 + 0x3e4,7);
-        FUN_001846d0(param_1 + 0x3e4,4);
+        uiSpriteSelectAnim(param_1 + 0x1b4,3);
+        uiSpriteSelectAnim(temp_v6,3);
+        pairSetFirstResetSecond(param_1 + 0x3e4,7);
+        uiSpriteSelectAnim(param_1 + 0x3e4,4);
         FUN_00387240(param_1 + 0x3e4,8,0x47);
         return;
       }
     }
     break;
   case 9:
-    FUN_00184518(param_1 + 0x1b4,4);
+    pairSetSecondResetFirst(param_1 + 0x1b4,4);
     FUN_00387240(param_1 + 0x1b4,8,0x22);
     *(unsigned char *)(param_1 + 0x1f0) = 1;
-    FUN_00184518(temp_v6,5);
+    pairSetSecondResetFirst(temp_v6,5);
     FUN_00387240(temp_v6,8,0x36);
     *(unsigned char *)(param_1 + 0x538) = 1;
     temp_v7 = 9;
@@ -244,27 +244,27 @@ joined_r0x0028baa4:
     }
     break;
   case 10:
-    FUN_00184518(param_1 + 0x1b4,2);
+    pairSetSecondResetFirst(param_1 + 0x1b4,2);
     temp_v6 = 9;
     FUN_001517b4(9,2);
     if ((temp_v6 != 0) || (temp_v6 = FUN_00163fd4(6), temp_v6 != 0)) {
       *(unsigned char *)(param_1 + 0x239) = 1;
     }
     else {
-      FUN_001846d0(param_1 + 0x1b4,5);
+      uiSpriteSelectAnim(param_1 + 0x1b4,5);
     }
     FUN_00387240(param_1 + 0x1b4,8,0x15);
     *(unsigned char *)(param_1 + 0x1f0) = 1;
     return;
   case 0xb:
-    FUN_00184518(param_1 + 0x1b4,0xb);
-    FUN_001846d0(param_1 + 0x1b4,6);
-    FUN_00184518(param_1 + 0x358,0xf);
-    FUN_001846d0(param_1 + 0x358,6);
-    FUN_00184b80(param_1 + 0x470,0xc);
-    FUN_001846d0(param_1 + 0x470,9);
-    FUN_00184518(temp_v7,0x1a);
-    FUN_001846d0(temp_v7,4);
+    pairSetSecondResetFirst(param_1 + 0x1b4,0xb);
+    uiSpriteSelectAnim(param_1 + 0x1b4,6);
+    pairSetSecondResetFirst(param_1 + 0x358,0xf);
+    uiSpriteSelectAnim(param_1 + 0x358,6);
+    pairSetFirstResetSecond(param_1 + 0x470,0xc);
+    uiSpriteSelectAnim(param_1 + 0x470,9);
+    pairSetSecondResetFirst(temp_v7,0x1a);
+    uiSpriteSelectAnim(temp_v7,4);
     *(unsigned int *)(param_1 + 0x1a18) = 0;
     *(unsigned int *)(param_1 + 0x1a1c) = 0;
     *(unsigned int *)(param_1 + 0x1a20) = 0;
@@ -297,7 +297,7 @@ joined_r0x0028baa4:
     else {
       *(unsigned char *)(param_1 + 0x3c) = 0;
       *(unsigned char *)(param_1 + 0x3d) = 1;
-      temp_v3 = FUN_0014bef4(99);
+      temp_v3 = randRange(99);
       *(unsigned char *)(param_1 + 0x3e) = (temp_v3 & 1) + 2;
       *(unsigned char *)(param_1 + 0x3f) = 4;
     }
@@ -305,10 +305,10 @@ joined_r0x0028baa4:
     temp_v7 = 0;
     if (0 < temp_v6) {
       do {
-        temp_v4 = FUN_0014bef4(10);
+        temp_v4 = randRange(10);
         *(unsigned char *)(param_1 + temp_v7 + 0x46) = temp_v4;
-        temp_v6 = FUN_0014bef4((*(int *)(param_1 + 0x24) - 1U) & 0xffff);
-        temp_v8 = FUN_0014bef4((*(int *)(param_1 + 0x24) - 1U) & 0xffff);
+        temp_v6 = randRange((*(int *)(param_1 + 0x24) - 1U) & 0xffff);
+        temp_v8 = randRange((*(int *)(param_1 + 0x24) - 1U) & 0xffff);
         temp_v4 = *(unsigned char *)(temp_v6 + param_1 + 0x3c);
         temp_v7 = temp_v7 + 1;
         *(unsigned char *)(temp_v6 + param_1 + 0x3c) = *(unsigned char *)(temp_v8 + param_1 + 0x3c);
@@ -368,8 +368,8 @@ LAB_0028bd98:
     }
     temp_v6 = 0;
     do {
-      temp_v7 = FUN_0014bef4(4);
-      temp_v8 = FUN_0014bef4(4);
+      temp_v7 = randRange(4);
+      temp_v8 = randRange(4);
       temp_v9 = temp_v14[temp_v7];
       temp_v6 = temp_v6 + 1;
       temp_v14[temp_v7] = temp_v14[temp_v8];
@@ -380,14 +380,14 @@ LAB_0028bd98:
       *(unsigned char *)(param_1 + temp_v6 + 0x37) = 0;
       temp_v7 = param_1 + temp_v6 * 0x8c + 0x588;
       FUN_0014e188(temp_v7,8,0xffffffff,param_1 + 0x194,0xb);
-      FUN_00184b80(temp_v7,0x8b);
-      FUN_00184c00(temp_v7,4,0);
+      pairSetFirstResetSecond(temp_v7,0x8b);
+      uiSpriteSetImageKeyframe(temp_v7,4,0);
       FUN_0019e330(temp_v7,6,0);
       FUN_00387240(temp_v7,8,temp_v14[temp_v6] + 0x8f);
       temp_v6 = temp_v6 + 1;
     } while (temp_v6 < 5);
     *(unsigned char *)(param_1 + 0x46) = 0;
-    *(unsigned int *)((*(int *)((unsigned char *)&DAT_0057f588 + 0xc)) + 0x28) = 0;
+    *(unsigned int *)((*(int *)((unsigned char *)&g_messageMain + 0xc)) + 0x28) = 0;
     return;
   case 0xd:
     *(unsigned char *)(param_1 + 0x5d) = 0;
@@ -411,24 +411,24 @@ LAB_0028bd98:
     temp_v2 = *(short *)(param_1 + 0x56);
     temp_v7 = param_1 + temp_v2 * 0x8c + 0x844;
     FUN_0014e188(temp_v7,8,0xffffffff,param_1 + 0x194,0xb);
-    FUN_00184b80(temp_v7,0x8b);
-    FUN_00184c00(temp_v7,4,0);
+    pairSetFirstResetSecond(temp_v7,0x8b);
+    uiSpriteSetImageKeyframe(temp_v7,4,0);
     FUN_0019e330(temp_v7,6,0);
     FUN_00387240(temp_v7,8,temp_v6 + temp_v2);
     *(unsigned char *)(param_1 + 0x5e) = 0;
-    *(unsigned short *)((*(int *)((unsigned char *)&DAT_0057f588 + 0xc)) + 0x58) = 0;
+    *(unsigned short *)((*(int *)((unsigned char *)&g_messageMain + 0xc)) + 0x58) = 0;
     *(unsigned short *)(param_1 + 0x62) = 0;
     return;
   case 0x14:
     FUN_0014e188(param_1 + 0x1b4,0x2f,0xffffffff,param_1 + 0x194,0xb);
-    FUN_00184518(param_1 + 0x1b4,0x10);
-    FUN_001846d0(param_1 + 0x1b4,6);
+    pairSetSecondResetFirst(param_1 + 0x1b4,0x10);
+    uiSpriteSelectAnim(param_1 + 0x1b4,6);
     return;
   }
   *(unsigned char *)(param_1 + 0x239) = 1;
   *(unsigned char *)(param_1 + 0x581) = 1;
-  FUN_00184b80(param_1 + 0x3e4,7);
-  FUN_001846d0(param_1 + 0x3e4,4);
+  pairSetFirstResetSecond(param_1 + 0x3e4,7);
+  uiSpriteSelectAnim(param_1 + 0x3e4,4);
   FUN_00387240(param_1 + 0x3e4,8,0x47);
   return;
 }

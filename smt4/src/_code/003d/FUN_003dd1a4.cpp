@@ -14,7 +14,7 @@ int btlGetMainState(...);
 int FUN_00297468(...);
 int FUN_002a0428(...);
 int FUN_002be624(...);
-int FUN_002bf694(...);
+int libc_strcpy(...);
 int memClear(...);
 int FUN_002d582c(...);
 int FUN_003da0ec(...);
@@ -47,7 +47,7 @@ extern int FUN_002522e0(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002a0428. */
 extern int FUN_002adee0(unsigned int);
 /* Supplied declaration required: FUN_002be624. */
-/* Supplied declaration required: FUN_002bf694. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: FUN_002d582c. */
 extern int FUN_002d8214(void);
@@ -216,10 +216,10 @@ LAB_003dd4ac:
       memClear(temp_v8,0x80);
       memClear(temp_v10,0x80);
       FUN_002be624(temp_v10,"battle/effect/%s.eft","ef_e_ref" + temp_v2 * 0x20);
-      FUN_002bf694(temp_v8,temp_v10);
+      libc_strcpy(temp_v8,temp_v10);
       temp_v3 = param_1 + temp_v2 * 0x8c;
       temp_v4 = FUN_002522e0(temp_v8,0x2f);
-      FUN_002bf694(temp_v3 + 0x25c8,temp_v4 + 1);
+      libc_strcpy(temp_v3 + 0x25c8,temp_v4 + 1);
       temp_v4 = FUN_0024a808(temp_v3 + 0x25c8);
       if (temp_v4 == 0xff) {
         FUN_00297468(temp_v8,temp_v3 + 0x25c4,0);

@@ -1,4 +1,4 @@
-/* The input state block returned by FUN_002b63ac(). */
+/* The input state block returned by gameGetPlayerData(). */
 #ifndef SHARD_PADSTATE_H
 #define SHARD_PADSTATE_H
 

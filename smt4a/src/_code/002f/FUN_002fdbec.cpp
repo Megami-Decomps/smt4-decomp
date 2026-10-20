@@ -17,7 +17,7 @@ typedef struct {
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-extern int FUN_002f34ac(unsigned int *, unsigned int);
+extern int onlineSockAddrEquals(unsigned int *, unsigned int);
 extern int wordRefsDiffer_002fd750(unsigned int **, unsigned int **);
 /* Supplied declaration required: FUN_00307d38. */
 
@@ -39,7 +39,7 @@ unsigned long long FUN_002fdbec(int param_1,unsigned int param_2,unsigned int *p
   uStack_14 = param_4;
   while (temp_v1 = puVar2, temp_v0 = wordRefsDiffer_002fd750(&temp_v1,&temp_v2), temp_v0 != 0) {
     puVar2 = (unsigned int *)*temp_v1;
-    temp_v0 = FUN_002f34ac(temp_v1 + 2,param_2);
+    temp_v0 = onlineSockAddrEquals(temp_v1 + 2,param_2);
     if (temp_v0 != 0) {
       temp_v3 = temp_v1;
       FUN_00307d38(&uStack_14,param_1,&temp_v3);

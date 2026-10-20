@@ -9,7 +9,7 @@ int FUN_003fd924(unsigned int, int, int);
 int FUN_0040aad4(int, int);
 int FUN_0040ace8(unsigned int, unsigned int);
 
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern int g_lmapMainState; /* 0x580238 */
 
 /* Supplied declaration required: FUN_003fd7c0. */
@@ -39,7 +39,7 @@ void FUN_00328794(void)
           FUN_0040aad4(temp_v1,0);
         }
         temp_v4 = *(unsigned int *)(*(int *)(temp_v3 + 0xa54) + 4);
-        FUN_0040ace8(DAT_0056fcc0,temp_v4);
+        FUN_0040ace8(g_handleRegistry,temp_v4);
         FUN_003fd924(temp_v4,0,2);
         FUN_003fd7c0(temp_v4,0,2);
       }

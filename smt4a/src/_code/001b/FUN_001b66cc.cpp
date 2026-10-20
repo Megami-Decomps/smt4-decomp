@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_4_stack;
 
-extern unsigned int *DAT_005b40e0; /* 0x5b40e0 */
+extern unsigned int *g_commandBufferCursor; /* 0x5b40e0 */
 
 /* Supplied declaration required: FUN_001bc730. */
 /* Supplied declaration required: FUN_001bc768. */
@@ -60,7 +60,7 @@ void FUN_001b66cc(int param_1,int param_2,int param_3,int param_4)
   temp_v6 = 0;
   if (temp_v6 < param_4) {
     do {
-      puVar1 = DAT_005b40e0;
+      puVar1 = g_commandBufferCursor;
       temp_v3 = *(int *)(temp_v8 + 0x1c);
       if (*(int *)(param_3 + 4) != 0) {
         temp_v2 = param_3 + 4 + *(int *)(param_3 + 4);
@@ -92,19 +92,19 @@ void FUN_001b66cc(int param_1,int param_2,int param_3,int param_4)
       }
       temp_v3 = *(int *)(temp_v3 + 4);
       if (temp_v6 != 0) {
-        FUN_001bc730(DAT_005b40e0);
-        DAT_005b40e0 = DAT_005b40e0 + 0xc;
+        FUN_001bc730(g_commandBufferCursor);
+        g_commandBufferCursor = g_commandBufferCursor + 0xc;
       }
       else {
-        *DAT_005b40e0 = 0x80000019;
+        *g_commandBufferCursor = 0x80000019;
         puVar1[1] = 0xf02c0;
         FUN_001bc768(puVar1 + 2,temp_v3 + temp_v2 * 0x30,(param_4 * 0xc00000 - 0x100000U) | 0xf02c1);
-        DAT_005b40e0 = DAT_005b40e0 + 0xf;
+        g_commandBufferCursor = g_commandBufferCursor + 0xf;
       }
       temp_v6 = temp_v6 + 1;
     } while (temp_v6 < param_4);
   }
-  DAT_005b40e0 = DAT_005b40e0 + 1;
+  g_commandBufferCursor = g_commandBufferCursor + 1;
   return;
 }
 

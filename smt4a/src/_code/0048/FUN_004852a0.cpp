@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00163aa4(int);
 int FUN_00167458(int, int);
-int FUN_004853fc(int, int);
+int stateSetterEnterState(int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -14,9 +14,9 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_00163aa4. */
-extern unsigned int FUN_001654d8(int);
+extern unsigned int vec2GetXInt(int);
 /* Supplied declaration required: FUN_00167458. */
-/* Supplied declaration required: FUN_004853fc. */
+/* Supplied declaration required: stateSetterEnterState. */
 
 
 void FUN_004852a0(int param_1)
@@ -27,11 +27,11 @@ void FUN_004852a0(int param_1)
   
   FUN_00167458(param_1 + 800,0);
   FUN_00163aa4(param_1 + 0x3ac);
-  temp_v0 = FUN_001654d8(param_1 + 800);
+  temp_v0 = vec2GetXInt(param_1 + 800);
   *(unsigned int *)(param_1 + 0xa4) = temp_v0;
   *(unsigned int *)(param_1 + 0xac) = temp_v0;
   if ((*(char *)(param_1 + 0x3aa) != '\0') && (*(char *)(param_1 + 0x436) != '\0')) {
-    FUN_004853fc(param_1,2);
+    stateSetterEnterState(param_1,2);
     return;
   }
   return;

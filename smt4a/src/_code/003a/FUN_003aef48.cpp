@@ -33,8 +33,8 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00152cf8. */
-extern int FUN_00164af0(unsigned int);
-extern int FUN_001656a0(unsigned int);
+extern int padButtonRepeat(unsigned int);
+extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: FUN_00167c14. */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_001834a4. */
@@ -287,7 +287,7 @@ unsigned int FUN_003aef48(int param_1)
       temp_v1 = *(int *)(param_1 + 0x120);
     }
     if ((!(temp_v12 || temp_v1 != 0)) &&
-       ((temp_v1 = FUN_001656a0(5), temp_v1 != 0 || (temp_v1 = FUN_001656a0(0xe), temp_v1 != 0)))) {
+       ((temp_v1 = padButtonIsPressed(5), temp_v1 != 0 || (temp_v1 = padButtonIsPressed(0xe), temp_v1 != 0)))) {
       temp_v1 = *(int *)(param_1 + 0x124);
       if (temp_v1 >= 0xc) {
         *(int *)(param_1 + 0x120) = temp_v1 - 0xb;
@@ -302,15 +302,15 @@ unsigned int FUN_003aef48(int param_1)
       *(int *)(param_1 + 0x118) = temp_v1;
     }
     else if (((*(int *)(param_1 + 0x120) + *(int *)(param_1 + 0x128)) - *(int *)(param_1 + 0x124) ==
-              -1) && ((temp_v1 = FUN_001656a0(6), temp_v1 != 0 ||
-                      (temp_v1 = FUN_001656a0(0xf), temp_v1 != 0)))) {
+              -1) && ((temp_v1 = padButtonIsPressed(6), temp_v1 != 0 ||
+                      (temp_v1 = padButtonIsPressed(0xf), temp_v1 != 0)))) {
       *(unsigned int *)(param_1 + 0x120) = 0;
       *(unsigned int *)(param_1 + 0x128) = 0;
       *(unsigned int *)(param_1 + 0x118) = 0;
     }
     else {
-      temp_v1 = FUN_00164af0(5);
-      if ((temp_v1 != 0) || (temp_v1 = FUN_00164af0(0xe), temp_v1 != 0)) {
+      temp_v1 = padButtonRepeat(5);
+      if ((temp_v1 != 0) || (temp_v1 = padButtonRepeat(0xe), temp_v1 != 0)) {
         if (0 < *(int *)(param_1 + 0x118)) {
           *(int *)(param_1 + 0x118) = *(int *)(param_1 + 0x118) - 1;
         }
@@ -330,8 +330,8 @@ unsigned int FUN_003aef48(int param_1)
         }
       }
       else {
-        temp_v1 = FUN_00164af0(6);
-        if ((temp_v1 != 0) || (temp_v1 = FUN_00164af0(0xf), temp_v1 != 0)) {
+        temp_v1 = padButtonRepeat(6);
+        if ((temp_v1 != 0) || (temp_v1 = padButtonRepeat(0xf), temp_v1 != 0)) {
           temp_v6 = *(int *)(param_1 + 0x124);
           if (*(int *)(param_1 + 0x118) < temp_v6) {
             *(int *)(param_1 + 0x118) = *(int *)(param_1 + 0x118) + 1;
@@ -355,8 +355,8 @@ unsigned int FUN_003aef48(int param_1)
           }
         }
         else {
-          temp_v1 = FUN_00164af0(3);
-          if ((temp_v1 != 0) || (temp_v1 = FUN_00164af0(0xc), temp_v1 != 0)) {
+          temp_v1 = padButtonRepeat(3);
+          if ((temp_v1 != 0) || (temp_v1 = padButtonRepeat(0xc), temp_v1 != 0)) {
             temp_v1 = *(int *)(param_1 + 0x124);
             if (temp_v1 <= *(int *)(param_1 + 0x120) + 0xb) {
               if (temp_v1 >= 0xc) {
@@ -390,8 +390,8 @@ unsigned int FUN_003aef48(int param_1)
             }
           }
           else {
-            temp_v1 = FUN_00164af0(4);
-            if ((temp_v1 != 0) || (temp_v1 = FUN_00164af0(0xd), temp_v1 != 0)) {
+            temp_v1 = padButtonRepeat(4);
+            if ((temp_v1 != 0) || (temp_v1 = padButtonRepeat(0xd), temp_v1 != 0)) {
               if (*(int *)(param_1 + 0x120) < 1) {
                 *(unsigned int *)(param_1 + 0x128) = 0;
                 *(unsigned int *)(param_1 + 0x118) = 0;
@@ -449,7 +449,7 @@ unsigned int FUN_003aef48(int param_1)
                    *(unsigned int *)(param_1 + 0x58));
       FUN_003d2150(0x100020d);
     }
-    temp_v1 = FUN_001656a0(0);
+    temp_v1 = padButtonIsPressed(0);
     if (temp_v1 == 0) {
       temp_v6 = FUN_002e1a18(1);
       temp_v1 = temp_v6;
@@ -457,7 +457,7 @@ unsigned int FUN_003aef48(int param_1)
         temp_v1 = temp_v22;
       }
       if (temp_v6 != 0 || temp_v1 != 0) goto LAB_003af720;
-      temp_v1 = FUN_001656a0(1);
+      temp_v1 = padButtonIsPressed(1);
       if ((temp_v1 != 0) || (temp_v1 = FUN_002e1a18(2), temp_v1 != 0)) {
         FUN_002844e4();
         temp_v1 = *(int *)(param_1 + 0x14c);

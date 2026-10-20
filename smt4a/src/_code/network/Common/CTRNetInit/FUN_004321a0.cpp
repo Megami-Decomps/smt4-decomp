@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00195fc8(void);
+int sysFatalBreak(void);
 int asdMemFree(void);
 int software_interrupt(int);
 
@@ -12,7 +12,7 @@ extern int DAT_00588114; /* 0x588114 */
 extern int DAT_00588118; /* 0x588118 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_00195fc8. */
+/* Supplied declaration required: sysFatalBreak. */
 /* Supplied declaration required: asdMemFree. */
 extern unsigned int FUN_00441e1c(void);
 
@@ -30,7 +30,7 @@ unsigned int FUN_004321a0(void)
   }
   temp_v0 = FUN_00441e1c();
   if ((int)temp_v0 < 0) {
-    FUN_00195fc8();
+    sysFatalBreak();
   }
   if ((temp_v0 & 0x80000000) != 0) {
     temp_v1 = 0;

@@ -10,11 +10,11 @@ typedef struct Object {
     /* 0x634 */ u32 flags;
 } Object;
 
-extern void FUN_002544ac(void *timer, s16 frames, s32 arg);
+extern void rangeInit(void *timer, s16 frames, s32 arg);
 
 void FUN_003d6df0(Object *obj, float unused0, float unused1, float frames)
 {
-    FUN_002544ac(obj->timer, (s16)(s32)frames, 0);
+    rangeInit(obj->timer, (s16)(s32)frames, 0);
     obj->flags |= 0x400000;
 }
 

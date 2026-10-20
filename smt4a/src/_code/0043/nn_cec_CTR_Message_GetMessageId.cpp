@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001a9110(...);
+int wordPairCopy(...);
 int clearTwoWords(void);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_001a9110. */
+/* Supplied declaration required: wordPairCopy. */
 extern unsigned int releaseOrCopyHandle(unsigned char *, int);
 /* Supplied declaration required: clearTwoWords. */
 
@@ -26,10 +26,10 @@ unsigned int nn_cec_CTR_Message_GetMessageId(unsigned int param_1,int param_2,in
   
   if (param_3 != 0) {
     temp_v0 = releaseOrCopyHandle(temp_v1,param_2 + 0x20);
-    FUN_001a9110(param_3,temp_v0);
+    wordPairCopy(param_3,temp_v0);
   }
   if (param_2 != -0x20) {
-    FUN_001a9110();
+    wordPairCopy();
   }
   else {
     clearTwoWords();

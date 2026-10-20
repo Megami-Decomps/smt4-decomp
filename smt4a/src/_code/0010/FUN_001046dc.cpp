@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002ea3f4(unsigned int *);
+int onlineHandleClose(unsigned int *);
 int FUN_002ea614(unsigned int *);
 
 extern unsigned char DAT_005585e0; /* 0x5585e0 */
 
-/* Supplied declaration required: FUN_002ea3f4. */
+/* Supplied declaration required: onlineHandleClose. */
 /* Supplied declaration required: FUN_002ea614. */
 
 
@@ -19,10 +19,10 @@ void FUN_001046dc(unsigned int *param_1)
 /* irregular: 2 native warning(s); review required */
   *param_1 = (unsigned int)&DAT_005585e0;
   if (*(char *)(param_1 + 0x47) != '\0') {
-    FUN_002ea3f4(param_1 + 0x46);
+    onlineHandleClose(param_1 + 0x46);
     *(unsigned char *)(param_1 + 0x47) = 0;
   }
-  FUN_002ea3f4(param_1 + 0x46);
+  onlineHandleClose(param_1 + 0x46);
   FUN_002ea614(param_1);
   return;
 }

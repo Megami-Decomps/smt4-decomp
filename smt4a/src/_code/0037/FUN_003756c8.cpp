@@ -18,8 +18,8 @@ extern unsigned int DAT_00573a28; /* 0x573a28 */
 extern unsigned int DAT_00573a2c; /* 0x573a2c */
 
 /* Supplied declaration required: sysPlaySe. */
-extern int FUN_0018719c(unsigned int);
-extern int FUN_003e46f4(unsigned int);
+extern int gameFlagIsSet(unsigned int);
+extern int gameDataFlagTestBit(unsigned int);
 
 
 void FUN_003756c8(int param_1)
@@ -32,14 +32,14 @@ void FUN_003756c8(int param_1)
       (DAT_005739f4 & *(unsigned int *)(g_btlMain + 0x45a4)) == 0) {
     if ((*(unsigned int *)(g_btlMain + 0x45a4) & DAT_00573a2c) == 0 &&
         (*(unsigned int *)(g_btlMain + 0x45a0) & DAT_00573a28) == 0) {
-      temp_v0 = FUN_0018719c(0x525);
+      temp_v0 = gameFlagIsSet(0x525);
       if (temp_v0 != 0) {
         sysPlaySe(0xe7);
         return;
       }
-      temp_v0 = FUN_003e46f4(0x10);
+      temp_v0 = gameDataFlagTestBit(0x10);
       if (temp_v0 == 0) {
-        temp_v0 = FUN_003e46f4(0x7f);
+        temp_v0 = gameDataFlagTestBit(0x7f);
         if (temp_v0 == 0) {
           if (param_1 != 0) {
             sysPlaySe(0xc9);
@@ -55,7 +55,7 @@ void FUN_003756c8(int param_1)
         sysPlaySe(0x39);
         return;
       }
-      temp_v0 = FUN_003e46f4(0x7f);
+      temp_v0 = gameDataFlagTestBit(0x7f);
       if (temp_v0 == 0) {
         if (param_1 != 0) {
           sysPlaySe(200);
@@ -72,12 +72,12 @@ void FUN_003756c8(int param_1)
       return;
     }
   }
-  temp_v0 = FUN_0018719c(0x525);
+  temp_v0 = gameFlagIsSet(0x525);
   if (temp_v0 != 0) {
     sysPlaySe(0xe6);
     return;
   }
-  temp_v0 = FUN_003e46f4(0x10);
+  temp_v0 = gameDataFlagTestBit(0x10);
   if (temp_v0 != 0) {
     sysPlaySe(0xb5);
     return;

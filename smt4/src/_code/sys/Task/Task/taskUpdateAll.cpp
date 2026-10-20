@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_0028ec84(Task *task);
+void nodeTreeRelease(Task *task);
 void taskListUpdate(u8 list);
 
 /* Visits every task of every list, then runs each list's update. */
@@ -13,7 +13,7 @@ void taskUpdateAll(void)
 
     for (i = 0; i < TASK_LIST_COUNT; i++) {
         for (task = taskGetList(i)->head; task != NULL; task = task->next) {
-            FUN_0028ec84(task);
+            nodeTreeRelease(task);
         }
     }
     for (i = 0; i < TASK_LIST_COUNT; i++) {

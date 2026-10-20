@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001641b4(int);
 int FUN_00169548(int);
 int FUN_00224880(unsigned int);
-int FUN_00275f44(unsigned int, unsigned int);
+int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int obj04Finish(void);
 int FUN_00474734(unsigned int *, int);
 int FUN_00476e58(unsigned int *, int, int);
@@ -29,15 +29,15 @@ extern int g_aocMain; /* 0x570260 */
 
 /* Supplied declaration required: FUN_001641b4. */
 /* Supplied declaration required: FUN_00169548. */
-extern int FUN_001d10ac(unsigned int *);
+extern int byteIsAtLeast100(unsigned int *);
 /* Supplied declaration required: FUN_00224880. */
 extern int FUN_0026272c(void);
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002e19f8(void);
 extern int FUN_002e1a18(unsigned int);
 extern int panelIsMissingOrFlagClear(void);
 /* Supplied declaration required: obj04Finish. */
-extern unsigned int FUN_00357bc8(unsigned int, unsigned char *);
+extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_00474734. */
 /* Supplied declaration required: FUN_00476e58. */
 /* Supplied declaration required: FUN_00477d10. */
@@ -76,8 +76,8 @@ void FUN_00478edc(unsigned int *param_1)
       if (temp_v0 == 0) {
         *param_1 = *param_1 | 0x10000;
         FUN_0047bcdc(param_1,3);
-        temp_v2 = FUN_00357bc8(param_1[0xd4],&LAB_004791a8);
-        FUN_00275f44(param_1[0xd6],temp_v2);
+        temp_v2 = tableGroupFindEntryIndex(param_1[0xd4],&LAB_004791a8);
+        scrScriptProcessStartEntry(param_1[0xd6],temp_v2);
         param_1[2] = 1;
         FUN_00477d10(param_1,0xffffffff,0);
         return;
@@ -98,7 +98,7 @@ void FUN_00478edc(unsigned int *param_1)
             param_1[2] = 3;
           }
           else {
-            temp_v1 = FUN_001d10ac(&temp_v4);
+            temp_v1 = byteIsAtLeast100(&temp_v4);
             if (temp_v1 != 0) {
               jobFlagsWorkStop(param_1);
               obj04Finish();
@@ -162,8 +162,8 @@ void FUN_00478edc(unsigned int *param_1)
   else {
     temp_v1 = FUN_0026272c();
     if (temp_v1 != 0) {
-      temp_v2 = FUN_00357bc8(param_1[0xd4],&LAB_004791c4);
-      FUN_00275f44(param_1[0xd6],temp_v2);
+      temp_v2 = tableGroupFindEntryIndex(param_1[0xd4],&LAB_004791c4);
+      scrScriptProcessStartEntry(param_1[0xd6],temp_v2);
       FUN_00169548(0);
       FUN_00477d10(param_1,3,1);
       temp_v0 = 4;

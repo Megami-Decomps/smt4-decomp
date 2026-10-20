@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_0022a478(char *, int);
 int FUN_00298d64(char *, int);
-int FUN_002992bc(char *, int);
-int FUN_0029d620(char *, int);
+int flaggedEntrySetValueB(char *, int);
+int flaggedEntrySetValueA(char *, int);
 int FUN_0029f848(...);
 
 /* stack frame of param_6: 2 slot(s), 8 byte(s) */
@@ -18,8 +18,8 @@ typedef struct {
 
 /* Supplied declaration required: FUN_0022a478. */
 /* Supplied declaration required: FUN_00298d64. */
-/* Supplied declaration required: FUN_002992bc. */
-/* Supplied declaration required: FUN_0029d620. */
+/* Supplied declaration required: flaggedEntrySetValueB. */
+/* Supplied declaration required: flaggedEntrySetValueA. */
 /* Supplied declaration required: FUN_0029f848. */
 
 
@@ -41,11 +41,11 @@ void FUN_00233730(char *param_1,unsigned int param_2,unsigned int param_3,unsign
   *param_1 = (char)param_4;
   if ((param_4 & 0xff) == 0) {
     FUN_00298d64(param_1 + 0x10,0);
-    FUN_0029d620(param_1 + 0x10,0);
+    flaggedEntrySetValueA(param_1 + 0x10,0);
   }
   if (*param_1 == '\x01') {
     FUN_0022a478(param_1 + 0x10,0);
-    FUN_002992bc(param_1 + 0x10,0);
+    flaggedEntrySetValueB(param_1 + 0x10,0);
   }
   param_1[0xc] = '\0';
   return;

@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002c4040(int *);
+int nn_os_LightEvent_Signal(int *);
 int nw_ut_internal_LinkListImpl_erase_2BAE30(int, int *);
 
-/* Supplied declaration required: FUN_002c4040. */
+/* Supplied declaration required: nn_os_LightEvent_Signal. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
 /* Supplied declaration required: nw_ut_internal_LinkListImpl_erase_2BAE30. */
@@ -34,7 +34,7 @@ unsigned int nw_snd_internal_TaskManager_RemoveTask(int param_1,int param_2)
       if (piVar2 + -1 == (int *)param_2) {
         nw_ut_internal_LinkListImpl_erase_2BAE30(temp_v0,piVar2);
         *(unsigned char *)(piVar2 + 4) = 4;
-        FUN_002c4040(piVar2 + 2);
+        nn_os_LightEvent_Signal(piVar2 + 2);
         nn_os_CriticalSection_Leave(temp_v2);
         return 1;
       }

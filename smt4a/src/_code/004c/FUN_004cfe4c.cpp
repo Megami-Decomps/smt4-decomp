@@ -6,8 +6,8 @@ extern "C" {
 
 extern int FUN_002a4844(char *);
 extern int FUN_002a4860(void);
-extern int FUN_0031d18c(char *);
-extern int FUN_0031d1a0(void);
+extern int flaggedEntryGetValueB(char *);
+extern int flaggedEntryGetValueA(void);
 
 
 int FUN_004cfe4c(char *param_1)
@@ -23,10 +23,10 @@ int FUN_004cfe4c(char *param_1)
     temp_v0 = FUN_002a4844(param_1 + 0x10);
   }
   if (*param_1 != '\x01') {
-    temp_v1 = FUN_0031d1a0();
+    temp_v1 = flaggedEntryGetValueA();
   }
   else {
-    temp_v1 = FUN_0031d18c(param_1 + 0x10);
+    temp_v1 = flaggedEntryGetValueB(param_1 + 0x10);
   }
   return temp_v1 + temp_v0;
 }

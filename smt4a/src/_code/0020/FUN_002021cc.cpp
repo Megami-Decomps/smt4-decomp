@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } void_stack;
 
-extern unsigned char DAT_0057f110; /* 0x57f110 */
+extern unsigned char g_campCec; /* 0x57f110 */
 
 /* Supplied declaration required: statusCameraApply. */
 extern int FUN_0039a2d8(int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
@@ -33,9 +33,9 @@ unsigned int FUN_002021cc(void)
   unsigned int temp_v5;
   unsigned long long temp_v6;
   
-  temp_v0 = (*(int *)((unsigned char *)&DAT_0057f110 + 0x4));
-  pcVar5 = *(romwright_code **)((*(int *)((unsigned char *)&DAT_0057f110 + 0x4)) + *(int *)((*(int *)((unsigned char *)&DAT_0057f110 + 0x4)) + 0x140) * 4 + 8);
-  if (((pcVar5 != (romwright_code *)0x0) && (temp_v1 = (*pcVar5)((*(int *)((unsigned char *)&DAT_0057f110 + 0x4))), temp_v1 == 3)) &&
+  temp_v0 = (*(int *)((unsigned char *)&g_campCec + 0x4));
+  pcVar5 = *(romwright_code **)((*(int *)((unsigned char *)&g_campCec + 0x4)) + *(int *)((*(int *)((unsigned char *)&g_campCec + 0x4)) + 0x140) * 4 + 8);
+  if (((pcVar5 != (romwright_code *)0x0) && (temp_v1 = (*pcVar5)((*(int *)((unsigned char *)&g_campCec + 0x4))), temp_v1 == 3)) &&
      (*(int *)(temp_v0 + 0x144) != -1)) {
     *(unsigned int *)(temp_v0 + 0x13c) = *(unsigned int *)(temp_v0 + 0x140);
     *(int *)(temp_v0 + 0x140) = *(int *)(temp_v0 + 0x144);

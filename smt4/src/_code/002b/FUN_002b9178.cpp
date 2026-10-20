@@ -7,7 +7,7 @@ extern "C" {
 int asdTMSprDecompress(int, unsigned int, int);
 int libc_strcat(...);
 int asdTextureCreate(void);
-int FUN_002bf694(unsigned char [64], int);
+int libc_strcpy(unsigned char [64], int);
 int asdMemFree(int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -22,9 +22,9 @@ extern unsigned char LAB_002b93a8; /* 0x2b93a8 */
 /* Supplied declaration required: asdTMSprDecompress. */
 /* Supplied declaration required: libc_strcat. */
 /* Supplied declaration required: asdTextureCreate. */
-/* Supplied declaration required: FUN_002bf694. */
+/* Supplied declaration required: libc_strcpy. */
 extern int rt_memcmp(int, unsigned char *, unsigned int);
-extern int FUN_002c30c4(unsigned int);
+extern int libc_strlen(unsigned int);
 /* Supplied declaration required: asdMemFree. */
 extern int asdLoadFileSync(unsigned char *, int *, unsigned int, unsigned int);
 
@@ -42,7 +42,7 @@ unsigned int FUN_002b9178(int *param_1)
   int temp_v5;
   
   temp_v2 = param_1[1];
-  FUN_002bf694(temp_v4,*param_1 + 0xc);
+  libc_strcpy(temp_v4,*param_1 + 0xc);
   pcVar2 = *(char **)(temp_v2 + 8);
   if (*pcVar2 != '-') {
     libc_strcat(temp_v4);
@@ -56,7 +56,7 @@ unsigned int FUN_002b9178(int *param_1)
   else {
     libc_strcat(temp_v4,&LAB_002b93a0);
   }
-  temp_v2 = FUN_002c30c4(*(unsigned int *)(temp_v2 + 8));
+  temp_v2 = libc_strlen(*(unsigned int *)(temp_v2 + 8));
   if (temp_v2 == 0) {
     param_1[2] = 0;
   }

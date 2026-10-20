@@ -8,8 +8,8 @@ int FUN_001028b8(unsigned char [132], int, unsigned char *, unsigned char *, cha
 int FUN_0013c174(unsigned char *, int *, int);
 int asdMemFree(unsigned int);
 int asdTextureCreate(void);
-int FUN_0019a840(int);
-int FUN_002267b0(int, unsigned char *, int, int);
+int asdTextureSetImage(int);
+int asdTexTgaLoadNw4c(int, unsigned char *, int, int);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -25,8 +25,8 @@ extern char s_flar02_02_00570300[10]; /* 0x570300 */
 /* Supplied declaration required: FUN_0013c174. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: asdTextureCreate. */
-/* Supplied declaration required: FUN_0019a840. */
-/* Supplied declaration required: FUN_002267b0. */
+/* Supplied declaration required: asdTextureSetImage. */
+/* Supplied declaration required: asdTexTgaLoadNw4c. */
 
 
 void FUN_003afc2c(void)
@@ -53,12 +53,12 @@ void FUN_003afc2c(void)
       puVar3 = temp_v4;
       FUN_0013c174(puVar3,&temp_v3,0);
       *(unsigned char **)(temp_v0 + 0x570340) = puVar3;
-      FUN_002267b0(*piVar4,puVar3,temp_v3,0x20000);
+      asdTexTgaLoadNw4c(*piVar4,puVar3,temp_v3,0x20000);
       *(unsigned int *)(*piVar4 + 0xc) = 0x2000000;
       *(unsigned int *)(*piVar4 + 0x3c) = 1;
       *(unsigned int *)(*piVar4 + 0x40) = 1;
       *(unsigned int *)(*piVar4 + 0x38) = 0;
-      FUN_0019a840(*piVar4);
+      asdTextureSetImage(*piVar4);
       *(unsigned char *)(temp_v0 + 0x570344) = 1;
       asdMemFree(*(unsigned int *)(temp_v0 + 0x570340));
       *(unsigned int *)(temp_v0 + 0x570340) = 0;

@@ -5,11 +5,11 @@ extern "C" {
 extern struct {
     u8 unk00;
     u8 unk01;
-} DAT_00471a70;
+} g_nngxState;
 
 void FUN_0011d0ec(void)
 {
-    DAT_00471a70.unk01 = 1;
+    g_nngxState.unk01 = 1;
 }
 
 } /* extern "C" */

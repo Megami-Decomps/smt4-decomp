@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002e6dd4(unsigned int, unsigned int);
-int FUN_002e6e14(unsigned int);
+int rt_memclr(unsigned int, unsigned int);
+int asdOperatorDeleteArray(unsigned int);
 int FUN_002e6e34(unsigned char [12], int *);
 int FUN_002e6e5c(unsigned char [12]);
-int FUN_002ea0c8(unsigned int, unsigned int);
+int onlineStringSetFromRaw(unsigned int, unsigned int);
 int FUN_0030eef0(...);
 
 typedef int romwright_code(...);
@@ -22,11 +22,11 @@ typedef struct {
 } param_3_stack;
 
 extern unsigned int rt_malloc(unsigned int);
-/* Supplied declaration required: FUN_002e6dd4. */
-/* Supplied declaration required: FUN_002e6e14. */
+/* Supplied declaration required: rt_memclr. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-/* Supplied declaration required: FUN_002ea0c8. */
+/* Supplied declaration required: onlineStringSetFromRaw. */
 /* Supplied declaration required: FUN_0030eef0. */
 
 
@@ -52,14 +52,14 @@ int FUN_00123d50(int *param_1,unsigned int param_2,unsigned int param_3)
     FUN_0030eef0(param_1,param_2,0,0,&temp_v5);
     if ((-1 < (int)param_1) && (temp_v1 = temp_v5 + 1, temp_v1 < 0x1001)) {
       temp_v0 = rt_malloc(temp_v1);
-      FUN_002e6dd4(temp_v0,temp_v1);
+      rt_memclr(temp_v0,temp_v1);
       piVar2 = temp_v6;
       FUN_0030eef0(temp_v6,param_2,temp_v0,temp_v1,0);
       temp_v2 = ((int)piVar2 >> 0x1f) + 1;
       if (temp_v2 != 0) {
-        FUN_002ea0c8(param_3,temp_v0);
+        onlineStringSetFromRaw(param_3,temp_v0);
       }
-      FUN_002e6e14(temp_v0);
+      asdOperatorDeleteArray(temp_v0);
       FUN_002e6e5c(temp_v3);
       return temp_v2;
     }

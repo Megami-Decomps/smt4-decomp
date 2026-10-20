@@ -15,7 +15,7 @@ struct fn_001a08dc_arg0 {
 
 typedef int romwright_code(...);
 extern unsigned char DAT_00405f48; /* 0x405f48 */
-extern unsigned char DAT_0044de98; /* 0x44de98 */
+extern unsigned char g_scrContext; /* 0x44de98 */
 
 
 unsigned int FUN_001a08dc(fn_001a08dc_arg0 *param_1)
@@ -28,7 +28,7 @@ unsigned int FUN_001a08dc(fn_001a08dc_arg0 *param_1)
   
   temp_v3 = param_1->field_0x18;
   temp_v0 = (unsigned int)*(unsigned short *)(param_1->field_0xbc + temp_v3 * 4 + 2) * 8;
-  (*(fn_001a08dc_arg0 * *)((unsigned char *)&DAT_0044de98 + 0x20)) = param_1;
+  (*(fn_001a08dc_arg0 * *)((unsigned char *)&g_scrContext + 0x20)) = param_1;
   temp_v1 = (**(romwright_code **)(&DAT_00405f48 + temp_v0))();
   if (temp_v1 == 0) {
     temp_v2 = 2;

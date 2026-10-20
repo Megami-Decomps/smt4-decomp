@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern int FUN_003f5f5c(void);
+extern int mwmofilterDeblockerCreate(void);
 
 typedef struct Obj {
     /* 0x00 */ u8 unk00[6];
@@ -14,7 +14,7 @@ typedef struct Obj {
 
 u8 FUN_0034ed38(Obj *obj)
 {
-    int result = FUN_003f5f5c();
+    int result = mwmofilterDeblockerCreate();
 
     if (result != 0) {
         obj->unk58 = 0;

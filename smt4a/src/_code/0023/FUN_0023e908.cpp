@@ -4,16 +4,16 @@
 
 extern "C" {
 
-int FUN_001641c4(void);
+int ifTouchRegionRemove(void);
 int FUN_001643b4(int, int);
-int FUN_001b4a90(int, int, unsigned int);
+int __aeabi_memset4(int, int, unsigned int);
 
-extern int DAT_0057f268; /* 0x57f268 */
+extern int g_partyPanel; /* 0x57f268 */
 
-/* Supplied declaration required: FUN_001641c4. */
+/* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: FUN_001643b4. */
-extern int FUN_001ab888(void);
-/* Supplied declaration required: FUN_001b4a90. */
+extern int gameGetSlotTable(void);
+/* Supplied declaration required: __aeabi_memset4. */
 
 
 void FUN_0023e908(void)
@@ -27,16 +27,16 @@ void FUN_0023e908(void)
   int *piVar5;
   unsigned int temp_v4;
   
-  temp_v0 = DAT_0057f268;
+  temp_v0 = g_partyPanel;
   temp_v2 = 0;
-  if (0 < *(int *)(DAT_0057f268 + 0xa00)) {
+  if (0 < *(int *)(g_partyPanel + 0xa00)) {
     do {
-      FUN_001641c4();
+      ifTouchRegionRemove();
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < *(int *)(temp_v0 + 0xa00));
   }
   *(unsigned int *)(temp_v0 + 0xa00) = 0;
-  FUN_001b4a90(temp_v0 + 0x9c4,0x3c,0xffffffff);
+  __aeabi_memset4(temp_v0 + 0x9c4,0x3c,0xffffffff);
   temp_v2 = 0;
   piVar5 = (int *)(temp_v0 + 0xa00);
   if (*(char *)(temp_v0 + 0x42) == '\0') {
@@ -49,16 +49,16 @@ void FUN_0023e908(void)
     } while (temp_v2 < 4);
     temp_v4 = 0xc;
     if (*(int *)(temp_v0 + 0x2c) != 0) {
-      temp_v2 = FUN_001ab888();
+      temp_v2 = gameGetSlotTable();
       temp_v4 = *(unsigned char *)(temp_v2 + 0x1ca3) - 0xc;
     }
     else {
-      temp_v2 = FUN_001ab888();
+      temp_v2 = gameGetSlotTable();
       if (*(unsigned char *)(temp_v2 + 0x1ca3) >= 0xc) {
         temp_v2 = 0;
         goto LAB_0023ea5c;
       }
-      temp_v2 = FUN_001ab888();
+      temp_v2 = gameGetSlotTable();
       temp_v4 = (unsigned int)*(unsigned char *)(temp_v2 + 0x1ca3);
     }
     temp_v2 = 0;
@@ -87,7 +87,7 @@ LAB_0023ea5c:
     *piVar5 = *(int *)(temp_v0 + 0xa00) + 1;
   } while (temp_v2 < 4);
   temp_v3 = 0;
-  temp_v2 = FUN_001ab888();
+  temp_v2 = gameGetSlotTable();
   if (*(char *)(temp_v2 + 0x1ca3) != '\0') {
     do {
       temp_v1 = FUN_001643b4(0x11,temp_v3 + 0x5b);
@@ -95,7 +95,7 @@ LAB_0023ea5c:
       temp_v3 = temp_v3 + 1;
       *(unsigned short *)(temp_v0 + temp_v2 + 0x9cc) = temp_v1;
       *piVar5 = *(int *)(temp_v0 + 0xa00) + 1;
-      temp_v2 = FUN_001ab888();
+      temp_v2 = gameGetSlotTable();
     } while (temp_v3 < (int)(unsigned int)*(unsigned char *)(temp_v2 + 0x1ca3));
   }
   return;

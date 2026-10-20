@@ -8,8 +8,8 @@ int FUN_00126468(void);
 int FUN_002b6480(unsigned char [64], int, int, unsigned char *, unsigned char *);
 int libc_strcat(unsigned char [64], unsigned char [72]);
 int FUN_002be624(...);
-int FUN_002bf694(int, unsigned char [64]);
-int FUN_002c3940(...);
+int libc_strcpy(int, unsigned char [64]);
+int rt_aeabi_memclr(...);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -27,9 +27,9 @@ extern signed char DAT_004c581a; /* 0x4c581a */
 /* Supplied declaration required: FUN_002b6480. */
 /* Supplied declaration required: libc_strcat. */
 /* Supplied declaration required: FUN_002be624. */
-/* Supplied declaration required: FUN_002bf694. */
+/* Supplied declaration required: libc_strcpy. */
 extern int FUN_002c1d5c(void);
-/* Supplied declaration required: FUN_002c3940. */
+/* Supplied declaration required: rt_aeabi_memclr. */
 extern int jyoucyuGetTableEntry(unsigned int);
 
 
@@ -46,9 +46,9 @@ unsigned int FUN_002bfc24(unsigned int param_1,unsigned int param_2,int param_3,
   unsigned char temp_v3 [64];
   unsigned char temp_v4 [72];
   
-  FUN_002c3940(temp_v2,0x40);
-  FUN_002c3940(temp_v3,0x40);
-  FUN_002c3940(temp_v4,0x40);
+  rt_aeabi_memclr(temp_v2,0x40);
+  rt_aeabi_memclr(temp_v3,0x40);
+  rt_aeabi_memclr(temp_v4,0x40);
   temp_v0 = jyoucyuGetTableEntry(1);
   if ((((temp_v0 != 0) || (temp_v0 = FUN_002c1d5c(), temp_v0 != 0)) || (DAT_004c581a != '\0')) ||
      (param_3 == 0)) {
@@ -83,7 +83,7 @@ unsigned int FUN_002bfc24(unsigned int param_1,unsigned int param_2,int param_3,
         *(int *)(temp_v0 + 0x4c568c) = (int)in_d0;
         *(int *)(temp_v0 + 0x4c5690) = (int)((unsigned long long)in_d0 >> 0x20);
         *(char *)(temp_v0 + 0x4c56a9) = (char)param_3;
-        FUN_002bf694(temp_v0 + 0x4c5635,temp_v2);
+        libc_strcpy(temp_v0 + 0x4c5635,temp_v2);
         FUN_002b6480(temp_v2,0,3,&LAB_00126484,puVar3);
         return temp_v1;
       }

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0023d3c0(unsigned int, int);
-int FUN_0028c640(unsigned int, int, int);
+int nodeSetTranslation(unsigned int, int, int);
 int FUN_002a8638(...);
 int FUN_002c1e30(...);
 int FUN_002c1edc(unsigned int, float *, int, float *);
@@ -75,7 +75,7 @@ static float romwright_fabs_4(float value)
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0023d3c0. */
-/* Supplied declaration required: FUN_0028c640. */
+/* Supplied declaration required: nodeSetTranslation. */
 /* Supplied declaration required: FUN_002a8638. */
 extern float *FUN_002a86a4(unsigned int);
 extern int __cxa_guard_acquire(unsigned int *);
@@ -154,7 +154,7 @@ void FUN_00341a3c(int param_1)
       *(float *)(param_1 + 0x1658) = *(float *)(param_1 + 0x1658) + *(float *)(param_1 + 0x164c);
       *(float *)(param_1 + 0x165c) = *(float *)(param_1 + 0x165c) + *(float *)(param_1 + 0x1650);
       *(float *)(param_1 + 0x1660) = *(float *)(param_1 + 0x1660) + *(float *)(param_1 + 0x1654);
-      FUN_0028c640(*(unsigned int *)(*(int *)(param_1 + 0x20) + 8),0,param_1 + 0x1658);
+      nodeSetTranslation(*(unsigned int *)(*(int *)(param_1 + 0x20) + 8),0,param_1 + 0x1658);
     }
     temp_v1 = *(int *)(param_1 + 0x10) + 1;
     *(unsigned int *)(param_1 + 0x10) = temp_v1;
@@ -178,7 +178,7 @@ void FUN_00341a3c(int param_1)
         *(unsigned int *)(param_1 + 0x1658) = *(unsigned int *)(param_1 + 0x1664);
         *(unsigned int *)(param_1 + 0x165c) = *(unsigned int *)(param_1 + 0x1668);
         *(unsigned int *)(param_1 + 0x1660) = *(unsigned int *)(param_1 + 0x166c);
-        FUN_0028c640(*(unsigned int *)(*(int *)(param_1 + 0x20) + 8),0,param_1 + 0x1658);
+        nodeSetTranslation(*(unsigned int *)(*(int *)(param_1 + 0x20) + 8),0,param_1 + 0x1658);
       }
     }
   }

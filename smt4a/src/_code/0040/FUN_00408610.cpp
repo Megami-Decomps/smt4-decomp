@@ -6,8 +6,8 @@ extern "C" {
 
 int asdSequenceRequest(int, int);
 int FUN_00268250(int, int, int, unsigned int, int);
-int FUN_002e342c(unsigned char [132], unsigned int);
-int FUN_002e6dd0(...);
+int libc_strcpy(unsigned char [132], unsigned int);
+int rt_aeabi_memclr(...);
 int FUN_00320c64(void);
 int byte1IsZero(void);
 int FUN_003416a0(int, unsigned char [132]);
@@ -24,8 +24,8 @@ extern int FUN_00229c9c(void);
 extern unsigned int FUN_00239288(void);
 extern int aocBootIsFinished(void);
 /* Supplied declaration required: FUN_00268250. */
-/* Supplied declaration required: FUN_002e342c. */
-/* Supplied declaration required: FUN_002e6dd0. */
+/* Supplied declaration required: libc_strcpy. */
+/* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: FUN_00320c64. */
 /* Supplied declaration required: byte1IsZero. */
 /* Supplied declaration required: FUN_003416a0. */
@@ -64,10 +64,10 @@ void FUN_00408610(int param_1)
     *(int *)(param_1 + 8) = *(int *)(param_1 + 8) + 1;
   case 3:
     temp_v0 = FUN_00239288();
-    FUN_002e6dd0(temp_v0,0x80);
-    FUN_002e6dd0(temp_v3,0x80);
+    rt_aeabi_memclr(temp_v0,0x80);
+    rt_aeabi_memclr(temp_v3,0x80);
     temp_v1 = FUN_00371b10(0);
-    FUN_002e342c(temp_v3,temp_v1);
+    libc_strcpy(temp_v3,temp_v1);
     temp_v2 = 0;
     FUN_003416a0(0,temp_v3);
     if (temp_v2 != 0) {

@@ -9,7 +9,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_4_stack;
 
-extern int FUN_0019a37c(unsigned int, int, int, unsigned int, int *, char *);
+extern int libc_strncmp(unsigned int, int, int, unsigned int, int *, char *);
 extern int wstrlen(unsigned int);
 
 
@@ -42,7 +42,7 @@ unsigned char FUN_001c3bb8(int *param_1,char *param_2,unsigned int param_3,unsig
   if (*(int *)(temp_v5 + 0x34) != 0) {
     do {
       piVar7 = (int *)(temp_v4 + temp_v5 + temp_v6 * 8);
-      temp_v2 = FUN_0019a37c(param_3,*piVar7 + temp_v7,temp_v3,param_4,param_1,pcVar10);
+      temp_v2 = libc_strncmp(param_3,*piVar7 + temp_v7,temp_v3,param_4,param_1,pcVar10);
       if ((temp_v2 == 0) &&
          ((temp_v0 = *(char *)(*piVar7 + temp_v7 + temp_v3), temp_v0 == '\0' || (temp_v0 == '.')))) {
         *(int *)(param_2 + 4) = *piVar7 + temp_v7;

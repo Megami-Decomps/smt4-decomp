@@ -8,16 +8,16 @@ int FUN_00210194(unsigned int);
 int FUN_00235554(unsigned int *, unsigned char *);
 int FUN_00259258(void);
 int FUN_00290d5c(int);
-int FUN_00296f4c(...);
+int scrScriptProcessStartEntry(...);
 int FUN_00297060(unsigned int, unsigned int);
 int FUN_002973d8(void);
 int FUN_00297468(unsigned char [64], unsigned int *, int);
 int scrScriptProcessDestroy(void);
 int libc_strcat(...);
-int FUN_002b8838(int);
+int buttonHelpSetPreset(int);
 int FUN_002bcfc0(unsigned char [64], unsigned char [140]);
 int FUN_002be624(...);
-int FUN_002bf694(unsigned char [64], unsigned int);
+int libc_strcpy(unsigned char [64], unsigned int);
 int FUN_002bff50(void);
 int asdMemFree(void);
 int memClear(unsigned int *, int);
@@ -39,21 +39,21 @@ extern int FUN_0019e0c0(unsigned int);
 extern int dataTable27Sub0GetRecord(unsigned int *, unsigned int);
 /* Supplied declaration required: FUN_00235554. */
 /* Supplied declaration required: FUN_00259258. */
-extern int FUN_0025a03c(unsigned int);
+extern int effIsFinished(unsigned int);
 /* Supplied declaration required: FUN_00290d5c. */
-extern unsigned int FUN_00290d74(unsigned int, int);
+extern unsigned int tableGroupFindEntryIndex(unsigned int, int);
 extern unsigned int FUN_00290e9c(void);
 extern int FUN_00290eb0(void);
-/* Supplied declaration required: FUN_00296f4c. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297060. */
 /* Supplied declaration required: FUN_002973d8. */
 /* Supplied declaration required: FUN_00297468. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: libc_strcat. */
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: FUN_002bcfc0. */
 /* Supplied declaration required: FUN_002be624. */
-/* Supplied declaration required: FUN_002bf694. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_002bff50. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: memClear. */
@@ -83,7 +83,7 @@ void FUN_00384be8(unsigned int *param_1)
   switch(param_1[2]) {
   case 0:
     if (param_1[0x36a] != 0) {
-      temp_v4 = FUN_0025a03c(*(unsigned int *)(param_1[*(int *)(param_1[0x36a] + 4) + 0x343] + 8));
+      temp_v4 = effIsFinished(*(unsigned int *)(param_1[*(int *)(param_1[0x36a] + 4) + 0x343] + 8));
       if (temp_v4 == 0) {
         return;
       }
@@ -101,7 +101,7 @@ void FUN_00384be8(unsigned int *param_1)
     if (0 < (int)param_1[0x363]) {
       do {
         temp_v4 = dataTable27Sub0GetRecord(param_1 + 8,0);
-        FUN_002bf694(temp_v6,temp_v4 + param_1[temp_v2 * 2 + 0x357] * 0x88);
+        libc_strcpy(temp_v6,temp_v4 + param_1[temp_v2 * 2 + 0x357] * 0x88);
         FUN_002bcfc0(temp_v6,temp_v8);
         libc_strcat(puVar6,temp_v8);
         libc_strcat(puVar6,"<br>");
@@ -170,7 +170,7 @@ void FUN_00384be8(unsigned int *param_1)
             temp_v4 = temp_v5;
           } while (temp_v5 < (int)param_1[0x368]);
         }
-        FUN_002b8838(0xa2);
+        buttonHelpSetPreset(0xa2);
         param_1[0x3f0] = param_1[0x369];
         return;
       }
@@ -205,7 +205,7 @@ void FUN_00384be8(unsigned int *param_1)
       temp_v2 = param_1[0x16f];
     }
     if ((param_1[0x16e] != 0 && temp_v2 != 0) &&
-       (temp_v4 = FUN_0025a03c(*(unsigned int *)(param_1[*(int *)(param_1[0x36a] + 4) + 0x343] + 8)),
+       (temp_v4 = effIsFinished(*(unsigned int *)(param_1[*(int *)(param_1[0x36a] + 4) + 0x343] + 8)),
        temp_v4 != 0)) {
       FUN_00210194(param_1[*(int *)(param_1[0x36a] + 4) + 0x343]);
       FUN_002d582c(param_1[*(int *)(*puVar6 + 4) + 0x343]);
@@ -217,8 +217,8 @@ void FUN_00384be8(unsigned int *param_1)
       temp_v4 = dataTable27Sub0GetRecord(param_1 + 8,0);
       temp_v5 = *(int *)*puVar6;
       jyoucyuGetTableEntry(0);
-      temp_v3 = FUN_00290d74(*puVar8,temp_v4 + temp_v5 * 0x88 + 0x6c);
-      FUN_00296f4c(param_1[0x170],temp_v3);
+      temp_v3 = tableGroupFindEntryIndex(*puVar8,temp_v4 + temp_v5 * 0x88 + 0x6c);
+      scrScriptProcessStartEntry(param_1[0x170],temp_v3);
       param_1[2] = param_1[2] + 1;
       return;
     }

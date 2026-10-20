@@ -6,8 +6,8 @@ extern "C" {
 
 int asdMemoryAllocTracked(...);
 int asdMemFree(void);
-int FUN_002e3328(void);
-int FUN_002e6e14(unsigned char *);
+int asdOperatorDelete(void);
+int asdOperatorDeleteArray(unsigned char *);
 int FUN_00413af4(unsigned char **, int, unsigned int);
 int FUN_00414a24(void);
 int rt_memcpy_w(int, int, int);
@@ -31,11 +31,11 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_1_stack;
 
-extern int FUN_0014bef4(unsigned int);
+extern int randRange(unsigned int);
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_002e3328. */
-/* Supplied declaration required: FUN_002e6e14. */
+/* Supplied declaration required: asdOperatorDelete. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
 /* Supplied declaration required: FUN_00413af4. */
 extern int FUN_00413e28(void);
 /* Supplied declaration required: FUN_00414a24. */
@@ -106,7 +106,7 @@ void FUN_003fa2e8(fn_003fa2e8_arg0 *param_1)
       temp_v7 = 0;
       if (temp_v7 < temp_v0) {
         do {
-          temp_v3 = FUN_0014bef4((temp_v6 - 1U) & 0xffff);
+          temp_v3 = randRange((temp_v6 - 1U) & 0xffff);
           *(unsigned int *)(temp_v5 + temp_v7 * 4) = puVar3[temp_v3];
           temp_v4 = (temp_v6 - temp_v3) - 1;
           if (0 < temp_v4) {
@@ -136,7 +136,7 @@ void FUN_003fa2e8(fn_003fa2e8_arg0 *param_1)
             temp_v7 = temp_v7 + 1;
           }
           rt_memcpy_w(param_1->field_0x48 + temp_v6 * 100,temp_v1,100);
-          FUN_002e6e14(temp_v9);
+          asdOperatorDeleteArray(temp_v9);
           temp_v6 = temp_v6 + 1;
         } while (temp_v6 < temp_v0);
       }
@@ -155,7 +155,7 @@ void FUN_003fa2e8(fn_003fa2e8_arg0 *param_1)
   }
   if (param_1->field_0x44 != 0) {
     FUN_00414a24();
-    FUN_002e3328();
+    asdOperatorDelete();
     param_1->field_0x44 = 0;
   }
   return;

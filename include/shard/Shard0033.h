@@ -18,14 +18,14 @@ typedef struct MenuState {
     /* 0x2B1 */ u8 unk2B1;
 } MenuState;
 
-/* Object at DAT_00588fd0+4. */
-/* Object at DAT_00588fd0+4. */
-/* Object at DAT_00588fd0+4. */
-/* Object at DAT_00588fd0+4. */
-/* Object at DAT_00588fd0+4. */
-/* Object at DAT_00588fd0+4. */
-/* Object at DAT_00588fd0+4. */
-/* Object at DAT_00588fd0+4. */
+/* Object at g_gameGlobals+4. */
+/* Object at g_gameGlobals+4. */
+/* Object at g_gameGlobals+4. */
+/* Object at g_gameGlobals+4. */
+/* Object at g_gameGlobals+4. */
+/* Object at g_gameGlobals+4. */
+/* Object at g_gameGlobals+4. */
+/* Object at g_gameGlobals+4. */
 typedef struct ObjB {
     /* 0x00 */ u8 unk00[0x274];
     /* 0x274 */ u8 block274[4];
@@ -95,7 +95,7 @@ typedef struct ObjBRef {
     /* 0x04 */ ObjB *instance;
 } ObjBRef;
 
-/* Object at DAT_0057f27c+4. */
+/* Object at g_useCounter+4. */
 typedef struct Obj7EC {
     /* 0x00 */ u8 unk00[0x7EC];
     /* 0x7EC */ u32 unk7EC;

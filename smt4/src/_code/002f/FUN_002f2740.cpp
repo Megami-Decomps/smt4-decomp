@@ -15,7 +15,7 @@ typedef struct {
     u16 group;      /* 0x46 */
 } HandleRecord;
 
-HandleRecord *FUN_002a8740(void);
+HandleRecord *gameGetUnitRecord(void);
 int FUN_002497f8(HandleHolder *first, HandleHolder *second);
 
 /* Calls FUN_002497f8 when both holders resolve to the same group (a holder without a handle counts as group 0). */
@@ -27,12 +27,12 @@ void FUN_002f2740(HandleHolder *first, HandleHolder *second)
     if (first->handle < 0) {
         firstGroup = 0;
     } else {
-        firstGroup = FUN_002a8740()->group;
+        firstGroup = gameGetUnitRecord()->group;
     }
     if (second->handle < 0) {
         secondGroup = 0;
     } else {
-        secondGroup = FUN_002a8740()->group;
+        secondGroup = gameGetUnitRecord()->group;
     }
     if (secondGroup != firstGroup) {
         return;

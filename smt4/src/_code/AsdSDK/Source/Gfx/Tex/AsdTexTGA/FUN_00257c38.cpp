@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b4414(...);
+int libc_strncmp(...);
 int asdMemoryAllocAligned(int, int, int, int);
 int rt_memcpy(...);
 
@@ -28,7 +28,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_4_stack;
 
-/* Supplied declaration required: FUN_002b4414. */
+/* Supplied declaration required: libc_strncmp. */
 /* Supplied declaration required: asdMemoryAllocAligned. */
 /* Supplied declaration required: rt_memcpy. */
 
@@ -44,7 +44,7 @@ void FUN_00257c38(fn_00257c38_arg0 *param_1,int param_2,unsigned int param_3,uns
   int temp_v4;
   unsigned int temp_v5;
   
-  temp_v2 = FUN_002b4414(param_2 + 0x12,"NW4C_Tga Ver1.0",0x10);
+  temp_v2 = libc_strncmp(param_2 + 0x12,"NW4C_Tga Ver1.0",0x10);
   if (temp_v2 == 0) {
     temp_v0 = *(unsigned char *)(param_2 + 0xd);
     temp_v1 = *(unsigned char *)(param_2 + 0xc);
@@ -54,7 +54,7 @@ void FUN_00257c38(fn_00257c38_arg0 *param_1,int param_2,unsigned int param_3,uns
     param_1->field_0x4 = 0xde1;
     param_2 = param_2 + *(int *)(param_2 + 0x22);
     while( 1 ) {
-      temp_v2 = FUN_002b4414(param_2,"nw4c_txd",8);
+      temp_v2 = libc_strncmp(param_2,"nw4c_txd",8);
       if (temp_v2 == 0) {
         param_1->field_0x28 = *(int *)(param_2 + 8) - 0xc;
         temp_v5 = 1;
@@ -64,25 +64,25 @@ void FUN_00257c38(fn_00257c38_arg0 *param_1,int param_2,unsigned int param_3,uns
         param_1->field_0x24 = temp_v3;
         rt_memcpy();
       }
-      temp_v2 = FUN_002b4414(param_2,"nw4c_tfm",8);
+      temp_v2 = libc_strncmp(param_2,"nw4c_tfm",8);
       if (temp_v2 == 0) {
         temp_v4 = 0;
         temp_v5 = 0;
         rt_memcpy(&temp_v4,param_2 + 0xc,*(int *)(param_2 + 8) - 0xc);
-        temp_v2 = FUN_002b4414(&temp_v4,"Etc1_a4",8);
+        temp_v2 = libc_strncmp(&temp_v4,"Etc1_a4",8);
         if (temp_v2 == 0) {
           param_1->field_0x20 = 0x1401;
           param_1->field_0x1c = 0x675b;
         }
         else {
-          temp_v2 = FUN_002b4414(&temp_v4,"Etc1",8);
+          temp_v2 = libc_strncmp(&temp_v4,"Etc1",8);
           if (temp_v2 == 0) {
             param_1->field_0x1c = 0x675a;
             param_1->field_0x20 = 0x1401;
           }
         }
       }
-      temp_v2 = FUN_002b4414(param_2,"nw4c_end",8);
+      temp_v2 = libc_strncmp(param_2,"nw4c_end",8);
       if (temp_v2 == 0) break;
       param_2 = param_2 + *(int *)(param_2 + 8);
     }

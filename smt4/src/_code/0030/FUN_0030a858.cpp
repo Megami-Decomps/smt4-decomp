@@ -2,8 +2,8 @@
 
 extern "C" {
 
-int FUN_002bd420(void *src, void *dst, int size);
-int FUN_002c3940(void *buffer, int size);
+int memCopy(void *src, void *dst, int size);
+int rt_aeabi_memclr(void *buffer, int size);
 
 typedef struct Source {
     /* 0x00 */ u8 unk00[0x36];
@@ -20,9 +20,9 @@ typedef struct Dest {
 /* Builds a 0x8C-byte record from the source: 0xE bytes to +0, the next 0x12 bytes to +0x4C, and the byte at +0x36 to +0x76. */
 void FUN_0030a858(Source *src, Dest *dst)
 {
-    FUN_002c3940(dst, 0x8c);
-    FUN_002bd420(src, dst, 0xe);
-    FUN_002bd420((u8 *)src + 0xe, dst->unk4C, 0x12);
+    rt_aeabi_memclr(dst, 0x8c);
+    memCopy(src, dst, 0xe);
+    memCopy((u8 *)src + 0xe, dst->unk4C, 0x12);
     dst->unk76 = src->unk36;
 }
 

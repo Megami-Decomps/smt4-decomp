@@ -4,17 +4,17 @@
 
 extern "C" {
 
-int FUN_001846d0(int, int);
+int uiSpriteSelectAnim(int, int);
 int FUN_003e48dc(unsigned int);
 int FUN_003e4e4c(int);
 int FUN_004bd410(void);
 
-extern unsigned char DAT_0057f588; /* 0x57f588 */
+extern unsigned char g_messageMain; /* 0x57f588 */
 
 extern int saveSlotFindSelected(void);
-/* Supplied declaration required: FUN_001846d0. */
+/* Supplied declaration required: uiSpriteSelectAnim. */
 extern int FUN_00187168(int);
-extern int FUN_002deb84(void);
+extern int scrGetCommandFrame(void);
 /* Supplied declaration required: FUN_003e48dc. */
 extern int FUN_003e4d68(unsigned int);
 /* Supplied declaration required: FUN_003e4e4c. */
@@ -35,19 +35,19 @@ unsigned int FUN_003bf938(void)
   unsigned int temp_v7;
   int temp_v8;
   
-  temp_v1 = (*(int *)((unsigned char *)&DAT_0057f588 + 0x8));
-  temp_v3 = FUN_002deb84();
-  temp_v8 = (*(int *)((unsigned char *)&DAT_0057f588 + 0x8));
+  temp_v1 = (*(int *)((unsigned char *)&g_messageMain + 0x8));
+  temp_v3 = scrGetCommandFrame();
+  temp_v8 = (*(int *)((unsigned char *)&g_messageMain + 0x8));
   if ((temp_v3 == 0x1e) &&
-     (temp_v0 = *(char *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0x8d), (temp_v0 == '\0' || temp_v0 == '\x02') || temp_v0 == '\x01')
+     (temp_v0 = *(char *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x8d), (temp_v0 == '\0' || temp_v0 == '\x02') || temp_v0 == '\x01')
      ) {
-    temp_v3 = (*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0xb00;
-    *(unsigned char *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0x8d) = 4;
-    FUN_001846d0(temp_v3,2);
+    temp_v3 = (*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0xb00;
+    *(unsigned char *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x8d) = 4;
+    uiSpriteSelectAnim(temp_v3,2);
     temp_v3 = 0;
     do {
       if (*(int *)(temp_v8 + 0x9c) < temp_v3) break;
-      FUN_001846d0(temp_v8 + temp_v3 * 0x8c + 0xdbc,2);
+      uiSpriteSelectAnim(temp_v8 + temp_v3 * 0x8c + 0xdbc,2);
       temp_v5 = temp_v8 + temp_v3;
       temp_v3 = temp_v3 + 1;
       *(unsigned char *)(temp_v5 + 0xa0) = 4;

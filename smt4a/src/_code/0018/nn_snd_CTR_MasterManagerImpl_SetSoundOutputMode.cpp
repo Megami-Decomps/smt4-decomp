@@ -3,7 +3,7 @@
 extern "C" {
 
 void nn_snd_CTR_Dspsnd_SetSoundOutputMode(u8 *state, u32 mode);
-s32 FUN_001c6e20(void);
+s32 nn_snd_CTR_Dspsnd_IsInitialized(void);
 extern u8 g_dspsndState[];
 
 typedef struct MasterManagerImpl {
@@ -11,10 +11,10 @@ typedef struct MasterManagerImpl {
     /* 0x02 */ u8 outputMode;
 } MasterManagerImpl;
 
-/* Records the sound output mode and forwards it to the DSP sound state, if FUN_001c6e20 allows it. */
+/* Records the sound output mode and forwards it to the DSP sound state, if nn_snd_CTR_Dspsnd_IsInitialized allows it. */
 void nn_snd_CTR_MasterManagerImpl_SetSoundOutputMode(MasterManagerImpl *manager, u32 mode)
 {
-    if (FUN_001c6e20() != 0) {
+    if (nn_snd_CTR_Dspsnd_IsInitialized() != 0) {
         manager->outputMode = (u8)mode;
         nn_snd_CTR_Dspsnd_SetSoundOutputMode(g_dspsndState, mode);
         return;

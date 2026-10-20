@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_3_stack;
 
-extern int DAT_0056fcc0; /* 0x56fcc0 */
+extern int g_handleRegistry; /* 0x56fcc0 */
 extern unsigned char DAT_0057aa00; /* 0x57aa00 */
 extern unsigned char DAT_0057aa01; /* 0x57aa01 */
 extern unsigned char DAT_0057aa02; /* 0x57aa02 */
@@ -60,7 +60,7 @@ void FUN_004d896c(int param_1,int param_2,int param_3)
                (int)*(short *)(temp_v5 + temp_v7 * 0x2c + 10));
   if (0 < *(int *)(*(int *)(param_1 + 0xc0) + temp_v7 * 0x2c + 0x18)) {
     obj80Select(0);
-    FUN_0045b334(*(int *)(DAT_0056fcc0 + 4) + 0xcc,0x18);
+    FUN_0045b334(*(int *)(g_handleRegistry + 4) + 0xcc,0x18);
   }
   temp_v5 = *(int *)(param_1 + 0xc0);
   temp_v6 = *(unsigned int *)(temp_v5 + temp_v7 * 0x2c + 0x10);

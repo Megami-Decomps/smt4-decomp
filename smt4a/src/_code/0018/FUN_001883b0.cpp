@@ -16,7 +16,7 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: FUN_00197c78. */
-extern int FUN_002e783c(void);
+extern int wstrlenU16(void);
 
 
 void FUN_001883b0(unsigned int *param_1,short *param_2,unsigned int param_3)
@@ -41,7 +41,7 @@ void FUN_001883b0(unsigned int *param_1,short *param_2,unsigned int param_3)
       param_2 = temp_v5;
     } while (temp_v0 != 0x3a);
     temp_v4 = 4;
-    temp_v1 = FUN_002e783c();
+    temp_v1 = wstrlenU16();
     temp_v6 = (temp_v1 + 1) * 2;
     temp_v2 = (*(romwright_code *)**(unsigned int **)psVar2)(psVar2,&temp_v3,&temp_v4,param_3);
     if ((temp_v2 & 0x80000000) == 0) {

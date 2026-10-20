@@ -6,9 +6,9 @@ extern "C" {
 
 int FUN_0023cc00(...);
 int FUN_0023cd08(unsigned int *, int, int);
-int FUN_00282924(unsigned int *, int);
+int btlMainFindEntryByListedId(unsigned int *, int);
 int FUN_0028a0d0(...);
-int FUN_00296d6c(int, int);
+int randBetween(int, int);
 int FUN_003adb34(void);
 int VectorSignedToFloat(...);
 
@@ -56,15 +56,15 @@ extern short DAT_00439a68; /* 0x439a68 */
 extern short DAT_00439a6a; /* 0x439a6a */
 extern short DAT_00439a6c; /* 0x439a6c */
 extern short DAT_00439a6e; /* 0x439a6e */
-extern int DAT_00439ca8; /* 0x439ca8 */
+extern int g_btlUiBlock; /* 0x439ca8 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0023cc00. */
 /* Supplied declaration required: FUN_0023cd08. */
-/* Supplied declaration required: FUN_00282924. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_0028a0d0. */
 extern unsigned int *btlGetMainState(void);
-/* Supplied declaration required: FUN_00296d6c. */
+/* Supplied declaration required: randBetween. */
 /* Supplied declaration required: FUN_003adb34. */
 
 
@@ -89,14 +89,14 @@ void FUN_00344158(unsigned int param_1,fn_00344158_arg1 *param_2)
   
   puVar3 = (unsigned int *)btlGetMainState();
   puVar4 = puVar3;
-  FUN_00282924(puVar3,(int)*(short *)((int)param_2->field_0x14 + 0x62));
+  btlMainFindEntryByListedId(puVar3,(int)*(short *)((int)param_2->field_0x14 + 0x62));
   if (puVar4 == (unsigned int *)0x0) {
     param_2->field_0x2 = 0;
     return;
   }
   if (param_2->field_0x20 != '\0') {
     if ((param_2->field_0x20 == '\x01') &&
-       ((param_2->field_0x26 < 0 || (temp_v4 = DAT_00439ca8, FUN_003adb34(), temp_v4 == 0)))) {
+       ((param_2->field_0x26 < 0 || (temp_v4 = g_btlUiBlock, FUN_003adb34(), temp_v4 == 0)))) {
       param_2->field_0x2 = 0;
       return;
     }
@@ -109,19 +109,19 @@ void FUN_00344158(unsigned int param_1,fn_00344158_arg1 *param_2)
         temp_v9 = 0.01f;
         temp_v10 = 0;
         if ((*puVar4 & 0x100) != 0) {
-          temp_v3 = FUN_00296d6c((int)DAT_00439a58,(int)DAT_00439a5a);
+          temp_v3 = randBetween((int)DAT_00439a58,(int)DAT_00439a5a);
           temp_v8 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
           *(float *)((int)param_2->field_0x14 + 0x30) = temp_v8 * temp_v9;
-          temp_v3 = FUN_00296d6c((int)DAT_00439a5c,(int)DAT_00439a5e);
+          temp_v3 = randBetween((int)DAT_00439a5c,(int)DAT_00439a5e);
           temp_v8 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
           *(float *)((int)param_2->field_0x14 + 0x34) = temp_v8 * temp_v9;
           *(unsigned int *)((int)param_2->field_0x14 + 0x38) = temp_v10;
         }
         else {
-          temp_v3 = FUN_00296d6c((int)DAT_00439a50,(int)DAT_00439a52);
+          temp_v3 = randBetween((int)DAT_00439a50,(int)DAT_00439a52);
           temp_v8 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
           *(float *)((int)param_2->field_0x14 + 0x30) = temp_v8 * temp_v9;
-          temp_v3 = FUN_00296d6c((int)DAT_00439a54,(int)DAT_00439a56);
+          temp_v3 = randBetween((int)DAT_00439a54,(int)DAT_00439a56);
           temp_v8 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
           *(float *)((int)param_2->field_0x14 + 0x34) = temp_v8 * temp_v9;
           *(unsigned int *)((int)param_2->field_0x14 + 0x38) = temp_v10;
@@ -140,24 +140,24 @@ void FUN_00344158(unsigned int param_1,fn_00344158_arg1 *param_2)
             }
             temp_v10 = 1;
           }
-          temp_v4 = DAT_00439ca8;
-          FUN_0028a0d0(DAT_00439ca8,*(unsigned int *)&param_2[1].field_0x4,temp_v10,0,
+          temp_v4 = g_btlUiBlock;
+          FUN_0028a0d0(g_btlUiBlock,*(unsigned int *)&param_2[1].field_0x4,temp_v10,0,
                        param_2->field_0x44 != 0,1);
           param_2->field_0x26 = (short)temp_v4;
-          temp_v4 = DAT_00439ca8;
-          FUN_0028a0d0(DAT_00439ca8,*(unsigned int *)&param_2->field_0x1c,temp_v10,1,
+          temp_v4 = g_btlUiBlock;
+          FUN_0028a0d0(g_btlUiBlock,*(unsigned int *)&param_2->field_0x1c,temp_v10,1,
                        param_2->field_0x44 != 0,1);
           param_2->field_0x26 = (short)temp_v4;
         }
         else {
-          temp_v4 = DAT_00439ca8;
-          FUN_0028a0d0(DAT_00439ca8,*(unsigned int *)&param_2[1].field_0x4);
+          temp_v4 = g_btlUiBlock;
+          FUN_0028a0d0(g_btlUiBlock,*(unsigned int *)&param_2[1].field_0x4);
           param_2->field_0x26 = (short)temp_v4;
         }
       }
       else {
-        temp_v4 = DAT_00439ca8;
-        FUN_0028a0d0(DAT_00439ca8,*(unsigned int *)&param_2[1].field_0x4);
+        temp_v4 = g_btlUiBlock;
+        FUN_0028a0d0(g_btlUiBlock,*(unsigned int *)&param_2[1].field_0x4);
         param_2->field_0x26 = (short)temp_v4;
       }
     }
@@ -174,12 +174,12 @@ void FUN_00344158(unsigned int param_1,fn_00344158_arg1 *param_2)
       temp_v7 = 0;
       if (0 < param_2->field_0x24) {
         if (temp_v4 != 4) {
-          temp_v0 = FUN_00296d6c((int)DAT_00439a60,(int)DAT_00439a62);
-          temp_v1 = FUN_00296d6c((int)DAT_00439a64,(int)DAT_00439a66);
+          temp_v0 = randBetween((int)DAT_00439a60,(int)DAT_00439a62);
+          temp_v1 = randBetween((int)DAT_00439a64,(int)DAT_00439a66);
         }
         else {
-          temp_v0 = FUN_00296d6c((int)DAT_00439a68,(int)DAT_00439a6a);
-          temp_v1 = FUN_00296d6c((int)DAT_00439a6c,(int)DAT_00439a6e);
+          temp_v0 = randBetween((int)DAT_00439a68,(int)DAT_00439a6a);
+          temp_v1 = randBetween((int)DAT_00439a6c,(int)DAT_00439a6e);
         }
         temp_v7 = (int)temp_v1;
         temp_v6 = (int)temp_v0;
@@ -201,24 +201,24 @@ void FUN_00344158(unsigned int param_1,fn_00344158_arg1 *param_2)
             }
             temp_v10 = 1;
           }
-          temp_v5 = DAT_00439ca8;
-          FUN_0023cc00(DAT_00439ca8,temp_v4,*(unsigned int *)&param_2[1].field_0x4,temp_v10,0,
+          temp_v5 = g_btlUiBlock;
+          FUN_0023cc00(g_btlUiBlock,temp_v4,*(unsigned int *)&param_2[1].field_0x4,temp_v10,0,
                        param_2->field_0x44 != 0,temp_v6,temp_v7);
           param_2->field_0x26 = (short)temp_v5;
-          temp_v5 = DAT_00439ca8;
-          FUN_0023cc00(DAT_00439ca8,temp_v4,*(unsigned int *)&param_2->field_0x1c,temp_v10,1,
+          temp_v5 = g_btlUiBlock;
+          FUN_0023cc00(g_btlUiBlock,temp_v4,*(unsigned int *)&param_2->field_0x1c,temp_v10,1,
                        param_2->field_0x44 != 0,temp_v6,temp_v7);
           param_2->field_0x26 = (short)temp_v5;
         }
         else {
-          temp_v6 = DAT_00439ca8;
-          FUN_0023cc00(DAT_00439ca8,temp_v4,*(unsigned int *)&param_2[1].field_0x4);
+          temp_v6 = g_btlUiBlock;
+          FUN_0023cc00(g_btlUiBlock,temp_v4,*(unsigned int *)&param_2[1].field_0x4);
           param_2->field_0x26 = (short)temp_v6;
         }
       }
       else {
-        temp_v6 = DAT_00439ca8;
-        FUN_0023cc00(DAT_00439ca8,temp_v4,*(unsigned int *)&param_2[1].field_0x4);
+        temp_v6 = g_btlUiBlock;
+        FUN_0023cc00(g_btlUiBlock,temp_v4,*(unsigned int *)&param_2[1].field_0x4);
         param_2->field_0x26 = (short)temp_v6;
       }
       if (param_2->field_0x22 == 0) {

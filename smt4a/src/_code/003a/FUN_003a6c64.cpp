@@ -9,7 +9,7 @@ int FUN_0017ffa8(...);
 int FUN_00180310(...);
 int FUN_001835b4(int, int, int, int, int, int);
 int FUN_00183bb0(void);
-int FUN_00184e64(unsigned int);
+int drawSetColorFromRGBA8(unsigned int);
 
 /* stack frame of param_5: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -29,7 +29,7 @@ extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
 extern unsigned int FUN_0018439c(void);
-/* Supplied declaration required: FUN_00184e64. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 
 
 void FUN_003a6c64(int param_1,int param_2,int param_3,int param_4,int param_5)
@@ -53,7 +53,7 @@ void FUN_003a6c64(int param_1,int param_2,int param_3,int param_4,int param_5)
   if (param_1 != 0xe) {
     FUN_001835b4(2,0xb,0x3f5,param_3,param_4,param_5);
     FUN_0017ffa8(2,0xb,temp_v0,param_3,param_4,param_5);
-    FUN_00184e64(temp_v2);
+    drawSetColorFromRGBA8(temp_v2);
     temp_v1 = FUN_001834a4(0xb,0x402);
     FUN_00180310(2,*(short *)(temp_v1 + 8) + param_3,*(short *)(temp_v1 + 10) + param_4,0,1,param_5 + 1,
                  temp_v3);
@@ -65,7 +65,7 @@ void FUN_003a6c64(int param_1,int param_2,int param_3,int param_4,int param_5)
                  &LAB_003a6de4,param_2);
   }
   else {
-    FUN_00184e64(temp_v2);
+    drawSetColorFromRGBA8(temp_v2);
     FUN_001835b4(2,0xb,0x3f5,param_3,param_4,param_5);
     FUN_0017ffa8(2,0xb,0x41e,param_3,param_4,param_5);
   }

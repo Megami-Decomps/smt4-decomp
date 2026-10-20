@@ -11,17 +11,17 @@ int FUN_0026d5a4(void);
 int FUN_0026ef04(...);
 int FUN_0026f188(...);
 int FUN_0026f204(...);
-int FUN_0026f800(...);
+int linkHolderApplyFlag(...);
 int FUN_0028a368(int);
 int FUN_0028a924(int, int, unsigned int);
 int FUN_00295214(...);
 int FUN_00295228(...);
-int FUN_00296f4c(...);
+int scrScriptProcessStartEntry(...);
 int FUN_002973d8(void);
 int FUN_0029e774(void);
-int FUN_002b8838(...);
+int buttonHelpSetPreset(...);
 int FUN_002bd2b4(...);
-int FUN_002c3940(int, int);
+int rt_aeabi_memclr(int, int);
 int FUN_003111e8(...);
 
 /* Supplied declaration required: FUN_0019e0c0. */
@@ -33,19 +33,19 @@ extern unsigned int FUN_00259800(void);
 /* Supplied declaration required: FUN_0026f188. */
 extern unsigned int FUN_0026f1f0(void);
 /* Supplied declaration required: FUN_0026f204. */
-/* Supplied declaration required: FUN_0026f800. */
+/* Supplied declaration required: linkHolderApplyFlag. */
 /* Supplied declaration required: FUN_0028a368. */
 /* Supplied declaration required: FUN_0028a924. */
 extern int FUN_00290e9c(void);
 extern int FUN_00290eb0(void);
 /* Supplied declaration required: FUN_00295214. */
 /* Supplied declaration required: FUN_00295228. */
-/* Supplied declaration required: FUN_00296f4c. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_002973d8. */
 /* Supplied declaration required: FUN_0029e774. */
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: FUN_002bd2b4. */
-/* Supplied declaration required: FUN_002c3940. */
+/* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: FUN_003111e8. */
 
 
@@ -93,7 +93,7 @@ unsigned int FUN_002d6d44(int param_1)
     FUN_002bd2b4(*(int *)(param_1 + 8),(int)*(short *)(*(int *)(param_1 + 8) + 0x34),
                  *(unsigned char *)(param_1 + 0x123),temp_v3);
     if (*(short *)(*(int *)(param_1 + 8) + 0x34) == 0) {
-      FUN_002c3940(*(int *)(param_1 + 8) + 0x38,0x14);
+      rt_aeabi_memclr(*(int *)(param_1 + 8) + 0x38,0x14);
     }
     if (*(int *)(param_1 + 0x11c) != 0) {
       *(unsigned int *)(param_1 + 0x100) = 0xffffffff;
@@ -135,7 +135,7 @@ unsigned int FUN_002d6d44(int param_1)
       *(unsigned char *)(param_1 + 0x24) = 0;
       *(unsigned int *)(param_1 + 0x34) = 0;
       *(unsigned char *)(param_1 + 0x38) = 0;
-      FUN_0026f800(*(unsigned int *)(param_1 + 4),0);
+      linkHolderApplyFlag(*(unsigned int *)(param_1 + 4),0);
       FUN_0028a924(0x10,0,0xffffffff);
       FUN_0029e774();
       FUN_0028a368(1);
@@ -153,7 +153,7 @@ unsigned int FUN_002d6d44(int param_1)
     FUN_002bd2b4(*(int *)(param_1 + 8),(int)*(short *)(param_1 + 0x120),
                  *(unsigned char *)(*(int *)(param_1 + 8) + 0x37),temp_v3);
     if (*(short *)(param_1 + 0x120) == 0) {
-      FUN_002c3940(*(int *)(param_1 + 8) + 0x38,0x14);
+      rt_aeabi_memclr(*(int *)(param_1 + 8) + 0x38,0x14);
     }
     FUN_0026f204(*(unsigned int *)(param_1 + 0x10),*(unsigned int *)(param_1 + 8),
                  *(unsigned int *)(param_1 + 0xac));
@@ -169,7 +169,7 @@ unsigned int FUN_002d6d44(int param_1)
     *(unsigned char *)(param_1 + 0x24) = 0;
     *(unsigned int *)(param_1 + 0x34) = 0;
     *(unsigned char *)(param_1 + 0x38) = 0;
-    FUN_002b8838(200);
+    buttonHelpSetPreset(200);
     *(unsigned int *)(param_1 + 0x100) = 0xffffffff;
     *(unsigned int *)(param_1 + 0x104) = 7;
     return 2;
@@ -225,7 +225,7 @@ unsigned int FUN_002d6d44(int param_1)
     *(unsigned int *)(param_1 + 0x100) = 0xffffffff;
     *(unsigned int *)(param_1 + 0x110) = 5;
     *(unsigned int *)(param_1 + 0x114) = 2;
-    FUN_0026f800(*(unsigned int *)(param_1 + 4),1);
+    linkHolderApplyFlag(*(unsigned int *)(param_1 + 4),1);
     *(unsigned int *)(param_1 + 0x48) = 0;
     *(unsigned char *)(param_1 + 0x4c) = 0;
     *(unsigned int *)(param_1 + 0x5c) = 0;
@@ -236,7 +236,7 @@ unsigned int FUN_002d6d44(int param_1)
     *(unsigned char *)(param_1 + 0x24) = 0;
     *(unsigned int *)(param_1 + 0x34) = 0;
     *(unsigned char *)(param_1 + 0x38) = 0;
-    FUN_002b8838(200);
+    buttonHelpSetPreset(200);
     FUN_00295228((int)*(short *)(param_1 + 0x120),0);
     break;
   case 6:
@@ -300,14 +300,14 @@ unsigned int FUN_002d6d44(int param_1)
     *(unsigned int *)(param_1 + 0x110) = 7;
     *(unsigned int *)(param_1 + 0x114) = 8;
     *(unsigned char *)(param_1 + 0x9c) = 0;
-    FUN_002b8838(0xbd);
+    buttonHelpSetPreset(0xbd);
     FUN_00295214(0);
     break;
   case 0xffffffff:
     if (*(int *)(param_1 + 0x104) == -1) {
       return 0;
     }
-    FUN_00296f4c(*(unsigned int *)(param_1 + 0xa0),
+    scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0xa0),
                  *(unsigned int *)(param_1 + *(int *)(param_1 + 0x104) * 4 + 0xd8));
     temp_v2 = *(unsigned int *)(param_1 + 0x104);
     *(unsigned int *)(param_1 + 0x100) = temp_v2;

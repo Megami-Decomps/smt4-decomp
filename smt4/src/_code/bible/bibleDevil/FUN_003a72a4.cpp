@@ -14,7 +14,7 @@ int FUN_0029ce60(unsigned int, int, int);
 int FUN_0029e620(unsigned int, int);
 int FUN_0029e648(int, int);
 int FUN_002b8454(int, int, int, int);
-int FUN_002b8838(void);
+int buttonHelpSetPreset(void);
 int FUN_002b898c(void);
 int FUN_003c2b74(int);
 int FUN_003c2c6c(int);
@@ -40,15 +40,15 @@ extern int FUN_00293aac(void);
 extern int FUN_00293b8c(void);
 /* Supplied declaration required: FUN_0029ce60. */
 extern int gameGetFlagByte12e8(void);
-extern int FUN_0029e1c8(void);
+extern int useCounterIsFinished(void);
 /* Supplied declaration required: FUN_0029e620. */
 /* Supplied declaration required: FUN_0029e648. */
 extern int FUN_0029e924(int);
 /* Supplied declaration required: FUN_002b8454. */
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: FUN_002b898c. */
-extern unsigned int FUN_002bed98(int);
-extern unsigned int FUN_002beda4(int);
+extern unsigned int vec2GetYInt(int);
+extern unsigned int vec2GetXInt(int);
 /* Supplied declaration required: FUN_003c2b74. */
 /* Supplied declaration required: FUN_003c2c6c. */
 
@@ -65,14 +65,14 @@ void FUN_003a72a4(int param_1)
   int temp_v5;
   unsigned int temp_v6;
   
-  temp_v1 = FUN_0029e1c8();
+  temp_v1 = useCounterIsFinished();
   if (temp_v1 == 0) {
     return;
   }
   FUN_00233344(param_1 + 0xdc,(int)*(short *)(param_1 + 0xa5b4));
   temp_v1 = param_1 + *(short *)(param_1 + 0xa5b4) * 0x8c + 0xfc;
-  temp_v2 = FUN_002bed98(temp_v1);
-  temp_v3 = FUN_002beda4(temp_v1);
+  temp_v2 = vec2GetYInt(temp_v1);
+  temp_v3 = vec2GetXInt(temp_v1);
   FUN_00231240(param_1 + 200,temp_v3,temp_v2);
   temp_v1 = FUN_0026c63c();
   if ((temp_v1 != 0) && (temp_v1 = FUN_00293aac(), temp_v1 == 0)) {
@@ -129,7 +129,7 @@ void FUN_003a72a4(int param_1)
         (*(unsigned int *)((unsigned char *)&DAT_0043d9c8 + 0x4)) = 0xffffffff;
         FUN_0022de74(param_1);
         FUN_002b898c();
-        FUN_002b8838();
+        buttonHelpSetPreset();
       }
     }
     else {

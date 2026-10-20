@@ -23,7 +23,7 @@ extern int FUN_0031c794(...); /* 0x31c794 */
 extern unsigned char LAB_0039b7b0; /* 0x39b7b0 */
 extern unsigned char LAB_0039b7c4; /* 0x39b7c4 */
 extern unsigned char LAB_0039b7dc; /* 0x39b7dc */
-extern unsigned int *DAT_0057f3b4; /* 0x57f3b4 */
+extern unsigned int *g_eventEffect; /* 0x57f3b4 */
 extern unsigned int DAT_0057f3d0; /* 0x57f3d0 */
 extern unsigned int DAT_0057f3d4; /* 0x57f3d4 */
 
@@ -31,7 +31,7 @@ extern unsigned int DAT_0057f3d4; /* 0x57f3d4 */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
-extern int FUN_0018206c(unsigned int, unsigned int);
+extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001acf98. */
 extern int FUN_00341940(unsigned int);
 
@@ -45,14 +45,14 @@ void FUN_0039b604(void)
   int temp_v0;
   int temp_v1;
   
-  if (DAT_0057f3b4 == (unsigned int *)0x0) {
+  if (g_eventEffect == (unsigned int *)0x0) {
     puVar1 = (unsigned int *)0x100;
     asdMemoryAllocTracked(0x100,0x100,0,0x1c,1);
-    DAT_0057f3b4 = puVar1;
+    g_eventEffect = puVar1;
   }
-  puVar1 = DAT_0057f3b4;
+  puVar1 = g_eventEffect;
   temp_v1 = 0;
-  *DAT_0057f3b4 = 0;
+  *g_eventEffect = 0;
   puVar1[1] = 0;
   puVar1[2] = 0;
   puVar1[3] = 0;
@@ -75,7 +75,7 @@ void FUN_0039b604(void)
       asdTMTexTableLoadTmx((&DAT_0057f3d0)[temp_v1 * 3],0);
       *(unsigned char *)(temp_v1 * 0xc + 0x57f3d9) = 1;
     }
-    temp_v0 = FUN_0018206c((&DAT_0057f3d0)[temp_v1 * 3],(&DAT_0057f3d4)[temp_v1 * 3]);
+    temp_v0 = asdTMTexTableNodeIsLoaded((&DAT_0057f3d0)[temp_v1 * 3],(&DAT_0057f3d4)[temp_v1 * 3]);
     if (temp_v0 == 0) {
       FUN_001acf98((&DAT_0057f3d0)[temp_v1 * 3],(&DAT_0057f3d4)[temp_v1 * 3]);
       *(unsigned char *)(temp_v1 * 0xc + 0x57f3d8) = 1;

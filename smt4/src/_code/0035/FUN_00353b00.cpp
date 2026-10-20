@@ -39,7 +39,7 @@ extern unsigned int DAT_004c7438; /* 0x4c7438 */
 extern unsigned char DAT_004c743c; /* 0x4c743c */
 extern unsigned char DAT_004c8000; /* 0x4c8000 */
 
-extern unsigned long long FUN_00100bf6(unsigned int, unsigned int, unsigned int);
+extern unsigned long long libc_strtoul(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00239ed0. */
 extern unsigned int *FUN_00239f84(unsigned char *, unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_00239fc4. */
@@ -48,7 +48,7 @@ extern unsigned int FUN_002b5c44(void);
 /* Supplied declaration required: FUN_002ba8e8. */
 /* Supplied declaration required: FUN_002baa40. */
 extern int FUN_002c55b4(void);
-extern int FUN_002c55c4(void);
+extern int appletIsExitRequested(void);
 extern unsigned int *FUN_003520d8(unsigned char *, unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_003535f0. */
 extern unsigned int *FUN_00353840(unsigned int, unsigned int *, unsigned int, unsigned int);
@@ -138,7 +138,7 @@ void FUN_00353b00(unsigned int *param_1,unsigned int *param_2,unsigned int *para
     }
     DAT_004c700c = DAT_004c700c | 0x40000;
     DAT_004c7008 = (unsigned int)*(unsigned char *)((int)param_4 + 5) | ((*param_4 & 0xff0fffff) << 8);
-    temp_v6 = FUN_00100bf6(param_5,0,10);
+    temp_v6 = libc_strtoul(param_5,0,10);
     DAT_004c7014 = (unsigned int)((unsigned long long)temp_v6 >> 0x20);
     DAT_004c7010 = (unsigned int)temp_v6;
     DAT_004c7018 = temp_v7;
@@ -174,7 +174,7 @@ void FUN_00353b00(unsigned int *param_1,unsigned int *param_2,unsigned int *para
     }
     puVar4 = (unsigned int *)FUN_00239f84(temp_v14,&DAT_004c7000,0);
     if (-1 < (int)puVar4) {
-      temp_v2 = FUN_002c55c4();
+      temp_v2 = appletIsExitRequested();
       if ((temp_v2 != 0) || (temp_v2 = FUN_002c55b4(), temp_v2 != 0)) {
         FUN_002baa40(temp_v15,0xc9413891);
         return;

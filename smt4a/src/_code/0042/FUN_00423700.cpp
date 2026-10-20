@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6dd4(int, int);
+int rt_memclr(int, int);
 int FUN_00422184(...);
 
 typedef struct fn_00423700_arg1 fn_00423700_arg1;
@@ -34,7 +34,7 @@ typedef struct {
     unsigned int sp70; /* 0x70: local_70 */
 } param_5_stack;
 
-/* Supplied declaration required: FUN_002e6dd4. */
+/* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: FUN_00422184. */
 
 
@@ -96,7 +96,7 @@ LAB_004237bc:
     param_3[temp_v1] = temp_v2;
     temp_v3 = 0;
     if (temp_v2 != 0) {
-      FUN_002e6dd4(temp_v2,*param_5 * temp_v8 * 3);
+      rt_memclr(temp_v2,*param_5 * temp_v8 * 3);
       do {
         temp_v2 = param_2->field_0x8;
         if (!(temp_v2 == 4 || temp_v2 == 5)) {

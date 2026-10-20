@@ -9,7 +9,7 @@ int FUN_0040a3a0(unsigned int);
 int FUN_0040a3c8(unsigned int);
 int FUN_0040a5e4(unsigned int);
 
-extern int FUN_001bcea0(void);
+extern int gameGetCounters(void);
 extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_0040a378. */
 /* Supplied declaration required: FUN_0040a3a0. */
@@ -29,7 +29,7 @@ unsigned int FUN_002c5214(void)
   temp_v0 = scrGetArg(0);
   temp_v1 = scrGetArg(1);
   temp_v0 = temp_v0 & 0xff;
-  temp_v2 = FUN_001bcea0();
+  temp_v2 = gameGetCounters();
   puVar4 = (unsigned int *)(temp_v2 + temp_v0 * 4);
   if (temp_v1 < ~*puVar4) {
     *puVar4 = *puVar4 + temp_v1;
@@ -37,7 +37,7 @@ unsigned int FUN_002c5214(void)
   else {
     *puVar4 = 0xffffffff;
   }
-  temp_v2 = FUN_001bcea0();
+  temp_v2 = gameGetCounters();
   puVar4 = (unsigned int *)(temp_v2 + temp_v0 * 4 + 0x200);
   if (temp_v1 < ~*puVar4) {
     *puVar4 = *puVar4 + temp_v1;

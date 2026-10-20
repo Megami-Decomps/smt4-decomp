@@ -7,8 +7,8 @@ extern "C" {
 extern unsigned char DAT_0055af44; /* 0x55af44 */
 
 extern unsigned int FUN_001054b4(void);
-extern int FUN_002e760a(unsigned int);
-extern int FUN_002e995c(unsigned int *);
+extern int operatorNew(unsigned int);
+extern int onlineSockAddrConstruct(unsigned int *);
 
 
 int FUN_001210b0(unsigned int *param_1)
@@ -22,8 +22,8 @@ int FUN_001210b0(unsigned int *param_1)
   *(unsigned char *)(param_1 + 2) = 0;
   *(unsigned char *)((int)param_1 + 9) = 0;
   param_1[3] = 0;
-  temp_v0 = FUN_002e995c(param_1 + 4);
-  temp_v1 = FUN_002e760a(0x50);
+  temp_v0 = onlineSockAddrConstruct(param_1 + 4);
+  temp_v1 = operatorNew(0x50);
   temp_v2 = 0;
   if (temp_v1 != 0) {
     temp_v2 = FUN_001054b4();

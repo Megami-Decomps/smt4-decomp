@@ -18,7 +18,7 @@ int FUN_00280988(void);
 int FUN_00282390(void);
 int FUN_0028250c(void);
 int FUN_00291e40(...);
-int FUN_002b8838(int);
+int buttonHelpSetPreset(int);
 int FUN_002c8b80(int, int, int, int *, float [7], int);
 
 /* stack frame of void: 4 slot(s), 16 byte(s) */
@@ -56,8 +56,8 @@ extern int FUN_0027ee9c(void);
 /* Supplied declaration required: FUN_00282390. */
 /* Supplied declaration required: FUN_0028250c. */
 /* Supplied declaration required: FUN_00291e40. */
-/* Supplied declaration required: FUN_002b8838. */
-extern int FUN_002bfde4(unsigned int);
+/* Supplied declaration required: buttonHelpSetPreset. */
+extern int padIsButtonPressed(unsigned int);
 /* Supplied declaration required: FUN_002c8b80. */
 
 
@@ -168,7 +168,7 @@ void FUN_002d4874(void)
               *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + temp_v4 * temp_v5;
             }
             else {
-              temp_v0 = FUN_002bfde4(6);
+              temp_v0 = padIsButtonPressed(6);
               if ((temp_v0 != 0) || (temp_v0 = FUN_002762e0(), temp_v0 != 0)) {
                 temp_v0 = DAT_004474f4;
                 *(unsigned int *)(DAT_004474f4 + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
@@ -218,7 +218,7 @@ void FUN_002d4874(void)
         *(unsigned int *)(temp_v0 + 0x50) = DAT_0049f9ac;
         FUN_0027fc14(0xd);
         *(unsigned int *)(DAT_004474f4 + 0xac) = 1;
-        FUN_002b8838(0xda);
+        buttonHelpSetPreset(0xda);
         FUN_0024f034(1,DAT_0049f99c);
         FUN_0019db68();
         temp_v0 = g_lmapScene;

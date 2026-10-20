@@ -5,26 +5,26 @@
 extern "C" {
 
 int jobStop(unsigned int, int);
-int FUN_001846d0(unsigned int *, int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+int uiSpriteSelectAnim(unsigned int *, int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 int asdMemFree(...);
 int scrScriptProcessDestroy(...);
 int FUN_0019d36c(void);
-int FUN_00237210(unsigned int);
+int asdMemFreeSlot(unsigned int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_4_stack;
 
-extern signed char DAT_0057f0c4; /* 0x57f0c4 */
+extern signed char g_buttonHelp; /* 0x57f0c4 */
 extern unsigned int *DAT_0057f0c8; /* 0x57f0c8 */
 
 /* Supplied declaration required: jobStop. */
-/* Supplied declaration required: FUN_001846d0. */
+/* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_0019d36c. */
-/* Supplied declaration required: FUN_00237210. */
+/* Supplied declaration required: asdMemFreeSlot. */
 
 
 void FUN_0037b3fc(unsigned int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -51,14 +51,14 @@ void FUN_0037b3fc(unsigned int *param_1,unsigned int param_2,unsigned int param_
     param_1[5] = 0;
   }
   puVar1 = DAT_0057f0c8;
-  DAT_0057f0c4 = DAT_0057f0c4 - '\x01';
-  if (DAT_0057f0c4 < '\x01') {
-    FUN_00237210(DAT_0057f0c8[0x19e]);
+  g_buttonHelp = g_buttonHelp - '\x01';
+  if (g_buttonHelp < '\x01') {
+    asdMemFreeSlot(DAT_0057f0c8[0x19e]);
     puVar1[0x19e] = 0;
     if (puVar1[4] != 3) {
       temp_v0 = 0;
       do {
-        FUN_001846d0(puVar1 + temp_v0 * 0x23 + 0xd,1,param_3,param_4,unaff_r4,unaff_r5,unaff_r6);
+        uiSpriteSelectAnim(puVar1 + temp_v0 * 0x23 + 0xd,1,param_3,param_4,unaff_r4,unaff_r5,unaff_r6);
         if (*(char *)(puVar1 + temp_v0 + 0x16b) != '\0') {
           FUN_0019d36c();
           puVar1[0x174] = puVar1[0x174] - 1;
@@ -78,7 +78,7 @@ void FUN_0037b3fc(unsigned int *param_1,unsigned int param_2,unsigned int param_
     jobStop(*puVar1,0);
     asdMemFree(puVar1);
     DAT_0057f0c8 = (unsigned int *)0x0;
-    DAT_0057f0c4 = '\0';
+    g_buttonHelp = '\0';
   }
   return;
 }

@@ -10,7 +10,7 @@ int FUN_00188444(void);
 int vcallSlot12IfValid(unsigned int);
 int FUN_001886bc(void);
 int FUN_00188e44(...);
-int FUN_00195fc8(void);
+int sysFatalBreak(void);
 
 typedef int romwright_code(...);
 extern unsigned char DAT_005c0adc; /* 0x5c0adc */
@@ -21,7 +21,7 @@ extern unsigned char DAT_005c0adc; /* 0x5c0adc */
 /* Supplied declaration required: vcallSlot12IfValid. */
 /* Supplied declaration required: FUN_001886bc. */
 /* Supplied declaration required: FUN_00188e44. */
-/* Supplied declaration required: FUN_00195fc8. */
+/* Supplied declaration required: sysFatalBreak. */
 
 
 unsigned int FUN_00189388(int *param_1,int *param_2,unsigned int param_3,unsigned int param_4)
@@ -39,7 +39,7 @@ unsigned int FUN_00189388(int *param_1,int *param_2,unsigned int param_3,unsigne
   if (temp_v1 < 0) {
     if ((param_1[2] & 0xfffffffeU) != 0) {
       if ((param_1[2] & 1U) != 0) {
-        FUN_00195fc8();
+        sysFatalBreak();
       }
       vcallSlot12IfValid(param_1[2] & 0xfffffffe);
       param_1[2] = 0;
@@ -51,7 +51,7 @@ unsigned int FUN_00189388(int *param_1,int *param_2,unsigned int param_3,unsigne
   if (*param_2 != 0x4f00) {
     if ((param_1[2] & 0xfffffffeU) != 0) {
       if ((param_1[2] & 1U) != 0) {
-        FUN_00195fc8();
+        sysFatalBreak();
       }
       vcallSlot12IfValid(param_1[2] & 0xfffffffe);
       param_1[2] = 0;
@@ -71,7 +71,7 @@ unsigned int FUN_00189388(int *param_1,int *param_2,unsigned int param_3,unsigne
     if (temp_v1 < 0) {
       if ((param_1[2] & 0xfffffffeU) != 0) {
         if ((param_1[2] & 1U) != 0) {
-          FUN_00195fc8();
+          sysFatalBreak();
         }
         vcallSlot12IfValid(param_1[2] & 0xfffffffe);
         param_1[2] = 0;

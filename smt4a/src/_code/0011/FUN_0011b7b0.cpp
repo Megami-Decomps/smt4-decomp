@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_0011ca08(int, int);
-int FUN_002e7232(int);
-int FUN_002e75fa(int);
+int sharedRefRelease(int);
+int sharedRefAddRef(int);
 int FUN_002eb338(int *, unsigned char [12], unsigned int);
-int FUN_002eb588(unsigned char [12]);
+int onlineTimeGetNow(unsigned char [12]);
 int FUN_002f2da0(int *, int, int **);
 
 typedef int romwright_code(...);
@@ -41,10 +41,10 @@ extern unsigned short DAT_00594984; /* 0x594984 */
 extern unsigned int DAT_00594a20; /* 0x594a20 */
 
 /* Supplied declaration required: FUN_0011ca08. */
-/* Supplied declaration required: FUN_002e7232. */
-/* Supplied declaration required: FUN_002e75fa. */
+/* Supplied declaration required: sharedRefRelease. */
+/* Supplied declaration required: sharedRefAddRef. */
 /* Supplied declaration required: FUN_002eb338. */
-/* Supplied declaration required: FUN_002eb588. */
+/* Supplied declaration required: onlineTimeGetNow. */
 extern int wordRefsDiffer_002eb690(int *, int *);
 extern int FUN_002f2a70(int);
 /* Supplied declaration required: FUN_002f2da0. */
@@ -84,7 +84,7 @@ void FUN_0011b7b0(int param_1,int *param_2)
       temp_v6 = temp_v9[0];
     }
     else {
-      FUN_002e75fa(temp_v1);
+      sharedRefAddRef(temp_v1);
       temp_v3 = temp_v6;
       (**(romwright_code **)(*param_2 + 0x14))(&temp_v8,param_2,&temp_v3);
       temp_v6 = temp_v8;
@@ -93,7 +93,7 @@ void FUN_0011b7b0(int param_1,int *param_2)
       }
       temp_v0 = DAT_00594a20;
       temp_v4 = (int *)(temp_v1 + 0x140);
-      FUN_002eb588(temp_v10);
+      onlineTimeGetNow(temp_v10);
       FUN_002eb338(&temp_v5,temp_v10,temp_v0);
       *temp_v4 = temp_v5;
       temp_v4[1] = iStack_44;
@@ -102,7 +102,7 @@ void FUN_0011b7b0(int param_1,int *param_2)
         temp_v4 = *(int **)(temp_v11 + 8);
         FUN_002f2da0(&iStack_44,temp_v11,&temp_v4);
       }
-      FUN_002e7232(temp_v1);
+      sharedRefRelease(temp_v1);
     }
   }
   return;

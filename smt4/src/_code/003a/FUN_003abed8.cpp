@@ -11,20 +11,20 @@ int FUN_002332f4(void);
 int FUN_0023553c(int);
 int FUN_00288e68(int);
 int FUN_00295660(int, unsigned char [36]);
-int FUN_00296f4c(unsigned int, int);
+int scrScriptProcessStartEntry(unsigned int, int);
 int FUN_0029ca58(void);
 int FUN_0029cc44(int);
 int FUN_0029d684(...);
 int FUN_0029defc(...);
 int FUN_0029dfc0(int);
-int FUN_0029e1ec(void);
+int useCounterStart(void);
 int FUN_0029e328(int);
-int FUN_0029e39c(int, int);
+int sortMenuCreate(int, int);
 int FUN_0029e620(unsigned int, int);
 int FUN_0029ede8(int, unsigned int, unsigned int, int);
 int FUN_0029ee6c(int, int);
-int FUN_002b06c4(void);
-int FUN_002bf694(unsigned char [36], unsigned int);
+int dataTable00FindById(void);
+int libc_strcpy(unsigned char [36], unsigned int);
 int FUN_003ac468(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -47,7 +47,7 @@ extern int FUN_002762e0(void);
 extern int FUN_0027ee9c(void);
 /* Supplied declaration required: FUN_00288e68. */
 /* Supplied declaration required: FUN_00295660. */
-/* Supplied declaration required: FUN_00296f4c. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_0029ca58. */
 /* Supplied declaration required: FUN_0029cc44. */
 /* Supplied declaration required: FUN_0029d684. */
@@ -55,15 +55,15 @@ extern int FUN_0027ee9c(void);
 extern int FUN_0029dfa8(void);
 /* Supplied declaration required: FUN_0029dfc0. */
 extern int FUN_0029e0f8(void);
-/* Supplied declaration required: FUN_0029e1ec. */
+/* Supplied declaration required: useCounterStart. */
 /* Supplied declaration required: FUN_0029e328. */
-/* Supplied declaration required: FUN_0029e39c. */
+/* Supplied declaration required: sortMenuCreate. */
 /* Supplied declaration required: FUN_0029e620. */
 /* Supplied declaration required: FUN_0029ede8. */
 /* Supplied declaration required: FUN_0029ee6c. */
-/* Supplied declaration required: FUN_002b06c4. */
+/* Supplied declaration required: dataTable00FindById. */
 extern unsigned int FUN_002bce00(void);
-/* Supplied declaration required: FUN_002bf694. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_003ac468. */
 
 
@@ -107,7 +107,7 @@ void FUN_003abed8(int param_1)
   if ((temp_v3 == 0) && (temp_v7 != 0)) {
     temp_v4 = FUN_0022ea28();
     if (temp_v4 < temp_v6) {
-      FUN_00296f4c(*(unsigned int *)(param_1 + 0x5a0),9);
+      scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x5a0),9);
       *(unsigned int *)(param_1 + 0x14) = 8;
       *(unsigned int *)(param_1 + 0x18) = 0;
     }
@@ -115,10 +115,10 @@ void FUN_003abed8(int param_1)
       temp_v1 = FUN_0023360c(param_1 + 0x20);
       FUN_00288e68(*(unsigned short *)(temp_v5 + temp_v1 * 0x20 + 4));
       temp_v2 = FUN_002bce00();
-      FUN_002bf694(temp_v9,temp_v2);
+      libc_strcpy(temp_v9,temp_v2);
       FUN_00295660(0x14,temp_v9);
       FUN_0029ede8(0x18,temp_v6,0xffffffff,0);
-      FUN_00296f4c(*(unsigned int *)(param_1 + 0x5a0),8);
+      scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x5a0),8);
       FUN_0023553c(1);
       *(unsigned int *)(param_1 + 0x14) = 5;
       *(unsigned int *)(param_1 + 0x18) = 0;
@@ -135,13 +135,13 @@ void FUN_003abed8(int param_1)
     FUN_00232848();
   }
   else if (temp_v8 != 0) {
-    FUN_0029e39c(0x10,0);
+    sortMenuCreate(0x10,0);
     FUN_0029e328(0xb);
     FUN_0029e328(7);
     FUN_0029e328(0xf);
     FUN_0029e328(0x11);
     FUN_0029e328(3);
-    FUN_0029e1ec();
+    useCounterStart();
     *(unsigned int *)(param_1 + 0x14) = 4;
     *(unsigned int *)(param_1 + 0x18) = 0;
     FUN_0029ee6c(0,0x323232ff);
@@ -164,7 +164,7 @@ void FUN_003abed8(int param_1)
       if (temp_v1 == 0) {
         psVar6 = (short *)0x0;
         *(short *)(param_1 + 0x5a4) = temp_v0;
-        FUN_002b06c4();
+        dataTable00FindById();
         temp_v1 = 0;
         do {
           if (psVar6[0x50] == *(short *)(param_1 + 0x5a4)) {

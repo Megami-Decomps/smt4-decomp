@@ -30,7 +30,7 @@ extern unsigned int DAT_005714b4; /* 0x5714b4 */
 
 /* Supplied declaration required: btlGetMainState. */
 extern int lcgRandomRange(unsigned int);
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0034a290. */
 /* Supplied declaration required: FUN_003ebd40. */
 /* Supplied declaration required: FUN_003f0e20. */
@@ -68,7 +68,7 @@ unsigned int FUN_004c63f0(unsigned int param_1)
           (DAT_005714b0 & *(unsigned int *)(temp_v0 + 0x45a8)) != 0) {
         temp_v1 = 0;
       }
-      temp_v0 = FUN_0018719c(0x1fb);
+      temp_v0 = gameFlagIsSet(0x1fb);
       if ((temp_v0 != 0) || (temp_v1 < 0x46)) {
         temp_v4 = 3;
         goto LAB_004c6530;

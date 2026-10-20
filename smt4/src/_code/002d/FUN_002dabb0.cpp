@@ -16,14 +16,14 @@ int FUN_0029e648(int, int);
 int FUN_0029e890(int);
 int FUN_0029ee6c(int, int);
 int FUN_002b8454(int, int, int, int);
-int FUN_002b8838(int);
+int buttonHelpSetPreset(int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_2_stack;
 
-extern int DAT_0043dd68; /* 0x43dd68 */
+extern int g_unite; /* 0x43dd68 */
 
 /* Supplied declaration required: FUN_00257a50. */
 /* Supplied declaration required: FUN_0029c4ac. */
@@ -37,7 +37,7 @@ extern int DAT_0043dd68; /* 0x43dd68 */
 /* Supplied declaration required: FUN_0029e890. */
 /* Supplied declaration required: FUN_0029ee6c. */
 /* Supplied declaration required: FUN_002b8454. */
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 extern unsigned int FUN_002d96a4(void);
 
 
@@ -85,8 +85,8 @@ void FUN_002dabb0(int param_1,int *param_2)
   }
   FUN_0029ee6c(0,0x323232ff);
   FUN_0029dd7c(7);
-  temp_v1 = DAT_0043dd68;
-  FUN_002b8838(0x5d);
+  temp_v1 = g_unite;
+  buttonHelpSetPreset(0x5d);
   if (*(char *)(temp_v1 + 0x9431) != '\0') {
     FUN_002b8454(2,9,0x44,1);
     FUN_002b8454(3,0,0,1);

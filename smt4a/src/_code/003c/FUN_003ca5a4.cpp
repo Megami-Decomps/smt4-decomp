@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_001aea28(unsigned int, int);
-int FUN_00398420(void);
+int ptrListRemoveClearOwner(unsigned int, int);
+int dataTable2dSub5GetCount(void);
 int FUN_003b5c54(unsigned int, int);
 int FUN_0040619c(int, unsigned int);
 int FUN_0040ace8(unsigned int, int);
@@ -27,14 +27,14 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned char DAT_00531270; /* 0x531270 */
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern int g_lmapMainState; /* 0x580238 */
 extern unsigned char DAT_005f0c54; /* 0x5f0c54 */
 
-extern int FUN_0018719c(void);
-/* Supplied declaration required: FUN_001aea28. */
+extern int gameFlagIsSet(void);
+/* Supplied declaration required: ptrListRemoveClearOwner. */
 extern char *dataTable2DGetEntry(int);
-/* Supplied declaration required: FUN_00398420. */
+/* Supplied declaration required: dataTable2dSub5GetCount. */
 /* Supplied declaration required: FUN_003b5c54. */
 /* Supplied declaration required: FUN_0040619c. */
 /* Supplied declaration required: FUN_0040ace8. */
@@ -74,18 +74,18 @@ void FUN_003ca5a4(int param_1)
   temp_v12 = 0;
   temp_v13 = 0;
   temp_v14 = 0;
-  FUN_00398420();
+  dataTable2dSub5GetCount();
   if (0 < param_1) {
     do {
       pcVar1 = (char *)dataTable2DGetEntry(temp_v2);
       temp_v0 = (int)*pcVar1;
       if (temp_v0 != -1) {
         if (*(short *)(pcVar1 + 4) != 0) {
-          temp_v1 = FUN_0018719c();
+          temp_v1 = gameFlagIsSet();
           temp_v0 = 0;
           if (temp_v1 == 0) goto LAB_003ca648;
         }
-        if ((*(short *)(pcVar1 + 6) == 0) || (temp_v0 = FUN_0018719c(), temp_v0 == 0)) {
+        if ((*(short *)(pcVar1 + 6) == 0) || (temp_v0 = gameFlagIsSet(), temp_v0 == 0)) {
           temp_v0 = (int)pcVar1[2];
           if (pcVar1[3] == '\0') {
             *(unsigned char *)((int)&temp_v5 + temp_v0) = 1;
@@ -97,7 +97,7 @@ void FUN_003ca5a4(int param_1)
       }
 LAB_003ca648:
       temp_v2 = temp_v2 + 1;
-      FUN_00398420();
+      dataTable2dSub5GetCount();
     } while (temp_v2 < temp_v0);
   }
   rt_memcpy_w(temp_v4,&DAT_00531270,0xa0);
@@ -108,7 +108,7 @@ LAB_003ca648:
     if ((&DAT_005f0c54)[temp_v3] != '\x01') {
       if ((g_lmapMainState != 0) && (*(char *)(g_lmapMainState + temp_v3 * 0x88 + 0x4f84) != '\0')) {
         FUN_0040619c(temp_v0,temp_v3);
-        FUN_001aea28(DAT_0056fcc0,temp_v0);
+        ptrListRemoveClearOwner(g_handleRegistry,temp_v0);
         if ((g_lmapMainState != 0) &&
            (temp_v0 = g_lmapMainState + temp_v3 * 0x88, *(char *)(temp_v0 + 0x4f84) != '\0')) {
           *(unsigned char *)(temp_v0 + 0x4f84) = 0;
@@ -119,7 +119,7 @@ LAB_003ca648:
     else {
       if ((g_lmapMainState == 0) || (*(char *)(g_lmapMainState + temp_v3 * 0x88 + 0x4f84) == '\0')) {
         FUN_0040619c(temp_v0,temp_v3);
-        FUN_0040ace8(DAT_0056fcc0,temp_v0);
+        FUN_0040ace8(g_handleRegistry,temp_v0);
         if ((g_lmapMainState != 0) &&
            (temp_v0 = g_lmapMainState + temp_v3 * 0x88, *(char *)(temp_v0 + 0x4f84) == '\0')) {
           *(unsigned char *)(temp_v0 + 0x4f84) = 1;

@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0022a3a8(...);
-int FUN_0022a400(...);
-int FUN_0025c2ec(unsigned int, int);
+int asdListBoxSetItemMode3(...);
+int asdListBoxSetItemMode2(...);
+int asdListBoxSetByteValue(unsigned int, int);
 int asdListBoxAddItems(void);
 int FUN_0025c58c(unsigned int, int, int);
 int FUN_00262914(unsigned int, unsigned char *);
@@ -55,13 +55,13 @@ typedef struct {
 extern unsigned char LAB_003c3d78; /* 0x3c3d78 */
 extern unsigned int DAT_00439ad4; /* 0x439ad4 */
 
-/* Supplied declaration required: FUN_0022a3a8. */
-/* Supplied declaration required: FUN_0022a400. */
-/* Supplied declaration required: FUN_0025c2ec. */
+/* Supplied declaration required: asdListBoxSetItemMode3. */
+/* Supplied declaration required: asdListBoxSetItemMode2. */
+/* Supplied declaration required: asdListBoxSetByteValue. */
 /* Supplied declaration required: asdListBoxAddItems. */
 /* Supplied declaration required: FUN_0025c58c. */
 /* Supplied declaration required: FUN_00262914. */
-extern unsigned int *FUN_002a8764(void);
+extern unsigned int *gameGetSlotTable(void);
 
 
 void FUN_003c39fc(fn_003c39fc_arg0 *param_1,int param_2)
@@ -76,40 +76,40 @@ void FUN_003c39fc(fn_003c39fc_arg0 *param_1,int param_2)
   FUN_0025c58c(temp_v0,0x73,0);
   *(unsigned int *)&param_1->field_0x10 = temp_v0;
   asdListBoxAddItems();
-  FUN_0025c2ec(*(unsigned int *)&param_1->field_0x10,1);
+  asdListBoxSetByteValue(*(unsigned int *)&param_1->field_0x10,1);
   FUN_00262914(*(unsigned int *)&param_1->field_0x10,&LAB_003c3d78);
   puVar3 = (unsigned int *)(param_2 + 0x44a8);
-  FUN_0022a400(*(unsigned int *)&param_1->field_0x10,0,(*puVar3 & 4) >> 2);
-  FUN_0022a400(*(unsigned int *)&param_1->field_0x10,1,(*puVar3 & 8) >> 3);
-  FUN_0022a400(*(unsigned int *)&param_1->field_0x10,2,(*puVar3 & 0x10) >> 4);
-  FUN_0022a400(*(unsigned int *)&param_1->field_0x10,3,(*puVar3 & 0x20) >> 5);
-  FUN_0022a400(*(unsigned int *)&param_1->field_0x10,5,(*puVar3 & 0x40) >> 6);
-  FUN_0022a400(*(unsigned int *)&param_1->field_0x10,6,(*puVar3 & 0x80) >> 7);
-  FUN_0022a3a8(*(unsigned int *)&param_1->field_0x10,4,*(unsigned int *)(param_2 + 0x4a50),0,99999,0);
-  FUN_0022a400(*(unsigned int *)&param_1->field_0x10,7,(*puVar3 & 0x100) >> 8);
-  FUN_0022a400(*(unsigned int *)&param_1->field_0x10,8,(*puVar3 & 0x200) >> 9);
-  FUN_0022a400(*(unsigned int *)&param_1->field_0x10,9,(*puVar3 & 0x400) >> 10);
-  FUN_0022a400(*(unsigned int *)&param_1->field_0x10,10,(*puVar3 & 0x800) >> 0xb);
-  FUN_0022a3a8(*(unsigned int *)&param_1->field_0x10,0xb,*(unsigned int *)(param_2 + 0x49c8),0,400,0);
-  puVar2 = (unsigned int *)FUN_002a8764();
-  FUN_0022a3a8(*(unsigned int *)&param_1->field_0x10,0xc,*puVar2,0,999999999,0);
-  FUN_0022a400(*(unsigned int *)&param_1->field_0x10,0xd,(*puVar3 & 0x20000) >> 0x11);
-  FUN_0022a400(*(unsigned int *)&param_1->field_0x10,0xe,(*puVar3 & 0x400000) >> 0x16);
-  FUN_0022a400(*(unsigned int *)&param_1->field_0x10,0xf,(*puVar3 & 0x800000) >> 0x17);
-  FUN_0022a400(*(unsigned int *)&param_1->field_0x10,0x10,(*puVar3 & 0x1000000) >> 0x18);
-  FUN_0022a400(*(unsigned int *)&param_1->field_0x10,0x11,(*puVar3 & 0x2000000) >> 0x19);
-  FUN_0022a400(*(unsigned int *)&param_1->field_0x10,0x12,(*puVar3 & 0x4000000) >> 0x1a);
-  FUN_0022a400(*(unsigned int *)&param_1->field_0x10,0x13,(*puVar3 & 0x8000000) >> 0x1b);
-  FUN_0022a400(*(unsigned int *)&param_1->field_0x10,0x14,(*puVar3 & 0x10000000) >> 0x1c);
-  FUN_0022a400(*(unsigned int *)&param_1->field_0x10,0x15,(*puVar3 & 0x20000000) >> 0x1d);
-  FUN_0022a400(*(unsigned int *)&param_1->field_0x10,0x16);
-  FUN_0022a400(*(unsigned int *)&param_1->field_0x10,0x17);
-  FUN_0022a3a8(*(unsigned int *)&param_1->field_0x10,0x18,*(unsigned int *)(param_2 + 0x2f2c),0xffffffff
+  asdListBoxSetItemMode2(*(unsigned int *)&param_1->field_0x10,0,(*puVar3 & 4) >> 2);
+  asdListBoxSetItemMode2(*(unsigned int *)&param_1->field_0x10,1,(*puVar3 & 8) >> 3);
+  asdListBoxSetItemMode2(*(unsigned int *)&param_1->field_0x10,2,(*puVar3 & 0x10) >> 4);
+  asdListBoxSetItemMode2(*(unsigned int *)&param_1->field_0x10,3,(*puVar3 & 0x20) >> 5);
+  asdListBoxSetItemMode2(*(unsigned int *)&param_1->field_0x10,5,(*puVar3 & 0x40) >> 6);
+  asdListBoxSetItemMode2(*(unsigned int *)&param_1->field_0x10,6,(*puVar3 & 0x80) >> 7);
+  asdListBoxSetItemMode3(*(unsigned int *)&param_1->field_0x10,4,*(unsigned int *)(param_2 + 0x4a50),0,99999,0);
+  asdListBoxSetItemMode2(*(unsigned int *)&param_1->field_0x10,7,(*puVar3 & 0x100) >> 8);
+  asdListBoxSetItemMode2(*(unsigned int *)&param_1->field_0x10,8,(*puVar3 & 0x200) >> 9);
+  asdListBoxSetItemMode2(*(unsigned int *)&param_1->field_0x10,9,(*puVar3 & 0x400) >> 10);
+  asdListBoxSetItemMode2(*(unsigned int *)&param_1->field_0x10,10,(*puVar3 & 0x800) >> 0xb);
+  asdListBoxSetItemMode3(*(unsigned int *)&param_1->field_0x10,0xb,*(unsigned int *)(param_2 + 0x49c8),0,400,0);
+  puVar2 = (unsigned int *)gameGetSlotTable();
+  asdListBoxSetItemMode3(*(unsigned int *)&param_1->field_0x10,0xc,*puVar2,0,999999999,0);
+  asdListBoxSetItemMode2(*(unsigned int *)&param_1->field_0x10,0xd,(*puVar3 & 0x20000) >> 0x11);
+  asdListBoxSetItemMode2(*(unsigned int *)&param_1->field_0x10,0xe,(*puVar3 & 0x400000) >> 0x16);
+  asdListBoxSetItemMode2(*(unsigned int *)&param_1->field_0x10,0xf,(*puVar3 & 0x800000) >> 0x17);
+  asdListBoxSetItemMode2(*(unsigned int *)&param_1->field_0x10,0x10,(*puVar3 & 0x1000000) >> 0x18);
+  asdListBoxSetItemMode2(*(unsigned int *)&param_1->field_0x10,0x11,(*puVar3 & 0x2000000) >> 0x19);
+  asdListBoxSetItemMode2(*(unsigned int *)&param_1->field_0x10,0x12,(*puVar3 & 0x4000000) >> 0x1a);
+  asdListBoxSetItemMode2(*(unsigned int *)&param_1->field_0x10,0x13,(*puVar3 & 0x8000000) >> 0x1b);
+  asdListBoxSetItemMode2(*(unsigned int *)&param_1->field_0x10,0x14,(*puVar3 & 0x10000000) >> 0x1c);
+  asdListBoxSetItemMode2(*(unsigned int *)&param_1->field_0x10,0x15,(*puVar3 & 0x20000000) >> 0x1d);
+  asdListBoxSetItemMode2(*(unsigned int *)&param_1->field_0x10,0x16);
+  asdListBoxSetItemMode2(*(unsigned int *)&param_1->field_0x10,0x17);
+  asdListBoxSetItemMode3(*(unsigned int *)&param_1->field_0x10,0x18,*(unsigned int *)(param_2 + 0x2f2c),0xffffffff
                ,999,0);
-  FUN_0022a400(*(unsigned int *)&param_1->field_0x10,0x19);
-  FUN_0022a3a8(*(unsigned int *)&param_1->field_0x10,0x1a,*(unsigned int *)(param_2 + 0x2f34),0,4,0);
-  FUN_0022a3a8(*(unsigned int *)&param_1->field_0x10,0x1b,DAT_00439ad4,0xffffffff,999,0);
-  FUN_0022a400(*(unsigned int *)&param_1->field_0x10,0x1c);
+  asdListBoxSetItemMode2(*(unsigned int *)&param_1->field_0x10,0x19);
+  asdListBoxSetItemMode3(*(unsigned int *)&param_1->field_0x10,0x1a,*(unsigned int *)(param_2 + 0x2f34),0,4,0);
+  asdListBoxSetItemMode3(*(unsigned int *)&param_1->field_0x10,0x1b,DAT_00439ad4,0xffffffff,999,0);
+  asdListBoxSetItemMode2(*(unsigned int *)&param_1->field_0x10,0x1c);
   return;
 }
 

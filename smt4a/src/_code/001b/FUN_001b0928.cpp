@@ -20,7 +20,7 @@ typedef struct {
     unsigned int spB4; /* 0xb4: local_b4 */
 } param_4_stack;
 
-extern unsigned int *DAT_005b40e0; /* 0x5b40e0 */
+extern unsigned int *g_commandBufferCursor; /* 0x5b40e0 */
 
 /* Supplied declaration required: FUN_001bc730. */
 /* Supplied declaration required: FUN_001bc768. */
@@ -69,9 +69,9 @@ void FUN_001b0928(int param_1,int param_2,int param_3,int param_4)
     }
     temp_v0 = temp_v3 + (unsigned int)(*(char *)(temp_v3 + 0x30) != '\0') * 4;
     temp_v2 = *(unsigned int *)(temp_v0 + 0x14);
-    nnnstdMemCpy(DAT_005b40e0,*(unsigned int *)(temp_v0 + 0xc),temp_v2);
-    puVar5 = (unsigned int *)((temp_v2 & 0xfffffffc) + (int)DAT_005b40e0);
-    DAT_005b40e0 = puVar5;
+    nnnstdMemCpy(g_commandBufferCursor,*(unsigned int *)(temp_v0 + 0xc),temp_v2);
+    puVar5 = (unsigned int *)((temp_v2 & 0xfffffffc) + (int)g_commandBufferCursor);
+    g_commandBufferCursor = puVar5;
     *puVar5 = 0x80000006;
     puVar5[1] = 0x804f02c0;
     puVar5[2] = 0;
@@ -151,13 +151,13 @@ void FUN_001b0928(int param_1,int param_2,int param_3,int param_4)
     }
     puVar5[0x48] = temp_v2 | 0x80000000;
     puVar5[0x49] = 0xf0227;
-    DAT_005b40e0 = DAT_005b40e0 + 0x4a;
+    g_commandBufferCursor = g_commandBufferCursor + 0x4a;
     temp_v2 = *(unsigned int *)(temp_v3 + 0x28);
-    nnnstdMemCpy(DAT_005b40e0,*(unsigned int *)(temp_v3 + 0x24));
-    DAT_005b40e0 = (unsigned int *)((int)DAT_005b40e0 + (temp_v2 & 0xfffffffc));
+    nnnstdMemCpy(g_commandBufferCursor,*(unsigned int *)(temp_v3 + 0x24));
+    g_commandBufferCursor = (unsigned int *)((int)g_commandBufferCursor + (temp_v2 & 0xfffffffc));
     temp_v2 = *(unsigned int *)(temp_v3 + 0x20);
-    nnnstdMemCpy(DAT_005b40e0,*(unsigned int *)(temp_v3 + 0x1c),temp_v2);
-    DAT_005b40e0 = (unsigned int *)((int)DAT_005b40e0 + (temp_v2 & 0xfffffffc));
+    nnnstdMemCpy(g_commandBufferCursor,*(unsigned int *)(temp_v3 + 0x1c),temp_v2);
+    g_commandBufferCursor = (unsigned int *)((int)g_commandBufferCursor + (temp_v2 & 0xfffffffc));
   }
   return;
 }

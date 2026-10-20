@@ -4,19 +4,19 @@
 
 extern "C" {
 
-int FUN_001bcd48(int, int);
+int svcSleepThread(int, int);
 
-extern int DAT_005c1fc4; /* 0x5c1fc4 */
+extern int g_nnCecdHandle; /* 0x5c1fc4 */
 
-/* Supplied declaration required: FUN_001bcd48. */
+/* Supplied declaration required: svcSleepThread. */
 
 
 unsigned int FUN_0042fe3c(void)
 
 {
 /* irregular: 1 native warning(s); review required */
-  while (DAT_005c1fc4 == 0) {
-    FUN_001bcd48(10000000,0);
+  while (g_nnCecdHandle == 0) {
+    svcSleepThread(10000000,0);
   }
   return 0;
 }

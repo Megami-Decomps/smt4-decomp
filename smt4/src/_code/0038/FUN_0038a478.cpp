@@ -37,8 +37,8 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002ba12c. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: FUN_002bed3c. */
-extern int FUN_002bed98(unsigned int *);
-extern int FUN_002beda4(void);
+extern int vec2GetYInt(unsigned int *);
+extern int vec2GetXInt(void);
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf4f8. */
 /* Supplied declaration required: FUN_002bf538. */
@@ -123,9 +123,9 @@ unsigned int FUN_0038a478(void)
     }
     if (((*(char *)((int)puVar2 + 0x4ca) != '\0') && ((char)puVar2[0x132] != '\0')) &&
        ((*puVar2 & 0x20) != 0)) {
-      temp_v4 = FUN_002beda4();
+      temp_v4 = vec2GetXInt();
       temp_v4 = temp_v4 + temp_v11;
-      temp_v2 = FUN_002bed98(puVar2 + 0x133);
+      temp_v2 = vec2GetYInt(puVar2 + 0x133);
       temp_v1 = g_titleScene;
       temp_v3 = FUN_002c5d80(1,0);
       piVar11 = (int *)(temp_v1 + 0x124c);

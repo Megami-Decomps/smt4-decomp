@@ -2,10 +2,10 @@
 
 extern "C" {
 
-extern void FUN_00271b64(InfoTable *info);
+extern void effBehaviorRun(InfoTable *info);
 extern void FUN_00390368(InfoHolder *holder, Item1C *item);
 
-/* After FUN_00271b64, calls FUN_00390368 for each kind-3 item whose table entry has unk10 == 0. */
+/* After effBehaviorRun, calls FUN_00390368 for each kind-3 item whose table entry has unk10 == 0. */
 void infoHolderInitItems(InfoHolder *holder)
 {
     InfoTable *info;
@@ -14,7 +14,7 @@ void infoHolderInitItems(InfoHolder *holder)
     s32 count;
     s32 i;
 
-    FUN_00271b64(holder->info);
+    effBehaviorRun(holder->info);
     info = holder->info;
     count = info->count;
     if (count != 0 && info->unk10 != 0) {

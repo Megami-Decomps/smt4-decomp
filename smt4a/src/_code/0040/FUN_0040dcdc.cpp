@@ -17,7 +17,7 @@ struct fn_0040dcdc_arg1 {
     int field_0x4c; /* +0x4c */
 };
 
-extern int DAT_0056fcc0; /* 0x56fcc0 */
+extern int g_handleRegistry; /* 0x56fcc0 */
 extern int g_btlStageModel; /* 0x57a4f8 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -41,7 +41,7 @@ void FUN_0040dcdc(unsigned int param_1,fn_0040dcdc_arg1 *param_2)
   if (0 < param_2->field_0x28) {
     temp_v2 = btlGetMainState();
     VectorSignedToFloat(param_2->field_0x28 - param_2->field_0x4c,(unsigned char)(in_fpscr >> 0x16) & 3);
-    puVar4 = (unsigned int *)table108Owner(*(unsigned int *)(DAT_0056fcc0 + 4),
+    puVar4 = (unsigned int *)table108Owner(*(unsigned int *)(g_handleRegistry + 4),
                                   (int)*(short *)(g_btlStageModel + 0xac),param_2->field_0x4c);
     temp_v3 = *puVar4;
     temp_v0 = (temp_v3 & 0xffffff) >> 0x10;

@@ -8,9 +8,9 @@ int FUN_002580d4(...);
 int FUN_0029a17c(...);
 int FUN_002b6758(...);
 int FUN_002b6dd8(...);
-int FUN_002b9024(void);
+int devilGetRecord(void);
 int FUN_002bdf94(...);
-int FUN_002be304(...);
+int drawSetColorFromRGBA8(...);
 int FUN_002be5a4(...);
 int FUN_002be624(...);
 int FUN_002bed3c(void);
@@ -47,16 +47,16 @@ extern unsigned int FUN_0029dde0(void);
 extern int FUN_0029ea68(unsigned short);
 /* Supplied declaration required: FUN_002b6758. */
 /* Supplied declaration required: FUN_002b6dd8. */
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: devilGetRecord. */
 extern unsigned int FUN_002bce30(unsigned short, unsigned int);
 extern unsigned int FUN_002bd068(unsigned short);
 /* Supplied declaration required: FUN_002bdf94. */
-/* Supplied declaration required: FUN_002be304. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002bed3c. */
-extern int FUN_002bed98(int);
-extern int FUN_002beda4(int);
+extern int vec2GetYInt(int);
+extern int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf4f8. */
@@ -131,7 +131,7 @@ void FUN_001f20b4(int param_1,int param_2,unsigned int param_3,int param_4,unsig
             if ((*(unsigned int *)(temp_v6 + 0x943c) & 0x1fffc) != 0) {
               puVar12 = (unsigned int *)(temp_v6 + 0x9438);
               puVar5 = (unsigned short *)((*(unsigned int *)(temp_v6 + 0x943c) & 0x1ffff) >> 2);
-              FUN_002b9024();
+              devilGetRecord();
               temp_v10 = puVar5;
               FUN_002bf288(2,0x24,0x65,*(short *)(temp_v2 + 8) + param_1,
                            *(short *)(temp_v2 + 10) + param_2,0xc9);
@@ -189,7 +189,7 @@ void FUN_001f20b4(int param_1,int param_2,unsigned int param_3,int param_4,unsig
                                   (int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v6 + 8),
                                   (unsigned char)(in_fpscr >> 0x16) & 3);
               FUN_002be5a4(2,0x7a4c00ff,temp_v9);
-              FUN_002be304(0xff);
+              drawSetColorFromRGBA8(0xff);
               temp_v6 = FUN_002bf4f8(0x24,0x71);
               FUN_002bdf94(0,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v6 + 8) + param_1,
                            (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v6 + 10) + param_2,1,2,
@@ -223,7 +223,7 @@ void FUN_001f20b4(int param_1,int param_2,unsigned int param_3,int param_4,unsig
           temp_v2 = temp_v1 + param_3 * 8;
           puVar12 = (unsigned int *)(temp_v2 + 0x9438);
           puVar5 = (unsigned short *)((*(unsigned int *)(temp_v2 + 0x943c) & 0x1ffff) >> 2);
-          FUN_002b9024();
+          devilGetRecord();
           temp_v6 = FUN_002bf4f8(0x24,param_3 + 0x87);
           FUN_002bf538();
           FUN_002bf288(2,0x24,0x76,*(short *)(temp_v6 + 8) + param_1,*(short *)(temp_v6 + 10) + param_2,
@@ -260,9 +260,9 @@ void FUN_001f20b4(int param_1,int param_2,unsigned int param_3,int param_4,unsig
           FUN_0029a17c((int)*(short *)(temp_v6 + 8) + (int)*(short *)(temp_v5 + 8) + param_1,
                        (int)*(short *)(temp_v6 + 10) + (int)*(short *)(temp_v5 + 10) + param_2,
                        (int)**(short **)(temp_v5 + 0xc),(int)(*(short **)(temp_v5 + 0xc))[1],1);
-          temp_v4 = FUN_002bed98(temp_v1 + 0xb0);
+          temp_v4 = vec2GetYInt(temp_v1 + 0xb0);
           temp_v0 = *(short *)(temp_v6 + 10);
-          temp_v1 = FUN_002beda4(temp_v1 + 0xb0);
+          temp_v1 = vec2GetXInt(temp_v1 + 0xb0);
           FUN_002bf288(2,0x24,0x7c,temp_v1 + param_1 + (int)*(short *)(temp_v6 + 8),
                        temp_v4 + param_2 + (int)temp_v0,0xce);
           temp_v1 = g_titleScene;

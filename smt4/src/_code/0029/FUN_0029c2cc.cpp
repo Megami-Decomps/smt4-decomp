@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001200d8(unsigned int);
-int FUN_00153050(unsigned int);
+int settings5BClearFlags(unsigned int);
 int nw_gfx_SceneNode_AttachChild(unsigned int);
 int nw_gfx_SceneTraverser_Begin(unsigned int, unsigned int);
 
@@ -21,16 +21,16 @@ extern unsigned int DAT_00464b20; /* 0x464b20 */
 extern unsigned int DAT_00464b24; /* 0x464b24 */
 extern int DAT_00464b7c; /* 0x464b7c */
 extern int DAT_00464b80; /* 0x464b80 */
-extern int *DAT_00464b84; /* 0x464b84 */
+extern int *g_asdModelTransformBuilder; /* 0x464b84 */
 extern int *DAT_00464b88; /* 0x464b88 */
-extern unsigned int DAT_00464b9c; /* 0x464b9c */
+extern unsigned int g_asdModelSlotArray0; /* 0x464b9c */
 extern unsigned int DAT_00464ba0; /* 0x464ba0 */
-extern unsigned int DAT_00464bb4; /* 0x464bb4 */
+extern unsigned int g_asdModelSlotArray3; /* 0x464bb4 */
 extern unsigned int DAT_00464bbc; /* 0x464bbc */
 extern unsigned int DAT_00464bc0; /* 0x464bc0 */
 
 /* Supplied declaration required: FUN_001200d8. */
-/* Supplied declaration required: FUN_00153050. */
+/* Supplied declaration required: settings5BClearFlags. */
 extern int asdModelGetSlotArray0(int);
 /* Supplied declaration required: nw_gfx_SceneNode_AttachChild. */
 /* Supplied declaration required: nw_gfx_SceneTraverser_Begin. */
@@ -99,13 +99,13 @@ void FUN_0029c2cc(int param_1,int param_2)
   }
   if (param_2 == 0) {
     temp_v2 = 1;
-    FUN_00153050(temp_v2);
+    settings5BClearFlags(temp_v2);
   }
   else if (param_2 == 1) {
     temp_v2 = 2;
-    FUN_00153050(temp_v2);
+    settings5BClearFlags(temp_v2);
   }
-  temp_v1 = *(int *)((&DAT_00464bb4)[param_2] + 4);
+  temp_v1 = *(int *)((&g_asdModelSlotArray3)[param_2] + 4);
   if (param_2 != 0) {
     if (param_2 != 1) {
       return;
@@ -119,11 +119,11 @@ void FUN_0029c2cc(int param_1,int param_2)
   }
   else {
     DAT_00464b10 = DAT_00464b20;
-    nw_gfx_SceneNode_AttachChild(DAT_00464b9c);
+    nw_gfx_SceneNode_AttachChild(g_asdModelSlotArray0);
     **(unsigned int **)(temp_v1 + 0xac) = DAT_00464b10;
     DAT_00464bbc = 0;
     temp_v1 = DAT_00464b7c;
-    piVar4 = DAT_00464b84;
+    piVar4 = g_asdModelTransformBuilder;
   }
   (**(romwright_code **)(*piVar4 + 0x10))(piVar4,*(unsigned int *)(temp_v1 + 0x10));
   FUN_001200d8(*(unsigned int *)(temp_v1 + 0x10));

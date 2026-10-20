@@ -6,7 +6,7 @@ extern "C" {
 
 int refIsNullOrZero(int *);
 int FUN_002bb5a4(unsigned int *, unsigned char **, int);
-int FUN_002c52f8(void);
+int asdFatalError(void);
 int FUN_002c618c(unsigned char **, int, int, int *);
 int FUN_0034dddc(unsigned int *, unsigned int *, unsigned int *);
 int FUN_00351488(unsigned char *);
@@ -37,7 +37,7 @@ extern unsigned int DAT_004c40f4; /* 0x4c40f4 */
 extern int FUN_002b90c8(int, unsigned int, unsigned int *);
 /* Supplied declaration required: refIsNullOrZero. */
 /* Supplied declaration required: FUN_002bb5a4. */
-/* Supplied declaration required: FUN_002c52f8. */
+/* Supplied declaration required: asdFatalError. */
 /* Supplied declaration required: FUN_002c618c. */
 /* Supplied declaration required: FUN_0034dddc. */
 extern unsigned int FUN_0034e134(unsigned int *);
@@ -78,7 +78,7 @@ void FUN_0032b3c4(int param_1)
   DAT_004c40ec = 0;
   FUN_002bb5a4(&DAT_004c40e4,&temp_v2,1);
   if ((int)puVar5 < 0) {
-    FUN_002c52f8();
+    asdFatalError();
   }
   FUN_0034dddc(&DAT_004c4080,&DAT_004c40e0,&DAT_004c3a38);
   temp_v1 = FUN_0034e134(&DAT_004c4080);

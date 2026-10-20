@@ -13,7 +13,7 @@ typedef struct List {
     /* 0x14 */ u32 unk14;
 } List;
 
-Node *FUN_00310186(List *list, u32 count);
+Node *poolAllocElement12(List *list, u32 count);
 
 /* Constructor: zeroes the list and allocates its sentinel node, which points at itself both ways. */
 List *FUN_001211a6(List *list)
@@ -24,7 +24,7 @@ List *FUN_001211a6(List *list)
     list->unk00[3] = 0;
     list->head = NULL;
     list->unk14 = 0;
-    list->head = FUN_00310186(list, 1);
+    list->head = poolAllocElement12(list, 1);
     list->head->next = list->head;
     list->head->prev = list->head;
     return list;

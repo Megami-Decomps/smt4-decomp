@@ -12,11 +12,11 @@ typedef struct {
 } param_2_stack;
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_001801a4(void);
+extern int gameGetPlayerData(void);
 extern int FUN_0018416c(unsigned short);
-extern int FUN_001ab854(void);
-extern int FUN_001ab888(void);
-extern int FUN_001b347c(void);
+extern int gameGetSlotRecord(void);
+extern int gameGetSlotTable(void);
+extern int gameSlotTableFindFree(void);
 
 
 void FUN_004a0bac(unsigned int param_1,int param_2)
@@ -35,11 +35,11 @@ void FUN_004a0bac(unsigned int param_1,int param_2)
   unsigned long long temp_v8;
   
   if (((param_1 == 0 || param_1 == 2) || param_1 == 3) &&
-     (((param_2 != 0 || (temp_v1 = FUN_001801a4(), (*(unsigned short *)(temp_v1 + 0x5e) & 2) == 0)) &&
-      (temp_v1 = FUN_001801a4(), (*(unsigned short *)(temp_v1 + 0x5e) & 0x400) == 0)))) {
-    temp_v1 = FUN_001801a4();
+     (((param_2 != 0 || (temp_v1 = gameGetPlayerData(), (*(unsigned short *)(temp_v1 + 0x5e) & 2) == 0)) &&
+      (temp_v1 = gameGetPlayerData(), (*(unsigned short *)(temp_v1 + 0x5e) & 0x400) == 0)))) {
+    temp_v1 = gameGetPlayerData();
     *(unsigned short *)(temp_v1 + 0x5e) = 0;
-    temp_v2 = FUN_001801a4();
+    temp_v2 = gameGetPlayerData();
     *(unsigned short *)(temp_v2 + 0x2a) = *(unsigned short *)(temp_v2 + 0x1c);
     *(unsigned short *)(temp_v2 + 0x2c) = *(unsigned short *)(temp_v2 + 0x1e);
     *(unsigned short *)(temp_v1 + 0x2a) = *(unsigned short *)(temp_v1 + 0x1c);
@@ -49,19 +49,19 @@ void FUN_004a0bac(unsigned int param_1,int param_2)
   if (param_1 >= 2) {
     if (param_1 != 2 && param_1 != 3) goto LAB_004a0d7c;
     temp_v1 = 3;
-    temp_v2 = FUN_001ab888();
+    temp_v2 = gameGetSlotTable();
     temp_v2 = temp_v2 + 0x1ca0;
   }
   else {
-    temp_v1 = FUN_001b347c();
-    temp_v2 = FUN_001ab888();
+    temp_v1 = gameSlotTableFindFree();
+    temp_v2 = gameGetSlotTable();
     temp_v2 = temp_v2 + 0x1c88;
   }
   temp_v5 = 0;
   if (temp_v5 < temp_v1) {
     do {
       if (((-1 < *(char *)(temp_v2 + temp_v5)) &&
-          ((temp_v3 = FUN_001ab854(), param_2 != 0 || ((*(unsigned short *)(temp_v3 + 0x60) & 2) == 0)))) &&
+          ((temp_v3 = gameGetSlotRecord(), param_2 != 0 || ((*(unsigned short *)(temp_v3 + 0x60) & 2) == 0)))) &&
          ((*(unsigned short *)(temp_v3 + 0x60) & 0x400) == 0)) {
         if ((*(unsigned short *)(temp_v3 + 0x60) & 4) != 0) {
           if (temp_v3 != 0) {
@@ -100,7 +100,7 @@ LAB_004a0d7c:
         temp_v1 = 0;
       }
       else {
-        temp_v1 = FUN_001ab888();
+        temp_v1 = gameGetSlotTable();
         temp_v1 = temp_v1 + (temp_v6 & 0xffff) * 0x134 + 0x1ddc;
       }
       if (((param_2 != 0) || ((*(unsigned short *)(temp_v1 + 0x60) & 2) == 0)) &&

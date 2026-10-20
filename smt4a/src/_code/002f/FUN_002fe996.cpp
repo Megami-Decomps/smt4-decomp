@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_001329ba(int *);
-int FUN_002e6e14(...);
+int asdOperatorDeleteArray(...);
 
 /* Supplied declaration required: FUN_001329ba. */
-/* Supplied declaration required: FUN_002e6e14. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
 
 
 int FUN_002fe996(int param_1)
@@ -27,8 +27,8 @@ int FUN_002fe996(int param_1)
     *(unsigned int **)(param_1 + 8) = puVar1;
     while (piVar2 = (int *)*piVar3, piVar2 != (int *)0x0) {
       *piVar3 = *piVar2;
-      FUN_002e6e14(piVar2[2]);
-      FUN_002e6e14(piVar2);
+      asdOperatorDeleteArray(piVar2[2]);
+      asdOperatorDeleteArray(piVar2);
     }
     *(unsigned int *)(param_1 + 8) = 0;
     *(unsigned int *)(param_1 + 0xc) = 0;

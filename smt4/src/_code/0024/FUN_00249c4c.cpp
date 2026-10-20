@@ -8,7 +8,7 @@ int FUN_002a4e18(int, unsigned int);
 int FUN_002a60cc(unsigned int, unsigned int, unsigned int);
 int FUN_002a86d4(int);
 int FUN_002a880c(int, int, int);
-int FUN_002ae898(unsigned int);
+int asdTMTexTableReleaseNode(unsigned int);
 
 typedef struct fn_00249c4c_arg0 fn_00249c4c_arg0;
 struct fn_00249c4c_arg0 {
@@ -43,9 +43,9 @@ extern int FUN_0024ecc0(fn_00249c4c_arg0 *, unsigned int);
 /* Supplied declaration required: FUN_002a60cc. */
 /* Supplied declaration required: FUN_002a86d4. */
 /* Supplied declaration required: FUN_002a880c. */
-/* Supplied declaration required: FUN_002ae898. */
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
 extern int jobGetWork(fn_00249c4c_arg0 *);
-extern int FUN_002c09d0(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 
 
 void FUN_00249c4c(fn_00249c4c_arg0 *param_1,unsigned int param_2,int param_3)
@@ -56,7 +56,7 @@ void FUN_00249c4c(fn_00249c4c_arg0 *param_1,unsigned int param_2,int param_3)
   int temp_v1;
   unsigned char temp_v2;
   
-  temp_v0 = FUN_002c09d0(0x522);
+  temp_v0 = gameFlagIsSet(0x522);
   if ((temp_v0 == 0) || (param_1 != (fn_00249c4c_arg0 *)0x0)) {
     temp_v1 = jobGetWork(param_1);
     temp_v2 = *(int *)(temp_v1 + 0x84) != -1;
@@ -65,7 +65,7 @@ void FUN_00249c4c(fn_00249c4c_arg0 *param_1,unsigned int param_2,int param_3)
       temp_v0 = *(int *)(temp_v1 + 0x80);
     }
     if (temp_v2 && temp_v0 != 0) {
-      FUN_002ae898(*(unsigned int *)(temp_v1 + 0x10));
+      asdTMTexTableReleaseNode(*(unsigned int *)(temp_v1 + 0x10));
       FUN_002a60cc(g_aocSystem,*(unsigned int *)(temp_v1 + 0x10),*(unsigned int *)(temp_v1 + 0x84));
       *(unsigned int *)(temp_v1 + 0x84) = 0xffffffff;
       *(unsigned int *)(temp_v1 + 0x80) = 0;

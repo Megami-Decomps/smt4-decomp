@@ -4,8 +4,8 @@ extern "C" {
 
 void FUN_002bff50(void)
 {
-    if (DAT_0043e188.state != NULL) {
-        DAT_0043e188.state->unkA11 = 0x14;
+    if (g_messageMain.state != NULL) {
+        g_messageMain.state->unkA11 = 0x14;
     }
 }
 

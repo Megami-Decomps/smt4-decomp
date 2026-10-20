@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_0026e68c(...);
-int FUN_002b722c(...);
-int FUN_002c425c(...);
+int jobGetStatus(...);
+int jobSetParent(...);
 int memClear(...);
 int asdMemAlloc(...);
 int taskCreateDraw(...);
@@ -28,9 +28,9 @@ extern unsigned char LAB_002ee9f0; /* 0x2ee9f0 */
 extern unsigned int *g_eventTex; /* 0x43ded0 */
 
 /* Supplied declaration required: FUN_0026e68c. */
-/* Supplied declaration required: FUN_002b722c. */
+/* Supplied declaration required: jobGetStatus. */
 extern int jobIsValid(unsigned int);
-/* Supplied declaration required: FUN_002c425c. */
+/* Supplied declaration required: jobSetParent. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: taskCreateDraw. */
@@ -69,7 +69,7 @@ LAB_002ee7d0:
   temp_v1 = jobIsValid(*(unsigned int *)(temp_v6 * 4 + 0x493790));
   if (temp_v1 != 0) {
     FUN_0026e68c(*(unsigned int *)(temp_v6 * 4 + 0x493790),1);
-    FUN_002c425c(*g_eventTex,*(unsigned int *)(temp_v6 * 4 + 0x493790));
+    jobSetParent(*g_eventTex,*(unsigned int *)(temp_v6 * 4 + 0x493790));
     puVar2 = g_eventTex;
     temp_v5 = *(unsigned int *)(temp_v6 * 4 + 0x493790);
     temp_v1 = 0;
@@ -126,8 +126,8 @@ LAB_002ee8c8:
     do {
       if (puVar2[temp_v1 + 1] != 0) {
         if (puVar2[temp_v1 + 2] != 0) {
-          temp_v2 = FUN_002b722c();
-          temp_v4 = FUN_002b722c(puVar2[temp_v1 + 2]);
+          temp_v2 = jobGetStatus();
+          temp_v4 = jobGetStatus(puVar2[temp_v1 + 2]);
           if (temp_v4 < temp_v2) {
             temp_v5 = puVar2[temp_v1 + 1];
             temp_v0 = 1;

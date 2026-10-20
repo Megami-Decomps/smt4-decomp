@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0014384c(int);
+int asdTMTexTableLoadSprites(int);
 int FUN_0014afd0(int, int);
 int FUN_00215bd0(void);
 int FUN_002804b0(...);
@@ -13,9 +13,9 @@ int FUN_002c7e6c(void);
 int FUN_002c8538(int);
 int FUN_002c85b0(int);
 int FUN_002e2afc(void);
-int FUN_0031a400(void);
+int campCommonBgAcquire(void);
 int FUN_003343f0(int);
-int FUN_00342010(void);
+int campButtonHelpAcquire(void);
 int objBInitBlock12DC(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -25,7 +25,7 @@ typedef struct {
 
 extern unsigned char LAB_004a77a0; /* 0x4a77a0 */
 
-/* Supplied declaration required: FUN_0014384c. */
+/* Supplied declaration required: asdTMTexTableLoadSprites. */
 /* Supplied declaration required: FUN_0014afd0. */
 /* Supplied declaration required: FUN_00215bd0. */
 /* Supplied declaration required: FUN_002804b0. */
@@ -35,11 +35,11 @@ extern unsigned char LAB_004a77a0; /* 0x4a77a0 */
 /* Supplied declaration required: FUN_002c85b0. */
 /* Supplied declaration required: FUN_002e2afc. */
 extern int *asdTMTexTableGetEntry(unsigned int);
-/* Supplied declaration required: FUN_0031a400. */
+/* Supplied declaration required: campCommonBgAcquire. */
 /* Supplied declaration required: FUN_003343f0. */
-/* Supplied declaration required: FUN_00342010. */
+/* Supplied declaration required: campButtonHelpAcquire. */
 /* Supplied declaration required: objBInitBlock12DC. */
-extern int FUN_00399e04(void);
+extern int campButtonHelpIsActive(void);
 
 
 void FUN_004a76a8(int param_1)
@@ -50,12 +50,12 @@ void FUN_004a76a8(int param_1)
   int *piVar2;
   unsigned int temp_v1;
   
-  FUN_0031a400();
-  temp_v0 = FUN_00399e04();
+  campCommonBgAcquire();
+  temp_v0 = campButtonHelpIsActive();
   if (temp_v0 == 0) {
     *(unsigned char *)(param_1 + 0x1c) = 1;
     FUN_002bf464();
-    FUN_00342010();
+    campButtonHelpAcquire();
   }
   piVar2 = (int *)asdTMTexTableGetEntry(7);
   if (*piVar2 == 0) {
@@ -63,7 +63,7 @@ void FUN_004a76a8(int param_1)
   }
   piVar2 = (int *)asdTMTexTableGetEntry(0x14);
   if (*piVar2 == 0) {
-    FUN_0014384c(0x14);
+    asdTMTexTableLoadSprites(0x14);
     temp_v0 = 0;
     do {
       FUN_0014afd0(0x14,temp_v0);

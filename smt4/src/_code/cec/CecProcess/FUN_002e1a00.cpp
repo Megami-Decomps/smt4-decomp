@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002bcc60(...);
 int FUN_002bcd44(...);
 int memAlloc(...);
-int FUN_002c38fc(...);
+int nn_os_CriticalSection_Initialize(...);
 int FUN_002c526c(...);
 
 /* stack frame of param_1: 7 slot(s), 28 byte(s) */
@@ -26,11 +26,11 @@ extern unsigned char LAB_003f6e94; /* 0x3f6e94 */
 extern unsigned char LAB_003f6f5c; /* 0x3f6f5c */
 extern unsigned char LAB_003f6fe8; /* 0x3f6fe8 */
 
-extern unsigned int FUN_00248a9c(void);
+extern unsigned int asdCecInboxGetMessageCount(void);
 /* Supplied declaration required: FUN_002bcc60. */
 /* Supplied declaration required: FUN_002bcd44. */
 /* Supplied declaration required: memAlloc. */
-/* Supplied declaration required: FUN_002c38fc. */
+/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
 /* Supplied declaration required: FUN_002c526c. */
 
 
@@ -46,9 +46,9 @@ void FUN_002e1a00(int param_1)
   unsigned char *temp_v5;
   int temp_v6;
   
-  FUN_002c38fc(param_1 + 0x420);
+  nn_os_CriticalSection_Initialize(param_1 + 0x420);
   *(unsigned int *)(param_1 + 0x6c) = 0;
-  temp_v0 = FUN_00248a9c();
+  temp_v0 = asdCecInboxGetMessageCount();
   *(unsigned int *)(param_1 + 0x70) = temp_v0;
   *(unsigned int *)(param_1 + 0x78) = 0;
   *(unsigned int *)(param_1 + 0x7c) = 0;

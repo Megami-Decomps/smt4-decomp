@@ -8,7 +8,7 @@ typedef struct Row12 {
 
 extern s32 scrGetArg(s32 index);
 extern void *btlGetMainState(void);
-extern void *FUN_003ef960(void *state, s32 index);
+extern void *btlGetTable(void *state, s32 index);
 extern Row12 *dataTableGetEntries(void *table);
 extern void scrSetResult(u32 value);
 
@@ -18,7 +18,7 @@ u32 scrCommGetBattleTableValue(void)
     s32 row = scrGetArg(0);
     s32 column = scrGetArg(1);
     void *state = btlGetMainState();
-    Row12 *rows = dataTableGetEntries(FUN_003ef960(state, 9));
+    Row12 *rows = dataTableGetEntries(btlGetTable(state, 9));
 
     scrSetResult(rows[row].values[column]);
     return 1;

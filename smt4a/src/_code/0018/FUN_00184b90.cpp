@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_00184758(int, int, int);
+int uiSpriteSetKeyframe(int, int, int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_00184758. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
 
 
 /* WARNING: Removing unreachable block (ram,0x00184c30) */
@@ -43,7 +43,7 @@ void FUN_00184b90(int param_1,int param_2)
       temp_v1 = 6;
     }
   }
-  FUN_00184758(param_1 + 0x1c8,(int)temp_v0,0);
+  uiSpriteSetKeyframe(param_1 + 0x1c8,(int)temp_v0,0);
   if (*(int *)(param_1 + 0x220) != 0) {
     *(short *)(param_1 + 0x224) = temp_v1;
     *(unsigned short *)(param_1 + 0x226) = 0;

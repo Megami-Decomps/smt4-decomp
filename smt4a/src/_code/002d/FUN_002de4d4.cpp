@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00162e8c(void);
+int gameFlagsGetBlock(void);
 int FUN_002c0dbc(int, int, int);
 int nn_math_ARMv6_VEC3TransformAsm_2AD44C(float *, float *, float *);
 
@@ -39,7 +39,7 @@ typedef struct {
 
 extern int DAT_005f180c; /* 0x5f180c */
 
-/* Supplied declaration required: FUN_00162e8c. */
+/* Supplied declaration required: gameFlagsGetBlock. */
 /* Supplied declaration required: FUN_002c0dbc. */
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
 
@@ -83,7 +83,7 @@ void FUN_002de4d4(short param_1)
   float temp_v27;
   unsigned int temp_v28;
   
-  FUN_00162e8c();
+  gameFlagsGetBlock();
   temp_v13 = 0.0f;
   temp_v14 = 5.0f;
   temp_v15 = 0.0f;

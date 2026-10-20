@@ -2,12 +2,12 @@
 
 extern "C" {
 
-void FUN_002e6f1c(void);
+void onlineCallContextWait(void);
 
-/* Forwards to FUN_002e6f1c. */
+/* Forwards to onlineCallContextWait. */
 void FUN_001035a8(void)
 {
-    FUN_002e6f1c();
+    onlineCallContextWait();
 }
 
 } /* extern "C" */

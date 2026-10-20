@@ -5,22 +5,22 @@
 extern "C" {
 
 int jobStop(unsigned int, int);
-int FUN_001641c4(void);
+int ifTouchRegionRemove(void);
 int asdMemFree(...);
-int FUN_0019a7f4(int, int);
+int asdTMTexTableReleaseNode(int, int);
 int scrScriptProcessDestroy(unsigned int);
-int FUN_001add24(int);
+int dataTableFree(int);
 int uiFadeSetVisible(int);
 int asdTMTexTableFreeEntry(int);
 
-extern unsigned int *DAT_0057f28c; /* 0x57f28c */
+extern unsigned int *g_uiQuest; /* 0x57f28c */
 
 /* Supplied declaration required: jobStop. */
-/* Supplied declaration required: FUN_001641c4. */
+/* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_0019a7f4. */
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: FUN_001add24. */
+/* Supplied declaration required: dataTableFree. */
 /* Supplied declaration required: uiFadeSetVisible. */
 /* Supplied declaration required: asdTMTexTableFreeEntry. */
 
@@ -32,10 +32,10 @@ void FUN_0034aae4(void)
   unsigned int *puVar1;
   int temp_v0;
   
-  puVar1 = DAT_0057f28c;
+  puVar1 = g_uiQuest;
   if (puVar1 != (unsigned int *)0x0) {
     for (temp_v0 = 0; temp_v0 < (int)(unsigned int)*(unsigned short *)(puVar1 + 0x351); temp_v0 = temp_v0 + 1) {
-      FUN_001641c4();
+      ifTouchRegionRemove();
     }
     scrScriptProcessDestroy(puVar1[0x23f]);
     asdMemFree(puVar1[0x23e]);
@@ -45,13 +45,13 @@ void FUN_0034aae4(void)
       asdMemFree(puVar1[0x240]);
       asdMemFree(puVar1[0x241]);
     }
-    FUN_0019a7f4(0x1e,0);
+    asdTMTexTableReleaseNode(0x1e,0);
     asdTMTexTableFreeEntry(0x1e);
-    FUN_001add24(0x34);
+    dataTableFree(0x34);
     uiFadeSetVisible(1);
     jobStop(*puVar1,0);
     asdMemFree(puVar1);
-    DAT_0057f28c = (unsigned int *)0x0;
+    g_uiQuest = (unsigned int *)0x0;
   }
   return;
 }

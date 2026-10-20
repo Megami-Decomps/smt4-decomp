@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001ab854(int);
+int gameGetSlotRecord(int);
 int FUN_003f0e20(unsigned int *, int);
 int FUN_004c28b4(int, int);
 int FUN_004c55e4(int, unsigned int);
@@ -16,7 +16,7 @@ extern unsigned int DAT_00571414; /* 0x571414 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern unsigned int *btlGetMainState(void);
 extern int FUN_0017760c(void);
-/* Supplied declaration required: FUN_001ab854. */
+/* Supplied declaration required: gameGetSlotRecord. */
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: FUN_004c28b4. */
 /* Supplied declaration required: FUN_004c55e4. */
@@ -57,7 +57,7 @@ int FUN_004c2aec(unsigned int param_1,int param_2,int param_3,int param_4)
       }
     }
     else {
-      FUN_001ab854(param_3 - 0x6d);
+      gameGetSlotRecord(param_3 - 0x6d);
       temp_v1 = FUN_0017760c();
       temp_v1 = temp_v1 * param_4;
       temp_v0 = (int)((unsigned long long)((long long)temp_v1 * 0x51eb851f) >> 0x20);

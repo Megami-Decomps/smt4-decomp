@@ -5,7 +5,7 @@ extern "C" {
 int FUN_0023553c(int a);
 int FUN_002a0cb0(void);
 int FUN_002a0cc8(int a);
-int FUN_002b8838(void);
+int buttonHelpSetPreset(void);
 extern int FUN_0019e0c0(u32 value);
 
 typedef struct Scene {
@@ -27,7 +27,7 @@ void FUN_003a7f98(Scene *scene)
         scene->unk14 = 2;
         scene->unkA5B0 = 0;
         FUN_002a0cb0();
-        FUN_002b8838();
+        buttonHelpSetPreset();
         return;
     }
 }

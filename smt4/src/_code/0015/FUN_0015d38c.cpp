@@ -12,11 +12,11 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern unsigned char DAT_004e6f14; /* 0x4e6f14 */
-extern unsigned char DAT_004e8568; /* 0x4e8568 */
+extern unsigned char g_nnSndMasterManager; /* 0x4e6f14 */
+extern unsigned char g_nnSndVoiceManager; /* 0x4e8568 */
 
 /* Supplied declaration required: sndAddDroppedFrames. */
-extern int FUN_002bb274(void);
+extern int nn_snd_CTR_Dspsnd_IsInitialized(void);
 extern void nn_snd_CTR_OutputCapture_Write(unsigned int, short *, int);
 extern void nn_snd_CTR_VoiceManager_UpdateStatus(unsigned int, int, unsigned int);
 /* Supplied declaration required: rt_memcpy_w. */
@@ -32,7 +32,7 @@ void FUN_0015d38c(int param_1)
   unsigned int temp_v3;
   unsigned int temp_v4;
   
-  temp_v1 = FUN_002bb274();
+  temp_v1 = nn_snd_CTR_Dspsnd_IsInitialized();
   if ((temp_v1 != 0) && (*(char *)(param_1 + 0x1318) != '\0')) {
     temp_v2 = 1;
     temp_v0 = **(short **)(param_1 + (~(unsigned int)*(unsigned short *)(param_1 + 0x131a) & 1) * 4 + 0x1098);
@@ -48,7 +48,7 @@ void FUN_0015d38c(int param_1)
       *(unsigned short *)(param_1 + 0x131c) = *(unsigned short *)(param_1 + 0x131a) & 1;
       do {
         nn_snd_CTR_VoiceManager_UpdateStatus
-                  ((unsigned int)&DAT_004e8568,temp_v4,
+                  ((unsigned int)&g_nnSndVoiceManager,temp_v4,
                    *(unsigned int *)
                     (param_1 + (unsigned int)*(unsigned short *)(param_1 + 0x131c) * 0x60 + (temp_v4 & 0xff) * 4 +
                     0x1170));
@@ -67,7 +67,7 @@ void FUN_0015d38c(int param_1)
                   (temp_v1,*(short **)(param_1 + (unsigned int)*(unsigned short *)(param_1 + 0x131c) * 4 + 0x1300),
                    0xa0);
       }
-      sndAddDroppedFrames(&DAT_004e6f14);
+      sndAddDroppedFrames(&g_nnSndMasterManager);
       return;
     }
   }

@@ -11,12 +11,12 @@ typedef struct Global588fd0 {
     /* 0x00 */ u8 unk00[4];
     /* 0x04 */ Game *game;
 } Global588fd0;
-extern Global588fd0 DAT_00588fd0;
+extern Global588fd0 g_gameGlobals;
 
 /* Stores `value` in the byte at 0x2012 of the game record. */
 void FUN_002c8538(u8 value)
 {
-    DAT_00588fd0.game->value = value;
+    g_gameGlobals.game->value = value;
 }
 
 } /* extern "C" */

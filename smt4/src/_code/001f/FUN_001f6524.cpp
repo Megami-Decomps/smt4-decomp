@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002b9024(void);
+int devilGetRecord(void);
 
 extern int dataTableGetEntry0102Value(unsigned short);
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: devilGetRecord. */
 
 
 int FUN_001f6524(unsigned short *param_1,unsigned short *param_2)
@@ -22,17 +22,17 @@ int FUN_001f6524(unsigned short *param_1,unsigned short *param_2)
   unsigned short *puVar6;
   
   puVar1 = (unsigned short *)(unsigned int)*param_1;
-  FUN_002b9024();
+  devilGetRecord();
   puVar2 = (unsigned short *)(unsigned int)*param_2;
-  FUN_002b9024();
+  devilGetRecord();
   temp_v0 = dataTableGetEntry0102Value(*puVar1);
   temp_v1 = dataTableGetEntry0102Value(*puVar2);
   temp_v0 = temp_v0 - temp_v1;
   if (temp_v0 == 0) {
     puVar5 = (unsigned short *)(unsigned int)*param_1;
-    FUN_002b9024();
+    devilGetRecord();
     puVar6 = (unsigned short *)(unsigned int)*param_2;
-    FUN_002b9024();
+    devilGetRecord();
     temp_v0 = (unsigned int)(unsigned char)puVar5[1] - (unsigned int)(unsigned char)puVar6[1];
     if ((temp_v0 == 0) &&
        (temp_v0 = (unsigned int)*(unsigned char *)((int)puVar6 + 3) - (unsigned int)*(unsigned char *)((int)puVar5 + 3), temp_v0 == 0)) {

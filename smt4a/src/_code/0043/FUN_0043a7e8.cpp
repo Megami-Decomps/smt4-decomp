@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00195fc8(void);
+int sysFatalBreak(void);
 int software_interrupt(int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -13,7 +13,7 @@ typedef struct {
 } param_1_stack;
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_00195fc8. */
+/* Supplied declaration required: sysFatalBreak. */
 extern int FUN_0043ac34(int *);
 
 
@@ -27,7 +27,7 @@ void FUN_0043a7e8(int *param_1)
   temp_v1 = 0;
   temp_v0 = FUN_0043ac34(&temp_v1);
   if (temp_v0 < 0) {
-    FUN_00195fc8();
+    sysFatalBreak();
   }
   if (*param_1 != 0) {
     software_interrupt(0x23);

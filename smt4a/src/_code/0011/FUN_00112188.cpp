@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_00121104(int, unsigned int);
-int FUN_002e75fa(void);
-int FUN_002e9afe(int, unsigned int);
+int sharedRefAddRef(void);
+int vectorCopyHeader(int, unsigned int);
 int FUN_002ea3c0(...);
 int FUN_002ea3d0(int, unsigned int);
 int FUN_002eca44(void);
@@ -75,9 +75,9 @@ extern unsigned char DAT_0055955c; /* 0x55955c */
 
 extern int FUN_0010eea4(unsigned int *, int, unsigned char *);
 /* Supplied declaration required: FUN_00121104. */
-/* Supplied declaration required: FUN_002e75fa. */
+/* Supplied declaration required: sharedRefAddRef. */
 extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
-/* Supplied declaration required: FUN_002e9afe. */
+/* Supplied declaration required: vectorCopyHeader. */
 extern int FUN_002e9ff4(int);
 /* Supplied declaration required: FUN_002ea3c0. */
 /* Supplied declaration required: FUN_002ea3d0. */
@@ -155,14 +155,14 @@ int FUN_00112188(fn_00112188_arg0 *param_1,unsigned int param_2,int param_3,unsi
   *(unsigned int *)(temp_v0 - 300) = 0;
   *(unsigned int *)(temp_v0 - 0x130) = 0x4000;
   if (*(int *)(temp_v0 - 0x14) != 0) {
-    FUN_002e75fa();
+    sharedRefAddRef();
   }
   if (*(int *)(temp_v0 - 0x10) != 0) {
-    FUN_002e75fa();
+    sharedRefAddRef();
   }
   temp_v5 = 0x10001;
   temp_v1 = FUN_002e7908(temp_v4,(unsigned int *)&temp_v5);
-  FUN_002e9afe(temp_v0 - 0x114,temp_v1);
+  vectorCopyHeader(temp_v0 - 0x114,temp_v1);
   if (*(char *)(*(int *)(temp_v0 - 0x108) + 0x74) != '\0') {
     temp_v1 = FUN_002ea3c0(temp_v7,0x111b45,0,&LAB_00112334);
     FUN_002fd6bc(temp_v0 - 0xf4,temp_v1);

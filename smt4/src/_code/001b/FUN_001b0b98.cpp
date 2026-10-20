@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002be304(...);
+int drawSetColorFromRGBA8(...);
 
-/* Supplied declaration required: FUN_002be304. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 
 
 unsigned int FUN_001b0b98(int param_1,int param_2,int param_3)
@@ -16,7 +16,7 @@ unsigned int FUN_001b0b98(int param_1,int param_2,int param_3)
   unsigned int temp_v0;
   
   if (param_2 < param_1) {
-    FUN_002be304(0x72e027ff);
+    drawSetColorFromRGBA8(0x72e027ff);
     return 0xffffffff;
   }
   if (param_2 <= param_1) {
@@ -26,10 +26,10 @@ unsigned int FUN_001b0b98(int param_1,int param_2,int param_3)
     else {
       temp_v0 = 0xffffffff;
     }
-    FUN_002be304(temp_v0);
+    drawSetColorFromRGBA8(temp_v0);
     return 0;
   }
-  FUN_002be304(0xdc0f14ff);
+  drawSetColorFromRGBA8(0xdc0f14ff);
   return 1;
 }
 

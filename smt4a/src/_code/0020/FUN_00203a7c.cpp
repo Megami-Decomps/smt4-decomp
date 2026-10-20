@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0014bdb4(unsigned int, unsigned int *);
+int jobSetParent(unsigned int, unsigned int *);
 int scrGetArg(int);
 int scrSetResult(unsigned int *);
 int FUN_0036c580(unsigned int *, unsigned int *, int, unsigned int, int, int, int);
@@ -18,7 +18,7 @@ typedef struct {
 extern unsigned int *g_eventTex; /* 0x57f3b0 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0014bdb4. */
+/* Supplied declaration required: jobSetParent. */
 extern int jobIsValid(void);
 /* Supplied declaration required: scrGetArg. */
 /* Supplied declaration required: scrSetResult. */
@@ -42,7 +42,7 @@ unsigned int FUN_00203a7c(void)
   FUN_0036c580(puVar2,g_eventTex + 0x25,0x40c00000,in_r3,0x40000000,0x40800000,0x40c00000);
   temp_v1 = jobIsValid();
   if (temp_v1 != 0) {
-    FUN_0014bdb4(*g_eventTex,puVar2);
+    jobSetParent(*g_eventTex,puVar2);
   }
   scrSetResult(puVar2);
   return 1;

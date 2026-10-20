@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_001aea28(unsigned int);
+int ptrListRemoveClearOwner(unsigned int);
 int clearByte(void);
 
 typedef int romwright_code(...);
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern int DAT_00581280; /* 0x581280 */
 
-/* Supplied declaration required: FUN_001aea28. */
+/* Supplied declaration required: ptrListRemoveClearOwner. */
 extern int FUN_00295e54(int, int, unsigned int);
 /* Supplied declaration required: clearByte. */
 extern int flagPairCondition(int, int);
@@ -80,7 +80,7 @@ unsigned int FUN_0033e1d4(void)
           (temp_v1 = flagPairCondition((int)*(short *)(temp_v4 + 0x34),(int)*(short *)(temp_v4 + 0x36)),
           temp_v1 == 0)) && (*(int *)(temp_v4 + 0x40) != 0)) {
         if (*(int *)(*(int *)(DAT_00581280 + temp_v2 * 0x3c + 0x40) + 4) != 0) {
-          FUN_001aea28(DAT_0056fcc0);
+          ptrListRemoveClearOwner(g_handleRegistry);
         }
         *(unsigned char *)(temp_v4 + 0xf) = 1;
       }

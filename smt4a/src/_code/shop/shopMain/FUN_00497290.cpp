@@ -26,14 +26,14 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern unsigned int DAT_00588f68; /* 0x588f68 */
 extern unsigned int DAT_00588f6c; /* 0x588f6c */
 extern unsigned int DAT_00588f70; /* 0x588f70 */
 extern unsigned int DAT_00588f74; /* 0x588f74 */
 
 /* Supplied declaration required: FUN_00184528. */
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 extern int FUN_00284140(int);
 /* Supplied declaration required: FUN_002f0384. */
 extern int objBStateAllowsAction(void);
@@ -78,7 +78,7 @@ void FUN_00497290(int param_1)
       if (*(int *)(*(int *)(param_1 + 0x16028) + 4) == 0) {
         FUN_0040aad4(*(int *)(param_1 + 0x16028),0);
         temp_v1 = *(unsigned int *)(*(int *)(param_1 + 0x16028) + 4);
-        FUN_0040ace8(DAT_0056fcc0,temp_v1);
+        FUN_0040ace8(g_handleRegistry,temp_v1);
         FUN_003fd7b4(temp_v1);
       }
     }
@@ -115,10 +115,10 @@ void FUN_00497290(int param_1)
       *(unsigned char *)(param_1 + 0x22) = 0;
       if (((*(int *)(param_1 + 0xb40) != 0) ||
           ((temp_v1 = DAT_00588f6c, *(char *)(param_1 + 0x18) == '\0' &&
-           (temp_v0 = FUN_0018719c(0x410), temp_v1 = DAT_00588f6c, temp_v0 != 0)))) &&
+           (temp_v0 = gameFlagIsSet(0x410), temp_v1 = DAT_00588f6c, temp_v0 != 0)))) &&
          ((*(int *)(param_1 + 0xb40) != 3 ||
           ((temp_v1 = DAT_00588f74, *(char *)(param_1 + 0x18) == '\0' &&
-           (temp_v0 = FUN_0018719c(0x410), temp_v1 = DAT_00588f74, temp_v0 != 0)))))) {
+           (temp_v0 = gameFlagIsSet(0x410), temp_v1 = DAT_00588f74, temp_v0 != 0)))))) {
         *(unsigned int *)(param_1 + 0xb40) = *(unsigned int *)(*(int *)(param_1 + 0xb40) * 8 + 0x588f2c)
         ;
       }
@@ -155,10 +155,10 @@ void FUN_00497290(int param_1)
     *(unsigned char *)(param_1 + 0x22) = 0;
     if (((*(int *)(param_1 + 0xb40) != 0) ||
         ((temp_v1 = DAT_00588f68, *(char *)(param_1 + 0x18) == '\0' &&
-         (temp_v0 = FUN_0018719c(0x410), temp_v1 = DAT_00588f68, temp_v0 != 0)))) &&
+         (temp_v0 = gameFlagIsSet(0x410), temp_v1 = DAT_00588f68, temp_v0 != 0)))) &&
        ((*(int *)(param_1 + 0xb40) != 3 ||
         ((temp_v1 = DAT_00588f70, *(char *)(param_1 + 0x18) == '\0' &&
-         (temp_v0 = FUN_0018719c(0x410), temp_v1 = DAT_00588f70, temp_v0 != 0)))))) {
+         (temp_v0 = gameFlagIsSet(0x410), temp_v1 = DAT_00588f70, temp_v0 != 0)))))) {
       *(unsigned int *)(param_1 + 0xb40) = *(unsigned int *)(*(int *)(param_1 + 0xb40) * 8 + 0x588f28);
     }
     else {

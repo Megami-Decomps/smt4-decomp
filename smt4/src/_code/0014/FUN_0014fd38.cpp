@@ -6,7 +6,7 @@ extern "C" {
 
 int func_0x00153374(unsigned char *, unsigned int);
 
-extern unsigned char DAT_004e6f14; /* 0x4e6f14 */
+extern unsigned char g_nnSndMasterManager; /* 0x4e6f14 */
 
 /* Supplied declaration required: func_0x00153374. */
 
@@ -15,7 +15,7 @@ void FUN_0014fd38(unsigned int param_1)
 
 {
 /* irregular: 1 native warning(s); review required */
-  func_0x00153374(&DAT_004e6f14,param_1);
+  func_0x00153374(&g_nnSndMasterManager,param_1);
   return;
 }
 

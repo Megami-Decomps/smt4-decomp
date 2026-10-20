@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_003fd63c(int, int, int);
+int gameFlagSetValue(int, int, int);
 
 typedef int romwright_code(...);
 extern int *DAT_005f0c88; /* 0x5f0c88 */
@@ -16,9 +16,9 @@ extern int *DAT_005f0d4c; /* 0x5f0d4c */
 extern int DAT_005f1c98; /* 0x5f1c98 */
 extern unsigned int *DAT_005f1c9c; /* 0x5f1c9c */
 
-extern int FUN_00162e8c(void);
-extern int FUN_0018719c(unsigned int);
-/* Supplied declaration required: FUN_003fd63c. */
+extern int gameFlagsGetBlock(void);
+extern int gameFlagIsSet(unsigned int);
+/* Supplied declaration required: gameFlagSetValue. */
 
 
 void FUN_00243edc(void)
@@ -29,25 +29,25 @@ void FUN_00243edc(void)
   int temp_v0;
   int temp_v1;
   
-  temp_v0 = FUN_00162e8c();
+  temp_v0 = gameFlagsGetBlock();
   puVar1 = (unsigned int *)&DAT_005f1c98;
   if (DAT_005f1c98 == 0x20) {
     puVar1 = DAT_005f1c9c;
   }
   if (!(DAT_005f1c98 == 0x20 && puVar1 == (unsigned int *)0x2)) {
-    temp_v1 = FUN_0018719c(0x4d0);
+    temp_v1 = gameFlagIsSet(0x4d0);
     if (temp_v1 == 0) {
       return;
     }
   }
   else {
-    temp_v1 = FUN_0018719c(0x4c9);
+    temp_v1 = gameFlagIsSet(0x4c9);
     if (temp_v1 != 0) {
       return;
     }
   }
   if (*(int *)(temp_v0 + 0x16a0) != 0) {
-    FUN_003fd63c(0x4d0,0,1);
+    gameFlagSetValue(0x4d0,0,1);
   }
   if (DAT_005f0c88 != (int *)0x0) {
     (**(romwright_code **)(*DAT_005f0c88 + 4))();

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00188b60(...);
+int nn_os_CriticalSection_Initialize(...);
 int FUN_002e3140(...);
 int FUN_002fb0d4(...);
 
@@ -24,7 +24,7 @@ extern unsigned char LAB_001bc5f4; /* 0x1bc5f4 */
 extern int FUN_001bd870(...); /* 0x1bd870 */
 extern unsigned char DAT_0064497c; /* 0x64497c */
 
-/* Supplied declaration required: FUN_00188b60. */
+/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
 extern int FUN_0018b65c(void);
 /* Supplied declaration required: FUN_002e3140. */
 /* Supplied declaration required: FUN_002fb0d4. */
@@ -52,7 +52,7 @@ FUN_001afaec(unsigned int *param_1,unsigned int param_2,unsigned int param_3,int
     if ((temp_v0 != 0) && (param_7 == 1)) {
       param_6 = 0x5109d500;
     }
-    FUN_00188b60(param_1 + 0xd);
+    nn_os_CriticalSection_Initialize(param_1 + 0xd);
     temp_v1 = 4;
     temp_v2 = &LAB_001bc5f4;
     puVar1 = param_1 + 4;

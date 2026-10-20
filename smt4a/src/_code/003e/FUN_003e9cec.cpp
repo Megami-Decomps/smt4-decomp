@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00184310(...);
 int sysMemClear(...);
-int FUN_002e6dd4(...);
+int rt_memclr(...);
 int FUN_004bd274(...);
 int FUN_004bd294(...);
 int clearTwoWords(...);
@@ -37,7 +37,7 @@ struct fn_003e9cec_arg2 {
 extern unsigned int FUN_0017760c(fn_003e9cec_arg2 *);
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_002e6dd4. */
+/* Supplied declaration required: rt_memclr. */
 extern unsigned short FUN_004bca20(fn_003e9cec_arg2 *);
 /* Supplied declaration required: FUN_004bd274. */
 /* Supplied declaration required: FUN_004bd294. */
@@ -109,7 +109,7 @@ void FUN_003e9cec(unsigned int param_1,unsigned char *param_2,fn_003e9cec_arg2 *
   clearTwoWords(param_2 + 0x1be);
   clearTwoWords(param_2 + 0x1c6);
   clearTwoWords(param_2 + 0x1ce);
-  FUN_002e6dd4(param_2 + 0x1d6,0x50);
+  rt_memclr(param_2 + 0x1d6,0x50);
   temp_v8 = 0;
   do {
     pfVar7 = param_3;

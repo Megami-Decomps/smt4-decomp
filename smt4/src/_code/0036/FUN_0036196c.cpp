@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002c1148(void);
-int FUN_002c52f8(void);
+int asdFatalError(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -13,7 +13,7 @@ typedef struct {
 } void_stack;
 
 /* Supplied declaration required: FUN_002c1148. */
-/* Supplied declaration required: FUN_002c52f8. */
+/* Supplied declaration required: asdFatalError. */
 
 
 void FUN_0036196c(void)
@@ -32,7 +32,7 @@ void FUN_0036196c(void)
   if (temp_v0 >= 0 || temp_v0 == temp_v1) {
     return;
   }
-  FUN_002c52f8();
+  asdFatalError();
   return;
 }
 

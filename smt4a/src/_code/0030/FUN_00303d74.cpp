@@ -28,7 +28,7 @@ extern int FUN_002e6e26(void);
 extern unsigned int FUN_002e7908(unsigned int *, unsigned int *);
 /* Supplied declaration required: FUN_002e9b30. */
 extern int FUN_002ea6fc(unsigned int *, unsigned char *);
-extern unsigned int FUN_002ee9ce(unsigned int);
+extern unsigned int streamWriterFinish(unsigned int);
 /* Supplied declaration required: FUN_002f3dde. */
 extern int FUN_002f4d9c(int, unsigned short);
 /* Supplied declaration required: FUN_002f4db0. */
@@ -84,7 +84,7 @@ LAB_00303db6:
       return;
     }
   }
-  temp_v1 = FUN_002ee9ce(param_3);
+  temp_v1 = streamWriterFinish(param_3);
   temp_v3 = 0;
   temp_v4 = 0;
   temp_v5 = 0;

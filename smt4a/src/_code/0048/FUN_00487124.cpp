@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00163aa4(void);
-int FUN_00184c00(int, int, int);
+int uiSpriteSetImageKeyframe(int, int, int);
 int FUN_00485d1c(void);
 int FUN_0048c394(int);
 
@@ -14,7 +14,7 @@ extern signed char DAT_005f161d; /* 0x5f161d */
 extern signed char DAT_005f1a5c; /* 0x5f1a5c */
 
 /* Supplied declaration required: FUN_00163aa4. */
-/* Supplied declaration required: FUN_00184c00. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_00485d1c. */
 /* Supplied declaration required: FUN_0048c394. */
 extern int FUN_0048e40c(int);
@@ -53,19 +53,19 @@ LAB_0048718c:
       FUN_00163aa4();
       if (*(char *)(param_1 + 0x1242) != '\0') {
         if (*(short *)(param_1 + 0x1214) != 3) {
-          FUN_00184c00(param_1 + 0x11b8,3,0);
+          uiSpriteSetImageKeyframe(param_1 + 0x11b8,3,0);
         }
         else {
-          FUN_00184c00(param_1 + 0x11b8,4,0);
+          uiSpriteSetImageKeyframe(param_1 + 0x11b8,4,0);
         }
       }
       FUN_00163aa4();
       if (*(char *)(param_1 + 0x12ce) != '\0') {
         if (*(short *)(param_1 + 0x12a0) != 5) {
-          FUN_00184c00(param_1 + 0x1244,5,0);
+          uiSpriteSetImageKeyframe(param_1 + 0x1244,5,0);
         }
         else {
-          FUN_00184c00(param_1 + 0x1244,6,0);
+          uiSpriteSetImageKeyframe(param_1 + 0x1244,6,0);
         }
       }
     }

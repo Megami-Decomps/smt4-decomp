@@ -34,7 +34,7 @@ typedef struct {
     Slot slots[3];      /* 0x10 */
 } Owner;
 
-int FUN_00152bec(Entry *entry);
+int asdMdlManagerMarkDestroy(Entry *entry);
 
 /* Marks the owner's entry and each slot's entry deactivated, clearing the holder flag and cancelling when a target value is set. */
 void FUN_00335144(Owner *owner)
@@ -47,7 +47,7 @@ void FUN_00335144(Owner *owner)
         entry->flags |= 2;
         entry->target->holder->active = 0;
         if (owner->entry->target->value >= 0) {
-            FUN_00152bec(owner->entry);
+            asdMdlManagerMarkDestroy(owner->entry);
         }
     }
     for (i = 0; i < 3; i++) {
@@ -58,7 +58,7 @@ void FUN_00335144(Owner *owner)
             entry->flags |= 2;
             entry->target->holder->active = 0;
             if (slot->entry->target->value >= 0) {
-                FUN_00152bec(slot->entry);
+                asdMdlManagerMarkDestroy(slot->entry);
             }
         }
     }

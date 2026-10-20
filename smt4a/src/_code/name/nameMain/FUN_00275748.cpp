@@ -7,8 +7,8 @@ extern "C" {
 int asdProcessCreateSimple(...);
 int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
-int FUN_00484ca8(...);
-int FUN_00484cb0(...);
+int stateSetterConstructDefault(...);
+int stateSetterConstruct(...);
 
 /* stack frame of param_1: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -27,8 +27,8 @@ extern unsigned int *DAT_00588110; /* 0x588110 */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: FUN_00484ca8. */
-/* Supplied declaration required: FUN_00484cb0. */
+/* Supplied declaration required: stateSetterConstructDefault. */
+/* Supplied declaration required: stateSetterConstruct. */
 
 
 void FUN_00275748(unsigned int *param_1)
@@ -42,10 +42,10 @@ void FUN_00275748(unsigned int *param_1)
   asdMemoryAllocTracked(0x100,0x100,0,0x580,1);
   DAT_00588110 = puVar1;
   if (param_1 != (unsigned int *)0x0) {
-    FUN_00484cb0(puVar1 + 4,(int)(char)*param_1);
+    stateSetterConstruct(puVar1 + 4,(int)(char)*param_1);
   }
   else {
-    FUN_00484ca8(puVar1 + 4);
+    stateSetterConstructDefault(puVar1 + 4);
   }
   pcVar2 = "NameMainProc";
   asdProcessCreateSimple("NameMainProc",4,0,0,&LAB_0027daf0,&LAB_00316108,DAT_00588110);

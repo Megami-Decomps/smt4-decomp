@@ -4,19 +4,19 @@
 
 extern "C" {
 
-int FUN_0017572c(int, int);
+int listAppendNode(int, int);
 int FUN_0019102c(int, int);
-int FUN_001a0990(int);
-int FUN_002e6dd4(int);
+int nn_os_LightEvent_ClearSignal(int);
+int rt_memclr(int);
 
 typedef int romwright_code(...);
 extern int DAT_005c0f58; /* 0x5c0f58 */
 
 extern int FUN_00175678(void);
-/* Supplied declaration required: FUN_0017572c. */
+/* Supplied declaration required: listAppendNode. */
 /* Supplied declaration required: FUN_0019102c. */
-/* Supplied declaration required: FUN_001a0990. */
-/* Supplied declaration required: FUN_002e6dd4. */
+/* Supplied declaration required: nn_os_LightEvent_ClearSignal. */
+/* Supplied declaration required: rt_memclr. */
 
 
 void FUN_0045f268(int *param_1)
@@ -94,7 +94,7 @@ void FUN_0045f268(int *param_1)
   param_1[0x18] = 0;
   param_1[0x19] = 0;
   if (param_1[0x3c] != 0) {
-    FUN_002e6dd4(param_1[0x3b]);
+    rt_memclr(param_1[0x3b]);
   }
   temp_v0 = (**(romwright_code **)(*param_1 + 0x20))(param_1);
   temp_v1 = FUN_00175678();
@@ -104,8 +104,8 @@ void FUN_0045f268(int *param_1)
   *(unsigned char *)(temp_v2 + 4) = 3;
   *(int *)(temp_v2 + 0x10) = temp_v0;
   *(int **)(temp_v2 + 0x14) = param_1 + 0x27;
-  FUN_0017572c(temp_v1,temp_v2);
-  FUN_001a0990(temp_v0 + 4);
+  listAppendNode(temp_v1,temp_v2);
+  nn_os_LightEvent_ClearSignal(temp_v0 + 4);
   *(unsigned char *)((int)param_1 + 0x9f) = 1;
   return;
 }

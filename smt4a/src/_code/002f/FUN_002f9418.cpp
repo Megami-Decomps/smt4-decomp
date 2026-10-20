@@ -9,7 +9,7 @@ int FUN_00163aa4(...);
 int FUN_001641b4(...);
 int sysPlaySe(...);
 int FUN_00184310(void);
-int FUN_0019cac4(void);
+int dataTable00FindById(void);
 int FUN_0021a6c8(int);
 int FUN_002a7324(...);
 int FUN_002c7e24(void);
@@ -46,7 +46,7 @@ extern unsigned short FUN_001643b4(unsigned int, unsigned int);
 extern int FUN_00165070(void);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: FUN_0019cac4. */
+/* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: FUN_0021a6c8. */
 extern int FUN_0023b3d0(void);
 extern int FUN_0026264c(unsigned short);
@@ -134,7 +134,7 @@ LAB_002f9458:
         do {
           temp_v2 = param_1 + temp_v8 * 0x40;
           temp_v5 = (unsigned int)*(unsigned short *)(temp_v2 + 0x4858);
-          FUN_0019cac4();
+          dataTable00FindById();
           if ((*(unsigned short *)(temp_v5 + 2) & 0x8000) != 0) {
             temp_v0 = 1;
             if (*(char *)(param_1 + 0x4857) != '\0') {
@@ -200,11 +200,11 @@ LAB_002f9458:
             FUN_0036d318(*(unsigned short *)(temp_v2 + 0x4858),temp_v11);
             puVar9 = (unsigned short *)FUN_002c7e24();
             temp_v6 = (unsigned int)*puVar9;
-            FUN_0019cac4();
+            dataTable00FindById();
             psVar8 = (short *)FUN_002c7e24();
             if ((*psVar8 < 1) || ((temp_v6 == 0 || ((*(unsigned short *)(temp_v6 + 0x16) & 1) != 0)))) {
               temp_v6 = (unsigned int)*(unsigned short *)(temp_v2 + 0x4858);
-              FUN_0019cac4();
+              dataTable00FindById();
               if ((temp_v6 != 0) && ((*(unsigned short *)(temp_v6 + 0x16) & 1) == 0)) {
                 temp_v14 = 0;
                 temp_v15 = 0;
@@ -342,7 +342,7 @@ LAB_002f9924:
         FUN_0036d318((unsigned int)*(unsigned short *)(param_1 + 0x4858),temp_v11);
         puVar9 = (unsigned short *)FUN_002c7e24();
         temp_v6 = (unsigned int)*puVar9;
-        FUN_0019cac4();
+        dataTable00FindById();
         if ((temp_v6 != 0) && ((*(unsigned short *)(temp_v6 + 0x16) & 1) == 0)) {
           temp_v14 = 0;
           temp_v15 = 0;

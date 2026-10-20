@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_002b06c4(void);
+int dataTable00FindById(void);
 
 extern int randRange(unsigned int);
 extern int FUN_00295d08(unsigned int);
-/* Supplied declaration required: FUN_002b06c4. */
-extern int FUN_002b63ac(void);
-extern int FUN_002c09d0(unsigned int);
+/* Supplied declaration required: dataTable00FindById. */
+extern int gameGetPlayerData(void);
+extern int gameFlagIsSet(unsigned int);
 extern int __aeabi_idivmod(int, int);
 
 
@@ -26,7 +26,7 @@ unsigned int FUN_00338584(int param_1)
   
   temp_v0 = FUN_00295d08(1);
   if ((((temp_v0 == 0) && ((*(unsigned int *)(param_1 + 0x44a0) & 0x40000) == 0)) &&
-      (temp_v0 = FUN_002c09d0(0x416), temp_v0 == 0)) &&
+      (temp_v0 = gameFlagIsSet(0x416), temp_v0 == 0)) &&
      ((*(short *)(param_1 + 0x1fc6) < 2 && (*(short *)(param_1 + 0x1fc6) != 0)))) {
     temp_v0 = 4;
     do {
@@ -37,7 +37,7 @@ unsigned int FUN_00338584(int param_1)
           return 0;
         }
         temp_v1 = (unsigned int)*(unsigned short *)((int)puVar3 + 0xce);
-        FUN_002b06c4();
+        dataTable00FindById();
         if ((*(unsigned short *)(temp_v1 + 0x16) & 0x10) != 0) {
           return 0;
         }
@@ -51,7 +51,7 @@ unsigned int FUN_00338584(int param_1)
             if (temp_v0 >= 0x14) {
               return 0;
             }
-            temp_v0 = FUN_002b63ac();
+            temp_v0 = gameGetPlayerData();
             temp_v1 = (((unsigned int)*(unsigned char *)(temp_v0 + 0x76) + (unsigned int)*(unsigned char *)(temp_v1 + 2)) >> 1) + 5;
             if (temp_v1 >= 11) {
               temp_v1 = 10;

@@ -17,7 +17,7 @@ int FUN_003ebec8(Actor *actor);
 int valueAtF0IsReady(Actor *actor);
 int FUN_003f0f40(Actor *actor);
 int FUN_003f1334(Actor *actor);
-int FUN_003f86c8(u32 id);
+int loadSlotIsLoaded(u32 id);
 
 /* Enters `state` and restarts its counters. */
 static __inline void phaseEnter(PhaseState *phase, u32 state)
@@ -30,7 +30,7 @@ static __inline void phaseEnter(PhaseState *phase, u32 state)
 /* Runs the phase 4 -> 5 -> 6 transition for `actor`, then hands over to FUN_003e1114. */
 void FUN_003e2470(PhaseState *phase, Actor *actor)
 {
-    if (FUN_003f86c8(0x4e) == 0) {
+    if (loadSlotIsLoaded(0x4e) == 0) {
         return;
     }
     FUN_003ebec8(actor);

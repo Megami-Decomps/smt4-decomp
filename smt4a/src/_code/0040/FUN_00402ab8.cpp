@@ -8,12 +8,12 @@ int FUN_00100388(...);
 int FUN_00162790(...);
 int FUN_00164168(...);
 int efctSetSpeed(...);
-int FUN_001801a4(...);
+int gameGetPlayerData(...);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
 int FUN_0018408c(...);
 int FUN_001879d0(...);
-int FUN_0030ea58(...);
+int libc_strcmp(...);
 int SBORROW4(...);
 int VectorSignedToFloat(...);
 
@@ -34,12 +34,12 @@ extern int FUN_0015687c(void);
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164168. */
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_001801a4. */
+/* Supplied declaration required: gameGetPlayerData. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_0018408c. */
 /* Supplied declaration required: FUN_001879d0. */
-/* Supplied declaration required: FUN_0030ea58. */
+/* Supplied declaration required: libc_strcmp. */
 
 
 void FUN_00402ab8(int param_1,int param_2,int param_3)
@@ -70,9 +70,9 @@ void FUN_00402ab8(int param_1,int param_2,int param_3)
   efctSetSpeed();
   temp_v6 = *(int *)(param_1 + 0x664) + 0x36;
   temp_v0 = temp_v6;
-  FUN_0030ea58(temp_v6,"<pc 0>");
+  libc_strcmp(temp_v6,"<pc 0>");
   if (temp_v0 == 0) {
-    FUN_001801a4();
+    gameGetPlayerData();
     temp_v6 = FUN_0015687c();
   }
   FUN_00100388(temp_v13,&LAB_00402e14,temp_v6);

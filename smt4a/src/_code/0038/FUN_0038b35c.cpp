@@ -1,13 +1,13 @@
-/* Returns the signed byte flag at DAT_00588e14. */
+/* Returns the signed byte flag at g_saveLoadUIBase. */
 #include "common.h"
 
 extern "C" {
 
-extern s8 DAT_00588e14;
+extern s8 g_saveLoadUIBase;
 
 s32 FUN_0038b35c(void)
 {
-    return DAT_00588e14;
+    return g_saveLoadUIBase;
 }
 
 }

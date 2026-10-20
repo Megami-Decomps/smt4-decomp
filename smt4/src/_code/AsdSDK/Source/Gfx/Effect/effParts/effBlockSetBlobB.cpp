@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern const char DAT_00409378[]; /* __FILE__ of effParts.cpp */
+extern const char g_effPartsSourcePath[]; /* __FILE__ of effParts.cpp */
 
 void *memAlloc(int heap, int alignClass, int unk08, u32 size, int align, int fromFront);
 void asdMemFree(void *ptr);
@@ -19,7 +19,7 @@ void effBlockSetBlobB(EffBlock *block, const void *src, s32 size, u16 tag)
         block->ownedB = NULL;
     }
     if (src != NULL && size > 0) {
-        asdDebugTrace(DAT_00409378, 1118);
+        asdDebugTrace(g_effPartsSourcePath, 1118);
         block->ownedB = memAlloc(0x10000, 0x100, 0, size, 0x10, 1);
         block->tagB = tag;
         block->dataB = block->ownedB;

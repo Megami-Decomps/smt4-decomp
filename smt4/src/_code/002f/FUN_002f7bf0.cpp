@@ -3,11 +3,11 @@
 extern "C" {
 
 int scrSetResult(int result);
-extern PadState *FUN_002b63ac(void);
+extern PadState *gameGetPlayerData(void);
 
 u32 FUN_002f7bf0(void)
 {
-    PadState *pad = FUN_002b63ac();
+    PadState *pad = gameGetPlayerData();
 
     scrSetResult((int)pad->unk1E);
     return 1;

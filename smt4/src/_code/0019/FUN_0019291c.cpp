@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_00297514(int);
+extern int scrPopInt(int);
 
 
 unsigned char FUN_0019291c(int param_1)
@@ -15,7 +15,7 @@ unsigned char FUN_0019291c(int param_1)
   
   temp_v1 = *(int *)(param_1 + 0x1c) != 0;
   if (temp_v1) {
-    temp_v0 = FUN_00297514(param_1);
+    temp_v0 = scrPopInt(param_1);
     *(int *)(param_1 + 0x18) = temp_v0 + 1;
   }
   return temp_v1;

@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern void FUN_004853fc(StateSetter *obj, s32 state);
+extern void stateSetterEnterState(StateSetter *obj, s32 state);
 
 void stateSetterStart9(StateSetter *obj)
 {
-    FUN_004853fc(obj, 9);
+    stateSetterEnterState(obj, 9);
     obj->unk00[0] = 1;
 }
 

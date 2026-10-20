@@ -4,7 +4,7 @@ extern "C" {
 
 int FUN_0013a410(void);
 int FUN_002bb20c(void);
-extern int FUN_002bb274(void);
+extern int nn_snd_CTR_Dspsnd_IsInitialized(void);
 
 extern struct {
     u8 unk0[4];
@@ -19,7 +19,7 @@ void FUN_002b5904(int flag)
             DAT_0044e360.unk4 = 0;
         }
     } else {
-        if (FUN_002bb274() != 0) {
+        if (nn_snd_CTR_Dspsnd_IsInitialized() != 0) {
             FUN_002bb20c();
             DAT_0044e360.unk4 = 1;
         }

@@ -24,8 +24,8 @@ extern unsigned char DAT_005f1a5e; /* 0x5f1a5e */
 extern unsigned char DAT_005f1a5f; /* 0x5f1a5f */
 
 /* Supplied declaration required: FUN_00163aa4. */
-extern unsigned int FUN_001654d8(int);
-extern unsigned int FUN_001654e4(int);
+extern unsigned int vec2GetXInt(int);
+extern unsigned int vec2GetYInt(int);
 /* Supplied declaration required: FUN_00168980. */
 /* Supplied declaration required: FUN_00184528. */
 /* Supplied declaration required: FUN_002844e4. */
@@ -88,8 +88,8 @@ void FUN_0048c1c0(int param_1)
     *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) | 2;
     FUN_002844e4();
   }
-  temp_v1 = FUN_001654e4(temp_v3);
-  temp_v2 = FUN_001654d8(temp_v3);
+  temp_v1 = vec2GetYInt(temp_v3);
+  temp_v2 = vec2GetXInt(temp_v3);
   FUN_004935b0(param_1 + 0x4d0,temp_v2,temp_v1);
   return;
 }

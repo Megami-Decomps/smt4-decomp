@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_003768dc(void);
+int sequenceRequestFlushDeferred(void);
 int screenCloseDestroy(int);
 int FUN_00485abc(int);
 
-/* Supplied declaration required: FUN_003768dc. */
-extern int FUN_0037692c(void);
+/* Supplied declaration required: sequenceRequestFlushDeferred. */
+extern int sequenceRequestIsPending(void);
 /* Supplied declaration required: screenCloseDestroy. */
 /* Supplied declaration required: FUN_00485abc. */
 
@@ -33,9 +33,9 @@ unsigned int FUN_0027daf4(int param_1)
         if (temp_v0 != '\x03') {
           return 0;
         }
-        temp_v2 = FUN_0037692c();
+        temp_v2 = sequenceRequestIsPending();
         if (temp_v2 != 0) {
-          FUN_003768dc();
+          sequenceRequestFlushDeferred();
         }
         return 0xffffffff;
       }

@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern void FUN_003216ec(void);
+extern void btlTalkBustUpReleaseAllSlots(void);
 
-/* Script command: runs FUN_003216ec. */
+/* Script command: runs btlTalkBustUpReleaseAllSlots. */
 u32 FUN_0039dcd0(void)
 {
-    FUN_003216ec();
+    btlTalkBustUpReleaseAllSlots();
     return 1;
 }
 

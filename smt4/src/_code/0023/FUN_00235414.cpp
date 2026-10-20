@@ -6,7 +6,7 @@ extern "C" {
 
 extern int FUN_002876f0(unsigned int, unsigned int);
 extern unsigned int FUN_00287704(unsigned int);
-extern int FUN_002c09d0(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 
 
 unsigned int FUN_00235414(int param_1)
@@ -18,11 +18,11 @@ unsigned int FUN_00235414(int param_1)
   if (param_1 != 1) {
     return 0;
   }
-  temp_v0 = FUN_002c09d0(0x235);
+  temp_v0 = gameFlagIsSet(0x235);
   temp_v1 = 0;
   if (temp_v0 != 0) {
-    temp_v0 = FUN_002c09d0(0x1c0);
-    if ((temp_v0 != 0) && (temp_v0 = FUN_002c09d0(0x424), temp_v0 != 0)) {
+    temp_v0 = gameFlagIsSet(0x1c0);
+    if ((temp_v0 != 0) && (temp_v0 = gameFlagIsSet(0x424), temp_v0 != 0)) {
       temp_v1 = FUN_00287704(1);
       temp_v0 = FUN_002876f0(temp_v1,4);
       if (temp_v0 == 0) {

@@ -4,9 +4,9 @@
 
 extern "C" {
 
-extern int DAT_0043e128; /* 0x43e128 */
+extern int g_infoWin; /* 0x43e128 */
 extern int g_mapIf; /* 0x447a78 */
-extern int *DAT_00447a98; /* 0x447a98 */
+extern int *g_mapIfTimer; /* 0x447a98 */
 
 
 /* WARNING: Removing unreachable block (ram,0x002bd91c) */
@@ -19,9 +19,9 @@ void FUN_00276238(void)
   int *piVar2;
   int temp_v1;
   
-  piVar2 = DAT_00447a98;
-  if (*DAT_00447a98 != 0) {
-    *DAT_00447a98 = 0;
+  piVar2 = g_mapIfTimer;
+  if (*g_mapIfTimer != 0) {
+    *g_mapIfTimer = 0;
     piVar2[1] = 0;
   }
   temp_v0 = g_mapIf;
@@ -30,8 +30,8 @@ void FUN_00276238(void)
   }
   *(unsigned char *)(g_mapIf + 0x18) = 0;
   *(unsigned int *)(temp_v0 + 0x1c) = 0;
-  temp_v0 = DAT_0043e128;
-  *(unsigned int *)(DAT_0043e128 + 8) = 5;
+  temp_v0 = g_infoWin;
+  *(unsigned int *)(g_infoWin + 8) = 5;
   *(unsigned int *)(temp_v0 + 0x10) = 0x1e;
   temp_v1 = *(int *)(temp_v0 + 0x90);
   if (temp_v1 == 0) {

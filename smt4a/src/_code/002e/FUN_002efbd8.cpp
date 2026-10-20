@@ -6,13 +6,13 @@ extern "C" {
 
 int FUN_002e6e34(int *, unsigned int);
 int FUN_002e6e5c(int *);
-int FUN_002e7232(unsigned int);
+int sharedRefRelease(unsigned int);
 int FUN_002efe80(int);
 
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-/* Supplied declaration required: FUN_002e7232. */
-extern unsigned int FUN_002ea714(void);
+/* Supplied declaration required: sharedRefRelease. */
+extern unsigned int onlineGetActiveLock(void);
 /* Supplied declaration required: FUN_002efe80. */
 
 
@@ -28,11 +28,11 @@ void FUN_002efbd8(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   uStack_18 = param_2;
   uStack_14 = param_3;
   uStack_10 = param_4;
-  temp_v0 = FUN_002ea714();
+  temp_v0 = onlineGetActiveLock();
   FUN_002e6e34(&uStack_18,temp_v0);
   if (*(int *)(param_1 + 0xa8) != 0) {
     FUN_002efe80(*(int *)(param_1 + 4) + 0x14);
-    FUN_002e7232(*(unsigned int *)(param_1 + 0xa8));
+    sharedRefRelease(*(unsigned int *)(param_1 + 0xa8));
     *(unsigned int *)(param_1 + 0xa8) = 0;
   }
   FUN_002e6e5c(&uStack_18);

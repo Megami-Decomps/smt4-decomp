@@ -11,7 +11,7 @@ int FUN_002907c4(...);
 int FUN_00295660(int, unsigned char [128]);
 int FUN_00296ae8(unsigned int, int, unsigned int, int);
 int FUN_0029ede8(int, int, unsigned int, int);
-int FUN_002b45e8(void);
+int dataTable08Sub2GetRecord(void);
 int FUN_002be624(...);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -37,8 +37,8 @@ extern int DAT_0043da30; /* 0x43da30 */
 /* Supplied declaration required: FUN_00295660. */
 /* Supplied declaration required: FUN_00296ae8. */
 /* Supplied declaration required: FUN_0029ede8. */
-/* Supplied declaration required: FUN_002b45e8. */
-extern unsigned short *FUN_002b63ac(void);
+/* Supplied declaration required: dataTable08Sub2GetRecord. */
+extern unsigned short *gameGetPlayerData(void);
 /* Supplied declaration required: FUN_002be624. */
 
 
@@ -56,9 +56,9 @@ void FUN_003170b0(int param_1,unsigned int param_2)
   unsigned char temp_v5 [128];
   
   temp_v1 = DAT_0043da2c;
-  puVar3 = (unsigned short *)FUN_002b63ac();
+  puVar3 = (unsigned short *)gameGetPlayerData();
   temp_v2 = (unsigned int)*puVar3;
-  FUN_002b45e8();
+  dataTable08Sub2GetRecord();
   if (temp_v2 == 0) {
     *(unsigned char *)(temp_v1 + 0x4cb) = 0;
   }

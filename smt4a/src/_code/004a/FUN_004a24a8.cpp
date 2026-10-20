@@ -6,7 +6,7 @@ extern "C" {
 
 int efctSetSpeed(void);
 int FUN_00183bb0(void);
-int FUN_00184e64(...);
+int drawSetColorFromRGBA8(...);
 int FUN_0031d174(...);
 int FUN_00493518(...);
 int words2Copy(int, float [2]);
@@ -28,7 +28,7 @@ extern unsigned int DAT_005e1e88; /* 0x5e1e88 */
 
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_00184e64. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 extern int FUN_002a482c(int);
 /* Supplied declaration required: FUN_0031d174. */
 /* Supplied declaration required: FUN_00493518. */
@@ -153,11 +153,11 @@ void FUN_004a24a8(int param_1)
              (temp_v5 = FUN_0031d174(param_1 + 0x20), temp_v5 == temp_v7)) {
             if (temp_v7 != 0) {
               if (unaff_r11[temp_v7 - 1] != unaff_r11[temp_v7]) {
-                FUN_00184e64();
+                drawSetColorFromRGBA8();
               }
             }
             else {
-              FUN_00184e64(*unaff_r11);
+              drawSetColorFromRGBA8(*unaff_r11);
             }
           }
           else {

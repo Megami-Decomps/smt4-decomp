@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0025ca80(int, int);
-int FUN_00263630(int, int);
+int asdModelSlotSetColor(int, int);
 int FUN_00263670(int, int);
 int FUN_002f5084(unsigned int);
 
@@ -16,7 +16,7 @@ typedef struct {
 
 extern int asdModelBankGetModel(int, unsigned int);
 /* Supplied declaration required: FUN_0025ca80. */
-/* Supplied declaration required: FUN_00263630. */
+/* Supplied declaration required: asdModelSlotSetColor. */
 /* Supplied declaration required: FUN_00263670. */
 extern int FUN_002cb7e0(int, unsigned int);
 /* Supplied declaration required: FUN_002f5084. */
@@ -49,7 +49,7 @@ void FUN_001e18d4(int param_1)
     }
     if ((*(int *)(param_1 + 0xc4) == 0) &&
        (temp_v1 = asdModelBankGetModel((int)(short)*(unsigned int *)(param_1 + 0xcc),0), temp_v1 != 0)) {
-      FUN_00263630((int)(short)*(unsigned int *)(param_1 + 0xcc),0);
+      asdModelSlotSetColor((int)(short)*(unsigned int *)(param_1 + 0xcc),0);
       return;
     }
   }

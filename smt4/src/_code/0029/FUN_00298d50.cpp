@@ -10,11 +10,11 @@ typedef struct Obj {
 extern struct {
     u8 unk0[4];
     Obj *obj;
-} DAT_0044ea58;
+} g_asdCamera;
 
 void FUN_00298d50(u32 value)
 {
-    DAT_0044ea58.obj->unk80 = value;
+    g_asdCamera.obj->unk80 = value;
 }
 
 } /* extern "C" */

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0014afd0(int, int);
-int FUN_0019a7f4(...);
+int asdTMTexTableReleaseNode(...);
 int dataTable2ECount(void);
 int FUN_0048e46c(int, int);
 int FUN_0049105c(int, int);
@@ -18,7 +18,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_0014afd0. */
 extern int FUN_00153f64(unsigned int, int);
-/* Supplied declaration required: FUN_0019a7f4. */
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
 extern int dataTable2EGetEntry(int);
 /* Supplied declaration required: dataTable2ECount. */
 /* Supplied declaration required: FUN_0048e46c. */
@@ -66,7 +66,7 @@ void FUN_0048821c(int param_1,int param_2)
     temp_v2 = (unsigned int)*(unsigned char *)(param_1 + 0x20645);
   }
   if (temp_v6 && temp_v2 == 1) {
-    FUN_0019a7f4(0x13,6);
+    asdTMTexTableReleaseNode(0x13,6);
     *(unsigned char *)(param_1 + 0x20645) = 0;
   }
   if (param_2 == -1) {
@@ -75,7 +75,7 @@ void FUN_0048821c(int param_1,int param_2)
   piVar9 = (int *)(param_1 + 0x1480);
   temp_v3 = param_1;
   if (*piVar9 != 0) {
-    temp_v3 = FUN_0019a7f4(0x28);
+    temp_v3 = asdTMTexTableReleaseNode(0x28);
     *piVar9 = 0;
   }
   temp_v4 = 0;

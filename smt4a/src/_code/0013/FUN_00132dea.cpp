@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00132dac(int *, int *, unsigned int [2]);
-int FUN_002e6e14(...);
+int asdOperatorDeleteArray(...);
 
 /* stack frame of param_1: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -16,7 +16,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_00132dac. */
-/* Supplied declaration required: FUN_002e6e14. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
 extern int wordRefsDiffer_002fb30c(unsigned int *, unsigned int **);
 
 
@@ -44,8 +44,8 @@ int * FUN_00132dea(int *param_1)
     param_1[1] = (int)piVar2;
     while (piVar2 = (int *)*param_1, piVar2 != (int *)0x0) {
       *param_1 = *piVar2;
-      FUN_002e6e14(piVar2[2]);
-      FUN_002e6e14(piVar2);
+      asdOperatorDeleteArray(piVar2[2]);
+      asdOperatorDeleteArray(piVar2);
     }
     param_1[1] = 0;
     param_1[2] = 0;

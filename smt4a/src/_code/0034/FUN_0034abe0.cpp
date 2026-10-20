@@ -19,7 +19,7 @@ int FUN_001835b4(...);
 int FUN_00183bb0(void);
 int FUN_0018408c(...);
 int FUN_00184310(void);
-int FUN_00184e64(...);
+int drawSetColorFromRGBA8(...);
 int slotRecordFindById(...);
 int FUN_002a4b28(...);
 int FUN_00344cd0(...);
@@ -78,8 +78,8 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_0014bf3c. */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164b5c. */
-extern int FUN_001654d8(unsigned int *);
-extern int FUN_001654e4(unsigned int *);
+extern int vec2GetXInt(unsigned int *);
+extern int vec2GetYInt(unsigned int *);
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00180114. */
@@ -90,7 +90,7 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: FUN_0018408c. */
 /* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: FUN_00184e64. */
+/* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: slotRecordFindById. */
 /* Supplied declaration required: FUN_0020caec. */
 extern unsigned int *FUN_0022e9b8(void);
@@ -236,15 +236,15 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
         temp_v8 = FUN_001834a4(0x1a,temp_v9 + 0xe3);
         FUN_001835b4(2,0x1a,0xd2,(int)&param_1->field_0x0 + (int)*(short *)(temp_v8 + 8),
                      *(short *)(temp_v8 + 10) + param_2,0x65);
-        FUN_00184e64(0xffffffff);
+        drawSetColorFromRGBA8(0xffffffff);
         if (temp_v17 != 0) {
-          FUN_00184e64(0xff);
+          drawSetColorFromRGBA8(0xff);
           efctSetSpeed();
         }
         else {
           temp_v3 = computeCountLimit();
           if (temp_v3 < (unsigned short)puVar7[3]) {
-            FUN_00184e64(0x9b9b9bff);
+            drawSetColorFromRGBA8(0x9b9b9bff);
             efctSetSpeed();
           }
         }
@@ -323,7 +323,7 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
                             ((int)**(short **)(temp_v2 + 0xc) - (int)puVar9),
                             (unsigned char)(in_fpscr >> 0x16) & 3);
         FUN_00162790(2,0xffffffff,temp_v13,(int)*(short *)(temp_v8 + 8));
-        FUN_00184e64(temp_v11);
+        drawSetColorFromRGBA8(temp_v11);
         temp_v2 = *(short *)(temp_v8 + 10) + param_2;
         temp_v6 = (int)&param_1->field_0x0 + (int)*(short *)(temp_v8 + 8);
         if ((unsigned short)puVar7[3] >= 100) {
@@ -465,7 +465,7 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
                             (int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v8 + 8),
                             (unsigned char)(in_fpscr >> 0x16) & 3);
         FUN_00162790(2,temp_v10,temp_v13,(int)*(short *)(temp_v8 + 8));
-        FUN_00184e64(temp_v11);
+        drawSetColorFromRGBA8(temp_v11);
         if ((unsigned short)psVar6[3] >= 100) {
           temp_v8 = FUN_001834a4(0x1a,0x25f);
           FUN_00180310(0,(int)&param_1->field_0x0 +
@@ -579,16 +579,16 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
   }
   efctSetSpeed();
   if (!((temp_v2 == 1 || temp_v2 == 2) || temp_v2 == 6)) {
-    temp_v9 = FUN_001654e4(puVar2 + 0x2c);
+    temp_v9 = vec2GetYInt(puVar2 + 0x2c);
     temp_v0 = *(short *)(temp_v1 + 10);
-    temp_v8 = FUN_001654d8(puVar2 + 0x2c);
+    temp_v8 = vec2GetXInt(puVar2 + 0x2c);
     FUN_001835b4(2,0x1a,0x3e,(int)&param_1->field_0x0 + *(short *)(temp_v1 + 8) + temp_v8,
                  temp_v9 + param_2 + (int)temp_v0,0x83);
   }
   else {
-    temp_v9 = FUN_001654e4(puVar2 + 0x2c);
+    temp_v9 = vec2GetYInt(puVar2 + 0x2c);
     temp_v0 = *(short *)(temp_v1 + 10);
-    temp_v8 = FUN_001654d8(puVar2 + 0x2c);
+    temp_v8 = vec2GetXInt(puVar2 + 0x2c);
     FUN_001835b4(2,0x1a,0x27e,(int)&param_1->field_0x0 + *(short *)(temp_v1 + 8) + temp_v8,
                  temp_v9 + param_2 + (int)temp_v0,0x83);
   }
@@ -637,7 +637,7 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
                       (int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v2 + 8),
                       (unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_00162790(3,temp_v10,temp_v13,(int)*(short *)(temp_v2 + 8));
-  FUN_00184e64(temp_v11);
+  drawSetColorFromRGBA8(temp_v11);
   if ((unsigned short)psVar6[3] >= 100) {
     temp_v2 = FUN_001834a4(0x1a,0x262);
     FUN_00180310(0,(int)&param_1->field_0x0 +

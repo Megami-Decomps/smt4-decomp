@@ -3,7 +3,7 @@
 extern "C" {
 
 void FUN_003210bc(void *object, s32 flag);
-s32 FUN_0018206c(u32 table, s32 index);
+s32 asdTMTexTableNodeIsLoaded(u32 table, s32 index);
 
 typedef struct Holder {
     /* 0x00 */ u8 unk00[0x10];
@@ -23,7 +23,7 @@ u32 FUN_002df66c(Holder *holder)
         count = 0;
         i = count;
         do {
-            flag = FUN_0018206c(0xC, i);
+            flag = asdTMTexTableNodeIsLoaded(0xC, i);
             if (flag != 0) {
                 count = count + 1;
             }
@@ -31,7 +31,7 @@ u32 FUN_002df66c(Holder *holder)
         } while (i < 6);
         i = 0;
         do {
-            flag = FUN_0018206c(0xD, i);
+            flag = asdTMTexTableNodeIsLoaded(0xD, i);
             if (flag != 0) {
                 count = count + 1;
             }

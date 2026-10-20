@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001568f8(int, int);
-int FUN_002e342c(unsigned char [132], unsigned int);
+int libc_strcpy(unsigned char [132], unsigned int);
 int FUN_002e5924(int);
 int sysMemClear(unsigned char [132], int);
 int FUN_003e0bb8(unsigned int *, int);
@@ -27,7 +27,7 @@ typedef struct {
 } param_2_stack;
 
 extern unsigned int g_aocSystem; /* 0x570280 */
-extern unsigned int DAT_00571508; /* 0x571508 */
+extern unsigned int g_btlCamera; /* 0x571508 */
 extern unsigned int DAT_00573878; /* 0x573878 */
 extern unsigned int DAT_0057387c; /* 0x57387c */
 extern unsigned int DAT_00573888; /* 0x573888 */
@@ -37,7 +37,7 @@ extern unsigned int DAT_00573894; /* 0x573894 */
 
 /* Supplied declaration required: FUN_001568f8. */
 extern int FUN_00240c34(unsigned char *);
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_002e5924. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003e0bb8. */
@@ -75,13 +75,13 @@ void FUN_003e1454(unsigned int *param_1,int param_2)
   }
   sysMemClear(temp_v6,0x80);
   temp_v2 = FUN_003efa38(param_2);
-  FUN_002e342c(temp_v6,temp_v2);
+  libc_strcpy(temp_v6,temp_v2);
   if ((!temp_v0) && (temp_v1 = FUN_00240c34(temp_v6), temp_v1 == 0)) {
     FUN_003edbd0(param_2);
     FUN_003f0d50(param_2);
     FUN_003edb9c(param_2);
     FUN_003f0b28(param_2);
-    words10CopyHighToLow(DAT_00571508);
+    words10CopyHighToLow(g_btlCamera);
     temp_v1 = FUN_003e0f94(param_1,param_2);
     puVar7 = (unsigned int *)(param_2 + 0x45a0);
     if ((temp_v1 == 1) || (temp_v1 == 2 || temp_v1 == 5)) {

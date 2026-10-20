@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_001846d0(...);
-int FUN_00184b80(...);
+int uiSpriteSelectAnim(...);
+int pairSetFirstResetSecond(...);
 
-/* Supplied declaration required: FUN_001846d0. */
-/* Supplied declaration required: FUN_00184b80. */
+/* Supplied declaration required: uiSpriteSelectAnim. */
+/* Supplied declaration required: pairSetFirstResetSecond. */
 extern int FUN_00291e14(void);
 
 
@@ -46,61 +46,61 @@ void FUN_002cd118(int param_1,int param_2,unsigned short param_3,unsigned short 
     do {
       if (*(int *)(param_1 + 0x2440) != 0) {
         temp_v2 = param_1 + temp_v0 * 0x8c;
-        FUN_00184b80(temp_v2 + 0x20,1);
-        FUN_00184b80(temp_v2 + 0xb10,8);
-        FUN_00184b80(temp_v2 + 0x1088,3);
-        FUN_00184b80(temp_v2 + 0x1b78,0xfa7);
-        FUN_00184b80(temp_v2 + 0x1600,0xfa1);
+        pairSetFirstResetSecond(temp_v2 + 0x20,1);
+        pairSetFirstResetSecond(temp_v2 + 0xb10,8);
+        pairSetFirstResetSecond(temp_v2 + 0x1088,3);
+        pairSetFirstResetSecond(temp_v2 + 0x1b78,0xfa7);
+        pairSetFirstResetSecond(temp_v2 + 0x1600,0xfa1);
         if (temp_v0 < 4) {
           if (temp_v0 == 0) {
-            FUN_00184b80(temp_v1,0xbd);
+            pairSetFirstResetSecond(temp_v1,0xbd);
           }
-          FUN_00184b80(temp_v2 + 0x2208,0xbc - temp_v0);
+          pairSetFirstResetSecond(temp_v2 + 0x2208,0xbc - temp_v0);
         }
       }
       else {
         temp_v2 = FUN_00291e14();
         temp_v3 = param_1 + temp_v0 * 0x8c;
         if (temp_v2 != 0) {
-          FUN_00184b80(temp_v3 + 0x20,0xa3);
-          FUN_00184b80(temp_v3 + 0xb10,0xa5);
-          FUN_00184b80(temp_v3 + 0x1088,0xa4);
-          FUN_00184b80(temp_v3 + 0x1b78,0xfa8);
-          FUN_00184b80(temp_v3 + 0x1600,0xfb0);
+          pairSetFirstResetSecond(temp_v3 + 0x20,0xa3);
+          pairSetFirstResetSecond(temp_v3 + 0xb10,0xa5);
+          pairSetFirstResetSecond(temp_v3 + 0x1088,0xa4);
+          pairSetFirstResetSecond(temp_v3 + 0x1b78,0xfa8);
+          pairSetFirstResetSecond(temp_v3 + 0x1600,0xfb0);
           if (temp_v0 < 4) {
             if (temp_v0 == 0) {
-              FUN_00184b80(temp_v1,0xc2);
+              pairSetFirstResetSecond(temp_v1,0xc2);
             }
-            FUN_00184b80(temp_v3 + 0x2208,0xc1 - temp_v0);
+            pairSetFirstResetSecond(temp_v3 + 0x2208,0xc1 - temp_v0);
           }
         }
         else {
-          FUN_00184b80(temp_v3 + 0x20,0);
-          FUN_00184b80(temp_v3 + 0xb10,7);
-          FUN_00184b80(temp_v3 + 0x1088,2);
-          FUN_00184b80(temp_v3 + 0x1b78,0xfa6);
-          FUN_00184b80(temp_v3 + 0x1600,4000);
+          pairSetFirstResetSecond(temp_v3 + 0x20,0);
+          pairSetFirstResetSecond(temp_v3 + 0xb10,7);
+          pairSetFirstResetSecond(temp_v3 + 0x1088,2);
+          pairSetFirstResetSecond(temp_v3 + 0x1b78,0xfa6);
+          pairSetFirstResetSecond(temp_v3 + 0x1600,4000);
           if (temp_v0 < 4) {
             if (temp_v0 == 0) {
-              FUN_00184b80(temp_v1,0xb8);
+              pairSetFirstResetSecond(temp_v1,0xb8);
             }
-            FUN_00184b80(temp_v3 + 0x2208,0xb7 - temp_v0);
+            pairSetFirstResetSecond(temp_v3 + 0x2208,0xb7 - temp_v0);
           }
         }
       }
       temp_v2 = param_1 + temp_v0 * 0x8c;
-      FUN_001846d0(temp_v2 + 0x20,2);
-      FUN_001846d0(temp_v2 + 0xb10,5);
-      FUN_001846d0(temp_v2 + 0x1088,3);
-      FUN_001846d0(temp_v2 + 0x1b78,10);
+      uiSpriteSelectAnim(temp_v2 + 0x20,2);
+      uiSpriteSelectAnim(temp_v2 + 0xb10,5);
+      uiSpriteSelectAnim(temp_v2 + 0x1088,3);
+      uiSpriteSelectAnim(temp_v2 + 0x1b78,10);
       if (temp_v0 < 4) {
         if (temp_v0 == 0) {
-          FUN_001846d0(temp_v1,0xc);
+          uiSpriteSelectAnim(temp_v1,0xc);
         }
-        FUN_001846d0(temp_v2 + 0x2208,0xc);
+        uiSpriteSelectAnim(temp_v2 + 0x2208,0xc);
       }
-      FUN_00184b80(temp_v2 + 0x598,6);
-      FUN_001846d0(temp_v2 + 0x598,1);
+      pairSetFirstResetSecond(temp_v2 + 0x598,6);
+      uiSpriteSelectAnim(temp_v2 + 0x598,1);
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < *(short *)(param_1 + 0x2448));
   }

@@ -5,13 +5,13 @@
 extern "C" {
 
 int btlGetMainState(void);
-int FUN_002aa568(int, unsigned int);
+int libc_strcmp(int, unsigned int);
 
 extern unsigned char g_btlEffect; /* 0x435d00 */
 
 extern int FUN_00293230(void);
 /* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: FUN_002aa568. */
+/* Supplied declaration required: libc_strcmp. */
 
 
 int FUN_003dcf34(int param_1)
@@ -28,7 +28,7 @@ int FUN_003dcf34(int param_1)
     temp_v0 = 0;
     do {
       temp_v1 = *piVar3 + temp_v0 * 0x16;
-      if ((temp_v1 != 0) && (FUN_002aa568(temp_v1,(*(unsigned int *)((unsigned char *)&g_btlEffect + 0x14))), temp_v1 == 0)) {
+      if ((temp_v1 != 0) && (libc_strcmp(temp_v1,(*(unsigned int *)((unsigned char *)&g_btlEffect + 0x14))), temp_v1 == 0)) {
         temp_v0 = *piVar3 + temp_v0 * 0x16;
         if (temp_v0 != 0) {
           return (int)*(short *)(temp_v0 + 0x10);

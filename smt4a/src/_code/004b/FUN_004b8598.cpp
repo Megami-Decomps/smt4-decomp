@@ -26,8 +26,8 @@ extern unsigned char LAB_004b87d0; /* 0x4b87d0 */
 extern unsigned char LAB_004b87d8; /* 0x4b87d8 */
 
 /* Supplied declaration required: FUN_00100388. */
-extern int FUN_0018206c(unsigned int, unsigned int);
-extern int FUN_0018719c(void);
+extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
+extern int gameFlagIsSet(void);
 /* Supplied declaration required: FUN_0020401c. */
 /* Supplied declaration required: FUN_004072b0. */
 /* Supplied declaration required: linkSlotSetFlag1C. */
@@ -57,7 +57,7 @@ void FUN_004b8598(int param_1)
   unsigned char temp_v6 [128];
   unsigned char temp_v7 [8];
   
-  temp_v0 = FUN_0018206c(0x18,*(unsigned int *)(param_1 + 0x90));
+  temp_v0 = asdTMTexTableNodeIsLoaded(0x18,*(unsigned int *)(param_1 + 0x90));
   if (temp_v0 != 0) {
     temp_v4 = *(int *)(param_1 + 0x1128) != 0;
     temp_v0 = 0;
@@ -72,9 +72,9 @@ void FUN_004b8598(int param_1)
         *(unsigned char *)(param_1 + 0x1214) = 1;
         FUN_00100388(temp_v5,&LAB_004b87d0,"mikado/",*(int *)(param_1 + 0x1118) + 0x40);
         if (((*(short *)(*(int *)(param_1 + 0x1118) + 100) != 0) &&
-            (temp_v0 = FUN_0018719c(), temp_v0 != 0)) ||
+            (temp_v0 = gameFlagIsSet(), temp_v0 != 0)) ||
            ((*(short *)(*(int *)(param_1 + 0x1118) + 0x66) != 0 &&
-            (temp_v0 = FUN_0018719c(), temp_v0 != 0)))) {
+            (temp_v0 = gameFlagIsSet(), temp_v0 != 0)))) {
           FUN_00100388(temp_v6,&LAB_004b87d0,"mikado/",*(int *)(param_1 + 0x1118) + 0x68);
           FUN_00407ab0(*(unsigned int *)(param_1 + 0x1218),temp_v5,temp_v6);
         }

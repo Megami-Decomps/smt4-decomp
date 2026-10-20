@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002e6e34(unsigned char [12], int);
 int FUN_002e6e5c(unsigned char [12]);
-int FUN_002fe9ea(int [2]);
+int listIteratorNext3(int [2]);
 int FUN_002fea02(int *, int, int *);
 
 /* stack frame of param_2: 5 slot(s), 20 byte(s) */
@@ -22,7 +22,7 @@ extern unsigned char g_flagBlock; /* 0x594958 */
 
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-/* Supplied declaration required: FUN_002fe9ea. */
+/* Supplied declaration required: listIteratorNext3. */
 extern int wordRefsDiffer_002fe9f2(int *, int *);
 /* Supplied declaration required: FUN_002fea02. */
 
@@ -51,7 +51,7 @@ void FUN_00113de4(int param_1,int param_2)
       temp_v4[0] = temp_v2;
       temp_v0 = *piVar2;
       while ((temp_v4[0] != temp_v0 && (temp_v4[0] != temp_v6))) {
-        FUN_002fe9ea(temp_v4);
+        listIteratorNext3(temp_v4);
       }
       temp_v2 = temp_v4[0];
       temp_v0 = wordRefsDiffer_002fe9f2(&temp_v2,piVar2);

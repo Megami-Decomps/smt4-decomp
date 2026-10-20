@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001f4e20(...);
+int dialogOpen(...);
 int FUN_0020401c(...);
 int FUN_00215978(...);
 int FUN_00284f90(...);
@@ -31,7 +31,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_001f4e20. */
+/* Supplied declaration required: dialogOpen. */
 /* Supplied declaration required: FUN_0020401c. */
 /* Supplied declaration required: FUN_00215978. */
 extern int FUN_00224880(unsigned int);
@@ -50,7 +50,7 @@ void FUN_004b8228(fn_004b8228_arg0 *param_1)
   if (temp_v0 == 2) {
     FUN_004b7d88(param_1);
     FUN_00215978(0);
-    FUN_001f4e20(0);
+    dialogOpen(0);
     FUN_002a49e4(*(unsigned int *)&param_1->field_0x113c,
                  *(unsigned char *)((int)param_1->field_0x1118 + 0x3f));
     param_1->field_0x2c = 0;

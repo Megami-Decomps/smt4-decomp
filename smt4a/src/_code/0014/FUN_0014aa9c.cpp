@@ -22,7 +22,7 @@ typedef struct {
     unsigned int sp58; /* 0x58: local_58 */
 } param_1_stack;
 
-extern int DAT_0057f65c; /* 0x57f65c */
+extern int g_frameTex; /* 0x57f65c */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -56,12 +56,12 @@ void FUN_0014aa9c(unsigned int param_1)
   float temp_v8;
   
   temp_v6 = g_renderCtx;
-  temp_v2 = DAT_0057f65c;
+  temp_v2 = g_frameTex;
   temp_v3 = param_1;
-  if (DAT_0057f65c != 0) {
-    temp_v3 = (unsigned int)*(unsigned char *)(DAT_0057f65c + 0x25);
+  if (g_frameTex != 0) {
+    temp_v3 = (unsigned int)*(unsigned char *)(g_frameTex + 0x25);
   }
-  if (DAT_0057f65c != 0 && temp_v3 != 0) {
+  if (g_frameTex != 0 && temp_v3 != 0) {
     temp_v4 = FUN_001692ac(1,0);
     piVar9 = (int *)(temp_v6 + 0x1258);
     temp_v5 = *piVar9;
@@ -87,7 +87,7 @@ void FUN_0014aa9c(unsigned int param_1)
     temp_v8 = *(float *)(temp_v2 + 0x28);
     FUN_001879d0(g_renderCtx);
     temp_v4 = mapMainIsIdle();
-    temp_v6 = DAT_0057f65c;
+    temp_v6 = g_frameTex;
     if (temp_v4 != 0) {
       VectorSignedToFloat((int)temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
       FUN_001a9698();

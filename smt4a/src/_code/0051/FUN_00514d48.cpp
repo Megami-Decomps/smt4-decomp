@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_00122024(int, unsigned int *);
 int rt_malloc(...);
-int FUN_002e6e14(unsigned int);
-int FUN_002e9318(unsigned char *[2]);
+int asdOperatorDeleteArray(unsigned int);
+int onlineStringDestroy(unsigned char *[2]);
 int FUN_002e9518(int, int);
 int constructObj0055affc(...);
 int FUN_002fd2a4(unsigned char **);
@@ -43,13 +43,13 @@ extern unsigned char DAT_0055ad28; /* 0x55ad28 */
 
 /* Supplied declaration required: FUN_00122024. */
 /* Supplied declaration required: rt_malloc. */
-/* Supplied declaration required: FUN_002e6e14. */
-/* Supplied declaration required: FUN_002e9318. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
+/* Supplied declaration required: onlineStringDestroy. */
 /* Supplied declaration required: FUN_002e9518. */
-extern int FUN_002e9520(unsigned int *, unsigned int *);
+extern int onlineStringCopyConstruct(unsigned int *, unsigned int *);
 /* Supplied declaration required: constructObj0055affc. */
 /* Supplied declaration required: FUN_002fd2a4. */
-extern int FUN_00302f28(int);
+extern int clearWords2Alt(int);
 extern int FUN_00303146(int, unsigned int *);
 extern int FUN_003038fc(int, unsigned int);
 extern int FUN_00303928(int, unsigned int, unsigned int *);
@@ -99,16 +99,16 @@ int * FUN_00514d48(int *param_1,unsigned int param_2)
   temp_v18 = 0;
   temp_v19 = (unsigned int *)0x0;
   temp_v0 = FUN_00303928(temp_v0 + 0x20,3,&temp_v17);
-  FUN_002e6e14(temp_v17);
+  asdOperatorDeleteArray(temp_v17);
   temp_v20 = 0;
   temp_v21 = 0;
   temp_v22 = 0;
   temp_v0 = FUN_00303928(temp_v0 + 0x14,3,&temp_v20);
-  FUN_002e6e14(temp_v20);
-  temp_v0 = FUN_00302f28(temp_v0 + 0x18);
-  temp_v0 = FUN_00302f28(temp_v0 + 8);
-  temp_v0 = FUN_00302f28(temp_v0 + 0x18);
-  temp_v0 = FUN_00302f28(temp_v0 + 8);
+  asdOperatorDeleteArray(temp_v20);
+  temp_v0 = clearWords2Alt(temp_v0 + 0x18);
+  temp_v0 = clearWords2Alt(temp_v0 + 8);
+  temp_v0 = clearWords2Alt(temp_v0 + 0x18);
+  temp_v0 = clearWords2Alt(temp_v0 + 8);
   constructObj0055affc(temp_v7);
   *(int *)(temp_v0 + 8) = 0;
   *(unsigned int *)(temp_v0 + 0xc) = 0;
@@ -117,7 +117,7 @@ int * FUN_00514d48(int *param_1,unsigned int param_2)
   *(int *)(temp_v0 + 8) = temp_v1;
   *(int *)(temp_v0 + 0xc) = temp_v1;
   *(int *)(temp_v0 + 0x10) = temp_v1 + 0x100;
-  FUN_002e9318(temp_v7);
+  onlineStringDestroy(temp_v7);
   temp_v10 = &DAT_0055a884;
   *(int *)(temp_v0 + 0x14) = 0;
   *(unsigned int *)(temp_v0 + 0x18) = 0;
@@ -155,7 +155,7 @@ int * FUN_00514d48(int *param_1,unsigned int param_2)
         temp_v19[3] = temp_v2;
         temp_v19[4] = temp_v23[4];
         temp_v19[5] = temp_v23[5];
-        temp_v0 = FUN_002e9520(temp_v19 + 6,temp_v23 + 6);
+        temp_v0 = onlineStringCopyConstruct(temp_v19 + 6,temp_v23 + 6);
         *(unsigned short *)(temp_v0 + 8) = *(unsigned short *)(puVar1 + 8);
         temp_v0 = temp_v0 + 0xc;
         FUN_00122024(temp_v0,puVar1 + 9);

@@ -32,8 +32,8 @@ typedef struct {
 
 /* Supplied declaration required: jyoucyuGetTableEntry. */
 /* Supplied declaration required: FUN_00184310. */
-extern int FUN_0018719c(unsigned int);
-extern int FUN_001ab888(void);
+extern int gameFlagIsSet(unsigned int);
+extern int gameGetSlotTable(void);
 extern int FUN_0026140c(void);
 /* Supplied declaration required: FUN_002a4b28. */
 /* Supplied declaration required: FUN_0032fbd0. */
@@ -86,7 +86,7 @@ LAB_004a19b4:
       puVar4 = (unsigned short *)((temp_v8 + 1U) & 0xffff);
       FUN_00184310();
       if ((puVar4 != (unsigned short *)0x0) && ((puVar4[5] & 1) != 0)) {
-        if ((temp_v8 == 9) && (temp_v4 = FUN_0018719c(0x441), temp_v4 == 0)) {
+        if ((temp_v8 == 9) && (temp_v4 = gameFlagIsSet(0x441), temp_v4 == 0)) {
           temp_v8 = 10;
           goto LAB_004a19b4;
         }
@@ -140,7 +140,7 @@ LAB_004a19b4:
   }
   else {
     FUN_004a83f8();
-    temp_v8 = FUN_001ab888();
+    temp_v8 = gameGetSlotTable();
     temp_v5 = 0;
     if (temp_v5 < *(unsigned char *)(temp_v8 + 0x1ca3)) {
       do {

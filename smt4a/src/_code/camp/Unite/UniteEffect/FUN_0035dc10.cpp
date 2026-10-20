@@ -8,9 +8,9 @@ int asdProcessCreateSimple(...);
 int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
 int FUN_001695a0(...);
-int FUN_002cd8fc(...);
+int btlTalkBustUpCreate(...);
 int sysMemClear(...);
-int FUN_003f86f8(...);
+int loadSlotEnsureLoaded(...);
 
 /* stack frame of void: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -31,9 +31,9 @@ extern unsigned int *DAT_0057f2c4; /* 0x57f2c4 */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_001695a0. */
-/* Supplied declaration required: FUN_002cd8fc. */
+/* Supplied declaration required: btlTalkBustUpCreate. */
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_003f86f8. */
+/* Supplied declaration required: loadSlotEnsureLoaded. */
 
 
 void FUN_0035dc10(void)
@@ -55,9 +55,9 @@ void FUN_0035dc10(void)
   *puVar1 = (unsigned int)puVar2;
   taskCreateDraw(&LAB_0035dd50,0xeb,0,0,FUN_003da030,0,0,puVar2);
   taskCreateDraw(&LAB_0035dd50,0x71,0,0,FUN_003d26cc,0,0,*puVar1);
-  FUN_002cd8fc();
+  btlTalkBustUpCreate();
   FUN_001695a0();
-  FUN_003f86f8(0x25);
+  loadSlotEnsureLoaded(0x25);
   return;
 }
 

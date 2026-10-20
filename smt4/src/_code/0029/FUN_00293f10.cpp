@@ -4,18 +4,18 @@
 
 extern "C" {
 
-int FUN_002a60b4(unsigned int);
-int FUN_002b06c4(void);
-int FUN_002b9024(int, unsigned int);
+int asdTMTexTableNodeIsLoaded(unsigned int);
+int dataTable00FindById(void);
+int devilGetRecord(int, unsigned int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_002a60b4. */
-/* Supplied declaration required: FUN_002b06c4. */
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: asdTMTexTableNodeIsLoaded. */
+/* Supplied declaration required: dataTable00FindById. */
+/* Supplied declaration required: devilGetRecord. */
 
 
 void FUN_00293f10(unsigned int param_1,int param_2)
@@ -28,12 +28,12 @@ void FUN_00293f10(unsigned int param_1,int param_2)
   temp_v1 = 0x17;
   if ((param_2 != 0) && (-1 < (int)param_1)) {
     temp_v0 = param_1;
-    FUN_002b9024(temp_v0,param_1);
+    devilGetRecord(temp_v0,param_1);
     if (temp_v0 == 0) {
       return;
     }
     param_1 = param_1 & 0xffff;
-    FUN_002b06c4();
+    dataTable00FindById();
     if ((*(unsigned char *)(param_1 + 3) & 1) != 0) {
       temp_v1 = 0x23;
       if (*(short *)(param_1 + 0x88) >= 0x81) {
@@ -44,7 +44,7 @@ void FUN_00293f10(unsigned int param_1,int param_2)
       return;
     }
   }
-  FUN_002a60b4(temp_v1);
+  asdTMTexTableNodeIsLoaded(temp_v1);
   return;
 }
 

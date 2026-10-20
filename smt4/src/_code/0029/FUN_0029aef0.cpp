@@ -6,9 +6,9 @@ extern "C" {
 
 int memClear(char *, int);
 
-extern int FUN_00229e84(void);
+extern int gameDataBlocksGetCounterPtr(void);
 extern int FUN_0029ea68(unsigned int);
-extern int FUN_002c09bc(void);
+extern int gameDataBlocksGetSaveData(void);
 /* Supplied declaration required: memClear. */
 
 
@@ -22,16 +22,16 @@ int FUN_0029aef0(void)
   unsigned int temp_v3;
   char acStack_7d [109];
   
-  temp_v1 = FUN_00229e84();
+  temp_v1 = gameDataBlocksGetCounterPtr();
   temp_v3 = (unsigned int)*(unsigned short *)(temp_v1 + 8);
-  temp_v1 = FUN_00229e84();
+  temp_v1 = gameDataBlocksGetCounterPtr();
   temp_v0 = *(unsigned short *)(temp_v1 + 10);
   memClear(acStack_7d + 5,100);
   if (temp_v3 <= temp_v0) {
     do {
       temp_v1 = FUN_0029ea68(temp_v3 & 0xffff);
       if (temp_v1 != 0) {
-        temp_v1 = FUN_002c09bc();
+        temp_v1 = gameDataBlocksGetSaveData();
         temp_v2 = (unsigned int)*(unsigned short *)(temp_v1 + temp_v3 * 0x34 + 0xc170);
         if ((temp_v2 - 1 < 99) && ((unsigned char)acStack_7d[temp_v2 + 5] < 0x14)) {
           acStack_7d[temp_v2 + 5] = acStack_7d[temp_v2 + 5] + 1;

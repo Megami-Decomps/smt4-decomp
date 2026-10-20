@@ -10,11 +10,11 @@ typedef struct MasterManagerImpl {
 } MasterManagerImpl;
 
 extern u8 g_dspsndState;
-extern int FUN_002bb274(void);
+extern int nn_snd_CTR_Dspsnd_IsInitialized(void);
 
 void nn_snd_CTR_MasterManagerImpl_SetSoundOutputMode(MasterManagerImpl *manager, u32 mode)
 {
-    if (FUN_002bb274() != 0) {
+    if (nn_snd_CTR_Dspsnd_IsInitialized() != 0) {
         manager->soundOutputMode = mode;
         nn_snd_CTR_Dspsnd_SetSoundOutputMode(&g_dspsndState, mode);
     }

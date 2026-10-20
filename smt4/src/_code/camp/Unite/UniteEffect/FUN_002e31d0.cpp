@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_00295720(...);
-int FUN_00297410(...);
+int btlTalkBustUpCreate(...);
+int fileSlotLoad(...);
 int FUN_002bff50(...);
 int memClear(...);
 int asdMemAlloc(...);
@@ -27,8 +27,8 @@ extern int FUN_0032ae80(...); /* 0x32ae80 */
 extern int FUN_00330ac8(...); /* 0x330ac8 */
 extern unsigned int *DAT_0043dd90; /* 0x43dd90 */
 
-/* Supplied declaration required: FUN_00295720. */
-/* Supplied declaration required: FUN_00297410. */
+/* Supplied declaration required: btlTalkBustUpCreate. */
+/* Supplied declaration required: fileSlotLoad. */
 /* Supplied declaration required: FUN_002bff50. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: asdMemAlloc. */
@@ -55,9 +55,9 @@ void FUN_002e31d0(void)
   *puVar1 = (unsigned int)puVar2;
   taskCreateDraw(&LAB_002e3318,0xe7,0,0,FUN_00330ac8,0,0,puVar2);
   taskCreateDraw(&LAB_002e3318,0x6f,0,0,FUN_0032ae80,0,0,*puVar1);
-  FUN_00295720();
+  btlTalkBustUpCreate();
   FUN_002bff50();
-  FUN_00297410(0x25);
+  fileSlotLoad(0x25);
   return;
 }
 

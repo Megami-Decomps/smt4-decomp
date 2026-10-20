@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_001c6e20(void);
+extern int nn_snd_CTR_Dspsnd_IsInitialized(void);
 
 
 unsigned char nn_snd_CTR_Dspsnd_SetChannelMix(int param_1,unsigned char param_2,int param_3)
@@ -16,7 +16,7 @@ unsigned char nn_snd_CTR_Dspsnd_SetChannelMix(int param_1,unsigned char param_2,
   unsigned short *puVar4;
   unsigned int *puVar5;
   
-  temp_v1 = FUN_001c6e20();
+  temp_v1 = nn_snd_CTR_Dspsnd_IsInitialized();
   temp_v0 = 0;
   if (temp_v1 != 0) {
     temp_v1 = 4;

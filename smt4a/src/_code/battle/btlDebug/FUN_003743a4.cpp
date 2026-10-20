@@ -27,7 +27,7 @@ int FUN_001834a4(...);
 int FUN_001835b4(...);
 int FUN_0018408c(...);
 int FUN_00185e84(...);
-int FUN_0019cac4(void);
+int dataTable00FindById(void);
 int VectorSignedToFloat(...);
 
 typedef int romwright_code(...);
@@ -62,8 +62,8 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_0015f858. */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164b5c. */
-extern int FUN_001654d8(void);
-extern int FUN_001654e4(int);
+extern int vec2GetXInt(void);
+extern int vec2GetYInt(int);
 /* Supplied declaration required: FUN_001676b0. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00167860. */
@@ -77,8 +77,8 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0018408c. */
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: FUN_00185e84. */
-/* Supplied declaration required: FUN_0019cac4. */
-extern unsigned char *FUN_001ab854(void);
+/* Supplied declaration required: dataTable00FindById. */
+extern unsigned char *gameGetSlotRecord(void);
 extern int FUN_001ba3d4(int);
 extern int FUN_00284140(int);
 extern unsigned char *btlMainGetUnk14(void);
@@ -93,7 +93,7 @@ extern int FUN_00372794(int, int, unsigned char *);
 /* Supplied declaration required: FUN_003b67e8. */
 /* Supplied declaration required: FUN_003c0d90. */
 extern int FUN_003df57c(int, unsigned int);
-extern int FUN_003e46f4(int);
+extern int gameDataFlagTestBit(int);
 extern short halfTableGet(unsigned int, unsigned int);
 extern int FUN_004bcbb4(unsigned char *, int);
 
@@ -130,11 +130,11 @@ void FUN_003743a4(int param_1)
   int *temp_v22;
   
   temp_v17 = (unsigned char *)0x0;
-  temp_v2 = FUN_001654d8();
-  temp_v3 = FUN_001654e4(param_1 + 0x11a0);
-  temp_v4 = FUN_001654d8();
+  temp_v2 = vec2GetXInt();
+  temp_v3 = vec2GetYInt(param_1 + 0x11a0);
+  temp_v4 = vec2GetXInt();
   temp_v4 = temp_v4 + temp_v2;
-  temp_v2 = FUN_001654e4(param_1 + 0x12b8);
+  temp_v2 = vec2GetYInt(param_1 + 0x12b8);
   temp_v2 = temp_v2 + temp_v3;
   efctSetSpeed();
   temp_v16[1] = 0xab;
@@ -200,7 +200,7 @@ void FUN_003743a4(int param_1)
       temp_v3 = param_1 + temp_v18 * 0x40;
       if (*(char *)(temp_v3 + 0x4870) != '\0') {
         temp_v5 = (unsigned int)*(unsigned short *)(temp_v3 + 0x4858);
-        FUN_0019cac4();
+        dataTable00FindById();
         if ((*(unsigned short *)(temp_v5 + 2) & 0x8000) != 0) {
           if (*(char *)(param_1 + 0x4857) != '\0') {
             temp_v6 = FUN_001834a4(0xd,0x1a0);
@@ -410,7 +410,7 @@ void FUN_003743a4(int param_1)
             temp_v16[1] = 0x32;
             temp_v17 = (unsigned char *)0x33;
             do {
-              temp_v3 = FUN_003e46f4(temp_v16[temp_v12]);
+              temp_v3 = gameDataFlagTestBit(temp_v16[temp_v12]);
               if (temp_v3 != 0) {
                 if (temp_v13 == temp_v5) {
                   temp_v9 = FUN_002f8e98(temp_v12 & 0xff);
@@ -510,7 +510,7 @@ void FUN_003743a4(int param_1)
       temp_v14 = 1;
       temp_v16[0] = 0;
       if (temp_v1 != -2) {
-        temp_v17 = (unsigned char *)FUN_001ab854();
+        temp_v17 = (unsigned char *)gameGetSlotRecord();
       }
       else {
         temp_v17 = (unsigned char *)btlMainGetUnk14();

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_004102d8(int, int, int, unsigned int);
 
-extern int DAT_005712f0; /* 0x5712f0 */
+extern int g_btlActionReflect; /* 0x5712f0 */
 
 extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_004102d8. */
@@ -36,8 +36,8 @@ FUN_004fd2cc(short param_1,unsigned int param_2,int param_3,unsigned short param
           if (temp_v0 < 0) {
             return 0;
           }
-          temp_v2 = DAT_005712f0;
-          FUN_004102d8(DAT_005712f0,(int)(short)(temp_v0 + param_1),0,param_2);
+          temp_v2 = g_btlActionReflect;
+          FUN_004102d8(g_btlActionReflect,(int)(short)(temp_v0 + param_1),0,param_2);
           *(unsigned char *)(temp_v2 + 4) = 0x46;
           *(short *)(temp_v2 + 0x24) = (short)temp_v3;
           *(unsigned short *)(temp_v2 + 0x26) = param_5;
@@ -50,8 +50,8 @@ FUN_004fd2cc(short param_1,unsigned int param_2,int param_3,unsigned short param
       } while (temp_v3 < 4);
     }
     else {
-      temp_v1 = DAT_005712f0;
-      FUN_004102d8(DAT_005712f0,(int)param_1,0,param_2);
+      temp_v1 = g_btlActionReflect;
+      FUN_004102d8(g_btlActionReflect,(int)param_1,0,param_2);
       *(unsigned char *)(temp_v1 + 4) = 0x46;
       *(unsigned short *)(temp_v1 + 0x24) = param_4;
       *(unsigned short *)(temp_v1 + 0x26) = param_5;

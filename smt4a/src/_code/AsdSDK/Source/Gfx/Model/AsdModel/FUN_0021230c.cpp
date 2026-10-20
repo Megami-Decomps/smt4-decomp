@@ -22,7 +22,7 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_3_stack;
 
-extern unsigned char DAT_005b3bf4; /* 0x5b3bf4 */
+extern unsigned char g_gfxSettings; /* 0x5b3bf4 */
 
 #ifndef ROMWRIGHT_PIECE_2_2_DEFINED
 #define ROMWRIGHT_PIECE_2_2_DEFINED
@@ -90,7 +90,7 @@ void FUN_0021230c(unsigned int *param_1,unsigned int *param_2,int param_3)
   if ((*param_2 & 2) != 0) {
     FUN_00386548(param_1[0xb]);
     *param_1 = *param_1 | 2;
-    (*(int *)((unsigned char *)&DAT_005b3bf4 + 0x40)) = (*(int *)((unsigned char *)&DAT_005b3bf4 + 0x40)) + 1;
+    (*(int *)((unsigned char *)&g_gfxSettings + 0x40)) = (*(int *)((unsigned char *)&g_gfxSettings + 0x40)) + 1;
   }
   piVar5 = (int *)param_2[1];
   param_1[1] = (unsigned int)piVar5;

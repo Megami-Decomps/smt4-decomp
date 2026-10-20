@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00131844(int [2], int, int *);
-int FUN_002e9538(unsigned int, int);
+int onlineSockAddrCopy(unsigned int, int);
 
 /* stack frame of param_3: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -16,7 +16,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00131844. */
 extern int wordRefsDiffer_00132142(int *, unsigned int *);
-/* Supplied declaration required: FUN_002e9538. */
+/* Supplied declaration required: onlineSockAddrCopy. */
 
 
 unsigned char FUN_0012409c(int param_1,unsigned int param_2,unsigned int param_3)
@@ -39,7 +39,7 @@ unsigned char FUN_0012409c(int param_1,unsigned int param_2,unsigned int param_3
   temp_v2 = *(unsigned int *)(param_1 + 0x14);
   temp_v0 = wordRefsDiffer_00132142(&temp_v1,(unsigned int *)&temp_v2);
   if (temp_v0 != 0) {
-    FUN_002e9538(param_3,temp_v1 + 0x14);
+    onlineSockAddrCopy(param_3,temp_v1 + 0x14);
   }
   return temp_v0 != 0;
 }

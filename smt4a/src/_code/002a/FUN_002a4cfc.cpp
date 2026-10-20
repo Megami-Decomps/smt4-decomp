@@ -31,9 +31,9 @@ int FUN_0037a2c8(void);
 int FUN_0038800c(...);
 int FUN_0038a694(void);
 int FUN_0039a638(void);
-int FUN_003f86f8(...);
+int loadSlotEnsureLoaded(...);
 
-int FUN_00184c00(...);
+int uiSpriteSetImageKeyframe(...);
 int FUN_0019de98(...);
 int FUN_001f4908(int, int, int);
 int configOpen(...);
@@ -41,7 +41,7 @@ int FUN_0020b660(...);
 int FUN_00215254(void);
 int FUN_00215bd0(void);
 int FUN_0021b274(...);
-int FUN_002316c8(int);
+int bgmRestart(int);
 int FUN_0023c08c(...);
 int FUN_0023f604(...);
 int FUN_0026f148(...);
@@ -66,14 +66,14 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } void_stack;
 
-extern int DAT_0057f108; /* 0x57f108 */
-extern int DAT_0057f268; /* 0x57f268 */
+extern int g_camp; /* 0x57f108 */
+extern int g_partyPanel; /* 0x57f268 */
 
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_00184c00. */
-extern int FUN_0018719c(unsigned int);
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0019de98. */
-extern int FUN_001ab888(void);
+extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_001f4908. */
 /* Supplied declaration required: configOpen. */
 /* Supplied declaration required: FUN_0020b660. */
@@ -84,7 +84,7 @@ extern unsigned int FUN_00213b5c(void);
 /* Supplied declaration required: FUN_0021b274. */
 /* Supplied declaration required: FUN_0022e774. */
 /* Supplied declaration required: FUN_00230ac0. */
-/* Supplied declaration required: FUN_002316c8. */
+/* Supplied declaration required: bgmRestart. */
 /* Supplied declaration required: FUN_0023c08c. */
 /* Supplied declaration required: FUN_0023f604. */
 /* Supplied declaration required: FUN_0026f0c4. */
@@ -135,8 +135,8 @@ extern int FUN_0035a044(void);
 extern int FUN_003da8f4(int, unsigned int);
 /* Supplied declaration required: obj48Arm. */
 /* Supplied declaration required: pair40Set. */
-/* Supplied declaration required: FUN_003f86f8. */
-extern unsigned int FUN_003fd63c(unsigned int, unsigned int);
+/* Supplied declaration required: loadSlotEnsureLoaded. */
+extern unsigned int gameFlagSetValue(unsigned int, unsigned int);
 
 
 /* WARNING: Removing unreachable block (ram,0x0020b744) */
@@ -166,22 +166,22 @@ void FUN_002a4cfc(void)
   int temp_v6;
   unsigned int in_lr;
   
-  temp_v3 = DAT_0057f108;
+  temp_v3 = g_camp;
   temp_v6 = 0;
-  temp_v1 = FUN_002a4878(DAT_0057f108 + 0x40);
+  temp_v1 = FUN_002a4878(g_camp + 0x40);
   temp_v2 = FUN_003da8f4((int)*(char *)(temp_v3 + 0xa4),temp_v1);
   switch(temp_v2) {
   case 4:
     FUN_0020b660(0x48);
     FUN_002a5cf4();
     FUN_00388758(1);
-    FUN_00184c00(DAT_0057f108 + 0x1634,7,0);
+    uiSpriteSetImageKeyframe(g_camp + 0x1634,7,0);
     FUN_002e738c(0);
     return;
   case 7:
     *(unsigned char *)(temp_v3 + 0x32a9) = 1;
     FUN_001f4908(0,10,0xff);
-    FUN_002316c8(0x1e);
+    bgmRestart(0x1e);
     return;
   case 9:
     FUN_0026fc00(2,3,0xffffffff,0);
@@ -190,8 +190,8 @@ void FUN_002a4cfc(void)
     FUN_003d386c(1);
     temp_v2 = FUN_002a4860(temp_v3 + 0x1ec);
     temp_v6 = FUN_002a4894(temp_v3 + 0x1ec);
-    if (DAT_0057f108 != 0) {
-      *(int *)(DAT_0057f108 + 0xbc) = temp_v2 + temp_v6;
+    if (g_camp != 0) {
+      *(int *)(g_camp + 0xbc) = temp_v2 + temp_v6;
     }
     FUN_00388758(1);
     temp_v2 = FUN_002c2c68(temp_v3 + 0x1ec);
@@ -319,7 +319,7 @@ void FUN_002a4cfc(void)
     FUN_0020b660(0x24);
     return;
   case 0x1c:
-    temp_v1 = FUN_003fd63c(0x48c,1);
+    temp_v1 = gameFlagSetValue(0x48c,1);
     FUN_0035c810();
     *(unsigned int *)(temp_v3 + 0xc) = temp_v1;
     FUN_002a5cf4();
@@ -343,7 +343,7 @@ void FUN_002a4cfc(void)
     *(unsigned char *)(temp_v3 + 0x3179) = 1;
     return;
   case 0x24:
-    temp_v3 = FUN_0018719c(0x459);
+    temp_v3 = gameFlagIsSet(0x459);
     if ((temp_v3 == 0) && (temp_v3 = FUN_002ab790(), temp_v3 != 0x19)) {
       FUN_002a7b74();
       FUN_0023c08c(0x19);
@@ -369,7 +369,7 @@ void FUN_002a4cfc(void)
     FUN_0021b274(0,0xffffffff);
     FUN_002a5cf4();
     FUN_00388758(1);
-    FUN_00184c00(DAT_0057f108 + 0x1634,7,0);
+    uiSpriteSetImageKeyframe(g_camp + 0x1634,7,0);
     *(unsigned int *)(temp_v3 + 0x24) = 0x2e;
     FUN_0020b660(4);
     return;
@@ -411,7 +411,7 @@ void FUN_002a4cfc(void)
   case 0x2f:
     temp_v3 = FUN_002c90b0();
     if (temp_v3 != 0) {
-      temp_v3 = FUN_001ab888();
+      temp_v3 = gameGetSlotTable();
       temp_v5 = 0;
       if (*(unsigned char *)(temp_v3 + 0x1ca3) != 0) {
         do {
@@ -480,7 +480,7 @@ void FUN_002a4cfc(void)
       sysPlaySe(0x92);
       FUN_00388758(1);
       FUN_0039a638();
-      FUN_00184c00(temp_v3 + 0x1634,7,0);
+      uiSpriteSetImageKeyframe(temp_v3 + 0x1634,7,0);
       return;
     }
     *(unsigned int *)(temp_v3 + 0x1c) = 0x3a;
@@ -498,7 +498,7 @@ void FUN_002a4cfc(void)
     FUN_002e2404(1);
     FUN_00388758(1);
     FUN_0039a638();
-    FUN_00184c00(temp_v3 + 0x1634,7,0);
+    uiSpriteSetImageKeyframe(temp_v3 + 0x1634,7,0);
     return;
   case 0x37:
     *(unsigned int *)(temp_v3 + 0x1c) = 0x3b;
@@ -583,7 +583,7 @@ void FUN_002a4cfc(void)
     FUN_0020b660(0x50);
     FUN_002a5cf4();
     FUN_00388758(1);
-    FUN_00184c00(DAT_0057f108 + 0x1634,7,0);
+    uiSpriteSetImageKeyframe(g_camp + 0x1634,7,0);
     FUN_0038a694();
     return;
   case 0x44:
@@ -595,23 +595,23 @@ void FUN_002a4cfc(void)
     FUN_0020b660(0x51);
     FUN_002a5cf4();
     FUN_00388758(1);
-    FUN_00184c00(DAT_0057f108 + 0x1634,7,0);
+    uiSpriteSetImageKeyframe(g_camp + 0x1634,7,0);
     FUN_00370d84();
     return;
   case 0x46:
     FUN_0020b660(0x52);
     FUN_002a5cf4();
     FUN_00388758(1);
-    FUN_00184c00(DAT_0057f108 + 0x1634,7,0);
+    uiSpriteSetImageKeyframe(g_camp + 0x1634,7,0);
     FUN_002a4708();
     return;
   case 0x47:
     FUN_0020b660(0x53);
     FUN_0037a2c8();
-    FUN_003f86f8(0x3a);
-    temp_v3 = DAT_0057f268;
-    if (DAT_0057f268 != 0) {
-      temp_v0 = *(char *)(DAT_0057f268 + 0x9b4);
+    loadSlotEnsureLoaded(0x3a);
+    temp_v3 = g_partyPanel;
+    if (g_partyPanel != 0) {
+      temp_v0 = *(char *)(g_partyPanel + 0x9b4);
       if ((temp_v0 != '\f' && temp_v0 != '\x04') &&
          ((temp_v0 != '\x0f' && temp_v0 != '\x11') && temp_v0 != '\x13')) {
         FUN_00230ac0(7,0xffffffff,0,0,unaff_r4,in_lr);
@@ -622,8 +622,8 @@ void FUN_002a4cfc(void)
         FUN_0022e774();
       }
       FUN_0038b548(1);
-      temp_v3 = DAT_0057f268;
-      *(unsigned int *)(DAT_0057f268 + 0x24) = *(unsigned int *)(DAT_0057f268 + 0x1c);
+      temp_v3 = g_partyPanel;
+      *(unsigned int *)(g_partyPanel + 0x24) = *(unsigned int *)(g_partyPanel + 0x1c);
       *(unsigned int *)(temp_v3 + 0x1c) = 0x17;
       *(unsigned int *)(temp_v3 + 0x18) = 0;
       if (*(int *)(temp_v3 + 0x1c) == 0x16) {

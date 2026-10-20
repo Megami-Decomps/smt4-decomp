@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001582dc(unsigned int *);
+int mobiclipPlayerReleaseHandle(unsigned int *);
 int FUN_00158314(unsigned int *);
 int FUN_0015836c(unsigned char *);
 int FUN_0015842c(unsigned char *);
@@ -21,7 +21,7 @@ int FUN_00425610(void);
 int FUN_00425aa0(unsigned char *);
 int SBORROW4(...);
 
-extern signed char DAT_00588020; /* 0x588020 */
+extern signed char g_mobiclipCtrl; /* 0x588020 */
 extern unsigned int DAT_00588028; /* 0x588028 */
 extern int DAT_0058802c; /* 0x58802c */
 extern unsigned int DAT_00617f18; /* 0x617f18 */
@@ -33,7 +33,7 @@ extern int DAT_00617f4c; /* 0x617f4c */
 #define ROMWRIGHT_ZEXT_4_8_DEFINED
 #define romwright_zext_4_8(value) ((unsigned long long)(unsigned int)(value))
 #endif
-/* Supplied declaration required: FUN_001582dc. */
+/* Supplied declaration required: mobiclipPlayerReleaseHandle. */
 /* Supplied declaration required: FUN_00158314. */
 /* Supplied declaration required: FUN_0015836c. */
 /* Supplied declaration required: FUN_0015842c. */
@@ -76,7 +76,7 @@ unsigned char FUN_003d3594(void)
     }
     temp_v0 = FUN_00423c7c(&DAT_00617f18);
     if (temp_v0 != 0) {
-      FUN_001582dc(&DAT_00617f18);
+      mobiclipPlayerReleaseHandle(&DAT_00617f18);
       FUN_0015836c(&DAT_00617f40);
       FUN_0015842c(&DAT_00617f40);
       FUN_00158314(&DAT_00617f18);
@@ -116,7 +116,7 @@ unsigned char FUN_003d3594(void)
         playHandleStart(&DAT_00617f18);
       }
     }
-    if (DAT_00588020 != '\0') {
+    if (g_mobiclipCtrl != '\0') {
       temp_v3 = 1;
     }
     FUN_00425aa0(&DAT_00617f40);

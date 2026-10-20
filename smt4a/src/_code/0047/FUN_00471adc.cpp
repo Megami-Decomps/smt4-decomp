@@ -19,7 +19,7 @@ typedef struct {
 
 extern unsigned char LAB_004745f0; /* 0x4745f0 */
 
-extern int FUN_001d10ac(unsigned int *);
+extern int byteIsAtLeast100(unsigned int *);
 /* Supplied declaration required: FUN_001d25a0. */
 /* Supplied declaration required: FUN_002f5020. */
 /* Supplied declaration required: asdOperatorNewE. */
@@ -72,7 +72,7 @@ void FUN_00471adc(int param_1)
     do {
       FUN_0047402c(&temp_v9,*(int *)(param_1 + 0x318) + temp_v5 * 0x50,param_1 + temp_v5 * 0x18 + 0x10)
       ;
-      temp_v0 = FUN_001d10ac((unsigned int *)&temp_v9);
+      temp_v0 = byteIsAtLeast100((unsigned int *)&temp_v9);
       temp_v1 = temp_v10;
       temp_v2 = uStack_14;
       temp_v3 = temp_v9;

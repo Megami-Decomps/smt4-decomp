@@ -5,9 +5,9 @@
 extern "C" {
 
 int asdTMTexTableLoadTmx(int, int);
-int FUN_001641c4(void);
-int FUN_0018206c(int, int);
-int FUN_0019a7f4(int, int);
+int ifTouchRegionRemove(void);
+int asdTMTexTableNodeIsLoaded(int, int);
+int asdTMTexTableReleaseNode(int, int);
 int FUN_001acf98(int, int);
 int FUN_001f4908(int, int, int);
 int FUN_00284168(int, int, int, int);
@@ -15,29 +15,29 @@ int asdTMTexTableFreeEntry(...);
 int FUN_0037ed38(void);
 int ref208SetPair1C(int);
 int FUN_003cbb0c(void);
-int FUN_003d2d34(int, int, int);
-int FUN_003d2d6c(...);
+int soundChannelRequestIfEnabled(int, int, int);
+int soundChannelStopAll(...);
 int FUN_003d54f8(int, int);
 int clearWordHalfByte(unsigned int *);
 
 extern int FUN_0013def0(unsigned int);
 /* Supplied declaration required: asdTMTexTableLoadTmx. */
-/* Supplied declaration required: FUN_001641c4. */
+/* Supplied declaration required: ifTouchRegionRemove. */
 extern int FUN_001643a0(void);
-extern int FUN_001656a0(unsigned int);
-/* Supplied declaration required: FUN_0018206c. */
-/* Supplied declaration required: FUN_0019a7f4. */
+extern int padButtonIsPressed(unsigned int);
+/* Supplied declaration required: asdTMTexTableNodeIsLoaded. */
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
 /* Supplied declaration required: FUN_001acf98. */
 /* Supplied declaration required: FUN_001f4908. */
-extern int FUN_002009a8(unsigned int);
+extern int bgmGetStateById(unsigned int);
 /* Supplied declaration required: FUN_00284168. */
 /* Supplied declaration required: asdTMTexTableFreeEntry. */
 extern int FUN_00341940(unsigned int);
 /* Supplied declaration required: FUN_0037ed38. */
 /* Supplied declaration required: ref208SetPair1C. */
 /* Supplied declaration required: FUN_003cbb0c. */
-/* Supplied declaration required: FUN_003d2d34. */
-/* Supplied declaration required: FUN_003d2d6c. */
+/* Supplied declaration required: soundChannelRequestIfEnabled. */
+/* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: FUN_003d54f8. */
 /* Supplied declaration required: clearWordHalfByte. */
 
@@ -75,7 +75,7 @@ unsigned int FUN_003e71a8(unsigned int *param_1)
     }
     temp_v0 = 1;
     do {
-      temp_v1 = FUN_0018206c(0x22,temp_v0);
+      temp_v1 = asdTMTexTableNodeIsLoaded(0x22,temp_v0);
       if (temp_v1 == 0) {
         FUN_001acf98(0x22,temp_v0);
         *(unsigned char *)((int)param_1 + temp_v0 + 0x44) = 1;
@@ -89,15 +89,15 @@ unsigned int FUN_003e71a8(unsigned int *param_1)
     param_1[0x10] = 0;
     FUN_00284168(0,0,0x140,0xf0);
     param_1[0x10] = temp_v2;
-    temp_v0 = FUN_002009a8(0x100003c);
+    temp_v0 = bgmGetStateById(0x100003c);
     if (temp_v0 != 1) {
-      FUN_003d2d34(0x100003c,0,0x3c);
+      soundChannelRequestIfEnabled(0x100003c,0,0x3c);
     }
     param_1[8] = param_1[8] + 1;
   }
   temp_v0 = FUN_0013def0(0);
   if ((temp_v0 == 0) &&
-     ((temp_v0 = FUN_001643a0(), temp_v0 == 6 || (temp_v0 = FUN_001656a0(0), temp_v0 != 0)))) {
+     ((temp_v0 = FUN_001643a0(), temp_v0 == 6 || (temp_v0 = padButtonIsPressed(0), temp_v0 != 0)))) {
     param_1[8] = 2;
     param_1[0xf] = 0;
   }
@@ -134,7 +134,7 @@ unsigned int FUN_003e71a8(unsigned int *param_1)
     param_1[0xe] = (float)param_1[0xe] + 0.016666668f;
   }
   if (param_1[8] == 1) {
-    temp_v0 = FUN_0018206c(0x22,6);
+    temp_v0 = asdTMTexTableNodeIsLoaded(0x22,6);
     if (temp_v0 == 0) {
       return 0;
     }
@@ -174,7 +174,7 @@ unsigned int FUN_003e71a8(unsigned int *param_1)
     temp_v0 = 1;
     do {
       if (*(char *)((int)param_1 + temp_v0 + 0x44) != '\0') {
-        FUN_0019a7f4(0x22,temp_v0);
+        asdTMTexTableReleaseNode(0x22,temp_v0);
         *(unsigned char *)((int)param_1 + temp_v0 + 0x44) = 0;
       }
       temp_v0 = temp_v0 + 1;
@@ -183,8 +183,8 @@ unsigned int FUN_003e71a8(unsigned int *param_1)
       asdTMTexTableFreeEntry(0x22);
       *(unsigned char *)((int)param_1 + 0x4b) = 0;
     }
-    FUN_001641c4();
-    FUN_003d2d6c(0xf);
+    ifTouchRegionRemove();
+    soundChannelStopAll(0xf);
     *param_1 = 10;
   }
   return 0;

@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_3_stack;
 
-extern romwright_code *DAT_00589520; /* 0x589520 */
+extern romwright_code *g_mwmoimaadpcmDecoder; /* 0x589520 */
 extern romwright_code *DAT_00589524; /* 0x589524 */
 
 /* Supplied declaration required: FUN_001f4120. */
@@ -37,7 +37,7 @@ unsigned int FUN_00513800(int param_1,int param_2,int param_3)
     if (*(int *)(param_1 + 0x10) != 0) {
       (*DAT_00589524)();
     }
-    temp_v0 = (*DAT_00589520)(*(unsigned int *)(param_1 + 0x14));
+    temp_v0 = (*g_mwmoimaadpcmDecoder)(*(unsigned int *)(param_1 + 0x14));
     *(int *)(param_1 + 0x10) = temp_v0;
     if (temp_v0 == 0) {
       return 0;

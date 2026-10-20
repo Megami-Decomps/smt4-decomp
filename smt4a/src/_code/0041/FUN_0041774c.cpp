@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001517b4(int, int);
 int FUN_001641b4(int);
 int saveSlotFindById(unsigned int);
-int FUN_00275f44(unsigned int, int);
+int scrScriptProcessStartEntry(unsigned int, int);
 int FUN_003180c4(int, unsigned int);
 int FUN_00333dc8(int);
 int obj04Finish(void);
@@ -17,10 +17,10 @@ int FUN_004bd6b0(unsigned int, int, unsigned int);
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: FUN_001641b4. */
 extern unsigned int FUN_00180114(unsigned short);
-extern int FUN_001801a4(void);
+extern int gameGetPlayerData(void);
 /* Supplied declaration required: saveSlotFindById. */
 extern int FUN_00224880(unsigned int);
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_003180c4. */
 /* Supplied declaration required: FUN_00333dc8. */
@@ -59,7 +59,7 @@ unsigned int FUN_0041774c(int param_1)
     if (*(char *)(param_1 + 0x40) != '\0') {
       if ((-1 < *(int *)(param_1 + 0x3c)) &&
          (temp_v3 = FUN_003df4a4(*(unsigned short *)(param_1 + 0x38)), temp_v3 == 0)) {
-        temp_v3 = FUN_001801a4();
+        temp_v3 = gameGetPlayerData();
         *(unsigned short *)(temp_v3 + *(int *)(param_1 + 0x3c) * 2 + 0x34) =
              *(unsigned short *)(param_1 + 0x38);
         *(unsigned char *)(*(int *)(param_1 + 0x3c) + temp_v3 + 0x44) = 1;
@@ -87,7 +87,7 @@ unsigned int FUN_0041774c(int param_1)
     FUN_00333dc8(1);
     temp_v2 = FUN_00180114(*(unsigned short *)(temp_v3 + 0x62));
     FUN_003180c4(0,temp_v2);
-    FUN_00275f44(*(unsigned int *)(param_1 + 0x1c),0x13);
+    scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x1c),0x13);
     *(unsigned int *)(param_1 + 0xc) = 3;
   case 3:
     temp_v3 = FUN_00224880(*(unsigned int *)(param_1 + 0x1c));
@@ -98,7 +98,7 @@ unsigned int FUN_0041774c(int param_1)
         temp_v3 = saveSlotFindById(*(unsigned int *)(param_1 + 0x34) & 0xffff);
         temp_v2 = FUN_00180114(*(unsigned short *)(temp_v3 + 0x62));
         FUN_003180c4(0,temp_v2);
-        FUN_00275f44(*(unsigned int *)(param_1 + 0x1c),0x14);
+        scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x1c),0x14);
         temp_v2 = 4;
         *(unsigned int *)(param_1 + 0xc) = temp_v2;
         break;

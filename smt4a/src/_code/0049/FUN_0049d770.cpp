@@ -22,9 +22,9 @@ extern int FUN_0049ebf0(...); /* 0x49ebf0 */
 
 /* Supplied declaration required: qsort. */
 /* Supplied declaration required: FUN_001643b4. */
-extern int FUN_0018206c(unsigned int, unsigned int);
+extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern int FUN_0018719c(unsigned short);
+extern int gameFlagIsSet(unsigned short);
 extern int dataTableGetCount(unsigned int);
 extern unsigned int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_00202400. */
@@ -55,7 +55,7 @@ void FUN_0049d770(int param_1)
     temp_v1 = *(int *)(param_1 + 0xc);
   }
   if (((temp_v7 || temp_v1 == 0) || (temp_v1 = FUN_00341940(0x33), temp_v1 == 0)) ||
-     (temp_v1 = FUN_0018206c(0x33,0), temp_v1 == 0)) {
+     (temp_v1 = asdTMTexTableNodeIsLoaded(0x33,0), temp_v1 == 0)) {
     return;
   }
   temp_v2 = dataTableGet(0x46,0);
@@ -75,7 +75,7 @@ void FUN_0049d770(int param_1)
       if (puVar7 != (unsigned short *)0x0 && temp_v4 != 0) {
         temp_v1 = flagsAtGetBit0();
         if (temp_v1 == 0) {
-          temp_v1 = FUN_0018719c(puVar7[1]);
+          temp_v1 = gameFlagIsSet(puVar7[1]);
           if (temp_v1 != 0) {
             flagsAtSetBits01(*puVar7);
             temp_v1 = temp_v6 * 2;

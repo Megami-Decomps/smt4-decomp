@@ -3,7 +3,7 @@
 extern "C" {
 
 int FUN_00224f68(void *obj, int arg);
-extern int FUN_002a60b4(u32 table, int index);
+extern int asdTMTexTableNodeIsLoaded(u32 table, int index);
 
 typedef struct Obj {
     /* 0x00 */ u8 unk00[0x20];
@@ -21,14 +21,14 @@ u32 FUN_0020f564(Obj *obj)
         count = 0;
         i = count;
         do {
-            if (FUN_002a60b4(0x14, i) != 0) {
+            if (asdTMTexTableNodeIsLoaded(0x14, i) != 0) {
                 count++;
             }
             i++;
         } while (i < 5);
         i = 0;
         do {
-            if (FUN_002a60b4(0x15, i) != 0) {
+            if (asdTMTexTableNodeIsLoaded(0x15, i) != 0) {
                 count++;
             }
             i++;

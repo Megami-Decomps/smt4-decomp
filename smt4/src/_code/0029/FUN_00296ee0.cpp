@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00232698(void);
-int FUN_002b8838(int);
+int buttonHelpSetPreset(int);
 int memClear(int, int);
 
 typedef struct fn_00296ee0_arg0 fn_00296ee0_arg0;
@@ -29,7 +29,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00232698. */
 extern fn_00296ee0_arg0 *FUN_00296e90(void);
-/* Supplied declaration required: FUN_002b8838. */
+/* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: memClear. */
 
 
@@ -57,7 +57,7 @@ int FUN_00296ee0(fn_00296ee0_arg0 *param_1,int param_2,unsigned int param_3,unsi
   }
   FUN_00232698();
   if (temp_v0 != 4 && temp_v0 != 5) {
-    FUN_002b8838(*(unsigned short *)&param_1[1].field_0x2e4 & 0xff);
+    buttonHelpSetPreset(*(unsigned short *)&param_1[1].field_0x2e4 & 0xff);
   }
   temp_v2 = *(int *)&param_1->field_0x654;
   if (*(int *)(*(int *)(temp_v2 + 0xb0) + 8) < 1) {

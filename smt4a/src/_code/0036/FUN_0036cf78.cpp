@@ -2,13 +2,13 @@
 
 extern "C" {
 
-extern StateAtF4 *DAT_0057f118;
+extern StateAtF4 *g_campCecEdit;
 extern u32 FUN_002e2114(u32 value);
 
 void FUN_0036cf78(void)
 {
-    if (DAT_0057f118 != NULL) {
-        FUN_002e2114(DAT_0057f118->unk04);
+    if (g_campCecEdit != NULL) {
+        FUN_002e2114(g_campCecEdit->unk04);
     }
 }
 

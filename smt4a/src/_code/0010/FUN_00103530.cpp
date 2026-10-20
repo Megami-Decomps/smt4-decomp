@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002e6dd4(int, int);
+int rt_memclr(int, int);
 
 extern int memAllocSized(void);
-/* Supplied declaration required: FUN_002e6dd4. */
+/* Supplied declaration required: rt_memclr. */
 
 
 int FUN_00103530(int param_1,int param_2)
@@ -19,7 +19,7 @@ int FUN_00103530(int param_1,int param_2)
   if ((param_1 != 0) && (param_2 != 0)) {
     temp_v0 = memAllocSized();
     if (temp_v0 != 0) {
-      FUN_002e6dd4(temp_v0,param_2 * param_1);
+      rt_memclr(temp_v0,param_2 * param_1);
     }
     return temp_v0;
   }

@@ -7,26 +7,26 @@ extern "C" {
 int FUN_00110110(unsigned char *, int);
 int FUN_00110124(unsigned char *, int);
 int FUN_00110838(int);
-int FUN_002c38fc(unsigned int *);
-int FUN_002c4040(unsigned int *);
+int nn_os_CriticalSection_Initialize(unsigned int *);
+int nn_os_LightEvent_Signal(unsigned int *);
 int FUN_002c5434(void);
 
 extern unsigned char LAB_0010d6b4; /* 0x10d6b4 */
 extern unsigned char LAB_0010e924; /* 0x10e924 */
 extern unsigned char DAT_00465198; /* 0x465198 */
 extern unsigned char DAT_00465199; /* 0x465199 */
-extern unsigned int DAT_0046519c; /* 0x46519c */
-extern unsigned int DAT_004651a4; /* 0x4651a4 */
-extern unsigned int DAT_004e4138; /* 0x4e4138 */
+extern unsigned int g_appletSleepQueryEvent; /* 0x46519c */
+extern unsigned int g_appletHomeButtonEvent; /* 0x4651a4 */
+extern unsigned int g_nnAppletCriticalSection; /* 0x4e4138 */
 
 /* Supplied declaration required: FUN_00110110. */
 /* Supplied declaration required: FUN_00110124. */
 /* Supplied declaration required: FUN_00110838. */
-/* Supplied declaration required: FUN_002c38fc. */
-/* Supplied declaration required: FUN_002c4040. */
+/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
+/* Supplied declaration required: nn_os_LightEvent_Signal. */
 /* Supplied declaration required: FUN_002c5434. */
 extern int FUN_002c55b4(void);
-extern int FUN_002c55c4(void);
+extern int appletIsExitRequested(void);
 extern void nn_os_LightEvent_Initialize(unsigned int, unsigned char);
 
 
@@ -38,18 +38,18 @@ unsigned int FUN_00103ec8(void)
   unsigned int temp_v1;
   
   temp_v1 = 1;
-  nn_os_LightEvent_Initialize((unsigned int)&DAT_0046519c,0);
-  nn_os_LightEvent_Initialize((unsigned int)&DAT_004651a4,0);
-  FUN_002c38fc(&DAT_004e4138);
+  nn_os_LightEvent_Initialize((unsigned int)&g_appletSleepQueryEvent,0);
+  nn_os_LightEvent_Initialize((unsigned int)&g_appletHomeButtonEvent,0);
+  nn_os_CriticalSection_Initialize(&g_nnAppletCriticalSection);
   DAT_00465198 = 1;
   FUN_002c5434();
   DAT_00465199 = 1;
-  FUN_002c4040(&DAT_0046519c);
-  FUN_002c4040(&DAT_004651a4);
+  nn_os_LightEvent_Signal(&g_appletSleepQueryEvent);
+  nn_os_LightEvent_Signal(&g_appletHomeButtonEvent);
   FUN_00110124(&LAB_0010e924,0);
   FUN_00110110(&LAB_0010d6b4,0);
   FUN_00110838(1);
-  temp_v0 = FUN_002c55c4();
+  temp_v0 = appletIsExitRequested();
   if ((temp_v0 != 0) || (temp_v0 = FUN_002c55b4(), temp_v0 != 0)) {
     temp_v1 = 0;
   }

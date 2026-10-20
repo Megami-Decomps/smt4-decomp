@@ -24,7 +24,7 @@ typedef struct {
     unsigned int spA0; /* 0xa0: local_a0 */
 } param_1_stack;
 
-extern int DAT_0057f65c; /* 0x57f65c */
+extern int g_frameTex; /* 0x57f65c */
 extern int DAT_0057f660; /* 0x57f660 */
 extern int DAT_0057f664; /* 0x57f664 */
 extern unsigned int DAT_0057f668; /* 0x57f668 */
@@ -81,13 +81,13 @@ void FUN_0014b01c(int param_1)
   unsigned int temp_v7;
   unsigned char temp_v8 [108];
   
-  temp_v3 = DAT_0057f65c;
-  if (DAT_0057f65c == 0) {
+  temp_v3 = g_frameTex;
+  if (g_frameTex == 0) {
     return;
   }
   temp_v6 = 0.0f;
-  if (0 < *(int *)(DAT_0057f65c + 0x14)) {
-    temp_v4 = *(int *)(DAT_0057f65c + 0x14) * -0x12 + 0xff;
+  if (0 < *(int *)(g_frameTex + 0x14)) {
+    temp_v4 = *(int *)(g_frameTex + 0x14) * -0x12 + 0xff;
     if ((int)temp_v4 < 0) {
       temp_v4 = 0;
     }
@@ -119,7 +119,7 @@ void FUN_0014b01c(int param_1)
     }
   }
   else {
-    temp_v0 = *(int *)(DAT_0057f65c + 0x10);
+    temp_v0 = *(int *)(g_frameTex + 0x10);
     if (temp_v0 < 10) {
       DAT_0057f660 = 0;
     }
@@ -204,7 +204,7 @@ void FUN_0014b01c(int param_1)
     *(unsigned char *)(temp_v3 + 0x12d0) = 0;
   }
   FUN_00157558(g_renderCtx);
-  temp_v3 = DAT_0057f65c;
+  temp_v3 = g_frameTex;
   temp_v7 = 0x3f800000;
   FUN_001a9698();
   if ((param_1 == 0) && (*(char *)(temp_v3 + 0x1418) != '\0')) {

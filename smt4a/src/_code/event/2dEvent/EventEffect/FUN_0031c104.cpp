@@ -16,7 +16,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_1_stack;
 
-extern int FUN_00213ad8(...); /* 0x213ad8 */
+extern int eventEffectDestroy(...); /* 0x213ad8 */
 extern unsigned char LAB_002281a0; /* 0x2281a0 */
 extern int FUN_00261254(...); /* 0x261254 */
 extern unsigned char LAB_0031c26c; /* 0x31c26c */
@@ -50,7 +50,7 @@ void FUN_0031c104(int param_1)
   puVar1[5] = 0;
   puVar1[6] = 0;
   puVar2 = &LAB_0031c26c;
-  asdProcessCreateSimple(&LAB_0031c26c,3,0,0,&LAB_002281a0,FUN_00213ad8,0);
+  asdProcessCreateSimple(&LAB_0031c26c,3,0,0,&LAB_002281a0,eventEffectDestroy,0);
   *puVar1 = (unsigned int)puVar2;
   taskCreateDraw(&LAB_0031c280,0x84,0,0,FUN_00261254,0,0,puVar2);
   taskCreateDraw(&LAB_0031c294,0xe0,0,0,FUN_00261254,0,0,*puVar1);

@@ -5,11 +5,11 @@
 extern "C" {
 
 int btlGetMainState(void);
-int FUN_001641c4(void);
+int ifTouchRegionRemove(void);
 int FUN_001643b4(...);
 int sysPlaySe(void);
-int FUN_0019cac4(void);
-int FUN_001b4a90(int, int, unsigned int);
+int dataTable00FindById(void);
+int __aeabi_memset4(int, int, unsigned int);
 int FUN_00203b40(int, int, int, int, int, int);
 int FUN_00270104(void);
 int FUN_002a4878(int);
@@ -17,7 +17,7 @@ int FUN_002c2c4c(...);
 int FUN_002cb438(int, unsigned int, int);
 int FUN_00341f88(void);
 int FUN_003756c8(void);
-int FUN_003e46f4(int);
+int gameDataFlagTestBit(int);
 
 /* stack frame of param_3: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -26,12 +26,12 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: FUN_001641c4. */
+/* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: FUN_001643b4. */
 extern int FUN_00167f08(void);
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_0019cac4. */
-/* Supplied declaration required: FUN_001b4a90. */
+/* Supplied declaration required: dataTable00FindById. */
+/* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: FUN_00203b40. */
 /* Supplied declaration required: FUN_00270104. */
 /* Supplied declaration required: FUN_002a4878. */
@@ -42,7 +42,7 @@ extern unsigned int FUN_002cc9e0(int, unsigned int);
 /* Supplied declaration required: FUN_00341f88. */
 extern int FUN_00348ed0(unsigned int);
 /* Supplied declaration required: FUN_003756c8. */
-/* Supplied declaration required: FUN_003e46f4. */
+/* Supplied declaration required: gameDataFlagTestBit. */
 extern int FUN_003e8430(void);
 
 
@@ -106,7 +106,7 @@ void FUN_0020ad6c(int param_1,int param_2,int param_3)
     }
   }
   else {
-    FUN_003e46f4(0x10);
+    gameDataFlagTestBit(0x10);
     sysPlaySe();
   }
   if (param_3 != 0) {
@@ -117,12 +117,12 @@ void FUN_0020ad6c(int param_1,int param_2,int param_3)
   *(unsigned int *)(param_1 + 0x3878) = 0;
   if (0 < *(short *)(param_1 + 0x480c)) {
     do {
-      FUN_001641c4();
+      ifTouchRegionRemove();
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < *(short *)(param_1 + 0x480c));
   }
   *(unsigned short *)(param_1 + 0x480c) = 0;
-  FUN_001b4a90(param_1 + 0x480e,0x40,0xffffffff);
+  __aeabi_memset4(param_1 + 0x480e,0x40,0xffffffff);
   if (param_2 != 1) {
     if (param_2 != 8) goto LAB_0020afa8;
 LAB_0020b03c:
@@ -235,7 +235,7 @@ LAB_0020afa8:
       temp_v4 = param_1 + temp_v1 * 0x40;
       if (*(char *)(temp_v4 + 0x4870) != '\0') {
         temp_v3 = (unsigned int)*(unsigned short *)(temp_v4 + 0x4858);
-        FUN_0019cac4();
+        dataTable00FindById();
         if ((*(unsigned short *)(temp_v3 + 2) & 0x8000) != 0) {
           if (*(char *)(param_1 + 0x4857) != '\0') {
             temp_v0 = FUN_001643b4(0xd,0x1a0);

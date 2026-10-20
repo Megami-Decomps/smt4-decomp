@@ -6,21 +6,21 @@ extern "C" {
 
 int FUN_0014e188(...);
 int FUN_001505ac(...);
-int FUN_001846d0(...);
-int FUN_00184758(...);
+int uiSpriteSelectAnim(...);
+int uiSpriteSetKeyframe(...);
 int FUN_001acf98(int, int);
 int FUN_002804b0(...);
 int FUN_002c7ce8(...);
 int FUN_002c7e6c(void);
 int FUN_002c8538(...);
 int FUN_002c85b0(...);
-int FUN_00342010(void);
+int campButtonHelpAcquire(void);
 int FUN_0036b644(...);
 int FUN_00371c3c(...);
 int objBMarkAndInit20D4(void);
 int stateHolderMarkAndInit2588(void);
 int FUN_003e4140(...);
-int FUN_003f881c(int, int);
+int loadSlotRequestAsync(int, int);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(int);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
@@ -38,23 +38,23 @@ extern unsigned char DAT_00533768; /* 0x533768 */
 
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: FUN_001505ac. */
-/* Supplied declaration required: FUN_001846d0. */
-/* Supplied declaration required: FUN_00184758. */
-extern int FUN_001ab854(void);
-extern int FUN_001ab888(void);
+/* Supplied declaration required: uiSpriteSelectAnim. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
+extern int gameGetSlotRecord(void);
+extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_001acf98. */
 /* Supplied declaration required: FUN_002804b0. */
 /* Supplied declaration required: FUN_002c7ce8. */
 /* Supplied declaration required: FUN_002c7e6c. */
 /* Supplied declaration required: FUN_002c8538. */
 /* Supplied declaration required: FUN_002c85b0. */
-/* Supplied declaration required: FUN_00342010. */
+/* Supplied declaration required: campButtonHelpAcquire. */
 /* Supplied declaration required: FUN_0036b644. */
 /* Supplied declaration required: FUN_00371c3c. */
 /* Supplied declaration required: objBMarkAndInit20D4. */
 /* Supplied declaration required: stateHolderMarkAndInit2588. */
 /* Supplied declaration required: FUN_003e4140. */
-/* Supplied declaration required: FUN_003f881c. */
+/* Supplied declaration required: loadSlotRequestAsync. */
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
 
 
@@ -71,18 +71,18 @@ void FUN_004b6390(int param_1)
     FUN_001acf98(0x1d,temp_v1);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 3);
-  temp_v1 = FUN_001ab888();
+  temp_v1 = gameGetSlotTable();
   FUN_00371c3c(0xffffffff,1);
   temp_v2 = 0;
   do {
     if (-1 < *(char *)(temp_v1 + temp_v2 + 0x1ca0)) {
-      temp_v0 = FUN_001ab854();
+      temp_v0 = gameGetSlotRecord();
       FUN_00371c3c((int)*(short *)(temp_v0 + 0x62),1);
     }
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 3);
-  FUN_003f881c(0x14,0);
-  FUN_003f881c(0x25,0);
+  loadSlotRequestAsync(0x14,0);
+  loadSlotRequestAsync(0x25,0);
   *(unsigned int *)(param_1 + 0x439c) = 0;
   *(unsigned int *)(param_1 + 0x43a4) = 0;
   *(unsigned int *)(param_1 + 0x43a8) = 0;
@@ -151,44 +151,44 @@ void FUN_004b6390(int param_1)
   FUN_001505ac(param_1,&DAT_0053356c,0x60,&DAT_005335cc,0xfc,&DAT_005336c8,0x84,&DAT_0053374c,0x1c,
                &DAT_00533768,0x508);
   FUN_0014e188(param_1 + 0x20,0x1d,0,param_1,1);
-  FUN_00184758(param_1 + 0x20,0);
+  uiSpriteSetKeyframe(param_1 + 0x20,0);
   temp_v1 = 0;
   do {
     temp_v2 = param_1 + temp_v1 * 0x8c;
     FUN_0014e188(temp_v2 + 0xac,0x1d,0,param_1,1);
-    FUN_00184758(temp_v2 + 0xac,4,0);
+    uiSpriteSetKeyframe(temp_v2 + 0xac,4,0);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 8);
   FUN_0014e188(param_1 + 0x50c,0x1d,0,param_1,1);
-  FUN_001846d0(param_1 + 0x50c,5);
+  uiSpriteSelectAnim(param_1 + 0x50c,5);
   FUN_0014e188(param_1 + 0x598,0x1d,0,param_1,1);
-  FUN_001846d0(param_1 + 0x598,0xe);
+  uiSpriteSelectAnim(param_1 + 0x598,0xe);
   FUN_0014e188(param_1 + 0x624,0x1d,0,param_1,1);
-  FUN_00184758(param_1 + 0x624,0);
+  uiSpriteSetKeyframe(param_1 + 0x624,0);
   FUN_0014e188(param_1 + 0x6b0,0x1d,0,param_1,1);
-  FUN_00184758(param_1 + 0x6b0,0);
+  uiSpriteSetKeyframe(param_1 + 0x6b0,0);
   FUN_0014e188(param_1 + 0x73c,0x1d,1000,param_1,0x65);
   FUN_0036b644(param_1 + 0x73c,0);
   FUN_0014e188(param_1 + 0x7c8,0x1d,1000,param_1,0x65);
   FUN_0014e188(param_1 + 0x854,0x1d,1000,param_1,0x65);
-  FUN_001846d0(param_1 + 0x854,6);
+  uiSpriteSelectAnim(param_1 + 0x854,6);
   temp_v1 = 0;
   do {
     temp_v2 = param_1 + temp_v1 * 0x8c;
     FUN_0014e188(temp_v2 + 0x8e0,0x1d,0,param_1,1);
-    FUN_001846d0(temp_v2 + 0x8e0,0);
+    uiSpriteSelectAnim(temp_v2 + 0x8e0,0);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 0x10);
   *(unsigned int *)(param_1 + 0x43ec) = 0;
   FUN_0014e188(param_1 + 0x40a8,0x1d,0x160,param_1,0xc9);
-  FUN_001846d0(param_1 + 0x40a8,0xb);
+  uiSpriteSelectAnim(param_1 + 0x40a8,0xb);
   FUN_0014e188(param_1 + 0x4134,0x1d,0x160,param_1,0xc9);
-  FUN_001846d0(param_1 + 0x4134,0xc);
+  uiSpriteSelectAnim(param_1 + 0x4134,0xc);
   temp_v1 = 0;
   do {
     temp_v2 = param_1 + temp_v1 * 0x8c + 0x41c0;
     FUN_0014e188(temp_v2,0x1d,temp_v1 + 0x161,param_1,(int)(short)((short)temp_v1 + 0xca));
-    FUN_001846d0(temp_v2,0xd);
+    uiSpriteSelectAnim(temp_v2,0xd);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 3);
   temp_v1 = 0;
@@ -211,7 +211,7 @@ void FUN_004b6390(int param_1)
     do {
       temp_v0 = param_1 + (temp_v1 * 7 + temp_v2 + 0x20) * 0x8c;
       FUN_0014e188(temp_v0 + 0x20,7,0x80c,param_1,0x97);
-      FUN_001846d0(temp_v0 + 0x20,1);
+      uiSpriteSelectAnim(temp_v0 + 0x20,1);
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < 7);
     temp_v1 = temp_v1 + 1;
@@ -220,9 +220,9 @@ void FUN_004b6390(int param_1)
   do {
     temp_v2 = param_1 + temp_v1 * 0x8c;
     FUN_0014e188(temp_v2 + 0x3900,0x1d,0x3e,param_1,0x6a);
-    FUN_001846d0(temp_v2 + 0x3900,9);
+    uiSpriteSelectAnim(temp_v2 + 0x3900,9);
     FUN_0014e188(temp_v2 + 0x3cd4,0x1d,0x119,param_1,0xf1);
-    FUN_001846d0(temp_v2 + 0x3cd4,10);
+    uiSpriteSelectAnim(temp_v2 + 0x3cd4,10);
     *(unsigned short *)(temp_v2 + 0x3d0e) = 2;
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 6);
@@ -236,7 +236,7 @@ void FUN_004b6390(int param_1)
   FUN_002c85b0(0);
   FUN_002c7ce8(0);
   FUN_002c8538(0);
-  FUN_00342010();
+  campButtonHelpAcquire();
   FUN_003e4140(param_1 + 0x7f40);
   objBMarkAndInit20D4();
   stateHolderMarkAndInit2588();

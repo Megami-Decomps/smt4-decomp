@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 
 /* stack frame of param_1: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -14,10 +14,10 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_1_stack;
 
-extern int FUN_001801a4(void);
-extern int FUN_0019c6bc(unsigned int);
-extern int FUN_001ab854(void);
-/* Supplied declaration required: FUN_001aba54. */
+extern int gameGetPlayerData(void);
+extern int idIsAbove400(unsigned int);
+extern int gameGetSlotRecord(void);
+/* Supplied declaration required: dataTable04FindById. */
 extern int btlMainGetUnk14(void);
 extern int FUN_0033896c(void);
 
@@ -64,7 +64,7 @@ void FUN_0023f788(int param_1)
     if (temp_v1 != -4) {
       if (temp_v1 != -1) {
         if (temp_v1 != -2) {
-          temp_v2 = FUN_001ab854();
+          temp_v2 = gameGetSlotRecord();
         }
         else {
           temp_v2 = btlMainGetUnk14();
@@ -72,7 +72,7 @@ void FUN_0023f788(int param_1)
         if (temp_v2 == 0) goto LAB_0023f8c4;
       }
       else {
-        temp_v2 = FUN_001801a4();
+        temp_v2 = gameGetPlayerData();
       }
       temp_v5 = 0;
       temp_v10 = *(unsigned int *)(temp_v2 + 0x40);
@@ -83,8 +83,8 @@ void FUN_0023f788(int param_1)
       do {
         temp_v0 = *(unsigned short *)((int)&temp_v7 + temp_v4 * 2);
         temp_v3 = (unsigned int)temp_v0;
-        FUN_001aba54();
-        if ((temp_v3 != 0) && (temp_v2 = FUN_0019c6bc((unsigned int)temp_v0), temp_v2 == 0)) {
+        dataTable04FindById();
+        if ((temp_v3 != 0) && (temp_v2 = idIsAbove400((unsigned int)temp_v0), temp_v2 == 0)) {
           temp_v2 = temp_v5 * 2;
           temp_v5 = temp_v5 + 1;
           *(unsigned short *)(param_1 + temp_v6 * 0x10 + temp_v2 + 0x3c44) = temp_v0;
@@ -97,7 +97,7 @@ LAB_0023f8c4:
     if (temp_v6 >= 4) {
       temp_v2 = FUN_0033896c();
       temp_v6 = temp_v2;
-      FUN_001aba54();
+      dataTable04FindById();
       if (*(char *)(temp_v6 + 0x36) == '\0') {
         temp_v2 = 0;
       }

@@ -9,8 +9,8 @@ extern "C" {
 typedef void (*VoidFunc)(void);
 
 int FUN_00184964(int low, int high);                    /* random integer in [low, high] */
-int FUN_003d2d6c(int id);
-int FUN_003d2d34(u32 handle, int arg1, int arg2);
+int soundChannelStopAll(int id);
+int soundChannelRequestIfEnabled(u32 handle, int arg1, int arg2);
 int FUN_001acf98(int type, int index);
 int FUN_00184310(void);
 int sysMemClear(void *ptr, int size);                  /* zero a block */
@@ -96,8 +96,8 @@ void whisperEffectStart(u32 devilId)
     fx->task = asdProcessCreateSimple(LAB_0037e4ec, 2, 0, 0, LAB_002c91d0, whisperEffectDestroy, fx);
     taskCreateDraw(LAB_0037e504, 0x81, 0, 0, FUN_0031fec0, 0, fx, fx->task);
     taskCreateDraw(LAB_0037e520, 0xdd, 0, 0, FUN_0031fec0, 0, g_whisperEffect, g_whisperEffect->task);
-    FUN_003d2d6c(0);
-    FUN_003d2d34(g_whisperEffect->handle, 0, 0x3c);
+    soundChannelStopAll(0);
+    soundChannelRequestIfEnabled(g_whisperEffect->handle, 0, 0x3c);
 }
 
 } /* extern "C" */

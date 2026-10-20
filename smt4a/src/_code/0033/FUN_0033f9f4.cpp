@@ -19,9 +19,9 @@ extern signed char DAT_005f1614; /* 0x5f1614 */
 extern int DAT_005f1618; /* 0x5f1618 */
 extern signed char DAT_005f161d; /* 0x5f161d */
 
-extern int FUN_00162e8c(void);
+extern int gameFlagsGetBlock(void);
 extern int FUN_00163fd4(unsigned int);
-extern int FUN_001656a0(unsigned int);
+extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: FUN_002b5cd4. */
 /* Supplied declaration required: mapIfStart. */
 /* Supplied declaration required: FUN_0033abb4. */
@@ -58,7 +58,7 @@ void FUN_0033f9f4(void)
   temp_v9 = 0;
   temp_v12 = 3.0f;
   temp_v14 = 0x43340000;
-  temp_v4 = FUN_00162e8c();
+  temp_v4 = gameFlagsGetBlock();
   temp_v5 = DAT_005806a4;
   temp_v13 = 0x3f800000;
   temp_v11 = 0.0f;
@@ -90,15 +90,15 @@ void FUN_0033f9f4(void)
       temp_v6 = temp_v5 != 0;
       temp_v5 = FUN_00163fd4(7);
       temp_v7 = temp_v5 != 0;
-      temp_v5 = FUN_001656a0(4);
+      temp_v5 = padButtonIsPressed(4);
       temp_v8 = temp_v5 != 0;
-      temp_v5 = FUN_001656a0(3);
+      temp_v5 = padButtonIsPressed(3);
       temp_v9 = temp_v5 != 0;
       if ((*(short *)(DAT_005806a4 + 0xb6) == 0) &&
          ((temp_v5 = FUN_004d0554(), temp_v5 != 0 ||
           (((temp_v5 = FUN_00163fd4(8), temp_v5 != 0 && (temp_v5 = FUN_00163fd4(7), temp_v5 != 0)) &&
-           ((temp_v5 = FUN_001656a0(8), temp_v5 == 0 &&
-            ((temp_v5 = FUN_001656a0(7), temp_v5 == 0 && (*(char *)(DAT_005806a4 + 0xb5) == '\0'))))))))
+           ((temp_v5 = padButtonIsPressed(8), temp_v5 == 0 &&
+            ((temp_v5 = padButtonIsPressed(7), temp_v5 == 0 && (*(char *)(DAT_005806a4 + 0xb5) == '\0'))))))))
          )) {
         temp_v6 = 0;
         temp_v7 = 0;

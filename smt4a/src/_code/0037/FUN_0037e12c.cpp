@@ -22,14 +22,14 @@ typedef struct StateHolder {
     /* 0x04 */ State *state;
 } StateHolder;
 
-extern StateHolder DAT_00588fd0;
+extern StateHolder g_gameGlobals;
 
 extern s32 FUN_00187168(Item *item);
 extern void FUN_0026fd50(void *slot, Item *item, u32 count, u32 arg);
 
 void FUN_0037e12c(Item *item, s32 latch, u32 arg)
 {
-    State *state = DAT_00588fd0.state;
+    State *state = g_gameGlobals.state;
 
     if (FUN_00187168(item) != 0) {
         FUN_0026fd50(state->slot, item, item->count, arg);

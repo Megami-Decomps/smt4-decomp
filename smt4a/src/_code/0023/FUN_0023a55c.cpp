@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_00100854(unsigned short *, unsigned int, unsigned int, int, unsigned char *);
-int FUN_0019a7f4(int);
+int libc_bsearch(unsigned short *, unsigned int, unsigned int, int, unsigned char *);
+int asdTMTexTableReleaseNode(int);
 
 /* stack frame of param_1: 3 slot(s), 10 byte(s) */
 typedef struct {
@@ -16,11 +16,11 @@ typedef struct {
 
 extern unsigned char LAB_002321f8; /* 0x2321f8 */
 
-/* Supplied declaration required: FUN_00100854. */
+/* Supplied declaration required: libc_bsearch. */
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern unsigned int dataTableGetEntries(void);
-/* Supplied declaration required: FUN_0019a7f4. */
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
 
 
 void FUN_0023a55c(unsigned short param_1)
@@ -37,9 +37,9 @@ void FUN_0023a55c(unsigned short param_1)
   temp_v0 = dataTableGetCount(temp_v0);
   puVar3 = temp_v2;
   temp_v2[0] = param_1;
-  FUN_00100854(puVar3,temp_v1,temp_v0,4,&LAB_002321f8);
+  libc_bsearch(puVar3,temp_v1,temp_v0,4,&LAB_002321f8);
   if ((puVar3 != (unsigned short *)0x0) && (-1 < (short)puVar3[1])) {
-    FUN_0019a7f4(0x34);
+    asdTMTexTableReleaseNode(0x34);
     return;
   }
   return;

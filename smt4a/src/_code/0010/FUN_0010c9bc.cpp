@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_0011a8b8(int, int, int, unsigned int);
-int FUN_002e6e74(int, unsigned int);
-int FUN_002e7232(int);
-int FUN_002e75fa(int);
+int onlineJobWaitComplete(int, unsigned int);
+int sharedRefRelease(int);
+int sharedRefAddRef(int);
 int FUN_002e78d0(unsigned int, int, int);
 int FUN_002e7908(...);
-int FUN_002e9afe(int *, unsigned int *);
+int vectorCopyHeader(int *, unsigned int *);
 
 /* stack frame of param_7: 7 slot(s), 28 byte(s) */
 typedef struct {
@@ -25,13 +25,13 @@ typedef struct {
 
 /* Supplied declaration required: FUN_0011a8b8. */
 extern unsigned int FUN_002e6e26(void);
-/* Supplied declaration required: FUN_002e6e74. */
-/* Supplied declaration required: FUN_002e7232. */
-/* Supplied declaration required: FUN_002e75fa. */
-extern int FUN_002e760a(unsigned int);
+/* Supplied declaration required: onlineJobWaitComplete. */
+/* Supplied declaration required: sharedRefRelease. */
+/* Supplied declaration required: sharedRefAddRef. */
+extern int operatorNew(unsigned int);
 /* Supplied declaration required: FUN_002e78d0. */
 /* Supplied declaration required: FUN_002e7908. */
-/* Supplied declaration required: FUN_002e9afe. */
+/* Supplied declaration required: vectorCopyHeader. */
 
 
 unsigned int *
@@ -59,7 +59,7 @@ FUN_0010c9bc(unsigned int *param_1,int param_2,unsigned int param_3,unsigned int
   iStack_20 = param_2;
   temp_v8 = param_3;
   uStack_18 = param_4;
-  temp_v0 = FUN_002e760a(0x2c0);
+  temp_v0 = operatorNew(0x2c0);
   if (temp_v0 != 0) {
     temp_v3 = param_5;
     temp_v4 = param_6;
@@ -70,18 +70,18 @@ FUN_0010c9bc(unsigned int *param_1,int param_2,unsigned int param_3,unsigned int
   else {
     temp_v0 = 0;
   }
-  FUN_002e75fa(temp_v0);
+  sharedRefAddRef(temp_v0);
   temp_v1 = FUN_002e6e26();
   FUN_002e78d0(temp_v1,temp_v0,0);
   if (param_5 != 0) {
-    FUN_002e7232(temp_v0);
+    sharedRefRelease(temp_v0);
     temp_v2 = 0x10001;
     temp_v7 = (unsigned int *)FUN_002e7908(temp_v7,&temp_v2);
   }
   else {
     temp_v5 = 0x80050001;
     FUN_002e7908(&temp_v2,&temp_v5);
-    FUN_002e6e74(temp_v0,param_7);
+    onlineJobWaitComplete(temp_v0,param_7);
     if (*(char *)(temp_v0 + 0x22) != '\x05') {
       temp_v6 = 0x80050008;
       puVar3 = (unsigned int *)FUN_002e7908(&uStack_34,&temp_v6);
@@ -92,8 +92,8 @@ FUN_0010c9bc(unsigned int *param_1,int param_2,unsigned int param_3,unsigned int
       uStack_30 = *(unsigned int *)(temp_v0 + 0x230);
       puVar3 = (unsigned int *)&temp_v6;
     }
-    FUN_002e9afe(&temp_v2,puVar3);
-    FUN_002e7232(temp_v0);
+    vectorCopyHeader(&temp_v2,puVar3);
+    sharedRefRelease(temp_v0);
     *temp_v7 = temp_v2;
     temp_v7[1] = temp_v3;
     temp_v7[2] = temp_v4;

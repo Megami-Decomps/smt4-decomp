@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } void_stack;
 
-extern int *DAT_005738e8; /* 0x5738e8 */
+extern int *g_btlHelp; /* 0x5738e8 */
 
 /* Supplied declaration required: jobStop. */
 extern int jobIsValid(unsigned int);
@@ -30,12 +30,12 @@ void FUN_002deeb8(void)
   int temp_v1;
   
   temp_v0 = jobGetWork();
-  piVar1 = DAT_005738e8;
-  if (DAT_005738e8 != (int *)0x0) {
-    temp_v1 = *DAT_005738e8;
-    while (piVar2 = DAT_005738e8, temp_v1 != 0) {
+  piVar1 = g_btlHelp;
+  if (g_btlHelp != (int *)0x0) {
+    temp_v1 = *g_btlHelp;
+    while (piVar2 = g_btlHelp, temp_v1 != 0) {
       if (*(int *)(temp_v1 + 0x878) == 0) {
-        *DAT_005738e8 = *(int *)(temp_v1 + 0x874);
+        *g_btlHelp = *(int *)(temp_v1 + 0x874);
       }
       else {
         *(unsigned int *)(*(int *)(temp_v1 + 0x878) + 0x874) = *(unsigned int *)(temp_v1 + 0x874);
@@ -50,8 +50,8 @@ void FUN_002deeb8(void)
       asdMemFree();
       temp_v1 = *piVar1;
     }
-    asdMemFree(DAT_005738e8);
-    DAT_005738e8 = (int *)0x0;
+    asdMemFree(g_btlHelp);
+    g_btlHelp = (int *)0x0;
   }
   temp_v1 = jobIsValid(*(unsigned int *)(temp_v0 + 0x70));
   if (temp_v1 != 0) {

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_001ab888(void);
+extern int gameGetSlotTable(void);
 
 
 int FUN_001ba514(unsigned int param_1)
@@ -14,7 +14,7 @@ int FUN_001ba514(unsigned int param_1)
   int temp_v1;
   int temp_v2;
   
-  temp_v0 = FUN_001ab888();
+  temp_v0 = gameGetSlotTable();
   temp_v1 = 0;
   while ((temp_v2 = (int)*(char *)(temp_v0 + temp_v1 + 0x1c88), temp_v2 < 0 ||
          (*(unsigned short *)(temp_v0 + temp_v2 * 300 + 0xca) != param_1))) {

@@ -7,7 +7,7 @@ typedef struct CountAt30 {
     /* 0x30 */ s16 count;
 } CountAt30;
 
-extern void FUN_001641c4(void);
+extern void ifTouchRegionRemove(void);
 
 /* Releases `count` entries (halfword at +0x30) and clears the count. */
 void releaseEntriesA(CountAt30 *obj)
@@ -15,7 +15,7 @@ void releaseEntriesA(CountAt30 *obj)
     s32 i;
 
     for (i = 0; i < obj->count; i++) {
-        FUN_001641c4();
+        ifTouchRegionRemove();
     }
     obj->count = 0;
 }

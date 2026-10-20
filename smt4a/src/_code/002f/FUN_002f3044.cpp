@@ -13,7 +13,7 @@ int FUN_002e6e5c(int *);
 #endif
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-extern int FUN_002e760a(unsigned int);
+extern int operatorNew(unsigned int);
 extern unsigned int FUN_00301490(void);
 
 
@@ -37,7 +37,7 @@ unsigned long long FUN_002f3044(int param_1,unsigned int param_2,unsigned int pa
     if (*(int *)(temp_v2 * 4 + param_1 + 0x34) == 0) break;
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 8);
-  temp_v0 = FUN_002e760a(0x40);
+  temp_v0 = operatorNew(0x40);
   temp_v1 = 0;
   if (temp_v0 != 0) {
     temp_v1 = FUN_00301490();

@@ -6,12 +6,12 @@ int FUN_00343a04(u32 amount);
 int FUN_00343a2c(u32 amount);
 int FUN_00343a74(u32 amount);
 int FUN_00343ba0(u32 amount);
-extern u32 *FUN_002542a4(void);
+extern u32 *gameGetCounters(void);
 
 /* Adds `amount` to counter `index` (saturating at 0xFFFFFFFF) and notifies the counter's handler. */
 void FUN_0029be5c(int index, u32 amount)
 {
-    u32 *table = FUN_002542a4();
+    u32 *table = gameGetCounters();
     u32 *counter = &table[index];
     u32 value = *counter;
 

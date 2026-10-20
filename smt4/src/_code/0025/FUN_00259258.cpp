@@ -10,12 +10,12 @@ typedef struct Target {
 extern struct {
     u8 unk00[8];
     Target *target;
-} DAT_0043e188;
+} g_messageMain;
 
 void FUN_00259258(void)
 {
-    if (DAT_0043e188.target != NULL) {
-        DAT_0043e188.target->unk30 = 1;
+    if (g_messageMain.target != NULL) {
+        g_messageMain.target->unk30 = 1;
     }
 }
 

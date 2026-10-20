@@ -13,7 +13,7 @@ extern unsigned short DAT_005715fa; /* 0x5715fa */
 extern int DAT_00571600; /* 0x571600 */
 extern unsigned int DAT_00571638; /* 0x571638 */
 extern unsigned int DAT_0057163c; /* 0x57163c */
-extern int DAT_0057a9c8; /* 0x57a9c8 */
+extern int g_btlUiBlock; /* 0x57a9c8 */
 
 /* Supplied declaration required: jobStop. */
 extern int jobIsValid(unsigned int);
@@ -33,8 +33,8 @@ void FUN_00314ef8(void)
   unsigned int temp_v3;
   
   temp_v0 = jobGetWork();
-  if (DAT_0057a9c8 != 0) {
-    FUN_004aa780(DAT_0057a9c8,0);
+  if (g_btlUiBlock != 0) {
+    FUN_004aa780(g_btlUiBlock,0);
   }
   temp_v2 = DAT_00571600;
   if (DAT_00571600 != 0) {

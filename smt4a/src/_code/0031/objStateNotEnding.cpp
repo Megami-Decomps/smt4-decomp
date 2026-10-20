@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern StateHolder518 *DAT_00588fe8;
+extern StateHolder518 *g_statusDown;
 
 /* True unless the global object's state is 0x15 or 0x17. */
 u8 objStateNotEnding(void)
 {
-    return DAT_00588fe8->state != 0x15 && DAT_00588fe8->state != 0x17;
+    return g_statusDown->state != 0x15 && g_statusDown->state != 0x17;
 }
 
 } /* extern "C" */

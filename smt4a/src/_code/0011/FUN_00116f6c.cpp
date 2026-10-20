@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e9300(...);
+int onlineStringConstruct(...);
 int FUN_002eca44(int);
 int FUN_002f5020(int, int, int, int);
 
@@ -26,10 +26,10 @@ extern unsigned char DAT_00559dd4; /* 0x559dd4 */
 extern unsigned char DAT_00559e24; /* 0x559e24 */
 
 extern int FUN_00103884(int);
-/* Supplied declaration required: FUN_002e9300. */
+/* Supplied declaration required: onlineStringConstruct. */
 extern unsigned int *FUN_002eca10(fn_00116f6c_arg0 *, unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_002eca44. */
-extern int FUN_002ed912(int);
+extern int vectorInitEmpty2(int);
 /* Supplied declaration required: FUN_002f5020. */
 
 
@@ -46,7 +46,7 @@ int FUN_00116f6c(fn_00116f6c_arg0 *param_1,unsigned int param_2,unsigned int par
   puVar1[0x1b] = 0;
   *puVar1 = (unsigned int)&DAT_00559dd4;
   puVar1[0x1a] = (unsigned int)&DAT_00559e24;
-  temp_v0 = FUN_002e9300(puVar1 + 0x1c,&LAB_00116fe0);
+  temp_v0 = onlineStringConstruct(puVar1 + 0x1c,&LAB_00116fe0);
   *(unsigned char *)(temp_v0 + 8) = 0;
   *(unsigned int *)(temp_v0 + 0xc) = 0;
   temp_v0 = temp_v0 + 0x10;
@@ -54,9 +54,9 @@ int FUN_00116f6c(fn_00116f6c_arg0 *param_1,unsigned int param_2,unsigned int par
   temp_v0 = FUN_00103884(temp_v0 + 0x60);
   *(unsigned int *)(temp_v0 + 4) = 0;
   *(unsigned int *)(temp_v0 + 8) = 0;
-  temp_v0 = FUN_002ed912(temp_v0 + 0xc);
+  temp_v0 = vectorInitEmpty2(temp_v0 + 0xc);
   *(unsigned char *)(temp_v0 + 0xc) = 0;
-  temp_v0 = FUN_002e9300(temp_v0 + 0x10,&LAB_00116fe0);
+  temp_v0 = onlineStringConstruct(temp_v0 + 0x10,&LAB_00116fe0);
   *(unsigned int *)(temp_v0 + 8) = 0;
   temp_v0 = temp_v0 + 0xc;
   FUN_002f5020(temp_v0,0x2ed913,0xc,4);

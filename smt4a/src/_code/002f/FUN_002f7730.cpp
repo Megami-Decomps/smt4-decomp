@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001ad9b4(void);
 
-extern int FUN_0019f18c(int);
+extern int idIsAtLeast350(int);
 /* Supplied declaration required: FUN_001ad9b4. */
 extern int partyEntryFlagsBit3(int);
 extern int partyEntryFlagsBit1(int);
@@ -29,7 +29,7 @@ int FUN_002f7730(int param_1,int param_2)
     return -1;
   }
   temp_v0 = 0;
-  temp_v2 = FUN_0019f18c(param_2);
+  temp_v2 = idIsAtLeast350(param_2);
   if ((temp_v2 != 0) && (*(char *)(temp_v1 + 6) == '\0')) {
     temp_v0 = 1;
   }

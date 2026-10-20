@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdTMTexTableFreeEntry(int);
-int FUN_002ae898(int);
+int asdTMTexTableReleaseNode(int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -13,7 +13,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: asdTMTexTableFreeEntry. */
-/* Supplied declaration required: FUN_002ae898. */
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
 
 
 void FUN_00291730(int param_1)
@@ -21,7 +21,7 @@ void FUN_00291730(int param_1)
 {
 /* irregular: 2 native warning(s); review required */
   if (*(int *)(param_1 + 0xb7c) != 0) {
-    FUN_002ae898(0x33);
+    asdTMTexTableReleaseNode(0x33);
     *(unsigned int *)(param_1 + 0xb7c) = 0;
   }
   asdTMTexTableFreeEntry(0x33);

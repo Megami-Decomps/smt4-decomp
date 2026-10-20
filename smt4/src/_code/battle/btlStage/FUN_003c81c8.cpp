@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0024ef48(int);
-int FUN_00263630(int, unsigned int);
+int mdlHandleArrayDestroy(int);
+int asdModelSlotSetColor(int, unsigned int);
 int FUN_002759bc(void);
 int FUN_00280ac0(int);
 int FUN_00340350(int);
@@ -17,9 +17,9 @@ int FUN_003c8058(int);
 
 extern int DAT_004398d4; /* 0x4398d4 */
 
-/* Supplied declaration required: FUN_0024ef48. */
+/* Supplied declaration required: mdlHandleArrayDestroy. */
 extern unsigned long long FUN_0025bb34(unsigned int, char *);
-/* Supplied declaration required: FUN_00263630. */
+/* Supplied declaration required: asdModelSlotSetColor. */
 /* Supplied declaration required: FUN_002759bc. */
 /* Supplied declaration required: FUN_00280ac0. */
 /* Supplied declaration required: FUN_00340350. */
@@ -64,7 +64,7 @@ unsigned int FUN_003c81c8(int param_1,int param_2)
     }
     *(short *)(param_1 + 0x8c) = (short)temp_v2;
     if (-1 < temp_v0) {
-      FUN_00263630(temp_v0,temp_v1);
+      asdModelSlotSetColor(temp_v0,temp_v1);
     }
     FUN_003c7cf0(param_1,*(unsigned int *)(param_1 + 8),*(unsigned int *)(param_1 + 0xc));
     temp_v1 = 4;
@@ -75,7 +75,7 @@ unsigned int FUN_003c81c8(int param_1,int param_2)
       *(unsigned int *)(param_1 + 0xa0) = 0;
     }
     FUN_002759bc();
-    FUN_0024ef48(param_1);
+    mdlHandleArrayDestroy(param_1);
     *(unsigned int *)(param_1 + 0x80) = 0;
     break;
   case 4:

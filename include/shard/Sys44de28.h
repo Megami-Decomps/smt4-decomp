@@ -16,6 +16,6 @@ typedef struct Sys44de28 {
     /* 0x04 */ Worker *worker;
 } Sys44de28;
 
-extern Sys44de28 DAT_0044de28;
+extern Sys44de28 g_saveLoadUIFlags;
 
 #endif

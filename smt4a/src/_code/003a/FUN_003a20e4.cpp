@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002b2d74(unsigned int, unsigned int, int);
-int FUN_002b2f08(void);
+int objectBufferFree(void);
 int FUN_0038439c(void);
 int FUN_003a1ef4(void);
 int FUN_003a1f88(unsigned int *, int);
@@ -21,7 +21,7 @@ struct fn_003a20e4_arg0 {
 
 extern int FUN_002721e4(fn_003a20e4_arg0 *);
 /* Supplied declaration required: FUN_002b2d74. */
-/* Supplied declaration required: FUN_002b2f08. */
+/* Supplied declaration required: objectBufferFree. */
 extern int FUN_002b41c4(void);
 /* Supplied declaration required: FUN_0038439c. */
 /* Supplied declaration required: FUN_003a1ef4. */
@@ -42,7 +42,7 @@ unsigned int * FUN_003a20e4(fn_003a20e4_arg0 *param_1)
   FUN_0038439c();
   temp_v1 = (unsigned int)param_1->field_0xc;
   if (puVar2[0xc] != 0) {
-    FUN_002b2f08();
+    objectBufferFree();
   }
   FUN_002b2d74(temp_v1,*puVar2,temp_v0 + 0x1c);
   puVar2[0xc] = temp_v1;

@@ -16,7 +16,7 @@ extern unsigned int DAT_00589298; /* 0x589298 */
 extern unsigned int DAT_0058929c; /* 0x58929c */
 extern unsigned int DAT_005892a0; /* 0x5892a0 */
 extern unsigned char DAT_0061a664; /* 0x61a664 */
-extern unsigned char DAT_0061a684; /* 0x61a684 */
+extern unsigned char g_callbackFuncs; /* 0x61a684 */
 extern unsigned char DAT_0061a6a4; /* 0x61a6a4 */
 
 extern int FUN_0016f864(unsigned int);
@@ -47,7 +47,7 @@ int FUN_00158f64(void)
         temp_v0 = 0;
         temp_v2 = 8;
         do {
-          *(unsigned int *)(&DAT_0061a684 + temp_v0 * 4) = 0;
+          *(unsigned int *)(&g_callbackFuncs + temp_v0 * 4) = 0;
           *(unsigned int *)(&DAT_0061a664 + temp_v0 * 4) = 0;
           *(unsigned int *)(temp_v0 * 4 + 0x61a644) = 0;
           temp_v2 = temp_v2 - 1;

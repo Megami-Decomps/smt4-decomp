@@ -7,7 +7,7 @@ extern "C" {
 int scrSetResult(int);
 int btlGetMainState(void);
 
-extern int FUN_002499b4(void);
+extern int btlMainFindActiveEntry(void);
 /* Supplied declaration required: scrSetResult. */
 /* Supplied declaration required: btlGetMainState. */
 extern int scrGetArg(void);
@@ -23,7 +23,7 @@ unsigned int FUN_002f705c(void)
   
   temp_v0 = scrGetArg();
   btlGetMainState();
-  temp_v1 = FUN_002499b4();
+  temp_v1 = btlMainFindActiveEntry();
   if ((temp_v1 != 0) &&
      (temp_v1 = __aeabi_idivmod(*(short *)(temp_v1 + 0x1b4) * 100,(int)*(short *)(temp_v1 + 0x1b6)),
      temp_v1 <= temp_v0)) {

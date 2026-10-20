@@ -5,15 +5,15 @@
 extern "C" {
 
 int FUN_0028eeb8(int);
-int FUN_002b63c0(void);
+int dataTable1bOr1cGetRecord(void);
 
 extern int FUN_00240a6c(unsigned int);
 extern int FUN_00287894(unsigned int);
 /* Supplied declaration required: FUN_0028eeb8. */
 extern int FUN_00298fa0(unsigned int, unsigned int);
-extern int FUN_002adc88(void);
-/* Supplied declaration required: FUN_002b63c0. */
-extern int FUN_002c09bc(void);
+extern int gameGetFlagBlock(void);
+/* Supplied declaration required: dataTable1bOr1cGetRecord. */
+extern int gameDataBlocksGetSaveData(void);
 
 
 unsigned int FUN_00348f70(void)
@@ -25,7 +25,7 @@ unsigned int FUN_00348f70(void)
   unsigned int temp_v2;
   unsigned int temp_v3;
   
-  temp_v0 = FUN_002c09bc();
+  temp_v0 = gameDataBlocksGetSaveData();
   temp_v3 = 0;
   temp_v2 = 0;
   *(unsigned int *)(temp_v0 + 0x1f85c) = *(unsigned int *)(temp_v0 + 0x1f458);
@@ -33,11 +33,11 @@ unsigned int FUN_00348f70(void)
     temp_v0 = FUN_00298fa0(temp_v2 & 0xffff,0);
     if (temp_v0 == 0) {
       temp_v1 = temp_v2;
-      FUN_002b63c0();
+      dataTable1bOr1cGetRecord();
       if ((((temp_v1 != 0) && (*(char *)(temp_v1 + 6) == '\x06')) && ((*(unsigned char *)(temp_v1 + 7) & 1) == 0))
          && (temp_v0 = FUN_00240a6c(temp_v2 & 0xffff), temp_v0 != 0)) {
         temp_v1 = temp_v2;
-        temp_v0 = FUN_002adc88();
+        temp_v0 = gameGetFlagBlock();
         temp_v0 = temp_v0 + temp_v1 * 4;
         *(unsigned char *)(temp_v0 + 0x201) = 0;
         *(unsigned char *)(temp_v0 + 0x202) = *(unsigned char *)(temp_v0 + 0x202) & 0xfe;

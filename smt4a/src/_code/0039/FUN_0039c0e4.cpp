@@ -5,24 +5,24 @@
 extern "C" {
 
 int jobStop(unsigned int, int);
-int FUN_001641c4(void);
+int ifTouchRegionRemove(void);
 int asdMemFree(void);
-int FUN_0019a7f4(int, int);
+int asdTMTexTableReleaseNode(int, int);
 int scrScriptProcessDestroy(void);
-int FUN_00237210(unsigned int);
+int asdMemFreeSlot(unsigned int);
 int asdTMTexTableFreeEntry(int);
-int FUN_002e3328(void);
+int asdOperatorDelete(void);
 
 extern unsigned char DAT_0057f254; /* 0x57f254 */
 
 /* Supplied declaration required: jobStop. */
-/* Supplied declaration required: FUN_001641c4. */
+/* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_0019a7f4. */
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: FUN_00237210. */
+/* Supplied declaration required: asdMemFreeSlot. */
 /* Supplied declaration required: asdTMTexTableFreeEntry. */
-/* Supplied declaration required: FUN_002e3328. */
+/* Supplied declaration required: asdOperatorDelete. */
 
 
 void FUN_0039c0e4(void)
@@ -36,15 +36,15 @@ void FUN_0039c0e4(void)
   temp_v0 = 0;
   if (*(short *)((*(unsigned int * *)((unsigned char *)&DAT_0057f254 + 0x4)) + 0x52) != 0) {
     do {
-      FUN_001641c4();
+      ifTouchRegionRemove();
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < (int)(unsigned int)*(unsigned short *)(puVar1 + 0x52));
   }
-  FUN_00237210(puVar1[0x176]);
+  asdMemFreeSlot(puVar1[0x176]);
   puVar1[0x176] = 0;
   temp_v0 = 0;
   do {
-    FUN_0019a7f4(0x31,temp_v0);
+    asdTMTexTableReleaseNode(0x31,temp_v0);
     temp_v0 = temp_v0 + 1;
   } while (temp_v0 < 2);
   asdTMTexTableFreeEntry(0x31);
@@ -74,7 +74,7 @@ void FUN_0039c0e4(void)
   }
   jobStop(*puVar1,0);
   if ((*(unsigned int * *)((unsigned char *)&DAT_0057f254 + 0x4)) != (unsigned int *)0x0) {
-    FUN_002e3328();
+    asdOperatorDelete();
     (*(unsigned int * *)((unsigned char *)&DAT_0057f254 + 0x4)) = (unsigned int *)0x0;
   }
   return;

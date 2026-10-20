@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern HolderOf9100 *DAT_0057f290;
+extern HolderOf9100 *g_unite;
 
 u8 region9100IsClear(void)
 {
-    Region9100 *region = &DAT_0057f290->region;
+    Region9100 *region = &g_unite->region;
 
     return region->flag == 0;
 }

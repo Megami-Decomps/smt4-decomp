@@ -11,9 +11,9 @@ typedef struct {
 
 void FUN_002bfdd4(void);
 void FUN_002dfefc(s32 arg);
-s32 FUN_002c09d0(u32 id);
+s32 gameFlagIsSet(u32 id);
 
-extern MapIfExtra *DAT_00447a98;
+extern MapIfExtra *g_mapIfTimer;
 extern GameState g_gameState;
 
 void FUN_001d34a8(s32 a, s32 b)
@@ -21,10 +21,10 @@ void FUN_001d34a8(s32 a, s32 b)
     MapIfExtra *extra;
 
     FUN_002bfdd4();
-    extra = DAT_00447a98;
-    DAT_00447a98->unk08 = a;
+    extra = g_mapIfTimer;
+    g_mapIfTimer->unk08 = a;
     extra->unk0C = b;
-    if (g_gameState.unk18 == 0 && FUN_002c09d0(0x16) != 0 && DAT_00447a98->unk00 == 0) {
+    if (g_gameState.unk18 == 0 && gameFlagIsSet(0x16) != 0 && g_mapIfTimer->unk00 == 0) {
         FUN_002dfefc(0);
     }
 }

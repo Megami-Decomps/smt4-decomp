@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0023392c(unsigned int *, int, int);
-int FUN_00233d78(unsigned int *);
+int jobStopAndClearFlags(unsigned int *);
 int FUN_00233db8(unsigned int *, int);
 int FUN_00233e70(unsigned int *, int, int);
 int FUN_00233fcc(unsigned int *, int);
@@ -24,15 +24,15 @@ typedef struct {
 extern int g_aocMain; /* 0x432fc8 */
 
 /* Supplied declaration required: FUN_0023392c. */
-/* Supplied declaration required: FUN_00233d78. */
+/* Supplied declaration required: jobStopAndClearFlags. */
 /* Supplied declaration required: FUN_00233db8. */
 /* Supplied declaration required: FUN_00233e70. */
 /* Supplied declaration required: FUN_00233fcc. */
 /* Supplied declaration required: FUN_002340e4. */
 /* Supplied declaration required: FUN_00234124. */
 extern int FUN_0026b564(void);
-extern int FUN_0027ea14(unsigned int *);
-extern int FUN_002a1520(unsigned int *);
+extern int strIsEmpty(unsigned int *);
+extern int byteIsAtLeast100(unsigned int *);
 /* Supplied declaration required: memClear. */
 
 
@@ -101,7 +101,7 @@ void FUN_0038e5f4(unsigned int *param_1)
         uStack_50 = uStack_3c;
         uStack_4c = uStack_38;
         uStack_48 = uStack_34;
-        temp_v1 = FUN_0027ea14(&temp_v2);
+        temp_v1 = strIsEmpty(&temp_v2);
         if (temp_v1 != 0) {
           if ((int *)param_1[0x82] != (int *)0x0) {
             (**(romwright_code **)(*(int *)param_1[0x82] + 4))();
@@ -113,11 +113,11 @@ void FUN_0038e5f4(unsigned int *param_1)
           param_1[0x82] = (unsigned int)puVar3;
           return;
         }
-        temp_v1 = FUN_002a1520(&temp_v2);
+        temp_v1 = byteIsAtLeast100(&temp_v2);
         if (temp_v1 == 0) {
           return;
         }
-        FUN_00233d78(param_1);
+        jobStopAndClearFlags(param_1);
         param_1[2] = 9999;
         param_1[0x84] = temp_v2;
         param_1[0x85] = uStack_54;
@@ -135,16 +135,16 @@ void FUN_0038e5f4(unsigned int *param_1)
       uStack_50 = uStack_3c;
       uStack_4c = uStack_38;
       uStack_48 = uStack_34;
-      temp_v1 = FUN_0027ea14(&temp_v2);
+      temp_v1 = strIsEmpty(&temp_v2);
       if (temp_v1 != 0) {
         param_1[2] = 2;
         return;
       }
-      temp_v1 = FUN_002a1520(&temp_v2);
+      temp_v1 = byteIsAtLeast100(&temp_v2);
       if (temp_v1 == 0) {
         return;
       }
-      FUN_00233d78(param_1);
+      jobStopAndClearFlags(param_1);
     }
     else {
       if (temp_v0 == 5) {
@@ -190,7 +190,7 @@ void FUN_0038e5f4(unsigned int *param_1)
       uStack_50 = uStack_3c;
       uStack_4c = uStack_38;
       uStack_48 = uStack_34;
-      temp_v1 = FUN_0027ea14(&temp_v2);
+      temp_v1 = strIsEmpty(&temp_v2);
       if (temp_v1 != 0) {
         param_1[1] = 10;
         param_1[2] = 0;
@@ -218,11 +218,11 @@ void FUN_0038e5f4(unsigned int *param_1)
         memClear(temp_v1 + 0x6d4,0x80);
         return;
       }
-      temp_v1 = FUN_002a1520(&temp_v2);
+      temp_v1 = byteIsAtLeast100(&temp_v2);
       if (temp_v1 == 0) {
         return;
       }
-      FUN_00233d78(param_1);
+      jobStopAndClearFlags(param_1);
     }
   }
   else {
@@ -235,17 +235,17 @@ void FUN_0038e5f4(unsigned int *param_1)
     uStack_50 = uStack_3c;
     uStack_4c = uStack_38;
     uStack_48 = uStack_34;
-    temp_v1 = FUN_0027ea14(&temp_v2);
+    temp_v1 = strIsEmpty(&temp_v2);
     if (temp_v1 != 0) {
       param_1[2] = 5;
       FUN_00233db8(param_1,1);
       return;
     }
-    temp_v1 = FUN_002a1520(&temp_v2);
+    temp_v1 = byteIsAtLeast100(&temp_v2);
     if (temp_v1 == 0) {
       return;
     }
-    FUN_00233d78(param_1);
+    jobStopAndClearFlags(param_1);
   }
   if ((temp_v2 & 0xff) == 0x66) {
     temp_v4 = temp_v2;

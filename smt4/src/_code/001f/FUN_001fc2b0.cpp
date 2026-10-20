@@ -10,12 +10,12 @@ typedef struct {
     s16 ids[1];         /* 0xe04 */
 } SlotBlock;
 
-SlotBlock *FUN_002c2950(void);
+SlotBlock *gameGetMapBlock(void);
 
 /* Returns 1 when an active slot holds `id`, else 0. */
 u32 FUN_001fc2b0(int id)
 {
-    SlotBlock *block = FUN_002c2950();
+    SlotBlock *block = gameGetMapBlock();
     int i = 0;
 
     if (i < block->count) {

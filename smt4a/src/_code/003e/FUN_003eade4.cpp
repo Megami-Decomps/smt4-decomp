@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_001ab888(void);
+extern int gameGetSlotTable(void);
 
 
 char FUN_003eade4(void)
@@ -13,7 +13,7 @@ char FUN_003eade4(void)
   int temp_v0;
   char temp_v1;
   
-  temp_v0 = FUN_001ab888();
+  temp_v0 = gameGetSlotTable();
   temp_v1 = -1 < *(char *)(temp_v0 + 0x1ca0);
   if (-1 < *(char *)(temp_v0 + 0x1ca1)) {
     temp_v1 = temp_v1 + '\x01';

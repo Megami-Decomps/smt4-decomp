@@ -18,7 +18,7 @@ typedef struct {
 } void_stack;
 
 extern unsigned char LAB_00245f00; /* 0x245f00 */
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern int g_mapIf; /* 0x58103c */
 
 /* Supplied declaration required: FUN_00178b04. */
@@ -63,7 +63,7 @@ void FUN_00245e38(void)
   FUN_0040aa6c();
   FUN_0040aad4(*(unsigned int *)(temp_v0 + 0xcc38),0);
   temp_v2 = *(unsigned int *)(*(int *)(temp_v0 + 0xcc38) + 4);
-  FUN_0040ace8(DAT_0056fcc0,temp_v2);
+  FUN_0040ace8(g_handleRegistry,temp_v2);
   FUN_003fd76c(temp_v2,temp_v0 + 0xcc28);
   FUN_003fdb18(temp_v2);
   FUN_003fe86c(temp_v2,0,2);

@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_002e6dd4(unsigned int, unsigned int);
+int rt_memclr(unsigned int, unsigned int);
 int FUN_002f17e4(unsigned int *, unsigned int);
 
 extern unsigned char DAT_0055ae64; /* 0x55ae64 */
 
-/* Supplied declaration required: FUN_002e6dd4. */
-extern unsigned int *FUN_002e9f80(void);
+/* Supplied declaration required: rt_memclr. */
+extern unsigned int *sharedRefInit(void);
 /* Supplied declaration required: FUN_002f17e4. */
 
 
@@ -20,11 +20,11 @@ unsigned int * FUN_002ecdec(unsigned int param_1,unsigned int param_2)
 /* irregular: 2 native warning(s); review required */
   unsigned int *puVar1;
   
-  puVar1 = (unsigned int *)FUN_002e9f80();
+  puVar1 = (unsigned int *)sharedRefInit();
   *puVar1 = (unsigned int)&DAT_0055ae64;
   puVar1 = puVar1 + 3;
   FUN_002f17e4(puVar1,param_2);
-  FUN_002e6dd4(*puVar1,param_2);
+  rt_memclr(*puVar1,param_2);
   return puVar1 + -3;
 }
 

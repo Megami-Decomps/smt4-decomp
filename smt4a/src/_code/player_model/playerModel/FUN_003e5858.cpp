@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00178b04(int, unsigned char *, int);
-int FUN_001aea28(unsigned int);
+int ptrListRemoveClearOwner(unsigned int);
 int FUN_003e573c(int, int, int, int);
 int FUN_003fd7b4(unsigned int);
 int FUN_003fe86c(unsigned int, int, int);
@@ -16,10 +16,10 @@ int FUN_0040ace8(unsigned int, unsigned int);
 
 typedef int romwright_code(...);
 extern unsigned char LAB_003e5aac; /* 0x3e5aac */
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 
 /* Supplied declaration required: FUN_00178b04. */
-/* Supplied declaration required: FUN_001aea28. */
+/* Supplied declaration required: ptrListRemoveClearOwner. */
 /* Supplied declaration required: FUN_003e573c. */
 /* Supplied declaration required: FUN_003fd7b4. */
 /* Supplied declaration required: FUN_003fe86c. */
@@ -49,7 +49,7 @@ void FUN_003e5858(int param_1)
         temp_v2 = *(unsigned int *)(*(int *)(param_1 + 8) + 4);
         FUN_003fd7b4(temp_v2);
         FUN_003fe86c(temp_v2,0,2);
-        FUN_0040ace8(DAT_0056fcc0,temp_v2);
+        FUN_0040ace8(g_handleRegistry,temp_v2);
         temp_v0 = *(int *)(*(int *)(param_1 + 8) + 4);
         *(unsigned int *)(temp_v0 + 4) = *(unsigned int *)(temp_v0 + 4) | 1;
         *(unsigned int *)(param_1 + 4) = 0;
@@ -71,7 +71,7 @@ void FUN_003e5858(int param_1)
         FUN_0040aad4(*(unsigned int *)(temp_v3 + 0x24),*(unsigned int *)(*(int *)(param_1 + 8) + 4));
         temp_v2 = *(unsigned int *)(*(int *)(temp_v3 + 0x24) + 4);
         FUN_003fd7b4(temp_v2);
-        FUN_0040ace8(DAT_0056fcc0,temp_v2);
+        FUN_0040ace8(g_handleRegistry,temp_v2);
         *puVar5 = 0;
       }
       break;
@@ -79,7 +79,7 @@ void FUN_003e5858(int param_1)
       *puVar5 = 3;
       temp_v3 = *(int *)(*(int *)(temp_v3 + 0x24) + 4);
       *(unsigned int *)(temp_v3 + 4) = *(unsigned int *)(temp_v3 + 4) | 3;
-      FUN_001aea28(DAT_0056fcc0);
+      ptrListRemoveClearOwner(g_handleRegistry);
       break;
     case 3:
       if (*(int **)(temp_v3 + 0x24) != (int *)0x0) {

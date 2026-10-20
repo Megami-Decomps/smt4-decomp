@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002b06c4(void);
+int dataTable00FindById(void);
 
 extern unsigned int g_aocMain; /* 0x432fc8 */
 
 extern int FUN_002955fc(void);
-extern int FUN_002a1534(unsigned int);
+extern int objGetFlagBit16(unsigned int);
 extern int FUN_002a6d50(unsigned int, unsigned int, int);
-/* Supplied declaration required: FUN_002b06c4. */
+/* Supplied declaration required: dataTable00FindById. */
 extern int FUN_002b8804(void);
 
 
@@ -23,11 +23,11 @@ unsigned int FUN_0038971c(unsigned int param_1,unsigned int param_2)
   int temp_v1;
   
   param_2 = param_2 & 0xffff;
-  FUN_002b06c4();
+  dataTable00FindById();
   temp_v0 = *(short *)(param_2 + 0x88);
   temp_v1 = FUN_002955fc();
   if (temp_v1 != 0) {
-    temp_v1 = FUN_002a1534(g_aocMain);
+    temp_v1 = objGetFlagBit16(g_aocMain);
     if (temp_v1 != 0) {
       return 1;
     }

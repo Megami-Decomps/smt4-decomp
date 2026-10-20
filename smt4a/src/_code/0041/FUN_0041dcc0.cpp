@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001386e8(int);
 int sysPlaySe(int);
 int FUN_00224880(unsigned int);
-int FUN_00275f44(unsigned int, int);
+int scrScriptProcessStartEntry(unsigned int, int);
 int FUN_002c76d8(void);
 int FUN_003a76a8(int);
 int FUN_003c12d8(int, int);
@@ -19,14 +19,14 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern unsigned char DAT_00588e14; /* 0x588e14 */
+extern unsigned char g_saveLoadUIBase; /* 0x588e14 */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_001386e8. */
-extern int FUN_0014af84(void);
+extern int gameDataBlocksGetSaveData(void);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00224880. */
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_002c76d8. */
 extern int FUN_0035d734(void);
 extern int byteTripleGetV0(void);
@@ -49,7 +49,7 @@ void FUN_0041dcc0(int param_1)
     if ((temp_v0 == 0) && (temp_v0 = FUN_00224880(*(unsigned int *)(param_1 + 0x40)), temp_v0 == 2)) {
       temp_v0 = byteArr5Get3();
       if (temp_v0 != 0) {
-        DAT_00588e14 = 1;
+        g_saveLoadUIBase = 1;
       }
       else {
         *(unsigned char *)(param_1 + 0x11) = 1;
@@ -91,14 +91,14 @@ void FUN_0041dcc0(int param_1)
       temp_v0 = byteArr5Get3();
       if (temp_v0 != 0) {
         FUN_001386e8(1);
-        temp_v0 = FUN_0014af84();
+        temp_v0 = gameDataBlocksGetSaveData();
         rt_memcpy_w(param_1 + *(int *)(param_1 + 0x2f8) * 0x80 + 0x6c,temp_v0 + 0x27044,0x80);
         *(unsigned char *)(*(int *)(param_1 + 0x2f8) + param_1 + 0x2ec) = 1;
-        FUN_00275f44(*(unsigned int *)(param_1 + 0x40),5);
+        scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x40),5);
         return;
       }
       FUN_001386e8(1);
-      FUN_00275f44(*(unsigned int *)(param_1 + 0x40),6);
+      scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x40),6);
       return;
     }
   }

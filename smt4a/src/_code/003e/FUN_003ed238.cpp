@@ -19,7 +19,7 @@ typedef struct {
     unsigned int sp80; /* 0x80: local_80 */
 } param_2_stack;
 
-extern int DAT_00571508; /* 0x571508 */
+extern int g_btlCamera; /* 0x571508 */
 extern float DAT_00573974; /* 0x573974 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
@@ -27,7 +27,7 @@ extern float DAT_00573974; /* 0x573974 */
 /* Supplied declaration required: FUN_001568f8. */
 extern int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
-extern unsigned int FUN_001a6f60(int, unsigned int);
+extern unsigned int dataTableFileGetTable(int, unsigned int);
 /* Supplied declaration required: FUN_003e7b5c. */
 /* Supplied declaration required: FUN_003e7cc8. */
 /* Supplied declaration required: FUN_003f0e20. */
@@ -97,7 +97,7 @@ void FUN_003ed238(int param_1,unsigned int param_2)
             temp_v0 = *(unsigned short *)(temp_v9 + 0x166);
             psVar5 = (short *)0x0;
             if (*(int *)(param_1 + 0x2294) != 0) {
-              temp_v2 = FUN_001a6f60(*(int *)(param_1 + 0x2294),0);
+              temp_v2 = dataTableFileGetTable(*(int *)(param_1 + 0x2294),0);
               temp_v9 = dataTableGetEntries();
               temp_v3 = dataTableGetCount(temp_v2);
               temp_v5 = 0;
@@ -123,9 +123,9 @@ LAB_003ed39c:
             *puVar9 = temp_v2;
             puVar9[1] = temp_v12;
             puVar9[2] = temp_v15;
-            temp_v9 = DAT_00571508;
+            temp_v9 = g_btlCamera;
             temp_v2 = *(unsigned int *)(psVar5 + 0x16);
-            *(unsigned int *)(DAT_00571508 + 0xc) = temp_v2;
+            *(unsigned int *)(g_btlCamera + 0xc) = temp_v2;
             temp_v17 = *(float *)(psVar5 + 0x18) * (float)temp_v25;
             *(float *)(temp_v9 + 0x10) = temp_v17;
             *(unsigned int *)(temp_v9 + 0x14) = temp_v2;

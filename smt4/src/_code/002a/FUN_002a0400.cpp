@@ -13,9 +13,9 @@ typedef struct {
 } param_3_stack;
 
 extern unsigned int DAT_00464b7c; /* 0x464b7c */
-extern unsigned int DAT_00464b84; /* 0x464b84 */
+extern unsigned int g_asdModelTransformBuilder; /* 0x464b84 */
 extern int DAT_00464b8c; /* 0x464b8c */
-extern int DAT_004dad80; /* 0x4dad80 */
+extern int g_asdLightCount; /* 0x4dad80 */
 
 /* Supplied declaration required: FUN_0019df1c. */
 extern unsigned int *asdMdlManagerCreateFromSource(unsigned int, unsigned int, unsigned int);
@@ -49,8 +49,8 @@ void FUN_002a0400(int param_1,unsigned int param_2,unsigned int param_3)
   temp_v0 = puVar1[2];
   if (DAT_00464b8c != 0) {
     FUN_0019df1c(temp_v0);
-    sceneTraverserVisit(DAT_00464b7c,DAT_00464b84);
-    DAT_004dad80 = DAT_004dad80 + 1;
+    sceneTraverserVisit(DAT_00464b7c,g_asdModelTransformBuilder);
+    g_asdLightCount = g_asdLightCount + 1;
     *(unsigned int *)(temp_v0 + 0xc) = 1;
     *(unsigned int *)(temp_v0 + 0x10) = 1;
     *(unsigned int *)(temp_v0 + 0x14) = 0;

@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_001aea28(unsigned int, unsigned int);
+int ptrListRemoveClearOwner(unsigned int, unsigned int);
 
 typedef int romwright_code(...);
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
-extern int DAT_0057f290; /* 0x57f290 */
+extern unsigned int g_handleRegistry; /* 0x56fcc0 */
+extern int g_unite; /* 0x57f290 */
 
-/* Supplied declaration required: FUN_001aea28. */
+/* Supplied declaration required: ptrListRemoveClearOwner. */
 
 
 void FUN_0035de50(void)
@@ -20,12 +20,12 @@ void FUN_0035de50(void)
   int temp_v0;
   int *piVar2;
   
-  temp_v0 = DAT_0057f290;
-  if (DAT_0057f290 == 0) {
+  temp_v0 = g_unite;
+  if (g_unite == 0) {
     return;
   }
-  if (*(int *)(DAT_0057f290 + 0x920c) != 0) {
-    FUN_001aea28(DAT_0056fcc0,*(unsigned int *)(*(int *)(DAT_0057f290 + 0x920c) + 4));
+  if (*(int *)(g_unite + 0x920c) != 0) {
+    ptrListRemoveClearOwner(g_handleRegistry,*(unsigned int *)(*(int *)(g_unite + 0x920c) + 4));
     piVar2 = *(int **)(temp_v0 + 0x920c);
     if (piVar2 != (int *)0x0) {
       (**(romwright_code **)(*piVar2 + 4))();

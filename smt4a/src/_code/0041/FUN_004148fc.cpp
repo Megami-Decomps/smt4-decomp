@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002e9318(...);
+int onlineStringDestroy(...);
 int FUN_002e9590(...);
-int FUN_002e9afe(...);
+int vectorCopyHeader(...);
 int FUN_002ea100(...);
 int FUN_004130c0(...);
 
@@ -16,12 +16,12 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_2_stack;
 
-extern int FUN_0018719c(unsigned int);
-/* Supplied declaration required: FUN_002e9318. */
+extern int gameFlagIsSet(unsigned int);
+/* Supplied declaration required: onlineStringDestroy. */
 /* Supplied declaration required: FUN_002e9590. */
-/* Supplied declaration required: FUN_002e9afe. */
+/* Supplied declaration required: vectorCopyHeader. */
 /* Supplied declaration required: FUN_002ea100. */
-extern int FUN_002f4e86(int);
+extern int refIsNonNegative(int);
 /* Supplied declaration required: FUN_004130c0. */
 
 
@@ -39,8 +39,8 @@ void FUN_004148fc(int param_1,int param_2)
   temp_v3 = *(unsigned int *)(param_2 + 0x40);
   temp_v2 = *(unsigned int *)(param_2 + 0x38);
   uStack_24 = *(unsigned int *)(param_2 + 0x3c);
-  FUN_002e9afe(param_1 + 0x7c,&temp_v2);
-  temp_v0 = FUN_002f4e86(param_1 + 0x7c);
+  vectorCopyHeader(param_1 + 0x7c,&temp_v2);
+  temp_v0 = refIsNonNegative(param_1 + 0x7c);
   if (temp_v0 == 0) {
     *(unsigned char *)(param_1 + 0xfc) = 1;
   }
@@ -53,7 +53,7 @@ void FUN_004148fc(int param_1,int param_2)
           if ((*(int *)(temp_v0 + 0xa4) - *(int *)(temp_v0 + 0xa0)) >> 3 != 0) {
             FUN_002e9590(temp_v4);
           }
-          FUN_002e9318(temp_v4);
+          onlineStringDestroy(temp_v4);
         }
         temp_v0 = temp_v0 + 0xb8;
       } while (*(int *)(param_1 + 0xec) != temp_v0);
@@ -70,7 +70,7 @@ void FUN_004148fc(int param_1,int param_2)
         temp_v0 = temp_v0 + 0xb8;
       } while (*(int *)(param_1 + 0xec) != temp_v0);
     }
-    temp_v0 = FUN_0018719c(0x580);
+    temp_v0 = gameFlagIsSet(0x580);
     if ((temp_v0 == 0) && (*(int *)(param_1 + 0x90) != 0 || *(int *)(param_1 + 0x94) != 0)) {
       FUN_004130c0(param_1,5);
       return;

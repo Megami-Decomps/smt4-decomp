@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_00115998(int, unsigned int);
-int FUN_002ea446(int, int);
-int FUN_002eb588(unsigned char [8]);
+int onlineJobSetStateTimed(int, int);
+int onlineTimeGetNow(unsigned char [8]);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
@@ -17,8 +17,8 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00115998. */
 extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
-/* Supplied declaration required: FUN_002ea446. */
-/* Supplied declaration required: FUN_002eb588. */
+/* Supplied declaration required: onlineJobSetStateTimed. */
+/* Supplied declaration required: onlineTimeGetNow. */
 extern int FUN_002eba9c(unsigned char *, int);
 
 
@@ -48,10 +48,10 @@ void FUN_001159d0(int param_1)
     puVar4 = temp_v4;
   }
   else {
-    FUN_002eb588(temp_v2);
+    onlineTimeGetNow(temp_v2);
     temp_v0 = FUN_002eba9c(temp_v2,param_1 + 0x78);
     if (temp_v0 == 0) {
-      FUN_002ea446(param_1,100);
+      onlineJobSetStateTimed(param_1,100);
       return;
     }
     puVar4 = temp_v5;

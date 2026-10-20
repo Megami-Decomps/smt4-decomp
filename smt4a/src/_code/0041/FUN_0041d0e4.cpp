@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_00341930(unsigned int);
+extern int resourceIsReady(unsigned int);
 
 
 unsigned int FUN_0041d0e4(int param_1)
@@ -19,7 +19,7 @@ unsigned int FUN_0041d0e4(int param_1)
   temp_v1 = 0;
   do {
     temp_v2 = temp_v1 * 0x44 + 0x40;
-    temp_v0 = FUN_00341930(*(unsigned int *)(*(int *)(param_1 + 0x18) + temp_v2));
+    temp_v0 = resourceIsReady(*(unsigned int *)(*(int *)(param_1 + 0x18) + temp_v2));
     if (temp_v0 == 0) {
       temp_v3 = 0;
     }

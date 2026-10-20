@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_0030ea58(int, int);
+int libc_strcmp(int, int);
 
 extern int wstrlen(int);
-/* Supplied declaration required: FUN_0030ea58. */
+/* Supplied declaration required: libc_strcmp. */
 
 
 void FUN_00508650(int param_1,unsigned int param_2,int param_3)
@@ -50,7 +50,7 @@ void FUN_00508650(int param_1,unsigned int param_2,int param_3)
       if ((temp_v2 != 0xffffffff) && (param_1 = *(int *)(param_1 + 4) + param_1, param_1 != 0)) {
         temp_v3 = param_1 + *(int *)(param_1 + temp_v2 * 0xc + 8);
       }
-      FUN_0030ea58(param_3,temp_v3);
+      libc_strcmp(param_3,temp_v3);
     }
   }
   return;

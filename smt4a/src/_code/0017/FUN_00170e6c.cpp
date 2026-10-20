@@ -10,9 +10,9 @@ extern Global5891b0 DAT_005891b0;
 
 void FUN_0016e758(void);
 void FUN_00189938(void);
-s32 FUN_001c6e20(void);
+s32 nn_snd_CTR_Dspsnd_IsInitialized(void);
 
-/* Toggles the active state: with `deactivate` set, runs FUN_00189938 and clears `active` if it was set; otherwise, if FUN_001c6e20 allows it, runs FUN_0016e758 and sets `active`. */
+/* Toggles the active state: with `deactivate` set, runs FUN_00189938 and clears `active` if it was set; otherwise, if nn_snd_CTR_Dspsnd_IsInitialized allows it, runs FUN_0016e758 and sets `active`. */
 void FUN_00170e6c(s32 deactivate)
 {
     if (deactivate != 0) {
@@ -21,7 +21,7 @@ void FUN_00170e6c(s32 deactivate)
             DAT_005891b0.active = 0;
         }
     } else {
-        if (FUN_001c6e20() != 0) {
+        if (nn_snd_CTR_Dspsnd_IsInitialized() != 0) {
             FUN_0016e758();
             DAT_005891b0.active = 1;
         }

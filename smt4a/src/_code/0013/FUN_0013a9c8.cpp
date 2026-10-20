@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00145084(int);
 int FUN_001640cc(int *);
-int FUN_0016c410(unsigned int);
+int renderCtxResetColorScale(unsigned int);
 int FUN_0016c4b8(unsigned int, unsigned int);
 int FUN_0016c560(unsigned int);
 int VectorSignedToFloat(int, int);
@@ -30,7 +30,7 @@ extern int FUN_00144eec(void);
 /* Supplied declaration required: FUN_00145084. */
 extern unsigned int FUN_00153f64(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001640cc. */
-/* Supplied declaration required: FUN_0016c410. */
+/* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: FUN_0016c4b8. */
 /* Supplied declaration required: FUN_0016c560. */
 
@@ -69,7 +69,7 @@ unsigned int FUN_0013a9c8(void)
       FUN_0016c4b8(g_renderCtx,temp_v0);
       FUN_001640cc(&temp_v2);
       FUN_0016c560(g_renderCtx);
-      FUN_0016c410(g_renderCtx);
+      renderCtxResetColorScale(g_renderCtx);
     }
     temp_v1 = FUN_00144eec();
     DAT_0057ffe4 = (DAT_0057ffe4 - temp_v1) - 1;

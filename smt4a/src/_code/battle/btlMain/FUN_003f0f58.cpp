@@ -7,7 +7,7 @@ extern "C" {
 int asdOperatorNew(...);
 int memAlloc(...);
 int FUN_0016dfc4(...);
-int FUN_00188b60(...);
+int nn_os_CriticalSection_Initialize(...);
 int FUN_002e3140(...);
 int FUN_002fb0d4(...);
 int software_interrupt(...);
@@ -32,7 +32,7 @@ extern unsigned char LAB_00514b74; /* 0x514b74 */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_0016dfc4. */
-/* Supplied declaration required: FUN_00188b60. */
+/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
 /* Supplied declaration required: FUN_002e3140. */
 /* Supplied declaration required: FUN_002fb0d4. */
 
@@ -52,7 +52,7 @@ void FUN_003f0f58(int param_1)
   unsigned char *temp_v5;
   int temp_v6 [2];
   
-  FUN_00188b60(param_1 + 0x4d0c);
+  nn_os_CriticalSection_Initialize(param_1 + 0x4d0c);
   if (*(int *)(param_1 + 0x4d00) == 0) {
     temp_v0 = 0x100;
     memAlloc(0x100,0x100,0,0x1000,0x1000,1);

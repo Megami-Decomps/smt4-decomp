@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_002e6e14(...);
-int FUN_002efb6c(...);
+int asdOperatorDeleteArray(...);
+int bitFieldSet(...);
 int FUN_002f1840(...);
 int FUN_00307632(...);
 int FUN_0030769c(int *, int *, int);
@@ -37,19 +37,19 @@ typedef struct {
     unsigned int sp68; /* 0x68: local_68 */
 } param_5_stack;
 
-/* Supplied declaration required: FUN_002e6e14. */
-/* Supplied declaration required: FUN_002efb6c. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
+/* Supplied declaration required: bitFieldSet. */
 extern int FUN_002f182e(int *, int);
 /* Supplied declaration required: FUN_002f1840. */
 /* Supplied declaration required: FUN_00307632. */
 /* Supplied declaration required: FUN_0030769c. */
-extern int FUN_003076b6(int *, int *);
+extern int pairIsDifferent(int *, int *);
 /* Supplied declaration required: FUN_003076d2. */
 /* Supplied declaration required: FUN_003076e6. */
 extern unsigned int FUN_003076f0(int *);
 /* Supplied declaration required: FUN_00307704. */
 /* Supplied declaration required: FUN_00307e74. */
-extern int FUN_00307ea0(int *, int, int);
+extern int bitIteratorDistance(int *, int, int);
 
 
 void FUN_00134ffe(int *param_1,int param_2,int param_3,int *param_4,char *param_5)
@@ -90,7 +90,7 @@ void FUN_00134ffe(int *param_1,int param_2,int param_3,int *param_4,char *param_
     temp_v19 = param_2;
     temp_v20 = param_3;
     piStack_18 = param_4;
-    temp_v0 = FUN_00307ea0(&temp_v6,*param_1,param_1[1]);
+    temp_v0 = bitIteratorDistance(&temp_v6,*param_1,param_1[1]);
     piVar5 = param_1;
     FUN_00307704();
     if ((int *)(temp_v0 - (int)piVar5) >= param_4) {
@@ -101,7 +101,7 @@ void FUN_00134ffe(int *param_1,int param_2,int param_3,int *param_4,char *param_
       FUN_002f1840(&temp_v9,param_1 + 2,param_4);
       temp_v16 = temp_v10;
       temp_v15 = temp_v9;
-      while (temp_v0 = FUN_003076b6(&temp_v11,&temp_v13), temp_v0 != 0) {
+      while (temp_v0 = pairIsDifferent(&temp_v11,&temp_v13), temp_v0 != 0) {
         temp_v1 = FUN_003076f0(&temp_v13);
         FUN_003076e6(&temp_v7,temp_v1);
         temp_v3 = temp_v7;
@@ -117,14 +117,14 @@ void FUN_00134ffe(int *param_1,int param_2,int param_3,int *param_4,char *param_
       FUN_002f1840(&temp_v5,&temp_v19,param_4);
       temp_v14 = temp_v6;
       temp_v13 = temp_v5;
-      while (temp_v0 = FUN_003076b6(&temp_v9,&temp_v13), temp_v0 != 0) {
+      while (temp_v0 = pairIsDifferent(&temp_v9,&temp_v13), temp_v0 != 0) {
         FUN_0030769c(&temp_v11,&temp_v9,0);
         temp_v8 = temp_v12;
         temp_v7 = temp_v11;
         FUN_003076e6(&temp_v3,&temp_v7);
         temp_v15 = temp_v3;
         temp_v16 = temp_v4;
-        FUN_002efb6c(&temp_v15,(int)*param_5);
+        bitFieldSet(&temp_v15,(int)*param_5);
       }
       FUN_00307e74(param_1 + 2,param_4);
     }
@@ -154,7 +154,7 @@ void FUN_00134ffe(int *param_1,int param_2,int param_3,int *param_4,char *param_
         FUN_003076e6(&temp_v3,&temp_v5);
         temp_v16 = temp_v3;
         temp_v17 = temp_v4;
-        FUN_002efb6c(&temp_v16,(int)*param_5);
+        bitFieldSet(&temp_v16,(int)*param_5);
       }
       FUN_002f1840(&temp_v12,&temp_v8,param_4);
       temp_v3 = param_1[3];
@@ -163,7 +163,7 @@ void FUN_00134ffe(int *param_1,int param_2,int param_3,int *param_4,char *param_
       FUN_00307632(&temp_v6,param_1,temp_v19,temp_v20,param_1[2]);
       param_1[3] = temp_v7;
       param_1[2] = temp_v6;
-      FUN_002e6e14(*param_1);
+      asdOperatorDeleteArray(*param_1);
       param_1[4] = ((temp_v11 + 0x1fU) >> 5) * 4 + temp_v0;
       *param_1 = temp_v0;
       param_1[1] = 0;

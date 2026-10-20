@@ -13,7 +13,7 @@ int FUN_00283e48(...);
 int dataTable06Sub1GetRecord(...);
 int FUN_002ae164(...);
 int FUN_002b7bca(...);
-int FUN_002b9024(...);
+int devilGetRecord(...);
 int asdMemFree(...);
 int memClear(...);
 int asdMemoryAlloc(...);
@@ -59,7 +59,7 @@ extern int FUN_0029903c(unsigned short, unsigned int);
 /* Supplied declaration required: dataTable06Sub1GetRecord. */
 /* Supplied declaration required: FUN_002ae164. */
 /* Supplied declaration required: FUN_002b7bca. */
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: asdMemoryAlloc. */
@@ -125,7 +125,7 @@ void FUN_0029b130(int param_1,int param_2,int param_3,unsigned short *param_4)
   temp_v13 = temp_v2;
   asdMemoryAlloc(0x100,0x100,0,temp_v9,1);
   temp_v19 = temp_v1;
-  FUN_002b9024();
+  devilGetRecord();
   temp_v8[0] = 0;
   temp_v8[1] = 0;
   temp_v1 = 0;

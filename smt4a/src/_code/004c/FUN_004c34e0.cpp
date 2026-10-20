@@ -7,8 +7,8 @@ extern "C" {
 int btlGetMainState(...);
 int FUN_001568f8(...);
 int FUN_00192550(void);
-int FUN_001ab854(...);
-int FUN_001aba54(void);
+int gameGetSlotRecord(...);
+int dataTable04FindById(void);
 int FUN_003e8bb0(...);
 int FUN_003f0e20(...);
 int FUN_004c4178(unsigned int, unsigned int, int, int, int);
@@ -49,8 +49,8 @@ extern unsigned int DAT_005714fc; /* 0x5714fc */
 /* Supplied declaration required: FUN_001568f8. */
 extern int lcgRandomRange(unsigned int);
 /* Supplied declaration required: FUN_00192550. */
-/* Supplied declaration required: FUN_001ab854. */
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: gameGetSlotRecord. */
+/* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: FUN_003e8bb0. */
 /* Supplied declaration required: FUN_003f0e20. */
 extern int FUN_004bd098(unsigned int, int);
@@ -99,7 +99,7 @@ unsigned int FUN_004c34e0(int param_1,unsigned int param_2,unsigned int param_3,
   iStack_28 = param_4;
   puVar2 = (unsigned int *)btlGetMainState();
   temp_v4 = temp_v21;
-  FUN_001aba54();
+  dataTable04FindById();
   FUN_00192550();
   puVar3 = puVar2;
   FUN_003f0e20(puVar2,param_5);
@@ -207,7 +207,7 @@ unsigned int FUN_004c34e0(int param_1,unsigned int param_2,unsigned int param_3,
       temp_v6 = (unsigned int)(temp_v8 * temp_v9);
     }
     else {
-      temp_v3 = FUN_001ab854(param_6 - 0x6d);
+      temp_v3 = gameGetSlotRecord(param_6 - 0x6d);
       temp_v8 = (float)VectorSignedToFloat((int)*(short *)(temp_v3 + 0x10) *
                                           (int)(short)(unsigned short)*(unsigned char *)(param_4 + 0x39),
                                           (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -223,7 +223,7 @@ unsigned int FUN_004c34e0(int param_1,unsigned int param_2,unsigned int param_3,
     }
   }
   else {
-    temp_v5 = FUN_001ab854(param_6 - 0x6d);
+    temp_v5 = gameGetSlotRecord(param_6 - 0x6d);
     temp_v3 = bitsAt60Test(temp_v5,3);
     temp_v7 = temp_v3 != 0;
     temp_v3 = 0;
@@ -238,7 +238,7 @@ unsigned int FUN_004c34e0(int param_1,unsigned int param_2,unsigned int param_3,
     return temp_v6;
   }
   if (param_6 >= 0x6d) {
-    temp_v3 = FUN_001ab854(param_6 - 0x6d);
+    temp_v3 = gameGetSlotRecord(param_6 - 0x6d);
     return (int)*(short *)(temp_v3 + 0x10);
   }
   FUN_001568f8(puVar2,param_6);

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00147a7c(...);
+int nnosConvertVirtToPhys(...);
 int FUN_002a688c(int);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
@@ -16,7 +16,7 @@ typedef struct {
 extern int DAT_004655c0; /* 0x4655c0 */
 extern int DAT_004655f0; /* 0x4655f0 */
 
-/* Supplied declaration required: FUN_00147a7c. */
+/* Supplied declaration required: nnosConvertVirtToPhys. */
 /* Supplied declaration required: FUN_002a688c. */
 
 
@@ -49,7 +49,7 @@ void FUN_00142a5c(void)
   if (*piVar5 != 0) {
     if (*(int *)(DAT_004655f0 + 0x80c) != 0) {
       puVar7 = *(unsigned int **)(*(int *)(DAT_004655f0 + 0x80c) + 8);
-      temp_v1 = FUN_00147a7c(*puVar7);
+      temp_v1 = nnosConvertVirtToPhys(*puVar7);
       *puVar9 = temp_v1;
       *(unsigned int *)(temp_v0 + 0x6e8) = puVar7[2];
     }
@@ -72,13 +72,13 @@ void FUN_00142a5c(void)
           piVar5 = *(int **)(temp_v3 + 8);
           puVar7 = (unsigned int *)(DAT_004655c0 + 0x6a0);
           if (temp_v4 == 0x10) {
-            temp_v1 = FUN_00147a7c(*piVar5);
+            temp_v1 = nnosConvertVirtToPhys(*piVar5);
             *puVar7 = temp_v1;
             *(int *)(temp_v2 + 0x6e8) = piVar5[2];
             return;
           }
           piVar3 = (int *)(DAT_004655c0 + 0x458 + temp_v4 * 0x18);
-          temp_v1 = FUN_00147a7c(*piVar5 + *piVar3);
+          temp_v1 = nnosConvertVirtToPhys(*piVar5 + *piVar3);
           puVar7[temp_v4 + 1] = temp_v1;
           puVar7[temp_v4 + 0x13] = *piVar3 + piVar5[2];
           temp_v2 = piVar3[2];

@@ -10,7 +10,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_3_stack;
 
-extern unsigned int FUN_002c30c4(int);
+extern unsigned int libc_strlen(int);
 extern int nw_ut_ResDicPatricia_Get(int *, int, unsigned int);
 
 
@@ -42,7 +42,7 @@ unsigned int FUN_002adde8(int param_1,int param_2,unsigned int *param_3)
     temp_v5 = temp_v4 + temp_v0 + 0x1c;
   }
   if (temp_v5 != 0 && param_2 != 0) {
-    temp_v1 = FUN_002c30c4(param_2);
+    temp_v1 = libc_strlen(param_2);
     temp_v0 = nw_ut_ResDicPatricia_Get(&temp_v5,param_2,temp_v1);
     if ((temp_v0 != 0) && (temp_v0 = ((temp_v0 - temp_v5) - 0x1c) >> 4, -1 < temp_v0)) {
       temp_v4 = (**(romwright_code **)(**(int **)(*(int *)(param_1 + 0x2c) + 0x220) + 0x1c))();

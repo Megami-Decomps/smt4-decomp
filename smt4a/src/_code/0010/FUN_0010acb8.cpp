@@ -13,7 +13,7 @@ int FUN_002e6e5c(int *);
 #endif
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-extern unsigned int FUN_002ea714(void);
+extern unsigned int onlineGetActiveLock(void);
 
 
 unsigned long long FUN_0010acb8(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -29,7 +29,7 @@ unsigned long long FUN_0010acb8(int param_1,unsigned int param_2,unsigned int pa
   uStack_18 = param_2;
   uStack_14 = param_3;
   uStack_10 = param_4;
-  temp_v0 = FUN_002ea714();
+  temp_v0 = onlineGetActiveLock();
   FUN_002e6e34(&uStack_18,temp_v0);
   temp_v1 = *(int *)(param_1 + 0x3c);
   FUN_002e6e5c(&uStack_18);

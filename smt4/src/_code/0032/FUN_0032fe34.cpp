@@ -8,8 +8,8 @@ int CONCAT44(unsigned int, double);
 int FUN_00262210(...);
 int FUN_002963ec(...);
 int FUN_002b93c8(...);
-int FUN_002bed98(...);
-int FUN_002beda4(...);
+int vec2GetYInt(...);
+int vec2GetXInt(...);
 int FUN_002bf288(...);
 int FUN_002bf538(void);
 int FUN_003881b0(unsigned int, unsigned int, unsigned int, int);
@@ -32,8 +32,8 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002963ec. */
 extern int FUN_002ae98c(unsigned int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002b93c8. */
-/* Supplied declaration required: FUN_002bed98. */
-/* Supplied declaration required: FUN_002beda4. */
+/* Supplied declaration required: vec2GetYInt. */
+/* Supplied declaration required: vec2GetXInt. */
 /* Supplied declaration required: FUN_002bf288. */
 extern int FUN_002bf4f8(unsigned int, int);
 /* Supplied declaration required: FUN_002bf538. */
@@ -129,9 +129,9 @@ void FUN_0032fe34(int param_1)
   case 4:
     FUN_002b93c8(param_1 + 0x20);
     if (*(char *)(param_1 + 0x2f5) != '\0') {
-      temp_v5 = FUN_002beda4(param_1 + 0x20);
+      temp_v5 = vec2GetXInt(param_1 + 0x20);
       temp_v14 = CONCAT44(temp_v5,in_s0);
-      temp_v8 = FUN_002bed98(param_1 + 0x20);
+      temp_v8 = vec2GetYInt(param_1 + 0x20);
       temp_v6 = 0;
       temp_v15 = 0;
       do {
@@ -223,9 +223,9 @@ void FUN_0032fe34(int param_1)
     FUN_002b93c8(param_1 + 0x20);
     if (*(char *)(param_1 + 0x2f5) == '\0') break;
     temp_v11 = *(unsigned int *)(param_1 + 0xb0);
-    temp_v5 = FUN_002beda4(param_1 + 0x20);
+    temp_v5 = vec2GetXInt(param_1 + 0x20);
     temp_v14 = CONCAT44(temp_v5,in_s0);
-    temp_v5 = FUN_002bed98(param_1 + 0x20);
+    temp_v5 = vec2GetYInt(param_1 + 0x20);
     FUN_002bf538();
     temp_v8 = g_titleScene;
     temp_v6 = packNibblesAndByte(6,1,0);
@@ -254,8 +254,8 @@ void FUN_0032fe34(int param_1)
   case 0x12:
     FUN_002b93c8(param_1 + 0x20);
     if (*(char *)(param_1 + 0x2f5) == '\0') break;
-    temp_v1 = FUN_002beda4(param_1 + 0x20);
-    temp_v2 = FUN_002bed98(param_1 + 0x20);
+    temp_v1 = vec2GetXInt(param_1 + 0x20);
+    temp_v2 = vec2GetYInt(param_1 + 0x20);
     FUN_00262210(param_1 + 0xac,0x18,*(int *)(param_1 + 0xb0) - 1);
     FUN_002963ec(param_1 + 0xac,(int)temp_v1,(int)temp_v2);
     temp_v8 = g_titleScene;
@@ -351,9 +351,9 @@ void FUN_0032fe34(int param_1)
     if (*(char *)(param_1 + 0x2f5) == '\0') break;
     FUN_002b93c8(param_1 + 0xac);
     temp_v11 = *(unsigned int *)(param_1 + 0x13c);
-    temp_v5 = FUN_002beda4(param_1 + 0x20);
+    temp_v5 = vec2GetXInt(param_1 + 0x20);
     temp_v14 = CONCAT44(temp_v5,in_s0);
-    temp_v5 = FUN_002bed98(param_1 + 0x20);
+    temp_v5 = vec2GetYInt(param_1 + 0x20);
     FUN_002bf538();
     temp_v8 = g_titleScene;
     temp_v6 = packNibblesAndByte(6,1,0);
@@ -383,8 +383,8 @@ void FUN_0032fe34(int param_1)
     if (*(char *)(param_1 + 0x2f5) == '\0') break;
 LAB_00330840:
     temp_v10 = *(unsigned int *)(param_1 + 0xb0);
-    temp_v5 = FUN_002beda4(param_1 + 0x20);
-    temp_v11 = FUN_002bed98(param_1 + 0x20);
+    temp_v5 = vec2GetXInt(param_1 + 0x20);
+    temp_v11 = vec2GetYInt(param_1 + 0x20);
     FUN_002bf538();
     temp_v12 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_002bf288(2,0x18,temp_v10,(int)(temp_v12 + in_s0),temp_v11,0xc9);
@@ -393,9 +393,9 @@ LAB_00330840:
   case 0x13:
     if (*(char *)(param_1 + 0x2f5) != '\0') {
       temp_v11 = *(unsigned int *)(param_1 + 0xb0);
-      temp_v5 = FUN_002beda4(param_1 + 0x20);
+      temp_v5 = vec2GetXInt(param_1 + 0x20);
       temp_v14 = CONCAT44(temp_v5,in_s0);
-      temp_v5 = FUN_002bed98(param_1 + 0x20);
+      temp_v5 = vec2GetYInt(param_1 + 0x20);
       temp_v8 = g_titleScene;
       temp_v6 = packNibblesAndByte(6,1,0);
       piVar11 = (int *)(temp_v8 + 0x12ac);

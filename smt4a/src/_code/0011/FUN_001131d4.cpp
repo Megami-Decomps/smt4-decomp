@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e9538(int, unsigned int *);
+int onlineSockAddrCopy(int, unsigned int *);
 int FUN_002ea3d0(int, unsigned int);
 int FUN_002fdbec(void);
 
@@ -17,7 +17,7 @@ typedef struct {
 extern unsigned char LAB_00112a0d; /* 0x112a0d */
 extern unsigned char LAB_00113268; /* 0x113268 */
 
-/* Supplied declaration required: FUN_002e9538. */
+/* Supplied declaration required: onlineSockAddrCopy. */
 extern unsigned int FUN_002ea3c0(unsigned int **, unsigned char *, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
 extern int wordRefsDiffer_002fd750(unsigned int **, unsigned int *);
@@ -57,7 +57,7 @@ void FUN_001131d4(int param_1)
           ((unsigned short)((*(unsigned short *)((int)temp_v4 + 0xe) << 8) |
                    (*(unsigned short *)((int)temp_v4 + 0xe) >> 8)) !=
            (unsigned short)((*(unsigned short *)(param_1 + 0x2f6) << 8) | (*(unsigned short *)(param_1 + 0x2f6) >> 8))));
-  FUN_002e9538(param_1 + 0x2f0,temp_v4 + 2);
+  onlineSockAddrCopy(param_1 + 0x2f0,temp_v4 + 2);
   *(unsigned int *)(param_1 + 0x2d0) = 4;
   puVar5 = (unsigned char *)0x112dd1;
   temp_v3 = FUN_002ea3c0(&temp_v4,puVar5,0,&LAB_00113268);

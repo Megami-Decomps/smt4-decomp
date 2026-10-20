@@ -23,7 +23,7 @@ extern int FUN_00231184(void);
 /* Supplied declaration required: FUN_0025a0e0. */
 /* Supplied declaration required: FUN_00275f00. */
 /* Supplied declaration required: FUN_00289880. */
-extern int FUN_002c09d0(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 
 
 void FUN_0039ca70(fn_0039ca70_arg0 *param_1)
@@ -52,7 +52,7 @@ void FUN_0039ca70(fn_0039ca70_arg0 *param_1)
   else {
     if ((*(signed char *)((unsigned char *)&g_gameState + 0x251)) != '\0') {
       (*(signed char *)((unsigned char *)&g_gameState + 0x251)) = '\0';
-      temp_v0 = FUN_002c09d0(0x16);
+      temp_v0 = gameFlagIsSet(0x16);
       if (temp_v0 != 0) {
         FUN_0025a0e0();
       }

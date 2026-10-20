@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_3_stack;
 
-extern unsigned char DAT_0062d630; /* 0x62d630 */
+extern unsigned char g_nnosAddressSpaceManagerApplication; /* 0x62d630 */
 
 /* Supplied declaration required: FUN_0016236c. */
 /* Supplied declaration required: FUN_0017e1c0. */
@@ -38,7 +38,7 @@ unsigned char * FUN_0016dfe0(int param_1,unsigned int param_2,unsigned int param
     puVar1 = (unsigned char *)0xe0e01bf1;
   }
   else {
-    temp_v0 = FUN_001a0af0(&DAT_0062d630,param_1,param_3,0x1000);
+    temp_v0 = FUN_001a0af0(&g_nnosAddressSpaceManagerApplication,param_1,param_3,0x1000);
     if (temp_v0 == 0) {
       puVar1 = (unsigned char *)0xd8601837;
     }
@@ -51,12 +51,12 @@ unsigned char * FUN_0016dfe0(int param_1,unsigned int param_2,unsigned int param
         FUN_0016236c(puVar1,*(unsigned int *)(param_1 + 0x14),0,param_3,6,0);
         if ((int)puVar1 < 0) {
           temp_v1 = *(unsigned int *)(param_1 + 0x14);
-          FUN_0017e1c0(&DAT_0062d630,param_1);
+          FUN_0017e1c0(&g_nnosAddressSpaceManagerApplication,param_1);
           FUN_0016236c(temp_v2,temp_v0,temp_v1,param_3,5,3);
         }
         return puVar1;
       }
-      FUN_0017e1c0(&DAT_0062d630,param_1);
+      FUN_0017e1c0(&g_nnosAddressSpaceManagerApplication,param_1);
     }
   }
   return puVar1;

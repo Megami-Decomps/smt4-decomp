@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00100388(int *, unsigned char *);
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 int FUN_0020d164(int *, unsigned int);
 int FUN_00230c1c(int *, unsigned int);
 int FUN_002a1f60(unsigned int, int, unsigned int, int);
@@ -23,8 +23,8 @@ extern int DAT_0057f0c8; /* 0x57f0c8 */
 
 /* Supplied declaration required: FUN_00100388. */
 extern unsigned int FUN_0016a0e8(void);
-extern int FUN_0019c6bc(int);
-/* Supplied declaration required: FUN_001aba54. */
+extern int idIsAbove400(int);
+/* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: FUN_0020d164. */
 /* Supplied declaration required: FUN_00230c1c. */
 /* Supplied declaration required: FUN_002a1f60. */
@@ -51,7 +51,7 @@ void FUN_00359b6c(int param_1)
     *(unsigned char *)(DAT_0057f0c8 + 0x67c) = 1;
     *(unsigned char *)(temp_v0 + 0x5ea) = 1;
     temp_v1 = FUN_0016a0e8();
-    temp_v2 = FUN_0019c6bc(param_1);
+    temp_v2 = idIsAbove400(param_1);
     if (temp_v2 != 0) {
       temp_v2 = param_1;
       FUN_0034a290();
@@ -62,7 +62,7 @@ void FUN_00359b6c(int param_1)
     }
     else {
       temp_v2 = param_1;
-      FUN_001aba54();
+      dataTable04FindById();
       FUN_0020d164(&temp_v3,(*(unsigned int *)(temp_v2 + 0x28) & 0xffff) >> 0xb);
       FUN_003180c4(0x24,&temp_v3);
       FUN_00230c1c(&temp_v3,(*(unsigned int *)(temp_v2 + 0x28) & 0x1ff) >> 5);

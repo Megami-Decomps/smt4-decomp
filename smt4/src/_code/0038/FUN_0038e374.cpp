@@ -27,9 +27,9 @@ extern unsigned int g_aocMain; /* 0x432fc8 */
 /* Supplied declaration required: FUN_002340e4. */
 /* Supplied declaration required: FUN_00234124. */
 /* Supplied declaration required: FUN_002341d4. */
-extern int FUN_0027ea14(unsigned int *);
+extern int strIsEmpty(unsigned int *);
 extern int FUN_002a12d8(unsigned int *);
-extern int FUN_002a1520(unsigned int *);
+extern int byteIsAtLeast100(unsigned int *);
 
 
 void FUN_0038e374(int param_1)
@@ -121,13 +121,13 @@ void FUN_0038e374(int param_1)
     uStack_48 = uStack_34;
     uStack_44 = temp_v5;
     uStack_40 = uStack_2c;
-    temp_v0 = FUN_0027ea14(&temp_v2);
+    temp_v0 = strIsEmpty(&temp_v2);
     if (temp_v0 != 0) {
       temp_v1 = 2;
       *(unsigned int *)(param_1 + 8) = temp_v1;
       return;
     }
-    temp_v0 = FUN_002a1520(&temp_v2);
+    temp_v0 = byteIsAtLeast100(&temp_v2);
   }
   else {
     (**(romwright_code **)(**(int **)(param_1 + 0x208) + 0xc))(&temp_v3);
@@ -136,13 +136,13 @@ void FUN_0038e374(int param_1)
     uStack_48 = uStack_34;
     uStack_44 = temp_v5;
     uStack_40 = uStack_2c;
-    temp_v0 = FUN_0027ea14(&temp_v2);
+    temp_v0 = strIsEmpty(&temp_v2);
     if (temp_v0 != 0) {
       temp_v1 = 4;
       *(unsigned int *)(param_1 + 8) = temp_v1;
       return;
     }
-    temp_v0 = FUN_002a1520(&temp_v2);
+    temp_v0 = byteIsAtLeast100(&temp_v2);
   }
   if (temp_v0 == 0) {
     return;

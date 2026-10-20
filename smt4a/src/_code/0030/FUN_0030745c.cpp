@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_001340c6(int *, int, int, unsigned int);
-int FUN_002e9318(unsigned char [8]);
-int FUN_002ea0c8(...);
+int onlineStringDestroy(unsigned char [8]);
+int onlineStringSetFromRaw(...);
 int FUN_002ea2e8(unsigned char [4]);
 int FUN_002ea3a8(unsigned char [4]);
 int FUN_002ee818(unsigned char [4], unsigned int);
@@ -26,13 +26,13 @@ extern unsigned char LAB_00307540; /* 0x307540 */
 extern unsigned char LAB_00307544; /* 0x307544 */
 
 /* Supplied declaration required: FUN_001340c6. */
-extern unsigned int FUN_002e9300(unsigned char *, unsigned char *);
-/* Supplied declaration required: FUN_002e9318. */
-/* Supplied declaration required: FUN_002ea0c8. */
+extern unsigned int onlineStringConstruct(unsigned char *, unsigned char *);
+/* Supplied declaration required: onlineStringDestroy. */
+/* Supplied declaration required: onlineStringSetFromRaw. */
 /* Supplied declaration required: FUN_002ea2e8. */
 /* Supplied declaration required: FUN_002ea3a8. */
 /* Supplied declaration required: FUN_002ee818. */
-extern unsigned int FUN_002f32dc(unsigned char *);
+extern unsigned int inlineBufferReset(unsigned char *);
 /* Supplied declaration required: FUN_002f76ca. */
 /* Supplied declaration required: FUN_0030edec. */
 /* Supplied declaration required: vectorCount8_0030fcf6. */
@@ -58,7 +58,7 @@ void FUN_0030745c(unsigned int param_1,int *param_2)
   unsigned int temp_v8;
   unsigned char temp_v9 [8];
   
-  temp_v6 = FUN_002e9300(temp_v9,&LAB_00307540);
+  temp_v6 = onlineStringConstruct(temp_v9,&LAB_00307540);
   temp_v0 = vectorCount8_0030fcf6(param_2);
   if (temp_v0 < 6) {
     temp_v3 = param_2[1];
@@ -71,7 +71,7 @@ void FUN_0030745c(unsigned int param_1,int *param_2)
       FUN_0030edec(param_2,*param_2 + 0x30,param_2[1]);
     }
   }
-  FUN_002e9318(temp_v9);
+  onlineStringDestroy(temp_v9);
   FUN_002f76ca(*param_2,&LAB_00307544);
   FUN_002ea2e8(temp_v7);
   temp_v2 = FUN_0043126c();
@@ -79,20 +79,20 @@ void FUN_0030745c(unsigned int param_1,int *param_2)
   FUN_002f76ca(*param_2 + 8,temp_v8);
   temp_v1 = lookupTable5B47D0(temp_v2);
   if (temp_v1 != 0) {
-    FUN_002ea0c8(*param_2 + 0x10);
+    onlineStringSetFromRaw(*param_2 + 0x10);
   }
-  temp_v2 = FUN_002f32dc(temp_v7);
+  temp_v2 = inlineBufferReset(temp_v7);
   FUN_00430f5c();
   FUN_002ee818(temp_v7,temp_v2);
   FUN_002f76ca(*param_2 + 0x18,temp_v8);
   temp_v1 = lookupTable5B44A4(temp_v2);
   if (temp_v1 != 0) {
-    FUN_002ea0c8(*param_2 + 0x20);
+    onlineStringSetFromRaw(*param_2 + 0x20);
   }
   temp_v1 = FUN_00426684(temp_v4);
   if (-1 < temp_v1) {
     temp_v5 = 0;
-    FUN_002ea0c8(*param_2 + 0x28,temp_v4);
+    onlineStringSetFromRaw(*param_2 + 0x28,temp_v4);
   }
   FUN_002ea3a8(temp_v7);
   return;

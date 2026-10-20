@@ -8,13 +8,13 @@ struct State00471a70 {
     /* 0x1c */ u32 handle;
 };
 
-extern State00471a70 DAT_00471a70;
+extern State00471a70 g_nngxState;
 
 void FUN_0013b3f4(u32 handle);
 
 void FUN_00129b04(void)
 {
-    FUN_0013b3f4(DAT_00471a70.handle);
+    FUN_0013b3f4(g_nngxState.handle);
 }
 
 }

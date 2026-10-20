@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_001641c4(void);
+int ifTouchRegionRemove(void);
 int sysPlaySe(...);
 int FUN_00168980(int);
 int FUN_0019de98(int, unsigned int);
 int FUN_0023b45c(int);
-int FUN_00275f44(unsigned int, int);
+int scrScriptProcessStartEntry(unsigned int, int);
 int FUN_002c7ce8(int);
 int FUN_002c8538(int);
 int FUN_002c85b0(int);
@@ -24,13 +24,13 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_001641c4. */
+/* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00168980. */
 /* Supplied declaration required: FUN_0019de98. */
-extern unsigned int *FUN_001ab888(void);
+extern unsigned int *gameGetSlotTable(void);
 /* Supplied declaration required: FUN_0023b45c. */
-/* Supplied declaration required: FUN_00275f44. */
+/* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_002c7ce8. */
 /* Supplied declaration required: FUN_002c8538. */
 /* Supplied declaration required: FUN_002c85b0. */
@@ -61,7 +61,7 @@ void FUN_0020b490(int param_1,unsigned int param_2)
   temp_v2 = 0;
   if (temp_v2 < *(short *)(param_1 + 0x43b4)) {
     do {
-      FUN_001641c4();
+      ifTouchRegionRemove();
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < *(short *)(param_1 + 0x43b4));
   }
@@ -121,10 +121,10 @@ LAB_0020b584:
       FUN_0033449c(0);
       FUN_00333f6c();
       temp_v0 = gameDataBlocksGetWord();
-      if ((temp_v0 != 0) && (puVar2 = (unsigned int *)FUN_001ab888(), temp_v0 <= *puVar2)) {
+      if ((temp_v0 != 0) && (puVar2 = (unsigned int *)gameGetSlotTable(), temp_v0 <= *puVar2)) {
         *(unsigned int *)(param_1 + 0x4364) = 0x16;
         sysPlaySe(0x92);
-        FUN_00275f44(*(unsigned int *)(param_1 + 0x43a0),5);
+        scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x43a0),5);
         return;
       }
       FUN_00387ac4(0);

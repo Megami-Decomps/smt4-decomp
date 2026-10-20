@@ -24,7 +24,7 @@ extern int asdModelProcessShutdown(...); /* 0x13ea8c */
 extern unsigned char LAB_001400f8; /* 0x1400f8 */
 extern unsigned char LAB_00141260; /* 0x141260 */
 extern int FUN_00141270(...); /* 0x141270 */
-extern unsigned char *DAT_005b3cd4; /* 0x5b3cd4 */
+extern unsigned char *g_asdModelProcess; /* 0x5b3cd4 */
 
 /* Supplied declaration required: FUN_00141870. */
 /* Supplied declaration required: asdMdlManagerStart. */
@@ -46,7 +46,7 @@ unsigned char * FUN_00138b18(int param_1,unsigned int param_2,unsigned int param
   if (puVar1 != (unsigned int *)0x0) {
     puVar2 = &LAB_00138c58;
     asdProcessCreateSimple(&LAB_00138c58,param_1,0,0,&LAB_001400f8,asdModelProcessShutdown,puVar1);
-    DAT_005b3cd4 = puVar2;
+    g_asdModelProcess = puVar2;
     if (puVar2 == (unsigned char *)0x0) {
       asdMemFree(puVar1);
       return (unsigned char *)0x0;
@@ -61,7 +61,7 @@ unsigned char * FUN_00138b18(int param_1,unsigned int param_2,unsigned int param
     asdMdlManagerStart();
     puVar2 = (unsigned char *)0x0;
     if (param_1 != 0) {
-      puVar2 = DAT_005b3cd4;
+      puVar2 = g_asdModelProcess;
     }
   }
   return puVar2;

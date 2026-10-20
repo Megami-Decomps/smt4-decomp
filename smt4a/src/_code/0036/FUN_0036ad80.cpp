@@ -30,7 +30,7 @@ extern unsigned int DAT_005f1ba8; /* 0x5f1ba8 */
 extern unsigned int DAT_005f1bac; /* 0x5f1bac */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_00162e8c(void);
+extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_00352d30. */
 
 
@@ -43,7 +43,7 @@ void FUN_0036ad80(int *param_1)
   unsigned int in_fpscr;
   
   temp_v1 = *param_1;
-  temp_v0 = FUN_00162e8c();
+  temp_v0 = gameFlagsGetBlock();
   if (DAT_005f18c4 != '\0') {
     DAT_005f18c4 = '\0';
   }

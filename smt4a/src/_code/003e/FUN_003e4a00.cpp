@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_001ab888(void);
+extern int gameGetSlotTable(void);
 
 
 int FUN_003e4a00(void)
@@ -18,7 +18,7 @@ int FUN_003e4a00(void)
   temp_v1 = 0;
   do {
     if ((temp_v1 & 0xffff) < 0xc) {
-      temp_v0 = FUN_001ab888();
+      temp_v0 = gameGetSlotTable();
       temp_v0 = temp_v0 + (temp_v1 & 0xffff) * 0x134;
       if ((temp_v0 != -0x1ddc) && ((*(unsigned int *)(temp_v0 + 0x1f0c) & 1) != 0)) {
         temp_v2 = temp_v2 + 1;

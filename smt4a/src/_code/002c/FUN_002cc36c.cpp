@@ -6,10 +6,10 @@ extern "C" {
 
 int btlGetMainState(void);
 int FUN_00163aa4(int);
-int FUN_00184518(int, int);
-int FUN_001846d0(...);
-int FUN_00184b80(int, unsigned int);
-int FUN_00184c00(int, int, int);
+int pairSetSecondResetFirst(int, int);
+int uiSpriteSelectAnim(...);
+int pairSetFirstResetSecond(int, unsigned int);
+int uiSpriteSetImageKeyframe(int, int, int);
 int FUN_002a1850(unsigned int *, int, unsigned int);
 int FUN_00358e94(...);
 int FUN_00387240(...);
@@ -22,7 +22,7 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_1_stack;
 
-extern int DAT_0057a9c8; /* 0x57a9c8 */
+extern int g_btlUiBlock; /* 0x57a9c8 */
 
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
 #define ROMWRIGHT_PIECE_4_4_DEFINED
@@ -31,10 +31,10 @@ extern int DAT_0057a9c8; /* 0x57a9c8 */
 /* Supplied declaration required: btlGetMainState. */
 extern unsigned int FUN_00152f54(void);
 /* Supplied declaration required: FUN_00163aa4. */
-/* Supplied declaration required: FUN_00184518. */
-/* Supplied declaration required: FUN_001846d0. */
-/* Supplied declaration required: FUN_00184b80. */
-/* Supplied declaration required: FUN_00184c00. */
+/* Supplied declaration required: pairSetSecondResetFirst. */
+/* Supplied declaration required: uiSpriteSelectAnim. */
+/* Supplied declaration required: pairSetFirstResetSecond. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_002a1850. */
 /* Supplied declaration required: FUN_00358e94. */
 /* Supplied declaration required: FUN_00387240. */
@@ -92,12 +92,12 @@ void FUN_002cc36c(int param_1)
           temp_v4 = 0;
           if (temp_v4 < temp_v2) {
             do {
-              FUN_00184c00(temp_v5 + temp_v4 * 0x8c + 0x75b4,0xc,0);
+              uiSpriteSetImageKeyframe(temp_v5 + temp_v4 * 0x8c + 0x75b4,0xc,0);
               temp_v4 = temp_v4 + 1;
             } while (temp_v4 < temp_v2);
           }
-          FUN_00184c00(temp_v5 + 0x7870,0xc,0);
-          FUN_00184c00(temp_v5 + 0x78fc,0xc,0);
+          uiSpriteSetImageKeyframe(temp_v5 + 0x7870,0xc,0);
+          uiSpriteSetImageKeyframe(temp_v5 + 0x78fc,0xc,0);
         }
         else if (*(char *)(temp_v5 + 0x763e) != '\0') {
           *(unsigned char *)(temp_v5 + 0x7994) = 0;
@@ -160,7 +160,7 @@ LAB_002cc580:
           if (*(int *)(temp_v5 + 0xb650) >= 0xc) {
 LAB_002cc6b0:
             if (*(short *)(temp_v5 + 0xb610) != 0xc) {
-              FUN_00184c00(temp_v5 + 0xb5b4,0xc,0);
+              uiSpriteSetImageKeyframe(temp_v5 + 0xb5b4,0xc,0);
               if (*(int *)(temp_v5 + 0xb650) >= 3) {
                 FUN_00163aa4(temp_v5 + 0xb5b4);
               }
@@ -189,7 +189,7 @@ LAB_002cc6b0:
     }
     else {
 LAB_002cc760:
-      temp_v5 = DAT_0057a9c8;
+      temp_v5 = g_btlUiBlock;
       temp_v2 = param_1 + temp_v7;
       if ((int)*(char *)(temp_v2 + 0x11874) < (int)*(char *)(temp_v2 + 0x11884)) {
         temp_v4 = param_1 + temp_v7 * 0x280 + *(char *)(temp_v2 + 0x11874) * 0x14;
@@ -208,10 +208,10 @@ LAB_002cc760:
           else if (temp_v1 == '\x03') {
             temp_v3 = 0x3f1;
           }
-          FUN_00184b80(DAT_0057a9c8 + temp_v7 * 0xa0 + 0xb5b4,temp_v3);
+          pairSetFirstResetSecond(g_btlUiBlock + temp_v7 * 0xa0 + 0xb5b4,temp_v3);
         }
         else {
-          FUN_00184518(DAT_0057a9c8 + temp_v7 * 0xa0 + 0xb5b4,0xf);
+          pairSetSecondResetFirst(g_btlUiBlock + temp_v7 * 0xa0 + 0xb5b4,0xf);
         }
         temp_v10 = (unsigned int)((unsigned long long)temp_v9 >> 0x20);
         temp_v12 = (int)temp_v9;
@@ -231,7 +231,7 @@ LAB_002cc760:
         FUN_00387240(temp_v6,0xd,0x416);
         FUN_00358e94(temp_v6,(int)(short)(int)*(float *)(temp_v5 + 0xb640),
                      (int)(short)(int)*(float *)(temp_v5 + 0xb644));
-        FUN_001846d0(temp_v6,9);
+        uiSpriteSelectAnim(temp_v6,9);
         *(unsigned char *)(temp_v4 + 0xf080) = 0;
         pcVar7 = (char *)(temp_v2 + 0x11874);
         temp_v1 = *(char *)(temp_v2 + 0x11874) + '\x01';

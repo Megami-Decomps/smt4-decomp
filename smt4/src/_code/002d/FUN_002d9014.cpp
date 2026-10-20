@@ -11,7 +11,7 @@ int FUN_0029a0e8(unsigned int);
 int FUN_0029c4c8(int);
 int FUN_0029dfc0(...);
 int FUN_0029e874(int);
-int FUN_002bf694(...);
+int libc_strcpy(...);
 int rt_memcpy_w(...);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -29,9 +29,9 @@ extern int DAT_0044de30; /* 0x44de30 */
 /* Supplied declaration required: FUN_0029c4c8. */
 /* Supplied declaration required: FUN_0029dfc0. */
 /* Supplied declaration required: FUN_0029e874. */
-extern unsigned int FUN_002b63ac(void);
-/* Supplied declaration required: FUN_002bf694. */
-extern int FUN_002c09bc(void);
+extern unsigned int gameGetPlayerData(void);
+/* Supplied declaration required: libc_strcpy. */
+extern int gameDataBlocksGetSaveData(void);
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -69,17 +69,17 @@ void FUN_002d9014(void)
       *(unsigned short *)((int)puVar5 + 0x2a) = *(unsigned short *)(temp_v1 + 0x270);
       *(unsigned short *)(puVar5 + 0xb) = *(unsigned short *)(temp_v1 + 0x272);
       puVar5[0xc] = *(unsigned int *)(temp_v1 + 0x26c);
-      FUN_002bf694(puVar5 + 0x13,temp_v1 + 0x24c);
+      libc_strcpy(puVar5 + 0x13,temp_v1 + 0x24c);
       *(unsigned char *)((int)puVar5 + 0x76) = *(unsigned char *)(temp_v1 + 0x298);
-      temp_v2 = FUN_002c09bc();
-      FUN_002bf694(temp_v2 + 0x54,temp_v1 + 0x24c);
+      temp_v2 = gameDataBlocksGetSaveData();
+      libc_strcpy(temp_v2 + 0x54,temp_v1 + 0x24c);
       FUN_0029a0e8(*(unsigned int *)(temp_v0 + 0x350));
       temp_v1 = temp_v0 + DAT_0044de30 * 0x80;
       if (temp_v1 != -0x24c) {
         FUN_0026b5a8(*(char *)(temp_v1 + 0x2b0) != '\0');
       }
       FUN_0029c4c8(0);
-      temp_v3 = FUN_002b63ac();
+      temp_v3 = gameGetPlayerData();
       rt_memcpy_w(temp_v3,*(unsigned int *)(temp_v0 + 0x350),0xe);
       FUN_0029963c(1,*(unsigned short *)(*(int *)(temp_v0 + 0x350) + 8));
       FUN_0029963c(2,*(unsigned short *)(*(int *)(temp_v0 + 0x350) + 10));

@@ -18,7 +18,7 @@ int FUN_004f112c(...);
 
 int FUN_001a1ee0(void);
 int FUN_001aff14(...);
-int FUN_00203a5c(void);
+int eventCommandGetPendingCleanup(void);
 int pairSourceGet(...);
 int FUN_003d4dd4(...);
 int FUN_003d8f24(...);
@@ -123,9 +123,9 @@ extern unsigned int FUN_00184964(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0018a924. */
 /* Supplied declaration required: FUN_001a1ee0. */
 /* Supplied declaration required: FUN_001aff14. */
-/* Supplied declaration required: FUN_00203a5c. */
+/* Supplied declaration required: eventCommandGetPendingCleanup. */
 extern float *FUN_00208bfc(void);
-extern int FUN_0022a00c(float *);
+extern int rangeIsValid(float *);
 /* Supplied declaration required: FUN_00280070. */
 extern int effectProcessIsActive(void);
 /* Supplied declaration required: FUN_002e5104. */
@@ -519,9 +519,9 @@ LAB_004f33d8:
     temp_v38 = temp_v0;
     temp_v39 = temp_v0;
     if (((unsigned int)param_1[0x193] & 0x4000) != 0) {
-      FUN_00203a5c();
+      eventCommandGetPendingCleanup();
       FUN_003d8f24();
-      FUN_00203a5c();
+      eventCommandGetPendingCleanup();
       pfVar4 = (float *)FUN_00208bfc();
       temp_v38 = *pfVar4;
       temp_v39 = pfVar4[1];
@@ -529,7 +529,7 @@ LAB_004f33d8:
     if (((unsigned int)param_1[0x193] & 0x40000) != 0) {
       FUN_003d8f24(param_1 + 0x11);
       pairSourceGet(param_1 + 0x11,&temp_v38,&temp_v39);
-      temp_v3 = FUN_0022a00c(param_1 + 0x11);
+      temp_v3 = rangeIsValid(param_1 + 0x11);
       if (temp_v3 != 0) {
         param_1[0x11] = 0.0f;
         param_1[0x12] = 0.0f;
@@ -544,7 +544,7 @@ LAB_004f33d8:
     if (((unsigned int)param_1[0x193] & 0x400000) != 0) {
       FUN_003d8f24(param_1 + 0x16);
       pairSourceGet(param_1 + 0x16,&temp_v42,&temp_v43);
-      temp_v3 = FUN_0022a00c(param_1 + 0x16);
+      temp_v3 = rangeIsValid(param_1 + 0x16);
       if (temp_v3 != 0) {
         param_1[0x16] = 0.0f;
         param_1[0x17] = 0.0f;
@@ -703,7 +703,7 @@ LAB_004f33d8:
     FUN_00280070(param_1 + 0x1b,0);
     words5Clear(param_1 + 0x11);
     words5Clear(param_1 + 0x16);
-    FUN_00203a5c();
+    eventCommandGetPendingCleanup();
     words5Clear();
     break;
   case 0x5:

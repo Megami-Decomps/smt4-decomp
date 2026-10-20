@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00100388(unsigned char *, unsigned char *, unsigned int, unsigned int);
 int FUN_00376fa4(unsigned int);
-int FUN_003847ac(int, unsigned int);
+int sequenceRequestDefer(int, unsigned int);
 int FUN_003d4ed8(int);
 int SBORROW4(int, int);
 
@@ -41,12 +41,12 @@ static float romwright_sqrt_4(float value)
 #endif
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_00100388. */
-extern int FUN_00162e8c(void);
-extern int FUN_001801a4(void);
+extern int gameFlagsGetBlock(void);
+extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00376fa4. */
-/* Supplied declaration required: FUN_003847ac. */
+/* Supplied declaration required: sequenceRequestDefer. */
 /* Supplied declaration required: FUN_003d4ed8. */
-extern int FUN_003e46f4(unsigned int);
+extern int gameDataFlagTestBit(unsigned int);
 
 
 unsigned int FUN_00482c04(int param_1)
@@ -72,8 +72,8 @@ unsigned int FUN_00482c04(int param_1)
   int temp_v15;
   
   temp_v7 = 0xffffffff;
-  temp_v2 = FUN_00162e8c();
-  temp_v3 = FUN_001801a4();
+  temp_v2 = gameFlagsGetBlock();
+  temp_v3 = gameGetPlayerData();
   temp_v8 = 999999;
   temp_v14 = 0x40a0000000000000;
   temp_v4 = 0;
@@ -118,7 +118,7 @@ unsigned int FUN_00482c04(int param_1)
                                  *(unsigned int *)(temp_v8 + 0xac));
                   }
                   else {
-                    FUN_003847ac(*(int *)(temp_v8 + 0xa8),*(unsigned int *)(temp_v8 + 0xac));
+                    sequenceRequestDefer(*(int *)(temp_v8 + 0xa8),*(unsigned int *)(temp_v8 + 0xac));
                   }
                 }
                 FUN_00376fa4(*(unsigned int *)(temp_v8 + 0x20));
@@ -135,7 +135,7 @@ unsigned int FUN_00482c04(int param_1)
             if (*(int *)(temp_v2 + 0xdf4) != 0) {
               temp_v15 = 0;
               temp_v8 = *(int *)(temp_v8 + 0x68);
-              temp_v6 = FUN_003e46f4(0x8b);
+              temp_v6 = gameDataFlagTestBit(0x8b);
               if (temp_v6 != 0) {
                 temp_v15 = 9;
               }

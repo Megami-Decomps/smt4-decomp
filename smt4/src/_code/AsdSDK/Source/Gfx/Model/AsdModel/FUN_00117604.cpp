@@ -21,18 +21,18 @@ typedef struct {
 } void_stack;
 
 extern unsigned int g_titleScene; /* 0x44ea00 */
-extern signed char DAT_00464af0; /* 0x464af0 */
+extern signed char g_gfxSettings; /* 0x464af0 */
 extern unsigned int DAT_00464b00; /* 0x464b00 */
 extern unsigned int DAT_00464b10; /* 0x464b10 */
 extern unsigned int DAT_00464b14; /* 0x464b14 */
 extern unsigned int DAT_00464b18; /* 0x464b18 */
 extern unsigned int g_asdModelSlotFlags; /* 0x464b74 */
 extern unsigned int DAT_00464b7c; /* 0x464b7c */
-extern int DAT_00464b84; /* 0x464b84 */
+extern int g_asdModelTransformBuilder; /* 0x464b84 */
 extern int DAT_00464b8c; /* 0x464b8c */
-extern int DAT_00464bb4; /* 0x464bb4 */
+extern int g_asdModelSlotArray3; /* 0x464bb4 */
 extern unsigned int DAT_00464bbc; /* 0x464bbc */
-extern int DAT_004dad80; /* 0x4dad80 */
+extern int g_asdLightCount; /* 0x4dad80 */
 extern signed char DAT_004dad84; /* 0x4dad84 */
 extern signed char DAT_004dad85; /* 0x4dad85 */
 extern signed char DAT_004dad94; /* 0x4dad94 */
@@ -63,14 +63,14 @@ void FUN_00117604(void)
   int temp_v1;
   unsigned int temp_v2;
   
-  if ((DAT_00464af0 != '\0') && ((0 < DAT_004dad80 || ((g_asdModelSlotFlags & 1) != 0)))) {
-    temp_v2 = *(unsigned int *)(DAT_00464bb4 + 4);
-    FUN_001325c4(DAT_00464bb4,DAT_00464b7c,DAT_00464b10,DAT_00464bbc);
-    temp_v0 = DAT_00464b84;
+  if ((g_gfxSettings != '\0') && ((0 < g_asdLightCount || ((g_asdModelSlotFlags & 1) != 0)))) {
+    temp_v2 = *(unsigned int *)(g_asdModelSlotArray3 + 4);
+    FUN_001325c4(g_asdModelSlotArray3,DAT_00464b7c,DAT_00464b10,DAT_00464bbc);
+    temp_v0 = g_asdModelTransformBuilder;
     if ((DAT_004dad84 != '\0') && (DAT_004dad85 == '\0')) {
       temp_v1 = DAT_00464b8c;
-      piVar4 = *(int **)(DAT_00464b84 + 0x1c);
-      for (piVar1 = *(int **)(DAT_00464b84 + 0x18); (piVar1 != piVar4 && (*piVar1 != DAT_00464b8c));
+      piVar4 = *(int **)(g_asdModelTransformBuilder + 0x1c);
+      for (piVar1 = *(int **)(g_asdModelTransformBuilder + 0x18); (piVar1 != piVar4 && (*piVar1 != DAT_00464b8c));
           piVar1 = piVar1 + 1) {
       }
       piVar2 = piVar1;
@@ -83,21 +83,21 @@ void FUN_00117604(void)
       if (piVar1 != piVar2) {
         *(unsigned int *)(temp_v1 + 0xc) = 0;
       }
-      sceneTraverserVisit(DAT_00464b7c,DAT_00464b84);
+      sceneTraverserVisit(DAT_00464b7c,g_asdModelTransformBuilder);
     }
     if (DAT_004dad94 == '\0') {
-      FUN_00131c98(DAT_00464bb4,DAT_00464b7c,DAT_00464bbc);
+      FUN_00131c98(g_asdModelSlotArray3,DAT_00464b7c,DAT_00464bbc);
     }
     if ((DAT_004dad84 != '\0') && (DAT_004dad85 == '\0')) {
-      nw_gfx_SceneNode_AttachChild(DAT_00464b84,DAT_00464b8c);
-      sceneTraverserVisit(DAT_00464b7c,DAT_00464b84);
+      nw_gfx_SceneNode_AttachChild(g_asdModelTransformBuilder,DAT_00464b8c);
+      sceneTraverserVisit(DAT_00464b7c,g_asdModelTransformBuilder);
     }
     temp_v0 = FUN_002c5210();
     if (temp_v0 != 1) {
-      FUN_0013231c(DAT_00464bb4,DAT_00464b10,1);
+      FUN_0013231c(g_asdModelSlotArray3,DAT_00464b10,1);
     }
     else {
-      FUN_001326b4(DAT_00464bb4,DAT_00464b14,DAT_00464b18,0);
+      FUN_001326b4(g_asdModelSlotArray3,DAT_00464b14,DAT_00464b18,0);
       nw_gfx_RenderContext_ResetState_2B7478(temp_v2);
     }
     FUN_002c3a14(g_titleScene);

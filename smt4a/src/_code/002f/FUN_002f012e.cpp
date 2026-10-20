@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e7232(int *);
+int sharedRefRelease(int *);
 int FUN_002eb108(int *, int, int, int, int, int);
 int FUN_002eb7e0(int *, int, int, int, int, int);
 int FUN_002ef34c(unsigned char [12], int, int *);
@@ -17,8 +17,8 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_4_stack;
 
-/* Supplied declaration required: FUN_002e7232. */
-extern int *FUN_002e760a(unsigned int);
+/* Supplied declaration required: sharedRefRelease. */
+extern int *operatorNew(unsigned int);
 /* Supplied declaration required: FUN_002eb108. */
 extern int *FUN_002eb7d0(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002eb7e0. */
@@ -60,7 +60,7 @@ void FUN_002f012e(int param_1,int param_2,unsigned int param_3,unsigned int para
     }
   }
   else {
-    piVar1 = (int *)FUN_002e760a(0x150);
+    piVar1 = (int *)operatorNew(0x150);
     if (piVar1 != (int *)0x0) {
       FUN_002eb108(piVar1,param_1,2,0x2000,param_2,0);
     }
@@ -73,7 +73,7 @@ void FUN_002f012e(int param_1,int param_2,unsigned int param_3,unsigned int para
   *(unsigned short *)(piVar1 + 0x11) = *(unsigned short *)(temp_v0 + 4);
   *(char *)(piVar1 + 0x21) = (char)param_4;
   FUN_002ef34c(temp_v1,param_1,piVar1);
-  FUN_002e7232(piVar1);
+  sharedRefRelease(piVar1);
   return;
 }
 

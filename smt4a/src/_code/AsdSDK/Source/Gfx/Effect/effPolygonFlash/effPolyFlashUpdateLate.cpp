@@ -3,7 +3,7 @@
 
 extern "C" {
 
-s32 FUN_001acf08(void);
+s32 effGetFrameStep(void);
 
 extern PolyFlashKind g_polyFlashKinds[];
 
@@ -11,7 +11,7 @@ extern PolyFlashKind g_polyFlashKinds[];
 void effPolyFlashUpdateLate(PolyObject *obj)
 {
     g_polyFlashKinds[obj->kind].update(obj);
-    obj->frame += FUN_001acf08();
+    obj->frame += effGetFrameStep();
     if (obj->frame > 0) {
         g_polyFlashKinds[obj->kind].lateUpdate(obj);
     }

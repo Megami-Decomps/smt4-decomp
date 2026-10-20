@@ -7,11 +7,11 @@ typedef struct Obj {
     /* 0x8 */ s32 state;
 } Obj;
 
-extern Obj *DAT_0043e128;
+extern Obj *g_infoWin;
 
 u8 FUN_002b6b04(void)
 {
-    return DAT_0043e128->state != 0;
+    return g_infoWin->state != 0;
 }
 
 } /* extern "C" */

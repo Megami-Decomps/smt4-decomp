@@ -4,7 +4,7 @@
 #include "common.h"
 
 /* The object whose vtable is at 0x55b2d8 (named after it until its real name is known); the vtable
- * is stored by FUN_002ee524 and FUN_002fde5c (constructors, which call init) and FUN_002ee54c (the
+ * is stored by FUN_002ee524 and FUN_002fde5c (constructors, which call init) and sharedRefHolderDestroy2 (the
  * destructor). */
 class Obj55b2d8 {
 public:

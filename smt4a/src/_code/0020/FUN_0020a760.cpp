@@ -10,9 +10,9 @@ int FUN_003f5220(...);
 
 int FUN_001517b4(int, int);
 int FUN_001641b4(int);
-int FUN_00184758(int, int, int);
+int uiSpriteSetKeyframe(int, int, int);
 int FUN_0020b718(int, int);
-int FUN_0023b27c(void);
+int useCounterStart(void);
 int FUN_0026fa30(void);
 int FUN_002a4878(...);
 int FUN_002a4894(...);
@@ -24,14 +24,14 @@ int FUN_0031f27c(int);
 int FUN_003343f0(int);
 int SBORROW4(...);
 
-extern int DAT_0057f268; /* 0x57f268 */
+extern int g_partyPanel; /* 0x57f268 */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: FUN_001641b4. */
-/* Supplied declaration required: FUN_00184758. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: FUN_0020b718. */
-/* Supplied declaration required: FUN_0023b27c. */
+/* Supplied declaration required: useCounterStart. */
 /* Supplied declaration required: FUN_0023e908. */
 /* Supplied declaration required: FUN_0026fa30. */
 /* Supplied declaration required: FUN_002a4878. */
@@ -60,7 +60,7 @@ unsigned int FUN_0020a760(int param_1)
   unsigned char temp_v6;
   unsigned char temp_v7;
   
-  temp_v5 = DAT_0057f268;
+  temp_v5 = g_partyPanel;
   temp_v1 = 10;
   FUN_001517b4(10,1);
   if (temp_v1 == 0) {
@@ -86,7 +86,7 @@ unsigned int FUN_0020a760(int param_1)
     FUN_0031f208(5);
     FUN_0031f208(0x1f);
     FUN_0031f208(3);
-    FUN_0023b27c();
+    useCounterStart();
     FUN_0020b718(0xf,1);
     FUN_003343f0(1);
     FUN_001641b4(0x100020e);
@@ -95,10 +95,10 @@ unsigned int FUN_0020a760(int param_1)
   temp_v0 = *(unsigned char *)(temp_v5 + 0x42) ^ 1;
   *(unsigned char *)(temp_v5 + 0x42) = temp_v0;
   if (temp_v0 != 0) {
-    FUN_00184758(temp_v5 + 0x4c8,6,0);
+    uiSpriteSetKeyframe(temp_v5 + 0x4c8,6,0);
   }
   else {
-    FUN_00184758(temp_v5 + 0x4c8,4,0);
+    uiSpriteSetKeyframe(temp_v5 + 0x4c8,4,0);
   }
   FUN_001641b4(0x100020e);
   if (*(int *)(temp_v5 + 0x1c) != 6) {

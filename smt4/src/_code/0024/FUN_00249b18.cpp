@@ -4,10 +4,10 @@
 
 extern "C" {
 
-extern int FUN_002a8740(void);
-extern int FUN_002a8764(void);
-extern int FUN_002a8778(void);
-extern int FUN_002b63ac(void);
+extern int gameGetUnitRecord(void);
+extern int gameGetSlotTable(void);
+extern int gameCountUnits(void);
+extern int gameGetPlayerData(void);
 
 
 void FUN_00249b18(unsigned int param_1,int param_2)
@@ -19,11 +19,11 @@ void FUN_00249b18(unsigned int param_1,int param_2)
   int temp_v3;
   
   if (((param_1 == 0 || param_1 == 2) || param_1 == 3) &&
-     (((param_2 != 0 || (temp_v0 = FUN_002b63ac(), (*(unsigned short *)(temp_v0 + 0x72) & 2) == 0)) &&
-      (temp_v0 = FUN_002b63ac(), (*(unsigned short *)(temp_v0 + 0x72) & 0x400) == 0)))) {
-    temp_v0 = FUN_002b63ac();
+     (((param_2 != 0 || (temp_v0 = gameGetPlayerData(), (*(unsigned short *)(temp_v0 + 0x72) & 2) == 0)) &&
+      (temp_v0 = gameGetPlayerData(), (*(unsigned short *)(temp_v0 + 0x72) & 0x400) == 0)))) {
+    temp_v0 = gameGetPlayerData();
     *(unsigned short *)(temp_v0 + 0x72) = 0;
-    temp_v1 = FUN_002b63ac();
+    temp_v1 = gameGetPlayerData();
     *(unsigned short *)(temp_v1 + 0x2a) = *(unsigned short *)(temp_v1 + 0x1c);
     *(unsigned short *)(temp_v1 + 0x2c) = *(unsigned short *)(temp_v1 + 0x1e);
     *(unsigned short *)(temp_v0 + 0x2a) = *(unsigned short *)(temp_v0 + 0x1c);
@@ -34,19 +34,19 @@ void FUN_00249b18(unsigned int param_1,int param_2)
       return;
     }
     temp_v1 = 3;
-    temp_v0 = FUN_002a8764();
+    temp_v0 = gameGetSlotTable();
     temp_v0 = temp_v0 + 0x9108;
   }
   else {
-    temp_v1 = FUN_002a8778();
-    temp_v0 = FUN_002a8764();
+    temp_v1 = gameCountUnits();
+    temp_v0 = gameGetSlotTable();
     temp_v0 = temp_v0 + 0x90f0;
   }
   temp_v3 = 0;
   if (temp_v3 < temp_v1) {
     do {
       if ((((-1 < *(char *)(temp_v0 + temp_v3)) &&
-           ((temp_v2 = FUN_002a8740(), param_2 != 0 || ((*(unsigned short *)(temp_v2 + 0x44) & 2) == 0)))) &&
+           ((temp_v2 = gameGetUnitRecord(), param_2 != 0 || ((*(unsigned short *)(temp_v2 + 0x44) & 2) == 0)))) &&
           ((*(unsigned short *)(temp_v2 + 0x44) & 0x400) == 0 && (*(unsigned short *)(temp_v2 + 0x44) & 4) == 0)) &&
          (temp_v2 != 0)) {
         *(unsigned short *)(temp_v2 + 0x44) = 0;

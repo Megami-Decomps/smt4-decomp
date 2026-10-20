@@ -13,13 +13,13 @@ typedef struct Obj {
     /* 0x44 */ u8 timer[1];
 } Obj;
 
-extern Obj *DAT_0043e128;
+extern Obj *g_infoWin;
 
 void FUN_00295ba4(void)
 {
-    Obj *obj = DAT_0043e128;
+    Obj *obj = g_infoWin;
 
-    DAT_0043e128->unk08 = 5;
+    g_infoWin->unk08 = 5;
     obj->unk10 = 0x1e;
     timerStart(obj->timer, 1, 0);
 }

@@ -35,7 +35,7 @@ struct fn_004dab08_arg0 {
 
 /* Supplied declaration required: FUN_00184310. */
 extern int slotRecordFindById(unsigned short);
-extern int FUN_001ab854(void);
+extern int gameGetSlotRecord(void);
 extern int FUN_002a4b28(unsigned short);
 extern unsigned int computeCountLimit(void);
 
@@ -122,17 +122,17 @@ LAB_004dac50:
     }
     if (((param_1->field_0x16e == 0) ||
         ((((unsigned short)param_1->field_0x170 >= 0x18 ||
-          (temp_v1 = FUN_001ab854(),
+          (temp_v1 = gameGetSlotRecord(),
           *(unsigned short *)(temp_v1 + 0x62) == param_2 || *(unsigned short *)(temp_v1 + 0x62) == param_3)) &&
          (((unsigned short)param_1->field_0x172 >= 0x18 ||
-          (temp_v1 = FUN_001ab854(),
+          (temp_v1 = gameGetSlotRecord(),
           *(unsigned short *)(temp_v1 + 0x62) == param_2 || *(unsigned short *)(temp_v1 + 0x62) == param_3)))))) &&
        ((param_1->field_0x174 == 0 ||
         ((((unsigned short)param_1->field_0x176 >= 0x18 ||
-          (temp_v1 = FUN_001ab854(),
+          (temp_v1 = gameGetSlotRecord(),
           *(unsigned short *)(temp_v1 + 0x62) != param_2 && *(unsigned short *)(temp_v1 + 0x62) != param_3)) &&
          (((unsigned short)param_1->field_0x178 >= 0x18 ||
-          (temp_v1 = FUN_001ab854(),
+          (temp_v1 = gameGetSlotRecord(),
           *(unsigned short *)(temp_v1 + 0x62) != param_2 && *(unsigned short *)(temp_v1 + 0x62) != param_3)))))))) {
       return 1;
     }

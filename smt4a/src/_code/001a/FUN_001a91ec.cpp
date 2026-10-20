@@ -12,8 +12,8 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_3_stack;
 
-extern unsigned int *DAT_005b40e0; /* 0x5b40e0 */
-extern unsigned int *DAT_005b40e4; /* 0x5b40e4 */
+extern unsigned int *g_commandBufferCursor; /* 0x5b40e0 */
+extern unsigned int *g_commandBufferEnd; /* 0x5b40e4 */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: rt_memmove_w. */
@@ -36,13 +36,13 @@ void FUN_001a91ec(unsigned int param_1,unsigned int param_2,int param_3)
   int temp_v6;
   unsigned char temp_v7;
   
-  if (DAT_005b40e0 + (param_2 & 0xfffffffe) + (param_2 >> 7) * 2 + 2 >= DAT_005b40e4) {
-    DAT_005b40e0 = DAT_005b40e4;
-    puVar6 = DAT_005b40e0;
+  if (g_commandBufferCursor + (param_2 & 0xfffffffe) + (param_2 >> 7) * 2 + 2 >= g_commandBufferEnd) {
+    g_commandBufferCursor = g_commandBufferEnd;
+    puVar6 = g_commandBufferCursor;
   }
   else {
     temp_v5 = 0;
-    puVar6 = DAT_005b40e0;
+    puVar6 = g_commandBufferCursor;
     if (param_2 != 0) {
       do {
         puVar7 = (unsigned int *)(param_3 + temp_v5 * 4);
@@ -115,7 +115,7 @@ void FUN_001a91ec(unsigned int param_1,unsigned int param_2,int param_3)
       } while (temp_v5 < param_2);
     }
   }
-  DAT_005b40e0 = puVar6;
+  g_commandBufferCursor = puVar6;
   return;
 }
 

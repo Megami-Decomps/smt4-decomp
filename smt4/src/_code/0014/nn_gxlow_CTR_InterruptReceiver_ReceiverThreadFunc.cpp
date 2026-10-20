@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c4040(unsigned int);
+int nn_os_LightEvent_Signal(unsigned int);
 int FUN_002c40f8(unsigned char *, int *, int, int, unsigned int, unsigned int);
 int FUN_002c526c(void);
 int hasExclusiveAccess(unsigned int *);
@@ -18,7 +18,7 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: hasExclusiveAccess (CALLOTHER). */
-/* Supplied declaration required: FUN_002c4040. */
+/* Supplied declaration required: nn_os_LightEvent_Signal. */
 /* Supplied declaration required: FUN_002c40f8. */
 /* Supplied declaration required: FUN_002c526c. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
@@ -80,7 +80,7 @@ void nn_gxlow_CTR_InterruptReceiver_ReceiverThreadFunc(unsigned int param_1)
       temp_v0 = *(char *)(param_1 + 0x76);
       *(unsigned char *)(param_1 + 0x76) = 2;
       if (temp_v0 == '\x01') {
-        FUN_002c4040(param_1 + 100);
+        nn_os_LightEvent_Signal(param_1 + 100);
       }
       nn_os_CriticalSection_Leave(param_1);
     }

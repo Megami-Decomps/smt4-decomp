@@ -3,7 +3,7 @@
 
 extern "C" {
 
-extern const char DAT_0053d0f8[]; /* "c:\SMT4F\SMT4F\AsdSDK\Source\Gfx\Effect\effParts.cpp": __FILE__ */
+extern const char g_effPartsSourcePath[]; /* "c:\SMT4F\SMT4F\AsdSDK\Source\Gfx\Effect\effParts.cpp": __FILE__ */
 
 void *memAlloc(int heap, int alignClass, int unk08, int size, int align, int fromFront);
 void asdMemFree(void *block);
@@ -31,7 +31,7 @@ void FUN_002b41e4(PartData *part, const void *src, s32 size, u16 id)
     if (src != NULL && size > 0) {
         void *block;
 
-        asdDebugTrace(DAT_0053d0f8, 1060);
+        asdDebugTrace(g_effPartsSourcePath, 1060);
         block = memAlloc(0x10000, 0x100, 0, size, 0x10, 1);
         part->id = id;
         part->block = block;

@@ -41,7 +41,7 @@ struct fn_004f4348_arg0 {
     float field_0x7d8; /* +0x7d8 */
 };
 
-extern int DAT_00571508; /* 0x571508 */
+extern int g_btlCamera; /* 0x571508 */
 extern int DAT_00571530; /* 0x571530 */
 extern unsigned int DAT_005e1530; /* 0x5e1530 */
 extern unsigned int DAT_005e1534; /* 0x5e1534 */
@@ -69,7 +69,7 @@ void FUN_004f4348(fn_004f4348_arg0 *param_1,unsigned int param_2,unsigned int pa
   unsigned int in_s1;
   unsigned int in_s2;
   
-  temp_v0 = DAT_00571508;
+  temp_v0 = g_btlCamera;
   if (DAT_00571530 < 1) {
     param_1->field_0x5dc = in_s0;
     param_1->field_0x5e0 = in_s1;
@@ -83,13 +83,13 @@ void FUN_004f4348(fn_004f4348_arg0 *param_1,unsigned int param_2,unsigned int pa
     param_1->field_0x64c = param_1->field_0x64c | 0x2000;
     return;
   }
-  puVar2 = (unsigned int *)(DAT_00571508 + 0x5dc);
-  puVar7 = (unsigned int *)(DAT_00571508 + 0x608);
+  puVar2 = (unsigned int *)(g_btlCamera + 0x5dc);
+  puVar7 = (unsigned int *)(g_btlCamera + 0x608);
   if (DAT_00571530 != 2) {
     if (DAT_00571530 == 1) {
-      puVar4 = (unsigned int *)(DAT_00571508 + 0x750);
-      puVar6 = (unsigned int *)(DAT_00571508 + 0x750);
-      *(unsigned int *)(DAT_00571508 + 0x758) = 0;
+      puVar4 = (unsigned int *)(g_btlCamera + 0x750);
+      puVar6 = (unsigned int *)(g_btlCamera + 0x750);
+      *(unsigned int *)(g_btlCamera + 0x758) = 0;
       *(unsigned int *)(temp_v0 + 0x754) = 0;
       *puVar4 = 0;
       DAT_005e1530 = *puVar6;
@@ -112,10 +112,10 @@ void FUN_004f4348(fn_004f4348_arg0 *param_1,unsigned int param_2,unsigned int pa
     }
   }
   else {
-    DAT_005e1548 = *(float *)(DAT_00571508 + 0x7c) - *(float *)(DAT_00571508 + 2000);
-    DAT_005e154c = *(float *)(DAT_00571508 + 0x80) - *(float *)(DAT_00571508 + 0x7d4);
-    puVar4 = (unsigned int *)(DAT_00571508 + 0x750);
-    DAT_005e1550 = *(float *)(DAT_00571508 + 0x84) - *(float *)(DAT_00571508 + 0x7d8);
+    DAT_005e1548 = *(float *)(g_btlCamera + 0x7c) - *(float *)(g_btlCamera + 2000);
+    DAT_005e154c = *(float *)(g_btlCamera + 0x80) - *(float *)(g_btlCamera + 0x7d4);
+    puVar4 = (unsigned int *)(g_btlCamera + 0x750);
+    DAT_005e1550 = *(float *)(g_btlCamera + 0x84) - *(float *)(g_btlCamera + 0x7d8);
     *puVar2 = in_s0;
     *(unsigned int *)(temp_v0 + 0x5e0) = in_s1;
     *(unsigned int *)(temp_v0 + 0x5e4) = in_s2;

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002b7bca(unsigned int, int, int, unsigned char *);
-int FUN_002b9024(void);
+int devilGetRecord(void);
 int dataTableGetEntries(void);
 int asdMemAlloc(int, int, int, unsigned int, int);
 
@@ -31,7 +31,7 @@ typedef struct {
 extern unsigned char LAB_002196fc; /* 0x2196fc */
 
 /* Supplied declaration required: FUN_002b7bca. */
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: devilGetRecord. */
 extern unsigned int dataTableGetCount(unsigned int);
 /* Supplied declaration required: dataTableGetEntries. */
 extern unsigned int dataTableGet(unsigned int);
@@ -130,7 +130,7 @@ unsigned int * FUN_003c9c94(unsigned int *param_1)
   if (temp_v1 != 0) {
     do {
       temp_v2 = temp_v4 & 0xffff;
-      FUN_002b9024();
+      devilGetRecord();
       temp_v3 = (unsigned int)*(unsigned char *)(temp_v2 + 2);
       if ((temp_v3 < 0x38) && ((*(unsigned short *)(temp_v2 + 6) & 1) != 0)) {
         *(char *)((int)param_1 + temp_v3) = *(char *)((int)param_1 + temp_v3) + '\x01';
@@ -152,7 +152,7 @@ unsigned int * FUN_003c9c94(unsigned int *param_1)
   if (temp_v4 < temp_v1) {
     do {
       puVar4 = (unsigned short *)(temp_v4 & 0xffff);
-      FUN_002b9024();
+      devilGetRecord();
       temp_v2 = (unsigned int)*(unsigned char *)(puVar4 + 1);
       if ((temp_v2 < 0x38) && ((puVar4[3] & 1) != 0)) {
         *(unsigned short *)(param_1[temp_v2 + 0xe] + (unsigned int)temp_v7[temp_v2] * 4) = *puVar4;

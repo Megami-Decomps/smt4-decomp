@@ -25,7 +25,7 @@ typedef struct {
     unsigned int sp50; /* 0x50: local_50 */
 } param_3_stack;
 
-extern int DAT_0056fcc0; /* 0x56fcc0 */
+extern int g_handleRegistry; /* 0x56fcc0 */
 extern int g_statusCamera; /* 0x588fe4 */
 
 /* Supplied declaration required: FUN_0013c884. */
@@ -101,7 +101,7 @@ void FUN_002a6dcc(float *param_1,float *param_2,unsigned int *param_3)
   FUN_0036b824(temp_v0);
   FUN_00140e38(temp_v0);
   FUN_001418fc(temp_v0);
-  *(int *)(DAT_0056fcc0 + 0xc) = temp_v0;
+  *(int *)(g_handleRegistry + 0xc) = temp_v0;
   return;
 }
 

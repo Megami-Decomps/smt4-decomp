@@ -9,7 +9,7 @@ int FUN_004bd354(...);
 
 int btlGetMainState(void);
 int FUN_0017760c(...);
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 int FUN_003f0e20(...);
 int FUN_004c53fc(...);
 int FUN_004c571c(...);
@@ -97,7 +97,7 @@ extern unsigned int DAT_00571414; /* 0x571414 */
 
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_0017760c. */
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: FUN_003e0064. */
 extern int FUN_003ea278(unsigned int *, unsigned int *);
 /* Supplied declaration required: FUN_003f0e20. */
@@ -127,7 +127,7 @@ int FUN_004c6edc(fn_004c6edc_arg0 *param_1,fn_004c6edc_arg1 *param_2,unsigned in
   puVar2 = (unsigned int *)btlGetMainState();
   puVar3 = puVar2;
   FUN_003f0e20(puVar2,param_1);
-  FUN_001aba54();
+  dataTable04FindById();
   if (param_2 == (fn_004c6edc_arg1 *)0x0) {
     return 0;
   }

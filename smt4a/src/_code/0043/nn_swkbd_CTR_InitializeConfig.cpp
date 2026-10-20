@@ -48,7 +48,7 @@ typedef struct SwkbdConfig {
     /* 0x354 */ u8 unk354;
 } SwkbdConfig;
 
-extern void FUN_002e6dd4(u8 *dst, s32 size);
+extern void rt_memclr(u8 *dst, s32 size);
 extern void sysMemClear(void *ptr, u32 size);
 
 /* Fills a software keyboard config with its defaults. */
@@ -65,7 +65,7 @@ void nn_swkbd_CTR_InitializeConfig(SwkbdConfig *config)
     config->unk020 = 65000;
     config->unk022 = 0;
     config->unk024 = 0;
-    FUN_002e6dd4(config->unk026, 0x66);
+    rt_memclr(config->unk026, 0x66);
     config->unk08C = 0;
     sysMemClear(config->unk090, 0x82);
     config->unk112 = 0;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002bd430(void);
+int sndVoiceFree(void);
 int UnsignedDoesSaturate(unsigned int, int);
 int UnsignedSaturate(unsigned int, int);
 
@@ -16,7 +16,7 @@ extern int nw_snd_internal_driver_Voice_SdkVoiceDropCallbackFuncMulti(...); /* 0
 /* Unsupported intrinsic, declaration required: UnsignedDoesSaturate (CALLOTHER). */
 extern unsigned int FUN_002baf30(void);
 extern int FUN_002bd29c(unsigned int, romwright_code *, int *);
-/* Supplied declaration required: FUN_002bd430. */
+/* Supplied declaration required: sndVoiceFree. */
 extern int nw_snd_internal_driver_VoiceManager_DropLowestPriorityVoice(unsigned int, unsigned int);
 
 
@@ -92,7 +92,7 @@ LAB_0015db58:
     if (temp_v4 < param_1[2]) {
       do {
         if (param_1[temp_v4] != 0) {
-          FUN_002bd430();
+          sndVoiceFree();
         }
         temp_v4 = temp_v4 + 1;
       } while (temp_v4 < param_1[2]);

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019cac4(void);
+int dataTable00FindById(void);
 int scrSetResult(int);
 int FUN_003e8bb0(unsigned char [2], int, int);
 int FUN_004c3ac0(int, int [3]);
@@ -28,7 +28,7 @@ extern unsigned int DAT_00570d94; /* 0x570d94 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int btlGetMainState(void);
-/* Supplied declaration required: FUN_0019cac4. */
+/* Supplied declaration required: dataTable00FindById. */
 extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: scrSetResult. */
 /* Supplied declaration required: FUN_003e8bb0. */
@@ -60,7 +60,7 @@ unsigned int FUN_0038d5c8(void)
   temp_v7 = 9999;
   temp_v8[0] = btlGetMainState();
   temp_v3 = temp_v2 & 0xffff;
-  FUN_0019cac4();
+  dataTable00FindById();
   if (temp_v3 != 0) {
     temp_v5 = 4;
     temp_v6 = *(int *)(temp_v8[0] + 0x1ffc);

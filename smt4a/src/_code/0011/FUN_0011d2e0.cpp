@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002e5700(...);
+int rt_vec_dtor(...);
 int FUN_002f5020(...);
-int FUN_00300934(int, unsigned char *);
+int streamReadWord(int, unsigned char *);
 int FUN_00304d10(...);
 int FUN_00310f9e(...);
 int FUN_00310fa6(...);
@@ -18,9 +18,9 @@ extern unsigned char LAB_002e7635; /* 0x2e7635 */
 extern unsigned char LAB_002e9ff5; /* 0x2e9ff5 */
 extern unsigned char LAB_002ec9f5; /* 0x2ec9f5 */
 
-/* Supplied declaration required: FUN_002e5700. */
+/* Supplied declaration required: rt_vec_dtor. */
 /* Supplied declaration required: FUN_002f5020. */
-/* Supplied declaration required: FUN_00300934. */
+/* Supplied declaration required: streamReadWord. */
 /* Supplied declaration required: FUN_00304d10. */
 /* Supplied declaration required: FUN_00310f9e. */
 /* Supplied declaration required: FUN_00310fa6. */
@@ -51,7 +51,7 @@ void FUN_0011d2e0(int param_1,unsigned int param_2)
   if (puVar1 != (unsigned char *)0x0) {
     puVar3 = puVar1;
   }
-  FUN_00300934(param_1,puVar3);
+  streamReadWord(param_1,puVar3);
   if (*(char *)(param_1 + 4) != '\0') {
     return;
   }
@@ -68,10 +68,10 @@ void FUN_0011d2e0(int param_1,unsigned int param_2)
     if (*(char *)(param_1 + 4) != '\0') {
       puVar3 = &LAB_002ec9f5;
       temp_v1 = 0x20;
-      FUN_002e5700(temp_v2,puVar3,temp_v1,1);
+      rt_vec_dtor(temp_v2,puVar3,temp_v1,1);
       return;
     }
-    FUN_002e5700(temp_v2,&LAB_002ec9f5,0x20,1);
+    rt_vec_dtor(temp_v2,&LAB_002ec9f5,0x20,1);
   }
   temp_v0 = FUN_00304d10(param_2,3);
   if (temp_v0 != 0) {
@@ -82,7 +82,7 @@ void FUN_0011d2e0(int param_1,unsigned int param_2)
   FUN_00310f9e(param_1,temp_v2);
   puVar3 = &LAB_0011077d;
   temp_v1 = 0xf8;
-  FUN_002e5700(temp_v2,puVar3,temp_v1,1);
+  rt_vec_dtor(temp_v2,puVar3,temp_v1,1);
   return;
 }
 

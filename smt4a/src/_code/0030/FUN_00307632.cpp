@@ -29,7 +29,7 @@ typedef struct {
 } param_8_stack;
 
 /* Supplied declaration required: FUN_0030769c. */
-extern int FUN_003076b6(unsigned int *, unsigned char *);
+extern int pairIsDifferent(unsigned int *, unsigned char *);
 /* Supplied declaration required: FUN_003076d2. */
 /* Supplied declaration required: FUN_003076e6. */
 
@@ -65,7 +65,7 @@ void FUN_00307632(unsigned int *param_1,unsigned int param_2,unsigned int param_
   uStack_14 = param_2;
   uStack_10 = param_3;
   uStack_c = param_4;
-  while (temp_v0 = FUN_003076b6((unsigned int *)&uStack_10,(unsigned char *)&param_5), temp_v0 != 0) {
+  while (temp_v0 = pairIsDifferent((unsigned int *)&uStack_10,(unsigned char *)&param_5), temp_v0 != 0) {
     FUN_0030769c(&temp_v9,&uStack_10,0);
     temp_v8 = temp_v10;
     temp_v7 = temp_v9;

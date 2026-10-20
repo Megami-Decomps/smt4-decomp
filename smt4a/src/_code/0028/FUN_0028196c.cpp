@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-extern int FUN_003166c0(void);
+extern int asdCecInboxGetMessageCount(void);
 /* Supplied declaration required: asdCecReadInboxMessages. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
@@ -30,7 +30,7 @@ void FUN_0028196c(int param_1)
     nn_os_CriticalSection_Enter(temp_v2);
     temp_v0 = *(unsigned int *)(param_1 + 0x90);
     if (temp_v0 - *(int *)(param_1 + 0x94) < 0x20) {
-      temp_v1 = FUN_003166c0();
+      temp_v1 = asdCecInboxGetMessageCount();
       if (temp_v1 >= 0x21) {
         temp_v1 = 0x20;
       }

@@ -2,8 +2,8 @@
 
 extern "C" {
 
-void FUN_00184758(u8 *member, s32 a, s32 b);
-void FUN_00184c00(u8 *member, s32 a, s32 b);
+void uiSpriteSetKeyframe(u8 *member, s32 a, s32 b);
+void uiSpriteSetImageKeyframe(u8 *member, s32 a, s32 b);
 
 typedef struct Navi {
     /* 0x000 */ u8 unk000[8];
@@ -23,7 +23,7 @@ typedef struct Navi {
     /* 0x32C */ u8 flagA;
     /* 0x32D */ u8 flagB;
 } Navi;
-extern Navi *DAT_0057f574;
+extern Navi *g_infoWin;
 
 /* Starts the navigator in state 1: restarts its members and sets the timer to 30, the mode to 2, and stores the given values. */
 void FUN_002c2cc4(u32 value, u8 option, u32 unused, u8 flagA, u8 flagB)
@@ -31,12 +31,12 @@ void FUN_002c2cc4(u32 value, u8 option, u32 unused, u8 flagA, u8 flagB)
     Navi *navi;
     u8 *member;
 
-    navi = DAT_0057f574;
-    member = DAT_0057f574->member54;
-    DAT_0057f574->state = 1;
-    FUN_00184758(member, 5, 0);
-    FUN_00184c00(navi->member54, 0, 0);
-    FUN_00184758(navi->memberE0, 3, 0);
+    navi = g_infoWin;
+    member = g_infoWin->member54;
+    g_infoWin->state = 1;
+    uiSpriteSetKeyframe(member, 5, 0);
+    uiSpriteSetImageKeyframe(navi->member54, 0, 0);
+    uiSpriteSetKeyframe(navi->memberE0, 3, 0);
     navi->option = option;
     navi->flag = 1;
     navi->timer = 0x1E;

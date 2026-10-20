@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_002e6e14(void);
-int FUN_002efb90(...);
+int asdOperatorDeleteArray(void);
+int pairCopyIfNotNull(...);
 int FUN_0030774e(...);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -14,8 +14,8 @@ typedef struct {
 } param_4_stack;
 
 extern int rt_malloc(void);
-/* Supplied declaration required: FUN_002e6e14. */
-/* Supplied declaration required: FUN_002efb90. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
+/* Supplied declaration required: pairCopyIfNotNull. */
 /* Supplied declaration required: FUN_0030774e. */
 
 
@@ -37,7 +37,7 @@ void FUN_00134f44(int *param_1,unsigned int *param_2,unsigned int *param_3,unsig
   temp_v0 = ((int)puVar8 - *param_1) >> 3;
   if (temp_v0 < (unsigned int)((param_1[2] - *param_1) >> 3)) {
     param_1[1] = (int)(puVar8 + 2);
-    FUN_002efb90(param_1,puVar8,puVar8 + -2,param_4,param_1,param_2);
+    pairCopyIfNotNull(param_1,puVar8,puVar8 + -2,param_4,param_1,param_2);
     puVar9 = puVar8 + -2;
     while (param_2 != puVar9) {
       temp_v4 = puVar9[-2];
@@ -58,13 +58,13 @@ void FUN_00134f44(int *param_1,unsigned int *param_2,unsigned int *param_3,unsig
   }
   temp_v2 = rt_malloc();
   FUN_0030774e(*param_1,param_2,temp_v2,param_1);
-  FUN_002efb90(param_1,(((int)param_2 - *param_1) & 0xfffffff8U) + temp_v2,param_3);
+  pairCopyIfNotNull(param_1,(((int)param_2 - *param_1) & 0xfffffff8U) + temp_v2,param_3);
   FUN_0030774e(param_2,param_1[1],(((int)param_2 - *param_1) & 0xfffffff8U) + temp_v2 + 8,param_1);
   temp_v3 = *param_1;
   temp_v6 = param_1[1] - temp_v3;
   for (; temp_v3 != param_1[1]; temp_v3 = temp_v3 + 8) {
   }
-  FUN_002e6e14();
+  asdOperatorDeleteArray();
   *param_1 = temp_v2;
   param_1[2] = temp_v1 * 8 + temp_v2;
   param_1[1] = (temp_v6 >> 3) * 8 + temp_v2 + 8;

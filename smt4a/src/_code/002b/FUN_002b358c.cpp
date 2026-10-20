@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0016c410(...);
+int renderCtxResetColorScale(...);
 int FUN_0016c4b8(unsigned int, unsigned int);
 int FUN_0016c560(...);
 int FUN_00184c4c(...);
@@ -132,7 +132,7 @@ typedef struct {
 extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0016c410. */
+/* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: FUN_0016c4b8. */
 /* Supplied declaration required: FUN_0016c560. */
 /* Supplied declaration required: FUN_00184c4c. */
@@ -391,7 +391,7 @@ void FUN_002b358c(fn_002b358c_arg0 *param_1)
       temp_v33 = (unsigned int *)((int)temp_v33 + iStack_134);
     } while (temp_v10 < temp_v7);
   }
-  FUN_0016c410(g_renderCtx);
+  renderCtxResetColorScale(g_renderCtx);
   FUN_0016c560(g_renderCtx);
   return;
 }

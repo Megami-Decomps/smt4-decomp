@@ -5,7 +5,7 @@
 extern "C" {
 
 typedef int romwright_code(...);
-extern unsigned int FUN_001b3d6c(unsigned int);
+extern unsigned int nw_snd_internal_SoundArchiveFileReader_ReadWaveArchiveInfo(unsigned int);
 
 
 unsigned int FUN_001a8930(int param_1,unsigned int param_2,unsigned int param_3)
@@ -15,7 +15,7 @@ unsigned int FUN_001a8930(int param_1,unsigned int param_2,unsigned int param_3)
   int *piVar2;
   unsigned int temp_v1;
   
-  temp_v0 = FUN_001b3d6c(*(unsigned int *)(param_1 + 4));
+  temp_v0 = nw_snd_internal_SoundArchiveFileReader_ReadWaveArchiveInfo(*(unsigned int *)(param_1 + 4));
   piVar2 = *(int **)(param_1 + 8);
   if (piVar2 != (int *)0x0) {
     if ((char)piVar2[1] == '\0') {

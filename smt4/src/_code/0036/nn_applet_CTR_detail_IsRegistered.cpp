@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002bb308(void);
+int nn_applet_CTR_detail_CloseSession(void);
 int FUN_002bb378(void);
 int FUN_002c131c(int, int);
 
@@ -14,7 +14,7 @@ typedef struct {
 } param_4_stack;
 
 extern int FUN_002bb284(unsigned int, unsigned int *);
-/* Supplied declaration required: FUN_002bb308. */
+/* Supplied declaration required: nn_applet_CTR_detail_CloseSession. */
 /* Supplied declaration required: FUN_002bb378. */
 /* Supplied declaration required: FUN_002c131c. */
 
@@ -33,7 +33,7 @@ int nn_applet_CTR_detail_IsRegistered
   if (temp_v0 < 0) {
     FUN_002c131c(temp_v0,0x361924);
   }
-  FUN_002bb308();
+  nn_applet_CTR_detail_CloseSession();
   return (int)(char)temp_v1;
 }
 

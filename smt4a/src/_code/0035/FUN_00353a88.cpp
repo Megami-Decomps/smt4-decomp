@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019a7f4(int, int);
+int asdTMTexTableReleaseNode(int, int);
 
 typedef int romwright_code(...);
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -14,7 +14,7 @@ typedef struct {
 
 extern int g_mapIf; /* 0x58103c */
 
-/* Supplied declaration required: FUN_0019a7f4. */
+/* Supplied declaration required: asdTMTexTableReleaseNode. */
 
 
 void FUN_00353a88(void)
@@ -31,7 +31,7 @@ void FUN_00353a88(void)
     *(unsigned int *)(temp_v0 + 0xcbf8) = 0;
   }
   *puVar2 = 0;
-  FUN_0019a7f4(4,0x25);
+  asdTMTexTableReleaseNode(4,0x25);
   return;
 }
 

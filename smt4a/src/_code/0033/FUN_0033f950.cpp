@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern int DAT_00587f28; /* 0x587f28 */
+extern int g_naviMain; /* 0x587f28 */
 
 /* Supplied declaration required: FUN_00486328. */
 
@@ -22,10 +22,10 @@ void FUN_0033f950(unsigned int param_1)
 
 {
 /* irregular: 2 native warning(s); review required */
-  if (DAT_00587f28 == 0) {
+  if (g_naviMain == 0) {
     return;
   }
-  FUN_00486328(DAT_00587f28 + 0x68,param_1,0,0,0,0);
+  FUN_00486328(g_naviMain + 0x68,param_1,0,0,0,0);
                     /* WARNING: Treating indirect jump as return */
   return;
 }

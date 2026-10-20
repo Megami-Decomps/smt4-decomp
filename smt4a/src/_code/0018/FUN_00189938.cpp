@@ -16,7 +16,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } void_stack;
 
-extern unsigned char DAT_00589284; /* 0x589284 */
+extern unsigned char g_callbackState; /* 0x589284 */
 extern signed char DAT_00589285; /* 0x589285 */
 extern signed char DAT_00589286; /* 0x589286 */
 extern signed char DAT_00589287; /* 0x589287 */
@@ -38,7 +38,7 @@ void FUN_00189938(void)
 /* irregular: 3 native warning(s); review required */
   int temp_v0;
   
-  DAT_00589284 = 0;
+  g_callbackState = 0;
   if (DAT_00589286 != '\0') {
     if ((DAT_0058928c == 0) || (DAT_00589285 != '\0')) {
       temp_v0 = -0x375f5804;

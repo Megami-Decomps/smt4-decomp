@@ -5,11 +5,11 @@
 extern "C" {
 
 int scrSetResult(int);
-int FUN_002a8740(...);
+int gameGetUnitRecord(...);
 
 /* Supplied declaration required: scrSetResult. */
-/* Supplied declaration required: FUN_002a8740. */
-extern int FUN_002a8764(void);
+/* Supplied declaration required: gameGetUnitRecord. */
+extern int gameGetSlotTable(void);
 
 
 unsigned int FUN_00311158(int *param_1)
@@ -22,12 +22,12 @@ unsigned int FUN_00311158(int *param_1)
   temp_v1 = *param_1;
   if (temp_v1 != 0) {
     if (*(int *)(temp_v1 + 0x670) >= 1) {
-      temp_v0 = FUN_002a8764();
+      temp_v0 = gameGetSlotTable();
       if (*(char *)(*(int *)(temp_v1 + 0x670) + temp_v0 + 0x9107) < '\0') {
         return 1;
       }
-      temp_v0 = FUN_002a8764();
-      temp_v1 = FUN_002a8740((int)*(char *)(*(int *)(temp_v1 + 0x670) + temp_v0 + 0x9107));
+      temp_v0 = gameGetSlotTable();
+      temp_v1 = gameGetUnitRecord((int)*(char *)(*(int *)(temp_v1 + 0x670) + temp_v0 + 0x9107));
     }
     else {
       if (*(int *)(temp_v1 + 0x674) < 0) {
@@ -36,7 +36,7 @@ unsigned int FUN_00311158(int *param_1)
       if ((short)*(unsigned int *)(temp_v1 + *(int *)(temp_v1 + 0x674) * 8 + 0x738) < 0) {
         return 1;
       }
-      temp_v1 = FUN_002a8740();
+      temp_v1 = gameGetUnitRecord();
     }
     if (temp_v1 != 0) {
       scrSetResult(*(unsigned short *)(temp_v1 + 0x46));

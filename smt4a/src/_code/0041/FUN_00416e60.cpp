@@ -31,12 +31,12 @@ struct fn_00416e60_arg0 {
     undefined4 field_0x44; /* +0x44 */
 };
 
-extern int FUN_001801a4(void);
+extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00275bc8. */
 extern int FUN_003df4a4(unsigned short);
 extern int FUN_003df6f4(void);
 extern unsigned long long countUnlockedSlots(void);
-extern int FUN_003f86c8(unsigned int);
+extern int loadSlotIsLoaded(unsigned int);
 /* Supplied declaration required: FUN_00416d30. */
 
 
@@ -64,7 +64,7 @@ unsigned int FUN_00416e60(fn_00416e60_arg0 *param_1,int param_2)
     }
   }
   else {
-    temp_v0 = FUN_003f86c8(0x25);
+    temp_v0 = loadSlotIsLoaded(0x25);
     if (temp_v0 == 0) {
       return 0;
     }
@@ -107,7 +107,7 @@ LAB_00416f38:
   if ((char)param_1->field_0x40 != '\0') {
     temp_v0 = FUN_003df4a4(param_1->field_0x38);
     if (temp_v0 != 0) {
-      temp_v0 = FUN_001801a4();
+      temp_v0 = gameGetPlayerData();
       temp_v6 = 0;
       temp_v8 = countUnlockedSlots();
       temp_v3 = (unsigned int)((unsigned long long)temp_v8 >> 0x20);
@@ -133,7 +133,7 @@ LAB_00416f38:
         param_1->field_0xc = 0;
         return 0;
       }
-      temp_v0 = FUN_001801a4();
+      temp_v0 = gameGetPlayerData();
       temp_v6 = 0;
       temp_v8 = countUnlockedSlots();
       temp_v3 = (unsigned int)((unsigned long long)temp_v8 >> 0x20);

@@ -5,9 +5,9 @@
 extern "C" {
 
 int FUN_002e32a4(int, unsigned char *, unsigned char *);
-int FUN_002e6e14(int);
+int asdOperatorDeleteArray(int);
 int FUN_00307a98(int, int, int, int *);
-int FUN_0030fd28(int *, int, int);
+int destroyRangeElem40(int *, int, int);
 int vectorCountx28_0030fd70(int *);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
@@ -24,10 +24,10 @@ extern unsigned char LAB_00133cb8; /* 0x133cb8 */
 #endif
 /* Supplied declaration required: FUN_002e32a4. */
 extern int *wordRefMax(unsigned int *, unsigned int *);
-/* Supplied declaration required: FUN_002e6e14. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
 /* Supplied declaration required: FUN_00307a98. */
-/* Supplied declaration required: FUN_0030fd28. */
-extern int FUN_0030fd62(int *, int, int);
+/* Supplied declaration required: destroyRangeElem40. */
+extern int vectorAllocx28(int *, int, int);
 /* Supplied declaration required: vectorCountx28_0030fd70. */
 extern unsigned int vectorGrowCapacity_0030fd7e(unsigned int, int *);
 extern unsigned int __aeabi_idivmod(int, unsigned int);
@@ -60,10 +60,10 @@ unsigned long long FUN_00133c2c(int *param_1,unsigned int param_2)
     temp_v5 = vectorGrowCapacity_0030fd7e(temp_v1,param_1);
     piVar3 = (int *)wordRefMax(&temp_v6,(unsigned int *)&temp_v5);
     temp_v4 = *piVar3;
-    temp_v2 = FUN_0030fd62(param_1,temp_v4,*param_1);
+    temp_v2 = vectorAllocx28(param_1,temp_v4,*param_1);
     FUN_00307a98(*param_1,param_1[1],temp_v2,param_1);
-    FUN_0030fd28(param_1,*param_1,param_1[1]);
-    FUN_002e6e14(*param_1);
+    destroyRangeElem40(param_1,*param_1,param_1[1]);
+    asdOperatorDeleteArray(*param_1);
     temp_v3 = vectorCountx28_0030fd70(param_1);
     *param_1 = temp_v2;
     param_1[2] = temp_v2 + temp_v4 * 0x28;

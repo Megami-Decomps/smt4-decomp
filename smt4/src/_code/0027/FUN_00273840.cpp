@@ -8,7 +8,7 @@ int FUN_0025a0e0(void);
 int FUN_002757a8(void);
 int FUN_00275bc8(void);
 int FUN_00289880(void);
-int FUN_002b8838(int);
+int buttonHelpSetPreset(int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -22,8 +22,8 @@ extern signed char DAT_0049fb6d; /* 0x49fb6d */
 /* Supplied declaration required: FUN_002757a8. */
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: FUN_00289880. */
-/* Supplied declaration required: FUN_002b8838. */
-extern int FUN_002c09d0(unsigned int);
+/* Supplied declaration required: buttonHelpSetPreset. */
+extern int gameFlagIsSet(unsigned int);
 extern int FUN_002d1cc8(void);
 extern int NaviMain_IsMapOpen(void);
 
@@ -39,14 +39,14 @@ void FUN_00273840(int param_1)
       DAT_0049fb6d = 1;
       FUN_00275bc8();
       FUN_00289880();
-      FUN_002b8838(0x90);
+      buttonHelpSetPreset(0x90);
       return;
     }
     return;
   }
   if (DAT_0049fb6d != '\0') {
     DAT_0049fb6d = '\0';
-    temp_v0 = FUN_002c09d0(0x16);
+    temp_v0 = gameFlagIsSet(0x16);
     if (temp_v0 != 0) {
       FUN_0025a0e0();
     }
@@ -60,26 +60,26 @@ void FUN_00273840(int param_1)
       if (g_gameState != 0x65) {
         if (g_gameState < 100) {
           if (g_gameState == 0x24) {
-            FUN_002b8838(0xd1);
+            buttonHelpSetPreset(0xd1);
             return;
           }
-          temp_v0 = FUN_002c09d0(0x16);
+          temp_v0 = gameFlagIsSet(0x16);
           if (temp_v0 != 0) {
-            FUN_002b8838(0x3f);
+            buttonHelpSetPreset(0x3f);
             return;
           }
-          FUN_002b8838(0xd9);
+          buttonHelpSetPreset(0xd9);
           return;
         }
       }
       else {
         temp_v0 = FUN_002d1cc8();
         if (temp_v0 != 0) {
-          FUN_002b8838(0xde);
+          buttonHelpSetPreset(0xde);
           return;
         }
       }
-      FUN_002b8838(0xd0);
+      buttonHelpSetPreset(0xd0);
       return;
     }
   }

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e3328(void);
+int asdOperatorDelete(void);
 int FUN_003f2f1c(void);
 int FUN_003fa2e8(unsigned int *);
 int coproc_movefrom_User_R_Thread_and_Process_ID(void);
@@ -22,7 +22,7 @@ extern unsigned int DAT_0062d2a4; /* 0x62d2a4 */
 
 /* Unsupported intrinsic, declaration required: coproc_movefrom_User_R_Thread_and_Process_ID (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_002e3328. */
+/* Supplied declaration required: asdOperatorDelete. */
 /* Supplied declaration required: FUN_003f2f1c. */
 /* Supplied declaration required: FUN_003fa2e8. */
 extern int FUN_00442280(void);
@@ -44,7 +44,7 @@ unsigned int * FUN_00442554(unsigned int *param_1)
     puVar1 = (unsigned int *)0x0;
     if (param_1[0xc] != 0) {
       FUN_003f2f1c();
-      FUN_002e3328();
+      asdOperatorDelete();
       param_1[0xc] = 0;
       return (unsigned int *)0x0;
     }

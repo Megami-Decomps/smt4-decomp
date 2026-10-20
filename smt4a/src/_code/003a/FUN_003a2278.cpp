@@ -22,7 +22,7 @@ extern signed char DAT_005f1891; /* 0x5f1891 */
 
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00183f58. */
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 extern int sub68OwnerCall2(void);
 /* Supplied declaration required: sub68OwnerCall3. */
 /* Supplied declaration required: FUN_00379be8. */
@@ -50,15 +50,15 @@ void FUN_003a2278(int param_1)
   }
   if (DAT_005f1891 != '\0') {
     DAT_005f1891 = 0;
-    temp_v0 = FUN_0018719c(0x49a);
+    temp_v0 = gameFlagIsSet(0x49a);
     if (temp_v0 != 0) {
       FUN_003c5848();
     }
     else {
       FUN_003b61ec();
     }
-    temp_v0 = FUN_0018719c(0xc);
-    if ((temp_v0 != 0) && (temp_v0 = FUN_0018719c(0x10), temp_v0 == 0)) {
+    temp_v0 = gameFlagIsSet(0xc);
+    if ((temp_v0 != 0) && (temp_v0 = gameFlagIsSet(0x10), temp_v0 == 0)) {
       FUN_003b61ec();
     }
     sub68OwnerCall3();
@@ -73,9 +73,9 @@ void FUN_003a2278(int param_1)
     if (g_gameState == 5) {
       temp_v0 = DAT_005f1600;
     }
-    if ((!(g_gameState == 5 && temp_v0 == 0xc)) && (temp_v0 = FUN_0018719c(0x49a), temp_v0 != 0)) {
-      temp_v0 = FUN_0018719c(0xc);
-      if ((temp_v0 == 0) || (temp_v0 = FUN_0018719c(0x10), temp_v0 != 0)) {
+    if ((!(g_gameState == 5 && temp_v0 == 0xc)) && (temp_v0 = gameFlagIsSet(0x49a), temp_v0 != 0)) {
+      temp_v0 = gameFlagIsSet(0xc);
+      if ((temp_v0 == 0) || (temp_v0 = gameFlagIsSet(0x10), temp_v0 != 0)) {
         temp_v0 = FUN_004a0404();
         if (temp_v0 != 0) {
           if (g_gameState != 0x65) {
@@ -108,8 +108,8 @@ void FUN_003a2278(int param_1)
       sysPlaySe(temp_v1);
     }
   }
-  temp_v0 = FUN_0018719c(0xc);
-  if ((temp_v0 != 0) && (temp_v0 = FUN_0018719c(0x10), temp_v0 == 0)) {
+  temp_v0 = gameFlagIsSet(0xc);
+  if ((temp_v0 != 0) && (temp_v0 = gameFlagIsSet(0x10), temp_v0 == 0)) {
     FUN_003b61ec();
     return;
   }

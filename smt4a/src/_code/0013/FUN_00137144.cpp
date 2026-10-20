@@ -8,11 +8,11 @@ int asdTMTexTableLoadTmx(...);
 int FUN_0013f578(...);
 int FUN_001402d0(...);
 int FUN_001409e4(...);
-int FUN_0014384c(...);
+int asdTMTexTableLoadSprites(...);
 int FUN_001445a0(...);
 int FUN_00144efc(...);
 int FUN_00145280(...);
-int FUN_0014bf2c(...);
+int objFlagsSetBits(...);
 int taskCreateDraw(...);
 int FUN_001527d8(...);
 
@@ -38,12 +38,12 @@ extern romwright_code *pcRam005b3d84; /* 0x5b3d84 */
 /* Supplied declaration required: FUN_0013f578. */
 /* Supplied declaration required: FUN_001402d0. */
 /* Supplied declaration required: FUN_001409e4. */
-/* Supplied declaration required: FUN_0014384c. */
+/* Supplied declaration required: asdTMTexTableLoadSprites. */
 /* Supplied declaration required: FUN_001445a0. */
 /* Supplied declaration required: FUN_00144efc. */
 /* Supplied declaration required: FUN_00145280. */
 extern unsigned int *FUN_0014afd0(unsigned int, int);
-/* Supplied declaration required: FUN_0014bf2c. */
+/* Supplied declaration required: objFlagsSetBits. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: FUN_001527d8. */
 
@@ -58,7 +58,7 @@ void FUN_00137144(void)
   int temp_v2;
   
   asdTMTexTableLoadTmx(3,0);
-  FUN_0014384c(8);
+  asdTMTexTableLoadSprites(8);
   temp_v2 = 0;
   do {
     puVar3 = (unsigned int *)FUN_0014afd0(8,temp_v2);
@@ -105,12 +105,12 @@ void FUN_00137144(void)
     *(unsigned char *)(*(int *)(temp_v1 + 0x5e2010) + 0x19c4) = 0;
     *(unsigned char *)(*(int *)(temp_v0 + 0x5e2014) + 0x19c4) = 0;
   } while (temp_v2 < 0xc);
-  FUN_0014bf2c(puVar3[1],0x100);
-  FUN_0014bf2c(DAT_0057f590[1],0x200);
-  FUN_0014bf2c(DAT_0057f594[1],0x100);
+  objFlagsSetBits(puVar3[1],0x100);
+  objFlagsSetBits(DAT_0057f590[1],0x200);
+  objFlagsSetBits(DAT_0057f594[1],0x100);
   temp_v2 = 0;
   do {
-    FUN_0014bf2c(*(unsigned int *)(*(int *)(temp_v2 * 4 + 0x5e2010) + 4),0x100);
+    objFlagsSetBits(*(unsigned int *)(*(int *)(temp_v2 * 4 + 0x5e2010) + 4),0x100);
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 0xc);
   FUN_00144efc(FUN_001456fc);

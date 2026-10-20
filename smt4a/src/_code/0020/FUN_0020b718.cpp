@@ -9,7 +9,7 @@ int FUN_003344b4(int);
 int obj48Arm(unsigned int, int);
 int pair40Set(unsigned int, int);
 
-extern int DAT_0057f268; /* 0x57f268 */
+extern int g_partyPanel; /* 0x57f268 */
 
 extern int FUN_002ef9f0(void);
 /* Supplied declaration required: FUN_003343f0. */
@@ -27,9 +27,9 @@ void FUN_0020b718(int param_1,int param_2)
   int temp_v1;
   int temp_v2;
   
-  temp_v0 = DAT_0057f268;
+  temp_v0 = g_partyPanel;
   if (param_2 != 0) {
-    *(unsigned int *)(DAT_0057f268 + 0x24) = *(unsigned int *)(DAT_0057f268 + 0x1c);
+    *(unsigned int *)(g_partyPanel + 0x24) = *(unsigned int *)(g_partyPanel + 0x1c);
   }
   *(int *)(temp_v0 + 0x1c) = param_1;
   *(unsigned int *)(temp_v0 + 0x18) = 0;

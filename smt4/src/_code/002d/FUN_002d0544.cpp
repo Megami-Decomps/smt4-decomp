@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002b9024(void);
+int devilGetRecord(void);
 
-/* Supplied declaration required: FUN_002b9024. */
+/* Supplied declaration required: devilGetRecord. */
 
 
 int FUN_002d0544(unsigned int *param_1,unsigned int *param_2)
@@ -18,18 +18,18 @@ int FUN_002d0544(unsigned int *param_1,unsigned int *param_2)
   int temp_v2;
   
   temp_v0 = (param_1[1] & 0x1ffff) >> 2;
-  FUN_002b9024();
+  devilGetRecord();
   temp_v1 = (param_2[1] & 0x1ffff) >> 2;
-  FUN_002b9024();
+  devilGetRecord();
   temp_v2 = (unsigned int)*(unsigned char *)(temp_v0 + 2) - (unsigned int)*(unsigned char *)(temp_v1 + 2);
   if ((temp_v2 == 0) && (temp_v2 = (unsigned int)*(unsigned char *)(temp_v1 + 3) - (unsigned int)*(unsigned char *)(temp_v0 + 3), temp_v2 == 0))
   {
     temp_v2 = ((param_1[1] & 0x1ffff) >> 2) - ((param_2[1] & 0x1ffff) >> 2);
   }
   temp_v0 = *param_1 & 0x7fff;
-  FUN_002b9024();
+  devilGetRecord();
   temp_v1 = *param_2 & 0x7fff;
-  FUN_002b9024();
+  devilGetRecord();
   if (((temp_v2 == 0) && (temp_v2 = (unsigned int)*(unsigned char *)(temp_v0 + 2) - (unsigned int)*(unsigned char *)(temp_v1 + 2), temp_v2 == 0)
       ) && (temp_v2 = (unsigned int)*(unsigned char *)(temp_v1 + 3) - (unsigned int)*(unsigned char *)(temp_v0 + 3), temp_v2 == 0)) {
     temp_v2 = (*param_1 & 0x7fff) - (*param_2 & 0x7fff);
@@ -38,9 +38,9 @@ int FUN_002d0544(unsigned int *param_1,unsigned int *param_2)
     }
   }
   temp_v0 = (*param_1 & 0x3fffffff) >> 0xf;
-  FUN_002b9024();
+  devilGetRecord();
   temp_v1 = (*param_2 & 0x3fffffff) >> 0xf;
-  FUN_002b9024();
+  devilGetRecord();
   if (((temp_v2 == 0) && (temp_v2 = (unsigned int)*(unsigned char *)(temp_v0 + 2) - (unsigned int)*(unsigned char *)(temp_v1 + 2), temp_v2 == 0)
       ) && ((temp_v2 = (unsigned int)*(unsigned char *)(temp_v1 + 3) - (unsigned int)*(unsigned char *)(temp_v0 + 3), temp_v2 == 0 &&
             (temp_v2 = ((*param_1 & 0x3fffffff) >> 0xf) - ((*param_2 & 0x3fffffff) >> 0xf), temp_v2 == 0

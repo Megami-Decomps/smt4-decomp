@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002c0894(void);
+int asdTextureRelease(void);
 
 extern int DAT_0047e500; /* 0x47e500 */
 
-/* Supplied declaration required: FUN_002c0894. */
+/* Supplied declaration required: asdTextureRelease. */
 
 
 void FUN_00262a38(void)
@@ -23,7 +23,7 @@ void FUN_00262a38(void)
   if (temp_v0 < DAT_0047e500) {
     do {
       if (*piVar1 != 0) {
-        FUN_002c0894();
+        asdTextureRelease();
         *piVar1 = 0;
       }
       temp_v0 = temp_v0 + 1;

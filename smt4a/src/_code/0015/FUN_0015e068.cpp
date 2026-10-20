@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_0017572c(int, int);
+int listAppendNode(int, int);
 int FUN_0019102c(int, int);
 
 typedef int romwright_code(...);
 extern int FUN_00175678(void);
-/* Supplied declaration required: FUN_0017572c. */
+/* Supplied declaration required: listAppendNode. */
 /* Supplied declaration required: FUN_0019102c. */
 
 
@@ -30,7 +30,7 @@ unsigned char FUN_0015e068(unsigned char param_1,int *param_2)
     *(unsigned char *)(temp_v2 + 4) = 0x34;
     *(unsigned char *)(temp_v2 + 0x10) = param_1;
     *(int **)(temp_v2 + 0x14) = param_2;
-    FUN_0017572c(temp_v1,temp_v2);
+    listAppendNode(temp_v1,temp_v2);
   }
   return temp_v0 != 0;
 }

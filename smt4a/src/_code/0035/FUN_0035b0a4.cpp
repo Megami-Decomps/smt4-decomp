@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6dd0(int, int);
+int rt_aeabi_memclr(int, int);
 
 typedef struct fn_0035b0a4_arg0 fn_0035b0a4_arg0;
 struct fn_0035b0a4_arg0 {
@@ -18,7 +18,7 @@ struct fn_0035b0a4_arg0 {
 
 extern int DAT_0057f69c; /* 0x57f69c */
 
-/* Supplied declaration required: FUN_002e6dd0. */
+/* Supplied declaration required: rt_aeabi_memclr. */
 
 
 void FUN_0035b0a4(fn_0035b0a4_arg0 *param_1)
@@ -26,7 +26,7 @@ void FUN_0035b0a4(fn_0035b0a4_arg0 *param_1)
 {
 /* irregular: 1 native warning(s); review required */
   if (param_1 < (fn_0035b0a4_arg0 *)0x20) {
-    FUN_002e6dd0(DAT_0057f69c + (int)param_1 * 100 + 0x2720c,100);
+    rt_aeabi_memclr(DAT_0057f69c + (int)param_1 * 100 + 0x2720c,100);
     return;
   }
   return;

@@ -16,7 +16,7 @@ struct fn_004bb510_arg0 {
     ushort field_0xe; /* +0xe */
 };
 
-extern int FUN_001801a4(void);
+extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_001ad9b4. */
 extern int FUN_001ada74(unsigned short);
 extern fn_004bb510_arg0 *FUN_001ba3d4(unsigned int);
@@ -135,7 +135,7 @@ unsigned int FUN_004bb510(fn_004bb510_arg0 *param_1)
       temp_v1 = (unsigned int)(unsigned short)puVar1[3];
       FUN_001ad9b4();
       if (temp_v1 != 0) {
-        temp_v0 = FUN_001801a4();
+        temp_v0 = gameGetPlayerData();
         if ((*(short *)(temp_v1 + 0x120) != 0) &&
            ((int)*(short *)(temp_v1 + 0x120) <= (int)(unsigned int)*(unsigned short *)(temp_v0 + 0x62))) {
           return (unsigned int)*(unsigned short *)((int)puVar1 + 0xe);

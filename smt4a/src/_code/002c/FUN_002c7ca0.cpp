@@ -8,12 +8,12 @@ typedef struct Scene {
     /* 0x515 */ u8 unk515[3];
     /* 0x518 */ s32 state;
 } Scene;
-extern Scene *DAT_00588fe8;
+extern Scene *g_statusDown;
 
 /* Returns the flag byte at 0x514 of the scene at 0x588FE8. */
 u8 FUN_002c7ca0(void)
 {
-    return DAT_00588fe8->flag;
+    return g_statusDown->flag;
 }
 
 } /* extern "C" */

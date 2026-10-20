@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002be5a4(...);
 int FUN_002bed3c(void);
-int FUN_002beda4(...);
+int vec2GetXInt(...);
 int FUN_002bedb0(...);
 int FUN_002bee04(unsigned int, int, unsigned int);
 int FUN_002bf288(...);
@@ -33,7 +33,7 @@ extern unsigned int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: FUN_002bed3c. */
-/* Supplied declaration required: FUN_002beda4. */
+/* Supplied declaration required: vec2GetXInt. */
 /* Supplied declaration required: FUN_002bedb0. */
 /* Supplied declaration required: FUN_002bee04. */
 /* Supplied declaration required: FUN_002bf288. */
@@ -69,7 +69,7 @@ void FUN_0039bd04(int param_1)
   FUN_002bf538();
   FUN_002bed3c();
   temp_v9 = param_1 + 0x9f8;
-  temp_v0 = FUN_002beda4();
+  temp_v0 = vec2GetXInt();
   FUN_002bf380(2,0x1c,0x1d,temp_v0,0,0xd3);
   __aeabi_idivmod(*(int *)(param_1 + 0x9f0) + 1,DAT_0044cdcc);
   puVar6 = (unsigned int *)(param_1 + 0x9f4);
@@ -87,28 +87,28 @@ void FUN_0039bd04(int param_1)
     afStack_98[temp_v5 * 2] = temp_v7;
     temp_v7 = (float)VectorSignedToFloat((int)*(short *)(temp_v1 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
     afStack_98[temp_v5 * 2 + 1] = temp_v7;
-    temp_v2 = FUN_002beda4(temp_v9);
+    temp_v2 = vec2GetXInt(temp_v9);
     FUN_002bf288(1,0x1c,0x1121,temp_v2 + *(short *)(temp_v1 + 8),(int)*(short *)(temp_v1 + 10),6);
     temp_v5 = temp_v5 + 1;
   } while (temp_v5 < 9);
-  temp_v0 = FUN_002beda4(temp_v9);
+  temp_v0 = vec2GetXInt(temp_v9);
   temp_v7 = (float)VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_002bf288(1,0x1c,0x1123,(int)(temp_v7 + afStack_98[*(int *)(param_1 + 0x9f4) * 2]),
                (int)afStack_98[*(int *)(param_1 + 0x9f4) * 2 + 1],6);
-  temp_v0 = FUN_002beda4(temp_v9);
+  temp_v0 = vec2GetXInt(temp_v9);
   temp_v7 = (float)VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_002bf288(1,0x1c,0x1122,(int)(temp_v7 + afStack_98[temp_v6 * 2]),(int)afStack_98[temp_v6 * 2 + 1],6);
   temp_v4 = (*puVar6 + 4) & 7;
   temp_v6 = (temp_v4 + 1) & 7;
-  temp_v0 = FUN_002beda4(temp_v9);
+  temp_v0 = vec2GetXInt(temp_v9);
   temp_v7 = (float)VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_002bf288(1,0x1c,0x1123,(int)(temp_v7 + afStack_98[temp_v4 * 2]),(int)afStack_98[temp_v4 * 2 + 1],6);
-  temp_v0 = FUN_002beda4(temp_v9);
+  temp_v0 = vec2GetXInt(temp_v9);
   temp_v7 = (float)VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_002bf288(1,0x1c,0x1122,(int)(temp_v7 + afStack_98[temp_v6 * 2]),(int)afStack_98[temp_v6 * 2 + 1],6);
   temp_v5 = FUN_002bf4f8(0x1c,0x1120);
   rt_memcpy_w(temp_v8,&LAB_0039c030,0x1b);
-  temp_v1 = FUN_002beda4(temp_v9);
+  temp_v1 = vec2GetXInt(temp_v9);
   VectorSignedToFloat((temp_v1 - 0xe) + (int)*(short *)(temp_v5 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat((int)*(short *)(temp_v5 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_002be5a4(4,DAT_0044cdd0,temp_v8);

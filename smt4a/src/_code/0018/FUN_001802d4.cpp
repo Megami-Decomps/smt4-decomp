@@ -8,11 +8,11 @@ u32 FUN_001802d4(u32 id)
     u8 match;
     u32 result;
 
-    match = (s32)DAT_0057f248.record->unk64E == id;
+    match = (s32)g_ifTouch.record->unk64E == id;
     if (match) {
-        id = (u32)DAT_0057f248.record->unk008;
+        id = (u32)g_ifTouch.record->unk008;
     }
-    if ((match && id == 1) && (DAT_0057f248.record->unk650 < 1)) {
+    if ((match && id == 1) && (g_ifTouch.record->unk650 < 1)) {
         result = 1;
     } else {
         result = 0;

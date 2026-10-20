@@ -7,7 +7,7 @@ extern "C" {
 int CONCAT44(double, double);
 int FUN_00164b5c(...);
 int efctSetSpeed(void);
-int FUN_0016c410(...);
+int renderCtxResetColorScale(...);
 int FUN_0016c560(...);
 int FUN_0018291c(...);
 int FUN_001835b4(...);
@@ -44,7 +44,7 @@ extern float DAT_0064c0c0; /* 0x64c0c0 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00164b5c. */
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_0016c410. */
+/* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: FUN_0016c560. */
 /* Supplied declaration required: FUN_0018291c. */
 /* Supplied declaration required: FUN_001835b4. */
@@ -331,7 +331,7 @@ void FUN_001634b4(unsigned int *param_1)
         uStack_34 = temp_v8;
         FUN_0018291c(&uStack_70,&uStack_60,&uStack_50,&uStack_40,0,1);
         FUN_0016c560(g_renderCtx);
-        FUN_0016c410(g_renderCtx);
+        renderCtxResetColorScale(g_renderCtx);
       }
     }
     return;

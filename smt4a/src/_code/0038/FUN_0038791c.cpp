@@ -17,7 +17,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00153630. */
 /* Supplied declaration required: jobGetWork. */
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0019d96c. */
 /* Supplied declaration required: FUN_001ad0fc. */
 /* Supplied declaration required: FUN_001ad1ac. */
@@ -34,7 +34,7 @@ void FUN_0038791c(int param_1,unsigned int param_2,int param_3,unsigned int para
   unsigned int temp_v1;
   
   temp_v1 = param_4;
-  temp_v0 = FUN_0018719c(0x522);
+  temp_v0 = gameFlagIsSet(0x522);
   if ((temp_v0 != 0) && (param_1 == 0)) {
     return;
   }

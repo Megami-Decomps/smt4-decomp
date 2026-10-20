@@ -16,7 +16,7 @@ typedef struct EffectOwner {
 } EffectOwner;
 
 extern void FUN_001919a4(void *handle);
-extern void FUN_002e3328(void *handle);
+extern void asdOperatorDelete(void *handle);
 extern void jyoucyuGetTableEntry(int index);
 
 /* Marks the owner's effect finished and releases its handle. */
@@ -27,7 +27,7 @@ void FUN_002bd364(EffectOwner *owner)
     effect->finished = 1;
     if (effect->handle != NULL) {
         FUN_001919a4(effect->handle);
-        FUN_002e3328(effect->handle);
+        asdOperatorDelete(effect->handle);
         effect->handle = NULL;
     }
     jyoucyuGetTableEntry(0);

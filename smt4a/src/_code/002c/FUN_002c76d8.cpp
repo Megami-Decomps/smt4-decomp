@@ -9,14 +9,14 @@ typedef struct GameDataBlocksView {
 } GameDataBlocksView;
 extern GameDataBlocksView g_gameDataBlocks;
 
-void FUN_001406f0(s32 value);
+void appletSetHomeButtonHeld(s32 value);
 
-/* Marks the game-data table busy, adds the given bits to `holds` and runs FUN_001406f0(0). */
+/* Marks the game-data table busy, adds the given bits to `holds` and runs appletSetHomeButtonHeld(0). */
 void FUN_002c76d8(u32 bits)
 {
     g_gameDataBlocks.idle = 0;
     g_gameDataBlocks.holds = bits | g_gameDataBlocks.holds;
-    FUN_001406f0(0);
+    appletSetHomeButtonHeld(0);
 }
 
 } /* extern "C" */

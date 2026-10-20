@@ -4,10 +4,10 @@
 
 extern "C" {
 
-extern int DAT_0057f290; /* 0x57f290 */
+extern int g_unite; /* 0x57f290 */
 
 extern int FUN_0026140c(void);
-extern int FUN_00481104(unsigned short);
+extern int flagValueIsPositive(unsigned short);
 
 
 unsigned int FUN_003347f0(void)
@@ -17,12 +17,12 @@ unsigned int FUN_003347f0(void)
   int temp_v1;
   unsigned int temp_v2;
   
-  temp_v1 = DAT_0057f290;
+  temp_v1 = g_unite;
   temp_v2 = 0;
-  if (DAT_0057f290 != 0) {
-    if (((*(short *)(DAT_0057f290 + 0x92bc) == 0) ||
+  if (g_unite != 0) {
+    if (((*(short *)(g_unite + 0x92bc) == 0) ||
         (temp_v0 = FUN_0026140c(), (*(unsigned char *)(temp_v0 + 0x36) & 2) == 0)) ||
-       (temp_v1 = FUN_00481104(*(unsigned short *)(temp_v1 + 0x92bc)), temp_v1 == 0)) {
+       (temp_v1 = flagValueIsPositive(*(unsigned short *)(temp_v1 + 0x92bc)), temp_v1 == 0)) {
       temp_v2 = 0;
     }
     else {

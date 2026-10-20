@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001ad9b4(void);
 
-extern int FUN_0019f18c(unsigned int);
+extern int idIsAtLeast350(unsigned int);
 extern int FUN_0019f1a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001ad9b4. */
 extern int FUN_001ada74(unsigned int);
@@ -28,7 +28,7 @@ unsigned int FUN_00191848(int param_1)
     if (((temp_v1 != 0) && (*(char *)(temp_v1 + 6) == '\0')) &&
        (temp_v2 = FUN_0019f1a4(temp_v3,1), temp_v2 != 0)) {
       temp_v0 = *(short *)(temp_v1 + 0x124);
-      temp_v2 = FUN_0019f18c(temp_v3);
+      temp_v2 = idIsAtLeast350(temp_v3);
       if ((temp_v2 == 0) && (temp_v0 != 0)) {
         switch(temp_v0) {
         case 1:

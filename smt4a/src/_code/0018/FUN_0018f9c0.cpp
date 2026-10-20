@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0030ea58(int, int);
+int libc_strcmp(int, int);
 
 typedef struct fn_0018f9c0_arg0 fn_0018f9c0_arg0;
 struct fn_0018f9c0_arg0 {
@@ -20,7 +20,7 @@ struct fn_0018f9c0_arg0 {
 
 extern int FUN_001a7a20(int, int, unsigned int);
 extern unsigned int wstrlen(int);
-/* Supplied declaration required: FUN_0030ea58. */
+/* Supplied declaration required: libc_strcmp. */
 
 
 unsigned int FUN_0018f9c0(fn_0018f9c0_arg0 *param_1,int param_2)
@@ -52,7 +52,7 @@ unsigned int FUN_0018f9c0(fn_0018f9c0_arg0 *param_1,int param_2)
         temp_v4 = temp_v3 + piVar7[1] * 0x10;
         for (; temp_v3 != temp_v4; temp_v3 = temp_v3 + 0x10) {
           temp_v2 = *(int *)(temp_v3 + 0xc);
-          FUN_0030ea58(temp_v2,temp_v0);
+          libc_strcmp(temp_v2,temp_v0);
           if (temp_v2 == 0) break;
         }
         if (*piVar7 + piVar7[1] * 0x10 == temp_v3) {
@@ -88,7 +88,7 @@ unsigned int FUN_0018f9c0(fn_0018f9c0_arg0 *param_1,int param_2)
     temp_v4 = temp_v3 + piVar7[1] * 0x10;
     for (; temp_v3 != temp_v4; temp_v3 = temp_v3 + 0x10) {
       temp_v2 = *(int *)(temp_v3 + 0xc);
-      FUN_0030ea58(temp_v2,temp_v0);
+      libc_strcmp(temp_v2,temp_v0);
       if (temp_v2 == 0) break;
     }
     if (*piVar7 + piVar7[1] * 0x10 != temp_v3) {

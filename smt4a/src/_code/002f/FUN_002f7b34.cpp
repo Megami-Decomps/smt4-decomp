@@ -3,7 +3,7 @@
 extern "C" {
 
 extern const u8 DAT_00559504[];  /* vtable */
-void FUN_002e9598(u32 *member, u32 value);
+void onlineStringAssign(u32 *member, u32 value);
 
 typedef struct Object559504 {
     /* 0x00 */ const void *vtbl;
@@ -22,8 +22,8 @@ Object559504 *FUN_002f7b34(u32 unused, u32 first, u32 second)
 
     object = FUN_002fd284();
     object->vtbl = DAT_00559504;
-    FUN_002e9598(&object->first, first);
-    FUN_002e9598(&object->second, second);
+    onlineStringAssign(&object->first, first);
+    onlineStringAssign(&object->second, second);
     return object;
 }
 

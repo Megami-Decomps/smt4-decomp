@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_00103f54(unsigned int, unsigned int *, int, int);
-int FUN_00103f74(unsigned int, int);
+int holderSetFlagBits(unsigned int, int);
 int FUN_0011b704(int, unsigned int, int, int, int);
 int FUN_0011bf74(...);
 int FUN_0011fdd8(unsigned char **, unsigned char **);
-int FUN_002e6e14(int);
-int FUN_002e760a(int);
+int asdOperatorDeleteArray(int);
+int operatorNew(int);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 21 slot(s), 68 byte(s) */
@@ -46,13 +46,13 @@ extern unsigned char DAT_0055ac90; /* 0x55ac90 */
 extern unsigned char DAT_0055cacc; /* 0x55cacc */
 
 /* Supplied declaration required: FUN_00103f54. */
-/* Supplied declaration required: FUN_00103f74. */
+/* Supplied declaration required: holderSetFlagBits. */
 /* Supplied declaration required: FUN_0011b704. */
 /* Supplied declaration required: FUN_0011bf74. */
 /* Supplied declaration required: FUN_0011fdd8. */
 extern unsigned int *rt_malloc(int);
-/* Supplied declaration required: FUN_002e6e14. */
-/* Supplied declaration required: FUN_002e760a. */
+/* Supplied declaration required: asdOperatorDeleteArray. */
+/* Supplied declaration required: operatorNew. */
 extern unsigned int FUN_002fafd8(int, unsigned int);
 
 
@@ -227,7 +227,7 @@ void FUN_004134f8(int param_1)
         for (; puVar6 != puVar5; puVar6 = puVar6 + 0xc) {
           (**(romwright_code **)*puVar6)(puVar6);
         }
-        FUN_002e6e14(*piVar8);
+        asdOperatorDeleteArray(*piVar8);
         *piVar8 = (int)puVar2;
         *(unsigned int **)(temp_v1 + 0xb0) = puVar2 + temp_v15 * 0xc + 0xc;
         *(unsigned int **)(temp_v1 + 0xb4) = puVar2 + temp_v16 * 0xc;
@@ -236,21 +236,21 @@ void FUN_004134f8(int param_1)
     temp_v3 = temp_v3 + 1;
     temp_v4 = &DAT_0055a7d8;
   } while (temp_v3 < 100);
-  temp_v1 = FUN_002e760a(0x78);
+  temp_v1 = operatorNew(0x78);
   if (temp_v1 == 0) {
     temp_v2 = 0;
   }
   else {
     temp_v2 = FUN_002fafd8(temp_v1,0);
   }
-  puVar6 = (unsigned int *)FUN_002e760a(0x14);
+  puVar6 = (unsigned int *)operatorNew(0x14);
   if (puVar6 != (unsigned int *)0x0) {
     puVar6[1] = temp_v21;
     puVar6[2] = (unsigned int)FUN_00414484;
     puVar6[3] = 0;
     *puVar6 = (unsigned int)&DAT_0055cacc;
     puVar6[4] = temp_v2;
-    FUN_00103f74(temp_v2,2);
+    holderSetFlagBits(temp_v2,2);
     FUN_00103f54(temp_v2,puVar6,0,1);
   }
   FUN_0011b704(temp_v21 + 4,temp_v2,temp_v21 + 0xac,temp_v21 + 0xb8,temp_v21 + 0xc4);

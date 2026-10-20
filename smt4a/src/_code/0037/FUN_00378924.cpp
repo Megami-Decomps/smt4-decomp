@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0033c9f0(char *, int);
 
-extern int DAT_00581038; /* 0x581038 */
+extern int g_mapHakai; /* 0x581038 */
 
 /* Supplied declaration required: FUN_0033c9f0. */
 
@@ -21,7 +21,7 @@ void FUN_00378924(void)
   
   temp_v1 = 0;
   do {
-    temp_v0 = DAT_00581038 + temp_v1 * 0x54;
+    temp_v0 = g_mapHakai + temp_v1 * 0x54;
     pcVar2 = (char *)(temp_v0 + 0x5c);
     if (*pcVar2 != '\0') {
       FUN_0033c9f0(pcVar2,(int)*(short *)(temp_v0 + 0xac));

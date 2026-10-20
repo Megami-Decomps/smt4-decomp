@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002ac068(unsigned int, unsigned int);
+int dataTableFileGetTable(unsigned int, unsigned int);
 int FUN_002ac0c4(void);
 int FUN_002ac0f8(void);
 
@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_002ac068. */
+/* Supplied declaration required: dataTableFileGetTable. */
 /* Supplied declaration required: FUN_002ac0c4. */
 /* Supplied declaration required: FUN_002ac0f8. */
 extern int FUN_002ac12c(unsigned int);
@@ -48,7 +48,7 @@ int FUN_0025bed8(int param_1,int param_2,unsigned int param_3)
           do {
             if ((*(char *)(temp_v1 + temp_v3 * 0x40) == param_2) &&
                (*(char *)(*(int *)(temp_v4 + 0x4c) + temp_v3 * 0x10 + 0xc) != '\0')) {
-              FUN_002ac068(*(unsigned int *)(*(int *)(temp_v4 + 0x4c) + temp_v3 * 0x10),param_3);
+              dataTableFileGetTable(*(unsigned int *)(*(int *)(temp_v4 + 0x4c) + temp_v3 * 0x10),param_3);
               temp_v0 = dataTableGetCount();
               temp_v6 = temp_v6 + temp_v0;
             }

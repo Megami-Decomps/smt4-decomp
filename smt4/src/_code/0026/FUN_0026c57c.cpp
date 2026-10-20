@@ -16,7 +16,7 @@ typedef struct {
 } void_stack;
 
 extern unsigned char LAB_0026c61c; /* 0x26c61c */
-extern int DAT_0043dd68; /* 0x43dd68 */
+extern int g_unite; /* 0x43dd68 */
 
 /* Supplied declaration required: FUN_00210194. */
 /* Supplied declaration required: FUN_0029bb14. */
@@ -34,8 +34,8 @@ void FUN_0026c57c(void)
   unsigned int *puVar3;
   int *piVar4;
   
-  temp_v0 = DAT_0043dd68;
-  sndObjectForwardField8(*(unsigned int *)(DAT_0043dd68 + 0x95c8));
+  temp_v0 = g_unite;
+  sndObjectForwardField8(*(unsigned int *)(g_unite + 0x95c8));
   piVar4 = (int *)(temp_v0 + 0x95cc);
   if (*piVar4 == 0) {
     puVar2 = &LAB_0026c61c;

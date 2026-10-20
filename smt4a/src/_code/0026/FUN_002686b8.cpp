@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001641c4(void);
+int ifTouchRegionRemove(void);
 int FUN_0019de98(int, unsigned int);
 int FUN_00318df4(int);
 int FUN_00387ac4(int);
@@ -14,9 +14,9 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-extern unsigned char DAT_0057f27c; /* 0x57f27c */
+extern unsigned char g_useCounter; /* 0x57f27c */
 
-/* Supplied declaration required: FUN_001641c4. */
+/* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_00318df4. */
 /* Supplied declaration required: FUN_00387ac4. */
@@ -29,13 +29,13 @@ void FUN_002686b8(void)
   int temp_v0;
   int temp_v1;
   
-  temp_v0 = (*(int *)((unsigned char *)&DAT_0057f27c + 0x4));
+  temp_v0 = (*(int *)((unsigned char *)&g_useCounter + 0x4));
   temp_v1 = 0;
-  *(unsigned int *)((*(int *)((unsigned char *)&DAT_0057f27c + 0x4)) + 0x744) = 4;
+  *(unsigned int *)((*(int *)((unsigned char *)&g_useCounter + 0x4)) + 0x744) = 4;
   if (0 < *(short *)(temp_v0 + 0x786)) {
     do {
       *(unsigned short *)(temp_v0 + temp_v1 * 2 + 0x76c) = 0xffff;
-      FUN_001641c4();
+      ifTouchRegionRemove();
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < *(short *)(temp_v0 + 0x786));
   }

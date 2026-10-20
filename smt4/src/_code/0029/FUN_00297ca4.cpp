@@ -6,18 +6,18 @@ extern "C" {
 
 int FUN_00292960(char *, int);
 int btlGetMainState(void);
-int FUN_002a8764(...);
+int gameGetSlotTable(...);
 
 extern int FUN_0023dcb8(void);
 extern int FUN_00292914(int);
 /* Supplied declaration required: FUN_00292960. */
-extern int padIsButtonDown(void);
+extern int flagBitIsSet(void);
 extern int FUN_00293988(void);
 /* Supplied declaration required: btlGetMainState. */
 extern int FUN_0029e908(int);
-extern int FUN_002a8740(int);
-/* Supplied declaration required: FUN_002a8764. */
-extern int FUN_002c09d0(void);
+extern int gameGetUnitRecord(int);
+/* Supplied declaration required: gameGetSlotTable. */
+extern int gameFlagIsSet(void);
 
 
 unsigned int FUN_00297ca4(int param_1,int param_2)
@@ -35,7 +35,7 @@ unsigned int FUN_00297ca4(int param_1,int param_2)
   if ((param_2 != 0) && (temp_v0 = *(int *)(param_1 + 0x3048), temp_v0 == 6)) {
     return 0xb;
   }
-  temp_v0 = FUN_002a8764(temp_v0);
+  temp_v0 = gameGetSlotTable(temp_v0);
   temp_v4 = 0;
   temp_v2 = 0;
   do {
@@ -44,12 +44,12 @@ unsigned int FUN_00297ca4(int param_1,int param_2)
     temp_v3 = 0;
     if ((*(int *)(param_1 + 0x305c) != 0) &&
        (-1 < *(char *)(*(int *)(param_1 + 0x305c) + temp_v0 + 0x9107))) {
-      temp_v3 = FUN_002a8764();
-      temp_v3 = FUN_002a8740((int)*(char *)(*(int *)(param_1 + 0x305c) + temp_v3 + 0x9107));
+      temp_v3 = gameGetSlotTable();
+      temp_v3 = gameGetUnitRecord((int)*(char *)(*(int *)(param_1 + 0x305c) + temp_v3 + 0x9107));
     }
     if (((((pcVar2 != (char *)0x0) && (pcVar2[1] == '\x01')) &&
-         ((*(short *)(pcVar2 + 0x5c) == 0 || (temp_v1 = FUN_002c09d0(), temp_v1 != 0)))) &&
-        ((*(short *)(pcVar2 + 0x5e) == 0 || (temp_v1 = padIsButtonDown(), temp_v1 != 0)))) &&
+         ((*(short *)(pcVar2 + 0x5c) == 0 || (temp_v1 = gameFlagIsSet(), temp_v1 != 0)))) &&
+        ((*(short *)(pcVar2 + 0x5e) == 0 || (temp_v1 = flagBitIsSet(), temp_v1 != 0)))) &&
        ((pcVar2[0x5b] == '\0' ||
         (temp_v1 = btlGetMainState(), (*(unsigned int *)(temp_v1 + 0x44a0) & 0x40000) == 0)))) {
       if (*pcVar2 != '\x05') {

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019cac4(void);
+int dataTable00FindById(void);
 int FUN_0046fd8c(int, unsigned int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -14,11 +14,11 @@ typedef struct {
 
 extern int g_aocSystem; /* 0x570280 */
 
-extern int FUN_0014bef4(short);
+extern int randRange(short);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
-/* Supplied declaration required: FUN_0019cac4. */
+/* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: FUN_0046fd8c. */
 extern int FUN_004bb80c(void);
 
@@ -53,7 +53,7 @@ unsigned short FUN_004bc2dc(unsigned int param_1,int param_2)
         temp_v4 = 0;
         do {
           temp_v2 = (unsigned int)*(unsigned short *)(temp_v3 + temp_v4 * 2 + 0x14);
-          if (((temp_v2 != 0) && (FUN_0019cac4(), temp_v2 != 0)) &&
+          if (((temp_v2 != 0) && (dataTable00FindById(), temp_v2 != 0)) &&
              ((*(char *)(temp_v2 + 0xa2) != '\0' || (*(char *)(temp_v2 + 0xa3) != '\0'))))
           goto LAB_004bc3bc;
           temp_v4 = temp_v4 + 1;
@@ -64,7 +64,7 @@ unsigned short FUN_004bc2dc(unsigned int param_1,int param_2)
 LAB_004bc3bc:
     temp_v1 = temp_v1 + 1;
     if (temp_v1 >= 0x1e) {
-      temp_v1 = FUN_0014bef4(temp_v6 - 1);
+      temp_v1 = randRange(temp_v6 - 1);
       temp_v3 = 0;
       while ((psVar7 = (short *)(temp_v5 + temp_v3 * 4), *psVar7 == 0 ||
              (temp_v1 = temp_v1 - (unsigned int)(unsigned short)psVar7[1], -1 < temp_v1))) {

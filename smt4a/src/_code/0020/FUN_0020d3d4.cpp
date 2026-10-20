@@ -19,14 +19,14 @@ extern unsigned int DAT_00573bb4; /* 0x573bb4 */
 
 extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_00184310. */
-extern int FUN_0018719c(void);
-extern int FUN_001ab854(int);
-extern int FUN_001ab888(void);
+extern int gameFlagIsSet(void);
+extern int gameGetSlotRecord(int);
+extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_00203b40. */
 extern int FUN_00291e14(void);
 extern int FUN_002b24fc(void);
 /* Supplied declaration required: FUN_002cc228. */
-extern int FUN_003e46f4(void);
+extern int gameDataFlagTestBit(void);
 extern int FUN_004bd748(int);
 
 
@@ -49,8 +49,8 @@ void FUN_0020d3d4(int param_1)
     pcVar2 = (char *)(temp_v4 & 0xff);
     FUN_002cc228(pcVar2,1);
     if (((((pcVar2 != (char *)0x0) && (pcVar2[1] == '\x01')) &&
-         ((*(short *)(pcVar2 + 0x5c) == 0 || (temp_v1 = FUN_0018719c(), temp_v1 != 0)))) &&
-        (((*(short *)(pcVar2 + 0x5e) == 0 || (temp_v1 = FUN_003e46f4(), temp_v1 != 0)) &&
+         ((*(short *)(pcVar2 + 0x5c) == 0 || (temp_v1 = gameFlagIsSet(), temp_v1 != 0)))) &&
+        (((*(short *)(pcVar2 + 0x5e) == 0 || (temp_v1 = gameDataFlagTestBit(), temp_v1 != 0)) &&
          ((pcVar2[0x5b] == '\0' ||
           (temp_v1 = btlGetMainState(),
           (*(unsigned int *)(temp_v1 + 0x45a0) & DAT_00573bb0) == 0 &&
@@ -67,18 +67,18 @@ void FUN_0020d3d4(int param_1)
   temp_v5 = 0;
   do {
     temp_v6 = 0;
-    temp_v1 = FUN_001ab888();
+    temp_v1 = gameGetSlotTable();
     if (-1 < *(char *)(temp_v1 + temp_v5 + 0x1ca0)) {
-      temp_v1 = FUN_001ab888();
-      temp_v1 = FUN_001ab854((int)*(char *)(temp_v1 + temp_v5 + 0x1ca0));
+      temp_v1 = gameGetSlotTable();
+      temp_v1 = gameGetSlotRecord((int)*(char *)(temp_v1 + temp_v5 + 0x1ca0));
       if (temp_v1 != 0) {
         temp_v4 = 0;
         do {
           pcVar2 = (char *)(temp_v4 & 0xff);
           FUN_002cc228(pcVar2,0);
           if (((((pcVar2 != (char *)0x0) && (pcVar2[1] == '\x01')) &&
-               ((*(short *)(pcVar2 + 0x5c) == 0 || (temp_v2 = FUN_0018719c(), temp_v2 != 0)))) &&
-              ((*(short *)(pcVar2 + 0x5e) == 0 || (temp_v2 = FUN_003e46f4(), temp_v2 != 0)))) &&
+               ((*(short *)(pcVar2 + 0x5c) == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 != 0)))) &&
+              ((*(short *)(pcVar2 + 0x5e) == 0 || (temp_v2 = gameDataFlagTestBit(), temp_v2 != 0)))) &&
              ((pcVar2[0x5b] == '\0' ||
               (temp_v2 = btlGetMainState(),
               (DAT_00573bb4 & *(unsigned int *)(temp_v2 + 0x45a4)) == 0 &&

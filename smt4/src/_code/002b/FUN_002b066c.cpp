@@ -2,9 +2,9 @@
 
 extern "C" {
 
-extern u8 *FUN_002a8740(int index);
-extern s8 *FUN_002a8764(void);
-extern int FUN_002a8778(void);
+extern u8 *gameGetUnitRecord(int index);
+extern s8 *gameGetSlotTable(void);
+extern int gameCountUnits(void);
 
 typedef struct Unit {
     /* 0x00 */ u8 unk00[0x46];
@@ -19,16 +19,16 @@ int FUN_002b066c(u32 id)
     int slot;
     Unit *unit;
 
-    count = FUN_002a8778();
+    count = gameCountUnits();
     if (0 < count) {
         do {
-            slot = FUN_002a8764()[i + 0x90f0];
-            unit = (Unit *)FUN_002a8740(slot);
+            slot = gameGetSlotTable()[i + 0x90f0];
+            unit = (Unit *)gameGetUnitRecord(slot);
             if (unit->id == id) {
                 return (int)unit;
             }
             i = i + 1;
-            count = FUN_002a8778();
+            count = gameCountUnits();
         } while (i < count);
     }
     return 0;

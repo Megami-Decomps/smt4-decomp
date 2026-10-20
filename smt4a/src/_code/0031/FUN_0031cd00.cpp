@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00231464(...);
 int FUN_00301ed4(...);
-int FUN_003fd63c(...);
+int gameFlagSetValue(...);
 
 typedef struct fn_0031cd00_arg0 fn_0031cd00_arg0;
 struct fn_0031cd00_arg0 {
@@ -29,11 +29,11 @@ extern unsigned int DAT_0057f68c; /* 0x57f68c */
 extern unsigned int DAT_0057f690; /* 0x57f690 */
 extern unsigned int DAT_0057f694; /* 0x57f694 */
 
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_00231464. */
 /* Supplied declaration required: FUN_00301ed4. */
-extern int FUN_003e46f4(unsigned int);
-/* Supplied declaration required: FUN_003fd63c. */
+extern int gameDataFlagTestBit(unsigned int);
+/* Supplied declaration required: gameFlagSetValue. */
 
 
 void FUN_0031cd00(fn_0031cd00_arg0 *param_1)
@@ -48,13 +48,13 @@ void FUN_0031cd00(fn_0031cd00_arg0 *param_1)
   if (param_1->field_0xa8 == 2) {
     if (!((param_1->field_0x45a8 & DAT_0057f690) == 0 && (param_1->field_0x45ac & DAT_0057f694) == 0
          )) {
-      temp_v0 = FUN_0018719c(0x1fc);
-      if ((temp_v0 != 0) || (temp_v0 = FUN_003e46f4(0x80), temp_v0 != 0)) {
-        temp_v0 = FUN_0018719c(0x1fe);
+      temp_v0 = gameFlagIsSet(0x1fc);
+      if ((temp_v0 != 0) || (temp_v0 = gameDataFlagTestBit(0x80), temp_v0 != 0)) {
+        temp_v0 = gameFlagIsSet(0x1fe);
 joined_r0x0031ce38:
         if (temp_v0 != 0) {
-          FUN_003fd63c(0x1fe,0,1);
-          FUN_003fd63c(0x1fc,0,1);
+          gameFlagSetValue(0x1fe,0,1);
+          gameFlagSetValue(0x1fc,0,1);
         }
         *(unsigned char *)(puVar1 + 2) = 2;
         *(unsigned char *)((int)puVar1 + 0x25) = 0;
@@ -74,9 +74,9 @@ joined_r0x0031ce38:
         puVar1[4] = 0;
         return;
       }
-      temp_v0 = FUN_0018719c(0x1fc);
-      if ((temp_v0 != 0) || (temp_v0 = FUN_003e46f4(0x80), temp_v0 != 0)) {
-        temp_v0 = FUN_0018719c(0x1fe);
+      temp_v0 = gameFlagIsSet(0x1fc);
+      if ((temp_v0 != 0) || (temp_v0 = gameDataFlagTestBit(0x80), temp_v0 != 0)) {
+        temp_v0 = gameFlagIsSet(0x1fe);
         goto joined_r0x0031ce38;
       }
       *(unsigned char *)(puVar1 + 2) = 1;

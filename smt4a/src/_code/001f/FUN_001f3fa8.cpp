@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_00164af0(unsigned int);
+extern int padButtonRepeat(unsigned int);
 
 
 unsigned int FUN_001f3fa8(int *param_1,int param_2,int param_3,int param_4,int param_5,int param_6)
@@ -23,9 +23,9 @@ unsigned int FUN_001f3fa8(int *param_1,int param_2,int param_3,int param_4,int p
         if (param_5 != 3) {
           return 0;
         }
-        temp_v0 = FUN_00164af0(4);
+        temp_v0 = padButtonRepeat(4);
         if (temp_v0 == 0) {
-          temp_v0 = FUN_00164af0(3);
+          temp_v0 = padButtonRepeat(3);
 joined_r0x001f403c:
           if (temp_v0 == 0) {
             return 0;
@@ -34,9 +34,9 @@ joined_r0x001f403c:
         }
       }
       else {
-        temp_v0 = FUN_00164af0(5);
+        temp_v0 = padButtonRepeat(5);
         if (temp_v0 == 0) {
-          temp_v0 = FUN_00164af0(6);
+          temp_v0 = padButtonRepeat(6);
           goto joined_r0x001f403c;
         }
       }
@@ -44,16 +44,16 @@ LAB_001f408c:
       temp_v0 = 1;
       goto LAB_001f4090;
     }
-    temp_v0 = FUN_00164af0(4);
+    temp_v0 = padButtonRepeat(4);
     if (temp_v0 == 0) {
-      temp_v0 = FUN_00164af0(3);
+      temp_v0 = padButtonRepeat(3);
       goto joined_r0x001f4010;
     }
   }
   else {
-    temp_v0 = FUN_00164af0(5);
+    temp_v0 = padButtonRepeat(5);
     if (temp_v0 == 0) {
-      temp_v0 = FUN_00164af0(6);
+      temp_v0 = padButtonRepeat(6);
 joined_r0x001f4010:
       if (temp_v0 == 0) {
         return 0;

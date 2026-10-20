@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00163aa4(int);
-int FUN_001846d0(int, int);
+int uiSpriteSelectAnim(int, int);
 int FUN_00203b40(int, unsigned int, int, int, int, int);
 int rt_memcpy_w(int, unsigned int, int);
 
@@ -15,7 +15,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_00163aa4. */
-/* Supplied declaration required: FUN_001846d0. */
+/* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: FUN_00203b40. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -74,7 +74,7 @@ void FUN_002007f4(int param_1)
     temp_v0 = 2;
   }
   do {
-    FUN_001846d0(param_1 + temp_v1 * 0x8c + 0x20,temp_v0);
+    uiSpriteSelectAnim(param_1 + temp_v1 * 0x8c + 0x20,temp_v0);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 5);
   *(unsigned int *)(param_1 + 0x6ec) = 2;

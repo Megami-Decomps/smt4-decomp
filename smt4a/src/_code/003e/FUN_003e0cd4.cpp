@@ -33,8 +33,8 @@ typedef struct {
     unsigned int sp5C; /* 0x5c: local_5c */
 } param_2_stack;
 
-extern unsigned int DAT_005712f0; /* 0x5712f0 */
-extern int DAT_00571508; /* 0x571508 */
+extern unsigned int g_btlActionReflect; /* 0x5712f0 */
+extern int g_btlCamera; /* 0x571508 */
 extern unsigned int DAT_00573808; /* 0x573808 */
 extern unsigned int DAT_00573830; /* 0x573830 */
 extern unsigned int DAT_00573834; /* 0x573834 */
@@ -46,7 +46,7 @@ extern unsigned int DAT_00573850; /* 0x573850 */
 extern unsigned int DAT_00573854; /* 0x573854 */
 extern unsigned int DAT_00573860; /* 0x573860 */
 extern unsigned int DAT_00573864; /* 0x573864 */
-extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
+extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
 /* Supplied declaration required: FUN_00229ffc. */
 /* Supplied declaration required: FUN_003d9164. */
@@ -77,10 +77,10 @@ unsigned int FUN_003e0cd4(unsigned int *param_1,fn_003e0cd4_arg1 *param_2)
   int temp_v13;
   unsigned int *puVar15;
   
-  if ((((param_2[1].field_0x17 == '\0') || (temp_v8 = chainCountIdUnflagged(DAT_005712f0,param_1), temp_v8 < 1))
+  if ((((param_2[1].field_0x17 == '\0') || (temp_v8 = chainCountIdUnflagged(g_btlActionReflect,param_1), temp_v8 < 1))
       && (temp_v8 = FUN_004f6384(DAT_00573808), temp_v8 != 0)) &&
      (((param_2->field_0x45a0 & DAT_00573860) == 0 && (*(unsigned int *)(param_2 + 1) & DAT_00573864) == 0
-      || (temp_v8 = FUN_004a96d4(DAT_0057a9c8), temp_v8 != 0)))) {
+      || (temp_v8 = FUN_004a96d4(g_btlUiBlock), temp_v8 != 0)))) {
     temp_v7 = DAT_00573854;
     temp_v6 = DAT_00573850;
     temp_v5 = DAT_00573844;
@@ -114,7 +114,7 @@ unsigned int FUN_003e0cd4(unsigned int *param_1,fn_003e0cd4_arg1 *param_2)
       } while (temp_v8 < 0x36);
     }
     param_1[3] = param_1[3] | 4;
-    temp_v8 = FUN_004f2708(DAT_00571508,param_2,1);
+    temp_v8 = FUN_004f2708(g_btlCamera,param_2,1);
     if (temp_v8 != 0) {
       temp_v0 = *(short *)&param_2->field_0x2004;
       temp_v9 = 0xffffffff;
@@ -130,17 +130,17 @@ unsigned int FUN_003e0cd4(unsigned int *param_1,fn_003e0cd4_arg1 *param_2)
       else if (temp_v0 == 3) {
         temp_v9 = 4;
       }
-      *(unsigned int *)(DAT_00571508 + 0x7cc) = temp_v9;
+      *(unsigned int *)(g_btlCamera + 0x7cc) = temp_v9;
     }
     param_1[4] = 0;
     *param_1 = 0x1a;
     param_1[3] = 0;
-    temp_v8 = chainCountIdUnflagged(DAT_005712f0,param_1);
+    temp_v8 = chainCountIdUnflagged(g_btlActionReflect,param_1);
     if (((temp_v8 < 1) && (temp_v8 = FUN_004f6384(DAT_00573808), temp_v8 != 0)) &&
-       ((temp_v8 = DAT_00571508, FUN_00229ffc(), temp_v8 != 0 &&
-        ((*(unsigned int *)(DAT_00571508 + 0x64c) & 0x80000) == 0)))) {
+       ((temp_v8 = g_btlCamera, FUN_00229ffc(), temp_v8 != 0 &&
+        ((*(unsigned int *)(g_btlCamera + 0x64c) & 0x80000) == 0)))) {
       FUN_003e9cd0(param_2);
-      *(unsigned int *)(DAT_00571508 + 0x64c) = *(unsigned int *)(DAT_00571508 + 0x64c) & 0xffffbfff;
+      *(unsigned int *)(g_btlCamera + 0x64c) = *(unsigned int *)(g_btlCamera + 0x64c) & 0xffffbfff;
       FUN_003d9164();
       return 0xffffffff;
     }

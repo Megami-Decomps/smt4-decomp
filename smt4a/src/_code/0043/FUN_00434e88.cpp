@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_4_stack;
 
-extern unsigned int FUN_002e783c(unsigned int);
+extern unsigned int wstrlenU16(unsigned int);
 /* Supplied declaration required: FUN_00434dd0. */
 
 
@@ -30,7 +30,7 @@ unsigned int FUN_00434e88(unsigned int *param_1,int param_2,unsigned int param_3
   
   *param_1 = param_3;
   temp_v7 = param_4;
-  temp_v1 = FUN_002e783c(param_3);
+  temp_v1 = wstrlenU16(param_3);
   param_1[1] = temp_v1;
   temp_v7 = *(int *)(param_2 + 4);
   temp_v0 = *(char *)(temp_v7 + 8);

@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_002af5c0(void *block, int a, int b);
+int uiSpriteSetImageKeyframe(void *block, int a, int b);
 
 typedef struct Obj {
     /* 0x000 */ u32 flags;
@@ -20,8 +20,8 @@ void FUN_0027e9c0(Obj *obj)
     if ((flags & 0x10) != 0 && (flags & 0x20) != 0) {
         obj->unk008 = 3;
         obj->flags = flags & 0xffffffdf;
-        FUN_002af5c0(obj->blockA, 2, 0);
-        FUN_002af5c0(obj->blockB, 2, 0);
+        uiSpriteSetImageKeyframe(obj->blockA, 2, 0);
+        uiSpriteSetImageKeyframe(obj->blockB, 2, 0);
         return;
     }
 }

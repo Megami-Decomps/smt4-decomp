@@ -5,13 +5,13 @@
 extern "C" {
 
 int FUN_00100388(unsigned char [132], unsigned char *, int, int);
-int FUN_0019cac4(void);
+int dataTable00FindById(void);
 int FUN_002804b0(unsigned char [132], int *, int);
 int sysMemClear(unsigned char [132], int);
 int FUN_003e12a8(unsigned int *, int);
 int FUN_003e3188(unsigned int *, int);
 int FUN_003eebf4(int, int);
-int FUN_0047118c(unsigned int, int, int *, unsigned char [132]);
+int aocQueueType38(unsigned int, int, int *, unsigned char [132]);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -24,14 +24,14 @@ extern unsigned int DAT_00573880; /* 0x573880 */
 extern unsigned int DAT_00573884; /* 0x573884 */
 
 /* Supplied declaration required: FUN_00100388. */
-/* Supplied declaration required: FUN_0019cac4. */
+/* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: FUN_002804b0. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003e12a8. */
 /* Supplied declaration required: FUN_003e3188. */
 /* Supplied declaration required: FUN_003eebf4. */
 extern int FUN_004706a8(unsigned int, unsigned short);
-/* Supplied declaration required: FUN_0047118c. */
+/* Supplied declaration required: aocQueueType38. */
 
 
 void FUN_003e03b0(unsigned int *param_1,int param_2)
@@ -51,14 +51,14 @@ void FUN_003e03b0(unsigned int *param_1,int param_2)
     *(unsigned int *)(param_2 + 0x45a0) = DAT_00573880 | *(unsigned int *)(param_2 + 0x45a0);
     *(unsigned int *)(param_2 + 0x45a4) = temp_v1;
     puVar1 = (unsigned short *)(unsigned int)*(unsigned short *)(*(int *)(param_2 + 0x1ffc) + temp_v0 * 0x408 + 0x166);
-    FUN_0019cac4();
+    dataTable00FindById();
     sysMemClear(temp_v2,0x80);
     FUN_00100388(temp_v2,&LAB_003e04ec,*(unsigned char *)(puVar1 + 0x51),
                  *(unsigned char *)((int)puVar1 + 0xa3));
     temp_v0 = FUN_004706a8(g_aocSystem,*puVar1);
     piVar4 = (int *)(param_2 + 0x1ec4);
     if (temp_v0 != 0) {
-      FUN_0047118c(g_aocSystem,*puVar1,piVar4,temp_v2);
+      aocQueueType38(g_aocSystem,*puVar1,piVar4,temp_v2);
     }
     else {
       FUN_002804b0(temp_v2,piVar4,0);

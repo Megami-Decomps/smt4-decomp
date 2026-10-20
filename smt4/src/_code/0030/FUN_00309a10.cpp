@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b7014(void);
+int asdModelCommandBlockRelease(void);
 int FUN_002b703c(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -15,7 +15,7 @@ typedef struct {
 extern int DAT_004729e0; /* 0x4729e0 */
 extern int DAT_004729e4; /* 0x4729e4 */
 
-/* Supplied declaration required: FUN_002b7014. */
+/* Supplied declaration required: asdModelCommandBlockRelease. */
 /* Supplied declaration required: FUN_002b703c. */
 
 
@@ -30,7 +30,7 @@ void FUN_00309a10(unsigned int param_1)
   *(unsigned int *)(DAT_004729e0 + DAT_004729e4 * 4) = param_1;
   *(unsigned int *)(temp_v0 + DAT_004729e4 * 4 + 4) = 0xf0106;
   DAT_004729e4 = DAT_004729e4 + 2;
-  FUN_002b7014();
+  asdModelCommandBlockRelease();
   return;
 }
 

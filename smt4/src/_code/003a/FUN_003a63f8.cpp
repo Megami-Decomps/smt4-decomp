@@ -6,7 +6,7 @@ extern "C" {
 
 extern unsigned char DAT_0044e068; /* 0x44e068 */
 
-extern unsigned int FUN_002a46d8(unsigned int);
+extern unsigned int fileSlotFree(unsigned int);
 
 
 unsigned int FUN_003a63f8(void)
@@ -16,7 +16,7 @@ unsigned int FUN_003a63f8(void)
   
   (*(int *)((unsigned char *)&DAT_0044e068 + 0x4)) = (*(int *)((unsigned char *)&DAT_0044e068 + 0x4)) - 1;
   if ((*(int *)((unsigned char *)&DAT_0044e068 + 0x4)) < 1) {
-    temp_v0 = FUN_002a46d8(0x17);
+    temp_v0 = fileSlotFree(0x17);
     return temp_v0;
   }
   return 1;

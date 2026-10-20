@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002aaa88(...);
+int nw_gfx_SceneBuilder_CreateObjectByResourceType(...);
 
 /* stack frame of param_7: 6 slot(s), 24 byte(s) */
 typedef struct {
@@ -16,7 +16,7 @@ typedef struct {
     unsigned int sp50; /* 0x50: local_50 */
 } param_7_stack;
 
-/* Supplied declaration required: FUN_002aaa88. */
+/* Supplied declaration required: nw_gfx_SceneBuilder_CreateObjectByResourceType. */
 
 
 void nw_gfx_SceneBuilder_BuildChildren
@@ -48,7 +48,7 @@ void nw_gfx_SceneBuilder_BuildChildren
     if (unaff_r4 != (int *)(temp_v0 + *(int *)(param_5 + 0x20) * 4)) {
       do {
         if (param_7 != 0) {
-          FUN_002aaa88(param_1,param_2,param_3,0,param_5,0,0,1,1);
+          nw_gfx_SceneBuilder_CreateObjectByResourceType(param_1,param_2,param_3,0,param_5,0,0,1,1);
         }
         else {
           if (*unaff_r4 != 0) {
@@ -57,7 +57,7 @@ void nw_gfx_SceneBuilder_BuildChildren
           else {
             temp_v0 = 0;
           }
-          FUN_002aaa88(param_1,0,0,param_4,temp_v0,(int)param_6,(int)((unsigned long long)param_6 >> 0x20),1,0)
+          nw_gfx_SceneBuilder_CreateObjectByResourceType(param_1,0,0,param_4,temp_v0,(int)param_6,(int)((unsigned long long)param_6 >> 0x20),1,0)
           ;
         }
         if (*(int *)(param_5 + 0x24) != 0) {

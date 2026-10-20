@@ -4,8 +4,8 @@
 
 extern "C" {
 
-extern int FUN_0018719c(unsigned int);
-extern int FUN_001ab888(void);
+extern int gameFlagIsSet(unsigned int);
+extern int gameGetSlotTable(void);
 
 
 void FUN_003e5354(int param_1)
@@ -15,13 +15,13 @@ void FUN_003e5354(int param_1)
   unsigned int temp_v1;
   unsigned int temp_v2;
   
-  temp_v0 = FUN_0018719c(0x533);
+  temp_v0 = gameFlagIsSet(0x533);
   if (temp_v0 != 0) {
     temp_v1 = 0;
     temp_v2 = temp_v1;
     do {
       if ((temp_v1 & 0xffff) < 0xc) {
-        temp_v0 = FUN_001ab888();
+        temp_v0 = gameGetSlotTable();
         temp_v0 = temp_v0 + (temp_v1 & 0xffff) * 0x134;
         if ((temp_v0 != -0x1ddc) && ((*(unsigned int *)(temp_v0 + 0x1f0c) & 1) != 0)) {
           temp_v2 = temp_v2 + 1;
@@ -30,7 +30,7 @@ void FUN_003e5354(int param_1)
       temp_v1 = temp_v1 + 1;
     } while ((int)temp_v1 < 0xc);
     if ((int)temp_v2 >= 2) {
-      temp_v0 = FUN_001ab888();
+      temp_v0 = gameGetSlotTable();
       param_1 = *(short *)(temp_v0 + 0x2c4e) + param_1;
       if (param_1 < 0) {
         param_1 = 0;

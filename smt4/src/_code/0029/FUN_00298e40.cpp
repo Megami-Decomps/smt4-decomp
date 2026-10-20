@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_002b63c0(void);
+int dataTable1bOr1cGetRecord(void);
 
 extern int FUN_0025b6e8(unsigned short);
 extern int FUN_0028fb40(unsigned short);
 extern int FUN_0029bcf0(unsigned short);
 extern int FUN_002ae3c4(unsigned short);
-/* Supplied declaration required: FUN_002b63c0. */
+/* Supplied declaration required: dataTable1bOr1cGetRecord. */
 extern int FUN_00348b7c(int);
 
 
@@ -24,7 +24,7 @@ void FUN_00298e40(int param_1,int param_2,int *param_3)
   int temp_v3;
   
   temp_v2 = param_1;
-  FUN_002b63c0();
+  dataTable1bOr1cGetRecord();
   if (temp_v2 == 0) {
     return;
   }

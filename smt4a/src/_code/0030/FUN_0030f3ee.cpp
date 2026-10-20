@@ -5,9 +5,9 @@
 extern "C" {
 
 int FUN_00135ab4(unsigned char [8], int, int *);
-int FUN_002e7228(void);
+int onlineJobSetStateReady(void);
 int FUN_002eb338(int *, unsigned char [8], unsigned int);
-int FUN_002eb588(unsigned char [8]);
+int onlineTimeGetNow(unsigned char [8]);
 int FUN_0030f3e0(unsigned int);
 int FUN_0030f558(int, int *);
 int FUN_0030f58c(int, int *);
@@ -23,9 +23,9 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: FUN_00135ab4. */
-/* Supplied declaration required: FUN_002e7228. */
+/* Supplied declaration required: onlineJobSetStateReady. */
 /* Supplied declaration required: FUN_002eb338. */
-/* Supplied declaration required: FUN_002eb588. */
+/* Supplied declaration required: onlineTimeGetNow. */
 /* Supplied declaration required: FUN_0030f3e0. */
 /* Supplied declaration required: FUN_0030f558. */
 /* Supplied declaration required: FUN_0030f58c. */
@@ -56,7 +56,7 @@ void FUN_0030f3ee(int param_1,int param_2,int param_3)
   if (temp_v0 != '\0') {
     if (temp_v0 == '\x01') {
       temp_v2 = *(unsigned int *)(param_2 + 0x24);
-      FUN_002eb588(temp_v8);
+      onlineTimeGetNow(temp_v8);
       FUN_002eb338(&temp_v6,temp_v8,temp_v2);
       temp_v4 = temp_v7;
       temp_v3 = temp_v6;
@@ -77,7 +77,7 @@ void FUN_0030f3ee(int param_1,int param_2,int param_3)
     }
   }
   else {
-    FUN_002e7228();
+    onlineJobSetStateReady();
     temp_v1 = param_1 + 0xe8;
   }
   if (param_3 != 0) {

@@ -8,8 +8,8 @@ int FUN_0022a5d8(int, int, int);
 int FUN_0022a918(unsigned int, int);
 int FUN_00246134(unsigned int, int, int, unsigned int);
 int FUN_00246e24(unsigned int, unsigned int, int, int, int);
-int FUN_00250d74(int);
-int FUN_00282924(int, int);
+int asdMemFreeIfNotNull(int);
+int btlMainFindEntryByListedId(int, int);
 int asdOperatorNewC(void);
 
 /* stack frame of param_3: 4 slot(s), 16 byte(s) */
@@ -25,8 +25,8 @@ typedef struct {
 extern int randRange(unsigned int);
 /* Supplied declaration required: FUN_00246134. */
 /* Supplied declaration required: FUN_00246e24. */
-/* Supplied declaration required: FUN_00250d74. */
-/* Supplied declaration required: FUN_00282924. */
+/* Supplied declaration required: asdMemFreeIfNotNull. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: asdOperatorNewC. */
 
 
@@ -81,12 +81,12 @@ void FUN_003cefe0(int *param_1,unsigned int param_2,unsigned int param_3)
     temp_v7 = *(int *)(*param_1 + 0x1e98) + *(int *)(temp_v3 + temp_v6 * 4) * 0x114;
     FUN_00246e24(param_3,param_2,temp_v7,0x200,1);
     temp_v6 = *param_1;
-    FUN_00282924(temp_v6,(int)*(short *)(temp_v7 + 0x62));
+    btlMainFindEntryByListedId(temp_v6,(int)*(short *)(temp_v7 + 0x62));
     *(unsigned short *)(temp_v6 + 0x1c8) = 0;
     *(unsigned short *)(temp_v6 + 0x1ca) = *(unsigned short *)(temp_v6 + 0x1ca) | 0x10;
     FUN_0022a5d8(0x1c,temp_v6,1);
   }
-  FUN_00250d74(temp_v3);
+  asdMemFreeIfNotNull(temp_v3);
   return;
 }
 

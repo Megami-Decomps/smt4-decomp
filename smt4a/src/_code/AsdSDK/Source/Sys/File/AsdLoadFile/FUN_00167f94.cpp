@@ -8,9 +8,9 @@ int FUN_00100388(...);
 int refIsNullOrZero(int *);
 int FUN_001883b0(unsigned int *, unsigned short [264], int);
 int vcallSlot12IfValid(unsigned int);
-int FUN_00195fc8(void);
+int sysFatalBreak(void);
 int FUN_002e3c44(unsigned short *, unsigned char *, int, int *);
-int FUN_002e6dd0(unsigned char [256], int);
+int rt_aeabi_memclr(unsigned char [256], int);
 
 /* stack frame of param_1: 8 slot(s), 32 byte(s) */
 typedef struct {
@@ -33,10 +33,10 @@ extern int asdFileHashPackIsOpen(void);
 extern int FUN_001860e4(unsigned char *);
 /* Supplied declaration required: FUN_001883b0. */
 /* Supplied declaration required: vcallSlot12IfValid. */
-/* Supplied declaration required: FUN_00195fc8. */
+/* Supplied declaration required: sysFatalBreak. */
 extern int FUN_0019dbb8(unsigned int);
 /* Supplied declaration required: FUN_002e3c44. */
-/* Supplied declaration required: FUN_002e6dd0. */
+/* Supplied declaration required: rt_aeabi_memclr. */
 
 
 unsigned int FUN_00167f94(unsigned int param_1)
@@ -57,7 +57,7 @@ unsigned int FUN_00167f94(unsigned int param_1)
   unsigned int temp_v7;
   
   puVar5 = temp_v2;
-  FUN_002e6dd0(temp_v3,0x100);
+  rt_aeabi_memclr(temp_v3,0x100);
   if ((g_asdLoadFileUseRawPaths != '\0') || (temp_v1 = FUN_0019dbb8(param_1), temp_v1 != 0)) {
     FUN_00100388(temp_v3,param_1);
   }
@@ -97,7 +97,7 @@ unsigned int FUN_00167f94(unsigned int param_1)
   FUN_001883b0(puVar4,temp_v2,1);
   if ((temp_v5[0] & 0xfffffffe) != 0) {
     if ((temp_v5[0] & 1) != 0) {
-      FUN_00195fc8();
+      sysFatalBreak();
     }
     vcallSlot12IfValid(temp_v5[0] & 0xfffffffe);
     temp_v5[0] = 0;
@@ -105,7 +105,7 @@ unsigned int FUN_00167f94(unsigned int param_1)
   if (((int)puVar4 < 0) && (!temp_v0)) {
     if ((temp_v5[0] & 0xfffffffe) != 0) {
       if ((temp_v5[0] & 1) != 0) {
-        FUN_00195fc8();
+        sysFatalBreak();
       }
       vcallSlot12IfValid(temp_v5[0] & 0xfffffffe);
     }
@@ -113,7 +113,7 @@ unsigned int FUN_00167f94(unsigned int param_1)
   }
   if ((temp_v5[0] & 0xfffffffe) != 0) {
     if ((temp_v5[0] & 1) != 0) {
-      FUN_00195fc8();
+      sysFatalBreak();
     }
     vcallSlot12IfValid(temp_v5[0] & 0xfffffffe);
   }

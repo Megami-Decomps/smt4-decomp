@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 int FUN_0035e458(void);
 int FUN_004cd0c8(int, int, unsigned short [10]);
 int FUN_004cd4b8(int, int);
@@ -19,8 +19,8 @@ typedef struct {
 } param_3_stack;
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-extern int FUN_001ab888(void);
-/* Supplied declaration required: FUN_001aba54. */
+extern int gameGetSlotTable(void);
+/* Supplied declaration required: dataTable04FindById. */
 extern int FUN_0035d89c(unsigned int);
 /* Supplied declaration required: FUN_0035e458. */
 /* Supplied declaration required: FUN_004cd0c8. */
@@ -48,7 +48,7 @@ unsigned int FUN_003e4b2c(unsigned int param_1,unsigned int param_2,int param_3)
       temp_v6 = 0;
     }
     else {
-      temp_v6 = FUN_001ab888();
+      temp_v6 = gameGetSlotTable();
       temp_v6 = temp_v6 + (temp_v4 & 0xffff) * 0x134 + 0x1ddc;
     }
     temp_v0 = (unsigned int)*(unsigned short *)(temp_v6 + 300);
@@ -94,7 +94,7 @@ unsigned int FUN_003e4b2c(unsigned int param_1,unsigned int param_2,int param_3)
     if ((temp_v6 != 0) && (temp_v5 < 8)) {
       *(unsigned short *)(temp_v6 + temp_v5 * 2 + 0x34) = temp_v9[temp_v2];
       temp_v0 = temp_v4;
-      FUN_001aba54();
+      dataTable04FindById();
       temp_v7 = 0;
       if ((temp_v0 != 0) && (*(unsigned short *)(temp_v0 + 0x26) < 0x12)) {
         temp_v7 = (int)*(char *)((unsigned int)*(unsigned short *)(temp_v0 + 0x26) + temp_v6 + 0x4c);

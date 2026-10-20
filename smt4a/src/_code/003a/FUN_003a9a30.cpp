@@ -4,7 +4,7 @@
 extern "C" {
 
 int scrSetResult(int value);
-u32 FUN_003ef960(u32 obj, u32 arg);
+u32 btlGetTable(u32 obj, u32 arg);
 u32 btlGetMainState(void);
 int scrGetArg(u32 index);
 int dataTableGetCount(u32 arg);
@@ -14,7 +14,7 @@ u16 *dataTableGetEntries(void);
 u32 FUN_003a9a30(void)
 {
     int requested = scrGetArg(0);
-    u32 field = FUN_003ef960(btlGetMainState(), 0xd);
+    u32 field = btlGetTable(btlGetMainState(), 0xd);
     u16 *table = dataTableGetEntries();
     int count = dataTableGetCount(field);
     int index;

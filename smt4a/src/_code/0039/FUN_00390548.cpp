@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_00221f20(void);
-int FUN_00222104(void);
+int handleBlockRefDrop(void);
 
 /* Supplied declaration required: FUN_00221f20. */
-/* Supplied declaration required: FUN_00222104. */
+/* Supplied declaration required: handleBlockRefDrop. */
 
 
 void FUN_00390548(int param_1,unsigned int param_2)
@@ -16,7 +16,7 @@ void FUN_00390548(int param_1,unsigned int param_2)
 {
 /* irregular: 2 native warning(s); review required */
   if (*(int *)(param_1 + 0x44) != 0) {
-    FUN_00222104();
+    handleBlockRefDrop();
   }
   FUN_00221f20();
   *(unsigned int *)(param_1 + 0x44) = param_2;

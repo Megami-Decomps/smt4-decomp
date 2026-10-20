@@ -22,7 +22,7 @@ extern signed char DAT_005f161d; /* 0x5f161d */
 extern signed char DAT_005f161f; /* 0x5f161f */
 extern int DAT_005f189c; /* 0x5f189c */
 
-extern int FUN_00162e8c(void);
+extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_002946a0. */
 /* Supplied declaration required: FUN_002b5cb4. */
 /* Supplied declaration required: FUN_003fd76c. */
@@ -46,7 +46,7 @@ void FUN_00481784(int param_1)
   float temp_v9;
   float temp_v10;
   
-  temp_v1 = FUN_00162e8c();
+  temp_v1 = gameFlagsGetBlock();
   if (DAT_005f161d != '\0') {
     return;
   }

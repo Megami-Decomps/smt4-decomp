@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_4_stack;
 
-extern unsigned char DAT_0057a9b8; /* 0x57a9b8 */
+extern unsigned char g_btlUi; /* 0x57a9b8 */
 
 /* Supplied declaration required: FUN_00184748. */
 /* Supplied declaration required: FUN_00231cdc. */
@@ -33,9 +33,9 @@ void FUN_004a9308(unsigned int param_1,unsigned int param_2,unsigned int param_3
   int temp_v1;
   unsigned int temp_v2;
   
-  temp_v0 = (*(int *)((unsigned char *)&DAT_0057a9b8 + 0x10));
+  temp_v0 = (*(int *)((unsigned char *)&g_btlUi + 0x10));
   temp_v2 = 0xffffffff;
-  *(unsigned int *)((*(int *)((unsigned char *)&DAT_0057a9b8 + 0x10)) + 0x74a0) = 0xb;
+  *(unsigned int *)((*(int *)((unsigned char *)&g_btlUi + 0x10)) + 0x74a0) = 0xb;
   switch(param_3) {
   case 1:
   case 2:

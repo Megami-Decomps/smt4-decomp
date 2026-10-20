@@ -5,16 +5,16 @@
 extern "C" {
 
 int FUN_001911a4(unsigned int, int);
-int FUN_001af148(int);
-int FUN_001af214(void);
+int nn_os_LightEvent_Wait(int);
+int nn_os_LightEvent_TryWait(void);
 int FUN_0045f268(int *);
 int playerInitReset(int *);
 
 typedef int romwright_code(...);
 extern unsigned int FUN_00175678(void);
 /* Supplied declaration required: FUN_001911a4. */
-/* Supplied declaration required: FUN_001af148. */
-/* Supplied declaration required: FUN_001af214. */
+/* Supplied declaration required: nn_os_LightEvent_Wait. */
+/* Supplied declaration required: nn_os_LightEvent_TryWait. */
 /* Supplied declaration required: FUN_0045f268. */
 /* Supplied declaration required: playerInitReset. */
 
@@ -30,10 +30,10 @@ void FUN_0045fb94(int *param_1)
   temp_v0 = (**(romwright_code **)(*param_1 + 0x20))(param_1);
   temp_v1 = FUN_00175678();
   temp_v2 = temp_v0 + 4;
-  FUN_001af214();
+  nn_os_LightEvent_TryWait();
   if (temp_v2 == 0) {
     FUN_001911a4(temp_v1,1);
-    FUN_001af148(temp_v0 + 4);
+    nn_os_LightEvent_Wait(temp_v0 + 4);
   }
   FUN_0045f268(param_1);
   playerInitReset(param_1 + 0x8c5);

@@ -11,7 +11,7 @@ int FUN_003fdb18(int);
 int FUN_003fe86c(int, int, int);
 
 extern int DAT_005806a4; /* 0x5806a4 */
-extern int DAT_00581038; /* 0x581038 */
+extern int g_mapHakai; /* 0x581038 */
 extern signed char DAT_005f161f; /* 0x5f161f */
 
 /* Supplied declaration required: FUN_002b5cd4. */
@@ -44,7 +44,7 @@ void FUN_0027461c(void)
   temp_v10 = 0x42480000;
   temp_v8 = 0x428c000000000000;
   do {
-    temp_v4 = DAT_00581038 + temp_v3 * 0x54;
+    temp_v4 = g_mapHakai + temp_v3 * 0x54;
     temp_v5 = *(char *)(temp_v4 + 0x5c) != '\0';
     temp_v2 = 0;
     if (temp_v5) {
@@ -55,7 +55,7 @@ void FUN_0027461c(void)
         temp_v2 = *(int *)(temp_v4 + 0x88);
       }
       else {
-        temp_v2 = *(int *)(DAT_00581038 + *(int *)(temp_v4 + 0x90) * 0x20 + *(short *)(temp_v4 + 0xac) * 4
+        temp_v2 = *(int *)(g_mapHakai + *(int *)(temp_v4 + 0x90) * 0x20 + *(short *)(temp_v4 + 0xac) * 4
                         + 0x20);
       }
       temp_v2 = *(int *)(temp_v2 + 4);

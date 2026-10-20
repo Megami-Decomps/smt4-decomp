@@ -8,7 +8,7 @@ int FUN_0022b92c(...);
 int FUN_0022bc54(...);
 int FUN_0022bcc4(...);
 int FUN_0022be6c(...);
-int FUN_0022c0a4(...);
+int poolNodeUnlink(...);
 int FUN_003fb694(...);
 
 typedef int romwright_code(...);
@@ -53,7 +53,7 @@ extern unsigned char LAB_003b27b8; /* 0x3b27b8 */
 /* Supplied declaration required: FUN_0022bc54. */
 /* Supplied declaration required: FUN_0022bcc4. */
 /* Supplied declaration required: FUN_0022be6c. */
-/* Supplied declaration required: FUN_0022c0a4. */
+/* Supplied declaration required: poolNodeUnlink. */
 extern int FUN_003af8d0(int);
 /* Supplied declaration required: FUN_003fb694. */
 extern int FUN_003fbfd0(int);
@@ -638,7 +638,7 @@ LAB_003b2e3c:
               return 0x44;
             }
             temp_v6 = temp_v5 + 0x4c;
-            FUN_0022c0a4(temp_v6);
+            poolNodeUnlink(temp_v6);
             *(unsigned int *)(temp_v5 + 0x50) = 0;
             *(int *)(temp_v5 + 0x58) = temp_v6;
             *(int *)(temp_v5 + 0x54) = temp_v6;

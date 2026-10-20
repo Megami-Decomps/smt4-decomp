@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c2950(void);
+int gameGetMapBlock(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -19,7 +19,7 @@ extern int FUN_00287894(unsigned short);
 extern int FUN_0028f1bc(unsigned short);
 extern int FUN_00298dc8(unsigned short);
 extern int FUN_00298e40(unsigned short, int, int *);
-/* Supplied declaration required: FUN_002c2950. */
+/* Supplied declaration required: gameGetMapBlock. */
 
 
 int FUN_001fb3a0(void)
@@ -34,7 +34,7 @@ int FUN_001fb3a0(void)
   int temp_v5 [3];
   
   temp_v4 = 0;
-  FUN_002c2950();
+  gameGetMapBlock();
   if ((*(signed char *)((unsigned char *)&g_gameState + 0xac)) != '\0') {
     temp_v4 = 4;
   }

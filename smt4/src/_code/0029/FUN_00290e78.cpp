@@ -6,10 +6,10 @@ u8 FUN_00290e78(void)
 {
     s8 value = 0;
 
-    if (DAT_0043e188.target != NULL) {
-        value = DAT_0043e188.target->unk08;
+    if (g_messageMain.target != NULL) {
+        value = g_messageMain.target->unk08;
     }
-    return DAT_0043e188.target == NULL || value == 0;
+    return g_messageMain.target == NULL || value == 0;
 }
 
 } /* extern "C" */

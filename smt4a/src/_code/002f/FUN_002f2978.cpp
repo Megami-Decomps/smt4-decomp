@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e9538(unsigned int *, unsigned int);
+int onlineSockAddrCopy(unsigned int *, unsigned int);
 int FUN_00310040(...);
 
 typedef struct fn_002f2978_arg0 fn_002f2978_arg0;
@@ -29,7 +29,7 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_5_stack;
 
-/* Supplied declaration required: FUN_002e9538. */
+/* Supplied declaration required: onlineSockAddrCopy. */
 /* Supplied declaration required: FUN_00310040. */
 
 
@@ -66,7 +66,7 @@ FUN_002f2978(fn_002f2978_arg0 *param_1,unsigned int param_2,unsigned int param_3
     *(unsigned char *)((int)param_5 + 0x35) = 2;
     *param_5 = param_2;
     param_5[1] = param_3;
-    FUN_002e9538(param_5 + 4,param_4);
+    onlineSockAddrCopy(param_5 + 4,param_4);
     param_5[2] = 0;
     piVar1 = (int *)param_1->field_0x3c;
     if (piVar1 == (int *)0x0) {

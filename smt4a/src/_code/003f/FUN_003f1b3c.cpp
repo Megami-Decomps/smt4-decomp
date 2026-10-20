@@ -7,7 +7,7 @@ extern "C" {
 int qsort(int, int, int, unsigned char *);
 int asdOperatorNewD(void);
 int sysMemClear(void);
-int FUN_002e6490(int);
+int asdOperatorDeleteC(int);
 
 /* stack frame of param_5: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -22,12 +22,12 @@ extern unsigned int DAT_00573a54; /* 0x573a54 */
 /* Supplied declaration required: qsort. */
 extern int lcgRandomRange(unsigned int);
 extern unsigned int dataTableGet(unsigned int);
-extern int FUN_0018719c(unsigned int);
+extern int gameFlagIsSet(unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
 /* Supplied declaration required: asdOperatorNewD. */
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_002e6490. */
+/* Supplied declaration required: asdOperatorDeleteC. */
 extern unsigned int repackWord(unsigned int);
 
 
@@ -92,7 +92,7 @@ void FUN_003f1b3c(int param_1,int param_2,int param_3,unsigned int *param_4,unsi
               if (((((DAT_00573a54 & *(unsigned int *)(param_1 + 0x5a4)) == 0 &&
                      (*(unsigned int *)(param_1 + 0x5a0) & DAT_00573a50) == 0) && (temp_v11 != 99)) &&
                   (temp_v11 <= temp_v0)) &&
-                 ((temp_v0 == 1 || (temp_v6 = FUN_0018719c(*(unsigned int *)(temp_v9 + 0xc)), temp_v6 != 0)))
+                 ((temp_v0 == 1 || (temp_v6 = gameFlagIsSet(*(unsigned int *)(temp_v9 + 0xc)), temp_v6 != 0)))
                  ) {
                 *(int *)(temp_v2 + temp_v7 * 4) = temp_v9;
                 temp_v11 = *(short *)(temp_v9 + 2);
@@ -101,7 +101,7 @@ void FUN_003f1b3c(int param_1,int param_2,int param_3,unsigned int *param_4,unsi
             }
             else if (((*(unsigned int *)(param_1 + 0x5a4) & DAT_00573a54) == 0 &&
                       (*(unsigned int *)(param_1 + 0x5a0) & DAT_00573a50) == 0) &&
-                    (temp_v6 = FUN_0018719c(*(unsigned int *)(temp_v9 + 0xc)), temp_v6 != 0)) {
+                    (temp_v6 = gameFlagIsSet(*(unsigned int *)(temp_v9 + 0xc)), temp_v6 != 0)) {
               *(int *)(temp_v2 + temp_v7 * 4) = temp_v9;
               temp_v11 = 99;
               temp_v7 = temp_v7 + 1;
@@ -122,12 +122,12 @@ void FUN_003f1b3c(int param_1,int param_2,int param_3,unsigned int *param_4,unsi
           *param_5 = temp_v1;
         }
       }
-      FUN_002e6490(temp_v2);
-      FUN_002e6490(temp_v4);
+      asdOperatorDeleteC(temp_v2);
+      asdOperatorDeleteC(temp_v4);
       return;
     }
   }
-  FUN_002e6490(temp_v4);
+  asdOperatorDeleteC(temp_v4);
   return;
 }
 

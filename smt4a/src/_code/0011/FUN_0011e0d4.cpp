@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e342c(unsigned int, unsigned int);
+int libc_strcpy(unsigned int, unsigned int);
 int FUN_002ea3d0(int, unsigned int);
 int FUN_002eca44(unsigned int *);
 
@@ -26,7 +26,7 @@ extern unsigned char LAB_0011e164; /* 0x11e164 */
 extern unsigned char DAT_0055aaa0; /* 0x55aaa0 */
 
 extern int wstrlen(unsigned int);
-/* Supplied declaration required: FUN_002e342c. */
+/* Supplied declaration required: libc_strcpy. */
 extern int strInit(int);
 extern unsigned int FUN_002e784e(int, unsigned char *, unsigned int);
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned int, unsigned int, unsigned char *);
@@ -65,7 +65,7 @@ int FUN_0011e0d4(fn_0011e0d4_arg0 *param_1,unsigned int param_2,unsigned int par
   temp_v1 = wstrlen(param_5);
   temp_v2 = FUN_002e784e(temp_v1 + 1,&LAB_0011e164,0);
   *(unsigned int *)(temp_v0 - 0x88) = temp_v2;
-  FUN_002e342c(temp_v2,param_5);
+  libc_strcpy(temp_v2,param_5);
   temp_v2 = FUN_002ea3c0(temp_v3,0x11def1,0,&LAB_0011e164);
   FUN_002ea3d0(temp_v0 - 0x178,temp_v2);
   return temp_v0 - 0x178;

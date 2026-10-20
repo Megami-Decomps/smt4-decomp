@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdOperatorNew(void);
-int FUN_00162e8c(void);
+int gameFlagsGetBlock(void);
 int FUN_00379958(void);
 int FUN_00482414(int, float *);
 int FUN_00482428(int, int *);
@@ -54,8 +54,8 @@ static float romwright_sqrt_4(float value)
 }
 #endif
 /* Supplied declaration required: asdOperatorNew. */
-/* Supplied declaration required: FUN_00162e8c. */
-extern int FUN_0018719c(void);
+/* Supplied declaration required: gameFlagsGetBlock. */
+extern int gameFlagIsSet(void);
 extern int FUN_00364444(int);
 /* Supplied declaration required: FUN_00379958. */
 extern int FUN_003b99d4(void);
@@ -96,7 +96,7 @@ void FUN_00482fe8(fn_00482fe8_arg0 *param_1)
   unsigned int temp_v15;
   
   temp_v0 = FUN_003b99d4();
-  FUN_00162e8c();
+  gameFlagsGetBlock();
   pcVar5 = (char *)0x0;
   if (0 < temp_v0) {
     temp_v6 = 0x42480000;
@@ -107,8 +107,8 @@ void FUN_00482fe8(fn_00482fe8_arg0 *param_1)
              (temp_v1 = FUN_003ded68(*(unsigned short *)(pcVar2 + 0x12)), temp_v1 != 0)) &&
             (((int)*pcVar2 == param_1->field_0x4 && ((int)pcVar2[1] == param_1->field_0x8)))) &&
            ((temp_v1 = FUN_00364444((int)(short)(int)pcVar5), temp_v1 == 0 &&
-            ((*(short *)(pcVar2 + 0x14) == 0 || (temp_v1 = FUN_0018719c(), temp_v1 != 0)))))) &&
-          ((*(short *)(pcVar2 + 0x16) == 0 || (temp_v1 = FUN_0018719c(), temp_v1 == 0)))) &&
+            ((*(short *)(pcVar2 + 0x14) == 0 || (temp_v1 = gameFlagIsSet(), temp_v1 != 0)))))) &&
+          ((*(short *)(pcVar2 + 0x16) == 0 || (temp_v1 = gameFlagIsSet(), temp_v1 == 0)))) &&
          (param_1->field_0x10 < 0x10)) {
         temp_v1 = 0;
         do {

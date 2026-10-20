@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00100388(...);
 int FUN_00180118(...);
 int FUN_0018408c(...);
-int FUN_0019cac4(...);
+int dataTable00FindById(...);
 int FUN_002a1850(...);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
@@ -51,7 +51,7 @@ extern unsigned int FUN_0014bf3c(fn_00368e10_arg1 *, unsigned int);
 /* Supplied declaration required: FUN_00180118. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0018408c. */
-/* Supplied declaration required: FUN_0019cac4. */
+/* Supplied declaration required: dataTable00FindById. */
 extern unsigned int FUN_00261424(void);
 extern unsigned char FUN_0026264c(fn_00368e10_arg1 *);
 extern int FUN_002626e0(void);
@@ -89,7 +89,7 @@ void FUN_00368e10(unsigned int *param_1,fn_00368e10_arg1 *param_2,unsigned int p
   pfStack_30 = param_2;
   temp_v7 = param_3;
   temp_v8 = param_4;
-  FUN_0019cac4();
+  dataTable00FindById();
   pfVar4 = param_2;
   FUN_00180118(param_2);
   FUN_00100388(*piVar1 + 4,&LAB_00369218,pfVar4);

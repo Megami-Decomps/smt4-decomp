@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-extern int DAT_00588fe8; /* 0x588fe8 */
+extern int g_statusDown; /* 0x588fe8 */
 
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00203b40. */
@@ -28,8 +28,8 @@ void FUN_002f001c(unsigned int *param_1)
   int temp_v1;
   unsigned int temp_v2;
   
-  temp_v0 = DAT_00588fe8;
-  if ((-1 < *(short *)(DAT_00588fe8 + 0x598)) && (*(char *)(DAT_00588fe8 + 0x514) == '\x01')) {
+  temp_v0 = g_statusDown;
+  if ((-1 < *(short *)(g_statusDown + 0x598)) && (*(char *)(g_statusDown + 0x514) == '\x01')) {
     temp_v1 = FUN_002c7e3c();
     if ((temp_v1 != 0xe) && (temp_v1 != 7)) {
       temp_v1 = fieldStateAllowsAction();

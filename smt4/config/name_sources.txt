@@ -727,3 +727,513 @@
 003f5848 allocatorFreeBlock inferred frees block words 3 and 0 and the block through the allocator at DAT_0044e918+4
 003e0e24 argsValidate inferred returns error code for null args/count > 0x10
 003e0b7c recordCopy70 inferred copies a 0x70-byte record
+00100338 libc_printfStrDispatch inferred picks the %s writer by a flag at +0x14, returns 1
+00100366 libc_printfStr inferred armlib _printf_str: pads, emits NUL-terminated bytes through the output callback
+00100974 libc_printfWstrDispatch inferred picks the %ls writer by a flag at +0x14, returns 1
+001005f0 libc_printfWstr inferred armlib %ls: converts each wide char to multibyte and emits it
+00100b44 libc_toupper inferred class-table lookup, bit 3 lowercase, c-0x20 except 0xDF (comment says toupper)
+002b46f8 libc_bsearch inferred binary search (key, base, count, size, cmp) returning match or 0
+00100dc4 libc_strtollParse inferred strtoll body: skips space, sign, 64-bit result, sets errno ERANGE
+00100bee libc_strtoll inferred thin forwarder to the strtoll body
+00100e4e libc_strtoulParse inferred strtoul body: skips space, sign, errno save/restore, negates for minus
+00100bf6 libc_strtoul inferred thin forwarder to the strtoul body
+0010108c libc_strtokR inferred strtok with save pointer: skip delimiters, NUL-terminate token
+00100c44 libc_strtok inferred thin forwarder to strtok body
+002ac838 libc_mbstowcs inferred converts multibyte string to 16-bit wide chars, -1 on bad sequence
+0010df48 asdGxCommandListAllocBlock inferred AsdGxCommandList.cpp line 295: allocates a 16-byte block from the main heap
+002c425c jobSetParent inferred unlinks the child job (2nd handle) from its old parent child list and appends it to the parent job (1st handle) children, sets parent link
+00153050 settings5BClearFlags inferred same code as smt4a settings5BClearFlags (tools/shared.py twin)
+002c09bc gameDataBlocksGetSaveData inferred returns the save block base + 0x88 (progress data; offsets like the in-game clock are relative to it)
+002bcf24 wstrBufferPutChar inferred writes a UTF-16 char at the cursor unless counting only, advances cursor, returns 1
+0010f96c nnosGetAppMemAlloc inferred reads 0x1FF80040 of the 3DS kernel config page = APPMEMALLOC (application memory size)
+00147a7c nnosConvertVirtToPhys inferred thunk to the virtual->physical address conversion (linear heap +0xC000000, VRAM window -0x7000000)
+00147a80 nnosConvertVirtToPhysImpl inferred rebases 0x14000000.. by +0xC000000 and 0x1F000000..+0x600000 by -0x7000000, else 0
+0011d100 gxLcdClearForceBlack inferred thunk to the body that clears the LCD force-black state
+0011d104 gxLcdClearForceBlackImpl inferred clears LCD force-black (nn_gxlow_CTR_Gpu_SetLcdForceBlack) when its flag is set
+0013b608 nngxLockEnter inferred thunk: enters the gx critical section DAT_004e6c5c
+0013b60c nngxLockEnterImpl inferred nn_os_CriticalSection_Enter on the gx critical section
+0013b618 nngxLockLeave inferred thunk: leaves the gx critical section DAT_004e6c5c
+0013b61c nngxLockLeaveImpl inferred nn_os_CriticalSection_Leave on the gx critical section
+002c34f8 appletSetHomeButtonHeld inferred sets the home-button-held flag byte, returns previous value
+002c49f8 objFlagsSetBits inferred ORs bits into the u32 flags at +0x34
+0011b638 mobiclipPlayerReleaseHandle inferred if the player handle is valid and state==1 releases it, state=0, marks released (called from mobiclipCtrlClosePlayer)
+00124594 gameDataCounterSpend inferred takes amount off the game-data u16 counter when it holds at least that much, then notifies
+0012650c msgBoxIsState2 inferred returns whether the message-box object state word (+0x44) equals 2
+00128650 nn_hid_CTR_AnalogStickClamper_SetClampParam inferred forwards to the clamp-record setter; clamp modes circle/cross/minimum match nn_hidlow_ClampStick*
+00128658 nn_hid_CTR_AnalogStickClamper_SetClampParamImpl inferred stores clamped (min 40/36, max 145) size pair into the record chosen by mode 0 circle/1 cross/2 minimum
+00129bd0 nn_gxlow_CTR_SaveVramSysArea inferred free wrapper: gets the current gxlow context, fails with 0x00202BF8 when none, else calls nn_gxlow_CTR_Gpu_SaveVramSysArea on its Gpu
+00129d04 nn_gxlow_CTR_WriteHWRegsWithMask inferred free wrapper forwarding to nn_gxlow_CTR_Gpu_WriteHWRegsWithMask for the current GPU object
+0013840c asdFileRequestGetResult inferred returns the loaded buffer and stores its size when the request is DONE (state 4), else 0/0; asdMdlManagerCreateLoaded uses it after asdFileWait
+00138594 asdFileRequestIsFinished inferred state is DONE (4) or FAILED (5), the condition asdFileWait waits for
+00138c6c asdTMTexFileGetNodeById inferred returns the 0x20-byte node at index id/1000 of a TMX file, or 0 when there is no file
+0014201c nw_snd_internal_SoundArchiveFileReader_ReadPlayerInfo inferred file-reader side of ReadPlayerInfo: player info from InfoBlockBody_GetPlayerInfo
+0014c494 slotTableReplace inferred stores value in slot `index` and returns the previous contents (0 when disabled or out of range)
+0014d360 nw_snd_internal_SoundArchiveFile_InfoBlockBody_GetSoundArchivePlayerInfo inferred returns header+offset of the archive-player info block whose 7 u16 fields the caller copies out
+0014d3d4 nw_snd_internal_SoundArchiveFileReader_ReadBankInfo inferred file-reader side of ReadBankInfo: first word of InfoBlockBody_GetBankInfo
+0014d404 nw_snd_internal_SoundArchiveFileReader_ReadSoundInfo inferred file-reader side of SoundArchive::ReadSoundInfo (wrapper passes wrapper->ref): copies common sound parameters via SoundArchiveFile_SoundInfo_Get*
+0014d480 nw_snd_internal_SoundArchiveFileReader_ReadWaveSoundInfo inferred file-reader side of ReadWaveSoundInfo: type-3 sound, channel priority and release-priority-fix into out
+0014d4f4 nw_snd_internal_SoundArchiveFileReader_ReadSoundGroupInfo inferred file-reader side of ReadSoundGroupInfo: two words and data address from InfoBlockBody_GetSoundGroupInfo
+0014d538 nw_snd_internal_SoundArchiveFileReader_ReadSequenceSoundInfo inferred file-reader side of ReadSequenceSoundInfo: type-1 sound, start offset, bank ids, priorities
+0014e724 asdFileRequestHasFailed inferred state is FAILED (5); asdLoadFileSync returns NULL when true
+0015239c nw_snd_internal_SoundArchiveFileReader_ReadWaveArchiveInfo inferred file-reader side of ReadWaveArchiveInfo: id, wave count, flag via InfoBlockBody_GetWaveArchiveInfo
+0015a400 nn_snd_CTR_VoiceImpl_EnableMonoFilter inferred sets the mono-filter flag on the voice body and flags it for update; called by nn_snd_CTR_Voice_EnableMonoFilter
+0015a4c0 nn_snd_CTR_VoiceImpl_SetBiquadFilterCoefficients inferred copies biquad coefficients into the voice body and flags update; called by nn_snd_CTR_Voice_SetBiquadFilterCoefficients
+0015a514 nn_snd_CTR_VoiceImpl_SetState inferred applies a play state to the channel: 1 stops it and re-initialises parameters, 2 only stops; behind nn_snd_CTR_Voice_SetState
+0015ee48 nn_snd_CTR_Channel_FlushSyncCount inferred if the sync-count-pending bit (0x8000) is set, sends the channel sync count to the DSP and clears the bit
+0015f000 nn_snd_CTR_Channel_PlayStart inferred starts the channel on the DSP and marks it playing
+00192694 asdMdlNodeCopyData inferred copies the source node data into the destination node for asdMdlManagerClone
+002542a4 gameGetCounters inferred returns the counters block of the game-data table (twin of the Apocalypse accessor)
+002621f8 pairSetSecondResetFirst inferred stores -1 in the first word and value in the second
+00290794 gameCountersGetWord inferred returns word `index` of the counters block
+00298de8 idIsAtLeast350 inferred returns whether the id is at least 0x15E (start of the flagged id range in partyFlagRange)
+002a1520 byteIsAtLeast100 inferred returns whether the referenced byte is at least 100
+002a1534 objGetFlagBit16 inferred returns bit 16 of the object flags word (0 or 1)
+002a2dec objGetFlagBit0 inferred returns bit 0 of the object flags word
+002a2df8 objGetFlagBit1 inferred returns bit 1 of the object flags word
+002a3188 slistPushFront inferred pushes a node onto the front of a singly linked list (free-list push in ChannelManager_Free)
+002a60b4 asdTMTexTableNodeIsLoaded inferred returns whether bit 2 of the node flags (asdTMTexTable node) is set; callers test loaded/ready
+002a8178 wordTripleClear inferred clears three consecutive words of a record
+002a8764 gameGetSlotTable inferred returns the 0x18-entry slot table (member at 0x8C) of the game-data table
+002a91f4 asdMdlNodeInit inferred initialises the shared model node with `param` (starts the node player), called by asdMdlManagerCreate*
+002ac068 dataTableFileGetTable inferred validates a TBCR container and returns its section `index` when that section begins with TBL1, else NULL
+002ad264 nn_gxlow_CTR_GetGpu inferred returns the Gpu object embedded in the gxlow context (DAT_005c0ab4 = context+0x14), passed to nn_gxlow_CTR_Gpu_* methods
+002ae1d8 idIsAbove400 inferred returns whether the id is at least 401 (callers branch on it when picking text/ids)
+002ae898 asdTMTexTableReleaseNode inferred releases the node (frees its buffer, drops its texture ref, clears fields) of a texture-table entry
+002af5c0 uiSpriteSetImageKeyframe inferred selects keyframe `index` (12-byte records at +0x58) and loads the image word at +0x20 from its first or second entry
+002b0174 asdFileRequestRelease inferred increments the lifetime step (+8) so the finished request is freed; asdLoadFileSync calls it after taking the buffer
+002b0184 asdFileRequestSetHeapKind inferred while the request is still QUEUED stores the heap kind (+0x24) and returns whether it was queued
+002b06c4 dataTable00FindById inferred looks a record id up (binary search, 0xA8-byte records) first in the AOC table then in data table (0,1); scrCommGetFlagBit* read it
+002b2770 asdMdlObjectBuildBounds inferred AsdMdlManager: allocates a 0x1C-byte record per mesh and computes per-mesh extents (transformed vertex maxima), the last step before asdListAdd
+002b2b08 resOwnerRunNodeHandlers inferred runs the type-table handler callback of every node in the list, then clears the pending word
+002b4414 libc_strncmp evidence byte/word-wise compare of at most n bytes stopping at NUL: armcc strncmp
+002b47bc fileSectionGetData inferred indexes a 16-byte section table (at header+0x14): returns data pointer (header+offset) or 0 when empty, and optionally the section count
+002b4f40 listAppendNode inferred appends a node at the tail of a singly linked list (head/tail) and returns the list count
+002b63ac gameGetPlayerData inferred returns the player data block (member at 0x90) of the game-data table: alignment, held value and step credit are read from it
+002b7014 asdModelCommandBlockRelease inferred releases the pending command block (count words) via asdModelAdvanceCommandCursor and clears count/field
+002b722c jobGetStatus inferred sum of two state words of the job work area; callers stop the job when it is not 4
+002b77b0 memCopyWords inferred copies size/4 words from src to dst (word loop, two words per iteration), used for texture pixels
+002b8234 msgBoxFlagsSetBit7 inferred sets bit 7 of the flags word of the message-box object held by the message state
+002b8cc8 ifTouchRegionRemove inferred decrements the IfTouch region count (200-entry list whose count starts at 10) once per released entry
+002b8d80 msgBoxFlagsClearBit7 inferred clears bit 7 of the message-box flags word
+002b8d90 msgBoxFlagsTestAny inferred returns whether any bit of the mask is set in the message-box flags word
+002b8da0 pairSetFirstResetSecond inferred stores value in the first word and -1 in the second
+002b8db0 msgBoxFlagsClear inferred clears the given bits of the message-box flags word
+002b8e84 eventQueueAddUnique inferred adds an event id to the 32-slot event queue unless it is already queued
+002bb274 nn_snd_CTR_Dspsnd_IsInitialized inferred byte 1 of the DSP sound state (set when the DSP component is loaded, cleared on unload); every nn_snd_CTR_Dspsnd_* function returns early when it is 0
+002bb308 nn_applet_CTR_detail_CloseSession inferred closes the APT session handle (svc 0x23) and releases the applet lock mutex (svc 0x14)
+002bd540 asdTextureSetImage inferred AsdTexture: validates the image address, derives the size from width*height and format, allocates the extra buffer for the target type and registers the physical address
+002be304 drawSetColorFromRGBA8 inferred unpacks an 0xRRGGBBAA colour into 0..1 floats (x1/255) and sets the current draw colour
+002bed98 vec2GetYInt inferred integer part (>>12) of the 20.12 fixed-point word at +0x10 of a 2-component object
+002beda4 vec2GetXInt inferred integer part (>>12) of the 20.12 fixed-point word at +0xC of a 2-component object
+002bef70 nngxBindCmdlist inferred looks the command-list id up in the hashed list table (creating a 0x44-byte record when absent) and makes it the current list
+002bf0dc nngxGetError inferred returns the pending GX error word and clears it; called after bind/run command list
+002c0894 asdTextureRelease inferred AsdTexture: drops one reference; at zero frees the image buffers (+0x24, +0x44) and the texture object; twin of asdTextureCreate
+002c09d0 gameFlagIsSet inferred tests bit `index` of the 0x1500-bit flag bitmap (flag browser, flagSelectVariant, data tables)
+002c3424 nn_os_LightEvent_Wait inferred LightEvent wait: blocks on the event while state is -1/-2; near-identical across games
+002c38fc nn_os_CriticalSection_Initialize inferred initialises the SimpleLock then clears the owner and count words; called by nn_init/AddressSpaceManager/MasterManager initialisers (matches nn::os::CriticalSection)
+002c4040 nn_os_LightEvent_Signal inferred LightEvent state -1/-2 -> signalled, wakes waiters; asdFileWakeWorker/asdFileWait use it on the file-thread event
+002c424c __aeabi_memset4 inferred replicates the byte into a word and word-fills size bytes (RTABI memset4 argument order ptr,size,value)
+002c55c4 appletIsExitRequested inferred byte 6 of the applet state; the applet message pump runs the exit callback and returns when it is set
+00360110 nn_snd_CTR_Voice_SetPriority inferred clamps priority to 0..0x7FFF, stores it at +0x20 and updates the voice manager; called by nw_snd_internal_driver_Voice_SetPriority
+00152bec asdMdlManagerMarkDestroy inferred sets flag 0x200000 on the object and calls a (stripped) hook on its child; callers run it just before asdMdlManagerDestroy
+002a780c asdMemFreeSlot inferred asdMemFree of the buffer a slot points to (clearing it), then of the slot itself
+0019e0c4 scrRunOpcodes inferred runs opcode handlers from a table until one yields or the script ends
+002592d8 scrGetArgString inferred scrGetArg sibling that returns the stack value only when its type tag is 5 (string/pointer)
+0025715c handleBlockRefDrop inferred drops one ref of a shared handle block (release handles, free buffer on last), then frees the ref
+00257108 handleBlockUnref inferred drops one ref of a shared handle block: on last releases each handle and frees the buffer
+002916ac nodeTreeReleaseItem inferred releases the tree node whose 0x34 header precedes the item
+0028ec84 nodeTreeRelease inferred releases a node's subtree and unlinks it from parent/siblings, once only
+00291414 nodeTreeReleaseItemClearOwner inferred clears the owner slot then nodeTreeReleaseItem
+002694f8 refCountIncrement inferred increments the referenced word
+001a9f28 bufferPairFree inferred frees data buffer (unless flag 0x10 borrowed) and the extra buffer
+0022725c rangeIsValid inferred true when range's first/min is set (not -1) and last/value not before it
+0018c0d8 gameDataBlocksGetCounter inferred returns the u16 counter the game-data blocks point to
+00288728 mdlPartsRelease inferred destroys model and frees buffer of each of 3 parts then the object's own model
+001aa030 cecProcessDestroy inferred destroys g_cecProcess's object via vtable, frees the process and clears the global
+002501e0 eventDispatch inferred calls g_handlerTable[event->type].run(event->arg)
+001a84ac eventDispatchIfSet inferred calls the handler-table callback for the request's index when it is non-NULL
+001ae3f4 indexerGetElementOffset inferred index * layout stride + base
+00295bd0 dialogIsActive inferred true for dialog states 1-4 (g dialog object, same one dialogSetText uses)
+0027e774 dialogOpen inferred marks dialog active, starts its timer, stores mode, 30 frames
+002062e8 playSceneAcceptsInput inferred true for the states in which the scene accepts input
+0026f800 linkHolderApplyFlag inferred runs linkHolderClearFlag or linkHolderSetFlag depending on the flag, only when the holder has a link
+002015bc dialogGetTimer inferred returns DAT_0043e128 (the dialog) timer field
+002a72c0 asdModelSlotRelease inferred clears the model slot's lists, frees its resource files, banks and active flag
+00229f30 questRecordFindById inferred searches the 0x10-byte records of the quest table for a u16 id; callers are questGetCurrentRecord*
+0029e1c8 useCounterIsFinished inferred true when there is no use counter or its state is 4
+00256fdc handleRefIncrement inferred increments the object's reference count word
+0023d02c bufferHandleRelease inferred frees buffer at +0xc, releases handle at +8 and clears the fields
+00263720 effTimelineIsDone inferred true when the effect has no timeline or its time reached its end
+0017fba0 scrOpLessThan inferred script op: calls the binary-op worker with sub-command 8 (pop1 < pop2) and advances the step
+0018b430 scrOpGreaterEqual inferred script op: binary-op worker sub-command 11 (>=) then step+1
+0018b454 scrOpOr inferred script op: binary-op worker sub-command 4 (logical or) then step+1
+0018b478 scrOpLessEqual inferred script op: binary-op worker sub-command 10 (<=) then step+1
+001928b0 scrOpAdd inferred script op: binary-op worker sub-command 0 (add) then step+1
+001928d4 scrOpAnd inferred script op: binary-op worker sub-command 5 (logical and) then step+1
+001928f8 scrOpDiv inferred script op: binary-op worker sub-command 3 (divide) then step+1
+00192948 scrOpMul inferred script op: binary-op worker sub-command 2 (multiply) then step+1
+0019296c scrOpNotEqual inferred script op: binary-op worker sub-command 7 (!=) then step+1
+00192a54 scrOpSub inferred script op: binary-op worker sub-command 1 (subtract) then step+1
+00155b74 dlistFreeAll inferred unlinks and frees every node of a head/tail doubly linked list
+0027eb88 memFill8 inferred fills 8 bytes with the low byte of value
+0027e6bc nodeListCountActiveById inferred counts list nodes with the id whose flag 4 is clear
+001f7c38 jobWorkerIsAliveA inferred worker exists and (its job is alive or no stop was requested)
+001fe478 jobWorkerIsAliveB inferred same as jobWorkerIsAliveA in another class
+002544ac rangeInit inferred stores two words, first and -last halfwords at +0x10/+0x12 (the fields rangeIsValid reads) and clears two words
+00207434 jobStopIfValidA inferred stops the job stored in the object (job at +0x34) when jobIsValid
+00219840 jobStopIfValidB inferred stops the job stored in the object (job at +0x30) when jobIsValid
+00219814 jobStopIfValidC inferred stops the job stored in the object (job at +0x50) when jobIsValid
+0024dd48 effEditorNodeChainApply inferred applies the per-node call with 1 to the node then with 0 to each chained node
+002118a0 scrCommMessageShowPlainBody inferred body of scrComm_Message_ShowPlainFromBattle: message from script arg 0 for the given battle unit
+002694e8 refSlotAssign inferred stores value into the slot and increments its refcount via refCountIncrement
+00198f84 idListAnyValid inferred true when any of the five ids is nonzero and the validity check accepts it
+0022a344 asdListBoxGetItemText inferred text field address of the list box item with the id, or 0
+0022a464 asdListBoxGetItemValuePtr inferred address of the value field of the list box item with the id, or 0
+0022a400 asdListBoxSetItemMode2 inferred sets item mode 2 with a value, marks the list box dirty
+0022a3a8 asdListBoxSetItemMode3 inferred sets item mode 3 with three values and a byte, marks the list box dirty
+0022c038 poolNodeUnlinkAndDestroy inferred unlinks a node from the circular share list; the last node destroys the item and returns it to its pool
+0022c0a4 poolNodeUnlink inferred unlinks a node from the circular share list; the last node returns the item to its pool
+00233d78 jobStopAndClearFlags inferred when the job is valid clears bits 8-9 of the flags and stops it
+00246908 effEditorNodeListCount inferred counts the nodes of the owner's linked list (only effect-editor callers)
+00247200 nodeListOwnerFree inferred frees the owner's node list, its buffer and the owner
+00250d74 asdMemFreeIfNotNull inferred frees the pointer when it is non-zero
+0025a03c effIsFinished inferred true when the effect has no count left, no timeline, or (unless looping) its timeline reached the end
+001c1d8c scrOpStoreIntVar inferred script op: pops an integer and stores it into the variable named by the operand (integer sibling of scrOpStoreFloatVar)
+002542bc scrWorkGetValue inferred returns entry index of the value table at +0xD8 of the script work block, used by scrComm handlers
+002542d4 scrWorkSetValue inferred stores entry index of the value table at +0xD8 of the script work block, used by scrComm handlers
+00273644 scrLoaderReset inferred sets state words, frees both buffers and destroys the script process
+0027369c scrLoaderFreeBuffers inferred frees both buffers and destroys the script process
+0027ea14 strIsEmpty inferred true when the first byte is 0
+0028648c mtxMakeTranslation inferred identity 4x4 with the vector in the last column
+00256fec handleBlockRefCreate inferred bumps the shared block's refcount and allocates a new reference pointing at it (counterpart of handleBlockRefDrop)
+00193be8 configSettingsResetDefaults inferred writes default values (2,2,2,1,1) into the five settings bytes of the game-data block and clears its header
+0026b5c8 configGetSettings inferred address of the settings area (+0x80 of the game-data block) used by the config UI and save/load
+001a9ebc asdCecShutdown inferred frees the g_asdCec process object (its resource and vtable member) and clears the pointer
+002471d8 padGetStickHorizontalDirection inferred 5 when the stick x is <= -9, 4 when >= 9, else 1
+002580b4 eventCommandGetPendingCleanup inferred returns the word eventCommandEnd tests to decide whether to run its two clean-ups
+0024dcec eventCommandSetPendingCleanup inferred stores the word eventCommandEnd tests to decide whether to run its clean-ups
+00296f4c scrScriptProcessStartEntry inferred copies the name of entry index (0x20-byte table entries) into the process and resets its run state; returns 1 if the index is valid
+00289858 scrScriptProcessGetEntry inferred address of the 0x20-byte entry index of the process's entry table, or 0 when out of range
+002734f0 questSysLoadStep evidence state machine that loads event/quest/QuestScr.bf and QuestSys.mbm then starts the quest script
+0027341c scrLoaderResetWithFlag inferred sets state 11 and a flag, frees both buffers and destroys the script process
+0027348c scrLoaderRelease inferred frees both buffers, destroys the script process and releases the flagged resource
+0022b8d8 listScrollToId inferred finds the entry with the id and scrolls the list (10 visible rows) so it is shown
+0022e4a4 panelSetScrollPosition inferred applies the scroll position (first, count) to the panel body according to its kind (0 or 1)
+0024aab4 fileOwnerCloseA inferred closes the owner's file handle (bit 0 tags a pending op) with nn_fs CloseFile and clears it
+0024aaec fileOwnerCloseB inferred same body as fileOwnerCloseA
+0024ab24 fileOwnerCloseC inferred same body as fileOwnerCloseA
+0024ab5c fileOwnerCloseD inferred same body as fileOwnerCloseA
+0024dc1c padStickDirectionIsDown inferred direction 4 true at stick x >= 800, direction 5 true at x <= -800
+00244db4 sysFlagsSetBits inferred ORs the mask into the system flags word
+0024ef48 mdlHandleArrayDestroy inferred destroys the three model handles (and slot 0's model resources first)
+0026b584 gameDataBlocksAddFlags inferred clears the dirty byte, ORs the mask into the game-data block flags then tail-calls a follow-up with 0; callers are save/load
+0026933c effBehaviorRun inferred on frame 0 resets the per-slot ids, then calls the behavior handler table[type] and advances the frame counter
+00263630 asdModelSlotSetColor inferred writes an RGB (alpha 1.0) and its PICA-packed value into the slot's model
+00282b88 jobWorkerPollAndFree inferred returns 1 while the worker's job runs (or no stop was requested); otherwise frees the worker and returns 0
+002523f0 btlTalkBustUpDestroy inferred tears down g_btlTalkBustUp: releases its resource, stops its job, frees and clears the global
+0025011c asdMemoryFreeLocked inferred takes the allocator critical section, maps the address to its region, calls asdMemoryFreeRegion and unlocks
+00257c2c asdTexTgaLoadNw4c evidence checks the "NW4C_Tga Ver1.0" signature, reads width/height and builds the texture from the TGA data (AsdTexTGA)
+0024dcfc asdMemoryFreeLockedAlt inferred second copy of asdMemoryFreeLocked (same body, called from eventCommandEnd)
+0029e1ec useCounterStart inferred sets the use counter state to 1, restarts its 13 members (the state FUN_0029e1c8 later waits to be 4)
+00288f60 gameDataGetPlayerName inferred returns the name buffer tmnlGetEntryText hands out for the protagonist (entry 0x3d / ids >= 201) and the naming screen fills
+0024bb38 gameDataGetSecondName inferred second name buffer next to the player name, selected by naming-screen kind 2
+00269a58 effGetFrameCounter inferred returns the global counter effect functions add to their frame offsets (effParticle and sibling update code)
+0023592c nw_snd_internal_driver_SequenceTrack_UpdateChannelParam inferred recomputes volume/pan/pitch of a sequence track's channel; called from SequenceTrack Close/ReleaseAllChannel/SetMute
+002769b4 mapDepartSetTarget inferred stores the three target ids in globals and looks up the matching 4-byte map-depart entry; callers are mapDepart code and its script command
+002499b4 btlMainFindActiveEntry inferred first of the 0x6d battle-state entries (0x288 bytes) whose flags 0x20 and 1 are both set, or 0
+00282924 btlMainFindEntryByListedId inferred first battle-state entry whose 0x32-short id list contains the id, or 0
+0018af60 bgmPlay inferred starts a track on one of the two channels (crossfading when one is playing) in the resident sound table; called by the sound test
+0029206c bgmStop inferred stops/releases the channel(s) matching the id in the resident sound table
+002629a0 bgmStopNoForce inferred calls bgmStop with the force argument 0
+00290f48 bgmFadeOut inferred starts the fade-out (30 frames) of the active resident-sound channels
+0026f9b4 bgmReleaseStopped inferred releases every channel whose state bits mark it stopped and clears its slot
+001a8040 bgmRestart inferred restarts the track of the current channel with a new value when its active bit is set
+00287468 bgmGetStateById inferred returns 0/1/3 for whether the id is playing, fading or queued on the resident sound channels
+00211f8c scrCommBgmPlay inferred script command: reads id and two arguments (clamped >= 0) and calls bgmPlay
+0023f3f8 gameDataGetFlagBits inferred returns the flag bit array padIsButtonDown/flag tests index into
+00229e84 gameDataBlocksGetCounterPtr inferred returns the pointer to the u16 counter held by the game-data blocks
+0026b5dc gameDataBlocksGetTable inferred returns the game-data table pointer held in g_gameDataBlocks
+002451ac btlMainGetDataTable inferred returns table `index` of the TBL1 table container held by the battle state (via the container lookup FUN_002ac068); callers are battle data-table script commands
+002c6a10 asdOperatorDelete inferred operator delete: asdMemFree when pointer is non-null; sits beside asdOperatorNewC
+002b2368 asdMemFreeNonNull inferred asdMemFree only when pointer is non-zero
+00289508 gameJumpRequestClear inferred zeroes the six-field pending jump request stored in the game data block
+00289594 gameJumpRequestGet inferred returns the pending jump request record; callers switch on its kind byte 1/2/3
+00297514 scrPopInt inferred pops the top script stack value as int (typed stack: int/float/var/float var), like scrPopFloat
+0028be40 playSceneTimerSubStart inferred starts the scene sub timer with animation 3 forward
+0028bf9c playSceneTimerSubStartReverse inferred starts the scene sub timer with animation 3 reversed
+0028be50 playSceneFadeInStart inferred when idle (state 0) starts the fade timer and enters fade-in state 5
+0028bfac playSceneFadeOutStart inferred when shown (state 1) starts the fade timer reversed and enters fade-out state 6
+0028c5e8 playSceneIsFadeInDone inferred true unless the fade-in state 5 is active
+0028bebc playSceneIsFadeOutDone inferred true unless the fade-out state 6 is active
+001e1a00 handlerTableCallWithValue inferred calls g_handlerTable[request.index].handler(arg, value) when set
+0024c39c handlerTableCall inferred calls g_handlerTable[request.index].handler(arg) when set
+001e19dc tableOwnerGetEntry inferred returns entries[index] of the table the owner points to
+00291050 cecMessageIdClear inferred zeroes the two words of a 64-bit message id; callers are asdCecMessageIdInit/nn_cec message id getter
+002917b8 buttonHelpRelease inferred decrements the ButtonHelp refcount DAT_0043da28 and frees its entries/script/job at zero
+0028d6d0 buttonHelpCreate inferred source folder camp/ButtonHelp/ButtonHelp; counterpart of buttonHelpRelease (refcounted create)
+0028dccc buttonHelpGetEntryValue inferred returns entries[index].value of the ButtonHelp object for index < 6
+00291944 uiFadeRelease inferred decrements UIFade refcount DAT_0043dc20, stops its job, frees it and calls uiFadeClose at zero
+00295c08 gameMoneyAdd inferred adds to the money counter at game data +0x8c, clamps to 0..999999999 and bumps the earned statistic
+002a8740 gameGetUnitRecord inferred address of unit record index (0x604-byte stride at game data +0x11c)
+002a8778 gameCountUnits inferred counts leading occupied slots of the 24-entry unit index array
+0028cad4 statusScreenIsClosed inferred true when the status screen object is absent or its state is 0; caller of scrComm_Battle_ShowStatusScreen
+00296c60 colorSetRgba inferred stores r,g,b,a bytes and the packed 32-bit word of a color
+00297410 fileSlotLoad inferred loads the file of slot (<0x43) synchronously via asdLoadFileSync unless already loaded or busy
+002a46d8 fileSlotFree inferred frees the loaded buffer of slot (<0x43) when not busy; counterpart of fileSlotLoad
+00298140 playSceneSetState inferred saves the previous state into mode and stores the new state at +0x3048 with per-state setup
+002a5ed0 asdTMTexTableLoadEntryAsync inferred builds the entry file path (dir + name + extension) and starts asdLoadFileAsync for the asdTMTexTableCallFileB entry
+002adc88 gameGetFlagBlock inferred returns the game-data block holding the flag bitmap tested by FUN_002c09d0 and per-index flag bytes
+001f5ec0 workerIsRunning inferred true while the owner worker exists and its job is alive or no stop was requested
+001f628c entryCompareByDataValue inferred qsort comparator: invalid entries last, otherwise difference of dataTableGetEntry0102Value of the ids
+00269334 objectBufferFree inferred asdMemFree of the object buffer
+001f728c handlerTableCallWithValueB inferred same code as handlerTableCallWithValue
+002b47f4 fileSlotGetBuffer inferred buffer pointer of file slot (<0x43), 0 otherwise; table shared with fileSlotLoad
+002b7174 jobWorkGetFirstWord inferred returns the first word of the current job work block
+002b721c jobWorkGetFirstWordB inferred same code as jobWorkGetFirstWord
+002a215c linkListEraseObject inferred erases the link node at object+4 from the list
+002b7430 linkListEraseManagerNode inferred erases the node at node+4 from the list embedded in the manager at +476
+002b8838 buttonHelpSetPreset inferred selects a ButtonHelp preset id (stored at obj+0x4c9) unless already set; called with ids from many screens
+002b8830 buttonHelpSetPresetDefault inferred buttonHelpSetPreset with the default id 0x90
+002b8fdc entryListFindById inferred linear search of obj->entries[] for the id, returns the entry or 0
+002b90f8 cameraSetViewMatrix inferred copies the view matrix when changed, builds its transpose and refreshes the dependent matrices
+002c3944 rt_memclr inferred zero-fills a byte range with word-aligned fast path and returns the end pointer
+002bd420 memCopy inferred rt_memcpy wrapper taking (src, dst, size)
+002bd440 nw_snd_internal_driver_SoundThread_GetInstance inferred function-local static: guard-initialised SoundThread sub-object, returns its address
+002bd430 sndVoiceFree inferred nn_snd_CTR_VoiceManager_FreeVoice on the global voice manager
+002bb7e8 asdAddressSpaceAllocate inferred thunk to nn_os_AddressSpaceManager_Allocate
+001ff458 asdListBoxDestroy inferred job destroy callback of asdListBoxCreate: frees list box work and the block
+002bfde4 padIsButtonPressed inferred true when the hold counter of button i (<0x1f) equals 1 and pad input is enabled
+002b8cec padIsButtonRepeat inferred true on first press or on each auto-repeat step (delay DAT_004650ac, interval DAT_004650b0)
+002c0c5c dataTable24Sub0Get inferred dataTableGet(24, 0)
+002c0cac dataTable24Sub0GetEntries inferred dataTableGetEntries of dataTableGet(24, 0)
+002a0d4c scrFloatOp inferred script VM binary float op selected by param_2 (add, sub, mul, div, compare...) popping two floats and pushing the result; thunks per op call it
+00205bfc scrComm_Calc_RandomPercent inferred script command: arg0 * random(arg1..arg2)/100 pushed as result
+002c9e00 jobWorkStopCurrentJob inferred stops jobs[current] of the job work when valid
+002570a8 geometryDestroy inferred releases a geometry handle (buffer, resource refs) and frees it; effPolyRingStateDestroy calls it on state->geom
+002d5574 workerIsRunningB inferred same code as workerIsRunning
+002d2a38 gameSetActorAlpha inferred stores an alpha byte in the 0x40-entry actor table of the save work; caller actorApplyAlpha
+002d85f8 eventTexHandleSetFlag inferred stores the flag byte in the current job work; used by eventTexSetFlag for every handle
+002dcb00 entryCompareByDataValueB inferred same code as entryCompareByDataValue
+002893d8 scrGetCommandFrame inferred script process field read by commands to tell the first call (0) from later polls and to count waited frames
+002bf694 libc_strcpy inferred word-at-a-time strcpy (dst, src)
+002c66cc rt_vec_dtor inferred runs the element destructor from the last to the first of count elements, returns array-8 (cookie start)
+001005dc rt_vec_delete inferred if non-null runs rt_vec_dtor with the cookie size and count stored before the array
+0029b998 resultCreate inferred source folder result/Result: allocates the 0xd658-byte result work, job "Result CALC"
+0029b990 resultCreateDefault inferred resultCreate(0)
+002a6100 asdTMTexTableLoadEntryAsyncB inferred same code as asdTMTexTableLoadEntryAsync
+002ae238 dataTable08Sub0GetRecord inferred binary search by id (record 0x58 bytes) in aoc table or dataTableGet(8,0)
+002b4670 dataTable08Sub1GetRecord inferred binary search by id in aoc table or dataTableGet(8,1)
+002b45e8 dataTable08Sub2GetRecord inferred binary search by id in aoc table or dataTableGet(8,2)
+002c30c4 libc_strlen inferred word-aligned string length scan
+002b9024 devilGetRecord inferred binary search by devil id (u16 at unit+0x46) in the 0x94-byte record table of the aoc system / dataTableGet(0)
+002b63c0 dataTable1bOr1cGetRecord inferred binary search by id (record 0x1b4 bytes) in aoc table, then dataTableGet(0x1b,0) and dataTableGet(0x1c,0)
+002cdd90 scrComm_Data_GetRecordValue inferred script command: result = record(arg0 via dataTable1bOr1cGetRecord)->values[arg1]
+002c3940 rt_aeabi_memclr inferred memclr(ptr,size) entry: armlink-removed branch falls into the zero-fill routine; callers clear records/buffers with it
+002e4158 scrComm_Party_GetMoney inferred script command: pushes the money counter (game data +0x8c)
+0015f898 rt_lmul inferred 64-bit multiply from 32-bit halves (lo*lo high word plus cross products)
+002c52f8 asdFatalError inferred called after a failed nn call (result < 0): runs the fatal handler FUN_002ad61c(0) which ends in svcBreak
+002aaa88 nw_gfx_SceneBuilder_CreateObjectByResourceType inferred switches on the resource type tag (0x40000042...) to create the scene object; called from SceneBuilder_BuildChildren/CreateObject
+002a4d14 asdWorkAreaReset inferred resets the work-area cursors (unk80/unk84) to their base values; called by the *Destroy functions of bustup/event3d/mobiclip/status camera
+0028d2e8 listGetU16OrZero inferred values[index] of the halfword list, 0 when index is out of range
+002903c8 gameJumpRequestIsPending inferred true when the jump request kind byte is 1..3
+00296d6c randBetween inferred LCG (0x41c64e6d,0x3039) random number between the two arguments, inclusive
+002c2950 gameGetMapBlock inferred game data block at +0xa8c0 used by MapDepart_Init, MapMain_Register, NaviMain_InitInstance and actorApplyAlpha
+002bbb5c gameGetQuestCenterBlock inferred game data block at +0x1e9ac holding the quest center flags/counters (QcMain_SetFlag, QcActive_GetField20 read it)
+002d7bb0 commonBgCreate inferred source folder camp/CommonBg/CommonBg: allocates the 0x24-byte object, creates two texts and the draw tasks
+0029e39c sortMenuCreate inferred source folder camp/SortMenu/SortMenu: refcounted create (0x878-byte object, process + draw task)
+00295720 btlTalkBustUpCreate inferred source folder battle/Talk/btlTalkBustUp: allocates the 0x30c-byte g_btlTalkBustUp work; called by scrComm_Talk_InitBustUp
+0020139c scrComm_Job_StopAndWait inferred script command: first call asks the job in arg0 to finish (state 3), later calls return 1 once the job is gone
+0015f834 svcCloseHandle evidence single SVC 0x23 = CloseHandle on 3DS
+002aa568 libc_strcmp inferred byte-wise string compare (word-at-a-time zero detection), 53 callers
+002b5a48 wstrlenU16 inferred length of a zero-terminated 16-bit string
+002bcd60 rt_memcpy_w144 inferred tail-calls rt_memcpy_w with a fixed 144-byte size
+002f1030 scrComm_Battle_GetWorkSlot inferred script command: returns the battle work word at index arg (index < 16)
+002f1064 scrComm_Battle_SetWorkSlot inferred script command: stores a value into the battle work word at index arg0 (index < 16)
+002fe1c4 scrComm_Job_Stop2 inferred script command: stops the job named by argument 0 if it is valid (second entry)
+002fe920 scrComm_Map_CallMainIfActive inferred script command: calls mapMainCallIfActive and lmapMainCallIfActive
+00310098 titleTexTableFreeEntries inferred called from titleMainDestroy; frees entry 0x2f of the texture table
+003100f4 asdCameraCreateFromResource inferred in AsdCamera source folder; allocates camera object and builds scene-builder objects from a resource's camera entries
+0031052c nodeCopyMatrixMarkDirty inferred copies the node's 3x4 matrix at block+0x4c and sets bit 11 of its flags
+00310550 packNibbleFields inferred packs four nibbles into bits 16-31 and two bytes into the low half
+00310b0c event3dEventModelMapCreate inferred in event/3dEvent/3dEventModelMap; allocates 0x100-byte object, loads battle_map/e%03d_%02d.bcenv
+00312598 scrComm_Battle_TryFinishEncount inferred script command: gets battle state, returns btlEncountTryFinish() != 0
+00312bc8 scrComm_Battle_GetDataTableValue inferred script command: reads halfword col of row (0xC-byte rows) of the selected data table and returns it
+00312d64 scrComm_Battle_GetRandomTableEntry inferred script command: returns a random entry of the selected data table (randNextInRange over dataTableGetCount)
+00316f58 objectSetRgba inferred stores r,g,b,a bytes into the object's colour field
+0025c2ec asdListBoxSetByteValue inferred marks the list box dirty, stores a byte in its job work and sets state field to 2
+0031834c scrComm_Battle_IsScriptUnitStatNegative inferred script command: arg 0/1/2 selects stat slot 7/10/11 of the script unit, result = value is negative
+0031b814 NaviMain_IsCreated inferred returns whether the NaviMain global (DAT_0044cdf0, also used by NaviMain_* functions) is non-null
+00221e00 eventTexJobSlotsDone inferred twin: true when the job work's slot counter is 0
+0031c0e4 eventEffectFreeTextures inferred in event/2dEvent/EventEffect: releases the two texture-table entries and resources held by the effect slots
+00240d74 flaggedEntryGetValueB inferred returns the second value of the entry, 0 when the entry is disabled
+0029e11c flaggedEntryGetValueA inferred twin: first value of the entry, 0 when disabled
+002992bc flaggedEntrySetValueB inferred twin: stores second value unless locked, marking changed
+0029d620 flaggedEntrySetValueA inferred twin: stores first value unless locked, marking changed
+0031ef28 scrComm_Battle_IsCurrentUnitStatPositive inferred script command: arg 0/1/2 selects stat slot 7/10/11 of the current battle unit, result = value >= 1 (0 when no unit)
+0028bed4 btlTalkBustUpReleaseAllSlots inferred releases every in-use slot of g_btlTalkBustUp's 5-slot manager and clears its active flag
+00322ee0 scrComm_Battle_IsCurrentUnitStatNegative inferred script command: arg 0/1/2 selects stat slot 7/10/11 of the current battle unit, result = value <= -1 (0 when no unit)
+003233bc scrComm_Battle_AddToRecordTotal inferred script command: adds argument 1 to the accumulator of the record selected by argument 0
+00323f74 scrComm_Battle_EntityHasPositiveCounterA inferred script command: active visible entity with the given id has primary or secondary counter > 0
+0031efac scrComm_Battle_UnitHasPositiveCounterA inferred script command: unit's primary or secondary counter (same fields as the entity variant) > 0
+003279dc scrComm_Battle_UnitHasPositiveCounterB inferred script command: same test on the next counter pair of the unit
+0031f24c scrComm_Battle_AnyActiveUnitMarked inferred script command: 1 when any of the 0x6D battle units is active, present, visible and flagged 0x100
+00325178 scrComm_Battle_AnyActiveUnitUnmarked inferred script command: 1 when any of the 0x6D battle units is active, present, visible and not flagged 0x100
+0032413c scrComm_Battle_GetDataTableField inferred script command: field 1-3 of a 6-byte row of the selected data table
+00325250 scrComm_Battle_GetTableEntryFirst inferred script command: first halfword of a 4-byte row of the selected data table
+0032521c scrComm_Battle_GetTableEntrySecond inferred script command: second halfword of a 4-byte row of the selected data table
+0032b36c NaviMain_Destroy inferred stops the job, frees the NaviMain global (DAT_0044cdf0 used by NaviMain_Start etc.) and nulls it
+0028c640 nodeSetTranslation inferred copies a 3-float vector into the node block's translation column and sets its dirty flag 0x800
+002cd9e4 eventEffectIsState2 inferred in event/2dEvent/EventEffect: true when the effect global exists and its state word is 2
+00335518 btlAiScriptLoadFile inferred called by btlAiScriptCall: destroys the old script process, sets state 1 and builds battle/AI/%s.bf path to load
+003356c0 btlAiScriptLoadStep inferred called by btlAiScriptUpdate: state machine 1..4 that starts, runs and finally destroys the AI script process
+003356ac btlAiScriptIsFinished inferred true when the AI script state machine (btlAiScriptLoadStep) reached state 4
+003366f8 btlFindFirstActiveUnit inferred returns the first active, present, visible battle unit among units 4-0x35, or null
+0023e378 resourceIsReady inferred twin: tests bit 2 of the status word at +0x10; callers use it as a 'ready' gate
+00343888 resourceSwitchMode2IfReady inferred if resourceIsReady(target) sets the target resource's mode to 2 (and two request flags to 1)
+00347ac4 resourceSwitchMode3IfReady inferred if resourceIsReady(target) sets the target resource's mode to 3 (and two request flags to 1)
+00349500 soundHandlePairDetach inferred detaches the sound from both handles of a two-handle pair and returns the pair
+0034e140 mobiclipS4FsReaderDestroy inferred in mobiclip_ctrl/helper_S4FsReader: tears down the reader thread/handles; called from mobiclipCtrlShutdown
+0034f050 mobiclipDeblockerRelease inferred calls mwmofilterDeblockerRelease on the stored deblocker and clears the field; used by the S4Player teardown
+003516c0 mobiclipS4PlayerDestroy inferred in mobiclip_ctrl/helper_S4Player: stops and finalizes the player thread; called from mobiclipCtrlShutdown (sibling of mobiclipS4FsReaderDestroy)
+00351bc0 mobiclipDecoderWrapperDestroy inferred destructor-style: installs vtable and releases the wrapped decoder with mwmomobiclipDecoderRelease
+00263c80 cameraRegistryRemove inferred twin: clears every entry equal to the argument in the global 32-entry registry; called from statusCameraDestroy
+0035ac98 nn_fnd_detail_DestroyHeap inferred branch stub called by nn_fnd_ExpHeapBase_Finalize with &heap->block; counterpart of nn_fnd_detail_CreateHeap
+0035ac9c nn_fnd_detail_UnlinkHeap inferred finds the global heap-list node containing the address, then unlinks the heap object from its (nested) intrusive list and decrements the count
+002ebf80 dataTable0eSub1GetId inferred returns the u16 id of entry index of data table 0xe section 1, 0 past the end
+00248248 dataTable23Sub0GetEntry inferred twin: entry accessor of data table 0x23 section 0 (0x20-byte entries) with an extension array
+0037a2a8 nw_snd_internal_TaskManager_CancelTasksByKey inferred branch stub to the implementation; callers are TaskManager users, sits between TaskManager_CancelTask and RemoveTask
+0037a2ac nw_snd_internal_TaskManager_CancelTasksByKeyImpl inferred under the critical section removes and destroys every entry with the key from the manager's three lists
+003840e4 flagsSetBit0 inferred sets bit 0 of the flag word it is given; called by scrComm_QuestCenter_OpenAndWait
+0025930c sequenceRequestDefer inferred twin: stores a pending flag and two parameters in globals for a later asdSequenceRequest
+0027db40 sequenceRequestFlushDeferred inferred twin: copies the deferred parameters, clears the pending flag and calls asdSequenceRequest
+00254434 sequenceRequestDeferEx inferred sets the pending flag and stores the id plus six words of a parameter block for the deferred asdSequenceRequest flush
+00397080 treeDestroyAllNodes inferred destroys every node below the root of a sentinel-based tree and resets root/first/last to the sentinel
+003970ac treeDestroySubtree inferred recursively destroys the subtree below a node (children first) through the tree's destroyNode vtable slot
+00248a9c asdCecInboxGetMessageCount inferred opens the CEC message box, reads the count field of the first (inbox) info section, closes it; caller cecInboxReadMessages
+0021f538 asdCecOutboxGetMessageCount inferred opens the CEC message box and reads the count field of the second (outbox) info section, 0 on open failure
+003184dc scrCommUnitHasFlag20000 inferred same script command as smt4a scrCommUnitHasFlag20000: btlUnitGet(*id)->+0x24 object tested with mask 0x20000
+0031caec scrCommUnitHasFlag40000 inferred same script command as smt4a scrCommUnitHasFlag40000: btlUnitGet(*id)->+0x24 object tested with mask 0x40000
+00399b30 NaviMain_EnterState1 inferred on the NaviMain state block sets state=1, step=0; called from NaviMode_Enter
+0039c050 NaviMain_EnterState5 inferred on the NaviMain state block sets state=5, step=0
+0039c2c0 NaviMain_EnterState4 inferred on the NaviMain state block sets state=4, step=0
+00289d58 campButtonHelpIsActive inferred true while the ButtonHelp refcount global is > 0 (same global the smt4a twin tests)
+00290d74 tableGroupFindEntryIndex inferred twin: finds the first non-empty table group and returns the index of the 0x20-byte entry matching the key, -1 when none
+003a6424 dataTable17Sub1ChildGetCount inferred entry of table 0x17 type 1 -> its child table (subTable+2) -> count
+003a6478 dataTable17Sub1ChildGetEntries inferred entry of table 0x17 type 1 -> its child table (subTable+2) -> entries
+0044cdf0 g_naviMain inferred pointer to the NaviMain block used by every NaviMain_* function (NaviMain_Start, _GetCursorPos, ...)
+0044e380 g_nnAppletState inferred state block read by the nn applet message/sleep handling (nn_applet_CTR_detail_* callers); low 3 bits of unk18 are the applet state
+0044e190 g_statusDown inferred block allocated by the StatusDown source file function (assert-anchored) that creates its process, draw task, sound player and timers
+0043e188 g_messageMain inferred message-window block (state object + banner); used by scrComm_Message_* handlers and bannerShow
+00439c88 g_btlUi inferred block whose +0x20 workspace is allocated in battle/btlUI (0xf040 bytes) and used by the battle UI functions
+0043da28 g_buttonHelp inferred ref-counted block created in camp/ButtonHelp (process, draw task, sound player, 0x564-byte object)
+0043dcb0 g_ifTouch inferred ref-counted block created in camp/IfTouch (0x680-byte object with process)
+00409378 g_effPartsSourcePath evidence assert source path string c:\SMT4\...\effParts.cpp passed to asdDebugTrace
+004093e0 g_asdMdlManagerSourcePath evidence assert source path string c:\SMT4\...\AsdMdlManager.cpp passed to asdDebugTrace
+004099b8 g_asdGxCommandListSourcePath evidence assert source path string c:\SMT4\...\AsdGxCommandList.cpp passed to asdDebugTrace
+00409bc8 g_asdProcessSourcePath evidence assert source path string c:\SMT4\...\AsdProcess.cpp passed to asdDebugTrace
+00409c0c g_asdSequenceSourcePath evidence assert source path string c:\SMT4\...\AsdSequence.cpp passed to asdDebugTrace
+00409c64 g_asdMemorySourcePath evidence assert source path string c:\SMT4\...\AsdMemory.cpp passed to asdDebugTrace
+00409cac g_asdSaveCommonSourcePath evidence assert source path string c:\SMT4\...\AsdSaveCommon.cpp passed to asdDebugTrace
+004103c4 g_effParticleSourcePath evidence assert source path string c:\SMT4\...\effParticle.cpp passed to asdDebugTrace
+00420e94 g_nnFndExpHeapBaseVtable inferred vtable installed by expHeapDestroyA/B just before nn_fnd_ExpHeapBase_Finalize
+00433a70 g_elementPresetTable inferred 0x30-byte records named normal/agi/bufu/zio/zan/megid/mudo/hama/phy/dia/buf, index>=0xe falls back to 0
+00434290 g_btlActionReflect inferred work block allocated by battle/btlActionReflect
+0043da90 g_camp inferred object allocated by camp/Camp
+0043daa8 g_campCec inferred object allocated by camp/CampCec/CampCec (0xd28 state word, sub objects)
+0043dc20 g_commonBg inferred ref-counted block allocated by camp/CommonBg
+0043dcf0 g_partyPanel inferred scene block allocated by camp/PartyPanel (character timers, title timer)
+0043dd50 g_uiQuest inferred object allocated by camp/UIQuest
+0043dd68 g_unite inferred object allocated by camp/Unite
+0043e0f8 g_comWin inferred object allocated by font/ComWin
+0043e128 g_infoWin inferred object allocated by font/InfoWin
+0043e140 g_placeWin inferred object allocated by font/PlaceWin
+0043e278 g_frameTex inferred job-flag block allocated by frame_tex/FrameTex
+0043e310 g_saveLoadThread inferred block allocated by gamedata/SaveLoad_Thread (+4 buffer)
+0044d020 g_mobiclipCtrl inferred state set up and cleared by mobiclip_ctrl/MobiclipCtrl
+0044dc20 g_result inferred object allocated by result/Result
+0044de28 g_saveLoadUIFlags inferred two state bytes in front of g_saveLoadUI (0x44de2c), cleared by saveLoadUI create
+0044ea58 g_asdCamera inferred object allocated by AsdSDK Gfx/Camera/AsdCamera
+0044ea80 g_effectEditor inferred block used by Gfx/EffectEditor/EffectEditor (refcount + object)
+00464be8 g_asdModelProcess inferred object allocated by Gfx/Model/AsdModelProcess
+0044ded0 g_scriptOpcodeHandlers inferred array of handler pointers indexed by script opcode in the script VM step loop FUN_0019e0c4
+00447a98 g_mapIfTimer inferred MapIfTimer block next to g_mapIf (0x447a78)
+00464af0 g_gfxSettings inferred graphics settings block: mode/flag bytes, flag mask, counters and the ResGraphicsFile set up in gfxSetupResGraphicsFile
+00263588 gfxObjectDestroy inferred destroy callback: destroys two pooled sub objects, cleans up the ResGraphicsFile, frees buffer and object
+003aceb4 countdownTimerUpdate inferred decrements g_countdown.timer and frees texture group 0x22 and the record when it reaches 0
+00248e8c dataTable23Type0FindIndexById inferred twin of smt4a FUN_003a32a8
+0024c324 dataTable23Type1CountWithAoc inferred count of data table 0x23 type 1 plus g_aocSystem->offset
+003218b4 dataTable23Type4CountWithAoc inferred count of data table 0x23 type 4 plus g_aocSystem->offset
+002482a8 dataTable23Type0CountWithAoc inferred count of data table 0x23 type 0 plus g_aocSystem->value
+003bbae0 dataTable33GetEntries inferred dataTableGet(0x33) then dataTableGetEntries
+0032c718 soundChannelRequest inferred two-slot (0x4c53c4/0x4c53e4) sound request state machine; returns 0 when jyoucyu table entry 1 is set
+002a03a0 soundChannelRequestIfEnabled inferred calls FUN_0032c718 only when jyoucyuGetTableEntry(1)==0
+003e70d8 soundArchiveRefGetSoundUserParam inferred gets the SoundInfo from the info block and returns nw_snd SoundInfo_GetUserParam (0 if none)
+003e70d0 soundArchiveWrapperGetSoundUserParam inferred wrapper forwarding wrapper->ref to FUN_003e70d8
+0044e978 g_mobiclipAllocator inferred {alloc, free} callback pair set from MobiclipCtrl by FUN_003f6520 and used by the mwmo decoder release/alloc paths
+002580c4 mobiclipAllocatorFree inferred calls the free callback DAT_0044e978[1] (g_mobiclipAllocator)
+003601c4 nn_snd_CTR_Voice_SetInterpolationType inferred only caller is nw_snd_internal_driver_Voice_SetInterpolationType; stores the value in the voice and forwards to the voice body
+003601d0 nn_snd_CTR_VoiceImpl_SetInterpolationType inferred stores the interpolation type in the voice body and marks it dirty (flags |= 0x20)
+00439ca8 g_btlUiBlock inferred the BtlUi heap block pointer: +0x20 field of the btlUI module global g_btlUi (0x439c88)
+00464d48 g_asdTextDefaults inferred default text parameters block: asdTextCreate takes the default colour from word 2; setters in the init code write one word each
+00465228 g_appletBusyFlag evidence returned by appletGetBusyFlag
+0046519c g_appletSleepQueryEvent inferred LightEvent signalled by appletReplySleepQueryAllow
+004651a4 g_appletHomeButtonEvent inferred LightEvent cleared by appletProcessHomeButton
+0028975c gameFlagSetValue inferred twin of smt4a FUN_003fd63c
+0029c3b0 soundChannelStopAll inferred calls the two-slot sound channel stop (FUN_0029206c) with id -1 (all) and the given fade value
+00385c58 aocQueueType20 inferred looks up add-on content entry of kind 0x20 and queues it on g_aocDisplay
+0022a11c aocQueueType1f inferred looks up add-on content entry of kind 0x1f and queues it on g_aocDisplay
+00388054 aocQueueType1d inferred looks up add-on content entry of kind 0x1d and queues it on g_aocDisplay
+0038813c aocQueueType07 inferred looks up add-on content entry of kind 7 and queues it on g_aocDisplay
+00234bb4 aocDisplayQueueRecord inferred takes a 0x80-byte add-on content record and queues it on the display block
+00394fd0 dataTableValue0f inferred wraps dataTableValueOrZero(0xF)
+00254484 tbcrBlockGetPayload inferred payload at +8 of a block tagged TBCR, else 0
+00471a70 g_nngxState inferred nngx init flag/vram-bank/handle block read by nngx* and nn_gxlow wrappers
+00471a84 g_nngxGpu inferred object whose address is passed to nn_gxlow_CTR_Gpu_AcquireRight/SetLcdForceBlack
+00471b48 g_nnosHeapState inferred base/size/heap-size words resized by the nn os heap code through the memory-control svc
+00471b54 g_nnosAddressSpaceInitialized inferred set once by nnosInitAddressSpaceOnce, tested before address block allocation
+00471c58 g_asdModelCommandBlockTemplate inferred 0x170-byte block copied into the command buffer by asdModelPushCommandBlock
+00473548 g_lcgRandomState inferred state of lcgRandomHigh16 (x*0x19660d+0x3c6ef35f)
+004d4600 g_nnosAddressSpaceManagerApplication inferred initialised by nnosInitAddressSpaceApplication with the 0xE000000/0x2000000 range
+004e6ef0 g_nnosAddressSpaceManager inferred manager initialised once by nnosInitAddressSpaceOnce and used by addressBlockInit/Allocate
+004c64a4 g_callbackFuncs inferred eight registered callbacks, run once and the pending flag cleared
+004eac5c g_nnosAddressSpaceManagerHeap inferred initialised by nnosInitAddressSpaceHeap with the 0x10000000/0x4000000 range
+004efce0 g_errno inferred address returned by __aeabi_errno_addr
+00473848 g_nnCecdHandle inferred service handle opened with the cecd:u name in nn_cec InitializeCecControl; tested by the cec wrappers
+004e6c5c g_nngxCriticalSection inferred critical section entered around the nngx state in the gx release/applet code
+0043dee8 g_eventEffect inferred singleton allocated by the event/2dEvent/EventEffect constructor
+00446fe8 g_mapCollision inferred state created by the map/collision init
+00464b84 g_asdModelTransformBuilder inferred result of nw_gfx_TransformNode_DynamicBuilder_Create in the AsdModel init; freed by effAsdLightFree
+00464b9c g_asdModelSlotArray0 inferred array read by asdModelGetSlotArray0
+00464ba4 g_asdModelSlotArray1 inferred array read by asdModelGetSlotArray1
+00464bac g_asdModelSlotArray2 inferred array read by asdModelGetSlotArray2
+00464bb4 g_asdModelSlotArray3 inferred array read by asdModelGetSlotArray3
+00447a48 g_mapGimic inferred file-local table of map/mapGimic (stride 0x18 records)
+00447e70 g_mapObj inferred file-local pointer of map/mapObj
+0044de98 g_scrContext inferred script executor context: current script state/table read by scrSetResult and the value-table readers
+00385aac dataTable27Load inferred wraps FUN_003f86f8(0x27), the data-table load request; sits among dataTable27* accessors
+0028e9d4 flagValueIsPositive inferred 0 < generic flag value read (bit, byte or short per category)
+00232920 treeSkew inferred AA-tree skew: right rotation when the left child has the same level
+002328c0 treeSplit inferred AA-tree split: left rotation of two right-linked equal-level nodes and level increase
+00396fec treeRebalanceAfterErase inferred AA-tree decrease-level step followed by three skews and two splits
+0044e948 g_mwmofilterDeblocker inferred allocator/free pair set by the deblocker initialiser and used by its create/release functions
+0044e960 g_mwmoimaadpcmDecoder inferred allocator/free pair of the IMA ADPCM decoder module; used by mwmoimaadpcmDecoderRelease
+003f5f5c mwmofilterDeblockerCreate inferred allocates an 8-byte zeroed deblocker object through the module allocator
+003e6a30 nameTableFindValue inferred linear search of a NameTable for a name (prefix compare), returns its value
+003eac84 soundArchiveLoaderGetFileAddress inferred looks the file up in the optional source then in the sound archive, reports a miss through the owner virtual handler
+004d4674 g_mwmoCriticalSection inferred critical section taken by the mobiclip (mwmo) decoder object accessors such as criticalSectionReadValue38
+00478000 g_keyedRecords inferred 64 records of 0x148 bytes searched by key string (findRecordByKey) and cleared as a whole
+00433278 g_keyedRecordCount inferred record count used by findRecordByKey/entryIsValid over g_keyedRecords
+0044e458 g_callbackState inferred state block whose pending flag gates running the registered callbacks (g_callbackFuncs)
+004215ac g_nwGfxLookAtTargetViewUpdaterVtable inferred vtable installed by the constructor placed right after nw_gfx_LookAtTargetViewUpdater_Update
+002304ec cellListAppend inferred appends a cell (x, flag bit, 1-bit field, 6-bit value) to a CellList and increments its count
+0043e0d0 g_aocJob inferred pointer to the add-on content job id used by aocJobStop and the job validity check
+004e6f14 g_nnSndMasterManager inferred object passed to nn_snd_CTR_MasterManager_GetAuxCallback and the init/finalize wrappers
+004ead10 g_nnSndMasterManagerImpl inferred object passed to nn_snd_CTR_MasterManagerImpl_Initialize/Finalize
+004e8568 g_nnSndVoiceManager inferred object passed to nn_snd_CTR_VoiceManager_Initialize
+004e6c74 g_nnHidServiceHandle inferred service handle opened with the hid:USER name
+004e4138 g_nnAppletCriticalSection inferred critical section tried by appletProcessHomeButton
+0039309c stateHandlerCall inferred calls the member-function-pointer pair stored at +0x160 + state*8 of the object (virtual when the adjustment word has bit 0 set)
+004dad80 g_asdLightCount inferred count of live effAsdLight objects: incremented by the effAsdLight create, decremented by the destroy; tested before model passes
+00465690 g_nnAppletParameter inferred flag/word block filled from the applet parameter received at startup (FUN_00110838 stores through the four setters)
+004e529c g_nnAppletParameterBuffer inferred 0x1000-byte buffer FUN_0011d3e0 returns and FUN_00110838 passes to the receive call
+00292f28 flagBitIsSet inferred tests bit n of gameDataGetFlagBits(), no pad involved

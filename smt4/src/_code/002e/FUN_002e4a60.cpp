@@ -8,7 +8,7 @@ typedef struct Record {
 } Record;
 
 int FUN_0028fb40(u16 id);
-Record *FUN_002b4670(u16 id);
+Record *dataTable08Sub1GetRecord(u16 id);
 
 /* Comparator on two u16 ids: orders by FUN_0028fb40(id), then by the records' rank (second minus first). */
 int FUN_002e4a60(u16 *a, u16 *b)
@@ -18,8 +18,8 @@ int FUN_002e4a60(u16 *a, u16 *b)
     int result = keyA - keyB;
 
     if (result == 0) {
-        Record *recordA = FUN_002b4670(*a);
-        Record *recordB = FUN_002b4670(*b);
+        Record *recordA = dataTable08Sub1GetRecord(*a);
+        Record *recordB = dataTable08Sub1GetRecord(*b);
 
         result = recordB->rank - recordA->rank;
     }

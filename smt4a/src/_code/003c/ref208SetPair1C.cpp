@@ -2,13 +2,13 @@
 
 extern "C" {
 
-extern Ref208B DAT_0057f208;
+extern Ref208B g_commonBg;
 
 void ref208SetPair1C(u8 a, u8 b)
 {
-    Obj1C *obj = DAT_0057f208.obj;
+    Obj1C *obj = g_commonBg.obj;
 
-    if (DAT_0057f208.obj != NULL) {
+    if (g_commonBg.obj != NULL) {
         obj->unk1C = b;
         obj->unk1D = a;
     }

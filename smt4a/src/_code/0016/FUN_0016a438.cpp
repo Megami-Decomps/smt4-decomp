@@ -11,7 +11,7 @@ int FUN_001940b0(...);
 int FUN_001986c4(unsigned int, float *);
 int FUN_00198848(unsigned int, float *);
 int FUN_001b4030(void);
-int FUN_0030ea58(int, int);
+int libc_strcmp(int, int);
 int hardfp_floorf(void);
 int rt_memcpy_w(...);
 
@@ -56,7 +56,7 @@ extern unsigned int FUN_001988bc(unsigned int, unsigned char *);
 extern int FUN_001a7a20(int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001b4030. */
 extern unsigned int wstrlen(unsigned int);
-/* Supplied declaration required: FUN_0030ea58. */
+/* Supplied declaration required: libc_strcmp. */
 /* Supplied declaration required: hardfp_floorf. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -176,7 +176,7 @@ void FUN_0016a438(int param_1,int param_2)
                   temp_v6 = temp_v5 + *(int *)(pcVar11 + 0x78) * 0x10;
                   for (; temp_v5 != temp_v6; temp_v5 = temp_v5 + 0x10) {
                     temp_v2 = *(int *)(temp_v5 + 0xc);
-                    FUN_0030ea58(temp_v2,temp_v1);
+                    libc_strcmp(temp_v2,temp_v1);
                     if (temp_v2 == 0) break;
                   }
                   if (*(int *)(pcVar11 + 0x74) + *(int *)(pcVar11 + 0x78) * 0x10 == temp_v5) {
@@ -190,7 +190,7 @@ void FUN_0016a438(int param_1,int param_2)
                   temp_v6 = temp_v5 + *(int *)(pcVar11 + 0x78) * 0x10;
                   for (; temp_v5 != temp_v6; temp_v5 = temp_v5 + 0x10) {
                     temp_v2 = *(int *)(temp_v5 + 0xc);
-                    FUN_0030ea58(temp_v2,temp_v1);
+                    libc_strcmp(temp_v2,temp_v1);
                     if (temp_v2 == 0) break;
                   }
                   if (*(int *)(pcVar11 + 0x74) + *(int *)(pcVar11 + 0x78) * 0x10 == temp_v5) {
@@ -387,7 +387,7 @@ void FUN_0016a438(int param_1,int param_2)
                   temp_v6 = temp_v5 + *(int *)(pcVar11 + 0x78) * 0x10;
                   for (; temp_v5 != temp_v6; temp_v5 = temp_v5 + 0x10) {
                     temp_v2 = *(int *)(temp_v5 + 0xc);
-                    FUN_0030ea58(temp_v2,temp_v1);
+                    libc_strcmp(temp_v2,temp_v1);
                     if (temp_v2 == 0) break;
                   }
                   if (*(int *)(pcVar11 + 0x74) + *(int *)(pcVar11 + 0x78) * 0x10 == temp_v5) {
@@ -401,7 +401,7 @@ void FUN_0016a438(int param_1,int param_2)
                   temp_v6 = temp_v5 + *(int *)(pcVar11 + 0x78) * 0x10;
                   for (; temp_v5 != temp_v6; temp_v5 = temp_v5 + 0x10) {
                     temp_v2 = *(int *)(temp_v5 + 0xc);
-                    FUN_0030ea58(temp_v2,temp_v1);
+                    libc_strcmp(temp_v2,temp_v1);
                     if (temp_v2 == 0) break;
                   }
                   if (*(int *)(pcVar11 + 0x74) + *(int *)(pcVar11 + 0x78) * 0x10 == temp_v5) {

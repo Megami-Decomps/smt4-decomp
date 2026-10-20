@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0016b078(int *, int);
 int FUN_0016b8a8(int *, int);
-int FUN_0016bb3c(int *);
+int vectorClear(int *);
 int FUN_0016bb74(int *, int);
 int FUN_0016d1f4(unsigned char [24]);
 int FUN_00177abc(unsigned int *, unsigned char *);
@@ -20,7 +20,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_0016b078. */
 /* Supplied declaration required: FUN_0016b8a8. */
-/* Supplied declaration required: FUN_0016bb3c. */
+/* Supplied declaration required: vectorClear. */
 /* Supplied declaration required: FUN_0016bb74. */
 /* Supplied declaration required: FUN_0016d1f4. */
 /* Supplied declaration required: FUN_00177abc. */
@@ -86,7 +86,7 @@ void FUN_00157268(int *param_1)
     for (temp_v0 = *param_1; temp_v0 != temp_v1; temp_v0 = temp_v0 + 0x30) {
       FUN_0016b078(param_1,temp_v0);
     }
-    FUN_0016bb3c(param_1);
+    vectorClear(param_1);
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 4);
   return;

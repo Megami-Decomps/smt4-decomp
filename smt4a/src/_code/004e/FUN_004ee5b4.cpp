@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0015f490(...);
 int FUN_00192550(void);
-int FUN_001aba54(void);
+int dataTable04FindById(void);
 int sysMemClear(unsigned int *, int);
 int FUN_003ece9c(...);
 int FUN_003ed9b4(int);
@@ -34,14 +34,14 @@ typedef struct {
 
 extern unsigned int DAT_00571160; /* 0x571160 */
 extern unsigned int DAT_00571164; /* 0x571164 */
-extern int DAT_00571508; /* 0x571508 */
+extern int g_btlCamera; /* 0x571508 */
 extern unsigned int DAT_00573808; /* 0x573808 */
-extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
+extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
-extern int FUN_0014bef4(unsigned int);
+extern int randRange(unsigned int);
 /* Supplied declaration required: FUN_0015f490. */
 /* Supplied declaration required: FUN_00192550. */
-/* Supplied declaration required: FUN_001aba54. */
+/* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: sysMemClear. */
 extern int FUN_003e7adc(int);
 extern int FUN_003e8430(int);
@@ -92,7 +92,7 @@ void FUN_004ee5b4(int *param_1,unsigned int *param_2,unsigned int param_3,unsign
   if (((((((unsigned int *)param_2[8])[1] & DAT_00571164) != 0 || (*(unsigned int *)param_2[8] & DAT_00571160) != 0)
        && (temp_v3 = FUN_003e7adc(*param_1), temp_v3 == 0)) && ((*param_2 & 0x200) == 0)) &&
      (((temp_v0 = *(short *)(param_2[10] + 0x1be), temp_v0 == 1 ||
-       ((temp_v0 == 2 || temp_v0 == 6) || temp_v0 == 8)) && (temp_v3 = FUN_0014bef4(99), temp_v3 < 0x32)))) {
+       ((temp_v0 == 2 || temp_v0 == 6) || temp_v0 == 8)) && (temp_v3 = randRange(99), temp_v3 < 0x32)))) {
     *(unsigned short *)(param_2[10] + 0x1be) = 2;
     *(unsigned short *)(param_2[10] + 0x1c0) = 0x8f;
     *param_2 = *param_2 | 0x100000;
@@ -142,7 +142,7 @@ void FUN_004ee5b4(int *param_1,unsigned int *param_2,unsigned int param_3,unsign
   }
   FUN_004e1f58(param_1,param_2,0);
   obj4FSlots28Reset(DAT_00573808);
-  *(unsigned int *)(DAT_00571508 + 0x64c) = (*(unsigned int *)(DAT_00571508 + 0x64c) & 0xfeffffff) | 0x4000;
+  *(unsigned int *)(g_btlCamera + 0x64c) = (*(unsigned int *)(g_btlCamera + 0x64c) & 0xfeffffff) | 0x4000;
   switch(*(unsigned short *)(param_2[10] + 0x1be)) {
   case 1:
   case 2:
@@ -162,7 +162,7 @@ void FUN_004ee5b4(int *param_1,unsigned int *param_2,unsigned int param_3,unsign
   temp_v7 = 0;
   if (*(short *)(temp_v4 + 0x1be) == 2) {
     temp_v7 = (unsigned int)*(short *)(temp_v4 + 0x1c0);
-    if (((0 < (int)temp_v7) && (temp_v4 = temp_v7, FUN_001aba54(), temp_v4 != 0)) &&
+    if (((0 < (int)temp_v7) && (temp_v4 = temp_v7, dataTable04FindById(), temp_v4 != 0)) &&
        (*(char *)(temp_v4 + 0x23) == '\x03')) {
       temp_v1 = 1;
     }
@@ -172,7 +172,7 @@ void FUN_004ee5b4(int *param_1,unsigned int *param_2,unsigned int param_3,unsign
     FUN_00192550();
     if (temp_v3 != 0) {
       temp_v7 = (unsigned int)*(unsigned short *)(temp_v3 + 0x32);
-      if (((0 < (int)temp_v7) && (temp_v4 = temp_v7, FUN_001aba54(), temp_v4 != 0)) &&
+      if (((0 < (int)temp_v7) && (temp_v4 = temp_v7, dataTable04FindById(), temp_v4 != 0)) &&
          (*(char *)(temp_v4 + 0x23) == '\x03')) {
         temp_v1 = 1;
       }
@@ -215,7 +215,7 @@ void FUN_004ee5b4(int *param_1,unsigned int *param_2,unsigned int param_3,unsign
       }
     }
     else if (((temp_v0 == 9 || temp_v0 == 10) && (temp_v3 = FUN_003e7adc(*param_1), temp_v3 != 0)) &&
-            (temp_v3 = FUN_004ab594(DAT_0057a9c8), temp_v3 == 0)) {
+            (temp_v3 = FUN_004ab594(g_btlUiBlock), temp_v3 == 0)) {
       FUN_0047f584();
       return;
     }

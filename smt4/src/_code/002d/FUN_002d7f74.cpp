@@ -14,7 +14,7 @@ int FUN_002c4f8c(int, unsigned int);
 
 typedef int romwright_code(...);
 extern int g_titleScene; /* 0x44ea00 */
-extern signed char DAT_0044ea80; /* 0x44ea80 */
+extern signed char g_effectEditor; /* 0x44ea80 */
 extern int DAT_0044ea90; /* 0x44ea90 */
 extern int DAT_0044eaa0; /* 0x44eaa0 */
 extern int DAT_0044eaac; /* 0x44eaac */
@@ -73,7 +73,7 @@ void FUN_002d7f74(void)
     (**(romwright_code **)(temp_v0 + 0x12c8))();
     *(unsigned char *)(temp_v0 + 0x12c4) = 0;
   }
-  if (DAT_0044ea80 != '\0') {
+  if (g_effectEditor != '\0') {
     FUN_002880a8(g_titleScene);
   }
   else {

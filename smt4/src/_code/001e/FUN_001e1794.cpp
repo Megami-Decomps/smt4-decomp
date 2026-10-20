@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002b63c0(void);
+int dataTable1bOr1cGetRecord(void);
 
 extern unsigned int FUN_00298e00(unsigned short);
-/* Supplied declaration required: FUN_002b63c0. */
+/* Supplied declaration required: dataTable1bOr1cGetRecord. */
 
 
 int FUN_001e1794(unsigned short *param_1,unsigned short *param_2)
@@ -31,9 +31,9 @@ int FUN_001e1794(unsigned short *param_1,unsigned short *param_2)
   }
   if (!temp_v3 && temp_v2 == 0) {
     temp_v0 = (unsigned int)*param_1;
-    FUN_002b63c0();
+    dataTable1bOr1cGetRecord();
     temp_v1 = (unsigned int)*param_2;
-    FUN_002b63c0();
+    dataTable1bOr1cGetRecord();
     temp_v2 = 0;
     if (temp_v0 != 0 && temp_v1 != 0) {
       temp_v2 = (unsigned int)*(unsigned short *)(temp_v0 + 4) - (unsigned int)*(unsigned short *)(temp_v1 + 4);

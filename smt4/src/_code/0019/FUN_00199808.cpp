@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00295eb0(int, int, int);
-int FUN_002b8da0(...);
+int pairSetFirstResetSecond(...);
 int FUN_002bee58(...);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -14,7 +14,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_00295eb0. */
-/* Supplied declaration required: FUN_002b8da0. */
+/* Supplied declaration required: pairSetFirstResetSecond. */
 /* Supplied declaration required: FUN_002bee58. */
 
 
@@ -45,36 +45,36 @@ void FUN_00199808(int param_1)
     temp_v0 = 0;
     break;
   case 5:
-    FUN_002b8da0(param_1 + 0xac,0x59d9);
-    FUN_002b8da0(param_1 + 0x138,0x59da);
+    pairSetFirstResetSecond(param_1 + 0xac,0x59d9);
+    pairSetFirstResetSecond(param_1 + 0x138,0x59da);
     FUN_00295eb0(param_1 + 0xac,0x18,0x59db);
     FUN_00295eb0(param_1 + 0x138,0x18,0x59db);
     FUN_002bee58(param_1 + 0xac,7);
     FUN_002bee58(param_1 + 0x138,8);
     return;
   case 6:
-    FUN_002b8da0(param_1 + 0xac,0x7149);
+    pairSetFirstResetSecond(param_1 + 0xac,0x7149);
     FUN_002bee58(param_1 + 0x20,2);
     FUN_002bee58(param_1 + 0xac,9);
     return;
   case 7:
-    FUN_002b8da0(param_1 + 0xac,0x130b1);
+    pairSetFirstResetSecond(param_1 + 0xac,0x130b1);
     FUN_002bee58(param_1 + 0x20,2);
     FUN_002bee58(param_1 + 0xac,10);
     return;
   case 9:
-    FUN_002b8da0(param_1 + 0xac,*(int *)(param_1 + 0x2f8) * 1000 + 1);
+    pairSetFirstResetSecond(param_1 + 0xac,*(int *)(param_1 + 0x2f8) * 1000 + 1);
     FUN_002bee58(param_1 + 0x20,2);
     FUN_002bee58(param_1 + 0xac,0xb);
     return;
   case 10:
   case 0xe:
-    FUN_002b8da0(param_1 + 0xac,*(int *)(param_1 + 0x2f8) * 1000 + 1);
+    pairSetFirstResetSecond(param_1 + 0xac,*(int *)(param_1 + 0x2f8) * 1000 + 1);
     FUN_002bee58(param_1 + 0x20,2);
     FUN_002bee58(param_1 + 0xac,2);
     return;
   case 0xb:
-    FUN_002b8da0(param_1 + 0xac,*(int *)(param_1 + 0x2f8) * 1000 + 1);
+    pairSetFirstResetSecond(param_1 + 0xac,*(int *)(param_1 + 0x2f8) * 1000 + 1);
     FUN_002bee58(param_1 + 0x20,2);
     FUN_002bee58(param_1 + 0xac,0xc);
     return;
@@ -88,7 +88,7 @@ void FUN_00199808(int param_1)
     FUN_002bee58(param_1 + 0xac,0xf);
     return;
   case 0xf:
-    FUN_002b8da0(param_1 + 0xac,*(int *)(param_1 + 0x2f8) * 1000);
+    pairSetFirstResetSecond(param_1 + 0xac,*(int *)(param_1 + 0x2f8) * 1000);
     FUN_002bee58(param_1 + 0x20,2);
     FUN_002bee58(param_1 + 0xac,0x10);
     return;
@@ -102,7 +102,7 @@ void FUN_00199808(int param_1)
     FUN_002bee58(param_1 + 0xac,0x11);
     return;
   case 0x12:
-    FUN_002b8da0(param_1 + 0xac,0x67071);
+    pairSetFirstResetSecond(param_1 + 0xac,0x67071);
     FUN_002bee58(param_1 + 0x20,2);
     FUN_002bee58(param_1 + 0xac,0x12);
     return;
@@ -112,7 +112,7 @@ void FUN_00199808(int param_1)
   }
   do {
     temp_v1 = param_1 + temp_v0 * 0x8c;
-    FUN_002b8da0(temp_v1 + 0xac,temp_v0 + 0x4269);
+    pairSetFirstResetSecond(temp_v1 + 0xac,temp_v0 + 0x4269);
     FUN_002bee58(temp_v1 + 0xac,6);
     temp_v0 = temp_v0 + 1;
   } while (temp_v0 < 4);

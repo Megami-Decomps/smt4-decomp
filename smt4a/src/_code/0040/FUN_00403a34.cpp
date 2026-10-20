@@ -16,7 +16,7 @@ typedef struct {
 extern unsigned char DAT_0052d13c; /* 0x52d13c */
 extern unsigned int g_aocSystem; /* 0x570280 */
 
-extern char *FUN_0016780c(unsigned int, int, int *);
+extern char *fileSectionGetData(unsigned int, int, int *);
 extern int FUN_001688c4(unsigned int);
 /* Supplied declaration required: FUN_0023723c. */
 /* Supplied declaration required: FUN_002a1f60. */
@@ -76,7 +76,7 @@ LAB_00403ac4:
       }
       else {
         temp_v4 = 0;
-        pcVar3 = (char *)FUN_0016780c(*(unsigned int *)(param_1 + 8),temp_v2 + param_2 * 10,&temp_v4);
+        pcVar3 = (char *)fileSectionGetData(*(unsigned int *)(param_1 + 8),temp_v2 + param_2 * 10,&temp_v4);
         if (((pcVar3 != (char *)0x0) && (-1 < temp_v4)) && (*pcVar3 != '\0')) {
           puVar2 = *(unsigned char **)(param_1 + 8);
           goto LAB_00403ac4;

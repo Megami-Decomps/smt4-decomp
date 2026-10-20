@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b2368(int);
+int asdMemFreeNonNull(int);
 int asdMemFree(unsigned int *);
 int jobStop(unsigned int, int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 int FUN_003b8b0c(void);
@@ -15,9 +15,9 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_4_stack;
 
-extern unsigned int *DAT_0043e140; /* 0x43e140 */
+extern unsigned int *g_placeWin; /* 0x43e140 */
 
-/* Supplied declaration required: FUN_002b2368. */
+/* Supplied declaration required: asdMemFreeNonNull. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: jobStop. */
 /* Supplied declaration required: FUN_003b8b0c. */
@@ -37,13 +37,13 @@ void FUN_002a7838(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   FUN_003b8b0c();
   FUN_003b980c(param_1);
   if (*(int *)(param_1 + 0xe5c) != 0) {
-    FUN_002b2368(*(int *)(param_1 + 0xe5c));
+    asdMemFreeNonNull(*(int *)(param_1 + 0xe5c));
   }
   *(unsigned int *)(param_1 + 0xe5c) = 0;
-  puVar1 = DAT_0043e140;
-  jobStop(*DAT_0043e140,0,param_3,param_4,unaff_r4,unaff_r5,unaff_r6,in_lr);
+  puVar1 = g_placeWin;
+  jobStop(*g_placeWin,0,param_3,param_4,unaff_r4,unaff_r5,unaff_r6,in_lr);
   asdMemFree(puVar1);
-  DAT_0043e140 = (unsigned int *)0x0;
+  g_placeWin = (unsigned int *)0x0;
   return;
 }
 

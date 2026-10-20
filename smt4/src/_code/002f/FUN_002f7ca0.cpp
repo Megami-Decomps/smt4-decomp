@@ -16,7 +16,7 @@ extern int DAT_0043e194; /* 0x43e194 */
 extern unsigned int FUN_0024b96c(void);
 extern int FUN_002865f8(void);
 /* Supplied declaration required: FUN_002866b4. */
-extern unsigned int FUN_002893d8(void);
+extern unsigned int scrGetCommandFrame(void);
 extern int btlGetMainState(void);
 extern unsigned int scrGetArg(unsigned int);
 
@@ -37,7 +37,7 @@ void FUN_002f7ca0(void)
   }
   *(unsigned int *)(DAT_0043e194 + 0x24) = temp_v2;
   temp_v2 = scrGetArg(0);
-  temp_v0 = FUN_002893d8();
+  temp_v0 = scrGetCommandFrame();
   FUN_002866b4(temp_v1,temp_v2,temp_v0,0xc,0,0);
   return;
 }

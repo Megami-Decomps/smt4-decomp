@@ -10,7 +10,7 @@ int FUN_004aa1d0(unsigned int);
 
 extern unsigned int DAT_00570dd0; /* 0x570dd0 */
 extern unsigned int DAT_00570dd4; /* 0x570dd4 */
-extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
+extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
 extern int btlGetMainState(void);
 extern int FUN_00168518(int, unsigned short);
@@ -39,7 +39,7 @@ unsigned int FUN_0038d548(void)
   temp_v3 = DAT_00570dd4 | *(unsigned int *)(temp_v1 + 0x45a4);
   *(unsigned int *)(temp_v1 + 0x45a0) = DAT_00570dd0 | *(unsigned int *)(temp_v1 + 0x45a0);
   *(unsigned int *)(temp_v1 + 0x45a4) = temp_v3;
-  FUN_004aa1d0(DAT_0057a9c8);
+  FUN_004aa1d0(g_btlUiBlock);
   return 1;
 }
 

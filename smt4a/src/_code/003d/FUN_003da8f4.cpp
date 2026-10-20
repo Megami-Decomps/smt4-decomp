@@ -6,10 +6,10 @@ extern "C" {
 
 int FUN_002e26ac(void);
 
-extern int FUN_0018719c(void);
+extern int gameFlagIsSet(void);
 /* Supplied declaration required: FUN_002e26ac. */
 extern unsigned char *dataTable15GetEntry(unsigned int);
-extern int FUN_003e46f4(void);
+extern int gameDataFlagTestBit(void);
 
 
 unsigned char FUN_003da8f4(unsigned int param_1,int param_2)
@@ -30,8 +30,8 @@ unsigned char FUN_003da8f4(unsigned int param_1,int param_2)
     do {
       puVar2 = (unsigned char *)dataTable15GetEntry(temp_v2);
       if ((((puVar2 != (unsigned char *)0x0) && ((unsigned char)puVar2[1] == param_1)) &&
-          ((*(short *)(puVar2 + 0x56) == 0 || (temp_v1 = FUN_0018719c(), temp_v1 != 0)))) &&
-         ((*(short *)(puVar2 + 0x58) == 0 || (temp_v1 = FUN_003e46f4(), temp_v1 != 0)))) {
+          ((*(short *)(puVar2 + 0x56) == 0 || (temp_v1 = gameFlagIsSet(), temp_v1 != 0)))) &&
+         ((*(short *)(puVar2 + 0x58) == 0 || (temp_v1 = gameDataFlagTestBit(), temp_v1 != 0)))) {
         if (temp_v3 == param_2) {
           return *puVar2;
         }

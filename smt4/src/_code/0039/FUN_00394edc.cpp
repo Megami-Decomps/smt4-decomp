@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b45e8(void);
+int dataTable08Sub2GetRecord(void);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -13,7 +13,7 @@ typedef struct {
 } param_2_stack;
 
 extern int FUN_0029903c(unsigned short, unsigned int);
-/* Supplied declaration required: FUN_002b45e8. */
+/* Supplied declaration required: dataTable08Sub2GetRecord. */
 
 
 void FUN_00394edc(int param_1,unsigned short *param_2)
@@ -32,12 +32,12 @@ void FUN_00394edc(int param_1,unsigned short *param_2)
   temp_v6[1] = 0;
   temp_v1 = (unsigned int)*(unsigned short *)(param_1 + 8);
   if (temp_v1 != 0) {
-    FUN_002b45e8();
+    dataTable08Sub2GetRecord();
     temp_v6[0] = temp_v1;
   }
   temp_v1 = (unsigned int)*(unsigned short *)(param_1 + 0xc);
   if (temp_v1 != 0) {
-    FUN_002b45e8();
+    dataTable08Sub2GetRecord();
     temp_v6[1] = temp_v1;
   }
   temp_v4 = 0;

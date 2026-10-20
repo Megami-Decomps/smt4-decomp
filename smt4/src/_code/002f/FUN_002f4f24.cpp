@@ -12,7 +12,7 @@ extern int DAT_004c5814; /* 0x4c5814 */
 extern unsigned char DAT_004c5818; /* 0x4c5818 */
 
 extern unsigned int FUN_00100bd4(int);
-extern int FUN_002893d8(void);
+extern int scrGetCommandFrame(void);
 /* Supplied declaration required: FUN_002bfc24. */
 
 
@@ -26,7 +26,7 @@ unsigned int FUN_002f4f24(unsigned int param_1)
   unsigned int temp_v2;
   unsigned char temp_v3;
   
-  temp_v0 = FUN_002893d8();
+  temp_v0 = scrGetCommandFrame();
   if (temp_v0 != 0) {
     if (DAT_0044e128 >= 4) {
       pcVar2 = (char *)0x0;

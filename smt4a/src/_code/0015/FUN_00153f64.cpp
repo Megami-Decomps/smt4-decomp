@@ -7,12 +7,12 @@ typedef struct Entry {
     /* 0x08 */ u32 value;
 } Entry;
 
-Entry *FUN_001861c4(void);
+Entry *asdTMTexTableGetNode(void);
 
-/* Returns the word at 0x8 of the entry FUN_001861c4 returns. */
+/* Returns the word at 0x8 of the entry asdTMTexTableGetNode returns. */
 u32 FUN_00153f64(void)
 {
-    Entry *entry = FUN_001861c4();
+    Entry *entry = asdTMTexTableGetNode();
     return entry->value;
 }
 

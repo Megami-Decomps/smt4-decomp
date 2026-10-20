@@ -2,11 +2,11 @@
 
 extern "C" {
 
-int FUN_0028bed4(void);
+int btlTalkBustUpReleaseAllSlots(void);
 
 u32 FUN_0030b60c(void)
 {
-    FUN_0028bed4();
+    btlTalkBustUpReleaseAllSlots();
     return 1;
 }
 

@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_4_stack;
 
-extern int FUN_002b5a48(int *);
+extern int wstrlenU16(int *);
 /* Supplied declaration required: FUN_002b5a5c. */
 
 
@@ -36,7 +36,7 @@ void FUN_002ad80c(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
       param_1 = piStack_24;
     } while ((short)temp_v0 != 0x3a);
     temp_v1 = 4;
-    temp_v0 = FUN_002b5a48(piStack_24);
+    temp_v0 = wstrlenU16(piStack_24);
     temp_v2 = (temp_v0 + 1) * 2;
     (**(romwright_code **)(*piVar1 + 0x18))(piVar1,&temp_v1,param_3,param_4);
   }

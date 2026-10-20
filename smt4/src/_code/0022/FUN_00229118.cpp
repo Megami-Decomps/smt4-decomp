@@ -11,7 +11,7 @@ int FUN_0023cd08(...);
 int FUN_00246134(...);
 int FUN_00247478(...);
 int FUN_0027da30(int, int);
-int FUN_00282924(...);
+int btlMainFindEntryByListedId(...);
 int btlGetMainState(void);
 int FUN_002eb278(...);
 int FUN_002eb340(...);
@@ -45,7 +45,7 @@ extern unsigned int g_btlAction; /* 0x434278 */
 /* Supplied declaration required: FUN_00247478. */
 extern int FUN_00255158(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0027da30. */
-/* Supplied declaration required: FUN_00282924. */
+/* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_002eb278. */
 /* Supplied declaration required: FUN_002eb340. */
@@ -113,7 +113,7 @@ void FUN_00229118(int *param_1,int param_2,unsigned int param_3,int param_4)
     default:
       temp_v4 = 0;
       temp_v3 = btlGetMainState();
-      FUN_00282924(temp_v3,param_3);
+      btlMainFindEntryByListedId(temp_v3,param_3);
       if (temp_v3 != 0) {
         temp_v9 = 0;
         temp_v10 = 0;
@@ -227,7 +227,7 @@ LAB_002292ac:
       default:
         temp_v7 = 0;
         temp_v3 = btlGetMainState();
-        FUN_00282924(temp_v3,temp_v8);
+        btlMainFindEntryByListedId(temp_v3,temp_v8);
         if (temp_v3 != 0) {
           temp_v10 = 0;
           temp_v11 = 0;

@@ -15,9 +15,9 @@ int FUN_001cd3ec(void);
 int FUN_00249ce4(int);
 int FUN_002804b0(...);
 int FUN_00297988(int, int);
-int FUN_0031a400(void);
+int campCommonBgAcquire(void);
 int FUN_0031e198(void);
-int FUN_00342010(void);
+int campButtonHelpAcquire(void);
 int FUN_0036b824(...);
 int FUN_0040ae70(unsigned int, int);
 int FUN_0040b0f8(int, unsigned char *);
@@ -34,7 +34,7 @@ extern unsigned char LAB_004ce05c; /* 0x4ce05c */
 extern unsigned char LAB_004ce07c; /* 0x4ce07c */
 extern unsigned char LAB_004ce094; /* 0x4ce094 */
 extern unsigned char LAB_004ce0ac; /* 0x4ce0ac */
-extern int DAT_0056fcc0; /* 0x56fcc0 */
+extern int g_handleRegistry; /* 0x56fcc0 */
 
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_0013c884. */
@@ -47,9 +47,9 @@ extern int DAT_0056fcc0; /* 0x56fcc0 */
 /* Supplied declaration required: FUN_00249ce4. */
 /* Supplied declaration required: FUN_002804b0. */
 /* Supplied declaration required: FUN_00297988. */
-/* Supplied declaration required: FUN_0031a400. */
+/* Supplied declaration required: campCommonBgAcquire. */
 /* Supplied declaration required: FUN_0031e198. */
-/* Supplied declaration required: FUN_00342010. */
+/* Supplied declaration required: campButtonHelpAcquire. */
 /* Supplied declaration required: FUN_0036b824. */
 extern unsigned int FUN_00387350(unsigned char *);
 extern unsigned int FUN_0040ac08(void);
@@ -97,10 +97,10 @@ void FUN_004cdddc(int param_1)
     }
     *(unsigned int *)(param_1 + temp_v0 * 4 + 0x28) = temp_v1;
     FUN_001cd3ec();
-    temp_v2 = DAT_0056fcc0;
+    temp_v2 = g_handleRegistry;
     temp_v0 = temp_v0 + 1;
   } while (temp_v0 < 3);
-  *(int *)(param_1 + 0x558) = DAT_0056fcc0;
+  *(int *)(param_1 + 0x558) = g_handleRegistry;
   FUN_0040b0f8(temp_v2,&LAB_004ce044);
   temp_v0 = FUN_0040af60(*(unsigned int *)(param_1 + 0x558));
   if (temp_v0 != 0) {
@@ -118,9 +118,9 @@ void FUN_004cdddc(int param_1)
   FUN_0014f0dc(temp_v0,temp_v3,temp_v4,temp_v5);
   FUN_001523b8(temp_v0,1);
   FUN_0036b824(param_1 + 0x38);
-  *(int *)(DAT_0056fcc0 + 0xc) = param_1 + 0x38;
-  FUN_0031a400();
-  FUN_00342010();
+  *(int *)(g_handleRegistry + 0xc) = param_1 + 0x38;
+  campCommonBgAcquire();
+  campButtonHelpAcquire();
   FUN_002804b0(&LAB_004ce07c,param_1 + 0x10,0);
   FUN_002804b0(&LAB_004ce094,param_1 + 0x14,0);
   FUN_002804b0(&LAB_004ce0ac,param_1 + 0x58c,0);

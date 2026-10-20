@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002e6e34(unsigned char [20], unsigned int);
 int FUN_002e6e5c(unsigned char [20], int, unsigned int, unsigned int);
-int FUN_002eb588(unsigned int *);
+int onlineTimeGetNow(unsigned int *);
 int SBORROW4(...);
 
 typedef struct fn_0010cbe8_arg0 fn_0010cbe8_arg0;
@@ -27,8 +27,8 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-extern unsigned int FUN_002ea714(void);
-/* Supplied declaration required: FUN_002eb588. */
+extern unsigned int onlineGetActiveLock(void);
+/* Supplied declaration required: onlineTimeGetNow. */
 
 
 void FUN_0010cbe8(fn_0010cbe8_arg0 *param_1)
@@ -44,9 +44,9 @@ void FUN_0010cbe8(fn_0010cbe8_arg0 *param_1)
   int temp_v6;
   unsigned char temp_v7 [20];
   
-  temp_v0 = FUN_002ea714();
+  temp_v0 = onlineGetActiveLock();
   FUN_002e6e34(temp_v7,temp_v0);
-  FUN_002eb588(&temp_v5);
+  onlineTimeGetNow(&temp_v5);
   temp_v2 = param_1->field_0x8;
   temp_v4 = temp_v5 - param_1->field_0x10;
   temp_v1 = (temp_v6 - param_1->field_0x14) - (unsigned int)(temp_v5 < param_1->field_0x10);

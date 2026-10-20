@@ -8,7 +8,7 @@ int sysPlaySe(...);
 int FUN_0019de98(...);
 int FUN_001ad9b4(void);
 int FUN_00212724(void);
-int FUN_0023b27c(void);
+int useCounterStart(void);
 int FUN_002c7a9c(...);
 int FUN_0031f208(...);
 int FUN_0031f27c(...);
@@ -16,8 +16,8 @@ int FUN_003dea6c(...);
 
 int FUN_001517b4(...);
 int FUN_001641b4(...);
-int FUN_00184758(...);
-int FUN_00184c00(...);
+int uiSpriteSetKeyframe(...);
+int uiSpriteSetImageKeyframe(...);
 int asdMemFree(void);
 int FUN_00228b04(int, int);
 int FUN_0023ff10(void);
@@ -39,7 +39,7 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } void_stack;
 
-extern int DAT_0057f28c; /* 0x57f28c */
+extern int g_uiQuest; /* 0x57f28c */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_001517b4. */
@@ -47,23 +47,23 @@ extern int FUN_00162858(void);
 /* Supplied declaration required: FUN_001641b4. */
 /* Supplied declaration required: sysPlaySe. */
 extern unsigned int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00184758. */
-/* Supplied declaration required: FUN_00184c00. */
+/* Supplied declaration required: uiSpriteSetKeyframe. */
+/* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_001ad9b4. */
 /* Supplied declaration required: FUN_00212724. */
 /* Supplied declaration required: FUN_00228b04. */
-/* Supplied declaration required: FUN_0023b27c. */
+/* Supplied declaration required: useCounterStart. */
 /* Supplied declaration required: FUN_0023ff10. */
-extern int FUN_00275f44(unsigned int, unsigned int);
+extern int scrScriptProcessStartEntry(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002a4860. */
 extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_002ae320. */
 extern int FUN_002c2c68(int);
 /* Supplied declaration required: FUN_002c7a9c. */
 extern int FUN_002f7730(int, unsigned int);
-extern unsigned int FUN_0031d1a0(int);
+extern unsigned int flaggedEntryGetValueA(int);
 /* Supplied declaration required: FUN_0031f208. */
 /* Supplied declaration required: FUN_0031f27c. */
 /* Supplied declaration required: FUN_003450d4. */
@@ -101,14 +101,14 @@ void FUN_0023eaf8(void)
   unsigned char temp_v14;
   char temp_v15 [8];
   
-  temp_v2 = DAT_0057f28c;
-  if (*(char *)(DAT_0057f28c + 0x90c) != '\0') {
-    temp_v11 = DAT_0057f28c + 0x948;
-    temp_v8 = DAT_0057f28c + 0xa10;
+  temp_v2 = g_uiQuest;
+  if (*(char *)(g_uiQuest + 0x90c) != '\0') {
+    temp_v11 = g_uiQuest + 0x948;
+    temp_v8 = g_uiQuest + 0xa10;
   }
   else {
-    temp_v11 = DAT_0057f28c + 0x9ac;
-    temp_v8 = DAT_0057f28c + 0xad6;
+    temp_v11 = g_uiQuest + 0x9ac;
+    temp_v8 = g_uiQuest + 0xad6;
   }
   temp_v3 = FUN_002c2c68(temp_v11);
   temp_v12 = 0x100020f;
@@ -116,11 +116,11 @@ void FUN_0023eaf8(void)
     temp_v11 = 1;
     FUN_001517b4();
     if (temp_v11 != 0) {
-      FUN_00184758(temp_v2 + 0x34,2,0);
-      FUN_00184c00(temp_v2 + 0x34,9,0);
-      temp_v11 = DAT_0057f28c;
-      temp_v12 = *(unsigned int *)(DAT_0057f28c + 4);
-      *(unsigned int *)(DAT_0057f28c + 4) = 3;
+      uiSpriteSetKeyframe(temp_v2 + 0x34,2,0);
+      uiSpriteSetImageKeyframe(temp_v2 + 0x34,9,0);
+      temp_v11 = g_uiQuest;
+      temp_v12 = *(unsigned int *)(g_uiQuest + 4);
+      *(unsigned int *)(g_uiQuest + 4) = 3;
       *(unsigned int *)(temp_v11 + 8) = temp_v12;
       *(unsigned int *)(temp_v11 + 0x10) = 0;
       FUN_001641b4(0x100020f);
@@ -152,7 +152,7 @@ void FUN_0023eaf8(void)
         FUN_003d498c(temp_v10,1);
         FUN_003d474c();
         FUN_0023ff10();
-        temp_v8 = DAT_0057f28c;
+        temp_v8 = g_uiQuest;
         temp_v3 = partyEntryBitsBit4(temp_v10);
         if ((temp_v3 == 0) && (temp_v6 = temp_v10, FUN_003defe0(), temp_v6 != 0)) {
           temp_v3 = 0;
@@ -205,7 +205,7 @@ void FUN_0023eaf8(void)
         FUN_003d498c(temp_v10,1);
         FUN_003d474c();
         FUN_0023ff10();
-        temp_v8 = DAT_0057f28c;
+        temp_v8 = g_uiQuest;
         temp_v3 = partyEntryBitsBit4(temp_v10);
         if ((temp_v3 == 0) && (temp_v6 = temp_v10, FUN_003defe0(), temp_v6 != 0)) {
           temp_v3 = 0;
@@ -254,11 +254,11 @@ void FUN_0023eaf8(void)
             temp_v8 = *(int *)(temp_v2 + 0x914);
           }
           if (temp_v8 != *(int *)(temp_v2 + 0x910)) {
-            FUN_00184758(temp_v2 + 0x1d8,3,0);
-            FUN_00184c00(temp_v2 + 0x1d8,9,0);
-            temp_v8 = DAT_0057f28c;
-            temp_v12 = *(unsigned int *)(DAT_0057f28c + 4);
-            *(unsigned int *)(DAT_0057f28c + 4) = 5;
+            uiSpriteSetKeyframe(temp_v2 + 0x1d8,3,0);
+            uiSpriteSetImageKeyframe(temp_v2 + 0x1d8,9,0);
+            temp_v8 = g_uiQuest;
+            temp_v12 = *(unsigned int *)(g_uiQuest + 4);
+            *(unsigned int *)(g_uiQuest + 4) = 5;
             *(unsigned int *)(temp_v8 + 8) = temp_v12;
             *(unsigned int *)(temp_v8 + 0x10) = 0;
             temp_v12 = 0x1000210;
@@ -276,11 +276,11 @@ LAB_0023f080:
               *(unsigned int *)(temp_v2 + 0x914) = 0;
             }
             if (*(int *)(temp_v2 + 0x914) != *(int *)(temp_v2 + 0x910)) {
-              FUN_00184758(temp_v2 + 0x1d8,2,0);
-              FUN_00184c00(temp_v2 + 0x1d8,9,0);
-              temp_v8 = DAT_0057f28c;
-              temp_v12 = *(unsigned int *)(DAT_0057f28c + 4);
-              *(unsigned int *)(DAT_0057f28c + 4) = 5;
+              uiSpriteSetKeyframe(temp_v2 + 0x1d8,2,0);
+              uiSpriteSetImageKeyframe(temp_v2 + 0x1d8,9,0);
+              temp_v8 = g_uiQuest;
+              temp_v12 = *(unsigned int *)(g_uiQuest + 4);
+              *(unsigned int *)(g_uiQuest + 4) = 5;
               *(unsigned int *)(temp_v8 + 8) = temp_v12;
               *(unsigned int *)(temp_v8 + 0x10) = 0;
               temp_v12 = 0x1000210;
@@ -299,11 +299,11 @@ LAB_0023f080:
                 FUN_0031f208(0x21);
                 FUN_0031f208(0x18);
                 FUN_0031f208(0x19);
-                FUN_0023b27c();
+                useCounterStart();
                 temp_v12 = 0x1e;
-                temp_v8 = DAT_0057f28c;
-                temp_v5 = *(unsigned int *)(DAT_0057f28c + 4);
-                *(unsigned int *)(DAT_0057f28c + 4) = temp_v12;
+                temp_v8 = g_uiQuest;
+                temp_v5 = *(unsigned int *)(g_uiQuest + 4);
+                *(unsigned int *)(g_uiQuest + 4) = temp_v12;
                 *(unsigned int *)(temp_v8 + 8) = temp_v5;
                 *(unsigned int *)(temp_v8 + 0x10) = 0;
                 goto LAB_0023f2a8;
@@ -320,11 +320,11 @@ LAB_0023f080:
                 if (temp_v3 != 0 || temp_v15[0] != '\0') {
                   temp_v4 = FUN_002a4860(temp_v11);
                   temp_v7 = FUN_002a4894(temp_v11);
-                  temp_v3 = DAT_0057f28c;
+                  temp_v3 = g_uiQuest;
                   temp_v10 = (unsigned int)*(unsigned short *)(temp_v8 + (temp_v7 + temp_v4) * 2);
                   if (*(char *)(temp_v2 + 0x93d) != '\0') {
-                    temp_v12 = *(unsigned int *)(DAT_0057f28c + 4);
-                    *(unsigned int *)(DAT_0057f28c + 4) = 0xd;
+                    temp_v12 = *(unsigned int *)(g_uiQuest + 4);
+                    *(unsigned int *)(g_uiQuest + 4) = 0xd;
                     *(unsigned int *)(temp_v3 + 8) = temp_v12;
                     *(unsigned int *)(temp_v3 + 0x10) = 0;
                     temp_v12 = 0x100020e;
@@ -347,11 +347,11 @@ LAB_0023f080:
                         if (temp_v8 != 0) {
                           temp_v6 = FUN_004186e0();
                           if ((temp_v6 != temp_v10) &&
-                             (temp_v8 = FUN_00275f44(*(unsigned int *)(temp_v2 + 0x8fc),4), temp_v8 != 0)) {
+                             (temp_v8 = scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x8fc),4), temp_v8 != 0)) {
                             sysPlaySe(0xb2);
-                            temp_v8 = DAT_0057f28c;
-                            temp_v12 = *(unsigned int *)(DAT_0057f28c + 4);
-                            *(unsigned int *)(DAT_0057f28c + 4) = 10;
+                            temp_v8 = g_uiQuest;
+                            temp_v12 = *(unsigned int *)(g_uiQuest + 4);
+                            *(unsigned int *)(g_uiQuest + 4) = 10;
                             *(unsigned int *)(temp_v8 + 8) = temp_v12;
                             *(unsigned int *)(temp_v8 + 0x10) = 0;
                             temp_v12 = 0x100020e;
@@ -361,19 +361,19 @@ LAB_0023f080:
                         else {
                           if (*(char *)(temp_v6 + 6) != '\x06') {
                             if (*(char *)(temp_v6 + 6) != '\v') {
-                              temp_v3 = FUN_00275f44(*(unsigned int *)(temp_v2 + 0x8fc),0);
-                              temp_v8 = DAT_0057f28c;
+                              temp_v3 = scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x8fc),0);
+                              temp_v8 = g_uiQuest;
                             }
                             else {
-                              temp_v3 = FUN_00275f44(*(unsigned int *)(temp_v2 + 0x8fc),0x12);
-                              temp_v8 = DAT_0057f28c;
+                              temp_v3 = scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x8fc),0x12);
+                              temp_v8 = g_uiQuest;
                             }
                           }
                           else {
-                            temp_v3 = FUN_00275f44(*(unsigned int *)(temp_v2 + 0x8fc),0x11);
-                            temp_v8 = DAT_0057f28c;
+                            temp_v3 = scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x8fc),0x11);
+                            temp_v8 = g_uiQuest;
                           }
-                          DAT_0057f28c = temp_v8;
+                          g_uiQuest = temp_v8;
                           if (temp_v3 != 0) {
                             temp_v12 = *(unsigned int *)(temp_v8 + 4);
                             *(unsigned int *)(temp_v8 + 4) = 6;
@@ -389,12 +389,12 @@ LAB_0023f080:
                     else {
                       temp_v8 = FUN_003dee58(temp_v10);
                       if ((temp_v8 != 0) &&
-                         (temp_v8 = FUN_00275f44(*(unsigned int *)(temp_v2 + 0x8fc),4), temp_v8 != 0)) {
+                         (temp_v8 = scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x8fc),4), temp_v8 != 0)) {
                         sysPlaySe(0xb2);
                         temp_v12 = 10;
-                        temp_v8 = DAT_0057f28c;
-                        temp_v5 = *(unsigned int *)(DAT_0057f28c + 4);
-                        *(unsigned int *)(DAT_0057f28c + 4) = temp_v12;
+                        temp_v8 = g_uiQuest;
+                        temp_v5 = *(unsigned int *)(g_uiQuest + 4);
+                        *(unsigned int *)(g_uiQuest + 4) = temp_v12;
                         *(unsigned int *)(temp_v8 + 8) = temp_v5;
                         *(unsigned int *)(temp_v8 + 0x10) = 0;
                       }
@@ -408,11 +408,11 @@ LAB_0023f21c:
             temp_v8 = 1;
             FUN_001517b4();
             if (temp_v8 != 0) {
-              FUN_00184758(temp_v2 + 0x34,2,0);
-              FUN_00184c00(temp_v2 + 0x34,9,0);
-              temp_v8 = DAT_0057f28c;
-              temp_v5 = *(unsigned int *)(DAT_0057f28c + 4);
-              *(unsigned int *)(DAT_0057f28c + 4) = 3;
+              uiSpriteSetKeyframe(temp_v2 + 0x34,2,0);
+              uiSpriteSetImageKeyframe(temp_v2 + 0x34,9,0);
+              temp_v8 = g_uiQuest;
+              temp_v5 = *(unsigned int *)(g_uiQuest + 4);
+              *(unsigned int *)(g_uiQuest + 4) = 3;
               *(unsigned int *)(temp_v8 + 8) = temp_v5;
               *(unsigned int *)(temp_v8 + 0x10) = 0;
               temp_v8 = FUN_00162858();
@@ -434,11 +434,11 @@ LAB_0023f2a8:
     temp_v14 = *(char *)(temp_v2 + 0x90c) == '\0';
     if (!temp_v14) {
       temp_v12 = FUN_002a4860(temp_v11);
-      temp_v5 = FUN_0031d1a0(temp_v11);
+      temp_v5 = flaggedEntryGetValueA(temp_v11);
     }
     else {
       temp_v12 = FUN_002a4860(temp_v11);
-      temp_v5 = FUN_0031d1a0(temp_v11);
+      temp_v5 = flaggedEntryGetValueA(temp_v11);
     }
     FUN_002c7a9c(temp_v14,temp_v5,temp_v12);
   }

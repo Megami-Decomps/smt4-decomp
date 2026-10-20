@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_0057f3b4; /* 0x57f3b4 */
+extern int g_eventEffect; /* 0x57f3b4 */
 
 
 unsigned int FUN_00330904(void)
@@ -13,7 +13,7 @@ unsigned int FUN_00330904(void)
   unsigned int temp_v0;
   
   temp_v0 = 0;
-  if ((DAT_0057f3b4 != 0) && (*(int *)(DAT_0057f3b4 + 8) == 2)) {
+  if ((g_eventEffect != 0) && (*(int *)(g_eventEffect + 8) == 2)) {
     temp_v0 = 1;
   }
   return temp_v0;

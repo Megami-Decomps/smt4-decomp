@@ -2,23 +2,23 @@
 
 extern "C" {
 
-int FUN_002b45e8(int id);
-extern int FUN_002471d8(void);
+int dataTable08Sub2GetRecord(int id);
+extern int padGetStickHorizontalDirection(void);
 
 typedef struct Entry {
     /* 0x00 */ u8 unk00[0x60];
     /* 0x60 */ u8 directions;   /* bit 0: right (4), bit 1: neutral (1), bit 2: left (5) */
 } Entry;
 
-/* 1 when the stick direction FUN_002471d8 reports is one the entry accepts. */
+/* 1 when the stick direction padGetStickHorizontalDirection reports is one the entry accepts. */
 u32 FUN_002995d8(int id)
 {
     u8 directions;
     int direction;
     Entry *entry;
 
-    direction = FUN_002471d8();
-    entry = (Entry *)FUN_002b45e8(id);
+    direction = padGetStickHorizontalDirection();
+    entry = (Entry *)dataTable08Sub2GetRecord(id);
     if (entry == NULL) {
         return 0;
     }
