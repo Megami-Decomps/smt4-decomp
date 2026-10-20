@@ -72,6 +72,19 @@ def read_objects(path):
     return objects
 
 
+def read_object_sizes(path):
+    """{address: size} of the `type:object` lines that give a `size:0x...`: a pool word pointing inside
+    such an object (a vtable's address point, 8 bytes in) is a relocation to it plus an addend."""
+    sizes = {}
+    for line in Path(path).read_text(encoding="utf-8").splitlines():
+        match = SYMBOL.match(line)
+        if match and "type:object" in match[3]:
+            size = re.search(r"\bsize:0x([0-9a-fA-F]+)", match[3])
+            if size:
+                sizes[int(match[2], 16)] = int(size[1], 16)
+    return sizes
+
+
 # --------------------------------------------------------------------------
 # Literal pools and direct branches (what romwright finds in a function's bytes)
 # --------------------------------------------------------------------------
@@ -335,7 +348,7 @@ def arm_attributes():
     return b"A" + struct.pack("<I", 4 + len(vendor)) + vendor
 
 
-def build_object(name, code, thumb, relocs, pools, attributes, local_symbols=None):
+def build_object(name, code, thumb, relocs, pools, attributes, local_symbols=None, analysed_size=None, weak=()):
     """ELF32 ARM relocatable object holding `code` as the function `name`: `.text`, `.rel.text`,
     `.ARM.attributes`, `.symtab` (section symbol, `$a`/`$t`/`$d` mapping symbols, local symbols, the
     function, undefined callees), `.strtab`, `.shstrtab`. `local_symbols`: {key a relocation names:
@@ -359,13 +372,17 @@ def build_object(name, code, thumb, relocs, pools, attributes, local_symbols=Non
     function = strtab.add(name)
     # A pool that ends the section follows the function's last instruction outside its symbol.
     size = pools[-1][0] if pools and pools[-1][1] == len(code) else len(code)
+    # A Thumb function's pool is word-aligned: the 0x0000 halfword padding before it is not code
+    # (armcc's symbol stops before it, as the analysed size does).
+    if thumb and analysed_size == size - 2 and code[size - 2:size] == b"\0\0":
+        size = analysed_size
     symbols.append((function, 0x12, 1, 1 if thumb else 0, size))
     index_of = {}
     for _, symbol, _ in relocs:
         if symbol == name or symbol in index_of or symbol in local_index:
             continue
         index_of[symbol] = len(symbols)
-        symbols.append((strtab.add(symbol), 0x10, 0, 0, 0))
+        symbols.append((strtab.add(symbol), 0x20 if symbol in weak else 0x10, 0, 0, 0))  # STB_WEAK / STB_GLOBAL
 
     out = bytearray(52)
 
@@ -418,11 +435,12 @@ def build_object(name, code, thumb, relocs, pools, attributes, local_symbols=Non
 # --------------------------------------------------------------------------
 
 class Module:
-    def __init__(self, program, functions, data_regions, objects=None):
+    def __init__(self, program, functions, data_regions, objects=None, object_sizes=None):
         self.program = program
         self.functions = functions                            # {address: (name, size, thumb)}
         self.names = {a: f[0] for a, f in functions.items()}
         self.objects = objects or {}                          # {address: name} of named globals
+        self.sized = sorted((object_sizes or {}).items())     # [(address, size)] of named globals with a size
         self.thumb = {a for a, f in functions.items() if f[2]}
         self.starts = sorted(functions)
         self.data = data_regions                              # [(start, end)] of the non-executable sections
@@ -470,8 +488,12 @@ class Module:
         for at in words:
             value = struct.unpack_from("<I", code, at)[0]
             symbol = self.resolve(value)
+            addend = 0
+            inside = next(((start, length) for start, length in self.sized if start < value < start + length), None)
+            if symbol is not None and inside and symbol.startswith("DAT_"):
+                symbol, addend = self.objects[inside[0]], value - inside[0]
             if symbol is not None:
-                code[at:at + 4] = bytes(4)
+                struct.pack_into("<I", code, at, addend)
                 relocs.append((at, symbol, 2))  # R_ARM_ABS32
         relocs += relocate_branches(address, code, thumb, branches)
         # A switch's case table is what armcc emits before linking: each word the case's offset from a
@@ -490,7 +512,7 @@ class Module:
                         struct.pack_into("<I", code, entry, (value - (address + at + 4)) & 0xFFFFFFFF)
                         relocs.append((entry, key, 2))  # R_ARM_ABS32
         relocs.sort(key=lambda r: r[0])
-        return build_object(name, bytes(code), thumb, relocs, pools, attributes, local_symbols)
+        return build_object(name, bytes(code), thumb, relocs, pools, attributes, local_symbols, size)
 
 
 def main():
@@ -535,7 +557,7 @@ def main():
         functions = read_symbols(ROOT / module["symbols"])
         data = [(int(s["start"], 16), int(s["start"], 16) + int(s["size"], 16))
                 for s in module["sections"] if "x" not in s["permissions"]]
-        built = Module(program, functions, data, read_objects(ROOT / module["symbols"]))
+        built = Module(program, functions, data, read_objects(ROOT / module["symbols"]), read_object_sizes(ROOT / module["symbols"]))
         for unit in units:
             address = int(unit["address"], 16)
             if address not in functions:

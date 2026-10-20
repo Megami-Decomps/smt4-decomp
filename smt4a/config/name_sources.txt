@@ -2575,3 +2575,6 @@
 005b4474 g_nnAppletParameter inferred flag/word block filled from the applet parameter received at startup (FUN_00110838 stores through the four setters)
 004bb138 dataTable33IsLoaded inferred calls loadSlotIsLoaded(0x33); the old name was swapped
 004bb198 dataTable33Load inferred calls loadSlotEnsureLoaded(0x33); the old name was swapped
+0012140c _ZN9Obj55afc4D1Ev evidence destructor: stores the vtable at 0x55afc4 (+8) and is its slot 2
+002f30c4 _ZN9Obj55afc44stopEv evidence called on this by the 0x55afc4 destructor: a base-class method Obj558be0 inherits
+0055afc4 _ZTV9Obj55afc4 evidence size:0x1c vtable (offset-to-top, RTTI, D1, D0, three pure virtual slots; the next vtable starts at 0x55afe0)

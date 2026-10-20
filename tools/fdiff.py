@@ -112,7 +112,7 @@ def main():
         if done.returncode:
             print("\n".join(line for line in (done.stdout + done.stderr).splitlines() if "Error" in line or line.startswith("  ")))
             sys.exit(2)
-        build.link_weak_calls(obj, unit)  # what armlink did: removed weak calls and branches to the next instruction
+        build.finish_object(compiler, unit, ROOT / args.game / unit["source"], obj)  # carve, then armlink's NOPs
     tool = objdump(args.game)
     retail = listing(tool, ROOT / args.game / unit["target"])
     built = listing(tool, ROOT / args.game / unit["object"])

@@ -11,7 +11,7 @@ int onlineUrlDestroy(unsigned char [104]);
 int onlineSockAddrConstruct2(int *, unsigned int);
 int FUN_002ee568(unsigned char [104], unsigned int);
 int FUN_002f2dfc(int, int, int);
-int _ZN9Obj558be04stopEv(int);
+int _ZN9Obj55afc44stopEv(int);
 int FUN_002f8208(int, int);
 int FUN_002fa18c(int);
 int FUN_0043d588(char *, unsigned char [8]);
@@ -45,7 +45,7 @@ extern unsigned int onlineUrlGetAddress(void);
 /* Supplied declaration required: FUN_002ee568. */
 extern int wideBufferLength(int);
 /* Supplied declaration required: FUN_002f2dfc. */
-/* Supplied declaration required: _ZN9Obj558be04stopEv. */
+/* Supplied declaration required: _ZN9Obj55afc44stopEv. */
 /* Supplied declaration required: FUN_002f8208. */
 /* Supplied declaration required: FUN_002fa18c. */
 extern int mapIsEmpty4(int);
@@ -129,7 +129,7 @@ void FUN_001123a0(int param_1)
           FUN_002ea3d0(param_1,temp_v4);
           return;
         }
-        _ZN9Obj558be04stopEv(temp_v1);
+        _ZN9Obj55afc44stopEv(temp_v1);
       }
     }
     FUN_002fa18c(temp_v13);

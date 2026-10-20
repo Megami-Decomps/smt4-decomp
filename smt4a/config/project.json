@@ -11386,12 +11386,12 @@
     },
     {
       "address": "0x12140c",
-      "function": "handleObjectDtor",
+      "function": "_ZN9Obj55afc4D1Ev",
       "module": "_code",
-      "object": "build/obj/_code/0012/handleObjectDtor.o",
+      "object": "build/obj/_code/0012/Obj55afc4__dtor_Obj55afc4.o",
       "size": 34,
-      "source": "src/_code/0012/handleObjectDtor.cpp",
-      "target": "orig/target/_code/0012/handleObjectDtor.o",
+      "source": "src/_code/0012/Obj55afc4__dtor_Obj55afc4.cpp",
+      "target": "orig/target/_code/0012/Obj55afc4__dtor_Obj55afc4.o",
       "thumb": true
     },
     {
@@ -69389,12 +69389,12 @@
     },
     {
       "address": "0x2f30c4",
-      "function": "_ZN9Obj558be04stopEv",
+      "function": "_ZN9Obj55afc44stopEv",
       "module": "_code",
-      "object": "build/obj/_code/002f/Obj558be0__stop.o",
+      "object": "build/obj/_code/002f/Obj55afc4__stop.o",
       "size": 28,
-      "source": "src/_code/002f/Obj558be0__stop.cpp",
-      "target": "orig/target/_code/002f/Obj558be0__stop.o",
+      "source": "src/_code/002f/Obj55afc4__stop.cpp",
+      "target": "orig/target/_code/002f/Obj55afc4__stop.o",
       "thumb": true
     },
     {

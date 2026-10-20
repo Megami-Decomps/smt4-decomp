@@ -176,6 +176,88 @@ def link_weak_calls(obj, unit=None):
     return patched
 
 
+def read_elf(data):
+    """(sections, symbols) of an ELF32 relocatable object: sections as dicts (name, type, flags,
+    offset, size, link, info), symbols as dicts (name, value, size, bind, type, shndx)."""
+    import struct
+    shoff, = struct.unpack_from("<I", data, 0x20)
+    entsize, count, strndx = struct.unpack_from("<HHH", data, 0x2E)
+    raw = [struct.unpack_from("<10I", data, shoff + i * entsize) for i in range(count)]
+    text = lambda table, at: bytes(data[table + at:data.index(b"\0", table + at)]).decode()
+    sections = [dict(name=text(raw[strndx][4], h[0]), type=h[1], flags=h[2], offset=h[4], size=h[5], link=h[6], info=h[7])
+                for h in raw]
+    symbols = []
+    for s in sections:
+        if s["type"] == 2:  # SHT_SYMTAB
+            names = sections[s["link"]]["offset"]
+            for at in range(s["offset"], s["offset"] + s["size"], 16):
+                name, value, size, info, _other, shndx = struct.unpack_from("<IIIBBH", data, at)
+                symbols.append(dict(name=text(names, name), value=value, size=size, bind=info >> 4, type=info & 0xF, shndx=shndx))
+    return sections, symbols
+
+
+def needs_carving(obj, unit):
+    """True when the object holds more than the unit's function: another function (a destructor's
+    deleting variant next to it) or a COMDAT group (a vtable the destructor's file emits)."""
+    sections, symbols = read_elf(Path(obj).read_bytes())
+    places = {(s["shndx"], s["value"] & ~1) for s in symbols if s["type"] == 2 and s["bind"] in (1, 2) and s["shndx"]}
+    return len(places) > 1 or any(s["type"] == 17 for s in sections)  # SHT_GROUP
+
+
+def carve(obj, unit):
+    """Rewrite an object compiled with --split_sections to hold only the unit's function, as the one
+    function per unit the retail objects are: its own section becomes `.text`; what it references in
+    the dropped sections (the vtable, the other variants) becomes an undefined symbol, resolved like any
+    other at link time. Returns False (object untouched) when it references a dropped section by
+    section symbol, which has no name to resolve."""
+    import struct
+    sys.path.insert(0, str(ROOT / "tools"))
+    import split
+    data = Path(obj).read_bytes()
+    sections, symbols = read_elf(data)
+    own = next((s for s in symbols if s["name"] == unit["function"] and s["shndx"] and s["type"] == 2), None)
+    if own is None:
+        return False
+    index = own["shndx"]
+    body = sections[index]
+    code = bytearray(data[body["offset"]:body["offset"] + body["size"]])
+    relocs, local_symbols, weak = [], {}, set()
+    for rel in sections:
+        if rel["type"] != 9 or rel["info"] != index:
+            continue
+        for at in range(rel["offset"], rel["offset"] + rel["size"], 8):
+            offset, info = struct.unpack_from("<II", data, at)
+            target = symbols[info >> 8]
+            if target["shndx"] == index and target["bind"] == 0 and target["name"]:
+                key = f"{target['name']}@{target['value']:x}"
+                local_symbols[key] = (target["name"], target["value"])
+                relocs.append((offset, key, info & 0xFF))
+            elif not target["name"] or target["type"] == 3:  # a section symbol: nothing to resolve it by
+                return False
+            else:
+                if target["bind"] == 2 and not target["shndx"]:
+                    weak.add(target["name"])
+                relocs.append((offset, target["name"], info & 0xFF))
+    marks = sorted((s["value"], s["name"]) for s in symbols if s["shndx"] == index and s["name"] in ("$a", "$t", "$d"))
+    pools = [(value, next((v for v, _n in marks if v > value), len(code))) for value, name in marks if name == "$d"]
+    attributes = next((bytes(data[s["offset"]:s["offset"] + s["size"]]) for s in sections if s["type"] == 0x70000003), b"")
+    Path(obj).write_bytes(split.build_object(unit["function"], bytes(code), bool(unit.get("thumb")), relocs, pools,
+                                             attributes, local_symbols, own["size"], weak))
+    return True
+
+
+def finish_object(compiler, unit, source, obj):
+    """What happens to a freshly compiled unit object: a destructor's or a file's extra functions and
+    vtable are cut away (recompiling with --split_sections), then armlink's NOPs are applied."""
+    if needs_carving(obj, unit):
+        split_command = command(compiler, unit, source, obj)
+        split_command.insert(split_command.index("-o"), "--split_sections")
+        done = subprocess.run(split_command, capture_output=True, text=True, cwd=ROOT)
+        if done.returncode == 0:
+            carve(obj, unit)
+    link_weak_calls(obj, unit)
+
+
 def compile_unit(compiler, unit, newest_header, force):
     source = ROOT / unit["source"]
     obj = ROOT / unit["object"]
@@ -184,7 +266,7 @@ def compile_unit(compiler, unit, newest_header, force):
     obj.parent.mkdir(parents=True, exist_ok=True)
     done = subprocess.run(command(compiler, unit, source, obj), capture_output=True, text=True, cwd=ROOT)
     if done.returncode == 0:
-        link_weak_calls(obj, unit)
+        finish_object(compiler, unit, source, obj)
         return unit, "ok", ""
     if obj.exists():
         obj.unlink()

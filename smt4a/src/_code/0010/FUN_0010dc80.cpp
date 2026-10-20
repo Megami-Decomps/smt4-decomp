@@ -10,7 +10,7 @@ int FUN_002ea3d0(int *, unsigned int);
 int FUN_002ea41e(int *, int *);
 int onlineJobSetStateDone(int *);
 int FUN_002ec738(int);
-int _ZN9Obj558be04stopEv(int *);
+int _ZN9Obj55afc44stopEv(int *);
 int FUN_002f3dde(int, int *);
 
 typedef int romwright_code(...);
@@ -31,7 +31,7 @@ extern unsigned int FUN_002ea3c0(unsigned int *, unsigned int, unsigned int, uns
 /* Supplied declaration required: FUN_002ea41e. */
 /* Supplied declaration required: onlineJobSetStateDone. */
 /* Supplied declaration required: FUN_002ec738. */
-/* Supplied declaration required: _ZN9Obj558be04stopEv. */
+/* Supplied declaration required: _ZN9Obj55afc44stopEv. */
 /* Supplied declaration required: FUN_002f3dde. */
 extern int refIsNonNegative(unsigned int *);
 
@@ -55,7 +55,7 @@ void FUN_0010dc80(int *param_1)
   onlineInstanceTableFind(temp_v0,param_1[0x45]);
   piVar4 = param_1 + 0x88;
   if (temp_v0 != 0) {
-    _ZN9Obj558be04stopEv(param_1 + 0x22);
+    _ZN9Obj55afc44stopEv(param_1 + 0x22);
     if ((char)param_1[0x8c] != '\x03') {
       if ((char)param_1[0x8c] == '\x01') {
         FUN_002e9f00(piVar4,4);
@@ -84,7 +84,7 @@ void FUN_0010dc80(int *param_1)
     FUN_002f3dde(temp_v0,&temp_v4);
   }
   else {
-    _ZN9Obj558be04stopEv(param_1 + 0x22);
+    _ZN9Obj55afc44stopEv(param_1 + 0x22);
     if ((char)param_1[0x8c] == '\x01') {
       FUN_002e9f00(piVar4,4);
     }

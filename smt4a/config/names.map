@@ -1095,7 +1095,7 @@
 00307be4 vecCount24c
 0030d3f4 copyObjectCtorDerived
 00103510 memAllocSized
-0012140c handleObjectDtor
+0012140c _ZN9Obj55afc4D1Ev
 0011356c serviceDispatch
 003d3508 scrPopFloat
 0025edcc scrOpStoreFloatVar
@@ -1132,7 +1132,7 @@
 003078f0 vectorCapacity12
 00307ac6 vectorCapacity40
 00307c64 vectorCapacity184
-002f30c4 _ZN9Obj558be04stopEv
+002f30c4 _ZN9Obj55afc44stopEv
 00147b84 sndSystemFinalize
 00244894 mapEplSlotsInit
 0042b754 nn_fs_OpenLinkFile

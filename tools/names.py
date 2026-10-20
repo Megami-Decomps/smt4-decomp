@@ -177,7 +177,10 @@ def main():
         if old is not None and section and "x" in section[3]:
             state.rename_function(old, new)
         elif old is None:
-            problem = state.name_global(address, new)
+            # A note starting `size:0x1c` gives the global's size (a vtable: a pool word pointing inside
+            # it, at its address point, then names it plus an addend).
+            size = re.match(r"size:0x([0-9a-fA-F]+)\b", note or "")
+            problem = state.name_global(address, new, int(size[1], 16) if size else None)
             if problem:
                 errors.append(f"{where}: {problem}")
                 continue

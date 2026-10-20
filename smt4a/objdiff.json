@@ -23394,13 +23394,13 @@
       "target_path": "orig/target/_code/0012/FUN_001213c0.o"
     },
     {
-      "base_path": "build/obj/_code/0012/handleObjectDtor.o",
+      "base_path": "build/obj/_code/0012/Obj55afc4__dtor_Obj55afc4.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "handleObjectDtor",
+            "name": "_ZN9Obj55afc4D1Ev",
             "size": 34,
             "vram": "0x12140c"
           }
@@ -23408,10 +23408,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0012/handleObjectDtor.cpp"
+        "source_path": "src/_code/0012/Obj55afc4__dtor_Obj55afc4.cpp"
       },
-      "name": "_code/0012/handleObjectDtor",
-      "target_path": "orig/target/_code/0012/handleObjectDtor.o"
+      "name": "_code/0012/Obj55afc4__dtor_Obj55afc4",
+      "target_path": "orig/target/_code/0012/Obj55afc4__dtor_Obj55afc4.o"
     },
     {
       "base_path": "build/obj/_code/0012/FUN_0012143c.o",
@@ -138257,13 +138257,13 @@
       "target_path": "orig/target/_code/002f/destroyObj00558be8.o"
     },
     {
-      "base_path": "build/obj/_code/002f/Obj558be0__stop.o",
+      "base_path": "build/obj/_code/002f/Obj55afc4__stop.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "_ZN9Obj558be04stopEv",
+            "name": "_ZN9Obj55afc44stopEv",
             "size": 28,
             "vram": "0x2f30c4"
           }
@@ -138271,10 +138271,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002f/Obj558be0__stop.cpp"
+        "source_path": "src/_code/002f/Obj55afc4__stop.cpp"
       },
-      "name": "_code/002f/Obj558be0__stop",
-      "target_path": "orig/target/_code/002f/Obj558be0__stop.o"
+      "name": "_code/002f/Obj55afc4__stop",
+      "target_path": "orig/target/_code/002f/Obj55afc4__stop.o"
     },
     {
       "base_path": "build/obj/_code/002f/FUN_002f30e0.o",

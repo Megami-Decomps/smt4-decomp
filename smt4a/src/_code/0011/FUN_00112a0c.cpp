@@ -12,7 +12,7 @@ int FUN_002ea3d0(int, unsigned int);
 int onlineJobSetStateDone(int);
 int FUN_002ea704(void);
 int FUN_002ec738(int);
-int _ZN9Obj558be04stopEv(int);
+int _ZN9Obj55afc44stopEv(int);
 int FUN_002f3490(unsigned char [12]);
 int FUN_002fa18c(int);
 int FUN_002fa434(unsigned char [12], unsigned int);
@@ -50,7 +50,7 @@ extern unsigned int FUN_002ea3c0(unsigned char *, unsigned int, unsigned int, un
 /* Supplied declaration required: onlineJobSetStateDone. */
 /* Supplied declaration required: FUN_002ea704. */
 /* Supplied declaration required: FUN_002ec738. */
-/* Supplied declaration required: _ZN9Obj558be04stopEv. */
+/* Supplied declaration required: _ZN9Obj55afc44stopEv. */
 /* Supplied declaration required: FUN_002f3490. */
 /* Supplied declaration required: FUN_002fa18c. */
 /* Supplied declaration required: FUN_002fa434. */
@@ -77,7 +77,7 @@ void FUN_00112a0c(int param_1)
   }
   temp_v2 = FUN_002ea704();
   if (temp_v2 != 0) {
-    _ZN9Obj558be04stopEv(param_1 + 0x1ac);
+    _ZN9Obj55afc44stopEv(param_1 + 0x1ac);
     temp_v0 = *(char *)(param_1 + 0x198);
     if (temp_v0 != '\x01') {
       if (temp_v0 != '\x02') {

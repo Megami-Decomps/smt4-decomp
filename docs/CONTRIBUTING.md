@@ -87,14 +87,26 @@ class only where the binary shows one:
 - a function that stores a vtable address into `this` (a constructor or destructor);
 - functions the class's methods call on `this` (`this` arrives in r0 like any first argument).
 
-Then write the function as a member (`void Obj558be0::stop()`, outside `extern "C"`) and name it
-with its mangled symbol through `tools/names.py` (`_ZN9Obj558be04stopEv`); its file becomes
-`Obj558be0__stop.cpp` and the progress site shows `Obj558be0::stop()`. `tools/cxxnames.py`
-demangles. Until a class's real name is known, it is named after its vtable address.
+Then write the function as a member (`void Obj55afc4::stop()`, outside `extern "C"`) and name it
+with its mangled symbol through `tools/names.py` (`_ZN9Obj55afc44stopEv`); its file becomes
+`Obj55afc4__stop.cpp` and the progress site shows `Obj55afc4::stop()`. `tools/cxxnames.py`
+demangles. Until a class's real name is known, it is named after its vtable address. Put the class
+in a shared header (`include/classes/Obj55afc4.h`) so every member's file declares it the same way.
 
-Constructors, destructors and the functions that define a vtable cannot be proven yet: armcc emits
-each structor in two or three aliased variants and puts the vtable into the same object, and the
-one-function-per-object tooling does not take that apart. Keep those in C form for now.
+Constructors and destructors are written as such (`Obj55afc4::~Obj55afc4()`, reference
+`include/classes/Obj55afc4.h` and `smt4a/src/_code/0012/Obj55afc4__dtor_Obj55afc4.cpp`):
+
+- name the unit with the variant retail's function is: `D1` for the destructor a vtable lists
+  (`_ZN9Obj55afc4D1Ev`), `C1` for a constructor (`_ZN9Obj55afc4C1Ev`); armcc emits the base-object
+  variant (`D2`/`C2`) as an alias of it and calls base and member structors by their `D1`/`C1` names;
+- name the vtable as a sized global, the note starting with its size:
+  `smt4a 0x55afc4 _ZTV9Obj55afc4 evidence size:0x1c vtable ...`. A pool word pointing at its address
+  point (vtable + 8) then reads `_ZTV9Obj55afc4` plus 8 in the retail object, as armcc writes it;
+- defining a destructor also emits its deleting variant (`D0`) and the vtable. `build.py` (and
+  `fdiff`) notice the extra function or vtable group, recompile with `--split_sections` and keep only
+  the unit's own function; the vtable stays the retail bytes. A `D0` unit can be written the same way
+  when armcc's deleting variant matches retail's; retail's often only calls `D1` and frees, from
+  another file, so keep it in C form when it does not.
 
 ## Names
 
