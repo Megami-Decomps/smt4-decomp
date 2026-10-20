@@ -213,9 +213,56 @@ def logo(game: str) -> str:
         return ('<div class="logo-iv" role="img" aria-label="Shin Megami Tensei IV">'
                 '<span class="jp">真・女神転生</span><span class="numeral">IV</span>'
                 '<span class="en">Shin Megami Tensei</span></div>')
-    return ('<div class="logo-apoc" role="img" aria-label="Shin Megami Tensei IV: Apocalypse">'
-            '<span class="en">SHIN MEGAMI TENSEI IV</span>'
-            '<span class="ring" aria-hidden="true"></span><span class="spray">Apocalypse</span></div>')
+    return APOCALYPSE_LOGO
+
+
+def _splatter() -> str:
+    """Spray-paint speckles around the streak: a fixed pseudo-random pattern (the page never changes
+    between builds of the same data)."""
+    seed, dots = 20141, []
+
+    def rand() -> float:
+        nonlocal seed
+        seed = (seed * 1103515245 + 12345) & 0x7FFFFFFF
+        return seed / 0x7FFFFFFF
+
+    for _ in range(320):
+        x = 110 + rand() * 820
+        spread = 80 + 50 * (1 - abs(x - 480) / 420)
+        y = 200 - (x - 480) * 0.12 + (rand() - 0.5) * 2 * spread * (0.35 + rand())
+        r = 0.8 + rand() ** 3 * 9
+        dots.append(f'<circle cx="{x:.0f}" cy="{y:.0f}" r="{r:.1f}" opacity="{0.55 + rand() * 0.45:.2f}"/>')
+    return "".join(dots)
+
+
+# After the Apocalypse logo: silver condensed caps over a red spray streak, the name brushed in black,
+# its A inside a sprayed anarchy ring. Drawn in SVG; no game asset is copied.
+APOCALYPSE_LOGO = (
+    '<div class="logo-apoc" role="img" aria-label="Shin Megami Tensei IV: Apocalypse">'
+    '<svg viewBox="0 0 960 300" aria-hidden="true">'
+    '<defs>'
+    '<filter id="apoc-splash" x="-10%" y="-30%" width="120%" height="160%">'
+    '<feTurbulence type="fractalNoise" baseFrequency="0.035 0.09" numOctaves="4" seed="7" result="n"/>'
+    '<feDisplacementMap in="SourceGraphic" in2="n" scale="46" xChannelSelector="R" yChannelSelector="G" result="d"/>'
+    '<feGaussianBlur in="d" stdDeviation="1.2"/></filter>'
+    '<filter id="apoc-brush" x="-5%" y="-10%" width="110%" height="120%">'
+    '<feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="3" result="n"/>'
+    '<feDisplacementMap in="SourceGraphic" in2="n" scale="5"/></filter>'
+    '</defs>'
+    '<g fill="#c3121b" filter="url(#apoc-splash)">'
+    '<path d="M140 238 C 230 170, 400 132, 590 124 C 720 118, 830 94, 905 62 C 890 112, 820 158, 720 192'
+    ' C 600 232, 420 268, 230 280 C 170 282, 128 262, 140 238 Z"/>'
+    '<ellipse cx="275" cy="205" rx="165" ry="74"/><ellipse cx="520" cy="196" rx="270" ry="64"/>'
+    '<ellipse cx="760" cy="168" rx="150" ry="44"/>'
+    '</g>'
+    f'<g fill="#c3121b">{_splatter()}</g>'
+    '<text x="470" y="78" text-anchor="middle" class="apoc-title" textLength="560" lengthAdjust="spacingAndGlyphs">'
+    'SHIN MEGAMI TENSEI Ⅳ</text>'
+    '<g filter="url(#apoc-brush)">'
+    '<circle cx="250" cy="192" r="66" fill="none" stroke="#0d0d0d" stroke-width="17"/>'
+    '<text x="250" y="232" text-anchor="middle" class="apoc-a">A</text>'
+    '<text x="322" y="230" class="apoc-name" textLength="520" lengthAdjust="spacingAndGlyphs">pocalypse</text>'
+    '</g></svg></div>')
 
 
 FILTERS = ('<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>'
@@ -375,17 +422,15 @@ nav a:hover, nav a[aria-current] { color: var(--ink); }
   grid-row: 1 / span 2; grid-column: 2; letter-spacing: -0.06em; }
 .logo-iv .en { grid-row: 2; font-family: "Cinzel", "Copperplate Gothic Bold", "Trajan Pro", Georgia, serif; font-weight: 700; font-size: 0.29em; letter-spacing: 0.16em; padding-top: 0.25em; white-space: nowrap; }
 
-/* Apocalypse: thin condensed caps over a sprayed red name and the red ring */
-.logo-apoc { position: relative; display: inline-flex; flex-direction: column; align-items: flex-start; }
-.logo-apoc .en { font-family: "Bodoni Moda", "Bodoni MT Condensed", "Didot", serif; font-weight: 500;
-  font-size: clamp(0.9rem, 1.5vw, 1.3rem); letter-spacing: 0.05em; color: #fff; transform: scaleY(1.45);
-  transform-origin: left bottom; margin-bottom: 0.15em; }
-.logo-apoc .spray { font-family: "Permanent Marker", "Segoe Script", "Marker Felt", cursive; font-weight: 400;
-  font-size: clamp(3.4rem, 9.5vw, 8.6rem); line-height: 0.95; color: #c41616; letter-spacing: 0;
-  text-shadow: 0.03em 0.04em 0 #5b0e0e, -0.02em -0.01em 0 #310005; filter: url(#spray); }
-.logo-apoc .ring { position: absolute; left: -0.05em; top: 0.55em; width: 1.25em; height: 1.25em;
-  font-size: clamp(3.4rem, 9.5vw, 8.6rem); border-radius: 50%; border: 0.1em solid #b81212;
-  box-shadow: 0 0 0.25em rgba(184, 18, 18, 0.55), inset 0 0 0.2em rgba(184, 18, 18, 0.5); opacity: 0.85; filter: url(#spray); }
+/* Apocalypse: silver condensed caps over a red spray streak, the name brushed in black */
+.logo-apoc { display: block; width: min(100%, 760px); }
+.logo-apoc svg { display: block; width: 100%; height: auto; overflow: visible; }
+.logo-apoc .apoc-title { font-family: "Bodoni Moda", "Bodoni MT Condensed", "Didot", serif; font-weight: 500;
+  font-size: 64px; fill: #e9e9e9; stroke: #151515; stroke-width: 3px; paint-order: stroke; }
+.logo-apoc .apoc-name { font-family: "Knewave", "Permanent Marker", "Segoe Script", cursive; font-size: 132px;
+  fill: #0d0d0d; stroke: rgba(255, 255, 255, 0.55); stroke-width: 2px; paint-order: stroke; }
+.logo-apoc .apoc-a { font-family: "Permanent Marker", "Knewave", cursive; font-size: 118px; fill: #f2f2f2;
+  stroke: #0d0d0d; stroke-width: 8px; paint-order: stroke; }
 
 .hero { padding: 48px 32px 56px; background: rgba(0, 0, 0, 0.35); display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
   gap: 40px 56px; align-items: end; }
@@ -473,7 +518,7 @@ footer .mark-large { font-size: clamp(3rem, 10vw, 9rem); font-weight: 900; font-
 .half:hover { filter: brightness(1.12); }
 .half .logo-iv, .half .logo-apoc { margin-bottom: auto; }
 .half .logo-iv { font-size: clamp(2rem, 4.4vw, 4.2rem); }
-.half .logo-apoc .spray, .half .logo-apoc .ring { font-size: clamp(2.8rem, 6.6vw, 6.4rem); }
+.half .logo-apoc { width: min(100%, 620px); }
 .half .figure { margin: 48px 0 6px; font-size: clamp(3.2rem, 7.5vw, 7rem); font-weight: 900; font-style: italic;
   line-height: 0.85; letter-spacing: -0.03em; }
 .half.theme-apoc .figure { filter: url(#spray); }
@@ -494,7 +539,7 @@ footer .mark-large { font-size: clamp(3rem, 10vw, 9rem); font-weight: 900; font-
 @media (prefers-reduced-motion: reduce) { .half { transition: none; } }
 """.replace("STONE_TEXTURE", STONE).replace("SLATE_TEXTURE", SLATE)
 
-FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700;900&family=Cinzel:wght@600;700&family=Bodoni+Moda:wght@500&family=Permanent+Marker&display=swap" rel="stylesheet">'
+FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700;900&family=Cinzel:wght@600;700&family=Bodoni+Moda:wght@500&family=Permanent+Marker&family=Knewave&display=swap" rel="stylesheet">'
 ESCAPED = STYLE.replace("{", "{{").replace("}", "}}")
 
 PAGE = """<!doctype html>
