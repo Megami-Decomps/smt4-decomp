@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the switch's jump table differs (a __switch$$ relocation in the build, raw case addresses in retail); the code is identical. */
 #include "shard/S2SoundLoader.h"
 
 extern "C" {

@@ -106,6 +106,22 @@ def thumb2_literal_load(first, second):
     return None
 
 
+def switch_table(code, at):
+    """(table offset, entries) of an armcc ARM switch at `at`, else None: `cmp rM, #N` before
+    `ldr pc, [pc, rM, lsl #2]`, then `b default`, then N words: the case addresses."""
+    word = struct.unpack_from("<I", code, at)[0]
+    if word & 0x0FFFFFF0 != 0x079FF100:
+        return None
+    index = word & 0xF
+    for back in range(at - 4, max(at - 24, -1), -4):
+        cmp = struct.unpack_from("<I", code, back)[0]
+        if cmp & 0x0FFFF000 == 0x03500000 | index << 16:  # CMP rM, #imm
+            rotate = (cmp >> 8 & 0xF) * 2
+            count = ((cmp & 0xFF) >> rotate | (cmp & 0xFF) << (32 - rotate)) & 0xFFFFFFFF if rotate else cmp & 0xFF
+            return (at + 8, count) if at + 8 + count * 4 <= len(code) else None
+    return None
+
+
 def literal_pools(entry, code, thumb):
     """(merged data ranges, words a PC-relative LDR reads, end) of an ARM/Thumb function, as
     byte offsets: A32 LDR/LDRD/VLDR and Thumb LDR with PC as the base. One pass in address
@@ -189,6 +205,9 @@ def literal_pools(entry, code, thumb):
                 rotate = (word >> 8 & 0xF) * 2
                 imm = ((word & 0xFF) >> rotate | (word & 0xFF) << (32 - rotate)) & 0xFFFFFFFF if rotate else word & 0xFF
                 addressed.append(at + 8 + imm)
+            elif switch_table(code, at):  # LDR PC, [PC, Rm, LSL #2]: the case table follows the B default
+                table, count = switch_table(code, at)
+                read(table, count * 4, False)
     for to in addressed:
         stop = code.find(b"\0", to) if 0 <= to < length else -1
         if stop >= 0:
@@ -316,10 +335,12 @@ def arm_attributes():
     return b"A" + struct.pack("<I", 4 + len(vendor)) + vendor
 
 
-def build_object(name, code, thumb, relocs, pools, attributes):
+def build_object(name, code, thumb, relocs, pools, attributes, local_symbols=None):
     """ELF32 ARM relocatable object holding `code` as the function `name`: `.text`, `.rel.text`,
-    `.ARM.attributes`, `.symtab` (section symbol, `$a`/`$t`/`$d` mapping symbols, the function,
-    undefined callees), `.strtab`, `.shstrtab`."""
+    `.ARM.attributes`, `.symtab` (section symbol, `$a`/`$t`/`$d` mapping symbols, local symbols, the
+    function, undefined callees), `.strtab`, `.shstrtab`. `local_symbols`: {key a relocation names:
+    (symbol name, offset)}, e.g. armcc's `__switch$$` that a switch table's words are relative to."""
+    local_symbols = local_symbols or {}
     strtab, shstr = Strings(), Strings()
     symbols = [(0, 0, 0, 0, 0), (0, 3, 1, 0, 0)]  # name, info, shndx, value, size
     mapping = strtab.add("$t" if thumb else "$a")
@@ -330,6 +351,10 @@ def build_object(name, code, thumb, relocs, pools, attributes):
         symbols.append((pool, 0, 1, start, 0))
         if end < len(code):
             symbols.append((mapping, 0, 1, end, 0))
+    local_index = {}
+    for key, (local_name, value) in local_symbols.items():
+        local_index[key] = len(symbols)
+        symbols.append((strtab.add(local_name), 0x02, 1, value, 0))  # STB_LOCAL, STT_FUNC
     first_global = len(symbols)
     function = strtab.add(name)
     # A pool that ends the section follows the function's last instruction outside its symbol.
@@ -337,7 +362,7 @@ def build_object(name, code, thumb, relocs, pools, attributes):
     symbols.append((function, 0x12, 1, 1 if thumb else 0, size))
     index_of = {}
     for _, symbol, _ in relocs:
-        if symbol == name or symbol in index_of:
+        if symbol == name or symbol in index_of or symbol in local_index:
             continue
         index_of[symbol] = len(symbols)
         symbols.append((strtab.add(symbol), 0x10, 0, 0, 0))
@@ -358,7 +383,7 @@ def build_object(name, code, thumb, relocs, pools, attributes):
         align(8)
         offset = len(out)
         for at, symbol, kind in relocs:
-            index = first_global if symbol == name else index_of[symbol]
+            index = first_global if symbol == name else local_index.get(symbol) or index_of[symbol]
             out += struct.pack("<II", at, index << 8 | kind)
         sections.append((shstr.add(".rel.text"), 9, 0x40, offset, len(out) - offset, symtab_index, 1, 4, 8))
     if attributes:
@@ -449,8 +474,23 @@ class Module:
                 code[at:at + 4] = bytes(4)
                 relocs.append((at, symbol, 2))  # R_ARM_ABS32
         relocs += relocate_branches(address, code, thumb, branches)
+        # A switch's case table is what armcc emits before linking: each word the case's offset from a
+        # local `__switch$$` symbol on the `b default` after `ldr pc, [pc, rM, lsl #2]`, relocated.
+        local_symbols = {}
+        if not thumb:
+            for at in range(0, len(code) - 3, 4):
+                if any(start <= at < end for start, end in pools) or not switch_table(code, at):
+                    continue
+                table, count = switch_table(code, at)
+                key = f"__switch$$@{at + 4:x}"
+                local_symbols[key] = ("__switch$$", at + 4)
+                for entry in range(table, table + count * 4, 4):
+                    value = struct.unpack_from("<I", code, entry)[0]
+                    if address <= value < address + len(code):
+                        struct.pack_into("<I", code, entry, (value - (address + at + 4)) & 0xFFFFFFFF)
+                        relocs.append((entry, key, 2))  # R_ARM_ABS32
         relocs.sort(key=lambda r: r[0])
-        return build_object(name, bytes(code), thumb, relocs, pools, attributes)
+        return build_object(name, bytes(code), thumb, relocs, pools, attributes, local_symbols)
 
 
 def main():

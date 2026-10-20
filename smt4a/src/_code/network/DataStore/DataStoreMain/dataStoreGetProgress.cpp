@@ -1,4 +1,3 @@
-/* NON_MATCHING: instructions are identical; only the switch jump table is compared as relocations (__switch$$) against retail's resolved words */
 /* Classifies the DataStore's progress by its state: 0 = starting, 1 = state 7, 2 = working, 3 = finished, 5 = not running or in an error. */
 #include "common.h"
 #include "network/DataStore/DataStoreMain.h"

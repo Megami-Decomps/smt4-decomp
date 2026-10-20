@@ -84,6 +84,8 @@ in the compiler's form (`bl` with a relocation; the linker chose `blx`), and mar
 that code addresses pc-relatively as data. relink links with `--no-warn-mismatch` because retail mixes
 units built for different CPUs (`--cpu=5TE` runtime code next to MPCore code), and accepts a compiled
 function longer than retail's when the extra bytes are a literal the image holds right after it.
+A switch (`ldr pc, [pc, rM, lsl #2]`) is followed by a table of case addresses; the target object holds
+it as armcc emits it, each word a case's offset from a local `__switch$$` symbol, relocated.
 
 ## What counts
 

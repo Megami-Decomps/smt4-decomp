@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the 7 jump-table words differ in fdiff (retail: absolute addresses, built: __switch$$-relative relocs to the same case labels); all code rows are identical. */
 #include "common.h"
 #include "shard/S3SoundArchiveLoader.h"
 

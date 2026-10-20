@@ -1,4 +1,3 @@
-/* NON_MATCHING: instructions are identical; only the switch jump table is compared as relocations (__switch$$) against retail's resolved words */
 /* Copies the part of the particle parameter block `src` that its type uses into `dst`: plain values, or fresh clones of the objects and handle arrays. */
 #include "AsdSDK/Source/Gfx/Effect/effParticle.h"
 #include "AsdSDK/AsdDebug.h"
