@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0011ccfc(int *, int, unsigned int, int, unsigned int, unsigned int, unsigned int, int, unsigned int);
 int FUN_002e760a(int);
 int FUN_002e995c(unsigned char [6]);
-int FUN_002f30c4(int *);
+int _ZN9Obj558be04stopEv(int *);
 int FUN_002f8624(unsigned char [12], int, unsigned short [2]);
 int FUN_002f86ac(int, unsigned short *);
 
@@ -48,7 +48,7 @@ extern int FUN_00109e60(int *, unsigned char *, unsigned short *, unsigned int);
 /* Supplied declaration required: FUN_0011ccfc. */
 /* Supplied declaration required: FUN_002e760a. */
 /* Supplied declaration required: FUN_002e995c. */
-/* Supplied declaration required: FUN_002f30c4. */
+/* Supplied declaration required: _ZN9Obj558be04stopEv. */
 extern int FUN_002f8208(int *, unsigned int);
 extern int *FUN_002f8574(int, int, unsigned int, int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002f8624. */
@@ -127,7 +127,7 @@ FUN_0010e05c(int param_1,unsigned int param_2,unsigned short *param_3,unsigned i
       }
       FUN_002f86ac(param_1 + 0x160,param_3);
     }
-    FUN_002f30c4(piVar2);
+    _ZN9Obj558be04stopEv(piVar2);
     if (piVar2 != (int *)0x0) {
       (**(romwright_code **)(*piVar2 + 4))(piVar2);
     }

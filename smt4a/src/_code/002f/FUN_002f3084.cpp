@@ -3,14 +3,14 @@
 extern "C" {
 
 int handleObjectDtor(int);
-int FUN_002f30c4(unsigned int *);
+int _ZN9Obj558be04stopEv(unsigned int *);
 int FUN_002f30e0(unsigned int *, unsigned int);
 
 extern unsigned char DAT_00558be8; /* 0x558be8 */
 
 /* Supplied declaration required: handleObjectDtor. */
 extern int FUN_002eb728(unsigned int *);
-/* Supplied declaration required: FUN_002f30c4. */
+/* Supplied declaration required: _ZN9Obj558be04stopEv. */
 /* Supplied declaration required: FUN_002f30e0. */
 extern int FUN_002f30fc(int);
 
@@ -22,7 +22,7 @@ void FUN_002f3084(unsigned int *param_1)
   int temp_v0;
   
   *param_1 = (unsigned int)&DAT_00558be8;
-  FUN_002f30c4(param_1);
+  _ZN9Obj558be04stopEv(param_1);
   FUN_002f30e0(param_1,param_1[0x12]);
   FUN_002f30e0(param_1,param_1[0x11]);
   temp_v0 = FUN_002eb728(param_1 + 0x48);

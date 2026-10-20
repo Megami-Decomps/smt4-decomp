@@ -137016,13 +137016,13 @@
       "target_path": "orig/target/_code/002f/FUN_002f3084.o"
     },
     {
-      "base_path": "build/obj/_code/002f/FUN_002f30c4.o",
+      "base_path": "build/obj/_code/002f/Obj558be0__stop.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002f30c4",
+            "name": "_ZN9Obj558be04stopEv",
             "size": 28,
             "vram": "0x2f30c4"
           }
@@ -137030,10 +137030,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002f/FUN_002f30c4.cpp"
+        "source_path": "src/_code/002f/Obj558be0__stop.cpp"
       },
-      "name": "_code/002f/FUN_002f30c4",
-      "target_path": "orig/target/_code/002f/FUN_002f30c4.o"
+      "name": "_code/002f/Obj558be0__stop",
+      "target_path": "orig/target/_code/002f/Obj558be0__stop.o"
     },
     {
       "base_path": "build/obj/_code/002f/FUN_002f30e0.o",

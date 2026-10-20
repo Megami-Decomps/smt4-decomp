@@ -28,12 +28,12 @@ typedef struct {
 extern u8 DAT_0055afcc;
 extern ListenerTable g_listenerTable;
 
-void FUN_002f30c4(HandleObject *self);
+void _ZN9Obj558be04stopEv(HandleObject *self);
 
 HandleObject *handleObjectDtor(HandleObject *self)
 {
     self->vtbl = &DAT_0055afcc;
-    FUN_002f30c4(self);
+    _ZN9Obj558be04stopEv(self);
     if (g_listenerTable.listener != NULL) {
         g_listenerTable.listener->vtbl->onRelease(g_listenerTable.listener, self->handle);
     }

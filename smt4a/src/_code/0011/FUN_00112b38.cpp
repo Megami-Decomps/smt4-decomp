@@ -10,7 +10,7 @@ int FUN_002ea3d0(int, unsigned int);
 int FUN_002ea446(int, int);
 int FUN_002efd4a(...);
 int FUN_002f2e3c(int, int, int, int);
-int FUN_002f30c4(int);
+int _ZN9Obj558be04stopEv(int);
 int FUN_002f7f50(int);
 int FUN_002f8208(int, int);
 int FUN_002fd706(int);
@@ -39,7 +39,7 @@ extern unsigned int FUN_002ea3c0(unsigned int *, unsigned char *, unsigned int, 
 /* Supplied declaration required: FUN_002ea446. */
 /* Supplied declaration required: FUN_002efd4a. */
 /* Supplied declaration required: FUN_002f2e3c. */
-/* Supplied declaration required: FUN_002f30c4. */
+/* Supplied declaration required: _ZN9Obj558be04stopEv. */
 extern int FUN_002f7f00(int, unsigned int);
 /* Supplied declaration required: FUN_002f7f50. */
 /* Supplied declaration required: FUN_002f8208. */
@@ -148,7 +148,7 @@ LAB_00112c5c:
         FUN_002ea3d0(param_1,temp_v2);
         return;
       }
-      FUN_002f30c4(temp_v7);
+      _ZN9Obj558be04stopEv(temp_v7);
       FUN_002f8208(temp_v7,1);
       FUN_002fd706(param_1);
     }

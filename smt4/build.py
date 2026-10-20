@@ -117,6 +117,39 @@ def command(compiler, unit, source, obj):
     )
 
 
+def link_weak_calls(obj):
+    """Do what armlink did to the retail code: an ARM BL/B to a weak function nothing defines (the
+    release build left the debug hooks out) becomes MOV r0, r0, and its relocation goes. armcc itself
+    never emits MOV r0, r0, so every one in the retail code is such a call. Returns how many."""
+    import struct
+    data = bytearray(Path(obj).read_bytes())
+    shoff, = struct.unpack_from("<I", data, 0x20)
+    entsize, count, strndx = struct.unpack_from("<HHH", data, 0x2E)
+    headers = [list(struct.unpack_from("<10I", data, shoff + i * entsize)) for i in range(count)]
+    name = lambda h: bytes(data[headers[strndx][4] + h[0]:data.index(b"\0", headers[strndx][4] + h[0])])
+    text = next((i for i, h in enumerate(headers) if name(h) == b".text"), None)
+    patched = 0
+    for index, rel in enumerate(headers):
+        if rel[1] != 9 or rel[7] != text:  # SHT_REL for .text
+            continue
+        symtab = headers[rel[6]]
+        kept = []
+        for at in range(rel[4], rel[4] + rel[5], 8):
+            offset, info = struct.unpack_from("<II", data, at)
+            _name, _value, _size, sym_info, _other, shndx = struct.unpack_from("<IIIBBH", data, symtab[4] + (info >> 8) * 16)
+            if (info & 0xFF) in (28, 29) and shndx == 0 and sym_info >> 4 == 2:  # R_ARM_CALL/JUMP24, undefined, weak
+                struct.pack_into("<I", data, headers[text][4] + offset, 0xE1A00000)
+                patched += 1
+            else:
+                kept.append(bytes(data[at:at + 8]))
+        if len(kept) * 8 != rel[5]:
+            data[rel[4]:rel[4] + len(kept) * 8] = b"".join(kept)
+            struct.pack_into("<I", data, shoff + index * entsize + 0x14, len(kept) * 8)
+    if patched:
+        Path(obj).write_bytes(bytes(data))
+    return patched
+
+
 def compile_unit(compiler, unit, newest_header, force):
     source = ROOT / unit["source"]
     obj = ROOT / unit["object"]
@@ -125,6 +158,7 @@ def compile_unit(compiler, unit, newest_header, force):
     obj.parent.mkdir(parents=True, exist_ok=True)
     done = subprocess.run(command(compiler, unit, source, obj), capture_output=True, text=True, cwd=ROOT)
     if done.returncode == 0:
+        link_weak_calls(obj)
         return unit, "ok", ""
     if obj.exists():
         obj.unlink()

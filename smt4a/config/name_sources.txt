@@ -630,3 +630,4 @@
 002e3238 __aeabi_uidivmod inferred ARM run-time ABI helper: armcc calls it by this name for % and / [runtime]
 00100380 libc_sprintf inferred twin of smt4 libc_sprintf
 0051440c libc_snprintf inferred the C library's snprintf, named apart for the same reason as libc_sprintf
+002f30c4 _ZN9Obj558be04stopEv inferred Obj558be0::stop(): called first by its destructor; stops the child object once

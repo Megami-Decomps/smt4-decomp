@@ -7,6 +7,7 @@
       "--apcs=/interwork",
       "--cpp",
       "--no_rtti",
+      "--no_rtti_data",
       "-O3",
       "-Otime"
     ],

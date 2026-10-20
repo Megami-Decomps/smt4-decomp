@@ -36,6 +36,12 @@ Every match must be one a programmer could have written for a reason.
   `config/project.json` when the retail code shows a different build: a constant division that calls
   `__aeabi_idivmod`/`__aeabi_uidivmod` instead of multiplying is `-Ospace` (the STL and SDK containers
   were built that way). Write the C as `/` and `%` and set the flag; never call the helper by hand.
+- **A `mov r0, r0` in retail ARM code is a removed call.** armcc never emits it; armlink writes it
+  over a call to a `__weak` function the release build didn't link: the engine's debug hook, called
+  with `__FILE__` and `__LINE__` (retail still loads the file string into r0 and the line into r1).
+  Write the call: `asdDebugTrace(DAT_00409c64, 172);` with `include/AsdSDK/AsdDebug.h`, where the
+  string is the retail `__FILE__` global and the number the line. `build.py` (and `fdiff`) turn calls
+  to undefined weak functions into `mov r0, r0` after compiling, as armlink did.
 
 ## Readability standard
 
@@ -55,6 +61,25 @@ A done function has none of the decompiler's placeholders:
 - **Comments say what the code does**, one line above the function and wherever a field's or
   constant's meaning isn't obvious. No restating the code.
 - Each source file includes `common.h` (base types, `NULL`) or a header that does.
+
+## C++
+
+The games are C++ (`.cpp` files compiled with `--cpp --no_rtti --no_rtti_data`), but not every
+function was a method: much of the game code is C-style functions and callback tables. Write a
+class only where the binary shows one:
+
+- a vtable in the data (two zero words, then function pointers) and the functions it lists;
+- a function that stores a vtable address into `this` (a constructor or destructor);
+- functions the class's methods call on `this` (`this` arrives in r0 like any first argument).
+
+Then write the function as a member (`void Obj558be0::stop()`, outside `extern "C"`) and name it
+with its mangled symbol through `tools/names.py` (`_ZN9Obj558be04stopEv`); its file becomes
+`Obj558be0__stop.cpp` and the progress site shows `Obj558be0::stop()`. `tools/cxxnames.py`
+demangles. Until a class's real name is known, it is named after its vtable address.
+
+Constructors, destructors and the functions that define a vtable cannot be proven yet: armcc emits
+each structor in two or three aliased variants and puts the vtable into the same object, and the
+one-function-per-object tooling does not take that apart. Keep those in C form for now.
 
 ## Names
 

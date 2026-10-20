@@ -7,6 +7,7 @@
       "--apcs=/interwork",
       "--cpp",
       "--no_rtti",
+      "--no_rtti_data",
       "-O3",
       "-Otime"
     ],
@@ -16498,6 +16499,7 @@
         "--apcs=/interwork",
         "--cpp",
         "--no_rtti",
+        "--no_rtti_data",
         "-O3",
         "-Ospace"
       ]
@@ -68316,12 +68318,12 @@
     },
     {
       "address": "0x2f30c4",
-      "function": "FUN_002f30c4",
+      "function": "_ZN9Obj558be04stopEv",
       "module": "_code",
-      "object": "build/obj/_code/002f/FUN_002f30c4.o",
+      "object": "build/obj/_code/002f/Obj558be0__stop.o",
       "size": 28,
-      "source": "src/_code/002f/FUN_002f30c4.cpp",
-      "target": "orig/target/_code/002f/FUN_002f30c4.o",
+      "source": "src/_code/002f/Obj558be0__stop.cpp",
+      "target": "orig/target/_code/002f/Obj558be0__stop.o",
       "thumb": true
     },
     {
@@ -71960,6 +71962,7 @@
         "--apcs=/interwork",
         "--cpp",
         "--no_rtti",
+        "--no_rtti_data",
         "-O3",
         "-Ospace"
       ]
@@ -74059,6 +74062,7 @@
         "--apcs=/interwork",
         "--cpp",
         "--no_rtti",
+        "--no_rtti_data",
         "-O3",
         "-Ospace"
       ]
@@ -76212,6 +76216,7 @@
         "--apcs=/interwork",
         "--cpp",
         "--no_rtti",
+        "--no_rtti_data",
         "-O3",
         "-Ospace"
       ]
@@ -76371,6 +76376,7 @@
         "--apcs=/interwork",
         "--cpp",
         "--no_rtti",
+        "--no_rtti_data",
         "-O3",
         "-Ospace"
       ]
@@ -76430,6 +76436,7 @@
         "--apcs=/interwork",
         "--cpp",
         "--no_rtti",
+        "--no_rtti_data",
         "-O3",
         "-Ospace"
       ]
@@ -76639,6 +76646,7 @@
         "--apcs=/interwork",
         "--cpp",
         "--no_rtti",
+        "--no_rtti_data",
         "-O3",
         "-Ospace"
       ]
@@ -78728,6 +78736,7 @@
         "--apcs=/interwork",
         "--cpp",
         "--no_rtti",
+        "--no_rtti_data",
         "-O3",
         "-Ospace"
       ]
@@ -81958,6 +81967,7 @@
         "--apcs=/interwork",
         "--cpp",
         "--no_rtti",
+        "--no_rtti_data",
         "-O3",
         "-Ospace"
       ]

@@ -40,6 +40,9 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from cxxnames import demangle  # noqa: E402
+
 ROOT = Path(__file__).resolve().parent.parent
 
 GAMES = {
@@ -331,7 +334,8 @@ def game_page(game: str, data: dict, history: list[dict], twins: dict, repo: str
         label = f"0x{folder}xxxx" if re.fullmatch(r"[0-9a-f]{4}", folder) else folder
         states = " ".join(sorted({f["state"] for f in members}))
         items = "".join(
-            f'<li class="{f["state"]}"><code>{html.escape(f["name"])}</code><span>{number(f["size"])}</span></li>'
+            f'<li class="{f["state"]}"><code title="{html.escape(f["name"])}">{html.escape(demangle(f["name"]))}</code>'
+            f'<span>{number(f["size"])}</span></li>'
             for f in sorted(members, key=lambda f: f["name"]))
         names = " ".join(f["name"].lower() for f in members)
         directory = f"src/_code/{folder}"

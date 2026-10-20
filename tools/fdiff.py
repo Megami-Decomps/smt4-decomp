@@ -76,6 +76,7 @@ def main():
         if done.returncode:
             print("\n".join(line for line in (done.stdout + done.stderr).splitlines() if "Error" in line or line.startswith("  ")))
             sys.exit(2)
+        build.link_weak_calls(obj)  # what armlink did: calls to absent __weak debug hooks become MOV r0, r0
     tool = objdump(args.game)
     retail = listing(tool, ROOT / args.game / unit["target"])
     built = listing(tool, ROOT / args.game / unit["object"])

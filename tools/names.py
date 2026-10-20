@@ -23,6 +23,9 @@ import subprocess
 import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from cxxnames import file_stem  # noqa: E402
+
 ROOT = Path(__file__).resolve().parent.parent
 IDENT = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
 
@@ -63,6 +66,7 @@ class Game:
         self.functions_renamed = {}  # old -> new, for symbols.txt, names.map, project, objdiff
         self.new_symbols = []  # type:object lines to append
         self.files = []      # (old source, new source)
+        self.stems = {}      # old file stem -> new file stem
 
     def taken(self, name):
         return name in self.functions
@@ -77,12 +81,16 @@ class Game:
         self.functions_renamed[old] = new
         unit = self.units.pop(old, None)
         if unit:
+            # Files are named after the function, readably: `Obj558be0__stop.cpp` for a mangled name.
             old_source = unit["source"]
-            for key in ("function", "source", "object", "target"):
+            old_stem, new_stem = file_stem(old), file_stem(new)
+            unit["function"] = new
+            for key in ("source", "object", "target"):
                 if key in unit:
-                    unit[key] = re.sub(r"(?<![A-Za-z0-9_])" + re.escape(old) + r"(?![A-Za-z0-9_])", new, unit[key])
+                    unit[key] = re.sub(r"(?<=/)" + re.escape(old_stem) + r"(?=\.)", new_stem, unit[key])
             self.units[new] = unit
             self.files.append((old_source, unit["source"]))
+            self.stems[old_stem] = new_stem
         self.renamed.append((old, new))
 
     def name_global(self, address, new, size=None):
@@ -116,6 +124,11 @@ class Game:
             functions = self.functions_renamed
             self.symbols = re.sub(r"^(\S+)( = )", lambda m: functions.get(m[1], m[1]) + m[2], self.symbols, flags=re.M)
             self.names_map = re.sub(r"^([0-9a-fA-F]{8}) (\S+)$", lambda m: f"{m[1]} {functions.get(m[2], m[2])}", self.names_map, flags=re.M)
+            # objdiff.json: paths and unit names take the file stem, the function entries the symbol.
+            stems = self.stems
+            if stems:
+                self.objdiff = re.sub(r"(?<=/)(" + "|".join(re.escape(s) for s in sorted(stems, key=len, reverse=True)) + r")(?=[.\"])",
+                                      lambda m: stems[m[1]], self.objdiff)
             self.objdiff = word(functions).sub(lambda m: functions[m[1]], self.objdiff)
         mapped = {int(m[1], 16) for m in re.finditer(r"^([0-9a-fA-F]{8}) ", self.names_map, re.M)}
         for old, new in self.functions_renamed.items():
