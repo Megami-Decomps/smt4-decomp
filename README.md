@@ -1,95 +1,86 @@
-# Shin Megami Tensei IV / IV: Apocalypse decompilation
+# Shin Megami Tensei IV & IV: Apocalypse
 
-Matching decompilations of the two Nintendo 3DS games, one function at a time, built with the
-compiler Atlus used: ARM's armcc (RVCT 4.1 build 713, `-O3 -Otime`). The games are C++ (asserts name 168
-`.cpp` source files and 4 `.c`), so every function is a `.cpp` compiled with `--cpp`. A function is done
-when its source compiles to the retail function's bytes and `tools/relink.py` links it back into a
-byte-identical game binary.
+A work-in-progress **matching decompilation** of *Shin Megami Tensei IV* and *Shin Megami Tensei IV:
+Apocalypse* for Nintendo 3DS. The goal is to understand and document how the games work by
+reconstructing readable source code from their retail binaries. Matching builds verify the
+reconstruction against the original executables.
 
-| Game | Directory | Build | Functions | Exact (objdiff) | Proven by relink | Fuzzy |
-|---|---|---|---|---|---|---|
-| Shin Megami Tensei IV (USA) | [`smt4/`](smt4/) | v1.2.0 update (CTR-U-AMXE) | 9,341 | 1,754 | 1,748 | 45.1% |
-| Shin Megami Tensei IV: Apocalypse (USA) | [`smt4a/`](smt4a/) | v1.0 cartridge (CTR-P-BG4E) | 15,106 | 3,081 | 3,075 | 45.8% |
+> [!IMPORTANT]
+> **This is a binary reconstruction and analysis project for understanding and documenting how the
+> games work. You cannot use this repository to play the games; it is not a port.**
+>
+> Building requires your own lawfully obtained copy of the corresponding game. Required files are
+> extracted locally from your copy. Game dumps and retail executables are not included.
 
-Every function compiles. Most of the source is still romwright's first pass; matched functions are
-edited by hand, and [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md) sets the bar a function has to clear:
-an honest match that reads like the original (`src/_code/sys/Task/Task/` and `include/sys/Task.h` are
-the reference). "Proven by relink" counts the functions `tools/relink.py --matched` links from their
-compiled objects into the retail `.code`, byte for byte; it lists every function it keeps as retail
-bytes and why. The 6 per game that objdiff scores 100% but relink keeps (`nw_gfx_internal_NWCopyVec4Reverse`,
-`NWCopyMtx24Reverse` and their copies) load with `vldmia r1!`, a writeback armcc emits only when the
-pointer is used afterwards: hand-written assembly.
+## Status and versions
 
-## Layout
+Every function compiles, but most are still the decompiler's first pass. A function counts once its
+source compiles to the retail bytes and `tools/relink.py` links it back into a byte-identical
+executable; names, types and source organization are still being recovered.
 
-```
-smt4/, smt4a/     one project per game: config/, include/, src/, objdiff.json, build.py, tools/
-  config/symbols.txt  every function's name, address and size, and every named global
-  config/name_sources.txt  where each name came from (evidence or inferred)
-  config/tus.json     function -> original source file (tools/assign_tus.py)
-  src/_code/<file>/   functions placed in their original source file's folder (AsdSDK/..., battle/...)
-  src/_code/<shard>/  everything else, by address
-include/              headers both games share: structs and accessors, by original source file
-docs/CONTRIBUTING.md  the workflow, the matching rules and the readability standard
-tools/assign_tus.py   places functions in source files from assert paths and file-local data
-tools/shared.py       pairs the functions both games share and compares their progress
-tools/fdiff.py        compiles one function and diffs its disassembly and relocations against retail
-tools/names.py        names a function or global in every file at once and records the evidence
-```
+| Version | Game | Build | `.code` SHA-256 |
+|---|---|---|---|
+| [`smt4`](smt4/) | Shin Megami Tensei IV (USA) | v1.2.0 update (`CTR-U-AMXE`) | `30c2fde6c31bdf2c2b08c74183523118a5eec048f0e0bf48f5b46fd136c495a1` |
+| [`smt4a`](smt4a/) | Shin Megami Tensei IV: Apocalypse (USA) | v1.0 cartridge (`CTR-P-BG4E`) | `0b5338c4eace771ae809a06977a785ea4e00fd41c63e58d3f05fa6a255561bbe` |
 
-Both games come from one build tree: the engine `AsdSDK`, Nintendo's SDK, and most of `sdds4`. The
-same original file has the same path in both (`AsdSDK/Source/Sys/File/AsdFile`, `camp/IfTouch`), and
-167 of Apocalypse's 215 placed files are also IV files. `python3 tools/shared.py` pairs the 3,782
-functions with the same code in both games (41% of IV's, 25% of Apocalypse's): same instructions, same
-constants and floats, only branch targets and image addresses free. A function matched in one game
-and not the other is a porting candidate (`--list ported`): its C very likely matches the twin too.
+The hash is of the decompressed program, so any container of the same build works.
 
-## Getting started
+| Version | Functions | Matched (objdiff) | Proven by relink | Fuzzy |
+|---|---|---|---|---|
+| `smt4` | 9,341 | 1,754 | 1,748 | 45.1% |
+| `smt4a` | 15,106 | 3,081 | 3,075 | 45.8% |
 
-Python 3 and your own decrypted dumps. Per game:
+"Proven" is the number that counts: objdiff ignores some operand differences, relink does not. The
+[project notes](docs/project.md#proof) explain the measurements and the six functions per game that
+were hand-written assembly.
+
+## Quickstart
+
+Requirements:
+
+- Windows, or Linux/macOS (the compiler then runs through [wibo](https://github.com/decompals/wibo),
+  which `build.py fetch` downloads).
+- Python 3.10+ and `git`.
+- Your own decrypted dump: the IV v1.2.0 update (the installed NCCH or a decrypted `.cia`), or the
+  Apocalypse cartridge (`.3ds`/`.cci`, or its partition 0).
 
 ```sh
-cd smt4
-python3 build.py fetch      # pinned armcc, objdiff-cli, wibo (non-Windows), arm-none-eabi binutils
-# put the decrypted v1.2.0 update at orig/smt4_v1.2.0.cxi: the installed NCCH or a decrypted .cia
-python3 build.py split      # checks the dump's program, writes orig/target/**.o (each retail function as an object)
-python3 build.py            # compile src/ with armcc
-python3 build.py report     # objdiff -> build/report.json (or open the directory in the objdiff GUI)
-python3 tools/relink.py --matched   # link every matched function into the retail .code: prints MATCH
+git clone https://github.com/Megami-Decomps/smt4-decomp.git
+cd smt4-decomp/smt4                 # or smt4a
+python build.py fetch               # the pinned armcc, objdiff-cli and arm-none-eabi binutils
+
+# Copy your dump to orig/smt4_v1.2.0.cxi (smt4a: orig/smt4a.cxi), then:
+python build.py split               # checks the dump, writes each retail function as an object
+python build.py                     # compiles every function with armcc
+python build.py report              # objdiff -> build/report.json
+python tools/relink.py --matched    # links every matched function into the retail .code
 ```
 
-For `smt4a/` the dump is the Apocalypse cartridge at `orig/smt4a.cxi`: a `.3ds`/`.cci` card or its
-partition 0. `build.py split` checks that the dump holds the exact build the project was made from.
-Dumps, `orig/` and `build/` stay local (git-ignored).
+`build.py split` refuses any other build of the game. `relink.py` prints `MATCH` when the linked
+`.code` is byte-identical to retail and lists every function it kept as retail bytes, with the reason.
 
-## Names and source files
+## Documentation and contributing
 
-Function names live in `config/symbols.txt`; `tools/names.py` changes them. IV started with 909 names:
+Start with the [contribution guide](docs/CONTRIBUTING.md): pick a function, make
+`python tools/fdiff.py <game> <function>` print `IDENTICAL` with readable C++, name it with
+`tools/names.py`, and verify that `relink.py --matched` still prints `MATCH`.
+[`sys/Task/Task`](smt4/src/_code/sys/Task/Task/) with [`include/sys/Task.h`](include/sys/Task.h) is the
+reference for what a finished file looks like.
 
-- Nintendo SDK functions (`nn::`, `nw::`), identified by matching code bytes against games that shipped
-  with symbols or DWARF;
-- event-script command handlers from the command table at `0x405F48` (`scrComm_EventFlag_Test`, ...);
-- map and navigation functions.
+Apocalypse reuses most of IV's engine and game code. The contribution guide also covers porting a
+matched function to its twin in the other game.
 
-Apocalypse carries 623 of them to the functions with the same code. Names given since are listed in
-`config/name_sources.txt`.
+The [documentation index](docs/README.md) groups the available references:
 
-`config/tus.json` comes from `tools/assign_tus.py --project <game>`. A function that references an
-assert's source path (`c:\SMT4\XRD686\...\btlMain.cpp`) is in that file, and a function using a
-file-local variable of one file joins it. Measured by hiding 30% of the anchors and placing them again
-(`--holdout 0.3`): IV 66.7% precision at 15.6% recall, Apocalypse 78.6% at 11.1%.
-`smt4/config/tus_extra.json` adds 20 assert-anchored functions found with another tool's function
-bounds. To move a function, move its `.cpp` and update its `source` and `file` in `config/project.json`
-and its unit in `objdiff.json`.
+- **Code reconstruction:** the matching rules, the readability standard and naming.
+- **Project notes:** layout, shared code between the games, where names and source-file placements
+  come from, and what counts as proven.
 
-## Where the source came from
+## Acknowledgements
 
-[romwright](https://github.com/Raikaru/romwright) branch `smt-decomp` (`a2e98c75`) generated both projects
-once, as C. They were then converted to C++ in place: each file became `.cpp`, its body wrapped in
-`extern "C"` (symbols keep their retail names), and the casts C++ demands were added. C called undeclared
-functions; C++ cannot. Each such callee is now declared with the argument types its calls pass, after C's
-promotions (`float` → `double`, `char`/`short` → `int`), which is how C called it. A callee whose calls
-disagree is declared `int f(...)`. Variadic calls pass floats in core registers, not VFP, so that
-fallback can change a function's code. `src/` is the source of truth now: do not regenerate.
-
-Every hand edit since is in the git history.
+- [objdiff](https://github.com/encounter/objdiff) and [wibo](https://github.com/decompals/wibo)
+- [decomp.me](https://decomp.me) for the armcc toolchain packaging
+- [Ghidra](https://github.com/NationalSecurityAgency/ghidra), whose decompiler produced the first pass
+- the [Digital Devil Saga decompilation](https://github.com/Megami-Decomps/dds-decomp), for the
+  contribution rules and conventions
+- [romwright](https://github.com/Raikaru/romwright), for analysis, project generation and cross-game pairing
